@@ -19,12 +19,13 @@
       {
         "files": [
           "**/*.png",
-          "**/*.jpg"
+          "**/*.jpg",
+          "../includes/**/*.png",
+          "../includes/**/*.jpg"
         ],
         "exclude": [
           "**/obj/**",
-          "opsacndocsdemo/**",
-          "**/includes/**"
+          "opsacndocsdemo/**"
         ]
       }
     ],
