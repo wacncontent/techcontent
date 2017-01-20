@@ -601,7 +601,7 @@ SDK 会在提取记录前执行隐式 `PushAsync()`。
     每个平台所需的代码如下：
     
     **Windows:**
-    
+
         private MobileServiceUser user;
         private async Task AuthenticateAsync()
         {
@@ -632,9 +632,9 @@ SDK 会在提取记录前执行隐式 `PushAsync()`。
                 await dialog.ShowAsync();
             }
         }
-    
+
     **Xamarin.iOS**
-    
+
         private MobileServiceUser user;
         private async Task AuthenticateAsync(UIViewController view)
         {
@@ -657,9 +657,9 @@ SDK 会在提取记录前执行隐式 `PushAsync()`。
                 Console.Error.WriteLine(@"ERROR - AUTHENTICATION FAILED {0}", ex.Message);
             }
         }
-    
+
     **Xamarin.Android**
-    
+
         private MobileServiceUser user;
         private async Task AuthenticateAsync()
         {
