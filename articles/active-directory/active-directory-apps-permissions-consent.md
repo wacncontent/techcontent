@@ -27,24 +27,24 @@ wacn.date: 01/05/2017
 ## 应用类型
 
 1. **单租户应用**</br>
-	- **单租户应用**：通常称为业务线 (LOB) 应用。这是指组织内的人员开发自己的应用，并希望组织中的用户能够登录该应用的情况。
-	![](./media/active-directory-apps-permissions-consent/apps2.png)
-	- **应用程序代理应用**：使用 Azure AD 应用程序代理公开本地应用程序时，会在租户（除应用程序代理服务外）中注册单租户应用。此应用代表本地应用程序进行所有云交互（例如，身份验证）。（应用程序代理要求使用 Azure AD Basic 或更高版本。）
+    - **单租户应用**：通常称为业务线 (LOB) 应用。这是指组织内的人员开发自己的应用，并希望组织中的用户能够登录该应用的情况。
+    ![](./media/active-directory-apps-permissions-consent/apps2.png)
+    - **应用程序代理应用**：使用 Azure AD 应用程序代理公开本地应用程序时，会在租户（除应用程序代理服务外）中注册单租户应用。此应用代表本地应用程序进行所有云交互（例如，身份验证）。（应用程序代理要求使用 Azure AD Basic 或更高版本。）
 
 2. **多租户应用**
-	- **其他用户可以同意的多租户应用**：类似“组织开发的单租户应用”。主要区别（除应用本身的逻辑外）在于，来自其他租户的用户也可以同意并登录该应用。</br>
-	![](./media/active-directory-apps-permissions-consent/apps4.png)
-	- **其他用户开发的、Contoso 可以同意的多租户应用**。（简称“同意的应用”。） 这是“组织开发的多租户应用”的另外一面。其他组织开发多租户应用时，本组织的用户可以同意并登录该应用。
-	- **Microsoft 第一方应用**：代表 Microsoft 服务的应用。同意以注册服务这一事实为依据。有时候，在建立应用访问策略时，会使用针对特定第一方应用的特殊用户体验和逻辑。</br>
-	![](./media/active-directory-apps-permissions-consent/apps3.png)
-	- **预先集成的应用**：Azure AD 应用库中提供的应用。可将这些应用添加到目录中，为常用 SaaS 应用提供单一登录功能（以及在某些情况下提供预配功能）。
-	- **Azure AD 单一登录**：用于可与 Azure AD 集成的应用的“真实”SSO，通过 SAML 2.0 或 OpenID Connect 等受支持的登录协议提供。向导会引导完成设置过程。
-	- **密码单一登录**：Azure AD 可安全存储应用的用户凭据，以及由 Azure AD 应用访问浏览器扩展“注入”登录表单的凭据。也称为“密码存储”。
+    - **其他用户可以同意的多租户应用**：类似“组织开发的单租户应用”。主要区别（除应用本身的逻辑外）在于，来自其他租户的用户也可以同意并登录该应用。</br>
+    ![](./media/active-directory-apps-permissions-consent/apps4.png)
+    - **其他用户开发的、Contoso 可以同意的多租户应用**。（简称“同意的应用”。） 这是“组织开发的多租户应用”的另外一面。其他组织开发多租户应用时，本组织的用户可以同意并登录该应用。
+    - **Microsoft 第一方应用**：代表 Microsoft 服务的应用。同意以注册服务这一事实为依据。有时候，在建立应用访问策略时，会使用针对特定第一方应用的特殊用户体验和逻辑。</br>
+    ![](./media/active-directory-apps-permissions-consent/apps3.png)
+    - **预先集成的应用**：Azure AD 应用库中提供的应用。可将这些应用添加到目录中，为常用 SaaS 应用提供单一登录功能（以及在某些情况下提供预配功能）。
+    - **Azure AD 单一登录**：用于可与 Azure AD 集成的应用的“真实”SSO，通过 SAML 2.0 或 OpenID Connect 等受支持的登录协议提供。向导会引导完成设置过程。
+    - **密码单一登录**：Azure AD 可安全存储应用的用户凭据，以及由 Azure AD 应用访问浏览器扩展“注入”登录表单的凭据。也称为“密码存储”。
 
 ## 权限
 
 注册应用时，执行应用注册的用户（即开发人员）定义应用需要访问的权限和资源。（资源本身以其他应用的形式定义。） 例如，生成邮件阅读器应用的人员会表明，其应用需要“Office 365 Exchange Online”资源中的“以登录用户身份访问邮箱”权限：
-	
+    
 ![](./media/active-directory-apps-permissions-consent/apps6.png)  
 
 为了让一个应用（客户端）向另一应用（资源）请求特定权限，资源应用的开发人员会定义存在的权限。在我们的示例中，“Office 365 Exchange Online”资源应用的所有者 Microsoft 已定义名为“以登录用户身份访问邮箱”的权限。
@@ -101,67 +101,67 @@ wacn.date: 01/05/2017
 
 可通过查找 Exchange（资源）的 ServicePrincipal 对象来查看该权限，该权限在注册 Office 365 时已添加。可将 ServicePrincipal 对象视为租户中应用的“实例”，其用于记录不同的选项和配置。可使用 PowerShell 中的 `Get-AzureADServicePrincipal` 进行查看。
 
-	PS C:\> Get-AzureADServicePrincipal -ObjectId 383f7b97-6754-4d3d-9474-3908ebcba1c6 | fl *
-	
-	DeletionTimeStamp         : 
-	ObjectId                  : 383f7b97-6754-4d3d-9474-3908ebcba1c6
-	ObjectType                : ServicePrincipal
-	AccountEnabled            : True
-	AppDisplayName            : Office 365 Exchange Online
-	AppId                     : 00000002-0000-0ff1-ce00-000000000000
-	AppOwnerTenantId          : 
-	AppRoleAssignmentRequired : False
-	AppRoles                  : {...}
-	DisplayName               : Microsoft.Exchange
-	ErrorUrl                  : 
-	Homepage                  : 
-	KeyCredentials            : {}
-	LogoutUrl                 : 
-	Oauth2Permissions         : {...
-	                            , class OAuth2Permission {
-	                              AdminConsentDescription : Allows the app to have the same access to mailboxes as the signed-in user via Exchange Web Services.
-	                              AdminConsentDisplayName : Access mailboxes as the signed-in user via Exchange Web Services
-	                              Id                      : 3b5f3d61-589b-4a3c-a359-5dd4b5ee5bd5
-	                              IsEnabled               : True
-	                              Type                    : User
-	                              UserConsentDescription  : Allows the app full access to your mailboxes on your behalf.
-	                              UserConsentDisplayName  : Access your mailboxes
-	                              Value                   : full_access_as_user
-	                            },
-	                            ...}
-	PasswordCredentials       : {}
-	PublisherName             : 
-	ReplyUrl                  : 
-	SamlMetadataUrl           : 
-	ServicePrincipalNames     : {00000002-0000-0ff1-ce00-000000000000/outlook.office365.com, 00000002-0000-0ff1-ce00-000000000000/mail.office365.com, 00000002-0000-0ff1-ce00-000000000000/outlook.com, 
-	                            00000002-0000-0ff1-ce00-000000000000/*.outlook.com...}
-	Tags                      : {}
+    PS C:\> Get-AzureADServicePrincipal -ObjectId 383f7b97-6754-4d3d-9474-3908ebcba1c6 | fl *
+    
+    DeletionTimeStamp         : 
+    ObjectId                  : 383f7b97-6754-4d3d-9474-3908ebcba1c6
+    ObjectType                : ServicePrincipal
+    AccountEnabled            : True
+    AppDisplayName            : Office 365 Exchange Online
+    AppId                     : 00000002-0000-0ff1-ce00-000000000000
+    AppOwnerTenantId          : 
+    AppRoleAssignmentRequired : False
+    AppRoles                  : {...}
+    DisplayName               : Microsoft.Exchange
+    ErrorUrl                  : 
+    Homepage                  : 
+    KeyCredentials            : {}
+    LogoutUrl                 : 
+    Oauth2Permissions         : {...
+                                , class OAuth2Permission {
+                                  AdminConsentDescription : Allows the app to have the same access to mailboxes as the signed-in user via Exchange Web Services.
+                                  AdminConsentDisplayName : Access mailboxes as the signed-in user via Exchange Web Services
+                                  Id                      : 3b5f3d61-589b-4a3c-a359-5dd4b5ee5bd5
+                                  IsEnabled               : True
+                                  Type                    : User
+                                  UserConsentDescription  : Allows the app full access to your mailboxes on your behalf.
+                                  UserConsentDisplayName  : Access your mailboxes
+                                  Value                   : full_access_as_user
+                                },
+                                ...}
+    PasswordCredentials       : {}
+    PublisherName             : 
+    ReplyUrl                  : 
+    SamlMetadataUrl           : 
+    ServicePrincipalNames     : {00000002-0000-0ff1-ce00-000000000000/outlook.office365.com, 00000002-0000-0ff1-ce00-000000000000/mail.office365.com, 00000002-0000-0ff1-ce00-000000000000/outlook.com, 
+                                00000002-0000-0ff1-ce00-000000000000/*.outlook.com...}
+    Tags                      : {}
 
 用户单击“接受”时，会启动同意。首先，会在租户中创建“FabrikamMail for Office 365”的 ServicePrincipal 对象。ServicePrincipal 类似如下所示内容：
 
-	PS C:\> Get-AzureADServicePrincipal -SearchString "FabrikamMail for Office 365" | fl *
-	
-	DeletionTimeStamp         : 
-	ObjectId                  : a8b16333-851d-42e8-acd2-eac155849b37
-	ObjectType                : ServicePrincipal
-	AccountEnabled            : True
-	AppDisplayName            : FabrikamMail for Office 365
-	AppId                     : aba7c072-2267-4031-8960-e7a2db6e0590
-	AppOwnerTenantId          : 4a4076e0-a70f-41c6-b819-6f9c4a86df89
-	AppRoleAssignmentRequired : False
-	AppRoles                  : {}
-	DisplayName               : FabrikamMail for Office 365
-	ErrorUrl                  : 
-	Homepage                  : 
-	KeyCredentials            : {}
-	LogoutUrl                 : 
-	Oauth2Permissions         : {}
-	PasswordCredentials       : {}
-	PublisherName             : Fabrikam, Inc.
-	ReplyUrl                  : 
-	SamlMetadataUrl           : 
-	ServicePrincipalNames     : {aba7c072-2267-4031-8960-e7a2db6e0590}
-	Tags                      : {WindowsAzureActiveDirectoryIntegratedApp}
+    PS C:\> Get-AzureADServicePrincipal -SearchString "FabrikamMail for Office 365" | fl *
+    
+    DeletionTimeStamp         : 
+    ObjectId                  : a8b16333-851d-42e8-acd2-eac155849b37
+    ObjectType                : ServicePrincipal
+    AccountEnabled            : True
+    AppDisplayName            : FabrikamMail for Office 365
+    AppId                     : aba7c072-2267-4031-8960-e7a2db6e0590
+    AppOwnerTenantId          : 4a4076e0-a70f-41c6-b819-6f9c4a86df89
+    AppRoleAssignmentRequired : False
+    AppRoles                  : {}
+    DisplayName               : FabrikamMail for Office 365
+    ErrorUrl                  : 
+    Homepage                  : 
+    KeyCredentials            : {}
+    LogoutUrl                 : 
+    Oauth2Permissions         : {}
+    PasswordCredentials       : {}
+    PublisherName             : Fabrikam, Inc.
+    ReplyUrl                  : 
+    SamlMetadataUrl           : 
+    ServicePrincipalNames     : {aba7c072-2267-4031-8960-e7a2db6e0590}
+    Tags                      : {WindowsAzureActiveDirectoryIntegratedApp}
 
 同意应用会在以下对象之间创建 Oauth2PermissionGrant 链接：
   
@@ -172,16 +172,16 @@ wacn.date: 01/05/2017
 
 对于 FabrikamMail，其类似如下所示内容：
 
-	PS C:\> Get-AzureADUserOAuth2PermissionGrant -ObjectId ddiggle@aadpremiumlab.partner.onmschina.cn | fl *
-	
-	ClientId    : a8b16333-851d-42e8-acd2-eac155849b37
-	ConsentType : Principal
-	ExpiryTime  : 05/15/2017 07:02:39 AM
-	ObjectId    : M2OxqB2F6EKs0urBVYSbN5d7PzhUZz1NlH25COvLocbJjoxkUFfRQauryBKwBWet
-	PrincipalId : 648c8ec9-5750-41d1-abab-c812b00567ad
-	ResourceId  : 383f7b97-6754-4d3d-9474-3908ebcba1c6
-	Scope       : full_access_as_user
-	StartTime   : 01/01/0001 12:00:00 AM
+    PS C:\> Get-AzureADUserOAuth2PermissionGrant -ObjectId ddiggle@aadpremiumlab.partner.onmschina.cn | fl *
+    
+    ClientId    : a8b16333-851d-42e8-acd2-eac155849b37
+    ConsentType : Principal
+    ExpiryTime  : 05/15/2017 07:02:39 AM
+    ObjectId    : M2OxqB2F6EKs0urBVYSbN5d7PzhUZz1NlH25COvLocbJjoxkUFfRQauryBKwBWet
+    PrincipalId : 648c8ec9-5750-41d1-abab-c812b00567ad
+    ResourceId  : 383f7b97-6754-4d3d-9474-3908ebcba1c6
+    Scope       : full_access_as_user
+    StartTime   : 01/01/0001 12:00:00 AM
 
 （**ClientId** 是 FabrikamMail 的服务主体对象 ID（刚才创建的对象），**PrincipalId** 是（同意的用户的）用户对象 ID，**ResourceId** 是 Exchange 的服务主体对象 ID，Scope 是 Exchange 中同意的权限）。
 

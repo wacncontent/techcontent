@@ -117,8 +117,8 @@ ms.author: iainfou
 - 单击“所有设置”|“网络接口”，然后选择你的网络接口。
 - 单击“所有设置”|“网络安全组”，然后选择你的网络安全组。
 - 单击“所有设置”|“入站安全规则”，并确保 TCP 端口 3389 上有允许 RDP 的规则。
-	- 如果尚无规则，请单击“添加”创建规则。输入 **TCP** 作为协议，然后输入 **3389** 用作目标端口范围。
-	- 确保将操作设置为“允许”，然后单击“确定”保存新的入站规则。
+    - 如果尚无规则，请单击“添加”创建规则。输入 **TCP** 作为协议，然后输入 **3389** 用作目标端口范围。
+    - 确保将操作设置为“允许”，然后单击“确定”保存新的入站规则。
 
 有关详细信息，请参阅[什么是网络安全组 (NSG)？](../virtual-network/virtual-networks-nsg.md)
 
@@ -146,10 +146,10 @@ ms.author: iainfou
 
 接下来，填写 Azure 订阅名称、云服务名称和虚拟机名称（删除 < and > 字符），然后运行这些命令。
 
-	$subscr="<Name of your Azure subscription>"
-	$serviceName="<Name of the cloud service that contains the target virtual machine>"
-	$vmName="<Name of the target virtual machine>"
-	.\InstallWinRMCertAzureVM.ps1 -SubscriptionName $subscr -ServiceName $serviceName -Name $vmName
+    $subscr="<Name of your Azure subscription>"
+    $serviceName="<Name of the cloud service that contains the target virtual machine>"
+    $vmName="<Name of the target virtual machine>"
+    .\InstallWinRMCertAzureVM.ps1 -SubscriptionName $subscr -ServiceName $serviceName -Name $vmName
 
 可以从 **Get-AzureSubscription** 命令显示的 _SubscriptionName_ 属性获取正确的订阅名称。可以从 Get-AzureVM 命令显示的 ServiceName 列中获取虚拟机的云服务名称。
 
@@ -157,13 +157,13 @@ ms.author: iainfou
 
 接下来，使用以下命令启动远程 Azure PowerShell 会话。
 
-	$uri = Get-AzureWinRMUri -ServiceName $serviceName -Name $vmName
-	$creds = Get-Credential
-	Enter-PSSession -ConnectionUri $uri -Credential $creds
+    $uri = Get-AzureWinRMUri -ServiceName $serviceName -Name $vmName
+    $creds = Get-Credential
+    Enter-PSSession -ConnectionUri $uri -Credential $creds
 
 输入有效的管理员凭据后，应显示类似以下 Azure PowerShell 提示符的信息：
 
-	[cloudservice4testing.chinacloudapp.cn]: PS C:\Users\User1\Documents>
+    [cloudservice4testing.chinacloudapp.cn]: PS C:\Users\User1\Documents>
 
 此提示的第一部分是包含目标 VM 的云服务名称，可能与于“cloudservice4testing.chinacloudapp.cn”不同。现在，可对此云服务发出 Azure PowerShell 命令来调查上述问题并更正配置。
 
@@ -171,19 +171,19 @@ ms.author: iainfou
 
 如果无法针对**与 Azure VM 的 RDP 连接（需重启）**问题运行 [Azure IaaS (Windows) 诊断程序包](https://home.diagnostics.support.microsoft.com/SelfHelp?knowledgebaseArticleFilter=2976864)，请在远程 Azure PowerShell 会话提示符下运行此命令。
 
-	Get-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "PortNumber"
+    Get-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "PortNumber"
 
 PortNumber 属性显示当前端口号。如果需要，可使用此命令将远程桌面端口号更改回其默认值 (3389)。
 
-	Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "PortNumber" -Value 3389
+    Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "PortNumber" -Value 3389
 
 使用此命令验证是否已将端口更改为 3389。
 
-	Get-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "PortNumber"
+    Get-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "PortNumber"
 
 使用此命令退出远程 Azure PowerShell 会话。
 
-	Exit-PSSession
+    Exit-PSSession
 
 验证 Azure VM 的远程桌面终结点是否也使用 TCP 端口 3398 作为其内部端口。重启 Azure VM，并重新尝试远程桌面连接。
 

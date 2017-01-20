@@ -43,27 +43,27 @@ ms.author: adrianha
 
 1. 将以下代码添加到 **TodoActivity** 类：
 
-	    // Define a authenticated user.
-	    private MobileServiceUser user;
-	    private async Task<bool> Authenticate()
-	    {
-	            var success = false;
-	            try
-	            {
-	                // Sign in with Microsoft login using a server-managed flow.
-	                user = await client.LoginAsync(this,
-	                    MobileServiceAuthenticationProvider.Microsoft);
-	                CreateAndShowDialog(string.Format("you are now logged in - {0}",
-	                    user.UserId), "Logged in!");
+        // Define a authenticated user.
+        private MobileServiceUser user;
+        private async Task<bool> Authenticate()
+        {
+                var success = false;
+                try
+                {
+                    // Sign in with Microsoft login using a server-managed flow.
+                    user = await client.LoginAsync(this,
+                        MobileServiceAuthenticationProvider.Microsoft);
+                    CreateAndShowDialog(string.Format("you are now logged in - {0}",
+                        user.UserId), "Logged in!");
 
-	                success = true;
-	            }
-	            catch (Exception ex)
-	            {
-	                CreateAndShowDialog(ex, "Authentication failed");
-	            }
-	            return success;
-	    }
+                    success = true;
+                }
+                catch (Exception ex)
+                {
+                    CreateAndShowDialog(ex, "Authentication failed");
+                }
+                return success;
+        }
 
         [Java.Interop.Export()]
         public async void LoginUser(View view)
@@ -85,11 +85,11 @@ ms.author: adrianha
 
 3. 在 **OnCreate** 方法中，删除或注释掉以下代码行：
 
-		OnRefreshItemsSelected ();
+        OnRefreshItemsSelected ();
 
 4. 在 Activity\_To\_Do.axml 文件中，在现有 *AddItem* 按钮之前添加以下 *LoginUser* 按钮定义：
 
-      	<Button
+          <Button
             android:id="@+id/buttonLoginUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,11 +98,11 @@ ms.author: adrianha
 
 5. 将以下元素添加到 Strings.xml 资源文件：
 
-		<string name="login_button_text">Sign in</string>
+        <string name="login_button_text">Sign in</string>
 
 6. 在 Visual Studio 或 Xamarin Studio 中，运行设备或模拟器中的客户端项目，并使用所选的标识提供者登录。
 
-   	成功登录后，应用将显示登录 ID 和待办事项列表，用户可以对数据进行更新。
+       成功登录后，应用将显示登录 ID 和待办事项列表，用户可以对数据进行更新。
 
 <!-- URLs. -->
 [创建 Xamarin.Android 应用]: ./app-service-mobile-xamarin-android-get-started.md

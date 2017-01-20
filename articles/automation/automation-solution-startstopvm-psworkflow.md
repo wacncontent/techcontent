@@ -72,8 +72,8 @@ Runbook 需要以下资产，你必须创建这些资产并在其中填充适当
 
 以下示例命令使用 Windows PowerShell 来运行 **StartAzureVMs**，以便启动服务名称为 *MyVMService* 的所有虚拟机。
 
-	$params = @{"ServiceName"="MyVMService"}
-	Start-AzureAutomationRunbook -AutomationAccountName "MyAutomationAccount" -Name "Start-AzureVMs" -Parameters $params
+    $params = @{"ServiceName"="MyVMService"}
+    Start-AzureAutomationRunbook -AutomationAccountName "MyAutomationAccount" -Name "Start-AzureVMs" -Parameters $params
 
 ### 输出
 
@@ -90,15 +90,15 @@ Runbook 需要以下资产，你必须创建这些资产并在其中填充适当
 
 例如，Runbook 中的以下代码段尝试启动服务名称为 *MyServiceName* 的所有虚拟机。如果任何启动请求失败，则可能会执行错误操作。
 
-	$results = Start-AzureVMs -ServiceName "MyServiceName"
-	foreach ($result in $results) {
-		if ($result -like "* has been started" ) {
-			# Action to take in case of success.
-		}
-		else {
-			# Action to take in case of error.
-		}
-	}
+    $results = Start-AzureVMs -ServiceName "MyServiceName"
+    foreach ($result in $results) {
+        if ($result -like "* has been started" ) {
+            # Action to take in case of success.
+        }
+        else {
+            # Action to take in case of error.
+        }
+    }
 
 ## 明细
 
@@ -128,10 +128,10 @@ Runbook 需要以下资产，你必须创建这些资产并在其中填充适当
 
 ### 身份验证
 
-	# Connect to Azure and select the subscription to work against
-	$Cred = Get-AutomationPSCredential -Name $AzureCredentialAssetName
-	$null = Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred -ErrorAction Stop
-	$SubId = Get-AutomationVariable -Name $AzureSubscriptionIdAssetName
+    # Connect to Azure and select the subscription to work against
+    $Cred = Get-AutomationPSCredential -Name $AzureCredentialAssetName
+    $null = Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred -ErrorAction Stop
+    $SubId = Get-AutomationVariable -Name $AzureSubscriptionIdAssetName
     $null = Select-AzureSubscription -SubscriptionId $SubId -ErrorAction Stop
 
 后续行设置将要用于 Runbook 的剩余部分的凭据和 Azure 订阅。首先，我们使用 **Get-AutomationPSCredential** 来获取用于存储凭据的资产，这些凭据具有相应的访问权限，可用于启动和停止 Azure 订阅中的虚拟机。**Add-AzureAccount -Environment AzureChinaCloud** 然后就会使用此资产来设置凭据。该输出已分配给一个虚拟变量，因此不会包括在 Runbook 输出中。
@@ -140,16 +140,16 @@ Runbook 需要以下资产，你必须创建这些资产并在其中填充适当
 
 ### 获取 VM
 
-	# If there is a specific cloud service, then get all VMs in the service,
+    # If there is a specific cloud service, then get all VMs in the service,
     # otherwise get all VMs in the subscription.
     if ($ServiceName) 
-	{ 
-		$VMs = Get-AzureVM -ServiceName $ServiceName
-	}
+    { 
+        $VMs = Get-AzureVM -ServiceName $ServiceName
+    }
     else 
-	{ 
-		$VMs = Get-AzureVM
-	}
+    { 
+        $VMs = Get-AzureVM
+    }
 
 **Get-AzureVM** 用于检索兼容 Runbook 的虚拟机。如果在 **ServiceName** 输入变量中提供了值，则仅检索使用该服务名称的虚拟机。如果 **ServiceName** 为空，则检索所有虚拟机。
 
@@ -158,27 +158,27 @@ Runbook 需要以下资产，你必须创建这些资产并在其中填充适当
     # Start each of the stopped VMs
     foreach ($VM in $VMs)
     {
-		if ($VM.PowerState -eq "Started")
-		{
-			# The VM is already started, so send notice
-			Write-Output ($VM.InstanceName + " is already running")
-		}
-		else
-		{
-			# The VM needs to be started
-        	$StartRtn = Start-AzureVM -Name $VM.Name -ServiceName $VM.ServiceName -ErrorAction Continue
+        if ($VM.PowerState -eq "Started")
+        {
+            # The VM is already started, so send notice
+            Write-Output ($VM.InstanceName + " is already running")
+        }
+        else
+        {
+            # The VM needs to be started
+            $StartRtn = Start-AzureVM -Name $VM.Name -ServiceName $VM.ServiceName -ErrorAction Continue
 
-	        if ($StartRtn.OperationStatus -ne 'Succeeded')
-	        {
-				# The VM failed to start, so send notice
+            if ($StartRtn.OperationStatus -ne 'Succeeded')
+            {
+                # The VM failed to start, so send notice
                 Write-Output ($VM.InstanceName + " failed to start")
-	        }
-			else
-			{
-				# The VM started, so send notice
-				Write-Output ($VM.InstanceName + " has been started")
-			}
-		}
+            }
+            else
+            {
+                # The VM started, so send notice
+                Write-Output ($VM.InstanceName + " has been started")
+            }
+        }
     }
 
 后续行将在每个虚拟机中执行。首先会检查虚拟机的 **PowerState**，看其是处于运行还是停止状态，具体取决于 Runbook。如果该虚拟机已处于目标状态，则会将消息发送到输出中，Runbook 结束。如果该虚拟机尚未处于目标状态，则会使用 **Start-AzureVM** 或 **Stop-AzureVM** 来尝试启动或停止虚拟机，其结果就是将请求存储到某个变量中。然后会将一条消息发送到输出，指出是否已成功提交启动或停止请求。

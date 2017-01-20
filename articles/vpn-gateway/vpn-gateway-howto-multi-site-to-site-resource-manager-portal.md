@@ -55,38 +55,38 @@ ms.author: cherylmc
 2. 单击“所有资源”，从资源列表中找到**虚拟网络网关**并单击它。
 3. 在“虚拟网络网关”边栏选项卡中，单击“连接”。
 
-	![“连接”边栏选项卡](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/connectionsblade.png "“连接”边栏选项卡")
+    ![“连接”边栏选项卡](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/connectionsblade.png "“连接”边栏选项卡")
 
 4. 在“连接”边栏选项卡中，单击“+添加”。
 
-	![“添加连接”按钮](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/addbutton.png "“添加连接”按钮")
+    ![“添加连接”按钮](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/addbutton.png "“添加连接”按钮")
 
 5. 在“添加连接”边栏选项卡中填写以下字段：
-	- **名称：**想与其建立连接的站点的名称。
-	- **连接类型：**选择“站点到站点(IPsec)”。
+    - **名称：**想与其建立连接的站点的名称。
+    - **连接类型：**选择“站点到站点(IPsec)”。
 
-	![“添加连接”边栏选项卡](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/addconnectionblade.png "“添加连接”边栏选项卡")
+    ![“添加连接”边栏选项卡](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/addconnectionblade.png "“添加连接”边栏选项卡")
 
 ## <a name="part2"></a>第 2 部分 - 添加本地网络网关
 
 1. 单击“本地网络网关”>“选择本地网络网关”。此时将打开“选择本地网络网关”边栏选项卡。
 
-	![选择本地网络网关](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/chooselng.png "选择本地网络网关")
+    ![选择本地网络网关](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/chooselng.png "选择本地网络网关")
 2. 单击“新建”打开“创建本地网络网关”边栏选项卡。
 
-	![“创建本地网络网关”边栏选项卡](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/createlngblade.png "创建本地网络网关")
+    ![“创建本地网络网关”边栏选项卡](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/createlngblade.png "创建本地网络网关")
 
 3. 在“创建本地网络网关”边栏选项卡中填写以下字段：
-	- **名称：**要分配给本地网络网关资源的名称。
-	- **IP 地址：**站点上要连接到的 VPN 设备的公共 IP 地址。
-	- **地址空间：**要路由到新本地网络站点的地址空间。
+    - **名称：**要分配给本地网络网关资源的名称。
+    - **IP 地址：**站点上要连接到的 VPN 设备的公共 IP 地址。
+    - **地址空间：**要路由到新本地网络站点的地址空间。
 4. 在“创建本地网络网关”边栏选项卡中，单击“确定”保存更改。
 
 ## <a name="part3"></a>第 3 部分 - 添加共享密钥并创建连接
 
 1. 在“添加连接”边栏选项卡中，添加用于创建连接的共享密钥。可以从 VPN 设备获取共享密钥，或者在此边栏选项卡中创建一个共享密钥，然后将 VPN 设备配置为使用这个共享密钥。重要的一点是，这两个密钥必须完全相同。
 
-	![共享密钥](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/sharedkey.png "共享密钥")
+    ![共享密钥](./media/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/sharedkey.png "共享密钥")
 2. 单击边栏选项卡底部的“确定”创建连接。
 
 ## <a name="part4"></a>第 4 部分 - 验证 VPN 连接

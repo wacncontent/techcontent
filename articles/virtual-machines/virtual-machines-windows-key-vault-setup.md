@@ -33,23 +33,23 @@ ms.author: singhkay
 
 对于新的密钥保管库，可以使用此 PowerShell cmdlet：
 
-	New-AzureRmKeyVault -VaultName 'ContosoKeyVault' -ResourceGroupName 'ContosoResourceGroup' -Location 'China East' -EnabledForDeployment
+    New-AzureRmKeyVault -VaultName 'ContosoKeyVault' -ResourceGroupName 'ContosoResourceGroup' -Location 'China East' -EnabledForDeployment
 
 对于现有的密钥保管库，可以使用此 PowerShell cmdlet：
 
-	Set-AzureRmKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -EnabledForDeployment
+    Set-AzureRmKeyVaultAccessPolicy -VaultName 'ContosoKeyVault' -EnabledForDeployment
 
 ## 使用 CLI 设置密钥保管库
 若要使用命令行接口 (CLI) 来创建密钥保管库，请参阅[使用 CLI 管理密钥保管库](../key-vault/key-vault-manage-with-cli.md#create-a-key-vault)。
 
 使用 CLI 时，必须先创建密钥保管库，然后分配部署策略。可以使用以下命令来执行此操作：
 
-	azure keyvault set-policy ContosoKeyVault -enabled-for-deployment true
+    azure keyvault set-policy ContosoKeyVault -enabled-for-deployment true
 
 ## 使用模板设置密钥保管库
 使用模板时，必须将密钥保管库资源的 `enabledForDeployment` 属性设置为 `true`。
 
-	{
+    {
       "type": "Microsoft.KeyVault/vaults",
       "name": "ContosoKeyVault",
       "apiVersion": "2015-06-01",

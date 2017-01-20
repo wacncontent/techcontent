@@ -18,7 +18,7 @@
 
 5. 在“存储帐户”边栏选项卡中，单击“访问密钥”。复制 **key1** 的值，供本教程后面使用。
 
-	![](./media/service-bus-event-hubs-getstarted-receive-ephcs/create-storage3.png)  
+    ![](./media/service-bus-event-hubs-getstarted-receive-ephcs/create-storage3.png)  
 
 4. 在 Visual Studio 中，使用**控制台应用程序**项目模板创建一个新的 Visual C# 桌面应用项目。将该项目命名为 **Receiver**。
 
@@ -30,68 +30,68 @@
 
     ![](./media/service-bus-event-hubs-getstarted-receive-ephcs/create-eph-csharp1.png)  
 
-	Visual Studio 便会下载、安装 [Azure 服务总线事件中心 - EventProcessorHost NuGet 程序包](https://www.nuget.org/packages/Microsoft.Azure.ServiceBus.EventProcessorHost)并添加对该程序包的引用，包括其所有依赖项。
+    Visual Studio 便会下载、安装 [Azure 服务总线事件中心 - EventProcessorHost NuGet 程序包](https://www.nuget.org/packages/Microsoft.Azure.ServiceBus.EventProcessorHost)并添加对该程序包的引用，包括其所有依赖项。
 
 7. 右键单击 **Receiver** 项目，单击“添加”，然后单击“类”。将新类命名为 **SimpleEventProcessor**，然后单击“添加”以创建该类。
 
-	![](./media/service-bus-event-hubs-getstarted-receive-ephcs/create-receiver-csharp2.png)  
+    ![](./media/service-bus-event-hubs-getstarted-receive-ephcs/create-receiver-csharp2.png)  
 
 8. 在 SimpleEventProcessor.cs 文件的顶部添加以下语句：
 
-    	using Microsoft.ServiceBus.Messaging;
-    	using System.Diagnostics;
+        using Microsoft.ServiceBus.Messaging;
+        using System.Diagnostics;
 
-	然后，用以下代码替换该类的正文：
+    然后，用以下代码替换该类的正文：
 
         class SimpleEventProcessor : IEventProcessor
-    	{
-    	    Stopwatch checkpointStopWatch;
+        {
+            Stopwatch checkpointStopWatch;
     
-    	    async Task IEventProcessor.CloseAsync(PartitionContext context, CloseReason reason)
-    	    {
-    	        Console.WriteLine("Processor Shutting Down. Partition '{0}', Reason: '{1}'.", context.Lease.PartitionId, reason);
-    	        if (reason == CloseReason.Shutdown)
-    	        {
-    	            await context.CheckpointAsync();
-    	        }
-    	    }
+            async Task IEventProcessor.CloseAsync(PartitionContext context, CloseReason reason)
+            {
+                Console.WriteLine("Processor Shutting Down. Partition '{0}', Reason: '{1}'.", context.Lease.PartitionId, reason);
+                if (reason == CloseReason.Shutdown)
+                {
+                    await context.CheckpointAsync();
+                }
+            }
     
-    	    Task IEventProcessor.OpenAsync(PartitionContext context)
-    	    {
-    	        Console.WriteLine("SimpleEventProcessor initialized.  Partition: '{0}', Offset: '{1}'", context.Lease.PartitionId, context.Lease.Offset);
-    	        this.checkpointStopWatch = new Stopwatch();
-    	        this.checkpointStopWatch.Start();
-    	        return Task.FromResult<object>(null);
-    	    }
+            Task IEventProcessor.OpenAsync(PartitionContext context)
+            {
+                Console.WriteLine("SimpleEventProcessor initialized.  Partition: '{0}', Offset: '{1}'", context.Lease.PartitionId, context.Lease.Offset);
+                this.checkpointStopWatch = new Stopwatch();
+                this.checkpointStopWatch.Start();
+                return Task.FromResult<object>(null);
+            }
     
-    	    async Task IEventProcessor.ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
-    	    {
-    	        foreach (EventData eventData in messages)
-    	        {
-    	            string data = Encoding.UTF8.GetString(eventData.GetBytes());
+            async Task IEventProcessor.ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
+            {
+                foreach (EventData eventData in messages)
+                {
+                    string data = Encoding.UTF8.GetString(eventData.GetBytes());
     
-    	            Console.WriteLine(string.Format("Message received.  Partition: '{0}', Data: '{1}'",
-    	                context.Lease.PartitionId, data));
-    	        }
+                    Console.WriteLine(string.Format("Message received.  Partition: '{0}', Data: '{1}'",
+                        context.Lease.PartitionId, data));
+                }
     
-    	        //Call checkpoint every 5 minutes, so that worker can resume processing from 5 minutes back if it restarts.
-    	        if (this.checkpointStopWatch.Elapsed > TimeSpan.FromMinutes(5))
+                //Call checkpoint every 5 minutes, so that worker can resume processing from 5 minutes back if it restarts.
+                if (this.checkpointStopWatch.Elapsed > TimeSpan.FromMinutes(5))
                 {
                     await context.CheckpointAsync();
                     this.checkpointStopWatch.Restart();
                 }
-    	    }
-    	}
+            }
+        }
 
-	此类将由 **EventProcessorHost** 调用，以处理从事件中心接收的事件。请注意，`SimpleEventProcessor` 类使用秒表以定期对 **EventProcessorHost** 上下文调用检查点方法。这将确保接收方重新启动时将会丢失的处理工作不会超过五分钟。
+    此类将由 **EventProcessorHost** 调用，以处理从事件中心接收的事件。请注意，`SimpleEventProcessor` 类使用秒表以定期对 **EventProcessorHost** 上下文调用检查点方法。这将确保接收方重新启动时将会丢失的处理工作不会超过五分钟。
 
 9. 在 **Program** 类中，在文件顶部添加以下 `using` 语句：
 
-	    using Microsoft.ServiceBus.Messaging;
+        using Microsoft.ServiceBus.Messaging;
 
-	然后，将 `Program` 类中的 `Main` 方法替换为以下代码，从而替换为以前保存的事件中心名称和命名空间级别连接字符串，以及在前面部分复制的存储帐户和密钥。
+    然后，将 `Program` 类中的 `Main` 方法替换为以下代码，从而替换为以前保存的事件中心名称和命名空间级别连接字符串，以及在前面部分复制的存储帐户和密钥。
 
-    	static void Main(string[] args)
+        static void Main(string[] args)
         {
           string eventHubConnectionString = "{Event Hub connection string}";
           string eventHubName = "{Event Hub name}";

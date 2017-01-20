@@ -616,7 +616,7 @@ Microsoft 在 2015 年 4 月推出了 Azure 高级存储。推出高级存储的
 
 在 Azure 中，VHD 名称遵循以下命名约定，需要为 Azure 中的 VHD 提供唯一的名称：
 
-	http(s)://<storage account name>.blob.core.chinacloudapi.cn/<container name>/<vhd name>
+    http(s)://<storage account name>.blob.core.chinacloudapi.cn/<container name>/<vhd name>
 
 如前所述，此字符串必须唯一标识存储在 Azure 存储空间中的 VHD。
 
@@ -996,7 +996,7 @@ SAP 系统，甚至是支持 SAP 应用程序层的专用 DBMS 服务器，都�
 
 数据磁盘作为 VHD 文件存储在 Azure 存储帐户中，并可直接附加到虚拟机或用作映像。在本例中，VHD 将复制到另一个位置，再附加到虚拟机。Azure 中 VHD 文件的完整名称必须在 Azure 中唯一。如前所述，此名称由三个部分组成，如下所示：
 
-	http(s)://<storage account name>.blob.core.chinacloudapi.cn/<container name>/<vhd name>
+    http(s)://<storage account name>.blob.core.chinacloudapi.cn/<container name>/<vhd name>
 
 ##### Powershell
 可按[此文][storage-powershell-guide-full-copy-vhd]中所述，使用 Azure PowerShell cmdlet 来复制 VHD。
@@ -1653,9 +1653,9 @@ Azure 中的 SAP 高可用性的相关介绍可分为两个部分：
 
 * **Azure 基础结构高可用性**，例如计算 (VM)、网络、存储等的 HA，以及提高 SAP 应用程序可用性的优点。
 * **SAP 应用程序高可用性**，例如 SAP 软件组件的 HA：
-	* SAP 应用程序服务器
-	* SAP ASCS/SCS 实例
-	* 数据库服务器
+    * SAP 应用程序服务器
+    * SAP ASCS/SCS 实例
+    * 数据库服务器
 
 如何与 Azure 基础结构 HA 相结合。
 
@@ -1794,7 +1794,7 @@ Azure 上 Linux 的 SAP HA 体系结构基本上与上述 Windows 相同。不�
 
 SAP 提供了相应的功能，用于在启动 VM 中的 OS 后立即启动 SAP 实例。SAP 知识库文章 [1909114] - How to start SAP instances automatically using parameter Autostart（如何使用参数 Autostart 自动启动 SAP 实例）中描述了确切的步骤。但是，SAP 不再建议使用此设置，因为假设多个 VM 已受到影响或每个 VM 已运行多个实例，将无法控制实例重新启动的顺序。假设这是一个 VM 中有一个 SAP 应用程序服务器实例的典型 Azure 方案，并且这是最终重新启动单个 VM 的方案，则 Autostart 实际上并不重要，可以通过将此参数添加到以下位置来启用它：
 
-	Autostart = 1
+    Autostart = 1
 
 运行 SAP ABAP 和/或 Java 实例的启动配置文件。
 
@@ -1860,9 +1860,9 @@ Azure 中 SAP 系统的高可用性要点如下：
 * 目前，无法以与本地完全相同的方式来保护 SAP 单一故障点。这是因为在 Azure 中还无法在不使用第三方软件的情况下构建共享磁盘群集。
 * 对于 DBMS 层，需要使用不依赖于共享磁盘群集技术的 DBMS 功能。[DBMS Guide][dbms-guide]（DBMS 指南）中提供了详细信息。
 * 若要将 Azure 基础结构或主机维护中的容错域问题的影响降到最低，应该使用 Azure 可用性集：
-	* 建议针对 SAP 应用程序层使用一个可用性集。
-	* 建议针对 SAP DBMS 层使用另一个可用性集。
-	* 不建议对不同 SAP 系统的 VM 应用相同的可用性集。
+    * 建议针对 SAP 应用程序层使用一个可用性集。
+    * 建议针对 SAP DBMS 层使用另一个可用性集。
+    * 不建议对不同 SAP 系统的 VM 应用相同的可用性集。
 * 若要备份 SAP DBMS 层，请参阅 [DBMS Guide][dbms-guide]（DBMS 指南）。
 * 备份 SAP 对话实例没有太大帮助，因为重新部署简单的对话实例通常更快。
 * 备份包含 SAP 系统全局目录的 VM 和不同实例的所有配置文件很有帮助，应该通过 Windows 备份或 Linux 上的 tar 执行此操作。由于 Windows Server 2008 (R2) 与 Windows Server 2012 (R2) 之间存在差异，因此使用更新版的 Windows Server 可以更轻松地进行备份，我们建议运行 Windows Server 2012 (R2) 作为 Windows 来宾操作系统。

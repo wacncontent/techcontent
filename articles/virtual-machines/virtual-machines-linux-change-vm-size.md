@@ -34,13 +34,13 @@ ms.author: mikewasson
 
 1. 运行以下 CLI 命令。此命令将列出托管 VM 的硬件群集上的可用 VM 大小。
 
-    	azure vm sizes -g <resource-group> --vm-name <vm-name>
+        azure vm sizes -g <resource-group> --vm-name <vm-name>
 
 2. 如果列出了所需大小，请运行以下命令来调整 VM 的大小。
 
-	    azure vm set -g <resource-group> --vm-size <new-vm-size> -n <vm-name>  
-	        --enable-boot-diagnostics --boot-diagnostics-storage-uri
-	        https://<storage-account-name>.blob.core.chinacloudapi.cn/ 
+        azure vm set -g <resource-group> --vm-size <new-vm-size> -n <vm-name>  
+            --enable-boot-diagnostics --boot-diagnostics-storage-uri
+            https://<storage-account-name>.blob.core.chinacloudapi.cn/ 
 
     在此过程中，VM 将重新启动。重新启动后，现有 OS 和数据磁盘将重新映射。临时磁盘上的所有内容将会丢失。
 
@@ -48,11 +48,11 @@ ms.author: mikewasson
 
 3. 如果未列出所需大小，请运行以下命令来解除分配 VM、调整其大小，然后将它重新启动。
 
-	    azure vm deallocate -g <resource-group> <vm-name>
-	    azure vm set -g <resource-group> --vm-size <new-vm-size> -n <vm-name>  
-	        --enable-boot-diagnostics --boot-diagnostics-storage-uri
-	        https://<storage-account-name>.blob.core.chinacloudapi.cn/ 
-	    azure vm start -g <resource-group> <vm-name>
+        azure vm deallocate -g <resource-group> <vm-name>
+        azure vm set -g <resource-group> --vm-size <new-vm-size> -n <vm-name>  
+            --enable-boot-diagnostics --boot-diagnostics-storage-uri
+            https://<storage-account-name>.blob.core.chinacloudapi.cn/ 
+        azure vm start -g <resource-group> <vm-name>
 
    > [!WARNING] 解除分配 VM 也会释放分配给该 VM 的所有动态 IP 地址。OS 和数据磁盘不受影响。
 

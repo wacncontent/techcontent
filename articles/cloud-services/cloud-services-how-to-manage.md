@@ -27,7 +27,7 @@ ms.author: adegeo
 
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn)中的仪表板的“云服务”页或“实例”页上，单击“更新”。
 
-	![更新部署](./media/cloud-services-how-to-manage/CloudServices_UpdateDeployment.png)
+    ![更新部署](./media/cloud-services-how-to-manage/CloudServices_UpdateDeployment.png)
 
 2. 在“部署标签”中，输入用于标识部署的名称（例如，mycloudservice4）。可在仪表板上“快速启动”之下找到部署标签。
 
@@ -39,11 +39,11 @@ ms.author: adegeo
 
 6. 如果更新更改了角色数量或任何角色的大小，则选中“如果角色大小或数量发生改变，则允许更新”复选框以继续进行更新。
 
-	请注意，如果更改角色大小（即托管角色实例的虚拟机大小）或角色数量，必须重建每个角色实例（虚拟机）的映像，并将丢失所有本地数据。
+    请注意，如果更改角色大小（即托管角色实例的虚拟机大小）或角色数量，必须重建每个角色实例（虚拟机）的映像，并将丢失所有本地数据。
 
 7. 如果任何服务角色只有一个角色实例，则选中“即使一个或多个角色包含单个实例也进行更新”复选框以继续进行升级。
 
-	如果每个角色至少具有两个角色实例（虚拟机），那么 Azure 在云服务更新期间只能保证 99.95% 的服务可用性。这使得一台虚拟机可以在另一台虚拟机正更新时处理客户端请求。
+    如果每个角色至少具有两个角色实例（虚拟机），那么 Azure 在云服务更新期间只能保证 99.95% 的服务可用性。这使得一台虚拟机可以在另一台虚拟机正更新时处理客户端请求。
 
 8. 单击“确定”（复选标记）以开始更新服务。
 
@@ -59,15 +59,15 @@ ms.author: adegeo
 
 3. 单击“交换”。
 
-	将打开以下确认提示。
+    将打开以下确认提示。
 
-	![云服务交换](./media/cloud-services-how-to-manage/CloudServices_Swap.png)
+    ![云服务交换](./media/cloud-services-how-to-manage/CloudServices_Swap.png)
 
 4. 在验证部署信息后，单击“是”交换部署。
 
-	交换部署的速度很快，因为唯一发生更改的是部署所用的虚拟 IP 地址 (VIP)。
+    交换部署的速度很快，因为唯一发生更改的是部署所用的虚拟 IP 地址 (VIP)。
 
-	为节省计算成本，确定新生产部署按预期执行时，可删除过渡环境中的部署。
+    为节省计算成本，确定新生产部署按预期执行时，可删除过渡环境中的部署。
 
 ## <a name="how-to-link-a-resource-to-a-cloud-service"></a> 如何：将资源链接到云服务
 
@@ -87,15 +87,15 @@ ms.author: adegeo
 
 2. 单击“链接的资源”。
 
-	“链接的资源”页随即打开。
+    “链接的资源”页随即打开。
 
-	![LinkedResourcesPage](./media/cloud-services-how-to-manage/CloudServices_LinkedResourcesPage.png)
+    ![LinkedResourcesPage](./media/cloud-services-how-to-manage/CloudServices_LinkedResourcesPage.png)
 
 3. 单击“链接资源”或“链接”。
 
-	“链接资源”向导随即启动。
+    “链接资源”向导随即启动。
 
-	![链接页 1](./media/cloud-services-how-to-manage/CloudServices_LinkedResources_LinkPage1.png)
+    ![链接页 1](./media/cloud-services-how-to-manage/CloudServices_LinkedResources_LinkPage1.png)
 
 4. 单击“创建新资源”或“链接现有资源”。
 
@@ -103,9 +103,9 @@ ms.author: adegeo
 
 6. 若要完成数据库配置，请按照 Azure 经典管理门户的“SQL 数据库”区域的帮助中的说明操作。
 
-	可以在消息区域中跟踪链接操作的进度。
+    可以在消息区域中跟踪链接操作的进度。
 
-	链接完成时，可在云服务仪表板上监视链接的资源的状态。有关缩放链接的 SQL 数据库的信息，请参阅[如何缩放云服务和链接的资源](./cloud-services-how-to-scale.md)。
+    链接完成时，可在云服务仪表板上监视链接的资源的状态。有关缩放链接的 SQL 数据库的信息，请参阅[如何缩放云服务和链接的资源](./cloud-services-how-to-scale.md)。
 
 ### 取消链接链接的资源
 
@@ -115,7 +115,7 @@ ms.author: adegeo
 
 3. 单击“取消链接”。然后在出现确认提示时，单击“是”。
 
-	取消链接 SQL 数据库对该数据库或应用程序与该数据库的连接没有任何影响。仍可在 Azure 经典管理门户的“SQL 数据库”区域中管理该数据库。
+    取消链接 SQL 数据库对该数据库或应用程序与该数据库的连接没有任何影响。仍可在 Azure 经典管理门户的“SQL 数据库”区域中管理该数据库。
 
 ## 如何：删除部署和云服务
 
@@ -129,9 +129,9 @@ ms.author: adegeo
 
 2. 选择云服务，然后单击“删除”。（若要选择云服务而不打开仪表板，请单击云服务条目中名称以外的任何位置。）
 
-	如果部署位于过渡或生产环境中，窗口底部将显示如下选择菜单。必须先删除所有现有部署，然后才能删除云服务。
+    如果部署位于过渡或生产环境中，窗口底部将显示如下选择菜单。必须先删除所有现有部署，然后才能删除云服务。
 
-	![“删除”菜单](./media/cloud-services-how-to-manage/CloudServices_DeleteMenu.png)
+    ![“删除”菜单](./media/cloud-services-how-to-manage/CloudServices_DeleteMenu.png)
 
 3. 若要删除部署，请单击“删除生产部署”或“删除过渡部署”。然后在出现确认提示时单击“是”。
 

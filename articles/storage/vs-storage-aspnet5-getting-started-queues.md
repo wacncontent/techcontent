@@ -41,26 +41,26 @@ Azure 队列存储是一项可存储大量消息的服务，用户可以通过�
 
 1. 请确保 C# 文件顶部的命名空间声明包括这些 **using** 语句。
 
-		using Microsoft.Framework.Configuration;
-		using Microsoft.WindowsAzure.Storage;
-		using Microsoft.WindowsAzure.Storage.Queue;
-		using System.Threading.Tasks;
-		using LogLevel = Microsoft.Framework.Logging.LogLevel;
+        using Microsoft.Framework.Configuration;
+        using Microsoft.WindowsAzure.Storage;
+        using Microsoft.WindowsAzure.Storage.Queue;
+        using System.Threading.Tasks;
+        using LogLevel = Microsoft.Framework.Logging.LogLevel;
 
 2. 获取表示存储帐户信息的 **CloudStorageAccount** 对象。使用下面的代码获取存储连接字符串和 Azure 服务配置中的存储帐户信息。
 
-		 CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-		   CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
+         CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+           CloudConfigurationManager.GetSetting("<storage-account-name>_AzureStorageConnectionString"));
 
 3. 获取 **CloudQueueClient** 对象，以引用存储帐户中的队列对象。
 
-	    // Create the CloudQueueClient object for the storage account.
-    	CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
+        // Create the CloudQueueClient object for the storage account.
+        CloudQueueClient queueClient = storageAccount.CreateCloudQueueClient();
 
 4. 获取 **CloudQueue** 对象，以引用特定队列。
 
-    	// Get a reference to the CloudQueue named "messageQueue"
-	    CloudQueue messageQueue = queueClient.GetQueueReference("messageQueue");
+        // Get a reference to the CloudQueue named "messageQueue"
+        CloudQueue messageQueue = queueClient.GetQueueReference("messageQueue");
 
 **注意：**在下列示例中，在代码的前面使用上述全部代码。
 
@@ -68,8 +68,8 @@ Azure 队列存储是一项可存储大量消息的服务，用户可以通过�
 
 若要在代码中创建 Azure 队列，只需添加对 **CreateIfNotExistsAsync** 的调用。
 
-	// Create the CloudQueue if it does not exist.
-	await messageQueue.CreateIfNotExistsAsync();
+    // Create the CloudQueue if it does not exist.
+    await messageQueue.CreateIfNotExistsAsync();
 
 ##向队列添加消息
 
@@ -79,16 +79,16 @@ Azure 队列存储是一项可存储大量消息的服务，用户可以通过�
 
 以下示例插入了消息“Hello, World”。
 
-	// Create a message and add it to the queue.
-	CloudQueueMessage message = new CloudQueueMessage("Hello, World");
-	await messageQueue.AddMessageAsync(message);
+    // Create a message and add it to the queue.
+    CloudQueueMessage message = new CloudQueueMessage("Hello, World");
+    await messageQueue.AddMessageAsync(message);
 
 ##读取队列中的消息
 
 通过调用 **PeekMessageAsync** 方法，可以查看队列前面的消息，而不必从队列中将其删除。
 
-	// Peek the next message in the queue. 
-	CloudQueueMessage peekedMessage = await messageQueue.PeekMessageAsync();
+    // Peek the next message in the queue. 
+    CloudQueueMessage peekedMessage = await messageQueue.PeekMessageAsync();
 
 ##读取和删除队列中的消息
 
@@ -98,13 +98,13 @@ Azure 队列存储是一项可存储大量消息的服务，用户可以通过�
 
 此删除消息的两步过程可确保，如果你的代码因硬件或软件故障而无法处理消息，则你的代码的其他实例可以获取相同消息并重试。以下代码将在处理消息后立即调用 **DeleteMessageAsync**。
 
-	// Get the next message in the queue.
-	CloudQueueMessage retrievedMessage = await messageQueue.GetMessageAsync();
+    // Get the next message in the queue.
+    CloudQueueMessage retrievedMessage = await messageQueue.GetMessageAsync();
 
-	// Process the message in less than 30 seconds.
+    // Process the message in less than 30 seconds.
 
     // Then delete the message.
-	await messageQueue.DeleteMessageAsync(retrievedMessage);
+    await messageQueue.DeleteMessageAsync(retrievedMessage);
 
 ## 使用其他方法取消对消息的排队
 
@@ -123,14 +123,14 @@ Azure 队列存储是一项可存储大量消息的服务，用户可以通过�
 
 你可以获取队列中消息的估计数。使用 **FetchAttributes** 方法可请求队列服务检索队列属性，包括消息计数。**ApproximateMethodCount** 属性返回 **FetchAttributes** 方法检索到的最后一个值，而不会调用队列服务。
 
-	// Fetch the queue attributes.
-	messageQueue.FetchAttributes();
+    // Fetch the queue attributes.
+    messageQueue.FetchAttributes();
 
     // Retrieve the cached approximate message count.
     int? cachedMessageCount = messageQueue.ApproximateMessageCount;
 
-	// Display the number of messages.
-	Console.WriteLine("Number of messages in queue: " + cachedMessageCount);
+    // Display the number of messages.
+    Console.WriteLine("Number of messages in queue: " + cachedMessageCount);
 
 ## 共同使用 Async Await 模式和公用队列 API
 

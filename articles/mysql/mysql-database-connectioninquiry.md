@@ -37,9 +37,9 @@ wacn.lang: cn
 ## **为什么数据库连接时常出现超时中断?**
 
 这是由于Azure流量管理器的限制引起的。我们建议您在管理门户或PowerShell中将服务器的参数手动设置为60-240s之间的任意数值，推荐120s。对于10月后创建的实例，我们已经将缺省值调整为120s，可选范围为60-240s，您无需手动更改。（此项调整仅对10月后创建的实例有效）
-	
+    
 ## **MySQL Database on Azure 并发连接量不够用?**
-	
+    
 为了保证连接可以高效的得到充分利用，我们建议您使用连接池(connection pool)或是长连接(persistent connection)连接数据库。查看[如何高效连接到MySQL Database on Azure](./mysql-database-connection-pool.md);
 
 ##**在设置连接池后，MySQL Database on Azure 访问时快时慢？**

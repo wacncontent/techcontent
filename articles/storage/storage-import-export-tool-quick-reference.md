@@ -25,23 +25,23 @@ ms.author: renash
 
 对于第一个会话：
 
-	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#1 /sk:************* /InitialDriveSet:driveset-1.csv /DataSet:dataset-1.csv /logdir:F:\logs
+    WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#1 /sk:************* /InitialDriveSet:driveset-1.csv /DataSet:dataset-1.csv /logdir:F:\logs
 
 第二个会话：
 
-	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2 /DataSet:dataset-2.csv
+    WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2 /DataSet:dataset-2.csv
 
 中止最新会话：
 
-	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2 /AbortSession
+    WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2 /AbortSession
 
 恢复最近中断的会话：
 
-	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#3 /ResumeSession
+    WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#3 /ResumeSession
 
 将驱动器添加到最新的会话：
 
-	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#3 /AdditionalDriveSet:driveset-2.csv
+    WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#3 /AdditionalDriveSet:driveset-2.csv
 
 ## 后续步骤
 

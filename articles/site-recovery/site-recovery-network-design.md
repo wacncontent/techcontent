@@ -74,7 +74,7 @@ ASR 让故障转移变为可能，第一步是将指定的虚拟机从主要数�
 在故障转移之前
 
 下图显示故障转移之后的网络和子网。
-	
+    
 ![在故障转移之后](./media/site-recovery-network-design/network-design3.png)
 
 在故障转移之后
@@ -92,10 +92,10 @@ ASR 让故障转移变为可能，第一步是将指定的虚拟机从主要数�
 
 在为 VM 启用保护之后，可以使用以下脚本示例验证已经分配给虚拟机的 IP。ASR 会将相同的 IP 设置为故障转移 IP，并在故障转移时分配到 VM：
 
-    	$vm = Get-SCVirtualMachine -Name <VM_NAME>
-		$na = $vm[0].VirtualNetworkAdapters>
-		$ip = Get-SCIPAddress -GrantToObjectID $na[0].id
-		$ip.address  
+        $vm = Get-SCVirtualMachine -Name <VM_NAME>
+        $na = $vm[0].VirtualNetworkAdapters>
+        $ip = Get-SCIPAddress -GrantToObjectID $na[0].id
+        $ip.address  
 
 >[!NOTE] 在虚拟机使用 DHCP 的方案中，IP 地址的管理完全在 ASR 控制范围之外。管理员必须确保提供恢复站点上 IP 地址的 DHCP 服务器可以从与主站点相同的范围中提供地址。
 
@@ -150,14 +150,14 @@ Woodgrove 决定将来自 IP 地址范围（172.16.1.0/24、172.16.2.0/24）的 
 - 对于基于 Internet 的应用程序，使用带有 ASR 的 Azure 流量管理器。
 - 在你的恢复计划中使用以下脚本来更新 DNS 服务器，以确保及时更新（如果配置了动态 DNS 注册，则不需要此脚本）
 
-		string]$Zone,
-		[string]$name,
-		[string]$IP
-		)
-		$Record = Get-DnsServerResourceRecord -ZoneName $zone -Name $name
-		$newrecord = $record.clone()
-		$newrecord.RecordData[0].IPv4Address  =  $IP
-		Set-DnsServerResourceRecord -zonename $zone -OldInputObject $record -NewInputObject $Newrecord
+        string]$Zone,
+        [string]$name,
+        [string]$IP
+        )
+        $Record = Get-DnsServerResourceRecord -ZoneName $zone -Name $name
+        $newrecord = $record.clone()
+        $newrecord.RecordData[0].IPv4Address  =  $IP
+        Set-DnsServerResourceRecord -zonename $zone -OldInputObject $record -NewInputObject $Newrecord
 
 ### 更改 IP 地址 — 灾难恢复到 Azure
 

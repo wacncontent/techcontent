@@ -27,14 +27,14 @@ ms.author: jluk
 
 1) 在新的 VM 上部署 LAMP
 
-	# One command to create a resource group holding a VM with LAMP already on it
-	$ azure group create -n uniqueResourceGroup -l chinanorth --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/lamp-app/azuredeploy.json
+    # One command to create a resource group holding a VM with LAMP already on it
+    $ azure group create -n uniqueResourceGroup -l chinanorth --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/lamp-app/azuredeploy.json
 
 2) 在现有 VM 上部署 LAMP
 
-	# Two commands: one updates packages, the other installs Apache, MySQL, and PHP
-	user@ubuntu$ sudo apt-get update
-	user@ubuntu$ sudo apt-get install apache2 mysql-server php5 php5-mysql
+    # Two commands: one updates packages, the other installs Apache, MySQL, and PHP
+    user@ubuntu$ sudo apt-get update
+    user@ubuntu$ sudo apt-get install apache2 mysql-server php5 php5-mysql
 
 ## 在新的 VM 上部署 LAMP 的演练
 
@@ -111,7 +111,7 @@ ms.author: jluk
 ##### 单个包
 使用 apt-get：
 
-	user@ubuntu$ sudo apt-get install apache2 mysql-server php5 php5-mysql
+    user@ubuntu$ sudo apt-get install apache2 mysql-server php5 php5-mysql
 
 ##### 使用 Tasksel
 此外，你可以下载 Tasksel，它是一个 Debian/Ubuntu 工具，可将多个相关包作为协同“任务”安装到你的系统中。
@@ -125,7 +125,7 @@ ms.author: jluk
 
 运行以下命令即可查看以程序包形式提供的其他 PHP 扩展：
 
-	user@ubuntu$ apt-cache search php5
+    user@ubuntu$ apt-cache search php5
 
 #### 创建 info.php 文档
 

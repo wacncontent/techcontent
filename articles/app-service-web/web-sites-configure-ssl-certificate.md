@@ -33,12 +33,12 @@ ms.author: cephalin
 - **增加到基本层或更高层** 较低定价层中的应用服务计划不支持自定义 SSL 证书。有关说明，请参阅[增加 Azure 中的应用](./web-sites-scale.md)。
 - **获取 SSL 证书** - 如果还没有该证书，需先从受信任的[证书颁发机构](http://zh.wikipedia.org/wiki/证书颁发机构) (CA) 获取。证书必须满足下列所有要求：
 
-	- 由受信任的 CA（而非私人 CA 服务器）签名。
-	- 包含私钥。
-	- 创建用于交换密钥并导出到 .PFX 文件。
-	- 至少使用 2048 位加密。
-	- 其使用者名称应与需保护的自定义域相匹配。若要用一个证书保护多个域，需使用通配符名称（如 ***.contoso.com**）或指定 subjectAltName 值。
-	- 与 CA 使用的所有**[中间证书](http://en.wikipedia.org/wiki/Intermediate_certificate_authorities)**合并。否则，在某些客户端上可能会遇到不可再现的互操作性问题。
+    - 由受信任的 CA（而非私人 CA 服务器）签名。
+    - 包含私钥。
+    - 创建用于交换密钥并导出到 .PFX 文件。
+    - 至少使用 2048 位加密。
+    - 其使用者名称应与需保护的自定义域相匹配。若要用一个证书保护多个域，需使用通配符名称（如 ***.contoso.com**）或指定 subjectAltName 值。
+    - 与 CA 使用的所有**[中间证书](http://en.wikipedia.org/wiki/Intermediate_certificate_authorities)**合并。否则，在某些客户端上可能会遇到不可再现的互操作性问题。
 
 ## <a name="bkmk_getcert"></a>步骤 1。获取 SSL 证书
 
@@ -60,61 +60,61 @@ ms.author: cephalin
 
 1. 创建文件（如 **myrequest.txt**），并向其复制以下文本，再将其保存在工作目录中。将 `<your-domain>` 占位符替换为应用的自定义域名。
 
-		[NewRequest]
-		Subject = "CN=<your-domain>"  ; E.g. "CN=www.contoso.com", or "CN=*.contoso.com" for a wildcard certificate
-		Exportable = TRUE
-		KeyLength = 2048              ; Required minimum is 2048
-		KeySpec = 1
-		KeyUsage = 0xA0
-		MachineKeySet = True
-		ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
-		ProviderType = 12
-		HashAlgorithm = SHA256
+        [NewRequest]
+        Subject = "CN=<your-domain>"  ; E.g. "CN=www.contoso.com", or "CN=*.contoso.com" for a wildcard certificate
+        Exportable = TRUE
+        KeyLength = 2048              ; Required minimum is 2048
+        KeySpec = 1
+        KeyUsage = 0xA0
+        MachineKeySet = True
+        ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
+        ProviderType = 12
+        HashAlgorithm = SHA256
 
-		[EnhancedKeyUsageExtension]
-		OID=1.3.6.1.5.5.7.3.1         ; Server Authentication
+        [EnhancedKeyUsageExtension]
+        OID=1.3.6.1.5.5.7.3.1         ; Server Authentication
 
-	若要深入了解 CSR 中的选项和其他可用选项，请参阅 [Certreq 参考文档](https://technet.microsoft.com/zh-cn/library/dn296456.aspx)。
+    若要深入了解 CSR 中的选项和其他可用选项，请参阅 [Certreq 参考文档](https://technet.microsoft.com/zh-cn/library/dn296456.aspx)。
 
 4. 在命令提示符中，通过 `CD` 转到工作目录，再运行以下命令来创建 CSR：
 
-		certreq -new myrequest.txt myrequest.csr
+        certreq -new myrequest.txt myrequest.csr
 
-	现已在当前工作目录中创建 **myrequest.csr**。
+    现已在当前工作目录中创建 **myrequest.csr**。
 
 5. 向 CA 提交 **myrequest.csr** 以获取 SSL 证书。上传文件，或将其内容从文本编辑器复制到 Web 窗体。
 
-	有关 Microsoft 信任的 CA 列表，请参阅 [Microsoft 信任的根证书程序：参与者][cas] (Microsoft Trusted Root Certificate Program: Participants)。
+    有关 Microsoft 信任的 CA 列表，请参阅 [Microsoft 信任的根证书程序：参与者][cas] (Microsoft Trusted Root Certificate Program: Participants)。
 
 6. CA 返回证书 ( CER) 文件后，即将其保存到工作目录中。然后，运行以下命令以完成挂起的 CSR。
 
-		certreq -accept -user <certificate-name>.cer
+        certreq -accept -user <certificate-name>.cer
 
-	此命令将完成后的证书存储在 Windows 证书存储中。
+    此命令将完成后的证书存储在 Windows 证书存储中。
 
 6. 如果 CA 使用中间证书，请先安装再继续操作。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。为 Microsoft IIS 选择版本。
 
-	下载证书后，在 Windows 资源管理器中右键单击每个证书，然后选择“安装证书”。使用“证书导入向导”中的默认值，然后继续选择“下一步”，直到完成导入。
+    下载证书后，在 Windows 资源管理器中右键单击每个证书，然后选择“安装证书”。使用“证书导入向导”中的默认值，然后继续选择“下一步”，直到完成导入。
 
 7. 若要从证书存储中导出 SSL 证书，请按 `Win`+`R` 并运行 **certmgr.msc** 以启动证书管理器。选择“个人”>“证书”。“颁发给”列应会显示一个条目，内附自定义域名和“颁发者”列中生成证书时所用的 CA。
 
-	![将证书管理器的图像插入此处][certmgr]
+    ![将证书管理器的图像插入此处][certmgr]
 
 9. 右键单击该证书，并选择“所有任务”>“导出”。在“证书导出向导”中，单击“下一步”，再选择“是, 导出私钥”，然后再次单击“下一步”。
 
-	![导出私钥][certwiz1]
+    ![导出私钥][certwiz1]
 
 10. 选择“个人信息交换- PKCS #12”、“将所有证书包括在证书路径内(如可能)”和“导出所有扩展属性”。然后，单击“下一步”。
 
-	![包括所有证书和扩展的属性][certwiz2]
+    ![包括所有证书和扩展的属性][certwiz2]
 
 11. 选择“密码”，然后输入并确认该密码。单击“下一步”。
 
-	![指定密码][certwiz3]
+    ![指定密码][certwiz3]
 
 12. 提供扩展名为 **.pfx** 的导出证书的路径和文件名。单击“下一步”完成操作。
 
-	![提供文件路径][certwiz4]
+    ![提供文件路径][certwiz4]
 
 现可将导出的 PFX 文件上传到应用服务。请参阅[步骤 2. 上传和绑定自定义 SSL 证书](#bkmk_configuressl)。
 
@@ -128,17 +128,17 @@ ms.author: cephalin
 
 4. 如果 CA 使用中间证书，请先安装再继续操作。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。为 Microsoft IIS 选择版本。
 
-	下载证书后，在 Windows 资源管理器中右键单击每个证书，然后选择“安装证书”。使用“证书导入向导”中的默认值，然后继续选择“下一步”，直到完成导入。
+    下载证书后，在 Windows 资源管理器中右键单击每个证书，然后选择“安装证书”。使用“证书导入向导”中的默认值，然后继续选择“下一步”，直到完成导入。
 
 4. 从 IIS 管理器导出 SSL 证书。有关导出证书的详细信息，请参阅[导出服务器证书 (IIS 7)][exportcertiis] (Export a Server Certificate (IIS 7))。
 
-	>[!IMPORTANT] 在“证书导出向导”中，确保选择“是, 导出私钥”
-	><p>
-	>![导出私钥][certwiz1]
-	><p>
-	> 还可选择“个人信息交换- PKCS #12”、“将所有证书包括在证书路径内(如可能)”和“导出所有扩展属性”。
-	><p>
-	>![包括所有证书和扩展的属性][certwiz2]
+    >[!IMPORTANT] 在“证书导出向导”中，确保选择“是, 导出私钥”
+    ><p>
+    >![导出私钥][certwiz1]
+    ><p>
+    > 还可选择“个人信息交换- PKCS #12”、“将所有证书包括在证书路径内(如可能)”和“导出所有扩展属性”。
+    ><p>
+    >![包括所有证书和扩展的属性][certwiz2]
 
 现可将导出的 PFX 文件上传到应用服务。请参阅[步骤 2. 上传和绑定自定义 SSL 证书](#bkmk_configuressl)。
 
@@ -146,11 +146,11 @@ ms.author: cephalin
 
 1. 在命令行终端，通过 `CD` 转到工作目录并运行以下命令来生成私钥和 CSR：
 
-		openssl req -sha256 -new -nodes -keyout myserver.key -out server.csr -newkey rsa:2048
+        openssl req -sha256 -new -nodes -keyout myserver.key -out server.csr -newkey rsa:2048
 
 2. 在系统提示后，输入适当的信息。例如：
 
- 		Country Name (2 letter code)
+         Country Name (2 letter code)
         State or Province Name (full name) []: Washington
         Locality Name (eg, city) []: Redmond
         Organization Name (eg, company) []: Microsoft
@@ -158,43 +158,43 @@ ms.author: cephalin
         Common Name (eg, YOUR name) []: www.microsoft.com
         Email Address []:
 
-		Please enter the following 'extra' attributes to be sent with your certificate request
+        Please enter the following 'extra' attributes to be sent with your certificate request
 
-       	A challenge password []:
+           A challenge password []:
 
-	完成后，工作目录中应有两个文件：**myserver.key** 和 **server.csr**。**Server.csr** 包含 CSR，稍后会需要 **myserver.key**。
+    完成后，工作目录中应有两个文件：**myserver.key** 和 **server.csr**。**Server.csr** 包含 CSR，稍后会需要 **myserver.key**。
 
 3. 向 CA 提交 CSR 以获取 SSL 证书。有关 Microsoft 信任的 CA 列表，请参阅 [Microsoft 信任的根证书程序：参与者][cas] (Microsoft Trusted Root Certificate Program: Participants)。
 
 4. CA 发回请求证书后，将其保存到工作目录中名为 **myserver.crt** 的文件下。如果 CA 提供的是文本格式，只需在文本编辑器中将内容复制到 **myserver.crt**，然后进行保存。该文件应如下所示：
 
-		-----BEGIN CERTIFICATE-----
-		MIIDJDCCAgwCCQCpCY4o1LBQuzANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJV
-		UzELMAkGA1UECBMCV0ExEDAOBgNVBAcTB1JlZG1vbmQxEDAOBgNVBAsTB0NvbnRv
-		c28xFDASBgNVBAMTC2NvbnRvc28uY29tMB4XDTE0MDExNjE1MzIyM1oXDTE1MDEx
-		NjE1MzIyM1owVDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdS
-		ZWRtb25kMRAwDgYDVQQLEwdDb250b3NvMRQwEgYDVQQDEwtjb250b3NvLmNvbTCC
-		ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN96hBX5EDgULtWkCRK7DMM3
-		enae1LT9fXqGlbA7ScFvFivGvOLEqEPD//eLGsf15OYHFOQHK1hwgyfXa9sEDPMT
-		3AsF3iWyF7FiEoR/qV6LdKjeQicJ2cXjGwf3G5vPoIaYifI5r0lhgOUqBxzaBDZ4
-		xMgCh2yv7NavI17BHlWyQo90gS2X5glYGRhzY/fGp10BeUEgIs3Se0kQfBQOFUYb
-		ktA6802lod5K0OxlQy4Oc8kfxTDf8AF2SPQ6BL7xxWrNl/Q2DuEEemjuMnLNxmeA
-		Ik2+6Z6+WdvJoRxqHhleoL8ftOpWR20ToiZXCPo+fcmLod4ejsG5qjBlztVY4qsC
-		AwEAATANBgkqhkiG9w0BAQUFAAOCAQEAVcM9AeeNFv2li69qBZLGDuK0NDHD3zhK
-		Y0nDkqucgjE2QKUuvVSPodz8qwHnKoPwnSrTn8CRjW1gFq5qWEO50dGWgyLR8Wy1
-		F69DYsEzodG+shv/G+vHJZg9QzutsJTB/Q8OoUCSnQS1PSPZP7RbvDV9b7Gx+gtg
-		7kQ55j3A5vOrpI8N9CwdPuimtu6X8Ylw9ejWZsnyy0FMeOPpK3WTkDMxwwGxkU3Y
-		lCRTzkv6vnHrlYQxyBLOSafCB1RWinN/slcWSLHADB6R+HeMiVKkFpooT+ghtii1
-		A9PdUQIhK9bdaFicXPBYZ6AgNVuGtfwyuS5V6ucm7RE6+qf+QjXNFg==
-		-----END CERTIFICATE-----
+        -----BEGIN CERTIFICATE-----
+        MIIDJDCCAgwCCQCpCY4o1LBQuzANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJV
+        UzELMAkGA1UECBMCV0ExEDAOBgNVBAcTB1JlZG1vbmQxEDAOBgNVBAsTB0NvbnRv
+        c28xFDASBgNVBAMTC2NvbnRvc28uY29tMB4XDTE0MDExNjE1MzIyM1oXDTE1MDEx
+        NjE1MzIyM1owVDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdS
+        ZWRtb25kMRAwDgYDVQQLEwdDb250b3NvMRQwEgYDVQQDEwtjb250b3NvLmNvbTCC
+        ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN96hBX5EDgULtWkCRK7DMM3
+        enae1LT9fXqGlbA7ScFvFivGvOLEqEPD//eLGsf15OYHFOQHK1hwgyfXa9sEDPMT
+        3AsF3iWyF7FiEoR/qV6LdKjeQicJ2cXjGwf3G5vPoIaYifI5r0lhgOUqBxzaBDZ4
+        xMgCh2yv7NavI17BHlWyQo90gS2X5glYGRhzY/fGp10BeUEgIs3Se0kQfBQOFUYb
+        ktA6802lod5K0OxlQy4Oc8kfxTDf8AF2SPQ6BL7xxWrNl/Q2DuEEemjuMnLNxmeA
+        Ik2+6Z6+WdvJoRxqHhleoL8ftOpWR20ToiZXCPo+fcmLod4ejsG5qjBlztVY4qsC
+        AwEAATANBgkqhkiG9w0BAQUFAAOCAQEAVcM9AeeNFv2li69qBZLGDuK0NDHD3zhK
+        Y0nDkqucgjE2QKUuvVSPodz8qwHnKoPwnSrTn8CRjW1gFq5qWEO50dGWgyLR8Wy1
+        F69DYsEzodG+shv/G+vHJZg9QzutsJTB/Q8OoUCSnQS1PSPZP7RbvDV9b7Gx+gtg
+        7kQ55j3A5vOrpI8N9CwdPuimtu6X8Ylw9ejWZsnyy0FMeOPpK3WTkDMxwwGxkU3Y
+        lCRTzkv6vnHrlYQxyBLOSafCB1RWinN/slcWSLHADB6R+HeMiVKkFpooT+ghtii1
+        A9PdUQIhK9bdaFicXPBYZ6AgNVuGtfwyuS5V6ucm7RE6+qf+QjXNFg==
+        -----END CERTIFICATE-----
 
 5. 在命令行终端中，运行以下命令从 **myserver.key** 和 **myserver.crt** 中导出 **myserver.pfx**:
 
-		openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
+        openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
 
-	系统提示后，定义密码以保护该 .pfx 文件。
+    系统提示后，定义密码以保护该 .pfx 文件。
 
-	> [!NOTE] 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
+    > [!NOTE] 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
 
 现可将导出的 PFX 文件上传到应用服务。请参阅[步骤 2. 上传和绑定自定义 SSL 证书](#bkmk_configuressl)。
 
@@ -202,83 +202,83 @@ ms.author: cephalin
 
 1. 创建名为 **sancert.cnf** 的文件，向其复制以下文本，再将其保存到工作目录中：
 
-		# -------------- BEGIN custom sancert.cnf -----
-		HOME = .
-		oid_section = new_oids
-		[ new_oids ]
-		[ req ]
-		default_days = 730
-		distinguished_name = req_distinguished_name
-		encrypt_key = no
-		string_mask = nombstr
-		req_extensions = v3_req # Extensions to add to certificate request
-		[ req_distinguished_name ]
-		countryName = Country Name (2 letter code)
-		countryName_default =
-		stateOrProvinceName = State or Province Name (full name)
-		stateOrProvinceName_default =
-		localityName = Locality Name (eg, city)
-		localityName_default =
-		organizationalUnitName  = Organizational Unit Name (eg, section)
-		organizationalUnitName_default  =
-		commonName              = Your common name (eg, domain name)
-		commonName_default      = www.mydomain.com
-		commonName_max = 64
-		[ v3_req ]
-		subjectAltName=DNS:ftp.mydomain.com,DNS:blog.mydomain.com,DNS:*.mydomain.com
-		# -------------- END custom sancert.cnf -----
+        # -------------- BEGIN custom sancert.cnf -----
+        HOME = .
+        oid_section = new_oids
+        [ new_oids ]
+        [ req ]
+        default_days = 730
+        distinguished_name = req_distinguished_name
+        encrypt_key = no
+        string_mask = nombstr
+        req_extensions = v3_req # Extensions to add to certificate request
+        [ req_distinguished_name ]
+        countryName = Country Name (2 letter code)
+        countryName_default =
+        stateOrProvinceName = State or Province Name (full name)
+        stateOrProvinceName_default =
+        localityName = Locality Name (eg, city)
+        localityName_default =
+        organizationalUnitName  = Organizational Unit Name (eg, section)
+        organizationalUnitName_default  =
+        commonName              = Your common name (eg, domain name)
+        commonName_default      = www.mydomain.com
+        commonName_max = 64
+        [ v3_req ]
+        subjectAltName=DNS:ftp.mydomain.com,DNS:blog.mydomain.com,DNS:*.mydomain.com
+        # -------------- END custom sancert.cnf -----
 
-	在以 `subjectAltName` 开头的行中，将值替换为要保护的所有域名（`commonName` 除外）。例如：
+    在以 `subjectAltName` 开头的行中，将值替换为要保护的所有域名（`commonName` 除外）。例如：
 
-		subjectAltName=DNS:sales.contoso.com,DNS:support.contoso.com,DNS:fabrikam.com
+        subjectAltName=DNS:sales.contoso.com,DNS:support.contoso.com,DNS:fabrikam.com
 
-	无需更改 `commonName` 在内的任何其他字段。系统将提示在后续几步中指定它们。
+    无需更改 `commonName` 在内的任何其他字段。系统将提示在后续几步中指定它们。
 
 1. 在命令行终端，通过 `CD` 转到工作目录并运行以下命令：
 
-		openssl req -sha256 -new -nodes -keyout myserver.key -out server.csr -newkey rsa:2048 -config sancert.cnf
+        openssl req -sha256 -new -nodes -keyout myserver.key -out server.csr -newkey rsa:2048 -config sancert.cnf
 
 2. 在系统提示后，输入适当的信息。例如：
 
- 		Country Name (2 letter code) []: US
+         Country Name (2 letter code) []: US
         State or Province Name (full name) []: Washington
         Locality Name (eg, city) []: Redmond
         Organizational Unit Name (eg, section) []: Azure
         Your common name (eg, domain name) []: www.microsoft.com
 
-	完成后，工作目录中应有两个文件：**myserver.key** 和 **server.csr**。**Server.csr** 包含 CSR，稍后会需要 **myserver.key**。
+    完成后，工作目录中应有两个文件：**myserver.key** 和 **server.csr**。**Server.csr** 包含 CSR，稍后会需要 **myserver.key**。
 
 3. 向 CA 提交 CSR 以获取 SSL 证书。有关 Microsoft 信任的 CA 列表，请参阅 [Microsoft 信任的根证书程序：参与者][cas] (Microsoft Trusted Root Certificate Program: Participants)。
 
 4. CA 发回请求证书后，将其保存到名为 **myserver.crt** 的文件下。如果 CA 提供的是文本格式，只需在文本编辑器中将内容复制到 **myserver.crt**，然后进行保存。该文件应如下所示：
 
-		-----BEGIN CERTIFICATE-----
-		MIIDJDCCAgwCCQCpCY4o1LBQuzANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJV
-		UzELMAkGA1UECBMCV0ExEDAOBgNVBAcTB1JlZG1vbmQxEDAOBgNVBAsTB0NvbnRv
-		c28xFDASBgNVBAMTC2NvbnRvc28uY29tMB4XDTE0MDExNjE1MzIyM1oXDTE1MDEx
-		NjE1MzIyM1owVDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdS
-		ZWRtb25kMRAwDgYDVQQLEwdDb250b3NvMRQwEgYDVQQDEwtjb250b3NvLmNvbTCC
-		ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN96hBX5EDgULtWkCRK7DMM3
-		enae1LT9fXqGlbA7ScFvFivGvOLEqEPD//eLGsf15OYHFOQHK1hwgyfXa9sEDPMT
-		3AsF3iWyF7FiEoR/qV6LdKjeQicJ2cXjGwf3G5vPoIaYifI5r0lhgOUqBxzaBDZ4
-		xMgCh2yv7NavI17BHlWyQo90gS2X5glYGRhzY/fGp10BeUEgIs3Se0kQfBQOFUYb
-		ktA6802lod5K0OxlQy4Oc8kfxTDf8AF2SPQ6BL7xxWrNl/Q2DuEEemjuMnLNxmeA
-		Ik2+6Z6+WdvJoRxqHhleoL8ftOpWR20ToiZXCPo+fcmLod4ejsG5qjBlztVY4qsC
-		AwEAATANBgkqhkiG9w0BAQUFAAOCAQEAVcM9AeeNFv2li69qBZLGDuK0NDHD3zhK
-		Y0nDkqucgjE2QKUuvVSPodz8qwHnKoPwnSrTn8CRjW1gFq5qWEO50dGWgyLR8Wy1
-		F69DYsEzodG+shv/G+vHJZg9QzutsJTB/Q8OoUCSnQS1PSPZP7RbvDV9b7Gx+gtg
-		7kQ55j3A5vOrpI8N9CwdPuimtu6X8Ylw9ejWZsnyy0FMeOPpK3WTkDMxwwGxkU3Y
-		lCRTzkv6vnHrlYQxyBLOSafCB1RWinN/slcWSLHADB6R+HeMiVKkFpooT+ghtii1
-		A9PdUQIhK9bdaFicXPBYZ6AgNVuGtfwyuS5V6ucm7RE6+qf+QjXNFg==
-		-----END CERTIFICATE-----
+        -----BEGIN CERTIFICATE-----
+        MIIDJDCCAgwCCQCpCY4o1LBQuzANBgkqhkiG9w0BAQUFADBUMQswCQYDVQQGEwJV
+        UzELMAkGA1UECBMCV0ExEDAOBgNVBAcTB1JlZG1vbmQxEDAOBgNVBAsTB0NvbnRv
+        c28xFDASBgNVBAMTC2NvbnRvc28uY29tMB4XDTE0MDExNjE1MzIyM1oXDTE1MDEx
+        NjE1MzIyM1owVDELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAldBMRAwDgYDVQQHEwdS
+        ZWRtb25kMRAwDgYDVQQLEwdDb250b3NvMRQwEgYDVQQDEwtjb250b3NvLmNvbTCC
+        ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN96hBX5EDgULtWkCRK7DMM3
+        enae1LT9fXqGlbA7ScFvFivGvOLEqEPD//eLGsf15OYHFOQHK1hwgyfXa9sEDPMT
+        3AsF3iWyF7FiEoR/qV6LdKjeQicJ2cXjGwf3G5vPoIaYifI5r0lhgOUqBxzaBDZ4
+        xMgCh2yv7NavI17BHlWyQo90gS2X5glYGRhzY/fGp10BeUEgIs3Se0kQfBQOFUYb
+        ktA6802lod5K0OxlQy4Oc8kfxTDf8AF2SPQ6BL7xxWrNl/Q2DuEEemjuMnLNxmeA
+        Ik2+6Z6+WdvJoRxqHhleoL8ftOpWR20ToiZXCPo+fcmLod4ejsG5qjBlztVY4qsC
+        AwEAATANBgkqhkiG9w0BAQUFAAOCAQEAVcM9AeeNFv2li69qBZLGDuK0NDHD3zhK
+        Y0nDkqucgjE2QKUuvVSPodz8qwHnKoPwnSrTn8CRjW1gFq5qWEO50dGWgyLR8Wy1
+        F69DYsEzodG+shv/G+vHJZg9QzutsJTB/Q8OoUCSnQS1PSPZP7RbvDV9b7Gx+gtg
+        7kQ55j3A5vOrpI8N9CwdPuimtu6X8Ylw9ejWZsnyy0FMeOPpK3WTkDMxwwGxkU3Y
+        lCRTzkv6vnHrlYQxyBLOSafCB1RWinN/slcWSLHADB6R+HeMiVKkFpooT+ghtii1
+        A9PdUQIhK9bdaFicXPBYZ6AgNVuGtfwyuS5V6ucm7RE6+qf+QjXNFg==
+        -----END CERTIFICATE-----
 
 5. 在命令行终端中，运行以下命令从 **myserver.key** 和 **myserver.crt** 中导出 **myserver.pfx**:
 
-		openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
+        openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
 
-	系统提示后，定义密码以保护该 .pfx 文件。
+    系统提示后，定义密码以保护该 .pfx 文件。
 
-	> [!NOTE] 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
+    > [!NOTE] 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
 
 现可将导出的 PFX 文件上传到应用服务。请参阅[步骤 2. 上传和绑定自定义 SSL 证书](#bkmk_configuressl)。
 
@@ -288,50 +288,50 @@ ms.author: cephalin
 
 1. 创建文本文件（如 **mycert.txt**），向其复制以下文本并将其文件保存到工作目录中。将 `<your-domain>` 占位符替换为应用的自定义域名。
 
-		[NewRequest]
-		Subject = "CN=<your-domain>"  ; E.g. "CN=www.contoso.com", or "CN=*.contoso.com" for a wildcard certificate
-		Exportable = TRUE
-		KeyLength = 2048              ; KeyLength can be 2048, 4096, 8192, or 16384 (required minimum is 2048)
-		KeySpec = 1
-		KeyUsage = 0xA0
-		MachineKeySet = True
-		ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
-		ProviderType = 12
-		HashAlgorithm = SHA256
-		RequestType = Cert            ; Self-signed certificate
-		ValidityPeriod = Years
-		ValidityPeriodUnits = 1
+        [NewRequest]
+        Subject = "CN=<your-domain>"  ; E.g. "CN=www.contoso.com", or "CN=*.contoso.com" for a wildcard certificate
+        Exportable = TRUE
+        KeyLength = 2048              ; KeyLength can be 2048, 4096, 8192, or 16384 (required minimum is 2048)
+        KeySpec = 1
+        KeyUsage = 0xA0
+        MachineKeySet = True
+        ProviderName = "Microsoft RSA SChannel Cryptographic Provider"
+        ProviderType = 12
+        HashAlgorithm = SHA256
+        RequestType = Cert            ; Self-signed certificate
+        ValidityPeriod = Years
+        ValidityPeriodUnits = 1
 
-		[EnhancedKeyUsageExtension]
-		OID=1.3.6.1.5.5.7.3.1         ; Server Authentication
+        [EnhancedKeyUsageExtension]
+        OID=1.3.6.1.5.5.7.3.1         ; Server Authentication
 
-	参数 `RequestType = Cert` 很重要，可指定自签名证书。若要深入了解 CSR 中的选项和其他可用选项，请参阅 [](https://technet.microsoft.com/zh-cn/library/dn296456.aspx)。
+    参数 `RequestType = Cert` 很重要，可指定自签名证书。若要深入了解 CSR 中的选项和其他可用选项，请参阅 [](https://technet.microsoft.com/zh-cn/library/dn296456.aspx)。
 
 4. 在命令提示符中，通过 `CD` 转到工作目录并运行以下命令：
 
-		certreq -new mycert.txt mycert.crt
-	
-	新的自签名证书现已安装在证书存储中。
+        certreq -new mycert.txt mycert.crt
+    
+    新的自签名证书现已安装在证书存储中。
 
 7. 若要导出证书存储中的证书，请按 `Win`+`R` 并运行 **certmgr.msc** 以启动证书管理器。选择“个人”>“证书”。“颁发给”列应会显示一个条目，内附自定义域名和“颁发者”列中生成证书时所用的 CA。
 
-	![将证书管理器的图像插入此处][certmgr]
+    ![将证书管理器的图像插入此处][certmgr]
 
 9. 右键单击该证书，并选择“所有任务”>“导出”。在“证书导出向导”中，单击“下一步”，再选择“是, 导出私钥”，然后再次单击“下一步”。
 
-	![导出私钥][certwiz1]
+    ![导出私钥][certwiz1]
 
 10. 选择“个人信息交换- PKCS #12”、“将所有证书包括在证书路径内(如可能)”和“导出所有扩展属性”。然后，单击“下一步”。
 
-	![包括所有证书和扩展的属性][certwiz2]
+    ![包括所有证书和扩展的属性][certwiz2]
 
 11. 选择“密码”，然后输入并确认该密码。单击“下一步”。
 
-	![指定密码][certwiz3]
+    ![指定密码][certwiz3]
 
 12. 提供扩展名为 **.pfx** 的导出证书的路径和文件名。单击“下一步”完成操作。
 
-	![提供文件路径][certwiz4]
+    ![提供文件路径][certwiz4]
 
 现可将导出的 PFX 文件上传到应用服务。请参阅[步骤 2. 上传和绑定自定义 SSL 证书](#bkmk_configuressl)。
 
@@ -375,15 +375,15 @@ ms.author: cephalin
 
 2. 在命令行终端，通过 `CD` 转到工作目录并运行以下命令：
 
-		openssl req -sha256 -x509 -nodes -days 365 -newkey rsa:2048 -keyout myserver.key -out myserver.crt -config serverauth.cnf
+        openssl req -sha256 -x509 -nodes -days 365 -newkey rsa:2048 -keyout myserver.key -out myserver.crt -config serverauth.cnf
 
-	此命令会基于 **serverauth.cnf** 中的设置创建两个文件：**myserver.crt**（自签名证书）和 **myserver.key**（私钥）。
+    此命令会基于 **serverauth.cnf** 中的设置创建两个文件：**myserver.crt**（自签名证书）和 **myserver.key**（私钥）。
 
 3. 运行以下命令将证书导出到 .pfx 文件：
 
-		openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
+        openssl pkcs12 -export -out myserver.pfx -inkey myserver.key -in myserver.crt
 
-	系统提示后，定义密码以保护该 .pfx 文件。
+    系统提示后，定义密码以保护该 .pfx 文件。
 
 现可将导出的 PFX 文件上传到应用服务。请参阅[步骤 2.上传和绑定自定义 SSL 证书](#bkmk_configuressl)。
 
@@ -418,17 +418,17 @@ ms.author: cephalin
 
 - [使用 A 记录将自定义域映射](./web-sites-custom-domain-name.md#a)到 Azure 应用，且刚添加 **基于 IP 的 SSL** 绑定。此应用场景下，需按以下步骤重新映射现有的 A 记录以指向专用 IP 地址：
 
-	1. 配置基于 IP 的 SSL 绑定后，将会向你的应用分配专用 IP 地址。可以在“自定义域”页面中应用设置的下面（紧靠在“主机名”部分的上方）找到此 IP 地址。此 IP 地址作为“外部 IP 地址”列出
+    1. 配置基于 IP 的 SSL 绑定后，将会向你的应用分配专用 IP 地址。可以在“自定义域”页面中应用设置的下面（紧靠在“主机名”部分的上方）找到此 IP 地址。此 IP 地址作为“外部 IP 地址”列出
     
-	    ![虚拟 IP 地址](./media/web-sites-configure-ssl-certificate/virtual-ip-address.png)
+        ![虚拟 IP 地址](./media/web-sites-configure-ssl-certificate/virtual-ip-address.png)
 
-	2. [将自定义域名的 A 记录重新映射到新的 IP 地址](./web-sites-custom-domain-name.md#a)。
+    2. [将自定义域名的 A 记录重新映射到新的 IP 地址](./web-sites-custom-domain-name.md#a)。
 
 - 应用中已有一个或多个 **SNI SSL** 绑定，且刚添加**基于 IP 的 SSL** 绑定。绑定完成后，*&lt;appname>*.chinacloudsites.cn 域名指向新的 IP 地址。因此，任何[从自定义域映射](./web-sites-custom-domain-name.md#cname)到 *&lt;appname>* chinacloudsites.cn 的现有 CNAME（包括 **SNI SSL** 保护的）也会收到新地址的流量，其中该地址仅针对**基于 IP 的 SSL** 创建。此应用场景中，需按以下步骤将 **SNI SSL** 流量发回原始共享 IP 地址：
 
-	1. 标识所有到带 **SNI SSL** 绑定的自定义域的 [CNAME 映射](./web-sites-custom-domain-name.md#cname)。
+    1. 标识所有到带 **SNI SSL** 绑定的自定义域的 [CNAME 映射](./web-sites-custom-domain-name.md#cname)。
 
-	2. 将每个 CNAME 记录重新映射到 **sni.**&lt;appname>.chinacloudsites.cn，而不是 &lt;appname>.chinacloudsites.cn。
+    2. 将每个 CNAME 记录重新映射到 **sni.**&lt;appname>.chinacloudsites.cn，而不是 &lt;appname>.chinacloudsites.cn。
 
 ## 步骤 4。测试自定义域的 HTTPS
 
@@ -452,34 +452,34 @@ ms.author: cephalin
 
 3. 单击铅笔按钮打开 `web.config`。
 
-	![](./media/web-sites-configure-ssl-certificate/openwebconfig.png)
+    ![](./media/web-sites-configure-ssl-certificate/openwebconfig.png)
 
-	如果使用 Visual Studio 或 Git 部署应用，应用服务会在应用程序根目录中为 .NET、PHP、Node.js 或 Python 自动生成相应的 `web.config`。如果 `web.config` 不存在，则在基于 Web 的命令提示符中运行 `touch web.config` 进行创建。或者，可在本地项目中创建它并重新部署代码。
+    如果使用 Visual Studio 或 Git 部署应用，应用服务会在应用程序根目录中为 .NET、PHP、Node.js 或 Python 自动生成相应的 `web.config`。如果 `web.config` 不存在，则在基于 Web 的命令提示符中运行 `touch web.config` 进行创建。或者，可在本地项目中创建它并重新部署代码。
 
 4. 如果必需创建 `web.config`，请向其复制以下代码并进行保存。如果已打开现有的 web.config，只需将整个 `<rule>` 标记到 `web.config` 的 `configuration/system.webServer/rewrite/rules` 元素中。
 
-		<?xml version="1.0" encoding="UTF-8"?>
-		<configuration>
-		  <system.webServer>
-		    <rewrite>
-		      <rules>
-			    <!-- BEGIN rule TAG FOR HTTPS REDIRECT -->
-		        <rule name="Force HTTPS" enabled="true">
-		          <match url="(.*)" ignoreCase="false" />
-		          <conditions>
-		            <add input="{HTTPS}" pattern="off" />
-		          </conditions>
-		          <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" appendQueryString="true" redirectType="Permanent" />
-		        </rule>
-				<!-- END rule TAG FOR HTTPS REDIRECT -->
-		      </rules>
-		    </rewrite>
+        <?xml version="1.0" encoding="UTF-8"?>
+        <configuration>
+          <system.webServer>
+            <rewrite>
+              <rules>
+                <!-- BEGIN rule TAG FOR HTTPS REDIRECT -->
+                <rule name="Force HTTPS" enabled="true">
+                  <match url="(.*)" ignoreCase="false" />
+                  <conditions>
+                    <add input="{HTTPS}" pattern="off" />
+                  </conditions>
+                  <action type="Redirect" url="https://{HTTP_HOST}/{R:1}" appendQueryString="true" redirectType="Permanent" />
+                </rule>
+                <!-- END rule TAG FOR HTTPS REDIRECT -->
+              </rules>
+            </rewrite>
           </system.webServer>
-		</configuration>
+        </configuration>
 
-	用户使用 HTTP 请求页面时，此规则都会将 HTTP 301（永久重定向）返回到 HTTPS 协议。它会从 http://contoso.com 重定向到 https://contoso.com。
+    用户使用 HTTP 请求页面时，此规则都会将 HTTP 301（永久重定向）返回到 HTTPS 协议。它会从 http://contoso.com 重定向到 https://contoso.com。
 
-	>[!IMPORTANT] 如果 `web.config` 中已有其他 `<rule>` 标记，则将复制的 `<rule>` 标记置于另一 `<rule>` 标记前。
+    >[!IMPORTANT] 如果 `web.config` 中已有其他 `<rule>` 标记，则将复制的 `<rule>` 标记置于另一 `<rule>` 标记前。
 
 4. 将文件保存在 Kudu 调试控制台。此操作立即生效并将所有请求重定向到 HTTPS。
 

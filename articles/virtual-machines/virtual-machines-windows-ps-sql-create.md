@@ -40,15 +40,15 @@ ms.author: jroth
 
 打开 Windows PowerShell，并通过运行以下 cmdlet 访问 Azure 帐户。随后将出现一个用于输入凭据的登录屏幕。使用登录 Azure 门户预览时所用的相同电子邮件和密码。
 
-	Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 成功登录后，你会在屏幕上看到一些信息，其中包括用于登录的订阅 ID。除非更改为其他订阅，否则本教程中的资源都将在该订阅中创建。如果你有多个订阅 ID，请运行以下 cmdlet 以返回所有订阅 ID 的列表：
 
-	Get-AzureRmSubscription
+    Get-AzureRmSubscription
 
 若要更改为另一个订阅 ID，请结合所需的订阅 ID 运行以下 cmdlet。
 
-	Select-AzureRmSubscription -SubscriptionId xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    Select-AzureRmSubscription -SubscriptionId xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 ## 定义映像变量
 
@@ -59,7 +59,7 @@ ms.author: jroth
 
 根据需要修改并执行以下 cmdlet，以初始化这些变量。
 
-	$Location = "ChinaEast"
+    $Location = "ChinaEast"
     $ResourceGroupName = "sqlvm1"
 
 ### 存储属性

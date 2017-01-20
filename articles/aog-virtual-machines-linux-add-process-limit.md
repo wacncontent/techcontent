@@ -31,11 +31,11 @@ wacn.date: 08/31/2016
 - 重启虚拟机并以管理员登陆虚拟机，切换成 root 用户
 - 查看文件 /etc/security/limits.d/20-nproc.conf， 默认应该为如下内容
 
-		# Default limit for number of user's processes to prevent
-		# accidental fork bombs.
-		# See rhbz #432903 for reasoning.	
-		*          soft    nproc     4096
-		root       soft    nproc     unlimited
+        # Default limit for number of user's processes to prevent
+        # accidental fork bombs.
+        # See rhbz #432903 for reasoning.	
+        *          soft    nproc     4096
+        root       soft    nproc     unlimited
 
 - 编辑文件 /etc/security/limits.d/20-nproc.conf，将高亮显示行内的 4096，调整为相应的值，或者改成 unlimited.
 

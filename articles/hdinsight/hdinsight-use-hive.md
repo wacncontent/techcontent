@@ -62,7 +62,7 @@ Hive 知道如何处理结构化和半结构化数据，例如字段以特定字
 
 本示例使用 *log4j* 示例文件，该文件存储在 Blob 存储容器的 **/example/data/sample.log** 中。该文件中的每个日志都由一行字段组成，其中包含一个用于显示类型和严重性的 `[LOG LEVEL]` 字段，例如：
 
-	2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
+    2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
 
 在前面的示例中，日志级别为 ERROR。
 
@@ -70,7 +70,7 @@ Hive 知道如何处理结构化和半结构化数据，例如字段以特定字
 
 示例数据存储在 Azure Blob 存储中，HDInsight 将其用作默认文件系统。HDInsight 可以使用 **wasb** 前缀来访问存储在 Blob 中的文件。例如，若要访问 sample.log 文件，可使用以下语法：
 
-	wasbs:///example/data/sample.log
+    wasbs:///example/data/sample.log
 
 Azure Blob 存储是 HDInsight 的默认存储，因此也可以使用 HiveQL 中的 **/example/data/sample.log** 访问该文件。
 
@@ -81,7 +81,7 @@ Azure Blob 存储是 HDInsight 的默认存储，因此也可以使用 HiveQL �
 以下 HiveQL 语句将列投影到 **wasbs:///example/data** 目录中存储的分隔数据：
 
     set hive.execution.engine=tez;
-	DROP TABLE log4jLogs;
+    DROP TABLE log4jLogs;
     CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
     ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
     STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
@@ -103,10 +103,10 @@ Azure Blob 存储是 HDInsight 的默认存储，因此也可以使用 HiveQL �
 创建外部表后，以下语句可用于创建**内部**表。
 
     set hive.execution.engine=tez;
-	CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
-	STORED AS ORC;
-	INSERT OVERWRITE TABLE errorLogs
-	SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]';
+    CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
+    STORED AS ORC;
+    INSERT OVERWRITE TABLE errorLogs
+    SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]';
 
 这些语句可执行以下操作：
 

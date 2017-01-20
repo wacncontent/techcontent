@@ -51,9 +51,9 @@ ms.author: ddove
 
 3. 新建数据库或选择现有数据库，以将其用作拆分/合并操作的状态数据库并检索该数据库的连接字符串。
 
-	**重要说明** 目前，状态数据库必须使用拉丁语排序规则 (SQL\_Latin1\_General\_CP1\_CI\_AS)。有关详细信息，请参阅 [Windows 排序规则名称 (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms188046.aspx)。
+    **重要说明** 目前，状态数据库必须使用拉丁语排序规则 (SQL\_Latin1\_General\_CP1\_CI\_AS)。有关详细信息，请参阅 [Windows 排序规则名称 (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms188046.aspx)。
 
-	在 Azure SQL DB 中，连接字符串通常采用以下形式：
+    在 Azure SQL DB 中，连接字符串通常采用以下形式：
 
         "Server=myservername.database.chinacloudapi.cn; Database=mydatabasename;User ID=myuserID; Password=mypassword; Encrypt=True; Connection Timeout=30" .
 4.    同时在 ElasticScaleMetadata 设置的 **SplitMergeWeb** 和 **SplitMergeWorker** 角色部分中，在 cscfg 文件内输入此连接字符串。

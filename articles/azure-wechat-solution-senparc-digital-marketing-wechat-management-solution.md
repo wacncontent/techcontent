@@ -22,7 +22,7 @@ wacn.date: 01/17/2017
 1. Web 应用服务
 
     ![1](./media/azure-wechat-solution-senparc-digital-marketing-wechat-management-solution/1.png)
- 	
+     
 2. Redis 缓存
 
     ![2](./media/azure-wechat-solution-senparc-digital-marketing-wechat-management-solution/2.png)
@@ -50,27 +50,27 @@ wacn.date: 01/17/2017
     2. Ftp 配置
 
         ![5](./media/azure-wechat-solution-senparc-digital-marketing-wechat-management-solution/5.png)
-			 			 
+                          
 2. Redis 缓存
 
     仅允许 SSL 访问
 
     ![6](./media/azure-wechat-solution-senparc-digital-marketing-wechat-management-solution/6.png)
-				 
+                 
 3. DataBase数据库
 
     将所需 IP 地址加入数据库防火墙
 
 4. 微信公众号配置
-	
+    
     1) 接口权限申请
 
     ![7](./media/azure-wechat-solution-senparc-digital-marketing-wechat-management-solution/7.png)
-			 
+             
     2) 域名配置
 
     ![8](./media/azure-wechat-solution-senparc-digital-marketing-wechat-management-solution/8.png)
-			 
+             
     3) 业务域名配置
 
     ![9](./media/azure-wechat-solution-senparc-digital-marketing-wechat-management-solution/9.png)

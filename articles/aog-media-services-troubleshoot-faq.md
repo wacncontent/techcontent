@@ -25,11 +25,11 @@ Wirecast 无法连接直播频道的 ingest URL，出现 -4018 错误:
 1. 登录 azure portal，检查频道是否在运行状态。
 2. 如果频道已经运行，检查 ingest URL 的域名是否可以在 Wirecast 工作站解析，如果无法解析，找到一台可以正常解析 ingest url 域名的电脑，运行 ping 命令获取 IP 地址:
 
-	![ping-ip](./media/aog-media-services-troubleshoot-faq/ping-ip.png "通过 ping 获取 IP 地址")  
+    ![ping-ip](./media/aog-media-services-troubleshoot-faq/ping-ip.png "通过 ping 获取 IP 地址")  
  在 Wirecast 的输出设置中，用获取的 IP 地址 替换 ingest URL 的域名:  
  ![ingestURL-domain](./media/aog-media-services-troubleshoot-faq/ingestURL-domain.png "IP 地址替换 ingest URL 域名")
   
-	>注：当频道重启后，IP 地址会发生变化，需要重新获取。**
+    >注：当频道重启后，IP 地址会发生变化，需要重新获取。**
 
 ###场景二: 
 

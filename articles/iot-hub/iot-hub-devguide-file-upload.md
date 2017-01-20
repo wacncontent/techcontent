@@ -105,12 +105,12 @@ IoT 中心有两个 REST 终结点支持文件上传，一个用于获取存储�
 
 ```
 {
-	"deviceId":"mydevice",
-	"blobUri":"https://{storage account}.blob.core.chinacloudapi.cn/{container name}/mydevice/myfile.jpg",
-	"blobName":"mydevice/myfile.jpg",
-	"lastUpdatedTime":"2016-06-01T21:22:41+00:00",
-	"blobSizeInBytes":1234,
-	"enqueuedTimeUtc":"2016-06-01T21:22:43.7996883Z"
+    "deviceId":"mydevice",
+    "blobUri":"https://{storage account}.blob.core.chinacloudapi.cn/{container name}/mydevice/myfile.jpg",
+    "blobName":"mydevice/myfile.jpg",
+    "lastUpdatedTime":"2016-06-01T21:22:41+00:00",
+    "blobSizeInBytes":1234,
+    "enqueuedTimeUtc":"2016-06-01T21:22:43.7996883Z"
 }
 ```
 

@@ -25,8 +25,8 @@ Visual Studio 2015 的 Azure 服务资源管理器默认是连接由微软运营
 
 - **前提**
 
-	1.	必须安装 Azure SDK for .NET，下载地址： [https://www.azure.cn/develop/net/](/develop/net/)
-	2.	VS2015 必须为 update2 之后版本
+    1.	必须安装 Azure SDK for .NET，下载地址： [https://www.azure.cn/develop/net/](/develop/net/)
+    2.	VS2015 必须为 update2 之后版本
 
 - **Visual Studio设置**
 

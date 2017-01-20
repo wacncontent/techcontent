@@ -82,7 +82,7 @@ Blob 的快照与其基本 Blob 相同，不过，Blob URI 的后面追加了一
 
 以下代码示例演示如何在 .NET 中删除 Blob 及其快照，其中 `blockBlob` 是 **CloudBlockBlob** 类型的变量：
 
-	await blockBlob.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots, null, null, null);
+    await blockBlob.DeleteIfExistsAsync(DeleteSnapshotsOption.IncludeSnapshots, null, null, null);
 
 ## 在 Azure 高级存储中使用快照
 在高级存储中使用快照需遵循以下规则：

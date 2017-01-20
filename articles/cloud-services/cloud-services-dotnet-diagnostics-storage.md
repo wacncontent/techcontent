@@ -25,9 +25,9 @@ ms.author: robb
 
 指定要在 ServiceConfiguration.cscfg 文件中使用的存储帐户。将帐户信息定义为配置设置中的连接字符串。下例显示在 Visual Studio 中针对新的云服务项目创建的默认连接字符串：
 
-		<ConfigurationSettings>
-		   <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
-		</ConfigurationSettings>
+        <ConfigurationSettings>
+           <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+        </ConfigurationSettings>
 
 可以更改此连接字符串，为 Azure 存储帐户提供帐户信息。
 

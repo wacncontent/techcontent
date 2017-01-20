@@ -40,25 +40,25 @@ MySQL Database on Azure supports slave server mode and standard MySQL data repli
 9.	Create the required user accounts on the newly created MySQL server. This is necessary because user account information cannot be replicated.
 10.	Import the user database data exported from the master server onto the newly created MySQL server. If the database file is very large, we recommend that you upload the file to a virtual machine on Azure, and then import it into the MySQL server from the virtual machine. The virtual machine should be in the same data center as the newly created MySQL server. The specific steps are listed below.
 
-	a) Upload the mysql.exe tool to the virtual machine.
+    a) Upload the mysql.exe tool to the virtual machine.
 
-	b) Upload the file that was exported from the database onto the virtual machine. If the backup file is very large, you can compress it before uploading.
+    b) Upload the file that was exported from the database onto the virtual machine. If the backup file is very large, you can compress it before uploading.
 
-	c) Sign in to the virtual machine, and connect to the newly created MySQL server by using mysql.exe: mysql -h<server address\> -P<port number\> –u<username\> -p<password\>
+    c) Sign in to the virtual machine, and connect to the newly created MySQL server by using mysql.exe: mysql -h<server address\> -P<port number\> –u<username\> -p<password\>
 
-	d) Run the source <backup file name> SQL command to import data within the backup file.
+    d) Run the source <backup file name> SQL command to import data within the backup file.
 
-	e) Repeat steps 3 to 6 until all the data in the user databases has been imported into the MySQL server.
+    e) Repeat steps 3 to 6 until all the data in the user databases has been imported into the MySQL server.
 
 11.	Make the newly created MySQL server the slave server
 
-	a) Select the newly created MySQL server, and click the “Replicate” page.
+    a) Select the newly created MySQL server, and click the “Replicate” page.
 
-	b) Change the role to “Slave server,” and then enter the master server parameters.
+    b) Change the role to “Slave server,” and then enter the master server parameters.
 
-	i. For the master server binary log file name and offset, enter the results obtained in step b.
+    i. For the master server binary log file name and offset, enter the results obtained in step b.
 
-	ii. If you are using SSL links, select the enable option in the locations by using the SSL links. Next, open the master server certification authority (CA) certificate and copy the entire contents into the input box of the master server CA certificate. c) Click Save after all the details are correctly configured.
+    ii. If you are using SSL links, select the enable option in the locations by using the SSL links. Next, open the master server certification authority (CA) certificate and copy the entire contents into the input box of the master server CA certificate. c) Click Save after all the details are correctly configured.
 
 >[!NOTE]**We strongly recommend using SSL to help ensure that your data is secure. **
 
@@ -81,11 +81,11 @@ If replication stops because it encounters a problem of any kind, the replicatio
 
 - Data is consistent between the master and slave servers. For example, replication attempts to insert a record into the slave server that already exists. There are several possible causes of this error:
 
-	- Some DMLs on the master server were not recorded in the binary log file. For example, SET sql\_log\_bin=0 was executed before the DML was executed on the master server.
+    - Some DMLs on the master server were not recorded in the binary log file. For example, SET sql\_log\_bin=0 was executed before the DML was executed on the master server.
 
-	- Before the replication role was changed to the slave server, faulty write operations were performed on it.
+    - Before the replication role was changed to the slave server, faulty write operations were performed on it.
 
-	- There are input errors for the binary log file name or offset the replication role was changed to the slave server.
+    - There are input errors for the binary log file name or offset the replication role was changed to the slave server.
 
 If data replication errors do occur, solve them by using the following process:
 
@@ -95,10 +95,10 @@ If data replication errors do occur, solve them by using the following process:
 
 3.	Use the Azure portal to change the replication role of the MySQL back to the slave server.
 
-	- The master server binary log file name and offset are the master server binary file name and offset that were previously replicated and executed. If there were previously no input errors with the binary log file name or offset, we do not recommend making any changes.
+    - The master server binary log file name and offset are the master server binary file name and offset that were previously replicated and executed. If there were previously no input errors with the binary log file name or offset, we do not recommend making any changes.
 
-	- For security reasons, the master server password and master server CA certificate that were previously entered will not be displayed at this time. If you do not make any changes, MySQL will continue to use the previous password and CA certificate.
+    - For security reasons, the master server password and master server CA certificate that were previously entered will not be displayed at this time. If you do not make any changes, MySQL will continue to use the previous password and CA certificate.
 
-	- The other master server parameter fields will show the corresponding parameter values that were previously entered. If there are no errors, you do not need to make any changes.
+    - The other master server parameter fields will show the corresponding parameter values that were previously entered. If there are no errors, you do not need to make any changes.
 
 <!--HONumber=81-->

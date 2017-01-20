@@ -136,7 +136,7 @@ ms.author: jeffstok
 
      SELECT * FROM CallStream
 
-	> [!IMPORTANT] 请确保输入源的名称与此前指定的输入的名称相匹配。
+    > [!IMPORTANT] 请确保输入源的名称与此前指定的输入的名称相匹配。
 
 3. 单击查询编辑器下的**“测试”**。
 4. 提供测试文件。可以使用在前面步骤中创建的文件，也可以使用 [telco.json](https://github.com/Azure/azure-stream-analytics/blob/master/Samples/SampleDataFiles/Telco.json)。
@@ -165,7 +165,7 @@ ms.author: jeffstok
      FROM CallStream TIMESTAMP BY CallRecTime
      GROUP BY TUMBLINGWINDOW(s, 5), SwitchNum
 
-	此查询使用 **Timestamp By** 关键字在要用于临时计算的负载中指定时间戳字段。如果未指定此字段，则会根据每个事件到达事件中心的时间执行窗口化操作。请参阅[流分析查询语言参考中的“到达时间与应用程序时间”](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)。
+    此查询使用 **Timestamp By** 关键字在要用于临时计算的负载中指定时间戳字段。如果未指定此字段，则会根据每个事件到达事件中心的时间执行窗口化操作。请参阅[流分析查询语言参考中的“到达时间与应用程序时间”](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)。
 
     请注意，你可以使用 **System.Timestamp** 属性访问每个窗口结束时的时间戳。
     

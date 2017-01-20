@@ -7,8 +7,8 @@
 - [Blob 存储](#blob)
 - [在虚拟机中运行 DBMS](#dbinvm)
 - [SQL 数据库](#sqldb)
-	<!-- - [SQL 数据同步](#datasync)-->
-	- [使用虚拟机进行 SQL 数据报告](#datarpt)
+    <!-- - [SQL 数据同步](#datasync)-->
+    - [使用虚拟机进行 SQL 数据报告](#datarpt)
 - [表存储](#tblstor)
 - [Hadoop](#hadoop)
 

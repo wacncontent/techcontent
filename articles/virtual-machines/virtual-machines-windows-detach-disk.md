@@ -40,7 +40,7 @@ ms.author: cynthn
 
 5. 在该数据磁盘的边栏选项卡中，单击“分离”。
 
-	![显示“分离”按钮的屏幕截图。](./media/virtual-machines-windows-detach-disk/detach-disk.png)
+    ![显示“分离”按钮的屏幕截图。](./media/virtual-machines-windows-detach-disk/detach-disk.png)
 
 磁盘保留在存储中，但不再附加到虚拟机。
 
@@ -52,9 +52,9 @@ ms.author: cynthn
 
 最后一个命令更新虚拟机的状态，以完成删除数据磁盘过程。
 
-	$VirtualMachine = Get-AzureRmVM -ResourceGroupName "RG11" -Name "MyVM07" 
-	Remove-AzureRmVMDataDisk -VM $VirtualMachine -Name "DataDisk3"
-	Update-AzureRmVM -ResourceGroupName "RG11" -Name "MyVM07" -VM $VirtualMachine
+    $VirtualMachine = Get-AzureRmVM -ResourceGroupName "RG11" -Name "MyVM07" 
+    Remove-AzureRmVMDataDisk -VM $VirtualMachine -Name "DataDisk3"
+    Update-AzureRmVM -ResourceGroupName "RG11" -Name "MyVM07" -VM $VirtualMachine
 
 有关详细信息，请参阅 [Remove-AzureRmVMDataDisk](https://msdn.microsoft.com/zh-cn/library/mt603614.aspx)
 

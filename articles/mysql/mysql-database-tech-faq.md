@@ -45,9 +45,9 @@ wacn.lang: cn
 ### **一个服务器是否限制数据库的数量?**
 
 在一个MySQL服务器中，用户可创建多个数据库，数量上没有限制，但是多个数据库会共享服务器资源，如数据库数量较多，性能需求较高，建议创建多个MySQL服务器。
-	
+    
 ### **MySQL Database on Azure目前有哪些限制?**
-	
+    
 了解更多[MySQL Database on Azure服务限制](./mysql-database-operation-limitation.md)
 
 ### **为什么MySQL Database on Azure不支持MYISAM格式的数据库?**
@@ -61,9 +61,9 @@ wacn.lang: cn
 5. MySQL的发展也是在向InnoDB转移,在最新的5.7中MySQL可以完全不是MyISAM,系统的数据库也被转移到了InnoDB。
 
 ### **为什么新建的空的数据库服务器默认大小为530M? 为什么数据库显示使用存储空间大于实际使用的存储空间?**
-	
+    
 出于性能考虑，我们为新创建的数据库实例配置使用两个256M的日志文件。因此您在管理门户中看到的存储空间使用统计包括了日志文件的大小。但是日志文件大小在使用过程中不会改变。
-	
+    
 ### **MYSQL Database on Azure 是否支持用户通过命令行设置权限**
 
 支持,虽然我们的[管理门户](https://manage.windowsazure.cn/) 以及PowerShell 命令行在创建用户或数据库时只支持对整个数据库设置读写权限，但你可以用“grant”命令对用户权限进行更细化的设置。
@@ -116,9 +116,9 @@ Step 4. 将数据导入到5.7实例
 ### **为什么数据库连接时常出现超时中断?**
 
 这是由于Azure流量管理器的限制引起的。我们建议您在管理门户或PowerShell中将服务器的参数手动设置为60-240s之间的任意数值，推荐120s。对于10月后创建的实例，我们已经将缺省值调整为120s，可选范围为60-240s，您无需手动更改。（此项调整仅对10月后创建的实例有效）
-	
+    
 ### **MySQL Database on Azure 并发连接量不够用?**
-	
+    
 为了保证连接可以高效的得到充分利用，我们建议您使用连接池(connection pool)或是长连接(persistent connection)连接数据库。查看[如何高效连接到MySQL Database on Azure](./mysql-database-connection-pool.md);
 
 ###**在设置连接池后，MySQL Database on Azure 访问时快时慢？**

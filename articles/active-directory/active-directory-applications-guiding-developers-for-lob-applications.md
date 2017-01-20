@@ -39,8 +39,8 @@ ms.author: kgremban
   - 使用 Azure Active Directory 作为 oAuth 授权服务器（保护应用程序公开的 API）
 
 - 声明让应用程序按预期运行所需的权限，包括：
-	  - 应用权限（仅限全局管理员）。例如：另一个 Azure AD 应用程序中的角色成员身份，或相对于 Azure 资源、资源组或订阅的角色成员身份
-	  - 委派的权限（任何用户）。例如：Azure AD、登录和读取配置文件
+      - 应用权限（仅限全局管理员）。例如：另一个 Azure AD 应用程序中的角色成员身份，或相对于 Azure 资源、资源组或订阅的角色成员身份
+      - 委派的权限（任何用户）。例如：Azure AD、登录和读取配置文件
 
 > [!NOTE]默认情况下，任何成员都可以注册应用程序。若要了解如何限定只有特定成员拥有注册应用程序的权限，请参阅 [How applications are added to Azure AD（如何将应用程序添加到 Azure AD）](./active-directory-how-applications-are-added.md#who-has-permission-to-add-applications-to-my-azure-ad-instance)文档。
 

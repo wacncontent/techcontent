@@ -44,21 +44,21 @@ ms.author: kundanap
 部署扩展的模板代码段如下所示：
 
       {
-	      "type": "Microsoft.Compute/virtualMachines/extensions",
-	      "name": "MyExtension",
-	      "apiVersion": "2015-05-01-preview",
-	      "location": "[parameters('location')]",
-	      "dependsOn": ["[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"],
-	      "properties":
-	      {
-		      "publisher": "Publisher Namespace",
-		      "type": "extension Name",
-		      "typeHandlerVersion": "extension version",
+          "type": "Microsoft.Compute/virtualMachines/extensions",
+          "name": "MyExtension",
+          "apiVersion": "2015-05-01-preview",
+          "location": "[parameters('location')]",
+          "dependsOn": ["[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'))]"],
+          "properties":
+          {
+              "publisher": "Publisher Namespace",
+              "type": "extension Name",
+              "typeHandlerVersion": "extension version",
               "autoUpgradeMinorVersion":true,
-		      "settings": {
-		      	// Extension specific configuration goes in here.
-		      }
-	      }
+              "settings": {
+                  // Extension specific configuration goes in here.
+              }
+          }
       }
 
 ## 适用于包含 VM 缩放集的 VM 扩展的示例模板代码段。

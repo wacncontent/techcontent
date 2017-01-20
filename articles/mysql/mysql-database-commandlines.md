@@ -199,7 +199,7 @@ Set-AzureResource -ResourceType "Microsoft.MySql/servers" -ResourceName testPSH 
 对其他参数的修改，可以参考下面Json文件的定义，参数的有效值范围可参考[定制MySQL Database on Azure服务器参数](./mysql-database-advanced-settings.md)：
 
 ```
-	"options": {
+    "options": {
           "type": "object",
           "properties": {
             "div_precision_increment": {

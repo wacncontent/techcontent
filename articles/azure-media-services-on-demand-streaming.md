@@ -21,45 +21,45 @@ wacn.date: 08/10/2016
 
 1. 首先登录 [Azure 经典管理门户](https://manage.windowsazure.cn/)，在管理页面左侧的服务列表中点击**媒体服务**，然后选择**创建媒体服务账户**即可。
 
-	![1](./media/azure-media-services-on-demand-streaming/1.png)
+    ![1](./media/azure-media-services-on-demand-streaming/1.png)
 
-	![2](./media/azure-media-services-on-demand-streaming/2.png)
+    ![2](./media/azure-media-services-on-demand-streaming/2.png)
 
 2. 在新建界面，我们可以自定义一个名称，可以使用现有的存储账户或者新建存储账户，这里我们新建一个存储账户。 
 
-	![3](./media/azure-media-services-on-demand-streaming/3.png)
+    ![3](./media/azure-media-services-on-demand-streaming/3.png)
 
 3. 点击**创建媒体服务**按钮，Azure 会在一分钟内完成媒体服务的创建。
 
-	![4](./media/azure-media-services-on-demand-streaming/4.png)
+    ![4](./media/azure-media-services-on-demand-streaming/4.png)
 
 ##Step 2: 上传视频
 1. 点击进入 Step 1 中创建的媒体服务，选择**内容**选项卡，然后点击**上载内容**或者页面底部的**上载**按钮将我们要在视屏 App 上播放的视频传输至 Azure 的存储账户。
 
-	![5](./media/azure-media-services-on-demand-streaming/5.png)
+    ![5](./media/azure-media-services-on-demand-streaming/5.png)
 
 2. 选择要播放的视频进行上传。
 
-	![6](./media/azure-media-services-on-demand-streaming/6.png)
+    ![6](./media/azure-media-services-on-demand-streaming/6.png)
 
 3. 上传完成之后，我们可以在媒体服务中看到该视频。
 
-	![7](./media/azure-media-services-on-demand-streaming/7.png)
+    ![7](./media/azure-media-services-on-demand-streaming/7.png)
 
 ##Step 3: 对视频进行编码
 
 1. 我们利用 Azure 媒体服务将刚才上传好的视频进行编码，以满足不同客户端和播放器的需求。选中视频，然后点击页面底部工具栏上的**进程**按钮
 
-	![8](./media/azure-media-services-on-demand-streaming/8.png)
+    ![8](./media/azure-media-services-on-demand-streaming/8.png)
 
 2. 在**进程**对话框中，我们可以在**编码配置**中选择所需的目标格式，并为输出的视频自定义名称。
 我们的 App 需支持播放高清或标清视频，所以推荐选择 **H264 多比特率 720P** 对视频进行编码，通过自适应比特率流，用户观看视频时，可根据当前网络带宽、CPU 利用率和其他因素，切换至高清或标清观看。
 
-	![9](./media/azure-media-services-on-demand-streaming/9.png)
+    ![9](./media/azure-media-services-on-demand-streaming/9.png)
 
 3. 点击√，Azure 媒体服务会很快完成编码工作。
 
-	![10](./media/azure-media-services-on-demand-streaming/10.png)
+    ![10](./media/azure-media-services-on-demand-streaming/10.png)
 
 ##Step 4: 添加流式处理端点
 
@@ -79,25 +79,25 @@ wacn.date: 08/10/2016
 
 1. 基本配置完成后，我们就可以发布视频了。在媒体服务内容中选择要发布的视频，点击页面底部工具栏上的**发布**按钮进行发布。
 
-	![13](./media/azure-media-services-on-demand-streaming/13.png)
+    ![13](./media/azure-media-services-on-demand-streaming/13.png)
 
 2. 选中已发布的视频，点击页面底部工具栏上的**播放**按钮进行预览。
 
-	![14](./media/azure-media-services-on-demand-streaming/14.png)
+    ![14](./media/azure-media-services-on-demand-streaming/14.png)
 
 3. 我们可以直接通过浏览器在 Azure 经典管理门户上播放该视频。
 
-	![15](./media/azure-media-services-on-demand-streaming/15.png)
+    ![15](./media/azure-media-services-on-demand-streaming/15.png)
 
 4. 选中已经发布的视频，在发布 URL 中点击“复制”按钮，将发布 URL 复制下来。
 
-	![16](./media/azure-media-services-on-demand-streaming/16.png)
+    ![16](./media/azure-media-services-on-demand-streaming/16.png)
 
 5. 把视频链接添加到视频 App 上，用户就可以在 App 上挑选并观看了。
 
-	![17](./media/azure-media-services-on-demand-streaming/17.png)
+    ![17](./media/azure-media-services-on-demand-streaming/17.png)
 
-	![18](./media/azure-media-services-on-demand-streaming/18.png)
+    ![18](./media/azure-media-services-on-demand-streaming/18.png)
 
 >[!NOTE]您也可以使用 Azure Media Player 模拟视频 APP，测试已编码视频是否可正常播放，打开 Azure Media Player 页面，在 URL 框中输入 Azure 媒体服务生成的**发布 URL**，并点击 **Update Player** 按钮。即可实现自适应码率视频的播放。 [下载　Azure Media Player](http://ampdemo.azureedge.net/azuremediaplayer.html)
 

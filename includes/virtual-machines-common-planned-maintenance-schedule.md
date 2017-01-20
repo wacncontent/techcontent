@@ -18,11 +18,11 @@
         
     2.	在“设置”下，你会看到 VM 是在哪个可用性集。
         
-    	![可用性集选择](./media/virtual-machines-planned-maintenance-schedule/availabilitysetselection.png)
+        ![可用性集选择](./media/virtual-machines-planned-maintenance-schedule/availabilitysetselection.png)
 
     3.	在可用性集的拉下菜单，选择"从可用性集删除"。
         
-    	![从集中删除](./media/virtual-machines-planned-maintenance-schedule/availabilitysetselectionconfiguration.png)
+        ![从集中删除](./media/virtual-machines-planned-maintenance-schedule/availabilitysetselectionconfiguration.png)
 
     4. 在底部，选择“保存”。选择“是”确认这个动作将重启 VM。
 

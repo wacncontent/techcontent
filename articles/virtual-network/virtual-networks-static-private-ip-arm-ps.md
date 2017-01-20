@@ -70,7 +70,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         New-AzureRmVM -ResourceGroupName $rgName -Location $locName -VM $vm 
 
     预期输出：
-	
+    
         EndTime             : [Date and time]
         Error               : 
         Output              : 

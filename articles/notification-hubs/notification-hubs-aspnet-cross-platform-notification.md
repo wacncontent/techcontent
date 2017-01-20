@@ -29,7 +29,7 @@ wacn.date: 11/22/2016
 
 2. 在 **Post** 方法中查找用于创建新注册的代码块，并将 `switch` 内容替换为以下代码：
 
-		switch (deviceUpdate.Platform)
+        switch (deviceUpdate.Platform)
         {
             case "mpns":
                 var toastTemplate = "<?xml version="1.0" encoding="utf-8"?>" +
@@ -56,7 +56,7 @@ wacn.date: 11/22/2016
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
         }
 
-	此代码调用平台特定的方法来创建模板注册而非本机注册。不需要修改现有注册，因为模板注册派生自本机注册。
+    此代码调用平台特定的方法来创建模板注册而非本机注册。不需要修改现有注册，因为模板注册派生自本机注册。
 
 3. 在 **Notifications** 控制器中，将 **sendNotification** 方法替换为以下代码：
 
@@ -71,7 +71,7 @@ wacn.date: 11/22/2016
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-	此代码将通知同时发送到所有平台，而不必指定本机负载。通知中心使用提供的_标记_值（在注册的模板中指定）生成正确的负载并将它传递到每个设备。
+    此代码将通知同时发送到所有平台，而不必指定本机负载。通知中心使用提供的_标记_值（在注册的模板中指定）生成正确的负载并将它传递到每个设备。
 
 4. 重新发布 WebApi 后端项目。
 
@@ -79,7 +79,7 @@ wacn.date: 11/22/2016
 
 6. （可选）将客户端应用程序部署到第二个设备，然后运行该应用程序。
 
-	请注意通知将显示在每个设备上。
+    请注意通知将显示在每个设备上。
 
 ## 后续步骤
 

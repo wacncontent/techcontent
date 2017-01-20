@@ -48,19 +48,19 @@ ms.author: adhurwit
 
 可以在 Package Manager Console 中使用 Install-Package 命令安装这两个包。
 
-	// this is currently the latest stable version of ADAL
-	Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory -Version 2.16.204221202
+    // this is currently the latest stable version of ADAL
+    Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory -Version 2.16.204221202
 
-	Install-Package Microsoft.Azure.KeyVault 
+    Install-Package Microsoft.Azure.KeyVault 
 
 ## <a id="webconfig"></a>修改 Web.Config ##
 需要按如下所示将三个应用程序设置添加到 web.config 文件。
 
-	<!-- ClientId and ClientSecret refer to the web application registration with Azure Active Directory -->
+    <!-- ClientId and ClientSecret refer to the web application registration with Azure Active Directory -->
     <add key="ClientId" value="clientid" />
     <add key="ClientSecret" value="clientsecret" />
 
-	<!-- SecretUri is the URI for the secret in Azure Key Vault -->
+    <!-- SecretUri is the URI for the secret in Azure Key Vault -->
     <add key="SecretUri" value="secreturi" />
 
 如果你不打算将应用程序作作为 Azure Web 应用程序托管，则应在 web.config 中添加实际的客户端 Id、客户端密钥和机密 URI 值。否则，请将这些虚构值，因为我们将在 Azure 门户中添加实际值以提高安全级别。
@@ -70,25 +70,25 @@ ms.author: adhurwit
 
 以下代码可从 Azure Active Directory 获取访问令牌。可将此代码添加在应用程序中的任意位置。我想要添加一个 Utils 或 EncryptionHelper 类。
 
-	//add these using statements
+    //add these using statements
     using Microsoft.IdentityModel.Clients.ActiveDirectory;
-	using System.Web.Configuration;
-	
-	//this is an optional property to hold the secret after it is retrieved
-	public static string EncryptSecret { get; set; }
+    using System.Web.Configuration;
+    
+    //this is an optional property to hold the secret after it is retrieved
+    public static string EncryptSecret { get; set; }
 
-	//the method that will be provided to the KeyVaultClient
-	public async static Task<string> GetToken(string authority, string resource, string scope)
+    //the method that will be provided to the KeyVaultClient
+    public async static Task<string> GetToken(string authority, string resource, string scope)
     {
-	    var authContext = new AuthenticationContext(authority);
-	    ClientCredential clientCred = new ClientCredential(WebConfigurationManager.AppSettings["ClientId"],
+        var authContext = new AuthenticationContext(authority);
+        ClientCredential clientCred = new ClientCredential(WebConfigurationManager.AppSettings["ClientId"],
                     WebConfigurationManager.AppSettings["ClientSecret"]);
-	    AuthenticationResult result = await authContext.AcquireTokenAsync(resource, clientCred);
-	    
-	    if (result == null)
-	    	throw new InvalidOperationException("Failed to obtain the JWT token");
-	    
-	    return result.AccessToken;
+        AuthenticationResult result = await authContext.AcquireTokenAsync(resource, clientCred);
+        
+        if (result == null)
+            throw new InvalidOperationException("Failed to obtain the JWT token");
+        
+        return result.AccessToken;
     }
 
 > [!NOTE] 使用客户端 ID 和客户端密码是对 Azure AD 应用程序进行身份验证的最简单方法。并且在 web 应用程序中使用它可以实现职责分离，并更好地控制密钥管理。但它不依赖于将客户端密码放入配置设置中，对于某些人来说这可能就像将要保护的机密放入配置设置中一样具有风险。有关如何使用客户端 ID 和证书（而不是客户端 ID 和客户端密码）对 Azure AD 应用程序进行身份验证的讨论，请参阅下文。
@@ -96,16 +96,16 @@ ms.author: adhurwit
 ## <a id="appstart"></a>在 Application Start 中检索机密 ##
 现在，我们需要添加代码来调用密钥保管库 API 并检索机密。以下代码可添加到任何位置，前提是在使用之前调用它。我已将此代码放在 Global.asax 中的 Application Start 事件内，这样，在启动应用程序时，该代码将运行一次，并使机密可用于应用程序。
 
-	//add these using statements
-	using Microsoft.Azure.KeyVault;
-	using System.Web.Configuration;
+    //add these using statements
+    using Microsoft.Azure.KeyVault;
+    using System.Web.Configuration;
 
-	// I put my GetToken method in a Utils class. Change for wherever you placed your method. 
+    // I put my GetToken method in a Utils class. Change for wherever you placed your method. 
     var kv = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(Utils.GetToken));
 
-	var sec = kv.GetSecretAsync(WebConfigurationManager.AppSettings["SecretUri"]).Result.Value;
-	
-	//I put a variable in a Utils class to hold the secret for general  application use. 
+    var sec = kv.GetSecretAsync(WebConfigurationManager.AppSettings["SecretUri"]).Result.Value;
+    
+    //I put a variable in a Utils class to hold the secret for general  application use. 
     Utils.EncryptSecret = sec;
 
 ## 使用证书（而不是客户端密码）进行身份验证 
@@ -118,8 +118,8 @@ ms.author: adhurwit
 
 **获取或创建证书** 出于我们的目的，我们将生成测试证书。下面是几个可在开发人员命令提示符下使用以创建证书的命令。将目录更改为要在其中创建证书文件的位置。
 
-	makecert -sv mykey.pvk -n "cn=KVWebApp" KVWebApp.cer -b 07/31/2015 -e 07/31/2016 -r
-	pvk2pfx -pvk mykey.pvk -spc KVWebApp.cer -pfx KVWebApp.pfx -po test123
+    makecert -sv mykey.pvk -n "cn=KVWebApp" KVWebApp.cer -b 07/31/2015 -e 07/31/2016 -r
+    pvk2pfx -pvk mykey.pvk -spc KVWebApp.cer -pfx KVWebApp.pfx -po test123
 
 记下 .pfx 的结束日期和密码（在此示例中为：07/31/2016 和 test123）。稍后你将需要它们。
 
@@ -127,25 +127,25 @@ ms.author: adhurwit
 
 **将证书与 Azure AD 应用程序相关联** 既然你拥有一个证书，你需要将其与 Azure AD 应用程序相关联。但当前 Azure 经典管理门户不支持此操作。你需要改用 Powershell。以下是你需要运行的命令：
 
-	$x509 = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-	
-	PS C:\> $x509.Import("C:\data\KVWebApp.cer")
-	
-	PS C:\> $credValue = [System.Convert]::ToBase64String($x509.GetRawCertData())
-	
-	PS C:\> $now = [System.DateTime]::Now
-	
-	# this is where the end date from the cert above is used
-	PS C:\> $yearfromnow = [System.DateTime]::Parse("2016-07-31") 
-	
-	PS C:\> $adapp = New-AzureRmADApplication -DisplayName "KVWebApp" -HomePage "http://kvwebapp" -IdentifierUris "http://kvwebapp" -KeyValue $credValue -KeyType "AsymmetricX509Cert" -KeyUsage "Verify" -StartDate $now -EndDate $yearfromnow
-	
-	PS C:\> $sp = New-AzureRmADServicePrincipal -ApplicationId $adapp.ApplicationId
-	
-	PS C:\> Set-AzureRmKeyVaultAccessPolicy -VaultName 'contosokv' -ServicePrincipalName $sp.ServicePrincipalName -PermissionsToKeys all -ResourceGroupName 'contosorg'
-	
-	# get the thumbprint to use in your app settings
-	PS C:\>$x509.Thumbprint
+    $x509 = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
+    
+    PS C:\> $x509.Import("C:\data\KVWebApp.cer")
+    
+    PS C:\> $credValue = [System.Convert]::ToBase64String($x509.GetRawCertData())
+    
+    PS C:\> $now = [System.DateTime]::Now
+    
+    # this is where the end date from the cert above is used
+    PS C:\> $yearfromnow = [System.DateTime]::Parse("2016-07-31") 
+    
+    PS C:\> $adapp = New-AzureRmADApplication -DisplayName "KVWebApp" -HomePage "http://kvwebapp" -IdentifierUris "http://kvwebapp" -KeyValue $credValue -KeyType "AsymmetricX509Cert" -KeyUsage "Verify" -StartDate $now -EndDate $yearfromnow
+    
+    PS C:\> $sp = New-AzureRmADServicePrincipal -ApplicationId $adapp.ApplicationId
+    
+    PS C:\> Set-AzureRmKeyVaultAccessPolicy -VaultName 'contosokv' -ServicePrincipalName $sp.ServicePrincipalName -PermissionsToKeys all -ResourceGroupName 'contosorg'
+    
+    # get the thumbprint to use in your app settings
+    PS C:\>$x509.Thumbprint
 
 运行这些命令后，你可以在 Azure AD 中看到该应用程序。如果你最初未看到该应用程序，可搜索“我的公司拥有的应用程序”，而不是“我的公司使用的应用程序”。
 

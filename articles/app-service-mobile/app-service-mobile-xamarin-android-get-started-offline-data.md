@@ -47,7 +47,7 @@ ms.author: adrianha
 
          const string applicationURL = @"https://your-service.azurewebsites.fail";
 
-	还可以通过在设备上禁用 wifi 和手机网络或使用飞行模式来演示脱机行为。
+    还可以通过在设备上禁用 wifi 和手机网络或使用飞行模式来演示脱机行为。
 
 2. 按 **F5** 生成并运行应用。请注意，在应用启动时，同步刷新将失败。
 
@@ -79,14 +79,14 @@ ms.author: adrianha
 
 * 表操作之前，必须初始化本地存储区。`ToDoActivity.OnCreate()` 执行 `ToDoActivity.InitLocalStoreAsync()` 时，对本地存储数据库进行初始化。此办法将使用 Azure 移动应用客户端 SDK 提供的 `MobileServiceSQLiteStore` 类创建一个本地 SQLite 数据库。
 
-	`DefineTable` 方法与所提供的类型中的字段相匹配的本地存储中创建一个表 `ToDoItem` 这种情况下。该类型无需包括远程数据库中的所有列。可以只存储列的子集。
+    `DefineTable` 方法与所提供的类型中的字段相匹配的本地存储中创建一个表 `ToDoItem` 这种情况下。该类型无需包括远程数据库中的所有列。可以只存储列的子集。
 
-		// ToDoActivity.cs
+        // ToDoActivity.cs
         private async Task InitLocalStoreAsync()
         {
             // new code to initialize the SQLite store
             string path = Path.Combine(System.Environment
-				.GetFolderPath(System.Environment.SpecialFolder.Personal), localDbFilename);
+                .GetFolderPath(System.Environment.SpecialFolder.Personal), localDbFilename);
 
             if (!File.Exists(path))
             {
@@ -98,29 +98,29 @@ ms.author: adrianha
 
             // Uses the default conflict handler, which fails on conflict
             // To use a different conflict handler, pass a parameter to InitializeAsync.
-			// For more details, see http://go.microsoft.com/fwlink/?LinkId=521416.
+            // For more details, see http://go.microsoft.com/fwlink/?LinkId=521416.
             await client.SyncContext.InitializeAsync(store);
         }
 
 * `ToDoActivity` 的 `toDoTable` 成员属于 `IMobileServiceSyncTable` 类型而不是 `IMobileServiceTable` 类型。IMobileServiceSyncTable 会将所有创建、读取、更新和删除 (CRUD) 表操作定向到本地存储数据库。
 
-	通过调用 `IMobileServiceSyncContext.PushAsync()` 确定将更改推送到 Azure 移动应用后端的时间。对于调用 `PushAsync` 时客户端应用修改的所有表，此同步上下文通过跟踪和推送这些表中的更改来帮助保持表关系。
+    通过调用 `IMobileServiceSyncContext.PushAsync()` 确定将更改推送到 Azure 移动应用后端的时间。对于调用 `PushAsync` 时客户端应用修改的所有表，此同步上下文通过跟踪和推送这些表中的更改来帮助保持表关系。
 
-	每当刷新 todoitem 列表或者添加或完成 todoitem 时，所提供的代码便会调用 `ToDoActivity.SyncAsync()` 进行同步。代码将在每次本地更改后同步。
+    每当刷新 todoitem 列表或者添加或完成 todoitem 时，所提供的代码便会调用 `ToDoActivity.SyncAsync()` 进行同步。代码将在每次本地更改后同步。
 
     在所提供的代码中，将查询远程 `TodoItem` 表中的所有记录，但它还可以筛选记录，只需将查询 ID 和查询传递给 `PushAsync` 即可。有关详细信息，请参阅 [Azure 移动应用中的脱机数据同步]中的 *增量同步* 部分。
 
-		// ToDoActivity.cs
+        // ToDoActivity.cs
         private async Task SyncAsync()
         {
-			try {
-	            await client.SyncContext.PushAsync();
-	            await toDoTable.PullAsync("allTodoItems", toDoTable.CreateQuery()); // query ID is used for incremental sync
-			} catch (Java.Net.MalformedURLException) {
-				CreateAndShowDialog (new Exception ("There was an error creating the Mobile Service. Verify the URL"), "Error");
-			} catch (Exception e) {
-				CreateAndShowDialog (e, "Error");
-			}
+            try {
+                await client.SyncContext.PushAsync();
+                await toDoTable.PullAsync("allTodoItems", toDoTable.CreateQuery()); // query ID is used for incremental sync
+            } catch (Java.Net.MalformedURLException) {
+                CreateAndShowDialog (new Exception ("There was an error creating the Mobile Service. Verify the URL"), "Error");
+            } catch (Exception e) {
+                CreateAndShowDialog (e, "Error");
+            }
         }
 
 ## 其他资源

@@ -66,20 +66,20 @@ ms.author: adegeo
 
 为此，请使用以下命令通过 Powershell 创建虚拟机。
 
-	# Initialize variables
-	# VNet and subnet must be classic virtual network resources, not Azure Resource Manager resources.
+    # Initialize variables
+    # VNet and subnet must be classic virtual network resources, not Azure Resource Manager resources.
 
-	$vnetname = '<your-vnet-name>'
-	$subnetname = '<your-subnet-name>'
-	$vmsvc1 = '<your-hosted-service>'
-	$vm1 = '<your-vm-name>'
-	$username = '<your-username>'
-	$password = '<your-password>'
-	$affgrp = '<your- affgrp>'
+    $vnetname = '<your-vnet-name>'
+    $subnetname = '<your-subnet-name>'
+    $vmsvc1 = '<your-hosted-service>'
+    $vm1 = '<your-vm-name>'
+    $username = '<your-username>'
+    $password = '<your-password>'
+    $affgrp = '<your- affgrp>'
 
 # 创建 VM 并将其添加到虚拟网络
 
-	New-AzureQuickVM -Windows -ServiceName $vmsvc1 -name $vm1 -ImageName $imgname -AdminUsername $username -Password $password -AffinityGroup $affgrp -SubnetNames $subnetname -VNetName $vnetname
+    New-AzureQuickVM -Windows -ServiceName $vmsvc1 -name $vm1 -ImageName $imgname -AdminUsername $username -Password $password -AffinityGroup $affgrp -SubnetNames $subnetname -VNetName $vnetname
 
 ## 将虚拟机提升为域控制器
 若要将虚拟机配置为 AD 域控制器，需要登录到 VM 并对其进行配置。
@@ -87,7 +87,7 @@ ms.author: adegeo
 若要登录到 VM，可使用以下命令通过 Powershell 获取 RDP 文件。
 
 # 获取 RDP 文件
-	Get-AzureRemoteDesktopFile -ServiceName $vmsvc1 -Name $vm1 -LocalPath <rdp-file-path>
+    Get-AzureRemoteDesktopFile -ServiceName $vmsvc1 -Name $vm1 -LocalPath <rdp-file-path>
 
 登录 VM 后，请根据[如何设置客户 AD 域控制器](http://social.technet.microsoft.com/wiki/contents/articles/12370.windows-server-2012-set-up-your-first-domain-controller-step-by-step.aspx)中的分步指导，将虚拟机设置为 AD 域控制器。
 
@@ -130,15 +130,15 @@ ms.author: adegeo
 
 # 初始化域变量
 
-	$domain = '<your-domain-name>'
-	$dmuser = '$domain<your-username>'
-	$dmpswd = '<your-domain-password>'
-	$dmspwd = ConvertTo-SecureString $dmpswd -AsPlainText -Force
-	$dmcred = New-Object System.Management.Automation.PSCredential ($dmuser, $dmspwd)
+    $domain = '<your-domain-name>'
+    $dmuser = '$domain<your-username>'
+    $dmpswd = '<your-domain-password>'
+    $dmspwd = ConvertTo-SecureString $dmpswd -AsPlainText -Force
+    $dmcred = New-Object System.Management.Automation.PSCredential ($dmuser, $dmspwd)
 
 # 将 AD 域扩展添加到云服务角色
 
-	Set-AzureServiceADDomainExtension -Service <your-cloud-service-hosted-service-name> -Role <your-role-name> -Slot <staging-or-production> -DomainName $domain -Credential $dmcred -JoinOption 35
+    Set-AzureServiceADDomainExtension -Service <your-cloud-service-hosted-service-name> -Role <your-role-name> -Slot <staging-or-production> -DomainName $domain -Credential $dmcred -JoinOption 35
 
 这就是所有的操作。
 

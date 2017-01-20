@@ -23,32 +23,32 @@ ms.author: kgremban
 
 下面是用于监视和重新启动虚拟机的自定义角色的一个示例：
 
-	{
-		"Name": "Virtual Machine Operator",
-		"Id": "cadb4a5a-4e7a-47be-84db-05cad13b6769",
-		"IsCustom": true,
-		"Description": "Can monitor and restart virtual machines.",
-		"Actions": [
-			"Microsoft.Storage/*/read",
-			"Microsoft.Network/*/read",
-			"Microsoft.Compute/*/read",
-			"Microsoft.Compute/virtualMachines/start/action",
-			"Microsoft.Compute/virtualMachines/restart/action",
-			"Microsoft.Authorization/*/read",
-			"Microsoft.Resources/subscriptions/resourceGroups/read",
-			"Microsoft.Insights/alertRules/*",
-			"Microsoft.Insights/diagnosticSettings/*",
-			"Microsoft.Support/*"
-		],
-		"NotActions": [
-		
-		],
-		"AssignableScopes": [
-			"/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e",
-			"/subscriptions/e91d47c4-76f3-4271-a796-21b4ecfe3624",
-			"/subscriptions/34370e90-ac4a-4bf9-821f-85eeedeae1a2"
-		]
-	}
+    {
+        "Name": "Virtual Machine Operator",
+        "Id": "cadb4a5a-4e7a-47be-84db-05cad13b6769",
+        "IsCustom": true,
+        "Description": "Can monitor and restart virtual machines.",
+        "Actions": [
+            "Microsoft.Storage/*/read",
+            "Microsoft.Network/*/read",
+            "Microsoft.Compute/*/read",
+            "Microsoft.Compute/virtualMachines/start/action",
+            "Microsoft.Compute/virtualMachines/restart/action",
+            "Microsoft.Authorization/*/read",
+            "Microsoft.Resources/subscriptions/resourceGroups/read",
+            "Microsoft.Insights/alertRules/*",
+            "Microsoft.Insights/diagnosticSettings/*",
+            "Microsoft.Support/*"
+        ],
+        "NotActions": [
+        
+        ],
+        "AssignableScopes": [
+            "/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e",
+            "/subscriptions/e91d47c4-76f3-4271-a796-21b4ecfe3624",
+            "/subscriptions/34370e90-ac4a-4bf9-821f-85eeedeae1a2"
+        ]
+    }
 
 ## 操作
 自定义角色的 **Actions** 属性指定该角色向其授予访问权限的 Azure 操作。它是操作字符串的集合，可标识 Azure 资源提供程序的安全对象操作。包含通配符 (*) 的操作字符串可以授权访问与该操作字符串相匹配的所有操作。例如：
@@ -60,15 +60,15 @@ ms.author: kgremban
 
 使用 `Get-AzureRmProviderOperation`（在 PowerShell 中）或 `azure provider operations show`（在 Azure CLI 中）列出 Azure 资源提供程序的操作。还可以使用这些命令来验证操作字符串是否有效，并展开通配符操作字符串。
 
-	Get-AzureRMProviderOperation Microsoft.Compute/virtualMachines/*/action | FT Operation, OperationName
-	
-	Get-AzureRMProviderOperation Microsoft.Network/*
+    Get-AzureRMProviderOperation Microsoft.Compute/virtualMachines/*/action | FT Operation, OperationName
+    
+    Get-AzureRMProviderOperation Microsoft.Network/*
 
 ![PowerShell 屏幕截图 - Get-AzureRMProviderOperation Microsoft.Compute/virtualMachines/*/action | FT Operation, OperationName](./media/role-based-access-control-configure/1-get-azurermprovideroperation-1.png)  
 
-	azure provider operations show "Microsoft.Compute/virtualMachines/*/action" --js on | jq '.[] | .operation'
-	
-	azure provider operations show "Microsoft.Network/*"
+    azure provider operations show "Microsoft.Compute/virtualMachines/*/action" --js on | jq '.[] | .operation'
+    
+    azure provider operations show "Microsoft.Network/*"
 
 ![Azure CLI 屏幕截图 - Azure 提供程序操作显示“Microsoft.Compute/virtualMachines/*/action”](./media/role-based-access-control-configure/1-azure-provider-operations-show.png)  
 
@@ -92,21 +92,21 @@ ms.author: kgremban
 自定义角色的 **AssignableScopes** 属性还能控制谁可以查看、修改和删除角色。
 
 - 谁可以创建自定义角色？ 
-	订阅、资源组和资源的所有者（和用户访问管理员）可以创建能在这些范围中使用的自定义角色。
-	创建角色的用户需要能够执行角色的所有 **AssignableScopes** 上的 `Microsoft.Authorization/roleDefinition/write` 操作。
+    订阅、资源组和资源的所有者（和用户访问管理员）可以创建能在这些范围中使用的自定义角色。
+    创建角色的用户需要能够执行角色的所有 **AssignableScopes** 上的 `Microsoft.Authorization/roleDefinition/write` 操作。
 
 - 谁可以修改自定义角色？ 
-	订阅、资源组和资源的所有者（和用户访问管理员）可以修改这些范围中的自定义角色。用户需要能够执行自定义角色的所有 **AssignableScopes** 上的 `Microsoft.Authorization/roleDefinition/write` 操作。
+    订阅、资源组和资源的所有者（和用户访问管理员）可以修改这些范围中的自定义角色。用户需要能够执行自定义角色的所有 **AssignableScopes** 上的 `Microsoft.Authorization/roleDefinition/write` 操作。
 
 - 谁可以查看自定义角色？ 
-	Azure RBAC 中的所有内置角色都允许查看可以进行分配的角色。范围中能够执行 `Microsoft.Authorization/roleDefinition/read` 操作的用户可以查看能在该范围中进行分配的 RBAC 角色。
+    Azure RBAC 中的所有内置角色都允许查看可以进行分配的角色。范围中能够执行 `Microsoft.Authorization/roleDefinition/read` 操作的用户可以查看能在该范围中进行分配的 RBAC 角色。
 
 ## 另请参阅
 - [基于角色的访问控制](./role-based-access-control-configure.md)：Azure 门户预览中的 RBAC 入门。
 - 了解如何通过以下方式管理访问权限：
-	- [PowerShell](./role-based-access-control-manage-access-powershell.md)
-	- [Azure CLI](./role-based-access-control-manage-access-azure-cli.md)
-	- [REST API](./role-based-access-control-manage-access-rest.md)
+    - [PowerShell](./role-based-access-control-manage-access-powershell.md)
+    - [Azure CLI](./role-based-access-control-manage-access-azure-cli.md)
+    - [REST API](./role-based-access-control-manage-access-rest.md)
 - [内置角色](./role-based-access-built-in-roles.md)：获取有关 RBAC 中的标准角色的详细信息。
 
 <!---HONumber=Mooncake_1017_2016-->

@@ -38,21 +38,21 @@ Azure PowerShell 是一个功能强大的脚本编写环境，可用于在 Azure
 
 若要检查所安装的 PowerShell 版本，请执行以下操作：
 
-	Get-Module *azure*
-	
+    Get-Module *azure*
+    
 若要卸载旧版本，请运行控制面板中的“程序和功能”。
 
 有两个主要选项用于安装 Azure PowerShell。
 
 - [PowerShell 库](https://www.powershellgallery.com/)。在已提升权限的 PowerShell ISE 或已提升权限的 Windows PowerShell 控制台中运行以下命令：
-		
-		# Install the Azure Service Management module from PowerShell Gallery
-		Install-Module Azure
-		
-		# Import Azure Service Management module
-		Import-Module Azure
+        
+        # Install the Azure Service Management module from PowerShell Gallery
+        Install-Module Azure
+        
+        # Import Azure Service Management module
+        Import-Module Azure
 
-	有关详细信息，请参阅 [PowerShell 库](https://www.powershellgallery.com/)。
+    有关详细信息，请参阅 [PowerShell 库](https://www.powershellgallery.com/)。
 
 - [Microsoft Web 平台安装程序 (WebPI)](http://aka.ms/webpi-azps)。如果你已安装 Azure PowerShell 0.9.x，系统将提示你卸载 0.9.x。如果你从 PowerShell 库安装了 Azure PowerShell 模块，安装程序将要求你在安装之前删除该模块，以确保 Azure PowerShell 环境一致。有关说明，请参阅[通过 WebPI 安装 Azure PowerShell 1.0](https://azure.microsoft.com/blog/azps-1-0/)。
 
@@ -70,22 +70,22 @@ HDInsight 群集要求在 Azure 存储帐户中创建 Blob 容器：
 
 [!INCLUDE [automation-azurechinacloud-environment-parameter](../../includes/automation-azurechinacloud-environment-parameter.md)]
 
-	Add-AzureAccount -Environment AzureChinaCloud
+    Add-AzureAccount -Environment AzureChinaCloud
 
 如果你有多个 Azure 订阅，可以调用 **Select-AzureSubscription**。
 
 **创建 Azure 存储帐户**
 
-	New-AzureStorageAccount -StorageAccountName <Azure Storage Account Name> -Location "<Azure Location>" -Type <AccountType> # account type example: Standard_LRS for zero redundancy storage
-	
+    New-AzureStorageAccount -StorageAccountName <Azure Storage Account Name> -Location "<Azure Location>" -Type <AccountType> # account type example: Standard_LRS for zero redundancy storage
+    
 [!INCLUDE [数据中心列表](../../includes/hdinsight-pricing-data-centers-clusters.md)]
 
 如果已有存储帐户但是不知道帐户名称和帐户密钥，可以使用以下命令来检索该信息：
 
-	# List Storage accounts for the current subscription
-	Get-AzureStorageAccount
-	# List the keys for a Storage account
-	Get-AzureStorageKey -StorageAccountName $storageAccountName
+    # List Storage accounts for the current subscription
+    Get-AzureStorageAccount
+    # List the keys for a Storage account
+    Get-AzureStorageKey -StorageAccountName $storageAccountName
 
 有关使用经典管理门户获取信息的详细信息，请参阅[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)的“查看、复制和重新生成存储访问密钥”部分。
 
@@ -93,53 +93,53 @@ HDInsight 群集要求在 Azure 存储帐户中创建 Blob 容器：
 
 Azure PowerShell 无法在 HDInsight 创建过程中创建 Blob 容器。可使用以下脚本创建容器：
 
-	$storageAccountName = "<Azure Storage Account Name>"
-	$storageAccountKey = Get-AzureStorageKey -StorageAccountName $storageAccountName |  %{ $_.Primary }
-	$containerName="<AzureBlobContainerName>"
+    $storageAccountName = "<Azure Storage Account Name>"
+    $storageAccountKey = Get-AzureStorageKey -StorageAccountName $storageAccountName |  %{ $_.Primary }
+    $containerName="<AzureBlobContainerName>"
 
-	# Create a storage context object
-	$destContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
+    # Create a storage context object
+    $destContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
 
-	# Create a Blob storage container
-	New-AzureStorageContainer -Name $containerName -Context $destContext
+    # Create a Blob storage container
+    New-AzureStorageContainer -Name $containerName -Context $destContext
 
 **创建群集**
 
 准备好存储帐户和 Blob 容器后，即可创建群集。
 
-	$storageAccountName = "<Azure Storage Account Name>"
-	$containerName = "<AzureBlobContainerName>"
+    $storageAccountName = "<Azure Storage Account Name>"
+    $containerName = "<AzureBlobContainerName>"
 
-	$clusterName = "<HDInsightClusterName>"
-	$location = "<AzureDataCenter>"
-	$clusterNodes = <ClusterSizeInNodes>
+    $clusterName = "<HDInsightClusterName>"
+    $location = "<AzureDataCenter>"
+    $clusterNodes = <ClusterSizeInNodes>
 
-	# Get the Storage account key
-	$storageAccountKey = Get-AzureStorageKey -StorageAccountName $storageAccountName | %{ $_.Primary }
+    # Get the Storage account key
+    $storageAccountKey = Get-AzureStorageKey -StorageAccountName $storageAccountName | %{ $_.Primary }
 
-	# Create a new HDInsight cluster
-	New-AzureHDInsightCluster -Name $clusterName `
-		-Location $location `
-		-DefaultStorageAccountName "$storageAccountName.blob.core.chinacloudapi.cn" `
-		-DefaultStorageAccountKey $storageAccountKey `
-		-DefaultStorageContainerName $containerName  `
-		-ClusterSizeInNodes $clusterNodes
+    # Create a new HDInsight cluster
+    New-AzureHDInsightCluster -Name $clusterName `
+        -Location $location `
+        -DefaultStorageAccountName "$storageAccountName.blob.core.chinacloudapi.cn" `
+        -DefaultStorageAccountKey $storageAccountKey `
+        -DefaultStorageContainerName $containerName  `
+        -ClusterSizeInNodes $clusterNodes
 
 ##列出群集
 使用以下命令可列出当前订阅中的所有群集：
 
-	Get-AzureHDInsightCluster
+    Get-AzureHDInsightCluster
 
 ##显示群集
 
 使用以下命令可显示当前订阅中特定群集的详细信息：
 
-	Get-AzureHDInsightCluster -Name <Cluster Name>
+    Get-AzureHDInsightCluster -Name <Cluster Name>
 
 ##删除群集
 使用以下命令来删除群集：
 
-	Remove-AzureHDInsightCluster -Name <Cluster Name>
+    Remove-AzureHDInsightCluster -Name <Cluster Name>
 
 ##缩放群集
 使用群集缩放功能，可更改 Azure HDInsight 中运行的群集使用的辅助节点数，而无需重新创建群集。
@@ -150,46 +150,46 @@ Azure PowerShell 无法在 HDInsight 创建过程中创建 Blob 容器。可使�
 
 - Hadoop
 
-	可顺利增加正在运行的 Hadoop 群集中的辅助节点数，而不会影响任何挂起或运行中的作业。也可在操作进行中提交新作业。系统会正常处理失败的缩放操作，让群集始终保持正常运行状态。
+    可顺利增加正在运行的 Hadoop 群集中的辅助节点数，而不会影响任何挂起或运行中的作业。也可在操作进行中提交新作业。系统会正常处理失败的缩放操作，让群集始终保持正常运行状态。
 
-	减少数据节点数目以缩减 Hadoop 群集时，系统会重新启动群集中的某些服务。这会导致所有正在运行和挂起的作业在缩放操作完成时失败。但是，可在操作完成后重新提交这些作业。
+    减少数据节点数目以缩减 Hadoop 群集时，系统会重新启动群集中的某些服务。这会导致所有正在运行和挂起的作业在缩放操作完成时失败。但是，可在操作完成后重新提交这些作业。
 
 - HBase
 
-	可在 HBase 群集运行时顺利添加或删除节点。完成缩放操作后的几分钟内，区域服务器将自动平衡。但也可手动平衡区域服务器，方法是登录到群集的头节点，然后在命令提示符窗口中运行以下命令：
+    可在 HBase 群集运行时顺利添加或删除节点。完成缩放操作后的几分钟内，区域服务器将自动平衡。但也可手动平衡区域服务器，方法是登录到群集的头节点，然后在命令提示符窗口中运行以下命令：
 
-		>pushd %HBASE_HOME%\bin
-		>hbase shell
-		>balancer
+        >pushd %HBASE_HOME%\bin
+        >hbase shell
+        >balancer
 
-	有关使用 HBase shell 的详细信息，请参阅
+    有关使用 HBase shell 的详细信息，请参阅
 - Storm
 
-	可在 Storm 群集运行时顺利添加或删除数据节点。但是，缩放操作成功完成后，需要重新平衡拓扑。
+    可在 Storm 群集运行时顺利添加或删除数据节点。但是，缩放操作成功完成后，需要重新平衡拓扑。
 
-	可以使用两种方法来完成重新平衡操作：
+    可以使用两种方法来完成重新平衡操作：
 
-	* Storm Web UI
-	* 命令行界面 (CLI) 工具
+    * Storm Web UI
+    * 命令行界面 (CLI) 工具
 
-	有关更多详细信息，请参阅 [Apache Storm 文档](http://storm.apache.org/documentation/Understanding-the-parallelism-of-a-Storm-topology.html)。
+    有关更多详细信息，请参阅 [Apache Storm 文档](http://storm.apache.org/documentation/Understanding-the-parallelism-of-a-Storm-topology.html)。
 
-	HDInsight 群集上提供了 Storm Web UI：
+    HDInsight 群集上提供了 Storm Web UI：
 
-	![hdinsight storm 缩放重新平衡](./media/hdinsight-administer-use-management-portal-v1/hdinsight.portal.scale.cluster.storm.rebalance.png)
+    ![hdinsight storm 缩放重新平衡](./media/hdinsight-administer-use-management-portal-v1/hdinsight.portal.scale.cluster.storm.rebalance.png)
 
-	以下是有关如何使用 CLI 命令重新平衡 Storm 拓扑的示例：
+    以下是有关如何使用 CLI 命令重新平衡 Storm 拓扑的示例：
 
-		## Reconfigure the topology "mytopology" to use 5 worker processes,
-		## the spout "blue-spout" to use 3 executors, and
-		## the bolt "yellow-bolt" to use 10 executors
+        ## Reconfigure the topology "mytopology" to use 5 worker processes,
+        ## the spout "blue-spout" to use 3 executors, and
+        ## the bolt "yellow-bolt" to use 10 executors
 
-		$ storm rebalance mytopology -n 5 -e blue-spout=3 -e yellow-bolt=10
+        $ storm rebalance mytopology -n 5 -e blue-spout=3 -e yellow-bolt=10
 
 若要使用 Azure PowerShell 更改 Hadoop 群集大小，请从客户端计算机运行以下命令：
 
-	Set-AzureHDInsightClusterSize -Cluster <Cluster Name> -ClusterSizeInNodes <NewSize>
-	
+    Set-AzureHDInsightClusterSize -Cluster <Cluster Name> -ClusterSizeInNodes <NewSize>
+    
 ## <a name="grant/revoke-access"></a> 授予/撤消访问权限
 
 HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样式的终结点）：
@@ -201,22 +201,22 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
 默认情况下，将授权这些服务进行访问。可撤消/授予访问权限。若要撤消：
 
-	Revoke-AzureHDInsightHttpServicesAccess -Name <Cluster Name>
+    Revoke-AzureHDInsightHttpServicesAccess -Name <Cluster Name>
 
 若要授予：
 
-	$clusterName = "<HDInsight Cluster Name>"
+    $clusterName = "<HDInsight Cluster Name>"
 
-	# Credential option 1
-	$hadoopUserName = "admin"
-	$hadoopUserPassword = "<Enter the Password>"
-	$hadoopUserPW = ConvertTo-SecureString -String $hadoopUserPassword -AsPlainText -Force
-	$credential = New-Object System.Management.Automation.PSCredential($hadoopUserName,$hadoopUserPW)
+    # Credential option 1
+    $hadoopUserName = "admin"
+    $hadoopUserPassword = "<Enter the Password>"
+    $hadoopUserPW = ConvertTo-SecureString -String $hadoopUserPassword -AsPlainText -Force
+    $credential = New-Object System.Management.Automation.PSCredential($hadoopUserName,$hadoopUserPW)
 
-	# Credential option 2
-	#$credential = Get-Credential -Message "Enter the HTTP username and password:" -UserName "admin"
-	
-	Grant-AzureHDInsightHttpServicesAccess -Name $clusterName -HttpCredential $credential
+    # Credential option 2
+    #$credential = Get-Credential -Message "Enter the HTTP username and password:" -UserName "admin"
+    
+    Grant-AzureHDInsightHttpServicesAccess -Name $clusterName -HttpCredential $credential
 
 >[!NOTE] 授予/撤消访问权限时，将重设群集用户的用户名和密码。
 
@@ -230,13 +230,13 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
 以下 Powershell 脚本演示如何获取群集的默认存储帐户名称和默认存储帐户密钥。
 
-	$clusterName = "<HDInsight Cluster Name>"
-	
-	$cluster = Get-AzureHDInsightCluster -Name $clusterName
-	$defaultStorageAccountName = ($cluster.DefaultStorageAccount).Replace(".blob.core.chinacloudapi.cn", "")
-	$defaultBlobContainerName = $cluster.DefaultStorageContainer
-	$defaultStorageAccountKey = Get-AzureStorageKey -StorageAccountName $defaultStorageAccountName |  %{ $_.Primary }
-	$defaultStorageAccountContext = New-AzureStorageContext -StorageAccountName $defaultStorageAccountName -StorageAccountKey $defaultStorageAccountKey 
+    $clusterName = "<HDInsight Cluster Name>"
+    
+    $cluster = Get-AzureHDInsightCluster -Name $clusterName
+    $defaultStorageAccountName = ($cluster.DefaultStorageAccount).Replace(".blob.core.chinacloudapi.cn", "")
+    $defaultBlobContainerName = $cluster.DefaultStorageContainer
+    $defaultStorageAccountKey = Get-AzureStorageKey -StorageAccountName $defaultStorageAccountName |  %{ $_.Primary }
+    $defaultStorageAccountContext = New-AzureStorageContext -StorageAccountName $defaultStorageAccountName -StorageAccountKey $defaultStorageAccountKey 
 
 ##提交作业
 

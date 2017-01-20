@@ -19,14 +19,14 @@
 
 键入 `azure --version` 即可查看安装的是否为版本 0.9.0 或更高版本。
 
-	azure --version
+    azure --version
     0.9.0 (node: 0.10.25)
 
 如果你的版本不是 0.9.0 或更高版本，则需要使用某个本机安装程序或者通过在 **npm** 中键入 `npm update -g azure-cli` 进行更新。
 
 你也可以使用以下 [Docker 映像](https://registry.hub.docker.com/u/microsoft/azure-cli/)运行 Docker 容器形式的 Azure CLI。在 Docker 主机上运行以下命令：
 
-	docker run -it microsoft/azure-cli
+    docker run -it microsoft/azure-cli
 
 ### 设置 Azure 帐户和订阅
 
@@ -49,13 +49,13 @@
 
 若要设置当前 Azure 订阅，请键入以下内容。使用具有你要管理的资源的订阅名称或 ID。
 
-	azure account set <subscription name or ID> true
+    azure account set <subscription name or ID> true
 
 ### 切换到 Azure CLI 资源组模式
 
 默认情况下，Azure CLI 在服务管理模式下启动（**asm** 模式）。键入以下内容，切换到资源组模式。
 
-	azure config mode arm
+    azure config mode arm
 
 ## 了解 Azure 资源模板和资源组
 
@@ -444,10 +444,10 @@
     data:    ProvisioningState  : Succeeded
     data:    Timestamp          : 2015-04-28T07:53:55.1828878Z
     data:    Mode               : Incremental
-	data:    CorrelationId      : xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-	data:    DeploymentParameters :
+    data:    CorrelationId      : xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    data:    DeploymentParameters :
     data:    Name                   Type          Value
-	data:    ---------------  ------------  -----------
+    data:    ---------------  ------------  -----------
     data:    adminUsername          String        ops
     data:    adminPassword          SecureString  undefined
     data:    dnsLabelPrefix String        newdomainname

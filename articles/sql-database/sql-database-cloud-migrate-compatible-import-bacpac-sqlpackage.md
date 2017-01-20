@@ -39,17 +39,17 @@ ms.author: carlrab
 1. 打开命令提示符并更改包含 sqlpackage.exe 命令行实用程序的目录 - 此实用程序随 Visual Studio 和 SQL Server 一起提供。
 2. 结合环境的以下参数执行以下 sqlpackage.exe 命令：
 
-	`sqlpackage.exe /Action:Import /tsn:< server_name > /tdn:< database_name > /tu:< user_name > /tp:< password > /sf:< source_file >`  
+    `sqlpackage.exe /Action:Import /tsn:< server_name > /tdn:< database_name > /tu:< user_name > /tp:< password > /sf:< source_file >`  
 
-	| 参数 | 说明 |
-	|---|---|
-	| < server_name > | 目标服务器名称 |
-	| < database_name > | 目标数据库名称 |
-	| < user_name > | 目标服务器中的用户名 |
-	| < password > | 用户的密码 |
-	| < source_file > | 要导入的 BACPAC 文件的文件名和位置 |
+    | 参数 | 说明 |
+    |---|---|
+    | < server_name > | 目标服务器名称 |
+    | < database_name > | 目标数据库名称 |
+    | < user_name > | 目标服务器中的用户名 |
+    | < password > | 用户的密码 |
+    | < source_file > | 要导入的 BACPAC 文件的文件名和位置 |
 
-	![通过“任务”菜单导出数据层应用程序](./media/sql-database-cloud-migrate/TestForCompatibilityUsingSQLPackage01c.png)  
+    ![通过“任务”菜单导出数据层应用程序](./media/sql-database-cloud-migrate/TestForCompatibilityUsingSQLPackage01c.png)  
 
 ## 后续步骤
 - [最新版本的 SSDT](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx)

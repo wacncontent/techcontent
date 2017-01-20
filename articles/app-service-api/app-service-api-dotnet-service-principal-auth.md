@@ -44,7 +44,7 @@ ms.author: rachelap
 
 1. 在 [Azure 门户预览](https://portal.azure.cn/)中，导航到要保护的 API 应用的“设置”边栏选项卡，然后找到“功能”部分并单击“身份验证/授权”。
 
-	![Azure 门户预览中的“身份验证/授权”](./media/app-service-api-dotnet-user-principal-auth/features.png)
+    ![Azure 门户预览中的“身份验证/授权”](./media/app-service-api-dotnet-user-principal-auth/features.png)
 
 3. 在“身份验证/授权”边栏选项卡中，单击“打开”。
 
@@ -52,19 +52,19 @@ ms.author: rachelap
 
 5. 在“身份验证提供程序”下面，选择“Azure Active Directory”。
 
-	![Azure 门户预览中的“身份验证/授权”边栏选项卡](./media/app-service-api-dotnet-user-principal-auth/authblade.png)
+    ![Azure 门户预览中的“身份验证/授权”边栏选项卡](./media/app-service-api-dotnet-user-principal-auth/authblade.png)
 
 6. 配置“Azure Active Directory 设置”边栏选项卡创建新的 Azure AD 应用程序；如果已有想要使用的现有 Azure AD 应用程序，请使用该应用程序。
 
-	内部方案通常涉及到调用 API 应用的 API 应用。可为每个 API 应用使用不同的 Azure AD 应用程序，或者全都使用同一个 Azure AD 应用程序。
+    内部方案通常涉及到调用 API 应用的 API 应用。可为每个 API 应用使用不同的 Azure AD 应用程序，或者全都使用同一个 Azure AD 应用程序。
 
-	有关此边栏选项卡的详细说明，请参阅 [How to configure your App Service application to use Azure Active Directory login](../app-service-mobile/app-service-mobile-how-to-configure-active-directory-authentication.md)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）。
+    有关此边栏选项卡的详细说明，请参阅 [How to configure your App Service application to use Azure Active Directory login](../app-service-mobile/app-service-mobile-how-to-configure-active-directory-authentication.md)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）。
 
 7. 完成身份验证提供程序配置边栏选项卡中的操作后，单击“确定”。
 
 7. 在“身份验证/授权”边栏选项卡中，单击“保存”。
 
-	![点击“保存”(Save)](./media/app-service-api-dotnet-service-principal-auth/authsave.png)
+    ![点击“保存”(Save)](./media/app-service-api-dotnet-service-principal-auth/authsave.png)
 
 完成后，应用服务只允许来自已配置 Azure AD 租户中的调用方的请求。受保护的 API 应用中不需要身份验证或授权代码。持有者令牌与 HTTP 标头中的常用声明一起传递到 API 应用，可以在代码中阅读该信息，验证请求是否来自特定的调用方（例如服务主体）。
 
@@ -115,31 +115,31 @@ ms.author: rachelap
 
 2. 在“设置”边栏选项卡中找到“功能”部分，然后单击“身份验证/授权”。
 
-	![Azure 门户预览中的“身份验证/授权”](./media/app-service-api-dotnet-user-principal-auth/features.png)
+    ![Azure 门户预览中的“身份验证/授权”](./media/app-service-api-dotnet-user-principal-auth/features.png)
 
 3. 在“身份验证/授权”边栏选项卡中，单击“打开”。
 
 4. 在“请求未经身份验证时需执行的操作”下拉列表中，选择“使用 Azure Active Directory 登录”。
 
-	这是能够让应用服务确保只有经过身份验证的请求能进入 API 应用的设置。对于具有有效持有者令牌的请求，应用服务会将令牌传递到 API 应用，并在 HTTP 标头中填充常用声明，让代码更轻松地获取该信息。
+    这是能够让应用服务确保只有经过身份验证的请求能进入 API 应用的设置。对于具有有效持有者令牌的请求，应用服务会将令牌传递到 API 应用，并在 HTTP 标头中填充常用声明，让代码更轻松地获取该信息。
 
 5. 在“身份验证提供程序”下面，单击“Azure Active Directory”。
 
-	![Azure 门户预览中的“身份验证/授权”边栏选项卡](./media/app-service-api-dotnet-user-principal-auth/authblade.png)
+    ![Azure 门户预览中的“身份验证/授权”边栏选项卡](./media/app-service-api-dotnet-user-principal-auth/authblade.png)
 
 6. 在“Azure Active Directory 设置”边栏选项卡中单击“快速”。
 
-	使用“快速”选项时，Azure 可以自动在 Azure AD [租户](https://msdn.microsoft.com/zh-cn/library/azure/jj573650.aspx#BKMK_WhatIsAnAzureADTenant)中创建 AAD 应用程序。
+    使用“快速”选项时，Azure 可以自动在 Azure AD [租户](https://msdn.microsoft.com/zh-cn/library/azure/jj573650.aspx#BKMK_WhatIsAnAzureADTenant)中创建 AAD 应用程序。
 
-	无需创建租户，因为每个 Azure 帐户都自动拥有一个。
+    无需创建租户，因为每个 Azure 帐户都自动拥有一个。
 
 7. 在“管理模式”下面，单击“创建新的 AD 应用”（如果尚未选择）。
 
-	门户将在“创建应用”输入框中填充默认值。默认情况下，Azure AD 应用程序的名称与 API 应用相同。如果需要，也可以输入不同的名称。
-	
-	![Azure AD 设置](./media/app-service-api-dotnet-service-principal-auth/aadsettings.png)
+    门户将在“创建应用”输入框中填充默认值。默认情况下，Azure AD 应用程序的名称与 API 应用相同。如果需要，也可以输入不同的名称。
+    
+    ![Azure AD 设置](./media/app-service-api-dotnet-service-principal-auth/aadsettings.png)
 
-	**注意**：或者，可对调用 API 应用和受保护 API 应用使用同一个 Azure AD 应用程序。如果选择后者，则此处不需要选择“创建新的 AD 应用”选项，因为前面已在用户身份验证教程中创建了 Azure AD 应用程序。在本教程中，为调用 API 应用和受保护 API 应用使用不同的 Azure AD 应用程序。
+    **注意**：或者，可对调用 API 应用和受保护 API 应用使用同一个 Azure AD 应用程序。如果选择后者，则此处不需要选择“创建新的 AD 应用”选项，因为前面已在用户身份验证教程中创建了 Azure AD 应用程序。在本教程中，为调用 API 应用和受保护 API 应用使用不同的 Azure AD 应用程序。
 
 8. 记下“创建应用”输入框中的值，因为稍后要在 Azure 经典管理门户中查找此 AAD 应用程序。
 
@@ -147,21 +147,21 @@ ms.author: rachelap
 
 10. 在“身份验证/授权”边栏选项卡中，单击“保存”。
 
-	![点击“保存”(Save)](./media/app-service-api-dotnet-service-principal-auth/saveauth.png)
+    ![点击“保存”(Save)](./media/app-service-api-dotnet-service-principal-auth/saveauth.png)
 
-	应用服务将创建一个 Azure Active Directory 应用程序，其“登录 URL”和“回复 URL”自动设置为 API 应用的 URL。第二个值可让 AAD 租户中的用户登录和访问 API 应用。
+    应用服务将创建一个 Azure Active Directory 应用程序，其“登录 URL”和“回复 URL”自动设置为 API 应用的 URL。第二个值可让 AAD 租户中的用户登录和访问 API 应用。
 
 ### 验证 API 应用是否受保护
 
 1. 在浏览器中，转到 API 应用的 URL：在 Azure 门户预览的“API 应用”边栏选项卡中，单击“URL”下面的链接。
 
-	由于不允许未经身份验证的请求进入 API 应用，因此将重定向到登录屏幕。
+    由于不允许未经身份验证的请求进入 API 应用，因此将重定向到登录屏幕。
 
-	如果浏览器确实转到 Swagger UI，则表示可能已登录浏览器 - 在这种情况下，请打开 InPrivate 或 Incognito 窗口并转到 Swagger UI URL。
+    如果浏览器确实转到 Swagger UI，则表示可能已登录浏览器 - 在这种情况下，请打开 InPrivate 或 Incognito 窗口并转到 Swagger UI URL。
 
 18. 使用 AAD 租户中用户的凭据登录。
 
-	登录后，浏览器中会显示“已成功创建”页。
+    登录后，浏览器中会显示“已成功创建”页。
 
 ## 配置 ToDoListAPI 项目以获取和发送 Azure AD 令牌
 
@@ -177,41 +177,41 @@ ms.author: rachelap
 
 1. 取消注释 *ServicePrincipal.cs* 文件中的所有代码。
 
-	这是使用用于 .NET 的 ADAL 获取 Azure AD 持有者令牌的代码。此代码使用多个配置值，稍后将在 Azure 运行时环境中设置这些值。代码如下：
+    这是使用用于 .NET 的 ADAL 获取 Azure AD 持有者令牌的代码。此代码使用多个配置值，稍后将在 Azure 运行时环境中设置这些值。代码如下：
 
-		public static class ServicePrincipal
-		{
-		    static string authority = ConfigurationManager.AppSettings["ida:Authority"];
-		    static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
-		    static string clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
-		    static string resource = ConfigurationManager.AppSettings["ida:Resource"];
-		
-		    public static AuthenticationResult GetS2SAccessTokenForProdMSA()
-		    {
-		        return GetS2SAccessToken(authority, resource, clientId, clientSecret);
-		    }
-		
-		    static AuthenticationResult GetS2SAccessToken(string authority, string resource, string clientId, string clientSecret)
-		    {
-		        var clientCredential = new ClientCredential(clientId, clientSecret);
-		        AuthenticationContext context = new AuthenticationContext(authority, false);
-		        AuthenticationResult authenticationResult = context.AcquireToken(
-		            resource,
-		            clientCredential);
-		        return authenticationResult;
-		    }
-		}
+        public static class ServicePrincipal
+        {
+            static string authority = ConfigurationManager.AppSettings["ida:Authority"];
+            static string clientId = ConfigurationManager.AppSettings["ida:ClientId"];
+            static string clientSecret = ConfigurationManager.AppSettings["ida:ClientSecret"];
+            static string resource = ConfigurationManager.AppSettings["ida:Resource"];
+        
+            public static AuthenticationResult GetS2SAccessTokenForProdMSA()
+            {
+                return GetS2SAccessToken(authority, resource, clientId, clientSecret);
+            }
+        
+            static AuthenticationResult GetS2SAccessToken(string authority, string resource, string clientId, string clientSecret)
+            {
+                var clientCredential = new ClientCredential(clientId, clientSecret);
+                AuthenticationContext context = new AuthenticationContext(authority, false);
+                AuthenticationResult authenticationResult = context.AcquireToken(
+                    resource,
+                    clientCredential);
+                return authenticationResult;
+            }
+        }
 
-	**注意**：此代码需要项目中已安装的用于 .NET 的 ADAL NuGet 包 (Microsoft.IdentityModel.Clients.ActiveDirectory)。如果此项目是从头开始创建的，则必须安装此包。API 应用的 new-project 模板不会自动安装此包。
+    **注意**：此代码需要项目中已安装的用于 .NET 的 ADAL NuGet 包 (Microsoft.IdentityModel.Clients.ActiveDirectory)。如果此项目是从头开始创建的，则必须安装此包。API 应用的 new-project 模板不会自动安装此包。
 
 2. 在 *Controllers/ToDoListController* 中，取消注释 `NewDataAPIClient` 方法中用于将令牌添加到 HTTP 请求 authorization 标头的代码。
 
-		client.HttpClient.DefaultRequestHeaders.Authorization =
-		    new AuthenticationHeaderValue("Bearer", ServicePrincipal.GetS2SAccessTokenForProdMSA().AccessToken);
+        client.HttpClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Bearer", ServicePrincipal.GetS2SAccessTokenForProdMSA().AccessToken);
 
 3. 部署 ToDoListAPI 项目。（右键单击该项目，然后单击“发布”>“发布”）。
 
-	Visual Studio 将部署项目并在浏览器中打开 Web 应用的基 URL。此时会显示 403 错误页，这是尝试从浏览器转到 Web API 基 URL 时的正常现象。
+    Visual Studio 将部署项目并在浏览器中打开 Web 应用的基 URL。此时会显示 403 错误页，这是尝试从浏览器转到 Web API 基 URL 时的正常现象。
 
 4. 关闭浏览器。
 
@@ -239,11 +239,11 @@ ms.author: rachelap
 
 6. 单击“保存”。
 
-	![生成应用密钥](./media/app-service-api-dotnet-service-principal-auth/genkey.png)
+    ![生成应用密钥](./media/app-service-api-dotnet-service-principal-auth/genkey.png)
 
 7. 复制密钥值，并将其保存到稍后可从中获取此值的位置。
 
-	![复制新应用密钥](./media/app-service-api-dotnet-service-principal-auth/genkeycopy.png)
+    ![复制新应用密钥](./media/app-service-api-dotnet-service-principal-auth/genkeycopy.png)
 
 ### 在中间层 API 应用的运行时环境中配置 Azure AD 设置
 
@@ -253,35 +253,35 @@ ms.author: rachelap
 
 3. 在“应用设置”部分中，添加以下键和值：
 
-	| **键** | ida:Authority |
-	|---|---|
-	| **值** | https://login.chinacloudapi.cn/{your Azure AD tenant name} |
-	| **示例** | https://login.chinacloudapi.cn/contoso.partner.onmschina.cn |
+    | **键** | ida:Authority |
+    |---|---|
+    | **值** | https://login.chinacloudapi.cn/{your Azure AD tenant name} |
+    | **示例** | https://login.chinacloudapi.cn/contoso.partner.onmschina.cn |
 
-	| **键** | ida:ClientId |
-	|---|---|
-	| **值** | 调用方应用程序（中间层 - ToDoListAPI）的客户端 ID |
-	| **示例** | 960adec2-b74a-484a-960adec2-b74a-484a |
+    | **键** | ida:ClientId |
+    |---|---|
+    | **值** | 调用方应用程序（中间层 - ToDoListAPI）的客户端 ID |
+    | **示例** | 960adec2-b74a-484a-960adec2-b74a-484a |
 
-	| **键** | ida:ClientSecret |
-	|---|---|
-	| **值** | 调用方应用程序（中间层 - ToDoListAPI）的应用密钥 |
-	| **示例** | e65e8fc9-5f6b-48e8-e65e8fc9-5f6b-48e8 |
+    | **键** | ida:ClientSecret |
+    |---|---|
+    | **值** | 调用方应用程序（中间层 - ToDoListAPI）的应用密钥 |
+    | **示例** | e65e8fc9-5f6b-48e8-e65e8fc9-5f6b-48e8 |
 
-	| **键** | ida:Resource |
-	|---|---|
-	| **值** | 被调用应用程序（数据层 - ToDoListDataAPI）的客户端 ID |
-	| **示例** | e65e8fc9-5f6b-48e8-e65e8fc9-5f6b-48e8 |
+    | **键** | ida:Resource |
+    |---|---|
+    | **值** | 被调用应用程序（数据层 - ToDoListDataAPI）的客户端 ID |
+    | **示例** | e65e8fc9-5f6b-48e8-e65e8fc9-5f6b-48e8 |
 
-	**注意**：对于 `ida:Resource`，请确保使用被调用应用程序的**客户端 ID**，而不是其**应用 ID URI**。
+    **注意**：对于 `ida:Resource`，请确保使用被调用应用程序的**客户端 ID**，而不是其**应用 ID URI**。
 
-	在本教程中，`ida:ClientId` 和 `ida:Resource` 是不同的值，因为对中间层和数据层使用的 Azure AD 应用程序不同。如果为调用方 API 应用和受保护 API 应用使用同一个 Azure AD 应用程序，请在 `ida:ClientId` 和 `ida:Resource` 中使用相同的值。
+    在本教程中，`ida:ClientId` 和 `ida:Resource` 是不同的值，因为对中间层和数据层使用的 Azure AD 应用程序不同。如果为调用方 API 应用和受保护 API 应用使用同一个 Azure AD 应用程序，请在 `ida:ClientId` 和 `ida:Resource` 中使用相同的值。
 
-	代码使用 ConfigurationManager 获取这些值，因此这些值可以存储在项目的 Web.config 文件或 Azure 运行时环境中。当 ASP.NET 应用程序在 Azure 应用服务中运行时，环境设置将自动覆盖 Web.config 的设置。一般而言，环境设置是[比 Web.config 文件更安全的敏感信息存储方式](http://www.asp.net/identity/overview/features-api/best-practices-for-deploying-passwords-and-other-sensitive-data-to-aspnet-and-azure)。
+    代码使用 ConfigurationManager 获取这些值，因此这些值可以存储在项目的 Web.config 文件或 Azure 运行时环境中。当 ASP.NET 应用程序在 Azure 应用服务中运行时，环境设置将自动覆盖 Web.config 的设置。一般而言，环境设置是[比 Web.config 文件更安全的敏感信息存储方式](http://www.asp.net/identity/overview/features-api/best-practices-for-deploying-passwords-and-other-sensitive-data-to-aspnet-and-azure)。
 
 6. 单击“保存”。
 
-	![点击“保存”(Save)](./media/app-service-api-dotnet-service-principal-auth/appsettings.png)
+    ![点击“保存”(Save)](./media/app-service-api-dotnet-service-principal-auth/appsettings.png)
 
 ### 测试应用程序
 
@@ -291,9 +291,9 @@ ms.author: rachelap
 
 4. 添加待办事项，验证应用程序是否正常工作。
 
-	![待办事项列表页](./media/app-service-api-dotnet-service-principal-auth/mvchome.png)
+    ![待办事项列表页](./media/app-service-api-dotnet-service-principal-auth/mvchome.png)
 
-	如果应用程序未按预期工作，请仔细检查在 Azure 门户预览中输入的所有设置。如果所有设置看起来都没问题，请参阅本教程稍后的[故障排除](#troubleshooting)部分。
+    如果应用程序未按预期工作，请仔细检查在 Azure 门户预览中输入的所有设置。如果所有设置看起来都没问题，请参阅本教程稍后的[故障排除](#troubleshooting)部分。
 
 ## 防止浏览器访问 API 应用
 
@@ -317,7 +317,7 @@ ms.author: rachelap
 
 3. 登录成功，但出现错误页。
 
-	已配置 AAD 应用，使 AAD 租户中的用户无法从浏览器登录和访问 API。仍可使用服务主体令牌访问 API 应用，若要验证这一点，请转到 Web 应用的 URL，并添加更多待办事项。
+    已配置 AAD 应用，使 AAD 租户中的用户无法从浏览器登录和访问 API。仍可使用服务主体令牌访问 API 应用，若要验证这一点，请转到 Web 应用的 URL，并添加更多待办事项。
 
 ## 限制对特定服务主体的访问  
 
@@ -333,38 +333,38 @@ ms.author: rachelap
 
 3. 取消注释用于设置 `trustedCallerClientId` 和 `trustedCallerServicePrincipalId` 的代码行。
 
-		private static string trustedCallerClientId = ConfigurationManager.AppSettings["todo:TrustedCallerClientId"];
-		private static string trustedCallerServicePrincipalId = ConfigurationManager.AppSettings["todo:TrustedCallerServicePrincipalId"];
+        private static string trustedCallerClientId = ConfigurationManager.AppSettings["todo:TrustedCallerClientId"];
+        private static string trustedCallerServicePrincipalId = ConfigurationManager.AppSettings["todo:TrustedCallerServicePrincipalId"];
 
 4. 取消注释 CheckCallerId 方法中的代码。开始执行控制器中的每个操作方法时将调用此方法。
 
-		private static void CheckCallerId()
-		{
-		    string currentCallerClientId = ClaimsPrincipal.Current.FindFirst("appid").Value;
-		    string currentCallerServicePrincipalId = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
-		    if (currentCallerClientId != trustedCallerClientId || currentCallerServicePrincipalId != trustedCallerServicePrincipalId)
-		    {
-		        throw new HttpResponseException(new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized, ReasonPhrase = "The appID or service principal ID is not the expected value." });
-		    }
-		}
+        private static void CheckCallerId()
+        {
+            string currentCallerClientId = ClaimsPrincipal.Current.FindFirst("appid").Value;
+            string currentCallerServicePrincipalId = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
+            if (currentCallerClientId != trustedCallerClientId || currentCallerServicePrincipalId != trustedCallerServicePrincipalId)
+            {
+                throw new HttpResponseException(new HttpResponseMessage { StatusCode = HttpStatusCode.Unauthorized, ReasonPhrase = "The appID or service principal ID is not the expected value." });
+            }
+        }
 
 5. 将 ToDoListDataAPI 项目重新部署到 Azure 应用服务。
 
 6. 在浏览器中，转到 AngularJS 前端 Web 应用的 HTTPS URL，然后在主页中单击“待办事项列表”选项卡。
 
-	对后端的调用失败，因此应用程序并未正常工作。新代码正在检查实际 appid 和 objectidentifier，但尚未获得正确值用于对这两项进行检查。浏览器开发人员工具控制台报告服务器返回 HTTP 401 错误。
+    对后端的调用失败，因此应用程序并未正常工作。新代码正在检查实际 appid 和 objectidentifier，但尚未获得正确值用于对这两项进行检查。浏览器开发人员工具控制台报告服务器返回 HTTP 401 错误。
 
-	![开发人员工具控制台中的错误](./media/app-service-api-dotnet-service-principal-auth/webapperror.png)
+    ![开发人员工具控制台中的错误](./media/app-service-api-dotnet-service-principal-auth/webapperror.png)
 
-	在以下步骤中配置预期值。
+    在以下步骤中配置预期值。
 
 8. 使用 Azure AD PowerShell 为针对 TodoListWebApp 项目创建的 Azure AD 应用程序获取服务主体值。
 
-	a.有关如何安装 Azure PowerShell 和连接到订阅的说明，请参阅 [Using Azure PowerShell with Azure Resource Manager](../azure-resource-manager/powershell-azure-resource-manager.md)（将 Azure PowerShell 与 Azure Resource Manager 配合使用）。
+    a.有关如何安装 Azure PowerShell 和连接到订阅的说明，请参阅 [Using Azure PowerShell with Azure Resource Manager](../azure-resource-manager/powershell-azure-resource-manager.md)（将 Azure PowerShell 与 Azure Resource Manager 配合使用）。
 
-	b.若要获取服务主体列表，请依次执行 `Login-AzureRmAccount` 命令和 `Get-AzureRmADServicePrincipal` 命令。
+    b.若要获取服务主体列表，请依次执行 `Login-AzureRmAccount` 命令和 `Get-AzureRmADServicePrincipal` 命令。
 
-	c.查找 TodoListAPI 应用程序服务主体的 objectid，并将它保存在稍后可从中复制此值的位置。
+    c.查找 TodoListAPI 应用程序服务主体的 objectid，并将它保存在稍后可从中复制此值的位置。
 
 7. 在 Azure 门户预览中，导航到部署 ToDoListDataAPI 项目的 API 应用的“API 应用”边栏选项卡。
 
@@ -372,25 +372,25 @@ ms.author: rachelap
 
 3. 在“应用设置”部分中，添加以下键和值：
 
-	| **键** | todo:TrustedCallerServicePrincipalId |
-	|---|---|
-	| **值** | 调用方应用程序的服务主体 ID |
-	| **示例** | 4f4a94a4-6f0d-4072-4f4a94a4-6f0d-4072 |
+    | **键** | todo:TrustedCallerServicePrincipalId |
+    |---|---|
+    | **值** | 调用方应用程序的服务主体 ID |
+    | **示例** | 4f4a94a4-6f0d-4072-4f4a94a4-6f0d-4072 |
 
-	| **键** | todo:TrustedCallerClientId |
-	|---|---|
-	| **值** | 调用方应用程序的客户端 ID - 从 TodoListAPI Azure AD 应用程序复制 |
-	| **示例** | 960adec2-b74a-484a-960adec2-b74a-484a |
+    | **键** | todo:TrustedCallerClientId |
+    |---|---|
+    | **值** | 调用方应用程序的客户端 ID - 从 TodoListAPI Azure AD 应用程序复制 |
+    | **示例** | 960adec2-b74a-484a-960adec2-b74a-484a |
 
 6. 单击“保存”。
 
-	![点击“保存”(Save)](./media/app-service-api-dotnet-service-principal-auth/trustedcaller.png)
+    ![点击“保存”(Save)](./media/app-service-api-dotnet-service-principal-auth/trustedcaller.png)
 
 6. 在浏览器中，返回 Web 应用的 URL，然后在主页中单击“待办事项列表”选项卡。
 
-	受信任调用方应用 ID 和服务主体 ID 均为预期值，因此应用程序这次会按预期工作。
+    受信任调用方应用 ID 和服务主体 ID 均为预期值，因此应用程序这次会按预期工作。
 
-	![待办事项列表页](./media/app-service-api-dotnet-service-principal-auth/mvchome.png)
+    ![待办事项列表页](./media/app-service-api-dotnet-service-principal-auth/mvchome.png)
 
 ## 从头开始生成项目
 
@@ -414,7 +414,7 @@ ms.author: rachelap
 * [Azure AD scenarios](../active-directory/active-directory-authentication-scenarios.md)（Azure AD 方案）
 * [Azure AD 示例](https://github.com/azure-samples?query=active-directory)
 
-	[WebApp-WebAPI-OAuth2-AppIdentity-DotNet](http://github.com/AzureADSamples/WebApp-WebAPI-OAuth2-AppIdentity-DotNet) 示例类似于本教程中所示的示例，但未使用应用服务身份验证。
+    [WebApp-WebAPI-OAuth2-AppIdentity-DotNet](http://github.com/AzureADSamples/WebApp-WebAPI-OAuth2-AppIdentity-DotNet) 示例类似于本教程中所示的示例，但未使用应用服务身份验证。
 
 有关通过 Visual Studio 或通过[源代码管理系统](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/source-control)的[自动部署](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/continuous-integration-and-continuous-delivery)功能以其他方式将 Visual Studio 项目部署到 API 应用的信息，请参阅 [How to deploy an Azure App Service app](../app-service-web/web-sites-deploy.md)（如何部署 Azure 应用服务应用）。
 

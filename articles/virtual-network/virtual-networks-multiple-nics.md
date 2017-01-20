@@ -108,9 +108,9 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
         New-AzureVM -ServiceName "MultiNIC-CS" -VNetName "MultiNIC-VNet" -VMs $vm
 
-	> [!NOTE]
-	此处指定的 VNet 必须已存在（如先决条件中所述）。下述示例指定名为“MultiNIC-VNet”的虚拟网络。
-	>
+    > [!NOTE]
+    此处指定的 VNet 必须已存在（如先决条件中所述）。下述示例指定名为“MultiNIC-VNet”的虚拟网络。
+    >
 
 ## 限制
 使用多个 NIC 时，以下限制适用：

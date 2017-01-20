@@ -53,7 +53,7 @@ SQL 数据库 V12 是最新版本，因此我们建议升级到 SQL 数据库 V1
 
 若要针对 Azure 订阅运行 PowerShell cmdlet，必须先与 Azure 帐户建立访问连接。运行以下命令，然后就会出现一个要求输入凭据的登录屏幕。使用登录 Azure 门户时所用的相同电子邮件和密码。
 
-	Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 成功登录后，你会在屏幕上看到一些信息，其中包括登录时使用的 ID，以及有权访问的 Azure 订阅。
 
@@ -61,7 +61,7 @@ SQL 数据库 V12 是最新版本，因此我们建议升级到 SQL 数据库 V1
 
 使用订阅信息运行以下 cmdlet 来设置当前订阅：
 
-	Set-AzureRmContext -SubscriptionId 4cac86b0-1e56-bbbb-aaaa-000000000000
+    Set-AzureRmContext -SubscriptionId 4cac86b0-1e56-bbbb-aaaa-000000000000
 
 以下命令将针对上方所选的订阅运行。
 
@@ -147,11 +147,11 @@ ElasticPoolCollection 和 DatabaseCollection 参数是可选的：
 **资源消耗数据：**对于基本、标准和高级数据库，可通过用户数据库中的 [sys.dm_ db_ resource\_stats](http://msdn.microsoft.com/zh-cn/library/azure/dn800981.aspx) DMV 查看资源消耗数据。此 DMV 针对前一小时的操作，以 15 秒的粒度提供接近实时的资源消耗信息。每个间隔的 DTU 消耗百分比将计算为 CPU、IO 和日志维度的最大消耗百分比。下面是用于计算过去一小时平均 DTU 消耗百分比的查询：
 
     SELECT end_time
-    	 , (SELECT Max(v)
+         , (SELECT Max(v)
              FROM (VALUES (avg_cpu_percent)
                          , (avg_data_io_percent)
                          , (avg_log_write_percent)
-    	   ) AS value(v)) AS [avg_DTU_percent]
+           ) AS value(v)) AS [avg_DTU_percent]
     FROM sys.dm_db_resource_stats
     ORDER BY end_time DESC;
 

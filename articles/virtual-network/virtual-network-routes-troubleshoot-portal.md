@@ -53,37 +53,37 @@ ms.author: anithaa
 3. 在显示的列表中选择要进行故障排除的 VM，随后会显示一个包含选项的 VM 边栏选项卡。
 4. 单击“诊断和解决问题”，然后选择一个常见问题。本示例选择了“无法连接到 Windows VM”。
 
-	![](./media/virtual-network-routes-troubleshoot-portal/image1.png)  
+    ![](./media/virtual-network-routes-troubleshoot-portal/image1.png)  
 
 5. 该问题的下面会出现步骤，如下图所示：
 
-	![](./media/virtual-network-routes-troubleshoot-portal/image2.png)  
+    ![](./media/virtual-network-routes-troubleshoot-portal/image2.png)  
 
-	在建议的步骤列表中单击“有效路由”。
+    在建议的步骤列表中单击“有效路由”。
 
 6. 此时将显示“有效路由”边栏选项卡，如下图所示：
 
-	![](./media/virtual-network-routes-troubleshoot-portal/image3.png)  
+    ![](./media/virtual-network-routes-troubleshoot-portal/image3.png)  
 
-	如果 VM 只有一个 NIC，则默认已选择该 NIC。如果有多个 NIC，请选择要查看其有效路由的 NIC。
+    如果 VM 只有一个 NIC，则默认已选择该 NIC。如果有多个 NIC，请选择要查看其有效路由的 NIC。
 
-	>[!NOTE] 如果与 NIC 关联的 VM 不处于运行中状态，将不显示有效路由。门户中只显示前 200 个有效路由。如需完整列表，请单击“下载”。可以在下载的 .csv 文件中进一步筛选结果。
+    >[!NOTE] 如果与 NIC 关联的 VM 不处于运行中状态，将不显示有效路由。门户中只显示前 200 个有效路由。如需完整列表，请单击“下载”。可以在下载的 .csv 文件中进一步筛选结果。
 
-	请注意输出中的以下信息：
-	- **Source**：表示路由的类型。系统路由显示为 *Default*，UDR 显示为 *User*，网关路由（静态或 BGP）显示为 *VPNGateway*。
-	- **State**：表示有效路由的状态。可能的值为 *Active* 或 *Invalid*。
-	- **AddressPrefixes**：以 CIDR 表示法指定有效路由的地址前缀。
-	- **nextHopType**：表示给定路由的下一跃点。可能的值为 *VirtualAppliance*、*Internet*、*VNetLocal*、*VNetPeering* 或 *Null*。如果 UDR 中的 **nextHopType** 值为 *Null*，可能表示是路由无效。例如，如果 **nextHopType** 为 *VirtualAppliance*，但网络虚拟设备 VM 不处于已预配/运行中状态。如果 **nextHopType** 为 *VPNGateway*，但给定的 VNet 中没有任何网关处于已预配/运行中状态，则路由可能失效。
+    请注意输出中的以下信息：
+    - **Source**：表示路由的类型。系统路由显示为 *Default*，UDR 显示为 *User*，网关路由（静态或 BGP）显示为 *VPNGateway*。
+    - **State**：表示有效路由的状态。可能的值为 *Active* 或 *Invalid*。
+    - **AddressPrefixes**：以 CIDR 表示法指定有效路由的地址前缀。
+    - **nextHopType**：表示给定路由的下一跃点。可能的值为 *VirtualAppliance*、*Internet*、*VNetLocal*、*VNetPeering* 或 *Null*。如果 UDR 中的 **nextHopType** 值为 *Null*，可能表示是路由无效。例如，如果 **nextHopType** 为 *VirtualAppliance*，但网络虚拟设备 VM 不处于已预配/运行中状态。如果 **nextHopType** 为 *VPNGateway*，但给定的 VNet 中没有任何网关处于已预配/运行中状态，则路由可能失效。
     
 7. 上一步骤的图片中没有列出从 *ChinaNorth-VNet1*（前缀 10.9.0.0/16）到 *ChinaNorth-VNET3* VNet（前缀 10.10.0.0/16）的路由。在下图中，对等互连链接处于 *Disconnected* 状态：
-	
-	![](./media/virtual-network-routes-troubleshoot-portal/image4.png)  
+    
+    ![](./media/virtual-network-routes-troubleshoot-portal/image4.png)  
 
-	对等互连的双向链接已断开，正因如此，VM1 无法连接到 *ChinaNorth-VNet3* VNet 中的 VM3。
+    对等互连的双向链接已断开，正因如此，VM1 无法连接到 *ChinaNorth-VNet3* VNet 中的 VM3。
 
 8. 下图显示了创建双向对等互连链接后的路由：
 
-	![](./media/virtual-network-routes-troubleshoot-portal/image5.png)  
+    ![](./media/virtual-network-routes-troubleshoot-portal/image5.png)  
 
 有关强制隧道和路由评估的更多故障排除方案，请阅读本文的[注意事项](./virtual-network-routes-troubleshoot-portal.md#Considerations)部分。
 
@@ -96,11 +96,11 @@ ms.author: anithaa
 3. 在列表中搜索 NIC 的名称，或者从显示的列表中选择 NIC。本示例选择了 **VM1-NIC1**。
 4. 在“网络接口”边栏选项卡中选择“有效路由”，如下图所示：
    
-   	![](./media/virtual-network-routes-troubleshoot-portal/image6.png)  
+       ![](./media/virtual-network-routes-troubleshoot-portal/image6.png)  
 
     “范围”默认设置为选定的网络接口。
 
-  	![](./media/virtual-network-routes-troubleshoot-portal/image7.png)  
+      ![](./media/virtual-network-routes-troubleshoot-portal/image7.png)  
 
 ### 查看路由表的有效路由
 
@@ -116,33 +116,33 @@ ms.author: anithaa
 2. 单击“更多服务”，然后单击“路由表”。
 3. 在列表中搜索想要查看其聚合路由的路由表，并将它选中。本示例选择了 **UDRouteTable**。此时将显示选定路由表的边栏选项卡，如下图所示：
 
-	![](./media/virtual-network-routes-troubleshoot-portal/image9.png)  
+    ![](./media/virtual-network-routes-troubleshoot-portal/image9.png)  
 
 4. 在“路由表”边栏选项卡中选择“有效路由”。“范围”已设置为选定的路由表。
 5. 一个路由表可以应用到多个子网。从列表中选择想要查看的**子网**。本示例选择了 **Subnet1**。
 6. 选择一个**网络接口**。随后将列出已连接到选定子网的所有 NIC。本示例选择了 **VM1-NIC1**。
 
-	![](./media/virtual-network-routes-troubleshoot-portal/image10.png)  
+    ![](./media/virtual-network-routes-troubleshoot-portal/image10.png)  
 
-	>[!NOTE] 如果 NIC 没有与运行中的 VM 关联，则不会显示任何有效路由。
+    >[!NOTE] 如果 NIC 没有与运行中的 VM 关联，则不会显示任何有效路由。
 
 ## <a name="Considerations"></a>注意事项
 
 查看返回的路由列表时，请注意以下事项：
 
 - 路由基于 UDR、BGP 与系统路由之间的最长前缀匹配 (LPM)。如果有多个路由的 LPM 匹配情况相同，则按以下顺序根据路由源来选择路由：
-	- 用户定义的路由
-	- BGP 路由
-	- 系统（默认）路由
+    - 用户定义的路由
+    - BGP 路由
+    - 系统（默认）路由
 
-	对于有效路由，只能查看基于所有可用路由匹配 LPM 的有效路由。如果显示了如何针对给定 NIC 实际评估路由，因此可以更方便地对可能影响 VM 连接的特定路由进行故障排除。
+    对于有效路由，只能查看基于所有可用路由匹配 LPM 的有效路由。如果显示了如何针对给定 NIC 实际评估路由，因此可以更方便地对可能影响 VM 连接的特定路由进行故障排除。
 
 - 如果使用 UDR 并且要将流量发送到网络虚拟设备 (NVA)（*VirtualAppliance* 为 **nextHopType**），请确保接收流量的 NVA 已启用 IP 转发，否则数据包将被丢弃。
 - 如果启用了强制隧道，所有出站 Internet 流量将路由到本地。根据本地处理此流量的方式，可能无法使用此设置通过 RDP/SSH 从 Internet 连接到 VM。符合以下条件时，可以启用强制隧道：
-	- 使用站点到站点 VPN 时，将用户定义的路由 (UDR) 的 nextHopType 设置为 VPN 网关
-	- 通过 BGP 播发默认路由时
+    - 使用站点到站点 VPN 时，将用户定义的路由 (UDR) 的 nextHopType 设置为 VPN 网关
+    - 通过 BGP 播发默认路由时
 - 要使 VNet 对等互连流量正常工作，对等互连的 VNet 的前缀范围中必须存在 **nextHopType** 为 *VNetPeering* 的系统路由。如果没有此类路由，并且 VNet 对等互连链接看起来正常：
-	- 如果是新建立的对等互连链接，请等待几秒钟并重试。有时需要花费较长的时间才能将路由传播到子网中的所有网络接口。
-	- 网络安全组 (NSG) 规则可能会影响流量流。有关详细信息，请参阅 [Troubleshoot Network Security Groups](./virtual-network-nsg-troubleshoot-portal.md)（排查网络安全组问题）一文。
+    - 如果是新建立的对等互连链接，请等待几秒钟并重试。有时需要花费较长的时间才能将路由传播到子网中的所有网络接口。
+    - 网络安全组 (NSG) 规则可能会影响流量流。有关详细信息，请参阅 [Troubleshoot Network Security Groups](./virtual-network-nsg-troubleshoot-portal.md)（排查网络安全组问题）一文。
 
 <!---HONumber=Mooncake_1107_2016-->

@@ -21,40 +21,40 @@ ms.author: rashimg
 
 了解如何使用 HDInsight 中的 Hive 处理和分析 JSON 文件。本教程将使用以下 JSON 文档
 
-	{
-	    "StudentId": "trgfg-5454-fdfdg-4346",
-	    "Grade": 7,
-	    "StudentDetails": [
-	        {
-	            "FirstName": "Peggy",
-	            "LastName": "Williams",
-	            "YearJoined": 2012
-	        }
-	    ],
-	    "StudentClassCollection": [
-	        {
-	            "ClassId": "89084343",
-	            "ClassParticipation": "Satisfied",
-	            "ClassParticipationRank": "High",
-	            "Score": 93,
-	            "PerformedActivity": false
-	        },
-	        {
-	            "ClassId": "78547522",
-	            "ClassParticipation": "NotSatisfied",
-	            "ClassParticipationRank": "None",
-	            "Score": 74,
-	            "PerformedActivity": false
-	        },
-	        {
-	            "ClassId": "78675563",
-	            "ClassParticipation": "Satisfied",
-	            "ClassParticipationRank": "Low",
-	            "Score": 83,
-	            "PerformedActivity": true
-	        }
-	    ]
-	}
+    {
+        "StudentId": "trgfg-5454-fdfdg-4346",
+        "Grade": 7,
+        "StudentDetails": [
+            {
+                "FirstName": "Peggy",
+                "LastName": "Williams",
+                "YearJoined": 2012
+            }
+        ],
+        "StudentClassCollection": [
+            {
+                "ClassId": "89084343",
+                "ClassParticipation": "Satisfied",
+                "ClassParticipationRank": "High",
+                "Score": 93,
+                "PerformedActivity": false
+            },
+            {
+                "ClassId": "78547522",
+                "ClassParticipation": "NotSatisfied",
+                "ClassParticipationRank": "None",
+                "Score": 74,
+                "PerformedActivity": false
+            },
+            {
+                "ClassId": "78675563",
+                "ClassParticipation": "Satisfied",
+                "ClassParticipationRank": "Low",
+                "Score": 83,
+                "PerformedActivity": true
+            }
+        ]
+    }
 
 可以在 wasbs://processjson@hditutorialdata.blob.core.windows.net/ 上找到该文件。有关将 Azure Blob 存储与 HDInsight 配合使用的详细信息，请参阅[将 HDFS 兼容的 Azure Blob 存储与 HDInsight 中的 Hadoop 配合使用](./hdinsight-hadoop-use-blob-storage.md)。如果需要，可以将该文件复制到群集的默认容器。
 
@@ -64,22 +64,22 @@ ms.author: rashimg
 
 下一节中列出的方法需要 JSON 文档在单个行中。因此，必须将 JSON 文档平展成字符串。如果已平展 JSON 文档，则可以跳过此步骤，直接转到分析 JSON 数据的下一节。
 
-	DROP TABLE IF EXISTS StudentsRaw;
-	CREATE EXTERNAL TABLE StudentsRaw (textcol string) STORED AS TEXTFILE LOCATION "wasbs://processjson@hditutorialdata.blob.core.windows.net/";
-	
-	DROP TABLE IF EXISTS StudentsOneLine;
-	CREATE EXTERNAL TABLE StudentsOneLine
-	(
-	  json_body string
-	)
-	STORED AS TEXTFILE LOCATION '/json/students';
-	
-	INSERT OVERWRITE TABLE StudentsOneLine
-	SELECT CONCAT_WS(' ',COLLECT_LIST(textcol)) AS singlelineJSON 
-	      FROM (SELECT INPUT__FILE__NAME,BLOCK__OFFSET__INSIDE__FILE, textcol FROM StudentsRaw DISTRIBUTE BY INPUT__FILE__NAME SORT BY BLOCK__OFFSET__INSIDE__FILE) x
-	      GROUP BY INPUT__FILE__NAME;
-	
-	SELECT * FROM StudentsOneLine
+    DROP TABLE IF EXISTS StudentsRaw;
+    CREATE EXTERNAL TABLE StudentsRaw (textcol string) STORED AS TEXTFILE LOCATION "wasbs://processjson@hditutorialdata.blob.core.windows.net/";
+    
+    DROP TABLE IF EXISTS StudentsOneLine;
+    CREATE EXTERNAL TABLE StudentsOneLine
+    (
+      json_body string
+    )
+    STORED AS TEXTFILE LOCATION '/json/students';
+    
+    INSERT OVERWRITE TABLE StudentsOneLine
+    SELECT CONCAT_WS(' ',COLLECT_LIST(textcol)) AS singlelineJSON 
+          FROM (SELECT INPUT__FILE__NAME,BLOCK__OFFSET__INSIDE__FILE, textcol FROM StudentsRaw DISTRIBUTE BY INPUT__FILE__NAME SORT BY BLOCK__OFFSET__INSIDE__FILE) x
+          GROUP BY INPUT__FILE__NAME;
+    
+    SELECT * FROM StudentsOneLine
 
 原始 JSON 文件位于 **wasbs://processjson@hditutorialdata.blob.core.windows.net/**。 *StudentsRaw* Hive 表指向原始未平展的 JSON 文档。
 
@@ -107,10 +107,10 @@ Hive 提供名为 [get\_json\_object](https://cwiki.apache.org/confluence/displa
 
 获取每位学生的名字和姓氏
 
-	SELECT 
-	  GET_JSON_OBJECT(StudentsOneLine.json_body,'$.StudentDetails.FirstName'), 
-	  GET_JSON_OBJECT(StudentsOneLine.json_body,'$.StudentDetails.LastName') 
-	FROM StudentsOneLine;
+    SELECT 
+      GET_JSON_OBJECT(StudentsOneLine.json_body,'$.StudentDetails.FirstName'), 
+      GET_JSON_OBJECT(StudentsOneLine.json_body,'$.StudentDetails.LastName') 
+    FROM StudentsOneLine;
 
 以下是在控制台窗口中执行此查询时的输出。
 
@@ -146,25 +146,25 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 
 1. 安装 [Java SE 开发工具包 7u55 JDK 1.7.0_55](http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html#jdk-7u55-oth-JPR)。如果要使用 HDInsight 的 Windows 部署，可选择 Windows X64 版本的 JDK。
 
-	>[!WARNING] JDK 1.8 不适用于此 SerDe。
+    >[!WARNING] JDK 1.8 不适用于此 SerDe。
 
-	安装完成后，添加新的用户环境变量：
+    安装完成后，添加新的用户环境变量：
 
-	1. 从 Windows 屏幕打开“查看高级系统设置”。
-	2. 单击“环境变量”。  
-	3. 添加指向 **C:\\Program Files\\Java\\jdk1.7.0\_55** 或任何 JDK 安装位置的新 **JAVA_HOME** 环境变量。
+    1. 从 Windows 屏幕打开“查看高级系统设置”。
+    2. 单击“环境变量”。  
+    3. 添加指向 **C:\\Program Files\\Java\\jdk1.7.0\_55** 或任何 JDK 安装位置的新 **JAVA_HOME** 环境变量。
 
-	![设置 JDK 的正确配置值][image-hdi-hivejson-jdk]  
+    ![设置 JDK 的正确配置值][image-hdi-hivejson-jdk]  
 
 2. 安装 Maven 3.3.1
 
-	转到“控件面板”->“编辑系统变量”（对应帐户环境变量），将 bin 文件夹添加到路径。以下屏幕截图显示了如何执行此操作。
+    转到“控件面板”->“编辑系统变量”（对应帐户环境变量），将 bin 文件夹添加到路径。以下屏幕截图显示了如何执行此操作。
 
-	![设置 Maven][image-hdi-hivejson-maven]  
+    ![设置 Maven][image-hdi-hivejson-maven]  
 
 3. 从 [Hive-JSON-SerDe](https://github.com/sheetaldolas/Hive-JSON-Serde/tree/master) github 站点克隆项目。可通过单击“下载 Zip”按钮执行此操作，如以下屏幕截图所示。
 
-	![克隆项目][image-hdi-hivejson-serde]  
+    ![克隆项目][image-hdi-hivejson-serde]  
 
 4：转到将此包下载到的文件夹，然后键入“mvn package”。这将创建必要的 jar 文件，然后可以将其复制到群集。
 
@@ -174,7 +174,7 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 
     add jar json-serde-1.1.9.9-Hive13-jar-with-dependencies.jar;
 
-	![Adding JAR to your project][image-hdi-hivejson-addjar]
+    ![Adding JAR to your project][image-hdi-hivejson-addjar]
 
 现在，可以使用 SerDe 对 JSON 文档执行查询。
 

@@ -48,11 +48,11 @@ ms.author: kasing
 
 >[!NOTE]可以从显示的 **Get-AzureVM** 命令中获取虚拟机和云服务名称。
 >
-	$svcName = "<cloud service name>"
-	$vmName = "<virtual machine name>"
-	$localPath = "<drive and folder location to store the downloaded RDP file, example: c:\temp >"
-	$localFile = $localPath + "" + $vmname + ".rdp"
-	Get-AzureRemoteDesktopFile -ServiceName $svcName -Name $vmName -LocalPath $localFile -Launch
+    $svcName = "<cloud service name>"
+    $vmName = "<virtual machine name>"
+    $localPath = "<drive and folder location to store the downloaded RDP file, example: c:\temp >"
+    $localFile = $localPath + "" + $vmname + ".rdp"
+    Get-AzureRemoteDesktopFile -ServiceName $svcName -Name $vmName -LocalPath $localFile -Launch
 
 ## 停止 VM
 

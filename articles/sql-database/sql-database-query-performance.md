@@ -71,7 +71,7 @@ Query Performance Insight 非常易于使用：
     -	每个查询的持续时间（取决于聚合函数）。
     -	特定查询的执行总次数。
 
-	选择或清除图表要包含或排除的单个查询。
+    选择或清除图表要包含或排除的单个查询。
 
 1. 如果感觉数据已过时，可单击“刷新”按钮。
 1. 可选择单击“设置”以自定义 CPU 消耗数据的显示方式，或显示不同的时间段。
@@ -120,12 +120,12 @@ Query Performance Insight 非常易于使用：
 - **所有** - 捕获所有查询。**所有**是默认选项。
 - **自动** - 忽略不频繁的查询以及编译和执行持续时间很短的查询。执行计数、编译和运行时持续时间的阈值由内部决定。
 - **无** - 查询存储停止捕获新的查询。
-	
+    
 建议将所有策略设置为“自动”，并将清除策略设置为“30 天”：
 
     ALTER DATABASE [YourDB] 
     SET QUERY_STORE (SIZE_BASED_CLEANUP_MODE = AUTO);
-    	
+        
     ALTER DATABASE [YourDB] 
     SET QUERY_STORE (CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30));
     

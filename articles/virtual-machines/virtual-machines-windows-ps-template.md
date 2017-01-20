@@ -202,7 +202,7 @@ ms.author: davidmu
 
 1. 获取可以创建资源的可用位置列表。
 
-	    Get-AzureRmLocation | sort DisplayName | Select DisplayName
+        Get-AzureRmLocation | sort DisplayName | Select DisplayName
 
 2. 使用列表中的位置（例如**中国北部**）替换 **$locName** 的值。创建变量。
 

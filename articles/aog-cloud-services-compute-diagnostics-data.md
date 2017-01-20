@@ -23,27 +23,27 @@ wacn.date: 09/29/2016
 1. [Azure PaaS Compute 诊断数据](https://blogs.msdn.microsoft.com/kwill/2013/08/09/windows-azure-paas-compute-diagnostics-data/)
 2. [AzureTools – 开发支持团队使用的有效的诊断工具](https://blogs.msdn.microsoft.com/kwill/2013/08/26/azuretools-the-diagnostic-utility-used-by-the-windows-azure-developer-support-team/)
 3. [排除故障场景 1 – 角色回收](https://blogs.msdn.microsoft.com/kwill/2013/08/20/troubleshooting-scenario-1-role-recycling/) 
-	- 使用任务管理器去确定哪个进程失败，首先需要看哪个日志。
-	- Azure 事件日志
+    - 使用任务管理器去确定哪个进程失败，首先需要看哪个日志。
+    - Azure 事件日志
 4. [排除故障场景 2 – 在成功运行 2 周后角色回收](https://blogs.msdn.microsoft.com/kwill/2013/08/26/troubleshooting-scenario-2-role-recycling-after-running-fine-for-2-weeks/) 
-	- WaHostBootstrapper.log
-	- startup 任务失败
-	- 系统重启
+    - WaHostBootstrapper.log
+    - startup 任务失败
+    - 系统重启
 5. [排除故障场景 3 – 角色一直是 Busy 状态](https://blogs.msdn.microsoft.com/kwill/2013/09/06/troubleshooting-scenario-3-role-stuck-in-busy/)
-	- WaHostBootstrapper.log
-	- startup 任务失败
-	- 修改一个正在运行的服务
+    - WaHostBootstrapper.log
+    - startup 任务失败
+    - 修改一个正在运行的服务
 6. [排除故障场景 5 – Internal Server Error 500 in WebRole](https://blogs.msdn.microsoft.com/kwill/2013/09/19/troubleshooting-scenario-5-internal-server-error-500-in-webrole/)
-	- 使用 DIP 浏览 IIS
+    - 使用 DIP 浏览 IIS
 7. [排除故障场景 6 – 角色在运行一段时间后被回收](https://blogs.msdn.microsoft.com/kwill/2013/09/23/troubleshooting-scenario-6-role-recycling-after-running-for-some-time/)
-	- Deep dive on WindowsAzureGuestAgent.exe logs (AppAgentRuntime.log and WaAppAgent.log)
-	- DiagnosticStore LocalStorage resource
+    - Deep dive on WindowsAzureGuestAgent.exe logs (AppAgentRuntime.log and WaAppAgent.log)
+    - DiagnosticStore LocalStorage resource
 8. [排除故障场景 7 – 角色回收](https://blogs.msdn.microsoft.com/kwill/2013/10/03/troubleshooting-scenario-7-role-recycling/) 
-	- 简单浏览 WaHostBootstrapper 和 WindowsAzureGuestAgent 日志
-	- AzureTools
-	- WinDBG
-	- Intellitrace
-	
+    - 简单浏览 WaHostBootstrapper 和 WindowsAzureGuestAgent 日志
+    - AzureTools
+    - WinDBG
+    - Intellitrace
+    
 这儿有个简短的 Channel 9 视频演示了一些本篇博客提到的文件位置以及使用 SDP 包的方法[https://channel9.msdn.com/Series/DIY-Windows-Azure-Troubleshooting/Windows-Azure-PaaS-Diagnostics-Data](https://channel9.msdn.com/Series/DIY-Windows-Azure-Troubleshooting/Windows-Azure-PaaS-Diagnostics-Data).
 
 ## 诊断数据的位置
@@ -129,10 +129,10 @@ Azure 开发支持团队已经创建了一个 SDP(Support Diagnostics Platform �
 2. **打开 Powershell**
 3. **复制/黏贴并执行以下代码**
 
-		md c:\Diagnostics; 
-		md $env:LocalAppData\ElevatedDiagnostics\1239425890; 
-		Import-Module bitstransfer; 
-		explorer $env:LocalAppData\ElevatedDiagnostics\1239425890; Start-BitsTransfer http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_global-Windows2008R2_Later.DiagCab c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab; c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab
+        md c:\Diagnostics; 
+        md $env:LocalAppData\ElevatedDiagnostics\1239425890; 
+        Import-Module bitstransfer; 
+        explorer $env:LocalAppData\ElevatedDiagnostics\1239425890; Start-BitsTransfer http://dsazure.blob.core.windows.net/azuretools/AzurePaaSLogs_global-Windows2008R2_Later.DiagCab c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab; c:\Diagnostics\AzurePaaSLogs_global-Windows2008R2_Later.DiagCab
 
 这行代码会做以下的事情:
 

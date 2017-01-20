@@ -90,8 +90,8 @@ Service Fabric 为云应用程序的完整应用程序生命周期管理提供�
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 ## 后续步骤
 * 更多相关信息：
-	* [为什么通过微服务的方法构建应用程序？](./service-fabric-overview-microservices.md)
-	* [术语概述](./service-fabric-technical-overview.md)
+    * [为什么通过微服务的方法构建应用程序？](./service-fabric-overview-microservices.md)
+    * [术语概述](./service-fabric-technical-overview.md)
 * 设置 Service Fabric [开发环境](./service-fabric-get-started.md)
 * 为服务[选择编程模型框架](./service-fabric-choose-framework.md)
 

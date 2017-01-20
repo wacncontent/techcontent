@@ -19,7 +19,7 @@ ms.author: wesmc
 
 # 如何通过 Python 使用通知中心
 [!INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
-		
+        
 如 MSDN 主题[通知中心 REST API](http://msdn.microsoft.com/library/dn223264.aspx) 中所述，你可以使用通知中心 REST 接口从 Java/PHP/Python/Ruby 后端访问所有通知中心功能。
 
 > [!NOTE] 这是在 Python 中实现通知发送的示例引用实现，不是官方支持的通知中心 Python SDK。
@@ -43,14 +43,14 @@ ms.author: wesmc
 
 例如，创建客户端：
 
-	isDebug = True
-	hub = NotificationHub("myConnectionString", "myNotificationHubName", isDebug)
-	
+    isDebug = True
+    hub = NotificationHub("myConnectionString", "myNotificationHubName", isDebug)
+    
 发送 Windows toast 通知：
-	
-	wns_payload = """<toast><visual><binding template=\"ToastText01\"><text id=\"1\">Hello world!</text></binding></visual></toast>"""
-	hub.send_windows_notification(wns_payload)
-	
+    
+    wns_payload = """<toast><visual><binding template=\"ToastText01\"><text id=\"1\">Hello world!</text></binding></visual></toast>"""
+    hub.send_windows_notification(wns_payload)
+    
 ## 实现
 如果你尚未实现，请按照我们的[入门教程]学至最后一节，其中你必须实现后端。
 
@@ -64,32 +64,32 @@ ms.author: wesmc
 
 下面是实现客户端的主类，其构造函数将解析连接字符串：
 
-	class NotificationHub:
-	    API_VERSION = "?api-version=2013-10"
-	    DEBUG_SEND = "&test"
-	
-	    def __init__(self, connection_string=None, hub_name=None, debug=0):
-	        self.HubName = hub_name
-	        self.Debug = debug
-	
-	        # Parse connection string
-	        parts = connection_string.split(';')
-	        if len(parts) != 3:
-	            raise Exception("Invalid ConnectionString.")
-	
-	        for part in parts:
-	            if part.startswith('Endpoint'):
-	                self.Endpoint = 'https' + part[11:]
-	            if part.startswith('SharedAccessKeyName'):
-	                self.SasKeyName = part[20:]
-	            if part.startswith('SharedAccessKey'):
-	                self.SasKeyValue = part[16:]
+    class NotificationHub:
+        API_VERSION = "?api-version=2013-10"
+        DEBUG_SEND = "&test"
+    
+        def __init__(self, connection_string=None, hub_name=None, debug=0):
+            self.HubName = hub_name
+            self.Debug = debug
+    
+            # Parse connection string
+            parts = connection_string.split(';')
+            if len(parts) != 3:
+                raise Exception("Invalid ConnectionString.")
+    
+            for part in parts:
+                if part.startswith('Endpoint'):
+                    self.Endpoint = 'https' + part[11:]
+                if part.startswith('SharedAccessKeyName'):
+                    self.SasKeyName = part[20:]
+                if part.startswith('SharedAccessKey'):
+                    self.SasKeyValue = part[16:]
 
 ### 创建安全令牌
 有关安全令牌创建的详细信息，请访问[此处](http://msdn.microsoft.com/library/dn495627.aspx)。
 以下方法必须添加到 **NotificationHub** 类，以便根据当前请求的 URI 和提取自连接字符串的凭据创建令牌。
 
-	@staticmethod
+    @staticmethod
     def get_expiry():
         # By default returns an expiration of 5 minutes (=300 seconds) from now
         return int(round(time.time() + 300))
@@ -119,22 +119,22 @@ ms.author: wesmc
 ### 使用 HTTP REST API 发送通知
 首先，定义表示通知的类。
 
-	class Notification:
-	    def __init__(self, notification_format=None, payload=None, debug=0):
-	        valid_formats = ['template', 'apple', 'gcm', 'windows', 'windowsphone', "adm", "baidu"]
-	        if not any(x in notification_format for x in valid_formats):
-	            raise Exception(
-	                "Invalid Notification format. " +
-	                "Must be one of the following - 'template', 'apple', 'gcm', 'windows', 'windowsphone', 'adm', 'baidu'")
-	
-	        self.format = notification_format
-	        self.payload = payload
-	
-	        # array with keynames for headers
-	        # Note: Some headers are mandatory: Windows: X-WNS-Type, WindowsPhone: X-NotificationType
-	        # Note: For Apple you can set Expiry with header: ServiceBusNotification-ApnsExpiry
-	        # in W3C DTF, YYYY-MM-DDThh:mmTZD (for example, 1997-07-16T19:20+01:00).
-	        self.headers = None
+    class Notification:
+        def __init__(self, notification_format=None, payload=None, debug=0):
+            valid_formats = ['template', 'apple', 'gcm', 'windows', 'windowsphone', "adm", "baidu"]
+            if not any(x in notification_format for x in valid_formats):
+                raise Exception(
+                    "Invalid Notification format. " +
+                    "Must be one of the following - 'template', 'apple', 'gcm', 'windows', 'windowsphone', 'adm', 'baidu'")
+    
+            self.format = notification_format
+            self.payload = payload
+    
+            # array with keynames for headers
+            # Note: Some headers are mandatory: Windows: X-WNS-Type, WindowsPhone: X-NotificationType
+            # Note: For Apple you can set Expiry with header: ServiceBusNotification-ApnsExpiry
+            # in W3C DTF, YYYY-MM-DDThh:mmTZD (for example, 1997-07-16T19:20+01:00).
+            self.headers = None
 
 此类是一个容器，其中包含本机通知正文或一组模板通知上的属性，以及一组包含格式（本机平台或模板）和平台特定属性（如 Apple 过期属性和 WNS 标头）的标头。
 
@@ -206,7 +206,7 @@ ms.author: wesmc
 
         self.make_http_request(url, payload_to_send, headers)
 
-	def send_apple_notification(self, payload, tags=""):
+    def send_apple_notification(self, payload, tags=""):
         nh = Notification("apple", payload)
         self.send_notification(nh, tags)
 
@@ -255,7 +255,7 @@ ms.author: wesmc
 我们最近添加了这个称为[通知中心 TestSend 属性](http://msdn.microsoft.com/library/microsoft.servicebus.notifications.notificationhubclient.enabletestsend.aspx)的属性，它将返回有关通知发送结果的详细信息。
 若要使用它 - 请使用以下方法进行初始化：
 
-	hub = NotificationHub("myConnectionString", "myNotificationHubName", isDebug)
+    hub = NotificationHub("myConnectionString", "myNotificationHubName", isDebug)
 
 通知中心 Send 请求 HTTP URL 获取附加 "test" 查询字符串作为结果。
 
@@ -264,58 +264,58 @@ ms.author: wesmc
 
 初始化你的通知中心客户端（按[入门教程]中所述替换连接字符串和中心名称）：
 
-	hub = NotificationHub("myConnectionString", "myNotificationHubName")
+    hub = NotificationHub("myConnectionString", "myNotificationHubName")
 
 然后，根据你的目标移动平台添加发送代码。此示例还添加了更高级别的方法以支持基于平台发送通知，例如 send\_windows\_notification for windows; send\_apple\_notification (for apple) 等。
 
 ### Windows 应用商店和 Windows Phone 8.1（非 Silverlight）
 
-	wns_payload = """<toast><visual><binding template=\"ToastText01\"><text id=\"1\">Test</text></binding></visual></toast>"""
-	hub.send_windows_notification(wns_payload)
+    wns_payload = """<toast><visual><binding template=\"ToastText01\"><text id=\"1\">Test</text></binding></visual></toast>"""
+    hub.send_windows_notification(wns_payload)
 
 ### Windows Phone 8.0 和 8.1 Silverlight
 
-	hub.send_mpns_notification(toast)
+    hub.send_mpns_notification(toast)
 
 ### iOS
 
-	alert_payload = {
-	    'data':
-	        {
-	            'msg': 'Hello!'
-	        }
-	}
-	hub.send_apple_notification(alert_payload)
+    alert_payload = {
+        'data':
+            {
+                'msg': 'Hello!'
+            }
+    }
+    hub.send_apple_notification(alert_payload)
 
 ### Android
 
-	gcm_payload = {
-	    'data':
-	        {
-	            'msg': 'Hello!'
-	        }
-	}
-	hub.send_gcm_notification(gcm_payload)
+    gcm_payload = {
+        'data':
+            {
+                'msg': 'Hello!'
+            }
+    }
+    hub.send_gcm_notification(gcm_payload)
 
 ### Kindle Fire
 
-	adm_payload = {
-	    'data':
-	        {
-	            'msg': 'Hello!'
-	        }
-	}
-	hub.send_adm_notification(adm_payload)
+    adm_payload = {
+        'data':
+            {
+                'msg': 'Hello!'
+            }
+    }
+    hub.send_adm_notification(adm_payload)
 
 ### 百度
 
-	baidu_payload = {
-	    'data':
-	        {
-	            'msg': 'Hello!'
-	        }
-	}
-	hub.send_baidu_notification(baidu_payload)
+    baidu_payload = {
+        'data':
+            {
+                'msg': 'Hello!'
+            }
+    }
+    hub.send_baidu_notification(baidu_payload)
 
 运行 Python 代码，现在应该生成显示在目标设备上的通知。
 
@@ -323,23 +323,23 @@ ms.author: wesmc
 
 ### 启用调试属性
 如果在初始化 NotificationHub 时启用调试标志，你将会看到详细的 HTTP 请求和响应转储以及 NotificationOutcome，如下所示，你可以从中了解哪些 HTTP 标头传入请求以及从通知中心收到哪些 HTTP 响应：
-   	![][1]
+       ![][1]
 
 你将看到如详细的通知中心结果，例如
 
 - 当消息成功发送到推送通知服务时。 
-	
-		<Outcome>The Notification was successfully sent to the Push Notification System</Outcome>
+    
+        <Outcome>The Notification was successfully sent to the Push Notification System</Outcome>
 
 - 如果没有为任何推送通知找到目标，你可能会看到以下响应（这表明可能没有找到传递通知的注册，因为这些注册具有一些不匹配的标记）
 
-		'<NotificationOutcome xmlns="http://schemas.microsoft.com/netservices/2010/10/servicebus/connect" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><Success>0</Success><Failure>0</Failure><Results i:nil="true"/></NotificationOutcome>'
+        '<NotificationOutcome xmlns="http://schemas.microsoft.com/netservices/2010/10/servicebus/connect" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><Success>0</Success><Failure>0</Failure><Results i:nil="true"/></NotificationOutcome>'
 
 ### 将 toast 通知广播到 Windows 
 
 请注意你在向 Windows 客户端发送广播 toast 通知时发送出去的标头。
 
-	hub.send_windows_notification(wns_payload)
+    hub.send_windows_notification(wns_payload)
 
 ![][2]
 
@@ -347,16 +347,16 @@ ms.author: wesmc
 
 请注意添加到 HTTP 请求的 Tags HTTP 标头（在以下示例中，我们只将通知发送给了具有 'sports'负载的注册）
 
-	hub.send_windows_notification(wns_payload, "sports")
+    hub.send_windows_notification(wns_payload, "sports")
 
 ![][3]
 
 ### 发送通知指定多个标记
 
 请注意发送多个标记时 Tags HTTP 标头的变化方式。
-	
-	tags = {'sports', 'politics'}
-	hub.send_windows_notification(wns_payload, tags)
+    
+    tags = {'sports', 'politics'}
+    hub.send_windows_notification(wns_payload, tags)
 
 ![][4]
 
@@ -366,13 +366,13 @@ ms.author: wesmc
 
 **客户端 - 已注册的模板**
 
-		var template =
-		                @"<toast><visual><binding template=""ToastText01""><text id=""1"">$(greeting_en)</text></binding></visual></toast>";
+        var template =
+                        @"<toast><visual><binding template=""ToastText01""><text id=""1"">$(greeting_en)</text></binding></visual></toast>";
             
 **服务器端 - 正在发送的负载**
-		
-		template_payload = {'greeting_en': 'Hello', 'greeting_fr': 'Salut'}
-		hub.send_template_notification(template_payload)
+        
+        template_payload = {'greeting_en': 'Hello', 'greeting_fr': 'Salut'}
+        hub.send_template_notification(template_payload)
 
 ![][5]
 

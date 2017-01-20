@@ -95,7 +95,7 @@ ms.author: juliako
 
 call
 
-	IContentKey key = CreateEnvelopeTypeContentKey(encryptedsset);
+    IContentKey key = CreateEnvelopeTypeContentKey(encryptedsset);
 
 ##<a id="common_contentkey"></a>创建公共类型 ContentKey    
 
@@ -133,6 +133,6 @@ call
     }
 call
 
-	IContentKey key = CreateCommonTypeContentKey(encryptedsset); 
+    IContentKey key = CreateCommonTypeContentKey(encryptedsset); 
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

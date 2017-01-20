@@ -79,20 +79,20 @@ ms.author: douglasl
 
 以下示例将迁移整个表并立即开始数据迁移。
 
-	USE <Stretch-enabled database name>;
-	GO
-	ALTER TABLE <table name>  
-	    SET ( REMOTE_DATA_ARCHIVE = ON ( MIGRATION_STATE = OUTBOUND ) ) ;  
-	GO
+    USE <Stretch-enabled database name>;
+    GO
+    ALTER TABLE <table name>  
+        SET ( REMOTE_DATA_ARCHIVE = ON ( MIGRATION_STATE = OUTBOUND ) ) ;  
+    GO
 以下示例只会迁移 `dbo.fn_stretchpredicate` 内联表值函数识别的行，并推迟数据迁移。有关筛选器函数的详细信息，请参阅[使用筛选器函数选择要迁移的行](./sql-server-stretch-database-predicate-function.md)。
 
-	USE <Stretch-enabled database name>;
-	GO
-	ALTER TABLE <table name>  
-	    SET ( REMOTE_DATA_ARCHIVE = ON (  
-	        FILTER_PREDICATE = dbo.fn_stretchpredicate(),  
-	        MIGRATION_STATE = PAUSED ) ) ;  
-	 GO
+    USE <Stretch-enabled database name>;
+    GO
+    ALTER TABLE <table name>  
+        SET ( REMOTE_DATA_ARCHIVE = ON (  
+            FILTER_PREDICATE = dbo.fn_stretchpredicate(),  
+            MIGRATION_STATE = PAUSED ) ) ;  
+     GO
 
 有关详细信息，请参阅 [ALTER TABLE (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms190273.aspx)。
 
@@ -101,23 +101,23 @@ ms.author: douglasl
 
 以下示例将迁移整个表并立即开始数据迁移。
 
-	USE <Stretch-enabled database name>;
-	GO
-	CREATE TABLE <table name>
-	    ( ... )  
-	    WITH ( REMOTE_DATA_ARCHIVE = ON ( MIGRATION_STATE = OUTBOUND ) ) ;  
-	GO
+    USE <Stretch-enabled database name>;
+    GO
+    CREATE TABLE <table name>
+        ( ... )  
+        WITH ( REMOTE_DATA_ARCHIVE = ON ( MIGRATION_STATE = OUTBOUND ) ) ;  
+    GO
 
 以下示例只会迁移 `dbo.fn_stretchpredicate` 内联表值函数识别的行，并推迟数据迁移。有关筛选器函数的详细信息，请参阅[使用筛选器函数选择要迁移的行](./sql-server-stretch-database-predicate-function.md)。
 
-	USE <Stretch-enabled database name>;
-	GO
-	CREATE TABLE <table name>
-	    ( ... )  
-	    WITH ( REMOTE_DATA_ARCHIVE = ON (  
-	        FILTER_PREDICATE = dbo.fn_stretchpredicate(),  
-	        MIGRATION_STATE = PAUSED ) ) ;  
-	GO  
+    USE <Stretch-enabled database name>;
+    GO
+    CREATE TABLE <table name>
+        ( ... )  
+        WITH ( REMOTE_DATA_ARCHIVE = ON (  
+            FILTER_PREDICATE = dbo.fn_stretchpredicate(),  
+            MIGRATION_STATE = PAUSED ) ) ;  
+    GO  
 
 有关详细信息，请参阅 [CREATE TABLE (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms174979.aspx)。
 

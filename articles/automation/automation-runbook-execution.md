@@ -79,10 +79,10 @@ Runbook 仪表板显示单个 Runbook 的摘要。摘要图表显示在给定的
 
 以下示例命令检索示例 Runbook 的最后一个作业，并显示其状态、为 Runbook 参数提供的值以及作业的输出。
 
-	$job = (Get-AzureAutomationJob -AutomationAccountName "MyAutomationAccount" -Name "Test-Runbook" | sort LastModifiedDate -desc)[0]
-	$job.Status
-	$job.JobParameters
-	Get-AzureAutomationJobOutput -AutomationAccountName "MyAutomationAccount" -Id $job.Id -Stream Output
+    $job = (Get-AzureAutomationJob -AutomationAccountName "MyAutomationAccount" -Name "Test-Runbook" | sort LastModifiedDate -desc)[0]
+    $job.Status
+    $job.JobParameters
+    Get-AzureAutomationJobOutput -AutomationAccountName "MyAutomationAccount" -Id $job.Id -Stream Output
 
 ## <a name="fairshare"></a>公平共享
 为了在云中的所有 Runbook 之间共享资源，Azure 自动化在任何作业运行 3 小时后都会将其暂时卸载。PowerShell 工作流 Runbook 将会从上一个[检查点](http://technet.microsoft.com/zh-cn/library/dn469257.aspx#bk_Checkpoints)进行恢复。在此期间，该作业将显示“正在运行，正在等待资源”状态。如果该 Runbook 没有检查点或者作业在卸载之前尚未达到第一个检查点，则会从开始处重启。

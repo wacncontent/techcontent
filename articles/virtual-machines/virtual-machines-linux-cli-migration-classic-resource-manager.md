@@ -36,73 +36,73 @@ ms.author: cynthn
 对于迁移方案，需要针对经典部署模型和 Resource Manager 部署模型设置环境。[安装 Azure CLI](../xplat-cli-install.md) 并[选择订阅](../xplat-cli-connect.md)。
 
 登录到帐户。
-	
-	azure login -e AzureChinaCloud
+    
+    azure login -e AzureChinaCloud
 
 使用以下命令选择 Azure 订阅。
 
-	azure account set "<azure-subscription-name>"
+    azure account set "<azure-subscription-name>"
 
 >[!NOTE] 注册是一次性步骤，但必须在尝试迁移之前完成。如果不注册，你会看到以下错误消息
 ><p>BadRequest : Subscription is not registered for migration.
 
 使用以下命令向迁移资源提供程序注册。请注意，在某些情况下，此命令会超时。但是，注册会成功。
 
-	azure provider register Microsoft.ClassicInfrastructureMigrate
+    azure provider register Microsoft.ClassicInfrastructureMigrate
 
 请等五分钟让注册完成。可以使用以下命令来检查审批状态。请确保在继续操作之前，RegistrationState 为 `Registered`。
 
-	azure provider show Microsoft.ClassicInfrastructureMigrate
+    azure provider show Microsoft.ClassicInfrastructureMigrate
 
 现在请将 CLI 切换到 `asm` 模式。
 
-	azure config mode asm
+    azure config mode asm
 
 ## 步骤 3：请确保在当前部署或 VNET 的 Azure 区域中有足够的 Azure Resource Manager 虚拟机核心
 
 要执行此步骤，需要切换到 `arm` 模式。使用以下命令执行此操作。
 
-	azure config mode arm
+    azure config mode arm
 
 可以使用以下 CLI 命令检查当前 Azure Resource Manager 中已有的核心数量。若要了解有关核心配额的详细信息，请参阅[限制和 Azure Resource Manager](../azure-subscription-service-limits.md#limits-and-the-azure-resource-manager)
 
-	azure vm list-usage -l "<Your VNET or Deployment's Azure region"
+    azure vm list-usage -l "<Your VNET or Deployment's Azure region"
 
 验证完此步骤后，可以切换回 `asm` 模式。
 
-	azure config mode asm
+    azure config mode asm
 
 ## 步骤 4：选项 1 - 迁移云服务中的虚拟机 
 
 使用以下命令获取云服务列表，然后选取要迁移的云服务。请注意，如果云服务中的 VM 在虚拟网络中或者具有 Web/辅助角色，你将收到错误消息。
 
-	azure service list
+    azure service list
 
 运行以下命令，从详细输出中获取云服务的部署名称。在大多数情况下，部署名称与云服务名称相同。
 
-	azure service show <serviceName> -vv
+    azure service show <serviceName> -vv
 
 准备迁移云服务中的虚拟机。可以从两个选项中进行选择。
 
 如果你想要将 VM 迁移到平台所创建的虚拟网络上，请使用以下命令。
 
-	azure service deployment prepare-migration <serviceName> <deploymentName> new "" "" ""
+    azure service deployment prepare-migration <serviceName> <deploymentName> new "" "" ""
 
 如果你想要迁移到 Resource Manager 部署模型中的现有虚拟网络，请使用以下命令。
 
-	azure service deployment prepare-migration <serviceName> <deploymentName> existing <destinationVNETResourceGroupName> subnetName <vnetName>
+    azure service deployment prepare-migration <serviceName> <deploymentName> existing <destinationVNETResourceGroupName> subnetName <vnetName>
 
 准备操作成功后，可以查看详细输出，以获取 VM 的迁移状态，并确保其处于 `Prepared` 状态。
 
-	azure vm show <vmName> -vv
+    azure vm show <vmName> -vv
 
 使用 CLI 或 Azure 门户查看准备好的资源的配置。如果你尚未做好迁移准备，因此想要回到旧的状态，请使用以下命令。
 
-	azure service deployment abort-migration <serviceName> <deploymentName>
+    azure service deployment abort-migration <serviceName> <deploymentName>
 
 如果准备好的配置看起来没问题，则可继续进行，使用以下命令提交资源。
 
-	azure service deployment commit-migration <serviceName> <deploymentName>
+    azure service deployment commit-migration <serviceName> <deploymentName>
 
 ## 步骤 4：选项 2 - 迁移虚拟网络中的虚拟机
 
@@ -110,8 +110,8 @@ ms.author: cynthn
 
 使用以下命令获取订阅中的所有虚拟网络。
 
-	azure network vnet list
-	
+    azure network vnet list
+    
 输出将如下所示：
 
 ![命令行屏幕截图，其中整个虚拟网络名称已突出显示。](./media/virtual-machines-linux-cli-migration-classic-resource-manager/vnet.png)
@@ -120,15 +120,15 @@ ms.author: cynthn
 
 使用以下命令来准备要迁移的所选虚拟网络。
 
-	azure network vnet prepare-migration <virtualNetworkName>
+    azure network vnet prepare-migration <virtualNetworkName>
 
 使用 CLI 或 Azure 门户查看准备好的虚拟机的配置。如果你尚未做好迁移准备，因此想要回到旧的状态，请使用以下命令。
 
-	azure network vnet abort-migration <virtualNetworkName>
+    azure network vnet abort-migration <virtualNetworkName>
 
 如果准备好的配置看起来没问题，则可继续进行，使用以下命令提交资源。
 
-	azure network vnet commit-migration <virtualNetworkName>
+    azure network vnet commit-migration <virtualNetworkName>
 
 ## 步骤 5：迁移存储帐户
 
@@ -136,15 +136,15 @@ ms.author: cynthn
 
 使用以下命令来准备要迁移的存储帐户
 
-	azure storage account prepare-migration <storageAccountName>
+    azure storage account prepare-migration <storageAccountName>
 
 使用 CLI 或 Azure 门户查看准备就绪的存储帐户的配置。如果你尚未做好迁移准备，因此想要回到旧的状态，请使用以下命令。
 
-	azure storage account abort-migration <storageAccountName>
+    azure storage account abort-migration <storageAccountName>
 
 如果准备好的配置看起来没问题，则可继续进行，使用以下命令提交资源。
 
-	azure storage account commit-migration <storageAccountName>
+    azure storage account commit-migration <storageAccountName>
 
 ## 后续步骤
 

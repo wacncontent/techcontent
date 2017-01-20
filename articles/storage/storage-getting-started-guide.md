@@ -44,11 +44,11 @@ ms.author: marsma
 1. 启动 Visual Studio。
 2. 在“文件”菜单中，单击“新建项目”。
 3. 在“新建项目”对话框中，单击“已安装”>“模板”>“Visual C#”>“云”>“快速启动”>“数据服务”。
-	a.选择以下模板之一：**Azure 存储空间：Blob**、**Azure 存储空间：文件**、**Azure 存储空间：队列**或 **Azure 存储空间：表**。
-	b.确保选择 **.NET Framework 4.5** 作为目标框架。
-	c.为你的项目指定一个名称并创建新的 Visual Studio 解决方案，如下所示：
-	
-	![Azure 快速启动][Image1]
+    a.选择以下模板之一：**Azure 存储空间：Blob**、**Azure 存储空间：文件**、**Azure 存储空间：队列**或 **Azure 存储空间：表**。
+    b.确保选择 **.NET Framework 4.5** 作为目标框架。
+    c.为你的项目指定一个名称并创建新的 Visual Studio 解决方案，如下所示：
+    
+    ![Azure 快速启动][Image1]
 
 你可能想要在运行应用程序之前检查源代码。若要查看代码，请在 Visual Studio 中的“查看”菜单上选择“解决方案资源管理器”。然后双击 Program.cs 文件。
 
@@ -56,12 +56,12 @@ ms.author: marsma
 
 1.	在 Visual Studio 中的“查看”菜单上，选择“解决方案资源管理器”。打开 App.config 文件并注释掉 Azure 存储模拟器的连接字符串：
 
-	`<!--<add key="StorageConnectionString" value = "UseDevelopmentStorage=true;"/>-->`
+    `<!--<add key="StorageConnectionString" value = "UseDevelopmentStorage=true;"/>-->`
 
 2.	取消注释 Azure 存储服务的连接字符串，并在 App.config 文件中提供存储帐户名称和访问密钥：
-	`<add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[AccountName];AccountKey=[AccountKey];EndpointSuffix=core.chinacloudapi.cn"`
+    `<add key="StorageConnectionString" value="DefaultEndpointsProtocol=https;AccountName=[AccountName];AccountKey=[AccountKey];EndpointSuffix=core.chinacloudapi.cn"`
 
-	若要检索存储帐户访问密钥，请参阅[管理存储访问密钥](./storage-create-storage-account.md#manage-your-storage-access-keys)。
+    若要检索存储帐户访问密钥，请参阅[管理存储访问密钥](./storage-create-storage-account.md#manage-your-storage-access-keys)。
 
 3.	在 App.config 文件中提供存储帐户名称和访问密钥后,在“文件” 菜单中，单击“全部保存”以保存所有项目文件。
 4.	在“生成”菜单中，单击“生成解决方案”。
@@ -76,15 +76,15 @@ ms.author: marsma
 1. 启动 Visual Studio。
 2. 在“文件”菜单中，单击“新建项目”。
 3. 在“新建项目”对话框中，单击“已安装”>“模板”>“Visual C#”>“云”>“快速启动”>“数据服务”。
-	a.选择以下模板之一：**Azure 存储空间：Blob**、**Azure 存储空间：文件**、**Azure 存储空间：队列**或 **Azure 存储空间：表**。
-	b.确保选择 **.NET Framework 4.5** 作为目标框架。
-	c.为你的项目指定一个名称并创建新的 Visual Studio 解决方案，如下所示：
-	
-	![Azure 快速启动][Image1]
+    a.选择以下模板之一：**Azure 存储空间：Blob**、**Azure 存储空间：文件**、**Azure 存储空间：队列**或 **Azure 存储空间：表**。
+    b.确保选择 **.NET Framework 4.5** 作为目标框架。
+    c.为你的项目指定一个名称并创建新的 Visual Studio 解决方案，如下所示：
+    
+    ![Azure 快速启动][Image1]
 
 4.	在 Visual Studio 中的“查看”菜单上，选择“解决方案资源管理器”。打开 App.config 文件并注释掉 Azure 存储帐户的连接字符串（如果已添加）。然后取消注释 Azure 存储模拟器的连接字符串：
 
-	`<add key="StorageConnectionString" value = "UseDevelopmentStorage=true;"/>`
+    `<add key="StorageConnectionString" value = "UseDevelopmentStorage=true;"/>`
 
 你可能想要在运行应用程序之前检查源代码。若要查看代码，请在 Visual Studio 中的“查看”菜单上选择“解决方案资源管理器”。然后双击 Program.cs 文件。
 

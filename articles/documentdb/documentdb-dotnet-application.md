@@ -309,7 +309,7 @@ ms.author: syamk
             }
         }
    
-	> [!TIP] 创建新的 DocumentCollection 时，你可以提供 OfferType 的可选 RequestOptions 参数，此参数可让你指定新集合的性能级别。如果未传递此参数，系统将使用默认的产品/服务类型。有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 性能级别](./documentdb-performance-levels.md)
+    > [!TIP] 创建新的 DocumentCollection 时，你可以提供 OfferType 的可选 RequestOptions 参数，此参数可让你指定新集合的性能级别。如果未传递此参数，系统将使用默认的产品/服务类型。有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 性能级别](./documentdb-performance-levels.md)
 
 3. 我们打算从配置中读取部分值，因此请打开应用程序的 **Web.config** 文件，并在 `<AppSettings>` 节下面添加下列几行。
    
@@ -389,12 +389,12 @@ ms.author: syamk
 
 1. 将下列方法添加到 **DocumentDBRepository** 类。
    
-		public static async Task<Document> CreateItemAsync(T item)
-		{
-			return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), item);
-		}
+        public static async Task<Document> CreateItemAsync(T item)
+        {
+            return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), item);
+        }
 
-	此方法只接受传递给它的对象，并将对象保留在 DocumentDB 中。
+    此方法只接受传递给它的对象，并将对象保留在 DocumentDB 中。
 
 2. 打开 ItemController.cs 文件，并在类中添加下列代码段。这是 ASP.NET MVC 得知如何执行**创建**操作的方式。在此情况下，只需呈现先前创建的关联 Create.cshtml 视图。
    
@@ -404,7 +404,7 @@ ms.author: syamk
             return View();
         }
    
-	现在此控制器需要更多代码，以接受“创建”视图所提交的数据。
+    现在此控制器需要更多代码，以接受“创建”视图所提交的数据。
 
 3. 将下一个代码块添加到 ItemController.cs 类，以告诉 ASP.NET MVC 如何使用窗体 POST 来执行此控制器的操作。
    

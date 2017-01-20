@@ -67,17 +67,17 @@ Microsoft 提供了为来自不同供应商的应用程序之间过渡凭据允�
 
 下面介绍了 Microsoft 标识 SDK 如何与应用程序的共享存储配合工作以启用 SSO：
 
-	+------------+ +------------+  +-------------+
-	|            | |            |  |             |
-	|   App 1    | |   App 2    |  |   App 3     |
-	|            | |            |  |             |
-	|            | |            |  |             |
-	+------------+ +------------+  +-------------+
-	| Azure SDK  | | Azure SDK  |  | Azure SDK   |
-	+------------+-+------------+--+-------------+
-	|                                            |
-	|            App Shared Storage              |
-	+--------------------------------------------+
+    +------------+ +------------+  +-------------+
+    |            | |            |  |             |
+    |   App 1    | |   App 2    |  |   App 3     |
+    |            | |            |  |             |
+    |            | |            |  |             |
+    +------------+ +------------+  +-------------+
+    | Azure SDK  | | Azure SDK  |  | Azure SDK   |
+    +------------+-+------------+--+-------------+
+    |                                            |
+    |            App Shared Storage              |
+    +--------------------------------------------+
 
 #### 中转站辅助的登录
 
@@ -106,28 +106,28 @@ Microsoft 提供了为来自不同供应商的应用程序之间过渡凭据允�
 - 管理你的客户应用程序中的登录体验的能力的丢失。
 
 下面介绍了 Microsoft 标识 SDK 如何与应用程序的中转站应用程序配合工作以启用 SSO：
-	
-	+------------+ +------------+   +-------------+
-	|            | |            |   |             |
-	|   App 1    | |   App 2    |   |   Someone   |
-	|            | |            |   |    Else's   |
-	|            | |            |   |     App     |
-	+------------+ +------------+   +-------------+
-	| Azure SDK  | | Azure SDK  |   | Azure SDK   |
-	+-----+------+-+-----+------+-  +-------+-----+
-	      |              |                  |
-	      |       +------v------+           |
-	      |       |             |           |
-	      |       | Microsoft   |           |
-	      +-------> Broker      |^----------+
-	              | Application
-	              |             |
-	              +-------------+
-	              |             |
-	              |   Broker    |
-	              |   Storage   |
-	              |             |
-	              +-------------+
+    
+    +------------+ +------------+   +-------------+
+    |            | |            |   |             |
+    |   App 1    | |   App 2    |   |   Someone   |
+    |            | |            |   |    Else's   |
+    |            | |            |   |     App     |
+    +------------+ +------------+   +-------------+
+    | Azure SDK  | | Azure SDK  |   | Azure SDK   |
+    +-----+------+-+-----+------+-  +-------+-----+
+          |              |                  |
+          |       +------v------+           |
+          |       |             |           |
+          |       | Microsoft   |           |
+          +-------> Broker      |^----------+
+                  | Application
+                  |             |
+                  +-------------+
+                  |             |
+                  |   Broker    |
+                  |   Storage   |
+                  |             |
+                  +-------------+
 
 了解这些背景信息后，你应该可以更好地理解 SSO 并使用 Microsoft 标识平台和 SDK 在应用程序中实现它。
 
@@ -165,26 +165,26 @@ App3 重定向 URI：`x-msauth-mytestiosapp://com.myapp.mytestapp3`
 
 这些应用嵌套在同一个客户端 ID/应用程序 ID 下，可以根据你在 SDK 配置中返回给我们的重定向 URI 来查找。
 
-	+-------------------+
-	|                   |
-	|  Client ID        |
-	+---------+---------+
-	          |
-	          |           +-----------------------------------+
-	          |           |  App 1 Redirect URI               |
-	          +----------^+                                   |
-	          |           +-----------------------------------+
-	          |
-	          |           +-----------------------------------+
-	          +----------^+  App 2 Redirect URI               |
-	          |           |                                   |
-	          |           +-----------------------------------+
-	          |
-	          +----------^+-----------------------------------+
-	                      |  App 3 Redirect URI               |
-	                      |                                   |
-	                      +-----------------------------------+
-	
+    +-------------------+
+    |                   |
+    |  Client ID        |
+    +---------+---------+
+              |
+              |           +-----------------------------------+
+              |           |  App 1 Redirect URI               |
+              +----------^+                                   |
+              |           +-----------------------------------+
+              |
+              |           +-----------------------------------+
+              +----------^+  App 2 Redirect URI               |
+              |           |                                   |
+              |           +-----------------------------------+
+              |
+              +----------^+-----------------------------------+
+                          |  App 3 Redirect URI               |
+                          |                                   |
+                          +-----------------------------------+
+    
 *请注意，下面介绍了这些重定向 URI 的格式。你可以使用任何重定向 URI，除非你想要支持中转站，在这种情况下，它们必须如上所示*
 
 #### 创建在应用程序之间共享的密钥链
@@ -193,21 +193,21 @@ App3 重定向 URI：`x-msauth-mytestiosapp://com.myapp.mytestapp3`
 
 如果正确设置了授权，应在项目目录中看到标题为 `entitlements.plist` 的文件，其中包含类似如下的内容：
 
-	<?xml version="1.0" encoding="UTF-8"?>
-	<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-	<plist version="1.0">
-	<dict>
-		<key>keychain-access-groups</key>
-		<array>
-			<string>$(AppIdentifierPrefix)com.myapp.mytestapp</string>
-			<string>$(AppIdentifierPrefix)com.myapp.mycache</string>
-		</array>
-	</dict>
-	</plist>
+    <?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+    <dict>
+        <key>keychain-access-groups</key>
+        <array>
+            <string>$(AppIdentifierPrefix)com.myapp.mytestapp</string>
+            <string>$(AppIdentifierPrefix)com.myapp.mycache</string>
+        </array>
+    </dict>
+    </plist>
 
 在每个应用程序中启用密钥链授权，并准备好使用 SSO 后，请在 `ADAuthenticationSettings` 中使用以下设置告知 Microsoft Identity SDK 关于密钥链的信息：
 
-	defaultKeychainSharingGroup=@"com.myapp.mycache";
+    defaultKeychainSharingGroup=@"com.myapp.mycache";
 
 > [!WARNING] 
 在应用程序之间共享密钥链之后，任何应用程序都可以删除用户，更糟的是，删除整个应用程序的所有令牌。如果你的应用程序依赖于这些令牌来执行后台工作，则这是特别严重的后果。要共享密钥链，就必须十分警惕通过 Microsoft 标识 SDK 执行的任意和所有删除操作。
@@ -228,8 +228,8 @@ App3 重定向 URI：`x-msauth-mytestiosapp://com.myapp.mytestapp3`
 #### 步骤 1：在应用程序中启用中转站模式
 创建“上下文”或身份验证对象的初始安装时，应用程序使用了中转站的功能被打开的。通过在代码中设置凭据类型中执行此操作：
 
-	/*! See the ADCredentialsType enumeration definition for details */
-	@propertyADCredentialsType credentialsType;
+    /*! See the ADCredentialsType enumeration definition for details */
+    @propertyADCredentialsType credentialsType;
 
 `AD_CREDENTIALS_AUTO` 设置允许 Microsoft Identity SDK 尝试调用中转站，而 `AD_CREDENTIALS_EMBEDDED` 阻止 Microsoft Identity SDK 调用中转站。
 
@@ -241,19 +241,19 @@ Microsoft 标识平台使用 URL 来调用中转站，然后将控制权返回�
 
 下面是在项目配置中的显示方式示例。你也可以在 XCode 中执行此操作：
 
-	<key>CFBundleURLTypes</key>
-	<array>
-	    <dict>
-	        <key>CFBundleTypeRole</key>
-	        <string>Editor</string>
-	        <key>CFBundleURLName</key>
-	        <string>com.myapp.mytestapp</string>
-	        <key>CFBundleURLSchemes</key>
-	        <array>
-	            <string>x-msauth-mytestiosapp</string>
-	        </array>
-	    </dict>
-	</array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>com.myapp.mytestapp</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>x-msauth-mytestiosapp</string>
+            </array>
+        </dict>
+    </array>
 
 #### 步骤 3：使用 URL 方案建立新的重定向 URI
 

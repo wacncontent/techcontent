@@ -84,7 +84,7 @@ ms.author: davidmu
           return token;
         }
 
-	将 {client-id} 替换为 Azure Active Directory 应用程序的标识符，将 {client-secret} 替换为 AD 应用程序的访问密钥，并将 {tenant-id} 替换为你的订阅的租户标识符。可以通过运行 Get-AzureRmSubscription 找到租户 ID。可使用 Azure 门户预览找到访问密钥。
+    将 {client-id} 替换为 Azure Active Directory 应用程序的标识符，将 {client-secret} 替换为 AD 应用程序的访问密钥，并将 {tenant-id} 替换为你的订阅的租户标识符。可以通过运行 Get-AzureRmSubscription 找到租户 ID。可使用 Azure 门户预览找到访问密钥。
 
 3. 若要调用之前添加的方法，请将以下代码添加到 Program.cs 文件中的 Main 方法：
 
@@ -456,7 +456,7 @@ ms.author: davidmu
           );
         }
 
-	>[!NOTE] 本教程创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅 [Navigate and select Azure virtual machine images with Windows PowerShell and the Azure CLI](./virtual-machines-linux-cli-ps-findimage.md)（使用 Windows PowerShell 和 Azure CLI 来导航和选择 Azure 虚拟机映像）。
+    >[!NOTE] 本教程创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅 [Navigate and select Azure virtual machine images with Windows PowerShell and the Azure CLI](./virtual-machines-linux-cli-ps-findimage.md)（使用 Windows PowerShell 和 Azure CLI 来导航和选择 Azure 虚拟机映像）。
 
 2. 若要调用之前添加的方法，请将此代码添加到 Main 方法：
 
@@ -505,11 +505,11 @@ ms.author: davidmu
 
 2. 在返回每个状态代码后，按 **Enter** 创建每个资源。创建虚拟机后，执行下一步骤，然后按 Enter 键删除所有资源。
 
-	完整运行该控制台应用程序大约需要 5 分钟。在按 Enter 开始删除资源之前，你可能需要在 Azure 门户预览中花费几分钟时间来验证资源的创建。
+    完整运行该控制台应用程序大约需要 5 分钟。在按 Enter 开始删除资源之前，你可能需要在 Azure 门户预览中花费几分钟时间来验证资源的创建。
 
 3. 若要查看资源的状态，请在 Azure 门户预览中浏览到“审核日志”：
 
-	![在 Azure 门户预览中浏览审核日志](./media/virtual-machines-windows-csharp/crpportal.png)  
+    ![在 Azure 门户预览中浏览审核日志](./media/virtual-machines-windows-csharp/crpportal.png)  
 
 ## 后续步骤
 

@@ -65,9 +65,9 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。换句话�
 - 默认情况下，所有高级数据磁盘的磁盘缓存策略都是“只读的”，所有附加到 VM 的高级操作系统都是“读写的”。为使应用程序的 I/O 达到最佳性能，建议使用此配置设置。对于频繁写入或只写的磁盘（例如 SQL Server 日志文件），禁用磁盘缓存可获得更佳的应用程序性能。
 - 确保 VM 上有足够的带宽来驱动磁盘通信。例如，STANDARD_DS1 VM 为高级存储磁盘通信提供每秒 32 MB 的专用带宽。这意味着，附加到此 VM 的 P10 高级存储磁盘最高只能达到每秒 32 MB，而不能像 P10 磁盘那样最高达到每秒 100 MB。同样，STANDARD_DS13 VM 可跨所有磁盘最高达到每秒 256 MB。目前，DS 系列上的最大 VM 是 STANDARD_DS14，它可以跨所有磁盘最高提供每秒 512 MB。
 
-	请注意，这些限制只适用于磁盘流量，而不包括缓存命中和网络流量。VM 网络通信可以使用单独的带宽，这不同于高级存储磁盘的专用带宽。
-	
-	有关 DS 系列 VM 的最大 IOPS 与吞吐量（带宽）的最新信息，请参阅 [Azure 的虚拟机和云服务大小](../virtual-machines/virtual-machines-windows-sizes.md)。若要了解高级存储磁盘及其 IOPS 和吞吐量限制，请参阅本文的[使用高级存储时的可伸缩性和性能目标](#scalability-and-performance-targets-when-using-premium-storage)部分中的表格。
+    请注意，这些限制只适用于磁盘流量，而不包括缓存命中和网络流量。VM 网络通信可以使用单独的带宽，这不同于高级存储磁盘的专用带宽。
+    
+    有关 DS 系列 VM 的最大 IOPS 与吞吐量（带宽）的最新信息，请参阅 [Azure 的虚拟机和云服务大小](../virtual-machines/virtual-machines-windows-sizes.md)。若要了解高级存储磁盘及其 IOPS 和吞吐量限制，请参阅本文的[使用高级存储时的可伸缩性和性能目标](#scalability-and-performance-targets-when-using-premium-storage)部分中的表格。
 
 > [!NOTE]缓存命中数不受到磁盘配置 IOPS/吞吐量的限制。也就是说，当你在 DS 系列 VM 上使用具有 ReadOnly 缓存设置的数据磁盘时，缓存提供的读取数不受高级存储磁盘限制的约束。因此，如果工作负荷以读取为主，可以从磁盘获得极高的吞吐量。请注意，缓存根据 VM 大小受到 VM 级别不同的 IOPS / 吞吐量的限制。DS 系列 VM 大约有 4000 IOPS，缓存与本地 SSD IO 是每个核心 33 MB/秒。
 
@@ -77,11 +77,11 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。换句话�
 - 可以将 DS 系列 Azure 虚拟机配置为使用标准存储帐户或高级存储帐户上托管的操作系统 (OS) 磁盘。如果 OS 磁盘只是用于引导，则你可以考虑使用基于标准存储的 OS 磁盘。这样既可以提高性价比，又可以在引导后提供类似于高级存储的性能。如果在除引导以外的 OS 磁盘上执行任何其他任务，请使用高级存储，因为它提供更好的性能。例如，如果你的应用程序要与 OS 磁盘相互读/写数据，则使用基于高级存储的 OS 磁盘可为 VM 提供更好的性能。
 - 可以对高级存储使用 [Azure 命令行界面 (Azure CLI)](../xplat-cli-install.md)。若要使用 Azure CLI 更改某个磁盘上的缓存策略，请运行以下命令：
 
-	`$ azure vm disk attach -h ReadOnly <VM-Name> <Disk-Name>`
+    `$ azure vm disk attach -h ReadOnly <VM-Name> <Disk-Name>`
 
-	请注意，缓存策略选项可以是 ReadOnly、None 或 ReadWrite。有关更多选项，请通过运行以下命令查看帮助：
+    请注意，缓存策略选项可以是 ReadOnly、None 或 ReadWrite。有关更多选项，请通过运行以下命令查看帮助：
 
-	`azure vm disk attach --help`
+    `azure vm disk attach --help`
 
 ##<a id="scalability-and-performance-targets-when-using-premium-storage"></a> 使用高级存储时的可伸缩性和性能目标
 
@@ -90,28 +90,28 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。换句话�
 <table border="1" cellspacing="0" cellpadding="5" style="border: 1px solid #000000;">
 <tbody>
 <tr>
-	<td><strong>高级存储磁盘类型</strong></td>
-	<td><strong>P10</strong></td>
-	<td><strong>P20</strong></td>
-	<td><strong>P30</strong></td>
+    <td><strong>高级存储磁盘类型</strong></td>
+    <td><strong>P10</strong></td>
+    <td><strong>P20</strong></td>
+    <td><strong>P30</strong></td>
 </tr>
 <tr>
-	<td><strong>磁盘大小</strong></td>
-	<td>128 GB</td>
-	<td>512 GB</td>
-	<td>1024 GB (1 TB)</td>
+    <td><strong>磁盘大小</strong></td>
+    <td>128 GB</td>
+    <td>512 GB</td>
+    <td>1024 GB (1 TB)</td>
 </tr>
 <tr>
-	<td><strong>每个磁盘的 IOPS</strong></td>
-	<td>500</td>
-	<td>2300</td>
-	<td>5000</td>
+    <td><strong>每个磁盘的 IOPS</strong></td>
+    <td>500</td>
+    <td>2300</td>
+    <td>5000</td>
 </tr>
 <tr>
-	<td><strong>每个磁盘的吞吐量</strong></td>
-	<td>每秒 100 MB *</td>
-	<td>每秒 150 MB *</td>
-	<td>每秒 200 MB *</td>
+    <td><strong>每个磁盘的吞吐量</strong></td>
+    <td>每秒 100 MB *</td>
+    <td>每秒 150 MB *</td>
+    <td>每秒 200 MB *</td>
 </tr>
 </tbody>
 </table>
@@ -133,17 +133,17 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 <table border="1" cellspacing="0" cellpadding="5" style="border: 1px solid #000000;">
 <tbody>
 <tr>
-	<td><strong>总帐户容量</strong></td>
-	<td><strong>本地冗余存储帐户的总带宽</strong></td>
+    <td><strong>总帐户容量</strong></td>
+    <td><strong>本地冗余存储帐户的总带宽</strong></td>
 </tr>
 <tr>
-	<td>
-	<ul>
+    <td>
+    <ul>
        <li type=round>磁盘容量：35 TB</li>
        <li type=round>快照容量：10 TB</li>
     </ul>
-	</td>
-	<td>入站 + 出站最高每秒 50 Gbps</td>
+    </td>
+    <td>入站 + 出站最高每秒 50 Gbps</td>
 </tr>
 </tbody>
 </table>
@@ -191,9 +191,9 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 请参考以下重要说明，以了解如何在高级存储上配置 Linux VM：
 
 - 对于缓存设置为“ReadOnly”或“None”的所有高级存储磁盘，必须在装入文件系统时禁用“屏障”，以实现高级存储的伸放性目标。对于这种情况你不需要屏障，因为写入高级存储支持的磁盘对于这些缓存设置是持久的。在成功完成写入请求时，数据已写入到持久存储。请根据你的文件系统，使用以下方法来禁用“屏障”：
-	- 如果你使用的是 **reiserFS**，请使用装入选项“barrier=none”禁用屏障（要启用屏障，请使用“barrier=flush”）
-	- 如果你使用的是 **ext3/ext4**，请使用装入选项“barrier=0”禁用屏障（要启用屏障，请使用“barrier=1”）
-	- 如果你使用的是 **XFS**，请使用装入选项“nobarrier”禁用屏障（要启用屏障，请使用“barrier”）
+    - 如果你使用的是 **reiserFS**，请使用装入选项“barrier=none”禁用屏障（要启用屏障，请使用“barrier=flush”）
+    - 如果你使用的是 **ext3/ext4**，请使用装入选项“barrier=0”禁用屏障（要启用屏障，请使用“barrier=1”）
+    - 如果你使用的是 **XFS**，请使用装入选项“nobarrier”禁用屏障（要启用屏障，请使用“barrier”）
 
 - 对于缓存设置为“ReadWrite”的高级存储磁盘，应该启用屏障以实现写入持久性。
 - 要在重新启动 VM 后保留卷标，你必须使用对磁盘的 UUID 引用来更新 /etc/fstab。另请参阅 [如何将数据磁盘附加到 Linux 虚拟机。](../virtual-machines/virtual-machines-linux-classic-attach-disk.md)
@@ -202,72 +202,72 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 <table border="1" cellspacing="0" cellpadding="5" style="border: 1px solid #000000;">
 <tbody>
 <tr>
-	<td><strong>分发</strong></td>
-	<td><strong>版本</strong></td>
-	<td><strong>支持的内核</strong></td>
-	<td><strong>支持的映像</strong></td>
+    <td><strong>分发</strong></td>
+    <td><strong>版本</strong></td>
+    <td><strong>支持的内核</strong></td>
+    <td><strong>支持的映像</strong></td>
 </tr>
 <tr>
-	<td rowspan="4"><strong>Ubuntu</strong></td>
-	<td>12.04</td>
-	<td>3.2.0-75.110</td>
-	<td>Ubuntu-12_04_5-LTS-amd64-server-20150119-zh-CN-30GB</td>
+    <td rowspan="4"><strong>Ubuntu</strong></td>
+    <td>12.04</td>
+    <td>3.2.0-75.110</td>
+    <td>Ubuntu-12_04_5-LTS-amd64-server-20150119-zh-CN-30GB</td>
 </tr>
 <tr>
-	<td>14.04</td>
-	<td>3.13.0-44.73</td>
-	<td>Ubuntu-14_04_1-LTS-amd64-server-20150123-zh-CN-30GB</td>
+    <td>14.04</td>
+    <td>3.13.0-44.73</td>
+    <td>Ubuntu-14_04_1-LTS-amd64-server-20150123-zh-CN-30GB</td>
 </tr>
 <tr>
-	<td>14.10</td>
-	<td>3.16.0-29.39</td>
-	<td>Ubuntu-14_10-amd64-server-20150202-zh-CN-30GB</td>
+    <td>14.10</td>
+    <td>3.16.0-29.39</td>
+    <td>Ubuntu-14_10-amd64-server-20150202-zh-CN-30GB</td>
 </tr>
 <tr>
-	<td>15.04</td>
-	<td>3.19.0-15</td>
-	<td>Ubuntu-15_04-amd64-server-20150422-zh-CN-30GB</td>
+    <td>15.04</td>
+    <td>3.19.0-15</td>
+    <td>Ubuntu-15_04-amd64-server-20150422-zh-CN-30GB</td>
 </tr>
 <tr>
-	<td><strong>SUSE</strong></td>
-	<td>SLES 12</td>
-	<td>3.12.36-38.1</td>
-	<td>suse-sles-12-priority-v20150213<br>suse-sles-12-v20150213</td>
+    <td><strong>SUSE</strong></td>
+    <td>SLES 12</td>
+    <td>3.12.36-38.1</td>
+    <td>suse-sles-12-priority-v20150213<br>suse-sles-12-v20150213</td>
 </tr>
 <tr>
-	<td><strong>CoreOS</strong></td>
-	<td>584.0.0</td>
-	<td>3.18.4</td>
-	<td>CoreOS 584.0.0</td>
+    <td><strong>CoreOS</strong></td>
+    <td>584.0.0</td>
+    <td>3.18.4</td>
+    <td>CoreOS 584.0.0</td>
 </tr>
 <tr>
-	<td rowspan="2"><strong>CentOS</strong></td>
-	<td>6.5, 6.6, 6.7, 7.0</td>
-	<td></td>
-	<td>
-		<a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409"> 需要 LIS 4.0 </a> </br>
-		*请参阅以下注释
-	</td>
+    <td rowspan="2"><strong>CentOS</strong></td>
+    <td>6.5, 6.6, 6.7, 7.0</td>
+    <td></td>
+    <td>
+        <a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409"> 需要 LIS 4.0 </a> </br>
+        *请参阅以下注释
+    </td>
 </tr>
 <tr>
-	<td>7.1</td>
-	<td>3.10.0-229.1.2.el7</td>
-	<td>
-		<a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409"> 建议使用 LIS 4.0 </a> <br/>
-		*请参阅以下注释
-	</td>
+    <td>7.1</td>
+    <td>3.10.0-229.1.2.el7</td>
+    <td>
+        <a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409"> 建议使用 LIS 4.0 </a> <br/>
+        *请参阅以下注释
+    </td>
 </tr>
 
 <tr>
-	<td rowspan="2"><strong>Oracle</strong></td>
-	<td>6.4</td>
-	<td></td>
-	<td><a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409"> 需要 LIS 4.0 </a></td>
+    <td rowspan="2"><strong>Oracle</strong></td>
+    <td>6.4</td>
+    <td></td>
+    <td><a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409"> 需要 LIS 4.0 </a></td>
 </tr>
 <tr>
-	<td>7.0</td>
-	<td></td>
-	<td>联系支持人员以获取详细信息</td>
+    <td>7.0</td>
+    <td></td>
+    <td>联系支持人员以获取详细信息</td>
 </tr>
 </tbody>
 </table>
@@ -276,8 +276,8 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 
 运行 OpenLogic CentOS VM 的客户应该运行以下命令来安装最新的驱动程序：
 
-	sudo rpm -e hypervkvpd  ## (may return error if not installed, that's OK)
-	sudo yum install microsoft-hyper-v
+    sudo rpm -e hypervkvpd  ## (may return error if not installed, that's OK)
+    sudo yum install microsoft-hyper-v
 
 需要重新启动才能激活新的驱动程序。
 
@@ -302,31 +302,31 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 1. 根据[如何安装和配置 Azure PowerShell](../powershell-install-configure.md) 中提供的步骤设置 PowerShell 环境。
 2. 启动 PowerShell 控制台，连接到订阅，并在控制台窗口中运行以下 PowerShell cmdlet。如此 PowerShell 语句中所示，当你创建高级存储帐户时，必须将 **Type** 参数指定为 **Premium_LRS**。
 
-		New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
+        New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
 
 3. 接下来，请创建新的 DS 系列 VM，并在控制台窗口中运行以下 PowerShell cmdlet 以指定你要使用高级存储：
 
-    	$storageAccount = "yourpremiumaccount"
-    	$adminName = "youradmin"
-    	$adminPassword = "yourpassword"
-    	$vmName ="yourVM"
-    	$location = "China East"
-    	$imageName = "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20150726-en.us-127GB.vhd"
-    	$vmSize ="Standard_DS2"
-    	$OSDiskPath = "https://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + $vmName + "_OS_PIO.vhd"
-    	$vm = New-AzureVMConfig -Name $vmName -ImageName $imageName -InstanceSize $vmSize -MediaLocation $OSDiskPath
-    	Add-AzureProvisioningConfig -Windows -VM $vm -AdminUsername $adminName -Password $adminPassword
-    	New-AzureVM -ServiceName $vmName -VMs $VM -Location $location
+        $storageAccount = "yourpremiumaccount"
+        $adminName = "youradmin"
+        $adminPassword = "yourpassword"
+        $vmName ="yourVM"
+        $location = "China East"
+        $imageName = "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20150726-en.us-127GB.vhd"
+        $vmSize ="Standard_DS2"
+        $OSDiskPath = "https://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + $vmName + "_OS_PIO.vhd"
+        $vm = New-AzureVMConfig -Name $vmName -ImageName $imageName -InstanceSize $vmSize -MediaLocation $OSDiskPath
+        Add-AzureProvisioningConfig -Windows -VM $vm -AdminUsername $adminName -Password $adminPassword
+        New-AzureVM -ServiceName $vmName -VMs $VM -Location $location
 
 4. 如果希望 VM 有更多的磁盘空间，请在创建虚拟机后于控制台窗口中运行以下 PowerShell cmdlet 以将新的数据磁盘附加到现有 DS 系列 VM。
 
-    	$storageAccount = "yourpremiumaccount"
-    	$vmName ="yourVM"
-    	$vm = Get-AzureVM -ServiceName $vmName -Name $vmName
-    	$LunNo = 1
-    	$path = "http://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + "myDataDisk_" + $LunNo + "_PIO.vhd"
-    	$label = "Disk " + $LunNo
-    	Add-AzureDataDisk -CreateNew -MediaLocation $path -DiskSizeInGB 128 -DiskLabel $label -LUN $LunNo -HostCaching ReadOnly -VM $vm | Update-AzureVm
+        $storageAccount = "yourpremiumaccount"
+        $vmName ="yourVM"
+        $vm = Get-AzureVM -ServiceName $vmName -Name $vmName
+        $LunNo = 1
+        $path = "http://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + "myDataDisk_" + $LunNo + "_PIO.vhd"
+        $label = "Disk " + $LunNo
+        Add-AzureDataDisk -CreateNew -MediaLocation $path -DiskSizeInGB 128 -DiskLabel $label -LUN $LunNo -HostCaching ReadOnly -VM $vm | Update-AzureVm
 
 ### 通过 Azure 命令行界面使用高级存储创建 Azure 虚拟机
 
@@ -334,24 +334,24 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 
 #### 创建高级存储帐户
 
-	azure storage account create "premiumtestaccount" -l "china east" --type PLRS
+    azure storage account create "premiumtestaccount" -l "china east" --type PLRS
 
 #### 创建 DS 系列虚拟机
 
-	azure vm create -z "Standard_DS2" -l "china east" -e 22 "premium-test-vm"
-		"b549f4301d0b4295b8e76ceb65df47d4__Ubuntu-14_10-amd64-server-20150202-zh-CN-30GB" -u "myusername" -p "passwd@123"
+    azure vm create -z "Standard_DS2" -l "china east" -e 22 "premium-test-vm"
+        "b549f4301d0b4295b8e76ceb65df47d4__Ubuntu-14_10-amd64-server-20150202-zh-CN-30GB" -u "myusername" -p "passwd@123"
 
 #### 显示有关虚拟机的信息
 
-	azure vm show premium-test-vm
+    azure vm show premium-test-vm
 
 #### 附加新的数据磁盘
 
-	azure vm disk attach-new premium-test-vm 20 https://premiumstorageaccount.blob.core.chinacloudapi.cn/vhd-store/data1.vhd
+    azure vm disk attach-new premium-test-vm 20 https://premiumstorageaccount.blob.core.chinacloudapi.cn/vhd-store/data1.vhd
 
 #### 显示有关新数据磁盘的信息
 
-	azure vm disk show premium-test-vm-premium-test-vm-0-201502210429470316
+    azure vm disk show premium-test-vm-premium-test-vm-0-201502210429470316
 
 ## 后续步骤
 

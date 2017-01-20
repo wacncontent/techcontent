@@ -54,7 +54,7 @@ Always Encrypted 是 Azure SQL 数据库和 SQL Server 中一项新的数据加�
 1. 打开 SSMS（如果未打开，单击“连接”>“数据库引擎...”，以打开“连接到服务器”窗口）。
 2. 输入服务器名称和凭据。服务器名称可以在 SQL 数据库边栏选项卡以及此前复制的连接字符串中找到。键入完整的服务器名称，包括 *database.chinacloudapi.cn*。
 
-	![复制连接字符串](./media/sql-database-always-encrypted/ssms-connect.png)
+    ![复制连接字符串](./media/sql-database-always-encrypted/ssms-connect.png)
 
 3. 如果“新建防火墙规则”窗口打开，请登录到 Azure，让 SSMS 创建新的防火墙规则。
 
@@ -136,7 +136,7 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 1. 打开 Visual Studio 并创建新的 C# 控制台应用程序。确保将项目设置为 **.NET Framework 4.6** 或更高版本。
 2. 将项目命名为 **AlwaysEncryptedConsoleApp**，然后单击“确定”。
 
-	![新建控制台应用程序](./media/sql-database-always-encrypted/console-app.png)
+    ![新建控制台应用程序](./media/sql-database-always-encrypted/console-app.png)
 
 ## 修改连接字符串以启用 Always Encrypted
 
@@ -464,7 +464,7 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 2. 单击“连接”>“数据库引擎”打开“连接到服务器”窗口，然后单击“选项”。
 3. 单击“其他连接参数”，然后键入 **Column Encryption Setting=enabled**。
 
-	![新建控制台应用程序](./media/sql-database-always-encrypted/ssms-connection-parameter.png)
+    ![新建控制台应用程序](./media/sql-database-always-encrypted/ssms-connection-parameter.png)
 
 4. 针对 Clinic 数据库运行以下查询：
 
@@ -472,7 +472,7 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 
      现在，可以看到已加密列中的纯文本数据。
 
-	![新建控制台应用程序](./media/sql-database-always-encrypted/ssms-plaintext.png)
+    ![新建控制台应用程序](./media/sql-database-always-encrypted/ssms-plaintext.png)
 
 > [!NOTE] 如果从其他计算机使用 SSMS（或任何客户端）进行连接，则无法访问加密密钥，因此无法解密数据。
 

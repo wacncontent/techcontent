@@ -33,8 +33,8 @@ Adventure Works Cycles 想要在 Azure 中生成一个在线商店应用程序�
 - 包含在分片群集中的两个 MongoDB 服务器，用于在数据库层中存储产品数据和订单
 - 身份验证层中用于客户帐户和供应商的两个 Active Directory 域控制器
 - 所有服务器皆位于两个子网中：
-	- Web 服务器位于前端子网中
-	- 应用程序服务器、MongoDB 群集和域控制器位于后端子网中
+    - Web 服务器位于前端子网中
+    - 应用程序服务器、MongoDB 群集和域控制器位于后端子网中
 
 ![不同应用程序基础结构层的关系图](./media/virtual-machines-common-infrastructure-service-guidelines/example-tiers.png)
 
@@ -52,9 +52,9 @@ Adventure Works Cycles 想要在 Azure 中生成一个在线商店应用程序�
 以上各项都将遵循以下命名约定：
 
 - Adventure Works Cycles 使用 **[IT 工作负荷]-[位置]-[Azure 资源]** 作为前缀
-	- 在本示例中，IT 工作负荷名为 **azos**（Azure On-line Store，Azure 在线商店），位置为 **che**（China East，中国东部）
+    - 在本示例中，IT 工作负荷名为 **azos**（Azure On-line Store，Azure 在线商店），位置为 **che**（China East，中国东部）
 - 存储帐户使用 adventureazoschesa**[描述]**
-	- 请注意，“adventure”已添加到前缀以确保唯一性，并且存储帐户名称不支持使用连字符。
+    - 请注意，“adventure”已添加到前缀以确保唯一性，并且存储帐户名称不支持使用连字符。
 - 虚拟网络使用 AZOS-CHE-VN**[数字]**
 - 可用性集使用 azos-che-as-**[角色]**
 - 虚拟机名称使用 azos-che-vm-**[VM 名称]**
@@ -80,11 +80,11 @@ Adventure Works Cycles 确定他们需要以下两个存储帐户：
 - 位置：中国东部
 - 虚拟网络地址空间：10.0.0.0/8
 - 第一个子网：
-	- 名称：FrontEnd
-	- 地址空间：10.0.1.0/24
+    - 名称：FrontEnd
+    - 地址空间：10.0.1.0/24
 - 第二个子网：
-	- 名称：BackEnd
-	- 地址空间：10.0.2.0/24
+    - 名称：BackEnd
+    - 地址空间：10.0.2.0/24
 
 ## 可用性集
 

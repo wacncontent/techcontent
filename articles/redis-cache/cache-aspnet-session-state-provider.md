@@ -44,20 +44,20 @@ NuGet 程序包会下载并添加所需的程序集引用，并将以下部分�
     <sessionState mode="Custom" customProvider="MySessionStateStore">
         <providers>
         <!--
-		<add name="MySessionStateStore"
-     	  	host = "127.0.0.1" [String]
-    		port = "" [number]
-    		accessKey = "" [String]
-    		ssl = "false" [true|false]
-    		throwOnError = "true" [true|false]
-    		retryTimeoutInMilliseconds = "0" [number]
-    		databaseId = "0" [number]
-    		applicationName = "" [String]
-    		connectionTimeoutInMilliseconds = "5000" [number]
-    		operationTimeoutInMilliseconds = "5000" [number]
-		/>
+        <add name="MySessionStateStore"
+               host = "127.0.0.1" [String]
+            port = "" [number]
+            accessKey = "" [String]
+            ssl = "false" [true|false]
+            throwOnError = "true" [true|false]
+            retryTimeoutInMilliseconds = "0" [number]
+            databaseId = "0" [number]
+            applicationName = "" [String]
+            connectionTimeoutInMilliseconds = "5000" [number]
+            operationTimeoutInMilliseconds = "5000" [number]
+        />
         -->
-		<add name="MySessionStateStore" type="Microsoft.Web.Redis.RedisSessionStateProvider" host="127.0.0.1" accessKey="" ssl="false"/>
+        <add name="MySessionStateStore" type="Microsoft.Web.Redis.RedisSessionStateProvider" host="127.0.0.1" accessKey="" ssl="false"/>
         </providers>
     </sessionState>
 
@@ -69,7 +69,7 @@ NuGet 程序包会下载并添加所需的程序集引用，并将以下部分�
 -	**port** - 使用非 SSL 端口或 SSL 端口，具体取决于 SSL 设置。
 -	**accessKey** - 使用缓存的主密钥或辅助密钥。
 -	**ssl** - 如果要使用 SSL 保护缓存/客户端通信，则为 true；否则为 false。请务必指定正确的端口。
-	-	默认情况下，将为新缓存禁用非 SSL 端口。为此设置指定 true 可使用 SSL 端口。有关启用非 SSL 端口的详细信息，请参阅[配置缓存](./cache-configure.md)主题中的[访问端口](./cache-configure.md#access-ports)部分。
+    -	默认情况下，将为新缓存禁用非 SSL 端口。为此设置指定 true 可使用 SSL 端口。有关启用非 SSL 端口的详细信息，请参阅[配置缓存](./cache-configure.md)主题中的[访问端口](./cache-configure.md#access-ports)部分。
 -	**throwOnError** - 如果你想要在失败时引发异常，则为 true；如果你想要操作以静默方式失败，则为 false。可以通过检查静态 Microsoft.Web.Redis.RedisSessionStateProvider.LastException 属性来检查失败。默认值为 true。
 -	**retryTimeoutInMilliseconds** - 将在此时间间隔内重试失败的操作，以毫秒为单位指定。首次重试在 20 毫秒后进行，然后重试每隔一秒进行，直到 retryTimeoutInMilliseconds 间隔到期。在此时间间隔过后，将立即重试操作最后一次。如果操作仍失败，则会将异常返回给调用方，具体取决于 throwOnError 设置。默认值为 0，这意味着不重试。
 -	**databaseId** - 指定要用于缓存输出数据的数据库。如果未指定，则使用默认值 0。

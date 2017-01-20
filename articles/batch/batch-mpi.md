@@ -43,17 +43,17 @@ ms.author: marsma
 
 csharp
 
-	CloudPool myCloudPool =
-		myBatchClient.PoolOperations.CreatePool(
-			poolId: "MultiInstanceSamplePool",
-			targetDedicated: 3
-			virtualMachineSize: "small",
-			cloudServiceConfiguration: new CloudServiceConfiguration(osFamily: "4"));
+    CloudPool myCloudPool =
+        myBatchClient.PoolOperations.CreatePool(
+            poolId: "MultiInstanceSamplePool",
+            targetDedicated: 3
+            virtualMachineSize: "small",
+            cloudServiceConfiguration: new CloudServiceConfiguration(osFamily: "4"));
 
-	// Multi-instance tasks require inter-node communication, and those nodes
-	// must run only one task at a time.
-	myCloudPool.InterComputeNodeCommunicationEnabled = true;
-	myCloudPool.MaxTasksPerComputeNode = 1;
+    // Multi-instance tasks require inter-node communication, and those nodes
+    // must run only one task at a time.
+    myCloudPool.InterComputeNodeCommunicationEnabled = true;
+    myCloudPool.MaxTasksPerComputeNode = 1;
 
 此外，多实例任务*只能*在 **2015 年 12 月 14 日之后创建的池**中的节点上执行。
 
@@ -62,20 +62,20 @@ csharp
 
 csharp
 
-	// Create a StartTask for the pool which we use for installing MS-MPI on
-	// the nodes as they join the pool (or when they are restarted).
-	StartTask startTask = new StartTask
-	{
-	    CommandLine = "cmd /c MSMpiSetup.exe -unattend -force",
-	    ResourceFiles = new List<ResourceFile> { new ResourceFile("https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/MSMpiSetup.exe", "MSMpiSetup.exe") },
-	    RunElevated = true,
-	    WaitForSuccess = true
-	};
-	myCloudPool.StartTask = startTask;
-	
-	// Commit the fully configured pool to the Batch service to actually create
-	// the pool and its compute nodes.
-	await myCloudPool.CommitAsync();
+    // Create a StartTask for the pool which we use for installing MS-MPI on
+    // the nodes as they join the pool (or when they are restarted).
+    StartTask startTask = new StartTask
+    {
+        CommandLine = "cmd /c MSMpiSetup.exe -unattend -force",
+        ResourceFiles = new List<ResourceFile> { new ResourceFile("https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/MSMpiSetup.exe", "MSMpiSetup.exe") },
+        RunElevated = true,
+        WaitForSuccess = true
+    };
+    myCloudPool.StartTask = startTask;
+    
+    // Commit the fully configured pool to the Batch service to actually create
+    // the pool and its compute nodes.
+    await myCloudPool.CommitAsync();
 
 ### 远程直接内存访问 (RDMA)
 在批处理池中为计算节点选择支持 RDMA 的大小（例如 A9）时，MPI 应用程序可以使用 Azure 的高性能、低延迟的远程直接内存访问 (RDMA) 网络。
@@ -97,26 +97,26 @@ csharp
 
 csharp
 
-	// Create the multi-instance task. Its command line is the "application command"
-	// and will be executed *only* by the primary, and only after the primary and
-	// subtasks execute the CoordinationCommandLine.
-	CloudTask myMultiInstanceTask = new CloudTask(id: "mymultiinstancetask",
-	    commandline: "cmd /c mpiexec.exe -wdir %AZ_BATCH_TASK_SHARED_DIR% MyMPIApplication.exe");
-	
-	// Configure the task's MultiInstanceSettings. The CoordinationCommandLine will be executed by
-	// the primary and all subtasks.
-	myMultiInstanceTask.MultiInstanceSettings =
-	    new MultiInstanceSettings(numberOfNodes) {
-	    CoordinationCommandLine = @"cmd /c start cmd /c ""%MSMPI_BIN%\smpd.exe"" -d",
-	    CommonResourceFiles = new List<ResourceFile> {
-	    new ResourceFile("https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/MyMPIApplication.exe",
-	                     "MyMPIApplication.exe")
-	    }
-	};
+    // Create the multi-instance task. Its command line is the "application command"
+    // and will be executed *only* by the primary, and only after the primary and
+    // subtasks execute the CoordinationCommandLine.
+    CloudTask myMultiInstanceTask = new CloudTask(id: "mymultiinstancetask",
+        commandline: "cmd /c mpiexec.exe -wdir %AZ_BATCH_TASK_SHARED_DIR% MyMPIApplication.exe");
+    
+    // Configure the task's MultiInstanceSettings. The CoordinationCommandLine will be executed by
+    // the primary and all subtasks.
+    myMultiInstanceTask.MultiInstanceSettings =
+        new MultiInstanceSettings(numberOfNodes) {
+        CoordinationCommandLine = @"cmd /c start cmd /c ""%MSMPI_BIN%\smpd.exe"" -d",
+        CommonResourceFiles = new List<ResourceFile> {
+        new ResourceFile("https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/MyMPIApplication.exe",
+                         "MyMPIApplication.exe")
+        }
+    };
 
-	// Submit the task to the job. Batch will take care of splitting it into subtasks and
-	// scheduling them for execution on the nodes.
-	await myBatchClient.JobOperations.AddTaskAsync("mybatchjob", myMultiInstanceTask);
+    // Submit the task to the job. Batch will take care of splitting it into subtasks and
+    // scheduling them for execution on the nodes.
+    await myBatchClient.JobOperations.AddTaskAsync("mybatchjob", myMultiInstanceTask);
 
 ## 主要任务和子任务
 创建任务的多实例设置时，需要指定用于执行任务的计算节点数目。当你将任务提交给作业时，Batch 服务将创建一个主要任务和足够的子任务，并且合计符合指定的节点数。
@@ -125,8 +125,8 @@ csharp
 
 csharp
 
-	int numberOfNodes = 10;
-	myMultiInstanceTask.MultiInstanceSettings = new MultiInstanceSettings(numberOfNodes);
+    int numberOfNodes = 10;
+    myMultiInstanceTask.MultiInstanceSettings = new MultiInstanceSettings(numberOfNodes);
 
 ### 主节点
 当用户提交多实例任务时，批处理服务会将其中一个计算节点指定为“主”节点，并将主要任务安排在主节点上执行。子任务安排在已分配给多实例任务的剩余节点上执行。
@@ -136,7 +136,7 @@ csharp
 
 阻止调用协调命令 -- 在所有子任务的协调命令成功返回之前，Batch 不执行应用程序命令。因此，协调命令应该启动任何所需的后台服务，确认它们已准备好可供使用，然后退出。例如，在使用 MS-MPI 第 7 版的方案中，此协调命令在节点上启动 SMPD 服务，然后退出：
 
-	cmd /c start cmd /c ""%MSMPI_BIN%\smpd.exe"" -d
+    cmd /c start cmd /c ""%MSMPI_BIN%\smpd.exe"" -d
 
 请注意此协调命令中使用 `start`。这是必需的，因为 `smpd.exe` 应用程序不会在执行后立即返回。如果不使用 [start][cmd_start] 命令，此协调命令就不返回，因此将阻止执行应用程序命令。
 
@@ -145,7 +145,7 @@ csharp
 
 对于 MS-MPI 应用程序，请使用应用程序命令通过 `mpiexec.exe` 执行已启用 MPI 的应用程序。例如，以下是使用 MS-MPI 第 7 版的方案所执行的应用程序命令：
 
-	cmd /c ""%MSMPI_BIN%\mpiexec.exe"" -c 1 -wdir %AZ_BATCH_TASK_SHARED_DIR% MyMPIApplication.exe
+    cmd /c ""%MSMPI_BIN%\mpiexec.exe"" -c 1 -wdir %AZ_BATCH_TASK_SHARED_DIR% MyMPIApplication.exe
 
 >[!NOTE] 由于 MS-MPI 的 `mpiexec.exe` 默认使用 `CCP_NODES` 变量（请参阅[环境变量](#environment-variables)），上述示例应用程序命令行已排除该变量。
 
@@ -195,40 +195,40 @@ csharp
 
 csharp
 
-	// Obtain the job and the multi-instance task from the Batch service
-	CloudJob boundJob = batchClient.JobOperations.GetJob("mybatchjob");
-	CloudTask myMultiInstanceTask = boundJob.GetTask("mymultiinstancetask");
-	
-	// Now obtain the list of subtasks for the task
-	IPagedEnumerable<SubtaskInformation> subtasks = myMultiInstanceTask.ListSubtasks();
-	
-	// Asynchronously iterate over the subtasks and print their stdout and stderr
-	// output if the subtask has completed
-	await subtasks.ForEachAsync(async (subtask) =>
-	{
-	    Console.WriteLine("subtask: {0}", subtask.Id);
-	    Console.WriteLine("exit code: {0}", subtask.ExitCode);
-	
-	    if (subtask.State == TaskState.Completed)
-	    {
-	        ComputeNode node =
-				await batchClient.PoolOperations.GetComputeNodeAsync(subtask.ComputeNodeInformation.PoolId,
-	                                                                 subtask.ComputeNodeInformation.ComputeNodeId);
-	
-	        NodeFile stdOutFile = await node.GetNodeFileAsync(subtask.ComputeNodeInformation.TaskRootDirectory + "\\" + Constants.StandardOutFileName);
-	        NodeFile stdErrFile = await node.GetNodeFileAsync(subtask.ComputeNodeInformation.TaskRootDirectory + "\\" + Constants.StandardErrorFileName);
-	        stdOut = await stdOutFile.ReadAsStringAsync();
-	        stdErr = await stdErrFile.ReadAsStringAsync();
-	
-	        Console.WriteLine("node: {0}:", node.Id);
-	        Console.WriteLine("stdout.txt: {0}", stdOut);
-	        Console.WriteLine("stderr.txt: {0}", stdErr);
-	    }
-	    else
-	    {
-	        Console.WriteLine("\tSubtask {0} is in state {1}", subtask.Id, subtask.State);
-	    }
-	});
+    // Obtain the job and the multi-instance task from the Batch service
+    CloudJob boundJob = batchClient.JobOperations.GetJob("mybatchjob");
+    CloudTask myMultiInstanceTask = boundJob.GetTask("mymultiinstancetask");
+    
+    // Now obtain the list of subtasks for the task
+    IPagedEnumerable<SubtaskInformation> subtasks = myMultiInstanceTask.ListSubtasks();
+    
+    // Asynchronously iterate over the subtasks and print their stdout and stderr
+    // output if the subtask has completed
+    await subtasks.ForEachAsync(async (subtask) =>
+    {
+        Console.WriteLine("subtask: {0}", subtask.Id);
+        Console.WriteLine("exit code: {0}", subtask.ExitCode);
+    
+        if (subtask.State == TaskState.Completed)
+        {
+            ComputeNode node =
+                await batchClient.PoolOperations.GetComputeNodeAsync(subtask.ComputeNodeInformation.PoolId,
+                                                                     subtask.ComputeNodeInformation.ComputeNodeId);
+    
+            NodeFile stdOutFile = await node.GetNodeFileAsync(subtask.ComputeNodeInformation.TaskRootDirectory + "\\" + Constants.StandardOutFileName);
+            NodeFile stdErrFile = await node.GetNodeFileAsync(subtask.ComputeNodeInformation.TaskRootDirectory + "\\" + Constants.StandardErrorFileName);
+            stdOut = await stdOutFile.ReadAsStringAsync();
+            stdErr = await stdErrFile.ReadAsStringAsync();
+    
+            Console.WriteLine("node: {0}:", node.Id);
+            Console.WriteLine("stdout.txt: {0}", stdOut);
+            Console.WriteLine("stderr.txt: {0}", stdErr);
+        }
+        else
+        {
+            Console.WriteLine("\tSubtask {0} is in state {1}", subtask.Id, subtask.State);
+        }
+    });
 
 ## 代码示例
 GitHub 上的 [MultiInstanceTasks][github_mpi] 代码示例演示了如何通过多实例任务在批处理计算节点上运行 [MS-MPI][msmpi_msdn] 应用程序。按[准备](#preparation)和[执行](#execution)中的步骤运行该示例。
@@ -257,36 +257,36 @@ GitHub 上的 [MultiInstanceTasks][github_mpi] 代码示例演示了如何通过
 
 `MultiInstanceTasks.exe` 的输出与下面类似：
 
-	Creating pool [MultiInstanceSamplePool]...
-	Creating job [MultiInstanceSampleJob]...
-	Adding task [MultiInstanceSampleTask] to job [MultiInstanceSampleJob]...
-	Awaiting task completion, timeout in 00:30:00...
+    Creating pool [MultiInstanceSamplePool]...
+    Creating job [MultiInstanceSampleJob]...
+    Adding task [MultiInstanceSampleTask] to job [MultiInstanceSampleJob]...
+    Awaiting task completion, timeout in 00:30:00...
 
-	Main task [MultiInstanceSampleTask] is in state [Completed] and ran on compute node [tvm-1219235766_1-20161017t162002z]:
-	---- stdout.txt ----
-	Rank 2 received string "Hello world" from Rank 0
-	Rank 1 received string "Hello world" from Rank 0
+    Main task [MultiInstanceSampleTask] is in state [Completed] and ran on compute node [tvm-1219235766_1-20161017t162002z]:
+    ---- stdout.txt ----
+    Rank 2 received string "Hello world" from Rank 0
+    Rank 1 received string "Hello world" from Rank 0
 
-	---- stderr.txt ----
+    ---- stderr.txt ----
 
-	Main task completed, waiting 00:00:10 for subtasks to complete...
+    Main task completed, waiting 00:00:10 for subtasks to complete...
 
-	---- Subtask information ----
-	subtask: 1
-	        exit code: 0
-	        node: tvm-1219235766_3-20161017t162002z
-	        stdout.txt:
-	        stderr.txt:
-	subtask: 2
-	        exit code: 0
-	        node: tvm-1219235766_2-20161017t162002z
-	        stdout.txt:
-	        stderr.txt:
+    ---- Subtask information ----
+    subtask: 1
+            exit code: 0
+            node: tvm-1219235766_3-20161017t162002z
+            stdout.txt:
+            stderr.txt:
+    subtask: 2
+            exit code: 0
+            node: tvm-1219235766_2-20161017t162002z
+            stdout.txt:
+            stderr.txt:
 
-	Delete job? [yes] no: yes
-	Delete pool? [yes] no: yes
+    Delete job? [yes] no: yes
+    Delete pool? [yes] no: yes
 
-	Sample complete, hit ENTER to exit...
+    Sample complete, hit ENTER to exit...
 
 ## 后续步骤
 - Microsoft HPC 和 Azure 批处理团队博客讨论 [MPI support for Linux on Azure Batch][blog_mpi_linux]（Azure 批处理上针对 Linux 的 MPI 支持），并介绍如何将 [OpenFOAM][openfoam] 与批处理配合使用。可以查找适用于 [OpenFOAM example on GitHub][github_mpi]（GitHub 上的 OpenFOAM 示例）的 Python 代码示例。

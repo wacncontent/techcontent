@@ -3,7 +3,7 @@
 
 2. 单击“推送”选项卡，输入你在执行前一过程时从 GCM 获取的“API 密钥”值，然后单击“保存”。
 
-   	![](./media/mobile-services-android-configure-push/mobile-push-tab-android.png)
+       ![](./media/mobile-services-android-configure-push/mobile-push-tab-android.png)
 
     >[!NOTE] 在门户的“推送”选项卡中为增强型推送通知设置 GCM 凭据后，这些凭据将与通知中心共享，以使用你的应用程序配置通知中心。
 

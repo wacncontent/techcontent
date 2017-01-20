@@ -49,11 +49,11 @@ ms.author: jotaub;sethm
 
 1.	从 Visual Studio 中运行 **Receiver** 项目，然后等待它为所有分区启动接收方。
 
-	![][21]
+    ![][21]
 
 2.	运行 **Sender** 项目。
 
-	![][22]
+    ![][22]
 
 ## 后续步骤
 

@@ -43,30 +43,30 @@ Azure CLI 提供了一组开源且跨平台的命令，这些命令可以用于 
 3. 在命令行界面中，输入 `azure storage` 即可列出所有 Azure 存储服务命令，并初步了解 Azure CLI 提供的功能。你可以输入带 **-h** 参数的命令名称（例如，`azure storage share create -h`），了解命令语法的详细信息。
 4. 现在，我们将提供一个简单的脚本，演示用于访问 Azure 存储服务的基本 Azure CLI 命令。该脚本会首先要求你针对存储帐户和密钥设置两个变量。然后，该脚本将在此新存储帐户中创建新容器，并将现有图像文件 (Blob) 上载到该容器。脚本在列出该容器中的所有 Blob 后，就会将图像文件下载到本地计算机上的目标目录。
 
-		#!/bin/bash
-		# A simple Azure storage example
+        #!/bin/bash
+        # A simple Azure storage example
 
-		export AZURE_STORAGE_ACCOUNT=<storage_account_name>
-		export AZURE_STORAGE_ACCESS_KEY=<storage_account_key>
+        export AZURE_STORAGE_ACCOUNT=<storage_account_name>
+        export AZURE_STORAGE_ACCESS_KEY=<storage_account_key>
 
-		export container_name=<container_name>
-		export blob_name=<blob_name>
-		export image_to_upload=<image_to_upload>
-		export destination_folder=<destination_folder>
+        export container_name=<container_name>
+        export blob_name=<blob_name>
+        export image_to_upload=<image_to_upload>
+        export destination_folder=<destination_folder>
 
-		echo "Creating the container..."
-		azure storage container create $container_name
+        echo "Creating the container..."
+        azure storage container create $container_name
 
-		echo "Uploading the image..."
-		azure storage blob upload $image_to_upload $container_name $blob_name
+        echo "Uploading the image..."
+        azure storage blob upload $image_to_upload $container_name $blob_name
 
-		echo "Listing the blobs..."
-		azure storage blob list $container_name
+        echo "Listing the blobs..."
+        azure storage blob list $container_name
 
-		echo "Downloading the image..."
-		azure storage blob download $container_name $blob_name $destination_folder
+        echo "Downloading the image..."
+        azure storage blob download $container_name $blob_name $destination_folder
 
-		echo "Done"
+        echo "Done"
 
 5. 在本地计算机中，打开首选的文本编辑器（例如 vim）。在文本编辑器中输入上述脚本。
 6. 现在，你需要基于配置设置更新脚本变量。
@@ -182,11 +182,11 @@ Azure 文件共享是 Azure 中的 SMB 文件共享。所有目录和文件都�
 ### 复制文件
 从 Azure CLI 的 0.9.8 版开始，可以将一个文件复制到另一个文件，将一个文件复制到一个 Blob，或将一个 Blob 复制到一个文件。下面，我们演示如何使用 CLI 命令执行这些复制操作。若要将文件复制到新目录中：
 
-	azure storage file copy start --source-share srcshare --source-path srcdir/hello.txt --dest-share destshare --dest-path destdir/hellocopy.txt --connection-string $srcConnectionString --dest-connection-string $destConnectionString
+    azure storage file copy start --source-share srcshare --source-path srcdir/hello.txt --dest-share destshare --dest-path destdir/hellocopy.txt --connection-string $srcConnectionString --dest-connection-string $destConnectionString
 
 若要将 blob 复制到一个文件目录中：
 
-	azure storage file copy start --source-container srcctn --source-blob hello2.txt --dest-share hello --dest-path hellodir/hello2copy.txt --connection-string $srcConnectionString --dest-connection-string $destConnectionString
+    azure storage file copy start --source-container srcctn --source-blob hello2.txt --dest-share hello --dest-path hellodir/hello2copy.txt --connection-string $srcConnectionString --dest-connection-string $destConnectionString
 
 ## 后续步骤
 下面是一些相关的文章和资源，可以让你更多地了解 Azure 存储服务。

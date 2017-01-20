@@ -20,7 +20,7 @@ wacn.date: 01/04/2017
 
 - [事件中心](./event-hubs-overview.md)
 - [事件中心定价详细信息](https://www.azure.cn/pricing/details/event-hubs/)
-- [事件中心可用性和支持常见问题](./event-hubs-availability-and-support-faq.md)
+- [事件中心可用性和支持常见问题](./event-hubs-faq.md)
 - [事件寻源模式](http://msdn.microsoft.com/zh-cn/library/dn589792.aspx)
  
 ## 构建

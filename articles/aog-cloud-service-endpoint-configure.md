@@ -25,16 +25,16 @@ wacn.date: 08/31/2016
 
 - [新建虚拟机终结点设置](#newVM)
 - [在 Azure 经典管理门户管理终结点](#portal)
-	- [添加终结点](#portaladd)
-	- [编辑终结点](#portaledit)
-	- [删除终结点](#portaledit)
+    - [添加终结点](#portaladd)
+    - [编辑终结点](#portaledit)
+    - [删除终结点](#portaledit)
 - [在 Azure 经典管理门户管理 ACL](#acl)
 - [创建/配置负载均衡集](#balance)
 - [使用 PowerShell 设置终结点](#powershell)
-	- [获取终结点](#powershellget)
-	- [添加终结点](#powershelladd)
-	- [编辑终结点](#powershelledit)
-	- [删除终结点](#powershelledit)
+    - [获取终结点](#powershellget)
+    - [添加终结点](#powershelladd)
+    - [编辑终结点](#powershelledit)
+    - [删除终结点](#powershelledit)
 - [终结点在资源管理器（Azure Resource Manager）中的变化](#change)
 
 ## <a id="newVM"></a>新建虚拟机终结点设置
@@ -137,111 +137,111 @@ Azure 页面上会显示正在进行更新，大约半分钟后更新完成。
 
 PowerShell 连接 Azure 后，使用 Get-AzureVM 命令列出所有虚拟机，然后将需要设置终结点的虚拟机赋给变量 $vm。
 
-	PS C:\> Get-AzureVM
-	
-	ServiceName     Name            Status   
-	-----------     ----            ------   
-	endpoint-test1  endpoint-test1  ReadyRole
-	endpoint-test2  endpoint-test2  ReadyRole
-	endpoint-test2  endpoint-test3  ReadyRole
-	endpoint-test4  endpoint-test4  ReadyRole 
+    PS C:\> Get-AzureVM
+    
+    ServiceName     Name            Status   
+    -----------     ----            ------   
+    endpoint-test1  endpoint-test1  ReadyRole
+    endpoint-test2  endpoint-test2  ReadyRole
+    endpoint-test2  endpoint-test3  ReadyRole
+    endpoint-test4  endpoint-test4  ReadyRole 
 
-	PS C:\> $vm = Get-AzureVM -ServiceName endpoint-test4 -Name endpoint-test4
+    PS C:\> $vm = Get-AzureVM -ServiceName endpoint-test4 -Name endpoint-test4
 
 接下来，就可以使用 Get-AzureEndpoint 命令来列出该虚拟机的终结点信息了。
 
-	PS C:\> $vm | Get-AzureEndpoint
+    PS C:\> $vm | Get-AzureEndpoint
 
-	LBSetName                : 
-	LocalPort                : 22
-	Name                     : SSH
-	Port                     : 22
-	Protocol                 : tcp
-	Vip                      : 42.159.XXX.XX
-	ProbePath                : 
-	ProbePort                : 0
-	ProbeProtocol            : 
-	ProbeIntervalInSeconds   : 
-	ProbeTimeoutInSeconds    : 
-	EnableDirectServerReturn : False
-	Acl                      : {}
-	InternalLoadBalancerName : 
-	IdleTimeoutInMinutes     : 
-	LoadBalancerDistribution : 
-	VirtualIPName            : 
+    LBSetName                : 
+    LocalPort                : 22
+    Name                     : SSH
+    Port                     : 22
+    Protocol                 : tcp
+    Vip                      : 42.159.XXX.XX
+    ProbePath                : 
+    ProbePort                : 0
+    ProbeProtocol            : 
+    ProbeIntervalInSeconds   : 
+    ProbeTimeoutInSeconds    : 
+    EnableDirectServerReturn : False
+    Acl                      : {}
+    InternalLoadBalancerName : 
+    IdleTimeoutInMinutes     : 
+    LoadBalancerDistribution : 
+    VirtualIPName            : 
 
 Get-AzureEndpoint 命令的详细说明请参考[这篇文章（英文）](https://msdn.microsoft.com/zh-cn/library/azure/dn495158.aspx)
 
 ### <a id="powershelladd"></a>添加终结点
 
 首先用 Get-AzureVM 将需要添加终结点的虚拟机赋给变量 $vm。
-	
-	PS C:\> $vm = Get-AzureVM -ServiceName endpoint-test4 -Name endpoint-test4
+    
+    PS C:\> $vm = Get-AzureVM -ServiceName endpoint-test4 -Name endpoint-test4
 
 然后用 $vm | Get-AzureEndpoint 查看此虚拟机已配置的终结点。
 
-	PS C:\> $vm | Get-AzureEndpoint
-	
-	LBSetName                : 
-	LocalPort                : 22
-	Name                     : SSH
-	Port                     : 22
-	Protocol                 : tcp
-	Vip                      : 42.159.XXX.XX
-	ProbePath                : 
-	ProbePort                : 0
-	ProbeProtocol            : 
-	ProbeIntervalInSeconds   : 
-	ProbeTimeoutInSeconds    : 
-	EnableDirectServerReturn : False
-	Acl                      : {}
-	InternalLoadBalancerName : 
-	IdleTimeoutInMinutes     : 
-	LoadBalancerDistribution : 
-	VirtualIPName            :  
+    PS C:\> $vm | Get-AzureEndpoint
+    
+    LBSetName                : 
+    LocalPort                : 22
+    Name                     : SSH
+    Port                     : 22
+    Protocol                 : tcp
+    Vip                      : 42.159.XXX.XX
+    ProbePath                : 
+    ProbePort                : 0
+    ProbeProtocol            : 
+    ProbeIntervalInSeconds   : 
+    ProbeTimeoutInSeconds    : 
+    EnableDirectServerReturn : False
+    Acl                      : {}
+    InternalLoadBalancerName : 
+    IdleTimeoutInMinutes     : 
+    LoadBalancerDistribution : 
+    VirtualIPName            :  
 
 接下来，使用 Add-AzureEndpoint 命令添加新的终结点。这里添加的名为 FTP 的终结点，协议为 tcp，公共端口和私有端口都为 21。
 
-	PS C:\> $vm | Add-AzureEndpoint -Name FTP -Protocol tcp -LocalPort 21 -PublicPort 21
+    PS C:\> $vm | Add-AzureEndpoint -Name FTP -Protocol tcp -LocalPort 21 -PublicPort 21
 
-	DeploymentName                    : endpoint-test4
-	Name                              : endpoint-test4
-	Label                             : 
-	VM                                : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.PersistentVM
-	InstanceStatus                    : ReadyRole
-	IpAddress                         : 10.215.XXX.XX
-	InstanceStateDetails              : 
-	PowerState                        : Started
-	InstanceErrorCode                 : 
-	InstanceFaultDomain               : 0
-	InstanceName                      : endpoint-test4
-	InstanceUpgradeDomain             : 0
-	InstanceSize                      : Small
-	HostName                          : endpoint-test4
-	AvailabilitySetName               : 
-	DNSName                           : http://endpoint-test4.chinacloudapp.cn/
-	Status                            : ReadyRole
-	GuestAgentStatus                  : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
-	ResourceExtensionStatusList       : {}
-	PublicIPAddress                   : 
-	PublicIPName                      : 
-	PublicIPDomainNameLabel           : 
-	PublicIPFqdns                     : {}
-	NetworkInterfaces                 : {}
-	VirtualNetworkName                : 
-	RemoteAccessCertificateThumbprint : 2116e952034cb1f515de0dd03cxxxxxx
-	ServiceName                       : endpoint-test4
-	OperationDescription              : Get-AzureVM
-	OperationId                       : 812a9ebeb64f47628502f63c7axxxxxx
-	OperationStatus                   : OK
+    DeploymentName                    : endpoint-test4
+    Name                              : endpoint-test4
+    Label                             : 
+    VM                                : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.PersistentVM
+    InstanceStatus                    : ReadyRole
+    IpAddress                         : 10.215.XXX.XX
+    InstanceStateDetails              : 
+    PowerState                        : Started
+    InstanceErrorCode                 : 
+    InstanceFaultDomain               : 0
+    InstanceName                      : endpoint-test4
+    InstanceUpgradeDomain             : 0
+    InstanceSize                      : Small
+    HostName                          : endpoint-test4
+    AvailabilitySetName               : 
+    DNSName                           : http://endpoint-test4.chinacloudapp.cn/
+    Status                            : ReadyRole
+    GuestAgentStatus                  : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
+    ResourceExtensionStatusList       : {}
+    PublicIPAddress                   : 
+    PublicIPName                      : 
+    PublicIPDomainNameLabel           : 
+    PublicIPFqdns                     : {}
+    NetworkInterfaces                 : {}
+    VirtualNetworkName                : 
+    RemoteAccessCertificateThumbprint : 2116e952034cb1f515de0dd03cxxxxxx
+    ServiceName                       : endpoint-test4
+    OperationDescription              : Get-AzureVM
+    OperationId                       : 812a9ebeb64f47628502f63c7axxxxxx
+    OperationStatus                   : OK
 
 最后使用 Update-AzureVM 命令将终结点更新到 Azure 中。
 
-	PS C:\> $vm | Update-AzureVM
-	
-	OperationDescription OperationId                          OperationStatus
-	-------------------- -----------                          ---------------
-	Update-AzureVM       5ceaxxxx-xxxx-xxxx-xxxx-xxxxxxxxc132 Succeeded   
+    PS C:\> $vm | Update-AzureVM
+    
+    OperationDescription OperationId                          OperationStatus
+    -------------------- -----------                          ---------------
+    Update-AzureVM       5ceaxxxx-xxxx-xxxx-xxxx-xxxxxxxxc132 Succeeded   
 
 为了确认是否添加成功，可以再次使用 `$vm | Get-AzureEndpoint` 查看终结点。也可以在 Azure 经典管理门户中查看是否添加成功。
 
@@ -253,44 +253,44 @@ Add-AzureEndpoint 命令的参数和使用方法还有很多，例如前文提�
 
 编辑终结点主要使用 Set-AzureEndpoint 命令。下面的例子中，通过该命令，将前一步创建的 FTP 终结点的公共端口和私有端口都修改为 10021。编辑完成后使用 Update-AzureVM 命令将终结点更新到 Azure 中。
 
-	PS C:\> $vm | Set-AzureEndpoint -Name FTP -PublicPort 10021 -LocalPort 10021
-	
-	DeploymentName                    : endpoint-test4
-	Name                              : endpoint-test4
-	Label                             : 
-	VM                                : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.PersistentVM
-	InstanceStatus                    : ReadyRole
-	IpAddress                         : 10.215.xxx.xx
-	InstanceStateDetails              : 
-	PowerState                        : Started
-	InstanceErrorCode                 : 
-	InstanceFaultDomain               : 0
-	InstanceName                      : endpoint-test4
-	InstanceUpgradeDomain             : 0
-	InstanceSize                      : Small
-	HostName                          : endpoint-test4
-	AvailabilitySetName               : 
-	DNSName                           : http://endpoint-test4.chinacloudapp.cn/
-	Status                            : ReadyRole
-	GuestAgentStatus                  : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
-	ResourceExtensionStatusList       : {}
-	PublicIPAddress                   : 
-	PublicIPName                      : 
-	PublicIPDomainNameLabel           : 
-	PublicIPFqdns                     : {}
-	NetworkInterfaces                 : {}
-	VirtualNetworkName                : 
-	RemoteAccessCertificateThumbprint : 2116e952034cb1f515de0dd03cxxxxxx
-	ServiceName                       : endpoint-test4
-	OperationDescription              : Get-AzureVM
-	OperationId                       : 812a9ebeb64f47628502f63c7axxxxxx
-	OperationStatus                   : OK
+    PS C:\> $vm | Set-AzureEndpoint -Name FTP -PublicPort 10021 -LocalPort 10021
+    
+    DeploymentName                    : endpoint-test4
+    Name                              : endpoint-test4
+    Label                             : 
+    VM                                : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.PersistentVM
+    InstanceStatus                    : ReadyRole
+    IpAddress                         : 10.215.xxx.xx
+    InstanceStateDetails              : 
+    PowerState                        : Started
+    InstanceErrorCode                 : 
+    InstanceFaultDomain               : 0
+    InstanceName                      : endpoint-test4
+    InstanceUpgradeDomain             : 0
+    InstanceSize                      : Small
+    HostName                          : endpoint-test4
+    AvailabilitySetName               : 
+    DNSName                           : http://endpoint-test4.chinacloudapp.cn/
+    Status                            : ReadyRole
+    GuestAgentStatus                  : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
+    ResourceExtensionStatusList       : {}
+    PublicIPAddress                   : 
+    PublicIPName                      : 
+    PublicIPDomainNameLabel           : 
+    PublicIPFqdns                     : {}
+    NetworkInterfaces                 : {}
+    VirtualNetworkName                : 
+    RemoteAccessCertificateThumbprint : 2116e952034cb1f515de0dd03cxxxxxx
+    ServiceName                       : endpoint-test4
+    OperationDescription              : Get-AzureVM
+    OperationId                       : 812a9ebeb64f47628502f63c7axxxxxx
+    OperationStatus                   : OK
 
-	PS C:\> $vm | Update-AzureVM
-	
-	OperationDescription OperationId                          OperationStatus
-	-------------------- -----------                          ---------------
-	Update-AzureVM       8d72xxxx-xxxx-xxxx-xxxx-xxxxxxxx8c3b Succeeded 
+    PS C:\> $vm | Update-AzureVM
+    
+    OperationDescription OperationId                          OperationStatus
+    -------------------- -----------                          ---------------
+    Update-AzureVM       8d72xxxx-xxxx-xxxx-xxxx-xxxxxxxx8c3b Succeeded 
 
 Set-AzureEndpoint命令的详细说明请参考（英文）：[https://msdn.microsoft.com/zh-cn/library/azure/dn495219.aspx](https://msdn.microsoft.com/en-us/library/azure/dn495219.aspx)  
 
@@ -298,44 +298,44 @@ Set-AzureEndpoint命令的详细说明请参考（英文）：[https://msdn.micr
 
 删除终结点主要使用 Remove-AzureEndpoint 命令。其参数只需要终结点的名字即可。下面的例子删除了之前创建的终结点 FTP。删除完成后使用 Update-AzureVM 命令将终结点更新到 Azure 中。
 
-	PS C:\> $vm | Remove-AzureEndpoint -Name FTP
-	
-	DeploymentName                    : endpoint-test4
-	Name                              : endpoint-test4
-	Label                             : 
-	VM                                : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.PersistentVM
-	InstanceStatus                    : ReadyRole
-	IpAddress                         : 10.215.xxx.xx
-	InstanceStateDetails              : 
-	PowerState                        : Started
-	InstanceErrorCode                 : 
-	InstanceFaultDomain               : 0
-	InstanceName                      : endpoint-test4
-	InstanceUpgradeDomain             : 0
-	InstanceSize                      : Small
-	HostName                          : endpoint-test4
-	AvailabilitySetName               : 
-	DNSName                           : http://endpoint-test4.chinacloudapp.cn/
-	Status                            : ReadyRole
-	GuestAgentStatus                  : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
-	ResourceExtensionStatusList       : {}
-	PublicIPAddress                   : 
-	PublicIPName                      : 
-	PublicIPDomainNameLabel           : 
-	PublicIPFqdns                     : {}
-	NetworkInterfaces                 : {}
-	VirtualNetworkName                : 
-	RemoteAccessCertificateThumbprint : 2116e952034cb1f515de0dd03cxxxxxx
-	ServiceName                       : endpoint-test4
-	OperationDescription              : Get-AzureVM
-	OperationId                       : 812a9ebeb64f47628502f63c7axxxxxx
-	OperationStatus                   : OK
-	
-	PS C:\> $vm | Update-AzureVM
-	
-	OperationDescription OperationId                          OperationStatus
-	-------------------- -----------                          ---------------
-	Update-AzureVM       250f xxxx-xxxx-xxxx-xxxx-xxxxxxxx2bb2 Succeeded      
+    PS C:\> $vm | Remove-AzureEndpoint -Name FTP
+    
+    DeploymentName                    : endpoint-test4
+    Name                              : endpoint-test4
+    Label                             : 
+    VM                                : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.PersistentVM
+    InstanceStatus                    : ReadyRole
+    IpAddress                         : 10.215.xxx.xx
+    InstanceStateDetails              : 
+    PowerState                        : Started
+    InstanceErrorCode                 : 
+    InstanceFaultDomain               : 0
+    InstanceName                      : endpoint-test4
+    InstanceUpgradeDomain             : 0
+    InstanceSize                      : Small
+    HostName                          : endpoint-test4
+    AvailabilitySetName               : 
+    DNSName                           : http://endpoint-test4.chinacloudapp.cn/
+    Status                            : ReadyRole
+    GuestAgentStatus                  : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
+    ResourceExtensionStatusList       : {}
+    PublicIPAddress                   : 
+    PublicIPName                      : 
+    PublicIPDomainNameLabel           : 
+    PublicIPFqdns                     : {}
+    NetworkInterfaces                 : {}
+    VirtualNetworkName                : 
+    RemoteAccessCertificateThumbprint : 2116e952034cb1f515de0dd03cxxxxxx
+    ServiceName                       : endpoint-test4
+    OperationDescription              : Get-AzureVM
+    OperationId                       : 812a9ebeb64f47628502f63c7axxxxxx
+    OperationStatus                   : OK
+    
+    PS C:\> $vm | Update-AzureVM
+    
+    OperationDescription OperationId                          OperationStatus
+    -------------------- -----------                          ---------------
+    Update-AzureVM       250f xxxx-xxxx-xxxx-xxxx-xxxxxxxx2bb2 Succeeded      
 
 Remove-AzureEndpoint 命令的详细说明请参考[这篇文章（英文）](https://msdn.microsoft.com/zh-cn/library/mt589109.aspx)。
 

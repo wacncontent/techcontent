@@ -75,7 +75,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
           <Variable name="EMULATED">
             <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
           </Variable>
-    	  <Variable name="PYTHON2" value="off" />
+          <Variable name="PYTHON2" value="off" />
         </Environment>
       </Task>
     
@@ -84,7 +84,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
           <Variable name="EMULATED">
             <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
           </Variable>
-      	  <Variable name="PYTHON2" value="off" />
+            <Variable name="PYTHON2" value="off" />
         </Environment>
       </Task>
     
@@ -162,40 +162,40 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
     $nl = [Environment]::NewLine
     
     if (-not $is_emulated){
-	Write-Output "Checking if python is installed...$nl"
-    	if ($is_python2) {
-    		& "${env:SystemDrive}\Python27\python.exe"  -V | Out-Null
-    	}
-    	else {
-    		py -V | Out-Null
-    	}
+    Write-Output "Checking if python is installed...$nl"
+        if ($is_python2) {
+            & "${env:SystemDrive}\Python27\python.exe"  -V | Out-Null
+        }
+        else {
+            py -V | Out-Null
+        }
     
-    	if (-not $?) {
+        if (-not $?) {
     
-    		$url = "https://www.python.org/ftp/python/3.5.2/python-3.5.2-amd64.exe"
-    		$outFile = "${env:TEMP}\python-3.5.2-amd64.exe"
+            $url = "https://www.python.org/ftp/python/3.5.2/python-3.5.2-amd64.exe"
+            $outFile = "${env:TEMP}\python-3.5.2-amd64.exe"
     
-    		if ($is_python2) {
-    			$url = "https://www.python.org/ftp/python/2.7.12/python-2.7.12.amd64.msi"
-    			$outFile = "${env:TEMP}\python-2.7.12.amd64.msi"
-    		}
-    		
-		Write-Output "Not found, downloading $url to $outFile$nl"
-    		Invoke-WebRequest $url -OutFile $outFile
-		Write-Output "Installing$nl"
+            if ($is_python2) {
+                $url = "https://www.python.org/ftp/python/2.7.12/python-2.7.12.amd64.msi"
+                $outFile = "${env:TEMP}\python-2.7.12.amd64.msi"
+            }
+            
+        Write-Output "Not found, downloading $url to $outFile$nl"
+            Invoke-WebRequest $url -OutFile $outFile
+        Write-Output "Installing$nl"
     
-    		if ($is_python2) {
-    			Start-Process msiexec.exe -ArgumentList "/q", "/i", "$outFile", "ALLUSERS=1" -Wait
-    		}
-    		else {
-    			Start-Process "$outFile" -ArgumentList "/quiet", "InstallAllUsers=1" -Wait
-    		}
+            if ($is_python2) {
+                Start-Process msiexec.exe -ArgumentList "/q", "/i", "$outFile", "ALLUSERS=1" -Wait
+            }
+            else {
+                Start-Process "$outFile" -ArgumentList "/quiet", "InstallAllUsers=1" -Wait
+            }
     
-		Write-Output "Done$nl"
-    	}
-    	else {
-		Write-Output "Already installed"
-    	}
+        Write-Output "Done$nl"
+        }
+        else {
+        Write-Output "Already installed"
+        }
     }
 
 #### PipInstaller.ps1
@@ -207,22 +207,22 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
     $nl = [Environment]::NewLine
     
     if (-not $is_emulated){
-	Write-Output "Checking if requirements.txt exists$nl"
-    	if (Test-Path ..\requirements.txt) {
-		Write-Output "Found. Processing pip$nl"
+    Write-Output "Checking if requirements.txt exists$nl"
+        if (Test-Path ..\requirements.txt) {
+        Write-Output "Found. Processing pip$nl"
     
-    		if ($is_python2) {
-    			& "${env:SystemDrive}\Python27\python.exe" -m pip install -r ..\requirements.txt
-    		}
-    		else {
-    			py -m pip install -r ..\requirements.txt
-    		}
+            if ($is_python2) {
+                & "${env:SystemDrive}\Python27\python.exe" -m pip install -r ..\requirements.txt
+            }
+            else {
+                py -m pip install -r ..\requirements.txt
+            }
     
-		Write-Output "Done$nl"
-    	}
-    	else {
-		Write-Output "Not found$nl"
-    	}
+        Write-Output "Done$nl"
+        }
+        else {
+        Write-Output "Not found$nl"
+        }
     }
     
 #### 修改 LaunchWorker.ps1
@@ -239,31 +239,31 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
     
     if (-not $is_emulated)
     {
-	Write-Output "Running worker.py$nl"
+    Write-Output "Running worker.py$nl"
     
-    	if ($is_python2) {
-    		cd..
-    		iex "$env:PYPATH\python.exe worker.py"
-    	}
-    	else {
-    		cd..
-    		iex "py worker.py"
-    	}
+        if ($is_python2) {
+            cd..
+            iex "$env:PYPATH\python.exe worker.py"
+        }
+        else {
+            cd..
+            iex "py worker.py"
+        }
     }
     else
     {
-	Write-Output "Running (EMULATED) worker.py$nl"
+    Write-Output "Running (EMULATED) worker.py$nl"
     
-    	# Customize to your local dev environment
+        # Customize to your local dev environment
     
-    	if ($is_python2) {
-    		cd..
-    		iex "$env:PYPATH\python.exe worker.py"
-    	}
-    	else {
-    		cd..
-    		iex "py worker.py"
-    	}
+        if ($is_python2) {
+            cd..
+            iex "$env:PYPATH\python.exe worker.py"
+        }
+        else {
+            cd..
+            iex "py worker.py"
+        }
     }
 
 #### ps.cmd

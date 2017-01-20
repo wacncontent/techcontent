@@ -32,13 +32,13 @@ Azure 媒体服务是一个可扩展的基于云的平台，使开发人员能�
 
 - [媒体服务 REST API](https://docs.microsoft.com/zh-cn/rest/api/media/mediaservice)
 - 可用的客户端 SDK 之一：
-	- [适用于 .NET 的 Azure 媒体服务 SDK](https://github.com/Azure/azure-sdk-for-media-services)、
-	- [Azure SDK for Java](https://github.com/Azure/azure-sdk-for-java)，
-	- [Azure PHP SDK](https://github.com/Azure/azure-sdk-for-php)，
-	- [适用于 Node.js 的 Azure 媒体服务](https://github.com/michelle-becker/node-ams-sdk/blob/master/lib/request.js)（这是 Node.js SDK 的非 Microsoft 版本。它由社区维护，当前未包括所有的 AMS API）。
+    - [适用于 .NET 的 Azure 媒体服务 SDK](https://github.com/Azure/azure-sdk-for-media-services)、
+    - [Azure SDK for Java](https://github.com/Azure/azure-sdk-for-java)，
+    - [Azure PHP SDK](https://github.com/Azure/azure-sdk-for-php)，
+    - [适用于 Node.js 的 Azure 媒体服务](https://github.com/michelle-becker/node-ams-sdk/blob/master/lib/request.js)（这是 Node.js SDK 的非 Microsoft 版本。它由社区维护，当前未包括所有的 AMS API）。
 - 现有工具：
-	- [Azure 经典管理门户](http://manage.windowsazure.cn/) 
-	- [Azure-Media-Services-Explorer](https://github.com/Azure/Azure-Media-Services-Explorer)（Azure 媒体服务资源管理器 (AMSE) 是适用于 Windows 的 Winforms/C# 应用程序）
+    - [Azure 经典管理门户](http://manage.windowsazure.cn/) 
+    - [Azure-Media-Services-Explorer](https://github.com/Azure/Azure-Media-Services-Explorer)（Azure 媒体服务资源管理器 (AMSE) 是适用于 Windows 的 Winforms/C# 应用程序）
 
 针对媒体服务 OData 模型进行开发时，以下图像将显示某些最常用的对象。
 
@@ -56,7 +56,7 @@ Azure 媒体服务是一个可扩展的基于云的平台，使开发人员能�
 2. Azure 媒体服务帐户。使用 Azure 经典管理门户、.NET 或 REST API 创建 Azure 媒体服务帐户。有关详细信息，请参阅[创建帐户](./media-services-create-account.md)。
 3. （可选）设置开发环境。为开发环境选择“.NET”或“REST API”。有关详细信息，请参阅[设置环境](./media-services-dotnet-how-to-use.md)。
 
-	此外，请学习如何以编程方式进行[连接](./media-services-dotnet-connect-programmatically.md)。
+    此外，请学习如何以编程方式进行[连接](./media-services-dotnet-connect-programmatically.md)。
 4. （推荐）分配一个或多个缩放单位。建议为生产环境中的应用程序分配一个或多个缩放单位。有关详细信息，请参阅[管理流式处理终结点](./media-services-manage-origins.md)。
 
 ##概念和概述
@@ -74,20 +74,20 @@ Azure 媒体服务是一个可扩展的基于云的平台，使开发人员能�
 ###保护存储中的内容并以明文（非加密）形式交付流式处理媒体
 
 1. 将优质夹层文件上传到资产中。
-	
-	建议向资产应用存储加密选项，以便在内容上传期间和内容在存储中处于静态时，为其提供保护。
+    
+    建议向资产应用存储加密选项，以便在内容上传期间和内容在存储中处于静态时，为其提供保护。
  
 1. 编码为一组自适应比特率 MP4 文件。
 
-	建议向输出资产应用存储加密选项，以便保护静态内容。
-	
+    建议向输出资产应用存储加密选项，以便保护静态内容。
+    
 1. 配置资产传送策略（由动态打包使用）。
-	
-	如果资产已经过存储加密，则**必须**配置资产传送策略。
+    
+    如果资产已经过存储加密，则**必须**配置资产传送策略。
 
 1. 通过创建 OnDemand 定位符发布资产。
 
-	确保要从中以流形式传输内容的流式传输终结点上至少有一个串流保留单元。
+    确保要从中以流形式传输内容的流式传输终结点上至少有一个串流保留单元。
 
 1. 流式传输已发布的内容。
 
@@ -109,11 +109,11 @@ Azure 媒体服务是一个可扩展的基于云的平台，使开发人员能�
 
 1. 将优质夹层文件上传到资产中。
 2. 使用下述媒体分析服务之一来处理视频：
-	
-	- **Hyperlapse** – [Hyperlapse 媒体文件与 Azure Media Hyperlapse](./media-services-hyperlapse-content.md)
-	- **动作检测** – [Azure 媒体分析的动作检测](./media-services-motion-detection.md)。
-	- **面部检测和面部情绪** – [Azure 媒体分析的面部和情绪检测](./media-services-face-and-emotion-detection.md)。
-	- **视频摘要** – [使用 Azure 媒体视频缩略图创建视频摘要](./media-services-video-summarization.md)
+    
+    - **Hyperlapse** – [Hyperlapse 媒体文件与 Azure Media Hyperlapse](./media-services-hyperlapse-content.md)
+    - **动作检测** – [Azure 媒体分析的动作检测](./media-services-motion-detection.md)。
+    - **面部检测和面部情绪** – [Azure 媒体分析的面部和情绪检测](./media-services-face-and-emotion-detection.md)。
+    - **视频摘要** – [使用 Azure 媒体视频缩略图创建视频摘要](./media-services-video-summarization.md)
 3. 媒体分析媒体处理器会生成 MP4 文件或 JSON 文件。如果媒体处理器生成了 MP4 文件，可采用渐进方式下载该文件。如果媒体处理器生成了 JSON 文件，可从 Azure Blob 存储下载该文件。
 
 ### 提供渐进式下载
@@ -121,9 +121,9 @@ Azure 媒体服务是一个可扩展的基于云的平台，使开发人员能�
 1. 编码为单个 MP4 文件。
 1. 通过创建 OnDemand 或 SAS 定位符来发布资产。
 
-	如果使用 OnDemand 定位符，请确保要从中以渐进方式下载内容的流式处理终结点上至少有一个串流保留单元。
+    如果使用 OnDemand 定位符，请确保要从中以渐进方式下载内容的流式处理终结点上至少有一个串流保留单元。
 
-	如果使用 SAS 定位符，可从 Azure blob 存储中下载内容。在这种情况下，不需要串流保留单元。
+    如果使用 SAS 定位符，可从 Azure blob 存储中下载内容。在这种情况下，不需要串流保留单元。
   
 1. 渐进式下载内容。
 
@@ -203,7 +203,7 @@ Azure 媒体服务提供所需的工具，以便创建适用于大多数平台�
 - 对于内容保护，我们保证将在至少 99.9% 的时间成功满足密钥请求。
 - 对于索引器，我们将使用编码保留单元在 99.9% 的时间成功处理索引器任务请求。
 
-	有关详细信息，请参阅 [Azure SLA](https://www.azure.cn/support/legal/sla/)。
+    有关详细信息，请参阅 [Azure SLA](https://www.azure.cn/support/legal/sla/)。
 
 <!-- Images -->
 

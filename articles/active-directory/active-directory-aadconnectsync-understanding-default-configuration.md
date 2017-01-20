@@ -190,15 +190,15 @@ SRE 是一个资源套件工具，将随 Azure AD Connect 同步一起安装。�
 
 表达式语言是 VBA (Visual Basic for Applications)，因此具有 Microsoft Office 或 VBScript 经验的用户认识该格式。属性将括在方括号内，如 [attributeName]。属性名称和函数名称是区分大小写的，但同步规则编辑器将对表达式求值并在表达式无效时提供警告。所有表达式都使用嵌套函数表示在一行上。为了显示配置语言的强大功能，下面给出了 pwdLastSet 流的示例，但插入了附加注释：
 
-	// If-then-else
-	IIF(
-	// (The evaluation for IIF) Is the attribute pwdLastSet present in AD?
-	IsPresent([pwdLastSet]),
-	// (The True part of IIF) If it is, then from right to left, convert the AD time format to a .Net datetime, change it to the time format used by Azure AD, and finally convert it to a string.
-	CStr(FormatDateTime(DateFromNum([pwdLastSet]),"yyyyMMddHHmmss.0Z")),
-	// (The False part of IIF) Nothing to contribute
-	NULL
-	)
+    // If-then-else
+    IIF(
+    // (The evaluation for IIF) Is the attribute pwdLastSet present in AD?
+    IsPresent([pwdLastSet]),
+    // (The True part of IIF) If it is, then from right to left, convert the AD time format to a .Net datetime, change it to the time format used by Azure AD, and finally convert it to a string.
+    CStr(FormatDateTime(DateFromNum([pwdLastSet]),"yyyyMMddHHmmss.0Z")),
+    // (The False part of IIF) Nothing to contribute
+    NULL
+    )
 
 有关属性流表达式语言的详细信息，请参阅 [Understanding Declarative Provisioning Expressions](./active-directory-aadconnectsync-understanding-declarative-provisioning-expressions.md)（了解声明性预配表达式）。
 

@@ -34,18 +34,18 @@ MySQL Database on Azure currently has the following limitations. If you have any
 5.	Users do not have file permissions. [Find out more about MySQL 5.5 user permissions](https://dev.mysql.com/doc/refman/5.5/en/privileges-provided.html).
 6.	The MySQL built-in system table does not support write permissions, and read/write permissions are currently not supported for the following tables:
 
-	* columns_priv
-	* db
-	* general_log
-	* host
-	* ndb_binlog_index
-	* plugin
-	* procs_priv
-	* servers
-	* slow_log
-	* tables_priv
-	* user
-	* proxies_priv
+    * columns_priv
+    * db
+    * general_log
+    * host
+    * ndb_binlog_index
+    * plugin
+    * procs_priv
+    * servers
+    * slow_log
+    * tables_priv
+    * user
+    * proxies_priv
 
 7.	Data replication currently supports only data syncing between local and cloud servers, a feature that makes it easier for users to build hybrid cloud scenarios.
 8.	The MyISAM storage engine is currently not supported.

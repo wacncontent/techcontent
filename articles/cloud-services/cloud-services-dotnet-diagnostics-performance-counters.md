@@ -191,32 +191,32 @@ Azure 诊断代理会在启动后一分钟刷新 .wadcfg 文件中的性能计�
 5. 保存文件。
 6. 先使用角色的 OnStart 方法创建自定义性能计数器类别，然后再调用 base.OnStart。以下 C# 示例创建自定义类别（如果尚不存在）：
 
-	    public override bool OnStart()
-	    {
-	    if (!PerformanceCounterCategory.Exists("MyCustomCounterCategory"))
-	    {
-	       CounterCreationDataCollection counterCollection = new CounterCreationDataCollection();
-	
-	       // add a counter tracking user button1 clicks
-	       CounterCreationData operationTotal1 = new CounterCreationData();
-	       operationTotal1.CounterName = "MyButton1Counter";
-	       operationTotal1.CounterHelp = "My Custom Counter for Button1";
-	       operationTotal1.CounterType = PerformanceCounterType.NumberOfItems32;
-	       counterCollection.Add(operationTotal1);
-	
-	       PerformanceCounterCategory.Create(
-	         "MyCustomCounterCategory",
-	         "My Custom Counter Category",
-	         PerformanceCounterCategoryType.SingleInstance, counterCollection);
-	
-	       Trace.WriteLine("Custom counter category created.");
-	    }
-	    else{
-	       Trace.WriteLine("Custom counter category already exists.");
-	    }
-	
-	    return base.OnStart();
-	    }
+        public override bool OnStart()
+        {
+        if (!PerformanceCounterCategory.Exists("MyCustomCounterCategory"))
+        {
+           CounterCreationDataCollection counterCollection = new CounterCreationDataCollection();
+    
+           // add a counter tracking user button1 clicks
+           CounterCreationData operationTotal1 = new CounterCreationData();
+           operationTotal1.CounterName = "MyButton1Counter";
+           operationTotal1.CounterHelp = "My Custom Counter for Button1";
+           operationTotal1.CounterType = PerformanceCounterType.NumberOfItems32;
+           counterCollection.Add(operationTotal1);
+    
+           PerformanceCounterCategory.Create(
+             "MyCustomCounterCategory",
+             "My Custom Counter Category",
+             PerformanceCounterCategoryType.SingleInstance, counterCollection);
+    
+           Trace.WriteLine("Custom counter category created.");
+        }
+        else{
+           Trace.WriteLine("Custom counter category already exists.");
+        }
+    
+        return base.OnStart();
+        }
 
 7. 更新应用程序中的计数器。下例更新 Button1\_Click 事件的自定义性能计数器：
 

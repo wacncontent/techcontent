@@ -45,15 +45,15 @@ ms.author: jgao
 
 - **已安装和配置 Azure PowerShell 的工作站**。
 
-	运行 PowerShell 脚本前，确保已使用以下 cmdlet 连接到 Azure 订阅：
+    运行 PowerShell 脚本前，确保已使用以下 cmdlet 连接到 Azure 订阅：
 
-		Add-AzureAccount -Environment AzureChinaCloud
+        Add-AzureAccount -Environment AzureChinaCloud
 
-	如果有多个 Azure 订阅，请使用以下 cmdlet 设置当前订阅：
+    如果有多个 Azure 订阅，请使用以下 cmdlet 设置当前订阅：
 
-		Select-AzureSubscription <AzureSubscriptionName>
+        Select-AzureSubscription <AzureSubscriptionName>
 
-	[!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+    [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 - **建立了 VPN 连接的两个 Azure 虚拟网络**。有关说明，请参阅 [在两个 Azure 虚拟网络之间配置 VPN 连接][hdinsight-hbase-replication-vnet]。
 
@@ -66,36 +66,36 @@ ms.author: jgao
 1.	单击“新建”>“计算”>“虚拟机”>“从库中”。
 2.	选择“Windows Server 2012 R2 Datacenter”。
 3.	输入：
-	- **虚拟机名称**：Contoso-DNS-CN
-	- **新用户名**： 
-	- **新密码**： 
+    - **虚拟机名称**：Contoso-DNS-CN
+    - **新用户名**： 
+    - **新密码**： 
 4.	输入：
-	- **云服务**：创建新云服务
-	- **区域/地缘组/虚拟网络**：（选择 Contoso-VNet-CN）
-	- **虚拟网络子网**：Subnet-1
-	- **存储帐户**：使用自动生成的存储帐户
-	
-		云服务名称与虚拟机名称相同。本例中为 Contoso-DNS-CN。对于后续虚拟机，可以选择使用同一个云服务。同一个云服务下的所有虚拟机共享同一个虚拟网络和域后缀。
+    - **云服务**：创建新云服务
+    - **区域/地缘组/虚拟网络**：（选择 Contoso-VNet-CN）
+    - **虚拟网络子网**：Subnet-1
+    - **存储帐户**：使用自动生成的存储帐户
+    
+        云服务名称与虚拟机名称相同。本例中为 Contoso-DNS-CN。对于后续虚拟机，可以选择使用同一个云服务。同一个云服务下的所有虚拟机共享同一个虚拟网络和域后缀。
 
-		存储帐户用于存储虚拟机映像文件。 
-	- **终结点**：（向下滚动并选择“DNS”） 
+        存储帐户用于存储虚拟机映像文件。 
+    - **终结点**：（向下滚动并选择“DNS”） 
 
 创建虚拟机后，找出内部 IP 和外部 IP。
 
 1.	单击虚拟机名称 **Contoso-DNS-CN**。
 2.	单击“仪表板”。
 3.	记下：
-	- 公用虚拟 IP 地址
-	- 内部 IP 地址
+    - 公用虚拟 IP 地址
+    - 内部 IP 地址
 
 **在 Contoso-VNet-CE 中创建名为 Contoso-DNS-CE 的虚拟机**
 
 - 重复相同的过程，使用以下值创建虚拟机：
-	- 虚拟机名称：Contoso-DNS-CE
-	- 区域/地缘组/虚拟网络：选择 Contoso-VNET-CE
-	- 虚拟网络子网：Subnet-1
-	- 存储帐户：使用自动生成的存储帐户
-	- 终结点：（选择 DNS）
+    - 虚拟机名称：Contoso-DNS-CE
+    - 区域/地缘组/虚拟网络：选择 Contoso-VNET-CE
+    - 虚拟网络子网：Subnet-1
+    - 存储帐户：使用自动生成的存储帐户
+    - 终结点：（选择 DNS）
 
 ##设置两个虚拟机的静态 IP 地址
 
@@ -106,16 +106,16 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 1. 打开 Windows PowerShell ISE。
 2. 运行以下 cmdlet：  
 
-		Add-AzureAccount -Environment AzureChinaCloud
-		
-		Select-AzureSubscription [YourAzureSubscriptionName]
-		
-		Get-AzureVM -ServiceName Contoso-DNS-CN -Name Contoso-DNS-CN | Set-AzureStaticVNetIP -IPAddress 10.1.0.4 | Update-AzureVM
-		Get-AzureVM -ServiceName Contoso-DNS-CE -Name Contoso-DNS-CE | Set-AzureStaticVNetIP -IPAddress 10.2.0.4 | Update-AzureVM 
+        Add-AzureAccount -Environment AzureChinaCloud
+        
+        Select-AzureSubscription [YourAzureSubscriptionName]
+        
+        Get-AzureVM -ServiceName Contoso-DNS-CN -Name Contoso-DNS-CN | Set-AzureStaticVNetIP -IPAddress 10.1.0.4 | Update-AzureVM
+        Get-AzureVM -ServiceName Contoso-DNS-CE -Name Contoso-DNS-CE | Set-AzureStaticVNetIP -IPAddress 10.2.0.4 | Update-AzureVM 
 
-	ServiceName 是云服务名称。由于 DNS 服务器是云服务的第一个虚拟机，因此云服务名称与虚拟机名称相同。
+    ServiceName 是云服务名称。由于 DNS 服务器是云服务的第一个虚拟机，因此云服务名称与虚拟机名称相同。
 
-	可能需要更新 ServiceName 和名称，以匹配你使用的名称。
+    可能需要更新 ServiceName 和名称，以匹配你使用的名称。
 
 ##添加两个虚拟机的 DNS 服务器角色
 
@@ -145,12 +145,12 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 
 1.	在 Azure 经典管理门户中，依次单击“新建”、“网络服务”、“虚拟网络”、“注册 DNS 服务器”。
 2.	输入：
-	- **名称**：Contoso-DNS-CN
-	- **DNS 服务器 IP 地址**：10.1.0.4 – IP 地址必须匹配 DNS 服务器虚拟机的 IP 地址。
-	 
+    - **名称**：Contoso-DNS-CN
+    - **DNS 服务器 IP 地址**：10.1.0.4 – IP 地址必须匹配 DNS 服务器虚拟机的 IP 地址。
+     
 3.	重复该过程，使用以下设置注册 Contoso-DNS-CE：
-	- **名称**：Contoso-DNS-CE
-	- **DNS 服务器 IP 地址**：10.2.0.4
+    - **名称**：Contoso-DNS-CE
+    - **DNS 服务器 IP 地址**：10.2.0.4
 
 **将两个 DNS 服务器分配到两个虚拟网络**
 
@@ -192,12 +192,12 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 3.	单击“DNS”。
 4.	在左窗格中，依次展开“DSN”、“Contoso-DNS-CN”。
 5.	输入以下信息：
-	- **DNS 域**：输入 Contoso-DNS-CN 的 DNS 后缀。例如：Contoso-DNS-CE.b5.internal.chinacloudapp.cn。
-	- **主服务器的 IP 地址**：输入 10.2.0.4，这是 Contoso-DNS-CE 的 IP 地址。
+    - **DNS 域**：输入 Contoso-DNS-CN 的 DNS 后缀。例如：Contoso-DNS-CE.b5.internal.chinacloudapp.cn。
+    - **主服务器的 IP 地址**：输入 10.2.0.4，这是 Contoso-DNS-CE 的 IP 地址。
 6.	按 **ENTER**，然后单击“确定”。现在，可以从 Contoso-DNS-CN 解析 Contoso-DNS-CE 的 IP 地址。
 7.	重复上述步骤，以使用以下值将 DNS 转发器添加到 Contoso-DNS-CE 虚拟机上的 DNS 服务：
-	- **DNS 域**：输入 Contoso-DNS-CN 的 DNS 后缀。 
-	- **主服务器的 IP 地址**：输入 10.2.0.4，这是 Contoso-DNS-CN 的 IP 地址。
+    - **DNS 域**：输入 Contoso-DNS-CN 的 DNS 后缀。 
+    - **主服务器的 IP 地址**：输入 10.2.0.4，这是 Contoso-DNS-CN 的 IP 地址。
 
 ##跨虚拟网络测试名称解析
 

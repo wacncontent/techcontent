@@ -39,7 +39,7 @@ ms.author: larryfr
 
 * Microsoft Excel 2013
 
-	> [!NOTE]Microsoft Excel 用于通过 [Power View](https://support.office.com/Article/Power-View-Explore-visualize-and-present-your-data-98268d31-97e2-42aa-a52b-a68cf460472e?ui=zh-CN&rs=zh-CN&ad=US) 实现数据可视化。
+    > [!NOTE]Microsoft Excel 用于通过 [Power View](https://support.office.com/Article/Power-View-Explore-visualize-and-present-your-data-98268d31-97e2-42aa-a52b-a68cf460472e?ui=zh-CN&rs=zh-CN&ad=US) 实现数据可视化。
 
 * [Microsoft Hive ODBC 驱动程序](http://www.microsoft.com/download/details.aspx?id=40886)
 
@@ -47,9 +47,9 @@ ms.author: larryfr
 
 1. 通过 Web 浏览器导航到以下 URL。将 `<clustername>` 替换为 HDInsight 群集的名称。
 
-	 	https://<clustername>.azurehdinsight.cn
+         https://<clustername>.azurehdinsight.cn
 
-	出现提示时，可以通过使用设置此群集时所用的管理员用户名和密码进行身份验证。
+    出现提示时，可以通过使用设置此群集时所用的管理员用户名和密码进行身份验证。
 
 2. 在打开的网页中，单击“入门库”选项卡，然后在“使用示例数据的解决方案”类别下方，单击“传感器数据分析”示例。
 

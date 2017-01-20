@@ -42,7 +42,7 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 * 在 **QSTodoService.m** 中，请注意成员 `syncTable` 的类型是 `MSSyncTable`。脱机同步使用此类型而不是 `MSTable`。使用同步表时，所有操作将会转到本地存储，而且只会与具有显式推送和提取操作的远程服务同步。
 
 ```
-		@property (nonatomic, strong)   MSSyncTable *syncTable;
+        @property (nonatomic, strong)   MSSyncTable *syncTable;
 ```
 
 若要获取对同步表的引用，请使用 `syncTableWithName` 方法。若要删除脱机同步功能，请改用 `tableWithName`。
@@ -50,8 +50,8 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 * 在 **QSTodoService.m** 中，执行表操作之前，本地存储将在 `QSTodoService.init` 中初始化：
 
 ```
-		MSCoreDataStore *store = [[MSCoreDataStore alloc] initWithManagedObjectContext:context];
-		self.client.syncContext = [[MSSyncContext alloc] initWithDelegate:nil dataSource:store callback:nil];
+        MSCoreDataStore *store = [[MSCoreDataStore alloc] initWithManagedObjectContext:context];
+        self.client.syncContext = [[MSSyncContext alloc] initWithDelegate:nil dataSource:store callback:nil];
 ```
 
 这会使用 `MSCoreDataStore` 接口创建本地存储。你可以通过实现 `MSSyncContextDataSource` 协议来提供不同的本地存储。
@@ -209,9 +209,9 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
 为了与服务器同步本地存储，你使用了 `MSSyncTable.pullWithQuery` 和 `MSClient.syncContext.pushWithCompletion`：
 
-		* 为了将更改推送到服务器，你调用了 `pushWithCompletion`。此方法在 `MSSyncContext` 中而不是在同步表中，因为它将在所有表上推送更改。只有以某种方式在本地修改（通过 CUD 操作）的记录才会发送到服务器。
+        * 为了将更改推送到服务器，你调用了 `pushWithCompletion`。此方法在 `MSSyncContext` 中而不是在同步表中，因为它将在所有表上推送更改。只有以某种方式在本地修改（通过 CUD 操作）的记录才会发送到服务器。
 
-		* 为了将数据从服务器上的表拉取到应用，你调用了 `MSSyncTable.pullWithQuery`。拉取时始终先发出推送操作。这是为了确保本地存储中的所有表以及关系都保持一致。可以通过自定义 `query` 参数，使用 `pullWithQuery` 筛选客户端上存储的数据。
+        * 为了将数据从服务器上的表拉取到应用，你调用了 `MSSyncTable.pullWithQuery`。拉取时始终先发出推送操作。这是为了确保本地存储中的所有表以及关系都保持一致。可以通过自定义 `query` 参数，使用 `pullWithQuery` 筛选客户端上存储的数据。
 
 ##  后续步骤
 

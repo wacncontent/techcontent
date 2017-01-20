@@ -205,7 +205,7 @@ CPU 使用率高可能意味着，客户端可能无法及时处理 Redis 发出
 
 StackExchange.Redis 使用名为 `synctimeout` 的配置设置进行同步操作，该设置的默认值为 1000 毫秒。如果同步调用未在规定时间内完成，StackExchange.Redis 客户端会引发类似于以下示例的超时错误。
 
-	System.TimeoutException: Timeout performing MGET 2728cc84-58ae-406b-8ec8-3f962419f641, inst: 1,mgr: Inactive, queue: 73, qu=6, qs=67, qc=0, wr=1/1, in=0/0 IOCP: (Busy=6, Free=999, Min=2,Max=1000), WORKER (Busy=7,Free=8184,Min=2,Max=8191)
+    System.TimeoutException: Timeout performing MGET 2728cc84-58ae-406b-8ec8-3f962419f641, inst: 1,mgr: Inactive, queue: 73, qu=6, qs=67, qc=0, wr=1/1, in=0/0 IOCP: (Busy=6, Free=999, Min=2,Max=1000), WORKER (Busy=7,Free=8184,Min=2,Max=8191)
 
 此错误消息中包含的指标可以为你指出问题的原因和可能的解决方法。下表包含有关错误消息指标的详细信息。
 
@@ -224,19 +224,19 @@ StackExchange.Redis 使用名为 `synctimeout` 的配置设置进行同步操作
 
 1. 请确保你在使用 StackExchange.Redis 客户端时，按照以下模式进行连接，这是一种最佳做法。
 
-	    private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
-	    {
-	        return ConnectionMultiplexer.Connect("cachename.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
-	
-	    });
-	
-	    public static ConnectionMultiplexer Connection
-	    {
-	        get
-	        {
-	            return lazyConnection.Value;
-	        }
-	    }
+        private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
+        {
+            return ConnectionMultiplexer.Connect("cachename.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
+    
+        });
+    
+        public static ConnectionMultiplexer Connection
+        {
+            get
+            {
+                return lazyConnection.Value;
+            }
+        }
 
     有关详细信息，请参阅 [Connect to the cache using StackExchange.Redis](./cache-dotnet-how-to-use-azure-redis-cache.md#connect-to-the-cache)（使用 StackExchange.Redis 连接到缓存）。
 
@@ -251,8 +251,8 @@ StackExchange.Redis 使用名为 `synctimeout` 的配置设置进行同步操作
 4. 如果请求受服务器或客户端上的带宽限制的约束，则需要更长时间才能完成，因此会导致超时。若要了解超时是否是服务器上的网络带宽造成的，请参阅[超出服务器端带宽](#server-side-bandwidth-exceeded)。若要了解超时是否是客户端网络带宽造成的，请参阅[超出客户端带宽](#client-side-bandwidth-exceeded)。
 
 6. 你的操作是否占用了服务器或客户端上的大量 CPU？
-	-	看看你的操作是否占用了客户端上的大量 CPU，如果是的话，则可能会导致请求无法在 `synctimeout` 时间间隔内得到处理，从而导致超时。改用更大型客户端或者将负载分散也许有助于控制这种情况。
-	-	看看你的操作是否占用了服务器上的大量 CPU，方法是监视 `CPU` [缓存性能指标](./cache-how-to-monitor.md#available-metrics-and-reporting-intervals)。如果请求传入时 Redis 处于 CPU 被大量占用的情况，则可能会导致这些请求超时。为了解决此问题，你可以将负载分散到高级缓存的多个分片中，也可以升级缓存大小或定价层。有关详细信息，请参阅 [Server Side Bandwidth Exceeded](#server-side-bandwidth-exceeded)（超出服务器端带宽）。
+    -	看看你的操作是否占用了客户端上的大量 CPU，如果是的话，则可能会导致请求无法在 `synctimeout` 时间间隔内得到处理，从而导致超时。改用更大型客户端或者将负载分散也许有助于控制这种情况。
+    -	看看你的操作是否占用了服务器上的大量 CPU，方法是监视 `CPU` [缓存性能指标](./cache-how-to-monitor.md#available-metrics-and-reporting-intervals)。如果请求传入时 Redis 处于 CPU 被大量占用的情况，则可能会导致这些请求超时。为了解决此问题，你可以将负载分散到高级缓存的多个分片中，也可以升级缓存大小或定价层。有关详细信息，请参阅 [Server Side Bandwidth Exceeded](#server-side-bandwidth-exceeded)（超出服务器端带宽）。
 
 7. 是否存在需要在服务器上进行长时间处理的命令？ 长时间运行的命令需要在 Redis 服务器上进行长时间的处理，可能会导致超时。下面是长时间运行的命令的一些示例：密钥数量很大的 `mget`、`keys *` 或编写质量差的 lua 脚本。可以使用 redis-cli 客户端或 [Redis 控制台](./cache-configure.md#redis-console)连接到 Azure Redis 缓存实例，然后运行 [SlowLog](http://redis.io/commands/slowlog) 命令，看是否有请求的处理时间超出正常。Redis 服务器和 StackExchange.Redis 适合处理多个小型请求，而不适合处理寥寥数个大型请求。将数据拆分成更小的块可能会解决问题。
 
@@ -266,18 +266,18 @@ StackExchange.Redis 使用名为 `synctimeout` 的配置设置进行同步操作
 
 11. 如果你使用的是 `RedisSessionStateprovider`，请确保你已经正确设置了重试超时。`retrytimeoutInMilliseconds` 应高于 `operationTimeoutinMilliseonds`，否则不会进行重试。在下面的示例中，`retrytimeoutInMilliseconds` 设置为 3000。有关详细信息，请参阅 [Azure Redis 缓存的 ASP.NET 会话状态提供程序](./cache-aspnet-session-state-provider.md)和 [How to use the configuration parameters of Session State Provider and Output Cache Provider](https://github.com/Azure/aspnet-redis-providers/wiki/Configuration)（如何使用会话状态提供程序和输出缓存提供程序的配置参数）。
 
-		<add
-		name="AFRedisCacheSessionStateProvider"
-		type="Microsoft.Web.Redis.RedisSessionStateProvider"
-		host="enbwcache.redis.cache.chinacloudapi.cn"
-		port="6380"
-		accessKey="…"
-		ssl="true"
-		databaseId="0"
-		applicationName="AFRedisCacheSessionState"
-		connectionTimeoutInMilliseconds = "5000"
-		operationTimeoutInMilliseconds = "1000"
-		retryTimeoutInMilliseconds="3000" />
+        <add
+        name="AFRedisCacheSessionStateProvider"
+        type="Microsoft.Web.Redis.RedisSessionStateProvider"
+        host="enbwcache.redis.cache.chinacloudapi.cn"
+        port="6380"
+        accessKey="…"
+        ssl="true"
+        databaseId="0"
+        applicationName="AFRedisCacheSessionState"
+        connectionTimeoutInMilliseconds = "5000"
+        operationTimeoutInMilliseconds = "1000"
+        retryTimeoutInMilliseconds="3000" />
 
 12. 通过[监视](./cache-how-to-monitor.md#available-metrics-and-reporting-intervals) `Used Memory RSS` 和 `Used Memory`，了解 Azure Redis 缓存服务器上的内存使用情况。如果实施了逐出策略，则当 `Used_Memory` 达到缓存大小时，Redis 就会开始逐出密钥。理想情况下，`Used memory` 应只稍高于 `Used Memory RSS`。差异过大意味着会出现内存碎片（内部或外部）。如果 `Used Memory RSS` 小于 `Used Memory`，则意味着部分缓存内存已被操作系统更换。如果发生这种情况，则会出现明显的延迟。由于 Redis 无法控制如何将其分配内容映射到内存页，`Used Memory RSS` 过高通常是由于内存使用剧增的缘故。当 Redis 释放内存以后，内存会送回给分配器，而分配器不一定会将内存送回给系统。`Used Memory` 值与操作系统所报告的内存消耗量可能存在差异。这可能是因为内存由 Redis 使用并释放后，并未送回给系统。为了减少内存问题，可执行以下步骤。
     -	通过升级提高缓存大小，消除系统的内存限制。

@@ -33,9 +33,9 @@ Azure 中一个常见的任务就是将虚拟机从一个存储账号转移到�
 
 或者使用 Azure PowerShell cmdlet 来完成相同的操作：
 
-	$servicename = "KenazTestService"
-	$vmname = "TestVM1"
-	Get-AzureVM -ServiceName $servicename -Name $vmname | Stop-AzureVM
+    $servicename = "KenazTestService"
+    $vmname = "TestVM1"
+    Get-AzureVM -ServiceName $servicename -Name $vmname | Stop-AzureVM
 
 当您进行复制操作时，一个必要的步骤是关闭虚拟机以保证文件系统的一致性。Azure 目前还不支持虚拟机的实时转移。该操作意味着您在将一个专用的 VM 从一个区域转移到另一个 。如果您想要通过一个通用的映像创建 VM ，在虚拟机停止之前使用系统准备工具（sys-prep）对映像进行一般化处理。 
 
@@ -50,40 +50,40 @@ Azure 存储服务提供了将 Blob 从一个存储账户移动到另一个的�
 
 >注意：在位于不同区域的存储账户之间复制 blob 时，根据该 blob 的大小会出现花费一个小时或更长的时间的情况。执行该操作最便捷的方式是通过 Azure PowerShell： 
 
-	Select-AzureSubscription "kenazsubscription" 
-	
-	# VHD blob to copy #
-	$blobName = "KenazTestService-TestVM1-2014-8-26-15-1-55-658-0.vhd" 
-	
-	# Source Storage Account Information #
-	$sourceStorageAccountName = "kenazsa"
-	$sourceKey = "MySourceStorageAccountKey"
-	$sourceContext = New-AzureStorageContext –StorageAccountName $sourceStorageAccountName -StorageAccountKey $sourceKey  
-	$sourceContainer = "vhds"
-	
-	# Destination Storage Account Information #
-	$destinationStorageAccountName = "kenazdestinationsa"
-	$destinationKey = "MyDestinationStorageAccountKey"
-	$destinationContext = New-AzureStorageContext –StorageAccountName $destinationStorageAccountName -StorageAccountKey $destinationKey  
-	
-	# Create the destination container #
-	$destinationContainerName = "destinationvhds"
-	New-AzureStorageContainer -Name $destinationContainerName -Context $destinationContext 
-	
-	# Copy the blob # 
-	$blobCopy = Start-AzureStorageBlobCopy -DestContainer $destinationContainerName `
-	                        -DestContext $destinationContext `
-	                        -SrcBlob $blobName `
-	                        -Context $sourceContext `
-	                        -SrcContainer $sourceContainer
+    Select-AzureSubscription "kenazsubscription" 
+    
+    # VHD blob to copy #
+    $blobName = "KenazTestService-TestVM1-2014-8-26-15-1-55-658-0.vhd" 
+    
+    # Source Storage Account Information #
+    $sourceStorageAccountName = "kenazsa"
+    $sourceKey = "MySourceStorageAccountKey"
+    $sourceContext = New-AzureStorageContext –StorageAccountName $sourceStorageAccountName -StorageAccountKey $sourceKey  
+    $sourceContainer = "vhds"
+    
+    # Destination Storage Account Information #
+    $destinationStorageAccountName = "kenazdestinationsa"
+    $destinationKey = "MyDestinationStorageAccountKey"
+    $destinationContext = New-AzureStorageContext –StorageAccountName $destinationStorageAccountName -StorageAccountKey $destinationKey  
+    
+    # Create the destination container #
+    $destinationContainerName = "destinationvhds"
+    New-AzureStorageContainer -Name $destinationContainerName -Context $destinationContext 
+    
+    # Copy the blob # 
+    $blobCopy = Start-AzureStorageBlobCopy -DestContainer $destinationContainerName `
+                            -DestContext $destinationContext `
+                            -SrcBlob $blobName `
+                            -Context $sourceContext `
+                            -SrcContainer $sourceContainer
 
 执行以上命令将会开始从您的源账户向目标账户进行 blob 的复制操作，此时，您可能需要稍作等待以确保 blob 能够完全的复制。如您需要查看该操作的状态，您可以使用以下命令。
 
-	while(($blobCopy | Get-AzureStorageBlobCopyState).Status -eq "Pending")
-	{
-	    Start-Sleep -s 30
-	    $blobCopy | Get-AzureStorageBlobCopyState
-	}
+    while(($blobCopy | Get-AzureStorageBlobCopyState).Status -eq "Pending")
+    {
+        Start-Sleep -s 30
+        $blobCopy | Get-AzureStorageBlobCopyState
+    }
 
 }
 
@@ -93,7 +93,7 @@ Azure 存储服务提供了将 Blob 从一个存储账户移动到另一个的�
 
 另一种方式可以使用 AzCopy 工具（[下载地址](http://aka.ms/downloadazcopy)）,下面同样是存储账户间 blob 复制的命令：
 
-	AzCopy https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /sourcekey:key1 /destkey:key2 abc.txt
+    AzCopy https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /sourcekey:key1 /destkey:key2 abc.txt
 
 关于如何在不同场景使用 AzCopy 工具更详细的信息，请查看“[使用 AzCopy 命令行工具入门](./storage/storage-use-azcopy.md)”。
 
@@ -115,10 +115,10 @@ Azure 存储服务提供了将 Blob 从一个存储账户移动到另一个的�
 
 或者，您可以通过 执行 PowerShell 命令来进行相同的操作。
 
-	Add-AzureDisk -DiskName "myMigratedTestVM" `
-	            -OS Linux `
-	            -MediaLocation "https://kenazdestinationsa.blob.core.chinacloudapi.cn/destinationvhds/KenazTestService-TestVM1-2014-8-26-16-16-48-522-0.vhd" `
-	            -Verbose
+    Add-AzureDisk -DiskName "myMigratedTestVM" `
+                -OS Linux `
+                -MediaLocation "https://kenazdestinationsa.blob.core.chinacloudapi.cn/destinationvhds/KenazTestService-TestVM1-2014-8-26-16-16-48-522-0.vhd" `
+                -Verbose
 
 以上步骤完成后，该磁盘将出现在虚拟机 磁盘 部分。
 

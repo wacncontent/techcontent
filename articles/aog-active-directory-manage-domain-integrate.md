@@ -42,8 +42,8 @@ Azure AD 模块支持安装了默认版本的微软 .Net Framework 与 Windows P
 
 在运行本文介绍的 PowerShell 指令之前，您必须使用 `Connect-MsolService` 命令连接至 Azure AD，然后输入您的账户与密码（例如：example@domain.partner.onmschina.cn)。您也可以使用以下命令提前输入账户凭据并连接：
 
-	$msolcred = get-credential
-	connect-msolservice -credential $msolcred
+    $msolcred = get-credential
+    connect-msolservice -credential $msolcred
 
 ![](./media/aog-active-directory-manage-domain-integrate/connect-msolService.png)
 
@@ -51,8 +51,8 @@ Azure AD 模块支持安装了默认版本的微软 .Net Framework 与 Windows P
 
 在连接至 Azure AD 之后，您可以使用以下命令得到当前域名的联合设置信息(将 domain.com 替换成您的订阅中已被验证的自定义域名)：
 
-	Get-MsolDomain
-	Get-MsolDomainFederationSettings -DomainName (domain.com)
+    Get-MsolDomain
+    Get-MsolDomainFederationSettings -DomainName (domain.com)
 
 ![](./media/aog-active-directory-manage-domain-integrate/get-moldomain.png)
 
@@ -62,14 +62,14 @@ Azure AD 模块支持安装了默认版本的微软 .Net Framework 与 Windows P
 
 在连接至 Azure AD 之后，您需要使用以下命令来使 PowerShell 能够连接至本地域内的 ADFS 服务，使得 PowerShell 能够读取或更改 ADFS 服务的信息(将 adfs.domain.com 替换成您的本地域中 ADFS 服务器的机器名)：
 
-	Set-MsolAdfsContext -Computer (adfs.domain.com)
+    Set-MsolAdfsContext -Computer (adfs.domain.com)
 
 ## 将 Azure AD 中的域从联合登陆模式转换至密码同步登陆模式
 
 当 Azure AD 里域的用户使用联合登陆时，他/她使用本地域的用户凭据登陆 Azure/Office 365，Azure AD 本身不会存有用户的密码哈希。
 在域从联合登陆转换模式至密码同步登陆模式时，PowerShell 会删除 ADFS 服务中关于 Azure AD 的依赖方( Relying Party) 设置，并给该域内的每个被同步的用户提供一个临时的密码。以下是转换命令(将 domain.com 替换成您的订阅中已被验证的自定义域名)：
 
-	Convert-MsolDomainToStandard -DomainName (domain.com) -PasswordFile C:\password.txt -SkipUserConversion $false
+    Convert-MsolDomainToStandard -DomainName (domain.com) -PasswordFile C:\password.txt -SkipUserConversion $false
 
 ![](./media/aog-active-directory-manage-domain-integrate/convert.png)
 
@@ -81,7 +81,7 @@ Azure AD 模块支持安装了默认版本的微软 .Net Framework 与 Windows P
 
 您可以使用以下命令将 Azure AD 的域从密码同步登陆模式转换至联合登陆模式(将 domain.com 替换成您的订阅中已被验证的自定义域名)：
 
-	Convert-MsolDomainToFederated -DomainName (domain.com) -SupportMultipleDomain
+    Convert-MsolDomainToFederated -DomainName (domain.com) -SupportMultipleDomain
 
 ![](./media/aog-active-directory-manage-domain-integrate/Convert-MsolDomainToFederated.png)
 
@@ -97,7 +97,7 @@ PowerShell 将在本地域的 ADFS 服务中注册 Azure AD 的依赖方 (Relyin
 
 使用以下命令来更新域的联合登陆配置信息(将 domain.com 替换成您的订阅中已被验证的自定义域名)：
 
-	Update-MsolFederatedDomain -DomainName (domain.com) -SupportMultipleDomain
+    Update-MsolFederatedDomain -DomainName (domain.com) -SupportMultipleDomain
 
 ![](./media/aog-active-directory-manage-domain-integrate/update.png)
 

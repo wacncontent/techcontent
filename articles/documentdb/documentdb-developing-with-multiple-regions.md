@@ -49,10 +49,10 @@ SDK 会自动将所有写入请求发送到当前写入区域。
     Uri accountEndPoint = new Uri(Properties.Settings.Default.GlobalDatabaseUri);
     string accountKey = Properties.Settings.Default.GlobalDatabaseKey;
 
-	//Setting read region selection preference 
-	connectionPolicy.PreferredLocations.Add("West US"); // first preference
-	connectionPolicy.PreferredLocations.Add("East US"); // second preference
-	connectionPolicy.PreferredLocations.Add("North Europe"); // third preference
+    //Setting read region selection preference 
+    connectionPolicy.PreferredLocations.Add("West US"); // first preference
+    connectionPolicy.PreferredLocations.Add("East US"); // second preference
+    connectionPolicy.PreferredLocations.Add("North Europe"); // third preference
 
     // initialize connection
     DocumentClient docClient = new DocumentClient(
@@ -73,19 +73,19 @@ SDK 会自动将所有写入请求发送到当前写入区域。
 > [!NOTE] 不应将终结点 URL 视为长期不变的常量。服务随时会更新这些 URL。SDK 会自动处理这种更改。
 
 下面是 NodeJS/Javascript 的代码示例。Python 和 Java 将遵循相同的模式。
-	
-	// Creating a ConnectionPolicy object
-	var connectionPolicy = new DocumentBase.ConnectionPolicy();
-	    
-	// Setting read region selection preference, in the following order -
-	// 1 - West US
-	// 2 - East US
-	// 3 - North Europe
-	connectionPolicy.PreferredLocations = ['West US', 'East US', 'North Europe'];
-	    
-	// initialize the connection
-	var client = new DocumentDBClient(host, { masterKey: masterKey }, connectionPolicy);
-	
+    
+    // Creating a ConnectionPolicy object
+    var connectionPolicy = new DocumentBase.ConnectionPolicy();
+        
+    // Setting read region selection preference, in the following order -
+    // 1 - West US
+    // 2 - East US
+    // 3 - North Europe
+    connectionPolicy.PreferredLocations = ['West US', 'East US', 'North Europe'];
+        
+    // initialize the connection
+    var client = new DocumentDBClient(host, { masterKey: masterKey }, connectionPolicy);
+    
 ## REST
 数据库帐户在多个区域中可用后，客户端可以通过对以下 URI 执行 GET 请求来查询该帐户的可用性。
 
@@ -107,7 +107,7 @@ SDK 会自动将所有写入请求发送到当前写入区域。
         "readableLocations": [
             {
                 "Name": "East US",
-	        "DatabaseAccountEndpoint": "https://globaldbexample-eastus.documents.azure.com:443/"
+            "DatabaseAccountEndpoint": "https://globaldbexample-eastus.documents.azure.com:443/"
             }
         ],
         "MaxMediaStorageUsageInMB": 2048,

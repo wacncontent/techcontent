@@ -62,11 +62,11 @@ ms.author: bwren
 
 下面的示例命令为 [Twilio](http://www.twilio.com) 创建一个新连接，Twilio 是一种允许您发送和接收短信的电话服务。在[脚本中心](http://gallery.technet.microsoft.com/scriptcenter/Twilio-PowerShell-Module-8a8bfef8)中提供了包括 Twilio 连接类型的示例集成模块。此连接类型为“帐户 SID”和“授权令牌”定义属性，这些是连接到 Twilio 时验证您的帐户时所需的属性。您必须[下载此模块](http://gallery.technet.microsoft.com/scriptcenter/Twilio-PowerShell-Module-8a8bfef8)并将其安装到您的自动化帐户中，才能使此示例代码正常工作。
 
-	$AccountSid = "DAf5fed830c6f8fac3235c5b9d58ed7ac5"
-	$AuthToken  = "17d4dadfce74153d5853725143c52fd1"
-	$FieldValues = @{"AccountSid" = $AccountSid;"AuthToken"=$AuthToken}
+    $AccountSid = "DAf5fed830c6f8fac3235c5b9d58ed7ac5"
+    $AuthToken  = "17d4dadfce74153d5853725143c52fd1"
+    $FieldValues = @{"AccountSid" = $AccountSid;"AuthToken"=$AuthToken}
 
-	New-AzureAutomationConnection -AutomationAccountName "MyAutomationAccount" -Name "TwilioConnection" -ConnectionTypeName "Twilio" -ConnectionFieldValues $FieldValues
+    New-AzureAutomationConnection -AutomationAccountName "MyAutomationAccount" -Name "TwilioConnection" -ConnectionTypeName "Twilio" -ConnectionFieldValues $FieldValues
 
 ## 在 Runbook 中使用连接
 
@@ -75,15 +75,15 @@ ms.author: bwren
 ### 文本 Runbook 示例
 下面的示例命令演示如何使用前面示例中的 Twilio 连接从 Runbook 中发送短信。此处使用的 Send-TwilioSMS 活动具有两个参数集，它们分别使用不同方法对 Twilio 服务进行身份验证。其中一个使用连接对象，而另一个对“帐户 SID”和“授权令牌”使用单个参数。此示例中显示了这两种方法。
 
-	$Con = Get-AutomationConnection -Name "TwilioConnection"
-	$NumTo = "14255551212"
-	$NumFrom = "15625551212"
-	$Body = "Text from Azure Automation."
+    $Con = Get-AutomationConnection -Name "TwilioConnection"
+    $NumTo = "14255551212"
+    $NumFrom = "15625551212"
+    $Body = "Text from Azure Automation."
 
-	#Send text with connection object.
-	Send-TwilioSMS -Connection $Con -From $NumFrom -To $NumTo -Body $Body
+    #Send text with connection object.
+    Send-TwilioSMS -Connection $Con -From $NumFrom -To $NumTo -Body $Body
 
-	#Send text with connection properties.
-	Send-TwilioSMS -AccountSid $Con.AccountSid -AuthToken $Con.AuthToken -From $NumFrom -To $NumTo -Body $Body
+    #Send text with connection properties.
+    Send-TwilioSMS -AccountSid $Con.AccountSid -AuthToken $Con.AuthToken -From $NumFrom -To $NumTo -Body $Body
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

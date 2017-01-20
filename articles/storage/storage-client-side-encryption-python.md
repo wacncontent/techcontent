@@ -66,7 +66,7 @@ ms.author: dineshm
 
 在加密过程中，客户端库将生成 16 字节的随机 IV 和 32 字节的随机 CEK，并使用此信息对队列消息文本执行信封加密。然后，将已包装的 CEK 和一些附加加密元数据添加到已加密的队列消息中。此修改后的消息（如下所示）将存储在服务中。
 
-	<MessageText>{"EncryptedMessageContents":"6kOu8Rq1C3+M1QO4alKLmWthWXSmHV3mEfxBAgP9QGTU++MKn2uPq3t2UjF1DO6w","EncryptionData":{…}}</MessageText>
+    <MessageText>{"EncryptedMessageContents":"6kOu8Rq1C3+M1QO4alKLmWthWXSmHV3mEfxBAgP9QGTU++MKn2uPq3t2UjF1DO6w","EncryptionData":{…}}</MessageText>
 
 在解密过程中，将从队列消息中提取已包装的密钥并将其解包。还将从队列消息中提取 IV，与解包的密钥一起使用来对队列消息数据进行解密。请注意，加密元数据很少（500 字节以下），因此虽然它计入队列消息的 64KB 限制，但影响应是可管理的。
 
@@ -128,83 +128,83 @@ KEK 必须实现以下方法才能成功加密数据：
 ### Blob 服务加密
 设置 blockblobservice 对象中的加密策略字段。其他所有事项均由客户端库在内部处理。
 
-	# Create the KEK used for encryption.
-	# KeyWrapper is the provided sample implementation, but the user may use their own object as long as it implements the interface above.
-	kek = KeyWrapper('local:key1') # Key identifier
+    # Create the KEK used for encryption.
+    # KeyWrapper is the provided sample implementation, but the user may use their own object as long as it implements the interface above.
+    kek = KeyWrapper('local:key1') # Key identifier
 
-	# Create the key resolver used for decryption.
-	# KeyResolver is the provided sample implementation, but the user may use whatever implementation they choose so long as the function set on the service object behaves appropriately.
-	key_resolver = KeyResolver()
-	key_resolver.put_key(kek)
+    # Create the key resolver used for decryption.
+    # KeyResolver is the provided sample implementation, but the user may use whatever implementation they choose so long as the function set on the service object behaves appropriately.
+    key_resolver = KeyResolver()
+    key_resolver.put_key(kek)
 
-	# Set the KEK and key resolver on the service object.
-	my_block_blob_service.key_encryption_key = kek
-	my_block_blob_service.key_resolver_funcion = key_resolver.resolve_key
+    # Set the KEK and key resolver on the service object.
+    my_block_blob_service.key_encryption_key = kek
+    my_block_blob_service.key_resolver_funcion = key_resolver.resolve_key
 
-	# Upload the encrypted contents to the blob.
-	my_block_blob_service.create_blob_from_stream(container_name, blob_name, stream)
+    # Upload the encrypted contents to the blob.
+    my_block_blob_service.create_blob_from_stream(container_name, blob_name, stream)
 
-	# Download and decrypt the encrypted contents from the blob.
-	blob = my_block_blob_service.get_blob_to_bytes(container_name, blob_name)
+    # Download and decrypt the encrypted contents from the blob.
+    blob = my_block_blob_service.get_blob_to_bytes(container_name, blob_name)
 
 ### 队列服务加密
 设置 queueservice 对象中的加密策略字段。其他所有事项均由客户端库在内部处理。
 
-	# Create the KEK used for encryption.
-	# KeyWrapper is the provided sample implementation, but the user may use their own object as long as it implements the interface above.
-	kek = KeyWrapper('local:key1') # Key identifier
+    # Create the KEK used for encryption.
+    # KeyWrapper is the provided sample implementation, but the user may use their own object as long as it implements the interface above.
+    kek = KeyWrapper('local:key1') # Key identifier
 
-	# Create the key resolver used for decryption.
-	# KeyResolver is the provided sample implementation, but the user may use whatever implementation they choose so long as the function set on the service object behaves appropriately.
-	key_resolver = KeyResolver()
-	key_resolver.put_key(kek)
+    # Create the key resolver used for decryption.
+    # KeyResolver is the provided sample implementation, but the user may use whatever implementation they choose so long as the function set on the service object behaves appropriately.
+    key_resolver = KeyResolver()
+    key_resolver.put_key(kek)
 
-	# Set the KEK and key resolver on the service object.
-	my_queue_service.key_encryption_key = kek
-	my_queue_service.key_resolver_funcion = key_resolver.resolve_key
+    # Set the KEK and key resolver on the service object.
+    my_queue_service.key_encryption_key = kek
+    my_queue_service.key_resolver_funcion = key_resolver.resolve_key
 
-	# Add message
-	my_queue_service.put_message(queue_name, content)
+    # Add message
+    my_queue_service.put_message(queue_name, content)
 
-	# Retrieve message
-	retrieved_message_list = my_queue_service.get_messages(queue_name)
+    # Retrieve message
+    retrieved_message_list = my_queue_service.get_messages(queue_name)
 
 ### 表服务加密
 除了创建加密策略并在请求选项中设置它以外，还必须在 **tableservice** 中指定 **encryption\_resolver\_function**，或者在 EntityProperty 中设置 encrypt 属性。
 
 ### 使用解析程序
 
-	# Create the KEK used for encryption.
-	# KeyWrapper is the provided sample implementation, but the user may use their own object as long as it implements the interface above.
-	kek = KeyWrapper('local:key1') # Key identifier
+    # Create the KEK used for encryption.
+    # KeyWrapper is the provided sample implementation, but the user may use their own object as long as it implements the interface above.
+    kek = KeyWrapper('local:key1') # Key identifier
 
-	# Create the key resolver used for decryption.
-	# KeyResolver is the provided sample implementation, but the user may use whatever implementation they choose so long as the function set on the service object behaves appropriately.
-	key_resolver = KeyResolver()
-	key_resolver.put_key(kek)
+    # Create the key resolver used for decryption.
+    # KeyResolver is the provided sample implementation, but the user may use whatever implementation they choose so long as the function set on the service object behaves appropriately.
+    key_resolver = KeyResolver()
+    key_resolver.put_key(kek)
 
-	# Define the encryption resolver_function.
-	def my_encryption_resolver(pk, rk, property_name):
-			if property_name == 'foo':
-					return True
-			return False
+    # Define the encryption resolver_function.
+    def my_encryption_resolver(pk, rk, property_name):
+            if property_name == 'foo':
+                    return True
+            return False
 
-	# Set the KEK and key resolver on the service object.
-	my_table_service.key_encryption_key = kek
-	my_table_service.key_resolver_funcion = key_resolver.resolve_key
-	my_table_service.encryption_resolver_function = my_encryption_resolver
+    # Set the KEK and key resolver on the service object.
+    my_table_service.key_encryption_key = kek
+    my_table_service.key_resolver_funcion = key_resolver.resolve_key
+    my_table_service.encryption_resolver_function = my_encryption_resolver
 
-	# Insert Entity
-	my_table_service.insert_entity(table_name, entity)
+    # Insert Entity
+    my_table_service.insert_entity(table_name, entity)
 
-	# Retrieve Entity
-	# Note: No need to specify an encryption resolver for retrieve, but it is harmless to leave the property set.
-	my_table_service.get_entity(table_name, entity['PartitionKey'], entity['RowKey'])
+    # Retrieve Entity
+    # Note: No need to specify an encryption resolver for retrieve, but it is harmless to leave the property set.
+    my_table_service.get_entity(table_name, entity['PartitionKey'], entity['RowKey'])
 
 ### 使用属性
 如上所述，可能通过将某个属性存储在 EntityProperty 对象中并设置 encrypt 字段，将该属性标记为进行加密。
 
-	encrypted_property_1 = EntityProperty(EdmType.STRING, value, encrypt=True)
+    encrypted_property_1 = EntityProperty(EdmType.STRING, value, encrypt=True)
 
 ## 加密和性能
 注意，加密您的存储数据会导致额外的性能开销。必须生成内容密钥和 IV，内容本身必须进行加密，并且其他元数据必须进行格式化并上载。此开销将因所加密的数据量而有所变化。我们建议客户在开发过程中始终测试其应用程序的性能。

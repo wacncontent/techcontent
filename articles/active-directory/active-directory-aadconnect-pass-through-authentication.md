@@ -61,12 +61,12 @@ Azure AD 直通身份验证为这些客户提供了一个简单的解决方案�
 - 请注意，如果有多个包含要与 Azure AD 同步的用户的林，那么这些林之间必须具有信任关系。
 - 具有运行 Windows Server 2012 R2 或更高版本的另一个服务器，在此服务器上运行另一个连接器以实现高可用性和负载均衡。有关如何部署此连接器，请参阅下面的说明。
 - 如果连接器与 Azure AD 之间存在防火墙，请确保：
-	- 如果启用了 URL 筛选，请确保连接器能够与以下 URL 通信：
-		-  *.msappproxy.net
-		-  *.servicebus.chinacloudapi.cn.
-		-  连接器还建立到 Azure 数据中心 IP 范围的直接 IP 连接。
-	- 确保当连接器使用客户端证书与 Azure AD 通信时，防火墙不执行 SSL 检查。
-	- 确保连接器可在以下端口上向 Azure AD 发出 HTTPS (TCP) 请求。
+    - 如果启用了 URL 筛选，请确保连接器能够与以下 URL 通信：
+        -  *.msappproxy.net
+        -  *.servicebus.chinacloudapi.cn.
+        -  连接器还建立到 Azure 数据中心 IP 范围的直接 IP 连接。
+    - 确保当连接器使用客户端证书与 Azure AD 通信时，防火墙不执行 SSL 检查。
+    - 确保连接器可在以下端口上向 Azure AD 发出 HTTPS (TCP) 请求。
 
 |端口号|说明
 | --- | ---
@@ -96,7 +96,7 @@ Azure AD 直通身份验证为这些客户提供了一个简单的解决方案�
 2.	以管理员身份打开命令提示符。
 3.	运行以下命令，其中 /q 表示静默安装 — 此安装不会提示你接受最终用户许可协议。
 
-		AADApplicationProxyConnectorInstaller.exe REGISTERCONNECTOR="false" /q
+        AADApplicationProxyConnectorInstaller.exe REGISTERCONNECTOR="false" /q
 
 ### 步骤 2：向 Azure AD 注册连接器以进行直通身份验证
 
@@ -111,13 +111,13 @@ Azure AD 直通身份验证为这些客户提供了一个简单的解决方案�
 
 此外，可在 C:\\ProgramData\\Microsoft\\Microsoft AAD Application Proxy Connector\\Trace 中的连接器跟踪日志中查找其他信息。这些日志还包括单个用户的直通身份验证失败的原因，如下面的包括错误代码 1328 的条目：
 
-	ApplicationProxyConnectorService.exe Error: 0 : Passthrough Authentication request failed. RequestId: 'df63f4a4-68b9-44ae-8d81-6ad2d844d84e'. Reason: '1328'.
-	    ThreadId=5
-	    DateTime=xxxx-xx-xxTxx:xx:xx.xxxxxxZ
+    ApplicationProxyConnectorService.exe Error: 0 : Passthrough Authentication request failed. RequestId: 'df63f4a4-68b9-44ae-8d81-6ad2d844d84e'. Reason: '1328'.
+        ThreadId=5
+        DateTime=xxxx-xx-xxTxx:xx:xx.xxxxxxZ
 
 可以通过启动命令提示符并运行以下命令来获取错误的详细信息。（将“1328”替换为请求中的错误号。）
 
-	Net helpmsg 1328
+    Net helpmsg 1328
 
 结果如下所示。
 

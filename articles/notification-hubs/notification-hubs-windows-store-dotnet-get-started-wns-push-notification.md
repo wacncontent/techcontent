@@ -55,40 +55,40 @@ wacn.date: 11/22/2016
 
 2. 键入应用的名称，然后单击“保留应用名称”。
 
-   	![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hubs-win8-app-name.png)
+       ![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hubs-win8-app-name.png)
 
-   	此操作为应用创建一个新的 Windows 应用商店注册。
+       此操作为应用创建一个新的 Windows 应用商店注册。
 
 3. 在 Visual Studio 中，使用“空白应用”模板来创建一个新的 Visual C# 应用商店应用项目，然后单击“确定”。
 
-   	![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-create-windows-universal-app.png)  
+       ![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-create-windows-universal-app.png)  
 
 4. 接受目标和最低平台版本的默认值。
 
 5. 在“解决方案资源管理器”中，右键单击 Windows 应用商店应用项目，单击“应用商店”，然后单击“将应用与应用商店关联...”。
 
-   	![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-associate-win8-app.png)
+       ![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-associate-win8-app.png)
 
-   	此时将显示“将应用与 Windows 应用商店关联”向导。
+       此时将显示“将应用与 Windows 应用商店关联”向导。
 
 6. 在该向导中，单击“登录”，然后使用你的 Microsoft 帐户登录。
 
 7. 单击在第 2 步中注册的应用，单击“下一步”，然后单击“关联”。
 
-   	![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-associate-app-name.png)
+       ![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-associate-app-name.png)
 
-   	这会将所需的 Windows 应用商店注册信息添加到应用程序清单中。
+       这会将所需的 Windows 应用商店注册信息添加到应用程序清单中。
 
 8. 返回新应用的[“Windows 开发人员中心”](http://go.microsoft.com/fwlink/p/?LinkID=266582)页，依次单击“服务”和“推送通知”，然后单击“Windows 推送通知服务(WNS)和 Azure 移动应用”下的“Live 服务网站”。
 
-   	![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hubs-uwp-app-live-services.png)  
+       ![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hubs-uwp-app-live-services.png)  
 
 9. 在应用的注册页上，记下位于“Windows 应用商店”平台设置中的“应用程序密码”和“包安全标识符(SID)”。
 
-   	![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hubs-uwp-app-push-auth.png)  
+       ![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hubs-uwp-app-push-auth.png)  
 
- 	> [!WARNING]
-	应用程序密钥和程序包 SID 是重要的安全凭据。请勿将这些值告知任何人或随你的应用程序分发它们。
+     > [!WARNING]
+    应用程序密钥和程序包 SID 是重要的安全凭据。请勿将这些值告知任何人或随你的应用程序分发它们。
 
 <a name="configure-your-notification-hub"></a>
 ##配置通知中心
@@ -109,28 +109,28 @@ wacn.date: 11/22/2016
 
 1. 在 Visual Studio 中，右键单击该解决方案，然后单击“管理 NuGet 包”。
 
-	此时将显示“管理 NuGet 包”对话框。
+    此时将显示“管理 NuGet 包”对话框。
 
 2. 搜索 `WindowsAzure.Messaging.Managed`，单击“安装”，然后接受使用条款。
 
-	![][20]  
+    ![][20]  
 
-	此时将使用 <a href="http://nuget.org/packages/WindowsAzure.Messaging.Managed/">WindowsAzure.Messaging.Managed NuGet 包</a>下载、安装并添加对 Windows 的 Azure 消息传送库的引用。
+    此时将使用 <a href="http://nuget.org/packages/WindowsAzure.Messaging.Managed/">WindowsAzure.Messaging.Managed NuGet 包</a>下载、安装并添加对 Windows 的 Azure 消息传送库的引用。
 
 3. 打开 App.xaml.cs 项目文件并添加以下 `using` 语句。
 
         using Windows.Networking.PushNotifications;
         using Microsoft.WindowsAzure.Messaging;
-		using Windows.UI.Popups;
+        using Windows.UI.Popups;
 
 4. 另外在 App.xaml.cs 中，将以下 **InitNotificationsAsync** 方法定义添加到 **App** 类中：
 
-	    private async void InitNotificationsAsync()
+        private async void InitNotificationsAsync()
         {
             var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
             var hub = new NotificationHub("< your hub name>", "<Your DefaultListenSharedAccessSignature connection string>");
-			var result = await hub.RegisterNativeAsync(channel.Uri);
+            var result = await hub.RegisterNativeAsync(channel.Uri);
 
             // Displays the registration ID so you know it was successful
             if (result.RegistrationId != null)
@@ -154,7 +154,7 @@ wacn.date: 11/22/2016
 
 6. 按 **F5** 键以运行应用。此时将显示包含注册密钥的弹出对话框。
 
-   	![][19]  
+       ![][19]  
 
 你的应用现在已能够接收 toast 通知。
 
@@ -184,21 +184,21 @@ wacn.date: 11/22/2016
 
 1. 右键单击解决方案，选择“添加”和“新建项目...”，然后在“Visual C#”下依次单击“Windows”、“控制台应用程序”和“确定”。
 
-   	![][13]
+       ![][13]
 
-	这会将新的 Visual C# 控制台应用程序添加到解决方案。你也可以在单独的解决方案中进行此项操作。
+    这会将新的 Visual C# 控制台应用程序添加到解决方案。你也可以在单独的解决方案中进行此项操作。
 
 2. 在 Visual Studio 中，依次单击“工具”、“NuGet 包管理器”和“包管理器控制台”。
 
-	这会在 Visual Studio 中显示“包管理器控制台”。
+    这会在 Visual Studio 中显示“包管理器控制台”。
 
 3. 在“包管理器控制台”窗口中，将“默认项目”设置为新的控制台应用程序项目，然后在控制台窗口中执行以下命令：
 
         Install-Package Microsoft.Azure.NotificationHubs
 
-	这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 包</a>添加对 Azure 通知中心 SDK 的引用。
+    这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 包</a>添加对 Azure 通知中心 SDK 的引用。
 
-	![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-package-manager.png)
+    ![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-package-manager.png)
 
 4. 打开文件 Program.cs 并添加以下 `using` 语句：
 
@@ -209,25 +209,25 @@ wacn.date: 11/22/2016
         private static async void SendNotificationAsync()
         {
             NotificationHubClient hub = NotificationHubClient
-				.CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
+                .CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
             var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">Hello from a .NET App!</text></binding></visual></toast>";
             await hub.SendWindowsNativeNotificationAsync(toast);
         }
 
-   	确保将“hub name”占位符替换为出现在 Azure 门户预览中的通知中心名称。此外，使用在“配置通知中心”部分中的通知中心的“访问策略”页获取的 **DefaultFullSharedAccessSignature** 连接字符串替换连接字符串占位符。
+       确保将“hub name”占位符替换为出现在 Azure 门户预览中的通知中心名称。此外，使用在“配置通知中心”部分中的通知中心的“访问策略”页获取的 **DefaultFullSharedAccessSignature** 连接字符串替换连接字符串占位符。
 
-	>[!NOTE]确保你使用的是具有**完全**访问权限的连接字符串，而不是具有**侦听**访问权限的连接字符串。侦听访问字符串无权发送通知。
+    >[!NOTE]确保你使用的是具有**完全**访问权限的连接字符串，而不是具有**侦听**访问权限的连接字符串。侦听访问字符串无权发送通知。
 
 6. 在 **Main** 方法中添加以下行：
 
          SendNotificationAsync();
-		 Console.ReadLine();
+         Console.ReadLine();
 
 7. 在 Visual Studio 中，右键单击控制台应用程序项目，然后单击“设为启动项目”，将它设置为启动项目。然后按 **F5** 键运行应用程序。
 
-   	![][14]
+       ![][14]
 
-	所有已注册的设备将会收到 toast 通知。单击或点击 toast 标题可加载应用。
+    所有已注册的设备将会收到 toast 通知。单击或点击 toast 标题可加载应用。
 
 你可以在 MSDN 上的 [toast 目录]、[磁贴目录]和[锁屏提醒]主题中找到所有支持的负载。
 

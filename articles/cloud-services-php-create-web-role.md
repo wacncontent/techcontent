@@ -55,15 +55,15 @@ Azure 提供了三种计算模型以运行应用程序：Azure App Service、Azu
 
 上述命令的输出与下图中所示类似。在此示例中，将 PHP 5.3.17 的 `IsDefault` 标志设置为 `true`，这指示它将是安装的默认 PHP 版本。
 
-	Runtime Version		PackageUri						IsDefault
-	------- ------- 	----------  					---------
-   	Node 0.6.17      	http://nodertncu.blob.core...   False
-   	Node 0.6.20         http://nodertncu.blob.core...   True
-   	Node 0.8.4          http://nodertncu.blob.core...   False
-	IISNode 0.1.21      http://nodertncu.blob.core...   True
-  	Cache 1.8.0         http://nodertncu.blob.core...   True
-	PHP 5.3.17          http://nodertncu.blob.core...   True
-	PHP 5.4.0           http://nodertncu.blob.core...   False
+    Runtime Version		PackageUri						IsDefault
+    ------- ------- 	----------  					---------
+       Node 0.6.17      	http://nodertncu.blob.core...   False
+       Node 0.6.20         http://nodertncu.blob.core...   True
+       Node 0.8.4          http://nodertncu.blob.core...   False
+    IISNode 0.1.21      http://nodertncu.blob.core...   True
+      Cache 1.8.0         http://nodertncu.blob.core...   True
+    PHP 5.3.17          http://nodertncu.blob.core...   True
+    PHP 5.4.0           http://nodertncu.blob.core...   False
 
 可以将 PHP 运行时版本设置为列出的任意 PHP 版本。例如，若要将 PHP 版本（对于名为 `roleName` 的角色）设置为 5.4.0，请使用以下命令：
 
@@ -98,21 +98,21 @@ Azure 提供了三种计算模型以运行应用程序：Azure App Service、Azu
         msiexec /i sqlncli.msi /qn IACCEPTSQLNCLILICENSETERMS=YES
 4. 定义将 [Internet Information Services (IIS)][iis.net] 配置为使用 PHP 运行时来处理 `.php` 页的请求的启动任务。为此，请在文本编辑器中打开 `setup_web.cmd` 文件（位于 Web 角色的根目录的 `bin` 文件夹中），并将其内容替换为以下脚本：
 
-		@ECHO ON
-		cd "%~dp0"
+        @ECHO ON
+        cd "%~dp0"
 
-		if "%EMULATED%"=="true" exit /b 0
+        if "%EMULATED%"=="true" exit /b 0
 
-		msiexec /i sqlncli.msi /qn IACCEPTSQLNCLILICENSETERMS=YES
+        msiexec /i sqlncli.msi /qn IACCEPTSQLNCLILICENSETERMS=YES
 
-		SET PHP_FULL_PATH=%~dp0php\php-cgi.exe
-		SET NEW_PATH=%PATH%;%RoleRoot%\base\x86
+        SET PHP_FULL_PATH=%~dp0php\php-cgi.exe
+        SET NEW_PATH=%PATH%;%RoleRoot%\base\x86
 
-		%WINDIR%\system32\inetsrv\appcmd.exe set config -section:system.webServer/fastCgi /+"[fullPath='%PHP_FULL_PATH%',maxInstances='12',idleTimeout='60000',activityTimeout='3600',requestTimeout='60000',instanceMaxRequests='10000',protocol='NamedPipe',flushNamedPipe='False']" /commit:apphost
-		%WINDIR%\system32\inetsrv\appcmd.exe set config -section:system.webServer/fastCgi /+"[fullPath='%PHP_FULL_PATH%'].environmentVariables.[name='PATH',value='%NEW_PATH%']" /commit:apphost
-		%WINDIR%\system32\inetsrv\appcmd.exe set config -section:system.webServer/fastCgi /+"[fullPath='%PHP_FULL_PATH%'].environmentVariables.[name='PHP_FCGI_MAX_REQUESTS',value='10000']" /commit:apphost
-		%WINDIR%\system32\inetsrv\appcmd.exe set config -section:system.webServer/handlers /+"[name='PHP',path='*.php',verb='GET,HEAD,POST',modules='FastCgiModule',scriptProcessor='%PHP_FULL_PATH%',resourceType='Either',requireAccess='Script']" /commit:apphost
-		%WINDIR%\system32\inetsrv\appcmd.exe set config -section:system.webServer/fastCgi /"[fullPath='%PHP_FULL_PATH%'].queueLength:50000"
+        %WINDIR%\system32\inetsrv\appcmd.exe set config -section:system.webServer/fastCgi /+"[fullPath='%PHP_FULL_PATH%',maxInstances='12',idleTimeout='60000',activityTimeout='3600',requestTimeout='60000',instanceMaxRequests='10000',protocol='NamedPipe',flushNamedPipe='False']" /commit:apphost
+        %WINDIR%\system32\inetsrv\appcmd.exe set config -section:system.webServer/fastCgi /+"[fullPath='%PHP_FULL_PATH%'].environmentVariables.[name='PATH',value='%NEW_PATH%']" /commit:apphost
+        %WINDIR%\system32\inetsrv\appcmd.exe set config -section:system.webServer/fastCgi /+"[fullPath='%PHP_FULL_PATH%'].environmentVariables.[name='PHP_FCGI_MAX_REQUESTS',value='10000']" /commit:apphost
+        %WINDIR%\system32\inetsrv\appcmd.exe set config -section:system.webServer/handlers /+"[name='PHP',path='*.php',verb='GET,HEAD,POST',modules='FastCgiModule',scriptProcessor='%PHP_FULL_PATH%',resourceType='Either',requireAccess='Script']" /commit:apphost
+        %WINDIR%\system32\inetsrv\appcmd.exe set config -section:system.webServer/fastCgi /"[fullPath='%PHP_FULL_PATH%'].queueLength:50000"
 
 5. 将应用程序文件添加到 Web 角色的根目录。这将是 Web 服务器的根目录。
 6. 按照以下[发布应用程序](#publish-your-application)部分中所述发布你的应用程序。
@@ -129,30 +129,30 @@ Azure 提供了三种计算模型以运行应用程序：Azure App Service、Azu
         msiexec /i sqlncli.msi /qn IACCEPTSQLNCLILICENSETERMS=YES
 4. 定义在设置角色时将 `php.exe` 可执行文件添加到辅助角色的 PATH 环境变量中的启动任务。为此，请在文本编辑器中打开 `setup_worker.cmd` 文件（位于辅助角色的根目录中），并将其内容替换为以下脚本：
 
-		@echo on
+        @echo on
 
-		cd "%~dp0"
+        cd "%~dp0"
 
-		echo Granting permissions for Network Service to the web root directory...
-		icacls ..\ /grant "Network Service":(OI)(CI)W
-		if %ERRORLEVEL% neq 0 goto error
-		echo OK
+        echo Granting permissions for Network Service to the web root directory...
+        icacls ..\ /grant "Network Service":(OI)(CI)W
+        if %ERRORLEVEL% neq 0 goto error
+        echo OK
 
-		if "%EMULATED%"=="true" exit /b 0
+        if "%EMULATED%"=="true" exit /b 0
 
-		msiexec /i sqlncli.msi /qn IACCEPTSQLNCLILICENSETERMS=YES
+        msiexec /i sqlncli.msi /qn IACCEPTSQLNCLILICENSETERMS=YES
 
-		setx Path "%PATH%;%~dp0php" /M
+        setx Path "%PATH%;%~dp0php" /M
 
-		if %ERRORLEVEL% neq 0 goto error
+        if %ERRORLEVEL% neq 0 goto error
 
-		echo SUCCESS
-		exit /b 0
+        echo SUCCESS
+        exit /b 0
 
-		:error
+        :error
 
-		echo FAILED
-		exit /b -1
+        echo FAILED
+        exit /b -1
 
 5. 将应用程序文件添加到辅助角色的根目录。
 6. 按照以下[发布应用程序](#publish-your-application)部分中所述发布你的应用程序。

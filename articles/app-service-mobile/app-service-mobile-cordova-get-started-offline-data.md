@@ -45,7 +45,7 @@ ms.author: adrianha
 
         client = new WindowsAzure.MobileServiceClient('http://yourmobileapp.azurewebsites.cn');
 
-	替换为此代码：
+    替换为此代码：
 
         client = new WindowsAzure.MobileServiceClient('http://yourmobileapp.azurewebsites.cn');
 
@@ -178,7 +178,7 @@ ms.author: adrianha
 
 5. （可选）使用 Visual Studio 查看 Azure SQL 数据库表，以了解后端数据库中的数据是否未更改。
 
-	在 Visual Studio 中，打开“服务器资源管理器”。导航到“Azure”->“SQL 数据库”中的数据库。右键单击数据库并选择“在 SQL Server 对象资源管理器中打开”。现在便可以浏览 SQL 数据库表及其内容。
+    在 Visual Studio 中，打开“服务器资源管理器”。导航到“Azure”->“SQL 数据库”中的数据库。右键单击数据库并选择“在 SQL Server 对象资源管理器中打开”。现在便可以浏览 SQL 数据库表及其内容。
 
 ## （可选）测试与移动后端的重新连接
 

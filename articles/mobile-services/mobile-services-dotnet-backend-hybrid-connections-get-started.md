@@ -49,11 +49,11 @@ ms.author: glenga
 
 1. 在 Visual Studio 2013 中，打开用于定义 .NET 后端移动服务的项目。 
 
-	若要了解如何下载 .NET 后端项目，请参阅[移动服务入门](./mobile-services-dotnet-backend-windows-store-dotnet-get-started.md)。
+    若要了解如何下载 .NET 后端项目，请参阅[移动服务入门](./mobile-services-dotnet-backend-windows-store-dotnet-get-started.md)。
 
 2. 在“解决方案资源管理器”中打开 Web.config 文件，找到 **connectionStrings** 节，添加类似于以下内容的新 SqlClient 项目，此项目指向本地 SQL Server 数据库：
-	
-	    <add name="OnPremisesDBConnection" 
+    
+        <add name="OnPremisesDBConnection" 
          connectionString="Data Source=OnPremisesServer,1433;
          Initial Catalog=OnPremisesDB;
          User ID=HybridConnectionLogin;
@@ -61,11 +61,11 @@ ms.author: glenga
          MultipleActiveResultSets=True"
          providerName="System.Data.SqlClient" />
 
-	请记得将这个字符串中的 `<**secure_password**>` 替换成你为 *HbyridConnectionLogin* 创建的密码。
-	
+    请记得将这个字符串中的 `<**secure_password**>` 替换成你为 *HbyridConnectionLogin* 创建的密码。
+    
 3. 在 Visual Studio 中单击“保存”以保存 Web.config 文件。
 
-	> [!NOTE]在本地计算机上运行时，使用此连接设置。在 Azure 中运行时，则以门户中定义的连接设置覆盖此设置。
+    > [!NOTE]在本地计算机上运行时，使用此连接设置。在 Azure 中运行时，则以门户中定义的连接设置覆盖此设置。
 
 4. 展开“Models”文件夹并打开文件名以 *Context.cs* 结尾的数据模型文件。
 
@@ -79,7 +79,7 @@ ms.author: glenga
             }
         }
 
-	现在，服务将使用新的 SQL Server 数据库连接。
+    现在，服务将使用新的 SQL Server 数据库连接。
 ##在本地测试数据库连接
 
 在发布到 Azure 并使用混合连接之前，最好先确保数据库连接能够在本地运行时正常工作。这样，你就可以更轻松地诊断并更正任何连接问题，然后重新发布并开始使用混合连接。
@@ -94,29 +94,29 @@ ms.author: glenga
 
 1. 单击“配置”选项卡，然后找到“连接字符串”部分。
 
-	![本地数据库的连接字符串](./media/mobile-services-dotnet-backend-hybrid-connections-get-started/11.png)
+    ![本地数据库的连接字符串](./media/mobile-services-dotnet-backend-hybrid-connections-get-started/11.png)
 
 3. 添加名为 `OnPremisesDBConnection` 的新 **SQL Server** 连接字符串，其值如下：
 
-		Server=OnPremisesServer,1433;Database=OnPremisesDB;User ID=HybridConnectionsLogin;Password=<**secure_password**>
+        Server=OnPremisesServer,1433;Database=OnPremisesDB;User ID=HybridConnectionsLogin;Password=<**secure_password**>
 
-	将 `<**secure_password**>` 替换为 *HybridConnectionLogin* 的安全密码。
+    将 `<**secure_password**>` 替换为 *HybridConnectionLogin* 的安全密码。
 
 4. 按“保存”以保存混合连接以及刚刚创建的连接字符串。
 
 5. 使用 Visual Studio 将更新的移动服务项目发布到 Azure。
 
-	此时将显示服务启动页。
+    此时将显示服务启动页。
 
 6. 与前面一样，使用启动页上的“立即试用”按钮，或使用连接到移动服务的客户端应用程序，调用可生成数据库更改的某些操作。
 
-	>[!NOTE]当你使用“立即试用”按钮来启动帮助 API 页时，请记得提供应用程序密钥作为密码（用户名为空白）。
+    >[!NOTE]当你使用“立即试用”按钮来启动帮助 API 页时，请记得提供应用程序密钥作为密码（用户名为空白）。
 
 7. 在 SQL Server Management Studio 中连接到 SQL Server 实例，打开对象资源管理器，然后依次展开“OnPremisesDB”数据库和“表”。
 
 8. 右键单击“hybridService1.TodoItems”表，然后选择“选择前 1000 行”以查看结果。
 
-	请注意，移动服务已使用混合连接将应用中生成的更改保存到本地数据库。
+    请注意，移动服务已使用混合连接将应用中生成的更改保存到本地数据库。
 
 ##另请参阅##
  

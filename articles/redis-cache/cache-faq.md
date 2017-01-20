@@ -166,21 +166,21 @@ ConnectTimeout|连接操作的超时，以毫秒为单位。| 请参阅下面的
 在大多数情况下，使用客户端的默认值便已足够。您可以根据工作负荷微调选项。
 
 -	**重试**
-	-	对于 ConnectRetry 和 ConnectTimeout，一般指导原则是快速失败并重试。这取决于工作负载，以及客户端发出 Redis 命令和接收响应平均花费的时间。
-	-	让 StackExchange.Redis 自动重新连接，而不是检查连接状态，然后由你自己重新连接。**避免使用 ConnectionMultiplexer.IsConnected 属性**。
-	-	雪球效应 - 有时，你可能会遇到这样的问题：不断地重试解决，但问题不断累积而永远无法恢复。在这种情况下，你应该根据 Microsoft 模式和实践小组发布的[一般重试指导原则](https://github.com/mspnp/azure-guidance/blob/master/Retry-Policies.md)中所述，考虑使用指数退让重试算法。
+    -	对于 ConnectRetry 和 ConnectTimeout，一般指导原则是快速失败并重试。这取决于工作负载，以及客户端发出 Redis 命令和接收响应平均花费的时间。
+    -	让 StackExchange.Redis 自动重新连接，而不是检查连接状态，然后由你自己重新连接。**避免使用 ConnectionMultiplexer.IsConnected 属性**。
+    -	雪球效应 - 有时，你可能会遇到这样的问题：不断地重试解决，但问题不断累积而永远无法恢复。在这种情况下，你应该根据 Microsoft 模式和实践小组发布的[一般重试指导原则](https://github.com/mspnp/azure-guidance/blob/master/Retry-Policies.md)中所述，考虑使用指数退让重试算法。
 -	**超时值**
-	-	根据工作负载相应地设置值。如果要存储较大值，应将超时设置为较大值。
-	-	将 `AbortOnConnectFail` 设置为 false，让 StackExchange.Redis 为你重新连接。
-	-	使用应用程序的单个 ConnectionMultiplexer 实例。可以使用 LazyConnection 创建 Connection 属性返回的单个实例，如[使用 ConnectionMultiplexer 类连接到缓存](./cache-dotnet-how-to-use-azure-redis-cache.md#connect-to-the-cache)中所示。
-	-	将 `ConnectionMultiplexer.ClientName` 属性设置为应用程序实例的唯一名称以进行诊断。
-	-	对自定义工作负载使用多个 `ConnectionMultiplexer` 实例。
-	-	如果应用程序中的负载不同，你可以遵循此模型。例如：
-	-	可以使用一个多路复用器来处理大键。
-	-	可以使用一个多路复用器来处理小键。
-	-	可为连接超时设置不同的值，并为使用的每个 ConnectionMultiplexer 设置重试逻辑。
-	-	在每个多路复用器上设置 `ClientName` 属性以帮助进行诊断。
-	-	这可以更好地改进每个 `ConnectionMultiplexer` 的延迟。
+    -	根据工作负载相应地设置值。如果要存储较大值，应将超时设置为较大值。
+    -	将 `AbortOnConnectFail` 设置为 false，让 StackExchange.Redis 为你重新连接。
+    -	使用应用程序的单个 ConnectionMultiplexer 实例。可以使用 LazyConnection 创建 Connection 属性返回的单个实例，如[使用 ConnectionMultiplexer 类连接到缓存](./cache-dotnet-how-to-use-azure-redis-cache.md#connect-to-the-cache)中所示。
+    -	将 `ConnectionMultiplexer.ClientName` 属性设置为应用程序实例的唯一名称以进行诊断。
+    -	对自定义工作负载使用多个 `ConnectionMultiplexer` 实例。
+    -	如果应用程序中的负载不同，你可以遵循此模型。例如：
+    -	可以使用一个多路复用器来处理大键。
+    -	可以使用一个多路复用器来处理小键。
+    -	可为连接超时设置不同的值，并为使用的每个 ConnectionMultiplexer 设置重试逻辑。
+    -	在每个多路复用器上设置 `ClientName` 属性以帮助进行诊断。
+    -	这可以更好地改进每个 `ConnectionMultiplexer` 的延迟。
 
 ### <a id="what-redis-cache-clients-can-i-use"></a>可以使用哪些 Redis 缓存客户端？
 
@@ -192,21 +192,21 @@ Redis 的一大优势是有许多客户端，支持许多不同的开发语言�
 
 Azure Redis 缓存没有本地模拟器，但可以在本地计算机上从 [Redis 命令行工具](https://github.com/MSOpenTech/redis/releases/)运行 MSOpenTech 版本的 redis-server.exe 并连接到它，以获得与本地缓存模拟器相似的体验，如以下示例所示。
 
-	private static Lazy<ConnectionMultiplexer>
-  		lazyConnection = new Lazy<ConnectionMultiplexer>
-	    (() =>
-	    {
-		    // Connect to a locally running instance of Redis to simulate a local cache emulator experience.
-		    return ConnectionMultiplexer.Connect("127.0.0.1:6379");
-	    });
-	
-	    public static ConnectionMultiplexer Connection
-	    {
-		    get
-		    {
-			    return lazyConnection.Value;
-		    }
-	    }
+    private static Lazy<ConnectionMultiplexer>
+          lazyConnection = new Lazy<ConnectionMultiplexer>
+        (() =>
+        {
+            // Connect to a locally running instance of Redis to simulate a local cache emulator experience.
+            return ConnectionMultiplexer.Connect("127.0.0.1:6379");
+        });
+    
+        public static ConnectionMultiplexer Connection
+        {
+            get
+            {
+                return lazyConnection.Value;
+            }
+        }
 
 如果需要，可以选择配置 [redis.conf](http://redis.io/topics/config) 文件，以更好地匹配联机 Azure Redis 缓存的[默认缓存设置](./cache-configure.md#default-redis-server-configuration)。
 
@@ -286,7 +286,7 @@ Redis 服务器不能现成地支持 SSL，但 Azure Redis 缓存可提供此支
 ### <a name="cache-redis-commands" id="what-are-some-of-the-considerations-when-using-common-redis-commands"></a>使用常见 Redis 命令时要注意哪些问题？
 
 -	对于某些需要较长时间才能完成的 Redis 命令，在未了解这些命令造成的影响的情况下，你不应运行这些命令。
-	-	例如，不要在生产环境中运行 [KEYS](http://redis.io/commands/keys) 命令，因为它可能需要很长时间才能返回，具体时间取决于键数。Redis 是单线程服务器，每次只能处理一个命令。如果在 KEYS 后面发出了其他命令，则这些命令只会在处理完 KEYS 命令后才会得到处理。[redis.io 站点](http://redis.io/commands/)具有关于其支持的每个操作的时间复杂性的详细信息。单击每个命令以查看每个操作的复杂程度。
+    -	例如，不要在生产环境中运行 [KEYS](http://redis.io/commands/keys) 命令，因为它可能需要很长时间才能返回，具体时间取决于键数。Redis 是单线程服务器，每次只能处理一个命令。如果在 KEYS 后面发出了其他命令，则这些命令只会在处理完 KEYS 命令后才会得到处理。[redis.io 站点](http://redis.io/commands/)具有关于其支持的每个操作的时间复杂性的详细信息。单击每个命令以查看每个操作的复杂程度。
 -	键大小 - 应使用小键/值还是大键/值？ 通常这取决于方案。如果你的方案需要较大的键，则你可以调整 ConnectionTimeout 和重试值，并调整重试逻辑。从 Redis 服务器的角度来看，值越小，性能就越好。
 -	但这并不意味着你不能 Redis 中存储较大值，只是要注意以下事项。延迟将会提高。如果你有一个较大的数据集和一个较小的数据集，则可以使用多个 ConnectionMultiplexer 实例，并根据[StackExchange.Redis 配置选项有什么作用](#cache-configuration)部分中所述，为每个实例配置一组不同的超时和重试值。
 
@@ -304,9 +304,9 @@ Redis 服务器不能现成地支持 SSL，但 Azure Redis 缓存可提供此支
 -	使用 1 k 有效负载测试管道 SET 请求
 
     redis-benchmark.exe -h **yourcache**.redis.cache.chinacloudapi.cn -a **yourAccesskey** -t SET -n 1000000 -d 1024 -P 50
-	
+    
 -	使用 1 k 有效负载测试管道 GET 请求。注意：首先运行上面显示的 SET 测试以填充缓存
-	
+    
     redis-benchmark.exe -h **yourcache**.redis.cache.chinacloudapi.cn -a **yourAccesskey** -t GET -n 1000000 -d 1024 -P 50
 
 ### <a name="threadpool" id="important-details-about-threadpool-growth"></a>有关线程池增长的重要详细信息
@@ -327,10 +327,10 @@ CLR 线程池具有两种类型的线程 —“辅助角色”和“I/O 完成�
 
 如果我们考虑一个来自 StackExchange.Redis（内部版本 1.0.450 或更高版本）的示例错误消息，会看到它现在会打印线程池统计信息（请参阅下面的 IOCP 和辅助角色详细信息）。
 
-	System.TimeoutException: Timeout performing GET MyKey, inst: 2, mgr: Inactive, 
-	queue: 6, qu: 0, qs: 6, qc: 0, wr: 0, wq: 0, in: 0, ar: 0, 
-	IOCP: (Busy=6,Free=994,Min=4,Max=1000), 
-	WORKER: (Busy=3,Free=997,Min=4,Max=1000)
+    System.TimeoutException: Timeout performing GET MyKey, inst: 2, mgr: Inactive, 
+    queue: 6, qu: 0, qs: 6, qc: 0, wr: 0, wq: 0, in: 0, ar: 0, 
+    IOCP: (Busy=6,Free=994,Min=4,Max=1000), 
+    WORKER: (Busy=3,Free=997,Min=4,Max=1000)
 
 在上面的示例中，可以看到对于 IOCP 线程有 6 个忙碌线程，而系统配置为允许最少 4 个线程。在这种情况下，客户端可能会遇到两个 500 毫秒延迟，因为 6 > 4。
 
@@ -386,17 +386,17 @@ Redis 缓存“设置”边栏选项卡的“支持 + 故障排除”部分还�
 下面是缓存断开连接的一些常见原因。
 
 -	客户端的原因
-	-	已重新部署客户端应用程序。
-	-	客户端应用程序执行了缩放操作。
-		-	对于云服务或 Web Apps，原因可能在于自动缩放。
-	-	客户端上的网络层已更改。
-	-	客户端中或客户端与服务器之间的网络节点中发生暂时性错误。
-	-	已达到带宽阈值限制。
-	-	占用大量 CPU 的操作花费了太长时间才完成。
+    -	已重新部署客户端应用程序。
+    -	客户端应用程序执行了缩放操作。
+        -	对于云服务或 Web Apps，原因可能在于自动缩放。
+    -	客户端上的网络层已更改。
+    -	客户端中或客户端与服务器之间的网络节点中发生暂时性错误。
+    -	已达到带宽阈值限制。
+    -	占用大量 CPU 的操作花费了太长时间才完成。
 -	服务器端的原因
-	-	在标准缓存产品上，Azure Redis 缓存服务启动了从主节点到辅助节点的故障转移。
-	-	Azure 正在修补已部署缓存的实例
-		-	原因可能是 Redis 服务器更新或常规 VM 维护。
+    -	在标准缓存产品上，Azure Redis 缓存服务启动了从主节点到辅助节点的故障转移。
+    -	Azure 正在修补已部署缓存的实例
+        -	原因可能是 Redis 服务器更新或常规 VM 维护。
 
 ### <a id="which-azure-cache-offering-is-right-for-me"></a> 哪种 Azure 缓存产品适合我？
 

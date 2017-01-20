@@ -30,20 +30,20 @@ ms.author: dobett
    * remote\_monitoring.js
 3. 打开 remote\_monitoring.js 文件并查找以下变量：
 
-		var connectionString = "[IoT Hub device connection string]";
+        var connectionString = "[IoT Hub device connection string]";
     
 4. 将 **[IoT Hub device connection string]** 替换为设备连接字符串。可以在远程监视解决方案仪表板中找到 IoT 中心主机名、设备 ID 和设备密钥的值。设备连接字符串具有以下格式：
 
-		HostName={your IoT Hub hostname};DeviceId={your device id};SharedAccessKey={your device key}
+        HostName={your IoT Hub hostname};DeviceId={your device id};SharedAccessKey={your device key}
     
     如果 IoT 中心主机名是 **contoso**，而设备 ID 为 **mydevice**，则连接字符串如下所示：
    
-		var connectionString = "HostName=contoso.azure-devices.cn;DeviceId=mydevice;SharedAccessKey=2s ... =="
+        var connectionString = "HostName=contoso.azure-devices.cn;DeviceId=mydevice;SharedAccessKey=2s ... =="
     
 5. 保存文件。在包含这些文件的文件夹中的命令提示符处运行以下命令，以安装所需包，然后运行示例应用程序：
 
-		npm install --save
-		node remote_monitoring.js
+        npm install --save
+        node remote_monitoring.js
     
 [!INCLUDE [iot-suite-visualize-connecting](../../includes/iot-suite-visualize-connecting.md)]
 

@@ -39,158 +39,158 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
 
 ###ChannelOperations 类定义
 
-	/// <summary> 
-	/// The ChannelOperations class only implements 
-	/// the Channel’s creation operation. 
-	/// </summary> 
-	public class ChannelOperations
-	{
-	    // Read values from the App.config file.
-	    private static readonly string _mediaServicesAccountName =
-	        ConfigurationManager.AppSettings["MediaServicesAccountName"];
-	    private static readonly string _mediaServicesAccountKey =
-	        ConfigurationManager.AppSettings["MediaServicesAccountKey"];
-	
-		private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
+    /// <summary> 
+    /// The ChannelOperations class only implements 
+    /// the Channel’s creation operation. 
+    /// </summary> 
+    public class ChannelOperations
+    {
+        // Read values from the App.config file.
+        private static readonly string _mediaServicesAccountName =
+            ConfigurationManager.AppSettings["MediaServicesAccountName"];
+        private static readonly string _mediaServicesAccountKey =
+            ConfigurationManager.AppSettings["MediaServicesAccountKey"];
+    
+        private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
 
-		// Azure China uses a different API server and a different ACS Base Address from the Global.
-		private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
-		private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
+        // Azure China uses a different API server and a different ACS Base Address from the Global.
+        private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
+        private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
 
-	    // Field for service context.
-	    private static CloudMediaContext _context = null;
-	    private static MediaServicesCredentials _cachedCredentials = null;
-		private static Uri _apiServer = null;
-	
-	    public ChannelOperations()
-	    {
-	            _cachedCredentials = new MediaServicesCredentials(_mediaServicesAccountName,
-	                _mediaServicesAccountKey, _defaultScope, _chinaAcsBaseAddressUrl);
-	
-				// Create the API server Uri
-				_apiServer = new Uri(_chinaApiServerUrl);
+        // Field for service context.
+        private static CloudMediaContext _context = null;
+        private static MediaServicesCredentials _cachedCredentials = null;
+        private static Uri _apiServer = null;
+    
+        public ChannelOperations()
+        {
+                _cachedCredentials = new MediaServicesCredentials(_mediaServicesAccountName,
+                    _mediaServicesAccountKey, _defaultScope, _chinaAcsBaseAddressUrl);
+    
+                // Create the API server Uri
+                _apiServer = new Uri(_chinaApiServerUrl);
 
-	            _context = new CloudMediaContext(_apiServer, _cachedCredentials);    }
-	
-	    /// <summary>  
-	    /// Initiates the creation of a new channel.  
-	    /// </summary>  
-	    /// <param name="channelName">Name to be given to the new channel</param>  
-	    /// <returns>  
-	    /// Operation Id for the long running operation being executed by Media Services. 
-	    /// Use this operation Id to poll for the channel creation status. 
-	    /// </returns> 
-	    public string StartChannelCreation(string channelName)
-	    {
-	        var operation = _context.Channels.SendCreateOperation(
-	            new ChannelCreationOptions
-	            {
-	                Name = channelName,
-	                Input = CreateChannelInput(),
-	                Preview = CreateChannelPreview(),
-	                Output = CreateChannelOutput()
-	            });
-	
-	        return operation.Id;
-	    }
-	
-	    /// <summary> 
-	    /// Checks if the operation has been completed. 
-	    /// If the operation succeeded, the created channel Id is returned in the out parameter.
-	    /// </summary> 
-	    /// <param name="operationId">The operation Id.</param> 
-	    /// <param name="channel">
-	    /// If the operation succeeded, 
-	    /// the created channel Id is returned in the out parameter.</param>
-	    /// <returns>Returns false if the operation is still in progress; otherwise, true.</returns> 
-	    public bool IsCompleted(string operationId, out string channelId)
-	    {
-	        IOperation operation = _context.Operations.GetOperation(operationId);
-	        bool completed = false;
-	
-	        channelId = null;
-	
-	        switch (operation.State)
-	        {
-	            case OperationState.Failed:
-	                // Handle the failure. 
-	                // For example, throw an exception. 
-					// Use the following information in the exception: operationId, operation.ErrorMessage.
-	                break;
-	            case OperationState.Succeeded:
-	                completed = true;
-	                channelId = operation.TargetEntityId;
-	                break;
-	            case OperationState.InProgress:
-	                completed = false;
-	                break;
-	        }
-	        return completed;
-	    }
-	
-	    private static ChannelInput CreateChannelInput()
-	    {
-	        return new ChannelInput
-	        {
-	            StreamingProtocol = StreamingProtocol.RTMP,
-	            AccessControl = new ChannelAccessControl
-	            {
-	                IPAllowList = new List<IPRange>
-	                {
-	                    new IPRange
-	                    {
-	                        Name = "TestChannelInput001",
-	                        Address = IPAddress.Parse("0.0.0.0"),
-	                        SubnetPrefixLength = 0
-	                    }
-	                }
-	            }
-	        };
-	    }
-	
-	    private static ChannelPreview CreateChannelPreview()
-	    {
-	        return new ChannelPreview
-	        {
-	            AccessControl = new ChannelAccessControl
-	            {
-	                IPAllowList = new List<IPRange>
-	                {
-	                    new IPRange
-	                    {
-	                        Name = "TestChannelPreview001",
-	                        Address = IPAddress.Parse("0.0.0.0"),
-	                        SubnetPrefixLength = 0
-	                    }
-	                }
-	            }
-	        };
-	    }
-	
-	    private static ChannelOutput CreateChannelOutput()
-	    {
-	        return new ChannelOutput
-	        {
-	            Hls = new ChannelOutputHls { FragmentsPerSegment = 1 }
-	        };
-	    }
-	}
+                _context = new CloudMediaContext(_apiServer, _cachedCredentials);    }
+    
+        /// <summary>  
+        /// Initiates the creation of a new channel.  
+        /// </summary>  
+        /// <param name="channelName">Name to be given to the new channel</param>  
+        /// <returns>  
+        /// Operation Id for the long running operation being executed by Media Services. 
+        /// Use this operation Id to poll for the channel creation status. 
+        /// </returns> 
+        public string StartChannelCreation(string channelName)
+        {
+            var operation = _context.Channels.SendCreateOperation(
+                new ChannelCreationOptions
+                {
+                    Name = channelName,
+                    Input = CreateChannelInput(),
+                    Preview = CreateChannelPreview(),
+                    Output = CreateChannelOutput()
+                });
+    
+            return operation.Id;
+        }
+    
+        /// <summary> 
+        /// Checks if the operation has been completed. 
+        /// If the operation succeeded, the created channel Id is returned in the out parameter.
+        /// </summary> 
+        /// <param name="operationId">The operation Id.</param> 
+        /// <param name="channel">
+        /// If the operation succeeded, 
+        /// the created channel Id is returned in the out parameter.</param>
+        /// <returns>Returns false if the operation is still in progress; otherwise, true.</returns> 
+        public bool IsCompleted(string operationId, out string channelId)
+        {
+            IOperation operation = _context.Operations.GetOperation(operationId);
+            bool completed = false;
+    
+            channelId = null;
+    
+            switch (operation.State)
+            {
+                case OperationState.Failed:
+                    // Handle the failure. 
+                    // For example, throw an exception. 
+                    // Use the following information in the exception: operationId, operation.ErrorMessage.
+                    break;
+                case OperationState.Succeeded:
+                    completed = true;
+                    channelId = operation.TargetEntityId;
+                    break;
+                case OperationState.InProgress:
+                    completed = false;
+                    break;
+            }
+            return completed;
+        }
+    
+        private static ChannelInput CreateChannelInput()
+        {
+            return new ChannelInput
+            {
+                StreamingProtocol = StreamingProtocol.RTMP,
+                AccessControl = new ChannelAccessControl
+                {
+                    IPAllowList = new List<IPRange>
+                    {
+                        new IPRange
+                        {
+                            Name = "TestChannelInput001",
+                            Address = IPAddress.Parse("0.0.0.0"),
+                            SubnetPrefixLength = 0
+                        }
+                    }
+                }
+            };
+        }
+    
+        private static ChannelPreview CreateChannelPreview()
+        {
+            return new ChannelPreview
+            {
+                AccessControl = new ChannelAccessControl
+                {
+                    IPAllowList = new List<IPRange>
+                    {
+                        new IPRange
+                        {
+                            Name = "TestChannelPreview001",
+                            Address = IPAddress.Parse("0.0.0.0"),
+                            SubnetPrefixLength = 0
+                        }
+                    }
+                }
+            };
+        }
+    
+        private static ChannelOutput CreateChannelOutput()
+        {
+            return new ChannelOutput
+            {
+                Hls = new ChannelOutputHls { FragmentsPerSegment = 1 }
+            };
+        }
+    }
 
 ###客户端代码
 
-	ChannelOperations channelOperations = new ChannelOperations();
-	string opId = channelOperations.StartChannelCreation("MyChannel001");
-	
-	string channelId = null;
-	bool isCompleted = false;
-	
-	while (isCompleted == false)
-	{
-	    System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
-	    isCompleted = channelOperations.IsCompleted(opId, out channelId);
-	}
-	
-	// If we got here, we should have the newly created channel id.
-	Console.WriteLine(channelId);
+    ChannelOperations channelOperations = new ChannelOperations();
+    string opId = channelOperations.StartChannelCreation("MyChannel001");
+    
+    string channelId = null;
+    bool isCompleted = false;
+    
+    while (isCompleted == false)
+    {
+        System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
+        isCompleted = channelOperations.IsCompleted(opId, out channelId);
+    }
+    
+    // If we got here, we should have the newly created channel id.
+    Console.WriteLine(channelId);
  
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

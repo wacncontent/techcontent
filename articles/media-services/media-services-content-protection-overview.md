@@ -81,9 +81,9 @@ Azure 媒体服务支持传送使用 AES 明文密钥和 DRM 加密（Microsoft 
 - 如果只将一个加密应用到资产，则无需在 URL 中指定加密类型。
 - 加密类型区分大小写。
 - 可以指定以下加密类型：
-	- **cenc**：通用加密（Playready 或 Widevine）
-	- **cbc aapl**：Fairplay
-	- **cbc**：AES 信封加密。
+    - **cenc**：通用加密（Playready 或 Widevine）
+    - **cbc aapl**：Fairplay
+    - **cbc**：AES 信封加密。
 
 ##<a id="common-scenarios"></a>常见方案
 

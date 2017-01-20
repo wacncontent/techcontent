@@ -49,22 +49,22 @@ ms.author: cherylmc
 
 1. 你可以通过选择创建新资源的选项来创建 ExpressRoute 线路。单击“新建”>“网络”>“ExpressRoute”，如下图所示：
 
-	![创建 ExpressRoute 线路](./media/expressroute-howto-circuit-portal-resource-manager/createcircuit1.png)
+    ![创建 ExpressRoute 线路](./media/expressroute-howto-circuit-portal-resource-manager/createcircuit1.png)
 
 2. 单击“ExpressRoute”即可显示“创建 ExpressRoute 线路”边栏选项卡。在此边栏选项卡中填充值时，请务必指定正确的 SKU 层和数据计量方式。
 
-	- “层”决定是启用 ExpressRoute 标准版外接程序还是 ExpressRoute 高级版外接程序。可以指定“Standard”以获取标准 SKU，或指定“Premium”以获取高级版外接程序。
+    - “层”决定是启用 ExpressRoute 标准版外接程序还是 ExpressRoute 高级版外接程序。可以指定“Standard”以获取标准 SKU，或指定“Premium”以获取高级版外接程序。
 
-	- “数据计量”决定计费类型。可以指定“Metered”以获取数据流量套餐，指定“Unlimited”以获取无限制流量套餐。注意，可以将计费类型从 **Metered** 更改为 **Unlimited**，但不能将类型从 **Unlimited** 更改为 **Metered**。
+    - “数据计量”决定计费类型。可以指定“Metered”以获取数据流量套餐，指定“Unlimited”以获取无限制流量套餐。注意，可以将计费类型从 **Metered** 更改为 **Unlimited**，但不能将类型从 **Unlimited** 更改为 **Metered**。
 
-	![配置 SKU 层和数据计量](./media/expressroute-howto-circuit-portal-resource-manager/createcircuit2.png)
+    ![配置 SKU 层和数据计量](./media/expressroute-howto-circuit-portal-resource-manager/createcircuit2.png)
 
 ### 3\.查看线路和属性
 
 **查看所有线路**
 
 在左侧菜单中选择“所有资源”即可查看创建的所有线路。
-	
+    
 ![查看线路](./media/expressroute-howto-circuit-portal-resource-manager/listresource.png)
 
 **查看属性**

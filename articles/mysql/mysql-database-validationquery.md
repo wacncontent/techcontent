@@ -30,38 +30,38 @@ wacn.lang: cn
 
 具体设置用户可参考[JDBC Connection Pool官方介绍文档](https://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html#Common_Attributes)。主要需要配置以下三个参数： TestOnBorrow (设为ture), ValidationQuery (设为 SELECT 1), ValidationQueryTimeout (设为1)，具体示例代码如下：
 
- 	public class SimpleTestOnBorrowExample {
-      	public static void main(String[] args) throws Exception {
-          	PoolProperties p = new PoolProperties();
-          	p.setUrl("jdbc:mysql://localhost:3306/mysql");
-          	p.setDriverClassName("com.mysql.jdbc.Driver");
-          	p.setUsername("root");
-          	p.setPassword("password");
+     public class SimpleTestOnBorrowExample {
+          public static void main(String[] args) throws Exception {
+              PoolProperties p = new PoolProperties();
+              p.setUrl("jdbc:mysql://localhost:3306/mysql");
+              p.setDriverClassName("com.mysql.jdbc.Driver");
+              p.setUsername("root");
+              p.setPassword("password");
                 // The indication of whether objects will be validated by the idle object evictor (if any). 
                 // If an object fails to validate, it will be dropped from the pool. 
                 // NOTE - for a true value to have any effect, the validationQuery or validatorClassName parameter must be set to a non-null string. 
-          	p.setTestOnBorrow(true); 
+              p.setTestOnBorrow(true); 
                 
                 // The SQL query that will be used to validate connections from this pool before returning them to the caller.
                 // If specified, this query does not have to return any data, it just can't throw a SQLException.
-          	p.setValidationQuery("SELECT 1");
+              p.setValidationQuery("SELECT 1");
                 
                 // The timeout in seconds before a connection validation queries fail. 
                 // This works by calling java.sql.Statement.setQueryTimeout(seconds) on the statement that executes the validationQuery. 
                 // The pool itself doesn't timeout the query, it is still up to the JDBC driver to enforce query timeouts. 
                 // A value less than or equal to zero will disable this feature.
-          	p.setValidationQueryTimeout(1);
+              p.setValidationQueryTimeout(1);
                 // set other usefull pool properties.
-          	DataSource datasource = new DataSource();
-          	datasource.setPoolProperties(p);
+              DataSource datasource = new DataSource();
+              datasource.setPoolProperties(p);
 
-         	 Connection con = null;
-          	try {
-            	con = datasource.getConnection();
-            	// execute your query here
-          	} finally {
-           	 if (con!=null) try {con.close();}catch (Exception ignore) {}
-          	}
-      	}
-  	}
+              Connection con = null;
+              try {
+                con = datasource.getConnection();
+                // execute your query here
+              } finally {
+                if (con!=null) try {con.close();}catch (Exception ignore) {}
+              }
+          }
+      }
 

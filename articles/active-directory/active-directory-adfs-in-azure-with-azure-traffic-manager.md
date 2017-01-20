@@ -115,9 +115,9 @@ ms.author: anandy;billmath
 若要测试 AD FS，最简单的方法是使用 IdpInitiatedSignon.aspx 页。若要执行此操作，必须在 AD FS 属性中启用 IdpInitiatedSignOn。请遵循以下步骤来验证你的 AD FS 设置
  
 1. 使用 PowerShell 在 AD FS 服务器上运行以下 cmdlet，以将它设置为启用。
-	
-	Set-AdfsProperties -EnableIdPInitiatedSignonPage $true
-	
+    
+    Set-AdfsProperties -EnableIdPInitiatedSignonPage $true
+    
 2. 从任何外部计算机访问 https://<yourfederationservicedns>/adfs/ls/IdpInitiatedSignon.aspx
 
 3. 你应会看到如下所示的 AD FS 页：

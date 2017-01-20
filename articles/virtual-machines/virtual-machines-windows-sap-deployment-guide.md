@@ -354,9 +354,9 @@ Azure 提供了优异的平台检测，以满足所有业务关键型应用程�
 在配置工作期间需要以下资源：
 
 * SAP 说明 [1928533]
-	* 支持部署 SAP 软件的 Azure 虚拟机大小的列表
-	* 按 Azure 虚拟机大小提供的重要容量信息
-	* 支持的 SAP 软件以及操作系统与数据库的组合
+    * 支持部署 SAP 软件的 Azure 虚拟机大小的列表
+    * 按 Azure 虚拟机大小提供的重要容量信息
+    * 支持的 SAP 软件以及操作系统与数据库的组合
 * SAP 说明 [2015553]，其中列出了在将 SAP 软件部署到 Azure 时，要受 SAP 支持而必须满足的先决条件。
 * SAP 说明 [1999351]，其中包含有关适用于 SAP 的增强型 Azure 监视的其他故障排除信息。
 * SAP 说明 [2178632]，其中包含有关 Azure 上 SAP 的所有可用监视度量值的详细信息。
@@ -703,14 +703,14 @@ ___
 #### <a name="b2db5c9a-a076-42c6-9835-16945868e866"></a>Windows
 
 * 下载 Azure VM 代理：
-	* 从以下网页下载 Azure VM 代理安装程序包：<https://go.microsoft.com/fwlink/?LinkId=394789>
-	* 将 VM 代理 MSI 包存储在便携式计算机或服务器本地
+    * 从以下网页下载 Azure VM 代理安装程序包：<https://go.microsoft.com/fwlink/?LinkId=394789>
+    * 将 VM 代理 MSI 包存储在便携式计算机或服务器本地
 * 安装 Azure VM 代理：
-	* 使用终端服务 (RDP) 连接到已部署的 Azure VM
-	* 在 VM 上打开一个 Windows 资源管理器窗口，然后打开 VM 代理的 MSI 文件的目标目录
-	* 将 Azure VM 代理安装程序 MSI 文件从本地便携式计算机/服务器拖放到 VM 上的 VM 代理的目标目录中
-	* 在 VM 中双击该 MSI 文件
-	* 对于已加入本地域的 VM，请确保最终的 Internet 代理设置也适用于 VM 中的 Windows 本地系统帐户 (S-1-5-18)，如[配置代理][deployment-guide-configure-proxy]一章中所述。VM 代理将在此上下文中运行，并且需要能够连接到 Azure。
+    * 使用终端服务 (RDP) 连接到已部署的 Azure VM
+    * 在 VM 上打开一个 Windows 资源管理器窗口，然后打开 VM 代理的 MSI 文件的目标目录
+    * 将 Azure VM 代理安装程序 MSI 文件从本地便携式计算机/服务器拖放到 VM 上的 VM 代理的目标目录中
+    * 在 VM 中双击该 MSI 文件
+    * 对于已加入本地域的 VM，请确保最终的 Internet 代理设置也适用于 VM 中的 Windows 本地系统帐户 (S-1-5-18)，如[配置代理][deployment-guide-configure-proxy]一章中所述。VM 代理将在此上下文中运行，并且需要能够连接到 Azure。
 
 #### <a name="6889ff12-eaaf-4f3c-97e1-7c9edc7f7542"></a>Linux
 使用以下命令来安装适用于 Linux 的 VM 代理
@@ -769,9 +769,9 @@ ___
 * 确保已安装最新版本的 Azure PowerShell cmdlet。请参阅本文档的[部署 Azure PowerShell cmdlet][deployment-guide-4.1] 一章。
 * 运行以下 Azure PowerShell cmdlet。有关可用环境的列表，请运行 cmdlet Get-AzureRmEnvironment。如果想要使用公共 Azure，你的环境将是 AzureCloud。对于中国区 Azure，请选择 AzureChinaCloud。
 
-	$env = Get-AzureRmEnvironment -Name <name of the environment>
-	Login-AzureRmAccount -Environment $env
-	Set-AzureRmContext -SubscriptionName <subscription name>
+    $env = Get-AzureRmEnvironment -Name <name of the environment>
+    Login-AzureRmAccount -Environment $env
+    Set-AzureRmContext -SubscriptionName <subscription name>
     
     Set-AzureRmVMAEMExtension -ResourceGroupName <resource group name> -VMName <virtual machine name>
 

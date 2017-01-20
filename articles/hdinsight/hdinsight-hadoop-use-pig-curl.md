@@ -79,7 +79,7 @@ ms.author: larryfr
 
         curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/jobs/JOBID | jq .status.state
 
-	如果作业已完成，状态将是 **SUCCEEDED**。
+    如果作业已完成，状态将是 **SUCCEEDED**。
 
     > [!NOTE] 此 Curl 请求返回具有作业相关信息的 JavaScript 对象表示法 (JSON) 文档；使用 jq 可以仅检索状态值。
 
@@ -89,11 +89,11 @@ ms.author: larryfr
 
 可以使用 [Azure CLI](../xplat-cli-install.md) 列出并下载这些文件。例如，若要列出 **example/pigcurl** 中的文件，请使用以下命令：
 
-	azure storage blob list <container-name> example/pigcurl
+    azure storage blob list <container-name> example/pigcurl
 
 若要下载文件，请使用以下命令：
 
-	azure storage blob download <container-name> <blob-name> <destination-file>
+    azure storage blob download <container-name> <blob-name> <destination-file>
 
 > [!NOTE] 你必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。
 

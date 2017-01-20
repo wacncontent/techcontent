@@ -58,41 +58,41 @@ Azure 中国区目前仅支持文本 PowerShell 工作流 Runbook。
 
 例如，请注意下面的代码，用于获取所有正在运行的服务。
 
-	 Get-Service | Where-Object {$_.Status -eq "Running"}
+     Get-Service | Where-Object {$_.Status -eq "Running"}
 
 如果您尝试在工作流中运行此代码，您将看到一条消息，类似于“无法使用指定的命名参数解析参数集”。 若要纠正此问题，只需提供如以下所示的参数名称。
 
-	Workflow Get-RunningServices
-	{
-		Get-Service | Where-Object -FilterScript {$_.Status -eq "Running"}
-	}
+    Workflow Get-RunningServices
+    {
+        Get-Service | Where-Object -FilterScript {$_.Status -eq "Running"}
+    }
 
 ### 反序列化的对象
 
 工作流中的对象已反序列化。这意味着其属性仍然可用，但其方法将不再可用。例如，请注意以下 PowerShell 代码，使用服务对象的 Stop 方法停止一项服务。
 
-	$Service = Get-Service -Name MyService
-	$Service.Stop()
+    $Service = Get-Service -Name MyService
+    $Service.Stop()
 
 如果您尝试在工作流中运行该代码，将看到错误消息，指明“在 Windows PowerShell 工作流中不支持方法调用”。
 
 一种选择是将这两行代码包括在 [InlineScript](#InlineScript) 代码块中，在这种情况下，$Service 是该代码块中的服务对象。
 
-	Workflow Stop-Service
-	{
-		InlineScript {
-			$Service = Get-Service -Name MyService
-			$Service.Stop()
-		}
-	} 
+    Workflow Stop-Service
+    {
+        InlineScript {
+            $Service = Get-Service -Name MyService
+            $Service.Stop()
+        }
+    } 
 
 另一个选项是使用执行相同功能的另一个 cmdlet（如果可用）。在我们的示例中，Stop-Service cmdlet 提供了与 Stop 方法相同的功能，您可以将以下代码用于工作流。
 
-	Workflow Stop-MyService
-	{
-		$Service = Get-Service -Name MyService
-		Stop-Service -Name $Service.Name
-	}
+    Workflow Stop-MyService
+    {
+        $Service = Get-Service -Name MyService
+        Stop-Service -Name $Service.Name
+    }
 
 ## <a name="InlineScript" id="inlinescript"></a> InlineScript
 
@@ -107,31 +107,31 @@ InlineScript 使用如下所示的语法。
 
 您可以通过将输出分配到一个变量，以返回来自 InlineScript 的输出。下面的示例停止一项服务，然后输出服务名称。
 
-	Workflow Stop-MyService
-	{
-		$Output = InlineScript {
-			$Service = Get-Service -Name MyService
-			$Service.Stop()
-			$Service
-		}
+    Workflow Stop-MyService
+    {
+        $Output = InlineScript {
+            $Service = Get-Service -Name MyService
+            $Service.Stop()
+            $Service
+        }
 
-		$Output.Name
-	}
+        $Output.Name
+    }
 
 您可以将值传递到 InlineScript 块，但是您必须使用 **$Using** 作用域修饰符。下面的示例与前面的示例相同，只是服务名称由变量提供。
 
-	Workflow Stop-MyService
-	{
-		$ServiceName = "MyService"
-	
-		$Output = InlineScript {
-			$Service = Get-Service -Name $Using:ServiceName
-			$Service.Stop()
-			$Service
-		}
+    Workflow Stop-MyService
+    {
+        $ServiceName = "MyService"
+    
+        $Output = InlineScript {
+            $Service = Get-Service -Name $Using:ServiceName
+            $Service.Stop()
+            $Service
+        }
 
-		$Output.Name
-	}
+        $Output.Name
+    }
 
 尽管 InlineScript 活动可能在某些工作流中非常关键，但它们不支持工作流构造，并且只能出于以下原因才使用：
 
@@ -156,23 +156,23 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
 
 例如，请注意以下将多个文件复制到网络目标的 PowerShell 命令。这些命令将依次进行，因此必须完成一个文件的复制，然后才能开始复制下一个文件。
 
-	$Copy-Item -Path C:\LocalPath\File1.txt -Destination \\NetworkPath\File1.txt
-	$Copy-Item -Path C:\LocalPath\File2.txt -Destination \\NetworkPath\File2.txt
-	$Copy-Item -Path C:\LocalPath\File3.txt -Destination \\NetworkPath\File3.txt
+    $Copy-Item -Path C:\LocalPath\File1.txt -Destination \\NetworkPath\File1.txt
+    $Copy-Item -Path C:\LocalPath\File2.txt -Destination \\NetworkPath\File2.txt
+    $Copy-Item -Path C:\LocalPath\File3.txt -Destination \\NetworkPath\File3.txt
 
 下面的工作流并行运行这些命令，以便它们同时开始复制。只有在所有复制均已完成之后，才会显示完成消息。
 
-	Workflow Copy-Files
-	{
-		Parallel 
-		{
-			$Copy-Item -Path "C:\LocalPath\File1.txt" -Destination "\\NetworkPath"
-			$Copy-Item -Path "C:\LocalPath\File2.txt" -Destination "\\NetworkPath"
-			$Copy-Item -Path "C:\LocalPath\File3.txt" -Destination "\\NetworkPath"
-		}
+    Workflow Copy-Files
+    {
+        Parallel 
+        {
+            $Copy-Item -Path "C:\LocalPath\File1.txt" -Destination "\\NetworkPath"
+            $Copy-Item -Path "C:\LocalPath\File2.txt" -Destination "\\NetworkPath"
+            $Copy-Item -Path "C:\LocalPath\File3.txt" -Destination "\\NetworkPath"
+        }
 
-		Write-Output "Files copied."
-	}
+        Write-Output "Files copied."
+    }
 
 您可以使用 **ForEach-Parallel** 构造同时处理集合中的每个项的处理命令。尽管脚本块中的命令按顺序运行，但集合中的项是并行处理的。这将使用如下所示的语法。在这种情况下，Activity1 将在同一时间对集合中的所有项启动。对于每个项，Activity2 将在 Activity1 完成后启动。只有在对所有项完成 Activity1 和 Activity2 后，activity3 才会启动。
 
@@ -185,18 +185,18 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
 
 下面的示例是类似于前面的示例，用于并行复制文件。在这种情况下，每个文件复制完成之后都将显示一条消息。只有在所有文件均复制完成之后，才会显示最终的完成消息。
 
-	Workflow Copy-Files
-	{
-		$files = @("C:\LocalPath\File1.txt","C:\LocalPath\File2.txt","C:\LocalPath\File3.txt")
+    Workflow Copy-Files
+    {
+        $files = @("C:\LocalPath\File1.txt","C:\LocalPath\File2.txt","C:\LocalPath\File3.txt")
 
-		ForEach -Parallel ($File in $Files) 
-		{
-			$Copy-Item -Path $File -Destination \\NetworkPath
-			Write-Output "$File copied."
-		}
-		
-		Write-Output "All files copied."
-	}
+        ForEach -Parallel ($File in $Files) 
+        {
+            $Copy-Item -Path $File -Destination \\NetworkPath
+            Write-Output "$File copied."
+        }
+        
+        Write-Output "All files copied."
+    }
 
 > [!NOTE]  我们不建议并行运行子 Runbook，这是由于这已被证实将导致不可靠的结果。来自子 Runbook 的输出有时将不会显示，一个子 Runbook 中的设置可能会影响其他并行子 Runbook
 
@@ -216,19 +216,19 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
 
 下面的示例将多个文件复制到某个网络位置，并在每个文件复制完成后设置检查点。如果网络位置丢失，工作流将以错误结束。当再次启动它时，它将从上一个检查点处继续，这意味着会跳过已复制的文件。
 
-	Workflow Copy-Files
-	{
-		$files = @("C:\LocalPath\File1.txt","C:\LocalPath\File2.txt","C:\LocalPath\File3.txt")
+    Workflow Copy-Files
+    {
+        $files = @("C:\LocalPath\File1.txt","C:\LocalPath\File2.txt","C:\LocalPath\File3.txt")
 
-		ForEach ($File in $Files) 
-		{
-			$Copy-Item -Path $File -Destination \\NetworkPath
-			Write-Output "$File copied."
-			Checkpoint-Workflow
-		}
-		
-		Write-Output "All files copied."
-	}
+        ForEach ($File in $Files) 
+        {
+            $Copy-Item -Path $File -Destination \\NetworkPath
+            Write-Output "$File copied."
+            Checkpoint-Workflow
+        }
+        
+        Write-Output "All files copied."
+    }
 
 由于在调用 [Suspend-Workflow](https://technet.microsoft.com/zh-cn/library/jj733586.aspx) 活动或最后一个检查点之后，将不保留用户名凭据，你需要在调用 **Suspend-Workflow** 或检查点后将凭据设置为 null，然后再从资产存储重新检索凭据。否则，可能会收到以下错误消息：*无法继续执行工作流作业，因为无法完整保存持久性数据或保存的持久性数据已损坏。你必须重新启动工作流。*
 

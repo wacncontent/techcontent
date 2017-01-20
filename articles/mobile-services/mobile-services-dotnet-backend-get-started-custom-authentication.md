@@ -36,7 +36,7 @@ ms.author: mahender
 
 2. 添加以下 `using` 语句：
 
-		using Microsoft.WindowsAzure.Mobile.Service;  
+        using Microsoft.WindowsAzure.Mobile.Service;  
 
 3. 将类定义替换为以下代码：
 
@@ -53,13 +53,13 @@ ms.author: mahender
 
         public DbSet<Account> Accounts { get; set; }
 
-	>[!NOTE]本教程中的代码段使用 `todoContext` 作为上下文名称。你必须更新项目上下文的代码段。 
+    >[!NOTE]本教程中的代码段使用 `todoContext` 作为上下文名称。你必须更新项目上下文的代码段。 
         &nbsp;
-	接下来，请设置安全功能以处理此数据。
+    接下来，请设置安全功能以处理此数据。
  
 5. 创建名为 `CustomLoginProviderUtils` 的类，然后添加以下 `using` 语句：
 
-		using System.Security.Cryptography;
+        using System.Security.Cryptography;
 
 6. 将以下代码方法添加到新类：
 
@@ -91,7 +91,7 @@ ms.author: mahender
             return diff == 0;
         }
 
-	这样，便会生成新的长格式盐，添加用于哈希处理加盐密码的功能，以及比较两个哈希代码的安全方式。
+    这样，便会生成新的长格式盐，添加用于哈希处理加盐密码的功能，以及比较两个哈希代码的安全方式。
 
 ## 创建注册终结点
 
@@ -109,12 +109,12 @@ ms.author: mahender
 
 2. 在移动服务后端项目中，右键单击“控制器”，单击“添加”和“控制器”，创建名为 `CustomRegistrationController` 的新“Microsoft Azure 移动服务自定义控制器”，然后添加以下 `using` 语句：
 
-		using Microsoft.WindowsAzure.Mobile.Service.Security;
-		using System.Text.RegularExpressions;
-		using <my_project_namespace>.DataObjects;
-		using <my_project_namespace>.Models;
+        using Microsoft.WindowsAzure.Mobile.Service.Security;
+        using System.Text.RegularExpressions;
+        using <my_project_namespace>.DataObjects;
+        using <my_project_namespace>.Models;
 
-	在以上代码中，将占位符替换为项目的命名空间。
+    在以上代码中，将占位符替换为项目的命名空间。
  
 3. 将类定义替换为以下代码：
 
@@ -139,7 +139,7 @@ ms.author: mahender
                 Account account = context.Accounts.Where(a => a.Username == registrationRequest.username).SingleOrDefault();
                 if (account != null)
                 {
-	                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "That username already exists.");
+                    return this.Request.CreateResponse(HttpStatusCode.BadRequest, "That username already exists.");
                 }
                 else
                 {
@@ -171,11 +171,11 @@ ms.author: mahender
 
 1. 创建派生自 **LoginProvider** 的新类 `CustomLoginProvider`，然后添加以下 `using` 语句：
 
-	    using Microsoft.WindowsAzure.Mobile.Service;
-		using Microsoft.WindowsAzure.Mobile.Service.Security;
-		using Newtonsoft.Json.Linq;
-		using Owin;
-		using System.Security.Claims;
+        using Microsoft.WindowsAzure.Mobile.Service;
+        using Microsoft.WindowsAzure.Mobile.Service.Security;
+        using Newtonsoft.Json.Linq;
+        using Owin;
+        using System.Security.Claims;
  
 2. 将 **CustomLoginProvider** 类定义替换为以下代码：
 
@@ -208,7 +208,7 @@ ms.author: mahender
             }
         }
 
-	此类表示有关用户的信息，将通过 [GetIdentitiesAsync](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.security.serviceuser.getidentitiesasync.aspx) 在后端上供你使用。如果你要添加自定义声明，请确保可在此对象中捕获这些声明。
+    此类表示有关用户的信息，将通过 [GetIdentitiesAsync](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.security.serviceuser.getidentitiesasync.aspx) 在后端上供你使用。如果你要添加自定义声明，请确保可在此对象中捕获这些声明。
 
 4. 将抽象方法 `ConfigureMiddleware` 的以下实现添加到 **CustomLoginProvider**。
 
@@ -218,7 +218,7 @@ ms.author: mahender
             return;
         }
 
-	此方法尚未实现，因为 **CustomLoginProvider** 不会与身份验证管道集成。
+    此方法尚未实现，因为 **CustomLoginProvider** 不会与身份验证管道集成。
 
 4. 将抽象方法 `ParseCredentials` 的以下实现添加到 **CustomLoginProvider**。
 
@@ -232,7 +232,7 @@ ms.author: mahender
             return serialized.ToObject<CustomLoginProviderCredentials>();
         }
 
-	此方法将使后端能够从传入的身份验证令牌反序列化用户信息。
+    此方法将使后端能够从传入的身份验证令牌反序列化用户信息。
 
 6. 将抽象方法 `CreateCredentials` 的以下实现添加到 **CustomLoginProvider**。
 
@@ -252,10 +252,10 @@ ms.author: mahender
             return credentials;
         }
 
-	此方法将 [ClaimsIdentity] 转换成在身份验证令牌颁发阶段使用的 [ProviderCredentials] 对象。在此方法中，你可以再次捕获任何其他声明。
+    此方法将 [ClaimsIdentity] 转换成在身份验证令牌颁发阶段使用的 [ProviderCredentials] 对象。在此方法中，你可以再次捕获任何其他声明。
 7. 创建 **ConfigOptions** 后，打开 App\_Start 文件夹中的 WebApiConfig.cs 项目文件并添加以下代码行:
-		
-		options.LoginProviders.Add(typeof(CustomLoginProvider));
+        
+        options.LoginProviders.Add(typeof(CustomLoginProvider));
 
 ## 创建登录终结点
 
@@ -269,25 +269,25 @@ ms.author: mahender
             public String password { get; set; }
         }
 
-	此类表示传入的登录尝试。
+    此类表示传入的登录尝试。
 
 2. 创建以下新的 `CustomLoginResult` 类：
 
-	    public class CustomLoginResult
-	    {
-	        public string UserId { get; set; }
-	        public string MobileServiceAuthenticationToken { get; set; }
-	
-	    }
+        public class CustomLoginResult
+        {
+            public string UserId { get; set; }
+            public string MobileServiceAuthenticationToken { get; set; }
+    
+        }
 
-	此类表示使用用户 ID 和身份验证令牌成功完成的登录。请注意，此类和客户端的 MobileServiceUser 类具有相同形式，因此，使用此类可以轻松地将登录响应传递给强类型化客户端。
+    此类表示使用用户 ID 和身份验证令牌成功完成的登录。请注意，此类和客户端的 MobileServiceUser 类具有相同形式，因此，使用此类可以轻松地将登录响应传递给强类型化客户端。
 
 2. 右键单击“控制器”，单击“添加”和“控制器”，创建名为 `CustomLoginController` 的新“Microsoft Azure 移动服务自定义控制器”，然后添加以下 `using` 语句：
 
-		using Microsoft.WindowsAzure.Mobile.Service.Security;
-		using System.Security.Claims;
-		using <my_project_namespace>.DataObjects;
-		using <my_project_namespace>.Models;
+        using Microsoft.WindowsAzure.Mobile.Service.Security;
+        using System.Security.Claims;
+        using <my_project_namespace>.DataObjects;
+        using <my_project_namespace>.Models;
 
 4. 将 **CustomLoginController** 类定义替换为以下代码：
 
@@ -301,29 +301,29 @@ ms.author: mahender
             public HttpResponseMessage Post(LoginRequest loginRequest)
             {
                 todoContext context = new todoContext();
-	            Account account = context.Accounts
-	                .Where(a => a.Username == loginRequest.username).SingleOrDefault();
+                Account account = context.Accounts
+                    .Where(a => a.Username == loginRequest.username).SingleOrDefault();
                 if (account != null)
                 {
-	                byte[] incoming = CustomLoginProviderUtils
-	                    .hash(loginRequest.password, account.Salt);
+                    byte[] incoming = CustomLoginProviderUtils
+                        .hash(loginRequest.password, account.Salt);
 
                     if (CustomLoginProviderUtils.slowEquals(incoming, account.SaltedAndHashedPassword))
                     {
                         ClaimsIdentity claimsIdentity = new ClaimsIdentity();
                         claimsIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, loginRequest.username));
-	                    LoginResult loginResult = new CustomLoginProvider(handler)
-	                        .CreateLoginResult(claimsIdentity, Services.Settings.MasterKey);
-	                    var customLoginResult = new CustomLoginResult()
-	                    {
-	                        UserId = loginResult.User.UserId,
-	                        MobileServiceAuthenticationToken = loginResult.AuthenticationToken
-	                    };
-	                    return this.Request.CreateResponse(HttpStatusCode.OK, customLoginResult);
+                        LoginResult loginResult = new CustomLoginProvider(handler)
+                            .CreateLoginResult(claimsIdentity, Services.Settings.MasterKey);
+                        var customLoginResult = new CustomLoginResult()
+                        {
+                            UserId = loginResult.User.UserId,
+                            MobileServiceAuthenticationToken = loginResult.AuthenticationToken
+                        };
+                        return this.Request.CreateResponse(HttpStatusCode.OK, customLoginResult);
                     }
                 }
-	            return this.Request.CreateResponse(HttpStatusCode.Unauthorized,
-	                "Invalid username or password");
+                return this.Request.CreateResponse(HttpStatusCode.Unauthorized,
+                    "Invalid username or password");
             }
         }
 
@@ -343,7 +343,7 @@ ms.author: mahender
 
 1. 在 Visual Studio 中，右键单击移动服务项目，然后单击“调试”和“启动新实例”。  
 
-	随后会启动移动服务后端项目的新调试实例。成功启动服务之后，你会看到显示“此移动服务在正常运行”的启动页。
+    随后会启动移动服务后端项目的新调试实例。成功启动服务之后，你会看到显示“此移动服务在正常运行”的启动页。
 
 2. 在服务启动页中，单击“试用”，然后在身份验证对话框中，键入你在 web.config 文件的 **MS\_ApplicationKey** 应用程序设置中设置的密码，并将用户名保留空白。
 
@@ -355,25 +355,25 @@ ms.author: mahender
 
     ![][3]
 
-	响应应为“201/已创建”。
+    响应应为“201/已创建”。
 
 5. 单击浏览器中的后退按钮，并使用前一步骤中注册的同一用户名和密码，对 **CustomLogin** 终结点重复步骤 2 和 3。
 
     ![][4]
 
-	你应会收到响应消息，其正文包含一个具有 *userId* 和 *authenticationToken* 的 **user** JSON 对象，此对象是自定义身份验证生成的移动服务身份验证令牌。此令牌足以授予客户端应用程序访问 TodoItem 终结点的权限。
+    你应会收到响应消息，其正文包含一个具有 *userId* 和 *authenticationToken* 的 **user** JSON 对象，此对象是自定义身份验证生成的移动服务身份验证令牌。此令牌足以授予客户端应用程序访问 TodoItem 终结点的权限。
 
-	复制 *authenticationToken* 的值。稍后你将使用此值来访问受限制的 TodoItem 终结点。
+    复制 *authenticationToken* 的值。稍后你将使用此值来访问受限制的 TodoItem 终结点。
 
 6. 单击浏览器中的后退按钮，然后在 API 文档页中，依次单击“GetTables”、“试用”。
 
 7. 在 GET 请求对话框中，单击“标头”旁边的加号，在左侧框中键入 `X-ZUMO-AUTH` 值，在右侧框中粘贴复制的 *authenticationToken* 值，然后单击“发送”。
 
- 	![](./media/mobile-services-dotnet-backend-get-started-custom-authentication/mobile-services-dotnet-backend-custom-auth-access-endpoint.png)
+     ![](./media/mobile-services-dotnet-backend-get-started-custom-authentication/mobile-services-dotnet-backend-custom-auth-access-endpoint.png)
 
-	移动服务应会授予访问终结点的权限，并返回“200/正常”状态，以及表中的 TodoItems 列表。
+    移动服务应会授予访问终结点的权限，并返回“200/正常”状态，以及表中的 TodoItems 列表。
 
- 	![](./media/mobile-services-dotnet-backend-get-started-custom-authentication/mobile-services-dotnet-backend-custom-auth-access-success.png)
+     ![](./media/mobile-services-dotnet-backend-get-started-custom-authentication/mobile-services-dotnet-backend-custom-auth-access-success.png)
 
 >[!IMPORTANT]如果你选择还要将此移动服务项目发布到 Azure 以供测试，请记住，登录和身份验证提供程序将很容易受到攻击。确保这些提供程序已经过适当的增强，或者受保护的测试数据对你而言并不重要。使用自定义身份验证方案之前请保持谨慎，以确保生产环境服务的安全。
 
@@ -387,14 +387,14 @@ ms.author: mahender
 
 2. 在客户端库的 **MobileServiceClient** 上使用适当的 **invokeApi** 方法调用 **CustomRegistration** 终结点，以在消息正文中传递运行时提供的用户名和密码。
 
-	如果你在“帐户”表中保留了用户登录信息，则你只需调用 **CustomRegistration** 终结点一次，即可为给定的用户创建帐户。有关如何在支持的各种客户端平台上调用自定义 API 的示例，请参阅文章 [Azure 移动服务中的自定义 API – 客户端 SDK](http://blogs.msdn.com/b/carlosfigueira/archive/2013/06/19/custom-api-in-azure-mobile-services-client-sdks.aspx)。
-	 
-	> [!IMPORTANT]由于此用户设置步骤只会发生一次，因此你可以考虑以某种带外方式创建用户帐户。对于公共注册终结点，还应该考虑实施基于短信或电子邮件的验证过程或者其他防护机制，以避免生成欺骗性的帐户。你可以使用 Twilio 从移动服务发送短信。也可以使用 SendGrid 从移动服务发送电子邮件。有关使用 SendGrid 的详细信息，请参阅[使用 SendGrid 从移动服务发送电子邮件](./store-sendgrid-mobile-services-send-email-scripts.md)。
-	
+    如果你在“帐户”表中保留了用户登录信息，则你只需调用 **CustomRegistration** 终结点一次，即可为给定的用户创建帐户。有关如何在支持的各种客户端平台上调用自定义 API 的示例，请参阅文章 [Azure 移动服务中的自定义 API – 客户端 SDK](http://blogs.msdn.com/b/carlosfigueira/archive/2013/06/19/custom-api-in-azure-mobile-services-client-sdks.aspx)。
+     
+    > [!IMPORTANT]由于此用户设置步骤只会发生一次，因此你可以考虑以某种带外方式创建用户帐户。对于公共注册终结点，还应该考虑实施基于短信或电子邮件的验证过程或者其他防护机制，以避免生成欺骗性的帐户。你可以使用 Twilio 从移动服务发送短信。也可以使用 SendGrid 从移动服务发送电子邮件。有关使用 SendGrid 的详细信息，请参阅[使用 SendGrid 从移动服务发送电子邮件](./store-sendgrid-mobile-services-send-email-scripts.md)。
+    
 3. 再次使用适当的 **invokeApi** 方法，但这次改为调用 **CustomLogin** 终结点，以在消息正文中传递运行时提供的用户名和密码。
 
-	这次你必须在成功登录后，捕获响应对象中返回的 *userId* 和 *authenticationToken* 值。
-	
+    这次你必须在成功登录后，捕获响应对象中返回的 *userId* 和 *authenticationToken* 值。
+    
 4. 使用返回的 *userId* 和 *authenticationToken* 值创建新的 **MobileServiceUser** 对象，并将该对象设为 **MobileServiceClient** 实例的当前用户，如[向现有应用程序添加身份验证](./mobile-services-dotnet-backend-ios-get-started-users.md)主题中所述。由于 CustomLogin 的结果与 **MobileServiceUser** 对象具有相同形式，因此你应该能够直接转换结果。
 
 本教程到此结束。

@@ -123,7 +123,7 @@ Azure 移动服务可轻松启动和构建连接云托管后端的应用，从�
 
 - 请考虑将索引添加到通常以谓词（例如，WHERE 子句）和联接条件句使用的列中，同时平衡下列数据库注意事项。
 - 编写在单个语句中插入或修改尽可能多个行的查询，而不要使用多个查询更新相同的行。当只有一条语句时，数据库引擎可以更好地优化索引维护方式。
-	
+    
 ####  数据库注意事项
 
 一个表中含有大量索引会影响 INSERT、UPDATE、DELETE 和 MERGE 等语句的性能，因为所有索引必须随表格中数据的更改进行适当调整。
@@ -146,7 +146,7 @@ Azure 移动服务可轻松启动和构建连接云托管后端的应用，从�
 4. 单击“列”选项卡。
 5. 选择该列。在命令栏中单击“设置索引”：
 
-	![移动服务门户 - 设置索引][SetIndexJavaScriptPortal]
+    ![移动服务门户 - 设置索引][SetIndexJavaScriptPortal]
 
 您还可以删除该视图中的索引。
 
@@ -158,10 +158,10 @@ Azure 移动服务可轻松启动和构建连接云托管后端的应用，从�
     {
         public string Text { get; set; }
 
-		[Index]
+        [Index]
         public bool Complete { get; set; }
     }
-		 
+         
 更多有关索引的详细信息，请参阅[实体框架中的索引批注][]。有关优化索引的更多提示，请参阅本文末尾的“[高级索引](#AdvancedIndexing)”。
 
 <a name="Schema"></a>
@@ -317,19 +317,19 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 聚集索引对执行下列操作的查询最有价值：
 
 - 使用诸如 BETWEEN、>、>=、< 和 <= 等运算符返回一定范围的值。 
-	- 使用聚集索引查找到第一个值的行后，才能保证包含后续索引值的行物理相邻。 
+    - 使用聚集索引查找到第一个值的行后，才能保证包含后续索引值的行物理相邻。 
 - 使用 JOIN 子句；通常为外键列。
 - 使用 ORDER BY 或 GROUP BY 子句。
-	- ORDER BY 或 GROUP BY 子句中指定列的索引可能无需采用数据库引擎对数据进行排序，因为行已经进行了排序。这将有助于提升查询性能。
+    - ORDER BY 或 GROUP BY 子句中指定列的索引可能无需采用数据库引擎对数据进行排序，因为行已经进行了排序。这将有助于提升查询性能。
 
 ####  在实体框架中创建聚集索引
 
 若要使用实体框架在 .NET 后端设置 `IsClustered` 索引，请设置批注的属性。例如，这是在 `Microsoft.WindowsAzure.Mobile.Service.EntityData` 中的 `CreatedAt` 定义：
 
-	[Index(IsClustered = true)]
-	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-	[TableColumnAttribute(TableColumnType.CreatedAt)]
-	public DateTimeOffset? CreatedAt { get; set; }
+    [Index(IsClustered = true)]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [TableColumnAttribute(TableColumnType.CreatedAt)]
+    public DateTimeOffset? CreatedAt { get; set; }
 
 ####  在数据库架构中创建索引
 
@@ -377,20 +377,20 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 
 下列示例返回了按平均 CPU 时间排名的前五个查询的信息。该示例根据查询散列收集了查询，以便逻辑上等值的查询能够根据累积资源消耗分组。
 
-	SELECT TOP 5 query_stats.query_hash AS "Query Hash", 
-	    SUM(query_stats.total_worker_time) / SUM(query_stats.execution_count) AS "Avg CPU Time",
-	    MIN(query_stats.statement_text) AS "Statement Text"
-	FROM 
-	    (SELECT QS.*, 
-	    SUBSTRING(ST.text, (QS.statement_start_offset/2) + 1,
-	    ((CASE statement_end_offset 
-	        WHEN -1 THEN DATALENGTH(st.text)
-	        ELSE QS.statement_end_offset END 
-	            - QS.statement_start_offset)/2) + 1) AS statement_text
-	     FROM sys.dm_exec_query_stats AS QS
-	     CROSS APPLY sys.dm_exec_sql_text(QS.sql_handle) as ST) as query_stats
-	GROUP BY query_stats.query_hash
-	ORDER BY 2 DESC;
+    SELECT TOP 5 query_stats.query_hash AS "Query Hash", 
+        SUM(query_stats.total_worker_time) / SUM(query_stats.execution_count) AS "Avg CPU Time",
+        MIN(query_stats.statement_text) AS "Statement Text"
+    FROM 
+        (SELECT QS.*, 
+        SUBSTRING(ST.text, (QS.statement_start_offset/2) + 1,
+        ((CASE statement_end_offset 
+            WHEN -1 THEN DATALENGTH(st.text)
+            ELSE QS.statement_end_offset END 
+                - QS.statement_start_offset)/2) + 1) AS statement_text
+         FROM sys.dm_exec_query_stats AS QS
+         CROSS APPLY sys.dm_exec_sql_text(QS.sql_handle) as ST) as query_stats
+    GROUP BY query_stats.query_hash
+    ORDER BY 2 DESC;
 
 有关详细信息，请参阅[使用动态管理视图监视 SQL 数据库][]。除执行查询之外，**SQL 数据库管理门户**还可为你提供有效的捷径查看数据：选择数据库“摘要”，然后选择“查询性能”：
 

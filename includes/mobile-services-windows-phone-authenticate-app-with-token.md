@@ -5,8 +5,8 @@
 
 1. 在 MainPage.xaml.cs 项目文件中，添加以下 **using** 语句：
 
-		using System.IO.IsolatedStorage;
-		using System.Security.Cryptography;		
+        using System.IO.IsolatedStorage;
+        using System.Security.Cryptography;		
 
 2. 将 **AuthenticateAsync** 方法替换为以下代码：
 
@@ -85,12 +85,12 @@
             }
         }
 
-	在此版本的 **AuthenticateAsync** 中，此应用尝试使用在本地存储中加密存储的凭证来访问移动服务。发送一个简单查询以验证存储的令牌是否未到期。返回 401 时，尝试了基于提供商的常规登录。没有存储任何凭证时，也执行常规登录。	
+    在此版本的 **AuthenticateAsync** 中，此应用尝试使用在本地存储中加密存储的凭证来访问移动服务。发送一个简单查询以验证存储的令牌是否未到期。返回 401 时，尝试了基于提供商的常规登录。没有存储任何凭证时，也执行常规登录。	
 
-	>[!NOTE]此应用在登录过程中测试令牌是否到期，但正在使用此应用时，可能会在身份验证之后发生令牌到期。有关用于处理到期令牌相关的授权错误的解决方案，请参阅文章[在 Azure 移动服务托管 SDK 中缓存和处理到期令牌](http://blogs.msdn.com/b/carlosfigueira/archive/2014/03/13/caching-and-handling-expired-tokens-in-azure-mobile-services-managed-sdk.aspx)。
-	
+    >[!NOTE]此应用在登录过程中测试令牌是否到期，但正在使用此应用时，可能会在身份验证之后发生令牌到期。有关用于处理到期令牌相关的授权错误的解决方案，请参阅文章[在 Azure 移动服务托管 SDK 中缓存和处理到期令牌](http://blogs.msdn.com/b/carlosfigueira/archive/2014/03/13/caching-and-handling-expired-tokens-in-azure-mobile-services-managed-sdk.aspx)。
+    
 3. 两次重新启动此应用。
 
-	请注意，在第一次启动时，再次需要使用此提供商进行登录。但是，在第二次重新启动时，将使用缓存的凭证，而绕过登录。
+    请注意，在第一次启动时，再次需要使用此提供商进行登录。但是，在第二次重新启动时，将使用缓存的凭证，而绕过登录。
 
 <!---HONumber=71-->

@@ -44,12 +44,12 @@ CNAME 记录将*特定的* DNS 名称（例如 **mail.contoso.com** 或 **www.co
 
 2. 在“Web 应用”边栏选项卡中，单击 Web 应用的名称，然后从页面底部选择“自定义域”。
 
-	![](./media/custom-dns-web-site/dncmntask-cname-6.png)
+    ![](./media/custom-dns-web-site/dncmntask-cname-6.png)
 
 3. 在“自定义域”边栏选项卡上，你会看到虚拟 IP 地址。保存此信息，因为将在创建 DNS 记录时使用它
 
-	![](./media/custom-dns-web-site/virtual-ip-address.png)
+    ![](./media/custom-dns-web-site/virtual-ip-address.png)
 
-	> [!NOTE] **免费** Web 应用不可使用自定义域名，并且必须将应用服务计划升级到**共享**、**基本**、**标准**或**高级**层。若要深入了解应用服务计划的定价层，包括如何更改 Web 应用的定价层，请参阅[如何缩放 Web 应用](../articles/app-service-web/web-sites-scale.md)。
+    > [!NOTE] **免费** Web 应用不可使用自定义域名，并且必须将应用服务计划升级到**共享**、**基本**、**标准**或**高级**层。若要深入了解应用服务计划的定价层，包括如何更改 Web 应用的定价层，请参阅[如何缩放 Web 应用](../articles/app-service-web/web-sites-scale.md)。
 
 <!---HONumber=Mooncake_0926_2016-->

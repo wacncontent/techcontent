@@ -26,7 +26,7 @@ ms.author: juliako;anilmur
 
 - 本地实时编码器将多比特率 **RTMP** 或**平滑流式处理**（分片 MP4）发送到无法通过 AMS 执行实时编码的通道。引入流将通过**通道**，但不会进行任何进一步处理。这种方法称为**直通**。可以使用以下输出多比特率平滑流的实时编码器：Elemental、Envivio、Cisco。以下实时编码器输出 RTMP：Adobe Flash Live、Telestream Wirecast 和 Tricaster 转码器。实时编码器也可将单比特率流发送到并未启用实时编码的通道，但不建议这样做。收到请求时，媒体服务会将该流传送给客户。
 
-	>[!NOTE] 实时传送视频流时，使用直通方法是最经济的。
+    >[!NOTE] 实时传送视频流时，使用直通方法是最经济的。
 
 从媒体服务2.10 发行版开始，创建通道时，可以指定希望通道接收输入流的方式，以及是否希望通道对流执行实时编码。可以使用两个选项：
 
@@ -87,26 +87,26 @@ ms.author: juliako;anilmur
 >[!NOTE] 目前，实时事件的最大建议持续时间为 8 小时。如果需要长时间运行某个通道，请通过 Azure.cn 联系 amslived。请注意，实时编码会影响计费，应记住，将实时编码通道保持为“正在运行”状态会产生费用。建议在实时流式处理事件完成之后立即停止正在运行的通道，以避免产生额外的小时费用。
 
 1. 将视频摄像机连接到计算机。启动并配置可以通过以下协议之一输出**单**比特率流的本地实时编码器：RTMP、平滑流式处理或 RTP (MPEG-TS)。
-	
-	此步骤也可以在创建通道后执行。
+    
+    此步骤也可以在创建通道后执行。
 
 1. 创建并启动通道。
 
 1. 检索通道引入 URL。
 
-	实时编码器使用引入 URL 将流发送到频道。
+    实时编码器使用引入 URL 将流发送到频道。
 1. 检索频道预览 URL。
 
-	使用此 URL 来验证通道是否正常接收实时流。
+    使用此 URL 来验证通道是否正常接收实时流。
 
 3. 创建节目。
 
-	使用 Azure 经典管理门户时，创建节目的同时还会创建资产。
+    使用 Azure 经典管理门户时，创建节目的同时还会创建资产。
 
-	使用 .NET SDK 或 REST 时，需要创建一个资源并指定在创建节目时要使用该资源。
+    使用 .NET SDK 或 REST 时，需要创建一个资源并指定在创建节目时要使用该资源。
 1. 发布与节目关联的资源。
 
-	确保要从中以流形式传输内容的流式传输终结点上至少有一个串流保留保留单元
+    确保要从中以流形式传输内容的流式传输终结点上至少有一个串流保留保留单元
 1. 在准备好开始流式传输和存档时，启动节目。
 2. （可选）可以向实时编码器发信号，以启动广告。将广告插入到输出流中。
 1. 在要停止对事件进行流式传输和存档时，停止节目。
@@ -137,46 +137,46 @@ ms.author: juliako;anilmur
 - 视频流应具有小于 15 Mbps 的平均比特率
 - 音频流的聚合平均比特率应小于 1 Mbps
 - 以下是支持的编解码器：
-	- MPEG-2/H.262 Video
-		
-		- Main Profile (4:2:0)
-		- High Profile (4:2:0, 4:2:2)
-		- 422 Profile (4:2:0, 4:2:2)
+    - MPEG-2/H.262 Video
+        
+        - Main Profile (4:2:0)
+        - High Profile (4:2:0, 4:2:2)
+        - 422 Profile (4:2:0, 4:2:2)
 
-	- MPEG-4 AVC/H.264 Video
-	
-		- Baseline、Main、High Profile（8 位 4:2:0）
-		- High 10 Profile（10 位 4:2:0）
-		- High 422 Profile（10 位 4:2:2）
+    - MPEG-4 AVC/H.264 Video
+    
+        - Baseline、Main、High Profile（8 位 4:2:0）
+        - High 10 Profile（10 位 4:2:0）
+        - High 422 Profile（10 位 4:2:2）
 
-	- MPEG-2 AAC-LC Audio
-	
-		- Mono、Stereo、Surround (5.1, 7.1)
-		- MPEG-2 样式 ADTS 打包
+    - MPEG-2 AAC-LC Audio
+    
+        - Mono、Stereo、Surround (5.1, 7.1)
+        - MPEG-2 样式 ADTS 打包
 
-	- Dolby Digital (AC-3) Audio
+    - Dolby Digital (AC-3) Audio
 
-		- Mono、Stereo、Surround (5.1, 7.1)
+        - Mono、Stereo、Surround (5.1, 7.1)
 
-	- MPEG Audio（层 II 和层 III）
-			
-		- Mono、Stereo
+    - MPEG Audio（层 II 和层 III）
+            
+        - Mono、Stereo
 
 - 推荐的广播编码器包括：
-	- Ateme AM2102
-	- Ericsson AVP2000
-	- eVertz 3480
-	- Ericsson RX8200
-	- Imagine Communications Selenio ENC 1
-	- Imagine Communications Selenio ENC 2
-	- AdTec EN-30
-	- AdTec EN-91P
-	- AdTec EN-100
-	- Harmonic ProStream 1000
-	- Thor H-2 4HD-EM
-	- eVertz 7880 SLKE
-	- Cisco Spinnaker
-	- Elemental Live
+    - Ateme AM2102
+    - Ericsson AVP2000
+    - eVertz 3480
+    - Ericsson RX8200
+    - Imagine Communications Selenio ENC 1
+    - Imagine Communications Selenio ENC 2
+    - AdTec EN-30
+    - AdTec EN-91P
+    - AdTec EN-100
+    - Harmonic ProStream 1000
+    - Thor H-2 4HD-EM
+    - eVertz 7880 SLKE
+    - Cisco Spinnaker
+    - Elemental Live
 
 ####<a id="single_bitrate_RTMP"></a>单比特率 RTMP
 

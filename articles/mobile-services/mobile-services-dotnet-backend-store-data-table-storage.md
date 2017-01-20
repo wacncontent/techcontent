@@ -33,7 +33,7 @@ ms.author: glenga
 
     ![](./media/mobile-services-dotnet-backend-store-data-table-storage/mobile-add-storage-nuget-package-dotnet.png)
 
-  	这会将 Azure 存储空间服务支持添加到 .NET 后端移动服务项目。
+      这会将 Azure 存储空间服务支持添加到 .NET 后端移动服务项目。
 
 3. 如果你尚未创建你的存储帐户，请参阅[如何创建存储帐户](../storage/storage-create-storage-account.md)。
 
@@ -43,21 +43,21 @@ ms.author: glenga
  
 6. 在移动服务中，单击“配置”选项卡，向下滚动到“连接字符串”并输入新的连接字符串（其“名称”为 `StorageConnectionString`，其“值”为存储帐户连接字符串且格式如下）。
 
-		DefaultEndpointsProtocol=https;AccountName=<ACCOUNT_NAME>;AccountKey=<ACCESS_KEY>;
+        DefaultEndpointsProtocol=https;AccountName=<ACCOUNT_NAME>;AccountKey=<ACCESS_KEY>;
 
-	![](./media/mobile-services-dotnet-backend-store-data-table-storage/mobile-blob-storage-app-settings.png)
+    ![](./media/mobile-services-dotnet-backend-store-data-table-storage/mobile-blob-storage-app-settings.png)
 
 7. 在上述字符串中，使用门户中的值替换 `<ACCOUNT_NAME>` 和 `<ACCESS_KEY>` 的值，然后单击“保存”。
 
-	存储帐户连接字符串将以加密形式存储在应用设置中。你可以在运行时在任何表控制器中访问此字符串。
+    存储帐户连接字符串将以加密形式存储在应用设置中。你可以在运行时在任何表控制器中访问此字符串。
 
 8. 在 Visual Studio 的解决方案资源管理器中，打开移动服务项目的 Web.config 文件，并添加以下新连接字符串：
 
-		<add name="StorageConnectionString" connectionString="<STORAGE_CONNECTION_STRING>" />
+        <add name="StorageConnectionString" connectionString="<STORAGE_CONNECTION_STRING>" />
 
 9. 将 `<STORAGE_CONNECTION_STRING>` 占位符替换为步骤 6 中的连接字符串。
 
-	移动服务在本地计算机上运行时将使用此连接字符串，使你可以在发布之前测试代码。在 Azure 中运行时，移动服务将改用门户中设置的连接字符串值，并忽略项目中的连接字符串。
+    移动服务在本地计算机上运行时将使用此连接字符串，使你可以在发布之前测试代码。在 Azure 中运行时，移动服务将改用门户中设置的连接字符串值，并忽略项目中的连接字符串。
 
 ## <a name="modify-service"></a>修改数据类型和表控制器
 
@@ -65,18 +65,18 @@ ms.author: glenga
 
 1. 将 **TodoItem** 数据类型修改为派生自 **StorageData** 而不是 **EntityData**，如下所示。
 
-	    public class TodoItem : StorageData
-	    {
-	        public string Text { get; set; }
-	        public bool Complete { get; set; }
-	    }
+        public class TodoItem : StorageData
+        {
+            public string Text { get; set; }
+            public bool Complete { get; set; }
+        }
 
-	>[!NOTE]**StorageData** 类型的 Id 属性需要一个复合键，该键是格式为 *partitionId*,*rowValue* 的字符串。
+    >[!NOTE]**StorageData** 类型的 Id 属性需要一个复合键，该键是格式为 *partitionId*,*rowValue* 的字符串。
 
 2. 在 **TodoItemController** 中添加以下 using 语句。
 
-		using System.Web.Http.OData.Query;
-		using System.Collections.Generic;
+        using System.Web.Http.OData.Query;
+        using System.Collections.Generic;
 
 3. 将 **TodoItemController** 的 **Initialize** 方法替换为以下内容。
 
@@ -92,17 +92,17 @@ ms.author: glenga
                 tableName, Request, Services);          
         }
 
-	这将使用存储帐户连接字符串为请求的控制站创建新的存储域管理器。
+    这将使用存储帐户连接字符串为请求的控制站创建新的存储域管理器。
 
 3. 将现有的 **GetAllTodoItems** 方法替换为以下代码。
 
-		public Task<IEnumerable<TodoItem>> GetAllTodoItems(ODataQueryOptions options)
+        public Task<IEnumerable<TodoItem>> GetAllTodoItems(ODataQueryOptions options)
         {
             // Call QueryAsync, passing the supplied query options.
             return DomainManager.QueryAsync(options);
         } 
 
-	不同于 SQL 数据库，此版本不返回 IQueryable<TEntity>，因此可以绑定到结果，但无法在查询中进一步编写。
+    不同于 SQL 数据库，此版本不返回 IQueryable<TEntity>，因此可以绑定到结果，但无法在查询中进一步编写。
 
 ## 更新客户端应用
 
@@ -112,25 +112,25 @@ ms.author: glenga
 
 2. 更新正在添加的 TodoItem 实例，以显式设置采用字符串格式 `<partitionID>,<rowValue>` 的 Id 字段。
 
-	这是一个说明如何在 C# 应用中设置此 ID 的示例，其中 partition 部分是固定的，row 部分基于 GUID 。
+    这是一个说明如何在 C# 应用中设置此 ID 的示例，其中 partition 部分是固定的，row 部分基于 GUID 。
 
-		 todoItem.Id = string.Format("partition,{0}", Guid.NewGuid());
+         todoItem.Id = string.Format("partition,{0}", Guid.NewGuid());
 
 现在，可以测试应用。
 
 ## <a name="test-application"></a>测试应用程序
 
 1. （可选）重新发布移动服务 .NET 后端项目。 
-	
-	你也可以先在本地测试移动服务，然后将 .NET 后端项目发布到 Azure。无论是在本地还是在 Azure 中测试，移动服务都使用 Azure 表存储。
+    
+    你也可以先在本地测试移动服务，然后将 .NET 后端项目发布到 Azure。无论是在本地还是在 Azure 中测试，移动服务都使用 Azure 表存储。
 
 2. 运行已连接到移动服务的快速入门客户端应用。
 
-	请注意，你看不见以前使用快速入门教程添加的项。这是因为表存储目前是空的。
+    请注意，你看不见以前使用快速入门教程添加的项。这是因为表存储目前是空的。
 
 3. 添加新项以生成数据库更改。
  
-	应用和移动服务的行为应如同以往，不过，数据现在将存储在非关系存储而不是 SQL 数据库中。
+    应用和移动服务的行为应如同以往，不过，数据现在将存储在非关系存储而不是 SQL 数据库中。
 
 ##后续步骤
 

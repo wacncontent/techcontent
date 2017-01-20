@@ -66,19 +66,19 @@ ms.author: ricksal
 
 1. 在“运行”菜单中，单击“运行应用程序”以启动项目。
 
-	这将执行使用 Android SDK 构建的应用，该应用使用客户端库发送一个查询，该查询从你的移动服务返回项目。
+    这将执行使用 Android SDK 构建的应用，该应用使用客户端库发送一个查询，该查询从你的移动服务返回项目。
 
 2. 和前面一样，输入有意义的文本，然后单击“添加”。
 
-   	此时会将一个新项作为 insert 发送到移动服务。
+       此时会将一个新项作为 insert 发送到移动服务。
 
 3. 在 [Azure 经典管理门户](https://manage.windowsazure.cn)中，单击“移动服务”，然后单击你的移动服务。
 
 4. 单击“数据”选项卡，然后单击“浏览”。
 
-   	![][9]
+       ![][9]
   
-   	请注意，**TodoItem** 表现在包含了数据以及由移动服务生成的某些值，并且已在该表中自动添加了列，以匹配应用程序中的 TodoItem 类。
+       请注意，**TodoItem** 表现在包含了数据以及由移动服务生成的某些值，并且已在该表中自动添加了列，以匹配应用程序中的 TodoItem 类。
 
 针对 Android 的**数据处理入门**教程到此结束。
 
@@ -93,7 +93,7 @@ ms.author: ricksal
 本教程演示了有关如何使 Android 应用程序处理移动服务中的数据的基础知识。请试着学习下列其他 Android 教程：
 
 * [身份验证入门](./mobile-services-android-get-started-users.md)
-	<br/>了解如何对应用程序用户进行身份验证。
+    <br/>了解如何对应用程序用户进行身份验证。
 
 <!-- Anchors. -->
 [Download the Android app project]: #download-app

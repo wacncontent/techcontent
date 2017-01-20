@@ -176,36 +176,36 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 保存脚本并从 **PowerShell** 命令提示符或 **PowerShell ISE** 运行它。最初的输出会如下所示：
 
-		ResourceGroupName : IaaSStory-Backend
-		Location          : chinanorth
-		ProvisioningState : Succeeded
-		Tags              :
-		Permissions       :
-			Actions  NotActions
-			=======  ==========
-				*                  
+        ResourceGroupName : IaaSStory-Backend
+        Location          : chinanorth
+        ProvisioningState : Succeeded
+        Tags              :
+        Permissions       :
+            Actions  NotActions
+            =======  ==========
+                *                  
 
-		ResourceId        : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory-Backend
+        ResourceId        : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory-Backend
 
 2. 几分钟后，填写提示的凭据，然后单击“确定”。下面的输出表示单个 VM。请注意，整个过程需要 8 分钟才能完成。
 
-		ResourceGroupName            :
-		Id                           :
-		Name                         : DB2
-		Type                         :
-		Location                     :
-		Tags                         :
-		TagsText                     : null
-		AvailabilitySetReference     : Microsoft.Azure.Management.Compute.Models.AvailabilitySetReference
-		AvailabilitySetReferenceText : 	{
- 									"ReferenceUri": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/IaaSStory-Backend/providers/Microsoft.Compute/availabilitySets/ASDB"
-									}
-		Extensions                   :
-		ExtensionsText               : null
-		HardwareProfile              : Microsoft.Azure.Management.Compute.Models.HardwareProfile
-		HardwareProfileText          : {
-										"VirtualMachineSize": "Standard_DS3"
-									   }
+        ResourceGroupName            :
+        Id                           :
+        Name                         : DB2
+        Type                         :
+        Location                     :
+        Tags                         :
+        TagsText                     : null
+        AvailabilitySetReference     : Microsoft.Azure.Management.Compute.Models.AvailabilitySetReference
+        AvailabilitySetReferenceText : 	{
+                                     "ReferenceUri": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/IaaSStory-Backend/providers/Microsoft.Compute/availabilitySets/ASDB"
+                                    }
+        Extensions                   :
+        ExtensionsText               : null
+        HardwareProfile              : Microsoft.Azure.Management.Compute.Models.HardwareProfile
+        HardwareProfileText          : {
+                                        "VirtualMachineSize": "Standard_DS3"
+                                       }
         InstanceView                 :
         InstanceViewText             : null
         NetworkProfile               :

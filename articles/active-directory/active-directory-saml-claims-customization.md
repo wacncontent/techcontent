@@ -63,7 +63,7 @@ Azure Active Directory 目前支持 Azure AD 应用库中数千个预先集成�
 
 - [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
 - [排查基于 SAML 的单一登录问题](./active-directory-saml-debugging.md)
-	
+    
 <!--Image references-->
 [1]: ./media/active-directory-saml-claims-customization/claimscustomization1.png
 [2]: ./media/active-directory-saml-claims-customization/claimscustomization2.png

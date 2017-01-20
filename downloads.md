@@ -120,7 +120,7 @@ wacn.date: 11/25/2016
     <h4>Windows PowerShell</h4>
     <ul>
       <li><a href="http://aka.ms/webpi-azps">安装</a></li>
-	  <li><a href="http://go.microsoft.com/?linkid=9811175&clcid=0x804">安装旧版</a></li>
+      <li><a href="http://go.microsoft.com/?linkid=9811175&clcid=0x804">安装旧版</a></li>
       <li><a href="./articles/powershell-install-configure.md">文档</a></li>
       <li><a href="https://technet.microsoft.com/zh-cn/scriptcenter/bb410849.aspx">浏览脚本中心</a></li>
     </ul>

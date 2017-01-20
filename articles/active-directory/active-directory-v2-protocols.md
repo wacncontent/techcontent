@@ -23,7 +23,7 @@ v2.0 终结点可以使用 Azure AD，通过行业标准协议（OpenID Connect 
 <!-- TODO: Need link to libraries above -->
 
 > [!NOTE]
-	v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
+    v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
 ## 基础知识
 几乎在所有的 OAuth 和 OpenID Connect 流中，都有四个参与交换的对象：
@@ -47,8 +47,8 @@ v2.0 终结点可以使用 Azure AD，通过行业标准协议（OpenID Connect 
 ## 终结点  <a name="endpoints"></a>
 注册后，应用将通过向 v2.0 终结点发送请求来与 Azure AD 通信：
 
-	https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
-	https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
+    https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize
+    https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
 
 其中 `{tenant}` 可以接受以下四个不同值之一：
 

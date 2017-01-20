@@ -52,7 +52,7 @@ ms.author: adrianha
 
 * 表操作之前，必须初始化本地存储区。在 **TodoItemManager** 类构造函数中使用以下代码初始化本地存储数据库：
 
-	    var store = new MobileServiceSQLiteStore(OfflineDbPath);
+        var store = new MobileServiceSQLiteStore(OfflineDbPath);
         store.DefineTable<TodoItem>();
 
         //Initializes the SyncContext using the default IMobileServiceSyncHandler.
@@ -60,15 +60,15 @@ ms.author: adrianha
 
         this.todoTable = client.GetSyncTable<TodoItem>();
 
-	此代码使用 **MobileServiceSQLiteStore** 类创建一个新的本地 SQLite 数据库。
+    此代码使用 **MobileServiceSQLiteStore** 类创建一个新的本地 SQLite 数据库。
 
     **DefineTable** 方法在本地存储中创建一个与所提供类型的字段匹配的表。该类型无需包括远程数据库中的所有列。可以只存储列的子集。
 
 * **TodoItemManager** 中的 **todoTable** 字段是 **IMobileServiceSyncTable** 类型，而不是 **IMobileServiceTable**。此类使用本地数据库进行所有创建、读取、更新和删除 (CRUD) 表操作。用户决定何时通过对 **IMobileServiceSyncContext** 调用 **PushAsync** 将这些更改推送到移动应用后端。调用 **PushAsync** 时此同步上下文通过跟踪和推送客户端应用修改的所有表中的更改来帮助保持表关系。
 
-	将调用以下 **SyncAsync** 方法来与移动应用后端进行同步：
+    将调用以下 **SyncAsync** 方法来与移动应用后端进行同步：
 
-		public async Task SyncAsync()
+        public async Task SyncAsync()
         {
             ReadOnlyCollection<MobileServiceTableOperationError> syncErrors = null;
 
@@ -105,7 +105,7 @@ ms.author: adrianha
                     }
 
                     Debug.WriteLine(@"Error executing sync operation. Item: {0} ({1}). Operation discarded.",
-						error.TableName, error.Item["id"]);
+                        error.TableName, error.Item["id"]);
                 }
             }
         }
@@ -145,7 +145,7 @@ ms.author: adrianha
 
 5. （可选）使用 Visual Studio 查看 Azure SQL 数据库表，以了解后端数据库中的数据是否未更改。
 
-	在 Visual Studio 中，打开“服务器资源管理器”。导航到“Azure”->“SQL 数据库”中的数据库。右键单击数据库并选择“在 SQL Server 对象资源管理器中打开”。现在便可以浏览 SQL 数据库表及其内容。
+    在 Visual Studio 中，打开“服务器资源管理器”。导航到“Azure”->“SQL 数据库”中的数据库。右键单击数据库并选择“在 SQL Server 对象资源管理器中打开”。现在便可以浏览 SQL 数据库表及其内容。
 
 ## 更新客户端应用以重新连接移动后端
 

@@ -31,29 +31,29 @@ Nginx 是一款轻量级的 Web 服务器/反向代理服务器及电子邮件�
 
 创建 /etc/yum.repos.d/nginx.repo 并黏贴以下配置信息。  
 
-	[nginx]
-	name=nginx repo
-	baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-	gpgcheck=0
-	enabled=1  
+    [nginx]
+    name=nginx repo
+    baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+    gpgcheck=0
+    enabled=1  
 
 或者添加 CentOS 7 EPEL 库  
 
-	sudo yum install epel-release  
+    sudo yum install epel-release  
 
 如果您想了解如何安装其他 Linux 发行版自带的 Nginx 软件包，可参考https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#。 
 
 1.2 安装  
 
-	yum install nginx  
+    yum install nginx  
 
 1.3 运行  
 
-	systemctl start nginx  
+    systemctl start nginx  
 
 您也可以运行一下命令来查看 nginx 服务的状态  
 
-	systemctl status nginx
+    systemctl status nginx
  
 ![nginx 服务的状态][2]  
 
@@ -63,28 +63,28 @@ Nginx 是一款轻量级的 Web 服务器/反向代理服务器及电子邮件�
 
 下面这个例子先安装了 wget 工具，这是因为 Azure 发布的 CentOS 7.1 中并没有默认安装 wget。  
 
-	yum install wget
-	wget nginx.org/download/nginx-1.9.5.tar.gz
-	tar –xvzf nginx-1.9.5.tar.gz
-	cd nginx-1.9.5  
+    yum install wget
+    wget nginx.org/download/nginx-1.9.5.tar.gz
+    tar –xvzf nginx-1.9.5.tar.gz
+    cd nginx-1.9.5  
 
 2.2 编译安装，关于更多的编译选项，可以运行 “./configure –help” 或者参考[官网](http://nginx.org/en/docs/configure.html)。  
 
 下面这个例子先安装了 gcc 编译器，这是因为 Azure 发布的 CentOS 7.1 中并没有默认安装 gcc。另外您也需要安装 pcre，pcre-devel，zlib，zlib-devel 和 openssl，否则您可能遇到再编译过程中遇到错误。比如，如果您不注明 “—without-http_rewrite_module” 您将会遇到 ”error: the HTTP rewrite module requires the PCRE library”。  
 
-	yum install gcc
-	yum install pcre pcre-devel zlib zlib-devel 
-	./configure 
-	make
-	make install
+    yum install gcc
+    yum install pcre pcre-devel zlib zlib-devel 
+    ./configure 
+    make
+    make install
 
 2.3 运行  
 
-	/usr/sbin/nginx –c /etc/nginx/nginx.conf  
+    /usr/sbin/nginx –c /etc/nginx/nginx.conf  
 
 2.4 查看状态  
 
-	ps –ef | grep nginx
+    ps –ef | grep nginx
  
 ![查看状态][3]  
 
@@ -106,49 +106,49 @@ Azure 虚拟机默认只开放对应 VIP 地址的有限端口，用于远程连
 
 下面的步骤针对 CentOS。  
 
-	vi /etc/ini.d/nginx  
+    vi /etc/ini.d/nginx  
 
 粘贴以下内容，保存。  
 
-	#!/bin/sh
-	#
-	# nginx - this script starts and stops the nginx daemon
-	#
-	# chkconfig:   - 85 15
-	# description:  NGINX is an HTTP(S) server, HTTP(S) reverse \
-	#               proxy and IMAP/POP3 proxy server
-	# processname: nginx
-	# config:      /etc/nginx/nginx.conf
-	# config:      /etc/sysconfig/nginx
-	# pidfile:     /var/run/nginx.pid
+    #!/bin/sh
+    #
+    # nginx - this script starts and stops the nginx daemon
+    #
+    # chkconfig:   - 85 15
+    # description:  NGINX is an HTTP(S) server, HTTP(S) reverse \
+    #               proxy and IMAP/POP3 proxy server
+    # processname: nginx
+    # config:      /etc/nginx/nginx.conf
+    # config:      /etc/sysconfig/nginx
+    # pidfile:     /var/run/nginx.pid
 
-	# Source function library.
-	. /etc/rc.d/init.d/functions
+    # Source function library.
+    . /etc/rc.d/init.d/functions
 
-	# Source networking configuration.
-	. /etc/sysconfig/network
+    # Source networking configuration.
+    . /etc/sysconfig/network
 
-	# Check that networking is up.
-	[ "$NETWORKING" = "no" ] && exit 0
+    # Check that networking is up.
+    [ "$NETWORKING" = "no" ] && exit 0
 
-	nginx="/usr/sbin/nginx"
-	prog=$(basename $nginx)
+    nginx="/usr/sbin/nginx"
+    prog=$(basename $nginx)
 
-	NGINX_CONF_FILE="/etc/nginx/nginx.conf"
+    NGINX_CONF_FILE="/etc/nginx/nginx.conf"
 
-	[ -f /etc/sysconfig/nginx ] && . /etc/sysconfig/nginx
+    [ -f /etc/sysconfig/nginx ] && . /etc/sysconfig/nginx
 
-	lockfile=/var/lock/subsys/nginx
+    lockfile=/var/lock/subsys/nginx
 
-	make_dirs() {
-   	# make required directories
-	user=`$nginx -V 2>&1 | grep "configure arguments:" | sed 's/[^*]*--user=\([^ ]*\).*/\1/g' -`
+    make_dirs() {
+       # make required directories
+    user=`$nginx -V 2>&1 | grep "configure arguments:" | sed 's/[^*]*--user=\([^ ]*\).*/\1/g' -`
 
-   	if [ -z "`grep $user /etc/passwd`" ]; then
+       if [ -z "`grep $user /etc/passwd`" ]; then
        useradd -M -s /bin/nologin $user
-   	fi
-   	options=`$nginx -V 2>&1 | grep 'configure arguments:'`
-   	for opt in $options; do
+       fi
+       options=`$nginx -V 2>&1 | grep 'configure arguments:'`
+       for opt in $options; do
        if [ `echo $opt | grep '.*-temp-path'` ]; then
            value=`echo $opt | cut -d "=" -f 2`
            if [ ! -d "$value" ]; then
@@ -156,106 +156,106 @@ Azure 虚拟机默认只开放对应 VIP 地址的有限端口，用于远程连
                mkdir -p $value && chown -R $user $value
            fi
        fi
-   	done
-	}
+       done
+    }
 
-	start() {
-    	[ -x $nginx ] || exit 5
-    	[ -f $NGINX_CONF_FILE ] || exit 6
-    	make_dirs
-    	echo -n $"Starting $prog: "
-    	daemon $nginx -c $NGINX_CONF_FILE
-    	retval=$?
-    	echo
-    	[ $retval -eq 0 ] && touch $lockfile
-    	return $retval
-	}
+    start() {
+        [ -x $nginx ] || exit 5
+        [ -f $NGINX_CONF_FILE ] || exit 6
+        make_dirs
+        echo -n $"Starting $prog: "
+        daemon $nginx -c $NGINX_CONF_FILE
+        retval=$?
+        echo
+        [ $retval -eq 0 ] && touch $lockfile
+        return $retval
+    }
 
-	stop() {
-    	echo -n $"Stopping $prog: "
-    	killproc $prog -QUIT
-    	retval=$?
-    	echo
-    	[ $retval -eq 0 ] && rm -f $lockfile
-    	return $retval
-	}
+    stop() {
+        echo -n $"Stopping $prog: "
+        killproc $prog -QUIT
+        retval=$?
+        echo
+        [ $retval -eq 0 ] && rm -f $lockfile
+        return $retval
+    }
 
-	restart() {
-    	configtest || return $?
-    	stop
-    	sleep 1
-    	start
-	}
+    restart() {
+        configtest || return $?
+        stop
+        sleep 1
+        start
+    }
 
-	reload() {
-    	configtest || return $?
-    	echo -n $"Reloading $prog: "
-    	killproc $nginx -HUP
-    	RETVAL=$?
-    	echo
-	}
+    reload() {
+        configtest || return $?
+        echo -n $"Reloading $prog: "
+        killproc $nginx -HUP
+        RETVAL=$?
+        echo
+    }
 
-	force_reload() {
-    	restart
-	}
+    force_reload() {
+        restart
+    }
 
-	configtest() {
-  		$nginx -t -c $NGINX_CONF_FILE
-	}
+    configtest() {
+          $nginx -t -c $NGINX_CONF_FILE
+    }
 
-	rh_status() {
-    	status $prog
-	}
+    rh_status() {
+        status $prog
+    }
 
-	rh_status_q() {
-    	rh_status >/dev/null 2>&1
-	}
+    rh_status_q() {
+        rh_status >/dev/null 2>&1
+    }
 
-	case "$1" in
-    	start)
-        	rh_status_q && exit 0
-        	$1
-        	;;
-    	stop)
-        	rh_status_q || exit 0
-        	$1
-        	;;
-    	restart|configtest)
-        	$1
-        	;;
-    	reload)
-        	rh_status_q || exit 7
-        	$1
-        	;;
-    	force-reload)
-        	force_reload
-        	;;
-    	status)
-        	rh_status
-        	;;
-    	condrestart|try-restart)
-        	rh_status_q || exit 0
+    case "$1" in
+        start)
+            rh_status_q && exit 0
+            $1
             ;;
-    	*)
+        stop)
+            rh_status_q || exit 0
+            $1
+            ;;
+        restart|configtest)
+            $1
+            ;;
+        reload)
+            rh_status_q || exit 7
+            $1
+            ;;
+        force-reload)
+            force_reload
+            ;;
+        status)
+            rh_status
+            ;;
+        condrestart|try-restart)
+            rh_status_q || exit 0
+            ;;
+        *)
         echo $"Usage: $0 {start|stop|status|restart|condrestart|try-restart|reload|force-reload|configtest}"
         exit 2
-	esac  
+    esac  
 
 赋予守护进程运行权限。  
 
-	Chmod +x /etc/init.d/nginx  
+    Chmod +x /etc/init.d/nginx  
 
 接下来您就可以启动/停止/查看 Nginx 服务了  
 
-	/etc/init.d/nginx start
-	/etc/init.d/nginx stop
-	/etc/init.d/nginx status  
+    /etc/init.d/nginx start
+    /etc/init.d/nginx stop
+    /etc/init.d/nginx status  
 
 如果你使用定制的 CentOS 并开启了防火墙，请运行以下命令来允许 HTTP 和 HTTPS 的流量:  
 
-	sudo firewall-cmd --permanent --zone=public --add-service=http 
-	sudo firewall-cmd --permanent --zone=public --add-service=https
-	sudo firewall-cmd --reload
+    sudo firewall-cmd --permanent --zone=public --add-service=http 
+    sudo firewall-cmd --permanent --zone=public --add-service=https
+    sudo firewall-cmd --reload
 
 <!-- image references -->  
 [1]: ./media/open-source-azure-virtual-machines-linux-set-up-nginx-web-server/open-source-set-up-nginx-web-server-in-azure-1.png 

@@ -46,7 +46,7 @@ ms.author: adrianha
 
 9. 在注册页中，记下“应用程序机密”和“程序包 SID”下的值，后面将使用这些值配置移动应用后端。
 
-	![将应用与 Windows 应用商店关联](./media/app-service-mobile-windows-store-dotnet-get-started-push/app-service-mobile-uwp-app-push-auth.png)
+    ![将应用与 Windows 应用商店关联](./media/app-service-mobile-windows-store-dotnet-get-started-push/app-service-mobile-uwp-app-push-auth.png)
 
     > [!IMPORTANT] 客户端密钥和程序包 SID 是重要的安全凭据。请勿将这些值告知任何人或随你的应用程序分发它们。将“应用程序 ID”与机密配合使用来配置 Microsoft 帐户身份验证。
 
@@ -64,45 +64,45 @@ ms.author: adrianha
 
 2. 展开“控制器”，打开 TodoItemController.cs，然后添加以下 using 语句：
 
-		using System.Collections.Generic;
-		using Microsoft.Azure.NotificationHubs;
-		using Microsoft.Azure.Mobile.Server.Config;
+        using System.Collections.Generic;
+        using Microsoft.Azure.NotificationHubs;
+        using Microsoft.Azure.Mobile.Server.Config;
 
 3. 在 **PostTodoItem** 方法中，在调用 **InsertAsync** 后添加如下代码：
 
-	    // Get the settings for the server project.
-	    HttpConfiguration config = this.Configuration;
-	    MobileAppSettingsDictionary settings =
-	        this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
+        // Get the settings for the server project.
+        HttpConfiguration config = this.Configuration;
+        MobileAppSettingsDictionary settings =
+            this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
 
-	    // Get the Notification Hubs credentials for the Mobile App.
-	    string notificationHubName = settings.NotificationHubName;
-	    string notificationHubConnection = settings
-	        .Connections[MobileAppSettingsKeys.NotificationHubConnectionString].ConnectionString;
+        // Get the Notification Hubs credentials for the Mobile App.
+        string notificationHubName = settings.NotificationHubName;
+        string notificationHubConnection = settings
+            .Connections[MobileAppSettingsKeys.NotificationHubConnectionString].ConnectionString;
 
-	    // Create the notification hub client.
-	    NotificationHubClient hub = NotificationHubClient
-	        .CreateClientFromConnectionString(notificationHubConnection, notificationHubName);
+        // Create the notification hub client.
+        NotificationHubClient hub = NotificationHubClient
+            .CreateClientFromConnectionString(notificationHubConnection, notificationHubName);
 
-	    // Define a WNS payload
-	    var windowsToastPayload = @"<toast><visual><binding template=""ToastText01""><text id=""1"">"
-	                            + item.Text + @"</text></binding></visual></toast>";
-	    try
-	    {
-	        // Send the push notification.
-	        var result = await hub.SendWindowsNativeNotificationAsync(windowsToastPayload);
+        // Define a WNS payload
+        var windowsToastPayload = @"<toast><visual><binding template=""ToastText01""><text id=""1"">"
+                                + item.Text + @"</text></binding></visual></toast>";
+        try
+        {
+            // Send the push notification.
+            var result = await hub.SendWindowsNativeNotificationAsync(windowsToastPayload);
 
-	        // Write the success result to the logs.
-	        config.Services.GetTraceWriter().Info(result.State.ToString());
-	    }
-	    catch (System.Exception ex)
-	    {
-	        // Write the failure result to the logs.
-	        config.Services.GetTraceWriter()
-	            .Error(ex.Message, null, "Push.SendAsync Error");
-	    }
+            // Write the success result to the logs.
+            config.Services.GetTraceWriter().Info(result.State.ToString());
+        }
+        catch (System.Exception ex)
+        {
+            // Write the failure result to the logs.
+            config.Services.GetTraceWriter()
+                .Error(ex.Message, null, "Push.SendAsync Error");
+        }
 
-	此代码指示通知中心在插入新项后，发送一条推送通知。
+    此代码指示通知中心在插入新项后，发送一条推送通知。
 
 4. 重新发布服务器项目。
 
@@ -112,47 +112,47 @@ ms.author: adrianha
 
 2. 将 todoitem.js 文件中的现有代码替换为以下内容：
 
-		var azureMobileApps = require('azure-mobile-apps'),
-	    promises = require('azure-mobile-apps/src/utilities/promises'),
-	    logger = require('azure-mobile-apps/src/logger');
+        var azureMobileApps = require('azure-mobile-apps'),
+        promises = require('azure-mobile-apps/src/utilities/promises'),
+        logger = require('azure-mobile-apps/src/logger');
 
-		var table = azureMobileApps.table();
+        var table = azureMobileApps.table();
 
-		table.insert(function (context) {
-	    // For more information about the Notification Hubs JavaScript SDK,
-	    // see http://aka.ms/nodejshubs
-	    logger.info('Running TodoItem.insert');
+        table.insert(function (context) {
+        // For more information about the Notification Hubs JavaScript SDK,
+        // see http://aka.ms/nodejshubs
+        logger.info('Running TodoItem.insert');
 
-	    // Define the WNS payload that contains the new item Text.
-	    var payload = "<toast><visual><binding template=\ToastText01><text id="1">"
-		                            + context.item.text + "</text></binding></visual></toast>";
+        // Define the WNS payload that contains the new item Text.
+        var payload = "<toast><visual><binding template=\ToastText01><text id="1">"
+                                    + context.item.text + "</text></binding></visual></toast>";
 
-	    // Execute the insert.  The insert returns the results as a Promise,
-	    // Do the push as a post-execute action within the promise flow.
-	    return context.execute()
-	        .then(function (results) {
-	            // Only do the push if configured
-	            if (context.push) {
-					// Send a WNS native toast notification.
-	                context.push.wns.sendToast(null, payload, function (error) {
-	                    if (error) {
-	                        logger.error('Error while sending push notification: ', error);
-	                    } else {
-	                        logger.info('Push notification sent successfully!');
-	                    }
-	                });
-	            }
-	            // Don't forget to return the results from the context.execute()
-	            return results;
-	        })
-	        .catch(function (error) {
-	            logger.error('Error while running context.execute: ', error);
-	        });
-		});
+        // Execute the insert.  The insert returns the results as a Promise,
+        // Do the push as a post-execute action within the promise flow.
+        return context.execute()
+            .then(function (results) {
+                // Only do the push if configured
+                if (context.push) {
+                    // Send a WNS native toast notification.
+                    context.push.wns.sendToast(null, payload, function (error) {
+                        if (error) {
+                            logger.error('Error while sending push notification: ', error);
+                        } else {
+                            logger.info('Push notification sent successfully!');
+                        }
+                    });
+                }
+                // Don't forget to return the results from the context.execute()
+                return results;
+            })
+            .catch(function (error) {
+                logger.error('Error while running context.execute: ', error);
+            });
+        });
 
-		module.exports = table;
+        module.exports = table;
 
-	插入新的待办事项时，会发送一条包含 item.text 的 WNS toast 通知。
+    插入新的待办事项时，会发送一条包含 item.text 的 WNS toast 通知。
 
 2. 编辑本地计算机上的文件时，重新发布服务器项目。
 
@@ -161,7 +161,7 @@ ms.author: adrianha
 
 1. 打开 **App.xaml.cs** 项目文件并添加以下 `using` 语句：
 
-		using System.Threading.Tasks;
+        using System.Threading.Tasks;
         using Windows.Networking.PushNotifications;
 
 2. 在同一文件中，将以下 **InitNotificationsAsync** 方法定义添加到 **App** 类中：
@@ -184,8 +184,8 @@ ms.author: adrianha
         {
             await InitNotificationsAsync();
 
-			// ...
-		}
+            // ...
+        }
 
     这保证每次启动应用程序时都注册短期的 ChannelURI。
 

@@ -24,4 +24,4 @@
 
 2.	创建虚拟机时，请选择上一个步骤中创建的云服务名称。
 
-	![将虚拟机添加到现有云服务](./media/virtual-machines-common-classic-connect-vms/Connect-VM-to-CS.png)
+    ![将虚拟机添加到现有云服务](./media/virtual-machines-common-classic-connect-vms/Connect-VM-to-CS.png)

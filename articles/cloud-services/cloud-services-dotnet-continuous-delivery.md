@@ -36,7 +36,7 @@ ms.author: tarcher
 3.	安装 [Azure Libraries for .NET](http://go.microsoft.com/fwlink/?LinkId=623519)。
 4.  将 Microsoft.WebApplication.targets 文件从 Visual Studio 安装复制到生成服务器。
 
-	在已安装 Visual Studio 的计算机上，此文件位于目录 C:\\Program Files(x86)\\MSBuild\\Microsoft\\VisualStudio\\v14.0\\WebApplications 中。应将该文件复制到生成服务器上的同一目录中。
+    在已安装 Visual Studio 的计算机上，此文件位于目录 C:\\Program Files(x86)\\MSBuild\\Microsoft\\VisualStudio\\v14.0\\WebApplications 中。应将该文件复制到生成服务器上的同一目录中。
 5.  安装 [Azure Tools for Visual Studio](https://www.visualstudio.com/features/azure-tools-vs.aspx)。
 
 ## 2：使用 MSBuild 命令生成包
@@ -281,7 +281,7 @@ ms.author: tarcher
 
     10. 在“处理错误输出”部分的正下方添加一个 WriteBuildError 活动。设置 Message='data'。这可确保脚本的标准错误将写入到生成错误输出中。
 
-	11. 更正蓝色感叹号指示的任何错误。将鼠标悬停在感叹号上可以获取有关错误的提示。保存工作流以清除错误。
+    11. 更正蓝色感叹号指示的任何错误。将鼠标悬停在感叹号上可以获取有关错误的提示。保存工作流以清除错误。
 
     发布工作流活动的最终结果将与设计器中的以下内容类似：
 
@@ -289,37 +289,37 @@ ms.author: tarcher
 
     发布工作流活动的最终结果将与 XAML 中的以下内容类似：
 
-		<If Condition="[Not String.IsNullOrEmpty(PublishScriptLocation)]" sap2010:WorkflowViewState.IdRef="If_1">
-	        <If.Then>
-	          <Sequence DisplayName="Start Publish" sap2010:WorkflowViewState.IdRef="Sequence_4">
-	            <Sequence.Variables>
-	              <Variable x:TypeArguments="x:String" Name="SubscriptionDataFilePath" />
-	              <Variable x:TypeArguments="x:String" Name="PublishScriptFilePath" />
-	            </Sequence.Variables>
-	            <mtbwa:ConvertWorkspaceItem DisplayName="Convert publish script filename" sap2010:WorkflowViewState.IdRef="ConvertWorkspaceItem_1" Input="[PublishScriptLocation]" Result="[PublishScriptFilePath]" Workspace="[Workspace]" />
-	            <mtbwa:ConvertWorkspaceItem DisplayName="Convert subscription filename" sap2010:WorkflowViewState.IdRef="ConvertWorkspaceItem_2" Input="[SubscriptionDataFileLocation]" Result="[SubscriptionDataFilePath]" Workspace="[Workspace]" />
-	            <mtbwa:InvokeProcess Arguments="[String.Format("; -File ";";{0}";"; -serviceName {1}&#xD;&#xA;            -storageAccountName {2} -packageLocation ";";{3}";";&#xD;&#xA;            -cloudConfigLocation ";";{4}";"; -subscriptionDataFile ";";{5}";";&#xD;&#xA;            -selectedSubscription {6} -environment ";";{7}";";";,&#xD;&#xA;            PublishScriptFilePath, ServiceName, StorageAccountName,&#xD;&#xA;            PackageLocation, CloudConfigLocation,&#xD;&#xA;            SubscriptionDataFilePath, SubscriptionName, Environment)]" DisplayName="'Execute Publish Script'" FileName="[PowerShell]" sap2010:WorkflowViewState.IdRef="InvokeProcess_1">
-	              <mtbwa:InvokeProcess.ErrorDataReceived>
-	                <ActivityAction x:TypeArguments="x:String">
-	                  <ActivityAction.Argument>
-	                    <DelegateInArgument x:TypeArguments="x:String" Name="data" />
-	                  </ActivityAction.Argument>
-	                  <mtbwa:WriteBuildError Message="{x:Null}" sap2010:WorkflowViewState.IdRef="WriteBuildError_1" />
-	                </ActivityAction>
-	              </mtbwa:InvokeProcess.ErrorDataReceived>
-	              <mtbwa:InvokeProcess.OutputDataReceived>
-	                <ActivityAction x:TypeArguments="x:String">
-	                  <ActivityAction.Argument>
-	                    <DelegateInArgument x:TypeArguments="x:String" Name="data" />
-	                  </ActivityAction.Argument>
-	                  <mtbwa:WriteBuildMessage sap2010:WorkflowViewState.IdRef="WriteBuildMessage_2" Importance="[Microsoft.TeamFoundation.Build.Client.BuildMessageImportance.High]" Message="[data]" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces" />
-	                </ActivityAction>
-	              </mtbwa:InvokeProcess.OutputDataReceived>
-	            </mtbwa:InvokeProcess>
-	          </Sequence>
-	        </If.Then>
-	      </If>
-	    </Sequence>
+        <If Condition="[Not String.IsNullOrEmpty(PublishScriptLocation)]" sap2010:WorkflowViewState.IdRef="If_1">
+            <If.Then>
+              <Sequence DisplayName="Start Publish" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:String" Name="SubscriptionDataFilePath" />
+                  <Variable x:TypeArguments="x:String" Name="PublishScriptFilePath" />
+                </Sequence.Variables>
+                <mtbwa:ConvertWorkspaceItem DisplayName="Convert publish script filename" sap2010:WorkflowViewState.IdRef="ConvertWorkspaceItem_1" Input="[PublishScriptLocation]" Result="[PublishScriptFilePath]" Workspace="[Workspace]" />
+                <mtbwa:ConvertWorkspaceItem DisplayName="Convert subscription filename" sap2010:WorkflowViewState.IdRef="ConvertWorkspaceItem_2" Input="[SubscriptionDataFileLocation]" Result="[SubscriptionDataFilePath]" Workspace="[Workspace]" />
+                <mtbwa:InvokeProcess Arguments="[String.Format("; -File ";";{0}";"; -serviceName {1}&#xD;&#xA;            -storageAccountName {2} -packageLocation ";";{3}";";&#xD;&#xA;            -cloudConfigLocation ";";{4}";"; -subscriptionDataFile ";";{5}";";&#xD;&#xA;            -selectedSubscription {6} -environment ";";{7}";";";,&#xD;&#xA;            PublishScriptFilePath, ServiceName, StorageAccountName,&#xD;&#xA;            PackageLocation, CloudConfigLocation,&#xD;&#xA;            SubscriptionDataFilePath, SubscriptionName, Environment)]" DisplayName="'Execute Publish Script'" FileName="[PowerShell]" sap2010:WorkflowViewState.IdRef="InvokeProcess_1">
+                  <mtbwa:InvokeProcess.ErrorDataReceived>
+                    <ActivityAction x:TypeArguments="x:String">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="x:String" Name="data" />
+                      </ActivityAction.Argument>
+                      <mtbwa:WriteBuildError Message="{x:Null}" sap2010:WorkflowViewState.IdRef="WriteBuildError_1" />
+                    </ActivityAction>
+                  </mtbwa:InvokeProcess.ErrorDataReceived>
+                  <mtbwa:InvokeProcess.OutputDataReceived>
+                    <ActivityAction x:TypeArguments="x:String">
+                      <ActivityAction.Argument>
+                        <DelegateInArgument x:TypeArguments="x:String" Name="data" />
+                      </ActivityAction.Argument>
+                      <mtbwa:WriteBuildMessage sap2010:WorkflowViewState.IdRef="WriteBuildMessage_2" Importance="[Microsoft.TeamFoundation.Build.Client.BuildMessageImportance.High]" Message="[data]" mva:VisualBasic.Settings="Assembly references and imported namespaces serialized as XML namespaces" />
+                    </ActivityAction>
+                  </mtbwa:InvokeProcess.OutputDataReceived>
+                </mtbwa:InvokeProcess>
+              </Sequence>
+            </If.Then>
+          </If>
+        </Sequence>
 
 7.  保存生成过程模板工作流并签入此文件。
 
@@ -351,204 +351,204 @@ ms.author: tarcher
 
 ### PublishCloudService.ps1 脚本模板
 
-	Param(  $serviceName = "",
-	        $storageAccountName = "",
-	        $packageLocation = "",
-	        $cloudConfigLocation = "",
-	        $environment = "Staging",
-	        $deploymentLabel = "ContinuousDeploy to $servicename",
-	        $timeStampFormat = "g",
-	        $alwaysDeleteExistingDeployments = 1,
-	        $enableDeploymentUpgrade = 1,
-	        $selectedsubscription = "default",
-	        $subscriptionDataFile = ""
-	     )
-	
-	function Publish()
-	{
-		$deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot -ErrorVariable a -ErrorAction silentlycontinue
-	    if ($a[0] -ne $null)
-	    {
-	        Write-Output "$(Get-Date -f $timeStampFormat) - No deployment is detected. Creating a new deployment. "
-	    }
-	    #check for existing deployment and then either upgrade, delete + deploy, or cancel according to $alwaysDeleteExistingDeployments and $enableDeploymentUpgrade boolean variables
-		if ($deployment.Name -ne $null)
-		{
-			switch ($alwaysDeleteExistingDeployments)
-		    {
-		        1
-				{
-	                switch ($enableDeploymentUpgrade)
-	                {
-	                    1  #Update deployment inplace (usually faster, cheaper, won't destroy VIP)
-	                    {
-	                        Write-Output "$(Get-Date -f $timeStampFormat) - Deployment exists in $servicename.  Upgrading deployment."
-					        UpgradeDeployment
-	                    }
-	                    0  #Delete then create new deployment
-	                    {
-	                        Write-Output "$(Get-Date -f $timeStampFormat) - Deployment exists in $servicename.  Deleting deployment."
-					        DeleteDeployment
-	                        CreateNewDeployment
-	
-	                    }
-	                } # switch ($enableDeploymentUpgrade)
-				}
-		        0
-				{
-					Write-Output "$(Get-Date -f $timeStampFormat) - ERROR: Deployment exists in $servicename.  Script execution cancelled."
-					exit
-				}
-		    } #switch ($alwaysDeleteExistingDeployments)
-		} else {
-	            CreateNewDeployment
-	    }
-	}
-	
-	function CreateNewDeployment()
-	{
-		write-progress -id 3 -activity "Creating New Deployment" -Status "In progress"
-		Write-Output "$(Get-Date -f $timeStampFormat) - Creating New Deployment: In progress"
-	
-		$opstat = New-AzureDeployment -Slot $slot -Package $packageLocation -Configuration $cloudConfigLocation -label $deploymentLabel -ServiceName $serviceName
-	
-	    $completeDeployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
-	    $completeDeploymentID = $completeDeployment.deploymentid
-	
-	    write-progress -id 3 -activity "Creating New Deployment" -completed -Status "Complete"
-		Write-Output "$(Get-Date -f $timeStampFormat) - Creating New Deployment: Complete, Deployment ID: $completeDeploymentID"
-	
-		StartInstances
-	}
-	
-	function UpgradeDeployment()
-	{
-		write-progress -id 3 -activity "Upgrading Deployment" -Status "In progress"
-		Write-Output "$(Get-Date -f $timeStampFormat) - Upgrading Deployment: In progress"
-	
-	    # perform Update-Deployment
-		$setdeployment = Set-AzureDeployment -Upgrade -Slot $slot -Package $packageLocation -Configuration $cloudConfigLocation -label $deploymentLabel -ServiceName $serviceName -Force
-	
-	    $completeDeployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
-	    $completeDeploymentID = $completeDeployment.deploymentid
-	
-	    write-progress -id 3 -activity "Upgrading Deployment" -completed -Status "Complete"
-		Write-Output "$(Get-Date -f $timeStampFormat) - Upgrading Deployment: Complete, Deployment ID: $completeDeploymentID"
-	}
-	
-	function DeleteDeployment()
-	{
-	
-		write-progress -id 2 -activity "Deleting Deployment" -Status "In progress"
-		Write-Output "$(Get-Date -f $timeStampFormat) - Deleting Deployment: In progress"
-	
-	    #WARNING - always deletes with force
-		$removeDeployment = Remove-AzureDeployment -Slot $slot -ServiceName $serviceName -Force
-	
-		write-progress -id 2 -activity "Deleting Deployment: Complete" -completed -Status $removeDeployment
-		Write-Output "$(Get-Date -f $timeStampFormat) - Deleting Deployment: Complete"
-	
-	}
-	
-	function StartInstances()
-	{
-		write-progress -id 4 -activity "Starting Instances" -status "In progress"
-		Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instances: In progress"
-	
-	    $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
-	    $runstatus = $deployment.Status
-	
-	    if ($runstatus -ne 'Running')
-	    {
-		    $run = Set-AzureDeployment -Slot $slot -ServiceName $serviceName -Status Running
-	    }
-		$deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
-		$oldStatusStr = @("") * $deployment.RoleInstanceList.Count
-	
-		while (-not(AllInstancesRunning($deployment.RoleInstanceList)))
-		{
-			$i = 1
-			foreach ($roleInstance in $deployment.RoleInstanceList)
-			{
-				$instanceName = $roleInstance.InstanceName
-				$instanceStatus = $roleInstance.InstanceStatus
-	
-				if ($oldStatusStr[$i - 1] -ne $roleInstance.InstanceStatus)
-				{
-					$oldStatusStr[$i - 1] = $roleInstance.InstanceStatus
-					Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instance '$instanceName': $instanceStatus"
-				}
-	
-				write-progress -id (4 + $i) -activity "Starting Instance '$instanceName'" -status "$instanceStatus"
-				$i = $i + 1
-			}
-	
-			sleep -Seconds 1
-	
-			$deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
-		}
-	
-		$i = 1
-		foreach ($roleInstance in $deployment.RoleInstanceList)
-		{
-			$instanceName = $roleInstance.InstanceName
-			$instanceStatus = $roleInstance.InstanceStatus
-	
-			if ($oldStatusStr[$i - 1] -ne $roleInstance.InstanceStatus)
-			{
-				$oldStatusStr[$i - 1] = $roleInstance.InstanceStatus
-				Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instance '$instanceName': $instanceStatus"
-			}
-	
-			$i = $i + 1
-		}
-	
-	    $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
-		$opstat = $deployment.Status
-	
-		write-progress -id 4 -activity "Starting Instances" -completed -status $opstat
-		Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instances: $opstat"
-	}
-	
-	function AllInstancesRunning($roleInstanceList)
-	{
-		foreach ($roleInstance in $roleInstanceList)
-		{
-			if ($roleInstance.InstanceStatus -ne "ReadyRole")
-			{
-				return $false
-			}
-		}
-	
-		return $true
-	}
-	
-	#configure powershell with Azure 1.7 modules
-	Import-Module Azure
-	
-	#configure powershell with publishsettings for your subscription
-	$pubsettings = $subscriptionDataFile
-	Import-AzurePublishSettingsFile $pubsettings
-	Set-AzureSubscription -CurrentStorageAccountName $storageAccountName -SubscriptionName $selectedsubscription
-	Select-AzureSubscription $selectedsubscription
-	
-	#set remaining environment variables for Azure cmdlets
-	$subscription = Get-AzureSubscription $selectedsubscription
-	$subscriptionname = $subscription.subscriptionname
-	$subscriptionid = $subscription.subscriptionid
-	$slot = $environment
-	
-	#main driver - publish & write progress to activity log
-	Write-Output "$(Get-Date -f $timeStampFormat) - Azure Cloud Service deploy script started."
-	Write-Output "$(Get-Date -f $timeStampFormat) - Preparing deployment of $deploymentLabel for $subscriptionname with Subscription ID $subscriptionid."
-	
-	Publish
-	
-	$deployment = Get-AzureDeployment -slot $slot -serviceName $servicename
-	$deploymentUrl = $deployment.Url
-	
-	Write-Output "$(Get-Date -f $timeStampFormat) - Created Cloud Service with URL $deploymentUrl."
-	Write-Output "$(Get-Date -f $timeStampFormat) - Azure Cloud Service deploy script finished."
+    Param(  $serviceName = "",
+            $storageAccountName = "",
+            $packageLocation = "",
+            $cloudConfigLocation = "",
+            $environment = "Staging",
+            $deploymentLabel = "ContinuousDeploy to $servicename",
+            $timeStampFormat = "g",
+            $alwaysDeleteExistingDeployments = 1,
+            $enableDeploymentUpgrade = 1,
+            $selectedsubscription = "default",
+            $subscriptionDataFile = ""
+         )
+    
+    function Publish()
+    {
+        $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot -ErrorVariable a -ErrorAction silentlycontinue
+        if ($a[0] -ne $null)
+        {
+            Write-Output "$(Get-Date -f $timeStampFormat) - No deployment is detected. Creating a new deployment. "
+        }
+        #check for existing deployment and then either upgrade, delete + deploy, or cancel according to $alwaysDeleteExistingDeployments and $enableDeploymentUpgrade boolean variables
+        if ($deployment.Name -ne $null)
+        {
+            switch ($alwaysDeleteExistingDeployments)
+            {
+                1
+                {
+                    switch ($enableDeploymentUpgrade)
+                    {
+                        1  #Update deployment inplace (usually faster, cheaper, won't destroy VIP)
+                        {
+                            Write-Output "$(Get-Date -f $timeStampFormat) - Deployment exists in $servicename.  Upgrading deployment."
+                            UpgradeDeployment
+                        }
+                        0  #Delete then create new deployment
+                        {
+                            Write-Output "$(Get-Date -f $timeStampFormat) - Deployment exists in $servicename.  Deleting deployment."
+                            DeleteDeployment
+                            CreateNewDeployment
+    
+                        }
+                    } # switch ($enableDeploymentUpgrade)
+                }
+                0
+                {
+                    Write-Output "$(Get-Date -f $timeStampFormat) - ERROR: Deployment exists in $servicename.  Script execution cancelled."
+                    exit
+                }
+            } #switch ($alwaysDeleteExistingDeployments)
+        } else {
+                CreateNewDeployment
+        }
+    }
+    
+    function CreateNewDeployment()
+    {
+        write-progress -id 3 -activity "Creating New Deployment" -Status "In progress"
+        Write-Output "$(Get-Date -f $timeStampFormat) - Creating New Deployment: In progress"
+    
+        $opstat = New-AzureDeployment -Slot $slot -Package $packageLocation -Configuration $cloudConfigLocation -label $deploymentLabel -ServiceName $serviceName
+    
+        $completeDeployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
+        $completeDeploymentID = $completeDeployment.deploymentid
+    
+        write-progress -id 3 -activity "Creating New Deployment" -completed -Status "Complete"
+        Write-Output "$(Get-Date -f $timeStampFormat) - Creating New Deployment: Complete, Deployment ID: $completeDeploymentID"
+    
+        StartInstances
+    }
+    
+    function UpgradeDeployment()
+    {
+        write-progress -id 3 -activity "Upgrading Deployment" -Status "In progress"
+        Write-Output "$(Get-Date -f $timeStampFormat) - Upgrading Deployment: In progress"
+    
+        # perform Update-Deployment
+        $setdeployment = Set-AzureDeployment -Upgrade -Slot $slot -Package $packageLocation -Configuration $cloudConfigLocation -label $deploymentLabel -ServiceName $serviceName -Force
+    
+        $completeDeployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
+        $completeDeploymentID = $completeDeployment.deploymentid
+    
+        write-progress -id 3 -activity "Upgrading Deployment" -completed -Status "Complete"
+        Write-Output "$(Get-Date -f $timeStampFormat) - Upgrading Deployment: Complete, Deployment ID: $completeDeploymentID"
+    }
+    
+    function DeleteDeployment()
+    {
+    
+        write-progress -id 2 -activity "Deleting Deployment" -Status "In progress"
+        Write-Output "$(Get-Date -f $timeStampFormat) - Deleting Deployment: In progress"
+    
+        #WARNING - always deletes with force
+        $removeDeployment = Remove-AzureDeployment -Slot $slot -ServiceName $serviceName -Force
+    
+        write-progress -id 2 -activity "Deleting Deployment: Complete" -completed -Status $removeDeployment
+        Write-Output "$(Get-Date -f $timeStampFormat) - Deleting Deployment: Complete"
+    
+    }
+    
+    function StartInstances()
+    {
+        write-progress -id 4 -activity "Starting Instances" -status "In progress"
+        Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instances: In progress"
+    
+        $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
+        $runstatus = $deployment.Status
+    
+        if ($runstatus -ne 'Running')
+        {
+            $run = Set-AzureDeployment -Slot $slot -ServiceName $serviceName -Status Running
+        }
+        $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
+        $oldStatusStr = @("") * $deployment.RoleInstanceList.Count
+    
+        while (-not(AllInstancesRunning($deployment.RoleInstanceList)))
+        {
+            $i = 1
+            foreach ($roleInstance in $deployment.RoleInstanceList)
+            {
+                $instanceName = $roleInstance.InstanceName
+                $instanceStatus = $roleInstance.InstanceStatus
+    
+                if ($oldStatusStr[$i - 1] -ne $roleInstance.InstanceStatus)
+                {
+                    $oldStatusStr[$i - 1] = $roleInstance.InstanceStatus
+                    Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instance '$instanceName': $instanceStatus"
+                }
+    
+                write-progress -id (4 + $i) -activity "Starting Instance '$instanceName'" -status "$instanceStatus"
+                $i = $i + 1
+            }
+    
+            sleep -Seconds 1
+    
+            $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
+        }
+    
+        $i = 1
+        foreach ($roleInstance in $deployment.RoleInstanceList)
+        {
+            $instanceName = $roleInstance.InstanceName
+            $instanceStatus = $roleInstance.InstanceStatus
+    
+            if ($oldStatusStr[$i - 1] -ne $roleInstance.InstanceStatus)
+            {
+                $oldStatusStr[$i - 1] = $roleInstance.InstanceStatus
+                Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instance '$instanceName': $instanceStatus"
+            }
+    
+            $i = $i + 1
+        }
+    
+        $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
+        $opstat = $deployment.Status
+    
+        write-progress -id 4 -activity "Starting Instances" -completed -status $opstat
+        Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instances: $opstat"
+    }
+    
+    function AllInstancesRunning($roleInstanceList)
+    {
+        foreach ($roleInstance in $roleInstanceList)
+        {
+            if ($roleInstance.InstanceStatus -ne "ReadyRole")
+            {
+                return $false
+            }
+        }
+    
+        return $true
+    }
+    
+    #configure powershell with Azure 1.7 modules
+    Import-Module Azure
+    
+    #configure powershell with publishsettings for your subscription
+    $pubsettings = $subscriptionDataFile
+    Import-AzurePublishSettingsFile $pubsettings
+    Set-AzureSubscription -CurrentStorageAccountName $storageAccountName -SubscriptionName $selectedsubscription
+    Select-AzureSubscription $selectedsubscription
+    
+    #set remaining environment variables for Azure cmdlets
+    $subscription = Get-AzureSubscription $selectedsubscription
+    $subscriptionname = $subscription.subscriptionname
+    $subscriptionid = $subscription.subscriptionid
+    $slot = $environment
+    
+    #main driver - publish & write progress to activity log
+    Write-Output "$(Get-Date -f $timeStampFormat) - Azure Cloud Service deploy script started."
+    Write-Output "$(Get-Date -f $timeStampFormat) - Preparing deployment of $deploymentLabel for $subscriptionname with Subscription ID $subscriptionid."
+    
+    Publish
+    
+    $deployment = Get-AzureDeployment -slot $slot -serviceName $servicename
+    $deploymentUrl = $deployment.Url
+    
+    Write-Output "$(Get-Date -f $timeStampFormat) - Created Cloud Service with URL $deploymentUrl."
+    Write-Output "$(Get-Date -f $timeStampFormat) - Azure Cloud Service deploy script finished."
 
 ## 后续步骤
 

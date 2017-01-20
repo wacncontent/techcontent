@@ -54,7 +54,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
             + Setting network configuration
             info:    network vnet create command OK
 
-	使用的参数：
+    使用的参数：
 
    * **--vnet**。要创建的 VNet 的名称。对于我们的方案，为 *TestVNet*
    * **-e（或 --address-space）**。VNet 地址空间。对于我们的方案，为 *192.168.0.0*
@@ -79,7 +79,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
             data:    Address prefix                  : 192.168.2.0/24
             info:    network vnet subnet create command OK
 
-	使用的参数：
+    使用的参数：
 
    * **-t（或 --vnet-name）**。将在其中创建子网的 VNet 的名称。对于我们的方案，为 *TestVNet* 。
    * **-n（或 --name）**。新子网的名称。对于我们的方案，为 *BackEnd* 。

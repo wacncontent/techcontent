@@ -61,7 +61,7 @@ ms.author: elbutter;barbkess
 
 3. 将以下 TSQL 查询复制到查询窗口中：
    
-    	SELECT COUNT(*) FROM dbo.FactInternetSales;
+        SELECT COUNT(*) FROM dbo.FactInternetSales;
     
 4. 运行该查询。若要执行此操作，请单击 `Execute`，或使用以下快捷键：`F5`。
    

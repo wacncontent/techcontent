@@ -46,9 +46,9 @@ ms.author: glenga
 
 2. 在快速入门选项卡中，单击“选择平台”下的“Windows”，然后展开“创建新的 Windows 应用商店应用程序”。
 
-   	此时将显示三个简单步骤，描述如何创建与移动服务连接的 Windows 应用商店应用程序。
+       此时将显示三个简单步骤，描述如何创建与移动服务连接的 Windows 应用商店应用程序。
 
-  	![移动服务快速入门步骤](./media/mobile-services-javascript-backend-windows-store-dotnet-get-started/mobile-quickstart-steps.png)
+      ![移动服务快速入门步骤](./media/mobile-services-javascript-backend-windows-store-dotnet-get-started/mobile-quickstart-steps.png)
 
 3. 在本地计算机或虚拟机上下载并安装 [Visual Studio 2013 Express for Windows]（如果尚未这么做）。
 
@@ -56,7 +56,7 @@ ms.author: glenga
 
 5. 在“下载并运行应用”下，选择应用的语言，然后单击“下载”。
 
-  	随即将会下载已连接到移动服务的示例待办事项列表应用程序的项目。将压缩的项目文件保存到本地计算机，并记下保存位置。
+      随即将会下载已连接到移动服务的示例待办事项列表应用程序的项目。将压缩的项目文件保存到本地计算机，并记下保存位置。
 
 ## 运行 Windows 应用程序
 

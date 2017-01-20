@@ -45,12 +45,12 @@ ms.author: torsteng
 
 **[ShardMap.OpenConnectionForKey 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.openconnectionforkey.aspx)** 将返回 ADO.Net 连接，该连接可随时基于 **key** 参数的值将命令分发到相应的数据库中。**ShardMapManager** 将分片信息缓存在应用程序中，因此这些请求通常不会针对**全局分片映射**数据库调用数据库查找。
 
-	// Syntax: 
-	public SqlConnection OpenConnectionForKey<TKey>(
-		TKey key,
-		string connectionString,
-		ConnectionOptions options
-	)
+    // Syntax: 
+    public SqlConnection OpenConnectionForKey<TKey>(
+        TKey key,
+        string connectionString,
+        ConnectionOptions options
+    )
 
 * **key** 参数在分片映射中用作查找键，以确定该请求的相应数据库。
 
@@ -68,7 +68,7 @@ ms.author: torsteng
     int newPersonId = 4321; 
 
     // Connect to the shard for that customer ID. No need to call a SqlConnection 
-	// constructor followed by the Open method.
+    // constructor followed by the Open method.
     using (SqlConnection conn = customerShardMap.OpenConnectionForKey(customerId, 
         Configuration.GetCredentialsConnectionString(), ConnectionOptions.Validate)) 
     { 

@@ -35,27 +35,27 @@ Windows 版的 iPerf 下载、解压后可以直接在命令提示符下运行�
 
 1.	确保 gcc 和 make 已安装。
 
-		#zypper in gcc
-		#zypper in make
+        #zypper in gcc
+        #zypper in make
 
 2.	下载并解压 iperf 源码包
 
-		#cd /tmp
-		#wget http://downloads.es.net/pub/iperf/iperf-3-current.tar.gz
-		#tar zxvf iperf-3-current.tar.gz
+        #cd /tmp
+        #wget http://downloads.es.net/pub/iperf/iperf-3-current.tar.gz
+        #tar zxvf iperf-3-current.tar.gz
 
 3.	安装 iperf
 
-		#cd iperf-3.1.2/
-		#./configure
-		#make
-		#make install
+        #cd iperf-3.1.2/
+        #./configure
+        #make
+        #make install
 
 完成后，iperf3 被安装至`/usr/local/bin/`下，在系统的任意路径都可以执行。
 
 若 iperf 运行报以下错误：
 
-	iperf3: error while loading shared libraries: libiperf.so.0: cannot open shared object file: No such file or directory
+    iperf3: error while loading shared libraries: libiperf.so.0: cannot open shared object file: No such file or directory
 
 通常运行 ldconfig 命令可以解决此问题。
 
@@ -127,15 +127,15 @@ iPerf 功能十分强大，支持的参数特别多。但是在实际使用中�
 ###开始测试
 
 首先在 Server 端，我们运行以下命令使 iPerf 监听 5001 端口，每 2 秒输出一次结果。
-	
-	#iperf3 -s -p 5001 -i 2
+    
+    #iperf3 -s -p 5001 -i 2
 
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-listen.png)
  
 当终端显示 Server listening on 5001 时，就表示 Server 已经正常运行，等待测试了。
 然后在 Client 端，我们并发 4 个数据流，测试总时长为 30 秒，每 2 秒输出一次结果。以下为测试所使用的命令。
 
-	#iperf3 -c 139.219.2XX.XXX -P 4 -t 30 -i 2 -p 5001
+    #iperf3 -c 139.219.2XX.XXX -P 4 -t 30 -i 2 -p 5001
 
 当 Client 端的命令执行后，测试就开始了。
 
@@ -145,7 +145,7 @@ iPerf 功能十分强大，支持的参数特别多。但是在实际使用中�
 
 测试完成后，再次用以下命令测试并发 8 个数据流的情况，对比结果将在结果解读中展现。
 
-	#iperf3 -c 139.219.2XX.XXX -P 8 -t 30 -i 2 -p 5001
+    #iperf3 -c 139.219.2XX.XXX -P 8 -t 30 -i 2 -p 5001
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-test.png)
  
 ###结果解读

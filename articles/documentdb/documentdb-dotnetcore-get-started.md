@@ -66,12 +66,12 @@ ms.author: arramac
 2. 在**“文件”**菜单中，选择**“新建”**，然后选择**“项目”**。
 3. 在“新建项目”对话框中，选择“模板”/ “Visual C#”/“.NET Core”/“控制台应用程序 (.NET Core)”，为项目命名，然后单击“确定”。
 
-	![“新建项目”窗口屏幕截图](./media/documentdb-get-started/nosql-tutorial-new-project-2.png)
+    ![“新建项目”窗口屏幕截图](./media/documentdb-get-started/nosql-tutorial-new-project-2.png)
 
 4. 在**“解决方案资源管理器”**中，右键单击 Visual Studio 解决方案下方的新控制台应用程序。
 5. 接下来，无需离开菜单，单击**“管理 NuGet 程序包...”** 
 
-	![“项目”右键菜单屏幕截图](./media/documentdb-get-started/nosql-tutorial-manage-nuget-pacakges.png)
+    ![“项目”右键菜单屏幕截图](./media/documentdb-get-started/nosql-tutorial-manage-nuget-pacakges.png)
 
 6. 在“Nuget”选项卡上，单击“浏览”，然后在搜索框中输入“azure documentdb”。
 7. 在结果中，找到“Microsoft.Azure.DocumentDB.Core”，然后单击“安装”。DocumentDB 客户端库的程序包 ID 是 [Microsoft.Azure.DocumentDB.Core](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB.Core)

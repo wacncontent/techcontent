@@ -52,7 +52,7 @@ ms.author: tamram
            "DefaultEndpointsProtocol=http;" +
                "AccountName=your_account_name;" +
                "AccountKey=your_account_name;" +
-	       "EndpointSuffix=core.chinacloudapi.cn";
+           "EndpointSuffix=core.chinacloudapi.cn";
 
 添加对 **main** 的声明，包括 **try** 块并包括必需的左大括号 **{**。
 
@@ -214,7 +214,7 @@ ms.author: tamram
                 "DefaultEndpointsProtocol=http;" +
                        "AccountName=your_account_name;" +
                        "AccountKey=your_account_name;" +
-		       "EndpointSuffix=core.chinacloudapi.cn";
+               "EndpointSuffix=core.chinacloudapi.cn";
 
         public static void main(String[] args) {
             try {
@@ -315,7 +315,7 @@ ms.author: tamram
                 "DefaultEndpointsProtocol=http;" +
                    "AccountName=your_account_name;" +
                    "AccountKey=your_account_key;" +
-		   "EndpointSuffix=core.chinacloudapi.cn";
+           "EndpointSuffix=core.chinacloudapi.cn";
 
         public static void main(String[] args)
         {

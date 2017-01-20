@@ -74,7 +74,7 @@ wacn.date: 12/26/2016
 ```
 Microsoft.ServiceBus.Messaging.QuotaExceededException
 Message: The maximum entity size has been reached or exceeded for Topic: ‘xxx-xxx-xxx’. 
-	Size of entity in bytes:1073742326, Max entity size in bytes:
+    Size of entity in bytes:1073742326, Max entity size in bytes:
 1073741824..TrackingId:xxxxxxxxxxxxxxxxxxxxxxxxxx, TimeStamp:3/15/2013 7:50:18 AM
 ```
 
@@ -85,12 +85,12 @@ Message: The maximum entity size has been reached or exceeded for Topic: ‘xxx-
 此错误有两个常见的原因：死信队列和无法正常运行的消息接收器。
 
 1. **死信队列**：
-	读取器无法完成消息，当锁定过期后，将消息返回至队列/主题。如果读取器发生异常，以致无法调用 [BrokeredMessage.Complete](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.complete.aspx)，就会出现这种情况。消息读取 10 次后，将默认移至死信队列。此行为由 [QueueDescription.MaxDeliveryCount](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.maxdeliverycount.aspx) 属性控制，默认值为 10。消息堆积在死信队列中会占用空间。
+    读取器无法完成消息，当锁定过期后，将消息返回至队列/主题。如果读取器发生异常，以致无法调用 [BrokeredMessage.Complete](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.complete.aspx)，就会出现这种情况。消息读取 10 次后，将默认移至死信队列。此行为由 [QueueDescription.MaxDeliveryCount](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.maxdeliverycount.aspx) 属性控制，默认值为 10。消息堆积在死信队列中会占用空间。
 
-	若要解决此问题，请读取并完成死信队列中的消息，就像处理任何其他队列一样。[QueueClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.aspx) 类甚至包含 [FormatDeadLetterPath](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.formatdeadletterpath.aspx) 方法，可帮助格式化死信队列路径。
+    若要解决此问题，请读取并完成死信队列中的消息，就像处理任何其他队列一样。[QueueClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.aspx) 类甚至包含 [FormatDeadLetterPath](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.formatdeadletterpath.aspx) 方法，可帮助格式化死信队列路径。
 
 2. **接收方已停止运行**：
-	接收方已停止接收队列或订阅中的消息。识别这种情况的方法是查看 [QueueDescription.MessageCountDetails](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.messagecountdetails.aspx) 属性，它会显示消息的完整细目。如果 [ActiveMessageCount](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagecountdetails.activemessagecount.aspx) 属性很高或不断增加，则表示消息写入的速度超过读取的速度。
+    接收方已停止接收队列或订阅中的消息。识别这种情况的方法是查看 [QueueDescription.MessageCountDetails](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.messagecountdetails.aspx) 属性，它会显示消息的完整细目。如果 [ActiveMessageCount](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagecountdetails.activemessagecount.aspx) 属性很高或不断增加，则表示消息写入的速度超过读取的速度。
 
 ### 事件中心
 
@@ -114,10 +114,10 @@ Message: The maximum entity size has been reached or exceeded for Topic: ‘xxx-
 此错误有两个常见的原因：配置不正确或暂时性服务错误。
 
 1. **配置不正确**：
-	运行条件下的操作超时值可能太小。客户端 SDK 的操作超时默认值为 60 秒。请查看代码是否将该值设置得过小。请注意，网络和 CPU 使用率的状况会影响完成特定操作所用的时间，因此，操作超时不应设置为非常小的值。
+    运行条件下的操作超时值可能太小。客户端 SDK 的操作超时默认值为 60 秒。请查看代码是否将该值设置得过小。请注意，网络和 CPU 使用率的状况会影响完成特定操作所用的时间，因此，操作超时不应设置为非常小的值。
 
 2. **暂时性服务错误**：
-	有时，服务总线服务在处理请求时会遇到延迟，例如，高流量时段。在这种情况下，你可以在延迟后重试操作，直到操作成功为止。如果多次尝试同一操作后仍然失败，请访问 [Azure 服务状态站点](https://azure.microsoft.com/status/)，看是否有任何已知的服务中断。
+    有时，服务总线服务在处理请求时会遇到延迟，例如，高流量时段。在这种情况下，你可以在延迟后重试操作，直到操作成功为止。如果多次尝试同一操作后仍然失败，请访问 [Azure 服务状态站点](https://azure.microsoft.com/status/)，看是否有任何已知的服务中断。
 
 ## 后续步骤
 

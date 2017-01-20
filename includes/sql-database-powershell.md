@@ -7,10 +7,10 @@
 
 运行 [**Add-AzureRmAccount**](https://msdn.microsoft.com/zh-cn/library/mt619267.aspx) cmdlet，随后显示要求输入凭据的登录屏幕。使用与登录 Azure 经典管理门户相同的凭据。
 
-	Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 如果你有多个订阅，请使用 [**Set-AzureRmContext**](https://msdn.microsoft.com/zh-cn/library/mt619263.aspx) cmdlet 选择你的 PowerShell 会话应使用的订阅。若要查看当前 PowerShell 会话正在使用哪个订阅，请运行 [**Get AzureRmContext**](https://msdn.microsoft.com/zh-cn/library/mt619265.aspx)。若要查看所有订阅，请运行 [**Get AzureRmSubscription**](https://msdn.microsoft.com/zh-cn/library/mt619284.aspx)。
 
-	Set-AzureRmContext -SubscriptionId '4cac86b0-1e56-bbbb-aaaa-000000000000'
+    Set-AzureRmContext -SubscriptionId '4cac86b0-1e56-bbbb-aaaa-000000000000'
 
 <!---HONumber=Mooncake_0912_2016-->

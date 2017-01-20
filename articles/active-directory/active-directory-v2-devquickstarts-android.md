@@ -34,11 +34,11 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 ## 从 GitHub 下载代码。
 本教程的代码[在 GitHub 上](https://github.com/azure-samples/active-directory-android-native-oidcandroidlib-v2)维护。若要遵照该代码，你可以[下载 .zip 格式应用骨架](git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git/archive/skeleton.zip)，或克隆该骨架：
 
-	git clone --branch skeleton git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
+    git clone --branch skeleton git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
 
 你也可以下载以下示例，并立即开始使用：
 
-	git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
+    git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git
 
 ## 注册应用程序
 在[应用程序注册门户](https://apps.dev.microsoft.com)创建新的应用，或按照[如何使用 v2.0 终结点注册应用](./active-directory-v2-app-registration.md)中的详细步骤操作。请确保：
@@ -54,7 +54,7 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
 将 OIDCAndroidLib 副本克隆到你的计算机。
 
-	git@github.com:kalemontes/OIDCAndroidLib.git
+    git@github.com:kalemontes/OIDCAndroidLib.git
 
 ![androidStudio](./media/active-directory-android-native-oidcandroidlib-v2/emotes-url.png)  
 
@@ -62,57 +62,57 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
 1. 创建一个新的 Android Studio 项目并接受向导中的默认值。
 
-	![在 Android Studio 中创建新项目](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample1.PNG)
+    ![在 Android Studio 中创建新项目](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample1.PNG)
 
-	![目标 Android 设备](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample2.PNG)
+    ![目标 Android 设备](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample2.PNG)
 
-	![向手机添加活动](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample3.PNG)  
+    ![向手机添加活动](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample3.PNG)  
 
 2. 若要设置项目模块，请将克隆的副本移到项目位置。你还可以创建项目，然后将其直接克隆到项目位置。
 
-	![项目模块](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample4_1.PNG)  
+    ![项目模块](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample4_1.PNG)  
 
 3. 使用上下文菜单或使用 Ctrl + Alt + Maj + S 快捷键打开项目模块设置。
 
-	![项目模块设置](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample4.PNG)  
+    ![项目模块设置](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample4.PNG)  
 
 4. 删除默认的应用程序模块，因为你只要项目容器设置。
 
-	![默认的应用程序模块](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample5.PNG)
+    ![默认的应用程序模块](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample5.PNG)
 
 5. 将克隆的副本中的模块导入当前项目。
 
-	![导入 gradle 项目](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample6.PNG) 
-	![创建新的模块页](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample7.PNG)
+    ![导入 gradle 项目](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample6.PNG) 
+    ![创建新的模块页](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample7.PNG)
 
 6. 针对 `oidlib-sample` 模块重复上述步骤。
 
 7. 检查 `oidlib-sample` 模块上的 oidclib 依赖项。
 
-	![oidlib-sample 模块上的 oidclib 依赖项](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample8.PNG)  
+    ![oidlib-sample 模块上的 oidclib 依赖项](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample8.PNG)  
 
 8. 单击“确定”并等待 gradle 同步。
 
-	你的 settings.gradle 内容应如下所示：
+    你的 settings.gradle 内容应如下所示：
 
-	![Settings.gradle 的屏幕截图](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample8_1.PNG)  
+    ![Settings.gradle 的屏幕截图](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample8_1.PNG)  
 
 9. 生成示例应用程序，以确保示例正常运行。
 
-	你目前无法将此示例应用程序与 Azure Active Directory 配合使用。我们需要首先配置一些终结点。这是为了确保开始自定义示例应用程序之前没有 Android Studio 问题。
+    你目前无法将此示例应用程序与 Azure Active Directory 配合使用。我们需要首先配置一些终结点。这是为了确保开始自定义示例应用程序之前没有 Android Studio 问题。
 
 10. 生成 `oidlib-sample` 并将其作为 Android Studio 中的目标运行。
 
-	![oidlib-sample 的生成进度](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample9.png)  
+    ![oidlib-sample 的生成进度](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample9.png)  
 
 11. 删除从项目中删除模块时留下的 `app ` 目录，因为出于安全性的考虑，Android Studio 不会删除该目录。
 
-	![包含应用程序目录的文件结构](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample12.PNG)  
+    ![包含应用程序目录的文件结构](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample12.PNG)  
 
 12. 打开“编辑配置”菜单，删除从项目中删除模块时还留下的运行配置。
 
-	![编辑配置菜单](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample10.PNG) 
-	![应用程序的运行配置](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample11.PNG)
+    ![编辑配置菜单](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample10.PNG) 
+    ![应用程序的运行配置](./media/active-directory-android-native-oidcandroidlib-v2/SetUpSample11.PNG)
 
 ## 配置示例的终结点
 
@@ -122,33 +122,33 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
 1. 由于你只使用 OAuth2 流来获得令牌并调用图形 API，因此将客户端设置为只使用 OAuth2。在后面的示例中将使用 OIDC。
 
-	xml
+    xml
 
-	    <bool name="oidc_oauth2only">true</bool>
-	
+        <bool name="oidc_oauth2only">true</bool>
+    
 2. 配置从注册门户收到的客户端 ID。
 
-	xml
+    xml
 
-	    <string name="oidc_clientId">86172f9d-a1ae-4348-aafa-7b3e5d1b36f5</string>
-	    <string name="oidc_clientSecret"></string>
-	
+        <string name="oidc_clientId">86172f9d-a1ae-4348-aafa-7b3e5d1b36f5</string>
+        <string name="oidc_clientSecret"></string>
+    
 3. 使用下面的文本配置重定向 URI。
 
-	xml
+    xml
 
-	    <string name="oidc_redirectUrl">https://login.microsoftonline.com/common/oauth2/nativeclient</string>
-	
+        <string name="oidc_redirectUrl">https://login.microsoftonline.com/common/oauth2/nativeclient</string>
+    
 4. 配置访问图形 API 所需的范围。
 
-	xml
+    xml
 
-	    <string-array name="oidc_scopes">
-	        <item>openid</item>
-	        <item>https://graph.microsoft.com/User.Read</item>
-	        <item>offline_access</item>
-	    </string-array>
-	
+        <string-array name="oidc_scopes">
+            <item>openid</item>
+            <item>https://graph.microsoft.com/User.Read</item>
+            <item>offline_access</item>
+        </string-array>
+    
 `oidc_scopes` 中的 `User.Read` 值允许读取已登录用户的基本配置文件。
 你可以在 [Microsoft Graph 权限范围](https://graph.microsoft.io/docs/authorization/permission_scopes)中了解有关所有可用范围的详细信息。
 
@@ -160,14 +160,14 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
 xml
 
-	<!-- Stores OpenID Connect provider endpoints. -->
-	<resources>
-	    <string name="op_authorizationEnpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
-	    <string name="op_tokenEndpoint">https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
-	    <string name="op_userInfoEndpoint">https://www.example.com/oauth2/userinfo</string>
-	    <string name="op_revocationEndpoint">https://www.example.com/oauth2/revoketoken</string>
-	</resources>
-	
+    <!-- Stores OpenID Connect provider endpoints. -->
+    <resources>
+        <string name="op_authorizationEnpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
+        <string name="op_tokenEndpoint">https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
+        <string name="op_userInfoEndpoint">https://www.example.com/oauth2/userinfo</string>
+        <string name="op_revocationEndpoint">https://www.example.com/oauth2/revoketoken</string>
+    </resources>
+    
 如果你使用 OAuth2 作为你的协议，应始终不更改这些终结点。
 
 > [!NOTE]
@@ -179,9 +179,9 @@ xml
 
 Java
 
-	   //TODO: set your protected resource url
-	    private static final String protectedResUrl = "https://graph.microsoft.com/v1.0/me/";
-	
+       //TODO: set your protected resource url
+        private static final String protectedResUrl = "https://graph.microsoft.com/v1.0/me/";
+    
 此处简单的图形 API 调用将返回我们的信息。
 
 这些是你需要执行的所有更改。运行 `oidlib-sample` 应用程序，然后单击“登录”。

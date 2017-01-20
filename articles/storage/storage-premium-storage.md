@@ -94,17 +94,17 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 <table border="1" cellspacing="0" cellpadding="5" style="border: 1px solid #000000;">
 <tbody>
 <tr>
-	<td><strong>总帐户容量</strong></td>
-	<td><strong>本地冗余存储帐户的总带宽</strong></td>
+    <td><strong>总帐户容量</strong></td>
+    <td><strong>本地冗余存储帐户的总带宽</strong></td>
 </tr>
 <tr>
-	<td>
-	<ul>
+    <td>
+    <ul>
        <li type=round>磁盘容量：35 TB</li>
        <li type=round>快照容量：10 TB</li>
     </ul>
-	</td>
-	<td>入站 + 出站最高每秒 50 Gbps</td>
+    </td>
+    <td>入站 + 出站最高每秒 50 Gbps</td>
 </tr>
 </tbody>
 </table>
@@ -123,28 +123,28 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 <table border="1" cellspacing="0" cellpadding="5" style="border: 1px solid #000000;">
 <tbody>
 <tr>
-	<td><strong>高级存储磁盘类型</strong></td>
-	<td><strong>P10</strong></td>
-	<td><strong>P20</strong></td>
-	<td><strong>P30</strong></td>
+    <td><strong>高级存储磁盘类型</strong></td>
+    <td><strong>P10</strong></td>
+    <td><strong>P20</strong></td>
+    <td><strong>P30</strong></td>
 </tr>
 <tr>
-	<td><strong>磁盘大小</strong></td>
-	<td>128 GiB</td>
-	<td>512 GiB</td>
-	<td>1024 GiB (1 TB)</td>
+    <td><strong>磁盘大小</strong></td>
+    <td>128 GiB</td>
+    <td>512 GiB</td>
+    <td>1024 GiB (1 TB)</td>
 </tr>
 <tr>
-	<td><strong>每个磁盘的 IOPS</strong></td>
-	<td>500</td>
-	<td>2300</td>
-	<td>5000</td>
+    <td><strong>每个磁盘的 IOPS</strong></td>
+    <td>500</td>
+    <td>2300</td>
+    <td>5000</td>
 </tr>
 <tr>
-	<td><strong>每个磁盘的吞吐量</strong></td>
-	<td>每秒 100 MB </td>
-	<td>每秒 150 MB </td>
-	<td>每秒 200 MB </td>
+    <td><strong>每个磁盘的吞吐量</strong></td>
+    <td>每秒 100 MB </td>
+    <td>每秒 150 MB </td>
+    <td>每秒 200 MB </td>
 </tr>
 </tbody>
 </table>
@@ -157,7 +157,7 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 
 - **磁盘大小**：Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高级存储磁盘选项。例如，大小为 100 GiB 的磁盘会分类为 P10 选项，每秒最多可执行 500 个 IO 单位，每秒吞吐量可达 100 MB。同样地，大小为 400 GiB 的磁盘会分类为 P20 选项，每秒最多可执行 2300 个 IO 单位，每秒吞吐量可达 150 MB。
 
-	> [!NOTE] 可以轻松增加现有磁盘的大小。例如，如果想要将 30 GB 大小的磁盘增加到 128 GB 或 1 TB。或者，如果想要将 P20 磁盘转换为 P30 磁盘，因为需要更多容量或更多的 IOPS 和吞吐量。可以使用“Update-AzureDisk”PowerShell 命令配合“-ResizedSizeInGB”属性来扩展磁盘。若要执行此操作，需要先从 VM 分离磁盘或停止 VM。
+    > [!NOTE] 可以轻松增加现有磁盘的大小。例如，如果想要将 30 GB 大小的磁盘增加到 128 GB 或 1 TB。或者，如果想要将 P20 磁盘转换为 P30 磁盘，因为需要更多容量或更多的 IOPS 和吞吐量。可以使用“Update-AzureDisk”PowerShell 命令配合“-ResizedSizeInGB”属性来扩展磁盘。若要执行此操作，需要先从 VM 分离磁盘或停止 VM。
 
 - **IO 大小**：输入/输出 (I/O) 单位大小为 256 KB。如果要传送的数据少于 256 KB，会视为单个 I/O 单位。较大的 I/O 大小则会视为大小是 256 KB 的多个 I/O。例如，1100 KB 的 I/O 会视为五个 I/O 单位。
 
@@ -218,20 +218,20 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 <table border="1" cellspacing="0" cellpadding="5" style="border: 1px solid #000000;">
 <tbody>
 <tr>
-	<td><strong>高级存储限制</strong></td>
-	<td><strong>值</strong></td>
+    <td><strong>高级存储限制</strong></td>
+    <td><strong>值</strong></td>
 </tr>
 <tr>
-	<td>每个 Blob 的快照数上限</td>
-	<td>100</td>
+    <td>每个 Blob 的快照数上限</td>
+    <td>100</td>
 </tr>
 <tr>
-	<td>快照的存储帐户容量（只包括快照中的数据，不包括基本 Blob 中的数据）。</td>
-	<td>10 TB</td>
+    <td>快照的存储帐户容量（只包括快照中的数据，不包括基本 Blob 中的数据）。</td>
+    <td>10 TB</td>
 </tr>
 <tr>
-	<td>连续快照的间隔时间下限</td>
-	<td>10 分钟</td>
+    <td>连续快照的间隔时间下限</td>
+    <td>10 分钟</td>
 </tr>
 </tbody>
 </table>
@@ -244,9 +244,9 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 请参考以下重要说明，以了解如何在高级存储上配置 Linux VM：
 
 - 对于缓存设置为“ReadOnly”或“None”的所有高级存储磁盘，必须在装入文件系统时禁用“屏障”，以实现高级存储的伸放性目标。对于这种情况不需要屏障，因为写入高级存储支持的磁盘对于这些缓存设置是持久的。在成功完成写入请求时，数据已写入到持久存储。请根据文件系统，使用以下方法来禁用“屏障”：
-	- 如果你使用的是 **reiserFS**，请使用装入选项“barrier=none”禁用屏障（要启用屏障，请使用“barrier=flush”）
-	- 如果你使用的是 **ext3/ext4**，请使用装入选项“barrier=0”禁用屏障（要启用屏障，请使用“barrier=1”）
-	- 如果你使用的是 **XFS**，请使用装入选项“nobarrier”禁用屏障（要启用屏障，请使用“barrier”）
+    - 如果你使用的是 **reiserFS**，请使用装入选项“barrier=none”禁用屏障（要启用屏障，请使用“barrier=flush”）
+    - 如果你使用的是 **ext3/ext4**，请使用装入选项“barrier=0”禁用屏障（要启用屏障，请使用“barrier=1”）
+    - 如果你使用的是 **XFS**，请使用装入选项“nobarrier”禁用屏障（要启用屏障，请使用“barrier”）
 
 - 对于缓存设置为“ReadWrite”的高级存储磁盘，应该启用屏障以实现写入持久性。
 - 若要在重新启动 VM 后保留卷标，必须使用对磁盘的 UUID 引用来更新 /etc/fstab。另请参考[如何将数据磁盘附加到 Linux 虚拟机](../virtual-machines/virtual-machines-linux-classic-attach-disk.md)
@@ -255,84 +255,84 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 <table border="1" cellspacing="0" cellpadding="5" style="border: 1px solid #000000;">
 <tbody>
 <tr>
-	<td><strong>分发</strong></td>
-	<td><strong>版本</strong></td>
-	<td><strong>支持的内核</strong></td>
-	<td><strong>详细信息</strong></td>
+    <td><strong>分发</strong></td>
+    <td><strong>版本</strong></td>
+    <td><strong>支持的内核</strong></td>
+    <td><strong>详细信息</strong></td>
 </tr>
 <tr>
-	<td rowspan="2"><strong>Ubuntu</strong></td>
-	<td>12.04</td>
-	<td>3.2.0-75.110+</td>
-	<td>Ubuntu-12_04_5-LTS-amd64-server-20150119-en-us-30GB</td>
+    <td rowspan="2"><strong>Ubuntu</strong></td>
+    <td>12.04</td>
+    <td>3.2.0-75.110+</td>
+    <td>Ubuntu-12_04_5-LTS-amd64-server-20150119-en-us-30GB</td>
 </tr>
 <tr>
-	<td>14.04+</td>
-	<td>3.13.0-44.73+</td>
-	<td>Ubuntu-14_04_1-LTS-amd64-server-20150123-en-us-30GB</td>
+    <td>14.04+</td>
+    <td>3.13.0-44.73+</td>
+    <td>Ubuntu-14_04_1-LTS-amd64-server-20150123-en-us-30GB</td>
 </tr>
 <tr>
-	<td><strong>Debian</strong></td>
-	<td>7.x、8.x</td>
-	<td>3.16.7-ckt4-1+</td>
+    <td><strong>Debian</strong></td>
+    <td>7.x、8.x</td>
+    <td>3.16.7-ckt4-1+</td>
     <td> </td>
 </tr>
 <tr>
-	<td rowspan="2"><strong>SUSE</strong></td>
-	<td>SLES 12</td>
-	<td>3.12.36-38.1+</td>
-	<td>suse-sles-12-priority-v20150213<br>suse-sles-12-v20150213</td>
+    <td rowspan="2"><strong>SUSE</strong></td>
+    <td>SLES 12</td>
+    <td>3.12.36-38.1+</td>
+    <td>suse-sles-12-priority-v20150213<br>suse-sles-12-v20150213</td>
 </tr>
 <tr>
-	<td>SLES 11 SP4</td>
+    <td>SLES 11 SP4</td>
     <td>3.0.101-0.63.1+</td>
     <td> </td>
 </tr>
 <tr>
-	<td><strong>CoreOS</strong></td>
-	<td>584.0.0+</td>
-	<td>3.18.4+</td>
-	<td>CoreOS 584.0.0</td>
+    <td><strong>CoreOS</strong></td>
+    <td>584.0.0+</td>
+    <td>3.18.4+</td>
+    <td>CoreOS 584.0.0</td>
 </tr>
 <tr>
-	<td rowspan="2"><strong>CentOS</strong></td>
-	<td>6.5、6.6、6.7、7.0</td>
-	<td></td>
-	<td>
-		<a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409"> 必须使用 LIS4 </a> <br/>
-		*请参阅下面的注释*
-	</td>
+    <td rowspan="2"><strong>CentOS</strong></td>
+    <td>6.5、6.6、6.7、7.0</td>
+    <td></td>
+    <td>
+        <a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409"> 必须使用 LIS4 </a> <br/>
+        *请参阅下面的注释*
+    </td>
 </tr>
 <tr>
-	<td>7.1+</td>
-	<td>3.10.0-229.1.2.el7+</td>
-	<td>
-		<a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409"> 建议使用 LIS4 </a> <br/>
-		*请参阅下面的注释*
-	</td>
+    <td>7.1+</td>
+    <td>3.10.0-229.1.2.el7+</td>
+    <td>
+        <a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409"> 建议使用 LIS4 </a> <br/>
+        *请参阅下面的注释*
+    </td>
 </tr>
 <tr>
-	<td><strong>RHEL</strong></td>
-	<td>6.8+、7.2+</td>
-	<td> </td>
-	<td></td>
+    <td><strong>RHEL</strong></td>
+    <td>6.8+、7.2+</td>
+    <td> </td>
+    <td></td>
 </tr>
 <tr>
-	<td rowspan="3"><strong>Oracle</strong></td>
+    <td rowspan="3"><strong>Oracle</strong></td>
     <td>6.8+、7.2+</td>
     <td> </td>
     <td> UEK4 或 RHCK </td>
 
 </tr>
 <tr>
-	<td>7.0-7.1</td>
-	<td> </td>
-	<td>UEK4 或带 <a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409">LIS 4.1+</a> 的 RHCK</td>
+    <td>7.0-7.1</td>
+    <td> </td>
+    <td>UEK4 或带 <a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409">LIS 4.1+</a> 的 RHCK</td>
 </tr>
 <tr>
-	<td>6.4-6.7</td>
-	<td></td>
-	<td>UEK4 或带 <a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409">LIS 4.1+</a> 的 RHCK</td>
+    <td>6.4-6.7</td>
+    <td></td>
+    <td>UEK4 或带 <a href="http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409">LIS 4.1+</a> 的 RHCK</td>
 </tr>
 </tbody>
 </table>
@@ -341,8 +341,8 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 
 运行 OpenLogic CentOS VM 的客户应该运行以下命令来安装最新的驱动程序：
 
-	sudo rpm -e hypervkvpd  ## (may return error if not installed, that's OK)
-	sudo yum install microsoft-hyper-v
+    sudo rpm -e hypervkvpd  ## (may return error if not installed, that's OK)
+    sudo yum install microsoft-hyper-v
 
 需要重新启动才能激活新的驱动程序。
 
@@ -387,9 +387,9 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 
 3. 输入存储帐户的名称。
 
-	> [!NOTE] 存储帐户名称必须为 3 到 24 个字符，并且只能包含数字和小写字母。
-	>  
-	> 存储帐户名称在 Azure 中必须是唯一的。Azure 门户预览将指出选择的存储帐户名称是否已被使用。
+    > [!NOTE] 存储帐户名称必须为 3 到 24 个字符，并且只能包含数字和小写字母。
+    >  
+    > 存储帐户名称在 Azure 中必须是唯一的。Azure 门户预览将指出选择的存储帐户名称是否已被使用。
 
 4. 指定要使用的部署模型：“Resource Manager”或“经典”。建议使用“Resource Manager”部署模型。有关详细信息，请参阅[了解 Resource Manager 部署和经典部署](../azure-resource-manager/resource-manager-deployment-model.md)。
 
@@ -415,7 +415,7 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 2. 在 VM 的“所有设置”中，转到“磁盘”，然后单击“附加新磁盘”。
 3. 输入数据磁盘的名称，然后在“类型”中选择“高级”。选择所需的“大小”和“主机缓存”设置。
 
-	![高级磁盘][Image1]
+    ![高级磁盘][Image1]
 
 请参阅[如何在 Azure 门户预览中附加数据磁盘](../virtual-machines/virtual-machines-windows-attach-disk-portal.md)中的更详细步骤。
 
@@ -436,41 +436,41 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 1. 根据[如何安装和配置 Azure PowerShell](../powershell-install-configure.md) 中提供的步骤设置 PowerShell 环境。
 2. 启动 PowerShell 控制台，连接到订阅，并在控制台窗口中运行以下 PowerShell cmdlet。如此 PowerShell 语句中所示，创建高级存储帐户时，必须将 **Type** 参数指定为 **Premium\_LRS**。
 
-		New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
+        New-AzureStorageAccount -StorageAccountName "yourpremiumaccount" -Location "China East" -Type "Premium_LRS"
 
 #### II.通过 Azure PowerShell 创建 Azure 虚拟机
 
 接下来，请创建新的 DS 系列 VM，并在控制台窗口中运行以下 PowerShell cmdlet 以指定要使用高级存储：
 
-    	$storageAccount = "yourpremiumaccount"
-    	$adminName = "youradmin"
-    	$adminPassword = "yourpassword"
-    	$vmName ="yourVM"
-    	$location = "China East"
-    	$imageName = "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20160721-en.us-127GB.vhd"
-    	$vmSize ="Standard_DS2"
-    	$OSDiskPath = "https://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + $vmName + "_OS_PIO.vhd"
-    	$vm = New-AzureVMConfig -Name $vmName -ImageName $imageName -InstanceSize $vmSize -MediaLocation $OSDiskPath
-    	Add-AzureProvisioningConfig -Windows -VM $vm -AdminUsername $adminName -Password $adminPassword
-    	New-AzureVM -ServiceName $vmName -VMs $VM -Location $location
+        $storageAccount = "yourpremiumaccount"
+        $adminName = "youradmin"
+        $adminPassword = "yourpassword"
+        $vmName ="yourVM"
+        $location = "China East"
+        $imageName = "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20160721-en.us-127GB.vhd"
+        $vmSize ="Standard_DS2"
+        $OSDiskPath = "https://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + $vmName + "_OS_PIO.vhd"
+        $vm = New-AzureVMConfig -Name $vmName -ImageName $imageName -InstanceSize $vmSize -MediaLocation $OSDiskPath
+        Add-AzureProvisioningConfig -Windows -VM $vm -AdminUsername $adminName -Password $adminPassword
+        New-AzureVM -ServiceName $vmName -VMs $VM -Location $location
 
 #### III.通过 Azure PowerShell 附加高级存储数据磁盘
 
 如果希望 VM 有更多的磁盘空间，请在创建虚拟机后于控制台窗口中运行以下 PowerShell cmdlet 以将新的数据磁盘附加到支持高级存储的现有 VM：
 
-    	$storageAccount = "yourpremiumaccount"
-    	$vmName ="yourVM"
-    	$vm = Get-AzureVM -ServiceName $vmName -Name $vmName
-    	$LunNo = 1
-    	$path = "http://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + "myDataDisk_" + $LunNo + "_PIO.vhd"
-    	$label = "Disk " + $LunNo
-    	Add-AzureDataDisk -CreateNew -MediaLocation $path -DiskSizeInGB 128 -DiskLabel $label -LUN $LunNo -HostCaching ReadOnly -VM $vm | Update-AzureVm
+        $storageAccount = "yourpremiumaccount"
+        $vmName ="yourVM"
+        $vm = Get-AzureVM -ServiceName $vmName -Name $vmName
+        $LunNo = 1
+        $path = "http://" + $storageAccount + ".blob.core.chinacloudapi.cn/vhds/" + "myDataDisk_" + $LunNo + "_PIO.vhd"
+        $label = "Disk " + $LunNo
+        Add-AzureDataDisk -CreateNew -MediaLocation $path -DiskSizeInGB 128 -DiskLabel $label -LUN $LunNo -HostCaching ReadOnly -VM $vm | Update-AzureVm
 
 #### IV.通过 Azure PowerShell 更改磁盘缓存策略
 
 若要更新磁盘缓存策略，请记下附加的数据磁盘的 LUN 编号。运行以下命令，将附加到 LUN 编号 2 的数据磁盘更新为 ReadOnly。
 
-		Get-AzureVM "myservice" -name "MyVM" | Set-AzureDataDisk -LUN 2 -HostCaching ReadOnly | Update-AzureVM
+        Get-AzureVM "myservice" -name "MyVM" | Set-AzureDataDisk -LUN 2 -HostCaching ReadOnly | Update-AzureVM
 
 >[!WARNING] 更改 Azure 磁盘的缓存设置可分离和重新附加目标磁盘。如果它是操作系统磁盘，将重启 VM。更改磁盘缓存设置前，停止所有可能受此中断影响的应用程序/服务。
 
@@ -480,34 +480,34 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 
 #### I.通过 Azure CLI 创建高级存储帐户
 
-	azure storage account create "premiumtestaccount" -l "China East" --type PLRS
+    azure storage account create "premiumtestaccount" -l "China East" --type PLRS
 
 #### II.通过 Azure CLI 创建 DS 系列虚拟机
 
-	azure vm create -z "Standard_DS2" -l "China East" -e 22 "premium-test-vm"
-		"55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20160721-en.us-127GB.vhd" -u "myusername" -p "passwd@123"
+    azure vm create -z "Standard_DS2" -l "China East" -e 22 "premium-test-vm"
+        "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-R2-20160721-en.us-127GB.vhd" -u "myusername" -p "passwd@123"
 
 显示有关虚拟机的信息
 
-	azure vm show premium-test-vm
+    azure vm show premium-test-vm
 
 #### III.通过 Azure CLI 附加新的高级数据磁盘
 
-	azure vm disk attach-new premium-test-vm 20 https://premiumstorageaccount.blob.core.chinacloudapi.cn/vhd-store/data1.vhd
+    azure vm disk attach-new premium-test-vm 20 https://premiumstorageaccount.blob.core.chinacloudapi.cn/vhd-store/data1.vhd
 
 显示有关新数据磁盘的信息
 
-	azure vm disk show premium-test-vm-premium-test-vm-0-201502210429470316
+    azure vm disk show premium-test-vm-premium-test-vm-0-201502210429470316
 
 #### IV.更改磁盘缓存策略
 
 若要使用 Azure CLI 更改某个磁盘上的缓存策略，请运行以下命令：
 
-		$ azure vm disk attach -h ReadOnly <VM-Name> <Disk-Name>
+        $ azure vm disk attach -h ReadOnly <VM-Name> <Disk-Name>
 
 请注意，缓存策略选项可以是 ReadOnly、None 或 ReadWrite。有关更多选项，请通过运行以下命令查看帮助：
 
-		azure vm disk attach --help
+        azure vm disk attach --help
 
 >[!WARNING] 更改 Azure 磁盘的缓存设置可分离和重新附加目标磁盘。如果它是操作系统磁盘，将重启 VM。更改磁盘缓存设置前，停止所有可能受此中断影响的应用程序/服务。
 
@@ -515,39 +515,39 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 
 1. **是否可以同时将高级和标准数据磁盘附加到支持高级存储的 VM？**
 
-	是的。可以同时将高级和标准数据磁盘附加到支持高级存储的系列 VM。
+    是的。可以同时将高级和标准数据磁盘附加到支持高级存储的系列 VM。
 
 2. **是否可以同时将高级和标准数据磁盘附加到 D、Dv2、G 或 F 系列 VM？**
 
-	不可以。只能将标准数据磁盘附加到不支持高级存储的系列 VM。
+    不可以。只能将标准数据磁盘附加到不支持高级存储的系列 VM。
 
 3. **如果从现有的 VHD（大小为 80 GB）创建高级数据磁盘，需要多少费用？**
 
-	从 80 GB VHD 创建的高级数据磁盘被视为下一个可用的高级磁盘大小（P10 磁盘）。我们将根据 P10 磁盘价格收费。
+    从 80 GB VHD 创建的高级数据磁盘被视为下一个可用的高级磁盘大小（P10 磁盘）。我们将根据 P10 磁盘价格收费。
 
 4. **使用高级存储是否产生任何事务成本？**
 
-	每个磁盘大小都有固定成本，其随着特定数量的 IOPS 和吞吐量预配。其他成本包括输出带宽和快照容量（如果适用）。有关更多详细信息，请参阅 [Azure 存储定价](https://www.azure.cn/pricing/details/storage/)。
+    每个磁盘大小都有固定成本，其随着特定数量的 IOPS 和吞吐量预配。其他成本包括输出带宽和快照容量（如果适用）。有关更多详细信息，请参阅 [Azure 存储定价](https://www.azure.cn/pricing/details/storage/)。
 
 5. **可以在何处存储支持高级存储的系列 VM 的引导诊断信息？**
 
-	请创建用于存储支持高级存储的系列 VM 的引导诊断信息的标准存储帐户。
+    请创建用于存储支持高级存储的系列 VM 的引导诊断信息的标准存储帐户。
 
 6. **可以从磁盘缓存获取多少 IOPS 和吞吐量？**
 
-	DS 系列的缓存和本地 SSD 合并限制是每个核心 4000 IOPS，以及每个核心每秒 33 MB。
+    DS 系列的缓存和本地 SSD 合并限制是每个核心 4000 IOPS，以及每个核心每秒 33 MB。
 
 7. **什么是支持高级存储的系列 VM 中的本地 SSD？**
 
-	本地 SSD 是支持高级存储的系列 VM 随附的临时存储。临时存储不需要额外的成本。建议不要使用此临时存储或本地 SSD 来存储应用程序数据，因为这些数据不会永久保存在 Azure Blob 存储中。
+    本地 SSD 是支持高级存储的系列 VM 随附的临时存储。临时存储不需要额外的成本。建议不要使用此临时存储或本地 SSD 来存储应用程序数据，因为这些数据不会永久保存在 Azure Blob 存储中。
 
 8. **是否可以将标准存储帐户转换成高级存储帐户？**
 
-	否。无法将标准存储帐户转换成高级存储帐户，反之亦然。必须使用所需的类型创建新的存储帐户，并将数据复制到新的存储帐户（如果适用）。
+    否。无法将标准存储帐户转换成高级存储帐户，反之亦然。必须使用所需的类型创建新的存储帐户，并将数据复制到新的存储帐户（如果适用）。
 
 9. **如何将 D 系列 VM 转换成 DS 系列 VM？**
 
-	请参考迁移指南[迁移到 Azure 高级存储](./storage-migration-to-premium-storage.md)，将工作负荷从使用标准存储帐户的 D 系列 VM 迁移到使用高级存储帐户的 DS 系列 VM。
+    请参考迁移指南[迁移到 Azure 高级存储](./storage-migration-to-premium-storage.md)，将工作负荷从使用标准存储帐户的 D 系列 VM 迁移到使用高级存储帐户的 DS 系列 VM。
 
 ## 后续步骤
 

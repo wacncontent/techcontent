@@ -669,7 +669,7 @@ SQL Server 2014 引入了一项称为缓冲池扩展的新功能。此功能使�
 * 利用此工具，可以定义可用于将不同备份类型定向到不同 Azure 存储空间容器的规则。
 * 定义了规则之后，此工具就会将备份的写入流重定向到之前定义的 Azure 存储空间位置的其中一个 VHD/磁盘。
 * 此工具将在为 SQL Server 备份定义的 VHD/磁盘上，保留数 KB 大小的小型存根文件。**此文件应保留在存储位置上，因为它需要再次从 Azure 存储空间还原。**
-	* 如果丢失了存根文件（例如，因为丢失了包含存根文件的存储媒体），但选择了备份到 Azure 存储帐户这一选项，则可以通过 Azure 存储空间，从放置存根文件的存储容器下载来恢复该文件。接着，你应该将存根文件放置在本地计算机上的文件夹中，在这里，工具将配置为检测并上载到具有相同加密密码的相同容器（如果加密与原始规则搭配使用）。
+    * 如果丢失了存根文件（例如，因为丢失了包含存根文件的存储媒体），但选择了备份到 Azure 存储帐户这一选项，则可以通过 Azure 存储空间，从放置存根文件的存储容器下载来恢复该文件。接着，你应该将存根文件放置在本地计算机上的文件夹中，在这里，工具将配置为检测并上载到具有相同加密密码的相同容器（如果加密与原始规则搭配使用）。
 
 这意味着，上述适用于较新版 SQL Server 的架构也适用于不允许直接寻址 Azure 存储空间位置的 SQL Server 版本。
  
@@ -716,7 +716,7 @@ Microsoft 在 Azure 应用商店中提供已经包含 SQL Server 版本的 VM。
 * 以“管理员身份”打开 Windows 命令窗口。
 * 将目录更改为 C:\\Program Files\\Microsoft SQL Server\\110\\Setup Bootstrap\\SQLServer2012。
 * 执行命令：Setup.exe /QUIET /ACTION=REBUILDDATABASE /INSTANCENAME=MSSQLSERVER /SQLSYSADMINACCOUNTS=`<local_admin_account_name`> /SQLCOLLATION=SQL\_Latin1\_General\_Cp850\_BIN2
-	* `<local_admin_account_name`> 是第一次通过库部署 VM 时定义为管理员帐户的帐户。
+    * `<local_admin_account_name`> 是第一次通过库部署 VM 时定义为管理员帐户的帐户。
 
 此过程应该只需要几分钟的时间。若要确保此步骤最终会有正确的结果，请执行下列步骤：
 
@@ -726,7 +726,7 @@ Microsoft 在 Azure 应用商店中提供已经包含 SQL Server 版本的 VM。
 
 所需的结果应如下所示：
 
-	Latin1-General, binary code point comparison sort for Unicode Data, SQL Server Sort Order 40 on Code Page 850 for non-Unicode Data
+    Latin1-General, binary code point comparison sort for Unicode Data, SQL Server Sort Order 40 on Code Page 850 for non-Unicode Data
 
 如果不是这个结果，请停止部署 SAP，并调查为什么安装命令未按预期运行。**不**支持将 SAP NetWeaver 应用程序部署到 SQL Server 代码页与上述代码页不同的 SQL Server 实例。
 
@@ -784,9 +784,9 @@ Azure 存储空间会保护内容，因此，更加没有理由坚持使用热�
 
 1. 使用最新的 DBMS 版本（例如 SQL Server 2014），其在 Azure 中最具优势。单论 SQL Server，SQL Server 2012 SP1 CU4 便已足够，该版本包含对 Azure 存储空间进行备份的功能。但是，如果与 SAP 搭配使用，则建议至少使用 SQL Server 2014 SP1 CU1 或 SQL Server 2012 SP2 以及最新的 CU。
 1. 在 Azure 中仔细规划你的 SAP 系统布局，以平衡数据文件布局和 Azure 限制：
-	* 不要有太多 VHD，但必须足以确保你可以达到所需的 IOPS。
-	* 请记住，不仅每个 Azure 存储帐户的 IOPS 受到限制，每个 Azure 订阅的存储帐户数目也受到限制（[更多详细信息][azure-subscription-service-limits]）。
-	* 只有在需要达到更高的吞吐量时，才在 VHD 上划分带区。
+    * 不要有太多 VHD，但必须足以确保你可以达到所需的 IOPS。
+    * 请记住，不仅每个 Azure 存储帐户的 IOPS 受到限制，每个 Azure 订阅的存储帐户数目也受到限制（[更多详细信息][azure-subscription-service-limits]）。
+    * 只有在需要达到更高的吞吐量时，才在 VHD 上划分带区。
 1. 永远不要在 D:\\ 驱动器上安装软件或放置任何需要永久保留的文件，因为它不是永久性的，此驱动器上的所有内容都会在 Windows 重新启动时丢失。
 1. 不要对 Azure 标准存储使用 Azure VHD 缓存。
 1. 不要使用 Azure 异地复制的存储帐户。对 DBMS 工作负荷使用本地冗余。
@@ -1138,7 +1138,7 @@ SAP 目前支持 SAP MaxDB 版本 7.9，该版本可以与 Azure 中基于 SAP N
 
 ### 可用的 SAP MaxDB 文档
 可以在 SAP 说明 [767598] 中找到更新的 SAP MaxDB 文档列表
-	
+    
 ### 在 Azure VM 中安装 SAP 的 SAP MaxDB 配置准则
 
 #### <a name="b48cfe3b-48e9-4f5b-a783-1d29155bd573"></a>存储配置

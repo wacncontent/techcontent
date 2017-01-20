@@ -49,21 +49,21 @@ ms.author: wesmc
 
 在较高级别上，模板是指定特定设备应如何接收通知的一种方法。模板通过引用作为你应用程序后端所发消息的一部分的属性，指定确切的负载格式。在我们的示例中，我们将发送包含所有支持的语言的区域设置未知的消息：
 
-	{
-		"News_English": "...",
-		"News_French": "...",
-		"News_Mandarin": "..."
-	}
+    {
+        "News_English": "...",
+        "News_French": "...",
+        "News_Mandarin": "..."
+    }
 
 然后我们将确保设备注册到引用正确属性的模板。例如，要接收简单的 toast 消息的 Windows 应用商店应用将注册以下包含任何相应标记的模板：
 
-	<toast>
-	  <visual>
-	    <binding template=\"ToastText01\">
-	      <text id=\"1\">$(News_English)</text>
-	    </binding>
-	  </visual>
-	</toast>
+    <toast>
+      <visual>
+        <binding template=\"ToastText01\">
+          <text id=\"1\">$(News_English)</text>
+        </binding>
+      </visual>
+    </toast>
 
 模板是很强大的功能，你可以在[模板](./notification-hubs-templates-cross-platform-push-messages.md)一文中了解其更多信息。
 
@@ -75,8 +75,8 @@ ms.author: wesmc
 
 更改 MainPage.xaml 以包含区域设置组合框：
 
-	<Grid Margin="120, 58, 120, 80"  
-			Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Margin="120, 58, 120, 80"  
+            Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -131,13 +131,13 @@ ms.author: wesmc
             return await hub.RegisterTemplateAsync(channel.Uri, templateBodyWNS, "localizedWNSTemplateExample", categories);
         }
 
-	请注意，不是调用 *RegisterNativeAsync* 方法，我们调用的是 *RegisterTemplateAsync*：我们将注册特定的通知格式，在其中模板依赖于区域设置。我们还提供模板的名称（“localizedWNSTemplateExample”），因为我们可能要注册多个模板（例如一个用于 toast 通知，一个用于磁贴），需要命名它们以便可以更新或删除它们。
+    请注意，不是调用 *RegisterNativeAsync* 方法，我们调用的是 *RegisterTemplateAsync*：我们将注册特定的通知格式，在其中模板依赖于区域设置。我们还提供模板的名称（“localizedWNSTemplateExample”），因为我们可能要注册多个模板（例如一个用于 toast 通知，一个用于磁贴），需要命名它们以便可以更新或删除它们。
 
-	请注意，如果一个设备使用同一标签注册多个模板，针对该标签的传入消息将导致多个通知发送到设备（每个通知对应一个模板）。当同一逻辑消息必须导致多个可视通知时，此行为很有用，例如在 Windows 应用商店应用程序显示徽章和 toast。
+    请注意，如果一个设备使用同一标签注册多个模板，针对该标签的传入消息将导致多个通知发送到设备（每个通知对应一个模板）。当同一逻辑消息必须导致多个可视通知时，此行为很有用，例如在 Windows 应用商店应用程序显示徽章和 toast。
 
 2. 添加以下方法来检索存储的区域设置：
 
-		public string RetrieveLocale()
+        public string RetrieveLocale()
         {
             var locale = (string) ApplicationData.Current.LocalSettings.Values["locale"];
             return locale != null ? locale : "English";
@@ -158,10 +158,10 @@ ms.author: wesmc
             if (SportsToggle.IsOn) categories.Add("Sports");
 
             var result = await ((App)Application.Current).notifications.StoreCategoriesAndSubscribe(locale,
-				 categories);
+                 categories);
 
             var dialog = new MessageDialog("Locale: " + locale + " Subscribed to: " + 
-				string.Join(",", categories) + " on registration Id: " + result.RegistrationId);
+                string.Join(",", categories) + " on registration Id: " + result.RegistrationId);
             dialog.Commands.Add(new UICommand("OK"));
             await dialog.ShowAsync();
         }

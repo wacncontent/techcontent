@@ -281,10 +281,10 @@ ms.author: jeffstok
                 </p>
             </td>
         </tr>
-		<tr>
+        <tr>
             <td width="174" valign="top">
-				<p>
-				 <strong>输入数据源</strong>
+                <p>
+                 <strong>输入数据源</strong>
                 </p>
             </td>
             <td width="204" valign="top">

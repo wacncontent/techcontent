@@ -45,10 +45,10 @@ ms.author: jeffstok
 2.	一旦数据按它在输入端上需要的样式进行布局，则我们需要确保你的查询已进行分区。这要求你在所有步骤中使用 **Partition By**。允许采用多个步骤，但它们都必须由相同的密钥进行分区。另一个需要注意的问题是，目前，需要将分区键设置为“PartitionId”才能够进行完全并行作业。
 3.	当前仅事件中心和 Blob 支持已分区的输出。对于事件中心输出，你需要将“PartitionKey”字段配置为“PartitionId”。对于 Blob，你不必执行任何操作。
 4.	另外还要注意，输入分区数必须等于的输出分区数。Blob 输出当前不支持分区，但这也没关系，因为它将继承上游查询的分区方案。将允许完全并行作业的分区值的示例：
-	1.	8 个事件中心输入分区和 8 个事件中心输出分区
-	2.	8 个事件中心输入分区和 Blob 输出
-	3.	8 个 Blob 输入分区和 Blob 输出
-	4.	8 个 Blob 输入分区和 8 个事件中心输出分区
+    1.	8 个事件中心输入分区和 8 个事件中心输出分区
+    2.	8 个事件中心输入分区和 Blob 输出
+    3.	8 个 Blob 输入分区和 Blob 输出
+    4.	8 个 Blob 输入分区和 8 个事件中心输出分区
 
 以下是一些易并行的示例方案。
 
@@ -130,15 +130,15 @@ PowerBI 输出当前不支持分区。
 ### 查询中的步骤
 查询可以有一个或多个步骤。每一步都是一个使用 **WITH** 关键字定义的子查询。位于 **WITH** 关键字外的唯一查询也计为一步，例如以下查询中的 **SELECT** 语句：
 
-	WITH Step1 AS (
-		SELECT COUNT(*) AS Count, TollBoothId
-		FROM Input1 Partition By PartitionId
-		GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-	)
+    WITH Step1 AS (
+        SELECT COUNT(*) AS Count, TollBoothId
+        FROM Input1 Partition By PartitionId
+        GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+    )
 
-	SELECT SUM(Count) AS Count, TollBoothId
-	FROM Step1
-	GROUP BY TumblingWindow(minute,3), TollBoothId
+    SELECT SUM(Count) AS Count, TollBoothId
+    FROM Step1
+    GROUP BY TumblingWindow(minute,3), TollBoothId
 
 前面的查询有两步。
 
@@ -199,29 +199,29 @@ PowerBI 输出当前不支持分区。
 ### 缩放示例
 以下查询计算三分钟时段内通过收费站（总共三个收费亭）的车辆数。此查询可以扩展到 6 个流式处理单位。
 
-	SELECT COUNT(*) AS Count, TollBoothId
-	FROM Input1
-	GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+    SELECT COUNT(*) AS Count, TollBoothId
+    FROM Input1
+    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
 
 若要对查询使用更多的流式处理单位，必须对数据流输入和查询进行分区。如果将数据流分区设置为 3，则可将以下修改的查询扩展到 18 个流式处理单位：
 
-	SELECT COUNT(*) AS Count, TollBoothId
-	FROM Input1 Partition By PartitionId
-	GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+    SELECT COUNT(*) AS Count, TollBoothId
+    FROM Input1 Partition By PartitionId
+    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
 
 对查询进行分区后，将在独立的分区组中处理和聚合输入事件。此外，还会为每个组生成输出事件。在数据流输入中，当**“分组方式”**字段不是“分区键”时，进行分区可能会导致某些意外的结果。例如，在前面的示例查询中，**TollBoothId** 字段不是 Input1 的“分区键”。可以将 TollBooth #1 提供的数据分布到多个分区中。
 
 将通过流分析对每个 Input1 分区分开进行处理，并会在相同的翻转窗口中为同一收费亭创建多个有关已通过车辆计数的记录。如果不能更改输入分区键，则可通过添加额外的不分区步骤来解决此问题，例如：
 
-	WITH Step1 AS (
-		SELECT COUNT(*) AS Count, TollBoothId
-		FROM Input1 Partition By PartitionId
-		GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-	)
+    WITH Step1 AS (
+        SELECT COUNT(*) AS Count, TollBoothId
+        FROM Input1 Partition By PartitionId
+        GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+    )
 
-	SELECT SUM(Count) AS Count, TollBoothId
-	FROM Step1
-	GROUP BY TumblingWindow(minute, 3), TollBoothId
+    SELECT SUM(Count) AS Count, TollBoothId
+    FROM Step1
+    GROUP BY TumblingWindow(minute, 3), TollBoothId
 
 此查询可以扩展到 24 个流式处理单位。
 
@@ -261,11 +261,11 @@ PowerBI 输出当前不支持分区。
 查询：“关灯时发送警报”
 
     SELECT AVG(lght),
-	 “LightOff” as AlertText
-	FROM input TIMESTAMP
-	BY devicetime
-	 WHERE
-		lght< 0.05 GROUP BY TumblingWindow(second, 1)
+     “LightOff” as AlertText
+    FROM input TIMESTAMP
+    BY devicetime
+     WHERE
+        lght< 0.05 GROUP BY TumblingWindow(second, 1)
 
 衡量吞吐量：在这种情况下，吞吐量是指由流分析在固定的时间（10 分钟）内处理的输入数据的量。若要使输入数据达到最佳的处理吞吐量，必须对数据流输入和查询进行分区。此外，还需在查询中添加 **COUNT()**，以便度量所处理的输入事件数。为了确保作业不会单纯地等待输入事件的到来，输入事件中心的每个分区已预先加载了足够的输入数据（大约 300MB）。
 

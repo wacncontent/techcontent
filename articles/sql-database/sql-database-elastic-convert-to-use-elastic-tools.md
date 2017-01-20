@@ -39,31 +39,31 @@ ms.author: ddove
 
 ## 步骤 1：创建分片映射管理器
 
-	# Create a shard map manager. 
-	New-ShardMapManager -UserName '<user_name>' 
-	-Password '<password>' 
-	-SqlServerName '<server_name>' 
-	-SqlDatabaseName '<smm_db_name>' 
-	#<server_name> and <smm_db_name> are the server name and database name 
-	# for the new or existing database that should be used for storing 
-	# tenant-database mapping information.
+    # Create a shard map manager. 
+    New-ShardMapManager -UserName '<user_name>' 
+    -Password '<password>' 
+    -SqlServerName '<server_name>' 
+    -SqlDatabaseName '<smm_db_name>' 
+    #<server_name> and <smm_db_name> are the server name and database name 
+    # for the new or existing database that should be used for storing 
+    # tenant-database mapping information.
 
 ### 检索分片映射管理器
 创建后，可以使用此 cmdlet 检索分片映射管理器。每当需要使用 ShardMapManager 对象时，则需要执行此步骤。
 
-	# Try to get a reference to the Shard Map Manager  
-	$ShardMapManager = Get-ShardMapManager -UserName '<user_name>' 
-	-Password '<password>' 
-	-SqlServerName '<server_name>' 
-	-SqlDatabaseName '<smm_db_name>' 
+    # Try to get a reference to the Shard Map Manager  
+    $ShardMapManager = Get-ShardMapManager -UserName '<user_name>' 
+    -Password '<password>' 
+    -SqlServerName '<server_name>' 
+    -SqlDatabaseName '<smm_db_name>' 
 
 ## 第 2 步：创建分片映射
 必须选择要创建的分片映射类型。类型的选择取决于数据库架构：
 
 1. 每个数据库一个租户（有关术语，请参阅[词汇表](./sql-database-elastic-scale-glossary.md)。）
 2. 每个数据库多个租户（两种类型）：
-	1. 列表映射
-	2. 范围映射
+    1. 列表映射
+    2. 范围映射
  
 对于单租户模型，创建“列表映射”分片映射。单租户模型将每个租户分配给一个数据库。这是适用于 SaaS 开发人员的有效模型，因为它可以简化管理。
 
@@ -82,32 +82,32 @@ ms.author: ddove
 ### 选项 1：为列表映射创建分片映射
 使用 ShardMapManager 对象创建分片映射。
 
-	# $ShardMapManager is the shard map manager object. 
-	$ShardMap = New-ListShardMap -KeyType $([int]) 
-	-ListShardMapName 'ListShardMap' 
-	-ShardMapManager $ShardMapManager 
+    # $ShardMapManager is the shard map manager object. 
+    $ShardMap = New-ListShardMap -KeyType $([int]) 
+    -ListShardMapName 'ListShardMap' 
+    -ShardMapManager $ShardMapManager 
  
 ### 选项 2：为范围映射创建分片映射
 请注意：若要使用此映射模式，租户 ID 值需要为连续范围，并且可接受范围中存在间距，方法是只需在创建数据库时跳过范围即可。
 
-	# $ShardMapManager is the shard map manager object 
-	# 'RangeShardMap' is the unique identifier for the range shard map.  
-	$ShardMap = New-RangeShardMap 
-	-KeyType $([int]) 
-	-RangeShardMapName 'RangeShardMap' 
-	-ShardMapManager $ShardMapManager 
+    # $ShardMapManager is the shard map manager object 
+    # 'RangeShardMap' is the unique identifier for the range shard map.  
+    $ShardMap = New-RangeShardMap 
+    -KeyType $([int]) 
+    -RangeShardMapName 'RangeShardMap' 
+    -ShardMapManager $ShardMapManager 
 
 ### 选项 3：单一数据库上的列表映射
 设置此模式也要求创建列表映射，如步骤 2，选项 1 中所示。
 
 ## 步骤 3：准备各个分片
 将每个分片（数据库）添加到分片映射管理器。此操作将准备用于存储映射信息的各个数据库。对每个分片执行此方法。
-	 
-	Add-Shard 
-	-ShardMap $ShardMap 
-	-SqlServerName '<shard_server_name>' 
-	-SqlDatabaseName '<shard_database_name>'
-	# The $ShardMap is the shard map created in step 2.
+     
+    Add-Shard 
+    -ShardMap $ShardMap 
+    -SqlServerName '<shard_server_name>' 
+    -SqlDatabaseName '<shard_database_name>'
+    # The $ShardMap is the shard map created in step 2.
  
 ## 步骤 4：添加映射
 添加映射的操作取决于所创建的分片映射种类。如果创建的是列表映射，则添加列表映射。如果创建的是范围映射，则添加范围映射。
@@ -115,25 +115,25 @@ ms.author: ddove
 ### 选项 1：为列表映射映射数据
 通过为每个租户添加列表映射来映射数据。
 
-	# Create the mappings and associate it with the new shards 
-	Add-ListMapping 
-	-KeyType $([int]) 
-	-ListPoint '<tenant_id>' 
-	-ListShardMap $ShardMap 
-	-SqlServerName '<shard_server_name>' 
-	-SqlDatabaseName '<shard_database_name>' 
+    # Create the mappings and associate it with the new shards 
+    Add-ListMapping 
+    -KeyType $([int]) 
+    -ListPoint '<tenant_id>' 
+    -ListShardMap $ShardMap 
+    -SqlServerName '<shard_server_name>' 
+    -SqlDatabaseName '<shard_database_name>' 
 
 ### 选项 2：为范围映射映射数据
 添加所有租户 ID 范围的范围映射 – 数据库关联：
 
-	# Create the mappings and associate it with the new shards 
-	Add-RangeMapping 
-	-KeyType $([int]) 
-	-RangeHigh '5' 
-	-RangeLow '1' 
-	-RangeShardMap $ShardMap 
-	-SqlServerName '<shard_server_name>' 
-	-SqlDatabaseName '<shard_database_name>' 
+    # Create the mappings and associate it with the new shards 
+    Add-RangeMapping 
+    -KeyType $([int]) 
+    -RangeHigh '5' 
+    -RangeLow '1' 
+    -RangeShardMap $ShardMap 
+    -SqlServerName '<shard_server_name>' 
+    -SqlDatabaseName '<shard_database_name>' 
 
 ### 步骤 4，选项 3：映射单一数据库上多个租户的数据
 对于每个租户，请运行 Add-ListMapping（上面的选项 1）。
@@ -141,9 +141,9 @@ ms.author: ddove
 ## 检查映射
 可以使用以下命令查询现有分片及其关联的映射的相关信息：
 
-	# List the shards and mappings 
-	Get-Shards -ShardMap $ShardMap 
-	Get-Mappings -ShardMap $ShardMap 
+    # List the shards and mappings 
+    Get-Shards -ShardMap $ShardMap 
+    Get-Mappings -ShardMap $ShardMap 
 
 ## 摘要
 完成设置后，便可以开始使用弹性数据库客户端库。还可以使用[数据相关的路由](./sql-database-elastic-scale-data-dependent-routing.md)和[多分片查询](./sql-database-elastic-scale-multishard-querying.md)。

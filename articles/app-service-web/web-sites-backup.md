@@ -43,32 +43,32 @@ ms.author: cephalin
 ## <a name="manualbackup" id="create-a-manual-backup"></a>创建手动备份
 
 2. 在 [Azure 门户预览](https://portal.azure.cn)中，导航到应用的边栏选项卡，选择“设置”，然后选择“备份”。将显示“备份”边栏选项卡。
-	
-	![“备份”页面][ChooseBackupsPage]
+    
+    ![“备份”页面][ChooseBackupsPage]
 
-	>[!NOTE] 若显示以下消息，请单击该消息升级应用服务计划，然后才能继续备份。有关详细信息，请参阅[增加 Azure 中的应用](./web-sites-scale.md)。![选择存储帐户](./media/web-sites-backup/01UpgradePlan.png)
+    >[!NOTE] 若显示以下消息，请单击该消息升级应用服务计划，然后才能继续备份。有关详细信息，请参阅[增加 Azure 中的应用](./web-sites-scale.md)。![选择存储帐户](./media/web-sites-backup/01UpgradePlan.png)
 
 3. 在“备份”边栏选项卡中，单击“存储: 未配置”来配置存储帐户。
 
-	![选择存储帐户][ChooseStorageAccount]
-	
+    ![选择存储帐户][ChooseStorageAccount]
+    
 4. 选择“存储帐户”和“容器”来选择备份目标。该存储帐户必须与要备份的应用属于同一订阅。也可在各自的边栏选项卡中新建存储帐户或容器。完成后，单击“选择”。
-	
-	![选择存储帐户](./media/web-sites-backup/02ChooseStorageAccount1.png)
-	
+    
+    ![选择存储帐户](./media/web-sites-backup/02ChooseStorageAccount1.png)
+    
 5. 在仍处于打开状态的“配置备份设置”边栏选项卡中，单击“数据库设置”，选择备份要包含的数据库（SQL 数据库或 MySQL），然后单击“确定”。
 
-	![选择存储帐户](./media/web-sites-backup/03ConfigureDatabase.png)
+    ![选择存储帐户](./media/web-sites-backup/03ConfigureDatabase.png)
 
-	> [!NOTE] 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
+    > [!NOTE] 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
 
 6. 在“配置备份设置”边栏选项卡上，单击“保存”。
 
 7. 在“备份”边栏选项卡的命令栏中，单击“立即备份”。
-	
-	![BackUpNow 按钮][BackUpNow]
-	
-	备份过程中将显示进度消息。
+    
+    ![BackUpNow 按钮][BackUpNow]
+    
+    备份过程中将显示进度消息。
 
 配置用于备份的存储帐户和容器后，可随时进行手动备份。
 
@@ -76,21 +76,21 @@ ms.author: cephalin
 
 1. 在“备份”边栏选项卡上，单击“计划: 未配置”。
 
-	![选择存储帐户](./media/web-sites-backup/05ScheduleBackup.png)
-	
+    ![选择存储帐户](./media/web-sites-backup/05ScheduleBackup.png)
+    
 1. 在“备份计划设置”边栏选项卡上，将“计划备份”设为“开”，然后根据需要配置备份计划，并单击“确定”。
-	
-	![启用自动化的备份][SetAutomatedBackupOn]
-	
+    
+    ![启用自动化的备份][SetAutomatedBackupOn]
+    
 4. 在仍处于打开状态的“配置备份设置”边栏选项卡上单击“存储设置”，然后通过选择“存储帐户”和“容器”来选择备份目标。该存储帐户必须与要备份的应用属于同一订阅。也可在各自的边栏选项卡中新建存储帐户或容器。完成后，单击“选择”。
-	
-	![选择存储帐户](./media/web-sites-backup/02ChooseStorageAccount1.png)
-	
+    
+    ![选择存储帐户](./media/web-sites-backup/02ChooseStorageAccount1.png)
+    
 5. 在“配置备份设置”边栏选项卡中，单击“数据库设置”，选择备份要包含的数据库（SQL 数据库或 MySQL），然后单击“确定”。
 
-	![选择存储帐户](./media/web-sites-backup/03ConfigureDatabase.png)
+    ![选择存储帐户](./media/web-sites-backup/03ConfigureDatabase.png)
 
-	> [!NOTE] 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
+    > [!NOTE] 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
 
 6. 在“配置备份设置”边栏选项卡上，单击“保存”。
 
@@ -111,26 +111,26 @@ ms.author: cephalin
 假设你的应用中包含永远不会更改的历年的日志文件和静态映像。你已有包括旧映像的应用的完整备份。现在你想要每天备份应用，但不想为永远不会更改的存储日志文件或静态映像文件支付费用。
 
 ![日志文件夹][LogsFolder] ![映像文件夹][ImagesFolder]
-	
+    
 以下步骤展示了如何从备份中排除这些文件。
 
 1. 转到 `http://{yourapp}.scm.chinacloudsites.cn/DebugConsole` 并确定想要从备份中排除的文件夹。在此示例中，你想要排除该用户界面中所示的以下文件和文件夹：
 
-		D:\home\site\wwwroot\Logs
-		D:\home\LogFiles
-		D:\home\site\wwwroot\Images\2013
-		D:\home\site\wwwroot\Images\2014
-		D:\home\site\wwwroot\Images\brand.png
+        D:\home\site\wwwroot\Logs
+        D:\home\LogFiles
+        D:\home\site\wwwroot\Images\2013
+        D:\home\site\wwwroot\Images\2014
+        D:\home\site\wwwroot\Images\brand.png
 
-	[!NOTE] 最后一行显示了你可以排除单个文件以及文件夹。
+    [!NOTE] 最后一行显示了你可以排除单个文件以及文件夹。
 
 2. 创建名为 `_backup.filter` 的文件并将上述列表放在文件中，但删除 `D:\home`。每行列出一个目录或文件。文件的内容应为：
 
-	    \site\wwwroot\Logs
-	    \LogFiles
-	    \site\wwwroot\Images\2013
-	    \site\wwwroot\Images\2014
-	    \site\wwwroot\Images\brand.png
+        \site\wwwroot\Logs
+        \LogFiles
+        \site\wwwroot\Images\2013
+        \site\wwwroot\Images\2014
+        \site\wwwroot\Images\brand.png
 
 3. 使用 [ftp](./web-sites-deploy.md#ftp) 或任何其他方法将此文件上载到站点的 `D:\home\site\wwwroot` 目录。如果你愿意，可以直接在 `http://{yourapp}.scm.chinacloudsites.cn/DebugConsole` 中创建文件并在那里插入内容。
 

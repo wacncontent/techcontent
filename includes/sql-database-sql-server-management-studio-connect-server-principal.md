@@ -19,9 +19,9 @@
  
 4. 默认情况下，新的服务器未定义[防火墙规则](../articles/sql-database/sql-database-firewall-configure.md)，因此最初阻止客户端进行连接。如果服务器尚不具有允许特定的 IP 地址进行连接的防火墙规则，那么 SSMS 会提示你创建服务器级防火墙规则。
 
-	单击“登录”并创建服务器级防火墙规则。必须是 Azure 管理员才能创建服务器级的防火墙规则。
+    单击“登录”并创建服务器级防火墙规则。必须是 Azure 管理员才能创建服务器级的防火墙规则。
 
-	![SQL Server Management Studio：连接到 SQL 数据库服务器](./media/sql-database-sql-server-management-studio-connect-server-principal/newfirewallrule.png)  
+    ![SQL Server Management Studio：连接到 SQL 数据库服务器](./media/sql-database-sql-server-management-studio-connect-server-principal/newfirewallrule.png)  
 
 5. 成功连接到 Azure SQL 数据库之后，打开**对象资源管理器**，现在可以访问数据库以[执行管理任务或查询数据](../articles/sql-database/sql-database-manage-azure-ssms.md)。
  

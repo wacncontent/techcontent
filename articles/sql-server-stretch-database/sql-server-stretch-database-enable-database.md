@@ -46,11 +46,11 @@ ms.author: douglasl
 
 若要在服务器上手动启用 Stretch Database，请运行 **sp\_configure** 并打开 **remote data archive** 选项。以下示例通过将 **remote data archive** 选项的值设置为 1 来启用该选项。
 
-	EXEC sp_configure 'remote data archive' , '1';
-	GO
+    EXEC sp_configure 'remote data archive' , '1';
+    GO
 
-	RECONFIGURE;
-	GO
+    RECONFIGURE;
+    GO
 
 有关详细信息，请参阅[配置 remote data archive 服务器配置选项](https://msdn.microsoft.com/zh-cn/library/mt143175.aspx)和 [sp\_configure (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms188787.aspx)。
 
@@ -68,7 +68,7 @@ ms.author: douglasl
 
     你可以通过尝试从 SQL Server Management Studio (SSMS) 的对象资源管理器连接到 Azure 服务器，轻松找到所需的值并创建防火墙规则。SSMS 通过打开以下对话框（其中已包括所需的 IP 地址值）帮助你创建规则。
 
-	![在 SSMS 中创建防火墙规则][FirewallRule]  
+    ![在 SSMS 中创建防火墙规则][FirewallRule]  
 
 3.  若要为延伸数据库配置某个 SQL Server 数据库，该数据库必须具有数据库主密钥。数据库主密钥用于保护延伸数据库在连接到远程数据库时所用的凭据。下面是一个示例，用于创建新的数据库主密钥。
 
@@ -84,7 +84,7 @@ ms.author: douglasl
     -   如果通过运行向导来启用延伸数据库，则可以在运行向导时创建凭据。
     -   如果你打算通过运行 **ALTER DATABASE** 启用 Stretch Database，则必须在运行 **ALTER DATABASE** 启用 Stretch Database 之前手动创建凭据。
 
-		下面是一个示例，用于创建新的凭据。
+        下面是一个示例，用于创建新的凭据。
 
         ```tsql
         CREATE DATABASE SCOPED CREDENTIAL <db_scoped_credential_name>
@@ -92,7 +92,7 @@ ms.author: douglasl
         GO
         ```
 
-		有关凭据的详细信息，请参阅 [CREATE DATABASE SCOPED CREDENTIAL (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/mt270260.aspx)。创建凭据需要 ALTER ANY CREDENTIAL 权限。
+        有关凭据的详细信息，请参阅 [CREATE DATABASE SCOPED CREDENTIAL (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/mt270260.aspx)。创建凭据需要 ALTER ANY CREDENTIAL 权限。
     -   如果符合以下所有条件，则可以使用 SQL Server 的联合服务帐户来与远程 Azure 服务器通信。
     -   运行 SQL Server 实例的服务帐户是一个域帐户。
     -   域帐户属于某个域，该域的 Active Directory 与 Azure Active Directory 相联合。

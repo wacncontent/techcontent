@@ -45,7 +45,7 @@ Azure 媒体服务允许传送通过高级加密标准 (AES)（使用 128 位加
 ##如何：配置密钥授权策略
 
 若要配置密钥授权策略，请选择“内容保护”页。
-	
+    
 媒体服务支持通过多种方式对发出密钥请求的用户进行身份验证。内容密钥授权策略可能且受到**开放**、**令牌**或 **IP** 授权限制（可以使用 REST 或 .NET SDK 配置 **IP**）。
 
 ###开放限制
@@ -67,18 +67,18 @@ Azure 媒体服务允许传送通过高级加密标准 (AES)（使用 128 位加
 ###PlayReady
 
 使用 **PlayReady** 保护内容时，需要在授权策略中指定的项目之一是定义 PlayReady 许可证模板的 XML 字符串。默认情况下，已设置以下策略：
-		
-	<PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1">
-	  <LicenseTemplates>
-	    <PlayReadyLicenseTemplate><AllowTestDevices>true</AllowTestDevices>
-	      <ContentKey i:type="ContentEncryptionKeyFromHeader" />
-	      <LicenseType>Nonpersistent</LicenseType>
-	      <PlayRight>
-	        <AllowPassingVideoContentToUnknownOutput>Allowed</AllowPassingVideoContentToUnknownOutput>
-	      </PlayRight>
-	    </PlayReadyLicenseTemplate>
-	  </LicenseTemplates>
-	</PlayReadyLicenseResponseTemplate>
+        
+    <PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1">
+      <LicenseTemplates>
+        <PlayReadyLicenseTemplate><AllowTestDevices>true</AllowTestDevices>
+          <ContentKey i:type="ContentEncryptionKeyFromHeader" />
+          <LicenseType>Nonpersistent</LicenseType>
+          <PlayRight>
+            <AllowPassingVideoContentToUnknownOutput>Allowed</AllowPassingVideoContentToUnknownOutput>
+          </PlayRight>
+        </PlayReadyLicenseTemplate>
+      </LicenseTemplates>
+    </PlayReadyLicenseResponseTemplate>
 
 可以单击“导入策略 xml”按钮，然后提供符合[此处](./media-services-playready-license-template-overview.md)定义的 XML 架构的另一个 XML。
 

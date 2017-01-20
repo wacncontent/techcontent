@@ -10,7 +10,7 @@
 
 1. 在虚拟机边栏选项卡中，选择“公共 IP 地址”。
 
-	![公共 ip 地址](./media/virtual-machines-sql-server-connection-steps/rm-public-ip-address.png)
+    ![公共 ip 地址](./media/virtual-machines-sql-server-connection-steps/rm-public-ip-address.png)
 
 2. 在公共 IP 地址的属性中，展开“配置”。
 
@@ -18,7 +18,7 @@
 
 4. 点击 “保存” 按钮
 
-	![dns 标签](./media/virtual-machines-sql-server-connection-steps/rm-dns-label.png)
+    ![dns 标签](./media/virtual-machines-sql-server-connection-steps/rm-dns-label.png)
 
 ### <a name="connect-to-the-database-engine-from-another-computer"></a> 从其他计算机连接到数据库引擎
  
@@ -34,6 +34,6 @@
 
 7. 单击“连接”。
 
-	![ssms 连接](./media/virtual-machines-sql-server-connection-steps/rm-ssms-connect.png)
+    ![ssms 连接](./media/virtual-machines-sql-server-connection-steps/rm-ssms-connect.png)
 
 <!---HONumber=Mooncake_0411_2016-->

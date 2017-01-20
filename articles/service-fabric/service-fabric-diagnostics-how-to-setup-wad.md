@@ -78,102 +78,102 @@ Azure 支持团队*需要*借助日志解决你创建的任何支持请求。这
 
 或者，也可以下载 Resource Manager 示例，进行更改，然后在 Azure PowerShell 窗口中输入 `New-AzureRmResourceGroupDeployment` 命令，使用修改后的模板创建群集。有关要在命令中传入哪些参数，请参阅以下代码。有关如何使用 PowerShell 部署资源组的详细信息，请参阅 [使用 Azure Resource Manager 模板部署资源组](../azure-resource-manager/resource-group-template-deploy.md)一文。
 
-	New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $deploymentName -TemplateFile $pathToARMConfigJsonFile -TemplateParameterFile $pathToParameterFile –Verbose
+    New-AzureRmResourceGroupDeployment -ResourceGroupName $resourceGroupName -Name $deploymentName -TemplateFile $pathToARMConfigJsonFile -TemplateParameterFile $pathToParameterFile –Verbose
 
 ### 将诊断扩展部署到现有群集
 如果现有的群集上未部署诊断或者你要修改现有配置，可以添加或更新配置。修改用于创建现有群集的 Resource Manager 模板，或者如前所述从门户下载该模板。执行以下任务可修改 template.json 文件。
 
 通过将存储资源添加到 resources 节将其添加到模板。
 
-	{
-	  "apiVersion": "2015-05-01-preview",
-	  "type": "Microsoft.Storage/storageAccounts",
-	  "name": "[parameters('applicationDiagnosticsStorageAccountName')]",
-	  "location": "[parameters('computeLocation')]",
-	  "properties": {
-	    "accountType": "[parameters('applicationDiagnosticsStorageAccountType')]"
-	  },
-	  "tags": {
-	    "resourceType": "Service Fabric",
-	    "clusterName": "[parameters('clusterName')]"
-	  }
-	},
+    {
+      "apiVersion": "2015-05-01-preview",
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[parameters('applicationDiagnosticsStorageAccountName')]",
+      "location": "[parameters('computeLocation')]",
+      "properties": {
+        "accountType": "[parameters('applicationDiagnosticsStorageAccountType')]"
+      },
+      "tags": {
+        "resourceType": "Service Fabric",
+        "clusterName": "[parameters('clusterName')]"
+      }
+    },
 
  接下来，将该资源添加到存储帐户定义后面的 `supportLogStorageAccountName` 与 `vmNodeType0Name` 之间的 parameters 节中。将占位符文本 *storage account name goes here* 替换为存储帐户的名称。
 
-	    "applicationDiagnosticsStorageAccountType": {
-	      "type": "string",
-	      "allowedValues": [
-	        "Standard_LRS",
-	        "Standard_GRS"
-	      ],
-	      "defaultValue": "Standard_LRS",
-	      "metadata": {
-	        "description": "Replication option for the application diagnostics storage account"
-	      }
-	    },
-	    "applicationDiagnosticsStorageAccountName": {
-	      "type": "string",
-	      "defaultValue": "storage account name goes here",
-	      "metadata": {
-	        "description": "Name for the storage account that contains application diagnostics data from the cluster"
-	      }
-	    },
+        "applicationDiagnosticsStorageAccountType": {
+          "type": "string",
+          "allowedValues": [
+            "Standard_LRS",
+            "Standard_GRS"
+          ],
+          "defaultValue": "Standard_LRS",
+          "metadata": {
+            "description": "Replication option for the application diagnostics storage account"
+          }
+        },
+        "applicationDiagnosticsStorageAccountName": {
+          "type": "string",
+          "defaultValue": "storage account name goes here",
+          "metadata": {
+            "description": "Name for the storage account that contains application diagnostics data from the cluster"
+          }
+        },
 
 然后，通过在 extensions 数组中添进行下代码来更新 template.json 的 `VirtualMachineProfile` 节。请务必根据插入位置，在开头或末尾添加逗点。
 
-	{
-		"name": "[concat(parameters('vmNodeType0Name'),'_Microsoft.Insights.VMDiagnosticsSettings')]",
-		"properties": {
-			"type": "IaaSDiagnostics",
-			"autoUpgradeMinorVersion": true,
-			"protectedSettings": {
-			"storageAccountName": "[parameters('applicationDiagnosticsStorageAccountName')]",
-			"storageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('applicationDiagnosticsStorageAccountName')),'2015-05-01-preview').key1]",
-			"storageAccountEndPoint": "https://core.chinacloudapi.cn/"
-			},
-			"publisher": "Microsoft.Azure.Diagnostics",
-			"settings": {
-			"WadCfg": {
-				"DiagnosticMonitorConfiguration": {
-				"overallQuotaInMB": "50000",
-				"EtwProviders": {
-					"EtwEventSourceProviderConfiguration": [
-					{
-						"provider": "Microsoft-ServiceFabric-Actors",
-						"scheduledTransferKeywordFilter": "1",
-						"scheduledTransferPeriod": "PT5M",
-						"DefaultEvents": {
-						"eventDestination": "ServiceFabricReliableActorEventTable"
-						}
-					},
-					{
-						"provider": "Microsoft-ServiceFabric-Services",
-						"scheduledTransferPeriod": "PT5M",
-						"DefaultEvents": {
-						"eventDestination": "ServiceFabricReliableServiceEventTable"
-						}
-					}
-					],
-					"EtwManifestProviderConfiguration": [
-					{
-						"provider": "cbd93bc2-71e5-4566-b3a7-595d8eeca6e8",
-						"scheduledTransferLogLevelFilter": "Information",
-						"scheduledTransferKeywordFilter": "4611686018427387904",
-						"scheduledTransferPeriod": "PT5M",
-						"DefaultEvents": {
-						"eventDestination": "ServiceFabricSystemEventTable"
-						}
-					}
-					]
-				}
-				}
-			},
-			"StorageAccount": "[parameters('applicationDiagnosticsStorageAccountName')]"
-			},
-			"typeHandlerVersion": "1.5"
-		}
-	}
+    {
+        "name": "[concat(parameters('vmNodeType0Name'),'_Microsoft.Insights.VMDiagnosticsSettings')]",
+        "properties": {
+            "type": "IaaSDiagnostics",
+            "autoUpgradeMinorVersion": true,
+            "protectedSettings": {
+            "storageAccountName": "[parameters('applicationDiagnosticsStorageAccountName')]",
+            "storageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('applicationDiagnosticsStorageAccountName')),'2015-05-01-preview').key1]",
+            "storageAccountEndPoint": "https://core.chinacloudapi.cn/"
+            },
+            "publisher": "Microsoft.Azure.Diagnostics",
+            "settings": {
+            "WadCfg": {
+                "DiagnosticMonitorConfiguration": {
+                "overallQuotaInMB": "50000",
+                "EtwProviders": {
+                    "EtwEventSourceProviderConfiguration": [
+                    {
+                        "provider": "Microsoft-ServiceFabric-Actors",
+                        "scheduledTransferKeywordFilter": "1",
+                        "scheduledTransferPeriod": "PT5M",
+                        "DefaultEvents": {
+                        "eventDestination": "ServiceFabricReliableActorEventTable"
+                        }
+                    },
+                    {
+                        "provider": "Microsoft-ServiceFabric-Services",
+                        "scheduledTransferPeriod": "PT5M",
+                        "DefaultEvents": {
+                        "eventDestination": "ServiceFabricReliableServiceEventTable"
+                        }
+                    }
+                    ],
+                    "EtwManifestProviderConfiguration": [
+                    {
+                        "provider": "cbd93bc2-71e5-4566-b3a7-595d8eeca6e8",
+                        "scheduledTransferLogLevelFilter": "Information",
+                        "scheduledTransferKeywordFilter": "4611686018427387904",
+                        "scheduledTransferPeriod": "PT5M",
+                        "DefaultEvents": {
+                        "eventDestination": "ServiceFabricSystemEventTable"
+                        }
+                    }
+                    ]
+                }
+                }
+            },
+            "StorageAccount": "[parameters('applicationDiagnosticsStorageAccountName')]"
+            },
+            "typeHandlerVersion": "1.5"
+        }
+    }
 
 如上所述修改 template.json 文件后，请重新发布 Resource Manager 模板。如果已导出模板，则运行 deploy.ps1 文件会重新发布模板。部署后，请确保 **ProvisioningState** 为 **Succeeded**。
 
@@ -184,13 +184,13 @@ Azure 支持团队*需要*借助日志解决你创建的任何支持请求。这
 
 例如，如果事件源名为 My-Eventsource，请添加以下代码，将来自 My-Eventsource 的事件放入名为 MyDestinationTableName 的表中。
 
-		{
-			"provider": "My-Eventsource",
-			"scheduledTransferPeriod": "PT5M",
-			"DefaultEvents": {
-			"eventDestination": "MyDestinationTableName"
-			}
-		}
+        {
+            "provider": "My-Eventsource",
+            "scheduledTransferPeriod": "PT5M",
+            "DefaultEvents": {
+            "eventDestination": "MyDestinationTableName"
+            }
+        }
 
 若要收集性能计数器或事件日志，请参考[使用 Azure Resource Manager 模板创建具有监视和诊断功能的 Windows 虚拟机](../virtual-machines/virtual-machines-windows-extensions-diagnostics-template.md)中提供的示例修改 Resource Manager 模板。然后重新发布 Resource Manager 模板。
 

@@ -46,7 +46,7 @@ Bootstrap 的使用方式有 2 种：
 
 - 使用 Azure PowerShell
 
-	[!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+    [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 - 使用 .NET SDK
 
@@ -58,40 +58,40 @@ Bootstrap 的使用方式有 2 种：
 
 以下 PowerShell 代码将自定义 Hive 配置：
 
-	# hive-site.xml configuration
-	$hiveConfigValues = @{ "hive.metastore.client.socket.timeout"="90" }
-	
-	$config = New-AzureHDInsightClusterConfig `
-		| Set-AzureHDInsightDefaultStorage `
-			-StorageAccountName "$defaultStorageAccountName.blob.core.chinacloudapi.cn" `
-			-StorageAccountKey $defaultStorageAccountKey `
-		| Add-AzureHDInsightConfigValues `
-			-Hive $hiveConfigValues 
-	
-	New-AzureHDInsightCluster `
-		-Name $clusterName `
-		-Location $location `
-		-ClusterSizeInNodes $clusterSizeInNodes `
-		-ClusterType Hadoop `
-		-Version "3.2" `
-		-Credential $httpCredential `
-		-Config $config 
+    # hive-site.xml configuration
+    $hiveConfigValues = @{ "hive.metastore.client.socket.timeout"="90" }
+    
+    $config = New-AzureHDInsightClusterConfig `
+        | Set-AzureHDInsightDefaultStorage `
+            -StorageAccountName "$defaultStorageAccountName.blob.core.chinacloudapi.cn" `
+            -StorageAccountKey $defaultStorageAccountKey `
+        | Add-AzureHDInsightConfigValues `
+            -Hive $hiveConfigValues 
+    
+    New-AzureHDInsightCluster `
+        -Name $clusterName `
+        -Location $location `
+        -ClusterSizeInNodes $clusterSizeInNodes `
+        -ClusterType Hadoop `
+        -Version "3.2" `
+        -Credential $httpCredential `
+        -Config $config 
 
 可在[附录 A](#appx-a:-powershell-sample) 中找到完整的有效 PowerShell 脚本。
 
 下面是有关自定义其他配置文件的更多示例：
 
-	# hdfs-site.xml configuration
-	$HdfsConfigValues = @{ "dfs.blocksize"="64m" } #default is 128MB in HDI 3.0 and 256MB in HDI 2.1
+    # hdfs-site.xml configuration
+    $HdfsConfigValues = @{ "dfs.blocksize"="64m" } #default is 128MB in HDI 3.0 and 256MB in HDI 2.1
 
-	# core-site.xml configuration
-	$CoreConfigValues = @{ "ipc.client.connect.max.retries"="60" } #default 50
+    # core-site.xml configuration
+    $CoreConfigValues = @{ "ipc.client.connect.max.retries"="60" } #default 50
 
-	# mapred-site.xml configuration
-	$MapRedConfigValues = @{ "mapreduce.task.timeout"="1200000" } #default 600000
+    # mapred-site.xml configuration
+    $MapRedConfigValues = @{ "mapreduce.task.timeout"="1200000" } #default 600000
 
-	# oozie-site.xml configuration
-	$OozieConfigValues = @{ "oozie.service.coord.normal.default.timeout"="150" }  # default 120
+    # oozie-site.xml configuration
+    $OozieConfigValues = @{ "oozie.service.coord.normal.default.timeout"="150" }  # default 120
 
 有关详细信息，请参阅 Azim Uddin 的标题为[自定义 HDInsight 群集创建](http://blogs.msdn.com/b/bigdatasupport/archive/2014/04/15/customizing-hdinsight-cluster-provisioning-via-powershell-and-net-sdk.aspx)的博客。
 

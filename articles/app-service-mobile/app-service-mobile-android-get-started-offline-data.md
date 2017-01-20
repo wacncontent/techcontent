@@ -36,7 +36,7 @@ ms.author: yuaxu
 
 1. 在 `TodoActivity.java` 中，注释掉 `mToDoTable` 的现有定义，取消注释同步表版本：
 
-	    private MobileServiceSyncTable<ToDoItem> mToDoTable;
+        private MobileServiceSyncTable<ToDoItem> mToDoTable;
 
 2. 在 `onCreate` 方法中，注释掉 `mToDoTable` 的现有初始化，取消注释以下定义：
 
@@ -44,39 +44,39 @@ ms.author: yuaxu
 
 3. 在 `refreshItemsFromTable` 中，注释掉 `results` 的定义，取消注释以下定义：
 
-		// Offline Sync
-		final List<ToDoItem> results = refreshItemsFromMobileServiceTableSyncTable();
+        // Offline Sync
+        final List<ToDoItem> results = refreshItemsFromMobileServiceTableSyncTable();
 
 4. 注释掉 `refreshItemsFromMobileServiceTable` 的定义。
 
 5. 取消注释 `refreshItemsFromMobileServiceTableSyncTable` 的定义：
 
-	    private List<ToDoItem> refreshItemsFromMobileServiceTableSyncTable() throws ExecutionException, InterruptedException {
-	        //sync the data
-	        sync().get();
-	        Query query = QueryOperations.field("complete").
-	                eq(val(false));
-	        return mToDoTable.read(query).get();
-	    }
+        private List<ToDoItem> refreshItemsFromMobileServiceTableSyncTable() throws ExecutionException, InterruptedException {
+            //sync the data
+            sync().get();
+            Query query = QueryOperations.field("complete").
+                    eq(val(false));
+            return mToDoTable.read(query).get();
+        }
 
 6. 取消注释 `sync` 的定义：
 
-	    private AsyncTask<Void, Void, Void> sync() {
-	        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
-	            @Override
-	            protected Void doInBackground(Void... params) {
-	                try {
-	                    MobileServiceSyncContext syncContext = mClient.getSyncContext();
-	                    syncContext.push().get();
-	                    mToDoTable.pull(null).get();
-	                } catch (final Exception e) {
-	                    createAndShowDialogFromTask(e, "Error");
-	                }
-	                return null;
-	            }
-	        };
-	        return runAsyncTask(task);
-	    }
+        private AsyncTask<Void, Void, Void> sync() {
+            AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+                @Override
+                protected Void doInBackground(Void... params) {
+                    try {
+                        MobileServiceSyncContext syncContext = mClient.getSyncContext();
+                        syncContext.push().get();
+                        mToDoTable.pull(null).get();
+                    } catch (final Exception e) {
+                        createAndShowDialogFromTask(e, "Error");
+                    }
+                    return null;
+                }
+            };
+            return runAsyncTask(task);
+        }
 
 ## 测试应用程序
 此部分在启用 WiFi 的情况下测试行为，然后关闭 WiFi 以创建脱机方案。
@@ -93,8 +93,8 @@ ms.author: yuaxu
 
 3. 使用 SQL 工具（如 *SQL Server Management Studio* ）或 REST 客户端（如 *Fiddler* 或 *Postman* ）查看 Azure *TodoItem* 表的内容。验证新项是否_未_同步到服务器
 
-   	+ 对于 Node.js 后端，请转到 [Azure 门户预览](https://portal.azure.cn/)，在移动应用后端中单击“简易表”>“TodoItem”，查看 `TodoItem` 表的内容。
-   	+ 对于 .NET 后端，请使用 SQL 工具（如 *SQL Server Management Studio* ）或 REST 客户端（如 *Fiddler* 或 *Poistman* ）查看表内容。
+       + 对于 Node.js 后端，请转到 [Azure 门户预览](https://portal.azure.cn/)，在移动应用后端中单击“简易表”>“TodoItem”，查看 `TodoItem` 表的内容。
+       + 对于 .NET 后端，请使用 SQL 工具（如 *SQL Server Management Studio* ）或 REST 客户端（如 *Fiddler* 或 *Poistman* ）查看表内容。
 
 4. 在设备或模拟器中打开 WiFi。接下来，按“刷新”按钮。
 

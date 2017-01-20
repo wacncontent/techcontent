@@ -29,11 +29,11 @@ Trend Micro Deep Security Agent (DSA) 可以配合 Deep Security Manager 工作�
 1.	在 [Trend Micro 官网](https://app.deepsecurity.trendmicro.com/SignUp.screen)注册一个试用版账号。
 2.	登陆账号，下载对应平台（如 Microsoft Windows 64bit）的激活脚本。
 
-	![active](./media/aog-virtual-machines-howto-activate-dsa/active.png)
+    ![active](./media/aog-virtual-machines-howto-activate-dsa/active.png)
 
 3.	将该 PowerShell 脚本拷贝到安装有 DSA 的虚拟机上运行即可完成激活操作。
 
-	![active-2](./media/aog-virtual-machines-howto-activate-dsa/active-2.png)
+    ![active-2](./media/aog-virtual-machines-howto-activate-dsa/active-2.png)
 
 ### 更多 Trend Micro DSA 信息请参考: ###
 

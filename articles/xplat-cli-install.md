@@ -42,7 +42,7 @@ ms.author: danlep
 
 在 Linux 分发版中，可能需要使用 **sudo** 才能成功运行 __npm__ 命令，如下所示：
 
-	sudo npm install -g azure-cli
+    sudo npm install -g azure-cli
 
 > [!NOTE]如果需要在 Linux 分发版或操作系统上安装或更新 Node.js 和 npm，我们建议安装最新的 Node.js LTS 版本 (4.x)。如果你使用旧版本，可能会遇到安装错误。
 
@@ -64,7 +64,7 @@ ms.author: danlep
 
 如果将计算机设置为 [Docker](https://docs.docker.com/engine/understanding-docker/) 主机，则可以在 Docker 容器中运行最新的 Azure CLI。运行以下命令（在 Linux 分发版中，可能需要使用 **sudo**）：
 
-	docker run -it microsoft/azure-cli
+    docker run -it microsoft/azure-cli
 
 ## 运行 Azure CLI 命令
 安装 Azure CLI 之后，请从命令行用户界面（Bash、终端、命令提示符等）运行 **azure** 命令。例如，若要运行帮助命令，请键入以下命令：
@@ -95,12 +95,12 @@ Mac 和 Linux 支持 tab 自动补全 CLI 命令。
 
 如要在 zsh 中启用，运行：
 
-	echo '. <(azure --completion)' >> .zshrc
+    echo '. <(azure --completion)' >> .zshrc
 
 若要在 bash 中启用，运行：
 
-	azure --completion >> ~/azure.completion.sh
-	echo 'source ~/azure.completion.sh' >> ~/.bash_profile
+    azure --completion >> ~/azure.completion.sh
+    echo 'source ~/azure.completion.sh' >> ~/.bash_profile
 
 ## 后续步骤 
 

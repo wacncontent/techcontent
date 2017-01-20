@@ -59,21 +59,21 @@ Power BI Embedded 的每个工作区是每位客户（租户）的工作区，�
 
 **HTTP 请求**
 
-	POST https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces
-	Authorization: AppKey MpaUgrTv5e...
+    POST https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces
+    Authorization: AppKey MpaUgrTv5e...
 
 **HTTP 响应**
 
-	HTTP/1.1 201 Created
-	Content-Type: application/json; odata.metadata=minimal; odata.streaming=true
-	Location: https://wabi-us-east2-redirect.analysis.chinacloudapi.cn/v1.0/collections/mypbiapp/workspaces
-	RequestId: 4220d385-2fb3-406b-8901-4ebe11a5f6da
+    HTTP/1.1 201 Created
+    Content-Type: application/json; odata.metadata=minimal; odata.streaming=true
+    Location: https://wabi-us-east2-redirect.analysis.chinacloudapi.cn/v1.0/collections/mypbiapp/workspaces
+    RequestId: 4220d385-2fb3-406b-8901-4ebe11a5f6da
 
-	{
-	  "@odata.context": "http://wabi-us-east2-redirect.analysis.chinacloudapi.cn/v1.0/collections/mypbiapp/$metadata#workspaces/$entity",
-	  "workspaceId": "32960a09-6366-4208-a8bb-9e0678cdbb9d",
-	  "workspaceCollectionName": "mypbiapp"
-	}
+    {
+      "@odata.context": "http://wabi-us-east2-redirect.analysis.chinacloudapi.cn/v1.0/collections/mypbiapp/$metadata#workspaces/$entity",
+      "workspaceId": "32960a09-6366-4208-a8bb-9e0678cdbb9d",
+      "workspaceCollectionName": "mypbiapp"
+    }
 
 返回的 **workspaceId** 用于后续 API 调用。应用程序必须保留此值。
 
@@ -82,74 +82,74 @@ Power BI Embedded 的每个工作区是每位客户（租户）的工作区，�
 
 URI 片段 **32960a09-6366-4208-a8bb-9e0678cdbb9d** 是 workspaceId，查询参数 **datasetDisplayName** 是要创建的数据集名称。创建的数据集保存 .pbix 文件中所有与数据相关的项目，例如导入的数据、指向数据源的指针，等等。
 
-	POST https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/imports?datasetDisplayName=mydataset01
-	Authorization: AppKey MpaUgrTv5e...
-	Content-Type: multipart/form-data; boundary="A300testx"
+    POST https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/imports?datasetDisplayName=mydataset01
+    Authorization: AppKey MpaUgrTv5e...
+    Content-Type: multipart/form-data; boundary="A300testx"
 
-	--A300testx
-	Content-Disposition: form-data
+    --A300testx
+    Content-Disposition: form-data
 
-	{the content (binary) of .pbix file}
-	--A300testx--
+    {the content (binary) of .pbix file}
+    --A300testx--
 
 此导入任务可能会运行一段时间。完成后，应用程序可以使用导入 ID 来请求任务状态。在本示例中，导入 ID 为 **4eec64dd-533b-47c3-a72c-6508ad854659**。
 
-	HTTP/1.1 202 Accepted
-	Content-Type: application/json; charset=utf-8
-	Location: https://wabi-us-east2-redirect.analysis.chinacloudapi.cn/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/imports/4eec64dd-533b-47c3-a72c-6508ad854659?tenantId=myorg
-	RequestId: 658bd6b4-b68d-4ec3-8818-2a94266dc220
+    HTTP/1.1 202 Accepted
+    Content-Type: application/json; charset=utf-8
+    Location: https://wabi-us-east2-redirect.analysis.chinacloudapi.cn/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/imports/4eec64dd-533b-47c3-a72c-6508ad854659?tenantId=myorg
+    RequestId: 658bd6b4-b68d-4ec3-8818-2a94266dc220
 
-	{"id":"4eec64dd-533b-47c3-a72c-6508ad854659"}
+    {"id":"4eec64dd-533b-47c3-a72c-6508ad854659"}
 
 以下内容显示正在使用此导入 ID 请求状态：
 
-	GET https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/imports/4eec64dd-533b-47c3-a72c-6508ad854659
-	Authorization: AppKey MpaUgrTv5e...
+    GET https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/imports/4eec64dd-533b-47c3-a72c-6508ad854659
+    Authorization: AppKey MpaUgrTv5e...
 
 如果任务未完成，HTTP 响应可能类似于下面：
 
-	HTTP/1.1 200 OK
-	Content-Type: application/json; charset=utf-8
-	RequestId: 614a13a5-4de7-43e8-83c9-9cd225535136
+    HTTP/1.1 200 OK
+    Content-Type: application/json; charset=utf-8
+    RequestId: 614a13a5-4de7-43e8-83c9-9cd225535136
 
-	{
-	  "id": "4eec64dd-533b-47c3-a72c-6508ad854659",
-	  "importState": "Publishing",
-	  "createdDateTime": "2016-07-19T07:36:06.227",
-	  "updatedDateTime": "2016-07-19T07:36:06.227",
-	  "name": "mydataset01"
-	}
+    {
+      "id": "4eec64dd-533b-47c3-a72c-6508ad854659",
+      "importState": "Publishing",
+      "createdDateTime": "2016-07-19T07:36:06.227",
+      "updatedDateTime": "2016-07-19T07:36:06.227",
+      "name": "mydataset01"
+    }
 
 如果任务已完成，HTTP 响应可能类似于下面：
 
-	HTTP/1.1 200 OK
-	Content-Type: application/json; charset=utf-8
-	RequestId: eb2c5a85-4d7d-4cc2-b0aa-0bafee4b1606
+    HTTP/1.1 200 OK
+    Content-Type: application/json; charset=utf-8
+    RequestId: eb2c5a85-4d7d-4cc2-b0aa-0bafee4b1606
 
-	{
-	  "id": "4eec64dd-533b-47c3-a72c-6508ad854659",
-	  "importState": "Succeeded",
-	  "createdDateTime": "2016-07-19T07:36:06.227",
-	  "updatedDateTime": "2016-07-19T07:36:06.227",
-	  "reports": [
-	    {
-	      "id": "2027efc6-a308-4632-a775-b9a9186f087c",
-	      "name": "mydataset01",
-	      "webUrl": "https://app.powerbi.com/reports/2027efc6-a308-4632-a775-b9a9186f087c",
-	      "embedUrl": "https://app.powerbi.com/appTokenReportEmbed?reportId=2027efc6-a308-4632-a775-b9a9186f087c"
-	    }
-	  ],
-	  "datasets": [
-	    {
-	      "id": "458e0451-7215-4029-80b3-9627bf3417b0",
-	      "name": "mydataset01",
-	      "tables": [
-	      ],
-	      "webUrl": "https://app.powerbi.com/datasets/458e0451-7215-4029-80b3-9627bf3417b0"
-	    }
-	  ],
-	  "name": "mydataset01"
-	}
+    {
+      "id": "4eec64dd-533b-47c3-a72c-6508ad854659",
+      "importState": "Succeeded",
+      "createdDateTime": "2016-07-19T07:36:06.227",
+      "updatedDateTime": "2016-07-19T07:36:06.227",
+      "reports": [
+        {
+          "id": "2027efc6-a308-4632-a775-b9a9186f087c",
+          "name": "mydataset01",
+          "webUrl": "https://app.powerbi.com/reports/2027efc6-a308-4632-a775-b9a9186f087c",
+          "embedUrl": "https://app.powerbi.com/appTokenReportEmbed?reportId=2027efc6-a308-4632-a775-b9a9186f087c"
+        }
+      ],
+      "datasets": [
+        {
+          "id": "458e0451-7215-4029-80b3-9627bf3417b0",
+          "name": "mydataset01",
+          "tables": [
+          ],
+          "webUrl": "https://app.powerbi.com/datasets/458e0451-7215-4029-80b3-9627bf3417b0"
+        }
+      ],
+      "name": "mydataset01"
+    }
 
 ## 数据源连接（及数据多租户）
 尽管 .pbix 文件中几乎所有的项目都已导入工作区，但却不包含数据源的凭据。因此，使用 **DirectQuery 模式**时，嵌入的报表无法正常显示。但是，使用**导入模式**时，可以使用现有的导入数据查看报表。在这种情况下，必须使用以下步骤，通过 REST 调用来设置凭据。
@@ -158,60 +158,60 @@ URI 片段 **32960a09-6366-4208-a8bb-9e0678cdbb9d** 是 workspaceId，查询参�
 
 **HTTP 请求**
 
-	GET https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/datasets/458e0451-7215-4029-80b3-9627bf3417b0/Default.GetBoundGatewayDatasources
-	Authorization: AppKey MpaUgrTv5e...
+    GET https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/datasets/458e0451-7215-4029-80b3-9627bf3417b0/Default.GetBoundGatewayDatasources
+    Authorization: AppKey MpaUgrTv5e...
 
 **HTTP 响应**
 
-	GET HTTP/1.1 200 OK
-	Content-Type: application/json; odata.metadata=minimal; odata.streaming=true
-	RequestId: 574b0b18-a6fa-46a6-826c-e65840cf6e15
+    GET HTTP/1.1 200 OK
+    Content-Type: application/json; odata.metadata=minimal; odata.streaming=true
+    RequestId: 574b0b18-a6fa-46a6-826c-e65840cf6e15
 
-	{
-	  "@odata.context": "http://wabi-us-east2-redirect.analysis.chinacloudapi.cn/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/$metadata#gatewayDatasources",
-	  "value": [
-	    {
-	      "id": "5f7ee2e7-4851-44a1-8b75-3eb01309d0ea",
-	      "gatewayId": "ca17e77f-1b51-429b-b059-6b3e3e9685d1",
-	      "datasourceType": "Sql",
-	      "connectionDetails": "{\"server\":\"testserver.database.chinacloudapi.cn\",\"database\":\"testdb01\"}"
-	    }
-	  ]
-	}
+    {
+      "@odata.context": "http://wabi-us-east2-redirect.analysis.chinacloudapi.cn/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/$metadata#gatewayDatasources",
+      "value": [
+        {
+          "id": "5f7ee2e7-4851-44a1-8b75-3eb01309d0ea",
+          "gatewayId": "ca17e77f-1b51-429b-b059-6b3e3e9685d1",
+          "datasourceType": "Sql",
+          "connectionDetails": "{\"server\":\"testserver.database.chinacloudapi.cn\",\"database\":\"testdb01\"}"
+        }
+      ]
+    }
 
 使用返回的网关 ID 和数据源 ID（参阅前面的 **gatewayId** 和所返回结果的 **ID**）可以更改此数据源的凭据，如下所示：
 
 **HTTP 请求**
 
-	PATCH https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/gateways/ca17e77f-1b51-429b-b059-6b3e3e9685d1/datasources/5f7ee2e7-4851-44a1-8b75-3eb01309d0ea
-	Authorization: AppKey MpaUgrTv5e...
-	Content-Type: application/json; charset=utf-8
+    PATCH https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/gateways/ca17e77f-1b51-429b-b059-6b3e3e9685d1/datasources/5f7ee2e7-4851-44a1-8b75-3eb01309d0ea
+    Authorization: AppKey MpaUgrTv5e...
+    Content-Type: application/json; charset=utf-8
 
-	{
-	  "credentialType": "Basic",
-	  "basicCredentials": {
-	    "username": "demouser",
-	    "password": "P@ssw0rd"
-	  }
-	}
+    {
+      "credentialType": "Basic",
+      "basicCredentials": {
+        "username": "demouser",
+        "password": "P@ssw0rd"
+      }
+    }
 
 **HTTP 响应**
 
-	HTTP/1.1 200 OK
-	Content-Type: application/octet-stream
-	RequestId: 0e533c13-266a-4a9d-8718-fdad90391099
+    HTTP/1.1 200 OK
+    Content-Type: application/octet-stream
+    RequestId: 0e533c13-266a-4a9d-8718-fdad90391099
 
 在生产环境中，也可以使用 REST API 针对每个工作区设置不同的连接字符串。（也就是说，可以隔离每个客户的数据库。）
 
 然后通过 REST 更改数据源的连接字符串。
 
-	POST https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/datasets/458e0451-7215-4029-80b3-9627bf3417b0/Default.SetAllConnections
-	Authorization: AppKey MpaUgrTv5e...
-	Content-Type: application/json; charset=utf-8
+    POST https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/datasets/458e0451-7215-4029-80b3-9627bf3417b0/Default.SetAllConnections
+    Authorization: AppKey MpaUgrTv5e...
+    Content-Type: application/json; charset=utf-8
 
-	{
-	  "connectionString": "data source=testserver02.database.chinacloudapi.cn;initial catalog=testdb02;persist security info=True;encrypt=True;trustservercertificate=False"
-	}
+    {
+      "connectionString": "data source=testserver02.database.chinacloudapi.cn;initial catalog=testdb02;persist security info=True;encrypt=True;trustservercertificate=False"
+    }
 
 或者，可以使用 Power BI Embedded 中的行级别安全性，在一个报表中隔离每个用户的数据。这样，就可以使用相同的 .pbix（UI 等）和不同的数据源来预配每份客户报表。
 
@@ -231,21 +231,21 @@ URI 片段 **32960a09-6366-4208-a8bb-9e0678cdbb9d** 是 workspaceId，查询参�
 
 > [!NOTE] 如果想要使用 Power BI Embedded 的行级别安全性 (RLS)，则还必须在声明中指定 **username** 和 **roles**。
 
-	{
-	  "typ":"JWT",
-	  "alg":"HS256"
-	}
+    {
+      "typ":"JWT",
+      "alg":"HS256"
+    }
 
-	{
-	  "wid":"{workspace id}",
-	  "rid":"{report id}",
-	  "wcn":"{workspace collection name}",
-	  "iss":"PowerBISDK",
-	  "ver":"0.2.0",
-	  "aud":"https://analysis.chinacloudapi.cn/powerbi/api",
-	  "nbf":{start time of token expiration},
-	  "exp":{end time of token expiration}
-	}
+    {
+      "wid":"{workspace id}",
+      "rid":"{report id}",
+      "wcn":"{workspace collection name}",
+      "iss":"PowerBISDK",
+      "ver":"0.2.0",
+      "aud":"https://analysis.chinacloudapi.cn/powerbi/api",
+      "nbf":{start time of token expiration},
+      "exp":{end time of token expiration}
+    }
 
 接下来，必须使用 SHA256 算法创建 HMAC（签名）的 base64 编码字符串。这个经过签名的输入值是前面获取的字符串。
 
@@ -253,50 +253,50 @@ URI 片段 **32960a09-6366-4208-a8bb-9e0678cdbb9d** 是 workspaceId，查询参�
 
 下面是这些步骤的 PHP 示例：
 
-	<?php
-	// 1. power bi access key
-	$accesskey = "MpaUgrTv5e...";
+    <?php
+    // 1. power bi access key
+    $accesskey = "MpaUgrTv5e...";
 
-	// 2. construct input value
-	$token1 = "{" .
-	  "\"typ\":\"JWT\"," .
-	  "\"alg\":\"HS256\"" .
-	  "}";
-	$token2 = "{" .
-	  "\"wid\":\"32960a09-6366-4208-a8bb-9e0678cdbb9d\"," . // workspace id
-	  "\"rid\":\"2027efc6-a308-4632-a775-b9a9186f087c\"," . // report id
-	  "\"wcn\":\"mypbiapp\"," . // workspace collection name
-	  "\"iss\":\"PowerBISDK\"," .
-	  "\"ver\":\"0.2.0\"," .
-	  "\"aud\":\"https://analysis.chinacloudapi.cn/powerbi/api\"," .
-	  "\"nbf\":" . date("U") . "," .
-	  "\"exp\":" . date("U" , strtotime("+1 hour")) .
-	  "}";
-	$inputval = rfc4648_base64_encode($token1) .
-	  "." .
-	  rfc4648_base64_encode($token2);
+    // 2. construct input value
+    $token1 = "{" .
+      "\"typ\":\"JWT\"," .
+      "\"alg\":\"HS256\"" .
+      "}";
+    $token2 = "{" .
+      "\"wid\":\"32960a09-6366-4208-a8bb-9e0678cdbb9d\"," . // workspace id
+      "\"rid\":\"2027efc6-a308-4632-a775-b9a9186f087c\"," . // report id
+      "\"wcn\":\"mypbiapp\"," . // workspace collection name
+      "\"iss\":\"PowerBISDK\"," .
+      "\"ver\":\"0.2.0\"," .
+      "\"aud\":\"https://analysis.chinacloudapi.cn/powerbi/api\"," .
+      "\"nbf\":" . date("U") . "," .
+      "\"exp\":" . date("U" , strtotime("+1 hour")) .
+      "}";
+    $inputval = rfc4648_base64_encode($token1) .
+      "." .
+      rfc4648_base64_encode($token2);
 
-	// 3. get encoded signature
-	$hash = hash_hmac("sha256",
-		$inputval,
-		$accesskey,
-		true);
-	$sig = rfc4648_base64_encode($hash);
+    // 3. get encoded signature
+    $hash = hash_hmac("sha256",
+        $inputval,
+        $accesskey,
+        true);
+    $sig = rfc4648_base64_encode($hash);
 
-	// 4. show result (which is the apptoken)
-	$apptoken = $inputval . "." . $sig;
-	echo($apptoken);
+    // 4. show result (which is the apptoken)
+    $apptoken = $inputval . "." . $sig;
+    echo($apptoken);
 
-	// helper functions
-	function rfc4648_base64_encode($arg) {
-	  $res = $arg;
-	  $res = base64_encode($res);
-	  $res = str_replace("/", "_", $res);
-	  $res = str_replace("+", "-", $res);
-	  $res = rtrim($res, "=");
-	  return $res;
-	}
-	?>
+    // helper functions
+    function rfc4648_base64_encode($arg) {
+      $res = $arg;
+      $res = base64_encode($res);
+      $res = str_replace("/", "_", $res);
+      $res = str_replace("+", "-", $res);
+      $res = rtrim($res, "=");
+      return $res;
+    }
+    ?>
 
 ## 最后，将报表嵌入网页
 
@@ -304,107 +304,107 @@ URI 片段 **32960a09-6366-4208-a8bb-9e0678cdbb9d** 是 workspaceId，查询参�
 
 **HTTP 请求**
 
-	GET https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/reports
-	Authorization: AppKey MpaUgrTv5e...
+    GET https://api.powerbi.com/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/reports
+    Authorization: AppKey MpaUgrTv5e...
 
 **HTTP 响应**
 
-	HTTP/1.1 200 OK
-	Content-Type: application/json; odata.metadata=minimal; odata.streaming=true
-	RequestId: d4099022-405b-49d3-b3b7-3c60cf675958
+    HTTP/1.1 200 OK
+    Content-Type: application/json; odata.metadata=minimal; odata.streaming=true
+    RequestId: d4099022-405b-49d3-b3b7-3c60cf675958
 
-	{
-	  "@odata.context": "http://wabi-us-east2-redirect.analysis.chinacloudapi.cn/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/$metadata#reports",
-	  "value": [
-	    {
-	      "id": "2027efc6-a308-4632-a775-b9a9186f087c",
-	      "name": "mydataset01",
-	      "webUrl": "https://app.powerbi.com/reports/2027efc6-a308-4632-a775-b9a9186f087c",
-	      "embedUrl": "https://embedded.powerbi.com/appTokenReportEmbed?reportId=2027efc6-a308-4632-a775-b9a9186f087c",
-	      "isFromPbix": false
-	    }
-	  ]
-	}
+    {
+      "@odata.context": "http://wabi-us-east2-redirect.analysis.chinacloudapi.cn/v1.0/collections/mypbiapp/workspaces/32960a09-6366-4208-a8bb-9e0678cdbb9d/$metadata#reports",
+      "value": [
+        {
+          "id": "2027efc6-a308-4632-a775-b9a9186f087c",
+          "name": "mydataset01",
+          "webUrl": "https://app.powerbi.com/reports/2027efc6-a308-4632-a775-b9a9186f087c",
+          "embedUrl": "https://embedded.powerbi.com/appTokenReportEmbed?reportId=2027efc6-a308-4632-a775-b9a9186f087c",
+          "isFromPbix": false
+        }
+      ]
+    }
 
 可以使用前面的应用令牌在 Web 应用中嵌入报表。在下一个示例代码中，可以发现前半部与前面的示例相同。在后半部中，本示例在 iframe 中显示 **embedUrl**（请参阅前面的结果），将应用令牌发布到 iframe 中。
 
 > [!NOTE] 需要将报表 ID 值更改为自己的值。此外，由于内容管理系统中的 bug，代码示例中的 iframe 标记以文本形式显示。如果复制并粘贴本示例代码，请删除标记中的大写文本。
 
-	    <?php
-	    // 1. power bi access key
-	    $accesskey = "MpaUgrTv5e...";
+        <?php
+        // 1. power bi access key
+        $accesskey = "MpaUgrTv5e...";
 
-	    // 2. construct input value
-	    $token1 = "{" .
-	      "\"typ\":\"JWT\"," .
-	      "\"alg\":\"HS256\"" .
-	      "}";
-	    $token2 = "{" .
-	      "\"wid\":\"32960a09-6366-4208-a8bb-9e0678cdbb9d\"," . // workspace id
-	      "\"rid\":\"2027efc6-a308-4632-a775-b9a9186f087c\"," . // report id
-	      "\"wcn\":\"mypbiapp\"," . // workspace collection name
-	      "\"iss\":\"PowerBISDK\"," .
-	      "\"ver\":\"0.2.0\"," .
-	      "\"aud\":\"https://analysis.chinacloudapi.cn/powerbi/api\"," .
-	      "\"nbf\":" . date("U") . "," .
-	      "\"exp\":" . date("U" , strtotime("+1 hour")) .
-	      "}";
-	    $inputval = rfc4648_base64_encode($token1) .
-	      "." .
-	      rfc4648_base64_encode($token2);
+        // 2. construct input value
+        $token1 = "{" .
+          "\"typ\":\"JWT\"," .
+          "\"alg\":\"HS256\"" .
+          "}";
+        $token2 = "{" .
+          "\"wid\":\"32960a09-6366-4208-a8bb-9e0678cdbb9d\"," . // workspace id
+          "\"rid\":\"2027efc6-a308-4632-a775-b9a9186f087c\"," . // report id
+          "\"wcn\":\"mypbiapp\"," . // workspace collection name
+          "\"iss\":\"PowerBISDK\"," .
+          "\"ver\":\"0.2.0\"," .
+          "\"aud\":\"https://analysis.chinacloudapi.cn/powerbi/api\"," .
+          "\"nbf\":" . date("U") . "," .
+          "\"exp\":" . date("U" , strtotime("+1 hour")) .
+          "}";
+        $inputval = rfc4648_base64_encode($token1) .
+          "." .
+          rfc4648_base64_encode($token2);
 
-	    // 3. get encoded signature value
-	    $hash = hash_hmac("sha256",
-	    	$inputval,
-	    	$accesskey,
-	    	true);
-	    $sig = rfc4648_base64_encode($hash);
+        // 3. get encoded signature value
+        $hash = hash_hmac("sha256",
+            $inputval,
+            $accesskey,
+            true);
+        $sig = rfc4648_base64_encode($hash);
 
-	    // 4. get apptoken
-	    $apptoken = $inputval . "." . $sig;
+        // 4. get apptoken
+        $apptoken = $inputval . "." . $sig;
 
-	    // helper functions
-	    function rfc4648_base64_encode($arg) {
-	      $res = $arg;
-	      $res = base64_encode($res);
-	      $res = str_replace("/", "_", $res);
-	      $res = str_replace("+", "-", $res);
-	      $res = rtrim($res, "=");
-	      return $res;
-	    }
-	    ?>
-	    <!DOCTYPE html>
-	    <html>
-	    <head>
-	      <meta charset="utf-8" />
-	      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	      <title>Test page</title>
-	      <meta name="viewport" content="width=device-width, initial-scale=1">
-	    </head>
-	    <body>
-	      <button id="btnView">View Report !</button>
-	      <div id="divView">
-	        <**REMOVE THIS CAPPED TEXT IF COPIED** iframe id="ifrTile" width="100%" height="400"></iframe>
-	      </div>
-	      <script>
-	        (function () {
-	          document.getElementById('btnView').onclick = function() {
-	            var iframe = document.getElementById('ifrTile');
-	            iframe.src = 'https://embedded.powerbi.com/appTokenReportEmbed?reportId=2027efc6-a308-4632-a775-b9a9186f087c';
-	            iframe.onload = function() {
-	              var msgJson = {
-	                action: "loadReport",
-	                accessToken: "<?=$apptoken?>",
-	                height: 500,
-	                width: 722
-	              };
-	              var msgTxt = JSON.stringify(msgJson);
-	              iframe.contentWindow.postMessage(msgTxt, "*");
-	            };
-	          };
-	        }());
-	      </script>
-	    </body>
+        // helper functions
+        function rfc4648_base64_encode($arg) {
+          $res = $arg;
+          $res = base64_encode($res);
+          $res = str_replace("/", "_", $res);
+          $res = str_replace("+", "-", $res);
+          $res = rtrim($res, "=");
+          return $res;
+        }
+        ?>
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <title>Test page</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+        </head>
+        <body>
+          <button id="btnView">View Report !</button>
+          <div id="divView">
+            <**REMOVE THIS CAPPED TEXT IF COPIED** iframe id="ifrTile" width="100%" height="400"></iframe>
+          </div>
+          <script>
+            (function () {
+              document.getElementById('btnView').onclick = function() {
+                var iframe = document.getElementById('ifrTile');
+                iframe.src = 'https://embedded.powerbi.com/appTokenReportEmbed?reportId=2027efc6-a308-4632-a775-b9a9186f087c';
+                iframe.onload = function() {
+                  var msgJson = {
+                    action: "loadReport",
+                    accessToken: "<?=$apptoken?>",
+                    height: 500,
+                    width: 722
+                  };
+                  var msgTxt = JSON.stringify(msgJson);
+                  iframe.contentWindow.postMessage(msgTxt, "*");
+                };
+              };
+            }());
+          </script>
+        </body>
 
 结果如下：
 

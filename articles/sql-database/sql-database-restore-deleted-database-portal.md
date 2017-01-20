@@ -31,7 +31,7 @@ ms.tgt_pltfrm: NA
 1.	在 [Azure 门户预览](https://portal.azure.cn)中，单击“更多服务”>“SQL 服务器”。
 3.  选择包含要还原的数据库的服务器。
 4.  向下滚动到服务器边栏选项卡的“操作”部分并选择“已删除的数据库”：
-	![还原 Azure SQL 数据库](./media/sql-database-restore-deleted-database-portal/restore-deleted-trashbin.png)
+    ![还原 Azure SQL 数据库](./media/sql-database-restore-deleted-database-portal/restore-deleted-trashbin.png)
 5.  选择要还原的数据库。
 6.  指定数据库名称，然后单击“确定”：
 

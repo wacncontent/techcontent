@@ -39,29 +39,29 @@ Azure 服务总线现在支持用于服务总线**分区队列和主题**的高�
 
 可以使用 [Azure 经典管理门户][]和服务总线 SDK 创建分区队列。若要创建分区队列，请在 [QueueDescription](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.aspx) 实例中将 [EnablePartitioning](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.enablepartitioning.aspx) 属性设置为 **true**。以下代码演示如何使用服务总线 SDK 创建分区队列。
  
-		// Create partitioned queue
-		var nm = NamespaceManager.CreateFromConnectionString(myConnectionString);
-		var queueDescription = new QueueDescription("myQueue");
-		queueDescription.EnablePartitioning = true;
-		nm.CreateQueue(queueDescription);
+        // Create partitioned queue
+        var nm = NamespaceManager.CreateFromConnectionString(myConnectionString);
+        var queueDescription = new QueueDescription("myQueue");
+        queueDescription.EnablePartitioning = true;
+        nm.CreateQueue(queueDescription);
 
 ### 使用 AMQP 发送和接收消息
 
 通过将 [TransportType](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.servicebusconnectionstringbuilder.transporttype.aspx) 属性设置为 [TransportType.Amqp](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.transporttype.aspx) 可以使用 AMQP 作为协议发送消息到分区队列，以及从分区队列接收消息，如以下代码所示。
 
-		// Sending and receiving messages to and from a queue
-		var myConnectionStringBuilder = new ServiceBusConnectionStringBuilder(myConnectionString);
-		myConnectionStringBuilder.TransportType = TransportType.Amqp;
-		string amqpConnectionString = myConnectionStringBuilder.ToString();
-		var queueClient = QueueClient.CreateFromConnectionString(amqpConnectionString, "myQueue");
+        // Sending and receiving messages to and from a queue
+        var myConnectionStringBuilder = new ServiceBusConnectionStringBuilder(myConnectionString);
+        myConnectionStringBuilder.TransportType = TransportType.Amqp;
+        string amqpConnectionString = myConnectionStringBuilder.ToString();
+        var queueClient = QueueClient.CreateFromConnectionString(amqpConnectionString, "myQueue");
 
-		BrokeredMessage message = new BrokeredMessage("Hello AMQP");
-		Console.WriteLine("Sending message {0}...", message.MessageId);
-		queueClient.Send(message);
+        BrokeredMessage message = new BrokeredMessage("Hello AMQP");
+        Console.WriteLine("Sending message {0}...", message.MessageId);
+        queueClient.Send(message);
 
-		var receivedMessage = queueClient.Receive();
-		Console.WriteLine("Received message: {0}", receivedMessage.GetBody<string>());
-		receivedMessage.Complete();
+        var receivedMessage = queueClient.Receive();
+        Console.WriteLine("Received message: {0}", receivedMessage.GetBody<string>());
+        receivedMessage.Complete();
 
 ## 将 AMQP 用于分区主题
 
@@ -72,34 +72,34 @@ Azure 服务总线现在支持用于服务总线**分区队列和主题**的高�
 ### 创建分区主题
 
 可以使用 [Azure 经典管理门户][]和服务总线 SDK 创建分区主题。若要创建分区主题，请在 [TopicDescription](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.topicdescription.aspx) 实例中将 [EnablePartitioning](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.topicdescription.enablepartitioning.aspx) 属性设置为 **true**。以下代码演示如何使用服务总线 SDK 创建分区主题。
-	
-		// Create partitioned topic
-		var nm = NamespaceManager.CreateFromConnectionString(myConnectionString);
-		var topicDescription = new TopicDescription("myTopic");
-		topicDescription.EnablePartitioning = true;
-		nm.CreateTopic(topicDescription);
+    
+        // Create partitioned topic
+        var nm = NamespaceManager.CreateFromConnectionString(myConnectionString);
+        var topicDescription = new TopicDescription("myTopic");
+        topicDescription.EnablePartitioning = true;
+        nm.CreateTopic(topicDescription);
 
-		var subscriptionDescription = new SubscriptionDescription("myTopic", "mySubscription");
-		nm.CreateSubscription(subscriptionDescription);
+        var subscriptionDescription = new SubscriptionDescription("myTopic", "mySubscription");
+        nm.CreateSubscription(subscriptionDescription);
 
 ### 使用 AMQP 发送和接收消息
 
 通过将 [TransportType](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.servicebusconnectionstringbuilder.transporttype.aspx) 属性设置为 [TransportType.Amqp](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.transporttype.aspx) 可以使用 AMQP 作为协议发送消息到分区主题订阅，以及从分区主题订阅接收消息，如以下代码所示。
 
-		// Sending and receiving messages to a topic and from a subscription
-		var myConnectionStringBuilder = new ServiceBusConnectionStringBuilder(myConnectionString);
-		myConnectionStringBuilder.TransportType = TransportType.Amqp;
-		string amqpConnectionString = myConnectionStringBuilder.ToString();
-	
-		var topicClient = TopicClient.CreateFromConnectionString(amqpConnectionString, "myTopic");
-		BrokeredMessage message = new BrokeredMessage("Hello AMQP");
-		Console.WriteLine("Sending message {0}...", message.MessageId);
-		topicClient.Send(message);
-	
-		var subcriptionClient = SubscriptionClient.CreateFromConnectionString(amqpConnectionString, "myTopic", "mySubscription");
-		var receivedMessage = subcriptionClient.Receive();
-		Console.WriteLine("Received message: {0}", receivedMessage.GetBody<string>());
-		receivedMessage.Complete();
+        // Sending and receiving messages to a topic and from a subscription
+        var myConnectionStringBuilder = new ServiceBusConnectionStringBuilder(myConnectionString);
+        myConnectionStringBuilder.TransportType = TransportType.Amqp;
+        string amqpConnectionString = myConnectionStringBuilder.ToString();
+    
+        var topicClient = TopicClient.CreateFromConnectionString(amqpConnectionString, "myTopic");
+        BrokeredMessage message = new BrokeredMessage("Hello AMQP");
+        Console.WriteLine("Sending message {0}...", message.MessageId);
+        topicClient.Send(message);
+    
+        var subcriptionClient = SubscriptionClient.CreateFromConnectionString(amqpConnectionString, "myTopic", "mySubscription");
+        var receivedMessage = subcriptionClient.Receive();
+        Console.WriteLine("Received message: {0}", receivedMessage.GetBody<string>());
+        receivedMessage.Complete();
 
 ## 后续步骤
 

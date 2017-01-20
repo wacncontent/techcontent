@@ -234,7 +234,7 @@ Azure DocumentDB 增加了对 [REST API 版本 2015-12-16](https://msdn.microsof
 
     // Query using partition key
     IQueryable<DeviceReading> query = client.CreateDocumentQuery<DeviceReading>(
-    	UriFactory.CreateDocumentCollectionUri("db", "coll"))
+        UriFactory.CreateDocumentCollectionUri("db", "coll"))
         .Where(m => m.MetricType == "Temperature" && m.DeviceId == "XMS-0001");
 
 下面的查询在分区键 (DeviceId) 上没有筛选器，并且以扇形展开到针对分区索引执行该查询的所有分区。请注意，必须指定 EnableCrossPartitionQuery（REST API 中的 `x-ms-documentdb-query-enablecrosspartition`）以使 SDK 跨分区执行查询。

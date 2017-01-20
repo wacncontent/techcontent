@@ -138,17 +138,17 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 示例 (1)：使用此 cmdlet 来更改连接字符串
 
-	$connectionstrings = @{ ContosoConn1 = @{ Type = "MySql"; Value = "MySqlConn"}; ContosoConn2 = @{ Type = "SQLAzure"; Value = "SQLAzureConn"} }
-	Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -ConnectionStrings $connectionstrings
+    $connectionstrings = @{ ContosoConn1 = @{ Type = "MySql"; Value = "MySqlConn"}; ContosoConn2 = @{ Type = "SQLAzure"; Value = "SQLAzureConn"} }
+    Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -ConnectionStrings $connectionstrings
 
 示例 (2)：添加或更改应用设置
 
-	$appsettings = @{appsetting1 = "appsetting1value"; appsetting2 = "appsetting2value"}
-	Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -AppSettings $appsettings
+    $appsettings = @{appsetting1 = "appsetting1value"; appsetting2 = "appsetting2value"}
+    Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -AppSettings $appsettings
 
 示例 (3)：将 Web 应用设置为在 64 位模式下运行
 
-	Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -Use32BitWorkerProcess $False
+    Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -Use32BitWorkerProcess $False
 
 ### 更改现有 Web 应用的状态 ###
 

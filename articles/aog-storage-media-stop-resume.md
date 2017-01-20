@@ -73,22 +73,22 @@ Un-versioned 访问截图
 
 1.  如果是 un-versioned 的访问方式（比如浏览器访问方式），默认就是2009-09-19。这个时候就可以通过修改默认存储服务的 DefaultServiceVersion 来解决，可以通过以下方式来达到目的。
 
-	a)      工具下载地址：[https://github.com/Plasma/AzureBlobUtility](https://github.com/Plasma/AzureBlobUtility)
+    a)      工具下载地址：[https://github.com/Plasma/AzureBlobUtility](https://github.com/Plasma/AzureBlobUtility)
 
      >备注：这个开源项目仅支持 Global Storage 服务，为此我们需要下载后对其进行修改编译，让其支持 China Storage 的工具。
 
-	b)       执行脚本语法：`BlobUtility.exe -k <AccessKey> -a <StorageName> -c <ContainerName> --setDefaultServiceVersion 2015-02-21`
+    b)       执行脚本语法：`BlobUtility.exe -k <AccessKey> -a <StorageName> -c <ContainerName> --setDefaultServiceVersion 2015-02-21`
 
-	示例：
+    示例：
 
-	![](./media/aog-storage-media-stop-resume/cmd.png)
+    ![](./media/aog-storage-media-stop-resume/cmd.png)
 
     >备注：默认是支持 Global Storage 服务，修改过后需要指定 AzureChinaCloud 环境。
     
-	c)       测试用例：我们测试一个视频文件，修改版本后，可以支持拖拽点播。
+    c)       测试用例：我们测试一个视频文件，修改版本后，可以支持拖拽点播。
 
-	![](./media/aog-storage-media-stop-resume/result1.png)
-	![](./media/aog-storage-media-stop-resume/result2.png)
+    ![](./media/aog-storage-media-stop-resume/result1.png)
+    ![](./media/aog-storage-media-stop-resume/result2.png)
  
 2.  如果是自己 code 开发的播放客户端，可以在读取音频或者视频文件时显示的设置 API 版本为最新。
 

@@ -32,7 +32,7 @@ ms.author: carlrab
 
 1. 确认你安装了最新版本的 SQL Server Management Studio。Management Studio 的新版本将每月更新一次，以与 Azure 门户的更新保持同步。
 
-	 > [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+     > [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 2. 连接到 Azure SQL 数据库服务器、右键单击“数据库”文件夹，然后单击“导入数据层应用程序...”
    
@@ -42,7 +42,7 @@ ms.author: carlrab
 
     ![导入设置](./media/sql-database-cloud-migrate/MigrateUsingBACPAC04.png)
 
-	 > [!IMPORTANT] 从 Azure Blob 存储导入 BACPAC 时，请使用标准存储。不支持从高级存储导入 BACPAC。
+     > [!IMPORTANT] 从 Azure Blob 存储导入 BACPAC 时，请使用标准存储。不支持从高级存储导入 BACPAC。
 
 4.	为 Azure SQL 数据库中的数据库提供**新数据库名称**，设置 **Azure SQL 数据库的版本**（服务层）、**最大数据库大小**和**服务目标**（性能级别）。
 

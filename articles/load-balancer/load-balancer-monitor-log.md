@@ -59,20 +59,20 @@ ms.author: sewhee
 
 只有基于每个负载均衡器启用了此日志，才会生成此日志。事件以 JSON 格式记录，并存储在启用日志记录时指定的存储帐户中。下面是事件的示例。
 
-	{
-	    "time": "2016-01-26T10:37:46.6024215Z",
-	    "systemId": "32077926-b9c4-42fb-94c1-762e528b5b27",
-	    "category": "LoadBalancerAlertEvent",
-	    "resourceId": "/SUBSCRIPTIONS/XXXXXXXXXXXXXXXXX-XXXX-XXXX-XXXXXXXXX/RESOURCEGROUPS/RG7/PROVIDERS/MICROSOFT.NETWORK/LOADBALANCERS/WWEBLB",
-	    "operationName": "LoadBalancerProbeHealthStatus",
-	    "properties": {
-	        "eventName": "Resource Limits Hit",
-	        "eventDescription": "Ports exhausted",
-	        "eventProperties": {
-	            "public ip address": "40.117.227.32"
-	        }
-	    }
-	}
+    {
+        "time": "2016-01-26T10:37:46.6024215Z",
+        "systemId": "32077926-b9c4-42fb-94c1-762e528b5b27",
+        "category": "LoadBalancerAlertEvent",
+        "resourceId": "/SUBSCRIPTIONS/XXXXXXXXXXXXXXXXX-XXXX-XXXX-XXXXXXXXX/RESOURCEGROUPS/RG7/PROVIDERS/MICROSOFT.NETWORK/LOADBALANCERS/WWEBLB",
+        "operationName": "LoadBalancerProbeHealthStatus",
+        "properties": {
+            "eventName": "Resource Limits Hit",
+            "eventDescription": "Ports exhausted",
+            "eventProperties": {
+                "public ip address": "40.117.227.32"
+            }
+        }
+    }
 
 JSON 输出显示的 *eventname* 属性将说明负载均衡器创建警报的原因。在本示例中，生成警报是因为源 IP NAT 限制 (SNAT) 导致 TCP 端口耗竭。
 

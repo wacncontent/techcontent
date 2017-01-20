@@ -45,27 +45,27 @@ ms.author: dobett
 
 1. 在 Visual Studio 中，使用“控制台应用程序”项目模板将新的 Visual C# Windows 经典桌面项目添加到当前解决方案。确保 .NET Framework 版本为 4.5.1 或更高。将项目命名为 **CreateDeviceIdentity**。
 
-	![新的 Visual C# Windows 经典桌面项目][10]
+    ![新的 Visual C# Windows 经典桌面项目][10]
 
 2. 在“解决方案资源管理器”中，右键单击“CreateDeviceIdentity”项目，然后单击“管理 NuGet 包”。
 
 3. 在“NuGet 包管理器”窗口中，选择“浏览”，搜索 **microsoft.azure.devices**，选择“安装”以安装 **Microsoft.Azure.Devices** 包，然后接受使用条款。这将下载、安装 [Microsoft Azure IoT 服务 SDK][lnk-nuget-service-sdk] NuGet 包及其依赖项并添加对它的引用。
 
-	![“NuGet 包管理器”窗口][11]
+    ![“NuGet 包管理器”窗口][11]
 
 4. 在 **Program.cs** 文件顶部添加以下 `using` 语句：
 
-		using Microsoft.Azure.Devices;
+        using Microsoft.Azure.Devices;
         using Microsoft.Azure.Devices.Common.Exceptions;
 
 5. 将以下字段添加到 **Program** 类。将占位符值替换为在上一部分中为 IoT 中心创建的连接字符串。
 
-		static RegistryManager registryManager;
+        static RegistryManager registryManager;
         static string connectionString = "{iothub connection string}";
 
 6. 将以下方法添加到 **Program** 类：
 
-		private static async Task AddDeviceAsync()
+        private static async Task AddDeviceAsync()
         {
             string deviceId = "myFirstDevice";
             Device device;
@@ -80,11 +80,11 @@ ms.author: dobett
             Console.WriteLine("Generated device key: {0}", device.Authentication.SymmetricKey.PrimaryKey);
         }
 
-	此方法将创建 ID 为 **myFirstDevice** 的新设备标识。（如果该设备 ID 已经存在于注册表中，代码就只检索现有的设备信息。） 然后，应用程序将显示该标识的主密钥。你将在此模拟设备中使用此密钥连接到 IoT 中心。
+    此方法将创建 ID 为 **myFirstDevice** 的新设备标识。（如果该设备 ID 已经存在于注册表中，代码就只检索现有的设备信息。） 然后，应用程序将显示该标识的主密钥。你将在此模拟设备中使用此密钥连接到 IoT 中心。
 
 7. 最后，在 **Main** 方法中添加以下行：
 
-		registryManager = RegistryManager.CreateFromConnectionString(connectionString);
+        registryManager = RegistryManager.CreateFromConnectionString(connectionString);
         AddDeviceAsync().Wait();
         Console.ReadLine();
 
@@ -174,18 +174,18 @@ ms.author: dobett
 
 4. 在 **Program.cs** 文件顶部添加以下 `using` 语句：
 
-		using Microsoft.Azure.Devices.Client;
+        using Microsoft.Azure.Devices.Client;
         using Newtonsoft.Json;
 
 5. 将以下字段添加到 **Program** 类。将占位符值替换为在“创建 IoT 中心”部分中检索到的 IoT 中心主机名，以及在“创建设备标识”部分中检索到的设备密钥。
 
-		static DeviceClient deviceClient;
+        static DeviceClient deviceClient;
         static string iotHubUri = "{iot hub hostname}";
         static string deviceKey = "{device key}";
 
 6. 将以下方法添加到 **Program** 类：
 
-		private static async void SendDeviceToCloudMessagesAsync()
+        private static async void SendDeviceToCloudMessagesAsync()
         {
             double avgWindSpeed = 10; // m/s
             Random rand = new Random();
@@ -209,7 +209,7 @@ ms.author: dobett
             }
         }
 
-	此方法每隔一秒发送一条新的设备到云消息。该消息包含一个具有设备 ID 的 JSON 序列化对象和一个随机生成的编号，用于模拟风速传感器。
+    此方法每隔一秒发送一条新的设备到云消息。该消息包含一个具有设备 ID 的 JSON 序列化对象和一个随机生成的编号，用于模拟风速传感器。
 
 7. 最后，在 **Main** 方法中添加以下行：
 
@@ -231,11 +231,11 @@ ms.author: dobett
 
 1.	在 Visual Studio 的“解决方案资源管理器”中右键单击你的解决方案，然后单击“设置启动项目”。选择“多个启动项目”，然后针对“ReadDeviceToCloudMessages”和“SimulatedDevice”项目选择“启动”作为“操作”。
 
-   	![启动项目属性][41]
+       ![启动项目属性][41]
 
 2.	按 **F5** 启动这两个应用，使其运行。来自 **SimulatedDevice** 应用的控制台输出会显示模拟设备发送给 IoT 中心的消息。来自 **ReadDeviceToCloudMessages** 应用的控制台输出则会显示 IoT 中心接收的消息。
 
-   	![来自应用的控制台输出][42]
+       ![来自应用的控制台输出][42]
 
 3. [Azure 门户预览][lnk-portal]中的“使用情况”磁贴显示发送到中心的消息数：
 

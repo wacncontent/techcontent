@@ -107,7 +107,7 @@ wacn.date: 01/04/2017
 
 12. 将 **RootManageSharedAccessKey** 策略的主密钥复制到剪贴板，或者将其粘贴到记事本。你将在本教程的后面部分使用此值。
 
-	![][36]
+    ![][36]
 
 ## 创建 Web 角色
 
@@ -137,7 +137,7 @@ wacn.date: 01/04/2017
 
 6. 仍然在“新建 ASP.NET 项目”对话框中，单击“更改身份验证”按钮。在“更改身份验证”对话框中，单击“无身份验证”，然后单击“确定”。在本教程中，你将部署无需用户登录名的应用。
 
-	![][16]
+    ![][16]
 
 7. 返回到“新建 ASP.NET 项目”对话框，单击“确定”以创建项目。
 
@@ -147,7 +147,7 @@ wacn.date: 01/04/2017
 
     ![][13]
 
-	请注意，现已引用所需的客户端程序集并已添加部分新代码文件。
+    请注意，现已引用所需的客户端程序集并已添加部分新代码文件。
 
 9.  在“解决方案资源管理器”中，右键单击“模型”，然后依次单击“添加”和“类”。在“名称”框中，键入名称 **OnlineOrder.cs**。然后单击“添加”。
 
@@ -204,9 +204,9 @@ wacn.date: 01/04/2017
                 // Controller method for handling submissions from the submission
                 // form.
                 [HttpPost]
-				// Attribute to help prevent cross-site scripting attacks and
-				// cross-site request forgery.  
-    			[ValidateAntiForgeryToken]
+                // Attribute to help prevent cross-site scripting attacks and
+                // cross-site request forgery.  
+                [ValidateAntiForgeryToken]
                 public ActionResult Submit(OnlineOrder order)
                 {
                     if (ModelState.IsValid)
@@ -241,11 +241,11 @@ wacn.date: 01/04/2017
 
 10. 删除“Home”、“About”和“Contact”链接。删除突出显示的代码：
 
-	![][28]
+    ![][28]
 
 11. 最后，修改提交页以包含有关队列的一些信息。在“解决方案资源管理器”中，双击“Views\\Home\\Submit.cshtml”文件以在 Visual Studio 编辑器中将其打开。在 `<h2>Submit</h2>` 后面添加以下行。`ViewBag.MessageCount` 当前为空。稍后你将填充它。
 
-	<p>Current number of orders in queue waiting to be processed: @ViewBag.MessageCount</p>
+    <p>Current number of orders in queue waiting to be processed: @ViewBag.MessageCount</p>
 
 12. 现在，你已实现你的 UI。你可以按 **F5** 运行应用程序并确认其按预期方式运行。
 
@@ -375,11 +375,11 @@ wacn.date: 01/04/2017
 
 3.  单击“添加”，然后单击“新建辅助角色项目”。此时将显示“添加新角色项目”对话框。
 
-	![][26]
+    ![][26]
 
 4.  在“添加新角色项目”对话框中，单击“服务总线队列的辅助角色”。
 
-	![][23]
+    ![][23]
 
 5.  在“名称”框中，将项目命名为 **OrderProcessingRole**。然后单击“添加”。
 
@@ -389,7 +389,7 @@ wacn.date: 01/04/2017
 
 8.  在“属性”对话框的“设置”选项卡中，在“Microsoft.ServiceBus.ConnectionString”的“值”框内单击，然后粘贴你在步骤 6 中复制的终结点值。
 
-	![][25]
+    ![][25]
 
 9.  当你从队列中处理订单时，创建一个 **OnlineOrder** 类来表示这些订单。你可以重用已创建的类。在“解决方案资源管理器”中，右键单击“OrderProcessingRole”类（右键单击类图标，而不是角色）。单击“添加”，然后单击“现有项”。
 
@@ -397,20 +397,20 @@ wacn.date: 01/04/2017
 
 11. 在 **WorkerRole.cs** 中，将 **QueueName** 变量的值 `"ProcessingQueue"` 更改为 `"OrdersQueue"`，如以下代码所示。
 
-	// The name of your queue.
-	const string QueueName = "OrdersQueue";
+    // The name of your queue.
+    const string QueueName = "OrdersQueue";
 
 12. 在 WorkerRole.cs 文件顶部添加以下 using 语句。
 
-	using FrontendWebRole.Models;
+    using FrontendWebRole.Models;
 
 13. 在 `Run()` 函数中，在 `OnMessage()` 调用的内部，将 `try` 子句的内容替换为以下代码。
 
-	Trace.WriteLine("Processing", receivedMessage.SequenceNumber.ToString());
-	// View the message as an OnlineOrder.
-	OnlineOrder order = receivedMessage.GetBody<OnlineOrder>();
-	Trace.WriteLine(order.Customer + ": " + order.Product, "ProcessingMessage");
-	receivedMessage.Complete();
+    Trace.WriteLine("Processing", receivedMessage.SequenceNumber.ToString());
+    // View the message as an OnlineOrder.
+    OnlineOrder order = receivedMessage.GetBody<OnlineOrder>();
+    Trace.WriteLine(order.Customer + ": " + order.Product, "ProcessingMessage");
+    receivedMessage.Complete();
 
 14. 你已完成此应用程序。你可以测试整个应用程序，方法是右键单击“解决方案资源管理器”中的 MultiTierApp 项目，选择“设置为启动项目”，然后按 F5。请注意，消息计数不会递增，因为辅助角色会处理队列中的项并将其标记为完成。你可以通过查看 Azure 计算模拟器 UI 来查看辅助角色的跟踪输出。可通过右击任务栏的通知区域中的模拟器图标并选择“显示计算模拟器 UI”来执行此操作。
 

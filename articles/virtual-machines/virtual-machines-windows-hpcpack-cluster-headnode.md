@@ -78,8 +78,8 @@ ms.author: danlep
 
     b.对于默认头节点配置，以管理员身份启动 Windows PowerShell 并键入以下命令：
 
-	    & $env:CCP_HOME\bin\HPCHNPrepare.ps1 –DBServerInstance ".\ComputeCluster"
-	    
+        & $env:CCP_HOME\bin\HPCHNPrepare.ps1 –DBServerInstance ".\ComputeCluster"
+        
     HPC Pack 服务启动可能需要几分钟时间。
 
     对于其他头节点配置选项，请键入 `get-help HPCHNPrepare.ps1`。

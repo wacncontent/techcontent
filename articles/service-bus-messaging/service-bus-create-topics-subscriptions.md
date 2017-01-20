@@ -53,21 +53,21 @@ Azure 服务总线支持一组基于云的、面向消息的中间件技术，�
 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类提供了创建、枚举和删除消息传送实体的方法。此处显示的代码介绍了创建 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 实例并用它创建 **DataCollectionTopic** 主题的方法。
 
 ```
-		Uri uri = ServiceBusEnvironment.CreateServiceUri("sb", "test-blog", string.Empty);
-		string name = "RootManageSharedAccessKey";
-		string key = "abcdefghijklmopqrstuvwxyz";
+        Uri uri = ServiceBusEnvironment.CreateServiceUri("sb", "test-blog", string.Empty);
+        string name = "RootManageSharedAccessKey";
+        string key = "abcdefghijklmopqrstuvwxyz";
      
-		TokenProvider tokenProvider = TokenProvider.CreateSharedAccessSignatureTokenProvider(name, key);
-		NamespaceManager namespaceManager = new NamespaceManager(uri, tokenProvider);
+        TokenProvider tokenProvider = TokenProvider.CreateSharedAccessSignatureTokenProvider(name, key);
+        NamespaceManager namespaceManager = new NamespaceManager(uri, tokenProvider);
  
-		namespaceManager.CreateTopic("DataCollectionTopic");
+        namespaceManager.CreateTopic("DataCollectionTopic");
 ```
 
 请注意，存在 [CreateTopic](https://msdn.microsoft.com/zh-cn/library/azure/hh293080.aspx) 方法的重载，你可通过该方法设置主题的属性。例如，可为发送给主题的消息设置默认生存期 (TTL) 值。接下来，添加“库存”和“仪表板”订阅。
 
 ```
-		namespaceManager.CreateSubscription("DataCollectionTopic", "Inventory");
-		namespaceManager.CreateSubscription("DataCollectionTopic", "Dashboard");
+        namespaceManager.CreateSubscription("DataCollectionTopic", "Inventory");
+        namespaceManager.CreateSubscription("DataCollectionTopic", "Dashboard");
 ```
 
 ### 将消息发送到主题
@@ -75,23 +75,23 @@ Azure 服务总线支持一组基于云的、面向消息的中间件技术，�
 为了对服务总线实体进行运行时操作（例如发送和接收消息），应用程序必须首先创建 [MessagingFactory](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactory.aspx) 对象。类似于 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类，[MessagingFactory](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactory.aspx) 实例也从服务命名空间和令牌提供程序的基址创建。
 
 ```
-		MessagingFactory factory = MessagingFactory.Create(uri, tokenProvider);
+        MessagingFactory factory = MessagingFactory.Create(uri, tokenProvider);
 ```
 
 在服务总线主题中发送和接收的消息是 [BrokeredMessage](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.aspx) 类的实例。此类包含一组标准属性（如 [Label](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.label.aspx) 和 [TimeToLive](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.timetolive.aspx)）、一个用来保存应用程序属性的词典以及大量随机应用程序数据。应用程序可以通过传入任何可序列化对象来设置正文（下面的示例传入 **SalesData** 对象，表示来自 POS 终端的销售数据），它将使用 [DataContractSerializer](https://msdn.microsoft.com/zh-cn/library/azure/system.runtime.serialization.datacontractserializer.aspx) 来序列化该对象。或者，也可以提供 [Stream](https://msdn.microsoft.com/zh-cn/library/azure/system.io.stream.aspx) 对象。
 
 ```
-		BrokeredMessage bm = new BrokeredMessage(salesData);
-		bm.Label = "SalesReport";
-		bm.Properties["StoreName"] = "Redmond";
-		bm.Properties["MachineID"] = "POS_1";
+        BrokeredMessage bm = new BrokeredMessage(salesData);
+        bm.Label = "SalesReport";
+        bm.Properties["StoreName"] = "Redmond";
+        bm.Properties["MachineID"] = "POS_1";
 ```
 
 将消息发送到主题的最简单方法是使用 [CreateMessageSender](https://msdn.microsoft.com/zh-cn/library/azure/hh322659.aspx) 从 [MessagingFactory](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactory.aspx) 实例直接创建 [MessageSender](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagesender.aspx) 对象。
 
 ```
-		MessageSender sender = factory.CreateMessageSender("DataCollectionTopic");
-		sender.Send(bm);
+        MessageSender sender = factory.CreateMessageSender("DataCollectionTopic");
+        sender.Send(bm);
 ```
 
 ### 从订阅接收消息
@@ -101,17 +101,17 @@ Azure 服务总线支持一组基于云的、面向消息的中间件技术，�
 请注意，为订阅创建 [MessageReceiver](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagereceiver.aspx) 时，*entityPath* 参数的形式为 `topicPath/subscriptions/subscriptionName`。因此，若要为 **DataCollectionTopic** 主题的“库存”订阅创建 [MessageReceiver](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagereceiver.aspx)，必须将 *entityPath* 设置为 `DataCollectionTopic/subscriptions/Inventory`。代码将如下所示：
 
 ```
-		MessageReceiver receiver = factory.CreateMessageReceiver("DataCollectionTopic/subscriptions/Inventory");
-		BrokeredMessage receivedMessage = receiver.Receive();
-		try
-		{
-		    ProcessMessage(receivedMessage);
-		    receivedMessage.Complete();
-		}
-		catch (Exception e)
-		{
-		    receivedMessage.Abandon();
-		}
+        MessageReceiver receiver = factory.CreateMessageReceiver("DataCollectionTopic/subscriptions/Inventory");
+        BrokeredMessage receivedMessage = receiver.Receive();
+        try
+        {
+            ProcessMessage(receivedMessage);
+            receivedMessage.Complete();
+        }
+        catch (Exception e)
+        {
+            receivedMessage.Abandon();
+        }
 ```
 
 ## 订阅筛选器
@@ -125,8 +125,8 @@ Azure 服务总线支持一组基于云的、面向消息的中间件技术，�
 若要设置此路由，可以创建“仪表板”订阅，如下所示：
 
 ```
-		SqlFilter dashboardFilter = new SqlFilter("StoreName = 'Redmond'");
-		namespaceManager.CreateSubscription("DataCollectionTopic", "Dashboard", dashboardFilter);
+        SqlFilter dashboardFilter = new SqlFilter("StoreName = 'Redmond'");
+        namespaceManager.CreateSubscription("DataCollectionTopic", "Dashboard", dashboardFilter);
 ```
 
 通过此订阅筛选器，只有 **StoreName** 属性设置为 **Redmond** 的消息将复制到“仪表板”订阅的虚拟队列。而且，订阅筛选的功能还不止这些。应用程序可为每个订阅设定多个筛选器，还能在将消息传递给订阅的虚拟队列时修改其属性。

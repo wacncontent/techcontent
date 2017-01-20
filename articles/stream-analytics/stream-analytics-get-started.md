@@ -49,7 +49,7 @@ ms.author: jeffstok
 3.	若要授予对事件中心的访问权限，需创建共享访问策略。单击事件中心的**“配置”**选项卡。
 4.	在**“共享访问策略”**下，使用**管理**权限创建一个新策略。
 
-	![共享访问策略：你可以在其中使用管理权限创建策略。](./media/stream-analytics-get-started/stream-ananlytics-shared-access-policies.png)
+    ![共享访问策略：你可以在其中使用管理权限创建策略。](./media/stream-analytics-get-started/stream-ananlytics-shared-access-policies.png)
 
 5.	单击页面底部的“保存”。
 6.	导航到**“仪表板”**，单击页面底部的**“连接信息”**，然后复制并保存连接信息。
@@ -93,15 +93,15 @@ ms.author: jeffstok
 1.	在 Azure 经典管理门户中，单击**“新建 > 数据服务 > 流分析 > 快速创建”**。
 2.	指定以下值，然后单击**“创建流分析作业”**：
 
-	* **作业名称**：输入作业名称。
+    * **作业名称**：输入作业名称。
 
-	* **区域**：选择要在其中运行作业的区域。考虑将作业和事件中心放在同一区域，以确保获得更好的性能，并确保在不同区域之间传输数据时不需付费。
+    * **区域**：选择要在其中运行作业的区域。考虑将作业和事件中心放在同一区域，以确保获得更好的性能，并确保在不同区域之间传输数据时不需付费。
 
-	* **存储帐户**：选择要使用的 Azure 存储帐户，以便为所有在此区域运行的流分析作业存储监视数据。你可以选择现有存储帐户，也可以创建新的存储帐户。
+    * **存储帐户**：选择要使用的 Azure 存储帐户，以便为所有在此区域运行的流分析作业存储监视数据。你可以选择现有存储帐户，也可以创建新的存储帐户。
 
 3.	单击左窗格中的**“流分析”**，列出流分析作业。
 
-	![流分析服务图标](./media/stream-analytics-get-started/stream-analytics-service-icon.png)
+    ![流分析服务图标](./media/stream-analytics-get-started/stream-analytics-service-icon.png)
 
 4.	新作业在显示时的状态为**“已创建”**。请注意，页面底部的**“启动”**按钮已禁用。你必须先配置作业输入、输出和查询，然后才能启动作业。
 
@@ -111,21 +111,21 @@ ms.author: jeffstok
 3.	选择**“事件中心”**，然后单击右侧的按钮。
 4.	在第三页中键入或选择以下值：
 
-	* **输入别名**：输入此作业输入的友好名称，如 *CallStream*。请注意，你需要在后面的查询中使用此名称。
-	* **事件中心**：如果创建的事件中心与流分析作业属于同一订阅，请选择事件中心所在的命名空间。
+    * **输入别名**：输入此作业输入的友好名称，如 *CallStream*。请注意，你需要在后面的查询中使用此名称。
+    * **事件中心**：如果创建的事件中心与流分析作业属于同一订阅，请选择事件中心所在的命名空间。
 
-	如果你的事件中心属于其他订阅，请选择**“使用其他订阅的事件中心”**，然后手动输入以下项目的相关信息：**Service Bus 命名空间**、**事件中心名称**、**事件中心策略名称**、**事件中心策略密钥**以及**事件中心分区计数**。
+    如果你的事件中心属于其他订阅，请选择**“使用其他订阅的事件中心”**，然后手动输入以下项目的相关信息：**Service Bus 命名空间**、**事件中心名称**、**事件中心策略名称**、**事件中心策略密钥**以及**事件中心分区计数**。
 
-	* **事件中心名称**：选择事件中心的名称。
+    * **事件中心名称**：选择事件中心的名称。
 
-	* **事件中心策略名称**：选择此前在本教程中创建的事件中心策略。
+    * **事件中心策略名称**：选择此前在本教程中创建的事件中心策略。
 
-	* **事件中心使用者组**：键入此前在本教程中创建的使用者组。
+    * **事件中心使用者组**：键入此前在本教程中创建的使用者组。
 5.	单击右侧按钮。
 6.	指定以下值：
 
-	* **事件序列化程序格式**：JSON
-	* **编码**：UTF8
+    * **事件序列化程序格式**：JSON
+    * **编码**：UTF8
 7.	单击相应勾选按钮以添加此源，并确保流分析可以成功连接到事件中心。
 
 ### 指定作业查询
@@ -139,7 +139,7 @@ ms.author: jeffstok
 2.	在出现的对话框中，指定开始收集数据的**“开始时间”**，以及使用额外数据的**“持续时间”**。
 3.	单击相应的勾选按钮，开始对输入中的数据取样。生成数据文件可能需要一到两分钟。完成此过程以后，单击**“详细信息”**，然后即可下载和保存所生成的 .JSON 文件。
 
-	![在 JSON 文件中下载并保存已处理的数据](./media/stream-analytics-get-started/stream-analytics-download-save-json-file.png)
+    ![在 JSON 文件中下载并保存已处理的数据](./media/stream-analytics-get-started/stream-analytics-download-save-json-file.png)
 
 #### 传递查询
 
@@ -148,15 +148,15 @@ ms.author: jeffstok
 1.	单击流分析作业页顶部的**“查询”**。
 2.	将以下内容添加到代码编辑器：
 
-		SELECT * FROM CallStream
+        SELECT * FROM CallStream
 
-	> 请确保输入源的名称与你此前指定的输入的名称相匹配。
+    > 请确保输入源的名称与你此前指定的输入的名称相匹配。
 
 3.	单击查询编辑器下的**“测试”**。
 4.	提供测试文件，可以使用在前面的步骤中创建的文件，也可以使用 [telco.json](https://github.com/Azure/azure-stream-analytics/blob/master/Sample%20Data/telco.json)。
 5.	单击勾选按钮，然后就会看到结果显示在查询定义下方。
 
-	![查询定义结果](./media/stream-analytics-get-started/stream-analytics-sim-fraud-output.png)
+    ![查询定义结果](./media/stream-analytics-get-started/stream-analytics-sim-fraud-output.png)
 
 ### 列投影
 
@@ -164,12 +164,12 @@ ms.author: jeffstok
 
 1.	在代码编辑器中将查询更改为：
 
-		SELECT CallRecTime, SwitchNum, CallingIMSI, CallingNum, CalledNum
-		FROM CallStream
+        SELECT CallRecTime, SwitchNum, CallingIMSI, CallingNum, CalledNum
+        FROM CallStream
 
 2.	单击查询编辑器下的**“重新运行”**以查看查询结果。
 
-	![查询编辑器中的输出。](./media/stream-analytics-get-started/stream-analytics-query-editor-output.png)
+    ![查询编辑器中的输出。](./media/stream-analytics-get-started/stream-analytics-query-editor-output.png)
 
 ### 按区域计算传入呼叫数：带聚合功能的翻转窗口
 
@@ -177,17 +177,17 @@ ms.author: jeffstok
 
 1.	在代码编辑器中将查询更改为：
 
-		SELECT System.Timestamp as WindowEnd, SwitchNum, COUNT(*) as CallCount
-		FROM CallStream TIMESTAMP BY CallRecTime
-		GROUP BY TUMBLINGWINDOW(s, 5), SwitchNum
+        SELECT System.Timestamp as WindowEnd, SwitchNum, COUNT(*) as CallCount
+        FROM CallStream TIMESTAMP BY CallRecTime
+        GROUP BY TUMBLINGWINDOW(s, 5), SwitchNum
 
-	此查询使用 **Timestamp By** 关键字在要用于临时计算的负载中指定时间戳字段。如果未指定此字段，将根据每个事件到达事件中心的时间执行开窗操作。请参阅[流分析查询语言参考中的“到达时间与应用程序时间”](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)。
+    此查询使用 **Timestamp By** 关键字在要用于临时计算的负载中指定时间戳字段。如果未指定此字段，将根据每个事件到达事件中心的时间执行开窗操作。请参阅[流分析查询语言参考中的“到达时间与应用程序时间”](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)。
 
-	请注意，你可以使用 **System.Timestamp** 属性访问每个窗口结束时的时间戳。
+    请注意，你可以使用 **System.Timestamp** 属性访问每个窗口结束时的时间戳。
 
 2.	单击查询编辑器下的**“重新运行”**以查看查询结果。
 
-	![Timestand By 的查询结果](./media/stream-analytics-get-started/stream-ananlytics-query-editor-rerun.png)
+    ![Timestand By 的查询结果](./media/stream-analytics-get-started/stream-ananlytics-query-editor-rerun.png)
 
 ### 使用自联接进行 SIM 欺诈行为检测
 
@@ -195,17 +195,17 @@ ms.author: jeffstok
 
 1.	在代码编辑器中将查询更改为：
 
-		SELECT System.Timestamp as Time, CS1.CallingIMSI, CS1.CallingNum as CallingNum1,
-		CS2.CallingNum as CallingNum2, CS1.SwitchNum as Switch1, CS2.SwitchNum as Switch2
-		FROM CallStream CS1 TIMESTAMP BY CallRecTime
-		JOIN CallStream CS2 TIMESTAMP BY CallRecTime
-		ON CS1.CallingIMSI = CS2.CallingIMSI
-		AND DATEDIFF(ss, CS1, CS2) BETWEEN 1 AND 5
-		WHERE CS1.SwitchNum != CS2.SwitchNum
+        SELECT System.Timestamp as Time, CS1.CallingIMSI, CS1.CallingNum as CallingNum1,
+        CS2.CallingNum as CallingNum2, CS1.SwitchNum as Switch1, CS2.SwitchNum as Switch2
+        FROM CallStream CS1 TIMESTAMP BY CallRecTime
+        JOIN CallStream CS2 TIMESTAMP BY CallRecTime
+        ON CS1.CallingIMSI = CS2.CallingIMSI
+        AND DATEDIFF(ss, CS1, CS2) BETWEEN 1 AND 5
+        WHERE CS1.SwitchNum != CS2.SwitchNum
 
 2.	单击查询编辑器下的**“重新运行”**以查看查询结果。
 
-	![联接的查询结果](./media/stream-analytics-get-started/stream-ananlytics-query-editor-join.png)
+    ![联接的查询结果](./media/stream-analytics-get-started/stream-ananlytics-query-editor-join.png)
 
 ### 创建输出接收器
 
@@ -223,17 +223,17 @@ ms.author: jeffstok
 2.	选择**“Blob 存储”**，然后单击右侧的按钮。
 3.	在第三页中键入或选择以下值：
 
-	* **输出别名**：输入此作业输出的友好名称。
-	* **订阅**：如果创建的 Blob 存储与流分析作业属于同一订阅，请选择“使用当前订阅中的存储帐户”。如果存储属于其他订阅，请选择“使用其他订阅中的存储帐户”，然后针对“存储帐户”、“存储帐户密钥”、“容器”手动输入相关信息。
-	* **存储帐户**：选择存储帐户的名称。
-	* **容器**：选择容器的名称。
-	* **文件名前缀**：键入写入 blob 输出时要使用的文件前缀。
+    * **输出别名**：输入此作业输出的友好名称。
+    * **订阅**：如果创建的 Blob 存储与流分析作业属于同一订阅，请选择“使用当前订阅中的存储帐户”。如果存储属于其他订阅，请选择“使用其他订阅中的存储帐户”，然后针对“存储帐户”、“存储帐户密钥”、“容器”手动输入相关信息。
+    * **存储帐户**：选择存储帐户的名称。
+    * **容器**：选择容器的名称。
+    * **文件名前缀**：键入写入 blob 输出时要使用的文件前缀。
 
 4.	单击右侧按钮。
 5.	指定以下值：
 
-	* **事件序列化程序格式**：JSON
-	* **编码**：UTF8
+    * **事件序列化程序格式**：JSON
+    * **编码**：UTF8
 
 6.	单击相应勾选按钮以添加此源，并确保流分析可以成功连接到存储帐户。
 

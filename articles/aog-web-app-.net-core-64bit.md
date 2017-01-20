@@ -26,15 +26,15 @@ wacn.date: 11/10/2016
 1.	从微软的 .Net Core 站点（[https://www.microsoft.com/net/core#windows](https://www.microsoft.com/net/core#windows) ）下载 .Net Core SDK, 并安装到一个64位的 Windows 本地机器中。
 2.	将安装后的 dotnet 文件夹（默认路径为C:\Program Files\dotnet ）通过 FTP 上传至 Azure App Service 目录。例如`/site/wwwroot/dotnet`
 
-	![](./media/aog-web-app-.net-core-64bit/ftp.png)
+    ![](./media/aog-web-app-.net-core-64bit/ftp.png)
  
 3.	打开站点web.config文件，在aspNetCore节中，将processPath改为新上传的dotnet.exe路径并保存。
 
-		  <system.webServer>
-		    <handlers>
-		      <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
-		    </handlers>
-		    <aspNetCore processPath="d:\home\site\wwwroot\dotnet\dotnet.exe" arguments=".\WebApplication1.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" forwardWindowsAuthToken="false" />
-		  </system.webServer>
+          <system.webServer>
+            <handlers>
+              <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModule" resourceType="Unspecified" />
+            </handlers>
+            <aspNetCore processPath="d:\home\site\wwwroot\dotnet\dotnet.exe" arguments=".\WebApplication1.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" forwardWindowsAuthToken="false" />
+          </system.webServer>
 4.	重启站点。 
 

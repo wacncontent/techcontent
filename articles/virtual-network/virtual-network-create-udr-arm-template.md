@@ -37,24 +37,24 @@ ms.author: jdial
 
 以下部分说明如何针对方案在 **azuredeploy-vnet-nsg-udr.json** 文件中定义前端 UDR：
 
-	"apiVersion": "2015-06-15",
-	"type": "Microsoft.Network/routeTables",
-	"name": "[parameters('frontEndRouteTableName')]",
-	"location": "[resourceGroup().location]",
-	"tags": {
-	  "displayName": "UDR - FrontEnd"	
-	},
-	"properties": {
-	  "routes": [
-	    {
-	      "name": "RouteToBackEnd",
-	      "properties": {
-	        "addressPrefix": "[parameters('backEndSubnetPrefix')]",
-	        "nextHopType": "VirtualAppliance",
-	        "nextHopIpAddress": "[parameters('vmaIpAddress')]"
-	      }
-	    }
-	  ]
+    "apiVersion": "2015-06-15",
+    "type": "Microsoft.Network/routeTables",
+    "name": "[parameters('frontEndRouteTableName')]",
+    "location": "[resourceGroup().location]",
+    "tags": {
+      "displayName": "UDR - FrontEnd"	
+    },
+    "properties": {
+      "routes": [
+        {
+          "name": "RouteToBackEnd",
+          "properties": {
+            "addressPrefix": "[parameters('backEndSubnetPrefix')]",
+            "nextHopType": "VirtualAppliance",
+            "nextHopIpAddress": "[parameters('vmaIpAddress')]"
+          }
+        }
+      ]
 
 若要将 UDR 与前端子网关联，需要更改模板中的子网定义，并使用 UDR 的引用 ID。
 
@@ -176,7 +176,7 @@ ms.author: jdial
 
     以上命令的预期输出如下：
 
-		info:    New mode is arm
+        info:    New mode is arm
 
 3. 从浏览器导航到 **https://raw.githubusercontent.com/telmosampaio/azure-templates/master/IaaS-NSG-UDR/azuredeploy.parameters.json** ，复制 json 文件的内容并粘贴到计算机中的新文件。对于此方案，将下面的值复制到名为 **c:\\udr\\azuredeploy.parameters.json** 的文件。
 
@@ -223,171 +223,171 @@ ms.author: jdial
 
     预期结果：
 
-	        info:    Executing command group show
-	        info:    Listing resource groups
-	        info:    Listing resources for the group
-	        data:    Id:                  /subscriptions/[Subscription Id]/resourceGroups/TestRG
-	        data:    Name:                TestRG
-	        data:    Location:            chinanorth
-	        data:    Provisioning State:  Succeeded
-	        data:    Tags: null
-	        data:    Resources:
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/availabilitySets/ASFW
-	        data:      Name    : ASFW
-	        data:      Type    : availabilitySets
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=AvailabilitySet - DMZ
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/availabilitySets/ASSQL
-	        data:      Name    : ASSQL
-	        data:      Type    : availabilitySets
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=AvailabilitySet - SQL
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/availabilitySets/ASWEB
-	        data:      Name    : ASWEB
-	        data:      Type    : availabilitySets
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=AvailabilitySet - Web
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/FW1
-	        data:      Name    : FW1
-	        data:      Type    : virtualMachines
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=VMs - DMZ
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/SQL1
-	        data:      Name    : SQL1
-	        data:      Type    : virtualMachines
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=VMs - SQL
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/SQL2
-	        data:      Name    : SQL2
-	        data:      Type    : virtualMachines
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=VMs - SQL
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/WEB1
-	        data:      Name    : WEB1
-	        data:      Type    : virtualMachines
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=VMs - Web
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/WEB2
-	        data:      Name    : WEB2
-	        data:      Type    : virtualMachines
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=VMs - Web
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICFW1
-		        data:      Name    : NICFW1
+            info:    Executing command group show
+            info:    Listing resource groups
+            info:    Listing resources for the group
+            data:    Id:                  /subscriptions/[Subscription Id]/resourceGroups/TestRG
+            data:    Name:                TestRG
+            data:    Location:            chinanorth
+            data:    Provisioning State:  Succeeded
+            data:    Tags: null
+            data:    Resources:
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/availabilitySets/ASFW
+            data:      Name    : ASFW
+            data:      Type    : availabilitySets
+            data:      Location: chinanorth
+            data:      Tags    : displayName=AvailabilitySet - DMZ
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/availabilitySets/ASSQL
+            data:      Name    : ASSQL
+            data:      Type    : availabilitySets
+            data:      Location: chinanorth
+            data:      Tags    : displayName=AvailabilitySet - SQL
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/availabilitySets/ASWEB
+            data:      Name    : ASWEB
+            data:      Type    : availabilitySets
+            data:      Location: chinanorth
+            data:      Tags    : displayName=AvailabilitySet - Web
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/FW1
+            data:      Name    : FW1
+            data:      Type    : virtualMachines
+            data:      Location: chinanorth
+            data:      Tags    : displayName=VMs - DMZ
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/SQL1
+            data:      Name    : SQL1
+            data:      Type    : virtualMachines
+            data:      Location: chinanorth
+            data:      Tags    : displayName=VMs - SQL
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/SQL2
+            data:      Name    : SQL2
+            data:      Type    : virtualMachines
+            data:      Location: chinanorth
+            data:      Tags    : displayName=VMs - SQL
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/WEB1
+            data:      Name    : WEB1
+            data:      Type    : virtualMachines
+            data:      Location: chinanorth
+            data:      Tags    : displayName=VMs - Web
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/WEB2
+            data:      Name    : WEB2
+            data:      Type    : virtualMachines
+            data:      Location: chinanorth
+            data:      Tags    : displayName=VMs - Web
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICFW1
+                data:      Name    : NICFW1
         data:      Type    : networkInterfaces
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=NetworkInterfaces - DMZ
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICSQL1
-	        data:      Name    : NICSQL1
-	        data:      Type    : networkInterfaces
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=NetworkInterfaces - SQL
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICSQL2
-	        data:      Name    : NICSQL2
-	        data:      Type    : networkInterfaces
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=NetworkInterfaces - SQL
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICWEB1
-	        data:      Name    : NICWEB1
-	        data:      Type    : networkInterfaces
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=NetworkInterfaces - Web
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICWEB2
-	        data:      Name    : NICWEB2
-	        data:      Type    : networkInterfaces
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=NetworkInterfaces - Web
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkSecurityGroups/NSG-BackEnd
-	        data:      Name    : NSG-BackEnd
-	        data:      Type    : networkSecurityGroups
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=NSG - Front End
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkSecurityGroups/NSG-FrontEnd
-	        data:      Name    : NSG-FrontEnd
-	        data:      Type    : networkSecurityGroups
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=NSG - Remote Access
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/PIPFW1
-	        data:      Name    : PIPFW1
-	        data:      Type    : publicIPAddresses
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=PublicIPAddresses - DMZ
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/PIPSQL1
-	        data:      Name    : PIPSQL1
-		        data:      Type    : publicIPAddresses
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=PublicIPAddresses - SQL
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/PIPSQL2
-	        data:      Name    : PIPSQL2
-	        data:      Type    : publicIPAddresses
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=PublicIPAddresses - SQL
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/PIPWEB1
-	        data:      Name    : PIPWEB1
-	        data:      Type    : publicIPAddresses
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=PublicIPAddresses - Web
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/PIPWEB2
-	        data:      Name    : PIPWEB2
-	        data:      Type    : publicIPAddresses
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=PublicIPAddresses - Web
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/routeTables/UDR-BackEnd
-	        data:      Name    : UDR-BackEnd
-	        data:      Type    : routeTables
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=Route Table - Back End
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/routeTables/UDR-FrontEnd
-	        data:      Name    : UDR-FrontEnd
-	        data:      Type    : routeTables
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=UDR - FrontEnd
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet
-	        data:      Name    : TestVNet
-	        data:      Type    : virtualNetworks
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=VNet
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/testvnetstorageprm
-	        data:      Name    : testvnetstorageprm
-	        data:      Type    : storageAccounts
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=Storage Account - Premium
-	        data:    
-	        data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/testvnetstoragestd
-	        data:      Name    : testvnetstoragestd
-	        data:      Type    : storageAccounts
-	        data:      Location: chinanorth
-	        data:      Tags    : displayName=Storage Account - Simple
-	        data:    
-	        data:    Permissions:
-	        data:      Actions: *
-	        data:      NotActions: 
-	        data:
-	        info:    group show command OK
+            data:      Location: chinanorth
+            data:      Tags    : displayName=NetworkInterfaces - DMZ
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICSQL1
+            data:      Name    : NICSQL1
+            data:      Type    : networkInterfaces
+            data:      Location: chinanorth
+            data:      Tags    : displayName=NetworkInterfaces - SQL
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICSQL2
+            data:      Name    : NICSQL2
+            data:      Type    : networkInterfaces
+            data:      Location: chinanorth
+            data:      Tags    : displayName=NetworkInterfaces - SQL
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICWEB1
+            data:      Name    : NICWEB1
+            data:      Type    : networkInterfaces
+            data:      Location: chinanorth
+            data:      Tags    : displayName=NetworkInterfaces - Web
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkInterfaces/NICWEB2
+            data:      Name    : NICWEB2
+            data:      Type    : networkInterfaces
+            data:      Location: chinanorth
+            data:      Tags    : displayName=NetworkInterfaces - Web
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkSecurityGroups/NSG-BackEnd
+            data:      Name    : NSG-BackEnd
+            data:      Type    : networkSecurityGroups
+            data:      Location: chinanorth
+            data:      Tags    : displayName=NSG - Front End
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/networkSecurityGroups/NSG-FrontEnd
+            data:      Name    : NSG-FrontEnd
+            data:      Type    : networkSecurityGroups
+            data:      Location: chinanorth
+            data:      Tags    : displayName=NSG - Remote Access
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/PIPFW1
+            data:      Name    : PIPFW1
+            data:      Type    : publicIPAddresses
+            data:      Location: chinanorth
+            data:      Tags    : displayName=PublicIPAddresses - DMZ
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/PIPSQL1
+            data:      Name    : PIPSQL1
+                data:      Type    : publicIPAddresses
+            data:      Location: chinanorth
+            data:      Tags    : displayName=PublicIPAddresses - SQL
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/PIPSQL2
+            data:      Name    : PIPSQL2
+            data:      Type    : publicIPAddresses
+            data:      Location: chinanorth
+            data:      Tags    : displayName=PublicIPAddresses - SQL
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/PIPWEB1
+            data:      Name    : PIPWEB1
+            data:      Type    : publicIPAddresses
+            data:      Location: chinanorth
+            data:      Tags    : displayName=PublicIPAddresses - Web
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/publicIPAddresses/PIPWEB2
+            data:      Name    : PIPWEB2
+            data:      Type    : publicIPAddresses
+            data:      Location: chinanorth
+            data:      Tags    : displayName=PublicIPAddresses - Web
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/routeTables/UDR-BackEnd
+            data:      Name    : UDR-BackEnd
+            data:      Type    : routeTables
+            data:      Location: chinanorth
+            data:      Tags    : displayName=Route Table - Back End
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/routeTables/UDR-FrontEnd
+            data:      Name    : UDR-FrontEnd
+            data:      Type    : routeTables
+            data:      Location: chinanorth
+            data:      Tags    : displayName=UDR - FrontEnd
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Network/virtualNetworks/TestVNet
+            data:      Name    : TestVNet
+            data:      Type    : virtualNetworks
+            data:      Location: chinanorth
+            data:      Tags    : displayName=VNet
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/testvnetstorageprm
+            data:      Name    : testvnetstorageprm
+            data:      Type    : storageAccounts
+            data:      Location: chinanorth
+            data:      Tags    : displayName=Storage Account - Premium
+            data:    
+            data:      Id      : /subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Storage/storageAccounts/testvnetstoragestd
+            data:      Name    : testvnetstoragestd
+            data:      Type    : storageAccounts
+            data:      Location: chinanorth
+            data:      Tags    : displayName=Storage Account - Simple
+            data:    
+            data:    Permissions:
+            data:      Actions: *
+            data:      NotActions: 
+            data:
+            info:    group show command OK
 
 > [!TIP]
 如果看不到所有资源，可运行 `azure group deployment show` 命令以确保部署的预配状态为“成功”。

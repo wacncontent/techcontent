@@ -35,18 +35,18 @@ wacn.date: 11/28/2016
 ## <a name="NewestVersion"></a>最新版本
 
 <table border='1'>
-	<tr><th>Hadoop 连接器版本</th>
-		<td>1.2.0</td></tr>
-	<tr><th>脚本 URI</th>
-		<td>https://portalcontent.blob.core.chinacloudapi.cn/scriptaction/documentdb-hadoop-installer-v04.ps1</td></tr>
-	<tr><th>修改日期</th>
-		<td>2016/04/26</td></tr>
-	<tr><th>支持的 HDInsight 版本</th>
-		<td>3.1, 3.2</td></tr>
-	<tr><th>更改日志</th>
-		<td>DocumentDB Java SDK 已更新到 1.6.0</br>
-			针对同时作为来源和接收器的已分区集合添加了支持</br>
-		</td></tr>
+    <tr><th>Hadoop 连接器版本</th>
+        <td>1.2.0</td></tr>
+    <tr><th>脚本 URI</th>
+        <td>https://portalcontent.blob.core.chinacloudapi.cn/scriptaction/documentdb-hadoop-installer-v04.ps1</td></tr>
+    <tr><th>修改日期</th>
+        <td>2016/04/26</td></tr>
+    <tr><th>支持的 HDInsight 版本</th>
+        <td>3.1, 3.2</td></tr>
+    <tr><th>更改日志</th>
+        <td>DocumentDB Java SDK 已更新到 1.6.0</br>
+            针对同时作为来源和接收器的已分区集合添加了支持</br>
+        </td></tr>
 </table>
 
 ## <a name="Prerequisites"></a>先决条件
@@ -71,64 +71,64 @@ wacn.date: 11/28/2016
 
 4. 在“新建 HDInsight 群集”边栏选项卡中输入**群集名称**，然后选择用于预配此资源的**订阅**。
 
-	<table border='1'>
-		<tr><td>群集名称</td><td>命名群集。<br/>
-		DNS 名称必须以字母数字字符开头和结尾，并且可以包含短划线。<br/>
-		字段必须是介于 3 到 63 个字符之间的字符串。</td></tr>
-		<tr><td>订阅名称</td>
-			<td>如果有多个 Azure 订阅，请选择托管 HDInsight 群集的订阅。</td></tr>
-	</table>
+    <table border='1'>
+        <tr><td>群集名称</td><td>命名群集。<br/>
+        DNS 名称必须以字母数字字符开头和结尾，并且可以包含短划线。<br/>
+        字段必须是介于 3 到 63 个字符之间的字符串。</td></tr>
+        <tr><td>订阅名称</td>
+            <td>如果有多个 Azure 订阅，请选择托管 HDInsight 群集的订阅。</td></tr>
+    </table>
 
 5. 单击“选择群集类型”，将以下属性设置为指定的值。
 
-	<table border='1'>
-		<tr><td>群集类型</td><td><strong>Hadoop</strong></td></tr>
-		<tr><td>群集层</td><td><strong>标准</strong></td></tr>
-		<tr><td>操作系统</td><td><strong>Windows</strong></td></tr>
-		<tr><td>版本</td><td>最新版本</td></tr>
-	</table>
+    <table border='1'>
+        <tr><td>群集类型</td><td><strong>Hadoop</strong></td></tr>
+        <tr><td>群集层</td><td><strong>标准</strong></td></tr>
+        <tr><td>操作系统</td><td><strong>Windows</strong></td></tr>
+        <tr><td>版本</td><td>最新版本</td></tr>
+    </table>
 
-	现在单击“选择”。
+    现在单击“选择”。
 
-	![提供 Hadoop HDInsight 初始群集详细信息][image-customprovision-page1]  
+    ![提供 Hadoop HDInsight 初始群集详细信息][image-customprovision-page1]  
 
 6. 单击“凭据”，设置登录凭据和远程访问凭据。选择“群集登录用户名”和“群集登录密码”。
 
-	如果想要远程登录群集，请在边栏选项卡底部选择“是”，并提供用户名和密码。
+    如果想要远程登录群集，请在边栏选项卡底部选择“是”，并提供用户名和密码。
 
 7. 单击“数据源”设置用于访问数据的主要位置。选择“选择方法”并指定现有存储帐户或创建新帐户。
 
 8. 在同一个边栏选项卡中，指定“默认容器”和“位置”。然后单击“选择”。
 
-	> [!NOTE] 选择靠近 DocumentDB 帐户区域的位置以提升性能
+    > [!NOTE] 选择靠近 DocumentDB 帐户区域的位置以提升性能
 
 8. 单击“定价”选择节点的数量和类型。可以先保留默认配置，以后再缩放辅助角色节点的数量。
 
 9. 单击“可选配置”，然后在“可选配置”边栏选项卡中选择“脚本操作”。
 
-	在“脚本操作”中输入以下用于自定义 HDInsight 群集的信息。
+    在“脚本操作”中输入以下用于自定义 HDInsight 群集的信息。
 
-	<table border='1'>
-		<tr><th>属性</th><th>值</th></tr>
-		<tr><td>名称</td>
-			<td>指定脚本操作的名称。</td></tr>
-		<tr><td>脚本 URI</td>
-			<td>指定要调用来自定义群集的脚本的 URI。</br></br>
-			请输入： </br> <strong>https://portalcontent.blob.core.chinacloudapi.cn/scriptaction/documentdb-hadoop-installer-v04.ps1</strong>。</td></tr>
-		<tr><td>头</td>
-			<td>单击相应的复选框，在头节点中运行 PowerShell 脚本。</br></br>
-			<strong>选中此复选框</strong>。</td></tr>
-		<tr><td>辅助角色</td>
-			<td>单击相应的复选框，在辅助角色节点中运行 PowerShell 脚本。</br></br>
-			<strong>选中此复选框</strong>。</td></tr>
-		<tr><td>Zookeeper</td>
-			<td>单击相应的复选框，在 Zookeeper 中运行 PowerShell 脚本。</br></br>
-			<strong>不需要</strong>。
-			</td></tr>
-		<tr><td>Parameters</td>
-			<td>根据脚本的需要，指定参数。</br></br>
-			<strong>无需参数</strong>。</td></tr>
-	</table>
+    <table border='1'>
+        <tr><th>属性</th><th>值</th></tr>
+        <tr><td>名称</td>
+            <td>指定脚本操作的名称。</td></tr>
+        <tr><td>脚本 URI</td>
+            <td>指定要调用来自定义群集的脚本的 URI。</br></br>
+            请输入： </br> <strong>https://portalcontent.blob.core.chinacloudapi.cn/scriptaction/documentdb-hadoop-installer-v04.ps1</strong>。</td></tr>
+        <tr><td>头</td>
+            <td>单击相应的复选框，在头节点中运行 PowerShell 脚本。</br></br>
+            <strong>选中此复选框</strong>。</td></tr>
+        <tr><td>辅助角色</td>
+            <td>单击相应的复选框，在辅助角色节点中运行 PowerShell 脚本。</br></br>
+            <strong>选中此复选框</strong>。</td></tr>
+        <tr><td>Zookeeper</td>
+            <td>单击相应的复选框，在 Zookeeper 中运行 PowerShell 脚本。</br></br>
+            <strong>不需要</strong>。
+            </td></tr>
+        <tr><td>Parameters</td>
+            <td>根据脚本的需要，指定参数。</br></br>
+            <strong>无需参数</strong>。</td></tr>
+    </table>
 
 10. 创建新**资源组**或使用 Azure 订阅下的现有资源组。
 
@@ -138,21 +138,21 @@ wacn.date: 11/28/2016
 
 1. 安装 Azure PowerShell 中的说明进行操作。可在[此处][powershell-install-configure]找到说明。
 
-	> [!NOTE] 或者，只需了解 Hive 查询，可以使用 HDInsight 的联机 Hive 编辑器。若要这样做，请登录到 [Azure 门户预览][azure-portal]，单击左侧窗格中的“HDInsight”查看 HDInsight 群集的列表。单击要对其运行 Hive 查询的群集，然后单击“查询控制台”。
+    > [!NOTE] 或者，只需了解 Hive 查询，可以使用 HDInsight 的联机 Hive 编辑器。若要这样做，请登录到 [Azure 门户预览][azure-portal]，单击左侧窗格中的“HDInsight”查看 HDInsight 群集的列表。单击要对其运行 Hive 查询的群集，然后单击“查询控制台”。
 
 2. 打开 Azure PowerShell 集成脚本环境：
-	- 在运行 Windows 8 或 Windows Server 2012 或更高版本的计算机上，可以使用内置搜索。在“开始”屏幕中，键入 **powershell ise** 并单击 **Enter**。
-	- 在运行早于 Windows 8 或 Windows Server 2012 的版本的计算机上，请使用“开始”菜单。在“开始”菜单中的搜索框内键入“命令提示符”，然后在结果列表中单击“命令提示符”。在命令提示符中，键入 **powershell\_ise** 并单击 **Enter**。
+    - 在运行 Windows 8 或 Windows Server 2012 或更高版本的计算机上，可以使用内置搜索。在“开始”屏幕中，键入 **powershell ise** 并单击 **Enter**。
+    - 在运行早于 Windows 8 或 Windows Server 2012 的版本的计算机上，请使用“开始”菜单。在“开始”菜单中的搜索框内键入“命令提示符”，然后在结果列表中单击“命令提示符”。在命令提示符中，键入 **powershell\_ise** 并单击 **Enter**。
 
 3. 添加你的 Azure 帐户。
-	1. 在控制台窗格中，键入 **Add-AzureAccount** 并单击 **Enter**。
-	2. 键入与你的 Azure 订阅相关联的电子邮件地址并单击“继续”。
-	3. 键入你的 Azure 订阅的密码。
-	4. 单击“登录”。
+    1. 在控制台窗格中，键入 **Add-AzureAccount** 并单击 **Enter**。
+    2. 键入与你的 Azure 订阅相关联的电子邮件地址并单击“继续”。
+    3. 键入你的 Azure 订阅的密码。
+    4. 单击“登录”。
 
 4. 以下关系图标识你的 Azure PowerShell 脚本环境的重要部分。
 
-	![Azure PowerShell 的关系图][azure-powershell-diagram]  
+    ![Azure PowerShell 的关系图][azure-powershell-diagram]  
 
 ## <a name="RunHive"></a>步骤 3：使用 DocumentDB 和 HDInsight 运行 Hive 作业
 
@@ -160,13 +160,13 @@ wacn.date: 11/28/2016
 
 1. 在你的 PowerShell 脚本窗格中设置以下变量。
 
-		# Provide Azure subscription name, the Azure Storage account and container that is used for the default HDInsight file system.
-		$subscriptionName = "<SubscriptionName>"
-		$storageAccountName = "<AzureStorageAccountName>"
-		$containerName = "<AzureStorageContainerName>"
+        # Provide Azure subscription name, the Azure Storage account and container that is used for the default HDInsight file system.
+        $subscriptionName = "<SubscriptionName>"
+        $storageAccountName = "<AzureStorageAccountName>"
+        $containerName = "<AzureStorageContainerName>"
 
-		# Provide the HDInsight cluster name where you want to run the Hive job.
-		$clusterName = "<HDInsightClusterName>"
+        # Provide the HDInsight cluster name where you want to run the Hive job.
+        $clusterName = "<HDInsightClusterName>"
 
 2. <p>让我们开始构造查询字符串。我们将编写 Hive 查询，该查询采用来自 DocumentDB 集合的所有文档的系统生成的时间戳 (_ts) 和唯一 ID (_rid)，按分钟计算所有文档，然后将结果存储回新 DocumentDB 集合。</p>
 
@@ -174,10 +174,10 @@ wacn.date: 11/28/2016
 
     > [!NOTE] **命名 DocumentDB.inputCollections 不是一个错误。** 是，我们允许添加多个集合作为输入：</br>
 
-		'*DocumentDB.inputCollections*' = '*\<DocumentDB Input Collection Name 1\>*,*\<DocumentDB Input Collection Name 2\>*' A1A</br> 不使用空格分隔集合名称，仅使用单个逗号。
+        '*DocumentDB.inputCollections*' = '*\<DocumentDB Input Collection Name 1\>*,*\<DocumentDB Input Collection Name 2\>*' A1A</br> 不使用空格分隔集合名称，仅使用单个逗号。
 
-		# Create a Hive table using data from DocumentDB. Pass DocumentDB the query to filter transferred data to _rid and _ts.
-		$queryStringPart1 = "drop table DocumentDB_timestamps; "  +
+        # Create a Hive table using data from DocumentDB. Pass DocumentDB the query to filter transferred data to _rid and _ts.
+        $queryStringPart1 = "drop table DocumentDB_timestamps; "  +
                             "create external table DocumentDB_timestamps(id string, ts BIGINT) "  +
                             "stored by 'com.microsoft.azure.documentdb.hive.DocumentDBStorageHandler' "  +
                             "tblproperties ( " +
@@ -189,10 +189,10 @@ wacn.date: 11/28/2016
 
 3.  接下来，让我们为输出集合创建 Hive 表。输出文档属性将为月、日、小时、分钟和发生次数总数。
 
-	> [!NOTE] **再次，命名 DocumentDB.outputCollections 不是一个错误。** 是，我们允许添加多个集合作为输出：</br> '*DocumentDB.outputCollections*' = '*<DocumentDB Output Collection Name 1>*,*<DocumentDB Output Collection Name 2>*' </br> 不使用空格分隔集合名称，仅使用单个逗号。</br></br>文档将为跨多个集合的分布式轮循机制。一批文档将存储在一个集合中，第二批文档则存储在下一个集合中，如此类推。
+    > [!NOTE] **再次，命名 DocumentDB.outputCollections 不是一个错误。** 是，我们允许添加多个集合作为输出：</br> '*DocumentDB.outputCollections*' = '*<DocumentDB Output Collection Name 1>*,*<DocumentDB Output Collection Name 2>*' </br> 不使用空格分隔集合名称，仅使用单个逗号。</br></br>文档将为跨多个集合的分布式轮循机制。一批文档将存储在一个集合中，第二批文档则存储在下一个集合中，如此类推。
 
-		# Create a Hive table for the output data to DocumentDB.
-	    $queryStringPart2 = "drop table DocumentDB_analytics; " +
+        # Create a Hive table for the output data to DocumentDB.
+        $queryStringPart2 = "drop table DocumentDB_analytics; " +
                               "create external table DocumentDB_analytics(Month INT, Day INT, Hour INT, Minute INT, Total INT) " +
                               "stored by 'com.microsoft.azure.documentdb.hive.DocumentDBStorageHandler' " +
                               "tblproperties ( " +
@@ -203,7 +203,7 @@ wacn.date: 11/28/2016
 
 4. 最后，让我们按月、日、小时和分钟计算文档，并将结果插入回输出 Hive 表。
 
-		# GROUP BY minute, COUNT entries for each, INSERT INTO output Hive table.
+        # GROUP BY minute, COUNT entries for each, INSERT INTO output Hive table.
         $queryStringPart3 = "INSERT INTO table DocumentDB_analytics " +
                               "SELECT month(from_unixtime(ts)) as Month, day(from_unixtime(ts)) as Day, " +
                               "hour(from_unixtime(ts)) as Hour, minute(from_unixtime(ts)) as Minute, " +
@@ -214,43 +214,43 @@ wacn.date: 11/28/2016
 
 5. 添加以下脚本代码段以从之前的查询创建 Hive 作业定义。
 
-		# Create a Hive job definition.
-		$queryString = $queryStringPart1 + $queryStringPart2 + $queryStringPart3
-		$hiveJobDefinition = New-AzureHDInsightHiveJobDefinition -Query $queryString
+        # Create a Hive job definition.
+        $queryString = $queryStringPart1 + $queryStringPart2 + $queryStringPart3
+        $hiveJobDefinition = New-AzureHDInsightHiveJobDefinition -Query $queryString
 
-	还可以使用 -File 开关来指定 HDFS 上的 HiveQL 脚本文件。
+    还可以使用 -File 开关来指定 HDFS 上的 HiveQL 脚本文件。
 
 6. 添加以下代码段以保存开始时间并提交 Hive 作业。
 
-		# Save the start time and submit the job to the cluster.
-		$startTime = Get-Date
-		Select-AzureSubscription $subscriptionName
-		$hiveJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $hiveJobDefinition
+        # Save the start time and submit the job to the cluster.
+        $startTime = Get-Date
+        Select-AzureSubscription $subscriptionName
+        $hiveJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $hiveJobDefinition
 
 7. 添加以下内容来等待 Hive 作业完成。
 
-		# Wait for the Hive job to complete.
-		Wait-AzureHDInsightJob -Job $hiveJob -WaitTimeoutInSeconds 3600
+        # Wait for the Hive job to complete.
+        Wait-AzureHDInsightJob -Job $hiveJob -WaitTimeoutInSeconds 3600
 
 8. 添加以下内容以打印标准输出以及开始和结束时间。
 
-		# Print the standard error, the standard output of the Hive job, and the start and end time.
-		$endTime = Get-Date
-		Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $hiveJob.JobId -StandardOutput
-		Write-Host "Start: " $startTime ", End: " $endTime -ForegroundColor Green
+        # Print the standard error, the standard output of the Hive job, and the start and end time.
+        $endTime = Get-Date
+        Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $hiveJob.JobId -StandardOutput
+        Write-Host "Start: " $startTime ", End: " $endTime -ForegroundColor Green
 
 9. **运行**新脚本！ **单击**绿色执行按钮。
 
 10. 检查结果。登录到 [Azure 门户预览][azure-portal]。
-	1. 在左侧面板上单击“浏览”。<strong></strong></br>
-	2. 在浏览面板右上角单击“全部”。<strong></strong></br>
-	3. 找到并单击“DocumentDB 帐户”。<strong></strong></br>
-	4. 接下来，找到 <strong>DocumentDB 帐户</strong>、<strong>DocumentDB 数据库</strong>和与 Hive 查询中指定的输出集合相关联的 <strong>DocumentDB 集合</strong>。</br>
-	5. 最后，单击“开发人员工具”下面的“文档资源管理器”。<strong></strong><strong></strong></br></p>
+    1. 在左侧面板上单击“浏览”。<strong></strong></br>
+    2. 在浏览面板右上角单击“全部”。<strong></strong></br>
+    3. 找到并单击“DocumentDB 帐户”。<strong></strong></br>
+    4. 接下来，找到 <strong>DocumentDB 帐户</strong>、<strong>DocumentDB 数据库</strong>和与 Hive 查询中指定的输出集合相关联的 <strong>DocumentDB 集合</strong>。</br>
+    5. 最后，单击“开发人员工具”下面的“文档资源管理器”。<strong></strong><strong></strong></br></p>
 
-	你将看到 Hive 查询的结果。
+    你将看到 Hive 查询的结果。
 
-	![Hive 查询结果][image-hive-query-results]  
+    ![Hive 查询结果][image-hive-query-results]  
 
 ## <a name="RunPig"></a>步骤 4：使用 DocumentDB 和 HDInsight 运行 Pig 作业
 
@@ -270,9 +270,9 @@ wacn.date: 11/28/2016
     > [!NOTE] 是，我们允许添加多个集合作为输入：</br> 
     '*<DocumentDB Input Collection Name 1>*,*<DocumentDB Input Collection Name 2>*'</br> 不使用空格分隔集合名称，仅使用单个逗号。</b>
 
-	文档将为跨多个集合的分布式轮循机制。一批文档将存储在一个集合中，第二批文档则存储在下一个集合中，如此类推。
+    文档将为跨多个集合的分布式轮循机制。一批文档将存储在一个集合中，第二批文档则存储在下一个集合中，如此类推。
 
-		# Load data from DocumentDB. Pass DocumentDB query to filter transferred data to _rid and _ts.
+        # Load data from DocumentDB. Pass DocumentDB query to filter transferred data to _rid and _ts.
         $queryStringPart1 = "DocumentDB_timestamps = LOAD '<DocumentDB Endpoint>' USING com.microsoft.azure.documentdb.pig.DocumentDBLoader( " +
                                                         "'<DocumentDB Primary Key>', " +
                                                         "'<DocumentDB Database Name>', " +
@@ -281,7 +281,7 @@ wacn.date: 11/28/2016
 
 3.  接下来，让我们按月、日、小时、分钟和发生次数总数计算文档。
 
-		# GROUP BY minute and COUNT entries for each.
+        # GROUP BY minute and COUNT entries for each.
         $queryStringPart2 = "timestamp_record = FOREACH DocumentDB_timestamps GENERATE `$0#'id' as id:int, ToDate((long)(`$0#'ts') * 1000) as timestamp:datetime; " +
                             "by_minute = GROUP timestamp_record BY (GetYear(timestamp), GetMonth(timestamp), GetDay(timestamp), GetHour(timestamp), GetMinute(timestamp)); " +
                             "by_minute_count = FOREACH by_minute GENERATE FLATTEN(group) as (Year:int, Month:int, Day:int, Hour:int, Minute:int), COUNT(timestamp_record) as Total:int; "
@@ -290,7 +290,7 @@ wacn.date: 11/28/2016
 
     > [!NOTE] 是，我们允许添加多个集合作为输出：</br> '<DocumentDB Output Collection Name 1>,<DocumentDB Output Collection Name 2>'</br> 不使用空格分隔集合名称，仅使用单个逗号。</br> 文档将是跨多个集合的分布式轮循机制。一批文档将存储在一个集合中，第二批文档则存储在下一个集合中，如此类推。
 
-		# Store output data to DocumentDB.
+        # Store output data to DocumentDB.
         $queryStringPart3 = "STORE by_minute_count INTO '<DocumentDB Endpoint>' " +
                             "USING com.microsoft.azure.documentdb.pig.DocumentDBStorage( " +
                                 "'<DocumentDB Primary Key>', " +
@@ -303,82 +303,82 @@ wacn.date: 11/28/2016
         $queryString = $queryStringPart1 + $queryStringPart2 + $queryStringPart3
         $pigJobDefinition = New-AzureHDInsightPigJobDefinition -Query $queryString -StatusFolder $statusFolder
 
-	你也可以使用 -File 开关来指定 HDFS 上的 Pig 脚本文件。
+    你也可以使用 -File 开关来指定 HDFS 上的 Pig 脚本文件。
 
 6. 添加以下代码段以保存开始时间并提交 Pig 作业。
 
-		# Save the start time and submit the job to the cluster.
-		$startTime = Get-Date
-		Select-AzureSubscription $subscriptionName
-		$pigJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $pigJobDefinition
+        # Save the start time and submit the job to the cluster.
+        $startTime = Get-Date
+        Select-AzureSubscription $subscriptionName
+        $pigJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $pigJobDefinition
 
 7. 添加以下内容来等待 Pig 作业完成。
 
-		# Wait for the Pig job to complete.
-		Wait-AzureHDInsightJob -Job $pigJob -WaitTimeoutInSeconds 3600
+        # Wait for the Pig job to complete.
+        Wait-AzureHDInsightJob -Job $pigJob -WaitTimeoutInSeconds 3600
 
 8. 添加以下内容以打印标准输出以及开始和结束时间。
 
-		# Print the standard error, the standard output of the Hive job, and the start and end time.
-		$endTime = Get-Date
-		Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $pigJob.JobId -StandardOutput
-		Write-Host "Start: " $startTime ", End: " $endTime -ForegroundColor Green
+        # Print the standard error, the standard output of the Hive job, and the start and end time.
+        $endTime = Get-Date
+        Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $pigJob.JobId -StandardOutput
+        Write-Host "Start: " $startTime ", End: " $endTime -ForegroundColor Green
 
 9. **运行**新脚本！ **单击**绿色执行按钮。
 
 10. 检查结果。登录到 [Azure 门户预览][azure-portal]。
-	1. 在左侧面板上单击“浏览”。<strong></strong></br>
-	2. 在浏览面板右上角单击“全部”。<strong></strong></br>
-	3. 找到并单击“DocumentDB 帐户”。<strong></strong></br>
-	4. 接下来，找到 <strong>DocumentDB 帐户</strong>、<strong>DocumentDB 数据库</strong>和与 Pig 查询中指定的输出集合相关联的 <strong>DocumentDB 集合</strong>。</br>
-	5. 最后，单击“开发人员工具”下面的“文档资源管理器”。<strong></strong><strong></strong></br></p>
+    1. 在左侧面板上单击“浏览”。<strong></strong></br>
+    2. 在浏览面板右上角单击“全部”。<strong></strong></br>
+    3. 找到并单击“DocumentDB 帐户”。<strong></strong></br>
+    4. 接下来，找到 <strong>DocumentDB 帐户</strong>、<strong>DocumentDB 数据库</strong>和与 Pig 查询中指定的输出集合相关联的 <strong>DocumentDB 集合</strong>。</br>
+    5. 最后，单击“开发人员工具”下面的“文档资源管理器”。<strong></strong><strong></strong></br></p>
 
-	你将看到 Pig 查询的结果。
+    你将看到 Pig 查询的结果。
 
-	![Pig 查询结果][image-pig-query-results]  
+    ![Pig 查询结果][image-pig-query-results]  
 
 ## <a name="RunMapReduce"></a>步骤 5：使用 DocumentDB 和 HDInsight 运行 MapReduce 作业
 
 1. 在你的 PowerShell 脚本窗格中设置以下变量。
 
-		$subscriptionName = "<SubscriptionName>"   # Azure subscription name
-		$clusterName = "<ClusterName>"             # HDInsight cluster name
+        $subscriptionName = "<SubscriptionName>"   # Azure subscription name
+        $clusterName = "<ClusterName>"             # HDInsight cluster name
 
 2. 我们将执行 MapReduce 作业，该作业从你的 DocumentDB 集合计算每个文档属性的发生次数。在以上代码片段**之后**添加此代码片段。
 
-		# Define the MapReduce job.
-		$TallyPropertiesJobDefinition = New-AzureHDInsightMapReduceJobDefinition -JarFile "wasb:///example/jars/TallyProperties-v01.jar" -ClassName "TallyProperties" -Arguments "<DocumentDB Endpoint>","<DocumentDB Primary Key>", "<DocumentDB Database Name>","<DocumentDB Input Collection Name>","<DocumentDB Output Collection Name>","<[Optional] DocumentDB Query>"
+        # Define the MapReduce job.
+        $TallyPropertiesJobDefinition = New-AzureHDInsightMapReduceJobDefinition -JarFile "wasb:///example/jars/TallyProperties-v01.jar" -ClassName "TallyProperties" -Arguments "<DocumentDB Endpoint>","<DocumentDB Primary Key>", "<DocumentDB Database Name>","<DocumentDB Input Collection Name>","<DocumentDB Output Collection Name>","<[Optional] DocumentDB Query>"
 
-	> [!NOTE] DocumentDB Hadoop 连接器自定义安装中附带了 TallyProperties-v01.jar。
+    > [!NOTE] DocumentDB Hadoop 连接器自定义安装中附带了 TallyProperties-v01.jar。
 
 3. 添加以下命令来提交 MapReduce 作业。
 
-		# Save the start time and submit the job.
-		$startTime = Get-Date
-		Select-AzureSubscription $subscriptionName
-		$TallyPropertiesJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $TallyPropertiesJobDefinition | Wait-AzureHDInsightJob -WaitTimeoutInSeconds 3600  
+        # Save the start time and submit the job.
+        $startTime = Get-Date
+        Select-AzureSubscription $subscriptionName
+        $TallyPropertiesJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $TallyPropertiesJobDefinition | Wait-AzureHDInsightJob -WaitTimeoutInSeconds 3600  
 
-	除了 MapReduce 作业定义外，你还要提供需运行 MapReduce 作业的 HDInsight 群集名称，以及凭据。Start-AzureHDInsightJob 是异步调用。要检查作业是否完成，请使用 *Wait-AzureHDInsightJob* cmdlet。
+    除了 MapReduce 作业定义外，你还要提供需运行 MapReduce 作业的 HDInsight 群集名称，以及凭据。Start-AzureHDInsightJob 是异步调用。要检查作业是否完成，请使用 *Wait-AzureHDInsightJob* cmdlet。
 
 4. 添加以下命令来检查运行 MapReduce 作业时的错误。
 
-		# Get the job output and print the start and end time.
-		$endTime = Get-Date
-		Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $TallyPropertiesJob.JobId -StandardError
-		Write-Host "Start: " $startTime ", End: " $endTime -ForegroundColor Green
+        # Get the job output and print the start and end time.
+        $endTime = Get-Date
+        Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $TallyPropertiesJob.JobId -StandardError
+        Write-Host "Start: " $startTime ", End: " $endTime -ForegroundColor Green
 
 5. **运行**新脚本！ **单击**绿色执行按钮。
 
 6. 检查结果。登录到 [Azure 门户预览][azure-portal]。
-	1. 在左侧面板上单击“浏览”。<strong></strong>
-	2. 在浏览面板右上角单击“全部”。<strong></strong>
-	3. 找到并单击“DocumentDB 帐户”。<strong></strong>
-	4. 接下来，找到 <strong>DocumentDB 帐户</strong>、<strong>DocumentDB 数据库</strong>和与 MapReduce 作业中指定的输出集合相关联的 <strong>DocumentDB 集合</strong>。
-	5. 最后，单击“开发人员工具”下面的“文档资源管理器”。<strong></strong><strong></strong>
+    1. 在左侧面板上单击“浏览”。<strong></strong>
+    2. 在浏览面板右上角单击“全部”。<strong></strong>
+    3. 找到并单击“DocumentDB 帐户”。<strong></strong>
+    4. 接下来，找到 <strong>DocumentDB 帐户</strong>、<strong>DocumentDB 数据库</strong>和与 MapReduce 作业中指定的输出集合相关联的 <strong>DocumentDB 集合</strong>。
+    5. 最后，单击“开发人员工具”下面的“文档资源管理器”。<strong></strong><strong></strong>
 
-	你将看到 MapReduce 作业的结果。
+    你将看到 MapReduce 作业的结果。
 
-	![MapReduce 查询结果][image-mapreduce-query-results]  
+    ![MapReduce 查询结果][image-mapreduce-query-results]  
 
 ## <a name="NextSteps"></a>后续步骤
 

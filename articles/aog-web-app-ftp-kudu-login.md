@@ -29,9 +29,9 @@ wacn.date: 11/03/2016
  
 2.在 FTP 中登录时，所填信息类似如下：
 
-	Host：ftp://cnws-prod-bjb-001.ftp.chinacloudsites.chinacloudapi.cn
-	Username；amaytestcreate1011\AzureCIE
-	Password：XXXX[您自己的 FTP 密码]
+    Host：ftp://cnws-prod-bjb-001.ftp.chinacloudsites.chinacloudapi.cn
+    Username；amaytestcreate1011\AzureCIE
+    Password：XXXX[您自己的 FTP 密码]
   ![](./media/aog-web-app-ftp-kudu-login/ftp-login.png)
 
 ### 使用发布配置文件进行 FTP 登录
@@ -42,16 +42,16 @@ wacn.date: 11/03/2016
 
 1. 下载网站的发布配置文件
 
-	![](./media/aog-web-app-ftp-kudu-login/publish-settings.png)
+    ![](./media/aog-web-app-ftp-kudu-login/publish-settings.png)
  
 2. 使用文本编辑器打开该文件。在此文件中查找 FTP 的相关信息，如下截图信息：PublishProfileName, publishMethod, publishUrl, ftpPassiveMode, userName, userPWD.
 其中 publishUrl, userName, userPWD 是在登录 FTP 时需要的信息。
 
-	![](./media/aog-web-app-ftp-kudu-login/publish-settings-content.png)
+    ![](./media/aog-web-app-ftp-kudu-login/publish-settings-content.png)
  
 3. 在第三方 ftp 客户端登录。
  
-	![](./media/aog-web-app-ftp-kudu-login/ftp-login-how.png)
+    ![](./media/aog-web-app-ftp-kudu-login/ftp-login-how.png)
 
 ##登录 Kudu 站点：
 
@@ -65,19 +65,19 @@ https://amaydel1.scm.chinacloudsites.cn/
 
 1. 获取登录的必要信息
 
-	Kudu URL：https://amaydel1.scm.chinacloudsites.cn/
-	用户名：may （Kudu 站点的用户名不包括网站名称）
-	密码；xxxxx
+    Kudu URL：https://amaydel1.scm.chinacloudsites.cn/
+    用户名：may （Kudu 站点的用户名不包括网站名称）
+    密码；xxxxx
 
-	![](./media/aog-web-app-ftp-kudu-login/publish-settings.png)
+    ![](./media/aog-web-app-ftp-kudu-login/publish-settings.png)
  
 2. 打开浏览器，输入 Kudu URL 地址，回车，输入用户名和密码。
 
-	![](./media/aog-web-app-ftp-kudu-login/kudu-login.png)
+    ![](./media/aog-web-app-ftp-kudu-login/kudu-login.png)
  
 3. 登录完成以后就可以看到 Kudu 站点了
 
-	![](./media/aog-web-app-ftp-kudu-login/kudu-page.png)
+    ![](./media/aog-web-app-ftp-kudu-login/kudu-page.png)
  
 ### 使用部署配置文件登录
 
@@ -85,23 +85,23 @@ https://amaydel1.scm.chinacloudsites.cn/
 
 1. 下载发布配置文件
 
-	![](./media/aog-web-app-ftp-kudu-login/publish-settings.png)
+    ![](./media/aog-web-app-ftp-kudu-login/publish-settings.png)
  
 2. 文本编辑器打开，获取必要信息
 
-		Kudu URL: https://amaydel1.scm.chinacloudsites.cn 
-		用户名：$amaydel1
-		密码：YnuEwRDLr3P6X1vCdKe2dNYyYQf7TJmfryubADvCbXXXXX
+        Kudu URL: https://amaydel1.scm.chinacloudsites.cn 
+        用户名：$amaydel1
+        密码：YnuEwRDLr3P6X1vCdKe2dNYyYQf7TJmfryubADvCbXXXXX
 
-	![](./media/aog-web-app-ftp-kudu-login/publish-settings-content.png)
+    ![](./media/aog-web-app-ftp-kudu-login/publish-settings-content.png)
 
 3. 打开浏览器，输入 Kudu URL 地址，回车，输入用户名和密码。
 
-	![](./media/aog-web-app-ftp-kudu-login/kudu-login.png)
+    ![](./media/aog-web-app-ftp-kudu-login/kudu-login.png)
  
 4. 登录完成以后就可以看到 Kudu 站点了
 
-	![](./media/aog-web-app-ftp-kudu-login/kudu-page.png)
+    ![](./media/aog-web-app-ftp-kudu-login/kudu-page.png)
  
 ##其他资源： 
 

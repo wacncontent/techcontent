@@ -33,23 +33,23 @@ ms.author: hermannd
 
 * 查找现有发布服务器（包括 SUSE）：
 
-	   PS : Get-AzureRmVMImagePublisher -Location "China East" | where-object { $\_.publishername -like "*US*" }
-	   CLI : azure vm image list-publishers chinaeast | grep "US"
+       PS : Get-AzureRmVMImagePublisher -Location "China East" | where-object { $\_.publishername -like "*US*" }
+       CLI : azure vm image list-publishers chinaeast | grep "US"
 
 * 从 SUSE 中查找现有产品/服务：
 
-	   PS : Get-AzureRmVMImageOffer -Location "China East" -Publisher "SUSE" 
-	   CLI: azure vm image list-offers chinaeast SUSE
+       PS : Get-AzureRmVMImageOffer -Location "China East" -Publisher "SUSE" 
+       CLI: azure vm image list-offers chinaeast SUSE
 
 * 查找 SUSE SLES 产品/服务：
 
-	   PS: Get-AzureRmVMImageSku -Location "China East" -Publisher "SUSE" -Offer "SLES" 
-	   CLI: azure vm image list-skus chinaeast SUSE SLES
+       PS: Get-AzureRmVMImageSku -Location "China East" -Publisher "SUSE" -Offer "SLES" 
+       CLI: azure vm image list-skus chinaeast SUSE SLES
 
 * 查找特定版本的 SLES SKU：
 
-	   PS : Get-AzureRmVMImage -Location "China East" -Publisher "SUSE" -Offer "SLES" -skus "12-SP1" 
-	   CLI : azure vm image list chinaeast SUSE SLES 12-SP1
+       PS : Get-AzureRmVMImage -Location "China East" -Publisher "SUSE" -Offer "SLES" -skus "12-SP1" 
+       CLI : azure vm image list chinaeast SUSE SLES 12-SP1
 
 ## 在 SUSE VM 中安装 WALinuxAgent
 
@@ -105,7 +105,7 @@ SAP“增强型监视”是在 Azure 上运行 SAP 的必要先决条件。请�
 
 在新的 Azure Resource Manager 模型中，应使用 JSON 模板文件创建新的 SUSE VM。创建 JSON 模板文件后，便可以使用以下 CLI 命令作为 PowerShell 的替代方法部署 VM 了：
 
-	   azure group deployment create "<deployment name>" -g "<resource group name>" --template-file "<../../filename.json>"
+       azure group deployment create "<deployment name>" -g "<resource group name>" --template-file "<../../filename.json>"
 
 有关 JSON 模板文件的更多详细信息，请参阅[创作 Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)和 [Azure 快速启动模板](https://github.com/Azure/azure-quickstart-templates/)。
 

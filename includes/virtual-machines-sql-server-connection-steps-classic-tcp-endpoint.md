@@ -10,7 +10,7 @@
 
 3. 选择“终结点”，然后单击终结点边栏选项卡顶部的“添加”按钮。
 
-	![用于创建终结点的门户步骤](./media/virtual-machines-sql-server-connection-steps/portal-endpoint-creation.png)
+    ![用于创建终结点的门户步骤](./media/virtual-machines-sql-server-connection-steps/portal-endpoint-creation.png)
 
 4. 在“添加终结点”边栏选项卡上，提供“名称”，例如 SQLEndpoint。
 

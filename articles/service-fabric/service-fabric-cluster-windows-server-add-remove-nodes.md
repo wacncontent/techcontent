@@ -30,7 +30,7 @@ ms.author: dkshir;chackdan
 5. 以管理员身份运行 Powershell，并导航到解压缩包所在的位置。
 6. 运行 *AddNode.ps1* Powershell，使用参数来描述要添加的新节点。以下示例将名为 VM5、类型为 NodeType0 且 IP 地址为 182.17.34.52 的新节点添加到 UD1 和 FD1 中。*ExistingClusterConnectionEndPoint* 是现有群集中已有节点的连接终结点。对于此终结点，可以选择群集中*任何*节点的 IP 地址。
 
-		.\AddNode.ps1 -NodeName VM5 -NodeType NodeType0 -NodeIPAddressorFQDN 182.17.34.52 -ExistingClientConnectionEndpoint 182.17.34.50:19000 -UpgradeDomain UD1 -FaultDomain FD1 -AcceptEULA
+        .\AddNode.ps1 -NodeName VM5 -NodeType NodeType0 -NodeIPAddressorFQDN 182.17.34.52 -ExistingClientConnectionEndpoint 182.17.34.50:19000 -UpgradeDomain UD1 -FaultDomain FD1 -AcceptEULA
 
 ## 从群集中删除节点
 
@@ -41,7 +41,7 @@ ms.author: dkshir;chackdan
 3. 以管理员身份运行 Powershell，并导航到解压缩包所在的位置。
 4. 运行 *RemoveNode.ps1* Powershell。以下示例从群集中删除当前节点。*ExistingClusterConnectionEndPoint* 是现有群集中已有节点的连接终结点。对于此终结点，必须选择群集中*任何***其他节点**的 IP 地址。
 
-		.\RemoveNode.ps1 -ExistingClusterConnectionEndPoint 182.17.34.50:19000
+        .\RemoveNode.ps1 -ExistingClusterConnectionEndPoint 182.17.34.50:19000
 
 以下已知缺陷将在下一个版本中修复：即使删除了某个节点，该节点也会在查询和 SFX 中显示为已关闭。
 

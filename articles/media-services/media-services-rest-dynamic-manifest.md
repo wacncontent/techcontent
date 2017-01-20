@@ -50,50 +50,50 @@ ms.author: juliako;cenkdin
 
 请求标头
 
-	POST https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Filters HTTP/1.1 
-	DataServiceVersion:3.0 
-	MaxDataServiceVersion: 3.0 
-	Content-Type: application/json 
-	Accept: application/json 
-	Accept-Charset: UTF-8 
-	Authorization: Bearer <token value> 
-	x-ms-version: 2.11 
-	x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
-	Host: wamsshaclus001rest-hs.chinacloudapp.cn 
+    POST https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Filters HTTP/1.1 
+    DataServiceVersion:3.0 
+    MaxDataServiceVersion: 3.0 
+    Content-Type: application/json 
+    Accept: application/json 
+    Accept-Charset: UTF-8 
+    Authorization: Bearer <token value> 
+    x-ms-version: 2.11 
+    x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
+    Host: wamsshaclus001rest-hs.chinacloudapp.cn 
 
 请求正文
 
-	{  
-	   "Name":"GlobalFilter",
-	   "PresentationTimeRange":{  
-	      "StartTimestamp":"0",
-	      "EndTimestamp":"9223372036854775807",
-	      "PresentationWindowDuration":"12000000000",
-	      "LiveBackoffDuration":"0",
-	      "Timescale":"10000000"
-	   },
-	   "Tracks":[  
-	      {  
-	         "PropertyConditions":
-	              [  
-	            {  
-	               "Property":"Type",
-	               "Value":"audio",
-	               "Operator":"Equal"
-	            },
-	            {  
-	               "Property":"Bitrate",
-	               "Value":"0-2147483647",
-	               "Operator":"Equal"
-	            }
-	         ]
-	      }
-	   ]
-	}
+    {  
+       "Name":"GlobalFilter",
+       "PresentationTimeRange":{  
+          "StartTimestamp":"0",
+          "EndTimestamp":"9223372036854775807",
+          "PresentationWindowDuration":"12000000000",
+          "LiveBackoffDuration":"0",
+          "Timescale":"10000000"
+       },
+       "Tracks":[  
+          {  
+             "PropertyConditions":
+                  [  
+                {  
+                   "Property":"Type",
+                   "Value":"audio",
+                   "Operator":"Equal"
+                },
+                {  
+                   "Property":"Bitrate",
+                   "Value":"0-2147483647",
+                   "Operator":"Equal"
+                }
+             ]
+          }
+       ]
+    }
 
 ####HTTP 响应
-	
-	HTTP/1.1 201 Created 
+    
+    HTTP/1.1 201 Created 
 
 ###创建局部 AssetFilter
 
@@ -103,52 +103,52 @@ ms.author: juliako;cenkdin
 
 请求标头
 
-	POST https://wamsshaclus001rest-hs.chinacloudapp.cn/API/AssetFilters HTTP/1.1 
-	DataServiceVersion: 3.0 
-	MaxDataServiceVersion: 3.0 
-	Content-Type: application/json 
-	Accept: application/json 
-	Accept-Charset: UTF-8 
-	Authorization: Bearer <token value> 
-	x-ms-version: 2.11 
-	x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
-	Host: wamsshaclus001rest-hs.chinacloudapp.cn
+    POST https://wamsshaclus001rest-hs.chinacloudapp.cn/API/AssetFilters HTTP/1.1 
+    DataServiceVersion: 3.0 
+    MaxDataServiceVersion: 3.0 
+    Content-Type: application/json 
+    Accept: application/json 
+    Accept-Charset: UTF-8 
+    Authorization: Bearer <token value> 
+    x-ms-version: 2.11 
+    x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
+    Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
 请求正文
 
-	{   
-	   "Name":"AssetFilter", 
-	   "ParentAssetId":"nb:cid:UUID:536e555d-1500-80c3-92dc-f1e4fdc6c592", 
-	   "PresentationTimeRange":{   
-	      "StartTimestamp":"0", 
-	      "EndTimestamp":"9223372036854775807", 
-	      "PresentationWindowDuration":"12000000000", 
-	      "LiveBackoffDuration":"0", 
-	      "Timescale":"10000000" 
-	   }, 
-	   "Tracks":[   
-	      {   
-	         "PropertyConditions": 
-	              [   
-	            {   
-	               "Property":"Type", 
-	               "Value":"audio", 
-	               "Operator":"Equal" 
-	            }, 
-	            {   
-	               "Property":"Bitrate", 
-	               "Value":"0-2147483647", 
-	               "Operator":"Equal" 
-	            } 
-	         ] 
-	      } 
-	   ] 
-	} 
+    {   
+       "Name":"AssetFilter", 
+       "ParentAssetId":"nb:cid:UUID:536e555d-1500-80c3-92dc-f1e4fdc6c592", 
+       "PresentationTimeRange":{   
+          "StartTimestamp":"0", 
+          "EndTimestamp":"9223372036854775807", 
+          "PresentationWindowDuration":"12000000000", 
+          "LiveBackoffDuration":"0", 
+          "Timescale":"10000000" 
+       }, 
+       "Tracks":[   
+          {   
+             "PropertyConditions": 
+                  [   
+                {   
+                   "Property":"Type", 
+                   "Value":"audio", 
+                   "Operator":"Equal" 
+                }, 
+                {   
+                   "Property":"Bitrate", 
+                   "Value":"0-2147483647", 
+                   "Operator":"Equal" 
+                } 
+             ] 
+          } 
+       ] 
+    } 
 
 ####HTTP 响应 
 
-	HTTP/1.1 201 Created 
-	. . . 
+    HTTP/1.1 201 Created 
+    . . . 
 
 ##列出筛选器
 
@@ -157,42 +157,42 @@ ms.author: juliako;cenkdin
 若要列出筛选器，请使用以下 HTTP 请求：
 
 ####HTTP 请求
-	 
-	GET https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Filters HTTP/1.1 
-	DataServiceVersion:3.0 
-	MaxDataServiceVersion: 3.0 
-	Accept: application/json 
-	Accept-Charset: UTF-8 
-	Authorization: Bearer <token value> 
-	x-ms-version: 2.11 
-	Host: wamsshaclus001rest-hs.chinacloudapp.cn
-	
+     
+    GET https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Filters HTTP/1.1 
+    DataServiceVersion:3.0 
+    MaxDataServiceVersion: 3.0 
+    Accept: application/json 
+    Accept-Charset: UTF-8 
+    Authorization: Bearer <token value> 
+    x-ms-version: 2.11 
+    Host: wamsshaclus001rest-hs.chinacloudapp.cn
+    
 ### 获取与资产关联的 **AssetFilter**。
 
 ####HTTP 请求
 
-	GET https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Assets('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592')/AssetFilters HTTP/1.1 
-	DataServiceVersion: 3.0 
-	MaxDataServiceVersion: 3.0 
-	Accept: application/json 
-	Accept-Charset: UTF-8 
-	Authorization: Bearer <token value> 
-	x-ms-version: 2.11 
-	x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
-	Host: wamsshaclus001rest-hs.chinacloudapp.cn 
+    GET https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Assets('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592')/AssetFilters HTTP/1.1 
+    DataServiceVersion: 3.0 
+    MaxDataServiceVersion: 3.0 
+    Accept: application/json 
+    Accept-Charset: UTF-8 
+    Authorization: Bearer <token value> 
+    x-ms-version: 2.11 
+    x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
+    Host: wamsshaclus001rest-hs.chinacloudapp.cn 
 
 ###基于 ID 获取 **AssetFilter**
 
 ####HTTP 请求
 
-	GET https://wamsshaclus001rest-hs.chinacloudapp.cn/API/AssetFilters('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592__%23%23%23__TestFilter') HTTP/1.1 
-	DataServiceVersion: 3.0 
-	MaxDataServiceVersion: 3.0 
-	Accept: application/json 
-	Accept-Charset: UTF-8 
-	Authorization: Bearer <token value> 
-	x-ms-version: 2.11 
-	x-ms-client-request-id: 00000000
+    GET https://wamsshaclus001rest-hs.chinacloudapp.cn/API/AssetFilters('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592__%23%23%23__TestFilter') HTTP/1.1 
+    DataServiceVersion: 3.0 
+    MaxDataServiceVersion: 3.0 
+    Accept: application/json 
+    Accept-Charset: UTF-8 
+    Authorization: Bearer <token value> 
+    x-ms-version: 2.11 
+    x-ms-client-request-id: 00000000
 
 ##更新筛选器
  
@@ -208,39 +208,39 @@ ms.author: juliako;cenkdin
  
 请求标头：
 
-	MERGE https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Filters('filterName') HTTP/1.1 
-	DataServiceVersion:3.0 
-	MaxDataServiceVersion: 3.0 
-	Content-Type: application/json 
-	Accept: application/json 
-	Accept-Charset: UTF-8 
-	Authorization: Bearer <token value> 
-	x-ms-version: 2.11 
-	x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
-	Host: wamsshaclus001rest-hs.chinacloudapp.cn 
-	Content-Length: 384
-	
+    MERGE https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Filters('filterName') HTTP/1.1 
+    DataServiceVersion:3.0 
+    MaxDataServiceVersion: 3.0 
+    Content-Type: application/json 
+    Accept: application/json 
+    Accept-Charset: UTF-8 
+    Authorization: Bearer <token value> 
+    x-ms-version: 2.11 
+    x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
+    Host: wamsshaclus001rest-hs.chinacloudapp.cn 
+    Content-Length: 384
+    
 请求正文：
-	
-	{ 
-	   "Tracks":[   
-	      {   
-	         "PropertyConditions": 
-	         [   
-	            {   
-	               "Property":"Type", 
-	               "Value":"audio", 
-	               "Operator":"Equal" 
-	            }, 
-	            {   
-	               "Property":"Bitrate", 
-	               "Value":"0-2147483647", 
-	               "Operator":"Equal" 
-	            } 
-	         ] 
-	      } 
-	   ] 
-	} 
+    
+    { 
+       "Tracks":[   
+          {   
+             "PropertyConditions": 
+             [   
+                {   
+                   "Property":"Type", 
+                   "Value":"audio", 
+                   "Operator":"Equal" 
+                }, 
+                {   
+                   "Property":"Bitrate", 
+                   "Value":"0-2147483647", 
+                   "Operator":"Equal" 
+                } 
+             ] 
+          } 
+       ] 
+    } 
 
 ###更新局部 AssetFilter
 
@@ -250,55 +250,55 @@ ms.author: juliako;cenkdin
 
 请求标头：
 
-	MERGE https://wamsshaclus001rest-hs.chinacloudapp.cn/API/AssetFilters('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592__%23%23%23__TestFilter')  HTTP/1.1 
-	DataServiceVersion: 3.0 
-	MaxDataServiceVersion: 3.0 
-	Content-Type: application/json 
-	Accept: application/json 
-	Accept-Charset: UTF-8 
-	Authorization: Bearer <token value> 
-	x-ms-version: 2.11 
-	x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
-	Host: wamsshaclus001rest-hs.chinacloudapp.cn 
-	
+    MERGE https://wamsshaclus001rest-hs.chinacloudapp.cn/API/AssetFilters('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592__%23%23%23__TestFilter')  HTTP/1.1 
+    DataServiceVersion: 3.0 
+    MaxDataServiceVersion: 3.0 
+    Content-Type: application/json 
+    Accept: application/json 
+    Accept-Charset: UTF-8 
+    Authorization: Bearer <token value> 
+    x-ms-version: 2.11 
+    x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
+    Host: wamsshaclus001rest-hs.chinacloudapp.cn 
+    
 请求正文：
-	
-	{ 
-	   "Tracks":[   
-	      {   
-	         "PropertyConditions": 
-	         [   
-	            {   
-	               "Property":"Type", 
-	               "Value":"audio", 
-	               "Operator":"Equal" 
-	            }, 
-	            {   
-	               "Property":"Bitrate", 
-	               "Value":"0-2147483647", 
-	               "Operator":"Equal" 
-	            } 
-	         ] 
-	      } 
-	   ] 
-	} 
+    
+    { 
+       "Tracks":[   
+          {   
+             "PropertyConditions": 
+             [   
+                {   
+                   "Property":"Type", 
+                   "Value":"audio", 
+                   "Operator":"Equal" 
+                }, 
+                {   
+                   "Property":"Bitrate", 
+                   "Value":"0-2147483647", 
+                   "Operator":"Equal" 
+                } 
+             ] 
+          } 
+       ] 
+    } 
 
 ##删除筛选器
 
 ###删除全局筛选器
 
 若要删除全局筛选器，请使用以下 HTTP 请求：
-	
+    
 ####HTTP 请求
 
-	DELETE https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Filters('GlobalFilter') HTTP/1.1 
-	DataServiceVersion:3.0 
-	MaxDataServiceVersion: 3.0 
-	Accept: application/json 
-	Accept-Charset: UTF-8 
-	Authorization: Bearer <token value> 
-	x-ms-version: 2.11 
-	Host: wamsshaclus001rest-hs.chinacloudapp.cn 
+    DELETE https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Filters('GlobalFilter') HTTP/1.1 
+    DataServiceVersion:3.0 
+    MaxDataServiceVersion: 3.0 
+    Accept: application/json 
+    Accept-Charset: UTF-8 
+    Authorization: Bearer <token value> 
+    x-ms-version: 2.11 
+    Host: wamsshaclus001rest-hs.chinacloudapp.cn 
 
 ###删除局部 AssetFilter
 
@@ -306,14 +306,14 @@ ms.author: juliako;cenkdin
 
 ####HTTP 请求
 
-	DELETE https://wamsshaclus001rest-hs.chinacloudapp.cn/API/AssetFilters('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592__%23%23%23__LocalFilter') HTTP/1.1 
-	DataServiceVersion: 3.0 
-	MaxDataServiceVersion: 3.0 
-	Accept: application/json 
-	Accept-Charset: UTF-8 
-	Authorization: Bearer <token value> 
-	x-ms-version: 2.11 
-	Host: wamsshaclus001rest-hs.chinacloudapp.cn
+    DELETE https://wamsshaclus001rest-hs.chinacloudapp.cn/API/AssetFilters('nb%3Acid%3AUUID%3A536e555d-1500-80c3-92dc-f1e4fdc6c592__%23%23%23__LocalFilter') HTTP/1.1 
+    DataServiceVersion: 3.0 
+    MaxDataServiceVersion: 3.0 
+    Accept: application/json 
+    Accept-Charset: UTF-8 
+    Authorization: Bearer <token value> 
+    x-ms-version: 2.11 
+    Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
 ##生成使用筛选器的流式处理 URL
 
@@ -323,23 +323,23 @@ ms.author: juliako;cenkdin
 
 **MPEG DASH**
 
-	http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf, filter=MyFilter)
+    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf, filter=MyFilter)
 
 **Apple HTTP 实时流 (HLS) V4**
 
-	http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl, filter=MyFilter)
+    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl, filter=MyFilter)
 
 **Apple HTTP 实时流 (HLS) V3**
 
-	http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3, filter=MyFilter)
+    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3, filter=MyFilter)
 
 **平滑流式处理**
 
-	http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(filter=MyFilter)
+    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(filter=MyFilter)
 
 **HDS**
 
-	http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=f4m-f4f, filter=MyFilter)
+    http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=f4m-f4f, filter=MyFilter)
 
 ##另请参阅 
 

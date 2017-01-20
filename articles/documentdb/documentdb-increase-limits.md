@@ -37,19 +37,19 @@ ms.author: anhoh
 
 1. 在 [Azure 门户预览](https://portal.azure.cn)中，依次单击“更多服务”、“帮助 + 支持”。
 
-	![启动帮助与支持的屏幕截图](./media/documentdb-increase-limits/helpsupport.png)  
+    ![启动帮助与支持的屏幕截图](./media/documentdb-increase-limits/helpsupport.png)  
 
 2. 在“帮助 + 支持”边栏选项卡上，单击“新建支持请求”。
 
-	![创建支持票证的屏幕截图](./media/documentdb-increase-limits/getsupport.png)  
+    ![创建支持票证的屏幕截图](./media/documentdb-increase-limits/getsupport.png)  
 
 3. 在**新支持请求**边栏选项卡上，单击**基本**。接下来，将**问题类型**设置为“配额”，将**订阅**设置为托管 DocumentDB 帐户的订阅，将**配额类型**设置为“DocumentDB”，并将**支持计划**设置为“配额支持 - 包括”。然后，单击“下一步”。
 
-	![支持票证请求类型的屏幕截图](./media/documentdb-increase-limits/supportrequest1.png)  
+    ![支持票证请求类型的屏幕截图](./media/documentdb-increase-limits/supportrequest1.png)  
 
 4. 在“问题”边栏选项卡中，选择严重级别，并在“详细信息”中包含关于你的配额增加的信息。单击**“下一步”**。
 
-	![支持票证订阅选取器的屏幕截图](./media/documentdb-increase-limits/supportrequest2.png)  
+    ![支持票证订阅选取器的屏幕截图](./media/documentdb-increase-limits/supportrequest2.png)  
 
 5. 最后，在“联系信息”边栏选项卡中填写你的联系信息，然后单击“创建”。
 

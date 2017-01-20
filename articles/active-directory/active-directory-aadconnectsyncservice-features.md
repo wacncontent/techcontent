@@ -64,11 +64,11 @@ UserWriteback | 目前不支持。
 
 在新建的 Azure AD 目录中，默认已打开此功能。可以运行以下命令查看是否已启用此功能：
 
-	Get-MsolDirSyncFeatures -Feature EnableSoftMatchOnUpn
+    Get-MsolDirSyncFeatures -Feature EnableSoftMatchOnUpn
 
 如果没有为 Azure AD 目录启用此功能，可以运行以下命令来启用它：
 
-	Set-MsolDirSyncFeature -Feature EnableSoftMatchOnUpn -Enable $true
+    Set-MsolDirSyncFeature -Feature EnableSoftMatchOnUpn -Enable $true
 
 ## 同步 userPrincipalName 更新
 在过去，除非以下两个条件都成立，否则会阻止在本地使用同步服务对 UserPrincipalName 属性进行更新：
@@ -82,11 +82,11 @@ UserWriteback | 目前不支持。
 
 在新建的 Azure AD 目录中，默认已打开此功能。可以运行以下命令查看是否已启用此功能：
 
-	Get-MsolDirSyncFeatures -Feature SynchronizeUpnForManagedUsers
+    Get-MsolDirSyncFeatures -Feature SynchronizeUpnForManagedUsers
 
 如果没有为 Azure AD 目录启用此功能，可以运行以下命令来启用它：
 
-	Set-MsolDirSyncFeature -Feature SynchronizeUpnForManagedUsers -Enable $true
+    Set-MsolDirSyncFeature -Feature SynchronizeUpnForManagedUsers -Enable $true
 
 启用此功能后，现有的 userPrincipalName 值将保持不变。下一次在本地更改 userPrincipalName 属性时，对用户进行正常的增量同步会更新 UPN。
 
