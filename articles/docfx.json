@@ -20,8 +20,12 @@
         "files": [
           "**/*.png",
           "**/*.jpg",
+          "**/*.svg",
+          "**/*.gif",
           "../includes/**/*.png",
-          "../includes/**/*.jpg"
+          "../includes/**/*.jpg",
+          "../includes/**/*.svg",
+          "../includes/**/*.gif"
         ],
         "exclude": [
           "**/obj/**",
