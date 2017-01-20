@@ -1,34 +1,33 @@
 <!-- need to be verified -->
 
-<properties 
-	pageTitle="使用 Visual Studio 对 Azure 应用服务中的 Web 应用进行故障排除" 
-	description="了解如何通过内置于 Visual Studio 2013 的远程调试、 跟踪和日志记录工具排除 Azure Web 应用的故障。" 
-	services="app-service" 
-	documentationCenter=".net" 
-	authors="tdykstra" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 使用 Visual Studio 对 Azure 应用服务中的 Web 应用进行故障排除
+description: 了解如何通过内置于 Visual Studio 2013 的远程调试、 跟踪和日志记录工具排除 Azure Web 应用的故障。
+services: app-service
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: 
 
-<tags 
-	ms.service="app-service" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="08/29/2016" 
-	wacn.date="12/12/2016" 
-	ms.author="rachelap"/>  
-
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 08/29/2016
+wacn.date: 12/12/2016
+ms.author: rachelap
+---
 
 # 使用 Visual Studio 对 Azure 应用服务中的 Web 应用进行故障排除
 
 ## 概述
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-本教程介绍如何使用 Visual Studio 工具，通过远程运行调试模式或查看应用程序日志和 Web 服务器日志帮助调试 [Azure 应用服务](/documentation/articles/app-service-changes-existing-services/)中的 Web 应用。
+本教程介绍如何使用 Visual Studio 工具，通过远程运行调试模式或查看应用程序日志和 Web 服务器日志帮助调试 [Azure 应用服务](./app-service-changes-existing-services.md)中的 Web 应用。
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
 
 学习内容：
 
@@ -53,13 +52,13 @@
 
 ## <a name="sitemanagement"></a>Web 应用配置和管理
 
-通过 Visual Studio，用户可以访问 [Azure 门户预览](/documentation/articles/app-service-web-app-azure-portal/)中提供的 Web 应用管理功能和配置设置的子集。本节介绍使用**服务器资源管理器**可以实现的功能。若要了解最新的 Azure 集成功能，请同时试用**云资源管理器**。可以从“视图”菜单打开这两个窗口。
+通过 Visual Studio，用户可以访问 [Azure 门户预览](./app-service-web-app-azure-portal.md)中提供的 Web 应用管理功能和配置设置的子集。本节介绍使用**服务器资源管理器**可以实现的功能。若要了解最新的 Azure 集成功能，请同时试用**云资源管理器**。可以从“视图”菜单打开这两个窗口。
 
 1. 如果还未在 Visual Studio 中登录到 Azure，请单击“服务器资源管理器”中的“连接至 Azure”按钮。
 
 	另一种方法是安装可以访问你的帐户的管理证书。如果选择安装证书，请右键单击“服务器资源管理器”中的“Azure”，然后单击上下文菜单中的“管理和筛选订阅”。在“管理 Azure 订阅”对话框中，单击“证书”选项卡，然后单击“导入”。按照说明为 Azure 帐户下载并导入一个订阅文件（也称为 *.publishsettings* 文件）。
 
-	> [AZURE.NOTE]
+	> [!NOTE]
 	将此订阅文件下载并保存到源代码目录之外的文件夹中（例如，在 Downloads 文件夹中），然后在导入完成后将其删除。获得此订阅文件访问权的恶意用户可以编辑、创建和删除 Azure 服务。
 
 2. 在“服务资源管理器”中，展开“Azure”，然后展开“应用服务”。
@@ -181,7 +180,7 @@
 
 ## <a name="remotedebugwj"></a> 远程调试 Web 作业
 
-本部分说明如何使用在 [Azure WebJobs SDK 入门](/documentation/articles/websites-dotnet-webjobs-sdk/)中创建的项目和 Web 应用进行远程调试。
+本部分说明如何使用在 [Azure WebJobs SDK 入门](./websites-dotnet-webjobs-sdk.md)中创建的项目和 Web 应用进行远程调试。
 
 本部分所示的功能只能在 Visual Studio 2013 Update 4 或更高版本中使用。
 
@@ -197,7 +196,7 @@
 
 1. 在“解决方案资源管理器”中，右键单击该 Web 项目（而非 Web 作业项目），然后单击“发布”。
 
-2. 在“配置文件”下拉列表中，选择与 [Azure WebJobs SDK 入门](/documentation/articles/websites-dotnet-webjobs-sdk/)中所用相同的配置文件。
+2. 在“配置文件”下拉列表中，选择与 [Azure WebJobs SDK 入门](./websites-dotnet-webjobs-sdk.md)中所用相同的配置文件。
 
 3. 单击“设置”选项卡，将“配置”更改为“调试”，然后单击“发布”。
 
@@ -241,7 +240,7 @@
 
 	![函数详细信息](./media/web-sites-dotnet-troubleshoot-visual-studio/funcdetails.png)
 
-如果将函数[写入了日志](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/#logs)，可以单击 **ToggleOutput** 查看日志。
+如果将函数[写入了日志](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#logs)，可以单击 **ToggleOutput** 查看日志。
 
 ## 有关远程调试的说明
 
@@ -249,7 +248,7 @@
 
 * 远程调试时避免长时间停止在断点处。Azure 会将停止时间超过几分钟的进程视为无反应进程而将其关闭。
 
-* 进行调试的时候，服务器会向 Visual Studio 发送数据，这可能会影响到带宽费用。有关带宽费率的信息，请参阅 [Azure 定价](/pricing/calculator/)。
+* 进行调试的时候，服务器会向 Visual Studio 发送数据，这可能会影响到带宽费用。有关带宽费率的信息，请参阅 [Azure 定价](https://www.azure.cn/pricing/calculator/)。
 
 * 请确保 *Web.config* 文件中 `compilation` 元素的 `debug` 属性设置为 true。在发布调试版本配置时，默认设置为 true。
 
@@ -285,7 +284,7 @@
 * 本地运行该项目时查看日志。
 * 查看由运行于 Azure 中的应用程序生成的日志。
 
-有关如何在 Web 作业中创建应用程序日志的信息，请参阅[如何使用 WebJobs SDK 处理 Azure 队列存储 - 如何写入日志](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/#logs)。以下有关查看日志以及控制其在 Azure 中的存储方式的说明，同样适用于 Web 作业创建的应用程序日志。
+有关如何在 Web 作业中创建应用程序日志的信息，请参阅[如何使用 WebJobs SDK 处理 Azure 队列存储 - 如何写入日志](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#logs)。以下有关查看日志以及控制其在 Azure 中的存储方式的说明，同样适用于 Web 作业创建的应用程序日志。
 
 ### 向应用程序添加跟踪语句
 
@@ -535,7 +534,7 @@ Web 服务器日志将记录 Web 应用上所有的 HTTP 活动。若要在“�
 
 6. 将“复制”下拉列表设置为“本地冗余”。
 
-	为存储帐户启用地域复制时，会将存储内容复制到辅助数据中心，这样就能够在主要位置发生重大灾难时将故障转移到该位置。地域复制可能会产生额外的成本。对于测试和开发帐户，你通常不希望因为地域复制而付款。有关详细信息，请参阅[创建、管理或删除存储帐户](/documentation/articles/storage-create-storage-account/)。
+	为存储帐户启用地域复制时，会将存储内容复制到辅助数据中心，这样就能够在主要位置发生重大灾难时将故障转移到该位置。地域复制可能会产生额外的成本。对于测试和开发帐户，你通常不希望因为地域复制而付款。有关详细信息，请参阅[创建、管理或删除存储帐户](../storage/storage-create-storage-account.md)。
 
 5. 单击“创建”。
 
@@ -658,7 +657,7 @@ Azure Web Apps 使用 IIS 7.0 及更高版本中提供的相同失败请求跟�
 
 有关对 Azure 应用服务中的 Web 应用进行故障排除的详细信息，请参阅以下资源：
 
-* [如何监视 Web 应用](/documentation/articles/web-sites-monitor/)
+* [如何监视 Web 应用](./web-sites-monitor.md)
 * [使用 Visual Studio 2013 在 Azure Web 应用中调查内存泄漏](http://blogs.msdn.com/b/visualstudioalm/archive/2013/12/20/investigating-memory-leaks-in-azure-web-sites-with-visual-studio-2013.aspx)。有关用于分析托管内存问题的 Visual Studio 功能的 Microsoft ALM 博客文章。
 * [应该了解的 Azure Web 应用联机工具](https://azure.microsoft.com/zh-cn/blog/2014/03/28/windows-azure-websites-online-tools-you-should-know-about-2/)。Amit Apple 发表的博客文章。
 
@@ -721,8 +720,7 @@ Internet 上对于 ASP.NET 跟踪没有全面且最新的介绍。最佳做法�
 
 Microsoft TechNet 网站包含的[使用失败请求跟踪](http://www.iis.net/learn/troubleshoot/using-failed-request-tracing)部分对于了解如何使用这些日志非常有用。然而，该文档主要着重于在 IIS 中配置失败请求跟踪，并不适用于 Azure Web 应用。
 
-[GetStarted]: /documentation/articles/web-sites-dotnet-get-started/
-[GetStartedWJ]: /documentation/articles/websites-dotnet-webjobs-sdk/
+[GetStarted]: ./web-sites-dotnet-get-started.md
+[GetStartedWJ]: ./websites-dotnet-webjobs-sdk.md
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

@@ -1,30 +1,27 @@
-<properties
-   pageTitle="在 Azure SUSE Linux VM 上测试 SAP NetWeaver | Azure"
-   description="在 Azure SUSE Linux VM 上测试 SAP NetWeaver"
-   services="virtual-machines-linux"
-   documentationCenter=""
-   authors="hermanndms"
-   manager="timlt"
-   editor=""
-   tags="azure-resource-manager"
-   keywords=""/>  
+---
+title: 在 Azure SUSE Linux VM 上测试 SAP NetWeaver | Azure
+description: 在 Azure SUSE Linux VM 上测试 SAP NetWeaver
+services: virtual-machines-linux
+documentationCenter: 
+authors: hermanndms
+manager: timlt
+editor: 
+tags: azure-resource-manager
+keywords: 
 
-<tags
-   ms.service="virtual-machines-linux"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-linux"
-   ms.workload="infrastructure-services"
-   ms.date="09/15/2016"
-   wacn.date="12/26/2016"
-   ms.author="hermannd"/>  
-
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure-services
+ms.date: 09/15/2016
+wacn.date: 12/26/2016
+ms.author: hermannd
+---
 
 # 在 Azure SUSE Linux VM 上运行 SAP NetWeaver
 
-
 本文介绍在 Azure SUSE Linux 虚拟机 (VM) 上运行 SAP NetWeaver 时应注意的各个事项。自 2016 年 5 月 19 日起，Azure 上的 SUSE Linux VM 已正式支持 SAP NetWeaver。有关 Linux 版本、SAP 内核版本等等的所有详细信息，请参阅 SAP 说明 1928533“Azure 上的 SAP 应用程序：支持的产品和 Azure VM 类型”。
-
 
 以下信息应有助于避免一些潜在的陷阱。
 
@@ -60,7 +57,7 @@
 
 - [OpenSUSE](http://software.opensuse.org/package/WALinuxAgent)
 
-- [Azure](/documentation/articles/virtual-machines-linux-endorsed-distros/)
+- [Azure](./virtual-machines-linux-endorsed-distros.md)
 
 - [SUSE](https://www.suse.com/communities/blog/suse-linux-enterprise-server-configuration-for-windows-azure/)
 
@@ -91,7 +88,7 @@ SAP“增强型监视”是在 Azure 上运行 SAP 的必要先决条件。请�
 
 ## 从本地将 SUSE VM 上载到 Azure
 
-有关从本地将 SUSE VM 上载到 Azure 的步骤说明，请参阅[为 Azure 准备 SLES 或 openSUSE 虚拟机](/documentation/articles/virtual-machines-linux-suse-create-upload-vhd/)。
+有关从本地将 SUSE VM 上载到 Azure 的步骤说明，请参阅[为 Azure 准备 SLES 或 openSUSE 虚拟机](./virtual-machines-linux-suse-create-upload-vhd.md)。
 
 若要使用最终没有取消预配步骤的方法上载 VM（例如，为了保留现有 SAP 安装以及主机名），需要检查以下项：
 
@@ -110,9 +107,9 @@ SAP“增强型监视”是在 Azure 上运行 SAP 的必要先决条件。请�
 
 	   azure group deployment create "<deployment name>" -g "<resource group name>" --template-file "<../../filename.json>"
 
-有关 JSON 模板文件的更多详细信息，请参阅[创作 Azure Resource Manager 模板](/documentation/articles/resource-group-authoring-templates/)和 [Azure 快速启动模板](https://github.com/Azure/azure-quickstart-templates/)。
+有关 JSON 模板文件的更多详细信息，请参阅[创作 Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)和 [Azure 快速启动模板](https://github.com/Azure/azure-quickstart-templates/)。
 
-有关 CLI 和 Azure Resource Manager 的更多详细信息，请参阅 [将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure Resource Manager 配合使用](/documentation/articles/xplat-cli-azure-resource-manager/)。
+有关 CLI 和 Azure Resource Manager 的更多详细信息，请参阅 [将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure Resource Manager 配合使用](../azure-resource-manager/xplat-cli-azure-resource-manager.md)。
 
 ## SAP 许可证和硬件密钥
 
@@ -128,15 +125,13 @@ SUSE 提供了一个名为“sapconf”的包，该包可管理一组特定于 S
 
 有关如何使用 tuned-adm 针对 SAP 工作负荷优化系统的信息可以在[此处](https://www.suse.com/documentation/sles-for-sap-12/pdfdoc/book_s4s/book_s4s.pdf)（6.2 章中）找到
 
-
 ## 分布式 SAP 安装中的 NFS 共享
 
 如果你使用了分布式安装（例如，要将数据库和 SAP 应用程序服务器安装在独立的 VM 中），你可以通过网络文件系统 (NFS) 来共享 /sapmnt 目录。如果在为 /sapmnt 创建 NFS 共享后，安装步骤会出现问题，请检查是否为该共享设置了“no\_root\_squash”。
 
 ## 逻辑卷
 
-在过去，如果用户需要一个跨多个 Azure 数据磁盘的大型逻辑卷（例如用于 SAP 数据库），我们建议使用 mdadm，因为 lvm 在 Azure 上尚未完全通过验证。若要了解如何使用 mdadm 在 Azure 上设置 Linux RAID，请参阅[在 Linux 上配置软件 RAID](/documentation/articles/virtual-machines-linux-configure-raid/)。此外，自 2016 年 5 月起，lvm 在 Azure 上也已获得完全支持，可用作 mdadm 的替代方案。有关 Azure 上 lvm 的其他信息，请参阅[在 Azure 中的 Linux VM 上配置 LVM](/documentation/articles/virtual-machines-linux-configure-lvm/)。
-
+在过去，如果用户需要一个跨多个 Azure 数据磁盘的大型逻辑卷（例如用于 SAP 数据库），我们建议使用 mdadm，因为 lvm 在 Azure 上尚未完全通过验证。若要了解如何使用 mdadm 在 Azure 上设置 Linux RAID，请参阅[在 Linux 上配置软件 RAID](./virtual-machines-linux-configure-raid.md)。此外，自 2016 年 5 月起，lvm 在 Azure 上也已获得完全支持，可用作 mdadm 的替代方案。有关 Azure 上 lvm 的其他信息，请参阅[在 Azure 中的 Linux VM 上配置 LVM](./virtual-machines-linux-configure-lvm.md)。
 
 ## Azure SUSE 存储库
 

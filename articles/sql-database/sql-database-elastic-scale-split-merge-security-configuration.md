@@ -1,26 +1,25 @@
-<properties 
-    pageTitle="拆分/合并安全配置 | Azure" 
-    description="设置用于加密的 x409 证书" 
-    metaKeywords="弹性数据库证书安全性" 
-    services="sql-database" 
-    documentationCenter="" 
-    manager="jhubbard" 
-    authors="torsteng"/>
+---
+title: 拆分/合并安全配置 | Azure
+description: 设置用于加密的 x409 证书
+metaKeywords: 弹性数据库证书安全性
+services: sql-database
+documentationCenter: 
+manager: jhubbard
+authors: torsteng
 
-<tags 
-    ms.service="sql-database" 
-    ms.workload="sql-database" 
-    ms.tgt_pltfrm="na" 
-    ms.devlang="na" 
-    ms.topic="article" 
-    ms.date="05/27/2016" 
-    wacn.date="12/27/2016" 
-    ms.author="torsteng" />
-
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/27/2016
+wacn.date: 12/27/2016
+ms.author: torsteng
+---
 
 # 拆分/合并安全配置  
 
-若要使用拆分/合并服务，必须正确配置安全性。该服务是 Azure SQL 数据库弹性缩放功能的一部分。有关详细信息，请参阅[弹性缩放拆分和合并服务教程](/documentation/articles/sql-database-elastic-scale-configure-deploy-split-and-merge/)。
+若要使用拆分/合并服务，必须正确配置安全性。该服务是 Azure SQL 数据库弹性缩放功能的一部分。有关详细信息，请参阅[弹性缩放拆分和合并服务教程](./sql-database-elastic-scale-configure-deploy-split-and-merge.md)。
 
 ## 配置证书
 
@@ -271,7 +270,6 @@
 
 *    -e，带有证书到期日期
 
-
 ##<a name="Find-CA-Public Key"></a> 查找 CA 公钥
 
 所有客户端证书都必须由服务信任的证书颁发机构颁发。为了将证书上传到云服务，需要查找颁发了客户端证书（将用于身份验证）的证书颁发机构提供的公钥。
@@ -491,5 +489,5 @@
 
 对此数据库中存储的凭据进行加密。但是，最佳实践是，确保服务部署的 Web 角色和辅助角色保持最新且是安全的，因为它们都有权访问元数据数据库和用于加密和解密存储凭据的证书。
 
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

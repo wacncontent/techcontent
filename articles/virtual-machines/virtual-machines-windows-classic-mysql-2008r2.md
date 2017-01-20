@@ -1,51 +1,48 @@
-<properties
-	pageTitle="创建运行 MySQL 的 VM | Azure"
-	description="使用经典部署模型创建运行 Windows Server 2012 R2 的 Azure 虚拟机，然后在其上安装并配置 MySQL 数据库。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="cynthn"
-	manager="timlt"
-	editor="tysonn"
-	tags="azure-service-management"/>
+---
+title: 创建运行 MySQL 的 VM | Azure
+description: 使用经典部署模型创建运行 Windows Server 2012 R2 的 Azure 虚拟机，然后在其上安装并配置 MySQL 数据库。
+services: virtual-machines-windows
+documentationCenter: 
+authors: cynthn
+manager: timlt
+editor: tysonn
+tags: azure-service-management
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/25/2016"
-	wacn.date="09/30/2016"
-	ms.author="cynthn"/>
-
-
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 07/25/2016
+wacn.date: 09/30/2016
+ms.author: cynthn
+---
 
 # 在使用经典部署模型创建的运行 Windows Server 2012 R2 的虚拟机上安装 MySQL
 
+[MySQL](http://www.mysql.com) 是一种受欢迎的 SQL 开源数据库。使用 [Azure 经典管理门户](http://manage.windowsazure.cn)，你可以从映像库创建运行 Windows Server 2012 R2 的虚拟机。然后，你就可以将其安装并配置为 MySQL Server。有关如何在 Linux 上安装 MySQL 的说明，请参阅：[如何在 Azure 上安装 MySQL](./virtual-machines-linux-mysql-install.md)。
 
-[MySQL](http://www.mysql.com) 是一种受欢迎的 SQL 开源数据库。使用 [Azure 经典管理门户](http://manage.windowsazure.cn)，你可以从映像库创建运行 Windows Server 2012 R2 的虚拟机。然后，你就可以将其安装并配置为 MySQL Server。有关如何在 Linux 上安装 MySQL 的说明，请参阅：[如何在 Azure 上安装 MySQL](/documentation/articles/virtual-machines-linux-mysql-install/)。
-
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 ## 创建运行 Windows Server 2012 R2 的虚拟机
 
-如果你还没拥有运行 Windows Server 2012 R2 的虚拟机，你可以使用这个[教程](/documentation/articles/virtual-machines-windows-classic-tutorial/)来创建虚拟机。
+如果你还没拥有运行 Windows Server 2012 R2 的虚拟机，你可以使用这个[教程](./virtual-machines-windows-classic-tutorial.md)来创建虚拟机。
 
 ## 附加数据磁盘
 
 创建虚拟机后，你可以选择性地附加其他数据磁盘。生产型负荷建议执行此操作，这样做还可以避免包含操作系统的 OS 驱动器 (C:) 空间不足。
 
-请参阅[如何将数据磁盘附加到 Windows 虚拟机](/documentation/articles/virtual-machines-windows-classic-attach-disk/)，然后按说明附加一个空磁盘。将主机缓存设置设置为“无”或“只读”。
+请参阅[如何将数据磁盘附加到 Windows 虚拟机](./virtual-machines-windows-classic-attach-disk.md)，然后按说明附加一个空磁盘。将主机缓存设置设置为“无”或“只读”。
 
 ## 登录到虚拟机
 
-接下来，你将[登录到虚拟机](/documentation/articles/virtual-machines-windows-classic-connect-logon/)，以便安装 MySQL。
+接下来，你将[登录到虚拟机](./virtual-machines-windows-classic-connect-logon.md)，以便安装 MySQL。
 
 ##在虚拟机上安装和运行 MySQL Community Server
 
 按照下列步骤操作可安装、配置和运行社区版 MySQL Server：
 
-> [AZURE.NOTE]这些步骤适用于 5.6.23.0 社区版 MySQL 和 Windows Server 2012 R2。不同版本的 MySQL 或 Windows Server 给你带来的体验可能有所不同。
+> [!NOTE]这些步骤适用于 5.6.23.0 社区版 MySQL 和 Windows Server 2012 R2。不同版本的 MySQL 或 Windows Server 给你带来的体验可能有所不同。
 
 1.	使用远程桌面连接到该虚拟机后，从“开始”菜单单击“Internet Explorer”。
 2.	选择右上角的“工具”按钮（齿轮图标），然后单击“Internet 选项”。依次单击“安全”选项卡、“受信任的站点”图标、“站点”按钮。将 http://*.mysql.com 添加到受信任站点列表中。单击“关闭”，然后单击“确定”。
@@ -86,9 +83,7 @@
 
 如果你希望 MySQL Server 服务可供 Internet 上的 MySQL 客户端计算机使用，则必须为 MySQL Server 服务所侦听的 TCP 端口配置一个终结点，并创建更多 Windows 防火墙规则。该端口为 TCP 端口 3306，除非你在“类型和网络”页上指定了其他端口（前一过程的步骤 10）。
 
-
-> [AZURE.NOTE]你应该仔细考虑这样做的安全隐患，因为这会使 MySQL Server 服务可供 Internet 上的所有计算机使用。你可以通过访问控制列表 (ACL) 定义一组允许使用终结点的源 IP 地址。有关详细信息，请参阅[如何对虚拟机设置终结点](/documentation/articles/virtual-machines-windows-classic-setup-endpoints/)。
-
+> [!NOTE]你应该仔细考虑这样做的安全隐患，因为这会使 MySQL Server 服务可供 Internet 上的所有计算机使用。你可以通过访问控制列表 (ACL) 定义一组允许使用终结点的源 IP 地址。有关详细信息，请参阅[如何对虚拟机设置终结点](./virtual-machines-windows-classic-setup-endpoints.md)。
 
 若要配置 MySQL Server 服务终结点，请执行以下操作：
 
@@ -104,10 +99,7 @@
 
 	New-NetFirewallRule -DisplayName "MySQL56" -Direction Inbound –Protocol TCP –LocalPort 3306 -Action Allow -Profile Public
 
-
-	
 ## 测试你的远程连接
-
 
 若要测试到 MySQL Server 服务（运行在 Azure 虚拟机上）的远程连接，你必须先确定与云服务相对应的 DNS 名称，该云服务包含运行 MySQL Server 的虚拟机。
 
@@ -123,7 +115,6 @@
 	例如，如果 MySQL 用户名为 dbadmin3，虚拟机的 DNS 名称为 testmysql.chinacloudapp.cn，请使用以下命令。
 
 		mysql -u dbadmin3 -p -h testmysql.chinacloudapp.cn
-
 
 ## 下一步
 

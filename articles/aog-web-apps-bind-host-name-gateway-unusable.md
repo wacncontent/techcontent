@@ -1,17 +1,18 @@
-<properties
-	pageTitle="如何解决当 Web 应用绑定了主机名而无法使用应用程序网关的问题"
-	description="如何解决当 Web 应用绑定了主机名而无法使用应用程序网关的问题。"
-	services="application-gateway"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 如何解决当 Web 应用绑定了主机名而无法使用应用程序网关的问题
+description: 如何解决当 Web 应用绑定了主机名而无法使用应用程序网关的问题。
+services: application-gateway
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="application-gateway-aog"
-	ms.date="12/05/2016"
-	wacn.date="01/18/2017"/>
+ms.service: application-gateway-aog
+ms.date: 12/05/2016
+wacn.date: 01/18/2017
+---
+
 # 如何解决当 Web 应用绑定了主机名而无法使用应用程序网关的问题 #
 
 ### 问题描述 ###

@@ -1,24 +1,22 @@
-<properties 
-    pageTitle="使用 Logic Apps 发送 DocumentDB 更改通知 | Azure" 
-    description="。" 
-    keywords="更改通知"
-    services="documentdb" 
-    authors="hedidin" 
-    manager="jhubbard" 
-    editor="mimig" 
-    documentationCenter=""/>  
+---
+title: 使用 Logic Apps 发送 DocumentDB 更改通知 | Azure
+description: 。
+keywords: 更改通知
+services: documentdb
+authors: hedidin
+manager: jhubbard
+editor: mimig
+documentationCenter: 
 
-
-<tags 
-    ms.service="documentdb" 
-    ms.workload="data-services" 
-    ms.tgt_pltfrm="na" 
-    ms.devlang="rest-api" 
-    ms.topic="article" 
-    ms.date="09/23/2016" 
-    ms.author="b-hoedid"
-    wacn.date="11/28/2016"/>  
-
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: rest-api
+ms.topic: article
+ms.date: 09/23/2016
+ms.author: b-hoedid
+wacn.date: 11/28/2016
+---
 
 # 使用逻辑应用针对新增或已更改的 DocumentDB 资源发送通知
 
@@ -26,7 +24,7 @@
 
 我已使用 BizTalk Server 许多年，这是使用 [WCF LOB 适配器](https://msdn.microsoft.com/zh-cn/library/bb798128.aspx)时非常常见的案例。因此，我决定试试看能否在 DocumentDB 中对新增和/或已修改的文档重现此功能。
 
-本文概述了更改通知解决方案的组件，其中包括[触发器](/documentation/articles/documentdb-programming/#trigger/)和逻辑应用。重要代码片段以内联方式提供，[GitHub](https://github.com/HEDIDIN/DocDbNotifications) 上提供了整个解决方案。
+本文概述了更改通知解决方案的组件，其中包括[触发器](./documentdb-programming.md#trigger/)和逻辑应用。重要代码片段以内联方式提供，[GitHub](https://github.com/HEDIDIN/DocDbNotifications) 上提供了整个解决方案。
 
 ## 使用案例
 
@@ -36,7 +34,7 @@ DocumentDB 是 Health Level Seven International (HL7) Fast Healthcare Interopera
 
 心脏病科会跟踪个人健康和锻炼数据。搜索新增或已修改的患者记录相当耗时。他们询问 IT 部门是否有办法让他们收到新增或已修改患者记录的通知。
 
-IT 部门表示他们可以轻松提供此通知。他们还表示可以将文档推送到 [Azure Blob 存储](/home/features/storage/)，供心脏病科轻松访问。
+IT 部门表示他们可以轻松提供此通知。他们还表示可以将文档推送到 [Azure Blob 存储](https://www.azure.cn/home/features/storage/)，供心脏病科轻松访问。
 
 ## IT 部门如何解决此问题
 
@@ -50,12 +48,10 @@ IT 部门表示他们可以轻松提供此通知。他们还表示可以将文�
 
 ![高级视图](./media/documentdb-change-notification/high-level-view.png)  
 
-
 ### 让我们看一下此逻辑应用的用途
 如果查看下图，你会发现 LogicApp 工作流中有几个步骤。
 
 ![主要逻辑流程](./media/documentdb-change-notification/main-logic-app-process.png)  
-
 
 步骤如下：
 
@@ -69,12 +65,11 @@ SQL
 
 	SELECT * FROM Patients p WHERE (p._ts >= @unixTimeStamp)
     
-
-> [AZURE.NOTE] \_ts 表示所有 DocumentDB 资源的时间戳元数据。
+> [!NOTE] \_ts 表示所有 DocumentDB 资源的时间戳元数据。
 
 4. 如果找到文档，则会将响应正文发送到 Azure Blob 存储。
 
-    > [AZURE.NOTE] Blob 存储需要 Azure 存储帐户。你必须预配 Azure Blob 存储帐户，并添加名为 patients 的新 Blob。有关详细信息，请参阅[关于 Azure 存储帐户](/documentation/articles/storage-create-storage-account/)和 [Azure Blob 存储入门](/documentation/articles/storage-dotnet-how-to-use-blobs/)。
+    > [!NOTE] Blob 存储需要 Azure 存储帐户。你必须预配 Azure Blob 存储帐户，并添加名为 patients 的新 Blob。有关详细信息，请参阅[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)和 [Azure Blob 存储入门](../storage/storage-dotnet-how-to-use-blobs.md)。
 
 5. 最后会发送电子邮件，通知收件人已找到的文档数目。如果找不到任何文档，电子邮件正文将为“0 Documents Found”。
 
@@ -90,29 +85,24 @@ SQL
 
 ![开始进行](./media/documentdb-change-notification/starting-off.png)  
 
-
 ### 完整逻辑应用的设计视图
 让我们往前跳并查看逻辑应用（名为 DocDB）的完整设计视图。
 
 ![逻辑应用工作流](./media/documentdb-change-notification/workflow-expanded.png)  
 
-
 在逻辑应用设计器中编辑操作时，可以选择来自 HTTP请求或来自前一个操作的**输出**，如以下 sendMail 操作所示。
 
 ![选择输出](./media/documentdb-change-notification/choose-outputs.png)  
-
 
 在执行工作流中的每个操作之前，可以做出决定；如下图所示“添加操作”或“添加条件”。
 
 ![做出决定](./media/documentdb-change-notification/add-action-or-condition.png)  
 
-
 如果选择“添加条件”，即会出现如下图所示的窗体，以便输入逻辑。这其实就是业务规则。如果单击字段内部，可以选择来自前一个操作的参数。也可以直接输入值。
 
 ![添加条件](./media/documentdb-change-notification/condition1.png)  
 
-
-> [AZURE.NOTE] 你也可以在“代码视图”中输入任何信息。
+> [!NOTE] 你也可以在“代码视图”中输入任何信息。
 
 让我们在代码视图中看一下完整的逻辑应用。
 
@@ -251,8 +241,6 @@ JSON
             "type": "Manual"
         }
 	
-
-
 如果你不熟悉代码中各节所代表的含义，可以查看[逻辑应用工作流定义语言](http://aka.ms/logicappsdocs)文档。
 
 此工作流使用 [HTTP Webhook 触发器](https://sendgrid.com/blog/whats-webhook/)。如果查看上述代码，你会看到以下示例所示的参数。
@@ -261,11 +249,9 @@ C#
 
     =@{triggerBody()['Subject']}
 
-
-
 `triggerBody()` 代表逻辑应用 REST API 的 REST POST 主体中包含的参数。`()['Subject']` 代表字段。所有这些参数构成了 JSON 格式的主体。
 
-> [AZURE.NOTE] 使用 Webhook，你可以完整访问触发器的请求标头和主体。在此应用程序中，你会需要主体。
+> [!NOTE] 使用 Webhook，你可以完整访问触发器的请求标头和主体。在此应用程序中，你会需要主体。
 
 如先前所述，你可以使用设计器来分配参数，或在代码视图中分配参数。如果在代码视图中分配参数，你会接着定义需有值的属性，如下列代码示例所示。
 
@@ -291,7 +277,6 @@ JSON
 		}
 	    }
 
-
 你正在创建将从 HTTP POST 主体传入的 JSON 架构。若要引发触发器，你需要一个回叫 URL。你将在稍后的教程中了解如何生成回叫 URL。
 
 ## 操作
@@ -302,7 +287,6 @@ JSON
 **设计器视图**
 
 ![](./media/documentdb-change-notification/getutcdate.png)  
-
 
 **代码视图**
 
@@ -323,8 +307,6 @@ JSON
 		    "type": "Http"
 		},
 
-
-
 此 HTTP 操作会执行 GET 操作。它会调用 API 应用 GetUtcDate 方法。Uri 使用传入触发器主体的“GetUtcDate\_HoursBack”属性。“GetUtcDate\_HoursBack”值在第一个逻辑应用中设置。你将在稍后的教程中详细了解触发器逻辑应用。
 
 此操作会调用 API 应用以返回 UTC 日期字符串值。
@@ -343,8 +325,6 @@ JSON
 	    }
 	}
 
-
-
 **响应**
 
 JSON
@@ -362,8 +342,6 @@ JSON
 	    "body": "Fri, 15 Jan 2016 23:47:33 GMT"
 	}
 
-
-
 下一步是将 UTC 日期时间值转换为 Unix 时间戳，后者是 .NET double 类型。
 
 ### 转换
@@ -371,7 +349,6 @@ JSON
 ##### 设计器视图
 
 ![转换](./media/documentdb-change-notification/conversion.png)  
-
 
 ##### 代码视图
 
@@ -396,8 +373,6 @@ JSON
 	    "type": "Http"
 	},
 
-
-
 在此步骤中，你会传入从 GetUTCDate 返回的值。系统有一个 dependsOn 条件，这表示必须成功完成 GetUTCDate 操作。如果未成功完成，则跳过此操作。
 
 此操作会调用 API 应用以处理转换。
@@ -416,7 +391,6 @@ JSON
 	    }
 	}   
 
-
 ##### 响应
 
 JSON
@@ -434,7 +408,6 @@ JSON
 	    "body": 1452901653
 	}
 
-
 在下一个操作中，你将对我们的 API 应用执行 POST 操作。
 
 ### GetDocuments 
@@ -442,7 +415,6 @@ JSON
 ##### 设计器视图
 
 ![获取文档](./media/documentdb-change-notification/getdocuments.png)  
-
 
 ##### 代码视图
 
@@ -467,16 +439,11 @@ JSON
 	    "type": "Http"
 	},
 
-
-
 在 GetDocuments 操作中，你将传入来自 Conversion 操作的响应主体。这是 Uri 中的参数：
 
- 
 C#
 
 	unixTimeStamp=@{body('Conversion')}
-
-
 
 QueryDocuments 操作会对 API 应用执行 HTTP POST 操作。
 
@@ -495,7 +462,6 @@ JSON
 		"unixTimeStamp": "1452901653"
 	    }
 	}
-
 
 ##### 响应
 
@@ -557,18 +523,15 @@ JSON
             }
         },
 
+下一个操作是将文档保存到 [Azure Blog 存储](https://www.azure.cn/home/features/storage/)。
 
-
-下一个操作是将文档保存到 [Azure Blog 存储](/home/features/storage/)。
-
-> [AZURE.NOTE] Blob 存储需要 Azure 存储帐户。你必须预配 Azure Blob 存储帐户，并添加名为 patients 的新 Blob。有关详细信息，请参阅 [Get started with Azure Blob storage](/documentation/articles/storage-dotnet-how-to-use-blobs/)（Azure Blob 存储入门）。
+> [!NOTE] Blob 存储需要 Azure 存储帐户。你必须预配 Azure Blob 存储帐户，并添加名为 patients 的新 Blob。有关详细信息，请参阅 [Get started with Azure Blob storage](../storage/storage-dotnet-how-to-use-blobs.md)（Azure Blob 存储入门）。
 
 ### 创建文件
 
 ##### 设计器视图
 
 ![创建文件](./media/documentdb-change-notification/createfile.png)  
-
 
 ##### 代码视图
 
@@ -634,8 +597,6 @@ JSON
                 "display": "Good Health Clinic"
             }
         },
-
-
 
 此代码通过设计器中的操作生成。你不需要修改此代码。
 
@@ -705,9 +666,6 @@ JSON
             }
         },….
 
-
-
-
 ##### 响应
 
 JSON
@@ -738,7 +696,6 @@ JSON
 	    }
 	}
 
-
 最后一步是发送电子邮件通知
 
 ### sendEmail
@@ -747,11 +704,9 @@ JSON
 
 ![发送电子邮件](./media/documentdb-change-notification/sendemail.png)  
 
-
 ##### 代码视图
 
 JSON
-
 
 	"sendMail": {
 	    "conditions": [
@@ -769,7 +724,6 @@ JSON
 	    },
 	    "type": "Http"
 	}
-
 
 在此操作中，你会发送电子邮件通知。将使用 [SendGrid](https://sendgrid.com/marketing/sendgrid-services?cvosrc=PPC.Bing.sendgrib&cvo_cid=SendGrid%20-%20US%20-%20Brand%20-%20&mc=Paid%20Search&mcd=BingAds&keyword=sendgrib&network=o&matchtype=e&mobile=&content=&search=1&utm_source=bing&utm_medium=cpc&utm_term=%5Bsendgrib%5D&utm_content=%21acq%21v2%2134335083397-8303227637-1649139544&utm_campaign=SendGrid+-+US+-+Brand+-+%28English%29)。
 
@@ -804,8 +758,6 @@ JSON
 		    "type": "String"
 		},
 
-
-
 emailBody 会将查询所返回的文档数目（可能是“0”或更多）与“Records Found”串连在一起。其余参数从触发器参数设置。
 
 此操作取决于 **GetDocuments** 操作。
@@ -823,8 +775,6 @@ JSON
 	    },
 	    "body": "api_user=azureuser@azure.com&api_key=Biz@Talk&from=user@msn.com&to=XXXX@XXXX.com&subject=New Patients&text=37 Documents Found"
 	}
-
-
 
 ##### 响应
 
@@ -844,9 +794,7 @@ JSON
 	    }
 	}
 
-
 最后，你要能够在 Azure 门户预览上看到逻辑应用的结果。若要这么做，请向 outputs 节添加参数。
-
 
 JSON
 
@@ -856,18 +804,14 @@ JSON
 		    "value": "@{int(length(actions('QueryDocuments').outputs.body))} Records Found"
 		}
 
-
-
 这会返回在电子邮件正文中发送的相同值。下图显示“29 Records Found”的示例。
 
 ![结果](./media/documentdb-change-notification/logic-app-run.png)  
-
 
 ## 度量值
 你可以在门户预览中为主要逻辑应用配置监视。这样，你就可以查看“运行延迟”和其他事件，如下图所示。
 
 ![](./media/documentdb-change-notification/metrics.png)  
-
 
 ## DocDb 触发器
 
@@ -876,7 +820,6 @@ JSON
 下图显示设计器视图。
 
 ![](./media/documentdb-change-notification/trigger-recurrence.png)  
-
 
 JSON
 
@@ -918,8 +861,6 @@ JSON
 	    }
 	}
 
-
-
 此触发器已设置为 24 个小时重复一次。操作为 HTTP POST，该操作使用主要逻辑应用的回叫 URL。主体包含 JSON 架构中指定的参数。
 
 #### 操作
@@ -940,8 +881,6 @@ JSON
 	    }
 	}
 
-
-
 ##### 响应
 
 JSON
@@ -958,7 +897,6 @@ JSON
 	    }
 	}
 
-
 现在，让我们看看 API 应用。
 
 ## DocDBNotificationApi
@@ -972,25 +910,21 @@ JSON
 ### DocDBNotificationApi 操作
 让我们看看 Swagger 文档
 
-> [AZURE.NOTE] 为了从外部调用操作，你需要在 API 应用的设置中添加 CORS 允许的原始值“*”（不含引号），如下图所示。
+> [!NOTE] 为了从外部调用操作，你需要在 API 应用的设置中添加 CORS 允许的原始值“*”（不含引号），如下图所示。
 
 ![Cors 配置](./media/documentdb-change-notification/cors.png)  
-
 
 #### GetUtcDate
 
 ![G](./media/documentdb-change-notification/getutcdateswagger.png)  
 
-
 #### ConvertToTimeStamp
 
 ![获取 UTC 日期](./media/documentdb-change-notification/converion-swagger.png)  
 
-
 #### QueryForNewPatientDocuments
 
 ![查询](./media/documentdb-change-notification/patientswagger.png)  
-
 
 让我们看看此操作背后的代码。
 
@@ -1011,10 +945,8 @@ C#
 	   [Metadata("Hours Back", "How many hours back from the current Date Time")] int hoursBack)
 	{
 
-
 	    return DateTime.UtcNow.AddHours(-hoursBack).ToString("r");
 	}
-
 
 此操作只会返回当前的 UTC 日期时间减去 HoursBack 值。
 
@@ -1056,8 +988,6 @@ C#
             return result;
         }
 
-
-
 此操作会将 GetUtcDate 操作的响应转换为双精度值。
 
 #### QueryForNewPatientDocuments
@@ -1086,7 +1016,6 @@ C#
                 unixTimeStamp);
             var options = new FeedOptions {MaxItemCount = -1};
 
-
             var collectionLink = UriFactory.CreateDocumentCollectionUri(DocumentDbContext.DatabaseId,
                 DocumentDbContext.CollectionId);
 
@@ -1096,13 +1025,10 @@ C#
             return response.ToList();
 	}
 
-
-
-此操作使用 [DocumentDB .NET SDK](/documentation/articles/documentdb-sdk-dotnet/) 创建文档查询。
+此操作使用 [DocumentDB .NET SDK](./documentdb-sdk-dotnet.md) 创建文档查询。
 
 C#
      CreateDocumentQuery<Document>(collectionLink, filterQuery, options).AsEnumerable();
-
 
 将传入 ConvertToTimeStamp 操作 (unixTimeStamp) 的响应。此操作返回文档列表 `IList<Document>`。
 
@@ -1124,20 +1050,15 @@ powershell
 
 	ArmClient.exe post https://management.azure.com/subscriptions/[YOUR SUBSCRIPTION ID/resourcegroups/[YOUR RESOURCE GROUP]/providers/Microsoft.Logic/workflows/[YOUR LOGIC APP NAME/triggers/manual/listcallbackurl?api-version=2015-08-01-preview
 
-
-
 结果应如下所示：
 
 powershell
 
 	https://prod-02.ChinaNorth.logic.azure.com:443/workflows/12a1de57e48845bc9ce7a247dfabc887/triggers/manual/run?api-version=2015-08-01-prevaiew&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=XXXXXXXXXXXXXXXXXXX
 
-
-
 可以使用 [postman](http://www.getpostman.com/) 等工具来测试主要逻辑应用，如下图所示。
 
 ![Postman](./media/documentdb-change-notification/newpostman.png)  
-
 
 下表列出的触发器参数构成 DocDB 触发器逻辑应用的主体。
 
@@ -1155,12 +1076,9 @@ EmailTo | 将会收到电子邮件通知的电子邮件地址
 
 ![存储帐户](./media/documentdb-change-notification/docdbstorageaccount.png)  
 
-
 你将可查看 Patient Blob 文件信息，如下所示。
 
 ![Blob 服务](./media/documentdb-change-notification/blobservice.png)  
-
-
 
 ## 摘要
 

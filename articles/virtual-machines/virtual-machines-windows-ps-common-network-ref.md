@@ -1,28 +1,26 @@
-<properties
-	pageTitle="VM 的常用网络 PowerShell 命令 | Azure"
-	description="可用于为 VM 创建虚拟网络及其关联资源的常用 PowerShell 命令。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: VM 的常用网络 PowerShell 命令 | Azure
+description: 可用于为 VM 创建虚拟网络及其关联资源的常用 PowerShell 命令。
+services: virtual-machines-windows
+documentationCenter: 
+authors: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="01/05/2017"
-	ms.author="davidmu"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 01/05/2017
+ms.author: davidmu
+---
 
 # VM 的常用网络 Azure PowerShell 命令
 
-如果希望创建虚拟机，需要创建[虚拟网络](/documentation/articles/virtual-networks-overview/)或对能够添加 VM 的现有虚拟网络比较了解。通常情况下，创建 VM 时，还需考虑创建本文所述资源。
+如果希望创建虚拟机，需要创建[虚拟网络](../virtual-network/virtual-networks-overview.md)或对能够添加 VM 的现有虚拟网络比较了解。通常情况下，创建 VM 时，还需考虑创建本文所述资源。
 
 有关安装最新版本的 Azure PowerShell、选择订阅和登录帐户的信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
@@ -30,9 +28,9 @@
 
 任务 | 命令 
 -------------- | -------------------------
-创建子网配置 | $subnet1 = [New-AzureRmVirtualNetworkSubnetConfig](https://msdn.microsoft.com/zh-cn/library/mt619412.aspx) -Name "subnet\_name" -AddressPrefix XX.X.X.X/XX<BR>$subnet2 = New-AzureRmVirtualNetworkSubnetConfig -Name "subnet\_name" -AddressPrefix XX.X.X.X/XX<BR><BR>典型的网络可能具有一个用于[面向 Internet 的负载均衡器](/documentation/articles/load-balancer-internet-overview/)的子网和另一个用于[内部负载均衡器](/documentation/articles/load-balancer-internal-overview/)的子网。 |
+创建子网配置 | $subnet1 = [New-AzureRmVirtualNetworkSubnetConfig](https://msdn.microsoft.com/zh-cn/library/mt619412.aspx) -Name "subnet\_name" -AddressPrefix XX.X.X.X/XX<BR>$subnet2 = New-AzureRmVirtualNetworkSubnetConfig -Name "subnet\_name" -AddressPrefix XX.X.X.X/XX<BR><BR>典型的网络可能具有一个用于[面向 Internet 的负载均衡器](../load-balancer/load-balancer-internet-overview.md)的子网和另一个用于[内部负载均衡器](../load-balancer/load-balancer-internal-overview.md)的子网。 |
 创建虚拟网络 | $vnet = [New-AzureRmVirtualNetwork](https://msdn.microsoft.com/zh-cn/library/mt603657.aspx) -Name "virtual\_network\_name" -ResourceGroupName "resource\_group\_name" -Location "location\_name" -AddressPrefix XX.X.X.X/XX -Subnet $subnet1, $subnet2
-唯一域名的测试 | [Test-AzureRmDnsAvailability](https://msdn.microsoft.com/zh-cn/library/mt619419.aspx) -DomainQualifiedName "domain\_name" -Location "location\_name"<BR><BR>可以为[公共 IP 资源](/documentation/articles/virtual-network-ip-addresses-overview-arm/)指定一个 DNS 域名，以便在 Azure 托管的 DNS 服务器中为 domainname.location.chinacloudapp.cn 创建目标为公共 IP 地址的映射。字段只能包含字母、数字和连字符。第一个和最后一个字符必须是字母或数字，域名在其 Azure 位置内必须是唯一的。如果返回 **True**，则建议的名称是全局唯一的。
+唯一域名的测试 | [Test-AzureRmDnsAvailability](https://msdn.microsoft.com/zh-cn/library/mt619419.aspx) -DomainQualifiedName "domain\_name" -Location "location\_name"<BR><BR>可以为[公共 IP 资源](../virtual-network/virtual-network-ip-addresses-overview-arm.md)指定一个 DNS 域名，以便在 Azure 托管的 DNS 服务器中为 domainname.location.chinacloudapp.cn 创建目标为公共 IP 地址的映射。字段只能包含字母、数字和连字符。第一个和最后一个字符必须是字母或数字，域名在其 Azure 位置内必须是唯一的。如果返回 **True**，则建议的名称是全局唯一的。
 创建公共 IP 地址 | $pip = [New-AzureRmPublicIpAddress](https://msdn.microsoft.com/zh-cn/library/mt603620.aspx) -Name "ip\_address\_name" -ResourceGroupName "resource\_group\_name" -DomainNameLabel "domain\_name" -Location "location\_name" -AllocationMethod Dynamic<BR><BR>公共 IP 地址使用以前测试的域名，并为负载均衡器的前端配置所用。
 创建前端 IP 配置 | $frontendIP = [New-AzureRmLoadBalancerFrontendIpConfig](https://msdn.microsoft.com/zh-cn/library/mt603510.aspx) -Name "frontend\_ip\_name" -PublicIpAddress $pip<BR><BR>前端配置包括以前为传入网络流量创建的公共 IP 地址。
 创建后端地址池 | $beAddressPool = [New-AzureRmLoadBalancerBackendAddressPoolConfig](https://msdn.microsoft.com/zh-cn/library/mt603791.aspx) -Name "backend\_pool\_name"<BR><BR>为通过网络接口访问的负载均衡器后端提供内部地址。
@@ -68,7 +66,7 @@
 
 ## 后续步骤
 
-- 使用在[创建 VM](/documentation/articles/virtual-machines-windows-ps-create/) 时创建的网络接口。
-- 了解如何才能[创建具有多个网络接口的 VM](/documentation/articles/virtual-networks-multiple-nics/)。
+- 使用在[创建 VM](./virtual-machines-windows-ps-create.md) 时创建的网络接口。
+- 了解如何才能[创建具有多个网络接口的 VM](../virtual-network/virtual-networks-multiple-nics.md)。
 
 <!---HONumber=Mooncake_1121_2016-->

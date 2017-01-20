@@ -1,35 +1,35 @@
-<properties
-	pageTitle="使用 Azure CLI 管理基于角色的访问控制 (RBAC) | Azure"
-	description="通过列出角色和角色操作、将角色分配到订阅和应用程序范围来了解如何使用 Azure 命令行接口管理基于角色的访问控制 (RBAC)。"
-	services="active-directory"
-	documentationCenter=""
-	authors="kgremban"
-	manager="femila"
-	editor=""/>  
+---
+title: 使用 Azure CLI 管理基于角色的访问控制 (RBAC) | Azure
+description: 通过列出角色和角色操作、将角色分配到订阅和应用程序范围来了解如何使用 Azure 命令行接口管理基于角色的访问控制 (RBAC)。
+services: active-directory
+documentationCenter: 
+authors: kgremban
+manager: femila
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="identity"
-	ms.date="07/22/2016"
-	wacn.date="09/26/2016"
-	ms.author="kgremban"/>
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 07/22/2016
+wacn.date: 09/26/2016
+ms.author: kgremban
+---
 
 # 使用 Azure 命令行接口管理基于角色的访问控制
 
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/role-based-access-control-manage-access-powershell/)
-- [Azure CLI](/documentation/articles/role-based-access-control-manage-access-azure-cli/)
-- [REST API](/documentation/articles/role-based-access-control-manage-access-rest/)
+> [!div class="op_single_selector"]
+- [PowerShell](./role-based-access-control-manage-access-powershell.md)
+- [Azure CLI](./role-based-access-control-manage-access-azure-cli.md)
+- [REST API](./role-based-access-control-manage-access-rest.md)
 
 使用 Azure 门户中基于角色的访问控制 (RBAC) 和 Azure Resource Manager API 可以精细地管理对订阅和资源的访问。使用此功能，可以通过在特定范围内为 Active Directory 用户、组或服务主体分配某些角色来向其授予访问权限。
 
 在使用 Azure CLI 管理 RBAC 之前，必须具备以下条件：
 
-- Azure CLI 0.8.8 版或更高。若要安装最新版本并将其与 Azure 订阅相关联，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)。
-- Azure CLI 中的 Azure Resource Manager。转到[将 Azure CLI 用于资源管理器](/documentation/articles/xplat-cli-azure-resource-manager/)了解详细信息。
+- Azure CLI 0.8.8 版或更高。若要安装最新版本并将其与 Azure 订阅相关联，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)。
+- Azure CLI 中的 Azure Resource Manager。转到[将 Azure CLI 用于资源管理器](../azure-resource-manager/xplat-cli-azure-resource-manager.md)了解详细信息。
 
 ## 列出角色
 
@@ -115,7 +115,6 @@
 
 ![RBAC Azure 命令行 - 按组创建的 Azure 角色分配 - 屏幕截图](./media/role-based-access-control-manage-access-azure-cli/2-azure-role-assignment-create-4.png)
 
-
 ##	删除访问权限
 若要删除角色分配，请使用：
 
@@ -161,16 +160,11 @@
 
 ![RBAC Azure 命令行 - Azure 角色列表 - 屏幕截图](./media/role-based-access-control-manage-access-azure-cli/5-azure-role-list1.png)
 
-
 在下面的示例中，虚拟机操作员自定义角色在 *Production4* 订阅中不可用，因为该订阅不在角色的 **AssignableScopes** 中。
 
 ![RBAC Azure 命令行 - 自定义角色的 Azure 角色列表 - 屏幕截图](./media/role-based-access-control-manage-access-azure-cli/5-azure-role-list2.png)
 
-
-
-
-
 ## RBAC 主题
-[AZURE.INCLUDE [role-based-access-control-toc.md](../../includes/role-based-access-control-toc.md)]
+[!INCLUDE [role-based-access-control-toc.md](../../includes/role-based-access-control-toc.md)]
 
 <!---HONumber=Mooncake_0815_2016-->

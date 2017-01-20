@@ -1,15 +1,16 @@
-<properties 
-	pageTitle="使用 Azure Java SDK 管理 VM" 
-	description="本文介绍如何使用 Azure Java SDK 管理 VM" 
-	services="" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags 
-	ms.service="virtual-machine-aog"
-	ms.date="" 
-	wacn.date="07/29/2016"/>
+---
+title: 使用 Azure Java SDK 管理 VM
+description: 本文介绍如何使用 Azure Java SDK 管理 VM
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machine-aog
+ms.date: 
+wacn.date: 07/29/2016
+---
 
 # 使用 Azure Java SDK 管理 VM
 
@@ -53,7 +54,6 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
     	ComputeManagementClient computeManagementClient = ComputeManagementService.create(config);  
     	VirtualMachineOperations vmop = computeManagementClient.getVirtualMachinesOperations();
 
-    
 2. 证书认证
 
     使用购买的证书或者自定义证书，将包含公钥的 cer 文件上传到 Azure 的经典管理门户中：
@@ -70,7 +70,6 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 		ComputeManagementClient computeManagementClient = ComputeManagementService.create(config);  
     	VirtualMachineOperations vmop = computeManagementClient.getVirtualMachinesOperations();
     
-
 ## <a id="createVM"></a>在云服务中创建 VM
 
 我们创建 VM 的时候，可以将 VM 创建到新建的云服务中或者已存在的云服务中。下面的示例代码中，是把 VM 创建到已经存在的云服务中，云服务的名称通过变量 *hostedServiceName* 指定。如果需要创建新的云服务，只需要在方法 *createVMDeployment* 中把 *createHostedService* 前面的注释打开。
@@ -93,7 +92,6 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 	    private static String hostedServiceDescription = testVMPrefix +"HostedServiceDescription1";        
 	    private static String deploymentLabel = testVMPrefix + "deployLabel1";
  
-    
 	    static{
 	         // TODO Auto-generated method stub
 	         try {
@@ -151,7 +149,6 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 	            createParameters.setLocation(vmLocation);
 	            OperationResponse hostedServiceOperationResponse = hostedServicesOperations.create(createParameters);
 	 
-	            
 	            System.out.println("hostedservice created: " + hostedServiceName);
 	         } catch (Exception e) {
 	               // TODO: handle exception
@@ -219,8 +216,6 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 	 
 	    }
 	 
-	 
-	   
 	    private static VirtualMachineCreateParameters createVirtualMachineCreateParameter(String roleName, ArrayList<ConfigurationSet> configlist, OSVirtualHardDisk oSVirtualHardDisk, String availabilitySetNameValue) {
 	        VirtualMachineCreateParameters createParameters = new VirtualMachineCreateParameters();
 	        //required       
@@ -254,7 +249,6 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 	        VirtualMachineOSImageListResponse virtualMachineImageListResponse = computeManagementClient.getVirtualMachineOSImagesOperations().list();
 	        ArrayList<VirtualMachineOSImageListResponse.VirtualMachineOSImage> virtualMachineOSImagelist = virtualMachineImageListResponse.getImages();
 	 
-	   
 	        for (VirtualMachineOSImageListResponse.VirtualMachineOSImage virtualMachineImage : virtualMachineOSImagelist) {
 	        
 	         // 注意：示例中使用逻辑如下，由于Win-GA已经过期，导致找不到镜像，会导致后续创建部署失败。具体创建哪些基于哪些镜像的VM，您可以输出virtualMachineImage.getName()值来看着使用
@@ -282,7 +276,6 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 	        return oSVirtualHardDisk;
 	    }
 	    
-	 
 		public static void main(String[] args) throws Exception {
 	 
 	        int random = (int)(Math.random()* 100); 
@@ -324,14 +317,11 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 
 关于 Sysprep，更多详细信息请参考：[Sysprep（一般化）Windows 安装](https://msdn.microsoft.com/zh-cn/library/hh824938.aspx)
 
-
 根据上述描述，我们分别创建了这两种类型的映像（如下图所示）。根据这两种映像创建 VM 的方法，请参考下面的示例代码。
 
 ![](./media/aog-azure-java-manage-vm/captured-vms.jpg)
 
-
 **使用经过 Sysprep 处理后的映像来创建 VM 的示例代码：**
-
 
 	public class CreateCaptureImageWithSysprep {
 
@@ -353,7 +343,6 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 	         }
 	    }
 	    
-	 
 	    private static String getSourceImage() throws Exception {
 	        String sourceImageName = null;
 	        VirtualMachineVMImageListResponse virtualMachineImageListResponse = computeManagementClient.getVirtualMachineVMImagesOperations().list();
@@ -417,9 +406,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 	   }
 	}
 
-
 **使用未经过 Sysprep 处理后的映像来创建 VM 的示例代码：**
-
 
 	public class CreateCaptureImageWithNoSysprep {
       
@@ -482,8 +469,6 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 	   }
 	}
 
-
-
 ## <a id="createDisk"></a>创建系统磁盘和数据磁盘
 
 虚拟机磁盘包含两种类型，系统磁盘和数据磁盘，从名字可以看出，系统磁盘一般用来做系统盘，而数据磁盘一般用来做数据存储盘。 Azure Java SDK 中有很多方法可以创建系统磁盘和数据磁盘。  
@@ -492,7 +477,6 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 **computeManagementClient.getVirtualMachineDisksOperations().createDataDisk**：该方法 只可以创建数据磁盘，该方法不依赖于现有的 VHD，可以直接向已有的 VM 附加新的数据磁盘
 
 **创建系统磁盘的示例代码**
-
 
 	Public void testCreateOSDisk() throws Exception {
 		URI mediaLinkUriValue = new URI("https://kevinstorage1.blob.core.chinacloudapi.cn/vhds/kevinvm-kevinvm-2016-04-14.vhd");
@@ -504,10 +488,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 		computeManagementClient.getVirtualMachineDisksOperations().createDisk(createParameters);
 	}
 
-
-
 **创建数据磁盘的示例代码**
-
 
 	Public void test CreateDataDisk() throws Exception {
 		URI mediaLinkUriValue = new URI("https://kevinstorage1.blob.core.chinacloudapi.cn/vhds/kevinvm-kevinvm-0509-2.vhd");
@@ -518,14 +499,12 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 		computeManagementClient.getVirtualMachineDisksOperations().createDisk(createParameters);
 	}
 
-
 ## <a id="attachanddelete"></a>附加磁盘和删除磁盘
 
 1. 附加磁盘
     
 	附加磁盘的时候，如果你附加现有的磁盘，首先确保你附加的磁盘没有被其他 VM 引用。附加现有磁盘只能通过更新 VM 来附加，请参考以下代码：
 	   
-	
 	    VirtualMachineGetResponse virtualMachinesGetResponse = computeManagementClient.getVirtualMachinesOperations().get("kevinvm", "kevinvm", "kevinvm");
 	    
 	    VirtualMachineUpdateParameters updateParameters = new VirtualMachineUpdateParameters();
@@ -548,15 +527,12 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 	    //update
 	    OperationResponse updateoperationResponse = computeManagementClient.getVirtualMachinesOperations().update("kevinvm", "kevinvm", "kevinvm", updateParameters);
 
-
 2. 分离磁盘
   
 	deleteDataDisk 删除磁盘是可以作为分离磁盘来用的， 这个方法的最后一个参数，deleteDataDisk 如果设置为 false，就是从当前 VM 中删除磁盘，但保留其 VHD 文件。请参考下面的代码：
 	
-	    
 		computeManagementClient.getVirtualMachineDisksOperations().deleteDataDisk 
 	    
-
 ## <a id="resource"></a>相关参考资料
 - [Azure Java SDK API](http://azure.github.io/azure-sdk-for-java/)
 - [Azure Management Libraries for Java](https://github.com/Azure/azure-sdk-for-java/tree/0.9)

@@ -1,22 +1,22 @@
-<properties
-   pageTitle="Azure VPN 网关的 BGP 概述 | Azure"
-   description="本文概述了 Azure VPN 网关的 BGP。"
-   services="vpn-gateway"
-   documentationCenter="na"
-   authors="yushwang"
-   manager="rossort"
-   editor=""
-   tags=""/>
+---
+title: Azure VPN 网关的 BGP 概述 | Azure
+description: 本文概述了 Azure VPN 网关的 BGP。
+services: vpn-gateway
+documentationCenter: na
+authors: yushwang
+manager: rossort
+editor: 
+tags: 
 
-<tags
-   ms.service="vpn-gateway"
-   ms.devlang="na"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="06/16/2016"
-   wacn.date="01/09/2017"
-   ms.author="yushwang"/>
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 06/16/2016
+wacn.date: 01/09/2017
+ms.author: yushwang
+---
 
 # Azure VPN 网关的 BGP 概述
 
@@ -38,7 +38,7 @@ BGP 是可用于 Azure 基于路由的 VPN 网关的可选功能。在启用此�
 	
 你还可以播发更大的前缀，可以包括一些 VNet 地址前缀，如大型专用 IP 地址空间（例如，10.0.0.0/8）。但请注意，这些前缀不能与任一 VNet 前缀相同。与 VNet 前缀相同的这些路由将被拒绝。
 
->[AZURE.IMPORTANT] 目前，向 Azure VPN 网关播发默认路由 (0.0.0.0/0) 将被阻止。启用此功能后，将提供进一步更新。
+>[!IMPORTANT] 目前，向 Azure VPN 网关播发默认路由 (0.0.0.0/0) 将被阻止。启用此功能后，将提供进一步更新。
 
 #### 支持 VNet 与本地站点之间的多个隧道基于 BGP 自动进行故障转移
 
@@ -58,14 +58,10 @@ BGP 使多个网关可以从不同网络获知和传播前缀，而无论它们�
 
 ## BGP 常见问题
 
-
-[AZURE.INCLUDE [vpn-gateway-bgp-faq-include](../../includes/vpn-gateway-bpg-faq-include.md)]
-
-
-
+[!INCLUDE [vpn-gateway-bgp-faq-include](../../includes/vpn-gateway-bpg-faq-include.md)]
 
 ## 后续步骤
 
-有关为跨界连接和 VNet 到 VNet 连接配置 BGP 的步骤，请参阅[在 Azure VPN 网关上使用 BGP 入门](/documentation/articles/vpn-gateway-bgp-resource-manager-ps/)。
+有关为跨界连接和 VNet 到 VNet 连接配置 BGP 的步骤，请参阅[在 Azure VPN 网关上使用 BGP 入门](./vpn-gateway-bgp-resource-manager-ps.md)。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

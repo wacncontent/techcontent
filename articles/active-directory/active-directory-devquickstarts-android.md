@@ -1,37 +1,37 @@
-<properties
-	pageTitle="Azure AD Android 入门 | Azure"
-	description="如何生成一个与 Azure AD 集成以方便登录，并使用 OAuth 调用 Azure AD 保护 API 的 Android 应用程序。"
-	services="active-directory"
-	documentationCenter="android"
-	authors="brandwe"
-	manager="mbaldwin"
-	editor=""/>
+---
+title: Azure AD Android 入门 | Azure
+description: 如何生成一个与 Azure AD 集成以方便登录，并使用 OAuth 调用 Azure AD 保护 API 的 Android 应用程序。
+services: active-directory
+documentationCenter: android
+authors: brandwe
+manager: mbaldwin
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="mobile-android"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="09/16/2016"
-	ms.author="brandwe"
-	wacn.date="01/09/2017"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: mobile-android
+ms.devlang: java
+ms.topic: article
+ms.date: 09/16/2016
+ms.author: brandwe
+wacn.date: 01/09/2017
+---
 
 # 将 Azure AD 集成到 Android 应用程序中
 
-[AZURE.INCLUDE [active-directory-devquickstarts-switcher](../../includes/active-directory-devquickstarts-switcher.md)]
+[!INCLUDE [active-directory-devquickstarts-switcher](../../includes/active-directory-devquickstarts-switcher.md)]
 
-[AZURE.INCLUDE [active-directory-devguide](../../includes/active-directory-devguide.md)]
+[!INCLUDE [active-directory-devguide](../../includes/active-directory-devguide.md)]
 
 如果你要开发桌面应用程序，Azure AD 可让你简单直接地使用用户的 Active Directory 帐户对其进行身份验证。它还可以让应用程序安全地使用 Azure AD 保护的任何 Web API，例如 Office 365 API 或 Azure API。
 
 对于需要访问受保护资源的 Android 客户端，Azure AD 提供 Active Directory 身份验证库 (ADAL)。在本质上，ADAL 的唯一用途就是方便应用程序获取访问令牌。为了演示这种简便性，我们生成了一个 Android 待办事项列表应用程序，其中包括：
 
--	使用 [OAuth 2.0 身份验证协议](/documentation/articles/active-directory-protocols-oauth-code/)获取调用待办事项列表 API 的访问令牌。
+-	使用 [OAuth 2.0 身份验证协议](./active-directory-protocols-oauth-code.md)获取调用待办事项列表 API 的访问令牌。
 -	获取用户的待办事项列表
 -	将用户注销。
 
-若要开始，你需要一个可在其中创建用户和注册应用程序的 Azure AD 租户。如果你还没有租户，请[了解如何获取租户](/documentation/articles/active-directory-howto-tenant/)。
+若要开始，你需要一个可在其中创建用户和注册应用程序的 Azure AD 租户。如果你还没有租户，请[了解如何获取租户](./active-directory-howto-tenant.md)。
 
 ## 步骤 1：下载并运行 Node.js REST API TODO 示例服务器
 
@@ -39,7 +39,7 @@
 
 有关如何设置的信息，请访问我们的现有示例：
 
-- [适用于 Node.js 的 Azure Active Directory 示例 REST API 服务](/documentation/articles/active-directory-devquickstarts-webapi-nodejs/)
+- [适用于 Node.js 的 Azure Active Directory 示例 REST API 服务](./active-directory-devquickstarts-webapi-nodejs.md)
 
 ## 步骤 2：向 Azure AD 租户注册 Web API
 
@@ -88,8 +88,6 @@
 9. 单击应用程序的“配置”选项卡。
 10. 查找“客户端 ID”值并将它复制到某个位置，稍后配置应用程序时需要用到它。
 11. 在“针对其他应用程序的权限”中，单击“添加应用程序”。 在“显示”下拉列表中选择“其他”，然后单击上方的复选标记。找到并单击“TodoListService”，然后单击底部的复选标记以添加该应用程序。从“委托的权限”下拉列表中选择“访问 TodoListService”，然后保存配置。
-
-
 
 若要使用 Maven 生成，你可以在顶层使用 pom.xml
 
@@ -148,7 +146,6 @@ gradle
 		   } // Recent version is 1.1.1
 	}
 
-
 ####选项 4：通过 Maven 获取 aar
 
 如果使用 Eclipse 中的 m2e 插件，可以在 pom.xml 文件中指定依赖关系：
@@ -162,14 +159,10 @@ xml
 		   <type>aar</type>
 	</dependency>
 
-
-
 ####选项 5：libs 文件夹中的 jar 包
 可以从 maven 存储库获取 jar 文件并将其放入项目中的 *libs* 文件夹。你还需要将所需的资源复制到项目，因为 jar 包不包括这些项目。
 
-
 ### 步骤 5：在项目中添加对 Android ADAL 的引用
-
 
 2. 添加对项目的引用，并将其指定为 Android 库。如果你不确定如何执行此操作，请[单击此处了解详细信息](http://developer.android.com/tools/projects/projects-eclipse.html)
 
@@ -195,7 +188,6 @@ Java
 		     ....
 	<application/>
 		    
-
 7. 在主要活动中创建 AuthenticationContext 的实例。有关此调用的详细信息超出了本自述文件的范畴，但你可以通过查看 [Android 本机客户端示例](https://github.com/AzureADSamples/NativeClient-Android)来获得一个良好的起点。下面是一个示例：
 Java
 
@@ -216,7 +208,6 @@ Java
 		    }
 	}
 		    
-
 9. 若要请求令牌，你可以定义一个回调
 
 Java
@@ -258,7 +249,6 @@ Java
 	mContext.acquireToken(MainActivity.this, resource, clientId, redirect, user_loginhint, PromptBehavior.Auto, "",
 		                    callback);
 		    
-
 	参数说明：
 
 	  * Resource 是必需的，它是你尝试访问的资源。
@@ -277,7 +267,6 @@ Java
 		
 	mContext.acquireTokenSilent(resource, clientid, userId, callback );
 		    
-
 11. **Broker**：
   Microsoft Intune 的公司门户应用程序将提供代理组件。如果在验证器中创建了一个用户帐户并且开发人员选择不跳过代理帐户，ADAL 将使用代理帐户。开发人员可以使用以下操作跳过代理用户：
 
@@ -285,7 +274,6 @@ Java
 
      AuthenticationSettings.Instance.setSkipBroker(true);
     
-
  开发人员需要注册特殊的 redirectUri 供代理使用。RedirectUri 的格式为 msauth://packagename/Base64UrlencodedSignature。你可以使用脚本“brokerRedirectPrint.ps1”或使用 API 调用 mContext.getBrokerRedirectUri 获取应用程序的 redirecturi。签名与签名证书相关。
 
  当前代理模型针对一个用户。AuthenticationContext 提供用于获取代理用户的 API 方法。
@@ -301,7 +289,6 @@ Java
  * GET\_ACCOUNTS
  * USE\_CREDENTIALS
  * MANAGE\_ACCOUNTS
-
 
 使用本演练时，你应会获得与 Azure Active Directory 成功集成所需的项目。有关此工作的更多示例，请访问 GitHub 上的 AzureADSamples/ 存储库。
 
@@ -335,7 +322,6 @@ Java
 
 	mContext = new AuthenticationContext(MainActivity.this, authority, true, yourCache);
 
-
 ### PromptBehavior
 
 ADAL 提供用于指定提示行为的选项。如果刷新令牌无效并且需要用户凭据，PromptBehavior.Auto 会弹出 UI。PromptBehavior.Always 会跳过缓存使用并始终显示 UI。
@@ -348,7 +334,6 @@ Java
 
 	Future<AuthenticationResult> result = mContext.acquireTokenSilent(resource, clientid, userId, callback );
     
-
 你也可以使用此方法执行同步调用。可以将回调设置为 null，或使用 acquireTokenSilentSync。
 
 ### 诊断
@@ -368,7 +353,6 @@ Java
 #### 日志
 
 你可以将库配置为生成有助于诊断问题的日志消息。若要配置日志记录，你可以执行以下调用以配置一个回调，ADAL 将使用该回调来移交它所生成的每条日志消息。
-
 
  Java
 
@@ -395,7 +379,6 @@ Java
 		osw.close();
 	}
 
-
 ##### 日志记录级别
 
 + 错误（异常）
@@ -409,7 +392,6 @@ Java
 
 	Logger.getInstance().setLogLevel(Logger.LogLevel.Verbose);
  
-
  除了将所有日志消息发送到任何自定义日志回调以外，还将其发送到 logcat。
 可以将日志从 logcat 提取到文件，如下所示：
 
@@ -425,7 +407,6 @@ Fiddler 是最方便的 HTTP 跟踪工具。使用以下链接设置该工具以
 
 + [针对 Android 设置 Fiddler](http://docs.telerik.com/fiddler/configure-fiddler/tasks/ConfigureForAndroid)
 + [为 ADAL 配置 Fiddler 规则](https://github.com/AzureAD/azure-activedirectory-library-for-android/wiki/How-to-listen-to-httpUrlConnection-in-Android-app-from-Fiddler)
-
 
 ### 对话模式
 没有活动的 acquireToken 方法支持对话提示。
@@ -466,15 +447,12 @@ Java
 	<string name="http_auth_dialog_login">Login</string>
 	<string name="http_auth_dialog_cancel">Cancel</string>
 
-
-
-
 ### NTLM 对话
 ADAL 版本 1.1.0 支持通过 WebViewClient 中的 onReceivedHttpAuthRequest 事件处理的 NTLM 对话。你可以自定义对话布局和字符串。
 
 ### 跨应用 SSO
-了解[如何使用 ADAL 在 Android 上启用跨应用 SSO](/documentation/articles/active-directory-sso-android/)
+了解[如何使用 ADAL 在 Android 上启用跨应用 SSO](./active-directory-sso-android.md)
 
-[AZURE.INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
+[!INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

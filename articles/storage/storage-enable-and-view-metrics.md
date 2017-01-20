@@ -1,25 +1,25 @@
-<properties 
-	pageTitle="在 Azure 门户中启用存储指标 | Azure" 
-	description="如何为 Blob、队列、表和文件服务启用存储指标"
-	services="storage"
-	documentationCenter=""
-	authors="robinsh"
-	manager="carmonm"
-	editor="tysonn"/>
+---
+title: 在 Azure 门户中启用存储指标 | Azure
+description: 如何为 Blob、队列、表和文件服务启用存储指标
+services: storage
+documentationCenter: 
+authors: robinsh
+manager: carmonm
+editor: tysonn
 
-<tags
-	ms.service="storage"
-	ms.workload="storage"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="08/03/2016"
-	wacn.date="12/19/2016"
-	ms.author="fryu;robinsh"/>
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 08/03/2016
+wacn.date: 12/19/2016
+ms.author: fryu;robinsh
+---
 
 # 启用 Azure 存储指标并查看指标数据
 
-[AZURE.INCLUDE [storage-selector-portal-enable-and-view-metrics](../../includes/storage-selector-portal-enable-and-view-metrics.md)]
+[!INCLUDE [storage-selector-portal-enable-and-view-metrics](../../includes/storage-selector-portal-enable-and-view-metrics.md)]
 
 ## 概述
 
@@ -59,7 +59,7 @@
 
 `Get-AzureStorageServiceMetricsProperty -MetricsType Hour -ServiceType Blob`
 
-若要了解如何配置 Azure PowerShell cmdlet 以使用 Azure 订阅以及如何选择要使用的默认存储帐户，请参阅：[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。
+若要了解如何配置 Azure PowerShell cmdlet 以使用 Azure 订阅以及如何选择要使用的默认存储帐户，请参阅：[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
 
 ## 如何以编程方式启用存储指标
 
@@ -93,7 +93,6 @@
     // Set the service properties.
     blobClient.SetServiceProperties(properties);
 
-
 ## 查看存储指标
 
 在将存储分析指标配置为监视存储帐户后，存储分析将使用存储帐户在一组已知表中记录指标。可以将图表配置为每小时查看 [Azure 门户预览](https://portal.azure.cn)中的指标：
@@ -109,9 +108,9 @@
 - 编写自定义应用程序或脚本来读取和存储表。
 
 很多第三方存储浏览工具可识别这些表，并可用于直接查看这些表。
-有关可用工具的列表，请参阅 [Azure 存储资源管理器](/documentation/articles/storage-explorers/)。
+有关可用工具的列表，请参阅 [Azure 存储资源管理器](./storage-explorers.md)。
 
-> [AZURE.NOTE] 从 [Azure 存储资源管理器](http://storageexplorer.com/) 0.8.0 版本开始，可查看和下载分析指标表。
+> [!NOTE] 从 [Azure 存储资源管理器](http://storageexplorer.com/) 0.8.0 版本开始，可查看和下载分析指标表。
 
 若要以编程方式访问分析表，请注意如果存储帐户中列出这些表，将不显示它们。可按名称直接访问它们，也可使用 .NET 客户端库中的 [CloudAnalyticsClient API](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.storage.analytics.cloudanalyticsclient.aspx) 查询表名。
 
@@ -143,12 +142,9 @@
 
 - 请求类型是 all（在这种情况下是摘要行）或可识别的特定 API，如 QueryEntity 或 UpdateEntity。
 
-
 上面的示例数据显示一分钟的所有记录（从上午 11:00 开始），因此，QueryEntities 请求数加 QueryEntity 请求数再加 UpdateEntity 请求数的和为 7，这是显示在 user:All 行上的总数。同样，通过计算 ((143.8 * 5) + 3 + 9)/7，可以在 user:All 行得到平均端到端延迟为 104.4286。
 
 应考虑在 [Azure 门户预览](https://portal.azure.cn)中的“监视”页上设置警报，以便存储指标自动通知存储服务行为中发生的任何重要更改。如果使用存储资源管理器工具下载这种采用分隔格式的指标数据，可使用 Microsoft Excel 分析该数据。有关可用存储资源管理器工具的列表，请参阅博客文章 [Azure 存储资源管理器](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/03/11/windows-azure-storage-explorers-2014.aspx)。
-
-
 
 ## 以编程方式访问指标数据
 
@@ -194,9 +190,6 @@
     return entityString;
 
     }
-
-
-
 
 ## 启用存储指标时，需要支付多少费用？
 

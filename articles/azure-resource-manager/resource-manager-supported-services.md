@@ -1,28 +1,29 @@
-<properties
-    pageTitle="Resource Manager 支持的服务 | Azure"
-    description="介绍支持资源管理器的资源提供程序及其架构和可用 API 版本，以及可托管资源的区域。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="3c7a6fe4-371a-40da-9ebe-b574f583305b"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="12/12/2016"
-    wacn.date="01/06/2017"
-    ms.author="magoedte;tomfitz" />
+---
+title: Resource Manager 支持的服务 | Azure
+description: 介绍支持资源管理器的资源提供程序及其架构和可用 API 版本，以及可托管资源的区域。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
+
+ms.assetid: 3c7a6fe4-371a-40da-9ebe-b574f583305b
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 12/12/2016
+wacn.date: 01/06/2017
+ms.author: magoedte;tomfitz
+---
 
 # 资源管理器提供程序、区域、 API 版本和架构
 Azure 资源管理器为你提供了一种新的方式来部署和管理构成应用程序的服务。大多数（但并非所有）服务都支持资源管理器，有些服务仅部分支持资源管理器。本主题提供支持 Azure 资源管理器的资源提供程序列表。
 
 部署资源时，你还需要知道哪些区域支持这些资源，以及哪些 API 版本可用于资源。[支持的区域](#supported-regions)部分说明了如何找出哪些区域支持相应的订阅和资源。[支持的 API 版本](#supported-api-versions)部分说明了如何判断可以使用哪些 API 版本。
 
-若要查看哪些服务支持移动资源，请参阅 [Move resources to new resource group or subscription](/documentation/articles/resource-group-move-resources/)（将资源移到新资源组或订阅）。
+若要查看哪些服务支持移动资源，请参阅 [Move resources to new resource group or subscription](./resource-group-move-resources.md)（将资源移到新资源组或订阅）。
 
 下表列出哪些 Microsoft 服务可通过资源管理器支持部署和管理，哪些则不可以。“快速入门模板”列中的链接向指定资源提供程序的 Azure 快速入门模板存储库发送查询。快速入门模板中经常会添加和更新数据。即使特定的服务存在链接，也并不一定代表查询将从存储库返回模板。此外，还有许多第三方资源提供程序支持 Resource Manager。了解如何在[资源提供程序和类型](#resource-providers-and-types)部分查看所有资源提供程序。
 
@@ -37,7 +38,7 @@ Azure 资源管理器为你提供了一种新的方式来部署和管理构成�
 | 虚拟机（经典）|有限制 |- |- |- |
 | 云服务（经典）|有限制（参阅下文）|- |- |- |
 
-虚拟机（经典）是指已通过经典部署模型部署的资源，而不是通过资源管理器部署模型部署的资源。一般而言，这些资源不支持资源管理器操作，但已启用某些操作。有关这些部署模型的详细信息，请参阅[了解资源管理器部署和经典部署](/documentation/articles/resource-manager-deployment-model/)。
+虚拟机（经典）是指已通过经典部署模型部署的资源，而不是通过资源管理器部署模型部署的资源。一般而言，这些资源不支持资源管理器操作，但已启用某些操作。有关这些部署模型的详细信息，请参阅[了解资源管理器部署和经典部署](./resource-manager-deployment-model.md)。
 
 云服务（经典）可与其他经典资源配合使用。但是，经典资源不能充分利用所有 Resource Manager 功能，并且不太适合未来的解决方案。应该考虑将你的应用程序基础结构更改为使用 Microsoft.Compute、Microsoft.Storage 和 Microsoft.Network 命名空间中的资源。
 
@@ -54,7 +55,7 @@ Azure 资源管理器为你提供了一种新的方式来部署和管理构成�
 ## 存储
 | 服务 | 已启用资源管理器 | REST API | 架构 | 快速入门模板 |
 | --- | --- | --- | --- | --- |
-| 存储 |是 |[存储 REST](https://docs.microsoft.com/rest/api/storagerp) |[存储帐户](/documentation/articles/resource-manager-template-storage/) |[Microsoft.Storage](https://github.com/Azure/azure-quickstart-templates) |
+| 存储 |是 |[存储 REST](https://docs.microsoft.com/rest/api/storagerp) |[存储帐户](./resource-manager-template-storage.md) |[Microsoft.Storage](https://github.com/Azure/azure-quickstart-templates) |
 
 ## 数据库
 | 服务 | 已启用资源管理器 | REST API | 架构 | 快速入门模板 |
@@ -85,7 +86,6 @@ Azure 资源管理器为你提供了一种新的方式来部署和管理构成�
 | 流分析 |是 |[流分析 REST](https://docs.microsoft.com/rest/api/streamanalytics) | | |
 | Power BI |是 |[Power BI Embedded REST](https://docs.microsoft.com/rest/api/powerbiembedded) |[Power BI 架构](https://github.com/Azure/azure-resource-manager-schemas/blob/master/schemas/2016-01-29/Microsoft.PowerBI.json) | |
 
-
 ## 物联网
 | 服务 | 已启用资源管理器 | REST API | 架构 | 快速入门模板 |
 | --- | --- | --- | --- | --- |
@@ -106,7 +106,7 @@ Azure 资源管理器为你提供了一种新的方式来部署和管理构成�
 | 服务总线 |是 |[服务总线 REST](https://docs.microsoft.com/rest/api/servicebus) |[服务总线架构](https://github.com/Azure/azure-resource-manager-schemas/blob/master/schemas/2015-08-01/Microsoft.ServiceBus.json) |[Microsoft.ServiceBus](https://github.com/Azure/azure-quickstart-templates) |
 
 ## 标识和访问管理
-Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色的访问控制。若要了解如何使用基于角色的访问控制和 Active Directory，请参阅 [Azure Role-based Access Control](/documentation/articles/role-based-access-control-configure/)（Azure 基于角色的访问控制）。
+Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色的访问控制。若要了解如何使用基于角色的访问控制和 Active Directory，请参阅 [Azure Role-based Access Control](../active-directory/role-based-access-control-configure.md)（Azure 基于角色的访问控制）。
 
 ## 开发人员服务
 | 服务 | 已启用资源管理器 | REST API | 架构 | 快速入门模板 |
@@ -117,15 +117,15 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 | 服务 | 已启用资源管理器 | REST API | 架构 | 快速入门模板 |
 | --- | --- | --- | --- | --- |
 | 自动化 |否 | | | |
-| 密钥保管库 |是 |[密钥保管库 REST](https://docs.microsoft.com/rest/api/keyvault) |[密钥保管库](/documentation/articles/resource-manager-template-keyvault/)<br />[密钥保管库机密](/documentation/articles/resource-manager-template-keyvault-secret/) |[Microsoft.KeyVault](https://github.com/Azure/azure-quickstart-templates) |
+| 密钥保管库 |是 |[密钥保管库 REST](https://docs.microsoft.com/rest/api/keyvault) |[密钥保管库](./resource-manager-template-keyvault.md)<br />[密钥保管库机密](./resource-manager-template-keyvault-secret.md) |[Microsoft.KeyVault](https://github.com/Azure/azure-quickstart-templates) |
 | 计划程序 |是 |[计划程序 REST](https://docs.microsoft.com/rest/api/scheduler) |[计划程序架构](https://github.com/Azure/azure-resource-manager-schemas/blob/master/schemas/2016-03-01/Microsoft.Scheduler.json) |[Microsoft.Scheduler](https://github.com/Azure/azure-quickstart-templates) |
 | 安全性（预览版） |是 |[安全 REST](https://msdn.microsoft.com/zh-cn/library/azure/mt704034.aspx) | |[Microsoft.Security](https://github.com/Azure/azure-quickstart-templates) |
 
 ## 资源管理器
 | 功能 | 已启用资源管理器 | REST API | 架构 | 快速入门模板 |
 | --- | --- | --- | --- | --- |
-| 授权 |是 |[授权 REST](https://docs.microsoft.com/rest/api/authorization) |[资源锁](/documentation/articles/resource-manager-template-lock/)<br />[角色分配](/documentation/articles/resource-manager-template-role/) |[Microsoft.Authorization](https://github.com/Azure/azure-quickstart-templates) |
-| 资源 |是 |[资源 REST](https://docs.microsoft.com/rest/api/resources) |[资源链接](/documentation/articles/resource-manager-template-links/) |[Microsoft.Resources](https://github.com/Azure/azure-quickstart-templates) |
+| 授权 |是 |[授权 REST](https://docs.microsoft.com/rest/api/authorization) |[资源锁](./resource-manager-template-lock.md)<br />[角色分配](./resource-manager-template-role.md) |[Microsoft.Authorization](https://github.com/Azure/azure-quickstart-templates) |
+| 资源 |是 |[资源 REST](https://docs.microsoft.com/rest/api/resources) |[资源链接](./resource-manager-template-links.md) |[Microsoft.Resources](https://github.com/Azure/azure-quickstart-templates) |
 
 ## <a name="resource-providers-and-types"></a> 资源提供程序和类型
 部署资源时，经常需要检索有关资源提供程序和类型的信息。可以通过 REST API、Azure PowerShell 或 Azure CLI 检索此信息。
@@ -137,7 +137,6 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
    
 ![列出资源提供程序](./media/resource-manager-supported-services/view-resource-providers.png)  
 
-
 ### REST API
 若要获取所有可用的资源提供程序，包括其类型、位置、API 版本和注册状态，请使用[列出所有资源提供程序](https://docs.microsoft.com/rest/api/resources/providers#Providers_List)操作。如果需要注册资源提供程序，请参阅 [Register a subscription with a resource provider](https://docs.microsoft.com/rest/api/resources/providers#Providers_Register)（将订阅注册到资源提供程序）。
 
@@ -145,7 +144,6 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 以下示例说明如何获取所有可用的资源提供程序。
 
     Get-AzureRmResourceProvider -ListAvailable
-
 
 以下示例演示如何获取特定资源提供程序的资源类型。
 
@@ -204,7 +202,6 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 3. 选择资源提供程序，然后查看支持的区域和 API 版本。
    
     ![查看提供程序](./media/resource-manager-supported-services/view-provider.png)  
-
 
 ### REST API
 若要发现哪些区域可供订阅中的特定资源类型使用，请使用[列出所有资源提供程序](https://docs.microsoft.com/rest/api/resources/providers#Providers_List)操作。
@@ -270,7 +267,7 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 你可以打开该文件并查找 **apiVersions** 元素
 
 ## 后续步骤
-* 若要了解如何创建资源管理器模板，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。
-* 若要了解如何部署资源，请参阅[使用 Azure 资源管理器模板部署应用程序](/documentation/articles/resource-group-template-deploy/)。
+* 若要了解如何创建资源管理器模板，请参阅[创作 Azure 资源管理器模板](./resource-group-authoring-templates.md)。
+* 若要了解如何部署资源，请参阅[使用 Azure 资源管理器模板部署应用程序](./resource-group-template-deploy.md)。
 
 <!---HONumber=Mooncake_0103_2017-->

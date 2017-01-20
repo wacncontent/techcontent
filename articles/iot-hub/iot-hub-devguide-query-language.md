@@ -1,23 +1,21 @@
-<properties
- pageTitle="开发人员指南 - 查询语言 | Azure"
- description="Azure IoT 中心开发人员指南 - 用于从 IoT 中心检索设备孪生、方法和作业相关信息的查询语言的说明"
- services="iot-hub"
- documentationCenter=".net"
- authors="fsautomata"
- manager="timlt"
- editor=""/>  
+---
+title: 开发人员指南 - 查询语言 | Azure
+description: Azure IoT 中心开发人员指南 - 用于从 IoT 中心检索设备孪生、方法和作业相关信息的查询语言的说明
+services: iot-hub
+documentationCenter: .net
+authors: fsautomata
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="09/30/2016"
- wacn.date="12/12/2016" 
- ms.author="elioda"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 12/12/2016
+ms.author: elioda
+---
 
 # 参考 - 设备孪生和作业的查询语言
 
@@ -72,7 +70,7 @@ IoT 中心将设备孪生公开为名为**设备**的文档集合。因此，以
 
         SELECT * FROM devices
 
-> [AZURE.NOTE] [Azure IoT SDKs][lnk-hub-sdks] 支持将大量结果分页：
+> [!NOTE] [Azure IoT SDKs][lnk-hub-sdks] 支持将大量结果分页：
 
 IoT 中心允许使用任意条件检索设备孪生筛选结果。例如，
 
@@ -199,7 +197,7 @@ IoT 中心允许使用任意条件检索设备孪生筛选结果。例如，
 
 目前，可以使用 IoT 中心查询语言以 **devices.jobs** 形式查询此集合。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 目前，查询设备孪生（即包含“FROM devices”的查询）时不会返回作业属性。它仅可使用 `FROM devices.jobs` 通过查询直接访问。
 >
 >
@@ -358,16 +356,16 @@ GROUP BY 的正式语法为：
 ## 后续步骤
 了解如何使用 [Azure IoT SDK][lnk-hub-sdks] 在应用中执行查询。
 
-[lnk-query-where]: /documentation/articles/iot-hub-devguide-query-language/#where-clause
-[lnk-query-expressions]: /documentation/articles/iot-hub-devguide-query-language/#expressions-and-conditions
-[lnk-query-getstarted]: /documentation/articles/iot-hub-devguide-query-language/#getting-started-with-twin-queries
+[lnk-query-where]: ./iot-hub-devguide-query-language.md#where-clause
+[lnk-query-expressions]: ./iot-hub-devguide-query-language.md#expressions-and-conditions
+[lnk-query-getstarted]: ./iot-hub-devguide-query-language.md#getting-started-with-twin-queries
 
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-[lnk-devguide-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-devguide-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-jobs]: ./iot-hub-devguide-jobs.md
+[lnk-devguide-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-devguide-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 
-[lnk-hub-sdks]: /documentation/articles/iot-hub-devguide-sdks/
+[lnk-hub-sdks]: ./iot-hub-devguide-sdks.md
 
 <!---HONumber=Mooncake_1205_2016-->

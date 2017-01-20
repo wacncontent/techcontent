@@ -1,18 +1,17 @@
-<properties
-	pageTitle="访问 Azure Web 应用遇到“指定的 CGI 应用程序遇到错误，服务器终止了该进程”错误"
-	description="访问 Azure Web 应用遇到“指定的 CGI 应用程序遇到错误，服务器终止了该进程”错误。"
-	services="app-service-web"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 访问 Azure Web 应用遇到“指定的 CGI 应用程序遇到错误，服务器终止了该进程”错误
+description: 访问 Azure Web 应用遇到“指定的 CGI 应用程序遇到错误，服务器终止了该进程”错误。
+services: app-service-web
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="app-service-web-aog"
-	ms.date="10/27/2016"
-	wacn.date="11/03/2016"/>
-
+ms.service: app-service-web-aog
+ms.date: 10/27/2016
+wacn.date: 11/03/2016
+---
 
 #访问 Azure Web 应用遇到“指定的 CGI 应用程序遇到错误，服务器终止了该进程”错误
 

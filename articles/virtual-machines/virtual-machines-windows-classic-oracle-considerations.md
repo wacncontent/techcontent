@@ -1,21 +1,21 @@
-<properties
-	pageTitle="使用 Oracle VM 映像的注意事项 | Azure"
-	description="在部署之前，了解 Azure 中 Windows Server 上的 Oracle VM 支持的配置以及限制。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	manager="timlt"
-	authors="rickstercdn"
-	tags="azure-service-management"/>
+---
+title: 使用 Oracle VM 映像的注意事项 | Azure
+description: 在部署之前，了解 Azure 中 Windows Server 上的 Oracle VM 支持的配置以及限制。
+services: virtual-machines-windows
+documentationCenter: 
+manager: timlt
+authors: rickstercdn
+tags: azure-service-management
 
-<tags
-ms.service="virtual-machines-windows"
-ms.devlang="na"
-ms.topic="article"
-ms.tgt_pltfrm="vm-windows"
-ms.workload="infrastructure-services"
-ms.date="09/06/2016"
-wacn.date="10/25/2016"
-ms.author="rclaus" />
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 09/06/2016
+wacn.date: 10/25/2016
+ms.author: rclaus
+---
 
 #有关 Oracle 虚拟机映像的其他注意事项
 
@@ -32,7 +32,7 @@ Azure 目前不支持 Oracle 数据库的 Oracle Real Application Clusters (RAC)
 
 ### 没有静态内部 IP
 
-Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络的一部分，否则虚拟机的 IP 地址就是动态的，在虚拟机重启后可能会更改。这会导致问题，因为 Oracle 数据库需要静态的 IP 地址。若要避免此问题，请考虑将虚拟机添加到 Azure 虚拟网络中。有关详细信息，请参阅[虚拟网络](/documentation/services/networking/)和[在 Azure 中创建虚拟网络](/documentation/articles/virtual-networks-create-vnet-classic-portal/)。
+Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络的一部分，否则虚拟机的 IP 地址就是动态的，在虚拟机重启后可能会更改。这会导致问题，因为 Oracle 数据库需要静态的 IP 地址。若要避免此问题，请考虑将虚拟机添加到 Azure 虚拟网络中。有关详细信息，请参阅[虚拟网络](../virtual-network/index.md/)和[在 Azure 中创建虚拟网络](../virtual-network/virtual-networks-create-vnet-classic-portal.md)。
 
 ### 附加磁盘配置选项
 
@@ -47,13 +47,13 @@ Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络�
 - **Oracle ASM 本身**与使用磁盘数组的方法相比，可能会导致更好的写操作性能，但会导致更差的读操作 IOPS。下图在逻辑上描绘了此安排。  
 	![](./media/virtual-machines-windows-classic-oracle-considerations/image2.png)
 
->[AZURE.IMPORTANT]逐条评估写性能和读性能之间的得失。使用这方法时的实际结果可能会有所不同。
+>[!IMPORTANT]逐条评估写性能和读性能之间的得失。使用这方法时的实际结果可能会有所不同。
 
 ### 高可用性和灾难恢复注意事项
 
 在 Azure 虚拟机中使用 Oracle 数据库时，你负责实现高可用性和灾难恢复解决方案，以避免任何停机。你还负责备份自己的数据和应用程序。
 
-可以在 Azure 上使用[数据防护、活动数据防护](http://www.oracle.com/technetwork/articles/oem/dataguardoverview-083155.html)或 [Oracle Golden Gate](http://www.oracle.com/technetwork/middleware/goldengate) 实现 Oracle 数据库企业版（不带 RAC）的高可用性和灾难恢复，其中两个数据库位于两个单独的虚拟机中。这两个虚拟机都位于相同的[云服务](/documentation/articles/virtual-machines-windows-classic-connect-vms/)和相同的[虚拟网络](/documentation/services/networking/)中，这样可确保它们能够通过专用的持久性 IP 地址相互访问。另外，我们建议你将虚拟机放在同一[可用性集](/documentation/articles/virtual-machines-windows-manage-availability/)中，以便 Azure 将它们置于不同的容错域和升级域中。请注意，只有同一云服务中的虚拟机可加入同一可用性集。每台虚拟机必须至少具有 2 GB 内存和 5 GB 磁盘空间。
+可以在 Azure 上使用[数据防护、活动数据防护](http://www.oracle.com/technetwork/articles/oem/dataguardoverview-083155.html)或 [Oracle Golden Gate](http://www.oracle.com/technetwork/middleware/goldengate) 实现 Oracle 数据库企业版（不带 RAC）的高可用性和灾难恢复，其中两个数据库位于两个单独的虚拟机中。这两个虚拟机都位于相同的[云服务](./virtual-machines-windows-classic-connect-vms.md)和相同的[虚拟网络](../virtual-network/index.md/)中，这样可确保它们能够通过专用的持久性 IP 地址相互访问。另外，我们建议你将虚拟机放在同一[可用性集](./virtual-machines-windows-manage-availability.md)中，以便 Azure 将它们置于不同的容错域和升级域中。请注意，只有同一云服务中的虚拟机可加入同一可用性集。每台虚拟机必须至少具有 2 GB 内存和 5 GB 磁盘空间。
 
 有了 Oracle 数据防护，可以通过一个虚拟机中的主数据库、另一个虚拟机中的辅助（备用）数据库和它们之间的单向复制设置实现高可用性。结果是对数据库副本的读取访问权限。使用 Oracle GoldenGate，可以配置两个数据库之间的双向复制。若要了解如何使用这些工具为数据库设置高可用性解决方案，请参阅 Oracle 网站上的[活动数据防护](http://www.oracle.com/technetwork/database/features/availability/data-guard-documentation-152848.html)和 [GoldenGate](http://docs.oracle.com/goldengate/1212/gg-winux/index.html) 文档。如果你需要对数据库副本的读写访问权限，则可以使用 [Oracle 活动数据防护](http://www.oracle.com/uk/products/database/options/active-data-guard/overview/index.html)。
 
@@ -98,6 +98,5 @@ Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络�
 	请注意，在此 JDK 6 和 7 的映像中提供的 JDK，以及从中派生的虚拟机和映像只能在 Azure 中使用。
 
 -  **64 位 JDK。** Azure 提供的 Oracle WebLogic Server 虚拟机映像和 Oracle JDK 虚拟机映像包含 64 位版本的 Windows Server 和 JDK。
-
 
 <!---HONumber=Mooncake_1221_2015-->

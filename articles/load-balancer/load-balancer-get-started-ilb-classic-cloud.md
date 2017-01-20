@@ -1,30 +1,31 @@
-<properties
-    pageTitle="在经典部署模型中为云服务创建内部负载均衡器 | Azure"
-    description="了解如何在经典部署模型中使用 PowerShell 创建内部负载均衡器"
-    services="load-balancer"
-    documentationcenter="na"
-    author="kumudd"
-    manager="timlt"
-    tags="azure-service-management" />
-<tags
-    ms.assetid="57966056-0f46-4f95-a295-483ca1ad135d"
-    ms.service="load-balancer"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/09/2016"
-    wacn.date="01/13/2017"
-    ms.author="kumud" />
+---
+title: 在经典部署模型中为云服务创建内部负载均衡器 | Azure
+description: 了解如何在经典部署模型中使用 PowerShell 创建内部负载均衡器
+services: load-balancer
+documentationcenter: na
+author: kumudd
+manager: timlt
+tags: azure-service-management
+
+ms.assetid: 57966056-0f46-4f95-a295-483ca1ad135d
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/09/2016
+wacn.date: 01/13/2017
+ms.author: kumud
+---
 
 # 开始为云服务创建内部负载均衡器（经典）
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/load-balancer-get-started-ilb-classic-ps/)
-- [Azure CLI](/documentation/articles/load-balancer-get-started-ilb-classic-cli/)
-- [云服务](/documentation/articles/load-balancer-get-started-ilb-classic-cloud/)
+> [!div class="op_single_selector"]
+- [PowerShell](./load-balancer-get-started-ilb-classic-ps.md)
+- [Azure CLI](./load-balancer-get-started-ilb-classic-cli.md)
+- [云服务](./load-balancer-get-started-ilb-classic-cloud.md)
 
-> [AZURE.IMPORTANT]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](/documentation/articles/load-balancer-get-started-ilb-arm-ps/)。
+> [!IMPORTANT]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](./load-balancer-get-started-ilb-arm-ps.md)。
 
 ## 为云服务配置内部负载均衡器
 
@@ -32,7 +33,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 在云服务中创建第一个部署期间必须设置内部负载均衡器配置，如下面的示例中所示。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 运行以下步骤的先决条件是已为云部署创建虚拟网络。你需要虚拟网络名称和子网名称，以便创建内部负载均衡。
 
 ### 步骤 1
@@ -81,9 +82,9 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 ## 后续步骤
 
-[使用源 IP 关联配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[使用源 IP 关联配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
-[为负载均衡器配置空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)
+[为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: update meta properties & wording update & update link references & update code-->

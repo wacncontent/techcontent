@@ -1,20 +1,21 @@
-<properties
-	pageTitle="Configuring Oracle GoldenGate in VMs | Azure"
-	description="Step through a tutorial for setting up and implementing Oracle GoldenGate on Azure Windows Server VMs for high availability and disaster recovery."
-	services="virtual-machines-windows"
-	authors="rickstercdn"
-	manager="timlt"
-	documentationCenter=""
-	tags="azure-service-management"/>
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows"
-	ms.workload="infrastructure-services"
-	ms.date="09/06/2016"
-	wacn.date="10/25/2016"
-	ms.author="rclaus" />
+---
+title: Configuring Oracle GoldenGate in VMs | Azure
+description: Step through a tutorial for setting up and implementing Oracle GoldenGate on Azure Windows Server VMs for high availability and disaster recovery.
+services: virtual-machines-windows
+authors: rickstercdn
+manager: timlt
+documentationCenter: 
+tags: azure-service-management
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 09/06/2016
+wacn.date: 10/25/2016
+ms.author: rclaus
+---
 
 #配置适用于 Azure 的 Oracle GoldenGate
 本教程演示如何为 Azure 虚拟机环境设置 Oracle GoldenGate，以实现高可用性和灾难恢复。本教程重点介绍非 RAC Oracle 数据库的[双向复制](http://docs.oracle.com/goldengate/1212/gg-winux/GWUAD/wu_about_gg.htm)，并要求两个站点都处于活动状态。
@@ -27,11 +28,11 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 
 此外，本教程假设你满足以下先决条件：
 
-- 你已经查看 [Oracle 虚拟机映像 - 其他注意事项](/documentation/articles/virtual-machines-windows-classic-oracle-considerations/)主题中的“高可用性和灾难恢复注意事项”部分。请注意，Azure 支持独立的 Oracle 数据库实例，但目前不支持 Oracle 真正应用程序群集 (Oracle RAC)。
+- 你已经查看 [Oracle 虚拟机映像 - 其他注意事项](./virtual-machines-windows-classic-oracle-considerations.md)主题中的“高可用性和灾难恢复注意事项”部分。请注意，Azure 支持独立的 Oracle 数据库实例，但目前不支持 Oracle 真正应用程序群集 (Oracle RAC)。
 
 - 你已从 [Oracle 下载](http://www.oracle.com/us/downloads/index.html)网站下载了 Oracle GoldenGate 软件。你已选择产品包“Oracle Fusion Middleware – Data Integration”。然后，你已选择适用于 Oracle 11g 数据库的 Oracle GoldenGate on Oracle v11.2.1 Media Pack for Microsoft Windows x64（64 位）。接下来，请下载 Oracle GoldenGate V11.2.1.0.3 for Oracle 11g 64bit on Windows 2008（64 位）。
 
-- 你已使用 Windows Server 上的 Oracle 企业版映像中提供的平台在 Azure 中创建了两个虚拟机 (VM)。有关信息，请参阅 [Azure 虚拟机](/documentation/services/virtual-machines/)。确保这些虚拟机位于[相同的云服务](/documentation/articles/virtual-machines-windows-load-balance/)和相同的[虚拟网络](/documentation/services/networking/)中，以确保它们可以通过持久性专用 IP 地址相互访问。
+- 你已使用 Windows Server 上的 Oracle 企业版映像中提供的平台在 Azure 中创建了两个虚拟机 (VM)。有关信息，请参阅 [Azure 虚拟机](./index.md/)。确保这些虚拟机位于[相同的云服务](./virtual-machines-windows-load-balance.md)和相同的[虚拟网络](../virtual-network/index.md/)中，以确保它们可以通过持久性专用 IP 地址相互访问。
 
 - 已在 Azure 经典管理门户中将站点 A 的虚拟机名称设置为“MachineGG1”，将站点 B 的虚拟机名称设置为“MachineGG2”。
 
@@ -77,7 +78,7 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 
 6. 验证双向复制过程
 
->[AZURE.IMPORTANT]本教程已针对以下软件配置进行设置和测试：
+>[!IMPORTANT]本教程已针对以下软件配置进行设置和测试：
 >
 >| | **站点 A 数据库** | **站点 B 数据库** |
 >|------------------------|----------------------------------|----------------------------------|
@@ -176,7 +177,6 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 	END;
 	/ 
 
-
 ##2.准备站点 A 和站点 B 以进行数据库复制
 本部分说明如何准备站点 A 和站点 B 以进行数据库复制。必须在两个站点上执行本部分所述的所有步骤：站点 A 和站点 B。
 
@@ -186,7 +186,6 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 	sql>startup mount 
 	sql>alter database archivelog; 
 	sql>alter database open;
-
 
 然后，按如下所示启用最小[补充日志记录](http://docs.oracle.com/cd/E11882_01/server.112/e22490/logminer.htm)：
 
@@ -200,7 +199,6 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 
 	sql>shutdown immediate 
 	sql>startup
-
 
 ##3.创建所有必要的对象以支持 DDL 复制
 本部分列出了你需要使用哪些脚本来创建所有必要的对象以支持 DDL 复制。需要在站点 A 和站点 B 上运行本部分中指定的脚本。
@@ -221,7 +219,6 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 	 Trigger altered.
 	 SQL> @ddl_pin ggate
 
-
 Oracle GoldenGate 工具要求使用表级登录名来支持 DDL（数据定义语言）。正因如此，请在表级别使用 ADD TRANDATA 命令启用补充日志记录。打开 Oracle GoldenGate 命令解释器窗口，登录数据库，然后运行 ADD TRANDATA 命令：
 
 	GGSCI 5> DBLOGIN USERID ggate, PASSWORD ggate
@@ -241,7 +238,6 @@ Oracle GoldenGate Manager 执行许多功能，例如，启动其他 GoldenGate 
 	Version 11.2.1.0.3 14400833 OGGCORE_11.2.1.0.3_PLATFORMS_120823.1258
 	Windows x64 (optimized), Oracle 11g on Aug 23 2012 16:50:36
 	Copyright (C) 1995, 2012, Oracle and/or its affiliates. All rights reserved.
-
 
 将 GGSCI 会话记录到数据库，以便可以执行影响数据库的命令：
 
@@ -337,7 +333,6 @@ Oracle GoldenGate Manager 执行许多功能，例如，启动其他 GoldenGate 
 	CHECKPOINTTABLE ggate.checkpointtable
 
 最后，请保存并关闭 GLOBALS 参数文件。
-
 
 ###在站点 B 上添加 REPLICAT
 本部分介绍如何在站点 B 上添加 REPLICAT 进程“REP2”。

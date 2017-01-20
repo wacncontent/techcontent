@@ -1,24 +1,22 @@
-<properties
-	pageTitle="通过 CLI 登录到 Azure | Azure"
-	description="从适用于 Mac、Linux 和 Windows 的 Azure 命令行界面 (Azure CLI) 连接到 Azure 订阅"
-	editor="tysonn"
-	manager="timlt"
-	documentationCenter=""
-	authors="dlepow"
-	services="virtual-machines-linux,virtual-network,storage,azure-resource-manager"
-	tags="azure-resource-manager,azure-service-management"/>  
+---
+title: 通过 CLI 登录到 Azure | Azure
+description: 从适用于 Mac、Linux 和 Windows 的 Azure 命令行界面 (Azure CLI) 连接到 Azure 订阅
+editor: tysonn
+manager: timlt
+documentationCenter: 
+authors: dlepow
+services: virtual-machines-linux,virtual-network,storage,azure-resource-manager
+tags: azure-resource-manager,azure-service-management
 
-
-<tags
-	ms.service="multiple"
-	ms.workload="multiple"
-	ms.tgt_pltfrm="vm-multiple"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/04/2016"
-	wacn.date="12/15/2016"
-	ms.author="danlep"/>
-
+ms.service: multiple
+ms.workload: multiple
+ms.tgt_pltfrm: vm-multiple
+ms.devlang: na
+ms.topic: article
+ms.date: 10/04/2016
+wacn.date: 12/15/2016
+ms.author: danlep
+---
 
 # 通过 Azure CLI 登录 Azure
 
@@ -28,14 +26,9 @@ Azure CLI 是一组开源且跨平台的命令，可以用于 Azure 资源。本
 
 * 如果只需使用 Azure 服务管理模式 CLI 命令（不建议用于大部分新部署），可以在计算机上下载并安装发布设置文件。
 
-如果你尚未安装 CLI，请参阅[安装 Azure CLI](/documentation/articles/xplat-cli-install/)。如果没有 Azure 订阅，只需要花费几分钟就能创建一个[免费帐户](http://azure.microsoft.com/free/)。
+如果你尚未安装 CLI，请参阅[安装 Azure CLI](./xplat-cli-install.md)。如果没有 Azure 订阅，只需要花费几分钟就能创建一个[免费帐户](http://azure.microsoft.com/free/)。
 
-有关不同帐户的标识和 Azure 订阅的背景信息，请参阅[Azure 订阅如何与 Azure Active Directory 相关联](/documentation/articles/active-directory-how-subscriptions-associated-directory/)。
-
-
-
-
-
+有关不同帐户的标识和 Azure 订阅的背景信息，请参阅[Azure 订阅如何与 Azure Active Directory 相关联](./active-directory/active-directory-how-subscriptions-associated-directory.md)。
 
 ## <a name="scenario-1-azure-login-with-interactive-login"></a> 方案 1：使用交互式登录方法登录 Azure 
 
@@ -61,10 +54,9 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 	+
 	info:    login command OK
     
->[AZURE.NOTE]  使用交互式登录时，会使用 Azure Active Directory 进行身份验证和授权。如果使用 Microsoft 帐户标识，登录过程会访问 Azure Active Directory 的默认域。（如果注册的是免费 Azure 帐户，Azure Active Directory 已为该帐户自动创建了默认域。）
+>[!NOTE]  使用交互式登录时，会使用 Azure Active Directory 进行身份验证和授权。如果使用 Microsoft 帐户标识，登录过程会访问 Azure Active Directory 的默认域。（如果注册的是免费 Azure 帐户，Azure Active Directory 已为该帐户自动创建了默认域。）
 
 ## 方案 2：使用用户名和密码登录 Azure <a name="use-the-log-in-method"></a>
-
 
 想要使用不需要多重身份验证的工作或学校帐户时，使用包含用户名 (`-u`) 参数的 `azure login` 命令进行身份验证。系统会在命令行中提示输入密码（也可以选择将密码作为 `azure login` 命令的其他参数传递）。以下示例将传递组织帐户的用户名：
 
@@ -85,15 +77,13 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 
 如果这是你首次使用这些凭据登录，系统将要求你确认是否希望缓存身份验证令牌。如果以前使用了 `azure logout` 命令，也会出现此提示（如本文稍后所述）。若要在自动化应用场景中绕过此提示，请使用 `-q` 参数运行 `azure login -e AzureChinaCloud`。
 
-   
-
 ## 方案 3：使用服务主体登录 Azure
 
 如果创建 Active Directory 应用程序的服务主体，并且服务主体拥有针对订阅的权限，就可以使用 `azure login -e AzureChinaCloud` 命令来对服务主体进行身份验证。根据方案，可以提供服务主体的凭据作为 `azure login` 命令的显式参数。例如，以下命令传递服务主体名称和 Active Directory 租户 ID：
 
     azure login -u https://www.contoso.org/example --service-principal --tenant myTenantID
 
-随后，系统会提示提供密码。还可以通过 CLI 脚本或应用程序代码提供凭据，或使用证书针对自动化方案以非交互方式对服务主体进行身份验证。有关详细信息与示例，请参阅[使用 Azure Resource Manager 对服务主体进行身份验证](/documentation/articles/resource-group-authenticate-service-principal-cli/)。
+随后，系统会提示提供密码。还可以通过 CLI 脚本或应用程序代码提供凭据，或使用证书针对自动化方案以非交互方式对服务主体进行身份验证。有关详细信息与示例，请参阅[使用 Azure Resource Manager 对服务主体进行身份验证](./azure-resource-manager/resource-group-authenticate-service-principal-cli.md)。
 
 ## 方案 4：使用发布设置文件
 
@@ -105,7 +95,7 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 
 这将会打开默认浏览器，并提示你登录到 [Azure 经典管理门户](https://manage.windowsazure.cn)。登录后，将下载 `.publishsettings` 文件。记下此文件的保存位置。
 
->[AZURE.NOTE] 如果你的帐户与多个 Azure Active Directory 租户关联，系统将提示你选择要为哪个 Active Directory 下载发布设置文件。
+>[!NOTE] 如果你的帐户与多个 Azure Active Directory 租户关联，系统将提示你选择要为哪个 Active Directory 下载发布设置文件。
 
 使用下载页面进行选择或通过访问 Azure 经典门户进行选择之后，所选的 Active Directory 将成为经典管理门户和下载页面使用的默认值。设立默认值后，会在下载页面的顶部看到文本“__若要返回选择页面，请单击此处__”。使用提供的链接返回选择页面。
 
@@ -113,8 +103,7 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 
 		azure account import <path to your .publishsettings file>
 
->[AZURE.IMPORTANT]导入发布设置后，应删除 `.publishsettings` 文件。因为 Azure CLI 不再需要该文件，并且该文件会产生安全风险，因为它可以用来访问你的订阅。
-
+>[!IMPORTANT]导入发布设置后，应删除 `.publishsettings` 文件。因为 Azure CLI 不再需要该文件，并且该文件会产生安全风险，因为它可以用来访问你的订阅。
 
 ## CLI 命令模式 <a name="CLI-command-modes"></a>
 
@@ -126,7 +115,7 @@ Azure CLI 提供两种命令模式让你使用不同的命令集来处理 Azure 
 
 首次安装时，CLI 的当前版本处于 Resource Manager 模式下。
 
->[AZURE.NOTE]Resource Manager 模式与服务管理模式互斥。即，在一种模式下创建的资源不能通过另一种模式进行管理。
+>[!NOTE]Resource Manager 模式与服务管理模式互斥。即，在一种模式下创建的资源不能通过另一种模式进行管理。
 
 ## 多个订阅
 
@@ -144,13 +133,11 @@ Azure CLI 提供两种命令模式让你使用不同的命令集来处理 Azure 
 
 这会将默认订阅更改为 Azure-sub-2。
 
-> [AZURE.NOTE] 更改默认订阅将会立即生效，并且是全局更改；新的 Azure CLI 命令（无论是从同一命令行实例还是其他实例运行的）将使用新的默认订阅。
+> [!NOTE] 更改默认订阅将会立即生效，并且是全局更改；新的 Azure CLI 命令（无论是从同一命令行实例还是其他实例运行的）将使用新的默认订阅。
 
 如果要将非默认订阅用于 Azure CLI，但不想更改当前默认订阅，则可以将 `--subscription` 选项用于命令并提供要用于此操作的订阅名称。
 
 一旦连接到你的 Azure 订阅，即可使用 Azure CLI 命令来处理 Azure 资源。
-
-
 
 ## CLI 设置的存储
 
@@ -169,7 +156,7 @@ Azure CLI 提供两种命令模式让你使用不同的命令集来处理 Azure 
 如果与帐户关联的订阅只使用 Active Directory 进行身份验证，则注销操作会从本地配置文件中删除订阅信息。但是，如果还为订阅导入了发布设置文件，则注销操作仅从本地配置文件中删除与 Active Directory 相关的信息。
 ## 后续步骤
 
-* 若要使用 Azure CLI 命令，请参阅 [Resource Manager 模式中的 Azure CLI 命令](/documentation/articles/azure-cli-arm-commands/)和[服务管理模式中的 Azure CLI 命令](/documentation/articles/virtual-machines-command-line-tools/)。
+* 若要使用 Azure CLI 命令，请参阅 [Resource Manager 模式中的 Azure CLI 命令](./virtual-machines/azure-cli-arm-commands.md)和[服务管理模式中的 Azure CLI 命令](./virtual-machines-command-line-tools.md)。
 
 * 若要了解有关 Azure CLI、下载源代码、报告问题或贡献项目的详细信息，请访问[适用于 Azure CLI 的 GitHub 存储库](https://github.com/azure/azure-xplat-cli)。
 

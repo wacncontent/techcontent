@@ -1,23 +1,21 @@
-<properties
- pageTitle="开发人员指南 - 控制对 IoT 中心的访问 | Azure"
- description="Azure IoT 中心开发人员指南 - 如何控制对 IoT 中心的访问和管理安全性"
- services="iot-hub"
- documentationCenter=".net"
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: 开发人员指南 - 控制对 IoT 中心的访问 | Azure
+description: Azure IoT 中心开发人员指南 - 如何控制对 IoT 中心的访问和管理安全性
+services: iot-hub
+documentationCenter: .net
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="09/30/2016"
- wacn.date="12/12/2016" 
- ms.author="dobett"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 12/12/2016
+ms.author: dobett
+---
 
 # 控制 IoT 中心的访问权限
 
@@ -49,7 +47,6 @@
     - **registryRead**：包含 RegistryRead 权限的策略。
     - **registryReadWrite**：包含 RegistryRead 和 RegistryWrite 权限的策略。
 
-
 * **每个设备的安全凭据**。每个 IoT 中心都包含一个[设备标识注册表][lnk-identity-registry]。对于此注册表中的每个设备，可以配置安全凭据，以相应设备终结点为范围来授予 **DeviceConnect** 权限。
 
 例如，在典型的 IoT 解决方案中：
@@ -65,7 +62,7 @@ Azure IoT 中心可根据共享访问策略和设备标识注册表安全凭据�
 
 安全凭据（例如对称密钥）永远不会通过网络发送。
 
-> [AZURE.NOTE] 如同 [Azure Resource Manager][lnk-azure-resource-manager] 中的所有提供程序一样，Azure IoT 中心资源提供程序也通过 Azure 订阅受到保护。
+> [!NOTE] 如同 [Azure Resource Manager][lnk-azure-resource-manager] 中的所有提供程序一样，Azure IoT 中心资源提供程序也通过 Azure 订阅受到保护。
 
 有关如何构造和使用安全令牌的详细信息，请参阅 [IoT Hub security tokens][lnk-sas-tokens]（IoT 中心安全令牌）。
 
@@ -94,7 +91,7 @@ HTTP 通过在**授权**请求标头中包含有效的令牌来实施身份验�
 
 密码（使用设备资源管理器生成 SAS 令牌）：`SharedAccessSignature sr=iothubname.azure-devices.cn%2fdevices%2fDeviceId&sig=kPszxZZZZZZZZZZZZZZZZZAhLT%2bV7o%3d&se=1487709501`
 
-> [AZURE.NOTE] [Azure IoT Hub SDKs][lnk-sdks]（Azure IoT 中心 SDK）在连接到服务时自动生成令牌。在某些情况下，SDK 不支持所有的协议或所有身份验证方法。
+> [!NOTE] [Azure IoT Hub SDKs][lnk-sdks]（Azure IoT 中心 SDK）在连接到服务时自动生成令牌。在某些情况下，SDK 不支持所有的协议或所有身份验证方法。
 
 ### 有关 SASL PLAIN 的特殊注意事项
 
@@ -183,7 +180,7 @@ IoT 中心还允许设备使用 [X.509 证书][lnk-x509]向 IoT 中心进行身�
 
         return 'SharedAccessSignature ' + urlencode(rawtoken)
 
-> [AZURE.NOTE] 由于 IoT 中心计算机会验证令牌的有效期，因此生成令牌的计算机的时间偏差必须很小。
+> [!NOTE] 由于 IoT 中心计算机会验证令牌的有效期，因此生成令牌的计算机的时间偏差必须很小。
 
 ### <a name="use-sas-tokens-in-a-device-app"></a> 在设备客户端中使用 SAS 令牌
 
@@ -191,7 +188,7 @@ IoT 中心还允许设备使用 [X.509 证书][lnk-x509]向 IoT 中心进行身�
 
 请记住，可从设备访问的所有功能都故意显示在前缀为 `/devices/{deviceId}` 的终结点上。
 
-> [AZURE.IMPORTANT] IoT 中心对某个特定设备进行身份验证的唯一方法是使用设备标识对称密钥。使用共享访问策略访问设备功能时，解决方案必须考虑将安全令牌作为受信任的子组件进行颁发的组件。
+> [!IMPORTANT] IoT 中心对某个特定设备进行身份验证的唯一方法是使用设备标识对称密钥。使用共享访问策略访问设备功能时，解决方案必须考虑将安全令牌作为受信任的子组件进行颁发的组件。
 
 面向设备的终结点包括（无论任何协议）：
 
@@ -222,7 +219,7 @@ IoT 中心还允许设备使用 [X.509 证书][lnk-x509]向 IoT 中心进行身�
 
     SharedAccessSignature sr=myhub.azure-devices.cn%2fdevices%2fdevice1&sig=13y8ejUk2z7PLmvtwR5RqlGBOVwiq7rQR3WZ5xZX3N4%3D&se=1456971697
 
-> [AZURE.NOTE] 可以使用 .NET 工具设备资源管理器来生成 SAS 令牌。
+> [!NOTE] 可以使用 .NET 工具设备资源管理器来生成 SAS 令牌。
 
 ### <a name="use-a-shared-access-policy"></a> 使用共享访问策略
 
@@ -305,7 +302,7 @@ IoT 中心还允许设备使用 [X.509 证书][lnk-x509]向 IoT 中心进行身�
 
 **RegistryManager** 类提供了用于注册设备的编程方式。具体而言，使用 **AddDeviceAsync** 和 **UpdateDeviceAsync** 方法，用户可以在 Iot 中心设备标识注册表中注册和更新设备。这两种方法均采用 **Device** 实例作为输入。**Device** 类包括 **Authentication** 属性，以允许用户指定主要和次要 X.509 证书指纹。指纹表示 X.509 证书的 SHA-1 哈希值（使用二进制 DER 编码存储）。用户可以选择指定主要指纹和/或次要指纹。为了处理证书滚动更新方案，支持主要和次要指纹。
 
-> [AZURE.NOTE] IoT 中心不需要也不存储整个 X.509 证书，它仅存储指纹。
+> [!NOTE] IoT 中心不需要也不存储整个 X.509 证书，它仅存储指纹。
 
 下面是使用 X.509 证书注册设备的示例 C# 代码片段：
 
@@ -353,7 +350,7 @@ var deviceClient = DeviceClient.Create("<IotHub DNS HostName>", authMethod);
 3. 令牌服务返回令牌。使用 `/devices/{deviceId}` 作为 `resourceURI`、使用 `deviceId` 作为所要进行身份验证的设备创建令牌。令牌服务使用共享访问策略来构造令牌。
 4. 设备直接通过 IoT 中心使用令牌。
 
-> [AZURE.NOTE] 可以使用 .NET 类 [SharedAccessSignatureBuilder][lnk-dotnet-sas] 或 Java 类 [IotHubServiceSasToken][lnk-java-sas] 在令牌服务中创建令牌。
+> [!NOTE] 可以使用 .NET 类 [SharedAccessSignatureBuilder][lnk-dotnet-sas] 或 Java 类 [IotHubServiceSasToken][lnk-java-sas] 在令牌服务中创建令牌。
 
 令牌服务可以根据需要设置令牌过期日期。令牌过期时，IoT 中心将断开设备连接。然后，设备必须向令牌服务请求新令牌。如果使用过短的过期时间，会增加设备与令牌服务上的负载。
 
@@ -404,40 +401,39 @@ var deviceClient = DeviceClient.Create("<IotHub DNS HostName>", authMethod);
 
 <!-- links and images -->
 
-
 [img-tokenservice]: ./media/iot-hub-devguide-security/tokenservice.png
-[lnk-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 [lnk-openssl]: https://www.openssl.org/
 [lnk-selfsigned]: https://technet.microsoft.com/zh-cn/library/hh848633
 
 [lnk-resource-provider-apis]: https://msdn.microsoft.com/zh-cn/library/mt548492.aspx
-[lnk-sas-tokens]: /documentation/articles/iot-hub-devguide-security/#security-tokens
+[lnk-sas-tokens]: ./iot-hub-devguide-security.md#security-tokens
 [lnk-amqp]: https://www.amqp.org/
-[lnk-azure-resource-manager]: /documentation/articles/resource-group-overview/
+[lnk-azure-resource-manager]: ../azure-resource-manager/resource-group-overview.md
 [lnk-cbs]: https://www.oasis-open.org/committees/download.php/50506/amqp-cbs-v1%200-wd02%202013-08-12.doc
 [lnk-event-hubs-publisher-policy]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-99ce67ab
 [lnk-management-portal]: https://portal.azure.cn
 [lnk-sasl-plain]: http://tools.ietf.org/html/rfc4616
-[lnk-identity-registry]: /documentation/articles/iot-hub-devguide-identity-registry/
+[lnk-identity-registry]: ./iot-hub-devguide-identity-registry.md
 [lnk-dotnet-sas]: https://msdn.microsoft.com/zh-cn/library/microsoft.azure.devices.common.security.sharedaccesssignaturebuilder.aspx
 [lnk-java-sas]: http://azure.github.io/azure-iot-sdks/java/service/api_reference/com/microsoft/azure/iot/service/auth/IotHubServiceSasToken.html
 [lnk-tls-psk]: https://tools.ietf.org/html/rfc4279
-[lnk-protocols]: /documentation/articles/iot-hub-protocol-gateway/
-[lnk-custom-auth]: /documentation/articles/iot-hub-devguide-security/#custom-device-authentication
-[lnk-x509]: /documentation/articles/iot-hub-devguide-security/#supported-x509-certificates
-[lnk-devguide-device-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-devguide-directmethods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-devguide-jobs]: /documentation/articles/iot-hub-devguide-jobs/
+[lnk-protocols]: ./iot-hub-protocol-gateway.md
+[lnk-custom-auth]: ./iot-hub-devguide-security.md#custom-device-authentication
+[lnk-x509]: ./iot-hub-devguide-security.md#supported-x509-certificates
+[lnk-devguide-device-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-devguide-directmethods]: ./iot-hub-devguide-direct-methods.md
+[lnk-devguide-jobs]: ./iot-hub-devguide-jobs.md
 [lnk-service-sdk]: https://github.com/Azure/azure-iot-sdks/tree/master/csharp/service
 [lnk-client-sdk]: https://github.com/Azure/azure-iot-sdks/tree/master/csharp/device
 [lnk-device-explorer]: https://github.com/Azure/azure-iot-sdks/blob/master/tools/DeviceExplorer/doc/how_to_use_device_explorer.md
 
-[lnk-getstarted-tutorial]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
-[lnk-c2d-tutorial]: /documentation/articles/iot-hub-csharp-csharp-c2d/
-[lnk-d2c-tutorial]: /documentation/articles/iot-hub-csharp-csharp-process-d2c/
+[lnk-getstarted-tutorial]: ./iot-hub-csharp-csharp-getstarted.md
+[lnk-c2d-tutorial]: ./iot-hub-csharp-csharp-c2d.md
+[lnk-d2c-tutorial]: ./iot-hub-csharp-csharp-process-d2c.md
 
 <!---HONumber=Mooncake_1205_2016-->

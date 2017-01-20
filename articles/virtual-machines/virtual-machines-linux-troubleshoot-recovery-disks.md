@@ -1,26 +1,26 @@
 <!-- need to be verified -->
 
-<properties
-    pageTitle="将 Linux 故障排除 VM 与 CLI 配合使用 | Azure"
-    description="了解如何通过使用 Azure CLI 将 OS 磁盘连接到恢复 VM 来排查 Linux VM 问题"
-    services="virtual-machines-linux"
-    documentationCenter=""
-    authors="iainfoulds"
-    manager="timlt"
-    editor="" />
-<tags 
-    ms.service="virtual-machines-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-linux"
-    ms.workload="infrastructure"
-    ms.date="11/14/2016"
-    wacn.date="12/20/2016"
-    ms.author="iainfou" />
+---
+title: 将 Linux 故障排除 VM 与 CLI 配合使用 | Azure
+description: 了解如何通过使用 Azure CLI 将 OS 磁盘连接到恢复 VM 来排查 Linux VM 问题
+services: virtual-machines-linux
+documentationCenter: 
+authors: iainfoulds
+manager: timlt
+editor: 
+
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
+ms.date: 11/14/2016
+wacn.date: 12/20/2016
+ms.author: iainfou
+---
 
 # 通过使用 Azure CLI 将 OS 磁盘附加到恢复 VM 来对 Linux VM 进行故障排除
 如果 Linux 虚拟机 (VM) 遇到启动或磁盘错误，则可能需要对虚拟硬盘本身执行故障排除步骤。一个常见示例是 `/etc/fstab` 中存在无效条目，使 VM 无法成功启动。本文详细介绍如何使用 Azure CLI 将虚拟硬盘连接到另一个 Linux VM，以修复任何错误，然后重新创建原始 VM。
-
 
 ## 恢复过程概述
 故障排除过程如下所示：
@@ -31,12 +31,11 @@
 4. 从故障排除 VM 卸载并分离虚拟硬盘。
 5. 使用原始虚拟硬盘创建 VM。
 
-确保已登录 [Azure CLI](/documentation/articles/xplat-cli-install/) 并使用 Resource Manager 模式：
+确保已登录 [Azure CLI](../xplat-cli-install.md) 并使用 Resource Manager 模式：
 
     azure config mode arm
 
 在以下示例中，请将参数名称替换为你自己的值。示例参数名称包括 `myResourceGroup`、`mystorageaccount` 和 `myVM`。
-
 
 ## 确定启动问题
 检查串行输出以确定 VM 不能正常启动的原因。一个常见示例是 `/etc/fstab` 中存在无效条目，或底层虚拟硬盘已删除或移动。
@@ -46,7 +45,6 @@
     azure vm get-serial-output --resource-group myResourceGroup --name myVM
 
 检查串行输出，以确定 VM 无法启动的原因。如果串行输出未提供任何指示，则在将虚拟硬盘连接到故障排除 VM 后，可能需要查看 `/var/log` 中的日志文件。
-
 
 ## 查看现有虚拟硬盘的详细信息
 在将虚拟硬盘附加到另一个 VM 之前，需要标识虚拟硬盘 (VHD) 的名称。
@@ -82,7 +80,6 @@
 
 等到 VM 已完成删除，然后再将虚拟硬盘附加到另一个 VM。虚拟硬盘上将其与 VM 关联的租约需要释放，然后才能将虚拟硬盘附加到另一个 VM。
 
-
 ## 将现有虚拟硬盘附加到另一个 VM
 在后续几个步骤中，将使用另一个 VM 进行故障排除。将现有虚拟硬盘附加到此故障排除 VM，以浏览和编辑磁盘的内容。例如，此过程允许用户更正任何配置错误或者查看其他应用程序或系统日志文件。选择或创建另一个 VM 以用于故障排除。
 
@@ -115,13 +112,11 @@
 
         sudo mount /dev/sdc1 /mnt/troubleshootingdisk
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     最佳做法是使用虚拟硬盘的全局唯一标识符 (UUID) 装载 Azure 中 VM 上的数据磁盘。对于此简短的故障排除方案，不必要使用 UUID 装载虚拟硬盘。但是，在正常使用时，编辑 `/etc/fstab` 以使用设备名称（而不是 UUID）装载虚拟硬盘可能会导致 VM 无法启动。
-
 
 ## 修复原始虚拟硬盘上的问题
 装载现有虚拟硬盘后，现在可以根据需要执行任何维护和故障排除步骤。解决问题后，请继续执行以下步骤。
-
 
 ## 卸载并分离原始虚拟硬盘
 解决错误后，可从故障排除 VM 中卸载并分离现有虚拟硬盘。在将虚拟硬盘附加到故障排除 VM 的租约释放前，不能将该虚拟硬盘用于任何其他 VM。
@@ -157,7 +152,6 @@
 
 - https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-specialized-vhd-existing-vnet/azuredeploy.json  
 
-
 该模板使用先前命令中的 VHD URL 将 VM 部署到现有虚拟网络中。以下示例将模板部署到名为 `myResourceGroup` 的资源组：
 
     azure group deployment create --resource-group myResourceGroup --name myDeployment \
@@ -188,6 +182,6 @@
     azure vm enable-diag --resource-group myResourceGroup --name myDeployedVM
 
 ## 后续步骤
-如果在连接到 VM 时遇到问题，请参阅 [Troubleshoot SSH connections to an Azure VM](/documentation/articles/virtual-machines-linux-troubleshoot-ssh-connection/)（排查 Azure VM 的 SSH 连接问题）。有关访问 VM 上运行的应用时遇到的问题，请参阅 [Troubleshoot application connectivity issues on a Linux VM](/documentation/articles/virtual-machines-linux-troubleshoot-app-connection/)（排查 Linux VM 上的应用程序连接问题）。
+如果在连接到 VM 时遇到问题，请参阅 [Troubleshoot SSH connections to an Azure VM](./virtual-machines-linux-troubleshoot-ssh-connection.md)（排查 Azure VM 的 SSH 连接问题）。有关访问 VM 上运行的应用时遇到的问题，请参阅 [Troubleshoot application connectivity issues on a Linux VM](./virtual-machines-linux-troubleshoot-app-connection.md)（排查 Linux VM 上的应用程序连接问题）。
 
 <!---HONumber=Mooncake_1212_2016-->

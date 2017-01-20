@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="什么是 Azure .NET SDK" 
-	description="了解 Azure .NET SDK 中包含的内容。" 
-	documentationCenter=".net" 
-	authors="tdykstra" 
-	manager="wpickett" 
-	editor="mollybos" 
-	services=""/>
+---
+title: 什么是 Azure .NET SDK
+description: 了解 Azure .NET SDK 中包含的内容。
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: mollybos
+services: 
 
-<tags 
-	ms.service="multiple" 
-	ms.workload="multiple" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="06/30/2016" 
-	wacn.date="08/08/2016" 
-	ms.author="rachelap"/>
+ms.service: multiple
+ms.workload: multiple
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/30/2016
+wacn.date: 08/08/2016
+ms.author: rachelap
+---
 
 # 什么是用于 .NET 的 Azure SDK？
 
@@ -46,11 +46,11 @@
 
 ###<a id="stgemulator"></a>Microsoft Azure 存储模拟器
 
-[Azure 存储模拟器](/documentation/articles/storage-use-emulator/)使用 SQL Server 实例和本地文件系统来模拟 Azure 存储空间（队列、表、Blob），以便在本地进行测试。
+[Azure 存储模拟器](./storage/storage-use-emulator.md)使用 SQL Server 实例和本地文件系统来模拟 Azure 存储空间（队列、表、Blob），以便在本地进行测试。
 
 ###<a id="stgtools"></a>Microsoft Azure 存储工具
 
-这将安装命令行工具 [AzCopy](/documentation/articles/storage-use-azcopy/)，可以使用它将数据传入和传出 Azure 存储帐户。
+这将安装命令行工具 [AzCopy](./storage/storage-use-azcopy.md)，可以使用它将数据传入和传出 Azure 存储帐户。
 
 ### <a id="auth"></a>Azure 创作工具
 
@@ -66,7 +66,7 @@ Azure 模拟器模拟云服务环境，这样您就可以先在本地计算机�
 
 ###<a id="hdinsight"></a>Visual Studio 的 HDInsight 工具和 Microsoft Hive ODBC 驱动程序
 
-在服务器资源管理器中的 HDInsight 工具，可以导航 Hive 数据库和 HDInsight 群集的链接存储帐户、创建表，并创建和提交 Hive 查询。有关详细信息，请参阅 [适用于 Visual Studio 的 HDInsight Hadoop 工具入门](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/)。
+在服务器资源管理器中的 HDInsight 工具，可以导航 Hive 数据库和 HDInsight 群集的链接存储帐户、创建表，并创建和提交 Hive 查询。有关详细信息，请参阅 [适用于 Visual Studio 的 HDInsight Hadoop 工具入门](./hdinsight/hdinsight-hadoop-visual-studio-tools-get-started.md)。
 
 ### <a name="libraries"></a>用于 .NET 的 Microsoft Azure 库
 
@@ -83,18 +83,18 @@ Azure 模拟器模拟云服务环境，这样您就可以先在本地计算机�
 
 这使您可以使用 Azure 资源，主要是云服务和虚拟机：
 
-* [创建、打开和发布云服务项目](/documentation/articles/cloud-services-dotnet-get-started/)。
-* [在创建新的 Web 项目时创建 Azure 虚拟机](/documentation/articles/virtual-machines-windows-classic-web-app-visual-studio/)。
+* [创建、打开和发布云服务项目](./cloud-services/cloud-services-dotnet-get-started.md)。
+* [在创建新的 Web 项目时创建 Azure 虚拟机](./virtual-machines/virtual-machines-windows-classic-web-app-visual-studio.md)。
 
 ###<a id="wte"></a>Microsoft App Service Tools for Visual Studio
 
 这使你可以使用 Azure 网站：
 
-* [将 Web 项目发布到 Azure 网站](/documentation/articles/web-sites-dotnet-get-started/)。
-* [将控制台应用程序项目发布到 Azure WebJobs](/documentation/articles/websites-dotnet-deploy-webjobs/)。
+* [将 Web 项目发布到 Azure 网站](./app-service-web/web-sites-dotnet-get-started.md)。
+* [将控制台应用程序项目发布到 Azure WebJobs](./app-service-web/websites-dotnet-deploy-webjobs.md)。
 * 在创建新的 Web 项目或发布 Web 项目时创建 Azure 网站和 SQL 数据库资源。
 
->[AZURE.NOTE] 无需安装用于 .NET 的 Azure SDK 即可使用这些功能；它们还包括在 Visual Studio 更新中。
+>[!NOTE] 无需安装用于 .NET 的 Azure SDK 即可使用这些功能；它们还包括在 Visual Studio 更新中。
 
 ##<a id="notincluded"></a>在安装用于 .NET 的 Azure SDK 时未获得的内容
 
@@ -106,9 +106,9 @@ Azure 模拟器模拟云服务环境，这样您就可以先在本地计算机�
 
   	**客户端库的本地副本。** 用于 .NET 的 Azure SDK 将某些 Azure 客户端库的 NuGet 包（如存储空间、服务总线和 Caching）复制到您的计算机上。这些客户端库将自动包括在新的云服务项目中，因此本地的 NuGet 程序包会启用 Visual Studio 来创建项目，即使您未连接到 Internet 也是如此。通常，客户端库的更新频率比 SDK 新版本的发布频率更为频繁，因此 NuGet.org 上的客户端库通常比您所获得的 SDK 更新。
 
-	**包括客户端库的项目模板。** 只有 [Azure 云服务](/documentation/articles/cloud-services-dotnet-get-started/)和 [Azure 移动服务](/documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-leaderboard/)项目模板会自动包含一些客户端库。对于其他库或其他模板，安装您所需的[客户端库 NuGet 包](http://go.microsoft.com/fwlink/?LinkId=510472)。
+	**包括客户端库的项目模板。** 只有 [Azure 云服务](./cloud-services/cloud-services-dotnet-get-started.md)和 [Azure 移动服务](./mobile-services/mobile-services-dotnet-backend-windows-store-dotnet-leaderboard.md)项目模板会自动包含一些客户端库。对于其他库或其他模板，安装您所需的[客户端库 NuGet 包](http://go.microsoft.com/fwlink/?LinkId=510472)。
 
-* [Azure 移动服务项目模板](/documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-leaderboard/)。
+* [Azure 移动服务项目模板](./mobile-services/mobile-services-dotnet-backend-windows-store-dotnet-leaderboard.md)。
 
 	移动服务模板仅在 Visual Studio 2013 Update 2 及更高版本中提供。这些模板在 Visual Studio 2012 或更早的版本中不提供，在 Visual Studio 2013 Update 1 或更早的版本中也不提供，即使你安装了用于 .NET 的 Azure SDK。
 
@@ -143,7 +143,7 @@ Azure 模拟器模拟云服务环境，这样您就可以先在本地计算机�
 
 ### <a name="guestos"></a>哪些来宾操作系统版本是用于 .NET 的 Azure SDK 兼容的？
 
-请参阅 [Azure 来宾 OS 版本和 SDK 兼容性矩阵](/documentation/articles/cloud-services-guestos-update-matrix/)。
+请参阅 [Azure 来宾 OS 版本和 SDK 兼容性矩阵](./cloud-services/cloud-services-guestos-update-matrix.md)。
 
 ###<a id="uninstall"></a>我如何卸载用于 .NET 的 Azure SDK？
 
@@ -158,8 +158,6 @@ Azure 模拟器模拟云服务环境，这样您就可以先在本地计算机�
 本文不会列出 Azure SDK 每个旧版本所包括的所有程序；因为在 SDK 的更高版本中有时会删除旧版本中的一些程序，所以您可以从较早的版本卸载这些程序。例如，版本 2.5 安装有“适用于 Visual Studio 的 Azure 资源管理器工具”，但是因为在**程序和功能**中不再将其作为单独的程序列出，所以本文也未将它列出。本文仅列出包含在用于 .NET 的 Azure SDK 版本 2.6 中的那些程序。
 
 > **注意：**在其他环境中可能会单独安装 SDK 的某些程序，因此，即使您不需要完整的 SDK，但这些程序也可能是需要的。同样地，即使在新版本的 SDK 中删除了旧版本中的某些程序，但仍然可能需要这些程序。因此，在卸载程序时，请务必小心谨慎，以免删除了计算机上仍然需要的内容。
-
-
 
 ##<a id="versions"></a>版本
 

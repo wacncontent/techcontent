@@ -1,20 +1,20 @@
-<properties
-    pageTitle="跨具有不同架构的云数据库进行查询 | Azure"
-    description="如何在垂直分区上设置跨数据库查询"    
-    services="sql-database"
-    documentationCenter=""  
-    manager="jhubbard"
-    authors="torsteng"/>
+---
+title: 跨具有不同架构的云数据库进行查询 | Azure
+description: 如何在垂直分区上设置跨数据库查询
+services: sql-database
+documentationCenter: 
+manager: jhubbard
+authors: torsteng
 
-<tags
-    ms.service="sql-database"
-    ms.workload="sql-database"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="05/27/2016"
-    wacn.date="12/26/2016"
-    ms.author="torsteng" />
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/27/2016
+wacn.date: 12/26/2016
+ms.author: torsteng
+---
 
 # 跨具有不同架构的云数据库进行查询（预览）
 
@@ -35,7 +35,6 @@
 2. [CREATE DATABASE SCOPED CREDENTIAL](https://msdn.microsoft.com/zh-cn/library/mt270260.aspx)
 3. [CREATE EXTERNAL DATA SOURCE](https://msdn.microsoft.com/zh-cn/library/dn935022.aspx)
 4. [CREATE EXTERNAL TABLE](https://msdn.microsoft.com/zh-cn/library/dn935021.aspx)
-
 
 ## 创建数据库范围的主密钥和凭据 
 
@@ -136,7 +135,6 @@ DATA\_SOURCE 子句定义用于外部表的外部数据源（即垂直分区情�
 ## 安全注意事项
 有权访问外部表的用户在使用外部数据源定义中提供的凭据时，会自动获得对基础远程表的访问权限。在管理对外部表的访问权限时应十分小心，避免通过外部数据源的凭据意外地提升特权。可以使用常规的 SQL 权限来授予或撤消对外部表的访问权，就像它是常规表一样。
 
-
 ## 示例：正在查询垂直分区的数据库 
 
 以下查询执行订单和订单行的两个本地表以及客户的远程表之间的三向联接。这是弹性查询的引用数据用例的示例：
@@ -155,7 +153,6 @@ DATA\_SOURCE 子句定义用于外部表的外部数据源（即垂直分区情�
 	ON o_id = ol_o_id and o_c_id = ol_c_id
 	WHERE c_id = 100
 
-
 ## 远程 T-SQL 执行的存储过程：sp\_execute\_remote
 
 弹性查询还引入了一个存储过程，该存储过程提供对分片的直接访问。该存储过程名为 [sp\_execute \_remote](https://msdn.microsoft.com/zh-cn/library/mt703714)，可用于执行远程存储过程或远程数据库上的 T-SQL 代码。它采用了以下参数：
@@ -173,8 +170,6 @@ sp\_execute\_remote 使用调用参数中提供的外部数据源，以在远程
 		N'MyExtSrc',
 		N'select count(w_id) as foo from warehouse' 
 
-
-  
 ## 工具的连接
 
 可以使用常规的 SQL Server 连接字符串将 BI 和数据集成工具连接到 SQL 数据库服务器（已启用弹性查询并已定义了外部表）上的数据库。请确保支持将 SQL Server 用作工具的数据源。然后可以引用弹性查询数据库及其外部表，就如同引用使用工具连接的任何其他 SQL Server 数据库一样。
@@ -185,17 +180,14 @@ sp\_execute\_remote 使用调用参数中提供的外部数据源，以在远程
 
 * 弹性查询最适合大部分计算可以在远程数据库上完成的查询。使用可以在远程数据库或联接上求值的选择性筛选器谓词（可以完全在远程数据库上执行），通常可以获得最佳查询性能。其他查询模式可能需要从远程数据库加载大量数据，并且可能无法很好地执行。
 
-
 ## 后续步骤
 
-若要查询水平分区的数据库（也称为分片数据库），请参阅[跨分片云数据库（水平分区）的查询](/documentation/articles/sql-database-elastic-query-horizontal-partitioning/)。
+若要查询水平分区的数据库（也称为分片数据库），请参阅[跨分片云数据库（水平分区）的查询](./sql-database-elastic-query-horizontal-partitioning.md)。
 
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
-
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-query-vertical-partitioning/verticalpartitioning.png
-
 
 <!--anchors-->
 

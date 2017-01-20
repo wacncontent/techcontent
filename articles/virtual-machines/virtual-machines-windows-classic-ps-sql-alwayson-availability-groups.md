@@ -1,33 +1,34 @@
-<properties 
-	pageTitle="在 Azure 中配置 AlwaysOn 可用性组 (PowerShell)"
-	description="使用 PowerShell 在 Azure 中创建 AlwaysOn 可用性组。"
-	services="virtual-machines"
-	documentationCenter="na"
-	authors="rothja"
-	manager="jeffreyg"
-	editor="monicar" />
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="09/22/2016"
-	wacn.date="01/05/2017"
-	ms.author="mikeray" />
+---
+title: 在 Azure 中配置 AlwaysOn 可用性组 (PowerShell)
+description: 使用 PowerShell 在 Azure 中创建 AlwaysOn 可用性组。
+services: virtual-machines
+documentationCenter: na
+authors: rothja
+manager: jeffreyg
+editor: monicar
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 09/22/2016
+wacn.date: 01/05/2017
+ms.author: mikeray
+---
 
 # 在 Azure 中配置 AlwaysOn 可用性组 (PowerShell)
 
-> [AZURE.SELECTOR]
-- [Resource Manager: 手动](/documentation/articles/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual/)
-- [经典: UI](/documentation/articles/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/)
-- [经典: PowerShell](/documentation/articles/virtual-machines-windows-classic-ps-sql-alwayson-availability-groups/)
+> [!div class="op_single_selector"]
+- [Resource Manager: 手动](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)
+- [经典: UI](./virtual-machines-windows-classic-portal-sql-alwayson-availability-groups.md)
+- [经典: PowerShell](./virtual-machines-windows-classic-ps-sql-alwayson-availability-groups.md)
 
 <br/>
 
-> [AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+> [!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
->[AZURE.NOTE]有关同一方案的基于 GUI 的教程，请参阅[在 Azure 中配置 AlwaysOn 可用性组 (GUI)](/documentation/articles/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/)。
+>[!NOTE]有关同一方案的基于 GUI 的教程，请参阅[在 Azure 中配置 AlwaysOn 可用性组 (GUI)](./virtual-machines-windows-classic-portal-sql-alwayson-availability-groups.md)。
 
 Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server 系统的成本。本教程介绍如何在 Azure 环境中使用端到端 SQL Server AlwaysOn 实施可用性组。完成本教程后，Azure 中的 SQL Server AlwaysOn 解决方案将包括以下要素：
 
@@ -61,7 +62,7 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
 
 	**Get-AzurePublishgSettingsFile** 命令自动生成管理证书，Azure 将其下载到你的计算机。浏览器将自动打开，提示输入 Azure 订阅的 Microsoft 帐户凭据。所下载的 **.publishsettings** 文件包含管理 Azure 订阅所需的一切信息。将该文件保存到本地目录后，使用 **Import-AzurePublishSettingsFile -Environment AzureChinaCloud** 命令将其导入。
 	
-	>[AZURE.NOTE]publishsettings 文件中含有你的凭据（未编码），这些凭据用于管理你的 Azure 订阅和服务。确保此文件安全的最佳做法是，将其暂时存储在您的源目录的外部（例如存储在 Libraries\\Documents 文件夹中），然后在完成导入后将其删除。恶意用户获得 publishsettings 文件的访问权限后，可编辑、创建和删除你的 Azure 服务。
+	>[!NOTE]publishsettings 文件中含有你的凭据（未编码），这些凭据用于管理你的 Azure 订阅和服务。确保此文件安全的最佳做法是，将其暂时存储在您的源目录的外部（例如存储在 Libraries\\Documents 文件夹中），然后在完成导入后将其删除。恶意用户获得 publishsettings 文件的访问权限后，可编辑、创建和删除你的 Azure 服务。
 
 1. 定义将用于创建云 IT 基础结构的一系列变量。
 
@@ -627,8 +628,8 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
 		    -Database $db
 
 ## 后续步骤
-现在，你已通过在 Azure 中创建可用性组，成功实施了 SQL Server AlwaysOn。若要为此可用性组配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](/documentation/articles/virtual-machines-windows-classic-ps-sql-int-listener/)。
+现在，你已通过在 Azure 中创建可用性组，成功实施了 SQL Server AlwaysOn。若要为此可用性组配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](./virtual-machines-windows-classic-ps-sql-int-listener.md)。
 
-有关在 Azure 中使用 SQL Server 的其他信息，请参阅 [Azure 虚拟机上的 SQL Server](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/)。
+有关在 Azure 中使用 SQL Server 的其他信息，请参阅 [Azure 虚拟机上的 SQL Server](./virtual-machines-windows-sql-server-iaas-overview.md)。
 
 <!---HONumber=70-->

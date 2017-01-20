@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Resource Manager 模板中的模式 | Azure"
-    description="演示 Azure 资源管理器模板的设计模式"
-    services="azure-resource-manager"
-    documentationcenter=""
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="ce1141d6-ece7-4976-acea-1db1f775409e"
-    ms.service="azure-resource-manager"
-    ms.workload="multiple"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/19/2016"
-    wacn.date="01/06/2017"
-    ms.author="tomfitz" />  
+---
+title: Resource Manager 模板中的模式 | Azure
+description: 演示 Azure 资源管理器模板的设计模式
+services: azure-resource-manager
+documentationcenter: 
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
+ms.assetid: ce1141d6-ece7-4976-acea-1db1f775409e
+ms.service: azure-resource-manager
+ms.workload: multiple
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/19/2016
+wacn.date: 01/06/2017
+ms.author: tomfitz
+---
 
 # 用于设计 Azure Resource Manager 模板的模式
 使用基于 Azure Resource Manager 模板的灵活方法，可以快速、一致地部署复杂的拓扑。随着核心产品的发展，你可以轻松地调整这些部署或适应外来方案或客户的变化。
@@ -128,7 +128,7 @@ DSC 可以使用最热门机制的一些资源扩展 - PowerShell DSC、Chef 和
 ### 自由格式配置
 表面上，自由格式配置听起来很实用。模板允许选择 VM 类型，并提供任意数目的节点以及这些节点的附加磁盘作为模板参数。但是，有些方案不适合使用此方法。
 
-[虚拟机大小](/documentation/articles/virtual-machines-windows-sizes/)介绍了不同的 VM 类型和可用大小，以及每种可附加的持久性磁盘数目（2、4、8、16 或 32）。每个附加的磁盘提供 500 IOPS，可将这些磁盘的倍数组建成池，以成倍提高 IOPS 数目。例如，可将 16 个磁盘组建成池，以提供 8,000 IOPS。可以使用 Microsoft Windows 存储空间或者在 Linux 使用价格便宜的磁盘冗余阵列 (RAID)，使用操作系统中的配置来实现池的组建。
+[虚拟机大小](../virtual-machines/virtual-machines-windows-sizes.md)介绍了不同的 VM 类型和可用大小，以及每种可附加的持久性磁盘数目（2、4、8、16 或 32）。每个附加的磁盘提供 500 IOPS，可将这些磁盘的倍数组建成池，以成倍提高 IOPS 数目。例如，可将 16 个磁盘组建成池，以提供 8,000 IOPS。可以使用 Microsoft Windows 存储空间或者在 Linux 使用价格便宜的磁盘冗余阵列 (RAID)，使用操作系统中的配置来实现池的组建。
 
 自由格式配置允许选择多个 VM 实例，并为这些实例选择多个 VM 类型和大小，每个 VM 类型可选择多个磁盘，还可选择一个或多个脚本来配置 VM 内容。
 
@@ -198,7 +198,6 @@ DSC 可以使用最热门机制的一些资源扩展 - PowerShell DSC、Chef 和
 
 ![主模板](./media/best-practices-resource-manager-design-templates/main-template.png)  
 
-
 **主模板接收来自用户的参数**
 
 提供的一个参数是已知配置类型，因为它使用标准化值（例如，小、中或大），因此也称为 T 恤尺寸参数。在实践中，可以多种方式使用此参数。有关详细信息，请参阅本文档后面的“已知配置资源模板”。
@@ -212,7 +211,6 @@ DSC 可以使用最热门机制的一些资源扩展 - PowerShell DSC、Chef 和
 
 ![模板资源](./media/best-practices-resource-manager-design-templates/template-resources.png)  
 
-
 **共享的资源模板**
 
 资源名称（例如虚拟网络名称）基于主模板。你可以根据组织的需要，将资源名称指定为该模板中的变量，或者以参数形式从用户处接收资源名称。
@@ -221,7 +219,6 @@ DSC 可以使用最热门机制的一些资源扩展 - PowerShell DSC、Chef 和
 可选资源模板包含基于参数或变量值且以编程方式部署的资源。
 
 ![可选资源](./media/best-practices-resource-manager-design-templates/optional-resources.png)  
-
 
 **可选资源模板**
 
@@ -239,7 +236,6 @@ DSC 可以使用最热门机制的一些资源扩展 - PowerShell DSC、Chef 和
 
 ![已知配置资源](./media/best-practices-resource-manager-design-templates/known-config.png)  
 
-
 **已知配置资源模板**
 
 通常会使用 T 恤尺寸方法，但参数可以代表任何已知配置的集。例如，你可以为企业应用程序指定一组环境，例如，开发、测试和生产。或者，可以针对云服务使用它来代表不同的缩放单位、产品版本或产品配置，例如，社区、开发人员或企业。
@@ -254,7 +250,6 @@ DSC 可以使用最热门机制的一些资源扩展 - PowerShell DSC、Chef 和
 
 ![成员资源](./media/best-practices-resource-manager-design-templates/member-resources.png)  
 
-
 **成员资源模板**
 
 每种类型的节点可能具有不同大小的 VM、附加的磁盘数、用于安装和设置节点的脚本、VM 的端口配置、实例数和其他详细信息。因此，每个节点类型都有自身的成员资源模板，其中包含有关部署和配置基础结构，以及执行脚本以在 VM 中部署和配置软件的详细信息。
@@ -266,14 +261,12 @@ DSC 可以使用最热门机制的一些资源扩展 - PowerShell DSC、Chef 和
 
 ![可重复使用的脚本](./media/best-practices-resource-manager-design-templates/reusable-scripts.png)  
 
-
 **成员资源模板可以调用广泛可重复使用的脚本**
 
 ### 自定义脚本
 模板通常会调用一个或多个脚本，用于在 VM 中安装和配置软件。在部署了一个或多个成员类型的多个实例的大型拓扑中经常会使用一种模式。将对每个可并行运行的 VM 启动安装脚本，接着会在部署所有 VM（或给定成员类型的所有 VM）之后调用设置脚本。
 
 ![自定义脚本](./media/best-practices-resource-manager-design-templates/custom-scripts.png)  
-
 
 **成员资源模板可出于特定目的（例如 VM 配置）调用脚本**
 
@@ -327,7 +320,6 @@ Redis 只使用单一节点类型，因此要创建名为 node-resources.json �
 
 ![端到端](./media/best-practices-resource-manager-design-templates/end-to-end.png)  
 
-
 **随时可以针对端到端解决方案模板范围扩展用于已划归容量或功能的解决方案模板的模型**
 
 ## 准备应用商店的模板
@@ -347,12 +339,11 @@ Redis 只使用单一节点类型，因此要创建名为 node-resources.json �
 
 ![应用商店](./media/best-practices-resource-manager-design-templates/marketplace.png)  
 
-
 **为应用商店改编划归解决方案的模板**
 
 ## 后续步骤
-* 至于如何在 Azure 资源管理器中处理安全事项，请参阅 [Azure 资源管理器的安全注意事项](/documentation/articles/best-practices-resource-manager-security/)以获取相关建议
-* 若要了解进出模板的状态，请参阅[共享 Azure 资源管理器模板中的状态](/documentation/articles/best-practices-resource-manager-state/)。
-* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](/documentation/articles/resource-manager-subscription-governance/)。
+* 至于如何在 Azure 资源管理器中处理安全事项，请参阅 [Azure 资源管理器的安全注意事项](./best-practices-resource-manager-security.md)以获取相关建议
+* 若要了解进出模板的状态，请参阅[共享 Azure 资源管理器模板中的状态](./best-practices-resource-manager-state.md)。
+* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](./resource-manager-subscription-governance.md)。
 
 <!---HONumber=Mooncake_0103_2017-->

@@ -1,22 +1,21 @@
-<properties
-   pageTitle="使用 HDInsight 中的 Hive 分析和处理 JSON 文档 | Azure"
-   description="了解如何使用 JSON 文档，以及如何使用 HDInsight 中的 Hive 分析这些文档。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="rashimg"
-   manager="mwinkle"
-   editor="cgronlun"/>
+---
+title: 使用 HDInsight 中的 Hive 分析和处理 JSON 文档 | Azure
+description: 了解如何使用 JSON 文档，以及如何使用 HDInsight 中的 Hive 分析这些文档。
+services: hdinsight
+documentationCenter: 
+authors: rashimg
+manager: mwinkle
+editor: cgronlun
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="06/22/2015"
-   wacn.date="12/16/2016"
-   ms.author="rashimg"/>
-
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 06/22/2015
+wacn.date: 12/16/2016
+ms.author: rashimg
+---
 
 # 使用 HDInsight 中的 Hive 处理和分析 JSON 文档
 
@@ -57,9 +56,9 @@
 	    ]
 	}
 
-可以在 wasbs://processjson@hditutorialdata.blob.core.windows.net/ 上找到该文件。有关将 Azure Blob 存储与 HDInsight 配合使用的详细信息，请参阅[将 HDFS 兼容的 Azure Blob 存储与 HDInsight 中的 Hadoop 配合使用](/documentation/articles/hdinsight-hadoop-use-blob-storage/)。如果需要，可以将该文件复制到群集的默认容器。
+可以在 wasbs://processjson@hditutorialdata.blob.core.windows.net/ 上找到该文件。有关将 Azure Blob 存储与 HDInsight 配合使用的详细信息，请参阅[将 HDFS 兼容的 Azure Blob 存储与 HDInsight 中的 Hadoop 配合使用](./hdinsight-hadoop-use-blob-storage.md)。如果需要，可以将该文件复制到群集的默认容器。
 
-在本教程中，将使用 Hive 控制台。有关打开 Hive 控制台的说明，请参阅[通过远程桌面将 Hive 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-hadoop-use-hive-remote-desktop/)。
+在本教程中，将使用 Hive 控制台。有关打开 Hive 控制台的说明，请参阅[通过远程桌面将 Hive 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-hadoop-use-hive-remote-desktop.md)。
 
 ##平展 JSON 文档
 
@@ -94,7 +93,6 @@ SELECT 语句应只返回 1 行。
 
 ![平展 JSON 文档。][image-hdi-hivejson-flatten]  
 
-
 ##在 Hive 中分析 JSON 文档
 
 Hive 提供对 JSON 文档执行查询的三种不同机制：
@@ -118,12 +116,10 @@ Hive 提供名为 [get\_json\_object](https://cwiki.apache.org/confluence/displa
 
 ![get\_json\_object UDF][image-hdi-hivejson-getjsonobject]  
 
-
 get-json\_object UDF 存在一些限制。
 
 - 由于查询中的每个字段都需要重新分析查询，因此会影响性能。
 - GET\_JSON\_OBJECT() 返回数组的字符串表示形式。要将其转换为 Hive 数组，必须使用正则表达式替换方括号“[”和“]”，然后调用拆分以获取数组。
-
 
 正因如此，Hive wiki 建议使用 json\_tuple。
 
@@ -140,9 +136,7 @@ Hive 提供的另一个 UDF 称为 [json\_tuple](https://cwiki.apache.org/conflu
 
 ![json\_tuple UDF][image-hdi-hivejson-jsontuple]  
 
-
 JSON\_TUPLE 在 Hive 中使用[横向视图](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+LateralView)语法，允许 json\_tuple 通过将 UDT 函数应用到原始表的每一行以创建虚拟表。由于重复使用横向视图，复杂的 JSON 会变得过于庞大。此外，JSON_TUPLE 无法处理嵌套的 JSONs。
-
 
 ###使用自定义 SerDe
 
@@ -152,7 +146,7 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 
 1. 安装 [Java SE 开发工具包 7u55 JDK 1.7.0_55](http://www.oracle.com/technetwork/java/javase/downloads/java-archive-downloads-javase7-521261.html#jdk-7u55-oth-JPR)。如果要使用 HDInsight 的 Windows 部署，可选择 Windows X64 版本的 JDK。
 
-	>[AZURE.WARNING] JDK 1.8 不适用于此 SerDe。
+	>[!WARNING] JDK 1.8 不适用于此 SerDe。
 
 	安装完成后，添加新的用户环境变量：
 
@@ -168,11 +162,9 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 
 	![设置 Maven][image-hdi-hivejson-maven]  
 
-
 3. 从 [Hive-JSON-SerDe](https://github.com/sheetaldolas/Hive-JSON-Serde/tree/master) github 站点克隆项目。可通过单击“下载 Zip”按钮执行此操作，如以下屏幕截图所示。
 
 	![克隆项目][image-hdi-hivejson-serde]  
-
 
 4：转到将此包下载到的文件夹，然后键入“mvn package”。这将创建必要的 jar 文件，然后可以将其复制到群集。
 
@@ -217,7 +209,6 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 
 ![SerDe 查询 1][image-hdi-hivejson-serde_query1]  
 
-
 计算 JSON 文档的总分
 
     SELECT SUM(scores)
@@ -230,30 +221,25 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 
 ![SerDe 查询 2][image-hdi-hivejson-serde_query2]  
 
-
 查找指定学生在哪些科目取得 80 以上的分数 SELECT jt.StudentClassCollection.ClassId FROM json\_table jt lateral view explode(jt.StudentClassCollection.Score) collection as score where score > 80;
       
 上述查询返回一个 Hive 数组，与 get\_json\_object 不同，后者返回一个字符串。
 
 ![SerDe 查询 3][image-hdi-hivejson-serde_query3]  
 
-
 如果要跳过格式不正确的 JSON，可以根据此 SerDe 的 [wiki 页面](https://github.com/sheetaldolas/Hive-JSON-Serde/tree/master)中所述，通过键入以下代码实现此目的：
 
     ALTER TABLE json_table SET SERDEPROPERTIES ( "ignore.malformed.json" = "true");
-
-
-
 
 ##摘要
 总之，在 Hive 中选择 JSON 运算符类型取决于方案。如果拥有简单的 JSON 文档，并且只有一个用于查找的字段，可以选择使用 Hive UDF get\_json\_object。如果拥有多个用于查找的键，可以使用 json\_tuple。如果拥有嵌套文档，应该使用 JSON SerDe。
 
 如需其他相关文章，请参阅
 
-- [将 Hive 和 HiveQL 与 HDInsight 中的 Hadoop 配合使用以分析示例 Apache log4j 文件](/documentation/articles/hdinsight-use-hive/)
-- [使用 HDInsight 中的 Hive 分析航班延误数据](/documentation/articles/hdinsight-analyze-flight-delay-data/)
+- [将 Hive 和 HiveQL 与 HDInsight 中的 Hadoop 配合使用以分析示例 Apache log4j 文件](./hdinsight-use-hive.md)
+- [使用 HDInsight 中的 Hive 分析航班延误数据](./hdinsight-analyze-flight-delay-data.md)
 
-[hdinsight-python]: /documentation/articles/hdinsight-python/
+[hdinsight-python]: ./hdinsight-python.md
 
 [image-hdi-hivejson-flatten]: ./media/hdinsight-using-json-in-hive/flatten.png
 [image-hdi-hivejson-getjsonobject]: ./media/hdinsight-using-json-in-hive/getjsonobject.png

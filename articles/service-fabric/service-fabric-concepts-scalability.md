@@ -1,21 +1,21 @@
-<properties
-   pageTitle="Service Fabric 服务的可伸缩性 | Azure"
-   description="介绍如何缩放 Service Fabric 服务"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="appi101"
-   manager="timlt"
-   editor=""/>
+---
+title: Service Fabric 服务的可伸缩性 | Azure
+description: 介绍如何缩放 Service Fabric 服务
+services: service-fabric
+documentationCenter: .net
+authors: appi101
+manager: timlt
+editor: 
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="08/10/2016"
-   wacn.date="08/29/2016"
-   ms.author="aprameyr"/>
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 08/10/2016
+wacn.date: 01/17/2017
+ms.author: aprameyr
+---
 
 # 缩放 Service Fabric 应用程序
 Azure Service Fabric 通过负载均衡服务、分区以及群集中所有节点上的副本，让可伸缩应用程序的生成更简单。这实现了资源利用率的最大化。
@@ -27,7 +27,7 @@ Azure Service Fabric 通过负载均衡服务、分区以及群集中所有节�
 2. 在服务名称级别进行缩放
 
 ## 在分区级别进行缩放
-Service Fabric 支持将单个服务分区为多个较小的分区。[分区概述](/documentation/articles/service-fabric-concepts-partitioning/)提供了有关受支持分区方案类型的信息。每个分区的副本分布在群集中的各个节点上。请考虑使用具有低键 0、高键 99 和 4 个分区的范围分区方案的服务。在包含三个节点的群集中，该服务可能如此处所示，按四个副本共享每个节点上的资源的方式进行布局：
+Service Fabric 支持将单个服务分区为多个较小的分区。[分区概述](./service-fabric-concepts-partitioning.md)提供了有关受支持分区方案类型的信息。每个分区的副本分布在群集中的各个节点上。请考虑使用具有低键 0、高键 99 和 4 个分区的范围分区方案的服务。在包含三个节点的群集中，该服务可能如此处所示，按四个副本共享每个节点上的资源的方式进行布局：
 
 ![三节点式分区布局](./media/service-fabric-concepts-scalability/layout-three-nodes.png)
 
@@ -36,7 +36,7 @@ Service Fabric 支持将单个服务分区为多个较小的分区。[分区概�
 ![四节点式分区布局](./media/service-fabric-concepts-scalability/layout-four-nodes.png)
 
 ## 在服务名称级别进行缩放
-服务实例是应用程序名称和服务类型名称的一个特定实例（请参阅 [Service Fabric 应用程序生命周期](/documentation/articles/service-fabric-application-lifecycle/)）。在创建服务的过程中，指定要使用的分区方案（请参阅 [Service Fabric 服务分区](/documentation/articles/service-fabric-concepts-partitioning/)）。
+服务实例是应用程序名称和服务类型名称的一个特定实例（请参阅 [Service Fabric 应用程序生命周期](./service-fabric-application-lifecycle.md)）。在创建服务的过程中，指定要使用的分区方案（请参阅 [Service Fabric 服务分区](./service-fabric-concepts-partitioning.md)）。
 
 第一个缩放级别是按服务名称进行。随着旧服务实例变得繁忙，你可以创建新的服务实例，并可赋予不同的分区级别。这允许新服务使用者使用较不繁忙的服务实例而非较忙碌的实例。
 
@@ -55,11 +55,10 @@ Service Fabric 支持将单个服务分区为多个较小的分区。[分区概�
 
 有关 Service Fabric 概念的详细信息，请参阅以下内容：
 
-- [Service Fabric 服务的可用性](/documentation/articles/service-fabric-availability-services/)
+- [Service Fabric 服务的可用性](./service-fabric-availability-services.md)
 
-- [Service Fabric 服务分区](/documentation/articles/service-fabric-concepts-partitioning/)
+- [Service Fabric 服务分区](./service-fabric-concepts-partitioning.md)
 
-- [定义和管理状态](/documentation/articles/service-fabric-concepts-state/)
+- [定义和管理状态](./service-fabric-concepts-state.md)
  
-
-<!---HONumber=Mooncake_0822_2016-->
+<!---HONumber=Mooncake_Quality_Review_0117_2017-->

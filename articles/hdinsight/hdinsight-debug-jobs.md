@@ -1,26 +1,26 @@
-<properties
-	pageTitle="在 HDInsight 中调试 Hadoop：查看日志和解释错误消息 | Azure"
-	description="了解在使用 PowerShell 管理 HDInsight 时可能会收到的错误消息，以及恢复正常的步骤。"
-	services="hdinsight"
-	tags="azure-portal"
-	editor="cgronlun"
-	manager="paulettm"
-	authors="mumian"
-	documentationCenter=""/>
+---
+title: 在 HDInsight 中调试 Hadoop：查看日志和解释错误消息 | Azure
+description: 了解在使用 PowerShell 管理 HDInsight 时可能会收到的错误消息，以及恢复正常的步骤。
+services: hdinsight
+tags: azure-portal
+editor: cgronlun
+manager: paulettm
+authors: mumian
+documentationCenter: 
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/02/2016"
-	wacn.date="12/16/2016"
-	ms.author="jgao"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/02/2016
+wacn.date: 12/16/2016
+ms.author: jgao
+---
 
 # 分析 HDInsight 日志
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 Azure HDInsight 中的每个 Hadoop 群集都有用作默认文件系统的 Azure 存储帐户。该存储帐户称作默认存储帐户。群集使用默认存储帐户上的 Azure 表存储和 Blob 存储存储其日志。即使在删除群集后，日志仍会保留在存储帐户中。
 
@@ -104,10 +104,9 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 
 通过[写入 Azure 表的日志](#log-written-to-azure-tables)，可在一定程度上了解 HDInsight 群集中发生的事件。但是，这些表不提供任务级日志，这些日志在问题发生时可以用于进一步分析问题。为了更进一步详细了解发生的问题，可以对 HDInsight 群集进行配置，将通过 Templeton 提交的任何作业的任务日志写入 Blob 存储帐户。实际上，这是指通过 Azure PowerShell cmdlet 或 .NET 作业提交 API 提交的作业，而不是指通过 RDP 提交或通过命令行访问群集时提交的作业。
 
-要查看日志，请参阅[在基于 Windows 的 HDInsight 上访问 YARN 应用程序日志](/documentation/articles/hdinsight-hadoop-access-yarn-app-logs/)。
+要查看日志，请参阅[在基于 Windows 的 HDInsight 上访问 YARN 应用程序日志](./hdinsight-hadoop-access-yarn-app-logs.md)。
 
 有关应用程序日志的详细信息，请参阅[简化 YARN 中的用户日志管理和访问](http://hortonworks.com/blog/simplifying-user-logs-management-and-access-in-yarn/)。
- 
  
 ## 查看群集运行状况和作业日志
 
@@ -120,7 +119,6 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 出现提示时，输入群集管理员凭据。在打开的查询控制台中，单击“Hadoop UI”。
 
 ![启动 Hadoop UI](./media/hdinsight-debug-jobs/hdi-debug-launch-dashboard-hadoop-ui.png)
-
 
 ###访问 Yarn UI
 
@@ -165,7 +163,6 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 ### <a id="ClusterNameUnavailable"></a>ClusterNameUnavailable
 - **说明**：群集名称 *yourClusterName* 不可用。请选取另一个名称。  
 - **缓解**：用户应指定唯一且不存在的群集名称，然后重试。如果用户正在使用门户，则 UI 将通知他们该群集名称是否已在创建步骤期间使用。
-
 
 ### <a id="ClusterPasswordInvalid"></a>ClusterPasswordInvalid
 - **说明**：群集密码无效。密码长度至少必须为 10 个字符，并且至少必须包含一个数字、大写字母、小写字母和特殊字符且没有空格，不得包含用户名作为密码的一部分。  

@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="授权 Microsoft® 平滑流式处理客户端移植工具包" 
-	description="了解如何为 Microsoft® 平滑流式处理客户端移植工具包授权。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="xpouyat,vsood" 
-	manager="erikre" 
-	editor=""/>
+---
+title: 授权 Microsoft® 平滑流式处理客户端移植工具包
+description: 了解如何为 Microsoft® 平滑流式处理客户端移植工具包授权。
+services: media-services
+documentationCenter: 
+authors: xpouyat,vsood
+manager: erikre
+editor: 
 
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/06/2016" 
-	wacn.date="12/26/2016"  
-	ms.author="xpouyat"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/06/2016
+wacn.date: 12/26/2016
+ms.author: xpouyat
+---
 
 #授权 Microsoft® 平滑流式处理客户端移植工具包
 
@@ -73,7 +73,6 @@ Microsoft 根据此许可证提供全部所需的知识产权，以便从其他�
 - 交付的每个设备实现支付 0.10 美元
 - 每年的特许权使用费上限为 50,000 美元
 - 每年的前 10,000 个设备实现无需支付特许权使用费
-
 
 ##Microsoft 平滑流式处理客户端中期产品协议许可接受方
 

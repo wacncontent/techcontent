@@ -37,7 +37,6 @@
 
  ![][5]  
 
-
 [0]: ./media/virtual-machines-common-classic-web-app-visual-studio/CreateVM_NewProject.PNG
 [1]: ./media/dotnet-visual-studio-create-virtual-machine/CreateVM_SignIn.PNG
 [2]: ./media/virtual-machines-common-classic-web-app-visual-studio/CreateVM_CreateVM.PNG

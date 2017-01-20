@@ -1,34 +1,32 @@
-<properties
-	pageTitle="创建 Windows VM 的副本 | Azure"
-	description="了解如何在 Resource Manager 部署模型中，为运行 Windows 的专用 Azure VM 创建副本。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="cynthn"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 创建 Windows VM 的副本 | Azure
+description: 了解如何在 Resource Manager 部署模型中，为运行 Windows 的专用 Azure VM 创建副本。
+services: virtual-machines-windows
+documentationCenter: 
+authors: cynthn
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/21/2016"
-	wacn.date="01/05/2017"
-	ms.author="cynthn"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/21/2016
+wacn.date: 01/05/2017
+ms.author: cynthn
+---
 
 # 从专用 VHD 创建 VM
 
 通过使用 Powershell 将专用 VHD 附加为 OS 磁盘来创建新 VM。专用 VHD 保留原始 VM 中的用户帐户、应用程序和其他状态数据。
 
-如果想要从通用 VHD 创建 VM，请参阅[从通用 VHD 映像创建 VM](/documentation/articles/virtual-machines-windows-create-vm-generalized/)。
+如果想要从通用 VHD 创建 VM，请参阅[从通用 VHD 映像创建 VM](./virtual-machines-windows-create-vm-generalized.md)。
 
 ## 创建子网和 vNet
 
-创建[虚拟网络](/documentation/articles/virtual-networks-overview/)的 vNet 和子网。
+创建[虚拟网络](../virtual-network/virtual-networks-overview.md)的 vNet 和子网。
 
 1. 创建子网。此示例在资源组 **myResourceGroup** 中创建名为 **mySubNet** 的子网，并将子网地址前缀设置为 **10.0.0.0/24**。
 
@@ -45,7 +43,7 @@
 
 ## 创建公共 IP 地址和 NIC
 
-若要与虚拟网络中的虚拟机通信，需要一个[公共 IP 地址](/documentation/articles/virtual-network-ip-addresses-overview-arm/)和网络接口。
+若要与虚拟网络中的虚拟机通信，需要一个[公共 IP 地址](../virtual-network/virtual-network-ip-addresses-overview-arm.md)和网络接口。
 
 1. 创建公共 IP。在此示例中，公共 IP 地址名称设置为 **myIP**。
 
@@ -75,7 +73,7 @@
 	$nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName $rgName -Location $location `
 		-Name $nsgName -SecurityRules $rdpRule
 
-有关终结点和 NSG 规则的详细信息，请参阅 [Opening ports to a VM in Azure using PowerShell](/documentation/articles/virtual-machines-windows-nsg-quickstart-powershell/)（使用 PowerShell 在 Azure 中打开 VM 端口）。
+有关终结点和 NSG 规则的详细信息，请参阅 [Opening ports to a VM in Azure using PowerShell](./virtual-machines-windows-nsg-quickstart-powershell.md)（使用 PowerShell 在 Azure 中打开 VM 端口）。
 
 ## 创建 VM 配置
 
@@ -107,7 +105,6 @@
 
 数据磁盘和操作系统磁盘的 URL 类似于：`https://StorageAccountName.blob.core.chinacloudapi.cn/BlobContainerName/DiskName.vhd`。可通过以下方法在门户上找到此信息：浏览到目标存储容器，单击复制的操作系统或数据 VHD，然后复制 URL 的内容。
 
-
 ## 创建 VM
 
 使用刚刚创建的配置创建 VM。
@@ -130,6 +127,6 @@
 
 ## 后续步骤
 
-若要登录到新虚拟机，请在[门户](https://portal.azure.cn)中浏览到该 VM，单击“连接”，然后打开远程桌面 RDP 文件。使用原始虚拟机的帐户凭据登录到新虚拟机。有关详细信息，请参阅 [How to connect and log on to an Azure virtual machine running Windows](/documentation/articles/virtual-machines-windows-connect-logon/)（如何连接并登录到运行 Windows 的 Azure 虚拟机）。
+若要登录到新虚拟机，请在[门户](https://portal.azure.cn)中浏览到该 VM，单击“连接”，然后打开远程桌面 RDP 文件。使用原始虚拟机的帐户凭据登录到新虚拟机。有关详细信息，请参阅 [How to connect and log on to an Azure virtual machine running Windows](./virtual-machines-windows-connect-logon.md)（如何连接并登录到运行 Windows 的 Azure 虚拟机）。
 
 <!---HONumber=Mooncake_1114_2016-->

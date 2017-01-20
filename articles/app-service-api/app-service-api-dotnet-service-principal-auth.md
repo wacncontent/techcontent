@@ -1,29 +1,29 @@
-<properties
-	pageTitle="Azure 应用服务中 API 应用的服务主体身份验证 | Azure"
-	description="了解如何在服务到服务方案中保护 Azure 应用服务中的 API 应用。"
-	services="app-service\api"
-	documentationCenter=".net"
-	authors="tdykstra"
-	manager="wpickett"
-	editor=""/>
+---
+title: Azure 应用服务中 API 应用的服务主体身份验证 | Azure
+description: 了解如何在服务到服务方案中保护 Azure 应用服务中的 API 应用。
+services: app-service\api
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="app-service-api"
-	ms.workload="na"
-	ms.tgt_pltfrm="dotnet"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="06/30/2016"
-	wacn.date="11/25/2016" 
-	ms.author="rachelap"/>
+ms.service: app-service-api
+ms.workload: na
+ms.tgt_pltfrm: dotnet
+ms.devlang: na
+ms.topic: article
+ms.date: 06/30/2016
+wacn.date: 11/25/2016
+ms.author: rachelap
+---
 
 # Azure 应用服务中 API 应用的服务主体身份验证
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 ## 概述
 
-本文介绍如何使用应用服务身份验证对 API 应用进行 *内部* 访问。内部访问方案是指希望 API 应用只能由自己的应用程序代码使用。在应用服务中实现这种方案的建议方法是使用 Azure AD 保护被调用的 API 应用。可以通过提供应用程序标识（服务主体）凭据，使用从 Azure AD 获取的持有者令牌调用受保护的 API 应用。有关使用 Azure AD 的替代方案，请参阅 [Azure App Service authentication overview](/documentation/articles/app-service-authentication-overview/#service-to-service-authentication)（Azure 应用服务身份验证概述）中的 **Service-to-service authentication**（服务到服务身份验证）部分。
+本文介绍如何使用应用服务身份验证对 API 应用进行 *内部* 访问。内部访问方案是指希望 API 应用只能由自己的应用程序代码使用。在应用服务中实现这种方案的建议方法是使用 Azure AD 保护被调用的 API 应用。可以通过提供应用程序标识（服务主体）凭据，使用从 Azure AD 获取的持有者令牌调用受保护的 API 应用。有关使用 Azure AD 的替代方案，请参阅 [Azure App Service authentication overview](../app-service/app-service-authentication-overview.md#service-to-service-authentication)（Azure 应用服务身份验证概述）中的 **Service-to-service authentication**（服务到服务身份验证）部分。
 
 本文内容：
 
@@ -58,7 +58,7 @@
 
 	内部方案通常涉及到调用 API 应用的 API 应用。可为每个 API 应用使用不同的 Azure AD 应用程序，或者全都使用同一个 Azure AD 应用程序。
 
-	有关此边栏选项卡的详细说明，请参阅 [How to configure your App Service application to use Azure Active Directory login](/documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）。
+	有关此边栏选项卡的详细说明，请参阅 [How to configure your App Service application to use Azure Active Directory login](../app-service-mobile/app-service-mobile-how-to-configure-active-directory-authentication.md)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）。
 
 7. 完成身份验证提供程序配置边栏选项卡中的操作后，单击“确定”。
 
@@ -99,7 +99,7 @@
 
 如果正在遵循适用于 API 应用的 Node.js 或 Java 系列教程，请跳到[后续步骤](#next-steps)部分。
 
-本文余下部分续接 .NET API 应用系列教程，假设已完成[用户身份验证教程](/documentation/articles/app-service-api-dotnet-user-principal-auth/)并拥有在 Azure 中运行、已启用用户身份验证的示例应用程序。
+本文余下部分续接 .NET API 应用系列教程，假设已完成[用户身份验证教程](./app-service-api-dotnet-user-principal-auth.md)并拥有在 Azure 中运行、已启用用户身份验证的示例应用程序。
 
 ## 在 Azure 中设置身份验证
 
@@ -360,7 +360,7 @@
 
 8. 使用 Azure AD PowerShell 为针对 TodoListWebApp 项目创建的 Azure AD 应用程序获取服务主体值。
 
-	a.有关如何安装 Azure PowerShell 和连接到订阅的说明，请参阅 [Using Azure PowerShell with Azure Resource Manager](/documentation/articles/powershell-azure-resource-manager/)（将 Azure PowerShell 与 Azure Resource Manager 配合使用）。
+	a.有关如何安装 Azure PowerShell 和连接到订阅的说明，请参阅 [Using Azure PowerShell with Azure Resource Manager](../azure-resource-manager/powershell-azure-resource-manager.md)（将 Azure PowerShell 与 Azure Resource Manager 配合使用）。
 
 	b.若要获取服务主体列表，请依次执行 `Login-AzureRmAccount` 命令和 `Get-AzureRmADServicePrincipal` 命令。
 
@@ -396,11 +396,11 @@
 
 两个 Web API 项目是通过使用 **Azure API 应用**项目模板并将默认“值”控制器替换为 ToDoList 控制器创建的。为了在 ToDoListAPI 项目中获取 Azure AD 服务主体令牌，我们已安装[用于 .NET 的 Active Directory 身份验证库 (ADAL)](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/) NuGet 包。
  
-有关如何使用 ToDoListAngular 之类的 Web API 后端创建 AngularJS 单页应用程序的信息，请参阅 [Hands On Lab: Build a Single Page Application (SPA) with ASP.NET Web API and Angular.js](http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/build-a-single-page-application-spa-with-aspnet-web-api-and-angularjs)（动手实验：使用 ASP.NET Web API 和 Angular.js 构建单页应用程序 (SPA)）。有关如何添加 Azure AD 身份验证代码的信息，请参阅 [Securing AngularJS Single Page Apps with Azure AD](/documentation/articles/active-directory-devquickstarts-angular/)（使用 Azure AD 保护 AngularJS 单页应用程序）。
+有关如何使用 ToDoListAngular 之类的 Web API 后端创建 AngularJS 单页应用程序的信息，请参阅 [Hands On Lab: Build a Single Page Application (SPA) with ASP.NET Web API and Angular.js](http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/build-a-single-page-application-spa-with-aspnet-web-api-and-angularjs)（动手实验：使用 ASP.NET Web API 和 Angular.js 构建单页应用程序 (SPA)）。有关如何添加 Azure AD 身份验证代码的信息，请参阅 [Securing AngularJS Single Page Apps with Azure AD](../active-directory/active-directory-devquickstarts-angular.md)（使用 Azure AD 保护 AngularJS 单页应用程序）。
 
 ## <a name="troubleshooting"></a>故障排除
 
-[AZURE.INCLUDE [故障排除](../../includes/app-service-api-auth-troubleshooting.md)]
+[!INCLUDE [故障排除](../../includes/app-service-api-auth-troubleshooting.md)]
 
 * 请务必不要混淆 ToDoListAPI（中间层）和 ToDoListDataAPI（数据层）。例如，在本教程中，将身份验证添加到了数据层 API 应用，**但应用密钥必须来自为中间层 API 应用创建的 Azure AD 应用程序**。
 
@@ -410,12 +410,12 @@
 
 有关 Azure Active Directory 的详细信息，请参阅以下资源。
 
-* [Azure AD developers' guide](/documentation/articles/active-directory-developers-guide/)（Azure AD 开发人员指南）
-* [Azure AD scenarios](/documentation/articles/active-directory-authentication-scenarios/)（Azure AD 方案）
+* [Azure AD developers' guide](../active-directory/active-directory-developers-guide.md)（Azure AD 开发人员指南）
+* [Azure AD scenarios](../active-directory/active-directory-authentication-scenarios.md)（Azure AD 方案）
 * [Azure AD 示例](https://github.com/azure-samples?query=active-directory)
 
 	[WebApp-WebAPI-OAuth2-AppIdentity-DotNet](http://github.com/AzureADSamples/WebApp-WebAPI-OAuth2-AppIdentity-DotNet) 示例类似于本教程中所示的示例，但未使用应用服务身份验证。
 
-有关通过 Visual Studio 或通过[源代码管理系统](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/source-control)的[自动部署](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/continuous-integration-and-continuous-delivery)功能以其他方式将 Visual Studio 项目部署到 API 应用的信息，请参阅 [How to deploy an Azure App Service app](/documentation/articles/web-sites-deploy/)（如何部署 Azure 应用服务应用）。
+有关通过 Visual Studio 或通过[源代码管理系统](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/source-control)的[自动部署](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/continuous-integration-and-continuous-delivery)功能以其他方式将 Visual Studio 项目部署到 API 应用的信息，请参阅 [How to deploy an Azure App Service app](../app-service-web/web-sites-deploy.md)（如何部署 Azure 应用服务应用）。
 
 <!---HONumber=Mooncake_0919_2016-->

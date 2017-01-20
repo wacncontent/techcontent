@@ -1,30 +1,30 @@
-<properties 
-	pageTitle="如何结合使用通知中心与 Python" 
-	description="了解如何从 Python 后端使用 Azure 通知中心。" 
-	services="notification-hubs" 
-	documentationCenter="" 
-	authors="wesmc7777"
-	manager="erikre" 
-	editor=""/>
+---
+title: 如何结合使用通知中心与 Python
+description: 了解如何从 Python 后端使用 Azure 通知中心。
+services: notification-hubs
+documentationCenter: 
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags 
-	ms.service="notification-hubs" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="python" 
-	ms.devlang="php" 
-	ms.topic="article" 
-	ms.date="06/29/2016" 
-	wacn.date="11/15/2016" 
-	ms.author="wesmc"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: python
+ms.devlang: php
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 11/15/2016
+ms.author: wesmc
+---
 
 # 如何通过 Python 使用通知中心
-[AZURE.INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
+[!INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
 		
 如 MSDN 主题[通知中心 REST API](http://msdn.microsoft.com/library/dn223264.aspx) 中所述，你可以使用通知中心 REST 接口从 Java/PHP/Python/Ruby 后端访问所有通知中心功能。
 
-> [AZURE.NOTE] 这是在 Python 中实现通知发送的示例引用实现，不是官方支持的通知中心 Python SDK。
+> [!NOTE] 这是在 Python 中实现通知发送的示例引用实现，不是官方支持的通知中心 Python SDK。
 
-> [AZURE.NOTE] 此示例使用 Python 3.4 编写。
+> [!NOTE] 此示例使用 Python 3.4 编写。
 
 本主题中，我们将向你介绍如何：
 
@@ -32,9 +32,9 @@
 * 使用 Python 接口发送通知到通知中心 REST API。 
 * 获取 HTTP REST 请求/响应的转储以进行调试/培训。 
 
-你可以按照你选定的移动平台的[入门教程](/documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/)以 Python 实现后端部分。
+你可以按照你选定的移动平台的[入门教程](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md)以 Python 实现后端部分。
 
-> [AZURE.NOTE] 该示例仅限于发送通知，并不执行任何注册管理操作。
+> [!NOTE] 该示例仅限于发送通知，并不执行任何注册管理操作。
 
 ## 客户端接口
 主要的客户端接口可提供 [.NET 通知中心 SDK](http://msdn.microsoft.com/library/jj933431.aspx) 中提供的相同方法。这将允许你直接翻译当前该网站上提供的所有教程和示例，这些内容均来自 Internet 上的社区。
@@ -84,7 +84,6 @@
 	                self.SasKeyName = part[20:]
 	            if part.startswith('SharedAccessKey'):
 	                self.SasKeyValue = part[16:]
-
 
 ### 创建安全令牌
 有关安全令牌创建的详细信息，请访问[此处](http://msdn.microsoft.com/library/dn495627.aspx)。
@@ -377,7 +376,6 @@
 
 ![][5]
 
-
 ## 后续步骤
 在本主题中，我们介绍了如何为通知中心创建简单的 Python REST 客户端。从这里你可以：
 
@@ -387,9 +385,9 @@
 
 <!-- URLs -->
 [Python REST 包装器示例]: https://github.com/Azure/azure-notificationhubs-samples/tree/master/notificationhubs-rest-python
-[入门教程]: /documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/
-[突发新闻教程]: /documentation/articles/notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns/
-[本地化新闻教程]: /documentation/articles/notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification/
+[入门教程]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
+[突发新闻教程]: ./notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns.md
+[本地化新闻教程]: ./notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification.md
 
 <!-- Images. -->
 [1]: ./media/notification-hubs-python-backend-how-to/DetailedLoggingInfo.png
@@ -398,5 +396,4 @@
 [4]: ./media/notification-hubs-python-backend-how-to/SendWithMultipleTags.png
 [5]: ./media/notification-hubs-python-backend-how-to/TemplatedNotification.png
  
-
 <!---HONumber=Mooncake_0808_2016-->

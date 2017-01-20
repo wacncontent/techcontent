@@ -1,21 +1,21 @@
-<properties 
-   pageTitle="服务总线消息传送异常 | Azure"
-   description="服务总线消息传送异常和建议的操作列表。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-   editor="tysonn" />  
+---
+title: 服务总线消息传送异常 | Azure
+description: 服务总线消息传送异常和建议的操作列表。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: tysonn
 
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/02/2016"
-    ms.author="sethm"
-    wacn.date="12/26/2016" />  
+ms.service: service-bus
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/02/2016
+ms.author: sethm
+wacn.date: 12/26/2016
+---
 
 # 服务总线消息传送异常
 
@@ -123,10 +123,10 @@ Message: The maximum entity size has been reached or exceeded for Topic: ‘xxx-
 
 有关服务总线和事件中心 .NET API 的完整参考，请参阅 [MSDN 上的 Azure 参考](https://msdn.microsoft.com/zh-cn/library/azure/mt419900.aspx)。
 
-若要了解有关[服务总线](/home/features/messaging/)的详细信息，请参阅以下主题。
+若要了解有关[服务总线](https://www.azure.cn/home/features/messaging/)的详细信息，请参阅以下主题。
 
-- [服务总线消息传送概述](/documentation/articles/service-bus-messaging-overview/)
-- [服务总线基础知识](/documentation/articles/service-bus-fundamentals-hybrid-solutions/)
-- [服务总线体系结构](/documentation/articles/service-bus-architecture/)
+- [服务总线消息传送概述](./service-bus-messaging-overview.md)
+- [服务总线基础知识](./service-bus-fundamentals-hybrid-solutions.md)
+- [服务总线体系结构](./service-bus-architecture.md)
 
 <!---HONumber=Mooncake_1219_2016-->

@@ -1,25 +1,25 @@
-<properties
-	pageTitle="适用于 C 语言的 Azure IoT 设备 SDK - 序列化程序 | Azure"
-	description="了解如何使用适用于 C 语言的 Azure IoT 设备 SDK 中的序列化程序库"
-	services="iot-hub"
-	documentationCenter=""
-	authors="olivierbloch"
-	manager="timlt"
-	editor=""/>
+---
+title: 适用于 C 语言的 Azure IoT 设备 SDK - 序列化程序 | Azure
+description: 了解如何使用适用于 C 语言的 Azure IoT 设备 SDK 中的序列化程序库
+services: iot-hub
+documentationCenter: 
+authors: olivierbloch
+manager: timlt
+editor: 
 
-<tags
-     ms.service="iot-hub"
-     ms.devlang="cpp"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="09/06/2016"
-     wacn.date="11/07/2016"
-     ms.author="obloch"/>
+ms.service: iot-hub
+ms.devlang: cpp
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/06/2016
+wacn.date: 01/17/2017
+ms.author: obloch
+---
 
 # 适用于 C 语言的 Azure IoT 设备 SDK – 有关序列化程序的详细信息
 
-本系列教程的[第一篇文章](/documentation/articles/iot-hub-device-sdk-c-intro/)介绍了**适用于 C 语言的 Azure IoT 设备 SDK**。下一篇文章提供 [**IoTHubClient**](/documentation/articles/iot-hub-device-sdk-c-iothubclient/) 的更详细介绍。本文最后的部分将提供该 SDK 的剩余组件**序列化程序**库的更详细说明。
+本系列教程的[第一篇文章](./iot-hub-device-sdk-c-intro.md)介绍了**适用于 C 语言的 Azure IoT 设备 SDK**。下一篇文章提供 [**IoTHubClient**](./iot-hub-device-sdk-c-iothubclient.md) 的更详细介绍。本文最后的部分将提供该 SDK 的剩余组件**序列化程序**库的更详细说明。
 
 本简介文章介绍如何使用**序列化程序**库将事件发送到 IoT 中心，以及接收来自 IoT 中心的消息。本文中将延伸该讨论，更完整地阐释如何使用**序列化程序**宏语言来创建数据模型。本文还包含更多有关该库如何序列化消息（以及在某些情况下，如何控制序列化行为）的详细信息。此外，将介绍可以修改以判断所要创建的模型大小的某些参数。
 
@@ -31,7 +31,7 @@
 
 ## 建模语言
 
-本系列教程中的[简介文章](/documentation/articles/iot-hub-device-sdk-c-intro/)通过 **simplesample\_amqp** 应用程序提供的示例介绍了**适用于 C 语言的 Azure IoT 设备 SDK** 建模语言：
+本系列教程中的[简介文章](./iot-hub-device-sdk-c-intro.md)通过 **simplesample\_amqp** 应用程序提供的示例介绍了**适用于 C 语言的 Azure IoT 设备 SDK** 建模语言：
 
 ```
 BEGIN_NAMESPACE(WeatherStation);
@@ -55,7 +55,7 @@ END_NAMESPACE(WeatherStation);
 
 本示例并未演示 SDK 支持的其他数据类型。我们将在稍后讨论。
 
-> [AZURE.NOTE] IoT 中心将设备发送给它的数据视为 *事件* ，而建模语言将其视为 *数据*（使用 **WITH\_DATA** 来定义）。同样，IoT 中心将发送给设备的数据视为 *消息* ，而建模语言将其视为*操作*（使用 **WITH\_ACTION** 来定义）。请注意，本文中可能会换用这些术语。
+> [!NOTE] IoT 中心将设备发送给它的数据视为 *事件* ，而建模语言将其视为 *数据*（使用 **WITH\_DATA** 来定义）。同样，IoT 中心将发送给设备的数据视为 *消息* ，而建模语言将其视为*操作*（使用 **WITH\_ACTION** 来定义）。请注意，本文中可能会换用这些术语。
 
 ### 支持的数据类型
 
@@ -445,7 +445,7 @@ if (SERIALIZE(&destination, &destinationSize, thermostat->Temperature, thermosta
 
 ## 消息处理
 
-到目前为止，本文只讨论了如何将事件发送到 IoT 中心，而尚未涉及到消息接收。这是因为有关接收消息的知识大多数在[以前的文章](/documentation/articles/iot-hub-device-sdk-c-intro/)中都已涵盖。回顾那篇文章，我们知道是通过注册消息回调函数来处理消息的：
+到目前为止，本文只讨论了如何将事件发送到 IoT 中心，而尚未涉及到消息接收。这是因为有关接收消息的知识大多数在[以前的文章](./iot-hub-device-sdk-c-intro.md)中都已涵盖。回顾那篇文章，我们知道是通过注册消息回调函数来处理消息的：
 
 ```
 IoTHubClient_SetMessageCallback(iotHubClientHandle, IoTHubMessage, myWeather)
@@ -605,7 +605,7 @@ WITH_DATA(int, MyData)
 
 本文着重介绍的示例应用程序为 **simplesample\_amqp**。此示例使用较高级别（非“LL”）API 来发送事件和接收消息。如果你使用这些 API，将运行后台线程来处理事件发送和消息接收。不过，你可以使用较低级别 (LL) API 来消除此后台线程的使用，并掌握发送事件或从云接收消息时的明确控制权。
 
-如[前一篇文章](/documentation/articles/iot-hub-device-sdk-c-iothubclient/)中所述，有一组由较高级别 API 组成的函数：
+如[前一篇文章](./iot-hub-device-sdk-c-iothubclient.md)中所述，有一组由较高级别 API 组成的函数：
 
 -   IoTHubClient\_CreateFromConnectionString
 
@@ -633,7 +633,7 @@ WITH_DATA(int, MyData)
 
 ## 其他主题
 
-值得一提的其他几个主题包括属性处理、使用替代设备凭据和配置选项。这些主题均涵盖在[前一篇文章](/documentation/articles/iot-hub-device-sdk-c-iothubclient/)中。重点在于，所有这些功能与**序列化程序**库配合使用的方式与和 **IoTHubClient** 库配合使用的方式相同。例如，如果你想要从模型将属性附加到事件，需要以前面所述的相同方式，使用 **IoTHubMessage\_Properties** 和 **Map**\_**AddorUpdate**：
+值得一提的其他几个主题包括属性处理、使用替代设备凭据和配置选项。这些主题均涵盖在[前一篇文章](./iot-hub-device-sdk-c-iothubclient.md)中。重点在于，所有这些功能与**序列化程序**库配合使用的方式与和 **IoTHubClient** 库配合使用的方式相同。例如，如果你想要从模型将属性附加到事件，需要以前面所述的相同方式，使用 **IoTHubMessage\_Properties** 和 **Map**\_**AddorUpdate**：
 
 ```
 MAP_HANDLE propMap = IoTHubMessage_Properties(message.messageHandle);
@@ -661,14 +661,13 @@ serializer_init(NULL);
 serializer_deinit();
 ```
 
-除此之外，上面列出的所有其他功能在**序列化程序**库中的运行方式均与在 **IoTHubClient** 库中的运行方式相同。有关这些主题中任何一个主题的详细信息，请参阅本系列教程中的[前一篇文章](/documentation/articles/iot-hub-device-sdk-c-iothubclient/)。
+除此之外，上面列出的所有其他功能在**序列化程序**库中的运行方式均与在 **IoTHubClient** 库中的运行方式相同。有关这些主题中任何一个主题的详细信息，请参阅本系列教程中的[前一篇文章](./iot-hub-device-sdk-c-iothubclient.md)。
 
 ## 后续步骤
 
 本文详细介绍了**适用于 C 语言的 Azure IoT 设备 SDK** 中包含的**序列化程序**库的独特方面。通过文中提供的信息，你应该能充分了解如何使用模型来发送事件和接收来自 IoT 中心的消息。
 
 本文也是通过**适用于 C 语言的 Azure IoT 设备 SDK** 开发应用程序这一系列教程（由三部分组成）的最后一部分。这些信息应该不仅足以让你入门，还能让你彻底了解 API 的工作原理。请了解其他信息，因为还有一些 SDK 中的示例未涵盖在本文中。除此之外，[SDK 文档](https://github.com/Azure/azure-iot-sdks)是获取其他信息的绝佳资源。
-
 
 若要详细了解如何针对 IoT 中心进行开发，请参阅 [IoT 中心 SDK][lnk-sdks]。
 
@@ -677,10 +676,10 @@ serializer_deinit();
 - [使用网关 SDK 模拟设备][lnk-gateway]
 - [使用 Azure 门户管理 IoT 中心][lnk-portal]
 
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
 
-[lnk-design]: /documentation/articles/iot-hub-guidance/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
-[lnk-portal]: /documentation/articles/iot-hub-manage-through-portal/
+[lnk-design]: ./iot-hub-guidance.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
+[lnk-portal]: ./iot-hub-manage-through-portal.md
 
-<!---HONumber=Mooncake_0725_2016-->
+<!---HONumber=Mooncake_Quality_Review_0117_2017-->

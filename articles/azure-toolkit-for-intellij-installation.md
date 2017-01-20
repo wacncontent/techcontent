@@ -1,21 +1,21 @@
-<properties
-	pageTitle="安装 Azure Toolkit for IntelliJ | Azure"
-	description="了解如何安装 Azure Toolkit for IntelliJ IDEA。"
-	services=""
-	documentationCenter="java"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""/>
+---
+title: 安装 Azure Toolkit for IntelliJ | Azure
+description: 了解如何安装 Azure Toolkit for IntelliJ IDEA。
+services: 
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="multiple"
-	ms.workload="na"
-	ms.tgt_pltfrm="multiple"
-	ms.devlang="Java"
-	ms.topic="article"
-	ms.date="11/01/2016" 
-	wacn.date="12/05/2016" 
-	ms.author="robmcm"/>
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/05/2016
+ms.author: robmcm
+---
 
 # 安装 Azure Toolkit for IntelliJ
 借助 Azure Toolkit for IntelliJ 提供的模板和功能，你可以轻松使用 IntelliJ IDEA 开发环境来创建、开发、测试和部署 Azure 应用程序。Azure Toolkit for IntelliJ 是一个开放源代码项目，其源代码可从 GitHub 上项目站点的 MIT 许可证下获取，URL 为：
@@ -24,7 +24,7 @@
 
 安装 Azure Toolkit for IntelliJ 的方法有两种，一种是从“设置”对话框安装，另一种是从开始屏幕上的“配置”菜单安装；下列步骤将演示这两种安装方法。
 
-[AZURE.INCLUDE [azure-toolkit-for-IntelliJ-prerequisites](../../includes/azure-toolkit-for-intellij-prerequisites.md)]
+[!INCLUDE [azure-toolkit-for-IntelliJ-prerequisites](../../includes/azure-toolkit-for-intellij-prerequisites.md)]
 
 ## 从“设置”对话框安装 Azure Toolkit for IntelliJ 的步骤
 1. 启动 IntelliJ IDEA。
@@ -86,12 +86,12 @@
 
 <!-- URL List -->
 
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij.md
 [在 Eclipse 中创建 Azure 的 Hello World Web 应用]: /documentation/articles/app-service-web-eclipse-create-hello-world-web-app/
 [在 IntelliJ 中创建 Azure 的 Hello World Web 应用]: /documentation/articles/app-service-web-intellij-create-hello-world-web-app/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
-[Azure Toolkit for Eclipse 的新增功能]: /documentation/articles/azure-toolkit-for-eclipse-whats-new/
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
+[Azure Toolkit for Eclipse 的新增功能]: ./azure-toolkit-for-eclipse-whats-new.md
 
 [Azure Java 开发人员中心]: /develop/java/
 

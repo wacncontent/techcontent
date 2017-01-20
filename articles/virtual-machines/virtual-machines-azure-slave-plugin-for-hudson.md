@@ -1,21 +1,21 @@
-<properties
-    pageTitle="如何在 Hudson 连续集成中使用 Azure Slave 插件 | Azure"
-    description="介绍如何在 Hudson 连续集成中使用 Azure Slave 插件。"
-	services="virtual-machines-linux"
-	documentationCenter=""
-	authors="rmcmurray"
-	manager="wpickett"
-	editor="" />
+---
+title: 如何在 Hudson 连续集成中使用 Azure Slave 插件 | Azure
+description: 介绍如何在 Hudson 连续集成中使用 Azure Slave 插件。
+services: virtual-machines-linux
+documentationCenter: 
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-multiple"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="09/20/2016"
-	wacn.date="11/21/2016"
-	ms.author="robmcm"/>
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-multiple
+ms.devlang: java
+ms.topic: article
+ms.date: 09/20/2016
+wacn.date: 11/21/2016
+ms.author: robmcm
+---
 
 # 如何在 Hudson 连续集成中使用 Azure Slave 插件
 
@@ -85,7 +85,7 @@
 
 	![配置配置文件][configure profile]
 
-	>[AZURE.NOTE] 要使用 Azure 中国，你需要点击 **Advanced...**，并把 "https://management.core.windows.net" 替换成 "https://management.core.chinacloudapi.cn"。
+	>[!NOTE] 要使用 Azure 中国，你需要点击 **Advanced...**，并把 "https://management.core.windows.net" 替换成 "https://management.core.chinacloudapi.cn"。
 
 5. 从你的订阅配置文件复制订阅 ID 和管理证书，然后将其粘贴到相应的字段中。
 
@@ -240,6 +240,5 @@
 [add vm template]: ./media/virtual-machines-azure-slave-plugin-for-hudson/hudson-setup-addnewvmtemplate.png
 [template config]: ./media/virtual-machines-azure-slave-plugin-for-hudson/hudson-setup-templateconfig1-withdata.png
 [OS family list]: ./media/virtual-machines-azure-slave-plugin-for-hudson/hudson-oslist.png
-
 
 <!---HONumber=Mooncake_0606_2016-->

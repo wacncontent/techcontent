@@ -1,26 +1,27 @@
-<properties 
-   pageTitle="在虚拟网络中创建和配置具有内部负载均衡器 (ILB) 的应用程序网关 | Azure"
-   description="本页说明如何配置具有内部负载均衡终结点的 Azure 应用程序网关"
-   documentationCenter="na"
-   services="application-gateway"
-   authors="joaoma"
-   manager="jdial"
-   editor="tysonn"/>
-<tags 
-   ms.service="application-gateway"
-   ms.devlang="na"
-   ms.topic="article" 
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services" 
-   ms.date="11/16/2016" 
-   wacn.date="01/03/2017"
-   ms.author="gwallace"/>
+---
+title: 在虚拟网络中创建和配置具有内部负载均衡器 (ILB) 的应用程序网关 | Azure
+description: 本页说明如何配置具有内部负载均衡终结点的 Azure 应用程序网关
+documentationCenter: na
+services: application-gateway
+authors: joaoma
+manager: jdial
+editor: tysonn
+
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/16/2016
+wacn.date: 01/03/2017
+ms.author: gwallace
+---
 
 # 创建具有内部负载均衡器 (ILB) 的应用程序网关
 
-> [AZURE.SELECTOR]
-- [Azure 经典步骤](/documentation/articles/application-gateway-ilb/)
-- [资源管理器 Powershell 步骤](/documentation/articles/application-gateway-ilb-arm/)
+> [!div class="op_single_selector"]
+- [Azure 经典步骤](./application-gateway-ilb.md)
+- [资源管理器 Powershell 步骤](./application-gateway-ilb-arm.md)
 
 可以配置使用面向 Internet 的虚拟 IP 或不向 Internet 公开的内部终结点（也称为内部负载均衡器 (ILB) 终结点）的应用程序网关。配置使用 ILB 的网关适用于不向 Internet 公开的内部业务线应用程序。对于位于不向 Internet 公开的安全边界内的多层应用程序中的服务/层也很有用，但仍需要执行循环负载分散、会话粘性或 SSL 终止。本文将引导你配置具有 ILB 的应用程序网关。
 
@@ -30,7 +31,6 @@
 2. 请确认你已创建包含有效子网、可正常运行的虚拟网络。
 3. 请确认后端服务器位于虚拟网络中，或者为后端服务器分配了公共 IP/VIP。
 
-
 若要创建新的应用程序网关，请按所列顺序执行以下步骤。
 
 1. [创建新的应用程序网关](#create-a-new-application-gateway)
@@ -38,8 +38,6 @@
 3. [设置网关配置](#set-the-gateway-configuration)
 4. [启动网关](#start-the-gateway)
 4. [验证网关](#verify-the-gateway-status)
-
-
 
 ## <a name="create-a-new-application-gateway"></a> 创建新的应用程序网关：
 
@@ -72,7 +70,6 @@
 	VirtualIPs: 
 	DnsName:
 
-
 ## <a name="configure-the-gateway"></a> 配置网关
 
 应用程序网关配置由多个值组成。这些值可将绑定在一起以构造配置。
@@ -87,10 +84,7 @@
 
 可以通过创建配置对象或使用配置 XML 文件来构造配置。若要使用配置 XML 文件构造配置，请使用以下示例。
 
-
-
 注意以下事项：
-
 
 - *FrontendIPConfigurations* 元素描述有关配置具有 ILB 的应用程序网关的 ILB 详细信息。 
 
@@ -101,8 +95,6 @@
 - 在 *FrontendIPConfiguration* 中指定的 *Name* 元素的值应该在 HTTPListener 的 *FrontendIP* 元素中使用，以引用 FrontendIPConfiguration。
 
  **配置 XML 示例**
-
- 
 
 		<?xml version="1.0" encoding="utf-8"?>
 		<ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
@@ -155,8 +147,6 @@
 		    </HttpLoadBalancingRules>
 		</ApplicationGatewayConfiguration>
 	
-
-
 ## <a name="set-the-gateway-configuration"></a> 设置网关配置
 
 接下来，你将设置应用程序网关。可以对配置对象或配置 XML 文件使用 `Set-AzureApplicationGatewayConfig` cmdlet。
@@ -173,8 +163,7 @@
 
 配置网关后，使用 `Start-AzureApplicationGateway` cmdlet 来启动网关。成功启动网关后，将开始计收应用程序网关的费用。
 
-
-> [AZURE.NOTE] `Start-AzureApplicationGateway` cmdlet 最多可能需要 15 到 20 分钟才能完成。
+> [!NOTE] `Start-AzureApplicationGateway` cmdlet 最多可能需要 15 到 20 分钟才能完成。
    
 	PS C:\> Start-AzureApplicationGateway AppGwTest 
 
@@ -188,7 +177,7 @@
 
 使用 `Get-AzureApplicationGateway` cmdlet 检查网关的状态。如果前一步骤中的 *Start-AzureApplicationGateway* 成功，则 State 应为 *Running*，Vip 和 DnsName 应包含有效的条目。此示例在第一行显示 cmdlet，接着显示输出。在此示例中，网关正在运行并准备好接收流量。
 
-> [AZURE.NOTE] 在此示例中，应用程序网关配置为在配置的 ILB 终结点 10.0.0.10 上接受流量。
+> [!NOTE] 在此示例中，应用程序网关配置为在配置的 ILB 终结点 10.0.0.10 上接受流量。
 
 	PS C:\> Get-AzureApplicationGateway AppGwTest 
 
@@ -206,10 +195,9 @@
 
 ## 后续步骤
 
-
 如需负载均衡选项的其他常规信息，请参阅：
 
-- [Azure 负载均衡器](/documentation/services/load-balancer/)
-- [Azure 流量管理器](/documentation/services/traffic-manager/)
+- [Azure 负载均衡器](../load-balancer/index.md/)
+- [Azure 流量管理器](../traffic-manager/index.md/)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

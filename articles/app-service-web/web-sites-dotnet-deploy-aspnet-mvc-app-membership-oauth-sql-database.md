@@ -1,29 +1,28 @@
-<properties 
-	pageTitle="创建具有身份验证和 SQL 数据库的 ASP.NET MVC 应用程序并将其部署到 Azure App Service" 
-	description="了解如何开发具有 SQL 数据库后端的 ASP.NET MVC 5 应用程序，添加身份验证和授权，并将其部署到 Azure。" 
-	services="app-service\web" 
-	documentationCenter=".net" 
-	authors="Rick-Anderson" 
-	writer="Rick-Anderson" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 创建具有身份验证和 SQL 数据库的 ASP.NET MVC 应用程序并将其部署到 Azure App Service
+description: 了解如何开发具有 SQL 数据库后端的 ASP.NET MVC 5 应用程序，添加身份验证和授权，并将其部署到 Azure。
+services: app-service\web
+documentationCenter: .net
+authors: Rick-Anderson
+writer: Rick-Anderson
+manager: wpickett
+editor: 
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="03/21/2016" 
-	wacn.date="12/12/2016" 
-	ms.author="riande"/> 
-
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 03/21/2016
+wacn.date: 12/12/2016
+ms.author: riande
+---
 
 # 创建具有身份验证和 SQL 数据库的 ASP.NET MVC 应用程序并将其部署到 Azure App Service
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-本教程演示如何构建安全的 ASP.NET MVC 5 Web 应用，以便用户能够使用 Facebook 或 Google 凭据进行登录。该应用是一个简单的联系人列表，使用 ADO.NET Entity Framework 进行数据库访问。你需要将该应用部署到 [Azure 应用服务](/documentation/articles/app-service-changes-existing-services/)。
+本教程演示如何构建安全的 ASP.NET MVC 5 Web 应用，以便用户能够使用 Facebook 或 Google 凭据进行登录。该应用是一个简单的联系人列表，使用 ADO.NET Entity Framework 进行数据库访问。你需要将该应用部署到 [Azure 应用服务](./app-service-changes-existing-services.md)。
 
 完成本教程后，你将能够在云中启动并运行安全的数据驱动的 Web 应用程序，以及使用云数据库。下图显示了已完成的应用程序的登录页。
 
@@ -37,13 +36,13 @@
 * 如何使用 ADO.NET Entity Framework 6 Code First 在 SQL 数据库中读取和写入数据。
 * 如何使用 Entity Framework Code First 迁移部署数据库。
 * 如何使用 Azure SQL 数据库在云中存储关系数据。
-* 如何部署 Web 项目，以便将数据库用于 Azure 应用服务中的 [Web 应用](/documentation/articles/app-service-changes-existing-services/)。
+* 如何部署 Web 项目，以便将数据库用于 Azure 应用服务中的 [Web 应用](./app-service-changes-existing-services.md)。
 
->[AZURE.NOTE] 本教程的篇幅较长。如果要快速了解 Azure 应用服务和 Visual Studio Web 项目，请参阅[在 Azure 应用服务中创建 ASP.NET Web 应用](/documentation/articles/web-sites-dotnet-get-started/)。有关疑难解答信息，请参阅[疑难解答](#troubleshooting)部分。
+>[!NOTE] 本教程的篇幅较长。如果要快速了解 Azure 应用服务和 Visual Studio Web 项目，请参阅[在 Azure 应用服务中创建 ASP.NET Web 应用](./web-sites-dotnet-get-started.md)。有关疑难解答信息，请参阅[疑难解答](#troubleshooting)部分。
 
 ## 先决条件
 
-要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以[注册试用版](/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
+要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以[注册试用版](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
 
 要设置开发环境，则必须安装 [Visual Studio 2013 Update 5](http://go.microsoft.com/fwlink/?LinkId=390521) 或更高版本，以及最新版本的 [Azure SDK for .NET](http://go.microsoft.com/fwlink/?linkid=324322&clcid=0x409)。本文专为 Visual Studio Update 4 和 SDK 2.8.1 编写。相同的说明同样适用于已安装最新 [Azure SDK for .NET](http://go.microsoft.com/fwlink/?linkid=518003&clcid=0x409) 的 Visual Studio 2015，但有些屏幕看起来与插图不同。
 
@@ -65,7 +64,6 @@
 
 	![“新建 ASP.NET 项目”对话框](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/newproject.png)  
 
-
 1. 单击“确定”。
 
 1. 此时将显示“配置 Azure Web 应用设置”对话框。如果尚未登录，则需要登录；如果登录已过期，则需要重新输入凭据。
@@ -76,31 +74,27 @@
 
 5. 在“资源组”下拉列表中选择一个现有组，或者**创建新的资源组**（请参见下图）。
 
-	如果需要，你也可以选择已有的资源组。但如果创建新的资源组并只将它用于本教程，则在完成教程后你可以轻松删除为教程创建的所有 Azure 资源。有关资源组的信息，请参阅 [Azure 资源管理器概述](/documentation/articles/resource-group-overview/)。
+	如果需要，你也可以选择已有的资源组。但如果创建新的资源组并只将它用于本教程，则在完成教程后你可以轻松删除为教程创建的所有 Azure 资源。有关资源组的信息，请参阅 [Azure 资源管理器概述](../azure-resource-manager/resource-group-overview.md)。
 
 5. 在“应用服务计划”下拉列表中选择一个现有计划，或者**创建新的应用服务计划**（请参见下图）。
 
-	如果需要，你也可以选择已有的 App Service 计划。有关应用服务计划的信息，请参阅 [Azure 应用服务计划深入概述](/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/)。
+	如果需要，你也可以选择已有的 App Service 计划。有关应用服务计划的信息，请参阅 [Azure 应用服务计划深入概述](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)。
 
 1. 点击“浏览其他 Azure 服务”以添加 SQL 数据库。
 
 	![添加新服务](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/n2.png)  
 
-
 1. 点击 **+** 图标以添加 SQL 数据库。
 
 	![新建 SQL DB](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/nsql.png)  
-
 
 1. 在“配置 SQL 数据库”对话框上单击“新建”：
 
 	![SQL 管理员名称和密码](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/nc.png)  
 
-
 1. 为管理员输入一个名称和强密码。
 
 	![新建 SQL DB](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/np.png)  
-
 
 	服务器名称必须唯一。该名称可以包含小写字母、数字和短划线，但尾部不能包含短划线。用户名和密码是要为新服务器创建的新凭据。
 
@@ -109,7 +103,6 @@
 	如果选择现有的数据库服务器，请确保 Web 应用和数据库位于相同的区域。
 
 	![使用新数据库](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/newdb.png)  
-
 
 4. 点击“创建”。
 
@@ -121,13 +114,10 @@
 
 	![解决方案资源管理器中的 \_Layout.cshtml][newapp004]  
 
-
 1. 将 *Layout.cshtml* 文件中的 ActionLink 替换为以下代码。
-
 
 	@Html.ActionLink("CM Demo", "Index", "Contacts", new { area = "" }, new { @class = "navbar-brand" })
 		           
-
 	确保将第三个参数从“Home”更改为“Contacts”。上面的标记会在每个页面上创建一个“Contacts”链接，以转到 Contacts 控制器的 Index 方法。将页眉和页脚中的应用程序名称从“My ASP.NET Application”和“Application name”更改为“Contact Manager”和“CM Demo”。
  
 ### 在本地运行应用程序
@@ -200,7 +190,6 @@
 
 	 ![FireFox 证书警告](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/ss30.PNG)  
 
-
 ## 向应用程序添加数据库
 
 接下来，你将更新应用程序以添加显示和更新联系人，以及在数据库中存储数据的功能。应用程序将使用 Entity Framework (EF) 创建数据库并读取和更新数据。
@@ -255,7 +244,6 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 1. 在“数据上下文类”中，选择“ApplicationDbContext (ContactManager.Models)”。**ApplicationDbContext** 将用于成员资格数据库和联系人数据。
 
-
 	![新建数据上下文 dlg](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/ss5.PNG)
 
 1. 单击“添加”。
@@ -279,7 +267,6 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 2. 在“包管理器控制台”窗口中，输入以下命令：
 
 		add-migration Initial
-
 
 	**add-migration Initial** 命令将在 *Migrations* 文件夹中生成一个名为 **&lt;date\_stamp&gt;Initial** 的文件。此文件中的代码将生成数据库表。第一个参数 (**Initial**) 用于创建文件的名称。你可以在“解决方案资源管理器”中查看新的类文件。
 
@@ -360,10 +347,9 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 	![数据的 MVC 视图][rx2]  
 
-
 ## 添加 OAuth2 提供程序
 
->[AZURE.NOTE] 为了详细说明如何使用 Google 和 Facebook 开发人员门户网站，本教程提供了指向 ASP.NET 网站上的教程的链接。但是，Google 和 Facebook 更改其网站的频率比这些教程的更新频率更频繁，因此这些教程现在已过时。如果在使用这些指导时遇到困难，请参阅本教程末尾提供的 Disqus 注释以查看已更改项的列表。
+>[!NOTE] 为了详细说明如何使用 Google 和 Facebook 开发人员门户网站，本教程提供了指向 ASP.NET 网站上的教程的链接。但是，Google 和 Facebook 更改其网站的频率比这些教程的更新频率更频繁，因此这些教程现在已过时。如果在使用这些指导时遇到困难，请参阅本教程末尾提供的 Disqus 注释以查看已更改项的列表。
 
 [OAuth](http://oauth.net/ "http://oauth.net/") 是一种开放协议，允许以一种简单而标准的方法从 Web、移动和桌面应用程序进行安全授权。ASP.NET MVC Internet 模板使用 OAuth 公开将 Facebook、Twitter、Google 和 Microsoft 作为身份验证提供程序。虽然本教程仅使用 Google 作为身份验证提供程序，但你可轻松修改代码以使用其中任一提供程序。实施其他提供程序的步骤与你将在本教程中看到的步骤非常类似。要将 Facebook 用作身份验证提供程序，请参阅[使用 Facebook、Twitter、LinkedIn 和 Google OAuth2 登录名创建 MVC 5 应用](http://www.asp.net/mvc/tutorials/mvc-5/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on)。
 
@@ -557,7 +543,6 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 	![登录](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/ss14.PNG)  
 
-
 1. 单击“CM 演示”链接，并验证你是否能看到数据。
 
 1. 单击页面上的编辑链接，你将被重定向到登录页（因为新的本地用户未添加到 *canEdit* 角色）。
@@ -581,7 +566,6 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 2. 在 **ApplicationDbContext** 下，选择在你创建项目时创建的数据库。
    
-
 1. 在“ContactManagerContext”下，选择“执行 Code First 迁移”。
 
 	![设置](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrc2.png)
@@ -605,7 +589,6 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 	也可以从 [Azure 门户预览](https://portal.azure.cn/)中转到 Web 应用的边栏选项卡，然后单击边栏选项卡顶部的“停止”图标。
 
 	![停止 Web 应用门户](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/stopweb.png)  
-
 
 ### 删除 AddToRoleAsync、发布和测试
 
@@ -673,7 +656,6 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 	![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrr8.png)  
 
- 
 1. 记下你注册要成为 **canEdit** 角色的 Google 帐户中的 ID，并记下 *user1@contoso.com* 的 ID。这些 ID 应该是具有 **canEdit** 角色的唯一用户。（你将在下一步中对此进行验证。）
 
 	![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/s2.png)
@@ -682,7 +664,6 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 	![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rs1.png)  
 
- 
 3. 验证 **UserId** 是否来自 *user1@contoso.com* 和你注册的 Google 帐户。
 
 ## <a name="troubleshooting"></a> 故障排除
@@ -691,7 +672,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 * 预配 SQL 数据库时出错 - 确保已安装最新的 SDK。2.8.1 之前的版本存在一个 bug，在某些情况下，当 VS 尝试创建数据库服务器或数据库时，该 bug 会导致错误。
 * 创建 Azure 资源时出现错误消息“操作不支持订阅优惠类型”- 与上面相同。
-* 部署时出错 - 建议查看[基本 ASP.NET 部署](/documentation/articles/web-sites-dotnet-get-started/)一文。该部署方案较为简单，如果你遇到相同的问题，也许可以轻松地识别原因。例如，在某些企业环境中，企业防火墙可能会阻止 Web Deploy 与 Azure 建立所需的连接类型。
+* 部署时出错 - 建议查看[基本 ASP.NET 部署](./web-sites-dotnet-get-started.md)一文。该部署方案较为简单，如果你遇到相同的问题，也许可以轻松地识别原因。例如，在某些企业环境中，企业防火墙可能会阻止 Web Deploy 与 Azure 建立所需的连接类型。
 * 部署时无法在“发布 Web”向导中选择连接字符串 - 如果你使用其他方法创建 Azure 资源（例如，尝试部署到在门户中创建的 Web 应用和 SQL 数据库），SQL 数据库可能与 Web 应用不相关联。最简单的解决方案是根据本教程中所示，使用 VS 创建新的 Web 应用和数据库。不需要从头开始学习本教程 - 在“发布 Web”向导中，可以选择创建新的 web 应用，此时会出现在创建项目时所看到的相同的 Azure 资源创建对话框。
 * 有关 Google 或 Facebook 开发人员门户的指导已过时 - 请参阅本教程末尾的 Disqus 专门注释。
 
@@ -713,7 +694,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 ## 发生的更改
 
-* 有关从网站更改为应用服务的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](/documentation/articles/app-service-changes-existing-services/)
+* 有关从网站更改为应用服务的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 
 <!-- bookmarks -->
 [Add an OAuth Provider]: #addOauth
@@ -727,7 +708,6 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 [deployapp11]: #bkmk_deploytowindowsazure11
 [adddb]: #bkmk_addadatabase
 
-
 <!-- images-->
 
 [rx2]: ./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rx2.png
@@ -739,7 +719,6 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 [rx9]: ./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database-vs2013/rx9.png
 
 [rxb]: ./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rxb.png
-
 
 [rxSSL]: ./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rxSSL.png
 
@@ -768,11 +747,9 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 [addcode008]: ./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database-vs2013/dntutmobile-migrations-package-manager-menu.png
 [addcode009]: ./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/dntutmobile-migrations-package-manager-console.png
 
-
 [Important information about ASP.NET in Azure web apps]: #aspnetwindowsazureinfo
 [Next steps]: #nextsteps
 
 [ImportPublishSettings]: ./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database-vs2013/ImportPublishSettings.png
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

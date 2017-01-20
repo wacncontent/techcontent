@@ -1,29 +1,29 @@
-<properties
-	pageTitle="应用服务中 Web 应用性能缓慢 | Azure"
-	description="本文将帮助你排查 Azure App Service 中 Web 应用性能缓慢的问题。"
-	services="app-service\web"
-	documentationCenter=""
-	authors="cephalin"
-	manager="wpickett"
-	editor=""
-	tags="top-support-issue"
-	keywords="Web 应用性能，缓慢应用，应用缓慢"/>
+---
+title: 应用服务中 Web 应用性能缓慢 | Azure
+description: 本文将帮助你排查 Azure App Service 中 Web 应用性能缓慢的问题。
+services: app-service\web
+documentationCenter: 
+authors: cephalin
+manager: wpickett
+editor: 
+tags: top-support-issue
+keywords: Web 应用性能，缓慢应用，应用缓慢
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/06/2016"
-	wacn.date="09/26/2016"
-	ms.author="cephalin"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/06/2016
+wacn.date: 09/26/2016
+ms.author: cephalin
+---
 
 # 排查 Azure App Service 中 Web 应用性能缓慢的问题
 
-本文将帮助你排查 [Azure App Service](/documentation/services/web-sites/) 中 Web 应用性能缓慢的问题。
+本文将帮助你排查 [Azure App Service](./index.md/) 中 Web 应用性能缓慢的问题。
 
-如果你对本文中的任何观点存在疑问，可以联系 [MSDN Azure 和 CSDN Azure](/support/forums/) 上的 Azure 专家。或者，你也可以提出 Azure 支持事件。请转到 [Azure 支持站点](/support/contact/)并单击“获取支持”。
+如果你对本文中的任何观点存在疑问，可以联系 [MSDN Azure 和 CSDN Azure](https://www.azure.cn/support/forums/) 上的 Azure 专家。或者，你也可以提出 Azure 支持事件。请转到 [Azure 支持站点](https://www.azure.cn/support/contact/)并单击“获取支持”。
 
 ## 症状
 
@@ -45,13 +45,13 @@
 2.	[收集数据](#collect)
 3.	[缓解问题](#mitigate)
 
-[应用服务 Web 应用](/home/features/app-service/web-apps/)为每个步骤提供了多种选项。
+[应用服务 Web 应用](https://www.azure.cn/home/features/app-service/web-apps/)为每个步骤提供了多种选项。
 
 ### <a name="observe"></a> 1.观察和监视应用程序行为
 
 #### 跟踪服务运行状况
 
-每次发生服务中断或性能下降时 Azure 会进行宣传。可以在 [Azure 门户预览](https://portal.azure.cn/)中跟踪服务的运行状况。有关详细信息，请参阅[跟踪服务的运行状况](/documentation/articles/insights-service-health/)。
+每次发生服务中断或性能下降时 Azure 会进行宣传。可以在 [Azure 门户预览](https://portal.azure.cn/)中跟踪服务的运行状况。有关详细信息，请参阅[跟踪服务的运行状况](../monitoring-and-diagnostics/insights-service-health.md)。
 
 #### 监视你的 Web 应用
 
@@ -67,11 +67,10 @@
 
 ![监视 Web 应用性能](./media/app-service-web-troubleshoot-performance-degradation/1-monitor-metrics.png)  
 
-
 有关详细信息，请参阅：
 
--	[在 Azure App Service 中监视 Web Apps](/documentation/articles/web-sites-monitor/)
--	[接收警报通知](/documentation/articles/insights-receive-alert-notifications/)
+-	[在 Azure App Service 中监视 Web Apps](./web-sites-monitor.md)
+-	[接收警报通知](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)
 
 #### 监视 Web 终结点状态
 
@@ -105,14 +104,13 @@ Web 应用环境为 Web 服务器和 Web 应用中的日志记录信息提供了
 
 使用应用程序诊断可以捕获 Web 应用程序生成的信息。ASP.NET 应用程序可使用 `System.Diagnostics.Trace` 类将信息记录到应用程序诊断日志。
 
-有关如何在应用程序中配置日志记录的详细说明，请参阅[在 Azure App Service 中启用 Web 应用的诊断日志记录](/documentation/articles/web-sites-enable-diagnostic-log/)。
+有关如何在应用程序中配置日志记录的详细说明，请参阅[在 Azure App Service 中启用 Web 应用的诊断日志记录](./web-sites-enable-diagnostic-log.md)。
 
 #### 使用远程分析
 
 在 Azure App Service 中，可以远程分析 Web 应用、API 应用和 WebJob。如果进程运行速度比预期缓慢，或者 HTTP 请求的延迟高于平时并且进程的 CPU 使用率偏高，则你可以远程分析进程并获取 CPU 采样调用堆栈，以分析进程活动和代码繁忙的路径。
 
 有关详细信息，请参阅 [Azure App Service 中的远程分析支持](http://azure.microsoft.com/blog/remote-profiling-support-in-azure-app-service)。
-
 
 #### 使用 Azure App Service 支持门户
 
@@ -145,7 +143,6 @@ Kudu 提供的一些信息和功能包括：
 -	诊断转储
 -	调试控制台，你可以在其中运行 Powershell cmdlet 和基本 DOS 命令。
 
-
 Kudu 的另一项有用功能是，如果应用程序引发第一次异常，你可以使用 Kudu 和 SysInternals 工具 Procdump 创建内存转储。这些内存转储是进程的快照，通常可以帮助你排查较复杂的 Web 应用问题。
 
 有关 Kudu 提供的功能的详细信息，请参阅 [Azure Websites Team Services tools you should know about](https://azure.microsoft.com/blog/windows-azure-websites-online-tools-you-should-know-about/)（你应该了解的 Azure Websites Team Services 工具）。
@@ -156,7 +153,7 @@ Kudu 的另一项有用功能是，如果应用程序引发第一次异常，你
 
 在 Azure App Service 中，为了提高性能和吞吐量，可以调整运行应用程序的规模。向上缩放 Web 应用涉及到两个相关操作：将 App Service 计划更改为较高的定价层，以及在切换到较高的定价层后配置特定的设置。
 
-有关缩放的详细信息，请参阅[在 Azure App Service 中缩放 Web 应用](/documentation/articles/web-sites-scale/)。
+有关缩放的详细信息，请参阅[在 Azure App Service 中缩放 Web 应用](./web-sites-scale.md)。
 
 此外，你可以选择在多个实例上运行应用程序。这不仅能提供更强大的处理能力，而且还能提供一定程度的容错。如果进程在某个实例上中断，其他实例仍将继续处理请求。
 
@@ -174,6 +171,6 @@ AutoHeal 会根据你选择的设置（例如配置更改、请求、基于内�
 
  ![重新启动 Web 应用以解决性能问题](./media/app-service-web-troubleshoot-performance-degradation/2-restart.png)
 
-你还可以使用 Azure Powershell 管理 Web 应用。有关详细信息，请参阅[将 Azure PowerShell 与 Azure 资源管理器配合使用](/documentation/articles/powershell-azure-resource-manager/)。
+你还可以使用 Azure Powershell 管理 Web 应用。有关详细信息，请参阅[将 Azure PowerShell 与 Azure 资源管理器配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)。
 
 <!---HONumber=Mooncake_0919_2016-->

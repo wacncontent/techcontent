@@ -1,16 +1,21 @@
-<properties 
-	pageTitle="修改 Linux VM 中单个用户最大进程数的限制" 
-	description="修改 Linux VM 中单个用户最大进程数的限制" 
-	services="virtual-machines" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machine-aog" ms.date="" wacn.date="08/31/2016"/>
+---
+title: 修改 Linux VM 中单个用户最大进程数的限制
+description: 修改 Linux VM 中单个用户最大进程数的限制
+services: virtual-machines
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machine-aog
+ms.date: 
+wacn.date: 08/31/2016
+---
+
 #修改 Linux VM 中单个用户最大进程数的限制
 
 在部署有并发任务执行的虚机上, 会遇到 SSH 无法访问的问题. 本文将帮助你找出其中一种比较特殊的原因, 并提供解决方案。  
->[AZURE.NOTE] 以下案例分析基于 CentOS 7, 对于其他版本的 Linux 操作系统, 会略有不同, 请注意。
+>[!NOTE] 以下案例分析基于 CentOS 7, 对于其他版本的 Linux 操作系统, 会略有不同, 请注意。
 
 ##症状描述
 

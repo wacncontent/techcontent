@@ -1,33 +1,31 @@
-<properties
-	pageTitle="RBAC：内置角色 | Azure"
-	description="本主题介绍适用于基于角色的访问控制 (RBAC) 的内置角色。"
-	services="active-directory"
-	documentationCenter=""
-	authors="kgremban"
-	manager="femila"
-	editor=""/>  
+---
+title: RBAC：内置角色 | Azure
+description: 本主题介绍适用于基于角色的访问控制 (RBAC) 的内置角色。
+services: active-directory
+documentationCenter: 
+authors: kgremban
+manager: femila
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="identity"
-	ms.date="08/25/2016"
-	wacn.date="01/06/2017"
-	ms.author="kgremban"/>  
-
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 08/25/2016
+wacn.date: 01/06/2017
+ms.author: kgremban
+---
 
 #RBAC：内置角色
 
-Azure 基于角色的访问控制 (RBAC) 附带以下可分配到用户、组和服务的内置角色。不能修改内置角色的定义。但是，可以创建 [Azure RBAC 中的自定义角色](/documentation/articles/role-based-access-control-custom-roles/)，以满足组织的特定需要。
+Azure 基于角色的访问控制 (RBAC) 附带以下可分配到用户、组和服务的内置角色。不能修改内置角色的定义。但是，可以创建 [Azure RBAC 中的自定义角色](./role-based-access-control-custom-roles.md)，以满足组织的特定需要。
 
 ## Azure 中的角色
 
 下表提供内置角色的简短说明。单击角色名称查看该角色**操作**和**不操作**的详细列表。**操作**属性指定对 Azure 资源允许的操作。操作字符串可以使用通配符。**不操作**属性指定从允许的操作中排除的操作。
 
->[AZURE.NOTE] Azure 角色定义不断演化。本文尽可能地保持处于最新状态，但你总是可在 Azure PowerShell 中找到最新的角色定义。若适用，请使用 cmdlet `(get-azurermroledefinition "<role name>").actions` 或 `(get-azurermroledefinition "<role name>").notactions`。
+>[!NOTE] Azure 角色定义不断演化。本文尽可能地保持处于最新状态，但你总是可在 Azure PowerShell 中找到最新的角色定义。若适用，请使用 cmdlet `(get-azurermroledefinition "<role name>").actions` 或 `(get-azurermroledefinition "<role name>").notactions`。
 
 | 角色名称 | 说明 |
 | --------- | ----------- |
@@ -532,9 +530,9 @@ Azure 基于角色的访问控制 (RBAC) 附带以下可分配到用户、组和
 | Microsoft.Web/sites/* | 创建和管理网站 |
 
 ## 另请参阅
-- [基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)：Azure 门户预览中的 RBAC 入门。
-- [Azure RBAC 中的自定义角色](/documentation/articles/role-based-access-control-custom-roles/)：了解如何创建自定义角色，以满足访问需要。
-- [创建访问权限更改历史记录报告](/documentation/articles/role-based-access-control-access-change-history-report/)：记录 RBAC 中的角色分配更改。
-- [基于角色的访问控制故障排除](/documentation/articles/role-based-access-control-troubleshooting/)：获取解决常见问题的建议。
+- [基于角色的访问控制](./role-based-access-control-configure.md)：Azure 门户预览中的 RBAC 入门。
+- [Azure RBAC 中的自定义角色](./role-based-access-control-custom-roles.md)：了解如何创建自定义角色，以满足访问需要。
+- [创建访问权限更改历史记录报告](./role-based-access-control-access-change-history-report.md)：记录 RBAC 中的角色分配更改。
+- [基于角色的访问控制故障排除](./role-based-access-control-troubleshooting.md)：获取解决常见问题的建议。
 
 <!---HONumber=Mooncake_1017_2016-->

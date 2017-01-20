@@ -1,37 +1,35 @@
-<properties
-    pageTitle="为 Apache Storm 开发基于 Java 的拓扑 | Azure"
-    description="了解如何通过创建一个简单的单词计数拓扑，来以 Java 语言创建一个 Storm 拓扑。"
-    services="hdinsight"
-    documentationcenter=""
-    author="Blackmist"
-    manager="jhubbard"
-    editor="cgronlun"
-    tags="azure-portal" />  
+---
+title: 为 Apache Storm 开发基于 Java 的拓扑 | Azure
+description: 了解如何通过创建一个简单的单词计数拓扑，来以 Java 语言创建一个 Storm 拓扑。
+services: hdinsight
+documentationcenter: 
+author: Blackmist
+manager: jhubbard
+editor: cgronlun
+tags: azure-portal
 
-<tags
-    ms.assetid="a8838f29-9c08-4fd9-99ef-26655d1bf6d7"
-    ms.service="hdinsight"
-    ms.devlang="java"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="big-data"
-    ms.date="11/18/2016"
-    wacn.date="12/12/2016"
-    ms.author="larryfr" />
+ms.assetid: a8838f29-9c08-4fd9-99ef-26655d1bf6d7
+ms.service: hdinsight
+ms.devlang: java
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 11/18/2016
+wacn.date: 12/12/2016
+ms.author: larryfr
+---
 
 # 使用 Apache Storm 和 HDInsight 上的 Maven 为基本的单词计数应用程序开发基于 Java 的拓扑
 
 了解如何使用 Maven 为 HDInsight 上的 Apache Storm 创建基于 Java 的拓扑。本文将会演练使用 Maven 和 Java（如果拓扑是在 Java 中定义的）创建基本单词计数应用程序的过程。然后，介绍如何使用 Flux 框架定义拓扑。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Storm 0.10.0 或更高版本中提供了 Flux 框架。HDInsight 3.3 随附了 Storm 0.10.0。
-
 
 完成本文档中的步骤之后，将获得用于部署到 Apache Storm on HDInsight 的基本拓扑。
 
-> [AZURE.NOTE]
+> [!NOTE]
 [https://github.com/Azure-Samples/hdinsight-java-storm-wordcount](https://github.com/Azure-Samples/hdinsight-java-storm-wordcount) 上提供了本文档中所创建的拓扑的完成版本。
-
 
 ## 先决条件
 
@@ -106,7 +104,7 @@ Maven 允许定义项目级的值，称为属性。在 `<url>http://maven.apache
 
 在编译时，Maven 会使用此信息来查找 Maven 存储库中的 **storm-core**。它会先查找本地计算机上的存储库。如果文件不存在，它会从公共 Maven 存储库下载这些文件，并将其存储在本地存储库中。
 
-> [AZURE.NOTE]
+> [!NOTE]
 请注意我们在该节中添加的 `<scope>provided</scope>` 行。这会告诉 Maven 从我们创建的任何 JAR 文件中排除 **storm-core**，因为系统将会予以提供。这样，便可以稍微减小所创建的包，并确保它们使用 Storm on HDInsight 群集中包含的 **storm-core** 位。
 
 ## 生成配置
@@ -146,7 +144,7 @@ Maven 插件可让你自定义项目的生成阶段，例如，如何编译项�
       </configuration>
     </plugin>
 
-> [AZURE.NOTE]
+> [!NOTE]
 请注意，`<mainClass>` 项使用 `${storm.topology}`。我们并未（但本应当）事先在 properties 节中定义此值。 不过，在稍后的步骤中，将在开发环境中运行拓扑时从命令行设置此值。
 
 另一个有用的插件是用于更改编译选项的 [Apache Maven Compiler 插件](http://maven.apache.org/plugins/maven-compiler-plugin/)。我们需要此插件的主要原因是要更改 Maven 用作应用程序源和目标的 Java 版本。
@@ -191,7 +189,7 @@ Maven 插件可让你自定义项目的生成阶段，例如，如何编译项�
 
 为了降低设置外部数据源的要求，以下 Spout 只会发出随机句子。它是 [Storm-Starter 示例](https://github.com/apache/storm/blob/0.10.x-branch/examples/storm-starter/src/jvm/storm/starter)随附的 Spout 的修改版本。
 
-> [AZURE.NOTE]
+> [!NOTE]
 有关从外部数据源读取的 Spout 的示例，请参阅以下示例之一：
 ><p> 
 ><p> * [TwitterSampleSPout](https://github.com/apache/storm/blob/0.10.x-branch/examples/storm-starter/src/jvm/storm/starter/spout/TwitterSampleSpout.java)：从 Twitter 读取数据的示例 spout <p> * [Storm-Kafka](https://github.com/apache/storm/tree/0.10.x-branch/external/storm-kafka)：从 Kafka 读取数据的 spout
@@ -260,7 +258,7 @@ Maven 插件可让你自定义项目的生成阶段，例如，如何编译项�
 
 请花费片刻时间通读代码注释，以了解此 Spout 的工作原理。
 
-> [AZURE.NOTE]
+> [!NOTE]
 虽然此拓扑只使用一个 Spout，但其他拓扑可能存在将数据从不同源送入拓扑的多个 Spout。
 
 ### 创建 Bolt
@@ -271,7 +269,7 @@ Bolt 用于处理数据。此拓扑有两个 Bolt：
 
 * **WordCount**：统计每个单词的出现次数。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Bolt 几乎可以执行任何操作，例如，计算、保存，或者与外部组件通信。
 
 在 **src\\main\\java\\com\\microsoft\\example** 目录中创建两个新文件：**SplitSentence.java** 和 **WordCount.Java**。将以下内容用作这些文件的内容：
@@ -503,12 +501,12 @@ Storm 使用 Apache Log4j 来记录信息。如果未配置日志记录，拓扑
 
 `<Root level="error">` 节将日志记录的根级别（不在 **com.microsoft.example** 中的所有内容）配置为只记录错误信息。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 尽管这可以大幅减少在开发环境中测试拓扑时所记录的信息，但不会删除在生产群集上运行时生成的所有调试信息。若要减少此类信息，还必须在提交到群集的配置中将调试设置为 false。有关示例，请参阅本文档中的 WordCountTopology.java 代码。
 
 有关为 Log4j 配置日志记录的详细信息，请参阅 [http://logging.apache.org/log4j/2.x/manual/configuration.html](http://logging.apache.org/log4j/2.x/manual/configuration.html)。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Storm 0.10.0 版及更高版本使用 Log4j 2.x。早期版本的 Storm 使用 Log4j 1.x（为日志配置使用的格式不同）。有关旧配置的信息，请参阅 [http://wiki.apache.org/logging-log4j/Log4jXmlFormat](http://wiki.apache.org/logging-log4j/Log4jXmlFormat)。
 
 ## 在本地测试拓扑
@@ -700,10 +698,10 @@ Trident 是 Storm 提供的高级抽象。它支持有状态处理。Trident 的
 
 你已学习如何使用 Java 创建 Storm 拓扑。接下来，请学习如何：
 
-* [在 HDInsight 上部署和管理 Apache Storm 拓扑](/documentation/articles/hdinsight-storm-deploy-monitor-topology/)
+* [在 HDInsight 上部署和管理 Apache Storm 拓扑](./hdinsight-storm-deploy-monitor-topology.md)
 
-* [使用 Visual Studio 开发 Apache Storm on HDInsight 的 C# 拓扑](/documentation/articles/hdinsight-storm-develop-csharp-visual-studio-topology/)
+* [使用 Visual Studio 开发 Apache Storm on HDInsight 的 C# 拓扑](./hdinsight-storm-develop-csharp-visual-studio-topology.md)
 
-如需更多 Storm 拓扑示例，请访问 [Storm on HDInsight 拓扑示例](/documentation/articles/hdinsight-storm-example-topology/)。
+如需更多 Storm 拓扑示例，请访问 [Storm on HDInsight 拓扑示例](./hdinsight-storm-example-topology.md)。
 
 <!---HONumber=Mooncake_1205_2016-->

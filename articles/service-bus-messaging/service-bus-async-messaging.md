@@ -1,22 +1,21 @@
-<properties 
-   pageTitle="服务总线异步消息传送 | Azure"
-   description="介绍服务总线异步中转消息传送。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-   editor="" />  
- 
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/04/2016"
-    ms.author="sethm"
-    wacn.date="01/09/2017"/>  
+---
+title: 服务总线异步消息传送 | Azure
+description: 介绍服务总线异步中转消息传送。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
 
+ms.service: service-bus
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/04/2016
+ms.author: sethm
+wacn.date: 01/09/2017
+---
 
 # 异步消息传送模式和高可用性
 
@@ -48,7 +47,7 @@
 
 -   Azure 数据中心内的服务总线故障。这是“灾难性故障”，无论故障时间是数分钟还是几小时，在此期间都无法访问系统。
 
-> [AZURE.NOTE] “存储”这一术语既能表示 Azure 存储又能表示 SQL Azure。
+> [!NOTE] “存储”这一术语既能表示 Azure 存储又能表示 SQL Azure。
 
 服务总线包含了针对这些问题的许多缓解措施。以下各节介绍了每个问题及其相应的缓解措施。
 
@@ -157,7 +156,7 @@ Azure 中的其他组件可能偶尔会发生服务问题。例如，当服务�
   [ServerBusyException]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.serverbusyexception.aspx
   [System.TimeoutException]: https://msdn.microsoft.com/zh-cn/library/system.timeoutexception.aspx
   [MessagingException]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingexception.aspx
-  [使应用程序免受服务总线中断和灾难影响的最佳实践]: /documentation/articles/service-bus-outages-disasters/
+  [使应用程序免受服务总线中断和灾难影响的最佳实践]: ./service-bus-outages-disasters.md
   [Microsoft.ServiceBus.Messaging.MessagingFactory]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactory.aspx
   [MessageReceiver]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagereceiver.aspx
   [QueueClient]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.aspx
@@ -172,6 +171,6 @@ Azure 中的其他组件可能偶尔会发生服务问题。例如，当服务�
   [IsTransient]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingexception.istransient.aspx
   [UnauthorizedAccessException]: https://msdn.microsoft.com/zh-cn/library/azure/system.unauthorizedaccessexception.aspx
   [BacklogQueueCount]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.sendavailabilitypairednamespaceoptions.backlogqueuecount.aspx
-  [成对命名空间]: /documentation/articles/service-bus-paired-namespaces/
+  [成对命名空间]: ./service-bus-paired-namespaces.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

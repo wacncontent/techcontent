@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure AD Connect 同步：函数参考 | Azure"
-	description="在 Azure AD Connect 同步中引用声明性设置表达式。"
-	services="active-directory"
-	documentationCenter=""
-	authors="andkjell"
-	manager="StevenPo"
-	editor=""/>
+---
+title: Azure AD Connect 同步：函数参考 | Azure
+description: 在 Azure AD Connect 同步中引用声明性设置表达式。
+services: active-directory
+documentationCenter: 
+authors: andkjell
+manager: StevenPo
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/23/2016"
-	wacn.date="10/11/2016"
-	ms.author="andkjell;markvi"/>
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/23/2016
+wacn.date: 10/11/2016
+ms.author: andkjell;markvi
+---
 
 # Azure AD Connect 同步：函数参考
 
@@ -1131,8 +1130,8 @@ UCase 函数将字符串中的所有字符都转换为大写形式。
 
 ## 其他资源
 
-* [了解声明性设置表达式](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning-expressions/)
-* [Azure AD Connect Sync：自定义同步选项](/documentation/articles/active-directory-aadconnectsync-whatis/)
-* [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
+* [了解声明性设置表达式](./active-directory-aadconnectsync-understanding-declarative-provisioning-expressions.md)
+* [Azure AD Connect Sync：自定义同步选项](./active-directory-aadconnectsync-whatis.md)
+* [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)
 
 <!---HONumber=Mooncake_0926_2016-->

@@ -1,6 +1,5 @@
 
 
-
 ## 在使用情况详细信息中查看标记
 
 通过 Resource Manager 部署模型放置在计算、网络和存储资源中的标记将在[计费门户](https://account.windowsazure.cn/)上的使用情况详细信息中填充。
@@ -18,7 +17,5 @@
 ![Azure 门户中的标记列](./media/virtual-machines-common-tag-usage/azure-portal-tags-column.png)
 
 通过分析这些标记以及使用情况，组织将能够获得对消耗数据的全新见解。
-
-
 
 <!---HONumber=Mooncake_0606_2016-->

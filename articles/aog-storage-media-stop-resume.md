@@ -1,24 +1,23 @@
-<properties
-	pageTitle="如何使用 Azure blob storage 在浏览器中实现对媒体文件拖拽点播"
-	description="如何使用 Azure blob storage 在浏览器中实现对媒体文件拖拽点播。"
-	services="storage"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags="blob存储,媒体文件,拖拽点播,Progressive Download"/>
+---
+title: 如何使用 Azure blob storage 在浏览器中实现对媒体文件拖拽点播
+description: 如何使用 Azure blob storage 在浏览器中实现对媒体文件拖拽点播。
+services: storage
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: blob存储,媒体文件,拖拽点播,Progressive Download
 
-<tags
-	ms.service="storage-aog"
-	ms.date="10/27/2016"
-	wacn.date="01/11/2017"/>
-
+ms.service: storage-aog
+ms.date: 10/27/2016
+wacn.date: 01/11/2017
+---
 
 #如何使用 Azure Blob Storage 在浏览器中实现对媒体文件拖拽点播
 
 Azure blob storage 是 Azure 提供的一种服务，blob 存储可以用来存储一些松散结构的数据，例如各类文本文件数据或者二进制数据（各类型格式文件、媒体文件以及应用安装文件）。
 
-而对于在 Azure storage 存放的 mp3 等格式的媒体文件，我们可以使用 Azure storage 提供的 url，可以通过浏览器访问的形式来播放该类媒体文件。这篇文章主要讨论在使用 Azure Storage 提供的 url 播放媒体文件时遇到的点播问题。需要注意的是，Azure Storage 主要提供的服务是存储服务，对于媒体文件的播放和编码等工作，Azure 提供专业的 media services，详细内容可以参考[链接](/documentation/services/media-services/)。
+而对于在 Azure storage 存放的 mp3 等格式的媒体文件，我们可以使用 Azure storage 提供的 url，可以通过浏览器访问的形式来播放该类媒体文件。这篇文章主要讨论在使用 Azure Storage 提供的 url 播放媒体文件时遇到的点播问题。需要注意的是，Azure Storage 主要提供的服务是存储服务，对于媒体文件的播放和编码等工作，Azure 提供专业的 media services，详细内容可以参考[链接](./media-services/index.md/)。
 
 ###问题描述：
 
@@ -52,7 +51,6 @@ Progressive Download：一种分片后的分段式下载缓冲
 
 •	Progressive Download 由于基于 HTTP 协议，在传输方面出现丢包会重新传输数据
 
-
 目前 Azure Blob storage 是不支持 Streaming 点播方式，但是 Azure Blob storage 可以支持 Progressive Download，也就是说我们可以使用 Blob Storage 实现 Progressive Download 形式的点播功能。
 
 然而我们注意到一个问题是，默认情况下我们上传到 Azure storage 中的文件采用较低版本（2009-09-19）的 REST 协议，而低版本的协议是不支持“字节范围检索（byte ranges seek）”，从而导致无法下载指定节点的字节流，也就导致无法播放。
@@ -67,7 +65,6 @@ Un-versioned 访问截图
 
 ![](./media/aog-storage-media-stop-resume/default-versioned.jpg)
  
-
 ###解决方案：
 
 了解清楚无法通过 Azure blob storage 实现媒体文件的点播是因为使用 Progressive Download 点播方式默认使用的是最原始的版本 2009-09-19，而该低版本的协议是不支持“字节范围检索（byte ranges seek），接下来我们需要考虑如何更改默认版本为可以支持点播方式的版本。
@@ -75,7 +72,6 @@ Un-versioned 访问截图
 根据[官方说明](https://blogs.msdn.microsoft.com/windowsazurestorage/2011/09/15/windows-azure-blobs-improved-http-headers-for-resume-on-download-and-a-change-in-if-match-conditions/)， 对于大部分浏览器，没有 accept-ranges 头就无法达到点播效果，而这一项是在2011-08-18版本后才加入的。因此，解决方案参考以下内容：
 
 1.  如果是 un-versioned 的访问方式（比如浏览器访问方式），默认就是2009-09-19。这个时候就可以通过修改默认存储服务的 DefaultServiceVersion 来解决，可以通过以下方式来达到目的。
-
 
 	a)      工具下载地址：[https://github.com/Plasma/AzureBlobUtility](https://github.com/Plasma/AzureBlobUtility)
 
@@ -94,9 +90,5 @@ Un-versioned 访问截图
 	![](./media/aog-storage-media-stop-resume/result1.png)
 	![](./media/aog-storage-media-stop-resume/result2.png)
  
- 
 2.  如果是自己 code 开发的播放客户端，可以在读取音频或者视频文件时显示的设置 API 版本为最新。
-
-
-
 

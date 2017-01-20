@@ -1,18 +1,17 @@
-<properties
-	pageTitle="使用应用程序网关网页载入超过 30 秒（错误代码 502）的解决方法"
-	description="如何解决载入超过 30 秒出现 502 错误"
-	services="application-gateway"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 使用应用程序网关网页载入超过 30 秒（错误代码 502）的解决方法
+description: 如何解决载入超过 30 秒出现 502 错误
+services: application-gateway
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="application-gateway-aog"
-	ms.date="10/27/2016"
-	wacn.date="11/03/2016"/>
-
+ms.service: application-gateway-aog
+ms.date: 10/27/2016
+wacn.date: 11/03/2016
+---
 
 #使用应用程序网关网页载入超过 30 秒（错误代码 502）的解决方法
 
@@ -62,7 +61,4 @@
 对于使用 ARM 模式创建的应用程序网关，我们可以直接在 Portal 直接进行配置。如下图所示，点击 HTTP 设置，选中某一条 HTTP 设置可以在请求超时部分进行配置。
 
 ![](./media/aog-web-app-timeout-30s/timeout.png)
-
-
- 
 

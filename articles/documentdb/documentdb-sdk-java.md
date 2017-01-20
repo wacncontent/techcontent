@@ -1,31 +1,31 @@
 
-<properties
-    pageTitle="DocumentDB Java API 和 SDK | Azure"
-    description="了解有关 Java API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB Java SDK 各版本之间所做的更改。"
-    services="documentdb"
-    documentationcenter="java"
-    author="rnagpal"
-    manager="jhubbard"
-    editor="cgronlun" />  
+---
+title: DocumentDB Java API 和 SDK | Azure
+description: 了解有关 Java API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB Java SDK 各版本之间所做的更改。
+services: documentdb
+documentationcenter: java
+author: rnagpal
+manager: jhubbard
+editor: cgronlun
 
-<tags
-    ms.assetid="7861cadf-2a05-471a-9925-0fec0599351b"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="java"
-    ms.topic="article"
-    ms.date="10/28/2016"
-    wacn.date="12/27/2016"
-    ms.author="rnagpal" />
+ms.assetid: 7861cadf-2a05-471a-9925-0fec0599351b
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: java
+ms.topic: article
+ms.date: 10/28/2016
+wacn.date: 12/27/2016
+ms.author: rnagpal
+---
 
 # DocumentDB API 和 SDK
->[AZURE.SELECTOR]
-- [.NET](/documentation/articles/documentdb-sdk-dotnet/)
-- [.NET Core](/documentation/articles/documentdb-sdk-dotnet-core/)
-- [Node.js](/documentation/articles/documentdb-sdk-node/)
-- [Java](/documentation/articles/documentdb-sdk-java/)
-- [Python](/documentation/articles/documentdb-sdk-python/)
+>[!div class="op_single_selector"]
+- [.NET](./documentdb-sdk-dotnet.md)
+- [.NET Core](./documentdb-sdk-dotnet-core.md)
+- [Node.js](./documentdb-sdk-node.md)
+- [Java](./documentdb-sdk-java.md)
+- [Python](./documentdb-sdk-python.md)
 - [REST](https://docs.microsoft.com/zh-cn/rest/api/documentdb/)
 - [REST 资源提供程序](https://docs.microsoft.com/rest/api/documentdbresourceprovider/)
 - [SQL](https://msdn.microsoft.com/zh-cn/library/azure/dn782250.aspx)
@@ -33,14 +33,13 @@
 ## DocumentDB Java API 和 SDK
 <table>  
 
-
 <tr><td>**SDK 下载**</td><td><a href="http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22com.microsoft.azure%22%20AND%20a%3A%22azure-documentdb%22">Maven</a></td></tr>
 
 <tr><td>**API 文档**</td><td><a href="http://azure.github.io/azure-documentdb-java/">Java API 参考文档</a></td></tr>
 
 <tr><td>**参与 SDK**</td><td><a href="https://github.com/Azure/azure-documentdb-java/">GitHub</a></td></tr>
 
-<tr><td>**入门**</td><td><a href="/documentation/articles/documentdb-java-application/">Java SDK 入门</a></td></tr>
+<tr><td>**入门**</td><td><a href="./documentdb-java-application.md">Java SDK 入门</a></td></tr>
 
 <tr><td>**当前受支持的运行时**</td><td><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html">JDK 7</a></td></tr>
 </table>
@@ -78,7 +77,7 @@
 - 对文档添加了生存时间 (TTL) 支持。
 
 ### <a name="1.6.0"/>[1\.6.0](http://mvnrepository.com/artifact/com.microsoft.azure/azure-documentdb/1.6.0)
-- 实现了[分区集合](/documentation/articles/documentdb-partition-data/)和[用户定义的性能级别](/documentation/articles/documentdb-performance-levels/)。
+- 实现了[分区集合](./documentdb-partition-data.md)和[用户定义的性能级别](./documentdb-performance-levels.md)。
 
 ### <a name="1.5.1"/>[1\.5.1](http://mvnrepository.com/artifact/com.microsoft.azure/azure-documentdb/1.5.1)
 - 修复了 HashPartitionResolver 中的 Bug 以生成 little-endian 格式的哈希值，以便与其他 SDK 保持一致。
@@ -111,7 +110,7 @@ Microsoft 至少会在停用 SDK 的 **12 个月**之前发出通知，以便顺
 
 使用已停用的 SDK 对 DocumentDB 发出的任何请求都将被服务拒绝。
 
-> [AZURE.WARNING]
+> [!WARNING]
 Azure DocumentDB SDK for Java 在 **1.0.0** 版之前的所有版本都将在 **2016 年 2 月 29 日**停用。
 
 <br/>
@@ -141,9 +140,9 @@ Azure DocumentDB SDK for Java 在 **1.0.0** 版之前的所有版本都将在 **
 | 0.9.0-prelease | 2014 年 12 月 10 日 | 2016 年 2 月 29 日 |
 
 ## 常见问题
-[AZURE.INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
+[!INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
 
 ## 另请参阅
-若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](/home/features/documentdb/) 服务页。
+若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](https://www.azure.cn/home/features/documentdb/) 服务页。
 
 <!---HONumber=Mooncake_1219_2016-->

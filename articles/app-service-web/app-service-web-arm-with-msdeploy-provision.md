@@ -1,28 +1,27 @@
-<properties
-	pageTitle="使用 MSDeploy、主机名和 SSL 证书部署 Web 应用"
-	description="通过使用 MSDeploy 并设置自定义主机名和 SSL 证书，在 Azure 资源管理器模板中部署 Web 应用"
-	services="app-service\web"
-	documentationCenter=""
-	authors="jodehavi"
-	/>
+---
+title: 使用 MSDeploy、主机名和 SSL 证书部署 Web 应用
+description: 通过使用 MSDeploy 并设置自定义主机名和 SSL 证书，在 Azure 资源管理器模板中部署 Web 应用
+services: app-service\web
+documentationCenter: 
+authors: jodehavi
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="05/31/2016"
-	wacn.date="11/25/2016"
-	ms.author="john.dehavilland"/>
+ms.service: app-service-web
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/31/2016
+wacn.date: 11/25/2016
+ms.author: john.dehavilland
+---
 
 # 使用 MSDeploy、自定义主机名和 SSL 证书部署 Web 应用
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本指南逐步说明如何通过利用 MSDeploy，以及将自定义主机名和 SSL 证书添加到 ARM 模板，来创建 Azure Web 应用的端到端部署。
 
-有关创建模板的详细信息，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。
+有关创建模板的详细信息，请参阅[创作 Azure 资源管理器模板](../azure-resource-manager/resource-group-authoring-templates.md)。
 
 ### 创建示例应用程序
 
@@ -123,9 +122,9 @@
 
 	"packageUri": "[concat(parameters('_artifactsLocation'), '/', parameters('webDeployPackageFolder'), '/', parameters('webDeployPackageFileName'), parameters('_artifactsLocationSasToken'))]"
 
-此 **packageUri** 使用的存储帐户 URI 指向包 zip 所要上载到的存储帐户。当你部署模板时，Azure 资源管理器会利用[共享访问签名](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)从存储帐户将包提取到本地。此过程将会通过一个 PowerShell 脚本自动化，该脚本将上载包，调用 Azure 管理 API 以创建所需的密钥，然后将这些密钥作为参数传入模板（ *\_artifactsLocation* 和 *\_artifactsLocationSasToken* ）。你需要针对存储容器下包所上载到的文件夹和文件名定义参数。
+此 **packageUri** 使用的存储帐户 URI 指向包 zip 所要上载到的存储帐户。当你部署模板时，Azure 资源管理器会利用[共享访问签名](../storage/storage-dotnet-shared-access-signature-part-1.md)从存储帐户将包提取到本地。此过程将会通过一个 PowerShell 脚本自动化，该脚本将上载包，调用 Azure 管理 API 以创建所需的密钥，然后将这些密钥作为参数传入模板（ *\_artifactsLocation* 和 *\_artifactsLocationSasToken* ）。你需要针对存储容器下包所上载到的文件夹和文件名定义参数。
 
-接下来，需要加入其他嵌套资源，以设置主机名绑定来利用自定义域。首先，需要确保拥有该主机名，然后对它进行设置，使 Azure 能够验证你是否拥有它 - 请参阅[在 Azure App Service 中配置自定义域名](/documentation/articles/web-sites-custom-domain-name/)。完成此操作后，可以将以下内容添加到模板中的 Microsoft.Web/sites 资源部分下：
+接下来，需要加入其他嵌套资源，以设置主机名绑定来利用自定义域。首先，需要确保拥有该主机名，然后对它进行设置，使 Azure 能够验证你是否拥有它 - 请参阅[在 Azure App Service 中配置自定义域名](./web-sites-custom-domain-name.md)。完成此操作后，可以将以下内容添加到模板中的 Microsoft.Web/sites 资源部分下：
 
 	{
 		"apiVersion": "2015-08-01",

@@ -1,28 +1,27 @@
-<properties 
-   pageTitle="使用 Azure 门户预览的 Azure SQL 数据库顾问 | Microsoft Azure" 
-   description="可以在 Azure 门户预览中使用 Azure SQL 数据库顾问查看和实施为你的现有 SQL 数据库提供的建议，这些建议可以提高当前查询性能。" 
-   services="sql-database" 
-   documentationCenter="" 
-   authors="stevestein" 
-   manager="jhubbard" 
-   editor="monicar"/>
+---
+title: 使用 Azure 门户预览的 Azure SQL 数据库顾问 | Microsoft Azure
+description: 可以在 Azure 门户预览中使用 Azure SQL 数据库顾问查看和实施为你的现有 SQL 数据库提供的建议，这些建议可以提高当前查询性能。
+services: sql-database
+documentationCenter: 
+authors: stevestein
+manager: jhubbard
+editor: monicar
 
-<tags
-   ms.service="sql-database"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="data-management" 
-   ms.date="09/30/2016"
-   wacn.date="10/31/2016"
-   ms.author="sstein"/>
-
+ms.service: sql-database
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-management
+ms.date: 09/30/2016
+wacn.date: 10/31/2016
+ms.author: sstein
+---
 
 # 在 Azure 门户预览中使用 SQL 数据库顾问
 
-> [AZURE.SELECTOR]
-- [SQL 数据库顾问概述](/documentation/articles/sql-database-advisor/)
-- [Azure 门户预览](/documentation/articles/sql-database-advisor-portal/)
+> [!div class="op_single_selector"]
+- [SQL 数据库顾问概述](./sql-database-advisor.md)
+- [Azure 门户预览](./sql-database-advisor-portal.md)
 
 可以在 Azure 门户预览中使用 Azure SQL 数据库顾问查看和实施为你的现有 SQL 数据库提供的建议，这些建议可以提高当前查询性能。
 
@@ -30,20 +29,19 @@
 
 你可以在建议页中根据其对提高性能的潜在影响来查看排位靠前的建议。你还可以查看历史操作的状态。选择一条建议或状态即可查看详细信息。
 
-若要查看和应用建议，需要 Azure 中相应的[基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)权限。查看建议需要“读者”、“SQL DB 参与者”权限，执行任何操作（如创建或删除索引、取消创建索引）需要“所有者”、“SQL DB 参与者”权限。
+若要查看和应用建议，需要 Azure 中相应的[基于角色的访问控制](../active-directory/role-based-access-control-configure.md)权限。查看建议需要“读者”、“SQL DB 参与者”权限，执行任何操作（如创建或删除索引、取消创建索引）需要“所有者”、“SQL DB 参与者”权限。
 
 1. 登录到 [Azure 门户预览](https://portal.azure.cn/)。
 2. 单击“更多服务”>“SQL 数据库”，然后选择数据库。
 5. 单击“性能建议建议”查看适用于所选数据库的可用建议。
 
-> [AZURE.NOTE] 若要获取建议，数据库需要具有一天左右的使用量，且该日期内需要有一些活动。此外还需要一些一致的活动。SQL 数据库顾问优化一致的查询模式比优化随机的突发活动更加轻松。如果建议不可用，“性能建议”页会提供一条说明原因的消息。
+> [!NOTE] 若要获取建议，数据库需要具有一天左右的使用量，且该日期内需要有一些活动。此外还需要一些一致的活动。SQL 数据库顾问优化一致的查询模式比优化随机的突发活动更加轻松。如果建议不可用，“性能建议”页会提供一条说明原因的消息。
 
 ![建议](./media/sql-database-advisor-portal/recommendations.png)  
 
 下面是 Azure 门户预览中“修复架构问题”建议的示例。
 
 ![修复架构问题](./media/sql-database-advisor-portal/sql-database-advisor-schema-issue.png)
-
 
 按其对性能的潜在影响将建议分为以下四个类别：
 
@@ -53,7 +51,6 @@
 | 中型 | 中等影响建议应提高性能，但提升程度不大。 |
 | 低 | 低影响建议提供的性能比没有时更好，但改进可能不明显。 
 
-
 ### 从列表中删除建议
 
 如果建议的列表中包含你想要删除的项则可放弃建议：
@@ -61,14 +58,11 @@
 1. 选择“建议”列表中的建议。
 2. 单击“详细信息”边栏选项卡上的“放弃”。
 
-
 可以根据需要将已放弃的项重新添加到“建议”列表中：
 
 1. 在“建议”边栏选项卡上单击“查看已放弃的项”。
 1. 从列表中选择一个放弃的项，查看其详细信息。
 1. （可选）单击“撤消放弃”，将索引重新添加到“建议”的主列表。
-
-
 
 ## 应用建议
 
@@ -103,14 +97,11 @@ SQL 数据库顾问允许通过以下三个选项之一全权控制建议的启�
 
     ![建议的索引](./media/sql-database-advisor-portal/automation.png)
 
-
-
 ### 手动运行建议的 T-SQL 脚本
 
 选择任意建议，然后单击“查看脚本”。针对数据库运行此脚本以手动应用建议。
 
 *不通过该服务监视和验证手动执行的索引的性能影响*，因此建议在创建后监视这些索引以验证它们是否提供性能提升，并在必要时调整或删除它们有关创建索引的详细信息，请参阅[创建索引 (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms188783.aspx)。
-
 
 ### 取消建议
 
@@ -118,8 +109,6 @@ SQL 数据库顾问允许通过以下三个选项之一全权控制建议的启�
 
 1. 在“优化历史记录”区域中选择建议，打开“建议详细信息”边栏选项卡。
 2. 单击“取消”可中止应用建议的过程。
-
-
 
 ## 监视操作
 
@@ -138,46 +127,36 @@ SQL 数据库顾问允许通过以下三个选项之一全权控制建议的启�
 
 ![建议的索引](./media/sql-database-advisor-portal/operations.png)  
 
-
-
 ### 正在还原建议
 
 如果你使用了顾问来应用建议（即并没有手动运行 T-SQL 脚本），那么顾问会在发现性能影响为负面时自动还原该建议。如果你因故需要还原建议，可执行以下操作：
-
 
 1. 在“优化历史记录”区域中选择已成功应用的建议。
 2. 单击“建议详细信息”边栏选项卡上的“还原”。
 
 ![建议的索引](./media/sql-database-advisor-portal/details.png)  
 
-
-
 ## 监视索引建议的性能影响
 
-成功实施建议后（当前仅限索引操作和参数化查询建议），可单击“建议详细信息”边栏选项卡上的“Query Insights”打开 [然后查看排位靠前的查询的性能影响](/documentation/articles/sql-database-query-performance/)。
+成功实施建议后（当前仅限索引操作和参数化查询建议），可单击“建议详细信息”边栏选项卡上的“Query Insights”打开 [然后查看排位靠前的查询的性能影响](./sql-database-query-performance.md)。
 
 ![监视性能影响](./media/sql-database-advisor-portal/query-insights.png)  
-
-
-
 
 ## 摘要
 
 SQL 数据库顾问提供了提高 SQL 数据库性能的建议。通过提供 T-SQL 脚本以及单个的和全自动化的索引（当前仅限索引），顾问可以有效地协助你优化数据库并最终提高查询性能。
 
-
-
 ## 后续步骤
 
 监视建议并继续应用它们以优化性能。数据库工作负荷是动态的，并且不断地更改。SQL 数据库顾问将继续监视和提供可能提高数据库性能的建议。
 
- - 有关 SQL 数据库顾问的概述，请参阅 [SQL 数据库顾问](/documentation/articles/sql-database-advisor/)。
- - 若要了解排名靠前的查询的性能影响，请参阅[查询性能见解](/documentation/articles/sql-database-query-performance/)。
+ - 有关 SQL 数据库顾问的概述，请参阅 [SQL 数据库顾问](./sql-database-advisor.md)。
+ - 若要了解排名靠前的查询的性能影响，请参阅[查询性能见解](./sql-database-query-performance.md)。
 
 ## 其他资源
 
 - [查询存储](https://msdn.microsoft.com/zh-cn/library/dn817826.aspx)
 - [CREATE INDEX](https://msdn.microsoft.com/zh-cn/library/ms188783.aspx)
-- [基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)
+- [基于角色的访问控制](../active-directory/role-based-access-control-configure.md)
 
 <!---HONumber=Mooncake_1024_2016-->

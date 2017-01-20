@@ -1,30 +1,29 @@
-<properties
-	pageTitle="Azure SQL 数据库的单一数据库性能指南"
-	description="本主题提供了指南，帮助你确定此预览版提供的哪个服务层适合你的应用程序，并提供了一些应用程序优化建议，让你充分利用 Azure SQL 数据库。"
-	services="sql-database"
-	documentationCenter="na"
-	authors="CarlRabeler"
-	manager="jhubbard"
-	editor="" />
+---
+title: Azure SQL 数据库的单一数据库性能指南
+description: 本主题提供了指南，帮助你确定此预览版提供的哪个服务层适合你的应用程序，并提供了一些应用程序优化建议，让你充分利用 Azure SQL 数据库。
+services: sql-database
+documentationCenter: na
+authors: CarlRabeler
+manager: jhubbard
+editor: 
 
-
-<tags
-	ms.service="sql-database"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="data-management"
-	ms.date="09/13/2016"
-	wacn.date="12/19/2016"
-	ms.author="carlrab" />  
+ms.service: sql-database
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-management
+ms.date: 09/13/2016
+wacn.date: 12/19/2016
+ms.author: carlrab
+---
 
 # Azure SQL 数据库的单一数据库性能指南
 
 ## 概述
 
-Azure SQL 数据库提供三个[服务层](/documentation/articles/sql-database-service-tiers/)：基本、标准和高级。所有这些服务层都会将提供给 Azure SQL 数据库的资源进行严格隔离，确保你获得可预知的性能。性能以 DTU 为单位度量。有关 DTU 的详细信息，请参阅 [什么是 DTU](/documentation/articles/sql-database-what-is-a-dtu/)。本文提供为应用程序选择服务层的指南，并提供优化应用程序以充分使用 Azure SQL 数据库的建议。
+Azure SQL 数据库提供三个[服务层](./sql-database-service-tiers.md)：基本、标准和高级。所有这些服务层都会将提供给 Azure SQL 数据库的资源进行严格隔离，确保你获得可预知的性能。性能以 DTU 为单位度量。有关 DTU 的详细信息，请参阅 [什么是 DTU](./sql-database-what-is-a-dtu.md)。本文提供为应用程序选择服务层的指南，并提供优化应用程序以充分使用 Azure SQL 数据库的建议。
 
->[AZURE.NOTE] 本文侧重于 SQL 数据库中单一数据库的性能指南。有关弹性池的性能指南，请参阅[弹性池的价格和性能注意事项](/documentation/articles/sql-database-elastic-pool-guidance/)。但请注意，本文中许多单一数据库的微调建议适用于具有类似性能优势的弹性池中的数据库。
+>[!NOTE] 本文侧重于 SQL 数据库中单一数据库的性能指南。有关弹性池的性能指南，请参阅[弹性池的价格和性能注意事项](./sql-database-elastic-pool-guidance.md)。但请注意，本文中许多单一数据库的微调建议适用于具有类似性能优势的弹性池中的数据库。
 
 - **基本** 基本服务层旨在针对每个数据库提供每小时内的良好性能可预测性。基本数据库的 DTU 旨在提供充足的资源，使不存在多个并发请求的小型数据库能够正常工作。
 - **标准** 标准服务层改进了存在多个并发请求的数据库（例如工作组和 Web 应用程序）的性能可预测性并使之更通畅地运行。通过使用标准服务层数据库，你可以根据每分钟的可预测性能调整数据库应用程序的大小。
@@ -61,24 +60,23 @@ Azure SQL 数据库提供三个[服务层](/documentation/articles/sql-database-
 - 弹性池按小时计费。此计量频率与单一数据库性能级别的计量频率相同。
 - 如果将弹性池的大小调整为新的 eDTU 量，则在调整大小操作完成之前，不会按新的 eDTU 量计费。这种计费模式所遵循的模式与更改独立数据库的性能级别所遵循的模式相同。
 
-
 - 弹性池的价格取决于池的 eDTU 数。弹性池的价格与池内弹性数据库的利用率无关。
 - 价格的计算公式为：（池 eDTU 的数量）x（每 eDTU 的单位价格）。
 
-弹性池的 eDTU 单价高于同一服务层中独立数据库的 DTU 单价。有关详细信息，请参阅 [SQL 数据库定价](/pricing/details/sql-database/)。
+弹性池的 eDTU 单价高于同一服务层中独立数据库的 DTU 单价。有关详细信息，请参阅 [SQL 数据库定价](https://www.azure.cn/pricing/details/sql-database/)。
 
 ##<a name="service-tier-capabilities-and-limits"></a> 服务层功能和限制
 每个服务层和性能级别都与不同的限制和性能特征相关联。下表描述单个数据库的这些特征。
 
-[AZURE.INCLUDE [SQL 数据库服务层表](../../includes/sql-database-service-tiers-table.md)]
+[!INCLUDE [SQL 数据库服务层表](../../includes/sql-database-service-tiers-table.md)]
 
 以下部分提供有关查看这些限制的使用量的详细信息。
 
 ### 最大内存中 OLTP 存储
 
-可以使用 **sys.dm\_db\_resource\_stats** 视图来监视内存中存储的使用情况。有关监视的详细信息，请参阅[监视内存中 OLTP 存储](/documentation/articles/sql-database-in-memory-oltp-monitoring/)。
+可以使用 **sys.dm\_db\_resource\_stats** 视图来监视内存中存储的使用情况。有关监视的详细信息，请参阅[监视内存中 OLTP 存储](./sql-database-in-memory-oltp-monitoring.md)。
 
->[AZURE.NOTE] 内存中 OLTP 预览版目前仅适用于单一数据库，不适用于弹性数据库池中的数据库。
+>[!NOTE] 内存中 OLTP 预览版目前仅适用于单一数据库，不适用于弹性数据库池中的数据库。
 
 ### 最大并发请求数
 
@@ -102,7 +100,7 @@ Azure SQL 数据库提供三个[服务层](/documentation/articles/sql-database-
 
 如果多个客户端使用相同的连接字符串，该服务也会对每个登录名进行身份验证。如果 10 个用户全都使用相同的用户名和密码同时连接到数据库，则会有 10 个并发登录名。此限制仅针对使用登录名进行身份验证的那段时间。因此，如果这 10 个用户依次连接到数据库，则并发登录名数就始终不会超过 1。
 
->[AZURE.NOTE] 此限制目前不适用于弹性数据库池中的数据库。
+>[!NOTE] 此限制目前不适用于弹性数据库池中的数据库。
 
 ### 最大会话数
 
@@ -155,14 +153,13 @@ Azure SQL 数据库提供三个[服务层](/documentation/articles/sql-database-
 
 ![SQL 数据库资源利用率](./media/sql-database-performance-guidance/sql_db_resource_utilization.png)  
 
-
 从数据来看，此数据库当前的峰值 CPU 负载相对于 P2 性能级别刚好超过 50% 的 CPU 使用率（周二午间）。如果 CPU 是应用程序资源分布曲线中的决定因素，则你可以判定 P2 就是适当的性能级别，它能够保证工作负荷始终正常运行。如果应用程序预期资源使用率将随时间增大，则留出一些额外的资源缓冲以使应用程序从不超限即有其意义。提高性能级别可帮助避免因数据中心能力不足以有效处理请求而导致客户可见的错误，尤其是在易受延迟影响的环境下（如一个数据库，它支持一个应用程序，该应用程序根据数据库调用的结果绘制网页）。
 
 值得注意的是，其他应用程序类型对同一图形可能有不同的解释。例如，如果某个应用程序尝试每天处理工资数据并使用相同的图表，则使用 P1 性能级别也许就能让此类“批处理作业”模型正常工作。P1 性能级别有 100 个 DTU，而 P2 性能级别有 200 个 DTU。这意味着，P1 性能级别提供的性能是 P2 性能级别的一半。因此，P2 中 50% 的 CPU 使用率就相当于 P1 中 100% 的 CPU 使用率。只要该应用程序没有超时，且只要今天完成，则即使有作业耗时 2 小时或 2.5 小时才完成也无关紧要。此类别的应用程序也许只需使用 P1 性能级别。可利用这样一个事实：白天有几个时期的资源使用量较低，意味着可能有“大峰值”在当天晚些时候溢出到其中某个低谷。只要作业每天可按时完成，P1 性能级别就可能很适合此类应用程序（并可节省资金）。
 
 Azure SQL 数据库在每个服务器的 **master** 数据库的 **sys.resource\_stats** 视图中公开每个活动数据库使用的资源信息。表中的数据以 5 分钟为间隔收集而得。使用基本、标准和高级服务层，可能要在超过 5 分钟后数据才会出现在表中，意味着这些数据更适合进行历史分析而非接近实时分析。查询 **sys.resource\_stats** 视图可以显示数据库的最近历史记录，以便验证所选取的保留是否在需要时提供所需的性能。
 
->[AZURE.NOTE] 在以下示例中，必须连接到逻辑 SQL 数据库服务器的 **master** 数据库才能查询 **sys.resource\_stats**。
+>[!NOTE] 在以下示例中，必须连接到逻辑 SQL 数据库服务器的 **master** 数据库才能查询 **sys.resource\_stats**。
 
 以下示例演示了如何公开此视图中的数据：
 
@@ -172,7 +169,6 @@ Azure SQL 数据库在每个服务器的 **master** 数据库的 **sys.resource\
 	ORDER BY start_time DESC
 
 ![sys 资源统计信息](./media/sql-database-performance-guidance/sys_resource_stats.png)  
-
 
 以下示例演示了如何使用 **sys.resource\_stats** 目录视图通过不同方式来了解 SQL 数据库的资源使用率。
 
@@ -250,8 +246,6 @@ Azure SQL 数据库在每个服务器的 **master** 数据库的 **sys.resource\
 ## 优化方法
 本部分介绍可用于优化 Azure SQL 数据库的方法，该方法可使应用程序达到最佳性能并以尽可能低的性能级别运行。有些方法可与传统的 SQL Server 优化最佳实践搭配使用，但有些方法专用于 Azure SQL 数据库。在某些情况下，可扩展传统的 SQL Server 方法，通过检查数据库使用的资源找到要进一步优化的区域，使这些方法也可在 Azure SQL 数据库上发挥作用。
 
-
-
 有关每个工具及其使用方法的详细信息，请参阅以前的链接。有关缺少索引和查询优化的以下两个部分提供的其他方法可以用于手动查找和纠正类似的性能问题。我们建议你首先在门户中尝试这些工具，以便更有效地诊断和纠正问题。特殊情况使用手动优化方式。
 
 ### 缺少索引
@@ -276,7 +270,6 @@ OLTP 数据库性能有一个常见问题与物理数据库设计有关。设计
 	WHERE m1.col2 = 4;
 
 ![缺少索引的查询计划](./media/sql-database-performance-guidance/query_plan_missing_indexes.png)  
-
 
 Azure SQL 数据库包含一些功能，可帮助向数据库管理员提示如何查找并修复常见的缺少索引情况。Azure SQL 数据库内置的动态管理视图 (DMV) 将查找其中索引会大幅降低运行查询的估算成本的查询编译。在查询执行期间，SQL 数据库跟踪每个查询计划的执行频率，以及执行查询计划与想象其中存在该索引的查询计划之间的差距。这些 DMV 可让数据库管理员迅速推测出哪些物理数据库设计更改可能减少给定数据库的总工作负荷成本及其真实工作负荷。
 
@@ -394,18 +387,15 @@ SQL Server 中有一个常见的示例也适用于 Azure SQL 数据库，该示�
 
 ![查询优化](./media/sql-database-performance-guidance/query_tuning_1.png)  
 
-
 由于我们用值 1 执行该过程，因此所得的计划对于 1 为最佳，但对于表中的所有其他值并非最佳。如果随机选取每个计划，则所得的行为可能不是所需的行为，因为计划将执行得更慢，并将更多资源用于执行。
 
 在“SET STATISTICS IO ON”的情况下运行测试将显示在本例中实际完成的逻辑扫描工作 - 可看到该计划完成了 1148 次读取（如果普通情况仅返回一行，则这样效率很低）。
 
 ![查询优化](./media/sql-database-performance-guidance/query_tuning_2.png)  
 
-
 本例的第二部分使用查询提示告知优化器在编译过程中使用某个特定值。在这种情况下，它强制查询处理器忽略作为参数传递的值，而改为采用“UNKNOWN”，表示在表中具有平均频率的值（忽略偏斜）。所得的计划是一个基于搜寻的计划，平均而言，它比示例第 1 部分中的计划速度更快，使用资源更少。
 
 ![查询优化](./media/sql-database-performance-guidance/query_tuning_3.png)  
-
 
 可通过检查 **sys.resource\_stats** 表发现这种情况产生的影响（从执行测试的时间到数据填入表中的时间将存在一段延迟）。对于本例，将在 22:25:00 时间范围内执行第 1 部分，在 22:35:00 执行第 2 部分。请注意，越早的时间范围使用的资源比越晚的时间范围要多（因计划效率提高）。
 
@@ -416,8 +406,7 @@ SQL Server 中有一个常见的示例也适用于 Azure SQL 数据库，该示�
 
 ![查询优化](./media/sql-database-performance-guidance/query_tuning_4.png)  
 
-
->[AZURE.NOTE] 虽然此处使用的示例是特意选择的较小的示例，但非最佳参数的影响仍很大，对于较大的数据库尤为如此。这种区别在极端情况下对于快速情况和慢速情况可在数秒和数小时之间。
+>[!NOTE] 虽然此处使用的示例是特意选择的较小的示例，但非最佳参数的影响仍很大，对于较大的数据库尤为如此。这种区别在极端情况下对于快速情况和慢速情况可在数秒和数小时之间。
 
 你可检查 **sys.resource\_stats** 以确定给定测试使用的资源多于还是少于另一个测试。在比较数据时，请使测试相隔足够长的时间，以使其不会在 **sys.resource\_stats** 视图中的同一 5 分钟时间范围内重合。本练习的目标是将使用的资源总量降至最低，而非将峰值资源降至最低。一般而言，优化一段产生延迟的代码也将减少资源消耗。请确保在任何应用程序中考虑进行的更改确为所需，不会对使用应用程序的任何人在使用查询提示时的客户体验产生负面影响。
 
@@ -426,7 +415,7 @@ SQL Server 中有一个常见的示例也适用于 Azure SQL 数据库，该示�
 ### 跨数据库分片
 由于 Azure SQL 数据库运行在商用硬件上，因此单一数据库的容量限制低于传统的本地 SQL Server 安装。因此，某些客户使用分片技术在数据库操作不符合 Azure SQL 数据库中单一数据库的限制时，将这些操作分摊到多个数据库上。当今在 Azure SQL 数据库上使用分片技术的大多数客户将单个维度的数据拆分到多个数据库上。该方法涉及了解 OLTP 应用程序执行的事务经常仅适用于架构中的一行或少数几行。
 
->[AZURE.NOTE] SQL 数据库现在提供一个库来帮助分片。有关详细信息，请参阅[弹性数据库客户端库概述](/documentation/articles/sql-database-elastic-database-client-library/)。
+>[!NOTE] SQL 数据库现在提供一个库来帮助分片。有关详细信息，请参阅[弹性数据库客户端库概述](./sql-database-elastic-database-client-library.md)。
 
 例如，如果数据库包含客户、订单和订单详细信息（如 SQL Server 附带的传统示例 Northwind 数据库中所见），则可通过将客户与相关订单和订单详细信息集中在一起并保证其留在单一数据库内，将这些数据拆分到多个数据库中。应用程序将不同的客户拆分到多个数据库上，实际上就是将负载分散在多个数据库上。通过分片，客户不仅可以避免达到最大数据库大小限制，而且还使 Azure SQL 数据库能够处理明显大于不同性能级别限制的工作负荷，前提是每个数据库适合其 DTU。
 
@@ -443,12 +432,12 @@ SQL Server 用户经常将许多功能集中在单一数据库内。例如，如
 某些应用程序频繁写入。有时，通过考虑如何统一批处理写入，可以减少数据库上的总 IO 负载。通常，这与在存储过程和即席批中使用显式事务代替自动提交事务一样简单。可在 [Azure 中 SQL 数据库应用程序的批处理方法](https://msdn.microsoft.com/zh-cn/library/windowsazure/dn132615.aspx)中找到对各种可用方法的评估。请使用你自己的工作负荷进行试验以找到合适的批处理模型，请注意，给定模型的事务一致性保证可能略有不同。若要找到将资源用量降至最低的正确工作负荷，需要找到一致性与性能折中的正确组合。
 
 ### 应用程序层缓存
-某些数据库应用程序包含具有大量读取操作的工作负荷。可利用缓存层减少数据库上的负载，还有可能降低支持使用 Azure SQL 数据库的数据库所需的性能级别。通过 [Azure Redis 缓存](/home/features/redis-cache/)，读取工作负荷较重的客户只需读取数据一次（也许只需对每个应用层计算机读取一次，具体取决于其配置方式），然后将该数据存储在 Azure SQL 数据库外部。这样可降低数据库负载（CPU 和读取 IO），但对于事务一致性有影响，因为从缓存读取的数据可能与数据库中数据的日期不同。虽然许多应用程序可接受一定的不一致，但并非所有工作负荷都是这样。应该先完全了解任何应用程序要求，然后再使用应用程序层缓存策略。
+某些数据库应用程序包含具有大量读取操作的工作负荷。可利用缓存层减少数据库上的负载，还有可能降低支持使用 Azure SQL 数据库的数据库所需的性能级别。通过 [Azure Redis 缓存](https://www.azure.cn/home/features/redis-cache/)，读取工作负荷较重的客户只需读取数据一次（也许只需对每个应用层计算机读取一次，具体取决于其配置方式），然后将该数据存储在 Azure SQL 数据库外部。这样可降低数据库负载（CPU 和读取 IO），但对于事务一致性有影响，因为从缓存读取的数据可能与数据库中数据的日期不同。虽然许多应用程序可接受一定的不一致，但并非所有工作负荷都是这样。应该先完全了解任何应用程序要求，然后再使用应用程序层缓存策略。
 
 ## 后续步骤
 
-- 有关服务层的详细信息，请参阅[服务层](/documentation/articles/sql-database-service-tiers/)
-- 有关弹性池的详细信息，请参阅[弹性池](/documentation/articles/sql-database-elastic-pool/)
-- 有关性能和弹性池的信息，请参阅[弹性池的性能注意事项](/documentation/articles/sql-database-elastic-pool-guidance/)
+- 有关服务层的详细信息，请参阅[服务层](./sql-database-service-tiers.md)
+- 有关弹性池的详细信息，请参阅[弹性池](./sql-database-elastic-pool.md)
+- 有关性能和弹性池的信息，请参阅[弹性池的性能注意事项](./sql-database-elastic-pool-guidance.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

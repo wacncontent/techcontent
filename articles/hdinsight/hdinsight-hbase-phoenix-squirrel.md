@@ -1,27 +1,27 @@
-<properties 
-   pageTitle="在 HDInsight 中使用 Apache Phoenix 和 Squirrel | Azure" 
-   description="了解如何在 HDInsight 中使用 Apache Phoenix，以及如何在工作站上安装和配置 SQuirrel 以连接到 HDInsight 中的 HBase 群集。" 
-   services="hdinsight" 
-   documentationCenter="" 
-   authors="mumian" 
-   manager="paulettm" 
-   editor="cgronlun"/>
+---
+title: 在 HDInsight 中使用 Apache Phoenix 和 Squirrel | Azure
+description: 了解如何在 HDInsight 中使用 Apache Phoenix，以及如何在工作站上安装和配置 SQuirrel 以连接到 HDInsight 中的 HBase 群集。
+services: hdinsight
+documentationCenter: 
+authors: mumian
+manager: paulettm
+editor: cgronlun
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data" 
-   ms.date="09/02/2016" 
-   wacn.date="12/12/2016"
-   ms.author="jgao"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 09/02/2016
+wacn.date: 12/12/2016
+ms.author: jgao
+---
 
 # 将 Apache Phoenix 和 SQuirreL 与 HDinsight 中的 HBase 配合使用  
 
 了解如何在 HDInsight 中使用 [Apache Phoenix](http://phoenix.apache.org/)，以及如何在工作站上安装和配置 SQuirrel 以连接到 HDInsight 中的 HBase 群集。有关 Phoenix 的详细信息，请参阅[在 15 分钟或以下了解 Phoenix](http://phoenix.apache.org/Phoenix-in-15-minutes-or-less.html)。有关 Phoenix 语法，请参阅 [Phoenix 语法](http://phoenix.apache.org/language/index.html)。
 
->[AZURE.NOTE] 有关 HDInsight 中的 Phoenix 版本信息，请参阅 [HDInsight 提供的 Hadoop 群集版本有有何变化？][hdinsight-versions]。
+>[!NOTE] 有关 HDInsight 中的 Phoenix 版本信息，请参阅 [HDInsight 提供的 Hadoop 群集版本有有何变化？][hdinsight-versions]。
 
 ## 使用 SQLLine
 [SQLLine](http://sqlline.sourceforge.net/) 是用于执行 SQL 的命令行实用工具。
@@ -63,23 +63,6 @@
 
 有关详细信息，请参阅 [SQLLine 手册](http://sqlline.sourceforge.net/#manual)和 [Phoenix 语法](http://phoenix.apache.org/language/index.html)。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 使用 SQuirrel
 
 [SQuirreL SQL 客户端](http://squirrel-sql.sourceforge.net/)是一种图形 Java 程序，可用于查看 JDBC 兼容数据库的结构、浏览表中的数据、发出 SQL 命令等。可使用它连接到 HDInsight 上的 Apache Phoenix。
@@ -90,14 +73,13 @@
 
 - 已将一个 HBase 群集部署到包含 DNS 虚拟机的 Azure 虚拟网络。有关说明，请参阅[在 Azure 虚拟网络上预配 HBase 群集][hdinsight-hbase-provision-vnet-v1]。 
 
-	>[AZURE.IMPORTANT]必须在虚拟网络中安装一个 DNS 服务器。有关说明，请参阅[在两个 Azure 虚拟网络之间配置 DNS](/documentation/articles/hdinsight-hbase-geo-replication-configure-DNS/)
+	>[!IMPORTANT]必须在虚拟网络中安装一个 DNS 服务器。有关说明，请参阅[在两个 Azure 虚拟网络之间配置 DNS](./hdinsight-hbase-geo-replication-configure-DNS.md)
 
 - 获取 HBase 群集的特定于连接的 DNS 后缀。若要获取该后缀，请与群集建立连接桌面连接 (RDP)，然后运行 IPConfig。DNS 后缀类似于：
 
 		myhbase.b7.internal.chinacloudapp.cn
 - 在工作站中下载并安装 [Microsoft Visual Studio Express 2013 for Windows Desktop](https://www.visualstudio.com/products/visual-studio-express-vs.aspx)。需要使用该程序包的 makecert 来创建证书。  
 - 在工作站中下载并安装 [Java 运行时环境](http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html)。SQuirrel SQL 客户端 3.0 和更高版本需要 JRE 1.6 或更高版本。  
-
 
 ### 在工作站上安装并配置 SQuirrel
 
@@ -107,12 +89,11 @@
 2. 打开/运行该 jar 文件。它需要 [Java 运行时环境](http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html)。
 3. 单击“下一步”两次。
 4. 指定你具有写入权限的路径，然后单击“下一步”。
-	>[AZURE.NOTE]默认的安装文件夹为 C:\\Program Files\\squirrel-sql-3.6 文件夹。若要写入此路径，必须为安装程序授予管理员权限。可以管理员身份打开命令提示符，导航到 Java 的 bin 文件夹，然后运行
+	>[!NOTE]默认的安装文件夹为 C:\\Program Files\\squirrel-sql-3.6 文件夹。若要写入此路径，必须为安装程序授予管理员权限。可以管理员身份打开命令提示符，导航到 Java 的 bin 文件夹，然后运行
 	><p>`java.exe -jar [the path of the SQuirrel jar file]`
 5. 单击“确定”确认创建目标目录。
 6. 默认设置是安装基本和标准程序包。单击“下一步”。
 7. 单击“下一步”两次，然后单击“完成”。
-
 
 **安装 Phoenix 驱动程序**
 
@@ -132,7 +113,7 @@ Phoenix 驱动程序 jar 文件位于 HBase 群集上。根据具体的版本，
 	- **示例 URL**：jdbc:phoenix:zookeeper2.contoso-hbase-eu.f5.internal.chinacloudapp.cn
 	- **类名**：org.apache.phoenix.jdbc.PhoenixDriver
 
-	>[AZURE.WARNING] 在“示例 URL”中使用全小写。当其中一个主机关闭时，可以使用整个 zookeeper 仲裁。主机名为 zookeeper0、zookeeper1 和 zookeeper2。
+	>[!WARNING] 在“示例 URL”中使用全小写。当其中一个主机关闭时，可以使用整个 zookeeper 仲裁。主机名为 zookeeper0、zookeeper1 和 zookeeper2。
 
 	![HDInsight HBase Phoenix SQuirrel 驱动程序][img-squirrel-driver]
 4. 单击**“确定”**。
@@ -172,15 +153,15 @@ Phoenix 驱动程序 jar 文件位于 HBase 群集上。根据具体的版本，
 
 - [HDInsight HBase 概述][hdinsight-hbase-overview]：HBase 是构建于 Hadoop 上的 Apache 开源 NoSQL 数据库，用于为大量非结构化和半结构化数据提供随机访问和高度一致性。
 - [在 Azure 虚拟网络上设置 HBase 群集][hdinsight-hbase-provision-vnet-v1]：通过虚拟网络集成，可以将 HBase 群集部署到应用程序所在的虚拟网络，以便应用程序直接与 HBase 进行通信。
-- [在 HDInsight 中配置 HBase 地域复制](/documentation/articles/hdinsight-hbase-geo-replication/)：了解如何跨两个 Azure 数据中心配置 HBase 复制。 
+- [在 HDInsight 中配置 HBase 地域复制](./hdinsight-hbase-geo-replication.md)：了解如何跨两个 Azure 数据中心配置 HBase 复制。 
 
 [azure-portal]: https://manage.windowsazure.cn
 
-[hdinsight-versions]: /documentation/articles/hdinsight-component-versioning-v1/
-[hdinsight-hbase-get-started]: /documentation/articles/hdinsight-hbase-tutorial-get-started-v1/
-[hdinsight-manage-portal]: /documentation/articles/hdinsight-administer-use-management-portal-v1/#connect-to-hdinsight-clusters-by-using-rdp
-[hdinsight-hbase-provision-vnet-v1]: /documentation/articles/hdinsight-hbase-provision-vnet-v1/
-[hdinsight-hbase-overview]: /documentation/articles/hdinsight-hbase-overview/
+[hdinsight-versions]: ./hdinsight-component-versioning-v1.md
+[hdinsight-hbase-get-started]: ./hdinsight-hbase-tutorial-get-started-v1.md
+[hdinsight-manage-portal]: ./hdinsight-administer-use-management-portal-v1.md#connect-to-hdinsight-clusters-by-using-rdp
+[hdinsight-hbase-provision-vnet-v1]: ./hdinsight-hbase-provision-vnet-v1.md
+[hdinsight-hbase-overview]: ./hdinsight-hbase-overview.md
 [hdinsight-hbase-phoenix-sqlline]: ./media/hdinsight-hbase-phoenix-squirrel/hdinsight-hbase-phoenix-sqlline.png
 [img-certificate]: ./media/hdinsight-hbase-phoenix-squirrel/hdinsight-hbase-vpn-certificate.png
 [img-vnet-diagram]: ./media/hdinsight-hbase-phoenix-squirrel/hdinsight-hbase-vnet-point-to-site.png

@@ -1,21 +1,21 @@
-<properties
-	pageTitle="SQL Server Stretch Database的管理和故障排除 | Azure"
-	description="如何对SQL Server Stretch Database进行管理和故障排除。"
-	services="sql-server-stretch-database"
-	documentationCenter=""
-	authors="douglaslMS"
-	manager=""
-	editor=""/>
+---
+title: SQL Server Stretch Database的管理和故障排除 | Azure
+description: 如何对SQL Server Stretch Database进行管理和故障排除。
+services: sql-server-stretch-database
+documentationCenter: 
+authors: douglaslMS
+manager: 
+editor: 
 
-<tags
-	ms.service="sql-server-stretch-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="06/27/2016"
-	wacn.date="01/04/2017"
-	ms.author="douglasl"/>
+ms.service: sql-server-stretch-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 06/27/2016
+wacn.date: 01/04/2017
+ms.author: douglasl
+---
 
 # 延伸数据库的管理和故障排除
 
@@ -28,7 +28,6 @@
 
 若要查看已启用延伸的表在 SQL Server 中使用的空间量，请运行以下语句。
 
-
 	USE <Stretch-enabled database name>;
 	GO
 	EXEC sp_spaceused '<Stretch-enabled table name>', 'true', 'LOCAL_ONLY';
@@ -37,15 +36,15 @@
 ## 管理数据迁移
 
 ### 检查应用于表的筛选器函数
-打开目录视图 **sys.remote\_data\_archive\_tables** 并检查 **filter\_predicate** 列的值，以标识 Stretch Database 正在使用来选择要迁移的行的函数。如果值为 null，则整个表符合迁移条件。有关详细信息，请参阅 [sys.remote\_data\_archive\_tables (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/dn935003.aspx) 和[使用筛选器函数选择要迁移的行](/documentation/articles/sql-server-stretch-database-predicate-function/)。
+打开目录视图 **sys.remote\_data\_archive\_tables** 并检查 **filter\_predicate** 列的值，以标识 Stretch Database 正在使用来选择要迁移的行的函数。如果值为 null，则整个表符合迁移条件。有关详细信息，请参阅 [sys.remote\_data\_archive\_tables (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/dn935003.aspx) 和[使用筛选器函数选择要迁移的行](./sql-server-stretch-database-predicate-function.md)。
 
 ### <a name="Migration"></a>检查数据迁移状态
-在 SQL Server Management Studio 中选择数据库对应的“任务 | 延伸 | 监视”，以便在 Stretch Database 监视器中监视数据迁移。有关详细信息，请参阅[数据迁移的监视和故障排除 (Stretch Database)](/documentation/articles/sql-server-stretch-database-monitor/)。
+在 SQL Server Management Studio 中选择数据库对应的“任务 | 延伸 | 监视”，以便在 Stretch Database 监视器中监视数据迁移。有关详细信息，请参阅[数据迁移的监视和故障排除 (Stretch Database)](./sql-server-stretch-database-monitor.md)。
 
 或者，打开动态管理视图 **sys.dm\_db\_rda\_migration\_status** 查看已迁移的数据批数与行数。
 
 ### <a name="Firewall"></a>数据迁移的故障排除
-有关故障排除的建议，请参阅[数据迁移的监视和故障排除 (Stretch Database)](/documentation/articles/sql-server-stretch-database-monitor/)。
+有关故障排除的建议，请参阅[数据迁移的监视和故障排除 (Stretch Database)](./sql-server-stretch-database-monitor.md)。
 
 ## 管理远程数据
 
@@ -84,10 +83,10 @@
 -   你的网络条件可能有所退化。有关最近出现的问题或服务中断的信息，请与你的网络管理员联系。
 
 ### 提高 Azure 性能级别，以便能够执行索引编制等资源密集型操作
-在生成、重新生成或重新组织已针对 Stretch Database 配置的大型表中的索引时，你期望在此期间在 Azure 中对迁移的数据进行大量的查询，那么请考虑在该操作的持续时间内提高相应远程 Azure 数据库的性能级别。有关性能级别和定价的详细信息，请参阅 [SQL Server Stretch Database 定价](/pricing/details/sql-server-stretch-database/)。
+在生成、重新生成或重新组织已针对 Stretch Database 配置的大型表中的索引时，你期望在此期间在 Azure 中对迁移的数据进行大量的查询，那么请考虑在该操作的持续时间内提高相应远程 Azure 数据库的性能级别。有关性能级别和定价的详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
 
 ### 你无法暂停 Azure 上的 SQL Server Stretch Database 服务  
- 请确保你选择合适的性能和定价级别。如果你为某个资源密集型操作暂时增加性能级别，那么在操作完成后，请将它还原到之前的级别。有关性能级别和定价的详细信息，请参阅 [SQL Server Stretch Database 定价](/pricing/details/sql-server-stretch-database/)。
+ 请确保你选择合适的性能和定价级别。如果你为某个资源密集型操作暂时增加性能级别，那么在操作完成后，请将它还原到之前的级别。有关性能级别和定价的详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
 
 ## 更改查询的范围  
  默认情况下，针对启用了延伸的表进行的查询将返回本地和远程数据。你可以更改所有用户进行的所有查询的范围，或仅更改管理员进行的单个查询的范围。
@@ -120,10 +119,10 @@
 
 ## 另请参阅
 
-[监视 Stretch Database](/documentation/articles/sql-server-stretch-database-monitor/)
+[监视 Stretch Database](./sql-server-stretch-database-monitor.md)
 
-[备份启用了延伸的数据库](/documentation/articles/sql-server-stretch-database-backup/)
+[备份启用了延伸的数据库](./sql-server-stretch-database-backup.md)
 
-[还原已启用延伸的数据库](/documentation/articles/sql-server-stretch-database-restore/)
+[还原已启用延伸的数据库](./sql-server-stretch-database-restore.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

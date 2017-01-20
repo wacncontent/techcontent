@@ -1,44 +1,40 @@
-<properties 
-   pageTitle="使用 VPN 网关和 PowerShell 将虚拟网络连接到多个站点 | Azure"
-   description="本文指导你使用经典部署模型的 VPN 网关将多个本地站点连接到虚拟网络。"
-   services="vpn-gateway"
-   documentationCenter="na"
-   authors="yushwang"
-   manager="rossort"
-   editor=""
-   tags="azure-service-management"/>  
+---
+title: 使用 VPN 网关和 PowerShell 将虚拟网络连接到多个站点 | Azure
+description: 本文指导你使用经典部署模型的 VPN 网关将多个本地站点连接到虚拟网络。
+services: vpn-gateway
+documentationCenter: na
+authors: yushwang
+manager: rossort
+editor: 
+tags: azure-service-management
 
-
-<tags 
-   ms.service="vpn-gateway"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="05/11/2016"
-   wacn.date="01/05/2017"
-   ms.author="yushwang" />  
-
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 05/11/2016
+wacn.date: 01/05/2017
+ms.author: yushwang
+---
 
 # 将站点到站点连接添加到包含现有 VPN 网关连接的 VNet
 
-> [AZURE.SELECTOR]
-- [Resource Manager - 门户](/documentation/articles/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/)
-- [经典 - PowerShell](/documentation/articles/vpn-gateway-multi-site/)
+> [!div class="op_single_selector"]
+- [Resource Manager - 门户](./vpn-gateway-howto-multi-site-to-site-resource-manager-portal.md)
+- [经典 - PowerShell](./vpn-gateway-multi-site.md)
 
 本文逐步讲解如何使用 PowerShell 将站点到站点 (S2S) 连接添加到包含现有连接的 VPN 网关。这种类型的连接通常称为“多站点”配置。
 
-本文适用于使用经典部署模型（也称为“服务管理”）创建的虚拟网络。本文中的步骤不适用于 ExpressRoute/站点到站点共存连接配置。有关共存连接的信息，请参阅 [ExpressRoute/S2S coexisting connections](/documentation/articles/expressroute-howto-coexist-classic/)（ExpressRoute/S2S 共存连接）。
+本文适用于使用经典部署模型（也称为“服务管理”）创建的虚拟网络。本文中的步骤不适用于 ExpressRoute/站点到站点共存连接配置。有关共存连接的信息，请参阅 [ExpressRoute/S2S coexisting connections](../expressroute/expressroute-howto-coexist-classic.md)（ExpressRoute/S2S 共存连接）。
 
 ### 部署模型和方法
 
-[AZURE.INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
+[!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
 当我们发布有关此配置的新文章和其他可用工具时，将会更新此表格。有相关的文章发布时，我们会直接从此表格链接到该文章。
 
-[AZURE.INCLUDE [vpn-gateway-table-multi-site](../../includes/vpn-gateway-table-multisite-include.md)]
-
-
+[!INCLUDE [vpn-gateway-table-multi-site](../../includes/vpn-gateway-table-multisite-include.md)]
 
 ## 关于连接
 
@@ -47,7 +43,6 @@
 如果已经有连接到虚拟网络的静态网关，可以将网关类型更改为动态，而不需要为了适应多站点而重建虚拟网络。在更改路由类型之前，请确保本地 VPN 网关支持基于路由的 VPN 配置。
 
 ![多站点示意图](./media/vpn-gateway-multi-site/multisite.png "多站点")  
-
 
 ## 考虑的要点
 
@@ -59,9 +54,9 @@
 
 在开始配置之前，请确认满足以下条件：
 
-- Azure 订阅。如果你还没有 Azure 订阅，你可以注册一个[试用版](/pricing/1rmb-trial)。
+- Azure 订阅。如果你还没有 Azure 订阅，你可以注册一个[试用版](https://www.azure.cn/pricing/1rmb-trial)。
 
-- 每个本地位置都有兼容的 VPN 硬件。查看[关于用于虚拟网络连接的 VPN 设备](/documentation/articles/vpn-gateway-about-vpn-devices/)，以确认你要使用的设备是否是已知兼容的设备。
+- 每个本地位置都有兼容的 VPN 硬件。查看[关于用于虚拟网络连接的 VPN 设备](./vpn-gateway-about-vpn-devices.md)，以确认你要使用的设备是否是已知兼容的设备。
 
 - 每个 VPN 设备都有一个面向外部的公共 IPv4 IP 地址。该 IP 地址不能位于 NAT 后面，必须满足这一要求。
 
@@ -75,27 +70,25 @@
 
 	例如，如果两个本地网络站点都包含 IP 地址范围 10.2.3.0/24，并且某个包包含目标地址 10.2.3.3，则 Azure 将不知道你要将该包发送到哪个站点，因为地址范围是重叠的。为了防止路由问题，Azure 不允许你上载具有重叠范围的配置文件。
 
-
-
 ## 1\.创建站点到站点 VPN
 
 如果你已有使用动态路由网关的站点到站点 VPN，那太好了！ 你可以转到[导出虚拟网络配置设置](#export)。否则，请执行以下操作：
 
 ### 如果已有一个站点到站点虚拟网络，但该虚拟网络使用静态（基于策略的）路由网关：
 
-1. 将网关类型更改为动态路由。多站点 VPN 需要动态（也称为基于路由的）路由网关。若要更改网关类型，首先需要删除现有网关，然后创建新网关。有关说明，请参阅 [How to change the VPN routing type for your gateway](/documentation/articles/vpn-gateway-configure-vpn-gateway-mp/#how-to-change-the-vpn-routing-type-for-your-gateway)（如何更改网关的 VPN 路由类型）。
+1. 将网关类型更改为动态路由。多站点 VPN 需要动态（也称为基于路由的）路由网关。若要更改网关类型，首先需要删除现有网关，然后创建新网关。有关说明，请参阅 [How to change the VPN routing type for your gateway](./vpn-gateway-configure-vpn-gateway-mp.md#how-to-change-the-vpn-routing-type-for-your-gateway)（如何更改网关的 VPN 路由类型）。
 
-2. 配置新网关并创建 VPN 隧道。有关说明，请参阅 [Configure a VPN Gateway in the Azure Classic Management Portal](/documentation/articles/vpn-gateway-configure-vpn-gateway-mp/)（在 Azure 经典管理门户中配置 VPN 网关）。首先，将网关类型更改为动态路由。
+2. 配置新网关并创建 VPN 隧道。有关说明，请参阅 [Configure a VPN Gateway in the Azure Classic Management Portal](./vpn-gateway-configure-vpn-gateway-mp.md)（在 Azure 经典管理门户中配置 VPN 网关）。首先，将网关类型更改为动态路由。
 
 ### 如果你没有站点到站点虚拟网络：
 
-1. 按照以下说明创建站点到站点虚拟网络：[在 Azure 经典管理门户中创建使用站点到站点 VPN 连接的虚拟网络](/documentation/articles/vpn-gateway-site-to-site-create/)。
+1. 按照以下说明创建站点到站点虚拟网络：[在 Azure 经典管理门户中创建使用站点到站点 VPN 连接的虚拟网络](./vpn-gateway-site-to-site-create.md)。
 
-2. 按照以下说明配置动态路由网关：[配置 VPN 网关](/documentation/articles/vpn-gateway-configure-vpn-gateway-mp/)。请务必为网关类型选择“动态路由”。
+2. 按照以下说明配置动态路由网关：[配置 VPN 网关](./vpn-gateway-configure-vpn-gateway-mp.md)。请务必为网关类型选择“动态路由”。
 
 ## <a name="export"></a>2.导出网络配置文件 
 
-导出网络配置文件。导出的文件将用于配置新的多站点设置。如需有关如何导出文件的说明，请参阅以下文章中的相应部分：[How to create a VNet using a network configuration file in the Azure Portal Preview](/documentation/articles/virtual-networks-create-vnet-classic-portal/#how-to-create-a-vnet-using-a-network-config-file-in-the-azure-portal)（如何在 Azure 门户预览中使用网络配置文件创建 VNet）。
+导出网络配置文件。导出的文件将用于配置新的多站点设置。如需有关如何导出文件的说明，请参阅以下文章中的相应部分：[How to create a VNet using a network configuration file in the Azure Portal Preview](../virtual-network/virtual-networks-create-vnet-classic-portal.md#how-to-create-a-vnet-using-a-network-config-file-in-the-azure-portal)（如何在 Azure 门户预览中使用网络配置文件创建 VNet）。
 
 ## 3\.打开网络配置文件
 
@@ -169,7 +162,7 @@
 
 ## 5\.导入网络配置文件
 
-导入网络配置文件。在导入这个包含更改的文件时，将会添加新的隧道。这些隧道将使用你前面创建的动态网关。如需有关如何导入文件的说明，请参阅以下文章中的相应部分：[How to create a VNet using a network configuration file in the Azure Portal Preview](/documentation/articles/virtual-networks-create-vnet-classic-portal/#how-to-create-a-vnet-using-a-network-config-file-in-the-azure-portal)（如何在 Azure 门户预览中使用网络配置文件创建 VNet）。
+导入网络配置文件。在导入这个包含更改的文件时，将会添加新的隧道。这些隧道将使用你前面创建的动态网关。如需有关如何导入文件的说明，请参阅以下文章中的相应部分：[How to create a VNet using a network configuration file in the Azure Portal Preview](../virtual-network/virtual-networks-create-vnet-classic-portal.md#how-to-create-a-vnet-using-a-network-config-file-in-the-azure-portal)（如何在 Azure 门户预览中使用网络配置文件创建 VNet）。
 
 ## 6\.下载密钥
 
@@ -215,6 +208,6 @@
 
 ## 后续步骤
 
-若要了解有关 VPN 网关的详细信息，请参阅[关于 VPN 网关](/documentation/articles/vpn-gateway-about-vpngateways/)。
+若要了解有关 VPN 网关的详细信息，请参阅[关于 VPN 网关](./vpn-gateway-about-vpngateways.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

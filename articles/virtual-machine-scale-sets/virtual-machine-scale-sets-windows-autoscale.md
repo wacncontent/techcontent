@@ -1,29 +1,28 @@
-<properties
-    pageTitle="自动缩放 Windows 虚拟机规模集 | Azure"
-    description="使用 Azure PowerShell 为 Windows 虚拟机规模集设置自动缩放"
-    services="virtual-machine-scale-sets"
-    documentationcenter=""
-    author="davidmu1"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 自动缩放 Windows 虚拟机规模集 | Azure
+description: 使用 Azure PowerShell 为 Windows 虚拟机规模集设置自动缩放
+services: virtual-machine-scale-sets
+documentationcenter: 
+author: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="88886cad-a2f0-46bc-8b58-32ac2189fc93"
-    ms.service="virtual-machine-scale-sets"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="09/27/2016"
-    wacn.date="01/05/2017"
-    ms.author="davidmu" />  
-
+ms.assetid: 88886cad-a2f0-46bc-8b58-32ac2189fc93
+ms.service: virtual-machine-scale-sets
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 01/05/2017
+ms.author: davidmu
+---
 
 # 自动缩放虚拟机规模集中的虚拟机
-使用虚拟机规模集可轻松地将相同的虚拟机作为集来进行部署和管理。规模集为超大规模应用程序提供高度可缩放且可自定义的计算层，并且它们支持 Windows 平台映像、Linux 平台映像、自定义映像和扩展。有关规模集的详细信息，请参阅[虚拟机规模集](/documentation/articles/virtual-machine-scale-sets-overview/)。
+使用虚拟机规模集可轻松地将相同的虚拟机作为集来进行部署和管理。规模集为超大规模应用程序提供高度可缩放且可自定义的计算层，并且它们支持 Windows 平台映像、Linux 平台映像、自定义映像和扩展。有关规模集的详细信息，请参阅[虚拟机规模集](./virtual-machine-scale-sets-overview.md)。
 
-本教程演示如何创建 Windows 虚拟机的规模集，并自动规模集中的虚拟机。通过使用 Azure PowerShell 创建和部署 Azure Resource Manager 模板，以创建规模集并设置缩放。有关模板的详细信息，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。若要了解有关规模集自动缩放的详细信息，请参阅[自动缩放和虚拟机规模集](/documentation/articles/virtual-machine-scale-sets-autoscale-overview/)。
+本教程演示如何创建 Windows 虚拟机的规模集，并自动规模集中的虚拟机。通过使用 Azure PowerShell 创建和部署 Azure Resource Manager 模板，以创建规模集并设置缩放。有关模板的详细信息，请参阅[创作 Azure 资源管理器模板](../azure-resource-manager/resource-group-authoring-templates.md)。若要了解有关规模集自动缩放的详细信息，请参阅[自动缩放和虚拟机规模集](./virtual-machine-scale-sets-autoscale-overview.md)。
 
 在本文中，将部署以下资源和扩展：
 
@@ -37,7 +36,7 @@
 * Microsoft.Insights.VMDiagnosticsSettings
 * Microsoft.Insights/autoscaleSettings
 
-有关 Resource Manager 资源的详细信息，请参阅 [Azure Resource Manager vs. classic deployment](/documentation/articles/resource-manager-deployment-model/)（Azure Resource Manager 与经典部署）。
+有关 Resource Manager 资源的详细信息，请参阅 [Azure Resource Manager vs. classic deployment](../azure-resource-manager/resource-manager-deployment-model.md)（Azure Resource Manager 与经典部署）。
 
 ## 步骤 1：安装 Azure PowerShell
 有关安装最新版本的 Azure PowerShell、选择订阅和登录 Azure 的信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
@@ -99,7 +98,7 @@
      * 虚拟网络和子网的 IP 地址名称和前缀。
      * 虚拟网络、负载均衡器和网络接口的名称和标识符。
      * 与规模集中虚拟机关联的帐户的存储帐户名称。
-     * 已安装在虚拟机上的诊断扩展的设置。有关诊断扩展的详细信息，请参阅[使用 Azure Resource Manager 模板创建具有监视和诊断功能的 Windows 虚拟机](/documentation/articles/virtual-machines-windows-extensions-diagnostics-template/)。
+     * 已安装在虚拟机上的诊断扩展的设置。有关诊断扩展的详细信息，请参阅[使用 Azure Resource Manager 模板创建具有监视和诊断功能的 Windows 虚拟机](../virtual-machines/virtual-machines-windows-extensions-diagnostics-template.md)。
 4. 将存储帐户资源添加到已添加到模板中的资源父元素下。此模板使用一个循环来创建所建议的五个存储帐户，其中将存储操作系统磁盘和诊断数据。这组帐户可在一个规模集中最多支持 100 个虚拟机，这是当前的最大值。每个存储帐户通过将变量中定义的字母指示符与模板的参数中提供的前缀相组合来命名。
    
         {
@@ -113,7 +112,7 @@
           "location": "[resourceGroup().location]",
           "properties": { "accountType": "Standard_LRS" }
         },
-5. 添加虚拟网络资源。有关详细信息，请参阅[网络资源提供程序](/documentation/articles/resource-groups-networking/)。
+5. 添加虚拟网络资源。有关详细信息，请参阅[网络资源提供程序](../virtual-network/resource-groups-networking.md)。
    
         {
           "apiVersion": "2015-06-15",
@@ -156,7 +155,7 @@
             }
           }
         },
-7. 添加规模集使用的负载均衡器资源。有关详细信息，请参阅 [Azure Resource Manager 对负载均衡器的支持](/documentation/articles/load-balancer-arm/)。
+7. 添加规模集使用的负载均衡器资源。有关详细信息，请参阅 [Azure Resource Manager 对负载均衡器的支持](../load-balancer/load-balancer-arm.md)。
    
         {
           "apiVersion": "2015-06-15",
@@ -471,7 +470,7 @@
 
 成功部署所有资源应大约需要 15 分钟。
 
-> [AZURE.NOTE]
+> [!NOTE]
 还可以利用门户的功能来部署资源。请使用此链接：“https://portal.azure.cn/#create/Microsoft.Template/uri/<link to VM Scale Set JSON template>”
 > 
 > 
@@ -489,7 +488,7 @@
         Get-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceView
 * 就像连接到任何其他计算机一样连接到单独的虚拟机，然后可以远程访问规模集中的虚拟机以监视单个进程。
 
-> [AZURE.NOTE]
+> [!NOTE]
 用于获取有关规模集的信息的完整 REST API 可在[Virtual Machine Scale Sets](https://msdn.microsoft.com/zh-cn/library/mt589023.aspx)（虚拟机规模集）中找到
 > 
 > 
@@ -504,9 +503,9 @@
     Remove-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name"
 
 ## 后续步骤
-* 使用[在虚拟机规模集中管理虚拟机](/documentation/articles/virtual-machine-scale-sets-windows-manage/)中的信息管理刚刚创建的规模集。
-* 在 [Azure 监视器 PowerShell 快速入门示例](/documentation/articles/insights-powershell-samples/)中查找 Azure 监视器监视功能的示例
-* 若要了解有关通知功能的信息，请参阅[使用自动缩放操作在 Azure 监视器中发送电子邮件和 webhook 警报通知](/documentation/articles/insights-autoscale-to-webhook-email/)
-* 了解如何[使用审核日志在 Azure 监视器中发送电子邮件和 webhook 警报通知](/documentation/articles/insights-auditlog-to-webhook-email/)
+* 使用[在虚拟机规模集中管理虚拟机](./virtual-machine-scale-sets-windows-manage.md)中的信息管理刚刚创建的规模集。
+* 在 [Azure 监视器 PowerShell 快速入门示例](../monitoring-and-diagnostics/insights-powershell-samples.md)中查找 Azure 监视器监视功能的示例
+* 若要了解有关通知功能的信息，请参阅[使用自动缩放操作在 Azure 监视器中发送电子邮件和 webhook 警报通知](../monitoring-and-diagnostics/insights-autoscale-to-webhook-email.md)
+* 了解如何[使用审核日志在 Azure 监视器中发送电子邮件和 webhook 警报通知](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md)
 
 <!---HONumber=Mooncake_1205_2016-->

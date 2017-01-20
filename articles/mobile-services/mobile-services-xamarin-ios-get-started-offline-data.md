@@ -1,27 +1,25 @@
-<properties 
-	pageTitle="在移动服务中使用脱机数据 (Xamarin iOS) | Azure" 
-	description="了解如何使用 Azure 移动服务向 Xamarin iOS 应用程序中的缓存和同步离线数据" 
-	documentationCenter="xamarin" 
-	authors="lindydonna" 
-	editor="wesmc" 
-	manager="dwrede" 
-	services="mobile-services"/>
+---
+title: 在移动服务中使用脱机数据 (Xamarin iOS) | Azure
+description: 了解如何使用 Azure 移动服务向 Xamarin iOS 应用程序中的缓存和同步离线数据
+documentationCenter: xamarin
+authors: lindydonna
+editor: wesmc
+manager: dwrede
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="donnam"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: donnam
+---
 
 #  在移动服务中使用脱机数据同步
 
-[AZURE.INCLUDE [mobile-services-selector-offline](../../includes/mobile-services-selector-offline.md)]
-
-
+[!INCLUDE [mobile-services-selector-offline](../../includes/mobile-services-selector-offline.md)]
 
 本主题将指导你通过 Azure 移动服务的脱机同步功能在 todo 列表快速入门应用程序中。脱机同步可轻松地创建应用程序即使在最终用户不具有任何网络访问权限时才可用。
 
@@ -32,7 +30,7 @@
 * 允许最终用户创建和修改数据，甚至在没有网络访问权限，并支持方案具有很少或没有连接时
 * 跨多个设备同步数据和同一个记录修改由两个设备时检测冲突
 
->[AZURE.NOTE]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个免费的移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial)</a>。
+>[!NOTE]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个免费的移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial)</a>。
 >
 > 如果这是你第一次体验移动服务，你应首先完成[移动服务入门]。
 
@@ -47,7 +45,6 @@
 * Visual Studio with Xamarin。有关说明，请参阅[设置和安装 Visual Studio 和 Xamarin](https://msdn.microsoft.com/zh-cn/library/mt613162.aspx)。 
 * 安装了 Xcode v7.0 版或更高版本以及 Xamarin Studio Community 的 Mac。请参阅 [设置和安装 Visual Studio 和 Xamarin](https://msdn.microsoft.com/zh-cn/library/mt613162.aspx) 和 [Mac 用户的设置、安装和验证](https://msdn.microsoft.com/zh-cn/library/mt488770.aspx) (MSDN)。
 * 完成 [Get started with Mobile Services（移动服务入门）]教程。
-
 
 ##  <a name="review-offline"></a>查看移动服务同步代码
 
@@ -98,7 +95,7 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
     在此示例中，我们检索远程中的所有记录 `TodoItem` 表中，但它也可能是要作为筛选依据传递查询的记录。`PullAsync()` 的第一个参数是用于增量同步的查询 ID；增量同步使用 `UpdatedAt` 时间戳以仅获取自上次同步以来修改的那些记录。查询 ID 应对于你的应用程序中的每个逻辑查询都是唯一的描述性字符串。若选择不要增量同步，请传递 `null` 作为查询 ID。此命令会检索每个请求的操作，这是可能效率低下上的所有记录。
 
-    >[AZURE.NOTE] 若要从设备本地存储区中删除已在移动设备数据库中删除的记录，应启用“[软删除]”。否则，你的应用程序应定期调用 `IMobileServiceSyncTable.PurgeAsync()` 以清除本地存储。
+    >[!NOTE] 若要从设备本地存储区中删除已在移动设备数据库中删除的记录，应启用“[软删除]”。否则，你的应用程序应定期调用 `IMobileServiceSyncTable.PurgeAsync()` 以清除本地存储。
 
     请注意，推送和请求操作可能会发生 `MobileServicePushFailedException`。
 
@@ -161,8 +158,7 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 
 ## 摘要
 
-[AZURE.INCLUDE [mobile-services-offline-summary-csharp](../../includes/mobile-services-offline-summary-csharp.md)]
-
+[!INCLUDE [mobile-services-offline-summary-csharp](../../includes/mobile-services-offline-summary-csharp.md)]
 
 <!-- Anchors. -->
 [查看移动服务同步代码]: #review-offline
@@ -174,10 +170,10 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
 <!-- URLs. -->
 [使用移动服务脱机支持处理冲突]: /documentation/articles/mobile-services-xamarin-ios-handling-conflicts-offline-data/
 [处理脱机支持的移动服务与冲突]: /documentation/articles/mobile-services-xamarin-ios-handling-conflicts-offline-data/
-[Get started with Mobile Services（移动服务入门）]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started/
-[移动服务入门]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started/
+[Get started with Mobile Services（移动服务入门）]: ./partner-xamarin-mobile-services-ios-get-started.md
+[移动服务入门]: ./partner-xamarin-mobile-services-ios-get-started.md
 [如何使用适用于 Azure 移动服务的 Xamarin 组件客户端]: /documentation/articles/partner-xamarin-mobile-services-how-to-use-client-library/
-[软删除]: /documentation/articles/mobile-services-using-soft-delete/
+[软删除]: ./mobile-services-using-soft-delete.md
 
 [Azure 经典管理门户]: https://manage.windowsazure.cn
 

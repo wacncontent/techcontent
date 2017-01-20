@@ -1,10 +1,27 @@
-<properties linkid="" urlDisplayName="" pageTitle="MySQL服务问题 - Azure 微软云" metaKeywords="Azure 云,技术文档,文档与资源,MySQL,数据库,常见问题,主从复制,只读实例,Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS,FAQ" description="本文介绍了MySQL PasS主从复制和只读实例的实现方法。" metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: MySQL服务问题 - Azure 微软云
+metaKeywords: Azure 云,技术文档,文档与资源,MySQL,数据库,常见问题,主从复制,只读实例,Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS,FAQ
+description: 本文介绍了MySQL PasS主从复制和只读实例的实现方法。
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql" ms.date="09/23/2016" wacn.date="09/23/2016" wacn.lang="cn" />
+ms.service: mysql
+ms.date: 09/23/2016
+wacn.date: 09/23/2016
+wacn.lang: cn
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-read-replica/)
-- [English](/documentation/articles/mysql-database-enus-read-replica/)
+- [中文](./mysql-database-read-replica.md)
+- [English](./mysql-database-enus-read-replica.md)
 
 #MySQL主从复制和只读实例
 
@@ -16,7 +33,7 @@ MySQL Database on Azure支持用户使用复制功能为MySQL实例创建从属�
 
 >注意事项：
 >
->1. MySQL Database on Azure只支持为MySQL5.6及以上版本的主实例创建从属实例，不支持MySQL5.5。数据库升级问题请参见[常见问题与故障排除](https://www.azure.cn/documentation/articles/mysql-database-serviceinquiry/)。
+>1. MySQL Database on Azure只支持为MySQL5.6及以上版本的主实例创建从属实例，不支持MySQL5.5。数据库升级问题请参见[常见问题与故障排除](./mysql-database-serviceinquiry.md)。
 >
 >2. 从属实例和主实例的MySQL版本必须一致。MySQL Database on Azure不支持不同MySQL版本间的复制。
 >
@@ -34,7 +51,6 @@ MySQL Database on Azure支持用户使用复制功能为MySQL实例创建从属�
 >注意事项：
 >
 >由于在创建从属实例的过程中，MySQL Database on Azure会对主实例做备份，请确保此时主实例上没有需要长时间运行的查询或改动，从而避免备份失败。
-
 
 ##监控从属实例复制状态
 
@@ -123,8 +139,6 @@ MySQL Database on Azure支持用户使用复制功能为MySQL实例创建从属�
 	            	}
 	        	}
 	    }
-
-
 
 - PHP样例程序：
 

@@ -1,49 +1,45 @@
-<properties 
-	pageTitle="将 MongoChef 与具有 MongoDB 协议支持的 DocumentDB 帐户配合使用 | Azure" 
-	description="了解如何将 MongoChef 与具有 MongoDB 协议支持的 DocumentDB 帐户（目前以预览版提供）配合使用。" 
-	keywords="mongochef"
-	services="documentdb" 
-	authors="stephbaron" 
-	manager="jhubbard" 
-	editor="" 
-	documentationCenter=""/>
+---
+title: 将 MongoChef 与具有 MongoDB 协议支持的 DocumentDB 帐户配合使用 | Azure
+description: 了解如何将 MongoChef 与具有 MongoDB 协议支持的 DocumentDB 帐户（目前以预览版提供）配合使用。
+keywords: mongochef
+services: documentdb
+authors: stephbaron
+manager: jhubbard
+editor: 
+documentationCenter: 
 
-<tags 
-	ms.service="documentdb" 
-	ms.workload="data-services" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="08/25/2016" 
-	wacn.date="10/18/2016" 
-	ms.author="anhoh"/>  
-
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/25/2016
+wacn.date: 10/18/2016
+ms.author: anhoh
+---
 
 # 将 MongoChef 与具有 MongoDB 协议支持的 DocumentDB 帐户配合使用
 
 若要使用 MongoChef 连接到具有 MongoDB 协议支持的 Azure DocumentDB 帐户，必须：
 
 - 下载并安装 [MongoChef](http://3t.io/mongochef)
-- 提供具有 MongoDB 协议支持的 DocumentDB 帐户的[连接字符串](/documentation/articles/documentdb-connect-mongodb-account/)信息
+- 提供具有 MongoDB 协议支持的 DocumentDB 帐户的[连接字符串](./documentdb-connect-mongodb-account.md)信息
 
 ## 在 MongoChef 中创建连接  
 
 若要将具有 MongoDB 协议支持的 DocumentDB 帐户添加到 MongoChef 连接管理器，请执行以下步骤。
 
-1. 使用[此处](/documentation/articles/documentdb-connect-mongodb-account/)的指令检索具有 MongoDB 协议支持的 DocumentDB 的连接信息。
+1. 使用[此处](./documentdb-connect-mongodb-account.md)的指令检索具有 MongoDB 协议支持的 DocumentDB 的连接信息。
 
 	![连接字符串边栏选项卡的屏幕截图](./media/documentdb-mongodb-mongochef/ConnectionStringBlade.png)  
-
 
 2. 单击“连接”以打开“连接管理器”，然后单击“新建连接”
 
 	![MongoChef 连接管理器屏幕截图](./media/documentdb-mongodb-mongochef/ConnectionManager.png)  
 
-	
 2. 在“新建连接”窗口中的“服务器”选项卡上，输入具有 MongoDB 协议支持的 DocumentDB 帐户的主机 (FQDN) 和端口。
 	
 	![MongoChef 连接管理器服务器选项卡屏幕截图](./media/documentdb-mongodb-mongochef/ConnectionManagerServerTab.png)  
-
 
 3. 在“新建连接”窗口中的“身份验证”选项卡上，选择“标准(MONGODB-CR 或 SCARM-SHA-1)”身份验证模式，然后输入用户名和密码。接受默认的身份验证数据库（管理员），或提供自己的值。
 
@@ -96,7 +92,6 @@
     	"isRegistered": true
 		}
 
-	
 6. 添加另一个文档，但这次使用以下内容。
 
 		{
@@ -129,12 +124,9 @@
 
 	![Mongo Chef 查询结果的屏幕截图](./media/documentdb-mongodb-mongochef/QueryDocument1.png)
 	
-
 ## 后续步骤
 
-- 浏览具有 MongoDB 协议支持的 DocumentDB [示例](/documentation/articles/documentdb-mongodb-samples/)。
-- 阅读具有 MongoDB 协议支持的 DocumentDB [预览版开发指南](/documentation/articles/documentdb-mongodb-guidelines/)。
-
- 
+- 浏览具有 MongoDB 协议支持的 DocumentDB [示例](./documentdb-mongodb-samples.md)。
+- 阅读具有 MongoDB 协议支持的 DocumentDB [预览版开发指南](./documentdb-mongodb-guidelines.md)。
 
 <!---HONumber=Mooncake_1010_2016-->

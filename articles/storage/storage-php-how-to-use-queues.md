@@ -1,33 +1,34 @@
-<properties
-    pageTitle="如何通过 PHP 使用队列存储 | Azure"
-    description="了解如何使用 Azure 队列存储服务创建和删除队列，以及插入、获取和删除消息。示例用 PHP 编写。"
-    documentationcenter="php"
-    services="storage"
-    author="robinsh"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="7582b208-4851-4489-a74a-bb952569f55b"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="PHP"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="robinsh" />
+---
+title: 如何通过 PHP 使用队列存储 | Azure
+description: 了解如何使用 Azure 队列存储服务创建和删除队列，以及插入、获取和删除消息。示例用 PHP 编写。
+documentationcenter: php
+services: storage
+author: robinsh
+manager: timlt
+editor: tysonn
+
+ms.assetid: 7582b208-4851-4489-a74a-bb952569f55b
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: PHP
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: robinsh
+---
 
 # 如何通过 PHP 使用队列存储
 
-[AZURE.INCLUDE [storage-selector-queue-include](../../includes/storage-selector-queue-include.md)]
+[!INCLUDE [storage-selector-queue-include](../../includes/storage-selector-queue-include.md)]
 
 ## 概述
 
 本指南将演示如何使用 Azure 队列存储服务执行常见方案。这些示例使用来自 Windows SDK for PHP 中的类编写。介绍的方案包括插入、扫视、获取和删除队列消息以及创建和删除队列。
 
-[AZURE.INCLUDE [storage-queue-concepts-include](../../includes/storage-queue-concepts-include.md)]
+[!INCLUDE [storage-queue-concepts-include](../../includes/storage-queue-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建 PHP 应用程序
 
@@ -37,7 +38,7 @@
 
 ## 获取 Azure 客户端库
 
-[AZURE.INCLUDE [get-client-libraries](../../includes/get-client-libraries.md)]
+[!INCLUDE [get-client-libraries](../../includes/get-client-libraries.md)]
 
 ## 配置应用程序以访问队列存储
 
@@ -48,12 +49,11 @@
 
 下面的示例演示了如何包括 autoloader 文件并引用 **ServicesBuilder** 类。
 
-> [AZURE.NOTE]
+> [!NOTE]
 本示例（以及本文中的其他示例）假定你已通过 Composer 安装用于 Azure 的 PHP 客户端库。如果已手动安装这些库，则将需要引用 `WindowsAzure.php` autoloader 文件。
 
 	require_once 'vendor/autoload.php';
 	use WindowsAzure\Common\ServicesBuilder;
-
 
 在下面的示例中，将始终显示 `require_once` 语句，但只会引用执行该示例所需的类。
 
@@ -69,7 +69,6 @@
 
 	UseDevelopmentStorage=true
 
-
 若要创建任何 Azure 服务客户端，需要使用 **ServicesBuilder** 类。可使用以下方法之一：
 
 * 将连接字符串直接传递给它。
@@ -84,7 +83,6 @@
 	use WindowsAzure\Common\ServicesBuilder;
 
 	$queueRestProxy = ServicesBuilder::getInstance()->createQueueService($connectionString);
-
 
 ## 创建队列
 
@@ -117,8 +115,7 @@
 		echo $code.": ".$error_message."<br />";
 	}
 
-> [AZURE.NOTE] 不应依赖元数据密钥区分大小写的性质。以小写形式从服务中读取所有密钥。
-
+> [!NOTE] 不应依赖元数据密钥区分大小写的性质。以小写形式从服务中读取所有密钥。
 
 ## 向队列添加消息
 
@@ -372,7 +369,6 @@
 		echo $code.": ".$error_message."<br />";
 	}
 
-
 ## 后续步骤
 
 既已了解有关 Azure 队列存储的基础知识，可单击以下链接了解更复杂的存储任务。
@@ -381,7 +377,7 @@
 
 有关详细信息，另请参阅 [PHP 开发人员中心](/develop/php/)。
 
-[download]: /documentation/articles/php-download-sdk/
+[download]: ../php-download-sdk.md
 [require\_once]: http://www.php.net/manual/en/function.require-once.php
 [Azure Portal]: https://portal.azure.cn
 

@@ -1,27 +1,26 @@
-<properties
-    pageTitle="在 Azure App Service 中使用 ASP.NET Web API 和 SQL 数据库创建 REST 服务"
-    description="本教程将向你介绍如何通过使用 Visual Studio 将使用 ASP.NET Web API 的应用部署到 Azure Web 应用。"
-    services="app-service\web"
-    documentationcenter=".net"
-    author="Rick-Anderson"
-    writer="Rick-Anderson"
-    manager="wpickett"
-    editor="" />  
+---
+title: 在 Azure App Service 中使用 ASP.NET Web API 和 SQL 数据库创建 REST 服务
+description: 本教程将向你介绍如何通过使用 Visual Studio 将使用 ASP.NET Web API 的应用部署到 Azure Web 应用。
+services: app-service\web
+documentationcenter: .net
+author: Rick-Anderson
+writer: Rick-Anderson
+manager: wpickett
+editor: 
 
-<tags
-    ms.assetid="f4916fc0-ea08-41f7-846b-73e41bc88149"
-    ms.service="app-service-web"
-    ms.workload="web"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="02/29/2016"
-    wacn.date="12/05/2016"
-    ms.author="riande" />  
-
+ms.assetid: f4916fc0-ea08-41f7-846b-73e41bc88149
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 02/29/2016
+wacn.date: 12/05/2016
+ms.author: riande
+---
 
 # 在 Azure App Service 中使用 ASP.NET Web API 和 SQL 数据库创建 REST 服务
-本教程介绍如何使用 Visual Studio 2013 或 Visual Studio 2013 Community Edition 中的“发布 Web”向导将 ASP.NET Web 应用部署到 [Azure 应用服务](/documentation/articles/app-service-changes-existing-services/)。
+本教程介绍如何使用 Visual Studio 2013 或 Visual Studio 2013 Community Edition 中的“发布 Web”向导将 ASP.NET Web 应用部署到 [Azure 应用服务](./app-service-changes-existing-services.md)。
 
 你可以免费注册一个 Azure 帐户，而且，如果你还没有 Visual Studio 2013，此 SDK 会自动安装 Visual Studio 2013 for Web Express。这样你就可以免费使用 Azure 进行开发了。
 
@@ -39,11 +38,10 @@
 
 ![网站屏幕截图][intro001]  
 
-
 <a name="bkmk_setupdevenv">
 <!-- the next line produces the "Set up the development environment" section as see at /documentation/articles/web-sites-dotnet-get-started/ -->
 
-[AZURE.INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
+[!INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
 
 ### 创建项目
 1. 启动 Visual Studio 2013。
@@ -57,7 +55,6 @@
    
     ![无身份验证](./media/web-sites-dotnet-rest-service-aspnet-api-sql-database/GS13noauth.png)  
 
-   
     你要创建的示例应用程序没有需要用户登录的功能。有关如何实现身份验证和授权功能的信息，请参阅本教程末尾的[后续步骤](#nextsteps)部分。
 6. 在“新建 ASP.NET 项目”对话框中，确保“在云中托管”处于选中状态，然后单击“确定”。
 
@@ -67,7 +64,6 @@
 2. 如果你以前未创建过数据库服务器，请选择“创建新服务器”，并输入数据库用户名和密码。
    
     ![配置 Azure 网站](./media/web-sites-dotnet-rest-service-aspnet-api-sql-database/configAz.PNG)  
-
 
 如果你有数据库服务器，请使用它来创建新的数据库。数据库服务器是非常宝贵的资源，而且你通常会想要在同一台服务器上创建多个数据库来进行测试和开发，而不是在每个数据库中各创建一个数据库服务器。请确保你的网站和数据库位于相同区域中。
 
@@ -490,7 +486,6 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
     ![Web API 保存对话框][addwebapi006]
 
-
     你可以在记事本或浏览器中打开返回的联系人。
 
     此输出可由另一个应用程序（如移动 Web 页面或应用程序）使用。
@@ -667,21 +662,21 @@ XSRF 攻击不同于网络钓鱼攻击。网络钓鱼攻击需要与受害者进
 该应用程序现在是在云中运行，使用 SQL 数据库存储其数据。在 Azure 中测试应用程序完成后，将其删除。该应用程序是公开的且没有限制访问的机制。
 
 ##<a name="nextsteps"></a>后续步骤
-实际的应用程序需要身份验证和授权，你可以使用成员资格数据库实现此目的。教程[使用 OAuth、成员资格以及 SQL 数据库部署安全的 ASP.NET MVC 应用程序](/documentation/articles/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/)基于本教程，其中介绍了如何部署包含成员资格数据库的 Web 应用程序。
+实际的应用程序需要身份验证和授权，你可以使用成员资格数据库实现此目的。教程[使用 OAuth、成员资格以及 SQL 数据库部署安全的 ASP.NET MVC 应用程序](./web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database.md)基于本教程，其中介绍了如何部署包含成员资格数据库的 Web 应用程序。
 
 另一种在 Azure 应用程序中存储数据的方法是使用 Azure 存储，该方法以 Blob 和表的形式提供非关系数据存储。以下链接提供了更多有关 Web API、ASP.NET MVC 以及 Window Azure 的信息。
 
 * [使用 MVC 的 Entity Framework 入门][EFCodeFirstMVCTutorial]
 * [ASP.NET MVC 5 简介](http://www.asp.net/mvc/tutorials/mvc-5/introduction/getting-started)
 * [你的第一个 ASP.NET Web API](http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)
-* [调试 WAWS](/documentation/articles/web-sites-dotnet-troubleshoot-visual-studio/)
+* [调试 WAWS](./web-sites-dotnet-troubleshoot-visual-studio.md)
 
 本教程和示例应用程序由 [Rick Anderson](http://blogs.msdn.com/b/rickandy/) 在 Tom Dykstra 和 Barry Dorrans 的帮助下编写。
 
 请提供有关你喜欢的内容或者你希望看到改善的内容的反馈，不仅关于教程本身，也关于它所演示的产品。你的反馈将帮助我们确定优先改进哪些方面。我们特别希望确定大家对于对配置和部署成员资格数据库的流程进行更多自动化的兴趣有多大。
 
 ## 发生的更改
-* 有关从网站更改为应用服务的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](/documentation/articles/app-service-changes-existing-services/)
+* 有关从网站更改为应用服务的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 
 <!-- bookmarks -->
 [Add an OAuth Provider]: #addOauth
@@ -700,7 +695,6 @@ XSRF 攻击不同于网络钓鱼攻击。网络钓鱼攻击需要与受害者进
 <!-- links -->
 [EFCodeFirstMVCTutorial]: http://www.asp.net/mvc/tutorials/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application
 [dbcontext-link]: http://msdn.microsoft.com/zh-cn/library/system.data.entity.dbcontext(v=VS.103).aspx
-
 
 <!-- images-->
 

@@ -1,31 +1,31 @@
-<properties
-	pageTitle="为 Azure Resource Manager 中的虚拟机设置 WinRM 访问权限 | Azure"
-	description="如何设置要用于 Azure Resource Manager 虚拟机的 WinRM 访问权限"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="singhkay"
-	manager="drewm"
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: 为 Azure Resource Manager 中的虚拟机设置 WinRM 访问权限 | Azure
+description: 如何设置要用于 Azure Resource Manager 虚拟机的 WinRM 访问权限
+services: virtual-machines-windows
+documentationCenter: 
+authors: singhkay
+manager: drewm
+editor: 
+tags: azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="06/16/2016"
-	wacn.date="12/16/2016"
-	ms.author="singhkay"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 06/16/2016
+wacn.date: 12/16/2016
+ms.author: singhkay
+---
 
 # 为 Azure Resource Manager 中的虚拟机设置 WinRM 访问权限
 
 ## Azure 服务管理中的 WinRM 与 Azure Resource Manager
 
-> [AZURE.NOTE] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用资源管理器部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型
+> [!NOTE] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用资源管理器部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型
 
-* 有关 Azure Resource Manager 的概述，请参阅此[文章](/documentation/articles/resource-group-overview/)
-* 有关 Azure 服务管理和 Azure Resource Manager 之间的差异，请参阅此[文章](/documentation/articles/resource-manager-deployment-model/)
+* 有关 Azure Resource Manager 的概述，请参阅此[文章](../azure-resource-manager/resource-group-overview.md)
+* 有关 Azure 服务管理和 Azure Resource Manager 之间的差异，请参阅此[文章](../azure-resource-manager/resource-manager-deployment-model.md)
 
 在两个堆栈之间设置 WinRM 配置的主要差异是将证书安装到 VM 的方式。在 Azure Resource Manager 堆栈中，证书被建模为由密钥保管库资源提供程序管理的资源。因此，在 VM 中使用自己的证书之前，用户需要提供这些证书并将其上载到密钥保管库。
 
@@ -82,9 +82,8 @@
 
 预配 VM 时，Microsoft.Compute 资源提供程序需要指向密钥保管库中密钥的 URL。这将使 Microsoft.Compute 资源提供程序能够下载密钥，并在 VM 上创建等效证书。
 
->[AZURE.NOTE] 密钥 URL 需要同时包含版本。示例 URL 类似如下
+>[!NOTE] 密钥 URL 需要同时包含版本。示例 URL 类似如下
 https://contosovault.vault.chinacloudapi.cn:443/secrets/contososecret/01h9db0df2cd4300a20ence585a6s7ve
-
 
 #### 模板
 
@@ -140,7 +139,7 @@ https://contosovault.vault.chinacloudapi.cn:443/secrets/contososecret/01h9db0df2
 
 可在 [Github](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-winrm-keyvault-windows) 中找到此模板的源代码.
 
->[AZURE.NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 #### PowerShell
 
@@ -157,7 +156,7 @@ https://contosovault.vault.chinacloudapi.cn:443/secrets/contososecret/01h9db0df2
 
     Enable-PSRemoting -Force
 
->[AZURE.NOTE] 如果以上命令无效，可能需要确保 WinRM 服务正在运行。可使用 `Get-Service WinRM` 完成此操作
+>[!NOTE] 如果以上命令无效，可能需要确保 WinRM 服务正在运行。可使用 `Get-Service WinRM` 完成此操作
 
 设置完成后，即可使用以下命令连接到 VM
 

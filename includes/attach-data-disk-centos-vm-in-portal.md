@@ -4,7 +4,6 @@
 
 	将显示“附加空磁盘”对话框。
 
-
 3. 已经为你定义了“虚拟机名称”、“存储位置”和“文件名”。您只需要输入所需的磁盘大小。在“大小”字段中键入“5”。
 
 	![附加空磁盘][Image2]
@@ -22,7 +21,6 @@
 
 1. 预配虚拟机后，使用 SSH 或 PuTTY 进行连接，并作为 **newuser** 进行登录（如上述步骤中所述）。	
 
-
 2. 在 SSH 或 PuTTY 窗口中，键入以下命令，然后输入帐户密码：
 
 	`$ sudo grep SCSI /var/log/messages`
@@ -31,31 +29,25 @@
 
 	![GREP][Image4]
 
-
 3. 在 SSH 或 PuTTY 窗口中，输入以下命令，对磁盘 **/dev/sdc** 进行分区：
 
 	`$ sudo fdisk /dev/sdc`
-
 
 4. 输入 **n** 新建一个分区。
 
 	![FDISK][Image5]
 
-
 5. 键入 **p** 将该分区设置为主分区，键入 **1** 将其设置为第一分区，然后按 Enter 以接受默认分区值 (1)。
 
 	![FDISK][Image6]
-
 
 6. 键入 **p** 以查看有关分区磁盘的详细信息。
 
 	![FDISK][Image7]
 
-
 7. 键入“w”以写入磁盘的设置。
 
 	![FDISK][Image8]
-
 
 8. 使用 **mkfs** 命令格式化新磁盘：
 
@@ -65,13 +57,11 @@
 
 	`sudo mkdir /datadrive`
 
-
 10. 键入下面的命令以安装驱动器：
 
 	`sudo mount /dev/sdc1 /datadrive`
 
 	数据磁盘现在可以作为 /datadrive 使用。
-
 
 11. 将新驱动器添加到 /etc/fstab：
 
@@ -85,7 +75,7 @@
 		`/dev/sdb1: UUID="22222222-2b2b-2c2c-2d2d-2e2e2e2e2e2e" TYPE="ext4"`
 		`/dev/sdc1: UUID="33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e" TYPE="ext4"`
 
-	>[AZURE.NOTE]Blkid 可能不是在所有情况下都需要 sudo 访问权限，不过，如果 /sbin 或 /usr/sbin 不在你的 `$PATH` 中，则在某些分发上使用 `sudo -i` 运行可能更为容易。
+	>[!NOTE]Blkid 可能不是在所有情况下都需要 sudo 访问权限，不过，如果 /sbin 或 /usr/sbin 不在你的 `$PATH` 中，则在某些分发上使用 `sudo -i` 运行可能更为容易。
 
 	**警告：**错误地编辑 /etc/fstab 文件可能会导致系统无法引导。如果没有把握，请参考分发的文档来获取有关如何正确编辑该文件的信息。另外，建议在编辑之前创建 /etc/fstab 文件的备份。
 
@@ -102,9 +92,7 @@
 
 	如果第二个命令产生错误，请检查 /etc/fstab 文件的语法是否正确。
 
-
-	>[AZURE.NOTE]之后，在不编辑 fstab 的情况下删除数据磁盘可能会导致 VM 无法引导。如果这是一种常见情况，则请注意，大多数分发都提供了 `nofail` 和/或 `nobootwait` fstab 选项，这些选项使系统在磁盘不存在时也能引导。有关这些参数的详细信息，请查阅您的分发文档。
-
+	>[!NOTE]之后，在不编辑 fstab 的情况下删除数据磁盘可能会导致 VM 无法引导。如果这是一种常见情况，则请注意，大多数分发都提供了 `nofail` 和/或 `nobootwait` fstab 选项，这些选项使系统在磁盘不存在时也能引导。有关这些参数的详细信息，请查阅您的分发文档。
 
 [Image2]: ./media/attach-data-disk-centos-vm-in-portal/AttachDataDiskLinuxVM2.png
 [Image4]: ./media/attach-data-disk-centos-vm-in-portal/GrepScsiMessages.png

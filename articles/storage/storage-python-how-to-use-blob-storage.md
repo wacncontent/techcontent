@@ -1,33 +1,34 @@
-<properties
-    pageTitle="如何通过 Python 使用 Azure Blob 存储（对象存储）| Azure"
-    description="使用 Azure Blob 存储（对象存储）将非结构化数据存储在云中。"
-    services="storage"
-    documentationcenter="python"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="0348e360-b24d-41fa-bb12-b8f18990d8bc"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="python"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 如何通过 Python 使用 Azure Blob 存储（对象存储）| Azure
+description: 使用 Azure Blob 存储（对象存储）将非结构化数据存储在云中。
+services: storage
+documentationcenter: python
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: 0348e360-b24d-41fa-bb12-b8f18990d8bc
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 如何通过 Python 使用 Azure Blob 存储
-[AZURE.INCLUDE [storage-selector-blob-include](../../includes/storage-selector-blob-include.md)]
+[!INCLUDE [storage-selector-blob-include](../../includes/storage-selector-blob-include.md)]
 
 ## 概述
 Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中的服务。Blob 存储可以存储任何类型的文本或二进制数据，例如文档、媒体文件或应用程序安装程序。Blob 存储也称为对象存储。
 
 本指南将演示如何使用 Blob 存储执行常见方案。这些示例通过 Python 编写并使用 [Azure Storage SDK for Python]。涉及的任务包括上传、列出、下载和删除 Blob。
 
-[AZURE.INCLUDE [storage-blob-concepts-include](../../includes/storage-blob-concepts-include.md)]
+[!INCLUDE [storage-blob-concepts-include](../../includes/storage-blob-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建容器
 根据要使用的 Blob 的类型，创建 **BlockBlobService**、**AppendBlobService** 或 **PageBlobService** 对象。以下代码使用 **BlockBlobService** 对象。在希望在其中以编程方式访问 Azure 块 Blob 存储的任何 Python 文件中，将以下代码添加到文件的顶部附近。
@@ -38,7 +39,7 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 
 	block_blob_service = BlockBlobService(account_name='myaccount', account_key='mykey', endpoint_suffix='core.chinacloudapi.cn')
 
-[AZURE.INCLUDE [storage-container-naming-rules-include](../../includes/storage-container-naming-rules-include.md)]
+[!INCLUDE [storage-container-naming-rules-include](../../includes/storage-container-naming-rules-include.md)]
 
 在以下代码示例中，如果容器不存在，可以使用 **BlockBlobService** 对象来创建它。
 

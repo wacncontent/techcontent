@@ -1,24 +1,22 @@
-<properties
-	pageTitle="创建多个虚拟机 | Azure"
-	description="用于在 Windows 上创建多个虚拟机的选项"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="gbowerman"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 创建多个虚拟机 | Azure
+description: 用于在 Windows 上创建多个虚拟机的选项
+services: virtual-machines-windows
+documentationCenter: 
+authors: gbowerman
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/25/2016"
-	wacn.date="01/05/2017"
-	ms.author="guybo"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/25/2016
+wacn.date: 01/05/2017
+ms.author: guybo
+---
 
 # 创建多个 Azure 虚拟机
 
@@ -48,6 +46,6 @@
 
 VM 规模集可以集中配置网络、存储、虚拟机和扩展属性，不需将多个资源（例如 NIC 和 VM）关联在一起。
 
-如需 VM 规模集的简介，请参阅[虚拟机规模集产品页](/home/features/virtual-machine-scale-sets/)。有关详细信息，请访问[虚拟机规模集文档](/documentation/services/virtual-machine-scale-sets/)。
+如需 VM 规模集的简介，请参阅[虚拟机规模集产品页](https://www.azure.cn/home/features/virtual-machine-scale-sets/)。有关详细信息，请访问[虚拟机规模集文档](../virtual-machine-scale-sets/index.md/)。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

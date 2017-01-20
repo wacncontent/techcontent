@@ -1,38 +1,37 @@
-<properties
-    pageTitle="使用 Azure CLI 和模板部署资源 | Azure"
-    description="使用 Azure Resource Manager 和 Azure CLI 将资源部署到 Azure。资源在 Resource Manager 模板中定义。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: 使用 Azure CLI 和模板部署资源 | Azure
+description: 使用 Azure Resource Manager 和 Azure CLI 将资源部署到 Azure。资源在 Resource Manager 模板中定义。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="493b7932-8d1e-4499-912c-26098282ec95"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/16/2016"
-    wacn.date="01/03/2017"
-    ms.author="tomfitz" />  
-
+ms.assetid: 493b7932-8d1e-4499-912c-26098282ec95
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/16/2016
+wacn.date: 01/03/2017
+ms.author: tomfitz
+---
 
 # 使用 Resource Manager 模板和 Azure CLI 部署资源
-> [AZURE.SELECTOR]
-* [Azure PowerShell](/documentation/articles/powershell-azure-resource-manager/)
-* [Azure CLI](/documentation/articles/xplat-cli-azure-resource-manager/)
-* [门户](/documentation/articles/resource-group-portal/)
-* [REST API](/documentation/articles/resource-manager-rest-api/)
+> [!div class="op_single_selector"]
+* [Azure PowerShell](./powershell-azure-resource-manager.md)
+* [Azure CLI](./xplat-cli-azure-resource-manager.md)
+* [门户](./resource-group-portal.md)
+* [REST API](./resource-manager-rest-api.md)
 
 本主题介绍如何将 Azure CLI 与 Resource Manager 模板配合使用向 Azure 部署资源。你的模板可以是本地文件或是可通过 URI 访问的外部文件。如果模板驻留在存储帐户中，你可以限制对该模板的访问，并在部署过程中提供共享访问签名 (SAS) 令牌。
 
-> [AZURE.TIP]
+> [!TIP]
 有关在部署过程中调试错误的帮助，请参阅：
 > 
-> * [使用 Azure CLI 查看部署操作](/documentation/articles/resource-manager-troubleshoot-deployments-cli/)，了解如何获取有助于排查错误的信息
-> * [排查使用 Azure Resource Manager 将资源部署到 Azure 时的常见错误](/documentation/articles/resource-manager-common-deployment-errors/)，了解如何解决常见的部署错误
+> * [使用 Azure CLI 查看部署操作](./resource-manager-troubleshoot-deployments-cli.md)，了解如何获取有助于排查错误的信息
+> * [排查使用 Azure Resource Manager 将资源部署到 Azure 时的常见错误](./resource-manager-common-deployment-errors.md)，了解如何解决常见的部署错误
 > 
 > 
 
@@ -44,10 +43,10 @@
 
 这些命令创建资源组，并将模板部署到该资源组。模板文件和参数文件都是本地文件。如果该操作成功，则一切准备就绪，可以部署资源了。不过，可以使用更多选项来指定要部署的资源。本文其余部分介绍了部署过程中可用的所有选项。
 
-[AZURE.INCLUDE [resource-manager-deployments](../../includes/resource-manager-deployments.md)]
+[!INCLUDE [resource-manager-deployments](../../includes/resource-manager-deployments.md)]
 
 ## <a name="deploy"></a> 部署
-如果你以前没有对资源管理器使用过 Azure CLI，请参阅[将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure 资源管理配合使用](/documentation/articles/xplat-cli-azure-resource-manager/)。
+如果你以前没有对资源管理器使用过 Azure CLI，请参阅[将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure 资源管理配合使用](./xplat-cli-azure-resource-manager.md)。
 
 1. 登录到你的 Azure 帐户。提供凭据后，该命令将返回你的登录结果。
 
@@ -104,7 +103,7 @@
 ## 使用 SAS 令牌从存储空间部署模板
 可以将模板添加到存储帐户，并在部署过程中使用 SAS 令牌链接到这些模板。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 通过执行以下步骤，只有帐户所有者可以访问包含模板的 blob。但是，如果为 blob 创建 SAS 令牌，则拥有该 URI 的任何人都可以访问 blob。如果其他用户截获了该 URI，则此用户可以访问该模板。使用 SAS 令牌是限制对模板的访问的好方法，但不应直接在模板中包括密码等敏感数据。
 
 ### 将专用模板添加到存储帐户
@@ -143,7 +142,7 @@
 
         azure group deployment create --template-uri $fullurl -g ExampleResourceGroup
 
-有关将 SAS 令牌与链接模板配合使用的示例，请参阅[将已链接的模版与 Azure Resource Manager 配合使用](/documentation/articles/resource-group-linked-templates/)。
+有关将 SAS 令牌与链接模板配合使用的示例，请参阅[将已链接的模版与 Azure Resource Manager 配合使用](./resource-group-linked-templates.md)。
 
 ## <a name="parameters"></a> 参数
 
@@ -157,14 +156,14 @@
 
       azure group deployment create -f "c:\MyTemplates\example.json" -e "c:\MyTemplates\example.params.json" -g ExampleResourceGroup -n ExampleDeployment
 
-[AZURE.INCLUDE [resource-manager-parameter-file](../../includes/resource-manager-parameter-file.md)]
+[!INCLUDE [resource-manager-parameter-file](../../includes/resource-manager-parameter-file.md)]
 
 ## 后续步骤
-* 有关通过 .NET 客户端库部署资源的示例，请参阅 [Deploy resources using .NET libraries and a template](/documentation/articles/virtual-machines-windows-csharp-template/)（使用 .NET 库和模板部署资源）。
-* 若要在模板中定义参数，请参阅[创作模板](/documentation/articles/resource-group-authoring-templates/#parameters)。
-* 有关将解决方案部署到不同环境的指南，请参阅 [Azure 中的开发和测试环境](/documentation/articles/solution-dev-test-environments/)。
-* 有关使用 KeyVault 引用来传递安全值的详细信息，请参阅[在部署期间传递安全值](/documentation/articles/resource-manager-keyvault-parameter/)。
-* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](/documentation/articles/resource-manager-subscription-governance/)。
-* 有关自动化部署的四部分系列教程，请参阅[将应用程序自动部署到 Azure 虚拟机](/documentation/articles/virtual-machines-windows-dotnet-core-1-landing/)。此系列教程介绍了应用程序体系结构、访问与安全性、可用性与缩放性，以及应用程序部署。
+* 有关通过 .NET 客户端库部署资源的示例，请参阅 [Deploy resources using .NET libraries and a template](../virtual-machines/virtual-machines-windows-csharp-template.md)（使用 .NET 库和模板部署资源）。
+* 若要在模板中定义参数，请参阅[创作模板](./resource-group-authoring-templates.md#parameters)。
+* 有关将解决方案部署到不同环境的指南，请参阅 [Azure 中的开发和测试环境](./solution-dev-test-environments.md)。
+* 有关使用 KeyVault 引用来传递安全值的详细信息，请参阅[在部署期间传递安全值](./resource-manager-keyvault-parameter.md)。
+* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](./resource-manager-subscription-governance.md)。
+* 有关自动化部署的四部分系列教程，请参阅[将应用程序自动部署到 Azure 虚拟机](../virtual-machines/virtual-machines-windows-dotnet-core-1-landing.md)。此系列教程介绍了应用程序体系结构、访问与安全性、可用性与缩放性，以及应用程序部署。
 
 <!---HONumber=Mooncake_1219_2016-->

@@ -1,20 +1,17 @@
-<properties 
-	pageTitle="Azure 提供的计算托管选项" 
-	description="了解 Azure 计算托管选项及其工作原理：虚拟机、 Web 应用、云服务，等等。" 
-	headerExpose="" 
-	footerExpose="" 
-	services="cloud-services,virtual-machines"
-	authors="Thraka" 
-	documentationCenter=""
-	manager="timlt"/>
+---
+title: Azure 提供的计算托管选项
+description: 了解 Azure 计算托管选项及其工作原理：虚拟机、 Web 应用、云服务，等等。
+headerExpose: 
+footerExpose: 
+services: cloud-services,virtual-machines
+authors: Thraka
+documentationCenter: 
+manager: timlt
 
-<tags 
-	ms.service="multiple" 
-	ms.date="09/08/2015" 
-	wacn.date="01/21/2016"/>
-
-
-
+ms.service: multiple
+ms.date: 09/08/2015
+wacn.date: 01/21/2016
+---
 
 # Azure 提供的计算托管选项
 
@@ -27,30 +24,30 @@ Azure 提供了用于运行应用程序的不同托管模型。每种模型提�
 | [虚拟机] | 可完全控制操作系统的自定义 Windows 和 Linux VM |
 
 <a name="tellmeas"></a>
-[AZURE.INCLUDE [内容](../../includes/app-service-choose-me-content.md)]
+[!INCLUDE [内容](../../includes/app-service-choose-me-content.md)]
 
 <a name="tellmecs"></a>
-[AZURE.INCLUDE [内容](../../includes/cloud-services-choose-me-content.md)]
+[!INCLUDE [内容](../../includes/cloud-services-choose-me-content.md)]
 
 <a name="tellmevm"></a>
-[AZURE.INCLUDE [内容](../../includes/virtual-machines-choose-me-content.md)]
+[!INCLUDE [内容](../../includes/virtual-machines-choose-me-content.md)]
 
 ## 其他选项
 
 Azure 还针对更特殊的用途提供其他计算托管模型，例如：
 
-* [移动服务](/documentation/services/mobile-services/)  
+* [移动服务](./mobile-services/index.md/)  
   适用于移动设备上运行的应用的云后端优化模型。
-* [Batch](/documentation/services/batch/)  
+* [Batch](./batch/index.md/)  
   适用于处理大量类似任务的优化模型，特别适用于本身在多台计算机上以并行任务形式运行的工作负荷。
-* [HDInsight (Hadoop)](/documentation/services/hdinsight/)  
+* [HDInsight (Hadoop)](./hdinsight/index.md/)  
   适用于在 Hadoop 群集上运行 [MapReduce](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/data-storage-options/#hadoop) 作业的优化模型。 
 
 ## 我该使用哪一种？ 做出选择
 
 所有三种通用型 Azure 计算托管模型都可让你在云中构建可缩放、可靠的应用程序。既然在本质上是类似的，你应该使用哪种模型呢？
 
-App Service 是大多数 Web 应用的最佳选择。部署和管理都已集成到平台，站点可以快速缩放以应对高流量负载，而内置的负载均衡和流量管理器可提供高可用性。可以使用[联机迁移工具](https://www.migratetoazure.net/)轻松将现有站点转移到 Azure App Service，使用 Web 应用库中的开放源代码应用，或使用选择的框架和工具创建新站点。[Web 作业](/documentation/articles/websites-webjobs-resources/)功能可让你轻松为应用添加后台作业处理，甚至还能运行根本不是 Web 应用的计算工作负荷。
+App Service 是大多数 Web 应用的最佳选择。部署和管理都已集成到平台，站点可以快速缩放以应对高流量负载，而内置的负载均衡和流量管理器可提供高可用性。可以使用[联机迁移工具](https://www.migratetoazure.net/)轻松将现有站点转移到 Azure App Service，使用 Web 应用库中的开放源代码应用，或使用选择的框架和工具创建新站点。[Web 作业](./app-service-web/websites-webjobs-resources.md)功能可让你轻松为应用添加后台作业处理，甚至还能运行根本不是 Web 应用的计算工作负荷。
 
 如果你需要加强控制 Web 服务器环境，例如想要远程登录服务器或配置服务器启动任务，Azure 云服务通常是最佳选择。
 
@@ -75,8 +72,8 @@ As the figure illustrates, the Cloud Services VMs run in a separate cloud servic
 
 ## 后续步骤
 
-* [比较](/documentation/articles/choose-web-site-cloud-service-vm/) App Service、云服务和虚拟机
-* 了解有关[云服务](/documentation/services/cloud-services/)的详细信息
-* 了解有关[虚拟机](/documentation/articles/virtual-machines-linux-azure-overview/)的详细信息 
+* [比较](./app-service-web/choose-web-site-cloud-service-vm.md) App Service、云服务和虚拟机
+* 了解有关[云服务](./cloud-services/index.md/)的详细信息
+* 了解有关[虚拟机](./virtual-machines/virtual-machines-linux-azure-overview.md)的详细信息 
 
 <!---HONumber=74-->

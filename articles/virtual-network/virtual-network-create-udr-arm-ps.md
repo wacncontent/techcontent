@@ -1,43 +1,42 @@
-<properties
-    pageTitle="使用 PowerShell 控制路由和虚拟设备 | Azure"
-    description="了解如何使用 PowerShell 控制路由和虚拟设备。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 PowerShell 控制路由和虚拟设备 | Azure
+description: 了解如何使用 PowerShell 控制路由和虚拟设备。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="9582fdaa-249c-4c98-9618-8c30d496940f"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/23/2016"
-    wacn.date="12/26/2016"
-    ms.author="jdial" />  
-
+ms.assetid: 9582fdaa-249c-4c98-9618-8c30d496940f
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/23/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 使用 PowerShell 创建用户定义的路由 (UDR)
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/virtual-network-create-udr-arm-ps/)
-- [Azure CLI](/documentation/articles/virtual-network-create-udr-arm-cli/)
-- [模板](/documentation/articles/virtual-network-create-udr-arm-template/)
-- [PowerShell（经典）](/documentation/articles/virtual-network-create-udr-classic-ps/)
-- [CLI（经典）](/documentation/articles/virtual-network-create-udr-classic-cli/)
+> [!div class="op_single_selector"]
+- [PowerShell](./virtual-network-create-udr-arm-ps.md)
+- [Azure CLI](./virtual-network-create-udr-arm-cli.md)
+- [模板](./virtual-network-create-udr-arm-template.md)
+- [PowerShell（经典）](./virtual-network-create-udr-classic-ps.md)
+- [CLI（经典）](./virtual-network-create-udr-classic-cli.md)
 
-[AZURE.INCLUDE [virtual-network-create-udr-intro-include.md](../../includes/virtual-network-create-udr-intro-include.md)]
+[!INCLUDE [virtual-network-create-udr-intro-include.md](../../includes/virtual-network-create-udr-intro-include.md)]
 
-> [AZURE.IMPORTANT]
-在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源前，请确保了解[部署模型和工具](/documentation/articles/resource-manager-deployment-model/)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍 Resource Manager 部署模型。还可[在经典部署模型中创建 UDR](/documentation/articles/virtual-network-create-udr-classic-ps/)。
+> [!IMPORTANT]
+在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源前，请确保了解[部署模型和工具](../azure-resource-manager/resource-manager-deployment-model.md)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍 Resource Manager 部署模型。还可[在经典部署模型中创建 UDR](./virtual-network-create-udr-classic-ps.md)。
 
-[AZURE.INCLUDE [virtual-network-create-udr-scenario-include.md](../../includes/virtual-network-create-udr-scenario-include.md)]
+[!INCLUDE [virtual-network-create-udr-scenario-include.md](../../includes/virtual-network-create-udr-scenario-include.md)]
 
 下面的示例 PowerShell 命令需要基于上述方案创建的简单环境。若要运行本文档中所显示的命令，请首先通过部署[此模板](http://github.com/telmosampaio/azure-templates/tree/master/IaaS-NSG-UDR-Before)构建测试环境，单击“部署至 Azure”，根据需要替换默认参数值，然后按照门户中的说明进行操作。
 
-[AZURE.INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
+[!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
 ## 为前端子网创建 UDR
 若要根据上述方案为前端子网创建所需的路由表和路由，请完成以下步骤：
@@ -62,7 +61,7 @@
         Set-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name FrontEnd `
         -AddressPrefix 192.168.1.0/24 -RouteTable $routeTable
 
-    > [AZURE.WARNING]
+    > [!WARNING]
     上述命令的输出显示虚拟网络配置对象的内容，该对象仅存在于运行 PowerShell 的计算机上。若要将这些设置保存到 Azure，需要运行 **Set-AzureVirtualNetwork** cmdlet。
     > 
 

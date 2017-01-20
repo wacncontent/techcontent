@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Active Directory 身份验证和 Resource Manager | Azure"
-    description="指导开发人员使用 Azure Resource Manager API 和 Active Directory 进行身份验证，将应用集成到其他 Azure 订阅。"
-    services="azure-resource-manager,active-directory"
-    documentationcenter="na"
-    author="dushyantgill"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: Active Directory 身份验证和 Resource Manager | Azure
+description: 指导开发人员使用 Azure Resource Manager API 和 Active Directory 进行身份验证，将应用集成到其他 Azure 订阅。
+services: azure-resource-manager,active-directory
+documentationcenter: na
+author: dushyantgill
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="17b2b40d-bf42-4c7d-9a88-9938409c5088"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="08/31/2016"
-    wacn.date="12/26/2016"
-    ms.author="dugill;tomfitz" />
+ms.assetid: 17b2b40d-bf42-4c7d-9a88-9938409c5088
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 08/31/2016
+wacn.date: 12/26/2016
+ms.author: dugill;tomfitz
+---
 
 # 如何使用 Azure Active Directory 与 Resource Manager 管理客户的资源
 ## 介绍
@@ -85,7 +85,7 @@ Web 应用：
 ### 可选配置 - 证书凭据
 Azure AD 还支持应用程序的证书凭据：创建自签名证书、保留私钥，以及将公钥添加到 Azure AD 应用程序注册。对于身份验证，应用程序会使用你的私钥将小负载发送到签名的 Azure AD，然后 Azure AD 使用注册的公钥来验证签名。
 
-有关使用证书创建 AD 应用的信息，请参阅 [Use Azure PowerShell to create a service principal to access resources](/documentation/articles/resource-group-authenticate-service-principal/#create-service-principal-with-certificate)（使用 Azure PowerShell 创建服务主体来访问资源）或 [Use Azure CLI to create a service principal to access resources](/documentation/articles/resource-group-authenticate-service-principal-cli/#create-service-principal-with-certificate)（使用 Azure CLI 创建服务主体来访问资源）。
+有关使用证书创建 AD 应用的信息，请参阅 [Use Azure PowerShell to create a service principal to access resources](./resource-group-authenticate-service-principal.md#create-service-principal-with-certificate)（使用 Azure PowerShell 创建服务主体来访问资源）或 [Use Azure CLI to create a service principal to access resources](./resource-group-authenticate-service-principal-cli.md#create-service-principal-with-certificate)（使用 Azure CLI 创建服务主体来访问资源）。
 
 ## 从订阅 ID 获取租户 ID
 若要请求可用于调用 Resource Manager 的令牌，应用程序需要知道托管 Azure 订阅的 Azure AD 租户的租户 ID。用户可能知道其订阅 ID，但不知道其用于 Active Directory 的租户 ID。若要获取用户的租户 ID，请让用户提供订阅 ID。发送有关订阅的请求时，请提供该订阅 ID：
@@ -97,14 +97,14 @@ Azure AD 还支持应用程序的证书凭据：创建自签名证书、保留�
 ## 获取用户和应用访问令牌
 应用程序使用 OAuth 2.0 授权请求将用户重定向到 Azure AD - 以验证用户的凭据并取回授权代码。应用程序使用授权代码来访问 Resource Manager 的令牌。[ConnectSubscription](https://github.com/dushyantgill/VipSwapper/blob/master/CloudSense/CloudSense/Controllers/HomeController.cs#L42) 方法创建授权请求。
 
-本主题说明用于对用户进行身份验证的 REST API 请求。也可以使用帮助库在代码中执行身份验证。有关这些库的详细信息，请参阅 [Azure Active Directory Authentication Libraries](/documentation/articles/active-directory-authentication-libraries/)（Azure Active Directory 身份验证库）。有关在应用程序中集成标识管理的指导，请参阅 [Azure Active Directory developer's guide](/documentation/articles/active-directory-developers-guide/)（Azure Active Directory 开发人员指南）。
+本主题说明用于对用户进行身份验证的 REST API 请求。也可以使用帮助库在代码中执行身份验证。有关这些库的详细信息，请参阅 [Azure Active Directory Authentication Libraries](../active-directory/active-directory-authentication-libraries.md)（Azure Active Directory 身份验证库）。有关在应用程序中集成标识管理的指导，请参阅 [Azure Active Directory developer's guide](../active-directory/active-directory-developers-guide.md)（Azure Active Directory 开发人员指南）。
 
 ### 授权请求 (OAuth 2.0)
 将 Open ID Connect/OAuth2.0 授权请求发送到 Azure AD 授权终结点：
 
     https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Authorize
 
-[request an authorization code](/documentation/articles/active-directory-protocols-oauth-code/#request-an-authorization-code)（请求授权代码）主题中介绍了适用于此请求的查询字符串参数。
+[request an authorization code](../active-directory/active-directory-protocols-oauth-code.md#request-an-authorization-code)（请求授权代码）主题中介绍了适用于此请求的查询字符串参数。
 
 以下示例演示如何请求 OAuth2.0 授权：
 
@@ -117,7 +117,7 @@ Azure AD 对用户进行身份验证，并根据需要请求用户向应用授�
 ### 授权请求 (Open ID Connect)
 如果不只想要代表用户访问 Azure Resource Manager，而且还要允许用户使用其 Azure AD 帐户登录你的应用程序，请发出 Open ID Connect 授权请求。使用 Open ID Connect，应用程序也可以从 Azure AD 接收 id\_token，应用可以使用它来将用户登录。
 
-[Send the sign-in request](/documentation/articles/active-directory-protocols-openid-connect-code/#send-the-sign-in-request)（发送登录请求）主题中介绍了适用于此请求的查询字符串参数。
+[Send the sign-in request](../active-directory/active-directory-protocols-openid-connect-code.md#send-the-sign-in-request)（发送登录请求）主题中介绍了适用于此请求的查询字符串参数。
 
 下面是一个示例 Open ID Connect 请求：
 
@@ -134,7 +134,7 @@ Azure AD 对用户进行身份验证，并根据需要请求用户向应用授�
 
     https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Token
 
-[use the authorization code](/documentation/articles/active-directory-protocols-oauth-code/#use-the-authorization-code-to-request-an-access-token)（使用授权代码）主题中介绍了适用于此请求的查询字符串参数。
+[use the authorization code](../active-directory/active-directory-protocols-oauth-code.md#use-the-authorization-code-to-request-an-access-token)（使用授权代码）主题中介绍了适用于此请求的查询字符串参数。
 
 以下示例演示如何使用密码凭据来请求代码授予令牌：
 
@@ -145,7 +145,7 @@ Azure AD 对用户进行身份验证，并根据需要请求用户向应用授�
 
     grant_type=authorization_code&code=AAABAAAAiL9Kn2Z*****L1nVMH3Z5ESiAA&redirect_uri=http%3A%2F%2Flocalhost%3A62080%2FAccount%2FSignIn&client_id=a0448380-c346-4f9f-b897-c18733de9394&client_secret=olna84E8*****goScOg%3D
 
-使用证书凭据时，请使用应用程序证书凭据的私钥来创建 JSON Web 令牌 (JWT) 并签名 (RSA SHA256)。令牌的声明类型在 [JWT 令牌声明](/documentation/articles/active-directory-protocols-oauth-code/#jwt-token-claims)中显示。请参考 [Active Directory Auth Library (.NET) code](https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/blob/dev/src/ADAL.PCL.Desktop/CryptographyHelper.cs)（Active Directory 身份验证库 (.NET) 代码）来为客户端断言 JWT 令牌签名。
+使用证书凭据时，请使用应用程序证书凭据的私钥来创建 JSON Web 令牌 (JWT) 并签名 (RSA SHA256)。令牌的声明类型在 [JWT 令牌声明](../active-directory/active-directory-protocols-oauth-code.md#jwt-token-claims)中显示。请参考 [Active Directory Auth Library (.NET) code](https://github.com/AzureAD/azure-activedirectory-library-for-dotnet/blob/dev/src/ADAL.PCL.Desktop/CryptographyHelper.cs)（Active Directory 身份验证库 (.NET) 代码）来为客户端断言 JWT 令牌签名。
 
 有关客户端身份验证的详细信息，请参阅 [Open ID Connect spec](http://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication)（Open ID Connect 规范）。
 
@@ -169,7 +169,7 @@ Azure AD 对用户进行身份验证，并根据需要请求用户向应用授�
 
     https://login.chinacloudapi.cn/{tenant-id}/OAuth2/Token
 
-[refreshing the access token](/documentation/articles/active-directory-protocols-oauth-code/#refreshing-the-access-tokens)（刷新访问令牌）中介绍了要在刷新请求中使用的参数。
+[refreshing the access token](../active-directory/active-directory-protocols-oauth-code.md#refreshing-the-access-tokens)（刷新访问令牌）中介绍了要在刷新请求中使用的参数。
 
 以下示例演示如何使用刷新令牌：
 
@@ -224,7 +224,7 @@ ASP.NET MVC 示例应用的 [UserCanManagerAccessForSubscription](https://github
 
 ASP.net MVC 示例应用程序的 [GetObjectIdOfServicePrincipalInOrganization](https://github.com/dushyantgill/VipSwapper/blob/master/CloudSense/CloudSense/AzureADGraphAPIUtil.cs) 方法使用适用于 .NET 的 Active Directory 身份验证库来获取图形 API 的仅限应用的访问令牌。
 
-[Request an Access Token](/documentation/articles/active-directory-protocols-oauth-service-to-service/#request-an-access-token)（请求访问令牌）主题中介绍了适用于此请求的查询字符串参数。
+[Request an Access Token](../active-directory/active-directory-protocols-oauth-service-to-service.md#request-an-access-token)（请求访问令牌）主题中介绍了适用于此请求的查询字符串参数。
 
 客户端凭据授予令牌的示例请求：
 

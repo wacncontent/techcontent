@@ -1,23 +1,22 @@
-<properties 
-	pageTitle="使用 Windows PowerShell 管理基于角色的访问控制" 
-	description="使用 Windows PowerShell 管理基于角色的访问控制" 
-	services="azure-portal" 
-	documentationCenter="na" 
-	authors="IHenkel"
-	manager="stevenpo"
-	editor="mollybos"/>
+---
+title: 使用 Windows PowerShell 管理基于角色的访问控制
+description: 使用 Windows PowerShell 管理基于角色的访问控制
+services: azure-portal
+documentationCenter: na
+authors: IHenkel
+manager: stevenpo
+editor: mollybos
 
-<tags 
-	ms.service="azure-portal" 
-	ms.date="08/14/2015"
-	wacn.date="12/15/2015"/>
+ms.service: azure-portal
+ms.date: 08/14/2015
+wacn.date: 12/15/2015
+---
 
 # 使用 Windows PowerShell 管理基于角色的访问控制 #
 
-> [AZURE.SELECTOR]
-- [Windows PowerShell](/documentation/articles/role-based-access-control-powershell/)
-- [Azure CLI](/documentation/articles/role-based-access-control-xplat-cli/)
-
+> [!div class="op_single_selector"]
+- [Windows PowerShell](./role-based-access-control-powershell.md)
+- [Azure CLI](./role-based-access-control-xplat-cli.md)
 
 使用 Azure 门户中基于角色的访问控制 (RBAC) 和 Azure 资源管理器 API 可以精细地管理对订阅的访问。使用此功能，可以通过在特定范围内为 Active Directory 用户、组或服务主体分配某些角色来向其授予访问权限。
 
@@ -31,7 +30,7 @@
 
 - Windows PowerShell 3.0 版或 4.0 版。若要查找 Windows PowerShell 版本，请键入：`$PSVersionTable` 并验证 `PSVersion` 的值是 3.0 或 4.0。若要安装兼容版本，请参阅 [Windows Management Framework 3.0 ](http://www.microsoft.com/download/details.aspx?id=34595) 或 [Windows Management Framework 4.0](https://www.microsoft.com/zh-CN/download/details.aspx?id=40855)。
 
-- Azure PowerShell 0.8.8 版或更高版本。若要安装最新版本并将其与 Azure 订阅相关联，请参阅[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。
+- Azure PowerShell 0.8.8 版或更高版本。若要安装最新版本并将其与 Azure 订阅相关联，请参阅[如何安装和配置 Azure PowerShell](./powershell-install-configure.md)。
 
 本教程专为 Windows PowerShell 新手设计，但它假定您了解基本概念，如模块、cmdlet 和会话。有关 Windows PowerShell 的详细信息，请参阅 [Windows PowerShell 入门](http://technet.microsoft.com/zh-cn/library/hh857337.aspx)。
 
@@ -45,9 +44,8 @@
 
 另请阅读以下教程以熟悉如何在 Windows PowerShell 中设置和使用 Azure 资源管理器：
 
-- [如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)
-- [将 Windows PowerShell 与资源管理器配合使用](/documentation/articles/powershell-azure-resource-manager/)
-
+- [如何安装和配置 Azure PowerShell](./powershell-install-configure.md)
+- [将 Windows PowerShell 与资源管理器配合使用](./azure-resource-manager/powershell-azure-resource-manager.md)
 
 ## 连接到订阅
 
@@ -55,7 +53,7 @@
 
     PS C:\> Switch-AzureMode -Name AzureResourceManager
 
-有关详细信息，请参阅[将 Windows PowerShell 与资源管理器配合使用](/documentation/articles/powershell-azure-resource-manager/)。
+有关详细信息，请参阅[将 Windows PowerShell 与资源管理器配合使用](./azure-resource-manager/powershell-azure-resource-manager.md)。
 
 若要连接到 Azure 订阅，请键入：
 
@@ -70,7 +68,7 @@
     # Use the subscription name to select the one you want to work on.
     PS C:\> Select-AzureSubscription -SubscriptionName <subscription name>
 
-有关详细信息，请参阅[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。
+有关详细信息，请参阅[如何安装和配置 Azure PowerShell](./powershell-install-configure.md)。
 
 ## 检查现有的角色分配
 
@@ -117,7 +115,6 @@
 
 然后，使用 `New-AzureRoleAssignment` 创建角色分配。例如：
 
-
 这将在当前订阅级别，为用户创建作为“读者”的角色分配。
 
 	 PS C:\> New-AzureRoleAssignment -Mail <user email> -RoleDefinitionName Reader
@@ -135,7 +132,6 @@
 	PS C:\> $resources = Get-AzureResource
     PS C:\> New-AzureRoleAssignment -Mail <user email> -RoleDefinitionName Owner -Scope $resources[0].ResourceId
 
-
 ## 验证权限
 
 检查你的帐户具有一些角色分配后，你可以通过运行以下命令实际查看这些角色分配授予你的权限
@@ -151,13 +147,12 @@
 
 若要了解有关使用 Windows PowerShell 管理基于角色的访问控制及相关主题的详细信息，请执行以下操作：
  
-
 - [Azure 资源管理器 Cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/dn708504.aspx)：了解如何在 AzureResourceManager 模块中使用这些 cmdlet。
 
 - [Azure 博客](http://blogs.msdn.com/azure)：了解 Azure 中的新功能。
 - [Windows PowerShell 博客](http://blogs.msdn.com/powershell)：了解 Windows PowerShell 中的新功能。
 - [“你好，脚本编写专家！” 博客](http://blogs.technet.com/b/heyscriptingguy/)：从 Windows PowerShell 社区获取实用提示和技巧。
-- [使用 Azure CLI 配置基于角色的访问控制](/documentation/articles/role-based-access-control-xplat-cli/)
-- [故障排除基于角色的访问控制](/documentation/articles/role-based-access-control-troubleshooting/)
+- [使用 Azure CLI 配置基于角色的访问控制](./role-based-access-control-xplat-cli.md)
+- [故障排除基于角色的访问控制](./active-directory/role-based-access-control-troubleshooting.md)
 
 <!---HONumber=71-->

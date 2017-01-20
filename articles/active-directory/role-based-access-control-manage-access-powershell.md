@@ -1,36 +1,34 @@
-<properties
-	pageTitle="使用 Azure PowerShell 管理基于角色的访问控制 (RBAC) | Azure"
-	description="如何使用 Azure PowerShell 管理 RBAC，包括列举角色、分配角色和删除角色分配。"
-	services="active-directory"
-	documentationCenter=""
-	authors="kgremban"
-	manager="femila"
-	editor=""/>  
+---
+title: 使用 Azure PowerShell 管理基于角色的访问控制 (RBAC) | Azure
+description: 如何使用 Azure PowerShell 管理 RBAC，包括列举角色、分配角色和删除角色分配。
+services: active-directory
+documentationCenter: 
+authors: kgremban
+manager: femila
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="identity"
-	ms.date="07/22/2016"
-	wacn.date="09/26/2016"
-	ms.author="kgremban"/>  
-
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 07/22/2016
+wacn.date: 09/26/2016
+ms.author: kgremban
+---
 
 # 使用 Azure PowerShell 管理基于角色的访问控制
 
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/role-based-access-control-manage-access-powershell/)
-- [Azure CLI](/documentation/articles/role-based-access-control-manage-access-azure-cli/)
-- [REST API](/documentation/articles/role-based-access-control-manage-access-rest/)
-
+> [!div class="op_single_selector"]
+- [PowerShell](./role-based-access-control-manage-access-powershell.md)
+- [Azure CLI](./role-based-access-control-manage-access-azure-cli.md)
+- [REST API](./role-based-access-control-manage-access-rest.md)
 
 Azure 门户中基于角色的访问控制 (RBAC) 和 Azure 资源管理 API 可精细管理对订阅的访问。使用此功能，可以通过在特定范围内为 Active Directory 用户、组或服务主体分配某些角色来向其授予访问权限。
 
 在使用 PowerShell 管理 RBAC 之前，必须具备以下条件：
 
-- Azure PowerShell 0.8.8 版或更高版本。若要安装最新版本并将其与 Azure 订阅相关联，请参阅[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。
+- Azure PowerShell 0.8.8 版或更高版本。若要安装最新版本并将其与 Azure 订阅相关联，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
 
 - Azure Resource Manager cmdlets。在 PowerShell 中安装 [Azure Resource Manager cmdlets](https://msdn.microsoft.com/library/mt125356.aspx)。
 
@@ -119,7 +117,7 @@ Azure 门户中基于角色的访问控制 (RBAC) 和 Azure 资源管理 API 可
 ## 创建自定义角色
 若要创建自定义角色，请使用 `New-AzureRmRoleDefinition` 命令。
 
-在 PowerShell 中创建自定义角色时，需从[内置角色](/documentation/articles/role-based-access-built-in-roles/)之一开始。编辑其属性并添加所需的任何 Action、notAction 或作用域，然后将所做的更改保存为新角色。
+在 PowerShell 中创建自定义角色时，需从[内置角色](./role-based-access-built-in-roles.md)之一开始。编辑其属性并添加所需的任何 Action、notAction 或作用域，然后将所做的更改保存为新角色。
 
 以下示例从虚拟机参与者角色开始，使用该角色创建名为虚拟机操作员的自定义角色。该新角色授权访问 *Microsoft.Compute*、*Microsoft.Storage* 和 *Microsoft.Network* 资源提供程序的所有读取操作，并授权访问启动、重启和监视虚拟机。该自定义角色可以在两个订阅中使用。
 
@@ -151,13 +149,12 @@ Azure 门户中基于角色的访问控制 (RBAC) 和 Azure 资源管理 API 可
 
 ![RBAC PowerShell - Get-AzureRmRoleDefinition - 屏幕截图](./media/role-based-access-control-manage-access-powershell/5-get-azurermroledefinition-1.png)
 
-
 在下面的示例中，虚拟机操作员自定义角色在 *Production4* 订阅中不可用，因为该订阅不在角色的 **AssignableScopes** 中。
 
 ![RBAC PowerShell - Get-AzureRmRoleDefinition - 屏幕截图](./media/role-based-access-control-manage-access-powershell/5-get-azurermroledefinition2.png)
 
 ## 另请参阅
-- [将 Azure PowerShell 与 Azure 资源管理器配合使用](/documentation/articles/powershell-azure-resource-manager/) 
-[AZURE.INCLUDE [role-based-access-control-toc.md](../../includes/role-based-access-control-toc.md)]
+- [将 Azure PowerShell 与 Azure 资源管理器配合使用](../azure-resource-manager/powershell-azure-resource-manager.md) 
+[!INCLUDE [role-based-access-control-toc.md](../../includes/role-based-access-control-toc.md)]
 
 <!---HONumber=Mooncake_0815_2016-->

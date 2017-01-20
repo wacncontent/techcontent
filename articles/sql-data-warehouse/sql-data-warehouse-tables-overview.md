@@ -1,26 +1,25 @@
-<properties
-   pageTitle="SQL 数据仓库中的表的概述 | Azure"
-   description="Azure SQL 数据仓库表入门。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="sonyam"
-   manager="barbkess"
-   editor=""/>
+---
+title: SQL 数据仓库中的表的概述 | Azure
+description: Azure SQL 数据仓库表入门。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: sonyam
+manager: barbkess
+editor: 
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="sonyama;barbkess;jrj"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: sonyama;barbkess;jrj
+---
 
 # 概述 SQL 数据仓库中的表
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [概述][]
 - [数据类型][]
 - [分布][]
@@ -31,17 +30,13 @@
 
 在 Azure SQL 数据仓库中创建表的入门操作很简单。基本的 [CREATE TABLE][] 语法与常用语法无异，这种语法你在使用其他数据库时很可能已经很熟悉了。创建表时，只需为表和列命名，然后为每个列定义数据类型即可。如果你已经在其他数据库中创建过表，则此操作对你来说应该很熟悉。
 
-
     CREATE TABLE Customers (FirstName VARCHAR(25), LastName VARCHAR(25))
-
 
 以上示例创建名为 Customers 的表，该表包含两个列：FirstName 和 LastName。每个列都定义了数据类型 VARCHAR(25)，其数据限制为 25 个字符。表的这些基本属性以及其他属性大多与其他数据库相同。每个列都定义了数据类型，确保数据的完整性。可以通过添加索引来减少 I/O，从而改进性能。需要修改数据时，可通过添加分区来改进性能。
 
 [重命名][RENAME] SQL 数据仓库表的操作如下所示：
 
-
     RENAME OBJECT Customer TO CustomerOrig; 
-
 
 ## 分布式表
 
@@ -84,12 +79,9 @@
 
 若要确定这 60 个分布中每个分布的表所占用的空间和行，一个简单的方法是使用 [DBCC PDW\_SHOWSPACEUSED][]。
 
-
     DBCC PDW_SHOWSPACEUSED('dbo.FactInternetSales');
 
-
 但是，使用 DBCC 命令可能会受到很大限制。使用动态管理视图 (DMV)，你可以查看更多详细信息，并可对查询结果进行更多控制。一开始请创建此视图，我们在本文以及其他文章中的许多示例将引用此视图。
-
 
 	CREATE VIEW dbo.vTableSizes
 	AS
@@ -201,11 +193,9 @@
 	FROM size
 	;
 
-
 ### 表空间摘要
 
 此查询返回行以及按表划分的空间。此查询适用于查看哪些表是你最大的表，以及这些表是按轮循机制分布的还是按哈希分布的。对于哈希分布表，此查询还显示分布列。大多数情况下，最大的表应该是哈希分布，并使用聚集列存储索引。
-
 
 	SELECT 
 	     database_name
@@ -233,9 +223,7 @@
 	    table_reserved_space_GB desc
 	;
 
-
 ### 按分布类型划分的表空间
-
 
 	SELECT 
 	     distribution_policy_name
@@ -248,9 +236,7 @@
 	GROUP BY distribution_policy_name
 	;
 
-
 ### 按索引类型划分的表空间
-
 
 	SELECT 
 	     index_type_desc
@@ -263,9 +249,7 @@
 	GROUP BY index_type_desc
 	;
 
-
 ### 分布空间摘要
-
 
     SELECT 
         distribution_id
@@ -279,7 +263,6 @@
     ORDER BY    distribution_id
     ;
 
-
 ## 后续步骤
 
 若要了解详细信息，请参阅有关[表数据类型][Data Types]、[分布表][Distribute]、[为表编制索引][Index]、[将表分区][Partition]和[维护表统计信息][Statistics] 的文章。有关最佳实践的详细信息，请参阅 [SQL 数据仓库最佳实践][]。
@@ -287,20 +270,20 @@
 <!--Image references-->
 
 <!--Article references-->
-[概述]: /documentation/articles/sql-data-warehouse-tables-overview/
-[Data Types]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[Distribute]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[分布]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[Index]: /documentation/articles/sql-data-warehouse-tables-index/
-[索引]: /documentation/articles/sql-data-warehouse-tables-index/
-[Partition]: /documentation/articles/sql-data-warehouse-tables-partition/
-[Statistics]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[统计信息]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[Temporary]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[临时]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[SQL 数据仓库最佳实践]: /documentation/articles/sql-data-warehouse-best-practices/
-[使用 PolyBase 加载数据]: /documentation/articles/sql-data-warehouse-load-from-azure-blob-storage-with-polybase/
+[概述]: ./sql-data-warehouse-tables-overview.md
+[Data Types]: ./sql-data-warehouse-tables-data-types.md
+[数据类型]: ./sql-data-warehouse-tables-data-types.md
+[Distribute]: ./sql-data-warehouse-tables-distribute.md
+[分布]: ./sql-data-warehouse-tables-distribute.md
+[Index]: ./sql-data-warehouse-tables-index.md
+[索引]: ./sql-data-warehouse-tables-index.md
+[Partition]: ./sql-data-warehouse-tables-partition.md
+[Statistics]: ./sql-data-warehouse-tables-statistics.md
+[统计信息]: ./sql-data-warehouse-tables-statistics.md
+[Temporary]: ./sql-data-warehouse-tables-temporary.md
+[临时]: ./sql-data-warehouse-tables-temporary.md
+[SQL 数据仓库最佳实践]: ./sql-data-warehouse-best-practices.md
+[使用 PolyBase 加载数据]: ./sql-data-warehouse-load-from-azure-blob-storage-with-polybase.md
 
 <!--MSDN references-->
 [CREATE TABLE]: https://msdn.microsoft.com/zh-cn/library/mt203953.aspx

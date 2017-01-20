@@ -1,21 +1,21 @@
-<properties
-	pageTitle="通知中心 - 企业推送架构"
-	description="有关在企业环境中使用 Azure 通知中心的指南"
-	services="notification-hubs"
-	documentationCenter=""
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>
+---
+title: 通知中心 - 企业推送架构
+description: 有关在企业环境中使用 Azure 通知中心的指南
+services: notification-hubs
+documentationCenter: 
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="07/12/2016" 
-	ms.author="wesmc"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 07/12/2016
+ms.author: wesmc
+---
 
 # 企业推送架构指南
 
@@ -219,7 +219,6 @@
 
 	![][4]
 
-
 3. **EnterprisePushMobileApp**
 
 	a.这是一个 Windows 应用商店应用程序，它将从作为移动后端的一部分运行的 WebJob 接收 toast 通知并显示它。这基于[通知中心 - Windows 通用教程]构建。
@@ -266,11 +265,11 @@
 
 <!-- Links -->
 [通知中心示例]: https://github.com/Azure/azure-notificationhubs-samples
-[Azure 移动服务]: /documentation/services/mobile-services/
-[Azure 服务总线]: /documentation/articles/service-bus-fundamentals-hybrid-solutions/
-[服务总线 Pub/Sub 编程]: /documentation/articles/service-bus-dotnet-how-to-use-topics-subscriptions/
-[Azure WebJob]: /documentation/articles/web-sites-create-web-jobs/
-[通知中心 - Windows 通用教程]: /documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/
+[Azure 移动服务]: ../mobile-services/index.md/
+[Azure 服务总线]: ../service-bus-messaging/service-bus-fundamentals-hybrid-solutions.md
+[服务总线 Pub/Sub 编程]: ../service-bus-messaging/service-bus-dotnet-how-to-use-topics-subscriptions.md
+[Azure WebJob]: ../app-service-web/web-sites-create-web-jobs.md
+[通知中心 - Windows 通用教程]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
 [Azure 经典门户]: https://manage.windowsazure.cn/
 
 <!---HONumber=Mooncake_0801_2016-->

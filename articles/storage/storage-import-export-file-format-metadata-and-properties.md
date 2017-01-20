@@ -1,23 +1,22 @@
-<properties
-    pageTitle="导入/导出服务元数据和属性文件格式 | Azure"
-    description="了解如何为导入或导出作业包含的一个或多个 Blob 指定元数据和属性。"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 导入/导出服务元数据和属性文件格式 | Azure
+description: 了解如何为导入或导出作业包含的一个或多个 Blob 指定元数据和属性。
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.assetid="840364c6-d9a8-4b43-a9f3-f7441c625069"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="05/25/2015"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.assetid: 840364c6-d9a8-4b43-a9f3-f7441c625069
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/25/2015
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 导入/导出服务元数据和属性文件格式
 可将一个或多个 Blob 的元数据和属性指定为导入作业或导出作业的一部分。若要设置将创建为导入作业一部分的 Blob 的元数据或属性，应在包含所要导入数据的硬盘驱动器上提供一个元数据或属性文件。对于导出作业，元数据和属性将写入到在返回的硬盘驱动器上包含的元数据或属性文件。
@@ -25,7 +24,6 @@
 ## 元数据文件格式  
 元数据文件的格式如下所示：
   
-
 	<?xml version="1.0" encoding="UTF-8"?>  
 	<Metadata>  
 	[<metadata-name-1>metadata-value-1</metadata-name-1>]  
@@ -33,7 +31,6 @@
 	. . .  
 	</Metadata>  
 
-  
 |XML 元素|类型|说明|  
 |-----------------|----------|-----------------|  
 |`Metadata`  
@@ -44,7 +41,6 @@
 ## 属性文件格式  
 属性文件的格式如下：
   
-
 	<?xml version="1.0" encoding="UTF-8"?>  
 	<Properties>  
 	[<Last-Modified>date-time-value</Last-Modified>]  
@@ -57,7 +53,6 @@
 	[<Cache-Control>cache-control</Cache-Control>]  
 	</Properties>  
 
-  
 |XML 元素|类型|说明|  
 |-----------------|----------|-----------------|  
 |`Properties`|Root 元素|属性文件的根元素。|  

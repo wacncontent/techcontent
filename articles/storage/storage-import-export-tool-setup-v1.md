@@ -1,23 +1,22 @@
-<properties
-    pageTitle="设置 Azure 导入/导出工具 | Azure"
-    description="了解如何设置 Azure 导入导出工具的驱动器准备和修复工具"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 设置 Azure 导入/导出工具 | Azure
+description: 了解如何设置 Azure 导入导出工具的驱动器准备和修复工具
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.assetid="c312b1ab-5b9e-4d24-becd-790a88b3ba8d"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="05/25/2015"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.assetid: c312b1ab-5b9e-4d24-becd-790a88b3ba8d
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/25/2015
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 设置 Azure 导入/导出工具
 Azure 导入/导出工具是可与 Azure 导入/导出服务一起使用的驱动器准备和修复工具。可以使用该工具实现以下功能：
@@ -80,7 +79,6 @@ Azure 导入/导出工具是可与 Azure 导入/导出服务一起使用的驱�
   
  若要输出命令帮助，请不带参数运行该工具：
   
-
 	WAImportExport, a client tool for Azure Import/Export Service. Microsoft (c) 2013, 2014  
   
 	Copy a Directory:  
@@ -250,13 +248,12 @@ Azure 导入/导出工具是可与 Azure 导入/导出服务一起使用的驱�
 	        xmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /t:d /encrypt /srcdir:d:\movi
 	        es\drama /dstdir:movies/drama/ /skipwrite
 
-  
 ## 另请参阅  
- [为导入作业准备硬盘驱动器](/documentation/articles/storage-import-export-tool-preparing-hard-drives-import-v1/)
- [预览导出作业的驱动器使用情况](/documentation/articles/storage-import-export-tool-previewing-drive-usage-export-v1/)
- [使用复制日志文件查看作业状态](/documentation/articles/storage-import-export-tool-reviewing-job-status-v1/)
- [修复导入作业](/documentation/articles/storage-import-export-tool-repairing-an-import-job-v1/)
- [修复导出作业](/documentation/articles/storage-import-export-tool-repairing-an-export-job-v1/)
- [排查 Azure 导入/导出工具问题](/documentation/articles/storage-import-export-tool-troubleshooting-v1/)
+ [为导入作业准备硬盘驱动器](./storage-import-export-tool-preparing-hard-drives-import-v1.md)
+ [预览导出作业的驱动器使用情况](./storage-import-export-tool-previewing-drive-usage-export-v1.md)
+ [使用复制日志文件查看作业状态](./storage-import-export-tool-reviewing-job-status-v1.md)
+ [修复导入作业](./storage-import-export-tool-repairing-an-import-job-v1.md)
+ [修复导出作业](./storage-import-export-tool-repairing-an-export-job-v1.md)
+ [排查 Azure 导入/导出工具问题](./storage-import-export-tool-troubleshooting-v1.md)
 
 <!---HONumber=Mooncake_1226_2016-->

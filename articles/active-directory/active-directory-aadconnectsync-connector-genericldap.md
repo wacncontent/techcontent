@@ -1,21 +1,21 @@
-<properties
-   pageTitle="泛型 LDAP 连接器 | Azure"
-   description="本文介绍如何配置 Microsoft 的泛型 LDAP 连接器。"
-   services="active-directory"
-   documentationCenter=""
-   authors="AndKjell"
-   manager="stevenpo"
-   editor=""/>
+---
+title: 泛型 LDAP 连接器 | Azure
+description: 本文介绍如何配置 Microsoft 的泛型 LDAP 连接器。
+services: active-directory
+documentationCenter: 
+authors: AndKjell
+manager: stevenpo
+editor: 
 
-<tags
-   ms.service="active-directory"
-   ms.workload="identity"
-   ms.tgt_pltfrm="na"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.date="08/30/2016"
-   wacn.date="10/11/2016"
-   ms.author="billmath"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/30/2016
+wacn.date: 10/11/2016
+ms.author: billmath
+---
 
 # 泛型 LDAP 连接器技术参考
 本指南介绍泛型 LDAP 连接器。本文适用于以下产品：

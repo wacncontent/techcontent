@@ -1,27 +1,28 @@
-<properties
-    pageTitle="使用 Azure 存储模拟器进行开发和测试 | Azure"
-    description="Azure 存储模拟器为针对 Azure 存储的开发和测试提供了免费的本地开发环境。了解有关存储模拟器的信息，包括如何对请求进行身份验证、如何从应用程序连接到模拟器和如何使用命令行工具。"
-    services="storage"
-    documentationcenter=""
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="f480b059-df8a-4a63-b05a-7f2f5d1f5c2a"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 使用 Azure 存储模拟器进行开发和测试 | Azure
+description: Azure 存储模拟器为针对 Azure 存储的开发和测试提供了免费的本地开发环境。了解有关存储模拟器的信息，包括如何对请求进行身份验证、如何从应用程序连接到模拟器和如何使用命令行工具。
+services: storage
+documentationcenter: 
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: f480b059-df8a-4a63-b05a-7f2f5d1f5c2a
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 使用 Azure 存储模拟器进行开发和测试
 ## 概述
 Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进行开发的本地环境。使用存储模拟器，可以在本地针对存储服务测试应用程序，而无需创建 Azure 订阅且不会产生任何费用。如果对应用程序在模拟器中的工作情况感到满意，则可以切换到在云中使用 Azure 存储帐户。
 
-> [AZURE.NOTE] 存储模拟器作为 [Azure SDK](/downloads/) 的一部分提供。此外，还可以使用[独立安装程序](https://go.microsoft.com/fwlink/?linkid=717179&clcid=0x409)来安装存储模拟器。若要配置存储模拟器，必须在计算机上具有管理权限。
+> [!NOTE] 存储模拟器作为 [Azure SDK](/downloads/) 的一部分提供。此外，还可以使用[独立安装程序](https://go.microsoft.com/fwlink/?linkid=717179&clcid=0x409)来安装存储模拟器。若要配置存储模拟器，必须在计算机上具有管理权限。
 > 
 > 存储模拟器目前仅在 Windows 上运行。
 >  
@@ -38,14 +39,14 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 与在云中的 Azure 存储相同、针对存储模拟器进行的每个请求都必须进行身份验证，除非它是匿名请求。可以使用共享密钥身份验证或使用共享的访问签名 (SAS) 针对存储模拟器的请求进行身份验证。
 
 ### 使用共享密钥凭据进行身份验证
-[AZURE.INCLUDE [storage-emulator-connection-string-include](../../includes/storage-emulator-connection-string-include.md)]
+[!INCLUDE [storage-emulator-connection-string-include](../../includes/storage-emulator-connection-string-include.md)]
 
-有关连接字符串的更多详细信息，请参阅[配置 Azure 存储连接字符串](/documentation/articles/storage-configure-connection-string/)。
+有关连接字符串的更多详细信息，请参阅[配置 Azure 存储连接字符串](./storage-configure-connection-string.md)。
 
 ### 使用共享访问签名进行身份验证
 某些 Azure 存储客户端库（诸如 Xamarin 库）仅支持使用共享的访问签名 (SAS) 令牌进行身份验证。需要使用支持共享密钥身份验证的工具或应用程序创建此 SAS 令牌。生成该 SAS 令牌的简单方法是通过 Azure PowerShell：
 
-1. 安装 Azure PowerShell（如果尚未安装）。建议使用 Azure PowerShell cmdlet 最新版本。请查看[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/#Install) 以获取安装说明。
+1. 安装 Azure PowerShell（如果尚未安装）。建议使用 Azure PowerShell cmdlet 最新版本。请查看[如何安装和配置 Azure PowerShell](../powershell-install-configure.md#Install) 以获取安装说明。
 2. 请打开 Azure PowerShell 并运行以下命令。请记住要使用自己的凭据替换 *ACCOUNT\_NAME* 和 *ACCOUNT\_KEY = =* 。将 *CONTAINER\_NAME* 替换为选择的名称。
 
 		$context = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName "ACCOUNT_NAME" -StorageAccountKey "ACCOUNT_KEY=="
@@ -62,8 +63,7 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 
 此示例中创建的共享访问签名的有效期为一天。该签名将授予对容器内 Blob 的完整权限（例如，读取、写入、删除和列出）。
 
-有关共享访问签名的详细信息，请参阅[使用共享访问签名 (SAS)](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)。
-
+有关共享访问签名的详细信息，请参阅[使用共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)。
 
 ##<a id="start-and-initialize-the-storage-emulator"></a> 启动和初始化存储模拟器
 
@@ -128,13 +128,13 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 
     http://127.0.0.1:10000/myaccount-secondary/mycontainer/myblob.txt 
 
-> [AZURE.NOTE] 若要使用存储模拟器以编程方式访问辅助副本，请使用 Storage Client Library for .NET 3.2 版或更高版本。有关详细信息，请参阅[用于 .NET 的存储客户端库](https://msdn.microsoft.com/zh-cn/library/azure/dn261237.aspx)。
+> [!NOTE] 若要使用存储模拟器以编程方式访问辅助副本，请使用 Storage Client Library for .NET 3.2 版或更高版本。有关详细信息，请参阅[用于 .NET 的存储客户端库](https://msdn.microsoft.com/zh-cn/library/azure/dn261237.aspx)。
 
 ##<a id="storage-emulator-command-line-tool-reference"></a> 存储模拟器命令行工具参考
 
 从 3.0 版开始，在启动存储模拟器时，会出现命令提示符弹出窗口。可使用命令提示符窗口启动和停止模拟器以及查询状态和执行其他操作。
 
-> [AZURE.NOTE] 如果已安装 Azure 计算模拟器，则在启动存储模拟器时，将显示一个系统任务栏图标。右键单击该图标可显示一个菜单，其中提供了启动和停止存储模拟器的图形化方式。
+> [!NOTE] 如果已安装 Azure 计算模拟器，则在启动存储模拟器时，将显示一个系统任务栏图标。右键单击该图标可显示一个菜单，其中提供了启动和停止存储模拟器的图形化方式。
 
 ### 命令行语法
     AzureStorageEmulator [start] [stop] [status] [clear] [init] [help]

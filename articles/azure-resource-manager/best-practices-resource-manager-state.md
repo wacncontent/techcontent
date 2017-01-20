@@ -1,23 +1,22 @@
-<properties
-    pageTitle="在 Resource Manager 模板中处理状态 | Azure"
-    description="显示了如何通过建议的方法来使用复杂对象，以便与 Azure 资源管理器模板和已链接模板共享状态数据"
-    services="azure-resource-manager"
-    documentationcenter=""
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: 在 Resource Manager 模板中处理状态 | Azure
+description: 显示了如何通过建议的方法来使用复杂对象，以便与 Azure 资源管理器模板和已链接模板共享状态数据
+services: azure-resource-manager
+documentationcenter: 
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="fd2f5e2d-d56d-4e01-a57d-34f3eaead4a9"
-    ms.service="azure-resource-manager"
-    ms.workload="multiple"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/26/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: fd2f5e2d-d56d-4e01-a57d-34f3eaead4a9
+ms.service: azure-resource-manager
+ms.workload: multiple
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/26/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 在 Azure 资源管理器模板中共享状态
 本主题介绍有关在模板中管理和共享状态的最佳实践。本主题中所示的参数和变量是用户为了方便组织部署要求而可以定义的对象类型的示例。通过这些示例，你可以使用适合环境的属性值实现自己的对象。
@@ -198,7 +197,6 @@
       }
     }
 
-
 ## 将状态传递给链接模板
 连接到已链接模板时，通常混合使用静态变量和生成的变量。
 
@@ -326,7 +324,6 @@
         "arbiterNodeInstallCommand": "[concat(variables('installCommand'), ' -a')]"
     },
 
-
 ## 从模板返回状态
 不仅可以传递数据到模板中，还可以反过来将数据共享给调用的模板。在已链接模板的**“输出”**部分，你可以提供允许源模板使用的键/值对。
 
@@ -351,7 +348,7 @@
         "type": "string"
       }
 
-有关使用链接模板的 outputs 节返回虚拟机数据磁盘的示例，请参阅[为一个虚拟机创建多个数据磁盘](/documentation/articles/resource-group-create-multiple/)。
+有关使用链接模板的 outputs 节返回虚拟机数据磁盘的示例，请参阅[为一个虚拟机创建多个数据磁盘](./resource-group-create-multiple.md)。
 
 ## 为虚拟机定义身份验证设置
 可以使用与前面所示相同的配置设置模式来指定虚拟机的身份验证设置。需创建要在身份验证类型中传递的参数。
@@ -406,9 +403,8 @@
       "osProfile": "[variables('osProfile')]"
     }
 
-
 ## 后续步骤
-* 若要了解模板的章节，请参阅[创作 Azure Resource Manager 模板](/documentation/articles/resource-group-authoring-templates/)
-* 若要查看模板中可用的函数，请参阅 [Azure Resource Manager 模板函数](/documentation/articles/resource-group-template-functions/)
+* 若要了解模板的章节，请参阅[创作 Azure Resource Manager 模板](./resource-group-authoring-templates.md)
+* 若要查看模板中可用的函数，请参阅 [Azure Resource Manager 模板函数](./resource-group-template-functions.md)
 
 <!---HONumber=Mooncake_1219_2016-->

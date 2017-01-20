@@ -1,25 +1,25 @@
-<properties
-	pageTitle="使用 PowerShell 将应用程序连接到虚拟网络"
-	description="有关如何使用 PowerShell 来连接和操作虚拟网络的说明"
-	services="app-service"
-	documentationCenter=""
-	authors="ccompy"
-	manager="wpickett"
-	editor="cephalin"/>
+---
+title: 使用 PowerShell 将应用程序连接到虚拟网络
+description: 有关如何使用 PowerShell 来连接和操作虚拟网络的说明
+services: app-service
+documentationCenter: 
+authors: ccompy
+manager: wpickett
+editor: cephalin
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/29/2016"
-	wacn.date="11/25/2016"
-	ms.author="ccompy"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/29/2016
+wacn.date: 11/25/2016
+ms.author: ccompy
+---
 
 # 使用 PowerShell 将应用程序连接到虚拟网络 #
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 ## 概述 ##
 
@@ -161,7 +161,6 @@ VNet 集成功能可让你与使用经典部署模型或 Azure Resource Manager 
 		}
 	}
 
-
 设置输入参数：
 
 	$parameters = @{"certData" = $vnet.Properties.certBlob ;
@@ -171,7 +170,6 @@ VNet 集成功能可让你与使用经典部署模型或 Azure Resource Manager 
 调用脚本：
 
 	$output = New-AzureRmResourceGroupDeployment -Name unused -ResourceGroupName $Configuration.VnetResourceGroup -TemplateParameterObject $parameters -TemplateFile C:\PATH\TO\GetNetworkPackageUri.json
-
 
 变量 **$output.Outputs.packageUri** 现在包含要提供给 Web 应用的包 URI。
 
@@ -216,7 +214,6 @@ Resource Manager 虚拟网络具有 Azure Resource Manager API，与经典虚拟
 ### Resource Manager VNet 应用服务集成脚本 ###
 
 复制以下脚本并将它保存到文件。如果你不想要使用该脚本，可以自由学习该脚本，以了解如何对 Resource Manager 虚拟网络进行设置。
-
 
     function ReadHostWithDefault($message, $default)
     {
@@ -725,7 +722,7 @@ Resource Manager 虚拟网络具有 Azure Resource Manager API，与经典虚拟
 尽管脚本中有 delete 字样，但实际上不会删除虚拟网络。它只是删除集成。在用户确认这是要执行的操作之后，命令将快速进行处理，并在完成时返回“True”。
 
 <!--Links-->
-[createvpngateway]: /documentation/articles/vpn-gateway-point-to-site-create/
+[createvpngateway]: ../vpn-gateway/vpn-gateway-point-to-site-create.md
 [azureportal]: http://portal.azure.cn
 
 <!---HONumber=Mooncake_0919_2016-->

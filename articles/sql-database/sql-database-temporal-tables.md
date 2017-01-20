@@ -1,22 +1,21 @@
-<properties
-   pageTitle="Azure SQL 数据库中的临时表入门 | Azure"
-   description="了解如何开始使用 Azure SQL 数据库中的临时表。"
-   services="sql-database"
-   documentationCenter=""
-   authors="CarlRabeler"
-   manager="jhubbard"
-   editor=""/>
+---
+title: Azure SQL 数据库中的临时表入门 | Azure
+description: 了解如何开始使用 Azure SQL 数据库中的临时表。
+services: sql-database
+documentationCenter: 
+authors: CarlRabeler
+manager: jhubbard
+editor: 
 
-<tags
-   ms.service="sql-database"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="sql-database"
-   ms.date="08/29/2016"
-   wacn.date="12/26/2016"
-   ms.author="carlrab"/>  
-
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: sql-database
+ms.date: 08/29/2016
+wacn.date: 12/26/2016
+ms.author: carlrab
+---
 
 #Azure SQL 数据库中的临时表入门
 
@@ -36,9 +35,7 @@
 
 根据是要开始新的开发工作，还是升级现有的应用程序，可以创建临时表，或者通过添加临时属性来修改现有表。一般情况下，用户方案可能混用了这两个选项。使用 [SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx) (SSMS)、[SQL Server Data Tools](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx) (SSDT) 或其他任何 Transact-SQL 开发工具执行以下操作。
 
-
-> [AZURE.IMPORTANT] 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
-
+> [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ###创建新表
 
@@ -46,14 +43,11 @@
 
 ![SSMSNewTable](./media/sql-database-temporal-tables/AzureTemporal2.png)  
 
-
 在 SSDT 中将新项添加到数据库项目时，请选择“临时表(版本由系统控制)”模板。此时将打开表设计器，让你轻松指定表布局：
 
 ![SSDTNewTable](./media/sql-database-temporal-tables/AzureTemporal3.png)  
 
-
 也可以通过直接指定 Transact-SQL 语句来创建临时表，如以下示例中所示。请注意，每个临时表的必需元素为 PERIOD 定义以及可引用将存储历史行版本的另一个用户表的 SYSTEM\_VERSIONING 子句：
-
 
 	CREATE TABLE WebsiteUserInfo 
 	(  
@@ -66,7 +60,6 @@
 	 )  
 	 WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.WebsiteUserInfoHistory));
 
-
 当你创建版本由系统控制的临时表时，将自动创建随附默认配置的历史记录表。默认历史记录表包含期限列（结束、开始）上启用页压缩的聚集 B 树目录索引。此配置非常适合使用临时表的大部分方案，特别是用于[数据审核](https://msdn.microsoft.com/zh-cn/library/mt631669.aspx#Anchor_0)。
 
 在此特定案例中，我们的目标是针对一段较长的数据历史记录以及较大的数据集，执行基于时间的趋势分析，因此历史记录表的存储选择为聚集列存储索引。聚集列存储为分析查询提供极佳的压缩和性能。临时表允许你灵活且完全独立地在当前表和临时表中配置索引。
@@ -75,21 +68,17 @@
 
 以下脚本演示如何将历史记录表的默认索引更改为聚集列存储：
 
-
 	CREATE CLUSTERED COLUMNSTORE INDEX IX_WebsiteUserInfoHistory
 	ON dbo.WebsiteUserInfoHistory
 	WITH (DROP_EXISTING = ON); 
-
 
 临时表在对象资源管理器中以特定图标表示以便于识别，其历史记录表显示为子节点。
 
 ![AlterTable](./media/sql-database-temporal-tables/AzureTemporal4.png)  
 
-
 ###将现有表更改为临时表
 
 下面探讨替代方案，其中 WebsiteUserInfo 表已存在，但不是针对保留更改历史记录而设计的。在这种情况下，只需将现有表扩展为临时表即可，如以下示例中所示：
-
 
 	ALTER TABLE WebsiteUserInfo 
 	ADD 
@@ -107,22 +96,18 @@
 	ON dbo.WebsiteUserInfoHistory
 	WITH (DROP_EXISTING = ON); 
 
-
 ##步骤 2：定期运行工作负荷
 
 临时表的主要优点是，不需要以任何方式更改或调整网站就可以执行更改跟踪。创建临时表后，每当对数据进行修改时，都将自动保存以前的行版本。
 
 若要为此特定方案使用自动更改跟踪功能，只需在每次用户结束网站上的会话时更新列 **PagesVisited**：
 
-
 	UPDATE WebsiteUserInfo  SET [PagesVisited] = 5 
 	WHERE [UserID] = 1;
-
 
 请务必注意，更新查询不需要知道实际操作进行的时间，也不需要知道如何保留历史数据以供将来分析使用。Azure SQL 数据库会自动处理这两个方面。下图演示了如何在每次更新时生成历史记录数据。
 
 ![TemporalArchitecture](./media/sql-database-temporal-tables/AzureTemporal5.png)  
-
 
 ##步骤 3：执行历史数据分析
 
@@ -130,16 +115,13 @@
 
 若要查看按访问网页次数排序的前 10 个用户，请运行以下查询：
 
-
 	DECLARE @hourAgo datetime2 = DATEADD(HOUR, -1, SYSUTCDATETIME());
 	SELECT TOP 10 * FROM dbo.WebsiteUserInfo FOR SYSTEM_TIME AS OF @hourAgo
 	ORDER BY PagesVisited DESC
 
-
 可轻松修改此查询，以分析一天前、一个月前或所需的任何过去时间点的站点访问记录。
 
 若要执行前一天的基本统计分析，请使用以下示例：
-
 
 	DECLARE @twoDaysAgo datetime2 = DATEADD(DAY, -2, SYSUTCDATETIME());
 	DECLARE @aDayAgo datetime2 = DATEADD(DAY, -1, SYSUTCDATETIME());
@@ -151,9 +133,7 @@
 	FOR SYSTEM_TIME BETWEEN @twoDaysAgo AND @aDayAgo
 	GROUP BY UserId
 
-
 若要搜索特定用户在某个时间段的活动，请使用 CONTAINED IN 子句：
-
 
 	DECLARE @hourAgo datetime2 = DATEADD(HOUR, -1, SYSUTCDATETIME());
 	DECLARE @twoHoursAgo datetime2 = DATEADD(HOUR, -2, SYSUTCDATETIME());
@@ -161,38 +141,30 @@
 	FOR SYSTEM_TIME CONTAINED IN (@twoHoursAgo, @hourAgo)
 	WHERE [UserID] = 1;
 
-
 图形可视化对于临时查询特别方便，因为可以轻松、直观地显示趋势和使用模式：
 
 ![TemporalGraph](./media/sql-database-temporal-tables/AzureTemporal6.png)  
-
 
 ##不断演变的表架构
 
 通常，开发应用时需要更改临时表架构。为此，只需运行常规 ALTER TABLE 语句，Azure SQL 数据库就会正确传播历史记录表的更改。以下脚本演示如何添加要跟踪的其他属性：
 
-
 	/*Add new column for tracking source IP address*/
 	ALTER TABLE dbo.WebsiteUserInfo 
 	ADD  [IPAddress] varchar(128) NOT NULL CONSTRAINT DF_Address DEFAULT 'N/A';
 
-
 同样，可在工作负荷处于活动状态时更改列定义：
-
 
 	/*Increase the length of name column*/
 	ALTER TABLE dbo.WebsiteUserInfo 
 	    ALTER COLUMN  UserName nvarchar(256) NOT NULL;
 
-
 最后，可删除不再需要的列。
-
 
 	/*Drop unnecessary column */
 	ALTER TABLE dbo.WebsiteUserInfo 
 	    DROP COLUMN TemporaryColumn; 
 
-    
 或者，在连接到数据库（联机模式）或开发数据库项目（脱机模式）时，使用最新 [SSDT](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx) 更改临时表架构。
 
 ##控制历史数据的保留期

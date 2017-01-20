@@ -1,17 +1,18 @@
-<properties
-	pageTitle="VS2015 直接使用账户登录 Azure"
-	description="VS2015 直接使用账户登录 Azure。"
-	services=""
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: VS2015 直接使用账户登录 Azure
+description: VS2015 直接使用账户登录 Azure。
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="na-aog"
-	ms.date="12/05/2016"
-	wacn.date="12/05/2016"/>
+ms.service: na-aog
+ms.date: 12/05/2016
+wacn.date: 12/05/2016
+---
+
 # VS2015 直接使用账户登录 Azure #
 
 ### 问题描述 ###

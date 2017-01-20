@@ -1,35 +1,30 @@
-<properties 
-	pageTitle="使用媒体服务 REST API 配置内容密钥授权策略 | Azure" 
-	description="了解如何使用媒体服务 REST API 配置内容密钥的授权策略。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用媒体服务 REST API 配置内容密钥授权策略 | Azure
+description: 了解如何使用媒体服务 REST API 配置内容密钥的授权策略。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/19/2016"  
-	wacn.date="12/26/2016"  
-	ms.author="juliako"/>
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/19/2016
+wacn.date: 12/26/2016
+ms.author: juliako
+---
 
 #动态加密：配置内容密钥授权策略
-[AZURE.INCLUDE [media-services-selector-content-key-auth-policy](../../includes/media-services-selector-content-key-auth-policy.md)]
-
+[!INCLUDE [media-services-selector-content-key-auth-policy](../../includes/media-services-selector-content-key-auth-policy.md)]
 
 ##概述
 
 借助 Azure 媒体服务，你可以传送使用高级加密标准 (AES)（使用 128 位加密密钥）和 PlayReady 或 Widevine DRM 加密的内容。媒体服务还提供了用于向已授权客户端传送密钥和 PlayReady/Widevine 许可证的服务。
 
-如果你需要媒体服务来加密资产，则需要将加密密钥（**CommonEncryption** 或 **EnvelopeEncryption**）与资产相关联（如[此处](/documentation/articles/media-services-rest-create-contentkey/)所述），同时配置密钥的授权策略（如本文所述）。
-
+如果你需要媒体服务来加密资产，则需要将加密密钥（**CommonEncryption** 或 **EnvelopeEncryption**）与资产相关联（如[此处](./media-services-rest-create-contentkey.md)所述），同时配置密钥的授权策略（如本文所述）。
 
 当播放器请求流时，媒体服务将使用指定的密钥通过 AES 或 PlayReady 加密动态加密你的内容。为了解密流，播放器将从密钥传送服务请求密钥。为了确定用户是否有权获取密钥，服务将评估为密钥指定的授权策略。
 
@@ -47,23 +42,21 @@
 
 ###请注意以下事项：
 
-- 为了能够使用动态打包和动态加密，必须确保至少有一个流式处理保留单元。有关详细信息，请参阅[如何缩放媒体服务](/documentation/articles/media-services-manage-origins/#scale_streaming_endpoints)。
-- 你的资产必须包含一组自适应比特率 MP4 或自适应比特率平滑流式处理文件。有关详细信息，请参阅[对资产进行编码](/documentation/articles/media-services-encode-asset/)。
+- 为了能够使用动态打包和动态加密，必须确保至少有一个流式处理保留单元。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
+- 你的资产必须包含一组自适应比特率 MP4 或自适应比特率平滑流式处理文件。有关详细信息，请参阅[对资产进行编码](./media-services-encode-asset.md)。
 - 使用 **AssetCreationOptions.StorageEncrypted** 选项上传资产并对其进行编码。
 - 如果你打算创建需要相同策略配置的多个内容密钥，我们强烈建议你创建单个授权策略，并将其重复用于多个内容密钥。
 - 密钥传送服务将 ContentKeyAuthorizationPolicy 及其相关对象（策略选项和限制）缓存 15 分钟。如果你创建 ContentKeyAuthorizationPolicy 并指定使用“令牌”限制，然后对其进行测试，再将策略更新为“开放”限制，则现有策略切换到“开放”版本的策略需要大约 15 分钟。
 - 如果你添加或更新资产的传送策略，则必须删除现有定位符（如果有）并创建新定位符。
 - 目前，无法加密 HDS 流式处理格式或渐进式下载。
 
-
 ##AES-128 动态加密
 
->[AZURE.NOTE] 使用媒体服务 REST API 时，需注意以下事项：
+>[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
 >
->访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](/documentation/articles/media-services-rest-how-to-use/)。
+>访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 
->请按照[使用 REST API 连接到媒体服务](/documentation/articles/media-services-rest-connect-programmatically/)中所述对媒体服务 URI 执行后续调用。
-
+>请按照[使用 REST API 连接到媒体服务](./media-services-rest-connect-programmatically.md)中所述对媒体服务 URI 执行后续调用。
 
 ###开放限制
 
@@ -252,7 +245,6 @@
 
 根据[此处](#ContentKeyAuthorizationPolicies)所示创建“令牌限制策略”。
 
-
 ###创建 ContentKeyAuthorizationPolicyOptions
 
 请求：
@@ -298,12 +290,11 @@
 
 根据[此处](#AddAuthorizationPolicyToKey)所示将 AuthorizationPolicy 添加到 ContentKey。
 
-
 ##PlayReady 动态加密 
 
 媒体服务允许你配置相应的权限和限制，以便在用户尝试播放受保护的内容时，PlayReady DRM 运行时会强制实施这些权限和限制。
 
-使用 PlayReady 保护你的内容时，需要在授权策略中指定的项目之一是用于定义 [PlayReady 许可证模板](/documentation/articles/media-services-playready-license-template-overview/)的 XML 字符串。
+使用 PlayReady 保护你的内容时，需要在授权策略中指定的项目之一是用于定义 [PlayReady 许可证模板](./media-services-playready-license-template-overview.md)的 XML 字符串。
 
 ###开放限制
 	
@@ -348,7 +339,6 @@
 	
 	{"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#ContentKeyAuthorizationPolicies/@Element","Id":"nb:ckpid:UUID:cc3c64a8-e2fc-4e09-bf60-ac954251a387","Name":"Deliver Common Content Key"}
 	
-
 #### 创建 ContentKeyAuthorizationPolicyOptions
 
 请求：
@@ -393,7 +383,6 @@
 ####将授权策略添加到内容密钥
 
 根据[此处](#AddAuthorizationPolicyToKey)所示将 AuthorizationPolicy 添加到 ContentKey。
-
 
 ###令牌限制
 
@@ -448,7 +437,6 @@
 
 根据[此处](#AddAuthorizationPolicyToKey)所示将 AuthorizationPolicy 添加到 ContentKey。
 
-
 ##<a id="types"></a>定义 ContentKeyAuthorizationPolicy 时使用的类型
 
 ###<a id="ContentKeyRestrictionType"></a>ContentKeyRestrictionType
@@ -470,13 +458,7 @@
         Widevine = 3
     }
 
-
-
-
-
 ##后续步骤
-现在已配置内容密钥的授权策略，请转到[如何配置资产传送策略](/documentation/articles/media-services-rest-configure-asset-delivery-policy/)主题。
-
- 
+现在已配置内容密钥的授权策略，请转到[如何配置资产传送策略](./media-services-rest-configure-asset-delivery-policy.md)主题。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

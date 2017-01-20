@@ -1,40 +1,36 @@
-<properties
-	pageTitle="从通用 VHD 创建 VM | Azure"
-	description="了解如何在 Resource Manager 部署模型中，使用 Azure PowerShell 从通用 VHD 映像创建 Windows 虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="cynthn"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 从通用 VHD 创建 VM | Azure
+description: 了解如何在 Resource Manager 部署模型中，使用 Azure PowerShell 从通用 VHD 映像创建 Windows 虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: cynthn
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/10/2016"
-	wacn.date="01/05/2017"
-	ms.author="cynthn"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 10/10/2016
+wacn.date: 01/05/2017
+ms.author: cynthn
+---
 
 # 从通用 VHD 映像创建 VM
 
-通用 VHD 映像包含使用 [Sysprep](/documentation/articles/virtual-machines-windows-generalize-vhd/) 删除的所有个人帐户信息。若要创建通用 VHD，可在本地 VM 上运行 Sysprep，然后[将 VHD 上载到 Azure](/documentation/articles/virtual-machines-windows-upload-image/)；或者在现有 Azure VM 上运行 Sysprep，然后[复制 VHD](/documentation/articles/virtual-machines-windows-vhd-copy/)。
+通用 VHD 映像包含使用 [Sysprep](./virtual-machines-windows-generalize-vhd.md) 删除的所有个人帐户信息。若要创建通用 VHD，可在本地 VM 上运行 Sysprep，然后[将 VHD 上载到 Azure](./virtual-machines-windows-upload-image.md)；或者在现有 Azure VM 上运行 Sysprep，然后[复制 VHD](./virtual-machines-windows-vhd-copy.md)。
 
-如果想要从通用 VHD 创建 VM，请参阅[从专用 VHD 创建 VM](/documentation/articles/virtual-machines-windows-create-vm-specialized/)。
+如果想要从通用 VHD 创建 VM，请参阅[从专用 VHD 创建 VM](./virtual-machines-windows-create-vm-specialized.md)。
 
 从通用 VHD 创建 VM 的最快速方法是使用[快速入门模板](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-from-user-image)。
 
-
 ## 先决条件
 
-如果打算使用从本地 VM 上载的 VHD（类似于使用 Hyper-V 创建的 VHD）应确保遵循[准备好要上载到 Azure 的 Windows VHD](/documentation/articles/virtual-machines-windows-prepare-for-upload-vhd-image/) 中的指导。
+如果打算使用从本地 VM 上载的 VHD（类似于使用 Hyper-V 创建的 VHD）应确保遵循[准备好要上载到 Azure 的 Windows VHD](./virtual-machines-windows-prepare-for-upload-vhd-image.md) 中的指导。
 
-在使用此方法创建 VM 之前，必须先通用化上载的 VHD 和现有的 Azure VM VHD。有关详细信息，请参阅 [Generalize a Windows virtual machine using Sysprep](/documentation/articles/virtual-machines-windows-generalize-vhd/)（使用 Sysprep 通用化 Windows 虚拟机）。
-
+在使用此方法创建 VM 之前，必须先通用化上载的 VHD 和现有的 Azure VM VHD。有关详细信息，请参阅 [Generalize a Windows virtual machine using Sysprep](./virtual-machines-windows-generalize-vhd.md)（使用 Sysprep 通用化 Windows 虚拟机）。
 
 ## 设置 VHD 的 URI
 
@@ -44,8 +40,7 @@ VHD 使用的 URI 采用以下格式：https://**mystorageaccount**.blob.core.ch
 
 ## 创建虚拟网络
 
-创建[虚拟网络](/documentation/articles/virtual-networks-overview/)的 vNet 和子网。
-
+创建[虚拟网络](../virtual-network/virtual-networks-overview.md)的 vNet 和子网。
 
 1. 创建子网。以下示例在资源组 **myResourceGroup** 中创建具有 **10.0.0.0/24** 地址前缀的、名为 **mySubnet** 的子网。
 
@@ -62,7 +57,7 @@ VHD 使用的 URI 采用以下格式：https://**mystorageaccount**.blob.core.ch
        
 ## 创建公共 IP 地址和网络接口
 
-若要与虚拟网络中的虚拟机通信，需要一个[公共 IP 地址](/documentation/articles/virtual-network-ip-addresses-overview-arm/)和网络接口。
+若要与虚拟网络中的虚拟机通信，需要一个[公共 IP 地址](../virtual-network/virtual-network-ip-addresses-overview-arm.md)和网络接口。
 
 1. 创建公共 IP 地址。此示例创建名为 **myPip** 的公共 IP 地址。
 
@@ -80,7 +75,7 @@ VHD 使用的 URI 采用以下格式：https://**mystorageaccount**.blob.core.ch
 
 若要使用 RDP 登录到 VM，需要创建一个允许在端口 3389 上进行 RDP 访问的安全规则。
 
-此示例创建名为 **myNsg** 的 NSG，其中包含一个允许通过端口 3389 传输 RDP 流量的、名为 **myRdpRule** 的规则。有关 NSG 的详细信息，请参阅 [Opening ports to a VM in Azure using PowerShell](/documentation/articles/virtual-machines-windows-nsg-quickstart-powershell/)（使用 PowerShell 在 Azure 中打开 VM 端口）。
+此示例创建名为 **myNsg** 的 NSG，其中包含一个允许通过端口 3389 传输 RDP 流量的、名为 **myRdpRule** 的规则。有关 NSG 的详细信息，请参阅 [Opening ports to a VM in Azure using PowerShell](./virtual-machines-windows-nsg-quickstart-powershell.md)（使用 PowerShell 在 Azure 中打开 VM 端口）。
 
 	$nsgName = "myNsg"
 
@@ -103,8 +98,6 @@ VHD 使用的 URI 采用以下格式：https://**mystorageaccount**.blob.core.ch
 以下 PowerShell 脚本演示如何设置虚拟机配置，并使用上载的 VM 映像作为新安装的源。
 
 </br>  
-
-
 
 	# Enter a new user name and password to use as the local administrator account 
 	# for remotely accessing the VM.
@@ -167,6 +160,6 @@ VHD 使用的 URI 采用以下格式：https://**mystorageaccount**.blob.core.ch
 
 ## 后续步骤
 
-若要使用 Azure PowerShell 管理新虚拟机，请参阅 [Manage virtual machines using Azure Resource Manager and PowerShell](/documentation/articles/virtual-machines-windows-ps-manage/)（使用 Azure Resource Manager 与 PowerShell 来管理虚拟机）。
+若要使用 Azure PowerShell 管理新虚拟机，请参阅 [Manage virtual machines using Azure Resource Manager and PowerShell](./virtual-machines-windows-ps-manage.md)（使用 Azure Resource Manager 与 PowerShell 来管理虚拟机）。
 
 <!---HONumber=Mooncake_1114_2016-->

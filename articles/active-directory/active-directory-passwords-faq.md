@@ -1,28 +1,25 @@
-<properties 
-	pageTitle="常见问题：Azure AD 密码管理 | Azure" 
-	description="有关 Azure AD 中密码管理的常见问题 (FAQ)，包括密码重置、注册、报告和写回本地 Active Directory。" 
-	services="active-directory" 
-	documentationCenter="" 
-	authors="asteen" 
-	manager="femila"
-	editor="curtand"/>  
+---
+title: 常见问题：Azure AD 密码管理 | Azure
+description: 有关 Azure AD 中密码管理的常见问题 (FAQ)，包括密码重置、注册、报告和写回本地 Active Directory。
+services: active-directory
+documentationCenter: 
+authors: asteen
+manager: femila
+editor: curtand
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/12/2016"
-	wacn.date="01/09/2017"
-	ms.author="asteen"/>  
-
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/12/2016
+wacn.date: 01/09/2017
+ms.author: asteen
+---
 
 # 密码管理常见问题
 
-> [AZURE.IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](/documentation/articles/active-directory-passwords-update-your-own-password/)。
+> [!IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
 
 下面是与密码管理相关的所有方面的一些常见问题。
 
@@ -67,7 +64,6 @@
  
  > **答：**如果用户已经定义了至少 N 项身份验证信息（其中 N 是你在 [Azure 管理门户](https://manage.windowsazure.cn)中设置的“所需身份验证方法数量”），则此用户即会被视为已注册用户。若要了解更多信息，请参阅“自定义用户密码重置策略”。
 
-
 ## <a name="password-reset"></a>密码重置
 
  - **问：多长时间会收到来自密码重置的电子邮件、短信或接到电话？**
@@ -83,7 +79,6 @@
  > **答：**密码重置门户不但会显示你的组织徽标，而且还支持你配置指向某一自定义电子邮件或 URL 的“请与管理员联系”链接。密码重置发送的任何电子邮件都将在电子邮件正文中包括你的组织的徽标、颜色（在本例中为红色）、名称，以及自定义的发件人姓名。请参阅下面所示的包含所有品牌化元素的一个示例。若要了解更多信息，请阅读“自定义密码重置的外观”。
 
   ![][001]  
-
 
  - **问：我如何告知我的用户到何处重置他们的密码？**
  
@@ -144,7 +139,7 @@
 ## <a name="password-writeback"></a>密码写回
  - **问：密码写回如何在后台工作？**
  
- > **答：**请参阅[密码写回的工作原理](/documentation/articles/active-directory-passwords-learn-more/#how-password-writeback-works/)，了解有关启用密码写回时发生的情况以及数据如何通过系统流回本地环境的详细说明。请参阅“密码写回的工作原理”中的[密码写回安全模型](/documentation/articles/active-directory-passwords-learn-more/#password-writeback-security-model/)，了解我们如何确保密码写回是一项高度安全的服务。
+ > **答：**请参阅[密码写回的工作原理](./active-directory-passwords-learn-more.md#how-password-writeback-works/)，了解有关启用密码写回时发生的情况以及数据如何通过系统流回本地环境的详细说明。请参阅“密码写回的工作原理”中的[密码写回安全模型](./active-directory-passwords-learn-more.md#password-writeback-security-model/)，了解我们如何确保密码写回是一项高度安全的服务。
 
  - **问：密码写回需要多长时间才工作？ 是否和使用密码哈希同步一样也存在同步延迟？**
  
@@ -160,25 +155,20 @@
 
  - **问：密码写回是否安全？ 如何确保我不会受到黑客攻击？**
  
- > **答：**是的。密码写回具有极高的安全性。若要阅读有关密码写回服务实施的 4 个安全层的详细信息，请查看“密码写回的工作原理”中的[密码写回安全模型](/documentation/articles/active-directory-passwords-learn-more/#password-writeback-security-model/)。
-
-
-
+ > **答：**是的。密码写回具有极高的安全性。若要阅读有关密码写回服务实施的 4 个安全层的详细信息，请查看“密码写回的工作原理”中的[密码写回安全模型](./active-directory-passwords-learn-more.md#password-writeback-security-model/)。
 
 ## 密码重置文档的链接
 以下是所有 Azure AD 密码重置文档页面的链接：
 
-- [**重置自己的密码**](/documentation/articles/active-directory-passwords-update-your-own-password/) - 了解如何以系统用户的身份重置或更改自己的密码
-- [**工作原理**](/documentation/articles/active-directory-passwords-how-it-works/) - 了解六个不同的服务组件及其功能
-- [**入门**](/documentation/articles/active-directory-passwords-getting-started/) - 了解如何让用户重置及更改云密码或本地密码
-- [**自定义**](/documentation/articles/active-directory-passwords-customize/) - 了解如何根据组织的需求自定义服务的外观和行为
-- [**最佳实践**](/documentation/articles/active-directory-passwords-best-practices/) - 了解如何快速部署且有效管理组织的密码
-- [**故障排除**](/documentation/articles/active-directory-passwords-troubleshoot/) - 了解如何快速排查服务的问题
-- [**了解更多**](/documentation/articles/active-directory-passwords-learn-more/) - 深入探索服务工作原理的技术细节
-
+- [**重置自己的密码**](./active-directory-passwords-update-your-own-password.md) - 了解如何以系统用户的身份重置或更改自己的密码
+- [**工作原理**](./active-directory-passwords-how-it-works.md) - 了解六个不同的服务组件及其功能
+- [**入门**](./active-directory-passwords-getting-started.md) - 了解如何让用户重置及更改云密码或本地密码
+- [**自定义**](./active-directory-passwords-customize.md) - 了解如何根据组织的需求自定义服务的外观和行为
+- [**最佳实践**](./active-directory-passwords-best-practices.md) - 了解如何快速部署且有效管理组织的密码
+- [**故障排除**](./active-directory-passwords-troubleshoot.md) - 了解如何快速排查服务的问题
+- [**了解更多**](./active-directory-passwords-learn-more.md) - 深入探索服务工作原理的技术细节
 
 [001]: ./media/active-directory-passwords-faq/001.jpg "Image_001.jpg"
 [002]: ./media/active-directory-passwords-faq/002.jpg "Image_002.jpg"
  
-
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

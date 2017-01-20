@@ -1,17 +1,17 @@
-<properties
-                pageTitle="使用 python 获取服务总线消息"
-                description="通过更新解决 azure-servicebus v0.20.2 之前版本的问题"
-                services="service-bus"
-                documentationCenter=""
-                authors=""
-                manager=""
-                editor=""
-                tags="Python,service bus"/>
+---
+title: 使用 python 获取服务总线消息
+description: 通过更新解决 azure-servicebus v0.20.2 之前版本的问题
+services: service-bus
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: Python,service bus
 
-<tags
-                ms.service="service-bus-aog"
-                ms.date="12/15/2016"
-                wacn.date="12/15/2016"/>
+ms.service: service-bus-aog
+ms.date: 12/15/2016
+wacn.date: 12/15/2016
+---
 
 # 使用 python 获取服务总线消息
 
@@ -39,7 +39,6 @@
   
 **代码如下：**  
 
-
 	from azure.servicebus import ServiceBusService, Message, Queue
 	bus_service = ServiceBusService(
 	    service_namespace='xhservicebus',
@@ -51,6 +50,5 @@
 	bus_service.send_queue_message('xuhuaq1', msg)
 	msg = bus_service.receive_queue_message('xuhuaq1')
 	print(msg.body)
-
 
 就可以正常的获取 Azure 服务总线队列里的消息。

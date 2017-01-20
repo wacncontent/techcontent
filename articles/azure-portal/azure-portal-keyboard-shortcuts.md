@@ -1,21 +1,21 @@
-<properties
-   pageTitle="Azure 门户预览快捷键 | Azure"
-   description="本文始终列出可在整个 Azure 门户预览中使用的最新快捷键。单个服务可能有其自身的专用快捷键。"
-   services="azure-portal"
-   documentationCenter=""
-   authors="flanakin"
-   manager="lwelicki"
-   editor=""/>
+---
+title: Azure 门户预览快捷键 | Azure
+description: 本文始终列出可在整个 Azure 门户预览中使用的最新快捷键。单个服务可能有其自身的专用快捷键。
+services: azure-portal
+documentationCenter: 
+authors: flanakin
+manager: lwelicki
+editor: 
 
-<tags
-   ms.service="multiple"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="na"
-   ms.date="02/07/2016"
-   wacn.date="06/21/2016"
-   ms.author="micflan"/>
+ms.service: multiple
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: na
+ms.date: 02/07/2016
+wacn.date: 06/21/2016
+ms.author: micflan
+---
 
 # Azure 门户预览快捷键
 
@@ -45,6 +45,5 @@
 | , | 将焦点移到命令栏 |
 | . | 将焦点移到导航栏 |
 | ? | 查看快捷键 |
-
 
 <!---HONumber=Mooncake_0613_2016-->

@@ -1,17 +1,17 @@
-<properties
-   pageTitle="Resource Manager SDK for Java | Azure"
-   description="概述 Resource Manager Java SDK 身份验证和用例"
-   services="azure-resource-manager"
-   documentationCenter="na"
-   authors="navalev"
-   manager=""
-   editor=""/>
+---
+title: Resource Manager SDK for Java | Azure
+description: 概述 Resource Manager Java SDK 身份验证和用例
+services: azure-resource-manager
+documentationCenter: na
+authors: navalev
+manager: 
+editor: 
 
-<tags
-   ms.service="azure-resource-manager"
-   ms.date="03/16/2016"
-   wacn.date="04/05/2016"/>
-   
+ms.service: azure-resource-manager
+ms.date: 03/16/2016
+wacn.date: 04/05/2016
+---
+
 # Azure Resource Manager SDK for Java
    
 Azure Resource Manager (ARM) 预览版 SDK 适用于多种语言和平台。每种语言中实现可通过其生态系统包管理器和 GitHub 来使用。
@@ -68,7 +68,7 @@ SDK 包含多个主包的帮助器类。帮助器类实现于 auzre-mgmt-utility
 
 ## 身份验证
 
-对 ARM 的身份验证由 Azure Active Directory (AD) 处理。若要连接到任何 API，首先需要使用 Azure AD 进行身份验证，以接收可传递给每个请求的身份验证令牌。若要获取此令牌，首先需要创建所谓的 Azure AD 应用程序和一个用于登录的服务主体。有关分步说明，请参阅[创建 Azure AD 应用程序和服务主体](/documentation/articles/resource-group-create-service-principal-portal/)。
+对 ARM 的身份验证由 Azure Active Directory (AD) 处理。若要连接到任何 API，首先需要使用 Azure AD 进行身份验证，以接收可传递给每个请求的身份验证令牌。若要获取此令牌，首先需要创建所谓的 Azure AD 应用程序和一个用于登录的服务主体。有关分步说明，请参阅[创建 Azure AD 应用程序和服务主体](./azure-resource-manager/resource-group-create-service-principal-portal.md)。
 
 创建服务主体后，你应会获得：
 
@@ -79,7 +79,6 @@ SDK 包含多个主包的帮助器类。帮助器类实现于 auzre-mgmt-utility
 获取这些值后，可以获取有效期为一小时的 Active Directory 访问令牌。
 
 提供客户端 ID、机密和租户 ID 后，Java SDK 将包含一个用于创建访问令牌的帮助器类 AuthHelper。 ServicePrincipalExample 类中的以下示例使用 AuthHelper *getAccessTokenFromServicePrincipalCredentials* 方法来获取访问令牌：
-
 
     public static Configuration createConfiguration() throws Exception {
        String baseUri = System.getenv("arm.url");
@@ -95,12 +94,10 @@ SDK 包含多个主包的帮助器类。帮助器类实现于 auzre-mgmt-utility
                       .getAccessToken());
     }
 
-
 ## 创建虚拟机 
 实用程序包包含一个用于创建虚拟机的帮助器类 ComputeHelper。
 
 下面是创建虚拟机的简单流程。在本示例中，帮助器类将在创建 VM 的过程中创建存储和网络：
-
 
     public static void main(String[] args) throws Exception {
             Configuration config = createConfiguration();
@@ -130,10 +127,8 @@ SDK 包含多个主包的帮助器类。帮助器类实现于 auzre-mgmt-utility
             }
     }
 
-
 ## 部署模板
 ResouceHelper 类旨在简化使用 Java SDK 部署 ARM 模板的过程。
-
 
     // create a new resource group
     ResourceManagementClient resourceManagementClient = createResourceManagementClient();
@@ -154,7 +149,6 @@ ResouceHelper 类旨在简化使用 Java SDK 部署 ARM 模板的过程。
 
 ## 列出所有虚拟机
 你不一定要使用帮助器类（不过它可以提供方便），而可以改为对每个资源提供程序直接使用服务类。在本示例中，我们将列出已经过身份验证的订阅下的某些资源 - 对于每个资源组，我们将查找虚拟机，然后查找与其关联的 IP。
-
 
     // authenticate and get access token
     Configuration config = createConfiguration();
@@ -190,7 +184,6 @@ ResouceHelper 类旨在简化使用 Java SDK 部署 ARM 模板的过程。
              }
           }
     }
-
 
 ## 其他阅读材料和帮助
 Azure SDK for Java 文档：[Java 文档](http://azure.github.io/azure-sdk-for-java/)

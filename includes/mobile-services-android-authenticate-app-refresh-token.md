@@ -52,10 +52,8 @@
     		return detected;
     	}
     	
-
 4. 在 ToDoActivity.java 文件中，将以下方法添加到 ToDoActivity 类。此方法将实际触发等待，然后在身份验证完成时更新出站请求中的令牌。 
 
-    	
     	/**
     	 * Waits for authentication to complete then adds or updates the token 
     	 * in the X-ZUMO-AUTH request header.
@@ -76,7 +74,6 @@
     			}
     		}
     	}
-
 
 5. 在 ToDoActivity.java 文件中，更新 ToDoActivity 类的 `authenticate` 方法，使它接受一个布尔型参数，以允许强制刷新令牌和令牌缓存。我们还需要在身份验证完成时，通知任何被阻止的线程以便其可以选取新令牌。
 
@@ -128,8 +125,6 @@
                 createTable();
 		    }
 	    }   
-
-
 
 6. 在 ToDoActivity.java 文件中，在 ToDoActivity 类中，为新  `RefreshTokenCacheFilter` 类添加此代码：
 
@@ -204,7 +199,6 @@
 	            return future;
 	        }
 		}
-
 
     该服务过滤器将检查每个响应以查找 HTTP 状态码 401“未授权”。如果遇到 401，将在 UI 线程上设置用于获取新令牌的新登录请求。其他调用将被阻止，直到完成该登录，或 5 次尝试都已失败。如果获得新令牌，则将使用新令牌重试触发 401 的请求，将使用新令牌重试任何被阻止的调用。
 
@@ -285,7 +279,6 @@
 			        "Verify the URL"), "Error");
 		    }
 	    }
-
 
        在此代码中，除了 `ProgressFilter` 以外，还使用了 `RefreshTokenCacheFilter`。此外，在 `onCreate` 期间，我们想要加载令牌缓存。因此将 `false` 传递给 `authenticate` 方法。
 

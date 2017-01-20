@@ -1,25 +1,22 @@
-<properties
-	pageTitle="流分析中常用使用模式的查询示例 | Azure"
-	description="常见的 Azure 流分析查询模式 "
-	keywords="查询示例"
-	services="stream-analytics"
-	documentationCenter=""
-	authors="jeffstokes72"
-	manager="jhubbard"
-	editor="cgronlun"/>  
+---
+title: 流分析中常用使用模式的查询示例 | Azure
+description: 常见的 Azure 流分析查询模式 
+keywords: 查询示例
+services: stream-analytics
+documentationCenter: 
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="stream-analytics"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="big-data"
-	ms.date="09/26/2016"
-	wacn.date="01/04/2017"
-	ms.author="jeffstok"/>  
-
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 09/26/2016
+wacn.date: 01/04/2017
+ms.author: jeffstok
+---
 
 # 常用流分析使用模式的查询示例
 
@@ -55,7 +52,6 @@ Azure 流分析中的查询采用类似 SQL 的查询语言来表述，该语言
     	TumblingWindow(second, 10)
 
 **说明**：对“重量”字段使用 CAST 语句，以便指定其类型（请在[此处](https://msdn.microsoft.com/zh-cn/library/azure/dn835065.aspx)查看受支持数据类型的列表）。
-
 
 ## 查询示例：使用 Like/Not like 进行模式匹配
 **说明**：查看事件中的某个字段值是否符合特定模式，例如，返回以 A 开头，以 9 结尾的牌照
@@ -224,7 +220,6 @@ Azure 流分析中的查询采用类似 SQL 的查询语言来表述，该语言
 	    Makes
 	GROUP BY
 	    TumblingWindow(second, 1)
-
 
 **说明：**我们会进行一个初始的聚合来获得该时段内通过的车辆所属的不同制造商以及车辆的计数。然后，我们会进行一个聚合来计算有多少个制造商 – 在提供了某个时段内所有唯一值的情况下，我们可以获得相同的时间戳，然后，第二个聚合窗口需要尽可能小，不能聚合第一步中的 2 个窗口。
 
@@ -404,7 +399,6 @@ Azure 流分析中的查询采用类似 SQL 的查询语言来表述，该语言
 | --- | --- | --- |
 | user@location.com | RightMenu | 7 |
   
-
 **解决方案**
 
 	    SELECT
@@ -439,7 +433,6 @@ Azure 流分析中的查询采用类似 SQL 的查询语言来表述，该语言
 
 **解决方案**：
 
-
 	WITH SelectPreviousEvent AS
 	(
 	SELECT
@@ -456,7 +449,6 @@ Azure 流分析中的查询采用类似 SQL 的查询语言来表述，该语言
 	WHERE
     	[weight] < 20000
 	    AND previousWeight > 20000
-
 
 **解释**：使用 LAG 查看 24 小时内的输入流并查找因重量 < 20000 而持续的 StartFault 和 StopFault 实例。
 
@@ -489,7 +481,6 @@ Azure 流分析中的查询采用类似 SQL 的查询语言来表述，该语言
 | 2014-01-01T14:01:40.000Z | 2014-01-01T14:01:35.000Z | 6 |
 | 2014-01-01T14:01:45.000Z | 2014-01-01T14:01:35.000Z | 6 |
 
-    
 **解决方案**：
 
     SELECT
@@ -499,21 +490,18 @@ Azure 流分析中的查询采用类似 SQL 的查询语言来表述，该语言
     	input TIMESTAMP BY t
     GROUP BY HOPPINGWINDOW(second, 300, 5)
 
-
 **解释**：
 此查询每隔 5 秒生成事件，并输出前面收到的最后一个事件。[跳跃窗口](https://msdn.microsoft.com/zh-cn/library/dn835041.aspx "跳跃窗口 - Azure 流分析")持续时间确定多久后查询将查找最新事件（在本例中为 300 秒）。
-
 
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。
 
 ## 后续步骤
 
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
  
-
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

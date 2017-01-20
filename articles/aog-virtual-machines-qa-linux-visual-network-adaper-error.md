@@ -1,12 +1,17 @@
-<properties 
-	pageTitle="Linux 虚拟机虚拟网卡问题导致无法连接问题" 
-	description="Linux 虚拟机虚拟网卡问题导致无法连接问题。" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machines-aog" ms.date="" wacn.date="12/05/2016"/>
+---
+title: Linux 虚拟机虚拟网卡问题导致无法连接问题
+description: Linux 虚拟机虚拟网卡问题导致无法连接问题。
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machines-aog
+ms.date: 
+wacn.date: 12/05/2016
+---
+
 # Linux 虚拟机虚拟网卡问题导致无法连接问题 #
 
 ### 问题描述 ###

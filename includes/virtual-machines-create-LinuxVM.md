@@ -1,7 +1,6 @@
 <!-- need to be verified -->
 
-
-1. 使用[从 Azure CLI 连接到 Azure](/documentation/articles/xplat-cli-connect/)中列出的步骤登录到 Azure 订阅。
+1. 使用[从 Azure CLI 连接到 Azure](../articles/xplat-cli-connect.md)中列出的步骤登录到 Azure 订阅。
 
 2. 确保使用经典部署模式，如下所示：
 
@@ -30,8 +29,8 @@
         + Creating VM
         info:    vm create command OK
 
-    > [AZURE.NOTE]
-    对于 Linux 虚拟机，必须在 `vm create` 中提供 `-e` 选项。在创建虚拟机后便无法启用 SSH。有关 SSH 的详细信息，请参阅[如何在 Azure 中将 SSH 用于 Linux](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)。
+    > [!NOTE]
+    对于 Linux 虚拟机，必须在 `vm create` 中提供 `-e` 选项。在创建虚拟机后便无法启用 SSH。有关 SSH 的详细信息，请参阅[如何在 Azure 中将 SSH 用于 Linux](../articles/virtual-machines/virtual-machines-linux-mac-create-ssh-keys.md)。
 
 5. 可以通过使用 `azure vm show` 命令验证 VM 的属性。以下示例列出名为 `myVM` 的 VM 的信息：
 
@@ -42,6 +41,6 @@
         azure vm start myVM
 
 ## 后续步骤
-有关所有这些 Azure CLI 虚拟机命令的详细信息，请参阅[使用经典部署 API 的 Azure CLI](/documentation/articles/virtual-machines-command-line-tools/)。
+有关所有这些 Azure CLI 虚拟机命令的详细信息，请参阅[使用经典部署 API 的 Azure CLI](../articles/virtual-machines-command-line-tools.md)。
 
 <!---HONumber=Mooncake_1212_2016-->

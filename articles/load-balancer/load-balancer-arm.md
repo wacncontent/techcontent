@@ -1,23 +1,21 @@
-<properties
-   pageTitle="负载均衡器的 Azure Resource Manager 支持 | Azure "
-   description="使用 Azure Resource Manager 将 powershell 用于负载均衡器。对负载均衡器使用模板"
-   services="load-balancer"
-   documentationCenter="na"
-   authors="sdwheeler"
-   manager="carmonm"
-   editor="tysonn" />  
+---
+title: 负载均衡器的 Azure Resource Manager 支持 | Azure 
+description: 使用 Azure Resource Manager 将 powershell 用于负载均衡器。对负载均衡器使用模板
+services: load-balancer
+documentationCenter: na
+authors: sdwheeler
+manager: carmonm
+editor: tysonn
 
-<tags
-   ms.service="load-balancer"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/24/2016"
-   wacn.date="12/05/2016"
-   ms.author="sewhee" />
-
-
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/24/2016
+wacn.date: 12/05/2016
+ms.author: sewhee
+---
 
 # 将 Azure Resource Manager 支持与 Azure Load Balancer 配合使用
 
@@ -41,9 +39,9 @@ Azure Resource Manager 可让你使用声明性模板预配应用程序。在单
 
 模板可包含以下项的定义：虚拟机、虚拟网络、可用性集、网络接口 (NIC)、存储帐户、负载均衡器、网络安全组和公开 IP。模板可用于创建复杂应用程序所需的一切内容。模板文件可签入到内容管理系统进行版本控制和协作。
 
-[详细了解模板](/documentation/articles/resource-manager-template-walkthrough/)
+[详细了解模板](../azure-resource-manager/resource-manager-template-walkthrough.md)
 
-[详细了解网络资源](/documentation/articles/resource-groups-networking/)
+[详细了解网络资源](../virtual-network/resource-groups-networking.md)
 
 有关使用 Azure Load Balancer 的快速入门模板，可参阅 [GitHub 存储库](https://github.com/Azure/azure-quickstart-templates)（托管社区生成的一组模板）。
 
@@ -58,14 +56,14 @@ Azure Resource Manager 可让你使用声明性模板预配应用程序。在单
 Azure Resource Manager cmdlet、命令行工具和 REST API 入门
 
 - [Azure 网络 Cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/mt163510.aspx) 可用于创建负载均衡器。
-- [How to create a load balancer using Azure Resource Manager（如何使用 Azure Resource Manager 创建负载均衡器）](/documentation/articles/load-balancer-get-started-ilb-arm-ps/)
-- [Using the Azure CLI with Azure Resource Management（将 Azure CLI 与 Azure 资源管理配合使用）](/documentation/articles/xplat-cli-azure-resource-manager/)
+- [How to create a load balancer using Azure Resource Manager（如何使用 Azure Resource Manager 创建负载均衡器）](./load-balancer-get-started-ilb-arm-ps.md)
+- [Using the Azure CLI with Azure Resource Management（将 Azure CLI 与 Azure 资源管理配合使用）](../azure-resource-manager/xplat-cli-azure-resource-manager.md)
 - [Load Balancer REST APIs（负载均衡器 REST API）](https://msdn.microsoft.com/zh-cn/library/azure/mt163651.aspx)
 
 ## 后续步骤
 
-还可以[开始创建面向 Internet 的负载均衡器](/documentation/articles/load-balancer-get-started-internet-arm-ps/)，并配置适合特定负载均衡器网络流量行为的[分发模式](/documentation/articles/load-balancer-distribution-mode/)类型。
+还可以[开始创建面向 Internet 的负载均衡器](./load-balancer-get-started-internet-arm-ps.md)，并配置适合特定负载均衡器网络流量行为的[分发模式](./load-balancer-distribution-mode.md)类型。
 
-了解如何管理[负载均衡器的空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)。应用程序对于负载均衡器后的服务器需要使连接保持活动状态时，这非常重要。
+了解如何管理[负载均衡器的空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)。应用程序对于负载均衡器后的服务器需要使连接保持活动状态时，这非常重要。
 
 <!---HONumber=Mooncake_1128_2016-->

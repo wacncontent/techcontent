@@ -1,27 +1,26 @@
-<properties
-    pageTitle="适用于 DocumentDB 的数据库迁移工具 | Azure"
-    description="本文演示了如何使用开源 DocumentDB 数据迁移工具将数据从各种源导入到 DocumentDB，包括 MongoDB、SQL Server、表存储、Amazon DynamoDB、CSV 和 JSON 文件。将 CSV 转换为 JSON。"
-    keywords="csv 到 json, 数据库迁移工具, 将 csv 转换为 json"
-    services="documentdb"
-    author="andrewhoh"
-    manager="jhubbard"
-    editor="monicar"
-    documentationcenter="" />  
+---
+title: 适用于 DocumentDB 的数据库迁移工具 | Azure
+description: 本文演示了如何使用开源 DocumentDB 数据迁移工具将数据从各种源导入到 DocumentDB，包括 MongoDB、SQL Server、表存储、Amazon DynamoDB、CSV 和 JSON 文件。将 CSV 转换为 JSON。
+keywords: csv 到 json, 数据库迁移工具, 将 csv 转换为 json
+services: documentdb
+author: andrewhoh
+manager: jhubbard
+editor: monicar
+documentationcenter: 
 
-<tags
-    ms.assetid="d173581d-782a-445c-98d9-5e3c49b00e25"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/16/2016"
-    wacn.date="01/04/2017"
-    ms.author="anhoh" />  
-
+ms.assetid: d173581d-782a-445c-98d9-5e3c49b00e25
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/16/2016
+wacn.date: 01/04/2017
+ms.author: anhoh
+---
 
 # 使用数据库迁移工具将数据导入到 DocumentDB
-本文演示如何使用官方开源 DocumentDB 数据迁移工具将数据从各种源（包括 JSON 文件、CSV 文件、SQL、MongoDB、Azure 表存储、Amazon DynamoDB 和 DocumentDB 集合）导入到 [Azure DocumentDB](/home/features/documentdb/)。
+本文演示如何使用官方开源 DocumentDB 数据迁移工具将数据从各种源（包括 JSON 文件、CSV 文件、SQL、MongoDB、Azure 表存储、Amazon DynamoDB 和 DocumentDB 集合）导入到 [Azure DocumentDB](https://www.azure.cn/home/features/documentdb/)。
 
 阅读本文之后，你将能够回答以下问题：
 
@@ -85,7 +84,7 @@ DocumentDB 数据迁移工具是一个开源解决方案，它将数据从多个
 
     mongodb://<dbuser>:<dbpassword>@<host>:<port>/<database>
 
-> [AZURE.NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 MongoDB 实例。
+> [!NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 MongoDB 实例。
 
 输入将从其中导入数据的集合的名称。可以选择为查询（例如 {pop: {$gt: 5000}}）和/或投影（例如 {loc:0}）指定或提供一个文件来筛选和形成要导入的数据。
 
@@ -115,7 +114,7 @@ DocumentDB 数据迁移工具是一个开源解决方案，它将数据从多个
 
 连接字符串的格式是标准 SQL 连接字符串格式。
 
-> [AZURE.NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 SQL Server 实例。
+> [!NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 SQL Server 实例。
 
 嵌套分隔符属性用于在导入过程中创建层次结构关系（子文档）。请考虑下列 SQL 查询：
 
@@ -155,11 +154,9 @@ CSV 文件源导入程序选项可用于导入一个或多个 CSV 文件。添�
 
 ![CSV 源选项的屏幕截图 - CSV 到 JSON](./media/documentdb-import-data/csvsource.png)  
 
-
 与 SQL 源相似，嵌套分隔符属性可用于在导入过程中创建层次结构关系（子文档）。请考虑以下 CSV 标头行和数据行︰
 
 ![CSV 示例记录的屏幕截图 - CSV 到 JSON](./media/documentdb-import-data/csvsample.png)  
-
 
 请注意 DomainInfo.Domain\_Name 和 RedirectInfo.Redirecting 等别名。通过指定嵌套分隔符“.”，导入工具会在导入过程中创建 DomainInfo 和 RedirectInfo 子文档。下面是在 DocumentDB 中生成文档的示例︰
 
@@ -192,12 +189,11 @@ CSV 文件源导入程序选项可用于导入一个或多个 CSV 文件。添�
 
 ![Azure 表存储源选项的屏幕截图](./media/documentdb-import-data/azuretablesource.png)  
 
-
 Azure 表存储连接字符串的格式为：
 
     DefaultEndpointsProtocol=<protocol>;AccountName=<Account Name>;AccountKey=<Account Key>;EndpointSuffix=core.chinacloudapi.cn
 
-> [AZURE.NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 Azure 表存储实例。
+> [!NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 Azure 表存储实例。
 
 输入将从其中导入数据的 Azure 表的名称。可以选择指定[筛选器](https://msdn.microsoft.com/zh-cn/library/azure/ff683669.aspx)。
 
@@ -219,15 +215,13 @@ Azure 表存储源导入程序选项具有下列附加选项︰
 
 ![Amazon DynamoDB 源选项的屏幕截图 - 数据库迁移工具](./media/documentdb-import-data/dynamodbsource1.png)  
 
-
 ![Amazon DynamoDB 源选项的屏幕截图 - 数据库迁移工具](./media/documentdb-import-data/dynamodbsource2.png)  
-
 
 Amazon DynamoDB 连接字符串的格式为：
 
     ServiceURL=<Service Address>;AccessKey=<Access Key>;SecretKey=<Secret Key>;
 
-> [AZURE.NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 Amazon DynamoDB 实例。
+> [!NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 Amazon DynamoDB 实例。
 
 下面是一个用于从 Amazon DynamoDB 中导入的命令行示例︰
 
@@ -238,7 +232,6 @@ Amazon DynamoDB 连接字符串的格式为：
 
 ![Blob 文件源选项的屏幕截图](./media/documentdb-import-data/blobsource.png)  
 
-
 下面是一个用于从 Azure Blob 存储中导入 JSON 文件的命令行示例︰
 
     dt.exe /s:JsonFile /s.Files:"blobs://<account key>@account.blob.core.chinacloudapi.cn:443/importcontainer/.*" /t:DocumentDBBulk /t.ConnectionString:"AccountEndpoint=<DocumentDB Endpoint>;AccountKey=<DocumentDB Key>;Database=<DocumentDB Database>;" /t.Collection:doctest
@@ -248,20 +241,19 @@ Amazon DynamoDB 连接字符串的格式为：
 
 ![DocumentDB 源选项的屏幕截图](./media/documentdb-import-data/documentdbsource.png)  
 
-
 DocumentDB 连接字符串的格式为︰
 
     AccountEndpoint=<DocumentDB Endpoint>;AccountKey=<DocumentDB Key>;Database=<DocumentDB Database>;
 
-DocumentDB 帐户连接字符串可从 Azure 门户预览的“密钥”边栏选项卡中检索到（如[如何管理 DocumentDB 帐户](/documentation/articles/documentdb-manage-account/)中所述），但是需要将数据库的名称追加到连接字符串后面（格式如下）：
+DocumentDB 帐户连接字符串可从 Azure 门户预览的“密钥”边栏选项卡中检索到（如[如何管理 DocumentDB 帐户](./documentdb-manage-account.md)中所述），但是需要将数据库的名称追加到连接字符串后面（格式如下）：
 
     Database=<DocumentDB Database>;
 
-> [AZURE.NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 DocumentDB 实例。
+> [!NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 DocumentDB 实例。
 
 要从单个 DocumentDB 集合中导入，请输入将从其中导入数据的集合的名称。若要从多个 DocumentDB 集合中导入，请提供与一个或多个集合名称相匹配的正则表达式（例如 collection01 | collection02 | collection03）。可以选择为查询指定或提供一个文件来筛选和形成要导入的数据。
 
-> [AZURE.NOTE] 由于集合字段接受正则表达式，因此如果要从名称包含正则表达式字符的单个集合中导入，则必须相应地转义这些字符。
+> [!NOTE] 由于集合字段接受正则表达式，因此如果要从名称包含正则表达式字符的单个集合中导入，则必须相应地转义这些字符。
 
 DocumentDB 源导入程序选项具有下列高级选项︰
 
@@ -272,8 +264,7 @@ DocumentDB 源导入程序选项具有下列高级选项︰
 
 ![DocumentDB 源高级选项的屏幕截图](./media/documentdb-import-data/documentdbsourceoptions.png)
 
-> [AZURE.TIP] 导入工具默认设置为 DirectTcp 连接模式。如果遇到防火墙问题，请切换到网关连接模式，因为它只需要端口 443。
-
+> [!TIP] 导入工具默认设置为 DirectTcp 连接模式。如果遇到防火墙问题，请切换到网关连接模式，因为它只需要端口 443。
 
 下面是一些从 DocumentDB 中导入的命令行示例︰
 
@@ -286,8 +277,8 @@ DocumentDB 源导入程序选项具有下列高级选项︰
     #Export a DocumentDB collection to a JSON file
     dt.exe /s:DocumentDB /s.ConnectionString:"AccountEndpoint=<DocumentDB Endpoint>;AccountKey=<DocumentDB Key>;Database=<DocumentDB Database>;" /s.Collection:StoresSub /t:JsonFile /t.File:StoresExport.json /t.Overwrite /t.CollectionThroughput:2500
 
-> [AZURE.TIP]
-DocumentDB 数据导入工具还支持从 [DocumentDB 模拟器](/documentation/articles/documentdb-nosql-local-emulator/)导入数据。从本地模拟器导入数据时，请将终结点设为 https://localhost:<port>。
+> [!TIP]
+DocumentDB 数据导入工具还支持从 [DocumentDB 模拟器](./documentdb-nosql-local-emulator.md)导入数据。从本地模拟器导入数据时，请将终结点设为 https://localhost:<port>。
 > 
 > 
 
@@ -296,35 +287,32 @@ DocumentDB 数据导入工具还支持从 [DocumentDB 模拟器](/documentation/
 
 ![HBase 源选项的屏幕截图](./media/documentdb-import-data/hbasesource1.png)  
 
-
 ![HBase 源选项的屏幕截图](./media/documentdb-import-data/hbasesource2.png)  
-
 
 HBase Stargate 连接字符串的格式为︰
 
     ServiceURL=<server-address>;Username=<username>;Password=<password>
 
-> [AZURE.NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 HBase 实例。
+> [!NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 HBase 实例。
 
 下面是一个用于从HBase 中导入的命令行示例︰
 
     dt.exe /s:HBase /s.ConnectionString:ServiceURL=<server-address>;Username=<username>;Password=<password> /s.Table:Contacts /t:DocumentDBBulk /t.ConnectionString:"AccountEndpoint=<DocumentDB Endpoint>;AccountKey=<DocumentDB Key>;Database=<DocumentDB Database>;" /t.Collection:hbaseimport
 
 ## <a id="DocumentDBBulkTarget"></a>导入到 DocumentDB（批量导入）
-借助 DocumentDB 批量导入程序，可以使用 DocumentDB 存储的过程从所有可用的源选项中导入，以提高效率。该工具支持导入到一个单分区 DocumentDB 集合，并支持分片导入，通过这种方法可跨多个单分区 DocumentDB 集合对数据进行分区。有关数据分区的详细信息，请参阅 [Azure DocumentDB 中的分区和缩放](/documentation/articles/documentdb-partition-data/)。该工具将创建、执行，然后删除目标集合中存储的过程。
+借助 DocumentDB 批量导入程序，可以使用 DocumentDB 存储的过程从所有可用的源选项中导入，以提高效率。该工具支持导入到一个单分区 DocumentDB 集合，并支持分片导入，通过这种方法可跨多个单分区 DocumentDB 集合对数据进行分区。有关数据分区的详细信息，请参阅 [Azure DocumentDB 中的分区和缩放](./documentdb-partition-data.md)。该工具将创建、执行，然后删除目标集合中存储的过程。
 
 ![DocumentDB 批量选项的屏幕截图](./media/documentdb-import-data/documentdbbulk.png)  
-
 
 DocumentDB 连接字符串的格式为︰
 
     AccountEndpoint=<DocumentDB Endpoint>;AccountKey=<DocumentDB Key>;Database=<DocumentDB Database>;
 
-DocumentDB 帐户连接字符串可从 Azure 门户预览的“密钥”边栏选项卡中检索到（如[如何管理 DocumentDB 帐户](/documentation/articles/documentdb-manage-account/)中所述），但是需要将数据库的名称追加到连接字符串后面（格式如下）：
+DocumentDB 帐户连接字符串可从 Azure 门户预览的“密钥”边栏选项卡中检索到（如[如何管理 DocumentDB 帐户](./documentdb-manage-account.md)中所述），但是需要将数据库的名称追加到连接字符串后面（格式如下）：
 
     Database=<DocumentDB Database>;
 
-> [AZURE.NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 DocumentDB 实例。
+> [!NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 DocumentDB 实例。
 
 要导入到单个 DocumentDB 集合，请输入将向其中导入数据的集合的名称，然后单击“添加”按钮。若要导入到多个集合，请分别输入每个集合的名称，或使用以下语法来指定多个集合：*collection\_prefix*[起始索引-结束索引]。在通过前述语法指定多个集合时，请注意以下事项︰
 
@@ -332,9 +320,9 @@ DocumentDB 帐户连接字符串可从 Azure 门户预览的“密钥”边栏�
 2. 可以使用缩写的语法︰collection[3] 将生成与第 1 步相同的一组集合。
 3. 可以提供多个替代。例如，collection[0-1] [0-9] 将生成 20 个带前导零的集合名称 (collection01，...02...03)。
 
-指定集合名称后，请选择集合所需的吞吐量（400 RU 到 10,000 RU）。为了获得最佳导入性能，请选择较高的吞吐量。有关性能级别的详细信息，请参阅 [DocumentDB 中的性能级别](/documentation/articles/documentdb-performance-levels/)。
+指定集合名称后，请选择集合所需的吞吐量（400 RU 到 10,000 RU）。为了获得最佳导入性能，请选择较高的吞吐量。有关性能级别的详细信息，请参阅 [DocumentDB 中的性能级别](./documentdb-performance-levels.md)。
 
-> [AZURE.NOTE] 性能吞吐量设置仅适用于创建集合。如果指定的集合已存在，将不会修改其吞吐量。
+> [!NOTE] 性能吞吐量设置仅适用于创建集合。如果指定的集合已存在，将不会修改其吞吐量。
 
 在导入到多个集合时，导入工具支持基于哈希的分片。在此方案中，指定要用作分区键的文档属性（如果分区键留空，文档将跨多个目标集合随机分片）。
 
@@ -344,11 +332,9 @@ DocumentDB 帐户连接字符串可从 Azure 门户预览的“密钥”边栏�
 
  ![DocumentDB 批量插入 sproc 选项的屏幕截图](./media/documentdb-import-data/bulkinsertsp.png)  
 
-
 此外，在导入日期类型时（例如从 SQL Server 或 MongoDB 中），可以选择三个导入选项中的一个︰
 
  ![DocumentDB 日期时间导入选项的屏幕截图](./media/documentdb-import-data/datetimeoptions.png)  
-
 
 - 字符串：保持字符串值
 - Epoch：保持 Epoch 数字值
@@ -366,23 +352,22 @@ DocumentDB 批量导入程序具有下列高级附加选项︰
 
 ![DocumentDB 批量导入高级选项的屏幕截图](./media/documentdb-import-data/docdbbulkoptions.png)
 
-> [AZURE.TIP] 导入工具默认设置为 DirectTcp 连接模式。如果遇到防火墙问题，请切换到网关连接模式，因为它只需要端口 443。
+> [!TIP] 导入工具默认设置为 DirectTcp 连接模式。如果遇到防火墙问题，请切换到网关连接模式，因为它只需要端口 443。
 
 ## <a id="DocumentDBSeqTarget"></a>导入到 DocumentDB（顺序记录导入）
-借助 DocumentDB 顺序记录导入程序，可以从任何可用的源选项中逐条导入记录。如果要导入到已达到存储过程配额的现有集合中，可以选择此选项。该工具支持导入到单个（单分区和多分区）DocumentDB 集合，并支持分片导入，通过这种方法可跨多个单分区和/或多分区 DocumentDB 集合对数据进行分区。有关数据分区的详细信息，请参阅 [Azure DocumentDB 中的分区和缩放](/documentation/articles/documentdb-partition-data/)。
+借助 DocumentDB 顺序记录导入程序，可以从任何可用的源选项中逐条导入记录。如果要导入到已达到存储过程配额的现有集合中，可以选择此选项。该工具支持导入到单个（单分区和多分区）DocumentDB 集合，并支持分片导入，通过这种方法可跨多个单分区和/或多分区 DocumentDB 集合对数据进行分区。有关数据分区的详细信息，请参阅 [Azure DocumentDB 中的分区和缩放](./documentdb-partition-data.md)。
 
 ![DocumentDB 顺序记录导入选项的屏幕截图](./media/documentdb-import-data/documentdbsequential.png)  
-
 
 DocumentDB 连接字符串的格式为︰
 
     AccountEndpoint=<DocumentDB Endpoint>;AccountKey=<DocumentDB Key>;Database=<DocumentDB Database>;
 
-DocumentDB 帐户连接字符串可从 Azure 门户预览的“密钥”边栏选项卡中检索到（如[如何管理 DocumentDB 帐户](/documentation/articles/documentdb-manage-account/)中所述），但是需要将数据库的名称追加到连接字符串后面（格式如下）：
+DocumentDB 帐户连接字符串可从 Azure 门户预览的“密钥”边栏选项卡中检索到（如[如何管理 DocumentDB 帐户](./documentdb-manage-account.md)中所述），但是需要将数据库的名称追加到连接字符串后面（格式如下）：
 
     Database=<DocumentDB Database>;
 
-> [AZURE.NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 DocumentDB 实例。
+> [!NOTE] 使用验证命令来确保可以访问在连接字符串字段中指定的 DocumentDB 实例。
 
 要导入到单个 DocumentDB 集合，请输入将向其中导入数据的集合的名称，然后单击“添加”按钮。若要导入到多个集合，请分别输入每个集合的名称，或使用以下语法来指定多个集合：*collection\_prefix*[起始索引-结束索引]。在通过前述语法指定多个集合时，请注意以下事项︰
 
@@ -390,9 +375,9 @@ DocumentDB 帐户连接字符串可从 Azure 门户预览的“密钥”边栏�
 2. 可以使用缩写的语法︰collection[3] 将生成与第 1 步相同的一组集合。
 3. 可以提供多个替代。例如，collection[0-1] [0-9] 将生成 20 个带前导零的集合名称 (collection01，...02...03)。
 
-指定集合名称后，请选择集合所需的吞吐量（400 RU 到 250,000 RU）。为了获得最佳导入性能，请选择较高的吞吐量。有关性能级别的详细信息，请参阅 [DocumentDB 中的性能级别](/documentation/articles/documentdb-performance-levels/)。在吞吐量超过 10,000 RU 的集合中进行任何导入都需要使用分区键。如果选择使用 250,000 个以上的 RU，请参阅[请求提高 DocumentDB 帐户限制](/documentation/articles/documentdb-increase-limits/)。
+指定集合名称后，请选择集合所需的吞吐量（400 RU 到 250,000 RU）。为了获得最佳导入性能，请选择较高的吞吐量。有关性能级别的详细信息，请参阅 [DocumentDB 中的性能级别](./documentdb-performance-levels.md)。在吞吐量超过 10,000 RU 的集合中进行任何导入都需要使用分区键。如果选择使用 250,000 个以上的 RU，请参阅[请求提高 DocumentDB 帐户限制](./documentdb-increase-limits.md)。
 
-> [AZURE.NOTE] 吞吐量设置仅适用于创建集合。如果指定的集合已存在，将不会修改其吞吐量。
+> [!NOTE] 吞吐量设置仅适用于创建集合。如果指定的集合已存在，将不会修改其吞吐量。
 
 在导入到多个集合时，导入工具支持基于哈希的分片。在此方案中，指定要用作分区键的文档属性（如果分区键留空，文档将跨多个目标集合随机分片）。
 
@@ -401,7 +386,6 @@ DocumentDB 帐户连接字符串可从 Azure 门户预览的“密钥”边栏�
 导入过程中可以使用多个高级选项。首先，在导入日期类型时（例如从 SQL Server 或 MongoDB 中），可以选择三个导入选项中的一个︰
 
  ![DocumentDB 日期时间导入选项的屏幕截图](./media/documentdb-import-data/datetimeoptions.png)  
-
 
 - 字符串：保持字符串值
 - Epoch：保持 Epoch 数字值
@@ -418,7 +402,7 @@ DocumentDB - 顺序记录导入程序具有下列高级附加选项︰
 
 ![DocumentDB 顺序记录导入高级选项的屏幕截图](./media/documentdb-import-data/documentdbsequentialoptions.png)
 
-> [AZURE.TIP] 导入工具默认设置为 DirectTcp 连接模式。如果遇到防火墙问题，请切换到网关连接模式，因为它只需要端口 443。
+> [!TIP] 导入工具默认设置为 DirectTcp 连接模式。如果遇到防火墙问题，请切换到网关连接模式，因为它只需要端口 443。
 
 ## <a id="IndexingPolicy"></a>在创建 DocumentDB 集合时指定索引策略
 当允许迁移工具在导入过程中创建集合时，可以指定集合的索引策略。在 DocumentDB 批量导入和 DocumentDB 顺序记录选项的高级选项部分，导航到“索引策略”部分。
@@ -434,8 +418,7 @@ DocumentDB - 顺序记录导入程序具有下列高级附加选项︰
 
 ![DocumentDB 索引策略高级选项的屏幕截图](./media/documentdb-import-data/indexingpolicy2.png)
 
-> [AZURE.NOTE] 如果未指定索引策略，则将应用默认策略。有关索引策略的详细信息，请参阅 [DocumentDB 索引策略](/documentation/articles/documentdb-indexing-policies/)。
-
+> [!NOTE] 如果未指定索引策略，则将应用默认策略。有关索引策略的详细信息，请参阅 [DocumentDB 索引策略](./documentdb-indexing-policies.md)。
 
 ## <a name="export-to-json-file"></a>导出到 JSON 文件
 使用 DocumentDB JSON 导出程序，可以将所有可用的源选项导出到包含一组 JSON 文档的 JSON 文件。该工具可为你处理导出，你也可以选择查看生成的迁移命令并自己运行该命令。生成的 JSON 文件可能存储在本地或 Azure Blob 存储中。

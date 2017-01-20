@@ -1,21 +1,21 @@
-<properties 
-    pageTitle="事件中心身份验证和安全模型概述 | Azure"
-    description="事件中心身份验证和安全模型概述。"
-    services="event-hubs"
-    documentationCenter="na"
-    authors="sethmanheim"
-    manager="timlt"
-    editor="" />  
+---
+title: 事件中心身份验证和安全模型概述 | Azure
+description: 事件中心身份验证和安全模型概述。
+services: event-hubs
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
 
-<tags 
-    ms.service="event-hubs"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="08/16/2016"
-    wacn.date="01/03/2017"
-    ms.author="sethm;clemensv" />
+ms.service: event-hubs
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/16/2016
+wacn.date: 01/03/2017
+ms.author: sethm;clemensv
+---
 
 # 事件中心身份验证和安全模型概述
 
@@ -27,7 +27,7 @@
 
 ## 设备身份验证
 
-事件中心安全模型基于[共享访问签名 (SAS)](/documentation/articles/service-bus-shared-access-signature-authentication/) 令牌与发布者的组合。事件发布者定义事件中心的虚拟终结点。发布者只能用于将消息发送到事件中心。无法从发布者接收消息。
+事件中心安全模型基于[共享访问签名 (SAS)](../service-bus-messaging/service-bus-shared-access-signature-authentication.md) 令牌与发布者的组合。事件发布者定义事件中心的虚拟终结点。发布者只能用于将消息发送到事件中心。无法从发布者接收消息。
 
 通常，事件中心为每个设备使用一个发布者。发送到事件中心的任何发布者的所有消息都将在该事件中心内排队。发布者允许进行精细的访问控制和限制。
 
@@ -42,7 +42,6 @@
 创建事件中心命名空间时，Azure 事件中心将生成名为 **RootManageSharedAccessKey** 的 256 位 SAS 密钥。此密钥授予对命名空间的发送、侦听和管理权限。你可以创建其他密钥。建议你生成一个密钥用于授予对特定事件中心的发送权限。本主题的余下部分假设已将此密钥命名为 `EventHubSendKey`。
 
 在创建事件中心时，以下示例将创建一个仅限发送的密钥：
-
 
 		// Create namespace manager.
 		string serviceNamespace = "YOUR_NAMESPACE";
@@ -60,27 +59,21 @@
 		ed.Authorization.Add(eventHubSendRule); 
 		nm.CreateEventHub(ed);
 
-
 ### 生成令牌
 
 可以使用 SAS 密钥生成令牌。对于每个设备，只能生成一个令牌。然后，可以使用以下方法生成令牌。所有令牌都使用 **EventHubSendKey** 密钥生成。将为每个令牌分配一个唯一 URI。
 
-
 		public static string SharedAccessSignatureTokenProvider.GetSharedAccessSignature(string keyName, string sharedAccessKey, string resource, TimeSpan tokenTimeToLive)
-
 
 调用此方法时，应将 URI 指定为 `//<NAMESPACE>.servicebus.chinacloudapi.cn/<EVENT_HUB_NAME>/publishers/<PUBLISHER_NAME>`。所有令牌的 URI 都是相同的，但每个令牌的 `PUBLISHER_NAME` 应该不同。`PUBLISHER_NAME` 最好是表示要接收该令牌的设备的 ID。
 
 此方法将生成具有以下结构的令牌：
 
-
 		SharedAccessSignature sr={URI}&sig={HMAC_SHA256_SIGNATURE}&se={EXPIRATION_TIME}&skn={KEY_NAME}
-
 
 令牌过期时间以从 1970 年 1 月 1 日开始算起的秒数指定。下面是一个令牌示例：
 
 		SharedAccessSignature sr=contoso&sig=nPzdNN%2Gli0ifrfJwaK4mkK0RqAB%2byJUlt%2bGFmBHG77A%3d&se=1403130337&skn=RootManageSharedAccessKey
-
 
 通常，令牌的使用期限相当于或长于设备的使用期限。如果设备能够获取新令牌，可以使用使用期限较短的令牌。
 
@@ -110,9 +103,8 @@
 - 使用服务总线队列的[队列消息解决方案]
 - [使用事件中心的完整示例应用程序]
 
-[事件中心概述]: /documentation/articles/event-hubs-overview/
+[事件中心概述]: ./event-hubs-overview.md
 [使用事件中心的完整示例应用程序]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-286fd097
-[队列消息解决方案]: /documentation/articles/service-bus-dotnet-multi-tier-app-using-service-bus-queues/
+[队列消息解决方案]: ../service-bus-messaging/service-bus-dotnet-multi-tier-app-using-service-bus-queues.md
  
-
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

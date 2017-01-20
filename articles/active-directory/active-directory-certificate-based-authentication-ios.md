@@ -1,28 +1,26 @@
-<properties
-    pageTitle="iOS 设备上的基于证书的身份验证入门 | Azure"
-    description="了解如何在 iOS 设备的解决方案中配置基于证书的身份验证"
-    services="active-directory"
-    author="MarkusVi"
-    documentationcenter="na"
-    manager="femila" />  
+---
+title: iOS 设备上的基于证书的身份验证入门 | Azure
+description: 了解如何在 iOS 设备的解决方案中配置基于证书的身份验证
+services: active-directory
+author: MarkusVi
+documentationcenter: na
+manager: femila
 
-<tags
-    ms.assetid="26a6fc54-0153-44fb-b970-9b432c99e9f9"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="12/16/2016"
-    wacn.date="01/05/2017"
-    ms.author="markvi" />  
-
+ms.assetid: 26a6fc54-0153-44fb-b970-9b432c99e9f9
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 12/16/2016
+wacn.date: 01/05/2017
+ms.author: markvi
+---
 
 # iOS 上基于证书的身份验证入门
->[AZURE.SELECTOR]
-- [iOS](/documentation/articles/active-directory-certificate-based-authentication-ios/)
-- [Android](/documentation/articles/active-directory-certificate-based-authentication-android/)
-
+>[!div class="op_single_selector"]
+- [iOS](./active-directory-certificate-based-authentication-ios.md)
+- [Android](./active-directory-certificate-based-authentication-android.md)
 
 本主题说明如何在 iOS 设备上为 Office 365 Enterprise、Business 和 Education 计划中租户的用户配置并使用基于证书的身份验证 (CBA)。
 
@@ -81,8 +79,6 @@ iOS 设备上的 Office 应用需要安装 Azure Authenticator。
 
 `Set-MSOLDomainFederationSettings -domainname <domain> -PromptLoginBehavior Disabled`  
 
-  
-
 ### Exchange ActiveSync 客户端支持
 iOS 9 或更高版本支持本机 iOS 邮件客户端。若要确定其他所有 Exchange ActiveSync 应用程序是否支持此功能，请联系应用程序开发人员。
 
@@ -116,7 +112,6 @@ iOS 9 或更高版本支持本机 iOS 邮件客户端。若要确定其他所有
         IntermediateAuthority = 1 
     } 
 
-
 若要上传信息，可以通过 Windows PowerShell 使用 Azure AD 模块。下面是添加、删除或修改证书颁发机构的示例。
 
 ### 为 Azure AD 租户配置基于证书的身份验证
@@ -144,7 +139,6 @@ iOS 9 或更高版本支持本机 iOS 邮件客户端。若要确定其他所有
 检索当前存储在 Azure Active Directory 中的租户的证书颁发机构：
 
 	Get-AzureADTrustedCertificateAuthority 
-
 
 ### 删除证书颁发机构
 1. 检索证书颁发机构：

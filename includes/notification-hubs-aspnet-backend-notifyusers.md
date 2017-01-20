@@ -8,12 +8,11 @@
 
 以下步骤说明了如何创建新的 ASP.NET WebAPI 后端：
 
-
-> [AZURE.NOTE]**重要提示**：在开始本教程之前，请确保已安装最新版本的 NuGet 程序包管理器。若要进行检查，请启动 Visual Studio。从“工具”菜单，单击“扩展和更新”。搜索“适用于 Visual Studio 2013 的 NuGet 程序包管理器”，并且确保具有版本 2.8.50313.46 或更高版本。否则，请卸载并重新安装 NuGet 程序包管理器。
+> [!NOTE]**重要提示**：在开始本教程之前，请确保已安装最新版本的 NuGet 程序包管理器。若要进行检查，请启动 Visual Studio。从“工具”菜单，单击“扩展和更新”。搜索“适用于 Visual Studio 2013 的 NuGet 程序包管理器”，并且确保具有版本 2.8.50313.46 或更高版本。否则，请卸载并重新安装 NuGet 程序包管理器。
 > 
 > ![][B4]
 
-> [AZURE.NOTE]请确保已安装 Visual Studio [Azure SDK](/downloads/) 以便进行 Web 应用部署。
+> [!NOTE]请确保已安装 Visual Studio [Azure SDK](/downloads/) 以便进行 Web 应用部署。
 
 1. 启动 Visual Studio 或 Visual Studio Express。单击“服务器资源管理器”并登录到你的 Azure 帐户。Visual Studio 需要你登录才能在你的帐户中创建 Web 应用资源。
 2. 在 Visual Studio 中，依次单击“文件”、“新建”和“项目”，依次展开“模板”和“Visual C#”，然后依次单击“Web”和“ASP.NET Web 应用程序”，键入名称 **AppBackend**，然后单击“确定”。 
@@ -28,13 +27,9 @@
 
 	![][B5]
 
-
-
 ## 在 WebAPI 后端上对客户端进行身份验证
 
 在本部分，你将为新的后端创建名为 **AuthenticationTestHandler** 的新消息处理程序类。此类衍生自 [DelegatingHandler](https://msdn.microsoft.com/library/system.net.http.delegatinghandler.aspx) 并已添加为消息处理程序，以便处理传入后端的所有请求。
-
-
 
 1. 在“解决方案资源管理器”中，右键单击“AppBackend”项目，单击“添加”，然后单击“类”。将新类命名为 **AuthenticationTestHandler.cs**，然后单击“添加”以生成该类。通过此类可简单地使用*基本身份验证* 对用户进行身份验证。请注意，您的应用可以使用所有身份验证方案。
 
@@ -104,7 +99,7 @@
 	        }
 	    }
 
-	> [AZURE.NOTE]**安全说明**：`AuthenticationTestHandler` 类不提供真正的身份验证。它仅用于模拟基本身份验证并且是不安全的。您必须在生产应用程序和服务中实现安全的身份验证机制。
+	> [!NOTE]**安全说明**：`AuthenticationTestHandler` 类不提供真正的身份验证。它仅用于模拟基本身份验证并且是不安全的。您必须在生产应用程序和服务中实现安全的身份验证机制。
 
 4. 在 **App\_Start/WebApiConfig.cs** 类中 `Register` 方法的末尾添加以下代码，以注册消息处理程序：
 
@@ -115,9 +110,6 @@
 ## 使用 WebAPI 后端注册通知
 
 在本部分，我们要将新的控制器添加到 WebAPI 后端来处理请求，以使用通知中心的客户端库为用户和设备注册通知。控制器将为已由 `AuthenticationTestHandler` 验证并已附加到 HttpContext 的用户添加用户标记。该标记采用以下字符串格式：`"username:<actual username>"`。
-
-
- 
 
 1. 在“解决方案资源管理器”中，右键单击“AppBackend”项目，然后单击“管理 NuGet 程序包”。
 
@@ -148,8 +140,6 @@
 																			 "<hub name>");
             }
         }
-
-
 
 7. 接下来，我们将创建一个名为 **RegisterController** 的新控制器。在“解决方案资源管理器”中，右键单击“Controllers”文件夹，然后依次单击“添加”和“控制器”。单击“Web API 2 Controller -- Empty”项目，然后单击“添加”。将新类命名为 **RegisterController**，然后再次单击“添加”以生成该控制器。
 
@@ -277,7 +267,6 @@
 
 在本部分，你将添加新的控制器，以便客户端设备使用 ASP.NET WebAPI 后端中的 Azure 通知中心服务管理库根据用户名标记发送通知。
 
-
 1. 创建另一个名为 **NotificationsController** 的新控制器。以你在上一节中创建 **RegisterController** 的相同方式来创建新控制器。
 
 2. 在 NotificationsController.cs 中，添加以下 `using` 语句：
@@ -334,7 +323,6 @@
             return Request.CreateResponse(ret);
         }
 
-
 4. 按 **F5** 运行应用程序并确保到目前为止操作的准确性。该应用应启动 Web 浏览器，然后显示 ASP.NET 主页。
 
 ##发布新的 WebAPI 后端
@@ -352,7 +340,6 @@
 4. 记下“连接”选项卡中的“目标 URL”属性。在本教程后面的部分中，我们将此 URL 称为*后端终结点*。单击“发布”。
 
     ![][B18]
-
 
 [B1]: ./media/notification-hubs-aspnet-backend-notifyusers/notification-hubs-secure-push1.png
 [B2]: ./media/notification-hubs-aspnet-backend-notifyusers/notification-hubs-secure-push2.png

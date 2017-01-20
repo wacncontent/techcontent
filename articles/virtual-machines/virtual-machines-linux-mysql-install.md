@@ -1,42 +1,38 @@
-<properties
-	pageTitle="在 Linux VM 上设置 MySQL | Azure"
-	description="了解如何在 Azure 中的 Linux 虚拟机（Ubuntu 或 RedHat 系列 OS）上安装 MySQL 堆栈"
-	services="virtual-machines-linux"
-	documentationCenter=""
-	authors="SuperScottz"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager,azure-service-management"/>
+---
+title: 在 Linux VM 上设置 MySQL | Azure
+description: 了解如何在 Azure 中的 Linux 虚拟机（Ubuntu 或 RedHat 系列 OS）上安装 MySQL 堆栈
+services: virtual-machines-linux
+documentationCenter: 
+authors: SuperScottz
+manager: timlt
+editor: 
+tags: azure-resource-manager,azure-service-management
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="02/01/2016"
-	wacn.date="03/28/2016"
-	ms.author="mingzhan"/>
-
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 02/01/2016
+wacn.date: 03/28/2016
+ms.author: mingzhan
+---
 
 #如何在 Azure 上安装 MySQL
 
-
 在本文中，你将了解如何在运行 Linux 的 Azure 虚拟机上安装和配置 MySQL。
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
-
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
 
 ##在虚拟机上安装 MySQL
 
-> [AZURE.NOTE]你必须已经有一个运行 Linux 的 Azure 虚拟机，才能完成本教程。在继续操作前，请参阅 [Azure Linux VM 教程](/documentation/articles/virtual-machines-linux-quick-create-cli/)创建并设置一个 Linux VM，其中 `mysqlnode` 为 VM 名称，`azureuser` 为用户。
+> [!NOTE]你必须已经有一个运行 Linux 的 Azure 虚拟机，才能完成本教程。在继续操作前，请参阅 [Azure Linux VM 教程](./virtual-machines-linux-quick-create-cli.md)创建并设置一个 Linux VM，其中 `mysqlnode` 为 VM 名称，`azureuser` 为用户。
 
 在此情况下，请使用 3306 端口作为 MySQL 端口。
 
-通过 putty 连接到你创建的 Linux VM。如果这是首次使用 Azure Linux VM，请参阅[此处](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)了解如何使用 putty 连接到 Linux VM。
+通过 putty 连接到你创建的 Linux VM。如果这是首次使用 Azure Linux VM，请参阅[此处](./virtual-machines-linux-mac-create-ssh-keys.md)了解如何使用 putty 连接到 Linux VM。
 
 我们将使用存储库包来安装 MySQL5.6，作为本文中的示例。实际上，MySQL5.6 在性能上相对于 MySQL5.5 而言有更大的改进。[此处](http://www.mysqlperformanceblog.com/2013/02/18/is-mysql-5-6-slower-than-mysql-5-5/)提供更多信息。
-
 
 ###如何在 Ubuntu 上安装 MySQL5.6
 我们在这里会将 Linux VM 与 Azure 中的 Ubuntu 一起使用。
@@ -53,7 +49,6 @@
     在安装过程中，你会看到如下所示的对话窗口弹出，要求你设置 MySQL 根密码。你需要在此处设置该密码。
 
     ![图像](./media/virtual-machines-linux-mysql-install/virtual-machines-linux-install-mysql-p01.png)
-
 
     再次输入密码进行确认。
 
@@ -82,7 +77,6 @@
     (d) 重新启动 MySQL 服务
 
              #[root@mysqlnode ~]# service mysql restart
-
 
 ###如何在 Red Hat OS 系列（例如 CentOS、Oracle Linux）上安装 MySQL
 在这里，我们会将 Linux VM 用于 CentOS 或 Oracle Linux。
@@ -131,7 +125,6 @@
 
            #[root@mysqlnode ~]#netstat  –tunlp|grep 3306
 
-
     (c) 启动 MySQL Server：
 
            #[root@mysqlnode ~]#service mysqld start
@@ -143,7 +136,6 @@
     (e) 将 MySQL 设置为在系统启动时启动：
 
            #[root@mysqlnode ~]#chkconfig mysqld on
-
 
 ###如何在 SUSE Linux 上安装 MySQL
 我们在这里会通过 OpenSUSE 来使用 Linux VM。
@@ -169,7 +161,6 @@
     (b) 检查是否为 MySQL Server 的默认端口：
 
            #[root@mysqlnode ~]# netstat  –tunlp|grep 3306
-
 
     (c) 启动 MySQL Server：
 

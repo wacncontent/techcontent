@@ -1,27 +1,24 @@
-<properties
-	pageTitle="Azure 活动日志概述 | Azure"
-	description="了解什么是 Azure 活动日志，以及如何通过它了解发生在 Azure 订阅中的事件。"
-	authors="johnkemnetz"
-	manager="rboucher"
-	editor=""
-	services="monitoring-and-diagnostics"
-	documentationCenter="monitoring-and-diagnostics"/>  
+---
+title: Azure 活动日志概述 | Azure
+description: 了解什么是 Azure 活动日志，以及如何通过它了解发生在 Azure 订阅中的事件。
+authors: johnkemnetz
+manager: rboucher
+editor: 
+services: monitoring-and-diagnostics
+documentationCenter: monitoring-and-diagnostics
 
-
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="12/09/2016"
-	wacn.date="01/03/2017"
-	ms.author="johnkem"/>  
-
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/09/2016
+wacn.date: 01/03/2017
+ms.author: johnkem
+---
 
 # Azure 活动日志概述
 **Azure 活动日志**是一种日志，方便用户了解对订阅中的资源执行的操作。活动日志此前称为“审核日志”或“操作日志”，因为它报告订阅的控制平面事件。使用活动日志，用户可以确定针对订阅中的资源执行的任何写入操作（PUT、POST、DELETE）的“内容、人员和时间”。还可以了解该操作和其他相关属性的状态。活动日志不包括读取 (GET) 操作。
-
 
 可以通过 Azure 门户预览、CLI、PowerShell cmdlet 和 Azure Monitor REST API 从活动日志检索事件。
 
@@ -30,10 +27,10 @@
 
 - 在 **Azure 门户预览**中查询和查看活动日志。
 - 通过 REST API、PowerShell Cmdlet 或 CLI 查询活动日志。
-- [创建触发活动日志事件的电子邮件或 webhook 警报。](/documentation/articles/insights-auditlog-to-webhook-email/)
-- [将活动日志保存到**存储帐户**进行存档或手动检查](/documentation/articles/monitoring-archive-activity-log/)。可以使用“日志配置文件”指定保留时间（天）。
+- [创建触发活动日志事件的电子邮件或 webhook 警报。](./insights-auditlog-to-webhook-email.md)
+- [将活动日志保存到**存储帐户**进行存档或手动检查](./monitoring-archive-activity-log.md)。可以使用“日志配置文件”指定保留时间（天）。
 - 在 PowerBI 中使用 [**PowerBI 内容包**](https://powerbi.microsoft.com/zh-CN/documentation/powerbi-content-pack-azure-audit-logs/)分析活动日志。
-- [将活动日志流式传输到**事件中心**](/documentation/articles/monitoring-stream-activity-logs-event-hubs/)，方便第三方服务或自定义分析解决方案（例如 PowerBI）引入。
+- [将活动日志流式传输到**事件中心**](./monitoring-stream-activity-logs-event-hubs.md)，方便第三方服务或自定义分析解决方案（例如 PowerBI）引入。
 
 只要配置设置的用户同时拥有两个订阅的相应 RBAC 访问权限，存储帐户或事件中心命名空间就不必与订阅发出日志位于同一订阅中。
 ## <a name="export-the-activity-log-with-log-profiles"></a> 使用日志配置文件导出活动日志
@@ -76,7 +73,6 @@
 
 		Add-AzureRmLogProfile -Name my_log_profile -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinanorth/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey -Locations chinaeast,chinanorth -RetentionInDays 90 -Categories Write,Delete,Action
 
-
 | 属性 | 必选 | 说明 |
 |------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 名称 | 是 | 日志配置文件的名称。 |
@@ -90,7 +86,6 @@
 
 		Remove-AzureRmLogProfile -name my_log_profile
 
-
 ### 通过 Azure 跨平台 CLI 配置日志配置文件
 #### 获取现有的日志配置文件
 		azure insights logprofile list
@@ -102,7 +97,6 @@
 #### 添加日志配置文件
 
 		azure insights logprofile add --name my_log_profile --storageId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Storage/storageAccounts/my_storage --serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinanorth/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey --locations chinaeast,chinanorth --retentionInDays 90 –categories Write,Delete,Action
-
 
 | 属性 | 必选 | 说明 |
 |------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -116,7 +110,6 @@
 #### 删除日志配置文件
 
 		azure insights logprofile delete --name my_log_profile
-
 
 ## 事件架构
 活动日志中的每个事件都有一个类似于此示例的 JSON blob：
@@ -225,7 +218,7 @@
 | nextLink |继续标记，用于提取下一结果集，此时这些结果已分解成多个响应。通常在有超过 200 个记录时需要。 |
 
 ## 后续步骤
-- [详细了解活动日志（以前称为审核日志）](/documentation/articles/resource-group-audit/)
-- [将 Azure 活动日志流式传输到事件中心](/documentation/articles/monitoring-stream-activity-logs-event-hubs/)
+- [详细了解活动日志（以前称为审核日志）](../azure-resource-manager/resource-group-audit.md)
+- [将 Azure 活动日志流式传输到事件中心](./monitoring-stream-activity-logs-event-hubs.md)
 
 <!---HONumber=Mooncake_1226_2016-->

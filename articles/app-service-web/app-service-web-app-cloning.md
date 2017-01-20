@@ -1,32 +1,31 @@
-<properties
-	pageTitle="使用 PowerShell 克隆 Web 应用"
-	description="了解如何使用 PowerShell 将 Web 应用克隆到新的 Web 应用。"
-	services="app-service\web"
-	documentationCenter=""
-	authors="ahmedelnably"
-	manager="stefsch"
-	editor=""/>
+---
+title: 使用 PowerShell 克隆 Web 应用
+description: 了解如何使用 PowerShell 将 Web 应用克隆到新的 Web 应用。
+services: app-service\web
+documentationCenter: 
+authors: ahmedelnably
+manager: stefsch
+editor: 
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="01/13/2016"
-	wacn.date="09/26/2016"
-	ms.author="ahmedelnably"/>  
-
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/13/2016
+wacn.date: 09/26/2016
+ms.author: ahmedelnably
+---
 
 # 使用 PowerShell 克隆 Azure App Service 应用#
 
 在发行的 Azure PowerShell 版本 1.1.0 中，为 New-AzureRMWebApp 添加了新选项，可让用户将现有的 Web 应用克隆到不同区域或相同区域中新建的应用。这样，客户就可以跨不同区域部署许多应用。
 
-应用克隆目前仅支持高级层 App Service 计划。新功能使用与 Web Apps 备份功能相同的限制，具体请参阅[在 Azure App Service 中备份 Web 应用](/documentation/articles/web-sites-backup/)。
+应用克隆目前仅支持高级层 App Service 计划。新功能使用与 Web Apps 备份功能相同的限制，具体请参阅[在 Azure App Service 中备份 Web 应用](./web-sites-backup.md)。
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
 
-若要了解如何使用基于 Azure Resource Manager 的 Azure PowerShell cmdlet 来管理 Web Apps，请查看[适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令](/documentation/articles/app-service-web-app-azure-resource-manager-powershell/)
+若要了解如何使用基于 Azure Resource Manager 的 Azure PowerShell cmdlet 来管理 Web Apps，请查看[适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令](./app-service-web-app-azure-resource-manager-powershell.md)
 
 ## 克隆现有应用 ##
 
@@ -97,12 +96,11 @@
 - 不会克隆 TiP 规则
 - 将不会克隆数据库内容
 
-
 ### 参考 ###
-- [适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令](/documentation/articles/app-service-web-app-azure-resource-manager-powershell/)
-- [使用 Azure 门户预览克隆 Web 应用](/documentation/articles/app-service-web-app-cloning-portal/)
-- [在 Azure App Service 中备份 Web 应用](/documentation/articles/web-sites-backup/)
-- [Azure 流量管理器预览版对 Azure 资源管理器的支持](/documentation/articles/traffic-manager-powershell-arm/)
-- [将 Azure PowerShell 与 Azure 资源管理器配合使用](/documentation/articles/powershell-azure-resource-manager/)
+- [适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令](./app-service-web-app-azure-resource-manager-powershell.md)
+- [使用 Azure 门户预览克隆 Web 应用](./app-service-web-app-cloning-portal.md)
+- [在 Azure App Service 中备份 Web 应用](./web-sites-backup.md)
+- [Azure 流量管理器预览版对 Azure 资源管理器的支持](../traffic-manager/traffic-manager-powershell-arm.md)
+- [将 Azure PowerShell 与 Azure 资源管理器配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)
 
 <!---HONumber=Mooncake_0815_2016-->

@@ -1,34 +1,34 @@
-<properties
-    pageTitle="使用 Azure CLI 管理资源 | Azure"
-    description="使用 Azure 命令行接口 (CLI) 管理 Azure 资源和组"
-    editor=""
-    manager="timlt"
-    documentationcenter=""
-    author="tfitzmac"
-    services="azure-resource-manager" />  
+---
+title: 使用 Azure CLI 管理资源 | Azure
+description: 使用 Azure 命令行接口 (CLI) 管理 Azure 资源和组
+editor: 
+manager: timlt
+documentationcenter: 
+author: tfitzmac
+services: azure-resource-manager
 
-<tags
-    ms.assetid="bb0af466-4f65-4559-ac3a-43985fa096ff"
-    ms.service="azure-resource-manager"
-    ms.workload="multiple"
-    ms.tgt_pltfrm="vm-multiple"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="08/22/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />
+ms.assetid: bb0af466-4f65-4559-ac3a-43985fa096ff
+ms.service: azure-resource-manager
+ms.workload: multiple
+ms.tgt_pltfrm: vm-multiple
+ms.devlang: na
+ms.topic: article
+ms.date: 08/22/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 使用 Azure CLI 管理 Azure 资源和资源组
->[AZURE.SELECTOR]
-[Portal](/documentation/articles/resource-group-portal/)
-[Azure CLI](/documentation/articles/xplat-cli-azure-resource-manager/)
-[Azure PowerShell](/documentation/articles/powershell-azure-resource-manager/)
-[REST API](/documentation/articles/resource-manager-rest-api/)
+>[!div class="op_single_selector"]
+[Portal](./resource-group-portal.md)
+[Azure CLI](./xplat-cli-azure-resource-manager.md)
+[Azure PowerShell](./powershell-azure-resource-manager.md)
+[REST API](./resource-manager-rest-api.md)
 
-Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管理资源的多种工具之一。本文介绍在 Resource Manager 模式下使用 Azure CLI 管理 Azure 资源和资源组的常见方式。有关使用 CLI 部署资源的信息，请参阅 [Deploy resources with Resource Manager templates and Azure CLI](/documentation/articles/resource-group-template-deploy-cli/)（使用 Resource Manager 模板和 Azure CLI 部署资源）。有关 Azure 资源和 Resource Manager 的背景信息，请参阅 [Azure Resource Manager Overview](/documentation/articles/resource-group-overview/)（Azure Resource Manager 概述）。
+Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管理资源的多种工具之一。本文介绍在 Resource Manager 模式下使用 Azure CLI 管理 Azure 资源和资源组的常见方式。有关使用 CLI 部署资源的信息，请参阅 [Deploy resources with Resource Manager templates and Azure CLI](./resource-group-template-deploy-cli.md)（使用 Resource Manager 模板和 Azure CLI 部署资源）。有关 Azure 资源和 Resource Manager 的背景信息，请参阅 [Azure Resource Manager Overview](./resource-group-overview.md)（Azure Resource Manager 概述）。
 
-> [AZURE.NOTE]
-若要使用 Azure CLI 管理 Azure 资源，需要[安装 Azure CLI](/documentation/articles/xplat-cli-install/) 并使用 `azure login -e AzureChinaCloud` 命令[登录 Azure](/documentation/articles/xplat-cli-connect/)。请确保 CLI 处于 Resource Manager 模式（运行 `azure config mode arm`）。如果已做好了这些准备，你便可以开始了。
+> [!NOTE]
+若要使用 Azure CLI 管理 Azure 资源，需要[安装 Azure CLI](../xplat-cli-install.md) 并使用 `azure login -e AzureChinaCloud` 命令[登录 Azure](../xplat-cli-connect.md)。请确保 CLI 处于 Resource Manager 模式（运行 `azure config mode arm`）。如果已做好了这些准备，你便可以开始了。
 > 
 > 
 
@@ -37,7 +37,6 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
 若要获取订阅中所有资源组的列表及其位置，请运行以下命令。
 
     azure group list
-
 
 ### 资源
  若要列出组中的所有资源，例如名为 *testRG* 的资源，请使用以下命令。
@@ -50,8 +49,8 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
 
 注意 **Microsoft.Compute/virtualMachines** 参数。此参数表示要请求其信息的资源的类型。
 
-> [AZURE.NOTE]
-使用除 **list** 命令以外的 **azure resource** 命令时，必须使用 **-o** 参数指定资源的 API 版本。如果不确定要使用哪个 API 版本，请查阅模板文件并查找资源的 apiVersion 字段。有关 Resource Manager 中 API 版本的详细信息，请参阅 [Resource Manager providers, regions, API versions, and schemas](/documentation/articles/resource-manager-supported-services/)（Resource Manager 提供程序、区域、API 版本和架构）。
+> [!NOTE]
+使用除 **list** 命令以外的 **azure resource** 命令时，必须使用 **-o** 参数指定资源的 API 版本。如果不确定要使用哪个 API 版本，请查阅模板文件并查找资源的 apiVersion 字段。有关 Resource Manager 中 API 版本的详细信息，请参阅 [Resource Manager providers, regions, API versions, and schemas](./resource-manager-supported-services.md)（Resource Manager 提供程序、区域、API 版本和架构）。
 > 
 > 
 
@@ -59,7 +58,7 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
 
     azure resource show testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15" --json
 
-> [AZURE.NOTE]
+> [!NOTE]
 可以将 JSON 数据保存到文件，使用 &gt; 字符将输出定向到文件即可。例如：
 > 
 > `azure resource show testRG MyUbuntuVM Microsoft.Compute/virtualMachines -o "2015-06-15" --json > myfile.json`
@@ -67,7 +66,7 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
 > 
 
 ### 标记
-[AZURE.INCLUDE [resource-manager-tag-resources-cli](../../includes/resource-manager-tag-resources-cli.md)]
+[!INCLUDE [resource-manager-tag-resources-cli](../../includes/resource-manager-tag-resources-cli.md)]
 
 ## 管理资源
 若要将存储帐户等资源添加到资源组，请运行如下所示的命令：
@@ -85,7 +84,7 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
     azure resource move -i "/subscriptions/{guid}/resourceGroups/OldRG/providers/Microsoft.Cache/Redis/examplecache" -d "NewRG"
 
 ## 控制对资源的访问
-可以使用 Azure CLI 来创建和管理策略，控制对 Azure 资源的访问。有关策略定义以及将策略分配给资源的背景信息，请参阅 [Use policy to manage resources and control access](/documentation/articles/resource-manager-policy/)（使用策略来管理资源和控制访问）。
+可以使用 Azure CLI 来创建和管理策略，控制对 Azure 资源的访问。有关策略定义以及将策略分配给资源的背景信息，请参阅 [Use policy to manage resources and control access](./resource-manager-policy.md)（使用策略来管理资源和控制访问）。
 
 例如，定义以下策略来拒绝所有位置不在中国东部或中国北部的请求，并将该策略保存到策略定义文件 policy.json 中：
 
@@ -143,14 +142,14 @@ Azure 命令行接口 (Azure CLI) 是可以配合 Resource Manager 部署和管�
   
         azure group deployment template download TestRG testRGDeploy ~/azure/templates/downloads/
 
-> [AZURE.NOTE]
+> [!NOTE]
 模板导出功能处于预览状态，并非所有的资源类型目前都支持导出模板。尝试导出模板时，你可能会看到一个错误，指出未导出某些资源。如果需要，可以在下载模板之后，在模板中手动定义这些资源。
 > 
 > 
 
 ## 后续步骤
-* 若要获取部署操作的详细信息并使用 Azure CLI 排查部署错误，请参阅 [View deployment operations with Azure CLI](/documentation/articles/resource-manager-troubleshoot-deployments-cli/)（使用 Azure CLI 查看部署操作）。
-* 若要使用 CLI 设置一个应用程序或脚本来访问资源，请参阅 [Use Azure CLI to create a service principal to access resources](/documentation/articles/resource-group-authenticate-service-principal-cli/)（使用 Azure CLI 创建服务主体来访问资源）。
-* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](/documentation/articles/resource-manager-subscription-governance/)。
+* 若要获取部署操作的详细信息并使用 Azure CLI 排查部署错误，请参阅 [View deployment operations with Azure CLI](./resource-manager-troubleshoot-deployments-cli.md)（使用 Azure CLI 查看部署操作）。
+* 若要使用 CLI 设置一个应用程序或脚本来访问资源，请参阅 [Use Azure CLI to create a service principal to access resources](./resource-group-authenticate-service-principal-cli.md)（使用 Azure CLI 创建服务主体来访问资源）。
+* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](./resource-manager-subscription-governance.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

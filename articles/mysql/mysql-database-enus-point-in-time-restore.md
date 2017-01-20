@@ -1,10 +1,27 @@
-<properties linkid="" urlDisplayName="" pageTitle="MySQL Service Questions – Microsoft Azure Cloud" metaKeywords="Azure Cloud, technical documentation, documents and resources, MySQL, database, FAQ, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="Provides quick answers for common technical questions encountered by users when using MySQL Database on Azure. Contact technical support if you have any further questions." metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="v-chuw" solutions="" manager="RongYu" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: MySQL Service Questions – Microsoft Azure Cloud
+metaKeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, FAQ, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+description: Provides quick answers for common technical questions encountered by users when using MySQL Database on Azure. Contact technical support if you have any further questions.
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: v-chuw
+solutions: 
+manager: RongYu
+editor: 
 
-<tags ms.service="mysql_en" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="en" />
+ms.service: mysql_en
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: en
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-point-in-time-restore/)
-- [English](/documentation/articles/mysql-database-enus-point-in-time-restore/)
+- [中文](./mysql-database-point-in-time-restore.md)
+- [English](./mysql-database-enus-point-in-time-restore.md)
 
 # Back up and restore a MySQL database on Azure
 

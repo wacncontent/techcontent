@@ -1,26 +1,25 @@
-<properties
-	pageTitle="Azure AD .NET 入门 | Azure"
-	description="如何生成一个与 Azure AD 集成以支持登录的 .NET MVC Web 应用。"
-	services="active-directory"
-	documentationCenter=".net"
-	authors="dstrockis"
-	manager="mbaldwin"
-	editor=""/>  
+---
+title: Azure AD .NET 入门 | Azure
+description: 如何生成一个与 Azure AD 集成以支持登录的 .NET MVC Web 应用。
+services: active-directory
+documentationCenter: .net
+authors: dstrockis
+manager: mbaldwin
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="09/16/2016"
-	ms.author="dastrock"
-	wacn.date="01/09/2017"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 09/16/2016
+ms.author: dastrock
+wacn.date: 01/09/2017
+---
 
 # 使用 Azure AD 执行 Web 应用登录和注销
 
-[AZURE.INCLUDE [active-directory-devguide](../../includes/active-directory-devguide.md)]
+[!INCLUDE [active-directory-devguide](../../includes/active-directory-devguide.md)]
 
 使用 Azure AD，只需编写几行代码，就能简单直接地外包 Web 应用的标识管理，提供单一登录和注销。在 Asp.NET Web Apps中，你可以使用 .NET Framework 4.5 中包含的社区驱动 OWIN 中间件的 Microsoft 实现来达到此目的。现在，我们将使用 OWIN 来执行下列操作：
 -	使用 Azure AD 作为标识提供者将用户登录到应用。
@@ -34,7 +33,7 @@
 3. 使用 OWIN 向 Azure AD 发出登录和注销请求。
 4. 列显有关用户的数据。
 
-若要开始，请[下载应用程序框架](https://github.com/AzureADQuickStarts/WebApp-OpenIdConnect-DotNet/archive/skeleton.zip)或[下载已完成的示例](https://github.com/AzureADQuickStarts/WebApp-OpenIdConnect-DotNet/archive/complete.zip)。你还需要一个用于注册应用程序的 Azure AD 租户。如果你没有此租户，请[了解如何获取租户](/documentation/articles/active-directory-howto-tenant/)。
+若要开始，请[下载应用程序框架](https://github.com/AzureADQuickStarts/WebApp-OpenIdConnect-DotNet/archive/skeleton.zip)或[下载已完成的示例](https://github.com/AzureADQuickStarts/WebApp-OpenIdConnect-DotNet/archive/complete.zip)。你还需要一个用于注册应用程序的 Azure AD 租户。如果你没有此租户，请[了解如何获取租户](./active-directory-howto-tenant.md)。
 
 ## *1.将一个应用程序注册到 Azure AD*
 若要使应用程序对用户进行身份验证，你首先需要在租户中注册新的应用程序。
@@ -54,11 +53,9 @@
 
 -	若要开始，请使用 Package Manager Console 将 OWIN 中间件 NuGet 包添加到项目。
 
-		
 	PM> Install-Package Microsoft.Owin.Security.OpenIdConnect
 	PM> Install-Package Microsoft.Owin.Security.Cookies
 	PM> Install-Package Microsoft.Owin.Host.SystemWeb
-
 
 -	将称为 `Startup.cs` 的 OWIN 启动类添加到项目。右键单击项目，选择“添加”-->“新建项”，然后搜索“OWIN”。当你的应用程序启动时，该 OWIN 中间件将调用 `Configuration(...)` 方法。
 -	将类声明更改为 `public partial class Startup` - 我们已在另一个文件中实现了此类的一部分。在 `Configuration(...)` 方法中，调用 ConfgureAuth(...) 以设置 Web 应用的身份验证
@@ -72,7 +69,6 @@ C#
 	        ConfigureAuth(app);
 	    }
 	}
-
 
 -	打开文件 `App_Start\Startup.Auth.cs` 并实现 `ConfigureAuth(...)` 方法。在 `OpenIDConnectAuthenticationOptions` 中提供的参数将充当应用程序与 Azure AD 通信时使用的坐标。你还需要设置 Cookie 身份验证 - OpenID Connect 中间件将在幕后使用 Cookie。
 
@@ -93,7 +89,6 @@ C#
 	        });
 	}
 
-
 -	最后，打开位于项目根目录中的 `web.config` 文件，并在 `<appSettings>` 节中输入你的配置值。
     -	应用程序的 `ida:ClientId` 是你在执行步骤 1 时从 Azure 门户预览复制的 Guid。
     -	`ida:Tenant` 是 Azure AD 租户的名称，例如“contoso.partner.onmschina.cn”。
@@ -110,7 +105,6 @@ C#
 	public ActionResult About()
 	{
 	  ...
-
 
 -	还可以使用 OWIN 直接从代码内部发出身份验证请求。打开 `Controllers\AccountController.cs`。在 SignIn() 和 SignOut() 操作中，分别发出 OpenID Connect 质询和注销请求。
 
@@ -130,7 +124,6 @@ C#
 	    HttpContext.GetOwinContext().Authentication.SignOut(
 	        OpenIdConnectAuthenticationDefaults.AuthenticationType, CookieAuthenticationDefaults.AuthenticationType);
 	}
-
 
 -	现在，请打开 `Views\Shared\_LoginPartial.cshtml`。你将在其中向用户显示应用程序的登录和注销链接，用户名将在视图中列显。
 
@@ -156,7 +149,6 @@ HTML
 	    </ul>
 	}
 
-
 ## *4.显示用户信息*
 使用 OpenID Connect 对用户进行身份验证时，Azure AD 将向应用程序返回 id\_token，其中包含有关用户的“声明”或断言。你可以使用这些声明来个性化应用程序：
 
@@ -175,16 +167,14 @@ C#
 	    return View();
 	}
 
-
 最后，生成并运行应用程序！ 如果你尚未这样做，现在可以使用 *.partner.onmschina.cn 域在租户中创建一个新的用户。以该用户的身份登录，随后你会看到该用户的标识在顶部导航栏中的显示方式。注销，然后以租户中其他用户的身份重新登录。如果你有浓厚的兴趣，可以注册并运行此应用程序的另一个实例（使用其自身的 clientId），然后观察单一登录的运作方式。
 
 [此处](https://github.com/AzureADQuickStarts/WebApp-OpenIdConnect-DotNet/archive/complete.zip)提供了已完成示例（无需配置值）供你参考。
 
 现在，可以转到更高级的主题。你可能想要尝试：
 
-[使用 Azure AD 保护 Web API >>](/documentation/articles/active-directory-devquickstarts-webapi-dotnet/)
+[使用 Azure AD 保护 Web API >>](./active-directory-devquickstarts-webapi-dotnet.md)
 
-[AZURE.INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
+[!INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
  
-
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

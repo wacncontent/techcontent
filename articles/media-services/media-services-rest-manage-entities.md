@@ -1,30 +1,28 @@
 
-<properties 
-	pageTitle="使用 REST API 管理媒体服务实体 | Azure" 
-	description="了解如何使用 REST API 管理媒体服务实体。" 
-	authors="juliako" 
-	manager="dwrede" 
-	editor="" 
-	services="media-services" 
-	documentationCenter=""/>
+---
+title: 使用 REST API 管理媒体服务实体 | Azure
+description: 了解如何使用 REST API 管理媒体服务实体。
+authors: juliako
+manager: dwrede
+editor: 
+services: media-services
+documentationCenter: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016" 
-	wacn.date="12/16/2016" 
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/16/2016
+ms.author: juliako
+---
 
 #使用 REST API 管理媒体服务实体
 
-> [AZURE.SELECTOR]
-- [REST](/documentation/articles/media-services-rest-manage-entities/)
-- [.NET](/documentation/articles/media-services-dotnet-manage-entities/)
+> [!div class="op_single_selector"]
+- [REST](./media-services-rest-manage-entities.md)
+- [.NET](./media-services-dotnet-manage-entities.md)
 
 Azure 媒体服务是一项以 OData v3 为基础的基于 REST 的服务。因此，你可以像在任何其他 OData 服务上一样添加、查询、更新和删除实体。适用时，将标注例外情况。有关 OData 的详细信息，请参阅[开放数据协议文档](http://www.odata.org/documentation/)。
 
@@ -34,12 +32,11 @@ Azure 媒体服务是一项以 OData v3 为基础的基于 REST 的服务。因�
 - 更新实体
 - 删除实体
 
->[AZURE.NOTE] 使用媒体服务 REST API 时，需注意以下事项：
+>[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
 >
->访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](/documentation/articles/media-services-rest-how-to-use/)。
+>访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 
->请按照[使用 REST API 连接到媒体服务](/documentation/articles/media-services-rest-connect-programmatically/)中所述对媒体服务 URI 执行后续调用。
-
+>请按照[使用 REST API 连接到媒体服务](./media-services-rest-connect-programmatically.md)中所述对媒体服务 URI 执行后续调用。
 
 ##添加实体
 
@@ -60,7 +57,6 @@ Azure 媒体服务是一项以 OData v3 为基础的基于 REST 的服务。因�
 	
 	{"Name": "DownloadPolicy", "DurationInMinutes" : "300", "Permissions" : 1}
 
- 
 ##查询实体
 
 查询和列出实体非常简单，仅涉及 GET HTTP 请求和可选的 OData 操作。以下示例会检索包含所有 MediaProcessor 实体的列表。
@@ -116,7 +112,7 @@ Azure 媒体服务是一项以 OData v3 为基础的基于 REST 的服务。因�
 	Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1337078831&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=suFkxhvPWxQVMjOYelOJfYEWkyTWJCBc02pF0N7NghI%3d
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
->[AZURE.NOTE]媒体服务不支持 $expand 操作以及“LINQ 注意事项（WCF 数据服务）”中所述的不受支持的 LINQ 方法。
+>[!NOTE]媒体服务不支持 $expand 操作以及“LINQ 注意事项（WCF 数据服务）”中所述的不受支持的 LINQ 方法。
 
 ##<a name="enumerating-through-large-collections-of-entities"></a>枚举实体的大型集合
 

@@ -1,33 +1,30 @@
-<properties 
-	pageTitle="使用 PowerShell 管理 Azure 媒体服务帐户" 
-	description="了解如何使用 PowerShell cmdlet 管理 Azure 媒体服务帐户。" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor="" 
-	services="media-services" 
-	documentationCenter=""/>  
+---
+title: 使用 PowerShell 管理 Azure 媒体服务帐户
+description: 了解如何使用 PowerShell cmdlet 管理 Azure 媒体服务帐户。
+authors: Juliako
+manager: erikre
+editor: 
+services: media-services
+documentationCenter: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="10/03/2016"
-	wacn.date="12/27/2016"
-	ms.author="juliako"/>  
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/03/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 #使用 PowerShell 管理 Azure 媒体服务帐户
 
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/media-services-create-account/)
-- [PowerShell](/documentation/articles/media-services-manage-with-powershell/)
+> [!div class="op_single_selector"]
+- [门户](./media-services-create-account.md)
+- [PowerShell](./media-services-manage-with-powershell.md)
 - [REST](https://docs.microsoft.com/zh-cn/rest/api/media/management/create-media-services-account)
 
-> [AZURE.NOTE] 若要创建 Azure 媒体服务帐户，你必须有一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="/pricing/1rmb-trial/?WT.mc_id=A8A8397B5" target="_blank">Azure 试用</a>。
+> [!NOTE] 若要创建 Azure 媒体服务帐户，你必须有一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A8A8397B5" target="_blank">Azure 试用</a>。
 
 ##概述 
 
@@ -37,7 +34,6 @@
 
 **ApiVersion**：“2015-10-01”
                
-
 ## New-AzureRmMediaService
 
 创建媒体服务。
@@ -494,11 +490,5 @@ ParameterSet: AccountNameParameterSet
 ### 输出
 
 输出类型是 cmdlet 发出的对象类型。
-
-
-
-
-
- 
 
 <!---HONumber=Mooncake_1114_2016-->

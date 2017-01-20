@@ -1,25 +1,24 @@
-<properties 
-	pageTitle="向经过身份验证的用户发送推送通知（通用 Windows 8.1）| Azure 移动服务" 
-	description="了解如何使用 Azure 移动服务向运行通用 Windows 8.1 应用并经过身份验证的特定用户发送推送通知。" 
-	services="mobile-services,notification-hubs" 
-	documentationCenter="windows" 
-	authors="ggailey777" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 向经过身份验证的用户发送推送通知（通用 Windows 8.1）| Azure 移动服务
+description: 了解如何使用 Azure 移动服务向运行通用 Windows 8.1 应用并经过身份验证的特定用户发送推送通知。
+services: mobile-services,notification-hubs
+documentationCenter: windows
+authors: ggailey777
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 # 向经过身份验证的用户发送推送通知
-[AZURE.INCLUDE [mobile-services-selector-push-users](../../includes/mobile-services-selector-push-users.md)]
-
+[!INCLUDE [mobile-services-selector-push-users](../../includes/mobile-services-selector-push-users.md)]
 
 ##概述
 
@@ -41,16 +40,15 @@
 
 ##<a name="register"></a>更新服务以要求对注册进行身份验证
 
-[AZURE.INCLUDE [mobile-services-dotnet-backend-push-notifications-app-users](../../includes/mobile-services-dotnet-backend-push-notifications-app-users.md)]
+[!INCLUDE [mobile-services-dotnet-backend-push-notifications-app-users](../../includes/mobile-services-dotnet-backend-push-notifications-app-users.md)]
 
 ##<a name="update-app"></a>更新应用程序以要求在注册之前登录
 
-[AZURE.INCLUDE [mobile-services-windows-store-dotnet-push-notifications-app-users](../../includes/mobile-services-windows-store-dotnet-push-notifications-app-users.md)]
+[!INCLUDE [mobile-services-windows-store-dotnet-push-notifications-app-users](../../includes/mobile-services-windows-store-dotnet-push-notifications-app-users.md)]
 
 ##<a name="test"></a>测试应用程序
 
-[AZURE.INCLUDE [mobile-services-windows-test-push-users](../../includes/mobile-services-windows-test-push-users.md)]
-
+[!INCLUDE [mobile-services-windows-test-push-users](../../includes/mobile-services-windows-test-push-users.md)]
 
 <!-- Anchors. -->
 [Updating the service to require authentication for registration]: #register
@@ -58,10 +56,9 @@
 [Testing the app]: #test
 [Next Steps]: #next-steps
 
-
 <!-- URLs. -->
-[身份验证入门]: /documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users/
-[Get started with push notifications]: /documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-push/
-[推送通知入门]: /documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-push/
+[身份验证入门]: ./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users.md
+[Get started with push notifications]: ./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-push.md
+[推送通知入门]: ./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-push.md
 
 <!---HONumber=Mooncake_0215_2016-->

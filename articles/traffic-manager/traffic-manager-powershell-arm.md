@@ -1,24 +1,21 @@
-<properties
-    pageTitle="流量管理器的 Azure Resource Manager 支持 | Azure "
-    description="将适用于流量管理器的 PowerShell 与 Azure Resource Manager 配合使用"
-    services="traffic-manager"
-    documentationCenter="na"
-    authors="sdwheeler"
-    manager="carmonm"
-    editor=""
-/>  
+---
+title: 流量管理器的 Azure Resource Manager 支持 | Azure 
+description: 将适用于流量管理器的 PowerShell 与 Azure Resource Manager 配合使用
+services: traffic-manager
+documentationCenter: na
+authors: sdwheeler
+manager: carmonm
+editor: 
 
-<tags
-    ms.service="traffic-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/11/2016"
-    wacn.date="01/09/2017"
-    ms.author="sewhee"
-/>  
-
+ms.service: traffic-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/11/2016
+wacn.date: 01/09/2017
+ms.author: sewhee
+---
 
 # Azure 流量管理器的 Azure Resource Manager 支持
 
@@ -47,7 +44,7 @@ Azure 流量管理器是使用名为流量管理器配置文件的一系列设�
 
 ## 限制
 
-在提到 Web 应用的“AzureEndpoints”类型的终结点时，流量管理器终结点仅指默认的（生产）[Web 应用槽](/documentation/articles/web-sites-staged-publishing/)。不支持自定义槽。一种解决方法是，可以使用“ExternalEndpoints”类型配置自定义槽。
+在提到 Web 应用的“AzureEndpoints”类型的终结点时，流量管理器终结点仅指默认的（生产）[Web 应用槽](../app-service-web/web-sites-staged-publishing.md)。不支持自定义槽。一种解决方法是，可以使用“ExternalEndpoints”类型配置自定义槽。
 
 ## 设置 Azure PowerShell
 
@@ -61,7 +58,7 @@ Azure 流量管理器是使用名为流量管理器配置文件的一系列设�
     New-AzureRmResourceGroup -Name MyRG -Location "China North"
 ```
 
->[AZURE.NOTE] Azure Resource Manager 要求所有资源组都有一个位置。此位置将用作该资源组中创建的资源的默认位置。但是，由于流量管理器配置文件资源是全局性而不是区域性的，因此，所选的资源组位置不会影响 Azure 流量管理器。
+>[!NOTE] Azure Resource Manager 要求所有资源组都有一个位置。此位置将用作该资源组中创建的资源的默认位置。但是，由于流量管理器配置文件资源是全局性而不是区域性的，因此，所选的资源组位置不会影响 Azure 流量管理器。
 
 ## 创建流量管理器配置文件
 
@@ -194,7 +191,7 @@ Azure 终结点引用 Azure 中托管的服务。支持 3 种类型的 Azure 终
 
 ## 添加“嵌套式”终结点
 
-每个流量管理器配置文件都会指定一个流量路由方法。但在某些情况下，所需的流量路由方法比单个流量管理器配置文件所提供的方法更复杂。可以嵌套流量管理器配置文件，将多个流量路由方法的优势结合在一起。使用嵌套式配置文件可以重写默认的流量管理器行为，支持更大、更复杂的应用程序部署。有关更详细的示例，请参阅[嵌套式流量管理器配置文件](/documentation/articles/traffic-manager-nested-profiles/)。
+每个流量管理器配置文件都会指定一个流量路由方法。但在某些情况下，所需的流量路由方法比单个流量管理器配置文件所提供的方法更复杂。可以嵌套流量管理器配置文件，将多个流量路由方法的优势结合在一起。使用嵌套式配置文件可以重写默认的流量管理器行为，支持更大、更复杂的应用程序部署。有关更详细的示例，请参阅[嵌套式流量管理器配置文件](./traffic-manager-nested-profiles.md)。
 
 在父配置文件中使用特定的终结点类型“NestedEndpoints”配置嵌套式终结点。指定嵌套式终结点时：
 
@@ -320,8 +317,8 @@ Disable-AzureRmTrafficManagerProfile cmdlet 将提示确认。可以使用使用
 
 ## 后续步骤
 
-[流量管理器监视](/documentation/articles/traffic-manager-monitoring/)
+[流量管理器监视](./traffic-manager-monitoring.md)
 
-[流量管理器性能注意事项](/documentation/articles/traffic-manager-performance-considerations/)
+[流量管理器性能注意事项](./traffic-manager-performance-considerations.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

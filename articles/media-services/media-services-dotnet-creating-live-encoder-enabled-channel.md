@@ -1,47 +1,43 @@
-<properties 
-	pageTitle="如何使用 Azure 媒体服务执行实时流式处理以通过 .NET 创建多比特率流" 
-	description="本教程将指导你使用 .NET SDK 完成创建通道的步骤，该通道接收单比特率实时流，并将其编码为多比特率流。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="anilmur" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 如何使用 Azure 媒体服务执行实时流式处理以通过 .NET 创建多比特率流
+description: 本教程将指导你使用 .NET SDK 完成创建通道的步骤，该通道接收单比特率实时流，并将其编码为多比特率流。
+services: media-services
+documentationCenter: 
+authors: anilmur
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="get-started-article"
-	ms.date="10/12/2016"
-	wacn.date="12/27/2016"
-	ms.author="juliako;anilmur"/>  
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 10/12/2016
+wacn.date: 12/27/2016
+ms.author: juliako;anilmur
+---
 
 #如何使用 Azure 媒体服务执行实时流式处理以通过 .NET 创建多比特率流
 
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/media-services-portal-creating-live-encoder-enabled-channel/)
-- [.NET](/documentation/articles/media-services-dotnet-creating-live-encoder-enabled-channel/)
+> [!div class="op_single_selector"]
+- [门户](./media-services-portal-creating-live-encoder-enabled-channel.md)
+- [.NET](./media-services-dotnet-creating-live-encoder-enabled-channel.md)
 - [REST API](https://docs.microsoft.com/zh-cn/rest/api/media/operations/channel)
 
->[AZURE.NOTE]
-若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
+>[!NOTE]
+若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
 
 ##概述
 
 本教程将指导你完成创建**通道**的步骤，该通道接收单比特率实时流，并将其编码为多比特率流。
 
-有关为实时编码启用的通道的更多相关概念信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)。
-
+有关为实时编码启用的通道的更多相关概念信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
 
 ##常见的实时流方案
 
 以下步骤介绍创建常见的实时流式处理应用程序时涉及的任务。
 
->[AZURE.NOTE] 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的通道，请通过 Azure.cn 联系 amslived。
+>[!NOTE] 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的通道，请通过 Azure.cn 联系 amslived。
 
 1. 将视频摄像机连接到计算机。启动并配置可以通过以下协议之一输出单比特率流的本地实时编码器：RTMP、平滑流式处理或 RTP (MPEG-TS)。有关详细信息，请参阅 [Azure 媒体服务 RTMP 支持和实时编码器](https://azure.microsoft.com/zh-cn/blog/azure-media-services-rtmp-support-and-live-encoders/)。
 
@@ -87,15 +83,14 @@
 1. 显示和隐藏清单。启动和停止广告。将使用长时间运行的 API。
 1. 清理通道及所有关联的资源。
 
-
 ##先决条件
 
 以下是完成本教程所需具备的条件。
 
 - 若要完成本教程，你需要一个 Azure 帐户。
 	
-	如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/?WT.mc_id=A261C142F)。获取可用来尝试付费版 Azure 服务的信用额度。即使在信用额度用完后，也可保留帐户并使用免费的 Azure 服务和功能，例如 Azure App Service 中的 Web 应用功能。
-- 一个媒体服务帐户。若要创建媒体服务帐户，请参阅[创建帐户](/documentation/articles/media-services-create-account/)。
+	如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。获取可用来尝试付费版 Azure 服务的信用额度。即使在信用额度用完后，也可保留帐户并使用免费的 Azure 服务和功能，例如 Azure App Service 中的 Web 应用功能。
+- 一个媒体服务帐户。若要创建媒体服务帐户，请参阅[创建帐户](./media-services-create-account.md)。
 - Visual Studio 2010 SP1（Professional、Premium、Ultimate 或 Express）或更高版本。
 - 必须使用适用于 .NET 的媒体服务 SDK 版本 3.2.0.0 或更高版本。
 - 可以发送单比特率实时流的摄像头和编码器。
@@ -105,7 +100,6 @@
 - 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的通道，请通过 Azure.cn 联系 amslived。
 - 确保你要从中以流形式传输内容的流式传输终结点上至少有一个流式传输保留单元。
 
-
 ##使用用于 .NET 的媒体服务 SDK 进行开发设置
 
 1. 使用 Visual Studio 创建控制台应用程序。
@@ -114,10 +108,9 @@
 ##连接到媒体服务
 最佳做法是，应使用 app.config 文件来存储媒体服务名称和帐户密钥。
 
->[AZURE.NOTE]若要查找名称和密钥值，请转到 Azure 经典管理门户，选择媒体服务帐户，然后单击门户窗口底部的“管理密钥”图标。单击每个文本框旁边的图标将值复制到系统剪贴板中。
+>[!NOTE]若要查找名称和密钥值，请转到 Azure 经典管理门户，选择媒体服务帐户，然后单击门户窗口底部的“管理密钥”图标。单击每个文本框旁边的图标将值复制到系统剪贴板中。
 
 在 app.config 文件中添加 appSettings 部分，并设置媒体服务帐户名称和帐户密钥的值。
-
 
 	<?xml version="1.0"?>
 	<configuration>
@@ -127,7 +120,6 @@
 	  </appSettings>
 	</configuration>
 	 
-	
 ##代码示例
 
 	using System;
@@ -165,7 +157,6 @@
 
 			private static Uri _apiServer = null;
 	
-	
 	        static void Main(string[] args)
 	        {
 				// Create and cache the Media Services credentials in a static class variable.
@@ -187,7 +178,6 @@
 	            string ingestUrl = channel.Input.Endpoints.FirstOrDefault().Url.ToString();
 	
 	            Console.WriteLine("Intest URL: {0}", ingestUrl);
-	
 	
 	            // Use the previewEndpoint to preview and verify 
 	            // that the input from the encoder is actually reaching the Channel. 
@@ -228,7 +218,6 @@
 	            var channelInput = CreateChannelInput();
 	            var channePreview = CreateChannelPreview();
 	            var channelEncoding = CreateChannelEncoding();
-	
 	
 	            ChannelCreationOptions options = new ChannelCreationOptions
 	            {
@@ -456,7 +445,6 @@
 	            }
 	        }
 	
-	
 	        /// <summary>
 	        /// Track long running operations.
 	        /// </summary>
@@ -516,7 +504,6 @@
 	            }
 	            return completed;
 	        }
-	
 	
 	        private static void Log(string action, string entityId = null, string operationId = null)
 	        {

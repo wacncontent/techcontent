@@ -1,27 +1,25 @@
-<properties 
-	pageTitle="将移动服务添加到现有应用 (WP8) | Azure" 
-	description="了解如何使用来自 Azure 移动服务 Windows Phone 8 应用程序的数据。" 
-	services="mobile-services" 
-	documentationCenter="windows" 
-	authors="ggailey777" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 将移动服务添加到现有应用 (WP8) | Azure
+description: 了解如何使用来自 Azure 移动服务 Windows Phone 8 应用程序的数据。
+services: mobile-services
+documentationCenter: windows
+authors: ggailey777
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows-phone"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
-
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows-phone
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 #  将移动服务添加到现有应用程序
 
-
-[AZURE.INCLUDE [mobile-services-selector-get-started-data](../../includes/mobile-services-selector-get-started-data.md)]
+[!INCLUDE [mobile-services-selector-get-started-data](../../includes/mobile-services-selector-get-started-data.md)]
 
 ##概述
 
@@ -31,7 +29,7 @@
 
 + Visual Studio 2012 Express for Windows Phone 8，以及 Windows 8 上运行的 [Windows Phone 8 SDK]。若要在完成本教程后创建一个 Windows Phone 8.1 应用程序，您必须使用 Visual Studio 2013 Update 2 或更高版本。 
 
-+ 一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial)</a>。
++ 一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial)</a>。
 
 ## <a name="download-app"></a>下载 GetStartedWithData 项目
 
@@ -39,7 +37,7 @@
 
 1. 从[开发人员代码示例站点]下载 GetStartedWithData 示例应用程序项目。 
 
-	>[AZURE.NOTE]若要创建 Windows Phone Silverlght 8.1 应用程序，只需在下载的 Windows Phone Silverlight 8 应用程序项目中将目标操作系统更改为 Windows Phone 8.1。若要创建 Windows Phone 应用商店应用程序，请下载 GetStartedWithData 示例应用程序项目的 [Windows Phone 应用商店应用程序版本](http://go.microsoft.com/fwlink/p/?LinkId=397372)。
+	>[!NOTE]若要创建 Windows Phone Silverlght 8.1 应用程序，只需在下载的 Windows Phone Silverlight 8 应用程序项目中将目标操作系统更改为 Windows Phone 8.1。若要创建 Windows Phone 应用商店应用程序，请下载 GetStartedWithData 示例应用程序项目的 [Windows Phone 应用商店应用程序版本](http://go.microsoft.com/fwlink/p/?LinkId=397372)。
 
 2. 在 Visual Studio 中打开下载的项目，然后检查 MainPage.xaml.cs 文件。
 
@@ -55,11 +53,11 @@
 
 ##<a name="create-service"></a>在 Azure 经典管理门户中创建新的移动服务
 
-[AZURE.INCLUDE [mobile-services-create-new-service-data](../../includes/mobile-services-create-new-service-data.md)]
+[!INCLUDE [mobile-services-create-new-service-data](../../includes/mobile-services-create-new-service-data.md)]
 
 ## <a name="add-table"></a>将新表添加到移动服务
 
-[AZURE.INCLUDE [mobile-services-create-new-service-data-2](../../includes/mobile-services-create-new-service-data-2.md)]
+[!INCLUDE [mobile-services-create-new-service-data-2](../../includes/mobile-services-create-new-service-data-2.md)]
 
 ## <a name="update-app"></a>更新应用程序以使用移动服务进行数据访问
 
@@ -162,13 +160,13 @@
 
 本教程演示了有关如何使 Windows Phone 8 应用程序处理移动服务中的数据的基础知识。建议你接下来阅读下列其他主题之一：
 
-* [向应用程序添加身份验证](/documentation/articles/mobile-services-windows-phone-get-started-users/)
+* [向应用程序添加身份验证](./mobile-services-windows-phone-get-started-users.md)
   <br/>了解如何对应用程序用户进行身份验证。
 
-* [向应用程序添加推送通知](/documentation/articles/mobile-services-javascript-backend-windows-phone-get-started-push/)
+* [向应用程序添加推送通知](./mobile-services-javascript-backend-windows-phone-get-started-push.md)
   <br/>了解如何使用移动服务将非常基本的推送通知发送到应用程序。
  
-* [移动服务 C# 操作方法概念性参考 ](/documentation/articles/mobile-services-dotnet-how-to-use-client-library/)
+* [移动服务 C# 操作方法概念性参考 ](./mobile-services-dotnet-how-to-use-client-library.md)
   <br/>了解有关如何将移动服务与 .NET 一起使用的详细信息。
  
 <!-- Anchors. -->
@@ -193,5 +191,4 @@
 [Developer Code Samples site]: http://go.microsoft.com/fwlink/p/?LinkId=271146
 [开发人员代码示例站点]: http://go.microsoft.com/fwlink/p/?LinkId=271146
  
-
 <!---HONumber=Mooncake_0118_2016-->

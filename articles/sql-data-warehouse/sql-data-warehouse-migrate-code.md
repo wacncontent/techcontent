@@ -1,21 +1,21 @@
-<properties
-   pageTitle="将 SQL 代码迁移到 SQL 数据仓库 | Azure"
-   description="有关在开发解决方案时将 SQL 代码迁移到 Azure SQL 数据仓库的技巧。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="lodipalm"
-   manager="barbkess"
-   editor=""/>
+---
+title: 将 SQL 代码迁移到 SQL 数据仓库 | Azure
+description: 有关在开发解决方案时将 SQL 代码迁移到 Azure SQL 数据仓库的技巧。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: lodipalm
+manager: barbkess
+editor: 
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/04/2017"
-   ms.author="lodipalm;barbkess;sonyama;jrj"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/04/2017
+ms.author: lodipalm;barbkess;sonyama;jrj
+---
 
 # 将 SQL 代码迁移到 SQL 数据仓库
 
@@ -98,7 +98,6 @@ SQL 数据仓库不支持递归 CTE。递归 CTE 的迁移过程可能有点复�
 
 若要解决缺少对 @@ROWCOUNT 支持的问题，创建将检索 sys.dm\_pdw\_request\_steps 中的最后一个行计数的存储过程，然后在 DML 语句后执行 `EXEC LastRowCount`。
 
-
 	CREATE PROCEDURE LastRowCount AS
 	WITH LastRequest as 
 	(   SELECT TOP 1    request_id
@@ -117,26 +116,25 @@ SQL 数据仓库不支持递归 CTE。递归 CTE 的迁移过程可能有点复�
 	SELECT TOP 1 row_count FROM LastRequestRowCounts ORDER BY step_index DESC
 	;
 
-
 ## 后续步骤
 有关所有支持的 T-SQL 语句的完整列表，请参阅 [Transact-SQL 主题][]。
 
 <!--Image references-->
 
 <!--Article references-->
-[Update 中的 ANSI Join]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[Delete 中的 ANSI Join]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[Merge 语句]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[INSERT..EXEC]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[Transact-SQL 主题]: /documentation/articles/sql-data-warehouse-reference-tsql-statements/
+[Update 中的 ANSI Join]: ./sql-data-warehouse-develop-ctas.md
+[Delete 中的 ANSI Join]: ./sql-data-warehouse-develop-ctas.md
+[Merge 语句]: ./sql-data-warehouse-develop-ctas.md
+[INSERT..EXEC]: ./sql-data-warehouse-tables-temporary.md
+[Transact-SQL 主题]: ./sql-data-warehouse-reference-tsql-statements.md
 
-[游标]: /documentation/articles/sql-data-warehouse-develop-loops/
-[SELECT..INTO]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[结合 rollup / cube / grouping sets 选项的 Group By 子句]: /documentation/articles/sql-data-warehouse-develop-group-by-options/
-[嵌套级别超过 8]: /documentation/articles/sql-data-warehouse-develop-transactions/
-[通过视图更新]: /documentation/articles/sql-data-warehouse-develop-views/
-[使用 select 分配变量]: /documentation/articles/sql-data-warehouse-develop-variable-assignment/
-[动态 SQL 字符串没有 MAX 数据类型]: /documentation/articles/sql-data-warehouse-develop-dynamic-sql/
+[游标]: ./sql-data-warehouse-develop-loops.md
+[SELECT..INTO]: ./sql-data-warehouse-develop-ctas.md
+[结合 rollup / cube / grouping sets 选项的 Group By 子句]: ./sql-data-warehouse-develop-group-by-options.md
+[嵌套级别超过 8]: ./sql-data-warehouse-develop-transactions.md
+[通过视图更新]: ./sql-data-warehouse-develop-views.md
+[使用 select 分配变量]: ./sql-data-warehouse-develop-variable-assignment.md
+[动态 SQL 字符串没有 MAX 数据类型]: ./sql-data-warehouse-develop-dynamic-sql.md
 
 <!--MSDN references-->
 

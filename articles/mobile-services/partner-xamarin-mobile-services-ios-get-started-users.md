@@ -1,26 +1,25 @@
-<properties
-	pageTitle="身份验证入门 (Xamarin.iOS) - 移动服务"
-	description="了解如何在 Xamarin.iOS 的 Azure 移动服务应用程序中使用身份验证。"
-	documentationCenter="xamarin"
-	services="mobile-services"
-	manager="dwrede"
-	authors="lindydonna"
-	editor=""/>
+---
+title: 身份验证入门 (Xamarin.iOS) - 移动服务
+description: 了解如何在 Xamarin.iOS 的 Azure 移动服务应用程序中使用身份验证。
+documentationCenter: xamarin
+services: mobile-services
+manager: dwrede
+authors: lindydonna
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-xamarin-ios"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="donnam"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-ios
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: donnam
+---
 
 # 向移动服务应用程序添加身份验证
 
-[AZURE.INCLUDE [mobile-services-selector-get-started-users](../../includes/mobile-services-selector-get-started-users.md)]
-
+[!INCLUDE [mobile-services-selector-get-started-users](../../includes/mobile-services-selector-get-started-users.md)]
 
 本主题说明如何通过应用程序对 Azure 移动服务中的用户进行身份验证。在本教程中，你将要使用移动服务支持的标识提供程序向快速入门项目添加身份验证。在移动服务成功完成身份验证和授权后，将显示用户 ID 值。
 
@@ -36,13 +35,11 @@
 
 ## <a name="register"></a>注册应用程序以进行身份验证并配置移动服务
 
-[AZURE.INCLUDE [mobile-services-register-authentication](../../includes/mobile-services-register-authentication.md)]
+[!INCLUDE [mobile-services-register-authentication](../../includes/mobile-services-register-authentication.md)]
 
 ## <a name="permissions"></a>将权限限制给已经过身份验证的用户
 
-
-[AZURE.INCLUDE [mobile-services-restrict-permissions-javascript-backend](../../includes/mobile-services-restrict-permissions-javascript-backend.md)]
-
+[!INCLUDE [mobile-services-restrict-permissions-javascript-backend](../../includes/mobile-services-restrict-permissions-javascript-backend.md)]
 
 3. 在 Xcode 中，打开你在完成[移动服务入门]教程时创建的项目。 
 
@@ -74,7 +71,7 @@
             }
         }
 
-	> [AZURE.NOTE]如果使用的标识提供程序不是 Microsoft 帐户，请将传递给上述 **LoginAsync** 方法的值更改为WindowsAzureActiveDirectory。
+	> [!NOTE]如果使用的标识提供程序不是 Microsoft 帐户，请将传递给上述 **LoginAsync** 方法的值更改为WindowsAzureActiveDirectory。
 
 3. 从 **ToDoService** 构造函数将对 **ToDoItem** 表的请求移到名为 **CreateTable** 的新方法中：
 
@@ -109,7 +106,6 @@
                 return;
             }
 
-
             await RefreshAsync();
         }
 6. 从 **TodoListViewController.ViewDidLoad** 中删除对 **RefreshAsync** 的原始调用。
@@ -143,11 +139,11 @@
 [My Applications]: http://go.microsoft.com/fwlink/p/?LinkId=262039
 [Live SDK for Windows]: http://go.microsoft.com/fwlink/p/?LinkId=262253
 
-[移动服务入门]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started/
+[移动服务入门]: ./partner-xamarin-mobile-services-ios-get-started.md
 [Get started with data]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started-data/
-[Get started with authentication]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started-users/
-[Get started with push notifications]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started-push/
-[使用脚本为用户授权]: /documentation/articles/mobile-services-javascript-backend-service-side-authorization/
+[Get started with authentication]: ./partner-xamarin-mobile-services-ios-get-started-users.md
+[Get started with push notifications]: ./partner-xamarin-mobile-services-ios-get-started-push.md
+[使用脚本为用户授权]: ./mobile-services-javascript-backend-service-side-authorization.md
 
 [Xamarin Studio]: http://xamarin.com/download
 

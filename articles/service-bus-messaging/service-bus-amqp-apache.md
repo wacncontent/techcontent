@@ -1,19 +1,20 @@
-<properties 
-   pageTitle="如何在 Linux VM 上安装 Apache Qpid Proton-C | Azure"
-   description="如何使用 Azure 虚拟机创建 CentOS Linux VM 以及如何生成和安装 Apache Qpid Proton-C 库。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-    editor="" /> 
-<tags 
-   ms.service="service-bus"
-    ms.date="09/29/2016"
-   wacn.date="01/09/2017" />
+---
+title: 如何在 Linux VM 上安装 Apache Qpid Proton-C | Azure
+description: 如何使用 Azure 虚拟机创建 CentOS Linux VM 以及如何生成和安装 Apache Qpid Proton-C 库。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
+
+ms.service: service-bus
+ms.date: 09/29/2016
+wacn.date: 01/09/2017
+---
 
 # 在 Azure Linux VM 上安装 Apache Qpid Proton-C
 
-[AZURE.INCLUDE [service-bus-selector-amqp](../../includes/service-bus-selector-amqp.md)]
+[!INCLUDE [service-bus-selector-amqp](../../includes/service-bus-selector-amqp.md)]
 
 本部分演示如何使用 Azure 虚拟机创建 CentOS Linux VM，以及如何下载、构建和安装 Apache Qpid Proton-C 库及 Python 和 PHP 语言绑定。完成这些步骤后，你将能够运行本指南附带的 Python 和 PHP 示例。
 
@@ -51,7 +52,6 @@
 		# dependencies needed for python docs
 		yum install epydoc
 
-
 1.  下载 Proton 库：
 
 	```
@@ -72,12 +72,9 @@
 
 1.  从分发存档中提取 Proton 代码：
 
-
 		tar xvfz qpid-proton-0.9.tar.gz
 
-
 1.  使用从自述文件中获取的以下步骤生成并安装代码：
-
 
 		From the directory where you found this README file:	
 		
@@ -94,7 +91,6 @@
 		# Note that this step will require root privileges.		
 		make install
 
-
 执行这些步骤后，Proton 将安装在计算机上并可供使用。
 
 ## 后续步骤
@@ -103,7 +99,7 @@
 
 - [服务总线 AMQP 概述]
 
-[服务总线 AMQP 概述]: /documentation/articles/service-bus-amqp-overview/
+[服务总线 AMQP 概述]: ./service-bus-amqp-overview.md
 [0]: ./media/service-bus-amqp-apache/amqp-apache-1.png
 [1]: ./media/service-bus-amqp-apache/amqp-apache-2.png
 [2]: ./media/service-bus-amqp-apache/amqp-apache-3.png

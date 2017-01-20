@@ -1,34 +1,32 @@
-<properties
-	pageTitle="克隆入门 | Azure"
-	description="本教程演示如何使用克隆"
-	services="iot-hub"
-	documentationCenter="node"
-	authors="fsautomata"
-	manager="timlt"
-	editor=""/>  
+---
+title: 克隆入门 | Azure
+description: 本教程演示如何使用克隆
+services: iot-hub
+documentationCenter: node
+authors: fsautomata
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-hub"
-     ms.devlang="node"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="09/13/2016"
-     wacn.date="12/12/2016"
-     ms.author="elioda"/>  
-
+ms.service: iot-hub
+ms.devlang: node
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/13/2016
+wacn.date: 12/12/2016
+ms.author: elioda
+---
 
 # 教程：设备孪生入门
 
-[AZURE.INCLUDE [iot-hub-selector-twin-get-started](../../includes/iot-hub-selector-twin-get-started.md)]
+[!INCLUDE [iot-hub-selector-twin-get-started](../../includes/iot-hub-selector-twin-get-started.md)]
 
 在本教程结束时，你将有两个 Node.js 控制台应用程序：
 
 * **AddTagsAndQuery.js**，一个旨在从后端运行的 Node.js 应用，它添加标记并查询设备孪生。
 * **TwinSimulatedDevice.js**，一个 Node.js 应用，它模拟使用早前创建的设备标识连接到 IoT 中心的设备，并报告其连接条件。
 
-> [AZURE.NOTE] [IoT Hub SDKs][lnk-hub-sdks]（IoT 中心 SDK）一文介绍了各种可以用来构建设备和后端应用程序的 SDK。
+> [!NOTE] [IoT Hub SDKs][lnk-hub-sdks]（IoT 中心 SDK）一文介绍了各种可以用来构建设备和后端应用程序的 SDK。
 
 若要完成本教程，你需要以下各项：
 
@@ -36,9 +34,9 @@
 
 + 有效的 Azure 帐户。（如果没有帐户，只需花费几分钟就能创建一个[帐户][lnk-free-trial]。）
 
-[AZURE.INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
+[!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
 
-[AZURE.INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
+[!INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
 
 ## 创建服务应用
 
@@ -122,13 +120,12 @@
    
     ![][1]  
 
-
 在下一部分，用户创建的设备应用会报告连接信息并更改上一部分中查询的结果。
 
 ## 创建设备应用
 在此部分，会创建一个 Node.js 控制台应用作为 **myDeviceId** 连接到中心，然后更新其设备孪生的报告属性，说明它是使用手机网络进行连接的。
 
-> [AZURE.NOTE] 目前，只能从使用 MQTT 协议连接到 IoT 中心的设备访问设备孪生。有关如何转换现有设备应用以使用 MQTT 的说明，请参阅 [MQTT 支持][lnk-devguide-mqtt]一文。
+> [!NOTE] 目前，只能从使用 MQTT 协议连接到 IoT 中心的设备访问设备孪生。有关如何转换现有设备应用以使用 MQTT 的说明，请参阅 [MQTT 支持][lnk-devguide-mqtt]一文。
 
 1. 新建名为 **reportconnectivity** 的空文件夹。在命令提示符下的 **reportconnectivity** 文件夹中，使用以下命令创建新的 package.json 文件。接受所有默认值：
    
@@ -193,7 +190,6 @@
    
     ![][3]  
 
-
 ## 后续步骤
 在本教程中，在 Azure 门户中配置了新的 IoT 中心，然后在中心的标识注册表中创建了设备标识。已从后端应用程序以标记形式添加了设备元数据，并编写了模拟的设备应用，用于报告设备孪生中的设备连接信息。你还学习了如何使用 IoT 中心的类似 SQL 的查询语言来查询此信息。
 
@@ -210,24 +206,24 @@
 
 <!-- links -->
 
-[lnk-hub-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-free-trial]: /pricing/free-trial/
+[lnk-hub-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-free-trial]: https://www.azure.cn/pricing/free-trial/
 
-[lnk-d2c]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-messages
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-identity]: /documentation/articles/iot-hub-devguide-identity-registry/
+[lnk-d2c]: ./iot-hub-devguide-messaging.md#device-to-cloud-messages
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-identity]: ./iot-hub-devguide-identity-registry.md
 
-[lnk-iothub-getstarted]: /documentation/articles/iot-hub-node-node-getstarted/
-[lnk-device-management]: /documentation/articles/iot-hub-node-node-device-management-get-started/
-[lnk-gateway-SDK]: /documentation/articles/iot-hub-linux-gateway-sdk-get-started/
+[lnk-iothub-getstarted]: ./iot-hub-node-node-getstarted.md
+[lnk-device-management]: ./iot-hub-node-node-device-management-get-started.md
+[lnk-gateway-SDK]: ./iot-hub-linux-gateway-sdk-get-started.md
 [lnk-connect-device]: /develop/iot/
 
-[lnk-twin-how-to-configure]: /documentation/articles/iot-hub-node-node-twin-how-to-configure/
+[lnk-twin-how-to-configure]: ./iot-hub-node-node-twin-how-to-configure.md
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/node-devbox-setup/
 
-[lnk-methods-tutorial]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-methods-tutorial]: ./iot-hub-node-node-direct-methods.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 
 <!---HONumber=Mooncake_1205_2016-->

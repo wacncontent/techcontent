@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="实现故障转移流式处理方案 | Azure" 
-	description="本主题演示如何实现故障转移流式处理方案。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 实现故障转移流式处理方案 | Azure
+description: 本主题演示如何实现故障转移流式处理方案。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016" 
-	wacn.date="11/21/2016" 
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 11/21/2016
+ms.author: juliako
+---
 
 #实现故障转移流式处理方案
 
@@ -47,14 +45,13 @@
 - 当前版本的媒体服务 SDK 不支持使用指定的定位器 ID 创建定位器。若要完成此任务，我们将使用媒体服务 REST API。
 - 当前版本的媒体服务 SDK 不支持以编程方式生成会将资产与资产文件关联的 IAssetFile 信息。若要完成此任务，我们将使用 CreateFileInfos 媒体服务 REST API。
 - 不支持使用存储加密资产 (AssetCreationOptions.StorageEncrypted) 进行复制（因为两个媒体服务帐户中的加密密钥将会有所不同）。
-- 如果你想要利用动态打包，则必须先获取至少一个按需流式处理保留单元。有关详细信息，请参阅[动态打包资产](/documentation/articles/media-services-dynamic-packaging-overview/)。
+- 如果你想要利用动态打包，则必须先获取至少一个按需流式处理保留单元。有关详细信息，请参阅[动态打包资产](./media-services-dynamic-packaging-overview.md)。
  
-
->[AZURE.NOTE]请考虑将媒体服务[复制器工具](http://replicator.codeplex.com/)用作备用选项，以手动实现故障转移流式处理方案。此工具可用于在两个媒体服务帐户之间复制资产。
+>[!NOTE]请考虑将媒体服务[复制器工具](http://replicator.codeplex.com/)用作备用选项，以手动实现故障转移流式处理方案。此工具可用于在两个媒体服务帐户之间复制资产。
 
 ##先决条件
  
-- 在新的或现有的 Azure 订阅中拥有两个媒体服务帐户。请参阅[如何创建媒体服务帐户](/documentation/articles/media-services-create-account/)。
+- 在新的或现有的 Azure 订阅中拥有两个媒体服务帐户。请参阅[如何创建媒体服务帐户](./media-services-create-account.md)。
 - 操作系统：Windows 7、Windows 2008 R2 或 Windows 8。
 - .NET Framework 4.5 或 .NET Framework 4。
 - Visual Studio 2010 SP1 或更高版本（专业版、高级专业版、旗舰版或学习版）。
@@ -87,8 +84,6 @@
 		using Microsoft.WindowsAzure.Storage.Blob;
 		using Microsoft.WindowsAzure.Storage.Auth;
 
-
-
 1. 将 appSettings 节添加到 .config 文件，并根据媒体服务和 Storage 密钥与名称值更新值。
 
 		<appSettings>
@@ -103,8 +98,6 @@
 		</appSettings>
 
 ##添加用于处理按需流式处理冗余的代码。
-
-
 
 1. 将以下类级字段添加到 Program 类。
 	
@@ -133,8 +126,6 @@
 		static private MediaServicesCredentials _cachedCredentialsSource = null;
 		static private MediaServicesCredentials _cachedCredentialsTarget = null;
 
-
-
 1. 请使用以下定义替换默认的 Main 方法定义：
 		
 		static void Main(string[] args)
@@ -151,7 +142,6 @@
 		    _contextSource = new CloudMediaContext(_cachedCredentialsSource);
 		    _contextTarget = new CloudMediaContext(_cachedCredentialsTarget);
 		
-		
 		    IAsset assetSingleFile = CreateAssetAndUploadSingleFile(_contextSource,
 		                                AssetCreationOptions.None,
 		                                SingleInputMp4Path);
@@ -166,14 +156,11 @@
 		
 		        Console.WriteLine("Locator Id: {0}", sourceOriginLocator.Id);
 		
-		
 		        // 1.Create a read-only SAS locator for the source asset to have read access to the container in the source Storage account (associated with the source Media Services account)
 		        var readSasLocator = GetSasReadLocator(_contextSource, sourceOutputAsset);
 		
-		
 		        // 2.Get the container name of the source asset from the read-only SAS locator created in the previous step
 		        string containerName = (new Uri(readSasLocator.Path)).Segments[1];
-		
 		
 		        // 3.Create a target empty asset in the target Media Services account
 		        var targetAsset = CreateTargetEmptyAsset(_contextTarget, containerName);
@@ -184,10 +171,8 @@
 		        // Get asset container name.
 		        string targetContainerName = (new Uri(writeSasLocator.Path)).Segments[1];
 		
-		
 		        // 5.Copy the blobs in the source container (source asset) to the target container (target empty asset)
 		        CopyBlobsFromDifferentStorage(containerName, targetContainerName, StorageNameSource, StorageKeySource, StorageNameTarget, StorageKeyTarget);
-		
 		
 		        // 6.Use the CreateFileInfos Media Services REST API to automatically generate all the IAssetFile’s for the target asset. 
 		        //      This API call is not supported in the current Media Services SDK for .NET. 
@@ -421,7 +406,6 @@
 		                Console.WriteLine(String.Format("Locator Path: {0}",
 		                        xmlResponse.GetElementsByTagName("Path")[0].InnerText));
 		
-		
 		                locatorNewPath = xmlResponse.GetElementsByTagName("Path")[0].InnerText;
 		            }
 		        }
@@ -429,7 +413,6 @@
 		
 		    return locatorNewPath;
 		}
-		
 		
 		public static void SetPrimaryFile(IAsset asset)
 		{
@@ -464,7 +447,6 @@
 		    return asset;
 		}
 		
-		
 		public static void CopyBlobsFromDifferentStorage(string sourceContainerName, string targetContainerName,
 		                                    string srcAccountName, string srcAccountKey,
 		                                    string destAccountName, string destAccountKey)
@@ -479,7 +461,6 @@
 		    var targetContainer = targetBlobClient.GetContainerReference(targetContainerName);
 		    targetContainer.CreateIfNotExists();
 		
-		
 		    string blobToken = sourceContainer.GetSharedAccessSignature(new SharedAccessBlobPolicy()
 		    {
 		        // Specify the expiration time for the signature.
@@ -487,7 +468,6 @@
 		        // Specify the permissions granted by the signature.
 		        Permissions = SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.Read
 		    });
-		
 		
 		    foreach (var sourceBlob in sourceContainer.ListBlobs())
 		    {
@@ -880,7 +860,6 @@
 		    if (String.IsNullOrEmpty(acsBearerToken)) throw new ArgumentNullException("acsBearerToken");
 		    if (String.IsNullOrEmpty(assetId)) throw new ArgumentNullException("assetId");
 		
-		
 		    string id = assetId.Replace(":", "%");
 		
 		    UriBuilder builder = new UriBuilder(mediaServicesApiServerUri);
@@ -915,7 +894,6 @@
 		        Console.WriteLine(ex.Message);
 		    }
 		}
-		
 		
 		private static HttpWebRequest GenerateRequest(string verb,
 		                                                string mediaServicesApiServerUri,
@@ -961,7 +939,6 @@
 		    return request;
 		}
 		
-
 ##后续步骤
 
 现在，你可以使用流量管理器在两个数据中心之间路由请求，因此可在任何中断情况下进行故障转移。

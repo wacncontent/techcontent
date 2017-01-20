@@ -1,26 +1,26 @@
 
-<properties
-	pageTitle="在 Azure 虚拟机上快速搭建 ELK 集群 | Azure "
-	description="了解如何在 Azure 虚拟机上快速搭建 ELK 集群"
-	services="open-resource"
-	documentationCenter=""
-	authors="lizzha"
-	manager=""
-	editor="lizzha"/>
+---
+title: 在 Azure 虚拟机上快速搭建 ELK 集群 | Azure 
+description: 了解如何在 Azure 虚拟机上快速搭建 ELK 集群
+services: open-resource
+documentationCenter: 
+authors: lizzha
+manager: 
+editor: lizzha
 
-<tags
-	ms.service="open-source-website"
-	ms.date=""
-	wacn.date="08/09/2016"/>
+ms.service: open-source-website
+ms.date: 
+wacn.date: 08/09/2016
+---
 
 #在 Azure 虚拟机上快速搭建 ELK 集群
 
 ELK 是 [Elasticsearch](https://www.elastic.co/products/elasticsearch)、[Logstash](https://www.elastic.co/products/logstash)、[Kibana](https://www.elastic.co/products/kibana) 三个开源软件的组合，是目前在实时数据检索和分析领域非常受欢迎的开源解决方案。本文介绍了如何通过 Azure 资源管理器在 Azure 虚拟机上快速搭建 ELK 集群。 
->[AZURE.NOTE]说明目前脚本仅支持 CentOS 7.2。
+>[!NOTE]说明目前脚本仅支持 CentOS 7.2。
 
 ##准备步骤 
 
-- 如果你选择 Azure PowerShell 方式搭建 ELK，那么请按[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)中的说明在本地计算机上安装 Azure PowerShell。然后打开 Azure PowerShell 命令提示符，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](/documentation/articles/xplat-cli-connect/)：    
+- 如果你选择 Azure PowerShell 方式搭建 ELK，那么请按[如何安装和配置 Azure PowerShell](./powershell-install-configure.md)中的说明在本地计算机上安装 Azure PowerShell。然后打开 Azure PowerShell 命令提示符，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](./xplat-cli-connect.md)：    
 
 		Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
@@ -28,11 +28,11 @@ ELK 是 [Elasticsearch](https://www.elastic.co/products/elasticsearch)、[Logsta
 
 		New-AzureRmResourceGroup -Name <YOUR-RESOURCE-GROUP-NAME> -Location "China East"
 
-- 如果你选择 Azure CLI 方式搭建 ELK，那么请[安装 Azure CLI](/documentation/articles/xplat-cli-install/)。然后请确保你是处于[资源管理器模式](/documentation/articles/resource-manager-deployment-model/)下，可通过运行以下命令来验证：
+- 如果你选择 Azure CLI 方式搭建 ELK，那么请[安装 Azure CLI](./xplat-cli-install.md)。然后请确保你是处于[资源管理器模式](./azure-resource-manager/resource-manager-deployment-model.md)下，可通过运行以下命令来验证：
 		
 		azure config mode arm
 
-	现在，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](/documentation/articles/xplat-cli-connect/)： 
+	现在，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](./xplat-cli-connect.md)： 
  
 		azure login -e AzureChinaCloud -u <your account>
 
@@ -43,7 +43,7 @@ ELK 是 [Elasticsearch](https://www.elastic.co/products/elasticsearch)、[Logsta
 ##开始动手
 
 PowerShell脚本运行注意事项
->[AZURE.WARNING]<p>PowerShell 脚本运行注意事项  </p><p>需要以管理员权限运行 PowerShell，使用之前需运行如下命令： </p><p>
+>[!WARNING]<p>PowerShell 脚本运行注意事项  </p><p>需要以管理员权限运行 PowerShell，使用之前需运行如下命令： </p><p>
 `Set-ExecutionPolicy -ExecutionPolicy Unrestricted `</p> 
 
 ###在Azure虚拟机上搭建ELK集群
@@ -105,7 +105,7 @@ PowerShell脚本运行注意事项
 
 		PS D:\elk-centos> New-AzureRmResourceGroupDeployment -Name deployelk -ResourceGroupName <YOUR-RESOURCE-GROUP-NAME> -TemplateParameterFile .\azuredeploy.parameters.json -TemplateUri $TemplateUri -DeploymentDebugLogLevel All -Verbose 
 
-	>[AZURE.NOTE]你可以通过指定可选参数 "-DeploymentDebugLogLevel All -Verbose" 来输出更多的部署日志，这可能有助于你诊断在部署过程中发生的错误。如果 PowerShell 返回这个参数不存在，请更新 Azure Powershell 到最新版本。   
+	>[!NOTE]你可以通过指定可选参数 "-DeploymentDebugLogLevel All -Verbose" 来输出更多的部署日志，这可能有助于你诊断在部署过程中发生的错误。如果 PowerShell 返回这个参数不存在，请更新 Azure Powershell 到最新版本。   
 
 	*或者*
    

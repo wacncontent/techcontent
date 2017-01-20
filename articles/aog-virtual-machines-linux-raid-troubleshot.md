@@ -1,12 +1,17 @@
-<properties 
-	pageTitle="Azure Linux 虚机上配置 RAID 的常见问题及解决方案" 
-	description="独立硬盘冗余阵列（RAID, Redundant Array of Independent Disks），简称磁盘阵列。能增强数据集成度，增强容错功能，增加处理量或容量。" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machines-aog" ms.date="" wacn.date="08/31/2016"/>
+---
+title: Azure Linux 虚机上配置 RAID 的常见问题及解决方案
+description: 独立硬盘冗余阵列（RAID, Redundant Array of Independent Disks），简称磁盘阵列。能增强数据集成度，增强容错功能，增加处理量或容量。
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machines-aog
+ms.date: 
+wacn.date: 08/31/2016
+---
+
 #Azure Linux 虚机上配置 RAID 的常见问题及解决方案
 
 ##简介
@@ -15,7 +20,7 @@
 
 ##配置方法
 
->[AZURE.NOTE] 以下范例均在 CentOS 平台运行,其他版本 Linux 略有差异, 请注意区别。
+>[!NOTE] 以下范例均在 CentOS 平台运行,其他版本 Linux 略有差异, 请注意区别。
 
 1.	在 Azure 平台的 Linux 虚拟机上添加至少 2 块空磁盘。
 2.	以管理员身份登录 Linux 虚机并切换至 root 用户。
@@ -51,7 +56,6 @@
 		# df -h |grep -i data
 		/dev/md0        2.0G   35M  1.9G   2% /data
 
-
 ## 常见问题及解决
 
 1.	**问题**:是否可以把临时盘(默认 /dev/sdb) 加入 RAID 中?
@@ -67,5 +71,4 @@
 		0 1 * * Sun root /usr/sbin/raid-check
 
 	编辑自检脚本 /etc/sysconfig/raid-check 将 ENABLED=yes 行改成 ENABLED=no 来关闭自检。
-
 

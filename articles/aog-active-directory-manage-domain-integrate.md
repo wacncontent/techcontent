@@ -1,19 +1,21 @@
 
-<properties 
-	pageTitle="使用 PowerShell 在 Azure Active Directory 中管理域的集成方式" 
-	description="使用 PowerShell 在 Azure Active Directory 中管理域的集成方式" 
-	services="Active Directory" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags 
-	ms.service="active-directory-aog"
-	ms.date="" 
-	wacn.date="08/31/2016"/>
+---
+title: 使用 PowerShell 在 Azure Active Directory 中管理域的集成方式
+description: 使用 PowerShell 在 Azure Active Directory 中管理域的集成方式
+services: Active Directory
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: active-directory-aog
+ms.date: 
+wacn.date: 08/31/2016
+---
+
 #使用 PowerShell 在 Azure Active Directory 中管理域的集成方式
 
-本文适用于已安装 Azure AD Connect 集成工具，将本地用户与 Azure AD 集成，并配置了基于密码同步的登录或基于 ADFS 联合身份验证服务的联合登陆的客户。关于如何安装并配置 Azure AD Connect，请参考[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)。
+本文适用于已安装 Azure AD Connect 集成工具，将本地用户与 Azure AD 集成，并配置了基于密码同步的登录或基于 ADFS 联合身份验证服务的联合登陆的客户。关于如何安装并配置 Azure AD Connect，请参考[将本地标识与 Azure Active Directory 集成](./active-directory/active-directory-aadconnect.md)。
 
 ##常见场景
 
@@ -22,8 +24,8 @@
 ##前提条件
 
 - 有效的 Azure 或 Office 365 订阅
-- Azure AD 或 Office 365 订阅中[已被验证的自定义域名](/documentation/articles/active-directory-add-domain/)
-- 本地域内已安装并部署完成的 [Azure AD Connect 集成工具](/documentation/articles/active-directory-aadconnect/)
+- Azure AD 或 Office 365 订阅中[已被验证的自定义域名](./active-directory/active-directory-add-domain.md)
+- 本地域内已安装并部署完成的 [Azure AD Connect 集成工具](./active-directory/active-directory-aadconnect.md)
 - 本地域内已安装并部署完成的 ADFS 联合身份验证服务
 - 本地域的域管理员账号
 - 加入本地域，并拥有 internet 连接的电脑
@@ -56,8 +58,6 @@ Azure AD 模块支持安装了默认版本的微软 .Net Framework 与 Windows P
 
 ![](./media/aog-active-directory-manage-domain-integrate/get-federation.png)
 
-
-
 ## 连接至本地域内的 ADFS 联合身份验证服务
 
 在连接至 Azure AD 之后，您需要使用以下命令来使 PowerShell 能够连接至本地域内的 ADFS 服务，使得 PowerShell 能够读取或更改 ADFS 服务的信息(将 adfs.domain.com 替换成您的本地域中 ADFS 服务器的机器名)：
@@ -75,7 +75,7 @@ Azure AD 模块支持安装了默认版本的微软 .Net Framework 与 Windows P
 
 临时密码会被储存在 C:\password.txt 文件中，管理员需要将临时密码分配给每个用户，以便他们登陆 Azure/Office 365。
 
-如果管理员希望用户可以沿用之前的密码，可以用 Azure AD Connect 工具触发一次密码全同步操作，该操作会将被同步用户的密码哈希同步至 Azure AD 中。关于如何触发密码全同步，请参阅[使用 Azure AD Connect 同步实现密码同步](/documentation/articles/active-directory-aadconnectsync-implement-password-synchronization/)。
+如果管理员希望用户可以沿用之前的密码，可以用 Azure AD Connect 工具触发一次密码全同步操作，该操作会将被同步用户的密码哈希同步至 Azure AD 中。关于如何触发密码全同步，请参阅[使用 Azure AD Connect 同步实现密码同步](./active-directory/active-directory-aadconnectsync-implement-password-synchronization.md)。
 
 ## 将 Azure AD 中的域从密码同步登陆模式转换至联合登陆模式
 
@@ -103,6 +103,6 @@ PowerShell 将在本地域的 ADFS 服务中注册 Azure AD 的依赖方 (Relyin
 
 ## 更多信息
 
-- [将自定义域名添加到 Azure Active Directory](/documentation/articles/active-directory-add-domain/)
-- [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
+- [将自定义域名添加到 Azure Active Directory](./active-directory/active-directory-add-domain.md)
+- [将本地标识与 Azure Active Directory 集成](./active-directory/active-directory-aadconnect.md)
 

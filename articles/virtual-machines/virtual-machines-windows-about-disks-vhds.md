@@ -1,32 +1,28 @@
-<properties
-	pageTitle="关于 Windows VM 的磁盘和 VHD | Azure"
-	description="了解 Azure 中 Windows 虚拟机磁盘和 VHD 的基础知识。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="cynthn"
-	manager="timlt"
-	editor="tysonn"
-	tags="azure-resource-manager,azure-service-management"/>  
+---
+title: 关于 Windows VM 的磁盘和 VHD | Azure
+description: 了解 Azure 中 Windows 虚拟机磁盘和 VHD 的基础知识。
+services: virtual-machines-windows
+documentationCenter: 
+authors: cynthn
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager,azure-service-management
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="11/21/2016"
-	ms.author="cynthn"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 11/21/2016
+ms.author: cynthn
+---
 
 # 关于 Azure 虚拟机的磁盘和 VHD
 
-就像其他任何计算机一样，Azure 中的虚拟机将磁盘用作存储操作系统、应用程序和数据的位置。所有 Azure 虚拟机都至少有两个磁盘，即 Windows 操作系统磁盘（对于 Windows VM）和临时磁盘。操作系统磁盘基于映像创建，操作系统磁盘和该映像实际上都存储在 Azure 存储帐户中的虚拟硬盘 (VHD) 内。虚拟机还可以有一个或多个数据磁盘，而这些磁盘也存储为 VHD。本文也适用于 [Linux 虚拟机](/documentation/articles/virtual-machines-linux-about-disks-vhds/)。
+就像其他任何计算机一样，Azure 中的虚拟机将磁盘用作存储操作系统、应用程序和数据的位置。所有 Azure 虚拟机都至少有两个磁盘，即 Windows 操作系统磁盘（对于 Windows VM）和临时磁盘。操作系统磁盘基于映像创建，操作系统磁盘和该映像实际上都存储在 Azure 存储帐户中的虚拟硬盘 (VHD) 内。虚拟机还可以有一个或多个数据磁盘，而这些磁盘也存储为 VHD。本文也适用于 [Linux 虚拟机](./virtual-machines-linux-about-disks-vhds.md)。
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
-
-
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
 
 ## 操作系统磁盘
 
@@ -36,9 +32,9 @@
 
 临时磁盘是自动为你创建的。临时磁盘默认标记为 D: 盘，用于存储 pagefile.sys。
 
-临时磁盘的大小因虚拟机的大小而异。有关详细信息，请参阅 [Sizes for Windows virtual machines](/documentation/articles/virtual-machines-windows-sizes/)（Windows 虚拟机的大小）。
+临时磁盘的大小因虚拟机的大小而异。有关详细信息，请参阅 [Sizes for Windows virtual machines](./virtual-machines-windows-sizes.md)（Windows 虚拟机的大小）。
 
->[AZURE.WARNING] 不要在临时磁盘上存储数据。该磁盘为应用程序和进程提供临时存储空间，只用于存储页面文件或交换文件等数据。若要将此磁盘重新映射到其他驱动器号，请参阅 [Change the drive letter of the Windows temporary disk](/documentation/articles/virtual-machines-windows-classic-change-drive-letter/)（更改 Windows 临时磁盘的驱动器号）。
+>[!WARNING] 不要在临时磁盘上存储数据。该磁盘为应用程序和进程提供临时存储空间，只用于存储页面文件或交换文件等数据。若要将此磁盘重新映射到其他驱动器号，请参阅 [Change the drive letter of the Windows temporary disk](./virtual-machines-windows-classic-change-drive-letter.md)（更改 Windows 临时磁盘的驱动器号）。
 
 有关 Azure 如何使用临时磁盘的详细信息，请参阅 [Understanding the temporary drive on Azure Virtual Machines](https://blogs.msdn.microsoft.com/mast/2013/12/06/understanding-the-temporary-drive-on-windows-azure-virtual-machines/)（了解 Azure 虚拟机上的临时驱动器）
 
@@ -46,7 +42,7 @@
 
 数据磁盘是附加到虚拟机的 VHD，用于存储应用程序数据或其他需要保留的数据。数据磁盘注册为 SCSI 驱动器并且带有所选择的字母标记。每个数据磁盘的最大容量为 1023 GB。虚拟机的大小决定了可附加的磁盘数目，以及可用来托管磁盘的存储类型。
 
->[AZURE.NOTE] 有关虚拟机容量的详细信息，请参阅[Sizes for Windows virtual machines](/documentation/articles/virtual-machines-windows-sizes/)（Windows 虚拟机的大小）。
+>[!NOTE] 有关虚拟机容量的详细信息，请参阅[Sizes for Windows virtual machines](./virtual-machines-windows-sizes.md)（Windows 虚拟机的大小）。
 
 当你基于映像创建虚拟机时，Azure 将会创建操作系统磁盘。如果你使用包含数据磁盘的映像，则 Azure 还会在创建虚拟机时创建数据磁盘。否则，你需要在创建虚拟机后添加数据磁盘。
 
@@ -54,7 +50,7 @@
 
 ## 关于 VHD
 
-Azure 中使用的 VHD 是在 Azure 的标准或高级存储帐户中作为页 Blob 存储的 .vhd 文件。有关页 blob 的详细信息，请参阅[了解块 blob 和页 blob](https://msdn.microsoft.com/zh-cn/library/ee691964.aspx)。有关高级存储的详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](/documentation/articles/storage-premium-storage/)。
+Azure 中使用的 VHD 是在 Azure 的标准或高级存储帐户中作为页 Blob 存储的 .vhd 文件。有关页 blob 的详细信息，请参阅[了解块 blob 和页 blob](https://msdn.microsoft.com/zh-cn/library/ee691964.aspx)。有关高级存储的详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](../storage/storage-premium-storage.md)。
 
 Azure 支持固定的磁盘 VHD 格式。固定格式在文件内对逻辑磁盘以线性方式布局，使磁盘偏移量 X 存储在 Blob 偏移量 X 的位置。在 Blob 末尾有一小段脚注，描述了 VHD 的属性。通常，由于大多数磁盘中都有较大的未使用区域，因此固定格式会浪费空间。不过，Azure 以稀疏格式存储 .vhd 文件，因此可兼获固定和动态格式磁盘的优点。有关更多详细信息，请参阅[虚拟硬盘入门](https://technet.microsoft.com/zh-cn/library/dd979539.aspx)。
 
@@ -64,13 +60,11 @@ Azure 中所有要用作磁盘或映像创建来源的 .vhd 文件都是只读�
 
 在删除源 .vhd 文件之前，需要先通过删除磁盘或映像来解除租约。若要删除由虚拟机当前用作操作系统磁盘的 .vhd 文件，可以通过删除虚拟机并删除所有关联的磁盘，一次性删除虚拟机、操作系统磁盘和源 .vhd 文件。但是，删除用作数据磁盘来源的 .vhd 文件需要按一定顺序执行几个步骤：先从虚拟机分离该磁盘，再删除该磁盘，然后才能删除 .vhd 文件。
 
->[AZURE.WARNING] 如果你从存储空间删除了源 .vhd 文件或删除了你的存储帐户，Microsoft 无法为你恢复数据。
-
-
+>[!WARNING] 如果你从存储空间删除了源 .vhd 文件或删除了你的存储帐户，Microsoft 无法为你恢复数据。
 
 ## 后续步骤
--  [附加磁盘](/documentation/articles/virtual-machines-windows-attach-disk-portal/)可为 VM 添加额外的存储。
--  [将 Windows VM 映像上载到 Azure](/documentation/articles/virtual-machines-windows-upload-image/)，以便在创建新的 VM 时使用。
--  [更改 Windows 临时磁盘的驱动器号](/documentation/articles/virtual-machines-windows-classic-change-drive-letter/)，使应用程序能够将 D: 盘用于数据。
+-  [附加磁盘](./virtual-machines-windows-attach-disk-portal.md)可为 VM 添加额外的存储。
+-  [将 Windows VM 映像上载到 Azure](./virtual-machines-windows-upload-image.md)，以便在创建新的 VM 时使用。
+-  [更改 Windows 临时磁盘的驱动器号](./virtual-machines-windows-classic-change-drive-letter.md)，使应用程序能够将 D: 盘用于数据。
 
 <!---HONumber=Mooncake_1017_2016-->

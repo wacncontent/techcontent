@@ -1,27 +1,25 @@
-<properties
-	pageTitle="通过百度开始使用 Azure 通知中心 | Azure"
-	description="在本教程中，你将了解如何通过百度使用 Azure 通知中心将通知推送到 Android 设备。"
-	services="notification-hubs"
-	documentationCenter="android"
-	authors="wesmc7777"
-	manager="dwrede"
-	editor=""/>  
+---
+title: 通过百度开始使用 Azure 通知中心 | Azure
+description: 在本教程中，你将了解如何通过百度使用 Azure 通知中心将通知推送到 Android 设备。
+services: notification-hubs
+documentationCenter: android
+authors: wesmc7777
+manager: dwrede
+editor: 
 
-
-<tags
-	ms.service="notification-hubs"
-	ms.devlang="java"
-	ms.topic="hero-article"
-	ms.tgt_pltfrm="mobile-baidu"
-	ms.workload="mobile"
-	ms.date="08/19/2016"
-	wacn.date="10/27/2016"
-	ms.author="wesmc"/>  
-
+ms.service: notification-hubs
+ms.devlang: java
+ms.topic: hero-article
+ms.tgt_pltfrm: mobile-baidu
+ms.workload: mobile
+ms.date: 08/19/2016
+wacn.date: 10/27/2016
+ms.author: wesmc
+---
 
 # 通过百度开始使用通知中心
 
-[AZURE.INCLUDE [notification-hubs-selector-get-started](../../includes/notification-hubs-selector-get-started.md)]
+[!INCLUDE [notification-hubs-selector-get-started](../../includes/notification-hubs-selector-get-started.md)]
 
 ##概述
 
@@ -35,8 +33,7 @@
 + [移动服务 Android SDK]
 + [百度推送 Android SDK]
 
->[AZURE.NOTE] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/)。
-
+>[!NOTE] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 ##创建百度帐户
 
@@ -401,25 +398,23 @@
 
 ##向应用程序发送通知
 
-
 在 [Azure 门户预览](https://portal.azure.cn/)中使用通知中心的“测试发送”按钮（如以下屏幕中所示）来发送通知，可以在应用中快速地测试通知的接收情况。
 
 ![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-test-send-wns.png)  
 
-
 通常，推送通知是在后端服务（例如，移动服务，或者使用兼容库的 ASP.NET）中发送的。如果你的后端没有可用的库，则你也可以使用 REST API 直接发送通知消息。
 
-在本教程中，为了保持内容的简单性，我们只会演示如何在控制台应用程序（而不是后端服务）中，使用通知中心的 .NET SDK 发送通知，以此测试你的客户端应用。建议你接下来学习[使用通知中心向用户推送通知](/documentation/articles/notification-hubs-aspnet-backend-windows-dotnet-wns-notification/)教程，以了解如何从 ASP.NET 后端发送通知。不过，可以使用以下方法来发送通知：
+在本教程中，为了保持内容的简单性，我们只会演示如何在控制台应用程序（而不是后端服务）中，使用通知中心的 .NET SDK 发送通知，以此测试你的客户端应用。建议你接下来学习[使用通知中心向用户推送通知](./notification-hubs-aspnet-backend-windows-dotnet-wns-notification.md)教程，以了解如何从 ASP.NET 后端发送通知。不过，可以使用以下方法来发送通知：
 
 * **REST 接口**：可以使用 [REST 接口](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn223264.aspx)在任何后端平台上支持通知。
 
 * **Azure 通知中心 .NET SDK**：在 Visual Studio 的 Nuget 包管理器中，运行 [Install-Package Microsoft.Azure.NotificationHubs](https://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/)。
 
-* **Node.js**：[如何通过 Node.js 使用通知中心](/documentation/articles/notification-hubs-nodejs-push-notification-tutorial/)。
+* **Node.js**：[如何通过 Node.js 使用通知中心](./notification-hubs-nodejs-push-notification-tutorial.md)。
 
-* **Azure 移动服务**：有关如何从与通知中心集成的 Azure 移动服务后端发送通知的示例，请参阅[将推送通知添加到移动服务应用](/documentation/articles/mobile-services-javascript-backend-windows-universal-dotnet-get-started-push/)。
+* **Azure 移动服务**：有关如何从与通知中心集成的 Azure 移动服务后端发送通知的示例，请参阅[将推送通知添加到移动服务应用](../mobile-services/mobile-services-javascript-backend-windows-universal-dotnet-get-started-push.md)。
 
-* **Java/PHP**：有关如何使用 REST API 发送通知的示例，请参阅“如何通过 Java/PHP 使用通知中心”([Java](/documentation/articles/notification-hubs-java-push-notification-tutorial/) | [PHP](/documentation/articles/notification-hubs-php-push-notification-tutorial/))。
+* **Java/PHP**：有关如何使用 REST API 发送通知的示例，请参阅“如何通过 Java/PHP 使用通知中心”([Java](./notification-hubs-java-push-notification-tutorial.md) | [PHP](./notification-hubs-php-push-notification-tutorial.md))。
 
 ##（可选）通过 .NET 控制台应用发送通知。
 
@@ -429,7 +424,6 @@
 
 	![][30]  
 
-
 2. 在“包管理器控制台”窗口中，将“默认项目”设置为新的控制台应用程序项目，然后在控制台窗口中执行以下命令：
 
 	Install-Package Microsoft.Azure.NotificationHubs
@@ -437,7 +431,6 @@
 	这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 包</a>添加对 Azure 通知中心 SDK 的引用。
 
 	![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-package-manager.png)  
-
 
 3. 打开文件 **Program.cs** 并添加以下 using 语句：
 
@@ -466,7 +459,6 @@
 该应用将从百度推送通知服务检索“userId”和“channelId”，并注册到通知中心。
 
 若要发送测试通知，可以使用 Azure 经典管理门户的“调试”选项卡。如果你为 Visual Studio 生成了 .NET 控制台应用程序，只需在 Visual Studio 中按 F5 键以运行该应用程序。该应用程序将发送一条通知，该通知显示在设备或模拟器的顶部通知区域。
-
 
 <!-- Images. -->
 

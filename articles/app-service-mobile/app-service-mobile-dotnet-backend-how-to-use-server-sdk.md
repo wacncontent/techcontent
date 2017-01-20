@@ -1,33 +1,32 @@
-<properties
-	pageTitle="如何使用适用于移动应用的 .NET 后端服务器 SDK | Azure 应用服务"
-	description="了解如何使用适用于 Azure 应用服务移动应用的 .NET 后端服务器 SDK。"
-	keywords="应用服务, azure 应用服务, 移动应用, 移动服务, 缩放, 可缩放, 应用部署, azure 应用部署"
-	services="app-service\mobile"
-	documentationCenter=""
-	authors="adrianhall"
-	manager="erikre"
-	editor=""/>  
+---
+title: 如何使用适用于移动应用的 .NET 后端服务器 SDK | Azure 应用服务
+description: 了解如何使用适用于 Azure 应用服务移动应用的 .NET 后端服务器 SDK。
+keywords: 应用服务, azure 应用服务, 移动应用, 移动服务, 缩放, 可缩放, 应用部署, azure 应用部署
+services: app-service\mobile
+documentationCenter: 
+authors: adrianhall
+manager: erikre
+editor: 
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="11/21/2016"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: adrianha
+---
 
 # 使用适用于 Azure 移动应用的 .NET 后端服务器 SDK
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-[AZURE.INCLUDE [app-service-mobile-selector-server-sdk](../../includes/app-service-mobile-selector-server-sdk.md)]
+[!INCLUDE [app-service-mobile-selector-server-sdk](../../includes/app-service-mobile-selector-server-sdk.md)]
 
 本主题说明如何在关键的 Azure 应用服务移动应用方案中使用 .NET 后端服务器 SDK。借助 Azure 移动应用 SDK 可从 ASP.NET 应用程序使用移动客户端。
 
->[AZURE.TIP] [适用于 Azure 移动应用的 .NET 服务器 SDK][2] 是 GitHub 上的开放源代码。存储库包含所有源代码，包括整个服务器 SDK 单元测试套件以及一些示例项目。
+>[!TIP] [适用于 Azure 移动应用的 .NET 服务器 SDK][2] 是 GitHub 上的开放源代码。存储库包含所有源代码，包括整个服务器 SDK 单元测试套件以及一些示例项目。
 
 ## 参考文档
 
@@ -43,7 +42,7 @@
 
 若要创建应用服务移动后端，请按照[快速入门教程][3]或以下步骤操作：
 
-[AZURE.INCLUDE [app-service-mobile-dotnet-backend-create-new-service-classic](../../includes/app-service-mobile-dotnet-backend-create-new-service-classic.md)]
+[!INCLUDE [app-service-mobile-dotnet-backend-create-new-service-classic](../../includes/app-service-mobile-dotnet-backend-create-new-service-classic.md)]
 
 返回“开始使用”边栏选项卡，在“创建表 API”下面，选择“C#”作为“后端语言”。单击“下载”，将压缩的项目文件解压缩到本地计算机，并在 Visual Studio 中打开解决方案。
 
@@ -148,7 +147,7 @@ Azure 门户中的服务器快速启动代码调用 **UseDefaultConfiguration()*
 
 ## <a name="publish-server-project"></a>如何发布服务器项目
 
-本部分说明如何从 Visual Studio 发布 .NET 后端项目。也可以使用 Git 或 [Azure 应用服务部署文档](/documentation/articles/web-sites-deploy/)中介绍的任何其他方法部署后端项目。
+本部分说明如何从 Visual Studio 发布 .NET 后端项目。也可以使用 Git 或 [Azure 应用服务部署文档](../app-service-web/web-sites-deploy.md)中介绍的任何其他方法部署后端项目。
 
 1. 在 Visual Studio 中，重新生成项目以还原 NuGet 包。
 
@@ -158,21 +157,17 @@ Azure 门户中的服务器快速启动代码调用 **UseDefaultConfiguration()*
 
 	![](./media/app-service-mobile-dotnet-backend-how-to-use-server-sdk/publish-wizard-1.png)  
 
-
 3. 选择“订阅”，从“视图”中选择“资源类型”，展开“移动应用”，单击移动应用后端，然后单击“确定”。
 
 	![](./media/app-service-mobile-dotnet-backend-how-to-use-server-sdk/publish-wizard-2.png)  
-
 
 4. 验证发布配置文件信息，然后单击“发布”。
 
 	![](./media/app-service-mobile-dotnet-backend-how-to-use-server-sdk/publish-wizard-3.png)  
 
-
 	成功发布移动应用后端后，可以看到表示成功的登陆页面。
 
 	![](./media/app-service-mobile-dotnet-backend-how-to-use-server-sdk/publish-success.png)  
-
 
 ##<a name="how-to-define-a-table-controller"></a> 如何定义表控制器
 
@@ -233,7 +228,7 @@ DTO 用于定义 SQL 数据库内的表。若要创建数据库项，请将 `DbS
 
 ## 如何定义自定义 API 控制器
 
-自定义 API 控制器通过公开终结点，向移动应用后端提供最基本的功能。可以使用 [MobileAppController] 属性注册移动设备特定的 API 控制器。`MobileAppController` 属性会注册路由、设置移动应用 JSON 序列化程序，并打开[客户端版本检查](/documentation/articles/app-service-mobile-client-and-server-versioning/)。
+自定义 API 控制器通过公开终结点，向移动应用后端提供最基本的功能。可以使用 [MobileAppController] 属性注册移动设备特定的 API 控制器。`MobileAppController` 属性会注册路由、设置移动应用 JSON 序列化程序，并打开[客户端版本检查](./app-service-mobile-client-and-server-versioning.md)。
 
 1. 在 Visual Studio 中，右键单击“控制器”文件夹，单击“添加”>“控制器”，选择“Web API 2 控制器 &mdash; 空白”，然后单击“添加”。
 
@@ -282,7 +277,7 @@ Azure 移动应用使用应用服务身份验证/授权来保护移动后端。�
 
 3. 将 `[Authorize]` 属性添加到任何要求身份验证的控制器或方法。
 
-若要了解如何在移动应用后端对客户端进行身份验证，请参阅 [Add authentication to your app](/documentation/articles/app-service-mobile-ios-get-started-users/)（将身份验证添加到应用）。
+若要了解如何在移动应用后端对客户端进行身份验证，请参阅 [Add authentication to your app](./app-service-mobile-ios-get-started-users.md)（将身份验证添加到应用）。
 
 ### <a name="custom-auth"></a>如何对应用程序使用自定义身份验证
 
@@ -290,7 +285,7 @@ Azure 移动应用使用应用服务身份验证/授权来保护移动后端。�
 
 通过创建 ApiController 并公开 `register` 和 `login` 操作来公开自定义身份验证。客户端应使用自定义 UI 从用户处收集信息。这些信息随后使用标准 HTTP POST 调用提交至 API。服务器验证断言后，便可以使用 `AppServiceLoginHandler.CreateToken()` 方法颁发令牌。ApiController **不应**使用 `[MobileAppController]` 属性。
 
-请注意，此 ApiController **不应**使用 `[MobileAppController]` 属性，因为这会导致客户端登录请求失败。`[MobileAppController]` 属性需要请求标头 [ZUMO-API-VERSION](/documentation/articles/app-service-mobile-client-and-server-versioning/)，此标头**并非**由客户端 SDK 针对登录路由而发送。
+请注意，此 ApiController **不应**使用 `[MobileAppController]` 属性，因为这会导致客户端登录请求失败。`[MobileAppController]` 属性需要请求标头 [ZUMO-API-VERSION](./app-service-mobile-client-and-server-versioning.md)，此标头**并非**由客户端 SDK 针对登录路由而发送。
 
 可能的示例登录操作为：
 
@@ -332,7 +327,7 @@ Azure 移动应用使用应用服务身份验证/授权来保护移动后端。�
 
     config.Routes.MapHttpRoute("custom", ".auth/login/custom", new { controller = "CustomAuth" });
 
->[AZURE.TIP] 使用 `loginAsync()` 方法可确保将身份验证令牌附加到后续对服务的每个调用。
+>[!TIP] 使用 `loginAsync()` 方法可确保将身份验证令牌附加到后续对服务的每个调用。
 
 ###<a name="user-info"></a>如何检索经过身份验证的用户信息
 
@@ -390,7 +385,7 @@ SID 派生自提供程序特定的用户 ID，对于给定的用户和登录提�
         NotificationHubClient hub = NotificationHubClient
         .CreateClientFromConnectionString(notificationHubConnection, notificationHubName);
 
-现在可以使用通知中心客户端将推送通知发送到已注册的设备。有关详细信息，请参阅 [Add push notifications to your app](/documentation/articles/app-service-mobile-ios-get-started-push/)（将推送通知添加到应用）。若要了解有关通知中心的详细信息，请参阅[通知中心概述](/documentation/articles/notification-hubs-push-notification-overview/)。
+现在可以使用通知中心客户端将推送通知发送到已注册的设备。有关详细信息，请参阅 [Add push notifications to your app](./app-service-mobile-ios-get-started-push.md)（将推送通知添加到应用）。若要了解有关通知中心的详细信息，请参阅[通知中心概述](../notification-hubs/notification-hubs-push-notification-overview.md)。
 #<a name="how-to-add-tags-to-a-device-installation-to-enable-push-to-tags"></a> 如何：使用标记启用目标推送
 
 通知中心允许使用标记将目标通知发送到特定的注册。多个标记会自动创建：
@@ -435,9 +430,9 @@ SID 派生自提供程序特定的用户 ID，对于给定的用户和登录提�
 
 Azure 应用服务提供多种适用于 ASP.NET 应用程序的调试和故障排除方法：
 
-- [Monitoring an Azure App Service（监视 Azure 应用服务）](/documentation/articles/web-sites-monitor/)
-- [Enable Diagnostic Logging in Azure App Service（在 Azure 应用服务中启用诊断记录）](/documentation/articles/web-sites-enable-diagnostic-log/)
-- [Toubleshoot an Azure App Service in Visual Studio（在 Visual Studio 中对 Azure 应用服务进行故障排除）](/documentation/articles/web-sites-dotnet-troubleshoot-visual-studio/)
+- [Monitoring an Azure App Service（监视 Azure 应用服务）](../app-service-web/web-sites-monitor.md)
+- [Enable Diagnostic Logging in Azure App Service（在 Azure 应用服务中启用诊断记录）](../app-service-web/web-sites-enable-diagnostic-log.md)
+- [Toubleshoot an Azure App Service in Visual Studio（在 Visual Studio 中对 Azure 应用服务进行故障排除）](../app-service-web/web-sites-dotnet-troubleshoot-visual-studio.md)
 
 ### 日志记录
 
@@ -445,7 +440,7 @@ Azure 应用服务提供多种适用于 ASP.NET 应用程序的调试和故障�
 
 若要启用诊断并写入日志，请执行以下操作：
 
-1. 遵循 [How to enable diagnostics](/documentation/articles/web-sites-enable-diagnostic-log/#enablediag)（如何启用诊断）中的步骤。
+1. 遵循 [How to enable diagnostics](../app-service-web/web-sites-enable-diagnostic-log.md#enablediag)（如何启用诊断）中的步骤。
 
 2. 在代码文件中添加以下 using 语句：
 
@@ -458,7 +453,7 @@ Azure 应用服务提供多种适用于 ASP.NET 应用程序的调试和故障�
 
 4. 重新发布服务器项目，并访问移动应用后端，结合日志记录执行代码路径。
 
-5. 根据[如何下载记录](/documentation/articles/web-sites-enable-diagnostic-log/#download)中所述下载并评估日志。
+5. 根据[如何下载记录](../app-service-web/web-sites-enable-diagnostic-log.md#download)中所述下载并评估日志。
 
 ### <a name="local-debug"></a>使用身份验证进行本地调试
 
@@ -487,7 +482,7 @@ Azure 应用服务提供多种适用于 ASP.NET 应用程序的调试和故障�
 
 [1]: https://msdn.microsoft.com/zh-cn/library/azure/dn961176.aspx
 [2]: https://github.com/Azure/azure-mobile-apps-net-server
-[3]: /documentation/articles/app-service-mobile-ios-get-started/
+[3]: ./app-service-mobile-ios-get-started.md
 [4]: /downloads/
 [5]: https://github.com/Azure-Samples/app-service-mobile-dotnet-backend-quickstart/blob/master/README.md#client-added-push-notification-tags
 [6]: https://github.com/Azure-Samples/app-service-mobile-dotnet-backend-quickstart/blob/master/README.md#push-to-users

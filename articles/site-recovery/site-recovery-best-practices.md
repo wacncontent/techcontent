@@ -1,23 +1,22 @@
-<properties
-    pageTitle="准备站点恢复部署 | Azure"
-    description="本文介绍如何准备使用 Azure Site Recovery 部署复制。"
-    services="site-recovery"
-    documentationcenter=""
-    author="rayne-wiselman"
-    manager="jwhit"
-    editor="tysonn" />  
+---
+title: 准备站点恢复部署 | Azure
+description: 本文介绍如何准备使用 Azure Site Recovery 部署复制。
+services: site-recovery
+documentationcenter: 
+author: rayne-wiselman
+manager: jwhit
+editor: tysonn
 
-<tags
-    ms.assetid="e24eea6c-50a7-4cd5-aab4-2c5c4d72ee2d"
-    ms.service="site-recovery"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage-backup-recovery"
-    ms.date="12/01/2016"
-    wacn.date="01/11/2017"
-    ms.author="raynew" />  
-
+ms.assetid: e24eea6c-50a7-4cd5-aab4-2c5c4d72ee2d
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 12/01/2016
+wacn.date: 01/11/2017
+ms.author: raynew
+---
 
 # 准备 Azure Site Recovery 部署
 本文介绍 Azure Site Recovery 服务支持的每种复制方案的概括性要求。在阅读每种方案的一般要求之后，可将每个部署链接到特定部署详细信息。
@@ -26,8 +25,7 @@
 
 组织需要制定 BCDR 策略来确定应用、工作负荷和数据如何在计划和非计划停机期间保持运行和可用，并尽快恢复正常运行情况。BCDR 策略应保持业务数据的安全性和可恢复性，并确保在发生灾难时工作负荷持续可用。
 
-站点恢复是一项 Azure 服务，可以通过协调从本地物理服务器和虚拟机到云 (Azure) 或辅助数据中心的的复制，来为 BCDR 策略提供辅助。当主要位置发生故障时，你可以故障转移到辅助位置，使应用和工作负荷保持可用。当主要位置恢复正常时，你可以故障转移回到主要位置。有关详细信息，请参阅[什么是 Site Recovery？](/documentation/articles/site-recovery-overview/)
-
+站点恢复是一项 Azure 服务，可以通过协调从本地物理服务器和虚拟机到云 (Azure) 或辅助数据中心的的复制，来为 BCDR 策略提供辅助。当主要位置发生故障时，你可以故障转移到辅助位置，使应用和工作负荷保持可用。当主要位置恢复正常时，你可以故障转移回到主要位置。有关详细信息，请参阅[什么是 Site Recovery？](./site-recovery-overview.md)
 
 ## 复制 Hyper-V 虚拟机的要求
 
@@ -37,17 +35,14 @@
 **Hyper-V** | 本地数据中心内有一个或多个 Hyper-V 主机服务器至少运行 Windows Server 2012 R2。Hyper-V 服务器必须位于 VMM 云中的主机组中。 | 源和目标站点中有一个或多个至少运行 Windows Server 2012 R2 的 Hyper-V 服务器。 | 源和目标站点中有一个或多个至少运行 Windows Server 2012（装有最新更新）的 Hyper-V 服务器。Hyper-V 服务器必须位于 VMM 云中的主机组中。
 **虚拟机** | 源 Hyper-V 服务器上至少需要一个 VM。复制到 Azure 的 VM 必须符合 [Azure 虚拟机先决条件](#azure-virtual-machine-requirements)。<br>使用[此处](https://technet.microsoft.com/zh-cn/library/hh846766.aspx#BKMK_step4)提供的步骤，在 VM 中安装或升级[集成服务](https://technet.microsoft.com/zh-cn/library/dn798297.aspx)。 | 源 Hyper-V 服务器上至少有一个 VM。复制到 Azure 的 VM 必须符合 [Azure 虚拟机先决条件](#azure-virtual-machine-requirements)。<br>使用[此处](https://technet.microsoft.com/zh-cn/library/hh846766.aspx#BKMK_step4)提供的步骤，在 VM 中安装或升级[集成服务](https://technet.microsoft.com/zh-cn/library/dn798297.aspx)。 | 源 VMM 云中至少有一个 VM。<br>使用[此处](https://technet.microsoft.com/zh-cn/library/hh846766.aspx#BKMK_step4)提供的步骤，在 VM 中安装或升级[集成服务](https://technet.microsoft.com/zh-cn/library/dn798297.aspx)。
 **Azure 帐户** | 需要一个 [Azure](https://azure.cn/) 帐户和订阅。 | 不适用 | 需要一个 [Azure](https://azure.cn/) 帐户和订阅。
-**Azure 存储空间** | 你将需要使用 [Azure 存储帐户](/documentation/articles/storage-redundancy/#geo-redundant-storage)来存储复制的数据。复制的数据存储在 Azure 空间，Azure VM 在发生故障转移时启动。 | 不适用 | 你将需要使用 [Azure 存储帐户](/documentation/articles/storage-redundancy/#geo-redundant-storage)来存储复制的数据。复制的数据存储在 Azure 空间，Azure VM 在发生故障转移时启动。
+**Azure 存储空间** | 你将需要使用 [Azure 存储帐户](../storage/storage-redundancy.md#geo-redundant-storage)来存储复制的数据。复制的数据存储在 Azure 空间，Azure VM 在发生故障转移时启动。 | 不适用 | 你将需要使用 [Azure 存储帐户](../storage/storage-redundancy.md#geo-redundant-storage)来存储复制的数据。复制的数据存储在 Azure 空间，Azure VM 在发生故障转移时启动。
 **提供程序/代理** | 在部署期间，将在 VMM 服务器上安装 Azure Site Recovery 提供程序，并在 Hyper-V 主机服务器上安装 Azure 恢复服务代理。该提供程序将与 Azure Site Recovery 进行通信。该代理将处理源和目标 Hyper-V 服务器之间的复制。不会在 VM 上安装任何软件。 | 在部署期间，将在 Hyper-V 主机服务器或群集上安装 Azure Site Recovery 提供程序和 Azure 恢复服务代理。不会在 VM 上安装任何软件。 | 在部署期间，将在 VMM 服务器上安装 Azure Site Recovery 提供程序，以便与 Azure Site Recovery 通信。通过 LAN/VPN 在 Hyper-V 源和目标服务器之间进行复制。
 **提供程序/代理连接** | 如果提供程序将通过代理连接到站点恢复服务，则需要确保该代理可以访问站点恢复 URL。 | 如果提供程序将通过代理连接到站点恢复，则需要确保该代理可以访问站点恢复 URL。 | 如果提供程序将通过代理连接到站点恢复，则需要确保该代理可以访问站点恢复 URL。
 **Internet 连接** | 从 VMM 服务器和 Hyper-V 主机连接。 | 从 Hyper-V 主机连接。 | 仅在 VMM 服务器上。
 **网络映射** | 设置网络映射，以便同一 Azure 网络上执行故障转移的所有虚拟机都能彼此互连，与这些虚拟机所属的恢复计划无关。如果目标 Azure 网络上有网关，虚拟机还可以连接到本地虚拟机。如果不设置网络映射，则只有同一个恢复计划中故障转移的计算机才能进行连接。 | 不适用 | 设置网络映射，以使虚拟机在故障转移之后连接到适当的网络，并以最佳方式将副本虚拟机放置在目标 Hyper-V 主机服务器上。如果不配置网络映射，则故障转移之后，复制的计算机将不会连接到任何 VM 网络。
 **存储映射** | 不适用 | 不适用 | 可以选择设置存储映射，以确保虚拟机在故障转移后以最佳方式连接到存储（默认情况下，副本 VM 将存储在目标 Hyper-V 服务器上所指示的位置中）。
 **SAN 复制** | 不适用 | 不适用 | 如果你要使用 SAN 复制在两个在本地 VMM 站点之间复制，可以使用现有的 SAN 环境。请查看[支持的 SAN 阵列](http://social.technet.microsoft.com/wiki/contents/articles/28317.deploying-azure-site-recovery-with-vmm-and-san-supported-storage-arrays.aspx)。
-**详细信息** | [详细的部署先决条件](/documentation/articles/site-recovery-vmm-to-azure/#before-you-start) | [详细的部署先决条件](/documentation/articles/site-recovery-hyper-v-site-to-azure/#before-you-start) | [详细的部署先决条件](/documentation/articles/site-recovery-vmm-to-vmm/#before-you-start)
-
-
-
+**详细信息** | [详细的部署先决条件](./site-recovery-vmm-to-azure.md#before-you-start) | [详细的部署先决条件](./site-recovery-hyper-v-site-to-azure.md#before-you-start) | [详细的部署先决条件](./site-recovery-vmm-to-vmm.md#before-you-start)
 
 ##<a id="azure-virtual-machine-requirements"></a><a name="virtual-machines"></a>Azure 虚拟机要求
 
@@ -80,7 +75,7 @@ Bitlocker | 不支持 | 保护虚拟机之前，必须先禁用 Bitlocker。
 - **数据磁盘大小**：如果要复制到 Azure，一台虚拟机中最多可以包含 64 个数据磁盘，每个磁盘的最大大小为 1 TB。可以有效地复制和故障转移约 64 TB 的虚拟机。
 - **恢复计划限制**：Site Recovery 可以扩展到数千个虚拟机。恢复计划旨在用作应一起故障转移的应用程序的模型，因此，我们可以将一个恢复计划中的计算机数目限制为 50。
 - **Azure 服务限制**：每个 Azure 订阅在核心、云服务等方面附带了一组默认限制。建议运行测试故障转移，验证订阅中资源的可用性。可以通过 Azure 支持人员修改这些限制。
-- **容量规划**：阅读站点恢复的[容量规划](/documentation/articles/site-recovery-capacity-planner/)相关信息。
+- **容量规划**：阅读站点恢复的[容量规划](./site-recovery-capacity-planner.md)相关信息。
 - **复制带宽**：如果你的复制带宽不足，请注意：
 	- **ExpressRoute**：可以配合 Azure ExpressRoute 和 WAN 优化器（如 Riverbed）来使用 Site Recovery。[详细了解](http://blogs.technet.com/b/virtualization/archive/2014/07/20/expressroute-and-azure-site-recovery.aspx)有关 ExpressRoute 的信息。
 	- **复制流量**：Site Recovery 用户只能使用数据块（而不是整个 VHD）执行智能初始复制。在复制过程中，只会复制更改。
@@ -88,16 +83,12 @@ Bitlocker | 不支持 | 保护虚拟机之前，必须先禁用 Bitlocker。
 - **RTO**：若要度量使用 Site Recovery 时预期的恢复时间目标 (RTO)，我们建议运行测试故障转移并查看 Site Recovery 作业，分析完成操作所花费的时间。如果你要故障转移到 Azure，为实现最佳 RTO，我们建议你通过与 Azure 自动化和恢复计划集成来自动化所有手动操作。
 - **RPO**：当你复制到 Azure 时，Site Recovery 支持近乎同步的恢复点目标 (RPO)。这假设数据中心和 Azure 之间有足够的带宽。
 
-
-
 ## 后续步骤
 查看常规部署要求之后，请阅读详细的先决条件并部署方案。
 
-
-
-- [将 VMM 云中的 Hyper-V 服务器复制到 Azure](/documentation/articles/site-recovery-vmm-to-azure/)
-- [将 Hyper-V 虚拟机（不使用 VMM）复制到 Azure](/documentation/articles/site-recovery-hyper-v-site-to-azure/)
-- [将 Hyper-V VM 复制到辅助站点](/documentation/articles/site-recovery-vmm-to-vmm/)
-- [使用单个 VMM 服务器复制 Hyper-V VM](/documentation/articles/site-recovery-single-vmm/)
+- [将 VMM 云中的 Hyper-V 服务器复制到 Azure](./site-recovery-vmm-to-azure.md)
+- [将 Hyper-V 虚拟机（不使用 VMM）复制到 Azure](./site-recovery-hyper-v-site-to-azure.md)
+- [将 Hyper-V VM 复制到辅助站点](./site-recovery-vmm-to-vmm.md)
+- [使用单个 VMM 服务器复制 Hyper-V VM](./site-recovery-single-vmm.md)
 
 <!---HONumber=Mooncake_1226_2016-->

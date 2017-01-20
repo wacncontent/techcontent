@@ -1,36 +1,33 @@
-<properties 
-	pageTitle="使用 .NET 将文件上传到媒体服务帐户" 
-	description="了解如何通过创建和上传资产将媒体内容加入媒体服务。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 .NET 将文件上传到媒体服务帐户
+description: 了解如何通过创建和上传资产将媒体内容加入媒体服务。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
- 	ms.date="09/19/2016" 
- 	wacn.date="10/10/2016" 
-	ms.author="juliako"/>
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/19/2016
+wacn.date: 10/10/2016
+ms.author: juliako
+---
 
 # 使用 .NET 将文件上传到媒体服务帐户
 
- > [AZURE.SELECTOR]
- - [.NET](/documentation/articles/media-services-dotnet-upload-files/)
- - [REST](/documentation/articles/media-services-rest-upload-files/)
+ > [!div class="op_single_selector"]
+ - [.NET](./media-services-dotnet-upload-files.md)
+ - [REST](./media-services-rest-upload-files.md)
 
 在媒体服务中，可以将数字文件上传（引入）到资产中。**资产**实体可以包含视频、音频、图像、缩略图集合、图文轨迹和隐藏式字幕文件（以及有关这些文件的元数据。） 文件上传完成后，相关内容即安全地存储在云中供后续处理和流式处理。
 
 资产中的文件称为**资产文件**。**AssetFile** 实例和实际媒体文件是两个不同的对象。AssetFile 实例包含有关媒体文件的元数据，而媒体文件包含实际媒体内容。
 
->[AZURE.NOTE]选择资产文件名时需考虑下列事项：
+>[!NOTE]选择资产文件名时需考虑下列事项：
 >
 >- 构建流内容的 URL 时，媒体服务会使用 IAssetFile.Name 属性的值（如 http://{AMSAccount}.origin.mediaservices.chinacloudapi.cn/{GUID}/{IAssetFile.Name}/streamingParameters.）。出于此原因，不允许使用百分号编码。**Name** 属性的值不能含有任何以下[百分号编码保留字符](http://en.wikipedia.org/wiki/Percent-encoding#Percent-encoding_reserved_characters)：!*'();:@&=+$,/?%#"。此外，文件扩展名中只能含有一个“.”。
 >
@@ -45,16 +42,14 @@
 
 	媒体服务为资产提供磁盘上的存储加密，而不是通过数字权限管理器 (DRM) 等线路提供加密。
 
-	如果资产已通过存储加密，则必须配置资产传送策略。有关详细信息，请参阅[配置资产传送策略](/documentation/articles/media-services-dotnet-configure-asset-delivery-policy/)。
+	如果资产已通过存储加密，则必须配置资产传送策略。有关详细信息，请参阅[配置资产传送策略](./media-services-dotnet-configure-asset-delivery-policy.md)。
 
-如果指定使用 **CommonEncrypted** 选项或 **EnvelopeEncypted** 选项加密资产，则需要将资产关联到 **ContentKey**。有关详细信息，请参阅[如何创建 ContentKey](/documentation/articles/media-services-dotnet-create-contentkey/)。
+如果指定使用 **CommonEncrypted** 选项或 **EnvelopeEncypted** 选项加密资产，则需要将资产关联到 **ContentKey**。有关详细信息，请参阅[如何创建 ContentKey](./media-services-dotnet-create-contentkey.md)。
 
 如果指定使用 **StorageEncrypted** 选项加密资产，适用于 .NET 的媒体服务 SDK 将为资产创建 **StorateEncrypted** **ContentKey**。
 
-
 本主题说明如何使用媒体服务.NET SDK 以及媒体服务.NET SDK Extensions 将文件上传到媒体服务资产中。
 
- 
 ## 使用媒体服务 .NET SDK 上传单个文件 
 
 以下示例代码使用 .NET SDK 执行以下任务：
@@ -65,7 +60,6 @@
 - 创建用于提供资产访问权限的 Locator 实例。
 - 将单个媒体文件上传到媒体服务。
 
-		
 		static public IAsset CreateAssetAndUploadSingleFile(AssetCreationOptions assetCreationOptions, string singleFilePath)
 		{
             if (!File.Exists(singleFilePath))
@@ -117,8 +111,7 @@
  	
 - 	使用 **UploadAsync** 方法将文件上传到媒体服务中。
  	
->[AZURE.NOTE] 使用 UploadAsync 方法可确保调用不会阻塞并且文件并行上传。
- 	
+>[!NOTE] 使用 UploadAsync 方法可确保调用不会阻塞并且文件并行上传。
  	
         static public IAsset CreateAssetAndUploadMultipleFiles(AssetCreationOptions assetCreationOptions, string folderPath)
         {
@@ -176,8 +169,6 @@
 	    }
 	}
 
-
-
 上传大量资产时，请注意以下事项。
 
 - 每个线程创建一个新的 **CloudMediaContext** 对象。**CloudMediaContext** 类不是线程安全的。
@@ -189,7 +180,6 @@
 ##<a id="ingest_in_bulk"></a>使用媒体服务 .NET SDK 批量引入资产 
 
 上传大型资产文件可能在资产创建过程中形成瓶颈。批量引入资产（简称“批量引入”）涉及将资产创建过程与上传过程分离。若要使用批量引入方法，请创建一个描述资产及其关联文件的清单 (IngestManifest)。然后，你可以使用所选上传方法将关联的文件上传到该清单的 Blob 容器。Azure 媒体服务将会监视与清单关联的 Blob 容器。文件上传到 Blob 容器后，Azure 媒体服务将基于清单 (IngestManifestAsset) 中资产的配置完成资产创建过程。
-
 
 若要创建新的 IngestManifest，请调用 CloudMediaContext 中的 IngestManifests 集合公开的 Create 方法。此方法将使用你提供的清单名称创建一个新的 IngestManifest。
 
@@ -243,7 +233,6 @@
 	UploadBlobFile(manifest.BlobStorageUriForUpload, filename2);
 	UploadBlobFile(manifest.BlobStorageUriForUpload, filename3);
 	
-
 可以通过轮询 **IngestManifest** 的 Statistics 属性来确定与 **IngestManifest** 关联的所有资产的批量引入进度。若要更新进度信息，每次轮询 Statistics 属性时，都必须使用新的 **CloudMediaContext**。
 
 以下示例演示如何按 **ID** 轮询 IngestManifest。
@@ -280,12 +269,9 @@
 	   }
 	}
 	
-
-
 ##使用 .NET SDK Extensions 上传文件 
 
 以下示例演示如何使用 .NET SDK Extensions 上传单个文件。在此情况下，将使用 **CreateFromFile** 方法，但也可以使用异步版本 (**CreateFromFileAsync**)。**CreateFromFile** 方法可让你指定文件名、加密选项和回调，以报告文件的上载进度。
-
 
 	static public IAsset UploadFile(string fileName, AssetCreationOptions options)
 	{
@@ -304,16 +290,11 @@
 
 以下示例调用 UploadFile 函数，并指定存储加密作为资产创建选项。
 
-
 	var asset = UploadFile(@"C:\VideoFiles\BigBuckBunny.mp4", AssetCreationOptions.StorageEncrypted);
-
-
-
 
 ##后续步骤
 将资产上传到媒体服务后，请转到[如何获取媒体处理器][]主题。
 
-[如何获取媒体处理器]: /documentation/articles/media-services-get-media-processor/
+[如何获取媒体处理器]: ./media-services-get-media-processor.md
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

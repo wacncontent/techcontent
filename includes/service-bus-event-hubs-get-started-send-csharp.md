@@ -12,11 +12,9 @@
 
 	![](./media/service-bus-event-hubs-getstarted-send-csharp/create-sender-csharp2.png)  
 
-
 	Visual Studio 便会下载、安装 [Azure 服务总线库 NuGet 包](https://www.nuget.org/packages/WindowsAzure.ServiceBus)并添加对它的引用。
 
 4. 在 **Program.cs** 文件顶部添加以下 `using` 语句：
-
 
     	using System.Threading;
     	using Microsoft.ServiceBus.Messaging;
@@ -58,6 +56,5 @@
     	Console.WriteLine("Press Enter to start now");
     	Console.ReadLine();
     	SendingRandomMessages();
-
 
 <!---HONumber=Mooncake_1121_2016-->

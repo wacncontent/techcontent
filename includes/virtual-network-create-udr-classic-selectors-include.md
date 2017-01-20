@@ -1,7 +1,7 @@
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/virtual-network-create-udr-arm-ps/)
-- [Azure CLI](/documentation/articles/virtual-network-create-udr-arm-cli/)
-- [模板](/documentation/articles/virtual-network-create-udr-arm-template/)
-- [PowerShell (经典)](/documentation/articles/virtual-network-create-udr-classic-ps/)
-- [CLI (经典)](/documentation/articles/virtual-network-create-udr-classic-cli/)
+> [!div class="op_single_selector"]
+- [PowerShell](../articles/virtual-network/virtual-network-create-udr-arm-ps.md)
+- [Azure CLI](../articles/virtual-network/virtual-network-create-udr-arm-cli.md)
+- [模板](../articles/virtual-network/virtual-network-create-udr-arm-template.md)
+- [PowerShell (经典)](../articles/virtual-network/virtual-network-create-udr-classic-ps.md)
+- [CLI (经典)](../articles/virtual-network/virtual-network-create-udr-classic-cli.md)
 <!---HONumber=79-->

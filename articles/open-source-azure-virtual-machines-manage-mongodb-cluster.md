@@ -1,16 +1,16 @@
 
-<properties
-	pageTitle="在 Azure 虚拟机上管理配置 MongoDB 集群 | Azure "
-	description="了解如何管理配置 MongoDB 集群"
-	services=" open-resource "
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor="Lingli"/>
+---
+title: 在 Azure 虚拟机上管理配置 MongoDB 集群 | Azure 
+description: 了解如何管理配置 MongoDB 集群
+services:  open-resource 
+documentationCenter: 
+authors: 
+manager: 
+editor: Lingli
 
-<tags
-	ms.service="open-source-mongodb" 
-	wacn.date="06/20/2016"/>
+ms.service: open-source-mongodb
+wacn.date: 06/20/2016
+---
 
 #在 Azure 虚拟机上管理配置 MongoDB 集群
 
@@ -38,12 +38,11 @@
 - [介绍](#introduction-2)
 - [配置MongoDB分片集群](#config-MongoDB-neafcluster)
 
-
 ##	<a name="introduction"></a>介绍
 MongoDB 是一个跨平台的面向文档的 NoSQL 数据库，本文档介绍如何在 Azure 虚拟机上配置管理 MongoDB 集群。
 ## <a name="install-MongoDB"></a>在虚拟机上手动安装 MongoDB
-如果您还没有 Azure Linux 虚拟机，请参考 [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 创建 Linux 虚拟机。
-如果这是您第一次使用 Azure 的 Linux 虚拟机，请参考 [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 如何使用虚拟机。
+如果您还没有 Azure Linux 虚拟机，请参考 [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 创建 Linux 虚拟机。
+如果这是您第一次使用 Azure 的 Linux 虚拟机，请参考 [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 如何使用虚拟机。
 
 不同的 Linux 发行版在安装 MongoDB 时有少许不同，请根据您的 Linux 版本选择对应的步骤。
 
@@ -85,7 +84,6 @@ MongoDB 是一个跨平台的面向文档的 NoSQL 数据库，本文档介绍�
 
 		$MongoPid=`sudo ps -ef |grep -v grep |grep mongod|awk '{print $2}'`
 		$sudo kill $MongoPid
-
 
 <a name="Ubuntu"></a>**Ubuntu**   
 
@@ -129,7 +127,6 @@ MongoDB 是一个跨平台的面向文档的 NoSQL 数据库，本文档介绍�
 		$MongoPid=`sudo ps -ef |grep -v grep |grep mongod|awk '{print $2}'`
 		$sudo kill $MongoPid
    
-
 <a name="SUSE"></a>**SUSE**  
 
 (以SLES 12 64x, MongoDB 3.2 为例)  
@@ -184,8 +181,6 @@ MongoDB 复制集是一组 mongod 实例，它们维护着同样的数据集。�
 
  ![4](./media/open-source-azure-virtual-machines-manage-mongodb-cluster/open-source-manage-MongoDB-4.png)  
 
-
-
 1. 个节点的基本信息如下  
 	<table class="table table-bordered table-striped table-condensed" width="1">
  	  <tr>
@@ -218,7 +213,7 @@ MongoDB 复制集是一组 mongod 实例，它们维护着同样的数据集。�
  	 </tr>
 	</table>
 
-2.	在 Azure 虚机管理界面中打开以上三个节点的 27017 端口，具体操作请参考[链接](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)。  
+2.	在 Azure 虚机管理界面中打开以上三个节点的 27017 端口，具体操作请参考[链接](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)。  
 3.	确保这三个节点能够互相连接。建议都位于同一个数据中心下，比如区域都是中国东部或者中国北部，以降低网络延迟。  
 4.	/etc/mongod.conf 配置文件里默认绑定了 IP 地址 127.0.0.1。修改此项配置，所有三个节点都执行下面命令    
 		
@@ -338,7 +333,6 @@ MongoDB 复制集是一组 mongod 实例，它们维护着同样的数据集。�
   
 关于更多复制集群配置操作，可以参考 [MongoDB 官方文档](https://docs.mongodb.com/manual/tutorial/deploy-replica-set/)。  
 
-
 ##<a name="manage-config-MongoDB-neafcluster"></a>配置管理 MongoDB 分片集群
 ###<a name="introduction-2"></a>介绍
 分片( Sharding )是使用多个机器存储数据的方法, MongoDB 使用分片以支持巨大的数据存储量与对数据操作  
@@ -354,7 +348,6 @@ Query Routers (或者叫 mongos ) 负责与用户程序打交道，同时“引�
 Config servers 保存分片集群元数据信息。  
 
 ###<a name="config-MongoDB-neafcluster"></a>配置 MongoDB 分片集群  
-
 
 1. 使用上图作为此次分片集群的结构。5个节点的基本信息如下：  
 	<table class="table table-bordered table-striped table-condensed" width="1">
@@ -455,6 +448,5 @@ Config servers 保存分片集群元数据信息。
 
 		>sh.shardCollection("<database-name >.<collection>", shard-key-pattern)
 		比如，sh.shardCollection("records.people", { "zipcode": 1, "name": 1 } )
-
 
 关于更多分片集群配置操作，可以参考 [MongoDB 官方文档](https://docs.mongodb.com/manual/core/sharding-introduction/)。

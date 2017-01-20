@@ -1,10 +1,27 @@
-<properties linkid="" urlDisplayName="" pageTitle="MySQL服务问题 - Azure 微软云" metaKeywords="Azure 云,技术文档,文档与资源,MySQL,数据库,快照备份,增量备份,Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS,FAQ" description="针对用户在使用MySQL 数据库 on Azure中遇到的一些常见技术问题,提供快速解答。如果您仍存有疑问,欢迎联系技术支持。" metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="v-chuw" solutions="" manager="RongYu" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: MySQL服务问题 - Azure 微软云
+metaKeywords: Azure 云,技术文档,文档与资源,MySQL,数据库,快照备份,增量备份,Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS,FAQ
+description: 针对用户在使用MySQL 数据库 on Azure中遇到的一些常见技术问题,提供快速解答。如果您仍存有疑问,欢迎联系技术支持。
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: v-chuw
+solutions: 
+manager: RongYu
+editor: 
 
-<tags ms.service="mysql" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="cn" />
+ms.service: mysql
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: cn
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-point-in-time-restore/)
-- [English](/documentation/articles/mysql-database-enus-point-in-time-restore/)
+- [中文](./mysql-database-point-in-time-restore.md)
+- [English](./mysql-database-enus-point-in-time-restore.md)
 
 # MySQL Database on Azure备份和恢复
 

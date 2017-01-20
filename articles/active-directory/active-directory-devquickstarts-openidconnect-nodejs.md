@@ -1,25 +1,23 @@
-<properties
-	pageTitle="开始使用 node.js 进行 Azure AD 登录和注销"
-	description="如何生成一个与 Azure AD 集成以支持登录的 node.js Express MVC Web 应用。"
-	services="active-directory"
-	documentationCenter="nodejs"
-	authors="brandwe"
-	manager="mbaldwin"
-	editor=""/>  
+---
+title: 开始使用 node.js 进行 Azure AD 登录和注销
+description: 如何生成一个与 Azure AD 集成以支持登录的 node.js Express MVC Web 应用。
+services: active-directory
+documentationCenter: nodejs
+authors: brandwe
+manager: mbaldwin
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-  ms.tgt_pltfrm="na"
-	ms.devlang="javascript"
-	ms.topic="article"
-	ms.date="08/15/2016"
-	wacn.date="10/17/2016"
-	ms.author="brandwe"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: javascript
+ms.topic: article
+ms.date: 08/15/2016
+wacn.date: 10/17/2016
+ms.author: brandwe
+---
 
 # 使用 Azure AD 执行 Web 应用登录和注销
-
 
 我们将在此处使用 Passport 来执行以下操作：
 
@@ -82,7 +80,6 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 
 - 接下来，打开项目根目录中的 `app.js` 文件，并添加以下调用以调用 `passport-azure-ad` 随附的 `OIDCStrategy` 策略
 
-
 JavaScript
 
 	var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
@@ -92,7 +89,6 @@ JavaScript
 	var log = bunyan.createLogger({
 	    name: 'Microsoft OIDC Example Web Application'
 	});
-
 
 - 然后，使用我们刚刚提到的策略来处理登录请求
 
@@ -137,8 +133,7 @@ JavaScript
 
 Passport 使用适用于它的所有策略（Twitter、Facebook 等），所有策略写入器都依循类似的模式。查看该策略，你会发现，我们已将它作为 function() 来传递，其中包含一个令牌和一个用作参数的 done。策略完成所有工作之后，便尽责地返回。完成后，我们需要存储用户并隐藏令牌，因此不需要再次请求它。
 
-
-> [AZURE.IMPORTANT] 
+> [!IMPORTANT] 
 上述代码使用了正好地服务器上进行身份验证的任何用户。这就是所谓的自动注册。在生产服务器中，你希望所有人都必须先经历你确定的注册过程。这通常是在使用者应用中看到的模式，可让向 Facebook 注册，但接着请求填写其他信息。如果这不是示例应用程序，我们就只能从返回的令牌对象中提取电子邮件，然后请求他们填写其他信息。由于这是测试服务器，因此，我们直接将它们加入到内存中的数据库。
 
 - 接下来，让我们添加方法，以便根据 Passport 的要求，持续跟踪已登录的用户。这包括将用户信息序列化和反序列化：
@@ -175,7 +170,6 @@ JavaScript
 	  return fn(null, null);
 	};
 
-
 - 接下来，让我们添加可加载 Express 引擎的代码。在此处，你将看到我们使用了 Express 提供的默认 /views 和 /routes 模式。
 
 JavaScript
@@ -183,7 +177,6 @@ JavaScript
 	// configure Express (Section 2)
 
 	var app = express();
-
 
 	app.configure(function() {
 	  app.set('views', __dirname + '/views');
@@ -200,8 +193,6 @@ JavaScript
 	  app.use(app.router);
 	  app.use(express.static(__dirname + '/../../public'));
 	});
-
-
 
 - 最后，让我们添加路由，以便将实际的登录请求递交到 `passport-azure-ad` 引擎：
 
@@ -246,7 +237,6 @@ JavaScript
 		res.redirect('/');
 	  });
   
-
 ## 4\.使用 Passport 向 Azure AD 发出登录和注销请求
 
 现在，应用已正确配置为使用 OpenID Connect 身份验证协议与 v2.0 终结点通信。`passport-azure-ad` 会代你处理有关创建身份验证消息、验证 Azure AD 提供的令牌以及保留用户会话的繁琐细节。你要做的一切就是提供某种方式让用户登录和注销，以及收集有关已登录用户的其他信息。
@@ -277,14 +267,11 @@ JavaScript
 	  res.redirect('/');
 	});
 
-
-
 -	我们详细探讨一下：
     -	`/` 路由将重定向到 index.ejs 视图，并在请求中传递用户（如果存在）
     - `/account` 路由首先***确保我们已经过身份验证***（下面我们将会实现），然后在请求中传递用户，以便我们可以获取有关该用户的其他信息。
     - `/login` 路由将从 `passport-azuread` 调用 azuread-openidconnect 验证器，如果该操作不成功，则将用户重定向回到 /login
     - `/logout` 只是调用 logout.ejs（和路由），以便清除 Cookie 并将用户返回到 index.ejs
-
 
 - 对于 `app.js` 的最后一个部分，让我们添加上述 `/account` 中使用的 EnsureAuthenticated 方法。
 
@@ -301,15 +288,11 @@ JavaScript
 	  res.redirect('/login')
 	}
 
-
 - 最后，在 `app.js` 中实际创建服务器本身：
 
 JavaScript
 
 	app.listen(3000);
-
-
-
 
 ## 5\.在 Express 中创建视图与路由，以在网站中显示用户
 
@@ -327,7 +310,6 @@ JavaScript
 	  res.render('index', { title: 'Express' });
 	};
 
-
 - 在根目录下创建 `/routes/user.js` 路由
 
 JavaScript
@@ -339,7 +321,6 @@ JavaScript
 	exports.list = function(req, res){
 	  res.send("respond with a resource");
 	};
-
 
 这些简单路由只将请求传递到我们的视图，包括用户（如果存在）。
 
@@ -355,8 +336,6 @@ JavaScript
 		<a href="/account">Account Info</a></br>
 		<a href="/logout">Log Out</a>
 	<% } %>
-
-
 
 - 在根目录下创建 `/views/account.ejs` 视图，以便能够查看 `passport-azuread` 放置在用户请求中的其他信息。
 
@@ -377,8 +356,6 @@ Javascript
 	<a href="/logout">Log Out</a>
 	<% } %>
 		
-
-
 - 最后，可以通过添加布局，使视图变得美观。在根目录下创建 '/views/layout.ejs' 视图
 
 HTML
@@ -405,11 +382,9 @@ HTML
 		</body>
 	</html>
 
-
 最后，生成并运行应用程序！
 
 运行 `node app.js` 并导航到 `http://localhost:3000`
-
 
 使用个人 Microsoft 帐户或者工作或学校帐户登录，随后你会看到该用户的标识已出现在 /account 列表中。Web 应用现在使用行业标准的协议进行保护，你可以使用个人和工作/学校帐户来验证用户。
 
@@ -417,10 +392,9 @@ HTML
 
 	git clone --branch complete https://github.com/AzureADQuickStarts/WebApp-OpenIDConnect-NodeJS.git
 
-
 现在，可以转到更高级的主题。你可能想要尝试：
 
-[使用 Azure AD 保护 Web API >>](/documentation/articles/active-directory-devquickstarts-webapi-nodejs/)
+[使用 Azure AD 保护 Web API >>](./active-directory-devquickstarts-webapi-nodejs.md)
 
-[AZURE.INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
+[!INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
 <!---HONumber=Mooncake_1010_2016-->

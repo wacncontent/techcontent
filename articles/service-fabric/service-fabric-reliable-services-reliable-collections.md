@@ -1,21 +1,22 @@
-<properties
-    pageTitle="可靠集合 | Azure"
-    description="Service Fabric 有状态服务提供可靠集合，方便编写高度可用、可缩放且低延迟的云应用程序。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="mcoskun"
-    manager="timlt"
-    editor="masnider,vturecek" />
-<tags
-    ms.assetid="62857523-604b-434e-bd1c-2141ea4b00d1"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="required"
-    ms.date="10/18/2016"
-    wacn.date="12/26/2016"
-    ms.author="mcoskun" />
+---
+title: 可靠集合 | Azure
+description: Service Fabric 有状态服务提供可靠集合，方便编写高度可用、可缩放且低延迟的云应用程序。
+services: service-fabric
+documentationcenter: .net
+author: mcoskun
+manager: timlt
+editor: masnider,vturecek
+
+ms.assetid: 62857523-604b-434e-bd1c-2141ea4b00d1
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: required
+ms.date: 10/18/2016
+wacn.date: 01/17/2017
+ms.author: mcoskun
+---
 
 # Azure Service Fabric 有状态服务中的可靠集合简介
 可靠集合可让你编写高度可用、可缩放且低延迟的云应用程序，就像编写单计算机应用程序一样。Microsoft.ServiceFabric.Data.Collections 命名空间中的类提供一组自动使状态具备高可用性的全新集合。开发人员只需面向可靠集合 API 编程，并让可靠集合管理复制状态和本地状态。
@@ -60,7 +61,7 @@ Reliable Collections 将在事务创建时根据副本的操作和角色，为�
 | 单个实体读取 |可重复的读取 |快照 |
 | 枚举\\计数 |快照 |快照 |
 
->[AZURE.NOTE] 单个实体操作的常见示例为 `IReliableDictionary.TryGetValueAsync`、`IReliableQueue.TryPeekAsync`。
+>[!NOTE] 单个实体操作的常见示例为 `IReliableDictionary.TryGetValueAsync`、`IReliableQueue.TryPeekAsync`。
 
 Reliable Dictionary 和 Reliable Queue 都支持“读取你的写入”。换而言之，事务中的任何写入都将对属于同一事务的后续读取可见。
 
@@ -90,7 +91,7 @@ Reliable Dictionary 对所有单个实体操作使用行级别锁定。Reliable 
 
 现在让我们看一下有限磁盘方案。随着日志记录的累积，可靠状态管理器将耗尽磁盘空间。在这种情况出现之前，可靠状态管理器需截断其日志，以便为较新的记录腾出空间。它将请求可靠集合在磁盘中添加其内存中状态的检查点。Reliable Collections 负责保存到该点为止的状态。在 Reliable Collections 完成其检查点后，可靠状态管理器便可以截断日志以释放磁盘空间。这样一来，当副本需要重新启动时，Reliable Collections 将恢复其检查点状态，而可靠状态管理器将恢复并播放自该检查点以来发生的所有状态更改。
 
->[AZURE.NOTE] 检查点的另一增值优点在于它可提高常见情况下的恢复性能。这是因为检查点仅包含最新版本。
+>[!NOTE] 检查点的另一增值优点在于它可提高常见情况下的恢复性能。这是因为检查点仅包含最新版本。
 
 ## 建议
 
@@ -115,13 +116,13 @@ Reliable Dictionary 对所有单个实体操作使用行级别锁定。Reliable 
 
 ## 后续步骤
 
-- [Reliable Services 快速启动](/documentation/articles/service-fabric-reliable-services-quick-start/)
-- [使用可靠集合](/documentation/articles/service-fabric-work-with-reliable-collections/)
-- [Reliable Services 通知](/documentation/articles/service-fabric-reliable-services-notifications/)
-- [Reliable Services 备份和还原（灾难恢复）](/documentation/articles/service-fabric-reliable-services-backup-restore/)
-- [可靠状态管理器和配置](/documentation/articles/service-fabric-reliable-services-configuration/)
-- [Service Fabric Web API 服务入门](/documentation/articles/service-fabric-reliable-services-communication-webapi/)
-- [Reliable Services 编程模型的高级用法](/documentation/articles/service-fabric-reliable-services-advanced-usage/)
+- [Reliable Services 快速启动](./service-fabric-reliable-services-quick-start.md)
+- [使用可靠集合](./service-fabric-work-with-reliable-collections.md)
+- [Reliable Services 通知](./service-fabric-reliable-services-notifications.md)
+- [Reliable Services 备份和还原（灾难恢复）](./service-fabric-reliable-services-backup-restore.md)
+- [可靠状态管理器和配置](./service-fabric-reliable-services-configuration.md)
+- [Service Fabric Web API 服务入门](./service-fabric-reliable-services-communication-webapi.md)
+- [Reliable Services 编程模型的高级用法](./service-fabric-reliable-services-advanced-usage.md)
 - [Reliable Collections 的开发人员参考](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicefabric.data.collections.aspx)
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_Quality_Review_0117_2017-->

@@ -1,37 +1,33 @@
-<properties 
-	pageTitle="在运行 Linux 的虚拟机上配置软件 RAID | Azure" 
-	description="了解如何使用 mdadm 在 Azure 中的 Linux 虚拟机上配置 RAID。" 
-	services="virtual-machines" 
-	documentationCenter="" 
-	authors="szarkos" 
-	writer="szark" 
-	manager="timlt" 
-	editor=""
-	tag="azure-service-management,azure-resource-manager" />
+---
+title: 在运行 Linux 的虚拟机上配置软件 RAID | Azure
+description: 了解如何使用 mdadm 在 Azure 中的 Linux 虚拟机上配置 RAID。
+services: virtual-machines
+documentationCenter: 
+authors: szarkos
+writer: szark
+manager: timlt
+editor: 
+tag: azure-service-management,azure-resource-manager
 
-<tags 
-	ms.service="virtual-machines-linux" 
-	ms.workload="infrastructure-services" 
-	ms.tgt_pltfrm="vm-linux" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/06/2016" 
-	wacn.date="01/05/2017" 
-	ms.author="rclaus"/>
-
-
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 09/06/2016
+wacn.date: 01/05/2017
+ms.author: rclaus
+---
 
 # 在 Linux 上配置软件 RAID
 一种比较常见的情况是，在 Azure 中的 Linux 虚拟机上使用软件 RAID 将多个附加的数据磁盘显示为单个 RAID 设备。通常，与仅使用单个磁盘相比，使用此方法不但可改进性能，而且还可提高吞吐量。
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
  
-
 ## 附加数据磁盘
-配置 RAID 设备通常需要两个或多个空数据磁盘。本文不详细介绍如何将数据磁盘附加到 Linux 虚拟机。请参阅 Azure 文章[附加磁盘](/documentation/articles/virtual-machines-linux-classic-attach-disk/)，以详细了解如何在 Azure 上为 Linux 虚拟机附加空数据磁盘。
+配置 RAID 设备通常需要两个或多个空数据磁盘。本文不详细介绍如何将数据磁盘附加到 Linux 虚拟机。请参阅 Azure 文章[附加磁盘](./virtual-machines-linux-classic-attach-disk.md)，以详细了解如何在 Azure 上为 Linux 虚拟机附加空数据磁盘。
 
->[AZURE.NOTE] 超小型 VM 不支持将多个数据磁盘附加到虚拟机。请参阅 [Azure 的虚拟机和云服务大小](/documentation/articles/cloud-services-sizes-specs/)，以了解有关 VM 大小和支持的数据磁盘数量的详细信息。
-
+>[!NOTE] 超小型 VM 不支持将多个数据磁盘附加到虚拟机。请参阅 [Azure 的虚拟机和云服务大小](../cloud-services/cloud-services-sizes-specs.md)，以了解有关 VM 大小和支持的数据磁盘数量的详细信息。
 
 ## 安装 mdadm 实用程序
 
@@ -47,7 +43,6 @@
 - **SLES 和 openSUSE**
 
 		zypper install mdadm
-
 
 ## 创建磁盘分区
 在此示例中，我们将在 /dev/sdc 上创建单个磁盘分区。然后，将该新磁盘分区命名为 /dev/sdc1。
@@ -99,7 +94,6 @@
 		Command (m for help): w
 		The partition table has been altered!
 
-
 ## 创建 RAID 阵列
 
 1. 以下示例为位于三个不同数据磁盘 (sdc1, sdd1, sde1) 上的三个分区设置带区（RAID 级别 0）：
@@ -108,7 +102,6 @@
 		  /dev/sdc1 /dev/sdd1 /dev/sde1
 
 在此示例中，运行此命令后将创建一个名为 **/dev/md127** 的新 RAID 设备。另请注意，如果这些数据磁盘之前属于另一失效的 RAID 阵列，则可能需要将 `--force` 参数添加到 `mdadm` 命令。
-
 
 2. 在新 RAID 设备上创建文件系统
 
@@ -125,12 +118,11 @@
 		sudo -i chkconfig --add boot.md
 		sudo echo 'DEVICE /dev/sd*[0-9]' >> /etc/mdadm.conf
 
-	>[AZURE.NOTE] 在 SUSE 系统中进行这些更改后，可能需要重新启动。在 SLES 12 中，*不*需要执行此步骤。
-
+	>[!NOTE] 在 SUSE 系统中进行这些更改后，可能需要重新启动。在 SLES 12 中，*不*需要执行此步骤。
 
 ## 将新文件系统添加到 /etc/fstab
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 > 编辑 /etc/fstab 文件不正确，可能会导致系统无法启动。如果不确定，请参阅发行版文档，了解有关如何正确编辑该文件的信息。另外，建议在编辑前备份 /etc/fstab 文件。
 
 1. 为新文件系统创建所需的安装点，例如：
@@ -180,7 +172,5 @@
 	除了以上参数，还可以使用内核参数“`bootdegraded=true`”启用系统引导功能，即使发现 RAID 已损坏或降级（例如，如果意外从虚拟机移除数据驱动器）。默认情况下，这也可能会导致系统无法启动。
 
 	请参阅发行版文档，了解如何正确编辑内核参数。例如，在许多发行版（CentOS、Oracle Linux、SLES 11）中，可以手动将这些参数添加到“`/boot/grub/menu.lst`”文件。在 Ubuntu 中，可将此参数添加到“/etc/default/grub”的 `GRUB_CMDLINE_LINUX_DEFAULT` 变量。
-
- 
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

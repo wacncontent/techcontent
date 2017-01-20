@@ -1,28 +1,27 @@
-<properties
-	pageTitle="Azure AD Cordova 入门 | Azure"
-	description="如何生成一个与 Azure AD 集成以方便登录，并使用 OAuth 调用 Azure AD 保护 API 的 Cordova 应用程序。"
-	services="active-directory"
-	documentationCenter=""
-	authors="vibronet"
-	manager="mbaldwin"
-	editor=""/>
+---
+title: Azure AD Cordova 入门 | Azure
+description: 如何生成一个与 Azure AD 集成以方便登录，并使用 OAuth 调用 Azure AD 保护 API 的 Cordova 应用程序。
+services: active-directory
+documentationCenter: 
+authors: vibronet
+manager: mbaldwin
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="javascript"
-	ms.topic="article"
-	ms.date="09/16/2016"
-	ms.author="vittorib"
-	wacn.date="01/09/2017"/>  
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: javascript
+ms.topic: article
+ms.date: 09/16/2016
+ms.author: vittorib
+wacn.date: 01/09/2017
+---
 
 # 将 Azure AD Apache Cordova 应用程序集成
 
-[AZURE.INCLUDE [active-directory-devquickstarts-switcher](../../includes/active-directory-devquickstarts-switcher.md)]
+[!INCLUDE [active-directory-devquickstarts-switcher](../../includes/active-directory-devquickstarts-switcher.md)]
 
-[AZURE.INCLUDE [active-directory-devguide](../../includes/active-directory-devguide.md)]
+[!INCLUDE [active-directory-devguide](../../includes/active-directory-devguide.md)]
 
 Apache Cordova 可让你开发能够在移动设备上运行的完全成熟的 HTML5/JavaScript 本机应用程序。使用 Azure AD，可以向 Cordova 应用程序添加企业级身份验证功能。
 得益于在 iOS、Android、Windows 应用商店和 Windows Phone 上包装 Azure AD 本机 SDK 的 Cordova 插件，你可以增强应用程序以支持使用用户的 AD 帐户登录，访问 Office 365 和 Azure API，甚至保护对你自己的自定义 Web API 的调用。
@@ -49,7 +48,7 @@ Apache Cordova 可让你开发能够在移动设备上运行的完全成熟的 H
 
 如果你已经设置了这两个项目，请直接转到步骤 1。
 
-如果你没有 Azure AD 租户，可以[在此处了解如何获取租户](/documentation/articles/active-directory-howto-tenant/)。
+如果你没有 Azure AD 租户，可以[在此处了解如何获取租户](./active-directory-howto-tenant.md)。
 
 如果你没有在计算机上设置 Apache Cordova，请安装以下组件：
 
@@ -77,7 +76,6 @@ Apache Cordova 可让你开发能够在移动设备上运行的完全成熟的 H
     - *Android 支持存储库* (Extras)
 
   Android SDK 不提供任何默认模拟器实例。如果你要在模拟器上运行 Android 应用程序，请从终端运行 `android avd`，然后选择“创建...”，以创建一个新实例。建议的“API 级别”为 19 或更高。有关 Android 模拟器和创建选项的详细信息，请参阅 [AVD Manager](http://developer.android.com/tools/help/avd-manager.html)。
-
 
 ## *1.将一个应用程序注册到 Azure AD*
 
@@ -108,7 +106,6 @@ Azure AD 只会向已知的应用程序颁发令牌。在从应用程序使用 A
 
 可通过多种方式创建 Cordova 应用程序。在本教程中，我们将使用 Cordova 命令行界面 (CLI)。
 在 shell 或命令行中键入以下命令：
-
 
      cordova create DirSearchClient --copy-from="NativeClient-MultiTarget-Cordova/DirSearchClient"
 
@@ -144,7 +141,6 @@ javascript
     resourceUri = "https://graph.chinacloudapi.cn",
     clientId = "a5d92493-ae5a-4a9f-bcbf-9f1d354067d3",
     graphApiVersion = "2013-11-08";
-
 
 `redirectUri` 和 `clientId` 值应与 AAD 中用于描述应用程序的值匹配。如本教程前面步骤 1 中所述，你可以在 Azure 门户预览的"配置"选项卡中找到这些值。
 注意：如果你选择不在自己的租户中注册新应用程序，则只需按原样粘贴上述预配置值 - 这样你便可以看到示例的运行情况，不过，在生产环境中，你始终要为应用程序创建自己的条目。
@@ -232,7 +228,6 @@ javascript
 			req.send();
 		},
 
-
 起点文件提供了一个精简 UX 用于在文本框中输入用户的别名。此方法使用该值来构造查询，将该查询与访问令牌相结合，然后将其发送到 Graph 并分析结果。起点文件中已提供了一个负责可视化结果的 renderData 方法。
 
 ## *4.运行*
@@ -285,8 +280,8 @@ javascript
 
 [此处](https://github.com/AzureADQuickStarts/NativeClient-MultiTarget-Cordova/tree/complete/DirSearchClient)提供了已完成示例（无需配置值）供你参考。现在，你可以转到更高级的（也更有趣）的案例。你可能想要尝试：
 
-[使用 Azure AD 保护 Node.js Web API>>](/documentation/articles/active-directory-devquickstarts-webapi-nodejs/)
+[使用 Azure AD 保护 Node.js Web API>>](./active-directory-devquickstarts-webapi-nodejs.md)
 
-[AZURE.INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
+[!INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

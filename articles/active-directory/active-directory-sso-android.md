@@ -1,26 +1,23 @@
-<properties
-	pageTitle="如何使用 ADAL 在 Android 上启用跨应用 SSO | Azure"
-	description="如何使用 ADAL SDK 的功能跨应用程序启用单一登录。"
-	services="active-directory"
-	documentationCenter=""
-	authors="brandwe"
-	manager="mbaldwin"
-	editor=""/>
+---
+title: 如何使用 ADAL 在 Android 上启用跨应用 SSO | Azure
+description: 如何使用 ADAL SDK 的功能跨应用程序启用单一登录。
+services: active-directory
+documentationCenter: 
+authors: brandwe
+manager: mbaldwin
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="android"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="09/16/2016"
-	wacn.date="10/25/2016"
-	ms.author="brandwe"/>  
-
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: android
+ms.devlang: java
+ms.topic: article
+ms.date: 09/16/2016
+wacn.date: 10/25/2016
+ms.author: brandwe
+---
 
 # 如何使用 ADAL 在 Android 上启用跨应用 SSO
-
 
 提供单一登录 (SSO)，以便用户只需一次输入其凭据并使这些凭据自动跨工作是现在所需的客户应用程序。在小屏幕上，通常时间加上的其他因素 (2FA)，如电话呼叫或发送短代码中，输入其用户名和密码的难度导致快速不满，如果用户必须执行此操作一次以上为你的产品。
 
@@ -30,9 +27,7 @@ Microsoft 标识平台以及 Microsoft 标识 SDK 能够为你完成所有这些
 
 本演练将介绍如何在 SDK 中配置应用程序，以便向客户提供此项优点。
 
-
-
-请注意，以下文档假设已了解如何[在旧版门户中为 Azure Active Directory 预配应用程序](/documentation/articles/active-directory-how-to-integrate/)，并且已将应用程序与 [Microsoft Identity Android SDK](https://github.com/AzureAD/azure-activedirectory-library-for-android) 集成。
+请注意，以下文档假设已了解如何[在旧版门户中为 Azure Active Directory 预配应用程序](./active-directory-how-to-integrate.md)，并且已将应用程序与 [Microsoft Identity Android SDK](https://github.com/AzureAD/azure-activedirectory-library-for-android) 集成。
 
 ## Microsoft 标识平台中的 SSO 概念
 
@@ -67,7 +62,6 @@ Microsoft 提供了为来自不同供应商的应用程序之间过渡凭据允�
 
 下面介绍了 Microsoft 标识 SDK 如何与应用程序的共享存储配合工作以启用 SSO：
 
-
 	+------------+ +------------+  +-------------+
 	|            | |            |  |             |
 	|   App 1    | |   App 2    |  |   App 3     |
@@ -79,7 +73,6 @@ Microsoft 提供了为来自不同供应商的应用程序之间过渡凭据允�
 	|                                            |
 	|            App Shared Storage              |
 	+--------------------------------------------+
-
 
 #### 中转站辅助的登录
 
@@ -107,11 +100,8 @@ Microsoft 提供了为来自不同供应商的应用程序之间过渡凭据允�
 - 在 iOS 中用户时选择了凭据，则利用应用程序体验转换。
 - 管理你的客户应用程序中的登录体验的能力的丢失。
 
-
-
 下面介绍了 Microsoft 标识 SDK 如何与应用程序的中转站应用程序配合工作以启用 SSO：
 
-	
 	+------------+ +------------+   +-------------+
 	|            | |            |   |             |
 	|   App 1    | |   App 2    |   |   Someone   |
@@ -134,10 +124,7 @@ Microsoft 提供了为来自不同供应商的应用程序之间过渡凭据允�
 	              |             |
 	              +-------------+
 	
-
-              
 了解这些背景信息后，你应该可以更好地理解 SSO 并使用 Microsoft 标识平台和 SDK 在应用程序中实现它。
-
 
 ## 使用 ADAL 启用跨应用 SSO
 
@@ -145,7 +132,6 @@ Microsoft 提供了为来自不同供应商的应用程序之间过渡凭据允�
 
 - 为应用套件打开非中转站辅助的 SSO
 - 打开对中转站辅助 SSO 的支持
-
 
 ### 打开对非中转站辅助 SSO 的 SSO
 
@@ -173,7 +159,6 @@ App3 重定向 URI：`msauth://com.example.userapp2/Pt85PxIyvbLkbKUtBI%2SitkW%2F
 
 这些应用嵌套在同一个客户端 ID/应用程序 ID 下，可以根据你在 SDK 配置中返回给我们的重定向 URI 来查找。
 
-
 	+-------------------+
 	|                   |
 	|  Client ID        |
@@ -194,11 +179,7 @@ App3 重定向 URI：`msauth://com.example.userapp2/Pt85PxIyvbLkbKUtBI%2SitkW%2F
 	                      |                                   |
 	                      +-----------------------------------+
 	
-	
-
-
 *请注意，下面介绍了这些重定向 URI 的格式。你可以使用任何重定向 URI，除非你想要支持中转站，在这种情况下，它们必须如上所示*
-
 
 #### 步骤 2：在 Android 中配置共享存储
 
@@ -206,7 +187,7 @@ App3 重定向 URI：`msauth://com.example.userapp2/Pt85PxIyvbLkbKUtBI%2SitkW%2F
 
 在所有应用程序中设置 `SharedUserID` 后，即可使用 SSO。
 
-> [AZURE.WARNING] 
+> [!WARNING] 
 在应用程序之间共享存储之后，任何应用程序都可以删除用户，更糟的是，删除整个应用程序的所有令牌。如果你的应用程序依赖于这些令牌来执行后台工作，则这是特别严重的后果。要共享存储，就必须十分警惕通过 Microsoft 标识 SDK 执行的任意和所有删除操作。
 
 就这么简单！ Microsoft 标识 SDK 现在将在所有应用程序之间共享凭据。此外还将在应用程序实例之间共享用户列表。
@@ -221,10 +202,8 @@ App3 重定向 URI：`msauth://com.example.userapp2/Pt85PxIyvbLkbKUtBI%2SitkW%2F
 2. 建立新的重定向 URI，并为应用程序和应用程序的注册提供程序
 3. 在 Android 清单中设置正确的权限
 
-
 #### 步骤 1：在应用程序中启用中转站模式
 应用程序使用了中转站的功能被打开的当你创建的设置或身份验证的实例的初始设置。通过在代码中设置 ApplicationSettings 类型中执行此操作：
-
 
 	AuthenticationSettings.Instance.setUseBroker(true);
 
@@ -236,11 +215,9 @@ App3 重定向 URI：`msauth://com.example.userapp2/Pt85PxIyvbLkbKUtBI%2SitkW%2F
 
 `msauth://packagename/Base64UrlencodedSignature`  
 
-
 例如：*msauth://com.example.userapp/IcB5PxIyvbLkbFVtBI%2FitkW%2Fejk%3D*
 
-需要使用 [Azure 经典管理门户](https://manage.windowsazure.cn/)在应用注册中指定此重定向 URI。有关 Azure AD 应用注册的详细信息，请参阅[与 Azure Active Directory 集成](/documentation/articles/active-directory-how-to-integrate/)。
-
+需要使用 [Azure 经典管理门户](https://manage.windowsazure.cn/)在应用注册中指定此重定向 URI。有关 Azure AD 应用注册的详细信息，请参阅[与 Azure Active Directory 集成](./active-directory-how-to-integrate.md)。
 
 #### 步骤 3：在应用程序中设置正确的权限
 
@@ -248,11 +225,9 @@ Android 中的中转站应用程序使用 Android OS 的帐户管理器功能来
 
 具体而言，这些权限如下：
 
-	
 	GET_ACCOUNTS
 	USE_CREDENTIALS
 	MANAGE_ACCOUNTS
-
 
 ### 你已配置 SSO！
 

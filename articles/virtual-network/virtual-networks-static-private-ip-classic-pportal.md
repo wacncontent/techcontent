@@ -1,34 +1,34 @@
-<properties 
-   pageTitle="如何使用 Azure 门户预览在经典模式下设置静态专用 IP | Azure"
-   description="了解静态专用 IP 以及如何使用 Azure 门户预览在经典模式下管理它们"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="carmonm"
-   editor="tysonn"
-   tags="azure-service-management"
-/>
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="02/04/2016"
-   wacn.date="12/26/2016"
-   ms.author="jdial" />
+---
+title: 如何使用 Azure 门户预览在经典模式下设置静态专用 IP | Azure
+description: 了解静态专用 IP 以及如何使用 Azure 门户预览在经典模式下管理它们
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: carmonm
+editor: tysonn
+tags: azure-service-management
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/04/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 如何在 Azure 门户预览中设置静态专用 IP 地址（经典）
 
-[AZURE.INCLUDE [virtual-networks-static-private-ip-selectors-classic-include](../../includes/virtual-networks-static-private-ip-selectors-classic-include.md)]
+[!INCLUDE [virtual-networks-static-private-ip-selectors-classic-include](../../includes/virtual-networks-static-private-ip-selectors-classic-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-static-private-ip-intro-include](../../includes/virtual-networks-static-private-ip-intro-include.md)]
+[!INCLUDE [virtual-networks-static-private-ip-intro-include](../../includes/virtual-networks-static-private-ip-intro-include.md)]
 
->[AZURE.IMPORTANT]在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源之前，请确保你了解[部署模型和工具](/documentation/articles/azure-classic-rm/)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍经典部署模型。还可[在 Resource Manager 部署模型中管理静态专用 IP 地址](/documentation/articles/virtual-networks-static-private-ip-arm-pportal/)。
+>[!IMPORTANT]在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源之前，请确保你了解[部署模型和工具](../azure-classic-rm.md)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍经典部署模型。还可[在 Resource Manager 部署模型中管理静态专用 IP 地址](./virtual-networks-static-private-ip-arm-pportal.md)。
 
-[AZURE.INCLUDE [virtual-networks-static-ip-scenario-include](../../includes/virtual-networks-static-ip-scenario-include.md)]
+[!INCLUDE [virtual-networks-static-ip-scenario-include](../../includes/virtual-networks-static-ip-scenario-include.md)]
 
-下面的示例步骤需要已创建简单的环境。若要运行本文档中所示步骤，首先需要生成[创建 Vnet](/documentation/articles/virtual-networks-create-vnet-classic-pportal/) 中所述的测试环境。
+下面的示例步骤需要已创建简单的环境。若要运行本文档中所示步骤，首先需要生成[创建 Vnet](./virtual-networks-create-vnet-classic-pportal.md) 中所述的测试环境。
 
 ## 如何在创建 VM 时指定静态专用 IP 地址
 若要在名为 *TestVNet* 的 VNet 的 *FrontEnd* 子网中使用静态专用 IP *192.168.1.101* 创建名为 *DNS01* 的 VM，请按照以下步骤进行操作：
@@ -78,8 +78,8 @@
 
 ## 后续步骤
 
-- 了解[保留公共 IP](/documentation/articles/virtual-networks-reserved-public-ip/) 地址。
-- 了解[实例层级公共 IP (ILPIP)](/documentation/articles/virtual-networks-instance-level-public-ip/) 地址。
+- 了解[保留公共 IP](./virtual-networks-reserved-public-ip.md) 地址。
+- 了解[实例层级公共 IP (ILPIP)](./virtual-networks-instance-level-public-ip.md) 地址。
 - 查阅[保留 IP REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn722420.aspx)。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -1,21 +1,22 @@
-<properties
-    pageTitle="云服务与 Service Fabric 之间的差异 | Azure"
-    description="将应用程序从云服务迁移到 Service Fabric 的概念性概览。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="vturecek"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="0b87b1d3-88ad-4658-a465-9f05a3376dee"
-    ms.service="service-fabric"
-    ms.devlang="dotNet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="10/19/2016"
-    wacn.date="12/26/2016"
-    ms.author="vturecek" />
+---
+title: 云服务与 Service Fabric 之间的差异 | Azure
+description: 将应用程序从云服务迁移到 Service Fabric 的概念性概览。
+services: service-fabric
+documentationcenter: .net
+author: vturecek
+manager: timlt
+editor: 
+
+ms.assetid: 0b87b1d3-88ad-4658-a465-9f05a3376dee
+ms.service: service-fabric
+ms.devlang: dotNet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 10/19/2016
+wacn.date: 01/17/2017
+ms.author: vturecek
+---
 
 # 迁移应用程序之前了解云服务与 Service Fabric 之间的差异。
 Azure Service Fabric 是面向高度可缩放、高度可靠分布式应用程序的下一代云应用程序平台。其中引入了许多用于打包、部署、更新和管理分布式云应用程序的新功能。
@@ -29,12 +30,10 @@ Azure Service Fabric 是面向高度可缩放、高度可靠分布式应用程�
  
 ![云服务应用程序和拓扑][1]  
 
-
  - **Service Fabric 涉及到将应用程序部署至现有的 VM 或运行 Service Fabric 的 Windows 或 Linux 计算机。** 你编写的服务完全与底层的基础结构分离（由 Service Fabric 应用程序平台抽象化），因此可将应用程序部署在多个环境。Service Fabric 中的工作负荷称为“服务”，一个或多个服务将在 Service Fabric 应用程序平台上运行的且正式定义的应用程序中分组。可将多个应用程序部署到单个 Service Fabric 群集。
  
 ![Service Fabric 应用程序和拓扑][2]  
 
- 
 Service Fabric 本身是在 Windows 或 Linux 中运行的应用程序平台层，而云服务是用于部署 Azure 托管的且附加了工作负荷的 VM。Service Fabric 应用程序模型有许多优点：
 
  - 快速部署。创建 VM 实例可能非常耗时。在 Service Fabric 中，只需部署 VM 一次即可构成托管 Service Fabric 应用程序平台的群集。此后，可将应用程序包快速部署到该群集。
@@ -94,7 +93,7 @@ Service Fabric 提供服务发现机制（称为“命名服务”），用于�
 
 从云服务迁移到 Service Fabric 的最简单路径是只将云服务部署替换为 Service Fabric 应用程序，并将应用程序的整个基础结构保持大致相同。以下文章提供了帮助你将 Web 角色和辅助角色迁移到 Service Fabric 无状态服务的指导。
 
- - [Simple migration: convert a Web or Worker Role to a Service Fabric stateless service（简单迁移：将 Web 角色或辅助角色转换为 Service Fabric 无状态服务）](/documentation/articles/service-fabric-cloud-services-migration-worker-role-stateless-service/)
+ - [Simple migration: convert a Web or Worker Role to a Service Fabric stateless service（简单迁移：将 Web 角色或辅助角色转换为 Service Fabric 无状态服务）](./service-fabric-cloud-services-migration-worker-role-stateless-service.md)
 
 <!--Image references-->
 [1]: ./media/service-fabric-cloud-services-migration-differences/topology-cloud-services.png
@@ -107,4 +106,4 @@ Service Fabric 提供服务发现机制（称为“命名服务”），用于�
 [10]: ./media/service-fabric-cloud-services-migration-differences/service-fabric-architecture-simple.png
 [11]: ./media/service-fabric-cloud-services-migration-differences/service-fabric-architecture-full.png
 
-<!---HONumber=Mooncake_1219_2016-->
+<!---HONumber=Mooncake_Quality_Review_0117_2017-->

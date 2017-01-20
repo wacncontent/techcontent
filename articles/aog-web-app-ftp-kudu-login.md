@@ -1,29 +1,25 @@
-<properties
-	pageTitle="本文详细介绍了登录 Azure web 应用 FTP 服务器和 Azure web 应用 Kudu 站点的几种方法"
-	description="本文详细介绍了登录 Azure web 应用 FTP 服务器和 Azure web 应用 Kudu 站点的几种方法。"
-	services="app-service-web"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 本文详细介绍了登录 Azure web 应用 FTP 服务器和 Azure web 应用 Kudu 站点的几种方法
+description: 本文详细介绍了登录 Azure web 应用 FTP 服务器和 Azure web 应用 Kudu 站点的几种方法。
+services: app-service-web
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="app-service-web-aog"
-	ms.date="10/27/2016"
-	wacn.date="11/03/2016"/>
-
-
+ms.service: app-service-web-aog
+ms.date: 10/27/2016
+wacn.date: 11/03/2016
+---
 
 # 本文详细介绍了登录 Azure web 应用 FTP 服务器和 Azure web 应用 Kudu 站点的几种方法
-
-
 
 ## 登录 FTP 服务器:
 
 ### 使用 FTP 部署用户名和密码登录
 
->[AZURE.TIP]: 一个订阅下的所有网站的用户名和密码是同一个，如果更改用户名和密码其他网站登录时也要采用新的用户名和密码登录。
+>[!TIP]: 一个订阅下的所有网站的用户名和密码是同一个，如果更改用户名和密码其他网站登录时也要采用新的用户名和密码登录。
 
 1.登录信息您可以在网站页面获取
 
@@ -57,13 +53,6 @@
  
 	![](./media/aog-web-app-ftp-kudu-login/ftp-login-how.png)
 
-
-
-
-
-
-
-
 ##登录 Kudu 站点：
 
 >Tip:  Azure 为每一个 web 应用都配置了 Kudu 站点，网站的 Kudu 站点可以方便对网站进行管理，kudu 的 URL 为：https://[网站名].scm.chinacloudsites.cn 如:
@@ -90,7 +79,6 @@ https://amaydel1.scm.chinacloudsites.cn/
 
 	![](./media/aog-web-app-ftp-kudu-login/kudu-page.png)
  
-
 ### 使用部署配置文件登录
 
 具体步骤参考事例如下：
@@ -101,15 +89,11 @@ https://amaydel1.scm.chinacloudsites.cn/
  
 2. 文本编辑器打开，获取必要信息
 
-
 		Kudu URL: https://amaydel1.scm.chinacloudsites.cn 
 		用户名：$amaydel1
 		密码：YnuEwRDLr3P6X1vCdKe2dNYyYQf7TJmfryubADvCbXXXXX
 
 	![](./media/aog-web-app-ftp-kudu-login/publish-settings-content.png)
-
-
- 
 
 3. 打开浏览器，输入 Kudu URL 地址，回车，输入用户名和密码。
 
@@ -121,5 +105,5 @@ https://amaydel1.scm.chinacloudsites.cn/
  
 ##其他资源： 
 
-[https://www.azure.cn/documentation/articles/aog-web-app-diagnostics-kudu/#login](/documentation/articles/aog-web-app-diagnostics-kudu/#login ) 
+[https://www.azure.cn/documentation/articles/aog-web-app-diagnostics-kudu/#login](./aog-web-app-diagnostics-kudu.md#login ) 
 

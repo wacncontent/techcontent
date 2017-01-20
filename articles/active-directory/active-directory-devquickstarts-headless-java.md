@@ -1,27 +1,25 @@
-<properties
-	pageTitle="Azure AD Java 入门 | Azure"
-	description="如何生成使用户登录以访问 API 的 Java 命令行应用。"
-	services="active-directory"
-	documentationCenter="java"
-	authors="brandwe"
-	manager="mbaldwin"
-	editor=""/>
+---
+title: Azure AD Java 入门 | Azure
+description: 如何生成使用户登录以访问 API 的 Java 命令行应用。
+services: active-directory
+documentationCenter: java
+authors: brandwe
+manager: mbaldwin
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-  ms.tgt_pltfrm="na"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="09/16/2016"
-	wacn.date="10/17/2016"
-	ms.author="brandwe"/>  
-
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: java
+ms.topic: article
+ms.date: 09/16/2016
+wacn.date: 10/17/2016
+ms.author: brandwe
+---
 
 # 通过 Azure AD 使用 Java 命令行应用访问 API
 
-[AZURE.INCLUDE [active-directory-devguide](../../includes/active-directory-devguide.md)]
+[!INCLUDE [active-directory-devguide](../../includes/active-directory-devguide.md)]
 
 使用 Azure AD，只需编写几行代码，就能简单直接地外包 Web 应用的标识管理，提供单一登录和注销。在 Java Web Apps 中，你可以使用社区驱动 ADAL4J 的 Microsoft 实现来达到此目的。
 
@@ -37,7 +35,7 @@
 3. 使用 ADAL4J 库向 Azure AD 发出登录和注销请求。
 4. 列显有关用户的数据。
 
-若要开始，请[下载应用程序框架](https://github.com/Azure-Samples/active-directory-java-webapp-openidconnect/archive/skeleton.zip)或[下载已完成的示例](https://github.com/Azure-Samples/active-directory-java-webapp-openidconnect/archive/complete.zip)。你还需要一个用于注册应用程序的 Azure AD 租户。如果你没有此租户，请[了解如何获取租户](/documentation/articles/active-directory-howto-tenant/)。
+若要开始，请[下载应用程序框架](https://github.com/Azure-Samples/active-directory-java-webapp-openidconnect/archive/skeleton.zip)或[下载已完成的示例](https://github.com/Azure-Samples/active-directory-java-webapp-openidconnect/archive/complete.zip)。你还需要一个用于注册应用程序的 Azure AD 租户。如果你没有此租户，请[了解如何获取租户](./active-directory-howto-tenant.md)。
 
 ## 1\.将一个应用程序注册到 Azure AD
 若要使应用程序对用户进行身份验证，你首先需要在租户中注册新的应用程序。
@@ -53,7 +51,6 @@
 - 完成注册后，AAD 将为应用程序分配唯一的客户端标识符。在后面的部分中将会用到此值，因此，请从“配置”选项卡复制此值。
 
 进入门户后，为你的应用创建一个**应用程序机密**并复制该机密。稍后您将需要它。
-
 
 ## 2\.使用 Maven 将应用设置为使用 ADAL4J 库和必备组件
 在这里，我们要将 ADAL4J 配置为使用 OpenID Connect 身份验证协议。ADAL4J 将用于发出登录和注销请求、管理用户的会话、获取有关用户的信息，等等。
@@ -176,11 +173,6 @@ Java
 		
 		</project>
 		
-		
-
-
-
-
 ## 3\.创建 java PublicClient 文件
 
 如上所述，我们将使用图形 API 来获取有关已登录的用户的数据。为了顺利进行，我们应该创建一个表示**目录对象**的文件以及一个表示**用户**的单独文件，如此便可以使用 Java 的 OO 模式。
@@ -246,7 +238,6 @@ Java
 	    }
 	}
 
-
 ##编译并运行示例
 
 更改回根目录，并运行下列命令来生成你刚刚使用 `maven` 组成的示例。这会使用你针对依赖项编写的 `pom.xml` 文件。
@@ -257,8 +248,7 @@ Java
 
 `http://localhost:8080/adal4jsample/`
 
-
-> [AZURE.NOTE] 
+> [!NOTE] 
 使用最新的 Tomcat 服务器部署 WAR 非常容易。只要导航到 `http://localhost:8080/manager/` 并遵循有关上传 `adal4jsample.war` 文件的说明即可。它会为你自动部署正确的终结点。
 
 ##后续步骤

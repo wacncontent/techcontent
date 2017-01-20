@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用 Azure 媒体分析检测面部和情绪 | Azure"
-    description="本主题演示如何使用 Azure 媒体分析检测人脸和情感。"
-    services="media-services"
-    documentationcenter=""
-    author="juliako"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="5ca4692c-23f1-451d-9d82-cbc8bf0fd707"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="11/29/2016"
-    wacn.date="01/13/2017"
-    ms.author="milanga;juliako;" />  
+---
+title: 使用 Azure 媒体分析检测面部和情绪 | Azure
+description: 本主题演示如何使用 Azure 媒体分析检测人脸和情感。
+services: media-services
+documentationcenter: 
+author: juliako
+manager: erikre
+editor: 
 
+ms.assetid: 5ca4692c-23f1-451d-9d82-cbc8bf0fd707
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 11/29/2016
+wacn.date: 01/13/2017
+ms.author: milanga;juliako;
+---
 
 # 使用 Azure 媒体分析检测面部和情绪
 ## 概述
@@ -26,7 +26,7 @@
 
 	面部检测能够找出并跟踪视频中的人脸。可以同时跟踪多个面部，随着对象移动持续进行跟踪，并将时间和位置的元数据以 JSON 文件的格式返回。跟踪期间，该服务将在人员于屏幕上四处移动时，尝试为他们的面部赋予相同的 ID，即使他们被挡住或暂时离帧。
 
-	>[AZURE.NOTE]此服务并不执行面部识别。面部离帧或被挡住太久的人员，将在回来时赋予新的 ID。
+	>[!NOTE]此服务并不执行面部识别。面部离帧或被挡住太久的人员，将在回来时赋予新的 ID。
 
 - **情绪检测**
 	
@@ -145,7 +145,6 @@ facesDetected|位于 JSON 结果的末尾，汇总在生成视频期间算法所
 	  }
 	}
 
-
 ####属性说明
 
 属性名称|说明
@@ -167,7 +166,6 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
 
 聚合情绪的 JSON 输出（已截断）：
  
-	
 	{
 	 "version": 1,
 	 "timescale": 30000,
@@ -319,7 +317,6 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
 	             "disgust": 0,
 	             "fear": 0,
 
-
 ## 限制
 * 支持的输入视频格式包括 MP4、MOV 和 WMV。
 * 可检测的面部大小范围为 24x24 到 2048x2048 像素。无法检测此范围以外的面部。
@@ -361,7 +358,6 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
 			private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
 			private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
 
-		
 		        // Field for service context.
 		        private static CloudMediaContext _context = null;
 		        private static MediaServicesCredentials _cachedCredentials = null;
@@ -513,11 +509,8 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
 		    }
         }
 
-
-
-
 ## 相关链接
-[Azure Media Services Analytics Overview（Azure 媒体服务分析概述）](/documentation/articles/media-services-analytics-overview/)
+[Azure Media Services Analytics Overview（Azure 媒体服务分析概述）](./media-services-analytics-overview.md)
 
 [Azure Media Analytics demos（Azure 媒体分析演示）](http://azuremedialabs.azurewebsites.net/demos/Analytics.html)
 

@@ -1,24 +1,23 @@
-<properties
-    pageTitle="Azure 应用服务工作方式"
-    description="了解应用服务工作方式"
-    keywords="应用服务, azure 应用服务, 缩放, 可缩放, 应用服务计划, 应用服务成本"
-    services="app-service"
-    documentationcenter=""
-    author="yochay"
-    manager="wpickett"
-    editor="" />  
+---
+title: Azure 应用服务工作方式
+description: 了解应用服务工作方式
+keywords: 应用服务, azure 应用服务, 缩放, 可缩放, 应用服务计划, 应用服务成本
+services: app-service
+documentationcenter: 
+author: yochay
+manager: wpickett
+editor: 
 
-<tags
-    ms.assetid="ae74fc32-969e-4580-8d61-02c922f1f184"
-    ms.service="app-service"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.date="02/10/2016"
-    wacn.date="12/05/2016"
-    ms.author="yochay" />  
-
+ms.assetid: ae74fc32-969e-4580-8d61-02c922f1f184
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: hero-article
+ms.date: 02/10/2016
+wacn.date: 12/05/2016
+ms.author: yochay
+---
 
 # 应用服务工作方式
 Azure 应用服务是一项云服务，旨在解决工程师目前面临的实际问题。应用服务主要考虑如何大幅提高开发人员的工作效率，同时又不影响云级别的应用程序交付需求。
@@ -30,7 +29,7 @@ Azure 应用服务是一项云服务，旨在解决工程师目前面临的实�
 * 通过 API 应用实现、部署和发布 API。
 * 将业务应用程序一起关联到工作流中。
 
-> [AZURE.INCLUDE [app-service-linux](../../includes/app-service-linux.md)]
+> [!INCLUDE [app-service-linux](../../includes/app-service-linux.md)]
 > 
 > 
 
@@ -45,6 +44,6 @@ Azure 应用服务是一项云服务，旨在解决工程师目前面临的实�
 
 总而言之，应用服务功能可以让开发人员专注于代码，快速进入一个稳定且伸缩性极强的生产状态。利用 API 应用功能，开发人员可以构建实际的企业应用程序，顺利实现业务解决方案从本地到云的集成。
 
-[AZURE.INCLUDE [app-service-blueprint-how-app-service-works](../../includes/app-service-blueprint-how-app-service-works.md)]
+[!INCLUDE [app-service-blueprint-how-app-service-works](../../includes/app-service-blueprint-how-app-service-works.md)]
 
 <!---HONumber=Mooncake_1128_2016-->

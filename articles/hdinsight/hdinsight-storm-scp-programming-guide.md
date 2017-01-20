@@ -1,21 +1,21 @@
-<properties
-pageTitle="SCP.NET 编程指南 | Azure"
-description="了解如何通过 SCP.NET 创建可与 HDInsight 上的 Storm 配合使用的基于 .NET 的 Storm 拓扑。"
-services="hdinsight"
-documentationCenter=""
-authors="rperi"
-manager="paulettm"
-editor="cgronlun"/>  
+---
+title: SCP.NET 编程指南 | Azure
+description: 了解如何通过 SCP.NET 创建可与 HDInsight 上的 Storm 配合使用的基于 .NET 的 Storm 拓扑。
+services: hdinsight
+documentationCenter: 
+authors: rperi
+manager: paulettm
+editor: cgronlun
 
-<tags
-ms.service="hdinsight"
-ms.devlang="dotnet"
-ms.topic="article"
-ms.tgt_pltfrm="na"
-ms.workload="big-data"
-ms.date="05/16/2016"
-wacn.date="12/26/2016"
-ms.author="raviperi"/>
+ms.service: hdinsight
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 05/16/2016
+wacn.date: 12/26/2016
+ms.author: raviperi
+---
 
 #SCP 编程指南
 
@@ -366,7 +366,6 @@ SCPRuntime 提供以下两种方法。
         }
         }
 
-
 ## 拓扑规范语言 
 
 SCP 拓扑规范是一种特定于域的语言，用于描述和配置 SCP 拓扑。它基于 Storm 的 Clojure DSL (<http://storm.incubator.apache.org/documentation/Clojure-DSL.html>)，可通过 SCP 进行扩展。
@@ -435,7 +434,6 @@ runspec 命令将会与位元一起部署，其用法如下：
         }
     }
 
-
 在上下文对象中，添加了以下 API：
 
 	public void DeclareComponentSchema(ComponentStreamSchema schema)
@@ -468,7 +466,6 @@ SCP.NET 添加了一个自定义的分组方法，该方法将会使用 byte 的
 	    }
 	    …
 	)
-
 
 其中：
 
@@ -673,7 +670,6 @@ SCP 组件包括 Java 端和 C# 端。若要与本机 Java Spout/Bolt 交互，�
         … …
     }
 
-
 ### HybridTopology
 
 此拓扑包含一个 Java Spout 和一个 C# Bolt。它使用 SCP 平台提供的默认序列化和反序列化实现方法。有关规范文件的详细信息，请参阅 **examples\\HybridTopology** 文件夹中的 **HybridTopology.spec**；有关如何指定 Java classpath，请参阅 **SubmitTopology.bat**。
@@ -686,11 +682,11 @@ SCP 组件包括 Java 端和 C# 端。若要与本机 Java Spout/Bolt 交互，�
 
 有关使用 SCP 创建的 Storm 拓扑示例，请参阅以下文档：
 
-* [使用 Visual Studio 开发 HDInsight 上 Apache Storm 的 C# 拓扑](/documentation/articles/hdinsight-storm-develop-csharp-visual-studio-topology/)
-* [使用 HDInsight 上的 Storm 从 Azure 事件中心处理事件](/documentation/articles/hdinsight-storm-develop-csharp-event-hub-topology/)
-* [使用 Power Bi 直观显示 Storm 拓扑中的数据](/documentation/articles/hdinsight-storm-power-bi-topology/)
+* [使用 Visual Studio 开发 HDInsight 上 Apache Storm 的 C# 拓扑](./hdinsight-storm-develop-csharp-visual-studio-topology.md)
+* [使用 HDInsight 上的 Storm 从 Azure 事件中心处理事件](./hdinsight-storm-develop-csharp-event-hub-topology.md)
+* [使用 Power Bi 直观显示 Storm 拓扑中的数据](./hdinsight-storm-power-bi-topology.md)
 * [使用 HDInsight 上的 Storm 从事件中心处理汽车传感器数据](https://github.com/hdinsight/hdinsight-storm-examples/tree/master/IotExample)
 * [从 Azure 事件中心提取、转换和加载 (ETL) 到 HBase](https://github.com/hdinsight/hdinsight-storm-examples/blob/master/RealTimeETLExample)
-* [使用 HDInsight 上的 Storm 和 HBase 关联事件](/documentation/articles/hdinsight-storm-correlation-topology/)
+* [使用 HDInsight 上的 Storm 和 HBase 关联事件](./hdinsight-storm-correlation-topology.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

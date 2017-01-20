@@ -1,31 +1,32 @@
-<properties
-    pageTitle="如何使用 Redis 缓存创建 Web 应用 | Azure"
-    description="了解如何使用 Redis 缓存创建 Web 应用"
-    services="redis-cache"
-    documentationcenter=""
-    author="steved0x"
-    manager="douge"
-    editor="" />
-<tags
-    ms.assetid="454e23d7-a99b-4e6e-8dd7-156451d2da7c"
-    ms.service="cache"
-    ms.workload="tbd"
-    ms.tgt_pltfrm="cache-redis"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.date="12/19/2016"
-    wacn.date="01/06/2017"
-    ms.author="sdanie" />
+---
+title: 如何使用 Redis 缓存创建 Web 应用 | Azure
+description: 了解如何使用 Redis 缓存创建 Web 应用
+services: redis-cache
+documentationcenter: 
+author: steved0x
+manager: douge
+editor: 
+
+ms.assetid: 454e23d7-a99b-4e6e-8dd7-156451d2da7c
+ms.service: cache
+ms.workload: tbd
+ms.tgt_pltfrm: cache-redis
+ms.devlang: na
+ms.topic: hero-article
+ms.date: 12/19/2016
+wacn.date: 01/06/2017
+ms.author: sdanie
+---
 
 # 如何使用 Redis 缓存创建 Web 应用
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/cache-dotnet-how-to-use-azure-redis-cache/)
-- [ASP.NET](/documentation/articles/cache-web-app-howto/)
-- [Node.js](/documentation/articles/cache-nodejs-get-started/)
-- [Java](/documentation/articles/cache-java-get-started/)
-- [Python](/documentation/articles/cache-python-get-started/)
+> [!div class="op_single_selector"]
+- [.NET](./cache-dotnet-how-to-use-azure-redis-cache.md)
+- [ASP.NET](./cache-web-app-howto.md)
+- [Node.js](./cache-nodejs-get-started.md)
+- [Java](./cache-java-get-started.md)
+- [Python](./cache-python-get-started.md)
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本教程介绍如何使用 Visual Studio 2015 创建 ASP.NET Web 应用程序并将其部署到 Azure App Service 中的 Web 应用。该示例应用程序显示了数据库中的团队统计信息列表，并显示了使用 Azure Redis 缓存通过缓存存储和检索数据的不同方式。完成本教程后，你将有一个运行的 Web 应用，该应用可以对数据库执行读写操作，已通过 Azure Redis 缓存进行优化，并且托管在 Azure 中。
 
@@ -47,14 +48,14 @@
 ### <a name="azure-account"></a>Azure 帐户
 完成本教程需要有一个 Azure 帐户。你可以：
 
-* [注册一元 Azure 帐户](/pricing/1rmb-trial/?WT.mc_id=redis_cache_hero)。获取可用来尝试付费版 Azure 服务的信用额度。即使在信用额度用完之后，你也可以保留帐户并使用免费的 Azure 服务和功能。
+* [注册一元 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=redis_cache_hero)。获取可用来尝试付费版 Azure 服务的信用额度。即使在信用额度用完之后，你也可以保留帐户并使用免费的 Azure 服务和功能。
 
 ### <a name="visual-studio-2015-with-the-azure-sdk-for-net"></a>包含用于 .NET 的 Azure SDK 的 Visual Studio 2015
-本教程专为配合使用 Visual Studio 2015 和 [用于 .NET 的 Azure SDK](/documentation/articles/dotnet-sdk/) 2.8.2 或更高版本编写。[单击此处下载最新的用于 Visual Studio 2015 的 Azure SDK](http://go.microsoft.com/fwlink/?linkid=518003)。如果尚未安装 Visual Studio，则会随 SDK 一起自动安装。
+本教程专为配合使用 Visual Studio 2015 和 [用于 .NET 的 Azure SDK](../dotnet-sdk.md) 2.8.2 或更高版本编写。[单击此处下载最新的用于 Visual Studio 2015 的 Azure SDK](http://go.microsoft.com/fwlink/?linkid=518003)。如果尚未安装 Visual Studio，则会随 SDK 一起自动安装。
 
 如果有 Visual Studio 2013，则可以[下载最新的 Azure SDK for Visual Studio 2013](http://go.microsoft.com/fwlink/?LinkID=324322)。某些屏幕看起来可能与本教程中显示的插图不同。
 
-> [AZURE.NOTE]
+> [!NOTE]
 根据计算机上已有 SDK 依赖项数量的不同，安装 SDK 可能耗时较长，从几分钟到半小时或更长时间不等。
 > 
 > 
@@ -65,7 +66,7 @@
    
     ![创建项目][cache-create-project]  
 
-3. 选择“MVC”作为项目类型。清除“在云中托管”复选框。本教程的后续步骤介绍了[预配 Azure 资源](#provision-the-azure-resources)以及[将应用程序发布到 Azure](#publish-the-application-to-azure)。勾选“在云中托管”即可通过 Visual Studio 预配应用服务 Web 应用，如需此方面的示例，请参阅 [Get started with Web Apps in Azure App Service, using ASP.NET and Visual Studio](/documentation/articles/web-sites-dotnet-get-started/)（通过 ASP.NET 和 Visual Studio 开始使用 Azure 应用服务中的 Web 应用）。
+3. 选择“MVC”作为项目类型。清除“在云中托管”复选框。本教程的后续步骤介绍了[预配 Azure 资源](#provision-the-azure-resources)以及[将应用程序发布到 Azure](#publish-the-application-to-azure)。勾选“在云中托管”即可通过 Visual Studio 预配应用服务 Web 应用，如需此方面的示例，请参阅 [Get started with Web Apps in Azure App Service, using ASP.NET and Visual Studio](../app-service-web/web-sites-dotnet-get-started.md)（通过 ASP.NET 和 Visual Studio 开始使用 Azure 应用服务中的 Web 应用）。
    
     ![选择项目模板][cache-select-template]  
 
@@ -252,7 +253,6 @@
    
     ![StackExchange.Redis NuGet 程序包][redis-cache-stack-exchange-nuget]  
 
-   
     NuGet 程序包会给客户端应用程序下载并添加所需的程序集引用，以访问带 StackExchange.Redis 缓存客户端的 Azure Redis 缓存。如果你希望使用 **StackExchange.Redis** 客户端库强名称版本，请选择 **StackExchange.Redis.StrongName**；否则选择 **StackExchange.Redis**。
 3. 在“解决方案资源管理器”中，展开“Controllers”文件夹，然后双击“TeamsController.cs”将其打开。
    
@@ -301,7 +301,7 @@
 ### <a name="update-the-teamscontroller-class-to-return-results-from-the-cache-or-the-database"></a>更新 TeamsController 类，以便从缓存或数据库返回结果
 在此示例中，团队统计信息可以从数据库或缓存中检索。团队统计信息以序列化 `List<Team>` 的形式存储在缓存中，同时以排序集的形式按 Redis 数据类型存储。从排序集检索项目时，可以检索部分项目或所有项目，也可以查询特定项目。在此示例中，你将按胜利数在排序集中查询排名前 5 的团队。
 
-> [AZURE.NOTE]
+> [!NOTE]
 不需在缓存中以多种格式存储团队统计信息即可使用 Azure Redis 缓存。本教程以多种格式演示了缓存数据时可以使用的不同方法和不同数据类型的一部分。
 > 
 > 
@@ -421,7 +421,7 @@
             return results.ToList<Team>();
         }
 
-    `GetFromList` 方法以序列化 `List<Team>` 的形式从缓存读取团队统计信息。如果缓存未命中，则会从数据库读取团队统计信息，然后将该信息存储在缓存中留待下次使用。在此示例中，我们将通过 JSON.NET 序列化来序列化进出缓存的 .NET 对象。有关详细信息，请参阅[如何处理 Azure Redis 缓存中的 .NET 对象](/documentation/articles/cache-dotnet-how-to-use-azure-redis-cache/#work-with-net-objects-in-the-cache)。
+    `GetFromList` 方法以序列化 `List<Team>` 的形式从缓存读取团队统计信息。如果缓存未命中，则会从数据库读取团队统计信息，然后将该信息存储在缓存中留待下次使用。在此示例中，我们将通过 JSON.NET 序列化来序列化进出缓存的 .NET 对象。有关详细信息，请参阅[如何处理 Azure Redis 缓存中的 .NET 对象](./cache-dotnet-how-to-use-azure-redis-cache.md#work-with-net-objects-in-the-cache)。
 
         List<Team> GetFromList()
         {
@@ -632,12 +632,12 @@
 
 [![部署到 Azure][deploybutton]](https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-web-app-redis-cache-sql-database%2Fazuredeploy.json)
 
->[AZURE.NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”部署的模板，以适应 Azure 中国云环境。例如，替换某些终结点 -- 将“redis.cache.windows.net”替换为“redis.cache.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”。
+>[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”部署的模板，以适应 Azure 中国云环境。例如，替换某些终结点 -- 将“redis.cache.windows.net”替换为“redis.cache.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”。
 
 此“部署到 Azure”按钮使用“创建 Web 应用、Redis 缓存和 SQL 数据库”[Azure 快速入门](https://github.com/Azure/azure-quickstart-templates)模板来预配这些服务，设置 SQL 数据库的连接字符串，以及 Azure Redis 缓存连接字符串的应用程序设置。[](https://github.com/Azure/azure-quickstart-templates/tree/master/201-web-app-redis-cache-sql-database)
 
-> [AZURE.NOTE]
-如果你没有 Azure 帐户，只需花费几分钟的时间就能[创建一个 1 元试用 Azure 帐户](/pricing/1rmb-trial/?WT.mc_id=redis_cache_hero)。
+> [!NOTE]
+如果你没有 Azure 帐户，只需花费几分钟的时间就能[创建一个 1 元试用 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=redis_cache_hero)。
 > 
 > 
 
@@ -645,12 +645,10 @@
 
 ![部署到 Azure][cache-deploy-to-azure-step-1]  
 
-
 1. 在“自定义部署”部分中，选择要使用的 Azure 订阅，然后选择现有资源组或创建新资源组，并指定资源组的位置。
 2. 在“设置”部分中，指定管理员帐户名 （**ADMINISTRATORLOGIN** - 请勿使用 **admin**）、管理员登录密码 (**ADMINISTRATORLOGINPASSWORD**) 和数据库名称 (**DATABASENAME**)。其他参数是针对免费应用服务托管计划以及不附带免费层的 SQL 数据库和 Azure Redis 缓存低价格选项配置的。
 
     ![部署到 Azure][cache-deploy-to-azure-step-2]  
-
 
 3. 配置所需的设置后，滚动到页面底部，阅读条款和条件，并勾选“我同意上述条款和条件”复选框。
 4. 若要开始预配资源，请单击“购买”。
@@ -659,21 +657,19 @@
 
 ![部署已开始][cache-deployment-started]  
 
-
 可以在“Microsoft.Template”边栏选项卡上查看部署状态。
 
 ![部署到 Azure][cache-deploy-to-azure-step-3]  
 
-
 设置完成后，可以从 Visual Studio 将应用程序发布到 Azure。
 
-> [AZURE.NOTE]
+> [!NOTE]
 预配过程中可能发生的任何错误都显示在“Microsoft.Template”Microsoft.Template 边栏选项卡上。常见错误包括 SQL Server 过多或每个订阅的免费应用服务托管计划过多。请解决所有错误，然后单击“Microsoft.Template”边栏选项卡上的“重新部署”或本教程中的“部署到 Azure”按钮重新启动过程。
 > 
 > 
 
 ## <a name="publish-the-application-to-azure"></a>将应用程序发布到 Azure
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 在教程的这一步中，你需要将应用程序发布到 Azure 并在云中运行。
 
@@ -726,10 +722,9 @@
    
     ![确认删除][cache-delete-confirm]  
 
-
 几分钟后，资源组及其包含的所有资源就会被删除。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 请注意，删除资源组这一操作是不可逆的，资源组以及其中的所有资源会被永久删除。请确保你不会意外删除错误的资源组或资源。如果你是在现有的资源组中为托管此示例而创建了相关资源，则可从各自的边栏选项卡逐个删除这些资源。
 > 
 > 
@@ -739,12 +734,12 @@
 
 * 如果你已根据上一部分所述将应用程序发布到 Azure，则可使用在该步骤中预配的 Azure Redis 缓存实例。
 * 如果你有另一个现成的 Azure Redis 缓存实例，则可使用该实例在本地运行此示例。
-* 如果需要创建 Azure Redis 缓存实例，则可按[创建缓存](/documentation/articles/cache-dotnet-how-to-use-azure-redis-cache/#create-a-cache)中的步骤来执行操作。
+* 如果需要创建 Azure Redis 缓存实例，则可按[创建缓存](./cache-dotnet-how-to-use-azure-redis-cache.md#create-a-cache)中的步骤来执行操作。
 
-选择或创建要使用的缓存后，在 Azure 门户预览中浏览到该缓存，然后检索缓存的[主机名](/documentation/articles/cache-configure/#properties)和[访问密钥](/documentation/articles/cache-configure/#access-keys)。有关说明，请参阅[配置 Redis 缓存设置](/documentation/articles/cache-configure/#configure-redis-cache-settings)。
+选择或创建要使用的缓存后，在 Azure 门户预览中浏览到该缓存，然后检索缓存的[主机名](./cache-configure.md#properties)和[访问密钥](./cache-configure.md#access-keys)。有关说明，请参阅[配置 Redis 缓存设置](./cache-configure.md#configure-redis-cache-settings)。
 
 1. 使用所选编辑器打开在本教程的[配置应用程序以使用 Redis 缓存](#configure-the-application-to-use-redis-cache)步骤中创建的 `WebAppPlusCacheAppSecrets.config` 文件。
-2. 编辑 `value` 属性，将 `MyCache.redis.cache.chinacloudapi.cn` 替换为缓存的[主机名](/documentation/articles/cache-configure/#properties)，并指定缓存的[主密钥或辅助密钥](/documentation/articles/cache-configure/#access-keys)作为密码。
+2. 编辑 `value` 属性，将 `MyCache.redis.cache.chinacloudapi.cn` 替换为缓存的[主机名](./cache-configure.md#properties)，并指定缓存的[主密钥或辅助密钥](./cache-configure.md#access-keys)作为密码。
 
         <appSettings>
           <add key="CacheConnection" value="MyCache.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=..."/>
@@ -752,7 +747,7 @@
 
 1. 按“Ctrl+F5”运行应用程序。
 
-> [AZURE.NOTE]
+> [!NOTE]
 请注意，由于应用程序（包括数据库）是在本地运行，而 Redis 缓存是托管在 Azure 中，因此从表现上看缓存可能不如数据库。为了获得最佳性能，应让客户端应用程序和 Azure Redis 缓存实例位于同一位置。
 > 
 > 
@@ -762,14 +757,14 @@
 * 有关在应用服务中创建 ASP.NET Web 应用的更多示例，请参阅 [HealthClinic.biz](https://github.com/Microsoft/HealthClinic.biz) 2015 Connect [演示](https://blogs.msdn.microsoft.com/visualstudio/2015/12/08/connectdemos-2015-healthclinic-biz/)中的[在 Azure App Service 中创建和部署 ASP.NET Web 应用](https://github.com/Microsoft/HealthClinic.biz/wiki/Create-and-deploy-an-ASP.NET-web-app-in-Azure-App-Service)。
   * 有关 HealthClinic.biz 演示的多个快速入门，请参阅 [Azure Developer Tools Quickstarts](https://github.com/Microsoft/HealthClinic.biz/wiki/Azure-Developer-Tools-Quickstarts)（Azure 开发人员工具快速入门）。
 * 详细了解[对新数据库使用 Code First](https://msdn.microsoft.com/data/jj193542) 中介绍的本教程所用实体框架需要的方法。
-* 详细了解 [Azure 应用服务中的 Web 应用](/documentation/articles/app-service-web-overview/)。
-* 了解如何在 Azure 门户预览中[监视](/documentation/articles/cache-how-to-monitor/)缓存。
+* 详细了解 [Azure 应用服务中的 Web 应用](../app-service-web/app-service-web-overview.md)。
+* 了解如何在 Azure 门户预览中[监视](./cache-how-to-monitor.md)缓存。
 * 了解 Azure Redis 缓存高级功能
   
-  * [如何为高级 Azure Redis 缓存配置暂留](/documentation/articles/cache-how-to-premium-persistence/)
-  * [如何为高级 Azure Redis 缓存配置群集功能](/documentation/articles/cache-how-to-premium-clustering/)
-  * [如何为高级 Azure Redis 缓存配置虚拟网络支持](/documentation/articles/cache-how-to-premium-vnet/)
-  * 有关高级缓存大小、吞吐量和带宽的更多详细信息，请参阅 [Azure Redis Cache FAQ](/documentation/articles/cache-faq/#what-redis-cache-offering-and-size-should-i-use)（Azure Redis 缓存常见问题解答）。
+  * [如何为高级 Azure Redis 缓存配置暂留](./cache-how-to-premium-persistence.md)
+  * [如何为高级 Azure Redis 缓存配置群集功能](./cache-how-to-premium-clustering.md)
+  * [如何为高级 Azure Redis 缓存配置虚拟网络支持](./cache-how-to-premium-vnet.md)
+  * 有关高级缓存大小、吞吐量和带宽的更多详细信息，请参阅 [Azure Redis Cache FAQ](./cache-faq.md#what-redis-cache-offering-and-size-should-i-use)（Azure Redis 缓存常见问题解答）。
 
 <!-- IMAGES -->
 

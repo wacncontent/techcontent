@@ -1,25 +1,21 @@
-<properties 
-	pageTitle="平滑流式处理 Windows 应用商店应用教程" 
-	description="了解如何使用 Azure 媒体服务来创建一个 C# Windows 应用商店应用程序，该应用程序包含一个用于播放平滑流内容的 XML MediaElement 控件。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 平滑流式处理 Windows 应用商店应用教程
+description: 了解如何使用 Azure 媒体服务来创建一个 C# Windows 应用商店应用程序，该应用程序包含一个用于播放平滑流内容的 XML MediaElement 控件。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016" 
-	wacn.date="12/16/2016"  
-	ms.author="juliako"/>  
-
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/16/2016
+ms.author: juliako
+---
 
 #如何生成平滑流式处理 Windows 应用商店应用程序
 
@@ -37,7 +33,6 @@
 - Windows 8 32 位或 64 位。
 - Visual Studio 2012 或 Visual Studio Express 2012（或更高版本）。可以从[此处](http://www.microsoft.com/visualstudio/11/downloads)获取试用版。
 - [适用于 Windows 8 的 Microsoft 平滑流式处理客户端 SDK](http://visualstudiogallery.msdn.microsoft.com/04423d13-3b3e-4741-a01c-1ae29e84fea6?SRC=Homehttp://visualstudiogallery.msdn.microsoft.com/04423d13-3b3e-4741-a01c-1ae29e84fea6?SRC=Home)。
-
 
 可从 MSDN 开发人员代码示例（代码库）下载每一节课的完整解决方案：
 
@@ -222,7 +217,6 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 6.	单击“设置源”。由于已按默认启用“自动播放”，因此媒体会自动播放。你可以使用“播放”、“暂停”和“停止”按钮控制媒体。可以使用垂直滚动条控制媒体音量。但是，用于控制媒体进度的水平滚动条功能尚未完全实现。
 
 第 1 课到此结束。在本课中，已学习如何使用 MediaElement 控件来播放平滑流式处理内容。在下一课中，需要要添加滚动条，以控制平滑流式处理内容的进度。
-
 
 ##第2 课：添加滚动条以控制媒体进度
 在第 1 课，你已使用 MediaElement XAML 控件创建了一个 Windows 应用商店应用程序，用于播放平滑流式处理媒体内容。该应用程序带有基本的媒体功能，例如开始、停止和暂停。在本课中，你将要在该应用程序中添加一个滚动条控件。
@@ -475,7 +469,6 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 		double absvalue  = (int)Math.Round(timespan.TotalSeconds, MidpointRounding.AwayFromZero); 
 		  sliderProgress.Maximum = absvalue; }); 
 		
-
 6.	在 **mediaElement\_AdaptiveSourceStatusUpdated** 方法的末尾，添加以下代码：
 	
 		setSliderStartTime(args.StartTime);
@@ -505,7 +498,6 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 1. 修改 XAML 文件
 2. 修改代码隐藏文件
 3. 编译和测试应用程序
-
 
 **修改 XAML 文件**
 
@@ -547,7 +539,6 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 		</Grid>
 
 4. 按 **CTRL+S** 保存更改。
-
 
 **修改代码隐藏文件**
 
@@ -802,7 +793,6 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 
 3. 按 **CTRL+S** 保存更改
 
-
 **修改代码隐藏文件**
 
 1. 在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看代码”。
@@ -976,9 +966,6 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 
 你已完成第 4 课。在本课中，你已添加了用于选择曲目的功能。
 
-
-
-
 ##其他资源：
 - [如何生成具有高级功能的平滑流式处理 Windows 8 JavaScript 应用程序](http://blogs.iis.net/cenkd/archive/2012/08/10/how-to-build-a-smooth-streaming-windows-8-javascript-application-with-advanced-features.aspx)
 - [平滑流式处理技术概述](http://www.iis.net/learn/media/on-demand-smooth-streaming/smooth-streaming-technical-overview)
@@ -986,5 +973,4 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 [PlayerApplication]: ./media/media-services-build-smooth-streaming-apps/SSClientWin8-1.png
 [CodeViewPic]: ./media/media-services-build-smooth-streaming-apps/SSClientWin8-2.png
  
-
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

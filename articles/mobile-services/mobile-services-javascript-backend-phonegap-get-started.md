@@ -1,28 +1,28 @@
-<properties
-	pageTitle="使用 Azure 移动服务开发 PhoneGap/cordova 应用入门 | Azure"
-	description="请按照本教程中的说明操作，开始使用用于 PhoneGap 开发的 Azure 移动服务（面向 iOS、, Android 和 Windows Phone）。"
-	services="mobile-services"
-	documentationCenter=""
-	authors="ggailey777"
-	manager="dwrede"
-	editor=""/>
+---
+title: 使用 Azure 移动服务开发 PhoneGap/cordova 应用入门 | Azure
+description: 请按照本教程中的说明操作，开始使用用于 PhoneGap 开发的 Azure 移动服务（面向 iOS、, Android 和 Windows Phone）。
+services: mobile-services
+documentationCenter: 
+authors: ggailey777
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-phonegap"
-	ms.devlang="multiple"
-	ms.topic="get-started-article" 
-	ms.date="07/21/2016" 
-	wacn.date="09/26/2016"
-	ms.author="ggailey777"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-phonegap
+ms.devlang: multiple
+ms.topic: get-started-article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: ggailey777
+---
 
 #  移动服务入门
 
-[AZURE.INCLUDE [mobile-services-selector-get-started](../../includes/mobile-services-selector-get-started.md)]
+[!INCLUDE [mobile-services-selector-get-started](../../includes/mobile-services-selector-get-started.md)]
 &nbsp;
 
-[AZURE.INCLUDE [mobile-services-hero-slug](../../includes/mobile-services-hero-slug.md)]
+[!INCLUDE [mobile-services-hero-slug](../../includes/mobile-services-hero-slug.md)]
 
 本教程说明如何使用 Azure 移动服务向应用程序添加基于云的后端服务。在本教程中，你将要创建一个新的移动服务，以及一个在新移动服务中存储应用程序数据的简单_待办事项列表_应用程序。
 
@@ -47,7 +47,7 @@
 
 ##  创建新的移动服务
 
-[AZURE.INCLUDE [mobile-services-create-new-service](../../includes/mobile-services-create-new-service.md)]
+[!INCLUDE [mobile-services-create-new-service](../../includes/mobile-services-create-new-service.md)]
 
 ##  创建新的 PhoneGap 应用程序
 
@@ -105,14 +105,13 @@
 		
 			![][4]
 	
-		>[AZURE.NOTE]若要在 Android 模拟器中运行项目，必须至少定义一个 Android 虚拟设备 (AVD)。使用 AVD 管理器创建和管理这些设备。
+		>[!NOTE]若要在 Android 模拟器中运行项目，必须至少定义一个 Android 虚拟设备 (AVD)。使用 AVD 管理器创建和管理这些设备。
 			
-	
 3. 在上述某个移动模拟器中启动应用程序后，在文本框中键入一些文本，然后单击“添加”。
 
 	这样可向在 Azure 中托管的新移动服务发送 POST 请求。来自请求的数据将插入到 **TodoItem** 表。移动服务返回存储在表中的项，数据显示在列表中。
 
-	> [AZURE.IMPORTANT]如果使用 PhoneGap 工具重新生成主项目，将会覆盖对此平台项目所做的更改。请根据以下部分中所述，在项目的 www 根目录中进行更改。
+	> [!IMPORTANT]如果使用 PhoneGap 工具重新生成主项目，将会覆盖对此平台项目所做的更改。请根据以下部分中所述，在项目的 www 根目录中进行更改。
 
 4. 返回 [Azure 经典管理门户]，单击“数据”选项卡，然后单击“TodoItem”表。
 
@@ -122,7 +121,6 @@
 
 	![](./media/mobile-services-javascript-backend-phonegap-get-started/mobile-data-browse.png)
 	
-
 ##  针对每个平台进行应用程序更新并重新生成项目
 
 1. 在“www”目录（在本例中为“todolist/www”）中对代码文件进行更改。
@@ -151,7 +149,7 @@
 
 4. 根据前面部分中所述，在相应的开发环境中打开每个项目。
 
->[AZURE.NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 js/index.js 文件中。
+>[!NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 js/index.js 文件中。
 
 ##  后续步骤
 完成快速入门后，请了解如何在移动服务中执行其他重要任务：
@@ -162,10 +160,10 @@
 * **[向应用程序添加推送通知](https://msdn.microsoft.com/magazine/dn879353.aspx)**
 了解如何向应用程序注册和发送推送通知。
 
-* **[移动服务 HTML/JavaScript 操作方法概念性参考](/documentation/articles/mobile-services-html-how-to-use-client-library/)**
+* **[移动服务 HTML/JavaScript 操作方法概念性参考](./mobile-services-html-how-to-use-client-library.md)**
 了解如何使用 JavaScript 客户端库来访问数据、调用自定义 API 和执行身份验证。
 
-[AZURE.INCLUDE [app-service-disqus-feedback-slug](../../includes/app-service-disqus-feedback-slug.md)]
+[!INCLUDE [app-service-disqus-feedback-slug](../../includes/app-service-disqus-feedback-slug.md)]
 
 <!-- Images. -->
 [0]: ./media/mobile-services-javascript-backend-phonegap-get-started/portal-screenshot1.png
@@ -175,7 +173,7 @@
 [4]: ./media/mobile-services-javascript-backend-phonegap-get-started/mobile-portal-quickstart-android.png
 
 <!-- URLs. -->
-[向应用程序添加身份验证]: /documentation/articles/mobile-services-html-get-started-users/
+[向应用程序添加身份验证]: ./mobile-services-html-get-started-users.md
 [Android SDK]: https://go.microsoft.com/fwLink/p/?LinkID=280125
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
 [Xcode]: https://go.microsoft.com/fwLink/p/?LinkID=266532

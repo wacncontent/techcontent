@@ -1,25 +1,25 @@
-<properties
-	pageTitle="从本地 Git 部署到 Azure App Service"
-	description="了解如何实现从本地 Git 部署到 Azure App Service。"
-	services="app-service"
-	documentationCenter=""
-	authors="dariagrigoriu"
-	manager="wpickett"
-	editor="mollybos"/>
+---
+title: 从本地 Git 部署到 Azure App Service
+description: 了解如何实现从本地 Git 部署到 Azure App Service。
+services: app-service
+documentationCenter: 
+authors: dariagrigoriu
+manager: wpickett
+editor: mollybos
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="06/13/2016"
-	wacn.date="01/05/2017"
-	ms.author="dariagrigoriu"/>
-    
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 06/13/2016
+wacn.date: 01/05/2017
+ms.author: dariagrigoriu
+---
+
 # 从本地 Git 部署到 Azure App Service
 
-本教程说明如何将应用从本地计算机上的 Git 存储库部署到 [Azure App Service]。应用服务支持结合 [Azure 门户预览]中的“本地 Git”部署选项使用此方法。在根据[此处](/documentation/articles/app-service-web-get-started/)所述使用 [Azure 命令行接口]创建应用服务应用时，将自动执行本文中所述的许多 Git 命令。
+本教程说明如何将应用从本地计算机上的 Git 存储库部署到 [Azure App Service]。应用服务支持结合 [Azure 门户预览]中的“本地 Git”部署选项使用此方法。在根据[此处](./app-service-web-get-started.md)所述使用 [Azure 命令行接口]创建应用服务应用时，将自动执行本文中所述的许多 Git 命令。
 
 ## 先决条件
 
@@ -27,7 +27,7 @@
 
 - Git。可在[此处](http://www.git-scm.com/downloads)下载二进制安装文件。
 - 对 Git 有一个基本的了解。
-- 一个 Azure 帐户。如果你没有帐户，可以[注册试用版](/pricing/1rmb-trial)。
+- 一个 Azure 帐户。如果你没有帐户，可以[注册试用版](https://www.azure.cn/pricing/1rmb-trial)。
 
 ## <a id="Step1"></a>步骤 1：创建本地存储库
 
@@ -85,7 +85,7 @@
 3. 使用 `git remote` 添加步骤 1 的 **Git URL** 中所列的远程引用。使用的命令应类似于：
 
 		git remote add azure https://<username>@localgitdeployment.scm.chinacloudsites.cn:443/localgitdeployment.git         
-    > [AZURE.NOTE] **remote** 命令可将命名引用添加到远程存储库。在本示例中，它为 Web 应用的存储库创建名为“azure”的引用。
+    > [!NOTE] **remote** 命令可将命名引用添加到远程存储库。在本示例中，它为 Web 应用的存储库创建名为“azure”的引用。
 
 4. 使用刚刚创建的新 **azure** 远程命令将内容推送到应用服务。
 
@@ -108,7 +108,6 @@
 **原因**：如果应用无法正常工作，则会发生该错误。
 
 **解决方法**：在 Azure 门户预览中启动应用。在应用运行之前，Git 部署无法进行。
-
 
 ****
 
@@ -156,20 +155,19 @@
 
 	* npm ERR! [modulename@version] preinstall: \`make || gmake\`
 
-
 ## 其他资源
 
 * [Git 文档](http://git-scm.com/documentation)
 * [项目 Kudu 文档](https://github.com/projectkudu/kudu/wiki)
-* [连续部署到 Azure App Service](/documentation/articles/app-service-continuous-deployment/)
+* [连续部署到 Azure App Service](./app-service-continuous-deployment.md)
 * [如何使用适用于 Azure 的 PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)
-* [如何使用 Azure 命令行界面](/documentation/articles/xplat-cli-install/)
+* [如何使用 Azure 命令行界面](../xplat-cli-install.md)
 
-[Azure App Service]: /documentation/articles/app-service-changes-existing-services/
+[Azure App Service]: ./app-service-changes-existing-services.md
 [Azure 门户预览]: https://portal.azure.cn
 [Git website]: http://git-scm.com
 [Installing Git]: http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git
-[Azure 命令行接口]: /documentation/articles/xplat-cli-azure-resource-manager/
+[Azure 命令行接口]: ../azure-resource-manager/xplat-cli-azure-resource-manager.md
 
 [Using Git with CodePlex]: http://codeplex.codeplex.com/wikipage?title=Using%20Git%20with%20CodePlex&referringTitle=Source%20control%20clients&ProjectName=codeplex
 [Quick Start - Mercurial]: http://mercurial.selenic.com/wiki/QuickStart

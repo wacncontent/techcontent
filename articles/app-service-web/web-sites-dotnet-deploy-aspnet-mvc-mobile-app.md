@@ -1,28 +1,27 @@
-<properties
-    pageTitle="在 Azure App Service 上部署 ASP.NET MVC 5 移动 Web 应用"
-    description="本教程说明如何使用 ASP.NET MVC 5 Web 应用程序中的移动功能将 Web 应用部署到 Azure App Service。"
-    services="app-service"
-    documentationcenter=".net"
-    author="cephalin"
-    manager="wpickett"
-    editor="jimbe" />  
+---
+title: 在 Azure App Service 上部署 ASP.NET MVC 5 移动 Web 应用
+description: 本教程说明如何使用 ASP.NET MVC 5 Web 应用程序中的移动功能将 Web 应用部署到 Azure App Service。
+services: app-service
+documentationcenter: .net
+author: cephalin
+manager: wpickett
+editor: jimbe
 
-<tags
-    ms.assetid="0752c802-8609-4956-a755-686116913645"
-    ms.service="app-service"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="01/12/2016"
-    wacn.date="12/05/2016"
-    ms.author="cephalin;riande" />  
-
+ms.assetid: 0752c802-8609-4956-a755-686116913645
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 01/12/2016
+wacn.date: 12/05/2016
+ms.author: cephalin;riande
+---
 
 # 在 Azure App Service 上部署 ASP.NET MVC 5 移动 Web 应用
 本教程介绍有关如何生成一个方便移动的 ASP.NET MVC 5 Web 应用并将其部署到 Azure 应用服务的基础知识。学习本教程需要安装 [Visual Studio Express 2013 for Web][Visual Studio Express 2013] 或者 Visual Studio 专业版（如果已有）。你可以使用 [Visual Studio 2015]，但屏幕截图可能有所不同，并且必须使用 ASP.NET 4.x 模板。
 
-[AZURE.INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
+[!INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
 
 ## 所需操作
 在本教程，你将在[初学者项目][StarterProject]提供的简单会议列表应用程序中添加移动功能。以下屏幕截图显示了已完成的应用程序中的 ASP.NET 会话，如在 Internet Explorer 11 F12 开发人员工具的浏览器模拟器中所见。
@@ -100,8 +99,7 @@
     
     ![][AllTags]  
 
-
-> [AZURE.TIP]
+> [!TIP]
 > 虽然可以从 Visual Studio 内部调试 MVC 5 应用程序，但可以再次将 Web 应用发布到 Azure，以直接从移动浏览器或浏览器模拟器验证实时 Web 应用。
 > 
 > 
@@ -180,7 +178,7 @@ Bootstrap 并不特定于 ASP.NET MVC 5，你可以在任何 Web 应用程序上
 
 此代码定义要与每个传入请求匹配的名为“iPhone”的新显示模式。如果传入请求与定义的条件（即，如果用户代理包含字符串“iPhone”）匹配，则 ASP.NET MVC 将查找名称包含“iPhone”后缀的视图。
 
-> [AZURE.NOTE]
+> [!NOTE]
 在添加移动浏览器特定显示模式（例如，用于 iPhone 和 Android）时，请务必将第一个参数设置为 `0`（在列表顶部插入），以确保浏览器特定模式优先于移动模板 (*.Mobile.cshtml)。如果移动模板位于列表顶部，则会选择该移动模板而不是你预期的显示模式（第一个匹配项优先，而移动模板与所有移动浏览器匹配）。
 > 
 > 
@@ -221,7 +219,6 @@ Bootstrap 并不特定于 ASP.NET MVC 5，你可以在任何 Web 应用程序上
 当 `RequireConsistentDisplayMode` 设置为 `true` 时，移动布局 (*\_Layout.Mobile.cshtml*) 只用于移动视图（即，视图文件为 ***ViewName**.Mobile.cshtml* 形式。）你可能需要将 `RequireConsistentDisplayMode` 设置为 `true`（如果你的移动布局不太适合你的非移动视图）。下面的屏幕截图显示当 `RequireConsistentDisplayMode` 设置为 `true` 时，如何呈现“Speakers”页面（顶部导航栏中没有字符串“(Mobile)”）。**
 
 ![][AllSpeakers_LayoutMobileOverridden]  
-
 
 你可以通过在视图文件中将 `RequireConsistentDisplayMode` 设置为 `false` 来禁用特定视图中一致的显示模式。*Views\\Home\\AllSpeakers.cshtml* 文件中的以下标记将 `RequireConsistentDisplayMode` 设置为 `false`：
 
@@ -347,7 +344,7 @@ Bootstrap [链接列表组][linked list group]样式使每个链接的整个框�
 
 ![][AllTagsFixed]
 
-> [AZURE.NOTE]
+> [!NOTE]
 如果你注意到移动浏览器中仍然存在原始列表格式，并且想知道合适的 Bootstrap 样式为何会发生这种情况，则需要知道，这是前面创建移动特定视图后产生的效果。但是，现在你要使用 Bootstrap CSS 框架来创建响应式 Web 设计，并继续删除这些移动特定的视图和移动特定的布局视图。完成此操作后，刷新的移动浏览器将显示 Bootstrap 样式。
 > 
 > 
@@ -543,7 +540,7 @@ Bootstrap [链接列表组][linked list group]样式使每个链接的整个框�
 * [用于媒体查询的 W3C 候选建议方案][W3C Candidate Recommendation for media queries]
 
 ## 发生的更改
-* 有关从网站更改为应用服务的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](/documentation/articles/app-service-changes-existing-services/)
+* 有关从网站更改为应用服务的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 
 <!-- Internal Links -->
 [Deploy the starter project to an Azure web app]: #bkmk_DeployStarterProject

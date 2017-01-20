@@ -1,28 +1,27 @@
-<properties 
-	pageTitle="使用 WebMatrix 构建 Node.js Web 应用并将其部署到 Azure" 
-	description="本教程演示如何使用 WebMatrix 开发 Node.js 应用程序并将其部署到 Azure 应用服务 Web 应用。" 
-	services="app-service\web" 
-	documentationCenter="nodejs" 
-	authors="rmcmurray" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 使用 WebMatrix 构建 Node.js Web 应用并将其部署到 Azure
+description: 本教程演示如何使用 WebMatrix 开发 Node.js 应用程序并将其部署到 Azure 应用服务 Web 应用。
+services: app-service\web
+documentationCenter: nodejs
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="nodejs" 
-	ms.topic="article" 
-	ms.date="11/01/2016" 
-	wacn.date="12/30/2016"
-	ms.author="robmcm"/>
-
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/30/2016
+ms.author: robmcm
+---
 
 # 使用 WebMatrix 构建 Node.js Web 应用并将其部署到 Azure
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-本教程演示如何使用 WebMatrix 开发 Node.js 应用程序并将其部署到 [Azure 应用服务](/documentation/articles/app-service-changes-existing-services/)中的 Web 应用。WebMatrix 是 Microsoft 提供的一个免费的 Web 开发工具，此工具包含开发 Web 应用所需的一切功能。WebMatrix 提供了一些便于使用 Node.js 的功能，包括代码完成、预构建模板以及对 Jade、LESS 和 CoffeeScript 的编辑器支持。了解有关 [WebMatrix](https://www.microsoft.com/web/webmatrix/next/) 的更多信息。
+本教程演示如何使用 WebMatrix 开发 Node.js 应用程序并将其部署到 [Azure 应用服务](./app-service-changes-existing-services.md)中的 Web 应用。WebMatrix 是 Microsoft 提供的一个免费的 Web 开发工具，此工具包含开发 Web 应用所需的一切功能。WebMatrix 提供了一些便于使用 Node.js 的功能，包括代码完成、预构建模板以及对 Jade、LESS 和 CoffeeScript 的编辑器支持。了解有关 [WebMatrix](https://www.microsoft.com/web/webmatrix/next/) 的更多信息。
 
 完成本指南之后，你将拥有一个在 Azure 应用服务中运行的 Node.js Web 应用。
  
@@ -30,7 +29,7 @@
 
 ![Azure Node Web 应用][webmatrix-node-completed]
 
-[AZURE.INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
+[!INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
 
 ## 登录 Azure
 
@@ -43,7 +42,6 @@
 	![添加帐户][addaccount]
 
 4. 系统将提示你输入帐户的名称。输入所需的任何内容，然后单击“确定”。
-
 
 ## 使用 Azure 的内置模板创建 Web 应用
 
@@ -99,13 +97,13 @@
 
 ##后续步骤
 
-若要了解有关随 Azure 提供的 Node.js 版本的更多信息以及如何指定适用于你的应用程序的版本，请参阅[在 Azure 应用程序中指定 Node.js 版本](/documentation/articles/nodejs-specify-node-version-azure-apps/)。
+若要了解有关随 Azure 提供的 Node.js 版本的更多信息以及如何指定适用于你的应用程序的版本，请参阅[在 Azure 应用程序中指定 Node.js 版本](../nodejs-specify-node-version-azure-apps.md)。
 
-如果在将应用程序部署到 Azure 后遇到应用程序问题，请参阅[如何在 Azure 应用服务中调试 Node.js Web 应用](/documentation/articles/web-sites-nodejs-debug/)以了解有关诊断问题的信息。
+如果在将应用程序部署到 Azure 后遇到应用程序问题，请参阅[如何在 Azure 应用服务中调试 Node.js Web 应用](./web-sites-nodejs-debug.md)以了解有关诊断问题的信息。
 
 [Azure 经典管理门户]: http://manage.windowsazure.cn
-[使用 Git 发布 Azure Web 应用]: /documentation/articles/app-service-deploy-local-git/
-[免费]: /zh-cn/pricing/1rmb-trial
+[使用 Git 发布 Azure Web 应用]: ./app-service-deploy-local-git.md
+[免费]: https://www.azure.cn/pricing/1rmb-trial
 [WebMatrix Web 应用]: http://www.microsoft.com/click/services/Redirect2.ashx?CR_CC=200106398
 [WebMatrix for Azure]: http://go.microsoft.com/fwlink/?LinkID=253622&clcid=0x409
 
@@ -124,5 +122,4 @@
 [sitefromtemplate]: ./media/web-sites-nodejs-use-webmatrix/webmatrix-site-from-template.png
 [nodesitefromtemplateazure]: ./media/web-sites-nodejs-use-webmatrix/webmatrix-node-site-azure.png
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

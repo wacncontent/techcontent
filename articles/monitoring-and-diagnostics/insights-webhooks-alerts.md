@@ -1,27 +1,25 @@
-<properties
-	pageTitle="针对 Azure 指标警报配置 webhook | Azure"
-	description="将 Azure 警报重新路由到其他非 Azure 系统。"
-	authors="kamathashwin"
-	manager=""
-	editor=""
-	services="monitoring-and-diagnostics"
-	documentationCenter="monitoring-and-diagnostics"/>  
+---
+title: 针对 Azure 指标警报配置 webhook | Azure
+description: 将 Azure 警报重新路由到其他非 Azure 系统。
+authors: kamathashwin
+manager: 
+editor: 
+services: monitoring-and-diagnostics
+documentationCenter: monitoring-and-diagnostics
 
-
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/15/2016"
-	wacn.date="01/03/2017"
-	ms.author="ashwink"/>  
-
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/15/2016
+wacn.date: 01/03/2017
+ms.author: ashwink
+---
 
 # 针对 Azure 度量值警报配置 webhook
 
-通过 webhook 可以将 Azure 警报通知路由到其他系统，以便进行后续处理或自定义操作。可以针对警报使用 webhook，以将警报路由到可以发送短信、记录 Bug、通过聊天/消息通知团队，或执行任意数量的其他操作的服务。本文介绍如何针对 Azure 度量值警报设置 webhook，以及 HTTP POST 对 Webhook 的有效负载情况。有关 Azure 活动日志警报（事件警报）的设置和架构的信息，[请参阅本页](/documentation/articles/insights-auditlog-to-webhook-email/)。
+通过 webhook 可以将 Azure 警报通知路由到其他系统，以便进行后续处理或自定义操作。可以针对警报使用 webhook，以将警报路由到可以发送短信、记录 Bug、通过聊天/消息通知团队，或执行任意数量的其他操作的服务。本文介绍如何针对 Azure 度量值警报设置 webhook，以及 HTTP POST 对 Webhook 的有效负载情况。有关 Azure 活动日志警报（事件警报）的设置和架构的信息，[请参阅本页](./insights-auditlog-to-webhook-email.md)。
 
 Azure 警报会将警报内容以 JSON 格式（架构定义如下）HTTP POST 到创建警报时提供的 webhook URI。此 URI 必须是有效的 HTTP 或 HTTPS 终结点。激活警报时，Azure 会针对每个请求发布一个条目。
 
@@ -31,8 +29,7 @@ Azure 警报会将警报内容以 JSON 格式（架构定义如下）HTTP POST �
 
 ![添加警报规则](./media/insights-webhooks-alerts/Alertwebhook.png)  
 
-
-还可以使用 [Azure PowerShell Cmdlet](/documentation/articles/insights-powershell-samples/#create-alert-rules)、[跨平台 CLI](/documentation/articles/insights-cli-samples/#work-with-alerts) 或 [Insights REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn933805.aspx) 将警报配置为发布到 webhook URI。
+还可以使用 [Azure PowerShell Cmdlet](./insights-powershell-samples.md#create-alert-rules)、[跨平台 CLI](./insights-cli-samples.md#work-with-alerts) 或 [Insights REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn933805.aspx) 将警报配置为发布到 webhook URI。
 
 ## 对 webhook 进行身份验证
 
@@ -76,7 +73,6 @@ POST 操作对于所有基于度量值的警报包含以下 JSON 有效负载和
 		              }
 		}
 
-
 | 字段 | 必需 | 一组固定的值 | 说明 |
 | :-------------| :-------------   | :-------------   | :-------------   |
 |status|Y|“Activated”, “Resolved”|以设置的条件为基础的警报的状态。|
@@ -103,8 +99,7 @@ POST 操作对于所有基于度量值的警报包含以下 JSON 有效负载和
 |portalLink |Y | |指向门户资源摘要页的直接链接。|
 |properties |N |可选 |一组包含事件详细信息的 `<Key, Value>` 对（即 `Dictionary<String, String>`）。properties 字段是可选的。在自定义 UI 或基于逻辑应用的工作流中，用户可以输入键/值，该键/值可通过有效负载传递。将自定义属性传递回 webhook 的替代方法是通过 webhook URI 本身（作为查询参数）|
 
-
->[AZURE.NOTE] 只能使用 [Azure Monitor REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn933805.aspx) 设置属性字段。
+>[!NOTE] 只能使用 [Azure Monitor REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn933805.aspx) 设置属性字段。
 
 ## 后续步骤
 

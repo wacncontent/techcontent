@@ -1,29 +1,30 @@
-<properties 
-	pageTitle="使用 PowerShell 创建具有本机模式报表服务器的虚拟机 |Azure"
-	description="本主题说明并指导你完成 SQL Server Reporting Services 本机模式报表服务器在 Azure 虚拟机中的部署和配置。"
-	services="virtual-machines-windows"
-	documentationCenter="na"
-	authors="rothja"
-	manager="jeffreyg"
-	editor="monicar" 
-	tags="azure-service-management"/>
-<tags 
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="10/04/2016"
-	wacn.date="11/21/2016"
-	ms.author="asaxton" />
+---
+title: 使用 PowerShell 创建具有本机模式报表服务器的虚拟机 |Azure
+description: 本主题说明并指导你完成 SQL Server Reporting Services 本机模式报表服务器在 Azure 虚拟机中的部署和配置。
+services: virtual-machines-windows
+documentationCenter: na
+authors: rothja
+manager: jeffreyg
+editor: monicar
+tags: azure-service-management
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 10/04/2016
+wacn.date: 11/21/2016
+ms.author: asaxton
+---
 
 # 使用 PowerShell 创建运行本机模式报表服务器的 Azure VM
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 本主题说明并指导你完成 SQL Server Reporting Services 本机模式报表服务器在 Azure 虚拟机中的部署和配置。本文档中的步骤使用一系列手动步骤来创建虚拟机以及用于在 VM 上配置 Reporting Services 的 Windows PowerShell 脚本。配置脚本包括为 HTTP 或 HTTPs 打开防火墙端口。
 
->[AZURE.NOTE]如果在报表服务器上不需要 **HTTPS**，请**跳过步骤 2**。
+>[!NOTE]如果在报表服务器上不需要 **HTTPS**，请**跳过步骤 2**。
 ><p>在步骤 1 中创建 VM 后，转到使用脚本部分配置报表服务器和 HTTP。在你运行该脚本后，报表服务器便可以使用。
 
 ## 前提条件和假设
@@ -32,7 +33,7 @@
 	
 	- 若要验证你的订阅的核心限制，在 Azure 经典管理门户中，单击右侧窗格中的“设置”，然后单击顶部菜单中的“使用情况”。
 	
-	- 若要增加核心配额，请联系 [Azure 支持](/support/contact/)。有关 VM 大小信息，请参阅 [Azure 的虚拟机大小](/documentation/articles/virtual-machines-windows-sizes/)。
+	- 若要增加核心配额，请联系 [Azure 支持](https://www.azure.cn/support/contact/)。有关 VM 大小信息，请参阅 [Azure 的虚拟机大小](./virtual-machines-windows-sizes.md)。
 
 - **Windows PowerShell 脚本编制**：本主题假定你有 Windows PowerShell 的基础工作知识。有关使用 Windows PowerShell 的详细信息，请参阅以下部分：
 
@@ -70,7 +71,7 @@
 	
 	- **层**：标准
 	
-	- **大小：A3** 是 SQL Server 工作负荷的建议 VM 大小。如果 VM 仅用作报表服务器，A2 的 VM 大小就足够了，除非报表服务器遇到大量工作负荷。有关 VM 定价信息，请参阅[虚拟机定价](/pricing/details/virtual-machines/)。
+	- **大小：A3** 是 SQL Server 工作负荷的建议 VM 大小。如果 VM 仅用作报表服务器，A2 的 VM 大小就足够了，除非报表服务器遇到大量工作负荷。有关 VM 定价信息，请参阅[虚拟机定价](https://www.azure.cn/pricing/details/virtual-machines/)。
 	
 	- **新用户名**：将你提供的名称创建为 VM 上的管理员。
 	
@@ -94,7 +95,7 @@
 
 		- **HTTP**：默认公共和专用端口均为 **80**。请注意，如果你使用非 80 的专用端口，请修改 http 脚本中的 **$HTTPport = 80**。
 
-		- **HTTPS**：默认公共和专用端口均为 **443**。最佳安全方案是更改私有端口并配置你的防火墙和报表服务器以使用私有端口。有关终结点的详细信息，请参阅[如何设置与虚拟机的通信](/documentation/articles/virtual-machines-windows-classic-setup-endpoints/)。请注意，如果你使用非 443 的端口，请更改 HTTPS 脚本中的参数 **$HTTPsport = 443**。
+		- **HTTPS**：默认公共和专用端口均为 **443**。最佳安全方案是更改私有端口并配置你的防火墙和报表服务器以使用私有端口。有关终结点的详细信息，请参阅[如何设置与虚拟机的通信](./virtual-machines-windows-classic-setup-endpoints.md)。请注意，如果你使用非 443 的端口，请更改 HTTPS 脚本中的参数 **$HTTPsport = 443**。
 	
 	- 单击“下一步”。![下一步](./media/virtual-machines-windows-classic-ps-sql-report/IC692021.gif)
 
@@ -106,7 +107,7 @@
 
 ## 步骤 2：创建服务器证书
 
->[AZURE.NOTE]如果在报表服务器上不需要 HTTPS，则可以**跳过步骤 2** 并转到**使用脚本来配置报表服务器和 HTTP** 部分。使用 HTTP 脚本快速配置报表服务器，报表服务器便可以使用了。
+>[!NOTE]如果在报表服务器上不需要 HTTPS，则可以**跳过步骤 2** 并转到**使用脚本来配置报表服务器和 HTTP** 部分。使用 HTTP 脚本快速配置报表服务器，报表服务器便可以使用了。
 
 为了在 VM 上使用 HTTPS，你需要受信任的 SSL 证书。具体取决于你的方案，你可以使用以下两种方法之一：
 
@@ -128,7 +129,7 @@
 
 	[用于管理 Windows Server 2012 的安全工具](https://technet.microsoft.com/zh-cn/library/jj730960.aspx)
 
-	>[AZURE.NOTE]受信任的 SSL 证书的 **issued to** 字段应与你用于新 VM 的**云服务 DNS 名称**相同。
+	>[!NOTE]受信任的 SSL 证书的 **issued to** 字段应与你用于新 VM 的**云服务 DNS 名称**相同。
 
 1. **在 Web 服务器上安装服务器证书**。Web 服务器在这种情况下是托管报表服务器的 VM， Web 应用在配置 Reporting Services 时的后续步骤中创建。有关通过使用证书 MMC 管理单元在 Web 服务器上安装服务器证书的详细信息，请参阅[安装服务器证书](https://technet.microsoft.com/zh-cn/library/cc740068)。
 	
@@ -184,7 +185,7 @@
 
 - 使用配置管理器配置报表服务器。
 
-有关更多详细步骤，请参阅[连接到虚拟机并启动 Reporting Services 配置管理器](/documentation/articles/virtual-machines-windows-classic-ps-sql-bi/#connect-to-the-virtual-machine-and-start-the-reporting-services-configuration-manager)。
+有关更多详细步骤，请参阅[连接到虚拟机并启动 Reporting Services 配置管理器](./virtual-machines-windows-classic-ps-sql-bi.md#connect-to-the-virtual-machine-and-start-the-reporting-services-configuration-manager)。
 
 **身份验证说明：**Windows 身份验证是建议的身份验证方法，并且它是默认的 Reporting Services 身份验证方法。只有在 VM 配置的用户可以访问 Reporting Services 并分配给 Reporting Services 角色。
 
@@ -598,13 +599,13 @@
 
 ## 步骤 4：打开 Windows 防火墙端口
 
->[AZURE.NOTE]如果使用了其中一个脚本来配置报表服务器，则可以跳过本节。该脚本包含一个用于打开防火墙端口的步骤。HTTP 默认端口是 80，HTTPS 默认端口是 443。
+>[!NOTE]如果使用了其中一个脚本来配置报表服务器，则可以跳过本节。该脚本包含一个用于打开防火墙端口的步骤。HTTP 默认端口是 80，HTTPS 默认端口是 443。
 
 若要远程连接到虚拟机上的报表管理器或报表服务器，在 VM 上需要 TCP 终结点。在 VM 防火墙中需要打开同一个端口。设置 VM 时创建了该终结点。
 
 本部分提供有关如何打开防火墙端口的基本信息。有关详细信息，请参阅[为报表服务器访问配置防火墙](https://technet.microsoft.com/zh-cn/library/bb934283.aspx)
 
->[AZURE.NOTE]如果使用了脚本来配置报表服务器，则可以跳过本节。该脚本包含一个用于打开防火墙端口的步骤。
+>[!NOTE]如果使用了脚本来配置报表服务器，则可以跳过本节。该脚本包含一个用于打开防火墙端口的步骤。
 
 如果你为非 443 的 HTTPS 配置一个私有端口，请相应地修改下面的脚本。若要打开 Windows 防火墙上的端口 **443**，请完成下列操作：
 
@@ -680,17 +681,17 @@
 
 ## 如果使用的不是 VM，将成本降到最低
 
->[AZURE.NOTE]为了在不使用 Azure 虚拟机时尽可能减少费用，可从 Azure 经典管理门户关闭 VM。如果使用 VM 内的 Windows 电源选项来关闭 VM，仍将为 VM 支付相同的金额。若要减少费用，你需要在 Azure 经典管理门户中关闭 VM。如果你不再需要该 VM，请记住删除 VM 和关联的 .vhd 文件以避免产生存储费用。有关详细信息，请参阅[虚拟机定价详细信息](/pricing/details/virtual-machines/)中的常见问题部分。
+>[!NOTE]为了在不使用 Azure 虚拟机时尽可能减少费用，可从 Azure 经典管理门户关闭 VM。如果使用 VM 内的 Windows 电源选项来关闭 VM，仍将为 VM 支付相同的金额。若要减少费用，你需要在 Azure 经典管理门户中关闭 VM。如果你不再需要该 VM，请记住删除 VM 和关联的 .vhd 文件以避免产生存储费用。有关详细信息，请参阅[虚拟机定价详细信息](https://www.azure.cn/pricing/details/virtual-machines/)中的常见问题部分。
 
 ## 更多信息
 
 ### 资源
 
-- 有关对 SQL Server Business Intelligence 和 SharePoint 2013 进行多服务器部署的相关类似内容，请参阅[在 Azure 虚拟机中部署 SQL Server Business Intelligence](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/)。
+- 有关对 SQL Server Business Intelligence 和 SharePoint 2013 进行多服务器部署的相关类似内容，请参阅[在 Azure 虚拟机中部署 SQL Server Business Intelligence](./virtual-machines-windows-sql-server-iaas-overview.md)。
 
-- 有关在 Azure 虚拟机上部署 SQL Server Business Intelligence 的常规信息，请参阅[在 Azure 虚拟机中部署 SQL Server Business Intelligence](/documentation/articles/virtual-machines-windows-classic-ps-sql-bi/)。
+- 有关在 Azure 虚拟机上部署 SQL Server Business Intelligence 的常规信息，请参阅[在 Azure 虚拟机中部署 SQL Server Business Intelligence](./virtual-machines-windows-classic-ps-sql-bi.md)。
 
-- 有关 Azure 计算费用成本的详细信息，请参阅 [Azure 定价计算器](/pricing/calculator/?scenario=virtual-machines)的“虚拟机”选项卡。
+- 有关 Azure 计算费用成本的详细信息，请参阅 [Azure 定价计算器](https://www.azure.cn/pricing/calculator/?scenario=virtual-machines)的“虚拟机”选项卡。
 
 ### 社区内容
 
@@ -698,6 +699,6 @@
 
 ### 指向 Azure VM 中 SQL Server 的其他资源的链接
 
-[Azure 虚拟机中的 SQL Server 概述](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/)
+[Azure 虚拟机中的 SQL Server 概述](./virtual-machines-windows-sql-server-iaas-overview.md)
 
 <!---HONumber=Mooncake_0104_2016-->

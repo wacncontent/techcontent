@@ -1,25 +1,23 @@
-<properties
-	pageTitle="在 VM 中配置 Oracle 数据防护 | Azure"
-	description="有关如何在 Azure 虚拟机中设置和实施 Oracle 数据防护以实现高可用性和灾难恢复的分步教程。"
-	services="virtual-machines-windows"
-	authors="rickstercdn"
-	manager="timlt"
-	documentationCenter=""
-	tags="azure-service-management"/>  
+---
+title: 在 VM 中配置 Oracle 数据防护 | Azure
+description: 有关如何在 Azure 虚拟机中设置和实施 Oracle 数据防护以实现高可用性和灾难恢复的分步教程。
+services: virtual-machines-windows
+authors: rickstercdn
+manager: timlt
+documentationCenter: 
+tags: azure-service-management
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows"
-	ms.workload="infrastructure-services"
-	ms.date="09/06/2016"
-	wacn.date="10/24/2016"
-	ms.author="rclaus" />  
-
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 09/06/2016
+wacn.date: 10/24/2016
+ms.author: rclaus
+---
 
 #为 Azure 配置 Oracle 数据防护
-
 
 本教程介绍如何在 Azure 虚拟机环境中设置和实施 Oracle 数据防护，以实现高可用性和灾难恢复。本教程着重于非 RAC Oracle 数据库的单向复制。
 
@@ -29,12 +27,9 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 
 此外，本教程假设你满足以下先决条件：
 
-- 已经查看 [Oracle Virtual Machine images - Miscellaneous Considerations](/documentation/articles/virtual-machines-windows-classic-oracle-considerations/)（Oracle 虚拟机映像 - 其他注意事项）主题中的“高可用性和灾难恢复注意事项”部分。Azure 支持独立的 Oracle 数据库实例，但目前不支持 Oracle 真正应用程序群集 (Oracle RAC)。
+- 已经查看 [Oracle Virtual Machine images - Miscellaneous Considerations](./virtual-machines-windows-classic-oracle-considerations.md)（Oracle 虚拟机映像 - 其他注意事项）主题中的“高可用性和灾难恢复注意事项”部分。Azure 支持独立的 Oracle 数据库实例，但目前不支持 Oracle 真正应用程序群集 (Oracle RAC)。
 
-
-- 已在 Azure 中使用由平台提供的同一 Oracle 企业版映像创建了两个虚拟机 (VM)。确保这些虚拟机位于[相同的云服务](/documentation/articles/virtual-machines-windows-load-balance/)和相同的虚拟网络中，可以通过持久性专用 IP 地址相互访问。另外，建议将 VM 放在同一[可用性集](/documentation/articles/virtual-machines-windows-manage-availability/)中，以便 Azure 将它们置于不同的容错域和升级域中。Oracle 数据防护仅适用于 Oracle 数据库企业版。每个虚拟机必须至少具有 2 GB 内存和 5 GB 磁盘空间。有关由平台提供的 VM 大小的最新信息，请参阅 [Virtual Machine Sizes for Azure](/documentation/articles/virtual-machines-windows-sizes/)（Azure 的虚拟机大小）。如果需要为 VM 提供更多的磁盘卷，可以附加更多的磁盘。有关信息，请参阅 [How to Attach a Data Disk to a Virtual Machine](/documentation/articles/virtual-machines-windows-classic-attach-disk/)（如何将数据磁盘附加到虚拟机）。
-
-
+- 已在 Azure 中使用由平台提供的同一 Oracle 企业版映像创建了两个虚拟机 (VM)。确保这些虚拟机位于[相同的云服务](./virtual-machines-windows-load-balance.md)和相同的虚拟网络中，可以通过持久性专用 IP 地址相互访问。另外，建议将 VM 放在同一[可用性集](./virtual-machines-windows-manage-availability.md)中，以便 Azure 将它们置于不同的容错域和升级域中。Oracle 数据防护仅适用于 Oracle 数据库企业版。每个虚拟机必须至少具有 2 GB 内存和 5 GB 磁盘空间。有关由平台提供的 VM 大小的最新信息，请参阅 [Virtual Machine Sizes for Azure](./virtual-machines-windows-sizes.md)（Azure 的虚拟机大小）。如果需要为 VM 提供更多的磁盘卷，可以附加更多的磁盘。有关信息，请参阅 [How to Attach a Data Disk to a Virtual Machine](./virtual-machines-windows-classic-attach-disk.md)（如何将数据磁盘附加到虚拟机）。
 
 - 已在 Azure 经典管理门户中将主 VM 的虚拟机名称设置为“Machine1”，将备用 VM 的虚拟机名称设置为“Machine2”。
 
@@ -80,7 +75,7 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 
 6. 验证物理备用数据库
 
-> [AZURE.IMPORTANT] 本教程已针对以下硬件和软件配置进行设置和测试：
+> [!IMPORTANT] 本教程已针对以下硬件和软件配置进行设置和测试：
 >
 >| | **主数据库** | **备用数据库** |
 >|----------------------|-------------------------------------------|-------------------------------------------|
@@ -139,7 +134,7 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 
 若要将存储日志从主服务器传递并应用到备用服务器，主服务器和备用服务器上的 sys 密码必须完全相同。正因如此，需要在主数据库中创建一个密码文件，并将其复制到备用服务器。
 
->[AZURE.IMPORTANT] 使用 Oracle 数据库 12c 时，可以使用新用户 **SYSDG** 来管理 Oracle 数据防护。有关详细信息，请参阅 [Changes in Oracle Database 12c Release](http://docs.oracle.com/database/121/UNXAR/release_changes.htm#UNXAR404)（Oracle 数据库 12c 版本中的更改）。
+>[!IMPORTANT] 使用 Oracle 数据库 12c 时，可以使用新用户 **SYSDG** 来管理 Oracle 数据防护。有关详细信息，请参阅 [Changes in Oracle Database 12c Release](http://docs.oracle.com/database/121/UNXAR/release_changes.htm#UNXAR404)（Oracle 数据库 12c 版本中的更改）。
 
 此外，请确保已在 Machine1 中定义 ORACLE\_HOME 环境。如果未定义，请使用“环境变量”对话框将它定义为环境变量。若要访问此对话框，请双击控制面板中的“系统”图标启动“系统”实用工具，然后单击“高级”选项卡并选择“环境变量”。若要设置环境变量，请单击“系统变量”下的“新建”按钮。设置环境变量后，请关闭现有的 Windows 命令提示符并打开一个新的。
 
@@ -172,7 +167,6 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 	52428800
 	52428800
 	52428800
-
 
 请注意，52428800 即 50 MB。
 
@@ -266,7 +260,6 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 	log_file_name_convert='TEST_STBY','TEST'
 	# ---------------------------------------------------------------------------------------------
 
-
 前面的语句块包含三个重要设置项：
 -	**LOG\_ARCHIVE\_CONFIG...：**使用此语句定义唯一的数据库 ID。
 -	**LOG\_ARCHIVE\_DEST\_1...：**使用此语句定义本地存档文件夹位置。建议根据数据库存档需要创建一个新目录，并显式使用此语句指定本地存档位置，而不要使用 Oracle 的默认文件夹 %ORACLE\_HOME%\\database\\archive。
@@ -355,7 +348,6 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 	db_file_name_convert='TEST','TEST_STBY'
 	log_file_name_convert='TEST','TEST_STBY'
 
-
 	job_queue_processes=10
 	LOG_ARCHIVE_CONFIG='DG_CONFIG=(TEST,TEST_STBY)'
 	LOG_ARCHIVE_DEST_1='LOCATION=c:\OracleDatabase\TEST_STBY\archives VALID_FOR=(ALL_LOGFILES,ALL_ROLES) DB_UNIQUE_NAME='TEST'
@@ -364,7 +356,6 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 	LOG_ARCHIVE_DEST_STATE_2='ENABLE'
 	LOG_ARCHIVE_FORMAT='%t_%s_%r.arc'
 	LOG_ARCHIVE_MAX_PROCESSES=30
-
 
 前面的语句块包含两个重要设置项：
 
@@ -429,7 +420,6 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 	    )
 	  )
 
-
 ### 在主虚拟机和备用虚拟机上配置 tnsnames.ora，用于保存主数据库和备用数据库的条目
 
 通过远程桌面连接到 Machine1，并根据下面的指定编辑 tnsnames.ora 文件。可在以下文件夹中找到 tnsnames.ora 文件：c:\\OracleDatabase\\product\\11.2.0\\dbhome\_1\\NETWORK\\ADMIN\\。
@@ -476,7 +466,6 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 	    )
 	  )
 
-
 ### 启动侦听器，并检查是否可以从两个虚拟机 tnsping 到两个服务。
 
 在主虚拟机和备用虚拟机中打开新的 Windows 命令提示符并运行以下语句：
@@ -492,7 +481,6 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 	VICE_NAME = test)))
 	OK (0 msec)
 
-
 	C:\Users\DBAdmin>tnsping test_stby
 
 	TNS Ping Utility for 64-bit Windows: Version 11.2.0.1.0 - Production on 14-NOV-2013 06:29:16
@@ -503,7 +491,6 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 	Attempting to contact (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = MACHINE2)(PORT = 1521))) (CONNECT_DATA = (SER
 	VICE_NAME = test_stby)))
 	OK (260 msec)
-
 
 ##在 nomount 状态下启动备用实例
 设置环境，以支持备用虚拟机 (MACHINE2) 上的备用数据库。
@@ -530,13 +517,12 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 	Database Buffers          264241152 bytes
 	Redo Buffers                7036928 bytes
 
-
 ##使用 RMAN 克隆数据库并创建备用数据库
 可以使用恢复管理器实用工具 (RMAN) 生成主数据库的任何备份副本以创建物理备用数据库。
 
 通过远程桌面连接到备用虚拟机 (MACHINE2)，并通过为 TARGET（主数据库，Machine1）和 AUXILLARY（备用数据库，Machine2）实例指定完整连接字符串来运行 RMAN 实用工具。
 
->[AZURE.IMPORTANT] 由于备用服务器计算机中尚无数据库，因此请不要使用操作系统身份验证。
+>[!IMPORTANT] 由于备用服务器计算机中尚无数据库，因此请不要使用操作系统身份验证。
 
 	C:\> RMAN TARGET sys/password@test AUXILIARY sys/password@test_STBY
 
@@ -564,7 +550,6 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 	SHUTDOWN IMMEDIATE;
 	STARTUP MOUNT;
 	ALTER DATABASE OPEN READ ONLY;
-
 
 ##验证物理备用数据库
 本部分介绍如何以管理员身份验证高可用性配置。

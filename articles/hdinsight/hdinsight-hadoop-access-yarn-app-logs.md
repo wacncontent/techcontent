@@ -1,22 +1,22 @@
-<properties
-	pageTitle="以编程方式访问 Hadoop YARN 应用程序日志 | Azure"
-	description="以编程方式访问 HDInsight 中 Hadoop 群集上的应用程序日志。"
-	services="hdinsight"
-	documentationCenter=""
-	tags="azure-portal"
-	authors="mumian" 
-	manager="paulettm"
-	editor="cgronlun"/>
+---
+title: 以编程方式访问 Hadoop YARN 应用程序日志 | Azure
+description: 以编程方式访问 HDInsight 中 Hadoop 群集上的应用程序日志。
+services: hdinsight
+documentationCenter: 
+tags: azure-portal
+authors: mumian
+manager: paulettm
+editor: cgronlun
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/19/2016"
-	wacn.date="12/30/2016"
-	ms.author="jgao"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/19/2016
+wacn.date: 12/30/2016
+ms.author: jgao
+---
 
 # 在基于 Windows 的 HDInsight 上访问 YARN 应用程序日志
 
@@ -24,8 +24,7 @@
 
 ### 先决条件
 
-- 基于 Windows 的 HDInsight 群集。请参阅[在 HDInsight 中创建基于 Windows 的 Hadoop 群集](/documentation/articles/hdinsight-provision-clusters-v1/)。
-
+- 基于 Windows 的 HDInsight 群集。请参阅[在 HDInsight 中创建基于 Windows 的 Hadoop 群集](./hdinsight-provision-clusters-v1.md)。
 
 ## YARN Timeline Server
 
@@ -33,7 +32,6 @@
 
 * 已通过 3.1.1.374 版或更高版本启用存储和检索 HDInsight 群集的通用应用程序信息。
 * Timeline Server 的架构特定应用程序信息组件目前不适用于 HDInsight 群集。
-
 
 通用应用程序信息包含以下类型的数据：
 
@@ -45,7 +43,6 @@
 在 HDInsight 群集上，Azure Resource Manager 将此信息存储到默认存储帐户默认容器中的历史记录存储。可以通过 REST API 检索有关完成应用程序的此类通用数据：
 
     GET on https://<cluster-dns-name>.azurehdinsight.cn/ws/v1/applicationhistory/apps
-
 
 ## <a name="YARNAppsAndLogs"></a> YARN 应用程序和日志
 
@@ -72,7 +69,7 @@ YARN 通过将资源管理与应用程序计划/监视分离，支持多种编�
 
 以下代码说明如何使用新 API 枚举应用程序和下载完成应用程序日志。
 
-> [AZURE.NOTE] 以下 API 仅适用于运行 3.1.1.374 版或更高版本的 Hadoop 群集。添加以下指令：
+> [!NOTE] 以下 API 仅适用于运行 3.1.1.374 版或更高版本的 Hadoop 群集。添加以下指令：
 
 	using Microsoft.Hadoop.Client;
 	using Microsoft.WindowsAzure.Management.HDInsight;
@@ -101,7 +98,6 @@ YARN 通过将资源管理与应用程序计划/监视分离，支持多种编�
 	// Create an Application History client against your cluster
 	IHDInsightApplicationHistoryClient appHistoryClient =
 				cluster.CreateHDInsightApplicationHistoryClient(TimeSpan.FromMinutes(5));
-
 
 现在，可以使用应用程序历史记录客户端列出已完成应用程序，根据条件筛选应用程序，并下载相关的应用程序日志。以下代码片段演示如何以编程方式执行此操作。
 
@@ -154,8 +150,6 @@ YARN 通过将资源管理与应用程序计划/监视分离，支持多种编�
 	{
 	    appHistoryClient.DownloadApplicationLogs(container, downloadLocation);
 	}
-
-
 
 [YARN-timeline-server]: http://hadoop.apache.org/docs/r2.4.0/hadoop-yarn/hadoop-yarn-site/TimelineServer.html
 [log-aggregation]: http://hortonworks.com/blog/simplifying-user-logs-management-and-access-in-yarn/

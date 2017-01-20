@@ -1,32 +1,28 @@
-<properties
-    pageTitle="Azure Active Directory 中的应用、权限和同意 | Azure"
-    description="Azure AD Connect 会将本地目录与 Azure Active Directory 集成。这样便可以为集成到 Azure AD 的 Office 365、Azure 和 SaaS 应用程序提供一个通用标识。"
-    keywords="Azure AD 介绍, 应用, 什么是 Azure AD Connect, 安装 active directory"
-    services="active-directory"
-    documentationcenter=""
-    author="billmath"
-    manager="femila"
-    editor=""/>  
+---
+title: Azure Active Directory 中的应用、权限和同意 | Azure
+description: Azure AD Connect 会将本地目录与 Azure Active Directory 集成。这样便可以为集成到 Azure AD 的 Office 365、Azure 和 SaaS 应用程序提供一个通用标识。
+keywords: Azure AD 介绍, 应用, 什么是 Azure AD Connect, 安装 active directory
+services: active-directory
+documentationcenter: 
+author: billmath
+manager: femila
+editor: 
 
-    
-<tags    
-    ms.assetid="25897cc4-7687-49b6-b0d5-71f51302b6b1"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="11/17/2016"
-    ms.author="billmath" 
-    wacn.date="01/05/2017"/>  
-
+ms.assetid: 25897cc4-7687-49b6-b0d5-71f51302b6b1
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 11/17/2016
+ms.author: billmath
+wacn.date: 01/05/2017
+---
 
 # Azure Active Directory 中的应用、权限和同意
 在 Azure Active Directory 内，可以向目录添加应用程序。可以添加的应用程序因应用程序的类型而异。若要在经典管理门户中查看应用程序，请选择一个目录，然后选择应用程序。
 
 ![](./media/active-directory-apps-permissions-consent/apps1.png)  
-
-
 
 ## 应用类型
 
@@ -34,7 +30,6 @@
 	- **单租户应用**：通常称为业务线 (LOB) 应用。这是指组织内的人员开发自己的应用，并希望组织中的用户能够登录该应用的情况。
 	![](./media/active-directory-apps-permissions-consent/apps2.png)
 	- **应用程序代理应用**：使用 Azure AD 应用程序代理公开本地应用程序时，会在租户（除应用程序代理服务外）中注册单租户应用。此应用代表本地应用程序进行所有云交互（例如，身份验证）。（应用程序代理要求使用 Azure AD Basic 或更高版本。）
-
 
 2. **多租户应用**
 	- **其他用户可以同意的多租户应用**：类似“组织开发的单租户应用”。主要区别（除应用本身的逻辑外）在于，来自其他租户的用户也可以同意并登录该应用。</br>
@@ -52,7 +47,6 @@
 	
 ![](./media/active-directory-apps-permissions-consent/apps6.png)  
 
-
 为了让一个应用（客户端）向另一应用（资源）请求特定权限，资源应用的开发人员会定义存在的权限。在我们的示例中，“Office 365 Exchange Online”资源应用的所有者 Microsoft 已定义名为“以登录用户身份访问邮箱”的权限。
 
 定义权限时，应用开发人员必须定义用户是否可以同意该权限，或是否需要管理员同意。这样一来，开发人员能够允许用户自行同意仅请求低敏感度权限的应用，但需要管理员才能同意更敏感的权限。例如，“Azure Active Directory”资源应用已经过定义，因此，用户可以同意请求有限只读权限的应用。但是，需要管理员同意才能获取完整的读取权限和所有写入权限。
@@ -60,8 +54,6 @@
 本机客户端未经过身份验证，因此，定义为本机客户端应用的应用仅可请求委托的权限。这意味着获取令牌时，必须始终有实际用户的参与。Web 应用和 Web API（保密客户端）在获取访问令牌时，必须始终使用 Azure AD 进行身份验证。这意味着，它们还有可能请求仅限应用的权限。例如，一个后端服务需要向另一个后端服务进行身份验证。请求仅限应用的权限的应用程序始终需要管理员同意。
 
 总结：
-
-
 
 - 应用（客户端）表明所需的其他应用（资源）的权限。
 - 应用（资源）表明向其他应用（客户端）公开的权限。
@@ -75,13 +67,12 @@
 
 ![](./media/active-directory-apps-permissions-consent/apps7.png)  
 
-
 在经典管理门户中，选择“用户可向应用程序授予访问数据的权限”。![](./media/active-directory-apps-permissions-consent/apps8.png)
 
 - 可控制用户是否可以注册自己的单租户 LOB 应用：在经典管理门户中选择“用户可添加集成应用程序”。
 ![](./media/active-directory-apps-permissions-consent/apps9.png)
 
->[AZURE.NOTE]
+>[!NOTE]
 即使允许用户注册单租户 LOB 应用，对于注册对象也存在限制。例如，不是目录管理员的开发人员。
 >
 >- 用户不能让单租户应用成为多租户应用。
@@ -89,16 +80,10 @@
 >- 注册单租户 LOB 应用时，如果委托的权限需要管理员同意，则用户不能向其他应用请求这些权限。
 >- 用户不能对自己不是所有者的应用进行更改。
 
-
-
 - 可控制用户是否可以自行添加使用密码 SSO（又称“密码存储”）的预先集成的应用
 ![](./media/active-directory-apps-permissions-consent/apps10.png)
 
-
-
 - 可控制可以在哪些条件下访问应用程序（即条件访问）。请注意，这同时适用于客户端应用和资源应用。因此，假设设置的条件访问策略是：仅可从合规的计算机访问“Office 365 Exchange Online”应用。此策略还适用于用户尝试使用向 Exchange Online 请求权限的客户端应用的情况。
-
-
 
 - 可看到已同意哪些应用以及正在使用哪些应用。
 

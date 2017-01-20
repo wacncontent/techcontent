@@ -1,32 +1,31 @@
-<properties
-	pageTitle="通知中心本地化的突发新闻教程"
-	description="了解如何使用 Azure 通知中心发送本地化的突发新闻通知。"
-	services="notification-hubs"
-	documentationCenter="windows"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>  
+---
+title: 通知中心本地化的突发新闻教程
+description: 了解如何使用 Azure 通知中心发送本地化的突发新闻通知。
+services: notification-hubs
+documentationCenter: windows
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="11/11/2016" 
-	ms.author="wesmc"/>  
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 11/11/2016
+ms.author: wesmc
+---
 
 # 使用通知中心发送本地化的突发新闻
 
-> [AZURE.SELECTOR]
-- [Windows 应用商店 C#](/documentation/articles/notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification/)
-- [iOS](/documentation/articles/notification-hubs-ios-xplat-localized-apns-push-notification/)
+> [!div class="op_single_selector"]
+- [Windows 应用商店 C#](./notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification.md)
+- [iOS](./notification-hubs-ios-xplat-localized-apns-push-notification.md)
 
 ##概述
 
 本主题演示如何使用 Azure 通知中心的**模板**功能广播已按语言和设备本地化的突发新闻通知。在本教程中，你从在[使用通知中心发送突发新闻]中创建的 Windows 应用商店应用程序开始操作。完成时，你将可以注册感兴趣的突发新闻类别，指定要接收通知的语言并仅接收采用该语言的这些类别的推送通知。
-
 
 此方案包含两个部分：
 
@@ -34,14 +33,11 @@
 
 - 后端使用 Azure 通知中心的**标记**和**模板**功能广播通知。
 
-
-
 ##先决条件
 
 你必须已完成学习[使用通知中心发送突发新闻]教程并具有可用的代码，因为本教程直接围绕该代码展开论述。
 
 你还需要 Visual Studio 2012 或更高版本。
-
 
 ##模板概念
 
@@ -69,10 +65,7 @@
 	  </visual>
 	</toast>
 
-
-
-模板是很强大的功能，你可以在[模板](/documentation/articles/notification-hubs-templates-cross-platform-push-messages/)一文中了解其更多信息。
-
+模板是很强大的功能，你可以在[模板](./notification-hubs-templates-cross-platform-push-messages.md)一文中了解其更多信息。
 
 ##应用程序用户界面
 
@@ -173,7 +166,6 @@
             await dialog.ShowAsync();
         }
 
-
 4. 最后，在 App.xaml.cs 文件中，确保更新 `InitNotificationsAsync` 方法以检索区域设置，并在订阅时使用该区域设置：
 
         private async void InitNotificationsAsync()
@@ -189,12 +181,9 @@
             }
         }
 
-
 ##从后端发送本地化的通知
 
-[AZURE.INCLUDE [notification-hubs-localized-back-end](../../includes/notification-hubs-localized-back-end.md)]
-
-
+[!INCLUDE [notification-hubs-localized-back-end](../../includes/notification-hubs-localized-back-end.md)]
 
 <!-- Anchors. -->
 [Template concepts]: #concepts
@@ -207,12 +196,10 @@
 
 <!-- URLs. -->
 
-
-[使用通知中心发送突发新闻]: /documentation/articles/notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns/
+[使用通知中心发送突发新闻]: ./notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns.md
 
 [Submit an app page]: http://go.microsoft.com/fwlink/p/?LinkID=266582
 [My Applications]: http://go.microsoft.com/fwlink/p/?LinkId=262039
-
 
 [wns object]: http://go.microsoft.com/fwlink/p/?LinkId=260591
 [Notification Hubs Guidance]: http://msdn.microsoft.com/library/jj927170.aspx

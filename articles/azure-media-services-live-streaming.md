@@ -1,14 +1,17 @@
-<properties
-	pageTitle="Azure媒体服务实现视频直播操作手册"
-    description="Azure媒体服务实现视频直播操作手册"
-    services=""
-    documentationCenter=""
-    authors=""
-    manager=""
-    editor=""
-    tags=""/>
+---
+title: Azure媒体服务实现视频直播操作手册
+description: Azure媒体服务实现视频直播操作手册
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags ms.service="multiple" ms.date="" wacn.date="08/10/2016"/>
+ms.service: multiple
+ms.date: 
+wacn.date: 08/10/2016
+---
 
 #Azure 媒体服务实现视频直播操作手册
 我们将为您具体呈现如何通过 Azure 媒体服务实现公开课直播场景。直播前期的准备工作需要大约 1 小时，您需要在开播前提前做好准备工作。具体操作步骤如下：
@@ -31,7 +34,7 @@
 
 4. 安装视频采集程序。
 
-	在 Azure Media Service 进行直播需要一个本地实时编码器的配合。从 Azure 官方文档可以了解到 Elemental Live、FMLE、Telestream Wirecast、NewTek TriCaster [四种编码器的配置方法](/documentation/articles/media-services-live-encoders-overview/)。
+	在 Azure Media Service 进行直播需要一个本地实时编码器的配合。从 Azure 官方文档可以了解到 Elemental Live、FMLE、Telestream Wirecast、NewTek TriCaster [四种编码器的配置方法](./media-services/media-services-live-encoders-overview.md)。
 
 	本例中使用 Telestream Wirecast 7.0.1 软件。 Wirecast 是一款知名的 RTMP 编码器，可实现直播流媒体的捕捉、实时制作和编码，以进行广播。我们将从 USB 摄像头采集的影像发送至 Azure 媒体服务并进行实时直播。[下载 Telestream Wirecast 7.0.1](http://www.telestream.net/wirecast/overview.htm)
 
@@ -43,7 +46,6 @@
 
 	![5](./media/azure-media-services-live-streaming/5.png)
 
- 
 	输入频道名称及说明，选择**标准**表示租户使用 azure 媒体服务的功能以生成自适应码率的流媒体，然后点击对话框右下角的下一步按钮。
 
 	![6](./media/azure-media-services-live-streaming/6.png)
@@ -144,13 +146,13 @@
 
 ![26](./media/azure-media-services-live-streaming/26.png)
 
->[AZURE.NOTE]后续的公开课都可以在已创建的频道直播，只需要再按照 Step 2 的 3、4 操作即可。
+>[!NOTE]后续的公开课都可以在已创建的频道直播，只需要再按照 Step 2 的 3、4 操作即可。
 
 ##Step4: 使用 CDN 为视频直播加速
 
-如果公开课邀请的学员分布地域比较广，并且为了满足不同网络环境的学员都能流畅观看，建议使用 Azure CDN 服务加速您的视频直播， Azure CDN 服务可以将用户请求分配到最优的 CDN 节点，为用户提供高速网络访问的体验。 如何创建并使用 CDN 详见：[流媒体直播加速 CDN 节点创建](/documentation/articles/cdn-how-to-create-LiveStreaming-CDN-endpoint/)和[使用 Azure CDN](/documentation/articles/cdn-how-to-use/)。
+如果公开课邀请的学员分布地域比较广，并且为了满足不同网络环境的学员都能流畅观看，建议使用 Azure CDN 服务加速您的视频直播， Azure CDN 服务可以将用户请求分配到最优的 CDN 节点，为用户提供高速网络访问的体验。 如何创建并使用 CDN 详见：[流媒体直播加速 CDN 节点创建](./cdn/cdn-how-to-create-LiveStreaming-CDN-endpoint.md)和[使用 Azure CDN](./cdn/cdn-how-to-use.md)。
 
 ##常见问题与相关文档
 
-[如何使用AMS进行实时编码](/documentation/articles/media-services-portal-creating-live-encoder-enabled-channel/)
+[如何使用AMS进行实时编码](./media-services/media-services-portal-creating-live-encoder-enabled-channel.md)
 

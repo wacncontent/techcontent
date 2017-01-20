@@ -1,26 +1,25 @@
-<properties
-    pageTitle="在 Azure App Service 中开始使用 Node.js Web 应用 | Azure"
-    description="学习如何将 Node.js 应用程序部署到 Azure App Service 中的 Web 应用。"
-    services="app-service\web"
-    documentationcenter="nodejs"
-    author="cephalin"
-    manager="wpickett"
-    editor="" />  
+---
+title: 在 Azure App Service 中开始使用 Node.js Web 应用 | Azure
+description: 学习如何将 Node.js 应用程序部署到 Azure App Service 中的 Web 应用。
+services: app-service\web
+documentationcenter: nodejs
+author: cephalin
+manager: wpickett
+editor: 
 
-<tags
-    ms.assetid="fb2b90c8-02b6-4700-929b-5de9a35d67cc"
-    ms.service="app-service-web"
-    ms.workload="web"
-    ms.tgt_pltfrm="na"
-    ms.devlang="nodejs"
-    ms.topic="get-started-article"
-    ms.date="12/16/2016"
-    wacn.date="01/03/2017"
-    ms.author="cephalin" />  
-
+ms.assetid: fb2b90c8-02b6-4700-929b-5de9a35d67cc
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: get-started-article
+ms.date: 12/16/2016
+wacn.date: 01/03/2017
+ms.author: cephalin
+---
 
 # 在 Azure App Service 中 Node.js Web 应用入门
-[AZURE.INCLUDE [选项卡](../../includes/app-service-web-get-started-nav-tabs.md)]
+[!INCLUDE [选项卡](../../includes/app-service-web-get-started-nav-tabs.md)]
 
 本教程说明如何创建一个简单的 [Node.js] 应用程序，然后通过 cmd.exe 或 bash 等命令行环境将它部署到 [Azure App Service]。本教程中的说明适用于任何能够运行 Node.js 的操作系统。
 
@@ -28,8 +27,8 @@
 
 可使用以下 CLI 版本之一完成任务：
 
-- [Azure CLI 1.0](/documentation/articles/app-service-web-nodejs-get-started-cli-nodejs/)：用于经典部署模型和资源管理部署模型的 CLI
-- [Azure CLI 2.0（预览版）](/documentation/articles/app-service-web-nodejs-get-started/)：用于资源管理部署模型的下一代 CLI
+- [Azure CLI 1.0](./app-service-web-nodejs-get-started-cli-nodejs.md)：用于经典部署模型和资源管理部署模型的 CLI
+- [Azure CLI 2.0（预览版）](./app-service-web-nodejs-get-started.md)：用于资源管理部署模型的下一代 CLI
 
 ## 先决条件
 * [Node.js]
@@ -68,7 +67,6 @@
    
     根据提示，在浏览器中继续使用具有 Azure 订阅的 Microsoft 帐户登录。
 
-
 3. 设置应用服务的部署用户。稍后使用凭据部署代码。
    
         azure site deployment user set --username <username> --pass <password>
@@ -88,7 +86,7 @@
             port: process.env.port,
         }
    
-    > [AZURE.NOTE] 
+    > [!NOTE] 
     默认情况下，Azure App Service 使用 `production` 环境变量 (`process.env.NODE_ENV="production"`) 运行 Node.js 应用程序。因此，此处的配置让 Azure 中的 Node.js 应用能够在 iisnode 侦听的默认端口上响应 Web 请求。
     >
     >
@@ -113,7 +111,6 @@
     现在，应该会看到 Node.js Web 应用在 Azure App Service 中实时运行。
    
     ![浏览到已部署应用程序的示例。][deployed-express-app]  
-
 
 ## 更新 Node.js Web 应用
 若要更新应用服务中运行的 Node.js Web 应用，只需和首次部署 Web 应用时一样运行 `git add`、`git commit` 和 `git push`。
@@ -154,7 +151,7 @@ Kudu 部署引擎按以下顺序确定要使用哪个 Node.js 引擎：
 
     https://<app_name>.scm.chinacloudsites.cn/api/diagnostics/runtime
 
-> [AZURE.NOTE]
+> [!NOTE]
 建议显式定义所需的 Node.js 引擎。默认的 Node.js 版本可以更改，并且可能会因为默认的 Node.js 版本不适合应用而在 Azure Web 应用中收到错误。
 > 
 > 
@@ -162,7 +159,7 @@ Kudu 部署引擎按以下顺序确定要使用哪个 Node.js 引擎：
 ## <a name="iisnodelog"></a>从 iisnode 获取 stdout 和 stderr 日志
 若要读取 iisnode 日志，请执行以下步骤。
 
-> [AZURE.NOTE]
+> [!NOTE]
 完成这些步骤之后，可能要等到发生错误时才会有日志文件。
 > 
 > 
@@ -193,11 +190,9 @@ Kudu 部署引擎按以下顺序确定要使用哪个 Node.js 引擎：
    
     ![打开 iisnode 日志文件。][iislog-kudu-console-open]  
 
-   
     现在可以查看日志，帮助调试应用服务部署。
    
     ![检查 iisnode 日志文件。][iislog-kudu-console-read]  
-
 
 ## 使用 Node-Inspector 调试应用
 如果使用 Node-Inspector 来调试 Node.js 应用，可将它用于实时应用服务应用。Node-Inspector 已预先安装在应用服务的 iisnode 安装中。如果你通过 Git 部署，则从 Kudu 自动生成的 Web.config 已包含启用 Node-Inspector 所需的所有配置。
@@ -222,36 +217,35 @@ Kudu 部署引擎按以下顺序确定要使用哪个 Node.js 引擎：
         http://{appname}.chinacloudsites.cn/app.js/debug
 
 ## 更多资源
-* [在 Azure 应用程序中指定 Node.js 版本](/documentation/articles/nodejs-specify-node-version-azure-apps/)
-* [Azure 上的 Node.js 应用程序的最佳实践和故障排除指南](/documentation/articles/app-service-web-nodejs-best-practices-and-troubleshoot-guide/)
-* [如何在 Azure App Service 中调试 Node.js Web 应用](/documentation/articles/web-sites-nodejs-debug/)
-* [将 Node.js 模块与 Azure 应用程序一起使用](/documentation/articles/nodejs-use-node-modules-azure-apps/)
+* [在 Azure 应用程序中指定 Node.js 版本](../nodejs-specify-node-version-azure-apps.md)
+* [Azure 上的 Node.js 应用程序的最佳实践和故障排除指南](./app-service-web-nodejs-best-practices-and-troubleshoot-guide.md)
+* [如何在 Azure App Service 中调试 Node.js Web 应用](./web-sites-nodejs-debug.md)
+* [将 Node.js 模块与 Azure 应用程序一起使用](../nodejs-use-node-modules-azure-apps.md)
 * [Azure App Service Web 应用：Node.js](http://blogs.msdn.com/b/silverlining/archive/2012/06/14/windows-azure-websites-node-js.aspx)
 * [Node.js 开发人员中心](/develop/nodejs/)
-* [在 Azure App Service 中开始使用 Web 应用](/documentation/articles/app-service-web-get-started/)
+* [在 Azure App Service 中开始使用 Web 应用](./app-service-web-get-started.md)
 * [探索神秘无比的 Kudu 调试控制台]
 
 <!-- URL List -->
 
-[Azure CLI]: /documentation/articles/xplat-cli-install/
-[Azure App Service]: /documentation/articles/app-service-value-prop-what-is/
+[Azure CLI]: ../xplat-cli-install.md
+[Azure App Service]: ../app-service/app-service-value-prop-what-is.md
 [Bower]: http://bower.io/
-[在 Azure App Service 中使用 Socket.IO 创建 Node.js 聊天应用程序]: /documentation/articles/web-sites-nodejs-chat-app-socketio/
-[将 Sails.js Web 应用部署到 Azure App Service]: /documentation/articles/app-service-web-nodejs-sails/
-[探索神秘无比的 Kudu 调试控制台]: /documentation/articles/aog-web-app-diagnostics-kudu/
+[在 Azure App Service 中使用 Socket.IO 创建 Node.js 聊天应用程序]: ./web-sites-nodejs-chat-app-socketio.md
+[将 Sails.js Web 应用部署到 Azure App Service]: ./app-service-web-nodejs-sails.md
+[探索神秘无比的 Kudu 调试控制台]: ../aog-web-app-diagnostics-kudu.md
 [适用于 Yeoman 的 Express 生成器]: https://github.com/petecoop/generator-express
 [Git]: http://www.git-scm.com/downloads
-[如何将 io.js 与 Azure App Service Web Apps 配合使用]: /documentation/articles/web-sites-nodejs-iojs/
+[如何将 io.js 与 Azure App Service Web Apps 配合使用]: ./web-sites-nodejs-iojs.md
 [iisnode]: https://github.com/tjanczuk/iisnode/wiki
 [MEANJS]: http://meanjs.org/
 [Node.js]: http://nodejs.org
 [SAILSJS]: http://sailsjs.org/
-[注册试用版]: /pricing/1rmb-trial/
-[web app]: /documentation/articles/app-service-web-overview/
+[注册试用版]: https://www.azure.cn/pricing/1rmb-trial/
+[web app]: ./app-service-web-overview.md
 [Yeoman]: http://yeoman.io/
 
 <!-- IMG List -->
-
 
 [deployed-express-app]: ./media/app-service-web-nodejs-get-started/deployed-express-app.png
 [iislog-kudu-console-find]: ./media/app-service-web-nodejs-get-started/iislog-kudu-console-navigate.png

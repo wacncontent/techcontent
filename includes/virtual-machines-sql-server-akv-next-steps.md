@@ -9,7 +9,7 @@
 
 以下 Transact-SQL 脚本提供针对每种形式的示例。
 
->[AZURE.NOTE] 每个示例基于两个先决条件：密钥保管库中名为 **CONTOSO\_KEY** 的非对称密钥，以及 AKV 集成功能创建的名为 **Azure\_EKM\_TDE\_cred** 的凭据。
+>[!NOTE] 每个示例基于两个先决条件：密钥保管库中名为 **CONTOSO\_KEY** 的非对称密钥，以及 AKV 集成功能创建的名为 **Azure\_EKM\_TDE\_cred** 的凭据。
 
 ### 透明数据加密 (TDE)
 1. 创建数据库引擎将用于 TDE 的 SQL Server 登录名，然后向其添加凭据。
@@ -93,6 +93,6 @@
 ## 其他资源
 有关如何使用这些加密功能的详细信息，请参阅[将 EKM 用于 SQL Server 加密功能](https://msdn.microsoft.com/zh-cn/library/dn198405.aspx#UsesOfEKM)。
 
-请注意，本文中的步骤假定你已经具有在 Azure 虚拟机上运行的 SQL Server。如果没有，请参阅[在 Azure 中预配 SQL Server 虚拟机](/documentation/articles/virtual-machines-windows-classic-ps-sql-create/)。有关在 Azure VM 中运行 SQL Server 的其他指南，请参阅 [Azure 虚拟机上的 SQL Server 概述](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/)。
+请注意，本文中的步骤假定你已经具有在 Azure 虚拟机上运行的 SQL Server。如果没有，请参阅[在 Azure 中预配 SQL Server 虚拟机](../articles/virtual-machines/virtual-machines-windows-classic-ps-sql-create.md)。有关在 Azure VM 中运行 SQL Server 的其他指南，请参阅 [Azure 虚拟机上的 SQL Server 概述](../articles/virtual-machines/virtual-machines-windows-sql-server-iaas-overview.md)。
 
 <!---HONumber=Mooncake_0215_2016-->

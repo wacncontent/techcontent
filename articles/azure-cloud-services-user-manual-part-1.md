@@ -1,24 +1,20 @@
-<properties
-	pageTitle="Azure 云服务操作手册 - 第一部分 | Azure"
-	description="Azure 云服务操作手册 - 第一部分 | Azure"
-	services=""
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure 云服务操作手册 - 第一部分 | Azure
+description: Azure 云服务操作手册 - 第一部分 | Azure
+services: 
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="cloud-services"
-	ms.date=""
-	wacn.date="09/21/2016"/>
-
-
+ms.service: cloud-services
+ms.date: 
+wacn.date: 09/21/2016
+---
 
 #Azure 云服务操作手册
 
-[Azure 云服务操作手册 - 第二部分](/documentation/articles/azure-cloud-services-user-manual-part-2/)
-
-
+[Azure 云服务操作手册 - 第二部分](./azure-cloud-services-user-manual-part-2.md)
 
 ##<a id="azure-cloud-services-related-content"></a>1. Azure 云服务相关服务  
 
@@ -63,8 +59,6 @@ Azure 带宽虽然是共享带宽，其价格还是非常具有竞争优势的�
 * 静态的照片文件保存到 Azure Block Blob。
 
 **通过将静态内容请求发送到 Azure Storage，将动态内容的请求发送到 Azure 云主机，就可以大大减少云主机独享带宽的的压力。**
-
-  
 
 ###<a id="azure-cloud-services-what-is"></a>1.2 什么是 Azure 云服务  
 
@@ -369,7 +363,6 @@ D系列虚拟机的类型如下：
 
    通过将静态内容请求发送到 Azure 存储，将动态内容请求发送到 Azure 云主机，可以大大减少云主机独享带宽的压力。
  
-
 ###<a id="azure-cloud-service-cost-analysis"></a>1.9 Azure 云服务成本分析
 
 Azure 云服务按照分钟计费，计费的单价为每小时。  
@@ -412,12 +405,10 @@ Azure 云服务运行时，会收取计算费用；关闭后，继续收取计�
 
 (6) 如果需要保存持久化的文件，一定要使用 Azure 存储！  
 
-
 <!--image reference-->
 [1]: ./media/azure-cloud-services-user-manual-part-1/1.png
 [2]: ./media/azure-cloud-services-user-manual-part-1/2.png
 [3]: ./media/azure-cloud-services-user-manual-part-1/3.png
 [4]: ./media/azure-cloud-services-user-manual-part-1/4.png
 [5]: ./media/azure-cloud-services-user-manual-part-1/5.png
-
 

@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="在发生灾难时恢复移动服务 | Azure"
-	description="了解在发生灾难时如何恢复移动服务。" 
-	services="mobile-services" 
-	documentationCenter="" 
-	authors="christopheranderson" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 在发生灾难时恢复移动服务 | Azure
+description: 了解在发生灾难时如何恢复移动服务。
+services: mobile-services
+documentationCenter: 
+authors: christopheranderson
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="christopheranderson"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: christopheranderson
+---
 
 # 在发生灾难时恢复移动服务
 
@@ -36,7 +36,6 @@
 + **保留辅助移动服务**
 
 	当移动服务发生可用性问题时，你可能需要将它重新部署到备用的 Azure 区域。为确保有可用容量（例如，在极少见的情况下，整个区域都会丢失），建议你在备用区域中创建一个辅助移动服务，并将其模式设置为等同于或者高于主服务的模式。（如果主服务处于基本模式，则你可以将辅助服务设置为基本或标准模式。但如果主服务处于标准模式，则辅助服务也必须处于标准模式。）
-
 
 ## <a name="watch"></a>观察问题的迹象
 
@@ -65,9 +64,9 @@
 
 4. 现在，你可以使用辅助服务来恢复主服务。
 
-	> [AZURE.IMPORTANT]除了迁移文件以外，迁移命令还会将主服务的主机名更新为指向辅助服务，因此客户端应用程序不需要更新。但是，主机名解析为新服务最长需要 30 分钟时间。因此，建议只在灾难恢复方案中使用迁移命令。
+	> [!IMPORTANT]除了迁移文件以外，迁移命令还会将主服务的主机名更新为指向辅助服务，因此客户端应用程序不需要更新。但是，主机名解析为新服务最长需要 30 分钟时间。因此，建议只在灾难恢复方案中使用迁移命令。
 
-	> [AZURE.IMPORTANT]当你执行此步骤中的命令时，将会删除辅助服务，以便能够使用它的容量来恢复主服务。我们建议你在运行该命令之前备份脚本和设置（如果你想要保留的话）。
+	> [!IMPORTANT]当你执行此步骤中的命令时，将会删除辅助服务，以便能够使用它的容量来恢复主服务。我们建议你在运行该命令之前备份脚本和设置（如果你想要保留的话）。
 
     准备就绪后，执行以下命令：
 
@@ -80,7 +79,7 @@
 		info:    Migration complete. It may take 30 minutes for DNS to resolve to the migrated site.
 		info:    mobile migrate command OK
 
-    > [AZURE.NOTE] 完成该命令后，可能需要经过几分钟时间，你才能在 Azure 经典管理门户中看到更改。
+    > [!NOTE] 完成该命令后，可能需要经过几分钟时间，你才能在 Azure 经典管理门户中看到更改。
 
 5. 验证是否已正确恢复所有脚本，方法是将其与源代码管理中的原件进行比较。大多数情况下，脚本会自动恢复且不会丢失数据，但如果你发现存在差异，可以手动恢复该脚本。
 
@@ -89,7 +88,7 @@
 	+ 在 Azure 经典管理门户中，在移动服务的“配置”选项卡上选择“更改数据库”，然后选择刚刚恢复的数据库。
 
 7. 现在，你的移动服务已托管在不同的物理位置。你需要更新发布和/或 git 凭据，以便更新正在运行的站点。
-	+ 如果你使用 **.NET 后端**，请按[发布移动服务](/documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-get-started/#publish-your-mobile-service)中所述重新设置发布配置文件。这会更新发布详细信息，以指向新的服务位置。
+	+ 如果你使用 **.NET 后端**，请按[发布移动服务](./mobile-services-dotnet-backend-windows-store-dotnet-get-started.md#publish-your-mobile-service)中所述重新设置发布配置文件。这会更新发布详细信息，以指向新的服务位置。
 	+ 如果你使用 **Javascript 后端**并通过门户来管理服务，则不需要执行任何附加的操作。
 	+ 如果你使用 **Javascript 后端**并通过节点来管理服务，请更新 git 远程设置以指向新的存储库。为此，请从 git 远程设置中删除 .git 文件路径：
 
@@ -112,10 +111,10 @@
 [SQL 数据库业务连续性指南]: http://msdn.microsoft.com/zh-cn/library/windowsazure/hh852669.aspx
 [Team Foundation Service]: http://tfs.visualstudio.com/
 [Github]: https://github.com/
-[源代码管理功能]: /documentation/articles/mobile-services-store-scripts-source-control/
-[使用 Azure CLI]: /documentation/articles/mobile-services-manage-command-line-interface/
+[源代码管理功能]: ./mobile-services-store-scripts-source-control.md
+[使用 Azure CLI]: ./mobile-services-manage-command-line-interface.md
 [Azure 经典管理门户]: http://manage.windowsazure.cn/
-[Azure 服务仪表板]: /zh-cn/support/service-dashboard/
-[使用 Azure CLI 自动操作移动服务]: /documentation/articles/mobile-services-manage-command-line-interface/
+[Azure 服务仪表板]: https://www.azure.cn/support/service-dashboard/
+[使用 Azure CLI 自动操作移动服务]: ./mobile-services-manage-command-line-interface.md
 
 <!---HONumber=Mooncake_0118_2016-->

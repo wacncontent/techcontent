@@ -1,28 +1,27 @@
-<properties 
-	pageTitle="在 Azure 中备份应用" 
-	description="了解如何在 Azure App Service 中创建应用备份。" 
-	services="app-service" 
-	documentationCenter="" 
-	authors="cephalin" 
-	manager="wpickett" 
-	editor="jimbe"/>
+---
+title: 在 Azure 中备份应用
+description: 了解如何在 Azure App Service 中创建应用备份。
+services: app-service
+documentationCenter: 
+authors: cephalin
+manager: wpickett
+editor: jimbe
 
-<tags 
-	ms.service="app-service" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="07/06/2016" 
-	wacn.date="12/12/2016" 
-	ms.author="cephalin"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/06/2016
+wacn.date: 12/12/2016
+ms.author: cephalin
+---
 
 # 在 Azure 中备份应用
 
+利用 [Azure App Service](../app-service/app-service-value-prop-what-is.md) 中的备份和还原功能，可以轻松地手动或自动创建应用备份。你可以将应用还原到以前的状态，或者基于原始应用的备份之一创建新的应用。
 
-利用 [Azure App Service](/documentation/articles/app-service-value-prop-what-is/) 中的备份和还原功能，可以轻松地手动或自动创建应用备份。你可以将应用还原到以前的状态，或者基于原始应用的备份之一创建新的应用。
-
-有关从备份中还原应用的信息，请参阅 [Restore an app in Azure](/documentation/articles/web-sites-restore/)（在 Azure 中还原应用）。
+有关从备份中还原应用的信息，请参阅 [Restore an app in Azure](./web-sites-restore.md)（在 Azure 中还原应用）。
 
 ## <a name="whatsbackedup"></a>备份的内容 
 应用服务可备份以下信息：
@@ -33,11 +32,11 @@
 
 此信息会备份到你指定的 Azure 存储帐户和容器。
 
-> [AZURE.NOTE] 每个备份都是你的应用的完整脱机副本，而不是增量更新。
+> [!NOTE] 每个备份都是你的应用的完整脱机副本，而不是增量更新。
 
 ## <a name="requirements"></a>要求和限制
 
-* 备份和还原功能要求应用服务计划位于**标准**层或更高层。有关缩放应用服务计划以使用更高层的详细信息，请参阅 [Scale up an app in Azure](/documentation/articles/web-sites-scale/)（增加 Azure 中的应用）。请注意，相比于**标准**层，**高级**层每日允许更多备份量。
+* 备份和还原功能要求应用服务计划位于**标准**层或更高层。有关缩放应用服务计划以使用更高层的详细信息，请参阅 [Scale up an app in Azure](./web-sites-scale.md)（增加 Azure 中的应用）。请注意，相比于**标准**层，**高级**层每日允许更多备份量。
 * 在与要备份的应用相同的订阅中，需要有一个 Azure 存储帐户和容器。有关 Azure 存储帐户的详细信息，请参阅本文结尾处的[链接](#moreaboutstorage)。
 * 最多可备份 10GB 的应用和数据库内容。如果备份大小超过此限制，将会出错。
 
@@ -47,7 +46,7 @@
 	
 	![“备份”页面][ChooseBackupsPage]
 
-	>[AZURE.NOTE] 若显示以下消息，请单击该消息升级应用服务计划，然后才能继续备份。有关详细信息，请参阅[增加 Azure 中的应用](/documentation/articles/web-sites-scale/)。![选择存储帐户](./media/web-sites-backup/01UpgradePlan.png)
+	>[!NOTE] 若显示以下消息，请单击该消息升级应用服务计划，然后才能继续备份。有关详细信息，请参阅[增加 Azure 中的应用](./web-sites-scale.md)。![选择存储帐户](./media/web-sites-backup/01UpgradePlan.png)
 
 3. 在“备份”边栏选项卡中，单击“存储: 未配置”来配置存储帐户。
 
@@ -61,7 +60,7 @@
 
 	![选择存储帐户](./media/web-sites-backup/03ConfigureDatabase.png)
 
-	> [AZURE.NOTE] 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
+	> [!NOTE] 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
 
 6. 在“配置备份设置”边栏选项卡上，单击“保存”。
 
@@ -91,7 +90,7 @@
 
 	![选择存储帐户](./media/web-sites-backup/03ConfigureDatabase.png)
 
-	> [AZURE.NOTE] 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
+	> [!NOTE] 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
 
 6. 在“配置备份设置”边栏选项卡上，单击“保存”。
 
@@ -99,7 +98,7 @@
 
 有时你不想备份应用中的所有内容。以下是一些示例：
 
--	你[设置每周备份](/documentation/articles/web-sites-backup/#configure-automated-backups)应用，其中包含永远不会更改的静态内容，例如旧的博客文章或图映像。
+-	你[设置每周备份](./web-sites-backup.md#configure-automated-backups)应用，其中包含永远不会更改的静态内容，例如旧的博客文章或图映像。
 -	应用的内容超过 10GB（这是一次可以备份的最大数量）。
 -	你不想备份日志文件。
 
@@ -123,7 +122,7 @@
 		D:\home\site\wwwroot\Images\2014
 		D:\home\site\wwwroot\Images\brand.png
 
-	[AZURE.NOTE] 最后一行显示了你可以排除单个文件以及文件夹。
+	[!NOTE] 最后一行显示了你可以排除单个文件以及文件夹。
 
 2. 创建名为 `_backup.filter` 的文件并将上述列表放在文件中，但删除 `D:\home`。每行列出一个目录或文件。文件的内容应为：
 
@@ -133,13 +132,13 @@
 	    \site\wwwroot\Images\2014
 	    \site\wwwroot\Images\brand.png
 
-3. 使用 [ftp](/documentation/articles/web-sites-deploy/#ftp) 或任何其他方法将此文件上载到站点的 `D:\home\site\wwwroot` 目录。如果你愿意，可以直接在 `http://{yourapp}.scm.chinacloudsites.cn/DebugConsole` 中创建文件并在那里插入内容。
+3. 使用 [ftp](./web-sites-deploy.md#ftp) 或任何其他方法将此文件上载到站点的 `D:\home\site\wwwroot` 目录。如果你愿意，可以直接在 `http://{yourapp}.scm.chinacloudsites.cn/DebugConsole` 中创建文件并在那里插入内容。
 
 4. 采用通常使用的相同方式运行备份，即[手动](#create-a-manual-backup)或[自动](#configure-automated-backups)。
 
 现在，`_backup.filter` 中指定的所有文件和文件夹都会从备份中排除。在此示例中，将不再对日志文件，2013 年和 2014 年的映像文件以及 brand.png 进行备份。
 
->[AZURE.NOTE] 采用[还原定期备份](/documentation/articles/web-sites-restore/)的相同方式还原站点的部分备份。还原过程会执行正确的操作。<p>还原完整备份后，站点上的所有内容都被替换为备份中的所有内容。如果文件在站点上但不在备份中，则会将其删除。但是，还原部分备份时，位于其中一个黑名单目录或任何黑名单文件中的任何内容都保持不变。
+>[!NOTE] 采用[还原定期备份](./web-sites-restore.md)的相同方式还原站点的部分备份。还原过程会执行正确的操作。<p>还原完整备份后，站点上的所有内容都被替换为备份中的所有内容。如果文件在站点上但不在备份中，则会将其删除。但是，还原部分备份时，位于其中一个黑名单目录或任何黑名单文件中的任何内容都保持不变。
 
 ## <a name="aboutbackups" id="moreaboutstorage"></a>如何存储备份
 
@@ -147,13 +146,12 @@
 
 应用的数据库备份存储在 .zip 文件的根目录中。对于 SQL 数据库，这是 BACPAC 文件（无文件扩展名），并且可以导入。若要基于 BACPAC 导出创建新的 SQL 数据库，请参阅[导入 BACPAC 文件以创建新的用户数据库](http://technet.microsoft.com/zh-cn/library/hh710052.aspx)。
 
-> [AZURE.WARNING] 改动“websitebackups”容器中的任何文件都会导致备份无效，进而无法还原。
+> [!WARNING] 改动“websitebackups”容器中的任何文件都会导致备份无效，进而无法还原。
 
 ## <a name="nextsteps"></a>后续步骤
-有关从备份中还原应用的信息，请参阅 [Restore an app in Azure](/documentation/articles/web-sites-restore/)（在 Azure 中还原应用）。还可使用 REST API 备份和还原应用服务应用（请参阅 [使用 REST 备份和还原应用服务应用](/documentation/articles/websites-csm-backup/)）。
+有关从备份中还原应用的信息，请参阅 [Restore an app in Azure](./web-sites-restore.md)（在 Azure 中还原应用）。还可使用 REST API 备份和还原应用服务应用（请参阅 [使用 REST 备份和还原应用服务应用](./websites-csm-backup.md)）。
 
->[AZURE.NOTE] 若要开始使用 Azure，请参阅 [Azure 试用版](/pricing/1rmb-trial/)。
-
+>[!NOTE] 若要开始使用 Azure，请参阅 [Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 
 <!-- IMAGES -->
 [ChooseBackupsPage]: ./media/web-sites-backup/01ChooseBackupsPage.png
@@ -170,5 +168,4 @@
 [LogsFolder]: ./media/web-sites-backup/12Logs.png
 [GhostUpgradeWarning]: ./media/web-sites-backup/13GhostUpgradeWarning.png
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

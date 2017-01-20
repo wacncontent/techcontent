@@ -1,23 +1,22 @@
-<properties
-    pageTitle="将 Azure 存储用于 Jenkins 持续集成解决方案 | Azure"
-    description="本教程演示如何使用 Azure Blob 服务作为 Jenkins 持续集成解决方案所创建生成项目的存储库。"
-    services="storage"
-    documentationcenter="java"
-    author="dineshmurthy"
-    manager="jahogg"
-    editor="tysonn" />  
+---
+title: 将 Azure 存储用于 Jenkins 持续集成解决方案 | Azure
+description: 本教程演示如何使用 Azure Blob 服务作为 Jenkins 持续集成解决方案所创建生成项目的存储库。
+services: storage
+documentationcenter: java
+author: dineshmurthy
+manager: jahogg
+editor: tysonn
 
-<tags
-    ms.assetid="f4e5ca75-f6cb-4f74-981b-2aa06bb8de45"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="10/18/2016"
-    wacn.date="12/05/2016"
-    ms.author="dinesh" />  
-
+ms.assetid: f4e5ca75-f6cb-4f74-981b-2aa06bb8de45
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: Java
+ms.topic: article
+ms.date: 10/18/2016
+wacn.date: 12/05/2016
+ms.author: dinesh
+---
 
 # 将 Azure 存储用于 Jenkins 持续集成解决方案
 ## 概述
@@ -54,7 +53,7 @@ Jenkins 通过允许开发人员轻松地集成其代码更改以及自动和频
      
       虽然典型 Jenkins CI 解决方案将设置为作为一个服务运行，但在本教程中，通过命令行运行 Jenkins war 就足够了。
 - Azure 帐户。注册 Azure 帐户的位置位于 <http://www.azure.cn>。
-- Azure 存储帐户。如果你还没有存储帐户，则可使用[创建存储帐户](/documentation/articles/storage-create-storage-account/#create-a-storage-account)中的步骤创建一个。
+- Azure 存储帐户。如果你还没有存储帐户，则可使用[创建存储帐户](./storage-create-storage-account.md#create-a-storage-account)中的步骤创建一个。
 - 建议（但不要求）熟悉 Jenkins CI 解决方案，因为以下内容将使用基本示例，演示使用 Blob 服务作为 Jenkins CI 生成项目的存储库时所需的步骤。
 
 ## 如何将 Blob 服务用于 Jenkins CI
@@ -101,7 +100,7 @@ Jenkins 通过允许开发人员轻松地集成其代码更改以及自动和频
    
     在你为“执行 Windows 批处理命令”输入脚本的“命令”部分下方，有一个指向 Jenkins 识别的环境变量的链接。单击此链接可了解环境变量名称和说明。请注意，不允许将包含特殊字符的环境变量（如 **BUILD\_URL** 环境变量）用作容器名称或通用虚拟路径。
 
-8. 对于此示例，请单击“默认将新容器设为公开的”。（若要使用私有容器，需创建共享访问签名以允许访问。这超出了本主题的范围。可以在[创建共享访问签名 (SAS)](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)中了解有关共享访问签名的详细信息。
+8. 对于此示例，请单击“默认将新容器设为公开的”。（若要使用私有容器，需创建共享访问签名以允许访问。这超出了本主题的范围。可以在[创建共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)中了解有关共享访问签名的详细信息。
 9. [可选]如果你希望在上载生成项目之前清除容器的内容，请单击“在上载前清除容器”（如果你不希望清除容器的内容，则使该复选框保持未选中状态）。
 10. 对于“要上传的项目列表”，请输入 **text/*.txt**。
 11. 在本教程中，对于“已上载项目的通用虚拟路径”，请输入 **${BUILD\_ID}/${BUILD\_NUMBER}**。

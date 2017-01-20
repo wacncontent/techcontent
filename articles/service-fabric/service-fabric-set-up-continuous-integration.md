@@ -1,20 +1,21 @@
-<properties
-   pageTitle="Service Fabric 的持续集成 | Azure"
-   description="大致了解如何使用 Visual Studio Team Services (VSTS) 为 Service Fabric 应用程序设置持续集成。"
-   services="service-fabric"
-   documentationCenter="na"
-   authors="mthalman-msft"
-   manager="timlt"
-   editor="" />
-<tags
-   ms.service="multiple"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="multiple"
-   ms.date="08/01/2016"
-   wacn.date="01/04/2017"
-   ms.author="mthalman" />
+---
+title: Service Fabric 的持续集成 | Azure
+description: 大致了解如何使用 Visual Studio Team Services (VSTS) 为 Service Fabric 应用程序设置持续集成。
+services: service-fabric
+documentationCenter: na
+authors: mthalman-msft
+manager: timlt
+editor: 
+
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 08/01/2016
+wacn.date: 01/04/2017
+ms.author: mthalman
+---
 
 # 使用 Visual Studio Team Services 为 Service Fabric 应用程序设置持续集成
 
@@ -30,18 +31,18 @@
 
 2. 确保你有权访问 Team Services 团队项目，否则请自行[创建一个](https://www.visualstudio.com/docs/setup-admin/create-team-project)。
 
-3. 确保你有一个可以向其部署应用程序的 Service Fabric 群集，或者使用 [Azure Resource Manager 模板](/documentation/articles/service-fabric-cluster-creation-via-arm/)或 [Visual Studio](/documentation/articles/service-fabric-cluster-creation-via-visual-studio/) 创建一个。
+3. 确保你有一个可以向其部署应用程序的 Service Fabric 群集，或者使用 [Azure Resource Manager 模板](./service-fabric-cluster-creation-via-arm.md)或 [Visual Studio](./service-fabric-cluster-creation-via-visual-studio.md) 创建一个。
 
 4. 确保已创建 Service Fabric 应用程序 (.sfproj) 项目。必须具有使用 Service Fabric SDK 2.1 或更高版本创建或升级的项目（.sfproj 文件应包含 1.1 或更高的 ProjectVersion 属性值）。
 
->[AZURE.NOTE] 不再需要自定义生成代理。Team Services 托管代理现在预装了 Service Fabric 群集管理软件，因此可以直接从这些代理部署应用程序。
+>[!NOTE] 不再需要自定义生成代理。Team Services 托管代理现在预装了 Service Fabric 群集管理软件，因此可以直接从这些代理部署应用程序。
 
 ## 配置和共享源文件
 
 你首先要做的事就是准备一个发布配置文件，供将要在 Team Services 中执行的部署进程使用。应将发布配置文件配置为针对此前已准备好的群集：
 
-1.	在应用程序项目中选择一个发布配置文件，以便将其用于持续集成工作流，然后按照[发布说明](/documentation/articles/service-fabric-publish-app-remote-cluster/)将应用程序发布到远程群集。不过，你实际上不需要发布你的应用程序。正确地完成配置操作以后，单击发布对话框中的“保存”超链接即可。
-2.	如果你希望每次在 Team Services 中进行部署时都升级应用程序，则需对发布配置文件进行配置，使之允许升级。在步骤 1 所使用的同一个发布对话框中，确保已勾选“升级应用程序”复选框。详细了解如何[配置其他升级设置](/documentation/articles/service-fabric-visualstudio-configure-upgrade/)。单击“保存”超链接，将设置保存到发布配置文件。
+1.	在应用程序项目中选择一个发布配置文件，以便将其用于持续集成工作流，然后按照[发布说明](./service-fabric-publish-app-remote-cluster.md)将应用程序发布到远程群集。不过，你实际上不需要发布你的应用程序。正确地完成配置操作以后，单击发布对话框中的“保存”超链接即可。
+2.	如果你希望每次在 Team Services 中进行部署时都升级应用程序，则需对发布配置文件进行配置，使之允许升级。在步骤 1 所使用的同一个发布对话框中，确保已勾选“升级应用程序”复选框。详细了解如何[配置其他升级设置](./service-fabric-visualstudio-configure-upgrade.md)。单击“保存”超链接，将设置保存到发布配置文件。
 3.	确保将更改保存到发布配置文件以后，即可取消发布对话框。
 4.	现在可以在 Team Services 中[共享应用程序项目源文件](https://www.visualstudio.com/docs/setup-admin/team-services/connect-to-visual-studio-team-services#vs)。能够在 Team Services 中访问源文件以后，即可转到下一步，即创建生成。
 

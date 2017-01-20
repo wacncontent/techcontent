@@ -1,25 +1,22 @@
-<properties
-	pageTitle="基于 Azure VM 创建 VM 映像 | Azure"
-	description="了解如何基于 Resource Manager 部署模型中创建的现有 Azure VM 创建通用化 VM 映像"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="cynthn"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 基于 Azure VM 创建 VM 映像 | Azure
+description: 了解如何基于 Resource Manager 部署模型中创建的现有 Azure VM 创建通用化 VM 映像
+services: virtual-machines-windows
+documentationCenter: 
+authors: cynthn
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/10/2016"
-	wacn.date="01/05/2017"
-	ms.author="cynthn"/>  
-
-
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 10/10/2016
+wacn.date: 01/05/2017
+ms.author: cynthn
+---
 
 # 下载 VM 模板
 
@@ -51,6 +48,6 @@ template.json 文件是模板。
 
 ## 后续步骤
 
-若要详细了解如何使用模板部署资源，请参阅 [Resource Manager template walkthrough](/documentation/articles/resource-manager-template-walkthrough/)（Resource Manager 模板演练）。
+若要详细了解如何使用模板部署资源，请参阅 [Resource Manager template walkthrough](../azure-resource-manager/resource-manager-template-walkthrough.md)（Resource Manager 模板演练）。
 
 <!---HONumber=Mooncake_1114_2016-->

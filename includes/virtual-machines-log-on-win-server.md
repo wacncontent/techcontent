@@ -1,4 +1,11 @@
-<properties services="virtual-machines" title="How to Log on to a Virtual Machine Running Windows Server" authors="cynthn" solutions="" manager="timlt" editor="tysonn" />
+---
+services: virtual-machines
+title: How to Log on to a Virtual Machine Running Windows Server
+authors: cynthn
+solutions: 
+manager: timlt
+editor: tysonn
+---
 
 4. 单击“连接”创建和下载远程桌面协议文件（.rdp 文件）。单击“打开”以使用此文件。
 

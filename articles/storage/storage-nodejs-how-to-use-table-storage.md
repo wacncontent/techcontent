@@ -1,38 +1,38 @@
-<properties
-    pageTitle="如何通过 Node.js 使用 Azure 表存储 | Azure"
-    description="使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。"
-    services="storage"
-    documentationcenter="nodejs"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="fc2e33d2-c5da-4861-8503-53fdc25750de"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="nodejs"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 如何通过 Node.js 使用 Azure 表存储 | Azure
+description: 使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。
+services: storage
+documentationcenter: nodejs
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: fc2e33d2-c5da-4861-8503-53fdc25750de
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 如何通过 Node.js 使用 Azure 表存储
-[AZURE.INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
-
+[!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 
 ## 概述
 本主题将演示如何使用 Node.js 应用程序中的 Azure 表服务执行常见方案。
 
 本主题中的代码示例假定用户已拥有 Node.js 应用程序。有关如何在 Azure 中创建 Node.js 应用程序的信息，请参阅以下任何主题：
 
-- [在 Azure App Service 中创建 Node.js Web 应用](/documentation/articles/web-sites-nodejs-develop-deploy-mac/)
-- [使用 WebMatrix 构建 Node.js Web 应用并将其部署到 Azure](/documentation/articles/web-sites-nodejs-use-webmatrix/)
-- [生成 Node.js 应用程序并将其部署到 Azure 云服务](/documentation/articles/cloud-services-nodejs-develop-deploy-app/)（使用 Windows PowerShell）
+- [在 Azure App Service 中创建 Node.js Web 应用](../app-service-web/web-sites-nodejs-develop-deploy-mac.md)
+- [使用 WebMatrix 构建 Node.js Web 应用并将其部署到 Azure](../app-service-web/web-sites-nodejs-use-webmatrix.md)
+- [生成 Node.js 应用程序并将其部署到 Azure 云服务](../cloud-services/cloud-services-nodejs-develop-deploy-app.md)（使用 Windows PowerShell）
 
-[AZURE.INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
+[!INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建用于访问 Azure 存储的应用程序
 若要使用 Azure 存储，需要 Azure Storage SDK for Node.js，其中包括一组便于与存储 REST 服务进行通信的库。
@@ -112,7 +112,7 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 	  dueDate: {'_':new Date(2015, 6, 20), '$':'Edm.DateTime'}
 	};
 
-> [AZURE.NOTE] 每个记录还有一个“时间戳”字段，在插入或更新实体时，Azure 会设置该字段。
+> [!NOTE] 每个记录还有一个“时间戳”字段，在插入或更新实体时，Azure 会设置该字段。
 
 还可以使用 **entityGenerator** 来创建实体。下面的示例使用 **entityGenerator** 来创建相同的任务实体。
 
@@ -138,7 +138,7 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 	{ '.metadata': { etag: 'W/"datetime\'2015-02-25T01%3A22%3A22.5Z\'"' } }
 
-> [AZURE.NOTE] 默认情况下，**insertEntity** 不会在 `response` 信息中返回插入的实体。如果计划对此实体执行其他操作，或者希望对信息进行缓存，则可在 `result` 中返回该实体。可以通过启用 **echoContent** 来执行此操作，如下所示：
+> [!NOTE] 默认情况下，**insertEntity** 不会在 `response` 信息中返回插入的实体。如果计划对此实体执行其他操作，或者希望对信息进行缓存，则可在 `result` 中返回该实体。可以通过启用 **echoContent** 来执行此操作，如下所示：
 >
 > `tableSvc.insertEntity('mytable', task, {echoContent: true}, function (error, result, response) {...}`
 
@@ -159,7 +159,7 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 	  }
 	});
 
-> [AZURE.NOTE] 默认情况下，更新某个实体时，不会查看要更新的数据是否曾被其他进程更新过。若要支持并发更新，请执行以下步骤：
+> [!NOTE] 默认情况下，更新某个实体时，不会查看要更新的数据是否曾被其他进程更新过。若要支持并发更新，请执行以下步骤：
 >
 > 1. 获取要更新的对象的 ETag。对于任何实体相关操作，该 ETag 将在 `response` 中返回，并且可通过 `response['.metadata'].etag` 检索。
 > 2. 对某个实体执行更新操作时，请将以前检索的 ETag 信息添加到新的实体。例如：
@@ -271,7 +271,7 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 	  }
 	});
 
-> [AZURE.NOTE] 考虑在删除项时使用 ETag，以确保项尚未被其他进程修改。请参阅[更新实体](#update-an-entity)了解如何使用 ETag。
+> [!NOTE] 考虑在删除项时使用 ETag，以确保项尚未被其他进程修改。请参阅[更新实体](#update-an-entity)了解如何使用 ETag。
 
 ## 删除表
 以下代码从存储帐户中删除一个表。
@@ -291,7 +291,6 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 在查询时，在查询对象实例和回调函数之间可能会提供继续标记参数：
 
-
 	var nextContinuationToken = null;
 	dc.table.queryEntities(tableName,
 	    query,
@@ -306,7 +305,6 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 	        }
 
 	    });
-
 
 如果检查 `continuationToken` 对象，就会发现 `nextPartitionKey`、`nextRowKey` 和 `targetLocation` 等属性可用于循环访问所有结果。
 
@@ -399,11 +397,11 @@ ACL 是使用一组访问策略实施的，每个策略都有一个关联的 ID�
   [using the REST API]: http://msdn.microsoft.com/zh-cn/library/azure/hh264518.aspx
   [Azure Portal]: portal.azure.cn
 
-  [Node.js Cloud Service]: /documentation/articles/cloud-services-nodejs-develop-deploy-app/
+  [Node.js Cloud Service]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
   [Azure Storage Team Blog]: http://blogs.msdn.com/b/windowsazurestorage/
-  [ Website with WebMatrix]: /documentation/articles/web-sites-nodejs-use-webmatrix/
-  [Node.js Cloud Service with Storage]: /documentation/articles/storage-nodejs-use-table-storage-cloud-service-app/
-  [使用 Azure 表服务的 Node.js Web 应用]: /documentation/articles/storage-nodejs-use-table-storage-web-site/
-  [Create and deploy a Node.js application to an Azure website]: /documentation/articles/web-sites-nodejs-develop-deploy-mac/
+  [ Website with WebMatrix]: ../app-service-web/web-sites-nodejs-use-webmatrix.md
+  [Node.js Cloud Service with Storage]: ./storage-nodejs-use-table-storage-cloud-service-app.md
+  [使用 Azure 表服务的 Node.js Web 应用]: ../app-service-web/storage-nodejs-use-table-storage-web-site.md
+  [Create and deploy a Node.js application to an Azure website]: ../app-service-web/web-sites-nodejs-develop-deploy-mac.md
 
 <!---HONumber=Mooncake_0103_2017-->

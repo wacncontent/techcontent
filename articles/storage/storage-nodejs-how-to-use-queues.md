@@ -1,33 +1,34 @@
-<properties
-    pageTitle="如何通过 Node.js 使用队列存储 | Azure"
-    description="了解如何使用 Azure 队列服务创建和删除队列，以及插入、获取和删除消息。相关示例是使用 Node.js 编写的。"
-    services="storage"
-    documentationcenter="nodejs"
-    author="robinsh"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="a8a92db0-4333-43dd-a116-28b3147ea401"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="nodejs"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="robinsh" />
+---
+title: 如何通过 Node.js 使用队列存储 | Azure
+description: 了解如何使用 Azure 队列服务创建和删除队列，以及插入、获取和删除消息。相关示例是使用 Node.js 编写的。
+services: storage
+documentationcenter: nodejs
+author: robinsh
+manager: timlt
+editor: tysonn
+
+ms.assetid: a8a92db0-4333-43dd-a116-28b3147ea401
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: robinsh
+---
 
 # 如何通过 Node.js 使用队列存储
 
-[AZURE.INCLUDE [storage-selector-queue-include](../../includes/storage-selector-queue-include.md)]
+[!INCLUDE [storage-selector-queue-include](../../includes/storage-selector-queue-include.md)]
 
 ## 概述
 
 本指南演示如何使用 Azure 队列服务执行常见任务。相关示例是使用 Node.js API 编写的。介绍的方案包括“插入”、“扫视”、“获取”和“删除”队列消息以及“创建”和“删除”队列。
 
-[AZURE.INCLUDE [storage-queue-concepts-include](../../includes/storage-queue-concepts-include.md)]
+[!INCLUDE [storage-queue-concepts-include](../../includes/storage-queue-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建 Node.js 应用程序
 创建一个空的 Node.js 应用程序。有关创建 Node.js 应用程序的说明，请参阅[在 Azure App Service 中创建 Node.js Web 应用]、[使用 Windows PowerShell 生成 Node.js 应用程序并将其部署到 Azure 云服务]或[使用 Web Matrix 生成 Node.js Web 应用并将其部署到 Azure]。
@@ -122,7 +123,7 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 `result` 包含该消息。
 
-> [AZURE.NOTE] 在队列中没有消息时使用 **peekMessages** 不会返回错误，但也不会返回消息。
+> [!NOTE] 在队列中没有消息时使用 **peekMessages** 不会返回错误，但也不会返回消息。
 
 ## 如何：取消对下一条消息的排队
 
@@ -146,9 +147,9 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 	  }
 	});
 
-> [AZURE.NOTE] 默认情况下，一条消息只会隐藏 30 秒，然后其他客户端就可以看见它。可以将 `options.visibilityTimeout` 与 **getMessages** 配合使用，以指定其他值。
+> [!NOTE] 默认情况下，一条消息只会隐藏 30 秒，然后其他客户端就可以看见它。可以将 `options.visibilityTimeout` 与 **getMessages** 配合使用，以指定其他值。
 
-> [AZURE.NOTE] 在队列中没有消息时使用 **getMessages** 不会返回错误，但也不会返回消息。
+> [!NOTE] 在队列中没有消息时使用 **getMessages** 不会返回错误，但也不会返回消息。
 
 ## 如何：更改已排队消息的内容
 
@@ -308,19 +309,16 @@ ACL 是使用一组访问策略实施的，每个策略都有一个关联的 ID�
   [Azure Storage SDK for Node]: https://github.com/Azure/azure-storage-node
   [using the REST API]: http://msdn.microsoft.com/zh-cn/library/azure/hh264518.aspx
   [Azure Portal]: https://portal.azure.cn
-  [在 Azure App Service 中创建 Node.js Web 应用]: /documentation/articles/web-sites-nodejs-develop-deploy-mac/
-  [Node.js Cloud Service with Storage]: /documentation/articles/storage-nodejs-use-table-storage-cloud-service-app/
-  [使用 Azure 表服务的 Node.js Web 应用]: /documentation/articles/storage-nodejs-use-table-storage-web-site/
+  [在 Azure App Service 中创建 Node.js Web 应用]: ../app-service-web/web-sites-nodejs-develop-deploy-mac.md
+  [Node.js Cloud Service with Storage]: ./storage-nodejs-use-table-storage-cloud-service-app.md
+  [使用 Azure 表服务的 Node.js Web 应用]: ../app-service-web/storage-nodejs-use-table-storage-web-site.md
 
-  
   [Queue1]: ./media/storage-nodejs-how-to-use-queues/queue1.png
   [plus-new]: ./media/storage-nodejs-how-to-use-queues/plus-new.png
   [quick-create-storage]: ./media/storage-nodejs-how-to-use-queues/quick-storage.png
 
-
-
-  [使用 Windows PowerShell 生成 Node.js 应用程序并将其部署到 Azure 云服务]: /documentation/articles/cloud-services-nodejs-develop-deploy-app/
+  [使用 Windows PowerShell 生成 Node.js 应用程序并将其部署到 Azure 云服务]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
   [Azure 存储团队博客]: http://blogs.msdn.com/b/windowsazurestorage/
-  [使用 Web Matrix 生成 Node.js Web 应用并将其部署到 Azure]: /documentation/articles/web-sites-nodejs-use-webmatrix/
+  [使用 Web Matrix 生成 Node.js Web 应用并将其部署到 Azure]: ../app-service-web/web-sites-nodejs-use-webmatrix.md
 
 <!---HONumber=Mooncake_0103_2017-->

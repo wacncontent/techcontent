@@ -1,22 +1,21 @@
-<properties
-   pageTitle="优化 Hive 查询以便在 HDInsight 中更快地执行 | Azure"
-   description="了解如何在 HDInsight 中优化 Hive 查询"
-   services="hdinsight"
-   documentationCenter=""
-   authors="rashimg"
-   manager="mwinkle"
-   editor="cgronlun"/>
+---
+title: 优化 Hive 查询以便在 HDInsight 中更快地执行 | Azure
+description: 了解如何在 HDInsight 中优化 Hive 查询
+services: hdinsight
+documentationCenter: 
+authors: rashimg
+manager: mwinkle
+editor: cgronlun
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="07/28/2015"
-   wacn.date="12/16/2016"
-   ms.author="rashimg"/>
-
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 07/28/2015
+wacn.date: 12/16/2016
+ms.author: rashimg
+---
 
 # 在 Hdinsight 中优化 Hadoop 的 Hive 查询
 
@@ -26,20 +25,19 @@
 
 增加群集中的辅助节点数目，即可利用更多并行运行的映射器和化简器。在 HDInsight 中，可通过两种方式增加扩大的数目：
 
-- 在预配时，可以使用 Azure 经典管理门户、Azure PowerShell 或跨平台命令行界面指定辅助节点的数目。有关详细信息，请参阅[设置 HDInsight 群集](/documentation/articles/hdinsight-provision-clusters-v1/)。以下屏幕显示了 Azure 经典管理门户上的辅助节点配置：
+- 在预配时，可以使用 Azure 经典管理门户、Azure PowerShell 或跨平台命令行界面指定辅助节点的数目。有关详细信息，请参阅[设置 HDInsight 群集](./hdinsight-provision-clusters-v1.md)。以下屏幕显示了 Azure 经典管理门户上的辅助节点配置：
 
 	![scaleout\_1][image-hdi-optimize-hive-scaleout_1]  
 
 - 在运行时，也可以向外缩放群集，而无需重建群集。如下所示。![scaleout\_1][image-hdi-optimize-hive-scaleout_2]
 
-有关 HDInsight 支持的不同虚拟机的详细信息，请参阅 [HDInsight 定价](/pricing/details/hdinsight/)。
+有关 HDInsight 支持的不同虚拟机的详细信息，请参阅 [HDInsight 定价](https://www.azure.cn/pricing/details/hdinsight/)。
 
 ##启用 Tez
 
 [Apache Tez](http://hortonworks.com/hadoop/tez/) 是 MapReduce 引擎的替代执行引擎：
 
 ![tez\_1][image-hdi-optimize-hive-tez_1]
-
 
 Tez 速度更快，因为：
 
@@ -56,7 +54,6 @@ Tez 速度更快，因为：
 	set hive.execution.engine=tez;
 
 必须在预配时启用 Tez。以下 Azure PowerShell 脚本示例用于预配已启用 Tez 的 Hadoop 群集：
-
 
 	$clusterName = "[HDInsightClusterName]"
 	$location = "[AzureDataCenter]" #i.e. China North
@@ -192,7 +189,6 @@ ORC（优化行纵栏式）格式是存储 Hive 数据的高效方式。与其�
 
 有关详细信息，请参阅[向量化查询执行](https://cwiki.apache.org/confluence/display/Hive/Vectorized+Query+Execution)。
 
-
 ##其他优化方法
 
 还可以考虑使用其他一些高级优化方法，例如：
@@ -204,9 +200,8 @@ ORC（优化行纵栏式）格式是存储 Hive 数据的高效方式。与其�
 ## <a id="nextsteps"></a>后续步骤
 在本文中，你学习了几种常见的 Hive 查询优化方法。要了解更多信息，请参阅下列文章：
 
-- [使用 HDInsight 中的 Hive 分析航班延误数据](/documentation/articles/hdinsight-analyze-flight-delay-data/)
-- [使用 HDInsight 中 Hadoop上的 Hive 查询控制台分析传感器数据](/documentation/articles/hdinsight-hive-analyze-sensor-data/)
-
+- [使用 HDInsight 中的 Hive 分析航班延误数据](./hdinsight-analyze-flight-delay-data.md)
+- [使用 HDInsight 中 Hadoop上的 Hive 查询控制台分析传感器数据](./hdinsight-hive-analyze-sensor-data.md)
 
 [image-hdi-optimize-hive-scaleout_1]: ./media/hdinsight-hadoop-optimize-hive-query-v1/scaleout_1.png
 [image-hdi-optimize-hive-scaleout_2]: ./media/hdinsight-hadoop-optimize-hive-query-v1/scaleout_2.png

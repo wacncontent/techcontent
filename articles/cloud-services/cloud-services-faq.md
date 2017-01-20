@@ -1,26 +1,24 @@
-<properties
-	pageTitle="云服务常见问题 | Azure"
-	description="有关云服务的常见问题。"
-	services="cloud-services"
-	documentationCenter=""
-	authors="Thraka"
-	manager="timlt"
-	editor=""/>  
+---
+title: 云服务常见问题 | Azure
+description: 有关云服务的常见问题。
+services: cloud-services
+documentationCenter: 
+authors: Thraka
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="cloud-services"
-	ms.workload="tbd"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="11/16/2016"
-	wacn.date="12/05/2016"
-	ms.author="adegeo"/>  
-
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/16/2016
+wacn.date: 12/05/2016
+ms.author: adegeo
+---
 
 # 云服务常见问题
-本文回答了一些关于 Azure 云服务的常见问题。你还可以访问 [Azure 支持 FAQ](http://go.microsoft.com/fwlink/?LinkID=185083) 了解一般的 Azure 定价和支持信息。还可以参阅[云服务 VM 大小页面](/documentation/articles/cloud-services-sizes-specs/)，了解大小信息。
+本文回答了一些关于 Azure 云服务的常见问题。你还可以访问 [Azure 支持 FAQ](http://go.microsoft.com/fwlink/?LinkID=185083) 了解一般的 Azure 定价和支持信息。还可以参阅[云服务 VM 大小页面](./cloud-services-sizes-specs.md)，了解大小信息。
 
 ## 证书
 
@@ -53,17 +51,17 @@ Azure 会阻止删除正在使用的证书。需要删除使用该证书的部�
 
 ### 我的证书一直消失
 
-虚拟机实例回收时，所有本地更改都将丢失。使用[启动任务](/documentation/articles/cloud-services-startup-tasks/)在每次角色启动时将证书安装到虚拟机。
+虚拟机实例回收时，所有本地更改都将丢失。使用[启动任务](./cloud-services-startup-tasks.md)在每次角色启动时将证书安装到虚拟机。
 
 ### 我在门户中找不到管理证书
 
-[管理证书](/documentation/articles/azure-api-management-certs/)仅在 Azure 经典经管门户中提供。
+[管理证书](../azure-api-management-certs.md)仅在 Azure 经典经管门户中提供。
 ### 如何禁用管理证书？
 
-[管理证书](/documentation/articles/azure-api-management-certs/)无法禁用。不想再使用它们时，可以通过 Azure 经典管理门户进行删除。
+[管理证书](../azure-api-management-certs.md)无法禁用。不想再使用它们时，可以通过 Azure 经典管理门户进行删除。
 
 ### 如何为特定 IP 地址创建 SSL 证书？
-按照[创建证书教程](/documentation/articles/cloud-services-certs-create/)中的说明操作。使用 IP 地址作为 DNS 名称。
+按照[创建证书教程](./cloud-services-certs-create.md)中的说明操作。使用 IP 地址作为 DNS 名称。
 
 ## “安全”
 ### 禁用 SSL 3.0

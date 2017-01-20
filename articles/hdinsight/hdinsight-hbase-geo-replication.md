@@ -1,29 +1,29 @@
-<properties 
-   pageTitle="在两个 Azure 数据中心之间配置 HBase 复制 | Azure" 
-   description="了解如何在两个 Azure 虚拟网络之间配置 VPN 连接，如何在两个虚拟网络之间配置域名解析，以及如何配置 HBase 异地复制" 
-   services="hdinsight" 
-   documentationCenter="" 
-   authors="mumian" 
-   manager="paulettm" 
-   editor="cgronlun"/>
+---
+title: 在两个 Azure 数据中心之间配置 HBase 复制 | Azure
+description: 了解如何在两个 Azure 虚拟网络之间配置 VPN 连接，如何在两个虚拟网络之间配置域名解析，以及如何配置 HBase 异地复制
+services: hdinsight
+documentationCenter: 
+authors: mumian
+manager: paulettm
+editor: cgronlun
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data" 
-   ms.date="07/25/2016" 
-   wacn.date="12/16/2016"
-   ms.author="jgao"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 07/25/2016
+wacn.date: 12/16/2016
+ms.author: jgao
+---
 
 # 在 HDInsight 中配置 HBase 异地复制
 
-- [配置 VPN 连接](/documentation/articles/hdinsight-hbase-geo-replication-configure-VNets/)
-- [配置 DNS](/documentation/articles/hdinsight-hbase-geo-replication-configure-DNS/)
-- [配置 HBase 复制](/documentation/articles/hdinsight-hbase-geo-replication/) 
+- [配置 VPN 连接](./hdinsight-hbase-geo-replication-configure-VNets.md)
+- [配置 DNS](./hdinsight-hbase-geo-replication-configure-DNS.md)
+- [配置 HBase 复制](./hdinsight-hbase-geo-replication.md) 
  
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 了解如何跨两个数据中心配置 HBase 复制。群集复制的部分用例包括：
 
@@ -44,7 +44,6 @@
 
 ![HDInsight HBase 复制虚拟网络示意图][img-vnet-diagram]  
 
-
 ## <a id="prerequisites"></a>先决条件
 要阅读本教程，必须具备：
 
@@ -54,10 +53,9 @@
 
 	要执行 PowerShell 脚本，必须以管理员身份运行 Azure PowerShell 并将执行策略设为 *RemoteSigned*。请参阅 [使用 Set-ExecutionPolicy cmdlet][2]。
 
-	[AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+	[!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 - **已配置 VPN 连接和 DNS 的两个 Azure 虚拟网络**。有关说明，请参阅[在两个 Azure 虚拟网络之间配置 VPN 连接][hdinsight-hbase-replication-vnet]和[在两个 Azure 虚拟网络之间配置 DNS][hdinsight-hbase-replication-dns]。
-
 
 	运行 PowerShell 脚本前，确保已使用以下 cmdlet 连接到 Azure 订阅：
 
@@ -67,14 +65,11 @@
 
 		Select-AzureSubscription <AzureSubscriptionName>
 
-
-
 ##在 HDInsight 中设置 HBase 群集
 
 在[在两个 Azure 虚拟网络之间配置 VPN 连接][hdinsight-hbase-replication-vnet]中，已分别在中国北部数据中心和中国东部数据中心各创建了一个虚拟网络。这两个虚拟网络通过 VPN 连接。在本课中，要在每个虚拟网络中设置 HBase 群集。在本教程的后面，将使其中一个 HBase 群集复制另一个 HBase 群集。
 
 Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群集。例如，将 *hbase.replication* 设置为 *true*。如果设置群集后在配置文件中设置该值，重新创建群集映像后会丢失该设置。有关详细信息，请参阅[在 HDInsight 中预配 Hadoop 群集][hdinsight-provision]。使用自定义选项设置 HDInsight 群集的选项之一是使用 Azure PowerShell。
-
 
 **在 Contoso-VNet-CN 中预配 HBase 群集**
 
@@ -136,8 +131,6 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 		
 		$config | New-AzureHDInsightCluster -Name $hbaseClusterName -Location $location -Credential $credential
 
-
-
 **在 Contoso-VNet-CE 中预配 HBase 群集**
 
 - 使用包含以下值的同一个脚本：
@@ -150,9 +143,6 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 
 		Add-AzureAccount -Environment AzureChinaCloud
 		Select-AzureSubscription $azureSubscriptionName
-
-
-
 
 # 配置 DNS 条件转发器
 
@@ -167,7 +157,6 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 3. 运行 **ipconfig**，并记下**特定于连接的 DNS 后缀**。
 4. 请不要关闭 RDP 会话。稍后要使用它来测试域名解析。
 5. 重复相同的步骤，以找出 **Contoso-HBase-CE** 的**特定于连接的 DNS 后缀**。
-
 
 **配置 DNS 转发器**
  
@@ -198,7 +187,7 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 4. 请不要关闭 RDP 会话。本教程后面的步骤中仍会用到它。
 5. 重复相同的步骤，以从 Contoso-HBase-CE ping Contoso-HBase-CN 的 headnode0。
 
->[AZURE.IMPORTANT] 在继续后面的步骤之前，DNS 必须正常工作。
+>[!IMPORTANT] 在继续后面的步骤之前，DNS 必须正常工作。
 
 ##在 HBase 表之间启用复制
 
@@ -226,7 +215,6 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 **在 Contoso-HBase-CE 中创建 HBase 表**
 
 - 重复上述步骤，在 Contoso-HBase-CE 中创建相同的表。
-
 
 **将 Contoso-HBase-CE 添加为复制对等方**
 
@@ -279,43 +267,38 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 
 		hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles /tmpOutput Contacts
 
-
 ##验证数据复制是否正在进行
 
 可以通过使用以下 HBase shell 命令扫描两个群集中的表，以验证复制是否正在进行：
 
 		Scan 'Contacts'
 
-
 ##后续步骤
 
 在本教程中，你已学习如何跨两个数据中心配置 HBase 复制。要了解有关 HDInsight 和 HBase 的详细信息，请参阅：
 
-- [HDInsight 服务页](/home/features/hdinsight/)
-- [HDInsight 文档](/documentation/services/hdinsight/)
+- [HDInsight 服务页](https://www.azure.cn/home/features/hdinsight/)
+- [HDInsight 文档](./index.md/)
 - [开始在 HDInsight 中使用 Apache HBase][hdinsight-hbase-get-started]
 - [HDInsight HBase 概述][hdinsight-hbase-overview]
 - [在 Azure 虚拟网络上设置 HBase 群集][hdinsight-hbase-provision-vnet-v1]
 - [使用 HDInsight (Hadoop) 中的 Storm 和 HBase 分析传感器数据][hdinsight-sensor-data]
 
-[hdinsight-hbase-geo-replication-vnet]: /documentation/articles/hdinsight-hbase-geo-replication-configure-VNets/
+[hdinsight-hbase-geo-replication-vnet]: ./hdinsight-hbase-geo-replication-configure-VNets.md
 <!-- [hdinsight-hbase-geo-replication-dns]: /documentation/articles/hdinsight-hbase-geo-replication-configure-VNet/ -->
-
-
 
 [img-vnet-diagram]: ./media/hdinsight-hbase-geo-replication/HDInsight.HBase.Replication.Network.diagram.png
 
-
-[hdinsight-hbase-get-started]: /documentation/articles/hdinsight-hbase-tutorial-get-started-v1/
-[hdinsight-manage-portal]: /documentation/articles/hdinsight-administer-use-management-portal-v1/
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
-[hdinsight-hbase-replication-vnet]: /documentation/articles/hdinsight-hbase-geo-replication-configure-VNets/
-[hdinsight-hbase-replication-dns]: /documentation/articles/hdinsight-hbase-geo-replication-configure-DNS/
+[hdinsight-hbase-get-started]: ./hdinsight-hbase-tutorial-get-started-v1.md
+[hdinsight-manage-portal]: ./hdinsight-administer-use-management-portal-v1.md
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-hbase-replication-vnet]: ./hdinsight-hbase-geo-replication-configure-VNets.md
+[hdinsight-hbase-replication-dns]: ./hdinsight-hbase-geo-replication-configure-DNS.md
 <!-- [hdinsight-hbase-twitter-sentiment]: /documentation/articles/hdinsight-hbase-analyze-twitter-sentiment/ -->
 
-[hdinsight-sensor-data]: /documentation/articles/hdinsight-storm-sensor-data-analysis/
-[hdinsight-hbase-overview]: /documentation/articles/hdinsight-hbase-overview/
-[hdinsight-hbase-provision-vnet-v1]: /documentation/articles/hdinsight-hbase-provision-vnet-v1/
-[hdinsight-hbase-get-started]: /documentation/articles/hdinsight-hbase-tutorial-get-started-v1/
+[hdinsight-sensor-data]: ./hdinsight-storm-sensor-data-analysis.md
+[hdinsight-hbase-overview]: ./hdinsight-hbase-overview.md
+[hdinsight-hbase-provision-vnet-v1]: ./hdinsight-hbase-provision-vnet-v1.md
+[hdinsight-hbase-get-started]: ./hdinsight-hbase-tutorial-get-started-v1.md
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

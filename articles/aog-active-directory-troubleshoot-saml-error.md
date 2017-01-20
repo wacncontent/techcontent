@@ -1,18 +1,17 @@
-<properties
-	pageTitle="通过 Azure AD SAML 协议登录应用报错相关解决方案"
-	description="通过 Azure AD SAML 协议登录应用报错相关解决方案。"
-	services="active-directory"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 通过 Azure AD SAML 协议登录应用报错相关解决方案
+description: 通过 Azure AD SAML 协议登录应用报错相关解决方案。
+services: active-directory
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="active-directory-aog"
-	ms.date="10/27/2016"
-	wacn.date="11/10/2016"/>
-
+ms.service: active-directory-aog
+ms.date: 10/27/2016
+wacn.date: 11/10/2016
+---
 
 #通过 Azure AD SAML 协议登录应用报错相关解决方案
 
@@ -35,7 +34,6 @@
 3.       用户提供正确的登录凭据给 IP
 4.       IP 验证成功后，通过浏览器返回 SAML 响应（包含 SAML Assertion ）给 SP，并设置浏览器端 cookie
 5.       SP 验证 SAML 响应，并额外设置浏览器端 cookie 表明已经验证成功，用户后续访问此 SP 就会带上该cookie 
-
 
 这样的工作方式使得后续用户重新访问该服务或者其他也基于该 IP 的服务就不需要再次登录，而是直接使用该 cookie。
 根据以上分析，如果是我们问题描述的场景（使用 azure AD SSO 功能），AAD 就是 IP，O365 和 Azure 以及客户自己的应用都是 SP，理论上来说，只要 Cookie 不清除，那么 IP 始终能够根据提供的 cookie 信息来返回正确的 SAML Assertion。

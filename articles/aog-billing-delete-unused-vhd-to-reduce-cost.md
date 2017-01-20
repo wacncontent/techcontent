@@ -1,12 +1,16 @@
-<properties 
-	pageTitle="释放虚拟磁盘未使用空间来减少计费容量" 
-	description="如何释放未使用的虚拟磁盘空间来减少费用" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="billing-aog" ms.date="" wacn.date="05/27/2016"/>
+---
+title: 释放虚拟磁盘未使用空间来减少计费容量
+description: 如何释放未使用的虚拟磁盘空间来减少费用
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: billing-aog
+ms.date: 
+wacn.date: 05/27/2016
+---
 
 #释放虚拟磁盘未使用空间来减少计费容量
 
@@ -33,7 +37,6 @@
 
 ![](./media/aog-virtual-machine-delete-vhd-unused/real-vhd-tool.png)
  
-
 ##常见问题
 
 问：如果在虚拟机上挂载一个 100 GB 的数据盘，是只对使用的部分收费，还是整个 100 GB 收费？

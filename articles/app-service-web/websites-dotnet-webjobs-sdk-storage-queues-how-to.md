@@ -1,31 +1,31 @@
-<properties 
-	pageTitle="如何通过 WebJobs SDK 使用 Azure 队列存储" 
-	description="了解如何通过 WebJobs SDK 使用 Azure 队列存储。创建和删除队列；插入、扫视、获取和删除队列消息等。" 
-	services="app-service\web, storage" 
-	documentationCenter=".net" 
-	authors="tdykstra" 
-	manager="wpickett" 
-	editor="jimbe"/>
+---
+title: 如何通过 WebJobs SDK 使用 Azure 队列存储
+description: 了解如何通过 WebJobs SDK 使用 Azure 队列存储。创建和删除队列；插入、扫视、获取和删除队列消息等。
+services: app-service\web, storage
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: jimbe
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="06/01/2016" 
-	wacn.date="12/12/2016" 
-	ms.author="tdykstra"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/01/2016
+wacn.date: 12/12/2016
+ms.author: tdykstra
+---
 
 # 如何通过 WebJobs SDK 使用 Azure 队列存储
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 ## 概述
 
 本指南提供了 C# 代码示例，用于演示如何在 Azure 队列存储服务中使用 Azure WebJobs SDK 版本 1.x。
 
-本指南假设你了解[如何使用指向存储帐户的连接字符串在 Visual Studio 中创建 WebJob 项目](/documentation/articles/websites-dotnet-webjobs-sdk-get-started/#configure-storage)或创建[多个存储帐户](https://github.com/Azure/azure-webjobs-sdk/blob/master/test/Microsoft.Azure.WebJobs.Host.EndToEndTests/MultipleStorageAccountsEndToEndTests.cs)。
+本指南假设你了解[如何使用指向存储帐户的连接字符串在 Visual Studio 中创建 WebJob 项目](./websites-dotnet-webjobs-sdk-get-started.md#configure-storage)或创建[多个存储帐户](https://github.com/Azure/azure-webjobs-sdk/blob/master/test/Microsoft.Azure.WebJobs.Host.EndToEndTests/MultipleStorageAccountsEndToEndTests.cs)。
 
 大多数代码段只显示函数，不同于创建 `JobHost` 对象的代码，如以下示例所示：
 
@@ -77,7 +77,6 @@
 
 在下述示例中，队列中包含一个字符串消息，因此已将 `QueueTrigger` 应用到包含队列消息内容的 `logMessage` 字符串参数。该函数[向仪表板写入一条日志消息](#logs)。
  
-
 		public static void ProcessQueueMessage([QueueTrigger("logqueue")] string logMessage, TextWriter logger)
 		{
 		    logger.WriteLine(logMessage);
@@ -233,7 +232,6 @@ SDK 实现了随机指数退让算法，以降低空闲队列轮询对存储交�
 
 下面的非异步代码示例在名为“outputqueue”的队列中创建新的队列消息，该消息的内容与名为“inputqueue”的队列中收到的队列消息相同。（对于异步函数，请按照本节稍后介绍的方法使用 `IAsyncCollector<T>`。）
 
-
 		public static void CreateQueueMessage(
 		    [QueueTrigger("inputqueue")] string queueMessage,
 		    [Queue("outputqueue")] out string outputQueueMessage )
@@ -302,7 +300,7 @@ SDK 会自动将对象序列化为 JSON。即使对象为 null，也始终会创
 
 ## <a id="blobs"></a>如何在处理队列消息时读取和写入 blob 和表
 
-可以使用 `Blob` 和 `Table` 属性来读取和写入 blob 和表。本部分中的示例适用于 Blob。有关展示如何在创建或更新 blob 时触发进程的代码示例，请参阅[如何结合使用 Azure blob 存储和 WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk-storage-blobs-how-to/)；有关用于读取和写入表的代码示例，请参阅[如何结合使用 Azure 表存储和 WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk-storage-tables-how-to/)。
+可以使用 `Blob` 和 `Table` 属性来读取和写入 blob 和表。本部分中的示例适用于 Blob。有关展示如何在创建或更新 blob 时触发进程的代码示例，请参阅[如何结合使用 Azure blob 存储和 WebJobs SDK](./websites-dotnet-webjobs-sdk-storage-blobs-how-to.md)；有关用于读取和写入表的代码示例，请参阅[如何结合使用 Azure 表存储和 WebJobs SDK](./websites-dotnet-webjobs-sdk-storage-tables-how-to.md)。
 
 ### 触发 Blob 操作的字符串队列消息
 
@@ -318,7 +316,7 @@ SDK 会自动将对象序列化为 JSON。即使对象为 null，也始终会创
 		    blobInput.CopyTo(blobOutput, 4096);
 		}
 
-`Blob` 属性构造函数采用指定容器和 blob 名称的 `blobPath` 参数。有关此占位符的详细信息，请参阅[如何结合使用 Azure blob 存储和 WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk-storage-blobs-how-to/)。
+`Blob` 属性构造函数采用指定容器和 blob 名称的 `blobPath` 参数。有关此占位符的详细信息，请参阅[如何结合使用 Azure blob 存储和 WebJobs SDK](./websites-dotnet-webjobs-sdk-storage-blobs-how-to.md)。
 
 当属性修饰 `Stream` 对象时，另一个构造函数参数会将 `FileAccess` 模式指定为读取、写入或读取/写入。
 
@@ -540,7 +538,7 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 无法将控制台输出链接到特定方法调用，因为控制台是单线程，而许多作业函数可能同时运行。正因如此，SDK 为每个函数调用提供了自身唯一的日志写入器对象。
 
-若要写入[应用程序跟踪日志](/documentation/articles/web-sites-dotnet-troubleshoot-visual-studio/#logsoverview)，请使用 `Console.Out`（创建标记为 INFO 的日志）和 `Console.Error`（创建标记为 ERROR 的日志）。或者，可以使用 [Trace 或 TraceSource](http://blogs.msdn.com/b/mcsuksoldev/archive/2014/09/04/adding-trace-to-azure-web-sites-and-web-jobs.aspx)，除提供“信息”和“错误”外，还提供“详细”、“警告”和“严重级别”。应用程序跟踪日志将显示在 Web 应用日志文件、Azure 表或 Azure Blob 中，具体取决于如何配置 Azure Web 应用。与所有控制台输出一样，最近的 100 条应用程序日志也会显示在 Web 作业的仪表板页面，而不是函数调用页面。
+若要写入[应用程序跟踪日志](./web-sites-dotnet-troubleshoot-visual-studio.md#logsoverview)，请使用 `Console.Out`（创建标记为 INFO 的日志）和 `Console.Error`（创建标记为 ERROR 的日志）。或者，可以使用 [Trace 或 TraceSource](http://blogs.msdn.com/b/mcsuksoldev/archive/2014/09/04/adding-trace-to-azure-web-sites-and-web-jobs.aspx)，除提供“信息”和“错误”外，还提供“详细”、“警告”和“严重级别”。应用程序跟踪日志将显示在 Web 应用日志文件、Azure 表或 Azure Blob 中，具体取决于如何配置 Azure Web 应用。与所有控制台输出一样，最近的 100 条应用程序日志也会显示在 Web 作业的仪表板页面，而不是函数调用页面。
 
 仅当程序在 Azure Web 作业中运行（而不是在本地运行或者在其他某个环境中运行）时，控制台输出才显示在仪表板中。
 
@@ -613,7 +611,6 @@ WebJobs SDK 还包括 [Timeout](http://github.com/Azure/azure-webjobs-sdk-sample
 
 ## <a id="nextsteps"></a>后续步骤
 
-本指南提供的代码示例演示了如何处理使用 Azure 队列的常见方案。若要详细了解如何使用 Azure WebJobs 和 WebJobs SDK，请参阅[有关 Azure WebJobs 的推荐资源](/documentation/articles/websites-webjobs-resources/)。
+本指南提供的代码示例演示了如何处理使用 Azure 队列的常见方案。若要详细了解如何使用 Azure WebJobs 和 WebJobs SDK，请参阅[有关 Azure WebJobs 的推荐资源](./websites-webjobs-resources.md)。
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

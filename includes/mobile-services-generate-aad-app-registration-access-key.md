@@ -12,7 +12,6 @@
 
     ![](./media/mobile-services-generate-aad-app-registration-access-key/app-perms.png)
 
-
 7. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，浏览回到你的移动服务，然后单击“配置”选项卡。向下滚动到“应用设置”部分并添加以下应用设置，然后单击“保存”。
 
     <table border="1">
@@ -30,8 +29,6 @@
     </tr>
     </table><br/>
 
- 
     ![](./media/mobile-services-generate-aad-app-registration-access-key/aad-app-settings.png)
   
-
 <!---HONumber=Mooncake_0118_2016-->

@@ -1,21 +1,22 @@
-<properties 
- pageTitle="计划程序出站身份验证" 
- description="计划程序出站身份验证"
- services="scheduler" 
- documentationCenter=".NET" 
- authors="krisragh" 
- manager="dwrede" 
- editor=""/>
-<tags
- ms.service="scheduler"
- ms.workload="infrastructure-services"
- ms.tgt_pltfrm="na"
- ms.devlang="dotnet"
- ms.topic="article"
- ms.date="08/15/2016"
- wacn.date="01/04/2017"
- ms.author="deli"/>
- 
+---
+title: 计划程序出站身份验证
+description: 计划程序出站身份验证
+services: scheduler
+documentationCenter: .NET
+authors: krisragh
+manager: dwrede
+editor: 
+
+ms.service: scheduler
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 08/15/2016
+wacn.date: 01/04/2017
+ms.author: deli
+---
+
 # 计划程序出站身份验证
 
 计划程序作业可能需要调用要求进行身份验证的服务。这样，被调用的服务可以确定计划程序作业是否可以访问其资源。其中的某些服务包括其他 Azure 服务、Salesforce.com、Facebook 和安全的自定义网站。
@@ -39,7 +40,6 @@
 |pfx|必需。PFX 文件的 Base64 编码内容。|
 |password|必需。用于访问 PFX 文件的密码。|
 
-
 ## ClientCertificate 身份验证的响应正文
 
 发送包含身份验证信息的请求时，响应将包含以下与身份验证相关的元素。
@@ -53,7 +53,6 @@
 |certificateExpiration |证书的过期日期。|
 
 ## ClientCertificate 身份验证的示例 REST 请求
-
 
 	PUT https://management.chinacloudapi.cn/subscriptions/1fe0abdf-581e-4dfe-9ec7-e5cb8e7b205e/resourceGroups/CS-SoutheastAsia-scheduler/providers/Microsoft.Scheduler/jobcollections/southeastasiajc/jobs/httpjob?api-version=2016-01-01 HTTP/1.1
 	User-Agent: Fiddler
@@ -88,9 +87,7 @@
 	  }
 	}
 
-
 ## ClientCertificate 身份验证的示例 REST 响应
-
 
 	HTTP/1.1 200 OK
 	Cache-Control: no-cache
@@ -145,7 +142,6 @@
 	  }
 	}
 
-
 ## 基本身份验证的请求正文
 
 使用 `Basic` 模型添加身份验证时，请在请求正文中指定以下附加元素。
@@ -168,7 +164,6 @@
 |username |经过身份验证的用户名。|
 
 ## 基本身份验证的示例 REST 请求
-
 
 	PUT https://management.chinacloudapi.cn/subscriptions/1d908808-e491-4fe5-b97e-29886e18efd4/resourceGroups/CS-SoutheastAsia-scheduler/providers/Microsoft.Scheduler/jobcollections/southeastasiajc/jobs/httpjob?api-version=2016-01-01 HTTP/1.1
 	User-Agent: Fiddler
@@ -204,9 +199,7 @@
 	  }
 	}
 
-
 ## 基本身份验证的示例 REST 响应
-
 
 	HTTP/1.1 200 OK
 	Cache-Control: no-cache
@@ -259,7 +252,6 @@
 	   }
 	}
 
-
 ## ActiveDirectoryOAuth 身份验证的请求正文
 
 使用 `ActiveDirectoryOAuth` 模型添加身份验证时，请在请求正文中指定以下附加元素。
@@ -290,7 +282,6 @@
 |clientId |AD 应用程序的客户端标识符。|
 
 ## ActiveDirectoryOAuth 身份验证的示例 REST 请求
-
 
 	PUT https://management.chinacloudapi.cn/subscriptions/1d908808-e491-4fe5-b97e-29886e18efd4/resourceGroups/CS-SoutheastAsia-scheduler/providers/Microsoft.Scheduler/jobcollections/southeastasiajc/jobs/httpjob?api-version=2016-01-01 HTTP/1.1
 	User-Agent: Fiddler
@@ -328,9 +319,7 @@
 	  }
 	}
 
-
 ## ActiveDirectoryOAuth 身份验证的示例 REST 响应
-
 
 	HTTP/1.1 200 OK
 	Cache-Control: no-cache
@@ -386,30 +375,22 @@
 	   }
 	}
 
-
 ## 另请参阅
 
-
- [计划程序是什么？](/documentation/articles/scheduler-intro/)
+ [计划程序是什么？](./scheduler-intro.md)
  
- [Azure 计划程序的概念、术语和实体层次结构](/documentation/articles/scheduler-concepts-terms/)
+ [Azure 计划程序的概念、术语和实体层次结构](./scheduler-concepts-terms.md)
  
- [开始在管理门户中使用计划程序](/documentation/articles/scheduler-get-started-portal/)
+ [开始在管理门户中使用计划程序](./scheduler-get-started-portal.md)
  
- [Azure 计划程序中的计划和计费](/documentation/articles/scheduler-plans-billing/)
+ [Azure 计划程序中的计划和计费](./scheduler-plans-billing.md)
 
  [Azure 计划程序 REST API 参考](https://msdn.microsoft.com/zh-CN/library/dn528946)
  
- [Azure 计划程序 PowerShell cmdlet 参考](/documentation/articles/scheduler-powershell-reference/)
+ [Azure 计划程序 PowerShell cmdlet 参考](./scheduler-powershell-reference.md)
 
- [Azure 计划程序高可用性和可靠性](/documentation/articles/scheduler-high-availability-reliability/)
+ [Azure 计划程序高可用性和可靠性](./scheduler-high-availability-reliability.md)
  
- [Azure 计划程序的限制、默认值和错误代码](/documentation/articles/scheduler-limits-defaults-errors/)
-
-
-  
-
- 
-  
+ [Azure 计划程序的限制、默认值和错误代码](./scheduler-limits-defaults-errors.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

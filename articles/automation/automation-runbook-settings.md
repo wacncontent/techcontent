@@ -1,23 +1,22 @@
-<properties
-    pageTitle="Runbook 设置 | Azure"
-    description="介绍 Azure 自动化中 Runbook 的配置设置，以及如何使用 Azure 经典管理门户和 Windows PowerShell 更改这些设置。"
-    services="automation"
-    documentationcenter=""
-    author="mgoedtel"
-    manager="stevenka"
-    editor="tysonn" />  
+---
+title: Runbook 设置 | Azure
+description: 介绍 Azure 自动化中 Runbook 的配置设置，以及如何使用 Azure 经典管理门户和 Windows PowerShell 更改这些设置。
+services: automation
+documentationcenter: 
+author: mgoedtel
+manager: stevenka
+editor: tysonn
 
-<tags
-    ms.assetid="a726f20c-a952-48b8-88ee-36d76aa3ac61"
-    ms.service="automation"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="11/11/2016"
-    wacn.date="01/09/2017"
-    ms.author="bwren" />  
-
+ms.assetid: a726f20c-a952-48b8-88ee-36d76aa3ac61
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/11/2016
+wacn.date: 01/09/2017
+ms.author: bwren
+---
 
 # Runbook 设置
 Azure 自动化中的每个 Runbook 都提供了多个设置用于帮助标识自身，以及更改它的日志记录行为。下面将会描述其中的每个设置，然后再介绍修改设置的过程。
@@ -27,10 +26,10 @@ Azure 自动化中的每个 Runbook 都提供了多个设置用于帮助标识�
 创建 Runbook 后，无法更改它的名称。“说明”是可选的，最多可包含 512 个字符。
 
 ### 标记
-使用标记可以指定不同的单词和短语用于帮助标识 Runbook。例如，在向 [Runbook 库](/documentation/articles/automation-runbook-gallery/)提交 Runbook 时，可以指定特定的标记来标识应将该 Runbook 列入的类别。可为一个 Runbook 指定多个标记并用逗号分隔各个标记。
+使用标记可以指定不同的单词和短语用于帮助标识 Runbook。例如，在向 [Runbook 库](./automation-runbook-gallery.md)提交 Runbook 时，可以指定特定的标记来标识应将该 Runbook 列入的类别。可为一个 Runbook 指定多个标记并用逗号分隔各个标记。
 
 ### 日志记录
-默认情况下，“详细”和“进度”记录不会写入作业历史记录。你可以更改特定 Runbook 的设置以记录这些记录。有关这些记录的详细信息，请参阅 [Runbook 输出和消息](/documentation/articles/automation-runbook-output-and-messages/)。
+默认情况下，“详细”和“进度”记录不会写入作业历史记录。你可以更改特定 Runbook 的设置以记录这些记录。有关这些记录的详细信息，请参阅 [Runbook 输出和消息](./automation-runbook-output-and-messages.md)。
 
 ## 更改 Runbook 设置
 
@@ -54,7 +53,7 @@ Azure 自动化中的每个 Runbook 都提供了多个设置用于帮助标识�
     Set-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName -LogVerbose $true -Tags $tags
 
 ## 后续步骤
-* 若要学习如何创建输出和错误消息以及从 Runbook 检索此类消息，请参阅 [Runbook 输出和消息](/documentation/articles/automation-runbook-output-and-messages/)
-* 若要了解如何添加已由社区或其他源开发的 Runbook，或创建自己的 Runbook，请参阅[创建或导入 Runbook](/documentation/articles/automation-creating-importing-runbook/)
+* 若要学习如何创建输出和错误消息以及从 Runbook 检索此类消息，请参阅 [Runbook 输出和消息](./automation-runbook-output-and-messages.md)
+* 若要了解如何添加已由社区或其他源开发的 Runbook，或创建自己的 Runbook，请参阅[创建或导入 Runbook](./automation-creating-importing-runbook.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

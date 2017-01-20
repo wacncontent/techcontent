@@ -1,16 +1,16 @@
-<properties
-   pageTitle="Azure Linux 虚拟机上的数据库的备份 | Azure"
-   description="本文介绍如何在 Azure Linux 虚拟机上备份 MySQL、Redis、MongoDB 数据库"
-   services="open-source"
-   documentationCenter=""
-   authors=""
-   manager=""
-   editor=""/>
+---
+title: Azure Linux 虚拟机上的数据库的备份 | Azure
+description: 本文介绍如何在 Azure Linux 虚拟机上备份 MySQL、Redis、MongoDB 数据库
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-   ms.service="open-source-website"  
-   ms.date=""
-   wacn.date="06/14/2016"/>
+ms.service: open-source-website
+ms.date: 
+wacn.date: 06/14/2016
+---
 
 #Azure Linux 虚拟机上的数据库的备份
 
@@ -22,18 +22,15 @@
 - [备份 Redis](#backup-redis)  
 - [备份 MongoDB](#backup-mongodb)  
 
-
-
-
 ##<a id="backup-mysql"></a>备份 MySQL
 
-有许多种备份 MySQL 数据库的方式。如果您使用的是 Azure 提供的 MySQL 服务，您可以参考 [Azure MySQL tutorial](/documentation/articles/mysql-database-get-started/) 进行备份
+有许多种备份 MySQL 数据库的方式。如果您使用的是 Azure 提供的 MySQL 服务，您可以参考 [Azure MySQL tutorial](./mysql/mysql-database-get-started.md) 进行备份
 
 如果您是在 Azure 的 Linux 虚拟机上自行搭建的 MySQL 数据库的话，这篇文档就非常适合您了。我们会介绍三种 MySQL 备份的方式：mysqldump, 主从复制, 以及 xtrabackup. 
 
-如果您还没有 Azure 下的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/). 创建 LINUX 虚拟机。  
+如果您还没有 Azure 下的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md). 创建 LINUX 虚拟机。  
 连接到您的 LINUX 虚拟机。如果这是您第一次使用 Azure 的 LINUX 虚拟机，请参考
- [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 连接到虚拟机。  
+ [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 连接到虚拟机。  
 我们假设您已经在 Azure 的 Linux 虚拟机上安装好了 MySQL 数据库服务，接下来开始备份过程。
 
 ##<a id="mysqldump"></a>Mysqldump
@@ -74,22 +71,19 @@ Mysqldump 要求对备份的表至少有查询的权限，如果--single-transac
 
 6.更多关于 mysqldump 的细节，可执行 mysqldump --help 或者参考 [MySQL 官网文档](https://dev.mysql.com/doc/refman/5.5/en/mysqldump.html)。 
 
-
-
 ##<a id="primary-secondary"></a>主从复制
 
 主从复制通常指将主服务器上的数据及时同步到从服务器上，保持主从服务器数据的一致。在 Azure 上，建议将主从服务器放置于同一个子网下，或者位于同一个数据中心，比如区域都位于中国东部或者中国北部，以降低网络延迟。在创建虚拟机时选择区域。  
 
-Azure 有提供虚拟网络的服务，可以让不同的虚拟机处于同一个子网下。请参考[虚拟网络链接](/documentation/articles/virtual-networks-create-vnet-classic-portal/)创建虚拟网络。  
+Azure 有提供虚拟网络的服务，可以让不同的虚拟机处于同一个子网下。请参考[虚拟网络链接](./virtual-network/virtual-networks-create-vnet-classic-portal.md)创建虚拟网络。  
 
 >[Azure.Note]**必须**在创建虚拟机时指定虚拟网络。创建虚拟机后，不能将它加入虚拟网络。如果不想让这些服务器处于同一个子网下，则请在选择区域时保持一致。
-
 
 不同的 LINUX 发行版在配置主从复制时有少许的不同。请根据您使用的 LINUX 版本选择下面对应的步骤：
 
 **Redhat base Linux**: ( 以CentOS 7.0, 64-bit system, MySQL Server 5.6(yum install) 为例)  
 
-1.在主从机器上都打开3306端口。请参考链接[创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)
+1.在主从机器上都打开3306端口。请参考链接[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)
 
 2.连接到主服务器。编辑 /etc/my.cnf, 在 [mysqld] 下添加如下内容
 
@@ -121,7 +115,6 @@ Azure 有提供虚拟网络的服务，可以让不同的虚拟机处于同一�
 ‘show master status’ 命令返回结果类似下图，其中的 ’File’ 和 ’Position’ 信息我们稍后需要用到。  
 ![show master statu][1]
  
-
 7.去到从服务器，启动 mysql 服务  
 
 	$sudo service mysqld start
@@ -156,10 +149,9 @@ show slave status\G 用来查看主从复制状态，得到结果如下图
 
 ![主从复制正常][3]
  
-
 **Ubuntu Linux**: ( 以 Ubuntu 14.04, 64-bit system, MySQL Server 5.5(apt-get install) 为例)
 
-1.在主从机器上都打开3306端口。请参考链接 [创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)   
+1.在主从机器上都打开3306端口。请参考链接 [创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)   
 
 然后在主从服务器上编辑/etc/mysql/my.cnf  
 
@@ -205,7 +197,6 @@ show slave status\G 用来查看主从复制状态，得到结果如下图
 show slave status\G 用来查看主从复制状态，得到结果如下图  
 ![主从复制状态][5]
 
- 
 查看 “Slave\_IO\_Running” 和 “Slave\_SQL\_Running”, 如果都是 “Yes”, 一般来讲意味着主从复制成功运行.  
 
 8.我们可以在主服务器上做一些更新操作，然后去到从服务器查看数据是否同步了。去到主服务器执行如下命令  
@@ -226,10 +217,9 @@ show slave status\G 用来查看主从复制状态，得到结果如下图
  
 ![主从复制正常][6]
  
-
 **SUSE Linux**: ( 以 SLES 12, 64-bit system, MySQL Server 5.6(rpm install) 为例)
 
-1.在主从机器上都打开3306端口。请参考链接 [创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/) 
+1.在主从机器上都打开3306端口。请参考链接 [创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md) 
 
 然后连接到主服务器。编辑 /etc/my.cnf, 在 [mysqld]下添加如下内容  
 
@@ -295,7 +285,6 @@ show slave status\G 用来查看主从复制状态，得到结果如下图
 
 ![主从复制正常][9]
  
-
 ##<a id="xtrabackup"></a>Xtrabackup
 
 Percona XtraBackup 是开源的热备份工具—在备份的时候，不会锁住 MySQL 数据库的表  
@@ -364,9 +353,6 @@ Percona XtraBackup 是开源的热备份工具—在备份的时候，不会锁�
 	$sudo chown -R mysql:mysql /var/lib/mysql
 	$sudo service mysqld restart
 
-
-
-
 **Ubuntu Linux**: ( 以Ubuntu 14.04, 64-bit system, Xtrabackup 2.2.13, MySQL Server 5.6 为例)
 
 备份和恢复过程和上面的 Redhat base Linux 备份恢复过程非常相似，只是在安装时有少许不同，后面的授权，备份和恢复都是一样的。  
@@ -378,17 +364,14 @@ Percona XtraBackup 是开源的热备份工具—在备份的时候，不会锁�
 
 2.请参考上面的备份恢复过程。注意 <font color='red'>--defaults-file=/etc/mysql/my.cnf , 不是 /etc/my.cnf</font>
 
-
 ##<a id="backup-redis"></a>备份 Redis
 
-请参考文档“[在Azure Linux虚拟机上配置Redis集群.docx](/documentation/articles/open-source-azure-virtual-machines-linux-configure-redis-cluster/)” 中关于复制和集群的部分。
-
+请参考文档“[在Azure Linux虚拟机上配置Redis集群.docx](./open-source-azure-virtual-machines-linux-configure-redis-cluster.md)” 中关于复制和集群的部分。
 
 ##<a id="backup-mongodb"></a>备份 MongoDB
-请参考文档 “[在Azure Linux虚拟机上管理配置MongoDB集群.docx](/documentation/articles/open-source-azure-virtual-machines-manage-mongodb-cluster/)” 中复制和分片的部分。  
+请参考文档 “[在Azure Linux虚拟机上管理配置MongoDB集群.docx](./open-source-azure-virtual-machines-manage-mongodb-cluster.md)” 中复制和分片的部分。  
 
 亦可使用mongodb tools.具体请参考[官网](https://docs.mongodb.com/manual/core/backups/)
-
 
 <!--image reference -->
 [1]: ./media/open-source-azure-virtual-machine-linux-backup-databases/open-source-virtual-machine-linux-backup-databases-1.png  

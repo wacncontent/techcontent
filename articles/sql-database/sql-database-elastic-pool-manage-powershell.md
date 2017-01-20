@@ -1,41 +1,40 @@
-<properties 
-    pageTitle="管理弹性数据库池 (PowerShell) | Azure" 
-    description="了解如何使用 PowerShell 管理弹性数据库池。"  
-	services="sql-database" 
-    documentationCenter="" 
-    authors="srinia" 
-    manager="jhubbard" 
-    editor=""/>
+---
+title: 管理弹性数据库池 (PowerShell) | Azure
+description: 了解如何使用 PowerShell 管理弹性数据库池。
+services: sql-database
+documentationCenter: 
+authors: srinia
+manager: jhubbard
+editor: 
 
-<tags
-    ms.service="sql-database"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="powershell"
-    ms.workload="data-management" 
-    ms.date="06/22/2016" 
-    wacn.date="12/26/2016"
-    ms.author="srinia"/>
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: powershell
+ms.workload: data-management
+ms.date: 06/22/2016
+wacn.date: 12/26/2016
+ms.author: srinia
+---
 
 # 使用 PowerShell 监视和管理弹性数据库池 
 
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/sql-database-elastic-pool-manage-portal/)
-- [PowerShell](/documentation/articles/sql-database-elastic-pool-manage-powershell/)
-- [C#](/documentation/articles/sql-database-elastic-pool-manage-csharp/)
-- [T-SQL](/documentation/articles/sql-database-elastic-pool-manage-tsql/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./sql-database-elastic-pool-manage-portal.md)
+- [PowerShell](./sql-database-elastic-pool-manage-powershell.md)
+- [C#](./sql-database-elastic-pool-manage-csharp.md)
+- [T-SQL](./sql-database-elastic-pool-manage-tsql.md)
 
-使用 PowerShell cmdlet 管理[弹性数据库池](/documentation/articles/sql-database-elastic-pool/)。
+使用 PowerShell cmdlet 管理[弹性数据库池](./sql-database-elastic-pool.md)。
 
-有关常见的错误代码，请参阅 [SQL 数据库客户端应用程序的 SQL 错误代码：数据库连接错误和其他问题](/documentation/articles/sql-database-develop-error-messages/)。
+有关常见的错误代码，请参阅 [SQL 数据库客户端应用程序的 SQL 错误代码：数据库连接错误和其他问题](./sql-database-develop-error-messages.md)。
 
-可以在 [eDTU 和存储限制](/documentation/articles/sql-database-elastic-pool/#eDTU-and-storage-limits-for-elastic-pools-and-elastic-databases)中找到有关池的值。
+可以在 [eDTU 和存储限制](./sql-database-elastic-pool.md#eDTU-and-storage-limits-for-elastic-pools-and-elastic-databases)中找到有关池的值。
 
 ## 先决条件
 
-* Azure PowerShell 1.0 或更高版本。有关详细信息，请参阅[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。
-* 弹性数据库池只能在 SQL 数据库 V12 服务器中使用。如果有一个 SQL 数据库 V11 服务器，可以通过一个步骤[使用 PowerShell 升级到 V12 并创建池](/documentation/articles/sql-database-upgrade-server-portal/)。
-
+* Azure PowerShell 1.0 或更高版本。有关详细信息，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
+* 弹性数据库池只能在 SQL 数据库 V12 服务器中使用。如果有一个 SQL 数据库 V11 服务器，可以通过一个步骤[使用 PowerShell 升级到 V12 并创建池](./sql-database-upgrade-server-portal.md)。
 
 ##<a name="Move-a-database-into-an-elastic-pool"></a> 将数据库移入弹性池
 
@@ -45,17 +44,15 @@
 
 ##<a name="change-performance-settings-of-a-pool"></a> 更改池的性能设置
 
-当性能受到影响时，可以更改池的设置以适应增长。使用 [Set-AzureRmSqlElasticPool](https://msdn.microsoft.com/zh-cn/library/azure/mt603511.aspx) cmdlet。将 -Dtu 参数设置为每个池的 eDTU。有关该参数可能的值，请参阅 [eDTU 和存储限制](/documentation/articles/sql-database-elastic-pool/#eDTU-and-storage-limits-for-elastic-pools-and-elastic-databases)。
+当性能受到影响时，可以更改池的设置以适应增长。使用 [Set-AzureRmSqlElasticPool](https://msdn.microsoft.com/zh-cn/library/azure/mt603511.aspx) cmdlet。将 -Dtu 参数设置为每个池的 eDTU。有关该参数可能的值，请参阅 [eDTU 和存储限制](./sql-database-elastic-pool.md#eDTU-and-storage-limits-for-elastic-pools-and-elastic-databases)。
 
     Set-AzureRmSqlElasticPool –ResourceGroupName “resourcegroup1” –ServerName “server1” –ElasticPoolName “elasticpool1” –Dtu 1200 –DatabaseDtuMax 100 –DatabaseDtuMin 50 
-
 
 ## 获取池操作的状态
 
 创建池需要一些时间。可以使用 [Get-AzureRmSqlElasticPoolActivity](https://msdn.microsoft.com/zh-cn/library/azure/mt603812.aspx) cmdlet 跟踪池操作（包括创建和更新）的状态。
 
 	Get-AzureRmSqlElasticPoolActivity –ResourceGroupName “resourcegroup1” –ServerName “server1” –ElasticPoolName “elasticpool1” 
-
 
 ## 获取将弹性数据库移入和移出池的状态
 
@@ -66,7 +63,6 @@
 ## 获取池的资源使用情况数据
 
 以资源池限制的百分比形式所表示的可以检索的指标：
-
 
 | 指标名称 | 说明 |
 | :-- | :-- |
@@ -93,7 +89,6 @@
 
 	$metrics = (Get-AzureRmMetric -ResourceId /subscriptions/<subscriptionId>/resourceGroups/FabrikamData01/providers/Microsoft.Sql/servers/fabrikamsqldb02/elasticPools/franchisepool -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime "4/18/2015" -EndTime "4/21/2015")  
 
-
 ##<a name="elastic-database-monitoring"></a> 获取弹性数据库的资源使用情况数据
 
 这些 API 与用于监视单独数据库的资源使用情况的当前 (V12) API 相同，但存在以下语义差异。
@@ -108,7 +103,7 @@
 
 可以向资源添加警报规则，以便在资源达到设置的使用阈值时，向 [URL 终结点](https://msdn.microsoft.com/zh-cn/library/mt718036.aspx)发送电子邮件通知或警报字符串。使用 Add-AzureRmMetricAlertRule cmdlet。
 
-> [AZURE.IMPORTANT]对弹性池资源利用率的监视存在至少 20 分钟的延迟。当前不支持为弹性池设置短于 30 分钟的警报。为弹性池设置的任何时长（PowerShell API 中名为“-WindowSize”的参数）短于 30 分钟的警报可能无法被触发。请确保为弹性池定义的任何警报的时长不短于 30 分钟 (WindowSize)。
+> [!IMPORTANT]对弹性池资源利用率的监视存在至少 20 分钟的延迟。当前不支持为弹性池设置短于 30 分钟的警报。为弹性池设置的任何时长（PowerShell API 中名为“-WindowSize”的参数）短于 30 分钟的警报可能无法被触发。请确保为弹性池定义的任何警报的时长不短于 30 分钟 (WindowSize)。
 
 该示例添加了一个警报，以便在池的 eDTU 消耗超出特定阈值时获取通知。
 
@@ -135,7 +130,7 @@
 
 可以将警报规则添加到弹性池中的所有数据库，以便在资源达到警报设置的使用阈值时，向 [URL 终结点](https://msdn.microsoft.com/zh-cn/library/mt718036.aspx)发送电子邮件通知或警报字符串。
 
-> [AZURE.IMPORTANT] 对弹性池资源利用率的监视存在至少 20 分钟的延迟。当前不支持为弹性池设置短于 30 分钟的警报。为弹性池设置的任何时长（PowerShell API 中名为“-WindowSize”的参数）短于 30 分钟的警报可能无法被触发。请确保为弹性池定义的任何警报的时长不短于 30 分钟 (WindowSize)。
+> [!IMPORTANT] 对弹性池资源利用率的监视存在至少 20 分钟的延迟。当前不支持为弹性池设置短于 30 分钟的警报。为弹性池设置的任何时长（PowerShell API 中名为“-WindowSize”的参数）短于 30 分钟的警报可能无法被触发。请确保为弹性池定义的任何警报的时长不短于 30 分钟 (WindowSize)。
 
 该示例向池中的所有数据库添加了一个警报，以便在数据库的 DTU 消耗超出特定阈值时获取通知。
 
@@ -167,14 +162,11 @@
     #Remove-AzureRmAlertRule -ResourceGroup $resourceGroupName -Name $alertName
     } 
 
-
-
 ## 在一个订阅的多个池中收集和监视资源使用情况数据
 
 当一个订阅中有大量数据库时，单独监视每个弹性池非常麻烦。相反，可以将 SQL 数据库 PowerShell cmdlet 和 T-SQL 查询结合使用，从多个池及其数据库中收集资源使用情况数据，以便监视和分析资源使用情况。可以在 GitHub SQL Server 示例存储库及有关该存储库的作用和如何使用的文档中找到 powershell 脚本集合的[示例实现](https://github.com/Microsoft/sql-server-samples/tree/master/samples/manage/azure-sql-db-elastic-pools)。
 
 要使用此示例实现，请按照下面所列的这些步骤进行操作。
-
 
 1. 下载[脚本和文档](https://github.com/Microsoft/sql-server-samples/tree/master/samples/manage/azure-sql-db-elastic-pools)：
 2. 修改环境的脚本。指定在其上托管弹性池的一个或多个服务器。
@@ -249,8 +241,6 @@
 	# Format and output database metrics
 	Invoke-Command -ScriptBlock $command -ArgumentList $dbMetrics,c:\temp\dbmetrics.csv
 
-
-
 ## 弹性池操作延迟
 
 - 更改每个数据库的最小 eDTU 数或每个数据库的最大 eDTU 数通常可在 5 分钟或更少的时间内完成。
@@ -260,20 +250,18 @@
 
 可以使用 PowerShell cmdlett 来启动、停止或监视从 Azure SQL 数据库 V11 或其他任何低于 V12 的版本到 V12 的升级。
 
-- [使用 PowerShell 升级到 SQL 数据库 V12](/documentation/articles/sql-database-upgrade-server-powershell/)
+- [使用 PowerShell 升级到 SQL 数据库 V12](./sql-database-upgrade-server-powershell.md)
 
 有关这些 PowerShell cmdlet 的参考文档，请参阅：
-
 
 - [Get-AzureRMSqlServerUpgrade](https://msdn.microsoft.com/zh-cn/library/azure/mt603582.aspx)
 - [Start-AzureRMSqlServerUpgrade](https://msdn.microsoft.com/zh-cn/library/azure/mt619403.aspx)
 - [Stop-AzureRMSqlServerUpgrade](https://msdn.microsoft.com/zh-cn/library/azure/mt603589.aspx)
 
-
 Stop- cmdlet 表示取消，而不是暂停。无法在中途恢复升级，只能从头开始重新升级。Stop- cmdlet 将清理并释放所有相应的资源。
 
 ## 后续步骤
 
-- 请参阅[使用 Azure SQL 数据库进行扩展](/documentation/articles/sql-database-elastic-scale-introduction/)：使用弹性数据库工具扩展、移动数据、查询或创建事务。
+- 请参阅[使用 Azure SQL 数据库进行扩展](./sql-database-elastic-scale-introduction.md)：使用弹性数据库工具扩展、移动数据、查询或创建事务。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

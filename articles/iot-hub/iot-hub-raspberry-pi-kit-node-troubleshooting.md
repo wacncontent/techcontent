@@ -1,18 +1,17 @@
-<properties
-	pageTitle="故障排除"
-	description="Raspberry Pi Node.js 体验的故障排除页"
-	services="iot-hub"
-	documentationcenter=""
-	author="shizn"
-	manager="timlt"
-	tags=""
-	keywords=""/>  
+---
+title: 故障排除
+description: Raspberry Pi Node.js 体验的故障排除页
+services: iot-hub
+documentationcenter: 
+author: shizn
+manager: timlt
+tags: 
+keywords: 
 
-
-<tags
-	ms.service="iot-hub"
-	ms.date="10/21/2016"
-	wacn.date="12/19/2016"/>  
+ms.service: iot-hub
+ms.date: 10/21/2016
+wacn.date: 12/19/2016
+---
 
 # 故障排除
 ## 硬件问题
@@ -25,7 +24,6 @@
 
 ![LED 规格](./media/iot-hub-raspberry-pi-lessons/troubleshooting/led_spec.png)  
 
-
 ### 其他硬件问题
 若要了解如何解决 Raspberry Pi 3 的常见问题，请参阅[官方的故障排除页](http://elinux.org/R-Pi_Troubleshooting)。
 
@@ -35,7 +33,6 @@
 
         gulp --verbose
 
-
 ### 设备发现问题
 如需使用 `devdisco` 命令时的常见问题的疑难解答帮助，请查看[自述文件](https://github.com/Azure/device-discovery-cli/blob/develop/readme.md)。
 
@@ -44,14 +41,12 @@
 
         npm install -g npm
 
-
 如果问题仍然存在，请在本文末尾留下你的评论，或者在[示例存储库](https://github.com/Azure-Samples/iot-hub-node-raspberrypi-getting-started)中创建一个 GitHub 问题。
 
 ## 远程调试
 ### 在调试模式下运行示例应用程序
 
         gulp run --debug
-
 
 调试引擎就绪以后，就会在控制台输出中看到```Debugger listening on port 5858```。
 
@@ -80,14 +75,12 @@
 
     ![远程调试配置](./media/iot-hub-raspberry-pi-lessons/troubleshooting/remote_debugging_configuration.png)  
 
-
 ### 连接到远程应用程序
 单击绿色的“开始调试”(F5) 按钮开始调试。
 
 若要详细了解调试器，请参阅 [JavaScript in VS Code](https://code.visualstudio.com/docs/languages/javascript#_debugging)（VS Code 中的 JavaScript）。
 
 ![交互式远程调试](./media/iot-hub-raspberry-pi-lessons/troubleshooting/remote_debugging_interactive.png)  
-
 
 ## Azure CLI 问题
 Azure 命令行接口 (Azure CLI) 为预览版。
@@ -109,7 +102,7 @@ Azure 命令行接口 (Azure CLI) 为预览版。
 如果已通过 Azure CLI 成功预配 Azure IoT 中心，且需使用工具管理连接到 IoT 中心的设备，可尝试以下工具。
 
 ### 设备资源管理器
-设备资源管理器在 Windows 本地计算机上运行，并连接到 Azure 中的 IoT 中心。它与以下 [IoT 中心终结点](/documentation/articles/iot-hub-devguide/)通信：
+设备资源管理器在 Windows 本地计算机上运行，并连接到 Azure 中的 IoT 中心。它与以下 [IoT 中心终结点](./iot-hub-devguide.md)通信：
 
 * *设备标识管理*：用于预配和管理注册到 IoT 中心的设备。
 * *接收从设备到云的消息*：用于监视从设备发送到 IoT 中心的消息。
@@ -124,13 +117,12 @@ iothub-explorer 是一项示例性的多平台 CLI 工具，用于管理设备�
 
         npm install -g iothub-explorer@latest
 
-
 可以使用以下命令获取所有 iothub-explorer 命令及其参数的更多帮助：
 
         iothub-explorer help
 
 ### Azure 门户预览
-完整的 CLI 体验有助于用户创建和管理其所有 Azure 资源。还可能需要借助 [Azure 门户预览](/documentation/articles/azure-portal-overview/)对 Azure 资源进行预配、管理和调试。
+完整的 CLI 体验有助于用户创建和管理其所有 Azure 资源。还可能需要借助 [Azure 门户预览](../azure-portal-overview.md)对 Azure 资源进行预配、管理和调试。
 
 ## Azure 存储问题
 [Microsoft Azure 存储资源管理器（预览版）](http://storageexplorer.com)是 Microsoft 推出的一款独立的应用，可用于在 Windows、OS X 和 Linux 上处理 Azure 存储数据。可以使用此工具连接到表并查看其中的数据。可以使用此工具排查 Azure 存储问题。

@@ -1,30 +1,28 @@
-<properties
-    pageTitle="适用于应用程序网关的 Web 应用程序防火墙 (WAF) 简介 | Azure"
-    description="此页概述适用于应用程序网关的 Web 应用程序防火墙 (WAF) "
-    documentationcenter="na"
-    services="application-gateway"
-    author="amsriva"
-    manager="rossort"
-    editor="amsriva" />  
+---
+title: 适用于应用程序网关的 Web 应用程序防火墙 (WAF) 简介 | Azure
+description: 此页概述适用于应用程序网关的 Web 应用程序防火墙 (WAF) 
+documentationcenter: na
+services: application-gateway
+author: amsriva
+manager: rossort
+editor: amsriva
 
-<tags
-    ms.assetid="04b362bc-6653-4765-86f6-55ee8ec2a0ff"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/16/2016"
-    wacn.date="01/03/2017"
-    ms.author="amsriva" />  
-
+ms.assetid: 04b362bc-6653-4765-86f6-55ee8ec2a0ff
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/16/2016
+wacn.date: 01/03/2017
+ms.author: amsriva
+---
 
 # 应用程序网关 Web 应用程序防火墙（预览版）
 
 Web 应用程序防火墙 (WAF) 是 Azure 应用程序网关的功能，用于保护 Web 应用程序，以便充分利用应用程序网关的应用程序传送控制 (ADC) 标准功能。Web 应用程序防火墙的此功能可以保护 Web 应用程序免受 OWASP 十大常见 Web 漏洞中的大部分漏洞的威胁。Web 应用程序已逐渐成为利用常见已知漏洞的恶意攻击的目标。这些攻击中最常见的攻击包括 SQL 注入攻击、跨站点脚本攻击等。防止应用程序代码遭受此类攻击颇具挑战性，并且可能需要对应用程序拓扑的多个层进行严格的维护、修补和监视。集中式 Web 应用程序防火墙可以防止 Web 攻击，简化安全管理，并可针对入侵威胁为应用程序提供更好的保障。相较保护每个单独的 Web 应用程序，WAF 解决方案还可通过在中央位置修补已知漏洞，更快地响应安全威胁。现有应用程序网关可以轻松地转换为带 Web 应用程序防火墙的应用程序网关。
 
 ![imageURLroute](./media/application-gateway-webapplicationfirewall-overview/WAF1.png)  
-
 
 应用程序网关可作为应用程序传送控制器运行，并提供 SSL 终止、基于 cookie 的会话相关性、轮循负载分发、基于内容的路由，以及托管多个网站和安全增强功能的能力。应用程序网关提供的安全增强功能包括 SSL 策略管理、端到端 SSL 支持。我们正在通过引入直接集成到 ADC 产品的 WAF（Web 应用程序防火墙）来加强服务的应用程序安全功能。这提供了易于配置的中央位置，可用于管理和保护 Web 应用程序，使其免受常见 Web 漏洞的威胁。
 
@@ -60,7 +58,6 @@ Web 应用程序防火墙 (WAF) 是 Azure 应用程序网关的功能，用于�
 
 ![imageURLroute](./media/application-gateway-webapplicationfirewall-overview/waf2.png)  
 
-
     {
         "resourceId": "/SUBSCRIPTIONS/<subscriptionId>/RESOURCEGROUPS/<resourceGroupName>/PROVIDERS/MICROSOFT.NETWORK/APPLICATIONGATEWAYS/<applicationGatewayName>",
         "operationName": "ApplicationGatewayFirewall",
@@ -85,6 +82,6 @@ Web 应用程序防火墙 (WAF) 是 Azure 应用程序网关的功能，用于�
 
 ## 后续步骤
 
-深入了解 WAF 的功能后，请参阅[如何在应用程序网关上配置 Web 应用程序防火墙](/documentation/articles/application-gateway-web-application-firewall-portal/)。
+深入了解 WAF 的功能后，请参阅[如何在应用程序网关上配置 Web 应用程序防火墙](./application-gateway-web-application-firewall-portal.md)。
 
 <!---HONumber=Mooncake_1226_2016-->

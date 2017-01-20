@@ -1,32 +1,27 @@
-<properties
-	pageTitle="使用 Azure Media Indexer 为媒体文件编制索引"
-	description="使用 Azure Media Indexer，可以使媒体文件内容可供搜索，并为隐藏的字幕和关键字生成全文本脚本。本主题说明如何使用 Media Indexer。"
-	services="media-services"
-	documentationCenter=""
-	authors="Asolanki"
-	manager="dwrede"
-	editor=""/>  
+---
+title: 使用 Azure Media Indexer 为媒体文件编制索引
+description: 使用 Azure Media Indexer，可以使媒体文件内容可供搜索，并为隐藏的字幕和关键字生成全文本脚本。本主题说明如何使用 Media Indexer。
+services: media-services
+documentationCenter: 
+authors: Asolanki
+manager: dwrede
+editor: 
 
-
-<tags
-	ms.service="media-services"
-	ms.workload="media"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="09/12/2016"
-	wacn.date="12/12/2016"   
-	ms.author="adsolank;juliako;johndeu"/>
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 09/12/2016
+wacn.date: 12/12/2016
+ms.author: adsolank;juliako;johndeu
+---
 
 # 使用 Azure Media Indexer 为媒体文件编制索引
 
-
 使用 Azure Media Indexer，可以使媒体文件内容可供搜索，并为隐藏的字幕和关键字生成全文本脚本。你可以只处理一个媒体文件，也可以一次处理多个媒体文件。
 
->[AZURE.IMPORTANT] 在编制内容的索引时，请确保使用语音极其清晰的媒体文件（没有背景音乐、噪音、特效音或麦克风电流嘶嘶声）。适当内容的某些示例包括：录制的会议、讲座或演示内容。以下内容可能不适合用于编制索引：电影、电视剧、混合了音频和声音特效的任何内容、带有背景噪音（电流嘶嘶声）的不当录制内容。
-
+>[!IMPORTANT] 在编制内容的索引时，请确保使用语音极其清晰的媒体文件（没有背景音乐、噪音、特效音或麦克风电流嘶嘶声）。适当内容的某些示例包括：录制的会议、讲座或演示内容。以下内容可能不适合用于编制索引：电影、电视剧、混合了音频和声音特效的任何内容、带有背景噪音（电流嘶嘶声）的不当录制内容。
 
 索引作业可生成以下输出：
 
@@ -37,7 +32,6 @@
 - 用于 SQL Server 的音频索引 Blob (AIB) 文件。
 
 	有关详细信息，请参阅[在 Azure 媒体索引器和 SQL Server 中使用 AIB 文件](https://azure.microsoft.com/blog/2014/11/03/using-aib-files-with-azure-media-indexer-and-sql-server/)。
-
 
 本主题介绍如何创建索引作业，以便“为资产编制索引”以及“为多个文件编制索引”。
 
@@ -157,8 +151,6 @@ __InputFileName.smi__<br />__InputFileName.ttml__<br />__InputFileName.vtt__ |�
 __InputFileName.kw.xml<br />InputFileName.info__ |关键字和信息文件。<br/><br/>关键字文件是 XML 文件，其中包含从语音内容中提取的关键字，以及频率和偏移量信息。<br/><br/>信息文件是一种纯文本文件，其中包含有关每个已识别术语的详细信息。第一行很特别，包含 Recognizability 评分。后续每一行是使用制表符分隔的以下数据的列表：开始时间、结束时间、单词/短语、置信度。时间以秒为单位，置信度为数字 0-1。<br/><br/>示例行："1.20 1.45 word 0.67"<br/><br/>这些文件可用于各种目的，如执行语音分析，公开给必应、Google 或 Microsoft SharePoint 等搜索引擎以使媒体文件更容易被发现，甚至用于传送更具相关性的广告。
 __JobResult.txt__ |输出清单，仅当为多个文件编制索引时才提供，包含以下信息：<br/><br/><table border="1"><tr><th>InputFile</th><th>Alias</th><th>MediaLength</th><th>Error</th></tr><tr><td>a.mp4</td><td>Media\_1</td><td>300</td><td>0</td></tr><tr><td>b.mp4</td><td>Media\_2</td><td>0</td><td>3000</td></tr><tr><td>c.mp4</td><td>Media\_3</td><td>600</td><td>0</td></tr></table><br/>
 
-
-
 如果没有为所有输入媒体文件成功编制索引，索引编制作业将会失败，错误代码为 4000。有关详细信息，请参阅[错误代码](#error_codes)。
 
 ## 为多个文件编制索引
@@ -244,7 +236,6 @@ __JobResult.txt__ |输出清单，仅当为多个文件编制索引时才提供�
 
 如果没有为所有输入媒体文件成功编制索引，索引编制作业将会失败，错误代码为 4000。有关详细信息，请参阅[错误代码](#error_codes)。
 
-
 生成相同的输出（与成功的作业一样）。你可以参考输出清单文件，以根据“错误”列的值查明哪些输入文件失败。对于失败的输入文件，不会生成相应的 AIB、SAMI、TTML、WebVTT 和关键字文件。
 
 ### <a id="preset"></a>Azure Media Indexer 的任务预设
@@ -273,20 +264,14 @@ __features__ <br /><br />在版本 1.2 中添加。目前，唯一支持的功�
 3000 | 无法解码媒体文件 | 媒体编解码器不受支持，<br/>或者<br/>媒体文件已损坏，<br/>或者<br/>输入媒体中没有音频流。
 4000 | 分批编制索引部分成功 | 一些输入媒体文件无法编制索引。有关详细信息，请参阅<a href="#output_files">输出文件</a>。
 
-
-
 ## <a id="supported_languages"></a>支持的语言
 
 当前支持英语和西班牙语。有关详细信息，请参阅[版本 v1.2 博客文章](https://azure.microsoft.com/blog/2015/04/13/azure-media-indexer-spanish-v1-2/)。
 
-
-
 ## 相关链接
 
-[Azure 媒体服务分析概述](/documentation/articles/media-services-analytics-overview/)
+[Azure 媒体服务分析概述](./media-services-analytics-overview.md)
 
 [在 Azure Media Indexer 和 SQL Server 中使用 AIB 文件](https://azure.microsoft.com/blog/2014/11/03/using-aib-files-with-azure-media-indexer-and-sql-server/)
-
-
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

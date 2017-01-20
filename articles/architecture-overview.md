@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="Azure 上的应用程序体系结构 | Azure" 
-	description="包括常见设计模式的体系结构概述" 
-	services="" 
-	documentationCenter="" 
-	authors="Rboucher" 
-	manager="jwhit" 
-	editor="mattshel"/>  
+---
+title: Azure 上的应用程序体系结构 | Azure
+description: 包括常见设计模式的体系结构概述
+services: 
+documentationCenter: 
+authors: Rboucher
+manager: jwhit
+editor: mattshel
 
-
-<tags 
-	ms.service="multiple" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/13/2016" 
-	wacn.date="12/15/2016" 
-	ms.author="robb"/>  
-
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/13/2016
+wacn.date: 12/15/2016
+ms.author: robb
+---
 
 #Azure 上的应用程序体系结构
 用于构建使用 Azure 的应用程序的资源。这包括一些工具，帮助您画图以直观地描述软件系统。
@@ -33,7 +31,6 @@ Microsoft 创建了支持 Microsoft 认证考试 70-534 的体系结构课程。
 
 ![Microsoft 体系结构认证课程](./media/architecture-overview/EDXCourse.png)  
 
-
 ## Microsoft 解决方案
 Microsoft 发布了一套高级别的[解决方案体系结构](http://aka.ms/azblueprints)，介绍如何使用 Microsoft 产品构建特定类型的系统。
 
@@ -42,8 +39,6 @@ Microsoft 发布了一套高级别的[解决方案体系结构](http://aka.ms/az
 蓝图和解决方案体系结构图都会使用部分云和企业符号集。
 
 ![Microsoft 体系结构蓝图 3D 图](./media/architecture-overview/BluePrintThumb.jpg)  
-
-
 
 ## 体系结构信息图
 Microsoft 发布了几个与体系结构相关的海报/信息图。它们包括[构建实际云应用程序](https://azure.microsoft.com/documentation/infographics/building-real-world-cloud-apps/)和[与云服务一起成长](https://azure.microsoft.com/documentation/infographics/cloud-services/)。

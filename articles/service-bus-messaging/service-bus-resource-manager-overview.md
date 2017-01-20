@@ -1,39 +1,37 @@
-<properties
-    pageTitle="使用 Azure Resource Manager 模板创建服务总线资源 | Azure"
-    description="使用 Azure Resource Manager 模板自动创建服务总线资源"
-    services="service-bus"
-    documentationCenter=".net"
-    authors="sethmanheim"
-    manager="timlt"
-    editor=""/>  
+---
+title: 使用 Azure Resource Manager 模板创建服务总线资源 | Azure
+description: 使用 Azure Resource Manager 模板自动创建服务总线资源
+services: service-bus
+documentationCenter: .net
+authors: sethmanheim
+manager: timlt
+editor: 
 
-
-<tags
-    ms.service="service-bus"
-    ms.devlang="tbd"
-    ms.topic="article"
-    ms.tgt_pltfrm="dotnet"
-    ms.workload="na"
-    ms.date="10/14/2016"
-    ms.author="sethm"
-    wacn.date="12/26/2016"/>  
-
+ms.service: service-bus
+ms.devlang: tbd
+ms.topic: article
+ms.tgt_pltfrm: dotnet
+ms.workload: na
+ms.date: 10/14/2016
+ms.author: sethm
+wacn.date: 12/26/2016
+---
 
 # 使用 Azure Resource Manager 模板创建服务总线资源
 本文介绍如何使用 Azure Resource Manager 模板、PowerShell 和服务总线资源提供程序创建和部署服务总线资源。
 
-Azure Resource Manager 模板可帮助你定义要为解决方案部署的资源，以及指定可用于为不同环境输入值的参数和变量。模板中包含可用于为部署构造值的 JSON 和表达式。有关编写 Azure Resource Manager 模板的详细信息，以及模板格式的讨论，请参阅[创作 Azure Resource Manager 模板](/documentation/articles/resource-group-authoring-templates/)。
+Azure Resource Manager 模板可帮助你定义要为解决方案部署的资源，以及指定可用于为不同环境输入值的参数和变量。模板中包含可用于为部署构造值的 JSON 和表达式。有关编写 Azure Resource Manager 模板的详细信息，以及模板格式的讨论，请参阅[创作 Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)。
 
->[AZURE.NOTE] 本文中的示例演示如何使用 Azure Resource Manager 来创建服务总线命名空间和消息实体（队列）。
+>[!NOTE] 本文中的示例演示如何使用 Azure Resource Manager 来创建服务总线命名空间和消息实体（队列）。
 
 ## 服务总线和事件中心 Resource Manager 模板
 这些服务总线 Azure Resource Manager 模板可供下载和部署。单击以下链接可获得有关每个链接的详细信息，其中包含指向 GitHub 上的模板的链接：
 
-- [创建服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace/)
-- [创建包含队列的服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace-queue/)
-- [创建包含主题和订阅的服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace-topic/)
-- [创建包含队列和授权规则的服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace-auth-rule/)
-- [创建包含主题、订阅和规则的服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace-topic-with-rule/)
+- [创建服务总线命名空间](./service-bus-resource-manager-namespace.md)
+- [创建包含队列的服务总线命名空间](./service-bus-resource-manager-namespace-queue.md)
+- [创建包含主题和订阅的服务总线命名空间](./service-bus-resource-manager-namespace-topic.md)
+- [创建包含队列和授权规则的服务总线命名空间](./service-bus-resource-manager-namespace-auth-rule.md)
+- [创建包含主题、订阅和规则的服务总线命名空间](./service-bus-resource-manager-namespace-topic-with-rule.md)
 
 ## 使用 PowerShell 进行部署
 
@@ -51,7 +49,7 @@ Azure Resource Manager 模板可帮助你定义要为解决方案部署的资源
 
 ### 安装 PowerShell
 
-请按[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/) 中的说明安装 Azure PowerShell。
+请按[如何安装和配置 Azure PowerShell](../powershell-install-configure.md) 中的说明安装 Azure PowerShell。
 
 ### 创建模板
 
@@ -141,7 +139,7 @@ Azure Resource Manager 模板可帮助你定义要为解决方案部署的资源
 		    }
 		}
 
-有关详细信息，请参阅[参数文件](/documentation/articles/resource-group-template-deploy/#parameter-file)主题。
+有关详细信息，请参阅[参数文件](../azure-resource-manager/resource-group-template-deploy.md#parameter-file)主题。
 
 ### 登录到 Azure 并设置 Azure 订阅
 
@@ -214,17 +212,15 @@ Azure Resource Manager 模板可帮助你定义要为解决方案部署的资源
 		                    serviceBusQueueName  String                 <queueName>
 		                    serviceBusApiVersion  String                2015-08-01
 
-
 ## 后续步骤
 
 你现在已了解用于部署 Azure Resource Manager 模板的基本工作流和命令。有关更多详细信息，请访问以下链接：
 
 - [Azure 资源管理器概述][]
 - [使用 Azure Resource Manager 模板部署资源][]
-- [创作模板](/documentation/articles/resource-group-authoring-templates/)
+- [创作模板](../azure-resource-manager/resource-group-authoring-templates.md)
 
-
-[Azure 资源管理器概述]: /documentation/articles/resource-group-overview/
-[使用 Azure Resource Manager 模板部署资源]: /documentation/articles/resource-group-template-deploy/
+[Azure 资源管理器概述]: ../azure-resource-manager/resource-group-overview.md
+[使用 Azure Resource Manager 模板部署资源]: ../azure-resource-manager/resource-group-template-deploy.md
 [Azure 快速入门模板库]: https://azure.microsoft.com/zh-cn/documentation/templates/?term=service+bus
 <!---HONumber=Mooncake_1219_2016-->

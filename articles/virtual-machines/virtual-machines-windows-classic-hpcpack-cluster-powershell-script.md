@@ -1,34 +1,34 @@
 
 
-<properties
-   pageTitle="用于部署 Windows HPC 群集的 PowerShell 脚本 | Azure"
-   description="运行 PowerShell 脚本，以在 Azure 虚拟机中部署 Windows HPC Pack 群集"
-   services="virtual-machines-windows"
-   documentationCenter=""
-   authors="dlepow"
-   manager="timlt"
-   editor=""
-   tags="azure-service-management,hpc-pack"/>  
+---
+title: 用于部署 Windows HPC 群集的 PowerShell 脚本 | Azure
+description: 运行 PowerShell 脚本，以在 Azure 虚拟机中部署 Windows HPC Pack 群集
+services: virtual-machines-windows
+documentationCenter: 
+authors: dlepow
+manager: timlt
+editor: 
+tags: azure-service-management,hpc-pack
 
-<tags
-   ms.service="virtual-machines-windows"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-windows"
-   ms.workload="big-compute"
-   ms.date="07/07/2016"
-   wacn.date="12/26/2016"
-   ms.author="danlep"/>
+ms.service: virtual-machines-windows
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: big-compute
+ms.date: 07/07/2016
+wacn.date: 12/26/2016
+ms.author: danlep
+---
 
 # 使用 HPC Pack IaaS 部署脚本创建 Windows 高性能计算 (HPC) 群集
 
 运行 HPC Pack IaaS 部署 PowerShell 脚本，以便在 Azure 虚拟机中部署适用于 Windows 工作负荷的完整 HPC 群集。群集包含运行 Windows Server 和 Microsoft HPC Pack 的已加入 Active Directory 的头节点，以及你指定的其他 Windows 计算资源。你还可以使用 Azure Resource Manager 模板来部署 HPC Pack 群集。相关示例，请参阅[创建 HPC 群集](https://github.com/Azure/azure-quickstart-templates/tree/master/create-hpc-cluster/)和[使用自定义计算节点映像创建 HPC 群集](https://github.com/Azure/azure-quickstart-templates/tree/master/create-hpc-cluster-custom-image/)。
 
->[AZURE.NOTE] 你从 GitHub 仓库 "azure-quickstart-templates" 中下载的模板，需要做一些修改才能适用于 Azure 中国云环境。例如，替换一些终结点 -- "blob.core.windows.net" 替换成 "blob.core.chinacloudapi.cn"，"cloudapp.azure.com" 替换成 "chinacloudapp.cn"；改掉一些不支持的 VM 映像，还有，改掉一些不支持的 VM 大小。
+>[!NOTE] 你从 GitHub 仓库 "azure-quickstart-templates" 中下载的模板，需要做一些修改才能适用于 Azure 中国云环境。例如，替换一些终结点 -- "blob.core.windows.net" 替换成 "blob.core.chinacloudapi.cn"，"cloudapp.azure.com" 替换成 "chinacloudapp.cn"；改掉一些不支持的 VM 映像，还有，改掉一些不支持的 VM 大小。
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
-[AZURE.INCLUDE [virtual-machines-common-classic-hpcpack-cluster-powershell-script](../../includes/virtual-machines-common-classic-hpcpack-cluster-powershell-script.md)]
+[!INCLUDE [virtual-machines-common-classic-hpcpack-cluster-powershell-script](../../includes/virtual-machines-common-classic-hpcpack-cluster-powershell-script.md)]
 
 ## <a name="Example-configuration-files"></a> 示例配置文件
 
@@ -183,12 +183,9 @@
 	  </BrokerNodes>
 	</IaaSClusterConfig>
 
-
-
 ### 示例 4
 
 以下配置文件将在现有域林中部署一个 HPC Pack 群集。该群集包含 2 个具有本地数据库的头节点，此外还将创建 2 个 Azure 节点模板并为 Azure 节点模板 _AzureTemplate1_ 创建 3 个中等大小的 Azure 节点。配置头节点后，将在其上运行脚本文件。
-
 
 	<?xml version="1.0" encoding="utf-8" ?>
 	<IaaSClusterConfig>
@@ -254,7 +251,6 @@
 
 ## 故障排除
 
-
 * **“虚拟网络不存在”错误** - 如果运行脚本在 Azure 中的一个订阅下同时部署多个群集，则一个或多个部署可能会失败并显示错误“虚拟网络 *VNet\_Name* 不存在”。如果发生此错误，请对失败的部署再次运行该脚本。
 
 * **从 Azure 虚拟网络访问 Internet 时出现问题** - 如果使用部署脚本创建具有新域控制器的群集，或将头节点 VM 手动提升为域控制器，则将 VM 连接到 Internet 时可能会遇到问题。如果已在域控制器上自动配置转发器 DNS 服务器，但此转发器 DNS 服务器未正确解析，则会出现此问题。
@@ -265,10 +261,10 @@
 
 * 尝试在群集上运行测试工作负荷。例如，请参阅 HPC Pack [入门指南](https://technet.microsoft.com/zh-cn/library/jj884144)。
 
-* 有关编写群集部署脚本和运行 HPC 工作负荷的教程，请参阅[开始在 Azure 中使用 HPC Pack 群集运行 Excel 和 SOA 工作负荷](/documentation/articles/virtual-machines-windows-excel-cluster-hpcpack/)。
+* 有关编写群集部署脚本和运行 HPC 工作负荷的教程，请参阅[开始在 Azure 中使用 HPC Pack 群集运行 Excel 和 SOA 工作负荷](./virtual-machines-windows-excel-cluster-hpcpack.md)。
 
-* 尝试使用 HPC Pack 的工具来启动、停止、添加和删除所创建群集中的计算节点。请参阅[在 Azure 中管理 HPC Pack 群集的计算节点](/documentation/articles/virtual-machines-windows-classic-hpcpack-cluster-node-manage/)。
+* 尝试使用 HPC Pack 的工具来启动、停止、添加和删除所创建群集中的计算节点。请参阅[在 Azure 中管理 HPC Pack 群集的计算节点](./virtual-machines-windows-classic-hpcpack-cluster-node-manage.md)。
 
-* 若要完成设置以将本地计算机中的作业提交到群集，请参阅[将本地计算机中的 HPC 作业提交到 Azure 中的 HPC Pack 群集](/documentation/articles/virtual-machines-windows-hpcpack-cluster-submit-jobs/)。
+* 若要完成设置以将本地计算机中的作业提交到群集，请参阅[将本地计算机中的 HPC 作业提交到 Azure 中的 HPC Pack 群集](./virtual-machines-windows-hpcpack-cluster-submit-jobs.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

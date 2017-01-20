@@ -1,28 +1,27 @@
-<properties
-    pageTitle="将 Azure 自动化 Runbook 添加到恢复计划 | Azure"
-    description="本指南介绍了如何借助 Azure Site Recovery，在恢复到 Azure 期间使用 Azure 自动化完成复杂任务，从而扩展恢复计划"
-    services="site-recovery"
-    documentationcenter=""
-    author="ruturaj"
-    manager="gauravd"
-    editor="" />  
+---
+title: 将 Azure 自动化 Runbook 添加到恢复计划 | Azure
+description: 本指南介绍了如何借助 Azure Site Recovery，在恢复到 Azure 期间使用 Azure 自动化完成复杂任务，从而扩展恢复计划
+services: site-recovery
+documentationcenter: 
+author: ruturaj
+manager: gauravd
+editor: 
 
-<tags
-    ms.assetid="f24eaa62-9dea-4fce-92e1-a72513ca0289"
-    ms.service="site-recovery"
-    ms.devlang="powershell"
-    ms.tgt_pltfrm="na"
-    ms.topic="article"
-    ms.workload="required"
-    ms.date="10/23/2016"
-    wacn.date="12/12/2016"
-    ms.author="ruturajd@microsoft.com" />  
-
+ms.assetid: f24eaa62-9dea-4fce-92e1-a72513ca0289
+ms.service: site-recovery
+ms.devlang: powershell
+ms.tgt_pltfrm: na
+ms.topic: article
+ms.workload: required
+ms.date: 10/23/2016
+wacn.date: 12/12/2016
+ms.author: ruturajd@microsoft.com
+---
 
 # 将 Azure 自动化 Runbook 添加到恢复计划 - 经典
 本教程介绍 Azure Site Recovery 如何与 Azure 自动化集成以便为恢复计划提供可扩展性。恢复计划可以协调使用 Azure Site Recovery 保护的虚拟机的恢复，以便复制到辅助云和 Azure 方案。它们还可帮助实现恢复的**一致准确性**、**可重复性**和**自动化**。如果你要将虚拟机故障转移到 Azure，则与 Azure 自动化集成可扩展恢复计划，并使你能够执行 Runbook，从而可以执行强大的自动化任务。
 
-如果你从未听说过 Azure 自动化，请在[此处](/home/features/automation/)注册。阅读有关 [Azure Site Recovery](/home/features/site-recovery/) 的详细信息，并在[此处](/blog/tags/站点恢复)了解如何使用恢复计划来协调到 Azure 的恢复。
+如果你从未听说过 Azure 自动化，请在[此处](https://www.azure.cn/home/features/automation/)注册。阅读有关 [Azure Site Recovery](https://www.azure.cn/home/features/site-recovery/) 的详细信息，并在[此处](https://www.azure.cn/blog/tags/站点恢复)了解如何使用恢复计划来协调到 Azure 的恢复。
 
 这篇简短的教程介绍如何将 Azure 自动化 Runbook 集成到恢复计划。我们将自动执行以前需要手动干预的简单任务，并了解如何将多步骤恢复转换成单击恢复操作。我们还将了解如何解决已出错的简单脚本。
 
@@ -87,7 +86,7 @@ Azure 自动化使用 Azure PowerShell 连接到订阅，并对该处的项目�
 
 ![](./media/site-recovery-runbook-automation/11.png)
 
-[此处](/documentation/articles/powershell-install-configure/)提供了有关如何通过 PowerShell 连接到订阅的详细信息。
+[此处](../powershell-install-configure.md)提供了有关如何通过 PowerShell 连接到订阅的详细信息。
 
 接下来，你将要在 Azure 自动化中创建一个 Runbook，用于在故障转移后为前端虚拟机添加终结点。
 
@@ -113,7 +112,6 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
                 }
 
         }
-
 
 下表包含上下文中每个变量的名称和说明。
 
@@ -141,15 +139,12 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
 2. 导航到 Runbook 的“创作”视图，并进入草稿模式。
 3. 首先指定要用作恢复计划上下文的变量
    
-
 	       param (
 	           [Object]$RecoveryPlanContext
 	       )
    
-
 4. 接下来，使用凭据和订阅名称连接到订阅
    
-
 	       $Cred = Get-AutomationPSCredential -Name 'AzureCredential'
    
 	       # Connect to Azure
@@ -157,11 +152,9 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
 	       $AzureSubscriptionName = Get-AutomationVariable –Name ‘AzureSubscriptionName’
 	       Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
 
-   
    请注意，此处使用了 Azure 资产 – **AzureCredential** 和 **AzureSubscriptionName**。
 5. 现在，请指定终结点详细信息和你要公开其终结点的虚拟机的 GUID。在本例中为前端虚拟机。
    
-
 	       # Specify the parameters to be used by the script
 	       $AEProtocol = "TCP"
 	       $AELocalPort = 80
@@ -169,11 +162,9 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
 	       $AEName = "Port 80 for HTTP"
 	       $VMGUID = "7a1069c6-c1d6-49c5-8c5d-33bfce8dd183"
 
-   
    这将指定 Azure 终结点协议、VM 上的本地端口及其映射的公共端口。这些变量是向 VM 添加终结点的 Azure 命令所需的参数。VMGUID 包含你要对其执行操作的虚拟机的 GUID。
 6. 现在，脚本提取给定 VM GUID 的上下文，并在它引用的虚拟机上创建终结点。
    
-
 	       #Read the VM GUID from the context
 	       $VM = $RecoveryPlanContext.VmMap.$VMGUID
    
@@ -195,7 +186,6 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
 7. 完成此操作后，点击“发布 ![](./media/site-recovery-runbook-automation/20.png)”使脚本可执行。
 
 下面提供了完整脚本供你参考
-
 
 	  workflow OpenPort80
 	  {
@@ -236,7 +226,6 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
 	    }
 	  }
 
-
 ## 将脚本添加到恢复计划
 脚本准备就绪后，你可以将它添加到先前创建的恢复计划。
 
@@ -268,7 +257,7 @@ ASR 会将上下文变量传递给 Runbook，以帮助你编写确定性的脚�
 尽管我们在本教程中演练的是一个常见任务，那就是向 Azure 虚拟机添加终结点，但是，你可以使用 Azure 自动化完成其他许多功能强大的自动化任务。Microsoft 和 Azure 自动化社区提供了示例 Runbook，可帮助你开始创建自己的解决方案和实用 Runbook，可用作更大自动化任务的构建基块。你可以从库中使用这些 Runbook，通过 Azure 站点恢复为应用程序生成强大的单击式恢复计划。
 
 ## 其他资源
-[Azure 自动化概述](/documentation/services/automation/ "Azure 自动化概述")
+[Azure 自动化概述](../automation/index.md/ "Azure 自动化概述")
 
 [Azure 自动化示例脚本](http://gallery.technet.microsoft.com/scriptcenter/site/search?f[0].Type=User&f[0].Value=SC%20Automation%20Product%20Team&f[0].Text=SC%20Automation%20Product%20Team "Azure 自动化示例脚本")
 

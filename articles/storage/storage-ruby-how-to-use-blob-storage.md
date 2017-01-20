@@ -1,36 +1,37 @@
-<properties
-    pageTitle="如何通过 Ruby 使用 Blob 存储（对象存储）| Azure"
-    description="使用 Azure Blob 存储（对象存储）将非结构化数据存储在云中。"
-    services="storage"
-    documentationcenter="ruby"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="e2fe4c45-27b0-4d15-b3fb-e7eb574db717"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="ruby"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 如何通过 Ruby 使用 Blob 存储（对象存储）| Azure
+description: 使用 Azure Blob 存储（对象存储）将非结构化数据存储在云中。
+services: storage
+documentationcenter: ruby
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: e2fe4c45-27b0-4d15-b3fb-e7eb574db717
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: ruby
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 如何通过 Ruby 使用 Blob 存储
-[AZURE.INCLUDE [storage-selector-blob-include](../../includes/storage-selector-blob-include.md)]
+[!INCLUDE [storage-selector-blob-include](../../includes/storage-selector-blob-include.md)]
 
 ## 概述
 Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中的服务。Blob 存储可以存储任何类型的文本或二进制数据，例如文档、媒体文件或应用程序安装程序。Blob 存储也称为对象存储。
 
 本指南将演示如何使用 Blob 存储执行常见方案。相关示例是使用 Ruby API 编写的。涉及的任务包括“上传”、“列出”、“下载”和“删除”Blob。
 
-[AZURE.INCLUDE [storage-blob-concepts-include](../../includes/storage-blob-concepts-include.md)]
+[!INCLUDE [storage-blob-concepts-include](../../includes/storage-blob-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建 Ruby 应用程序
-创建 Ruby 应用程序。有关说明，请参阅 [Azure VM 上的 Ruby on Rails Web 应用程序](/documentation/articles/virtual-machines-linux-classic-ruby-rails-web-app/)。
+创建 Ruby 应用程序。有关说明，请参阅 [Azure VM 上的 Ruby on Rails Web 应用程序](../virtual-machines/virtual-machines-linux-classic-ruby-rails-web-app.md)。
 
 ## 配置应用程序以访问存储
 要使用 Azure 存储，需要下载和使用 Ruby azure 包，其中包括一组便于与存储 REST 服务进行通信的库。
@@ -51,7 +52,6 @@ Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORA
 	Azure.config.storage_account_name = "<your azure storage account>"
 	Azure.config.storage_access_key = "<your azure storage access key>"
 
-
 从 Azure 门户预览中的经典账户或 Resource Manager 存储帐户中获取这些值：
 
 1. 登录到 [Azure 门户预览](https://portal.azure.cn)。
@@ -69,7 +69,7 @@ Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORA
 5. 单击复制图标以将键复制到剪贴板。
 
 ## 创建容器
-[AZURE.INCLUDE [storage-container-naming-rules-include](../../includes/storage-container-naming-rules-include.md)]
+[!INCLUDE [storage-container-naming-rules-include](../../includes/storage-container-naming-rules-include.md)]
 
 使用 **Azure::Blob::BlobService** 对象可以对容器和 Blob 进行操作。若要创建容器，请使用 **create\_container()** 方法。
 
@@ -88,7 +88,6 @@ Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORA
 
 	container = azure_blob_service.create_container("test-container",
 	  :public_access_level => "<public access level>")
-
 
 **:public\_access\_level** 选项的有效值为：
 
@@ -142,6 +141,6 @@ Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORA
 
 - [Azure 存储团队博客](http://blogs.msdn.com/b/windowsazurestorage/)
 - GitHub 上的 [Azure SDK for Ruby](https://github.com/WindowsAzure/azure-sdk-for-ruby) 存储库
-- [使用 AzCopy 命令行实用程序传输数据](/documentation/articles/storage-use-azcopy/)
+- [使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)
 
 <!---HONumber=Mooncake_0103_2017-->

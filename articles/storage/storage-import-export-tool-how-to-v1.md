@@ -1,29 +1,28 @@
-<properties
-    pageTitle="使用 Azure 导入/导出工具 - v1 | Azure"
-    description="了解如何使用导入/导出工具为导入作业准备硬盘驱动器，以修复导入作业或导出作业。"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 使用 Azure 导入/导出工具 - v1 | Azure
+description: 了解如何使用导入/导出工具为导入作业准备硬盘驱动器，以修复导入作业或导出作业。
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.assetid="f77535bb-d577-438a-bdd3-e15a82e0c543"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/19/2016"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.assetid: f77535bb-d577-438a-bdd3-e15a82e0c543
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/19/2016
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 使用 Azure 导入/导出工具 (v1)
 
 使用 Azure 导入/导出工具 (WAImportExport.exe) 可以创建和管理 Azure 导入/导出服务的作业，将大量数据传入或传出 Azure Blob 存储。
 
-本文档适用于 v1 版本的 Azure 导入/导出工具。有关该工具的最新版本的用法信息，请参阅[使用 Azure 导入/导出工具](/documentation/articles/storage-import-export-tool-how-to/)。
+本文档适用于 v1 版本的 Azure 导入/导出工具。有关该工具的最新版本的用法信息，请参阅[使用 Azure 导入/导出工具](./storage-import-export-tool-how-to.md)。
 
 以下文章介绍了如何使用该工具实现以下目的：
 

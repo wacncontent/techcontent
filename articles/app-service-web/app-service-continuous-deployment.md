@@ -1,25 +1,25 @@
-<properties
-	pageTitle="连续部署到 Azure App Service | Azure"
-	description="了解如何实现连续部署到 Azure App Service。"
-	services="app-service"
-	documentationCenter=""
-	authors="dariagrigoriu"
-	manager="wpickett"
-	editor="mollybos"/>
+---
+title: 连续部署到 Azure App Service | Azure
+description: 了解如何实现连续部署到 Azure App Service。
+services: app-service
+documentationCenter: 
+authors: dariagrigoriu
+manager: wpickett
+editor: mollybos
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/28/2016"
-	wacn.date="01/05/2017"
-	ms.author="dariagrigoriu"/>
-    
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/28/2016
+wacn.date: 01/05/2017
+ms.author: dariagrigoriu
+---
+
 # 连续部署到 Azure App Service
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本教程说明如何为 [Azure App Service] 应用配置连续部署工作流。将应用服务与 BitBucket 和 GitHub 集成可以实现一种连续部署工作流，在其中，Azure 可以从发布到其中一种服务的项目中拉取最近的更新。连续部署选项非常适合用于频繁集成多个分发内容的项目。
 
@@ -35,7 +35,7 @@
 
 4. 输入 GitHub 存储库的 URL 并输入要跟踪的分支。将“存储库类型”保留为“Git”，并单击“完成”
 
-    > [AZURE.NOTE] Azure 中国目前只支持公共存储库，因为我们无法输入 Web 应用的 Git 凭据。
+    > [!NOTE] Azure 中国目前只支持公共存储库，因为我们无法输入 Web 应用的 Git 凭据。
 
     Azure 将创建与所选存储库的关联，从指定的分支提取文件，并保留 Azure Web 应用存储库的副本。
 
@@ -63,7 +63,6 @@
 
     ![](./media/app-service-continuous-deployment/VS_source_control.png)  
 
- 
 -	将整个解决方案的目录树添加到你的存储库中，其中 .sln 文件位于存储库根中。
 
 你按照说明设置存储库并将 Azure 中的应用配置为从某个联机 Git 存储库连续发布后，你就可以在 Visual Studio 中从本地开发 ASP.NET 应用程序，并且只需通过将所做的更改推送到联机的 Git 存储库即可连续部署代码。
@@ -84,12 +83,12 @@
 * [Git 文档]
 * [项目 Kudu](https://github.com/projectkudu/kudu/wiki)
 
-[Azure App Service]: /documentation/articles/app-service-changes-existing-services/
+[Azure App Service]: ./app-service-changes-existing-services.md
 [Azure 门户预览]: https://portal.azure.cn
 [VSTS Portal]: https://www.visualstudio.com/products/visual-studio-team-services-vs.aspx
 [Installing Git]: http://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git
 [如何使用适用于 Azure 的 PowerShell]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
-[如何使用针对 Mac 和 Linux 的 Azure 命令行工具]: /documentation/articles/xplat-cli-install/
+[如何使用针对 Mac 和 Linux 的 Azure 命令行工具]: ../xplat-cli-install.md
 [Git 文档]: http://git-scm.com/documentation
 
 [创建存储库 (GitHub)]: https://help.github.com/articles/create-a-repo

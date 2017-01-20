@@ -1,48 +1,46 @@
-<properties
-   pageTitle="配置可共存的 ExpressRoute 连接和站点到站点 VPN 连接 | Azure"
-   description="本文将指导你配置可在经典部署模型中并存的 ExpressRoute 连接和站点到站点 VPN 连接。"
-   documentationCenter="na"
-   services="expressroute"
-   authors="charwen"
-   manager="carmonm"
-   editor=""
-   tags="azure-service-management"/>
-<tags
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/10/2016"
-   wacn.date="01/04/2017"
-   ms.author="charwen"/>  
+---
+title: 配置可共存的 ExpressRoute 连接和站点到站点 VPN 连接 | Azure
+description: 本文将指导你配置可在经典部署模型中并存的 ExpressRoute 连接和站点到站点 VPN 连接。
+documentationCenter: na
+services: expressroute
+authors: charwen
+manager: carmonm
+editor: 
+tags: azure-service-management
 
+ms.service: expressroute
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/10/2016
+wacn.date: 01/04/2017
+ms.author: charwen
+---
 
 # 为经典部署模型配置 ExpressRoute 和站点到站点共存连接
 
-
-> [AZURE.SELECTOR]
-- [PowerShell - Resource Manager](/documentation/articles/expressroute-howto-coexist-resource-manager/)
-- [PowerShell - 经典](/documentation/articles/expressroute-howto-coexist-classic/)
+> [!div class="op_single_selector"]
+- [PowerShell - Resource Manager](./expressroute-howto-coexist-resource-manager.md)
+- [PowerShell - 经典](./expressroute-howto-coexist-classic.md)
 
 能够配置站点到站点 VPN 和 ExpressRoute 具有多项优势。你可以将站点到站点 VPN 配置为 ExressRoute 的安全故障转移路径，或者使用站点到站点 VPN 连接到不是通过 ExpressRoute 进行连接的站点。我们将在本文中介绍这两种方案的配置步骤。本文适用于经典部署模型。此配置在门户中不可用。
 
 **关于 Azure 部署模型**
 
-[AZURE.INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
+[!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
->[AZURE.IMPORTANT] 按以下说明进行操作之前，必须预先配置ExpressRoute 线路。在按以下步骤操作之前，请务必遵循相关指南来[创建 ExpressRoute 线路](/documentation/articles/expressroute-howto-circuit-classic/)和[配置路由](/documentation/articles/expressroute-howto-routing-classic/)。
+>[!IMPORTANT] 按以下说明进行操作之前，必须预先配置ExpressRoute 线路。在按以下步骤操作之前，请务必遵循相关指南来[创建 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)和[配置路由](./expressroute-howto-routing-classic.md)。
 
 ## 限制和局限性
 
 - **不支持传输路由。** 无法在通过站点到站点 VPN 连接的本地网络与通过 ExpressRoute 连接的本地网络之间进行路由（通过 Azure）。
 - **不支持点到站点路由。** 不能启用与连接到 ExpressRoute 的同一 VNet 的点到站点 VPN 连接。对于同一 VNet 而言，点到站点 VPN 和 ExpressRoute 不能共存。
 - **不能在站点到站点 VPN 网关上启用强制隧道。** 仅可“强制”所有面向 Internet 的流量通过 ExpressRoute 回到本地网络。
-- **不支持基本 SKU 网关。** 必须为 [ExpressRoute 网关](/documentation/articles/expressroute-about-virtual-network-gateways/)和 [VPN 网关](/documentation/articles/vpn-gateway-about-vpngateways/)使用非基本 SKU 网关。
-- **仅支持基于路由的 VPN 网关。** 必须使用基于路由的 [VPN 网关](/documentation/articles/vpn-gateway-about-vpngateways/)。
+- **不支持基本 SKU 网关。** 必须为 [ExpressRoute 网关](./expressroute-about-virtual-network-gateways.md)和 [VPN 网关](../vpn-gateway/vpn-gateway-about-vpngateways.md)使用非基本 SKU 网关。
+- **仅支持基于路由的 VPN 网关。** 必须使用基于路由的 [VPN 网关](../vpn-gateway/vpn-gateway-about-vpngateways.md)。
 - **应该为 VPN 网关配置静态路由。** 如果本地网络同时连接到 ExpressRoute 和站点到站点 VPN，则必须在本地网络中配置静态路由，以便将站点到站点 VPN 连接路由到公共 Internet。
 - **必须先配置 ExpressRoute 网关。** 必须先创建 ExpressRoute 网关，然后才能添加站点到站点 VPN 网关。
-
 
 ## 配置设计
 
@@ -58,12 +56,11 @@
 
 ![共存](./media/expressroute-howto-coexist-classic/scenario2.jpg)
 
->[AZURE.NOTE]不能将虚拟网络配置为转换路由器。
+>[!NOTE]不能将虚拟网络配置为转换路由器。
 
 ## 选择要使用的步骤
 
 若要配置能够共存的连接，有两组不同的过程可供选择。你选择的配置过程将取决于你有要连接到的现有虚拟网络，还是要创建新的虚拟网络。
-
 
 - 我没有 VNet，需要创建一个。
 	
@@ -75,12 +72,11 @@
 
 	在此过程中，创建可以共存的连接将需要你删除网关，然后配置新网关。这意味着，在你删除并重新创建网关和连接时，跨界连接将会停止工作，但你无需将任何 VM 或服务迁移到新的虚拟网络。在你配置网关时，如果进行了相应配置，你的 VM 和服务仍可以通过负载均衡器与外界通信。
 
-
 ## <a name="new"></a>创建新的虚拟网络和并存连接
 
 本过程将指导你创建 VNet，以及创建将共存的站点到站点连接和 ExpressRoute 连接。
 
-1. 你需要安装 Azure PowerShell cmdlet 的最新版本。有关安装 PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。请注意，针对此配置使用的 cmdlet 可能与你熟悉的 cmdlet 稍有不同。请务必使用说明内容中指定的 cmdlet。
+1. 你需要安装 Azure PowerShell cmdlet 的最新版本。有关安装 PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。请注意，针对此配置使用的 cmdlet 可能与你熟悉的 cmdlet 稍有不同。请务必使用说明内容中指定的 cmdlet。
 
 2. 创建虚拟网络的架构。有关配置架构的详细信息，请参阅 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100.aspx)。
 
@@ -155,14 +151,13 @@
 
 7. 创建一个本地站点 VPN 网关实体。此命令不会配置本地 VPN 网关，而是允许你提供本地网关设置（如公共 IP 和本地地址空间），以便 Azure VPN 网关可以连接到它。
 
-	>[AZURE.IMPORTANT] netcfg 中未定义站点到站点 VPN 的本地站点。而是，必须使用此 cmdlet 指定本地站点参数。不能使用门户或 netcfg 文件定义它。
+	>[!IMPORTANT] netcfg 中未定义站点到站点 VPN 的本地站点。而是，必须使用此 cmdlet 指定本地站点参数。不能使用门户或 netcfg 文件定义它。
 
 	使用下面的示例，并将值替换为你自己的值。
 
 		New-AzureLocalNetworkGateway -GatewayName MyLocalNetwork -IpAddress <MyLocalGatewayIp> -AddressSpace <MyLocalNetworkAddress>
 
-	> [AZURE.NOTE]如果你的本地网络具有多个路由，你可以通过数组的形式将其全部传入。$MyLocalNetworkAddress = @("10.1.2.0/24","10.1.3.0/24","10.2.1.0/24")
-
+	> [!NOTE]如果你的本地网络具有多个路由，你可以通过数组的形式将其全部传入。$MyLocalNetworkAddress = @("10.1.2.0/24","10.1.3.0/24","10.2.1.0/24")
 
 	若要检索虚拟网络网关设置（包括网关 ID 和公共 IP），请使用 `Get-AzureVirtualNetworkGateway` cmdlet。请参阅以下示例。
 
@@ -176,13 +171,11 @@
 		OperationId          : ddc4bfae-502c-adc7-bd7d-1efbc00b3fe5
 		OperationStatus      : Succeeded
 
-
-8. 配置本地 VPN 设备以连接到新网关。配置 VPN 设备时，使用在步骤 6 中检索到的信息。有关 VPN 设备配置的详细信息，请参阅 [VPN 设备配置](/documentation/articles/vpn-gateway-about-vpn-devices/)。
+8. 配置本地 VPN 设备以连接到新网关。配置 VPN 设备时，使用在步骤 6 中检索到的信息。有关 VPN 设备配置的详细信息，请参阅 [VPN 设备配置](../vpn-gateway/vpn-gateway-about-vpn-devices.md)。
 
 9. 将 Azure 上的站点到站点 VPN 网关连接到本地网关。
 
 	在此示例中，connectedEntityId 是本地网关 ID，可以通过运行 `Get-AzureLocalNetworkGateway` 来查找它。可以通过使用 `Get-AzureVirtualNetworkGateway` cmdlet 查找 virtualNetworkGatewayId。完成此步骤后，已通过站点到站点 VPN 连接建立本地网络与 Azure 之间的连接。
-
 
 		New-AzureVirtualNetworkGatewayConnection -connectedEntityId <local-network-gateway-id> -gatewayConnectionName Azure2Local -gatewayConnectionType IPsec -sharedKey abc123 -virtualNetworkGatewayId <azure-s2s-vpn-gateway-id>
 
@@ -192,9 +185,9 @@
 
 如果网关子网为 /27 或更大，且虚拟网络是通过 ExpressRoute 连接的，则可跳过下面的步骤，转到前一部分的[“步骤 6 - 创建站点到站点 VPN 网关”](#vpngw)。
 
->[AZURE.NOTE] 如果你删除的是现有网关，则当你进行此配置时，本地系统将失去与虚拟网络建立的连接。
+>[!NOTE] 如果你删除的是现有网关，则当你进行此配置时，本地系统将失去与虚拟网络建立的连接。
 
-1. 你需要安装最新版本的 Azure Resource Manager PowerShell cmdlet。有关安装 PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。请注意，针对此配置使用的 cmdlet 可能与你熟悉的 cmdlet 稍有不同。请务必使用说明内容中指定的 cmdlet。 
+1. 你需要安装最新版本的 Azure Resource Manager PowerShell cmdlet。有关安装 PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。请注意，针对此配置使用的 cmdlet 可能与你熟悉的 cmdlet 稍有不同。请务必使用说明内容中指定的 cmdlet。 
 
 2. 删除现有的 ExpressRoute 或站点到站点 VPN 网关。使用下面的 cmdlet，并将值替换为你自己的值。
 
@@ -205,7 +198,7 @@
 	`Get-AzureVNetConfig -ExportToFile "C:\NetworkConfig.xml"`
 
 4. 编辑网络配置文件架构，使网关子网为 /27 或更短的前缀（例如 /26 或 /25）。请参阅以下示例。
->[AZURE.NOTE] 如果你因为虚拟网络中没有剩余足够的 IP 地址而无法增加网关子网大小，则需增加 IP 地址空间。有关配置架构的详细信息，请参阅 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100.aspx)。
+>[!NOTE] 如果你因为虚拟网络中没有剩余足够的 IP 地址而无法增加网关子网大小，则需增加 IP 地址空间。有关配置架构的详细信息，请参阅 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100.aspx)。
 
           <Subnet name="GatewaySubnet">
             <AddressPrefix>10.17.159.224/27</AddressPrefix>
@@ -225,6 +218,6 @@
 
 ## 后续步骤
 
-有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 常见问题](/documentation/articles/expressroute-faqs/)。
+有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 常见问题](./expressroute-faqs.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

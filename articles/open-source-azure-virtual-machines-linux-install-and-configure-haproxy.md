@@ -1,16 +1,16 @@
-<properties
-	pageTitle="在 Azure Linux 虚拟机上安装配置 HAProxy"
-	description="了解如何在 Azure Linux 虚拟机上安装配置 HAProxy"
-	services="open-source"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""/>
+---
+title: 在 Azure Linux 虚拟机上安装配置 HAProxy
+description: 了解如何在 Azure Linux 虚拟机上安装配置 HAProxy
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-	ms.service="open-source-website"
-	ms.date=""
-	wacn.date="06/14/2016"/>
+ms.service: open-source-website
+ms.date: 
+wacn.date: 06/14/2016
+---
 
 # 在 Azure Linux 虚拟机上安装配置 HAProxy
 
@@ -24,7 +24,6 @@
 HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的开源，快速，可靠的解决方案，特别适用于访问量大，高并发的网站。过去的这几年 HAProxy 已经成为标准的开源负载均衡器，在某些云平台默认部署。
 
 它的运作模式使得与现有的架构进行集成变得非常的容易，而且让脆弱的 web server 不直接暴露在公网上。这篇文档演示了 HAProxy 的安装，配置和使用过程。
-
 
 ##<a name="install"></a> 安装
 
@@ -59,13 +58,13 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
 	不想让这些服务器处于同一子网的话可以忽略‘创建虚拟网络’这步，那么则让它们的区域保持一致，都是中国东部或者中国北部。在创建虚拟机时选择区域。
 
-	Azure 有提供虚拟网络的服务，可以让不同的虚拟机处于同一个子网下。请参考[虚拟网络链接](/documentation/articles/virtual-networks-create-vnet-classic-portal/)创建虚拟网络
+	Azure 有提供虚拟网络的服务，可以让不同的虚拟机处于同一个子网下。请参考[虚拟网络链接](./virtual-network/virtual-networks-create-vnet-classic-portal.md)创建虚拟网络
 
-2. 新建三台 VM，选择 OS， 比如 CentOS 7.0。参考 [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/). 创建虚拟机。在创建时记得选择上一步创建的虚拟网络。必须在创建虚拟机时指定虚拟网络。创建虚拟机后，不能将它加入虚拟网络。没有创建虚拟网络的话则请在选择区域时保持一致。
+2. 新建三台 VM，选择 OS， 比如 CentOS 7.0。参考 [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md). 创建虚拟机。在创建时记得选择上一步创建的虚拟网络。必须在创建虚拟机时指定虚拟网络。创建虚拟机后，不能将它加入虚拟网络。没有创建虚拟网络的话则请在选择区域时保持一致。
 
-3. 三台 VM 打开上面表格中提到的相应端口。参考[创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)
+3. 三台 VM 打开上面表格中提到的相应端口。参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)
 
-4. 连接到 HAProxy VM. 如果这是您第一次使用 AZURE 的虚拟机，请参考 [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 连接到虚拟机。
+4. 连接到 HAProxy VM. 如果这是您第一次使用 AZURE 的虚拟机，请参考 [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 连接到虚拟机。
 
 5. 下载 HAProxy 源码包。访问 HAProxy 官网下载您所需的版本，比如 http://www.haproxy.org/download/1.6/src/haproxy-1.6.3.tar.gz
 
@@ -94,9 +93,6 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 	Ubuntu 用 sudo apt-get install make gcc           #---》 Ubuntu 默认没有安装 make
 
 	SLES 用 sudo zypper install gcc
-
-
-
 
 ##<a name="configure"></a> 配置
 
@@ -188,16 +184,12 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 		        server  10.8.0.4 10.8.0.4:80  weight 5 check inter 2000 rise 2 fall 3
 		        server  10.8.0.5 10.8.0.5:80  weight 5 check inter 2000 rise 2 fall 3
 
-
-
 	重启 HAProxy 服务
 
 		$sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
 
 	再次在浏览器里输入 [http://HAProxy 的公网地址:80](#) 并不断的刷新，发现访问的都是固定的一台 web server。
  
-
-
 2. 通过 roundrobin+cookie 的方式来解决 sesion 会话的问题
 
 	修改 /usr/local/haproxy/haproxy.cfg 中 backend httppool 的部分，修改后内容如下
@@ -295,7 +287,7 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
 		$sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
 
-4. 在HAProxy VM打开443端口。参考[创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)
+4. 在HAProxy VM打开443端口。参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)
 5. 在浏览器里输入 [https://HAProxy 域名](#), 会出现如下图。
 
 	![](./media/open-source-azure-virtual-machines-linux-install-and-configure-haproxy/ssl2.png)
@@ -344,7 +336,7 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
 		$sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
 
-3. 在 HAProxy VM 以及后端两台 web server 打开 443 端口。参考[创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)
+3. 在 HAProxy VM 以及后端两台 web server 打开 443 端口。参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)
 4. 在 web server 配置 SSL。请参考 apache 官网 [https://httpd.apache.org/docs/2.2/ssl/](https://httpd.apache.org/docs/2.2/ssl/)
 
 更多关于 HAProxy 的详细信息请参考[官网](http://www.haproxy.org/)

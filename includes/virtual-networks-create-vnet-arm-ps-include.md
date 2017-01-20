@@ -6,7 +6,7 @@
 
 1. 如果你从未使用过 Azure PowerShell，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)，并始终按照说明进行操作，以登录到 Azure 并选择你的订阅。
 	
-3. 如有必要，创建一个新的资源组，如下所示。对于我们的方案，创建一个名为 *TestRG* 的资源组。有关资源组的详细信息，请访问 [Azure 资源管理器概述](/documentation/articles/resource-group-overview/)。
+3. 如有必要，创建一个新的资源组，如下所示。对于我们的方案，创建一个名为 *TestRG* 的资源组。有关资源组的详细信息，请访问 [Azure 资源管理器概述](../articles/azure-resource-manager/resource-group-overview.md)。
 
 		New-AzureResourceGroup -Name TestRG -Location centralus
 
@@ -52,7 +52,7 @@
 
 		$vnet = Get-AzureVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
 	
-	>[AZURE.TIP]可以通过运行 **$vnet = New-AzureVirtualNetwork -ResourceGroupName TestRG -Name TestVNet -AddressPrefix 192.168.0.0/16 -Location centralus** 合并步骤 4 和步骤 5。
+	>[!TIP]可以通过运行 **$vnet = New-AzureVirtualNetwork -ResourceGroupName TestRG -Name TestVNet -AddressPrefix 192.168.0.0/16 -Location centralus** 合并步骤 4 和步骤 5。
 
 6. 将子网添加到新的 VNet 变量中，如下所示。
 

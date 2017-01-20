@@ -1,20 +1,19 @@
-<properties
-	pageTitle="Azure 中使用 iPerf 进行网络带宽测试"
-	description="了解 Azure 中使用 iPerf 进行网络带宽测试。"
-	services="virtual-network"
-	documentationCenter=""
-	authors="Kyle Fu"
-	manager=""
-	editor=""
-	tags="Azure,iPerf,带宽,网络"/>
+---
+title: Azure 中使用 iPerf 进行网络带宽测试
+description: 了解 Azure 中使用 iPerf 进行网络带宽测试。
+services: virtual-network
+documentationCenter: 
+authors: Kyle Fu
+manager: 
+editor: 
+tags: Azure,iPerf,带宽,网络
 
-<tags
-	ms.service="virtual-network-aog"
-	ms.date="11/03/2016"
-	wacn.date="11/03/2016"/>
+ms.service: virtual-network-aog
+ms.date: 11/03/2016
+wacn.date: 11/03/2016
+---
 
 #Azure 中使用 iPerf 进行网络带宽测试
-
 
 ##iPerf 简介
 
@@ -173,7 +172,6 @@ Client 端的数据除了传输的数据大小和实时带宽，还有 TCP 重�
 
 ![](./media/aog-virtual-network-iperf-bandwidth-test/iperf-output-final.png)
 
- 
 这里可以看到 4 个数据流接收到的数据大小和平均带宽，还有接收到的总数据和总带宽。
 
 我们再看一下 8 个数据流并发测试的结果，见下图。

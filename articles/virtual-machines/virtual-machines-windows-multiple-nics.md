@@ -1,29 +1,30 @@
 <!-- need to be verified -->
 
-<properties
-    pageTitle="创建具有多个 NIC 的 Windows VM | Azure"
-    description="了解如何使用 Azure PowerShell 或 Resource Manager 模板创建附有多个 NIC 的 Windows VM。"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    author="iainfoulds"
-    manager="timlt"
-    editor="" />
-<tags 
-    ms.assetid="9bff5b6d-79ac-476b-a68f-6f8754768413"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="infrastructure"
-    ms.date="10/27/2016"
-    wacn.date="01/05/2017"
-    ms.author="iainfou" />
+---
+title: 创建具有多个 NIC 的 Windows VM | Azure
+description: 了解如何使用 Azure PowerShell 或 Resource Manager 模板创建附有多个 NIC 的 Windows VM。
+services: virtual-machines-windows
+documentationcenter: 
+author: iainfoulds
+manager: timlt
+editor: 
+
+ms.assetid: 9bff5b6d-79ac-476b-a68f-6f8754768413
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure
+ms.date: 10/27/2016
+wacn.date: 01/05/2017
+ms.author: iainfou
+---
 
 # 创建具有多个 NIC 的 Windows VM
-可以在 Azure 中创建附有多个虚拟网络接口 (NIC) 的虚拟机 (VM)。一种常见方案是为前端和后端连接使用不同的子网，或者为监视或备份解决方案使用一个专用网络。本文提供用于创建附有多个 NIC 的 VM 的快速命令。有关详细信息，包括如何在自己的 PowerShell 脚本中创建多个 NIC，请阅读 [Deploying multi-NIC VMs](/documentation/articles/virtual-network-deploy-multinic-arm-ps/)（部署具有多个 NIC 的 VM）。不同的 [VM 大小](/documentation/articles/virtual-machines-windows-sizes/)支持不同数目的 NIC，因此请相应地调整 VM 的大小。
+可以在 Azure 中创建附有多个虚拟网络接口 (NIC) 的虚拟机 (VM)。一种常见方案是为前端和后端连接使用不同的子网，或者为监视或备份解决方案使用一个专用网络。本文提供用于创建附有多个 NIC 的 VM 的快速命令。有关详细信息，包括如何在自己的 PowerShell 脚本中创建多个 NIC，请阅读 [Deploying multi-NIC VMs](../virtual-network/virtual-network-deploy-multinic-arm-ps.md)（部署具有多个 NIC 的 VM）。不同的 [VM 大小](./virtual-machines-windows-sizes.md)支持不同数目的 NIC，因此请相应地调整 VM 的大小。
 
-> [AZURE.WARNING]
-必须在创建 VM 时附加多个 NIC - 不能将 NIC 添加到现有 VM。可以[基于原始虚拟磁盘创建 VM](/documentation/articles/virtual-machines-windows-vhd-copy/)，并在部署 VM 时创建多个 NIC。
+> [!WARNING]
+必须在创建 VM 时附加多个 NIC - 不能将 NIC 添加到现有 VM。可以[基于原始虚拟磁盘创建 VM](./virtual-machines-windows-vhd-copy.md)，并在部署 VM 时创建多个 NIC。
 > 
 > 
 
@@ -69,10 +70,10 @@
     $myNic2 = New-AzureRmNetworkInterface -ResourceGroupName "myResourceGroup" `
         -Location "ChinaNorth" -Name "myNic2" -SubnetId $backEnd.Id
 
-通常，我们还会创建[网络安全组](/documentation/articles/virtual-networks-nsg/)或[负载均衡器](/documentation/articles/load-balancer-overview/)来帮助管理流量以及跨 VM 分布流量。[更详细的多 NIC VM](/documentation/articles/virtual-network-deploy-multinic-arm-ps/) 文章将指导你创建网络安全组和分配 NIC。
+通常，我们还会创建[网络安全组](../virtual-network/virtual-networks-nsg.md)或[负载均衡器](../load-balancer/load-balancer-overview.md)来帮助管理流量以及跨 VM 分布流量。[更详细的多 NIC VM](../virtual-network/virtual-network-deploy-multinic-arm-ps.md) 文章将指导你创建网络安全组和分配 NIC。
 
 ## 创建虚拟机
-立即开始构建 VM 配置。每种 VM 大小限制了可添加到 VM 的 NIC 数目。有关详细信息，请阅读 [Windows VM sizes](/documentation/articles/virtual-machines-windows-sizes/)（Windows VM 大小）。
+立即开始构建 VM 配置。每种 VM 大小限制了可添加到 VM 的 NIC 数目。有关详细信息，请阅读 [Windows VM sizes](./virtual-machines-windows-sizes.md)（Windows VM 大小）。
 
 首先，将 VM 凭据设置为 `$cred` 变量，如下所示：
 
@@ -107,23 +108,23 @@
     New-AzureRmVM -VM $vmConfig -ResourceGroupName "myResourceGroup" -Location "ChinaNorth"
 
 ## 使用 Resource Manager 模板创建多个 NIC
-Azure Resource Manager 模板使用声明性 JSON 文件来定义环境。阅读 [Azure Resource Manager 概述](/documentation/articles/resource-group-overview/)。Resource Manager 模板可让你在部署期间创建资源的多个实例，例如，创建多个 NIC。使用 *copy* 指定要创建的实例数：
+Azure Resource Manager 模板使用声明性 JSON 文件来定义环境。阅读 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。Resource Manager 模板可让你在部署期间创建资源的多个实例，例如，创建多个 NIC。使用 *copy* 指定要创建的实例数：
 
     "copy": {
         "name": "multiplenics"
         "count": "[parameters('count')]"
     }
 
-阅读有关[使用 *copy* 创建多个实例](/documentation/articles/resource-group-create-multiple/)的详细信息。
+阅读有关[使用 *copy* 创建多个实例](../azure-resource-manager/resource-group-create-multiple.md)的详细信息。
 
 也可以使用 `copyIndex()` 并在资源名称中追加一个数字，来创建 `myNic1`、`MyNic2`，等等。下面显示了追加索引值的示例：
 
     "name": "[concat('myNic', copyIndex())]", 
 
-阅读[使用 Resource Manager 模板创建多个 NIC](/documentation/articles/virtual-network-deploy-multinic-arm-template/) 的完整示例。
+阅读[使用 Resource Manager 模板创建多个 NIC](../virtual-network/virtual-network-deploy-multinic-arm-template.md) 的完整示例。
 
 ## 后续步骤
-尝试创建具有多个 NIC 的 VM 时，请务必查看 [Windows VM sizes](/documentation/articles/virtual-machines-windows-sizes/)（Windows VM 大小）。注意每个 VM 大小支持的 NIC 数目上限。
+尝试创建具有多个 NIC 的 VM 时，请务必查看 [Windows VM sizes](./virtual-machines-windows-sizes.md)（Windows VM 大小）。注意每个 VM 大小支持的 NIC 数目上限。
 
 请记住，不能将其他 NIC 添加到现有 VM，而必须在部署 VM 时创建所有 NIC。仔细规划部署，确保从一开始就建立了全部所需的网络连接。
 

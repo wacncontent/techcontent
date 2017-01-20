@@ -1,28 +1,28 @@
-<properties
-    pageTitle="使用 Azure Resource Manager 配置应用程序网关以进行 SSL 卸载 | Azure"
-    description="本页提供有关使用 Azure Resource Manager 创建支持 SSL 卸载的应用程序网关的说明"
-    documentationcenter="na"
-    services="application-gateway"
-    author="georgewallace"
-    manager="carmonm"
-    editor="tysonn" />  
+---
+title: 使用 Azure Resource Manager 配置应用程序网关以进行 SSL 卸载 | Azure
+description: 本页提供有关使用 Azure Resource Manager 创建支持 SSL 卸载的应用程序网关的说明
+documentationcenter: na
+services: application-gateway
+author: georgewallace
+manager: carmonm
+editor: tysonn
 
-<tags
-    ms.assetid="3c3681e0-f928-4682-9d97-567f8e278e13"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="11/16/2016"
-    wacn.date="01/03/2017"
-    ms.author="gwallace" />
+ms.assetid: 3c3681e0-f928-4682-9d97-567f8e278e13
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/16/2016
+wacn.date: 01/03/2017
+ms.author: gwallace
+---
 
 # 使用 Azure Resource Manager 配置应用程序网关以进行 SSL 卸载
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/application-gateway-ssl-portal/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-ssl-arm/)
-- [Azure 经典 PowerShell](/documentation/articles/application-gateway-ssl/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./application-gateway-ssl-portal.md)
+- [Azure Resource Manager PowerShell](./application-gateway-ssl-arm.md)
+- [Azure 经典 PowerShell](./application-gateway-ssl.md)
 
  可将 Azure 应用程序网关配置为在网关上终止安全套接字层 (SSL) 会话，以避免 Web 场中出现开销较高的 SSL 解密任务。SSL 卸载还简化了 Web 应用程序的前端服务器设置与管理。
 
@@ -60,7 +60,7 @@
 4. 创建应用程序网关资源
 
 ## 创建资源管理器的资源组
-确保切换 PowerShell 模式，以便使用 Azure Resource Manager cmdlet。[将 Windows PowerShell 与 Resource Manager 配合使用](/documentation/articles/powershell-azure-resource-manager/)中提供了详细信息。
+确保切换 PowerShell 模式，以便使用 Azure Resource Manager cmdlet。[将 Windows PowerShell 与 Resource Manager 配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)中提供了详细信息。
 
 ### 步骤 1
 
@@ -174,7 +174,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此设置用作�
 
 此示例配置应用程序网关的实例大小。
 
-> [AZURE.NOTE]
+> [!NOTE]
 *InstanceCount* 的默认值为 2，最大值为 10。*GatewaySize* 的默认值为 Medium。你可以在 Standard\_Small、Standard\_Medium 和 Standard\_Large 之间进行选择。
 > 
 > 
@@ -189,11 +189,9 @@ Azure 资源管理器要求所有资源组指定一个位置。此设置用作�
 
 创建网关后，下一步是配置用于通信的前端。使用公共 IP 时，应用程序网关需要动态分配的 DNS 名称，这会造成不方便。若要确保最终用户能够访问应用程序网关，可以使用指向应用程序网关的公共终结点的 CNAME 记录。为此，可使用附加到应用程序网关的 PublicIPAddress 元素检索应用程序网关及其关联的 IP/DNS 名称的详细信息。应使用应用程序网关的 DNS 名称来创建 CNAME 记录，使两个 Web 应用程序都指向此 DNS 名称。不建议使用 A 记录，因为重新启动应用程序网关后 VIP 可能会变化。
 
-
     Get-AzureRmPublicIpAddress -ResourceGroupName appgw-RG -Name publicIP01
 
 <br/>  
-
 
     Name                     : publicIP01
     ResourceGroupName        : appgw-RG
@@ -217,11 +215,11 @@ Azure 资源管理器要求所有资源组指定一个位置。此设置用作�
 
 ## 后续步骤
 
-如果要将应用程序网关配置为与内部负载均衡器 (ILB) 配合使用，请参阅 [Create an application gateway with an internal load balancer (ILB)](/documentation/articles/application-gateway-ilb/)（创建具有内部负载均衡器 (ILB) 的应用程序网关）。
+如果要将应用程序网关配置为与内部负载均衡器 (ILB) 配合使用，请参阅 [Create an application gateway with an internal load balancer (ILB)](./application-gateway-ilb.md)（创建具有内部负载均衡器 (ILB) 的应用程序网关）。
 
 如需负载均衡选项的其他常规信息，请参阅：
 
-* [Azure Load Balancer](/documentation/services/load-balancer/)
-* [Azure 流量管理器](/documentation/services/traffic-manager/)
+* [Azure Load Balancer](../load-balancer/index.md/)
+* [Azure 流量管理器](../traffic-manager/index.md/)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

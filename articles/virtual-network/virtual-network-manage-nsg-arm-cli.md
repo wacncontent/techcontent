@@ -1,38 +1,37 @@
-<properties
-    pageTitle="使用 Azure CLI 管理 NSG | Azure"
-    description="了解如何使用 Azure CLI 管理现有 NSG。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 Azure CLI 管理 NSG | Azure
+description: 了解如何使用 Azure CLI 管理现有 NSG。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="ed17d314-07e6-4c7f-bcf1-a8a2535d7c14"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="03/14/2016"
-    wacn.date="12/26/2016"
-    ms.author="jdial" />  
-
+ms.assetid: ed17d314-07e6-4c7f-bcf1-a8a2535d7c14
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/14/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 使用 Azure CLI 管理 NSG
 
-[AZURE.INCLUDE [virtual-network-manage-arm-selectors-include.md](../../includes/virtual-network-manage-nsg-arm-selectors-include.md)]
+[!INCLUDE [virtual-network-manage-arm-selectors-include.md](../../includes/virtual-network-manage-nsg-arm-selectors-include.md)]
 
-[AZURE.INCLUDE [virtual-network-manage-nsg-intro-include.md](../../includes/virtual-network-manage-nsg-intro-include.md)]
+[!INCLUDE [virtual-network-manage-nsg-intro-include.md](../../includes/virtual-network-manage-nsg-intro-include.md)]
 
-> [AZURE.NOTE]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型。
+> [!NOTE]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型。
 > 
 
-[AZURE.INCLUDE [virtual-network-manage-nsg-arm-scenario-include.md](../../includes/virtual-network-manage-nsg-arm-scenario-include.md)]
+[!INCLUDE [virtual-network-manage-nsg-arm-scenario-include.md](../../includes/virtual-network-manage-nsg-arm-scenario-include.md)]
 
-[AZURE.INCLUDE [azure-cli-prerequisites-include.md](../../includes/azure-cli-prerequisites-include.md)]
+[!INCLUDE [azure-cli-prerequisites-include.md](../../includes/azure-cli-prerequisites-include.md)]
 
 ## 检索信息
 可以查看你的现有 NSG、检索现有 NSG 的规则和查找与 NSG 关联的资源。
@@ -80,7 +79,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
     data:    DenyAllOutBound                *                  *            *               *                 *         Outbound   Deny    65500
     info:    network nsg show command OK
 
-> [AZURE.NOTE]
+> [!NOTE]
 还可以使用 `azure network nsg rule list --resource-group RG-NSG --nsg-name NSG-FrontEnd` 列出 **NSG-FrontEnd** NSG 中的规则。
 >
 
@@ -180,7 +179,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         --name allow-https \
         --quiet
 
-> [AZURE.NOTE]
+> [!NOTE]
 `--quiet` 参数可确保无需确认删除。
 >
 
@@ -234,7 +233,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
     azure network nic set --resource-group RG-NSG --name TestNICWeb1 --network-security-group-id ""
 
-> [AZURE.NOTE]
+> [!NOTE]
 请注意 `network-security-group-id` 参数的 ""（空）值。这就是删除 NSG 关联项的方式。不能对 `network-security-group-name` 参数执行相同操作。
 > 
 
@@ -296,7 +295,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         --name FrontEnd \
         --network-security-group-name NSG-FronEnd
 
-> [AZURE.NOTE]
+> [!NOTE]
 上述命令能起作用是因为 **NSG-FrontEnd** NSG 与虚拟网络 **TestVNet** 处于同一个资源组中。如果 NSG 在不同的资源组中，则需要改用 `--network-security-group-id` 参数，并提供 NSG 的完整 ID。可通过运行 `azure network nsg show --resource-group RG-NSG --name NSG-FrontEnd --json` 并查找 **id** 属性来检索 ID。
 > 
 
@@ -337,6 +336,6 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 		info:    network nsg delete command OK
 
 ## 后续步骤
-* 为 NSG [启用日志记录](/documentation/articles/virtual-network-nsg-manage-log/)。
+* 为 NSG [启用日志记录](./virtual-network-nsg-manage-log.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

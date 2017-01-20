@@ -1,26 +1,26 @@
-<properties
-    pageTitle="使用 Azure 媒体分析进行面部修订 | Azure"
-    description="本主题演示如何使用 Azure 媒体分析检测面部。"
-    services="media-services"
-    documentationcenter=""
-    author="juliako"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="5b6d8b8c-5f4d-4fef-b3d6-dc22c6b5a0f5"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="11/30/2016"
-    wacn.date="01/13/2017"
-    ms.author="juliako;" />  
+---
+title: 使用 Azure 媒体分析进行面部修订 | Azure
+description: 本主题演示如何使用 Azure 媒体分析检测面部。
+services: media-services
+documentationcenter: 
+author: juliako
+manager: erikre
+editor: 
 
+ms.assetid: 5b6d8b8c-5f4d-4fef-b3d6-dc22c6b5a0f5
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 11/30/2016
+wacn.date: 01/13/2017
+ms.author: juliako;
+---
 
 # 使用 Azure 媒体分析进行面部修订
 ## 概述
-**Azure 媒体修订器**是一种 [Azure 媒体分析](/documentation/articles/media-services-analytics-overview/)媒体处理器 \(MP\)，可用于在云中进行可缩放的面部修订。使用面部修订，可对视频进行修改，使所选个人的面部模糊显示。用户可能想要在公共安全和新闻媒体场景中使用面部修订服务。对于时长仅几分钟但包含多张面孔的镜头，进行手动面部修订可能需要几个小时，但使用此服务仅需几个简单步骤即可完成该过程。有关详细信息，请参阅[此](https://azure.microsoft.com/blog/azure-media-redactor/)博客。
+**Azure 媒体修订器**是一种 [Azure 媒体分析](./media-services-analytics-overview.md)媒体处理器 \(MP\)，可用于在云中进行可缩放的面部修订。使用面部修订，可对视频进行修改，使所选个人的面部模糊显示。用户可能想要在公共安全和新闻媒体场景中使用面部修订服务。对于时长仅几分钟但包含多张面孔的镜头，进行手动面部修订可能需要几个小时，但使用此服务仅需几个简单步骤即可完成该过程。有关详细信息，请参阅[此](https://azure.microsoft.com/blog/azure-media-redactor/)博客。
 
 本主题提供有关 **Azure 媒体修订器**的详细信息，并演示如何通过适用于 .NET 的媒体服务 SDK 使用它。
 
@@ -95,7 +95,6 @@
 
 … 已截断
 
-
 ###修订模式
 
 工作流的第二步使用更大数量的输入，这些输入必须合并为单个资产。
@@ -124,7 +123,7 @@
 
 对于已检测并跟踪到的面部，将返回其坐标，以指示面部位置，还将返回面部 ID 编号，以表示正在跟踪该人员的面部。在正面面部长时间于帧中消失或重叠的情况下，面部 ID 编号很容易重置，导致某些人员被分配多个 ID。
 
-有关详细的属性说明，请参阅 [Detect Face and Emotion with Azure Media Analytics](/documentation/articles/media-services-face-and-emotion-detection/)（使用 Azure 媒体分析检测面部和情感）主题。
+有关详细的属性说明，请参阅 [Detect Face and Emotion with Azure Media Analytics](./media-services-face-and-emotion-detection.md)（使用 Azure 媒体分析检测面部和情感）主题。
 
 ## 代码示例
 
@@ -311,12 +310,9 @@
 		    }
         }
 
-
-
-
 ##相关链接
 
-[Azure Media Services Analytics Overview（Azure 媒体服务分析概述）](/documentation/articles/media-services-analytics-overview/)
+[Azure Media Services Analytics Overview（Azure 媒体服务分析概述）](./media-services-analytics-overview.md)
 
 [Azure 媒体分析演示](http://azuremedialabs.azurewebsites.net/demos/Analytics.html)
 

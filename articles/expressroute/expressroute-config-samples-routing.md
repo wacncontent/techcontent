@@ -1,28 +1,29 @@
-<properties
-   pageTitle="ExpressRoute 客户路由器配置示例 | Azure"
-   description="本页提供 Cisco 和 Juniper 路由器的路由器配置示例。"
-   documentationCenter="na"
-   services="expressroute"
-   authors="cherylmc"
-   manager="carmonm"
-   editor="" />
-<tags
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="article" 
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/10/2016"
-   wacn.date="01/09/2017"
-   ms.author="cherylmc"/>
+---
+title: ExpressRoute 客户路由器配置示例 | Azure
+description: 本页提供 Cisco 和 Juniper 路由器的路由器配置示例。
+documentationCenter: na
+services: expressroute
+authors: cherylmc
+manager: carmonm
+editor: 
+
+ms.service: expressroute
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/10/2016
+wacn.date: 01/09/2017
+ms.author: cherylmc
+---
 
 # 用于设置和管理路由的路由器配置示例
 
 本页提供适用于 Cisco IOS XE 和 Juniper MX 系列路由器的接口与路由配置示例。这些示例仅供指导，不能按原样使用。你可以与你的供应商合作，以便为你的网络指定适当的配置。
 
->[AZURE.IMPORTANT] 本页中的示例仅供指导。你必须与供应商的销售/技术团队和你的网络团队合作，以便指定符合需要的适当配置。对于本页中所列配置的相关问题，Azure 将不提供支持。有关支持问题，必须与设备供应商联系。
+>[!IMPORTANT] 本页中的示例仅供指导。你必须与供应商的销售/技术团队和你的网络团队合作，以便指定符合需要的适当配置。对于本页中所列配置的相关问题，Azure 将不提供支持。有关支持问题，必须与设备供应商联系。
 
-以下路由器配置示例适用于所有对等互连。有关路由的更多详细信息，请查看 [ExpressRoute 对等互连](/documentation/articles/expressroute-circuit-peerings)和 [ExpressRoute 路由要求](/documentation/articles/expressroute-routing/)。
+以下路由器配置示例适用于所有对等互连。有关路由的更多详细信息，请查看 [ExpressRoute 对等互连](./expressroute-circuit-peerings.md)和 [ExpressRoute 路由要求](./expressroute-routing.md)。
 
 ## 基于 Cisco IOS-XE 的路由器
 
@@ -93,7 +94,6 @@
 	 match ip address prefix-list <MS_Prefixes>
 	!
 
-
 ## Juniper MX 系列路由器 
 
 本部分中的示例适用于所有 Juniper MX 系列路由器。
@@ -115,7 +115,6 @@
     		}
     	}
     }
-
 
 #### QinQ 接口定义
 
@@ -175,7 +174,6 @@
 	    }                                   
 	}
 
-
 ### 4\.路由映射
 
 可以使用路由映射和前缀列表来筛选已传播到网络中的前缀。可以使用以下示例来完成此任务。确保已设置适当的前缀列表。
@@ -209,6 +207,6 @@
 
 ## 后续步骤
 
-有关详细信息，请参阅 [ExpressRoute 常见问题](/documentation/articles/expressroute-faqs/)。
+有关详细信息，请参阅 [ExpressRoute 常见问题](./expressroute-faqs.md)。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

@@ -1,34 +1,29 @@
-<properties 
-	pageTitle="使用 .NET 连接到媒体服务帐户" 
-	description="本主题演示如何使用 .NET 连接到媒体服务。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 .NET 连接到媒体服务帐户
+description: 本主题演示如何使用 .NET 连接到媒体服务。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="09/26/2016" 
-	wacn.date="12/26/2016"
-	ms.author="juliako"/>  
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/26/2016
+ms.author: juliako
+---
 
 # 使用适用于 .NET 的媒体服务 SDK 连接到媒体服务帐户
 
-> [AZURE.SELECTOR]
-- [REST](/documentation/articles/media-services-rest-connect-programmatically/)
-- [.NET](/documentation/articles/media-services-dotnet-connect-programmatically/)
-
+> [!div class="op_single_selector"]
+- [REST](./media-services-rest-connect-programmatically.md)
+- [.NET](./media-services-dotnet-connect-programmatically.md)
 
 本主题介绍如何在使用适用于 .NET 的媒体服务 SDK 编程时获取与 Azure 媒体服务的编程连接。
-
 
 ## 连接到媒体服务
 
@@ -42,13 +37,11 @@
 
 若要查找这些值，请转到 Azure 经典管理门户，选择你的媒体服务帐户，然后单击门户窗口底部的“管理密钥”图标。单击每个文本框旁边的图标将值复制到系统剪贴板中。
 
-
 ## 创建 CloudMediaContext 实例
 
 若要开始针对媒体服务编程，你需要创建一个代表服务器上下文的 **CloudMediaContext** 实例。**CloudMediaContext** 包括对各种重要集合的引用，这些集合包括作业、资产、文件、访问策略和定位符。
 
->[AZURE.NOTE] **CloudMediaContext** 类不是线程安全的。每个线程或每组操作均应创建一个新 CloudMediaContext。
-
+>[!NOTE] **CloudMediaContext** 类不是线程安全的。每个线程或每组操作均应创建一个新 CloudMediaContext。
 
 CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServicesCredentials** 为参数的构造函数。有关详细信息，请参阅下面的**重复使用访问控制服务令牌**。
 
@@ -61,11 +54,9 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
 	
 	_context = new CloudMediaContext(_cachedCredentials);
 
-
 ## 重复使用访问控制服务令牌
 
 本部分说明如何通过使用以 MediaServicesCredentials 为参数的 CloudMediaContext 构造函数重复使用访问控制服务令牌。
-
 
 [Azure Active Directory 访问控制](https://msdn.microsoft.com/zh-cn/library/hh147631.aspx)（也称为访问控制服务或 ACS）是一个基于云的服务，可轻松对用户进行身份验证和授权以使用户获得访问其 Web 应用程序的权限。Azure 媒体服务通过需要 ACS 令牌的 OAuth 协议控制对其服务的访问。媒体服务从授权服务器接收 ACS 令牌。
 
@@ -80,7 +71,6 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
 		// Create and cache the Media Services credentials in a static class variable.
 		_cachedCredentials = new MediaServicesCredentials(_mediaServicesAccountName, _mediaServicesAccountKey);
 
-		
 		// Use the cached credentials to create a new CloudMediaContext object.
 		if(_cachedCredentials == null)
 		{
@@ -107,7 +97,6 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
 		
 	使用保存的令牌值可创建 MediaServicesCredentials。
 
-
 		var accessToken = "";
 		var tokenExpiration = DateTime.UtcNow;
 		
@@ -130,14 +119,12 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
 		    UpdateTokenDataInExternalStorageIfNeeded(accessToken, context2.Credentials.TokenExpiration);
 		}
 		
-
 - 如果你具有多个媒体服务帐户（例如，用于负载共享目的或地域分布，则可以使用 System.Collections.Concurrent.ConcurrentDictionary 集合（ConcurrentDictionary 集合表示可由多个线程同时访问的密钥/值对的线程安全集合）缓存 MediaServicesCredentials 对象。然后可以使用 GetOrAdd 方法获得缓存凭据。
 
 		// Declare a static class variable of the ConcurrentDictionary type in which the Media Services credentials will be cached.  
 		private static readonly ConcurrentDictionary<string, MediaServicesCredentials> mediaServicesCredentialsCache = 
 		    new ConcurrentDictionary<string, MediaServicesCredentials>();
 		
-
 		// Cache (or get already cached) Media Services credentials. Use these credentials to create a new CloudMediaContext object.
 		static public CloudMediaContext CreateMediaServicesContext(string accountName, string accountKey)
 		{
@@ -161,14 +148,12 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
 
 例如：
 
-
 	_context = new CloudMediaContext(
 	    new Uri("https://wamsbjbclus001rest-hs.chinacloudapp.cn/API/"),
 	    _mediaServicesAccountName,
 	    _mediaServicesAccountKey,
 	    "urn:WindowsAzureMediaServices",
 	    "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn");
-
 
 ## 将连接值存储到配置中
 
@@ -182,7 +167,6 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
 	    <add key="MediaServicesAccountKey" value="Media-Services-Account-Key" />
 	  </appSettings>
 	</configuration>
-
 
 若要从配置中检索连接值，你可以使用 **ConfigurationManager** 类，然后将相关值分配给代码中的字段：
 	

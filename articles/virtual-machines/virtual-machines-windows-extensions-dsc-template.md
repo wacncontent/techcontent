@@ -1,28 +1,26 @@
-<properties
-   pageTitle="Desired State Configuration Resource Manager 模板 | Azure"
-   description="Azure 中 Desired State Configuration 的 Resource Manager 模板定义，提供示例和故障排除方法"
-   services="virtual-machines-windows"
-   documentationCenter=""
-   authors="zjalexander"
-   manager="timlt"
-   editor=""
-   tags="azure-service-management,azure-resource-manager"
-   keywords=""/>  
+---
+title: Desired State Configuration Resource Manager 模板 | Azure
+description: Azure 中 Desired State Configuration 的 Resource Manager 模板定义，提供示例和故障排除方法
+services: virtual-machines-windows
+documentationCenter: 
+authors: zjalexander
+manager: timlt
+editor: 
+tags: azure-service-management,azure-resource-manager
+keywords: 
 
-
-<tags
-   ms.service="virtual-machines-windows"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-windows"
-   ms.workload="na"
-   ms.date="09/15/2016"
-   wacn.date="01/05/2017"
-   ms.author="zachal"/>  
-
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: na
+ms.date: 09/15/2016
+wacn.date: 01/05/2017
+ms.author: zachal
+---
 
 # 在 Azure Resource Manager 模板中使用 Windows VMSS 和 Desired State Configuration
-本文介绍 [Desired State Configuration 扩展处理程序](/documentation/articles/virtual-machines-windows-extensions-dsc-overview/)的 Resource Manager 模板。
+本文介绍 [Desired State Configuration 扩展处理程序](./virtual-machines-windows-extensions-dsc-overview.md)的 Resource Manager 模板。
 
 ## Windows VM 模板示例
 
@@ -54,7 +52,6 @@
                   "protectedSettings": {
                       "configurationUrlSasToken": "[parameters('_artifactsLocationSasToken')]"
                   }
-
 
 ## Windows VMSS 的模板示例
 
@@ -162,7 +159,7 @@ Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用�
 
 ## 示例
 
-以下示例摘自 [DSC Extension Handler Overview](/documentation/articles/virtual-machines-windows-extensions-dsc-overview/)（DSC 扩展处理程序概述）网页中的“Getting Started”（入门）部分。
+以下示例摘自 [DSC Extension Handler Overview](./virtual-machines-windows-extensions-dsc-overview.md)（DSC 扩展处理程序概述）网页中的“Getting Started”（入门）部分。
 此示例使用 Resource Manager 模板而不是cmdlet 来部署该扩展。
 保存“IisInstall.ps1”配置，将它放在 .ZIP 文件中，然后将该文件上载到可访问的 URL 中。此示例使用 Azure Blob 存储，但可以从任意位置下载 .ZIP 文件。
 
@@ -227,7 +224,6 @@ Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用�
 | protectedSettings.configurationUrlSasToken | settings.SasToken |
 | protectedSettings.configurationDataUrlSasToken | protectedSettings.DataBlobUri 中的 SAS 令牌 |
 
-
 ## 故障排除 - 错误代码 1100
 错误代码 1100 指示 DSC 扩展中的用户输入有问题。
 这些错误的文本是可变的，将来可能会更改。
@@ -283,13 +279,12 @@ Azure Resource Manager 模板中 Azure DSC 扩展的“设置”部分会使用�
 - 提供缺少的属性。
 - 删除需要缺失属性的属性。
 
-
 ## 后续步骤
-若要了解 DSC 的和虚拟机规模集，请参阅[将虚拟机规模集与 Azure DSC 扩展配合使用](/documentation/articles/virtual-machine-scale-sets-dsc/)
+若要了解 DSC 的和虚拟机规模集，请参阅[将虚拟机规模集与 Azure DSC 扩展配合使用](../virtual-machine-scale-sets/virtual-machine-scale-sets-dsc.md)
 
-有关详细信息，请参阅 [DSC 的安全凭据管理](/documentation/articles/virtual-machines-windows-extensions-dsc-credentials/)。
+有关详细信息，请参阅 [DSC 的安全凭据管理](./virtual-machines-windows-extensions-dsc-credentials.md)。
 
-若要深入了解 Azure DSC 扩展处理程序，请参阅 [Azure Desired State Configuration 扩展处理程序简介](/documentation/articles/virtual-machines-windows-extensions-dsc-overview/)。
+若要深入了解 Azure DSC 扩展处理程序，请参阅 [Azure Desired State Configuration 扩展处理程序简介](./virtual-machines-windows-extensions-dsc-overview.md)。
 
 有关 PowerShell DSC 的详细信息，请[访问 PowerShell 文档中心](https://msdn.microsoft.com/powershell/dsc/overview)。
 

@@ -1,24 +1,23 @@
-<properties
-    pageTitle="使用 DocumentDB 模拟器在本地开发 | Azure"
-    description="使用 DocumentDB 模拟器，可以在本地免费开发并测试应用程序，而无需创建 Azure 订阅。"
-    services="documentdb"
-    documentationcenter=""
-    keywords="DocumentDB 模拟器"
-    author="arramac"
-    manager="jhubbard"
-    editor="" />  
+---
+title: 使用 DocumentDB 模拟器在本地开发 | Azure
+description: 使用 DocumentDB 模拟器，可以在本地免费开发并测试应用程序，而无需创建 Azure 订阅。
+services: documentdb
+documentationcenter: 
+keywords: DocumentDB 模拟器
+author: arramac
+manager: jhubbard
+editor: 
 
-<tags
-    ms.assetid="90b379a6-426b-4915-9635-822f1a138656"
-    ms.service="documentdb"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/17/2016"
-    wacn.date="12/20/2016"
-    ms.author="arramac" />  
-
+ms.assetid: 90b379a6-426b-4915-9635-822f1a138656
+ms.service: documentdb
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/17/2016
+wacn.date: 12/20/2016
+ms.author: arramac
+---
 
 # 使用 Azure DocumentDB 模拟器进行开发和测试
 
@@ -38,13 +37,13 @@ DocumentDB 模拟器具有以下硬件和软件要求：
 ## 安装 DocumentDB 模拟器
 可以在 [Microsoft 下载中心](https://aka.ms/documentdb-emulator)下载并安装 DocumentDB 模拟器。
 
-> [AZURE.NOTE]
+> [!NOTE]
 若要安装、配置并运行 DocumentDB 模拟器，必须在计算机上具有管理权限。
 
 ## 检查 DocumentDB 模拟器更新
 DocumentDB 模拟器包括内置的 Azure DocumentDB 数据资源管理器，用于浏览 DocumentDB 中存储的数据、创建新集合，并且通知何时有新的更新可下载。
 
-> [AZURE.NOTE]
+> [!NOTE]
 在 DocumentDB 模拟器的一个版本中创建的数据不保证在使用不同版本时可以访问。如果需要长期保存数据，建议将数据存储在 Azure DocumentDB 帐户中，而不是存储在 DocumentDB 模拟器中。
 
 ## DocumentDB 模拟器的工作方式
@@ -52,14 +51,13 @@ DocumentDB 模拟器提供对 DocumentDB 服务的高保真模拟。它支持和
 
 虽然创建了实际 DocumentDB 服务的高保真本地模拟，但是 DocumentDB 模拟器的实现不同于该服务。例如，DocumentDB 模拟器针对持久性使用标准 OS 组件（如本地文件系统），针对连接性使用 HTTPS 协议堆栈。这意味着一些依赖于 Azure 基础结构的功能，如全局复制、读/写的一位数毫秒延迟和可调一致性级别，无法通过 DocumentDB 模拟器使用。
 
-
 ## 对 DocumentDB 模拟器的请求进行身份验证
 和云中的 Azure Document 一样，每个针对 DocumentDB 模拟器的请求都必须进行身份验证。DocumentDB 模拟器使用一个固定的帐户和公开的身份验证密钥进行主密钥身份验证。此帐户和密钥是允许用于 DocumentDB 模拟器的唯一凭据。它们具有以下特点：
 
     Account name: localhost:<port>
     Account key: C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==
 
-> [AZURE.NOTE]
+> [!NOTE]
 DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 模拟器中使用生产 DocumentDB 帐户和密钥。
 
 此外，和 Azure DocumentDB 服务一样，DocumentDB 模拟器仅支持使用 SSL 的安全通信。
@@ -70,16 +68,14 @@ DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 
 
 ![选择“开始”按钮或按 Windows 键，先键入“DocumentDB 模拟器”，然后从应用程序的列表中选择模拟器](./media/documentdb-nosql-local-emulator/azure-documentdb-database-local-emulator-start.png)  
 
-
 运行模拟器时，在 Windows 任务栏通知区域中会显示一个图标。默认情况下，DocumentDB 模拟器在端口 8081 上侦听的本地计算机（“localhost”）上运行。
 
 ![DocumentDB 本地模拟器的任务栏通知](./media/documentdb-nosql-local-emulator/azure-documentdb-database-local-emulator-taskbar.png)  
 
-
 默认情况下，DocumentDB 模拟器安装到 `C:\Program Files\Azure DocumentDB Emulator` 目录。你还可以从命令行启动和停止模拟器。有关详细信息，请参阅[命令行工具参考](#command-line)。
 
 ## 使用 DocumentDB 模拟器进行开发
-在桌面上运行 DocumentDB 模拟器之后，可以使用任何支持的 [DocumentDB SDK](/documentation/articles/documentdb-sdk-dotnet/) 或 [DocumentDB REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 与模拟器进行交互。DocumentDB 模拟器还包括内置的数据资源管理器，可用于创建集合、查看和编辑文档，而无需编写任何代码。
+在桌面上运行 DocumentDB 模拟器之后，可以使用任何支持的 [DocumentDB SDK](./documentdb-sdk-dotnet.md) 或 [DocumentDB REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 与模拟器进行交互。DocumentDB 模拟器还包括内置的数据资源管理器，可用于创建集合、查看和编辑文档，而无需编写任何代码。
 
     // Connect to the DocumentDB Emulator running locally
     DocumentClient client = new DocumentClient(
@@ -87,10 +83,10 @@ DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 
         "C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==",
         new ConnectionPolicy { EnableEndpointDiscovery = false });
 
-> [AZURE.NOTE]
+> [!NOTE]
 连接到模拟器时，必须在连接配置中设置 EnableEndpointDiscovery = false。
 
-如果使用[具有 MongoDB 协议支持的 DocumentDB](/documentation/articles/documentdb-protocol-mongodb/)，请使用以下连接字符串：
+如果使用[具有 MongoDB 协议支持的 DocumentDB](./documentdb-protocol-mongodb.md)，请使用以下连接字符串：
 
     mongodb://localhost:C2y6yDjf5/R+ob0N8A7Cgv30VRDJIWEHLM+4QDU5DE2nQ9nDuVTqobD4b8mGGyPMbIZnqyMsEcaGQy67XIw/Jw==@localhost:10250/admin?ssl=true&3t.sslSelfSignedCerts=true
 
@@ -179,13 +175,13 @@ DocumentDB 模拟器支持的主密钥仅用于模拟器。不能在 DocumentDB 
 
 - DocumentDB 模拟器只支持一个固定的帐户和公开的主密钥。在 DocumentDB 模拟器中无法重新生成密钥。
 - DocumentDB 模拟器不是可扩展的服务，并且不支持大量集合。
-- DocumentDB 模拟器不模拟不同的 [DocumentDB 一致性级别](/documentation/articles/documentdb-consistency-levels/)。
-- DocumentDB 模拟器不模拟[多区域复制](/documentation/articles/documentdb-distribute-data-globally/)。
+- DocumentDB 模拟器不模拟不同的 [DocumentDB 一致性级别](./documentdb-consistency-levels.md)。
+- DocumentDB 模拟器不模拟[多区域复制](./documentdb-distribute-data-globally.md)。
 - DocumentDB 模拟器不支持服务配额覆盖，而 Azure DocumentDB 服务支持（例如文档大小限制、增加的分区集合存储）。
 - 由于 DocumentDB 模拟器的副本不一定能反应 Azure DocumentDB 的最新更改，因此请使用 [DocumentDB 容量规划器](https://www.documentdb.com/capacityplanner)准确估计应用程序的生产吞吐量需求。
 
 ## 后续步骤
-- 若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB 简介](/documentation/articles/documentdb-introduction/)。
-- 若要开始使用 DocumentDB 模拟器进行开发，请下载一个[支持的 DocumentDB SDK](/documentation/articles/documentdb-sdk-dotnet/)。
+- 若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB 简介](./documentdb-introduction.md)。
+- 若要开始使用 DocumentDB 模拟器进行开发，请下载一个[支持的 DocumentDB SDK](./documentdb-sdk-dotnet.md)。
 
 <!---HONumber=Mooncake_1212_2016-->

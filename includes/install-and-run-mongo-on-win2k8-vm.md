@@ -1,6 +1,6 @@
 按照以下步骤操作可在运行 Windows Server 的虚拟机上安装和运行 MongoDB。
 
-> [AZURE.IMPORTANT] 默认情况下，不启用 MongoDB 安全功能，例如身份验证和 IP 地址绑定。在将 MongoDB 部署到生产环境之前，应启用安全功能。有关详细信息，请参阅[安全性和身份验证](http://www.mongodb.org/display/DOCS/Security+and+Authentication)。
+> [!IMPORTANT] 默认情况下，不启用 MongoDB 安全功能，例如身份验证和 IP 地址绑定。在将 MongoDB 部署到生产环境之前，应启用安全功能。有关详细信息，请参阅[安全性和身份验证](http://www.mongodb.org/display/DOCS/Security+and+Authentication)。
 
 1. 使用远程桌面连接到该虚拟机后，从虚拟机上的“开始”菜单打开 Internet Explorer。
 
@@ -90,14 +90,11 @@
 
 	![终结点][Image9]  
 
-
-> [AZURE.NOTE] 端口 27017 是 MongoDB 使用的默认端口。可以在启动 mongod.exe 服务器时通过指定 `--port` 参数更改此默认端口。请确保在防火墙中提供同一个端口号以及上面说明中的“Mongo”终结点。
-
+> [!NOTE] 端口 27017 是 MongoDB 使用的默认端口。可以在启动 mongod.exe 服务器时通过指定 `--port` 参数更改此默认端口。请确保在防火墙中提供同一个端口号以及上面说明中的“Mongo”终结点。
 
 [MongoDownloads]: http://www.mongodb.org/downloads
 
 [MongoWindowsSvcOptions]: http://www.mongodb.org/display/DOCS/Windows+Service
-
 
 [Image1]: ./media/install-and-run-mongo-on-win2k8-vm/WinFirewall1.png
 [Image2]: ./media/install-and-run-mongo-on-win2k8-vm/WinFirewall2.png

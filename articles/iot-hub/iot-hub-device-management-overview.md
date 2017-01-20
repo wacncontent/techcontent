@@ -1,23 +1,21 @@
-<properties
- pageTitle="IoT 中心设备管理概述 | Azure"
- description="本文概述了 Azure IoT 中心的设备管理：企业设备生命周期、重新启动、恢复出厂设置、固件更新、配置、设备孪生、查询、作业"
- services="iot-hub"
- documentationCenter=""
- authors="bzurcher"
- manager="timlt"
- editor=""/>  
+---
+title: IoT 中心设备管理概述 | Azure
+description: 本文概述了 Azure IoT 中心的设备管理：企业设备生命周期、重新启动、恢复出厂设置、固件更新、配置、设备孪生、查询、作业
+services: iot-hub
+documentationCenter: 
+authors: bzurcher
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="na"
- ms.topic="get-started-article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="10/03/2016"
- ms.author="bzurcher"
- wacn.date="12/16/2016"/>  
-
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/03/2016
+ms.author: bzurcher
+wacn.date: 01/17/2017
+---
 
 # IoT 中心设备管理概述
 
@@ -36,7 +34,6 @@ IoT 带来了一系列独特的设备管理难题，每个企业级解决方案�
 
 ![设备管理原则图形][img-dm_principles]  
 
-
 - **规模和自动化**：IoT 解决方案需要可以自动执行日常任务的简单工具，使相对数量少的操作人员可以管理数百万台设备。每天，操作员希望远程批量处理设备操作，并且仅在出现需要直接干预的问题时才收到通知。
 
 - **开放性和兼容性**：IoT 设备生态系统是截然不同的。管理工具必须进行定制以适应多种设备类、平台和协议。操作员必须能够支持许多类型的设备，从最受限制的嵌入式单进程芯片到功能强大且全功能的计算机。
@@ -49,7 +46,6 @@ IoT 带来了一系列独特的设备管理难题，每个企业级解决方案�
 有一组所有企业 IoT 项目通用的常规设备管理阶段。在 Azure IoT 中，IoT 设备生命周期有五个阶段：
 
 ![Azure IoT 设备生命周期的五个阶段：计划、预配、配置、监视、停用][img-device_lifecycle]  
-
 
 在上述五个阶段的每个阶段中，都有几项应满足以提供完整解决方案的设备操作员要求：
 
@@ -74,36 +70,32 @@ IoT 带来了一系列独特的设备管理难题，每个企业级解决方案�
     *其他阅读材料*：[如何使用设备孪生属性][lnk-twin-properties]、[管理设备标识][lnk-identity-registry]
 
 ## 设备管理模式
-IoT 中心启用以下设备管理模式集。
+IoT 中心启用以下设备管理模式集。[设备管理教程][lnk-get-started]更详细地介绍如何扩展这些模式以适合具体方案，以及如何基于这些核心模板设计新模式。
 
 - **重新启动** - 后端应用程序通过直接方法通知设备它已启动重新启动。设备使用设备孪生报告属性来更新设备的重新启动状态。
 
     ![设备管理重启模式图形][img-reboot_pattern]  
 
-
 - **恢复出厂设置** - 后端应用程序通过直接方法通知设备它已启动恢复出厂设置。设备使用设备孪生报告属性来更新设备的恢复出厂设置状态。
 
     ![设备管理恢复出厂设置模式图形][img-facreset_pattern]  
-
 
 - **配置** - 后端应用程序使用设备孪生所需属性来配置设备上运行的软件。设备使用设备孪生报告属性来更新设备的配置状态。
 
     ![设备管理配置模式图形][img-config_pattern]  
 
-
 - **固件更新** - 后端应用程序通过直接方法通知设备它已启动固件更新。设备将启动一个多步骤过程，用于下载固件包、应用固件包，最后重新连接到 IoT 中心服务。在整个多步骤过程中，设备使用设备孪生报告属性来更新设备的进度和状态。
 
     ![设备管理固件更新模式图形][img-fwupdate_pattern]  
-
 
 - **报告进度和状态** - 应用程序后端在一组设备上运行设备孪生查询，以报告设备上运行的操作的状态和进度。
 
     ![设备管理报告进度和状态模式图形][img-report_progress_pattern]  
 
-
 ## 后续步骤
 可以使用 IoT 中心为设备管理提供的功能、模式和代码库，在每个设备生命周期阶段创建满足企业 IoT 操作员需求的 IoT 应用程序。
 
+若要继续了解 IoT 中心的设备管理功能，请参阅[设备管理入门][lnk-get-started]教程。
 
 <!-- Images and links -->
 
@@ -115,16 +107,16 @@ IoT 中心启用以下设备管理模式集。
 [img-reboot_pattern]: ./media/iot-hub-device-management-overview/reboot-pattern.png
 [img-report_progress_pattern]: ./media/iot-hub-device-management-overview/report-progress-pattern.png
 
-[lnk-twins-devguide]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-get-started]: /documentation/articles/iot-hub-node-node-device-management-get-started/
-[lnk-twins-getstarted]: /documentation/articles/iot-hub-node-node-twin-getstarted/
-[lnk-twin-properties]: /documentation/articles/iot-hub-node-node-twin-how-to-configure/
-[lnk-hub-getstarted]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
-[lnk-identity-registry]: /documentation/articles/iot-hub-devguide-identity-registry/
-[lnk-bulk-identity]: /documentation/articles/iot-hub-bulk-identity-mgmt/
-[lnk-query-language]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-c2d-methods]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-methods-devguide]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-jobs-devguide]: /documentation/articles/iot-hub-devguide-jobs/
+[lnk-twins-devguide]: ./iot-hub-devguide-device-twins.md
+[lnk-get-started]: ./iot-hub-node-node-device-management-get-started.md
+[lnk-twins-getstarted]: ./iot-hub-node-node-twin-getstarted.md
+[lnk-twin-properties]: ./iot-hub-node-node-twin-how-to-configure.md
+[lnk-hub-getstarted]: ./iot-hub-csharp-csharp-getstarted.md
+[lnk-identity-registry]: ./iot-hub-devguide-identity-registry.md
+[lnk-bulk-identity]: ./iot-hub-bulk-identity-mgmt.md
+[lnk-query-language]: ./iot-hub-devguide-query-language.md
+[lnk-c2d-methods]: ./iot-hub-node-node-direct-methods.md
+[lnk-methods-devguide]: ./iot-hub-devguide-direct-methods.md
+[lnk-jobs-devguide]: ./iot-hub-devguide-jobs.md
 
-<!---HONumber=Mooncake_1205_2016-->
+<!---HONumber=Mooncake_Quality_Review_0117_2017-->

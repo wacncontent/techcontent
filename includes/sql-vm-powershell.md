@@ -3,8 +3,7 @@
 
 首先你需要安装并运行最新的 [Azure PowerShell](http://msdn.microsoft.com/zh-cn/library/mt619274.aspx)。有关详细信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
-
->[AZURE.NOTE] 由于本主题中的示例使用的是 [Azure Resource Manager 部署模型](/documentation/articles/resource-group-overview/)，因此示例将使用 [Azure Resource Manager cmdlet](http://msdn.microsoft.com/zh-cn/library/azure/mt125356.aspx)。
+>[!NOTE] 由于本主题中的示例使用的是 [Azure Resource Manager 部署模型](../articles/azure-resource-manager/resource-group-overview.md)，因此示例将使用 [Azure Resource Manager cmdlet](http://msdn.microsoft.com/zh-cn/library/azure/mt125356.aspx)。
 
 运行 [**Add-AzureRmAccount**](http://msdn.microsoft.com/zh-cn/library/mt619267.aspx) cmdlet，然后就会出现一个要求你输入凭据的登录屏幕。使用登录 Azure 门户预览时所用的同一凭据。
 

@@ -1,31 +1,30 @@
-<properties
-   pageTitle="管理 Azure SQL 数据仓库中的计算能力 (PowerShell) | Azure"
-   description="用于管理计算能力的 PowerShell 任务。通过调整 DWU 缩放计算资源。或者，暂停和恢复计算资源来节省成本。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="barbkess"
-   manager="barbkess"
-   editor=""/>
+---
+title: 管理 Azure SQL 数据仓库中的计算能力 (PowerShell) | Azure
+description: 用于管理计算能力的 PowerShell 任务。通过调整 DWU 缩放计算资源。或者，暂停和恢复计算资源来节省成本。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: barbkess
+manager: barbkess
+editor: 
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/12/2016"
-   ms.author="barbkess;sonyama"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/12/2016
+ms.author: barbkess;sonyama
+---
 
 # 管理 Azure SQL 数据仓库中的计算能力 (PowerShell)
 
-> [AZURE.SELECTOR]
-- [概述](/documentation/articles/sql-data-warehouse-manage-compute-overview/)
-- [Azure 门户预览](/documentation/articles/sql-data-warehouse-manage-compute-portal/)
-- [PowerShell](/documentation/articles/sql-data-warehouse-manage-compute-powershell/)
-- [REST](/documentation/articles/sql-data-warehouse-manage-compute-rest-api/)
-- [TSQL](/documentation/articles/sql-data-warehouse-manage-compute-tsql/)
-
+> [!div class="op_single_selector"]
+- [概述](./sql-data-warehouse-manage-compute-overview.md)
+- [Azure 门户预览](./sql-data-warehouse-manage-compute-portal.md)
+- [PowerShell](./sql-data-warehouse-manage-compute-powershell.md)
+- [REST](./sql-data-warehouse-manage-compute-rest-api.md)
+- [TSQL](./sql-data-warehouse-manage-compute-tsql.md)
 
 通过扩大计算资源和内存来提升性能，从而满足工作负荷不断变化的需求。通过在非高峰时段缩减资源或同时暂停计算来节省成本。
 
@@ -37,12 +36,11 @@
 
 若要了解相关信息，请参阅[管理计算概述][]。
 
-
 ## 开始之前
 
 ### 安装最新版本的 Azure PowerShell
 
-> [AZURE.NOTE]  若要对 SQL 数据仓库使用 Azure PowerShell，需要安装 Azure PowerShell 1.0.3 或更高版本。若要验证当前版本，请运行命令 **Get-Module -ListAvailable -Name Azure**。可以从 [Microsoft Web 平台安装程序][]安装最新的版本。有关详细信息，请参阅[如何安装和配置 Azure PowerShell][]。
+> [!NOTE]  若要对 SQL 数据仓库使用 Azure PowerShell，需要安装 Azure PowerShell 1.0.3 或更高版本。若要验证当前版本，请运行命令 **Get-Module -ListAvailable -Name Azure**。可以从 [Microsoft Web 平台安装程序][]安装最新的版本。有关详细信息，请参阅[如何安装和配置 Azure PowerShell][]。
 
 ### Azure PowerShell cmdlet 入门
 
@@ -60,7 +58,7 @@
 
 ## 缩放计算能力
 
-[AZURE.INCLUDE [SQL Data Warehouse scale DWUs description（SQL 数据仓库缩放 DWU 说明）](../../includes/sql-data-warehouse-scale-dwus-description)]
+[!INCLUDE [SQL Data Warehouse scale DWUs description（SQL 数据仓库缩放 DWU 说明）](../../includes/sql-data-warehouse-scale-dwus-description)]
 
 若要更改 DWU，请使用 [Set-AzureRmSqlDatabase][] PowerShell cmdlet。以下示例将托管在服务器 MyServer 上的数据库 MySQLDW 的服务级别目标设置为 DW1000。
 
@@ -70,11 +68,11 @@
 
 ## 暂停计算
 
-[AZURE.INCLUDE [SQL Data Warehouse pause description（SQL 数据仓库暂停说明）](../../includes/sql-data-warehouse-pause-description)]
+[!INCLUDE [SQL Data Warehouse pause description（SQL 数据仓库暂停说明）](../../includes/sql-data-warehouse-pause-description)]
 
 若要暂停数据库，请使用 [Suspend-AzureRmSqlDatabase][] cmdlet。以下示例将暂停 Server01 服务器上托管的 Database02 数据库。该服务器位于名为 ResourceGroup1 的 Azure 资源组中。
 
-> [AZURE.NOTE] 注意，如果服务器是 foo.database.chinacloudapi.cn，请使用“foo”作为 Powershell cmdlet 中的 -ServerName。
+> [!NOTE] 注意，如果服务器是 foo.database.chinacloudapi.cn，请使用“foo”作为 Powershell cmdlet 中的 -ServerName。
 
     Suspend-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
     –ServerName "Server01" –DatabaseName "Database02"
@@ -86,12 +84,11 @@
     $resultDatabase = $database | Suspend-AzureRmSqlDatabase
     $resultDatabase
 
-
 <a name="resume-compute-bk"></a>
 
 ## 恢复计算
 
-[AZURE.INCLUDE [SQL Data Warehouse resume description（SQL 数据仓库恢复说明）](../../includes/sql-data-warehouse-resume-description)]
+[!INCLUDE [SQL Data Warehouse resume description（SQL 数据仓库恢复说明）](../../includes/sql-data-warehouse-resume-description)]
 
 若要启动数据库，请使用 [Resume-AzureRmSqlDatabase][] cmdlet。以下示例将启动 Server01 服务器上托管的 Database02 数据库。该服务器位于名为 ResourceGroup1 的 Azure 资源组中。
 
@@ -114,10 +111,10 @@
 <!--Image references-->
 
 <!--Article references-->
-[Service capacity limits]: /documentation/articles/sql-data-warehouse-service-capacity-limits/
-[管理概述]: /documentation/articles/sql-data-warehouse-overview-manage/
-[如何安装和配置 Azure PowerShell]: /documentation/articles/powershell-install-configure/
-[管理计算概述]: /documentation/articles/sql-data-warehouse-manage-compute-overview/
+[Service capacity limits]: ./sql-data-warehouse-service-capacity-limits.md
+[管理概述]: ./sql-data-warehouse-overview-manage.md
+[如何安装和配置 Azure PowerShell]: ../powershell-install-configure.md
+[管理计算概述]: ./sql-data-warehouse-manage-compute-overview.md
 
 <!--MSDN references-->
 [Resume-AzureRmSqlDatabase]: https://msdn.microsoft.com/zh-cn/library/mt619347.aspx

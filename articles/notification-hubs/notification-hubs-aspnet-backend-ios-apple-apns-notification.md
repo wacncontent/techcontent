@@ -1,43 +1,40 @@
-<properties
-	pageTitle="Azure 通知中心 - 使用 .NET 后端通知 iOS 用户"
-	description="了解如何向 Azure 中的用户发送推送通知。使用 Objective-C 和 .NET API 为后端编写的代码示例。"
-	documentationCenter="ios"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""
-	services="notification-hubs"/>  
+---
+title: Azure 通知中心 - 使用 .NET 后端通知 iOS 用户
+description: 了解如何向 Azure 中的用户发送推送通知。使用 Objective-C 和 .NET API 为后端编写的代码示例。
+documentationCenter: ios
+authors: wesmc7777
+manager: erikre
+editor: 
+services: notification-hubs
 
-
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="10/03/2016"
-	ms.author="wesmc"
-	wacn.date="11/22/2016"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 10/03/2016
+ms.author: wesmc
+wacn.date: 11/22/2016
+---
 
 #Azure 通知中心 - 使用 .NET 后端通知 iOS 用户
 
-[AZURE.INCLUDE [notification-hubs-selector-aspnet-backend-notify-users](../../includes/notification-hubs-selector-aspnet-backend-notify-users.md)]
+[!INCLUDE [notification-hubs-selector-aspnet-backend-notify-users](../../includes/notification-hubs-selector-aspnet-backend-notify-users.md)]
 
 ##概述
 
-利用 Azure 中的推送通知支持，你可以访问易于使用且向外扩展的多平台推送基础结构，这大大简化了为移动平台的使用者应用程序和企业应用程序实现推送通知的过程。本教程说明如何使用 Azure 通知中心将推送通知发送到特定设备上的特定应用程序用户。ASP.NET WebAPI 后端用于对客户端进行身份验证并生成通知，如指南主题[从应用后端注册](/documentation/articles/notification-hubs-push-notification-registration-management/#registration-management-from-a-backend/)中所述。
+利用 Azure 中的推送通知支持，你可以访问易于使用且向外扩展的多平台推送基础结构，这大大简化了为移动平台的使用者应用程序和企业应用程序实现推送通知的过程。本教程说明如何使用 Azure 通知中心将推送通知发送到特定设备上的特定应用程序用户。ASP.NET WebAPI 后端用于对客户端进行身份验证并生成通知，如指南主题[从应用后端注册](./notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend/)中所述。
 
-> [AZURE.NOTE] 本教程假设您已根据[通知中心入门 (iOS)](/documentation/articles/notification-hubs-ios-apple-push-notification-apns-get-started/) 中所述创建并配置了通知中心。此外，只有在学习本教程后，才可以学习[安全推送 (iOS)](/documentation/articles/notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification/) 教程。
-> 如果你要使用 Mobile Apps 作为后端服务，请参阅 [Mobile Apps Get Started with Push](/documentation/articles/app-service-mobile-ios-get-started-push/)（Mobile Apps 中的推送通知入门）。
+> [!NOTE] 本教程假设您已根据[通知中心入门 (iOS)](./notification-hubs-ios-apple-push-notification-apns-get-started.md) 中所述创建并配置了通知中心。此外，只有在学习本教程后，才可以学习[安全推送 (iOS)](./notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md) 教程。
+> 如果你要使用 Mobile Apps 作为后端服务，请参阅 [Mobile Apps Get Started with Push](../app-service-mobile/app-service-mobile-ios-get-started-push.md)（Mobile Apps 中的推送通知入门）。
 
-
-
-[AZURE.INCLUDE [notification-hubs-aspnet-backend-notifyusers](../../includes/notification-hubs-aspnet-backend-notifyusers.md)]
+[!INCLUDE [notification-hubs-aspnet-backend-notifyusers](../../includes/notification-hubs-aspnet-backend-notifyusers.md)]
 
 ## 修改 iOS 应用
 
-1. 打开你在[通知中心入门 (iOS)](/documentation/articles/notification-hubs-ios-apple-push-notification-apns-get-started/) 教程中创建的“单页视图”应用。
+1. 打开你在[通知中心入门 (iOS)](./notification-hubs-ios-apple-push-notification-apns-get-started.md) 教程中创建的“单页视图”应用。
 
-	> [AZURE.NOTE] 在本节中我们假定你的项目已配置了空的组织名称。如果未配置，你将需要在所有类名前面追加组织名称。
+	> [!NOTE] 在本节中我们假定你的项目已配置了空的组织名称。如果未配置，你将需要在所有类名前面追加组织名称。
 
 2. 在 Main.storyboard 中添加对象库中的组件，如下面的屏幕截图中所示。
 
@@ -46,13 +43,12 @@
 	+ **用户名**：包含占位符文本“输入用户名”的 UITextField，直接位于发送结果标签的下面并受左边距和右边距约束。
 	+ **密码**：包含占位符文本“输入密码”的 UITextField，直接位于用户名文本字段的下面并受左边距和右边距约束。选中属性检查器中“返回密钥”下的“安全文本输入”选项。
 	+ **登录**：在密码文本字段的直接下方标记的 UIButton 并取消选中属性检查器中“控件内容”下的“已启用”选项
-	+ **WNS**：标签和开关，用于已在中心设置 Windows 通知服务时，启用将通知发送到 Windows 通知服务。请参阅 [Windows 入门](/documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/)教程。
+	+ **WNS**：标签和开关，用于已在中心设置 Windows 通知服务时，启用将通知发送到 Windows 通知服务。请参阅 [Windows 入门](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md)教程。
 	+ **GCM**：标签和开关，用于已在中心设置 Google Cloud Messaging 时，启用将通知发送到 Google Cloud Messaging。
 	+ **APNS**：标签和开关，用于启用将通知发送到 Apple 平台通知服务。
 	+ **收件人用户名**：包含占位符文本“收件人用户名标记”的 UITextField，直接位于 GCM 标签的下面并受左边距和右边距约束。
 
-
-	某些组件已在[通知中心入 (iOS)](/documentation/articles/notification-hubs-ios-apple-push-notification-apns-get-started/) 教程中添加。
+	某些组件已在[通知中心入 (iOS)](./notification-hubs-ios-apple-push-notification-apns-get-started.md) 教程中添加。
 
 3. 按 **Ctrl** 的同时从视图中的组件拖至 ViewController.h 并添加这些新插座。
 
@@ -106,7 +102,6 @@
 		@end
 
 6. 将 RegisterClient.m 中的 `@implementation` 节替换为以下代码。
-
 
 		@implementation RegisterClient
 
@@ -265,7 +260,7 @@
 
 		@end
 
-	上面的代码使用 NSURLSession 对应用后端执行 REST 调用并使用 NSUserDefaults 在本地存储通知中心返回的 registrationId，实现了指南文章[从应用后端注册](/documentation/articles/notification-hubs-push-notification-registration-management/#registration-management-from-a-backend/)中所述的逻辑。
+	上面的代码使用 NSURLSession 对应用后端执行 REST 调用并使用 NSUserDefaults 在本地存储通知中心返回的 registrationId，实现了指南文章[从应用后端注册](./notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend/)中所述的逻辑。
 
 	请注意，此类需要设置其属性 **authorizationHeader**，才能正常工作。登录后，由 **ViewController** 类设置此属性。
 
@@ -286,7 +281,7 @@
 
 		@end
 
-	> [AZURE.NOTE] 下面的代码段不是安全的身份验证方案，你应将 **createAndSetAuthenticationHeaderWithUsername:AndPassword:** 的实现替换为你的特定身份验证机制，该机制将生成要供注册客户端类（例如，OAuth、Active Directory）使用的身份验证令牌。
+	> [!NOTE] 下面的代码段不是安全的身份验证方案，你应将 **createAndSetAuthenticationHeaderWithUsername:AndPassword:** 的实现替换为你的特定身份验证机制，该机制将生成要供注册客户端类（例如，OAuth、Active Directory）使用的身份验证令牌。
 
 9. 然后在 ViewController.m 的 `@implementation` 节中添加以下代码，以添加用于设置设备令牌的实现和身份验证标头。
 
@@ -336,7 +331,6 @@
 		        }
 		    }];
 		}
-
 
 		- (void)SendNotificationASPNETBackend:(NSString*)pns UsernameTag:(NSString*)usernameTag
 					Message:(NSString*)message
@@ -389,16 +383,13 @@
 		    [dataTask resume];
 		}
 
-
 11. 更新“发送通知”按钮的操作以使用 ASP.NET 后端，发送开关启用的任何 PNS。
-
 
 		- (IBAction)SendNotificationMessage:(id)sender
 		{
 		    //[self SendNotificationRESTAPI];
 		    [self SendToEnabledPlatforms];
 		}
-
 
 		-(void)SendToEnabledPlatforms
 		{
@@ -415,8 +406,6 @@
 		    if ([self.APNSSwitch isOn])
 		        [self SendNotificationASPNETBackend:@"apns" UsernameTag:self.RecipientField.text Message:json];
 		}
-
-
 
 11. 在函数 **ViewDidLoad** 中，添加以下内容来实例化 RegisterClient 实例并设置文本字段的委托。
 
@@ -452,17 +441,14 @@
 
 	![][2]
 
-
 3. 你应看到弹出窗口通知你注册成功。单击**“确定”**。
 
 	![][3]  
-
 
 4. 在*“收件人用户名标记”文本字段中，输入用于从另一台设备注册的用户名标记。
 5. 输入通知消息，然后单击“发送通知”。只有使用该用户名标记注册的设备才会收到通知消息。该消息将只发送给那些用户。
 
 	![][4]
-
 
 [1]: ./media/notification-hubs-aspnet-backend-ios-notify-users/notification-hubs-ios-notify-users-interface.png
 [2]: ./media/notification-hubs-aspnet-backend-ios-notify-users/notification-hubs-ios-notify-users-enter-user-pwd.png

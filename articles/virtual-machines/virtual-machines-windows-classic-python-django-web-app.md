@@ -1,33 +1,29 @@
-<properties
-	pageTitle="使用 Django 创建 Python Web 应用| Azure"
-	description="本教程演示如何在 Azure 中使用 Windows Server 2012 R2 Datacenter 虚拟机托管基于 Django 的 Web 应用。"
-	services="virtual-machines-windows"
-	documentationCenter="python"
-	authors="huguesv"
-	manager="wpickett"
-	editor=""/>
+---
+title: 使用 Django 创建 Python Web 应用| Azure
+description: 本教程演示如何在 Azure 中使用 Windows Server 2012 R2 Datacenter 虚拟机托管基于 Django 的 Web 应用。
+services: virtual-machines-windows
+documentationCenter: python
+authors: huguesv
+manager: wpickett
+editor: 
 
-
-<tags 
-	ms.service="virtual-machines-windows" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="vm-windows" 
-	ms.devlang="python" 
-	ms.topic="article" 
-	ms.date="08/04/2015" 
-	wacn.date="01/05/2017" 
-	ms.author="huvalo"/>
-
-
-
+ms.service: virtual-machines-windows
+ms.workload: web
+ms.tgt_pltfrm: vm-windows
+ms.devlang: python
+ms.topic: article
+ms.date: 08/04/2015
+wacn.date: 01/05/2017
+ms.author: huvalo
+---
 
 # Django Hello World Web 应用
 
-> [AZURE.SELECTOR]
-- [Windows](/documentation/articles/virtual-machines-windows-classic-python-django-web-app/)
-- [Mac/Linux](/documentation/articles/virtual-machines-linux-python-django-web-app/)
+> [!div class="op_single_selector"]
+- [Windows](./virtual-machines-windows-classic-python-django-web-app.md)
+- [Mac/Linux](./virtual-machines-linux-python-django-web-app.md)
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 想发布 Django，请查看这个[资源管理器模板](https://github.com/Azure/azure-quickstart-templates/tree/master/django-app/).
 
@@ -44,11 +40,11 @@
 
 ![显示 Azure 上的 hello world 页面的浏览器窗口][1]
 
-[AZURE.INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
+[!INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
 
 ## 创建并配置 Azure 虚拟机以托管 Django
 
-1. 按照[此处](/documentation/articles/virtual-machines-windows-classic-tutorial/)提供的说明可创建 Windows Server 2012 R2 Datacenter 分发的 Azure 虚拟机。
+1. 按照[此处](./virtual-machines-windows-classic-tutorial.md)提供的说明可创建 Windows Server 2012 R2 Datacenter 分发的 Azure 虚拟机。
 
 1. 指示 Azure 将来自 Web 的端口 80 通信定向到虚拟机上的端口 80：
  - 在 Azure 经典管理门户中导航到你新创建的虚拟机，然后单击“终结点”。
@@ -172,7 +168,6 @@
 1. 最后，在你的浏览器中加载网页。
 
 ![显示 Azure 上的 hello world 页面的浏览器窗口][1]
-
 
 ## 关闭你的 Azure 虚拟机
 

@@ -1,14 +1,31 @@
-<properties linkid="" urlDisplayName="" pageTitle="MySQL Service Questions – Azure Cloud" metakeywords="Azure Cloud, technical documentation, documents and resources, MySQL, database, FAQ, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="Provides quick answers for common technical questions encountered by users when using MySQL Database on Azure. Contact technical support if you have any further questions." metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: MySQL Service Questions – Azure Cloud
+metakeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, FAQ, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+description: Provides quick answers for common technical questions encountered by users when using MySQL Database on Azure. Contact technical support if you have any further questions.
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql_en" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="en" />
+ms.service: mysql_en
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: en
+---
 
 #Connection issues
-> [AZURE.SELECTOR]
-- [All FAQs](/documentation/articles/mysql-database-enus-tech-faq/)
-- [Service consulting](/documentation/articles/mysql-database-enus-serviceinquiry/)
-- [Connection issues](/documentation/articles/mysql-database-enus-connectioninquiry/)
-- [Security consulting](/documentation/articles/mysql-database-enus-securityinquiry/)
-- [Compatibility Issues](/documentation/articles/mysql-database-enus-compatibilityinquiry/)
+> [!div class="op_single_selector"]
+- [All FAQs](./mysql-database-enus-tech-faq.md)
+- [Service consulting](./mysql-database-enus-serviceinquiry.md)
+- [Connection issues](./mysql-database-enus-connectioninquiry.md)
+- [Security consulting](./mysql-database-enus-securityinquiry.md)
+- [Compatibility Issues](./mysql-database-enus-compatibilityinquiry.md)
 
 ### **I can’t connect to MySQL Database on Azure after I create a database. What should I do?**
 
@@ -23,7 +40,7 @@ This is caused by limitations in Azure traffic manager. We recommend that you ma
 	
 ### **Do I have too few concurrent connections for MySQL Database on Azure?**
 	
-To ensure that connections are fully and effectively used, we recommend that you use connection pooling or persistent connections to connect to the database. See [How to connect efficiently to MySQL Database on Azure](/documentation/articles/mysql-database-connection-pool/).
+To ensure that connections are fully and effectively used, we recommend that you use connection pooling or persistent connections to connect to the database. See [How to connect efficiently to MySQL Database on Azure](./mysql-database-connection-pool.md).
 
 ### **Java Database Connectivity (JDBC) reports an IllegalArgumentException when it connects to MySQL on Azure, with an error message showing "URLDecoder: Illegal hex characters in escape (%) pattern - For input string: ...".**
 

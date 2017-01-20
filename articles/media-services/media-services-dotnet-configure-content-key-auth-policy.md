@@ -1,25 +1,26 @@
-<properties
-    pageTitle="使用媒体服务 .NET SDK 配置内容密钥授权策略 | Azure"
-    description="了解如何使用适用于 .NET 的媒体服务 SDK 配置内容密钥的授权策略。"
-    services="media-services"
-    documentationcenter=""
-    author="Mingfeiy"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="1a0aedda-5b87-4436-8193-09fc2f14310c"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/07/2016"
-    wacn.date="01/13/2017"
-    ms.author="juliako;mingfeiy" />
+---
+title: 使用媒体服务 .NET SDK 配置内容密钥授权策略 | Azure
+description: 了解如何使用适用于 .NET 的媒体服务 SDK 配置内容密钥的授权策略。
+services: media-services
+documentationcenter: 
+author: Mingfeiy
+manager: erikre
+editor: 
+
+ms.assetid: 1a0aedda-5b87-4436-8193-09fc2f14310c
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/07/2016
+wacn.date: 01/13/2017
+ms.author: juliako;mingfeiy
+---
 
 # 动态加密：配置内容密钥授权策略
 
-[AZURE.INCLUDE [media-services-selector-content-key-auth-policy](../../includes/media-services-selector-content-key-auth-policy.md)]
+[!INCLUDE [media-services-selector-content-key-auth-policy](../../includes/media-services-selector-content-key-auth-policy.md)]
 
 ##概述
 
@@ -27,7 +28,7 @@ Azure 媒体服务允许传送受高级加密标准 (AES)（使用 128 位加密
 
 媒体服务还提供了**密钥\\许可证传送服务**，客户端可从中获取 AES 密钥或 PlayReady/Widevine 许可证，以用于播放加密的内容。
 
-如果要使用媒体服务来加密资产，需要将加密密钥（**CommonEncryption** 或 **EnvelopeEncryption**）与资产相关联（如[此处](/documentation/articles/media-services-dotnet-create-contentkey/)所述），并配置密钥的授权策略（如本文所述）。
+如果要使用媒体服务来加密资产，需要将加密密钥（**CommonEncryption** 或 **EnvelopeEncryption**）与资产相关联（如[此处](./media-services-dotnet-create-contentkey.md)所述），并配置密钥的授权策略（如本文所述）。
 
 播放器请求流时，媒体服务会使用指定的密钥通过 AES 或 DRM 加密来动态加密你的内容。为了解密流，播放器会从密钥传送服务请求密钥。为了确定用户是否有权获取密钥，服务将评估为密钥指定的授权策略。
 
@@ -45,14 +46,13 @@ Azure 媒体服务允许传送受高级加密标准 (AES)（使用 128 位加密
 
 ###请注意以下事项：
 
-- 为了能够使用动态打包和动态加密，必须确保至少有一个流式处理保留单元。有关详细信息，请参阅[如何缩放媒体服务](/documentation/articles/media-services-manage-origins/#scale_streaming_endpoints)。
-- 资产必须包含一组自适应比特率 MP4 或自适应比特率平滑流文件。有关详细信息，请参阅[对资产进行编码](/documentation/articles/media-services-encode-asset/)。
+- 为了能够使用动态打包和动态加密，必须确保至少有一个流式处理保留单元。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
+- 资产必须包含一组自适应比特率 MP4 或自适应比特率平滑流文件。有关详细信息，请参阅[对资产进行编码](./media-services-encode-asset.md)。
 - 使用 **AssetCreationOptions.StorageEncrypted** 选项上传资产并对其进行编码。
 - 如果打算创建需要相同策略配置的多个内容密钥，我们强烈建议创建单个授权策略，并将其重复用于多个内容密钥。
 - 密钥传送服务将 ContentKeyAuthorizationPolicy 及其相关对象（策略选项和限制）缓存 15 分钟。如果创建 ContentKeyAuthorizationPolicy 并指定使用“令牌”限制，然后对其进行测试，再将策略更新为“开放”限制，则现有策略切换到“开放”版本的策略需要大约 15 分钟。
 - 如果添加或更新资产的传送策略，则必须删除现有定位符（如果有）并创建新定位符。
 - 目前，无法加密渐进式下载。
-
 
 ##AES-128 动态加密 
 
@@ -97,7 +97,6 @@ Azure 媒体服务允许传送受高级加密标准 (AES)（使用 128 位加密
 	    IContentKey updatedKey = contentKey.UpdateAsync().Result;
 	    Console.WriteLine("Adding Key to Asset: Key ID is " + updatedKey.Id);
 	}
-
 
 ###令牌限制
 
@@ -232,14 +231,13 @@ Azure 媒体服务允许传送受高级加密标准 (AES)（使用 128 位加密
 	Console.WriteLine("The authorization token is:\nBearer {0}", testToken);
 	Console.WriteLine();
 
-
 ##<a name="playready-dynamic-encryption"></a>PlayReady 动态加密 
 
 媒体服务允许配置相应的权限和限制，以便在用户尝试播放受保护的内容时，PlayReady DRM 运行时会强制实施这些权限和限制。
 
-使用 PlayReady 保护内容时，需要在授权策略中指定的项目之一是用于定义 [PlayReady 许可证模板](/documentation/articles/media-services-playready-license-template-overview/)的 XML 字符串。在适用于 .NET 的媒体服务 SDK 中，**PlayReadyLicenseResponseTemplate** 和 **PlayReadyLicenseTemplate** 类可帮助定义 PlayReady 许可证模板。
+使用 PlayReady 保护内容时，需要在授权策略中指定的项目之一是用于定义 [PlayReady 许可证模板](./media-services-playready-license-template-overview.md)的 XML 字符串。在适用于 .NET 的媒体服务 SDK 中，**PlayReadyLicenseResponseTemplate** 和 **PlayReadyLicenseTemplate** 类可帮助定义 PlayReady 许可证模板。
 
-[本主题](/documentation/articles/media-services-protect-with-drm/)演示如何使用 **PlayReady** 和 **Widevine** 加密你的内容。
+[本主题](./media-services-protect-with-drm.md)演示如何使用 **PlayReady** 和 **Widevine** 加密你的内容。
 
 ###开放限制
 	
@@ -275,7 +273,6 @@ Azure 媒体服务允许传送受高级加密标准 (AES)（使用 128 位加密
 	                ContentKeyAuthorizationPolicies.
 	                CreateAsync("Deliver Common Content Key with no restrictions").
 	                Result;
-	
 	
 	    contentKeyAuthorizationPolicy.Options.Add(policyOption);
 	
@@ -341,7 +338,6 @@ Azure 媒体服务允许传送受高级加密标准 (AES)（使用 128 位加密
             template.Audience = _sampleAudience.ToString();
             template.Issuer = _sampleIssuer.ToString();
 	
-	
 	    template.RequiredClaims.Add(TokenClaim.ContentKeyIdentifierClaim);
 	
 	    return TokenRestrictionTemplateSerializer.Serialize(template);
@@ -371,7 +367,6 @@ Azure 媒体服务允许传送受高级加密标准 (AES)（使用 128 位加密
         // is set to 150.  If false (the default), the MinimumSecurityLevel property of the license is set to 2000.
         licenseTemplate.AllowTestDevices = true;
 
-
         // You can also configure the Play Right in the PlayReady license by using the PlayReadyPlayRight class. 
         // It grants the user the ability to playback the content subject to the zero or more restrictions 
         // configured in the license and on the PlayRight itself (for playback specific policy). 
@@ -393,7 +388,6 @@ Azure 媒体服务允许传送受高级加密标准 (AES)（使用 128 位加密
 
         return MediaServicesLicenseTemplateSerializer.Serialize(responseTemplate);
     }
-
 
 若要获取用于密钥授权策略，基于令牌限制的测试令牌，请参阅[此](#test)部分。
 
@@ -427,17 +421,8 @@ Azure 媒体服务允许传送受高级加密标准 (AES)（使用 128 位加密
         JWT = 2,
     }
 
-
-
-
-
-
-
-
-
 ##后续步骤
-现在已配置内容密钥的授权策略，请转到[如何配置资产传送策略](/documentation/articles/media-services-dotnet-configure-asset-delivery-policy/)主题。
+现在已配置内容密钥的授权策略，请转到[如何配置资产传送策略](./media-services-dotnet-configure-asset-delivery-policy.md)主题。
  
-
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: wording update; remove HDS related content-->

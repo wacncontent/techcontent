@@ -1,17 +1,16 @@
-<properties
-   pageTitle="在 Azure Linux 虚拟机上手动安装配置 Zabbix 监控服务"
-   description="本文介绍如何在 Azure Linux 虚拟机上配置 zabbix 监控"
-   services="open-source"
-   documentationCenter=""
-   authors=""
-   manager=""
-   editor=""/>
+---
+title: 在 Azure Linux 虚拟机上手动安装配置 Zabbix 监控服务
+description: 本文介绍如何在 Azure Linux 虚拟机上配置 zabbix 监控
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-   ms.service="open-source-website"  
-   ms.date=""
-   wacn.date="08/10/2016"/>
-
+ms.service: open-source-website
+ms.date: 
+wacn.date: 08/10/2016
+---
 
 # 在 Azure Linux 虚拟机上手动安装配置 Zabbix 监控服务
 
@@ -31,20 +30,18 @@ Zabbix 由2部分构成，zabbix server 与可选组件 zabbix agent。
 Zabbix server 可以通过 SNMP，zabbix agent，ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集等功能
 Zabbix 的四种监控方式：Agent, SNMP, JMX, IPMI
 
-本文主要介绍如何手动在 Azure Linux 虚拟机上搭建 Zabbix 监控服务，关于如何通过 Azure 资源管理器自动搭建 Zabbix 监控服务，请参阅[使用 Azure 资源管理器自动部署 Zabbix 监控服务](/documentation/articles/open-source-azure-resource-manager-zabbix/)。
+本文主要介绍如何手动在 Azure Linux 虚拟机上搭建 Zabbix 监控服务，关于如何通过 Azure 资源管理器自动搭建 Zabbix 监控服务，请参阅[使用 Azure 资源管理器自动部署 Zabbix 监控服务](./open-source-azure-resource-manager-zabbix.md)。
 
 我们将会在一台虚拟机上安装 zabbix server 软件包作为 zabbix server，在被监控的虚拟机上安装 zabbix 客户端软件包。
 
-
 ##<a id="install-zabbix-server"></a> 安装 zabbix server
 
-如果您还没有 Azure 下的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 创建 LINUX 虚拟机。
+如果您还没有 Azure 下的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 创建 LINUX 虚拟机。
 
 连接到您的 LINUX 虚拟机。如果这是您第一次使用 Azure 的 LINUX 虚拟机，请参考
- [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 连接到虚拟机。
+ [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 连接到虚拟机。
 
 不同的 LINUX 发行版在安装时有少许的不同。接下来我们以 CentOS 7.0 为例说明安装过程。
-
 
 1. 关闭 selinux
 
@@ -143,7 +140,7 @@ Zabbix 的四种监控方式：Agent, SNMP, JMX, IPMI
         $sudo /etc/init.d/zabbix_agentd start
         $ sudo sed -i '$a /etc/init.d/zabbix_server start\n/etc/init.d/zabbix_agentd start' /etc/rc.local
         
-11.	打开端口 80, 10050, 10051. 请参考链接[创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)打开这些端口
+11.	打开端口 80, 10050, 10051. 请参考链接[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)打开这些端口
 12.	Zabbix server web 端配置. 打开网址 *http://zabbix server ip/zabbix*  
     Zabbix server ip 是您的 zabbix server 虚拟机的 IP 地址。打开的页面如下图所示
 
@@ -189,13 +186,10 @@ Zabbix 的四种监控方式：Agent, SNMP, JMX, IPMI
 
     接下来我们在需要被监控的虚拟机上安装 zabbix agent 软件包，这样 zabbix server 就能监控到了。
 
-
-
-
 ##<a id="install-zabbix-agent"></a> 安装 zabbix agent
 
 连接到您的 LINUX 虚拟机。如果这是您第一次使用 Azure 的 LINUX 虚拟机，请参考
- [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 连接到虚拟机。
+ [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 连接到虚拟机。
 
 不同的 LINUX 发行版在安装 Redis 时有少许的不同。请根据您的 LINUX 版本选择对应的步骤。
 
@@ -252,7 +246,6 @@ Zabbix 的四种监控方式：Agent, SNMP, JMX, IPMI
         $ sudo /etc/init.d/zabbix_agentd start
     
 10.	打开端口 10050，10051。请参考链接创建终结点 打开端口.
-
 
 **Ubuntu base Linux**: ( 以 Ubuntu 14.04, 64-bit system 为例)
 
@@ -360,13 +353,9 @@ Zabbix 的四种监控方式：Agent, SNMP, JMX, IPMI
         $ sudo chkconfig zabbix_agentd on
         $ sudo /etc/init.d/zabbix_agentd
     
-10.	打开端口10050, 10051. 请参考链接[创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)
+10.	打开端口10050, 10051. 请参考链接[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)
 
 当 zabbix agent 安装和启动之后，我们就可以把这些需要监控的虚拟机监控起来了！
-
-
-
-
 
 ##<a id="Monitor-virtual-machines"></a> 监控虚拟机
 
@@ -404,7 +393,6 @@ Zabbix 的四种监控方式：Agent, SNMP, JMX, IPMI
     ![](./media/open-source-azure-virtual-machines-linux-configure-zabbix-1/18.png)
  
 ##<a name='settingmailnotification'></a>设置邮件通知
-
 
 当被监控的虚拟机出现一些问题，比如 CPU 使用率，磁盘 I/O 等居高不下，您可以在“Monitoring” -- > “Dashboard” 看到这些消息，但是我们并不是时刻都盯着这个页面，我们需要在出现问题的时候第一时间收到邮件通知。
 有好几种设置邮件通知的方式，接下来展示一种简单的设置方法： 
@@ -459,15 +447,9 @@ Zabbix 的四种监控方式：Agent, SNMP, JMX, IPMI
 
 	![](./media/open-source-azure-virtual-machines-linux-configure-zabbix-1/2_11.png)
  
-
-
 之后只要被监控的虚拟机出了‘问题’，您都将会收到邮件通知。
 
-
-
-
 ##<a name='customizemonitoringitems'></a>自定义监控项
-
 
 我们也许有自定义的项目需要监控。接下来展示一个例子：
 

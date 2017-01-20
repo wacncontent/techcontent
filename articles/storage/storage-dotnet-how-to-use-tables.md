@@ -1,25 +1,25 @@
-<properties
-    pageTitle="通过 .NET 开始使用 Azure 表存储 | Azure"
-    description="使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。"
-    services="storage"
-    documentationcenter=".net"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="fe46d883-7bed-49dd-980e-5c71df36adb3"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="hero-article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />  
+---
+title: 通过 .NET 开始使用 Azure 表存储 | Azure
+description: 使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。
+services: storage
+documentationcenter: .net
+author: mmacy
+manager: timlt
+editor: tysonn
 
+ms.assetid: fe46d883-7bed-49dd-980e-5c71df36adb3
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: hero-article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 通过 .NET 开始使用 Azure 表存储
-[AZURE.INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
+[!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 
 ## 概述
 Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。表存储是采用无架构设计的键/属性存储。因为表存储无架构，因此可以很容易地随着你的应用程序需求的发展使数据适应存储。对于所有类型的应用程序，都可以快速并经济高效地访问数据。对于相似的数据量，表存储的成本通常显著低于传统的 SQL。
@@ -34,15 +34,15 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
 - [Microsoft Visual Studio](https://www.visualstudio.com/zh-cn/visual-studio-homepage-vs.aspx)
 - [适用于 .NET 的 Azure 存储空间客户端库](https://www.nuget.org/packages/WindowsAzure.Storage/)
 - [适用于 .NET 的 Azure Configuration Manager](https://www.nuget.org/packages/Microsoft.WindowsAzure.ConfigurationManager/)
-- 一个 [Azure 存储帐户](/documentation/articles/storage-create-storage-account/#create-a-storage-account)
+- 一个 [Azure 存储帐户](./storage-create-storage-account.md#create-a-storage-account)
 
-[AZURE.INCLUDE [storage-dotnet-client-library-version-include](../../includes/storage-dotnet-client-library-version-include.md)]
+[!INCLUDE [storage-dotnet-client-library-version-include](../../includes/storage-dotnet-client-library-version-include.md)]
 
-[AZURE.INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
+[!INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
-[AZURE.INCLUDE [storage-development-environment-include](../../includes/storage-development-environment-include.md)]
+[!INCLUDE [storage-development-environment-include](../../includes/storage-development-environment-include.md)]
 
 ### 添加命名空间声明
 将以下 **using** 语句添加到 `program.cs` 文件的顶部：
@@ -53,7 +53,7 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
 
 ### 解析连接字符串
 
-[AZURE.INCLUDE [storage-cloud-configuration-manager-include](../../includes/storage-cloud-configuration-manager-include.md)]
+[!INCLUDE [storage-cloud-configuration-manager-include](../../includes/storage-cloud-configuration-manager-include.md)]
 
 ### 创建表服务客户端
 **CloudTableClient** 类使你能够检索存储在表存储中的表和实体。下面是创建服务客户端的一种方法：
@@ -426,11 +426,10 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
 - 查看表服务参考文档，了解有关可用 API 的完整详情：
     - [.NET 存储客户端库参考](https://msdn.microsoft.com/zh-cn/library/mt347887.aspx)
     - [REST API 参考](http://msdn.microsoft.com/zh-cn/library/azure/dd179355)
-- 了解如何使用 [Azure WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk-get-started/) 简化你编写的用于 Azure 存储空间的代码
+- 了解如何使用 [Azure WebJobs SDK](../app-service-web/websites-dotnet-webjobs-sdk-get-started.md) 简化你编写的用于 Azure 存储空间的代码
 - 查看更多功能指南，以了解在 Azure 中存储数据的其他方式。
-    - [通过 .NET 开始使用 Azure Blob 存储](/documentation/articles/storage-dotnet-how-to-use-blobs/)来存储非结构化数据。
-    - [使用.NET (C#) 连接到 SQL 数据库](/documentation/articles/sql-database-develop-dotnet-simple/)，存储关系数据。
-
+    - [通过 .NET 开始使用 Azure Blob 存储](./storage-dotnet-how-to-use-blobs.md)来存储非结构化数据。
+    - [使用.NET (C#) 连接到 SQL 数据库](../sql-database/sql-database-develop-dotnet-simple.md)，存储关系数据。
 
   [下载并安装 Azure SDK for.NET]: /develop/net/
   [在 Visual Studio 中创建 Azure 项目]: http://msdn.microsoft.com/zh-cn/library/azure/ee405487.aspx

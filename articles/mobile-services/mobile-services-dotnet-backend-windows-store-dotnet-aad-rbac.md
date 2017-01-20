@@ -1,25 +1,25 @@
-<properties
-	pageTitle="使用 .NET 的移动服务和 Azure Active Directory 中基于角色的访问控制（Windows 应用商店）| Azure"
-	description="了解如何使用 .NET 后端通过移动服务基于 Windows 应用商店应用程序中的 Azure Active Directory 角色控制访问。"
-	documentationCenter="windows"
-	authors="wesmc7777"
-	manager="dwrede"
-	editor=""
-	services="mobile-services"/>
+---
+title: 使用 .NET 的移动服务和 Azure Active Directory 中基于角色的访问控制（Windows 应用商店）| Azure
+description: 了解如何使用 .NET 后端通过移动服务基于 Windows 应用商店应用程序中的 Azure Active Directory 角色控制访问。
+documentationCenter: windows
+authors: wesmc7777
+manager: dwrede
+editor: 
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="wesmc"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: wesmc
+---
 
 # 使用 JavaScript 的移动服务和 Azure Active Directory 中基于角色的访问控制
 
-[AZURE.INCLUDE [mobile-services-selector-rbac](../../includes/mobile-services-selector-rbac.md)]
+[!INCLUDE [mobile-services-selector-rbac](../../includes/mobile-services-selector-rbac.md)]
 
 ##概述
 
@@ -27,8 +27,7 @@
 
 本教程将演示基于角色的访问控制，检查每个用户在 Azure Active Directory (AAD) 中定义的“销售”组的成员资格。访问检查将在 .NET 移动服务后端中使用 Azure Active Directory 的 [Graph REST API] 来完成。只有属于“销售”组的用户才能查询数据。
 
-
->[AZURE.NOTE]本教程旨在扩充身份验证知识以加入授权实践。你应该先使用 Azure Active Directory 身份验证提供程序完成[向应用程序添加身份验证]教程。本教程将继续更新[向应用程序添加身份验证]教程中使用的 TodoItem 应用程序。
+>[!NOTE]本教程旨在扩充身份验证知识以加入授权实践。你应该先使用 Azure Active Directory 身份验证提供程序完成[向应用程序添加身份验证]教程。本教程将继续更新[向应用程序添加身份验证]教程中使用的 TodoItem 应用程序。
 
 ##先决条件
 
@@ -37,23 +36,15 @@
 * 在 Windows 8.1 上运行的 Visual Studio 2013。
 * 使用 Azure Active Directory 身份验证提供程序完成[向应用程序添加身份验证]教程。
  
-
-
-
 ##为集成的应用程序生成密钥
-
 
 在学习[向应用程序添加身份验证]教程的过程中，你在完成[注册以使用 Azure Active Directory 登录名]步骤时为集成的应用程序创建了注册。在本部分中，你将生成在使用该集成应用程序客户端 ID 读取目录信息时所用的密钥。
 
-[AZURE.INCLUDE [mobile-services-generate-aad-app-registration-access-key](../../includes/mobile-services-generate-aad-app-registration-access-key.md)]
-
-
+[!INCLUDE [mobile-services-generate-aad-app-registration-access-key](../../includes/mobile-services-generate-aad-app-registration-access-key.md)]
 
 ##创建具有成员资格的销售组
 
-[AZURE.INCLUDE [mobile-services-aad-rbac-create-sales-group](../../includes/mobile-services-aad-rbac-create-sales-group.md)]
-
-
+[!INCLUDE [mobile-services-aad-rbac-create-sales-group](../../includes/mobile-services-aad-rbac-create-sales-group.md)]
 
 ##在移动服务上创建自定义授权属性 
 
@@ -150,8 +141,6 @@
             }
         }
 
-
-
 8. 在 AuthorizeAadRole.cs 中，按如下所示更新 `AuthorizeAadRole` 类中的 `InitGroupIds` 方法。此方法会创建一个字典，以将组 ID 映射到每个角色。
 
         private void InitGroupIds()
@@ -172,10 +161,9 @@
             }
         }
 
-
 9. 在 AuthorizeAadRole.cs 中，更新 `AuthorizeAadRole` 类中的 `GetAADToken` 方法。此方法使用存储在移动服务中的应用程序设置来获取从 ADAL 访问 AAD 的令牌。
 
-    >[AZURE.NOTE]默认情况下，ADAL for .NET 包含内存中令牌缓存，以帮助减轻 Active Directory 的额外网络流量。但是，你可以编写自己的缓存实现，或完全禁用缓存。有关详细信息，请参阅 [ADAL for .NET]。
+    >[!NOTE]默认情况下，ADAL for .NET 包含内存中令牌缓存，以帮助减轻 Active Directory 的额外网络流量。但是，你可以编写自己的缓存实现，或完全禁用缓存。有关详细信息，请参阅 [ADAL for .NET]。
 
         // Use ADAL and the authentication app settings from the Mobile Service to get an AAD access token
         private async Task<string> GetAADToken()
@@ -238,10 +226,9 @@
             return membership;
         }
 
-
 11. 在 AuthorizeAadRole.cs 中，使用以下代码更新 `AuthorizeAadRole` 类中的 `OnAuthorization` 方法。此代码要求调用移动服务的用户已在 AAD 上完成身份验证。然后，此代码将获取用户的 AAD 对象 ID，检查与该角色对应的 Active Directory 组的成员资格。
 
-    >[AZURE.NOTE]你可以按名称查找 Active Directory 组。但是，在许多情况下，将组 ID 存储为移动服务应用程序设置是较好的做法。这是因为组名称很可能会更改，而 ID 会保持相同。
+    >[!NOTE]你可以按名称查找 Active Directory 组。但是，在许多情况下，将组 ID 存储为移动服务应用程序设置是较好的做法。这是因为组名称很可能会更改，而 ID 会保持相同。
 
         public override void OnAuthorization(HttpActionContext actionContext)
         {
@@ -361,31 +348,23 @@
             return DeleteAsync(id);
         }
 
-
 4. 保存 TodoItemController.cs 并生成移动服务，以验证是否没有语法错误。
 5. 将移动服务发布到 Azure 帐户。
 
-
 ##测试客户端的访问
 
-[AZURE.INCLUDE [mobile-services-aad-rbac-test-app](../../includes/mobile-services-aad-rbac-test-app.md)]
-
-
-
-
-
-
+[!INCLUDE [mobile-services-aad-rbac-test-app](../../includes/mobile-services-aad-rbac-test-app.md)]
 
 <!-- Images -->
 [0]: ./media/mobile-services-dotnet-backend-windows-store-dotnet-aad-rbac/add-authorize-aad-role-class.png
 
 <!-- URLs. -->
-[向应用程序添加身份验证]: /documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users/
-[How to Register with the Azure Active Directory]: /documentation/articles/mobile-services-how-to-register-active-directory-authentication/
+[向应用程序添加身份验证]: ./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users.md
+[How to Register with the Azure Active Directory]: ./mobile-services-how-to-register-active-directory-authentication.md
 [Azure Management Portal]: https://manage.windowsazure.cn/
 [Directory Sync Scenarios]: http://msdn.microsoft.com/zh-cn/library/azure/jj573653.aspx
-[Store Server Scripts]: /documentation/articles/mobile-services-store-scripts-source-control/
-[注册以使用 Azure Active Directory 登录名]: /documentation/articles/mobile-services-how-to-register-active-directory-authentication/
+[Store Server Scripts]: ./mobile-services-store-scripts-source-control.md
+[注册以使用 Azure Active Directory 登录名]: ./mobile-services-how-to-register-active-directory-authentication.md
 [Graph REST API]: http://msdn.microsoft.com/zh-cn/library/azure/hh974478.aspx
 [IsMemberOf]: http://msdn.microsoft.com/zh-cn/library/azure/dn151601.aspx
 [ADAL for .NET]: https://msdn.microsoft.com/zh-cn/library/azure/jj573266.aspx

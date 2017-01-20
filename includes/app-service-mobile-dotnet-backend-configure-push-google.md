@@ -11,7 +11,6 @@
 
 3. 将 `PostTodoItem`方法替换为以下代码：
 
-      
         public async Task<IHttpActionResult> PostTodoItem(TodoItem item)
         {
             TodoItem current = await InsertAsync(item);
@@ -54,7 +53,7 @@
 
 ### <a name="nodejs"></a>Node.js 后端项目
 
-1. 如果尚未执行此操作，请[下载快速启动项目](/documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/#download-quickstart)或使用 [Azure 门户中的在线编辑器](/documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/#online-editor)。
+1. 如果尚未执行此操作，请[下载快速启动项目](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#download-quickstart)或使用 [Azure 门户中的在线编辑器](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#online-editor)。
  
 1. 将 todoitem.js 文件中的现有代码替换为以下内容：
 

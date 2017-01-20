@@ -1,35 +1,32 @@
-<properties
-	pageTitle="准备好要上载到 Azure 的 Windows VHD | Azure"
-	description="将 Windows VHD 上载到 Azure 之前为其做好准备的建议做法"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="genlin"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 准备好要上载到 Azure 的 Windows VHD | Azure
+description: 将 Windows VHD 上载到 Azure 之前为其做好准备的建议做法
+services: virtual-machines-windows
+documentationCenter: 
+authors: genlin
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/18/2016"
-	wacn.date="11/28/2016"
-	ms.author="glimoli;genli"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/18/2016
+wacn.date: 11/28/2016
+ms.author: glimoli;genli
+---
 
 # 准备好要上载到 Azure 的 Windows VHD
 若要将 Windows VM 从本地上载到 Azure，必须正确地准备好虚拟硬盘 (VHD)。在将 VHD 上载到 Azure 之前，建议先完成几个步骤。本文介绍如何准备需上载到 Azure 的 Windows VHD，以及[何时以何种方式使用 Sysprep](#step23)。
 
 ## 准备虚拟磁盘
 
->[AZURE.NOTE] 
+>[!NOTE] 
 Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.technet.com/b/ausoemteam/archive/2015/04/21/deciding-when-to-use-generation-1-or-generation-2-virtual-machines-with-hyper-v.aspx)。Azure 不支持更新的 VHDX 格式。
 ><p>
 ><p> VHD 的大小必须是固定的而不是动态的。如果需要，请参阅下面有关如何从 VHDX 或动态磁盘进行转换的详细说明。VHD 允许的最大大小为 1,023 GB。
-
 
 确保 Windows VHD 在本地服务器上正常工作。在尝试转换磁盘或将其上载到 Azure 之前，请解决 VM 本身内部的所有错误。
 
@@ -55,7 +52,7 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 
 ## 准备要上载的 Windows 配置
 
-> [AZURE.NOTE] 以[管理权限](https://technet.microsoft.com/zh-cn/library/cc947813.aspx)运行以下所有命令。
+> [!NOTE] 以[管理权限](https://technet.microsoft.com/zh-cn/library/cc947813.aspx)运行以下所有命令。
 
 1. 删除路由表中的所有静态持久性路由：
 
@@ -74,7 +71,6 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 
 		REG ADD HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsUniversal /t REG_DWORD /d 1
 		sc config w32time start= auto
-
 
 ## 配置 Windows 服务
 5. 确保下面的每个 Windows 服务均设置为 **Windows 默认值**。这些服务是使用以下列表中所述的启动设置配置的。可以运行以下命令重置启动设置：
@@ -205,7 +201,6 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 
 			netsh advfirewall firewall set rule dir=out name="Network Discovery (WSD-Out)" new enable=yes
 
-
 ## 其他 Windows 配置步骤
 12. 运行 `winmgmt /verifyrepository`，确认 Windows Management Instrumentation (WMI) 存储库是否一致。如果存储库已损坏，请参阅[这篇博客文章](https://blogs.technet.microsoft.com/askperf/2014/08/08/wmi-repository-corruption-or-not)。
 
@@ -230,7 +225,6 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 18.	如果要上载的 Windows VHD 是域控制器，请遵循[这些附加步骤](https://support.microsoft.com/kb/2904015)来准备磁盘。
 19.	重新启动 VM，确保 Windows 仍可正常运行，并可以使用 RDP 连接来访问它。
 20.	重置当前本地管理员密码，确保可以使用此帐户通过 RDP 连接登录 Windows。此访问权限由“允许通过远程桌面服务登录”策略对象控制。此对象位于“计算机配置”\\“Windows 设置”\\“安全设置”\\“本地策略”\\“用户权限分配”下面。
-
 
 ## 安装 Windows 更新
 22. 安装最新的 Windows 更新。如果无法安装最新更新，请确保安装以下更新：
@@ -260,11 +254,9 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 <a id="step23"></a>
 23. 如果你想要创建一个映像并从中部署多个计算机，则在将 VHD 上载到 Azure 之前，需要运行 `sysprep` 来通用化该映像。不需运行 `sysprep` 即可使用专用的 VHD。有关如何创建通用化映像的详细信息，请参阅以下文章：
 
-	- [Create a VM image from an existing Azure VM using the Resource Manager deployment model（使用 Resource Manager 部署模型从现有 Azure VM 创建 VM 映像）](/documentation/articles/virtual-machines-windows-create-vm-generalized/)
-	- [Create a VM image from an existing Azure VM using the Classic deployment modem（使用经典部署模型从现有 Azure VM 创建 VM 映像）](/documentation/articles/virtual-machines-windows-classic-capture-image/)
+	- [Create a VM image from an existing Azure VM using the Resource Manager deployment model（使用 Resource Manager 部署模型从现有 Azure VM 创建 VM 映像）](./virtual-machines-windows-create-vm-generalized.md)
+	- [Create a VM image from an existing Azure VM using the Classic deployment modem（使用经典部署模型从现有 Azure VM 创建 VM 映像）](./virtual-machines-windows-classic-capture-image.md)
 	- [针对服务器角色的 Sysprep 支持](https://msdn.microsoft.com/windows/hardware/commercialize/manufacture/desktop/sysprep-support-for-server-roles)
-
-
 
 ## 其他建议的配置
 
@@ -290,6 +282,6 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 
 ## 后续步骤
 
-- [将 Windows VM 映像上载到 Azure 以进行资源管理器部署](/documentation/articles/virtual-machines-windows-upload-image/)
+- [将 Windows VM 映像上载到 Azure 以进行资源管理器部署](./virtual-machines-windows-upload-image.md)
 
 <!---HONumber=Mooncake_1121_2016-->

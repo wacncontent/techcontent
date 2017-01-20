@@ -1,10 +1,27 @@
-<properties linkid="" urlDisplayName="" pageTitle="如何配置数据同步复制到MySQL Database on Azure- Azure 微软云" metaKeywords="Azure 云,技术文档,文档与资源,MySQL,数据库,服务限制,数据复制，Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="帮助您了解如何通过数据同步功能将本地MySQL实例复制到云端。" metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: 如何配置数据同步复制到MySQL Database on Azure- Azure 微软云
+metaKeywords: Azure 云,技术文档,文档与资源,MySQL,数据库,服务限制,数据复制，Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+description: 帮助您了解如何通过数据同步功能将本地MySQL实例复制到云端。
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="cn" />
+ms.service: mysql
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: cn
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-data-replication/)
-- [English](/documentation/articles/mysql-database-enus-data-replication/)
+- [中文](./mysql-database-data-replication.md)
+- [English](./mysql-database-enus-data-replication.md)
 
 #如何配置数据同步复制到MySQL Database on Azure
 
@@ -56,19 +73,17 @@ source <备份文件名>;
 	ii.	如果使用SSL连接,请在使用SSL连接处选择启用。然后打开主服务器CA证书,将它的所有内容拷贝到主服务器CA证书输入框中。
 	3)	配置好所有信心后点击保存。
 
->[AZURE.NOTE] **注意:为保证数据的安全性，我们强烈建议使用SSL。**
+>[!NOTE] **注意:为保证数据的安全性，我们强烈建议使用SSL。**
 
 ![配置过程](./media/mysql-database-data-replication/replicationsetting.png)
-
 
 12.	配置成功后,底部的复制状态应该为复制中。
 ![配置过程](./media/mysql-database-data-replication/replicationstatus.png)
 
->[AZURE.NOTE] ** 注意:
+>[!NOTE] ** 注意:
 - 当MySQL服务器的复制角色配置为从服务器以后,该服务器处于只读模式。
 - 当MySQL服务器的复制角色配置为从服务器以后, 除角色外，复制页面所有主服务器参数不可更改。如果有输入错误,只有先将复制角色配置为禁止，然后重新配置从服务器参数。
 - 我们推荐将主服务器的binlog_format参数设置为 Mixed或者Row, 从而避免因为使用unsafe statement,例如 sysdate()而引发的数据复制错误.**
-
 
 ##数据复制的限制
 1. 不会复制主服务器端针对账户和权限的变动。如果你在主服务器端新建了一个账户而且这个账户需要访问从服务器，那么你需要在MySQL Database on Azure上自己新建一个同样的账户。
@@ -97,7 +112,6 @@ source <备份文件名>;
 2.	根据复制错误字段,分析错误原因，解决错误。 例如设置max_allowed_packet,使它和主服务器一致,在从服务器上更改导致复制失败的记录。
 
 3.	通过Azure管理门户，重新将该MySQL的复制角色更改为从服务器。
-
 
 	1)	主服务器二进制日志文件名和偏移是之前复制执行到的主服务器二进制日志文件名和偏移。如果之前不存在二进制日志文件名或者偏移量输入错误,不建议更改。
 

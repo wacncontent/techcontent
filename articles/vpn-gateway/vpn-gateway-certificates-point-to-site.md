@@ -1,22 +1,22 @@
-<properties 
-   pageTitle="使用 makecert 为点到站点虚拟网络跨界连接创建自签名证书 | Azure"
-   description="本文包含在 Windows 10 上使用 makecert 创建自签名证书的步骤。"
-   services="vpn-gateway"
-   documentationCenter="na"
-   authors="cherylmc"
-   manager="carmonm"
-   editor=""
-   tags="azure-resource-manager"/>  
+---
+title: 使用 makecert 为点到站点虚拟网络跨界连接创建自签名证书 | Azure
+description: 本文包含在 Windows 10 上使用 makecert 创建自签名证书的步骤。
+services: vpn-gateway
+documentationCenter: na
+authors: cherylmc
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags 
-   ms.service="vpn-gateway"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="08/22/2016"
-   wacn.date="01/03/2017"
-   ms.author="cherylmc" />
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 08/22/2016
+wacn.date: 01/03/2017
+ms.author: cherylmc
+---
 
 # 为点到站点连接使用自签名证书
 
@@ -42,7 +42,6 @@ Makecert 是创建自签名证书的方式之一。以下步骤将演示如何�
 
     	makecert -sky exchange -r -n "CN=ARMP2SRootCert" -pe -a sha1 -len 2048 -ss My "ARMP2SRootCert.cer"
 
-
 ###  <a name="rootpublickey"></a>获取公钥
 
 根证书的公钥作为点到站点连接 VPN 网关配置的一部分上载到 Azure。
@@ -57,7 +56,6 @@ Makecert 是创建自签名证书的方式之一。以下步骤将演示如何�
 
 5. 单击“完成”以导出证书。
 
- 
 ### 导出自签名证书（可选）
 
 可能需要导出自签名证书，并将它安全存储。如果需要，可以稍后在另一台计算机上安装此自签名证书，然后生成更多客户端证书，或导出另一个 .cer 文件。已安装客户端证书并设置适当的 VPN 客户端设置的任何计算机，都可以通过 P2S 连接到虚拟网络。因此，需要确保仅在需要时生成和安装客户端证书，并且需要安全地存储此自签名证书。
@@ -77,7 +75,6 @@ Makecert 是创建自签名证书的方式之一。以下步骤将演示如何�
 2. 在本示例中，"ARMP2SRootCert" 是指生成的自签名证书。
 	- 将 *"ARMP2SRootCert"* 更改为生成客户端证书所用的自签名根证书。
 	- 将 *ClientCertificateName* 更改为生成客户端证书所用的名称。
-
 
 	修改并运行示例，生成客户端证书。如果未经修改就运行以下示例，个人证书存储中将有一个从根证书 ARMP2SRootCert 生成的客户端证书，名为 ClientCertificateName。
 
@@ -117,7 +114,7 @@ Makecert 是创建自签名证书的方式之一。以下步骤将演示如何�
 
 继续使用点到站点配置。
 
-- 有关 **Resource Manager** 部署模型步骤，请参阅 [Configure a Point-to-Site connection to a VNet using PowerShell](/documentation/articles/vpn-gateway-howto-point-to-site-rm-ps/)（使用 PowerShell 配置与 VNet 的点到站点连接）。
-- 有关**经典**部署模型步骤，请参阅 [Configure a Point-to-Site VPN connection to a VNet using the Classic Management Portal](/documentation/articles/vpn-gateway-point-to-site-create/)（使用经典管理门户配置与 VNet 的点到站点 VPN 连接）。
+- 有关 **Resource Manager** 部署模型步骤，请参阅 [Configure a Point-to-Site connection to a VNet using PowerShell](./vpn-gateway-howto-point-to-site-rm-ps.md)（使用 PowerShell 配置与 VNet 的点到站点连接）。
+- 有关**经典**部署模型步骤，请参阅 [Configure a Point-to-Site VPN connection to a VNet using the Classic Management Portal](./vpn-gateway-point-to-site-create.md)（使用经典管理门户配置与 VNet 的点到站点 VPN 连接）。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

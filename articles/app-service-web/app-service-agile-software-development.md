@@ -1,29 +1,29 @@
-<properties
-	pageTitle="使用 Azure App Service 进行敏捷软件开发"
-	description="学习如何使用支持敏捷软件开发的方式，通过 Azure App Service 创建高缩放性的复杂应用程序。"
-	services="app-service"
-	documentationCenter=""
-	authors="cephalin"
-	manager="wpickett"
-	editor=""/>
+---
+title: 使用 Azure App Service 进行敏捷软件开发
+description: 学习如何使用支持敏捷软件开发的方式，通过 Azure App Service 创建高缩放性的复杂应用程序。
+services: app-service
+documentationCenter: 
+authors: cephalin
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/01/2016"
-	wacn.date="01/05/2017"
-	ms.author="cephalin"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/01/2016
+wacn.date: 01/05/2017
+ms.author: cephalin
+---
 
 # 使用 Azure App Service 进行敏捷软件开发 #
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-在本教程中，你将学习如何使用支持[敏捷软件开发](https://en.wikipedia.org/wiki/Agile_software_development)的方式，通过 [Azure App Service](/home/features/app-service/) 创建高缩放性的复杂应用程序。假设你已经知道如何[通过可预测方式在 Azure 中部署复杂应用程序](/documentation/articles/app-service-deploy-complex-application-predictably/)。
+在本教程中，你将学习如何使用支持[敏捷软件开发](https://en.wikipedia.org/wiki/Agile_software_development)的方式，通过 [Azure App Service](https://www.azure.cn/home/features/app-service/) 创建高缩放性的复杂应用程序。假设你已经知道如何[通过可预测方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)。
 
-技术流程限制通常会妨碍成功的实施敏捷方法。如果在 [Azure 资源管理器](/documentation/articles/resource-group-overview/)中合理地结合了部署的协调与管理，则具有[连续发布](/documentation/articles/app-service-continuous-deployment/)、[过渡环境](/documentation/articles/web-sites-staged-publishing/)（槽）和[监视](/documentation/articles/web-sites-monitor/)等功能的 Azure App Service 是非常适合采用敏捷软件开发的开发人员的解决方案。
+技术流程限制通常会妨碍成功的实施敏捷方法。如果在 [Azure 资源管理器](../azure-resource-manager/resource-group-overview.md)中合理地结合了部署的协调与管理，则具有[连续发布](./app-service-continuous-deployment.md)、[过渡环境](./web-sites-staged-publishing.md)（槽）和[监视](./web-sites-monitor.md)等功能的 Azure App Service 是非常适合采用敏捷软件开发的开发人员的解决方案。
 
 下表是敏捷开发的相关要求以及 Azure 服务如何启用它们的简短列表。
 
@@ -35,20 +35,20 @@
 | - 轻松查看最新构建版本的结果 | 从存储库连续部署到 Azure，意味着你可以在提交更改后，立即在实时应用程序中测试新代码。 |
 | - 每天提交到主要分支<br>- 自动化部署 | 生产应用程序与存储库主要分支的连续集成可自动将主要分支的每次提交/合并部署到生产环境。 |
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
 
 ## 执行的操作 ##
 
-你将逐步执行典型的“开发-测试-过渡-生产”工作流，以将新更改发布到 [ToDoApp](https://github.com/azure-appservice-samples/ToDoApp) 示例应用程序（包含两个 [Web 应用](/home/features/app-service/web-apps/)：一个是前端 (FE)，另一个是 Web API 后端 (BE)）和 [SQL 数据库](/home/features/sql-database/)。将按如下所示使用部署体系结构：
+你将逐步执行典型的“开发-测试-过渡-生产”工作流，以将新更改发布到 [ToDoApp](https://github.com/azure-appservice-samples/ToDoApp) 示例应用程序（包含两个 [Web 应用](https://www.azure.cn/home/features/app-service/web-apps/)：一个是前端 (FE)，另一个是 Web API 后端 (BE)）和 [SQL 数据库](https://www.azure.cn/home/features/sql-database/)。将按如下所示使用部署体系结构：
 
 ![](./media/app-service-agile-software-development/what-1-architecture.png)
 
 将图片放入文字：
 
--	部署体系结构分成三个不同的环境（或 Azure 中的[资源组](/documentation/articles/resource-group-overview/)），各有其自身的 [App Service](/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/) 计划、[缩放](/documentation/articles/web-sites-scale/)设置和 SQL 数据库。
+-	部署体系结构分成三个不同的环境（或 Azure 中的[资源组](../azure-resource-manager/resource-group-overview.md)），各有其自身的 [App Service](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md) 计划、[缩放](./web-sites-scale.md)设置和 SQL 数据库。
 -	你可以单独管理每个环境。它们甚至可以存在于不同的订阅中。
 -	过渡和生产环境实现为相同 App Service 应用的两个槽。主分支是设置进行具有过渡槽的连续集成。
--	在过渡槽（包含生产数据）上验证主分支的提交时，已验证的过渡应用将交换到生产槽，且[不会造成停机](/documentation/articles/web-sites-staged-publishing/)。
+-	在过渡槽（包含生产数据）上验证主分支的提交时，已验证的过渡应用将交换到生产槽，且[不会造成停机](./web-sites-staged-publishing.md)。
 
 生产和过渡环境由 [ *&lt;repository\_root>* /ARMTemplates/ProdandStage.json](https://github.com/azure-appservice-samples/ToDoApp/blob/master/ARMTemplates/ProdAndStage.json) 中的模板定义。
 
@@ -65,16 +65,16 @@
 -	Git Shell（与 [GitHub for Windows](https://windows.github.com/) 一起安装）- 可让你在相同的会话中运行 Git 和 PowerShell 命令
 -	最新的 [Azure PowerShell](https://github.com/Azure/azure-powershell/releases/download/0.9.4-June2015/azure-powershell.0.9.4.msi) 软件
 -	基本了解以下知识：
-	-	[Azure 资源管理器](/documentation/articles/resource-group-overview/)模板部署（另请参阅[通过可预测的方式在 Azure 中部署复杂应用程序](/documentation/articles/app-service-deploy-complex-application-predictably/)）
+	-	[Azure 资源管理器](../azure-resource-manager/resource-group-overview.md)模板部署（另请参阅[通过可预测的方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)）
 	-	[Git](http://git-scm.com/documentation)
 	-	[PowerShell](https://technet.microsoft.com/zh-cn/library/bb978526.aspx)
 
-> [AZURE.NOTE] 完成本教程需要有一个 Azure 帐户：
-> + 可以[注册一个 Azure 帐户](/pricing/1rmb-trial/) — 获取可用来试用付费版 Azure 服务的信用额度，甚至在用完信用额度后，仍可以保留帐户和使用免费的 Azure 服务（如 Web 应用）。
+> [!NOTE] 完成本教程需要有一个 Azure 帐户：
+> + 可以[注册一个 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/) — 获取可用来试用付费版 Azure 服务的信用额度，甚至在用完信用额度后，仍可以保留帐户和使用免费的 Azure 服务（如 Web 应用）。
 
 ## 设置生产环境 ##
 
->[AZURE.NOTE] 目前，在 Azure 中国，你不能在新门户输入 GitHub 的凭证。所以，只有公共的 GitHub 库才能使用连续发布，并且，你只能通过 Kudu 进行设置。
+>[!NOTE] 目前，在 Azure 中国，你不能在新门户输入 GitHub 的凭证。所以，只有公共的 GitHub 库才能使用连续发布，并且，你只能通过 Kudu 进行设置。
 
 在典型的 DevOps 方案中，应用程序在 Azure 中实时运行，并且你可以通过连续发布对它进行更改。此方案将会提供你开发、测试和使用的模板来部署生产环境。本部分将介绍如何设置生产环境。
 
@@ -92,7 +92,7 @@
 
 		.\deploy.ps1 -RepoUrl https://github.com/<your_fork>/todoapp.git
 
-	>[AZURE.NOTE] 在使用这些模板之前，需要进行以下编辑，以适应 Azure 中国区的云环境：
+	>[!NOTE] 在使用这些模板之前，需要进行以下编辑，以适应 Azure 中国区的云环境：
 	> <p>1. 打开文件“ProdAndStage.json”，然后搜索“sourcecontrols”。
 	> <p>2. 在“properties”内添加 `"IsManualIntegration": true` 
 	> <p>3. 在“ProdAndStage.json”和“deploy.ps1”中，将“West US”或“East US”替换为“China East”或“China North”
@@ -106,7 +106,7 @@
 
 	![](./media/app-service-agile-software-development/production-2-app-in-browser.png)
  
-	>[AZURE.TIP] 查看 *&lt;repository\_root>* \\ARMTemplates\\Deploy.ps1，以了解它如何生成具有唯一 ID 的资源。可以使用相同的方法来创建相同部署的复本，而不必担心资源名称冲突。
+	>[!TIP] 查看 *&lt;repository\_root>* \\ARMTemplates\\Deploy.ps1，以了解它如何生成具有唯一 ID 的资源。可以使用相同的方法来创建相同部署的复本，而不必担心资源名称冲突。
  
 6.	返回 Git Shell 会话，运行：
 
@@ -134,7 +134,7 @@
 		git push origin NewUpdate 
 		.\deploy.ps1 -TemplateFile .\Dev.json -RepoUrl https://github.com/<your_fork>/ToDoApp.git -Branch NewUpdate
 
-	>[AZURE.NOTE] 应该对“Dev.json”进行相同的修改，就像你对“ProdAndStage.json”所做的修改一样
+	>[!NOTE] 应该对“Dev.json”进行相同的修改，就像你对“ProdAndStage.json”所做的修改一样
 	> <p>
 	> <P>[这里](https://github.com/bbetstcw/ToDoApp)可以找到一个已经改好的版本。
 
@@ -163,7 +163,7 @@
 	-	开发环境在 Azure 中实时运行。
 	-	删除开发环境就像删除资源组一样简单。[稍后](#delete)你将学习如何执行这项操作。
 
->[AZURE.NOTE] 有多位开发人员处理新的更新时，只要执行以下操作，每一位都可以轻松创建分支和专用开发环境：
+>[!NOTE] 有多位开发人员处理新的更新时，只要执行以下操作，每一位都可以轻松创建分支和专用开发环境：
 ><p>1.	在 GitHub 中创建其在存储库中的专属分叉（请参阅[分叉存储库](https://help.github.com/articles/fork-a-repo/)）。
 ><p>2.	克隆其本地计算机上的分叉。
 ><p>3.	运行相同的命令，以创建其自身的开发分支和环境。
@@ -176,7 +176,7 @@
 
 ![](./media/app-service-agile-software-development/test-2-all-webapps.png)
  
->[AZURE.NOTE] 请注意，ProdandStage.json 将生产环境指定为使用**标准**定价层，这适合生产应用程序的缩放性。
+>[!NOTE] 请注意，ProdandStage.json 将生产环境指定为使用**标准**定价层，这适合生产应用程序的缩放性。
 
 ## 构建和测试每项提交 ##
 
@@ -190,7 +190,7 @@
 
 	![](./media/app-service-agile-software-development/commit-1-changes.png)
 
-	>[AZURE.NOTE] 如果无法看到上述图像：
+	>[!NOTE] 如果无法看到上述图像：
 	><p>
 	><p>- 在第 18 行，将 `check-list` 更改为 `list-group`。
 	><p>- 在第 19 行，将 `class="check-list-item"` 更改为 `class="list-group-item"`。
@@ -270,21 +270,21 @@
 
 ## 摘要 ##
 
-对于许多想要采用 Azure 作为其应用程序平台的公司而言，敏捷软件开发是必不可少的。在本教程中，你已学习如何轻松创建和删除生产环境的确切副本或近似副本，即使对于复杂应用程序也是一样。你还学习了如何利用此功能创建开发过程，以便在 Azure 中构建和测试每项提交。本教程旨在演示如何最恰当地将 Azure App Service 和 Azure 资源管理器配合使用，以创建提供敏捷方法的 DevOps 解决方案。接下来，可以通过执行高级 DevOps 技术（例如[在生产环境中测试](/documentation/articles/app-service-web-test-in-production-get-start/)），基于此方案生成项目。
+对于许多想要采用 Azure 作为其应用程序平台的公司而言，敏捷软件开发是必不可少的。在本教程中，你已学习如何轻松创建和删除生产环境的确切副本或近似副本，即使对于复杂应用程序也是一样。你还学习了如何利用此功能创建开发过程，以便在 Azure 中构建和测试每项提交。本教程旨在演示如何最恰当地将 Azure App Service 和 Azure 资源管理器配合使用，以创建提供敏捷方法的 DevOps 解决方案。接下来，可以通过执行高级 DevOps 技术（例如[在生产环境中测试](./app-service-web-test-in-production-get-start.md)），基于此方案生成项目。
 
 ## 更多资源 ##
 
--	[通过可预测的方式在 Azure 中部署复杂应用程序](/documentation/articles/app-service-deploy-complex-application-predictably/)
+-	[通过可预测的方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)
 -	[敏捷开发实践：有关现代化开发周期的提示和技巧](http://channel9.msdn.com/Events/Ignite/2015/BRK3707)
 -	[使用资源管理器模板为 Azure Web Apps 制定高级部署策略](http://channel9.msdn.com/Events/Build/2015/2-620)
--	[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)
+-	[创作 Azure 资源管理器模板](../azure-resource-manager/resource-group-authoring-templates.md)
 -	[JSONLint – JSON 验证程序](http://jsonlint.com/)
 -	[ARMClient - 设置从 GitHub 到站点的发布](https://github.com/projectKudu/ARMClient/wiki/Setup-GitHub-publishing-to-Site)
 -	[Git 分支 - 基本分支和合并](http://www.git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging)
 -	[David Ebbo 的博客](http://blog.davidebbo.com/)
 -	[Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)
--	[Azure 跨平台命令行工具](/documentation/articles/xplat-cli-install/)
--	[在 Azure AD 中创建或编辑用户](/documentation/articles/active-directory-create-users/)
+-	[Azure 跨平台命令行工具](../xplat-cli-install.md)
+-	[在 Azure AD 中创建或编辑用户](../active-directory/active-directory-create-users.md)
 -	[项目 Kudu Wiki](https://github.com/projectkudu/kudu/wiki)
 
 <!---HONumber=Mooncake_0919_2016-->

@@ -32,10 +32,8 @@
   
       ![SQL Server Management Studio：连接到 SQL 数据库服务器](./media/sql-database-sql-server-management-studio-connect-user/connect-user-5.png)
       
- 
  ## 排查连接失败
 
 连接失败的最常见原因是服务器名称（记住，<*servername*> 是逻辑服务器（而非数据库）的名称）、用户名或密码错误，以及出于安全原因，服务器不允许进行连接。
-
 
 <!---HONumber=Mooncake_0503_2016-->

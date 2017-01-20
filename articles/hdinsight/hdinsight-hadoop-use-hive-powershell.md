@@ -1,31 +1,30 @@
-<properties
-   pageTitle="在 HDInsight 中将 Hadoop Hive 与 PowerShell 配合使用 | Azure"
-   description="使用 PowerShell 在 HDInsight 上的 Hadoop 中运行 Hive 查询。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="Blackmist"
-   manager="paulettm"
-   editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 在 HDInsight 中将 Hadoop Hive 与 PowerShell 配合使用 | Azure
+description: 使用 PowerShell 在 HDInsight 上的 Hadoop 中运行 Hive 查询。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="09/07/2016"
-   wacn.date="12/12/2016"
-   ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 09/07/2016
+wacn.date: 12/12/2016
+ms.author: larryfr
+---
 
 #使用 PowerShell 运行 Hive 查询
 
-[AZURE.INCLUDE [hive-selector](../../includes/hdinsight-selector-use-hive.md)]
+[!INCLUDE [hive-selector](../../includes/hdinsight-selector-use-hive.md)]
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-> [AZURE.NOTE] 本文档未详细描述示例中使用的 HiveQL 语句的作用。有关此示例中使用的 HiveQL 的信息，请参阅[将 Hive 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-hive/)。
-
+> [!NOTE] 本文档未详细描述示例中使用的 HiveQL 语句的作用。有关此示例中使用的 HiveQL 的信息，请参阅[将 Hive 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-hive.md)。
 
 **<a id="prereq"></a>先决条件**
 
@@ -34,7 +33,7 @@
 - **Azure HDInsight（HDInsight 上的 Hadoop）群集（基于 Windows）** 
 - **配备 Azure PowerShell 的工作站**。
 
-    [AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+    [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 ## <a id="powershell"></a>使用 Azure PowerShell 运行 Hive 查询
 
@@ -44,7 +43,7 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
 
 * **Import-AzurePublishSettingsFile**：在 Azure 订阅中进行 Azure PowerShell 身份验证
 
-[AZURE.INCLUDE [automation-azurechinacloud-environment-parameter](../../includes/automation-azurechinacloud-environment-parameter.md)]
+[!INCLUDE [automation-azurechinacloud-environment-parameter](../../includes/automation-azurechinacloud-environment-parameter.md)]
 
 * **New-AzureHDInsightHiveJobDefinition**：使用指定的 HiveQL 语句创建新的*作业定义*
 
@@ -89,7 +88,6 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
 		$creds = New-Object System.Management.Automation.PSCredential ($httpUsername, $passwd)
 		$hiveJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $hiveJobDefinition -Credential $creds
 
-
 		#Wait for the Hive job to complete
 		Write-Host "Wait for the job to complete..." -ForegroundColor Green
 		Wait-AzureHDInsightJob -Cluster $clusterName -JobId $hiveJob.JobId -Credential $creds
@@ -98,7 +96,6 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
 		Write-Host "Display the standard output..." -ForegroundColor Green
 		Get-AzureHDInsightJobOutput -ClusterName $clusterName -JobId $hiveJob.JobId -StandardOutput 
 
-            
 2. 打开一个新的 **Azure PowerShell** 命令提示符。将目录更改为 **hivejob.ps1** 文件的所在位置，然后使用以下命令来运行脚本：
 
 		.\hivejob.ps1
@@ -127,7 +124,7 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
 		2012-02-03	18:55:54	SampleClass1	[ERROR]	incorrect	id
 		2012-02-03	19:25:27	SampleClass4	[ERROR]	incorrect	id
 
-	> [AZURE.NOTE] 对于较长的 HiveQL 查询，你可以使用 Azure PowerShell **Here-Strings** cmdlet 或 HiveQL 脚本文件。以下代码段显示了如何使用 **Invoke-Hive** cmdlet 来运行 HiveQL 脚本文件。HiveQL 脚本文件必须上载到 wasbs://。
+	> [!NOTE] 对于较长的 HiveQL 查询，你可以使用 Azure PowerShell **Here-Strings** cmdlet 或 HiveQL 脚本文件。以下代码段显示了如何使用 **Invoke-Hive** cmdlet 来运行 HiveQL 脚本文件。HiveQL 脚本文件必须上载到 wasbs://。
 	> <p>`Invoke-AzureHDInsightHiveJob -File "wasbs://<ContainerName>@<StorageAccountName>/<Path>/query.hql"`
 	> <p>有关 **Here-Strings** 的详细信息，请参阅<a href="http://technet.microsoft.com/zh-cn/library/ee692792.aspx" target="_blank">使用 Windows PowerShell Here-Strings</a>。
 
@@ -149,12 +146,12 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
 
 有关 HDInsight 中的 Hive 的一般信息：
 
-* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-hive/)
+* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-hive.md)
 
 有关 HDInsight 上的 Hadoop 的其他使用方法的信息：
 
-* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-pig.md)
 
-* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

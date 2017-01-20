@@ -1,24 +1,23 @@
-<properties
-    pageTitle="排查应用程序网关的网关无效 (502) 错误 | Azure"
-    description="了解如何排查应用程序网关 502 错误"
-    services="application-gateway"
-    documentationcenter="na"
-    author="amitsriva"
-    manager="rossort"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 排查应用程序网关的网关无效 (502) 错误 | Azure
+description: 了解如何排查应用程序网关 502 错误
+services: application-gateway
+documentationcenter: na
+author: amitsriva
+manager: rossort
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="1d431ead-d318-47d8-b3ad-9c69f7e08813"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/16/2016"
-    wacn.date="01/09/2017"
-    ms.author="amsriva" />  
-
+ms.assetid: 1d431ead-d318-47d8-b3ad-9c69f7e08813
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/16/2016
+wacn.date: 01/09/2017
+ms.author: amsriva
+---
 
 # 排查应用程序网关中的网关无效错误
 
@@ -100,8 +99,8 @@ BackendAddressPoolsText：
 * 如果 BackendHttpSetting 指定的端口不是 80，则应将默认站点配置为侦听指定的端口。
 * 对 http://127.0.0.1:port 的调用应返回 HTTP 结果代码 200。应在 30 秒超时期限内返回此代码。
 * 确保配置的端口已打开，并且没有任何防火墙或 Azure 网络安全组在配置的端口上阻止传入或传出流量。
-* 如果对 Azure 经典 VM 或云服务使用 FQDN 或公共 IP，请确保打开相应的[终结点](/documentation/articles/virtual-machines-windows-classic-setup-endpoints/)。
-* 如果 VM 是通过 Azure Resource Manager 配置的并且位于应用程序网关部署所在的 VNet 的外部，则必须将[网络安全组](/documentation/articles/virtual-networks-nsg/)配置为允许在所需端口上进行访问。
+* 如果对 Azure 经典 VM 或云服务使用 FQDN 或公共 IP，请确保打开相应的[终结点](../virtual-machines/virtual-machines-windows-classic-setup-endpoints.md)。
+* 如果 VM 是通过 Azure Resource Manager 配置的并且位于应用程序网关部署所在的 VNet 的外部，则必须将[网络安全组](../virtual-network/virtual-networks-nsg.md)配置为允许在所需端口上进行访问。
 
 ## 自定义运行状况探测出现问题
 
@@ -123,7 +122,7 @@ BackendAddressPoolsText：
 
 根据上表验证是否已正确配置自定义运行状况探测。除了上述故障排除步骤以外，另请确保符合以下要求：
 
-* 确保已根据[指南](/documentation/articles/application-gateway-create-probe-ps/)正确指定了探测。
+* 确保已根据[指南](./application-gateway-create-probe-ps.md)正确指定了探测。
 * 如果在应用程序网关中设置了单站点，则默认情况下，除非已在自定义探测中进行配置，否则应将主机名指定为“127.0.0.1”。
 * 确保对 http://\<主机>:<端口><路径> 的调用返回 HTTP 结果代码 200。
 * 确保 Interval、Time-out 和 UnhealtyThreshold 都在可接受的范围内。
@@ -142,6 +141,6 @@ BackendAddressPoolsText：
 
 ## 后续步骤
 
-如果上述步骤无法解决问题，请开具[支持票证](/support/contact/)。
+如果上述步骤无法解决问题，请开具[支持票证](https://www.azure.cn/support/contact/)。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

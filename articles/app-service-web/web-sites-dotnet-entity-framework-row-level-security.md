@@ -1,29 +1,29 @@
-<properties
-	pageTitle="教程：使用多租户数据库和 Entity Framework 及行级别安全性的 Web 应用"
-	description="了解如何通过 Entity Framework 和行级安全性来开发使用多租户 SQL 数据库后端的 ASP.NET MVC 5 Web 应用。"
-	metaKeywords="Azure ASP.NET MVC Entity Framework 多租户行级别安全 RLS SQL 数据库"
-	services="app-service\web"
-	documentationCenter=".net"
-	manager="jeffreyg"
-	authors="tmullaney"/>
+---
+title: 教程：使用多租户数据库和 Entity Framework 及行级别安全性的 Web 应用
+description: 了解如何通过 Entity Framework 和行级安全性来开发使用多租户 SQL 数据库后端的 ASP.NET MVC 5 Web 应用。
+metaKeywords: Azure ASP.NET MVC Entity Framework 多租户行级别安全 RLS SQL 数据库
+services: app-service\web
+documentationCenter: .net
+manager: jeffreyg
+authors: tmullaney
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="04/25/2016"
-	wacn.date="11/25/2016"
-	ms.author="thmullan"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 04/25/2016
+wacn.date: 11/25/2016
+ms.author: thmullan
+---
 
 # 教程：使用多租户数据库和 Entity Framework 及行级别安全性的 Web 应用
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本教程说明了如何构建多租户 Web 应用，该应用使用“[共享数据库，共享架构](https://msdn.microsoft.com/zh-cn/library/aa479086.aspx)”租户模型，并使用 Entity Framework 和[行级别安全性](https://msdn.microsoft.com/zh-cn/library/dn765131.aspx)。在此模型中，单个数据库包含多个租户的数据，每个表中的每一行都与“租户 ID”相关联。 行级别安全性 (RLS) 是 Azure SQL 数据库的新功能，用于防止租户访问彼此的数据。该功能只需对应用程序进行单个的小改动。通过将租户访问逻辑集中于数据库本身，RLS 简化了应用程序代码，降低了租户之间发生意外数据泄露的风险。
 
-让我们先看看[通过身份验证和 SQL 数据库创建 ASP.NET MVP 应用并将其部署到 Azure App Service](/documentation/articles/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/)中一个简单的联系人管理器应用程序。该应用程序现在允许所有用户（租户）查看所有联系人：
+让我们先看看[通过身份验证和 SQL 数据库创建 ASP.NET MVP 应用并将其部署到 Azure App Service](./web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database.md)中一个简单的联系人管理器应用程序。该应用程序现在允许所有用户（租户）查看所有联系人：
 
 ![尚未启用 RLS 的联系人管理器应用程序](./media/web-sites-dotnet-entity-framework-row-level-security/ContactManagerApp-Before.png)
 
@@ -228,7 +228,6 @@
 		ADD BLOCK PREDICATE Security.userAccessPredicate(UserId) ON dbo.Contacts
 	go
 
-
 此代码执行三项操作。首先，它会根据最佳实践创建一个新的架构，以便对 RLS 对象的访问权限进行集中管理和限制。接下来，它会创建一个谓词函数，该函数会在行的 UserId 与 SESSION\_CONTEXT 中的 UserId 相匹配时返回“1”。最后，它会创建一项安全策略，以便将此函数添加为 Contacts 表的筛选谓词和阻塞谓词。筛选谓词迫使查询仅返回属于当前用户的行，阻塞谓词则充当保护角色，防止应用程序意外插入错误用户的行。
 
 现在请运行该应用程序，然后以 user1@contoso.com 身份登录。此用户现在只能看到我们此前分配给该 UserId 的联系人：
@@ -241,7 +240,7 @@
 
 就这么简单！ 简单的联系人管理器 Web 应用已变成一个多租户应用，其中的每个用户都有自己的联系人列表。使用行级安全性以后，就不必在应用程序代码中强制实施租户访问逻辑，从而避免了各种复杂操作。这种透明性使得应用程序可以专注于处理现实中存在的业务问题，还可以降低随着应用程序的代码库增长而发生数据意外泄漏的风险。
 
-本教程仅概要介绍了可以通过 RLS 执行的各种操作。例如，可以创建更完善或更细致的访问逻辑，还可以在 SESSION\_CONTEXT 中存储除当前 UserId 之外的其他内容。还可以[将 RLS 与弹性数据库工具客户端库相集成](/documentation/articles/sql-database-elastic-tools-multi-tenant-row-level-security/)，以便在扩展型数据层中启用多租户分片。
+本教程仅概要介绍了可以通过 RLS 执行的各种操作。例如，可以创建更完善或更细致的访问逻辑，还可以在 SESSION\_CONTEXT 中存储除当前 UserId 之外的其他内容。还可以[将 RLS 与弹性数据库工具客户端库相集成](../sql-database/sql-database-elastic-tools-multi-tenant-row-level-security.md)，以便在扩展型数据层中启用多租户分片。
 
 除了提供这些可能的操作，我们还致力于改进 RLS 的功能。如果你有任何问题、想法或者希望看到我们推出特定的功能，请在评论中指出。我们非常感谢你的反馈！
 

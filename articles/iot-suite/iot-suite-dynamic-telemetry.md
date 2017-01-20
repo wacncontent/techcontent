@@ -1,24 +1,22 @@
-<properties
-	pageTitle="使用动态遥测 | Azure"
-	description="遵循本教程来了解如何配合使用动态遥测和远程监视预配置解决方案。"
-	services=""
-    suite="iot-suite"
-	documentationCenter=""
-	authors="dominicbetts"
-	manager="timlt"
-	editor=""/>  
+---
+title: 使用动态遥测 | Azure
+description: 遵循本教程来了解如何配合使用动态遥测和远程监视预配置解决方案。
+services: 
+suite: iot-suite
+documentationCenter: 
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-suite"
-     ms.devlang="na"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="11/16/2016"
-     wacn.date="01/03/2017"
-     ms.author="dobett"/>  
-
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/16/2016
+wacn.date: 01/03/2017
+ms.author: dobett
+---
 
 # 配合使用动态遥测和远程监视预配置解决方案
 ## 介绍
@@ -33,9 +31,9 @@
 
 可以在任何操作系统上完成本教程，例如 Windows 或 Linux，只要能够在其中安装 Node.js 即可。
 
-[AZURE.INCLUDE [iot-suite-provision-remote-monitoring](../../includes/iot-suite-provision-remote-monitoring.md)]
+[!INCLUDE [iot-suite-provision-remote-monitoring](../../includes/iot-suite-provision-remote-monitoring.md)]
 
-[AZURE.INCLUDE [iot-suite-send-external-temperature](../../includes/iot-suite-send-external-temperature.md)]
+[!INCLUDE [iot-suite-send-external-temperature](../../includes/iot-suite-send-external-temperature.md)]
 
 ## 添加遥测类型
 
@@ -76,8 +74,7 @@
 
     ![将 RPM 添加到仪表板][image3]  
 
-
-> [AZURE.NOTE] 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
+> [!NOTE] 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
 
 ## 自定义仪表板显示内容
 
@@ -110,7 +107,7 @@
 		  'Type': 'double'
 		}]
 
-> [AZURE.NOTE] 远程监视解决方案会比较元数据定义和遥测流中的数据并区分大小写。
+> [!NOTE] 远程监视解决方案会比较元数据定义和遥测流中的数据并区分大小写。
 
 按以上代码片段中所述添加 **Telemetry** 定义不会影响仪表板的行为。但是，元数据也可以包含 **DisplayName** 属性来自定义仪表板中的显示内容。如以下片段中所述更新 **Telemetry** 元数据定义：
 
@@ -136,8 +133,7 @@
 
 ![自定义图表图例][image4]  
 
-
-> [AZURE.NOTE] 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
+> [!NOTE] 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
 
 ## 筛选遥测类型
 
@@ -169,7 +165,7 @@
 
 此更改仅影响图表的显示效果。仍会存储 **ExternalTemperature** 数据值，并可用于任何后端处理。
 
-> [AZURE.NOTE] 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
+> [!NOTE] 可能需要在仪表板中的“设备”页上禁用 Node.js 设备然后重新将它启用，才能立即查看更改。
 
 ## 处理错误
 
@@ -179,14 +175,14 @@
 
 熟悉了动态遥测的使用方式，现在可深入了解预配置的解决方案如何使用设备信息：[远程监视预配置解决方案中的设备信息元数据][lnk-devinfo]。
 
-[lnk-devinfo]: /documentation/articles/iot-suite-remote-monitoring-device-info/
+[lnk-devinfo]: ./iot-suite-remote-monitoring-device-info.md
 [image1]: ./media/iot-suite-dynamic-telemetry/image1.png
 [image2]: ./media/iot-suite-dynamic-telemetry/image2.png
 [image3]: ./media/iot-suite-dynamic-telemetry/image3.png
 [image4]: ./media/iot-suite-dynamic-telemetry/image4.png
 [image5]: ./media/iot-suite-dynamic-telemetry/image5.png
 
-[lnk_free_trial]: /pricing/1rmb-trial/
+[lnk_free_trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-node]: http://nodejs.org
 
 <!---HONumber=Mooncake_1226_2016-->

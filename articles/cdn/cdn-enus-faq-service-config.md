@@ -1,14 +1,28 @@
-<properties linkid="dev-net-common-tasks-cdn" urlDisplayName="CDN" pageTitle="Azure Content Delivery Network FAQs: Azure feature guide" metaKeywords="Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN FAQs, CDN acceleration, CDN service, configuring CNAME, CNAME, CNAME record, cache refresh, cache rules, CDN edge node, CDN technical documentation, CDN help files" description="Find answers to service configuration questions related to Azure Content Delivery Network" metaCanonical="" services="" documentationCenter=".NET" title="" authors="" solutions="" manager="" editor="" />
-<tags ms.service="cdn_en"
-    ms.date="7/7/2016"
-    wacn.date="7/7/2016"
-    wacn.lang="en"
-    />
-> [AZURE.LANGUAGE]
-- [中文](/documentation/articles/cdn-faq-service-config/)
-- [English](/documentation/articles/cdn-enus-faq-service-config/) 
-#FAQs: Service configuration
+---
+linkid: dev-net-common-tasks-cdn
+urlDisplayName: CDN
+title: Azure Content Delivery Network FAQs: Azure feature guide
+metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN FAQs, CDN acceleration, CDN service, configuring CNAME, CNAME, CNAME record, cache refresh, cache rules, CDN edge node, CDN technical documentation, CDN help files
+description: Find answers to service configuration questions related to Azure Content Delivery Network
+metaCanonical: 
+services: 
+documentationCenter: .NET
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
+ms.service: cdn_en
+ms.date: 7/7/2016
+wacn.date: 7/7/2016
+wacn.lang: en
+---
+
+> [AZURE.LANGUAGE]
+- [中文](./cdn-faq-service-config.md)
+- [English](./cdn-enus-faq-service-config.md) 
+#FAQs: Service configuration
 
 + [Configure CNAME](#step1)
 + [How do I confirm that my CNAME record has taken effect?](#step2)
@@ -65,7 +79,5 @@ After you have successfully created CDN for your origin domain _www.abc.com_ on 
 Then visit _www.abc.com_ in a browser. If the website appears correctly, then there are no problems CDN domain. If it is impossible to access the website, but the website can be successfully accessed after the IP address in the hosts file is changed to the origin IP address, then there is a problem with the CDN service.
 
 >**Note** that in Windows, the path for the hosts file is C:\\Windows\\System32\\drivers\\etc\\hosts. In UNIX-like operating systems such as Linux or BSD, the path for the hosts file is /etc/hosts. Administrator privileges are required to edit this file. Also note that, for the Azure Blob service and Cloud Services, you will get a 404 error message if you directly access the domain name. In such cases, you can troubleshoot by visiting a valid URI.
-
-
 
 <!---HONumber=CDN_1201_2015-->

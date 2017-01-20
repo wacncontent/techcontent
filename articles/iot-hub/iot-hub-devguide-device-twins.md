@@ -1,23 +1,21 @@
-<properties
- pageTitle="开发人员指南 - 了解设备孪生 | Azure"
- description="Azure IoT 中心开发人员指南 - 使用设备孪生在 IoT 中心与设备之间同步状态和配置数据"
- services="iot-hub"
- documentationCenter=".net"
- authors="fsautomata"
- manager="timlt"
- editor=""/>  
+---
+title: 开发人员指南 - 了解设备孪生 | Azure
+description: Azure IoT 中心开发人员指南 - 使用设备孪生在 IoT 中心与设备之间同步状态和配置数据
+services: iot-hub
+documentationCenter: .net
+authors: fsautomata
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="09/30/2016"
- wacn.date="12/12/2016" 
- ms.author="elioda"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 12/12/2016
+ms.author: elioda
+---
 
 # 了解设备孪生
 
@@ -28,7 +26,7 @@
 * 设备孪生的结构：*标记*、*所需属性*和*报告属性*，以及
 * 设备应用和后端可在设备孪生上执行的操作。
 
-> [AZURE.NOTE] 目前，只能从使用 MQTT 协议连接到 IoT 中心的设备访问设备孪生。有关如何转换现有设备应用以使用 MQTT 的说明，请参阅 [MQTT 支持][lnk-devguide-mqtt]一文。
+> [!NOTE] 目前，只能从使用 MQTT 协议连接到 IoT 中心的设备访问设备孪生。有关如何转换现有设备应用以使用 MQTT 的说明，请参阅 [MQTT 支持][lnk-devguide-mqtt]一文。
 
 ### 使用时机
 
@@ -59,7 +57,6 @@
 此外，设备孪生的根包含[设备标识注册表][lnk-identity]中相应标识的只读属性。
 
 ![][img-twin]  
-
 
 下面是设备孪生 JSON 文档的一个示例：
 
@@ -132,7 +129,7 @@
         ...
 3. 应用后端可以通过[查询][lnk-query]设备孪生，保持跟踪多个设备上的配置操作结果。
 
-> [AZURE.NOTE] 为便于阅读，上述代码片段示例经过优化，演示了为设备配置及其状态进行编码的一种可能方式。IoT 中心不会对设备孪生中的所需属性和报告属性施加特定的架构。
+> [!NOTE] 为便于阅读，上述代码片段示例经过优化，演示了为设备配置及其状态进行编码的一种可能方式。IoT 中心不会对设备孪生中的所需属性和报告属性施加特定的架构。
 
 在许多情况下，设备孪生用于同步长时间运行的操作，例如固件更新。有关如何使用属性来同步和跟踪设备上长时间运行的操作，请参阅 [Use desired properties to configure devices][lnk-twin-properties]（使用所需属性配置设备）。
 
@@ -171,7 +168,7 @@
 
 借助 [Azure IoT 设备 SDK][lnk-sdks]，可以通过多种语言和平台轻松使用上述操作。[设备重新连接流][lnk-reconnection]详细说明了 IoT 中心内用于同步所需属性的基元。
 
-> [AZURE.NOTE] 当前，只能从使用 MQTT 协议连接到 IoT 中心的设备访问设备孪生。
+> [!NOTE] 当前，只能从使用 MQTT 协议连接到 IoT 中心的设备访问设备孪生。
 
 ## 参考主题：
 
@@ -275,7 +272,7 @@ IoT 中心不会保留已断开连接设备的所需属性更新通知。它遵�
 
 设备应用可以忽略 `$version` 小于或等于完全检索文档的版本的所有通知。之所以能够忽略，是因为 IoT 中心保证版本始终是递增的。
 
-> [AZURE.NOTE] 此逻辑已在中 [Azure IoT 设备 SDK][lnk-sdks] 中实现。仅当设备应用无法使用任何 Azure IoT 设备 SDK，必须直接为 MQTT 接口编程时，这段说明才有作用。
+> [!NOTE] 此逻辑已在中 [Azure IoT 设备 SDK][lnk-sdks] 中实现。仅当设备应用无法使用任何 Azure IoT 设备 SDK，必须直接为 MQTT 接口编程时，这段说明才有作用。
 
 ## 其他参考资料
 
@@ -300,30 +297,29 @@ IoT 中心不会保留已断开连接设备的所需属性更新通知。它遵�
 
 <!-- links and images -->
 
-
-[lnk-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-[lnk-identity]: /documentation/articles/iot-hub-devguide-identity-registry/
-[lnk-d2c]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-messages
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-security]: /documentation/articles/iot-hub-devguide-security/
-[lnk-c2d-guidance]: /documentation/articles/iot-hub-devguide-c2d-guidance/
-[lnk-d2c-guidance]: /documentation/articles/iot-hub-devguide-d2c-guidance/
+[lnk-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-jobs]: ./iot-hub-devguide-jobs.md
+[lnk-identity]: ./iot-hub-devguide-identity-registry.md
+[lnk-d2c]: ./iot-hub-devguide-messaging.md#device-to-cloud-messages
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-security]: ./iot-hub-devguide-security.md
+[lnk-c2d-guidance]: ./iot-hub-devguide-c2d-guidance.md
+[lnk-d2c-guidance]: ./iot-hub-devguide-d2c-guidance.md
 
 [ISO8601]: https://en.wikipedia.org/wiki/ISO_8601
 [RFC7232]: https://tools.ietf.org/html/rfc7232
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 
-[lnk-devguide-directmethods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-devguide-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-[lnk-twin-tutorial]: /documentation/articles/iot-hub-node-node-twin-getstarted/
-[lnk-twin-properties]: /documentation/articles/iot-hub-node-node-twin-how-to-configure/
-[lnk-twin-metadata]: /documentation/articles/iot-hub-devguide-device-twins/#device-twin-metadata
-[lnk-concurrency]: /documentation/articles/iot-hub-devguide-device-twins/#optimistic-concurrency
-[lnk-reconnection]: /documentation/articles/iot-hub-devguide-device-twins/#device-reconnection-flow
+[lnk-devguide-directmethods]: ./iot-hub-devguide-direct-methods.md
+[lnk-devguide-jobs]: ./iot-hub-devguide-jobs.md
+[lnk-twin-tutorial]: ./iot-hub-node-node-twin-getstarted.md
+[lnk-twin-properties]: ./iot-hub-node-node-twin-how-to-configure.md
+[lnk-twin-metadata]: ./iot-hub-devguide-device-twins.md#device-twin-metadata
+[lnk-concurrency]: ./iot-hub-devguide-device-twins.md#optimistic-concurrency
+[lnk-reconnection]: ./iot-hub-devguide-device-twins.md#device-reconnection-flow
 
 [img-twin]: ./media/iot-hub-devguide-device-twins/twin.png
 

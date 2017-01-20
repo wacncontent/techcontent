@@ -1,29 +1,28 @@
-<properties 
-	pageTitle="LOB 应用程序测试环境 | Azure" 
-	description="了解如何在混合云环境中创建基于 Web 的业务线应用程序，以便进行 IT 专业人员测试或开发测试。" 
-	services="virtual-machines-windows" 
-	documentationCenter="" 
-	authors="JoeDavies-MSFT" 
-	manager="timlt" 
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: LOB 应用程序测试环境 | Azure
+description: 了解如何在混合云环境中创建基于 Web 的业务线应用程序，以便进行 IT 专业人员测试或开发测试。
+services: virtual-machines-windows
+documentationCenter: 
+authors: JoeDavies-MSFT
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags 
-	ms.service="virtual-machines-windows" 
-	ms.workload="infrastructure-services" 
-	ms.tgt_pltfrm="vm-windows" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/30/2016" 
-	wacn.date="12/16/2016" 
-	ms.author="josephd"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/30/2016
+wacn.date: 12/16/2016
+ms.author: josephd
+---
 
 # 在混合云中设置基于 Web 的 LOB 应用程序以用于测试
 
 本主题逐步讲解如何创建模拟的混合云环境，以便测试在 Azure 中托管的基于 Web 的业务线 (LOB) 应用程序。这是生成的配置。
 
 ![](./media/virtual-machines-windows-ps-hybrid-cloud-test-env-lob/virtual-machines-windows-ps-hybrid-cloud-test-env-lob-ph3.png)  
-
 
 此配置包括：
 
@@ -47,7 +46,7 @@
 
 ## 阶段 1：设置模拟混合云环境
 
-创建[模拟的混合云测试环境](/documentation/articles/virtual-machines-windows-ps-hybrid-cloud-test-env-sim/)。由于此测试环境不需要 Corpnet 子网上存在 APP1 服务器，因此现在可将其关闭。
+创建[模拟的混合云测试环境](./virtual-machines-windows-ps-hybrid-cloud-test-env-sim.md)。由于此测试环境不需要 Corpnet 子网上存在 APP1 服务器，因此现在可将其关闭。
 
 这是你当前的配置。
 
@@ -141,7 +140,6 @@
 
 ![](./media/virtual-machines-windows-ps-hybrid-cloud-test-env-lob/virtual-machines-windows-ps-hybrid-cloud-test-env-lob-ph2.png)  
 
- 
 ## 阶段 3：配置 LOB 服务器 (LOB1)
 
 首先，在本地计算机上的 Azure PowerShell 命令提示符下使用这些命令创建适用于 LOB1 的虚拟机。
@@ -206,6 +204,6 @@
 
 ## 后续步骤
 
-- 使用 [Azure 门户预览](/documentation/articles/virtual-machines-windows-hero-tutorial/)添加新虚拟机。
+- 使用 [Azure 门户预览](./virtual-machines-windows-hero-tutorial.md)添加新虚拟机。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

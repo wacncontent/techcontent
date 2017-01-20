@@ -1,27 +1,27 @@
-<properties
- pageTitle="云服务的大小"
- description="列出 Azure 云服务 Web 角色和辅助角色的不同虚拟机大小。"
- services="cloud-services"
- documentationCenter=""
- authors="Thraka"
- manager="timlt"
- editor=""/>
-<tags
- ms.service="cloud-services"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="tbd"
- ms.date="12/14/2016"
- wacn.date="01/03/2017"
- ms.author="adegeo"/>
+---
+title: 云服务的大小
+description: 列出 Azure 云服务 Web 角色和辅助角色的不同虚拟机大小。
+services: cloud-services
+documentationCenter: 
+authors: Thraka
+manager: timlt
+editor: 
+
+ms.service: cloud-services
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: tbd
+ms.date: 12/14/2016
+wacn.date: 01/03/2017
+ms.author: adegeo
+---
 
 # 云服务的大小
 
-本主题介绍云服务角色实例（Web 角色和辅助角色）的可用大小和选项。此外，还提供了在计划使用这些资源时要考虑的部署注意事项。每个大小都具有要放在[服务定义文件](/documentation/articles/cloud-services-model-and-package/#csdef)中的 ID。[云服务定价](/pricing/details/cloud-services/)页提供每种大小的价格。
+本主题介绍云服务角色实例（Web 角色和辅助角色）的可用大小和选项。此外，还提供了在计划使用这些资源时要考虑的部署注意事项。每个大小都具有要放在[服务定义文件](./cloud-services-model-and-package.md#csdef)中的 ID。[云服务定价](https://www.azure.cn/pricing/details/cloud-services/)页提供每种大小的价格。
 
-
-> [AZURE.NOTE]若要查看相关的 Azure 限制，请参阅 [Azure 订阅和服务限制、配额与约束](/documentation/articles/azure-subscription-service-limits/)
+> [!NOTE]若要查看相关的 Azure 限制，请参阅 [Azure 订阅和服务限制、配额与约束](../azure-subscription-service-limits.md)
 
 ## Web 角色实例和辅助角色实例的大小
 Azure 上有多个标准大小可供选择。其中某些大小的注意事项包括：
@@ -32,7 +32,7 @@ Azure 上有多个标准大小可供选择。其中某些大小的注意事项�
 * A 系列 VM 可以部署在各种不同的硬件类型和处理器上。根据硬件限制大小，为运行中的实例提供一致的处理器性能，而不考虑硬件部署的位置。若要判断此大小部署所在的物理硬件，请从虚拟机中查询虚拟硬件。
 * A0 大小在物理硬件上过度订阅。仅针对此特定大小，其他客户部署可能影响正在运行的工作负荷的性能。以下概述的相对性能为预期的基准，受限于近似变化性的 15%。
 
-虚拟机的大小会影响定价。此外，大小还会影响虚拟机的处理能力、内存和存储容量。存储成本根据存储帐户中的已使用页数进行单独计算。有关详细信息，请参阅[云服务定价详细信息](/pricing/details/cloud-services/)和 [Azure 存储定价](/pricing/details/storage/)。
+虚拟机的大小会影响定价。此外，大小还会影响虚拟机的处理能力、内存和存储容量。存储成本根据存储帐户中的已使用页数进行单独计算。有关详细信息，请参阅[云服务定价详细信息](https://www.azure.cn/pricing/details/cloud-services/)和 [Azure 存储定价](https://www.azure.cn/pricing/details/storage/)。
 
 以下注意事项可能有助于确定大小：
 
@@ -44,13 +44,12 @@ Azure 上有多个标准大小可供选择。其中某些大小的注意事项�
 ## 性能注意事项
 我们已创建 Azure 计算单位 (ACU) 概念，提供一种方法来比较各 Azure SKU 的计算 (CPU) 性能并识别哪个 SKU 最能满足用户的性能需求。ACU 目前在小型 (Standard\_A1) VM 上标准为 100，而所有其他 SKU 表示 SKU 在运行标准基准测试时大约可以有多快。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 > ACU 只是一种规则。工作负荷的结果可能会有所不同。
 > 
 > 
 
 <br>  
-
 
 | SKU 系列 | ACU/核心 |
 | --- | --- |
@@ -109,7 +108,6 @@ ACU 标有 *使用 Intel® Turbo 技术来增加 CPU 频率，并提升性能。
 | Standard\_A2m\_v2 | 2 | 16 | 20 | 4 | 4X500 | 2/中 |
 | Standard\_A4m\_v2 | 4 | 32 | 40 | 8 | 8x500 | 4/高 |
 | Standard\_A8m\_v2 | 8 | 64 | 80 | 16 | 16x500 | 8/高 |
-
 
 ## <a name="d-series"></a> D 系列
 | 大小 | CPU 核心数 | 内存：GiB | 本地 SSD：GiB | 最大数据磁盘数 | 数据磁盘最大吞吐量：IOPS | 最大网卡数/网络带宽等级 |
@@ -173,10 +171,9 @@ Azure H 系列虚拟机是下一代高性能计算 VM，旨在满足高端计算
 
 ## 配置云服务的大小
 
-你可以指定角色实例的虚拟机大小作为[服务定义文件](/documentation/articles/cloud-services-model-and-package/#csdef)描述的服务模型的一部分。角色大小确定了 CPU 核心数目、内存容量，以及分配给正在运行的实例的本地文件系统大小。根据应用程序的资源要求选择角色大小。
+你可以指定角色实例的虚拟机大小作为[服务定义文件](./cloud-services-model-and-package.md#csdef)描述的服务模型的一部分。角色大小确定了 CPU 核心数目、内存容量，以及分配给正在运行的实例的本地文件系统大小。根据应用程序的资源要求选择角色大小。
 
 下面是一个将 Web 角色实例的角色大小设置为 Standard_D2 的示例：
-
 
 	<WorkerRole name="Worker1" vmsize="Standard_D2">
 	...
@@ -186,12 +183,12 @@ Azure H 系列虚拟机是下一代高性能计算 VM，旨在满足高端计算
 
 工作负荷性质更改或有新的 VM 大小可用时，可能需要更改角色的大小。为此，必须在服务定义文件中更改 VM 大小（如上所示），然后重新打包云服务并进行部署。不能直接从门户或 PowerShell 更改 VM 大小。
 
->[AZURE.TIP]
-用户可能希望在不同的环境（例如测试和生产）中为角色使用不同的 VM 大小。一种办法是在项目中创建多个服务定义文件 (.csdef)，然后使用 CSPack 工具在自动生成期间为每个环境创建不同的云服务包。若要了解云服务包的元素以及如何创建云服务包，请参阅[什么是云服务模型以及如何打包？](/documentation/articles/cloud-services-model-and-package/)
+>[!TIP]
+用户可能希望在不同的环境（例如测试和生产）中为角色使用不同的 VM 大小。一种办法是在项目中创建多个服务定义文件 (.csdef)，然后使用 CSPack 工具在自动生成期间为每个环境创建不同的云服务包。若要了解云服务包的元素以及如何创建云服务包，请参阅[什么是云服务模型以及如何打包？](./cloud-services-model-and-package.md)
 >
 >
 
 ## 后续步骤
-* 了解 [Azure 订阅和服务的限制、配额和约束](/documentation/articles/azure-subscription-service-limits/)。
+* 了解 [Azure 订阅和服务的限制、配额和约束](../azure-subscription-service-limits.md)。
 
 <!---HONumber=Mooncake_1226_2016-->

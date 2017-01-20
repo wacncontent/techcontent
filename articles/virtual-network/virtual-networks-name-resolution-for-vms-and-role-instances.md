@@ -1,20 +1,21 @@
-<properties 
-   pageTitle="VM 和角色实例的解析"
-   description="Azure IaaS、混合解决方案、不同的云服务之间、Active Directory 和使用自己的 DNS 服务器的名称解析方案"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="GarethBradshawMSFT"
-   manager="carmonm"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="08/31/2016"
-   wacn.date="12/12/2016"
-   ms.author="telmos" />
+---
+title: VM 和角色实例的解析
+description: Azure IaaS、混合解决方案、不同的云服务之间、Active Directory 和使用自己的 DNS 服务器的名称解析方案
+services: virtual-network
+documentationCenter: na
+authors: GarethBradshawMSFT
+manager: carmonm
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 08/31/2016
+wacn.date: 12/12/2016
+ms.author: telmos
+---
 
 # VM 和角色实例的名称解析
 
@@ -39,13 +40,11 @@
 | 针对内部 IP 的反向 DNS | [使用你自己的 DNS 服务器的名称解析](#name-resolution-using-your-own-dns-server) | 不适用 |
 | 位于不同云服务（而非虚拟网络）中的 VM 或角色实例之间的名称解析| 不适用。不同云服务中的 VM 和角色实例之间的连接在虚拟网络外部不受支持。| 不适用 |
 
-
-
 ## <a name="azure-provided-name-resolution" id="Azure-provided-name-resolution"></a> Azure 提供的名称解析
 
 除公共 DNS 名称解析之外，Azure 还为驻留在相同虚拟网络或云服务中的 VM 和角色实例提供内部名称解析。云服务中的 VM/实例共享同一 DNS 后缀，因此只需单独的主机名，但在经典虚拟网络中，不同的云服务具有不同的 DNS 后缀，因此需要使用 FQDN 在不同云服务之间解析名称。虽然 Azure 提供的名称解析不需要任何配置，但并不适合所有部署方案，如上表所示。
 
-> [AZURE.NOTE] 在 Web 和辅助角色的情况下，还可以基于使用 Azure 服务管理 REST API 的角色名称和实例数访问内部 IP 地址。有关详细信息，请参阅[服务管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/ee460799.aspx)。
+> [!NOTE] 在 Web 和辅助角色的情况下，还可以基于使用 Azure 服务管理 REST API 的角色名称和实例数访问内部 IP 地址。有关详细信息，请参阅[服务管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/ee460799.aspx)。
 
 ### 功能和注意事项
 
@@ -77,7 +76,6 @@
 
 - 在经典部署模型中，每个虚拟网络仅注册前 180 个云服务中的 VM。
 
-
 ### <a name="Getting-the-most-from-Azure-provided-name-resolution"></a> 充分利用 Azure 提供的名称解析
 **客户端缓存：**
 
@@ -102,7 +100,7 @@
 	- 将“prepend domain-name-servers 127.0.0.1;”添加到“/etc/dhclient-eth0.conf”
 	- 重新启动网络服务（“service network restart”），以将缓存设置为本地 DNS 解析程序
 
-> [AZURE.NOTE]该“dnsmasq”包只是适用于 Linux 的众多 DNS 缓存中的一个。在使用之前，请检查其是否适合你的特定需求，并且确认你没有安装其他缓存。
+> [!NOTE]该“dnsmasq”包只是适用于 Linux 的众多 DNS 缓存中的一个。在使用之前，请检查其是否适合你的特定需求，并且确认你没有安装其他缓存。
 
 **客户端重试：**
 
@@ -142,27 +140,24 @@ DNS 转发还可用于在 VNet 之间进行 DNS 解析，可以通过本地计�
  
 -  在经典部署模型中，该后缀可通过 [Get Deployment API](https://msdn.microsoft.com/zh-cn/library/azure/ee460804.aspx) 调用或 [Get-AzureVM -Debug](https://msdn.microsoft.com/zh-cn/library/azure/dn495236.aspx) cmdlet 来获取。
 
-
 如果你不想将查询转发到 Azure，则需提供你自己的 DNS 解决方案。你的 DNS 解决方案需满足以下条件：
 
--  提供合适的主机名解析方式（例如通过 [DDNS](/documentation/articles/virtual-networks-name-resolution-ddns/) 进行解析）。请注意，如果使用 DDNS，则可能需要禁用 DNS 记录清理，因为 Azure 的 DHCP 租约时间很长，进行清理可能会导致 DNS 记录删除过早。 
+-  提供合适的主机名解析方式（例如通过 [DDNS](./virtual-networks-name-resolution-ddns.md) 进行解析）。请注意，如果使用 DDNS，则可能需要禁用 DNS 记录清理，因为 Azure 的 DHCP 租约时间很长，进行清理可能会导致 DNS 记录删除过早。 
 -  提供适当的递归式解析来解析外部域名。
 -  可以从其所服务的对象（即客户端）进行访问（在端口 53 上启用 TCP 和 UDP），并可访问 Internet。
 -  禁止从 Internet 进行访问，减少外部代理带来的威胁。
 
-> [AZURE.NOTE] 为了获得最佳性能，在将 Azure VM用作 DNS 服务器时，应禁用 IPv6，并且[实例层级公共 IP](/documentation/articles/virtual-networks-instance-level-public-ip/) 应分配到每个 DNS 服务器 VM。如果你选择使用 Windows Server 作为 DNS 服务器，则可参阅[此文](http://blogs.technet.com/b/networking/archive/2015/08/19/name-resolution-performance-of-a-recursive-windows-dns-server-2012-r2.aspx)，其中提供了其他性能分析和优化措施。
-
+> [!NOTE] 为了获得最佳性能，在将 Azure VM用作 DNS 服务器时，应禁用 IPv6，并且[实例层级公共 IP](./virtual-networks-instance-level-public-ip.md) 应分配到每个 DNS 服务器 VM。如果你选择使用 Windows Server 作为 DNS 服务器，则可参阅[此文](http://blogs.technet.com/b/networking/archive/2015/08/19/name-resolution-performance-of-a-recursive-windows-dns-server-2012-r2.aspx)，其中提供了其他性能分析和优化措施。
 
 ### 指定 DNS 服务器
 
 使用你自己的 DNS 服务器时，可通过 Azure 为每个虚拟网络或云服务（经典）指定多个 DNS 服务器。为云服务/网络接口指定 DNS 服务器时，其优先级高于为虚拟网络指定的 DNS 服务器。
 
-> [AZURE.NOTE] 不应直接在 Windows VM 中编辑网络连接属性（例如 DNS 服务器 IP），因为如果更换虚拟网络适配器，则可能会在服务修复过程中擦除这些属性。
+> [!NOTE] 不应直接在 Windows VM 中编辑网络连接属性（例如 DNS 服务器 IP），因为如果更换虚拟网络适配器，则可能会在服务修复过程中擦除这些属性。
 
 使用经典部署模型时，可以在经典管理门户或[*网络配置*文件](https://msdn.microsoft.com/zh-cn/library/azure/jj157100)中指定虚拟网络的 DNS 服务器。对于云服务器，则可通过[*服务配置*文件](https://msdn.microsoft.com/zh-cn/library/azure/ee758710)或 PowerShell ([New-AzureVM](https://msdn.microsoft.com/zh-cn/library/azure/dn495254.aspx)) 指定 DNS 服务器。
 
-> [AZURE.NOTE] 如果更改已部署的虚拟网络/虚拟机的 DNS 设置，则需重新启动每个受影响的 VM，所做的更改才会生效。
-
+> [!NOTE] 如果更改已部署的虚拟网络/虚拟机的 DNS 设置，则需重新启动每个受影响的 VM，所做的更改才会生效。
 
 ## 后续步骤
  
@@ -170,6 +165,6 @@ DNS 转发还可用于在 VNet 之间进行 DNS 解析，可以通过本地计�
 
 - [Azure 服务配置架构](https://msdn.microsoft.com/zh-cn/library/azure/ee758710)
 - [虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100)
-- [使用网络配置文件配置虚拟网络](/documentation/articles/virtual-networks-using-network-configuration-file/) 
+- [使用网络配置文件配置虚拟网络](./virtual-networks-using-network-configuration-file.md) 
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

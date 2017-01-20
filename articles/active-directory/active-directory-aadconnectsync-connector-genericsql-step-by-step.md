@@ -1,21 +1,21 @@
-<properties
-   pageTitle="通用 SQL 连接器分步指南 | Azure"
-   description="本文将指导你完成一个使用通用 SQL 连接器的简单 HR 系统分步示例。"
-   services="active-directory"
-   documentationCenter=""
-   authors="AndKjell"
-   manager="stevenpo"
-   editor=""/>
+---
+title: 通用 SQL 连接器分步指南 | Azure
+description: 本文将指导你完成一个使用通用 SQL 连接器的简单 HR 系统分步示例。
+services: active-directory
+documentationCenter: 
+authors: AndKjell
+manager: stevenpo
+editor: 
 
-<tags
-   ms.service="active-directory"
-   ms.workload="identity"
-   ms.tgt_pltfrm="na"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.date="08/30/2016"
-   wacn.date="10/11/2016"
-   ms.author="billmath"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/30/2016
+wacn.date: 10/11/2016
+ms.author: billmath
+---
 
 # 通用 SQL 连接器分步说明
 本主题是一份循序渐进的指南。其中将会创建一个简单的示例 HR 数据库，然后使用它导入一些用户及其组成员身份。

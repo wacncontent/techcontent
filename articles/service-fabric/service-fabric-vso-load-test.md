@@ -1,21 +1,22 @@
-<properties
-    pageTitle="使用 Visual Studio Team Services 对应用程序进行负载测试 | Azure"
-    description="了解如何使用 Visual Studio Team Services 对 Azure Service Fabric 应用程序进行压力测试。"
-    services="service-fabric"
-    documentationcenter="na"
-    author="cawams"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="fc743585-0d1b-483f-981d-493f4552ac07"
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="11/18/2016"
-    wacn.date="12/26/2016"
-    ms.author="cawa" />
+---
+title: 使用 Visual Studio Team Services 对应用程序进行负载测试 | Azure
+description: 了解如何使用 Visual Studio Team Services 对 Azure Service Fabric 应用程序进行压力测试。
+services: service-fabric
+documentationcenter: na
+author: cawams
+manager: timlt
+editor: 
+
+ms.assetid: fc743585-0d1b-483f-981d-493f4552ac07
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 11/18/2016
+wacn.date: 12/26/2016
+ms.author: cawa
+---
 
 # 使用 Visual Studio Team Services 对应用程序进行负载测试
 本文说明如何使用 Microsoft Visual Studio 负载测试功能对应用程序进行压力测试。其中使用了 Azure Service Fabric 有状态服务后端和无状态服务 Web 前端。此处使用的示例应用程序是一个飞机定位模拟器。你需要提供飞机 ID、出发时间和目的地。应用程序的后端处理请求，前端在地图上显示与条件匹配的飞机。
@@ -29,7 +30,7 @@
 
 - 获取 Visual Studio Team Services 帐户。可以在 [Visual Studio Team Services](https://www.visualstudio.com) 中获取一个免费帐户。
 - 获取并安装 Visual Studio 2013 或 Visual Studio 2015。本文使用 Visual Studio 2015 Enterprise 版本，但是 Visual Studio 2013 和其他版本应该也可以正常工作。
-- 将应用程序部署到过渡环境。有关详细信息，请参阅[如何使用 Visual Studio 将应用程序部署到远程群集](/documentation/articles/service-fabric-publish-app-remote-cluster/)。
+- 将应用程序部署到过渡环境。有关详细信息，请参阅[如何使用 Visual Studio 将应用程序部署到远程群集](./service-fabric-publish-app-remote-cluster.md)。
 - 了解应用程序的使用模式。这项信息用于模拟负载模式。
 - 了解负载测试的目标。这可帮助你解释和分析负载测试结果。
 
@@ -93,7 +94,7 @@
 
 4. 在“运行设置”部分中，指定负载测试持续期间。
 
-    >[AZURE.NOTE] 仅当你使用 Visual Studio 在本地运行负载测试时，“测试迭代”选项才可用。
+    >[!NOTE] 仅当你使用 Visual Studio 在本地运行负载测试时，“测试迭代”选项才可用。
 
 5. 在“运行设置”的“位置”部分中，指定生成负载测试请求的位置。该向导可能会提示你登录 Team Services 帐户。请登录，然后选择一个地理位置。完成后，请选择“完成”按钮。
 
@@ -128,7 +129,7 @@
 Visual Studio Team Services 负载测试提供了 API 来帮助你管理负载测试，并分析 Team Services 帐户中的结果。有关详细信息，请参阅[云负载测试 Rest API](http://blogs.msdn.com/b/visualstudioalm/archive/2014/11/03/cloud-load-testing-rest-apis-are-here.aspx)。
 
 ## 后续步骤
-- [在本地计算机开发安装过程中监视和诊断服务](/documentation/articles/service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally/)
+- [在本地计算机开发安装过程中监视和诊断服务](./service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)
 
 [0]: ./media/service-fabric-vso-load-test/OverviewDiagram.png
 [1]: ./media/service-fabric-vso-load-test/NewProjectDialog.png

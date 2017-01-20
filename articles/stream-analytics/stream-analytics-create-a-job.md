@@ -1,24 +1,22 @@
-<properties 
-	pageTitle="如何为流分析创建数据分析处理作业 | Azure" 
-	description="为流分析创建数据分析处理作业 | 学习路径段。"
-	keywords="数据分析处理"
-	documentationCenter=""
-	services="stream-analytics"
-	authors="jeffstokes72" 
-	manager="jhubbard" 
-	editor="cgronlun"/>  
+---
+title: 如何为流分析创建数据分析处理作业 | Azure
+description: 为流分析创建数据分析处理作业 | 学习路径段。
+keywords: 数据分析处理
+documentationCenter: 
+services: stream-analytics
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags 
-	ms.service="stream-analytics" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.tgt_pltfrm="na" 
-	ms.workload="data-services" 
-	ms.date="09/26/2016" 
-	wacn.date="11/14/2016" 
-	ms.author="jeffstok"/>  
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 09/26/2016
+wacn.date: 11/14/2016
+ms.author: jeffstok
+---
 
 # 如何为流分析创建数据分析处理作业
 
@@ -31,9 +29,7 @@
 
     ![数据分析处理作业向导](./media/stream-analytics-create-a-job/1-stream-analytics-create-a-job.png)  
 
-
     ![创建数据分析处理作业](./media/stream-analytics-create-a-job/4-stream-analytics-create-a-job.png)  
-
 
 3.  指定流分析作业所需的配置。
 	- 在“作业名称”框中，输入一个名称以标识该流分析作业。对“作业名称”进行验证后，作业名称框中会出现一个绿色的复选标记。“作业名称”只能包含字母数字字符和字符“-”，且长度必须在 3 到 63 个字符之间。
@@ -45,26 +41,22 @@
 
     ![数据分析处理作业通知中心](./media/stream-analytics-create-a-job/2-stream-analytics-create-a-job.png)  
 
-
     ![Azure 门户数据分析处理作业创建作业](./media/stream-analytics-create-a-job/5-stream-analytics-create-a-job.png)  
-
 
 5.  新作业在显示时的状态为**“已创建”**。请注意，“启动”按钮被禁用。你必须先配置作业输入、查询和输出，然后才能启动作业。
 
     ![数据分析处理作业作业状态](./media/stream-analytics-create-a-job/3-stream-analytics-create-a-job.png)  
 
-
     ![Azure 门户数据分析处理作业作业状态](./media/stream-analytics-create-a-job/6-stream-analytics-create-a-job.png)  
-
 
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。
 
 ## 后续步骤
 
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
 

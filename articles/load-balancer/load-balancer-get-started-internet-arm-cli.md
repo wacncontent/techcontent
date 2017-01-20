@@ -1,40 +1,38 @@
-<properties 
-   pageTitle="使用 Azure CLI 在 Resource Manager 中创建面向 Internet 的负载均衡器 | Azure"
-   description="了解如何使用 Azure CLI 在 Resource Manager 中创建面向 Internet 的负载均衡器"
-   services="load-balancer"
-   documentationCenter="na"
-   authors="sdwheeler"
-   manager="carmonm"
-   editor=""
-   tags="azure-resource-manager"
-/>  
+---
+title: 使用 Azure CLI 在 Resource Manager 中创建面向 Internet 的负载均衡器 | Azure
+description: 了解如何使用 Azure CLI 在 Resource Manager 中创建面向 Internet 的负载均衡器
+services: load-balancer
+documentationCenter: na
+authors: sdwheeler
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-   ms.service="load-balancer"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/24/2016"
-   wacn.date="12/30/2016"
-   ms.author="sewhee" />  
-
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/24/2016
+wacn.date: 12/30/2016
+ms.author: sewhee
+---
 
 # 使用 Azure CLI 创建内部负载均衡器
 
-> [AZURE.SELECTOR]
-[Portal](/documentation/articles/load-balancer-get-started-internet-portal/)
-[PowerShell](/documentation/articles/load-balancer-get-started-internet-arm-ps/)
-[Azure CLI](/documentation/articles/load-balancer-get-started-internet-arm-cli/)
-[Template](/documentation/articles/load-balancer-get-started-internet-arm-template/)
+> [!div class="op_single_selector"]
+[Portal](./load-balancer-get-started-internet-portal.md)
+[PowerShell](./load-balancer-get-started-internet-arm-ps.md)
+[Azure CLI](./load-balancer-get-started-internet-arm-cli.md)
+[Template](./load-balancer-get-started-internet-arm-template.md)
 
-[AZURE.INCLUDE [load-balancer-get-started-internet-intro-include.md](../../includes/load-balancer-get-started-internet-intro-include.md)]
+[!INCLUDE [load-balancer-get-started-internet-intro-include.md](../../includes/load-balancer-get-started-internet-intro-include.md)]
 
-[AZURE.INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
+[!INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]
 
-本文介绍 Resource Manager 部署模型。你还可以[了解如何使用经典部署创建面向 Internet 的负载均衡器](/documentation/articles/load-balancer-get-started-internet-classic-portal/)
+本文介绍 Resource Manager 部署模型。你还可以[了解如何使用经典部署创建面向 Internet 的负载均衡器](./load-balancer-get-started-internet-classic-portal.md)
 
-[AZURE.INCLUDE [load-balancer-get-started-internet-scenario-include.md](../../includes/load-balancer-get-started-internet-scenario-include.md)]
+[!INCLUDE [load-balancer-get-started-internet-scenario-include.md](../../includes/load-balancer-get-started-internet-scenario-include.md)]
 
 ## 使用 Azure CLI 部署解决方案
 
@@ -48,11 +46,11 @@
 * 入站 NAT 规则 - 包含将负载均衡器上的公共端口映射到后端地址池中特定虚拟机的端口的规则。
 * 探测器 - 包含用于检查后端地址池中虚拟机实例的可用性的运行状况探测器。
 
-有关详细信息，请参阅 [Azure Resource Manager 对负载均衡器的支持](/documentation/articles/load-balancer-arm/)。
+有关详细信息，请参阅 [Azure Resource Manager 对负载均衡器的支持](./load-balancer-arm.md)。
 
 ## 将 CLI 设置为使用 Resource Manager
 
-1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
+1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到资源管理器模式，如下所示。
 
         azure config mode arm
@@ -75,7 +73,7 @@
 
 	azure network public-ip create -g NRPRG -n NRPPublicIP -l chinaeast -d loadbalancernrp -a static -i 4
 
-    >[AZURE.IMPORTANT] 负载均衡器将使用公共 IP 的域标签作为其 FQDN。这与经典部署不同，后者使用云服务座位负载均衡器 FQDN。该实例中，FQDN 是 *loadbalancernrp.eastus.cloudapp.azure.com* 。
+    >[!IMPORTANT] 负载均衡器将使用公共 IP 的域标签作为其 FQDN。这与经典部署不同，后者使用云服务座位负载均衡器 FQDN。该实例中，FQDN 是 *loadbalancernrp.eastus.cloudapp.azure.com* 。
 
 ## 创建负载均衡器
 
@@ -110,7 +108,6 @@
         azure network lb inbound-nat-rule create -g nrprg -l nrplb -n ssh1 -p tcp -f 21 -b 22
         azure network lb inbound-nat-rule create -g nrprg -l nrplb -n ssh2 -p tcp -f 23 -b 22
 
-
 2. 创建负载均衡器规则。
 
         azure network lb rule create nrprg nrplb lbrule -p tcp -f 80 -b 80 -t NRPfrontendpool -o NRPbackendpool
@@ -118,7 +115,6 @@
 3. 创建运行状况探测器。
 
         azure network lb probe create -g nrprg -l nrplb -n healthprobe -p "http" -o 80 -f healthprobe.aspx -i 15 -c 4
-
 
 4. 检查你的设置。
 
@@ -193,7 +189,6 @@
 
         azure network nic create -g nrprg -n lb-nic1-be --subnet-name nrpvnetsubnet --subnet-vnet-name nrpvnet -d "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/backendAddressPools/NRPbackendpool" -e "/subscriptions/####################################/resourceGroups/nrprg/providers/Microsoft.Network/loadBalancers/nrplb/inboundNatRules/rdp1" eastus
 
-
     预期输出：
 
         info:    Executing command network nic create
@@ -228,7 +223,7 @@
 
 	    azure vm create --resource-group nrprg --name web1 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic1-be --availset-name nrp-avset --storage-account-name web1nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
 
-    >[AZURE.IMPORTANT] 负载均衡器中的 VM 需要在同一可用性集中。使用 `azure availset create` 创建可用性集。
+    >[!IMPORTANT] 负载均衡器中的 VM 需要在同一可用性集中。使用 `azure availset create` 创建可用性集。
 
     输出应如下所示：
 
@@ -249,7 +244,7 @@
         + Creating VM "web1"
         info:    vm create command OK
 
-    >[AZURE.NOTE] 应显示信息性消息**这是未配置公共 IP 的 NIC**，因为为连接到 Internet 的负载均衡器创建的 NIC 使用的是负载均衡器公共 IP 地址。
+    >[!NOTE] 应显示信息性消息**这是未配置公共 IP 的 NIC**，因为为连接到 Internet 的负载均衡器创建的 NIC 使用的是负载均衡器公共 IP 地址。
 
     由于 *lb-nic1-be* NIC 与 *rdp1* NAT 规则相关联，因此你可以使用 RDP 通过负载均衡器上的端口 3441 连接到 *web1* 。
 
@@ -262,18 +257,16 @@
 
 	azure network lb rule create --resource-group nrprg --lb-name nrplb --name lbrule2 --protocol tcp --frontend-port 8080 --backend-port 8051 --frontend-ip-name frontendnrppool --backend-address-pool-name NRPbackendpool
 
-
 ## 删除负载均衡器
 以下命令可删除负载均衡器：
 
 	azure network lb delete --resource-group nrprg --name nrplb
 
-
 ## 后续步骤
-[开始配置内部负载均衡器](/documentation/articles/load-balancer-get-started-ilb-arm-cli/)
+[开始配置内部负载均衡器](./load-balancer-get-started-ilb-arm-cli.md)
 
-[配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
-[为负载均衡器配置空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)
+[为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
 <!---HONumber=Mooncake_1128_2016-->

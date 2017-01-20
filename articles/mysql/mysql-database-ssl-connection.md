@@ -3,15 +3,14 @@
 
 # SSL安全访问MySQL Database on Azure
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-ssl-connection/)
-- [English](/documentation/articles/mysql-database-enus-ssl-connection/)
+- [中文](./mysql-database-ssl-connection.md)
+- [English](./mysql-database-enus-ssl-connection.md)
 
 <tags ms.service="mysql" ms.date="10/10/2016" wacn.date="10/10/2016" wacn.lang="cn" />
 
 通过SSL加密访问数据库，可以保障您访问的安全性，本文介绍如何下载并配置SSL证书。目前MySQL Database on Azure支持利用公钥在服务器端进行加密验证。
 
 在您创建MySQL Database on Azure实例时，我们强烈建议您将数据库实例与其他Azure服务放在同一区域，即使不用SSL加密，也可保障安全性。
-
 
 ## 步骤 1:下载SSL连接的公钥证书
 [点击下载](https://www.wosign.com/root/WS_CA1_NEW.crt)SSL证书至本地。
@@ -31,7 +30,7 @@ mysql.exe --ssl-ca=WS_CA1_NEW.crt -h mysqlservices.chinacloudapp.cn -u ssltest%t
 
 ![验证][6]
 
->[AZURE.NOTE]**需要注意的是MySQL on Azure在代理服务器proxy和用户端之间建立了SSL安全链接，所以服务器中SSL相关的全局变量或者会话变量仍然是DISABLED值，而实际上整个通信过程已被TLSv1加密。**
+>[!NOTE]**需要注意的是MySQL on Azure在代理服务器proxy和用户端之间建立了SSL安全链接，所以服务器中SSL相关的全局变量或者会话变量仍然是DISABLED值，而实际上整个通信过程已被TLSv1加密。**
 
 以MySQL Workbench为例，通过Parameters标签设置访问数据库的Connection String，如下图所示。
 
@@ -48,7 +47,7 @@ mysql.exe --ssl-ca=WS_CA1_NEW.crt -h mysqlservices.chinacloudapp.cn -u ssltest%t
 > ![errormessage][4]
 >
 
-> 2.MySQL workbench 6.3.5中，会默认进行SSL加密，且存在一定的兼容性问题，具体解决方法可参见[客户端兼容性常见问题](/documentation/articles/mysql-database-compatibilityinquiry/)
+> 2.MySQL workbench 6.3.5中，会默认进行SSL加密，且存在一定的兼容性问题，具体解决方法可参见[客户端兼容性常见问题](./mysql-database-compatibilityinquiry.md)
 
 > **提示** 当前证书支持MySQL.exe 5.5.44和5.6.25及其后续版本。
 > 
@@ -56,8 +55,6 @@ mysql.exe --ssl-ca=WS_CA1_NEW.crt -h mysqlservices.chinacloudapp.cn -u ssltest%t
 以Python为例，下图是一段示例代码，供参考：
 
 ![python SSL访问][5]
-
-
 
 <!--Image references-->
 

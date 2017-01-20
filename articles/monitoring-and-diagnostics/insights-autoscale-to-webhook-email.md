@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure Insights：使用自动缩放操作发送电子邮件和 webhook 警报通知。| Azure"
-	description="了解如何在 Azure Insights 中使用自动缩放操作来调用 Web URL 或发送电子邮件通知。"
-	authors="kamathashwin"
-	manager=""
-	editor=""
-	services="azure-portal"
-	documentationCenter="na"/>
+---
+title: Azure Insights：使用自动缩放操作发送电子邮件和 webhook 警报通知。| Azure
+description: 了解如何在 Azure Insights 中使用自动缩放操作来调用 Web URL 或发送电子邮件通知。
+authors: kamathashwin
+manager: 
+editor: 
+services: azure-portal
+documentationCenter: na
 
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/19/2016"
-	wacn.date="12/26/2016"
-	ms.author="ashwink"/>
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/19/2016
+wacn.date: 12/26/2016
+ms.author: ashwink
+---
 
 # 使用自动缩放操作在 Azure Insights 中发送电子邮件和 webhook 警报通知
 
@@ -27,7 +27,6 @@
 ## 电子邮件
 电子邮件可以发送到任何有效电子邮件地址。还会通知在其中运行规则的订阅的管理员和协同管理员。
 
-
 ## 云服务和 Web Apps
 可以从 Azure 门户预览选择加入云服务和服务器场 (Web Apps)。
 
@@ -37,7 +36,6 @@
 
 ## 虚拟机规模集
 对于较新的基于 ARM 的虚拟机（虚拟机规模集），可以使用 REST API、PowerShell 和 CLI 对此进行配置。门户预览界面尚不可用。
-
 
 ## webhook 中的身份验证
 有两种身份验证 URI 形式：
@@ -73,7 +71,6 @@
         }
 }
 ```
-
 
 |字段 |必需？|	说明|
 |---|---|---|

@@ -1,33 +1,33 @@
-<properties
-   pageTitle="在 HDInsight 中将 Hadoop Pig 与 .NET 配合使用 | Azure"
-   description="了解如何使用 .NET SDK for Hadoop 将 Pig 作业提交到 HDInsight 上的 Hadoop。"
-   services="hdinsight"
-   documentationCenter=".net"
-   authors="Blackmist"
-   manager="paulettm"
-   editor="cgronlun"/>
+---
+title: 在 HDInsight 中将 Hadoop Pig 与 .NET 配合使用 | Azure
+description: 了解如何使用 .NET SDK for Hadoop 将 Pig 作业提交到 HDInsight 上的 Hadoop。
+services: hdinsight
+documentationCenter: .net
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="05/04/2016"
-   wacn.date="12/26/2016"
-   ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 05/04/2016
+wacn.date: 12/26/2016
+ms.author: larryfr
+---
 
 #使用 HDInsight 中的 .NET SDK for Hadoop 运行 Pig 作业
 
-[AZURE.INCLUDE [pig-selector](../../includes/hdinsight-selector-use-pig.md)]
+[!INCLUDE [pig-selector](../../includes/hdinsight-selector-use-pig.md)]
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本文档提供使用 .NET SDK for Hadoop 将 Pig 作业提交到 HDInsight 上的 Hadoop 群集的示例。
 
 HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsight 群集的操作。Pig 可让你通过为一系列数据转换建模，创建 MapReduce 操作。你将了解如何使用基本 C# 应用程序将 Pig 作业提交到 HDInsight 群集。
 
-> [AZURE.IMPORTANT] 目前，Azure 中国区的 HDInsight 只能通过 Azure 服务管理器 (ASM) 进行管理。适用于 HDInsight 的 Azure Resource Manager (ARM) 模型尚不可用。
+> [!IMPORTANT] 目前，Azure 中国区的 HDInsight 只能通过 Azure 服务管理器 (ASM) 进行管理。适用于 HDInsight 的 Azure Resource Manager (ARM) 模型尚不可用。
 
 ## <a id="prereq"></a>先决条件
 
@@ -41,9 +41,9 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 
 若要在 Azure HDInsight 上对应用程序进行身份验证，必须创建自签名证书、将它安装在开发工作站上，同时将它上传到你的 Azure 订阅。
 
-有关如何执行此操作的说明，请参阅[创建自签名证书](/documentation/articles/hdinsight-administer-use-management-portal-v1/#cert)。
+有关如何执行此操作的说明，请参阅[创建自签名证书](./hdinsight-administer-use-management-portal-v1.md#cert)。
 
-> [AZURE.NOTE] 创建证书时，请务必记下使用的友好名称供以后使用。
+> [!NOTE] 创建证书时，请务必记下使用的友好名称供以后使用。
 
 ## <a id="subscriptionid"></a>查找你的订阅 ID
 
@@ -119,7 +119,6 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 		                "RESULT = order FREQUENCIES by COUNT desc;" +
 		                "DUMP RESULT;";
 		
-		
 		            HDInsightJobManagementClient _hdiJobManagementClient;
 		            var clusterCredentials = new BasicAuthenticationCloudCredentials { Username = ExistingClusterUsername, Password = ExistingClusterPassword };
 		            _hdiJobManagementClient = new HDInsightJobManagementClient(ExistingClusterUri, clusterCredentials);
@@ -153,12 +152,12 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 
 有关 HDInsight 中的 Pig 的一般信息。
 
-* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-pig.md)
 
 有关 HDInsight 上的 Hadoop 的其他使用方法的信息。
 
-* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-hive/)
+* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-hive.md)
 
-* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -1,22 +1,22 @@
-<properties
-    pageTitle="开始使用 Azure 队列存储和 Visual Studio 连接服务 (ASP.NET) | Azure"
-    description="在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的 ASP.NET 项目中使用 Azure 队列存储"
-    services="storage"
-    documentationcenter=""
-    author="TomArcher"
-    manager="douge"
-    editor="" />
-<tags
-    ms.assetid="94ca3413-5497-433f-abbe-836f83a9de72"
-    ms.service="storage"
-    ms.workload="web"
-    ms.tgt_pltfrm="vs-getting-started"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/02/2016"
-    wacn.date="01/06/2017"
-    ms.author="tarcher" />  
+---
+title: 开始使用 Azure 队列存储和 Visual Studio 连接服务 (ASP.NET) | Azure
+description: 在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的 ASP.NET 项目中使用 Azure 队列存储
+services: storage
+documentationcenter: 
+author: TomArcher
+manager: douge
+editor: 
 
+ms.assetid: 94ca3413-5497-433f-abbe-836f83a9de72
+ms.service: storage
+ms.workload: web
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: na
+ms.topic: article
+ms.date: 12/02/2016
+wacn.date: 01/06/2017
+ms.author: tarcher
+---
 
 # 开始使用 Azure 队列存储和 Visual Studio 连接服务 (ASP.NET)
 
@@ -26,7 +26,7 @@ Azure 队列存储是一项存储大量非结构化数据的服务，用户可�
 
 本文介绍如何以编程方式管理 Azure 队列存储实体，执行常见任务，例如创建 Azure 队列，以及添加、修改、读取和删除队列消息。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > 
 > 本文的代码部分假定用户已使用连接服务连接到 Azure 存储帐户。连接服务的配置方法是：打开 Visual Studio 解决方案资源管理器，右键单击项目，然后从上下文菜单中选择“添加”->“连接服务”选项。在该处按照对话框的说明连接到所需的 Azure 存储帐户。
 
@@ -56,7 +56,6 @@ Azure 队列存储是一项存储大量非结构化数据的服务，用户可�
 5. 如果队列不存在，则调用 **CloudQueue.CreateIfNotExists** 方法来创建队列。
 
 	    queue.CreateIfNotExists();
-
 
 ## 向队列添加消息
 
@@ -211,6 +210,6 @@ Azure 队列存储是一项存储大量非结构化数据的服务，用户可�
 	    messageQueue.Delete();
 
 ## 后续步骤
-[AZURE.INCLUDE [vs-storage-dotnet-queues-next-steps](../../includes/vs-storage-dotnet-queues-next-steps.md)]
+[!INCLUDE [vs-storage-dotnet-queues-next-steps](../../includes/vs-storage-dotnet-queues-next-steps.md)]
 
 <!---HONumber=Mooncake_0103_2017-->

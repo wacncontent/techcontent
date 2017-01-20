@@ -1,21 +1,22 @@
-<properties
-    pageTitle="使用表存储构建 Web 应用 (Node.js) | Azure"
-    description="本教程以“使用 Express 构建 Web 应用程序”教程为基础，演示如何添加 Azure 存储服务和 Azure 模块。"
-    services="cloud-services, storage"
-    documentationcenter="nodejs"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="e90959a2-4cb2-4b19-9bfb-aede15b18b1c"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="nodejs"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 使用表存储构建 Web 应用 (Node.js) | Azure
+description: 本教程以“使用 Express 构建 Web 应用程序”教程为基础，演示如何添加 Azure 存储服务和 Azure 模块。
+services: cloud-services, storage
+documentationcenter: nodejs
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: e90959a2-4cb2-4b19-9bfb-aede15b18b1c
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 使用存储构建 Node.js Web 应用程序
 ## 概述
@@ -37,7 +38,7 @@
 ## 在 Web.Config 中设置存储凭据
 若要访问 Azure 存储空间，你需要传入存储凭据。为此，您将使用 web.config 应用程序设置。这些设置将作为环境变量传递给 Node，然后再由 Azure SDK 进行读取。
 
-> [AZURE.NOTE] 仅在将应用程序部署到 Azure 时才使用存储凭据。应用程序在模拟器中运行时将使用存储模拟器。
+> [!NOTE] 仅在将应用程序部署到 Azure 时才使用存储凭据。应用程序在模拟器中运行时将使用存储模拟器。
 
 执行下列步骤可检索存储帐户凭据并将这些凭据添加到 web.config 设置中：
 
@@ -51,7 +52,7 @@
 
 	这样可以检索与托管服务关联的存储帐户和帐户密钥的列表。
 
-	> [AZURE.NOTE] 由于在你部署服务时 Azure SDK 会创建一个存储帐户，因此在前面的指南中部署你的应用程序之后应当已存在一个存储帐户。
+	> [!NOTE] 由于在你部署服务时 Azure SDK 会创建一个存储帐户，因此在前面的指南中部署你的应用程序之后应当已存在一个存储帐户。
 
 4.  打开 **ServiceDefinition.csdef** 文件，该文件包含将应用程序部署到 Azure 时所使用的环境设置：
 
@@ -346,7 +347,6 @@
 
 ## 将应用程序发布到 Azure
 
-
 在 Windows PowerShell 窗口中，调用以下 cmdlet 将托管服务重新部署到 Azure。
 
     PS C:\node\tasklist\WebRole1> Publish-AzureServiceProject -name myuniquename -location datacentername -launch
@@ -393,11 +393,9 @@ Azure 将按使用的服务器小时数对 Web 角色实例计费。你的应用
 
 	删除服务可能需要花费几分钟时间。删除服务后，你将收到一条指示服务已被删除的消息。
 
-  [Node.js Web Application using Express]: /documentation/articles/cloud-services-nodejs-develop-deploy-express-app/
-  [使用 Express 构建 Node.js Web 应用程序]: /documentation/articles/cloud-services-nodejs-develop-deploy-express-app/
+  [Node.js Web Application using Express]: ../cloud-services/cloud-services-nodejs-develop-deploy-express-app.md
+  [使用 Express 构建 Node.js Web 应用程序]: ../cloud-services/cloud-services-nodejs-develop-deploy-express-app.md
   [在 Azure 中存储和访问数据]: http://msdn.microsoft.com/zh-cn/library/azure/gg433040.aspx
-  [Node.js Web 应用程序]: /documentation/articles/cloud-services-nodejs-develop-deploy-app/
+  [Node.js Web 应用程序]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
  
- 
-
 <!---HONumber=Mooncake_0103_2017-->

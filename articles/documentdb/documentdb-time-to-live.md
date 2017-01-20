@@ -1,24 +1,23 @@
-<properties
-    pageTitle="利用生存时间使 DocumentDB 中的数据过期 |Azure"
-    description="通过 TTL 功能，Azure DocumentDB 能够在一段时间后将文档自动从系统清除。"
-    services="documentdb"
-    documentationcenter=""
-    keywords="生存时间"
-    author="kiratp"
-    manager="jhubbard"
-    editor="" />  
+---
+title: 利用生存时间使 DocumentDB 中的数据过期 |Azure
+description: 通过 TTL 功能，Azure DocumentDB 能够在一段时间后将文档自动从系统清除。
+services: documentdb
+documentationcenter: 
+keywords: 生存时间
+author: kiratp
+manager: jhubbard
+editor: 
 
-<tags
-    ms.assetid="25fcbbda-71f7-414a-bf57-d8671358ca3f"
-    ms.service="documentdb"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/12/2016"
-    wacn.date="12/27/2016"
-    ms.author="kipandya" />  
-
+ms.assetid: 25fcbbda-71f7-414a-bf57-d8671358ca3f
+ms.service: documentdb
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/12/2016
+wacn.date: 12/27/2016
+ms.author: kipandya
+---
 
 # 利用生存时间使 DocumentDB 集合中的数据自动过期
 应用程序可以生成和存储大量数据。其中的某些数据（如计算机生成的事件数据、日志和用户会话信息）仅在有限的一段时间内才有用。当数据变得多余，应用程序不再需要时，可以安全地清除这些数据并减少应用程序的存储需求。
@@ -40,7 +39,7 @@ TTL 功能在两个级别受 TTL 属性控制 - 集合级别和文档级别。�
    - 属性仅在对父集合设置 DefaultTTL 时适用。
    - 替代父集合的 DefaultTTL 值。
 
-只要文档已过期（ttl + \_ts >= 当前服务器时间），则文档就会标记为“已过期”。此时间过后，将不允许对这些文档执行任何操作，这些文档也将从执行的任何查询结果中排除。这些文档在系统中被物理删除，并且稍后找机会在后台删除。这不占用集合预算的任何[请求单位 (RU)](/documentation/articles/documentdb-request-units/)。
+只要文档已过期（ttl + \_ts >= 当前服务器时间），则文档就会标记为“已过期”。此时间过后，将不允许对这些文档执行任何操作，这些文档也将从执行的任何查询结果中排除。这些文档在系统中被物理删除，并且稍后找机会在后台删除。这不占用集合预算的任何[请求单位 (RU)](./documentdb-request-units.md)。
 
 上面的逻辑可显示在以下矩阵中：
 
@@ -112,9 +111,9 @@ TTL 应用于整个文档。如果只是想要使文档的一部分过期，则�
 
 **TTL 功能是否具有特定的索引编制要求？**
 
-是的。该集合的[索引策略](/documentation/articles/documentdb-indexing-policies/)必须设置为“一致”或或“延迟”。尝试在索引设置为“无”的集合上设置 DefaultTTL 将导致错误，尝试关闭已设置 DefaultTTL 的集合上的索引也是如此。
+是的。该集合的[索引策略](./documentdb-indexing-policies.md)必须设置为“一致”或或“延迟”。尝试在索引设置为“无”的集合上设置 DefaultTTL 将导致错误，尝试关闭已设置 DefaultTTL 的集合上的索引也是如此。
 
 ## 后续步骤
-若要了解有关 Azure DocumentDB 的详细信息，请参阅服务的[*文档*](/documentation/services/documentdb/)页。
+若要了解有关 Azure DocumentDB 的详细信息，请参阅服务的[*文档*](./index.md/)页。
 
 <!---HONumber=Mooncake_1219_2016-->

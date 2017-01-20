@@ -1,28 +1,28 @@
-<properties 
-	pageTitle="如何使用 Azure 经典管理门户检查作业进度" 
-	description="了解如何使用 Azure 经典管理门户跟踪作业进度。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 如何使用 Azure 经典管理门户检查作业进度
+description: 了解如何使用 Azure 经典管理门户跟踪作业进度。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="08/29/2016" 
-	wacn.date="10/10/2016"  
-	ms.author="juliako"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/29/2016
+wacn.date: 10/10/2016
+ms.author: juliako
+---
 
 #如何：检查作业进度
 
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/media-services-portal-check-job-progress/)
-- [.NET](/documentation/articles/media-services-check-job-progress/)
-- [REST](/documentation/articles/media-services-rest-check-job-progress/)
+> [!div class="op_single_selector"]
+- [门户](./media-services-portal-check-job-progress.md)
+- [.NET](./media-services-check-job-progress.md)
+- [REST](./media-services-rest-check-job-progress.md)
 
 ##使用门户检查作业状态
 
@@ -33,14 +33,10 @@
 
 	![CheckStatus][checkstatus]
 
-
-
 ##后续步骤
 
-发布内容。有关详细信息，请参阅[如何：对资产进行编码](/documentation/articles/media-services-manage-content/#publish)。
-
+发布内容。有关详细信息，请参阅[如何：对资产进行编码](./media-services-manage-content.md#publish)。
 
 [checkstatus]: ./media/media-services-portal-check-job-progress/media-services-monitor-job-progress.png
  
-
 <!---HONumber=Mooncake_0926_2016-->

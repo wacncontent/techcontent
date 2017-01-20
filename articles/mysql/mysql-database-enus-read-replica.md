@@ -1,10 +1,27 @@
-<properties linkid="" urlDisplayName="" pageTitle="MySQL Service Questions – Microsoft Azure Cloud" metaKeywords="Azure Cloud, technical documentation, documents and resources, MySQL, database, FAQ, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="Provides quick answers for common technical questions encountered by users when using MySQL Database on Azure. Contact technical support if you have any further questions." metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: MySQL Service Questions – Microsoft Azure Cloud
+metaKeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, FAQ, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+description: Provides quick answers for common technical questions encountered by users when using MySQL Database on Azure. Contact technical support if you have any further questions.
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql_en" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="en" />
+ms.service: mysql_en
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: en
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-read-replica/)
-- [English](/documentation/articles/mysql-database-enus-read-replica/)
+- [中文](./mysql-database-read-replica.md)
+- [English](./mysql-database-enus-read-replica.md)
 
 # MySQL master-subordinate replication and read-only instances
 
@@ -14,7 +31,6 @@ The **MySQL Database on Azure** option on the Azure portal supports the use of t
 
 When you create a subordinate instance, Azure first performs a backup of the master instance and then creates a new read-only instance that's based on the backup to serve as the subordinate instance. After this, Azure will continually replicate all changes to the master instance on the subordinate instance.
 
-
 Notes:
 
 1. **MySQL Database on Azure** supports the creation of subordinate instances only for MySQL 5.6. MySQL 5.5 is not supported.
@@ -22,7 +38,6 @@ Notes:
 3. **MySQL Database on Azure** currently only supports subordinate instances in the same location (data center) as the master instance.
 4. **MySQL Database on Azure** currently supports a maximum of five subordinate instances of the same master instance.
 5. In order to ensure that data remains consistent between the master and subordinate instances, subordinate instances are read-only instances. All MySQL links on subordinate instances are read-only links. You cannot create, modify, or delete databases or database accounts on the subordinate instance. You can perform these operations on the master instance, and the system will automatically synchronize them to the subordinate instances.
-
 
 ## Create read-only (subordinate) instances
 1.	Select an existing instance, and then click **Replicate**.
@@ -43,7 +58,6 @@ Select a subordinate instance and click **Replicate**. This page shows the repli
 
 ## Implement read/write separation in applications
 A Java sample program for read/write separation at the application end is shown below:
-
 
 	package test1;
 	
@@ -201,8 +215,6 @@ A: Master-subordinate replication only supports version 5.6. You can manually up
 Q: How do I upgrade the database from version 5.5 to version 5.6?
 
 A: We do not currently support one-key upgrades. The way around this is to export the data from the original version 5.5 instance by using mysqldump, create a new version 5.6 database server instance, and then import the data. After it passes compatibility testing, you can migrate the application to the version 5.6 instance. If your original database is the generation environment or you cannot accept any downtime, you can manually create a snapshot of the original database, restore it to a completely new instance, and then perform the migration and upgrade on the restored instance. This will reduce the impact on the original database.
-
-
 
 <!--Image references-->
 

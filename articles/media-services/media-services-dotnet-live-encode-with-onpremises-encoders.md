@@ -1,45 +1,43 @@
-<properties 
-	pageTitle="如何使用 .NET 通过本地编码器执行实时传送视频流 | Azure" 
-	description="本主题演示如何使用 .NET 通过本地编码器执行实时编码。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>
+---
+title: 如何使用 .NET 通过本地编码器执行实时传送视频流 | Azure
+description: 本主题演示如何使用 .NET 通过本地编码器执行实时编码。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="ne" 
-	ms.topic="article" 
- 	ms.date="08/31/2016" 
- 	wacn.date="12/27/2016"  
-	ms.author="cenkdin;juliako"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: ne
+ms.topic: article
+ms.date: 08/31/2016
+wacn.date: 12/27/2016
+ms.author: cenkdin;juliako
+---
 
 #如何使用 .NET 通过本地编码器执行实时传送视频流
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/media-services-dotnet-live-encode-with-onpremises-encoders/)
+> [!div class="op_single_selector"]
+- [.NET](./media-services-dotnet-live-encode-with-onpremises-encoders.md)
 - [REST](https://docs.microsoft.com/zh-cn/rest/api/media/operations/channel)
 
 本教程将逐步演示如何使用 Azure 媒体服务 .NET SDK 创建为实现直通传送而配置的**频道**。
-
 
 ##先决条件
 
 以下是完成本教程所需具备的条件：
 
 - 一个 Azure 帐户。
-- 一个媒体服务帐户。若要创建媒体服务帐户，请参阅[如何创建媒体服务帐户](/documentation/articles/media-services-create-account/)。
-- 设置开发环境。有关详细信息，请参阅[设置环境](/documentation/articles/media-services-set-up-computer/)。
+- 一个媒体服务帐户。若要创建媒体服务帐户，请参阅[如何创建媒体服务帐户](./media-services-create-account.md)。
+- 设置开发环境。有关详细信息，请参阅[设置环境](./media-services-set-up-computer.md)。
 - 网络摄像机。例如，[Telestream Wirecast 编码器](http://www.telestream.net/wirecast/overview.htm)。
 
 建议阅读以下文章：
 
 - [Azure 媒体服务 RTMP 支持和实时编码器](https://azure.microsoft.com/blog/2014/09/18/azure-media-services-rtmp-support-and-live-encoders/)
-- [使用本地编码器执行实时流式处理以创建多比特率流](/documentation/articles/media-services-live-streaming-with-onprem-encoders/)
-
+- [使用本地编码器执行实时流式处理以创建多比特率流](./media-services-live-streaming-with-onprem-encoders.md)
 
 ##示例
 
