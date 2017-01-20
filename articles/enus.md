@@ -1,6 +1,22 @@
-<properties linkid="" urlDisplayName="" pageTitle="Configure SQL Data Sync to replicate to MySQL Database on Azure – Azure cloud" metakeywords="Azure Cloud, technical documentation, documents and resources, MySQL, database, service restrictions and limitations, data replication, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="This article helps you to understand how to use the SQL Data Sync function to replicate local MySQL instances to the cloud." metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: Configure SQL Data Sync to replicate to MySQL Database on Azure – Azure cloud
+metakeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, service restrictions and limitations, data replication, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+description: This article helps you to understand how to use the SQL Data Sync function to replicate local MySQL instances to the cloud.
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql" ms.date="" wacn.date="09/16/2015"/>
+ms.service: mysql
+ms.date: 
+wacn.date: 09/16/2015
+---
 
 #Configure SQL Data Sync to replicate to MySQL Database on Azure
 MySQL Database on Azure supports slave server mode and standard MySQL data replication. You can use this feature to automatically sync database data from a MySQL server that is running locally or in other locations to a server that is running on MySQL Database on Azure.
@@ -38,15 +54,13 @@ MySQL Database on Azure supports slave server mode and standard MySQL data repli
 
 	ii. If you are using SSL links, select the enable option in the locations by using the SSL links. Next, open the master server certification authority (CA) certificate and copy the entire contents into the input box of the master server CA certificate. c) Click Save after all the details are correctly configured.
 
->[AZURE.NOTE]**We strongly recommend using SSL to help ensure that your data is secure. **
+>[!NOTE]**We strongly recommend using SSL to help ensure that your data is secure. **
 
 ![Configuration process](./media/mysql-database-data-replication/replicationsetting.png)
 
-
 12.	Once the configuration is successful, the Replication Status at the bottom should say “replicating.” ![Configuration process](./media/mysql-database-data-replication/replicationstatus.png)
 
->[AZURE.NOTE]**Once the replication role of the MySQL server is set to slave server, the server will be in read-only mode. - Once the replication role of the MySQL server is set to slave server, none of the master server parameters on the replication page will be editable, except for the role. If there is an input error, you must set the replication role to Disabled and then reconfigure the slave server parameters. - We recommend setting the binlog\_format for the master server to Mixed or Row, to avoid causing data replication errors due to the use of unsafe statements such as sysdate ().**
-
+>[!NOTE]**Once the replication role of the MySQL server is set to slave server, the server will be in read-only mode. - Once the replication role of the MySQL server is set to slave server, none of the master server parameters on the replication page will be editable, except for the role. If there is an input error, you must set the replication role to Disabled and then reconfigure the slave server parameters. - We recommend setting the binlog\_format for the master server to Mixed or Row, to avoid causing data replication errors due to the use of unsafe statements such as sysdate ().**
 
 ##Data replication restrictions
 1. Changes on the master server to accounts and permissions are not replicated. If you created an account on the master server and this account needs to access the slave server, then you will need to create the same account yourself on MySQL Database on Azure.
@@ -74,7 +88,6 @@ If data replication errors do occur, solve them by using the following process:
 2.	Determine the cause of the error by looking at the replication error field, and resolve the issue. For example, you can set a max\_allowed\_packet value consistent with that on the master server and change the record on the slave server that is causing the replication failure.
 
 3.	Use the Azure portal to change the replication role of the MySQL back to the slave server.
-
 
 	- The master server binary log file name and offset are the master server binary file name and offset that were previously replicated and executed. If there were previously no input errors with the binary log file name or offset, we do not recommend making any changes.
 

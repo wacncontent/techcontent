@@ -1,35 +1,34 @@
-<properties
-   pageTitle="自定义测试方案 | Microsoft Azure"
-   description="如何针对常规/非常规故障强化你的服务。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="anmolah"
-   manager="timlt"
-   editor=""/>
+---
+title: 自定义测试方案 | Microsoft Azure
+description: 如何针对常规/非常规故障强化你的服务。
+services: service-fabric
+documentationCenter: .net
+authors: anmolah
+manager: timlt
+editor: 
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="05/17/2016"
-   wacn.date="01/17/2017"
-   ms.author="anmola"/>
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 05/17/2016
+wacn.date: 01/17/2017
+ms.author: anmola
+---
 
 # 在服务工作负荷期间模拟故障
 
 Azure Service Fabric 中的可测试性方案可让开发人员不用再担心如何处理单个故障。然而也存在一些方案，可能需要客户端工作负荷与故障有明显的交错。客户端工作负荷与故障的交错确保在发生故障时，服务实际在执行某些操作。考虑到可测试性功能提供的控制等级，这些交错应该在精确的工作负荷执行点进行。这种在应用程序的不同状态下引入故障可以找出 bug 并提高质量。
 
 ## 自定义方案示例
-此测试显示一种方案，其中业务工作负荷与[常规故障和非常规故障](/documentation/articles/service-fabric-testability-actions/#graceful-vs-ungraceful-fault-actions)交错出现。为了获得最佳结果，故障应在服务操作或计算的中间引入。
+此测试显示一种方案，其中业务工作负荷与[常规故障和非常规故障](./service-fabric-testability-actions.md#graceful-vs-ungraceful-fault-actions)交错出现。为了获得最佳结果，故障应在服务操作或计算的中间引入。
 
 让我们来了解一个显示了四个工作负荷 A、B、C、D 的服务示例。每个负荷对应一组工作流程，可以是计算、存储或者二者的混合。为简单起见，我们将对示例中的工作负荷进行抽象化。本示例中执行的不同故障为：
   + RestartNode：用于模拟计算机重启操作的非正常故障。
   + RestartDeployedCodePackage：用于模拟服务主机进程崩溃的非正常故障。
   + RemoveReplica：用于模拟副本删除操作的正常故障。
   + MovePrimary：用于模拟 Service Fabric 负载均衡器触发的副本移动操作的正常故障。
-
 
 	// Add a reference to System.Fabric.Testability.dll and System.Fabric.dll.
 	
@@ -154,6 +153,5 @@ Azure Service Fabric 中的可测试性方案可让开发人员不用再担心�
 	        return workload;
 	    }
 	}
-
 
 <!---HONumber=Mooncake_Quality_Review_0117_2017-->

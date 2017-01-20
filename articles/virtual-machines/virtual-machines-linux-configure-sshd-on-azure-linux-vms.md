@@ -1,27 +1,27 @@
-<properties
-    pageTitle="在 Azure Linux 虚拟机上配置 SSHD | Azure"
-    description="按安全最佳实践配置 SSHD，并将 SSH 锁定到 Azure Linux 虚拟机。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="vlivech"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid=""
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/21/2016"
-    wacn.date="01/13/2017"
-    ms.author="v-livech" />  
+---
+title: 在 Azure Linux 虚拟机上配置 SSHD | Azure
+description: 按安全最佳实践配置 SSHD，并将 SSH 锁定到 Azure Linux 虚拟机。
+services: virtual-machines-linux
+documentationcenter: 
+author: vlivech
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
+ms.assetid: 
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 11/21/2016
+wacn.date: 01/13/2017
+ms.author: v-livech
+---
 
 # 在 Azure Linux VM 上配置 SSHD
 
-本文说明如何在 Linux 上锁定 SSH 服务器，以便使用 SSH 密钥而不是密码提供最佳实践安全性并加快 SSH 登录过程。为了进一步锁定 SSHD，我们将禁止根用户登录，通过已批准的组列表限制允许登录的用户，禁用 SSH 协议版本 1，设置最小密钥位，并配置空闲用户的自动注销。本文的必要条件是一个 Azure 帐户（[获取试用版](/pricing/1rmb-trial/)）和 [SSH 公钥与私钥文件](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)。
+本文说明如何在 Linux 上锁定 SSH 服务器，以便使用 SSH 密钥而不是密码提供最佳实践安全性并加快 SSH 登录过程。为了进一步锁定 SSHD，我们将禁止根用户登录，通过已批准的组列表限制允许登录的用户，禁用 SSH 协议版本 1，设置最小密钥位，并配置空闲用户的自动注销。本文的必要条件是一个 Azure 帐户（[获取试用版](https://www.azure.cn/pricing/1rmb-trial/)）和 [SSH 公钥与私钥文件](./virtual-machines-linux-mac-create-ssh-keys.md)。
 
 ## 快速命令
 
@@ -60,7 +60,7 @@
 
 SSHD 是在 Linux VM 上运行的 SSH 服务器。SSH 是从 MacBook、Linux 工作站上的 shell 或 Windows 上的 Bash 运行的客户端。SSH 也是用于保护和加密工作站与 Linux VM 的通信的协议，后者使 SSH 还为 VPN（虚拟专用网络）。
 
-在本文中，必须让用户在 Linux VM 中保持登录，使整个演练得以顺畅进行。建立 SSH 连接后，只要未关闭窗口，它将保持为打开的会话。使一个终端处于已登录状态，可以在进行重大更改时，更改 SSHD 服务而不必锁定该服务。如果由于 SSHD 配置被破坏，用户被挡在 Linux VM 的外面，Azure 提供能够使用 [Azure VM 访问扩展](/documentation/articles/virtual-machines-linux-using-vmaccess-extension/)重置被破坏的 SSHD 配置的功能。
+在本文中，必须让用户在 Linux VM 中保持登录，使整个演练得以顺畅进行。建立 SSH 连接后，只要未关闭窗口，它将保持为打开的会话。使一个终端处于已登录状态，可以在进行重大更改时，更改 SSHD 服务而不必锁定该服务。如果由于 SSHD 配置被破坏，用户被挡在 Linux VM 的外面，Azure 提供能够使用 [Azure VM 访问扩展](./virtual-machines-linux-using-vmaccess-extension.md)重置被破坏的 SSHD 配置的功能。
 
 出于此原因，我们将打开两个终端，并从它们通过 SSH 登录到 Linux VM。我们将使用第一个终端来更改 SSHD 配置文件，然后重新启动 SSHD 服务。重新启动服务后，我们将使用第二个终端来测试这些更改。由于我们要禁用 SSH 密码并严重依赖于 SSH 密钥，因此如果 SSH 密钥不正确而关闭 VM 连接，VM 将永久被锁定，并且没有人能够登录。这样，只能将它删除后再重新创建。
 
@@ -140,10 +140,10 @@ SSH 能够断开这样的用户的连接：具有打开的连接且空闲持续�
 
 现在，已在 Linux VM 上配置并锁定 SSH 服务器，可以按照其他安全最佳实践进行操作了。
 
-* [管理用户、SSH，并使用 VMAccess 扩展检查或修复 Azure Linux VM 上的磁盘](/documentation/articles/virtual-machines-linux-using-vmaccess-extension/)
+* [管理用户、SSH，并使用 VMAccess 扩展检查或修复 Azure Linux VM 上的磁盘](./virtual-machines-linux-using-vmaccess-extension.md)
 
-* [使用 Azure CLI 加密 Linux VM 上的磁盘](/documentation/articles/virtual-machines-linux-encrypt-disks/)
+* [使用 Azure CLI 加密 Linux VM 上的磁盘](./virtual-machines-linux-encrypt-disks.md)
 
-* [Azure Resource Manager 模板中的访问权限和安全性](/documentation/articles/virtual-machines-linux-dotnet-core-3-access-security/)
+* [Azure Resource Manager 模板中的访问权限和安全性](./virtual-machines-linux-dotnet-core-3-access-security.md)
 
 <!---HONumber=Mooncake_0109_2017-->

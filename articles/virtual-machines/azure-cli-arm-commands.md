@@ -1,28 +1,28 @@
-<properties
-	pageTitle="Resource Manager 模式下的 Azure CLI 命令 | Azure"
-	description="用于在 Resource Manager 部署模型中管理资源的 Azure 命令行界面 (CLI) 命令"
-	services="virtual-machines-linux,virtual-machines-windows,virtual-network,mobile-services,cloud-services"
-	documentationCenter=""
-	authors="dlepow"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: Resource Manager 模式下的 Azure CLI 命令 | Azure
+description: 用于在 Resource Manager 部署模型中管理资源的 Azure 命令行界面 (CLI) 命令
+services: virtual-machines-linux,virtual-machines-windows,virtual-network,mobile-services,cloud-services
+documentationCenter: 
+authors: dlepow
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-	ms.service="multiple"
-	ms.workload="multiple"
-	ms.tgt_pltfrm="command-line-interface"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/05/2016"
-	wacn.date="11/16/2016"
-	ms.author="danlep"/>
+ms.service: multiple
+ms.workload: multiple
+ms.tgt_pltfrm: command-line-interface
+ms.devlang: na
+ms.topic: article
+ms.date: 08/05/2016
+wacn.date: 11/16/2016
+ms.author: danlep
+---
 
 # Resource Manager 模式下的 Azure CLI 命令
 
 本文提供经常用于在 Azure Resource Manager 部署模型中创建和管理 Azure 资源的 Azure 命令行界面 (CLI) 命令的语法和选项。通过在 Resource Manager (arm) 模式下运行 CLI 可以访问这些命令。本参考内容并不完整，你的 CLI 版本可能会显示略微不同的命令或参数。
 
-若要开始，请先[安装 Azure CLI](/documentation/articles/xplat-cli-install/)，然后使用工作或学校帐户[连接到你的 Azure 订阅](/documentation/articles/xplat-cli-connect/)。
+若要开始，请先[安装 Azure CLI](../xplat-cli-install.md)，然后使用工作或学校帐户[连接到你的 Azure 订阅](../xplat-cli-connect.md)。
 
 要在资源管理器模式下在命令行中查看当前的命令语法和选项，请键入 `azure help`；要显示某个命令的帮助，请键入 `azure help [command]`。你还可以在创建和管理具体 Azure 服务的说明文档中找到 CLI 示例。
 
@@ -36,7 +36,7 @@
 
 	azure config mode arm
 
->[AZURE.NOTE] Azure 资源管理器模式与 Azure 服务管理模式互斥。即在一种模式下创建的资源不能从另一种模式进行管理。
+>[!NOTE] Azure 资源管理器模式与 Azure 服务管理模式互斥。即在一种模式下创建的资源不能从另一种模式进行管理。
 
 ## azure account：管理你的帐户信息
 该工具使用你的 Azure 订阅信息连接到你的帐户。
@@ -188,7 +188,6 @@
 	network vnet create [options] <resource-group> <name> <location>
 用于创建新的虚拟网络。在以下示例中，我们将为中国北部区域的资源组 myresourcegroup 创建名为 newvnet 的虚拟网络。
 
-
 	azure network vnet create myresourcegroup newvnet "China North"
 	info:    Executing command network vnet create
 	+ Looking up virtual network "newvnet"
@@ -206,7 +205,6 @@
 	data:    Subnets:
 	data:
 	info:    network vnet create command OK
-
 
 参数选项：
 
@@ -281,7 +279,6 @@
 
 使用该命令可列出资源组中的所有虚拟网络。
 
-
 	C:\>azure network vnet list myresourcegroup
 
 	info:    Executing command network vnet list
@@ -295,7 +292,6 @@
 	info:    network vnet list command OK
 
 参数选项：
-
 
       -h, --help                             output usage information
       -v, --verbose                          use verbose output
@@ -349,7 +345,6 @@
      -q, --quiet                            quiet mode, do not ask for delete confirmation
      -s, --subscription <subscription>      the subscription identifier
 
-
 **用于管理虚拟网络子网的命令**
 
 	network vnet subnet create [options] <resource-group> <vnet-name> <name>
@@ -387,7 +382,6 @@
 	network vnet subnet set [options] <resource-group> <vnet-name> <name>
 
 在资源组中设置特定的虚拟网络子网。
-
 
 	C:\>azure network vnet subnet set -g myresourcegroup --vnet-name newvnet -n subnet1
 
@@ -653,7 +647,6 @@
 	-g, --resource-group <resource-group>  the name of the resource group
 	-l, --lb-name <lb-name>                the name of the load balancer
 	-s, --subscription <subscription>      the subscription identifier
-
 
 	network lb probe delete [options] <resource-group> <lb-name> <name>
 
@@ -961,7 +954,6 @@
 
 	azure network lb rule create -g myresourcegroup -l mylb -n mylbrule -p tcp -f 80 -b 8080 -i 10
 
-
 	info:    Executing command network lb rule create
 	+ Looking up the load balancer "mylb"
 	+ Updating load balancer "mylb"
@@ -1027,7 +1019,6 @@
 	-o, --backend-address-pool <backend-address-pool>  name of the backend address pool defined in the same load balancer
 	-s, --subscription <subscription>                  the subscription identifier
 
-
 	network lb rule list [options] <resource-group> <lb-name>
 
 列出针对特定资源组中某个负载均衡器配置的所有负载均衡器规则。
@@ -1080,7 +1071,6 @@
 为负载均衡器创建入站 NAT 规则。
 
 在以下示例中，我们从前端 IP（前面已定义。有关详细信息，请参阅“azure network frontend-ip”命令），使用入站侦听端口和负载均衡器要将网络流量发送到的出站端口，创建了一个 NAT 规则。
-
 
 	azure network lb inbound-nat-rule create -g myresourcegroup -l mylb -n myinboundnat -p tcp -f 80 -b 8080 -i myfrontendip
 
@@ -1234,7 +1224,6 @@
 	data:    FQDN:                 azureclitest.chinaeast.chinacloudapp.cn
 	info:    network public-ip create command OK
 
-
 参数选项：
 
 	-h, --help                                   output usage information
@@ -1349,7 +1338,6 @@
 	-n, --name <name>                      the name of the public IP
 	-s, --subscription <subscription>      the subscription identifier
 
-
 	network public-ip delete [options] <resource-group> <name>
 
 删除公共 IP 资源。
@@ -1370,7 +1358,6 @@
 	-n, --name <name>                      the name of the public IP
 	-q, --quiet                            quiet mode, do not ask for delete confirmation
 	-s, --subscription <subscription>      the subscription identifier
-
 
 **用于管理网络接口的命令**
 
@@ -1679,7 +1666,7 @@
 
     vm quick-create [options] <resource-group> <name> <location> <os-type> <image-urn> <admin-username> <admin-password>
     
->[AZURE.TIP]从 CLI 版本 0.10 开始，你可以为某些常用的应用商店映像提供“UbuntuLTS”或“Win2012R2Datacenter”之类的简短别名作为 `image-urn`。针对选项运行 `azure help vm quick-create`。另外，从版本 0.10 开始，`azure vm quick-create` 默认使用高级存储，前提是所选区域提供该存储。
+>[!TIP]从 CLI 版本 0.10 开始，你可以为某些常用的应用商店映像提供“UbuntuLTS”或“Win2012R2Datacenter”之类的简短别名作为 `image-urn`。针对选项运行 `azure help vm quick-create`。另外，从版本 0.10 开始，`azure vm quick-create` 默认使用高级存储，前提是所选区域提供该存储。
 
 **列出帐户中的虚拟机**
 

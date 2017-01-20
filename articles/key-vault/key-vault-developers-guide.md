@@ -1,22 +1,21 @@
-<properties
-   pageTitle="密钥保管库开发人员指南 | Azure"
-   description="开发人员可以使用 Azure 密钥保管库来管理 Azure 环境中的加密密钥。"
-   services="key-vault"
-   documentationCenter=""
-   authors="BrucePerlerMS"
-   manager="mbaldwin"
-   editor="bruceper" />  
+---
+title: 密钥保管库开发人员指南 | Azure
+description: 开发人员可以使用 Azure 密钥保管库来管理 Azure 环境中的加密密钥。
+services: key-vault
+documentationCenter: 
+authors: BrucePerlerMS
+manager: mbaldwin
+editor: bruceper
 
-<tags
-   ms.service="key-vault"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="identity"
-   ms.date="10/03/2016"
-   ms.author="bruceper" 
-   wacn.date="11/22/2016"/>  
-
+ms.service: key-vault
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 10/03/2016
+ms.author: bruceper
+wacn.date: 11/22/2016
+---
 
 # Azure 密钥保管库开发人员指南
 使用密钥保管库能够从应用程序中安全地访问敏感信息，以便：
@@ -27,18 +26,18 @@
 
 - 从 2016 年 9 月版密钥保管库开始，应用程序可以使用密钥保管库证书。有关详细信息，请参阅 [REST 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn903623.aspx)中的**关于密钥、机密和证书**一文。
 
-有关 Azure 密钥保管库的更多常规信息，请参阅 [What is Key Vault](/documentation/articles/key-vault-whatis/)（什么是密钥保管库）。
+有关 Azure 密钥保管库的更多常规信息，请参阅 [What is Key Vault](./key-vault-whatis.md)（什么是密钥保管库）。
 
 ## 创建和管理密钥保管库
 
 在代码中使用 Azure 密钥保管库之前，可以通过 REST、资源管理器模板、PowerShell 或 CLI 创建和管理保管库，如以下文章中所述：
 
 - [使用 REST 创建和管理密钥保管库](https://msdn.microsoft.com/zh-cn/library/azure/mt620024.aspx)
-- [使用 PowerShell 创建和管理密钥保管库](/documentation/articles/key-vault-get-started/)
-- [使用 CLI 创建和管理密钥保管库](/documentation/articles/key-vault-manage-with-cli/)
-- [通过 Azure 资源管理器模板创建密钥保管库并添加机密](/documentation/articles/resource-manager-template-keyvault/)
+- [使用 PowerShell 创建和管理密钥保管库](./key-vault-get-started.md)
+- [使用 CLI 创建和管理密钥保管库](./key-vault-manage-with-cli.md)
+- [通过 Azure 资源管理器模板创建密钥保管库并添加机密](../azure-resource-manager/resource-manager-template-keyvault.md)
 
->[AZURE.NOTE] 针对密钥保管库执行的操作通过 AAD 进行身份验证并通过密钥保管库自己的访问策略（按保管库定义）进行授权。
+>[!NOTE] 针对密钥保管库执行的操作通过 AAD 进行身份验证并通过密钥保管库自己的访问策略（按保管库定义）进行授权。
 
 ## 使用密钥保管库进行编码
 
@@ -59,22 +58,22 @@
 |[.NET SDK 文档](https://msdn.microsoft.com/zh-cn/library/mt765854.aspx)|[Node.js SDK 文档](http://azure.github.io/azure-sdk-for-node/azure-arm-keyvault/latest)|
 |[Nuget 中的 .NET SDK 包](http://www.nuget.org/packages/Microsoft.Azure.KeyVault)|[Node.js SDK 包](https://www.npmjs.com/package/azure-keyvault)|
 
-有关 2.x 版 .NET SDK 的详细信息，请参阅[发行说明](/documentation/articles/key-vault-dotnet2api-release-notes/)。
+有关 2.x 版 .NET SDK 的详细信息，请参阅[发行说明](./key-vault-dotnet2api-release-notes.md)。
 
 ## 示例代码
 有关在应用程序中使用密钥保管库的完整示例，请参阅：
 
 - .NET 示例应用程序 *HelloKeyVault* 和 Azure Web 服务示例。[Azure 密钥保管库代码示例](http://www.microsoft.com/en-us/download/details.aspx?id=45343)
-- 本教程可帮助你了解如何从 Azure 中的 Web 应用程序使用 Azure 密钥保管库。[从 Web 应用程序使用 Azure 密钥保管库](/documentation/articles/key-vault-use-from-web-application/)
+- 本教程可帮助你了解如何从 Azure 中的 Web 应用程序使用 Azure 密钥保管库。[从 Web 应用程序使用 Azure 密钥保管库](./key-vault-use-from-web-application.md)
 
 ## 操作方法
 
 以下文章和方案提供了特定于任务的指导，方便你使用 Azure 密钥保管库：
 
-- [订阅移动后更改密钥保管库租户 ID](/documentation/articles/key-vault-subscription-move-fix/) - 将 Azure 订阅从租户 A 移到租户 B 时，租户 B.中的主体（用户和应用程序）无法访问现有的密钥保管库。若要解决此问题，请参阅本指南。
-- [访问防火墙后面的密钥保管库](/documentation/articles/key-vault-access-behind-firewall/) - 若要访问密钥保管库，密钥保管库客户端应用程序需要能够访问多个终结点才能使用各种功能。
+- [订阅移动后更改密钥保管库租户 ID](./key-vault-subscription-move-fix.md) - 将 Azure 订阅从租户 A 移到租户 B 时，租户 B.中的主体（用户和应用程序）无法访问现有的密钥保管库。若要解决此问题，请参阅本指南。
+- [访问防火墙后面的密钥保管库](./key-vault-access-behind-firewall.md) - 若要访问密钥保管库，密钥保管库客户端应用程序需要能够访问多个终结点才能使用各种功能。
 
-- [如何在部署期间传递安全值（如密码）](/documentation/articles/resource-manager-keyvault-parameter/)- 需要在部署期间以参数形式传递安全值（例如密码）时，可以将该值存储为 Azure 密钥保管库中的机密，并在其他 资源管理器模板中引用该值。
+- [如何在部署期间传递安全值（如密码）](../azure-resource-manager/resource-manager-keyvault-parameter.md)- 需要在部署期间以参数形式传递安全值（例如密码）时，可以将该值存储为 Azure 密钥保管库中的机密，并在其他 资源管理器模板中引用该值。
 - [如何使用密钥保管库，以便通过 SQL Server 进行可扩展的密钥管理](https://msdn.microsoft.com/zh-cn/library/dn198405.aspx) - 适用于 Azure 密钥保管库的 SQL Server 连接器允许 SQL Server 和 VM 中的 SQL 将 Azure 密钥保管库服务用作可扩展密钥管理 (EKM) 提供程序，以便保护其针对应用程序链接的加密密钥；透明数据加密、备份加密和列级加密。
 - [如何将密钥保管库中的证书部署到 VM](https://blogs.technet.microsoft.com/kv/2015/07/14/deploy-certificates-to-vms-from-customer-managed-key-vault/) - 在 Azure 上的 VM 中运行的云应用程序需要一个证书。现在，要如何将此证书部署到此 VM 中呢？
 
@@ -85,7 +84,6 @@
 这些文章介绍了使用密钥保管库或者与之集成的其他方案与服务。
 
 - Azure 磁盘加密利用 Windows 的行业标准 [BitLocker](https://technet.microsoft.com/zh-cn/library/cc732774.aspx) 功能和 Linux 的 [DM-Crypt](https://en.wikipedia.org/wiki/Dm-crypt) 功能，为 OS 和数据磁盘提供卷加密。该解决方案与 Azure 密钥保管库集成，可帮助你控制和管理密钥保管库订阅中的磁盘加密密钥和机密，同时确保虚拟机磁盘中的所有数据可在 Azure 存储空间中静态加密。
-
 
 ## 支持库
 

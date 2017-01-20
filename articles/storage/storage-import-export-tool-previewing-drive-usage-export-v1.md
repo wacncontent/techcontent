@@ -1,23 +1,22 @@
-<properties
-    pageTitle="预览导出作业的驱动器使用情况 | Azure"
-    description="了解如何预览针对 Azure 导入/导出服务中的导出作业选择的 Blob 列表"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 预览导出作业的驱动器使用情况 | Azure
+description: 了解如何预览针对 Azure 导入/导出服务中的导出作业选择的 Blob 列表
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.assetid="7707d744-7ec7-4de8-ac9b-93a18608dc9a"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="05/25/2015"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.assetid: 7707d744-7ec7-4de8-ac9b-93a18608dc9a
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/25/2015
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 预览导出作业的驱动器使用情况
 在创建导出作业之前，需要选择一组要导出的 Blob。Azure 导入/导出服务允许使用一系列 Blob 路径或 Blob 前缀来表示选定的 Blob。
@@ -35,13 +34,10 @@
   
 以下示例演示了 `PreviewExport` 命令：
   
-
 	WAImportExport.exe PreviewExport /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /ExportBlobListFile:C:\WAImportExport\mybloblist.xml /DriveSize:500GB    
 
-  
 导出 Blob 列表文件可能包含 Blob 名称和 Blob 前缀，如下所示：
   
-
 	<?xml version="1.0" encoding="utf-8"?>  
 	<BlobList>  
 	<BlobPath>pictures/animals/koala.jpg</BlobPath>  
@@ -49,12 +45,10 @@
 	<BlobPathPrefix>/movies/</BlobPathPrefix>  
 	</BlobList>  
 
-
 Azure 导入/导出工具可列出要导出的所有 Blob，在考虑所有必要开销的情况下计算如何将其打包到指定大小的驱动器，然后估算保存 Blob 和驱动器使用情况信息所需的驱动器数量。
   
 下面是一个省略了信息性日志的输出示例：
   
-
 	Number of unique blob paths/prefixes:   3  
 	Number of duplicate blob paths/prefixes:        0  
 	Number of nonexistent blob paths/prefixes:      1  
@@ -67,8 +61,7 @@ Azure 导入/导出工具可列出要导出的所有 Blob，在考虑所有必�
 	        Drive #2:       blobs = 3, occupied space = 441.37 GB  
 	        Drive #3:       blobs = 2, occupied space = 131.28 GB    
  
-  
 ## 另请参阅  
-[Azure 导入/导出工具参考](/documentation/articles/storage-import-export-tool-how-to-v1/)
+[Azure 导入/导出工具参考](./storage-import-export-tool-how-to-v1.md)
 
 <!---HONumber=Mooncake_1226_2016-->

@@ -1,30 +1,29 @@
-<properties 
-	pageTitle="DocumentDB 的 NoSQL Python 示例 | Azure" 
-	description="在 github 上找到 NoSQL Python 示例用于 DocumentDB 中的普通任务，包括 NoSQL 数据库中的 JSON 文档的 CRUD 操作。" 
-	keywords="Python 示例"
-	services="documentdb" 
-	authors="aliuy" 
-	manager="jhubbard" 
-	editor="monicar" 
-	documentationCenter="python"/>
+---
+title: DocumentDB 的 NoSQL Python 示例 | Azure
+description: 在 github 上找到 NoSQL Python 示例用于 DocumentDB 中的普通任务，包括 NoSQL 数据库中的 JSON 文档的 CRUD 操作。
+keywords: Python 示例
+services: documentdb
+authors: aliuy
+manager: jhubbard
+editor: monicar
+documentationCenter: python
 
-<tags 
-	ms.service="documentdb" 
-	ms.workload="data-services" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="04/18/2016" 
-	wacn.date="11/30/2016" 
-	ms.author="moderakh"/>
-
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 04/18/2016
+wacn.date: 11/30/2016
+ms.author: moderakh
+---
 
 # DocumentDB Python SDK 示例
 
-> [AZURE.SELECTOR]
-- [.NET 示例](/documentation/articles/documentdb-dotnet-samples/)
-- [Node.js 示例](/documentation/articles/documentdb-nodejs-samples/)
-- [Python 示例](/documentation/articles/documentdb-python-samples/)
+> [!div class="op_single_selector"]
+- [.NET 示例](./documentdb-dotnet-samples.md)
+- [Node.js 示例](./documentdb-nodejs-samples.md)
+- [Python 示例](./documentdb-python-samples.md)
 - [Azure 代码示例库](https://azure.microsoft.com/documentation/samples/?service=documentdb)
 
 对 Azure DocumentDB 资源执行 CRUD 操作和其他常见操作的示例解决方案包括在 [azure-documentdb-python](https://github.com/Azure/azure-documentdb-python/tree/master/samples) GitHub 存储库。本文将提供：
@@ -35,11 +34,11 @@
 **先决条件**
 
 1. 你需要一个 Azure 帐户以使用这些 Python 示例：
-    - 可以[建议个 Azure 试用帐户](/pricing/free-trial/)：获取可用来试用付费版 Azure 服务的信用额度，甚至在用完信用额度后，你仍可以保留帐户和使用免费的 Azure 服务（如网站）。你的信用卡将永远不会付费，除非你显式更改设置并要求付费。
+    - 可以[建议个 Azure 试用帐户](https://www.azure.cn/pricing/free-trial/)：获取可用来试用付费版 Azure 服务的信用额度，甚至在用完信用额度后，你仍可以保留帐户和使用免费的 Azure 服务（如网站）。你的信用卡将永远不会付费，除非你显式更改设置并要求付费。
 
-2. 你还需要 [Python SDK](/documentation/articles/documentdb-sdk-python/)。 
+2. 你还需要 [Python SDK](./documentdb-sdk-python.md)。 
 
-    > [AZURE.NOTE] 每个示例都是独立的，自行对自身进行设置并在完成后自行进行清理。因此，示例问题将多次调用 [document\_client.CreateCollection](http://azure.github.io/azure-documentdb-python/api/pydocumentdb.document_client.html)。每次执行完此操作，均会按照正在创建的集合的性能等级，向你的订阅收取使用 1 小时的费用。
+    > [!NOTE] 每个示例都是独立的，自行对自身进行设置并在完成后自行进行清理。因此，示例问题将多次调用 [document\_client.CreateCollection](http://azure.github.io/azure-documentdb-python/api/pydocumentdb.document_client.html)。每次执行完此操作，均会按照正在创建的集合的性能等级，向你的订阅收取使用 1 小时的费用。
 
 ## 数据库示例  <a name="database-examples"></a>
 

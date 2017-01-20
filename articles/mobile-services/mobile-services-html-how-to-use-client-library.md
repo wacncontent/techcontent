@@ -1,31 +1,31 @@
-<properties
-	pageTitle="如何使用 HTML 客户端 | Azure"
-	description="了解如何使用适用于 Azure 移动服务的 HTML 客户端。"
-	services="mobile-services"
-	documentationCenter=""
-	authors="ggailey777"
-	manager="dwrede"
-	editor=""/>
+---
+title: 如何使用 HTML 客户端 | Azure
+description: 了解如何使用适用于 Azure 移动服务的 HTML 客户端。
+services: mobile-services
+documentationCenter: 
+authors: ggailey777
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-html"
-	ms.devlang="javascript"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-html
+ms.devlang: javascript
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 #  如何使用适用于 Azure 移动服务的 HTML/JavaScript 客户端
 
-[AZURE.INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
+[!INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
 
 ## 概述
 
-本指南说明如何使用适用于 Azure 移动服务的 HTML/JavaScript 客户端（包括 Windows 应用商店 JavaScript 和 PhoneGap/Cordova 应用程序）执行常见任务。所述的任务包括查询数据、插入、更新和删除数据、对用户进行身份验证和处理错误。如果你是第一次使用移动服务，最好先完成[移动服务快速入门](/documentation/articles/mobile-services-html-get-started/)。快速入门教程可帮助你配置帐户并创建第一个移动服务。
+本指南说明如何使用适用于 Azure 移动服务的 HTML/JavaScript 客户端（包括 Windows 应用商店 JavaScript 和 PhoneGap/Cordova 应用程序）执行常见任务。所述的任务包括查询数据、插入、更新和删除数据、对用户进行身份验证和处理错误。如果你是第一次使用移动服务，最好先完成[移动服务快速入门](./mobile-services-html-get-started.md)。快速入门教程可帮助你配置帐户并创建第一个移动服务。
 
-[AZURE.INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
+[!INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
 
 ## <a name="create-client"></a>如何创建移动服务客户端
 
@@ -46,14 +46,13 @@
 
 必须将占位符 `AppUrl` 替换为移动服务的应用程序 URL，将 `AppKey` 替换为你从 [Azure 经典管理门户](http://manage.windowsazure.cn/)获取的应用程序密钥。
 
->[AZURE.IMPORTANT]应用程序密钥用于针对移动服务筛选出随机请求，将随应用程序一起分发。由于此密钥未加密，因此不能被认为是安全的。为确保安全访问你的移动服务数据，你必须改为在允许用户访问前对用户进行身份验证。有关详细信息，请参阅[如何：对用户进行身份验证](#authentication)。
+>[!IMPORTANT]应用程序密钥用于针对移动服务筛选出随机请求，将随应用程序一起分发。由于此密钥未加密，因此不能被认为是安全的。为确保安全访问你的移动服务数据，你必须改为在允许用户访问前对用户进行身份验证。有关详细信息，请参阅[如何：对用户进行身份验证](#authentication)。
 
 ## <a name="querying"></a>如何从移动服务查询数据
 
 访问或修改 SQL 数据库表中数据的所有代码均将调用 `MobileServiceTable` 对象的函数。可通过对 `MobileServiceClient` 实例调用 `getTable()` 函数来获取对表的引用。
 
     var todoItemTable = client.getTable('todoitem');
-
 
 ###  <a name="filtering"></a>如何筛选返回的数据
 
@@ -137,7 +136,6 @@
        alert("Error: " + err);
     });
 
-
 如果传入带参数的函数，则 `where` 子句后面的所有参数都将按顺序绑定到函数参数。来自函数范围以外的任何对象都必须作为参数传递 - 函数无法捕获任何外部变量。在接下来的两个示例中，自变量“david”将绑定到参数 `name`，在第一个示例中，自变量“medium”也绑定到参数 `level`。另外，函数必须包含带受支持表达式的单个 `return` 语句，例如：
 
 	 query.where(function (name, level) {
@@ -165,7 +163,7 @@
 
 以下代码演示了如何通过在查询中包含 `orderBy` 或 `orderByDescending` 函数来为数据排序。该代码将返回 `todoItemTable` 中的项，这些项已按 `text` 字段的升序排序。默认情况下，服务器只返回前 50 个元素。
 
-> [AZURE.NOTE]默认情况下，将使用服务器驱动的页大小来防止返回所有元素。这可以防止对大型数据集发出的默认请求对服务造成负面影响。 
+> [!NOTE]默认情况下，将使用服务器驱动的页大小来防止返回所有元素。这可以防止对大型数据集发出的默认请求对服务造成负面影响。 
 你可以根据下一节中所述，通过调用 `take` 来增加返回的项数。`todoItemTable` 是对前面创建的移动服务表的引用。
 
 	var ascendingSortedTable = todoItemTable.orderBy("text").read().done(function (results) {
@@ -222,7 +220,6 @@
 
 此处，select 函数的参数是要返回的表列的名称。
 
-
 到目前为止所述的所有函数都是加性函数，我们可以不断地调用它们，每次调用都能进一步影响查询。再提供一个示例：
 
     query.where({
@@ -258,7 +255,7 @@
 	    }, handleError);
 	}
 
->[AZURE.NOTE]在 `read` 函数中提供原始 OData 查询选项字符串时，不能在同一查询中使用查询生成器方法。在这种情况下，必须将整个查询编写为 OData 查询字符串。有关 OData 系统查询选项的详细信息，请参阅 [OData 系统查询选项参考]。
+>[!NOTE]在 `read` 函数中提供原始 OData 查询选项字符串时，不能在同一查询中使用查询生成器方法。在这种情况下，必须将整个查询编写为 OData 查询字符串。有关 OData 系统查询选项的详细信息，请参阅 [OData 系统查询选项参考]。
 
 ## <a name="inserting"></a>如何在移动服务中插入数据
 
@@ -296,9 +293,9 @@
 + 更方便地合并不同表或数据库中的记录。
 + ID 值能够更好地与应用程序的逻辑相集成。
 
-如果插入的记录中尚未设置字符串 ID 值，移动服务将为 ID 生成唯一值。有关如何在客户端上或 .NET 后端中生成自己的 ID 值的详细信息，请参阅[如何：生成唯一 ID 值](/documentation/articles/mobile-services-how-to-use-server-scripts/#generate-guids)。
+如果插入的记录中尚未设置字符串 ID 值，移动服务将为 ID 生成唯一值。有关如何在客户端上或 .NET 后端中生成自己的 ID 值的详细信息，请参阅[如何：生成唯一 ID 值](./mobile-services-how-to-use-server-scripts.md#generate-guids)。
 
-也可以为表使用整数 ID。若要使用整数 ID，必须结合 `--integerId` 选项使用 `mobile table create` 命令创建表。应在适用于 Azure 的命令行界面 (CLI) 中使用此命令。有关使用 CLI 的详细信息，请参阅[用于管理移动服务表的 CLI](/documentation/articles/virtual-machines-command-line-tools/#Mobile_Tables)。
+也可以为表使用整数 ID。若要使用整数 ID，必须结合 `--integerId` 选项使用 `mobile table create` 命令创建表。应在适用于 Azure 的命令行界面 (CLI) 中使用此命令。有关使用 CLI 的详细信息，请参阅[用于管理移动服务表的 CLI](../virtual-machines-command-line-tools.md#Mobile_Tables)。
 
 ## <a name="modifying"></a>如何：在移动服务中修改数据
 
@@ -368,7 +365,7 @@
 
 ##<a name="custom-api"></a>如何：调用自定义 API
 
-自定义 API 可让你定义自定义终结点，这些终结点将会公开不映射到插入、更新、删除或读取操作的服务器功能。使用自定义 API 能够以更大的力度控制消息传送，包括读取和设置 HTTP 消息标头，以及定义除 JSON 以外的消息正文格式。有关如何在移动服务中创建自定义 API 的示例，请参阅[如何：定义自定义 API 终结点](/documentation/articles/mobile-services-dotnet-backend-define-custom-api/)。
+自定义 API 可让你定义自定义终结点，这些终结点将会公开不映射到插入、更新、删除或读取操作的服务器功能。使用自定义 API 能够以更大的力度控制消息传送，包括读取和设置 HTTP 消息标头，以及定义除 JSON 以外的消息正文格式。有关如何在移动服务中创建自定义 API 的示例，请参阅[如何：定义自定义 API 终结点](./mobile-services-dotnet-backend-define-custom-api.md)。
 
 通过对 **MobileServiceClient** 调用 [invokeApi](https://github.com/Azure/azure-mobile-services/blob/master/sdk/Javascript/src/MobileServiceClient.js#L337) 方法，从客户端调用自定义 API。例如，以下代码行向移动服务上的 **completeAll** API 发送 POST 请求：
 
@@ -383,23 +380,21 @@
         alert(error.message);
     });
 
- 
 有关更现实可行的示例和对 **invokeApi** 更完整的介绍，请参阅[Azure 移动服务客户端 SDK 中的自定义 API](http://blogs.msdn.com/b/carlosfigueira/archive/2013/06/19/custom-api-in-azure-mobile-services-client-sdks.aspx)。
 
 ##<a name="authentication"></a>如何对用户进行身份验证
 
 移动服务支持使用 Microsoft 帐户和 Azure Active Direcotry 对应用程序用户进行身份验证和授权。你可以在表中设置权限，以便将特定操作的访问权限限制给已经过身份验证的用户。你还可以在服务器脚本中使用已经过身份验证的用户的标识来实施授权规则。有关详细信息，请参阅 [身份验证入门] 教程。
 
->[AZURE.NOTE]在 PhoneGap 或 Cordova 应用程序中使用身份验证时，还必须向项目中添加以下插件：
+>[!NOTE]在 PhoneGap 或 Cordova 应用程序中使用身份验证时，还必须向项目中添加以下插件：
 >
 >+ https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
 >+ https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git
 
-
 支持两种身份验证流：_服务器流_和_客户端流_。服务器流依赖于提供者的 Web 身份验证界面，因此可提供最简便的身份验证体验。客户端流依赖于提供者和设备特定的 SDK，因此允许与设备特定的功能（例如单一登录）进行更深入的集成。
 
 ###服务器流
-若要让移动服务管理 Windows 应用商店或 HTML5 应用程序中的身份验证过程，必须将你的应用程序注册到标识提供者。然后，需要在移动服务中配置提供者提供的应用程序 ID 和机密。有关详细信息，请参阅[向应用程序添加身份验证](/documentation/articles/mobile-services-html-get-started-users/)教程。
+若要让移动服务管理 Windows 应用商店或 HTML5 应用程序中的身份验证过程，必须将你的应用程序注册到标识提供者。然后，需要在移动服务中配置提供者提供的应用程序 ID 和机密。有关详细信息，请参阅[向应用程序添加身份验证](./mobile-services-html-get-started-users.md)教程。
 
 注册标识提供者后，只需结合提供者的 [MobileServiceAuthenticationProvider] 值调用 [LoginAsync 方法]。例如，若要使用 microsoftaccount 登录，请使用以下代码。
 
@@ -415,7 +410,6 @@
 
 ###客户端流
 你的应用程序还能够独立联系标识提供者，然后将返回的令牌提供给移动服务以进行身份验证。使用此客户端流可为用户提供单一登录体验，或者从标识提供者中检索其他用户数据。
-
 
 ####Microsoft 帐户基本示例
 以下示例使用 Live SDK，该 SDK 使用 Microsoft 帐户来支持 Windows 应用商店应用程序的单一登录：
@@ -433,7 +427,6 @@
 		});
 
 这个简化的示例将从 Live Connect 获取一个令牌，并通过调用 [login] 函数将该令牌提供给移动服务。
-
 
 ####Microsoft 帐户完整示例
 
@@ -516,7 +509,7 @@ In some cases, the call to the login method can be avoided after the first time 
 
 如果你的应用程序是 PhoneGap 或 Apache Cordova HTML/JavaScript 应用程序，则你可以使用本机移动平台在设备上接收推送通知。[Azure 移动服务的 Apache Cordova 插件](https://github.com/Azure/azure-mobile-services-cordova)可让你向 Azure 通知中心注册推送通知。使用的具体通知服务取决于执行代码的本机设备平台。有关如何执行此操作的示例，请参阅[使用 Microsoft Azure 将通知推送到 Cordova 应用程序](https://github.com/Azure/mobile-services-samples/tree/master/CordovaNotificationsArticle)。
 
->[AZURE.NOTE]此插件目前仅支持 iOS 和 Android 设备。有关也包含 Windows 设备的解决方案，请参阅文章[使用通知中心集成将通知推送到 PhoneGap 应用程序](http://blogs.msdn.com/b/azuremobile/archive/2014/06/17/push-notifications-to-phonegap-apps-using-notification-hubs-integration.aspx)。
+>[!NOTE]此插件目前仅支持 iOS 和 Android 设备。有关也包含 Windows 设备的解决方案，请参阅文章[使用通知中心集成将通知推送到 PhoneGap 应用程序](http://blogs.msdn.com/b/azuremobile/archive/2014/06/17/push-notifications-to-phonegap-apps-using-notification-hubs-integration.aspx)。
 
 ## <a name="errors"></a>如何：处理错误
 
@@ -545,7 +538,6 @@ In some cases, the call to the login method can be avoided after the first time 
 		}, function (error) {
 		   alert(JSON.parse(error.request.responseText).error);
 		});
-
 
 更明白地说，每次执行数据访问时，你都可以传入错误处理程序作为第二个参数：
 
@@ -637,8 +629,6 @@ In some cases, the call to the login method can be avoided after the first time 
 [How to: Use cross-origin resource sharing]: #hostnames
 [Next steps]: #nextsteps
 [Execute an OData query operation]: #odata-query
-
-
 
 <!-- URLs. -->
 

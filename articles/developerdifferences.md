@@ -1,16 +1,19 @@
-<properties 
-	pageTitle="中国区 Azure 应用程序开发说明"
-	description="本文主要介绍中国区 Azure 与国际版 Azure 应用程序开发上的区别" 
-	metaKeywords="中国区 Azure, 开发说明, 境外 Azure, Visual Studio, 资源端点URI, 指南, 云服务, Active Directory, 服务总线, Azure PowerShell, Azure CLI, Azure SDK"
-	metaCanonical="" 
-	services="" 
-	documentationCenter="develop"  
-	authors="" 
-	solutions="" 
-	manager="TK" 
-	editor=""/>
-<tags ms.service="multiple" ms.date="" wacn.date="11/18/2016"/>
+---
+title: 中国区 Azure 应用程序开发说明
+description: 本文主要介绍中国区 Azure 与国际版 Azure 应用程序开发上的区别
+metaKeywords: 中国区 Azure, 开发说明, 境外 Azure, Visual Studio, 资源端点URI, 指南, 云服务, Active Directory, 服务总线, Azure PowerShell, Azure CLI, Azure SDK
+metaCanonical: 
+services: 
+documentationCenter: develop
+authors: 
+solutions: 
+manager: TK
+editor: 
 
+ms.service: multiple
+ms.date: 
+wacn.date: 11/18/2016
+---
 
 # 中国区 Azure 应用程序开发说明
 
@@ -36,12 +39,9 @@
 
 目前，中国区 Azure 有两个数据中心，在位置字段中显示为“中国北部”和“中国东部”。
 
-
 ##<a name="cndiffoverview"></a>在 Azure 上创建应用程序的区别
 
-
 在中国区 Azure 上开发应用程序与在境外 Azure 上开发的主要区别在于，中国区 Azure 端点地址有不同的 URI。 例如，Azure 和 SQL 数据库 URI 通常以 windows.net 结尾。 URI 端点不同时，开发人员必须能够识别，然后配置所需的工具和应用程序，并使用适合的 URI。
-
 
 ##<a name="confdevcomp"></a>设置开发计算机
 
@@ -53,7 +53,6 @@ Visual Studio 支持在中国区 Azure 上开发，使用 Visual Studio 2015 upd
 
 1. 请使用以下注册表文件： 
 	
-		
 	Azure.reg
 
 			Windows Registry Editor Version 5.00
@@ -66,7 +65,6 @@ Visual Studio 支持在中国区 Azure 上开发，使用 Visual Studio 2015 upd
 			"EnableAzureRMIdentity"="true"
 			"GraphUrl"="graph.chinacloudapi.cn"
 	
-
 	若要将 Reg 值返回境外 Azure，请使用此处的注册表文件：
 
 	TargetProduction.reg
@@ -103,7 +101,6 @@ Visual Studio 支持在中国区 Azure 上开发，使用 Visual Studio 2015 upd
 
 	![02](./media/developerdifferences/developerdifferences-02.png)
 
-
 3. 从 Cloud Explorer 查看中国区 Azure 订阅中的资源。
 
 	![03](./media/developerdifferences/developerdifferences-03.png)
@@ -133,7 +130,6 @@ Visual Studio 支持在中国区 Azure 上开发，使用 Visual Studio 2015 upd
 
 	![10](./media/developerdifferences/developerdifferences-10.png)
 
-
 3. 对于在资源模板中出现、但中国区 Azure 不支持的资源，该界面会发出警告；
 
 	![11](./media/developerdifferences/developerdifferences-11.png)
@@ -141,7 +137,6 @@ Visual Studio 支持在中国区 Azure 上开发，使用 Visual Studio 2015 upd
 4. 编辑模板参数，继续部署。
 
 其他功能的步骤与此类似。
-
 
 ##中国区 Azure 资源端点URI (供应用程序代码使用)
 
@@ -151,7 +146,6 @@ Visual Studio 支持在中国区 Azure 上开发，使用 Visual Studio 2015 upd
 
 下表指导用户将境外 Azure 资源端点映射到中国特定端点。
  
-
 服务类型|在境外由微软运营的 Microsoft Azure URI|由世纪互联运营的 Microsoft Azure URI
 :--|:--|:--
 Azure - 常规 | *.windows.net | *.chinacloudapi.cn
@@ -180,9 +174,7 @@ SQL 数据库导入/导出服务映射端点 | | <p>1. 中国东部：[https://s
 
 开发人员必须使用自定义存储端点。 默认设置指向 `*.core.windows.net`，其中 * 随着用户应用程序和存储位置的不同而不同。
 
-
 例如，在 Cloud Services 应用程序的服务配置文件（.cscfg）中，设置自定义数据连接字符串，指向中国区 Azure 的 blob，队列和表存储 URI。 以下代码为自定义端点的示例，其中 `<AccountKey>` 变量必须由特定的存储帐户键替换。 字符串 mystorageaccount 是在订阅下创建的存储帐户示例。
-
 
 	<Setting name="DataConnectionString" 
 	value="BlobEndpoint=https://mystorageaccount.blob.core.chinacloudapi.cn/;QueueEndpoint=https://mystorageaccount.queue.core.chinacloudapi.cn/;TableEndpoint=https://mystorageaccount.table.core.chinacloudapi.cn/;AccountName=mystorageaccount;AccountKey=<AccountKey> " />
@@ -204,7 +196,6 @@ SQL 数据库导入/导出服务映射端点 | | <p>1. 中国东部：[https://s
 11.	单击 OK。
 
 Visual Studio 在服务配置文件中创建自定义存储端点，开发人员可以从角色代码中使用此存储端点。
-
 
 以下代码通过使用为中国区 Azure 特定的自定义 URL，以编程方式连接到存储帐户。
 
@@ -235,9 +226,7 @@ Visual Studio 在服务配置文件中创建自定义存储端点，开发人员
 
 ##连接 SQL 数据库服务器
 
-
 SQL 数据库服务器名称将由 `*.database.windows.net` 更改为 `*.database.chinacloudapi.cn`。 所有客户端应用程序或工具都必须使用新名称命名其连接字符串，连接到数据库。 对于未在中国区 Azure 运行的应用程序，可参照 SQL 数据库服务器的值，该值可以是服务定义文件中的 DataConnectionString 值，或 .NET 其它配置文件中的值。 例如：
-
 
 	<configuration>
   		<connectionStrings>
@@ -253,7 +242,6 @@ SQL 数据库服务器名称将由 `*.database.windows.net` 更改为 `*.databas
 
 Azure Active Directory（AAD）可以为本地部署和云应用程序提供身份和访问功能。开发人员利用 AAD 功能，可为企业应用程序和软件即服务（SaaS）供应商实现单点登录和单点注销；可通过使用图形 API 查询和管理云目录对象；还可以与本地 Active Directory 整合，将目录数据同步到云端。
 
-
 中国区 Azure 包含 Azure AD。然而从设计角度讲，仍存在一些影响开发人员体验的差异，以下会展开介绍。
 
 中国区 Azure 是个自定义产品，虽然与境外 Azure 有许多共同特性，但自定义仍会导致以下差异，对开发人员使用 AAD 造成影响：
@@ -261,9 +249,7 @@ Azure Active Directory（AAD）可以为本地部署和云应用程序提供身�
 - 中国区 Azure 不包含访问控制（Access Control）命名空间。要集成应用程序以及与 Azure 身份验证服务同步的目录，需要使用 Azure 中的 Active Directory。在 Azure 经典管理门户中，单击" Active Directory”。
 - ACS 管理门户仅适用于服务总线命名空间。
 - 除了这些自定义带来的差异，中国区 Azure 中的 Azure AD 设计与境外 Azure 全部一致。
->[AZURE.NOTE]中国区 Azure 在预览期间，其创建的访问控制命名空间既不能操作，也不能访问。 但是，类似的功能可在 Azure 管理门户的 Active Directory 中使用。
-
-
+>[!NOTE]中国区 Azure 在预览期间，其创建的访问控制命名空间既不能操作，也不能访问。 但是，类似的功能可在 Azure 管理门户的 Active Directory 中使用。
 
 ###<a name="srvbusconf"></a>服务总线配置
 
@@ -278,7 +264,6 @@ Azure Active Directory（AAD）可以为本地部署和云应用程序提供身�
 如果 EXE 文件或工作人员角色处于运行状态，任一选项均可用。 如果使用 Web 角色，仅选项 3 可用。
 
 无论选择哪种选项，端点名称都将按照下表进行更改。
-
 
 <table border="1" cellspacing="0" cellpadding="0">
   <thead>
@@ -308,7 +293,7 @@ Azure Active Directory（AAD）可以为本地部署和云应用程序提供身�
 		STSHOST=accesscontrol.chinacloudapi.cn 
 		RELAYENV=Custom
 
->[AZURE.WARNING] 通过 csdef 文件中的 `<environment>` 标记为 Web 角色添加环境变量时，此选项不可用。 Web 角色在 w3wp.exe 的上下文中运行。 环境变量不会传播到 w3wp.exe 环境。 请参阅 Web 角色的选项 3。
+>[!WARNING] 通过 csdef 文件中的 `<environment>` 标记为 Web 角色添加环境变量时，此选项不可用。 Web 角色在 w3wp.exe 的上下文中运行。 环境变量不会传播到 w3wp.exe 环境。 请参阅 Web 角色的选项 3。
 
 ####选项 2：使用 ServiceBus.config 文件重定向单个应用程序：
 
@@ -375,26 +360,20 @@ Azure Active Directory（AAD）可以为本地部署和云应用程序提供身�
 
 ##<a name="srvapi"></a>使用服务管理 API
 
-
 通过服务管理 API，开发人员可以对 Azure 中运行的托管服务进行部署管理。 事实上，境外 Azure 和中国区 Azure 的管理门户都使用服务管理 API。  
 
 境外 Azure 编写代码使用的路径为：<a href="https://management.core.windows.net">https://management.core.windows.net</a>。中国区 Azure 编写代码使用的路径为：<span class="Italic">
   <a href="https://management.core.chinacloudapi.cn">https://management.core.chinacloudapi.cn</a>。
  
-
 ##<a name="dnsred"></a>重定将自定义域名定位到中国区 Azure 的托管服务中
 
 如果用户使用的自定义域名被转发到境外 Azure 中运行的托管服务，并将该托管服务移至中国区 Azure，必须更新转发域，指向新的中国特定终端点。
 
-
 例如，如果要将 www.contoso.com 重定向到运行在 contoso.cloudapp.net 的 web 角色中，那么现在就必须将其重定向到 contoso.chinacloudapp.cn 中。
  
-
 ##<a name="wadig"></a>使用 Azure 诊断
 
-
 Azure 诊断通过使用开发计算机上的本地存储或中国区 Azure 存储帐户，存储诊断信息。
-
 
 在* .cscfg 文件中添加以下配置信息：
 
@@ -402,9 +381,7 @@ Azure 诊断通过使用开发计算机上的本地存储或中国区 Azure 存�
   		<Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="<YourStorageString>" />
 	</ConfigurationSettings>
 
-
 `<YourStorageString>` 的值是个自定义端点，将URI并入中国区 Azure。
-
 
 ##<a name="http-cert"></a>为 HTTPS 端点重新发布证书
 
@@ -432,9 +409,7 @@ Azure 诊断通过使用开发计算机上的本地存储或中国区 Azure 存�
 
 ##<a name="nodejs"></a>为 Node.js 使用 Azure SDK
 
-
 如果要在中国区 Azure 中使用 SDK，需从管理门户或 CLI 中提供连接字符串。
-
 
 ###存储、服务总线和通知总线
 存储、服务总线和通知中心都接受各自的连接字符串，可通过管理门户或使用 CLI 获取该值。
@@ -451,13 +426,10 @@ Azure 诊断通过使用开发计算机上的本地存储或中国区 Azure 存�
 
 	var sqlManagementService = azure.createSqlManagementService(subscriptionId, authentication, hostOptions);
  
-
 ##<a name="appendix"></a>附录：Azure 的内容库
-
 
 以下列出了 Azure 当前可用的所有内容资产，并指明该资产是否专门针对中国区 Azure。
 
- 
 <table border="1" cellspacing="0" cellpadding="0">
   <tbody>
     <tr>
@@ -483,7 +455,7 @@ Azure 诊断通过使用开发计算机上的本地存储或中国区 Azure 存�
     <tr>
       <td width="130" valign="top"> 中国客户案例 </td>
       <td width="180" valign="top"> 是 </td>
-      <td><a href="/partnerancasestudy/case-studies/">https://www.azure.cn/partnerancasestudy/case-studies/</a></td>
+      <td><a href="https://www.azure.cn/partnerancasestudy/case-studies/">https://www.azure.cn/partnerancasestudy/case-studies/</a></td>
     </tr>
     <tr>
       <td width="130" valign="top"> P&amp;P 丛书 </td>
@@ -544,5 +516,3 @@ Azure 诊断通过使用开发计算机上的本地存储或中国区 Azure 存�
   </tbody>
 </table>
  
- 
-

@@ -1,23 +1,22 @@
-<properties
-	pageTitle="在 HDInsight 中的 Hadoop 上将 C# 与 Hive 和 Pig 配合使用 | Azure"
-	description="了解在 Azure HDInsight 中如何将 C# 用户定义的函数 (UDF) 与 Hive 和 Pig 流式处理配合使用。"
-	services="hdinsight"
-	documentationCenter=""
-	authors="Blackmist"
-	manager="paulettm"
-	editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 在 HDInsight 中的 Hadoop 上将 C# 与 Hive 和 Pig 配合使用 | Azure
+description: 了解在 Azure HDInsight 中如何将 C# 用户定义的函数 (UDF) 与 Hive 和 Pig 流式处理配合使用。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="10/28/2016"
-	wacn.date="12/30/2016"
-	ms.author="larryfr"/>
-
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/28/2016
+wacn.date: 12/30/2016
+ms.author: larryfr
+---
 
 #在 HDInsight 中的 Hadoop 上将 C# 用户定义函数与 Hive 和 Pig 流式处理配合使用
 
@@ -37,14 +36,13 @@ Hive 和 Pig 非常适合处理 Azure HDInsight 中的数据，但有时你需�
 
 	* Visual Studio 2015
 
-* HDInsight 群集上的 Hadoop - 有关创建群集的步骤，请参阅[设置 HDInsight 群集](/documentation/articles/hdinsight-provision-clusters-v1/)
+* HDInsight 群集上的 Hadoop - 有关创建群集的步骤，请参阅[设置 HDInsight 群集](./hdinsight-provision-clusters-v1.md)
 
-* Hadoop Tools for Visual Studio。有关安装和配置该工具的步骤，请参阅[开始使用用于 Visual Studio 的 HDInsight Hadoop 工具](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/)。
+* Hadoop Tools for Visual Studio。有关安装和配置该工具的步骤，请参阅[开始使用用于 Visual Studio 的 HDInsight Hadoop 工具](./hdinsight-hadoop-visual-studio-tools-get-started.md)。
 
 ##HDInsight 的 .NET
 
 基于 Windows 的 HDInsight 群集会默认安装 .NET 通用语言运行时 (CLR) 和框架。这样就可以将 C# 应用程序与 Hive 和 Pig 流式处理配合使用（通过 stdout/stdin 在 Hive/Pig 与 C# 应用程序之间传递数据）。
-
 
 ##.NET 和流式处理
 
@@ -194,7 +192,7 @@ Hive 和 Pig 非常适合处理 Azure HDInsight 中的数据，但有时你需�
 
 ###上载应用程序
 
-1. Pig 流式处理预期应用程序位于群集文件系统本地。为 HDInsight 群集启用远程桌面，然后根据[使用 RDP 连接到 HDInsight 群集](/documentation/articles/hdinsight-administer-use-management-portal-v1/#rdp)中的说明连接到群集。
+1. Pig 流式处理预期应用程序位于群集文件系统本地。为 HDInsight 群集启用远程桌面，然后根据[使用 RDP 连接到 HDInsight 群集](./hdinsight-administer-use-management-portal-v1.md#rdp)中的说明连接到群集。
 
 2. 在连接后，从本地计算机上 PigUDF 项目的 **bin/debug** 目录中复制 **PigUDF.exe**，并将其粘贴到群集上的 **%PIG\_HOME%** 目录中。
 
@@ -219,7 +217,7 @@ Hive 和 Pig 非常适合处理 Azure HDInsight 中的数据，但有时你需�
 
 	`DEFINE` 语句为 pigudf.exe 应用程序创建别名 `streamer`，`SHIP` 将其在群集的节点中进行分发。以后，可以将 `streamer` 与 `STREAM` 运算符配合使用，以便处理 LOG 中包含的单一行，并将数据返回为一系列的列。
 
-> [AZURE.NOTE]用于流式处理的应用程序名称在使用别名时必须用 `（反引号）字符括起来，当与 `SHIP` 一起使用时，必须用 '（单引号）括起来。
+> [!NOTE]用于流式处理的应用程序名称在使用别名时必须用 `（反引号）字符括起来，当与 `SHIP` 一起使用时，必须用 '（单引号）括起来。
 
 3. 输入最后一行后，该作业应该启动。最终，它将返回类似于以下内容的输出：
 
@@ -231,14 +229,14 @@ Hive 和 Pig 非常适合处理 Azure HDInsight 中的数据，但有时你需�
 
 ##摘要
 
-在本文档中，你了解了如何在 HDInsight 上通过 Hive 和 Pig 使用 .NET Framework 应用程序。如果希望了解如何将 Python 与 Hive 和 Pig 配合使用，请参阅[在 HDInsight 中将 Python 与 Hive 和 Pig 配合使用](/documentation/articles/hdinsight-python/)。
+在本文档中，你了解了如何在 HDInsight 上通过 Hive 和 Pig 使用 .NET Framework 应用程序。如果希望了解如何将 Python 与 Hive 和 Pig 配合使用，请参阅[在 HDInsight 中将 Python 与 Hive 和 Pig 配合使用](./hdinsight-python.md)。
 
 要了解使用 Pig、Hive 的其他方式以及如何使用 MapReduce，请参阅以下文章：
 
-* [将 Hive 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-hive/)
+* [将 Hive 与 HDInsight 配合使用](./hdinsight-use-hive.md)
 
-* [将 Pig 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Pig 与 HDInsight 配合使用](./hdinsight-use-pig.md)
 
-* [将 MapReduce 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将 MapReduce 与 HDInsight 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

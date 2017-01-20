@@ -1,28 +1,28 @@
-<properties
-	pageTitle="在 Linux VM 上设置 Apache Tomcat | Azure"
-	description="了解如何使用运行 Linux 的 Azure 虚拟机 (VM) 设置 Apache Tomcat7。"
-	services="virtual-machines"
-	documentationCenter=""
-	authors="NingKuang"
-	manager="timlt"
-	editor=""
-	tags="azure-service-management"/>
+---
+title: 在 Linux VM 上设置 Apache Tomcat | Azure
+description: 了解如何使用运行 Linux 的 Azure 虚拟机 (VM) 设置 Apache Tomcat7。
+services: virtual-machines
+documentationCenter: 
+authors: NingKuang
+manager: timlt
+editor: 
+tags: azure-service-management
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="12/15/2015"
-	wacn.date="01/05/2017"
-	ms.author="ningk"/>
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 12/15/2015
+wacn.date: 01/05/2017
+ms.author: ningk
+---
 
 # 如何使用 Azure 在 Linux 虚拟机上设置 Tomcat7 
 
 Apache Tomcat（或简称 Tomcat，以前也称为 Jakarta Tomcat）是由 Apache Software Foundation (ASF) 开发的一个开源 Web 服务器和 servlet 容器。Tomcat 实现了 Sun Microsystems 提出的 Java Servlet 和 JavaServer Pages (JSP) 规范，并提供了用于运行 Java 代码的纯 Java HTTP Web 服务器环境。在最简单的配置中，Tomcat 在单个操作系统进程中运行。此进程运行 Java 虚拟机 (JVM)。浏览器向 Tomcat 发出的每个 HTTP 请求都作为 Tomcat 进程中的单独线程进行处理。
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 在 Ubuntu 安装 Open JDK 和 Tomcate 的资源管理器模板，请点击[这里](https://github.com/Azure/azure-quickstart-templates/tree/master/openjdk-tomcat-ubuntu-vm/).
 
@@ -94,8 +94,6 @@ TCP 端口 8080 是 tomcat 侦听的默认端口号。使用 Azure 终结点打�
 
 4.	单击**“确定”**将该终结点添加到你的虚拟机。
 
-
-
 ###步骤 2：连接到你创建的映像
 你可以选择用于连接到虚拟机的任何 SSH 工具。在此示例中，我们使用 Putty。
 
@@ -115,16 +113,11 @@ TCP 端口 8080 是 tomcat 侦听的默认端口号。使用 Azure 终结点打�
 单击**“打开”**。此时可能会通过一个消息框提醒你。如果你已正确配置 DNS 名称和端口号，请单击**“是”**。
 ![][11]  
 
-
 你应该看到以下内容：  
 ![][12]
 
 输入在“第 1 阶段：创建映像”中创建虚拟机时指定的用户名。你会看到如下内容：  
 ![][13]
-
-
-
-
 
 ##第 3 阶段：安装软件
 在此阶段中，你将安装 Java 运行时环境、tomcat 和其他 tomcat 组件。
@@ -182,7 +175,6 @@ oracle-jdk
 
 若要检查 tomcat7 是否已成功安装，请浏览到 tomcat 服务器的 DNS 名称（http://tomcatexample.chinacloudapp.cn/ 是本文中的示例 URL）。如果你看到如下页面，则 tomcat7 已正确安装。
 ![][16]
-
 
 ###安装其他 Tomcat 组件
 你还可以安装其他可选 tomcat 组件。
@@ -308,8 +300,6 @@ Tomcat 正在运行，但你使用浏览器看不到 Tomcat 默认页。
 	以下命令只会更改文件夹目录的权限，但不会更改目录内的文件和文件夹的权限。
 
 		sudo chown username:group directory
-
-
 
 [1]: ./media/virtual-machines-linux-classic-setup-tomcat/virtual-machines-linux-setup-tomcat7-linux-01.png
 [2]: ./media/virtual-machines-linux-classic-setup-tomcat/virtual-machines-linux-setup-tomcat7-linux-02.png

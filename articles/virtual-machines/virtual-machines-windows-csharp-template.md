@@ -1,24 +1,22 @@
-<properties
-	pageTitle="使用 C# 和 Resource Manager 模板部署 VM | Azure"
-	description="了解如何使用 C# 和 Resource Manager 模板部署 Azure VM。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor="tysonn"
-	tags="azure-resource-manager"/>  
+---
+title: 使用 C# 和 Resource Manager 模板部署 VM | Azure
+description: 了解如何使用 C# 和 Resource Manager 模板部署 Azure VM。
+services: virtual-machines-windows
+documentationCenter: 
+authors: davidmu1
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="na"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/10/2016"
-	wacn.date="12/16/2016"
-	ms.author="davidmu"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: na
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 10/10/2016
+wacn.date: 12/16/2016
+ms.author: davidmu
+---
 
 # 使用 C# 和 Resource Manager 模板部署 Azure 虚拟机
 
@@ -28,8 +26,8 @@
 
 - 安装 [Visual Studio](http://msdn.microsoft.com/zh-cn/library/dd831853.aspx)
 - 验证是否安装了 [Windows Management Framework 3.0](http://www.microsoft.com/download/details.aspx?id=34595) 或 [Windows Management Framework 4.0](http://www.microsoft.com/download/details.aspx?id=40855)
-- 获取[身份验证令牌](/documentation/articles/resource-group-authenticate-service-principal/)
-- 使用 [Azure PowerShell](/documentation/articles/resource-group-template-deploy/)、[Azure CLI](/documentation/articles/resource-group-template-deploy-cli/) 或 [Azure 门户预览](/documentation/articles/resource-group-template-deploy-portal/)创建资源组。
+- 获取[身份验证令牌](../azure-resource-manager/resource-group-authenticate-service-principal.md)
+- 使用 [Azure PowerShell](../azure-resource-manager/resource-group-template-deploy.md)、[Azure CLI](../azure-resource-manager/resource-group-template-deploy-cli.md) 或 [Azure 门户预览](../azure-resource-manager/resource-group-template-deploy-portal.md)创建资源组。
 
 完成这些步骤大约需要 30 分钟。
     
@@ -56,7 +54,7 @@
           "contentVersion": "1.0.0.0",
         }
 
-6. [参数](/documentation/articles/resource-group-authoring-templates/#parameters)并非总是必需，但它们在部署参数时提供了一种输入值的方式。在 ContentVersion 元素后面添加 parameters 元素及其子元素：
+6. [参数](../azure-resource-manager/resource-group-authoring-templates.md#parameters)并非总是必需，但它们在部署参数时提供了一种输入值的方式。在 ContentVersion 元素后面添加 parameters 元素及其子元素：
 
         {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
@@ -67,7 +65,7 @@
           },
         }
 
-7. 可以在模板中使用[变量](/documentation/articles/resource-group-authoring-templates/#variables)来指定可能经常发生变化的值，或者需要从参数值的组合创建的值。在 parameters 节的后面添加 variables 元素：
+7. 可以在模板中使用[变量](../azure-resource-manager/resource-group-authoring-templates.md#variables)来指定可能经常发生变化的值，或者需要从参数值的组合创建的值。在 parameters 节的后面添加 variables 元素：
 
         {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
@@ -82,7 +80,7 @@
           },
         }
 
-8. 接下来将在模板中定义[资源](/documentation/articles/resource-group-authoring-templates/#resources)，例如虚拟机、虚拟网络和存储帐户。在 variables 节的后面添加 resources 节：
+8. 接下来将在模板中定义[资源](../azure-resource-manager/resource-group-authoring-templates.md#resources)，例如虚拟机、虚拟网络和存储帐户。在 variables 节的后面添加 resources 节：
 
         {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
@@ -210,7 +208,7 @@
           }
         }
 
-    >[AZURE.NOTE] 本文创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅[使用 Windows PowerShell 和 Azure CLI 浏览和选择 Azure 虚拟机映像](/documentation/articles/virtual-machines-linux-cli-ps-findimage/)。
+    >[!NOTE] 本文创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅[使用 Windows PowerShell 和 Azure CLI 浏览和选择 Azure 虚拟机映像](./virtual-machines-linux-cli-ps-findimage.md)。
 
 4. 保存创建的参数文件。
 
@@ -347,10 +345,9 @@ Azure Active Directory 应用程序已创建且安装了身份验证库。现可
 
 	![在 Azure 门户预览中浏览审核日志](./media/virtual-machines-windows-csharp-template/crpportal.png)  
 
-
 ## 后续步骤
 
-- 如果部署出现问题，请参阅[使用 Azure 门户预览排除资源组部署故障](/documentation/articles/resource-manager-troubleshoot-deployments-portal/)。
-- 若要了解如何管理刚创建的虚拟机，请参阅[使用 Azure Resource Manager 和 PowerShell 管理虚拟机](/documentation/articles/virtual-machines-windows-csharp-manage/)。
+- 如果部署出现问题，请参阅[使用 Azure 门户预览排除资源组部署故障](../azure-resource-manager/resource-manager-troubleshoot-deployments-portal.md)。
+- 若要了解如何管理刚创建的虚拟机，请参阅[使用 Azure Resource Manager 和 PowerShell 管理虚拟机](./virtual-machines-windows-csharp-manage.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

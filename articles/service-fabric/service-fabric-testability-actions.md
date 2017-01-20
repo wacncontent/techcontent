@@ -1,22 +1,21 @@
-<properties
-   pageTitle="可测试性操作 | Azure"
-   description="本文介绍了 Microsoft Azure Service Fabric 中的可测试性操作。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="motanv"
-   manager="timlt"
-   editor="toddabel"/>  
+---
+title: 可测试性操作 | Azure
+description: 本文介绍了 Microsoft Azure Service Fabric 中的可测试性操作。
+services: service-fabric
+documentationCenter: .net
+authors: motanv
+manager: timlt
+editor: toddabel
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="10/03/2016"
-   wacn.date="11/28/2016"
-   ms.author="motanv;heeldin"/>
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 10/03/2016
+wacn.date: 11/28/2016
+ms.author: motanv;heeldin
+---
 
 # 可测试性操作
 为了模拟一个不可靠的基础结构，Azure Service Fabric 向你（即开发人员）提供众多方式来模拟各种现实世界故障和状态转换。这些方式被称为可测试操作。这些操作属于低级别 API，导致具体的故障注入、状态转换或验证。结合使用这些操作，你可以为你的服务编写全面的测试方案。
@@ -66,24 +65,17 @@ System.Fabric.dll 程序集包含了这些操作的 C# 实现。Microsoft.Servic
 
 若要针对本地群集运行一个可测试性操作，首先你需要连接到群集并且应在管理员模式下打开 PowerShell 提示符。让我们看一下 **Restart-ServiceFabricNode** 操作。
 
-
 Restart-ServiceFabricNode -NodeName Node1 -CompletionMode DoNotVerify
-
 
 在这里，操作 **Restart-ServiceFabricNode** 在一个名为“Node1”的节点上运行。完成模式指定不应该验证实际上是否成功执行了重启节点操作。将完成模式指定为“Verify”会让其验证实际是否成功执行了重新启动操作。除了按其名称直接指定节点以外，还可以通过分区键和副本类型指定节点，如下所示：
 
-
 	Restart-ServiceFabricNode -ReplicaKindPrimary  -PartitionKindNamed -PartitionKey Partition3 -CompletionMode Verify
-
-
-
 
 	$connection = "localhost:19000"
 	$nodeName = "Node1"
 	
 	Connect-ServiceFabricCluster $connection
 	Restart-ServiceFabricNode -NodeName $nodeName -CompletionMode DoNotVerify
-
 
 应使用 **Restart-ServiceFabricNode** 来重新启动群集中的一个 Service Fabric 节点。这将停止会重新启动驻留在该节点上的所有系统服务和用户服务副本的 Fabric.exe 进程。使用此 API 来测试你的服务有助于沿故障转移恢复路径发现 Bug。它帮助模拟群集中的节点故障。
 
@@ -102,9 +94,7 @@ Restart-ServiceFabricNode -NodeName Node1 -CompletionMode DoNotVerify
 若要使用 C# 运行可测试性操作，首先你需要使用 FabricClient 连接到群集。然后获取运行该操作所需的参数。可用不同的参数来运行相同的操作。
 请看一看 RestartServiceFabricNode 操作，运行该操作的方式之一是在群集中使用节点信息（节点名称和节点实例 ID）。
 
-
 	RestartNodeAsync(nodeName, nodeInstanceId, completeMode, operationTimeout, CancellationToken.None)
-
 
 参数说明：
 
@@ -115,8 +105,6 @@ Restart-ServiceFabricNode -NodeName Node1 -CompletionMode DoNotVerify
 除了按其名称直接指定节点以外，还可以通过分区键和副本类型指定节点。
 
 有关更多信息，请参阅 [PartitionSelector 和 ReplicaSelector](#partition_replica_selector)。
-
-
 
 	// Add a reference to System.Fabric.Testability.dll and System.Fabric.dll
 	using System;
@@ -182,14 +170,12 @@ Restart-ServiceFabricNode -NodeName Node1 -CompletionMode DoNotVerify
 	    }
 	}
 
-
 ##<a name="partition_replica_selector"></a> PartitionSelector 和 ReplicaSelector
 
 ### PartitionSelector
 PartitionSelector 是在可测试性中运用的一个帮助程序，用于选择在其上执行任何可测试性操作的具体分区。如果事先知道分区 ID，则它可用于选择具体分区。或者，你可以提供分区键，操作将在内部解析分区 ID。你还可以选择一个随机分区。
 
 若要使用此帮助器，请创建 PartitionSelector 对象，并使用 Select* 方法之一选择分区。然后在 PartitionSelector 对象中将其传递给需要它的 API。如果未选择任何选项，则默认为随机分区。
-
 
 	Uri serviceName = new Uri("fabric:/samples/InMemoryToDoListApp/InMemoryToDoListService");
 	Guid partitionIdGuid = new Guid("8fb7ebcc-56ee-4862-9cc0-7c6421e68829");
@@ -208,12 +194,10 @@ PartitionSelector 是在可测试性中运用的一个帮助程序，用于选�
 	// Select a partition based on partition key
 	PartitionSelector uniformIntPartitionSelector = PartitionSelector.PartitionKeyOf(serviceName, partitionKeyUniformInt64);
 
-
 ### ReplicaSelector
 ReplicaSelector 是在可测试性中运用的一个帮助程序，用于帮助选择在其上执行任何可测试性操作的副本。如果事先知道副本 ID，则它可用于选择具体副本。此外，你可以选择主副本，也可以选择随机辅助副本。ReplicaSelector 派生于 PartitionSelector，因此你需要同时选择要在其上执行可测试性操作的副本和分区。
 
 若要使用此帮助器，请创建一个 ReplicaSelector 对象，并设置副本的分区的选择方式。然后，你可以将它传递给需要它的 API。如果未选择任何选项，则默认为随机副本和随机分区。
-
 
 	Guid partitionIdGuid = new Guid("8fb7ebcc-56ee-4862-9cc0-7c6421e68829");
 	PartitionSelector partitionSelector = PartitionSelector.PartitionIdOf(serviceName, partitionIdGuid);
@@ -231,13 +215,11 @@ ReplicaSelector 是在可测试性中运用的一个帮助程序，用于帮助�
 	// Select a random secondary replica
 	ReplicaSelector secondaryReplicaSelector = ReplicaSelector.RandomSecondaryOf(partitionSelector);
 
-
 ## 后续步骤
 
-- [可测试性方案](/documentation/articles/service-fabric-testability-scenarios/)
+- [可测试性方案](./service-fabric-testability-scenarios.md)
 - 如何测试你的服务
-   - [在服务工作负荷期间模拟故障](/documentation/articles/service-fabric-testability-workload-tests/)
-   - [服务到服务通信失败](/documentation/articles/service-fabric-testability-scenarios-service-communication/)
+   - [在服务工作负荷期间模拟故障](./service-fabric-testability-workload-tests.md)
+   - [服务到服务通信失败](./service-fabric-testability-scenarios-service-communication.md)
  
-
 <!---HONumber=Mooncake_1121_2016-->

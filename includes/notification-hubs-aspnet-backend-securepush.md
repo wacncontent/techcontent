@@ -10,7 +10,6 @@
 	        public bool Read { get; set; }
 	    }
     
-    
 	    public class Notifications
 	    {
 	        public static Notifications Instance = new Notifications();
@@ -73,10 +72,8 @@
             // gcm
             await Notifications.Instance.Hub.SendGcmNativeNotificationAsync("{"data": {"secureId": "" + secureNotificationInTheBackend.Id.ToString() + ""}}", usernameTag);
 
-
             return Request.CreateResponse(HttpStatusCode.OK);
         }
-
 
 请注意，`Post` 方法现在不发送 toast 通知。它将发送只包含通知 ID 且没有任何敏感内容的原始通知。另外，请确保注释在通知中心上未配置其凭据的平台的发送操作，因为它们会导致错误。
 

@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure SQL 数据库用户手册 - 第一部分 | Azure"
-	description="Azure SQL 数据库用户手册 - 第一部分 | Azure"
-	services=""
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure SQL 数据库用户手册 - 第一部分 | Azure
+description: Azure SQL 数据库用户手册 - 第一部分 | Azure
+services: 
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="sql-database"
-	ms.date=""
-	wacn.date="10/19/2016"/>
+ms.service: sql-database
+ms.date: 
+wacn.date: 10/19/2016
+---
 
 #Azure SQL 数据库用户手册
 
-- [Azure SQL 数据库用户手册 - 第二部分](/documentation/articles/azure-sql-database-user-manual-part-2/)
+- [Azure SQL 数据库用户手册 - 第二部分](./azure-sql-database-user-manual-part-2.md)
 
- 
 ##<a id="overview"></a>1. 总体介绍
 
 ###<a id="what-is-azure-sql-database"></a>1.1 什么是 Azure SQL 数据库  
@@ -425,7 +424,7 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 
 1.	[行级安全性(RLS)](https://msdn.microsoft.com/zh-cn/library/dn765131.aspx)  
 
-2.	[动态数据屏蔽](/documentation/articles/sql-database-dynamic-data-masking-get-started/)  
+2.	[动态数据屏蔽](./sql-database/sql-database-dynamic-data-masking-get-started.md)  
 
 3.	[包含的数据库用户](https://msdn.microsoft.com/zh-cn/library/ff929188.aspx)  
 
@@ -433,7 +432,7 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 
 5.	[透明数据加密 (TDE)](https://msdn.microsoft.com/zh-cn/library/0bf7e8ff-1416-4923-9c4c-49341e208c62.aspx)  
 
-6.	[使用 Azure Active Directory 身份验证连接到 SQL 数据库](/documentation/articles/sql-database-aad-authentication/)  
+6.	[使用 Azure Active Directory 身份验证连接到 SQL 数据库](./sql-database/sql-database-aad-authentication.md)  
 
 7.	[始终加密](https://msdn.microsoft.com/zh-cn/library/mt163865.aspx) (预览)  
 
@@ -604,10 +603,9 @@ Azure SQL 数据库的时区默认为 UTC 时区，且无法进行修改和配�
 
 ###<a id="pricing"></a>1.8 价格
 
-有关 Azure SQL 数据库的价格，请参考[此处](/pricing/details/sql-database/)。  
+有关 Azure SQL 数据库的价格，请参考[此处](https://www.azure.cn/pricing/details/sql-database/)。  
 
 请注意: Azure SQL 数据库按照不同的服务层来收费，即按照基本、标准和高级服务层来收费，不收取存储及事务费用。  
-
 
 <!--image reference-->
 [1]: ./media/azure-sql-database-user-manual-part-1/azure-sql-database-user-manual-1.png

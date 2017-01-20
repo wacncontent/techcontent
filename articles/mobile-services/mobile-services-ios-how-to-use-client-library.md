@@ -1,31 +1,31 @@
-<properties
-	pageTitle="如何使用适用于 Azure 移动服务的 iOS 客户端库"
-	description="如何使用适用于移动服务的 iOS 客户端库"
-	services="mobile-services"
-	documentationCenter="ios"
-	authors="krisragh"
-	manager="dwrede"
-	editor=""/>
+---
+title: 如何使用适用于 Azure 移动服务的 iOS 客户端库
+description: 如何使用适用于移动服务的 iOS 客户端库
+services: mobile-services
+documentationCenter: ios
+authors: krisragh
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="krisragh"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: krisragh
+---
 
 #  如何使用适用于 Azure 移动服务的 iOS 客户端库
 
-[AZURE.INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
+[!INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
 
 本指南介绍如何使用 Azure 移动服务 [iOS SDK] 执行常见任务。如果你不熟悉移动服务，请先完成[移动服务快速入门]，以配置你的帐户、创建表，并创建移动服务。
 
-> [AZURE.NOTE]本指南使用最新的 [iOS 移动服务 SDK](https://go.microsoft.com/fwLink/?LinkID=266533&clcid=0x409)。如果你的项目使用旧版 SDK，请先升级 Xcode 中的框架。
+> [!NOTE]本指南使用最新的 [iOS 移动服务 SDK](https://go.microsoft.com/fwLink/?LinkID=266533&clcid=0x409)。如果你的项目使用旧版 SDK，请先升级 Xcode 中的框架。
 
-[AZURE.INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
+[!INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
 
 ## <a name="Setup"></a>安装与先决条件
 
@@ -101,7 +101,6 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 * 指定请求中的自定义查询字符串参数 
 * 应用其他函数
 
-
 ##  <a name="sorting"></a>如何：使用 MSQuery 对数据排序
 
 让我们先看一个示例，来了解如何对结果排序。若要先按 **text** 字段升序排序，然后按 `completion` 字段降序排序，请按如下所示调用 `MSQuery`：
@@ -146,7 +145,6 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 		query.includeTotalCount = YES;
     query.fetchLimit = 5;
 		query.fetchOffset = self.loadedItems.count;
-
 
     [query readWithCompletion:^(MSQueryResult *result, NSError *error) {
 			if(!error) {
@@ -242,10 +240,9 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 
 ##<a name="#custom-api"></a>如何：调用自定义 API
 
-自定义 API 可让你定义自定义终结点，这些终结点将会公开不映射到插入、更新、删除或读取操作的服务器功能。使用自定义 API 能够以更大的力度控制消息传送，包括读取和设置 HTTP 消息标头，以及定义除 JSON 以外的消息正文格式。有关如何在移动服务中创建自定义 API 的示例，请参阅[如何：定义自定义 API 终结点](/documentation/articles/mobile-services-dotnet-backend-define-custom-api/)。
+自定义 API 可让你定义自定义终结点，这些终结点将会公开不映射到插入、更新、删除或读取操作的服务器功能。使用自定义 API 能够以更大的力度控制消息传送，包括读取和设置 HTTP 消息标头，以及定义除 JSON 以外的消息正文格式。有关如何在移动服务中创建自定义 API 的示例，请参阅[如何：定义自定义 API 终结点](./mobile-services-dotnet-backend-define-custom-api.md)。
 
-[AZURE.INCLUDE [mobile-services-ios-call-custom-api](../../includes/mobile-services-ios-call-custom-api.md)]
-
+[!INCLUDE [mobile-services-ios-call-custom-api](../../includes/mobile-services-ios-call-custom-api.md)]
 
 ## <a name="authentication"></a>如何：对用户进行身份验证
 
@@ -263,7 +260,7 @@ Azure 移动服务支持两种身份验证工作流：
 
 以下是可以将服务器托管登录添加到[移动服务快速入门]项目的方式；你可以为其他项目使用类似的代码。
 
-[AZURE.INCLUDE [mobile-services-ios-authenticate-app](../../includes/mobile-services-ios-authenticate-app.md)]
+[!INCLUDE [mobile-services-ios-authenticate-app](../../includes/mobile-services-ios-authenticate-app.md)]
 
 ###  客户端托管登录（单一登录）
 
@@ -281,7 +278,7 @@ Azure 移动服务支持两种身份验证工作流：
 
 ## <a name="caching-tokens"></a>如何：缓存身份验证令牌
 
-了解如何在[移动服务快速入门]项目中缓存令牌；你可以对任何项目应用类似的步骤。[AZURE.INCLUDE [mobile-services-ios-authenticate-app-with-token](../../includes/mobile-services-ios-authenticate-app-with-token.md)]
+了解如何在[移动服务快速入门]项目中缓存令牌；你可以对任何项目应用类似的步骤。[!INCLUDE [mobile-services-ios-authenticate-app-with-token](../../includes/mobile-services-ios-authenticate-app-with-token.md)]
 
 ## <a name="errors"></a>如何：处理错误
 
@@ -318,8 +315,8 @@ Azure 移动服务支持两种身份验证工作流：
 <!-- Images. -->
 
 <!-- URLs. -->
-[移动服务快速入门]: /documentation/articles/mobile-services-ios-get-started/
-[Get started with Mobile Services]: /documentation/articles/mobile-services-ios-get-started/
+[移动服务快速入门]: ./mobile-services-ios-get-started.md
+[Get started with Mobile Services]: ./mobile-services-ios-get-started.md
 [Mobile Services SDK]: https://go.microsoft.com/fwLink/p/?LinkID=266533
 
 [iOS SDK]: https://developer.apple.com/xcode
@@ -327,13 +324,12 @@ Azure 移动服务支持两种身份验证工作流：
 [Handling Expired Tokens]: http://go.microsoft.com/fwlink/p/?LinkId=301955
 [Live Connect SDK]: http://go.microsoft.com/fwlink/p/?LinkId=301960
 [权限]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj193161.aspx
-[服务器端授权]: /documentation/articles/mobile-services-javascript-backend-service-side-authorization/
+[服务器端授权]: ./mobile-services-javascript-backend-service-side-authorization.md
 [动态架构]: http://go.microsoft.com/fwlink/p/?LinkId=296271
 [创建表]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj193162.aspx
 [NSDictionary object]: http://go.microsoft.com/fwlink/p/?LinkId=301965
 [ASCII control codes C0 and C1]: http://en.wikipedia.org/wiki/Data_link_escape_character#C1_set
-[CLI to manage Mobile Services tables]: /documentation/articles/virtual-machines-command-line-tools/#Mobile_Tables
-[冲突处理程序]: /documentation/articles/mobile-services-ios-handling-conflicts-offline-data/#add-conflict-handling
+[CLI to manage Mobile Services tables]: ../virtual-machines-command-line-tools.md#Mobile_Tables
+[冲突处理程序]: ./mobile-services-ios-handling-conflicts-offline-data.md#add-conflict-handling
  
-
 <!---HONumber=Mooncake_0215_2016-->

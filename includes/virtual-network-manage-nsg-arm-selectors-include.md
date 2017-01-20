@@ -1,6 +1,6 @@
-> [AZURE.SELECTOR]
-[门户预览](/documentation/articles/virtual-network-manage-nsg-arm-portal/)
-[PowerShell](/documentation/articles/virtual-network-manage-nsg-arm-ps/)
-[Azure CLI](/documentation/articles/virtual-network-manage-nsg-arm-cli/)
+> [!div class="op_single_selector"]
+[门户预览](../articles/virtual-network/virtual-network-manage-nsg-arm-portal.md)
+[PowerShell](../articles/virtual-network/virtual-network-manage-nsg-arm-ps.md)
+[Azure CLI](../articles/virtual-network/virtual-network-manage-nsg-arm-cli.md)
 
 <!---HONumber=Mooncake_0516_2016-->

@@ -1,12 +1,27 @@
-<properties linkid="dev-net-common-tasks-cdn" urlDisplayName="CDN" pageTitle="Azure Content Delivery Network FAQs: Azure feature guide" metaKeywords="Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN FAQS, origin traffic, ICP record number, CDN default cache rules, origin domain name, subscribe, CNAME, download acceleration, Web acceleration, website acceleration, live streaming acceleration, VOD acceleration, video on demand acceleration, CDN price, CDN fees, technical documentation, help files" description="Find answers to common service consulting questions or inquiries related to Azure Content Delivery Network" metaCanonical="" services="" documentationCenter=".NET" title="" authors="" solutions="" manager="" editor="" />
-<tags ms.service="cdn_en"
-    ms.date=""
-    wacn.date="2/23/2016"
-    wacn.lang="en"
-    />
+---
+linkid: dev-net-common-tasks-cdn
+urlDisplayName: CDN
+title: Azure Content Delivery Network FAQs: Azure feature guide
+metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN FAQS, origin traffic, ICP record number, CDN default cache rules, origin domain name, subscribe, CNAME, download acceleration, Web acceleration, website acceleration, live streaming acceleration, VOD acceleration, video on demand acceleration, CDN price, CDN fees, technical documentation, help files
+description: Find answers to common service consulting questions or inquiries related to Azure Content Delivery Network
+metaCanonical: 
+services: 
+documentationCenter: .NET
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
+
+ms.service: cdn_en
+ms.date: 
+wacn.date: 2/23/2016
+wacn.lang: en
+---
+
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/cdn-faq-service-inquiry/)
-- [English](/documentation/articles/cdn-enus-faq-service-inquiry/) 
+- [中文](./cdn-faq-service-inquiry.md)
+- [English](./cdn-enus-faq-service-inquiry.md) 
 #FAQs – Consulting
 
 + [Azure CDN price consulting](#step1)
@@ -30,7 +45,6 @@
 + [If I use Content Delivery Network acceleration with a blob, do I directly use the blob address, rather than the custom domain name? Does it need ICP number and why?](#step19)
 + [If there are multiple subscriptions, how do I switch between them?](#step20)
 
-
 ##**Price consulting**<a id="step1"></a>
 
 ### **Is all data transferred charged at a higher rate once the amount of data transferred each month exceeds 10 terabytes (TB)?**
@@ -43,7 +57,7 @@ No, this is not included. When Content Delivery Network receives a request for a
 
 ### **How are Content Delivery Network fees calculated?**
 
-Fees for Content Delivery Network are currently calculated on the basis of traffic. Charging by bandwidth is not supported at the moment. For more specific information on pricing, refer to [Pricing details](/pricing/details/cdn/).
+Fees for Content Delivery Network are currently calculated on the basis of traffic. Charging by bandwidth is not supported at the moment. For more specific information on pricing, refer to [Pricing details](https://www.azure.cn/pricing/details/cdn/).
 
 ## **The concept and role of Azure Content Delivery Network**<a id="step2"></a>
 
@@ -152,7 +166,7 @@ When you create CDN in the Azure CDN portal, enter the return-to-source access h
 
 ## **What are the differences between the Standard and Premium version of CDN?**<a id="step18"></a>
      
-First, the pricing is different. See [Pricing details](/pricing/details/cdn/) for specifics. Second, the current premium CDN service includes only HTTPS acceleration services, although other advanced acceleration services will gradually be added in the future. If you wish to use HTTPS acceleration services at this time, use the support page to contact the Azure support team to enable HTTPS acceleration services.
+First, the pricing is different. See [Pricing details](https://www.azure.cn/pricing/details/cdn/) for specifics. Second, the current premium CDN service includes only HTTPS acceleration services, although other advanced acceleration services will gradually be added in the future. If you wish to use HTTPS acceleration services at this time, use the support page to contact the Azure support team to enable HTTPS acceleration services.
 
 ## **If I use Content Delivery Network acceleration with a blob, do I directly use the blob address, rather than the custom domain name? Does it need ICP number and why?**<a id="step19"></a>
 
@@ -173,6 +187,4 @@ If you have multiple subscriptions, as shown in the diagram, you can click the t
     
 ![FAQs](./media/cdn-doc/faq-inquiry-001.png)
     
-
-
 <!---HONumber=CDN_1201_2015-->

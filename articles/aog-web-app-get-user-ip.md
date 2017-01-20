@@ -1,17 +1,17 @@
-<properties
-	pageTitle="应用程序网关中如何获取访问者源 IP"
-	description="介绍如何在应用程序网关中获取访问者源 IP。"
-	services="application-gateway"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 应用程序网关中如何获取访问者源 IP
+description: 介绍如何在应用程序网关中获取访问者源 IP。
+services: application-gateway
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="application-gateway-aog"
-	ms.date="10/27/2016"
-	wacn.date="11/03/2016"/>
+ms.service: application-gateway-aog
+ms.date: 10/27/2016
+wacn.date: 11/03/2016
+---
 
 # 应用程序网关中如何获取访问者源 IP
 

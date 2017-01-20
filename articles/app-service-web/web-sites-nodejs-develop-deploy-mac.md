@@ -1,33 +1,33 @@
-<properties
-	pageTitle="在 Azure App Service 中创建 Node.js Web 应用 | Azure"
-	description="学习如何将 Node.js 应用程序部署到 Azure App Service 中的 Web 应用。"
-	services="app-service\web"
-	documentationCenter="nodejs"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""/>
+---
+title: 在 Azure App Service 中创建 Node.js Web 应用 | Azure
+description: 学习如何将 Node.js 应用程序部署到 Azure App Service 中的 Web 应用。
+services: app-service\web
+documentationCenter: nodejs
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="nodejs"
-	ms.topic="hero-article"
-	ms.date="11/01/2016"
-	wacn.date="01/05/2017"
-	ms.author="robmcm"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: hero-article
+ms.date: 11/01/2016
+wacn.date: 01/05/2017
+ms.author: robmcm
+---
 
 # 在 Azure App Service 中创建 Node.js Web 应用
 
-> [AZURE.SELECTOR]
-- [.Net](/documentation/articles/web-sites-dotnet-get-started/)
-- [Node.js](/documentation/articles/web-sites-nodejs-develop-deploy-mac/)
-- [Java](/documentation/articles/web-sites-java-get-started/)
-- [PHP - Git](/documentation/articles/web-sites-php-mysql-deploy-use-git/)
-- [PHP - FTP](/documentation/articles/web-sites-php-mysql-deploy-use-ftp/)
-- [Python](/documentation/articles/web-sites-python-ptvs-django-mysql/)
+> [!div class="op_single_selector"]
+- [.Net](./web-sites-dotnet-get-started.md)
+- [Node.js](./web-sites-nodejs-develop-deploy-mac.md)
+- [Java](./web-sites-java-get-started.md)
+- [PHP - Git](./web-sites-php-mysql-deploy-use-git.md)
+- [PHP - FTP](./web-sites-php-mysql-deploy-use-ftp.md)
+- [Python](./web-sites-python-ptvs-django-mysql.md)
 
-本教程说明如何创建一个简单的 [Node.js](http://nodejs.org) 应用程序，并使用 [Git](http://git-scm.com) 将其部署到 [Azure App Service](/documentation/articles/app-service-value-prop-what-is/) 中的 [Web 应用](/documentation/articles/app-service-web-overview/)。本教程中的说明适用于任何能够运行 Node.js 的操作系统。
+本教程说明如何创建一个简单的 [Node.js](http://nodejs.org) 应用程序，并使用 [Git](http://git-scm.com) 将其部署到 [Azure App Service](../app-service/app-service-value-prop-what-is.md) 中的 [Web 应用](./app-service-web-overview.md)。本教程中的说明适用于任何能够运行 Node.js 的操作系统。
 
 学习内容：
 
@@ -40,8 +40,8 @@
 
 有关教程以及适用于更复杂 Node.js 应用程序的示例代码，或有关如何在 Azure 中使用 Node.js 的其他主题，请参阅 [Node.js 开发人员中心](/develop/nodejs/)。
 
-> [AZURE.NOTE]
-若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以[注册试用版](/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
+> [!NOTE]
+若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以[注册试用版](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
 
 ## 创建 Web 应用并启用 Git 发布
 
@@ -65,11 +65,11 @@
 
 6. 选择“资源组”或新建一个。
 
-	有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](/documentation/articles/resource-group-overview/)。
+	有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
 
 7. 选择“App Service 计划/位置”或新建一个。
 
-	有关应用服务计划的详细信息，请参阅 [Azure App Service 计划概述](/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/)
+	有关应用服务计划的详细信息，请参阅 [Azure App Service 计划概述](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)
 
 8. 单击“创建”。
    
@@ -125,7 +125,6 @@
 1. 从命令行中，将目录更改为 **helloworld** 目录，然后输入以下命令来初始化本地 Git 存储库。
 
 		git init
-
 
 2. 使用以下命令将文件添加到存储库中：
 
@@ -186,13 +185,13 @@
 
 ## 后续步骤
 
-现已将 Node.js 应用程序部署到 Azure App Service 中的 Web 应用。若要了解应用服务 Web 应用如何运行 Node.js 应用程序的详细信息，请参阅 [Azure App Service Web 应用：Node.js](http://blogs.msdn.com/b/silverlining/archive/2012/06/14/windows-azure-websites-node-js.aspx) 和[在 Azure 应用程序中指定 Node.js 版本](/documentation/articles/nodejs-specify-node-version-azure-apps/)。
+现已将 Node.js 应用程序部署到 Azure App Service 中的 Web 应用。若要了解应用服务 Web 应用如何运行 Node.js 应用程序的详细信息，请参阅 [Azure App Service Web 应用：Node.js](http://blogs.msdn.com/b/silverlining/archive/2012/06/14/windows-azure-websites-node-js.aspx) 和[在 Azure 应用程序中指定 Node.js 版本](../nodejs-specify-node-version-azure-apps.md)。
 
-Node.js 提供可由您的应用程序使用的丰富的模块生态系统。若要了解 Web 应用如何使用模块，请参阅[将 Node.js 模块与 Azure 应用程序一起使用](/documentation/articles/nodejs-use-node-modules-azure-apps/)。
+Node.js 提供可由您的应用程序使用的丰富的模块生态系统。若要了解 Web 应用如何使用模块，请参阅[将 Node.js 模块与 Azure 应用程序一起使用](../nodejs-use-node-modules-azure-apps.md)。
 
-如果将应用程序部署到 Azure 后遇到问题，请参阅[如何在 Azure App Service 中调试 Node.js 应用程序](/documentation/articles/web-sites-nodejs-debug/)，以了解有关诊断问题的信息。
+如果将应用程序部署到 Azure 后遇到问题，请参阅[如何在 Azure App Service 中调试 Node.js 应用程序](./web-sites-nodejs-debug.md)，以了解有关诊断问题的信息。
 
-本文将使用 Azure 门户预览来创建 Web 应用。你也可以使用 [Azure 命令行接口](/documentation/articles/xplat-cli-install/)或 [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 执行相同的操作。
+本文将使用 Azure 门户预览来创建 Web 应用。你也可以使用 [Azure 命令行接口](../xplat-cli-install.md)或 [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 执行相同的操作。
 
 有关如何在 Azure 上开发 Node.js 应用程序的详细信息，请参阅 [Node.js 开发人员中心](/develop/nodejs/)。
 

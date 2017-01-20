@@ -1,33 +1,34 @@
-<properties
-    pageTitle="如何通过 Java 使用表存储 | Azure"
-    description="使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。"
-    services="storage"
-    documentationcenter="java"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="45145189-e67f-4ca6-b15d-43af7bfd3f97"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 如何通过 Java 使用表存储 | Azure
+description: 使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。
+services: storage
+documentationcenter: java
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: 45145189-e67f-4ca6-b15d-43af7bfd3f97
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: Java
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 如何通过 Java 使用表存储
-[AZURE.INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
+[!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 
 ## 概述
 本指南将演示如何使用 Azure 表存储服务执行常见方案。这些示例用 Java 编写并使用 [Azure Storage SDK for Java][Azure Storage SDK for Java]。涉及的方案包括“创建”、“列出”和“删除”表，以及“插入”、“查询”、“修改”和“删除”表中的实体。有关表的详细信息，请参阅[后续步骤](#Next-Steps)部分。
 
 注意：为在 Android 设备上使用 Azure 存储的开发人员提供了 SDK。有关详细信息，请参阅 [Azure Storage SDK for Android][Azure Storage SDK for Android]。
 
-[AZURE.INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
+[!INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建 Java 应用程序
 在本指南中，将使用存储功能，这些功能可在本地 Java 应用程序中运行，或在 Azure 的 Web 角色或辅助角色中通过运行的代码来运行。
@@ -539,7 +540,6 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 * [Azure 存储团队博客][Azure Storage Team Blog]
 
 有关详细信息，另请参阅 [Java 开发人员中心](/develop/java/)。
-
 
 [Azure SDK for Java]: /develop/java/
 [Azure Storage SDK for Java]: https://github.com/azure/azure-storage-java

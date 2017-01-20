@@ -10,15 +10,12 @@
 	-Location "China North" -AddressPrefix @('10.0.0.0/24','20.0.0.0/24','30.0.0.0/24') `
 	-GatewayIpAddress "5.4.3.2" -ResourceGroupName MyRGName
 
-
 ### <a name="gwipwithconnection"></a>如何修改网关 IP 地址 - 现有网关连接
 
 如果网关连接已存在，首先需要删除该连接。然后，可修改网关 IP 地址并重新创建一个新的连接。这将导致 VPN 连接中断一段时间。
 
-
->[AZURE.IMPORTANT] 不要删除 VPN 网关。如果将其删除，则必须返回执行相应步骤来重新创建它，并使用将分配到新创建的网关的 IP 地址来重新配置本地路由器。
+>[!IMPORTANT] 不要删除 VPN 网关。如果将其删除，则必须返回执行相应步骤来重新创建它，并使用将分配到新创建的网关的 IP 地址来重新配置本地路由器。
  
-
 1. 删除连接。可使用 `Get-AzureRmVirtualNetworkGatewayConnection` cmdlet 找到连接的名称。
 
 		Remove-AzureRmVirtualNetworkGatewayConnection -Name MyGWConnectionName `

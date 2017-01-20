@@ -1,17 +1,17 @@
-<properties
-	pageTitle="在 Azure WebApps 中运行64位 Asp.net Core 应用"
-	description="在 Azure WebApps 中运行64位 Asp.net Core 应用"
-	services="app-service-web"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 在 Azure WebApps 中运行64位 Asp.net Core 应用
+description: 在 Azure WebApps 中运行64位 Asp.net Core 应用
+services: app-service-web
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="app-service-web-aog"
-	ms.date="10/27/2016"
-	wacn.date="11/10/2016"/>
+ms.service: app-service-web-aog
+ms.date: 10/27/2016
+wacn.date: 11/10/2016
+---
 
 #在 Azure WebApps 中运行64位 Asp.net Core 应用
 
@@ -37,6 +37,4 @@
 		    <aspNetCore processPath="d:\home\site\wwwroot\dotnet\dotnet.exe" arguments=".\WebApplication1.dll" stdoutLogEnabled="false" stdoutLogFile=".\logs\stdout" forwardWindowsAuthToken="false" />
 		  </system.webServer>
 4.	重启站点。 
-
-
 

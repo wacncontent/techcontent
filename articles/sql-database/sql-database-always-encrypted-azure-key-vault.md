@@ -1,35 +1,32 @@
-<properties
-	pageTitle="Always Encrypted - 使用数据库加密保护 Azure SQL 数据库中的敏感数据"
-	description="在数分钟内保护 SQL 数据库中的敏感数据。"
-	keywords="数据加密、加密密钥、云加密"	
-	services="sql-database"
-	documentationCenter=""
-	authors="stevestein"
-	manager="jhubbard"
-	editor="cgronlun"/>  
+---
+title: Always Encrypted - 使用数据库加密保护 Azure SQL 数据库中的敏感数据
+description: 在数分钟内保护 SQL 数据库中的敏感数据。
+keywords: 数据加密、加密密钥、云加密
+services: sql-database
+documentationCenter: 
+authors: stevestein
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="sql-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/18/2016"
-	wacn.date="12/26/2016"
-	ms.author="sstein"/>
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/18/2016
+wacn.date: 12/26/2016
+ms.author: sstein
+---
 
 # Always Encrypted - 使用数据加密保护 SQL 数据库中的敏感数据并将加密密钥存储在 Azure 密钥保管库中
 
-> [AZURE.SELECTOR]
-- [Azure 密钥保管库](/documentation/articles/sql-database-always-encrypted-azure-key-vault/)
-- [Windows 证书存储](/documentation/articles/sql-database-always-encrypted/)
-
+> [!div class="op_single_selector"]
+- [Azure 密钥保管库](./sql-database-always-encrypted-azure-key-vault.md)
+- [Windows 证书存储](./sql-database-always-encrypted.md)
 
 本文演示如何使用 [SQL Server Management Studio (SSMS)](https://msdn.microsoft.com/zh-cn/library/hh213248.aspx) 中的 [Always Encrypted 向导](https://msdn.microsoft.com/zh-cn/library/mt459280.aspx)，通过数据加密来保护 SQL 数据库中的敏感数据，以及如何将每个加密密钥存储在 Azure 密钥保管库中。
 
 Always Encrypted 是 Azure SQL 数据库和 SQL Server 中一项新的数据加密技术，用于保护服务器上的敏感静态数据、在客户端和服务器之间进行移动的敏感数据，以及正在使用中的数据，确保敏感数据永远不会在数据库系统中以纯文本形式显示。配置数据加密之后，仅客户端应用程序或应用服务器（具有密钥访问权限）能够访问纯文本数据。有关详细信息，请参阅 [Always Encrypted（数据库引擎）](https://msdn.microsoft.com/zh-cn/library/mt163865.aspx)。
-
 
 将数据库配置为使用 Always Encrypted 后，通过 Visual Studio 使用 C# 创建一个客户端应用程序，以便处理加密的数据。
 
@@ -41,19 +38,16 @@ Always Encrypted 是 Azure SQL 数据库和 SQL Server 中一项新的数据加�
 - 创建一个数据库表并加密某些列。
 - 创建一个可从已加密列插入、选择和显示数据的应用程序。
 
-
 ## 先决条件
 
 在本教程中，你需要：
 
-- 在开始之前，你需要有 Azure 帐户和订阅。如果没有，请注册[试用版](/pricing/1rmb-trial)。
+- 在开始之前，你需要有 Azure 帐户和订阅。如果没有，请注册[试用版](https://www.azure.cn/pricing/1rmb-trial)。
 - [SQL Server Management Studio (SSMS)](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx) 版本 13.0.700.242 或更高版本。
 - [.NET Framework 4.6](https://msdn.microsoft.com/zh-cn/library/w0x726c2.aspx) 或更高版本（在客户端计算机上）。
 - [Visual Studio](https://www.visualstudio.com/downloads/download-visual-studio-vs.aspx)。
-- [Azure PowerShell](/documentation/articles/powershell-install-configure/)，最低版本为 1.0。
+- [Azure PowerShell](../powershell-install-configure.md)，最低版本为 1.0。
     - 键入 **(Get-Module azure -ListAvailable).Version** 可查看所运行的 PowerShell 版本。
-
-
 
 ## 使客户端应用程序可以访问 SQL 数据库服务
 
@@ -73,15 +67,11 @@ Always Encrypted 是 Azure SQL 数据库和 SQL Server 中一项新的数据加�
 14. 单击“保存”（位于底部）。
 15. 保存完成之后，在“密钥”部分中找到并复制密钥值（稍后在代码中会需要此值）。
 
-
-
 ## 创建 Azure 密钥保管库以存储密钥
 
 现在客户端应用已配置，也已获得了客户端 ID，便可以开始创建 Azure 密钥保管库并配置其访问策略以允许你和应用程序访问保管库的机密（Always Encrypted 密钥）。为了将密钥与 Azure 密钥保管库结合使用，需要 *create*、*get*、*list*、*sign*、*verify*、*wrapKey* 和 *unwrapKey* 权限以便用于创建新的列主密钥以及用于通过 SQL Server Management Studio 设置加密。
 
-若要快速创建 Azure 密钥保管库，可以运行以下脚本。有关这些 cmdlet 的详细说明以及有关创建和配置 Azure 密钥保管库的详细信息，请参阅 [Azure 密钥保管库入门](/documentation/articles/key-vault-get-started/)
-
-
+若要快速创建 Azure 密钥保管库，可以运行以下脚本。有关这些 cmdlet 的详细说明以及有关创建和配置 Azure 密钥保管库的详细信息，请参阅 [Azure 密钥保管库入门](../key-vault/key-vault-get-started.md)
 
     $subscriptionName = '<your Azure subscription name>'
     $userPrincipalName = '<username@domain.com>'
@@ -90,7 +80,6 @@ Always Encrypted 是 Azure SQL 数据库和 SQL Server 中一项新的数据加�
     $location = '<datacenter location>'
     $vaultName = 'AeKeyVault'
     
-
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
     $subscriptionId = (Get-AzureRmSubscription -SubscriptionName $subscriptionName).SubscriptionId
     Set-AzureRmContext -SubscriptionId $subscriptionId
@@ -101,13 +90,9 @@ Always Encrypted 是 Azure SQL 数据库和 SQL Server 中一项新的数据加�
     Set-AzureRmKeyVaultAccessPolicy -VaultName $vaultName -ResourceGroupName $resourceGroupName -PermissionsToKeys create,get,wrapKey,unwrapKey,sign,verify,list -UserPrincipalName $userPrincipalName
     Set-AzureRmKeyVaultAccessPolicy  -VaultName $vaultName  -ResourceGroupName $resourceGroupName -ServicePrincipalName $clientId -PermissionsToKeys get,wrapKey,unwrapKey,sign,verify,list
 
-
-
-
 ## 使用 SSMS 连接到数据库
 
 打开 SSMS，连接到包含 Clinic 数据库的服务器。
-
 
 1. 打开 SSMS（如果未打开，单击“连接”>“数据库引擎...”，以打开“连接到服务器”窗口）。
 2. 输入服务器名称和凭据。服务器名称可以在 SQL 数据库边栏选项卡以及此前复制的连接字符串中找到。键入完整的服务器名称，包括 *database.chinacloudapi.cn*。
@@ -116,7 +101,6 @@ Always Encrypted 是 Azure SQL 数据库和 SQL Server 中一项新的数据加�
 
 3. 如果“新建防火墙规则”窗口打开，请登录到 Azure，让 SSMS 创建新的防火墙规则。
 
-
 ## 创建表
 
 首先，将创建一个表来保留患者数据（最初不进行加密 -- 会在下一部分中配置加密）。
@@ -124,7 +108,6 @@ Always Encrypted 是 Azure SQL 数据库和 SQL Server 中一项新的数据加�
 1. 展开“数据库”。
 1. 右键单击“Clinic”数据库，然后单击“新建查询”。
 2. 将以下 Transact-SQL (T-SQL) 粘贴到新查询窗口中，然后单击“执行”以执行该语句：
-
 
         CREATE TABLE [dbo].[Patients](
          [PatientId] [int] IDENTITY(1,1), 
@@ -139,7 +122,6 @@ Always Encrypted 是 Azure SQL 数据库和 SQL Server 中一项新的数据加�
          [BirthDate] [date] NOT NULL
          PRIMARY KEY CLUSTERED ([PatientId] ASC) ON [PRIMARY] );
          GO
-
 
 ## 加密某些列（配置 Always Encrypted）
 
@@ -172,7 +154,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 
     ![主密钥配置](./media/sql-database-always-encrypted-azure-key-vault/master-key-configuration.png)
 
-
 5. **验证**
 
     可以现在就加密这些列，也可以保存 PowerShell 脚本供以后运行。对于本教程，请选择“现在完成”，然后单击“下一步”。
@@ -181,9 +162,7 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 
     确保设置全都正确，然后单击“完成”以完成“Always Encrypted”的设置。
 
-
     ![摘要](./media/sql-database-always-encrypted-azure-key-vault/summary.png)
-
 
 ### 该向导的具体功能是什么？
 
@@ -195,20 +174,16 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 
 通过展开“Clinic”>“安全”>“Always Encrypted 密钥”，可以验证 SSMS 中密钥的创建。现在，可以看到向导所生成的新密钥了。
 
-
 ## 创建处理已加密数据的客户端应用程序
 
 设置 Always Encrypted 之后，便可以生成一个应用程序，用其在已加密列上执行某些 INSERT 操作和 SELECT 操作。
 
-> [AZURE.IMPORTANT] 通过 Always Encrypted 列将纯文本数据传递到服务器时，应用程序必须使用 [SqlParameter](https://msdn.microsoft.com/zh-cn/library/system.data.sqlclient.sqlparameter.aspx) 对象。在不使用 SqlParameter 对象的情况下传递文本值会导致异常。
-
+> [!IMPORTANT] 通过 Always Encrypted 列将纯文本数据传递到服务器时，应用程序必须使用 [SqlParameter](https://msdn.microsoft.com/zh-cn/library/system.data.sqlclient.sqlparameter.aspx) 对象。在不使用 SqlParameter 对象的情况下传递文本值会导致异常。
 
 1. 打开 Visual Studio 并创建新的 C# 控制台应用程序。确保将项目设置为 **.NET Framework 4.6** 或更高版本。
 2. 将项目命名为 **AlwaysEncryptedConsoleAKVApp**，然后单击“确定”。
 
-
 	![新建控制台应用程序](./media/sql-database-always-encrypted-azure-key-vault/console-app.png)
-
 
 3. 通过单击“工具”>“NuGet 包管理器”>“包管理器控制台”来安装以下 NuGet 包。
 
@@ -217,25 +192,19 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
     Install-Package Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider
     Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
 
-
-   
 ## 修改连接字符串以启用 Always Encrypted
 
 本节只简单介绍如何在数据库连接字符串中启用 Always Encrypted。在下一节（即 **Always Encrypted 示例控制台应用程序**）中，将实际修改刚创建的控制台应用。
 
-
 若要启用 Always Encrypted，需要将 **Column Encryption Setting** 关键字添加到连接字符串中，并将其设置为“已启用”。
 
 可以在连接字符串中直接进行该设置，也可以使用 [SqlConnectionStringBuilder](https://msdn.microsoft.com/zh-cn/library/system.data.sqlclient.sqlconnectionstringbuilder.aspx) 进行设置。下一节中的示例应用程序演示如何使用 **SqlConnectionStringBuilder**。
-
-
 
 ### 在连接字符串中启用 Always Encrypted
 
 将以下关键字添加到连接字符串中：
 
     Column Encryption Setting=Enabled
-
 
 ### 通过 SqlConnectionStringBuilder 启用 Always Encrypted
 
@@ -269,8 +238,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
        SqlConnection.RegisterColumnEncryptionKeyStoreProviders(providers);
     }
 
-
-
 ## Always Encrypted 示例控制台应用程序
 
 此示例演示了如何执行以下操作：
@@ -303,7 +270,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
         static string clientId = @"<client id from step 7 above>";
         static string clientSecret = "<key from step 13 above>";
 
-
         static void Main(string[] args)
         {
             InitializeAzureKeyVaultProvider();
@@ -329,10 +295,8 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
             Console.WriteLine(Environment.NewLine + "Enter server password:");
             connStringBuilder.Password = Console.ReadLine();
 
-
             // Assign the updated connection string to our global variable.
             connectionString = connStringBuilder.ConnectionString;
-
 
             // Delete all records to restart this demo app.
             ResetPatientsTable();
@@ -376,7 +340,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
                 BirthDate = DateTime.Parse("05/06/1993")
             });
 
-
             // Fetch and display all patients.
             Console.WriteLine(Environment.NewLine + "All the records currently in the Patients table:");
 
@@ -418,7 +381,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
             Console.ReadLine();
         }
 
-
         private static ClientCredential _clientCredential;
 
         static void InitializeAzureKeyVaultProvider()
@@ -454,7 +416,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
      VALUES (@SSN, @FirstName, @LastName, @BirthDate);";
 
             SqlCommand sqlCmd = new SqlCommand(sqlCmdText);
-
 
             SqlParameter paramSSN = new SqlParameter(@"@SSN", newPatient.SSN);
             paramSSN.DbType = DbType.AnsiStringFixedLength;
@@ -498,16 +459,13 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
             return returnValue;
         }
 
-
         static List<Patient> SelectAllPatients()
         {
             List<Patient> patients = new List<Patient>();
 
-
             SqlCommand sqlCmd = new SqlCommand(
               "SELECT [SSN], [FirstName], [LastName], [BirthDate] FROM [dbo].[Patients]",
                 new SqlConnection(connectionString));
-
 
             using (sqlCmd.Connection = new SqlConnection(connectionString))
 
@@ -541,7 +499,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
             return patients;
         }
 
-
         static Patient SelectPatientBySSN(string ssn)
         {
             Patient patient = new Patient();
@@ -556,7 +513,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
             paramSSN.Size = 11;
 
             sqlCmd.Parameters.Add(paramSSN);
-
 
             using (sqlCmd.Connection = new SqlConnection(connectionString))
             {
@@ -591,7 +547,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
             return patient;
         }
 
-
         // This method simply deletes all records in the Patients table to reset our demo.
         static int ResetPatientsTable()
         {
@@ -624,8 +579,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
     }
     }
 
-
-
 ## 确保数据已加密
 
 若要快速查看服务器上的实际数据是否已加密，可以通过 SSMS 对患者数据进行轻松查询（使用当前的连接，其中，列加密设置尚未启用）。
@@ -637,7 +590,6 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 可以看到，已加密的列不包含任何纯文本数据。
 
    ![新建控制台应用程序](./media/sql-database-always-encrypted-azure-key-vault/ssms-encrypted.png)
-
 
 若要使用 SSMS 来访问纯文本数据，可将 **Column Encryption Setting=enabled** 参数添加到连接中。
 
@@ -653,17 +605,13 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 
      现在，可以看到已加密列中的纯文本数据。
 
-
 	![新建控制台应用程序](./media/sql-database-always-encrypted-azure-key-vault/ssms-plaintext.png)
-
 
 ## 后续步骤
 创建使用 Always Encrypted 的数据库以后，可能需要执行以下操作：
 
 - [轮换使用和清除密钥](https://msdn.microsoft.com/zh-cn/library/mt607048.aspx)。
 - [迁移已使用 Always Encrypted 加密的数据](https://msdn.microsoft.com/zh-cn/library/mt621539.aspx)
-
-
 
 ## 相关信息
 

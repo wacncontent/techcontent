@@ -1,19 +1,20 @@
-<properties 
-   pageTitle="服务总线和 Python 与 AMQP 1.0 | Azure"
-   description="使用集成了 AMQP 的 Python 中的服务总线。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-    editor="" /> 
-<tags 
-   ms.service="service-bus"
-    ms.date="09/29/2016"
-   wacn.date="01/09/2017" />
+---
+title: 服务总线和 Python 与 AMQP 1.0 | Azure
+description: 使用集成了 AMQP 的 Python 中的服务总线。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
+
+ms.service: service-bus
+ms.date: 09/29/2016
+wacn.date: 01/09/2017
+---
 
 # 使用集成了 AMQP 1.0 的 Python 中的服务总线
 
-[AZURE.INCLUDE [service-bus-selector-amqp](../../includes/service-bus-selector-amqp.md)]
+[!INCLUDE [service-bus-selector-amqp](../../includes/service-bus-selector-amqp.md)]
 
 Proton-Python 是绑定到 Proton-C 的 Python 语言；也就是说，Proton-Python 是作为 C 中实现的引擎周围的包装器实现的。
 
@@ -31,7 +32,6 @@ Proton-Python 是绑定到 Proton-C 的 Python 语言；也就是说，Proton-Py
 
 以下代码演示如何向服务总线消息实体发送消息。
 
-
 		messenger = Messenger()
 		message = Message()
 		message.address = "amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn/[entity]"
@@ -40,11 +40,9 @@ Proton-Python 是绑定到 Proton-C 的 Python 语言；也就是说，Proton-Py
 		messenger.put(message)
 		messenger.send()
 
-
 ### 使用 Proton-Python 接收消息
 
 以下代码演示如何从服务总线消息实体接收消息。
-
 
 		messenger = Messenger()
 		address = "amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn/[entity]"
@@ -57,7 +55,6 @@ Proton-Python 是绑定到 Proton-C 的 Python 语言；也就是说，Proton-Py
 		      messenger.get(message)
 		messenger.stop()
 
-
 ## 在 .NET 和 Proton-Python 之间进行消息传递
 
 ### 应用程序属性
@@ -66,16 +63,13 @@ Proton-Python 是绑定到 Proton-C 的 Python 语言；也就是说，Proton-Py
 
 Proton-Python 消息支持以下类型的应用程序属性：**int**、**long**、**float**、**uuid**、**bool**、**string**。以下 Python 代码显示如何使用上述每种属性类型在消息上设置属性。
 
-
 		message.properties[u"TestString"] = u"This is a string"    
 		message.properties[u"TestInt"] = 1
 		message.properties[u"TestLong"] = 1000L
 		message.properties[u"TestFloat"] = 1.5    
 		message.properties[u"TestGuid"] = uuid.uuid1()    
 
-
 在服务总线 .NET API 中，在 [BrokeredMessage][] 的 **Properties** 集合中携带消息应用程序属性。以下代码演示如何读取从 Python 客户端收到的消息的应用程序属性。
-
 
 		if (message.Properties.Keys.Count > 0)
 		{
@@ -86,7 +80,6 @@ Proton-Python 消息支持以下类型的应用程序属性：**int**、**long**
 		  }
 		  Console.WriteLine();
 		}
-
 
 下表将 Python 属性类型映射到 .NET 属性类型。
 
@@ -102,7 +95,6 @@ Proton-Python 消息支持以下类型的应用程序属性：**int**、**long**
 #### 服务总线 .NET API 到 Proton-Python
 
 [BrokeredMessage][] 类型支持以下类型的应用程序属性：**byte**、**sbyte**、**char**、**short**、**ushort**、**int**、**uint**、**long**、**ulong**、**float**、**double**、**decimal**、**bool**、**Guid**、**string**、**Uri**、**DateTime**、**DateTimeOffset** 和 **TimeSpan**。以下 .NET 代码显示如何使用上述每种属性类型在 [BrokeredMessage][] 对象上设置属性。
-
 
 		message.Properties["TestByte"] = (byte)128;
 		message.Properties["TestSbyte"] = (sbyte)-22;
@@ -125,14 +117,11 @@ Proton-Python 消息支持以下类型的应用程序属性：**int**、**long**
 		message.Properties["TestTimeSpan"] = TimeSpan.FromMinutes(60);
 		message.Properties["TestTimeSpan"] = TimeSpan.FromMinutes(60);
 
-
 以下 Python 代码演示如何读取从服务总线 .NET 客户端收到的消息的应用程序属性。
-
 
 		if message.properties != None:
 		   for k,v in message.properties.items():         
 		         print "--   %s : %s (%s)" % (k, str(v), type(v))         
-
 
 下表将 .NET 属性类型映射到 Python 属性类型。
 
@@ -210,6 +199,6 @@ Proton-Python 消息支持以下类型的应用程序属性：**int**、**long**
 [BrokeredMessage]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.aspx
 [适用于 Windows Server 的服务总线中的 AMQP]: https://msdn.microsoft.com/zh-cn/library/dn574799.aspx
 
-[服务总线 AMQP 概述]: /documentation/articles/service-bus-amqp-overview/
+[服务总线 AMQP 概述]: ./service-bus-amqp-overview.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

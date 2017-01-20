@@ -1,7 +1,7 @@
-> [AZURE.SELECTOR]
-- [Overview](/documentation/articles/hdinsight-use-sqoop/)
-- [Curl](/documentation/articles/hdinsight-hadoop-use-sqoop-curl/)
-- [PowerShell](/documentation/articles/hdinsight-hadoop-use-sqoop-powershell/)
-- [.NET](/documentation/articles/hdinsight-hadoop-use-sqoop-dotnet-sdk/)
+> [!div class="op_single_selector"]
+- [Overview](../articles/hdinsight/hdinsight-use-sqoop.md)
+- [Curl](../articles/hdinsight/hdinsight-hadoop-use-sqoop-curl.md)
+- [PowerShell](../articles/hdinsight/hdinsight-hadoop-use-sqoop-powershell.md)
+- [.NET](../articles/hdinsight/hdinsight-hadoop-use-sqoop-dotnet-sdk.md)
 
 <!---HONumber=67-->

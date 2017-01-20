@@ -1,32 +1,31 @@
 <!-- Ibiza portal: tested -->
 
-<properties
-	pageTitle="创建 VM 可用性集 | Azure"
-	description="了解如何通过 Azure 门户预览或 PowerShell，使用资源管理器部署模型为虚拟机创建可用性集。"
-	keywords="可用性集"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="cynthn"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="12/16/2016"
-	ms.author="cynthn"/>
+---
+title: 创建 VM 可用性集 | Azure
+description: 了解如何通过 Azure 门户预览或 PowerShell，使用资源管理器部署模型为虚拟机创建可用性集。
+keywords: 可用性集
+services: virtual-machines-windows
+documentationCenter: 
+authors: cynthn
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 12/16/2016
+ms.author: cynthn
+---
 
 # 创建可用性集 
 
 使用门户时，如果希望 VM 属于某个可用性集，则需要先创建该可用性集。
 
-有关创建和使用可用性集的详细信息，请参阅[管理虚拟机的可用性](/documentation/articles/virtual-machines-windows-manage-availability/)。
-
+有关创建和使用可用性集的详细信息，请参阅[管理虚拟机的可用性](./virtual-machines-windows-manage-availability.md)。
 
 ## 在创建 VM 之前先使用门户创建可用性集
 
@@ -55,14 +54,11 @@
 
 ![显示创建 VM 时创建新可用性集的过程的屏幕截图。](./media/virtual-machines-windows-create-availability-set/new-vm-avail-set.png)
 
-
 ## 将新 VM 添加到现有可用性集
 
 对于所创建的应属于该集的每个其他 VM，请确保在同一个**资源组**中创建该 VM，然后在步骤 3 中选择现有可用性集。
 
 ![显示如何选择要用于 VM 的现有可用性集的屏幕截图。](./media/virtual-machines-windows-create-availability-set/add-vm-to-set.png)
-
-
 
 ## 使用 PowerShell 创建可用性集
 
@@ -72,14 +68,12 @@
 	
 有关详细信息，请参阅 [New-AzureRmAvailabilitySet](https://msdn.microsoft.com/zh-cn/library/mt619453.aspx)。
 
-
 ## 故障排除
 
 - 创建 VM 时，如果所需的可用性集不在门户的下拉列表中，则表示可能已在不同的资源组中创建该可用性集。如果不知道可用性集所属的资源组，请转到中心菜单并单击“浏览”>“可用性集”，以查看可用性集及其所属资源组的列表。
 
-
 ## 后续步骤
 
-通过添加更多[数据磁盘](/documentation/articles/virtual-machines-windows-attach-disk-portal/)，向 VM 添加更多存储。
+通过添加更多[数据磁盘](./virtual-machines-windows-attach-disk-portal.md)，向 VM 添加更多存储。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

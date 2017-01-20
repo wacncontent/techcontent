@@ -1,31 +1,30 @@
-<properties
-   pageTitle="将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型 | Azure"
-   description="本页面介绍如何将经典线路转移到 Resource Manager 部署模型。"
-   documentationCenter="na"
-   services="expressroute"
-   authors="ganesr"
-   manager="carmonm"
-   editor=""
-   tags="azure-resource-manager"/>
-<tags
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/10/2016"
-   wacn.date="10/31/2016"
-   ms.author="ganesr"/>
+---
+title: 将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型 | Azure
+description: 本页面介绍如何将经典线路转移到 Resource Manager 部署模型。
+documentationCenter: na
+services: expressroute
+authors: ganesr
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-
+ms.service: expressroute
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/10/2016
+wacn.date: 10/31/2016
+ms.author: ganesr
+---
 
 # 将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型
 
 ## 配置先决条件
 
 - 需要最新版本的 Azure PowerShell 模块（至少 1.0 版）。
-- 在开始配置之前，请务必查看[先决条件](/documentation/articles/expressroute-prerequisites/)、[路由要求](/documentation/articles/expressroute-routing/)和[工作流](/documentation/articles/expressroute-workflows/)。
-- 在继续下一步之前，请先参阅[将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型](/documentation/articles/expressroute-move/)中提供的信息。确保你已完全了解可能的限制和局限性。
+- 在开始配置之前，请务必查看[先决条件](./expressroute-prerequisites.md)、[路由要求](./expressroute-routing.md)和[工作流](./expressroute-workflows.md)。
+- 在继续下一步之前，请先参阅[将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型](./expressroute-move.md)中提供的信息。确保你已完全了解可能的限制和局限性。
 - 如果你要将 Azure ExpressRoute 线路从经典部署模型转移到 Azure Resource Manager 部署模型，必须完全配置好该线路，使它能够在经典部署模型中正常工作。
 - 确保拥有一个在 Resource Manager 部署模型中创建的资源组。
 
@@ -71,13 +70,13 @@
 
 ### 步骤 3：将 ExpressRoute 线路转移到 Resource Manager 部署模型
 
-现在，你可以将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型。在继续下一步之前，请先参阅[将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型](/documentation/articles/expressroute-move/)中提供的信息。
+现在，你可以将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型。在继续下一步之前，请先参阅[将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型](./expressroute-move.md)中提供的信息。
 
 可以运行以下代码段来实现此目的：
 
 	Move-AzureRmExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "DemoRG" -Location "chinaeast" -ServiceKey "<Service-key>"
 
->[AZURE.NOTE] 转移完成之后，列在前一个 cmdlet 中的新名称用于处理资源。线路实质上已重命名。
+>[!NOTE] 转移完成之后，列在前一个 cmdlet 中的新名称用于处理资源。线路实质上已重命名。
 
 ## 为两种部署模型启用 ExpressRoute 线路
 
@@ -102,9 +101,8 @@
 
 服务密钥必须已列出。现在，你可以通过适用于经典 VNet 的标准经典部署模型命令以及适用于 ARM VNET 的标准 ARM 命令来管理到 ExpressRoute 线路的链接。以下文章将引导你了解如何管理 ExpressRoute 线路的链接：
 
-- [Link your virtual network to your ExpressRoute circuit in the Resource Manager deployment model](/documentation/articles/expressroute-howto-linkvnet-arm)（在 Resource Manager 部署模型中将虚拟网络链接到 ExpressRoute 线路）
-- [Link your virtual network to your ExpressRoute circuit in the classic deployment model](/documentation/articles/expressroute-howto-linkvnet-classic)（在经典部署模型中将虚拟网络链接到 ExpressRoute 线路）
-
+- [Link your virtual network to your ExpressRoute circuit in the Resource Manager deployment model](./expressroute-howto-linkvnet-arm.md)（在 Resource Manager 部署模型中将虚拟网络链接到 ExpressRoute 线路）
+- [Link your virtual network to your ExpressRoute circuit in the classic deployment model](./expressroute-howto-linkvnet-classic.md)（在经典部署模型中将虚拟网络链接到 ExpressRoute 线路）
 
 ## 在经典部署模型中禁用 ExpressRoute 线路
 
@@ -125,7 +123,7 @@
 
 创建你的线路后，请确保执行以下操作：
 
-- [创建和修改 ExpressRoute 线路的路由](/documentation/articles/expressroute-howto-routing-arm/)
-- [将虚拟网络链接到 ExpressRoute 线路](/documentation/articles/expressroute-howto-linkvnet-arm/)
+- [创建和修改 ExpressRoute 线路的路由](./expressroute-howto-routing-arm.md)
+- [将虚拟网络链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-arm.md)
 
 <!---HONumber=Mooncake_Quality_Review_0117_2017-->

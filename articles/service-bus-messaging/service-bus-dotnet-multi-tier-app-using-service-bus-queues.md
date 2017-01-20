@@ -1,16 +1,16 @@
-<properties
-	pageTitle=".NET 多层应用程序 | Azure"
-	description="本 .NET 教程可帮助你在 Azure 中开发使用服务总线队列在各层之间进行通信的多层应用。"
-	services="service-bus"
-	documentationCenter=".net"
-	authors="sethmanheim"
-	manager="timlt"
-	editor=""/>
+---
+title: .NET 多层应用程序 | Azure
+description: 本 .NET 教程可帮助你在 Azure 中开发使用服务总线队列在各层之间进行通信的多层应用。
+services: service-bus
+documentationCenter: .net
+authors: sethmanheim
+manager: timlt
+editor: 
 
-<tags
-	ms.service="service-bus"
-	ms.date="09/01/2016"
-	wacn.date="01/04/2017"/>
+ms.service: service-bus
+ms.date: 09/01/2016
+wacn.date: 01/04/2017
+---
 
 # 使用 Azure 服务总线队列创建 .NET 多层应用程序
 
@@ -25,9 +25,9 @@
 -   如何使用 Web 角色和辅助角色在 Azure 中创建多层应用程序。
 -   如何使用服务总线队列在各层之间进行通信。
 
-[AZURE.INCLUDE [create-account-note](../../includes/create-account-note.md)]
+[!INCLUDE [create-account-note](../../includes/create-account-note.md)]
 
-在本教程中，你将生成多层应用程序并在 Azure 云服务中运行它。前端将为 ASP.NET MVC Web 角色，后端将为使用服务总线队列的辅助角色。你可以创建与前端相同的多层应用程序，作为将部署到 Azure 网站而不是云服务的 Web 项目。有关如何以不同方式处理 Azure 网站前端的说明，请参阅[后续步骤](#next-steps)部分。你还可以试用 [.NET 本地/云混合应用程序](/documentation/articles/service-bus-dotnet-hybrid-app-using-service-bus-relay/)教程。
+在本教程中，你将生成多层应用程序并在 Azure 云服务中运行它。前端将为 ASP.NET MVC Web 角色，后端将为使用服务总线队列的辅助角色。你可以创建与前端相同的多层应用程序，作为将部署到 Azure 网站而不是云服务的 Web 项目。有关如何以不同方式处理 Azure 网站前端的说明，请参阅[后续步骤](#next-steps)部分。你还可以试用 [.NET 本地/云混合应用程序](./service-bus-dotnet-hybrid-app-using-service-bus-relay.md)教程。
 
 以下屏幕截图显示了已完成的应用程序。
 
@@ -89,7 +89,7 @@
 
 5.  在确保命名空间名称可用后，选择应承载您的命名空间的国家或地区（确保使用在其中部署计算资源的同一国家/地区）。此外，请确保在命名空间“类型”字段中选择“消息”，在“消息层”字段中选择“标准”。
 
-    > [AZURE.IMPORTANT] 选取要部署应用程序的**相同区域**。这将为你提供最佳性能。
+    > [!IMPORTANT] 选取要部署应用程序的**相同区域**。这将为你提供最佳性能。
 
 6.  单击“确定”复选标记。系统现已创建您的服务命名空间并已将其启用。您可能需要等待几分钟，因为系统将为您的帐户配置资源。
 
@@ -319,7 +319,6 @@
             }
         }
 
-
 4.  现在，请确保你的 **Initialize** 方法会被调用。在“解决方案资源管理器”中，双击“Global.asax\Global.asax.cs”。
 
 5.  在 **Application\_Start** 方法的末尾添加以下代码行。
@@ -398,26 +397,20 @@
 
 11. 在 **WorkerRole.cs** 中，将 **QueueName** 变量的值 `"ProcessingQueue"` 更改为 `"OrdersQueue"`，如以下代码所示。
 
-
 	// The name of your queue.
 	const string QueueName = "OrdersQueue";
 
-
 12. 在 WorkerRole.cs 文件顶部添加以下 using 语句。
-
 
 	using FrontendWebRole.Models;
 
-
 13. 在 `Run()` 函数中，在 `OnMessage()` 调用的内部，将 `try` 子句的内容替换为以下代码。
-
 
 	Trace.WriteLine("Processing", receivedMessage.SequenceNumber.ToString());
 	// View the message as an OnlineOrder.
 	OnlineOrder order = receivedMessage.GetBody<OnlineOrder>();
 	Trace.WriteLine(order.Customer + ": " + order.Product, "ProcessingMessage");
 	receivedMessage.Complete();
-
 
 14. 你已完成此应用程序。你可以测试整个应用程序，方法是右键单击“解决方案资源管理器”中的 MultiTierApp 项目，选择“设置为启动项目”，然后按 F5。请注意，消息计数不会递增，因为辅助角色会处理队列中的项并将其标记为完成。你可以通过查看 Azure 计算模拟器 UI 来查看辅助角色的跟踪输出。可通过右击任务栏的通知区域中的模拟器图标并选择“显示计算模拟器 UI”来执行此操作。
 
@@ -441,7 +434,6 @@
   [1]: ./media/service-bus-dotnet-multi-tier-app-using-service-bus-queues/getting-started-multi-tier-100.png
   [2]: ./media/service-bus-dotnet-multi-tier-app-using-service-bus-queues/getting-started-multi-tier-101.png
   [获取工具和 SDK]: http://go.microsoft.com/fwlink/?LinkId=271920
-
 
   [GetSetting]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.cloudconfigurationmanager.getsetting.aspx
   [Microsoft.WindowsAzure.Configuration.CloudConfigurationManager]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.cloudconfigurationmanager.aspx
@@ -477,9 +469,8 @@
   [36]: ./media/service-bus-dotnet-multi-tier-app-using-service-bus-queues/service-bus-policies.png
 
   [sbmsdn]: http://msdn.microsoft.com/zh-cn/library/azure/ee732537.aspx  
-  [sbwacom]: /documentation/services/service-bus/  
-  [sbwacomqhowto]: /documentation/articles/service-bus-dotnet-get-started-with-queues/  
+  [sbwacom]: ../service-bus/index.md/  
+  [sbwacomqhowto]: ./service-bus-dotnet-get-started-with-queues.md  
   [mutitierstorage]: https://code.msdn.microsoft.com/Windows-Azure-Multi-Tier-eadceb36
   
-
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

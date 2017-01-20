@@ -1,38 +1,36 @@
-<properties 
-   pageTitle="排查路由问题 - PowerShell | Azure"
-   description="了解如何使用 Azure PowerShell 在 Azure Resource Manager 部署模型中排查路由问题。"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="AnithaAdusumilli"
-   manager="narayan"
-   editor=""
-   tags="azure-resource-manager"
-/>  
+---
+title: 排查路由问题 - PowerShell | Azure
+description: 了解如何使用 Azure PowerShell 在 Azure Resource Manager 部署模型中排查路由问题。
+services: virtual-network
+documentationCenter: na
+authors: AnithaAdusumilli
+manager: narayan
+editor: 
+tags: azure-resource-manager
 
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="09/23/2016"
-   wacn.date="01/05/2017"
-   ms.author="anithaa" />  
-
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 09/23/2016
+wacn.date: 01/05/2017
+ms.author: anithaa
+---
 
 # 使用 Azure PowerShell 排查路由问题
 
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/virtual-network-routes-troubleshoot-portal/)
-- [PowerShell](/documentation/articles/virtual-network-routes-troubleshoot-powershell/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./virtual-network-routes-troubleshoot-portal.md)
+- [PowerShell](./virtual-network-routes-troubleshoot-powershell.md)
 
 如果与 Azure 虚拟机 (VM) 之间出现网络连接问题，路由可能会影响 VM 的流量流。本文概述路由诊断功能，帮助用户做进一步的故障排除。
 
 路由表与子网关联，在该子网中的所有网络接口 (NIC) 上有效。可将以下类型的路由应用到每个网络接口：
 
 - **系统路由：**默认情况下，在 Azure 虚拟网络 (VNet) 中创建的每个子网都具有系统路由表，允许传送本地 VNet 流量、通过 VPN 网关的本地流量以及 Internet 流量。对等互连的 VNet 也有系统路由。
-- **BGP 路由：**通过 ExpressRoute 或站点到站点 VPN 连接传播到网络接口。阅读 [BGP with VPN gateways](/documentation/articles/vpn-gateway-bgp-overview/)（使用 VPN 网关的 BGP）和 [ExpressRoute overview](/documentation/articles/expressroute-introduction/)（ExpressRoute 概述）文章，了解有关 BGP 路由的详细信息。
-- **用户定义的路由 (UDR)：**如果使用网络虚拟设备或强制隧道通过站点到站点 VPN 将流量传送到本地网络，可将用户定义的路由 (UDR) 与子网路由表相关联。如果你不熟悉 UDR，请阅读 [user-defined routes](/documentation/articles/virtual-networks-udr-overview/#user-defined-routes)（用户定义的路由）一文。
+- **BGP 路由：**通过 ExpressRoute 或站点到站点 VPN 连接传播到网络接口。阅读 [BGP with VPN gateways](../vpn-gateway/vpn-gateway-bgp-overview.md)（使用 VPN 网关的 BGP）和 [ExpressRoute overview](../expressroute/expressroute-introduction.md)（ExpressRoute 概述）文章，了解有关 BGP 路由的详细信息。
+- **用户定义的路由 (UDR)：**如果使用网络虚拟设备或强制隧道通过站点到站点 VPN 将流量传送到本地网络，可将用户定义的路由 (UDR) 与子网路由表相关联。如果你不熟悉 UDR，请阅读 [user-defined routes](./virtual-networks-udr-overview.md#user-defined-routes)（用户定义的路由）一文。
 
 由于可将各种路由应用到网络接口，因此有时难以确定哪些聚合路由是有效的。为了帮助排查 VM 网络连接问题，可以查看 Azure Resource Manager 部署模型中某个网络接口的所有有效路由。
 
@@ -44,7 +42,7 @@
 
 本文说明如何使用 Azure Resource Manager 部署模型中的有效路由功能确定连接失败的原因。尽管本示例只使用系统路由，但可以使用相同的步骤判断任何路由类型的入站和出站连接失败情况。
 
->[AZURE.NOTE] 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
+>[!NOTE] 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
 
 ### 查看虚拟机的有效路由
 
@@ -60,7 +58,7 @@
 
 		Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
 
-	>[AZURE.TIP] 如果不知道网络接口的名称，请输入以下命令检索资源组中所有网络接口的名称。*
+	>[!TIP] 如果不知道网络接口的名称，请输入以下命令检索资源组中所有网络接口的名称。*
 
 	    Get-AzureRmNetworkInterface -ResourceGroupName RG1 | Format-Table Name
 
@@ -96,11 +94,9 @@
 		Active {10.9.0.0/16} VnetLocal {}
 		Active {0.0.0.0/0} Internet {}
 	
-
 3. 上一步骤的输出没有列出*从 *ChinaNorth-VNet1*（前缀 10.9.0.0/16）* 到 *ChinaNorth-VNet3* VNet（前缀 10.10.0.0/16）的路由。如下图所示，包含 *ChinaNorth-VNet3* VNet 的 VNet 对等互连链接处于 *Disconnected* 状态。
 	
 	![](./media/virtual-network-routes-troubleshoot-portal/image4.png)  
-
 
 	对等互连的双向链接已断开，正因如此，VM1 无法连接到 *ChinaNorth-VNet3* VNet 中的 VM3。为 *ChinaNorth-VNet1* 和 *ChinaNorth-VNet3* VNet 再次设置双向对等互连链接。正确建立 VNet 对等互连链接后，返回的输出如下所示：
 
@@ -131,6 +127,6 @@
 	- 通过 BGP 播发默认路由时
 - 要使 VNet 对等互连流量正常工作，对等互连的 VNet 的前缀范围中必须存在 **nextHopType** 为 *VNetPeering* 的系统路由。如果没有此类路由，并且 VNet 对等互连链接看起来正常：
 	- 如果是新建立的对等互连链接，请等待几秒钟并重试。有时需要花费较长的时间才能将路由传播到子网中的所有网络接口。
-	- 网络安全组 (NSG) 规则可能会影响流量流。有关详细信息，请参阅 [Troubleshoot Network Security Groups](/documentation/articles/virtual-network-nsg-troubleshoot-powershell/)（排查网络安全组问题）一文。
+	- 网络安全组 (NSG) 规则可能会影响流量流。有关详细信息，请参阅 [Troubleshoot Network Security Groups](./virtual-network-nsg-troubleshoot-powershell.md)（排查网络安全组问题）一文。
 
 <!---HONumber=Mooncake_1107_2016-->

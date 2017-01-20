@@ -1,35 +1,34 @@
-<properties
-	pageTitle="如何通过 C++ 使用文件存储 | Azure"
-	description="使用 Azure 文件存储在云中存储文件数据。"
-	services="storage"
-	documentationCenter=".net"
-	authors="seguler"
-	manager="jahogg"
-	editor="tysonn" />  
+---
+title: 如何通过 C++ 使用文件存储 | Azure
+description: 使用 Azure 文件存储在云中存储文件数据。
+services: storage
+documentationCenter: .net
+authors: seguler
+manager: jahogg
+editor: tysonn
 
-
-<tags ms.service="storage"
-	ms.workload="storage"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/10/2016"
-	wacn.date="11/07/2016"
-	ms.author="seguler;robinsh" />  
-
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/10/2016
+wacn.date: 11/07/2016
+ms.author: seguler;robinsh
+---
 
 # 如何通过 C++ 使用文件存储
 
-[AZURE.INCLUDE [storage-selector-file-include](../../includes/storage-selector-file-include.md)]
-[AZURE.INCLUDE [storage-file-overview-include](../../includes/storage-file-overview-include.md)]
+[!INCLUDE [storage-selector-file-include](../../includes/storage-selector-file-include.md)]
+[!INCLUDE [storage-file-overview-include](../../includes/storage-file-overview-include.md)]
 
 ## 关于本教程
 
 在本教程中，会学习如何针对 Azure 文件存储服务执行基本操作。通过以 C++ 编写的示例，学习如何创建共享和目录，以及如何上传、列出和删除文件。如果不熟悉 Azure 文件存储服务，学习后续部分的概念对于理解示例会很有帮助。
 
-[AZURE.INCLUDE [storage-file-concepts-include](../../includes/storage-file-concepts-include.md)]
+[!INCLUDE [storage-file-concepts-include](../../includes/storage-file-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建 C++ 应用程序
 
@@ -157,7 +156,6 @@ Azure 文件存储共享至少包含文件所在的根目录。在本部分，�
 		}		
 	}
 	
-
 ## 如何：下载文件
 
 若要下载文件，请先检索文件引用，然后调用 **download\_to\_stream** 方法，以将文件内容传输到流对象，随后可将该流对象保存到本地本件。或者，可以使用 **download\_to\_file** 方法将文件的内容下载到本地文件。可以使用 **download\_text** 方法以文本字符串形式下载文件的内容。
@@ -327,7 +325,7 @@ Azure 文件存储共享至少包含文件所在的根目录。在本部分，�
 	
 	}
 
-有关创建和使用共享访问签名的详细信息，请参阅[使用共享访问签名 (SAS)](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)。
+有关创建和使用共享访问签名的详细信息，请参阅[使用共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)。
 
 ## 后续步骤
 
@@ -337,6 +335,6 @@ Azure 文件存储共享至少包含文件所在的根目录。在本部分，�
 
 -   [Azure 存储空间资源管理器](http://go.microsoft.com/fwlink/?LinkID=822673&clcid=0x409)
 
--   [Azure 存储空间文档](/documentation/services/storage/)
+-   [Azure 存储空间文档](./index.md/)
 
 <!---HONumber=Mooncake_1031_2016-->

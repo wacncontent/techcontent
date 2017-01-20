@@ -1,38 +1,36 @@
-<properties 
-   pageTitle="排查路由问题 - 门户 | Azure"
-   description="了解如何使用 Azure 门户预览在 Azure Resource Manager 部署模型中排查路由问题。"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="AnithaAdusumilli"
-   manager="narayan"
-   editor=""
-   tags="azure-resource-manager"
-/>  
+---
+title: 排查路由问题 - 门户 | Azure
+description: 了解如何使用 Azure 门户预览在 Azure Resource Manager 部署模型中排查路由问题。
+services: virtual-network
+documentationCenter: na
+authors: AnithaAdusumilli
+manager: narayan
+editor: 
+tags: azure-resource-manager
 
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="09/23/2016"
-   wacn.date="11/14/2016"
-   ms.author="anithaa" />  
-
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 09/23/2016
+wacn.date: 11/14/2016
+ms.author: anithaa
+---
 
 # 使用 Azure 门户预览排查路由问题
 
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/virtual-network-routes-troubleshoot-portal/)
-- [PowerShell](/documentation/articles/virtual-network-routes-troubleshoot-powershell/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./virtual-network-routes-troubleshoot-portal.md)
+- [PowerShell](./virtual-network-routes-troubleshoot-powershell.md)
 
 如果与 Azure 虚拟机 (VM) 之间出现网络连接问题，路由可能会影响 VM 的流量流。本文概述路由诊断功能，帮助用户做进一步的故障排除。
 
 路由表与子网关联，在该子网中的所有网络接口 (NIC) 上有效。可将以下类型的路由应用到每个网络接口：
 
 - **系统路由：**默认情况下，在 Azure 虚拟网络 (VNet) 中创建的每个子网都具有系统路由表，允许传送本地 VNet 流量、通过 VPN 网关的本地流量以及 Internet 流量。对等互连的 VNet 也有系统路由。
-- **BGP 路由：**通过 ExpressRoute 或站点到站点 VPN 连接传播到网络接口。阅读 [BGP with VPN gateways](/documentation/articles/vpn-gateway-bgp-overview/)（使用 VPN 网关的 BGP）和 [ExpressRoute overview](/documentation/articles/expressroute-introduction/)（ExpressRoute 概述）文章，了解有关 BGP 路由的详细信息。
-- **用户定义的路由 (UDR)：**如果使用网络虚拟设备或强制隧道通过站点到站点 VPN 将流量传送到本地网络，可将用户定义的路由 (UDR) 与子网路由表相关联。如果你不熟悉 UDR，请阅读 [user-defined routes](/documentation/articles/virtual-networks-udr-overview/#user-defined-routes)（用户定义的路由）一文。
+- **BGP 路由：**通过 ExpressRoute 或站点到站点 VPN 连接传播到网络接口。阅读 [BGP with VPN gateways](../vpn-gateway/vpn-gateway-bgp-overview.md)（使用 VPN 网关的 BGP）和 [ExpressRoute overview](../expressroute/expressroute-introduction.md)（ExpressRoute 概述）文章，了解有关 BGP 路由的详细信息。
+- **用户定义的路由 (UDR)：**如果使用网络虚拟设备或强制隧道通过站点到站点 VPN 将流量传送到本地网络，可将用户定义的路由 (UDR) 与子网路由表相关联。如果你不熟悉 UDR，请阅读 [user-defined routes](./virtual-networks-udr-overview.md#user-defined-routes)（用户定义的路由）一文。
 
 由于可将各种路由应用到网络接口，因此有时难以确定哪些聚合路由是有效的。为了帮助排查 VM 网络连接问题，可以查看 Azure Resource Manager 部署模型中某个网络接口的所有有效路由。
 
@@ -44,7 +42,7 @@
 
 本文说明如何使用 Azure Resource Manager 部署模型中的有效路由功能确定连接失败的原因。尽管本示例只使用系统路由，但可以使用相同的步骤判断任何路由类型的入站和出站连接失败情况。
 
->[AZURE.NOTE] 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
+>[!NOTE] 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
 
 ### 查看虚拟机的有效路由
 
@@ -57,11 +55,9 @@
 
 	![](./media/virtual-network-routes-troubleshoot-portal/image1.png)  
 
-
 5. 该问题的下面会出现步骤，如下图所示：
 
 	![](./media/virtual-network-routes-troubleshoot-portal/image2.png)  
-
 
 	在建议的步骤列表中单击“有效路由”。
 
@@ -69,10 +65,9 @@
 
 	![](./media/virtual-network-routes-troubleshoot-portal/image3.png)  
 
-
 	如果 VM 只有一个 NIC，则默认已选择该 NIC。如果有多个 NIC，请选择要查看其有效路由的 NIC。
 
-	>[AZURE.NOTE] 如果与 NIC 关联的 VM 不处于运行中状态，将不显示有效路由。门户中只显示前 200 个有效路由。如需完整列表，请单击“下载”。可以在下载的 .csv 文件中进一步筛选结果。
+	>[!NOTE] 如果与 NIC 关联的 VM 不处于运行中状态，将不显示有效路由。门户中只显示前 200 个有效路由。如需完整列表，请单击“下载”。可以在下载的 .csv 文件中进一步筛选结果。
 
 	请注意输出中的以下信息：
 	- **Source**：表示路由的类型。系统路由显示为 *Default*，UDR 显示为 *User*，网关路由（静态或 BGP）显示为 *VPNGateway*。
@@ -84,15 +79,13 @@
 	
 	![](./media/virtual-network-routes-troubleshoot-portal/image4.png)  
 
-
 	对等互连的双向链接已断开，正因如此，VM1 无法连接到 *ChinaNorth-VNet3* VNet 中的 VM3。
 
 8. 下图显示了创建双向对等互连链接后的路由：
 
 	![](./media/virtual-network-routes-troubleshoot-portal/image5.png)  
 
-
-有关强制隧道和路由评估的更多故障排除方案，请阅读本文的[注意事项](/documentation/articles/virtual-network-routes-troubleshoot-portal/#Considerations)部分。
+有关强制隧道和路由评估的更多故障排除方案，请阅读本文的[注意事项](./virtual-network-routes-troubleshoot-portal.md#Considerations)部分。
 
 ### 查看网络接口的有效路由
 
@@ -105,12 +98,9 @@
    
    	![](./media/virtual-network-routes-troubleshoot-portal/image6.png)  
 
-
     “范围”默认设置为选定的网络接口。
 
   	![](./media/virtual-network-routes-troubleshoot-portal/image7.png)  
-
-
 
 ### 查看路由表的有效路由
 
@@ -120,7 +110,6 @@
 
 ![](./media/virtual-network-routes-troubleshoot-portal/image8.png)  
 
-
 若要查看路由表的聚合路由，请完成以下步骤：
 
 1. 登录到 Azure 门户预览 (https://portal.azure.cn)。
@@ -129,15 +118,13 @@
 
 	![](./media/virtual-network-routes-troubleshoot-portal/image9.png)  
 
-
 4. 在“路由表”边栏选项卡中选择“有效路由”。“范围”已设置为选定的路由表。
 5. 一个路由表可以应用到多个子网。从列表中选择想要查看的**子网**。本示例选择了 **Subnet1**。
 6. 选择一个**网络接口**。随后将列出已连接到选定子网的所有 NIC。本示例选择了 **VM1-NIC1**。
 
 	![](./media/virtual-network-routes-troubleshoot-portal/image10.png)  
 
-
-	>[AZURE.NOTE] 如果 NIC 没有与运行中的 VM 关联，则不会显示任何有效路由。
+	>[!NOTE] 如果 NIC 没有与运行中的 VM 关联，则不会显示任何有效路由。
 
 ## <a name="Considerations"></a>注意事项
 
@@ -156,6 +143,6 @@
 	- 通过 BGP 播发默认路由时
 - 要使 VNet 对等互连流量正常工作，对等互连的 VNet 的前缀范围中必须存在 **nextHopType** 为 *VNetPeering* 的系统路由。如果没有此类路由，并且 VNet 对等互连链接看起来正常：
 	- 如果是新建立的对等互连链接，请等待几秒钟并重试。有时需要花费较长的时间才能将路由传播到子网中的所有网络接口。
-	- 网络安全组 (NSG) 规则可能会影响流量流。有关详细信息，请参阅 [Troubleshoot Network Security Groups](/documentation/articles/virtual-network-nsg-troubleshoot-portal/)（排查网络安全组问题）一文。
+	- 网络安全组 (NSG) 规则可能会影响流量流。有关详细信息，请参阅 [Troubleshoot Network Security Groups](./virtual-network-nsg-troubleshoot-portal.md)（排查网络安全组问题）一文。
 
 <!---HONumber=Mooncake_1107_2016-->

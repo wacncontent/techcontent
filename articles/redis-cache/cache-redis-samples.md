@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="Azure Redis 缓存示例 | Azure" 
-	description="了解如何使用 Azure Redis Cache" 
-	services="redis-cache" 
-	documentationCenter="" 
-	authors="steved0x" 
-	manager="douge" 
-	editor=""/>
+---
+title: Azure Redis 缓存示例 | Azure
+description: 了解如何使用 Azure Redis Cache
+services: redis-cache
+documentationCenter: 
+authors: steved0x
+manager: douge
+editor: 
 
-<tags 
-	ms.service="cache" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="cache-redis" 
-	ms.devlang="multiple" 
-	ms.topic="article" 
-	ms.date="08/30/2016" 
-	wacn.date="01/03/2017" 
-	ms.author="sdanie"/>
+ms.service: cache
+ms.workload: tbd
+ms.tgt_pltfrm: cache-redis
+ms.devlang: multiple
+ms.topic: article
+ms.date: 08/30/2016
+wacn.date: 01/03/2017
+ms.author: sdanie
+---
 
 # Azure Redis Cache 示例 
 
@@ -40,9 +40,9 @@
 
 有关详细信息，请参阅 github 上的 [StackExchange.Redis](https://github.com/StackExchange/StackExchange.Redis)；有关更多的使用方案，请参阅 [StackExchange.Redis.Tests](https://github.com/StackExchange/StackExchange.Redis/tree/master/StackExchange.Redis.Tests) 单位测试。
 
-[如何将 Azure Redis 缓存与 Python 配合使用](/documentation/articles/cache-python-get-started/)展示了如何使用 Python 和 [redis-py](https://github.com/andymccurdy/redis-py) 客户端开始使用 Azure Redis 缓存。
+[如何将 Azure Redis 缓存与 Python 配合使用](./cache-python-get-started.md)展示了如何使用 Python 和 [redis-py](https://github.com/andymccurdy/redis-py) 客户端开始使用 Azure Redis 缓存。
 
-[在缓存中处理 .NET 对象](/documentation/articles/cache-dotnet-how-to-use-azure-redis-cache/#work-with-net-objects-in-the-cache)演示了如何对 .NET 对象进行序列化以便可以将其写入到 Azure Redis 缓存实例以及从中进行读取。
+[在缓存中处理 .NET 对象](./cache-dotnet-how-to-use-azure-redis-cache.md#work-with-net-objects-in-the-cache)演示了如何对 .NET 对象进行序列化以便可以将其写入到 Azure Redis 缓存实例以及从中进行读取。
 
 ## 将 Redis Cache 用作 ASP.NET SignalR 的扩展基架
 

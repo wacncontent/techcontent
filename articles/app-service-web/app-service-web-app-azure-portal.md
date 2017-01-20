@@ -1,27 +1,27 @@
-<properties
-	pageTitle="有关在 Azure 门户预览中导航的参考"
-	description="了解在管理门户与 Azure 门户预览中使用 App Service Web 的不同用户体验"
-	services="app-service"
-	documentationCenter=""
-	authors="jaime-espinosa"
-	manager="wpickett"
-	editor="jimbe"/>
+---
+title: 有关在 Azure 门户预览中导航的参考
+description: 了解在管理门户与 Azure 门户预览中使用 App Service Web 的不同用户体验
+services: app-service
+documentationCenter: 
+authors: jaime-espinosa
+manager: wpickett
+editor: jimbe
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="02/26/2016"
-	wacn.date="09/26/2016"
-	ms.author="jaime-espinosa"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 02/26/2016
+wacn.date: 09/26/2016
+ms.author: jaime-espinosa
+---
 
 # 有关在 Azure 门户预览中导航的参考
 
-Azure 网站现在称为 [App Service Web Apps](/documentation/articles/app-service-changes-existing-services/)。我们正在更新所有文档以反应此名称更改，并为 Azure 门户预览提供说明。完成该过程之前，你可以使用此文档作为在新 Azure 门户预览中使用 Web Apps 的指南。
+Azure 网站现在称为 [App Service Web Apps](./app-service-changes-existing-services.md)。我们正在更新所有文档以反应此名称更改，并为 Azure 门户预览提供说明。完成该过程之前，你可以使用此文档作为在新 Azure 门户预览中使用 Web Apps 的指南。
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
  
 ## Azure 经典门户的未来趋势
 
@@ -47,7 +47,7 @@ Azure 门户预览则可以利用多个服务中的组件端对端地轻松构�
 
 ![](./media/app-service-web-app-azure-portal/CreateWebAppSettings.png)
 
-此外，你可以在新门户中定义其他通用设置。例如，通过[资源组](/documentation/articles/resource-group-overview/)可以轻松查看和管理相关 Azure 资源。
+此外，你可以在新门户中定义其他通用设置。例如，通过[资源组](../azure-resource-manager/resource-group-overview.md)可以轻松查看和管理相关 Azure 资源。
 
 ## 浏览示例：设置和功能
 
@@ -81,7 +81,6 @@ Azure 门户预览则可以利用多个服务中的组件端对端地轻松构�
 [Azure 库]: /marketplace/
 
 ## 发生的更改
-* 有关从网站更改为 App Service 的指南，请参阅：[Azure App Service 及其对现有 Azure 服务的影响](/documentation/articles/app-service-changes-existing-services/)
+* 有关从网站更改为 App Service 的指南，请参阅：[Azure App Service 及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
  
-
 <!---HONumber=Mooncake_0328_2016-->

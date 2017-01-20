@@ -1,17 +1,17 @@
-<properties
-                pageTitle="如何配置 Azure Blob 存储中文件的互联网媒体类型"
-                description="配置 Azure Blob 存储中文件的互联网媒体类型以避免被点击时反复下载"
-                services="storage"
-                documentationCenter=""
-                authors=""
-                manager=""
-                editor=""
-                tags="存储,Blob,互联网媒体类型,MIME,AzCopy, Azure Storage Explorer"/>
+---
+title: 如何配置 Azure Blob 存储中文件的互联网媒体类型
+description: 配置 Azure Blob 存储中文件的互联网媒体类型以避免被点击时反复下载
+services: storage
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 存储,Blob,互联网媒体类型,MIME,AzCopy, Azure Storage Explorer
 
-<tags
-                ms.service="storage-aog"
-                ms.date="12/15/2016"
-                wacn.date="12/15/2016"/>
+ms.service: storage-aog
+ms.date: 12/15/2016
+wacn.date: 12/15/2016
+---
 
 # 如何配置 Azure Blob 存储中文件的互联网媒体类型
 
@@ -35,7 +35,7 @@ Azure Blob 存储支持大部分常见的互联网媒体类型，并将媒体类
 
 ### 如何在上传时自动设置正确的内容类型 ###
 
-目前，通过 Azure 存储传输工具 [AzCopy](/documentation/articles/storage-use-azcopy/) 或管理工具 Azure Storage Explorer（[Windows](http://go.microsoft.com/fwlink/?linkid=698844&clcid=0x804)/[Mac](http://go.microsoft.com/fwlink/?linkid=698845&clcid=0x804)）上传到 Blob 存储的文件都会通过分析文件的后缀名，被自动加上正确的内容类型。如果需要通过客户自定义代码上传文件，可以引用 .Net Framework 4.5 BCL 库中的 [System.Web.MimeMapping](https://msdn.microsoft.com/zh-cn/library/system.web.mimemapping.getmimemapping.aspx) 类，或在代码中加入[ MIME 类型词典](https://github.com/samuelneff/MimeTypeMap)进行媒体类型的判断（三方代码，仅供参考）。
+目前，通过 Azure 存储传输工具 [AzCopy](./storage/storage-use-azcopy.md) 或管理工具 Azure Storage Explorer（[Windows](http://go.microsoft.com/fwlink/?linkid=698844&clcid=0x804)/[Mac](http://go.microsoft.com/fwlink/?linkid=698845&clcid=0x804)）上传到 Blob 存储的文件都会通过分析文件的后缀名，被自动加上正确的内容类型。如果需要通过客户自定义代码上传文件，可以引用 .Net Framework 4.5 BCL 库中的 [System.Web.MimeMapping](https://msdn.microsoft.com/zh-cn/library/system.web.mimemapping.getmimemapping.aspx) 类，或在代码中加入[ MIME 类型词典](https://github.com/samuelneff/MimeTypeMap)进行媒体类型的判断（三方代码，仅供参考）。
 
 ### 如何更改已上传的文件内容类型 ###
 
@@ -43,7 +43,7 @@ Azure Blob 存储支持大部分常见的互联网媒体类型，并将媒体类
 
 ![properties](./media/aog-storage-blob-howto-store-mime-type/properties.png)
 
->[AZURE.NOTE] Azure Storage Explorer 在 `0.8.6` 及以上版本才有修改 Blob 及文件的属性的功能。如发现无法修改 Blob 属性，请升级至最新版。
+>[!NOTE] Azure Storage Explorer 在 `0.8.6` 及以上版本才有修改 Blob 及文件的属性的功能。如发现无法修改 Blob 属性，请升级至最新版。
 
 对于一个 Blob 容器内所有文件的批处理，可以参考 PowerShell 脚本 [How to batch change the content type of Microsoft Azure blob storage(PowerShell)](https://gallery.technet.microsoft.com/How-to-batch-change-the-47e310b4)。
 

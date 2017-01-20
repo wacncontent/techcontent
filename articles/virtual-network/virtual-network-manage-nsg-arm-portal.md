@@ -1,38 +1,37 @@
-<properties
-    pageTitle="使用 Azure 门户预览管理 NSG | Azure"
-    description="了解如何使用 Azure 门户预览管理现有 NSG。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 Azure 门户预览管理 NSG | Azure
+description: 了解如何使用 Azure 门户预览管理现有 NSG。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="5d55679d-57da-457c-97dc-1e1973909ee5"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="03/14/2016"
-    wacn.date="12/26/2016"
-    ms.author="jdial" />  
-
+ms.assetid: 5d55679d-57da-457c-97dc-1e1973909ee5
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/14/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 使用门户管理 NSG
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/virtual-network-manage-nsg-arm-portal/)
-- [PowerShell](/documentation/articles/virtual-network-manage-nsg-arm-ps/)
-- [Azure CLI](/documentation/articles/virtual-network-manage-nsg-arm-cli/)
+> [!div class="op_single_selector"]
+- [门户](./virtual-network-manage-nsg-arm-portal.md)
+- [PowerShell](./virtual-network-manage-nsg-arm-ps.md)
+- [Azure CLI](./virtual-network-manage-nsg-arm-cli.md)
 
-[AZURE.INCLUDE [virtual-network-manage-nsg-intro-include.md](../../includes/virtual-network-manage-nsg-intro-include.md)]
+[!INCLUDE [virtual-network-manage-nsg-intro-include.md](../../includes/virtual-network-manage-nsg-intro-include.md)]
 
-> [AZURE.NOTE]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型。
+> [!NOTE]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型。
 > 
 
-[AZURE.INCLUDE [virtual-network-manage-nsg-arm-scenario-include.md](../../includes/virtual-network-manage-nsg-arm-scenario-include.md)]
+[!INCLUDE [virtual-network-manage-nsg-arm-scenario-include.md](../../includes/virtual-network-manage-nsg-arm-scenario-include.md)]
 
 ## 检索信息
 可以查看你的现有 NSG、检索现有 NSG 的规则和查找与 NSG 关联的资源。
@@ -63,7 +62,6 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 	![Azure 门户预览 - NSG](./media/virtual-network-manage-nsg-arm-portal/figure4.png)  
 
-
 ### 列出 NSG 的所有规则
 
 若要查看名为 **NSG-FrontEnd** 的 NSG 的规则，请完成以下步骤：
@@ -80,7 +78,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 4. 在“设置”选项卡中，单击“出站安全规则”，查看出站规则。
 
-	> [AZURE.NOTE]
+	> [!NOTE]
 	若要查看默认规则，请单击显示规则的边栏选项卡顶部的“默认规则”图标。
 	> 
 
@@ -152,7 +150,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 	![Azure 门户预览 - NSG](./media/virtual-network-manage-nsg-arm-portal/figure13.png)  
 
-> [AZURE.NOTE]
+> [!NOTE]
 还可使用此边栏选项卡将 NIC 关联到任意现有 NSG。
 >
 
@@ -178,7 +176,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 2. 在“设置”边栏选项卡中，单击“子网”>“FrontEnd”>“网络安全组”>“NSG-FrontEnd”。
 3. 在“FrontEnd”边栏选项卡中，单击“保存”。
 
-> [AZURE.NOTE]
+> [!NOTE]
 还可以在 NSG 的“设置”边栏选项卡中将 NSG 关联到子网。
 > 
 
@@ -196,6 +194,6 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 	![Azure 门户预览 - NSG](./media/virtual-network-manage-nsg-arm-portal/figure16.png)
 
 ## 后续步骤
-* 为 NSG [启用日志记录](/documentation/articles/virtual-network-nsg-manage-log/)。
+* 为 NSG [启用日志记录](./virtual-network-nsg-manage-log.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

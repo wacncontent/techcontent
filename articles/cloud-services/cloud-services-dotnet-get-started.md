@@ -1,32 +1,31 @@
-<properties
-	pageTitle="Azure 云服务和 ASP.NET 入门 | Azure"
-	description="了解如何使用 ASP.NET MVC 和 Azure 创建多层应用程序。该应用程序运行在云服务中，带有 web 角色和辅助角色。它使用实体框架、SQL 数据库和 Azure 存储队列和 Blob。"
-	services="cloud-services, storage"
-	documentationCenter=".net"
-	authors="Thraka"
-	manager="timlt"
-	editor=""/>  
+---
+title: Azure 云服务和 ASP.NET 入门 | Azure
+description: 了解如何使用 ASP.NET MVC 和 Azure 创建多层应用程序。该应用程序运行在云服务中，带有 web 角色和辅助角色。它使用实体框架、SQL 数据库和 Azure 存储队列和 Blob。
+services: cloud-services, storage
+documentationCenter: .net
+authors: Thraka
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="cloud-services"
-	ms.workload="tbd"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="hero-article"
-	ms.date="11/16/2016"
-	wacn.date="01/03/2017"
-	ms.author="adegeo"/>
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: hero-article
+ms.date: 11/16/2016
+wacn.date: 01/03/2017
+ms.author: adegeo
+---
 
 # Azure 云服务和 ASP.NET 入门
 
-> [AZURE.SELECTOR]
-- [Node.js](/documentation/articles/cloud-services-nodejs-develop-deploy-app/)
-- [.NET](/documentation/articles/cloud-services-dotnet-get-started/)
+> [!div class="op_single_selector"]
+- [Node.js](./cloud-services-nodejs-develop-deploy-app.md)
+- [.NET](./cloud-services-dotnet-get-started.md)
 
 ## 概述
 
-本教程演示如何使用 ASP.NET MVC 前端创建多层.NET 应用程序，并将其部署到 [Azure 云服务](/documentation/articles/cloud-services-choose-me/)。应用程序使用 [Azure SQL 数据库](http://msdn.microsoft.com/zh-cn/library/azure/ee336279)、[Azure Blob 服务](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/unstructured-blob-storage)和 [Azure 队列服务](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/queue-centric-work-pattern)。你可以从 MSDN 代码库[下载 Visual Studio 项目](http://code.msdn.microsoft.com/Simple-Azure-Cloud-Service-e01df2e4)。
+本教程演示如何使用 ASP.NET MVC 前端创建多层.NET 应用程序，并将其部署到 [Azure 云服务](./cloud-services-choose-me.md)。应用程序使用 [Azure SQL 数据库](http://msdn.microsoft.com/zh-cn/library/azure/ee336279)、[Azure Blob 服务](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/unstructured-blob-storage)和 [Azure 队列服务](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/queue-centric-work-pattern)。你可以从 MSDN 代码库[下载 Visual Studio 项目](http://code.msdn.microsoft.com/Simple-Azure-Cloud-Service-e01df2e4)。
 
 本教程介绍如何生成并本地运行应用程序、如何将其部署到 Azure 并在云中运行，以及最终如何从头构建。您可以从头构建然后进行测试，之后根据您的喜好部署步骤。
 
@@ -40,7 +39,7 @@
 
 ## 替代体系结构：网站和 Web 作业
 
-本教程演示如何在 Azure 云服务中运行前端和后端。一种替代方法是在 [Azure 网站](/documentation/services/web-sites/)中运行前端，并为后端使用 [Web 作业](/documentation/articles/websites-webjobs-resources/)功能（目前以预览版提供）。有关如何使用 Web 作业的教程，请参阅 [Azure WebJobs SDK 入门](/documentation/articles/websites-dotnet-webjobs-sdk-get-started/)。有关如何选择最适合你方案的服务信息，请参阅 [Azure 网站、云服务和虚拟机的比较](/documentation/articles/choose-web-site-cloud-service-vm/)。
+本教程演示如何在 Azure 云服务中运行前端和后端。一种替代方法是在 [Azure 网站](../app-service-web/index.md/)中运行前端，并为后端使用 [Web 作业](../app-service-web/websites-webjobs-resources.md)功能（目前以预览版提供）。有关如何使用 Web 作业的教程，请参阅 [Azure WebJobs SDK 入门](../app-service-web/websites-dotnet-webjobs-sdk-get-started.md)。有关如何选择最适合你方案的服务信息，请参阅 [Azure 网站、云服务和虚拟机的比较](../app-service-web/choose-web-site-cloud-service-vm.md)。
 
 ## 学习内容
 
@@ -53,9 +52,9 @@
 
 ## 先决条件
 
-本教程假定你了解[有关 Azure 云服务的基本概念](/documentation/articles/cloud-services-choose-me/)，例如 *Web 角色*和*辅助角色*术语。此外，还假设你知道如何处理 Visual Studio 中的 [ASP.NET MVC](http://www.asp.net/mvc/tutorials/mvc-5/introduction/getting-started) 或 [Web 窗体](http://www.asp.net/web-forms/tutorials/aspnet-45/getting-started-with-aspnet-45-web-forms/introduction-and-overview)项目。示例应用程序使用 MVC，但在本教程的大部分也适用于 Web 窗体。
+本教程假定你了解[有关 Azure 云服务的基本概念](./cloud-services-choose-me.md)，例如 *Web 角色*和*辅助角色*术语。此外，还假设你知道如何处理 Visual Studio 中的 [ASP.NET MVC](http://www.asp.net/mvc/tutorials/mvc-5/introduction/getting-started) 或 [Web 窗体](http://www.asp.net/web-forms/tutorials/aspnet-45/getting-started-with-aspnet-45-web-forms/introduction-and-overview)项目。示例应用程序使用 MVC，但在本教程的大部分也适用于 Web 窗体。
 
-可本地运行应用而无需 Azure 订阅，但需要订阅才能将应用程序部署到云。如果你没有帐户，可以[注册试用版](/pricing/1rmb-trial)。
+可本地运行应用而无需 Azure 订阅，但需要订阅才能将应用程序部署到云。如果你没有帐户，可以[注册试用版](https://www.azure.cn/pricing/1rmb-trial)。
 
 教程说明使用以下产品之一：
 
@@ -74,7 +73,7 @@
 
 ![Contoso 广告体系结构](./media/cloud-services-dotnet-get-started/apparchitecture.png)
 
-[AZURE.INCLUDE [install-sdk](../../includes/install-sdk-2015-2013.md)]
+[!INCLUDE [install-sdk](../../includes/install-sdk-2015-2013.md)]
 
 ## 下载并运行已完成的解决方案
 
@@ -207,7 +206,7 @@ Azure 存储帐户提供在云中存储队列和 Blob 数据的资源。
 
 6. 将“复制”下拉列表设置为“本地冗余”。
 
-	为存储帐户启用地域复制时，会将存储内容复制到辅助数据中心，这样就能够在主要位置发生重大灾难时将故障转移到该位置。地域复制可能会产生额外的成本。对于测试和开发帐户，你通常不希望因为地域复制而付款。有关详细信息，请参阅[创建、管理或删除存储帐户](/documentation/articles/storage-create-storage-account/)。
+	为存储帐户启用地域复制时，会将存储内容复制到辅助数据中心，这样就能够在主要位置发生重大灾难时将故障转移到该位置。地域复制可能会产生额外的成本。对于测试和开发帐户，你通常不希望因为地域复制而付款。有关详细信息，请参阅[创建、管理或删除存储帐户](../storage/storage-create-storage-account.md)。
 
 5. 单击“创建存储帐户”。
 
@@ -221,7 +220,7 @@ Web 项目和辅助角色项目自身具有数据库连接字符串，并且当�
 
 你将为 Web 角色使用 [Web.config 转换](http://www.asp.net/mvc/tutorials/deployment/visual-studio-web-deployment/web-config-transformations)，为辅助角色使用云服务环境设置。
 
->[AZURE.NOTE] 在本部分和下一部分中，你将在项目文件中存储凭据。[不要将敏感数据存储在公共源代码存储库中](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/source-control#secrets)。
+>[!NOTE] 在本部分和下一部分中，你将在项目文件中存储凭据。[不要将敏感数据存储在公共源代码存储库中](http://www.asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/source-control#secrets)。
 
 1. 在 ContosoAdsWeb 项目中，为应用程序 *Web.config* 文件打开 *Web.Release.config* 转换文件，删除包含 `<connectionStrings>` 元素的注释块，并在其原位置粘贴下面的代码。
 
@@ -349,7 +348,7 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
 7. 就像在本地运行应用程序一样，现在可以通过创建、查看和编辑一些广告测试应用程序。
 
->[AZURE.NOTE] 完成测试后，删除或停止云服务。即使你不使用云服务，也会产生费用，因为要为它保留虚拟机资源。如果保持运行云服务，找到你 URL 的任何人都可以创建和查看广告。在 [Azure 经典管理门户](http://manage.windowsazure.cn)中，转到云服务的“仪表板”选项卡，然后单击页面底部的“删除”按钮。如果你只是想要暂时防止其他人访问站点，请单击“停止”。在这种情况下，会继续产生费用。当你不再需要 SQL 数据库和存储帐户时，可以遵循类似的过程将其删除。
+>[!NOTE] 完成测试后，删除或停止云服务。即使你不使用云服务，也会产生费用，因为要为它保留虚拟机资源。如果保持运行云服务，找到你 URL 的任何人都可以创建和查看广告。在 [Azure 经典管理门户](http://manage.windowsazure.cn)中，转到云服务的“仪表板”选项卡，然后单击页面底部的“删除”按钮。如果你只是想要暂时防止其他人访问站点，请单击“停止”。在这种情况下，会继续产生费用。当你不再需要 SQL 数据库和存储帐户时，可以遵循类似的过程将其删除。
 
 ## 从头开始创建应用程序
 
@@ -771,7 +770,7 @@ Azure 辅助角色环境在辅助角色启动时调用 `WorkerRole` 类中的 `O
 
 此代码读取数据库以获取图像 URL、将图像转换为一个缩略图、在 blob 中保存缩略图、用缩略图 blob URL 更新数据库并删除队列消息。
 
->[AZURE.NOTE] 为简单起见，`ConvertImageToThumbnailJPG` 方法中的代码使用 System.Drawing 命名空间中的类。但是，此命名空间中的类已设计用于 Windows 窗体。不支持在 Windows 或 ASP.NET 服务中使用。有关图像处理选项的详细信息，请参阅[动态图像生成](http://www.hanselman.com/blog/BackToBasicsDynamicImageGenerationASPNETControllersRoutingIHttpHandlersAndRunAllManagedModulesForAllRequests.aspx)和[深入学习图像大小调整](http://www.hanselminutes.com/313/deep-inside-image-resizing-and-scaling-with-aspnet-and-iis-with-imageresizingnet-author-na)。
+>[!NOTE] 为简单起见，`ConvertImageToThumbnailJPG` 方法中的代码使用 System.Drawing 命名空间中的类。但是，此命名空间中的类已设计用于 Windows 窗体。不支持在 Windows 或 ASP.NET 服务中使用。有关图像处理选项的详细信息，请参阅[动态图像生成](http://www.hanselman.com/blog/BackToBasicsDynamicImageGenerationASPNETControllersRoutingIHttpHandlersAndRunAllManagedModulesForAllRequests.aspx)和[深入学习图像大小调整](http://www.hanselminutes.com/313/deep-inside-image-resizing-and-scaling-with-aspnet-and-iis-with-imageresizingnet-author-na)。
 
 ## 故障排除
 
@@ -812,7 +811,7 @@ Contoso 广告应用程序有意保持入门教程的简单性。例如，它没
 有关详细信息，请参阅以下资源：
 
 * [Azure 云服务的第 1 部分：简介](http://justazure.com/microsoft-azure-cloud-services-part-1-introduction)
-* [如何管理云服务](/documentation/articles/cloud-services-how-to-manage/)
-* [Azure 存储空间](/documentation/services/storage/)
+* [如何管理云服务](./cloud-services-how-to-manage.md)
+* [Azure 存储空间](../storage/index.md/)
 
 <!---HONumber=Mooncake_1226_2016-->

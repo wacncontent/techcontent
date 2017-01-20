@@ -1,21 +1,21 @@
-<properties
-   pageTitle="与安全边界环境配合使用的示例应用程序 | Azure"
-   description="在创建外围网络后部署这一简单 Web 应用，以测试流量传送方案"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="tracsman"
-   manager="rossort"
-   editor=""/>
+---
+title: 与安全边界环境配合使用的示例应用程序 | Azure
+description: 在创建外围网络后部署这一简单 Web 应用，以测试流量传送方案
+services: virtual-network
+documentationCenter: na
+authors: tracsman
+manager: rossort
+editor: 
 
-<tags
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="02/01/2016"
-   wacn.date="12/26/2016"
-   ms.author="jonor"/>
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/01/2016
+wacn.date: 12/26/2016
+ms.author: jonor
+---
 
 # 与安全边界环境配合使用的示例应用程序
 
@@ -137,7 +137,6 @@
 		Write-Host "Web App Creation Successfull!" -ForegroundColor Green
 		Write-Host
 
-
 ## AppVM01 - 文件服务器安装脚本
 此脚本设置此简单应用程序的后端。此脚本将执行以下操作：
 
@@ -147,7 +146,7 @@
 4.	将目录和文件的权限设为匿名以允许访问
 5.	关闭 IE 增强的安全性以方便从此服务器浏览 
 
->[AZURE.IMPORTANT] **最佳实践**：切勿在生产服务器上关闭“IE 增强的安全性”，并且通常不应从生产服务器浏览网页。此外，最好不要向匿名访问公开文件共享，此处这样做是为了简单起见。
+>[!IMPORTANT] **最佳实践**：切勿在生产服务器上关闭“IE 增强的安全性”，并且通常不应从生产服务器浏览网页。此外，最好不要向匿名访问公开文件共享，此处这样做是为了简单起见。
 
 通过 RDP 访问 AppVM01 时，此 PowerShell 脚本应在本地运行。必须以管理员身份运行 PowerShell 才能确保成功执行。
 	
@@ -180,11 +179,10 @@
 	    Write-Host "File Server Setup Successfull!" -ForegroundColor Green
 	    Write-Host
 	
-
 ## DNS01 - DNS 服务器安装脚本
 本示例应用程序中未包含设置 DNS 服务器的脚本。如果测试防火墙规则、NSG 或 UDR 需要包含 DNS 流量，则需手动安装 DNS01 服务器。这两个示例的网络配置 XML 文件都包含 DNS01 作为主要 DNS 服务器，且包含第 3 级托管的公共 DNS 服务器则作为备份 DNS 服务器。第 3 级 DNS 服务器是非本地流量使用的实际 DNS 服务器，若未安装 DNS01，就不会有本地 DNS。
 
 <!--Link References-->
-[HOME]: /documentation/articles/best-practices-network-security/
+[HOME]: ../security/best-practices-network-security.md
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

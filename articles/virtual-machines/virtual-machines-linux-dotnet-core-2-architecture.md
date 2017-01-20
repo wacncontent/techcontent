@@ -1,24 +1,22 @@
-<properties
-   pageTitle="使用 Azure Resource Manager 模板部署计算资源 | Azure"
-   description="Azure 虚拟机 DotNet Core 教程"
-   services="virtual-machines-linux"
-   documentationCenter="virtual-machines"
-   authors="neilpeterson"
-   manager="timlt"
-   editor="tysonn"
-   tags="azure-service-management"/>  
+---
+title: 使用 Azure Resource Manager 模板部署计算资源 | Azure
+description: Azure 虚拟机 DotNet Core 教程
+services: virtual-machines-linux
+documentationCenter: virtual-machines
+authors: neilpeterson
+manager: timlt
+editor: tysonn
+tags: azure-service-management
 
-
-<tags
-   ms.service="virtual-machines-linux"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-linux"
-   ms.workload="infrastructure"
-   ms.date="11/21/2016"
-   wacn.date="12/30/2016"
-   ms.author="nepeters"/>  
-
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
+ms.date: 11/21/2016
+wacn.date: 12/30/2016
+ms.author: nepeters
+---
 
 # 使用 Azure Resource Manager 模板的应用程序体系结构
 
@@ -62,7 +60,6 @@
 
 ![虚拟机](./media/virtual-machines-linux-dotnet-core/vm.png)  
 
-
 ## 存储帐户
 
 存储帐户有许多存储选项和功能。在 Azure 虚拟机的上下文中，存储帐户保存虚拟机的虚拟硬盘和其他任何数据磁盘。音乐应用商店示例包含一个存储帐户，其中保存了部署中每个虚拟机的虚拟硬盘。
@@ -99,13 +96,11 @@
 
 ![存储帐户](./media/virtual-machines-linux-dotnet-core/storacct.png)  
 
-
 单击进入存储帐户 Blob 容器，即可查看使用模板部署的每个虚拟机的虚拟硬盘文件。
 
 ![虚拟硬盘](./media/virtual-machines-linux-dotnet-core/vhd.png)  
 
-
-有关 Azure 存储的信息，请参阅 [Azure 存储文档](/documentation/services/storage/)。
+有关 Azure 存储的信息，请参阅 [Azure 存储文档](../storage/index.md/)。
 
 ## 虚拟网络
 
@@ -147,7 +142,6 @@
 在 Azure 门户预览中，虚拟网络如下图所示。请注意，使用模板部署的所有虚拟机都已附加到虚拟网络。
 
 ![虚拟网络](./media/virtual-machines-linux-dotnet-core/vnet.png)  
-
 
 ## 网络接口
 
@@ -214,8 +208,7 @@
 
 ![网络接口](./media/virtual-machines-linux-dotnet-core/nic.png)  
 
-
-有关 Azure 虚拟网络的详细信息，请参阅 [Azure 虚拟网络文档](/documentation/services/networking/)。
+有关 Azure 虚拟网络的详细信息，请参阅 [Azure 虚拟网络文档](../virtual-network/index.md/)。
 
 ## Azure SQL 数据库
 
@@ -260,13 +253,12 @@ Azure 门户预览中显示的 SQL Server 和 MusicStore 数据库视图。
 
 ![SQL Server](./media/virtual-machines-linux-dotnet-core/sql.png)  
 
-
-有关部署 Azure SQL 数据库的详细信息，请参阅 [Azure SQL 数据库文档](/documentation/services/sql-databases/)。
+有关部署 Azure SQL 数据库的详细信息，请参阅 [Azure SQL 数据库文档](../sql-database/index.md/)。
 
 ## 后续步骤
 
 <hr>
 
-[步骤 2 - Azure Resource Manager 模板中的访问权限和安全性](/documentation/articles/virtual-machines-linux-dotnet-core-3-access-security/)
+[步骤 2 - Azure Resource Manager 模板中的访问权限和安全性](./virtual-machines-linux-dotnet-core-3-access-security.md)
 
 <!---HONumber=Mooncake_1114_2016-->

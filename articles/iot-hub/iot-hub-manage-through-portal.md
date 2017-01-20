@@ -1,16 +1,16 @@
-<properties
-	 pageTitle="使用 Azure 门户管理 IoT 中心 | Azure"
-	 description="概述如何通过 Azure 门户创建和管理 Azure IoT 中心"
-	 services="iot-hub"
-	 documentationCenter=""
-	 authors="nasing"
-	 manager="timlt"
-	 editor=""/>
+---
+title: 使用 Azure 门户管理 IoT 中心 | Azure
+description: 概述如何通过 Azure 门户创建和管理 Azure IoT 中心
+services: iot-hub
+documentationCenter: 
+authors: nasing
+manager: timlt
+editor: 
 
-<tags
-	 ms.service="iot-hub"
-	 ms.date="08/11/2016"
-	 wacn.date="01/09/2017"/>
+ms.service: iot-hub
+ms.date: 08/11/2016
+wacn.date: 01/09/2017
+---
 
 # 通过 Azure 门户管理 IoT 中心
 
@@ -50,7 +50,7 @@
 
 ![][4]
 
-> [AZURE.NOTE] IoT 中心只允许每个订阅有一个免费中心。
+> [!NOTE] IoT 中心只允许每个订阅有一个免费中心。
 
 ### IoT 中心单位
 
@@ -114,7 +114,7 @@ Azure IoT 中心自动显示用户帐户所链接的订阅列表。可以在此�
 
 **使用者组**：使用者组是一种类似于其他消息传送系统的设置，可用于通过特定方式拉取数据，以将其他应用程序或服务连接到 IoT 中心。创建的每个 IoT 中心都包含一个默认使用者组。但是，你可以在 IoT 中心添加或删除使用者组。
 
-> [AZURE.NOTE] 无法编辑或删除默认使用者组。
+> [!NOTE] 无法编辑或删除默认使用者组。
 
 ![][11]
 
@@ -166,7 +166,6 @@ Azure IoT 中心自动显示用户帐户所链接的订阅列表。可以在此�
 - [开发人员指南][lnk-devguide]
 - [使用网关 SDK 模拟设备][lnk-gateway]
 
-
 [4]: ./media/iot-hub-manage-through-portal/create-iothub.png
 [5]: ./media/iot-hub-manage-through-portal/location1.png
 [8]: ./media/iot-hub-manage-through-portal/portal-settings.png
@@ -176,15 +175,15 @@ Azure IoT 中心自动显示用户帐户所链接的订阅列表。可以在此�
 [13]: ./media/iot-hub-manage-through-portal/file-upload-settings.png
 [14]: ./media/iot-hub-manage-through-portal/file-upload-container-selection.png
 
-[lnk-get-started]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
-[Azure IoT 中心是什么？]: /documentation/articles/iot-hub-what-is-iot-hub/
-[lnk-bulk]: /documentation/articles/iot-hub-bulk-identity-mgmt/
-[lnk-metrics]: /documentation/articles/iot-hub-metrics/
-[lnk-monitor]: /documentation/articles/iot-hub-operations-monitoring/
-[lnk-itpro]: /documentation/articles/iot-hub-itpro-info/
+[lnk-get-started]: ./iot-hub-csharp-csharp-getstarted.md
+[Azure IoT 中心是什么？]: ./iot-hub-what-is-iot-hub.md
+[lnk-bulk]: ./iot-hub-bulk-identity-mgmt.md
+[lnk-metrics]: ./iot-hub-metrics.md
+[lnk-monitor]: ./iot-hub-operations-monitoring.md
+[lnk-itpro]: ./iot-hub-itpro-info.md
 
-[lnk-design]: /documentation/articles/iot-hub-guidance/
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-design]: ./iot-hub-guidance.md
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
 [lnk-securing]: /documentation/articles/iot-hub-security-ground-up/
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

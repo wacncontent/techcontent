@@ -1,29 +1,29 @@
-<properties
-	pageTitle="Azure 应用服务中 API 应用的用户身份验证 | Azure"
-	description="了解如何通过将访问权限只授予经过身份验证的用户，来保护 Azure 应用服务中的 API 应用。"
-	services="app-service\api"
-	documentationCenter=".net"
-	authors="tdykstra"
-	manager="wpickett"
-	editor=""/>
+---
+title: Azure 应用服务中 API 应用的用户身份验证 | Azure
+description: 了解如何通过将访问权限只授予经过身份验证的用户，来保护 Azure 应用服务中的 API 应用。
+services: app-service\api
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="app-service-api"
-	ms.workload="na"
-	ms.tgt_pltfrm="dotnet"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="06/30/2016"
-	wacn.date="11/25/2016"
-	ms.author="rachelap"/>
+ms.service: app-service-api
+ms.workload: na
+ms.tgt_pltfrm: dotnet
+ms.devlang: na
+ms.topic: article
+ms.date: 06/30/2016
+wacn.date: 11/25/2016
+ms.author: rachelap
+---
 
 # Azure 应用服务中 API 应用的用户身份验证
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 ## 概述
 
-本文说明如何保护 Azure API 应用，以便只有经过身份验证的用户可以调用它。本文假设读者已阅读 [Azure App Service authentication overview](/documentation/articles/app-service-authentication-overview/)（Azure 应用服务身份验证概述）。
+本文说明如何保护 Azure API 应用，以便只有经过身份验证的用户可以调用它。本文假设读者已阅读 [Azure App Service authentication overview](../app-service/app-service-authentication-overview.md)（Azure 应用服务身份验证概述）。
 
 学习内容：
 
@@ -52,7 +52,7 @@
 
 	* 如果要让所有调用进入 API 应用，请选择“允许请求(无操作)”。可以使用此选项将未经身份验证的调用方定向到所选的身份验证提供程序。若要使用此选项，必须编写代码来处理授权。
 
-	有关详细信息，请参阅 [Authentication and authorization for API Apps in Azure App Service](/documentation/articles/app-service-api-authentication/#multiple-protection-options)（Azure 应用服务中 API 应用的身份验证和授权）。
+	有关详细信息，请参阅 [Authentication and authorization for API Apps in Azure App Service](./app-service-api-authentication.md#multiple-protection-options)（Azure 应用服务中 API 应用的身份验证和授权）。
 
 5. 选择一个或多个**身份验证提供程序**。
 
@@ -62,7 +62,7 @@
 
 	选择身份验证提供程序后，门户将显示该提供程序的配置边栏选项卡。
 
-	有关如何配置身份验证提供程序配置边栏选项卡的详细说明，请参阅 [How to configure your App Service application to use Azure Active Directory login](/documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）。（单击该链接会转到有关 Azure AD 的文章，但该文章本身包含指向其他身份验证提供程序文章的选项卡。）
+	有关如何配置身份验证提供程序配置边栏选项卡的详细说明，请参阅 [How to configure your App Service application to use Azure Active Directory login](../app-service-mobile/app-service-mobile-how-to-configure-active-directory-authentication.md)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）。（单击该链接会转到有关 Azure AD 的文章，但该文章本身包含指向其他身份验证提供程序文章的选项卡。）
 
 7. 完成身份验证提供程序配置边栏选项卡中的操作后，单击“确定”。
 
@@ -74,15 +74,15 @@
 
 ## <a id="tutorialstart"></a>继续学习 .NET API 应用教程
 
-如果要遵循适用于 API 应用的 Node.js 或 Java 教程，请跳到下一篇文章：[service principal authentication for API apps](/documentation/articles/app-service-api-dotnet-service-principal-auth/)（API 应用的服务主体身份验证）。
+如果要遵循适用于 API 应用的 Node.js 或 Java 教程，请跳到下一篇文章：[service principal authentication for API apps](./app-service-api-dotnet-service-principal-auth.md)（API 应用的服务主体身份验证）。
 
-如果要遵循适用于 API 应用的 .NET 系列教程，并已根据[第一篇](/documentation/articles/app-service-api-dotnet-get-started/)和[第二篇](/documentation/articles/app-service-api-cors-consume-javascript/)教程中的说明部署示例应用程序，请跳到[在应用服务和 Azure AD 中设置身份验证](#azureauth)部分。
+如果要遵循适用于 API 应用的 .NET 系列教程，并已根据[第一篇](./app-service-api-dotnet-get-started.md)和[第二篇](./app-service-api-cors-consume-javascript.md)教程中的说明部署示例应用程序，请跳到[在应用服务和 Azure AD 中设置身份验证](#azureauth)部分。
 
 如果想要遵循本教程，但又不想完成第一篇和第二篇教程，请执行以下步骤，其中说明了如何开始使用自动化过程部署示例应用程序。
 
->[AZURE.NOTE] 执行以下步骤可以建立学习起点，就好像已完成前两篇教程一样，但只有一点例外：Visual Studio 不知道每个项目已部署到哪些 Web 应用或 API 应用。这意味着，无法在本教程中获得有关如何部署到正确目标的确切说明。如果不太了解自行部署的步骤，最好遵循系列教程中的[第一篇教程](/documentation/articles/app-service-api-dotnet-get-started/)，而不要从此自动化部署过程开始。
+>[!NOTE] 执行以下步骤可以建立学习起点，就好像已完成前两篇教程一样，但只有一点例外：Visual Studio 不知道每个项目已部署到哪些 Web 应用或 API 应用。这意味着，无法在本教程中获得有关如何部署到正确目标的确切说明。如果不太了解自行部署的步骤，最好遵循系列教程中的[第一篇教程](./app-service-api-dotnet-get-started.md)，而不要从此自动化部署过程开始。
 
-1. 确保满足[第一篇教程](/documentation/articles/app-service-api-dotnet-get-started/)中所列的所有先决条件。除了所列的先决条件以外，这些身份验证教程还假设读者在 Visual Studio 和 Azure 门户预览中用过应用服务 Web 应用和 API 应用。
+1. 确保满足[第一篇教程](./app-service-api-dotnet-get-started.md)中所列的所有先决条件。除了所列的先决条件以外，这些身份验证教程还假设读者在 Visual Studio 和 Azure 门户预览中用过应用服务 Web 应用和 API 应用。
 
 2. 在[待办事项列表示例存储库自述文件](https://github.com/azure-samples/app-service-api-dotnet-todo-list/blob/master/readme.md)中单击“部署到 Azure”按钮，部署 API 应用和 Web 应用。记下创建的 Azure 资源组，因为稍后可以用它来查找 Web 应用和 API 应用名称。
  
@@ -154,7 +154,7 @@
 
 配置 Azure AD 身份验证时，应用服务已创建 Azure AD 应用程序。默认情况下，新 Azure AD 应用程序配置为将持有者令牌提供给 API 应用的 URL。在本部分，将 Azure AD 应用程序配置为向 AngularJS 前端提供持有者令牌，而不是直接提供给中间层 API 应用。AngularJS 前端在调用 API 应用时，会将令牌发送到 API 应用。
 
->[AZURE.NOTE] 为了尽可能简化过程，本教程为前端和中间层 API 应用使用单个 Azure AD 应用程序。另一种做法是使用两个 Azure AD 应用程序。在此情况下，必须授予前端 Azure AD 应用程序调用中间层 Azure AD 应用程序的权限。使用这种多重应用程序方法可以更精细地控制每层的权限。
+>[!NOTE] 为了尽可能简化过程，本教程为前端和中间层 API 应用使用单个 Azure AD 应用程序。另一种做法是使用两个 Azure AD 应用程序。在此情况下，必须授予前端 Azure AD 应用程序调用中间层 Azure AD 应用程序的权限。使用这种多重应用程序方法可以更精细地控制每层的权限。
 
 11. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，转到“Azure Active Directory”。
 
@@ -318,25 +318,24 @@
 
 	![JSON 响应中的所有者 ID](./media/app-service-api-dotnet-user-principal-auth/todolistapiauth.png)
 
-
 ## 从头开始生成项目
 
 两个 Web API 项目是通过使用 **Azure API 应用**项目模板并将默认“值”控制器替换为 ToDoList 控制器创建的。
 
 有关如何使用 Web API 2 后端创建 AngularJS 单页应用程序的信息，请参阅 [Hands On Lab: Build a Single Page Application (SPA) with ASP.NET Web API and Angular.js](http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/build-a-single-page-application-spa-with-aspnet-web-api-and-angularjs)（动手实验：使用 ASP.NET Web API 和 Angular.js 构建单页应用程序 (SPA)）。有关如何添加 Azure AD 身份验证代码的信息，请参阅以下资源：
 
-* [Securing AngularJS Single Page Apps with Azure AD](/documentation/articles/active-directory-devquickstarts-angular/)（使用 Azure AD 保护 AngularJS 单页应用程序）。
+* [Securing AngularJS Single Page Apps with Azure AD](../active-directory/active-directory-devquickstarts-angular.md)（使用 Azure AD 保护 AngularJS 单页应用程序）。
 * [Introducing ADAL JS v1](http://www.cloudidentity.com/blog/2015/02/19/introducing-adal-js-v1/)（ADAL JS v1 简介）
 
 ## <a name="troubleshooting"></a>故障排除
 
-[AZURE.INCLUDE [故障排除](../../includes/app-service-api-auth-troubleshooting.md)]
+[!INCLUDE [故障排除](../../includes/app-service-api-auth-troubleshooting.md)]
 
 * 请务必不要混淆 ToDoListAPI（中间层）和 ToDoListDataAPI（数据层）。例如，验证是否将身份验证添加到了中间层 API 应用而不是数据层。
 * 确保 AngularJS 源代码引用了中间层 API 应用 URL（ToDoListAPI 而不是 ToDoListDataAPI）和正确的 Azure AD 客户端 ID。
 
 ## 后续步骤
 
-本教程介绍了如何对 API 应用使用应用服务身份验证，以及如何使用 ADAL JS 库调用 API 应用。下一篇教程介绍如何[在服务到服务方案中保护对 API 应用的访问](/documentation/articles/app-service-api-dotnet-service-principal-auth/)。
+本教程介绍了如何对 API 应用使用应用服务身份验证，以及如何使用 ADAL JS 库调用 API 应用。下一篇教程介绍如何[在服务到服务方案中保护对 API 应用的访问](./app-service-api-dotnet-service-principal-auth.md)。
 
 <!---HONumber=Mooncake_0919_2016-->

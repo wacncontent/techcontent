@@ -1,17 +1,16 @@
-<properties
-   pageTitle="在 Azure 中自己搭建 Nginx Web 服务器 | Azure"
-   description="本文介绍如何微软的公有云平台 Azure 中搭建 Nginx Web 服务器。"
-   services="open-source"
-   documentationCenter=""
-   authors=""
-   manager=""
-   editor=""/>
+---
+title: 在 Azure 中自己搭建 Nginx Web 服务器 | Azure
+description: 本文介绍如何微软的公有云平台 Azure 中搭建 Nginx Web 服务器。
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-   ms.service="open-source-website"  
-   ms.date=""
-   wacn.date="06/14/2016"/>
-
+ms.service: open-source-website
+ms.date: 
+wacn.date: 06/14/2016
+---
 
 #在 Azure 中自己搭建 Nginx Web 服务器
 
@@ -94,13 +93,11 @@ Nginx 是一款轻量级的 Web 服务器/反向代理服务器及电子邮件�
 Azure 虚拟机默认只开放对应 VIP 地址的有限端口，用于远程连接或管理。新建网站如果需要通过虚拟 IP 地址某端口访问，则需要在该虚拟机上添加此服务终端节点（endpoint）。此操作可以通过 Azure 经典管理门户网站或通过 PowerShell 进行。  
 ![添加服务终端节点][4]
  
-
 ##验证
 
 现在您可以在浏览器中访问您刚刚搭建好的服务器的公网 IP 来进行验证。  
 ![验证][5]
  
-
 ##小建议
 
 如果您是自己从源码编译安装 Ngnix，建议把它变成一个守护进程，这样更容易来管理该服务。  
@@ -259,8 +256,6 @@ Azure 虚拟机默认只开放对应 VIP 地址的有限端口，用于远程连
 	sudo firewall-cmd --permanent --zone=public --add-service=http 
 	sudo firewall-cmd --permanent --zone=public --add-service=https
 	sudo firewall-cmd --reload
-
-
 
 <!-- image references -->  
 [1]: ./media/open-source-azure-virtual-machines-linux-set-up-nginx-web-server/open-source-set-up-nginx-web-server-in-azure-1.png 

@@ -1,27 +1,27 @@
-<properties
-	pageTitle="在源代码管理中存储 .NET 后端项目代码 | Azure 移动服务"
-	description="了解如何将 .NET 后端项目存储在计算机上的本地 Git 存储库中并从中发布。"
-	services="mobile-services"
-	documentationCenter=""
-	authors="ggailey777"
-	manager="dwrede"
-	editor=""/>
+---
+title: 在源代码管理中存储 .NET 后端项目代码 | Azure 移动服务
+description: 了解如何将 .NET 后端项目存储在计算机上的本地 Git 存储库中并从中发布。
+services: mobile-services
+documentationCenter: 
+authors: ggailey777
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 # 在源代码管理中存储移动服务项目代码
 
-> [AZURE.SELECTOR]
-- [.NET backend](/documentation/articles/mobile-services-dotnet-backend-store-code-source-control/)
-- [Javascript backend](/documentation/articles/mobile-services-store-scripts-source-control/)
+> [!div class="op_single_selector"]
+- [.NET backend](./mobile-services-dotnet-backend-store-code-source-control.md)
+- [Javascript backend](./mobile-services-store-scripts-source-control.md)
 
 本主题说明如何使用 Azure 移动服务提供的源代码管理存储 .NET 后端服务项目。只需将项目从本地 Git 存储库上载到生产移动服务，便可以发布该项目。
 
@@ -29,7 +29,7 @@
 
 ##<a name="enable-source-control"></a>在移动服务中启用源代码管理
 
-[AZURE.INCLUDE [mobile-services-enable-source-control](../../includes/mobile-services-enable-source-control.md)]
+[!INCLUDE [mobile-services-enable-source-control](../../includes/mobile-services-enable-source-control.md)]
 
 ##<a name="clone-repo"></a>安装 Git 并创建本地存储库
 
@@ -37,7 +37,7 @@
 
 	安装 Git 所需的步骤因操作系统的不同而异。有关操作系统特定的分发和安装指南，请参阅[安装 Git]。
 
-	> [AZURE.NOTE]
+	> [!NOTE]
 	在某些操作系统上，命令行和 GUI 版本的 Git 都可用。本文中提供的说明使用命令行版本。
 
 2. 打开一个命令行，例如 **GitBash** (Windows) 或 **Bash** (Unix Shell)。在 OS X 系统上，可以通过 **Terminal** 应用程序访问命令行。
@@ -97,8 +97,8 @@
 [Git website]: http://git-scm.com
 [Source control]: http://msdn.microsoft.com/zh-cn/library/azure/c25aaede-c1f0-4004-8b78-113708761643
 [安装 Git]: http://git-scm.com/book/en/Getting-Started-Installing-Git
-[移动服务入门]: /documentation/articles/mobile-services-dotnet-backend-ios-get-started/
+[移动服务入门]: ./mobile-services-dotnet-backend-ios-get-started.md
 [Azure Management Portal]: https://manage.windowsazure.cn/
-[如何对 .NET 后端移动服务进行数据模型更改]: /documentation/articles/mobile-services-dotnet-backend-how-to-use-code-first-migrations/
+[如何对 .NET 后端移动服务进行数据模型更改]: ./mobile-services-dotnet-backend-how-to-use-code-first-migrations.md
 
 <!---HONumber=Mooncake_0118_2016-->

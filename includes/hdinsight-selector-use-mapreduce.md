@@ -1,6 +1,6 @@
-> [AZURE.SELECTOR]
-- [Overview](/documentation/articles/hdinsight-use-mapreduce/)
-- [Curl](/documentation/articles/hdinsight-hadoop-use-mapreduce-curl/)
-- [PowerShell](/documentation/articles/hdinsight-hadoop-use-mapreduce-powershell/)
-- [Remote Desktop](/documentation/articles/hdinsight-hadoop-use-mapreduce-remote-desktop/)
-- [Curl](/documentation/articles/hdinsight-hadoop-use-mapreduce-curl/)
+> [!div class="op_single_selector"]
+- [Overview](../articles/hdinsight/hdinsight-use-mapreduce.md)
+- [Curl](../articles/hdinsight/hdinsight-hadoop-use-mapreduce-curl.md)
+- [PowerShell](../articles/hdinsight/hdinsight-hadoop-use-mapreduce-powershell.md)
+- [Remote Desktop](../articles/hdinsight/hdinsight-hadoop-use-mapreduce-remote-desktop.md)
+- [Curl](../articles/hdinsight/hdinsight-hadoop-use-mapreduce-curl.md)

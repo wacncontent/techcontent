@@ -1,10 +1,27 @@
-<properties linkid="" urlDisplayName="" pageTitle="Setting MySQL Database on Azure Server Parameters – Azure Cloud" metaKeywords="Azure Cloud, technical documentation, documents and resources, MySQL, database, parameters, customization, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="MySQL Database on Azure supports customizing some parameters to your own requirements. We will help you to understand the selectable ranges and intervals for different parameters." metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: Setting MySQL Database on Azure Server Parameters – Azure Cloud
+metaKeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, parameters, customization, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+description: MySQL Database on Azure supports customizing some parameters to your own requirements. We will help you to understand the selectable ranges and intervals for different parameters.
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql_en" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="en" />
+ms.service: mysql_en
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: en
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-advanced-settings/)
-- [English](/documentation/articles/mysql-database-enus-advanced-settings/)
+- [中文](./mysql-database-advanced-settings.md)
+- [English](./mysql-database-enus-advanced-settings.md)
 
 #Setting MySQL Database on Azure server parameters
 
@@ -94,5 +111,5 @@ MySQL Database on Azure supports custom settings for some parameters. The follow
     <td>[60-240] </td>
   </tr>
 </table>
->[AZURE.NOTE]**In view of the limitations of Azure Traffic Manager, we have adjusted the default value for wait\_timeout to 120 seconds (s) and the selectable range to 60s to 240s, but this adjustment only works on instances created after October 2015. For earlier instances, please manually set the value of wait\_timeout to any number between 60s and 240s. We recommend 120s. **
+>[!NOTE]**In view of the limitations of Azure Traffic Manager, we have adjusted the default value for wait\_timeout to 120 seconds (s) and the selectable range to 60s to 240s, but this adjustment only works on instances created after October 2015. For earlier instances, please manually set the value of wait\_timeout to any number between 60s and 240s. We recommend 120s. **
 <!--HONumber=81-->

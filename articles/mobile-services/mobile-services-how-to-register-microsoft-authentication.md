@@ -1,25 +1,25 @@
-<properties 
-	pageTitle="注册以进行 Microsoft 身份验证 | Microsoft Azure" 
-	description="了解如何在 Azure 移动服务应用程序中注册以进行 Microsoft 身份验证。" 
-	authors="ggailey777" 
-	services="mobile-services" 
-	documentationCenter="Mobile" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 注册以进行 Microsoft 身份验证 | Microsoft Azure
+description: 了解如何在 Azure 移动服务应用程序中注册以进行 Microsoft 身份验证。
+authors: ggailey777
+services: mobile-services
+documentationCenter: Mobile
+manager: dwrede
+editor: 
 
-<tags 
-	ms.service="mobile-services" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="NA" 
-	ms.devlang="multiple" 
-	ms.topic="article" 
-	ms.date="07/21/2016" 
-	wacn.date="09/26/2016" 
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: NA
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 # 注册应用程序以使用 Microsoft 帐户进行身份验证
 
-[AZURE.INCLUDE [mobile-services-selector-register-identity-provider](../../includes/mobile-services-selector-register-identity-provider.md)]
+[!INCLUDE [mobile-services-selector-register-identity-provider](../../includes/mobile-services-selector-register-identity-provider.md)]
 
 ## 概述 
 
@@ -29,7 +29,7 @@
 
 首先必须在 Windows 开发人员中心注册 Windows 应用商店应用程序。通过注册，Windows 应用将能够使用单一登录行为。
 
->[AZURE.NOTE]Windows Phone 8、Windows Phone 8.1 Silverlight 和非 Windows 应用程序可以跳过本部分。
+>[!NOTE]Windows Phone 8、Windows Phone 8.1 Silverlight 和非 Windows 应用程序可以跳过本部分。
 
 1. 如果尚未注册应用，请导航到 [Windows 开发人员中心](https://dev.windows.com/dashboard/Application/New)，使用你的 Microsoft 帐户登录，键入应用的名称，然后单击“保留应用名称”。
  
@@ -64,20 +64,19 @@
 	+ **.NET 后端**：`https://<mobile_service>.azure-mobile.net/signin-microsoft`
 	+ **JavaScript 后端**：`https://<mobile_service>.azure-mobile.net/login/microsoftaccount` 
 
-	 >[AZURE.NOTE]确保根据移动服务后端的类型使用正确的重定向 URL 路径格式。如果格式不正确，身份验证将不会成功。“根域”应会自动填入。
+	 >[!NOTE]确保根据移动服务后端的类型使用正确的重定向 URL 路径格式。如果格式不正确，身份验证将不会成功。“根域”应会自动填入。
 
     ![Microsoft 帐户 API 设置](./media/mobile-services-how-to-register-microsoft-authentication/mobile-services-win8-app-push-auth-2.png)
-
 
 4. 单击“应用程序设置”，并记下“客户端 ID”、“客户端机密”和“包 SID”的值。
 	
    	![Microsoft 帐户应用程序设置](./media/mobile-services-how-to-register-microsoft-authentication/mobile-services-win8-app-push-auth.png)
 
-    > [AZURE.NOTE]客户端密钥是一个非常重要的安全凭据。请勿与任何人分享客户端密钥或将密钥随应用程序分发。只有 Windows 应用商店应用程序注册才能看到“包 SID”字段。
+    > [!NOTE]客户端密钥是一个非常重要的安全凭据。请勿与任何人分享客户端密钥或将密钥随应用程序分发。只有 Windows 应用商店应用程序注册才能看到“包 SID”字段。
 
 4. 在 [Azure 经典管理门户]中，单击移动服务的“标识”选项卡，输入从标识提供者获取的客户端 ID、客户端机密和包 SID，然后单击“保存”。
 
-	>[AZURE.NOTE]对于 Windows Phone 8、Windows Phone 应用商店 8.1 Silverlight 或非 Windows 应用程序，不需提供包 SID 值。
+	>[!NOTE]对于 Windows Phone 8、Windows Phone 应用商店 8.1 Silverlight 或非 Windows 应用程序，不需提供包 SID 值。
 	
 现在，你的移动服务和应用程序都已配置为使用 Microsoft 帐户。
 

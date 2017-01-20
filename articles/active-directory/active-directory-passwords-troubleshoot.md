@@ -1,25 +1,25 @@
-<properties 
-	pageTitle="故障排除：Azure AD 密码管理 | Microsoft Azure" 
-	description="针对 Azure AD 密码管理的常见故障排除步骤，包括重置、更改、写回、注册，以及寻求帮助时要提供的信息。" 
-	services="active-directory" 
-	documentationCenter="" 
-	authors="asteen" 
-	manager="femila"
-	editor="curtand"/>  
+---
+title: 故障排除：Azure AD 密码管理 | Microsoft Azure
+description: 针对 Azure AD 密码管理的常见故障排除步骤，包括重置、更改、写回、注册，以及寻求帮助时要提供的信息。
+services: active-directory
+documentationCenter: 
+authors: asteen
+manager: femila
+editor: curtand
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/12/2016"
-	wacn.date="01/06/2017"
-	ms.author="asteen"/>  
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/12/2016
+wacn.date: 01/06/2017
+ms.author: asteen
+---
 
 # 如何排查密码管理问题
 
-> [AZURE.IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](/documentation/articles/active-directory-passwords-update-your-own-password/)。
+> [!IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
 
 如果你有密码管理方面的问题，我们随时可提供帮助。你可能会遇到的大多数问题都可以通过以下简单故障排除步骤来解决，请阅读以下内容来排查你的部署问题：
 
@@ -46,13 +46,11 @@
 
     ![][001]
 
-
  - **用户 ID** – 看到错误的用户的 ID 是什么（例如 user@contoso.com）？
  - **有关用户的信息** – 用户是否已联合、密码哈希是否已同步、是否只在云中？ 用户是否已获 AAD Premium 或 AAD Basic 授权？
  - **应用程序事件日志** – 如果你使用密码写回，而且错误位于你的本地基础结构中，请将 Azure AD Connect 服务器中的应用程序事件日志副本进行压缩，然后连同请求一起发送。
 
 包含这些信息将有助于我们尽快为你解决问题。
-
 
 ##  <a name="troubleshoot-password-reset-configuration-in-the-azure-management-portal"></a>在 Azure 经典管理门户中排查密码重置配置问题
 如果你在配置密码重置时遇到错误，可以遵循以下故障排除步骤来解决错误：
@@ -107,7 +105,7 @@
             </td>
             <td>
               <p>UI 的许多元素都是隐藏的，直到需要它们时才会显示。如果你希望看到它们，请尝试启用页面上的所有选项。</p>
-              <p>有关可供你使用的所有控件的更多信息，请参阅<a href="/documentation/articles/active-directory-passwords-customize/">自定义用户密码策重置略</a>。</p>
+              <p>有关可供你使用的所有控件的更多信息，请参阅<a href="./active-directory-passwords-customize.md">自定义用户密码策重置略</a>。</p>
             </td>
           </tr>
           <tr>
@@ -119,7 +117,7 @@
             </td>
             <td>
               <p>仅当你已下载 Azure AD Connect 并配置了密码写回时，此选项才可见。完成此操作后，此选项才会出现，并允许你启用或禁用从云写回功能。</p>
-              <p>有关如何执行此操作的详细信息，请参阅<a href="/documentation/articles/active-directory-passwords-getting-started/#enable-users-to-reset-or-change-their-ad-passwords">如何启用/禁用密码写回</a>。</p>
+              <p>有关如何执行此操作的详细信息，请参阅<a href="./active-directory-passwords-getting-started.md#enable-users-to-reset-or-change-their-ad-passwords">如何启用/禁用密码写回</a>。</p>
             </td>
           </tr>
         </tbody></table>
@@ -294,7 +292,7 @@
               <p>如果你愿意，我们可以联系你所在组织的管理员为你重置密码。</p>
             </td>
             <td>
-              <p>确保用户在目录下的文件中有格式正确的联系人数据，然后继续。有关如何在目录中配置身份验证信息以避免用户遇到此错误的信息，请参阅<a href="/documentation/articles/active-directory-passwords-learn-more/#what-data-is-used-by-password-reset">密码重置使用哪些数据</a>。</p>
+              <p>确保用户在目录下的文件中有格式正确的联系人数据，然后继续。有关如何在目录中配置身份验证信息以避免用户遇到此错误的信息，请参阅<a href="./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset">密码重置使用哪些数据</a>。</p>
             </td>
           </tr>
           <tr>
@@ -310,7 +308,7 @@
               <p>如果你愿意，我们可以联系你所在组织的管理员为你重置密码。</p>
             </td>
             <td>
-              <p>确保用户至少有两个正确配置的联系方式（例如，移动电话和办公室电话），然后继续。有关如何在目录中配置身份验证信息以避免用户遇到此错误的信息，请参阅<a href="/documentation/articles/active-directory-passwords-learn-more/#what-data-is-used-by-password-reset">密码重置使用哪些数据</a>。</p>
+              <p>确保用户至少有两个正确配置的联系方式（例如，移动电话和办公室电话），然后继续。有关如何在目录中配置身份验证信息以避免用户遇到此错误的信息，请参阅<a href="./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset">密码重置使用哪些数据</a>。</p>
             </td>
           </tr>
           <tr>
@@ -332,7 +330,7 @@
               <p>用户单击了“向我发送短信”或“呼叫我”，但一直收不到任何信息。</p>
             </td>
             <td>
-              <p>这可能是由于目录中的电话号码格式不正确导致的。请确保电话号码的格式为“+ccc xxxyyyzzzzXeeee”。若要了解有关设置电话号码格式以用于重置的详细信息，请参阅<a href="/documentation/articles/active-directory-passwords-learn-more/#what-data-is-used-by-password-reset">密码重置使用哪些数据</a>。</p>
+              <p>这可能是由于目录中的电话号码格式不正确导致的。请确保电话号码的格式为“+ccc xxxyyyzzzzXeeee”。若要了解有关设置电话号码格式以用于重置的详细信息，请参阅<a href="./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset">密码重置使用哪些数据</a>。</p>
               <p>如果你需要一个分机才能路由到相关用户，请注意密码重置不支持分机，即使你在目录中指定了分机（它们将在呼叫前被剥离）。请尝试使用不带分机的号码，或者在你的 PBX 中将分机集成到电话号码中。</p>
             </td>
           </tr>
@@ -345,7 +343,7 @@
             </td>
             <td>
               <p>此问题的最常见原因是消息被垃圾邮件筛选器拒绝。请检查你的垃圾邮件或已删除邮件文件夹中是否有电子邮件。</p>
-              <p>另请确保你在正确的电子邮箱中检查是否有该邮件，许多人都有类似的电子邮件地址，结果在错误的收件箱中检查是否有该邮件。如果这些选项都不起作用，还可能是目录中的电子邮件地址不正确，请进行检查以确保电子邮件地址正确，然后重试。若要了解有关设置电子邮件地址格式以用于重置的详细信息，请参阅<a href="/documentation/articles/active-directory-passwords-learn-more/#what-data-is-used-by-password-reset">密码重置使用哪些数据</a>。</p>
+              <p>另请确保你在正确的电子邮箱中检查是否有该邮件，许多人都有类似的电子邮件地址，结果在错误的收件箱中检查是否有该邮件。如果这些选项都不起作用，还可能是目录中的电子邮件地址不正确，请进行检查以确保电子邮件地址正确，然后重试。若要了解有关设置电子邮件地址格式以用于重置的详细信息，请参阅<a href="./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset">密码重置使用哪些数据</a>。</p>
             </td>
           </tr>
           <tr>
@@ -538,7 +536,7 @@
               <p>在工作一段时间后，联合用户或密码哈希同步的用户无法重置其密码。</p>
             </td>
             <td>
-              <p>在某些极少见的情况下，当 Azure AD Connect 已重新启动时，密码写回服务可能无法重新启动。在这些情况下，首先，请检查是否已在本地启用了密码写回。这可以通过使用 Azure AD Connect 向导或 powershell 来完成（请参阅上面的“操作说明”部分）。如果此功能已启用，请尝试再次通过 UI 或 PowerShell 启用或禁用此功能。有关如何执行此操作的详细信息，请参阅<a href="/documentation/articles/active-directory-passwords-getting-started/#enable-users-to-reset-or-change-their-ad-passwords">如何启用/禁用密码写回</a>中的“步骤 2：在 Directory Sync 计算机上启用密码写回并配置防火墙规则”。</p>
+              <p>在某些极少见的情况下，当 Azure AD Connect 已重新启动时，密码写回服务可能无法重新启动。在这些情况下，首先，请检查是否已在本地启用了密码写回。这可以通过使用 Azure AD Connect 向导或 powershell 来完成（请参阅上面的“操作说明”部分）。如果此功能已启用，请尝试再次通过 UI 或 PowerShell 启用或禁用此功能。有关如何执行此操作的详细信息，请参阅<a href="./active-directory-passwords-getting-started.md#enable-users-to-reset-or-change-their-ad-passwords">如何启用/禁用密码写回</a>中的“步骤 2：在 Directory Sync 计算机上启用密码写回并配置防火墙规则”。</p>
               <p>
                 
               </p>
@@ -582,7 +580,7 @@
                 <li>
 										现在，你尝试启用/禁用密码写回。向导将使用凭据将连接器的名称构造为“abc.partner.onmschina.cn - AAD”并将其传递给密码写回 cmdlet。此操作将会失败，因为没有使用此名称创建的连接器。&lt;br>&lt;br></li>
               </ol>
-              <p>此问题在我们的最新内部版本中已修复。如果你具有较早的内部版本，一个解决方法是使用 powershell cmdlet 来启用/禁用该功能。有关如何执行此操作的详细信息，请参阅<a href="/documentation/articles/active-directory-passwords-getting-started/#enable-users-to-reset-or-change-their-ad-passwords">如何启用/禁用密码写回</a>中的“步骤 2：在 Directory Sync 计算机上启用密码写回并配置防火墙规则”。</p>
+              <p>此问题在我们的最新内部版本中已修复。如果你具有较早的内部版本，一个解决方法是使用 powershell cmdlet 来启用/禁用该功能。有关如何执行此操作的详细信息，请参阅<a href="./active-directory-passwords-getting-started.md#enable-users-to-reset-or-change-their-ad-passwords">如何启用/禁用密码写回</a>中的“步骤 2：在 Directory Sync 计算机上启用密码写回并配置防火墙规则”。</p>
             </td>
           </tr>
           <tr>
@@ -657,11 +655,10 @@
               <p>尝试通过 Azure 经典管理门户代表用户重置密码时，你将看到一条消息：“在本地环境中运行的密码重置服务不支持管理员重置用户密码。请升级到最新版本的 AAD Sync 以解决此问题。”</p>
             </td>
             <td>
-              <p>当同步引擎的版本不支持所使用的特定密码写回操作时，将会发生这种情况。1.0.0419.0911 以上的 AAD Sync 版本支持所有密码管理操作，包括密码重置写回、密码更改写回，以及管理员通过 Azure 经典管理门户启动的密码重置写回。&#160; 1.0.6862 以上的 DirSync 版本仅支持密码重置写回。若要解决此问题，强烈建议你安装最新版本的 AAD Sync 或 Azure Active Directory Connect（有关详细信息，请参阅<a href="/documentation/articles/active-directory-aadconnect/">目录集成工具</a>），这样既能解决此问题，又可以在你的组织中充分利用密码写回功能。</p>
+              <p>当同步引擎的版本不支持所使用的特定密码写回操作时，将会发生这种情况。1.0.0419.0911 以上的 AAD Sync 版本支持所有密码管理操作，包括密码重置写回、密码更改写回，以及管理员通过 Azure 经典管理门户启动的密码重置写回。&#160; 1.0.6862 以上的 DirSync 版本仅支持密码重置写回。若要解决此问题，强烈建议你安装最新版本的 AAD Sync 或 Azure Active Directory Connect（有关详细信息，请参阅<a href="./active-directory-aadconnect.md">目录集成工具</a>），这样既能解决此问题，又可以在你的组织中充分利用密码写回功能。</p>
             </td>
           </tr>
         </tbody></table>
-
 
 ## <a name="password-writeback-event-log-error-codes"></a>密码写回事件日志错误代码
 在排查密码写回问题时，最佳做法是检查 Azure AD Connect 计算机上的该应用程序事件日志。此事件日志将包含来自与密码写回相关的两个源的事件。PasswordResetService 源将描述与密码写回操作相关的操作和问题。ADSync 源将描述与在你的 AD 环境中设置密码相关的操作和问题。
@@ -1303,7 +1300,7 @@
               <p>PasswordResetService</p>
             </td>
             <td>
-              <p>此事件表示管理代理服务帐户在相关帐户上没有合适的权限来设置新密码。请确保用户的林中的 MA 帐户对林中的所有对象都具有重置和更改密码的权限。有关如何执行此操作的详细信息，请参阅<a href="/documentation/articles/active-directory-passwords-getting-started/#step-4-set-up-the-appropriate-active-directory-permissions">步骤 4：设置适当的 Active Directory 权限</a>。</p>
+              <p>此事件表示管理代理服务帐户在相关帐户上没有合适的权限来设置新密码。请确保用户的林中的 MA 帐户对林中的所有对象都具有重置和更改密码的权限。有关如何执行此操作的详细信息，请参阅<a href="./active-directory-passwords-getting-started.md#step-4-set-up-the-appropriate-active-directory-permissions">步骤 4：设置适当的 Active Directory 权限</a>。</p>
             </td>
           </tr>
           <tr>
@@ -1484,7 +1481,7 @@
 ### <a name="install-the-latest-azure-ad-connect-release"></a>安装最新版本的 Azure AD Connect
 重新安装 Azure AD Connect 包可以解决所有可能会影响你在本地 AD 环境中连接到我们的云服务或管理你的密码的配置问题。我们建议你仅在尝试了上述前两个步骤后再执行此步骤。
 
- 1.	可从[此处](/documentation/articles/active-directory-aadconnect/)下载最新版本的 Azure AD Connect。
+ 1.	可从[此处](./active-directory-aadconnect.md)下载最新版本的 Azure AD Connect。
  2.	由于你已安装 Azure AD Connect，只需执行就地升级将 Azure AD Connect 安装更新到最新版本。
  3.	执行下载的程序包，然后按照屏幕说明进行操作来更新 Azure AD Connect 计算机。无需执行其他手动步骤，除非你自定义了现成的规则，在这种情况下，你应该**先备份这些规则，然后再继续进行升级，并在完成后手动重新部署这些规则**。
 
@@ -1492,8 +1489,7 @@
 
 如果安装最新版本的 Azure AD Connect 服务器无法解决你遇到的问题，我们建议你在安装最新的同步 QFE 之后，最后再尝试禁用密码写回，然后重新启用该功能。
 
-如果这样做仍无法解决你遇到的问题，我们建议你查看[排查密码写回问题](#troubleshoot-password-writeback)和 [Azure AD 密码管理常见问题](/documentation/articles/active-directory-passwords-faq/)，以了解其中是否讨论了你遇到的问题。
-
+如果这样做仍无法解决你遇到的问题，我们建议你查看[排查密码写回问题](#troubleshoot-password-writeback)和 [Azure AD 密码管理常见问题](./active-directory-passwords-faq.md)，以了解其中是否讨论了你遇到的问题。
 
 <br/>
 <br/>
@@ -1502,23 +1498,18 @@
 ## 密码重置文档的链接
 以下是所有 Azure AD 密码重置文档页面的链接：
 
-* **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](/documentation/articles/active-directory-passwords-update-your-own-password/)。
-* [**工作原理**](/documentation/articles/active-directory-passwords-how-it-works/) - 了解六个不同的服务组件及其功能
-* [**入门**](/documentation/articles/active-directory-passwords-getting-started/) - 了解如何让用户重置及更改云密码或本地密码
-* [**自定义**](/documentation/articles/active-directory-passwords-customize/) - 了解如何根据组织的需求自定义服务的外观和行为
-* [**最佳实践**](/documentation/articles/active-directory-passwords-best-practices/) - 了解如何快速部署且有效管理组织的密码
-* [**深入分析**](/documentation/articles/active-directory-passwords-get-insights/) - 了解集成式报告功能
-* [**常见问题**](/documentation/articles/active-directory-passwords-faq/) - 获取常见问题的解答
-* [**了解更多**](/documentation/articles/active-directory-passwords-learn-more/) - 深入探索服务工作原理的技术细节
-
-
-
+* **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
+* [**工作原理**](./active-directory-passwords-how-it-works.md) - 了解六个不同的服务组件及其功能
+* [**入门**](./active-directory-passwords-getting-started.md) - 了解如何让用户重置及更改云密码或本地密码
+* [**自定义**](./active-directory-passwords-customize.md) - 了解如何根据组织的需求自定义服务的外观和行为
+* [**最佳实践**](./active-directory-passwords-best-practices.md) - 了解如何快速部署且有效管理组织的密码
+* [**深入分析**](./active-directory-passwords-get-insights.md) - 了解集成式报告功能
+* [**常见问题**](./active-directory-passwords-faq.md) - 获取常见问题的解答
+* [**了解更多**](./active-directory-passwords-learn-more.md) - 深入探索服务工作原理的技术细节
 
 [001]: ./media/active-directory-passwords-troubleshoot/001.jpg "Image_001.jpg"
 [002]: ./media/active-directory-passwords-troubleshoot/002.jpg "Image_002.jpg"
 [003]: ./media/active-directory-passwords-troubleshoot/003.jpg "Image_003.jpg"
 [004]: ./media/active-directory-passwords-troubleshoot/004.jpg "Image_004.jpg"
-
- 
 
 <!---HONumber=Mooncake_0815_2016-->

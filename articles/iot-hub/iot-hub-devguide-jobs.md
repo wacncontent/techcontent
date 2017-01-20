@@ -1,23 +1,21 @@
-<properties
- pageTitle="开发人员指南 - 作业 |Azure"
- description="Azure IoT 中心开发人员指南 - 计划要在连接到中心的多个设备上运行的作业"
- services="iot-hub"
- documentationCenter=".net"
- authors="juanjperez"
- manager="timlt"
- editor=""/>  
+---
+title: 开发人员指南 - 作业 |Azure
+description: Azure IoT 中心开发人员指南 - 计划要在连接到中心的多个设备上运行的作业
+services: iot-hub
+documentationCenter: .net
+authors: juanjperez
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="09/30/2016"
- wacn.date="12/12/2016" 
- ms.author="juanpere"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 12/12/2016
+ms.author: juanpere
+---
 
 # 在多台设备上计划作业（预览版）
 
@@ -35,7 +33,7 @@
 
 作业由解决方案后端启动，并由 IoT 中心维护。可以通过面向服务的 URI (`{iot hub}/jobs/v2/{device id}/methods/<jobID>?api-version=2016-09-30-preview`) 启动作业，并通过面向服务的 URI (`{iot hub}/jobs/v2/<jobId>?api-version=2016-09-30-preview`) 查询正在执行的作业的进度。启动作业后，查询作业将使后端应用程序能够刷新正在运行的作业的状态。
 
-> [AZURE.NOTE] 启动作业时，属性名称和值只能包含 US ASCII 可打印字母数字，但下列组中的任一项除外：``{'$', '(', ')', '<', '>', '@', ',', ';', ':', '\', '"', '/', '[', ']', '?', '=', '{', '}', SP, HT}``。
+> [!NOTE] 启动作业时，属性名称和值只能包含 US ASCII 可打印字母数字，但下列组中的任一项除外：``{'$', '(', ')', '<', '>', '@', ',', ';', ':', '\', '"', '/', '[', ']', '?', '=', '{', '}', SP, HT}``。
 
 ## 参考主题：
 以下参考主题提供有关使用作业的详细信息。
@@ -131,7 +129,6 @@
 | **deviceJobStatistics.runningCount** |当前正在运行作业的设备数。 |
 | **deviceJobStatistics.pendingCount** |等待运行作业的设备数。 |
 
-
 ### 其他参考资料
 
 开发人员指南中的其他参考主题包括：
@@ -142,18 +139,16 @@
 - [设备孪生、方法和作业的 IoT 中心查询语言][lnk-query]介绍从 IoT 中心检索有关设备孪生、方法和作业的信息时可以使用的查询语言。
 - [IoT 中心 MQTT 支持][lnk-devguide-mqtt]提供有关 IoT 中心对 MQTT 协议的支持的详细信息。
 
-
 <!-- links and images -->
 
-
-[lnk-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
-[lnk-c2d-methods]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-dev-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-get-started-twin]: /documentation/articles/iot-hub-node-node-twin-getstarted/
-[lnk-twin-devguide]: /documentation/articles/iot-hub-devguide-device-twins/
+[lnk-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
+[lnk-c2d-methods]: ./iot-hub-node-node-direct-methods.md
+[lnk-dev-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-get-started-twin]: ./iot-hub-node-node-twin-getstarted.md
+[lnk-twin-devguide]: ./iot-hub-devguide-device-twins.md
 
 <!---HONumber=Mooncake_1205_2016-->

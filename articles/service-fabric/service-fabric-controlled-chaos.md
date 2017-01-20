@@ -1,23 +1,21 @@
-<properties
-   pageTitle="在 Service Fabric 群集中引入混沌测试 | Azure"
-   description="使用故障注入和群集分析服务 API 管理群集中的混沌测试。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="motanv"
-   manager="rsinha"
-   editor="toddabel"/>  
+---
+title: 在 Service Fabric 群集中引入混沌测试 | Azure
+description: 使用故障注入和群集分析服务 API 管理群集中的混沌测试。
+services: service-fabric
+documentationCenter: .net
+authors: motanv
+manager: rsinha
+editor: toddabel
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/19/2016"
-   wacn.date="11/28/2016"
-   ms.author="motanv"/>  
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/19/2016
+wacn.date: 11/28/2016
+ms.author: motanv
+---
 
 # 在 Service Fabric 群集中引入受控的混沌测试
 大规模分布式系统，例如云基础结构，在本质上都是不可靠的。Azure Service Fabric 可让开发人员在不可靠的基础结构顶层编写可靠的服务。为了编写稳健的服务，开发人员需要能够针对这种不可靠的基础结构引入故障来测试其服务的稳定性。
@@ -60,7 +58,6 @@
 
 ## 如何运行混沌测试
 **C#：**
-
 
 	using System;
 	using System.Collections.Generic;
@@ -142,7 +139,6 @@
 	}
 
 **PowerShell：**
-
 
 	$connection = "localhost:19000"
 	$timeToRun = 60

@@ -1,14 +1,17 @@
-<properties
-	pageTitle="盛派自助微信营销系统 | Azure"
-    description="盛派自助微信营销系统"
-    services=""
-    documentationCenter=""
-    authors=""
-    manager=""
-    editor=""
-    tags=""/>
+---
+title: 盛派自助微信营销系统 | Azure
+description: 盛派自助微信营销系统
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags ms.service="multiple" ms.date="" wacn.date="01/17/2017"/>
+ms.service: multiple
+ms.date: 
+wacn.date: 01/17/2017
+---
 
 # 盛派自助微信营销系统
 
@@ -33,7 +36,7 @@
     - 计算机视觉
     - 情绪感知
 
->[AZURE.NOTE]以上配置仅供参考。
+>[!NOTE]以上配置仅供参考。
 
 ### 环境配置
 1.	Web 应用
@@ -42,7 +45,7 @@
 
         ![4](./media/azure-wechat-solution-senparc-digital-marketing-wechat-management-solution/4.png)
  
-        >[AZURE.NOTE]域名需要做 CName 映射,到域名购买平台做 CName 映射。
+        >[!NOTE]域名需要做 CName 映射,到域名购买平台做 CName 映射。
 
     2. Ftp 配置
 
@@ -80,8 +83,6 @@
 
     ![11](./media/azure-wechat-solution-senparc-digital-marketing-wechat-management-solution/11.png)
  
-				
-
 ##系统参数配置
 
 1. DataBase 数据库：
@@ -109,13 +110,13 @@
     公众号 AppId: Key：AppId
     公众号 AppSecret: Key：AppSecret
 
-    >[AZURE.NOTE]微信公众号类型不能为订阅号。
+    >[!NOTE]微信公众号类型不能为订阅号。
 
 5. 域名
 
     网站域名 Key：DomainName
 
->[AZURE.NOTE]网页授权以后的网站域名
+>[!NOTE]网页授权以后的网站域名
 
 ## 项目初始化
 

@@ -1,26 +1,26 @@
-<properties
-    pageTitle="使用 ASP.NET Web API 进行服务通信 | Azure"
-    description="了解如何在 Reliable Services API 中将 ASP.NET Web API 与 OWIN 自托管配合使用来实现服务通信。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="vturecek"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="8aa4668d-cbb6-4225-bd2d-ab5925a868f2"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="required"
-    ms.date="10/19/2016"
-    wacn.date="01/04/2017"
-    ms.author="vturecek" />
+---
+title: 使用 ASP.NET Web API 进行服务通信 | Azure
+description: 了解如何在 Reliable Services API 中将 ASP.NET Web API 与 OWIN 自托管配合使用来实现服务通信。
+services: service-fabric
+documentationcenter: .net
+author: vturecek
+manager: timlt
+editor: 
+
+ms.assetid: 8aa4668d-cbb6-4225-bd2d-ab5925a868f2
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: required
+ms.date: 10/19/2016
+wacn.date: 01/04/2017
+ms.author: vturecek
+---
 
 # 入门：Service Fabric Web API 服务与 OWIN 自托管
 
 Azure Service Fabric 让你有权决定你希望你的服务如何与用户以及相互之间进行通信。本教程重点介绍如何在 Service Fabric 的 Reliable Services API 中将 ASP.NET Web API 与适用于 .NET 的开放式 Web 接口 (OWIN) 自托管配置使用来实现服务通信。我们将深入探讨 Reliable Services 可插式通信 API。此外，还将在循序渐进的示例中使用 Web API 演示如何设置自定义通信侦听器。
-
 
 ## Service Fabric 中的 Web API 简介
 
@@ -32,7 +32,6 @@ Service Fabric 中的 Web API 是你熟知并喜爱的相同 ASP.NET Web API。�
  2. 主机（Web 服务器，通常是 IIS）
 
 Web API 应用程序本身不会更改。它与你可能已在过去编写的 Web API 应用程序没什么不同，你应能够转移大部分应用程序代码。但是，如果要在 IIS 上托管，托管应用程序的位置可能与你的习惯稍有不同。在我们深入探讨托管部分之前，我们从更熟悉的部分开始：Web API 应用程序。
-
 
 ## 创建应用程序
 
@@ -53,7 +52,6 @@ Web API 应用程序本身不会更改。它与你可能已在过去编写的 We
 安装了这些包之后，我们可以开始构建基本的 Web API 项目结构。如果你使用过 Web API，则项目结构应看上去非常熟悉。首先添加 `Controllers` 目录和简单的值控制器：
 
 **ValuesController.cs**
-
 
 	using System.Collections.Generic;
 	using System.Web.Http;
@@ -91,12 +89,9 @@ Web API 应用程序本身不会更改。它与你可能已在过去编写的 We
 	    }
 	}
 
-
-
 接着，在项目根目录中添加一个 Startup 类，用于注册路由、格式化程序和任何其他配置设置。这也是 Web API 插入到*主机*中的位置（会在以后再次重新访问）。
 
 **Startup.cs**
-
 
 	using System.Web.Http;
 	using Owin;
@@ -121,14 +116,12 @@ Web API 应用程序本身不会更改。它与你可能已在过去编写的 We
 	    }
 	}
 
-
 应用程序部分就是这样。此时，我们只是设置了基本的 Web API 项目布局。到当前为止，看起来应该与过去可能已编写的 Web API 项目或基本的 Web API 模板有太多不同。你的业务逻辑同往常一样放入控制器和模型中。
 
 现在我们该针对托管执行什么操作以便我们可以实际运行它？
 
 ## 服务托管
 在 Service Fabric 中，服务在*服务主机进程*（运行服务代码的可执行文件）中运行。当你使用 Reliable Services API 编写服务时，服务项目只编译成注册服务类型并运行代码的可执行文件。当你在 .NET 中的 Service Fabric 上编写服务时，在大多数情况下都是如此。如果你打开无状态服务项目中的 Program.cs，则应该看到：
-
 
 	using System;
 	using System.Diagnostics;
@@ -157,8 +150,6 @@ Web API 应用程序本身不会更改。它与你可能已在过去编写的 We
 	    }
 	}
 
-
-
 如果这看上去疑似控制台应用程序的入口点，这是因为它是。
 
 有关服务主机进程和服务注册的更多详细信息已超出本文的范围。但是现在请务必了解*服务代码已在它自身的进程中运行*。
@@ -168,27 +159,21 @@ Web API 应用程序本身不会更改。它与你可能已在过去编写的 We
 
 在本文中，我们将使用 Katana 作为 Web API 应用程序的 OWIN 主机。Katana 是基于 [System.Net.HttpListener](https://msdn.microsoft.com/zh-cn/library/system.net.httplistener.aspx) 和 Windows [HTTP Server API](https://msdn.microsoft.com/zh-cn/library/windows/desktop/aa364510.aspx) 的开源 OWIN 主机实现。
 
-> [AZURE.NOTE] 若要了解有关 Katana 的详细信息，请转到 [Katana 站点](http://www.asp.net/aspnet/overview/owin-and-katana/an-overview-of-project-katana)。有关如何使用 Katana 自托管 Web API 的快速概述，请参阅[使用 OWIN 自托管 ASP.NET Web API 2](http://www.asp.net/web-api/overview/hosting-aspnet-web-api/use-owin-to-self-host-web-api)。
-
+> [!NOTE] 若要了解有关 Katana 的详细信息，请转到 [Katana 站点](http://www.asp.net/aspnet/overview/owin-and-katana/an-overview-of-project-katana)。有关如何使用 Katana 自托管 Web API 的快速概述，请参阅[使用 OWIN 自托管 ASP.NET Web API 2](http://www.asp.net/web-api/overview/hosting-aspnet-web-api/use-owin-to-self-host-web-api)。
 
 ## 设置 Web 服务器
 Reliable Services API 提供通信入口点，可在其中插入通信堆栈，以便用户和客户端能够连接到服务：
-
-
 
 	protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
 	{
 	    ...
 	}
 
-
-
 Web 服务器（以及可能在将来使用的任何其他通信堆栈，如 WebSockets）应使用 ICommunicationListener 接口与系统正确集成。这样做的原因会在后续步骤中表现得更明显。
 
 首先创建一个名为 OwinCommunicationListener 的类，它实现 ICommunicationListener：
 
 **OwinCommunicationListener.cs**
-
 
 	using Microsoft.Owin.Hosting;
 	using Microsoft.ServiceFabric.Services.Communication.Runtime;
@@ -217,7 +202,6 @@ Web 服务器（以及可能在将来使用的任何其他通信堆栈，如 Web
 	    }
 	}
 
-
 ICommunicationListener 接口提供了三个方法来为服务管理通信侦听器：
 
  - *OpenAsync*。开始侦听请求。
@@ -225,7 +209,6 @@ ICommunicationListener 接口提供了三个方法来为服务管理通信侦听
  - *Abort*。取消所有内容并立即停止。
 
 若要开始操作，请为侦听器运行所需的项目添加私有类成员。这些成员会通过构造函数初始化，并在后面设置侦听 URL 时使用。
-
 
 	internal class OwinCommunicationListener : ICommunicationListener
 	{
@@ -273,10 +256,7 @@ ICommunicationListener 接口提供了三个方法来为服务管理通信侦听
 	        this.appRoot = appRoot;
 	    }
    
-
 	    ...
-
-
 
 ## 实现 OpenAsync
 若要设置 Web 服务器，需要两项信息：
@@ -288,20 +268,15 @@ ICommunicationListener 接口提供了三个方法来为服务管理通信侦听
 
 在 PackageRoot\\ServiceManifest.xml 中配置 HTTP 终结点：
 
-
-
 	<Resources>
 	    <Endpoints>
 	        <Endpoint Name="ServiceEndpoint" Type="Input" Protocol="http" Port="8281" />
 	    </Endpoints>
 	</Resources>
 
-
-
 此步骤很重要，因为服务主机进程要在受限制的凭据（在 Windows 上的网络服务）之下运行。这意味着服务并没有自行设置 HTTP 终结点的访问权限。通过使用终结点配置，Service Fabric 知道要为服务侦听的 URL 设置适当的访问控制列表 (ACL)。Service Fabric 还提供了一个标准位置用于配置终结点。
 
 返回到 OwinCommunicationListener.cs 中，现在可以开始实现 OpenAsync。从此处启动 Web 服务器。首先，获取终结点信息，并创建服务将侦听的 URL。视侦听器用于无状态服务还是有状态服务而定，URL 会有所不同。如果用于有状态服务，侦听器必须针对它所侦听的每个有状态服务副本创建唯一的地址。如果用于无状态服务，此地址可以简单得多。
-
 
 	public Task<string> OpenAsync(CancellationToken cancellationToken)
 	{
@@ -343,14 +318,11 @@ ICommunicationListener 接口提供了三个方法来为服务管理通信侦听
     
 	    ...
 
-
-
 请注意，此处使用了“http://+”。这是为了确保 Web 服务器侦听所有可用的地址，包括 localhost、FQDN 和计算机 IP。
 
 OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器（或任何通信堆栈），而不是仅仅直接在服务中从 `RunAsync()` 打开它的最重要原因之一。OpenAsync 的返回值是 Web 服务器所侦听的地址。当此地址返回到系统时，它会向服务注册此地址。Service Fabric 提供了一个 API，使客户端和其他服务随后可以通过服务名称请求此地址。这一点很重要，因为服务地址不是静态的。服务为了资源平衡和可用性目的在群集中移动。这是允许客户端为服务解析侦听地址的机制。
 
 明确这一点后，OpenAsync 会启动 Web 服务器，并返回它所侦听的地址。请注意它侦听“http://+”，但在 OpenAsync 返回地址之前，“+”会替换为它当前所处节点的 IP 或 FQDN。此方法所返回的地址就是向系统注册的地址。它也是客户端和其他服务在请求服务地址时所看到的地址。要使客户端可以正确连接到它，它们在地址中需要实际 IP 或 FQDN。
-
 
 	    ...
 
@@ -376,15 +348,12 @@ OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器�
 	    }
 	}
 
-
-
 请注意，这会引用在构造函数中传入到 OwinCommunicationListener 的 Startup 类。此启动实例由 Web 服务器用于启动 Web API 应用程序。
 
 将来在运行应用程序时，`ServiceEventSource.Current.Message()` 行会出现在“诊断事件”窗口中，以确认 Web 服务器已成功启动。
 
 ## 实现 CloseAsync 和 Abort
 最后，实现 CloseAsync 和 Abort 以停止 Web 服务器。可以通过释放在 OpenAsync 过程中创建的服务器句柄来停止 Web 服务器。
-
 
 	public Task CloseAsync(CancellationToken cancellationToken)
 	{
@@ -417,12 +386,10 @@ OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器�
 	    }
 	}
 
-
 在此实现示例中，CloseAsync 和 Abort 都只是停止 Web 服务器。你可以选择在 CloseAsync 中运行更妥善协调的 Web 服务器关机。例如，关机可以等待正在进行的请求在返回之前完成。
 
 ## 启动 Web 服务器
 你现在已准备好创建并返回 OwinCommunicationListener 的实例以启动 Web 服务器。返回到 Service 类 (WebService.cs) 中，替代 `CreateServiceInstanceListeners()` 方法：
-
 
 	protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
 	{
@@ -434,14 +401,12 @@ OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器�
 	        serviceContext => new OwinCommunicationListener(Startup.ConfigureApp, serviceContext, ServiceEventSource.Current, endpoint), endpoint));
 	}
 
-
 这是 Web API *应用程序*和 OWIN *主机*最后相会之处。通过 Startup 类为主机 (OwinCommunicationListener) 指定*应用程序*实例 (Web API)。然后，Service Fabric 将管理其生命周期。通常任何通信堆栈都可以遵循这一相同模式。
 
 ## 将其放在一起
 在此示例中，你无需在 `RunAsync()` 方法中执行任何操作，从而可以简单地删除重写。
 
 最终的服务实现应该非常简单。它只需创建通信侦听器：
-
 
 	using System;
 	using System.Collections.Generic;
@@ -471,9 +436,7 @@ OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器�
 	    }
 	}
 
-
 完整的 `OwinCommunicationListener` 类：
-
 
 	using System;
 	using System.Diagnostics;
@@ -626,38 +589,28 @@ OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器�
 	    }
 	}
 
-
 所有部分都准备就绪后，项目现在应类似于具有 Reliable Services API 入口点和 OWIN 主机的典型 Web API 应用程序：
-
 
 ![包含 Reliable Services API 入口点和 OWIN 主机的 Web API](./media/service-fabric-reliable-services-communication-webapi/webapi-projectstructure.png)
 
 ## 运行 Web 浏览器并通过它进行连接
 
-如果尚未这样做，请[设置开发环境](/documentation/articles/service-fabric-get-started/)。
+如果尚未这样做，请[设置开发环境](./service-fabric-get-started.md)。
 
 现在，你可以生成并部署你的服务。在 Visual Studio 中按 **F5** 以生成并部署应用程序。在“诊断事件”窗口中，你应看到一条消息，指示已在 http://localhost:8281/ 上打开了 Web 服务器。
 
-
 ![Visual Studio 诊断事件窗口](./media/service-fabric-reliable-services-communication-webapi/webapi-diagnostics.png)
 
-> [AZURE.NOTE] 如果计算机上的另一个进程已经打开该端口，你可能会在此看到错误消息。这表示无法打开侦听器。如果是这种情况，请在 ServiceManifest.xml 中的终结点配置中尝试使用不同端口。
-
+> [!NOTE] 如果计算机上的另一个进程已经打开该端口，你可能会在此看到错误消息。这表示无法打开侦听器。如果是这种情况，请在 ServiceManifest.xml 中的终结点配置中尝试使用不同端口。
 
 服务运行之后，打开浏览器并导航到 [http://localhost:8281/api/values](http://localhost:8281/api/values) 对它进行测试。
 
 ## 将其扩展
 扩展无状态 Web 应用通常意味着添加更多计算机并在其上运行 Web 应用。每当向群集添加新节点时，Service Fabric 的业务流程引擎可以为你执行此操作。创建无状态服务的实例时，可以指定要创建的实例数。Service Fabric 将该数目的实例放置在群集中的节点上。它可以确保不会在任一节点上创建多个实例。还可以通过为实例计数指定 **-1**，指示 Service Fabric 始终在每个节点上创建一个实例。这可保证每当添加节点以扩展群集时，都会在新节点上创建无状态服务的实例。此值是服务实例的属性，因此它是在你创建服务实例时设置的：可以通过 PowerShell 设置：
 
-
-
 	New-ServiceFabricService -ApplicationName "fabric:/WebServiceApplication" -ServiceName "fabric:/WebServiceApplication/WebService" -ServiceTypeName "WebServiceType" -Stateless -PartitionSchemeSingleton -InstanceCount -1
 
-
-
 也可以在 Visual Studio 无状态服务项目中定义默认服务时设置：
-
-
 
 	<DefaultServices>
 	  <Service Name="WebService">
@@ -667,12 +620,10 @@ OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器�
 	  </Service>
 	</DefaultServices>
 
-
-
-有关如何创建应用程序和服务实例的详细信息，请参阅[部署应用程序](/documentation/articles/service-fabric-deploy-remove-applications/)。
+有关如何创建应用程序和服务实例的详细信息，请参阅[部署应用程序](./service-fabric-deploy-remove-applications.md)。
 
 ## 后续步骤
 
-[使用 Visual Studio 调试 Service Fabric 应用程序](/documentation/articles/service-fabric-debugging-your-application/)
+[使用 Visual Studio 调试 Service Fabric 应用程序](./service-fabric-debugging-your-application.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

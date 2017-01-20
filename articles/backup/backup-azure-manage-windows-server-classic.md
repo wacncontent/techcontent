@@ -1,33 +1,31 @@
-<properties
-	pageTitle="使用 Azure 经典部署模型管理 Azure 备份保管库和服务器 | Azure"
-	description="使用本教程来了解如何管理 Azure 备份保管库和服务器。"
-	services="backup"
-	documentationCenter=""
-	authors="Jim-Parker"
-	manager="jwhit"
-	editor="tysonn"/>  
+---
+title: 使用 Azure 经典部署模型管理 Azure 备份保管库和服务器 | Azure
+description: 使用本教程来了解如何管理 Azure 备份保管库和服务器。
+services: backup
+documentationCenter: 
+authors: Jim-Parker
+manager: jwhit
+editor: tysonn
 
-
-<tags
-	ms.service="backup"
-	ms.workload="storage-backup-recovery"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="11/15/2016"
-	ms.author="jimpark;markgal"/>
-
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 11/15/2016
+ms.author: jimpark;markgal
+---
 
 # 使用经典部署模型管理 Azure 备份保管库和服务器
 
-> [AZURE.SELECTOR]
-- [资源管理器](/documentation/articles/backup-azure-vms-automation/)
-- [经典](/documentation/articles/backup-azure-manage-windows-server-classic/)
+> [!div class="op_single_selector"]
+- [资源管理器](./backup-azure-vms-automation.md)
+- [经典](./backup-azure-manage-windows-server-classic.md)
 
 本文概述了可通过 Azure 经典管理门户和 Azure 备份代理完成的备份管理任务。
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-classic-include.md)] 资源管理器部署模型。
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-classic-include.md)] 资源管理器部署模型。
 
 ## 经典管理门户任务
 1. 登录到[经典管理门户](https://manage.windowsazure.cn)。
@@ -36,11 +34,9 @@
 
     ![恢复服务](./media/backup-azure-manage-windows-server-classic/rs-left-nav.png)  
 
-
 在“快速启动”页面顶部选择选项后，可以看到可用的管理任务。
 
 ![管理选项卡](./media/backup-azure-manage-windows-server-classic/qs-page.png)  
-
 
 ### 仪表板
 选择“仪表板”以查看服务器的使用概览。“使用概览”包括：
@@ -56,7 +52,6 @@
 - **删除** - 删除当前备份保管库。如果不再使用备份保管库，则可将其删除以释放存储空间。仅在从保管库中删除所有注册的服务器后启用“删除”。
 
 ![备份仪表板任务](./media/backup-azure-manage-windows-server-classic/dashboard-tasks.png)  
-
 
 ## 已注册的项
 选择“已注册的项”可查看已注册到此保管库的服务器的名称。
@@ -81,11 +76,11 @@
 
 从“配置”选项卡中，可以选择适当的存储冗余选项。选择存储冗余选项的最佳时机是在创建保管库之后、将任何计算机注册到保管库之前。
 
->[AZURE.WARNING] 将某个项注册到保管库后，存储冗余选项将会锁定且不能修改。
+>[!WARNING] 将某个项注册到保管库后，存储冗余选项将会锁定且不能修改。
 
 ![配置](./media/backup-azure-manage-windows-server-classic/configure.png)
 
-有关[存储冗余](/documentation/articles/storage-redundancy/)的详细信息，请参阅此文。
+有关[存储冗余](../storage/storage-redundancy.md)的详细信息，请参阅此文。
 
 ## Azure 备份代理任务
 
@@ -94,7 +89,6 @@
 打开 **Azure 备份代理**（可以通过在计算机中搜索 *Azure 备份*来找到它）。
 
 ![备份代理](./media/backup-azure-manage-windows-server-classic/snap-in-search.png)  
-
 
 通过备份代理控制台右侧的“操作”，可以执行以下管理任务：
 
@@ -105,14 +99,13 @@
 
 ![代理控制台操作](./media/backup-azure-manage-windows-server-classic/console-actions.png)
 
->[AZURE.NOTE] 若要**恢复数据**，请参阅 [Restore files to a Windows server or Windows client machine](/documentation/articles/backup-azure-restore-windows-server/)（将文件还原到 Windows Server 或 Windows 客户端计算机）。
+>[!NOTE] 若要**恢复数据**，请参阅 [Restore files to a Windows server or Windows client machine](./backup-azure-restore-windows-server.md)（将文件还原到 Windows Server 或 Windows 客户端计算机）。
 
 ### 修改现有备份
 
 1. 在 Azure 备份代理中，单击“计划备份”。
 
     ![计划 Windows Server 备份](./media/backup-azure-manage-windows-server-classic/schedule-backup.png)  
-
 
 2. 在计划备份向导中，将“更改备份项或时间”选项保留选中状态，然后单击“下一步”。
 
@@ -132,8 +125,7 @@
 
     ![指定备份计划](./media/backup-azure-manage-windows-server-classic/specify-backup-schedule-modify-close.png)  
 
-
-    >[AZURE.NOTE] [此文](/documentation/articles/backup-azure-backup-cloud-as-tape/)中详细介绍了如何指定备份计划。
+    >[!NOTE] [此文](./backup-azure-backup-cloud-as-tape.md)中详细介绍了如何指定备份计划。
 
 6. 选择备份副本的“保留策略”，然后单击“下一步”。
 
@@ -156,7 +148,6 @@ Azure 备份代理提供的“限制”选项卡可让你控制在数据传输�
 
     ![网络限制](./media/backup-azure-manage-windows-server-classic/throttling-dialog.png)  
 
-
 3. 启用限制后，指定在“工作时间”和“非工作时间”允许使用多少带宽进行备份数据传输。
 
     带宽值从每秒 512 千字节 (Kbps) 开始，最高可为每秒 1023 兆字节 (Mbps)。你还可以指定“工作时间”的开始和结束时间，以及一周中有哪几天被视为工作日。在指定的工作时间之外的时间被视为非工作时间。
@@ -173,7 +164,6 @@ Azure 备份代理提供的“限制”选项卡可让你控制在数据传输�
 
     ![计划 Windows Server 备份](./media/backup-azure-manage-windows-server-classic/schedule-backup.png)  
 
-
 3. 在计划备份向导中，将“更改备份项或时间”选项保留选中状态，然后单击“下一步”。
 
     ![修改计划](./media/backup-azure-manage-windows-server-classic/modify-or-stop-a-scheduled-backup.png)
@@ -182,11 +172,9 @@ Azure 备份代理提供的“限制”选项卡可让你控制在数据传输�
 
     ![选择要排除的项](./media/backup-azure-manage-windows-server-classic/exclusion-settings.png)  
 
-
 5. 单击“添加排除项”。
 
     ![添加排除项](./media/backup-azure-manage-windows-server-classic/add-exclusion.png)  
-
 
 6. 选择位置，然后单击“确定”。
 
@@ -196,16 +184,13 @@ Azure 备份代理提供的“限制”选项卡可让你控制在数据传输�
 
     ![按文件类型排除](./media/backup-azure-manage-windows-server-classic/exclude-file-type.png)  
 
-
     添加 .mp3 扩展名
 
     ![文件类型示例](./media/backup-azure-manage-windows-server-classic/exclude-mp3.png)  
 
-
     若要添加其他扩展名，请单击“添加排除项”，然后输入另一个文件类型扩展名（添加 .jpeg 扩展名）。
 
     ![另一个文件类型示例](./media/backup-azure-manage-windows-server-classic/exclude-jpg.png)  
-
 
 8. 添加所有扩展名之后，请单击“确定”。
 
@@ -214,8 +199,8 @@ Azure 备份代理提供的“限制”选项卡可让你控制在数据传输�
     ![确认排除](./media/backup-azure-manage-windows-server-classic/finish-exclusions.png)
 
 ## 后续步骤
-- [从 Azure 还原 Windows Server 或 Windows 客户端](/documentation/articles/backup-azure-restore-windows-server/)
-- 若要了解有关 Azure 备份的详细信息，请参阅 [Azure 备份概述](/documentation/articles/backup-introduction-to-azure-backup/)
+- [从 Azure 还原 Windows Server 或 Windows 客户端](./backup-azure-restore-windows-server.md)
+- 若要了解有关 Azure 备份的详细信息，请参阅 [Azure 备份概述](./backup-introduction-to-azure-backup.md)
 - 访问 [Azure 备份论坛](https://social.msdn.microsoft.com/forums/azure/en-US/home?forum=windowsazureonlinebackup)
 
 <!---HONumber=Mooncake_1107_2016-->

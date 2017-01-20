@@ -1,24 +1,21 @@
-<properties
-	pageTitle="准备网络映射，以便在 Azure Site Recovery 中通过 VMM 进行 Hyper-V 虚拟机保护 | Azure"
-	description="设置网络映射，以便进行从本地数据中心到 Azure 或者到辅助站点的 Hyper-V 虚拟机复制。"
-	services="site-recovery"
-	documentationCenter=""
-	authors="rayne-wiselman"
-	manager="jwhit"
-	editor=""/>  
+---
+title: 准备网络映射，以便在 Azure Site Recovery 中通过 VMM 进行 Hyper-V 虚拟机保护 | Azure
+description: 设置网络映射，以便进行从本地数据中心到 Azure 或者到辅助站点的 Hyper-V 虚拟机复制。
+services: site-recovery
+documentationCenter: 
+authors: rayne-wiselman
+manager: jwhit
+editor: 
 
-
-<tags
-	ms.service="site-recovery"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="storage-backup-recovery"
-	ms.date="10/05/2016"
-	wacn.date="01/04/2017"
-	ms.author="raynew"/>  
-
-
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 10/05/2016
+wacn.date: 01/04/2017
+ms.author: raynew
+---
 
 # 准备网络映射，以便在 Azure Site Recovery 中通过 VMM 进行 Hyper-V 虚拟机保护
 
@@ -27,7 +24,6 @@ Azure Site Recovery 有助于业务连续性和灾难恢复 (BCDR) 策略，因�
 本文介绍网络映射，你可以通过网络映射来优化网络设置的配置，以便使用 Site Recovery 在两个本地数据中心之间或本地数据中心与 Azure 之间复制位于 VMM 云中的 Hyper-V 虚拟机。请注意，如果你是在没有 VMM 云的情况下复制 Hyper-V VM，或者是复制物理服务器，则本文与之不相关。
 
 请将任何评论或问题发布到本文底部，或者发布到 [Azure 恢复服务论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=hypervrecovmgr)。
-
 
 ## 概述
 
@@ -43,7 +39,6 @@ Azure Site Recovery 有助于业务连续性和灾难恢复 (BCDR) 策略，因�
 	- **在故障转移后连接虚拟机** - 在同一网络上进行故障转移的所有计算机都可以彼此连接到对方，不管它们位于哪个恢复计划中。
 	- **网关** - 如果在目标 Azure 网络上设置了网络网关，则虚拟机可以连接到其他本地虚拟机。
 	- **无网络映射** - 如果没有配置网络映射，则只有在同一恢复计划中进行故障转移的虚拟机能够在故障转移到 Azure 后彼此连接到对方。
-
 
 ## 网络映射示例
 
@@ -95,17 +90,13 @@ VMNetwork1-Shanghai | SilverCloud1 | SilverCloud2 | 可用
 VMNetwork2-Shanghai | SilverCloud1 | SilverCloud2 | 不可用
  | GoldCloud1 | GoldCloud2 | 可用
 
-
-
 ## 多个子网
 
 如果目标网络具有多个子网，并且其中一个子网与源虚拟机所在的子网同名，则在故障转移后副本虚拟机将连接到该目标子网。如果没有具有匹配名称的目标子网，则虚拟机将连接到网络中的第一个子网。
 
-
 ### 故障回复
 
 若要查看在故障恢复情况下发生的情况（反向复制），我们假设 VMNetwork1-Beijing 已映射到 VMNetwork1-Shanghai，设置如下。
-
 
 **虚拟机** | **连接到 VM 网络**
 ---|---
@@ -121,9 +112,8 @@ VM2（VM1 的副本） | VMNetwork1-Shanghai
 VM-2 的网络属性在故障转移后发生更改并连接到 VMNetwork2-Shanghai | 如果未映射 VMNetwork2-Shanghai，则 VM-1 将断开连接
 VMNetwork1-Shanghai 的网络映射已更改 | VM-1 将连接到现映射到 VMNetwork1-Shanghai 的网络
 
-
 ## 后续步骤
 
-现在，你已经对网络映射有了更好的了解，因此可以[开始 Site Recovery 部署](/documentation/articles/site-recovery-best-practices/)了。
+现在，你已经对网络映射有了更好的了解，因此可以[开始 Site Recovery 部署](./site-recovery-best-practices.md)了。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

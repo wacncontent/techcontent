@@ -1,12 +1,17 @@
-<properties 
-	pageTitle="Linux 内核超时导致虚拟机无法正常启动" 
-	description="Linux 内核超时导致虚拟机无法正常启动。" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machines-aog" ms.date="" wacn.date="12/05/2016"/>
+---
+title: Linux 内核超时导致虚拟机无法正常启动
+description: Linux 内核超时导致虚拟机无法正常启动。
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machines-aog
+ms.date: 
+wacn.date: 12/05/2016
+---
+
 # Linux 内核超时导致虚拟机无法正常启动 #
 
 ### 问题描述 ###
@@ -63,5 +68,4 @@
 			sysctl -p
 
 如果上述两个方案依然无法解决问题, 请及时联系 Azure 技术支持中心,获取更深入的支持和帮助.
-
 

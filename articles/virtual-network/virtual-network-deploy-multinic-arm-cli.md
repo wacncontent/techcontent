@@ -1,35 +1,34 @@
-<properties
-    pageTitle="使用 Azure CLI 创建具有多个 NIC 的 VM | Azure"
-    description="了解如何使用 Azure CLI 通过 Azure Resource Manager 创建具有多个 NIC 的 VM。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 Azure CLI 创建具有多个 NIC 的 VM | Azure
+description: 了解如何使用 Azure CLI 通过 Azure Resource Manager 创建具有多个 NIC 的 VM。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="8e906a4b-8583-4a97-9416-ee34cfa09a98"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/02/2016"
-    wacn.date="12/26/2016"
-    ms.author="jdial" />  
-
+ms.assetid: 8e906a4b-8583-4a97-9416-ee34cfa09a98
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/02/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 使用 Azure CLI 创建具有多个 NIC 的 VM
-[AZURE.INCLUDE [virtual-network-deploy-multinic-arm-selectors-include.md](../../includes/virtual-network-deploy-multinic-arm-selectors-include.md)]
+[!INCLUDE [virtual-network-deploy-multinic-arm-selectors-include.md](../../includes/virtual-network-deploy-multinic-arm-selectors-include.md)]
 
-[AZURE.INCLUDE [virtual-network-deploy-multinic-intro-include.md](../../includes/virtual-network-deploy-multinic-intro-include.md)]
+[!INCLUDE [virtual-network-deploy-multinic-intro-include.md](../../includes/virtual-network-deploy-multinic-intro-include.md)]
 
-> [AZURE.NOTE]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是[经典部署模型](/documentation/articles/virtual-network-deploy-multinic-classic-cli/)。
+> [!NOTE]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是[经典部署模型](./virtual-network-deploy-multinic-classic-cli.md)。
 >
 
-[AZURE.INCLUDE [virtual-network-deploy-multinic-scenario-include.md](../../includes/virtual-network-deploy-multinic-scenario-include.md)]
+[!INCLUDE [virtual-network-deploy-multinic-scenario-include.md](../../includes/virtual-network-deploy-multinic-scenario-include.md)]
 
 以下步骤将名为 *IaaSStory* 的资源组用于 Web 服务器，并将名为 *IaaSStory-BackEnd* 的资源组用于数据库服务器。
 
@@ -40,11 +39,11 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 2. 在模板页中“父资源组”的右侧，单击“部署到 Azure”。
 3. 如果需要，更改参数值，然后按照 Azure 门户预览中的步骤部署资源组。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 请确保存储帐户名称是唯一的。不能在 Azure 中有重复的存储帐户名称。
 > 
 
-[AZURE.INCLUDE [azure-cli-prerequisites-include.md](../../includes/azure-cli-prerequisites-include.md)]
+[!INCLUDE [azure-cli-prerequisites-include.md](../../includes/azure-cli-prerequisites-include.md)]
 
 ## 创建后端 VM
 后端 VM 取决于以下资源的创建：
@@ -91,7 +90,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
                 --name $backendSubnetName|grep Id)"
         subnetId=${subnetId#*/}
 
-   > [AZURE.TIP]
+   > [!TIP]
    上面的第一个命令使用 [grep](http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_04_02.html) 和[字符串操作](http://tldp.org/LDP/abs/html/string-manipulation.html)（更具体地说，是子字符串删除）。
    >
 

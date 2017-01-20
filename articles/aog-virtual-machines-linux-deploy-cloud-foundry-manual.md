@@ -1,12 +1,17 @@
-<properties 
-	pageTitle="使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry" 
-	description="这篇文章将介绍如何使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machines-aog" ms.date="" wacn.date="08/31/2016"/>
+---
+title: 使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry
+description: 这篇文章将介绍如何使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machines-aog
+ms.date: 
+wacn.date: 08/31/2016
+---
+
 # 使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry
 
 这篇文章将介绍如何使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry。本文的目的在于：
@@ -15,7 +20,6 @@
 2.	了解用于管理 Cloud Foundry 的分布式系统生命周期管理软件的 Bosh 的搭建和使用。通过本文，你将明白如何通过 bosh-init 工具安装bosh 虚拟机，如果通过 bosh CLI 命令部署和管理 deployment。
 3.	让读者熟悉 Azure CLI 命令集，Bosh CLI 命令集和 CF CLI 命令集。
 
- 
 任何 PaaS 都必须依附于底层的 IaaS 环境，这里我们使用 Azure 云平台。下图中显示了 CF 与 IaaS，及其管理软件的关系。
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/foundation.png)
@@ -35,7 +39,7 @@
 
 ###<a id="prepare_ssh"></a> 为跳板虚拟机准备 ssh-key
 
-从这一步开始，到跳板机安装完成，所有操作将在 Azure CLI 中完成。关于如何安装 Azure CLI 请参见[链接](/documentation/articles/xplat-cli-install/)。
+从这一步开始，到跳板机安装完成，所有操作将在 Azure CLI 中完成。关于如何安装 Azure CLI 请参见[链接](./xplat-cli-install.md)。
 
 打开 Azure CLI，将 CLI 切换到 ARM 模式。
 
@@ -61,7 +65,6 @@
 
 接下来使用命令查询账号的基本信息，如果一个账号下有多个订阅，使用 account set 命令选中其中一个。
 
-
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/account-list.png)
  
 查询该订阅的详细信息，并用变量记录下订阅号和租户号，后续命令中会使用。
@@ -69,7 +72,6 @@
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/account-list-result.png)
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/account-select.png)
- 
  
 ###<a id="prepare_bosh"></a>  为 bosh 准备服务主体
 
@@ -81,7 +83,6 @@
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/set-clientid.png)
 
- 
 为该账号创建服务主体。
 
 	azure ad sp create -a %Client_ID%
@@ -95,7 +96,6 @@
 	azure role assignment create --spn %SPN% --roleName "Virtual Machine Contributor" --subscription %Sub_ID%
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/role-assign.png)
-
 
 	azure role assignment create --spn %SPN% --roleName "Network Contributor" --subscription %Sub_ID%
 
@@ -153,7 +153,6 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/network-public-ip-create.png)
  
-
 ####<a id="ready_vnet"></a> 虚拟网络及其子网
 
 为整套环境创建一个虚拟网络。该网络包含三个子网，分别用户 bosh director 环境，CF 环境和 Diego 环境。
@@ -205,7 +204,6 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 	azure vm image list --location "china east" --publisher canonical --offer UbuntuServer
 
- 
 创建 VM:
 
 	azure vm create --resource-group lqicfrg01 --name lqicfvm01-bosh --location "China East" --os-type linux --nic-name lqicfnic01-bosh --vnet-name lqicfvnet01 --vnet-subnet-name lqicfvnet01-bosh --storage-account-name lqicfsa01 --image-urn canonical:UbuntuServer:14.04.3-LTS:14.04.201606270 --ssh-publickey-file C:\Test\lqicfvm01-bosh.pub --admin-username boshuser
@@ -224,7 +222,6 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/update-os.png)
 
- 
 安装 Bosh 和 CF 需要的软件包。
 
 	sudo apt-get install -y build-essential ruby2.0 ruby2.0-dev libxml2-dev libsqlite3-dev libxslt1-dev libpq-dev libmysqlclient-dev zlibc zlib1g-dev openssl libxstl-dev libssl-dev libreadline6 libreadline6-dev libyam                                                                                                                                                             l-dev sqlite3 libffi-dev
@@ -232,7 +229,6 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/install-bosh.png)
 	 
 将命令指向最新的软件版本。
-
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/update-software.png)
  
@@ -246,9 +242,6 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/update-gem2.png)
 
-
-
- 
 下载安装 bosh-init。该工具用于部署安装 bosh director。
 
 	wget -O bosh-init https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-0.0.51-linux-amd64
@@ -313,7 +306,6 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/portal-list-change.png) 
  
-
 ##<a id="concept"></a> 部署 CF
 
 本小节包含
@@ -322,7 +314,6 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 - [上传 stemcell 和 release](#upload)
 - [指定当前部署](#specific_deploy)
 - [部署 CF](#deploy_cf)
-
 
 因为没有注册域名，这里使用 xip.io 作为 CF 实验环境的域名；该域名解析会将域名直接解析为前面添加的 IP 地址。
 接下来我们将通过命令 bosh 命令行操作 Bosh Director 来管理 deployment。首先是要创建一个 deployment。基本步骤为
@@ -349,7 +340,6 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 	![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/upload-stemcell.png) 
 
- 
 2. 将该 deployment 需要的所有 release 上传到 director。需要的 release 已经定义在 manifest 文件中，请确保所有 release 已经传到 director。
 
 	![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/single-vm-cf.png) 
@@ -366,16 +356,11 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/bosh-upload-cf-release2.png) 
  
- 
- 
- 
 ###<a id="specific_deploy"></a> 指定当前部署
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/prepare-deploy.png) 
  
 如果 yml 文件格式有误，将会提示错误，请根据错误修正文件。
-
-
 
 ###<a id="deploy_cf"></a> 部署 CF
 

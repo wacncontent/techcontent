@@ -1,12 +1,12 @@
-> [AZURE.SELECTOR]
-- [(iOS | .NET)](/documentation/articles/mobile-services-dotnet-backend-ios-get-started-users/)
-- [(iOS | JavaScript)](/documentation/articles/mobile-services-ios-get-started-users/)
-- [(Windows Phone | Javascript)](/documentation/articles/mobile-services-windows-phone-get-started-users/)
-- [(Android | Javascript)](/documentation/articles/mobile-services-android-get-started-users/)
-- [(Xamarin iOS | .NET)](/documentation/articles/mobile-services-dotnet-backend-xamarin-ios-get-started-users/)
-- [(Xamarin iOS | Javascript)](/documentation/articles/partner-xamarin-mobile-services-ios-get-started-users/)
-- [(Xamarin Android | .NET)](/documentation/articles/mobile-services-dotnet-backend-xamarin-android-get-started-users/)
-- [(Xamarin Android | Javascript)](/documentation/articles/partner-xamarin-mobile-services-android-get-started-users/)
-- [(HTML | Javascript)](/documentation/articles/mobile-services-html-get-started-users/)
+> [!div class="op_single_selector"]
+- [(iOS | .NET)](../articles/mobile-services/mobile-services-dotnet-backend-ios-get-started-users.md)
+- [(iOS | JavaScript)](../articles/mobile-services/mobile-services-ios-get-started-users.md)
+- [(Windows Phone | Javascript)](../articles/mobile-services/mobile-services-windows-phone-get-started-users.md)
+- [(Android | Javascript)](../articles/mobile-services/mobile-services-android-get-started-users.md)
+- [(Xamarin iOS | .NET)](../articles/mobile-services/mobile-services-dotnet-backend-xamarin-ios-get-started-users.md)
+- [(Xamarin iOS | Javascript)](../articles/mobile-services/partner-xamarin-mobile-services-ios-get-started-users.md)
+- [(Xamarin Android | .NET)](../articles/mobile-services/mobile-services-dotnet-backend-xamarin-android-get-started-users.md)
+- [(Xamarin Android | Javascript)](../articles/mobile-services/partner-xamarin-mobile-services-android-get-started-users.md)
+- [(HTML | Javascript)](../articles/mobile-services/mobile-services-html-get-started-users.md)
 
 <!---HONumber=82-->

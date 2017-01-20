@@ -1,37 +1,35 @@
-<properties
-	pageTitle="在 Windows Phone 上借助 Azure 通知中心发送推送通知 | Azure"
-	description="在本教程中，你将了解如何使用 Azure 通知中心将通知推送到 Windows Phone 8 或 Windows Phone 8.1 Silverlight 应用程序。"
-	services="notification-hubs"
-	documentationCenter="windows"
-    keywords="推送通知,push notification,windows phone 推送"
-	authors="wesmc7777"
-	manager="erikre"
-	editor="erikre"/>  
+---
+title: 在 Windows Phone 上借助 Azure 通知中心发送推送通知 | Azure
+description: 在本教程中，你将了解如何使用 Azure 通知中心将通知推送到 Windows Phone 8 或 Windows Phone 8.1 Silverlight 应用程序。
+services: notification-hubs
+documentationCenter: windows
+keywords: 推送通知,push notification,windows phone 推送
+authors: wesmc7777
+manager: erikre
+editor: erikre
 
-
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows-phone"
-	ms.devlang="dotnet"
-	ms.topic="hero-article"
-	ms.date="10/03/2016"
-	ms.author="wesmc"
-	wacn.date="11/22/2016"/>  
-
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows-phone
+ms.devlang: dotnet
+ms.topic: hero-article
+ms.date: 10/03/2016
+ms.author: wesmc
+wacn.date: 11/22/2016
+---
 
 # 在 Windows Phone 上借助 Azure 通知中心发送推送通知
 
-[AZURE.INCLUDE [notification-hubs-selector-get-started](../../includes/notification-hubs-selector-get-started.md)]
+[!INCLUDE [notification-hubs-selector-get-started](../../includes/notification-hubs-selector-get-started.md)]
 
 ##概述
 
-> [AZURE.NOTE] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](/pricing/1rmb-trial/)。
+> [!NOTE] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
-本教程演示如何使用 Azure 通知中心将推送通知发送到 Windows Phone 8 或 Windows Phone 8.1 Silverlight 应用程序。如果你要以 Windows Phone 8.1（非 Silverlight）为目标，请参阅 [Windows Universal](/documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/) 版本。
+本教程演示如何使用 Azure 通知中心将推送通知发送到 Windows Phone 8 或 Windows Phone 8.1 Silverlight 应用程序。如果你要以 Windows Phone 8.1（非 Silverlight）为目标，请参阅 [Windows Universal](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md) 版本。
 在本教程中，你将创建一个空白 Windows Phone 8 应用，它使用 Microsoft 推送通知服务 (MPNS) 接收推送通知。完成后，你将能够使用通知中心将推送通知广播到运行你的应用的所有设备。
 
-> [AZURE.NOTE] 通知中心 Windows Phone SDK 不支持将 Windows 推送通知服务 (WNS) 与 Windows Phone 8.1 Silverlight 应用配合使用。若要将 WNS（而不是 MPNS）与 Windows Phone 8.1 Silverlight 应用配合使用，请遵循使用 REST API 的 [通知中心 - Windows Phone Silverlight 教程]。
+> [!NOTE] 通知中心 Windows Phone SDK 不支持将 Windows 推送通知服务 (WNS) 与 Windows Phone 8.1 Silverlight 应用配合使用。若要将 WNS（而不是 MPNS）与 Windows Phone 8.1 Silverlight 应用配合使用，请遵循使用 REST API 的 [通知中心 - Windows Phone Silverlight 教程]。
 
 本教程演示使用通知中心的简单广播方案。
 
@@ -45,7 +43,7 @@
 
 ##创建通知中心
 
-[AZURE.INCLUDE [notification-hubs-portal-create-new-hub](../../includes/notification-hubs-portal-create-new-hub.md)]
+[!INCLUDE [notification-hubs-portal-create-new-hub](../../includes/notification-hubs-portal-create-new-hub.md)]
 
 <ol start="6">
 <li><p>单击“通知服务”部分（位于“设置”内），然后单击“Windows Phone (MPNS)”并选中“启用未经身份验证的推送”复选框。<b></b><i></i><b></b><b></b></p>
@@ -56,7 +54,7 @@
 
 你的中心现已创建，并已配置为向 Windows Phone 发送未经身份验证的通知。
 
-> [AZURE.NOTE] 本教程使用未经身份验证模式下的 MPNS。MPNS 未经身份验证的模式对你可以发送到每个通道的通知有一些限制。通知中心支持 [MPNS 身份验证模式](http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/ff941099.aspx)，它允许你上载证书。
+> [!NOTE] 本教程使用未经身份验证模式下的 MPNS。MPNS 未经身份验证的模式对你可以发送到每个通道的通知有一些限制。通知中心支持 [MPNS 身份验证模式](http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/ff941099.aspx)，它允许你上载证书。
 
 ##将你的应用程序连接到通知中心
 
@@ -104,12 +102,12 @@
             });
         });
 
-    >[AZURE.NOTE] 值 **MyPushChannel** 是用于查找 [HttpNotificationChannel](https://msdn.microsoft.com/zh-cn/library/windows/apps/microsoft.phone.notification.httpnotificationchannel.aspx) 集合中现有通道的索引。如果不存在，则使用该名称创建新条目。
+    >[!NOTE] 值 **MyPushChannel** 是用于查找 [HttpNotificationChannel](https://msdn.microsoft.com/zh-cn/library/windows/apps/microsoft.phone.notification.httpnotificationchannel.aspx) 集合中现有通道的索引。如果不存在，则使用该名称创建新条目。
     
     确保插入你的中心名称以及在前一部分中获取的名为 **DefaultListenSharedAccessSignature** 的连接字符串。
     此代码从 MPNS 检索应用的通道 URI，然后将该通道 URI 注册到你的通知中心。它还保证每次启动应用程序时都在通知中心注册通道 URI。
 
-	>[AZURE.NOTE]本教程将一个 toast 通知发送到设备。而当你发送磁贴通知时，必须在通道上调用 **BindToShellTile** 方法。若要同时支持 toast 通知和磁贴通知，请同时调用 **BindToShellTile** 和 **BindToShellToast**。
+	>[!NOTE]本教程将一个 toast 通知发送到设备。而当你发送磁贴通知时，必须在通道上调用 **BindToShellTile** 方法。若要同时支持 toast 通知和磁贴通知，请同时调用 **BindToShellTile** 和 **BindToShellToast**。
 
 6. 在解决方案资源管理器中，展开“属性”，打开 `WMAppManifest.xml` 文件，单击“功能”选项卡并确保选中 **ID\_CAP\_PUSH\_NOTIFICATION** 功能。
 
@@ -123,15 +121,15 @@
 
 8. 关闭应用。
 
-   >[AZURE.NOTE] 若要接收 toast 推送通知，则应用程序不得在前台运行。
+   >[!NOTE] 若要接收 toast 推送通知，则应用程序不得在前台运行。
 
 ##从后端发送推送通知
 
 你可以使用通知中心通过公共 <a href="http://msdn.microsoft.com/zh-cn/library/windowsazure/dn223264.aspx">REST 接口</a>从任意后端发送推送通知。在本教程中，你将使用 .NET 控制台应用程序来发送推送通知。
 
-有关如何从与通知中心集成的 ASP.NET WebAPI 后端来发送推送通知的示例，请参阅 [Azure Notification Hubs Notify Users with .NET backend（Azure 通知中心 - 使用 .NET 后端通知用户）](/documentation/articles/notification-hubs-aspnet-backend-windows-dotnet-wns-notification/)。
+有关如何从与通知中心集成的 ASP.NET WebAPI 后端来发送推送通知的示例，请参阅 [Azure Notification Hubs Notify Users with .NET backend（Azure 通知中心 - 使用 .NET 后端通知用户）](./notification-hubs-aspnet-backend-windows-dotnet-wns-notification.md)。
 
-有关如何使用 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn223264.aspx) 发送推送通知的示例，请参阅[如何通过 Java 使用通知中心](/documentation/articles/notification-hubs-java-push-notification-tutorial/)和[如何通过 PHP 使用通知中心](/documentation/articles/notification-hubs-php-push-notification-tutorial/)。
+有关如何使用 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn223264.aspx) 发送推送通知的示例，请参阅[如何通过 Java 使用通知中心](./notification-hubs-java-push-notification-tutorial.md)和[如何通过 PHP 使用通知中心](./notification-hubs-php-push-notification-tutorial.md)。
 
 1. 右键单击解决方案，选择“添加”和“新建项目...”，然后在“Visual C#”下依次单击“Windows”、“控制台应用程序”和“确定”。
 
@@ -170,7 +168,7 @@
 
 	确保将 `<hub name>` 占位符替换为出现在门户中的通知中心名称。此外，使用你在“配置通知中心”部分中获取的名称为 **DefaultFullSharedAccessSignature** 的连接字符串替换连接字符串占位符。
 
-	>[AZURE.NOTE]确保你使用的是具有**完全**访问权限的连接字符串，而不是具有**侦听**访问权限的连接字符串。侦听访问字符串无权发送推送通知。
+	>[!NOTE]确保你使用的是具有**完全**访问权限的连接字符串，而不是具有**侦听**访问权限的连接字符串。侦听访问字符串无权发送推送通知。
 
 4. 在 `Main` 方法中添加以下行：
 
@@ -193,8 +191,6 @@
 
 在[通知中心指南]中了解有关如何使用通知中心的更多信息。
 
-
-
 <!-- Images. -->
 [6]: ./media/notification-hubs-windows-phone-get-started/notification-hub-create-console-app.png
 [7]: ./media/notification-hubs-windows-phone-get-started/notification-hub-create-from-portal.png
@@ -210,17 +206,13 @@
 [20]: ./media/notification-hubs-windows-phone-get-started/notification-hub-windows-universal-app-install-package.png
 [213]: ./media/notification-hubs-windows-phone-get-started/notification-hub-create-console-app.png
 
-
-
-
-
 <!-- URLs. -->
 
 [Visual Studio 2012 Express for Windows Phone]: https://go.microsoft.com/fwLink/p/?LinkID=268374
 [通知中心指南]: http://msdn.microsoft.com/zh-cn/library/jj927170.aspx
 [MPNS authenticated mode]: http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/ff941099(v=vs.105).aspx
-[使用通知中心将通知推送到用户]: /documentation/articles/notification-hubs-aspnet-backend-windows-dotnet-wns-notification/
-[使用通知中心发送突发新闻]: /documentation/articles/notification-hubs-windows-phone-push-xplat-segmented-mpns-notification/
+[使用通知中心将通知推送到用户]: ./notification-hubs-aspnet-backend-windows-dotnet-wns-notification.md
+[使用通知中心发送突发新闻]: ./notification-hubs-windows-phone-push-xplat-segmented-mpns-notification.md
 [toast 目录]: http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/jj662938(v=vs.105).aspx
 [磁贴目录]: http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/hh202948(v=vs.105).aspx
 [通知中心 - Windows Phone Silverlight 教程]: https://github.com/Azure/azure-notificationhubs-samples/tree/master/PushToSLPhoneApp

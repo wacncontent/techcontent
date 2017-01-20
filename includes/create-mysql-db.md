@@ -40,7 +40,6 @@
 
 	![MySql 连接信息](./media/create-mysql-db/mysql-conn-info.png) 
 
-
 <h2><a id="CreateForWebSite"></a>如何：创建作为 Azure Web 应用的链接资源的 MySQL 数据库</h2>
 
 若要在创建 [Azure Web 应用][waws]时创建作为链接资源的 MySQL 数据库，请执行以下操作：
@@ -77,8 +76,8 @@
 > [WACOM.NOTE] 您的 Web 应用应用程序可通过连接字符串名称来获取连接字符串。在 .NET 应用程序中，连接字符串在 **connectionStrings** 对象中提供。在其他编程语言中，连接字符串作为环境变量提供。有关更多信息，请参见[如何配置 Web 应用][配置]。
 
 [ClearDB]: http://www.cleardb.com/
-[waws]: /zh-cn/documentation/services/web-sites/
+[waws]: ../articles/app-service-web/index.md/
 [Azure 应用商店]: /zh-cn/gallery/store/
 [门户]: http://manage.windowsazure.cn
-[配置]: /documentation/articles/web-sites-configure/
+[配置]: ../articles/app-service-web/web-sites-configure.md
 <!--HONumber=41-->

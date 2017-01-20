@@ -1,6 +1,6 @@
 注册新的插入脚本，当插入新的 Todo 项时，它可以生成 SAS。
 
-0. 如果你尚未创建你的存储帐户，请参阅[如何创建存储帐户](/documentation/articles/storage-create-storage-account/)。
+0. 如果你尚未创建你的存储帐户，请参阅[如何创建存储帐户](../articles/storage/storage-create-storage-account.md)。
 
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，单击“存储”，单击存储帐户，然后单击“管理密钥”。
 
@@ -20,7 +20,6 @@
 4. 在“配置”选项卡中，请确保已启用“[动态架构](http://msdn.microsoft.com/zh-cn/library/windowsazure/b6bb7d2d-35ae-47eb-a03f-6ee393e170f7)”。你需要启用动态架构以能够将新列添加到 TodoItem 表。不应在任何生产服务中启用动态架构。
 
 5. 单击“数据”选项卡，然后单击 **TodoItem** 表。
-
 
 6.  在 **todoitem** 中，单击“脚本”选项卡，然后选择“插入”，将 insert 函数替换为以下代码，然后单击“保存”：
 
@@ -79,7 +78,7 @@
 
    	这样可将当 TodoItem 表中发生插入时所调用的函数替换为新脚本。此新脚本将为插入生成新 SAS（它的有效时间为 5 分钟）并将生成的 SAS 的值分配给所返回项目的 `sasQueryString` 属性。还将 `imageUri` 属性设置为新 BLOB 的资源路径，以便在绑定时在客户端 UI 中启用图像显示。
 
-	>[AZURE.NOTE] 这段代码为单个 BLOB 创建 SAS。如果你需要使用同一个 SAS 将多个 blob 上载到容器，可以改为使用空 blob 资源名称调用 [generateSharedAccessSignature 方法](http://go.microsoft.com/fwlink/?LinkId=390455)</a>，如下所示：
+	>[!NOTE] 这段代码为单个 BLOB 创建 SAS。如果你需要使用同一个 SAS 将多个 blob 上载到容器，可以改为使用空 blob 资源名称调用 [generateSharedAccessSignature 方法](http://go.microsoft.com/fwlink/?LinkId=390455)</a>，如下所示：
 	>                 
 	>     blobService.generateSharedAccessSignature(containerName, '', sharedAccessPolicy);
 

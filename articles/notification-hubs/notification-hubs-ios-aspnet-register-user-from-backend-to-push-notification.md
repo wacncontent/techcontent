@@ -1,28 +1,26 @@
-<properties
-	pageTitle="通过使用 Web API 注册推送通知的当前用户 | Azure"
-	description="了解在 ASP.NET Web API 执行注册时如何在 iOS 应用程序中请求向 Azure 通知中心注册推送通知。"
-	services="notification-hubs"
-	documentationCenter="ios"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>
+---
+title: 通过使用 Web API 注册推送通知的当前用户 | Azure
+description: 了解在 ASP.NET Web API 执行注册时如何在 iOS 应用程序中请求向 Azure 通知中心注册推送通知。
+services: notification-hubs
+documentationCenter: ios
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="08/08/2016"
-	ms.author="wesmc"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 08/08/2016
+ms.author: wesmc
+---
 
 # 通过使用 ASP.NET 注册推送通知的当前用户
 
-> [AZURE.SELECTOR]
-- [iOS](/documentation/articles/notification-hubs-ios-aspnet-register-user-from-backend-to-push-notification/)
-
-
+> [!div class="op_single_selector"]
+- [iOS](./notification-hubs-ios-aspnet-register-user-from-backend-to-push-notification.md)
 
 ##概述
 
@@ -111,7 +109,7 @@
 
 	这为请求设置设备标记。
 
-	> [AZURE.NOTE] 此时，此方法中不应有任何其他代码。如果你已调用在完成[通知中心入门](/documentation/articles/notification-hubs-ios-apple-push-notification-apns-get-started/)教程的学习时添加的 **registerNativeWithDeviceToken** 方法，必须注释掉或删除该调用。
+	> [!NOTE] 此时，此方法中不应有任何其他代码。如果你已调用在完成[通知中心入门](./notification-hubs-ios-apple-push-notification-apns-get-started.md)教程的学习时添加的 **registerNativeWithDeviceToken** 方法，必须注释掉或删除该调用。
 
 10.	在 PushToUserAppDelegate.m 文件中，添加以下处理程序方法：
 
@@ -188,7 +186,6 @@
 			    return [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
 			}
 
-
 12. 将以下代码复制到由 XCode 创建的 **login** 处理程序方法：
 
 			DeviceInfo* deviceInfo = [(PushToUserAppDelegate*)[[UIApplication sharedApplication]delegate] deviceInfo];
@@ -233,8 +230,8 @@
 [1]: ./media/notification-hubs-ios-aspnet-register-user-push-notifications/notification-hub-user-aspnet-ios2.png
 
 <!-- URLs. -->
-[使用通知中心通知用户]: /documentation/articles/notification-hubs-aspnet-backend-windows-dotnet-wns-notification/
+[使用通知中心通知用户]: ./notification-hubs-aspnet-backend-windows-dotnet-wns-notification.md
 
-[通知中心入门]: /documentation/articles/notification-hubs-ios-apple-push-notification-apns-get-started/
+[通知中心入门]: ./notification-hubs-ios-apple-push-notification-apns-get-started.md
 
 <!---HONumber=Mooncake_0801_2016-->

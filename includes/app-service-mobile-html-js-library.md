@@ -57,7 +57,6 @@ table
 
 随结果调用 success 函数。请勿在 success 函数中使用 `for (var i in results)`，因为这会在使用其他查询函数（如 `.includeTotalCount()`）时迭代结果中所含的信息。
 
-
 ####<a name="table-filter"></a>在服务器上筛选数据
 
 可在表格引用上使用 `where` 子句：
@@ -111,7 +110,6 @@ function loadPage(pageNum) {
 
 然后可使用页变量和某些 UI 按钮提供页列表；使用 loadPage() 为每页加载新记录。应实现某种形式的缓存，加快已加载记录的访问速度。
 
-
 ####<a name="sorting-data"></a>如何：返回排序后的数据
 
 使用 .orderBy() 或 .orderByDescending() 查询方法：
@@ -122,7 +120,6 @@ table
     .read()
     .then(success, failure);
 ```
-
 
 ###<a name="inserting"></a>如何：插入数据
 

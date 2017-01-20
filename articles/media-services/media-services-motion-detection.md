@@ -1,24 +1,22 @@
-<properties
-	pageTitle="使用 Azure 媒体分析检测动作 | Azure"
-	description="Azure 媒体动作检测器媒体处理器 (MP) 可让你在冗长且平淡的视频中有效识别出你感兴趣的部分。"
-	services="media-services"
-	documentationCenter=""
-	authors="juliako"
-	manager="erikre"
-	editor=""/>  
+---
+title: 使用 Azure 媒体分析检测动作 | Azure
+description: Azure 媒体动作检测器媒体处理器 (MP) 可让你在冗长且平淡的视频中有效识别出你感兴趣的部分。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/10/2016
+wacn.date: 11/25/2016
+ms.author: milanga;juliako;
+---
 
-<tags
-	ms.service="media-services"
-	ms.workload="media"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="10/10/2016"  
-	wacn.date="11/25/2016"
-	ms.author="milanga;juliako;"/>  
-
- 
 # 使用 Azure 媒体分析检测动作
 
 ##概述
@@ -30,7 +28,6 @@
 **Azure 媒体动作检测器** MP 目前以预览版提供。
 
 本主题提供有关 **Azure 媒体动作检测器**的详细信息，并演示如何通过适用于 .NET 的媒体服务 SDK 使用它。
-
 
 ##动作检测器输入文件
 
@@ -54,7 +51,6 @@ detectionZones|检测区域数组：<br/>- 检测区域是包含 3 个或 3 个�
 
 ###JSON 示例
 
-	
 	{
 	  'version': '1.0',
 	  'options': {
@@ -83,7 +79,6 @@ detectionZones|检测区域数组：<br/>- 检测区域是包含 3 个或 3 个�
 	  }
 	}
 
-
 ##动作检测器输出文件
 
 动作检测作业将在输出资产中返回 JSON 文件，该文件描述视频中的动作警报和类别。该文件将包含有关在视频中检测到的动作的时间和持续时间的信息。
@@ -92,7 +87,7 @@ detectionZones|检测区域数组：<br/>- 检测区域是包含 3 个或 3 个�
 
 ###<a id="output_elements"></a>输出 JSON 文件中的元素
 
->[AZURE.NOTE]在最新版本中，输出 JSON 格式已更改，对某些客户来说可以说是重大更改。
+>[!NOTE]在最新版本中，输出 JSON 格式已更改，对某些客户来说可以说是重大更改。
 
 下表描述了输出 JSON 文件的元素。
 
@@ -164,7 +159,6 @@ Fragments|元数据划分成称为“片段”的不同段。每个片段包含�
 - 支持的输入视频格式包括 MP4、MOV 和 WMV。
 - 动作检测已针对固定背景视频优化。算法专注于降低误报，例如光源变化和阴影。
 - 某些动作可能因技术难题而无法检测到，例如夜视视频、半透明对象和小对象。
-
 
 ## 代码示例
 
@@ -379,12 +373,10 @@ Fragments|元数据划分成称为“片段”的不同段。每个片段包含�
 		    }
         }
 
-
-
 ##相关链接
 [Azure 媒体服务动作检测器博客](https://azure.microsoft.com/blog/motion-detector-update/)
 
-[Azure Media Services Analytics Overview（Azure 媒体服务分析概述）](/documentation/articles/media-services-analytics-overview/)
+[Azure Media Services Analytics Overview（Azure 媒体服务分析概述）](./media-services-analytics-overview.md)
 
 [Azure Media Analytics demos（Azure 媒体分析演示）](http://azuremedialabs.azurewebsites.net/demos/Analytics.html)
 

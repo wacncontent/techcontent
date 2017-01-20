@@ -1,23 +1,21 @@
-<properties
-   pageTitle="指定 Service Fabric 服务终结点 | Azure"
-   description="如何在服务清单中描述终结点资源，包括如何设置 HTTPS 终结点"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="mani-ramaswamy"
-   manager="timlt"
-   editor=""/>  
+---
+title: 指定 Service Fabric 服务终结点 | Azure
+description: 如何在服务清单中描述终结点资源，包括如何设置 HTTPS 终结点
+services: service-fabric
+documentationCenter: .net
+authors: mani-ramaswamy
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/14/2016"
-   wacn.date="10/24/2016"
-   ms.author="subramar"/>  
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/14/2016
+wacn.date: 10/24/2016
+ms.author: subramar
+---
 
 # 在服务清单中指定资源
 
@@ -29,7 +27,6 @@
 
 在服务清单中定义了终结点资源时，如果未显式指定端口，则 Service Fabric 从保留的应用程序端口范围中分配端口。例如，可以查看本段落后面提供的清单代码段中指定的终结点 *ServiceEndpoint1*。此外，服务还可以请求在资源中使用特定端口。在不同群集节点上运行的服务副本可以分配不同的端口号，而运行在同一节点上的服务副本共享同一个端口。之后服务副本可根据需要将这些端口用于复制和侦听客户端请求。
 
-
 	<Resources>
 	  <Endpoints>
 	    <Endpoint Name="ServiceEndpoint1" Protocol="http"/>
@@ -38,15 +35,13 @@
 	  </Endpoints>
 	</Resources>
 
-
-请参阅[配置有状态 Reliable Services](/documentation/articles/service-fabric-reliable-services-configuration/)以了解有关从配置包设置文件 (settings.xml) 引用终结点的更多信息。
+请参阅[配置有状态 Reliable Services](./service-fabric-reliable-services-configuration.md)以了解有关从配置包设置文件 (settings.xml) 引用终结点的更多信息。
 
 ## 示例：为服务指定 HTTP 终结点
 
 以下服务清单在 &lt;Resources&gt; 元素中定义了 1 个 TCP 终结点资源和 2 个 HTTP 终结点资源。
 
 HTTP 终结点由 Service Fabric 自动建立 ACL。
-
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<ServiceManifest Name="Stateful1Pkg"
@@ -90,16 +85,13 @@ HTTP 终结点由 Service Fabric 自动建立 ACL。
 	  </Resources>
 	</ServiceManifest>
 
-
 ## 示例：指定用于你的服务的 HTTPS 终结点
 
 HTTPS 协议提供服务器身份验证，用于对客户端-服务器通信进行加密。若要在 Service Fabric 服务上启用 HTTPS，请在服务清单的“资源”->“终结点”->“终结点”部分中指定该协议，如前面针对终结点 *ServiceEndpoint3* 的操作所示。
 
->[AZURE.NOTE] 不能在应用程序升级期间更改服务的协议，因为这是一项破坏性更改。
-
+>[!NOTE] 不能在应用程序升级期间更改服务的协议，因为这是一项破坏性更改。
 
 下面是你需要为 HTTPS 设置的一个示例 ApplicationManifest。必须提供证书的指纹。EndpointRef 是对 ServiceManifest 中 EndpointResource 的引用，你为其设置 HTTPS 协议。可以添加多个 EndpointCertificate。
-
 
 	<?xml version="1.0" encoding="utf-8"?>
 	<ApplicationManifest ApplicationTypeName="Application1Type"

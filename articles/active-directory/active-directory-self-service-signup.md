@@ -1,24 +1,22 @@
-<properties
-    pageTitle="什么是 Azure 的自助注册？| Azure"
-    description="概述 Azure 的自助注册、如何管理注册过程以及如何接管 DNS 域名。"
-    services="active-directory"
-    documentationcenter=""
-    author="curtand"
-    manager="femila"
-    editor="" />  
+---
+title: 什么是 Azure 的自助注册？| Azure
+description: 概述 Azure 的自助注册、如何管理注册过程以及如何接管 DNS 域名。
+services: active-directory
+documentationcenter: 
+author: curtand
+manager: femila
+editor: 
 
-<tags
-    ms.assetid="b9f01876-29d1-4ab8-8b74-04d43d532f4b"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="11/09/2016"
-    ms.author="curtand"
-    wacn.date="12/13/2016"/>  
-
-
+ms.assetid: b9f01876-29d1-4ab8-8b74-04d43d532f4b
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 11/09/2016
+ms.author: curtand
+wacn.date: 12/13/2016
+---
 
 # 什么是 Azure 的自助服务注册？
 本主题介绍自助注册过程以及如何接管 DNS 域名。
@@ -198,7 +196,7 @@
 有关示例和如何使用这些参数的详细信息，请参阅 [Set-MsolCompanySettings](https://msdn.microsoft.com/zh-cn/library/azure/dn194127.aspx)。
 
 ## 另请参阅
-- [如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)
+- [如何安装和配置 Azure PowerShell](../powershell-install-configure.md)
 - [Azure PowerShell](https://msdn.microsoft.com/zh-cn/library/azure/jj156055.aspx)
 - [Azure Cmdlet 参考](https://msdn.microsoft.com/zh-cn/library/azure/jj554330.aspx)
 - [Set-MsolCompanySettings](https://msdn.microsoft.com/zh-cn/library/azure/dn194127.aspx)

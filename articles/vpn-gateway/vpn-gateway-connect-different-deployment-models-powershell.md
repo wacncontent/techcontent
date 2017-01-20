@@ -1,28 +1,28 @@
-<properties 
-   pageTitle="如何使用 PowerShell 将经典虚拟网络连接到 Resource Manager 虚拟网络 | Azure"
-   description="了解如何使用 VPN 网关和 PowerShell 在经典 VNet 与 Resource Manager VNet 之间创建 VPN 连接"
-   services="vpn-gateway"
-   documentationCenter="na"
-   authors="cherylmc"
-   manager="carmonm"
-   editor=""
-   tags="azure-service-management,azure-resource-manager"/>  
+---
+title: 如何使用 PowerShell 将经典虚拟网络连接到 Resource Manager 虚拟网络 | Azure
+description: 了解如何使用 VPN 网关和 PowerShell 在经典 VNet 与 Resource Manager VNet 之间创建 VPN 连接
+services: vpn-gateway
+documentationCenter: na
+authors: cherylmc
+manager: carmonm
+editor: 
+tags: azure-service-management,azure-resource-manager
 
-<tags 
-   ms.service="vpn-gateway"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="09/23/2016"
-   wacn.date="01/05/2017"
-   ms.author="cherylmc" />
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 09/23/2016
+wacn.date: 01/05/2017
+ms.author: cherylmc
+---
 
 # 使用 PowerShell 从不同的部署模型连接虚拟网络
 
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/vpn-gateway-connect-different-deployment-models-portal/)
-- [PowerShell](/documentation/articles/vpn-gateway-connect-different-deployment-models-powershell/)
+> [!div class="op_single_selector"]
+- [门户](./vpn-gateway-connect-different-deployment-models-portal.md)
+- [PowerShell](./vpn-gateway-connect-different-deployment-models-powershell.md)
 
 Azure 当前具有两个管理模型：经典模型和 Resource Manager (RM) 模型。如果 Azure 已经使用了一段时间，则您的 Azure VM 和实例角色可能是在经典 VNet 上运行。而较新的 VM 和角色实例可能是在 Resource Manager 中创建的 VNet 上运行。本文将指导您如何连接经典 VNet 和 Resource Manager Vnet，从而可以通过网关连接使不同部署模型中的资源能够相互通信。
 
@@ -30,16 +30,15 @@ Azure 当前具有两个管理模型：经典模型和 Resource Manager (RM) 模
 
 ### 用于连接不同部署模型中的 VNet 的部署模型和方法
 
-[AZURE.INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
+[!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
 当我们发布有关此配置的新文章和其他可用工具时，将会更新以下表格。有相关的文章发布时，我们会直接从该表格链接到该文章。<br><br>
 
-[AZURE.INCLUDE [vpn-gateway-table-vnet-vnet](../../includes/vpn-gateway-table-vnet-to-vnet-include.md)]
+[!INCLUDE [vpn-gateway-table-vnet-vnet](../../includes/vpn-gateway-table-vnet-to-vnet-include.md)]
 
 **VNet 对等互连**
 
-[AZURE.INCLUDE [vpn-gateway-vnetpeeringlink](../../includes/vpn-gateway-vnetpeeringlink-include.md)]
-
+[!INCLUDE [vpn-gateway-vnetpeeringlink](../../includes/vpn-gateway-vnetpeeringlink-include.md)]
 
 ## 开始之前
 
@@ -78,7 +77,6 @@ VNet 名称 = RMVNet <br>
 虚拟网络网关名称 = RMGateway <br>
 网关 IP 寻址配置 = gwipconfig
 
-
 ## <a name="createsmgw"></a>第 1 节 — 配置经典 VNet
 
 ### 第 1 部分 — 下载网络配置文件。
@@ -93,12 +91,11 @@ VNet 名称 = RMVNet <br>
 
 3. 打开下载的 .xml 文件进行编辑。有关网络配置文件的示例，请参阅[网络配置架构](https://msdn.microsoft.com/zh-cn/library/jj157100.aspx)。
  
-
 ### 第 2 部分 — 验证网关子网
 
 在 **VirtualNetworkSites** 元素中，向 VNet 添加一个网关子网（如果尚未创建）。在使用网络配置文件时，网关子网必须命名为“GatewaySubnet”，否则 Azure 无法识别并将其用作网关子网。
 
-[AZURE.INCLUDE [vpn-gateway-no-nsg-include](../../includes/vpn-gateway-no-nsg-include.md)]
+[!INCLUDE [vpn-gateway-no-nsg-include](../../includes/vpn-gateway-no-nsg-include.md)]
 
 **示例：**
 	
@@ -165,7 +162,6 @@ VNet 名称 = RMVNet <br>
 
 可以使用 `Get-AzureVNetGateway` cmdlet 检查网关状态。
 
-
 ## <a name="creatermgw"></a>第 2 节：配置 RM VNet 网关
 
 若要为 RM VNet 创建 VPN 网关，请遵循以下说明。请务必在检索到经典 VNet 的网关的公共 IP 地址之后再开始执行以下步骤。
@@ -182,7 +178,6 @@ VNet 名称 = RMVNet <br>
 
 		Select-AzureRmSubscription -SubscriptionName "Name of subscription"
 
-
 2.  **创建本地网络网关**。在虚拟网络中，局域网网关通常指你的本地位置。在本例中，本地网络网关是指经典 VNet。指定该网关的名称以供 Azure 引用，同时指定地址空间前缀。Azure 使用指定的 IP 地址前缀来识别要发送到本地位置的流量。如果稍后需要在创建网关之前调整此处的信息，可以修改这些值并再次运行该示例。<br><br>
 	- `-Name` 是要分配来指代本地网络网关的名称。<br>
 	- `-AddressPrefix` 是经典 VNet 的地址空间。<br>
@@ -194,7 +189,6 @@ VNet 名称 = RMVNet <br>
 
 3. **请求一个公共 IP 地址**并将其分配到 Resource Manager VNet 的虚拟网络网关。无法指定要使用的 IP 地址。IP 地址动态分配到虚拟网络网关。但是，这并不意味着 IP 地址会更改。虚拟网络网关 IP 地址只在删除或重新创建网关时更改。它不会因为网关调整大小、重置或其他内部维护/升级而更改。<br>在此步骤中，我们还将设置一个在后续步骤中要使用的变量。
 
-
 		$ipaddress = New-AzureRmPublicIpAddress -Name gwpip `
 		-ResourceGroupName RG1 -Location 'ChinaEast' `
 		-AllocationMethod Dynamic
@@ -204,7 +198,6 @@ VNet 名称 = RMVNet <br>
 5. 通过运行以下命令，**检索用于网关的子网**。在此步骤中，我们还将设置一个要在下一步使用的变量。
 	- `-Name` 是 Resource Manager VNet 的名称。
 	- `-ResourceGroupName` 是 VNet 所关联的资源组。此 VNet 必须已经存在网关子网，并且该子网必须命名为 *GatewaySubnet* 才能正常工作。
-
 
 			$subnet = Get-AzureRmVirtualNetworkSubnetConfig -Name GatewaySubnet `
 			-VirtualNetwork (Get-AzureRmVirtualNetwork -Name RMVNet -ResourceGroupName RG1) 
@@ -249,7 +242,6 @@ VNet 名称 = RMVNet <br>
 
 3. 保存所做更改并将编辑后的文件导回到 Azure。
 
-
 ## <a name="connect"></a>第 4 节：在网关之间创建连接
 
 在网关之间创建连接需要用到 PowerShell。您可能需要添加 Azure 帐户才能使用经典 PowerShell cmdlet。若要执行此操作，可以使用以下 cmdlet：
@@ -283,6 +275,6 @@ VNet 名称 = RMVNet <br>
 
 查看常见问题解答详细信息以获取有关 VNet 到 VNet 连接的其他信息。
 
-[AZURE.INCLUDE [vpn-gateway-vnet-vnet-faq](../../includes/vpn-gateway-vnet-vnet-faq-include.md)]
+[!INCLUDE [vpn-gateway-vnet-vnet-faq](../../includes/vpn-gateway-vnet-vnet-faq-include.md)]
 
 <!---HONumber=Mooncake_1031_2016-->

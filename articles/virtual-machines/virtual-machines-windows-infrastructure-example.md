@@ -1,29 +1,28 @@
-<properties
-	pageTitle="示例基础结构演练 | Azure"
-	description="了解用于在 Azure 中部署示例基础结构的关键设计和实施准则。"
-	documentationCenter=""
-	services="virtual-machines-windows"
-	authors="iainfoulds"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: 示例基础结构演练 | Azure
+description: 了解用于在 Azure 中部署示例基础结构的关键设计和实施准则。
+documentationCenter: 
+services: virtual-machines-windows
+authors: iainfoulds
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/08/2016"
-	wacn.date="12/26/2016"
-	ms.author="iainfou"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/08/2016
+wacn.date: 12/26/2016
+ms.author: iainfou
+---
 
 # 示例 Azure 基础结构演练
 
-[AZURE.INCLUDE [virtual-machines-windows-infrastructure-guidelines-intro](../../includes/virtual-machines-windows-infrastructure-guidelines-intro.md)]
+[!INCLUDE [virtual-machines-windows-infrastructure-guidelines-intro](../../includes/virtual-machines-windows-infrastructure-guidelines-intro.md)]
 
 本文将逐步讲述如何构建示例应用程序基础结构。我们将详细介绍如何设计简单在线商店的基础结构，该基础结构应全面考虑关于命名约定、可用性集、虚拟网络及负载均衡器的所有准则和决策；还将介绍如何实际部署虚拟机 (VM)。
-
 
 ## 示例工作负荷
 
@@ -60,11 +59,9 @@ Adventure Works Cycles 想要在 Azure 中生成一个在线商店应用程序�
 - 可用性集使用 azos-che-as-**[角色]**
 - 虚拟机名称使用 azos-che-vm-**[VM 名称]**
 
-
 ## Azure 订阅和帐户
 
 Adventure Works Cycles 使用名为“Adventure Works 企业订阅”的企业订阅为此 IT 工作负荷提供计费服务。
-
 
 ## 存储帐户
 
@@ -72,7 +69,6 @@ Adventure Works Cycles 确定他们需要以下两个存储帐户：
 
 - **adventureazoschesawebapp** 用于 Web 服务器、应用程序服务器、域控制器及其数据磁盘的标准存储。
 - **adventureazoschesasql** 用于 SQL Server VM 及其数据磁盘的高级存储。
-
 
 ## 虚拟网络和子网
 
@@ -90,7 +86,6 @@ Adventure Works Cycles 确定他们需要以下两个存储帐户：
 	- 名称：BackEnd
 	- 地址空间：10.0.2.0/24
 
-
 ## 可用性集
 
 为了维护其在线商店的所有四个层的高可用性，Adventure Works Cycles 决定使用四个可用性集：
@@ -99,7 +94,6 @@ Adventure Works Cycles 确定他们需要以下两个存储帐户：
 - **azos-che-as-app** 用于应用程序服务器
 - **azos-che-as-sql** 用于 SQL 服务器
 - **azos-che-as-dc** 用于域控制器
-
 
 ## 虚拟机
 
@@ -128,9 +122,8 @@ Adventure Works Cycles 决定为其 Azure VM 使用以下名称：
 - 用于从 Web 服务器到应用程序服务器的未加密 Web 流量的内部负载均衡集
 - 单个资源组
 
-
 ## <a name="next-steps"></a> 后续步骤
 
-[AZURE.INCLUDE [virtual-machines-windows-infrastructure-guidelines-next-steps](../../includes/virtual-machines-windows-infrastructure-guidelines-next-steps.md)]
+[!INCLUDE [virtual-machines-windows-infrastructure-guidelines-next-steps](../../includes/virtual-machines-windows-infrastructure-guidelines-next-steps.md)]
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

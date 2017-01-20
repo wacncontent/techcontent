@@ -1,25 +1,25 @@
-<properties
-	pageTitle="向移动服务应用程序添加推送通知 (Xamarin.iOS) - 移动服务"
-	description="了解如何借助 Azure 移动服务在 Xamarin.iOS 应用程序中使用推送通知。"
-	documentationCenter="xamarin"
-	authors="ysxu"
-	manager="dwrede"
-	services="mobile-services"
-	editor=""/>
+---
+title: 向移动服务应用程序添加推送通知 (Xamarin.iOS) - 移动服务
+description: 了解如何借助 Azure 移动服务在 Xamarin.iOS 应用程序中使用推送通知。
+documentationCenter: xamarin
+authors: ysxu
+manager: dwrede
+services: mobile-services
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-xamarin-ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="yuaxu"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: yuaxu
+---
 
 #  向移动服务应用程序添加推送通知
 
-[AZURE.INCLUDE [mobile-services-selector-get-started-push](../../includes/mobile-services-selector-get-started-push.md)]
+[!INCLUDE [mobile-services-selector-get-started-push](../../includes/mobile-services-selector-get-started-push.md)]
 
 ## 概述
 
@@ -32,7 +32,7 @@
 + [Xamarin Studio]
 + [Azure 移动服务组件]
 
->[AZURE.IMPORTANT]根据 APNS 的要求，你必须在支持 iOS 的设备（iPhone 或 iPad）而不是在模拟器上部署和测试推送通知。
+>[!IMPORTANT]根据 APNS 的要求，你必须在支持 iOS 的设备（iPhone 或 iPad）而不是在模拟器上部署和测试推送通知。
 
 APNS 使用证书对你的移动服务进行身份验证。按照以下说明创建必要的证书并将其上载到你的移动服务。有关正式的 APNS 功能文档，请参阅 [Apple 推送通知服务]。
 
@@ -306,7 +306,7 @@ APNS 使用证书对你的移动服务进行身份验证。按照以下说明创
 
    	这将会注册一个新的插入脚本，该脚本使用[apns 对象]将推送通知（插入的文本）发送到插入请求中提供的设备。
 
-   >[AZURE.NOTE]此脚本将延迟发送通知，使你有足够的时间关闭应用程序以接收 toast 通知。
+   >[!NOTE]此脚本将延迟发送通知，使你有足够的时间关闭应用程序以接收 toast 通知。
 
 ##  <a name="test"></a>在应用程序中测试推送通知
 
@@ -314,7 +314,7 @@ APNS 使用证书对你的移动服务进行身份验证。按照以下说明创
 
   	![][23]
 
-       >[AZURE.NOTE]你必须显式接受来自应用程序的推送通知。此请求只会在首次运行应用程序时出现。
+       >[!NOTE]你必须显式接受来自应用程序的推送通知。此请求只会在首次运行应用程序时出现。
 
 2. 在应用中键入有意义的文本（例如 _新的移动服务任务_），然后单击加号 (**+**) 图标。
 
@@ -387,10 +387,9 @@ APNS 使用证书对你的移动服务进行身份验证。按照以下说明创
 [iOS Provisioning Portal]: http://go.microsoft.com/fwlink/p/?LinkId=272456
 [Mobile Services iOS SDK]: https://go.microsoft.com/fwLink/p/?LinkID=266533
 [Apple 推送通知服务]: http://go.microsoft.com/fwlink/p/?LinkId=272584
-[移动服务入门]: /documentation/articles/mobile-services-ios-get-started/
+[移动服务入门]: ./mobile-services-ios-get-started.md
 
 [Xamarin 设备设置]: http://developer.xamarin.com/guides/ios/getting_started/installation/device_provisioning/
-
 
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
 [apns 对象]: http://go.microsoft.com/fwlink/p/?LinkId=272333

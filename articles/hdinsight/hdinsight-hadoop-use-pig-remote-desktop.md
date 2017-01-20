@@ -1,26 +1,26 @@
-<properties
-   pageTitle="将 Pig 与 HDInsight 中的远程桌面配合使用 | Azure"
-   description="了解如何使用 Pig 命令从到基于 Windows 的 HDInsight Hadoop 群集的远程桌面连接运行 Pig Latin 语句。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="Blackmist"
-   manager="paulettm"
-   editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 将 Pig 与 HDInsight 中的远程桌面配合使用 | Azure
+description: 了解如何使用 Pig 命令从到基于 Windows 的 HDInsight Hadoop 群集的远程桌面连接运行 Pig Latin 语句。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="10/11/2016"
-   wacn.date="12/26/2016"
-   ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 10/11/2016
+wacn.date: 12/26/2016
+ms.author: larryfr
+---
 
 #从远程桌面连接运行 Pig 作业
 
-[AZURE.INCLUDE [pig-selector](../../includes/hdinsight-selector-use-pig.md)]
+[!INCLUDE [pig-selector](../../includes/hdinsight-selector-use-pig.md)]
 
 本文档演练了如何使用 Pig 命令从到基于 Windows 的 HDInsight 群集的远程桌面连接运行 Pig Latin 语句。Pig Latin 允许通过描述数据转换创建 MapReduce 应用程序，而不是创建映射和化简函数。
 
@@ -36,7 +36,7 @@
 
 ##<a id="connect"></a>使用远程桌面进行连接
 
-为 HDInsight 群集启用远程桌面，然后根据[使用 RDP 连接到 HDInsight 群集](/documentation/articles/hdinsight-administer-use-management-portal-v1/#rdp)中的说明连接到该群集。
+为 HDInsight 群集启用远程桌面，然后根据[使用 RDP 连接到 HDInsight 群集](./hdinsight-administer-use-management-portal-v1.md#rdp)中的说明连接到该群集。
 
 ##<a id="pig"></a>使用 Pig 命令
 
@@ -86,7 +86,7 @@
 
 		STORE RESULT into 'wasbs:///example/data/pigout'
 
-	> [AZURE.NOTE] 数据将存储到文件中名为 **part-nnnnn** 的指定目录。如果该目录已存在，你将收到错误消息。
+	> [!NOTE] 数据将存储到文件中名为 **part-nnnnn** 的指定目录。如果该目录已存在，你将收到错误消息。
 
 7. 若要退出 grunt 提示符，请输入以下语句。
 
@@ -129,12 +129,12 @@
 
 有关 HDInsight 中的 Pig 的一般信息：
 
-* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-pig.md)
 
 有关 HDInsight 上的 Hadoop 的其他使用方法的信息：
 
-* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-hive/)
+* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-hive.md)
 
-* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

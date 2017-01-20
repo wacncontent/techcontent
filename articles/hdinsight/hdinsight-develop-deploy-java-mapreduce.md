@@ -1,20 +1,20 @@
-<properties 
-	pageTitle="为 Hadoop 开发 Java MapReduce 程序 | Azure" 
-	description="了解如何在 HDInsight Emulator 上开发 Java MapReduce 程序，以及如何将这些程序部署到 HDInsight。" 
-	services="hdinsight" 
-	editor="cgronlun" 
-	manager="paulettm" 
-	authors="nitinme" 
-	documentationCenter=""/>
+---
+title: 为 Hadoop 开发 Java MapReduce 程序 | Azure
+description: 了解如何在 HDInsight Emulator 上开发 Java MapReduce 程序，以及如何将这些程序部署到 HDInsight。
+services: hdinsight
+editor: cgronlun
+manager: paulettm
+authors: nitinme
+documentationCenter: 
 
-<tags 
-   ms.service="hdinsight"
-   ms.date="07/11/2015"
-   wacn.date="01/05/2017"/>
+ms.service: hdinsight
+ms.date: 07/11/2015
+wacn.date: 01/05/2017
+---
 
 # 为 HDInsight 中的 Hadoop 开发 Java MapReduce 程序
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本教程将引导完成一项端对端方案，在 Apache Maven 中使用 Java 来开发单词计数 Hadoop MapReduce 作业。本教程还将说明如何在 HDInsight Emulator for Azure 上测试该应用程序，然后在基于 Windows 的 HDInsight 群集上部署并运行它。
 
@@ -27,7 +27,6 @@
 - 在模拟器计算机上安装 Java 平台 JDK 7 或更高版本。模拟器计算机上已有此版本。
 - 安装并配置 [Apache Maven](http://maven.apache.org/)。
 - 获取 Azure 订阅。有关说明，请参阅[购买选项][azure-purchase-options]、[试用][azure-trial]。
-
 
 ## <a name="develop"></a>使用 Apache Maven 以 Java 创建 MapReduce 程序
 
@@ -198,8 +197,7 @@
 
 3. 完成该命令后，__wordcountjava\\target__ 目录将包含名为 __wordcountjava-1.0-SNAPSHOT.jar__ 的文件。
 
-	> [AZURE.NOTE]__wordcountjava-1.0-SNAPSHOT.jar__ 文件是一个 uberjar。
-
+	> [!NOTE]__wordcountjava-1.0-SNAPSHOT.jar__ 文件是一个 uberjar。
 
 ## <a name="test"></a>在模拟器中测试该程序
 
@@ -227,7 +225,7 @@
 
 本教程使用位于 %hadoop_home% 目录中的 .txt 文件作为数据文件。
 
-> [AZURE.NOTE]Hadoop HDFS 命令区分大小写。
+> [!NOTE]Hadoop HDFS 命令区分大小写。
 
 **将数据文件复制到模拟器 HDFS**
 
@@ -296,8 +294,6 @@
 		hadoop fs -cat /WordCount/Output/part-r-00000 | findstr "there"
 
 至此，你已开发一个单词计数 MapReduce 作业，并在模拟器上成功测试。下一步是在 Azure HDInsight 上部署并运行该作业。
-
-
 
 ## <a id="upload"></a>将数据和应用程序上载到 Azure Blob 存储
 Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群集时，将使用 Azure Blob 存储容器来存储系统文件。可以使用此默认容器或其他容器（可以在同一 Azure 存储帐户上，也可以在群集所在的数据中心内的其他存储帐户上）来存储数据文件。
@@ -442,7 +438,6 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
 	1. 删除 HDInsight 群集
 	2. 删除用作默认 HDInsight 群集文件系统的存储帐户
 
-
 **运行 Azure PowerShell 脚本**
 
 1. 打开记事本。
@@ -535,10 +530,8 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
 
 8. 出现提示时，输入 HDInsight 群集的用户名和密码。由于你将在脚本末尾删除群集，并且将不再需要用户名和密码，因此用户名和密码可以是任何字符串。如果你不想让系统提示你输入凭据，请参阅[在 Windows PowerShell 中使用密码、安全字符串和凭据][powershell-PSCredential]。
 
-
 ## <a name="retrieve"></a>检索 MapReduce 作业输出
 本节演示如何下载和显示输出。有关在 Excel 中显示结果的信息，请参阅[使用 Microsoft Hive ODBC 驱动程序将 Excel 连接到 HDInsight][hdinsight-ODBC] 和[利用 Power Query 将 Excel 连接到 HDInsight][hdinsight-power-query]。
-
 
 **检索输出**
 
@@ -577,28 +570,25 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
 - [利用 Power Query 将 Excel 连接到 HDInsight][hdinsight-power-query]
  <!--[使用 Microsoft Hive ODBC Driver 将 Excel 连接到 HDInsight][hdinsight-ODBC]-->
 
-[azure-purchase-options]: /pricing/overview/
-[azure-trial]: /pricing/1rmb-trial/
+[azure-purchase-options]: https://www.azure.cn/pricing/overview/
+[azure-trial]: https://www.azure.cn/pricing/1rmb-trial/
 
+[hdinsight-use-sqoop]: ./hdinsight-use-sqoop.md
+[hdinsight-ODBC]: ./hdinsight-connect-excel-hive-ODBC-driver.md
+[hdinsight-power-query]: ./hdinsight-connect-excel-power-query.md
 
-[hdinsight-use-sqoop]: /documentation/articles/hdinsight-use-sqoop/
-[hdinsight-ODBC]: /documentation/articles/hdinsight-connect-excel-hive-ODBC-driver/
-[hdinsight-power-query]: /documentation/articles/hdinsight-connect-excel-power-query/
-
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
-[hdinsight-emulator]: /documentation/articles/hdinsight-hadoop-emulator-get-started/
-[hdinsight-emulator-wasb]: /documentation/articles/hdinsight-hadoop-emulator-get-started/#blobstorage
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-[hdinsight-admin-powershell]: /documentation/articles/hdinsight-administer-use-powershell/
-[hdinsight-use-hive]: /documentation/articles/hdinsight-use-hive/
-[hdinsight-use-pig]: /documentation/articles/hdinsight-use-pig/
-[hdinsight-power-query]: /documentation/articles/hdinsight-connect-excel-power-query/
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-emulator]: ./hdinsight-hadoop-emulator-get-started.md
+[hdinsight-emulator-wasb]: ./hdinsight-hadoop-emulator-get-started.md#blobstorage
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
+[hdinsight-admin-powershell]: ./hdinsight-administer-use-powershell.md
+[hdinsight-use-hive]: ./hdinsight-use-hive.md
+[hdinsight-use-pig]: ./hdinsight-use-pig.md
+[hdinsight-power-query]: ./hdinsight-connect-excel-power-query.md
 
 [powershell-PSCredential]: http://social.technet.microsoft.com/wiki/contents/articles/4546.working-with-passwords-secure-strings-and-credentials-in-windows-powershell.aspx
 [Powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
-
-
 
 [image-emulator-wordcount-compile]: ./media/hdinsight-develop-deploy-java-mapreduce/HDI-Emulator-Compile-Java-MapReduce.png
 [image-emulator-wordcount-run]: ./media/hdinsight-develop-deploy-java-mapreduce/HDI-Emulator-Run-Java-MapReduce.png

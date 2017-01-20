@@ -1,17 +1,17 @@
-<properties
-                pageTitle="如何在不添加应用程序的前提下使用 PowerShell 获取 Azure Active Directory 令牌"
-                description="使用 PowerShell 在不添加应用程序的前提下获取 Azure Active Directory 令牌"
-                services="active-directory"
-                documentationCenter=""
-                authors=""
-                manager=""
-                editor=""
-                tags="PowerShell,azure AD,token"/>
+---
+title: 如何在不添加应用程序的前提下使用 PowerShell 获取 Azure Active Directory 令牌
+description: 使用 PowerShell 在不添加应用程序的前提下获取 Azure Active Directory 令牌
+services: active-directory
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: PowerShell,azure AD,token
 
-<tags
-                ms.service="active-directory-aog"
-                ms.date="12/16/2016"
-                wacn.date="12/16/2016"/>
+ms.service: active-directory-aog
+ms.date: 12/16/2016
+wacn.date: 12/16/2016
+---
 
 # 如何在不添加应用程序的前提下使用 PowerShell 获取 Azure Active Directory 令牌
 
@@ -29,7 +29,6 @@ Azure AD Graph API 通过 OData REST API 终结点提供对 Azure AD 的编程�
 4. 将以下代码保存为 .ps1 的后缀名，运行该脚本程序。  
 
 **Powershell 代码：**  
-
 
 	function GetAuthToken
 	{
@@ -69,7 +68,6 @@ Azure AD Graph API 通过 OData REST API 终结点提供对 Azure AD 的编程�
 			return $authResult
 	}
 
-
 通过以下方式调用上述脚本中的方法：
 
 	$token = GetAuthToken -TenantName "<your Azure AD tenant>.partner.onmschina.cn"
@@ -82,5 +80,4 @@ Azure AD Graph API 通过 OData REST API 终结点提供对 Azure AD 的编程�
 **结果截图：**  
 
 ![result](./media/aog-active-directory-powershell-query-token/result.png)
-
 

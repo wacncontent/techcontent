@@ -1,22 +1,21 @@
-<properties 
-	pageTitle="使用本地编码器执行实时传送视频流以创建多比特率流 | Azure" 
-	description="本主题介绍如何设置接收来自本地编码器的多比特率实时流的频道。然后，该流可以使用以下自适应流式处理协议之一通过一个或多个流式处理终结点传送给客户端播放应用程序：HLS、平滑流、MPEG DASH、HDS。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用本地编码器执行实时传送视频流以创建多比特率流 | Azure
+description: 本主题介绍如何设置接收来自本地编码器的多比特率实时流的频道。然后，该流可以使用以下自适应流式处理协议之一通过一个或多个流式处理终结点传送给客户端播放应用程序：HLS、平滑流、MPEG DASH、HDS。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="ne" 
-	ms.topic="article" 
-	ms.date="10/12/2016" 
-	wacn.date="12/26/2016" 
-	ms.author="cenkdin;juliako"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: ne
+ms.topic: article
+ms.date: 10/12/2016
+wacn.date: 12/26/2016
+ms.author: cenkdin;juliako
+---
 
 #使用本地编码器执行实时传送视频流以创建多比特率流
 
@@ -24,10 +23,9 @@
 
 在 Azure 媒体服务中，**频道**表示用于处理实时传送视频流内容的管道。**频道**采用以下两种方式之一接收实时输入流：
 
-
 - 本地实时编码器将多比特率 **RTMP** 或“平滑流式处理”（分段 MP4）发送到未针对使用 AMS 执行实时编码而启用的频道。引入流将通过**频道**，但不会进行任何进一步处理。这种方法称为**直通**。可以使用以下输出多比特率平滑流的实时编码器：Elemental、Envivio、Cisco。以下实时编码器输出 RTMP：Adobe Flash Live、Telestream Wirecast 和 Tricaster 转码器。实时编码器也可将单比特率流发送到并未启用实时编码的通道，但不建议这样做。收到请求时，媒体服务会将该流传送给客户。
 
-	>[AZURE.NOTE] 实时传送视频流时，使用直通方法是最经济的方式。
+	>[!NOTE] 实时传送视频流时，使用直通方法是最经济的方式。
 	
 - 本地实时编码器（采用以下格式之一：RTP (MPEG-TS)、RTMP 或平滑流式处理（分段 MP4））将单比特率流发送到能够使用媒体服务执行实时编码的频道。然后，频道将对传入的单比特率流执行实时编码，使之转换为多比特率（自适应）视频流。收到请求时，媒体服务会将该流传送给客户。
 
@@ -37,18 +35,17 @@
 
 - **标准** - 如果你打算使用媒体服务将单比特率实时流编码为多比特率流，请选择此值。请注意，实时编码会影响计费，应记住，将实时编码通道保持为“正在运行”状态会产生费用。建议在实时传送视频流事件完成之后立即停止正在运行的频道，以避免产生额外的小时费用。收到请求时，媒体服务会将该流传送给客户。
 
->[AZURE.NOTE]本主题讨论未针对执行实时编码（编码类型为**无**）而启用的频道的属性。有关使用为执行实时编码而启用的频道的信息，请参阅[使用 Azure 媒体服务进行实时传送视频流以创建多比特率流](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)。
+>[!NOTE]本主题讨论未针对执行实时编码（编码类型为**无**）而启用的频道的属性。有关使用为执行实时编码而启用的频道的信息，请参阅[使用 Azure 媒体服务进行实时传送视频流以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
 
 下图表示的是一个使用本地实时编码器输出多比特率 RTMP 或分段 MP4（平滑流式处理）流的实时传送视频流工作流。
 
 ![实时工作流][live-overview]  
 
-
 本主题涵盖以下内容：
 
-- [常见实时传送视频流方案](/documentation/articles/media-services-live-streaming-with-onprem-encoders/#scenario)
-- [频道及其相关组件的说明](/documentation/articles/media-services-live-streaming-with-onprem-encoders/#channel)
-- [注意事项](/documentation/articles/media-services-live-streaming-with-onprem-encoders/#Considerations)
+- [常见实时传送视频流方案](./media-services-live-streaming-with-onprem-encoders.md#scenario)
+- [频道及其相关组件的说明](./media-services-live-streaming-with-onprem-encoders.md#channel)
+- [注意事项](./media-services-live-streaming-with-onprem-encoders.md#Considerations)
 
 ##<a id="scenario"></a>常见实时传送视频流方案
 以下步骤介绍创建常见的实时传送视频流应用程序时涉及的任务。
@@ -96,7 +93,6 @@
 
 	**辅助 URL**（可选）：指定频道的辅助 RTMP 引入终结点的完全限定 URL。
 
-
 	如果你想要提高引入流的持久性和容错性，并实现编码器故障转移和容错性（尤其在以下情况下），请使用辅助 URL。
 
 	- 单个编码器双推送到主和辅助 URL：
@@ -143,7 +139,6 @@
 3 到 5 秒|2:1|如果 KeyFrameInterval（或 GOP）长度为 4 秒，则默认的 HLS 段打包比率将是 2:1，这将创建一个 8 秒的 HLS 段。
 大于 5 秒|1:1|如果 KeyFrameInterval（或 GOP）长度为 6 秒，则默认的 HLS 段打包比率将是 1:1，这将创建一个 6 秒长的 HLS 段。
 
-
 你可以通过配置频道的输出并设置 ChannelOutputHls 上的 FragmentsPerSegment，更改每段的段数这一比率。
 
 你还可以通过设置 ChanneInput 上的 KeyFrameInterval 属性更改关键帧间隔值。
@@ -151,7 +146,6 @@
 如果你显式设置 KeyFrameInterval，则会使用上面所述的规则计算 HLS 段打包比率 FragmentsPerSegment。
 
 如果你同时显式设置 KeyFrameInterval 和 FragmentsPerSegment，则媒体服务将使用你设置的值。
-
 
 ####允许的 IP 地址
 
@@ -171,7 +165,6 @@
 
 请注意，当前不管指定了哪种输入类型，都只能以分段 MP4（平滑流式处理）格式传送预览流。你可以使用 [http://smf.cloudapp.net/healthmonitor](http://smf.cloudapp.net/healthmonitor) 播放器测试平滑流。你还可以使用 Azure 经典管理门户中承载的播放器查看你的流。
 
-
 ####允许的 IP 地址
 
 可以定义允许连接到预览终结点的 IP 地址。如果未指定 IP 地址，则将允许任何 IP 地址。允许的 IP 地址可以指定为单个 IP 地址（例如“10.0.0.1”）、使用一个 IP 地址和 CIDR 子网掩码的 IP 范围（例如“10.0.0.1/22”），或使用一个 IP 地址和点分十进制子网掩码的 IP 范围（例如“10.0.0.1(255.255.252.0)”）。
@@ -179,7 +172,6 @@
 ###频道输出
 
 有关详细信息，请参阅[设置关键帧间隔](#keyframe_interval)部分。
-
 
 ###频道的节目
 
@@ -230,7 +222,6 @@ CEA-708 和 EIA-608 (708/608)|CEA-708 和 EIA-608 是美国和加拿大实施的
 ismt 内的 TTML（平滑流式处理文本轨道）|媒体服务动态打包功能允许你的客户端对下列任何格式的内容进行流式传输：MPEG DASH、HLS 或平滑流式处理。不过，如果你引入 .ismt 内带有字幕（平滑流式处理文本轨道）的分段 MP4（平滑流式处理），则只能将该流传送到平滑流式处理客户端。
 SCTE-35|用来提示广告插入的数字信号系统。下游接收器使用该信号将广告接合到流中并使其占用规定的时间。SCTE-35 必须在输入流中作为稀疏轨道发送。<p><p>请注意，当前唯一受支持的可以携带广告信号的输入流格式是分段 MP4（平滑流式处理）。唯一受支持的输出格式也是平滑流式处理。
 
-
 ##<a id="Considerations"></a>注意事项
 
 当使用本地实时编码器将多比特率流发送到一个频道时，以下限制将适用：
@@ -241,14 +232,13 @@ SCTE-35|用来提示广告插入的数字信号系统。下游接收器使用该
 - 所有视频流和音频流的平均比特率聚合应小于 25 Mbps
 - 当频道或其关联的节目正在运行时，无法更改输入协议。如果你需要不同的协议，应当针对每个输入协议创建单独的频道。
 
-
 其他有关使用频道及其相关组件的注意事项：
 
 - 每次重新配置实时编码器时，请对频道调用 **Reset** 方法。重置通道之前，必须停止节目。重置通道后，重新启动节目。
 - 只有当通道处于“正在运行”状态且通道中的所有节目都已停止时才能停止通道。
-- 默认情况下，你只能向你的媒体服务帐户添加 5 个频道。有关详细信息，请参阅[配额和限制](/documentation/articles/media-services-quotas-and-limitations/)。
+- 默认情况下，你只能向你的媒体服务帐户添加 5 个频道。有关详细信息，请参阅[配额和限制](./media-services-quotas-and-limitations.md)。
 - 通道或其关联的节目正在运行时，无法更改输入协议。如果需要不同的协议，应当针对每个输入协议创建单独的通道。
-- 仅当通道处于“正在运行”状态时才会收取费用。有关详细信息，请参阅[此](/documentation/articles/media-services-live-streaming-with-onprem-encoders/#states)部分。
+- 仅当通道处于“正在运行”状态时才会收取费用。有关详细信息，请参阅[此](./media-services-live-streaming-with-onprem-encoders.md#states)部分。
 
 ##如何创建从本地编码器接收多比特率实时流的频道
 
@@ -256,19 +246,15 @@ SCTE-35|用来提示广告插入的数字信号系统。下游接收器使用该
 
 依次选择“门户”、“.NET”、“REST API”，了解如何创建和管理频道和节目。
 
-[AZURE.INCLUDE [media-services-selector-manage-channels](../../includes/media-services-selector-manage-channels.md)]
-
-
-
-
+[!INCLUDE [media-services-selector-manage-channels](../../includes/media-services-selector-manage-channels.md)]
 
 ##相关主题
 
-[Azure 媒体服务分段 MP4 实时引入规范](/documentation/articles/media-services-fmp4-live-ingest-overview/)
+[Azure 媒体服务分段 MP4 实时引入规范](./media-services-fmp4-live-ingest-overview.md)
 
-[使用 Azure 媒体服务传送实时传送视频流事件](/documentation/articles/media-services-overview/)
+[使用 Azure 媒体服务传送实时传送视频流事件](./media-services-overview.md)
 
-[媒体服务概念](/documentation/articles/media-services-concepts/)
+[媒体服务概念](./media-services-concepts.md)
 
 [live-overview]: ./media/media-services-manage-channels-overview/media-services-live-streaming-current.png
 

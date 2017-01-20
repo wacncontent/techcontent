@@ -1,17 +1,17 @@
-<properties
-	pageTitle="如何在 JAVA 中导入 Wosign 证书"
-	description="介绍如何在 JAVA 中导入 Wosign 证书。"
-	services="app-service-web-aog"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags="Java,Wosign 证书"/>
+---
+title: 如何在 JAVA 中导入 Wosign 证书
+description: 介绍如何在 JAVA 中导入 Wosign 证书。
+services: app-service-web-aog
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: Java,Wosign 证书
 
-<tags
-	ms.service="app-service-web-aog"
-	ms.date="10/28/2016"
-	wacn.date="10/28/2016"/>
+ms.service: app-service-web-aog
+ms.date: 10/28/2016
+wacn.date: 10/28/2016
+---
 
 # 如何在 JAVA 中导入 Wosign 证书 #
 
@@ -20,7 +20,6 @@
 `PKIX：unable to find valid certification path to requested target`
 
 **原因：** JDK 有一套单独的证书库，Java 在访问 HTTPS 服务时，会使用自己的证书仓库中的信任根证书，对 HTTPS 的证书，进行校验是否可信。如果服务提供方的根证书不在 JDK 可信证书库中，就会报该证书不存在。而 Azure 使用 Wosign 根证书，默认是不包含在 JDK 的证书库中。所以就会出现该问题。
-
 
 **解决方法：**安装 Wosign 根证书到 JDK 的证书库，详细步骤如下：
 

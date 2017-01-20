@@ -1,33 +1,32 @@
-<properties
-   pageTitle="为 ExpressRoute 配置虚拟网络和网关 | Microsoft Azure"
-   description="本文指导你使用经典部署模型为 ExpressRoute 设置虚拟网络 (VNet)。"
-   documentationCenter="na"
-   services="expressroute"
-   authors="cherylmc"
-   manager="carmonm"
-   editor=""
-   tags="azure-service-management"/>
+---
+title: 为 ExpressRoute 配置虚拟网络和网关 | Microsoft Azure
+description: 本文指导你使用经典部署模型为 ExpressRoute 设置虚拟网络 (VNet)。
+documentationCenter: na
+services: expressroute
+authors: cherylmc
+manager: carmonm
+editor: 
+tags: azure-service-management
 
-<tags 
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="article" 
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services" 
-   ms.date="09/20/2016" 
-   wacn.date="01/09/2017"
-   ms.author="cherylmc"/>  
-
+ms.service: expressroute
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 09/20/2016
+wacn.date: 01/09/2017
+ms.author: cherylmc
+---
 
 # 在经典管理门户中为 ExpressRoute 创建虚拟网络
 
 本文中的步骤指导通过经典管理部署模型和经典门户配置用于 ExpressRoute 的虚拟网络和虚拟网络网关。
 
-有关 Resource Manager 部署模型的说明，请参阅以下文章：[使用 PowerShell 创建虚拟网络](/documentation/articles/virtual-networks-create-vnet-arm-ps/)和[将 VPN 网关添加到 ExpressRoute 的 Resource Manager VNet](/documentation/articles/expressroute-howto-add-gateway-resource-manager/)。
+有关 Resource Manager 部署模型的说明，请参阅以下文章：[使用 PowerShell 创建虚拟网络](../virtual-network/virtual-networks-create-vnet-arm-ps.md)和[将 VPN 网关添加到 ExpressRoute 的 Resource Manager VNet](./expressroute-howto-add-gateway-resource-manager.md)。
 
 **关于 Azure 部署模型**
 
-[AZURE.INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
+[!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
 ## 创建经典 VNet 和网关
 
@@ -55,7 +54,6 @@
 	- **地址空间** - 包括“起始 IP”和“CIDR (地址计数)”。你可以指定任何地址范围，但前提是它不能与虚拟网络的地址范围重叠。通常情况下，这会为你的本地网络指定地址范围，但在使用 ExpressRoute 时，不会使用这些设置。不过，当你使用经典管理门户时，必须使用该设置才能创建本地网络。
 	- **添加地址空间** - 此设置与 ExpressRoute 的设置不相关。
 
-
 6. 在“虚拟网络地址空间”页上，输入以下信息，然后单击右下角的复选框以配置网络。
 
 	- **地址空间** - 包括起始 IP 和地址计数。请验证你指定的地址空间不与本地网络的任一个地址空间相重叠。
@@ -72,11 +70,11 @@
 
 3. 开始创建网关时，你将看到一条消息，告知网关已经开始创建。创建网关最多可能需要 45 分钟。
 
-11. 将你的网络连接到线路。遵循[如何将 VNet 链接到 ExpressRoute 线路](/documentation/articles/expressroute-howto-linkvnet-classic/)一文中的说明。
+11. 将你的网络连接到线路。遵循[如何将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-classic.md)一文中的说明。
 
 ## <a name="config"></a>为 ExpressRoute 配置现有的经典 VNet
 
-如果你已经有一个经典的 VNet，则可将其配置为在经典管理门户中连接到 ExpressRoute。设置如以上部分所述，因此请通读这些部分以熟悉所需设置。如果想要创建 ExpressRoute/站点到站点共存连接，请参阅[此文](/documentation/articles/expressroute-howto-coexist-classic/)以了解相关步骤。这些步骤不同于本文中的步骤。
+如果你已经有一个经典的 VNet，则可将其配置为在经典管理门户中连接到 ExpressRoute。设置如以上部分所述，因此请通读这些部分以熟悉所需设置。如果想要创建 ExpressRoute/站点到站点共存连接，请参阅[此文](./expressroute-howto-coexist-classic.md)以了解相关步骤。这些步骤不同于本文中的步骤。
  
 1. 需要先创建本地网络，然后才能更新 VNet 设置的其余部分。若要创建新的本地网络（这是通过经典管理门户配置 ExpressRoute 所必需的），请单击“新建”>“网络服务”>“虚拟网络”>“添加本地网络”。按照向导步骤创建本地网络。
 
@@ -84,13 +82,9 @@
 
 3. 配置设置以后，请转到本文的[创建网关](#gw)部分，以便创建网关。
 
-
 ## 后续步骤
 
-- 如果要将虚拟机添加到虚拟网络，请参阅[虚拟机学习路径](/documentation/services/virtual-machines/)。
-- 如果要了解有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 概述](/documentation/articles/expressroute-introduction/)。
-
-
- 
+- 如果要将虚拟机添加到虚拟网络，请参阅[虚拟机学习路径](../virtual-machines/index.md/)。
+- 如果要了解有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 概述](./expressroute-introduction.md)。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

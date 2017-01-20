@@ -1,29 +1,27 @@
-<properties 
-	pageTitle="使用 REST API 连接到媒体服务帐户 | Azure" 
-	description="本主题演示如何使用 REST API 连接到媒体服务。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 REST API 连接到媒体服务帐户 | Azure
+description: 本主题演示如何使用 REST API 连接到媒体服务。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="09/26/2016"  
-	wacn.date="12/26/2016"  
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/26/2016
+ms.author: juliako
+---
 
 # 使用媒体服务 REST API 连接到媒体服务帐户
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/media-services-dotnet-connect-programmatically/)
-- [REST](/documentation/articles/media-services-rest-connect-programmatically/)
+> [!div class="op_single_selector"]
+- [.NET](./media-services-dotnet-connect-programmatically.md)
+- [REST](./media-services-rest-connect-programmatically.md)
 
 本主题介绍如何在使用媒体服务 REST API 编程时获取与 Azure 媒体服务的编程连接。
 
@@ -34,7 +32,7 @@
 1. 获取访问令牌
 2. 连接到媒体服务 URI
 
-	>[AZURE.NOTE]上海 DC URI：https://wamsshaclus001rest-hs.chinacloudapp.cn/API/ ； 北京 DC URI： https://wamsbjbclus001rest-hs.chinacloudapp.cn/API/
+	>[!NOTE]上海 DC URI：https://wamsshaclus001rest-hs.chinacloudapp.cn/API/ ； 北京 DC URI： https://wamsbjbclus001rest-hs.chinacloudapp.cn/API/
 
 3. 将后续 API 调用发布到相应的 URL。
 
@@ -54,7 +52,6 @@
 	Connection: Keep-Alive
 	Accept: application/json
 
-	
 **正文**：
 
 需要在此请求的正文中提供 client\_id 和 client\_secret 值；client\_id 和 client\_secret 分别对应于 AccountName 和 AccountKey 值。在你设置帐户时，媒体服务将向你提供这些值。
@@ -63,11 +60,9 @@
 
 	grant_type=client_credentials&client_id=ams_account_name&client_secret=URL_encoded_ams_account_key&scope=urn%3aWindowsAzureMediaServices
 
-
 例如：
 
 	grant_type=client_credentials&client_id=amstestaccount001&client_secret=wUNbKhNj07oqjqU3Ah9R9f4kqTJ9avPpfe6Pk3YZ7ng%3d&scope=urn%3aWindowsAzureMediaServices
-
 
 以下示例显示了在响应正文中包含访问令牌的 HTTP 响应。
 
@@ -89,8 +84,7 @@
 	   "scope":"urn:WindowsAzureMediaServices"
 	}
 	
-
->[AZURE.NOTE]
+>[!NOTE]
 建议在外部存储中缓存“access\_token”和“expires\_in”值。以后可以从存储中检索令牌数据，并在媒体服务 REST API 调用中重新使用。这对于令牌可以在多个进程或多台计算机之间安全共享的方案尤其有用。
 
 确保监视访问令牌的“expires\_in”值，并在必要时使用新令牌更新你的 REST API 调用。
@@ -109,7 +103,6 @@
 	Accept: application/json
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
-
 **HTTP 响应**：
 	
 	HTTP/1.1 200 OK
@@ -127,8 +120,4 @@
 	
 	{"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata","value":[{"name":"AccessPolicies","url":"AccessPolicies"},{"name":"Locators","url":"Locators"},{"name":"ContentKeys","url":"ContentKeys"},{"name":"ContentKeyAuthorizationPolicyOptions","url":"ContentKeyAuthorizationPolicyOptions"},{"name":"ContentKeyAuthorizationPolicies","url":"ContentKeyAuthorizationPolicies"},{"name":"Files","url":"Files"},{"name":"Assets","url":"Assets"},{"name":"AssetDeliveryPolicies","url":"AssetDeliveryPolicies"},{"name":"IngestManifestFiles","url":"IngestManifestFiles"},{"name":"IngestManifestAssets","url":"IngestManifestAssets"},{"name":"IngestManifests","url":"IngestManifests"},{"name":"StorageAccounts","url":"StorageAccounts"},{"name":"Tasks","url":"Tasks"},{"name":"NotificationEndPoints","url":"NotificationEndPoints"},{"name":"Jobs","url":"Jobs"},{"name":"TaskTemplates","url":"TaskTemplates"},{"name":"JobTemplates","url":"JobTemplates"},{"name":"MediaProcessors","url":"MediaProcessors"},{"name":"EncodingReservedUnitTypes","url":"EncodingReservedUnitTypes"},{"name":"Operations","url":"Operations"},{"name":"StreamingEndpoints","url":"StreamingEndpoints"},{"name":"Channels","url":"Channels"},{"name":"Programs","url":"Programs"}]}
 	 
-
-
-
-
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

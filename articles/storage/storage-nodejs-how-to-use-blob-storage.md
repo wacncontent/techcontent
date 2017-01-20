@@ -1,31 +1,32 @@
-﻿<properties
-    pageTitle="如何通过 Node.js 使用 Blob 存储 | Azure"
-    description="使用 Azure Blob 存储（对象存储）将非结构化数据存储在云中。"
-    services="storage"
-    documentationcenter="nodejs"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="8b0df222-1ca8-4967-8248-6d6d720947b8"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="nodejs"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+﻿---
+title: 如何通过 Node.js 使用 Blob 存储 | Azure
+description: 使用 Azure Blob 存储（对象存储）将非结构化数据存储在云中。
+services: storage
+documentationcenter: nodejs
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: 8b0df222-1ca8-4967-8248-6d6d720947b8
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 如何通过 Node.js 使用 Blob 存储
-[AZURE.INCLUDE [storage-selector-blob-include](../../includes/storage-selector-blob-include.md)]
+[!INCLUDE [storage-selector-blob-include](../../includes/storage-selector-blob-include.md)]
 
 ## 概述
 本文介绍如何使用 Blob 存储执行常见方案。相关示例是通过 Node.js API 编写的。涉及的方案包括如何上传、列出、下载和删除 Blob。
 
-[AZURE.INCLUDE [storage-blob-concepts-include](../../includes/storage-blob-concepts-include.md)]
+[!INCLUDE [storage-blob-concepts-include](../../includes/storage-blob-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建 Node.js 应用程序
 有关如何创建 Node.js 应用程序的说明，请参阅[在 Azure App Service 中创建 Node.js Web 应用]、[使用 Windows PowerShell 生成 Node.js 应用程序并将其部署到 Azure 云服务]或[使用 Web Matrix 生成 Node.js Web 应用并将其部署到 Azure]。
@@ -65,9 +66,9 @@ Azure 模块将读取环境变量 `AZURE_STORAGE_ACCOUNT`、`AZURE_STORAGE_ACCES
 
     var blobSvc = azure.createBlobService();
 
-> [AZURE.NOTE] 可以匿名访问 Blob，只需使用 **createBlobServiceAnonymous** 并提供主机地址即可。例如，使用 `var blobSvc = azure.createBlobServiceAnonymous('https://myblob.blob.core.chinacloudapi.cn/');`。
+> [!NOTE] 可以匿名访问 Blob，只需使用 **createBlobServiceAnonymous** 并提供主机地址即可。例如，使用 `var blobSvc = azure.createBlobServiceAnonymous('https://myblob.blob.core.chinacloudapi.cn/');`。
 
-[AZURE.INCLUDE [storage-container-naming-rules-include](../../includes/storage-container-naming-rules-include.md)]
+[!INCLUDE [storage-container-naming-rules-include](../../includes/storage-container-naming-rules-include.md)]
 
 若要创建一个新的容器，请使用 **createContainerIfNotExists**。以下代码示例将创建名为“mycontainer”的新容器：
 
@@ -166,7 +167,7 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 * **appendBlockFromStream** - 将流的内容追加到现有追加 Blob
 * **appendBlockFromText** - 将字符串的内容追加到现有追加 Blob
 
-> [AZURE.NOTE] appendFromXXX API 将会执行某些客户端验证以快速失败，从而避免不必要的服务器调用。而 appendBlockFromXXX 则不会如此。
+> [!NOTE] appendFromXXX API 将会执行某些客户端验证以快速失败，从而避免不必要的服务器调用。而 appendBlockFromXXX 则不会如此。
 
 以下代码示例将 **test.txt** 文件的内容上传到 **myappendblob** 中。
 
@@ -175,7 +176,6 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 	    // text appended
 	  }
 	});
-
 
 ### 页 Blob
 若要将数据上传到页 Blob，可使用以下方法：
@@ -194,7 +194,7 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 	  }
 	});
 
-> [AZURE.NOTE] 页 Blob 包含 512 字节的“页面”。如果上传大小不是 512 倍数的数据，则会收到错误。
+> [!NOTE] 页 Blob 包含 512 字节的“页面”。如果上传大小不是 512 倍数的数据，则会收到错误。
 
 ## 列出容器中的 Blob
 若要列出容器中的 Blob，请使用 **listBlobsSegmented** 方法。如果想要返回带特定前缀的 Blob，请使用 **listBlobsSegmentedWithPrefix**。
@@ -272,14 +272,14 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 对 **myblob** 的后续操作必须提供 `options.leaseId` 参数。租约 ID 作为 `result.id` 从 **acquireLease** 返回。
 
-> [AZURE.NOTE] 默认情况下，租约期限为无期。可以指定一个有限的租期（15 到 60 秒），只需提供 `options.leaseDuration` 参数即可。
+> [!NOTE] 默认情况下，租约期限为无期。可以指定一个有限的租期（15 到 60 秒），只需提供 `options.leaseDuration` 参数即可。
 
 若要删除租约，请使用 **releaseLease**。若要中断租约，但又要防止其他人在原始租约到期之前获得新租约，则可使用 **breakLease**。
 
 ## 使用共享访问签名
 共享访问签名 (SAS) 是一种安全的方法，用于对 Blob 和容器进行细致访问而无需提供存储帐户名或密钥。通常使用共享访问签名来提供对数据的有限访问权限，例如允许移动应用程序访问 Blob。
 
-> [AZURE.NOTE] 虽然也可以允许匿名访问 Blob，但共享访问签名可以允许提供更受控制的访问，因为必须生成 SAS。
+> [!NOTE] 虽然也可以允许匿名访问 Blob，但共享访问签名可以允许提供更受控制的访问，因为必须生成 SAS。
 
 受信任的应用程序（例如基于云的服务）可使用 **BlobService** 的 **generateSharedAccessSignature** 生成共享访问签名，然后将其提供给不受信任的或不完全受信任的应用程序，例如移动应用。共享访问签名可使用策略生成，该策略描述了共享访问签名的生效日期和失效日期，以及授予共享访问签名持有者的访问级别。
 
@@ -357,19 +357,18 @@ ACL 是使用一组访问策略实施的，每个策略都有一个关联的 ID�
 * [Azure 存储团队博客][Azure Storage Team Blog]
 * GitHub 上的 [Azure Storage SDK for Node][Azure Storage SDK for Node] 存储库
 * [Node.js 开发人员中心](/develop/nodejs/)
-* [使用 AzCopy 命令行实用程序传输数据](/documentation/articles/storage-use-azcopy/)
+* [使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)
 
 [Azure Storage SDK for Node]: https://github.com/Azure/azure-storage-node
 
-[在 Azure App Service 中创建 Node.js Web 应用]: /documentation/articles/web-sites-nodejs-develop-deploy-mac/
-[Node.js Cloud Service with Storage]: /documentation/articles/storage-nodejs-use-table-storage-cloud-service-app/
-[使用 Azure 表服务的 Node.js Web 应用]: /documentation/articles/storage-nodejs-use-table-storage-web-site/
-[使用 Web Matrix 生成 Node.js Web 应用并将其部署到 Azure]: /documentation/articles/web-sites-nodejs-use-webmatrix/
+[在 Azure App Service 中创建 Node.js Web 应用]: ../app-service-web/web-sites-nodejs-develop-deploy-mac.md
+[Node.js Cloud Service with Storage]: ./storage-nodejs-use-table-storage-cloud-service-app.md
+[使用 Azure 表服务的 Node.js Web 应用]: ../app-service-web/storage-nodejs-use-table-storage-web-site.md
+[使用 Web Matrix 生成 Node.js Web 应用并将其部署到 Azure]: ../app-service-web/web-sites-nodejs-use-webmatrix.md
 [Using the REST API]: http://msdn.microsoft.com/zh-cn/library/azure/hh264518.aspx
 [Azure Portal]: https://portal.azure.cn
-[使用 Windows PowerShell 生成 Node.js 应用程序并将其部署到 Azure 云服务]: /documentation/articles/cloud-services-nodejs-develop-deploy-app/
+[使用 Windows PowerShell 生成 Node.js 应用程序并将其部署到 Azure 云服务]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
 [Azure Storage Team Blog]: http://blogs.msdn.com/b/windowsazurestorage/
 [Azure Storage SDK for Node API Reference]: http://azure.github.io/azure-storage-node/
  
-
 <!---HONumber=Mooncake_0103_2017-->

@@ -1,28 +1,27 @@
-<properties
-	pageTitle="Azure 通知中心安全推送"
-	description="了解如何在 Azure 中发送安全推送通知。代码示例是使用 .NET API 通过 C# 编写的。"
-	documentationCenter="windows"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""
-	services="notification-hubs"/>
+---
+title: Azure 通知中心安全推送
+description: 了解如何在 Azure 中发送安全推送通知。代码示例是使用 .NET API 通过 C# 编写的。
+documentationCenter: windows
+authors: wesmc7777
+manager: erikre
+editor: 
+services: notification-hubs
 
-<tags
-	ms.service="notification-hubs" 
-	ms.workload="mobile"
-	ms.tgt_pltfrm="windows"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="01/09/2017"
-	ms.author="wesmc"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: windows
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 01/09/2017
+ms.author: wesmc
+---
 
 #Azure 通知中心安全推送
 
-> [AZURE.SELECTOR]
-- [Windows Universal](/documentation/articles/notification-hubs-aspnet-backend-windows-dotnet-wns-secure-push-notification/)
-- [iOS](/documentation/articles/notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification/)
-
+> [!div class="op_single_selector"]
+- [Windows Universal](./notification-hubs-aspnet-backend-windows-dotnet-wns-secure-push-notification.md)
+- [iOS](./notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md)
 
 ##概述
 
@@ -41,12 +40,12 @@
 
 请务必注意，在之前的流程（以及本教程中）中，我们假设此设备会在用户登录后在本地存储中存储身份验证令牌。这可以保证完全无缝的体验，因为该设备可以使用此令牌检索通知的安全有效负载。如果您的应用程序未在设备上存储身份验证令牌，或者如果这些令牌可能已过期，此设备应用在收到通知时应显示提示用户启动应用的通用通知。然后，应用对用户进行身份验证并显示通知有效负载。
 
-本安全推送教程演示如何安全地发送推送通知。本教程以[通知用户](/documentation/articles/notification-hubs-aspnet-backend-windows-dotnet-wns-notification/)教程为基础，因此您应该先完成该教程中的步骤。
+本安全推送教程演示如何安全地发送推送通知。本教程以[通知用户](./notification-hubs-aspnet-backend-windows-dotnet-wns-notification.md)教程为基础，因此您应该先完成该教程中的步骤。
 
-> [AZURE.NOTE] 本教程假设您已根据[通知中心入门（Windows 应用商店）](/documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/)中所述创建并配置了通知中心。
+> [!NOTE] 本教程假设您已根据[通知中心入门（Windows 应用商店）](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md)中所述创建并配置了通知中心。
 此外，请注意 Windows Phone 8.1 需要 Windows（而不是 Windows Phone）凭据，且后台任务无法在 Windows Phone 8.0 或 Silverlight 8.1 上正常运行。对于 Windows 应用商店应用程序，您只能在应用锁屏界面启用（单击 Appmanifest 中的复选框）的情况下，通过运行后台任务来接收通知。
 
-[AZURE.INCLUDE [notification-hubs-aspnet-backend-securepush](../../includes/notification-hubs-aspnet-backend-securepush.md)]
+[!INCLUDE [notification-hubs-aspnet-backend-securepush](../../includes/notification-hubs-aspnet-backend-securepush.md)]
 
 ## 修改 Windows Phone 项目
 

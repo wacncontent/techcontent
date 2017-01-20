@@ -1,30 +1,29 @@
-<properties
-   pageTitle="Reliable Services WCF 通信堆栈 | Azure"
-   description="Service Fabric 中的内置 WCF 通信堆栈为 Service Services 提供客户端到服务的 WCF 通信。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="BharatNarasimman"
-   manager="timlt"
-   editor="vturecek"/>
+---
+title: Reliable Services WCF 通信堆栈 | Azure
+description: Service Fabric 中的内置 WCF 通信堆栈为 Service Services 提供客户端到服务的 WCF 通信。
+services: service-fabric
+documentationCenter: .net
+authors: BharatNarasimman
+manager: timlt
+editor: vturecek
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="required"
-   ms.date="07/26/2016"
-   wacn.date="08/29/2016"
-   ms.author="bharatn"/>
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: required
+ms.date: 07/26/2016
+wacn.date: 08/29/2016
+ms.author: bharatn
+---
 
 # Reliable Services 基于 WCF 的通信堆栈
-Reliable services 框架使服务创作者能够选择他们要用于其服务的通信堆栈。他们可以通过从 [CreateServiceReplicaListeners 或 CreateServiceInstanceListeners](/documentation/articles/service-fabric-reliable-services-communication/) 方法返回的 **ICommunicationListener**，来插入所选的通信堆栈。对于想要使用基于 Windows Communication Foundation (WCF) 的通信的服务创作者，该框架提供了基于 WCF 的通信堆栈实现。
+Reliable services 框架使服务创作者能够选择他们要用于其服务的通信堆栈。他们可以通过从 [CreateServiceReplicaListeners 或 CreateServiceInstanceListeners](./service-fabric-reliable-services-communication.md) 方法返回的 **ICommunicationListener**，来插入所选的通信堆栈。对于想要使用基于 Windows Communication Foundation (WCF) 的通信的服务创作者，该框架提供了基于 WCF 的通信堆栈实现。
 
 ## WCF 通信侦听器
 特定于 WCF 的 ICommunicationListener 实现由 Microsoft.ServiceFabric.Services.Communication.Wcf.Runtime.WcfCommunicationListener 类提供。
 
 假设我们有 `ICalculator` 类型的服务协定
-
 
 	[ServiceContract]
 	public interface ICalculator
@@ -33,10 +32,7 @@ Reliable services 框架使服务创作者能够选择他们要用于其服务�
 	    Task<int> Add(int value1, int value2);
 	}
 
-
 我们可以通过下列方式在服务中创建 WCF 通信侦听器。
-
-
 
 	protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
 	{
@@ -58,11 +54,8 @@ Reliable services 框架使服务创作者能够选择他们要用于其服务�
     	)};
 	}
 
-
 ## 为 WCF 通信堆栈编写客户端
-为编写客户端以便使用 WCF 与服务进行通信，该框架提供了 **WcfClientCommunicationFactory**，这是特定于 WCF 的 [ClientCommunicationFactoryBase](/documentation/articles/service-fabric-reliable-services-communication/) 实现。
-
-
+为编写客户端以便使用 WCF 与服务进行通信，该框架提供了 **WcfClientCommunicationFactory**，这是特定于 WCF 的 [ClientCommunicationFactoryBase](./service-fabric-reliable-services-communication.md) 实现。
 
 	public WcfCommunicationClientFactory(
     	Binding clientBinding = null,
@@ -71,10 +64,7 @@ Reliable services 框架使服务创作者能够选择他们要用于其服务�
     	string traceId = null,
     	object callback = null);
 
-
 可以从 **WcfCommunicationClientFactory** 创建的 **WcfCommunicationClient** 访问 WCF 通信通道。
-
-
 
 	public class WcfCommunicationClient : ServicePartitionClient<WcfCommunicationClient<ICalculator>>
    	{
@@ -84,10 +74,7 @@ Reliable services 框架使服务创作者能够选择他们要用于其服务�
        	}
    	}
 
-
-
 客户端代码可以使用 **WcfCommunicationClientFactory** 以及用于实现 **ServicePartitionClient** 的 **WcfCommunicationClient** 来确定服务终结点，并与服务通信。
-
 
 	// Create binding
 	Binding binding = WcfUtility.CreateTcpClientBinding();
@@ -112,14 +99,13 @@ Reliable services 框架使服务创作者能够选择他们要用于其服务�
 	var result = calculatorServiceCommunicationClient.InvokeWithRetryAsync(
 	                client => client.Channel.Add(2, 3)).Result;
 	
-
->[AZURE.NOTE] 默认 ServicePartitionResolver 假设客户端正在与服务相同的群集中运行。如果不是这样，请创建 ServicePartitionResolver 对象，并传入群集连接终结点。
+>[!NOTE] 默认 ServicePartitionResolver 假设客户端正在与服务相同的群集中运行。如果不是这样，请创建 ServicePartitionResolver 对象，并传入群集连接终结点。
 
 ## 后续步骤
-* [使用 Reliable Services 远程控制执行远程过程调用](/documentation/articles/service-fabric-reliable-services-communication-remoting/)
+* [使用 Reliable Services 远程控制执行远程过程调用](./service-fabric-reliable-services-communication-remoting.md)
 
-* [Reliable Services 中使用 OWIN 的 Web API](/documentation/articles/service-fabric-reliable-services-communication-webapi/)
+* [Reliable Services 中使用 OWIN 的 Web API](./service-fabric-reliable-services-communication-webapi.md)
 
-* [确保 Reliable Services 的通信安全](/documentation/articles/service-fabric-reliable-services-secure-communication/)
+* [确保 Reliable Services 的通信安全](./service-fabric-reliable-services-secure-communication.md)
 
 <!---HONumber=Mooncake_0822_2016-->

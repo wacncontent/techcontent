@@ -1,23 +1,21 @@
-<properties
- pageTitle="IoT 中心 MQTT 支持 | Azure"
- description="介绍 IoT 中心级别的 MQTT 支持"
- services="iot-hub"
- documentationCenter=".net"
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: IoT 中心 MQTT 支持 | Azure
+description: 介绍 IoT 中心级别的 MQTT 支持
+services: iot-hub
+documentationCenter: .net
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="10/24/2016"
- wacn.date="01/04/2017"
- ms.author="kdotchko"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/24/2016
+wacn.date: 01/04/2017
+ms.author: kdotchko
+---
 
 # IoT 中心 MQTT 支持
 
@@ -84,7 +82,7 @@ IoT 中心允许设备在端口 8883 上使用 [MQTT v3.1.1][lnk-mqtt-org] 协�
 
 		RFC 2396-encoded(<PropertyName1>)=RFC 2396-encoded(<PropertyValue1>)&RFC 2396-encoded(<PropertyName2>)=RFC 2396-encoded(<PropertyValue2>)…
 
-> [AZURE.NOTE] 此 `{property_bag}` 元素使用的编码与 HTTP 协议中用于查询字符串的编码相同。
+> [!NOTE] 此 `{property_bag}` 元素使用的编码与 HTTP 协议中用于查询字符串的编码相同。
 
 设备客户端应用程序还可以使用 `devices/{device_id}/messages/events/{property_bag}` 作为 **Will 主题名称**，来定义要以遥测消息形式转发的 *Will 消息*。
 
@@ -119,17 +117,17 @@ IoT 中心允许设备在端口 8883 上使用 [MQTT v3.1.1][lnk-mqtt-org] 协�
 [lnk-sample-csharp]: https://github.com/Azure/azure-iot-sdks/tree/master/csharp/device/samples
 [lnk-sample-python]: https://github.com/Azure/azure-iot-sdks/tree/master/python/device/samples
 [lnk-device-explorer]: https://github.com/Azure/azure-iot-sdks/blob/master/tools/DeviceExplorer/readme.md
-[lnk-sas-tokens]: /documentation/articles/iot-hub-devguide-security/#use-sas-tokens-in-a-device-app
-[lnk-mqtt-devguide]: /documentation/articles/iot-hub-devguide-messaging/#notes-on-mqtt-support
+[lnk-sas-tokens]: ./iot-hub-devguide-security.md#use-sas-tokens-in-a-device-app
+[lnk-mqtt-devguide]: ./iot-hub-devguide-messaging.md#notes-on-mqtt-support
 
-[lnk-devices]: /documentation/articles/iot-hub-tested-configurations/
-[lnk-protocols]: /documentation/articles/iot-hub-protocol-gateway/
-[lnk-compare]: /documentation/articles/iot-hub-compare-event-hubs/
-[lnk-scaling]: /documentation/articles/iot-hub-scaling/
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-devices]: ./iot-hub-tested-configurations.md
+[lnk-protocols]: ./iot-hub-protocol-gateway.md
+[lnk-compare]: ./iot-hub-compare-event-hubs.md
+[lnk-scaling]: ./iot-hub-scaling.md
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
 
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-messaging]: /documentation/articles/iot-hub-devguide-messaging/
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-messaging]: ./iot-hub-devguide-messaging.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

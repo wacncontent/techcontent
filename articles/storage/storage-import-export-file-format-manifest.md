@@ -1,23 +1,22 @@
-<properties
-    pageTitle="导入/导出服务清单文件格式 | Azure"
-    description="了解驱动器清单文件的格式。清单文件描述 Azure Blob 存储中的 Blob 与构成导入/导出服务中导入或导出作业的驱动器上的文件之间的映射。"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 导入/导出服务清单文件格式 | Azure
+description: 了解驱动器清单文件的格式。清单文件描述 Azure Blob 存储中的 Blob 与构成导入/导出服务中导入或导出作业的驱动器上的文件之间的映射。
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.assetid="f3119e1c-2c25-48ad-8752-a6ed4adadbb0"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="05/25/2015"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.assetid: f3119e1c-2c25-48ad-8752-a6ed4adadbb0
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/25/2015
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 导入/导出服务清单文件格式
 驱动器清单文件描述 Azure Blob 存储中的 Blob 与构成导入或导出作业的驱动器上的文件之间的映射。对于某个导入操作而言，该清单文件作为驱动器准备过程的一部分创建，在将该驱动器送至 Azure 数据中心之前已存储在驱动器上。在导出操作过程中，Azure 导入/导出服务将在驱动器上创建并存储该清单。
@@ -26,7 +25,6 @@
   
 下面介绍驱动器清单文件的一般格式：
   
-
 	<?xml version="1.0" encoding="UTF-8"?>  
 	<DriveManifest Version="2014-11-01">  
 	  <Drive>  
@@ -87,7 +85,6 @@
 	      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]   
 	       Hash="md5-hash"/>]  
 	    </BlockList>  
-
 
 下表指定了驱动器清单 XML 格式的数据元素和属性。
   

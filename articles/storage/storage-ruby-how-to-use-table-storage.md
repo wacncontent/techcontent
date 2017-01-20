@@ -1,36 +1,37 @@
-<properties
-    pageTitle="如何通过 Ruby 使用 Azure 表存储 | Azure"
-    description="使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。"
-    services="storage"
-    documentationcenter="ruby"
-    author="mmacy"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="047cd9ff-17d3-4c15-9284-1b5cc61a3224"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="ruby"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 如何通过 Ruby 使用 Azure 表存储 | Azure
+description: 使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。
+services: storage
+documentationcenter: ruby
+author: mmacy
+manager: timlt
+editor: 
+
+ms.assetid: 047cd9ff-17d3-4c15-9284-1b5cc61a3224
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: ruby
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 如何通过 Ruby 使用 Azure 表存储
 
-[AZURE.INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
+[!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 
 ## 概述
 本指南演示如何使用 Azure 表服务执行常见任务。相关示例是使用 Ruby API 编写的。涉及的情景包括创建和删除表、在表中插入和查询条目。
 
-[AZURE.INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
+[!INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建 Ruby 应用程序
 
-有关如何创建 Ruby 应用程序的说明，请参阅 [Azure VM 上的 Ruby on Rails Web 应用程序](/documentation/articles/virtual-machines-linux-classic-ruby-rails-web-app/)。
+有关如何创建 Ruby 应用程序的说明，请参阅 [Azure VM 上的 Ruby on Rails Web 应用程序](../virtual-machines/virtual-machines-linux-classic-ruby-rails-web-app.md)。
 
 ## 配置应用程序以访问存储
 要使用 Azure 存储，需下载和使用 Ruby Azure 包，其中包括与存储 REST 服务通信的一组方便的库。
@@ -128,7 +129,7 @@ Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORA
 	query = { :filter => "PartitionKey eq 'test-partition-key'" }
 	result, token = azure_table_service.query_entities("testtable", query)
 
-> [AZURE.NOTE] 如果结果集太大，一个查询无法全部返回，将会返回一个继续标记，你可以使用该标记检索后续页面。
+> [!NOTE] 如果结果集太大，一个查询无法全部返回，将会返回一个继续标记，你可以使用该标记检索后续页面。
 
 ## 查询条目属性的子集
 对表的查询可以只检索条目的几个属性。这种技术称为“投影”，可减少带宽并提高查询性能，尤其适用于大型条目。请使用 select 子句并传递你希望显示给客户端的属性的名称。

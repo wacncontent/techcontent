@@ -1,30 +1,30 @@
-<properties 
-	pageTitle="使用 .NET 监视作业进度" 
-	description="了解如何使用事件处理程序代码来跟踪作业进度并发送状态更新。代码示例用 C# 编写，并使用用于 .NET 的媒体服务 SDK。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>
+---
+title: 使用 .NET 监视作业进度
+description: 了解如何使用事件处理程序代码来跟踪作业进度并发送状态更新。代码示例用 C# 编写，并使用用于 .NET 的媒体服务 SDK。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="08/19/2016" 
-	wacn.date="12/16/2016"   
-	ms.author="juliako"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 08/19/2016
+wacn.date: 12/16/2016
+ms.author: juliako
+---
 
 # 使用 .NET 监视作业进度
 
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/media-services-portal-check-job-progress/)
-- [.NET](/documentation/articles/media-services-check-job-progress/)
-- [REST](/documentation/articles/media-services-rest-check-job-progress/)
+> [!div class="op_single_selector"]
+- [门户](./media-services-portal-check-job-progress.md)
+- [.NET](./media-services-check-job-progress.md)
+- [REST](./media-services-rest-check-job-progress.md)
 
-运行作业时，通常需要采用某种方式来跟踪作业进度。可以通过定义 StateChanged 事件处理程序（如本主题中所述）或使用 Azure 队列存储监视媒体服务作业通知（如[此](/documentation/articles/media-services-dotnet-check-job-progress-with-queues/)主题中所述）来检查进度。
+运行作业时，通常需要采用某种方式来跟踪作业进度。可以通过定义 StateChanged 事件处理程序（如本主题中所述）或使用 Azure 队列存储监视媒体服务作业通知（如[此](./media-services-dotnet-check-job-progress-with-queues.md)主题中所述）来检查进度。
 
 ##<a id="statechange_event_handler"></a><a name="check_progress_with_queues"></a>定义 StateChanged 事件处理程序以监视作业进度
 

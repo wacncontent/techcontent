@@ -1,30 +1,28 @@
 <!-- Remove script center -->
-<properties
-	pageTitle="如何安装和配置 Azure PowerShell"
-	description="了解如何安装和配置 Azure PowerShell。"
-	editor="tysonn"
-	manager="dongill"
-	documentationCenter=""
-	services=""
-	authors="coreyp-at-msft"/>  
+---
+title: 如何安装和配置 Azure PowerShell
+description: 了解如何安装和配置 Azure PowerShell。
+editor: tysonn
+manager: dongill
+documentationCenter: 
+services: 
+authors: coreyp-at-msft
 
-
-<tags
-	ms.service="multiple"
-	ms.workload="multiple"
-	ms.tgt_pltfrm="powershell"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/30/2016"
-	wacn.date="11/21/2016"
-	ms.author="coreyp"/>  
-
+ms.service: multiple
+ms.workload: multiple
+ms.tgt_pltfrm: powershell
+ms.devlang: na
+ms.topic: article
+ms.date: 09/30/2016
+wacn.date: 11/21/2016
+ms.author: coreyp
+---
 
 # 如何安装和配置 Azure PowerShell
 
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/powershell-install-configure/)
-- [Azure CLI](/documentation/articles/xplat-cli-install/)
+> [!div class="op_single_selector"]
+- [PowerShell](./powershell-install-configure.md)
+- [Azure CLI](./xplat-cli-install.md)
 
 ##什么是 Azure PowerShell？
 Azure PowerShell 是一组模块，提供用于通过 Windows PowerShell 管理 Azure 的 cmdlet。你可以使用 cmdlet 来创建、测试、部署和管理通过 Azure 平台传送的解决方案和服务。在大多数情况下，这些 cmdlet 可用于执行在 Azure 经典管理门户中可以执行的任务，例如，创建和配置云服务、虚拟机、虚拟网络和 Web 应用。
@@ -51,7 +49,6 @@ Azure PowerShell 使用语义版本控制，这意味着如果版本 A > 版本 
 
 请注意，Azure 和 AzureRM 模块拥有共同的依赖项，因此，使用这两个模块时，如果要更新其中的一个模块，则应同时更新两个模块。Azure 模块的早期版本加载并行模块时与 AzureRM 模块的早期版本加载并行模块时遇到的问题一样。
 
-
 <a id="Install"></a>
 ## 步骤 1：安装
 
@@ -61,11 +58,11 @@ Azure PowerShell 使用语义版本控制，这意味着如果版本 A > 版本 
 
 从 WebPI 安装 Azure PowerShell 1.0 和更高版本的方法与安装 0.9.x 版本是一样的。下载 [Azure PowerShell](http://aka.ms/webpi-azps) 并开始安装。如果安装了 Azure PowerShell 0.9.x，将在升级期间卸载版本 0.9.x。如果从 PowerShell 库安装了 Azure PowerShell 模块，安装程序将在安装之前自动删除这些模块，以确保 Azure PowerShell 环境一致。
 
-> [AZURE.NOTE] 如果之前从 PowerShell 库安装了 Azure 模块，安装程序将自动删除这些模块。这是为了防止混淆已安装的模块版本及其所在的位置。PowerShell 库模块通常安装在 **%ProgramFiles%\\WindowsPowerShell\\Modules** 中。相反，WebPI 安装程序会在 **%ProgramFiles(x86)%\\Microsoft SDKs\\Azure\\PowerShell** 中安装 Azure 模块。如果在安装过程中发生错误，可以手动删除 **%ProgramFiles%\\WindowsPowerShell\\Modules** 文件夹中的 Azure* 文件夹，然后重试安装。
+> [!NOTE] 如果之前从 PowerShell 库安装了 Azure 模块，安装程序将自动删除这些模块。这是为了防止混淆已安装的模块版本及其所在的位置。PowerShell 库模块通常安装在 **%ProgramFiles%\\WindowsPowerShell\\Modules** 中。相反，WebPI 安装程序会在 **%ProgramFiles(x86)%\\Microsoft SDKs\\Azure\\PowerShell** 中安装 Azure 模块。如果在安装过程中发生错误，可以手动删除 **%ProgramFiles%\\WindowsPowerShell\\Modules** 文件夹中的 Azure* 文件夹，然后重试安装。
 
 安装完成后，```$env:PSModulePath``` 设置中应会有包含 Azure PowerShell cmdlet 的目录。
 
-> [AZURE.NOTE] 从 WebPI 安装时，会发生一个有关 PowerShell **$env:PSModulePath** 的已知问题。如果计算机因系统更新或其他安装而需要重启，有可能会导致更新 **$env:PSModulePath** 不包含 Azure PowerShell 的安装路径。如果发生这种情况，当你在安装或升级之后尝试使用 Azure PowerShell cmdlet 时，可能会看到“cmdlet 无法识别”消息。如果发生这种情况，重启计算机应该可以解决该问题。
+> [!NOTE] 从 WebPI 安装时，会发生一个有关 PowerShell **$env:PSModulePath** 的已知问题。如果计算机因系统更新或其他安装而需要重启，有可能会导致更新 **$env:PSModulePath** 不包含 Azure PowerShell 的安装路径。如果发生这种情况，当你在安装或升级之后尝试使用 Azure PowerShell cmdlet 时，可能会看到“cmdlet 无法识别”消息。如果发生这种情况，重启计算机应该可以解决该问题。
 
 如果尝试加载或执行 cmdlet，会收到如下消息：
 
@@ -143,7 +140,6 @@ import-module "C:\\Program Files\\WindowsPowerShell\\Modules\\Azure\\XXXX\\expre
     # To list all of the blobs in all of your containers in all of your accounts
     Get-AzureRmStorageAccount | Get-AzureStorageContainer | Get-AzureStorageBlob
 
-
 ## <a name="Connect"></a> 步骤 3：连接
 cmdlet 需要使用你的订阅来管理你的服务。如果你没有 Azure 订阅，可以购买一个。有关说明，请参阅[如何购买 Azure](https://www.azure.cn/pricing/overview/)。
 
@@ -157,7 +153,7 @@ cmdlet 需要使用你的订阅来管理你的服务。如果你没有 Azure 订
 
     $cred = Get-Credential
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $cred
-> [AZURE.NOTE] 如果你的组织帐户有多个关联的租户，请指定 TenantId 参数：
+> [!NOTE] 如果你的组织帐户有多个关联的租户，请指定 TenantId 参数：
 
     $loadersubscription = Get-AzureRmSubscription -SubscriptionName $YourSubscriptionName -TenantId $YourAssociatedSubscriptionTenantId
 
@@ -173,7 +169,6 @@ cmdlet 需要使用你的订阅来管理你的服务。如果你没有 Azure 订
 
 这些资源提供特定 cmdlet 的帮助信息：
 
-
 -   从控制台内，可以使用内置的帮助系统。**Get-Help** cmdlet 提供对此系统的访问。
 
 - 要获得社区中的帮助信息，请尝试以下常见论坛：
@@ -182,7 +177,6 @@ cmdlet 需要使用你的订阅来管理你的服务。如果你没有 Azure 订
 	- [CSDN](http://azure.csdn.net/)
 
 ##了解详细信息
-
 
 若要详细了解如何使用 cmdlet，请参阅以下资源：
 

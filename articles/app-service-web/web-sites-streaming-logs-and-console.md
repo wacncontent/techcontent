@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="流式传输日志和控制台" 
-	description="流式传输日志和控制台概述" 
-	authors="btardif" 
-	manager="wpickett" 
-	editor="" 
-	services="app-service\web" 
-	documentationCenter=""/>  
+---
+title: 流式传输日志和控制台
+description: 流式传输日志和控制台概述
+authors: btardif
+manager: wpickett
+editor: 
+services: app-service\web
+documentationCenter: 
 
-
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="multiple" 
-	ms.topic="article" 
-	ms.date="10/12/2016" 
-	wacn.date="11/07/2016" 
-	ms.author="byvinyal"/>  
-
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 10/12/2016
+wacn.date: 11/07/2016
+ms.author: byvinyal
+---
 
 # 流式传输日志和控制台
 
@@ -63,7 +61,7 @@ console.log("My trace statement").
 
 单击边栏选项卡顶部的“保存”，然后就可以开始查看日志了。
 
->[AZURE.NOTE] **严重性级别**越高，日志消耗的资源就越多，但生成的跟踪也越多。确保将**严重性级别**配置为适用于生产或高流量站点的正确详细级别。
+>[!NOTE] **严重性级别**越高，日志消耗的资源就越多，但生成的跟踪也越多。确保将**严重性级别**配置为适用于生产或高流量站点的正确详细级别。
 
 ![][StreamingLogsScreenshot]
 若要从 Azure 门户预览中查看**流式传输日志**，请单击同样位于设置菜单的“监视”部分中的“(1) 日志流”。如果应用主动写入跟踪语句，则会以近乎实时的方式在 **(2) 流式传输日志 UI** 中看到它们。

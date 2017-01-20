@@ -1,29 +1,28 @@
-<properties
-	pageTitle="Azure Monitor 自动缩放常用指标 | Azure"
-	description="了解自动缩放云服务、虚拟机和 Web Apps 时常用的指标。"
-	authors="kamathashwin"
-	manager=""
-	editor=""
-	services="monitoring-and-diagnostics"
-	documentationCenter="monitoring-and-diagnostics"/>  
+---
+title: Azure Monitor 自动缩放常用指标 | Azure
+description: 了解自动缩放云服务、虚拟机和 Web Apps 时常用的指标。
+authors: kamathashwin
+manager: 
+editor: 
+services: monitoring-and-diagnostics
+documentationCenter: monitoring-and-diagnostics
 
-
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="12/06/2016"
-	wacn.date="01/03/2017"
-	ms.author="ashwink"/>
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/06/2016
+wacn.date: 01/03/2017
+ms.author: ashwink
+---
 
 # Azure Monitor 自动缩放常用指标
 利用 Azure Monitor 自动缩放，可根据遥测数据（指标）增加或减少正在运行的实例数。本文档介绍了你可能想要使用的常用指标。在云服务和服务器场的 Azure 门户预览中，可以选择要作为缩放依据的资源指标。不过，你也可以选择其他资源的任何指标来作为缩放依据。
 
 下列信息对于缩放虚拟机规模集同样适用。
 
-> [AZURE.NOTE]
+> [!NOTE]
 此信息仅适用于基于 Resource Manager 的 VM 和 VM 规模集。
 > 
 
@@ -36,7 +35,7 @@
 
 如果特定指标未采样或以所需的频率传输，你可以更新诊断配置。
 
-如果发生上述任一情况，请查看[使用 PowerShell 在运行 Windows 的虚拟机中启用 Azure 诊断](/documentation/articles/virtual-machines-windows-ps-extensions-diagnostics/)，将 Azure VM 诊断扩展配置和更新为启用该指标。这篇文章还包含一个诊断配置文件示例。
+如果发生上述任一情况，请查看[使用 PowerShell 在运行 Windows 的虚拟机中启用 Azure 诊断](../virtual-machines/virtual-machines-windows-ps-extensions-diagnostics.md)，将 Azure VM 诊断扩展配置和更新为启用该指标。这篇文章还包含一个诊断配置文件示例。
 
 ### <a name="compute-metrics-for-windows-vm-v2-as-a-guest-os"></a> Windows VM v2 作为来宾 OS 时的计算指标
 
@@ -77,8 +76,6 @@
 |\\PhysicalDisk(\_Total)\\Avg.Disk Write Queue Length |计数|
 |\\LogicalDisk(\_Total)\\% Free Space| 百分比|
 |\\LogicalDisk(\_Total)\\Free Megabytes| 计数|
-
-
 
 ### <a name="compute-metrics-for-linux-vm-v2-as-a-guest-os"></a> Linux VM v2 作为来宾 OS 时的计算指标
 
@@ -131,9 +128,6 @@
 |\\NetworkInterface\\TotalTxErrors|	计数|
 |\\NetworkInterface\\TotalCollisions|	计数|
 
-
-
-
 ## 常用的 Web（服务器场）指标
 
 你也可以根据常用的 Web 服务器指标（如 Http 队列长度）执行自动缩放。其指标名称为 **HttpQueueLength**。以下部分列出了可用的服务器场 (Web Apps) 指标。
@@ -154,7 +148,6 @@
 |HttpQueueLength|	计数|
 |BytesReceived|	字节|
 |BytesSent|	字节|
-
 
 ## 常用的存储指标
 你可以将存储队列长度作为缩放依据，它是存储队列中的消息数目。存储队列长度是一个特殊指标，阈值是每个实例的消息数。例如，如果有两个实例并且阈值设置为 100，则当队列中的消息总数为 200 时将进行缩放。这两个实例的消息数可能各为 100，或分别为 120 和 80，或者为其他相加大于等于 200 的数字组合。
@@ -182,6 +175,6 @@
 		 "metricNamespace": "",
 		"metricResourceUri": "/subscriptions/s1/resourceGroups/rg1/providers/Microsoft.ServiceBus/namespaces/mySB/queues/myqueue"
 
->[AZURE.NOTE] 若使用服务总线，则不存在资源组这一概念，但 Azure Resource Manager 会为每个区域创建一个默认资源组。此资源组通常采用“Default-ServiceBus-[region]”的格式。
+>[!NOTE] 若使用服务总线，则不存在资源组这一概念，但 Azure Resource Manager 会为每个区域创建一个默认资源组。此资源组通常采用“Default-ServiceBus-[region]”的格式。
 
 <!---HONumber=Mooncake_1226_2016-->

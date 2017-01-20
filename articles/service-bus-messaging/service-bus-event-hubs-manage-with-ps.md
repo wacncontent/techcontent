@@ -1,17 +1,16 @@
-<properties
-   pageTitle="使用 PowerShell 管理 Service Bus 和事件中心资源"
-   description="使用 PowerShell 创建和管理 Service Bus 和事件中心资源"
-   services="service-bus"
-   documentationCenter=".NET"
-   authors="sethmanheim"
-   manager="timlt"
-   editor=""/>  
+---
+title: 使用 PowerShell 管理 Service Bus 和事件中心资源
+description: 使用 PowerShell 创建和管理 Service Bus 和事件中心资源
+services: service-bus
+documentationCenter: .NET
+authors: sethmanheim
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="service-bus"
-   ms.date="10/04/2016"
-   wacn.date="12/26/2016"/>  
+ms.service: service-bus
+ms.date: 10/04/2016
+wacn.date: 12/26/2016
+---
 
 # 使用 PowerShell 管理 Service Bus 和事件中心资源
 
@@ -75,7 +74,6 @@ Azure PowerShell 是一个脚本编写环境，可用于控制和自动执行 Az
 2. 如果找到该命名空间，则报告它找到的内容。
 3. 如果找不到该命名空间，则会创建该命名空间，然后检索新创建的命名空间。
 
-		
 		$Namespace = "MyServiceBusNS"
 		$Location = "China East"
 		
@@ -115,8 +113,6 @@ Azure PowerShell 是一个脚本编写环境，可用于控制和自动执行 Az
 1. 使用 `NamespaceManager` 对象检查由 `$Path` 标识的事件中心是否存在。
 2. 如果不存在，将创建 `EventHubDescription` 并将其传递到 `NamespaceManager` 类的 `CreateEventHubIfNotExists` 方法。
 3. 确定事件中心可用后，请使用 `ConsumerGroupDescription` 和 `NamespaceManager` 创建使用者组。
-
-
 
     	$Path  = "MyEventHub"
     	$PartitionCount = 12
@@ -253,14 +249,13 @@ Azure PowerShell 是一个脚本编写环境，可用于控制和自动执行 Az
 
 <!--Anchors-->
 
-
-[购买选项]: /pricing/overview/
-[试用版]: /pricing/1rmb-trial/
+[购买选项]: https://www.azure.cn/pricing/overview/
+[试用版]: https://www.azure.cn/pricing/1rmb-trial/
 [Service Bus NuGet 包]: http://www.nuget.org/packages/WindowsAzure.ServiceBus/
 [Get-AzureSBNamespace]: https://msdn.microsoft.com/zh-cn/library/azure/dn495122.aspx
 [New-AzureSBNamespace]: https://msdn.microsoft.com/zh-cn/library/azure/dn495165.aspx
 [Get-AzureSBAuthorizationRule]: https://msdn.microsoft.com/zh-cn/library/azure/dn495113.aspx
 [.NET API for Service Bus]: https://msdn.microsoft.com/zh-cn/library/azure/mt419900.aspx
-[安装和配置 Azure PowerShell]: /documentation/articles/powershell-install-configure/
+[安装和配置 Azure PowerShell]: ../powershell-install-configure.md
 
 <!---HONumber=Mooncake_1219_2016-->

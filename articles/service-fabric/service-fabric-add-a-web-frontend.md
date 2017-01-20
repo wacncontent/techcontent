@@ -1,34 +1,31 @@
-<properties
-   pageTitle="使用 ASP.NET Core 创建应用程序的 Web 前端 | Azure"
-   description="使用 ASP.NET Core Web API 项目和通过服务代理进行的服务间通信向 Web 公开 Service Fabric 应用。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="seanmck"
-   manager="timlt"
-   editor=""/>  
+---
+title: 使用 ASP.NET Core 创建应用程序的 Web 前端 | Azure
+description: 使用 ASP.NET Core Web API 项目和通过服务代理进行的服务间通信向 Web 公开 Service Fabric 应用。
+services: service-fabric
+documentationCenter: .net
+authors: seanmck
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotNet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="10/29/2016"
-   wacn.date="01/03/2017"
-   ms.author="seanmck"/>  
-
-
+ms.service: service-fabric
+ms.devlang: dotNet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 10/29/2016
+wacn.date: 01/03/2017
+ms.author: seanmck
+---
 
 # 使用 ASP.NET Core 生成应用程序的 Web 服务前端
 默认情况下，Azure Service Fabric 服务不提供用于访问 Web 的公共接口。若要向 HTTP 客户端公开应用程序的功能，需要创建一个 Web 项目作为入口点，然后从该处与单个服务进行通信。
 
-在本教程中，我们将弥补[在 Visual Studio 中创建第一个应用程序](/documentation/articles/service-fabric-create-your-first-application-in-visual-studio/)教程中遗留的内容，在有状态计数器服务的前面添加一个 Web 服务。如果你尚未学习上述教程，应该返回并逐步完成该教程中的步骤。
+在本教程中，我们将弥补[在 Visual Studio 中创建第一个应用程序](./service-fabric-create-your-first-application-in-visual-studio.md)教程中遗留的内容，在有状态计数器服务的前面添加一个 Web 服务。如果你尚未学习上述教程，应该返回并逐步完成该教程中的步骤。
 
 ## 将 ASP.NET Core 服务添加到应用程序
 ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web UI 和 Web API。让我们将 ASP.NET Web API 项目添加到现有的应用程序。
 
->[AZURE.NOTE] 若要完成本教程，需要[安装 .NET Core 1.0][dotnetcore-install]。
+>[!NOTE] 若要完成本教程，需要[安装 .NET Core 1.0][dotnetcore-install]。
 
 1. 在解决方案资源管理器中，右键单击应用程序项目中的“服务”，然后选择“添加”>“新建 Service Fabric 服务”。
 
@@ -44,7 +41,7 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
     创建 Web API 项目后，应用程序中会有两个服务。随着你不断构建应用程序，将以完全相同的方式添加更多服务。每个服务都可以单独进行版本控制和升级。
 
->[AZURE.TIP] 若要了解有关构建 ASP.NET Core 服务的详细信息，请参阅 [ASP.NET Core 文档](https://docs.asp.net)。
+>[!TIP] 若要了解有关构建 ASP.NET Core 服务的详细信息，请参阅 [ASP.NET Core 文档](https://docs.asp.net)。
 
 ## 运行应用程序
 
@@ -60,13 +57,11 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
     在本教程结束后，我们将以有状态服务的最新计数器值替换这些默认值。
 
-
 ## 连接服务
 
-在如何与 Reliable Services 通信方面，Service Fabric 提供十足的弹性。在单个应用程序中，你可能拥有可通过 TCP 访问的服务、可通过 HTTP REST API 访问的其他服务，并且还有其他可通过 Web 套接字访问的服务。有关可用选项和相关权衡取舍的背景信息，请参阅[与服务通信](/documentation/articles/service-fabric-connect-and-communicate-with-services/)。在本教程中，我们将遵循下列其中一种更简单的方法并使用 SDK 中提供的 `ServiceProxy`/`ServiceRemotingListener` 类。
+在如何与 Reliable Services 通信方面，Service Fabric 提供十足的弹性。在单个应用程序中，你可能拥有可通过 TCP 访问的服务、可通过 HTTP REST API 访问的其他服务，并且还有其他可通过 Web 套接字访问的服务。有关可用选项和相关权衡取舍的背景信息，请参阅[与服务通信](./service-fabric-connect-and-communicate-with-services.md)。在本教程中，我们将遵循下列其中一种更简单的方法并使用 SDK 中提供的 `ServiceProxy`/`ServiceRemotingListener` 类。
 
 在 `ServiceProxy` 方法（模仿远程过程调用或 RPC）中，定义一个接口以用作服务的公共约定。然后使用该接口生成代理类，以便与服务交互。
-
 
 ### 创建接口
 
@@ -86,7 +81,6 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 5. 在类库中，使用单个方法 `GetCountAsync` 创建接口，并从 IService 扩展接口。
 
-
 	    namespace MyStatefulService.Interfaces
 	    {
 	        using Microsoft.ServiceFabric.Services.Remoting;
@@ -96,8 +90,6 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 	            Task<long> GetCountAsync();
 	        }
 	    }
-
-
 
 ### 在有状态服务中实现接口
 
@@ -109,7 +101,6 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 2. 找到继承自 `StatefulService` 的类（例如 `MyStatefulService`），然后扩展它以实现 `ICounter` 接口。
 
-
 	    using MyStatefulService.Interfaces;
 	
 	    ...
@@ -119,9 +110,7 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 	          // ...
 	    }
 
-
 3. 现在实现 `ICounter` 接口中定义的单个方法，即 `GetCountAsync`。
-
 
 	    public async Task<long> GetCountAsync()
 	    {
@@ -135,16 +124,13 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 	        }
 	    }
 
-
-
 ### 使用服务远程侦听器公开有状态服务
 
 实现 `ICounter` 接口后，使有状态服务可从其他服务调用的最后一个步骤是打开通信通道。对于有状态服务，Service Fabric 提供了名为 `CreateServiceReplicaListeners` 的可重写方法。通过此方法，你可以根据想要为服务启用的通信类型指定一个或多个通信侦听器。
 
->[AZURE.NOTE] 用于打开无状态服务的通信通道的等效方法名为 `CreateServiceInstanceListeners`。
+>[!NOTE] 用于打开无状态服务的通信通道的等效方法名为 `CreateServiceInstanceListeners`。
 
 在本例中，我们将替换现有的 `CreateServiceReplicaListeners` 方法，并提供 `ServiceRemotingListener` 的实例，该实例通过 `ServiceProxy` 来创建可从客户端调用的 RPC 终结点。
-
 
 	using Microsoft.ServiceFabric.Services.Remoting.Runtime;
 	
@@ -160,8 +146,6 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 	    };
 	}
 
-
-
 ### 使用 ServiceProxy 类来与服务交互
 
 现在，有状态服务已准备好接收来自其他服务的流量。因此，剩下的操作便是从 ASP.NET Web 服务添加代码来与其通信。
@@ -172,7 +156,6 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
     ![将类库显示为 AnyCPU 的 Configuration Manager][vs-configuration-manager]  
 
-
     请注意，该类库项目 **MyStatefulService.Interface** 应配置为针对任意 CPU 生成。为了能在 Service Fabric 中正常运行，它必须显式针对 x64。单击平台下拉列表，选择“新建”，然后创建 x64 平台配置。
 
     ![新建类库平台][vs-create-platform]
@@ -180,7 +163,6 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 3. 将 Microsoft.ServiceFabric.Services 包添加到 ASP.NET 项目，就如同前面对类库项目所做的一样。这将提供 `ServiceProxy` 类。
 
 4. 在 **Controllers** 文件夹中，打开 `ValuesController` 类。请注意，`Get` 方法目前只返回“value1”和“value2”的硬编码字符串数组，这符合前面在浏览器中看到的内容。使用以下代码替换此实现：
-
 
 	    using MyStatefulService.Interfaces;
 	    using Microsoft.ServiceFabric.Services.Remoting.Client;
@@ -197,10 +179,9 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 	        return new string[] { count.ToString() };
 	    }
 
-
     第一行代码是关键代码。若要创建有状态服务的 ICounter Proxy，必须提供两项信息：分区 ID 和服务名称。
 
-    可以使用分区根据定义的键（例如客户 ID 或邮政编码）将有状态服务的状态划分为不同的桶，以此调整有状态服务。在我们的简单应用程序中，有状态服务只有一个分区，所以键并不重要。提供的任何键将导致分区相同。若要深入了解分区服务，请参阅[如何为 Service Fabric Reliable Services 分区](/documentation/articles/service-fabric-concepts-partitioning/)。
+    可以使用分区根据定义的键（例如客户 ID 或邮政编码）将有状态服务的状态划分为不同的桶，以此调整有状态服务。在我们的简单应用程序中，有状态服务只有一个分区，所以键并不重要。提供的任何键将导致分区相同。若要深入了解分区服务，请参阅[如何为 Service Fabric Reliable Services 分区](./service-fabric-concepts-partitioning.md)。
 
     服务名称是 fabric:/&lt;应用程序名称&gt;/&lt;服务名称&gt; 格式的 URI。
 
@@ -212,12 +193,9 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
     ![浏览器中显示的有状态计数器值][browser-aspnet-counter-value]  
 
-
     定期刷新浏览器，以查看计数器更新值。
 
-
->[AZURE.WARNING] 模板中提供的 ASP.NET Core Web 服务器称为 Kestrel，[目前尚不支持处理直接 Internet 流量](https://docs.asp.net/en/latest/fundamentals/servers.html#kestrel)。请注意，IIS 中的部署不支持 Service Fabric。
-
+>[!WARNING] 模板中提供的 ASP.NET Core Web 服务器称为 Kestrel，[目前尚不支持处理直接 Internet 流量](https://docs.asp.net/en/latest/fundamentals/servers.html#kestrel)。请注意，IIS 中的部署不支持 Service Fabric。
 
 ## 执行组件的情况如何？
 
@@ -233,16 +211,15 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 相比之下，当你在本地运行 Web 服务时，必须确保服务只有一个实例正在运行。否则，正在同一路径和端口上侦听的多个进程将发生冲突。因此，本地部署的 Web 服务实例计数应设置为“1”。
 
-若要了解如何针对不同环境配置不同的值，请参阅[管理多个环境的应用程序参数](/documentation/articles/service-fabric-manage-multiple-environment-app-configuration/)。
+若要了解如何针对不同环境配置不同的值，请参阅[管理多个环境的应用程序参数](./service-fabric-manage-multiple-environment-app-configuration.md)。
 
 ## 后续步骤
 
-- [在 Azure 中创建群集以便将应用程序部署到云中](/documentation/articles/service-fabric-cluster-creation-via-portal/)
-- [详细了解如何与服务通信](/documentation/articles/service-fabric-connect-and-communicate-with-services/)
-- [详细了解如何为有状态服务分区](/documentation/articles/service-fabric-concepts-partitioning/)
+- [在 Azure 中创建群集以便将应用程序部署到云中](./service-fabric-cluster-creation-via-portal.md)
+- [详细了解如何与服务通信](./service-fabric-connect-and-communicate-with-services.md)
+- [详细了解如何为有状态服务分区](./service-fabric-concepts-partitioning.md)
 
 <!-- Image References -->
-
 
 [vs-add-new-service]: ./media/service-fabric-add-a-web-frontend/vs-add-new-service.png
 [vs-new-service-dialog]: ./media/service-fabric-add-a-web-frontend/vs-new-service-dialog.png
@@ -254,7 +231,6 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 [browser-aspnet-counter-value]: ./media/service-fabric-add-a-web-frontend/browser-aspnet-counter-value.png
 [vs-configuration-manager]: ./media/service-fabric-add-a-web-frontend/vs-configuration-manager.png
 [vs-create-platform]: ./media/service-fabric-add-a-web-frontend/vs-create-platform.png
-
 
 <!-- external links -->
 [dotnetcore-install]: https://www.microsoft.com/net/core#windows

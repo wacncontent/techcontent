@@ -1,17 +1,17 @@
-<properties
-	pageTitle="使用应用代理启用混合访问 | Azure"
-	description="通过 Azure Active Directory 从网络外部实现对专用网络内部运行的应用的访问。"
-	services="active-directory"
-	documentationCenter=""
-	keywords="应用程序访问,应用代理,混合访问"
-	authors="femila"
-	manager="stevenpo"
-	editor=""/>
+---
+title: 使用应用代理启用混合访问 | Azure
+description: 通过 Azure Active Directory 从网络外部实现对专用网络内部运行的应用的访问。
+services: active-directory
+documentationCenter: 
+keywords: 应用程序访问,应用代理,混合访问
+authors: femila
+manager: stevenpo
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.date="02/10/2016"
-	wacn.date="06/24/2016"/>
+ms.service: active-directory
+ms.date: 02/10/2016
+wacn.date: 06/24/2016
+---
 
 # 使用应用代理启用混合访问
 使用 Microsoft Azure Active Directory (AD) 应用程序代理，可以从任何位置和任何设备安全访问专用网络中的应用程序。在环境中安装应用程序代理连接器后，可以使用 Azure AD 轻松配置该连接器。
@@ -36,7 +36,6 @@
 7. 响应通过应用程序代理发送到用户。
 
 ## 相关文章
-- [有关 Azure Active Directory 中应用程序管理的文章索引](/documentation/articles/active-directory-apps-index/)
-
+- [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
 
 <!---HONumber=Mooncake_0411_2016-->

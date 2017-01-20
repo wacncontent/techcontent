@@ -1,27 +1,27 @@
-<properties 
-	pageTitle="在 Azure 中还原应用" 
-	description="了解如何从备份还原应用。" 
-	services="app-service" 
-	documentationCenter="" 
-	authors="cephalin" 
-	manager="wpickett" 
-	editor="jimbe"/>
+---
+title: 在 Azure 中还原应用
+description: 了解如何从备份还原应用。
+services: app-service
+documentationCenter: 
+authors: cephalin
+manager: wpickett
+editor: jimbe
 
-<tags 
-	ms.service="app-service" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="07/06/2016" 
-	wacn.date="12/16/2016" 
-	ms.author="cephalin"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/06/2016
+wacn.date: 12/16/2016
+ms.author: cephalin
+---
 
 # 在 Azure 中还原应用
 
-本文将演示如何在 [Azure App Service](/documentation/articles/app-service-value-prop-what-is/) 中还原已事先备份的应用（请参阅[在 Azure 中备份应用](/documentation/articles/web-sites-backup/)）。你可以根据需要将应用及其链接的数据库（SQL 数据库或 MySQL）还原到以前的状态，或者基于原始应用的备份之一创建新的应用。创建与最新版本并行运行的新应用对于 A/B 测试会很有用。
+本文将演示如何在 [Azure App Service](../app-service/app-service-value-prop-what-is.md) 中还原已事先备份的应用（请参阅[在 Azure 中备份应用](./web-sites-backup.md)）。你可以根据需要将应用及其链接的数据库（SQL 数据库或 MySQL）还原到以前的状态，或者基于原始应用的备份之一创建新的应用。创建与最新版本并行运行的新应用对于 A/B 测试会很有用。
 
-从备份还原适用于在**标准**和**高级**层中运行的应用。有关向上缩放应用的信息，请参阅 [Scale up an app in Azure](/documentation/articles/web-sites-scale/)（向上缩放 Azure 中的应用）。相比于**标准**层，**高级**层允许执行更多的每日备份量。
+从备份还原适用于在**标准**和**高级**层中运行的应用。有关向上缩放应用的信息，请参阅 [Scale up an app in Azure](./web-sites-scale.md)（向上缩放 Azure 中的应用）。相比于**标准**层，**高级**层允许执行更多的每日备份量。
 
 ## <a name="PreviousBackup"></a>从现有备份还原应用
 
@@ -39,7 +39,7 @@
 
 	![](./media/web-sites-restore/022ChooseDestination.png)
 	
-	>[AZURE.WARNING] 如果选择“覆盖”，将清除当前应用中所有的现有数据。在单击“确定”之前，请确保该操作正是想要执行的操作。
+	>[!WARNING] 如果选择“覆盖”，将清除当前应用中所有的现有数据。在单击“确定”之前，请确保该操作正是想要执行的操作。
 	
 	可选择“现有应用”将应用备份还原到同一资源组中的其他应用。使用此选项之前，应已使用应用备份中定义的镜像数据库配置在资源组中创建了其他应用。
 	
@@ -77,8 +77,7 @@
 	
 ## 后续步骤
 
-还可以使用 REST API 备份和还原应用服务应用（请参阅[使用 REST 备份和还原应用服务应用](/documentation/articles/websites-csm-backup/)）。
-
+还可以使用 REST API 备份和还原应用服务应用（请参阅[使用 REST 备份和还原应用服务应用](./websites-csm-backup.md)）。
 
 <!-- IMAGES -->
 [ChooseRestoreNow]: ./media/web-sites-restore/02ChooseRestoreNow.png
@@ -96,5 +95,4 @@
 [DetailsButton]: ./media/web-sites-restore/12DetailsButton.png
 [OperationDetails]: ./media/web-sites-restore/13OperationDetails.png
  
-
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

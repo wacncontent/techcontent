@@ -1,25 +1,25 @@
-<properties
-   pageTitle="如何在 Service Fabric 服务中调用数据丢失 | Azure"
-   description="介绍如何使用数据丢失 API"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="LMWF"
-   manager="rsinha"
-   editor=""/>
+---
+title: 如何在 Service Fabric 服务中调用数据丢失 | Azure
+description: 介绍如何使用数据丢失 API
+services: service-fabric
+documentationCenter: .net
+authors: LMWF
+manager: rsinha
+editor: 
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/19/2016"
-   wacn.date="11/28/2016"
-   ms.author="lemai"/>
-   
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/19/2016
+wacn.date: 11/28/2016
+ms.author: lemai
+---
+
 # 如何在服务中调用数据丢失
 
->[AZURE.WARNING] 本文档介绍如何导致服务数据丢失，应谨慎使用。
+>[!WARNING] 本文档介绍如何导致服务数据丢失，应谨慎使用。
 
 ## 介绍
 你可以通过调用 StartPartitionDataLossAsync() 在 Service Fabric 服务的分区调用数据丢失。此 API 使用错误注入和分析服务来执行导致数据丢失条件的工作。
@@ -42,7 +42,6 @@
 2.	命令遇到致命错误。如果你在这种情况下对其调用“GetProgress”，则进度对象的“状态”将为“出错”
 3.	可通过 [CancelTestCommandAsync][cancel] API 或 [Stop-ServiceFabricTestCommand][cancelps] PowerShell cmdlet 取消该命令。如果你在这种情况下对其调用“GetProgress”，则进度对象的“状态”将为“已取消”或“已强制取消”，具体取决于该 API 的参数。如需更多详细信息，请参阅 [CancelTestCommandAsync][cancel] 的文档。
 
-
 ## 运行命令的详细信息
 
 若要启动命令，请使用预期的参数来调用启动 API。所有启动 API 都有名为 operationId 的 GUID 参数。应跟踪 operationId 参数，因为该参数用于跟踪此命令的进度。必须将该参数传入“GetProgress”API 中，然后才能跟踪命令的进度。OperationId 必须是唯一的。
@@ -50,7 +49,6 @@
 在成功调用启动 API 以后，应采用循环方式调用 GetProgress API，直到返回的进度对象的“状态”属性为“已完成”。应重试所有 [FabricTransientException 类][fte]和 OperationCanceledException 类。当命令进入终止状态（“已完成”、“出错”或“已取消”）后，返回的进度对象的“结果”属性将包含其他信息。如果状态为“已完成”，Result.SelectedPartition.PartitionId 将包含所选分区 ID。Result.Exception 将为 Null。如果状态为“出错”，则 Result.Exception 会提供错误注入和分析服务无法执行命令的原因。Result.SelectedPartition.PartitionId 将提供所选分区 ID。某些情况下，该命令可能尚未执行到选择分区的进度。这种情况下，PartitionId 将为 0。如果状态为“已取消”，则 Result.Exception 将为 Null。与“出错”情况类型，Result.SelectedPartition.PartitionId 将会提供所选分区 ID，但如果命令尚未执行到相应进度，则 PartitionId 将为 0。另请参阅下面的示例。
 
 以下示例代码演示如何启动一个命令在特定的分区上导致数据丢失，然后检查该命令的进度。
-
 
 	    static async Task PerformDataLossSample()
 	    {
@@ -131,9 +129,7 @@
 	        }
 	    }
 
-
 下面的示例演示了如何使用 PartitionSelector 来选择指定服务的随机分区：
-
 
 	    static async Task PerformDataLossUseSelectorSample()
 	    {
@@ -217,7 +213,6 @@
 	            await Task.Delay(TimeSpan.FromSeconds(1.0d)).ConfigureAwait(false);
 	        }
 	    }
-
 
 ## 历史记录和截断
 

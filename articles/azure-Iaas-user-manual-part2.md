@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure IaaS 用户手册 - 第二部分 | Azure"
-	description="详细介绍如何创建和管理 Azure 虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure IaaS 用户手册 - 第二部分 | Azure
+description: 详细介绍如何创建和管理 Azure 虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.date=""
-	wacn.date="09/27/2016"/>
+ms.service: virtual-machines-windows
+ms.date: 
+wacn.date: 09/27/2016
+---
 
 # Azure IaaS 用户手册 - 第二部分
 
-- [Azure IaaS 用户手册 - 第一部分](/documentation/articles/azure-Iaas-user-manual-part1/)
-- [Azure IaaS 用户手册 - 第三部分](/documentation/articles/azure-Iaas-user-manual-part3/)
+- [Azure IaaS 用户手册 - 第一部分](./azure-Iaas-user-manual-part1.md)
+- [Azure IaaS 用户手册 - 第三部分](./azure-Iaas-user-manual-part3.md)
 
 ##<a name="section_5"></a> 3.	开始创建 Azure 虚拟机
 ###<a name="section_5_1"></a> 3.1 模拟场景
@@ -62,7 +62,7 @@ Contoso 公司已经采购了 Azure 服务，计划把现有托管在 IDC 的企
 ####<a name="section_5_2_3"></a> 3.2.3 选择最合适的虚拟机配置
 传统的虚拟机化技术，CPU 是共享的。Azure 虚拟机，除了 A0 的虚拟机类型，它的 CPU 是和别的用户共享的。其他类型的虚拟机，比如 A1-A7，它的 CPU 是独占的，不是和别的用户共享的。
 
-如[第 2.4.2 章](/documentation/articles/azure-Iaas-user-manual-part1/#section_4_4_2)，Azure 虚拟机分为 A 系列、 D 系列和 Dv2 系列，并且拥有不同的 CPU 和内存配置。
+如[第 2.4.2 章](./azure-Iaas-user-manual-part1.md#section_4_4_2)，Azure 虚拟机分为 A 系列、 D 系列和 Dv2 系列，并且拥有不同的 CPU 和内存配置。
 
 如果您在传统 IDC 托管中已经部署了硬件服务器。则在 Azure 平台选择最接近的 Azure 虚拟机配置即可。
 
@@ -73,7 +73,7 @@ Contoso 公司已经采购了 Azure 服务，计划把现有托管在 IDC 的企
 1.	相比 A 系列单台 VM 最大 8Core/56GB RAM 的配置，D 系列虚拟机单台最大的配置为 16Core/112GB RAM
 2.	D 系列的 CPU 性能比 A 系列提升约 60%
 
-其他内容，请参考[第 2.4.2 章](/documentation/articles/azure-Iaas-user-manual-part1/#section_4_4_2)。
+其他内容，请参考[第 2.4.2 章](./azure-Iaas-user-manual-part1.md#section_4_4_2)。
 
 ####<a name="section_5_2_4"></a> 3.2.4 规划好高可用
 在 Azure 虚拟机中，您也可以选择使用一台 Azure 虚拟机部署 AD Server，一台 Azure 虚拟机部署 Web 应用程序，使用另一台虚拟机部署 SQL Server。但是这样的场景是没有服务级别协议保障的。
@@ -127,7 +127,7 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 比如 Contoso 公司需要在月底进行一次大型的数字营销活动，需要使用 300 个 CPU Core，则可以提前联系世纪互联支持团队，让世纪互联运维团队将默认的 100 CPU Core 提升到 300个。
 
-[世纪互联支持团队](/support/contact)
+[世纪互联支持团队](https://www.azure.cn/support/contact)
 
 ![scenario2](./media/azure-Iaas-user-manual-part2/scenario2.png)
 
@@ -339,7 +339,7 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 4.	子网 DB-Subnet 的 IP Range 为 10.0.2.0 – 10.0.3.255。同上，该子网的实际可用 IP Range 为 10.0.2.0 – 10.0.3.255。
 5.	定义了虚拟网络以后，创建的 Azure 虚拟机的内网 IP 地址，就是在虚拟网络中定义的可用地址范围和子网来定义的。
 
->[AZURE.NOTE]
+>[!NOTE]
 >使用 Azure 管理界面创建的虚拟机，是无法固定内网 IP 地址的。必须通过 Azure PowerShell，才能固定虚拟机的内网 IP 地址。
 
 在 Azure 云平台是没有 DHCP 这个概念的。如果将第一台虚拟机 VM01，通过管理界面进行创建，加入到 AD-Subnet 的话，这台虚拟机 VM01 会自动获得第一个可用的内网 IP (Private IP)，为 10.0.0.4。
@@ -352,12 +352,12 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 假设将虚拟机通过管理界面关机。经过一段时间后，将 VM03 首先通过管理界面开机，则 VM03 会自动获得第一个可用的内网 IP 地址，为 10.0.0.4。
 
->[AZURE.IMPORTANT]
+>[!IMPORTANT]
 >如果通过管理界面创建 Azure 虚拟机，通过管理界面开关虚拟机，内网 IP 地址会变化。
 
 如果需要固定内网 IP 地址，请直接阅读[第 3.5 章](#section_5_5)，只有通过 PowerShell 创建的虚拟机，内网 IP 地址才是固定的。
 
->[AZURE.IMPORTANT]
+>[!IMPORTANT]
 >使用管理界面创建的 Azure 虚拟机，默认时区是 UTC 时区。而平时使用的时区是 UTC+8 (北京时区)。
 
 #####<a name="section_5_4_4_2"></a> 3.4.4.2 创建第一台 AD Server
@@ -434,13 +434,13 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 	![vm_create16](./media/azure-Iaas-user-manual-part2/vm_create16.png)
 
-	关于终结点的内容，将在[第 4 章](/documentation/articles/azure-Iaas-user-manual-part3/#section_6)做详细的介绍。
+	关于终结点的内容，将在[第 4 章](./azure-Iaas-user-manual-part3.md#section_6)做详细的介绍。
 
 5.	最后点击确认，这样就完成创建第一个 AD Server。在虚拟机创建列表中就会显示 ”正在启动 (正在配置)”
 
 	![vm_create17](./media/azure-Iaas-user-manual-part2/vm_create17.png)
 
-	>[AZURE.NOTE]
+	>[!NOTE]
 	>注意：在客户点击创建的时间点，Azure 就开始计费。而不是等到虚拟机创建完毕才开始计费。
 
 <br/>
@@ -630,7 +630,7 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 ![vm_create28](./media/azure-Iaas-user-manual-part2/vm_create28.png)
 
-有关 SQL Server 虚拟机配置 Always-On 的文档，请参考 [文档](/documentation/articles/virtual-machines-windows-classic-ps-sql-alwayson-availability-groups/)
+有关 SQL Server 虚拟机配置 Always-On 的文档，请参考 [文档](./virtual-machines/virtual-machines-windows-classic-ps-sql-alwayson-availability-groups.md)
 
 #####<a name="section_5_4_4_7"></a> 3.4.4.7 总结
 一般情况下，创建 Azure 虚拟机之前需要做如下准备:
@@ -696,7 +696,7 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 	![vm_powershell5](./media/azure-Iaas-user-manual-part2/vm_powershell5.png)
 
 ####<a name="section_5_5_3"></a> 3.5.3 使用 PowerShell 创建 Windows VM
->[AZURE.NOTE]
+>[!NOTE]
 >本节所有的 Azure PowerShell，在执行的时候请不要用换行符。请复制到记事本后，根据自己的情况，修改相应的参数。
 
 首先，请预先准备以下内容：
@@ -739,7 +739,6 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 		Select-AzureSubscription "<SubscriptionName>" –Current
 
 	这样，可以把某个订阅设置为当前的订阅。
-
 
 以 AD Server 为例，使用 Azure PowerShell 创建 AD01 和 AD02
 
@@ -825,7 +824,6 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 		New-AzureVMConfig -Name $ServiceName -InstanceSize $VMSize -ImageName $image.ImageName -AvailabilitySetName $AvbSetName ` | Add-AzureProvisioningConfig -Windows -AdminUsername $adminusername -Password $adminpassword -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames $SubnetName | Set-AzureStaticVNetIP -IPAddress $PrivateIP | New-AzureVM -ServiceName $CloudServiceName -VNetName $VNetName -Location $Location
 
-
 	以创建第一台 ContosoAD01 为例，实际的 PowerShell 如下：
 
 		$ServiceName= "ContosoAD01"
@@ -851,7 +849,7 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 这样第一台 ContosoAD01 就算创建完毕了。
 
->[AZURE.IMPORTANT]
+>[!IMPORTANT]
 >不同于使用 Azure 管理界面创建，使用 PowerShell 创建 Azure 虚拟机，内网 IP 是固定的，而且创建的时候指定了时区为 UTC+8 北京时间。
 
 接下去可以创建第 2 台 ContosoAD02，使用相同的云服务，命令如下：
@@ -871,30 +869,24 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 	Get-AzurePublishSettingsFile -Environment AzureChinaCloud
 	
-
 2. 将 publishsettings 下载到本地磁盘，然后执行上传 publishsettings 命令  
 
 	Import-AzurePublishSettingsFile <PathToFile>
 	
-
 上面步骤 1、2 执行成功后，下次运行 Azure PowerShell 将不必再次运行上面的命令。
-
 
 3. 创建新的存储账号，选择当前的订阅，并设置存储账号  
 
 	Set-AzureSubscription -SubscriptionName '[SubscriptionName]' -CurrentStorageAccount '[StorageName]'
 	
-
 4. 在上海数据中心，获得固定的 Public IPV4 地址  
 
 	$NginxReservedIP = New-AzureReservedIP -ReservedIPName 'NginxPublicIP' -Label 'NginxPublicIP' -Location 'China East'
 	
-
 查看这个 IP 地址  
 
 	Get-AzureReservedIP -ReservedIPName 'NginxPublicIP'
 	
-
 5. 创建虚拟网络 Virtual Network，命名为 MyVNet (位置选择 China East)。注意 Virtual Network 不能属于地缘组里。
 
 -　　MyVNet IP Rang为10.0.0.0-10.0.0.255，
@@ -910,7 +902,6 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 	$image=$imageList[0]
 	
 7. 创建 3 台虚拟机：
-
 
 -　　DNS为MyNginx，并且绑定 Public IP (NginxPublicIP)
 
@@ -928,22 +919,18 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 -　　并设置该虚拟机的时区为 UTC+8 时区 (北京时间)
 
-
 创建第 1 台虚拟机 (Nginx01，内网 IP 是 10.0.0.4) 的命令如下：  
 
 	New-AzureVMConfig -Name 'Nginx01' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.4' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' –ReservedIPName 'NginxPublicIP' -Location 'China East'
 	
-
 创建第 2 台虚拟机 (Nginx02，内网 IP 是 10.0.0.5) 的命令如下：
 
 	New-AzureVMConfig -Name 'Nginx02' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.5' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
 	
-
 创建第 3 台 虚拟机 (Nginx03，内网 IP 是10.0.0.6) 的命令如下：  
 
 	New-AzureVMConfig -Name 'Nginx03' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.6' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
 	
-
 ###<a name="section_5_6"></a> 3.6 管理 Azure 虚拟机
 ####<a name="section_5_6_1"></a> 3.6.1 远程桌面连接 Windows 虚拟机
 选中在之前创建成功的 ContosoAD01 这台虚拟机，如下图：

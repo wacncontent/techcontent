@@ -2,7 +2,6 @@
 
 若要通过 Apple Push Notification 服务 (APNS) 为应用注册推送通知，必须在 Apple 开发人员门户上为项目创建新的推送证书、应用 ID 和预配配置文件。你的应用可以使用应用 ID 中包含的配置设置来发送和接收推送通知。这些设置包括发送和接收推送通知时，在 Apple Push Notification 服务 (APNS) 上进行身份验证所需的推送通知证书。有关这些概念的详细信息，请参阅 [Apple Push Notification 服务](http://go.microsoft.com/fwlink/p/?LinkId=272584)文档。
 
-
 #### 为推送证书生成证书签名请求文件
 
 这些步骤将引导你创建证书签名请求。此请求可让你生成用于 APNS 的推送证书。
@@ -22,7 +21,6 @@
   	![](./media/notification-hubs-xamarin-enable-apple-push-notifications/notification-hubs-save-csr.png)
 
   	此操作会将 CSR 文件保存到选定位置；默认位置是桌面。请记住为此文件选择的位置。
-
 
 #### 为推送通知注册应用程序
 
@@ -54,7 +52,7 @@
 
    	此时将显示“Add iOS Certificate”（添加 iOS 证书）助手。
 
-    > [AZURE.NOTE]本教程使用开发证书。注册生产证书时使用相同的过程。你只需确保在发送通知时使用相同的证书类型。
+    > [!NOTE]本教程使用开发证书。注册生产证书时使用相同的过程。你只需确保在发送通知时使用相同的证书类型。
 
 7. 单击“Choose File”（选择文件），浏览到推送证书 CSR 保存到的位置。然后单击“Generate”（生成）。
 
@@ -68,19 +66,17 @@
 
   	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-cert-downloaded.png)
 
-    > [AZURE.NOTE]默认情况下，下载的文件（开发证书）名为 **aps\_development.cer**。
+    > [!NOTE]默认情况下，下载的文件（开发证书）名为 **aps\_development.cer**。
 
 9. 双击下载的推送证书 **aps\_development.cer**。将在 Keychain 中安装新证书，如下所示：
 
    	![](./media/notification-hubs-xamarin-enable-apple-push-notifications/notification-hubs-cert-in-keychain.png)
 
-    > [AZURE.NOTE]证书中的名称可能不同，但将以 **Apple Development iOS Push Services:** 作为前缀。
+    > [!NOTE]证书中的名称可能不同，但将以 **Apple Development iOS Push Services:** 作为前缀。
 
 10. 在 Keychain Access 中，右键单击你在“Certificates”（证书）类别中创建的新推送证书。单击“Export”（导出），为文件命名，选择“.p12”格式，然后单击“Save”（保存）。
 
 	记住导出的 .p12 推送证书的文件名和位置。稍后你要在 Azure 经典管理门户中将它上载，以使用它来启用 APNS 身份验证。
-
-
 
 #### 为应用程序创建配置文件
 
@@ -90,21 +86,17 @@
 
 2. 选择“Development”（开发）下的“iOS App Development”（iOS 应用程序开发）作为设置配置文件类型，然后单击“Continue”（继续）。
 
-
 3. 接下来，从“App ID”（应用程序 ID）下拉列表中选择你刚刚创建的应用程序 ID，然后单击“Continue”（继续）。
 
    	![](./media/notification-hubs-xamarin-enable-apple-push-notifications/notification-hubs-select-appid-for-provisioning.png)
-
 
 4. 在“Select certificates”（选择证书）屏幕中，选择用于代码签名的开发证书，然后单击“Continue”（继续）。这是一个签名证书，而不是你刚刚创建的推送证书。
 
    	![](./media/notification-hubs-xamarin-enable-apple-push-notifications/notification-hubs-provisioning-select-cert.png)
 
-
 5. 接下来，选择要用于测试的“Devices”（设备），然后单击“Continue”（继续）。
 
    	![](./media/notification-hubs-xamarin-enable-apple-push-notifications/notification-hubs-provisioning-select-devices.png)
-
 
 6. 最后，在“Profile Name”（配置文件名称）中为配置文件选取一个名称，并单击“Generate”（生成）。
 

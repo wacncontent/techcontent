@@ -1,26 +1,26 @@
 
-<properties 
-	pageTitle="自定义 Swashbuckle 生成的 API 定义" 
-	description="了解如何自定义 Swashbuckle 针对 Azure 应用服务中的 API 应用生成的 Swagger API 定义。" 
-	services="app-service\api" 
-	documentationCenter=".net" 
-	authors="bradygaster" 
-	manager="wpickett" 
-	editor="jimbe"/>
+---
+title: 自定义 Swashbuckle 生成的 API 定义
+description: 了解如何自定义 Swashbuckle 针对 Azure 应用服务中的 API 应用生成的 Swagger API 定义。
+services: app-service\api
+documentationCenter: .net
+authors: bradygaster
+manager: wpickett
+editor: jimbe
 
-<tags 
-	ms.service="app-service-api" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="dotnet" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="08/29/2016" 
-	wacn.date="11/25/2016" 
-	ms.author="rachelap"/>
+ms.service: app-service-api
+ms.workload: web
+ms.tgt_pltfrm: dotnet
+ms.devlang: na
+ms.topic: article
+ms.date: 08/29/2016
+wacn.date: 11/25/2016
+ms.author: rachelap
+---
 
 # 自定义 Swashbuckle 生成的 API 定义 
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 ## 概述
 
@@ -252,5 +252,4 @@ Swashbuckle 提供两种方法自定义它生成的预期 HTTP 响应代码列�
 
 本文说明了如何自定义 Swashbuckle 生成操作 ID 和有效响应代码。有关详细信息，请参阅 [GitHub 上的 Swashbuckle](https://github.com/domaindrivendev/Swashbuckle)。
  
-
 <!---HONumber=Mooncake_0919_2016-->

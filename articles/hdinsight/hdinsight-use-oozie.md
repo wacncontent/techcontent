@@ -1,29 +1,28 @@
-<properties
-	pageTitle="在 HDInsight 中使用 Hadoop Oozie | Azure"
-	description="在 HDInsight 中使用大数据服务 Hadoop Oozie。了解如何定义 Oozie 工作流，并提交 Oozie 作业。"
-	services="hdinsight"
-	documentationCenter=""
-	tags="azure-portal"
-	authors="mumian"
-	manager="paulettm"
-	editor="cgronlun"/>
+---
+title: 在 HDInsight 中使用 Hadoop Oozie | Azure
+description: 在 HDInsight 中使用大数据服务 Hadoop Oozie。了解如何定义 Oozie 工作流，并提交 Oozie 作业。
+services: hdinsight
+documentationCenter: 
+tags: azure-portal
+authors: mumian
+manager: paulettm
+editor: cgronlun
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="11/15/2016"
-	wacn.date="01/05/2017"
-	ms.author="jgao"/>
-
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/15/2016
+wacn.date: 01/05/2017
+ms.author: jgao
+---
 
 # 在 HDInsight 中将 Oozie 与 Hadoop 配合使用以定义和运行工作流
 
-[AZURE.INCLUDE [oozie-selector](../../includes/hdinsight-oozie-selector.md)]
+[!INCLUDE [oozie-selector](../../includes/hdinsight-oozie-selector.md)]
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 了解如何定义工作流，以及如何在 HDInsight 上运行工作流。若要了解 Oozie 协调器，请参阅[将基于时间的 Hadoop Oozie 协调器与 HDInsight 配合使用][hdinsight-oozie-coordinator-time]。
 
@@ -53,7 +52,7 @@ Apache Oozie 是一个管理 Hadoop 作业的工作流/协调系统。它与 Had
 
 2.  Sqoop 操作将 HiveQL 输出结果导出到 Azure SQL 数据库中的表。有关 Sqoop 的详细信息，请参阅[将 Hadoop Sqoop 与 HDInsight 配合使用][hdinsight-use-sqoop]。
 
-> [AZURE.NOTE]有关在 HDInsight 群集上支持的 Oozie 版本，请参阅 [HDInsight 提供的 Hadoop 群集版本有哪些新增功能？][hdinsight-versions]。
+> [!NOTE]有关在 HDInsight 群集上支持的 Oozie 版本，请参阅 [HDInsight 提供的 Hadoop 群集版本有哪些新增功能？][hdinsight-versions]。
 
 ### <a name="prerequisites"></a>先决条件
 
@@ -61,7 +60,7 @@ Apache Oozie 是一个管理 Hadoop 作业的工作流/协调系统。它与 Had
 
 - **配备 Azure PowerShell 的工作站**。
 
-	[AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+	[!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 	若要执行 Windows PowerShell 脚本，必须以管理员身份运行并将执行策略设为 *RemoteSigned*。有关详细信息，请参阅[运行 Windows PowerShell 脚本][powershell-script]。
 
@@ -170,9 +169,9 @@ HDInsight 使用 Azure 存储空间中的 Blob 来存储数据。有关详细信
 
 	wasb[s]://<ContainerName>@<StorageAccountName>.blob.core.chinacloudapi.cn/<path>/<filename>
 
-> [AZURE.NOTE]HDInsight 版本 3.0 群集仅支持 **wasbs://* 语法。较早的 **asv://* 语法在 HDInsight 2.1 和 1.6 群集中受支持，但在 HDInsight 3.0 群集中不受支持。
+> [!NOTE]HDInsight 版本 3.0 群集仅支持 **wasbs://* 语法。较早的 **asv://* 语法在 HDInsight 2.1 和 1.6 群集中受支持，但在 HDInsight 3.0 群集中不受支持。
 
-> [AZURE.NOTE]wasbs:// 路径是虚拟路径。有关详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用][hdinsight-storage]。
+> [!NOTE]wasbs:// 路径是虚拟路径。有关详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用][hdinsight-storage]。
 
 存储在默认文件系统容器中的文件可以使用以下任一 URI 从 HDInsight 进行访问（以下代码使用 workflow.xml 为例）：
 
@@ -205,7 +204,7 @@ HDInsight 使用 Azure 存储空间中的 Blob 来存储数据。有关详细信
 
 	系统将提示你输入 Azure 帐户凭据。这种添加订阅连接的方法会超时，12 个小时之后，你将需要再次运行该 cmdlet。
 
-	> [AZURE.NOTE]如果你有多个 Azure 订阅，而默认订阅不是你想使用的，则请使用 <strong>Select-AzureSubscription</strong> cmdlet 来选择正确的订阅。
+	> [!NOTE]如果你有多个 Azure 订阅，而默认订阅不是你想使用的，则请使用 <strong>Select-AzureSubscription</strong> cmdlet 来选择正确的订阅。
 
 3. 将以下脚本复制到脚本窗格，然后设置前六个变量：
 			
@@ -226,7 +225,6 @@ HDInsight 使用 Azure 存储空间中的 Blob 来存储数据。有关详细信
 		
 		# WASB folder for storing the Oozie tutorial files.
 		$destFolder = "tutorials/useoozie"  # Do NOT use the long path here
-
 
 	有关这些变量的详细说明，请参阅本教程中的[先决条件](#prerequisites)部分。
 
@@ -329,7 +327,6 @@ Azure PowerShell 目前不提供任何用于定义 Oozie 作业的 cmdlet。你�
 
 		$passwd = ConvertTo-SecureString $clusterPassword -AsPlainText -Force
 		$creds = New-Object System.Management.Automation.PSCredential ($clusterUsername, $passwd)
-
 
 	有关这些变量的详细说明，请参阅本教程中的[先决条件](#prerequisites)部分。
 
@@ -500,7 +497,6 @@ Azure PowerShell 目前不提供任何用于定义 Oozie 作业的 cmdlet。你�
 	
 	$conn.close()
 
-
 ##后续步骤
 在本教程中，你已经学习了如何定义 Oozie 工作流，以及如何使用 Windows PowerShell 运行 Oozie 作业。若要了解更多信息，请参阅下列文章：
 
@@ -514,36 +510,31 @@ Azure PowerShell 目前不提供任何用于定义 Oozie 作业的 cmdlet。你�
 - [将 Pig 与 HDInsight 上的 Hadoop 配合使用][hdinsight-use-pig]
 - [为 HDInsight 开发 Java MapReduce 程序][hdinsight-develop-mapreduce]
 
-
 [hdinsight-cmdlets-download]: http://go.microsoft.com/fwlink/?LinkID=325563
 
+[hdinsight-oozie-coordinator-time]: ./hdinsight-use-oozie-coordinator-time.md
+[hdinsight-versions]: ./hdinsight-component-versioning-v1.md
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-admin-portal]: ./hdinsight-administer-use-management-portal-v1.md
 
+[hdinsight-use-sqoop]: ./hdinsight-use-sqoop.md
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-admin-powershell]: ./hdinsight-administer-use-powershell.md
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
+[hdinsight-use-mapreduce]: ./hdinsight-use-mapreduce.md
+[hdinsight-use-hive]: ./hdinsight-use-hive.md
+[hdinsight-use-pig]: ./hdinsight-use-pig.md
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
+[hdinsight-get-started-emulator]: ./hdinsight-hadoop-emulator-get-started.md
 
+[hdinsight-develop-mapreduce]: ./hdinsight-develop-deploy-java-mapreduce.md
 
-[hdinsight-oozie-coordinator-time]: /documentation/articles/hdinsight-use-oozie-coordinator-time/
-[hdinsight-versions]: /documentation/articles/hdinsight-component-versioning-v1/
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
-[hdinsight-admin-portal]: /documentation/articles/hdinsight-administer-use-management-portal-v1/
-
-
-[hdinsight-use-sqoop]: /documentation/articles/hdinsight-use-sqoop/
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
-[hdinsight-admin-powershell]: /documentation/articles/hdinsight-administer-use-powershell/
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
-[hdinsight-use-mapreduce]: /documentation/articles/hdinsight-use-mapreduce/
-[hdinsight-use-hive]: /documentation/articles/hdinsight-use-hive/
-[hdinsight-use-pig]: /documentation/articles/hdinsight-use-pig/
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-[hdinsight-get-started-emulator]: /documentation/articles/hdinsight-hadoop-emulator-get-started/
-
-[hdinsight-develop-mapreduce]: /documentation/articles/hdinsight-develop-deploy-java-mapreduce/
-
-[sqldatabase-create-configue]: /documentation/articles/sql-database-get-started/
-[sqldatabase-get-started]: /documentation/articles/sql-database-get-started/
+[sqldatabase-create-configue]: ../sql-database/sql-database-get-started.md
+[sqldatabase-get-started]: ../sql-database/sql-database-get-started.md
 
 [azure-management-portal]: https://manage.windowsazure.cn/
-[azure-create-storageaccount]: /documentation/articles/storage-create-storage-account/
+[azure-create-storageaccount]: ../storage/storage-create-storage-account.md
 
 [apache-hadoop]: http://hadoop.apache.org/
 [apache-oozie-400]: http://oozie.apache.org/docs/4.0.0/

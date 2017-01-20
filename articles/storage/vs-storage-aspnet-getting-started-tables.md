@@ -1,22 +1,22 @@
-<properties
-    pageTitle="开始使用 Azure 表存储和 Visual Studio 连接服务 (ASP.NET) | Azure"
-    description="在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的 ASP.NET 项目中使用 Azure 表存储"
-    services="storage"
-    documentationcenter=""
-    author="TomArcher"
-    manager="douge"
-    editor="" />
-<tags
-    ms.assetid="af81a326-18f4-4449-bc0d-e96fba27c1f8"
-    ms.service="storage"
-    ms.workload="web"
-    ms.tgt_pltfrm="vs-getting-started"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/02/2016"
-    wacn.date="01/06/2017"
-    ms.author="tarcher" />  
+---
+title: 开始使用 Azure 表存储和 Visual Studio 连接服务 (ASP.NET) | Azure
+description: 在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的 ASP.NET 项目中使用 Azure 表存储
+services: storage
+documentationcenter: 
+author: TomArcher
+manager: douge
+editor: 
 
+ms.assetid: af81a326-18f4-4449-bc0d-e96fba27c1f8
+ms.service: storage
+ms.workload: web
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: na
+ms.topic: article
+ms.date: 12/02/2016
+wacn.date: 01/06/2017
+ms.author: tarcher
+---
 
 # 开始使用 Azure 表存储和 Visual Studio 连接服务 (ASP.NET)
 
@@ -26,7 +26,7 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 
 本文介绍如何以编程方式管理 Azure 表存储实体，执行常见任务，例如创建和删除表，以及使用表实体。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > 
 > 本文的代码部分假定用户已使用连接服务连接到 Azure 存储帐户。连接服务的配置方法是：打开 Visual Studio 解决方案资源管理器，右键单击项目，然后从上下文菜单中选择“添加”->“连接服务”选项。在该处按照对话框的说明连接到所需的 Azure 存储帐户。
 
@@ -49,7 +49,6 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 3. 获取表示表服务客户端的 **CloudTableClient** 对象。
 
         CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-
 
 4. 获取表示所需表名称引用的 **CloudTable** 对象。（将 *<table-name>* 更改为要创建的表的名称。）
 
@@ -78,7 +77,6 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 3. 获取表示表服务客户端的 **CloudTableClient** 对象。
 
         CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-
 
 4. 获取表示所需表名称引用的 **CloudTable** 对象。（将 *<table-name>* 更改为要向其添加实体的表的名称。）
 
@@ -134,7 +132,6 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 
         CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-
 4. 获取表示所需表名称引用的 **CloudTable** 对象。（将 *<table-name>* 更改为要向其添加实体的表的名称。）
 
 		CloudTable table = tableClient.GetTableReference(<table-name>);
@@ -182,7 +179,7 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 
 以下步骤演示了如何以编程方式获取表中的实体。在 ASP.NET MVC 应用中，该代码会置于控制器中。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > 
 > 本部分的代码引用[向表添加一批实体](#add-a-batch-of-entities-to-a-table)部分提供的 **CustomerEntity** 类和数据。
 
@@ -201,7 +198,6 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 3. 获取表示表服务客户端的 **CloudTableClient** 对象。
 
         CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-
 
 4. 获取表示所需表名称引用的 **CloudTable** 对象。（将 *<table-name>* 更改为要向其添加实体的表的名称。）
 
@@ -229,7 +225,7 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 
 以下步骤演示了如何以编程方式获取分区中的所有实体。在 ASP.NET MVC 应用中，该代码会置于控制器中。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > 
 > 本部分的代码引用[向表添加一批实体](#add-a-batch-of-entities-to-a-table)部分提供的 **CustomerEntity** 类和数据。
 
@@ -248,7 +244,6 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 3. 获取表示表服务客户端的 **CloudTableClient** 对象。
 
         CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-
 
 4. 获取表示所需表名称引用的 **CloudTable** 对象。（将 *<table-name>* 更改为要向其添加实体的表的名称。）
 
@@ -294,7 +289,6 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 
         CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-
 4. 获取表示所需表名称引用的 **CloudTable** 对象。（将 *<table-name>* 更改为要向其添加实体的表的名称。）
 
 		CloudTable table = tableClient.GetTableReference(<table-name>);
@@ -322,6 +316,6 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 
 ## 后续步骤
 
-[AZURE.INCLUDE [vs-storage-dotnet-tables-next-steps](../../includes/vs-storage-dotnet-tables-next-steps.md)]
+[!INCLUDE [vs-storage-dotnet-tables-next-steps](../../includes/vs-storage-dotnet-tables-next-steps.md)]
 
 <!---HONumber=Mooncake_0103_2017-->

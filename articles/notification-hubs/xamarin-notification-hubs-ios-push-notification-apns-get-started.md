@@ -1,29 +1,29 @@
-<properties
-	pageTitle="使用通知中心针对 Xamarin 应用发送 iOS 推送通知 | Azure"
-	description="在本教程中，你将了解如何使用 Azure 通知中心将推送通知发送到 Xamarin iOS 应用程序。"
-	services="notification-hubs"
-    keywords="ios 推送通知, 推送消息, 推送通知, 推送消息"
-	documentationCenter="xamarin"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>  
+---
+title: 使用通知中心针对 Xamarin 应用发送 iOS 推送通知 | Azure
+description: 在本教程中，你将了解如何使用 Azure 通知中心将推送通知发送到 Xamarin iOS 应用程序。
+services: notification-hubs
+keywords: ios 推送通知, 推送消息, 推送通知, 推送消息
+documentationCenter: xamarin
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-xamarin-ios"
-	ms.devlang="dotnet"
-	ms.topic="hero-article"
-	ms.date="06/29/2016"
-	wacn.date="01/10/2017"
-	ms.author="wesmc"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-ios
+ms.devlang: dotnet
+ms.topic: hero-article
+ms.date: 06/29/2016
+wacn.date: 01/10/2017
+ms.author: wesmc
+---
 
 # 使用通知中心针对 Xamarin 应用发送 iOS 推送通知
 
-[AZURE.INCLUDE [notification-hubs-selector-get-started](../../includes/notification-hubs-selector-get-started.md)]
+[!INCLUDE [notification-hubs-selector-get-started](../../includes/notification-hubs-selector-get-started.md)]
 
 ##概述
-> [AZURE.IMPORTANT] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/)。
+> [!IMPORTANT] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 本教程演示如何使用 Azure 通知中心将推送通知发送到 iOS 应用程序。
 你将创建一个空白 Xamarin.iOS 应用，它使用 [Apple Push Notification 服务 APNs 接收推送通知。完成后，你将能够使用通知中心将推送通知广播到运行你的应用的所有设备。NotificationHubs 应用程序示例中提供了完成的代码。
@@ -39,20 +39,18 @@
 + iOS 开发人员计划成员身份
 + [Xamarin Studio]
 
-   > [AZURE.NOTE] 由于 iOS 推送通知配置要求，你必须在物理 iOS 设备（iPhone 或 iPad）而不是在模拟器上部署和测试示例应用程序。
+   > [!NOTE] 由于 iOS 推送通知配置要求，你必须在物理 iOS 设备（iPhone 或 iPad）而不是在模拟器上部署和测试示例应用程序。
 
 只有在完成本教程后，才能完成有关 Xamarin iOS 应用的所有其他通知中心教程。
 
-
-[AZURE.INCLUDE [通知中心：启用 Apple 推送通知](../../includes/notification-hubs-enable-apple-push-notifications.md)]
+[!INCLUDE [通知中心：启用 Apple 推送通知](../../includes/notification-hubs-enable-apple-push-notifications.md)]
 
 <!--
 ##配置通知中心
 
 本部分将引导你使用创建的 **.p12** 推送证书创建新的通知中心并配置 APNS 身份验证。如果你想要使用已创建的通知中心，可以跳到步骤 5。
 
-[AZURE.INCLUDE [notification-hubs-portal-create-new-hub](../../includes/notification-hubs-portal-create-new-hub.md)]
-
+[!INCLUDE [notification-hubs-portal-create-new-hub](../../includes/notification-hubs-portal-create-new-hub.md)]
 
 <ol start="7">
 <li>
@@ -63,7 +61,6 @@
 &emsp;&emsp;![](./media/notification-hubs-ios-get-started/notification-hubs-apns.png)
 
 &emsp;&emsp;![](./media/notification-hubs-ios-get-started/notification-hubs-sandbox.png)
-
 
 你的通知中心现在已配置为使用 APNS，并且你有连接字符串用于注册你的应用和发送推送通知。
 
@@ -92,7 +89,6 @@
         // Azure app-specific connection string and hub path
         public const string ConnectionString = "<Azure connection string>";
         public const string NotificationHubPath = "<Azure hub path>";
-
 
 6. 在 **AppDelegate.cs** 中，更新 **FinishedLaunching()** 以匹配以下内容：
 
@@ -177,14 +173,11 @@
             }
         }
 
-    > [AZURE.NOTE] 你可以选择覆盖 **FailedToRegisterForRemoteNotifications()** 以处理无网络连接等情况。如果用户可能会在脱机模式下（例如飞行模式）下启动你的应用程序，并且你想要处理应用特定的推送消息方案，则此操作特别重要。
-
+    > [!NOTE] 你可以选择覆盖 **FailedToRegisterForRemoteNotifications()** 以处理无网络连接等情况。如果用户可能会在脱机模式下（例如飞行模式）下启动你的应用程序，并且你想要处理应用特定的推送消息方案，则此操作特别重要。
 
 10. 在你的设备上运行应用程序。
 
-
 ## 发送推送通知
-
 
 在 [Azure 门户预览]中通过“通知中心”页面上“故障排除”工具集中的“测试发送”功能来发送通知，可以在应用中测试推送通知的接收情况，如以下屏幕中所示。
 
@@ -192,18 +185,17 @@
 
 通常，推送通知通过后端服务（例如移动服务或者使用兼容库的 ASP.NET）进行发送。如果你的方案中没有可用的库，则你也可以使用 REST API 直接发送推送消息。
 
-在本教程中，为了保持内容的简单性，我们只会演示如何在控制台应用程序（而不是后端服务）中，使用通知中心的 .NET SDK 发送通知，以此测试你的客户端应用。建议你接下来学习[使用通知中心向用户推送通知](/documentation/articles/notification-hubs-aspnet-backend-ios-apple-apns-notification/)教程，以了解如何从 ASP.NET 后端发送通知。不过，可以使用以下方法来发送通知：
+在本教程中，为了保持内容的简单性，我们只会演示如何在控制台应用程序（而不是后端服务）中，使用通知中心的 .NET SDK 发送通知，以此测试你的客户端应用。建议你接下来学习[使用通知中心向用户推送通知](./notification-hubs-aspnet-backend-ios-apple-apns-notification.md)教程，以了解如何从 ASP.NET 后端发送通知。不过，可以使用以下方法来发送通知：
 
 - **REST 接口**：可以使用 [REST 接口](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn223264.aspx)在任何后端平台上支持推送通知。
 
 * ** Azure 通知中心 .NET SDK**：在 Visual Studio 的 Nuget 包管理器中，运行 [Install-Package Microsoft.Azure.NotificationHubs](https://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/)。
 
-* **Node.js**：[如何通过 Node.js 使用通知中心](/documentation/articles/notification-hubs-nodejs-push-notification-tutorial/)。
+* **Node.js**：[如何通过 Node.js 使用通知中心](./notification-hubs-nodejs-push-notification-tutorial.md)。
 
-* **Azure 移动服务**：有关如何从与通知中心集成的 Azure 移动服务后端发送推送通知的示例，请参阅“移动服务中的推送通知入门”（[.NET 后端](/documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-push/) | [JavaScript 后端](/documentation/articles/mobile-services-javascript-backend-windows-universal-dotnet-get-started-push/)）。
+* **Azure 移动服务**：有关如何从与通知中心集成的 Azure 移动服务后端发送推送通知的示例，请参阅“移动服务中的推送通知入门”（[.NET 后端](../mobile-services/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-push.md) | [JavaScript 后端](../mobile-services/mobile-services-javascript-backend-windows-universal-dotnet-get-started-push.md)）。
 
-* **Java/PHP**：有关如何使用 REST API 发送推送通知的示例，请参阅“如何通过 Java/PHP 使用通知中心”([Java](/documentation/articles/notification-hubs-java-push-notification-tutorial/) | [PHP](/documentation/articles/notification-hubs-php-push-notification-tutorial/))。
-
+* **Java/PHP**：有关如何使用 REST API 发送推送通知的示例，请参阅“如何通过 Java/PHP 使用通知中心”([Java](./notification-hubs-java-push-notification-tutorial.md) | [PHP](./notification-hubs-php-push-notification-tutorial.md))。
 
 ####（可选）通过 .NET 控制台应用发送推送通知
 
@@ -224,7 +216,6 @@
 	这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 包</a>添加对 Azure 通知中心 SDK 的引用。
 
 	![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-package-manager.png)
-
 
 4. 打开 `Program.cs` 文件，并添加以下 `using` 语句，确保我们可以使用 Azure 类和你主类中的函数：
 
@@ -285,13 +276,11 @@
     		}
 		);
 
-
 6. 单击底部栏上的“运行一次”。你应在设备上收到警报。
 
 ##后续步骤
 
 在这个简单的示例中，你已将推送通知广播到所有 iOS 设备。若要针对特定客户，请参考教程[使用通知中心将通知推送到用户]。如果要按兴趣组划分用户，可以阅读[使用通知中心发送突发新闻]。请在[通知中心指南]和[适用于 iOS 的通知中心操作方法指南]中了解有关如何使用通知中心的详细信息。
-
 
 <!-- Images. -->
 
@@ -300,11 +289,7 @@
 [215]: ./media/partner-xamarin-notification-hubs-ios-get-started/notification-hub-scheduler1.png
 [216]: ./media/partner-xamarin-notification-hubs-ios-get-started/notification-hub-scheduler2.png
 
-
 [31]: ./media/partner-xamarin-notification-hubs-ios-get-started/notification-hub-create-ios-app.png
-
-
-
 
 <!-- URLs. -->
 [Mobile Services iOS SDK]: http://go.microsoft.com/fwLink/?LinkID=266533
@@ -316,8 +301,8 @@
 [Install Xcode]: https://go.microsoft.com/fwLink/p/?LinkID=266532
 [iOS Provisioning Portal]: http://go.microsoft.com/fwlink/p/?LinkId=272456
 
-[使用通知中心将通知推送到用户]: /documentation/articles/notification-hubs-aspnet-backend-windows-dotnet-wns-notification/
-[使用通知中心发送突发新闻]: /documentation/articles/notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns/
+[使用通知中心将通知推送到用户]: ./notification-hubs-aspnet-backend-windows-dotnet-wns-notification.md
+[使用通知中心发送突发新闻]: ./notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns.md
 
 [本地和推送通知编程指南]: http://developer.apple.com/library/mac/#documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ApplePushService.html#//apple_ref/doc/uid/TP40008194-CH100-SW1
 [Apple Push Notification Service]: http://go.microsoft.com/fwlink/p/?LinkId=272584

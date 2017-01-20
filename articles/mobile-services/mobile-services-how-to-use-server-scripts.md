@@ -1,26 +1,24 @@
-<properties 
-	pageTitle="使用 JavaScript 后端移动服务" 
-	description="提供有关如何在 Azure 移动服务中定义、注册以及使用服务器脚本的示例。" 
-	services="mobile-services" 
-	documentationCenter="" 
-	authors="RickSaling" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 使用 JavaScript 后端移动服务
+description: 提供有关如何在 Azure 移动服务中定义、注册以及使用服务器脚本的示例。
+services: mobile-services
+documentationCenter: 
+authors: RickSaling
+manager: dwrede
+editor: 
 
-<tags 
-	ms.service="mobile-services" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="javascript" 
-	ms.devlang="multiple" 
-	ms.topic="article" 
-	ms.date="07/21/2016" 
-	wacn.date="09/26/2016" 
-	ms.author="ricksal"/>
-
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: javascript
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: ricksal
+---
 
 #  使用 JavaScript 后端移动服务
 
- 
 本文提供有关如何在 Azure 移动服务中使用 JavaScript 后端的详细信息和示例。
 
 ## <a name="intro"></a>介绍
@@ -34,7 +32,6 @@
 服务器脚本中 main 函数的签名取决于脚本的具体使用位置。你还可以将公用脚本代码定义为可在脚本之间共享的 nodes.js 模块。有关详细信息，请参阅[源代码管理和共享代码][Source control, shared code, and helper functions]。
 
 有关各个服务器脚本对象和函数的说明，请参阅[移动服务服务器脚本参考]。
-
 
 ## <a name="table-scripts"></a>表操作
 
@@ -83,7 +80,7 @@
 + [Delete][delete function]：`function del (id, user, request) { ... }`
 + [Read][read function]：`function read (query, user, request) { ... }`
 
->[AZURE.NOTE]注册到删除操作的函数必须命名为 _del_，因为 delete 是 JavaScript 中的保留关键字。
+>[!NOTE]注册到删除操作的函数必须命名为 _del_，因为 delete 是 JavaScript 中的保留关键字。
 
 每个服务器脚本都有一个主函数，并包含可选的 Helper 函数。即使服务器脚本是为特定表创建的，它也可以引用同一数据库中的其他表。你还可以将公用函数定义为可在脚本之间共享的模块。有关详细信息，请参阅[源代码管理和共享代码][Source control, shared code, and helper functions]。
 
@@ -95,11 +92,9 @@
 
 	![1][1]
 	
-
 + 使用源代码管理。启用源代码管理后，只需在 git 存储库中的 .\\service\\table 子文件夹内创建一个名为 <em>`<table>`</em>.<em>`<operation>`</em>.js 的文件，其中，<em>`<table>`</em> 是表的名称，<em>`<operation>`</em> 是要注册的表操作。有关详细信息，请参阅[源代码管理和共享代码][Source control, shared code, and helper functions]。
 
 + 使用 Azure 命令行工具中的命令提示符。有关详细信息，请参阅[使用命令行工具]。
-
 
 表操作脚本必须至少调用 [request 对象]的下列函数之一，以确保客户端收到响应。
  
@@ -107,7 +102,7 @@
  
 + **respond 函数**：已返回自定义响应。
 
-> [AZURE.IMPORTANT]如果在脚本的某个代码路径中 **execute** 和 **respond** 均未调用，则该操作可能不返回响应。
+> [!IMPORTANT]如果在脚本的某个代码路径中 **execute** 和 **respond** 均未调用，则该操作可能不返回响应。
 
 以下脚本将调用 **execute** 函数来完成客户端请求的数据操作：
 
@@ -137,10 +132,9 @@
 	    request.execute(); 
 	}
  
->[AZURE.NOTE]在删除脚本中，更改所提供的 userId 变量不会影响所删除的记录。
+>[!NOTE]在删除脚本中，更改所提供的 userId 变量不会影响所删除的记录。
 
 有关更多示例，请参阅[读取和写入数据]、[修改请求]和[验证数据]。
-
 
 ### <a name="override-response"></a>如何：重写默认响应
 
@@ -177,7 +171,7 @@
 
 如果为 **execute** 函数提供了 **success** 处理程序，则还必须在 **success** 处理程序中调用 **respond** 函数，使运行时知道脚本已完成，并且可写入响应。如果在调用 **respond** 时未传递任何参数，则移动服务将生成默认响应。
 
->[AZURE.NOTE]只有在先调用 **execute** 函数之后，才能调用不带参数的 **respond** 来调用默认响应。
+>[!NOTE]只有在先调用 **execute** 函数之后，才能调用不带参数的 **respond** 来调用默认响应。
  
 ### <a name="override-error"></a>如何：重写默认错误处理
 
@@ -194,7 +188,6 @@
 	  }); 
 	}
  
-
 提供 error 处理程序后，调用 **respond** 时，移动服务会向客户端返回错误结果。
 
 如果需要，你也可以同时提供 **success** 和 **error** 处理程序。
@@ -222,7 +215,6 @@
 		return (hex4() + hex4() + "-" + hex4() + "-" + hex4() + "-" + hex4() + "-" + hex4() + hex4() + hex4());
 	}
 
-
 如果应用程序提供了某个 ID 的值，移动服务将按原样存储该值，包括前导和尾随空格。不会从值中裁剪掉空格。
 
 `id` 的值必须唯一，并且不能包含以下集中的字符：
@@ -231,8 +223,7 @@
 +  可打印字符：**"**(0x0022), **+** (0x002B), **/** (0x002F), **?** (0x003F), **\** (0x005C), **`** (0x0060)
 +  ID“.”和“..”
 
-也可以为表使用整数 ID。若要使用整数 ID，必须结合 `--integerId` 选项使用 `mobile table create` 命令创建表。应在适用于 Azure 的命令行界面 (CLI) 中使用此命令。有关使用 CLI 的详细信息，请参阅[用于管理移动服务表的 CLI](/documentation/articles/virtual-machines-command-line-tools/#Mobile_Tables)。
-
+也可以为表使用整数 ID。若要使用整数 ID，必须结合 `--integerId` 选项使用 `mobile table create` 命令创建表。应在适用于 Azure 的命令行界面 (CLI) 中使用此命令。有关使用 CLI 的详细信息，请参阅[用于管理移动服务表的 CLI](../virtual-machines-command-line-tools.md#Mobile_Tables)。
 
 ### <a name="access-headers"></a>如何：访问自定义参数
 
@@ -287,7 +278,6 @@
 			insertItemIfNotComplete(results); 
 		}
 
-
 ### <a name="work-with-users"></a>如何：处理用户
 
 在 Azure 移动服务中，你可以使用标识提供程序对用户进行身份验证。当经过身份验证的用户调用表操作时，移动服务将使用 [user 对象]向已注册的脚本函数提供有关该用户的信息。可以使用 **userId** 属性来存储和检索用户特定的信息。以下示例将基于某个经过身份验证的用户的 **userId** 来设置项的 owner 属性：
@@ -341,7 +331,6 @@
 
 	![2][2]
 	
-
 + 使用源代码管理。如果已启用源代码管理，只需在 git 存储库的 .\\service\\api 子文件夹中创建一个名为 <em>`<custom_api>`</em>.js 的文件，其中 <em>`<custom_api>`</em> 是要注册的自定义 API 的名称。此脚本文件包含自定义 API 公开的每个 HTTP 方法的 _exported_ 函数。权限在随附的 .json 文件中定义。有关详细信息，请参阅[源代码管理和共享代码][Source control, shared code, and helper functions]。
 
 + 使用 Azure 命令行工具中的命令提示符。有关详细信息，请参阅[使用命令行工具]。
@@ -459,7 +448,7 @@ HTTP GET 请求可按如下所示调用上述自定义 API 示例中的两个路
 
 + 使用 Azure 命令行工具中的命令提示符。有关详细信息，请参阅[使用命令行工具]。
 
->[AZURE.NOTE]启用源代码管理后，你可以直接在 git 存储库的 .\\service\\scheduler 子文件夹中编辑计划的作业脚本文件。有关详细信息，请参阅 [如何：使用源代码管理来共享代码]。
+>[!NOTE]启用源代码管理后，你可以直接在 git 存储库的 .\\service\\scheduler 子文件夹中编辑计划的作业脚本文件。有关详细信息，请参阅 [如何：使用源代码管理来共享代码]。
 
 ## <a name="shared-code"></a>源代码管理、共享代码和 Helper 函数
 
@@ -498,7 +487,6 @@ HTTP GET 请求可按如下所示调用上述自定义 API 示例中的两个路
 	    }); 
 	} 
 
-
 ### <a name="shared-code-source-control"></a>如何：使用源代码管理来共享代码
 
 你可以将源代码管理与 Node.js 程序包管理器 (npm) 结合使用，以控制可供移动服务使用的模块。可通过两种方式实现此目的：
@@ -507,18 +495,17 @@ HTTP GET 请求可按如下所示调用上述自定义 API 示例中的两个路
 
 + 对于专用或自定义模块，你可以使用 npm 手动将模块安装到源代码管理的 `.\service\node_modules` 目录中。有关如何手动上载模块的示例，请参阅[在服务器脚本中利用共享代码和 Node.js 模块]。
 
-	>[AZURE.NOTE]如果 `node_modules` 已在目录层次结构中存在，NPM 将在该目录中创建 `\node-uuid` 子目录，而不是在存储库中创建一个新的 `node_modules`。在此情况下，你只需删除现有的 `node_modules` 目录即可。
+	>[!NOTE]如果 `node_modules` 已在目录层次结构中存在，NPM 将在该目录中创建 `\node-uuid` 子目录，而不是在存储库中创建一个新的 `node_modules`。在此情况下，你只需删除现有的 `node_modules` 目录即可。
 
 将 package.json 文件或自定义模块提交到移动服务的存储库后，请使用 **require** 来按名称引用这些模块。
 
->[AZURE.NOTE]在 package.json 中指定的模块或者上载到移动服务的模块只会在服务器脚本代码中使用。移动服务运行时不使用这些模块。
+>[!NOTE]在 package.json 中指定的模块或者上载到移动服务的模块只会在服务器脚本代码中使用。移动服务运行时不使用这些模块。
 
 ### <a name="helper-functions"></a>如何：使用 Helper 函数
 
 除了要求使用模块外，单个服务器脚本还可以包含 Helper 函数。这些函数与主函数不同，后者可用于分离脚本中的代码。
 
 在以下示例中，表脚本已注册到包含 Helper 函数 **handleUnapprovedItem** 的插入操作：
-
 
 	function insert(item, user, request) {
 	    if (!item.approved) {
@@ -628,7 +615,6 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 		data:    register_notifications  application  application  user         application  application
 		info:    mobile script list command OK
 
-
 ## <a name="working-with-tables"></a>使用表
 
 本部分详细介绍了用于直接处理 SQL 数据库表数据的策略，具体包括以下小节：
@@ -657,7 +643,7 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 
 		var todoItemsTable = request.service.tables.getTable('TodoItem');
 
-> [AZURE.NOTE]共享函数不能直接访问 **tables** 对象。在共享函数中，必须将表对象传递给该函数。
+> [!NOTE]共享函数不能直接访问 **tables** 对象。在共享函数中，必须将表对象传递给该函数。
 
 获得 [table 对象]后，可以调用一个或多个表操作函数：insert、update、delete 或 read。以下示例将从 permissions 表中读取用户权限：
 
@@ -750,8 +736,6 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 		
 		insertItems(); 
 
-
-
 ### <a name="JSON-types"></a>如何：将 JSON 类型映射到数据库类型
 
 客户端上的数据类型集合不同于移动服务数据库表中的数据类型集合。有时它们可以轻松地映射到另一种类型，而其他时候不会映射。移动服务执行映射中的多种类型转换：
@@ -806,7 +790,6 @@ Stream|不支持
 			}
 		});
 
-
 #### <a name="dynamic-query"></a>如何：运行动态参数化查询
 
 以下示例通过从权限表中读取每个用户的权限来实现自定义授权。执行该查询时，占位符 (?) 将被替换为提供的参数。
@@ -826,7 +809,6 @@ Stream|不支持
                 	console.log("error is: " + err);
 				}	
 		    });
-
 
 #### <a name="joins"></a>如何：联接关系表
 
@@ -851,7 +833,6 @@ Stream|不支持
 该脚本将联接两个表，并将结果写入日志。最终的对象可能类似于：
 
 		{ text: 'Take out the trash', complete: false, description: 'Critical'}
-
 
 #### <a name="raw"></a>如何：运行返回 *raw* 结果的查询
 
@@ -919,7 +900,7 @@ Stream|不支持
 
 若要写入日志，请使用全局 [console 对象]。使用 **log** 或 **info** 函数记录信息级警告。**warning** 和 **error** 函数将记录其对应级别，这些级别已在日志中予以标注。
 
-> [AZURE.NOTE]若要查看移动服务的日志，请登录到 [Azure 经典管理门户](https://manage.windowsazure.cn/)，选择你的移动服务，然后选择“日志”选项卡。
+> [!NOTE]若要查看移动服务的日志，请登录到 [Azure 经典管理门户](https://manage.windowsazure.cn/)，选择你的移动服务，然后选择“日志”选项卡。
 
 你还可以使用 [console 对象]的日志记录功能通过参数来设置消息格式。以下示例向消息字符串提供了一个参数形式的 JSON 对象：
 
@@ -1025,7 +1006,7 @@ Stream|不支持
 [Android Push]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started-with-push-android/
 [Azure SDK for Node.js]: http://go.microsoft.com/fwlink/p/?LinkId=275539
 [发送 HTTP 请求]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj631641.aspx
-[使用 SendGrid 从移动服务发送电子邮件]: /documentation/articles/store-sendgrid-mobile-services-send-email-scripts/
+[使用 SendGrid 从移动服务发送电子邮件]: ./store-sendgrid-mobile-services-send-email-scripts.md
 [身份验证入门]: /documentation/articles/mobile-services-windows-store-dotnet-get-started-users/
 [crypto API]: http://go.microsoft.com/fwlink/p/?LinkId=288802
 [path API]: http://go.microsoft.com/fwlink/p/?LinkId=288803
@@ -1038,8 +1019,8 @@ Stream|不支持
 [express.js 库]: http://go.microsoft.com/fwlink/p/?LinkId=309046
 [定义支持定期通知的自定义 API]: /documentation/articles/mobile-services-windows-store-dotnet-create-pull-notifications/
 [express.js 中的 express 对象]: http://expressjs.com/api.html#express
-[Store server scripts in source control]: /documentation/articles/mobile-services-store-scripts-source-control/
-[在服务器脚本中利用共享代码和 Node.js 模块]: /documentation/articles/mobile-services-store-scripts-source-control/#use-npm
+[Store server scripts in source control]: ./mobile-services-store-scripts-source-control.md
+[在服务器脚本中利用共享代码和 Node.js 模块]: ./mobile-services-store-scripts-source-control.md#use-npm
 [service 对象]: http://msdn.microsoft.com/zh-cn/library/windowsazure/dn303371.aspx
 [应用设置]: http://msdn.microsoft.com/zh-cn/library/dn529070.aspx
 [config module]: http://msdn.microsoft.com/zh-cn/library/dn508125.aspx

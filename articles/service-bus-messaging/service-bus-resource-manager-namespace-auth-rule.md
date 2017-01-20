@@ -1,43 +1,42 @@
-<properties
-    pageTitle="使用 Azure Resource Manager 模板创建服务总线授权规则 | Azure"
-    description="使用 Azure Resource Manager 模板为命名空间和队列创建服务总线授权规则"
-    services="service-bus"
-    documentationCenter=".net"
-    authors="sethmanheim"
-    manager="timlt"
-    editor=""/>  
+---
+title: 使用 Azure Resource Manager 模板创建服务总线授权规则 | Azure
+description: 使用 Azure Resource Manager 模板为命名空间和队列创建服务总线授权规则
+services: service-bus
+documentationCenter: .net
+authors: sethmanheim
+manager: timlt
+editor: 
 
-
-<tags
-    ms.service="service-bus"
-    ms.devlang="tbd"
-    ms.topic="article"
-    ms.tgt_pltfrm="dotnet"
-    ms.workload="na"
-    ms.date="10/14/2016"
-    ms.author="sethm;shvija"
-    wacn.date="12/26/2016"/>  
+ms.service: service-bus
+ms.devlang: tbd
+ms.topic: article
+ms.tgt_pltfrm: dotnet
+ms.workload: na
+ms.date: 10/14/2016
+ms.author: sethm;shvija
+wacn.date: 12/26/2016
+---
 
 # 使用 Azure Resource Manager 模板为命名空间和队列创建服务总线授权规则
 
-本文介绍如何使用为服务总线命名空间和队列创建[授权规则](/documentation/articles/service-bus-authentication-and-authorization/#shared-access-signature-authentication)的 Azure Resource Manager 模板。你将了解如何定义要部署的资源以及如何定义执行部署时指定的参数。可将此模板用于自己的部署，或自定义此模板以满足要求。
+本文介绍如何使用为服务总线命名空间和队列创建[授权规则](./service-bus-authentication-and-authorization.md#shared-access-signature-authentication)的 Azure Resource Manager 模板。你将了解如何定义要部署的资源以及如何定义执行部署时指定的参数。可将此模板用于自己的部署，或自定义此模板以满足要求。
 
 有关创建模板的详细信息，请参阅[创作 Azure Resource Manager 模板][]。
 
 有关完整的模板，请参阅 GitHub 上的[服务总线授权规则模板][]。
 
->[AZURE.NOTE] 以下 Azure Resource Manager 模板可供下载和部署。
+>[!NOTE] 以下 Azure Resource Manager 模板可供下载和部署。
 >
-> -  [创建服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace/)
-> -  [创建包含队列的服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace-queue/)
-> -  [创建包含主题和订阅的服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace-topic/)
-> -  [创建包含主题、订阅和规则的服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace-topic-with-rule/)
+> -  [创建服务总线命名空间](./service-bus-resource-manager-namespace.md)
+> -  [创建包含队列的服务总线命名空间](./service-bus-resource-manager-namespace-queue.md)
+> -  [创建包含主题和订阅的服务总线命名空间](./service-bus-resource-manager-namespace-topic.md)
+> -  [创建包含主题、订阅和规则的服务总线命名空间](./service-bus-resource-manager-namespace-topic-with-rule.md)
 
 ## 你将部署什么内容？
 
 利用此模板，你将为命名空间和消息传送实体（在此情况下为队列）部署服务总线授权规则。
 
-此模板使用[共享访问签名 (SAS)](/documentation/articles/service-bus-sas-overview/) 进行身份验证。SAS 使应用程序能够使用在命名空间或在关联了特定权限的消息传送实体（队列或主题）上配置的访问密钥向服务总线进行身份验证。然后可以使用此密钥生成 SAS 令牌，客户端反过来可用它向服务总线进行身份验证。
+此模板使用[共享访问签名 (SAS)](./service-bus-sas-overview.md) 进行身份验证。SAS 使应用程序能够使用在命名空间或在关联了特定权限的消息传送实体（队列或主题）上配置的访问密钥向服务总线进行身份验证。然后可以使用此密钥生成 SAS 令牌，客户端反过来可用它向服务总线进行身份验证。
 
 若要自动运行部署，请单击以下按钮：
 
@@ -135,7 +134,7 @@
 
 ## 运行部署的命令
 
-[AZURE.INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
+[!INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
 
 ### PowerShell
 
@@ -151,13 +150,13 @@
 
 现在，你已使用 Azure Resource Manager 创建并部署了资源，请通过查看以下文章了解如何管理这些资源：
 
-- [使用 PowerShell 管理服务总线](/documentation/articles/service-bus-powershell-how-to-provision/)
+- [使用 PowerShell 管理服务总线](./service-bus-powershell-how-to-provision.md)
 - [使用服务总线资源管理器管理服务总线资源](https://code.msdn.microsoft.com/Service-Bus-Explorer-f2abca5a)
-- [服务总线身份验证和授权](/documentation/articles/service-bus-authentication-and-authorization/)
+- [服务总线身份验证和授权](./service-bus-authentication-and-authorization.md)
 
-  [创作 Azure Resource Manager 模板]: /documentation/articles/resource-group-authoring-templates/
-  [Using Azure PowerShell with Azure Resource Manager]: /documentation/articles/powershell-azure-resource-manager/
-  [Using the Azure CLI for Mac, Linux, and Windows with Azure Resource Management]: /documentation/articles/xplat-cli-azure-resource-manager/
+  [创作 Azure Resource Manager 模板]: ../azure-resource-manager/resource-group-authoring-templates.md
+  [Using Azure PowerShell with Azure Resource Manager]: ../azure-resource-manager/powershell-azure-resource-manager.md
+  [Using the Azure CLI for Mac, Linux, and Windows with Azure Resource Management]: ../azure-resource-manager/xplat-cli-azure-resource-manager.md
   [服务总线授权规则模板]: https://github.com/Azure/azure-quickstart-templates/blob/master/301-servicebus-create-authrule-namespace-and-queue/
 
 <!---HONumber=Mooncake_1219_2016-->

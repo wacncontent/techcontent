@@ -1,25 +1,23 @@
-<properties
- pageTitle="面向物联网的 Azure 解决方案 | Azure"
- description="Azure 上 IoT 的概述，包括一个解决方案体系结构示例以及它如何与 Azure IoT 中心、设备 SDK 和预配置解决方案关联"
- services="iot-hub"
- documentationCenter=""
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: 面向物联网的 Azure 解决方案 | Azure
+description: Azure 上 IoT 的概述，包括一个解决方案体系结构示例以及它如何与 Azure IoT 中心、设备 SDK 和预配置解决方案关联
+services: iot-hub
+documentationCenter: 
+authors: dominicbetts
+manager: timlt
+editor: 
 
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/05/2016
+wacn.date: 01/04/2017
+ms.author: dobett
+---
 
-<tags
- ms.service="iot-hub"
- ms.devlang="na"
- ms.topic="get-started-article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="10/05/2016"
- wacn.date="01/04/2017"
- ms.author="dobett"/>  
-
-
-[AZURE.INCLUDE [iot-azure-and-iot](../../includes/iot-azure-and-iot.md)]
+[!INCLUDE [iot-azure-and-iot](../../includes/iot-azure-and-iot.md)]
 
 ## 后续步骤
 
@@ -40,11 +38,11 @@ Azure IoT 中心是一项 Azure 服务，可在一个应用程序后端和数百
 
 你也可能会对 [Azure IoT 套件][lnk-iot-suite]有兴趣，这是一套预配置的解决方案。IoT 套件可让你快速入门和扩展 IoT 项目，以应对常见的 IoT 案例，例如远程监视、资产管理和预测性维护。
 
-[lnk-getstarted]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
+[lnk-getstarted]: ./iot-hub-csharp-csharp-getstarted.md
 [lnk-device-sdks]: https://github.com/Azure/azure-iot-sdks/blob/master/readme.md
-[lnk-iot-hub]: /documentation/articles/iot-hub-what-is-iot-hub/
-[lnk-iot-suite]: /documentation/services/iot-suite/
+[lnk-iot-hub]: ./iot-hub-what-is-iot-hub.md
+[lnk-iot-suite]: ../iot-suite/index.md/
 [lnk-iotdev]: /develop/iot/
-[lnk-device-management]: /documentation/articles/iot-hub-device-management-overview/
+[lnk-device-management]: ./iot-hub-device-management-overview.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

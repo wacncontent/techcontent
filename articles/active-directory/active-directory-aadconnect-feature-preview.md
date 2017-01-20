@@ -1,21 +1,21 @@
-<properties
-   pageTitle="Azure AD Connect：预览版功能 | Azure"
-   description="本主题详细介绍 Azure AD Connect 中以预览版形式提供的功能。"
-   services="active-directory"
-   documentationCenter=""
-   authors="andkjell"
-   manager="stevenpo"
-   editor=""/>
+---
+title: Azure AD Connect：预览版功能 | Azure
+description: 本主题详细介绍 Azure AD Connect 中以预览版形式提供的功能。
+services: active-directory
+documentationCenter: 
+authors: andkjell
+manager: stevenpo
+editor: 
 
-<tags
-   ms.service="active-directory"  
-   ms.workload="identity"
-   ms.tgt_pltfrm="na"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.date="06/27/2016"
-   wacn.date="08/01/2016"
-   ms.author="billmath"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 06/27/2016
+wacn.date: 08/01/2016
+ms.author: billmath
+---
 
 # 有关预览版功能的详细信息
 本主题介绍如何使用预览版中当前提供的功能。
@@ -34,14 +34,14 @@
 - 目前仅支持单林 Exchange 组织部署。如果本地环境中有多个 Exchange 组织，则你需有一个本地 GALSync 解决方案才能让这些组显示在其他林中。
 - 组写回功能当前无法处理安全组或分发组。
 
->[AZURE.NOTE] 组写回需要 Azure AD Premium 订阅。
+>[!NOTE] 组写回需要 Azure AD Premium 订阅。
 
 ## <a name="user-writeback"></a>用户写回
-> [AZURE.IMPORTANT] Azure AD Connect 的 2015 年 8 月更新版中删除了用户写回预览版功能。如果你已启用此功能，现在应将它禁用。
+> [!IMPORTANT] Azure AD Connect 的 2015 年 8 月更新版中删除了用户写回预览版功能。如果你已启用此功能，现在应将它禁用。
 
 ## 后续步骤
-配置 [Azure AD Connect 的自定义安装](/documentation/articles/active-directory-aadconnect-get-started-custom/)。
+配置 [Azure AD Connect 的自定义安装](./active-directory-aadconnect-get-started-custom.md)。
 
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_0725_2016-->

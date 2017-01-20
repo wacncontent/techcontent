@@ -1,21 +1,21 @@
-<properties
-	pageTitle="使用 Site Recovery 将 Azure IaaS 虚拟机从一个 Azure 区域迁移到另一个 Azure 区域 | Azure"
-	description="使用 Azure Site Recovery 将 Azure IaaS 虚拟机从一个 Azure 区域迁移到另一个 Azure 区域。"
-	services="site-recovery"
-	documentationCenter=""
-	authors="rayne-wiselman"
-	manager="jwhit"
-	editor="tysonn"/>
+---
+title: 使用 Site Recovery 将 Azure IaaS 虚拟机从一个 Azure 区域迁移到另一个 Azure 区域 | Azure
+description: 使用 Azure Site Recovery 将 Azure IaaS 虚拟机从一个 Azure 区域迁移到另一个 Azure 区域。
+services: site-recovery
+documentationCenter: 
+authors: rayne-wiselman
+manager: jwhit
+editor: tysonn
 
-<tags
-	ms.service="site-recovery"
-	ms.workload="backup-recovery"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/21/2016"
-	wacn.date="01/04/2017"
-	ms.author="raynew"/>
+ms.service: site-recovery
+ms.workload: backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/21/2016
+wacn.date: 01/04/2017
+ms.author: raynew
+---
 
 #  使用 Azure Site Recovery 在 Azure 区域之间迁移 Azure IaaS 虚拟机
 
@@ -26,9 +26,7 @@
 - **目前仅能从一个区域迁移到另一个区域。可以将 VM 从一个 Azure 区域故障转移到另一个 Azure 区域，但不能重新对其进行故障回复。**
 - 本文中的迁移说明以将物理计算机复制到 Azure 的说明为基础。
 
-
 请将任何评论或问题发布到本文底部，或者发布到 [Azure 恢复服务论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=hypervrecovmgr)。
-
 
 ## 先决条件
 
@@ -56,10 +54,10 @@
 	
 	向组添加计算机之后，系统将启用保护，并且依据保护组设置运行初始复制。
 
-10. [运行非计划的故障转移](/documentation/articles/site-recovery-failover/#run-an-unplanned-failover)。在初始复制完成之后，可以运行非计划的从一个 Azure 区域到另一个 Azure 区域的故障转移。（可选）你可以创建一个恢复计划并运行非计划的故障转移，在区域之间迁移多个虚拟机。[详细了解](/documentation/articles/site-recovery-create-recovery-plans/)恢复计划。
+10. [运行非计划的故障转移](./site-recovery-failover.md#run-an-unplanned-failover)。在初始复制完成之后，可以运行非计划的从一个 Azure 区域到另一个 Azure 区域的故障转移。（可选）你可以创建一个恢复计划并运行非计划的故障转移，在区域之间迁移多个虚拟机。[详细了解](./site-recovery-create-recovery-plans.md)恢复计划。
 		
 ## 后续步骤
 
-若要详细了解其他复制方案，请参阅[什么是 Azure Site Recovery？](/documentation/articles/site-recovery-overview/)
+若要详细了解其他复制方案，请参阅[什么是 Azure Site Recovery？](./site-recovery-overview.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

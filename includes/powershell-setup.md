@@ -1,9 +1,15 @@
-<properties services="virtual-machines" title="Setting up PowerShell" authors="JoeDavies-MSFT" solutions="" manager="timlt" editor="tysonn" />
+---
+services: virtual-machines
+title: Setting up PowerShell
+authors: JoeDavies-MSFT
+solutions: 
+manager: timlt
+editor: tysonn
 
-<tags
-   ms.service="virtual-machines"
-   ms.date="05/12/2015"
-   wacn.date="06/26/2015"/>
+ms.service: virtual-machines
+ms.date: 05/12/2015
+wacn.date: 06/26/2015
+---
 
 ## 设置 PowerShell
 
@@ -39,12 +45,11 @@
 	-------
 	0.8.16.1
 
-有关说明以及指向最新版本的链接，请参阅[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。
-
+有关说明以及指向最新版本的链接，请参阅[如何安装和配置 Azure PowerShell](../articles/powershell-install-configure.md)。
 
 ### 设置你的 Azure 帐户和订阅
 
-如果你还没有 Azure 订阅，你可以注册一个[试用版](/pricing/1rmb-trial/)。
+如果你还没有 Azure 订阅，你可以注册一个[试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 
 打开 Azure PowerShell 命令提示符，然后使用此命令登录到 Azure。
 
@@ -72,6 +77,6 @@
 	$subscr="<SubscriptionName from the display of Get-AzureSubscription>"
 	Select-AzureSubscription -SubscriptionName $subscr -Current	
 
-有关 Azure 订阅和帐户的详细信息，请参阅[如何：连接到你的订阅](/documentation/articles/powershell-install-configure/#Connect)。
+有关 Azure 订阅和帐户的详细信息，请参阅[如何：连接到你的订阅](../articles/powershell-install-configure.md#Connect)。
 
 <!---HONumber=61-->

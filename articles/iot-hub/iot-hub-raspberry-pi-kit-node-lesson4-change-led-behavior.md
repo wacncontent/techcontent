@@ -1,29 +1,27 @@
-<properties
-	pageTitle="“可选：更改 LED 的开关行为”"
-	description="自定义这些消息，以便更改 LED 的开关行为。"
-	services="iot-hub"
-	documentationcenter=""
-	author="shizn"
-	manager="timlt"
-	tags=""
-	keywords=""/>  
+---
+title: “可选：更改 LED 的开关行为”
+description: 自定义这些消息，以便更改 LED 的开关行为。
+services: iot-hub
+documentationcenter: 
+author: shizn
+manager: timlt
+tags: 
+keywords: 
 
-
-<tags
-	ms.service="iot-hub"
-	ms.date="10/21/2016"
-	wacn.date="12/19/2016"/>  
-
+ms.service: iot-hub
+ms.date: 10/21/2016
+wacn.date: 12/19/2016
+---
 
 # 更改 LED 的开关行为
 ## 执行的操作
-自定义这些消息，以便更改 LED 的开关行为。如果有问题，请在[故障排除页](/documentation/articles/iot-hub-raspberry-pi-kit-node-troubleshooting/)上查找解决方案。
+自定义这些消息，以便更改 LED 的开关行为。如果有问题，请在[故障排除页](./iot-hub-raspberry-pi-kit-node-troubleshooting.md)上查找解决方案。
 
 ## 你要学习的知识
 使用其他 Node.js 函数更改 LED 的开关行为。
 
 ## 需要什么
-用户必须已成功完成[在 Raspberry Pi 上运行示例应用程序，以便接收从云到设备的消息](/documentation/articles/iot-hub-raspberry-pi-kit-node-lesson4-send-cloud-to-device-messages/)。
+用户必须已成功完成[在 Raspberry Pi 上运行示例应用程序，以便接收从云到设备的消息](./iot-hub-raspberry-pi-kit-node-lesson4-send-cloud-to-device-messages.md)。
 
 ## 添加 Node.js 函数
 1. 通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
@@ -82,7 +80,6 @@
 此时会看到 LED 开启两秒，然后关闭两秒。最后一条为“停止”消息，停止示例应用程序运行。
 
 ![包含开关消息的示例应用程序](./media/iot-hub-raspberry-pi-lessons/lesson4/gulp_on_and_off.png)  
-
 
 祝贺你！ 你已成功自定义从 IoT 中心发送到 Pi 的消息。
 

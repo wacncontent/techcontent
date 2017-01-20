@@ -1,12 +1,17 @@
-<properties 
-	pageTitle="如何在 Proxy 环境下正确使用 PowerShell 工具发送 web http 请求" 
-	description="如何在 Proxy 环境下正确使用 PowerShell 工具发送 web http 请求" 
-	services="" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="na-aog" ms.date="" wacn.date="09/29/2016"/>
+---
+title: 如何在 Proxy 环境下正确使用 PowerShell 工具发送 web http 请求
+description: 如何在 Proxy 环境下正确使用 PowerShell 工具发送 web http 请求
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: na-aog
+ms.date: 
+wacn.date: 09/29/2016
+---
+
 #如何在 Proxy 环境下正确使用 PowerShell 工具发送 web http 请求
 
 PowerShell 是一款非常实用的命令行界面和脚本编辑工具，同时我们也可以通过该工具来管理几乎所有 azure 上的资源。它可以被用来执行各种任务，其中包括脚本程序执行和命令提示行交互。
@@ -28,7 +33,6 @@ PowerShell 是一款非常实用的命令行界面和脚本编辑工具，同时
 	+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
 	    + CategoryInfo          : CloseError: (:) [Get-AzureVM], HttpRequestException  
 	    + FullyQualifiedErrorId : Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.GetAzureVMCommand
-	
 	
 	Get-OSVersions : The remote server returned an unexpected response: (407) Proxy Authenti cation Required. 
 	At line:1 char:15 + get-osversions &lt;&lt;&lt;&lt; -subscriptionId * -certificate (get-item cert:\CurrentUser
@@ -115,7 +119,6 @@ Class 示例：
 64 位 PowerShell 路径：C:\Windows\SysWOW64\WindowsPowerShell\v1.0   
 3. 创建一个 powershell.exe.config 文件，该文件用来声明 Powershell 不使用默认代理设置，而是使用刚才创建好的.dll 中声明的代理。  
 powershell.exe.config 示例：  
-
 
 		<defaultProxy enabled="true" useDefaultCredentials="false">
 		  <module type = "SomeNameSpace.MyProxy, SomeAssembly" />

@@ -1,14 +1,18 @@
-<properties 
-	pageTitle="创建基于 AFS 的 Docker 容器卷" 
-	description="创建基于 AFS 的 Docker 容器卷" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machine-aog" ms.date="" wacn.date="09/29/2016"/>
-# 创建基于 AFS 的 Docker 容器卷
+---
+title: 创建基于 AFS 的 Docker 容器卷
+description: 创建基于 AFS 的 Docker 容器卷
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
+ms.service: virtual-machine-aog
+ms.date: 
+wacn.date: 09/29/2016
+---
+
+# 创建基于 AFS 的 Docker 容器卷
 
 标准的 Docker 容器卷一般是位于 Docker 主机上的一个本地目录。在这样的配置下，容器必须依赖于一台特定的主机，因此使得容器的迁移和扩展变得困难。通过使用容器卷插件，能让容器访问独立于主机的存储，使得迁移或者共享变得简单。
 
@@ -17,7 +21,6 @@ Docker Volume Plugin for Azure File Storage 是 Microsoft 提供的容器共享�
 目前 Docker Volume Plugin for Azure File Storage 仅支持 Ubuntu。更多信息和更新，请参见 [https://github.com/Azure/azurefile-dockervolumedriver](https://github.com/Azure/azurefile-dockervolumedriver) 。
 
 在开始前，请确认您已经拥有一个共享出来的 AFS 和一个已经搭建好的 docker 虚拟机。登录到该虚拟机，切换到 root 账号。确认 cifs-utils 已经安装。
-
 
 	# apt-get install cifs-utils
 
@@ -65,7 +68,6 @@ Docker Volume Plugin for Azure File Storage 是 Microsoft 提供的容器共享�
 	# initctl start azurefile-dockervolumedriver  
 	# initctl status azurefile-dockervolumedriver  
  
-
 ##<font color=darkblue>Systemd 模式下的配置</font>
 
 ###下载配置文件
@@ -144,8 +146,5 @@ Docker Volume Plugin for Azure File Storage 是 Microsoft 提供的容器共享�
 
 通过该驱动创建的共享文件夹，默认 quota 是 5TB。您可能需要在 Azure portal 上去修改该 quota 值以适应您的需求。
 
-
 ![modify-Quota](./media/aog-virtual-machines-docker-based-afs/modify-Quota.png "修改 AzurePortal 中的 Quota 值.png")
-
-
 

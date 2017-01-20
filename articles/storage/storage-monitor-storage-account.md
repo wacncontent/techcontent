@@ -1,33 +1,33 @@
-<properties
-    pageTitle="如何监视存储帐户 | Azure"
-    description="了解如何使用 Azure 门户在 Azure 中监视存储帐户。"
-    services="storage"
-    documentationcenter=""
-    author="robinsh"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="b83cba7b-4627-4ba7-b5d0-f1039fe30e78"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="robinsh" />
+---
+title: 如何监视存储帐户 | Azure
+description: 了解如何使用 Azure 门户在 Azure 中监视存储帐户。
+services: storage
+documentationcenter: 
+author: robinsh
+manager: timlt
+editor: tysonn
+
+ms.assetid: b83cba7b-4627-4ba7-b5d0-f1039fe30e78
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: robinsh
+---
 
 # 在 Azure 门户预览中监视存储帐户
 ## 概述
 
 可在 [Azure 门户预览](https://portal.azure.cn)中监视存储帐户。配置存储帐户以便通过门户进行监视时，Azure 存储使用[存储分析](http://msdn.microsoft.com/zh-cn/library/azure/hh343270.aspx)跟踪帐户和日志请求数据的指标。
 
-> [AZURE.NOTE] 在 [Azure 门户预览](https://portal.azure.cn)中查看监视数据会产生相关的额外费用。有关详细信息，请参阅<a href="http://msdn.microsoft.com/zh-cn/library/azure/hh360997.aspx">存储分析和计费</a>。<br />
+> [!NOTE] 在 [Azure 门户预览](https://portal.azure.cn)中查看监视数据会产生相关的额外费用。有关详细信息，请参阅<a href="http://msdn.microsoft.com/zh-cn/library/azure/hh360997.aspx">存储分析和计费</a>。<br />
 
 > Azure 文件存储目前支持存储分析指标，但尚不支持日志记录。可以通过 [Azure 门户预览](https://portal.azure.cn)为 Azure 文件存储启用指标。
 
-> 有关使用存储分析及其他工具来识别、诊断和排查 Azure 存储相关问题的深入指导，请参阅[监视、诊断和排查 Azure 存储问题](/documentation/articles/storage-monitoring-diagnosing-troubleshooting/)。
-
+> 有关使用存储分析及其他工具来识别、诊断和排查 Azure 存储相关问题的深入指导，请参阅[监视、诊断和排查 Azure 存储问题](./storage-monitoring-diagnosing-troubleshooting.md)。
 
 ## 如何：为存储帐户配置监视
 
@@ -59,7 +59,6 @@
 
 指标存储在存储帐户中的以下 4 个表中：$MetricsTransactionsBlob、$MetricsTransactionsTable、$MetricsTransactionsQueue 和 $MetricsCapacityBlob。有关详细信息，请参阅[关于存储分析指标](http://msdn.microsoft.com/zh-cn/library/azure/hh343258.aspx)。
 
-
 ## 如何：针对监视功能自定义仪表板
 
 在仪表板上，可以从 9 个可用指标中最多选择 6 个要在指标图表上显示的指标。对于每项服务（Blob、表和队列），“可用性”、“成功百分比”和“请求总数”均可供选择。对于最低监视或详细监视，仪表板上提供的指标是相同的。
@@ -78,7 +77,6 @@
 
 4. 要更改指标图表显示的时间范围，请在图表顶部选择 6 小时、24 小时或者 7 天。
 
-
 ## 如何：自定义“监视”页
 
 在“监视”页上，可以查看存储帐户的一组完整指标。
@@ -91,7 +89,6 @@
 
 ##<a name="how-to-add-metrics-to-the-metrics-table"></a> 如何：向指标表中添加指标
 
-
 1. 在 [Azure 门户预览](https://portal.azure.cn/)中，单击“存储”，然后单击存储帐户名称以打开仪表板。
 
 2. 单击“监视”。
@@ -100,7 +97,7 @@
 
 	![Monitoring\_VerboseDisplay](./media/storage-monitor-storage-account/Storage_Monitoring_VerboseDisplay.png)
 
-	> [AZURE.NOTE] 选择指标时应考虑成本。在刷新监视视图时会产生相关的事务和数据传出费用。有关详细信息，请参阅[存储分析和计费](http://msdn.microsoft.com/zh-cn/library/azure/hh360997.aspx)。
+	> [!NOTE] 选择指标时应考虑成本。在刷新监视视图时会产生相关的事务和数据传出费用。有关详细信息，请参阅[存储分析和计费](http://msdn.microsoft.com/zh-cn/library/azure/hh360997.aspx)。
 
 3. 单击“添加指标”。
 
@@ -112,13 +109,11 @@
 
 	![AddMetricsScrollbar](./media/storage-monitor-storage-account/Storage_AddMetrics_Scrollbar.png)
 
-
 5. 单击指标旁边的向下箭头可展开该指标范围内所含操作的列表。选择要在 [Azure 门户预览](https://portal.azure.cn)中的指标表中查看的每项操作。
 
 	下图中展开了“授权错误百分比”指标。
 
 	![ExpandCollapse](./media/storage-monitor-storage-account/Storage_AddMetrics_ExpandCollapse.png)
-
 
 6. 为所有服务选择指标后，单击“确定”（复选标记）以更新监视配置。所选指标将添加到指标表中。
 
@@ -134,8 +129,6 @@
 
 3.	要更改指标图表显示的时间范围，请在图表顶部选择“6 小时”、“24 小时”或者“7 天”。
 
-
-
 ## 如何：配置日志记录
 
 对于存储帐户中提供的每项存储服务（Blob、表和队列），可保存“读取请求”、“写入请求”和/或“删除请求”的诊断日志，并可为其中每项服务设置数据保留策略。
@@ -145,7 +138,6 @@
 2. 单击“配置”，然后使用键盘上的向下箭头向下滚动到“日志记录”。
 
 	![Storagelogging](./media/storage-monitor-storage-account/Storage_LoggingOptions.png)
-
 
 3. 为每项服务（Blob、表和队列）配置下列内容：
 

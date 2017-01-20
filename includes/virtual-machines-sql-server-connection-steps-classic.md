@@ -10,7 +10,6 @@
 
 	![DNS 名称](./media/virtual-machines-sql-server-connection-steps/sql-vm-dns-name.png)
 
-
 ### <a name="connect-to-the-database-engine-from-another-computer"></a> 从其他计算机连接到数据库引擎
 
 1. 在连接到 Internet 的计算机上，打开 SQL Server Management Studio。

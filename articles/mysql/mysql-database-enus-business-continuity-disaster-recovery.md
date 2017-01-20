@@ -1,10 +1,27 @@
-<properties linkid="" urlDisplayName="" pageTitle="MySQL Service Questions – Microsoft Azure Cloud" metaKeywords="Azure Cloud, technical documentation, documents and resources, MySQL, database, FAQ, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="Provides quick answers for common technical questions encountered by users when using MySQL Database on Azure. Contact technical support if you have any further questions." metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="v-chuw" solutions="" manager="RongYu" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: MySQL Service Questions – Microsoft Azure Cloud
+metaKeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, FAQ, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+description: Provides quick answers for common technical questions encountered by users when using MySQL Database on Azure. Contact technical support if you have any further questions.
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: v-chuw
+solutions: 
+manager: RongYu
+editor: 
 
-<tags ms.service="mysql_en" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="en" />
+ms.service: mysql_en
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: en
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-business-continuity-disaster-recovery/)
-- [English](/documentation/articles/mysql-database-enus-business-continuity-disaster-recovery/)
+- [中文](./mysql-database-business-continuity-disaster-recovery.md)
+- [English](./mysql-database-enus-business-continuity-disaster-recovery.md)
 
 # MySQL on Azure service continuity solutions
 
@@ -42,7 +59,7 @@ Following are common scenarios and corresponding solutions.
 			An operational error by a database administrator in a production environment that causes the loss of some important data and requires rapid recovery.
 		</td>
 		<td>
-			Backup and restore -- point-in-time restore feature of MySQL can roll back to any point in time during the last seven days. For the specific steps, see <a href="https://www.azure.cn/documentation/articles/mysql-database-point-in-time-restore/" target="_blank">MySQL on Azure backup and restore—restore the database to any point in time</a>.
+			Backup and restore -- point-in-time restore feature of MySQL can roll back to any point in time during the last seven days. For the specific steps, see <a href="./mysql-database-point-in-time-restore.md" target="_blank">MySQL on Azure backup and restore—restore the database to any point in time</a>.
 		</td>
 	</tr>
 	<tr>
@@ -53,7 +70,7 @@ Following are common scenarios and corresponding solutions.
 			In a production environment, the failure of a particular upgrade causes compatibility problems that make it impossible for the service to be performed normally.
 		</td>
 		<td>
-			Create a snapshot backup of the database before you upgrade. If the upgrade encounters a problem, you can then quickly restore the entire backup to the original instance or to a new instance. For the specific steps, see <a href="https://www.azure.cn/documentation/articles/mysql-database-point-in-time-restore/" target="_blank">Backup and restore</a>.
+			Create a snapshot backup of the database before you upgrade. If the upgrade encounters a problem, you can then quickly restore the entire backup to the original instance or to a new instance. For the specific steps, see <a href="./mysql-database-point-in-time-restore.md" target="_blank">Backup and restore</a>.
 		</td>
 	</tr>
 	<tr>
@@ -82,22 +99,21 @@ MySQL on Azure now provides offsite recovery features to help you maintain servi
 
 * Self-service disaster recovery: If you are using a production environment with higher requirements in terms of recovery times, you can use the PowerShell command line to manually restore the affected instances offsite when a disaster occurs.
 
-
 ### The principle of offsite recovery: ###
 When incidents happen, user can either rely on self-service by specifying the point in time he wants to restore, or reply on PaaS level failover, which will specify the incident time point by default, MySQL on Azure will restore the time point with best effort. MySQL on Azure stores users data in Azure page blob with Read-Access Geographically Redundant Storage (RA-GRS) to maintain 3 intra-region data copy and 3 cross-region data copy. When user initiates geo restore, if storage in source location remain intact during incidents, MySQL on Azure will based on the time point user specified to copy data from source location to target location, and then restore MySQL server instance; if storage in source location is damaged, MySQL on Azure will restore the closest time point based on Azure storage geo redundant data copy in target location, and then restore MySQL server instance.
 
 ### Offsite recovery performance indicators: ###
 ERT<3 hours，RPO< 1 hour. <br>
->[AZURE.NOTE] ERT, RTO, and RPO are project indicators that are intended only for reference purposes. These indicators only appear in regional disasters and are not part of the MySQL database service’s service level agreement (SLA).
+>[!NOTE] ERT, RTO, and RPO are project indicators that are intended only for reference purposes. These indicators only appear in regional disasters and are not part of the MySQL database service’s service level agreement (SLA).
 
 ### User self-service process: ###
-If a disaster occurs and you can use the Azure portal, you can use the offsite restore process in [backup and restore](/documentation/articles/mysql-database-point-in-time-restore/) to perform the operation. However, if regional disasters occur frequently, it will not be possible to obtain correct information on the instance in the Azure portal. In such a situation, we recommend that you perform an offsite restore operation on the instance by using PowerShell:
+If a disaster occurs and you can use the Azure portal, you can use the offsite restore process in [backup and restore](./mysql-database-point-in-time-restore.md) to perform the operation. However, if regional disasters occur frequently, it will not be possible to obtain correct information on the instance in the Azure portal. In such a situation, we recommend that you perform an offsite restore operation on the instance by using PowerShell:
 
 ```
 New-AzureRmResource -ResourceType "Microsoft.MySql/servers" -ResourceName <ResourceName> -ApiVersion 2015-09-01 -ResourceGroupName <ResourceGroupName> -Location <TargetLocation> -SkuObject @{name=<targetSKU>} -Properties @{creationSource=@{server='<SourceServerName>';region='<SourceLocation>';timepoint='<TimeTag>'};version = '<version number>'}
 ```
 
->[AZURE.NOTE] 
+>[!NOTE] 
 1. Timepoint is an optional value. If you do not enter this value, the default is the current point in time. If you want to enter this value, you must use the date-time format in JSON, for example, 2016-05-06T08:00:00. We use UTC time universally.<br>
 2. Instances that were created by using the Azure portal will be allocated to the “Default-MySQL-ChinaNorth” and “Default-MySQL-ChinaEast” resource groups by default on the basis of geographic location.
 

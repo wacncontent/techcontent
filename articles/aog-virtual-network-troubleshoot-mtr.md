@@ -1,18 +1,17 @@
-<properties
-	pageTitle="Azure 中使用 MTR 进行网络故障排查"
-	description="Azure 中使用 MTR 进行网络故障排查。"
-	services="virtual-network"
-	documentationCenter=""
-	authors="Kyle Fu"
-	manager=""
-	editor=""
-	tags="Azure,MTR,WinMTR,ICMP,网络"/>
+---
+title: Azure 中使用 MTR 进行网络故障排查
+description: Azure 中使用 MTR 进行网络故障排查。
+services: virtual-network
+documentationCenter: 
+authors: Kyle Fu
+manager: 
+editor: 
+tags: Azure,MTR,WinMTR,ICMP,网络
 
-<tags
-	ms.service="virtual-network-aog"
-	ms.date="10/20/2016"
-	wacn.date="11/03/2016"/>
-
+ms.service: virtual-network-aog
+ms.date: 10/20/2016
+wacn.date: 11/03/2016
+---
 
 #Azure 中使用 MTR 进行网络故障排查
 
@@ -76,7 +75,7 @@ WinMTR 的界面非常简洁，如下图。
 
 除了从公网到 Azure 的测试，我们还能从 Azure 内部发起到公网的 IP 或主机的测试。正如前文提到的，Azure Load Balancer 不开放 ICMP 协议。所以通常情况下，此类测试无法完成。但是，我们可以通过一定方法来避开 Azure Load Balancer 对 ICMP 的限制。
 
-在经典模式下部署的虚拟机中，我们可以通过设置 ILPIP 来实现。具体设置方法请参考：[https://www.azure.cn/documentation/articles/virtual-networks-instance-level-public-ip](/documentation/articles/virtual-networks-instance-level-public-ip/)。
+在经典模式下部署的虚拟机中，我们可以通过设置 ILPIP 来实现。具体设置方法请参考：[https://www.azure.cn/documentation/articles/virtual-networks-instance-level-public-ip](./virtual-network/virtual-networks-instance-level-public-ip.md)。
 
 在资源管理器模式下，创建的虚拟机默认会配置 Public IP 和 NSG。而 NSG 在通常情况下，也不允许 ICMP 包的传输。所以要在资源管理器模式下的虚拟机中使用 WinMTR，则需要将 NSG 从虚拟机所使用的网卡中移除（设置对应网卡的 NSG 为“无”），或者添加一个优先级最高，协议为 Any，端口范围为*，动作为 Allow 的 NSG 规则（见下图）。
 
@@ -90,8 +89,6 @@ WinMTR 的界面非常简洁，如下图。
 
 ![](./media/aog-virtual-network-troubleshoot-mtr/host-azure-test-page2.png)
  
- 
-
 ##延伸阅读
 
 MTR 测试会得出各式各样的结果。当网络有故障时，不同的结果通常都需要有丰富的经验才能做出正确的判断。这里推荐一篇文章供大家阅读，帮助大家能够尽可能正确解读 MTR 测试的结果。
@@ -99,7 +96,4 @@ MTR 测试会得出各式各样的结果。当网络有故障时，不同的结�
 [使用 MTR 诊断网络问题（中文）](http://www.tuicool.com/articles/emINv2v)
 
 [Diagnosing Network Issues with MTR（上一个链接的英文原版）](https://www.linode.com/docs/networking/diagnostics/diagnosing-network-issues-with-mtr/)
-
-
-
 

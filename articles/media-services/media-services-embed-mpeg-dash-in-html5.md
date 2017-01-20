@@ -1,24 +1,21 @@
-<properties 
-	pageTitle="使用 DASH.js 在 HTML5 应用程序中嵌入 MPEG-DASH 自适应流式处理视频 | Azure" 
-	description="本主题演示如何使用 DASH.js 在 HTML5 应用程序中嵌入 MPEG-DASH 自适应流式处理视频。" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor="" 
-	services="media-services" 
-	documentationCenter=""/>  
+---
+title: 使用 DASH.js 在 HTML5 应用程序中嵌入 MPEG-DASH 自适应流式处理视频 | Azure
+description: 本主题演示如何使用 DASH.js 在 HTML5 应用程序中嵌入 MPEG-DASH 自适应流式处理视频。
+authors: Juliako
+manager: erikre
+editor: 
+services: media-services
+documentationCenter: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016" 
-	wacn.date="11/14/2016" 
-	ms.author="juliako"/>  
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 11/14/2016
+ms.author: juliako
+---
 
 #使用 DASH.js 在 HTML5 应用程序中嵌入 MPEG-DASH 自适应流式处理视频
 
@@ -27,7 +24,6 @@
 MPEG-DASH 是视频内容自适应流式处理的 ISO 标准，为那些希望传送高质量自适应视频流式处理输出的用户提供了显著的好处。使用 MPEG-DASH，当在网络阻塞时，视频流将自动降低到较低清晰度。这将减少在播放器下载下几秒钟要播放内容（又称缓冲）时观众看到“暂停”视频的可能性。当网络拥塞减少时，视频播放器将转而恢复到较高质量的流。这种适应所需带宽的能力也会导致视频开始的速度更快。这意味着可以在快速下载较低质量段播放最初的几秒钟，然后在已缓冲足够内容后提升到更高质量。
 
 Dash.js 是用 JavaScript 编写的开源 MPEG-DASH 视频播放器。其目标是提供可以在需要视频播放的应用程序中自由重用的功能强大的跨平台播放器。它在支持 W3C 媒体源扩展 (MSE) 的任何浏览器（目前为 Chrome、Microsoft Edge 和 IE11，其他浏览器已指示有意支持 MSE）中提供 MPEG-DASH 播放。有关 DASH.js、js 的详细信息，请参阅 GitHub dash.js 存储库。
-
 
 ##创建基于浏览器的流式处理视频播放器
 
@@ -63,7 +59,6 @@ Dash.js 是用 JavaScript 编写的开源 MPEG-DASH 视频播放器。其目标�
 
 	<!-- DASH-AVC/265 reference implementation -->
 	< script src="js/dash.all.js"></script>
-
 
 接下来，创建一个函数以便在加载页面时初始化播放器。在加载 dash.all.js 的代码行后添加以下脚本：
 
@@ -102,11 +97,9 @@ Dash.js 是用 JavaScript 编写的开源 MPEG-DASH 视频播放器。其目标�
 
 若要播放视频，请将浏览器指向 basicPlayback.html 文件，并单击所显示的视频播放器上的“播放”。
 
-
-
 ##另请参阅
 
-[开发视频播放器应用程序](/documentation/articles/media-services-develop-video-players/)
+[开发视频播放器应用程序](./media-services-develop-video-players.md)
 
 [GitHub dash.js 存储库](https://github.com/Dash-Industry-Forum/dash.js)
 

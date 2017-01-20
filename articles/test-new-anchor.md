@@ -1,35 +1,35 @@
-<properties 
-	pageTitle="测试文档" 
-	description="This tutorial walks you through the steps of implementing a Video-on-Demand (VoD) content delivery application with Azure Media Services using REST APIs." 
-	services="media-services" 
-	documentationCenter=".net" 
-	authors="" 
-	manager="Tiffena" 
-	editor="Eric Chen"/>
+---
+title: 测试文档
+description: This tutorial walks you through the steps of implementing a Video-on-Demand (VoD) content delivery application with Azure Media Services using REST APIs.
+services: media-services
+documentationCenter: .net
+authors: 
+manager: Tiffena
+editor: Eric Chen
 
-<tags ms.service="test" ms.date="03/12/2015" wacn.date="06/09/2015"/>
-
+ms.service: test
+ms.date: 03/12/2015
+wacn.date: 06/09/2015
+---
 
 # 这是一个测试文档用于测试新标签的网页渲染支持 
 
 V.0625.1
 
-> [AZURE.SELECTOR]
-- [Configure VPN connectivity](/documentation/articles/hdinsight-hbase-geo-replication-configure-VNets/)
-- [Configure DNS](/documentation/articles/hdinsight-hbase-geo-replication-configure-DNS/)
+> [!div class="op_single_selector"]
+- [Configure VPN connectivity](./hdinsight/hdinsight-hbase-geo-replication-configure-VNets.md)
+- [Configure DNS](./hdinsight/hdinsight-hbase-geo-replication-configure-DNS.md)
 - [portal](http://www.azure.cn)
  
-
 ##test direct reference of md file
 
-> [AZURE.TIP] Subscribe to the [Guest OS Update RSS Feed][rss] to receive the most timely notification on all Guest OS changes. Changes mentioned on that feed will be integrated into this page approximately every week.
+> [!TIP] Subscribe to the [Guest OS Update RSS Feed][rss] to receive the most timely notification on all Guest OS changes. Changes mentioned on that feed will be integrated into this page approximately every week.
 
-> [AZURE.IMPORTANT] To ensure that your service works as expected, you must deploy it to Guest OS release that is compatible with the version of the Azure SDK used to develop your service. If you do not, the deployed service may exhibit errors in the cloud that were not apparent in the development environment.
+> [!IMPORTANT] To ensure that your service works as expected, you must deploy it to Guest OS release that is compatible with the version of the Azure SDK used to develop your service. If you do not, the deployed service may exhibit errors in the cloud that were not apparent in the development environment.
 
-> [AZURE.WARNING] The retirement of Guest OS family 1 began June 1, 2013 and is scheduled to complete soon. Do not create new installations and upgrade older ones using this Guest OS family. For more information see [Azure Guest OS Family 1 Retirement Information][fam1retire]
+> [!WARNING] The retirement of Guest OS family 1 began June 1, 2013 and is scheduled to complete soon. Do not create new installations and upgrade older ones using this Guest OS family. For more information see [Azure Guest OS Family 1 Retirement Information][fam1retire]
 
 ##测试Learning Map
-
 
 <object type="image/svg+xml" data="https://wacn.blob.core.chinacloudapi.cn/documents/WacnElasticScaleMapcoded.svg" width="100%" height="100%">
 </object>
@@ -44,11 +44,10 @@ V.0625.1
 <object type="image/svg+xml" data="./media/test-new-anchor/WacnElasticScaleMapcoded.svg" width="100%" height="100%">
 </object>
 
->[AZURE.NOTE]
-> To complete this tutorial, you need an Azure account. If you don't have an account, you can create a free trial account in just a couple of minutes. For details, see <a href="/pricing/1rmb-trial/" target="_blank">Azure Trial</a>.
+>[!NOTE]
+> To complete this tutorial, you need an Azure account. If you don't have an account, you can create a free trial account in just a couple of minutes. For details, see <a href="https://www.azure.cn/pricing/1rmb-trial/" target="_blank">Azure Trial</a>.
 
-
->[AZURE.NOTE] From now on the new URI will be used in this tutorial.
+>[!NOTE] From now on the new URI will be used in this tutorial.
 
 ## <a id="upload"></a>Create a new asset and upload a video file with REST API
 
@@ -56,7 +55,6 @@ In Media Services, you upload your digital files into an asset. The **Asset** en
 
 One of the values that you have to provide when creating an asset is asset creation options. The **Options** property is an enumeration value that describes the encryption options that an Asset can be created with. A valid value is one of the values from the list below, not a combination of values from this list:
 
- 
 - **None** = **0** - No encryption is used. Note that when using this option your content is not protected in transit or at rest in storage.
 
 	If you plan to deliver an MP4 using progressive download, use this option. 
@@ -86,7 +84,6 @@ The following example shows how to create an asset.
 	
 	{"Name":"BigBuckBunny.mp4", "Options":"0"}
 	
-
 **HTTP Response**
 
 If successful, the following is returned:
@@ -146,7 +143,6 @@ After you upload your digital media file into a blob container, you will use the
 	   "ParentAssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1"
 	}
 
-
 **HTTP Response**
 
 	HTTP/1.1 201 Created
@@ -180,7 +176,6 @@ After you upload your digital media file into a blob container, you will use the
 	   "MimeType":"video/mp4",
 	   "ContentChecksum":null
 	}
-
 
 ### Creating the AccessPolicy with write permission. 
 
@@ -235,7 +230,6 @@ The following example shows how to create an AccessPolicy:
 
 To receive the actual upload URL, create a SAS Locator. Locators define the start time and type of connection endpoint for clients that want to access Files in an Asset. You can create multiple Locator entities for a given AccessPolicy and Asset pair to handle different client requests and needs. Each of these Locators use the StartTime value plus the DurationInMinutes value of the AccessPolicy to determine the length of time a URL can be used. For more information, see [Locator](https://msdn.microsoft.com/zh-CN/library/azure/hh974308.aspx).
 
-
 A SAS URL has the following format:
 
 	{https://myaccount.blob.core.windows.net}/{asset name}/{video file name}?{SAS signature}
@@ -267,7 +261,6 @@ The following example shows how to create a SAS URL Locator, as defined by the T
 	   "StartTime":"2015-02-18T16:45:53",
 	   "Type":1
 	}
-
 
 **HTTP Response**
 
@@ -305,10 +298,9 @@ If successful, the following response is returned:
 	
 Once you have the AccessPolicy and Locator set, the actual file is uploaded to an Azure Blob Storage container using the Azure Storage REST APIs. You can either upload in page or block blobs. 
 
->[AZURE.NOTE] You must add the file name for the file you want to upload to the Locator **Path** value received in the previous section. For example, https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . . 
+>[!NOTE] You must add the file name for the file you want to upload to the Locator **Path** value received in the previous section. For example, https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . . 
 
 For more information on working with Azure storage blobs, see [Blob Service REST API](https://msdn.microsoft.com/zh-CN/library/azure/dd135733.aspx).
-
 
 ### Update the AssetFile 
 
@@ -332,7 +324,6 @@ Now that you've uploaded your file, update the FileAsset size (and other) inform
 	   "ParentAssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1"
 	}
 
-
 **HTTP Response**
 
 If successful, the following is returned:
@@ -341,7 +332,6 @@ If successful, the following is returned:
 ## Delete the Locator and AccessPolicy 
 
 **HTTP Request**
-
 
 	DELETE https://wamsbayclus001rest-hs.cloudapp.net/api/Locators('nb%3Alid%3AUUID%3Aaf57bdd8-6751-4e84-b403-f3c140444b54') HTTP/1.1
 	DataServiceVersion: 1.0;NetFx
@@ -352,7 +342,6 @@ If successful, the following is returned:
 	x-ms-version: 2.8
 	Host: wamsbayclus001rest-hs.cloudapp.net
 
-	
 **HTTP Response**
 
 If successful, the following is returned:
@@ -378,7 +367,6 @@ If successful, the following is returned:
 	HTTP/1.1 204 No Content 
 	...
 
- 
 ## <a id="configure_streaming_units"></a>Configure streaming units with REST API
 
 When working with Azure Media Services one of the most common scenarios is delivering adaptive bitrate streaming to your clients. With adaptive bitrate streaming, the client can switch to a higher or lower bitrate stream as the video is displayed based on the current network bandwidth, CPU utilization, and other factors. Media Services supports the following adaptive bitrate streaming technologies: HTTP Live Streaming (HLS), Smooth Streaming, MPEG DASH, and HDS (for Adobe PrimeTime/Access licensees only). 
@@ -394,7 +382,7 @@ With dynamic packaging you only need to store and pay for the files in single st
 
 Note that in addition to being able to use the dynamic packaging capabilities, On-Demand Streaming reserved units provide you with dedicated egress capacity that can be purchased in increments of 200 Mbps. By default, on-demand streaming is configured in a shared-instance model for which server resources (for example, compute, egress capacity, etc.) are shared with all other users. To improve an on-demand streaming throughput, it is recommended to purchase On-Demand Streaming reserved units.
 
->[AZURE.NOTE] For information about pricing details, see [Media Services Pricing Details](http://go.microsoft.com/fwlink/?LinkId=275107).
+>[!NOTE] For information about pricing details, see [Media Services Pricing Details](http://go.microsoft.com/fwlink/?LinkId=275107).
 
 To change the number of on-demand streaming reserved units, do the following:
 	
@@ -451,7 +439,6 @@ If successful, the following is returned:
 	Date: Fri, 16 Jan 2015 22:16:43 GMT
 	Content-Length: 0
 
-	
 ### <a id="long_running_op_status"></a> Check on the status of a long-running operation
 
 The allocation of any new units of on-demand streaming takes around 20 minutes to complete. To check the status of the operation use the **Operations** method and specify the Id of the operation. The operation Id was returned in the response to the **Scale** request.
@@ -498,7 +485,6 @@ The allocation of any new units of on-demand streaming takes around 20 minutes t
 	   }
 	}
 
-
 ## <a id="encode"></a>Encode the source file into a set of adaptive bitrate MP4 files
 
 After ingesting Assets into Media Services, media can be encoded, transmuxed, watermarked, and so on, before it is delivered to clients. These activities are scheduled and run against multiple background role instances to ensure high performance and availability. These activities are called Jobs and each [Job](https://msdn.microsoft.com/zh-CN/library/azure/hh974289.aspx) is comprised of atomic Tasks that do the actual work on the Asset file. 
@@ -529,7 +515,6 @@ The following code requests the encoder's id.
 	x-ms-version: 2.8
 	Host: wamsbayclus001rest-hs.cloudapp.net
 	
-
 **HTTP Response**
 
 	HTTP/1.1 200 OK
@@ -658,7 +643,6 @@ If successful, the following response is returned:
 	   }
 	}
 
-
 There are a few important things to note in any Job request:
 
 - TaskBody properties MUST use literal XML to define the number of input, or output assets that will be used by the Task. The Task topic contains the XML Schema Definition for the XML.
@@ -668,7 +652,7 @@ There are a few important things to note in any Job request:
 - Tasks must not form a cycle.
 - The value parameter that you pass to JobInputAsset or JobOutputAsset represents the index value for an Asset. The actual Assets are defined in the InputMediaAssets and OutputMediaAssets navigation properties on the Job entity definition. 
 
->[AZURE.NOTE] Because Media Services is built on OData v3, the individual assets in InputMediaAssets and OutputMediaAssets navigation property collections are referenced through a "__metadata : uri" name-value pair. 
+>[!NOTE] Because Media Services is built on OData v3, the individual assets in InputMediaAssets and OutputMediaAssets navigation property collections are referenced through a "__metadata : uri" name-value pair. 
 
 - InputMediaAssets maps to one or more Assets you have created in Media Services. OutputMediaAssets are created by the system. They do not reference an existing asset.
 - OutputMediaAssets can be named using the assetName attribute. If this attribute is not present, then the name of the OutputMediaAsset will be whatever the inner text value of the <outputAsset> element is with a suffix of either the Job Name value, or the Job Id value (in the case where the Name property isn't defined). For example, if you set a value for assetName to "Sample", then the OutputMediaAsset Name property would be set to "Sample". However, if you did not set a value for assetName, but did set the job name to "NewJob", then the OutputMediaAsset Name would be "JobOutputAsset(value)_NewJob". 
@@ -676,7 +660,6 @@ There are a few important things to note in any Job request:
 	The following example shows how to set the assetName attribute:
 	
 		"<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetName=\"CustomOutputAssetName\">JobOutputAsset(0)</outputAsset></taskBody>"
-
 
 - To enable task chaining:
 
@@ -701,7 +684,6 @@ You can retrieve the Job status by using the State property, as shown in the fol
 	Host: wamsbayclus001rest-hs.net
 	Content-Length: 0
 
-
 **HTTP Response**
 
 If successful, the following response is returned:
@@ -720,16 +702,13 @@ If successful, the following response is returned:
 	
 	{"d":{"State":2}}
 
-
 ### Cancel a job
 
 Media Services allows you to cancel running jobs through the CancelJob function. This call will return a 400 error code if you try to cancel a Job when its state is canceled, canceling, error, or finished.
 
 The following example shows how to call CancelJob.
 
-
 **HTTP Request**
-
 
 	GET https://wamsbayclus001rest-hs.net/API/CancelJob?jobid='nb%3ajid%3aUUID%3a71d2dd33-efdf-ec43-8ea1-136a110bd42c' HTTP/1.1
 	Content-Type: application/json;odata=verbose
@@ -740,16 +719,13 @@ The following example shows how to call CancelJob.
 	Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1336908753&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=kolAgnFfbQIeRv4lWxKSFa4USyjWXRm15Kd%2bNd5g8eA%3d
 	Host: wamsbayclus001rest-hs.net
 
-
 If successful, a 204 response code is returned with no message body.
 
->[AZURE.NOTE] You must URL-encode the job id (normally nb:jid:UUID: somevalue) when passing it in as a parameter to CancelJob.
-
+>[!NOTE] You must URL-encode the job id (normally nb:jid:UUID: somevalue) when passing it in as a parameter to CancelJob.
 
 ### Get the output asset 
 
 In the next section we are going to configure the delivery policy for the job's output asset (the encoded asset). The following code shows how to request the output asset Id. 
-
 
 **HTTP Request**
 
@@ -763,7 +739,6 @@ In the next section we are going to configure the delivery policy for the job's 
 	x-ms-version: 2.8
 	Host: wamsbayclus001rest-hs.cloudapp.net
 	
-
 **HTTP Response**
 
 	HTTP/1.1 200 OK
@@ -796,13 +771,11 @@ In the next section we are going to configure the delivery policy for the job's 
 	   ]
 	}
 
-
 ## <a id="configure_delivery_method"></a>Configure delivery policy for the encoded asset
 
 One of the steps in the Media Services content delivery workflow is configuring asset delivery policies. Some things that the asset delivery policy configuration includes: what protocols can be used to deliver the asset (for example, MPEG DASH, HLS, HDS, Smooth Streaming or all), whether you want to dynamically encrypt your asset and how (envelope or common encryption). 
 
 The following **AssetDeliveryPolicies** HTTP Request specifies not to apply dynamic encryption (AssetDeliveryPolicyType could be one of these values: None = 0, Blocked = 1, NoDynamicEncryption = 2, DynamicEnvelopeEncryption = 3, DynamicCommonEncryption = 4) and to deliver the stream in any of the following protocols:  MPEG DASH, HLS, and Smooth Streaming protocols (AssetDeliveryProtocol could be a combination of the following values: None = 0,        SmoothStreaming = 1, Dash = 2, HLS = 4, Hds = 8, All = 65535). 
-
 
 As a result of this delivery configuration you would be able to request a Smooth, HLS, or MPEG DASH streams using the following formats:
 
@@ -818,9 +791,7 @@ MPEG DASH
 
 	{streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf) 
 
-
 ### Create AssetDeliveryPolicies
-
 
 **HTTP Request**
 		
@@ -836,7 +807,6 @@ MPEG DASH
 	Content-Length: 83
 	
 	{"Name":"Clear Policy", "AssetDeliveryPolicyType":"2","AssetDeliveryProtocol":"7"} 
-
 
 **HTTP Response**
 	
@@ -865,7 +835,6 @@ MPEG DASH
 	   "LastModified":"2015-01-19T09:13:18.911615Z"
 	}
     
-
 ### Link the asset delivery policy with an asset
 
 The following HTTP request associates the specified delivery policy with the specified asset.  
@@ -885,19 +854,16 @@ The following HTTP request associates the specified delivery policy with the spe
 	
 	{ "uri":"https://wamsbayclus001rest-hs.cloudapp.net/api/AssetDeliveryPolicies('nb%3Aadpid%3AUUID%3Aef97ae36-b898-4b8a-b427-7819ee726276')" }
 
-
 **HTTP Response**
 
 	HTTP/1.1 204 No Content
     . . . 
-
 
 ## <a id="publish_get_urls"></a>Publish the asset and get streaming and progressive download URLs with REST API
 
 To stream or download an asset you first need to "publish" it by creating a locator. Locators provide access to files contained in the asset. Media Services supports two types of locators: OnDemandOrigin locators, used to stream media (for example, MPEG DASH, HLS, or Smooth Streaming) and Access Signature (SAS) locators, used to download media files.
 
 Once you create the locators, you can build the URLs that are used to stream or download your files. 
-
 
 An on-demand URL for Smooth Streaming has the following format:
 
@@ -910,7 +876,6 @@ An on-demand URL for HLS has the following format:
 An on-demand URL for MPEG DASH has the following format:
 
 	{streaming endpoint name-media services account name}.streaming.mediaservices.windows.net/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
-
 
 A SAS URL used to download files has the following format:
 
@@ -943,9 +908,8 @@ The following example shows how to specify the AccessPolicy for read permissions
 
 If successful, a 201 success code is returned describing the AccessPolicy entity that you created. You will then use the AccessPolicy Id along with the Asset Id of the asset that contains the file you want to deliver(such as an output asset) to create the Locator entity.
 
->[AZURE.NOTE]
+>[!NOTE]
 This basic workflow is the same as uploading a file when ingesting an Asset (as was discussed earlier in this topic). Also, like uploading files, if you (or your clients) need to access your files immediately, set your StartTime value to five minutes before the current time. This action is necessary because there may be clock skew between the client and Media Services. The StartTime value must be in the following DateTime format: YYYY-MM-DDTHH:mm:ssZ (for example, "2014-05-23T17:53:50Z").
-
 
 ###Creating a SAS URL for downloading content 
 
@@ -966,7 +930,6 @@ The following code shows how to get a URL that can be used to download a media f
 
 If successful, the following response is returned:
 
-	
 	HTTP/1.1 201 Created
 	Cache-Control: no-cache
 	Content-Length: 1150
@@ -1007,17 +970,16 @@ If successful, the following response is returned:
 	   }
 	}
 
-
 The returned **Path** property contains the SAS URL.
 
->[AZURE.NOTE]
+>[!NOTE]
 If you download storage encrypted content, you must manually decrypt it before rendering it, or use the Storage Decryption MediaProcessor in a processing task to output processed files in the clear to an OutputAsset and then download from that Asset. For more information on processing, see Creating an Encoding Job with the Media Services REST API. Also, SAS URL Locators cannot be updated after they have been created. For example, you cannot reuse the same Locator with an updated StartTime value. This is because of the way SAS URLs are created. If you want to access an asset for download after a Locator has expired, then you must create a new one with a new StartTime.
 
 ###Download files
 
 Once you have the AccessPolicy and Locator set, you can download files using the Azure Storage REST APIs.  
 
->[AZURE.NOTE] You must add the file name for the file you want to download to the Locator **Path** value received in the previous section. For example, https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . . 
+>[!NOTE] You must add the file name for the file you want to download to the Locator **Path** value received in the previous section. For example, https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . . 
 
 For more information on working with Azure storage blobs, see [Blob Service REST API](https://msdn.microsoft.com/zh-CN/library/azure/dd135733.aspx).
 
@@ -1039,9 +1001,7 @@ As a result of the encoding job that you performed earlier (encoding into Adapti
 	
 	https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_56kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
-
 ###Creating an on-demand origin URL for streaming content
-
 
 The following code shows how to create an origin URL Locator:
 
@@ -1112,7 +1072,6 @@ To stream MPEG DASH, append (format=mpd-time-csf) after the "/manifest".
 
 	http://amstestaccount001.streaming.mediaservices.windows.net/ebf733c4-3e2e-4a68-b67b-cc5159d1d7f2/BigBuckBunny.ism/manifest(format=mpd-time-csf)
 
-
 ## <a id="play"></a>Play your content  
 
 Once you have SAS URLs, you can progressively download your MP4 files by pasting a URL into a browser (for example, IE, Chrome, Safari).
@@ -1125,18 +1084,13 @@ To test MPEG DASH, use [http://dashif.org](http://dashif.org/reference/players/j
 
 To test HLS, use iOS or Safari devices, or [3ivx-hls-player](http://apps.microsoft.com/windows/zh-CN/app/3ivx-hls-player/f79ce7d0-2993-4658-bc4e-83dc182a0614). 
 
-
-
 <h2>Additional Resources</h2>
 - <a href="http://channel9.msdn.com/Shows/Azure-Friday/Azure-Media-Services-101-Get-your-video-online-now-">Azure Media Services 101 - Get your video online now!</a>
 - <a href="http://channel9.msdn.com/Shows/Azure-Friday/Azure-Media-Services-102-Dynamic-Packaging-and-Mobile-Devices">Azure Media Services 102 - Dynamic Packaging and Mobile Devices</a>
 
-
 <!-- Anchors. -->
-
 
 <!-- URLs. -->
   [Web Platform Installer]: http://go.microsoft.com/fwlink/?linkid=255386
   [Management Portal]: http://manage.windowsazure.cn/
-
 

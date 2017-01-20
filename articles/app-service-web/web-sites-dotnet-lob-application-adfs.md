@@ -1,28 +1,28 @@
-<properties
-    pageTitle="使用 AD FS 身份验证创建业务线 Azure 应用 | Azure"
-    description="了解如何在 Azure App Service 中创建使用本地 STS 进行身份验证的业务线应用。本教程将 AD FS 定位为本地 STS。"
-    services="app-service\web"
-    documentationcenter=".net"
-    author="cephalin"
-    manager="wpickett"
-    editor="" />  
+---
+title: 使用 AD FS 身份验证创建业务线 Azure 应用 | Azure
+description: 了解如何在 Azure App Service 中创建使用本地 STS 进行身份验证的业务线应用。本教程将 AD FS 定位为本地 STS。
+services: app-service\web
+documentationcenter: .net
+author: cephalin
+manager: wpickett
+editor: 
 
-<tags
-    ms.assetid="0fa9f7a1-37bd-4d11-845f-aeff6fc9e4ca"
-    ms.service="app-service-web"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="web"
-    ms.date="08/31/2016"
-    wacn.date="12/05/2016"
-    ms.author="cephalin" />
+ms.assetid: 0fa9f7a1-37bd-4d11-845f-aeff6fc9e4ca
+ms.service: app-service-web
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: web
+ms.date: 08/31/2016
+wacn.date: 12/05/2016
+ms.author: cephalin
+---
 
 # 使用 AD FS 身份验证创建业务线 Azure 应用
-本文说明如何使用本地 [Active Directory 联合身份验证服务](http://technet.microsoft.com/zh-cn/library/hh831502.aspx)作为标识提供者，在 [Azure App Service](/documentation/articles/app-service-value-prop-what-is/) 中创建 ASP.NET MVC 业务线应用程序。如果要在 Azure App Service 中创建业务线应用程序，并且组织要求在现场存储目录数据，则可以使用此方案。
+本文说明如何使用本地 [Active Directory 联合身份验证服务](http://technet.microsoft.com/zh-cn/library/hh831502.aspx)作为标识提供者，在 [Azure App Service](../app-service/app-service-value-prop-what-is.md) 中创建 ASP.NET MVC 业务线应用程序。如果要在 Azure App Service 中创建业务线应用程序，并且组织要求在现场存储目录数据，则可以使用此方案。
 
-> [AZURE.NOTE]
-有关 Azure App Service 的不同企业身份验证和授权选项的概述，请参阅 [Authenticate with on-premises Active Directory in your Azure app（在 Azure 应用中使用本地 Active Directory 进行身份验证）](/documentation/articles/web-sites-authentication-authorization/)。
+> [!NOTE]
+有关 Azure App Service 的不同企业身份验证和授权选项的概述，请参阅 [Authenticate with on-premises Active Directory in your Azure app（在 Azure 应用中使用本地 Active Directory 进行身份验证）](./web-sites-authentication-authorization.md)。
 > 
 > 
 
@@ -34,7 +34,7 @@
 * 用于在 Visual Studio 中进行调试和发布到 App Service Web Apps 的静态配置（配置一次，随时调试和发布）
 
 ## <a name="bkmk_need"></a>所需条件
-[AZURE.INCLUDE [free-trial-note](../../includes/free-trial-note.md)]
+[!INCLUDE [free-trial-note](../../includes/free-trial-note.md)]
 
 若要完成本教程，你需要以下项目：
 
@@ -53,7 +53,7 @@
 ## <a name="bkmk_setup"></a>设置示例应用程序
 1. 将 [WebApp-WSFederation-DotNet](https://github.com/AzureADSamples/WebApp-WSFederation-DotNet) 的示例解决方案克隆或下载到您的本地目录中。
    
-    > [AZURE.NOTE]
+    > [!NOTE]
     [README.md](https://github.com/AzureADSamples/WebApp-WSFederation-DotNet/blob/master/README.md) 中的说明介绍了如何使用 Azure Active Directory 设置应用程序。但本教程中使用 AD FS 进行设置，因此请改用本教程中的步骤。
     > 
     > 
@@ -138,7 +138,7 @@
 ## <a name="bkmk_rptrusts"></a>在 AD FS 管理中配置信赖方信任
 现在，需要先在 AD FS 管理中配置 RP 信任，然后才能使用示例应用程序并真正在 AD FS 上进行身份验证。您需要单独设置两个 RP 信任，一个用于调试环境，另一个用于已发布的 Web 应用。
 
-> [AZURE.NOTE]
+> [!NOTE]
 请务必针对两个环境重复以下步骤。
 > 
 > 
@@ -154,7 +154,7 @@
 5. 在“选择协议”页面上，单击“下一步”。
 6. 在“配置证书”页面上，单击“下一步”。
     
-    > [AZURE.NOTE]
+    > [!NOTE]
     由于你已在使用 HTTPS，因此加密令牌是可选的。如果你确实想要在此页上加密来自 AD FS 的令牌，则还必须在代码中添加令牌解密逻辑。有关详细信息，请参阅[手动配置 OWIN WS 联合身份验证中间件和接受加密令牌](http://chris.59north.com/post/2014/08/21/Manually-configuring-OWIN-WS-Federation-middleware-and-accepting-encrypted-tokens.aspx)。
     > 
     > 
@@ -165,13 +165,13 @@
     
     ![](./media/web-sites-dotnet-lob-application-adfs/4-configure-url.png)
     
-    > [AZURE.NOTE]
+    > [!NOTE]
     URL 指定身份验证成功后要将客户端发送到的位置。对于调试环境，它应为 <code>https://localhost:&lt;port&gt;/</code>。对于发布的 Web 应用，它应该是 Web 应用 URL。
     > 
     > 
 9. 在“配置标识符”页面上，确认您的项目 SSL URL 是否已列出，然后单击“下一步”。保持默认选择不变，同时单击“下一步”，一直到向导结束。
     
-    > [AZURE.NOTE]
+    > [!NOTE]
     在 Visual Studio 项目的 App\_Start\\Startup.Auth.cs 中，此标识符与联合身份验证期间 <code>WsFederationAuthenticationOptions.Wtrealm</code> 的值相匹配。默认情况下，将添加上一步中的应用程序 URL 作为 RP 标识符。
     > 
     > 
@@ -180,10 +180,10 @@
     * 名称 (http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name) - ASP.NET 用来解冻 `User.Identity.Name`。
     * 用户主体名称 (http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn) - 用于唯一标识组织中的用户。
     * 将成员资格分组为角色 (http://schemas.microsoft.com/ws/2008/06/identity/claims/role) - 可与 `[Authorize(Roles="role1, role2,...")]` 修饰符配合使用来授权控制器/操作。事实上，这可能不是角色授权的最有效方法。如果 AD 用户属于数百个安全组，他们将变成 SAML 令牌中的数百个角色声明。另一种方法是根据用户在某个特定组中成员身份，有条件地发送单个角色声明。但是，本教程将简化其结构。
-    * 名称 ID (http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier) - 可用于防伪验证。若要详细了解如何使其适用于防伪验证，请参阅 [Create a line-of-business Azure app with Azure Active Directory authentication（使用 Azure Active Directory 身份验证创建业务线 Azure 应用）](/documentation/articles/web-sites-dotnet-lob-application-azure-ad/#bkmk_crud)中的**Add line-of-business functionality**（添加业务线功能）部分。
+    * 名称 ID (http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier) - 可用于防伪验证。若要详细了解如何使其适用于防伪验证，请参阅 [Create a line-of-business Azure app with Azure Active Directory authentication（使用 Azure Active Directory 身份验证创建业务线 Azure 应用）](./web-sites-dotnet-lob-application-azure-ad.md#bkmk_crud)中的**Add line-of-business functionality**（添加业务线功能）部分。
     
-    > [AZURE.NOTE]
-    需要为应用程序配置的声明类型取决于应用程序的需求。有关 Azure Active Directory 应用程序支持的声明列表（即 RP 信任），请参阅[支持的令牌和声明类型](/documentation/articles/active-directory-token-and-claims/)。
+    > [!NOTE]
+    需要为应用程序配置的声明类型取决于应用程序的需求。有关 Azure Active Directory 应用程序支持的声明列表（即 RP 信任），请参阅[支持的令牌和声明类型](../active-directory/active-directory-token-and-claims.md)。
     > 
     > 
 11. 在“编辑声明规则”对话框中，单击“添加规则”。
@@ -224,7 +224,7 @@
     
     ![](./media/web-sites-dotnet-lob-application-adfs/8-all-claim-rules.png)
     
-    > [AZURE.NOTE]
+    > [!NOTE]
     同样，请确保对调试环境和发布的 Web 应用重复这些步骤。
     > 
     > 
@@ -327,14 +327,14 @@
 7. 再次将应用程序发布到 Azure App Service Web Apps 中，并测试实时应用程序的行为。
 
 ## <a name="bkmk_data"></a>连接到本地数据
-使用 AD FS 而不是 Azure Active Directory 实施业务线应用程序的一个原因是，既能符合法规要求，同时可将组织数据保留在外部。这可能还意味着，您在 Azure 中的 Web 应用必须访问本地数据库，因为您不得使用 [SQL 数据库](/home/features/sql-database/)作为 Web 应用的数据层。
+使用 AD FS 而不是 Azure Active Directory 实施业务线应用程序的一个原因是，既能符合法规要求，同时可将组织数据保留在外部。这可能还意味着，您在 Azure 中的 Web 应用必须访问本地数据库，因为您不得使用 [SQL 数据库](https://www.azure.cn/home/features/sql-database/)作为 Web 应用的数据层。
 
-在 Azure 中国区，Azure 应用服务 Web 应用仅支持通过[虚拟网络](/documentation/articles/app-service-vnet-integration-powershell/)访问本地数据库。
+在 Azure 中国区，Azure 应用服务 Web 应用仅支持通过[虚拟网络](./app-service-vnet-integration-powershell.md)访问本地数据库。
 
 ## <a name="bkmk_resources"></a>其他资源
-* [通过 SSL 和 Authorize 属性保护应用程序](/documentation/articles/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/#protect-the-application-with-ssl-and-the-authorize-attribute)
-* [Authenticate with on-premises Active Directory in your Azure app（在 Azure 应用中使用本地 Active Directory 进行身份验证）](/documentation/articles/web-sites-authentication-authorization/)
-* [使用 Azure Active Directory 身份验证创建业务线 Azure 应用](/documentation/articles/web-sites-dotnet-lob-application-azure-ad/)
+* [通过 SSL 和 Authorize 属性保护应用程序](./web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database.md#protect-the-application-with-ssl-and-the-authorize-attribute)
+* [Authenticate with on-premises Active Directory in your Azure app（在 Azure 应用中使用本地 Active Directory 进行身份验证）](./web-sites-authentication-authorization.md)
+* [使用 Azure Active Directory 身份验证创建业务线 Azure 应用](./web-sites-dotnet-lob-application-azure-ad.md)
 * [在 Visual Studio 2013 中将本地组织的身份验证选项 (ADFS) 与 ASP.NET 结合使用](http://www.cloudidentity.com/blog/2014/02/12/use-the-on-premises-organizational-authentication-option-adfs-with-asp-net-in-visual-studio-2013/)
 * [将 VS2013 Web 项目从 WIF 迁移到 Katana](http://www.cloudidentity.com/blog/2014/09/15/MIGRATE-A-VS2013-WEB-PROJECT-FROM-WIF-TO-KATANA/)
 * [Active Directory 联合身份验证服务概述](http://technet.microsoft.com/zh-cn/library/hh831502.aspx)

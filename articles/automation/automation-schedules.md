@@ -1,22 +1,21 @@
-<properties 
-   pageTitle="Azure 自动化中的计划 | Azure"
-   description="自动化计划用于安排自动启动 Azure 自动化中的 Runbook。介绍如何创建和管理计划，以便在特定的时间或按重复计划自动启动 Runbook。"
-   services="automation"
-   documentationCenter=""
-   authors="MGoedtel"
-   manager="jwhit"
-   editor="tysonn" />  
+---
+title: Azure 自动化中的计划 | Azure
+description: 自动化计划用于安排自动启动 Azure 自动化中的 Runbook。介绍如何创建和管理计划，以便在特定的时间或按重复计划自动启动 Runbook。
+services: automation
+documentationCenter: 
+authors: MGoedtel
+manager: jwhit
+editor: tysonn
 
-<tags 
-   ms.service="automation"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/10/2016"
-   wacn.date="01/09/2017"
-   ms.author="mgoedtel" />  
-
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/10/2016
+wacn.date: 01/09/2017
+ms.author: mgoedtel
+---
 
 # 在 Azure 自动化中计划 Runbook
 
@@ -41,7 +40,7 @@
 
 可以使用经典管理门户或 Windows PowerShell 为 Runbook 创建新计划。也可以在使用 Azure 经典管理门户将 Runbook 链接到计划时，选择创建新计划。
 
->[AZURE.NOTE] 将计划与 Runbook 相关联时，自动化会将模块的当前版本存储在你的帐户中，并将模块链接到该计划。这意味着，如果在创建计划时你的帐户中有 1.0 版的模块，然后将模块更新到版本 2.0，该计划将继续使用 1.0 版。若要使用更新后的模块版本，必须创建新计划。
+>[!NOTE] 将计划与 Runbook 相关联时，自动化会将模块的当前版本存储在你的帐户中，并将模块链接到该计划。这意味着，如果在创建计划时你的帐户中有 1.0 版的模块，然后将模块更新到版本 2.0，该计划将继续使用 1.0 版。若要使用更新后的模块版本，必须创建新计划。
 
 ### 在 Azure 经典管理门户中创建新计划
 
@@ -78,7 +77,7 @@
 
 ### 使用 Windows PowerShell 将计划链接到 Runbook
 
-可以使用 [Register-AzureAutomationScheduledRunbook](http://msdn.microsoft.com/zh-cn/library/azure/dn690265.aspx) 将计划链接到经典 Runbook。可以使用 Parameters 参数为 Runbook 的参数指定值。有关指定参数值的详细信息，请参阅[在 Azure 自动化中启动 Runbook](/documentation/articles/automation-starting-a-runbook/)。
+可以使用 [Register-AzureAutomationScheduledRunbook](http://msdn.microsoft.com/zh-cn/library/azure/dn690265.aspx) 将计划链接到经典 Runbook。可以使用 Parameters 参数为 Runbook 的参数指定值。有关指定参数值的详细信息，请参阅[在 Azure 自动化中启动 Runbook](./automation-starting-a-runbook.md)。
 
 以下示例命令演示了如何使用带参数的 Azure 服务管理 cmdlet 链接计划。
 
@@ -115,6 +114,6 @@
 
 ## 后续步骤
 
-- 若要在 Azure 自动化中开始使用 Runbook，请参阅 [Starting a Runbook in Azure Automation](/documentation/articles/automation-starting-a-runbook/)（在 Azure 自动化中启动 Runbook）
+- 若要在 Azure 自动化中开始使用 Runbook，请参阅 [Starting a Runbook in Azure Automation](./automation-starting-a-runbook.md)（在 Azure 自动化中启动 Runbook）
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

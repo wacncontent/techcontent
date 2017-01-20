@@ -1,20 +1,21 @@
-<properties 
-   pageTitle="包含双层应用程序的混合连接 | Azure"
-   description="了解如何部署虚拟设备和 UDR 以便在 Azure 中创建多层应用程序环境"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="christb"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="05/05/2016"
-   wacn.date="12/26/2016"
-   ms.author="jdial" />
+---
+title: 包含双层应用程序的混合连接 | Azure
+description: 了解如何部署虚拟设备和 UDR 以便在 Azure 中创建多层应用程序环境
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: christb
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 05/05/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 虚拟设备方案
 
@@ -44,7 +45,6 @@
 - **用户定义的路由 (UDR)**。路由表可以包含 Azure 网络用于控制 VNet 中数据包流动的 UDR。这些路由表可应用到子网。Azure 中的最新功能之一是将路由表应用到 GatewaySubnet，从而能够通过混合连接将传入 Azure VNet 的所有流量转发到虚拟设备。
 - **IP 转发**。默认情况下，仅当数据包目标 IP 地址与 NIC IP 地址匹配时，Azure 网络引擎才将数据包转发到虚拟网络接口卡 (NIC)。因此，如果 UDR 定义必须将数据包发送到给定的虚拟设备，则 Azure 网络引擎会丢弃该数据包。为了确保将数据包传送到数据包实际目标以外的 VM（在本例中为虚拟设备），需要为虚拟设备启用 IP 转发。
 - **网络安全组 (NSG)**。以下示例未使用 NSG，但可在此解决方案中使用适用于子网和/或 NIC 的 NSG，进一步筛选传入和传出相应子网和 NIC 的流量。
-
 
 ![IPv6 连接](./media/virtual-network-scenario-udr-gw-nva/figure01.png)
 
@@ -116,7 +116,7 @@ Azure 中的每个子网可以链接到用于定义该子网中发起的流量�
 
 此虚拟设备 VM 必须能够接收不以其自身为目标的传入流量。若要允许 VM 接收发送到其他目标的流量，必须为该 VM 启用 IP 转发。这是 Azure 设置，不是来宾操作系统中的设置。虚拟设备仍需要运行某种类型的应用程序，以便处理和正确路由传入流量。
 
-有关 IP 转发的详细信息，请访问[用户定义的路由和 IP 转发的定义](/documentation/articles/virtual-networks-udr-overview/#ip-forwarding)。
+有关 IP 转发的详细信息，请访问[用户定义的路由和 IP 转发的定义](./virtual-networks-udr-overview.md#ip-forwarding)。
 
 例如，假设在 Azure VNet 中使用了以下设置：
 

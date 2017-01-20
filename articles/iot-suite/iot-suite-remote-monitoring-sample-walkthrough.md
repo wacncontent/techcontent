@@ -1,22 +1,22 @@
-<properties
- pageTitle="远程监视预配置解决方案演练 | Azure"
- description="介绍 Azure IoT 预配置解决方案远程监视及其体系结构。"
- services=""
- suite="iot-suite"
- documentationCenter=""
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: 远程监视预配置解决方案演练 | Azure
+description: 介绍 Azure IoT 预配置解决方案远程监视及其体系结构。
+services: 
+suite: iot-suite
+documentationCenter: 
+authors: dominicbetts
+manager: timlt
+editor: 
 
-<tags
- ms.service="iot-suite"
- ms.devlang="na"
- ms.topic="get-started-article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="11/16/2016"
- wacn.date="12/05/2016"
- ms.author="dobett"/>  
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/16/2016
+wacn.date: 12/05/2016
+ms.author: dobett
+---
 
 # 远程监视预配置解决方案演练
 
@@ -36,8 +36,6 @@ IoT 套件远程监视[预配置解决方案][lnk-preconfigured-solutions]是适
 
 ![逻辑体系结构](./media/iot-suite-remote-monitoring-sample-walkthrough/remote-monitoring-architecture.png)  
 
-
-
 ## 模拟设备
 
 在该预配置解决方案中，模拟设备表示冷却设备（例如建筑物空调或设施空气处理单位）。部署预配置解决方案时，还会自动预配 4 个在 [Azure Web 作业][lnk-webjobs]中运行的模拟设备。模拟设备可让你轻松观测解决方案的行为，而不需要部署任何物理设备。若要部署实际的物理设备，请参阅 [Connect your device to the remote monitoring preconfigured solution][lnk-connect-rm]（将设备连接到远程监视预配置解决方案）教程。
@@ -49,7 +47,6 @@ IoT 套件远程监视[预配置解决方案][lnk-preconfigured-solutions]是适
 | 启动 | 设备启动后，会向后端发送含有其自身信息的**设备信息**消息。此数据包含设备 ID、设备元数据、设备支持的命令的列表，以及设备的当前配置。 |
 | 状态 | 设备会定期发送**状态**消息，报告该设备能否感应到传感器的状态。 |
 | 遥测 | 设备会定期发送**遥测**消息，报告从设备的模拟传感器收集到的温度和湿度模拟值。 |
-
 
 模拟设备在**设备信息**消息中发送以下设备属性：
 
@@ -70,7 +67,6 @@ IoT 套件远程监视[预配置解决方案][lnk-preconfigured-solutions]是适
 | 经度 | 设备的经度位置 |
 
 模拟器会以示例值在模拟设备中植入这些属性。模拟器每次初始化模拟设备时，设备会将预定义的元数据发布到 IoT 中心。请注意这会如何覆盖在设备门户中所做的任何元数据更新。
-
 
 模拟设备可以处理通过 IoT 中心从解决方案仪表板发送的以下命令：
 
@@ -144,7 +140,6 @@ SELECT * FROM DeviceDataStream Partition By PartitionId WHERE  ObjectType = 'Dev
 
 **作业 3：遥测**会通过两种方法来操作传入设备遥测流。第一种方法会将设备的所有遥测消息发送到永久性 Blob 存储以进行长期存储。第二种方法会通过五分钟滑动窗口计算平均、最小和最大湿度值，并将此数据发送到 Blob 存储。解决方案仪表板从 Blob 存储读取遥测数据来填充图表。此作业使用下列查询定义：
 
-	
 	WITH 
 	    [StreamData]
 	AS (
@@ -208,7 +203,6 @@ SELECT * FROM DeviceDataStream Partition By PartitionId WHERE  ObjectType = 'Dev
 ### 远程监视仪表板
 Web 应用程序中的此页面使用 PowerBI javascript 控件（请参阅 [PowerBI-visuals repo（PowerBI 可视化效果存储库）](https://www.github.com/Microsoft/PowerBI-visuals)）来可视化设备发送的遥测数据。解决方案使用 ASA 遥测作业将遥测数据写入 Blob 存储。
 
-
 ### 设备管理门户
 
 此 Web 应用可让你：
@@ -231,12 +225,12 @@ Web 应用程序中的此页面使用 PowerBI javascript 控件（请参阅 [Pow
 - [将设备连接到远程监视预配置解决方案][lnk-connect-rm]
 - [azureiotsuite.cn 站点权限][lnk-permissions]
 
-[lnk-preconfigured-solutions]: /documentation/articles/iot-suite-what-are-preconfigured-solutions/
-[lnk-customize]: /documentation/articles/iot-suite-guidance-on-customizing-preconfigured-solutions/
-[lnk-iothub]: /documentation/services/iot-hub/
-[lnk-asa]: /documentation/services/stream-analytics/
-[lnk-webjobs]: /documentation/articles/websites-webjobs-resources/
-[lnk-connect-rm]: /documentation/articles/iot-suite-connecting-devices/
-[lnk-permissions]: /documentation/articles/iot-suite-permissions/
+[lnk-preconfigured-solutions]: ./iot-suite-what-are-preconfigured-solutions.md
+[lnk-customize]: ./iot-suite-guidance-on-customizing-preconfigured-solutions.md
+[lnk-iothub]: ../iot-hub/index.md/
+[lnk-asa]: ../stream-analytics/index.md/
+[lnk-webjobs]: ../app-service-web/websites-webjobs-resources.md
+[lnk-connect-rm]: ./iot-suite-connecting-devices.md
+[lnk-permissions]: ./iot-suite-permissions.md
 
 <!---HONumber=Mooncake_0815_2016-->

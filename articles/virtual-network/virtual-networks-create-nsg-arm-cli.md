@@ -1,41 +1,41 @@
-<properties 
-   pageTitle="如何使用 Azure CLI 在 ARM 模式下创建 NSG | Azure"
-   description="了解如何使用 Azure CLI 在 ARM 模式下创建和部署 NSG"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="carmonm"
-   editor="tysonn"
-   tags="azure-resource-manager"
-/>
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="03/15/2016"
-   wacn.date="12/16/2016"
-   ms.author="jdial" />
+---
+title: 如何使用 Azure CLI 在 ARM 模式下创建 NSG | Azure
+description: 了解如何使用 Azure CLI 在 ARM 模式下创建和部署 NSG
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: carmonm
+editor: tysonn
+tags: azure-resource-manager
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/15/2016
+wacn.date: 12/16/2016
+ms.author: jdial
+---
 
 # 如何在 Azure CLI 中创建 NSG
 
-[AZURE.INCLUDE [virtual-networks-create-nsg-selectors-arm-include](../../includes/virtual-networks-create-nsg-selectors-arm-include.md)]
+[!INCLUDE [virtual-networks-create-nsg-selectors-arm-include](../../includes/virtual-networks-create-nsg-selectors-arm-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-create-nsg-intro-include](../../includes/virtual-networks-create-nsg-intro-include.md)]
+[!INCLUDE [virtual-networks-create-nsg-intro-include](../../includes/virtual-networks-create-nsg-intro-include.md)]
 
->[AZURE.IMPORTANT]在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：资源管理器部署模型和经典部署模型。在使用任何 Azure 资源之前，请确保你了解[部署模型和工具](/documentation/articles/azure-classic-rm/)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍资源管理器部署模型。你还可以[在经典部署模型中创建 NSG](/documentation/articles/virtual-networks-create-nsg-classic-cli/)。
+>[!IMPORTANT]在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：资源管理器部署模型和经典部署模型。在使用任何 Azure 资源之前，请确保你了解[部署模型和工具](../azure-classic-rm.md)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍资源管理器部署模型。你还可以[在经典部署模型中创建 NSG](./virtual-networks-create-nsg-classic-cli.md)。
 
-[AZURE.INCLUDE [virtual-networks-create-nsg-scenario-include](../../includes/virtual-networks-create-nsg-scenario-include.md)]
+[!INCLUDE [virtual-networks-create-nsg-scenario-include](../../includes/virtual-networks-create-nsg-scenario-include.md)]
 
 下面的示例 Azure CLI 命令需要一个已经基于上述方案创建的简单环境。如果你想要运行本文档中所显示的命令，首先通过部署[此模板](http://github.com/telmosampaio/azure-templates/tree/master/201-IaaS-WebFrontEnd-SQLBackEnd)构建测试环境。下载该模板，并作必要的修改，然后通过 Azure CLI 发布。
 
->[AZURE.NOTE] 你从 GitHub 仓库 "azure-quickstart-templates" 中下载的模板，需要做一些修改才能适用于 Azure 中国云环境。例如，替换一些终结点 -- "blob.core.windows.net" 替换成 "blob.core.chinacloudapi.cn"，"cloudapp.azure.com" 替换成 "chinacloudapp.cn"；改掉一些不支持的 VM 映像，还有，改掉一些不支持的 VM 大小。
+>[!NOTE] 你从 GitHub 仓库 "azure-quickstart-templates" 中下载的模板，需要做一些修改才能适用于 Azure 中国云环境。例如，替换一些终结点 -- "blob.core.windows.net" 替换成 "blob.core.chinacloudapi.cn"，"cloudapp.azure.com" 替换成 "chinacloudapp.cn"；改掉一些不支持的 VM 映像，还有，改掉一些不支持的 VM 大小。
 
 ## 如何为前端子网创建 NSG
 若要基于上述方案创建名为 *NSG-FrontEnd* 的 NSG，请执行下面的步骤。
 
-1. 如果你从未使用过 Azure CLI，请参阅 [Install and Configure the Azure CLI](/documentation/articles/xplat-cli-install/)（安装和配置 Azure CLI），并按照说明进行操作，直到选择 Azure 帐户和订阅。
+1. 如果你从未使用过 Azure CLI，请参阅 [Install and Configure the Azure CLI](../xplat-cli-install.md)（安装和配置 Azure CLI），并按照说明进行操作，直到选择 Azure 帐户和订阅。
 
 2. 运行 **azure config mode** 命令以切换到资源管理器模式，如下所示。
 

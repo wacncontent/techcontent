@@ -1,21 +1,21 @@
-<properties 
-    pageTitle="Azure 事件中心 API 概述 | Azure"
-    description="汇总了一些重要的事件中心 .NET 客户端 API。"
-    services="event-hubs"
-    documentationCenter="na"
-    authors="sethmanheim"
-    manager="timlt"
-    editor="" />  
+---
+title: Azure 事件中心 API 概述 | Azure
+description: 汇总了一些重要的事件中心 .NET 客户端 API。
+services: event-hubs
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
 
-<tags 
-    ms.service="event-hubs"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/18/2016"
-    wacn.date="01/03/2017"
-    ms.author="sethm" />
+ms.service: event-hubs
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/18/2016
+wacn.date: 01/03/2017
+ms.author: sethm
+---
 
 # 事件中心 API 概述
 本文汇总了一些重要的事件中心 .NET 客户端 API。有两个类别：管理 API 和运行时 API。运行时 API 包括发送和接收消息所需的全部操作。使用管理操作，你可以通过创建、更新和删除实体来管理事件中心实体状态。
@@ -34,7 +34,6 @@
 
 ### 更新
 
-
 		EventHubDescription ehd = await namespaceManager.GetEventHubAsync(eventHubName);
 
 		// Create a customer SAS rule with Manage permissions
@@ -44,22 +43,17 @@
 		ehd.Authorization.Add(new SharedAccessAuthorizationRule(ruleName, ruleKey, new AccessRights[] {AccessRights.Manage, AccessRights.Listen, AccessRights.Send} )); 
 		namespaceManager.UpdateEventHubAsync(ehd).Wait();
 
-
 ### 删除
 
 		namespaceManager.DeleteEventHubAsync("Event Hub name").Wait();
 
-
 ## 运行时 API
 ### 创建发布者
-
 
 		// EventHubClient model (uses implicit factory instance, so all links on same connection)
 		EventHubClient eventHubClient = EventHubClient.Create("Event Hub name");
 
-
 ### 发布消息
-
 
 		// Create the device/temperature metric
 		MetricEvent info = new MetricEvent() { DeviceId = random.Next(SampleManager.NumDevices), Temperature = random.Next(100) };
@@ -76,9 +70,7 @@
 		// Send single message async
 		await client.SendAsync(data);
 
-
 ### 创建使用者
-
 
 		// Create the Event Hubs client
 		EventHubClient eventHubClient = EventHubClient.Create(EventHubName);
@@ -95,9 +87,7 @@
 		// From specific offset, -1 means oldest
 		EventHubReceiver consumer = await defaultConsumerGroup.CreateReceiverAsync(shardId: index,startingOffset:-1); 
 
-
 ### 使用消息
-
 
 		var message = await consumer.ReceiveAsync();
 
@@ -108,10 +98,8 @@
 		var info = message.GetBytes(); 
 		msg = UnicodeEncoding.UTF8.GetString(info);
 
-
 ## 事件处理程序主机 API
 这些 API 通过在可用工作进程之间分布分片，为可能变为不可用的工作进程提供复原能力。
-
 
 		// Checkpointing is done within the SimpleEventProcessor and on a per-consumerGroup per-partition basis, workers resume from where they last left off.
 		// Use the EventData.Offset value for checkpointing yourself, this value is unique per partition.
@@ -126,9 +114,7 @@
 		// To close
 		host.UnregisterEventProcessorAsync().Wait();   
 
-
 [IEventProcessor](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.ieventprocessor.aspx) 接口定义如下：
-
 
 		public class SimpleEventProcessor : IEventProcessor
 		{
@@ -159,7 +145,6 @@
 
 		    }
 
-
 		    public async Task CloseAsync(PartitionContext context, CloseReason reason)
 		    {
 		        if (reason == CloseReason.Shutdown)
@@ -169,14 +154,12 @@
 		    }
 		}
 
-
 ## 后续步骤
 若要了解有关事件中心方案的详细信息，请访问以下链接：
 
-- [什么是 Azure 事件中心？](/documentation/articles/event-hubs-what-is-event-hubs/)
-- [事件中心概述](/documentation/articles/event-hubs-overview/)
-- [事件中心编程指南](/documentation/articles/event-hubs-programming-guide/)
-
+- [什么是 Azure 事件中心？](./event-hubs-what-is-event-hubs.md)
+- [事件中心概述](./event-hubs-overview.md)
+- [事件中心编程指南](./event-hubs-programming-guide.md)
 
 下面提供了 .NET API 参考：
 

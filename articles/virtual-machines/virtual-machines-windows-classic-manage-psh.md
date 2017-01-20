@@ -1,32 +1,32 @@
-<properties
-   pageTitle="使用 Azure PowerShell 管理虚拟机 | Azure"
-   description="了解可用于在虚拟机管理过程中自动执行任务的命令。"
-   services="virtual-machines-windows"
-   documentationCenter="windows"
-   authors="singhkay"
-   manager="timlt"
-   editor=""
-   tags="azure-service-management"/>
+---
+title: 使用 Azure PowerShell 管理虚拟机 | Azure
+description: 了解可用于在虚拟机管理过程中自动执行任务的命令。
+services: virtual-machines-windows
+documentationCenter: windows
+authors: singhkay
+manager: timlt
+editor: 
+tags: azure-service-management
 
-   <tags
-   ms.service="virtual-machines-windows"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-windows"
-   ms.workload="infrastructure-services"
-   ms.date="10/12/2016"
-   wacn.date="01/05/2017"
-   ms.author="kasing"/>
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 10/12/2016
+wacn.date: 01/05/2017
+ms.author: kasing
+---
 
 # 使用 Azure PowerShell 管理虚拟机
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
-关于资源管理器模型的 PowerShell 命令，请点击[这里](/documentation/articles/virtual-machines-windows-ps-common-ref/)。
+关于资源管理器模型的 PowerShell 命令，请点击[这里](./virtual-machines-windows-ps-common-ref.md)。
 
 每天执行的许多管理 VM 的任务都可通过使用 Azure PowerShell cmdlet 自动执行。本文提供较简单任务的示例命令，并提供演示更复杂任务的命令的文章链接。
 
->[AZURE.NOTE]如果尚未安装和配置 Azure PowerShell，你可以在[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 这篇文章中获取相关说明。
+>[!NOTE]如果尚未安装和配置 Azure PowerShell，你可以在[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 这篇文章中获取相关说明。
 
 ## 如何使用示例命令
 你需要将命令中的一些文本替换为适合你的环境的文本。< and > 符号指示需要替换的文本。替换文本时，请删除符号，但将引号保留在原处。
@@ -46,7 +46,7 @@
 
 运行以下命令：
 
->[AZURE.NOTE]可以从显示的 **Get-AzureVM** 命令中获取虚拟机和云服务名称。
+>[!NOTE]可以从显示的 **Get-AzureVM** 命令中获取虚拟机和云服务名称。
 >
 	$svcName = "<cloud service name>"
 	$vmName = "<virtual machine name>"
@@ -60,7 +60,7 @@
 
     Stop-AzureVM -ServiceName "<cloud service name>" -Name "<virtual machine name>"
 
->[AZURE.IMPORTANT]如果该 VM 是云服务中的最后一个 VM，则使用此参数可以保留该云服务的虚拟 IP (VIP)。<br><br> 如果你使用 StayProvisioned 参数，则仍要支付 VM 的费用。
+>[!IMPORTANT]如果该 VM 是云服务中的最后一个 VM，则使用此参数可以保留该云服务的虚拟 IP (VIP)。<br><br> 如果你使用 StayProvisioned 参数，则仍要支付 VM 的费用。
 
 ## 启动 VM
 
@@ -89,12 +89,11 @@
 
 ## 创建基于 Windows 的 VM
 
-若要在 Azure 中创建新的基于 Windows 的虚拟机，请使用[使用 Azure PowerShell 创建和预配置基于 Windows 的虚拟机](/documentation/articles/virtual-machines-windows-classic-create-powershell/)中的说明。本主题指导你逐步完成创建 Azure PowerShell 命令集，以创建可预先配置以下项的基于 Windows 的 VM：
+若要在 Azure 中创建新的基于 Windows 的虚拟机，请使用[使用 Azure PowerShell 创建和预配置基于 Windows 的虚拟机](./virtual-machines-windows-classic-create-powershell.md)中的说明。本主题指导你逐步完成创建 Azure PowerShell 命令集，以创建可预先配置以下项的基于 Windows 的 VM：
 
 - Active Directory 域成员身份。
 - 附加磁盘。
 - 作为现有负载均衡集的成员。
 - 静态 IP 地址。
-
 
 <!---HONumber=70-->

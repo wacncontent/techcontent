@@ -1,32 +1,33 @@
-<properties
-	pageTitle="使用 REST 备份和还原应用服务应用"
-	description="了解如何使用 RESTful API 调用在 Azure App Service 中备份和还原应用"
-	services="app-service"
-	documentationCenter=""
-	authors="NKing92"
-	manager="wpickett"
-    editor="" />
+---
+title: 使用 REST 备份和还原应用服务应用
+description: 了解如何使用 RESTful API 调用在 Azure App Service 中备份和还原应用
+services: app-service
+documentationCenter: 
+authors: NKing92
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/10/2016"
-	wacn.date="12/26/2016"
-	ms.author="nicking"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/10/2016
+wacn.date: 12/26/2016
+ms.author: nicking
+---
+
 # 使用 REST 备份和还原应用服务应用
 
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/app-service-powershell-backup/)
-- [REST API](/documentation/articles/websites-csm-backup/)
+> [!div class="op_single_selector"]
+- [PowerShell](../app-service/app-service-powershell-backup.md)
+- [REST API](./websites-csm-backup.md)
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-[应用服务应用](/home/features/app-service/web-apps/)可以备份为 Azure 存储中的 Blob。备份还可以包含该应用的数据库。如果意外地删除了该应用，或者需要将该应用还原到以前的版本，则可以从任何以前的备份还原。可随时按需备份，也可以计划以合适的时间间隔备份。
+[应用服务应用](https://www.azure.cn/home/features/app-service/web-apps/)可以备份为 Azure 存储中的 Blob。备份还可以包含该应用的数据库。如果意外地删除了该应用，或者需要将该应用还原到以前的版本，则可以从任何以前的备份还原。可随时按需备份，也可以计划以合适的时间间隔备份。
 
-本文介绍如何使用 RESTful API 请求备份和还原应用。如果要通过 Azure 门户预览以图形方式创建和管理应用备份，请参阅[在 Azure App Service 中备份 Web 应用](/documentation/articles/web-sites-backup/)
+本文介绍如何使用 RESTful API 请求备份和还原应用。如果要通过 Azure 门户预览以图形方式创建和管理应用备份，请参阅[在 Azure App Service 中备份 Web 应用](./web-sites-backup.md)
 
 ## <a name="gettingstarted"></a>入门
 若要发送 REST 请求，需要知道应用的“名称”、“资源组”和“订阅 ID”。可通过在 [Azure 门户预览](https://portal.azure.cn)的“应用服务”边栏选项卡中单击应用找到此信息。对于本文中的示例，我们要配置网站 **backuprestoreapiexamples.chinacloudsites.cn**。它将存储在 Default-Web-ChinaEast 资源组中，并在 ID 为 00001111-2222-3333-4444-555566667777 的订阅上运行。
@@ -46,7 +47,7 @@
 
 使用我们的示例网站时，URL 如下所示。**https://management.chinacloudapi.cn/subscriptions/00001111-2222-3333-4444-555566667777/resourceGroups/Default-Web-ChinaNorth/providers/Microsoft.Web/sites/backuprestoreapiexamples/backup/**
 
-在请求的正文中提供 JSON 对象，以指定要使用哪个存储帐户存储备份。JSON 对象必须具有一个名为 **storageAccountUrl** 的属性，其中包含将写入访问权限授予包含备份 blob 的 Azure 存储容器的 [SAS URL](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)。如果要备份数据库，还必须提供一个包含要备份的数据库的名称、类型和连接字符串的列表。
+在请求的正文中提供 JSON 对象，以指定要使用哪个存储帐户存储备份。JSON 对象必须具有一个名为 **storageAccountUrl** 的属性，其中包含将写入访问权限授予包含备份 blob 的 Azure 存储容器的 [SAS URL](../storage/storage-dotnet-shared-access-signature-part-1.md)。如果要备份数据库，还必须提供一个包含要备份的数据库的名称、类型和连接字符串的列表。
 
 	{
     	"properties":
@@ -90,7 +91,7 @@
     	}
 	}
 
->[AZURE.NOTE] 可以在 HTTP 响应的 log 属性中找到错误消息。
+>[!NOTE] 可以在 HTTP 响应的 log 属性中找到错误消息。
 
 ## <a name="schedule-automatic-backups"></a>计划自动备份
 除了按需备份应用外，还可以计划自动进行的备份。
@@ -210,7 +211,7 @@ Azure App Service 会尝试使用创建备份时提供的 SAS URL 从 Azure 存�
     	}
 	}
 
->[AZURE.NOTE] 出于安全原因，在为特定备份发送 GET 请求时，将不返回与该备份关联的 SAS URL。如果要查看与备份关联的 SAS URL，请向上述同一 URL 发送 POST 请求。在请求正文中包含空 JSON 对象。服务器响应包含该备份的所有信息，包括其 SAS URL。
+>[!NOTE] 出于安全原因，在为特定备份发送 GET 请求时，将不返回与该备份关联的 SAS URL。如果要查看与备份关联的 SAS URL，请向上述同一 URL 发送 POST 请求。在请求正文中包含空 JSON 对象。服务器响应包含该备份的所有信息，包括其 SAS URL。
 
 <!-- IMAGES -->
 [SampleWebsiteInformation]: ./media/websites-csm-backup/01siteconfig.png

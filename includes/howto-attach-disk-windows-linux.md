@@ -1,5 +1,5 @@
 
-有关磁盘的更多详细信息，请参阅[关于虚拟机的磁盘和 VHD](/documentation/articles/virtual-machines-linux-about-disks-vhds/)。
+有关磁盘的更多详细信息，请参阅[关于虚拟机的磁盘和 VHD](../articles/virtual-machines/virtual-machines-linux-about-disks-vhds.md)。
 
 ## <a id="attachempty"></a>如何：附加空磁盘
 
@@ -9,14 +9,11 @@
 
 2. 在命令栏上，单击“附加”，然后单击“附加空磁盘”。
 
-
 	![附加空磁盘](./media/howto-attach-disk-window-linux/AttachEmptyDisk.png)
 
 3.	将显示“附加空磁盘”对话框。
 
-
 	![附加新的空磁盘](./media/howto-attach-disk-window-linux/AttachEmptyDetail.png)
-
 
 	请执行以下操作：
 
@@ -30,7 +27,7 @@
 
 	![已成功附加了空数据磁盘](./media/howto-attach-disk-window-linux/AttachEmptySuccess.png)
 	
-> [AZURE.NOTE]在添加新数据磁盘后，你需要登录到虚拟机并初始化磁盘，然后虚拟机才能使用磁盘来存储数据。
+> [!NOTE]在添加新数据磁盘后，你需要登录到虚拟机并初始化磁盘，然后虚拟机才能使用磁盘来存储数据。
 
 ## <a id="attachexisting"></a>如何：附加现有磁盘
 
@@ -40,12 +37,9 @@
 
 2. 在命令栏中，单击“附加”，然后选择“附加磁盘”。
 
-
 	![附加数据磁盘](./media/howto-attach-disk-window-linux/AttachExistingDisk.png)
 
 	将显示“附加磁盘”对话框。
-
-
 
 	![输入数据磁盘详细信息](./media/howto-attach-disk-window-linux/AttachExistingDetail.png)
 
@@ -54,7 +48,6 @@
 4. 单击复选标记以将数据磁盘附加到虚拟机。
 
 5.	附加数据磁盘后，它列出在虚拟机的仪表板中。
-
 
 	![已成功附加了数据磁盘](./media/howto-attach-disk-window-linux/AttachExistingSuccess.png)
 

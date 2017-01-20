@@ -55,7 +55,7 @@
 
         sudo ifdown eth0 && sudo ifup eth0
 
-    > [AZURE.IMPORTANT]
+    > [!IMPORTANT]
     > 如果使用远程连接，请在同一行中同时运行 ifdown 和 ifup。
     >
 

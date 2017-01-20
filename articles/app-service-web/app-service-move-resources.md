@@ -1,25 +1,25 @@
-<properties
-	pageTitle="将 Web 应用资源移到另一个资源组"
-	description="介绍将 Web 应用和 App Service 从一个资源组移到另一个资源组的方案。"
-	services="app-service"
-	documentationCenter=""
-	authors="ZainRizvi"
-	manager="wpickett"
-	editor=""/>
+---
+title: 将 Web 应用资源移到另一个资源组
+description: 介绍将 Web 应用和 App Service 从一个资源组移到另一个资源组的方案。
+services: app-service
+documentationCenter: 
+authors: ZainRizvi
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="app-service"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="01/04/2016"
-	wacn.date="09/26/2016"
-	ms.author="zarizvi"/>
-	
+ms.service: app-service
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/04/2016
+wacn.date: 09/26/2016
+ms.author: zarizvi
+---
+
 # 受支持的迁移配置
 
-你可以使用 [ARM 迁移资源 API](/documentation/articles/resource-group-move-resources/) 迁移 Azure Web 应用资源。
+你可以使用 [ARM 迁移资源 API](../azure-resource-manager/resource-group-move-resources.md) 迁移 Azure Web 应用资源。
 
 Azure Web 应用当前支持以下迁移方案：
 

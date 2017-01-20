@@ -1,21 +1,21 @@
-<properties
-   pageTitle="使用示例库了解 HDInsight 中的 Hadoop | Azure"
-   description="通过从 HDInsight 入门库运行示例应用程序快速了解 Hadoop。使用示例数据，或提供自己的数据。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="mumian"
-   manager="paulettm"
-   editor="cgronlun"/>
+---
+title: 使用示例库了解 HDInsight 中的 Hadoop | Azure
+description: 通过从 HDInsight 入门库运行示例应用程序快速了解 Hadoop。使用示例数据，或提供自己的数据。
+services: hdinsight
+documentationCenter: 
+authors: mumian
+manager: paulettm
+editor: cgronlun
 
-<tags
-   ms.service="hdinsight"
-   ms.workload="big-data"
-   ms.tgt_pltfrm="na"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.date="09/02/2016"
-   wacn.date="12/16/2016"
-   ms.author="jgao"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/02/2016
+wacn.date: 12/16/2016
+ms.author: jgao
+---
 
 # 使用 HDInsight 入门库了解 Hadoop
 

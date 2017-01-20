@@ -8,7 +8,7 @@
 
 	这样将创建新的名为 **CompleteAllController** 的空控制器类。
 
-	>[AZURE.NOTE]如果你的对话框没有移动服务特定的基架，请创建新的“Web API 控制器 - 空”。在这个新控制器类中，添加公共 **Services** 属性，它将返回 **ApiServices** 类型。此属性用于从控制器内部访问服务器特定的设置。
+	>[!NOTE]如果你的对话框没有移动服务特定的基架，请创建新的“Web API 控制器 - 空”。在这个新控制器类中，添加公共 **Services** 属性，它将返回 **ApiServices** 类型。此属性用于从控制器内部访问服务器特定的设置。
 
 3. 在 **CompleteAllController.cs** 中，添加以下 **using** 语句。将 `todolistService` 替换为你的移动服务项目的命名空间，它应该是在移动服务名称后追加 `Service`。
 
@@ -26,7 +26,6 @@
         }
 
 5. 将以下代码添加到新控制器。将 `todolistContext` 替换为你的数据模型的 DbContext 名称，它应该是在移动服务名称后追加 `Context`。同样，将 UPDATE 语句中的模式名称替换为你的移动服务名称。此代码使用[数据库类](http://msdn.microsoft.com/zh-cn/library/system.data.entity.database.aspx)来直接访问 **TodoItems** 表，以便在所有项上设置完成标志。此方法支持 POST 请求，已更改行的数量将以整数值形式返回至客户端。
-
 
 	    // POST api/completeall        
         public async Task<MarkAllResult> Post()
@@ -52,6 +51,6 @@
             }
         }
 
-	> [AZURE.NOTE]使用默认权限和应用密钥的任何人都可以调用自定义 API。但是，应用程序密钥不被视为安全的凭据，因为无法安全地分发或存储它。请考虑仅限经过身份验证的用户访问。
+	> [!NOTE]使用默认权限和应用密钥的任何人都可以调用自定义 API。但是，应用程序密钥不被视为安全的凭据，因为无法安全地分发或存储它。请考虑仅限经过身份验证的用户访问。
 
 <!---HONumber=76-->

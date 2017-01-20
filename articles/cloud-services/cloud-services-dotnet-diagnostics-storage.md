@@ -1,20 +1,21 @@
-<properties
-  pageTitle="在 Azure 存储中存储和查看诊断数据 | Azure"
-  description="将 Azure 诊断数据传输到 Azure 存储并查看"
-  services="cloud-services"
-  documentationCenter=".net"
-  authors="rboucher"
-  manager="jwhit"
-  editor="tysonn" />
-<tags
-	ms.service="cloud-services"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="na"
-	ms.date="08/01/2016"
-	wacn.date="01/03/2017"
-	ms.author="robb" />
+---
+title: 在 Azure 存储中存储和查看诊断数据 | Azure
+description: 将 Azure 诊断数据传输到 Azure 存储并查看
+services: cloud-services
+documentationCenter: .net
+authors: rboucher
+manager: jwhit
+editor: tysonn
+
+ms.service: cloud-services
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/01/2016
+wacn.date: 01/03/2017
+ms.author: robb
+---
 
 # 在 Azure 存储中存储和查看诊断数据
 
@@ -23,7 +24,6 @@
 ## 指定存储帐户
 
 指定要在 ServiceConfiguration.cscfg 文件中使用的存储帐户。将帐户信息定义为配置设置中的连接字符串。下例显示在 Visual Studio 中针对新的云服务项目创建的默认连接字符串：
-
 
 		<ConfigurationSettings>
 		   <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
@@ -50,8 +50,7 @@
 
 对于 SDK 2.4 及更低版本，可以请求通过配置文件以及编程方式传输诊断数据。编程方式还可以进行按需传输。
 
-
->[AZURE.IMPORTANT] 将诊断数据传输到 Azure 存储帐户时会产生费用，具体取决于诊断数据使用的存储资源。
+>[!IMPORTANT] 将诊断数据传输到 Azure 存储帐户时会产生费用，具体取决于诊断数据使用的存储资源。
 
 ## 存储诊断数据
 
@@ -84,11 +83,9 @@
 
 - Visual Studio 中的服务器资源管理器 - 如果已安装 Azure Tools for Microsoft Visual Studio，则可以在服务器资源管理器中使用“Azure 存储”节点从 Azure 存储帐户查看只读 Blob 和表数据。既可以从本地存储模拟器帐户显示数据，也可以从为 Azure 创建的存储帐户显示数据。
 
-
-
 - [Azure Management Studio](http://www.cerebrata.com/products/azure-management-studio/introduction) 随附 Azure 诊断管理器，可用于查看、下载和管理 Azure 中运行的应用程序收集的诊断数据。
 
 ## 后续步骤
-[使用 Azure 诊断跟踪云服务应用程序中的流](/documentation/articles/cloud-services-dotnet-diagnostics-trace-flow/)
+[使用 Azure 诊断跟踪云服务应用程序中的流](./cloud-services-dotnet-diagnostics-trace-flow.md)
 
 <!---HONumber=Mooncake_1226_2016-->

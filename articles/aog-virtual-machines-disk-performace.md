@@ -1,25 +1,30 @@
-<properties 
-	pageTitle="理解及快速测定 Azure 虚拟机的磁盘性能" 
-	description="理解及快速测定 Azure 虚拟机的磁盘性能" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machine-aog" ms.date="" wacn.date="10/28/2016"/>
+---
+title: 理解及快速测定 Azure 虚拟机的磁盘性能
+description: 理解及快速测定 Azure 虚拟机的磁盘性能
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machine-aog
+ms.date: 
+wacn.date: 10/28/2016
+---
+
 # 理解及快速测定 Azure 虚拟机的磁盘性能 #
 
 随着越来越多的用户将生产系统迁移到 Azure 平台的虚拟机服务中，Azure 虚拟机的性能愈发被关注。传统的数据中心中，我们通常使用 CPU，内存，存储和网络的性能来衡量生产压力。特别是对于 IO 密集型工作负荷，比如虚拟机内部运行的 SQL 服务，存储系统的吞吐容量，往往成为生产系统的瓶颈所在。
 
 Azure 提供了标准存储和高级存储两种存储服务。针对于生产环境中的 IO 密集型负荷，我们推荐使用高级存储。标准存储仅推荐在开发测试环境中使用。针对于具体的高级存储的介绍，以及虚拟机存储的最佳实践等信息，建议完成以下阅读：
 
-- [高级存储简介](/documentation/articles/storage-premium-storage/ "https://www.azure.cn/documentation/articles/storage-premium-storage/")
-- [Azure 虚拟运行 SQL 服务的最佳实践](/documentation/articles/virtual-machines-windows-sql-performance/ "https://www.azure.cn/documentation/articles/virtual-machines-windows-sql-performance/")
-- [在 SQL 虚拟机中使用 Azure 高级存储](/documentation/articles/virtual-machines-windows-classic-sql-server-premium-storage/ "https://www.azure.cn/documentation/articles/virtual-machines-windows-classic-sql-server-premium-storage/")
+- [高级存储简介](./storage/storage-premium-storage.md "https://www.azure.cn/documentation/articles/storage-premium-storage/")
+- [Azure 虚拟运行 SQL 服务的最佳实践](./virtual-machines/virtual-machines-windows-sql-performance.md "https://www.azure.cn/documentation/articles/virtual-machines-windows-sql-performance/")
+- [在 SQL 虚拟机中使用 Azure 高级存储](./virtual-machines/virtual-machines-windows-classic-sql-server-premium-storage.md "https://www.azure.cn/documentation/articles/virtual-machines-windows-classic-sql-server-premium-storage/")
 	
 然而在现实环境中，由于种种条件所限，很多用户暂时无法使用高级存储来达到最佳的存储性能。本文的目的在于帮助目前仍然使用标准存储的用户如何准确理解虚拟机的存储性能，从而在发生存储性能问题时快速有效的从支持部门得到帮助。
 
-首先，由于虚拟机运行在 Azure 平台，我们需要了解 [Azure 存储空间可伸缩性和性能目标](/documentation/articles/storage-scalability-targets/ "https://www.azure.cn/documentation/articles/storage-scalability-targets/")：
+首先，由于虚拟机运行在 Azure 平台，我们需要了解 [Azure 存储空间可伸缩性和性能目标](./storage/storage-scalability-targets.md "https://www.azure.cn/documentation/articles/storage-scalability-targets/")：
 
 - 单个标准存储帐户总请求率上限为 20,000 IOPS，所有虚拟机磁盘的 IOPS 总数不应超过此限制。
 - 标准层虚拟机的单个磁盘 IOPS 上限约为 500。
@@ -116,4 +121,4 @@ Azure 提供了标准存储和高级存储两种存储服务。针对于生产�
 4. 使用 [Microsoft Automated Troubleshooting Services](https://support.microsoft.com/zh-cn/kb/2598970 "https://support.microsoft.com/zh-cn/kb/2598970")，来快速自动排查虚拟机内部可能影响磁盘性能的问题
 5. 检查存储账户容量，虚拟大小等配置信息，避免由于并发 IO 或是容量配置导致的问题。
 
-如果以上步骤没有发现明显问题，但是压力测试得到的磁盘数据比本文中的数据相差明显，建议您可以联系 [Azure 支持部门](/support/contact/)，我们很愿意协助您快速定位问题。
+如果以上步骤没有发现明显问题，但是压力测试得到的磁盘数据比本文中的数据相差明显，建议您可以联系 [Azure 支持部门](https://www.azure.cn/support/contact/)，我们很愿意协助您快速定位问题。

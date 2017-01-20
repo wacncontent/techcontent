@@ -1,21 +1,22 @@
-<properties
-    pageTitle="我在 Azure 自动化中的第一个 PowerShell 工作流 Runbook | Azure"
-    description="本教程指导你使用 PowerShell 工作流创建、测试和发布一个简单的文本 Runbook。"
-    services="automation"
-    documentationCenter=""
-    authors="mgoedtel"
-    manager="jwhit"
-    editor=""
-	keywords="powershell 工作流, powershell 工作流示例, 工作流 powershell"/>
-<tags
-    ms.service="automation"
-    ms.workload="tbd"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="07/19/2016"
-    wacn.date="01/03/2017"
-    ms.author="magoedte;bwren"/>
+---
+title: 我在 Azure 自动化中的第一个 PowerShell 工作流 Runbook | Azure
+description: 本教程指导你使用 PowerShell 工作流创建、测试和发布一个简单的文本 Runbook。
+services: automation
+documentationCenter: 
+authors: mgoedtel
+manager: jwhit
+editor: 
+keywords: powershell 工作流, powershell 工作流示例, 工作流 powershell
+
+ms.service: automation
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 07/19/2016
+wacn.date: 01/03/2017
+ms.author: magoedte;bwren
+---
 
 # 我的第一个 PowerShell 工作流 Runbook
 
@@ -25,8 +26,8 @@
 
 为了完成本教程，你需要满足以下条件。
 
-- Azure 订阅创建新存储帐户。如果你没有订阅，可以[注册帐户](/pricing/1rmb-trial)。
-- [自动化帐户](/documentation/articles/automation-security-overview/)，用来保存 Runbook 以及向 Azure 资源进行身份验证。此帐户必须有权启动和停止虚拟机。
+- Azure 订阅创建新存储帐户。如果你没有订阅，可以[注册帐户](https://www.azure.cn/pricing/1rmb-trial)。
+- [自动化帐户](./automation-security-overview.md)，用来保存 Runbook 以及向 Azure 资源进行身份验证。此帐户必须有权启动和停止虚拟机。
 - Azure 虚拟机。我们将停止并启动该计算机，因此其不应为生产用计算机。
 
 ## 步骤 1 - 创建新的 Runbook

@@ -1,22 +1,21 @@
-<properties
-    pageTitle="设置 Azure 导入/导出工具 | Azure"
-    description="了解如何设置 Azure 导入/导出服务的驱动器准备和修复工具"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 设置 Azure 导入/导出工具 | Azure
+description: 了解如何设置 Azure 导入/导出服务的驱动器准备和修复工具
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/16/2016"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/16/2016
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 设置 Azure 导入/导出工具
 
@@ -70,9 +69,7 @@ Azure 导入/导出工具由以下文件组成：
 
 若要输出命令帮助，请不带参数运行该工具：
 
-
 	WAImportExport, a client tool for Microsoft Azure Import/Export Service. Microsoft (c) 2013
-
 
 	Copy directories and/or files with a new copy session:
 	    WAImportExport.exe PrepImport
@@ -211,14 +208,13 @@ Azure 导入/导出工具由以下文件组成：
 	        98 /sn:mytestaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94
 	        f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\temp\9WM35C2V_error.log
 
-
 ## 后续步骤
 
-* [为导入作业准备硬盘驱动器](/documentation/articles/storage-import-export-tool-preparing-hard-drives-import/)
-* [预览导出作业的驱动器使用情况](/documentation/articles/storage-import-export-tool-previewing-drive-usage-export-v1/)
-* [使用复制日志文件查看作业状态](/documentation/articles/storage-import-export-tool-reviewing-job-status-v1/)
-* [修复导入作业](/documentation/articles/storage-import-export-tool-repairing-an-import-job-v1/)
-* [修复导出作业](/documentation/articles/storage-import-export-tool-repairing-an-export-job-v1/)
-* [排查 Azure 导入/导出工具问题](/documentation/articles/storage-import-export-tool-troubleshooting-v1/)
+* [为导入作业准备硬盘驱动器](./storage-import-export-tool-preparing-hard-drives-import.md)
+* [预览导出作业的驱动器使用情况](./storage-import-export-tool-previewing-drive-usage-export-v1.md)
+* [使用复制日志文件查看作业状态](./storage-import-export-tool-reviewing-job-status-v1.md)
+* [修复导入作业](./storage-import-export-tool-repairing-an-import-job-v1.md)
+* [修复导出作业](./storage-import-export-tool-repairing-an-export-job-v1.md)
+* [排查 Azure 导入/导出工具问题](./storage-import-export-tool-troubleshooting-v1.md)
 
 <!---HONumber=Mooncake_1226_2016-->

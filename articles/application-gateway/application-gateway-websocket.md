@@ -1,22 +1,21 @@
-<properties
-   pageTitle="应用程序网关 WebSocket 支持 | Azure"
-   description="此页概述了应用程序网关的 WebSocket 支持。"
-   documentationCenter="na"
-   services="application-gateway"
-   authors="amsriva"
-   manager="rossort"
-   editor="amsriva"/>  
+---
+title: 应用程序网关 WebSocket 支持 | Azure
+description: 此页概述了应用程序网关的 WebSocket 支持。
+documentationCenter: na
+services: application-gateway
+authors: amsriva
+manager: rossort
+editor: amsriva
 
-<tags
-   ms.service="application-gateway"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="11/16/2016"
-   wacn.date="12/30/2016"
-   ms.author="amsriva"/>  
-
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/16/2016
+wacn.date: 12/30/2016
+ms.author: amsriva
+---
 
 # 应用程序网关 WebSocket 支持
 
@@ -24,13 +23,11 @@
 
 应用程序网关跨所有网关大小为 WebSocket 提供本机支持。用户无法通过配置设置来选择性地启用或禁用 WebSocket 支持。可以在端口 80/443 上继续使用标准 HTTPListener 来接收 WebSocket 流量。随后会使用应用程序网关规则中指定的相应后端池，将 WebSocket 流量定向到已启用 WebSocket 的后端服务器。
 
-后端服务器必须响应应用程序网关探测，如[运行状况探测概述](/documentation/articles/application-gateway-probe-overview/)部分中所述。应用程序网关运行状况探测仅限 HTTP/HTTPS，这意味着每个后端服务器都必须响应 HTTP 探测，应用程序网关才能将 WebSocket 流量路由到服务器。
-
+后端服务器必须响应应用程序网关探测，如[运行状况探测概述](./application-gateway-probe-overview.md)部分中所述。应用程序网关运行状况探测仅限 HTTP/HTTPS，这意味着每个后端服务器都必须响应 HTTP 探测，应用程序网关才能将 WebSocket 流量路由到服务器。
 
 ## 侦听器配置元素
 
-现有的 HTTPListener 可用于支持 WebSocket。以下是示例模板文件中 HttpListeners 元素的代码片段。需要同时拥有 HTTP 和 HTTPS 侦听器才能支持 WebSocket 并保护 WebSocket 流量。同样，可以使用[门户](/documentation/articles/application-gateway-create-gateway-portal/)或 [PowerShell](/documentation/articles/application-gateway-create-gateway-arm/) 在端口 80/443 上创建具有侦听器的应用程序网关，以支持 WebSocket 通信。
-
+现有的 HTTPListener 可用于支持 WebSocket。以下是示例模板文件中 HttpListeners 元素的代码片段。需要同时拥有 HTTP 和 HTTPS 侦听器才能支持 WebSocket 并保护 WebSocket 流量。同样，可以使用[门户](./application-gateway-create-gateway-portal.md)或 [PowerShell](./application-gateway-create-gateway-arm.md) 在端口 80/443 上创建具有侦听器的应用程序网关，以支持 WebSocket 通信。
 
     "httpListeners": [
                 {
@@ -115,6 +112,6 @@
 
 ## 后续步骤
 
-了解 WebSocket 支持后，请转到[创建应用程序网关](/documentation/articles/application-gateway-create-gateway/)，开始使用已启用 WebSocket 的 Web 应用程序。
+了解 WebSocket 支持后，请转到[创建应用程序网关](./application-gateway-create-gateway.md)，开始使用已启用 WebSocket 的 Web 应用程序。
 
 <!---HONumber=Mooncake_1010_2016-->

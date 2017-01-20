@@ -1,27 +1,27 @@
-<properties 
-	pageTitle="如何使用 Azure 命令行界面 (Azure CLI) 创建和管理 Azure Redis 缓存" 
-	description="了解如何在任何平台上安装 Azure CLI、如何使用它连接到你的 Azure 帐户，以及如何从 Azure CLI 创建和管理 Redis 缓存。" 
-	services="redis-cache" 
-	documentationCenter="" 
-	authors="steved0x" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 如何使用 Azure 命令行界面 (Azure CLI) 创建和管理 Azure Redis 缓存
+description: 了解如何在任何平台上安装 Azure CLI、如何使用它连接到你的 Azure 帐户，以及如何从 Azure CLI 创建和管理 Redis 缓存。
+services: redis-cache
+documentationCenter: 
+authors: steved0x
+manager: dwrede
+editor: 
 
-<tags 
-	ms.service="cache" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="cache-redis" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/15/2016" 
-	wacn.date="01/03/2017" 
-	ms.author="sdanie"/>
+ms.service: cache
+ms.workload: tbd
+ms.tgt_pltfrm: cache-redis
+ms.devlang: na
+ms.topic: article
+ms.date: 09/15/2016
+wacn.date: 01/03/2017
+ms.author: sdanie
+---
 
 # 如何使用 Azure 命令行界面 (Azure CLI) 创建和管理 Azure Redis 缓存
 
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/cache-howto-manage-redis-cache-powershell/)
-- [Azure CLI](/documentation/articles/cache-manage-cli/)
+> [!div class="op_single_selector"]
+- [PowerShell](./cache-howto-manage-redis-cache-powershell.md)
+- [Azure CLI](./cache-manage-cli.md)
 
 Azure CLI 是从任何平台管理 Azure 基础结构的好办法。本文演示了如何使用 Azure CLI 创建和管理 Azure Redis 缓存实例。
 
@@ -29,9 +29,9 @@ Azure CLI 是从任何平台管理 Azure 基础结构的好办法。本文演示
 
 若要使用 Azure CLI 创建和管理 Azure Redis 缓存实例，必须完成以下步骤。
 
--	你必须具有 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个[试用帐户](/pricing/1rmb-trial/)。
--	[安装 Azure CLI](/documentation/articles/xplat-cli-install/)。
--	将 Azure CLI 安装与个人 Azure 帐户或者工作或学校 Azure 帐户关联，然后使用 `azure login -e AzureChinaCloud` 命令从 Azure CLI 登录。若要了解区别并进行选择，请参阅[从 Azure 命令行界面 (Azure CLI) 连接到 Azure 订阅](/documentation/articles/xplat-cli-connect/)。
+-	你必须具有 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial/)。
+-	[安装 Azure CLI](../xplat-cli-install.md)。
+-	将 Azure CLI 安装与个人 Azure 帐户或者工作或学校 Azure 帐户关联，然后使用 `azure login -e AzureChinaCloud` 命令从 Azure CLI 登录。若要了解区别并进行选择，请参阅[从 Azure 命令行界面 (Azure CLI) 连接到 Azure 订阅](../xplat-cli-connect.md)。
 -	在运行以下任何命令之前，通过运行 `azure config mode arm` 命令将 Azure CLI 切换到资源管理器模式下。
 
 ## Redis 缓存属性

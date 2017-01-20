@@ -26,9 +26,6 @@ articles/sql-database/sql-database-get-started-tutorial.md
 
 [1]: ./media/sql-database-getting-started-tutorial/login.png
 
-
-
-
 <!--
 
 -->

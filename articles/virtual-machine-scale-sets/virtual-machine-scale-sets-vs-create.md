@@ -1,30 +1,28 @@
-<properties
-	pageTitle="使用 Visual Studio 部署虚拟机规模集 | Azure"
-	description="使用 Visual Studio 和 Resource Manager 模板部署虚拟机规模集"
-	services="virtual-machine-scale-sets"
-	documentationCenter=""
-	authors="gbowerman"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 使用 Visual Studio 部署虚拟机规模集 | Azure
+description: 使用 Visual Studio 和 Resource Manager 模板部署虚拟机规模集
+services: virtual-machine-scale-sets
+documentationCenter: 
+authors: gbowerman
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machine-scale-sets"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="06/13/2016"
-	wacn.date="11/21/2016"
-	ms.author="guybo"/>
+ms.service: virtual-machine-scale-sets
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 06/13/2016
+wacn.date: 11/21/2016
+ms.author: guybo
+---
 
 # 使用 Visual Studio 部署虚拟机规模集
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本文介绍如何使用 Visual Studio 资源组部署来部署 Azure 虚拟机规模集。
-
 
 [Azure 虚拟机规模集](https://azure.microsoft.com/blog/azure-vm-scale-sets-public-preview/)是一种 Azure 计算资源，可通过轻松集成的自动缩放和负载均衡选项部署和管理一组类似的虚拟机。可以使用 [Azure 资源管理器 (ARM) 模板](https://github.com/Azure/azure-quickstart-templates)预配和部署 VM 规模集。可以使用 Azure CLI、PowerShell、REST 来部署 ARM 模板，也可直接从 Visual Studio 部署。Visual Studio 提供了一组示例模板，这些模板可以作为 Azure 资源组部署项目的一部分进行部署。
 
@@ -57,7 +55,6 @@ Azure 资源组部署是一种通过单个部署操作将相关的一组 Azure �
 
 	![解决方案资源管理器][solution_explorer]  
 
-
 ## 自定义项目
 
 现在可以编辑模板以根据应用程序的需求自定义它，例如添加 VM 扩展属性或编辑负载均衡规则。默认情况下 VM 规模集模板已配置为部署 AzureDiagnostics 扩展，这样可通过其轻松添加自动缩放规则。它还使用公共 IP 地址部署了配置有入站 NAT 规则的负载均衡器，可以使用 SSH (Linux) 或 RDP (Windows) 连接到 VM 实例 - 前端端口范围从 50000 开始，这意味着在 Linux 的情况下，如果通过 SSH 连接到公共 IP 地址（或域名）的端口 50000，会路由到规模集中的第一个 VM 的端口 22。连接到端口 50001 将被路由到的第二个 VM 的端口 22，依此类推。
@@ -65,7 +62,6 @@ Azure 资源组部署是一种通过单个部署操作将相关的一组 Azure �
  使用 Visual Studio 编辑模板的良好方法是使用“JSON 概要”来组织参数、变量和资源。了解架构后，Visual Studio 可以在部署前指出模板中的错误。
 
 ![JSON 资源管理器][json_explorer]  
-
 
 ## 部署项目
 
@@ -88,7 +84,6 @@ Azure 资源组部署是一种通过单个部署操作将相关的一组 Azure �
 10. 现在单击“部署”。“输出”窗口将显示部署进度。请注意，该操作正在执行 **Deploy-AzureResourceGroup.ps1** 脚本。
 
 	![输出窗口][output_window]  
-
 
 ## 浏览 VM 规模集
 

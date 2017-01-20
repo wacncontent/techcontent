@@ -1,26 +1,26 @@
-<properties
-	pageTitle="在 HDInsight 中运行 Hadoop 示例 | Azure"
-	description="使用所提供的示例开始使用 Azure HDInsight 服务。在数据群集中使用运行 MapReduce 程序的 PowerShell 脚本。"
-	services="hdinsight"
-	documentationCenter=""
-	tags="azure-portal"
-	authors="mumian"
-	manager="paulettm"
-	editor="cgronlun"/>
+---
+title: 在 HDInsight 中运行 Hadoop 示例 | Azure
+description: 使用所提供的示例开始使用 Azure HDInsight 服务。在数据群集中使用运行 MapReduce 程序的 PowerShell 脚本。
+services: hdinsight
+documentationCenter: 
+tags: azure-portal
+authors: mumian
+manager: paulettm
+editor: cgronlun
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/21/2016"
-	wacn.date="01/05/2017"
-	ms.author="jgao"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/21/2016
+wacn.date: 01/05/2017
+ms.author: jgao
+---
 
 #在基于 Windows 的 HDInsight 中运行 Hadoop MapReduce 示例
 
-[AZURE.INCLUDE [samples-selector](../../includes/hdinsight-run-samples-selector.md)]
+[!INCLUDE [samples-selector](../../includes/hdinsight-run-samples-selector.md)]
 
 为帮助你开始使用 Azure HDInsight 在 Hadoop 群集上运行 MapReduce 作业，我们提供了一组示例。在你创建的每一个 HDInsight 托管群集上都可以使用这些示例。运行这些示例会让你熟悉使用 Azure PowerShell cmdlet 在 Hadoop 群集上运行作业。
 
@@ -29,26 +29,26 @@
 - [**Pi 估计器**](#hdinsight-sample-pi-estimator)：使用统计学方法（拟蒙特卡罗法）来估算 pi 值。
 - [**10-GB Graysort**](#hdinsight-sample-10gb-graysort)：使用 HDInsight 对 10 GB 文件运行常规用途的 GraySort。有三个作业要运行：Teragen 生成数据，Terasort 对数据排序，而 Teravalidate 确认数据已正确排序。
 
->[AZURE.NOTE]可以在附录中找到源代码。
+>[!NOTE]可以在附录中找到源代码。
 
 Web 上有许多介绍 Hadoop 相关技术（例如基于 Java 的 MapReduce 编程和流式处理）的其他文档，以及有关 Windows PowerShell 脚本中使用的 cmdlet 的文档。有关这些资源的详细信息，请参阅：
 
-- [为 HDInsight 中的 Hadoop 开发 Java MapReduce 程序](/documentation/articles/hdinsight-develop-deploy-java-mapreduce/)
-- [在 HDInsight 中提交 Hadoop 作业](/documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/)
+- [为 HDInsight 中的 Hadoop 开发 Java MapReduce 程序](./hdinsight-develop-deploy-java-mapreduce.md)
+- [在 HDInsight 中提交 Hadoop 作业](./hdinsight-submit-hadoop-jobs-programmatically.md)
 - [Azure HDInsight 简介][hdinsight-introduction]
 
 现今，许多人选择 Hive 和 Pig，而不是 MapReduce。有关详细信息，请参阅：
 
-- [在 HDInsight 中使用 Hive](/documentation/articles/hdinsight-use-hive/)
-- [在 HDInsight 中使用 Pig](/documentation/articles/hdinsight-use-pig/)
+- [在 HDInsight 中使用 Hive](./hdinsight-use-hive.md)
+- [在 HDInsight 中使用 Pig](./hdinsight-use-pig.md)
  
 **先决条件**：
 
-- **一个 Azure 订阅**。请参阅[获取 Azure 试用版](/pricing/1rmb-trial/)。
-- **一个 HDInsight 群集**。有关可用于创建这类群集的不同方法的说明，请参阅[在 HDInsight 中创建 Hadoop 群集](/documentation/articles/hdinsight-provision-clusters-v1/)。
+- **一个 Azure 订阅**。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
+- **一个 HDInsight 群集**。有关可用于创建这类群集的不同方法的说明，请参阅[在 HDInsight 中创建 Hadoop 群集](./hdinsight-provision-clusters-v1.md)。
 - **配备 Azure PowerShell 的工作站**。
 
-    [AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+    [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 ## <a name="hdinsight-sample-wordcount"></a> 字数统计 - Java 
 
@@ -56,7 +56,7 @@ Web 上有许多介绍 Hadoop 相关技术（例如基于 Java 的 MapReduce 编
 
 可以在[附录 A](#apendix-a---the-word-count-MapReduce-program-in-java) 中找到源代码。
 
-有关开发 Java MapReduce 程序的过程，请参阅[开发适用于 HDInsight 中的 Hadoop 的 Java MapReduce 程序](/documentation/articles/hdinsight-develop-deploy-java-mapreduce/)
+有关开发 Java MapReduce 程序的过程，请参阅[开发适用于 HDInsight 中的 Hadoop 的 Java MapReduce 程序](./hdinsight-develop-deploy-java-mapreduce.md)
  
 **提交字数统计 MapReduce 作业**
 
@@ -136,7 +136,6 @@ Hadoop 向 MapReduce 提供了一个流式处理 API，利用它，你可以采�
 									-InputPath "/example/data/gutenberg/davinci.txt" `
 									-OutputPath "/example/data/StreamingOutput/wc.txt"
 
-
 	输出文件应该是：
 	
 		example/data/StreamingOutput/wc.txt/part-00000		
@@ -193,7 +192,6 @@ pi 估计器使用统计学方法（拟蒙特卡罗法）来估算 pi 值。单�
 								-ClassName "teravalidate" `
 								-Arguments "-Dmapred.map.tasks=50", "-Dmapred.reduce.tasks=25", "/example/data/10GB-sort-output", "/example/data/10GB-sort-validate"
 
-
 ##后续步骤 
 
 从本文和每个示例的相关文章中，你了解到如何使用 Azure PowerShell 运行 HDInsight 群集附带的示例。有关 Pig、Hive 和 MapReduce 如何与 HDInsight 配合使用的教程，请参阅以下主题：
@@ -204,7 +202,6 @@ pi 估计器使用统计学方法（拟蒙特卡罗法）来估算 pi 值。单�
 * [在 HDInsight 中提交 Hadoop 作业][hdinsight-submit-jobs]
 * [Azure HDInsight SDK 文档][hdinsight-sdk-documentation]
 * [在 HDInsight 中调试 Hadoop：错误消息][hdinsight-errors]
-
 
 ## <a name="word-count-java" id="apendix-a---the-word-count-MapReduce-program-in-java"></a> 附录 A - 字数统计源代码
 
@@ -276,7 +273,6 @@ pi 估计器使用统计学方法（拟蒙特卡罗法）来估算 pi 值。单�
   	}
   	}
 
-
 ## 附录 B - 字数统计流式处理源代码
 
 MapReduce 程序使用 cat.exe 应用程序作为映射接口将文本流式传输到控制台，并使用 wc.exe 应用程序作为化简接口来统计从文档中流式传输的字数。映射器和化简器都从标准输入流 (stdin) 逐行读取字符，并写入到标准输出流 (stdout)。
@@ -306,10 +302,7 @@ MapReduce 程序使用 cat.exe 应用程序作为映射接口将文本流式传�
 	    }
 	}
 
-
-
 cat.cs 文件中的映射器代码使用 [StreamReader][streamreader] 对象将传入流的字符读入到控制台，然后控制台使用静态 [Console.Writeline][console-writeline] 方法将流写入标准输出流。
-
 
 	// The source code for wc.exe (Reducer) is:
 
@@ -338,12 +331,7 @@ cat.cs 文件中的映射器代码使用 [StreamReader][streamreader] 对象将�
 	    }
 	}
 
-
 wc.cs 文件中的化简器代码使用 [StreamReader][streamreader] 对象从 cat.exe 映射器输出的标准输入流读取字符。当它使用 [Console.Writeline][console-writeline] 方法读取字符时，它将通过统计位于每个单词末尾的空格和行结束字符的数目来计算单词数量。然后使用 [Console.Writeline][console-writeline] 方法将总数写入标准输出流中。
-
-
-
-
 
 ## 附录 C - PI 估计器源代码
 
@@ -395,7 +383,6 @@ wc.cs 文件中的化简器代码使用 [StreamReader][streamreader] 对象从 c
  	import org.apache.hadoop.mapred.SequenceFileOutputFormat;
  	import org.apache.hadoop.util.Tool;
  	import org.apache.hadoop.util.ToolRunner;
-
 
 	//A Map-reduce program to estimate the value of Pi
 	//using quasi-Monte Carlo method.
@@ -525,7 +512,6 @@ wc.cs 文件中的化简器代码使用 [StreamReader][streamreader] 对象从 c
  	}
  	}
 
-
 	//Reducer class for Pi estimation.
 	//Accumulate points inside/outside results from the mappers.
  	public static class PiReducer extends MapReduceBase
@@ -540,7 +526,6 @@ wc.cs 文件中的化简器代码使用 [StreamReader][streamreader] 对象从 c
  	public void configure(JobConf job) {
  	conf = job;
  	}
-
 
 	// Accumulate number of points inside/outside results from the mappers.
 	// @param isInside Is the points inside?
@@ -690,7 +675,6 @@ wc.cs 文件中的化简器代码使用 [StreamReader][streamreader] 对象从 c
 
 这一部分提供了 TeraSort MapReduce 程序的代码以供检查。
 
-
 	/**
 	 * Licensed to the Apache Software Foundation (ASF) under one
 	 * or more contributor license agreements.  See the NOTICE file
@@ -834,7 +818,6 @@ wc.cs 文件中的化简器代码使用 [StreamReader][streamreader] 对象从 c
 	      }
 	    }
 
-
 	    /**
 	     * Read the cut points from the given sequence file.
 	     * @param fs the file system
@@ -955,44 +938,25 @@ wc.cs 文件中的化简器代码使用 [StreamReader][streamreader] 对象从 c
 	  }
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-[hdinsight-errors]: /documentation/articles/hdinsight-debug-jobs/
+[hdinsight-errors]: ./hdinsight-debug-jobs.md
 
 [hdinsight-sdk-documentation]: https://msdn.microsoft.com/zh-cn/library/azure/dn479185.aspx
 
-[hdinsight-submit-jobs]: /documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/
-[hdinsight-introduction]: /documentation/articles/hdinsight-hadoop-introduction/
-
+[hdinsight-submit-jobs]: ./hdinsight-submit-hadoop-jobs-programmatically.md
+[hdinsight-introduction]: ./hdinsight-hadoop-introduction.md
 
 [powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
 
-[hdinsight-samples]: /documentation/articles/hdinsight-run-samples/
+[hdinsight-samples]: ./hdinsight-run-samples.md
 [hdinsight-sample-10gb-graysort]: #hdinsight-sample-10gb-graysort
 [hdinsight-sample-csharp-streaming]: #hdinsight-sample-csharp-streaming
 [hdinsight-sample-pi-estimator]: #hdinsight-sample-pi-estimator
 [hdinsight-sample-wordcount]: #hdinsight-sample-wordcount
 
-[hdinsight-use-hive]: /documentation/articles/hdinsight-use-hive/
-[hdinsight-use-pig]: /documentation/articles/hdinsight-use-pig/
+[hdinsight-use-hive]: ./hdinsight-use-hive.md
+[hdinsight-use-pig]: ./hdinsight-use-pig.md
 
 [streamreader]: http://msdn.microsoft.com/zh-cn/library/system.io.streamreader.aspx
 [console-writeline]: http://msdn.microsoft.com/zh-cn/library/system.console.writeline

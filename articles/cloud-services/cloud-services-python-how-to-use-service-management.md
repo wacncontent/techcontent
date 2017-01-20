@@ -1,46 +1,44 @@
-<properties
-	pageTitle="如何使用服务管理 API (Python) - 功能指南"
-	description="了解如何以编程方式执行 Python 提供的常见服务管理任务。"
-	services="cloud-services"
-	documentationCenter="python"
-	authors="lmazuel"
-	manager="wpickett"
-	editor=""/>  
+---
+title: 如何使用服务管理 API (Python) - 功能指南
+description: 了解如何以编程方式执行 Python 提供的常见服务管理任务。
+services: cloud-services
+documentationCenter: python
+authors: lmazuel
+manager: wpickett
+editor: 
 
-
-<tags
-	ms.service="cloud-services"
-	ms.workload="tbd"
-	ms.tgt_pltfrm="na"
-	ms.devlang="python"
-	ms.topic="article"
-	ms.date="09/06/2016"
-	wacn.date="12/12/2016"
-	ms.author="lmazuel"/>  
-
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: article
+ms.date: 09/06/2016
+wacn.date: 12/12/2016
+ms.author: lmazuel
+---
 
 # 如何从 Python 使用服务管理
 
-> [AZURE.NOTE] 服务管理 API 将被新的资源管理 API 替换，后者目前已发布预览版。请参阅 [Azure 资源管理文档](http://azure-sdk-for-python.readthedocs.org/)，详细了解如何使用 Python 推出的全新资源管理 API。
+> [!NOTE] 服务管理 API 将被新的资源管理 API 替换，后者目前已发布预览版。请参阅 [Azure 资源管理文档](http://azure-sdk-for-python.readthedocs.org/)，详细了解如何使用 Python 推出的全新资源管理 API。
 
 本指南说明如何以编程方式从 Python 执行常见服务管理任务。[用于 Python 的 Azure SDK](https://github.com/Azure/azure-sdk-for-python) 中的 **ServiceManagementService** 类支持以编程方式访问 [Azure 经典管理门户][management-portal]中提供的众多与服务管理相关的功能（例如**创建、更新和删除云服务、部署、数据管理服务和虚拟机**）。此功能可用于构建需要以编程方式访问服务管理的应用程序。
 
 ## <a name="WhatIs"> </a>什么是服务管理？
 利用服务管理 API，可以编程方式访问通过[经典管理门户][management-portal]提供的众多服务管理功能。Azure SDK for Python 允许你管理云服务和存储帐户。
 
-若要使用服务管理 API，需要[创建 Azure 帐户](/pricing/1rmb-trial/)。
+若要使用服务管理 API，需要[创建 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 
 ## <a name="Concepts"> </a>概念
 Azure SDK for Python 可包装 [Azure 服务管理 API][svc-mgmt-rest-api]，后者是 REST API。所有 API 操作都通过 SSL 执行，并使用 X.509 v3 证书进行互相验证。可以从在 Azure 中运行的服务访问管理服务，或直接通过 Internet 从可发送 HTTPS 请求和接收 HTTPS 响应的任意应用程序访问管理服务。
 
 ## <a name="Installation"></a>安装
 
-`azure-servicemanagement-legacy` 包中提供本文介绍的所有功能，可以使用 pip 安装该包。有关安装的更多详细信息（例如，如果刚开始接触 Python），请参阅此文：[安装 Python 和 Azure SDK](/documentation/articles/python-how-to-install/)
+`azure-servicemanagement-legacy` 包中提供本文介绍的所有功能，可以使用 pip 安装该包。有关安装的更多详细信息（例如，如果刚开始接触 Python），请参阅此文：[安装 Python 和 Azure SDK](../python-how-to-install.md)
 
 ## <a name="Connect"> </a>如何：连接到服务管理
 若要连接到服务管理终结点，你需要 Azure 订阅 ID 和有效管理证书。可以通过 [Azure 经典管理门户][management-portal]获取订阅 ID。
 
-> [AZURE.NOTE] 从 Azure SDK for Python v0.8.0 开始，在 Windows 上运行时，可以使用通过 OpenSSL 创建的证书。需要 Python 2.7.4 或更高版本。我们建议用户使用 OpenSSL 而不是 .pfx，因为将来可能会取消对 .pfx 证书的支持。
+> [!NOTE] 从 Azure SDK for Python v0.8.0 开始，在 Windows 上运行时，可以使用通过 OpenSSL 创建的证书。需要 Python 2.7.4 或更高版本。我们建议用户使用 OpenSSL 而不是 .pfx，因为将来可能会取消对 .pfx 证书的支持。
 
 ### Windows/Mac/Linux 上的管理证书 (OpenSSL)
 可使用 [OpenSSL](http://www.openssl.org/) 创建管理证书。你实际上需要创建两个证书，一个用于服务器（`.cer` 文件），一个用于客户端（`.pem` 文件）。若要创建 `.pem` 文件，请执行以下代码：
@@ -51,7 +49,7 @@ Azure SDK for Python 可包装 [Azure 服务管理 API][svc-mgmt-rest-api]，后
 
     openssl x509 -inform pem -in mycert.pem -outform der -out mycert.cer
 
-有关 Azure 证书的详细信息，请参阅 [Azure 云服务证书概述](/documentation/articles/cloud-services-certs-create/)。
+有关 Azure 证书的详细信息，请参阅 [Azure 云服务证书概述](./cloud-services-certs-create.md)。
 
 创建这些文件后，需要通过 [Azure 经典管理门户][management-portal]中“设置”选项卡的“上传”操作将 `.cer` 文件上传到 Azure，并且需要记下 `.pem` 文件的保存位置。
 
@@ -73,7 +71,7 @@ Azure SDK for Python 可包装 [Azure 服务管理 API][svc-mgmt-rest-api]，后
 
     makecert -sky exchange -r -n "CN=AzureCertificate" -pe -a sha1 -len 2048 -ss My "AzureCertificate.cer"
 
-该命令将创建 `.cer` 文件，然后将该文件安装到“个人”证书存储区中。有关详细信息，请参阅 [Azure 云服务证书概述](/documentation/articles/cloud-services-certs-create/)。
+该命令将创建 `.cer` 文件，然后将该文件安装到“个人”证书存储区中。有关详细信息，请参阅 [Azure 云服务证书概述](./cloud-services-certs-create.md)。
 
 创建证书后，需通过[经典管理门户][management-portal]“设置”选项卡的“上传”操作，将 `.cer` 文件上传到 Azure。
 
@@ -104,7 +102,6 @@ Azure SDK for Python 可包装 [Azure 服务管理 API][svc-mgmt-rest-api]，后
 
 创建云服务或存储服务时，需要提供有效位置。**list\_locations** 方法将始终返回当前可用位置的最新列表。截止到本文撰写时为止，可用位置为：
 
- 
 - 中国东部 
 - 中国北部
 
@@ -165,7 +162,7 @@ Azure SDK for Python 可包装 [Azure 服务管理 API][svc-mgmt-rest-api]，后
 
 ## <a name="CreateStorageService"> </a>如何：创建存储服务
 
-利用[存储服务](/documentation/articles/storage-create-storage-account/)，可以访问 Azure [Blob](/documentation/articles/storage-python-how-to-use-blob-storage/)、[表](/documentation/articles/storage-python-how-to-use-table-storage/)和[队列](/documentation/articles/storage-python-how-to-use-queue-storage/)。若要创建存储服务，需要服务名称（3 至 24 个小写字符，且在 Azure 中是唯一的）、说明、标签（最多 100 个字符，自动编码为 base64）以及位置。下面的示例演示如何通过指定位置来创建存储服务。
+利用[存储服务](../storage/storage-create-storage-account.md)，可以访问 Azure [Blob](../storage/storage-python-how-to-use-blob-storage.md)、[表](../storage/storage-python-how-to-use-table-storage.md)和[队列](../storage/storage-python-how-to-use-queue-storage.md)。若要创建存储服务，需要服务名称（3 至 24 个小写字符，且在 Azure 中是唯一的）、说明、标签（最多 100 个字符，自动编码为 base64）以及位置。下面的示例演示如何通过指定位置来创建存储服务。
 
 	from azure import *
 	from azure.servicemanagement import *
@@ -396,9 +393,9 @@ Azure SDK for Python 可包装 [Azure 服务管理 API][svc-mgmt-rest-api]，后
 		role_size='Small',
 		vm_image_name = image_name)
 
-若要了解有关如何捕获 Linux 虚拟机的详细信息，请参阅[如何捕获 Linux 虚拟机](/documentation/articles/virtual-machines-linux-classic-capture-image/)。
+若要了解有关如何捕获 Linux 虚拟机的详细信息，请参阅[如何捕获 Linux 虚拟机](../virtual-machines/virtual-machines-linux-classic-capture-image.md)。
 
-若要了解有关如何捕获 Windows 虚拟机的详细信息，请参阅[如何捕获 Windows 虚拟机](/documentation/articles/virtual-machines-windows-classic-capture-image/)。
+若要了解有关如何捕获 Windows 虚拟机的详细信息，请参阅[如何捕获 Windows 虚拟机](../virtual-machines/virtual-machines-windows-classic-capture-image.md)。
 
 ## <a name="What's Next"></a>后续步骤
 
@@ -427,17 +424,16 @@ Azure SDK for Python 可包装 [Azure 服务管理 API][svc-mgmt-rest-api]，后
 [management-portal]: https://manage.windowsazure.cn/
 [svc-mgmt-rest-api]: http://msdn.microsoft.com/zh-cn/library/windowsazure/ee460799.aspx
 
-
-[download-SDK-Python]: /documentation/articles/python-how-to-install/
-[云服务]: /documentation/services/cloud-services/
+[download-SDK-Python]: ../python-how-to-install.md
+[云服务]: ./index.md/
 [service package]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj155995.aspx
-[Azure PowerShell cmdlets]: /documentation/articles/powershell-install-configure/
+[Azure PowerShell cmdlets]: ../powershell-install-configure.md
 [cspack commandline tool]: http://msdn.microsoft.com/zh-cn/library/windowsazure/gg432988.aspx
 [Deploying an Azure Service]: http://msdn.microsoft.com/zh-cn/library/windowsazure/gg433027.aspx
-[存储服务]: /documentation/articles/storage-introduction/
-[azure-blobs]: /documentation/articles/storage-python-how-to-use-blob-storage/
-[azure-tables]: /documentation/articles/storage-python-how-to-use-table-storage/
-[azure-queues]: /documentation/articles/storage-python-how-to-use-queue-storage/
+[存储服务]: ../storage/storage-introduction.md
+[azure-blobs]: ../storage/storage-python-how-to-use-blob-storage.md
+[azure-tables]: ../storage/storage-python-how-to-use-table-storage.md
+[azure-queues]: ../storage/storage-python-how-to-use-queue-storage.md
 [Azure Service Configuration Schema (.cscfg)]: http://msdn.microsoft.com/zh-cn/library/windowsazure/ee758710.aspx
 [Cloud Services]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj155995.aspx
 [Virtual Machines]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj156003.aspx

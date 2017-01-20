@@ -1,29 +1,28 @@
-<properties
-	pageTitle="SQL 数据库 s 数据同步入门"
-	description="本教程帮助你 Azure SQL 数据同步（预览版）入门。"
-	services="sql-database"
-	documentationCenter=""
-	authors="jennieHubbard"
-	manager="jhubbard"
-	editor=""/>
+---
+title: SQL 数据库 s 数据同步入门
+description: 本教程帮助你 Azure SQL 数据同步（预览版）入门。
+services: sql-database
+documentationCenter: 
+authors: jennieHubbard
+manager: jhubbard
+editor: 
 
-<tags
-	ms.service="sql-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/11/2016"
-	wacn.date="08/15/2016"
-	ms.author="jhubbard"/>
-
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/11/2016
+wacn.date: 08/15/2016
+ms.author: jhubbard
+---
 
 #Azure SQL 数据同步入门（预览版）
 在本教程中，你将了解使用 Azure 经典管理门户的 Azure SQL 数据同步的基础知识。
 
 本教程假定你之前未使用过 SQL Server 和 Azure SQL 数据库。在本教程中，你将创建一个完全配置且按既定计划同步的混合（SQL Server 和 SQL 数据库实例）同步组。
 
-> [AZURE.NOTE] 有关 Azure SQL 数据同步的完整技术文档集以前位于 MSDN 中，现在以 .pdf 文件提供。可从[此处](http://download.microsoft.com/download/4/E/3/4E394315-A4CB-4C59-9696-B25215A19CEF/SQL_Data_Sync_Preview.pdf)下载。
+> [!NOTE] 有关 Azure SQL 数据同步的完整技术文档集以前位于 MSDN 中，现在以 .pdf 文件提供。可从[此处](http://download.microsoft.com/download/4/E/3/4E394315-A4CB-4C59-9696-B25215A19CEF/SQL_Data_Sync_Preview.pdf)下载。
 
 ## 步骤 1：连接到 Azure SQL 数据库
 
@@ -38,7 +37,6 @@
 5. 如果你之前没有添加代理，请“单击此处进行下载”。
 
 	![Image1](./media/sql-database-get-started-sql-data-sync/SQLDatabaseScreen-Figure1.PNG)
-
 
 ## 步骤 2：添加客户端代理
 仅当你要在同步组中包含本地 SQL Server 数据库时，才需要执行此步骤。如果你的同步组只具有 SQL 数据库实例，则请跳到步骤 4。
@@ -59,14 +57,10 @@
 
  从[此处](http://www.microsoft.com/zh-cn/download/details.aspx?id=26728)安装 Microsoft SQL Server 2008 R2 SP1 Shared Management Objects (x86)
 
-
-
 <a id="InstallClient"></a>
 ### 步骤 2b：安装新的客户端代理
 
 按照[安装客户端代理（SQL 数据同步）](http://download.microsoft.com/download/4/E/3/4E394315-A4CB-4C59-9696-B25215A19CEF/SQL_Data_Sync_Preview.pdf)中的说明来安装代理。
-
-
 
 <a id="RegisterSSDb"></a>
 ### 步骤 2c：完成新建 SQL 数据同步代理向导
@@ -77,17 +71,12 @@
 4.	从下拉列表中，选择托管此代理的“订阅”。
 5.	单击右箭头。
 
-
-
 ## 步骤 3：使用客户端代理注册 SQL Server 数据库
 
 安装客户端代理后，向该代理注册您要包含在同步组中的每个本地 SQL Server 数据库。
 若要向该代理注册数据库，请按照[向客户端代理注册 SQL Server 数据库](http://download.microsoft.com/download/4/E/3/4E394315-A4CB-4C59-9696-B25215A19CEF/SQL_Data_Sync_Preview.pdf)中的说明操作。
 
-
-
 ## 步骤 4：创建同步组
-
 
 <a id="StartNewSGWizard"></a>
 ### 步骤 4a：启动新建同步组向导
@@ -98,18 +87,14 @@
 
 	![Image2](./media/sql-database-get-started-sql-data-sync/NewSyncGroup-Figure2.png)
 
-
-
 <a id=""></a>
 ### 步骤 4b：输入基本设置
-
 
 1.	为该同步组输入一个有意义的名称。
 2.	从下拉列表中，选择托管此同步组的“区域”（数据中心）。
 3. 单击右箭头。
 
 	![Image3](./media/sql-database-get-started-sql-data-sync/NewSyncGroupName-Figure3.PNG)
-
 
 <a id="DefineHubDB"></a>
 ### 步骤 4c：定义同步中心
@@ -121,7 +106,6 @@
 
  **中心 Wins** – 写入中心数据库的任何更改都将写入引用数据库，以覆盖同一引用数据库记录中的更改。从功能上看，这意味着写入中心的首次更改会传播到其他数据库。
 
-
  **客户端 Wins** – 写入中心的更改将被引用数据库中的更改覆盖。从功能上看，这意味着写入中心的最后一次更改会被保留并传播到其他数据库。
 
 5.	单击右箭头。
@@ -130,7 +114,6 @@
 
 <a id="AddRefDB"></a>
 ### 步骤 4d：添加引用数据库
-
 
 对你要额外添加到同步组中的每个数据库重复此步骤。
 
@@ -151,7 +134,6 @@
 5.	再次单击复选标记。你将会返回到 SQL 数据库下的“同步”页。现在，此同步组将与其他同步组和代理一同列出。
 
 	![Image5](./media/sql-database-get-started-sql-data-sync/NewSyncGroupReference-Figure5.PNG)
-
 
 ## 步骤 5：定义要同步的数据
 
@@ -199,10 +181,7 @@
 有关 SQL 数据库和 SQL 数据同步的其他信息，请参阅：
 
 * [下载完整的 SQL 数据同步技术文档](http://download.microsoft.com/download/4/E/3/4E394315-A4CB-4C59-9696-B25215A19CEF/SQL_Data_Sync_Preview.pdf)
-* [SQL 数据库概述](/documentation/articles/sql-database-technical-overview/)
+* [SQL 数据库概述](./sql-database-technical-overview.md)
 * [数据库生命周期管理](https://msdn.microsoft.com/zh-cn/library/jj907294.aspx)
  
-
- 
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

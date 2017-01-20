@@ -6,7 +6,6 @@
 
    ![在 iOS 上运行的快速启动应用](./media/app-service-mobile-ios-quickstart/mobile-quickstart-startup-ios.png)  
 
-
 [Azure 门户预览]: https://portal.azure.cn/
 
 <!---HONumber=Mooncake_1219_2016-->

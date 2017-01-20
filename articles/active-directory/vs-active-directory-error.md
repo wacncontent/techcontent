@@ -1,23 +1,22 @@
-<properties
-    pageTitle="身份验证检测期间的错误"
-    description="Active Directory 连接向导检测到不兼容的身份验证类型"
-    services="active-directory"
-    documentationcenter=""
-    author="TomArcher"
-    manager="douge"
-    editor="" />  
+---
+title: 身份验证检测期间的错误
+description: Active Directory 连接向导检测到不兼容的身份验证类型
+services: active-directory
+documentationcenter: 
+author: TomArcher
+manager: douge
+editor: 
 
-<tags
-    ms.assetid="dd89ea63-4e45-4da1-9642-645b9309670a"
-    ms.service="active-directory"
-    ms.workload="web"
-    ms.tgt_pltfrm="vs-getting-started"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/18/2016"
-    wacn.date="01/05/2017"
-    ms.author="tarcher" />  
-
+ms.assetid: dd89ea63-4e45-4da1-9642-645b9309670a
+ms.service: active-directory
+ms.workload: web
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: na
+ms.topic: article
+ms.date: 11/18/2016
+wacn.date: 01/05/2017
+ms.author: tarcher
+---
 
 # 身份验证检测期间的错误
 检测以前的身份验证代码时，向导检测到不兼容的身份验证类型。
@@ -91,6 +90,6 @@
 
 如需变更身份认证类型，请删除不兼容的身份验证类型，然后再次运行此向导。
 
-有关详细信息，请参阅 [Azure AD 的身份验证方案](/documentation/articles/active-directory-authentication-scenarios/)。
+有关详细信息，请参阅 [Azure AD 的身份验证方案](./active-directory-authentication-scenarios.md)。
 
 <!---HONumber=Mooncake_1226_2016-->

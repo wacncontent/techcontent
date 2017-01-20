@@ -1,29 +1,29 @@
-<properties
-	pageTitle="将应用部署到 Azure App Service | Azure"
-	description="了解如何将你的应用部署到 Azure App Service。"
-	services="app-service"
-	documentationCenter=""
-	authors="cephalin"
-	manager="wpickett"
-	editor="mollybos"/>
+---
+title: 将应用部署到 Azure App Service | Azure
+description: 了解如何将你的应用部署到 Azure App Service。
+services: app-service
+documentationCenter: 
+authors: cephalin
+manager: wpickett
+editor: mollybos
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/19/2016"
-	wacn.date="01/05/2017"
-	ms.author="cephalin;dariac"/>  
-    
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/19/2016
+wacn.date: 01/05/2017
+ms.author: cephalin;dariac
+---
+
 # 将应用部署到 Azure App Service
 
-本文可帮助你确定将 Web 应用、移动应用后端或 API 应用的文件部署到 [Azure App Service](/documentation/articles/app-service-changes-existing-services/) 的最佳选项，然后将你引导到相应的资源，其中包含特定于你的首选选项的操作说明。
+本文可帮助你确定将 Web 应用、移动应用后端或 API 应用的文件部署到 [Azure App Service](./app-service-changes-existing-services.md) 的最佳选项，然后将你引导到相应的资源，其中包含特定于你的首选选项的操作说明。
 
 ## <a name="overview"></a>Azure App Service 部署概述
 
-Azure App Service 保留了应用程序框架（ASP.NET、PHP、Node.js 等等）。某些框架在默认情况下已启用，而其他框架（如 Java 和 Python）可能需要进行简单的复选标记配置才能启用。此外，你还可以自定义应用程序框架，如运行时的 PHP 版本或位元。有关详细信息，请参阅 [Configure your app in Azure App Service](/documentation/articles/web-sites-configure/)（在 Azure App Service 中配置你的应用）。
+Azure App Service 保留了应用程序框架（ASP.NET、PHP、Node.js 等等）。某些框架在默认情况下已启用，而其他框架（如 Java 和 Python）可能需要进行简单的复选标记配置才能启用。此外，你还可以自定义应用程序框架，如运行时的 PHP 版本或位元。有关详细信息，请参阅 [Configure your app in Azure App Service](./web-sites-configure.md)（在 Azure App Service 中配置你的应用）。
 
 由于你无需担心 Web 服务器或应用程序框架，因此将应用部署到应用服务只需将代码、二进制文件、内容文件及其各自的目录结构部署到 Azure 中的 [**/site/wwwroot** 目录](https://github.com/projectkudu/kudu/wiki/File-structure-on-azure)（对于 Web 作业，部署到 **/site/wwwroot/App\_Data/Jobs/** 目录）。应用服务支持以下部署选项：
 
@@ -37,7 +37,7 @@ Azure App Service 保留了应用程序框架（ASP.NET、PHP、Node.js 等等�
 
 常用的 Web 开发工具支持其中的一个或多个部署进程。虽然你选择的工具确定了你可以利用的部署进程，但是由你支配的实际 DevOps 功能取决于部署进程和你选择的特定工具的组合。例如，如果你从[包含 Azure SDK 的 Visual Studio](#vspros) 执行 Web 部署，即使你未从 Kudu 自动执行，你也会在 Visual Studio 中自动执行程序包还原和 MSBuild。
 
->[AZURE.NOTE] 这些部署过程并不会真正[预配应用可能需要的 Azure 资源](/documentation/articles/resource-group-template-deploy-portal/)。但是，大多数链接的操作方法文章会向你展示如何预配应用并端到端地将代码部署到该应用。你还可以在[使用命令行工具自动部署](#automate)部分中找到用于预配 Azure 资源的其他选项。
+>[!NOTE] 这些部署过程并不会真正[预配应用可能需要的 Azure 资源](../azure-resource-manager/resource-group-template-deploy-portal.md)。但是，大多数链接的操作方法文章会向你展示如何预配应用并端到端地将代码部署到该应用。你还可以在[使用命令行工具自动部署](#automate)部分中找到用于预配 Azure 资源的其他选项。
      
 ## <a name="ftp"></a>使用 FTP 通过将文件手动复制到 Azure 进行部署
 如果你习惯于手动将 Web 内容复制到 Web 服务器，可以使用 [FTP](http://en.wikipedia.org/wiki/File_Transfer_Protocol) 实用工具（如 Windows 资源管理器或 [FileZilla](https://filezilla-project.org/)）复制文件。
@@ -65,7 +65,7 @@ Azure App Service 保留了应用程序框架（ASP.NET、PHP、Node.js 等等�
 
 有关详细信息，请参阅以下资源：
 
-* [创建 PHP-MySQL Web 应用并使用 FTP 进行部署](/documentation/articles/web-sites-php-mysql-deploy-use-ftp/)。
+* [创建 PHP-MySQL Web 应用并使用 FTP 进行部署](./web-sites-php-mysql-deploy-use-ftp.md)。
 
 ## <a name="continuousdeployment"></a>从基于云的源代码管理服务连续部署
 如果你的开发团队使用基于云的源代码管理 (SCM) 服务，如 [GitHub](https://www.github.com)，则你可以将应用服务配置为与你的存储库集成并连续部署。
@@ -74,7 +74,7 @@ Azure App Service 保留了应用程序框架（ASP.NET、PHP、Node.js 等等�
 
 - 版本控制支持回退。
 - 能够为 Git（以及 Mercurial，如果适用）存储库配置连续部署。
-- 分支特定的部署，可以将不同分支部署到不同的[槽](/documentation/articles/web-sites-staged-publishing/)。
+- 分支特定的部署，可以将不同分支部署到不同的[槽](./web-sites-staged-publishing.md)。
 - Kudu 部署引擎中的所有功能都可用（例如，部署版本控制、回退、程序包还原、自动化）。
 
 从基于云的源代码管理服务部署的缺点是：
@@ -84,7 +84,7 @@ Azure App Service 保留了应用程序框架（ASP.NET、PHP、Node.js 等等�
 ###<a name="vsts"></a>如何从基于云的源代码管理服务连续部署
 在 Kudu 中，可以从 GitHub 配置连续部署。
 
-* [Continous Deployment to Azure App Service](/documentation/articles/app-service-continuous-deployment/)（连续部署到 Azure App Service）。
+* [Continous Deployment to Azure App Service](./app-service-continuous-deployment.md)（连续部署到 Azure App Service）。
 
 ## <a name="localgitdeployment"></a>从本地 Git 部署
 如果你的开发团队使用基于 Git 的本地源代码管理 (SCM) 服务，可将它配置为应用服务的部署源。
@@ -92,7 +92,7 @@ Azure App Service 保留了应用程序框架（ASP.NET、PHP、Node.js 等等�
 从本地 Git 进行部署的优点是：
 
 - 版本控制支持回退。
-- 分支特定的部署，可以将不同分支部署到不同的[槽](/documentation/articles/web-sites-staged-publishing/)。
+- 分支特定的部署，可以将不同分支部署到不同的[槽](./web-sites-staged-publishing.md)。
 - Kudu 部署引擎中的所有功能都可用（例如，部署版本控制、回退、程序包还原、自动化）。
 
 从本地 Git 进行部署的缺点是：
@@ -103,7 +103,7 @@ Azure App Service 保留了应用程序框架（ASP.NET、PHP、Node.js 等等�
 ###<a name="vsts"></a>如何从本地 Git 部署
 在 [Azure 门户预览](https://portal.azure.cn)中，可以配置本地 Git 部署。
 
-* [Local Git Deployment to Azure App Service](/documentation/articles/app-service-deploy-local-git/)（从本地 Git 部署到 Azure App Service）。
+* [Local Git Deployment to Azure App Service](./app-service-deploy-local-git.md)（从本地 Git 部署到 Azure App Service）。
 * [从任何 git/hg 存储库发布到 Web 应用](http://blog.davidebbo.com/2013/04/publishing-to-azure-web-sites-from-any.html)。
 
 ## 使用 IDE 进行部署
@@ -130,9 +130,9 @@ Visual Studio 支持所有这三种部署过程（FTP、Git 和 Web 部署），
 
 ###<a name="vs"></a>如何直接从 Visual Studio 部署
 
-* [Azure 和 ASP.NET 入门](/documentation/articles/web-sites-dotnet-get-started/)。如何使用 Visual Studio 和 Web 部署来创建和部署一个简单的 ASP.NET MVC Web 项目。
-* [如何使用 Visual Studio 部署 Azure Web 作业](/documentation/articles/websites-dotnet-deploy-webjobs/)。如何配置控制台应用程序项目，以便将它们部署为 Web 作业。
-* [将包含成员资格、OAuth 和 SQL 数据库的安全 ASP.NET MVC 5 应用程序部署到 Web 应用](/documentation/articles/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/)。如何使用 Visual Studio、Web 部署和 Entity Framework Code First 迁移通过 SQL 数据库来创建和部署 ASP.NET MVC Web 项目。
+* [Azure 和 ASP.NET 入门](./web-sites-dotnet-get-started.md)。如何使用 Visual Studio 和 Web 部署来创建和部署一个简单的 ASP.NET MVC Web 项目。
+* [如何使用 Visual Studio 部署 Azure Web 作业](./websites-dotnet-deploy-webjobs.md)。如何配置控制台应用程序项目，以便将它们部署为 Web 作业。
+* [将包含成员资格、OAuth 和 SQL 数据库的安全 ASP.NET MVC 5 应用程序部署到 Web 应用](./web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database.md)。如何使用 Visual Studio、Web 部署和 Entity Framework Code First 迁移通过 SQL 数据库来创建和部署 ASP.NET MVC Web 项目。
 * [使用 Visual Studio 的 ASP.NET Web 部署](http://www.asp.net/mvc/tutorials/deployment/visual-studio-web-deployment/introduction)。共 12 篇的系列教程涵盖了比此列表中其他部署任务更完整的部署任务。自编写本教程以来添加了一些 Azure 部署功能，但注释是后来添加的，说明缺少哪些内容。
 * [在 Visual Studio 2012 中直接从 Git 存储库将 ASP.NET 网站部署到 Azure](http://www.dotnetcurry.com/ShowArticle.aspx?ID=881)。说明如何在 Visual Studio 中部署 ASP.NET Web 项目（使用 Git 插件将代码提交到 Git 并将 Azure 连接到 Git 存储库）。从 Visual Studio 2013 开始，Git 支持是内置的，不需要安装插件。
 
@@ -163,9 +163,9 @@ Visual Studio 支持所有这三种部署过程（FTP、Git 和 Web 部署），
 
 有关详细信息，请参阅以下资源：
 
-* [部署链接到 GitHub 存储库的 Web 应用](/documentation/articles/app-service-web-arm-from-github-provision/)
-* [设置使用 SQL 数据库的 Web 应用](/documentation/articles/app-service-web-arm-with-sql-database-provision/)
-* [按可预见的方式在 Azure 中设置和部署微服务](/documentation/articles/app-service-deploy-complex-application-predictably/)
+* [部署链接到 GitHub 存储库的 Web 应用](./app-service-web-arm-from-github-provision.md)
+* [设置使用 SQL 数据库的 Web 应用](./app-service-web-arm-with-sql-database-provision.md)
+* [按可预见的方式在 Azure 中设置和部署微服务](./app-service-deploy-complex-application-predictably.md)
 * [使用 Azure 构建真实世界云应用 – 使一切自动化](http://asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/automate-everything)。电子书章节，其中介绍电子书中所示的示例应用程序如何使用 Windows PowerShell 脚本创建 Azure 测试环境并部署到该环境中。请参阅[资源](http://asp.net/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/automate-everything#resources)部分以获取指向其他 Azure PowerShell 文档的链接。
 
 ###<a name="api"></a>使用 .NET 管理 API 自动部署
@@ -197,13 +197,10 @@ Visual Studio 支持所有这三种部署过程（FTP、Git 和 Web 部署），
 
 ##<a name="nextsteps"></a>后续步骤
 
-在某些情况下，你可能想要能够轻松地在应用的过渡版本和生产版本之间来回切换。有关详细信息，请参阅 [Web 应用上的过渡部署](/documentation/articles/web-sites-staged-publishing/)。
+在某些情况下，你可能想要能够轻松地在应用的过渡版本和生产版本之间来回切换。有关详细信息，请参阅 [Web 应用上的过渡部署](./web-sites-staged-publishing.md)。
 
-准备好备份和还原计划是任何部署工作流的一个重要部分。有关应用服务备份和还原功能的信息，请参阅 [Web Apps Backups](/documentation/articles/web-sites-backup/)（Web 应用备份）。
+准备好备份和还原计划是任何部署工作流的一个重要部分。有关应用服务备份和还原功能的信息，请参阅 [Web Apps Backups](./web-sites-backup.md)（Web 应用备份）。
 
 有关如何使用 Azure 的基于角色的访问控制来管理应用服务部署访问权限的信息，请参阅 [RBAC and Web App Publishing](https://azure.microsoft.com/blog/2015/01/05/rbac-and-azure-websites-publishing/)（RBAC 和 Web 应用发布）。
-
-
- 
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

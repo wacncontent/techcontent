@@ -1,22 +1,21 @@
-<properties
-	pageTitle="保护 Azure AD 中的特权访问 | Azure"
-	description="本主题介绍在 Azure、Azure Active Directory 和 Microsoft 在线服务中保护特许访问的方法。"
-	services="active-directory"
-	documentationCenter=""
-	authors="kgremban"
-	manager="femila"
-	editor="mwahl"/>
+---
+title: 保护 Azure AD 中的特权访问 | Azure
+description: 本主题介绍在 Azure、Azure Active Directory 和 Microsoft 在线服务中保护特许访问的方法。
+services: active-directory
+documentationCenter: 
+authors: kgremban
+manager: femila
+editor: mwahl
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/26/2016"
-	wacn.date="12/30/2016"
-	ms.author="kgremban"/>
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/26/2016
+wacn.date: 12/30/2016
+ms.author: kgremban
+---
 
 # 保护 Azure AD 中的特权访问
 
@@ -34,7 +33,6 @@ Microsoft 建议遵循 [Securing Privileged Access（保护特权访问）](http
 
 Azure Multi-Factor Authentication 可帮助保护对数据和应用程序的访问，同时可以满足用户对简单登录过程的需求。它通过各种简单的验证选项（包括电话呼叫、短信、移动应用通知或验证码）和第三方 OATH 令牌）来提供强式身份验证。
 
-
 有关详细信息，请参阅 [MFA for Office 365 and MFA for Azure（对 Office 365 的 MFA 和对 Azure 的 MFA）](https://blogs.technet.microsoft.com/ad/2014/02/11/mfa-for-office-365-and-mfa-for-azure/)。
 
 ## 时间约束的特权
@@ -43,9 +41,7 @@ Azure Multi-Factor Authentication 可帮助保护对数据和应用程序的访�
 
 若要减少特权的曝露时间并增大其使用的可见性，可将用户限制为只在需要执行某个任务时才适时使用 (JIT) 其特权。对于 Azure Active Directory 和 Microsoft 在线服务，可以使用 [Azure AD Privileged Identity Management (PIM)](http://aka.ms/AzurePIM)。
 
-
 ![PIM 仪表板][2]
-
 
 ## 攻击检测
 
@@ -57,16 +53,11 @@ Azure Active Directory Identity Protection 提供一个整合的视图来让你�
 
 借助条件性访问控制，Azure Active Directory 会在验证用户身份时先检查你选择的特定条件，然后才允许访问应用程序。一旦符合这些条件，用户就会通过身份验证并获权访问应用程序。
 
-
 ![设置使用 MFA 的条件性访问规则][4]
-
 
 ## 相关文章
 
-
-- 启用 [Azure Multi-Factor Authentication](/documentation/articles/multi-factor-authentication-get-started-cloud/)
-
-
+- 启用 [Azure Multi-Factor Authentication](../multi-factor-authentication/multi-factor-authentication-get-started-cloud.md)
 
 有关构建完整安全路线图的详细信息，请参阅 [Microsoft Cloud Security for Enterprise Architects（针对企业结构设计的 Microsoft 云安全性）](http://aka.ms/securecustomer)文档中的“Customer responsibilities and roadmap”（客户责任和路线图）部分。有关运用 Microsoft 服务来帮助实现其中任一主题所述功能的详细信息，请联系 Microsoft 代表或访问我们的网络安全解决方案网页。
 

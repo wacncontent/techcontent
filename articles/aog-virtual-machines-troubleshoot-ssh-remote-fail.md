@@ -1,12 +1,16 @@
-<properties 
-	pageTitle="SSH 无法启动的原因分析及解决方法" 
-	description="本文介绍 SSH 无法启动的原因分析及解决方法" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machine-aog" ms.date="" wacn.date="10/28/2016"/>
+---
+title: SSH 无法启动的原因分析及解决方法
+description: 本文介绍 SSH 无法启动的原因分析及解决方法
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machine-aog
+ms.date: 
+wacn.date: 10/28/2016
+---
 
 # SSH 无法启动的原因分析及解决方法 #
 
@@ -28,7 +32,6 @@ SSH 之另一项优点为其传输的数据可以是经过压缩的，所以可�
     `Starting sshd: /var/empty/sshd must be owned by root and not group or world-writable.`
 2. ssh <span style="background:#FFFF00">配置文件内容有误, 或语法有误</span>, 报错参考如下:
 	`Starting sshd: [FAILED]`
-
 
 ## 解决方案 ##
 

@@ -1,33 +1,34 @@
-<properties
-	pageTitle="配置 AlwaysOn 可用性组的外部侦听器 | Azure"
-	description="本教程逐步说明如何在 Azure 中创建一个可以使用关联云服务公共虚拟 IP 地址从外部访问的 AlwaysOn 可用性组侦听器。"
-	services="virtual-machines-windows"
-	documentationCenter="na"
-	authors="MikeRayMSFT"
-	manager="jhubbard"
-	editor=""
-	tags="azure-service-management" />
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="07/12/2016"
-	wacn.date="09/12/2016"
-	ms.author="MikeRayMSFT" />
+---
+title: 配置 AlwaysOn 可用性组的外部侦听器 | Azure
+description: 本教程逐步说明如何在 Azure 中创建一个可以使用关联云服务公共虚拟 IP 地址从外部访问的 AlwaysOn 可用性组侦听器。
+services: virtual-machines-windows
+documentationCenter: na
+authors: MikeRayMSFT
+manager: jhubbard
+editor: 
+tags: azure-service-management
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 07/12/2016
+wacn.date: 09/12/2016
+ms.author: MikeRayMSFT
+---
 
 # 在 Azure 中配置 AlwaysOn 可用性组的外部侦听器
 
-> [AZURE.SELECTOR]
-- [内部侦听器](/documentation/articles/virtual-machines-windows-classic-ps-sql-int-listener/)
-- [外部侦听器](/documentation/articles/virtual-machines-windows-classic-ps-sql-ext-listener/)
+> [!div class="op_single_selector"]
+- [内部侦听器](./virtual-machines-windows-classic-ps-sql-int-listener.md)
+- [外部侦听器](./virtual-machines-windows-classic-ps-sql-ext-listener.md)
 
 本主题说明如何为 AlwaysOn 可用性组配置一个可以通过 Internet 从外部访问的侦听器。这是通过将云服务的**公共虚拟 IP (VIP)** 地址与侦听器关联来实现的。
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
-你的可用性组可以仅包含本地副本或 Azure 副本，也可以跨越本地和 Azure 以实现混合配置。Azure 副本可以位于同一区域，也可以跨越使用多个虚拟网络 (VNet) 的多个区域。以下步骤假设你已[配置了一个可用性组](/documentation/articles/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/)但是没有配置侦听器。
+你的可用性组可以仅包含本地副本或 Azure 副本，也可以跨越本地和 Azure 以实现混合配置。Azure 副本可以位于同一区域，也可以跨越使用多个虚拟网络 (VNet) 的多个区域。以下步骤假设你已[配置了一个可用性组](./virtual-machines-windows-classic-portal-sql-alwayson-availability-groups.md)但是没有配置侦听器。
 
 ## 外部侦听器的准则和限制
 
@@ -37,7 +38,7 @@
 
 - 客户端应用程序必须位于与包含你的可用性组 VM 的云服务不同的云服务中。Azure 不支持客户端和服务器位于同一个云服务中的直接服务器返回。
 
-- 默认情况下，本文中的步骤说明如何将一个侦听器配置为使用云服务虚拟 IP (VIP) 地址。但是，你可以为云服务保留和创建多个 VIP 地址。这样就可以使用本文中的步骤创建多个侦听器，每个侦听器与不同的 VIP 相关联。有关如何创建多个 VIP 地址的信息，请参阅[每个云服务具有多个 VIP](/documentation/articles/load-balancer-multivip/)。
+- 默认情况下，本文中的步骤说明如何将一个侦听器配置为使用云服务虚拟 IP (VIP) 地址。但是，你可以为云服务保留和创建多个 VIP 地址。这样就可以使用本文中的步骤创建多个侦听器，每个侦听器与不同的 VIP 相关联。有关如何创建多个 VIP 地址的信息，请参阅[每个云服务具有多个 VIP](../load-balancer/load-balancer-multivip.md)。
 
 - 如果你要为混合环境创建侦听器，则本地网络必须连接到公共 Internet，还通过 Azure 虚拟网络连接到站点到站点 VPN。位于 Azure 子网中时，只能通过相应云服务的公共 IP 地址来访问该可用性组侦听器。
 
@@ -45,15 +46,15 @@
 
 ## 确定侦听器的可访问性
 
-[AZURE.INCLUDE [ag-listener-accessibility](../../includes/virtual-machines-ag-listener-determine-accessibility.md)]
+[!INCLUDE [ag-listener-accessibility](../../includes/virtual-machines-ag-listener-determine-accessibility.md)]
 
-本文重点介绍如何创建使用**外部负载均衡**的侦听器。如果你想要创建专用于虚拟网络的侦听器，请参阅本文的另一个版本，其中提供了设置[使用 ILB 的侦听器](/documentation/articles/virtual-machines-windows-classic-ps-sql-int-listener/)的步骤
+本文重点介绍如何创建使用**外部负载均衡**的侦听器。如果你想要创建专用于虚拟网络的侦听器，请参阅本文的另一个版本，其中提供了设置[使用 ILB 的侦听器](./virtual-machines-windows-classic-ps-sql-int-listener.md)的步骤
 
 ## 创建支持直接服务器返回的负载均衡 VM 终结点
 
 外部负载均衡使用托管 VM 的云服务的公共虚拟 IP 地址。因此，在这种情况下，你不需要创建或配置负载均衡器。
 
-[AZURE.INCLUDE [load-balanced-endpoints](../../includes/virtual-machines-ag-listener-load-balanced-endpoints.md)]
+[!INCLUDE [load-balanced-endpoints](../../includes/virtual-machines-ag-listener-load-balanced-endpoints.md)]
 
 1. 将以下 PowerShell 脚本复制到文本编辑器中，并根据你的环境设置变量值（这里为某些参数提供了默认值）。请注意，如果可用性组跨 Azure 区域，则你必须在每个数据中心内对云服务和节点运行该脚本一次。
 
@@ -71,15 +72,15 @@
 
 ## 如果需要，请验证是否已安装 KB2854082
 
-[AZURE.INCLUDE [kb2854082](../../includes/virtual-machines-ag-listener-kb2854082.md)]
+[!INCLUDE [kb2854082](../../includes/virtual-machines-ag-listener-kb2854082.md)]
 
 ## 在可用性组节点中打开防火墙端口
 
-[AZURE.INCLUDE [防火墙](../../includes/virtual-machines-ag-listener-open-firewall.md)]
+[!INCLUDE [防火墙](../../includes/virtual-machines-ag-listener-open-firewall.md)]
 
 ## 创建可用性组侦听器
 
-[AZURE.INCLUDE [防火墙](../../includes/virtual-machines-ag-listener-create-listener.md)]
+[!INCLUDE [防火墙](../../includes/virtual-machines-ag-listener-create-listener.md)]
 
 1. 对于外部负载均衡，你必须获取包含副本的云服务的公共虚拟 IP 地址。登录到 Azure 经典管理门户。导航到包含你的可用性组 VM 的云服务。打开“仪表板”视图。
 
@@ -99,22 +100,21 @@
 		# Get-ClusterResource $IPResourceName | Set-ClusterParameter -Multiple @{"Address"="$CloudServiceIP";"ProbePort"="59999";"SubnetMask"="255.255.255.255";"Network"="$ClusterNetworkName";"OverrideAddressMatch"=1;"EnableDhcp"=0}
 		# cluster res $IPResourceName /priv enabledhcp=0 overrideaddressmatch=1 address=$CloudServiceIP probeport=59999  subnetmask=255.255.255.255
 
-
 1. 设置变量之后，打开提升的 Windows PowerShell 窗口，然后从文本编辑器复制脚本，并将其粘贴到 Azure PowerShell 会话中运行。如果提示符仍然显示 >>，请再次按 Enter，以确保脚本开始运行。
 
 1. 在每个 VM 上重复此过程。此脚本将使用云服务的 IP 地址来配置 IP 地址资源，同时设置探测端口等其他参数。在 IP 地址资源联机后，它可以响应我们在本教程前面部分创建的负载均衡终结点在探测端口上的轮询。
 
 ## 使侦听器联机
 
-[AZURE.INCLUDE [Bring-Listener-Online](../../includes/virtual-machines-ag-listener-bring-online.md)]
+[!INCLUDE [Bring-Listener-Online](../../includes/virtual-machines-ag-listener-bring-online.md)]
 
 ## 后续操作项
 
-[AZURE.INCLUDE [Follow-up](../../includes/virtual-machines-ag-listener-follow-up.md)]
+[!INCLUDE [Follow-up](../../includes/virtual-machines-ag-listener-follow-up.md)]
 
 ## 测试可用性组侦听器（在同一 VNet 中）
 
-[AZURE.INCLUDE [Test-Listener-Within-VNET](../../includes/virtual-machines-ag-listener-test.md)]
+[!INCLUDE [Test-Listener-Within-VNET](../../includes/virtual-machines-ag-listener-test.md)]
 
 ## 测试可用性组侦听器（通过 Internet）
 
@@ -128,6 +128,6 @@
 
 ## 后续步骤
 
-[AZURE.INCLUDE [Listener-Next-Steps](../../includes/virtual-machines-ag-listener-next-steps.md)]
+[!INCLUDE [Listener-Next-Steps](../../includes/virtual-machines-ag-listener-next-steps.md)]
 
 <!---HONumber=Mooncake_0905_2016-->

@@ -1,27 +1,25 @@
-<properties
-	pageTitle="在 Azure 门户预览中使用基于角色的访问控制 | Azure"
-	description="在 Azure 门户预览中使用基于角色的访问控制开始进行访问权限管理。使用角色分配来分配资源权限。"
-	services="active-directory"
-	documentationCenter=""
-	authors="kgremban"
-	manager="femila"
-	editor=""/>  
+---
+title: 在 Azure 门户预览中使用基于角色的访问控制 | Azure
+description: 在 Azure 门户预览中使用基于角色的访问控制开始进行访问权限管理。使用角色分配来分配资源权限。
+services: active-directory
+documentationCenter: 
+authors: kgremban
+manager: femila
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.devlang="na"
-	ms.topic="get-started-article"
-	ms.tgt_pltfrm="na"
-	ms.workload="identity"
-	ms.date="10/10/2016"
-	wacn.date="11/08/2016"
-	ms.author="kgremban"/>  
-
+ms.service: active-directory
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 10/10/2016
+wacn.date: 11/08/2016
+ms.author: kgremban
+---
 
 # 使用角色分配来管理对 Azure 订阅资源的访问权限
 
-Azure 基于角色的访问控制 (RBAC) 可用于对 Azure 进行细致的访问管理。使用 RBAC，你可以仅授予用户执行其作业所需的访问次数。本文可帮助你在 Azure 门户预览中启动并运行 RBAC。如果希望了解有关 RBAC 如何帮助管理访问权限的更多详细信息，请参阅[什么是基于角色的访问控制](/documentation/articles/role-based-access-control-what-is/)。
+Azure 基于角色的访问控制 (RBAC) 可用于对 Azure 进行细致的访问管理。使用 RBAC，你可以仅授予用户执行其作业所需的访问次数。本文可帮助你在 Azure 门户预览中启动并运行 RBAC。如果希望了解有关 RBAC 如何帮助管理访问权限的更多详细信息，请参阅[什么是基于角色的访问控制](./role-based-access-control-what-is.md)。
 
 ## 查看访问权限
 你可以在 [Azure 门户预览](https://portal.azure.cn)中的主边栏选项卡上查看谁有权访问资源、资源组或订阅。例如，我们想要查看谁有权访问其中一个资源组：
@@ -34,11 +32,9 @@ Azure 基于角色的访问控制 (RBAC) 可用于对 Azure 进行细致的访�
 
 	![用户边栏选项卡 - 继承的与分配的访问权限屏幕截图](./media/role-based-access-control-configure/view-access.png)  
 
-
 请注意，某些用户为**分配**的访问权限，而其他人为**继承**的访问权限。访问权限要么特定于资源组进行分配，要么从对父订阅的分配继承而来。
 
-> [AZURE.NOTE] 经典订阅管理员和共同管理员被视为新 RBAC 模型中的订阅所有者。
-
+> [!NOTE] 经典订阅管理员和共同管理员被视为新 RBAC 模型中的订阅所有者。
 
 ## <a name="add-access"></a> 添加访问权限
 从资源、资源组或在该角色分配范围内的订阅中授予访问权限。
@@ -68,13 +64,13 @@ Azure 基于角色的访问控制 (RBAC) 可用于对 Azure 进行细致的访�
 ## 管理访问权限的其他工具
 可以使用 Azure 门户预览以外的工具中的 Azure RBAC 命令分配角色和管理访问权限。依照该链接以了解有关先决条件和 Azure RBAC 命令入门的详细信息。
 
-- [Azure PowerShell](/documentation/articles/role-based-access-control-manage-access-powershell/)
-- [Azure 命令行界面](/documentation/articles/role-based-access-control-manage-access-azure-cli/)
-- [REST API](/documentation/articles/role-based-access-control-manage-access-rest/)
+- [Azure PowerShell](./role-based-access-control-manage-access-powershell.md)
+- [Azure 命令行界面](./role-based-access-control-manage-access-azure-cli.md)
+- [REST API](./role-based-access-control-manage-access-rest.md)
 
 ## 后续步骤
-- [创建访问变更历史记录报表](/documentation/articles/role-based-access-control-access-change-history-report/)
-- 请参阅 [RBAC 内置角色](/documentation/articles/role-based-access-built-in-roles/)
-- 定义自己在 [Azure RBAC 中的自定义角色](/documentation/articles/role-based-access-control-custom-roles/)
+- [创建访问变更历史记录报表](./role-based-access-control-access-change-history-report.md)
+- 请参阅 [RBAC 内置角色](./role-based-access-built-in-roles.md)
+- 定义自己在 [Azure RBAC 中的自定义角色](./role-based-access-control-custom-roles.md)
 
 <!---HONumber=Mooncake_1031_2016-->

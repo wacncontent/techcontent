@@ -1,30 +1,30 @@
-<properties
-	pageTitle="Azure 应用服务 Web 应用高级配置和扩展"
-	description="使用 XML 文档转换 (XDT) 声明可以转换 Azure 应用服务 Web 应用中的 ApplicationHost.config 文件，以及添加专用扩展来启用自定义管理操作。"
-	authors="cephalin"
-	writer="cephalin"
-	editor="mollybos"
-	manager="wpickett"
-	services="app-service"
-	documentationCenter=""/>
+---
+title: Azure 应用服务 Web 应用高级配置和扩展
+description: 使用 XML 文档转换 (XDT) 声明可以转换 Azure 应用服务 Web 应用中的 ApplicationHost.config 文件，以及添加专用扩展来启用自定义管理操作。
+authors: cephalin
+writer: cephalin
+editor: mollybos
+manager: wpickett
+services: app-service
+documentationCenter: 
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="02/25/2016"
-	wacn.date="12/12/2016"
-	ms.author="cephalin"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 02/25/2016
+wacn.date: 12/12/2016
+ms.author: cephalin
+---
 
 # Azure 应用服务 Web 应用高级配置和扩展
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 使用 [XML 文档转换](http://msdn.microsoft.com/zh-cn/library/dd465326.aspx) (XDT) 声明，可以转换 Azure 应用服务中 Web 应用的 [ApplicationHost.config](http://www.iis.net/learn/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig) 文件。你还可使用 XDT 声明添加专用扩展，启用自定义 Web 应用管理操作。本文包括一个 PHP Manager Web 应用扩展示例，可用于通过 Web 界面管理 PHP 设置。
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
 
 ## <a id="transform"></a>通过 ApplicationHost.config 完成的高级配置
 应用服务平台为 Web 应用配置提供灵活性和控制。尽管标准 IIS ApplicationHost.config 配置文件不能在应用服务中直接编辑，但该平台支持基于 XML 文档转换 (XDT) 的声明性 ApplicationHost.config 转换模型。
@@ -46,14 +46,12 @@
   		</system.webServer>
 	</configuration>
 
-
 包含转换状态和详细信息的日志文件位于 FTP 根目录 LogFiles\\Transform 中。
 
 有关其他示例，请参阅 [https://github.com/projectkudu/kudu/wiki/Xdt-transform-samples](https://github.com/projectkudu/kudu/wiki/Xdt-transform-samples)。
 
 **注意**<br />
 无法删除或重新排序 `system.webServer` 的模块列表中的元素，但可以删除或重新排列排序列表的附加内容。
-
 
 ## <a id="extend"></a> 扩展 Web 应用
 
@@ -102,7 +100,6 @@ PHP Manager 扩展是使用 Visual Studio ASP.NET MVC 4 Web 应用程序模板�
     		var userSettingsFile = Path.Combine(rootPath, @"site\wwwroot\.user.ini");
     		return userSettingsFile;
 	}
-
 
 得到目录路径后，可以使用常规文件 I/O 操作来读取和写入文件。
 
@@ -176,11 +173,10 @@ Web 应用扩展位于：
 在开发和调查过程中，可以通过添加使用键 `WEBSITE_PRIVATE_EXTENSIONS` 和值 `0` 的应用设置，来禁用 Web 应用的所有专用（非预装）扩展。
 
 ## 更改内容
-* 有关从网站更改为应用服务的指南，请参阅 [Azure 应用服务及其对现有 Azure 服务的影响](/documentation/articles/app-service-changes-existing-services/)
+* 有关从网站更改为应用服务的指南，请参阅 [Azure 应用服务及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 
 <!-- IMAGES -->
 [TransformSitePHPUI]: ./media/web-sites-transform-extend/TransformSitePHPUI.png
 [TransformSiteSolEx]: ./media/web-sites-transform-extend/TransformSiteSolEx.png
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

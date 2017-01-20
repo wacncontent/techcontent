@@ -1,23 +1,22 @@
-<properties
-    pageTitle="Azure Batch 中的高效列表查询 | Azure"
-    description="在请求批处理资源（例如池、作业、任务和计算节点）的相关信息时对查询进行筛选可提高性能。"
-    services="batch"
-    documentationcenter=".net"
-    author="mmacy"
-    manager="timlt"
-    editor="" />  
+---
+title: Azure Batch 中的高效列表查询 | Azure
+description: 在请求批处理资源（例如池、作业、任务和计算节点）的相关信息时对查询进行筛选可提高性能。
+services: batch
+documentationcenter: .net
+author: mmacy
+manager: timlt
+editor: 
 
-<tags
-    ms.assetid="031fefeb-248e-4d5a-9bc2-f07e46ddd30d"
-    ms.service="batch"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="big-compute"
-    ms.date="10/25/2016"
-    wacn.date="12/12/2016"
-    ms.author="marsma" />  
-
+ms.assetid: 031fefeb-248e-4d5a-9bc2-f07e46ddd30d
+ms.service: batch
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: big-compute
+ms.date: 10/25/2016
+wacn.date: 12/12/2016
+ms.author: marsma
+---
 
 # 有效地查询 Azure Batch 服务
 本文介绍如何通过减少使用[批处理 .NET][api_net] 库查询作业、任务和计算节点时该服务返回的数据量，提高 Azure 批处理应用程序的性能。
@@ -51,7 +50,7 @@ csharp
 
 在此示例方案中，如果作业中存在数以千计的任务，则通常情况下，第二个查询的结果的返回速度将远远快于第一个查询。[下面](#efficient-querying-in-batch-net)提供了有关使用批处理 .NET API 列出项时使用 ODATADetailLevel 的详细信息。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 强烈建议*始终* 将 ODATADetailLevel 对象提供给 .NET API 列表调用，确保最大程度地提高应用程序的效率和性能。指定详细程度有助于缩短 Batch 服务响应时间、提高网络利用率，以及最大程度减少客户端应用程序的内存使用量。
 
 ## Filter、select 和 expand
@@ -78,7 +77,7 @@ expand 字符串用于减少获取特定信息所需的 API 调用数。使用 e
 - 当所有属性都是必需属性且没有指定 select 字符串时，*必须* 使用 expand 字符串来获取统计信息。如果使用了 select 字符串来获取属性的子集，则可在 select 字符串中指定 `stats`，不需指定 expand 字符串。
 - 此示例性 expand 字符串指定列表中的每个项都应返回统计信息：`stats`。
 
-> [AZURE.NOTE] 构造这三种查询字符串类型（filter、select 和 expand）中的任意一种类型时，必须确保属性名称和大小写与其 REST API 元素的对应项相匹配。例如，在使用 .NET [CloudTask](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.cloudtask) 类时，必须指定 **state** 而非 **State**，即使 .NET 属性为 [CloudTask.State](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.cloudtask.state)。请参阅下表中 .NET 和 REST API 之间的属性映射。
+> [!NOTE] 构造这三种查询字符串类型（filter、select 和 expand）中的任意一种类型时，必须确保属性名称和大小写与其 REST API 元素的对应项相匹配。例如，在使用 .NET [CloudTask](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.cloudtask) 类时，必须指定 **state** 而非 **State**，即使 .NET 属性为 [CloudTask.State](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.cloudtask.state)。请参阅下表中 .NET 和 REST API 之间的属性映射。
 
 ### filter、select 和 expand 字符串的规则
 - filter、select 和 expand 字符串中属性名称的显示方式应与其在[批处理 REST][api_rest] API 中的显示方式相同，即使用户使用[批处理 .NET][api_net] 或其他某个批处理 SDK。
@@ -126,7 +125,7 @@ csharp
 	List<CloudPool> testPools =
 		await myBatchClient.PoolOperations.ListPools(detailLevel).ToListAsync();
 
-> [AZURE.TIP] 使用 Select 和 Expand 子句配置的 [ODATADetailLevel][odata] 实例也可以传递给相应的 Get 方法（例如 [PoolOperations.GetPool](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.pooloperations.getpool.aspx)），以便限制返回的数据量。
+> [!TIP] 使用 Select 和 Expand 子句配置的 [ODATADetailLevel][odata] 实例也可以传递给相应的 Get 方法（例如 [PoolOperations.GetPool](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.pooloperations.getpool.aspx)），以便限制返回的数据量。
 
 ## Batch REST 到 .NET API 映射
 filter、select 和 expand 字符串中的属性名称*必须*反映其 REST API 对应项，不管是名称本身还是大小写。下表提供了 .NET 和 REST API 的对应项之间的映射。
@@ -172,7 +171,6 @@ filter、select 和 expand 字符串中的属性名称*必须*反映其 REST API
 
 `(executionInfo/exitCode lt 0) or (executionInfo/exitCode gt 0)`  
 
-
 ## 示例：构造 select 字符串
 若要构造 [ODATADetailLevel.SelectClause][odata_select]，请查阅上表，在“select 字符串的映射”下导航到与所列实体类型相对应的 REST API 页。你会在该页第一个多行表中找到可选择属性及其支持的运算符。例如，如果你希望仅检索列表中每个任务的 ID 和命令行，则可在[获取有关任务的信息][rest_get_task]的相应表中找到这些行：
 
@@ -184,7 +182,6 @@ filter、select 和 expand 字符串中的属性名称*必须*反映其 REST API
 因此，若要只包括每个所列任务的 ID 和命令行，可使用以下 select 字符串：
 
 `id, commandLine`  
-
 
 ## 代码示例
 ### 高效列表查询代码示例
@@ -228,7 +225,7 @@ csharp
 
 ## 后续步骤
 ### 并行节点任务
-[通过并发节点任务最大限度提高 Azure 批处理计算资源的使用率](/documentation/articles/batch-parallel-node-tasks/)是另一篇与批处理应用程序性能相关的文章。在数量较少但规模更大的计算节点上执行并行任务适合某些类型的工作负荷。若需详细了解此类方案，请查看文章中的[示例方案](/documentation/articles/batch-parallel-node-tasks/#example-scenario/)。
+[通过并发节点任务最大限度提高 Azure 批处理计算资源的使用率](./batch-parallel-node-tasks.md)是另一篇与批处理应用程序性能相关的文章。在数量较少但规模更大的计算节点上执行并行任务适合某些类型的工作负荷。若需详细了解此类方案，请查看文章中的[示例方案](./batch-parallel-node-tasks.md#example-scenario/)。
 
 ### Batch 论坛
 MSDN 上的 [Azure Batch 论坛][forum]是探讨 Batch 服务以及咨询其相关问题的不错场所。欢迎前往浏览这些帮忙解决“棘手问题”的贴子，并发布你在构建 Batch 解决方案时遇到的问题。

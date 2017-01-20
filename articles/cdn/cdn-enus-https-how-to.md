@@ -1,26 +1,38 @@
-<properties linkid="dev-net-common-tasks-cdn" urlDisplayName="CDN" pageTitle="Azure CDN how to create https endpoint-EN" metaKeywords="Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN, CDN acceleration, CDN service, mainstream CDN, multi-scenario acceleration, free CDN, CDN website acceleration, website acceleration, webpage acceleration, static acceleration, download acceleration, VOD acceleration, streaming media webcast acceleration, cloud service,  storage account, cache refresh, return to origin, cloud acceleration, acceleration results, node, traffic, CNAME, bandwidth, network speed, anti-theft chain, https acceleration, low-cost bandwidth, access acceleration, small file acceleration, download acceleration, large file acceleration, streaming media acceleration, HTTPS secure acceleration, cache refresh, content pre-loading, anti-theft chain, log download, CDN technical documentation, CDN help files, CDN FAQs" description="How to create HTTPS CDN endpoint." metaCanonical="" services="" documentationCenter=".NET" title="" authors="" solutions="" manager="" editor="" />
-<tags ms.service="cdn_en"
-    ms.date="7/7/2016"
-    wacn.date="7/7/2016"
-    wacn.lang="en"
-    />
+---
+linkid: dev-net-common-tasks-cdn
+urlDisplayName: CDN
+title: Azure CDN how to create https endpoint-EN
+metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN, CDN acceleration, CDN service, mainstream CDN, multi-scenario acceleration, free CDN, CDN website acceleration, website acceleration, webpage acceleration, static acceleration, download acceleration, VOD acceleration, streaming media webcast acceleration, cloud service,  storage account, cache refresh, return to origin, cloud acceleration, acceleration results, node, traffic, CNAME, bandwidth, network speed, anti-theft chain, https acceleration, low-cost bandwidth, access acceleration, small file acceleration, download acceleration, large file acceleration, streaming media acceleration, HTTPS secure acceleration, cache refresh, content pre-loading, anti-theft chain, log download, CDN technical documentation, CDN help files, CDN FAQs
+description: How to create HTTPS CDN endpoint.
+metaCanonical: 
+services: 
+documentationCenter: .NET
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
+
+ms.service: cdn_en
+ms.date: 7/7/2016
+wacn.date: 7/7/2016
+wacn.lang: en
+---
+
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/cdn-https-how-to/)
-- [English](/documentation/articles/cdn-enus-https-how-to/) 
+- [中文](./cdn-https-how-to.md)
+- [English](./cdn-enus-https-how-to.md) 
 
 # Azure CDN HTTPS acceleration service
-
 
 ## Request access
 The Azure CDN HTTPS acceleration service is only available to paid Azure users.
 
 1. **To apply for access:** Please contact the [Azure technical support team](https://www.azure.cn/support/contact/). You will need to provide the Azure subscription ID that you want to use the HTTPS acceleration service for.
 
-
 2. **Self-service creation:** Once the Azure CDN team receives and approves your access request, they will start the HTTPS acceleration service for the Azure subscription you provided. You can then log into the Azure Management Portal to complete the self-service creation process. Please refer to the instructions for the self-service creation process.
 
     ![][1]
-
 
 3. **SSL certificate application and configuration:** Once your configuration request is received, the Azure CDN will apply for an SSL certificate on your behalf (see the notes for details of certificate types).
     > **Notes**
@@ -28,7 +40,6 @@ The Azure CDN HTTPS acceleration service is only available to paid Azure users.
     > The application and configuration for this certificate takes around ***5 working days***. You will also need to cooperate during the application process, so that the certificate issuer can confirm ownership of the domain name. Details of this confirmation process are given later in this article.
 
 4. **When the configuration is finished and takes effect:** Once the configuration process is complete, you can complete the final setup of the CNAME record as you would to create services with other types of acceleration. Finally, you can complete any other associated management and configuration tasks through the unified Azure CDN Management Portal.
-
 
 ## Self-service creation process
 1. Once you have finished creating the HTTPS acceleration type on the Azure Management Portal, press the “Management” button shown in the image below to jump to the Azure CDN Management Portal, from where you can complete the subsequent access procedure.
@@ -81,8 +92,6 @@ The Azure CDN HTTPS acceleration service is only available to paid Azure users.
 
 	1) **Default method**: Once the certificate issuer receives the request, the domain name  ownership confirmation email will be sent by default to the email address associated with the acceleration domain name (see the screenshot above for details) as soon as possible. If you choose to obtain the confirmation email by this method, you can go directly to the next step by clicking on the “Confirm” button.
 		
-	
-
 	2) **DNS TXT method**: If you are unable to sign in to the email account above to complete confirmation of the domain name ownership, you can complete the confirmation process **by creating a DNS TXT record** as shown in the image below. This method may take a little longer to complete.
 
 	![][7]
@@ -94,8 +103,6 @@ The Azure CDN HTTPS acceleration service is only available to paid Azure users.
 	Once you have successfully created the corresponding DNS TXT log in this step, click on the **Confirm** button for this step and proceed to the next step.
 
 	![][9]
-
-	
 
 6. The user can complete the domain name ownership verification process by accessing the email.
 	
@@ -125,9 +132,6 @@ The Azure CDN HTTPS acceleration service is only available to paid Azure users.
 
 	Lastly, you can complete the final CNAME configuration process through your domain name service provider just as you would to create accelerated domain names with other acceleration types; direct the user-defined accelerated domain name to the CDN domain name provided by the Azure CDN platform, which should have an extension similar to **.mschcdn.com**, in order to enable the whole configuration to take effect.
 
-
-
-
 ## Notes
 
 ### About the SSL certificates used
@@ -142,10 +146,8 @@ The Azure CDN will apply for, install, and maintain the SSL certificate on your 
 ### Information about charges
 Information about charges for CDN HTTPS acceleration nodes, as for other CDN acceleration nodes, can be viewed through the corresponding [Azure account portal](https://account.windowsazure.cn) and is summarized below the corresponding Azure subscription.
 
-
 ### CDN HTTPS pricing
 The Azure CDN HTTPS acceleration service is currently included in the premium version. See the [official Azure website](https://www.azure.cn/pricing/details/cdn/), for details of pricing and charges.
-
 
 <!--Image references-->
 [1]: ./media/cdn-https/he001.png

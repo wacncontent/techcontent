@@ -1,16 +1,16 @@
-<properties
-    pageTitle="使用 Azure Resource Manager 模板创建包含事件中心和使用者组的服务总线命名空间 | Azure"
-    description="使用 Azure Resource Manager 模板创建包含事件中心和使用者组的服务总线命名空间"
-    services="service-bus"
-    documentationCenter=".net"
-    authors="sethmanheim"
-    manager="timlt"
-    editor=""/>
+---
+title: 使用 Azure Resource Manager 模板创建包含事件中心和使用者组的服务总线命名空间 | Azure
+description: 使用 Azure Resource Manager 模板创建包含事件中心和使用者组的服务总线命名空间
+services: service-bus
+documentationCenter: .net
+authors: sethmanheim
+manager: timlt
+editor: 
 
-<tags
-    ms.service="service-bus"
-    ms.date="07/11/2016"
-    wacn.date="08/15/2016"/>
+ms.service: service-bus
+ms.date: 07/11/2016
+wacn.date: 08/15/2016
+---
 
 # 使用 Azure Resource Manager 模板创建包含事件中心和使用者组的服务总线命名空间
 
@@ -18,13 +18,12 @@
 
 有关创建模板的详细信息，请参阅[创作 Azure Resource Manager 模板][]。
 
-
->[AZURE.NOTE] 以下 Azure Resource Manager 模板可供下载和部署。
+>[!NOTE] 以下 Azure Resource Manager 模板可供下载和部署。
 >
->-    [创建包含队列和授权规则的服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace-auth-rule/)
->-    [创建包含队列的服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace-queue/)
->-    [创建包含主题和订阅的服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace-topic/)
->-    [创建服务总线命名空间](/documentation/articles/service-bus-resource-manager-namespace/)
+>-    [创建包含队列和授权规则的服务总线命名空间](./service-bus-resource-manager-namespace-auth-rule.md)
+>-    [创建包含队列的服务总线命名空间](./service-bus-resource-manager-namespace-queue.md)
+>-    [创建包含主题和订阅的服务总线命名空间](./service-bus-resource-manager-namespace-topic.md)
+>-    [创建服务总线命名空间](./service-bus-resource-manager-namespace.md)
 >
 >若要检查最新模板，请访问 [Azure 快速入门模板][] 库并搜索服务总线。
 
@@ -32,7 +31,7 @@
 
 使用此模板，你将部署包含事件中心和使用者组的服务总线命名空间。
 
-[事件中心](/documentation/articles/event-hubs-what-is-event-hubs/)是一种事件处理服务，用于向 Azure 提供大规模的事件与遥测数据输入，并且具有较低的延迟和较高的可靠性。
+[事件中心](../event-hubs/event-hubs-what-is-event-hubs.md)是一种事件处理服务，用于向 Azure 提供大规模的事件与遥测数据输入，并且具有较低的延迟和较高的可靠性。
 
 若要自动运行部署，请单击以下按钮：
 
@@ -131,7 +130,7 @@
 
 ## 运行部署的命令
 
-[AZURE.INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
+[!INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
 
 ## PowerShell
 
@@ -151,13 +150,13 @@ azure group deployment create \<my-resource-group\> \<my-deployment-name\> --tem
 
 现在，你已使用 Azure Resource Manager 创建并部署了资源，请通过查看以下文章了解如何管理这些资源：
 
-- [使用 Azure 自动化管理 Azure Service Bus](/documentation/articles/service-bus-automation-manage/)
-- [使用 PowerShell 管理事件中心](/documentation/articles/service-bus-powershell-how-to-provision/)
+- [使用 Azure 自动化管理 Azure Service Bus](./service-bus-automation-manage.md)
+- [使用 PowerShell 管理事件中心](./service-bus-powershell-how-to-provision.md)
 - [使用服务总线资源管理器管理事件中心资源](https://code.msdn.microsoft.com/Service-Bus-Explorer-f2abca5a)
 
-  [创作 Azure Resource Manager 模板]: /documentation/articles/resource-group-authoring-templates/
-  [Using Azure PowerShell with Azure Resource Manager]: /documentation/articles/powershell-azure-resource-manager/
-  [Using the Azure CLI for Mac, Linux, and Windows with Azure Resource Management]: /documentation/articles/xplat-cli-azure-resource-manager/
+  [创作 Azure Resource Manager 模板]: ../azure-resource-manager/resource-group-authoring-templates.md
+  [Using Azure PowerShell with Azure Resource Manager]: ../azure-resource-manager/powershell-azure-resource-manager.md
+  [Using the Azure CLI for Mac, Linux, and Windows with Azure Resource Management]: ../azure-resource-manager/xplat-cli-azure-resource-manager.md
   [服务总线事件中心和使用者组模板]: https://github.com/Azure/azure-quickstart-templates/blob/master/201-servicebus-create-eventhub-and-consumergroup/
 
 <!---HONumber=Mooncake_0808_2016-->

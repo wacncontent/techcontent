@@ -1,4 +1,4 @@
-你必须先创建 VNet 和网关子网，然后再处理以下任务。有关详细信息，请参阅 [Configure a Virtual Network using the classic portal](/documentation/articles/expressroute-howto-vnet-portal-classic/)（使用经典管理门户配置虚拟网络）一文。
+你必须先创建 VNet 和网关子网，然后再处理以下任务。有关详细信息，请参阅 [Configure a Virtual Network using the classic portal](../articles/expressroute/expressroute-howto-vnet-portal-classic.md)（使用经典管理门户配置虚拟网络）一文。
 
 ## 添加网关
 
@@ -14,9 +14,9 @@
 
 ## 重设网关大小
 
-这里有许多[网关 SKU](/documentation/articles/expressroute-about-virtual-network-gateways/)。你可以使用以下命令随时更改网关 SKU。
+这里有许多[网关 SKU](../articles/expressroute/expressroute-about-virtual-network-gateways.md)。你可以使用以下命令随时更改网关 SKU。
 
->[AZURE.IMPORTANT] 此命令对 UltraPerformance 网关不起作用。若要将网关更改为 UltraPerformance 网关，首先要删除现有的 ExpressRoute 网关，然后创建新的 UltraPerformance 网关。若要将网关从 UltraPerformance 网关降级，首先要删除 UltraPerformance 网关，然后创建新网关。
+>[!IMPORTANT] 此命令对 UltraPerformance 网关不起作用。若要将网关更改为 UltraPerformance 网关，首先要删除现有的 ExpressRoute 网关，然后创建新的 UltraPerformance 网关。若要将网关从 UltraPerformance 网关降级，首先要删除 UltraPerformance 网关，然后创建新网关。
 
 	Resize-AzureVirtualNetworkGateway -GatewayId <Gateway ID> -GatewaySKU HighPerformance
 

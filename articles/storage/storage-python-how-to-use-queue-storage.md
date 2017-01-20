@@ -1,34 +1,34 @@
-<properties
-    pageTitle="如何通过 Python 使用队列存储 | Azure"
-    description="了解如何通过 Python 使用 Azure 队列服务创建和删除队列，以及插入、获取和删除消息。"
-    services="storage"
-    documentationcenter="python"
-    author="robinsh"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="cc0d2da2-379a-4b58-a234-8852b4e3d99d"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="python"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="robinsh" />
+---
+title: 如何通过 Python 使用队列存储 | Azure
+description: 了解如何通过 Python 使用 Azure 队列服务创建和删除队列，以及插入、获取和删除消息。
+services: storage
+documentationcenter: python
+author: robinsh
+manager: timlt
+editor: tysonn
 
+ms.assetid: cc0d2da2-379a-4b58-a234-8852b4e3d99d
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: robinsh
+---
 
 # 如何通过 Python 使用队列存储
 
-[AZURE.INCLUDE [storage-selector-queue-include](../../includes/storage-selector-queue-include.md)]
+[!INCLUDE [storage-selector-queue-include](../../includes/storage-selector-queue-include.md)]
 
 ## 概述
 
 本指南演示如何使用 Azure 队列存储服务执行常见方案。这些示例用 Python 编写并使用 [Azure Storage SDK for Python]。介绍的方案包括“插入”、“查看”、“获取”和“删除”队列消息以及“创建和删除队列”。有关队列的详细信息，请参阅 [后续步骤] 部分。
 
-[AZURE.INCLUDE [storage-queue-concepts-include](../../includes/storage-queue-concepts-include.md)]
+[!INCLUDE [storage-queue-concepts-include](../../includes/storage-queue-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 如何：创建队列
 
@@ -42,13 +42,11 @@
 
 	queue_service.create_queue('taskqueue')
 
-
 ## 如何：在队列中插入消息
 
 若要在队列中插入消息，可使用 **put\_message** 方法创建一条新消息并将其添加到队列中。
 
 	queue_service.put_message('taskqueue', u'Hello World')
-
 
 ## 如何：扫视下一条消息
 
@@ -57,7 +55,6 @@
 	messages = queue_service.peek_messages('taskqueue')
 	for message in messages:
 		print(message.content)
-
 
 ## 如何：取消消息的排队
 
@@ -74,7 +71,6 @@
 	for message in messages:
 		print(message.content)
 		queue_service.delete_message('taskqueue', message.id, message.pop_receipt)		
-
 
 ## 如何：更改已排队消息的内容
 

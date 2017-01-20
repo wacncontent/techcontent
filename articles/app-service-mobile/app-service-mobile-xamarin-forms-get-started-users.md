@@ -1,26 +1,25 @@
-<properties
-	pageTitle="Xamarin.Forms 应用中的移动应用身份验证入门 | Azure"
-	description="了解如何使用移动应用通过各种标识提供者（包括 AAD 和 Microsoft）对 Xamarin Forms 应用的用户进行身份验证。"
-	services="app-service\mobile"
-	documentationCenter="xamarin"
-	authors="adrianhall"
-	manager="dwrede"
-	editor=""/>  
+---
+title: Xamarin.Forms 应用中的移动应用身份验证入门 | Azure
+description: 了解如何使用移动应用通过各种标识提供者（包括 AAD 和 Microsoft）对 Xamarin Forms 应用的用户进行身份验证。
+services: app-service\mobile
+documentationCenter: xamarin
+authors: adrianhall
+manager: dwrede
+editor: 
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-xamarin"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="12/26/2016"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 12/26/2016
+ms.author: adrianha
+---
 
 # 向 Xamarin.Forms 应用添加身份验证
 
-[AZURE.INCLUDE [app-service-mobile-selector-get-started-users](../../includes/app-service-mobile-selector-get-started-users.md)]
+[!INCLUDE [app-service-mobile-selector-get-started-users](../../includes/app-service-mobile-selector-get-started-users.md)]
 
 ##概述
 本主题演示如何从客户端应用程序对应用服务移动应用的用户进行身份验证。在本教程中，使用应用服务支持的标识提供者向 Xamarin Forms 快速入门项目添加身份验证。移动应用成功进行身份验证和授权后，将显示用户 ID 值，该用户将能够访问受限制的表数据。
@@ -32,11 +31,11 @@
 
 ##注册应用以进行身份验证并配置应用服务
 
-[AZURE.INCLUDE [app-service-mobile-register-authentication](../../includes/app-service-mobile-register-authentication.md)]
+[!INCLUDE [app-service-mobile-register-authentication](../../includes/app-service-mobile-register-authentication.md)]
 
 ##将权限限制给已经过身份验证的用户
 
-[AZURE.INCLUDE [app-service-mobile-restrict-permissions-dotnet-backend](../../includes/app-service-mobile-restrict-permissions-dotnet-backend.md)]
+[!INCLUDE [app-service-mobile-restrict-permissions-dotnet-backend](../../includes/app-service-mobile-restrict-permissions-dotnet-backend.md)]
 
 ## 向可移植类库添加身份验证
 移动应用使用 [MobileServiceClient][4] 的 [LoginAsync][3] 扩展方法通过应用服务身份验证登录用户。此示例使用服务器托管的身份验证流，在应用中显示提供程序的登录界面。有关详细信息，请参阅[服务器托管的身份验证][5]。若要在生产应用中提供更好的用户体验，则应考虑改用[客户端托管的身份验证][6]。
@@ -76,7 +75,6 @@
 		// Track whether the user has authenticated. 
         bool authenticated = false;
 
-
 6. 将 **OnAppearing** 方法替换为以下代码：
 
 	    protected override async void OnAppearing()
@@ -111,7 +109,6 @@
 
 8. 保存更改，重新生成可移植类库项目，并验证没有错误。
 
-
 ##向 Android 应用添加身份验证
 
 本部分演示如何在 Android 应用项目中实现 **IAuthenticate** 接口。如果不要支持 Android 设备，请跳过本部分。
@@ -126,7 +123,6 @@
 4. 更新 **MainActivity** 类，以实现 **IAuthenticate** 接口，如下所示：
 
 		public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity, IAuthenticate
-
 
 5. 通过添加 **MobileServiceUser** 字段和 **IAuthenticate** 接口所需的 **Authenticate** 方法，更新 **MainActivity** 类，如下所示：
    
@@ -162,7 +158,6 @@
 
             return success;
         }
-
 
 	如果使用的是 Microsoft 以外的其他标识提供者，请为 [MobileServiceAuthenticationProvider] 选择其他值。
 
@@ -286,7 +281,6 @@
             return success;
         }
 
-
 	如果使用的是 Microsoft 以外的其他标识提供者，请为 [MobileServiceAuthenticationProvider] 选择其他值。
 
 6. 在 **MainPage** 类的构造函数中调用 `LoadApplication()` 之前添加以下代码行：
@@ -325,20 +319,18 @@
 
 完成此基本身份验证教程后，请考虑继续学习以下教程之一：
 
-
-+ [为应用启用脱机同步](/documentation/articles/app-service-mobile-xamarin-forms-get-started-offline-data/)  
++ [为应用启用脱机同步](./app-service-mobile-xamarin-forms-get-started-offline-data.md)  
   了解如何使用移动应用后端向应用添加脱机支持。脱机同步允许最终用户与移动应用交互（查看、添加或修改数据），即使在没有网络连接时也是如此。
 
 <!-- Images. -->
 
-
 <!-- URLs. -->
-[1]: /documentation/articles/app-service-mobile-xamarin-forms-get-started/
-[2]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
+[1]: ./app-service-mobile-xamarin-forms-get-started.md
+[2]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
 [3]: https://msdn.microsoft.com/zh-cn/library/azure/dn268341(v=azure.10).aspx
 [4]: https://msdn.microsoft.com/zh-cn/library/azure/JJ553674(v=azure.10).aspx
-[5]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/#serverflow
-[6]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/#clientflow
+[5]: ./app-service-mobile-dotnet-how-to-use-client-library.md#serverflow
+[6]: ./app-service-mobile-dotnet-how-to-use-client-library.md#clientflow
 [7]: https://msdn.microsoft.com/zh-cn/library/azure/jj730936(v=azure.10).aspx
 
 <!---HONumber=Mooncake_1219_2016-->

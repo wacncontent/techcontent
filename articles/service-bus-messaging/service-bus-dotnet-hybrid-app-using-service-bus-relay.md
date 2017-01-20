@@ -1,16 +1,16 @@
-<properties
-	pageTitle="本地/云混合应用程序 (.NET) | Azure"
-	description="了解如何使用 Azure 服务总线中继创建 .NET 本地/云混合应用程序。"
-	services="service-bus"
-	documentationCenter=".net"
-	authors="sethmanheim"
-	manager="timlt"
-	editor=""/>
+---
+title: 本地/云混合应用程序 (.NET) | Azure
+description: 了解如何使用 Azure 服务总线中继创建 .NET 本地/云混合应用程序。
+services: service-bus
+documentationCenter: .net
+authors: sethmanheim
+manager: timlt
+editor: 
 
-<tags
-	ms.service="service-bus"
-	ms.date="09/16/2016"
-	wacn.date="01/09/2017"/>
+ms.service: service-bus
+ms.date: 09/16/2016
+wacn.date: 01/09/2017
+---
 
 # 使用 Azure 服务总线中继创建 .NET 本地/云混合应用程序
 
@@ -23,7 +23,7 @@
 -   如何创建或修改现有 Web 服务以供 Web 解决方案使用。
 -   如何使用 Azure 服务总线中继功能在 Azure 应用程序和托管于其他某处的 Web 服务之间共享数据。
 
-[AZURE.INCLUDE [create-account-note](../../includes/create-account-note.md)]
+[!INCLUDE [create-account-note](../../includes/create-account-note.md)]
 
 ##服务总线中继功能将为混合解决方案带来哪些帮助
 
@@ -31,7 +31,7 @@
 
 解决方案架构师开始使用云来轻松地处理缩放需求和降低运营成本。在此过程中，他们发现希望用作其解决方案的构建基块的现有服务资产位于企业防火墙内，无法通过云解决方案轻松访问。许多内部服务的构建或托管方式使得它们无法在企业网络边缘轻松公开。
 
-服务总线中继的设计考虑到如何利用现有的 Windows Communication Foundation (WCF) Web 服务，使得位于企业外部的解决方案能够安全地访问这些服务，而无需对企业网络基础结构进行彻底的更改。虽然此类服务总线中继服务仍托管在现有环境中，但它们会将侦听传入会话和请求这一任务委托给云托管的服务总线。服务总线还会通过使用[共享访问签名](/documentation/articles/service-bus-sas-overview/) (SAS) 身份验证来保护这些服务，以阻止未经授权的访问。
+服务总线中继的设计考虑到如何利用现有的 Windows Communication Foundation (WCF) Web 服务，使得位于企业外部的解决方案能够安全地访问这些服务，而无需对企业网络基础结构进行彻底的更改。虽然此类服务总线中继服务仍托管在现有环境中，但它们会将侦听传入会话和请求这一任务委托给云托管的服务总线。服务总线还会通过使用[共享访问签名](./service-bus-sas-overview.md) (SAS) 身份验证来保护这些服务，以阻止未经授权的访问。
 
 ## 解决方案应用场景
 
@@ -63,7 +63,6 @@
 
 若要开始在 Azure 中使用服务总线功能，必须先创建一个服务命名空间。命名空间提供了用于对应用程序中的 Service Bus 资源进行寻址的范围容器。
 
-
 1.  登录到 [Azure 经典管理门户][]。
 
 2.  在门户的左侧导航窗格中，单击“服务总线”。
@@ -78,7 +77,7 @@
 
 5.  在确保命名空间名称可用后，选择应承载您的命名空间的国家或地区（确保使用在其中部署计算资源的同一国家/地区）。
 
-    > [AZURE.IMPORTANT] 选取要选择用于部署应用程序的*相同区域*。这将为你提供最佳性能。
+    > [!IMPORTANT] 选取要选择用于部署应用程序的*相同区域*。这将为你提供最佳性能。
 
 6.	将对话框中的其他字段保留为其默认值，然后单击“确定”复选标记。系统将创建并启用命名空间。您可能需要等待几分钟，因为系统将为您的帐户配置资源。
 
@@ -224,10 +223,8 @@
 	            }
 	        }
 
-
 13. 在解决方案资源管理器中，双击“App.config”文件以在 Visual Studio 编辑器中将其打开。在 **&lt;system.ServiceModel&gt;** 元素的底部（但仍在 &lt;system.ServiceModel&gt; 内），添加以下 XML 代码。确保将 *yourServiceNamespace* 替换为命名空间的名称，并将 *yourKey* 替换为之前从门户中检索到的 SAS 密钥：
 
-    
 	    <system.serviceModel>
 		...
 	      <services>
@@ -250,14 +247,12 @@
     
 14. 仍在 App.config 中，将 **&lt;appSettings&gt;** 元素中的连接字符串值替换为之前从门户获取的连接字符串。
 
-	
 		<appSettings>
 	   	<!-- Service Bus specific app settings for messaging connections -->
 	   	<add key="Microsoft.ServiceBus.ConnectionString"
 		       value="Endpoint=sb://yourNamespace.servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yourKey"/>
 		</appSettings>
 	
-
 14. 按 **Ctrl+Shift+B** 或从“生成”菜单中单击“生成解决方案”生成应用程序，并验证到目前为止操作的准确性。
 
 ## 创建 ASP.NET 应用程序
@@ -290,7 +285,7 @@
 
 7. 单击**“确定”**。
 
-8. 现在必须配置新 Web 应用的 Azure 资源。请按照[配置新 Web 应用的 Azure 资源](/documentation/articles/web-sites-dotnet-get-started/#configure-azure-resources-for-a-new-web-app)一节中的所有步骤操作。然后，返回到本教程并继续执行下一步。
+8. 现在必须配置新 Web 应用的 Azure 资源。请按照[配置新 Web 应用的 Azure 资源](../app-service-web/web-sites-dotnet-get-started.md#configure-azure-resources-for-a-new-web-app)一节中的所有步骤操作。然后，返回到本教程并继续执行下一步。
 
 5.  在解决方案资源管理器中，右键单击“模型”，再单击“添加”，然后单击“类”。在“名称”框中，键入名称 **Product.cs**。然后单击“添加”。
 
@@ -334,7 +329,6 @@
 	            }
 	        }
 
-
 3.  在解决方案资源管理器中，展开 Views\\Shared 文件夹，然后双击“\_Layout.cshtml”以在 Visual Studio 编辑器中将其打开。
 
 5.  将每一处 **My ASP.NET Application** 更改为 **LITWARE'S Products**。
@@ -345,7 +339,6 @@
 
 7.  在解决方案资源管理器中，展开 Views\\Home 文件夹，然后双击“Index.cshtml”以在 Visual Studio 编辑器中将其打开。将文件的全部内容替换为以下代码。
 
-	
 		@model IEnumerable<ProductsWeb.Models.Product>
 	
 		@{
@@ -378,9 +371,7 @@
 	
 		</table>
 	
-
 9.  若要验证到目前为止操作的准确性，可以按 **Ctrl+Shift+B** 生成项目。
-
 
 ### 在本地运行应用
 
@@ -477,14 +468,13 @@
 
 ## 将 ProductsPortal 项目部署到 Azure Web 应用
 
-下一步是将 **ProductsPortal** 前端转换为 Azure Web 应用。首先，部署 **ProductsPortal** 项目，请按照[将 Web 项目部署到 Azure Web 应用](/documentation/articles/web-sites-dotnet-get-started/#deploy-the-web-project-to-the-azure-web-app)一节中的所有步骤操作。部署完成后，返回到本教程并继续执行下一步。
+下一步是将 **ProductsPortal** 前端转换为 Azure Web 应用。首先，部署 **ProductsPortal** 项目，请按照[将 Web 项目部署到 Azure Web 应用](../app-service-web/web-sites-dotnet-get-started.md#deploy-the-web-project-to-the-azure-web-app)一节中的所有步骤操作。部署完成后，返回到本教程并继续执行下一步。
 
 复制已部署 Web 应用的 URL，因为你在下一个步骤中需要用到该 URL。你也可以从 Visual Studio 的“Azure App Service 活动”窗口中获取此 URL：
 
 ![][9] 
    
-
-> [AZURE.NOTE] 在部署后自动启动 **ProductsPortal** Web 项目时，你可能会在浏览器窗口中看到错误消息。这在意料之中，因为 **ProductsServer** 应用程序尚未运行。
+> [!NOTE] 在部署后自动启动 **ProductsPortal** Web 项目时，你可能会在浏览器窗口中看到错误消息。这在意料之中，因为 **ProductsServer** 应用程序尚未运行。
 
 ### 将 ProductsPortal 设置为 Web 应用
 
@@ -508,7 +498,7 @@
 
     ![][1]
 
-	> [AZURE.IMPORTANT] **ProductsServer** 控制台应用程序必须正在运行，而且能够为 **ProductsPortal** 应用程序提供数据。如果浏览器显示错误，请再多等几秒钟，让 **ProductsServer** 加载并显示以下消息。然后按浏览器中的“刷新”。
+	> [!IMPORTANT] **ProductsServer** 控制台应用程序必须正在运行，而且能够为 **ProductsPortal** 应用程序提供数据。如果浏览器显示错误，请再多等几秒钟，让 **ProductsServer** 加载并显示以下消息。然后按浏览器中的“刷新”。
 
 	![][37]
 
@@ -523,7 +513,6 @@
 * [Azure 服务总线][sbwacom]  
 * [如何使用 Service Bus 队列][sbwacomqhowto]  
 
-
   [0]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hybrid.png
   [1]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/App2.png
   [获取工具和 SDK]: http://go.microsoft.com/fwlink/?LinkId=271920
@@ -532,7 +521,6 @@
   [Azure 经典管理门户]: http://manage.windowsazure.cn
   [5]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/sb-queues-03.png
   [6]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/sb-queues-04.png
-
 
   [11]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hy-con-1.png
   [13]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/getting-started-multi-tier-13.png
@@ -558,7 +546,7 @@
   [45]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hy-web-45.png
   [46]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/service-bus-policies.png
 
-  [sbwacom]: /documentation/services/service-bus/
-  [sbwacomqhowto]: /documentation/articles/service-bus-dotnet-get-started-with-queues/
+  [sbwacom]: ../service-bus/index.md/
+  [sbwacomqhowto]: ./service-bus-dotnet-get-started-with-queues.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

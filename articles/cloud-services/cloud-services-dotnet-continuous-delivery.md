@@ -1,22 +1,21 @@
-<properties
-	pageTitle="在 Azure 中使用 TFS 持续交付云服务 | Azure"
-	description="了解如何设置 Azure 云应用的持续交付。MSBuild 命令行语句和 PowerShell 脚本的代码示例。"
-	services="cloud-services"
-	documentationCenter=""
-	authors="TomArcher"
-	manager="douge"
-	editor=""/>
+---
+title: 在 Azure 中使用 TFS 持续交付云服务 | Azure
+description: 了解如何设置 Azure 云应用的持续交付。MSBuild 命令行语句和 PowerShell 脚本的代码示例。
+services: cloud-services
+documentationCenter: 
+authors: TomArcher
+manager: douge
+editor: 
 
-<tags
-	ms.service="cloud-services"
-	ms.workload="tbd"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="11/18/2016"
-	wacn.date="01/03/2017"
-	ms.author="tarcher"/>
-
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 11/18/2016
+wacn.date: 01/03/2017
+ms.author: tarcher
+---
 
 # 在 Azure 中持续交付云服务
 
@@ -141,7 +140,7 @@
 
 7.  直接从 Azure PowerShell 调用脚本，或将此脚本连接到在包生成后进行的主机生成自动化。
 
-    >[AZURE.IMPORTANT] 默认情况下，此脚本将始终删除或替换现有部署（如果检测到这些部署）。这对于从没有用户提示的自动化中启用持续集成是必需的。
+    >[!IMPORTANT] 默认情况下，此脚本将始终删除或替换现有部署（如果检测到这些部署）。这对于从没有用户提示的自动化中启用持续集成是必需的。
 
     **示例方案 1：**对服务的过渡环境进行持续部署：
 
@@ -179,7 +178,7 @@
 
     可使用脚本 ($enableDeploymentUpgrade = 0) 或将 *-enableDeploymentUpgrade 0* 作为参数传递（这会将脚本行为更改为首先删除任何现有部署，然后创建新的部署）来禁用升级部署。
 
-    >[AZURE.IMPORTANT] 默认情况下，此脚本将始终删除或替换现有部署（如果检测到这些部署）。这对于从没有用户/操作员提示的自动化中启用持续集成是必需的。
+    >[!IMPORTANT] 默认情况下，此脚本将始终删除或替换现有部署（如果检测到这些部署）。这对于从没有用户/操作员提示的自动化中启用持续集成是必需的。
 
 ## 5：使用 TFS Team Build 发布包
 
@@ -322,7 +321,6 @@
 	      </If>
 	    </Sequence>
 
-
 7.  保存生成过程模板工作流并签入此文件。
 
 8.  编辑生成定义（如果已打开，请将它关闭）。如果在“过程模板”列表中看不到新模板，请选择“新建”按钮。
@@ -365,7 +363,6 @@
 	        $selectedsubscription = "default",
 	        $subscriptionDataFile = ""
 	     )
-	
 	
 	function Publish()
 	{
@@ -555,7 +552,7 @@
 
 ## 后续步骤
 
-若要在使用持续交付时启用远程调试，请参阅[使用连续交付功能发布到 Azure 时如何启用远程调试](/documentation/articles/cloud-services-virtual-machines-dotnet-continuous-delivery-remote-debugging/)。
+若要在使用持续交付时启用远程调试，请参阅[使用连续交付功能发布到 Azure 时如何启用远程调试](./cloud-services-virtual-machines-dotnet-continuous-delivery-remote-debugging.md)。
 
   [Team Foundation 生成服务]: https://msdn.microsoft.com/zh-cn/library/ee259687.aspx
   [.NET Framework 4]: https://www.microsoft.com/zh-cn/download/details.aspx?id=17851
@@ -563,7 +560,7 @@
   [.NET Framework 4.5.2]: https://www.microsoft.com/zh-cn/download/details.aspx?id=42643
   [扩展生成系统]: https://msdn.microsoft.com/zh-cn/library/dd793166.aspx
   [部署和配置生成服务器]: https://msdn.microsoft.com/zh-cn/library/ms181712.aspx
-  [Azure PowerShell cmdlet]: /documentation/articles/powershell-install-configure/
+  [Azure PowerShell cmdlet]: ../powershell-install-configure.md
   [the .publishsettings file]: https://manage.windowsazure.cn/download/publishprofile.aspx?wa=wsignin1.0
   [0]: ./media/cloud-services-dotnet-continuous-delivery/tfs-01bc.png
   [2]: ./media/cloud-services-dotnet-continuous-delivery/tfs-02.png

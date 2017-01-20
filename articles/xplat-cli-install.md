@@ -1,29 +1,28 @@
-<properties
-	pageTitle="安装 Azure 命令行界面 | Azure"
-	description="安装适用于 Mac、Linux 和 Windows 的 Azure 命令行接口 (CLI) 即可使用 Azure 服务"
-	editor=""
-	manager="timlt"
-	documentationCenter=""
-	authors="dlepow"
-	services="virtual-machines-linux,virtual-network,storage,azure-resource-manager"
-	tags="azure-resource-manager,azure-service-management"/>  
+---
+title: 安装 Azure 命令行界面 | Azure
+description: 安装适用于 Mac、Linux 和 Windows 的 Azure 命令行接口 (CLI) 即可使用 Azure 服务
+editor: 
+manager: timlt
+documentationCenter: 
+authors: dlepow
+services: virtual-machines-linux,virtual-network,storage,azure-resource-manager
+tags: azure-resource-manager,azure-service-management
 
+ms.service: multiple
+ms.workload: multiple
+ms.tgt_pltfrm: command-line-interface
+ms.devlang: na
+ms.topic: article
+ms.date: 10/04/2016
+wacn.date: 11/28/2016
+ms.author: danlep
+---
 
-<tags
-	ms.service="multiple"
-	ms.workload="multiple"
-	ms.tgt_pltfrm="command-line-interface"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/04/2016"
-	wacn.date="11/28/2016"
-	ms.author="danlep"/>
-    
 # 安装 Azure CLI
 
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/powershell-install-configure/)
-- [Azure CLI](/documentation/articles/xplat-cli-install/)
+> [!div class="op_single_selector"]
+- [PowerShell](./powershell-install-configure.md)
+- [Azure CLI](./xplat-cli-install.md)
 
 快速安装 Azure 命令行界面 (Azure CLI)，以便使用一组基于 shell 的开源命令在 Microsoft Azure 中创建和管理资源。在计算机上安装这些跨平台工具时有多个选项：
 
@@ -33,9 +32,7 @@
     
 有关更多选项和背景信息，请参阅 [GitHub](https://github.com/azure/azure-xplat-cli) 上的项目存储库。
 
-安装 Azure CLI 之后，[将它连接到 Azure 订阅](/documentation/articles/xplat-cli-connect/)，从命令行接口（Bash、终端、命令提示符等）运行 **azure** 命令来使用 Azure 资源。
-
-
+安装 Azure CLI 之后，[将它连接到 Azure 订阅](./xplat-cli-connect.md)，从命令行接口（Bash、终端、命令提示符等）运行 **azure** 命令来使用 Azure 资源。
 
 ## 选项 1：安装 npm 包
 
@@ -47,7 +44,7 @@
 
 	sudo npm install -g azure-cli
 
-> [AZURE.NOTE]如果需要在 Linux 分发版或操作系统上安装或更新 Node.js 和 npm，我们建议安装最新的 Node.js LTS 版本 (4.x)。如果你使用旧版本，可能会遇到安装错误。
+> [!NOTE]如果需要在 Linux 分发版或操作系统上安装或更新 Node.js 和 npm，我们建议安装最新的 Node.js LTS 版本 (4.x)。如果你使用旧版本，可能会遇到安装错误。
 
 如果喜欢，也可以将 npm 包的最新 Linux [tar 文件][linux-installer]下载到本地。然后，按照以下步骤安装下载的 npm 包（在 Linux 分发版上可能需要使用 **sudo**）：
 
@@ -61,8 +58,7 @@
 
 * [Windows MSI][windows-installer]
 
->[AZURE.TIP]在 Windows 上，还可以下载 [Web 平台安装程序](https://go.microsoft.com/?linkid=9828653)来安装 CLI。借助此安装程序，可选择在安装 CLI 后再安装其他 Azure SDK 和命令行工具。
-
+>[!TIP]在 Windows 上，还可以下载 [Web 平台安装程序](https://go.microsoft.com/?linkid=9828653)来安装 CLI。借助此安装程序，可选择在安装 CLI 后再安装其他 Azure SDK 和命令行工具。
 
 ## 选项 3：使用 Docker 容器
 
@@ -70,13 +66,12 @@
 
 	docker run -it microsoft/azure-cli
 
-
 ## 运行 Azure CLI 命令
 安装 Azure CLI 之后，请从命令行用户界面（Bash、终端、命令提示符等）运行 **azure** 命令。例如，若要运行帮助命令，请键入以下命令：
 
     azure help
 
-> [AZURE.NOTE]在某些 Linux 分发版中，可能会收到类似于“`/usr/bin/env: ‘node’: No such file or directory`”的错误。此错误来自最近安装在 /usr/bin/nodejs 中的 Node.js 安装。若要解决此错误，请运行以下命令创建 /usr/bin/node 的符号链接：
+> [!NOTE]在某些 Linux 分发版中，可能会收到类似于“`/usr/bin/env: ‘node’: No such file or directory`”的错误。此错误来自最近安装在 /usr/bin/nodejs 中的 Node.js 安装。若要解决此错误，请运行以下命令创建 /usr/bin/node 的符号链接：
 
     sudo ln -s /usr/bin/nodejs /usr/bin/node
 
@@ -84,10 +79,9 @@
 
     azure --version
 
-你现在已准备就绪！ 若要访问所有 CLI 命令以使用自己的资源，请[从 Azure CLI 连接到 Azure 订阅](/documentation/articles/xplat-cli-connect/)。
+你现在已准备就绪！ 若要访问所有 CLI 命令以使用自己的资源，请[从 Azure CLI 连接到 Azure 订阅](./xplat-cli-connect.md)。
 
->[AZURE.NOTE] 首次使用 Azure CLI 时，会看到一条消息，询问是否允许 Microsoft 收集使用情况信息。参与为自愿性质。如果选择参与，通过运行 `azure telemetry --disable` 即可随时停止参与。若要随时启用参与，请运行 `azure telemetry --enable`。
-
+>[!NOTE] 首次使用 Azure CLI 时，会看到一条消息，询问是否允许 Microsoft 收集使用情况信息。参与为自愿性质。如果选择参与，通过运行 `azure telemetry --disable` 即可随时停止参与。若要随时启用参与，请运行 `azure telemetry --enable`。
 
 ## 更新 CLI
 
@@ -101,21 +95,16 @@ Mac 和 Linux 支持 tab 自动补全 CLI 命令。
 
 如要在 zsh 中启用，运行：
 
-
 	echo '. <(azure --completion)' >> .zshrc
 
-
 若要在 bash 中启用，运行：
-
 
 	azure --completion >> ~/azure.completion.sh
 	echo 'source ~/azure.completion.sh' >> ~/.bash_profile
 
-
-
 ## 后续步骤 
 
-* [从 CLI 连接到 Azure 订阅](/documentation/articles/xplat-cli-connect/)以创建和管理 Azure 资源。
+* [从 CLI 连接到 Azure 订阅](./xplat-cli-connect.md)以创建和管理 Azure 资源。
 
 * 若要了解有关 Azure CLI、下载源代码、报告问题或贡献项目的详细信息，请访问[适用于 Azure CLI 的 GitHub 存储库](https://github.com/azure/azure-xplat-cli)。
 
@@ -126,7 +115,7 @@ Mac 和 Linux 支持 tab 自动补全 CLI 命令。
 [mac-installer]: http://aka.ms/mac-azure-cli
 [windows-installer]: http://aka.ms/webpi-azure-cli
 [linux-installer]: http://aka.ms/linux-azure-cli
-[cliasm]: /documentation/articles/virtual-machines-command-line-tools/
-[cliarm]: /documentation/articles/azure-cli-arm-commands/
+[cliasm]: ./virtual-machines-command-line-tools.md
+[cliarm]: ./virtual-machines/azure-cli-arm-commands.md
 
 <!---HONumber=Mooncake_1121_2016-->

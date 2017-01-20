@@ -1,16 +1,16 @@
-<properties
-	pageTitle="在 Azure Linux 虚拟机上安装 MySQL"
-	description="了解如何在 Azure Linux 虚拟机上安装 MySQL"
-	services="open-source"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""/>
+---
+title: 在 Azure Linux 虚拟机上安装 MySQL
+description: 了解如何在 Azure Linux 虚拟机上安装 MySQL
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-	ms.service="open-source-website"
-	ms.date=""
-	wacn.date="06/14/2016"/>
+ms.service: open-source-website
+ms.date: 
+wacn.date: 06/14/2016
+---
 
 # 在 Azure Linux 虚拟机上安装 MySQL
 
@@ -22,8 +22,7 @@
 
 MySQL 有多个稳定版本以及多种安装方式，这篇文档以 MySQL 5.6， repository package 安装方式演示整个安装过程。
 
-
-连接到您的 LINUX 虚拟机。如果这是您第一次使用 Azure 的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 连接到虚拟机。
+连接到您的 LINUX 虚拟机。如果这是您第一次使用 Azure 的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 连接到虚拟机。
 
 不同的 LINUX 发行版在安装 MySQL 时有少许的不同。请根据您的 LINUX 版本选择对应的步骤。
 
@@ -76,10 +75,8 @@ MySQL 有多个稳定版本以及多种安装方式，这篇文档以 MySQL 5.6�
 
 	注意上面 10.0.0.1 是被授权访问此 MySQL Server 的机器地址，123456 是您 root 密码。如果用 % 替代 IP 地址的话表明所有机器都可访问此数据库服务器。
 
-10. 打开 3306 端口。3306 端口是 MySQL 的默认端口。请参考[创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)打开端口
+10. 打开 3306 端口。3306 端口是 MySQL 的默认端口。请参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)打开端口
 11. 此时可以从 10.0.0.1 机器远程访问您的 MySQL 数据库了。
-
-
 
 ##<a name="install-mysql-server-5_6-under-ubuntu-linux"></a> Ubuntu Linux 下安装 MySQL Server 5.6: (以 Ubuntu 14.04, 64-bit system, MySQL 5.6 为例)
 
@@ -118,7 +115,7 @@ MySQL 有多个稳定版本以及多种安装方式，这篇文档以 MySQL 5.6�
 
 	注意上面 10.0.0.1 是被授权访问此 MySQL Server 的机器地址，123456 是您 root 密码。如果用%替代 IP 地址的话表明所有机器都可访问此数据库服务器。
 
-6. 打开 3306 端口。3306 端口是 MySQL 的默认端口。请参考[创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)打开端口 
+6. 打开 3306 端口。3306 端口是 MySQL 的默认端口。请参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)打开端口 
 
 7. 此时可以从 10.0.0.1 机器远程访问您的 MySQL 数据库了。
 
@@ -165,9 +162,8 @@ MySQL 有多个稳定版本以及多种安装方式，这篇文档以 MySQL 5.6�
 
 	注意上面 10.0.0.1 是被授权访问此 MySQL Server 的机器地址，123456 是您 root 密码。如果用%替代 IP 地址的话表明所有机器都可访问此数据库服务器。
 
-8. 打开 3306 端口。3306 端口是 MySQL 的默认端口。请参考[创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)打开端口 
+8. 打开 3306 端口。3306 端口是 MySQL 的默认端口。请参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)打开端口 
 
 9. 此时可以从 10.0.0.1 机器远程访问您的 MySQL 数据库了。
-
 
 更多资料请参考[官网](http://dev.mysql.com/doc/refman/5.6/en/) 

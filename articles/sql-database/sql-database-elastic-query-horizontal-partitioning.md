@@ -1,20 +1,20 @@
-<properties
-    pageTitle="跨已扩展的云数据库进行报告（预览）| Azure"
-    description="如何对水平分区设置弹性查询"    
-    services="sql-database"
-    documentationCenter=""  
-    manager="jhubbard"
-    authors="torsteng"/>
+---
+title: 跨已扩展的云数据库进行报告（预览）| Azure
+description: 如何对水平分区设置弹性查询
+services: sql-database
+documentationCenter: 
+manager: jhubbard
+authors: torsteng
 
-<tags
-    ms.service="sql-database"
-    ms.workload="sql-database"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="05/27/2016"
-    wacn.date="12/26/2016"
-    ms.author="torsteng" />
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/27/2016
+wacn.date: 12/26/2016
+ms.author: torsteng
+---
 
 # 跨已扩展的云数据库进行报告（预览）
 
@@ -22,22 +22,20 @@
 
 分片数据库跨已扩展的数据层分布行。所有参与数据库（也称为水平分区）的架构都是相同的。通过使用弹性查询，可以创建跨分片数据库中的所有数据库的报表。
 
-有关快速入门的详细信息，请参阅[跨已扩展的云数据库进行报告](/documentation/articles/sql-database-elastic-query-getting-started/)。
+有关快速入门的详细信息，请参阅[跨已扩展的云数据库进行报告](./sql-database-elastic-query-getting-started.md)。
 
-对于非分片数据库，请参阅[跨具有不同架构的云数据库进行查询](/documentation/articles/sql-database-elastic-query-vertical-partitioning/)。
+对于非分片数据库，请参阅[跨具有不同架构的云数据库进行查询](./sql-database-elastic-query-vertical-partitioning.md)。
 
- 
 ## 先决条件
 
-* 使用弹性数据库客户端库创建分片映射。请参阅[分片映射管理](/documentation/articles/sql-database-elastic-scale-shard-map-management/)。或者使用[弹性数据库工具入门](/documentation/articles/sql-database-elastic-scale-get-started/)中的示例应用。
-* 也可以参阅[将现有数据库迁移到已扩展的数据库](/documentation/articles/sql-database-elastic-convert-to-use-elastic-tools/)。
+* 使用弹性数据库客户端库创建分片映射。请参阅[分片映射管理](./sql-database-elastic-scale-shard-map-management.md)。或者使用[弹性数据库工具入门](./sql-database-elastic-scale-get-started.md)中的示例应用。
+* 也可以参阅[将现有数据库迁移到已扩展的数据库](./sql-database-elastic-convert-to-use-elastic-tools.md)。
 * 用户必须拥有 ALTER ANY EXTERNAL DATA SOURCE 权限。此权限包含在 ALTER DATABASE 权限中。
 * 引用基础数据源需要 ALTER ANY EXTERNAL DATA SOURCE 权限。
 
 ## 概述
 
 这些语句在弹性查询数据库中创建分片数据层的元数据表示形式。
-
 
 1. [CREATE MASTER KEY](https://msdn.microsoft.com/zh-cn/library/ms174382.aspx)
 2. [CREATE DATABASE SCOPED CREDENTIAL](https://msdn.microsoft.com/zh-cn/library/mt270260.aspx)
@@ -146,7 +144,6 @@ DISTRIBUTION 子句指定用于此表的数据分布。查询处理器利用 DIS
 
 **数据层引用**：外部表 DDL 引用外部数据源。外部数据源指定分片映射，后者为外部表提供在数据层中找到所有数据库所需的信息。
 
-
 ### 安全注意事项 
 
 有权访问外部表的用户在使用外部数据源定义中提供的凭据时，会自动获得对基础远程表的访问权限。避免通过外部数据源的凭据进行不必要的特权提升。对外部表使用 GRANT 或 REVOKE，就如同它是常规表一样。
@@ -203,7 +200,7 @@ sp\_execute\_remote 使用调用参数中提供的外部数据源，以在远程
 
 * 弹性查询最适合大部分计算可以在分片上完成的查询。使用可以在分片或联接上通过分区键求值的选择性筛选器谓词（可以在所有分片上以分区对齐方式执行），通常可以获得最佳查询性能。其他查询模式可能需要从分片将大量数据加载到头节点，并且可能无法很好地执行
 
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-query-horizontal-partitioning/horizontalpartitioning.png

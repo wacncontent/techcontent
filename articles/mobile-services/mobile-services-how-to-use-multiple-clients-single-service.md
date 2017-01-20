@@ -1,20 +1,21 @@
-<properties
-	pageTitle="如何在多个客户端上使用单个移动服务后端 | Azure 移动服务"
-	description="了解如何在面向不同移动平台的多个客户端应用上使用单个移动服务后端。"
-	services="mobile-services"
-	documentationCenter=""
-	authors="ggailey777"
-	manager="dwrede"
-	editor="mollybos"/>
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="11/10/2016"
-	ms.author="glenga"/>
+---
+title: 如何在多个客户端上使用单个移动服务后端 | Azure 移动服务
+description: 了解如何在面向不同移动平台的多个客户端应用上使用单个移动服务后端。
+services: mobile-services
+documentationCenter: 
+authors: ggailey777
+manager: dwrede
+editor: mollybos
+
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 11/10/2016
+ms.author: glenga
+---
 
 #  通过单个移动服务支持多个设备平台
  
@@ -42,7 +43,7 @@
 
 在 .NET 后端移动服务中，通过调用从 [ApiServices.Push](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.apiservices.push.aspx) 属性获取的 [PushClient](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.notifications.pushclient.aspx) 对象的 [SendAsync] 方法发送通知。发送的推送通知（本机或模板）取决于传递给 [SendAsync] 方法的特定 [IPushMessage](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.notifications.ipushmessage.aspx) 派生的对象，如下表所示：
 
-|平台 |[APNS](/documentation/articles/mobile-services-dotnet-backend-ios-get-started-push/)|WNS | MPNS
+|平台 |[APNS](./mobile-services-dotnet-backend-ios-get-started-push.md)|WNS | MPNS
 |-----|-----|----|----|-----|
 |本机|[ApplePushMessage](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.applepushmessage.aspx) |[GooglePushMessage](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.googlepushmessage.aspx) |[WindowsPushMessage](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.windowspushmessage.aspx) | [MpnsPushMessage](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.mpnspushmessage.aspx) |
 
@@ -77,7 +78,7 @@
 
 在 JavaScript 后端移动服务中，通过调用从全局 [push 对象]获取的特定于平台的对象的 **send** 方法发送通知，如下表所示：
 
-|平台 |[APNS](/documentation/articles/mobile-services-javascript-backend-ios-get-started-push/)|WNS|[MPNS](/documentation/articles/mobile-services-javascript-backend-windows-phone-get-started-push/)|
+|平台 |[APNS](./mobile-services-javascript-backend-ios-get-started-push.md)|WNS|[MPNS](./mobile-services-javascript-backend-windows-phone-get-started-push.md)|
 |-----|-----|----|----|-----|
 |本机|[apns 对象](http://msdn.microsoft.com/zh-cn/library/azure/jj839711.aspx) |[gcm 对象](http://msdn.microsoft.com/zh-cn/library/azure/dn126137.aspx) |[wns 对象](http://msdn.microsoft.com/zh-cn/library/azure/jj860484.aspx) | [mpns 对象](http://msdn.microsoft.com/zh-cn/library/azure/jj871025.aspx) |
 
@@ -141,12 +142,11 @@
 
 + [**Xamarin**](https://go.microsoft.com/fwLink/p/?LinkID=330242)<br/>使用 Xamarin 可以为 iOS 和 Android 设备创建完全本机应用程序，这些应用程序具有完全本机 UI 并可访问所有设备资源。Xamarin 应用程序使用 C#（而不是 Objective-C 和 Java）编码。这使 .NET 开发人员能够将应用程序发布到 iOS 和 Android 并共享 Windows 项目中的代码。Xamarin 通过 C# 代码在 iOS 和 Android 设备上提供完全本机用户体验。这使你能够在 iOS 和 Android 设备上重用 Windows 应用程序中的某些移动服务代码。
 
-
 <!-- URLs -->
-[Azure 通知中心]: /documentation/articles/notification-hubs-push-notification-overview/
+[Azure 通知中心]: ../notification-hubs/notification-hubs-push-notification-overview.md
 [SSO Windows Store]: /documentation/articles/mobile-services-windows-store-dotnet-single-sign-on/
 [SSO Windows Phone]: /documentation/articles/mobile-services-windows-phone-single-sign-on/
-[Tutorials and resources]: /documentation/services/mobile-services/
+[Tutorials and resources]: ./index.md/
 
 [向用户发送跨平台通知]: /documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users-xplat-mobile-services/
 [Get started with push Windows dotnet]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started-push-vs2012/
@@ -158,8 +158,8 @@
 [How to use a .NET client with Mobile Services]: /documentation/articles/mobile-services-windows-dotnet-how-to-use-client-library/
 [push 对象]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj554217.aspx
 [TemplatePushMessage]: http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.templatepushmessage.aspx
-[PhoneGap]: /documentation/articles/mobile-services-javascript-backend-phonegap-get-started/
-[Sencha]: /documentation/articles/partner-sencha-mobile-services-get-started/
+[PhoneGap]: ./mobile-services-javascript-backend-phonegap-get-started.md
+[Sencha]: ./partner-sencha-mobile-services-get-started.md
 [Appcelerator]: /documentation/articles/partner-appcelerator-mobile-services-javascript-backend-appcelerator-get-started/
 [SendAsync]: http://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.mobile.service.notifications.pushclient.sendasync.aspx
 [What's next for Windows Phone 8 developers]: http://msdn.microsoft.com/zh-cn/library/windows/apps/dn655121(v=vs.105).aspx

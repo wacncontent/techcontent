@@ -1,12 +1,16 @@
-<properties 
-	pageTitle="Azure linux虚拟机常见导致无法远程的操作" 
-	description="对Azure虚拟机的一些操作可能会导致无法远程连接，本文罗列了些常见的场景。" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machines-aog" ms.date="" wacn.date="07/26/2016"/>
+---
+title: Azure linux虚拟机常见导致无法远程的操作
+description: 对Azure虚拟机的一些操作可能会导致无法远程连接，本文罗列了些常见的场景。
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machines-aog
+ms.date: 
+wacn.date: 07/26/2016
+---
 
 # Azure Linux 虚拟机常见导致无法远程的操作
 
@@ -17,8 +21,6 @@
 - [场景3 - 误设置防火墙规则](#scenario03)
 - [场景4 - 挂载UUID相同的系统盘](#scenario04)
 - [场景5 - 使用device名称挂载软raid的device，名称发生变化引起启动失败](#scenario05)
-
-
 
 ##<a id="scenario01"></a>场景1 
 在配置文件（/etc/sysconfig/network-scripts/ifcfg-eth0）中配置固定的IP地址或MAC地址：
@@ -72,7 +74,7 @@
  
 ##<a id="scenario05"></a>场景5 
 虚拟机做软raid后，使用device名称挂载而非UUID挂载，重启后软raid的device名称发生变化，导致无法正常挂载，虚拟机启动失败从而无法正常ssh：
-例如，在创建raid的时候，使用md0，md1，md2作为名称进行创建（[参考链接](/documentation/articles/virtual-machines-linux-configure-raid/)）：
+例如，在创建raid的时候，使用md0，md1，md2作为名称进行创建（[参考链接](./virtual-machines/virtual-machines-linux-configure-raid.md)）：
 
 `mdadm --create /dev/md0 --level 0 --raid-devices 2 /dev/sdc1 /dev/sdd1`
 
@@ -88,6 +90,4 @@
 
 注：本场景测试环境为CentOS 6.5, 如果您当前使用的非该版本, 请注意版本的差异性。
  
-
- 
 

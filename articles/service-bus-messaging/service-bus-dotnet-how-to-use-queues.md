@@ -1,26 +1,26 @@
-<properties
-    pageTitle="如何使用服务总线队列 (.NET) | Azure"
-    description="了解如何在 Azure 中使用 Service Bus 队列。代码示例是使用 .NET API 通过 C# 编写的。"
-    services="service-bus"
-    documentationCenter=".net"
-    authors="sethmanheim"
-    manager="timlt"
-    editor=""/>
+---
+title: 如何使用服务总线队列 (.NET) | Azure
+description: 了解如何在 Azure 中使用 Service Bus 队列。代码示例是使用 .NET API 通过 C# 编写的。
+services: service-bus
+documentationCenter: .net
+authors: sethmanheim
+manager: timlt
+editor: 
 
-<tags
-    ms.service="service-bus"
-    ms.date="05/09/2016"
-    wacn.date="01/04/2017"/>
+ms.service: service-bus
+ms.date: 05/09/2016
+wacn.date: 01/04/2017
+---
 
 # 如何使用 Service Bus 队列
 
-[AZURE.INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
+[!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 本文介绍了如何使用服务总线队列。相关示例采用 C# 编写且使用 .NET API。涉及的方案包括创建队列以及发送和接收消息。有关队列的详细信息，请参阅[后续步骤](#next-steps)部分。
 
-[AZURE.INCLUDE [create-account-note](../../includes/create-account-note.md)]
+[!INCLUDE [create-account-note](../../includes/create-account-note.md)]
 
-[AZURE.INCLUDE [howto-service-bus-queues](../../includes/howto-service-bus-queues.md)]
+[!INCLUDE [howto-service-bus-queues](../../includes/howto-service-bus-queues.md)]
 
 ## 添加服务总线 NuGet 包
 
@@ -46,7 +46,6 @@
 
 利用该服务配置机制，你可以从 [Azure 经典管理门户][]动态更改配置设置，而无需重新部署应用程序。例如，向服务定义 (.csdef) 文件中添加 `Setting` 标签，如以下示例所示。
 
-
 		<ServiceDefinition name="Azure1">
 		...
 		    <WebRole name="MyRole" vmsize="Small">
@@ -59,7 +58,6 @@
 
 然后在服务配置 (.cscfg) 文件中指定值，如以下示例所示。
 
-
 		<ServiceConfiguration serviceName="Azure1">
 		...
 		    <Role name="MyRole">
@@ -71,13 +69,11 @@
 		...
 		</ServiceConfiguration>
 
-
 使用从 Azure 经典管理门户检索到的共享访问签名 (SAS) 密钥名称和密钥值，如上一部分中所述。
 
 ### 在使用网站或 Azure 虚拟机时配置连接字符串
 
 在使用网站或虚拟机时，建议你使用 .NET 配置系统（如 **Web.config**）。你可以使用 `<appSettings>` 元素存储连接字符串：
-
 
 		<configuration>
 		    <appSettings>
@@ -85,7 +81,6 @@
 		             value="Endpoint=sb://yourServiceNamespace.servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yourKey" />
 		    </appSettings>
 		</configuration>
-
 
 使用从 Azure 经典管理门户检索到的 SAS 名称和密钥值，如上一部分中所述。
 
@@ -101,7 +96,6 @@
 
 使用以下示例，考虑上一节中的配置设置。
 
-
 		// Create the queue if it does not exist already.
 		string connectionString =
 		    CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
@@ -114,9 +108,7 @@
 		    namespaceManager.CreateQueue("TestQueue");
 		}
 
-
 这里使用了 [CreateQueue](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.createqueue.aspx) 方法的重载，以允许你调整队列属性（例如，为了将默认的生存时间 (TTL) 值设置为应用于发送到队列的消息）。使用 [QueueDescription](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.aspx) 类应用这些设置。以下示例演示如何创建名为 `TestQueue`、最大大小为 5 GB、默认消息 TTL 为 1 分钟的队列。
-
 
 		// Configure queue settings.
 		QueueDescription qd = new QueueDescription("TestQueue");
@@ -135,15 +127,13 @@
 		    namespaceManager.CreateQueue(qd);
 		}
 
-
-> [AZURE.NOTE]你可以对 [NamespaceManager][] 对象使用 [QueueExists](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.queueexists.aspx) 方法，以检查具有指定名称的队列是否已存在于某个服务命名空间中。
+> [!NOTE]你可以对 [NamespaceManager][] 对象使用 [QueueExists](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.queueexists.aspx) 方法，以检查具有指定名称的队列是否已存在于某个服务命名空间中。
 
 ## 向队列发送消息
 
 若要向服务总线队列发送消息，你的应用程序需使用连接字符串创建 [QueueClient][] 对象。
 
 以下代码演示如何使用 [CreateFromConnectionString](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.createfromconnectionstring.aspx) API 调用为刚创建的 `TestQueue` 队列创建 [QueueClient][] 对象。
-
 
 		string connectionString =
 		    CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
@@ -153,11 +143,9 @@
 
 		Client.Send(new BrokeredMessage());
 
-
 在服务总线队列中发送和接收的消息是 [BrokeredMessage][] 类的实例。[BrokeredMessage][] 对象包含一组标准属性（如 [Label](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.label.aspx) 和 [TimeToLive](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.timetolive.aspx)）、一个用来保存自定义应用程序特定属性的词典以及大量随机应用程序数据。应用程序可通过将任何可序列化对象传入到 [BrokeredMessage][] 对象的构造函数中来设置消息的正文，然后将使用适当的 **DataContractSerializer** 序列化对象。或者，你可以提供 **System.IO.Stream** 对象。
 
 以下示例演示了如何将五条测试消息发送到在前面的代码示例中获取的 `TestQueue` [QueueClient][] 对象。
-
 
 		for (int i=0; i<5; i++)
 		{
@@ -172,8 +160,7 @@
 		  Client.Send(message);
 		}
 
-
-服务总线队列支持[最大为 256 Kb 的消息](/documentation/articles/service-bus-azure-and-service-bus-queues-compared-contrasted/#capacity-and-quotas)（标头最大为 64 KB，其中包括标准和自定义应用程序属性）。一个队列可包含的消息数不受限制，但消息的总大小受限。此队列大小是在创建时定义的，上限为 5 GB。如果启用了分区，则上限更高。有关详细信息，请参阅[分区消息传送实体](/documentation/articles/service-bus-partitioning/)。
+服务总线队列支持[最大为 256 Kb 的消息](./service-bus-azure-and-service-bus-queues-compared-contrasted.md#capacity-and-quotas)（标头最大为 64 KB，其中包括标准和自定义应用程序属性）。一个队列可包含的消息数不受限制，但消息的总大小受限。此队列大小是在创建时定义的，上限为 5 GB。如果启用了分区，则上限更高。有关详细信息，请参阅[分区消息传送实体](./service-bus-partitioning.md)。
 
 ## 如何从队列接收消息
 
@@ -184,7 +171,6 @@
 在 **PeekLock** 模式（这是默认模式）下，接收变成了一个两阶段操作，从而有可能支持不允许遗漏消息的应用程序。当 Service Bus 收到请求时，它会查找下一条要使用的消息，锁定该消息以防其他使用者接收，然后将该消息返回到应用程序。应用程序完成消息处理（或可靠地存储消息以供将来处理）后，它将通过对收到的消息调用 [Complete][] 完成接收过程的第二个阶段。当服务总线发现 [Complete][] 调用时，它会将消息标记为“已使用”并将其从队列中删除。
 
 以下示例演示如何使用默认的 **PeekLock** 模式接收和处理消息。若要指定不同的 [ReceiveMode](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.receivemode.aspx) 值，可以使用 [CreateFromConnectionString](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.createfromconnectionstring.aspx) 的另一个重载。此示例使用 [OnMessage](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.onmessage.aspx) 回调来处理传入 `TestQueue` 的消息。
-
 
 		string connectionString =
 		  CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
@@ -217,7 +203,6 @@
 		    }
 		}, options);
 
-
 此示例使用 [OnMessageOptions](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.onmessageoptions.aspx) 对象配置 [OnMessage](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.onmessage.aspx) 回调。将 [AutoComplete](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.onmessageoptions.autocomplete.aspx) 设置为 **false** 以允许手动控制何时对收到的消息调用 [Complete][]。将 [AutoRenewTimeout](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.onmessageoptions.autorenewtimeout.aspx) 设置为 1 分钟，这会导致客户端最多等待消息一分钟，然后调用会超时并且客户端将发出新的调用以检查是否有消息。此属性值会减少客户端无法检索消息时产生的应计费调用次数。
 
 ## 如何处理应用程序崩溃和不可读消息
@@ -238,10 +223,10 @@
 
   [Azure 经典管理门户]: http://manage.windowsazure.cn
   [7]: ./media/service-bus-dotnet-how-to-use-queues/getting-started-multi-tier-13.png
-  [队列、主题和订阅]: /documentation/articles/service-bus-queues-topics-subscriptions/
-  [服务总线中转消息传送 .NET 教程]: /documentation/articles/service-bus-brokered-tutorial-dotnet/
+  [队列、主题和订阅]: ./service-bus-queues-topics-subscriptions.md
+  [服务总线中转消息传送 .NET 教程]: ./service-bus-brokered-tutorial-dotnet.md
   [Azure 示例]: https://code.msdn.microsoft.com/site/search?query=service%20bus&f%5B0%5D.Value=service%20bus&f%5B0%5D.Type=SearchText&ac=2
-  [服务总线示例概述]: /documentation/articles/service-bus-samples/
+  [服务总线示例概述]: ./service-bus-samples.md
   [GetSetting]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.cloudconfigurationmanager.getsetting.aspx
   [CloudConfigurationManager]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.cloudconfigurationmanager
   [NamespaceManager]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx

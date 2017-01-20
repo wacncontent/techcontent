@@ -1,24 +1,22 @@
-<properties
-	pageTitle="分析平台：Apache Storm 与流分析之间的比较 | Azure"
-	description="使用 Apache Storm 与流分析之间的比较获取有关选择云分析平台的指导。了解功能和区别。"
-	keywords="分析平台, 分析平台, 云分析平台, storm 比较"
-	services="stream-analytics"
-	documentationCenter=""
-	authors="jeffstokes72"
-	manager="jhubbard"
-	editor="cgronlun"/>  
+---
+title: 分析平台：Apache Storm 与流分析之间的比较 | Azure
+description: 使用 Apache Storm 与流分析之间的比较获取有关选择云分析平台的指导。了解功能和区别。
+keywords: 分析平台, 分析平台, 云分析平台, storm 比较
+services: stream-analytics
+documentationCenter: 
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="stream-analytics"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="big-data"
-	ms.date="09/26/2016"
-	wacn.date="01/09/2017"
-	ms.author="jeffstok"/>  
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 09/26/2016
+wacn.date: 01/09/2017
+ms.author: jeffstok
+---
 
 # 帮助你选择流分析平台：Apache Storm 与 Azure 流分析的比较
 
@@ -125,7 +123,7 @@
                     流分析通过处理的数据量以及流式处理单位的数目（作业每小时运行的）来定价。
                 </p>
                 <p>
-                    <a href="/pricing/details/stream-analytics/">更多定价信息可在此处找到。</a>
+                    <a href="https://www.azure.cn/pricing/details/stream-analytics/">更多定价信息可在此处找到。</a>
                 </p>
             </td>
             <td width="246" valign="top">
@@ -133,7 +131,7 @@
                     就 Apache Storm on HDInsight 来说，采购单位是根据群集计算的，而收费则根据群集所运行的时间来计算，与部署的作业无关。
                 </p>
                 <p>
-                    <a href="/pricing/details/hdinsight/">更多定价信息可在此处找到。</a>
+                    <a href="https://www.azure.cn/pricing/details/hdinsight/">更多定价信息可在此处找到。</a>
                 </p>
             </td>
         </tr>

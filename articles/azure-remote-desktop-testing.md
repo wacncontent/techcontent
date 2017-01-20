@@ -1,14 +1,17 @@
-<properties
-	pageTitle="远程开发测试环境自动化管理解决方案配置手册"
-    description="远程开发测试环境自动化管理解决方案配置手册"
-    services="multiple"
-    documentationCenter=""
-    authors=""
-    manager=""
-    editor=""
-    tags=""/>
+---
+title: 远程开发测试环境自动化管理解决方案配置手册
+description: 远程开发测试环境自动化管理解决方案配置手册
+services: multiple
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags ms.service="multiple" ms.date="" wacn.date="10/17/2016"/>
+ms.service: multiple
+ms.date: 
+wacn.date: 10/17/2016
+---
 
 # 远程开发测试环境自动化管理解决方案配置手册
 
@@ -22,7 +25,6 @@
 4. 已经记录所创建的虚拟网络、云服务、存储账户相关信息，如：云服务名称、虚拟网络名称、存储账户名称、子网名称等。
 
 ## Step1：基础环境配置
-
 
 1. <a id="step1-1"></a>登录 [Azure 经典管理门户](https://manage.windowsazure.cn/)。
 	
@@ -56,7 +58,6 @@
 
 	![08](./media/azure-remote-desktop-testing/08.png)
 
-	
 9. <a id="step1-9"></a>记录该用户的 **用户名称** 和 **临时密码**，单击 **完成** 按钮关闭该页面，完成新 Azure AD 用户创建 。
 
 	![09](./media/azure-remote-desktop-testing/09.png)
@@ -65,7 +66,7 @@
 
 	![10](./media/azure-remote-desktop-testing/10.png)
 	
-11. 再次浏览 [Azure 经典管理门户](https://manage.windowsazure.cn/) , 并使用 <a href="/documentation/articles/azure-remote-desktop-testing/#step1-9" target="_blank">Step1->9</a> 中创建的新用户和临时密码进行登录。
+11. 再次浏览 [Azure 经典管理门户](https://manage.windowsazure.cn/) , 并使用 <a href="./azure-remote-desktop-testing.md#step1-9" target="_blank">Step1->9</a> 中创建的新用户和临时密码进行登录。
 
 	![11](./media/azure-remote-desktop-testing/11.png)
 	
@@ -73,7 +74,7 @@
 
 	![12](./media/azure-remote-desktop-testing/12.png)
 	
-13. 返回 <a href="/documentation/articles/azure-remote-desktop-testing/#step1-1" target="_blank">Step1->1</a> 中登录的 Azure 管理门户页面，单击 **设置** 。
+13. 返回 <a href="./azure-remote-desktop-testing.md#step1-1" target="_blank">Step1->1</a> 中登录的 Azure 管理门户页面，单击 **设置** 。
 
 	![13](./media/azure-remote-desktop-testing/13.png)
 	
@@ -81,10 +82,9 @@
 
 	![14](./media/azure-remote-desktop-testing/14.png)
 	
-15. 在 **电子邮件地址** 处输入在 <a href="/documentation/articles/azure-remote-desktop-testing/#step1-9" target="_blank">Step1->9</a> 处所添加的 **用户名称** ，订阅选中 “**1元人民币的试用订阅**”，单击 **确定** 按钮。
+15. 在 **电子邮件地址** 处输入在 <a href="./azure-remote-desktop-testing.md#step1-9" target="_blank">Step1->9</a> 处所添加的 **用户名称** ，订阅选中 “**1元人民币的试用订阅**”，单击 **确定** 按钮。
 
 	![15](./media/azure-remote-desktop-testing/15.png)
-	
 	
 ## Step2：捕获虚拟机映像
 	
@@ -120,7 +120,6 @@
 
 	![23](./media/azure-remote-desktop-testing/23.png)
 	
-
 ## Step3：配置自动化服务
 
 1. 在 Azure 管理门户中，单击 **自动化** ，单击 **创建自动管理账户**。
@@ -147,7 +146,7 @@
 
 	![29](./media/azure-remote-desktop-testing/29.png)
 	
-7. 在 **用户名** 处输入 <a href="/documentation/articles/azure-remote-desktop-testing/#step1-9" target="_blank">Step1->9</a> 处所添加的用户，**密码** 和 **确认密码** 为 <a href="/documentation/articles/azure-remote-desktop-testing/#step1-12" target="_blank">Step1->12</a> 处所修改后的密码，单击 **确认** 按钮。
+7. 在 **用户名** 处输入 <a href="./azure-remote-desktop-testing.md#step1-9" target="_blank">Step1->9</a> 处所添加的用户，**密码** 和 **确认密码** 为 <a href="./azure-remote-desktop-testing.md#step1-12" target="_blank">Step1->12</a> 处所修改后的密码，单击 **确认** 按钮。
 
 	![30](./media/azure-remote-desktop-testing/30.png) 
 
@@ -155,7 +154,7 @@
 
 	![31](./media/azure-remote-desktop-testing/31.png) 
 	
-10. 单击 Azure 管理门户中的 **新建** 按钮，选择 **应用程序服务->自动化->RUNBOOK->快速创建**，设置一个 **RUNBOOK 名称**，在本示例中本次所创建的 RUNBOOK 用于进行开发测试环境部署，RUNBOOK 名称为 createdevvm， **自动化账户** 选择 <a href="/documentation/articles/azure-remote-desktop-testing/#step3-2" target="_blank">Step3->2</a> 中所创建的自动化账户，单击 **创建** 按钮。
+10. 单击 Azure 管理门户中的 **新建** 按钮，选择 **应用程序服务->自动化->RUNBOOK->快速创建**，设置一个 **RUNBOOK 名称**，在本示例中本次所创建的 RUNBOOK 用于进行开发测试环境部署，RUNBOOK 名称为 createdevvm， **自动化账户** 选择 <a href="./azure-remote-desktop-testing.md#step3-2" target="_blank">Step3->2</a> 中所创建的自动化账户，单击 **创建** 按钮。
 
 	![32](./media/azure-remote-desktop-testing/32.png) 
 	
@@ -209,8 +208,7 @@
 
 	![34](./media/azure-remote-desktop-testing/34.png) 
 	
-	
-14. 参考 <a href="/documentation/articles/azure-remote-desktop-testing/#step3-11" target="_blank">Step3->11 至 13 </a>步，在同一自动化账户中再创建并发布三个名称分别为 deletedevvm、startvm、shutdownvm  的 RUNBOOK，其代码部分如下：
+14. 参考 <a href="./azure-remote-desktop-testing.md#step3-11" target="_blank">Step3->11 至 13 </a>步，在同一自动化账户中再创建并发布三个名称分别为 deletedevvm、startvm、shutdownvm  的 RUNBOOK，其代码部分如下：
 
 	以下是deletedevvm runbook代码：
 
@@ -283,11 +281,9 @@
 
 	![35](./media/azure-remote-desktop-testing/35.png) 
 	
-
 ## Step4：开发测试环境自动化部署测试
 
 1. 记录本指南开篇处准备工作部分所要求的存储账户名称、云服务名称、虚拟网络名称、子网名称等信息。
-
 
 2. 找到自动化账户中的 createvm RUNBOOK，单击 **启动** 按钮。
 
@@ -298,8 +294,8 @@
 	名称 | 值
 	---|---
 	CLOUDSERVICENAME | VM部署目标云服务名称
-	CREDENTIALNAME | <a href="/documentation/articles/azure-remote-desktop-testing/#step3-6" target="_blank">Step3->6</a> 中所设置的凭据名称
-	IMAGENAME | <a href="/documentation/articles/azure-remote-desktop-testing/#step2-7" target="_blank">Step2->7</a> 中所设置的 OS 映像名称
+	CREDENTIALNAME | <a href="./azure-remote-desktop-testing.md#step3-6" target="_blank">Step3->6</a> 中所设置的凭据名称
+	IMAGENAME | <a href="./azure-remote-desktop-testing.md#step2-7" target="_blank">Step2->7</a> 中所设置的 OS 映像名称
 	STORAGEACCOUNT | VM 部署目标存储账户，需与 OS 映像所在存储账户为同一存储账户
 	SUBNETNAME | VM 部署目标子网，需是本表 VNETNAME 参数所指定虚拟网络中的子网
 	VMADMINUSERNAME | VM 创建后操作系统管理员用户名
@@ -309,7 +305,7 @@
 	VMSIZE | VM 实例大小，本演示使用 Standard_D1
 	VNETNAME | VM 部署目标虚拟网络，需与存储账户和云服务在同一个数据中心位置
 	
-	>[AZURE.NOTE]1 元试用订阅中的资源使用上限为 4 CPU，因此在按照本文档演示内容操作时，应提前检查是否存在足够数量的 CPU 空闲资源。
+	>[!NOTE]1 元试用订阅中的资源使用上限为 4 CPU，因此在按照本文档演示内容操作时，应提前检查是否存在足够数量的 CPU 空闲资源。
 	
 4. 设置完部署参数的交互窗口如下图所示，单击 **确定** 按钮。
 
@@ -327,7 +323,6 @@
 
 	![40](./media/azure-remote-desktop-testing/40.png) 
 	
-
 ## Step5：开发测试环境自动化成本优化
 
 1. <a id="step5-1"></a>在自动化账户页面，单击 **RUNBOOK** 选项卡，找到 **StartVM** RUNBOOK，单击其名称右侧的箭头。
@@ -346,17 +341,16 @@
 
 	字段名称 | 值  
 	---|---  
-	$VMName | <a href="/documentation/articles/azure-remote-desktop-testing/#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的 VM 名称  
-	$CloudServiceName | <a href="/documentation/articles/azure-remote-desktop-testing/#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的云服务名称  
-	$VMSize | <a href="/documentation/articles/azure-remote-desktop-testing/#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的实例大小  
-	$CredentialName | <a href="/documentation/articles/azure-remote-desktop-testing/#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的凭据名称
+	$VMName | <a href="./azure-remote-desktop-testing.md#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的 VM 名称  
+	$CloudServiceName | <a href="./azure-remote-desktop-testing.md#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的云服务名称  
+	$VMSize | <a href="./azure-remote-desktop-testing.md#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的实例大小  
+	$CredentialName | <a href="./azure-remote-desktop-testing.md#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的凭据名称
 
 5. 修改后的结果如下图所示，单击 **发布** 按钮，选择 **是**。
 
 	![44](./media/azure-remote-desktop-testing/44.png) 
 	
-	
-6. 参考以上 <a href="/documentation/articles/azure-remote-desktop-testing/#step5-1" target="_blank">Step5->1</a> 至 5 步骤对 **shutdownvm** RUNBOOK 进行编辑并重新发布。
+6. 参考以上 <a href="./azure-remote-desktop-testing.md#step5-1" target="_blank">Step5->1</a> 至 5 步骤对 **shutdownvm** RUNBOOK 进行编辑并重新发布。
 
 	![45](./media/azure-remote-desktop-testing/45.png) 
 	
@@ -378,7 +372,7 @@
 	
 	![50](./media/azure-remote-desktop-testing/50.png) 
 	
-11. 参考以上 <a href="/documentation/articles/azure-remote-desktop-testing/#step5-7" target="_blank">Step5->7 至 10</a> 步骤对 **startvm** RUNBOOK 进行计划日程设置，如执行时间为每天上午 9 点。
+11. 参考以上 <a href="./azure-remote-desktop-testing.md#step5-7" target="_blank">Step5->7 至 10</a> 步骤对 **startvm** RUNBOOK 进行计划日程设置，如执行时间为每天上午 9 点。
 
 	![51](./media/azure-remote-desktop-testing/51.png) 
 	
@@ -394,38 +388,37 @@
 
 	字段名称 | 值  
 	---|---
-	$VMName | <a href="/documentation/articles/azure-remote-desktop-testing/#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的 VM 名称  
-	$CloudServiceName | <a href="/documentation/articles/azure-remote-desktop-testing/#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的云服务名称  
-	$VMSize | <a href="/documentation/articles/azure-remote-desktop-testing/#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的实例大小  
-	$CredentialName | <a href="/documentation/articles/azure-remote-desktop-testing/#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的凭据名称  
+	$VMName | <a href="./azure-remote-desktop-testing.md#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的 VM 名称  
+	$CloudServiceName | <a href="./azure-remote-desktop-testing.md#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的云服务名称  
+	$VMSize | <a href="./azure-remote-desktop-testing.md#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的实例大小  
+	$CredentialName | <a href="./azure-remote-desktop-testing.md#step4-3" target="_blank">Step4->3 和 4</a> 中所指定的凭据名称  
 
-	>[AZURE.NOTE]上表为本演示环境中所使用参数，生产环境使用时需根据实际情况进行参数修改。
+	>[!NOTE]上表为本演示环境中所使用参数，生产环境使用时需根据实际情况进行参数修改。
 	
 3. 指定参数后的交互界面如下图所示，单击 **确定** 按钮。
 
 	![53](./media/azure-remote-desktop-testing/53.png)
 	
-	>[AZURE.NOTE]本脚本将强制删除指定的VM，在执行前请确认目标虚拟机业务方面的可删除性。
+	>[!NOTE]本脚本将强制删除指定的VM，在执行前请确认目标虚拟机业务方面的可删除性。
 	
 4. 当需要对现有开发测试环境进行迭代更新时，只需参考本演示中相关步骤，对模板进行更新后，删除现有虚拟机并重新使用新模板创建即可。
-
 
 ## 扩展服务
 
 ### 虚拟机
 		
-虚拟机服务是 Azure 提供的通用型计算服务。您可以通过虚拟机来运行您的数据库、中间件等。本演示中通过虚拟机来运行 Mongo DB 数据库。关于虚拟机更多信息请参考 [虚拟机服务介绍](/home/features/virtual-machines/)。
+虚拟机服务是 Azure 提供的通用型计算服务。您可以通过虚拟机来运行您的数据库、中间件等。本演示中通过虚拟机来运行 Mongo DB 数据库。关于虚拟机更多信息请参考 [虚拟机服务介绍](https://www.azure.cn/home/features/virtual-machines/)。
 	
 ### 虚拟网络
 		
-虚拟网络 (VNet) 是 Azure 上提供的一种云端网络部署形式。通过虚拟网络企业可以在云端搭建自己的私有网络，并在该网络上设计应用部署架构，进行流量管理等。同时虚拟网络还允许企业将云端与本地数据中心进行联通，形成混合云环境。 关于虚拟网络更多信息请参考 [虚拟网络服务介绍](/home/features/networking/) 。
+虚拟网络 (VNet) 是 Azure 上提供的一种云端网络部署形式。通过虚拟网络企业可以在云端搭建自己的私有网络，并在该网络上设计应用部署架构，进行流量管理等。同时虚拟网络还允许企业将云端与本地数据中心进行联通，形成混合云环境。 关于虚拟网络更多信息请参考 [虚拟网络服务介绍](https://www.azure.cn/home/features/networking/) 。
 	
 ### 计划程序
 		
-Azure 计划程序可让您在云中创建可靠调用 Azure 内部和外部服务的作业 - 例如，调用 HTTP/S 终结点，或者将消息发布到 Azure 存储空间队列。您可以选择立即运行、按照定期计划日程运行或者在将来的某个时间点运行作业。更多关于计划程序信息请参考 [计划程序服务介绍](/home/features/scheduler/) 。
+Azure 计划程序可让您在云中创建可靠调用 Azure 内部和外部服务的作业 - 例如，调用 HTTP/S 终结点，或者将消息发布到 Azure 存储空间队列。您可以选择立即运行、按照定期计划日程运行或者在将来的某个时间点运行作业。更多关于计划程序信息请参考 [计划程序服务介绍](https://www.azure.cn/home/features/scheduler/) 。
 
 ## 常见问题与相关文档
 	
-- [Windows 虚拟机镜像捕获介绍](/documentation/articles/virtual-machines-windows-classic-capture-image/)
-- [自动化服务介绍](/home/features/automation/)
+- [Windows 虚拟机镜像捕获介绍](./virtual-machines/virtual-machines-windows-classic-capture-image.md)
+- [自动化服务介绍](https://www.azure.cn/home/features/automation/)
 - [RUNBOOK下载社区](https://gallery.technet.microsoft.com/scriptcenter/site/search?f%5B0%5D.Type=RootCategory&f%5B0%5D.Value=WindowsAzure&f%5B0%5D.Text=Windows%20Azure&f%5B1%5D.Type=SubCategory&f%5B1%5D.Value=WindowsAzure_automation&f%5B1%5D.Text=Automation)

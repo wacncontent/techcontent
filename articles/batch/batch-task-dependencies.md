@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure Batch 中的任务依赖关系 | Azure"
-	description="在 Azure Batch 中创建依赖于其他任务的成功完成的任务，以处理 MapReduce 样式工作负荷和类似的大数据工作负荷。"
-	services="batch"
-	documentationCenter=".net"
-	authors="mmacy"
-	manager="timlt"
-	editor="" />  
+---
+title: Azure Batch 中的任务依赖关系 | Azure
+description: 在 Azure Batch 中创建依赖于其他任务的成功完成的任务，以处理 MapReduce 样式工作负荷和类似的大数据工作负荷。
+services: batch
+documentationCenter: .net
+authors: mmacy
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="batch"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows"
-	ms.workload="big-compute"
-	ms.date="09/28/2016"
-	wacn.date="11/16/2016"
-	ms.author="marsma" />
+ms.service: batch
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: big-compute
+ms.date: 09/28/2016
+wacn.date: 11/16/2016
+ms.author: marsma
+---
 
 # Azure Batch 中的任务依赖关系
 
@@ -59,7 +58,7 @@ Azure Batch 的任务依赖关系功能适用于处理以下项：
 
 此代码片段创建了一个 ID 为“Flowers”的任务，该任务计划为仅在 ID 为“Rain”和“Sun”的任务成功完成后，才在计算节点上运行。
 
- > [AZURE.NOTE] 当任务处于“已完成”状态并且其**退出代码**为 `0` 时，可认为该任务已完成。在 Batch .NET 中，这意味着 [CloudTask][net_cloudtask].[State][net_taskstate] 属性值为 `Completed`，CloudTask 的 [TaskExecutionInformation][net_taskexecutioninformation].[ExitCode][net_exitcode] 属性值为 `0`。
+ > [!NOTE] 当任务处于“已完成”状态并且其**退出代码**为 `0` 时，可认为该任务已完成。在 Batch .NET 中，这意味着 [CloudTask][net_cloudtask].[State][net_taskstate] 属性值为 `Completed`，CloudTask 的 [TaskExecutionInformation][net_taskexecutioninformation].[ExitCode][net_exitcode] 属性值为 `0`。
 
 ## <a name="dependency-scenarios"></a>依赖关系方案
 
@@ -71,7 +70,7 @@ Azure Batch 的任务依赖关系功能适用于处理以下项：
  [一对多](#one-to-many) | *taskC* 同时依赖于 *taskA* 和 *taskB* <p/> 直到 *taskA* 和 *taskB* 成功完成，*taskC* 才会按计划执行 | ![关系图：一对多任务依赖关系][2]
  [任务 ID 范围](#task-id-range) | *taskD* 依赖于某个范围的任务 <p/> 直到 ID 为 *1* 到 *10* 的任务成功完成，*taskD* 才会按计划执行 | ![关系图：任务 ID 范围依赖关系][3]
 
->[AZURE.TIP] 可以创建**多对多**关系，例如，在此关系中任务 C、D、E 和 F 都依赖于任务 A 和 B。这很有用，例如，在下游任务依赖于多个上游任务的输出的并行化预处理方案中，即可以这样操作。
+>[!TIP] 可以创建**多对多**关系，例如，在此关系中任务 C、D、E 和 F 都依赖于任务 A 和 B。这很有用，例如，在下游任务依赖于多个上游任务的输出的并行化预处理方案中，即可以这样操作。
 
 ### <a name="one-to-one"></a>一对一
 
@@ -105,7 +104,7 @@ Azure Batch 的任务依赖关系功能适用于处理以下项：
 
 若要创建依赖于一组任务（其 ID 在某个范围内）的成功完成的任务，可在填充 [CloudTask][net_cloudtask] 的 [DependsOn][net_dependson] 属性时，向 [TaskDependencies][net_taskdependencies].[OnIdRange][net_onidrange] 静态方法提供该范围内的第一个和最后一个任务 ID。
 
->[AZURE.IMPORTANT] 将任务 ID 范围用于依赖关系时，该范围内的任务 ID *必须*采用整数值的字符串表示形式。此外，范围内的每项任务必须成功完成，依赖任务才能按计划执行。
+>[!IMPORTANT] 将任务 ID 范围用于依赖关系时，该范围内的任务 ID *必须*采用整数值的字符串表示形式。此外，范围内的每项任务必须成功完成，依赖任务才能按计划执行。
 
 	// Tasks 1, 2, and 3 don't depend on any other tasks. Because
 	// we will be using them for a task range dependency, we must
@@ -131,7 +130,7 @@ Azure Batch 的任务依赖关系功能适用于处理以下项：
 
 ### 应用程序部署
 
-使用 Batch 的[应用程序包](/documentation/articles/batch-application-packages/)功能，可以轻松地部署任务在计算节点上执行的应用程序并对其进行版本控制。
+使用 Batch 的[应用程序包](./batch-application-packages.md)功能，可以轻松地部署任务在计算节点上执行的应用程序并对其进行版本控制。
 
 ### 安装应用程序和暂存数据
 

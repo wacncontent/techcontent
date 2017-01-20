@@ -1,26 +1,24 @@
-<properties
-   pageTitle="Azure SQL 数据库 T-SQL 中不支持的语句 | Azure"
-   description="在 Azure SQL 数据库中不完全支持的 Transact-SQL 语句"
-   services="sql-database"
-   documentationCenter=""
-   authors="BYHAM"
-   manager="jhubbard"
-   editor=""
-   tags=""/>
+---
+title: Azure SQL 数据库 T-SQL 中不支持的语句 | Azure
+description: 在 Azure SQL 数据库中不完全支持的 Transact-SQL 语句
+services: sql-database
+documentationCenter: 
+authors: BYHAM
+manager: jhubbard
+editor: 
+tags: 
 
-<tags
-   ms.service="sql-database"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="data-management"
-   ms.date="08/30/2016"
-   wacn.date="12/12/2016"
-   ms.author="rick.byham@microsoft.com"/>  
-
+ms.service: sql-database
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-management
+ms.date: 08/30/2016
+wacn.date: 12/12/2016
+ms.author: rick.byham@microsoft.com
+---
 
 # Azure SQL 数据库 Transact-SQL 差异
-
 
 Microsoft SQL Server 和 Azure SQL 数据库都支持应用程序依赖的大多数 Transact-SQL 功能。下面是应用程序支持的功能的不完整列表：
 
@@ -30,11 +28,10 @@ Microsoft SQL Server 和 Azure SQL 数据库都支持应用程序依赖的大多
 
 但是，Azure SQL 数据库会将功能与 **master** 数据库上的任何依赖项相隔离。因此，许多服务器级活动并不适用于 SQL 数据库，也不受 SQL 数据库的支持。SQL Server 中弃用的功能一般不受 SQL 数据库的支持。
 
-> [AZURE.NOTE]
-本主题介绍将 SQL 数据库升级到最新版 SQL 数据库 V12 后可用的功能。有关 V12 的详细信息，请参阅 [SQL 数据库 V12 新增功能](/documentation/articles/sql-database-v12-whats-new/)。
+> [!NOTE]
+本主题介绍将 SQL 数据库升级到最新版 SQL 数据库 V12 后可用的功能。有关 V12 的详细信息，请参阅 [SQL 数据库 V12 新增功能](./sql-database-v12-whats-new.md)。
 
 以下部分列出了部分受支持的功能，以及完全不支持的功能。
-
 
 ## SQL 数据库 V12 部分支持的功能
 
@@ -54,8 +51,8 @@ SQL 数据库 V12 支持相应 SQL Server 2016 Transact-SQL 语句中存在的�
 ## SQL 数据库中不支持的功能
 
 - 系统对象的排序规则
-- 相关的连接：终结点语句、ORIGINAL\_DB\_NAME。SQL 数据库不支持 Windows 身份验证，但支持类似的 Azure Active Directory 身份验证。某些身份验证类型要求使用最新版本的 SSMS。有关详细信息，请参阅[使用 Azure Active Directory 身份验证连接到 SQL 数据库或 SQL 数据仓库](/documentation/articles/sql-database-aad-authentication/)。
-- 使用三个或四个部分名称的跨数据库查询。（使用[弹性数据库查询](/documentation/articles/sql-database-elastic-query-overview/)支持只读跨数据库查询。）
+- 相关的连接：终结点语句、ORIGINAL\_DB\_NAME。SQL 数据库不支持 Windows 身份验证，但支持类似的 Azure Active Directory 身份验证。某些身份验证类型要求使用最新版本的 SSMS。有关详细信息，请参阅[使用 Azure Active Directory 身份验证连接到 SQL 数据库或 SQL 数据仓库](./sql-database-aad-authentication.md)。
+- 使用三个或四个部分名称的跨数据库查询。（使用[弹性数据库查询](./sql-database-elastic-query-overview.md)支持只读跨数据库查询。）
 - 跨数据库所有权链接, TRUSTWORTHY 设置
 - 数据收集器
 - 数据库关系图
@@ -96,7 +93,6 @@ SQL 数据库 V12 支持相应 SQL Server 2016 Transact-SQL 语句中存在的�
 - Transact-SQL 调试
 - 触发器：服务器作用域或登录触发器
 - USE 语句：若要将数据库上下文更改为不同的数据库，必须与新数据库建立新连接。
-
 
 ## 完整的 Transact-SQL 引用
 

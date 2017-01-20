@@ -1,22 +1,20 @@
-<properties 
-	pageTitle="将证书添加到 Java CA 存储 |Azure" 
-	description="了解如何将证书颁发机构 (CA) 证书添加到 Twilio 服务或 Azure 服务总线的 Java CA 证书 (cacerts) 存储。" 
-	services="" 
-	documentationCenter="java" 
-	authors="rmcmurray" 
-	manager="wpickett" 
-	editor=""/>  
+---
+title: 将证书添加到 Java CA 存储 |Azure
+description: 了解如何将证书颁发机构 (CA) 证书添加到 Twilio 服务或 Azure 服务总线的 Java CA 证书 (cacerts) 存储。
+services: 
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-
-<tags 
-	ms.service="multiple" 
-    	ms.workload="na"
-    	ms.tgt_pltfrm="multiple"
-    	ms.devlang="Java"
-    	ms.topic="article"
-	ms.date="11/01/2016" 
-	wacn.date="12/23/2016"/>  
-
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/23/2016
+---
 
 # 将证书添加到 Java CA 证书存储
 以下步骤演示如何将证书颁发机构 (CA) 证书添加到 Java CA 证书 (cacerts) 存储。使用的示例适用于 Twilio 服务所需的 CA 证书。本主题中稍后提供的信息介绍如何安装 Azure 服务总线的 CA 证书。

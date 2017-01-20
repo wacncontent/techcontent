@@ -1,20 +1,20 @@
-<properties
-   pageTitle="Azure 安全和审核日志管理 | Azure"
-   description="文章提供了从托管在 Azure 上的服务生成、收集和分析安全日志的介绍。它面向每天要进行信息资产管理的 IT 专业人员和安全分析人员（包括负责其组织安全和合规性工作的人员）。"
-   services="virtual-machines, cloud-services, storage"
-   documentationCenter="na"
-   authors="nayak-mahesh"
-   manager="msStevenPo"
-   editor=""/>
+---
+title: Azure 安全和审核日志管理 | Azure
+description: 文章提供了从托管在 Azure 上的服务生成、收集和分析安全日志的介绍。它面向每天要进行信息资产管理的 IT 专业人员和安全分析人员（包括负责其组织安全和合规性工作的人员）。
+services: virtual-machines, cloud-services, storage
+documentationCenter: na
+authors: nayak-mahesh
+manager: msStevenPo
+editor: 
 
-<tags
-   ms.service="azure-security"
-   ms.date="12/10/2015"
-   wacn.date="01/29/2016"/>
+ms.service: azure-security
+ms.date: 12/10/2015
+wacn.date: 01/29/2016
+---
 
 # Azure 安全和审核日志管理
 
-Azure 使客户能够在其订阅中执行从 Azure 服务架构 (IaaS) 和平台即服务 (PaaS) 角色到中央存储的安全事件生成和收集。然后，客户就可以使用 [HDInsight](/documentation/services/hdinsight/) 来聚合和分析所收集的事件。此外，这些收集的事件可以导出到本地安全信息和事件管理 (SIEM) 系统以便进行持续监视。
+Azure 使客户能够在其订阅中执行从 Azure 服务架构 (IaaS) 和平台即服务 (PaaS) 角色到中央存储的安全事件生成和收集。然后，客户就可以使用 [HDInsight](./hdinsight/index.md/) 来聚合和分析所收集的事件。此外，这些收集的事件可以导出到本地安全信息和事件管理 (SIEM) 系统以便进行持续监视。
 
 Azure 安全日志记录、分析和监视生命周期包括：
 
@@ -28,7 +28,7 @@ Azure 安全日志记录、分析和监视生命周期包括：
 ## 日志生成
 Windows 事件日志中引发了虚拟机中有关**系统**、**安全**和**应用程序**通道的安全事件。若要确保在不出现数据丢失的情况下记录事件，请务必正确配置事件日志的大小。根据审核策略设置生成的事件数量和事件收集策略定义的事件数量来设置事件日志的大小。有关详细信息，请参阅[安全审核监视和管理规划](http://technet.microsoft.com/zh-cn/library/ee513968.aspx#BKMK_4)。
 
->[AZURE.NOTE]在使用 Windows 事件转发 (WEF) 或 Azure 诊断（如[日志收集](#log-collection)部分所述）从云服务或虚拟机中拉取日志时，请考虑系统中断的潜在影响。例如，如果您的 WEF 环境在一段时间内出现故障，您要么确保日志大小足以应对更长的持续时间，要么就需要做好日志数据可能丢失的准备。
+>[!NOTE]在使用 Windows 事件转发 (WEF) 或 Azure 诊断（如[日志收集](#log-collection)部分所述）从云服务或虚拟机中拉取日志时，请考虑系统中断的潜在影响。例如，如果您的 WEF 环境在一段时间内出现故障，您要么确保日志大小足以应对更长的持续时间，要么就需要做好日志数据可能丢失的准备。
 
 对于在 Azure 中部署的云服务应用程序和从 <!--[-->Azure 虚拟机应用商店<!--](/marketplace/virtual-machines/#microsoft)-->创建的虚拟机，默认情况下启用一组操作系统安全事件。客户可以通过自定义操作系统审核策略来添加、删除或修改要审核的事件。有关详细信息，请参阅[安全策略设置参考](http://technet.microsoft.com/zh-cn/library/jj852210.aspx)。
 
@@ -38,7 +38,7 @@ Windows 事件日志中引发了虚拟机中有关**系统**、**安全**和**�
 - Desired State Configuration (DSC)，以便推送和管理策略设置。有关详细信息，请参阅 [Azure PowerShell DSC](http://blogs.msdn.com/b/powershell/archive/2014/08/07/introducing-the-azure-powershell-dsc-desired-state-configuration-extension.aspx)。
 - 服务部署角色启动代码，以便为云服务（PaaS 方案）进行设置
 
-配置 Azure 角色启动任务可使代码在角色启动之前运行。可以通过将 **Startup** 元素添加到服务定义文件中的角色定义来定义角色的启动任务，如下面的示例中所示。有关详细信息，请参阅[在 Azure 中运行启动任务](/documentation/articles/cloud-services-startup-tasks/)。
+配置 Azure 角色启动任务可使代码在角色启动之前运行。可以通过将 **Startup** 元素添加到服务定义文件中的角色定义来定义角色的启动任务，如下面的示例中所示。有关详细信息，请参阅[在 Azure 中运行启动任务](./cloud-services/cloud-services-startup-tasks.md)。
 
 要作为启动任务运行的任务文件（即以下示例中的 EnableLogOnAudit.cmd）需要包含在您的生成包中。如果您使用是的 Visual Studio，请将文件添加到您的云项目，右键单击该文件名，单击“属性”，然后将“复制到输出目录”设置为“始终复制”。
 
@@ -71,7 +71,6 @@ ConfigureIISLogging:cmd 的内容
     appcmd.exe set config "Contoso" -section:system.webServer/httpLogging /selectiveLogging:"LogAll" /commit
     Exit /B 0
 
-
 ## <a name="log-collection"></a>日志收集
 通过以下两种主要方法来从云服务或 Azure 中的虚拟机收集安全事件和日志：
 
@@ -89,7 +88,7 @@ ConfigureIISLogging:cmd 的内容
 ##	使用 Windows 事件转发进行的安全事件数据收集
 对于已加入域的 Azure 虚拟机，可以使用组策略设置配置 WEF（与配置本地已加入域的计算机的方法相同）。有关详细信息，请参阅[混合云](http://www.microsoft.com/server-cloud/solutions/hybrid-cloud.aspx)。
 
-组织可以使用此方法购买 IaaS 订阅，通过使用 [ExpressRoute](/documentation/services/expressroute/) 或站点到站点 VPN 将其连接到公司网络，然后将已在 Azure 中的虚拟机加入到企业域。之后，您可以从已加入域的计算机配置 WEF。
+组织可以使用此方法购买 IaaS 订阅，通过使用 [ExpressRoute](./expressroute/index.md/) 或站点到站点 VPN 将其连接到公司网络，然后将已在 Azure 中的虚拟机加入到企业域。之后，您可以从已加入域的计算机配置 WEF。
 
 事件转发拆分为两个部分：源和收集器。源是在其中生成安全日志的计算机。收集器是收集并合并事件日志的集中式服务器。IT 管理员可以订阅事件，以便他们可以接收和存储从远程计算机（事件源）转发的事件。有关详细信息，请参阅[配置计算机以转发和收集事件](http://technet.microsoft.com/zh-cn/library/cc748890.aspx)。
 
@@ -104,7 +103,7 @@ Azure 诊断使您能够从云服务辅助角色或 Web 角色，或者从 Azure
 
 ![][1]
 
-Azure 诊断将日志从客户云服务应用程序和 [Azure 虚拟机](/documentation/articles/virtual-machines-linux-azure-overview/)移动到 Azure 存储空间。基于一种日志格式将一部分数据存储在 Azure 表中，另一部分存储在 blob 中。使用 Azure 存储空间客户端库将在 [Azure 存储空间](/documentation/articles/storage-introduction/)中收集的数据下载到本地 SIEM 系统，以便进行监视和分析。
+Azure 诊断将日志从客户云服务应用程序和 [Azure 虚拟机](./virtual-machines/virtual-machines-linux-azure-overview.md)移动到 Azure 存储空间。基于一种日志格式将一部分数据存储在 Azure 表中，另一部分存储在 blob 中。使用 Azure 存储空间客户端库将在 [Azure 存储空间](./storage/storage-introduction.md)中收集的数据下载到本地 SIEM 系统，以便进行监视和分析。
 
 此外，HDInsight 可以用于进一步分析云中的数据。以下是一些使用 Azure 诊断的安全数据收集示例。
 
@@ -119,7 +118,7 @@ Azure 诊断将日志从客户云服务应用程序和 [Azure 虚拟机](/docume
 在本示例中，我们设置了使用 Azure 诊断的安全日志收集管道的新实例，并检测到虚拟机中的登录失败事件（事件 ID 为 4624 和 4625）。您可以从您的开发环境中实现以下步骤，也可以使用远程桌面会话通过远程桌面协议 (RDP) 连接到云中的节点。
 
 ##### 步骤 1：安装 Azure PowerShell SDK
-Azure PowerShell SDK 提供用于配置 Azure 虚拟机上的 Azure 诊断的 cmdlet。Azure PowerShell 版本 0.8.7 或更高版本中提供这些必要的 cmdlet。有关详细信息，请参阅[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。
+Azure PowerShell SDK 提供用于配置 Azure 虚拟机上的 Azure 诊断的 cmdlet。Azure PowerShell 版本 0.8.7 或更高版本中提供这些必要的 cmdlet。有关详细信息，请参阅[如何安装和配置 Azure PowerShell](./powershell-install-configure.md)。
 
 ##### 步骤 2：准备配置文件
 根据您想要收集的事件准备配置文件。下面举例说明 Azure 诊断配置文件通过添加筛选器仅收集登录成功和失败事件，来从**安全**通道收集 Windows 事件。有关详细信息，请参阅 [Azure Diagnostics 1.2 配置架构](http://msdn.microsoft.com/zh-cn/library/azure/dn782207.aspx)。
@@ -215,7 +214,7 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 - 时间戳是在服务器上维护的日期/时间值，用来跟踪实体上次修改的时间。
 
->[AZURE.NOTE]Azure 存储空间表中的最大行大小被限制为 1 MB。如果帐户在 2012 年 6 月之后创建，则存储帐户可以包含多达 200 TB 的 blob、队列和表中的数据。因此，如果 blob 和队列没有任何存储空间，则表大小可以增长至 200 TB。在 2012 年 6 月之前创建的帐户具有 100 TB 的限制。
+>[!NOTE]Azure 存储空间表中的最大行大小被限制为 1 MB。如果帐户在 2012 年 6 月之后创建，则存储帐户可以包含多达 200 TB 的 blob、队列和表中的数据。因此，如果 blob 和队列没有任何存储空间，则表大小可以增长至 200 TB。在 2012 年 6 月之前创建的帐户具有 100 TB 的限制。
 
 您还可以选择在存储资源管理器中编辑表数据。双击表视图中的特定行以打开“编辑实体”窗口，如下所示：
 
@@ -227,7 +226,7 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 ##### 步骤 1：更新配置文件以包括感兴趣的事件
 需要更新上一示例中创建的 Azure 诊断文件以包括 Windows 应用程序事件日志错误类型。
 
->[AZURE.NOTE]需要将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。在新文件中定义的设置将覆盖现有的配置。
+>[!NOTE]需要将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。在新文件中定义的设置将覆盖现有的配置。
 
 若要检索现有配置设置，可以使用 **Get-AzureVMDiagnosticsExtension** cmdlet。下面是一个用于检索现有配置的示例 Azure PowerShell 脚本：
 
@@ -367,7 +366,6 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 1.	若要启动到云服务实例的远程桌面会话，请在 Visual Studio 中打开服务器资源管理器，右键单击该角色实例，然后单击“使用远程桌面连接”。
 2.	打开提升的命令提示符并运行以下命令以创建虚拟机上的本地管理员帐户：
 
-
     net user contosoadmin <enterpassword> /add
     net localgroup administrators contosoadmin /add
 
@@ -394,7 +392,7 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 若要检测防火墙更改，我们将更新现有配置以包括防火墙更改事件。
 
 #### 步骤 1：获取现有配置
->[AZURE.NOTE]新的配置设置将覆盖现有配置。因此，请务必将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。
+>[!NOTE]新的配置设置将覆盖现有配置。因此，请务必将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。
 
 若要检索现有配置设置，可以使用 **Get-AzureServiceDiagnosticsExtension** cmdlet：
 
@@ -457,7 +455,7 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 ![][14]
 
 ### 安全事件分发和峰值检测
-在事件都位于客户的存储帐户后，应用程序可以使用存储客户端库来访问和执行事件聚合。有关访问表数据的示例代码，请参阅[操作说明：检索表数据](/documentation/articles/storage-dotnet-how-to-use-tables/)。
+在事件都位于客户的存储帐户后，应用程序可以使用存储客户端库来访问和执行事件聚合。有关访问表数据的示例代码，请参阅[操作说明：检索表数据](./storage/storage-dotnet-how-to-use-tables.md)。
 
 下面是一个事件聚合示例。可进一步调查事件分发中的任何峰值以查找异常活动。
 
@@ -486,7 +484,6 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 在前面的 Azure 诊断配置中，**containerName** 是在客户的存储帐户内要将日志移动到的 blob 容器名称。
 
 使用前面[步骤 3：验证配置 XML 文件](#step3)中所示的相同步骤来验证配置文件。
-
 
 #### 步骤 2：更新 Azure 诊断以使用新配置
 运行以下 Azure PowerShell 脚本来更新 Azure 诊断以使用新配置（请确保使用您的云服务信息更新 storage\_name、key、config\_path 和 service\_name)。
@@ -530,7 +527,7 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 - 将现有的 Azure 诊断配置设置与您所做的更改进行合并。新的配置文件将覆盖现有的配置设置。
 - 明智地选择“计划传输时间段”间隔。较短的传输时间将会提高数据相关性，但可能会增加存储成本和处理开销。
 
->[AZURE.NOTE]将会显著影响收集的数据量的另一个变量是日志记录级别。下面举例说明如何通过日志记录级别筛选日志：
+>[!NOTE]将会显著影响收集的数据量的另一个变量是日志记录级别。下面举例说明如何通过日志记录级别筛选日志：
 
     System!*[System[(Level =2)]]
 
@@ -538,15 +535,15 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 - 如果不再需要诊断数据，请定期将其从 Azure 存储空间中清除。
 
->[AZURE.NOTE]若要了解有关诊断数据的详细信息，请参阅[在 Azure 存储空间中存储和查看诊断数据](https://msdn.microsoft.com/zh-cn/library/azure/hh411534.aspx)。容器和存储诊断数据的表就像其他容器和表一样，您可以采用对其他数据采用的相同方法来删除其中的 blob 和实体。您可以采用编程方式通过其中一个存储客户端库或采用直观的方式通过[存储资源管理器客户端](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/03/11/windows-azure-storage-explorers-2014.aspx)来删除诊断数据。
+>[!NOTE]若要了解有关诊断数据的详细信息，请参阅[在 Azure 存储空间中存储和查看诊断数据](https://msdn.microsoft.com/zh-cn/library/azure/hh411534.aspx)。容器和存储诊断数据的表就像其他容器和表一样，您可以采用对其他数据采用的相同方法来删除其中的 blob 和实体。您可以采用编程方式通过其中一个存储客户端库或采用直观的方式通过[存储资源管理器客户端](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/03/11/windows-azure-storage-explorers-2014.aspx)来删除诊断数据。
 
 - 它是将服务数据和安全日志数据存储在单独的存储帐户的最佳做法。这种隔离可确保安全日志数据的保存不会影响生产服务数据的存储性能。
 - 基于组织的合规性策略、数据分析和监视要求选择日志保留期。
 
 ## 将安全日志导出到其他系统
-可以使用 Azure 存储空间客户端库下载 blob 数据，然后将其导出到您的本地系统进行处理。有关管理 blob 数据的示例代码，请参阅[如何通过 .NET 使用 Blob 存储](/documentation/articles/storage-dotnet-how-to-use-blobs/)。
+可以使用 Azure 存储空间客户端库下载 blob 数据，然后将其导出到您的本地系统进行处理。有关管理 blob 数据的示例代码，请参阅[如何通过 .NET 使用 Blob 存储](./storage/storage-dotnet-how-to-use-blobs.md)。
 
-同样，您可以使用 Azure 存储空间客户端库下载存储在 Azure 表中的安全数据。若要了解有关访问存储在表中的数据的详细信息，请参阅[如何通过 .NET 使用表存储](/documentation/articles/storage-dotnet-how-to-use-tables/)。
+同样，您可以使用 Azure 存储空间客户端库下载存储在 Azure 表中的安全数据。若要了解有关访问存储在表中的数据的详细信息，请参阅[如何通过 .NET 使用表存储](./storage/storage-dotnet-how-to-use-tables.md)。
 
 ## Azure Active Directory 报告
 Azure Active Directory (Azure AD) 包括一组安全、使用情况和审核日志报告，让您清楚地了解 Azure AD 租户的完整性和安全性。例如，Azure AD 能够自动分析用户活动和显示异常访问，然后通过客户可见的报告提供这一功能。

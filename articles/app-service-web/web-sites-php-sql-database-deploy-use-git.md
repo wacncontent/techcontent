@@ -1,27 +1,27 @@
-<properties 
-	pageTitle="使用 Git 创建 PHP-SQL Web 应用并将其部署到 Azure 应用服务" 
-	description="本教程演示如何创建在 Azure SQL 数据库中存储数据的 PHP Web 应用并使用 Git 部署到 Azure 应用服务。" 
-	services="app-service\web, sql-database" 
-	documentationCenter="php" 
-	authors="rmcmurray" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 使用 Git 创建 PHP-SQL Web 应用并将其部署到 Azure 应用服务
+description: 本教程演示如何创建在 Azure SQL 数据库中存储数据的 PHP Web 应用并使用 Git 部署到 Azure 应用服务。
+services: app-service\web, sql-database
+documentationCenter: php
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="PHP" 
-	ms.topic="article" 
-	ms.date="11/01/2016" 
-	wacn.date="12/30/2016" 
-	ms.author="robmcm"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: PHP
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/30/2016
+ms.author: robmcm
+---
 
 # 使用 Git 创建 PHP-SQL Web 应用并将其部署到 Azure 应用服务
 
-本教程演示如何在 [Azure 应用服务](/documentation/articles/app-service-changes-existing-services/)中创建连接到 Azure SQL 数据库的 PHP Web 应用以及如何使用 Git 部署该应用。本教程假定你已在计算机上安装 [PHP][install-php]、[SQL Server Express][install-SQLExpress]、[Microsoft Drivers for SQL Server for PHP](http://www.microsoft.com/download/en/details.aspx?id=20098) 和 [Git][install-git]。完成本指南之后，你将拥有一个在 Azure 中运行的 PHP-SQL Web 应用。
+本教程演示如何在 [Azure 应用服务](./app-service-changes-existing-services.md)中创建连接到 Azure SQL 数据库的 PHP Web 应用以及如何使用 Git 部署该应用。本教程假定你已在计算机上安装 [PHP][install-php]、[SQL Server Express][install-SQLExpress]、[Microsoft Drivers for SQL Server for PHP](http://www.microsoft.com/download/en/details.aspx?id=20098) 和 [Git][install-git]。完成本指南之后，你将拥有一个在 Azure 中运行的 PHP-SQL Web 应用。
 
-> [AZURE.NOTE]
+> [!NOTE]
 你可以使用 [Microsoft Web 平台安装程序](http://www.microsoft.com/web/downloads/platform.aspx)安装和配置 PHP、SQL Server Express 和 Microsoft Drivers for SQL Server for PHP。
 
 你将学习以下内容：
@@ -33,7 +33,7 @@
 
 ![Azure PHP 网站](./media/web-sites-php-sql-database-deploy-use-git/running_app_3.png)
 
-[AZURE.INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
+[!INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
 
 ##创建 Azure Web 应用并设置 Git 发布
 
@@ -98,7 +98,6 @@
 		>sqlcmd -S localhost\sqlexpress -U <local user name> -P <local password>
 		1> create database registration
 		2> GO	
-
 
 2. 在应用程序根目录中，创建两个文件 - 一个名为 `createtable.php`，另一个名为 `index.php`。
 
@@ -241,15 +240,13 @@
 	$pwd = "<your password>";
 	$db = "<value of SQL Database>";
 
-> [AZURE.NOTE]
+> [!NOTE]
 在 <code>$host</code> 中，Server 的值的前面必须带有 <code>tcp:</code>。
-
 
 现在，你已准备好设置 Git 发布并发布应用程序。
 
-> [AZURE.NOTE]
+> [!NOTE]
 这些步骤与上面**创建 Azure Web 应用并设置 Git 发布**部分的结尾标明的步骤相同。
-
 
 1. 打开 GitBash（或终端，如果 Git 在 `PATH` 中），将目录更改为应用程序的根目录（**registration** 目录），然后运行以下命令：
 
@@ -282,10 +279,7 @@
 3. 浏览到 **http://[web app name].chinacloudsites.cn/index.php** 以查看所做的更改。
 
 ## 更改内容
-* 有关从网站更改为应用服务的指南，请参阅 [Azure 应用服务及其对现有 Azure 服务的影响](/documentation/articles/app-service-changes-existing-services/)
-
-
-
+* 有关从网站更改为应用服务的指南，请参阅 [Azure 应用服务及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 
 [install-php]: http://www.php.net/manual/en/install.php
 [install-SQLExpress]: http://www.microsoft.com/download/details.aspx?id=29062
@@ -293,5 +287,4 @@
 [install-git]: http://git-scm.com/
 [pdo-sqlsrv]: http://php.net/pdo_sqlsrv
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

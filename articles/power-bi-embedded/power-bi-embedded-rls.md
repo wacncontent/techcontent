@@ -1,29 +1,28 @@
-<properties
-   pageTitle="Power BI Embedded 的行级别安全性"
-   description="有关 Power BI Embedded 的行级别安全性的详细信息"
-   services="power-bi-embedded"
-   documentationCenter=""
-   authors="mgblythe"
-   manager="NA"
-   editor=""
-   tags=""/>
-<tags
-   ms.service="power-bi-embedded"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="powerbi"
-   ms.date="07/05/2016"
-   ms.author="mblythe"
-   wacn.date="12/29/2016"/>  
+---
+title: Power BI Embedded 的行级别安全性
+description: 有关 Power BI Embedded 的行级别安全性的详细信息
+services: power-bi-embedded
+documentationCenter: 
+authors: mgblythe
+manager: NA
+editor: 
+tags: 
 
+ms.service: power-bi-embedded
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: powerbi
+ms.date: 07/05/2016
+ms.author: mblythe
+wacn.date: 12/29/2016
+---
 
 # Power BI Embedded 的行级别安全性
 
 行级别安全性 (RLS) 可用于限制用户对报表或数据集内特定数据的访问，使多个不同的用户在查看不同数据的同时，能够使用相同的报表。Power BI Embedded 现在支持使用 RLS 配置的数据集。
 
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-flow-1.png)  
-
 
 若要利用 RLS，必须了解三个重要概念：用户、角色和规则。下面更详细地讲解每个概念：
 
@@ -39,13 +38,11 @@
 
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-scenario-2.png)  
 
-
 零售分析示例显示特定零售链中所有商店的销售额。如果不使用 RLS，无论哪个区域的经理在登录后查看报表时，都会看到相同的数据。高级管理层决定只允许每个区域经理查看他们所管理的商店的销售额。为实现此目的，可以使用 RLS。
 
 RLS 是在 Power BI Desktop 中编写的。打开数据集和报表时，可以切换到图示视图来查看架构：
 
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-diagram-view-3.png)  
-
 
 下面是此架构的一些注意事项：
 
@@ -55,7 +52,6 @@ RLS 是在 Power BI Desktop 中编写的。打开数据集和报表时，可以�
 -	“区域”表指明谁是每个区域的经理：
 
     ![](./media/power-bi-embedded-rls/pbi-embedded-rls-district-table-4.png)  
-
 
 根据此架构，如果将筛选器应用到“区域”表中的“区域经理”列，并且该筛选器与查看报表的用户匹配，则该筛选器也向下筛选“商店”和“销售”表，只显示该特定区域经理的数据。
 
@@ -79,22 +75,18 @@ RLS 是在 Power BI Desktop 中编写的。打开数据集和报表时，可以�
 
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-diagram-view-9.png)  
 
-
 这种模式也许能够满足某种要求，但如果不希望经理查看他们没有任何销售的项，则可以针对关系启用双向交叉筛选，使安全筛选器同时流向两个方向。为此，可以编辑“销售”与“项”之间的关系，如下所示：
 
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-edit-relationship-10.png)  
-
 
 现在，筛选器可以从“销售”表流向“项”表：
 
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-diagram-view-11.png)  
 
-
 **注意：**如果针对数据使用 DirectQuery 模式，必须选择以下两个选项来启用双向交叉筛选：
 
 1.	“文件”->“选项和设置”->“预览功能”->“为 DirectQuery 启用两个方向的交叉筛选”。
 2.	“文件”->“选项和设置”->“DirectQuery”->“允许 DirectQuery 模式下不受限制的度量”。
-
 
 若要了解有关双向交叉筛选的详细信息，请下载 [Bidirectional cross-filtering in SQL Server Analysis Services 2016 and Power BI Desktop]（SQL Server Analysis Services 2016 和 Power BI Desktop 中的双向交叉筛选）白皮书 (http://download.microsoft.com/download/2/7/8/2782DF95-3E0D-40CD-BFC8-749A2882E109/Bidirectional cross-filtering in Analysis Services 2016 and Power BI.docx)。
 
@@ -108,11 +100,9 @@ RLS 是在 Power BI Desktop 中编写的。打开数据集和报表时，可以�
 
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-app-token-string-12.png)  
 
-
 现已组合所有信息片段，当某人登录应用程序查看此报表时，只能根据行级别安全性的定义，看到他们有权查看的数据。
 
 ![](./media/power-bi-embedded-rls/pbi-embedded-rls-dashboard-13.png)  
-
 
 ## 另请参阅
 [Row-level security (RLS) with Power](https://powerbi.microsoft.com/zh-CN/documentation/powerbi-admin-rls/)（Power 的行级别安全性 (RLS)）

@@ -1,23 +1,22 @@
-<properties
-	pageTitle="在运行 Linux 的 Azure 虚拟机上安装和配置 PostgreSQL"
-	description="了解如何在 Azure 中的 Linux 虚拟机上安装和配置 PostgreSQL"
-	services="virtual-machines-linux"
-	documentationCenter=""
-	authors="SuperScottz"
-	manager="timlt"
-	editor=""
- 	tags="azure-resource-manager,azure-service-management"/>
+---
+title: 在运行 Linux 的 Azure 虚拟机上安装和配置 PostgreSQL
+description: 了解如何在 Azure 中的 Linux 虚拟机上安装和配置 PostgreSQL
+services: virtual-machines-linux
+documentationCenter: 
+authors: SuperScottz
+manager: timlt
+editor: 
+tags: azure-resource-manager,azure-service-management
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-linux"
-	ms.workload="infrastructure-services"
-	ms.date="02/01/2016"
-	wacn.date="03/28/2016"
-	ms.author="mingzhan"/>
-
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure-services
+ms.date: 02/01/2016
+wacn.date: 03/28/2016
+ms.author: mingzhan
+---
 
 #在 Azure 上安装和配置 PostgreSQL
 
@@ -25,17 +24,15 @@ PostgreSQL 是一种类似于 Oracle 和 DB2 的高级开放源代码数据库�
 
 在本文中，你将了解如何在运行 Linux 的 Azure 虚拟机上安装和配置 PostgreSQL。
 
-
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
-
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
 
 ## 安装 PostgreSQL
 
-> [AZURE.NOTE]你必须已经有一个运行 Linux 的 Azure 虚拟机，才能完成本教程。在继续操作前，若要创建并设置 Linux VM，请参阅 [Azure Linux VM 教程](/documentation/articles/virtual-machines-linux-quick-create-cli/)。
+> [!NOTE]你必须已经有一个运行 Linux 的 Azure 虚拟机，才能完成本教程。在继续操作前，若要创建并设置 Linux VM，请参阅 [Azure Linux VM 教程](./virtual-machines-linux-quick-create-cli.md)。
 
 在此示例中，使用端口 1999 作为 PostgreSQL 端口。
 
-通过 PuTTY 连接到你创建的 Linux VM。如果这是你首次使用 Azure Linux VM，请参阅[如何在 Azure 上将 SSH 用于 Linux](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)，以了解如何使用 PuTTY 连接到 Linux VM。
+通过 PuTTY 连接到你创建的 Linux VM。如果这是你首次使用 Azure Linux VM，请参阅[如何在 Azure 上将 SSH 用于 Linux](./virtual-machines-linux-mac-create-ssh-keys.md)，以了解如何使用 PuTTY 连接到 Linux VM。
 
 1. 运行以下命令切换成根用户（管理员）：
 
@@ -95,8 +92,7 @@ PostgreSQL 是一种类似于 Oracle 和 DB2 的高级开放源代码数据库�
 
 		# su - postgres
 
-   >[AZURE.NOTE]出于安全原因，PostgreSQL 将使用非根用户来初始化、启动或关闭数据库。
-
+   >[!NOTE]出于安全原因，PostgreSQL 将使用非根用户来初始化、启动或关闭数据库。
 
 4. 通过输入以下命令编辑 *bash\_profile* 文件。这些行将添加到 *bash\_profile* 文件的末尾：
 
@@ -251,7 +247,6 @@ PostgreSQL 是一种类似于 Oracle 和 DB2 的高级开放源代码数据库�
 使用以下命令来更新表中的数据。在此示例中，Sandy 已经确认将出席活动，因此我们将她的回复从“N”更改为“Y”：
 
  	UPDATE potluck set confirmed = 'Y' WHERE name = 'Sandy';
-
 
 ##获取有关 PostgreSQL 的详细信息
 现在，你已完成在 Azure Linux VM 中安装 PostgreSQL，你可以在 Azure 中享受使用它的过程。若要了解有关 PostgreSQL 的详细信息，请访问 [PostgreSQL 网站](http://www.postgresql.org/)。

@@ -1,28 +1,28 @@
-<properties 
-   pageTitle="使用 Resource Manager 部署模型配置站点到站点连接的强制隧道 | Azure"
-   description="如何重定向或“强制”所有 Internet 绑定的流量路由回本地位置。"
-   services="vpn-gateway"
-   documentationCenter="na"
-   authors="cherylmc"
-   manager="carmonm"
-   editor=""
-   tags="azure-resource-manager"/>
-<tags 
-   ms.service="vpn-gateway"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="08/10/2016"
-   wacn.date="01/09/2017"
-   ms.author="cherylmc" />  
+---
+title: 使用 Resource Manager 部署模型配置站点到站点连接的强制隧道 | Azure
+description: 如何重定向或“强制”所有 Internet 绑定的流量路由回本地位置。
+services: vpn-gateway
+documentationCenter: na
+authors: cherylmc
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 08/10/2016
+wacn.date: 01/09/2017
+ms.author: cherylmc
+---
 
 # 使用 Azure Resource Manager 部署模型配置强制隧道
 
-> [AZURE.SELECTOR]
-- [PowerShell - 经典](/documentation/articles/vpn-gateway-about-forced-tunneling/)
-- [PowerShell - Resource Manager](/documentation/articles/vpn-gateway-forced-tunneling-rm/)
+> [!div class="op_single_selector"]
+- [PowerShell - 经典](./vpn-gateway-about-forced-tunneling.md)
+- [PowerShell - Resource Manager](./vpn-gateway-forced-tunneling-rm.md)
 
 借助强制隧道，你可以通过站点到站点 VPN 隧道，将全部 Internet 绑定流量重定向或“强制”返回到本地位置，以进行检查和审核。这是很多企业 IT 策略的关键安全要求。
 
@@ -32,17 +32,15 @@
 
 **关于 Azure 部署模型**
 
-[AZURE.INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
+[!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
 **强制隧道的部署模型和工具**
 
 可为经典部署模型和 Resource Manager 部署模型配置强制隧道连接。有关详细信息，请参阅下表。我们将在由可用于此配置的新文章、新部署模型和其他工具时更新此表。当有文章可用时，我们将从表中直接链接到该文章。
 
-[AZURE.INCLUDE [vpn-gateway-table-forced-tunneling](../../includes/vpn-gateway-table-forcedtunnel-include.md)]
-
+[!INCLUDE [vpn-gateway-table-forced-tunneling](../../includes/vpn-gateway-table-forcedtunnel-include.md)]
 
 ## 关于强制隧道
-
 
 下图说明了强制隧道的工作方式。
 
@@ -54,7 +52,7 @@
 
 ## 要求和注意事项
 
-在 Azure 中，通过虚拟网络用户定义路由配置强制隧道。将流量重定向到本地站点，这是 Azure VPN 网关的默认路由。有关用户定义路由和虚拟网络的详细信息，请参阅[用户定义路由和 IP 转发](/documentation/articles/virtual-networks-udr-overview/)。
+在 Azure 中，通过虚拟网络用户定义路由配置强制隧道。将流量重定向到本地站点，这是 Azure VPN 网关的默认路由。有关用户定义路由和虚拟网络的详细信息，请参阅[用户定义路由和 IP 转发](../virtual-network/virtual-networks-udr-overview.md)。
 
 - 每个虚拟网络子网具有内置的系统路由表。系统路由表具有以下三组路由：
 
@@ -68,7 +66,7 @@
 
 - 强制隧道必须关联到具有基于路由的 VPN 网关的 VNet。您需要在连接到虚拟网络的跨界本地站点中，设置一个“默认站点”。
 
-- ExpressRoute 强制隧道不是通过此机制配置的，而是通过 ExpressRoute BGP 对等会话播发默认路由来启用的。有关详细信息，请参阅 [ExpressRoute 文档](/documentation/services/expressroute/)。
+- ExpressRoute 强制隧道不是通过此机制配置的，而是通过 ExpressRoute BGP 对等会话播发默认路由来启用的。有关详细信息，请参阅 [ExpressRoute 文档](../expressroute/index.md/)。
 
 ## 配置概述
 
@@ -76,15 +74,13 @@
 
 以下过程步骤将 *DefaultSiteHQ* 设置为使用强制隧道的默认站点连接，并将中间层和后端子网配置为使用强制隧道。
 
-	
 ## 开始之前
 
 在开始配置之前，请确认你具有以下各项。
 
-- Azure 订阅。如果你还没有 Azure 订阅，可以注册获取[试用帐户](/pricing/1rmb-trial/)。
+- Azure 订阅。如果你还没有 Azure 订阅，可以注册获取[试用帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 
 - 你需要安装最新版本的 Azure Resource Manager PowerShell cmdlet（1.0 或更高）。有关安装 PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
-
 
 ## 配置强制隧道
 
@@ -126,7 +122,6 @@
 		Add-AzureRmRouteConfig -Name "DefaultRoute" -AddressPrefix "0.0.0.0/0" -NextHopType VirtualNetworkGateway -RouteTable $rt
 		Set-AzureRmRouteTable -RouteTable $rt
 
-
 7. 将路由表与“中间层”子网和“后端”子网关联起来。
 
 		$vnet = Get-AzureRmVirtualNetwork -Name "MultiTier-Vnet" -ResourceGroupName "ForcedTunneling"
@@ -156,5 +151,4 @@
 
 		Get-AzureRmVirtualNetworkGatewayConnection -Name "Connection1" -ResourceGroupName "ForcedTunneling"
 		
-
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

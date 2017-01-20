@@ -1,37 +1,33 @@
-<properties 
-	pageTitle="使用 REST 创建 ContentKey | Azure" 
-	description="了解如何创建提供对资产进行安全访问的内容密钥。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 REST 创建 ContentKey | Azure
+description: 了解如何创建提供对资产进行安全访问的内容密钥。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016"  
-	wacn.date="12/27/2016"  
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 #使用 REST 创建 ContentKey
 
-
-> [AZURE.SELECTOR]
-- [REST](/documentation/articles/media-services-rest-create-contentkey/)
-- [.NET](/documentation/articles/media-services-dotnet-create-contentkey/)
-
+> [!div class="op_single_selector"]
+- [REST](./media-services-rest-create-contentkey.md)
+- [.NET](./media-services-dotnet-create-contentkey.md)
 
 媒体服务允许创建新资产和传送加密的资产。**ContentKey** 提供对**资产**的安全访问。
 
-创建新资产时（例如，[上载文件](/documentation/articles/media-services-rest-upload-files/)之前），可以指定以下加密选项：**StorageEncrypted**、**CommonEncryptionProtected** 或 **EnvelopeEncryptionProtected**。
+创建新资产时（例如，[上载文件](./media-services-rest-upload-files.md)之前），可以指定以下加密选项：**StorageEncrypted**、**CommonEncryptionProtected** 或 **EnvelopeEncryptionProtected**。
 
-将资产传送到客户端时，可以使用以下两个加密选项之一[将资产配置为动态加密](/documentation/articles/media-services-rest-configure-asset-delivery-policy/)：**DynamicEnvelopeEncryption** 或 **DynamicCommonEncryption**。
+将资产传送到客户端时，可以使用以下两个加密选项之一[将资产配置为动态加密](./media-services-rest-configure-asset-delivery-policy.md)：**DynamicEnvelopeEncryption** 或 **DynamicCommonEncryption**。
 
 加密的资产必须与 **ContentKey** 关联。本文介绍如何创建内容密钥。
 
@@ -70,21 +66,17 @@
 
 请注意，本主题中省略了生成 AES 密钥、加密密钥以及计算校验和的示例。仅提供了演示如何与媒体服务进行交互的示例。
 
-
->[AZURE.NOTE] 使用媒体服务 REST API 时，需注意以下事项：
+>[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
 >
->访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](/documentation/articles/media-services-rest-how-to-use/)。
+>访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 
->请根据[使用 REST API 连接到媒体服务](/documentation/articles/media-services-rest-connect-programmatically/)中所述对媒体服务 URI 执行后续调用。
+>请根据[使用 REST API 连接到媒体服务](./media-services-rest-connect-programmatically.md)中所述对媒体服务 URI 执行后续调用。
 
 ##检索 ProtectionKeyId 
  
-
 以下示例演示了如何检索加密内容密钥时必须使用的证书的证书指纹 ProtectionKeyId。执行此步骤以确保计算机上已具备适当的证书。
 
-
 请求：
-	
 	
 	GET https://wamsshaclus001rest-hs.chinacloudapp.cn/api/GetProtectionKeyId?contentKeyType=0 HTTP/1.1
 	MaxDataServiceVersion: 3.0;NetFx
@@ -95,7 +87,6 @@
 	x-ms-version: 2.11
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 	
-
 响应：
 	
 	HTTP/1.1 200 OK
@@ -129,8 +120,6 @@
 	x-ms-client-request-id: 78d1247a-58d7-40e5-96cc-70ff0dfa7382
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 	
-
-
 响应：
 	
 	HTTP/1.1 200 OK
@@ -180,9 +169,7 @@
         EnvelopeEncryption = 4
     }
 
-
 以下示例演示了如何创建 **ContentKey**，将 **ContentKeyType** 设置为存储加密（“1”）并将 **ProtectionKeyType** 设置为“0”，以指示保护密钥 ID 是 X.509 证书指纹。
-
 
 请求
 
@@ -204,7 +191,6 @@
 	"EncryptedContentKey":"your encrypted content key",
 	"Checksum":"calculated checksum"
 	}
-
 
 响应：
 	
@@ -248,7 +234,6 @@
 	x-ms-version: 2.11
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
-	
 	{"uri":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeys('nb%3Akid%3AUUID%3A01e6ea36-2285-4562-91f1-82c45736047c')"}
 
 响应：

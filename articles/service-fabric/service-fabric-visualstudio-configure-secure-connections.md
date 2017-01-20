@@ -1,25 +1,25 @@
-<properties
-   pageTitle="配置受 Service Fabric 群集支持的安全连接 | Microsoft Azure"
-   description="了解如何使用 Visual Studio 来配置 Azure Service Fabric 群集支持的安全连接。"
-   services="service-fabric"
-   documentationCenter="na"
-   authors="cawaMS"
-   manager="paulyuk"
-   editor="tglee" />
+---
+title: 配置受 Service Fabric 群集支持的安全连接 | Microsoft Azure
+description: 了解如何使用 Visual Studio 来配置 Azure Service Fabric 群集支持的安全连接。
+services: service-fabric
+documentationCenter: na
+authors: cawaMS
+manager: paulyuk
+editor: tglee
 
-<tags
-   ms.service="multiple"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="multiple"
-   ms.date="10/08/2015"
-   wacn.date="07/07/2016"
-   ms.author="cawaMS" />
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 10/08/2015
+wacn.date: 07/07/2016
+ms.author: cawaMS
+---
 
 # 从 Visual Studio 配置与 Service Fabric 群集的安全连接
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 了解如何使用 Visual Studio 安全访问已配置访问控制策略的 Azure Service Fabric 群集。
 
@@ -59,7 +59,6 @@ Visual Studio Service Fabric 工具支持所有用于连接到群集来进行发
 
     下面是连接到基于 x509 证书的安全群集的示例：
 
-    
 	    <ClusterConnectionParameters
 	    ConnectionEndpoint="mycluster.chinaeast.chinacloudapp.cn:19000"
 	    X509Credential="true"
@@ -69,11 +68,10 @@ Visual Studio Service Fabric 工具支持所有用于连接到群集来进行发
 	    StoreLocation="CurrentUser"
 	    StoreName="My" />
 	    
-
 5.	编辑其他任何所需的设置（例如升级参数和应用程序参数文件位置），然后从 Visual Studio 中的“发布 Service Fabric应用程序”对话框发布应用程序。
 
 ## 后续步骤
-有关访问 Service Fabric 群集的详细信息，请参阅[使用 Service Fabric 资源管理器可视化群集](/documentation/articles/service-fabric-visualizing-your-cluster/)。
+有关访问 Service Fabric 群集的详细信息，请参阅[使用 Service Fabric 资源管理器可视化群集](./service-fabric-visualizing-your-cluster.md)。
 
 <!--Image references-->
 [publishdialog]: ./media/service-fabric-visualstudio-configure-secure-connections/publishdialog.png

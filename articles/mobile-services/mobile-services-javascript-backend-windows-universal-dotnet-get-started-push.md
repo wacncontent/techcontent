@@ -1,31 +1,29 @@
-<properties 
-	pageTitle="向通用 Windows 8.1 应用添加推送通知 | Azure" 
-	description="了解如何从 JavaScript 后端移动服务使用 Azure 通知中心向通用 Windows 8.1 应用发送推送通知。" 
-	services="mobile-services,notification-hubs" 
-	documentationCenter="windows" 
-	authors="ggailey777" 
-	manager="erikre" 
-	editor=""/>
+---
+title: 向通用 Windows 8.1 应用添加推送通知 | Azure
+description: 了解如何从 JavaScript 后端移动服务使用 Azure 通知中心向通用 Windows 8.1 应用发送推送通知。
+services: mobile-services,notification-hubs
+documentationCenter: windows
+authors: ggailey777
+manager: erikre
+editor: 
 
-<tags 
-	ms.service="mobile-services" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="mobile-windows" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="07/21/2016" 
-	wacn.date="09/26/2016" 
-	ms.author="glenga"/>
-
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 #  向移动服务应用程序添加推送通知
 
-[AZURE.INCLUDE [mobile-services-selector-get-started-push](../../includes/mobile-services-selector-get-started-push.md)]
+[!INCLUDE [mobile-services-selector-get-started-push](../../includes/mobile-services-selector-get-started-push.md)]
 
- 
 本主题说明如何结合使用 Azure 移动服务和 JavaScript 后端向通用 Windows 应用程序发送推送通知。在本教程中，你将在通用 Windows 应用程序项目中使用 Azure 通知中心来启用推送通知。完成后，当每次在 TodoList 表中插入一条记录时，你的移动服务将从 JavaScript 后端向所有已注册的 Windows 应用商店和 Windows Phone 应用商店应用发送一条推送通知。创建的通知中心可在移动服务中任意使用，可独立于移动服务进行管理，并可供其他应用程序和服务使用。
 
->[AZURE.NOTE]本主题演示如何在 Visual Studio 2013 Update 3 中使用此工具，以便从移动服务向通用 Windows 应用程序添加推送通知的支持。可以使用相同的步骤将推送通知从移动服务添加到 Windows 应用商店或 Windows Phone 应用商店 8.1 应用程序。若要将推送通知添加到 Windows Phone 8 或 Windows Phone Silverlight 8.1 应用程序，请参阅此版本的[移动服务中的推送通知入门](/documentation/articles/mobile-services-javascript-backend-windows-phone-get-started-push/)。
+>[!NOTE]本主题演示如何在 Visual Studio 2013 Update 3 中使用此工具，以便从移动服务向通用 Windows 应用程序添加推送通知的支持。可以使用相同的步骤将推送通知从移动服务添加到 Windows 应用商店或 Windows Phone 应用商店 8.1 应用程序。若要将推送通知添加到 Windows Phone 8 或 Windows Phone Silverlight 8.1 应用程序，请参阅此版本的[移动服务中的推送通知入门](./mobile-services-javascript-backend-windows-phone-get-started-push.md)。
 
 本教程将指导你完成启用推送通知的以下基本步骤：
 
@@ -40,7 +38,7 @@
 
 ## <a id="register"></a>为推送通知注册应用程序
 
-[AZURE.INCLUDE [mobile-services-create-new-push-vs2013](../../includes/mobile-services-create-new-push-vs2013.md)]
+[!INCLUDE [mobile-services-create-new-push-vs2013](../../includes/mobile-services-create-new-push-vs2013.md)]
 
 &nbsp;&nbsp;6.浏览到 `\Services\MobileServices\your_service_name` 项目文件夹，打开生成的 push.register.cs 代码文件，并检查 **UploadChannel** 方法是否将设备的通道 URL 注册到通知中心。
 
@@ -56,39 +54,35 @@
 
 以下步骤更新注册到 TodoItem 表的插入脚本。在任何服务器脚本中或在后端服务中的其他任何地方，您都可以实施类似的代码。
 
-[AZURE.INCLUDE [mobile-services-javascript-update-script-notification-hubs](../../includes/mobile-services-javascript-update-script-notification-hubs.md)]
-
+[!INCLUDE [mobile-services-javascript-update-script-notification-hubs](../../includes/mobile-services-javascript-update-script-notification-hubs.md)]
 
 ## <a id="test"></a>在应用程序中测试推送通知
 
-[AZURE.INCLUDE [mobile-services-javascript-backend-windows-universal-test-push](../../includes/mobile-services-javascript-backend-windows-universal-test-push.md)]
+[!INCLUDE [mobile-services-javascript-backend-windows-universal-test-push](../../includes/mobile-services-javascript-backend-windows-universal-test-push.md)]
 
 ##  <a name="next-steps"></a>后续步骤
 
 本教程演示了启用 Windows 应用商店应用程序以便使用移动服务和通知中心发送推送通知的基础知识。接下来，请考虑完成以下教程之一：
 
-+ [向经过身份验证的用户发送推送通知](/documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-push-notifications-app-users/)
++ [向经过身份验证的用户发送推送通知](./mobile-services-javascript-backend-windows-store-dotnet-push-notifications-app-users.md)
 <br/>了解如何使用标记来做到只将推送通知从移动服务发送到经过身份验证的用户。
 
-+ [将广播通知发送到订户](/documentation/articles/notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns/)
++ [将广播通知发送到订户](../notification-hubs/notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns.md)
 	<br/>了解用户如何注册和接收他们感兴趣的类别的推送通知。
 
-+ [将平台无关的通知发送到订户](/documentation/articles/notification-hubs-aspnet-cross-platform-notification/)
++ [将平台无关的通知发送到订户](../notification-hubs/notification-hubs-aspnet-cross-platform-notification.md)
 	<br/>了解如何使用模板从移动服务发送推送通知，且不会在后端中产生平台特定的负载。
 
 	通过以下主题了解有关移动服务和通知中心的详细信息：
 
-* [Azure 通知中心 - 诊断指南](/documentation/articles/notification-hubs-push-notification-fixer/)
+* [Azure 通知中心 - 诊断指南](../notification-hubs/notification-hubs-push-notification-fixer.md)
 	<br/>了解如何排查推送通知问题。
 
 * [身份验证入门]
   <br/>了解如何通过移动服务对使用不同帐户类型的应用程序用户进行身份验证。
 
-
 * [什么是通知中心？] 
 <br/>了解有关通知中心跨所有主要的客户端平台向你的应用程序交付通知的详细信息。
-
-
 
 <!-- Anchors. -->
 
@@ -99,12 +93,12 @@
 [Submit an app page]: http://go.microsoft.com/fwlink/p/?LinkID=266582
 [My Applications]: http://go.microsoft.com/fwlink/p/?LinkId=262039
 [Live SDK for Windows]: http://go.microsoft.com/fwlink/p/?LinkId=262253
-[Get started with Mobile Services]: /documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-get-started/
-[身份验证入门]: /documentation/articles/mobile-services-javascript-backend-windows-universal-dotnet-get-started-users/
+[Get started with Mobile Services]: ./mobile-services-dotnet-backend-windows-store-dotnet-get-started.md
+[身份验证入门]: ./mobile-services-javascript-backend-windows-universal-dotnet-get-started-users.md
 
-[Send push notifications to authenticated users]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-push-notifications-app-users/
+[Send push notifications to authenticated users]: ./mobile-services-javascript-backend-windows-store-dotnet-push-notifications-app-users.md
 
-[什么是通知中心？]: /documentation/articles/notification-hubs-push-notification-overview/
+[什么是通知中心？]: ../notification-hubs/notification-hubs-push-notification-overview.md
 
 [如何使用适用于 Azure 移动服务的 .NET 客户端]: /documentation/articles/mobile-services-windows-dotnet-how-to-use-client-library/
 [MobileServiceClient]: http://go.microsoft.com/fwlink/p/?LinkId=302030

@@ -1,23 +1,21 @@
-<properties
-   pageTitle="Azure Batch CLI 入门 | Azure"
-   description="Azure CLI 中用于管理 Azure Batch 服务资源的 Batch 命令简介"
-   services="batch"
-   documentationCenter=""
-   authors="mmacy"
-   manager="timlt"
-   editor=""/>  
+---
+title: Azure Batch CLI 入门 | Azure
+description: Azure CLI 中用于管理 Azure Batch 服务资源的 Batch 命令简介
+services: batch
+documentationCenter: 
+authors: mmacy
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="batch"
-   ms.devlang="na"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="multiple"
-   ms.workload="big-compute"
-   ms.date="09/30/2016"
-   wacn.date="12/30/2016"
-   ms.author="marsma"/>  
-
+ms.service: batch
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: multiple
+ms.workload: big-compute
+ms.date: 09/30/2016
+wacn.date: 12/30/2016
+ms.author: marsma
+---
 
 # Azure Batch CLI 入门
 
@@ -27,13 +25,13 @@
 
 ## 先决条件
 
-* [安装 Azure CLI](/documentation/articles/xplat-cli-install/)
+* [安装 Azure CLI](../xplat-cli-install.md)
 
-* [将 Azure CLI 连接到 Azure 订阅](/documentation/articles/xplat-cli-connect/)
+* [将 Azure CLI 连接到 Azure 订阅](../xplat-cli-connect.md)
 
 * 切换到 **资源管理器模式**：`azure config mode arm`
 
->[AZURE.TIP] 建议经常更新 Azure CLI 安装，利用服务更新和增强功能。
+>[!TIP] 建议经常更新 Azure CLI 安装，利用服务更新和增强功能。
 
 ## 命令帮助
 
@@ -59,11 +57,11 @@
 
 	azure group create --name "resgroup001" --location "China North"
 
-> [AZURE.NOTE] Batch 帐户名必须是创建帐户的 Azure 区域内的唯一名称。它只能包含小写字母数字字符，且长度必须为 3-24 个字符。不能在 Batch 帐户名中使用 `-` 或 `_` 等特殊字符。
+> [!NOTE] Batch 帐户名必须是创建帐户的 Azure 区域内的唯一名称。它只能包含小写字母数字字符，且长度必须为 3-24 个字符。不能在 Batch 帐户名中使用 `-` 或 `_` 等特殊字符。
 
 ### 链接存储帐户（自动存储） <a name="linked-storage-account-autostorage"></a>
 
-（可选）在创建 Batch 帐户时，可以将**常规用途**存储帐户链接到该帐户。与 [Batch 文件约定 .NET](/documentation/articles/batch-task-output/)库一样，Batch 的[应用程序包](/documentation/articles/batch-application-packages/)功能在链接的常规用途存储帐户中使用 Blob 存储。这些可选功能可帮助部署 Batch 任务运行的应用程序，以及保存它们生成的数据。
+（可选）在创建 Batch 帐户时，可以将**常规用途**存储帐户链接到该帐户。与 [Batch 文件约定 .NET](./batch-task-output.md)库一样，Batch 的[应用程序包](./batch-application-packages.md)功能在链接的常规用途存储帐户中使用 Blob 存储。这些可选功能可帮助部署 Batch 任务运行的应用程序，以及保存它们生成的数据。
 
 若要在创建新 Batch 帐户时将现有 Azure 存储帐户链接到该帐户，请指定 `--autostorage-account-id` 选项。此选项需要存储帐户的完全限定资源 ID。
 
@@ -123,7 +121,7 @@
 
 可以设置 `AZURE_BATCH_ACCOUNT`、`AZURE_BATCH_ACCESS_KEY` 和 `AZURE_BATCH_ENDPOINT` 环境变量，而无需每次执行命令时在命令行上指定 `-a`、`-k` 和 `-u` 选项。Batch CLI 将使用这些变量（如果已设置），因此可以省略 `-a`、`-k` 和 `-u` 选项。本文的余下部分假设使用这些环境变量。
 
->[AZURE.TIP] 使用 `azure batch account keys list` 列出密钥，使用 `azure batch account show` 显示帐户的终结点。
+>[!TIP] 使用 `azure batch account keys list` 列出密钥，使用 `azure batch account show` 显示帐户的终结点。
 
 ### JSON 文件  <a name="json-files"></a>
 
@@ -131,12 +129,11 @@
 
 `azure batch pool create my_batch_pool.json`  
 
-
 尽管可以使用命令行选项执行许多资源创建操作，但有些功能需要 JSON 格式的文件（包含资源详细信息）。例如，若要指定启动任务的资源文件，必须使用 JSON 文件。
 
 若要查找创建资源所需的 JSON，请参阅 MSDN 上的 [Batch REST API reference][rest_api]（Batch REST API 参考）文档。每个“Add *resource type*”（添加 <资源类型>）主题都包含用于创建资源的示例 JSON，可将它用作 JSON 文件的模板。例如，在 [Add a pool to an account][rest_add_pool]（将池添加到帐户）中可以找到用于创建池的 JSON。
 
->[AZURE.NOTE] 如果在创建资源时指定 JSON 文件，则会忽略在命令行上为该资源指定的所有其他参数。
+>[!NOTE] 如果在创建资源时指定 JSON 文件，则会忽略在命令行上为该资源指定的所有其他参数。
 
 ## 创建池
 
@@ -154,15 +151,15 @@
 
 在 Batch 服务中创建计算节点的池。
 
-如 [Batch feature overview](/documentation/articles/batch-api-basics/#pool/)（Batch 功能概述）中所述，为池中的节点选择操作系统时，可以使用两个选项：“虚拟机配置”和“云服务配置”。使用 `--image-*` 选项可创建虚拟机配置池，使用 `--os-family` 可创建云服务配置池。不能同时指定 `--os-family` 和 `--image-*` 选项。
+如 [Batch feature overview](./batch-api-basics.md#pool/)（Batch 功能概述）中所述，为池中的节点选择操作系统时，可以使用两个选项：“虚拟机配置”和“云服务配置”。使用 `--image-*` 选项可创建虚拟机配置池，使用 `--os-family` 可创建云服务配置池。不能同时指定 `--os-family` 和 `--image-*` 选项。
 
-可以指定池[应用程序包](/documentation/articles/batch-application-packages/)以及[启动任务](/documentation/articles/batch-api-basics/#start-task/)的命令行。若要指定启动任务的资源文件，必须改用 [JSON 文件](#json-files)。
+可以指定池[应用程序包](./batch-application-packages.md)以及[启动任务](./batch-api-basics.md#start-task/)的命令行。若要指定启动任务的资源文件，必须改用 [JSON 文件](#json-files)。
 
 使用以下命令删除池：
 
     azure batch pool delete [pool-id]
 
->[AZURE.TIP] 在[虚拟机映像列表](/documentation/articles/batch-linux-nodes/#list-of-virtual-machine-images/)中检查适合 `--image-*` 选项的值。
+>[!TIP] 在[虚拟机映像列表](./batch-linux-nodes.md#list-of-virtual-machine-images/)中检查适合 `--image-*` 选项的值。
 
 ## 创建作业
 
@@ -201,7 +198,7 @@ Batch CLI 支持 Batch 服务所支持的所有三个子句：
 * `--filter-clause [filter-clause]` 返回与指定的 OData 表达式匹配的实体
 * `--expand-clause [expand-clause]` 通过一个基础 REST 调用获取实体信息。expand 子句目前仅支持 `stats` 属性。
 
-有关这三个子句以及使用它们执行 list 查询的详细信息，请参阅 [Query the Azure Batch service efficiently](/documentation/articles/batch-efficient-list-queries/)（有效查询 Azure Batch 服务）。
+有关这三个子句以及使用它们执行 list 查询的详细信息，请参阅 [Query the Azure Batch service efficiently](./batch-efficient-list-queries.md)（有效查询 Azure Batch 服务）。
 
 ## 应用程序包管理
 
@@ -229,9 +226,9 @@ Batch CLI 支持 Batch 服务所支持的所有三个子句：
 
     azure batch pool create --id "pool001" --target-dedicated 1 --vm-size "small" --os-family "4" --app-package-ref "MyTaskApplication"
 
-目前无法使用命令行选项指定要部署的包版本。必须先使用 Azure 门户预览设置应用程序的默认版本，才可以将应用程序分配到池。在 [Application deployment with Azure Batch application packages](/documentation/articles/batch-application-packages/)（使用 Azure Batch 应用程序包部署应用程序）中了解如何设置默认版本。但是，如果在创建池时使用 [JSON 文件](#json-files)而不是命令行选项，则可以指定默认版本。
+目前无法使用命令行选项指定要部署的包版本。必须先使用 Azure 门户预览设置应用程序的默认版本，才可以将应用程序分配到池。在 [Application deployment with Azure Batch application packages](./batch-application-packages.md)（使用 Azure Batch 应用程序包部署应用程序）中了解如何设置默认版本。但是，如果在创建池时使用 [JSON 文件](#json-files)而不是命令行选项，则可以指定默认版本。
 
->[AZURE.IMPORTANT] 若要使用应用程序包，必须[将 Azure 存储帐户链接](#linked-storage-account-autostorage)到 Batch 帐户。
+>[!IMPORTANT] 若要使用应用程序包，必须[将 Azure 存储帐户链接](#linked-storage-account-autostorage)到 Batch 帐户。
 
 ## 故障排除提示
 
@@ -249,9 +246,9 @@ Batch CLI 支持 Batch 服务所支持的所有三个子句：
 
 ## 后续步骤
 
-*  请参阅 [Application deployment with Azure Batch application packages](/documentation/articles/batch-application-packages/)（使用 Azure Batch 应用程序包部署应用程序），了解如何使用此功能来管理和部署 Batch 计算节点上执行的应用程序。
+*  请参阅 [Application deployment with Azure Batch application packages](./batch-application-packages.md)（使用 Azure Batch 应用程序包部署应用程序），了解如何使用此功能来管理和部署 Batch 计算节点上执行的应用程序。
 
-* 有关如何减少项数以及针对 Batch 查询返回的信息类型的详细信息，请参阅 [Query the Batch service efficiently](/documentation/articles/batch-efficient-list-queries/)（有效查询 Batch 服务）。
+* 有关如何减少项数以及针对 Batch 查询返回的信息类型的详细信息，请参阅 [Query the Batch service efficiently](./batch-efficient-list-queries.md)（有效查询 Batch 服务）。
 
 [batch_forum]: https://social.msdn.microsoft.com/forums/azure/zh-cn/home?forum=azurebatch
 [rest_api]: https://msdn.microsoft.com/zh-cn/library/azure/dn820158.aspx

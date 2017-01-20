@@ -1,26 +1,26 @@
-<properties
-   pageTitle="将 MapReduce 与 HDInsight 上的 Hadoop 配合使用 | Azure"
-   description="学习如何在 HDInsight 上的 Hadoop 群集中运行 MapReduce 作业。你将运行一个实现为 Java MapReduce 作业的基本单词计数操作。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="Blackmist"
-   manager="paulettm"
-   editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 将 MapReduce 与 HDInsight 上的 Hadoop 配合使用 | Azure
+description: 学习如何在 HDInsight 上的 Hadoop 群集中运行 MapReduce 作业。你将运行一个实现为 Java MapReduce 作业的基本单词计数操作。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="11/15/2016"
-   wacn.date="01/05/2017"
-   ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 11/15/2016
+wacn.date: 01/05/2017
+ms.author: larryfr
+---
 
 # 在 HDInsight 上的 Hadoop 中使用 MapReduce
 
-[AZURE.INCLUDE [mapreduce-selector](../../includes/hdinsight-selector-use-mapreduce.md)]
+[!INCLUDE [mapreduce-selector](../../includes/hdinsight-selector-use-mapreduce.md)]
 
 在本文中，你将学习如何在 HDInsight 上的 Hadoop 群集中运行 MapReduce 作业。我们将运行一个实现为 Java MapReduce 作业的基本单词计数操作。
 
@@ -63,13 +63,13 @@ Hadoop 流式处理通过 STDIN 和 STDOUT 与映射器和化简器通信 - 映�
 
 由于 Azure Blob 存储是 HDInsight 的默认存储，因此你也可以使用 **/example/data/gutenberg/davinci.txt** 访问该文件。
 
-> [AZURE.NOTE]在上述语法中，****wasbs:///** 用于访问 HDInsight 群集的默认存储容器中存储的文件。如果你在设置群集时指定了其他存储帐户，并想要访问这些帐户中存储的文件，你可以指定容器名称和存储帐户地址来访问数据。例如 ****wasbs://mycontainer@mystorage.blob.core.chinacloudapi.cn/example/data/gutenberg/davinci.txt**。
+> [!NOTE]在上述语法中，****wasbs:///** 用于访问 HDInsight 群集的默认存储容器中存储的文件。如果你在设置群集时指定了其他存储帐户，并想要访问这些帐户中存储的文件，你可以指定容器名称和存储帐户地址来访问数据。例如 ****wasbs://mycontainer@mystorage.blob.core.chinacloudapi.cn/example/data/gutenberg/davinci.txt**。
 
 ## <a id="job"></a>关于示例 MapReduce
 
 本示例中使用的 MapReduce 作业位于 HDInsight 群集随附的 ****wasbs://example/jars/hadoop-mapreduce-examples.jar** 中。其中包含一个你要针对 **davinci.txt** 运行的单词计数示例。
 
-> [AZURE.NOTE]在 HDInsight 2.1 群集上，该文件位置为 ****wasbs:///example/jars/hadoop-examples.jar**。
+> [!NOTE]在 HDInsight 2.1 群集上，该文件位置为 ****wasbs:///example/jars/hadoop-examples.jar**。
 
 下面提供了单词计数 MapReduce 作业的 Java 代码供你参考：
 
@@ -143,7 +143,7 @@ Hadoop 流式处理通过 STDIN 和 STDOUT 与映射器和化简器通信 - 映�
 	  }
 	}
 
-有关编写自己的 MapReduce 作业的说明，请参阅[为 HDInsight 开发 Java MapReduce 程序](/documentation/articles/hdinsight-develop-deploy-java-mapreduce/)。
+有关编写自己的 MapReduce 作业的说明，请参阅[为 HDInsight 开发 Java MapReduce 程序](./hdinsight-develop-deploy-java-mapreduce.md)。
 
 ## <a id="run"></a>运行 MapReduce
 
@@ -151,15 +151,15 @@ HDInsight 可以使用各种方法运行 HiveQL 作业。使用下表来确定�
 
 | **使用此方法**... | **...实现此目的** | ...使用此**群集操作系统** | ...从此**客户端操作系统** |
 |:-------------------------------------------------------------------|:--------------------------------------------------------|:------------------------------------------|:-----------------------------------------|
-| [Curl](/documentation/articles/hdinsight-hadoop-use-mapreduce-curl/) | 使用 **REST** 远程提交作业 | Windows | Windows |
-| [Windows PowerShell](/documentation/articles/hdinsight-hadoop-use-mapreduce-powershell/) | 使用 **Windows PowerShell** 远程提交作业 | Windows | Windows |
-| [远程桌面](/documentation/articles/hdinsight-hadoop-use-mapreduce-remote-desktop/) | 通过**远程桌面**使用 Hadoop 命令 | Windows | Windows |
+| [Curl](./hdinsight-hadoop-use-mapreduce-curl.md) | 使用 **REST** 远程提交作业 | Windows | Windows |
+| [Windows PowerShell](./hdinsight-hadoop-use-mapreduce-powershell.md) | 使用 **Windows PowerShell** 远程提交作业 | Windows | Windows |
+| [远程桌面](./hdinsight-hadoop-use-mapreduce-remote-desktop.md) | 通过**远程桌面**使用 Hadoop 命令 | Windows | Windows |
 
 ## <a id="nextsteps"></a>后续步骤
 
 虽然 MapReduce 提供了强大的诊断功能，但掌握起来可能会比较困难。有多个基于 Java 的框架可让你更轻松地定义 MapReduce 应用程序，还有一些技术（例如 Pig 和 Hive）可让你更方便地在 HDInsight 中处理数据。若要了解更多信息，请参阅下列文章：
 
-* [为 HDInsight 开发 Java MapReduce 程序](/documentation/articles/hdinsight-develop-deploy-java-mapreduce/)
+* [为 HDInsight 开发 Java MapReduce 程序](./hdinsight-develop-deploy-java-mapreduce.md)
 
 * [将 Hive 与 HDInsight 配合使用][hdinsight-use-hive]
 
@@ -167,14 +167,13 @@ HDInsight 可以使用各种方法运行 HiveQL 作业。使用下表来确定�
 
 * [运行 HDInsight 示例][hdinsight-samples]
 
-
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
-[hdinsight-develop-mapreduce-jobs]: /documentation/articles/hdinsight-develop-deploy-java-mapreduce/
-[hdinsight-use-hive]: /documentation/articles/hdinsight-use-hive/
-[hdinsight-use-pig]: /documentation/articles/hdinsight-use-pig/
-[hdinsight-samples]: /documentation/articles/hdinsight-run-samples/
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-develop-mapreduce-jobs]: ./hdinsight-develop-deploy-java-mapreduce.md
+[hdinsight-use-hive]: ./hdinsight-use-hive.md
+[hdinsight-use-pig]: ./hdinsight-use-pig.md
+[hdinsight-samples]: ./hdinsight-run-samples.md
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
 
 [powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 

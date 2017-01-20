@@ -1,26 +1,25 @@
-<properties
-	pageTitle="使用 IoT 中心发送云到设备的消息 | Azure"
-	description="遵照本教程了解如何将 Azure IoT 中心与 Java 配合使用，以发送云到设备的消息。"
-	services="iot-hub"
-	documentationCenter="java"
-	authors="dominicbetts"
-	manager="timlt"
-	editor=""/>  
+---
+title: 使用 IoT 中心发送云到设备的消息 | Azure
+description: 遵照本教程了解如何将 Azure IoT 中心与 Java 配合使用，以发送云到设备的消息。
+services: iot-hub
+documentationCenter: java
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-hub"
-     ms.devlang="java"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="09/13/2016"
-     wacn.date="01/17/2017"
-     ms.author="dobett"/>
+ms.service: iot-hub
+ms.devlang: java
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/13/2016
+wacn.date: 01/17/2017
+ms.author: dobett
+---
 
 # 教程：如何使用 IoT 中心和 Java 发送云到设备的消息
 
-[AZURE.INCLUDE [iot-hub-selector-c2d](../../includes/iot-hub-selector-c2d.md)]
+[!INCLUDE [iot-hub-selector-c2d](../../includes/iot-hub-selector-c2d.md)]
 
 ## 介绍
 
@@ -39,7 +38,7 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
 * **simulated-device**，这是在 [Get started with IoT Hub]（IoT 中心入门）中创建的应用的修改版本，可连接到 IoT 中心并接收云到设备的消息。
 * **send-c2d-messages**，它将云到设备的消息通过 IoT 中心发送到模拟设备，然后接收 IoT 中心的传送确认。
 
-> [AZURE.NOTE] IoT 中心通过 Azure IoT 设备 SDK 对许多设备平台和语言（包括 C、Java 和 Javascript）提供 SDK 支持。有关如何将设备连接到本教程中的代码（通常是连接到 Azure IoT 中心）的逐步说明，请参阅 [Azure IoT Developer Center]（Azure IoT 开发人员中心）。
+> [!NOTE] IoT 中心通过 Azure IoT 设备 SDK 对许多设备平台和语言（包括 C、Java 和 Javascript）提供 SDK 支持。有关如何将设备连接到本教程中的代码（通常是连接到 Azure IoT 中心）的逐步说明，请参阅 [Azure IoT Developer Center]（Azure IoT 开发人员中心）。
 
 若要完成本教程，您需要以下各项：
 
@@ -79,7 +78,7 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
     client.open();
     ```
 
-   > [AZURE.NOTE] 如果使用 HTTP（而不使用 MQTT 或 AMQP）作为传输，**DeviceClient** 实例不会经常检查 IoT 中心发来的消息（时间间隔小于 25 分钟）。有关 MQTT、AMQP 和 HTTP 支持之间的差异，以及 IoT 中心限制的详细信息，请参阅 [IoT 中心开发人员指南][IoT Hub Developer Guide - C2D]。
+   > [!NOTE] 如果使用 HTTP（而不使用 MQTT 或 AMQP）作为传输，**DeviceClient** 实例不会经常检查 IoT 中心发来的消息（时间间隔小于 25 分钟）。有关 MQTT、AMQP 和 HTTP 支持之间的差异，以及 IoT 中心限制的详细信息，请参阅 [IoT 中心开发人员指南][IoT Hub Developer Guide - C2D]。
 
 ## 发送云到设备的消息
 
@@ -155,7 +154,7 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
     }
     ```
 
-    > [AZURE.NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+    > [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 运行应用程序
 
@@ -185,21 +184,20 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
 
 若要了解有关使用 IoT 中心开发解决方案的详细信息，请参阅 [IoT Hub Developer Guide]（IoT 中心开发人员指南）。
 
-
 <!-- Images -->
 [img-simulated-device]: ./media/iot-hub-java-java-c2d/receivec2d.png
 [img-send-command]: ./media/iot-hub-java-java-c2d/sendc2d.png
 <!-- Links -->
 
-[Get started with IoT Hub]: /documentation/articles/iot-hub-java-java-getstarted/
-[IoT 中心入门]: /documentation/articles/iot-hub-java-java-getstarted/
-[IoT Hub Developer Guide - C2D]: /documentation/articles/iot-hub-devguide-messaging/
-[IoT Hub Developer Guide]: /documentation/articles/iot-hub-devguide/
+[Get started with IoT Hub]: ./iot-hub-java-java-getstarted.md
+[IoT 中心入门]: ./iot-hub-java-java-getstarted.md
+[IoT Hub Developer Guide - C2D]: ./iot-hub-devguide-messaging.md
+[IoT Hub Developer Guide]: ./iot-hub-devguide.md
 [Azure IoT Developer Center]: /develop/iot
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/java-devbox-setup.md
 [Transient Fault Handling]: https://msdn.microsoft.com/zh-cn/library/hh680901(v=pandp.50).aspx
 [Azure 门户预览]: https://portal.azure.cn
-[Azure IoT Suite]: /documentation/services/iot-suite/
+[Azure IoT Suite]: ../iot-suite/index.md/
 
 <!---HONumber=Mooncake_Quality_Review_0117_2017-->

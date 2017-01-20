@@ -1,6 +1,6 @@
-> [AZURE.SELECTOR]
-- [Node.js](/documentation/articles/iot-hub-node-node-twin-how-to-configure/)
-- [C#](/documentation/articles/iot-hub-csharp-node-twin-how-to-configure/)
+> [!div class="op_single_selector"]
+- [Node.js](../articles/iot-hub/iot-hub-node-node-twin-how-to-configure.md)
+- [C#](../articles/iot-hub/iot-hub-csharp-node-twin-how-to-configure.md)
 
 ## 介绍
 在 [IoT 中心设备克隆入门][lnk-twin-tutorial]中，你已学习如何使用 *标记* 通过解决方案后端设置设备元数据、如何使用 *报告属性* 通过设备应用报告设备条件以及如何使用类似 SQL 的语言查询此信息。
@@ -9,7 +9,7 @@
 
 从较高层面讲，使用设备克隆允许解决方案后端指定托管设备所需配置，而不发送特定命令。这个方法让设备负责确定更新其配置的最佳方法（对于特定设备条件影响即时执行特定命令的能力的 IoT 方案而言十分重要），同时继续向后端报告更新过程的当前状态和潜在错误条件。此模式能够帮助管理大量设备，因为它让后端能够跨所有设备完全掌握配置流程状态。
 
-> [AZURE.NOTE] 在以更具交互性的方式控制设备的方案中（通过用户控制的应用打开风扇），请考虑使用[直接方法][lnk-methods]。
+> [!NOTE] 在以更具交互性的方式控制设备的方案中（通过用户控制的应用打开风扇），请考虑使用[直接方法][lnk-methods]。
 
 在本教程中，应用程序后端更改目标设备的遥测配置，这样一来，设备应用会执行多步流程来应用配置更新（例如，要求软件模块重启），这在本教程中以简单的延迟进行模拟。
 
@@ -30,7 +30,7 @@
             ...
         }
 
-> [AZURE.NOTE] 由于配置可能会是复杂对象，通常会为它们分配唯一 ID（哈希值或 [GUID][lnk-guid]），以简化其比较。
+> [!NOTE] 由于配置可能会是复杂对象，通常会为它们分配唯一 ID（哈希值或 [GUID][lnk-guid]），以简化其比较。
 
 设备应用以镜像报告属性中的所需属性 **telemetryConfig** 的形式报告其当前配置：
 
@@ -79,9 +79,8 @@
 
 <!-- links -->
 
-
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-twin-tutorial]: /documentation/articles/iot-hub-node-node-twin-getstarted/
+[lnk-methods]: ../articles/iot-hub/iot-hub-devguide-direct-methods.md
+[lnk-twin-tutorial]: ../articles/iot-hub/iot-hub-node-node-twin-getstarted.md
 [lnk-guid]: https://en.wikipedia.org/wiki/Globally_unique_identifier
 
 <!---HONumber=Mooncake_1212_2016-->

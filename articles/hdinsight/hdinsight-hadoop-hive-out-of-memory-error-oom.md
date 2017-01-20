@@ -1,22 +1,22 @@
-<properties
-	pageTitle="内存不足 (OOM) 错误 - Hive 设置 | Azure"
-	description="在 HDInsight 的 Hadoop 中解决运行 Hive 查询时内存不足 (OOM) 错误。客户方案为跨多个大型表运行查询。"
-	keywords="内存不足错误, OOM, Hive 设置"
-	services="hdinsight"
-	documentationCenter=""
-	authors="rashimg"
-	manager="paulettm"
-	editor="cgronlun"/>
+---
+title: 内存不足 (OOM) 错误 - Hive 设置 | Azure
+description: 在 HDInsight 的 Hadoop 中解决运行 Hive 查询时内存不足 (OOM) 错误。客户方案为跨多个大型表运行查询。
+keywords: 内存不足错误, OOM, Hive 设置
+services: hdinsight
+documentationCenter: 
+authors: rashimg
+manager: paulettm
+editor: cgronlun
 
-<tags
-	ms.service="hdinsight"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="big-data"
-	ms.date="09/02/2016"
-	wacn.date="10/25/2016"
-	ms.author="rashimg;jgao"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 09/02/2016
+wacn.date: 10/25/2016
+ms.author: rashimg;jgao
+---
 
 # 在 Azure HDInsight 的 Hadoop 中使用 Hive 内存设置解决内存不足 (OOM) 错误
 
@@ -55,7 +55,7 @@
 
 由于查询大约在 26 分钟内完成运行，因此客户忽略了这些警告，反而开始将重点放在如何进一步改善此查询的性能上。
 
-客户参考了[在 HDInsight 中优化 Hadoop 的 Hive 查询](/documentation/articles/hdinsight-hadoop-optimize-hive-query-v1/)，并决定使用 Tez 执行引擎。启用 Tez 设置运行同一个查询之后，该查询运行了 15 分钟，然后引发以下错误：
+客户参考了[在 HDInsight 中优化 Hadoop 的 Hive 查询](./hdinsight-hadoop-optimize-hive-query-v1.md)，并决定使用 Tez 执行引擎。启用 Tez 设置运行同一个查询之后，该查询运行了 15 分钟，然后引发以下错误：
 
 	Status: Failed
 	Vertex failed, vertexName=Map 5, vertexId=vertex_1443634917922_0008_1_05, diagnostics=[Task failed, taskId=task_1443634917922_0008_1_05_000006, diagnostics=[TaskAttempt 0 failed, info=[Error: Failure while running task:java.lang.RuntimeException: java.lang.OutOfMemoryError: Java heap space
@@ -107,10 +107,9 @@
 
 ![Tez 容器内存示意图：Hive 内存不足 (OOM) 错误](./media/hdinsight-hadoop-hive-out-of-memory-error-oom/hive-out-of-memory-error-oom-tez-container-memory.png)
 
-
 如该博客文章中所述，以下两项内存设置定义了堆的容器内存：**hive.tez.container.size** 和 **hive.tez.java.opts**。从我们的经验来看，OOM 异常不表示容器太小，而是表示 Java 堆大小 (hive.tez.java.opts) 太小。因此，每当你看到 OOM 时，可尝试增大 **hive.tez.java.opts**。必要时，你可能需要增大 **hive.tez.container.size**。**java.opts** 设置应该大约为 **container.size** 的 80%。
 
-> [AZURE.NOTE]**hive.tez.java.opts** 设置始终必须小于 **hive.tez.container.size**。
+> [!NOTE]**hive.tez.java.opts** 设置始终必须小于 **hive.tez.container.size**。
 
 由于 D12 计算机具有 28GB 内存，因此我们决定使用 10GB (10240MB) 的容器大小并将 80% 分配给 java.opts。可以在 Hive 控制台上使用以下设置完成此操作：
 

@@ -1,23 +1,22 @@
-<properties
-   pageTitle="使用动态管理视图监视 Azure SQL 数据库 | Azure"
-   description="了解如何通过使用动态管理视图监视 Azure SQL 数据库来检测并诊断常见性能问题。"
-   services="sql-database"
-   documentationCenter=""
-   authors="CarlRabeler"
-   manager="jhubbard"
-   editor=""
-   tags=""/>  
+---
+title: 使用动态管理视图监视 Azure SQL 数据库 | Azure
+description: 了解如何通过使用动态管理视图监视 Azure SQL 数据库来检测并诊断常见性能问题。
+services: sql-database
+documentationCenter: 
+authors: CarlRabeler
+manager: jhubbard
+editor: 
+tags: 
 
-
-<tags
-   ms.service="sql-database"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="data-management"
-   ms.date="09/20/2016"
-   wacn.date="12/12/2016"
-   ms.author="carlrab"/>
+ms.service: sql-database
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-management
+ms.date: 09/20/2016
+wacn.date: 12/12/2016
+ms.author: carlrab
+---
 
 # 使用动态管理视图监视 Azure SQL 数据库
 
@@ -43,15 +42,12 @@ SQL 数据库部分支持三种类别的动态管理视图：
 
 下面的查询将返回数据库的大小（以 MB 为单位）：
 
-
 	-- Calculates the size of the database.
 	SELECT SUM(reserved_page_count)*8.0/1024
 	FROM sys.dm_db_partition_stats;
 	GO
 
-
 下面的查询将返回数据库中各个对象的大小（以 MB 为单位）：
-
 
 	-- Calculates the size of individual database objects.
 	SELECT sys.objects.name, SUM(reserved_page_count) * 8.0 / 1024
@@ -60,11 +56,9 @@ SQL 数据库部分支持三种类别的动态管理视图：
 	GROUP BY sys.objects.name;
 	GO
 
-
 ## 监视连接
 
 可以使用 [sys.dm\_exec\_connections](https://msdn.microsoft.com/zh-cn/library/ms181509.aspx) 视图来检索有关特定的 Azure SQL 数据库服务器所建立连接的信息以及每个连接的详细信息。此外，[sys.dm\_exec\_sessions](https://msdn.microsoft.com/zh-cn/library/ms176013.aspx) 视图在检索有关所有活动用户连接和内部任务的信息时非常有用。下面的查询将检索当前连接上的信息：
-
 
 	SELECT
 	    c.session_id, c.net_transport, c.encrypt_option,
@@ -77,8 +71,7 @@ SQL 数据库部分支持三种类别的动态管理视图：
 	    ON c.session_id = s.session_id
 	WHERE c.session_id = @@SPID;
 
-
-> [AZURE.NOTE] 在执行 **sys.dm\_exec\_requests** 和 **sys.dm\_exec\_sessions **视图时，如果具有对数据库的 **VIEW DATABASE STATE** 权限，将会看到数据库上所有正在执行的会话；否则，只会看到当前会话。
+> [!NOTE] 在执行 **sys.dm\_exec\_requests** 和 **sys.dm\_exec\_sessions **视图时，如果具有对数据库的 **VIEW DATABASE STATE** 权限，将会看到数据库上所有正在执行的会话；否则，只会看到当前会话。
 
 ## 监视查询性能
 
@@ -87,7 +80,6 @@ SQL 数据库部分支持三种类别的动态管理视图：
 ### 查找前 n 个查询
 
 下列示例返回了按平均 CPU 时间排名的前五个查询的信息。该示例根据查询散列收集了查询，以便逻辑上等值的查询能够根据累积资源消耗分组。
-
 
 	SELECT TOP 5 query_stats.query_hash AS "Query Hash",
 	    SUM(query_stats.total_worker_time) / SUM(query_stats.execution_count) AS "Avg CPU Time",
@@ -104,7 +96,6 @@ SQL 数据库部分支持三种类别的动态管理视图：
 	GROUP BY query_stats.query_hash
 	ORDER BY 2 DESC;
 
-
 ### 监视受阻的查询
 
 缓慢或长时间运行的查询会造成过多的资源消耗并会导致查询受阻。受阻的原因可能是应用程序设计欠佳、查询计划不良、缺乏有用的索引等。可以使用 sys.dm\_tran\_locks 视图来获取有关 Azure SQL 数据库中当前锁定活动的信息。有关示例代码，请参阅 SQL Server 联机丛书中的 [sys.dm\_tran\_locks (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms190345.aspx)。
@@ -112,7 +103,6 @@ SQL 数据库部分支持三种类别的动态管理视图：
 ### 监视查询计划
 
 低效的查询计划还可能会增加 CPU 占用率。下面的示例使用 [sys.dm\_exec\_query\_stats](https://msdn.microsoft.com/zh-cn/library/ms189741.aspx) 视图来确定哪一查询累积的 CPU 占用率最高。
-
 
 	SELECT
 	    highest_cpu_queries.plan_handle,
@@ -132,9 +122,8 @@ SQL 数据库部分支持三种类别的动态管理视图：
 	    CROSS APPLY sys.dm_exec_sql_text(plan_handle) AS q
 	ORDER BY highest_cpu_queries.total_worker_time DESC;
 
-
 ## 另请参阅
 
-[SQL 数据库简介](/documentation/articles/sql-database-technical-overview/)
+[SQL 数据库简介](./sql-database-technical-overview.md)
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

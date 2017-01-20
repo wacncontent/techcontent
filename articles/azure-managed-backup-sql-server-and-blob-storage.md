@@ -1,14 +1,17 @@
-<properties
-	pageTitle="SQL 数据库 + Blob 存储实现托管备份操作手册"
-    description="SQL 数据库 + Blob 存储实现托管备份操作手册"
-    services=""
-    documentationCenter=""
-    authors=""
-    manager=""
-    editor=""
-    tags=""/>
+---
+title: SQL 数据库 + Blob 存储实现托管备份操作手册
+description: SQL 数据库 + Blob 存储实现托管备份操作手册
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags ms.service="multiple" ms.date="" wacn.date="08/24/2016"/>
+ms.service: multiple
+ms.date: 
+wacn.date: 08/24/2016
+---
 
 #SQL 数据库 + Blob 存储实现托管备份操作手册  
 
@@ -142,7 +145,7 @@ SQL 版本支持说明：本文档基于 SQL Server 2014 编写，适用于 SQL 
 
 	![22](./media/azure-managed-backup-sql-server-and-blob-storage/22.png)
 
-	>[AZURE.NOTE]初次配置时选择**配置**选项。
+	>[!NOTE]初次配置时选择**配置**选项。
 
 3. 勾选**启用托管备份**。
 
@@ -202,11 +205,11 @@ SQL 版本支持说明：本文档基于 SQL Server 2014 编写，适用于 SQL 
 ##扩展服务：
 ###StorSimple
 
-如果您本地数据中心需要备份的 SQL 数据库较多，且总数据量较大时，您可以在本地部署 StorSimple，先将 SQL 备份至 StorSimple，由 StorSimple 压缩、去重后，再由 StorSimple 上传至 Azure。关于 StorSimple 更多信息请参考 [StorSimple 产品介绍](/solutions/storsimple/)。 
+如果您本地数据中心需要备份的 SQL 数据库较多，且总数据量较大时，您可以在本地部署 StorSimple，先将 SQL 备份至 StorSimple，由 StorSimple 压缩、去重后，再由 StorSimple 上传至 Azure。关于 StorSimple 更多信息请参考 [StorSimple 产品介绍](https://www.azure.cn/solutions/storsimple/)。 
  
 ###常见问题与相关文档
 
 - [如何对 Azure 上的 SQL 托管备份进行恢复](https://msdn.microsoft.com/zh-cn/library/dn449492(v=sql.120).aspx)
-- [将 SQL Server 数据库迁移到云中的 SQL 数据库](/documentation/articles/sql-database-cloud-migrate/)
-- [Azure SQL 数据库 Transact-SQL 的差异](/documentation/articles/sql-database-transact-sql-information/)
+- [将 SQL Server 数据库迁移到云中的 SQL 数据库](./sql-database/sql-database-cloud-migrate.md)
+- [Azure SQL 数据库 Transact-SQL 的差异](./sql-database/sql-database-transact-sql-information.md)
 - [为可用性组设置 SQL Server 托管备份到 Azure](https://msdn.microsoft.com/zh-cn/library/dn449488(v=sql.120).aspx)

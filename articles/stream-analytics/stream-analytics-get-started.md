@@ -1,33 +1,28 @@
-<properties
-	pageTitle="流分析入门：实时检测欺诈行为 | Azure"
-	description="了解如何通过流分析创建实时欺诈行为检测解决方案。使用事件中心进行实时事件处理。"
-	keywords="异常检测、欺诈检测、实时异常检测"
-	services="stream-analytics"
-	documentationCenter=""
-	authors="jeffstokes72"
-	manager="jhubbard"
-	editor="cgronlun" />  
+---
+title: 流分析入门：实时检测欺诈行为 | Azure
+description: 了解如何通过流分析创建实时欺诈行为检测解决方案。使用事件中心进行实时事件处理。
+keywords: 异常检测、欺诈检测、实时异常检测
+services: stream-analytics
+documentationCenter: 
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="stream-analytics"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="data-services"
-	ms.date="09/26/2016"
-	wacn.date="01/04/2017"
-	ms.author="jeffstok" />  
-
-
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 09/26/2016
+wacn.date: 01/04/2017
+ms.author: jeffstok
+---
 
 # Azure 流分析入门：实时检测欺诈行为
 
 了解如何创建端到端解决方案，以便通过 Azure 流分析实时检测欺诈行为。将事件引入 Azure 事件中心、编写用于聚合或提醒的流分析查询，以及将结果发送到输出接收器，以便通过实时处理来分析数据。虽然介绍的是电信方面的实时异常检测，但作为示例的技术同样适用于其他类型的欺诈检测，例如盗窃信用卡或身份的情况。
 
-流分析是一种完全托管的服务，可以在云中通过流式数据进行低延迟、高度可用、可伸缩且复杂的事件处理。有关详细信息，请参阅 [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)。
-
+流分析是一种完全托管的服务，可以在云中通过流式数据进行低延迟、高度可用、可伸缩且复杂的事件处理。有关详细信息，请参阅 [Azure 流分析简介](./stream-analytics-introduction.md)。
 
 ## 方案：实时进行远程通信和 SIM 欺诈行为检测
 
@@ -45,12 +40,12 @@
 
 ## 创建 Azure 事件中心输入和使用者组
 
-示例应用程序将会生成事件并将其推送到进行实时处理的事件中心实例。为流分析引入事件时，Service Bus 事件中心是首选的方法。你可以在 [Azure Service Bus 文档](/documentation/services/service-bus/)中了解有关事件中心的更多信息。
+示例应用程序将会生成事件并将其推送到进行实时处理的事件中心实例。为流分析引入事件时，Service Bus 事件中心是首选的方法。你可以在 [Azure Service Bus 文档](../service-bus/index.md/)中了解有关事件中心的更多信息。
 
 创建事件中心的步骤：
 
 1.	在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中单击**“新建”**>**“应用程序服务”**>**“Service Bus”**>**“事件中心”**>**“快速创建”**。提供创建新的事件中心所需的名称、区域以及新的或现有的命名空间。  
-2.	最佳做法是让每个流分析作业都从单个事件中心使用者组进行读取。我们将在下面向你详细介绍创建使用者组的过程，你可以[了解有关使用者组的详细信息](/documentation/articles/event-hubs-overview/)。若要创建使用者组，请导航到新创建的事件中心并单击**“使用者组”**选项卡，然后单击页面底部的**“创建”**，为使用者组提供一个名称。
+2.	最佳做法是让每个流分析作业都从单个事件中心使用者组进行读取。我们将在下面向你详细介绍创建使用者组的过程，你可以[了解有关使用者组的详细信息](../event-hubs/event-hubs-overview.md)。若要创建使用者组，请导航到新创建的事件中心并单击**“使用者组”**选项卡，然后单击页面底部的**“创建”**，为使用者组提供一个名称。
 3.	若要授予对事件中心的访问权限，需创建共享访问策略。单击事件中心的**“配置”**选项卡。
 4.	在**“共享访问策略”**下，使用**管理**权限创建一个新策略。
 
@@ -89,7 +84,6 @@
 | CallingIMSI | 国际移动用户标识 (IMSI)。呼叫方的唯一标识符。 |
 | CalledNum | 呼叫接收人的电话号码。 |
 | CalledIMSI | 国际移动用户标识 (IMSI)。呼叫接收人的唯一标识符。 |
-
 
 ## 创建流分析作业
 现在，我们已获得远程通信事件流，因此可以设置一个流分析作业来实时分析这些事件。
@@ -163,7 +157,6 @@
 5.	单击勾选按钮，然后就会看到结果显示在查询定义下方。
 
 	![查询定义结果](./media/stream-analytics-get-started/stream-analytics-sim-fraud-output.png)
-
 
 ### 列投影
 
@@ -260,12 +253,11 @@
 ## 获取支持
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。
 
-
 ## 后续步骤
 
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
 

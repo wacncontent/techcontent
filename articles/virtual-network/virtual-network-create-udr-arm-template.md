@@ -1,37 +1,36 @@
-<properties
-    pageTitle="使用模板控制路由和虚拟设备 | Azure"
-    description="了解如何使用 Azure Resource Manager 模板控制路由和虚拟设备。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用模板控制路由和虚拟设备 | Azure
+description: 了解如何使用 Azure Resource Manager 模板控制路由和虚拟设备。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="832c7831-d0e9-449b-b39c-9a09ba051531"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/23/2016"
-    wacn.date="01/05/2017"
-    ms.author="jdial" />  
-
+ms.assetid: 832c7831-d0e9-449b-b39c-9a09ba051531
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/23/2016
+wacn.date: 01/05/2017
+ms.author: jdial
+---
 
 # 使用模板创建用户定义的路由 (UDR)
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/virtual-network-create-udr-arm-ps/)
-- [Azure CLI](/documentation/articles/virtual-network-create-udr-arm-cli/)
-- [模板](/documentation/articles/virtual-network-create-udr-arm-template/)
-- [PowerShell（经典）](/documentation/articles/virtual-network-create-udr-classic-ps/)
-- [CLI（经典）](/documentation/articles/virtual-network-create-udr-classic-cli/)
+> [!div class="op_single_selector"]
+- [PowerShell](./virtual-network-create-udr-arm-ps.md)
+- [Azure CLI](./virtual-network-create-udr-arm-cli.md)
+- [模板](./virtual-network-create-udr-arm-template.md)
+- [PowerShell（经典）](./virtual-network-create-udr-classic-ps.md)
+- [CLI（经典）](./virtual-network-create-udr-classic-cli.md)
 
-> [AZURE.IMPORTANT]
-在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源前，请确保了解[部署模型和工具](/documentation/articles/resource-manager-deployment-model/)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍 Resource Manager 部署模型。
+> [!IMPORTANT]
+在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源前，请确保了解[部署模型和工具](../azure-resource-manager/resource-manager-deployment-model.md)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍 Resource Manager 部署模型。
 
-[AZURE.INCLUDE [virtual-network-create-udr-scenario-include.md](../../includes/virtual-network-create-udr-scenario-include.md)]
+[!INCLUDE [virtual-network-create-udr-scenario-include.md](../../includes/virtual-network-create-udr-scenario-include.md)]
 
 ## 模板文件中的 UDR 资源
 可查看和下载[示例模板](https://github.com/telmosampaio/azure-templates/tree/master/IaaS-NSG-UDR)。
@@ -170,7 +169,7 @@
 
 若要使用 Azure CLI 部署 ARM 模板，请完成以下步骤：
 
-1. 如果从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
+1. 如果从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行以下命令，切换到 Resource Manager 模式：
 
         azure config mode arm
@@ -390,7 +389,7 @@
 	        data:
 	        info:    group show command OK
 
-> [AZURE.TIP]
+> [!TIP]
 如果看不到所有资源，可运行 `azure group deployment show` 命令以确保部署的预配状态为“成功”。
 > 
 

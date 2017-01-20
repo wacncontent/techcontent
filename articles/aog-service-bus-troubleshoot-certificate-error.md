@@ -1,12 +1,17 @@
-<properties 
-	pageTitle="Azure Web 应用连接 Service Bus 出现证书错误的解决方案" 
-	description="Azure Web 应用连接 Service Bus 出现证书错误的解决方案" 
-	services="" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="service-bus-aog" ms.date="" wacn.date="11/23/2016"/>
+---
+title: Azure Web 应用连接 Service Bus 出现证书错误的解决方案
+description: Azure Web 应用连接 Service Bus 出现证书错误的解决方案
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: service-bus-aog
+ms.date: 
+wacn.date: 11/23/2016
+---
+
 # Azure Web 应用连接 Service Bus 出现证书错误的解决方案
 
 ##问题描述：

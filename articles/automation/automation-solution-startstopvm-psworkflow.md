@@ -1,22 +1,21 @@
-<properties 
-	pageTitle="通过 Azure 自动化启动和停止虚拟机 - PowerShell 工作流 | Azure"
-	description="Azure 自动化方案的图形版本，包括启动和停止经典虚拟机所需的 Runbook。"
-	services="automation"
-	documentationCenter=""
-	authors="mgoedtel"
-	manager="jwhit"
-	editor="tysonn" />  
+---
+title: 通过 Azure 自动化启动和停止虚拟机 - PowerShell 工作流 | Azure
+description: Azure 自动化方案的图形版本，包括启动和停止经典虚拟机所需的 Runbook。
+services: automation
+documentationCenter: 
+authors: mgoedtel
+manager: jwhit
+editor: tysonn
 
-<tags 
-	ms.service="automation"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="infrastructure-services"
-	ms.date="07/06/2016"
-	wacn.date="01/03/2017"
-	ms.author="bwren" />  
-
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 07/06/2016
+wacn.date: 01/03/2017
+ms.author: bwren
+---
 
 # Azure 自动化方案 - 启动和停止虚拟机
 
@@ -27,7 +26,7 @@
 - 从另一作为整体解决方案一部分的 Runbook 调用 Runbook。
 - 使用 Runbook 作为教程来学习 Runbook 创作概念。
 
-[AZURE.INCLUDE [automation-azurechinacloud-environment-parameter](../../includes/automation-azurechinacloud-environment-parameter.md)]
+[!INCLUDE [automation-azurechinacloud-environment-parameter](../../includes/automation-azurechinacloud-environment-parameter.md)]
 
 ## 获取方案
 
@@ -38,12 +37,11 @@
 | Start-AzureVMs | [启动 Azure 经典 VM](https://gallery.technet.microsoft.com/Start-Azure-Classic-VMs-86ef746b) | PowerShell 工作流 | 启动 Azure 订阅者中的所有经典虚拟机，或者启动所有具有特定服务名称的虚拟机。 |
 | Stop-AzureVMs | [停止 Azure 经典 VM](https://gallery.technet.microsoft.com/Stop-Azure-Classic-VMs-7a4ae43e) | PowerShell 工作流 | 停止自动化帐户中的所有虚拟机，或者停止所有具有特定服务名称的虚拟机。 |
 
-
 ## <a id="installing-and-configuring-the-scenario" name="installing-the-solution"></a> 安装和配置方案
 
 ### 1\.安装 Runbook
 
-下载 Runbook 之后，你可以使用[导入 Runbook](/documentation/articles/automation-creating-importing-runbook/#ImportRunbook) 中的流程来导入它们。
+下载 Runbook 之后，你可以使用[导入 Runbook](./automation-creating-importing-runbook.md#ImportRunbook) 中的流程来导入它们。
 
 ### 2\.查看说明和要求
 Runbook 包括带注释的帮助文本，其中包括说明和所需的资产。你也可以从本文中获取相同的信息。
@@ -70,7 +68,7 @@ Runbook 需要以下资产，你必须创建这些资产并在其中填充适当
 
 ### 启动 Runbook
 
-你可以使用[在 Azure 自动化中启动 Runbook](/documentation/articles/automation-starting-a-runbook/) 中的任何方法来启动此方案中的任一 Runbook。
+你可以使用[在 Azure 自动化中启动 Runbook](./automation-starting-a-runbook.md) 中的任何方法来启动此方案中的任一 Runbook。
 
 以下示例命令使用 Windows PowerShell 来运行 **StartAzureVMs**，以便启动服务名称为 *MyVMService* 的所有虚拟机。
 
@@ -79,7 +77,7 @@ Runbook 需要以下资产，你必须创建这些资产并在其中填充适当
 
 ### 输出
 
-这些 Runbook 会为每个虚拟机[输出一条消息](/documentation/articles/automation-runbook-output-and-messages/)，指示是否已成功提交启动或停止指令。你可以在输出中查找特定字符串，以确定每个 Runbook 的结果。可能的输出字符串列在下表中。
+这些 Runbook 会为每个虚拟机[输出一条消息](./automation-runbook-output-and-messages.md)，指示是否已成功提交启动或停止指令。你可以在输出中查找特定字符串，以确定每个 Runbook 的结果。可能的输出字符串列在下表中。
 
 | Runbook | 条件 | 消息 |
 |:---|:---|:---|
@@ -101,7 +99,6 @@ Runbook 需要以下资产，你必须创建这些资产并在其中填充适当
 			# Action to take in case of error.
 		}
 	}
-
 
 ## 明细
 
@@ -127,7 +124,7 @@ Runbook 需要以下资产，你必须创建这些资产并在其中填充适当
     # Returns strings with status messages
     [OutputType([String])]
 
-此行声明 Runbook 的输出将是一个字符串。这不是必需的，但在将 Runbook 用作[子 Runbook](/documentation/articles/automation-child-runbooks/) 的情况下，这是一种最佳做法，可以让父 Runbook 了解应该期望哪种输出类型。
+此行声明 Runbook 的输出将是一个字符串。这不是必需的，但在将 Runbook 用作[子 Runbook](./automation-child-runbooks.md) 的情况下，这是一种最佳做法，可以让父 Runbook 了解应该期望哪种输出类型。
 
 ### 身份验证
 
@@ -186,10 +183,9 @@ Runbook 需要以下资产，你必须创建这些资产并在其中填充适当
 
 后续行将在每个虚拟机中执行。首先会检查虚拟机的 **PowerState**，看其是处于运行还是停止状态，具体取决于 Runbook。如果该虚拟机已处于目标状态，则会将消息发送到输出中，Runbook 结束。如果该虚拟机尚未处于目标状态，则会使用 **Start-AzureVM** 或 **Stop-AzureVM** 来尝试启动或停止虚拟机，其结果就是将请求存储到某个变量中。然后会将一条消息发送到输出，指出是否已成功提交启动或停止请求。
 
-
 ## 后续步骤
 
-- 若要了解有关使用子 Runbook 的详细信息，请参阅 [Child runbooks in Azure Automation](/documentation/articles/automation-child-runbooks/)（Azure 自动化中的子 Runbook）
-- 若要详细了解执行 Runbook 期间的输出消息和日志记录以帮助进行故障排除，请参阅 [Runbook output and messages in Azure Automation](/documentation/articles/automation-runbook-output-and-messages/)（Azure 自动化中的 Runbook 输出和消息）
+- 若要了解有关使用子 Runbook 的详细信息，请参阅 [Child runbooks in Azure Automation](./automation-child-runbooks.md)（Azure 自动化中的子 Runbook）
+- 若要详细了解执行 Runbook 期间的输出消息和日志记录以帮助进行故障排除，请参阅 [Runbook output and messages in Azure Automation](./automation-runbook-output-and-messages.md)（Azure 自动化中的 Runbook 输出和消息）
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

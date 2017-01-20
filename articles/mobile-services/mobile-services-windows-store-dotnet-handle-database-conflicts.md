@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="利用乐观并发处理数据库写入冲突（Windows 应用商店）| Azure" 
-	description="了解如何处理服务器上和 Windows 应用商店应用程序中的数据库写入冲突。" 
-	documentationCenter="windows" 
-	authors="wesmc7777" 
-	manager="dwrede" 
-	editor="" 
-	services="mobile-services"/>
+---
+title: 利用乐观并发处理数据库写入冲突（Windows 应用商店）| Azure
+description: 了解如何处理服务器上和 Windows 应用商店应用程序中的数据库写入冲突。
+documentationCenter: windows
+authors: wesmc7777
+manager: dwrede
+editor: 
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="wesmc"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: wesmc
+---
 
 # 处理数据库写入冲突
 
@@ -24,7 +24,6 @@
 本教程旨在帮助你更好地理解在两个或两个以上客户端写入 Windows 应用商店应用程序中的同一条数据库记录时，如何处理发生的冲突。在某些情况下，两个或两个以上客户端可能会同时将更改写入同一项目。如果没有任何冲突检测，则最后一次写入会覆盖任何以前的更新，即使这并不是所需要的结果。Azure 移动服务为检测和解决这些冲突提供支持。本主题将指导你完成用于处理服务器上和应用程序中数据库写入冲突的步骤。
 
 在本教程中，你将向快速入门应用添加功能以处理更新 TodoItem 数据库时可能发生的争用。
-
 
 ##先决条件
 
@@ -42,13 +41,9 @@
 
 		![][20]
 
-
- 
-
 ##更新应用程序以允许更新
 
 在本节中，你将更新 TodoList 用户界面，以便更新列表框控件中每个项目的文本。列表框将包含针对数据库表中每个项目的复选框和文本框控件。你将能够更新 TodoItem 的文本字段。应用程序将处理该文本框的 `LostFocus` 事件以更新数据库中的项目。
-
 
 1. 在 Visual Studio 中，打开在[移动服务入门]教程中下载的 TodoList 项目。
 2. 在 Visual Studio 解决方案资源管理器中，打开 MainPage.xaml 并将 `ListView` 定义替换为下面所示的 `ListView` 并保存更改。
@@ -64,9 +59,7 @@
 			</ListView.ItemTemplate>
 		</ListView>
 
-
 3. 在 Visual Studio 解决方案资源管理器中，打开共享项目中的 MainPage.cs。将事件处理程序添加到 TextBox `LostFocus` 事件的 MainPage，如下所示。
-
 
         private async void ToDoText_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -119,13 +112,12 @@
 			public string Version { set; get; }
 		}
 
-	> [AZURE.NOTE]使用非类型表时，请通过将 Version 标志添加到表的 SystemProperties 来启用乐观并发。
+	> [!NOTE]使用非类型表时，请通过将 Version 标志添加到表的 SystemProperties 来启用乐观并发。
 	>
 	>`````
 	>//Enable optimistic concurrency by retrieving __version
 	>todoTable.SystemProperties |= MobileServiceSystemProperties.Version;
 	>`````
-
 
 2. 将 `Version` 属性添加到 `TodoItem` 类后，如果记录自上次查询以来已更改，则在更新期间将通过 `MobileServicePreconditionFailedException` 异常通知应用程序。此异常包括服务器中该项目的最新版本。在共享项目的 MainPage.cs 中，添加以下代码以在 `UpdateToDoItem()` 方法中处理异常。
 
@@ -160,9 +152,7 @@
             }
         }
 
-
 3. 在 MainPage.cs 中，添加在 `UpdateToDoItem()` 中引用的 `ResolveConflict()` 方法的定义。请注意，为了解决冲突，在提交用户的决定之前，请将本地项目的版本设置为服务器中的已更新版本。否则，你将不断遇到冲突。
-
 
         private async Task ResolveConflict(TodoItem localItem, TodoItem serverItem)
         {
@@ -191,12 +181,9 @@
             await msgDialog.ShowAsync();
         }
 
-
-
 ##测试应用程序中的数据库写入冲突
 
 在本节中，你将生成 Windows 应用商店应用程序包，以便在第二台计算机或虚拟机上安装应用程序。然后，你将在这两台计算机上运行应用程序，并生成写入冲突以测试代码。应用的两个实例将尝试更新同一项目的 `text` 属性，因此需要用户解决该冲突。
-
 
 1. 创建 Windows 应用商店应用程序包，以便在第二台计算机或虚拟机上进行安装。为此，请在 Visual Studio 中单击“项目”->“应用商店”->“创建应用程序包”。
 
@@ -226,7 +213,6 @@
 	应用实例 2	
 	![][2]
 
-
 7. 在应用实例 1 中，将最后一个项目的文本更新为“Test Write 1”，然后单击另一个文本框，以使 `LostFocus` 事件处理程序更新数据库。下面的屏幕快照显示了一个示例。
 	
 	应用实例 1	
@@ -250,8 +236,6 @@
 
 	应用实例 2	
 	![][6]
-
-
 
 ##使用服务器脚本自动解决冲突
 
@@ -331,8 +315,6 @@
 	应用实例 2	
 	![][18]
  
-
-
 <!-- Images. -->
 [0]: ./media/mobile-services-windows-store-dotnet-handle-database-conflicts/Mobile-oc-store-create-app-package1.png
 [1]: ./media/mobile-services-windows-store-dotnet-handle-database-conflicts/Mobile-oc-store-create-app-package2.png
@@ -358,12 +340,12 @@
 
 <!-- URLs. -->
 [乐观并发控制]: http://go.microsoft.com/fwlink/?LinkId=330935
-[Get started with Mobile Services]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/#create-new-service
-[Azure 帐户]: /pricing/1rmb-trial/
+[Get started with Mobile Services]: ./mobile-services-javascript-backend-windows-store-dotnet-get-started.md#create-new-service
+[Azure 帐户]: https://www.azure.cn/pricing/1rmb-trial/
 [Validate and modify data with scripts]: /documentation/articles/mobile-services-windows-store-dotnet-validate-modify-data-server-scripts/
 [Refine queries with paging]: /documentation/articles/mobile-services-windows-store-dotnet-add-paging-data/
-[完成移动服务入门]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/
-[移动服务入门]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/
+[完成移动服务入门]: ./mobile-services-javascript-backend-windows-store-dotnet-get-started.md
+[移动服务入门]: ./mobile-services-javascript-backend-windows-store-dotnet-get-started.md
 [Get started with data]: /documentation/articles/mobile-services-windows-store-dotnet-get-started-data/
 [向应用程序添加身份验证]: /documentation/articles/mobile-services-windows-store-dotnet-get-started-users/
 

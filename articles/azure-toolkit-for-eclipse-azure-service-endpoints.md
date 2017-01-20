@@ -1,21 +1,21 @@
-<properties
-    pageTitle="Azure 服务终结点"
-    description="介绍 Azure Toolkit for Eclipse 中的 Azure 服务终结点设置。"
-    services=""
-    documentationCenter="java"
-    authors="rmcmurray"
-    manager="wpickett"
-    editor=""/>
+---
+title: Azure 服务终结点
+description: 介绍 Azure Toolkit for Eclipse 中的 Azure 服务终结点设置。
+services: 
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="11/01/2016" 
-    wacn.date="12/05/2016" 
-    ms.author="robmcm"/>
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/05/2016
+ms.author: robmcm
+---
 
 <!-- Legacy MSDN URL = https://msdn.microsoft.com/library/azure/dn268600.aspx -->
 
@@ -55,13 +55,12 @@ Azure 服务终结点确定你的应用程序是在全球 Azure 平台管理、�
 <!-- URL List -->
 
 [Azure Java 开发人员中心]: /develop/java/
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
 
 <!-- IMG List -->
 
 [ic719493]: ./media/azure-toolkit-for-eclipse-azure-service-endpoints/ic719493.png
-
 
 <!---HONumber=Mooncake_1128_2016-->

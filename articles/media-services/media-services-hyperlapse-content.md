@@ -1,36 +1,33 @@
-<properties
-	pageTitle="Hyperlapse 媒体文件与 Azure Media Hyperlapse"
-	description="Azure Media Hyperlapse 可以使用第一人称视角或运动相机内容创建流畅缩时视频。本主题说明如何使用 Media Indexer。"
-	services="media-services"
-	documentationCenter=""
-	authors="asolanki"
-	manager="johndeu"
-	editor=""/>
+---
+title: Hyperlapse 媒体文件与 Azure Media Hyperlapse
+description: Azure Media Hyperlapse 可以使用第一人称视角或运动相机内容创建流畅缩时视频。本主题说明如何使用 Media Indexer。
+services: media-services
+documentationCenter: 
+authors: asolanki
+manager: johndeu
+editor: 
 
-<tags
-	ms.service="media-services"
-	ms.workload="media"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="09/19/2016"  
-	wacn.date="11/21/2016"  
-	ms.author="adsolank"/>  
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 09/19/2016
+wacn.date: 11/21/2016
+ms.author: adsolank
+---
 
 # Hyperlapse 媒体文件与 Azure Media Hyperlapse
 
 Azure Media Hyperlapse 是可以使用第一人称视角或运动相机内容创建流畅缩时视频的媒体处理器 (MP)。Azure 媒体服务的基于云的 Microsoft Hyperlapse 与 [Microsoft Research 的桌面 Hyperlapse Pro 和手机版 Hyperlapse Mobile](http://aka.ms/hyperlapse) 相似，它运用大规模的 Azure 媒体服务媒体处理平台来实现水平缩放，以及并行化批量 Hyperlapse 处理。
 
->[AZURE.IMPORTANT]Microsoft Hyperlapse 最适合用于通过移动相机拍摄第一人称视角内容。尽管静态相机镜头仍可运行，但 Azure 媒体 Hyperlapse 媒体处理器无法保证其他类型内容的性能及质量。若要深入了解 Azure 媒体服务的 Microsoft Hyperlapse 并观看一些示例视频，请查看公开预览版的[简介博客文章](http://aka.ms/azurehyperlapseblog)。
+>[!IMPORTANT]Microsoft Hyperlapse 最适合用于通过移动相机拍摄第一人称视角内容。尽管静态相机镜头仍可运行，但 Azure 媒体 Hyperlapse 媒体处理器无法保证其他类型内容的性能及质量。若要深入了解 Azure 媒体服务的 Microsoft Hyperlapse 并观看一些示例视频，请查看公开预览版的[简介博客文章](http://aka.ms/azurehyperlapseblog)。
 
 Azure Media Hyperlapse 作业接受输入 MP4、MOV 或 WMV 资产文件以及配置文件，以指定视频中要缩时的帧及其速度（例如前 10,000 帧的速度为 2x）。输出是输入视频经过稳定和缩时转译的结果。
 
-
-
 ## 将资产进行 Hyperlapse 处理
 
-首先，请将所需的输入文件上传到 Azure 媒体服务。若要深入了解有关上传和管理内容的概念，请阅读[内容管理文章](/documentation/articles/media-services-manage-content/#upload)。
+首先，请将所需的输入文件上传到 Azure 媒体服务。若要深入了解有关上传和管理内容的概念，请阅读[内容管理文章](./media-services-manage-content.md#upload)。
 
 ###  <a id="configuration"></a>Hyperlapse 的配置预设
 
@@ -76,9 +73,9 @@ Speed|用于加速输入视频的倍数。
 
 以下方法将媒体文件上传为资产，然后使用 Azure Media Hyperlapse 媒体处理器来创建作业。
 
-> [AZURE.NOTE] 为了使代码正常工作，应该事先在名为“context”的作用域中创建 CloudMediaContext。若要了解详细信息，请阅读[内容管理文章](/documentation/articles/media-services-dotnet-get-started/)。
+> [!NOTE] 为了使代码正常工作，应该事先在名为“context”的作用域中创建 CloudMediaContext。若要了解详细信息，请阅读[内容管理文章](./media-services-dotnet-get-started.md)。
 
-> [AZURE.NOTE] 字符串参数“hyperConfig”应是上述采用 JSON 或 XML 格式且符合要求的配置预设。
+> [!NOTE] 字符串参数“hyperConfig”应是上述采用 JSON 或 XML 格式且符合要求的配置预设。
 
 	static bool RunHyperlapseJob(string input, string output, string hyperConfig)
 	{
@@ -112,7 +109,6 @@ Speed|用于加速输入视频的倍数。
 		hyperlapseTask.InputAssets.Add(asset);
 		hyperlapseTask.OutputAssets.AddNew("Hyperlapse output",
 											AssetCreationOptions.None);
-
 
 		job.Submit();
 
@@ -167,7 +163,6 @@ Speed|用于加速输入视频的倍数。
 		}
 	}
 
-
 	static IAsset CreateAssetAndUploadSingleFile(string filePath, string assetName, AssetCreationOptions options)
 	{
 	    IAsset asset = context.Assets.Create(assetName, options);
@@ -199,20 +194,9 @@ Speed|用于加速输入视频的倍数。
 - MOV
 - WMV
 
-
-
-
-
-
-
-
-
-
-
-
 ##相关链接
 
-[Azure 媒体服务分析概述](/documentation/articles/media-services-analytics-overview/)
+[Azure 媒体服务分析概述](./media-services-analytics-overview.md)
 
 [Azure 媒体分析演示](http://azuremedialabs.azurewebsites.net/demos/Analytics.html)
 

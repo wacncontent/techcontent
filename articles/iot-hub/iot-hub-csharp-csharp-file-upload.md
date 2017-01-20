@@ -1,22 +1,21 @@
-<properties
-	pageTitle="使用 IoT 中心从设备上载文件 | Microsoft Azure"
-	description="遵照本教程了解如何将 Azure IoT 中心与 C# 配合使用，以从设备上载文件。"
-	services="iot-hub"
-	documentationCenter=".net"
-	authors="fsautomata"
-	manager="timlt"
-	editor=""/>  
+---
+title: 使用 IoT 中心从设备上载文件 | Microsoft Azure
+description: 遵照本教程了解如何将 Azure IoT 中心与 C# 配合使用，以从设备上载文件。
+services: iot-hub
+documentationCenter: .net
+authors: fsautomata
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-hub"
-     ms.devlang="dotnet"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="06/21/2016"
-     wacn.date="01/04/2017"
-     ms.author="elioda"/>  
+ms.service: iot-hub
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 06/21/2016
+wacn.date: 01/04/2017
+ms.author: elioda
+---
 
 # 教程：如何使用 IoT 中心将文件从设备上载到云中
 
@@ -31,13 +30,13 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
 * **SimulatedDevice**，这是 [Send Cloud-to-Device messages with IoT Hub]（使用 IoT 中心发送云到设备的消息）教程中创建的应用的修改版本，它可以使用 IoT 中心提供的 SAS URI 将文件上载到存储。
 * **ReadFileUploadNotification**，它可以接收来自 IoT 中心的文件上载通知。
 
-> [AZURE.NOTE] IoT 中心通过 Azure IoT 设备 SDK 来支持许多设备平台和语言（包括 C、Java 和 Javascript）。有关如何将设备连接到本教程中所示的代码（通常是连接到 Azure IoT 中心）的逐步说明，请参阅 [Azure IoT Developer Center]（Azure IoT 开发人员中心）。
+> [!NOTE] IoT 中心通过 Azure IoT 设备 SDK 来支持许多设备平台和语言（包括 C、Java 和 Javascript）。有关如何将设备连接到本教程中所示的代码（通常是连接到 Azure IoT 中心）的逐步说明，请参阅 [Azure IoT Developer Center]（Azure IoT 开发人员中心）。
 
 完成本教程需要具备以下项：
 
 + Microsoft Visual Studio 2015。
 
-+ 有效的 Azure 帐户。<br/>如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/)。
++ 有效的 Azure 帐户。<br/>如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 ## 将 Azure 存储帐户关联到 IoT 中心
 
@@ -82,7 +81,7 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
 
         SendToBlobAsync();
 
-> [AZURE.NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+> [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 接收文件上载通知
 
@@ -148,7 +147,6 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
 
     ![][50]
 
-
 ## 后续步骤
 
 在本教程中，你已学习如何利用 IoT 中心的文件上载功能来帮助从设备上载文件。可以使用以下文章继续探索 IoT 中心功能和方案：
@@ -163,34 +161,31 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
 
 <!-- Images. -->
 
-
 [50]: ./media/iot-hub-csharp-csharp-file-upload/run-apps1.png
 [1]: ./media/iot-hub-csharp-csharp-file-upload/image-properties.png
 [2]: ./media/iot-hub-csharp-csharp-file-upload/create-identity-csharp1.png
 
 <!-- Links -->
 
-
 [Azure 门户预览]: https://portal.azure.cn/
 
+[Hadoop]: ../hdinsight/index.md/
 
-[Hadoop]: /documentation/services/hdinsight/
-
-[Send Cloud-to-Device messages with IoT Hub]: /documentation/articles/iot-hub-csharp-csharp-c2d/
-[Process Device-to-Cloud messages]: /documentation/articles/iot-hub-csharp-csharp-process-d2c/
-[Get started with IoT Hub]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
+[Send Cloud-to-Device messages with IoT Hub]: ./iot-hub-csharp-csharp-c2d.md
+[Process Device-to-Cloud messages]: ./iot-hub-csharp-csharp-process-d2c.md
+[Get started with IoT Hub]: ./iot-hub-csharp-csharp-getstarted.md
 [Azure IoT Developer Center]: /develop/iot
 
 [Transient Fault Handling]: https://msdn.microsoft.com/zh-cn/library/hh680901(v=pandp.50).aspx
-[Azure 存储]: /documentation/articles/storage-create-storage-account/#create-a-storage-account
-[lnk-configure-upload]: /documentation/articles/iot-hub-configure-file-upload/
+[Azure 存储]: ../storage/storage-create-storage-account.md#create-a-storage-account
+[lnk-configure-upload]: ./iot-hub-configure-file-upload.md
 [Azure IoT - 服务 SDK NuGet 包]: https://www.nuget.org/packages/Microsoft.Azure.Devices/
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 
-[lnk-create-hub]: /documentation/articles/iot-hub-rm-template-powershell/
-[lnk-c-sdk]: /documentation/articles/iot-hub-device-sdk-c-intro/
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
+[lnk-create-hub]: ./iot-hub-rm-template-powershell.md
+[lnk-c-sdk]: ./iot-hub-device-sdk-c-intro.md
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
 
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

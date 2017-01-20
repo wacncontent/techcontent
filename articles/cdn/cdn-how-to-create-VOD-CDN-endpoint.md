@@ -1,22 +1,36 @@
-<properties linkid="dev-net-common-tasks-cdn" urlDisplayName="CDN" pageTitle="How to create VOD acceleration type CDN - Azure feature guide" metaKeywords="Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN加速,CDN服务,主流CDN, VOD, 视频点播加速, VOD加速, 缓存规则, 媒体服务, Azure Media Service, CDN技术文档, CDN帮助文档" description="Learn How to create VOD acceleration type CDN on Azure Management Portal and default caching rules for VOD CDN" metaCanonical="" services="" documentationCenter=".NET" title="" authors="" solutions="" manager="" editor="" />
-<tags ms.service="cdn"
-    ms.date="7/7/2016"
-    wacn.date="7/7/2016"
-    wacn.lang="cn"
-    />
-> [AZURE.LANGUAGE]
-- [中文](/documentation/articles/cdn-how-to-create-VOD-CDN-endpoint/)
-- [English](/documentation/articles/cdn-enus-how-to-create-VOD-CDN-endpoint/) 
-#VOD视频点播加速CDN节点创建
+---
+linkid: dev-net-common-tasks-cdn
+urlDisplayName: CDN
+title: How to create VOD acceleration type CDN - Azure feature guide
+metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN加速,CDN服务,主流CDN, VOD, 视频点播加速, VOD加速, 缓存规则, 媒体服务, Azure Media Service, CDN技术文档, CDN帮助文档
+description: Learn How to create VOD acceleration type CDN on Azure Management Portal and default caching rules for VOD CDN
+metaCanonical: 
+services: 
+documentationCenter: .NET
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
+ms.service: cdn
+ms.date: 7/7/2016
+wacn.date: 7/7/2016
+wacn.lang: cn
+---
+
+> [AZURE.LANGUAGE]
+- [中文](./cdn-how-to-create-VOD-CDN-endpoint.md)
+- [English](./cdn-enus-how-to-create-VOD-CDN-endpoint.md) 
+#VOD视频点播加速CDN节点创建
 
 VOD视频点播加速服务主要针对在线音视频点播提供加速服务。随着网路视频媒体服务的兴起，越来越多的用户选择使用网络平台收听观看各种音视频。加之国内网络环境的限制，对音视频内容的最终分发提出了非常高的要求。Azure CDN将音频、视频等流媒体内容分发缓存到CDN边缘节点，将用户请求指向最优节点，减少源站服务器的负载，节省带宽资源，给用户提供高速、流畅、高质量的在线视频体验。
 
-Azure CDN VOD视频点播加速支持Azure内置的[媒体服务](/home/features/media-services/)。
+Azure CDN VOD视频点播加速支持Azure内置的[媒体服务](https://www.azure.cn/home/features/media-services/)。
 
 VOD视频点播加速适用于各类在线音视频点播网站，如媒体类视频网站，在线教育网站，移动端APP客户端等。
 
-本文是针对VOD视频点播加速域名创建，您也可以参考[使用Azure CDN](/documentation/articles/cdn-how-to-use/)了解基本的Azure CDN加速节点创建信息。
+本文是针对VOD视频点播加速域名创建，您也可以参考[使用Azure CDN](./cdn-how-to-use.md)了解基本的Azure CDN加速节点创建信息。
 
 ###**视频点播加速默认缓存规则**
 Azure CDN针对VOD视频点播加速设置了默认缓存规则（见下文）。您也可以根据需求自定义设置缓存规则，具体请参考Azure CDN管理门户高级管理的帮助文档“域名管理”。如果源站内容更改或者更新，同时设置的缓存生存时间未到期，可以通过手动刷新CDN缓存文件实时同步源站更新的内容，具体请参考Azure CDN管理门户高级管理的帮助文档“缓存刷新”。
@@ -67,5 +81,5 @@ Azure CDN针对VOD视频点播加速设置了默认缓存规则（见下文）�
 
    ![022](./media/cdn-doc/022.png)
 
->**注意** 为终结点创建的配置将不能立即可用，需要审核所提供的ICP自定义域名和ICP编号是否匹配，详情请参考[使用Azure CDN](/documentation/articles/cdn-how-to-use/)中步骤2：创建新的CDN终结点的后半部分。
+>**注意** 为终结点创建的配置将不能立即可用，需要审核所提供的ICP自定义域名和ICP编号是否匹配，详情请参考[使用Azure CDN](./cdn-how-to-use.md)中步骤2：创建新的CDN终结点的后半部分。
 

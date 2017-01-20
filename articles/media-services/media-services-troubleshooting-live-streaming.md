@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="实时流式处理故障排除指南 | Azure" 
-	description="本主题提供有关如何排查实时流式处理问题的建议。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 实时流式处理故障排除指南 | Azure
+description: 本主题提供有关如何排查实时流式处理问题的建议。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="10/12/2016"  
-	wacn.date="12/16/2016"  
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/12/2016
+wacn.date: 12/16/2016
+ms.author: juliako
+---
 
 #实时流式处理故障排除指南
 
@@ -55,7 +53,6 @@
 
 	**故障排除步骤**：通过 RTMP 流式处理时，请检查防火墙和/或代理设置，确认出站端口 1935 和 1936 已打开。使用 RTP 流式处理时，请确认出站端口 2010 已打开。
 
-
 ###问题：在配置编码器以使用 RTP 协议流式处理时，没有可用于输入主机名的位置。 
 
 - **潜在问题**：许多 RTP 编码器不允许使用主机名，需要获取 IP 地址。
@@ -76,6 +73,6 @@
 
 	**故障排除步骤**：在 AMSE 工具中导航到“流式处理终结点”选项卡，确认包含一个流式处理单位的流式处理终结点正在运行。
 	
->[AZURE.NOTE] 如果遵循故障排除步骤后仍然无法成功流式处理，请[在线申请支持](/support/support-ticket-form/?l=zh-cn)创建工单。
+>[!NOTE] 如果遵循故障排除步骤后仍然无法成功流式处理，请[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

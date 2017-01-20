@@ -1,26 +1,26 @@
-<properties
- pageTitle="使用 HDInsight 上的 Storm 和 HBase 按时间关联事件"
- description="了解如何使用 HDInsight 上的 Storm 和 HBase 将不同时间到达的事件关联起来。"
- services="hdinsight"
- documentationCenter=""
- authors="Blackmist"
- manager="paulettm"
- editor="cgronlun"
- tags="azure-portal"/>
+---
+title: 使用 HDInsight 上的 Storm 和 HBase 按时间关联事件
+description: 了解如何使用 HDInsight 上的 Storm 和 HBase 将不同时间到达的事件关联起来。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
- ms.service="hdinsight"
- ms.devlang="dotnet"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="big-data"
- ms.date="11/18/2016"
- wacn.date="12/30/2016"
- ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 11/18/2016
+wacn.date: 12/30/2016
+ms.author: larryfr
+---
 
 # 使用 HDInsight 上的 Storm 和 HBase 按时间关联事件
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 通过使用 Apache Storm 的持久数据存储，可以将不同时间到达的数据条目关联起来。例如，将用户会话的登录事件和注销事件关联起来，即可计算该会话的持续时间。
 
@@ -28,7 +28,7 @@
 
 ## 先决条件
 
--	Visual Studio 和适用于 Visual Studio 的 HDInsight 工具：有关安装信息，请参阅[开始使用适用于 Visual Studio 的 HDInsight 工具](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/)。
+-	Visual Studio 和适用于 Visual Studio 的 HDInsight 工具：有关安装信息，请参阅[开始使用适用于 Visual Studio 的 HDInsight 工具](./hdinsight-hadoop-visual-studio-tools-get-started.md)。
 
 -	Apache Storm on HDInsight 群集（基于 Windows）。这将运行 Storm 拓扑，以便处理传入的数据并将其存储在 HBase 中。
 
@@ -60,7 +60,7 @@
 
 会话启动时，**开始**事件将通过拓扑接收，然后记录到 HBase。收到**结束**事件后，拓扑会检索**开始**事件并计算两个事件之间的时间。然后会将此**持续时间**值存储到 HBase 中，同时存储的还有**结束**事件信息。
 
-> [AZURE.IMPORTANT] 虽然此拓扑演示了基本的模式，但生产型解决方案需要针对以下情况进行设计：
+> [!IMPORTANT] 虽然此拓扑演示了基本的模式，但生产型解决方案需要针对以下情况进行设计：
 ><p> - 事件在到达时混乱无序
 ><p> - 重复的事件
 ><p> - 删除的事件
@@ -93,7 +93,7 @@
 
 -	版本：“cf”系列设置为每行保留 5 个版本
 
-	> [AZURE.NOTE] 可以使用版本来记录以前为特定行键存储的值。默认情况下，HBase 只返回行的最新版本的值。在这种情况下，同一行将用于所有事件（开始、结束）。每个版本的行通过时间戳值来标识。这样即可通过历史视图来查看针对特定 ID 记录的事件。
+	> [!NOTE] 可以使用版本来记录以前为特定行键存储的值。默认情况下，HBase 只返回行的最新版本的值。在这种情况下，同一行将用于所有事件（开始、结束）。每个版本的行通过时间戳值来标识。这样即可通过历史视图来查看针对特定 ID 记录的事件。
 
 ## 下载项目
 
@@ -147,7 +147,7 @@
 
 	- 	HBaseTableColumnFamily：列系列名称。该名称包含的列系列名称应该与 SessionInfo 项目中使用的相同
 
-	> [AZURE.IMPORTANT] 请勿更改 HBaseTableColumnNames，因为其默认值是 **SessionInfo** 用来检索数据的名称。
+	> [!IMPORTANT] 请勿更改 HBaseTableColumnNames，因为其默认值是 **SessionInfo** 用来检索数据的名称。
 
 4.  保存属性，然后生成项目。
 
@@ -157,7 +157,7 @@
 
 6.	在“提交拓扑”对话框中，选择将运行此拓扑的 Storm 群集。
 
-	> [AZURE.NOTE] 第一次提交拓扑时，可能需要几秒钟来检索 HDInsight 群集名称。
+	> [!NOTE] 第一次提交拓扑时，可能需要几秒钟来检索 HDInsight 群集名称。
 
 7.	一旦上载拓扑并将其提交到该群集，“Storm 拓扑视图”将打开并显示正在运行的拓扑。选择 **CorrelationTopology**，然后使用页面右上角的刷新按钮刷新拓扑信息。
 
@@ -165,7 +165,7 @@
 
 	当拓扑开始生成数据时，“已发出”列中的值将递增。
 
-	> [AZURE.NOTE] 如果“Storm 拓扑视图”未自动打开，可按以下步骤将其打开：
+	> [!NOTE] 如果“Storm 拓扑视图”未自动打开，可按以下步骤将其打开：
 	><p>
 	><p> 1. 在“解决方案资源管理器”中，展开“Azure”，然后展开“HDInsight”。
 	><p>
@@ -189,7 +189,7 @@
 
 	Session fc9fa8e6-6892-4073-93b3-a587040d892e lasted 2 minutes, and ended at 6/5/2015 6:12:15 PM
 
-> [AZURE.NOTE] 虽然输入的时间值为本地时间，但从查询返回的时间将是 UTC。
+> [!NOTE] 虽然输入的时间值为本地时间，但从查询返回的时间将是 UTC。
 
 ##停止拓扑
 
@@ -197,10 +197,10 @@
 
 ##删除群集
 
-[AZURE.INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
+[!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
 
 ##后续步骤
 
-如需更多 Storm 示例，请参阅 [Storm on HDInsight 拓扑示例](/documentation/articles/hdinsight-storm-example-topology/)。
+如需更多 Storm 示例，请参阅 [Storm on HDInsight 拓扑示例](./hdinsight-storm-example-topology.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

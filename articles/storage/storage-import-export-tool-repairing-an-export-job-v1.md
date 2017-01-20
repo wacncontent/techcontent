@@ -1,23 +1,22 @@
-<properties
-    pageTitle="修复导出作业 | Azure"
-    description="了解如何使用 Azure 导入/导出服务修复已创建和运行的导出作业。"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 修复导出作业 | Azure
+description: 了解如何使用 Azure 导入/导出服务修复已创建和运行的导出作业。
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.assetid="728e2a42-04ce-4be8-9375-e9e2bc6827a5"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="05/25/2015"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.assetid: 728e2a42-04ce-4be8-9375-e9e2bc6827a5
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/25/2015
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 修复导出作业
 在完成导出作业后，可以在本地运行 Azure 导入/导出工具来执行以下操作：
@@ -53,13 +52,10 @@
   
 若要在 **RepairExport** 模式下运行该工具，首先需要将包含已导出文件的驱动器连接到计算机。接下来，运行 Azure 导入/导出工具，并使用 `/d` 参数指定该驱动器的路径。还需要指定已下载的驱动器复制日志文件的路径。以下示例命令行将运行该工具，修复未能导出的所有文件：
   
-
 	WAImportExport.exe RepairExport /r:C:\WAImportExport\9WM35C3U.rep /d:G:\ /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C3U.log  
 
-  
 下面是复制日志文件的一个示例，显示未能导出的 Blob 中的一个块：
   
-
 	<?xml version="1.0" encoding="utf-8"?>  
 	<DriveLog>  
 	  <DriveId>9WM35C2V</DriveId>  
@@ -75,23 +71,19 @@
 	  <Status>CompletedWithErrors</Status>  
 	</DriveLog>  
 
-  
 复制日志文件指示 Azure 导入/导出服务在将 Blob 的某个块下载到导出驱动器上的文件时发生失败。该文件的其他组成部分已成功下载，并且正确设置了文件长度。在本例中，工具将在驱动器上打开该文件，从存储帐户下载该块并将其写入从偏移位置 65536 开始、长度为 65536 的文件范围。
   
 ## 使用 RepairExport 验证驱动器内容  
 还可以使用提供 **RepairExport** 选项的 Azure 导入/导出服务来验证驱动器上的内容是否正确。每个导出驱动器上的清单文件包含驱动器内容的 MD5 哈希。
   
-Azure 导入/导出服务还可以在导出过程中将清单文件保存到某个存储帐户。完成作业后，可通过[获取作业](https://docs.microsoft.com/rest/api/storageservices/importexport/Get-Job3)操作获得清单文件的位置。有关驱动器清单文件格式的详细信息，请参阅[导入/导出服务清单文件格式](/documentation/articles/storage-import-export-file-format-metadata-and-properties/)。
+Azure 导入/导出服务还可以在导出过程中将清单文件保存到某个存储帐户。完成作业后，可通过[获取作业](https://docs.microsoft.com/rest/api/storageservices/importexport/Get-Job3)操作获得清单文件的位置。有关驱动器清单文件格式的详细信息，请参阅[导入/导出服务清单文件格式](./storage-import-export-file-format-metadata-and-properties.md)。
   
 以下示例演示如何结合 **/ManifestFile** 和 **/CopyLogFile** 参数运行 Azure 导入/导出工具：
   
-
 	WAImportExport.exe RepairExport /r:C:\WAImportExport\9WM35C3U.rep /d:G:\ /sn:bobmediaaccount /sk:VkGbrUqBWLYJ6zg1m29VOTrxpBgdNOlp+kp0C9MEdx3GELxmBw4hK94f7KysbbeKLDksg7VoN1W/a5UuM2zNgQ== /CopyLogFile:C:\WAImportExport\9WM35C3U.log /ManifestFile:G:\9WM35C3U.manifest  
 
-  
 下面是清单文件的一个示例：
   
-
 	<?xml version="1.0" encoding="utf-8"?>  
 	<DriveManifest Version="2011-10-01">  
 	  <Drive>  
@@ -125,7 +117,6 @@ Azure 导入/导出服务还可以在导出过程中将清单文件保存到某�
 	 </Drive>  
 	</DriveManifest>  
 
-  
 完成修复过程后，工具将读取在该清单文件中引用的每个文件，并使用 MD5 哈希验证该文件的完整性。对于上面的清单文件，工具将遍历以下组成部分。
   
 G:\\pictures\\city\\redmond.jpg，偏移量 0，长度 3584
@@ -149,10 +140,10 @@ G:\\pictures\\wild\\canyon.jpg.properties
 工具将下载验证失败的所有组成部分，并将其重新写入驱动器上的同一文件。
   
 ## 另请参阅  
-[设置 Azure 导入/导出工具](/documentation/articles/storage-import-export-tool-setup-v1/)
-[为导入作业准备硬盘驱动器](/documentation/articles/storage-import-export-tool-preparing-hard-drives-import-v1/)
-[使用复制日志文件查看作业状态](/documentation/articles/storage-import-export-tool-reviewing-job-status-v1/)
-[修复导入作业](/documentation/articles/storage-import-export-tool-repairing-an-import-job-v1/)
-[排查 Azure 导入/导出工具问题](/documentation/articles/storage-import-export-tool-troubleshooting-v1/)
+[设置 Azure 导入/导出工具](./storage-import-export-tool-setup-v1.md)
+[为导入作业准备硬盘驱动器](./storage-import-export-tool-preparing-hard-drives-import-v1.md)
+[使用复制日志文件查看作业状态](./storage-import-export-tool-reviewing-job-status-v1.md)
+[修复导入作业](./storage-import-export-tool-repairing-an-import-job-v1.md)
+[排查 Azure 导入/导出工具问题](./storage-import-export-tool-troubleshooting-v1.md)
 
 <!---HONumber=Mooncake_1226_2016-->

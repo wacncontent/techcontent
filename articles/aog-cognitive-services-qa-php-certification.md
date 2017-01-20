@@ -1,15 +1,17 @@
-<properties 
-	pageTitle="PHP 调用认知服务证书认证问题" 
-	description="PHP 调用认知服务证书认证问题" 
-	services="cognitive-services" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags 
-	ms.service="cognitive-services-aog"
-	ms.date="" 
-	wacn.date="12/05/2016"/>
+---
+title: PHP 调用认知服务证书认证问题
+description: PHP 调用认知服务证书认证问题
+services: cognitive-services
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: cognitive-services-aog
+ms.date: 
+wacn.date: 12/05/2016
+---
+
 # PHP 调用认知服务证书认证问题 #
 
 ### 问题描述 ###

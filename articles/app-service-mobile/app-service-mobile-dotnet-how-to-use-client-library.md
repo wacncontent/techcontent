@@ -1,26 +1,25 @@
-<properties
-	pageTitle="使用应用服务移动应用托管客户端库 (Windows | Xamarin) | Azure"
-	description="了解如何在 Windows 和 Xamarin 应用中使用 Azure 应用服务移动应用的 .NET 客户端。"
-	services="app-service\mobile"
-	documentationCenter=""
-	authors="adrianhall"
-	manager="erikre"
-	editor=""/>  
+---
+title: 使用应用服务移动应用托管客户端库 (Windows | Xamarin) | Azure
+description: 了解如何在 Windows 和 Xamarin 应用中使用 Azure 应用服务移动应用的 .NET 客户端。
+services: app-service\mobile
+documentationCenter: 
+authors: adrianhall
+manager: erikre
+editor: 
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="12/26/2016"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 12/26/2016
+ms.author: adrianha
+---
 
 # 如何使用 Azure 移动应用的托管客户端
 
-[AZURE.INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
+[!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
 ##概述
 
@@ -131,7 +130,7 @@ C# 中对应的类型化客户端类型为以下类：
 - [选择特定的列](#selecting)
 - [按 ID 查找数据](#lookingup)
 
->[AZURE.NOTE] 将强制使用服务器驱动的页大小来防止返回所有行。分页可以防止对大型数据集发出的默认请求对服务造成负面影响。若要返回 50 个以上的行，请根据[在页中返回数据]所述使用 `Skip` 和 `Take` 方法。
+>[!NOTE] 将强制使用服务器驱动的页大小来防止返回所有行。分页可以防止对大型数据集发出的默认请求对服务造成负面影响。若要返回 50 个以上的行，请根据[在页中返回数据]所述使用 `Skip` 和 `Take` 方法。
 
 ###<a name="filtering"></a>如何筛选返回的数据
 
@@ -224,7 +223,7 @@ C# 中对应的类型化客户端类型为以下类：
 
 在实际应用中，可以搭配页导航控件或类似的 UI 使用类似于上述示例的查询，在页之间导航。
 
->[AZURE.NOTE]若要替代移动应用后端中的 50 行限制，还必须将 [EnableQueryAttribute] 应用到公共 GET 方法，并指定分页行为。将以下语句应用到该方法后，最大返回行数将设置为 1000：
+>[!NOTE]若要替代移动应用后端中的 50 行限制，还必须将 [EnableQueryAttribute] 应用到公共 GET 方法，并指定分页行为。将以下语句应用到该方法后，最大返回行数将设置为 1000：
 >
 >    [EnableQuery(MaxTop=1000)]
 
@@ -358,7 +357,6 @@ C# 中对应的类型化客户端类型为以下类：
         public string Version { set; get; }
     }
 
-
 使用非类型化表的应用程序通过在表的 `SystemProperties` 中设置 `Version` 标志来启用乐观并发，如下所示。
 
 	//Enable optimistic concurrency by retrieving version
@@ -387,7 +385,6 @@ C# 中对应的类型化客户端类型为以下类：
 	        await ResolveConflict(item, exception.Item);
     	}
 	}
-
 
 	private async Task ResolveConflict(TodoItem localItem, TodoItem serverItem)
 	{
@@ -569,7 +566,7 @@ SDK 会在提取记录前执行隐式 `PushAsync()`。
 
 支持两种身份验证流： *客户端托管* 流和 *服务器托管* 流。服务器托管流依赖于提供者的 Web 身份验证界面，因此可提供最简便的身份验证体验。客户端托管流依赖于提供者和设备特定的 SDK，因此允许与设备特定的功能进行更深入的集成。
 
->[AZURE.NOTE] 建议在生产应用中使用客户端托管流。
+>[!NOTE] 建议在生产应用中使用客户端托管流。
 
 若要设置身份验证，必须向一个或多个标识提供者注册应用。标识提供者为应用生成客户端 ID 和客户端机密。然后会在后端设置这些值，以便进行 Azure 应用服务身份验证/授权。有关详细信息，请遵循 [Add authentication to your app]（将身份验证添加到应用）教程中的详细说明。
 
@@ -778,7 +775,6 @@ SDK 会在提取记录前执行隐式 `PushAsync()`。
 
 如果使用的标识提供者不是 Microsoft，请将上述 [MobileServiceAuthenticationProvider] 的值更改为提供者的值。
 
-
 在服务器流中，Azure 应用服务可以通过显示所选提供者的登录页来管理 OAuth 身份验证。标识提供者返回后，Azure 应用服务会生成一个应用服务身份验证令牌。[LoginAsync 方法]返回 [MobileServiceUser]，后者提供已经过身份验证的用户的 [UserId]，以及 JSON Web 令牌 (JWT) 形式的 [MobileServiceAuthenticationToken]。可以缓存此令牌，并在它过期之前重复使用。有关详细信息，请参阅[缓存身份验证令牌](#caching)。
 
 ### <a name="caching"></a>缓存身份验证令牌
@@ -821,7 +817,6 @@ Xamarin 应用使用 [Xamarin.Auth API] 将证书安全存储在 **Account** 对
 
 	// Authenticate using the access token.
 	await client.LoginAsync(MobileServiceAuthenticationProvider.Microsoft, token);
-
 
 ##<a name="pushnotifications"></a>推送通知
 
@@ -956,33 +951,30 @@ Xamarin 应用需要一些额外的代码才能注册 iOS 或 Android 平台上�
         }
     }
 
-
 <!-- Anchors. -->
-
-
 
 <!-- Images. -->
 
 <!-- URLs. -->
-[1]: /documentation/articles/app-service-mobile-windows-store-dotnet-get-started/
-[2]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
-[3]: /documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/
+[1]: ./app-service-mobile-windows-store-dotnet-get-started.md
+[2]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[3]: ./app-service-mobile-node-backend-how-to-use-server-sdk.md
 [4]: https://msdn.microsoft.com/zh-cn/library/azure/mt419521(v=azure.10).aspx
 [5]: https://github.com/Azure-Samples
 [6]: http://www.newtonsoft.com/json/help/html/Properties_T_Newtonsoft_Json_JsonPropertyAttribute.htm
-[7]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#how-to-define-a-table-controller
-[8]: /documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/#TableOperations
+[7]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#how-to-define-a-table-controller
+[8]: ./app-service-mobile-node-backend-how-to-use-server-sdk.md#TableOperations
 [9]: https://www.nuget.org/packages/Microsoft.Azure.Mobile.Client/
 [10]: http://www.symbolsource.org/
 [11]: http://www.symbolsource.org/Public/Wiki/Using
 [12]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobileservices.mobileserviceclient(v=azure.10).aspx
 
-[Add authentication to your app]: /documentation/articles/app-service-mobile-windows-store-dotnet-get-started-users/
-[向应用程序添加身份验证]: /documentation/articles/app-service-mobile-windows-store-dotnet-get-started-users/
-[Offline Data Sync in Azure Mobile Apps]: /documentation/articles/app-service-mobile-offline-data-sync/
-[Add push notifications to your app]: /documentation/articles/app-service-mobile-windows-store-dotnet-get-started-push/
-[注册应用以使用 Microsoft 帐户登录]: /documentation/articles/app-service-mobile-how-to-configure-microsoft-authentication/
-[How to configure App Service for Active Directory login]: /documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/
+[Add authentication to your app]: ./app-service-mobile-windows-store-dotnet-get-started-users.md
+[向应用程序添加身份验证]: ./app-service-mobile-windows-store-dotnet-get-started-users.md
+[Offline Data Sync in Azure Mobile Apps]: ./app-service-mobile-offline-data-sync.md
+[Add push notifications to your app]: ./app-service-mobile-windows-store-dotnet-get-started-push.md
+[注册应用以使用 Microsoft 帐户登录]: ./app-service-mobile-how-to-configure-microsoft-authentication.md
+[How to configure App Service for Active Directory login]: ./app-service-mobile-how-to-configure-active-directory-authentication.md
 
 <!-- Microsoft URLs. -->
 [Azure Mobile Apps .NET client reference]: https://msdn.microsoft.com/zh-cn/library/azure/mt419521(v=azure.10).aspx

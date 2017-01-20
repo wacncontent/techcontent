@@ -1,27 +1,27 @@
-<properties
-    pageTitle="如何使用访问控制 (Java) | Azure"
-    description="了解如何在 Azure 中以 Java 开发和使用访问控制。"
-    services="active-directory"
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />  
+---
+title: 如何使用访问控制 (Java) | Azure
+description: 了解如何在 Azure 中以 Java 开发和使用访问控制。
+services: active-directory
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: 
 
-<tags
-    ms.assetid="247dfd59-0221-4193-97ec-4f3ebe01d3c7"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="11/01/2016"
-    ms.author="robmcm" 
-    wacn.date="01/03/2017"/>
+ms.assetid: 247dfd59-0221-4193-97ec-4f3ebe01d3c7
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+ms.author: robmcm
+wacn.date: 01/03/2017
+---
 
 # 如何使用 Eclipse 在 Azure Access Control 服务上对 Web 用户进行身份验证
 本指南将说明如何在 Azure Toolkit for Eclipse 中使用 Azure 访问控制服务 (ACS)。有关 ACS 的详细信息，请参阅[后续步骤](#next_steps)部分。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Azure 访问服务控制筛选器是一个社区技术预览版。作为预发行软件，Microsoft 不会为它提供正式支持。
 
 ## 什么是 ACS？
@@ -77,9 +77,9 @@ Azure ACS 在基于声明的标识的主体的基础上构建，它是一种创�
 - Eclipse IDE for Java EE Developers, Indigo 或更高版本。可以从 <http://www.eclipse.org/downloads/> 下载。
 - 分发基于 Java 的 Web 服务器或应用程序服务器，例如 Apache Tomcat、GlassFish、JBoss 应用程序服务器或 Jetty。
 - Azure 订阅，可以从 </pricing/1rmb-trial> 获取。
-- Azure Toolkit for Eclipse 2014 年 4 月版或更高版本。有关详细信息，请参阅[安装 Azure Toolkit for Eclipse](/documentation/articles/azure-toolkit-for-eclipse-installation/)。
+- Azure Toolkit for Eclipse 2014 年 4 月版或更高版本。有关详细信息，请参阅[安装 Azure Toolkit for Eclipse](../azure-toolkit-for-eclipse-installation.md)。
 - 要用于应用程序的 X.509 证书。你将需要此证书的公用证书 (.cer) 格式版和个人信息交换 (.PFX) 格式版。（本教程后面将介绍用于创建此证书的选项）。
-- 熟悉[在 Eclipse 中创建 Azure 的 Hello World 应用程序](/documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/)中介绍的 Azure 计算模拟器和部署技术。
+- 熟悉[在 Eclipse 中创建 Azure 的 Hello World 应用程序](../azure-toolkit-for-eclipse-creating-a-hello-world-application.md)中介绍的 Azure 计算模拟器和部署技术。
 
 ## 创建 ACS 命名空间
 若要开始在 Azure 中使用访问控制服务 (ACS)，必须创建一个 ACS 命名空间。该命名空间提供了一个唯一范围，用于从应用程序中对 ACS 资源进行寻址。
@@ -199,7 +199,7 @@ Windows Live ID 现已作为你的 ACS 命名空间的 IP 启用。紧接着，�
 
 1. 在 Eclipse 的项目资源管理器中，右键单击“MyACSHelloWorld”，单击“Azure”，然后单击“适用于 Azure 的包”。
 2. 对于“项目名称”，请键入 **MyAzureACSProject**，然后单击“下一步”。
-3. 选择一个 JDK 和一个应用程序服务器。（[在 Eclipse 中创建 Azure 的 Hello World 应用程序](/documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/)教程中将详细介绍这些步骤）。
+3. 选择一个 JDK 和一个应用程序服务器。（[在 Eclipse 中创建 Azure 的 Hello World 应用程序](../azure-toolkit-for-eclipse-creating-a-hello-world-application.md)教程中将详细介绍这些步骤）。
 4. 单击“完成”。
 5. 单击“在 Azure 模拟器中运行”按钮。
 6. 当你的 Java Web 应用程序在计算模拟器中启动后，请关闭浏览器的所有实例（以便任何当前浏览器会话不会妨碍你的 ACS 登录测试）。
@@ -230,11 +230,11 @@ Windows Live ID 现已作为你的 ACS 命名空间的 IP 启用。紧接着，�
     ![用于生产部署的 Azure ACS 筛选器设置][add_acs_filter_lib_production]
 13. 单击“完成”关闭“编辑库”对话框。
 14. 单击“确定”关闭“MyACSHelloWorld 的属性”对话框。
-15. 在 Eclipse 中，单击“发布到 Azure 云”按钮。像在[在 Eclipse 中创建 Azure 的 Hello World 应用程序](/documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/)主题的**将应用程序部署到 Azure**部分中一样对提示进行响应。
+15. 在 Eclipse 中，单击“发布到 Azure 云”按钮。像在[在 Eclipse 中创建 Azure 的 Hello World 应用程序](../azure-toolkit-for-eclipse-creating-a-hello-world-application.md)主题的**将应用程序部署到 Azure**部分中一样对提示进行响应。
 
 部署 Web 应用程序后，关闭任何打开的浏览器会话，运行你的 Web 应用程序，系统将提示你使用 Windows Live ID 凭据登录，然后将这些凭据发送到信赖方应用程序的返回 URL。
 
-使用完你的 ACS Hello World 应用程序后，请务必删除部署（可在[在 Eclipse 中创建 Azure 的 Hello World 应用程序](/documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/)主题中了解如何删除部署）。
+使用完你的 ACS Hello World 应用程序后，请务必删除部署（可在[在 Eclipse 中创建 Azure 的 Hello World 应用程序](../azure-toolkit-for-eclipse-creating-a-hello-world-application.md)主题中了解如何删除部署）。
 
 ## <a name="next_steps"></a>后续步骤
 有关 ACS 返回给应用程序的安全断言标记语言 (SAML) 的介绍，请参阅 [如何查看 Azure 访问控制服务返回的 SAML][如何查看 Azure 访问控制服务返回的 SAML]。若要进一步了解 ACS 的功能并尝试将其用于更复杂的方案，请参阅[访问控制服务 2.0][Access Control Service 2.0]。

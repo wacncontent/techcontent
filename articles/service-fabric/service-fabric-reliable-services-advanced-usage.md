@@ -1,24 +1,25 @@
-<properties
-    pageTitle="Reliable Services 的高级用法 | Azure"
-    description="了解 Service Fabric Reliable Services 的高级用法，以便在服务中提高灵活性。"
-    services="Service-Fabric"
-    documentationcenter=".net"
-    author="vturecek"
-    manager="timlt"
-    editor="masnider" />
-<tags
-    ms.assetid="f2942871-863d-47c3-b14a-7cdad9a742c7"
-    ms.service="Service-Fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="10/19/2016"
-    wacn.date="01/17/2017"
-    ms.author="vturecek" />
+---
+title: Reliable Services 的高级用法 | Azure
+description: 了解 Service Fabric Reliable Services 的高级用法，以便在服务中提高灵活性。
+services: Service-Fabric
+documentationcenter: .net
+author: vturecek
+manager: timlt
+editor: masnider
+
+ms.assetid: f2942871-863d-47c3-b14a-7cdad9a742c7
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 10/19/2016
+wacn.date: 01/17/2017
+ms.author: vturecek
+---
 
 # Reliable Services 编程模型的高级用法
-Azure Service Fabric 可简化可靠的无状态服务和有状态服务的编写与管理。本指南讨论 Reliable Services 的高级用法，以便针对服务获得更多控制和灵活性。阅读本指南之前，你自己应熟悉 [Reliable Services 编程模型](/documentation/articles/service-fabric-reliable-services-introduction/)。
+Azure Service Fabric 可简化可靠的无状态服务和有状态服务的编写与管理。本指南讨论 Reliable Services 的高级用法，以便针对服务获得更多控制和灵活性。阅读本指南之前，你自己应熟悉 [Reliable Services 编程模型](./service-fabric-reliable-services-introduction.md)。
 
 有状态服务和无状态服务针对用户代码都有两个主要入口点：
 
@@ -53,17 +54,15 @@ Azure Service Fabric 可简化可靠的无状态服务和有状态服务的编�
 - `Task OnCloseAsync(CancellationToken)`
 - `void OnAbort()`
 
-
-
 ## 后续步骤
 有关与 Service Fabric 相关的更高级的主题，请参阅以下文章：
 
-- [配置有状态 Reliable Services](/documentation/articles/service-fabric-reliable-services-configuration/)
+- [配置有状态 Reliable Services](./service-fabric-reliable-services-configuration.md)
 
-- [Service Fabric 运行状况简介](/documentation/articles/service-fabric-health-introduction/)
+- [Service Fabric 运行状况简介](./service-fabric-health-introduction.md)
 
-- [使用系统运行状况报告进行故障排除](/documentation/articles/service-fabric-understand-and-troubleshoot-with-system-health-reports/)
+- [使用系统运行状况报告进行故障排除](./service-fabric-understand-and-troubleshoot-with-system-health-reports.md)
 
-- [使用 Service Fabric 群集资源管理器配置服务](/documentation/articles/service-fabric-cluster-resource-manager-configure-services/)
+- [使用 Service Fabric 群集资源管理器配置服务](./service-fabric-cluster-resource-manager-configure-services.md)
 
 <!---HONumber=Mooncake_Quality_Review_0117_2017-->

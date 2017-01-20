@@ -1,12 +1,17 @@
-<properties 
-	pageTitle="如何为 Azure Service Bus 和 Azure IoT Hub 生成 SharedAccessSignature" 
-	description="如何为 Azure Service Bus 和 Azure IoT Hub 生成 SharedAccessSignature" 
-	services="" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="service-bus-aog" ms.date="" wacn.date="12/05/2016"/>
+---
+title: 如何为 Azure Service Bus 和 Azure IoT Hub 生成 SharedAccessSignature
+description: 如何为 Azure Service Bus 和 Azure IoT Hub 生成 SharedAccessSignature
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: service-bus-aog
+ms.date: 
+wacn.date: 12/05/2016
+---
+
 # 如何为 Azure Service Bus 和 Azure IoT Hub 生成 SharedAccessSignature #
 
 很多服务在做验证的时候都会用到 SharedAccessSignature，例如 Azure Service Bus, Azure IoT Hub 等。这篇文章主要讨论不同服务下生成的 SharedAccessSignature 的区别。
@@ -30,7 +35,6 @@
 
 如果您是使用 C# 做开发，可以通过以下方法生成 SAS Token:
 
-
 	class SASTokenGenerator
 	{
 		public static string GetSASToken(string resourceUri, string keyName, string key, TimeSpan ttl)
@@ -51,8 +55,4 @@
 	    	return Convert.ToString((int)expirySinceEpoch.TotalSeconds);
 	    }
 	}
-
-
-
-
 

@@ -1,24 +1,21 @@
-<properties 
-	pageTitle="轮询长时间运行的操作" 
-	description="本主题展示了如何轮询长时间运行的操作。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 轮询长时间运行的操作
+description: 本主题展示了如何轮询长时间运行的操作。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: dwrede
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
- 	ms.date="09/26/2016" 
- 	wacn.date="12/16/2016" 
-	ms.author="juliako"/>  
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/16/2016
+ms.author: juliako
+---
 
 #使用 Azure 媒体服务传送实时流
 
@@ -33,7 +30,6 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
 当前，以下类支持非轮询方法：**Channel**、**StreamingEndpoint** 和 **Program**。
 
 若要轮询操作状态，请对 **OperationBaseCollection** 类使用 **GetOperation** 方法。使用以下时间间隔来检查操作状态：对于 **Channel** 和 **StreamingEndpoint** 操作，使用 30 秒；对于 **Program** 操作，使用 10 秒。
-
 
 ##示例
 
@@ -132,7 +128,6 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
 	        return completed;
 	    }
 	
-	
 	    private static ChannelInput CreateChannelInput()
 	    {
 	        return new ChannelInput
@@ -198,5 +193,4 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
 	// If we got here, we should have the newly created channel id.
 	Console.WriteLine(channelId);
  
-
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

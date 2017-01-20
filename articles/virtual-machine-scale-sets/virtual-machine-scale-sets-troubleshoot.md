@@ -1,23 +1,23 @@
-<properties
-    pageTitle="疑难解答使用虚拟机规模集的自动缩放问题 | Azure"
-    description="疑难解答使用虚拟机规模集的自动缩放问题。了解遇到的典型问题以及如何解决这些问题。"
-    services="virtual-machine-scale-sets"
-    documentationcenter=""
-    author="gbowerman"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 疑难解答使用虚拟机规模集的自动缩放问题 | Azure
+description: 疑难解答使用虚拟机规模集的自动缩放问题。了解遇到的典型问题以及如何解决这些问题。
+services: virtual-machine-scale-sets
+documentationcenter: 
+author: gbowerman
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="c7d87b72-ee24-4e52-9377-a42f337f76fa"
-    ms.service="virtual-machine-scale-sets"
-    ms.workload="na"
-    ms.tgt_pltfrm="windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/28/2016"
-    wacn.date="12/12/2016"
-    ms.author="guybo" />
+ms.assetid: c7d87b72-ee24-4e52-9377-a42f337f76fa
+ms.service: virtual-machine-scale-sets
+ms.workload: na
+ms.tgt_pltfrm: windows
+ms.devlang: na
+ms.topic: article
+ms.date: 10/28/2016
+wacn.date: 12/12/2016
+ms.author: guybo
+---
 
 # 疑难解答使用虚拟机规模集的自动缩放问题
 **问题** - 您已使用 VM 规模集在 Azure Resource Manager 中创建自动缩放基础结构 - 例如，通过部署与此类似的模板：https://github.com/Azure/azure-quickstart-templates/tree/master/201-vmss-bottle-autoscale - 您定义了缩放规则，其效果良好，只不过无论在 VM 中施放多少负载，它都不会自动缩放。
@@ -25,7 +25,7 @@
 ## 疑难解答步骤
 应考虑的一些事项包括：
 
-* 每个 VM 有多少个核心？您加载了所有核心吗？ 上面的 Azure 快速入门模板示例具有 do\_work.php 脚本，它加载单个核心。如果使用的 VM 超过单核 VM 的大小（例如超过 Standard\_A1 或 D1），需要多次运行此负载。通过查看 [Azure 中 Windows 虚拟机的大小](/documentation/articles/virtual-machines-windows-sizes/)检查 VM 中有多少个核心
+* 每个 VM 有多少个核心？您加载了所有核心吗？ 上面的 Azure 快速入门模板示例具有 do\_work.php 脚本，它加载单个核心。如果使用的 VM 超过单核 VM 的大小（例如超过 Standard\_A1 或 D1），需要多次运行此负载。通过查看 [Azure 中 Windows 虚拟机的大小](../virtual-machines/virtual-machines-windows-sizes.md)检查 VM 中有多少个核心
 * VM 规模集中有多少个 VM？您正在处理每个 VM 吗？
   
     仅当规模集中**所有** VM 的平均 CPU 在自动缩放规则中内部定义的时间之内超出阈值时，才会发生扩大事件。
@@ -70,7 +70,7 @@
     
     ![存储表][tables]
     
-    如果数据不存在，则意味着问题与在 VM 中运行的诊断扩展相关。如果数据存在，则意味着问题与缩放规则或 Insights 服务相关。检查 [Azure 状态](/support/service-dashboard/)。
+    如果数据不存在，则意味着问题与在 VM 中运行的诊断扩展相关。如果数据存在，则意味着问题与缩放规则或 Insights 服务相关。检查 [Azure 状态](https://www.azure.cn/support/service-dashboard/)。
 
     后完这些步骤成，如果仍旧遇到自动缩放的问题，可以尝试访问 [MSDN](https://social.msdn.microsoft.com/forums/azure/home?category=windowsazureplatform%2Cazuremarketplace%2Cwindowsazureplatformctp) 上的论坛、[CSDN Azure](http://azure.csdn.net/)，或者登记电话支持。准备共享模板和性能数据的视图。
 

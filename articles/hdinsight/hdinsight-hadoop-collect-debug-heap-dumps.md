@@ -1,23 +1,22 @@
-<properties
-	pageTitle="使用堆转储调试和分析 Hadoop 服务 | Azure"
-	description="自动收集 Hadoop 服务的堆转储并将其放置在 Azure Blob 存储帐户内用于调试和分析。"
-	services="hdinsight"
-	documentationCenter=""
-	tags="azure-portal"
-	authors="mumian"
-	manager="paulettm"
-	editor="cgronlun"/>
+---
+title: 使用堆转储调试和分析 Hadoop 服务 | Azure
+description: 自动收集 Hadoop 服务的堆转储并将其放置在 Azure Blob 存储帐户内用于调试和分析。
+services: hdinsight
+documentationCenter: 
+tags: azure-portal
+authors: mumian
+manager: paulettm
+editor: cgronlun
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/19/2016"
-	wacn.date="12/30/2016"
-	ms.author="jgao"/>
-
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/19/2016
+wacn.date: 12/30/2016
+ms.author: jgao
+---
 
 # 在 Blob 存储中收集堆转储以调试和分析 Hadoop 服务
 
@@ -48,7 +47,7 @@
 
 例如，要使用 Azure PowerShell 为 jobhistoryserver 启用堆转储，请执行以下操作：
 
-[AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+[!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 	$MapRedConfigValues = new-object 'Microsoft.WindowsAzure.Management.HDInsight.Cmdlet.DataObjects.AzureHDInsightMapReduceConfiguration'
 

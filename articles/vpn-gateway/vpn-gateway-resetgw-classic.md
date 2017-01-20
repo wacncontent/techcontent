@@ -1,27 +1,24 @@
-<properties
-   pageTitle="重置 Azure VPN 网关 | Azure"
-   description="本文将指导你完成重置 Azure VPN 网关。本文适用于经典和 Resource Manager 部署模型中的 VPN 网关。"
-   services="vpn-gateway"
-   documentationCenter="na"
-   authors="cherylmc"
-   manager="carmonm"
-   editor=""
-   tags="azure-resource-manager,azure-service-management"/>  
+---
+title: 重置 Azure VPN 网关 | Azure
+description: 本文将指导你完成重置 Azure VPN 网关。本文适用于经典和 Resource Manager 部署模型中的 VPN 网关。
+services: vpn-gateway
+documentationCenter: na
+authors: cherylmc
+manager: carmonm
+editor: 
+tags: azure-resource-manager,azure-service-management
 
-
-<tags
-   ms.service="vpn-gateway"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="09/23/2016"
-   wacn.date="01/18/2017"
-   ms.author="cherylmc"/>  
-
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 09/23/2016
+wacn.date: 01/18/2017
+ms.author: cherylmc
+---
 
 # 使用 PowerShell 重置 Azure VPN 网关
-
 
 本文逐步讲解如何使用 PowerShell cmdlet 重置 Azure VPN 网关。这些说明涉及到经典部署模型和 Resource Manager 部署模型。
 
@@ -66,7 +63,6 @@
 	Status         : Successful
 	RequestId      : 9ca273de2c4d01e986480ce1ffa4d6d9
 	StatusCode     : OK
-
 
 ## 后续步骤
 	

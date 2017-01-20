@@ -1,20 +1,21 @@
-<properties
-    pageTitle="使用恢复管理器解决分片映射问题 | Azure"
-    description="使用 RecoveryManager 类解决分片映射问题"
-    services="sql-database"
-    documentationcenter=""
-    manager="jhubbard"
-    author="ddove" />
-<tags
-    ms.assetid="45520ca3-6903-4b39-88ba-1d41b22da9fe"
-    ms.service="sql-database"
-    ms.workload="sql-database"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/24/2016"
-    wacn.date="12/19/2016"
-ms.author="ddove" />
+---
+title: 使用恢复管理器解决分片映射问题 | Azure
+description: 使用 RecoveryManager 类解决分片映射问题
+services: sql-database
+documentationcenter: 
+manager: jhubbard
+author: ddove
+
+ms.assetid: 45520ca3-6903-4b39-88ba-1d41b22da9fe
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/24/2016
+wacn.date: 12/19/2016
+ms.author: ddove
+---
 
 # 使用 RecoveryManager 类解决分片映射问题
 
@@ -22,29 +23,26 @@ ms.author="ddove" />
 
 GSM 和 LSM 跟踪分片环境中每个数据库的映射。有时，GSM 和 LSM 之间会发生中断。在这种情况下，请使用 RecoveryManager 类来检测和修复中断问题。
 
-RecoveryManager 类是[弹性数据库客户端库](/documentation/articles/sql-database-elastic-database-client-library/)的一部分。
-
+RecoveryManager 类是[弹性数据库客户端库](./sql-database-elastic-database-client-library.md)的一部分。
 
 ![分片映射][1]
 
-
-有关术语定义，请参阅[弹性数据库工具词汇表](/documentation/articles/sql-database-elastic-scale-glossary/)。若要了解如何使用 **ShardMapManager** 来管理分片解决方案中的数据，请参阅[分片映射管理](/documentation/articles/sql-database-elastic-scale-shard-map-management/)。
-
+有关术语定义，请参阅[弹性数据库工具词汇表](./sql-database-elastic-scale-glossary.md)。若要了解如何使用 **ShardMapManager** 来管理分片解决方案中的数据，请参阅[分片映射管理](./sql-database-elastic-scale-shard-map-management.md)。
 
 ## 为何使用恢复管理器？
 在分片数据库环境中，每个数据库有一个租户，而每个服务器有多个数据库。环境中也可能有多个服务器。每个数据库映射在分片映射中，以便将调用路由到正确的服务器和数据库。根据**分片键**跟踪数据库，并为每个分片分配**键值范围**。例如，分片键可能代表从“D”到“F”的客户名称。 所有分片（也称为数据库）的映射及其映射范围都包含在**全局分片映射 (GSM)** 中。每个数据库还包含分片上所包含的范围的映射 - 这称为**本地分片映射 (LSM)**。当应用连接到分片时，将在应用中缓存映射用于快速检索。LSM 用于验证缓存的数据。
 
 GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 
-1. 删除其范围被认为是不再使用的分片，或重命名分片。删除分片导致**孤立的分片映射**。类似地，重命名的数据库同样可能会造成孤立的分片映射。根据更改的目的，可能需要删除分片或需要更新分片位置。若要恢复已删除的数据库，请参阅[还原已删除的数据库](/documentation/articles/sql-database-restore-deleted-database-portal/)。
-2. 发生异地故障转移事件。若要继续，必须有人更新服务器名称和应用程序中分片映射管理器的数据库名称，然后更新分片映射中所有分片的分片映射详细信息。在异地故障转移时，此类恢复逻辑应该在故障转移工作流中自动化。自动化修复操作能够实现顺畅地管理启用异地冗余的数据库，并避免人工操作。若要了解在出现数据中心中断时用于恢复数据库的选项，请参阅[业务连续性](/documentation/articles/sql-database-business-continuity/)和[灾难恢复](/documentation/articles/sql-database-disaster-recovery/)。
-3. 分片或 ShardMapManager 数据库将还原到较早的时间点。若要了解时点恢复，请参阅[时点恢复](/documentation/articles/sql-database-point-in-time-restore-portal/)。
+1. 删除其范围被认为是不再使用的分片，或重命名分片。删除分片导致**孤立的分片映射**。类似地，重命名的数据库同样可能会造成孤立的分片映射。根据更改的目的，可能需要删除分片或需要更新分片位置。若要恢复已删除的数据库，请参阅[还原已删除的数据库](./sql-database-restore-deleted-database-portal.md)。
+2. 发生异地故障转移事件。若要继续，必须有人更新服务器名称和应用程序中分片映射管理器的数据库名称，然后更新分片映射中所有分片的分片映射详细信息。在异地故障转移时，此类恢复逻辑应该在故障转移工作流中自动化。自动化修复操作能够实现顺畅地管理启用异地冗余的数据库，并避免人工操作。若要了解在出现数据中心中断时用于恢复数据库的选项，请参阅[业务连续性](./sql-database-business-continuity.md)和[灾难恢复](./sql-database-disaster-recovery.md)。
+3. 分片或 ShardMapManager 数据库将还原到较早的时间点。若要了解时点恢复，请参阅[时点恢复](./sql-database-point-in-time-restore-portal.md)。
 
 有关 Azure SQL 数据库弹性数据库工具、异地复制和还原的详细信息，请参阅以下内容：
 
-* [概述：云业务连续性与使用 SQL 数据库进行数据库灾难恢复](/documentation/articles/sql-database-business-continuity/)
-* [弹性数据库工具入门](/documentation/articles/sql-database-elastic-scale-get-started/)
-* [ShardMap 管理](/documentation/articles/sql-database-elastic-scale-shard-map-management/)
+* [概述：云业务连续性与使用 SQL 数据库进行数据库灾难恢复](./sql-database-business-continuity.md)
+* [弹性数据库工具入门](./sql-database-elastic-scale-get-started.md)
+* [ShardMap 管理](./sql-database-elastic-scale-shard-map-management.md)
 
 ## 从 ShardMapManager 检索 RecoveryManager 
 
@@ -56,7 +54,7 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 
 在此示例中，RecoveryManager 已从 ShardMapManager 进行了初始化。包含 ShardMap 的 ShardMapManager 也已进行了初始化。
 
-由于此应用程序代码会自己处理分片映射，因此在工厂方法中使用的凭据（上述示例中的 smmConnectionString）应该是对连接字符串所引用的 GSM 数据库拥有读写权限的凭据。这些凭据通常与用于为数据相关的路由打开连接的凭据不同。有关详细信息，请参阅[在弹性数据库客户端中使用凭据](/documentation/articles/sql-database-elastic-scale-manage-credentials/)。
+由于此应用程序代码会自己处理分片映射，因此在工厂方法中使用的凭据（上述示例中的 smmConnectionString）应该是对连接字符串所引用的 GSM 数据库拥有读写权限的凭据。这些凭据通常与用于为数据相关的路由打开连接的凭据不同。有关详细信息，请参阅[在弹性数据库客户端中使用凭据](./sql-database-elastic-scale-manage-credentials.md)。
 
 ## 删除分片后从 ShardMap 中删除分片
 
@@ -71,7 +69,7 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 
 	rm.DetachShard(s.Location, customerMap); 
 
-在删除分片前，先映射 GSM 中的分片位置。由于已删除分片，因此假设这是有意而为之的，且分片键范围已不再使用。如果不是这样，则可以执行时间点还原，以从较早的时间点恢复分片。（在这种情况下，请查看以下部分了解如何检测分片的不一致性。） 若要恢复，请参阅[时点恢复](/documentation/articles/sql-database-point-in-time-restore-portal/)。
+在删除分片前，先映射 GSM 中的分片位置。由于已删除分片，因此假设这是有意而为之的，且分片键范围已不再使用。如果不是这样，则可以执行时间点还原，以从较早的时间点恢复分片。（在这种情况下，请查看以下部分了解如何检测分片的不一致性。） 若要恢复，请参阅[时点恢复](./sql-database-point-in-time-restore-portal.md)。
 
 由于假设删除数据库是有意而为之的，因此最终的管理清理操作是删除分片映射管理器中分片的条目。这可以防止应用程序无意中将信息写入到非预期的范围。
 
@@ -152,14 +150,10 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 		} 
 	}
 
-
-
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
-
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Image references-->
 
 [1]: ./media/sql-database-elastic-database-recovery-manager/recovery-manager.png
  
-
 <!---HONumber=Mooncake_1212_2016-->

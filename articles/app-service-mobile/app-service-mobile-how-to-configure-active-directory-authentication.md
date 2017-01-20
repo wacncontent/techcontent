@@ -1,25 +1,25 @@
-<properties
-	pageTitle="如何为应用服务应用程序配置 Azure Active Directory 身份验证"
-	description="了解如何为应用服务应用程序配置 Azure Active Directory 身份验证。"
-	authors="mattchenderson"
-	services="app-service"
-	documentationCenter=""
-	manager="erikre"
-	editor=""/>
+---
+title: 如何为应用服务应用程序配置 Azure Active Directory 身份验证
+description: 了解如何为应用服务应用程序配置 Azure Active Directory 身份验证。
+authors: mattchenderson
+services: app-service
+documentationCenter: 
+manager: erikre
+editor: 
 
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="11/21/2016"
-	ms.author="mahender"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: mahender
+---
 
 # 如何将应用服务应用程序配置为使用 Azure Active Directory 登录
 
-[AZURE.INCLUDE [app-service-mobile-selector-authentication](../../includes/app-service-mobile-selector-authentication.md)]
+[!INCLUDE [app-service-mobile-selector-authentication](../../includes/app-service-mobile-selector-authentication.md)]
 
 本主题说明如何将 Azure 应用程序服务配置为使用 Azure Active Directory 作为身份验证提供程序。
 
@@ -102,7 +102,7 @@ Azure Active Directory 还允许注册权限映射控制度更高的本机客户
 
 4. 在“添加应用程序”向导中，为应用程序输入**名称**，并单击“本机客户端应用程序”类型。然后单击以继续。
 
-5. 在“重定向 URI”框中，使用 HTTPS 方案输入站点的 _/.auth/login/done_ 终结点。此值应类似于 \_https://contoso.chinacloudsites.cn/.auth/login/done_。如果要创建 Windows 应用程序，请改用[包 SID](/documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/#package-sid) 作为 URI。
+5. 在“重定向 URI”框中，使用 HTTPS 方案输入站点的 _/.auth/login/done_ 终结点。此值应类似于 \_https://contoso.chinacloudsites.cn/.auth/login/done_。如果要创建 Windows 应用程序，请改用[包 SID](./app-service-mobile-dotnet-how-to-use-client-library.md#package-sid) 作为 URI。
 
 6. 添加本机应用程序后，单击“配置”选项卡。找到**客户端 ID**并记下此值。
 
@@ -116,7 +116,7 @@ Azure Active Directory 还允许注册权限映射控制度更高的本机客户
 
 ## <a name="related-content"></a>相关内容
 
-[AZURE.INCLUDE [app-service-mobile-related-content-get-started-users](../../includes/app-service-mobile-related-content-get-started-users.md)]
+[!INCLUDE [app-service-mobile-related-content-get-started-users](../../includes/app-service-mobile-related-content-get-started-users.md)]
 
 <!-- Images. -->
 

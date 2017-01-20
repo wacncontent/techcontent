@@ -1,23 +1,22 @@
-<properties 
-	pageTitle="连接到具有 MongoDB 协议支持的 DocumentDB 帐户 | Azure" 
-	description="了解如何连接到具有 MongoDB 协议支持的 DocumentDB 帐户（目前以预览版提供）。使用 MongoDB 连接字符串进行连接。" 
-	keywords="mongodb 连接字符串"
-	services="documentdb" 
-	authors="stephbaron" 
-	manager="jhubbard" 
-	editor="" 
-	documentationCenter=""/>
+---
+title: 连接到具有 MongoDB 协议支持的 DocumentDB 帐户 | Azure
+description: 了解如何连接到具有 MongoDB 协议支持的 DocumentDB 帐户（目前以预览版提供）。使用 MongoDB 连接字符串进行连接。
+keywords: mongodb 连接字符串
+services: documentdb
+authors: stephbaron
+manager: jhubbard
+editor: 
+documentationCenter: 
 
-<tags 
-	ms.service="documentdb" 
-	ms.workload="data-services" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="08/23/2016" 
-	wacn.date="01/03/2017" 
-	ms.author="anhoh"/>  
-
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/23/2016
+wacn.date: 01/03/2017
+ms.author: anhoh
+---
 
 # 如何连接到具有 MongoDB 协议支持的 DocumentDB 帐户
 
@@ -29,7 +28,6 @@
 2. 在“帐户”边栏选项卡的**左导航**栏中，单击“连接字符串”。若要导航到“帐户”边栏选项卡，请在跳转栏上单击“更多服务”，单击“DocumentDB (NoSQL)”，然后选择具有 MongoDB 协议支持的 DocumentDB 帐户。
 
 	![“所有设置”边栏选项卡的屏幕截图](./media/documentdb-connect-mongodb-account/SettingsBlade.png)  
-
 
 3. 此时将打开“连接字符串信息”边栏选项卡，其中显示了使用 MongoDB 驱动程序连接到帐户所需的所有信息，包括预先构造的连接字符串。
 
@@ -78,13 +76,9 @@
             MongoClient client = new MongoClient(settings);
             var database = client.GetDatabase("Tasks",);
 	
-
 ## 后续步骤
 
-
-- 了解如何对具有 MongoDB 协议支持的 DocumentDB 帐户[使用 MongoChef](/documentation/articles/documentdb-mongodb-mongochef/)。
-- 浏览具有 MongoDB 协议支持的 DocumentDB [示例](/documentation/articles/documentdb-mongodb-samples/)。
-
- 
+- 了解如何对具有 MongoDB 协议支持的 DocumentDB 帐户[使用 MongoChef](./documentdb-mongodb-mongochef.md)。
+- 浏览具有 MongoDB 协议支持的 DocumentDB [示例](./documentdb-mongodb-samples.md)。
 
 <!---HONumber=Mooncake_1010_2016-->

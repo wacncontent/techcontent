@@ -1,42 +1,42 @@
-<properties
-   pageTitle="在 HDInsight 中将 Hadoop Pig 与 PowerShell 配合使用 | Azure"
-   description="了解如何使用 Azure PowerShell 将 Pig 作业提交到 HDInsight 上的 Hadoop 群集。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="Blackmist"
-   manager="paulettm"
-   editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 在 HDInsight 中将 Hadoop Pig 与 PowerShell 配合使用 | Azure
+description: 了解如何使用 Azure PowerShell 将 Pig 作业提交到 HDInsight 上的 Hadoop 群集。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="10/11/2016"
-   wacn.date="12/16/2016"
-   ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 10/11/2016
+wacn.date: 12/16/2016
+ms.author: larryfr
+---
 
 #使用 PowerShell 运行 Pig 作业
 
-[AZURE.INCLUDE [pig-selector](../../includes/hdinsight-selector-use-pig.md)]
+[!INCLUDE [pig-selector](../../includes/hdinsight-selector-use-pig.md)]
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本文档提供了一个示例，演示了使用 Azure PowerShell 向 HDInsight 群集上的 Hadoop 提交 Pig 作业。Pig 允许你使用可为数据转换建模的语言 (Pig Latin) 编写 MapReduce 作业，无需使用映射和化简函数。
 
-> [AZURE.NOTE]本文档未详细描述示例中使用的 Pig Latin 语句的作用。有关此示例中使用的 Pig Latin 的信息，请参阅[将 Pig 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-pig/)。
+> [!NOTE]本文档未详细描述示例中使用的 Pig Latin 语句的作用。有关此示例中使用的 Pig Latin 的信息，请参阅[将 Pig 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-pig.md)。
 
 ## <a id="prereq"></a>先决条件
 
 要完成本文中的步骤，需要：
 
-- **Azure 订阅**。请参阅[获取 Azure 试用版](/pricing/1rmb-trial/)。
+- **Azure 订阅**。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 
 - **配备 Azure PowerShell 的工作站**。
 
-    [AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+    [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 ## <a id="powershell"></a>使用 PowerShell 运行 Pig 作业
 
@@ -46,7 +46,7 @@ Azure PowerShell 提供 *cmdlet*，可在 HDInsight 上远程运行 Pig 作业�
 
 * **Import-AzurePublishSettingsFile**：对 Azure 订阅进行 Azure PowerShell 身份验证
 
-[AZURE.INCLUDE [automation-azurechinacloud-environment-parameter](../../includes/automation-azurechinacloud-environment-parameter.md)]
+[!INCLUDE [automation-azurechinacloud-environment-parameter](../../includes/automation-azurechinacloud-environment-parameter.md)]
 
 * **New-AzureHDInsightPigJobDefinition**：使用指定的 Pig Latin 语句创建新*作业定义*
 
@@ -125,12 +125,12 @@ Azure PowerShell 提供了一种简单方法，可在 HDInsight 群集上运行 
 
 有关 HDInsight 中的 Pig 的一般信息：
 
-* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-pig.md)
 
 有关 HDInsight 上 Hadoop 的其他使用方法的信息：
 
-* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-hive/)
+* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-hive.md)
 
-* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

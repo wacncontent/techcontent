@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure Web 应用用户手册 - 第一部分 | Azure"
-	description="详细介绍如何创建和管理 Azure Web 应用。"
-	services="app-service-web"
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure Web 应用用户手册 - 第一部分 | Azure
+description: 详细介绍如何创建和管理 Azure Web 应用。
+services: app-service-web
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="app-service-web"
-	ms.date=""
-	wacn.date="07/07/2016"/>
+ms.service: app-service-web
+ms.date: 
+wacn.date: 07/07/2016
+---
 
 # Azure Web 应用用户手册 - 第一部分
 
-- [Azure Web 应用用户手册 - 第二部分](/documentation/articles/azure-web-apps-user-manual-part2/)
-- [Azure Web 应用用户手册 - 第三部分](/documentation/articles/azure-web-apps-user-manual-part3/)
-
+- [Azure Web 应用用户手册 - 第二部分](./azure-web-apps-user-manual-part2.md)
+- [Azure Web 应用用户手册 - 第三部分](./azure-web-apps-user-manual-part3.md)
 
 ##<a name="section_3"></a> 1. Azure Web 应用相关服务
 ###<a name="section_3_1"></a> 1.1 Azure Web 应用的带宽问题
@@ -101,7 +100,7 @@ Azure Web 应用是一个多租户的环境。Azure Web 应用架构借鉴了 Mi
 * (2)	中型，配置为：双核心，3.5GB 内存
 * (3)	大型，配置为：四核心，7GB 内存
 
->[AZURE.NOTE]
+>[!NOTE]
 >如果您开发的 Web Application，单个实例需要运行的最小计算单元大于 4Core/7GB (对应 Web 应用单台最高配置大型，4Core/7GB)，则这个 Web Application 不适合部署在 Azure Web 应用 PaaS 平台。
 
 ###<a name="section_3_9"></a> 1.9 Azure Web 应用服务类型
@@ -148,7 +147,7 @@ Azure Web 应用提供四种不同的服务类型，如下图：
 </tbody>
 </table>
 
-更详细的服务类型比较，请参考 Azure 中国 [官网](/pricing/details/web-site/) 
+更详细的服务类型比较，请参考 Azure 中国 [官网](https://www.azure.cn/pricing/details/web-site/) 
 
 这四种服务类型的区别如下：
 
@@ -190,7 +189,7 @@ Azure Web 应用提供四种不同的服务类型，如下图：
 
 ![app_service_plan2](./media/azure-web-apps-user-manual-part1/app_service_plan2.png)
  
->[AZURE.NOTE]
+>[!NOTE]
 >对于 Azure Web 应用来说，需要把 App Service 配置为基本或标准，才能得到 99.9% 的服务级别协议。但是只需要 1 个实例数就有服务级别协议保障，并不需要 2 个或者 2 个以上的实例做高可用性。
 
 ###<a name="section_3_10"></a> 1.10 Azure Web 应用使用静态资源
@@ -286,7 +285,7 @@ Azure Web 应用提供四种不同的服务类型：
 
 ![price](./media/azure-web-apps-user-manual-part1/price.png)
 
-以上价格参考 Azure 中国 [官方价格信息](http://www.azure.cn/pricing/details/web-site/)
+以上价格参考 Azure 中国 [官方价格信息](https://www.azure.cn/pricing/details/web-site/)
 
 * (1)	在基本模式下，单个小型，中型，大型的 Web 应用实例价格分别为 0.45 元/小时，0.89 元/小时，1.79 元/小时。
 * (2)	在基本模式下，如果用多个实例进行横向扩展，则每小时单价会按照实例个数增加。

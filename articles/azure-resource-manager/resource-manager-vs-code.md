@@ -1,23 +1,22 @@
-<properties
-    pageTitle="将 VS Code 与 Resource Manager 模板配合使用 | Azure"
-    description="说明如何设置 Visual Studio Code 以创建 Azure Resource Manager 模板。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="cmatskas"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: 将 VS Code 与 Resource Manager 模板配合使用 | Azure
+description: 说明如何设置 Visual Studio Code 以创建 Azure Resource Manager 模板。
+services: azure-resource-manager
+documentationcenter: na
+author: cmatskas
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="78f2aa22-df1d-41bd-92ec-dabd1175db88"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/26/2016"
-    wacn.date="12/26/2016"
-    ms.author="chmatsk;tomfitz" />  
-
+ms.assetid: 78f2aa22-df1d-41bd-92ec-dabd1175db88
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/26/2016
+wacn.date: 12/26/2016
+ms.author: chmatsk;tomfitz
+---
 
 # 在 Visual Studio Code 中使用 Azure Resource Manager 模板
 Azure Resource Manager 模板是用于描述资源和相关依赖性的 JSON 文件。这些文件有时可能很大且很复杂，因此工具支持非常重要。Visual Studio Code 是全新的轻量型开源跨平台代码编辑器。它通过[新的扩展](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools)支持创建和编辑 Resource Manager 模板。VS Code 可在任何位置运行，除非你还想要部署 Resource Manager 模板，否则它不需要访问 Internet。
@@ -55,7 +54,7 @@ Azure Resource Manager 模板是用于描述资源和相关依赖性的 JSON 文
 现在，可以开始使用 Resource Manager 代码片段了。接下来，我们将测试此设置。
 
 ## 在 VS Code 中使用模板
-开始使用模板的最简单方法是获取 [Github](https://github.com/Azure/azure-quickstart-templates) 上提供的快速启动模板之一，或使用你自己的某个模板。你可以通过门户轻松地针对任何资源组[导出模板](/documentation/articles/resource-manager-export-template/)。
+开始使用模板的最简单方法是获取 [Github](https://github.com/Azure/azure-quickstart-templates) 上提供的快速启动模板之一，或使用你自己的某个模板。你可以通过门户轻松地针对任何资源组[导出模板](./resource-manager-export-template.md)。
 
 1. 如果从资源组导出了模板，请在 VS Code 中打开提取的文件。
    
@@ -116,8 +115,8 @@ Azure Resource Manager 模板是用于描述资源和相关依赖性的 JSON 文
         azure group deployment create -f <PathToTemplate> 
 
 ## 后续步骤
-* 若要详细了解模板，请参阅 [Authoring Azure Resource Manager templates](/documentation/articles/resource-group-authoring-templates/)（创作 Azure Resource Manager 模板）。
-* 若要了解模板函数，请参阅 [Azure Resource Manager template functions](/documentation/articles/resource-group-template-functions/)（Azure Resource Manager 模板函数）。
+* 若要详细了解模板，请参阅 [Authoring Azure Resource Manager templates](./resource-group-authoring-templates.md)（创作 Azure Resource Manager 模板）。
+* 若要了解模板函数，请参阅 [Azure Resource Manager template functions](./resource-group-template-functions.md)（Azure Resource Manager 模板函数）。
 * 有关使用 Visual Studio Code 的更多示例，请参阅 [HealthClinic.biz](https://github.com/Microsoft/HealthClinic.biz) 2015 Connect [演示](https://blogs.msdn.microsoft.com/visualstudio/2015/12/08/connectdemos-2015-healthclinic-biz/)的 [Build cloud apps with Visual Studio Code](https://github.com/Microsoft/HealthClinic.biz/wiki/Build-cloud-apps-with-Visual-Studio-Code)（使用 Visual Studio Code 生成云应用）。有关 HealthClinic.biz 演示的多个快速入门，请参阅 [Azure Developer Tools Quickstarts](https://github.com/Microsoft/HealthClinic.biz/wiki/Azure-Developer-Tools-Quickstarts)（Azure 开发人员工具快速入门）。
 
 <!---HONumber=Mooncake_1219_2016-->

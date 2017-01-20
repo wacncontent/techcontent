@@ -10,7 +10,6 @@
 * [如何创建和管理 Azure 网站](#WebSites)
 * [如何创建和管理 Azure 虚拟机](#VMs)
 
-
 <h2><a id="Overview"></a>什么是适用于 Mac 和 Linux 的 Azure 命令行工具</h2>
 
 适用于 Mac 和 Linux 的 Azure 命令行工具是一组用于部署和管理 Azure 服务的命令行工具。
@@ -38,7 +37,6 @@
 		sudo npm install azure-cli -g
 
 * **Windows**：运行此处 [Azure 命令行工具][windows-installer]提供的 Windows 安装程序（.msi 文件）。
-
 
 若要测试安装，请在命令提示符下键入 `azure`。如果安装成功，你将会看到所有可用 `azure` 命令的列表。
 
@@ -74,7 +72,7 @@
 
 导入发布设置后，为安全起见，应删除 `.publishsettings` 文件。
 
-> [AZURE.NOTE] 导入发布设置时，用于访问 Azure 订阅的凭据将存储在你的 `user` 文件夹中。你的 `user` 文件夹受操作系统保护。但是，建议你采取其他措施来对你的 `user` 文件夹进行加密。你可通过以下方式完成此操作：
+> [!NOTE] 导入发布设置时，用于访问 Azure 订阅的凭据将存储在你的 `user` 文件夹中。你的 `user` 文件夹受操作系统保护。但是，建议你采取其他措施来对你的 `user` 文件夹进行加密。你可通过以下方式完成此操作：
 > 
 > - 在 Windows 上，修改文件夹属性或使用 BitLocker。
 > - 在 Mac 上，为文件夹启用 FileVault。

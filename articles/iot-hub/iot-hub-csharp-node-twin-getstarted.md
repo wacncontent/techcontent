@@ -1,34 +1,32 @@
-<properties
-	pageTitle="设备孪生入门 | Azure"
-	description="本教程介绍如何使用设备孪生"
-	services="iot-hub"
-	documentationCenter="node"
-	authors="fsautomata"
-	manager="timlt"
-	editor=""/>  
+---
+title: 设备孪生入门 | Azure
+description: 本教程介绍如何使用设备孪生
+services: iot-hub
+documentationCenter: node
+authors: fsautomata
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-hub"
-     ms.devlang="node"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="09/13/2016"
-     wacn.date="12/12/2016"
-     ms.author="elioda"/>  
-
+ms.service: iot-hub
+ms.devlang: node
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/13/2016
+wacn.date: 12/12/2016
+ms.author: elioda
+---
 
 # 教程：设备孪生入门（预览版）
 
-[AZURE.INCLUDE [iot-hub-selector-twin-get-started](../../includes/iot-hub-selector-twin-get-started.md)]
+[!INCLUDE [iot-hub-selector-twin-get-started](../../includes/iot-hub-selector-twin-get-started.md)]
 
 在本教程结束时，用户将有一个 .NET 控制台应用程序，以及一个 Node.js 控制台应用程序：
 
 * **AddTagsAndQuery.sln**，一个旨在从后端运行的 .NET 应用，用于添加标记并查询设备孪生。
 * **TwinSimulatedDevice.js**，一个 Node.js 应用，可模拟使用早前创建的设备标识连接到 IoT 中心的设备，并报告其连接状况。
 
-> [AZURE.NOTE]
+> [!NOTE]
 [Azure IoT SDK][lnk-hub-sdks] 一文介绍了各种可用来构建设备和后端应用程序的 SDK。
 > 
 > 
@@ -41,9 +39,9 @@
 
 + 有效的 Azure 帐户。（如果没有帐户，只需花费几分钟就能创建一个[帐户][lnk-free-trial]。）
 
-[AZURE.INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
+[!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
 
-[AZURE.INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
+[!INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
 
 ## 创建服务应用
 在此部分，会创建一个 Node.js 控制台应用，将位置元数据添加到与 **myDeviceId** 关联的设备孪生。该应用随后会选择位于中国的设备来查询存储在中心的设备孪生，然后查询报告手机网络连接的设备孪生。
@@ -103,7 +101,6 @@
 8. 运行此应用程序，对于寻找位于 **Redmond43** 的所有设备的查询，应在结果中看到一个设备，而对于将结果限制为使用手机网络连接的设备的查询，不会看到任何设备。
    
     ![窗口中的查询结果][img-addtagapp]  
-
 
 在下一部分，用户创建的设备应用会报告连接信息并更改上一部分中查询的结果。
 
@@ -169,7 +166,6 @@
    
     ![][img-addtagapp2]  
 
-
 ## 后续步骤
 在本教程中，在 Azure 门户中配置了新的 IoT 中心，然后在中心的标识注册表中创建了设备标识。已从后端应用程序以标记形式添加了设备元数据，并编写了模拟的设备应用，用于报告设备孪生中的设备连接信息。你还学习了如何使用 IoT 中心的类似 SQL 的查询语言来查询此信息。
 
@@ -188,19 +184,19 @@
 
 <!-- links -->
 
-[lnk-hub-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-hub-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-nuget-service-sdk]: https://www.nuget.org/packages/Microsoft.Azure.Devices/
 
-[lnk-d2c]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-messages
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-identity]: /documentation/articles/iot-hub-devguide-identity-registry/
+[lnk-d2c]: ./iot-hub-devguide-messaging.md#device-to-cloud-messages
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-identity]: ./iot-hub-devguide-identity-registry.md
 
-[lnk-iothub-getstarted]: /documentation/articles/iot-hub-node-node-getstarted/
-[lnk-methods-tutorial]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-twin-how-to-configure]: /documentation/articles/iot-hub-csharp-node-twin-how-to-configure/
+[lnk-iothub-getstarted]: ./iot-hub-node-node-getstarted.md
+[lnk-methods-tutorial]: ./iot-hub-node-node-direct-methods.md
+[lnk-twin-how-to-configure]: ./iot-hub-csharp-node-twin-how-to-configure.md
 
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/node-devbox-setup.md
 

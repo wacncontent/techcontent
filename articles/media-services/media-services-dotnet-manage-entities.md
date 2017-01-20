@@ -1,32 +1,28 @@
 
-<properties 
-	pageTitle="使用媒体服务 .NET SDK 管理资产和相关的实体" 
-	description="了解如何使用适用于 .NET 的媒体服务 SDK 管理资产和相关的实体。" 
-	authors="juliako" 
-	manager="dwrede" 
-	editor="" 
-	services="media-services" 
-	documentationCenter=""/>  
+---
+title: 使用媒体服务 .NET SDK 管理资产和相关的实体
+description: 了解如何使用适用于 .NET 的媒体服务 SDK 管理资产和相关的实体。
+authors: juliako
+manager: dwrede
+editor: 
+services: media-services
+documentationCenter: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
- 	ms.date="10/10/2016" 
- 	wacn.date="12/12/2016"
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/10/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 #使用媒体服务 .NET SDK 管理资产和相关的实体
 
-
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/media-services-dotnet-manage-entities/)
-- [REST](/documentation/articles/media-services-rest-manage-entities/)
-
+> [!div class="op_single_selector"]
+- [.NET](./media-services-dotnet-manage-entities.md)
+- [REST](./media-services-rest-manage-entities.md)
 
 本主题介绍如何完成以下媒体服务管理任务：
 
@@ -43,7 +39,7 @@
 
 ##先决条件 
 
-请参阅[设置你的环境](/documentation/articles/media-services-set-up-computer/)
+请参阅[设置你的环境](./media-services-set-up-computer.md)
 
 ##<a id="Get-an-asset-reference"></a>获取资产引用
 
@@ -85,8 +81,6 @@
 
 随着存储空间中的资产数量的增长，这对列出你的资产很有用。以下代码示例演示了如何循环访问服务器上下文对象上的资产集合。对于每个资产，该代码示例还会将其一些属性值写入控制台。例如，每个资产可以包含多个媒体文件。代码示例会写出与每个资产关联的所有文件。
 
-
-
 	static void ListAssets()
 	{
 	    string waitMessage = "Building the list. This may take a few "
@@ -127,7 +121,7 @@
 
 在媒体服务中列出资产及其关联作业是一项重要的相关任务。以下代码示例演示了如何列出每个 IJob 对象，然后，针对每个作业，它会显示作业的相关属性、所有相关的任务、所有输入资产和所有输出资产。本示例中的代码对各种其他任务也有所帮助。例如，如果想要列出你先前运行的一个或多个编码作业的输出资产，本代码将演示如何访问输出资产。如果拥有对某个输出资产的引用，你可以通过下载或提供 URL 的方式，将内容传递给其他用户或应用程序。
 
-有关传递资产选项的详细信息，请参阅[使用适用于 .NET 的媒体服务 SDK 传递资产](/documentation/articles/media-services-deliver-streaming-content/)。
+有关传递资产选项的详细信息，请参阅[使用适用于 .NET 的媒体服务 SDK 传递资产](./media-services-deliver-streaming-content.md)。
 
 	// List all jobs on the server, and for each job, also list 
 	// all tasks, all input assets, all output assets.
@@ -155,7 +149,6 @@
 	        builder.AppendLine("State: " + job.State);
 	        builder.AppendLine("Order: " + job.Priority);
 	        builder.AppendLine("==============");
-	
 	
 	        // For each job, display the associated tasks (a job  
 	        // has one or more tasks). 
@@ -229,7 +222,7 @@
 
 以下代码示例列出了服务器上的所有定位符。对于每个定位符，它将显示相关资产和访问策略的 ID。它也显示权限的类型、到期日期和访问资产的完整路径。
 
-请注意，访问资产的定位符路径仅仅是访问资产的基本 URL。若要创建用户或应用程序可以浏览到的单个文件的直接路径，你的代码必须将特定文件路径添加到定位符路径。有关如何进行操作的详细信息，请参阅主题[使用适用于 .NET 的媒体服务 SDK 传递资产](/documentation/articles/media-services-deliver-streaming-content/)。
+请注意，访问资产的定位符路径仅仅是访问资产的基本 URL。若要创建用户或应用程序可以浏览到的单个文件的直接路径，你的代码必须将特定文件路径添加到定位符路径。有关如何进行操作的详细信息，请参阅主题[使用适用于 .NET 的媒体服务 SDK 传递资产](./media-services-deliver-streaming-content.md)。
 
 	static void ListAllLocators()
 	{
@@ -354,7 +347,6 @@
 	    }
 	}
 
-
 ##<a id="Delete-an-access-policy"></a>删除访问策略
 
 以下代码示例演示如何基于策略 ID，获取对访问策略的引用，然后删除该策略。
@@ -373,5 +365,4 @@
 	
 	}
 	
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

@@ -1,29 +1,27 @@
-<properties 
-	pageTitle="如何使用 Media Encoder Standard 通过 .NET 生成缩略图" 
-	description="本主题介绍如何使用 .NET 通过 Media Encoder Standard 对资产进行编码和生成缩略图。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 如何使用 Media Encoder Standard 通过 .NET 生成缩略图
+description: 本主题介绍如何使用 .NET 通过 Media Encoder Standard 对资产进行编码和生成缩略图。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
- 	ms.date="10/10/2016" 
- 	wacn.date="12/26/2016"
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/10/2016
+wacn.date: 12/26/2016
+ms.author: juliako
+---
 
 #如何使用 Media Encoder Standard 通过 .NET 生成缩略图
 
 本主题介绍如何使用媒体服务 .NET SDK 通过 Media Encoder Standard 对资产进行编码和生成缩略图。本主题定义了 XML 和 JSON 缩略图预设，可用于创建同时执行编码和生成缩略图的任务。[本](https://msdn.microsoft.com/zh-cn/library/mt269962.aspx)文档包含这些预设所用的元素的说明。
 
-请务必仔细阅读[注意事项](/documentation/articles/media-services-dotnet-generate-thumbnail-with-mes/#considerations)部分。
+请务必仔细阅读[注意事项](./media-services-dotnet-generate-thumbnail-with-mes.md#considerations)部分。
 
 ##示例
 
@@ -31,7 +29,7 @@
 
 - 创建编码作业。
 - 获取对 Media Encoder Standard 编码器的引用。
-- 加载预设 [XML](/documentation/articles/media-services-dotnet-generate-thumbnail-with-mes/#xml) 或 [JSON](/documentation/articles/media-services-dotnet-generate-thumbnail-with-mes/#json)，其中包含生成缩略图所需的编码预设和信息。可以在一个文件中保存此 [XML](/documentation/articles/media-services-dotnet-generate-thumbnail-with-mes/#xml) 或 [JSON](/documentation/articles/media-services-dotnet-generate-thumbnail-with-mes/#json)，并使用以下代码加载该文件。
+- 加载预设 [XML](./media-services-dotnet-generate-thumbnail-with-mes.md#xml) 或 [JSON](./media-services-dotnet-generate-thumbnail-with-mes.md#json)，其中包含生成缩略图所需的编码预设和信息。可以在一个文件中保存此 [XML](./media-services-dotnet-generate-thumbnail-with-mes.md#xml) 或 [JSON](./media-services-dotnet-generate-thumbnail-with-mes.md#json)，并使用以下代码加载该文件。
 
 			// Load the XML (or JSON) from the local file.
 		    string configuration = File.ReadAllText(fileName);  
@@ -117,7 +115,6 @@
 				    // processor to use for the specific task.
 				    IMediaProcessor processor = GetLatestMediaProcessorByName("Media Encoder Standard");
 				
-		
 				    // Load the XML (or JSON) from the local file.
 				    string configuration = File.ReadAllText("ThumbnailPreset_JSON.json");
 				
@@ -171,7 +168,6 @@
 		                    break;
 		            }
 		        }
-		
 		
 		        private static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
 		        {
@@ -289,7 +285,6 @@
 	  ]
 	}
 
-
 ##<a id="xml"></a>缩略图 XML 预设
 
 有关架构的信息，请参阅[此](https://msdn.microsoft.com/zh-cn/library/mt269962.aspx)主题。
@@ -384,9 +379,8 @@
 	- 默认值：Start:{Best}
 - 需要显式提供每个图像格式的输出格式：Jpg/Png/BmpFormat。MES 会将 JpgVideo（如果已提供）与 JpgFormat 进行匹配，依此类推。OutputFormat 引入了新的图像编解码器特定 Macro: {Index}，需要为图像输出格式提供该宏一次（且只需一次）。
 
-
 ##另请参阅 
 
-[媒体服务编码概述](/documentation/articles/media-services-encode-asset/)
+[媒体服务编码概述](./media-services-encode-asset.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -1,24 +1,24 @@
-<properties 
-	pageTitle="如何结合使用通知中心与 Java" 
-	description="了解如何从 Java 后端使用 Azure 通知中心。" 
-	services="notification-hubs" 
-	documentationCenter="" 
-	authors="wesmc7777" 
-	manager="erikre" 
-	editor=""/>
+---
+title: 如何结合使用通知中心与 Java
+description: 了解如何从 Java 后端使用 Azure 通知中心。
+services: notification-hubs
+documentationCenter: 
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags 
-	ms.service="notification-hubs" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="java" 
-	ms.devlang="java" 
-	ms.topic="article" 
-	ms.date="06/29/2016" 
-	wacn.date="08/23/2016" 
-	ms.author="wesmc"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: java
+ms.devlang: java
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 08/23/2016
+ms.author: wesmc
+---
 
 # 如何通过 Java 使用通知中心
-[AZURE.INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
+[!INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
 		
 本主题将向你介绍完全受支持的全新官方 Azure 通知中心 Java SDK 的主要功能。 
 这是一个开源项目，你可以在 [Java SDK] 查看完整的 SDK 代码。
@@ -203,7 +203,6 @@ CreateOrUpdate、Patch 和 Delete 最终与 Get 一致。你请求的操作会�
 	job.setOutputContainerUri("container uri with SAS signature");
 	job = hub.submitNotificationHubJob(job);
 
-
 **提交导入作业：**
 
 	NotificationHubJob job = new NotificationHubJob();
@@ -299,13 +298,12 @@ CreateOrUpdate、Patch 和 Delete 最终与 Get 一致。你请求的操作会�
 	- [发送跨平台通知到经身份验证的用户]
 
 [Java SDK]: https://github.com/Azure/azure-notificationhubs-java-backend
-[Get started tutorial]: /documentation/articles/notification-hubs-ios-apple-push-notification-apns-get-started/
-[通知中心入门]: /documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/
-[发送突发新闻]: /documentation/articles/notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns/
-[发送当地的突发新闻]: /documentation/articles/notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification/
-[发送通知到经身份验证的用户]: /documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users/
-[发送跨平台通知到经身份验证的用户]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-push-notifications-app-users/
+[Get started tutorial]: ./notification-hubs-ios-apple-push-notification-apns-get-started.md
+[通知中心入门]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
+[发送突发新闻]: ./notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns.md
+[发送当地的突发新闻]: ./notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification.md
+[发送通知到经身份验证的用户]: ../mobile-services/mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users.md
+[发送跨平台通知到经身份验证的用户]: ../mobile-services/mobile-services-javascript-backend-windows-store-dotnet-push-notifications-app-users.md
 [Maven]: http://maven.apache.org/
  
-
 <!---HONumber=Mooncake_0808_2016-->

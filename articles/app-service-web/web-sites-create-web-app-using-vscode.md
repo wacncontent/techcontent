@@ -1,32 +1,31 @@
-<properties
-   pageTitle="在 Visual Studio Code 中创建 ASP.NET 5 Web 应用"
-   description="本教程演示了如何使用 Visual Studio Code 创建 ASP.NET 5 Web 应用。"
-   services="app-service\web"
-   documentationCenter=".net"
-   authors="erikre"
-   manager="wpickett"
-   editor="jimbe"/>
+---
+title: 在 Visual Studio Code 中创建 ASP.NET 5 Web 应用
+description: 本教程演示了如何使用 Visual Studio Code 创建 ASP.NET 5 Web 应用。
+services: app-service\web
+documentationCenter: .net
+authors: erikre
+manager: wpickett
+editor: jimbe
 
-<tags
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="dotnet" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="02/26/2016" 
-	wacn.date="12/26/2016" 
-	ms.author="cephalin"/>  
-
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: dotnet
+ms.devlang: na
+ms.topic: article
+ms.date: 02/26/2016
+wacn.date: 12/26/2016
+ms.author: cephalin
+---
 
 # 在 Visual Studio Code 中创建 ASP.NET 5 Web 应用
 
 ## 概述
 
-本教程介绍如何使用 [Visual Studio Code](http://code.visualstudio.com//Docs/whyvscode) (VS Code) 创建 ASP.NET Web 5 应用，并将其部署到 [Azure App Service](/documentation/articles/app-service-value-prop-what-is/)。
+本教程介绍如何使用 [Visual Studio Code](http://code.visualstudio.com//Docs/whyvscode) (VS Code) 创建 ASP.NET Web 5 应用，并将其部署到 [Azure App Service](../app-service/app-service-value-prop-what-is.md)。
 
-> [AZURE.NOTE] 尽管本文介绍的是 Web 应用，但同样适用于 API 应用和移动应用。
+> [!NOTE] 尽管本文介绍的是 Web 应用，但同样适用于 API 应用和移动应用。
 
-ASP.NET 5 是经过大幅重新设计的 ASP.NET。ASP.NET 5 是新的开源跨平台框架，用于通过 .NET 构建基于云的现代 Web 应用。有关详细信息，请参阅 [ASP.NET 5 简介](http://docs.asp.net/en/latest/conceptual-overview/aspnet.html)。有关 Azure App Service Web 应用的信息，请参阅 [Web 应用概述](/documentation/articles/app-service-web-overview/)。
+ASP.NET 5 是经过大幅重新设计的 ASP.NET。ASP.NET 5 是新的开源跨平台框架，用于通过 .NET 构建基于云的现代 Web 应用。有关详细信息，请参阅 [ASP.NET 5 简介](http://docs.asp.net/en/latest/conceptual-overview/aspnet.html)。有关 Azure App Service Web 应用的信息，请参阅 [Web 应用概述](./app-service-web-overview.md)。
 
 ## 先决条件  
 
@@ -71,7 +70,7 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
 
 		dnvm use 1.0.0-update1 -p
 
-> [AZURE.NOTE] 有关 OS X、 Linux 和 Windows 的更详细安装说明，请参阅[安装 ASP.NET 5 和 DNX](https://code.visualstudio.com/Docs/ASPnet5#_installing-aspnet-5-and-dnx)。
+> [!NOTE] 有关 OS X、 Linux 和 Windows 的更详细安装说明，请参阅[安装 ASP.NET 5 和 DNX](https://code.visualstudio.com/Docs/ASPnet5#_installing-aspnet-5-and-dnx)。
 
 ## 创建 Web 应用 
 
@@ -83,7 +82,7 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
 
 		npm install -g yo grunt-cli generator-aspnet bower
 
-	> [AZURE.NOTE] 你可能会收到提示 npm 版本已过期的警告。此警告不会影响本教程。
+	> [!NOTE] 你可能会收到提示 npm 版本已过期的警告。此警告不会影响本教程。
 
 3. 在命令提示符下输入以下命令，以创建项目文件夹，并创建应用的基架。
 
@@ -115,7 +114,7 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
 
 		dnx: Run Command
 
-	> [AZURE.NOTE] 如果 Omnisharp 服务器当前未运行，则会启动。重新输入上述命令。
+	> [!NOTE] 如果 Omnisharp 服务器当前未运行，则会启动。重新输入上述命令。
 
 	接下来，选择以下命令以运行你的 Web 应用：
 		
@@ -123,7 +122,7 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
 
 	命令窗口会显示该应用程序已启动。如果命令窗口未显示此消息，请检查 VS Code 左下角以找出项目中的错误。
 	
-	> [AZURE.NOTE] 从**命令控制板**发出命令需要在命令行的开头输入 **>** 字符。你可以在 *project.json* 文件中查看与 **web** 命令相关的详细信息。
+	> [!NOTE] 从**命令控制板**发出命令需要在命令行的开头输入 **>** 字符。你可以在 *project.json* 文件中查看与 **web** 命令相关的详细信息。
 	> 如果该命令未出现或不可用，则可能需要安装 C# 扩展。运行 `>Extensions: Install Extension` 和 `ext install c#` 以安装 C# 扩展。
 
 2. 打开浏览器并导航到以下 URL。
@@ -133,7 +132,6 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
 	将显示 Web 应用的默认页面，如下所示。
 
 	![浏览器中的本地 Web 应用](./media/web-sites-create-web-app-using-vscode/08-web-app.png)  
-
 
 3. 关闭浏览器。在**命令窗口**中，按 **Ctrl+C** 关闭应用程序并关闭**命令窗口**。
 
@@ -151,7 +149,7 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
 
 4. 输入“名称”的值，例如 **SampleWebAppDemo**。请注意，此名称必须是唯一的；尝试输入名称时，门户会强制此要求。因此，如果选择或输入了不同的值，需要以该值替换本教程中每个出现的 **SampleWebAppDemo**。
 
-5. 选择现有 **App Service 计划**或创建新计划。如果创建新计划，请选择定价层、位置和其他选项。有关 App Service 计划的详细信息，请参阅 [Azure App Service 计划深入概述](/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/)一文。
+5. 选择现有 **App Service 计划**或创建新计划。如果创建新计划，请选择定价层、位置和其他选项。有关 App Service 计划的详细信息，请参阅 [Azure App Service 计划深入概述](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)一文。
 
 	![新 Azure Web 应用边栏选项卡](./media/web-sites-create-web-app-using-vscode/10-azure-newappblade.png)
 
@@ -175,7 +173,6 @@ Git 是分布式版本控制系统，可用于部署 Azure App Service Web 应�
 
 ![](./media/web-sites-python-create-deploy-django-app/django-ws-006.png)  
 
-
 ## 将 Web 应用发布到 Azure App Service
 
 在本部分中，你将创建一个本地 Git 存储库，并从该存储库推送到 Azure，以将 Web 应用部署到 Azure。
@@ -183,7 +180,6 @@ Git 是分布式版本控制系统，可用于部署 Azure App Service Web 应�
 1. 在 VS Code 的左侧导航栏中，选择“Git”选项。
 
 	![VS Code 中的 Git 图标](./media/web-sites-create-web-app-using-vscode/git-icon.png)  
-
 
 2. 选择“初始化 git 存储库”，确保工作区受 git 源代码管理。
 
@@ -202,7 +198,6 @@ Git 是分布式版本控制系统，可用于部署 Azure App Service Web 应�
 5. 完成处理 Git 之后，你会发现，Git 窗口中的“更改”下面未列出任何文件。
 
 	![Git 无更改](./media/web-sites-create-web-app-using-vscode/no-changes.png)  
-
 
 6. 切换回到命令窗口，其中的命令提示符现在指向 Web 应用所在的目录。
 
@@ -226,7 +221,7 @@ Git 是分布式版本控制系统，可用于部署 Azure App Service Web 应�
 		To https://user@testsite.scm.chinacloudsites.cn/testsite.git
 		[new branch]      master -> master
 
-> [AZURE.NOTE] 如果更改了应用，可依次选择“全部提交”选项和“推送”选项，直接在 VS Code 中使用内置 Git 功能重新发布应用。可以在“全部提交”和“刷新”按钮旁边的下拉菜单中找到可用的“推送”选项。
+> [!NOTE] 如果更改了应用，可依次选择“全部提交”选项和“推送”选项，直接在 VS Code 中使用内置 Git 功能重新发布应用。可以在“全部提交”和“刷新”按钮旁边的下拉菜单中找到可用的“推送”选项。
 
 如果需要与其他人对项目进行协作，应该考虑在推送到 Azure 之前先推送到 GitHub。
 
@@ -245,6 +240,6 @@ Git 是分布式版本控制系统，可用于部署 Azure App Service Web 应�
 ![Azure Web 应用](./media/web-sites-create-web-app-using-vscode/21-azurewebapp.png)
 
 ## 摘要
-在本教程中，你学习了如何在 VS Code 创建 Web 应用并将其部署到 Azure。有关 VS Code 的详细信息，请参阅[为何使用 Visual Studio Code？](https://code.visualstudio.com/Docs/)一文 若要了解应用服务 Web 应用，请参阅 [Web 应用概述](/documentation/articles/app-service-web-overview/)。
+在本教程中，你学习了如何在 VS Code 创建 Web 应用并将其部署到 Azure。有关 VS Code 的详细信息，请参阅[为何使用 Visual Studio Code？](https://code.visualstudio.com/Docs/)一文 若要了解应用服务 Web 应用，请参阅 [Web 应用概述](./app-service-web-overview.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

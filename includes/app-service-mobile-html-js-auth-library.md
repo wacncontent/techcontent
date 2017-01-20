@@ -20,7 +20,6 @@ client.login("microsoftaccount").done(function (results) {
 
 你的应用还能够独立联系标识提供者，然后将返回的令牌提供给应用服务以进行身份验证。使用此客户端流可为用户提供单一登录体验，或者从标识提供者中检索其他用户数据。
 
-
 #### Microsoft 帐户示例
 
 以下示例使用 Live SDK，该 SDK 使用 Microsoft 帐户来支持 Windows 应用商店应用程序的单一登录：

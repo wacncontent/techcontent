@@ -1,22 +1,21 @@
-<properties 
-	pageTitle="Azure 服务总线 | Azure" 
-	description="介绍如何使用服务总线将 Azure 应用程序连接到其他软件。" 
-	services="service-bus" 
-	documentationCenter=".net" 
-	authors="sethmanheim" 
-	manager="timlt" 
-	editor=""/>  
+---
+title: Azure 服务总线 | Azure
+description: 介绍如何使用服务总线将 Azure 应用程序连接到其他软件。
+services: service-bus
+documentationCenter: .net
+authors: sethmanheim
+manager: timlt
+editor: 
 
-
-<tags 
-	ms.service="service-bus" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="get-started-article" 
-	ms.date="08/31/2016" 
-	ms.author="sethm"
-	wacn.date="01/04/2017"/>  
+ms.service: service-bus
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 08/31/2016
+ms.author: sethm
+wacn.date: 01/04/2017
+---
 
 # Azure 服务总线
 
@@ -112,10 +111,10 @@
 
 现在，你已了解有关服务总线的基础知识，请单击下面的链接了解更多信息。
 
-- 如何使用[服务总线队列](/documentation/articles/service-bus-dotnet-get-started-with-queues/)。
-- 如何使用[服务总线主题](/documentation/articles/service-bus-dotnet-how-to-use-topics-subscriptions/)。
-- 如何使用[服务总线中继](/documentation/articles/service-bus-dotnet-how-to-use-relay/)。
-- [服务总线示例](/documentation/articles/service-bus-samples/)
+- 如何使用[服务总线队列](./service-bus-dotnet-get-started-with-queues.md)。
+- 如何使用[服务总线主题](./service-bus-dotnet-how-to-use-topics-subscriptions.md)。
+- 如何使用[服务总线中继](./service-bus-dotnet-how-to-use-relay.md)。
+- [服务总线示例](./service-bus-samples.md)
 
 [1]: ./media/service-bus-fundamentals-hybrid-solutions/SvcBus_01_architecture.png
 [2]: ./media/service-bus-fundamentals-hybrid-solutions/SvcBus_02_queues.png

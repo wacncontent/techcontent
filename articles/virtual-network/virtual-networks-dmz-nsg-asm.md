@@ -1,21 +1,21 @@
-<properties
-   pageTitle="外围网络示例 – 使用 NSG 构建简单的外围网络 | Azure"
-   description="使用网络安全组 (NSG) 构建外围网络"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="tracsman"
-   manager="rossort"
-   editor=""/>
+---
+title: 外围网络示例 – 使用 NSG 构建简单的外围网络 | Azure
+description: 使用网络安全组 (NSG) 构建外围网络
+services: virtual-network
+documentationCenter: na
+authors: tracsman
+manager: rossort
+editor: 
 
-<tags
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="02/01/2016"
-   wacn.date="12/12/2016"
-   ms.author="jonor;sivae"/>
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/01/2016
+wacn.date: 12/12/2016
+ms.author: jonor;sivae
+---
 
 # 示例 1 – 使用 NSG 构建简单的外围网络
 
@@ -50,7 +50,7 @@
 ## 网络安全组 (NSG)
 本示例将构建一个 NSG 组，然后加载六个规则。
 
->[AZURE.TIP] 一般而言，应该先创建特定的“允许”规则，最后再创建一般的“拒绝”规则。分配的优先级确定了要先评估哪些规则。发现要向流量应用哪个特定规则后，不需要评估后续规则。可以朝入站或出站方向（从子网的角度看）应用 NSG 规则。
+>[!TIP] 一般而言，应该先创建特定的“允许”规则，最后再创建一般的“拒绝”规则。分配的优先级确定了要先评估哪些规则。发现要向流量应用哪个特定规则后，不需要评估后续规则。可以朝入站或出站方向（从子网的角度看）应用 NSG 规则。
 
 以声明性的方式为入站流量构建以下规则：
 
@@ -247,8 +247,7 @@
 
 此 PowerShell 脚本应该在连接到 Internet 的电脑或服务器上本地运行。
 
->[AZURE.IMPORTANT] 此脚本运行时，PowerShell 中可能会弹出警告或其他参考性消息。只有以红色字体显示的错误消息才需要引以关注。
-
+>[!IMPORTANT] 此脚本运行时，PowerShell 中可能会弹出警告或其他参考性消息。只有以红色字体显示的错误消息才需要引以关注。
 
 	<# 
 	 .SYNOPSIS
@@ -505,7 +504,6 @@
 	  Write-Host " - Install Backend resource (Run Post-Build Script on the AppVM01)" -ForegroundColor Gray
 	  Write-Host
 	  
-
 #### 网络配置文件
 使用更新的位置保存此 xml 文件，并将此文件的链接添加到上述脚本中的 $NetworkConfigFile 变量。
 	
@@ -547,7 +545,7 @@
 
 <!--Link References-->
 
-[HOME]: /documentation/articles/best-practices-network-security/
-[SampleApp]: /documentation/articles/virtual-networks-sample-app/
+[HOME]: ../security/best-practices-network-security.md
+[SampleApp]: ./virtual-networks-sample-app.md
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

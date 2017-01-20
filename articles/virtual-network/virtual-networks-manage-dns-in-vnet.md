@@ -1,26 +1,27 @@
-<properties 
-   pageTitle="管理虚拟网络 (VNet) 使用的 DNS 服务器"
-   description="了解如何在虚拟网络 (VNet) 中添加和删除 DNS 服务器"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="carmonm"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="03/15/2016"
-   wacn.date="12/16/2016"
-   ms.author="jdial" />
+---
+title: 管理虚拟网络 (VNet) 使用的 DNS 服务器
+description: 了解如何在虚拟网络 (VNet) 中添加和删除 DNS 服务器
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: carmonm
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/15/2016
+wacn.date: 12/16/2016
+ms.author: jdial
+---
 
 # 管理虚拟网络 (VNet) 使用的 DNS 服务器
 
 你可以在经典管理门户或网络配置文件中管理 VNet 中使用的 DNS 服务器列表。对于每个 VNet，最多可以添加 12 个 DNS 服务器。指定 DNS 服务器时，请确认按所处环境的正确顺序列出 DNS 服务器，这一点很重要。DNS 服务器列表不采用循环机制。将按指定服务器的顺序使用这些服务器。如果可访问列表上的第一个 DNS 服务器，则无论该 DNS 服务器是否工作正常，客户端都将使用它。若要更改你的虚拟网络的 DNS 服务器顺序，请从列表中删除 DNS 服务器，然后按你所需的顺序重新添加这些服务器。
 
->[AZURE.WARNING] 更新 DNS 列表后，必须重新启动位于虚拟网络中的虚拟机，以使其选取新的 DNS 服务器设置。虚拟机将继续使用其当前配置，直至其重新启动为止。
+>[!WARNING] 更新 DNS 列表后，必须重新启动位于虚拟网络中的虚拟机，以使其选取新的 DNS 服务器设置。虚拟机将继续使用其当前配置，直至其重新启动为止。
 
 ## 使用经典管理门户编辑虚拟网络的 DNS 服务器列表
 
@@ -50,16 +51,16 @@
 
 若要使用网络配置文件编辑 DNS 服务器列表，将首先从经典管理门户中导出配置设置。然后，将编辑网络配置文件，再通过经典管理门户向回导入该文件。下面概括列出了用于完成此过程的步骤。
 
-1. 将虚拟网络设置导出到网络配置文件。有关导出网络配置设置的详细信息和步骤，请参阅[将虚拟网络设置导出到网络配置文件](/documentation/articles/virtual-networks-using-network-configuration-file/)。
+1. 将虚拟网络设置导出到网络配置文件。有关导出网络配置设置的详细信息和步骤，请参阅[将虚拟网络设置导出到网络配置文件](./virtual-networks-using-network-configuration-file.md)。
 
-2. 指定虚拟网络的 DNS 服务器信息。有关指定 DNS 服务器的详细信息，请参阅[在虚拟网络配置文件中指定 DNS 服务器](/documentation/articles/virtual-networks-specifying-a-dns-settings-in-a-virtual-network-configuration-file/)。有关网络配置文件的其他信息，请参阅 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100.aspx)和[使用网络配置文件配置虚拟网络](/documentation/articles/virtual-networks-create-vnet-classic-portal/)。
+2. 指定虚拟网络的 DNS 服务器信息。有关指定 DNS 服务器的详细信息，请参阅[在虚拟网络配置文件中指定 DNS 服务器](./virtual-networks-specifying-a-dns-settings-in-a-virtual-network-configuration-file.md)。有关网络配置文件的其他信息，请参阅 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100.aspx)和[使用网络配置文件配置虚拟网络](./virtual-networks-create-vnet-classic-portal.md)。
 
-3. 导入网络配置文件。有关导入网络配置文件的详细信息和步骤，请参阅[导入网络配置文件](/documentation/articles/virtual-networks-using-network-configuration-file/)。
+3. 导入网络配置文件。有关导入网络配置文件的详细信息和步骤，请参阅[导入网络配置文件](./virtual-networks-using-network-configuration-file.md)。
 
 4. 重新启动位于虚拟网络中的虚拟机以使其可获取新的 DNS 设置。
 
 ## 后续步骤
 
-[如何在虚拟网络中使用公共 IP 地址](/documentation/articles/virtual-networks-public-ip-within-vnet/)
+[如何在虚拟网络中使用公共 IP 地址](./virtual-networks-public-ip-within-vnet.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

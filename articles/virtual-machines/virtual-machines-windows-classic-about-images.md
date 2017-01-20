@@ -1,35 +1,34 @@
-<properties
-	pageTitle="关于 Windows 虚拟机的映像 | Azure"
-	description="了解如何对 Azure 中的 Windows 虚拟机使用映像。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="cynthn"
-	manager="timlt"
-	editor="tysonn"
-	tags="azure-service-management"/>
+---
+title: 关于 Windows 虚拟机的映像 | Azure
+description: 了解如何对 Azure 中的 Windows 虚拟机使用映像。
+services: virtual-machines-windows
+documentationCenter: 
+authors: cynthn
+manager: timlt
+editor: tysonn
+tags: azure-service-management
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="01/05/2017"
-	ms.author="cynthn"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 01/05/2017
+ms.author: cynthn
+---
 
 # 关于 Windows 虚拟机的映像
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-classic-include.md)]
 
-[AZURE.INCLUDE [virtual-machines-common-classic-about-images](../../includes/virtual-machines-common-classic-about-images.md)]
+[!INCLUDE [virtual-machines-common-classic-about-images](../../includes/virtual-machines-common-classic-about-images.md)]
 
-更多关于在资源管理器模型查找镜像，请点击[这里](/documentation/articles/virtual-machines-windows-cli-ps-findimage/)。
+更多关于在资源管理器模型查找镜像，请点击[这里](./virtual-machines-windows-cli-ps-findimage.md)。
 
 ## 使用映像
 
 可以使用 Azure PowerShell 模块管理 Azure 订阅可用的映像。也可以使用 Azure 经典管理门户完成某些映像任务，但命令行提供更多选项。
-
 
 -	**获取所有映像**：`Get-AzureVMImage`返回当前订阅中可用的所有映像的列表：映像以及 Azure 或合作伙伴提供的映像。这意味着你可能会收到一个大列表。下一个示例演示如何获取较短的列表。
 -	**获取映像系列**：`Get-AzureVMImage | select ImageFamily` 通过显示 **ImageFamily** 字符串属性获取映像系列的列表。
@@ -42,9 +41,8 @@
 
 -	**删除映像**：`Remove-AzureVMImage -ImageName "MyOldVmImage"`
 
-
 ## 后续步骤
 
-还可以[使用经典管理门户创建 Windows 计算机](/documentation/articles/virtual-machines-windows-classic-tutorial/)
+还可以[使用经典管理门户创建 Windows 计算机](./virtual-machines-windows-classic-tutorial.md)
 
 <!---HONumber=Mooncake_0905_2016-->

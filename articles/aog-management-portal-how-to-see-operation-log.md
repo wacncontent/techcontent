@@ -1,16 +1,18 @@
-<properties 
-	pageTitle="如何通过管理服务查看在经典管理门户中执行的相关操作记录" 
-	description="本文介绍如何通过管理服务查看在经典管理门户中执行的相关操作记录" 
-	services="management portal" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="na-aog" ms.date="" wacn.date="12/18/2015"/>
+---
+title: 如何通过管理服务查看在经典管理门户中执行的相关操作记录
+description: 本文介绍如何通过管理服务查看在经典管理门户中执行的相关操作记录
+services: management portal
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
+ms.service: na-aog
+ms.date: 
+wacn.date: 12/18/2015
+---
 
 #如何通过管理服务查看在经典管理门户中执行的相关操作记录
-
 
 ###本文包含以下内容
 - [操作日志的作用](#function)

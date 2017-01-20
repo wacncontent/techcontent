@@ -1,23 +1,22 @@
-<properties
-    pageTitle="网络资源提供程序概述 | Azure"
-    description="了解 Azure 资源管理器中的新网络资源提供程序"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor="tysonn" />  
+---
+title: 网络资源提供程序概述 | Azure
+description: 了解 Azure 资源管理器中的新网络资源提供程序
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: tysonn
 
-<tags
-    ms.assetid="79bf09da-4809-45cb-8d21-705616ef24dc"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="03/15/2016"
-    wacn.date="12/26/2016"
-    ms.author="jdial" />  
-
+ms.assetid: 79bf09da-4809-45cb-8d21-705616ef24dc
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/15/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 网络资源提供程序
 要在当今社会获得业务成功，需要满足的一个基本需求就是，能够以灵活、弹性、安全且可重复的方式生成和管理可识别大型网络的应用程序。使用 Azure 资源管理器 (ARM) 可以在资源组中部署单个资源集合，从而可以创建此类应用程序。此类资源将通过 ARM 下的各种资源提供程序进行管理。
@@ -48,7 +47,6 @@ Azure 资源管理器依靠不同的资源提供程序提供对你的资源的�
 
 ![网络资源模型](./media/resource-groups-networking/Figure2.png)  
 
-
 每个资源都包含一组通用属性及其各自的属性集。通用属性：
 
 | 属性 | 说明 | 示例值 |
@@ -59,23 +57,23 @@ Azure 资源管理器依靠不同的资源提供程序提供对你的资源的�
 
 你可以在以下部分中检查资源的各个属性。
 
-[AZURE.INCLUDE [virtual-networks-nrp-pip-include](../../includes/virtual-networks-nrp-pip-include.md)]
+[!INCLUDE [virtual-networks-nrp-pip-include](../../includes/virtual-networks-nrp-pip-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-nrp-nic-include](../../includes/virtual-networks-nrp-nic-include.md)]
+[!INCLUDE [virtual-networks-nrp-nic-include](../../includes/virtual-networks-nrp-nic-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-nrp-nsg-include](../../includes/virtual-networks-nrp-nsg-include.md)]
+[!INCLUDE [virtual-networks-nrp-nsg-include](../../includes/virtual-networks-nrp-nsg-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-nrp-udr-include](../../includes/virtual-networks-nrp-udr-include.md)]
+[!INCLUDE [virtual-networks-nrp-udr-include](../../includes/virtual-networks-nrp-udr-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-nrp-vnet-include](../../includes/virtual-networks-nrp-vnet-include.md)]
+[!INCLUDE [virtual-networks-nrp-vnet-include](../../includes/virtual-networks-nrp-vnet-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-nrp-lb-include](../../includes/virtual-networks-nrp-lb-include.md)]
+[!INCLUDE [virtual-networks-nrp-lb-include](../../includes/virtual-networks-nrp-lb-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-nrp-appgw-include](../../includes/virtual-networks-nrp-appgw-include.md)]
+[!INCLUDE [virtual-networks-nrp-appgw-include](../../includes/virtual-networks-nrp-appgw-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-nrp-vpn-include](../../includes/virtual-networks-nrp-vpn-include.md)]
+[!INCLUDE [virtual-networks-nrp-vpn-include](../../includes/virtual-networks-nrp-vpn-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-nrp-tm-include](../../includes/virtual-networks-nrp-tm-include.md)]
+[!INCLUDE [virtual-networks-nrp-tm-include](../../includes/virtual-networks-nrp-tm-include.md)]
 
 ## 管理界面
 可以使用不同界面来管理你的 Azure 网络资源。在本文档中，我们将针对这些界面重点介绍其中两种：REST API 和模板。
@@ -229,7 +227,6 @@ Rest API 符合 HTTP 1.1 协议规范。下面显示了该 API 的常规 URI 结
       }
     }
 
-
 使用模板的主要优势在于：
 
 * 可以声明性方式在资源组中构建复杂的基础结构。创建资源的协调（包括依赖关系管理）由 ARM 处理。
@@ -238,23 +235,22 @@ Rest API 符合 HTTP 1.1 协议规范。下面显示了该 API 的常规 URI 结
 
 有关示例模板，请参阅 [Azure 快速入门模板](https://github.com/Azure/azure-quickstart-templates)。
 
-有关 ARM 模板语言的详细信息，请参阅 [Azure 资源管理器模板语言](/documentation/articles/resource-group-authoring-templates/)。
+有关 ARM 模板语言的详细信息，请参阅 [Azure 资源管理器模板语言](../azure-resource-manager/resource-group-authoring-templates.md)。
 
 上面的示例模板使用虚拟网络和子网资源。下面列出了可以使用的其他一些网络资源：
 
 ### 使用模板
 可以使用 PowerShell 或 AzureCLI，将服务从模板部署到 Azure。若要从 GitHub 中的模板部署服务，请下载[模板](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vnet-two-subnets)，执行一些必要的修改，然后使用 Azure CLI 进行部署。
 
->[AZURE.NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
-
+>[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 ## 后续步骤
-[Azure 资源管理器模板语言](/documentation/articles/resource-group-authoring-templates/)
+[Azure 资源管理器模板语言](../azure-resource-manager/resource-group-authoring-templates.md)
 
 [Azure 网络 – 常用的模板](https://github.com/Azure/azure-quickstart-templates)
 
-[Azure Resource Manager 和经典部署](/documentation/articles/resource-manager-deployment-model/)
+[Azure Resource Manager 和经典部署](../azure-resource-manager/resource-manager-deployment-model.md)
 
-[Azure Resource Manager 概述](/documentation/articles/resource-group-overview/)
+[Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)
 
 <!---HONumber=Mooncake_1219_2016-->

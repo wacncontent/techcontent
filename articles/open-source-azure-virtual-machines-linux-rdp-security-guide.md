@@ -1,17 +1,16 @@
-<properties
-   pageTitle="Linux 虚拟机远程连接安全贴士 | Azure"
-   description="本文介绍如何安全的远程连接到 Linux 虚拟机"
-   services="open-source"
-   documentationCenter=""
-   authors=""
-   manager=""
-   editor=""/>
+---
+title: Linux 虚拟机远程连接安全贴士 | Azure
+description: 本文介绍如何安全的远程连接到 Linux 虚拟机
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-   ms.service="open-source-website"  
-   ms.date=""
-   wacn.date="06/14/2016"/>
-
+ms.service: open-source-website
+ms.date: 
+wacn.date: 06/14/2016
+---
 
 #Azure Linux 虚拟机远程连接安全贴士
 
@@ -25,7 +24,7 @@
 
 ![azureuser 用户名][2]
  
-做身份验证最好使用密钥。如何产生密钥可以参考[使用密钥](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)。如果使用密码，请务必选择复杂的密码，使得蛮力攻击不会很容易猜出你的密码，这样可以大大的增强安全性。如需修改密码，可以使用 VMAccess 扩展。具体可以参考 [VMAcess](/documentation/articles/virtual-machines-linux-classic-reset-access/)。
+做身份验证最好使用密钥。如何产生密钥可以参考[使用密钥](./virtual-machines/virtual-machines-linux-mac-create-ssh-keys.md)。如果使用密码，请务必选择复杂的密码，使得蛮力攻击不会很容易猜出你的密码，这样可以大大的增强安全性。如需修改密码，可以使用 VMAccess 扩展。具体可以参考 [VMAcess](./virtual-machines/virtual-machines-linux-classic-reset-access.md)。
 
 其次是关闭标准端口，改用其他端口。这样黑客们起码需要扫遍很多端口才能开始尝试连接，增加了攻击的难度和时间。如果不设公用端口，系统默认为自动，会随机选一个端口。  
 
@@ -35,7 +34,7 @@
  
 ![为 SSH 端口配置 ACL][4]
  
-以上简单几步，就可以让你更安全的远程连接到 Azure Linux 虚拟机。如果你希望进一步加强安全性，可以参考 [Network tutorial](/documentation/services/networking/) 来利用网络功能对虚拟机做更好的隔离，比如部署点到站点 VPN 或网络安全组。  
+以上简单几步，就可以让你更安全的远程连接到 Azure Linux 虚拟机。如果你希望进一步加强安全性，可以参考 [Network tutorial](./virtual-network/index.md/) 来利用网络功能对虚拟机做更好的隔离，比如部署点到站点 VPN 或网络安全组。  
 
 <!--image references-->
 [1]: ./media/open-source-azure-virtual-machines-linux-rdp-security-guide/open-source-azure-virtual-machines-linux-rdp-security-guide-1.png  

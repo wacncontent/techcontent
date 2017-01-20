@@ -1,17 +1,17 @@
-<properties
-                pageTitle="Azure Web 应用重新配置应用服务计划时无法选择新创建的应用服务计划"
-                description="Azure 应用服务计划由于不在同一区域或同一资源组，出现 Web 应用无法选择新创建的应用服务计划"
-                services="app-service-web"
-                documentationCenter=""
-                authors=""
-                manager=""
-                editor=""
-                tags="Web Apps,App Service Plan,Resource group"/>
+---
+title: Azure Web 应用重新配置应用服务计划时无法选择新创建的应用服务计划
+description: Azure 应用服务计划由于不在同一区域或同一资源组，出现 Web 应用无法选择新创建的应用服务计划
+services: app-service-web
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: Web Apps,App Service Plan,Resource group
 
-<tags
-                ms.service="app-service-web-aog"
-                ms.date="12/23/2016"
-                wacn.date="12/23/2016"/>
+ms.service: app-service-web-aog
+ms.date: 12/23/2016
+wacn.date: 12/23/2016
+---
 
 # Azure Web 应用重新配置应用服务计划时无法选择新创建的应用服务计划
 
@@ -41,4 +41,4 @@
 
 	![classic](./media/aog-web-apps-qa-portal-change-app-service-plans/classic.jpg)
 
-详细内容请参考：[Azure 应用服务计划深入概述](/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/)
+详细内容请参考：[Azure 应用服务计划深入概述](./app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)

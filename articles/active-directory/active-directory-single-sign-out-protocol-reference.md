@@ -1,24 +1,21 @@
-<properties
-	pageTitle="Azure 单一注销 SAML 协议 | Azure"
-	description="本文介绍 Azure Active Directory 中的单一注销 SAML 协议"
-	services="active-directory"
-	documentationCenter=".net"
-	authors="priyamohanram"
-	manager="mbaldwin"
-	editor=""/>  
+---
+title: Azure 单一注销 SAML 协议 | Azure
+description: 本文介绍 Azure Active Directory 中的单一注销 SAML 协议
+services: active-directory
+documentationCenter: .net
+authors: priyamohanram
+manager: mbaldwin
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/03/2016"
-	wacn.date="11/08/2016"
-	ms.author="priyamo"/>  
-
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/03/2016
+wacn.date: 11/08/2016
+ms.author: priyamo
+---
 
 # 单一注销 SAML 协议
 
@@ -34,12 +31,10 @@ Azure Active Directory (Azure AD) 支持 SAML 2.0 Web 浏览器单一注销配�
 
 云服务将 `LogoutRequest` 消息发送到 Azure AD，以指示会话已终止。以下摘录显示了一个示例 `LogoutRequest` 元素。
 
-
 	<samlp:LogoutRequest xmlns="urn:oasis:names:tc:SAML:2.0:metadata" ID="idaa6ebe6839094fe4abc4ebd5281ec780" Version="2.0" IssueInstant="2013-03-28T07:10:49.6004822Z" xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol">
 	  <Issuer xmlns="urn:oasis:names:tc:SAML:2.0:assertion">https://www.workaad.com</Issuer>
 	  <NameID xmlns="urn:oasis:names:tc:SAML:2.0:assertion"> Uz2Pqz1X7pxe4XLWxV9KJQ+n59d573SepSAkuYKSde8=</NameID>
 	</samlp:LogoutRequest>
-
 
 ### LogoutRequest
 
@@ -64,14 +59,12 @@ Azure Active Directory (Azure AD) 支持 SAML 2.0 Web 浏览器单一注销配�
 
 Azure AD 在响应 `LogoutRequest` 元素时发送 `LogoutResponse`。以下摘录显示了一个示例 `LogoutResponse`。
 
-
 	<samlp:LogoutResponse ID="_f0961a83-d071-4be5-a18c-9ae7b22987a4" Version="2.0" IssueInstant="2013-03-18T08:49:24.405Z" InResponseTo="iddce91f96e56747b5ace6d2e2aa9d4f8c" xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol">
 	  <Issuer xmlns="urn:oasis:names:tc:SAML:2.0:assertion">https://sts.chinacloudapi.cn/82869000-6ad1-48f0-8171-272ed18796e9/</Issuer>
 	  <samlp:Status>
 	    <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success" />
 	  </samlp:Status>
 	</samlp:LogoutResponse>
-
 
 ### LogoutResponse
 

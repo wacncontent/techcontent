@@ -1,25 +1,26 @@
-<properties
-    pageTitle="创建 SAS 并将其用于 Blob 存储 | Azure"
-    description="本教程演示如何创建共享访问签名以用于 Blob 存储，以及如何从客户端应用程序使用这些签名。"
-    services="storage"
-    documentationcenter=""
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="491e0b3c-76d4-4149-9a80-bbbd683b1f3e"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 创建 SAS 并将其用于 Blob 存储 | Azure
+description: 本教程演示如何创建共享访问签名以用于 Blob 存储，以及如何从客户端应用程序使用这些签名。
+services: storage
+documentationcenter: 
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: 491e0b3c-76d4-4149-9a80-bbbd683b1f3e
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 共享访问签名，第 2 部分：创建 SAS 并将 SAS 用于 Blob 存储
 ## 概述
-本教程的[第 1 部分](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)介绍了共享访问签名 (SAS) 并且说明了有关使用共享访问签名的最佳实践。第 2 部分将演示如何生成共享访问签名以及如何将共享访问签名用于 Blob 存储。示例是用 C# 编写的并使用了 Azure .NET 存储客户端库。涉及的任务包括使用共享访问签名的以下方面：
+本教程的[第 1 部分](./storage-dotnet-shared-access-signature-part-1.md)介绍了共享访问签名 (SAS) 并且说明了有关使用共享访问签名的最佳实践。第 2 部分将演示如何生成共享访问签名以及如何将共享访问签名用于 Blob 存储。示例是用 C# 编写的并使用了 Azure .NET 存储客户端库。涉及的任务包括使用共享访问签名的以下方面：
 
 * 在容器上生成共享访问签名
 * 在 Blob 上生成共享访问签名
@@ -95,7 +96,6 @@
 	    return container.Uri + sasContainerToken;
     }
 
-
 在 **Main()** 方法的底部，在调用 **Console.ReadLine()** 之前，添加以下代码行以调用 **GetContainerSasUri()** 并将签名 URI 写入控制台窗口：
 
     //Generate a SAS URI for the container, without a stored access policy.
@@ -148,7 +148,6 @@
     //Generate a SAS URI for a blob within the container, without a stored access policy.
     Console.WriteLine("Blob SAS URI: " + GetBlobSasUri(container));
     Console.WriteLine();
-
 
 编译并且运行以输出新 Blob 的共享访问签名 URI。该 URI 将类似以下 URI：
 
@@ -302,7 +301,7 @@
 ## 第 2 部分：创建控制台应用程序来测试共享访问签名
 为了测试在之前的示例中创建的共享访问签名，我们将创建第二个控制台应用程序，该应用程序将使用这些签名在容器和 Blob 上执行操作。
 
-> [AZURE.NOTE] 如果自你完成本教程的第一部分后超过 24 小时，则你生成的签名将不再有效。在这种情况下，你应该在第一个控制台应用程序中运行代码，生成全新的共享访问签名以供在本教程的第二部分使用。
+> [!NOTE] 如果自你完成本教程的第一部分后超过 24 小时，则你生成的签名将不再有效。在这种情况下，你应该在第一个控制台应用程序中运行代码，生成全新的共享访问签名以供在本教程的第二部分使用。
 
 在 Visual Studio 中，创建一个新的 Windows 控制台应用程序并将其命名为 **ConsumeSharedAccessSignatures**。像之前所做的一样添加对 **Microsoft.WindowsAzure.Configuration.dll** 和 **Microsoft.WindowsAzure.Storage.dll** 的引用：
 
@@ -414,7 +413,6 @@
         }        
     }
 
-
 更新 **Main()** 方法以使用你在容器上创建的两个共享访问签名调用 **UseContainerSAS()**：
 
 	static void Main(string[] args)
@@ -430,7 +428,6 @@
 
 	    Console.ReadLine();
 	}
-
 
 ### 添加方法以便尝试使用共享访问签名执行 Blob 操作
 最后，我们将添加一个方法，该方法将在 Blob 上使用共享访问签名测试一些有代表性的 Blob 操作。在这个例子中，我们使用在共享访问签名中传入的构造函数 **CloudBlockBlob(String)** 返回对该 Blob 的引用。无需其他身份验证；它仅基于签名。
@@ -506,7 +503,6 @@
         }        
     }
 
-
 更新 **Main()** 方法以使用你在 Blob 上创建的两个共享访问签名调用 **UseBlobSAS()**：
 
 	static void Main(string[] args)
@@ -532,9 +528,9 @@
 ![sas-console-output-2][sas-console-output-2]
 
 ## 后续步骤
-[共享访问签名，第 1 部分：了解 SAS 模型](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)
+[共享访问签名，第 1 部分：了解 SAS 模型](./storage-dotnet-shared-access-signature-part-1.md)
 
-[管理对容器和 blob 的匿名读取访问](/documentation/articles/storage-manage-access-to-resources/)
+[管理对容器和 blob 的匿名读取访问](./storage-manage-access-to-resources.md)
 
 [使用共享访问签名委托访问 (REST API)](http://msdn.microsoft.com/zh-cn/library/azure/ee395415.aspx)
 

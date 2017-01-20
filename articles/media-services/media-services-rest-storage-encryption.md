@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="使用 AMS REST API 通过存储空间加密来加密内容" 
-	description="了解如何使用 AMS REST API 通过存储空间加密来加密内容。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 AMS REST API 通过存储空间加密来加密内容
+description: 了解如何使用 AMS REST API 通过存储空间加密来加密内容。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016"
-	wacn.date="12/27/2016"
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 #使用 AMS REST API 通过存储空间加密来加密内容
 
@@ -32,14 +30,13 @@
 - 将内容密钥链接到资产。
 - 对 AssetFile 实体设置加密相关的参数。
  
->[AZURE.NOTE]如果要传送存储加密资产，则必须配置资产的传送策略。在流式传输资产之前，流式处理服务器会删除存储加密，然后再使用指定的传送策略流式传输你的内容。有关详细信息，请参阅[配置资产传送策略](/documentation/articles/media-services-rest-configure-asset-delivery-policy/)。
+>[!NOTE]如果要传送存储加密资产，则必须配置资产的传送策略。在流式传输资产之前，流式处理服务器会删除存储加密，然后再使用指定的传送策略流式传输你的内容。有关详细信息，请参阅[配置资产传送策略](./media-services-rest-configure-asset-delivery-policy.md)。
 
-
->[AZURE.NOTE] 使用媒体服务 REST API 时，需注意以下事项：
+>[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
 >
->访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](/documentation/articles/media-services-rest-how-to-use/)。
+>访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 
->请按照[使用 REST API 连接到媒体服务](/documentation/articles/media-services-rest-connect-programmatically/)中所述对媒体服务 URI 执行后续调用。
+>请按照[使用 REST API 连接到媒体服务](./media-services-rest-connect-programmatically.md)中所述对媒体服务 URI 执行后续调用。
 
 ##存储空间加密概述 
 
@@ -64,7 +61,6 @@ AMS 存储空间加密将 **AES-CTR** 模式加密应用于整个文件。AES-CT
 	媒体服务 .NET SDK 在加密时使用 RSA 和 OAEP。你可以参阅 [EncryptSymmetricKeyData 函数](https://github.com/Azure/azure-sdk-for-media-services/blob/dev/src/net/Client/Common/Common.FileEncryption/EncryptionUtils.cs)中的 .NET 示例。
 4.	创建使用密钥标识符和内容密钥计算的校验和值。下面的 .NET 示例将使用密钥标识符和明文内容密钥的 GUID 部分计算校验和。
 	
-
         public static string CalculateChecksum(byte[] contentKey, Guid keyId)
         {
             const int ChecksumLength = 8;
@@ -91,10 +87,8 @@ AMS 存储空间加密将 **AES-CTR** 模式加密应用于整个文件。AES-CT
             return Convert.ToBase64String(retVal);
         }
 
-
 5. 创建具有 **EncryptedContentKey**（转换为 base64 编码的字符串）、**ProtectionKeyId**、**ProtectionKeyType**、**ContentKeyType** 和在前面步骤中收到的**校验和**值的内容密钥。
 
-	
 	对于存储空间加密，应在请求正文中包括以下属性。
 	 
 	请求正文属性 | 说明
@@ -106,15 +100,11 @@ AMS 存储空间加密将 **AES-CTR** 模式加密应用于整个文件。AES-CT
 	ProtectionKeyType | 这是用于加密内容密钥的保护密钥的加密类型。对于我们的示例，此值为 StorageEncryption(1)。
 	校验和 |内容密钥的 MD5 计算的校验和。它通过使用内容密钥加密内容 ID 计算得出。此示例代码演示了如何计算校验和。
 	
-
 ###检索 ProtectionKeyId 
  
-
 以下示例演示了如何检索证书的证书指纹 ProtectionKeyId，你在加密内容密钥时必须使用此指纹。执行此步骤以确保你的计算机已具备适当的证书。
 
-
 请求：
-	
 	
 	GET https://wamsshaclus001rest-hs.chinacloudapp.cn/api/GetProtectionKeyId?contentKeyType=0 HTTP/1.1
 	MaxDataServiceVersion: 3.0;NetFx
@@ -125,7 +115,6 @@ AMS 存储空间加密将 **AES-CTR** 模式加密应用于整个文件。AES-CT
 	x-ms-version: 2.11
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 	
-
 响应：
 	
 	HTTP/1.1 200 OK
@@ -159,8 +148,6 @@ AMS 存储空间加密将 **AES-CTR** 模式加密应用于整个文件。AES-CT
 	x-ms-client-request-id: 78d1247a-58d7-40e5-96cc-70ff0dfa7382
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 	
-
-
 响应：
 	
 	HTTP/1.1 200 OK
@@ -188,7 +175,6 @@ AMS 存储空间加密将 **AES-CTR** 模式加密应用于整个文件。AES-CT
 
 以下示例演示了如何创建一个 **ContentKey**，其中它的 **ContentKeyType** 设置为存储加密 ("1") 且 **ProtectionKeyType** 设置为“0”，以指示保护密钥 ID 是 X.509 证书指纹。
 
-
 请求
 
 	POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeys HTTP/1.1
@@ -209,7 +195,6 @@ AMS 存储空间加密将 **AES-CTR** 模式加密应用于整个文件。AES-CT
 	"EncryptedContentKey":"your encrypted content key",
 	"Checksum":"calculated checksum"
 	}
-
 
 响应：
 	
@@ -254,7 +239,6 @@ AMS 存储空间加密将 **AES-CTR** 模式加密应用于整个文件。AES-CT
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 	
 	{"Name":"BigBuckBunny" "Options":1}
-
 
 **HTTP 响应**
 
@@ -302,7 +286,6 @@ AMS 存储空间加密将 **AES-CTR** 模式加密应用于整个文件。AES-CT
 	x-ms-version: 2.11
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
-	
 	{"uri":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeys('nb%3Akid%3AUUID%3A01e6ea36-2285-4562-91f1-82c45736047c')"}
 
 响应：

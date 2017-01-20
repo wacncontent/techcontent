@@ -1,27 +1,24 @@
-<properties
- pageTitle="IoT 安全最佳实践 | Azure"
- description="保护 IoT 基础结构的安全最佳实践"
- services=""
- suite="iot-suite"
- documentationCenter=""
- authors="YuriDio"
- manager="timlt"
- editor=""/>  
+---
+title: IoT 安全最佳实践 | Azure
+description: 保护 IoT 基础结构的安全最佳实践
+services: 
+suite: iot-suite
+documentationCenter: 
+authors: YuriDio
+manager: timlt
+editor: 
 
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/17/2016
+wacn.date: 10/31/2016
+ms.author: yurid
+---
 
-<tags
- ms.service="iot-suite"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="10/17/2016"
- wacn.date="10/31/2016"
- ms.author="yurid"/>
-
-
-
-[AZURE.INCLUDE [iot-security-best-practices](../../includes/iot-security-best-practices.md)]
+[!INCLUDE [iot-security-best-practices](../../includes/iot-security-best-practices.md)]
 
 ## 后续步骤
 
@@ -34,9 +31,9 @@
 
 - [有关 Azure IoT 套件的常见问题][lnk-faq]
 
-[lnk-faq]: /documentation/articles/iot-suite-faq/
+[lnk-faq]: ./iot-suite-faq.md
 
-[lnk-security-architecture]: /documentation/articles/iot-security-architecture/
-[lnk-security-deployment]: /documentation/articles/iot-suite-security-deployment/
+[lnk-security-architecture]: ./iot-security-architecture.md
+[lnk-security-deployment]: ./iot-suite-security-deployment.md
 
 <!---HONumber=Mooncake_0829_2016-->

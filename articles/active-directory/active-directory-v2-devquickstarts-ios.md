@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure AD v2.0 iOS 应用 | Azure"
-	description="如何通过第三方库生成一个使用个人 Microsoft 帐户和工作或学校帐户来登录用户的 iOS 应用。"
-	services="active-directory"
-	documentationCenter=""
-	authors="brandwe"
-	manager="mbaldwin"
-	editor=""/>  
+---
+title: Azure AD v2.0 iOS 应用 | Azure
+description: 如何通过第三方库生成一个使用个人 Microsoft 帐户和工作或学校帐户来登录用户的 iOS 应用。
+services: active-directory
+documentationCenter: 
+authors: brandwe
+manager: mbaldwin
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="mobile-ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="06/28/2016"
-	wacn.date="08/22/2016"
-	ms.author="brandwe"/>  
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: mobile-ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 06/28/2016
+wacn.date: 08/22/2016
+ms.author: brandwe
+---
 
 # 使用 v2.0 终结点，通过图形 API 将登录添加到使用第三方库的 iOS 应用
 
@@ -24,37 +23,31 @@ Microsoft 标识平台使用开放式标准，例如 OAuth2 和 OpenID Connect�
 
 借助本演练创建的应用程序，用户可以使用图形 API 登录到其组织，然后在组织中搜索其他人。
 
-如果你是 OAuth2 或 OpenID Connect 新手，此示例配置可能不太适合你。建议你阅读 [v2.0 协议 — OAuth 2.0 授权代码流](/documentation/articles/active-directory-v2-protocols-oauth-code/)了解背景信息。
+如果你是 OAuth2 或 OpenID Connect 新手，此示例配置可能不太适合你。建议你阅读 [v2.0 协议 — OAuth 2.0 授权代码流](./active-directory-v2-protocols-oauth-code.md)了解背景信息。
 
-
-> [AZURE.NOTE]
+> [!NOTE]
     我们的平台中有些功能（例如条件性访问和 Intune 策略管理）采用 OAuth2 或 OpenID Connect 标准中的表达式，所以会要求你使用开放源代码 Microsoft Azure 标识库。
 
 v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
-> [AZURE.NOTE]
-    若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](/documentation/articles/active-directory-v2-limitations/)。
+> [!NOTE]
+    若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
 ## 从 GitHub 下载代码
 本教程的代码[在 GitHub 上](https://github.com/Azure-Samples/active-directory-ios-native-nxoauth2-v2)维护。若要遵照该代码，你可以[下载 .zip 格式应用骨架](https://github.com/AzureADQuickStarts/AppModelv2-WebAPI-DotNet/archive/skeleton.zip)，或克隆该骨架：
 
-
 	git clone --branch skeleton git@github.com:Azure-Samples/active-directory-ios-native-nxoauth2-v2.git
-
 
 你也可以下载以下示例，并立即开始使用：
 
-
 	git clone git@github.com:Azure-Samples/active-directory-ios-native-nxoauth2-v2.git
 
-
 ## 注册应用程序
-在[应用程序注册门户](https://apps.dev.microsoft.com)创建新的应用，或按照[如何使用 v2.0 终结点注册应用](/documentation/articles/active-directory-v2-app-registration/)中的详细步骤操作。请确保：
+在[应用程序注册门户](https://apps.dev.microsoft.com)创建新的应用，或按照[如何使用 v2.0 终结点注册应用](./active-directory-v2-app-registration.md)中的详细步骤操作。请确保：
 
 - 复制分配给应用的“应用程序 ID”，因为稍后将要用到。
 - 为应用添加**移动**平台。
 - 从门户复制**重定向 URI**。必须使用默认值 `urn:ietf:wg:oauth:2.0:oob`。
-
 
 ## 下载 NXOAuth2 第三方库并创建工作区
 
@@ -64,12 +57,10 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
 CocoaPods 是 Xcode 项目的依赖关系管理器。它会自动管理上述安装步骤。
 
-
 	$ vi Podfile
 
 1. 将以下内容添加到 podfile：
 
-		
 		platform :ios, '8.0'
 	
 		target 'QuickStart' do
@@ -78,15 +69,12 @@ CocoaPods 是 Xcode 项目的依赖关系管理器。它会自动管理上述安
 	
 		end
 		
-
 2. 使用 CocoaPods 加载 podfile。这会创建你要加载的新 Xcode 工作区。
 
-		
 		$ pod install
 		...
 		$ open QuickStart.xcworkspace
 		
-
 ## 浏览项目结构
 
 在主干中为项目设置以下结构：
@@ -124,7 +112,6 @@ objc
 	bool isRequestBusy;
 	NSURL *authcode;
 	
-
 让我们看看关于代码的详细信息。
 
 第一个字符串用于 `scopes`。`User.ReadBasic.All` 值可让你读取目录中所有用户的基本个人资料。
@@ -157,7 +144,6 @@ objc
 	
 	}
 
-
 ### 创建用于登录的 Web 视图
 
 Web 视图可提示用户提供短信等附加因素（如果已配置）或向用户返回错误消息。你将在此处设置 Web 视图，然后编写代码，以从标识服务处理将会在 Web 视图中发生的回叫。
@@ -175,7 +161,6 @@ objc
 	                                   }];
 	}
 	
-
 ### 重写 Web 视图方法以处理身份验证
 
 如先前所述，当用户需要登录时，若要告诉 Web 视图发生了什么情况，你可以粘贴以下代码。
@@ -230,7 +215,6 @@ objc
 	
 	}
 
-
 ### 编写代码以处理 OAuth2 请求的结果
 
 以下代码会处理从 Web 视图返回的 redirectURL。如果身份验证未成功，此代码将重试一次。同时，库会提供错误，让你可在控制台中查看或以异步方式处理。
@@ -252,17 +236,13 @@ objc
 	    }
 	}
 
-
 ### 设置 OAuth 上下文（称为帐户存储）
 
 在这里，你可以针对希望应用程序能够访问的每个服务，在共享帐户存储上调用 `-[NXOAuth2AccountStore setClientID:secret:authorizationURL:tokenURL:redirectURL:forAccountType:]`。帐户类型是字符串，可作为特定服务的标识符。由于你正在访问图形 API，因此，代码会将其视为 `"myGraphService"`。接着，你要设置观察器，以在令牌发生任何更改时告诉你。在你获取令牌后，让用户返回到 `masterView`。
 
-
-
 objc
 
 		- (void)setupOAuth2AccountStore {
-	
 	
 	        AppData* data = [AppData getInstance];
 	
@@ -302,7 +282,6 @@ objc
 	                                                  }];
 	}
 
-
 ## 设置主视图以从图形 API 搜索和显示用户
 
 在网格中显示所返回数据的主视图控制器 (MVC) 应用超出了本演练的范围，而且有很多在线教程说明了如何生成该应用。此代码全都在主干文件中。不过，必须在此 MVC 应用程序中处理几件事：
@@ -321,7 +300,6 @@ objc
 	- (void)viewDidLoad {
 	    [super viewDidLoad];
 	
-	
 	    NXOAuth2AccountStore *store = [NXOAuth2AccountStore sharedStore];
 	    NSArray *accounts = [store accountsWithAccountType:@"myGraphService"];
 	
@@ -333,7 +311,6 @@ objc
 	            [self.navigationController pushViewController:userSelectController animated:YES];
 	        });
 	        }
-
 
 ### 在收到数据时更新表视图
 
@@ -363,15 +340,12 @@ objc
 	    User *user = nil;
 	     user = [upnArray objectAtIndex:indexPath.row];
 	
-	
 	    // Configure the cell
 	    cell.textLabel.text = user.name;
 	    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
 	
 	    return cell;
 	}
-
-
 
 ### 提供有人在搜索字段中键入内容时调用图形 API 的方法
 
@@ -384,14 +358,10 @@ objc
 	
 	    };
 	
-	
-	
 	        [GraphAPICaller searchUserList:searchText completionBlock:^(NSMutableArray* returnedUpns, NSError* error) {
 	            if (returnedUpns) {
 	
-	
 	                upnArray = returnedUpns;
-	
 	
 	            }
 	            else
@@ -405,12 +375,9 @@ objc
 	                });
 	            }
 	
-	
 	        }];
 	
-	
 	}
-
 
 ## 编写帮助程序类以访问图形 API
 
@@ -429,9 +396,7 @@ objc
 	
 	@end
 
-
 如你所见，指定的方法会获取字符串并返回 completionBlock。此 completionBlock（如你所猜测）提供的对象会在用户搜索时实时填充数据，以此更新表。
-
 
 ### 创建新的 Objective C 文件
 
@@ -490,7 +455,6 @@ objc
 	                               s.businessPhones =[keyValuePairs valueForKey:@"businessPhones"];
 	                               s.mobilePhones =[keyValuePairs valueForKey:@"mobilePhone"];
 	
-	
 	                               [Users addObject:s];
 	                           }
 	
@@ -504,26 +468,21 @@ objc
 	                   }];
 	}
 
-
-
 我们会详细解说此方法。
 
 此代码的核心在于 `NXOAuth2Request`，该方法会采用你已经在 settings.plist 文件中定义的参数。
 
 第一步是构造正确的图形 API 调用。由于你正在调用 `/users`，因此，你会将它追加到图形 API 资源和版本来进行指定。因为这些都会随着 API 演进而改变，所以合理的做法是将其放在外部设置文件中。
 
-
 objc
 
 	NSString *graphURL = [NSString stringWithFormat:@"%@%@/users", data.graphApiUrlString, data.apiversion];
-
 
 接下来，你需要指定也会提供给图形 API 调用的参数。切记不要将参数放在资源终结点中，因为系统会在运行时针对所有不符合 URI 的字符擦除该终结点。必须在参数中提供所有查询代码。
 
 objc
 
 	NSDictionary* params = [self convertParamsToDictionary:searchString];
-
 
 你可能发现这会调用你尚未编写的 `convertParamsToDictionary` 方法。让我们立即在文件末尾这样做：
 
@@ -537,11 +496,8 @@ objc
 	
 	           [dictionary setValue:query forKey:@"$filter"];
 	
-	
-	
 	    return dictionary;
 	}
-
 
 接下来，我们将使用 `NXOAuth2Request` 方法从 API 取回 JSON 格式的数据。
 
@@ -564,7 +520,6 @@ objc
 
                            // We can grab the top most JSON node to get our graph data.
                            NSArray *graphDataArray = [dataReturned objectForKey:@"value"];
-
 
 最后，来看看你要如何将数据返回到 MasterViewController。数据会以序列化方式返回，而且该数据必须反序列化并加载到 MainViewController 可使用的对象中。出于此目的，主干具有的 `User.m/h` 文件可以创建 User 对象。你会使用图形中的信息填充该 User 对象。
 
@@ -591,10 +546,7 @@ objc
 	    s.businessPhones =[keyValuePairs valueForKey:@"businessPhones"];
 	    s.mobilePhones =[keyValuePairs valueForKey:@"mobilePhone"];
 	
-	
 	    [Users addObject:s];
-
-
 
 ## 运行示例
 

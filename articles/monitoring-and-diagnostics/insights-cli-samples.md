@@ -1,37 +1,34 @@
-<properties
-	pageTitle="Azure Insights：Azure Insights CLI 快速入门示例 | Azure"
-	description="示例 CLI 命令可以帮助访问 Azure Insights 监视功能。Azure Insights 是一种 Azure 服务，允许你基于配置的遥测数据值自动缩放云服务、虚拟机和 Web Apps、发送警报通知或调用 Web URL。"
-	authors="kamathashwin"
-	manager=""
-	editor=""
-	services="monitoring-and-diagnostics"
-	documentationCenter="monitoring-and-diagnostics"/>  
+---
+title: Azure Insights：Azure Insights CLI 快速入门示例 | Azure
+description: 示例 CLI 命令可以帮助访问 Azure Insights 监视功能。Azure Insights 是一种 Azure 服务，允许你基于配置的遥测数据值自动缩放云服务、虚拟机和 Web Apps、发送警报通知或调用 Web URL。
+authors: kamathashwin
+manager: 
+editor: 
+services: monitoring-and-diagnostics
+documentationCenter: monitoring-and-diagnostics
 
-
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/08/2016"
-	ms.author="ashwink"
-	wacn.date="12/05/2016"/>  
-
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/08/2016
+ms.author: ashwink
+wacn.date: 12/05/2016
+---
 
 # Azure Monitor 跨平台 CLI 快速启动示例
 
 本文说明可帮助访问 Azure Monitor 功能的示例命令行接口 (CLI) 命令。Azure Monitor 允许基于配置的遥测数据值自动缩放云服务、虚拟机和 Web 应用，以及发送警报通知或调用 Web URL。
 
-> [AZURE.NOTE]
+> [!NOTE]
 “Azure Insights”在 2016 年 9 月 25 日后称为 Azure Monitor。但是，命名空间和以下命令中仍然包含“insights”。
 > 
 > 
 
 ## 先决条件
 
-如果尚未安装 Azure CLI，请参阅[安装 Azure CLI](/documentation/articles/xplat-cli-install/)。如果不熟悉 Azure CLI，可在[将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure Resource Manager 配合使用](/documentation/articles/xplat-cli-azure-resource-manager/)中了解相关详细信息。
-
+如果尚未安装 Azure CLI，请参阅[安装 Azure CLI](../xplat-cli-install.md)。如果不熟悉 Azure CLI，可在[将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure Resource Manager 配合使用](../azure-resource-manager/xplat-cli-azure-resource-manager.md)中了解相关详细信息。
 
 在 Windows 中，从 [Node.js 网站](https://nodejs.org/)安装 npm。完成安装之后，通过“以管理员身份运行”权限使用 CMD.exe，从安装 npm 的文件夹执行以下命令：
 
@@ -156,7 +153,6 @@ azure insights logprofile list
 azure insights logprofile get -n default
 ```
 
-
 ### 添加没有保留期的日志配置文件
 
 ```
@@ -181,7 +177,6 @@ azure insights logprofile add --name default --storageId /subscriptions/1a66ce04
 azure insights logprofile add --name default --storageId /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/insights-integration/providers/Microsoft.Storage/storageAccounts/insightsintegration7777 --serviceBusRuleId /subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/Default-ServiceBus-EastUS/providers/Microsoft.ServiceBus/namespaces/testshoeboxeastus/authorizationrules/RootManageSharedAccessKey --locations chinanorth,chinaeast --retentionInDays 90
 ```
 
-
 ## 诊断
 可以按照此部分中的信息使用诊断设置。
 
@@ -203,7 +198,6 @@ azure insights diagnostic set --resourceId /subscriptions/df602c9c-7aa0-407d-a6f
 azure insights diagnostic set --resourceId /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andyrg/providers/Microsoft.Logic/workflows/andy0315logicapp --storageId /subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/Default-Storage-chinaeast/providers/Microsoft.Storage/storageAccounts/shibanitesting --enabled true
 ```
 
-
 ## <a name="autoscale"></a> 自动缩放
 按照此部分中的信息使用自动缩放设置。需要修改这些示例。
 
@@ -218,7 +212,6 @@ azure insights autoscale setting list montest2
 ```
 azure insights autoscale setting list montest2 -n setting2
 ```
-
 
 ### 设置自动缩放设置
 

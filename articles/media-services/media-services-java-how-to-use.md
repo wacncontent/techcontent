@@ -1,31 +1,30 @@
-<properties
-    pageTitle="开始使用 Java 传送点播内容 | Azure"
-    description="介绍如何使用 Azure 媒体服务执行编码、加密和流式处理资源等常见任务。"
-    services="media-services"
-    documentationcenter="java"
-    author="juliako"
-    manager="erikre"
-    editor="" />  
+---
+title: 开始使用 Java 传送点播内容 | Azure
+description: 介绍如何使用 Azure 媒体服务执行编码、加密和流式处理资源等常见任务。
+services: media-services
+documentationcenter: java
+author: juliako
+manager: erikre
+editor: 
 
-<tags
-    ms.assetid="b884bd61-dbdb-42ea-b170-8fb02e7fded7"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="java"
-    ms.topic="get-started-article"
-    ms.date="10/19/2016"
-    wacn.date="12/12/2016"
-    ms.author="juliako" />  
-
+ms.assetid: b884bd61-dbdb-42ea-b170-8fb02e7fded7
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: java
+ms.topic: get-started-article
+ms.date: 10/19/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 # 开始使用 Java 传送点播内容
 
-[AZURE.INCLUDE [media-services-selector-get-started](../../includes/media-services-selector-get-started.md)]
+[!INCLUDE [media-services-selector-get-started](../../includes/media-services-selector-get-started.md)]
 
 ##<a id="setup-account"></a>为媒体服务设置 Azure 帐户
 
-若要设置媒体服务帐户，请使用 Azure 经典管理门户。请参阅主题[如何创建媒体服务帐户](/documentation/articles/media-services-create-account/)。在 Azure 经典管理门户中创建帐户后，便可以设置计算机以进行媒体服务开发。
+若要设置媒体服务帐户，请使用 Azure 经典管理门户。请参阅主题[如何创建媒体服务帐户](./media-services-create-account.md)。在 Azure 经典管理门户中创建帐户后，便可以设置计算机以进行媒体服务开发。
 
 ##<a id="setup-dev"></a>完成设置以进行媒体服务开发
 
@@ -33,14 +32,14 @@
 
 ###先决条件
 
--   在新的或现有的 Azure 订阅中拥有一个媒体服务帐户。请参阅主题[如何创建媒体服务帐户](/documentation/articles/media-services-create-account/)。
+-   在新的或现有的 Azure 订阅中拥有一个媒体服务帐户。请参阅主题[如何创建媒体服务帐户](./media-services-create-account.md)。
 -   适用于 Java 的 Azure 库，可以从 [Azure Java 开发人员中心][Azure Java Developer Center]安装。
 
 ##<a if="connect"></a>如何将媒体服务与 Java 结合使用
 
 以下代码演示了如何创建资产、如何将媒体文件上传到该资产、如何使用任务运行作业以转换资产，以及如何创建定位符来流式传输视频。
 
-使用此代码前，需设置一个媒体服务帐户。有关设置帐户的信息，请参阅[如何创建媒体服务帐户](/documentation/articles/media-services-create-account/)。
+使用此代码前，需设置一个媒体服务帐户。有关设置帐户的信息，请参阅[如何创建媒体服务帐户](./media-services-create-account.md)。
 
 将“clientId”和“clientSecret”变量替换为你自己的值。该代码还依赖于本地存储的文件。需要提供自己的文件以供使用。
 	
@@ -72,7 +71,6 @@
 	import com.microsoft.windowsazure.services.media.models.MediaProcessorInfo;
 	import com.microsoft.windowsazure.services.media.models.Task;
 	
-	
 	public class HelloMediaServices
 	{
 		// Media Services account credentials configuration
@@ -96,11 +94,9 @@
 				mediaServiceUri, oAuthUri, clientId, clientSecret, scope);
 				mediaService = MediaService.create(configuration);
 				
-				
 				// Upload a local file to an Asset
 				AssetInfo uploadAsset = uploadFileAndCreateAsset("BigBuckBunny.mp4");
 				System.out.println("Uploaded Asset Id: " + uploadAsset.getId());
-				
 				
 				// Transform the Asset
 				AssetInfo encodedAsset = encode(uploadAsset);
@@ -210,7 +206,6 @@
 	        return outputAssets.get(0);
 	    }
 	    
-	
 	    public static String getStreamingOriginLocator(AssetInfo asset) throws ServiceException {
 	        // Get the .ISM AssetFile
 	        ListResult<AssetFileInfo> assetFiles = mediaService.list(AssetFile.list(asset.getAssetFilesLink()));
@@ -257,19 +252,13 @@
 	
 	}
 
-
-
-
 ## 其他资源
 有关媒体服务 Javadoc 文档，请参阅[适用于 Java 的 Azure 库文档][Azure Libraries for Java documentation]。
 
 <!-- URLs. -->
 
-
   [Azure Java Developer Center]: /develop/java/
   [Azure Libraries for Java documentation]: http://azure.github.io/azure-sdk-for-java/
-  [Media Services Client Development]: /documentation/articles/media-services-develop-video-players/
-
- 
+  [Media Services Client Development]: ./media-services-develop-video-players.md
 
 <!---HONumber=Mooncake_1205_2016-->

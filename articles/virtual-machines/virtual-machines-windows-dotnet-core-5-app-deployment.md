@@ -1,24 +1,23 @@
-<properties
-    pageTitle="使用虚拟机扩展自动化应用程序部署 | Azure"
-    description="Azure 虚拟机 DotNet Core 教程"
-    services="virtual-machines-windows"
-    documentationcenter="virtual-machines"
-    author="neilpeterson"
-    manager="timlt"
-    editor="tysonn"
-    tags="azure-resource-manager" />  
+---
+title: 使用虚拟机扩展自动化应用程序部署 | Azure
+description: Azure 虚拟机 DotNet Core 教程
+services: virtual-machines-windows
+documentationcenter: virtual-machines
+author: neilpeterson
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="79c91304-6c1b-4354-a185-fecc129b139d"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="infrastructure-services"
-    ms.date="11/21/2016"
-    wacn.date="12/20/2016"
-    ms.author="nepeters" />  
-
+ms.assetid: 79c91304-6c1b-4354-a185-fecc129b139d
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 11/21/2016
+wacn.date: 12/20/2016
+ms.author: nepeters
+---
 
 # 使用 Azure Resource Manager 模板部署应用程序
 确定所有 Azure 基础结构要求并转换成部署模板后，需要解决实际的应用程序部署需求。此处的应用程序部署是指将实际应用程序二进制文件安装到 Azure 资源上。以音乐应用商店示例而言，需要在每个虚拟机上安装并配置 .Net Core 和 IIS。需要将音乐应用商店二进制文件安装到虚拟机上，并预先创建音乐应用商店数据库。
@@ -83,7 +82,7 @@
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [VM 脚本扩展](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L339)。
 
->[AZURE.NOTE] 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE] 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 请注意，在以下 JSON 中，脚本存储在 GitHub 中。此脚本也可以存储在 Azure Blob 存储中。此外，Azure Resource Manager 模板允许构建脚本执行字符串，使模板参数值可用作脚本执行参数。在本例中，数据是在部署模板时提供的，然后，可在执行脚本时使用这些值。
 
@@ -115,7 +114,7 @@
       }
     }
 
-有关使用自定义脚本扩展的详细信息，请参阅 [Custom script extensions with Resource Manager templates](/documentation/articles/virtual-machines-windows-extensions-customscript/)（使用 Resource Manager 模板自定义脚本扩展）。
+有关使用自定义脚本扩展的详细信息，请参阅 [Custom script extensions with Resource Manager templates](./virtual-machines-windows-extensions-customscript.md)（使用 Resource Manager 模板自定义脚本扩展）。
 
 ## 后续步骤
 <hr>

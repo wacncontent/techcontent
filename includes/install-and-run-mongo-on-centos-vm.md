@@ -1,6 +1,6 @@
 按照以下步骤操作可在运行 CentOS Linux 的虚拟机上安装和运行 MongoDB。
 
-> [AZURE.WARNING]默认情况下，不启用 MongoDB 安全功能，例如身份验证和 IP 地址绑定。在将 MongoDB 部署到生产环境之前，应启用安全功能。有关详细信息，请参阅[安全性和身份验证](http://www.mongodb.org/display/DOCS/Security+and+Authentication)。
+> [!WARNING]默认情况下，不启用 MongoDB 安全功能，例如身份验证和 IP 地址绑定。在将 MongoDB 部署到生产环境之前，应启用安全功能。有关详细信息，请参阅[安全性和身份验证](http://www.mongodb.org/display/DOCS/Security+and+Authentication)。
 
 1. 配置程序包管理系统 (YUM) 以便能够安装 MongoDB。创建 */etc/yum.repos.d/10gen.repo* 文件以保存有关你的存储库的信息并添加以下内容：
 
@@ -64,10 +64,7 @@
  
  这将允许对 MongoDB 进行远程访问。
 
-
-
 [QuickStartUnix]: http://www.mongodb.org/display/DOCS/Quickstart+Unix
-
 
 [Image7]: ./media/install-and-run-mongo-on-centos-vm/LinuxVmAddEndpoint.png
 [Image8]: ./media/install-and-run-mongo-on-centos-vm/LinuxVmAddEndpoint2.png

@@ -1,27 +1,26 @@
-<properties
-    pageTitle="删除服务器并禁用保护 | Azure"
-    description="本文介绍如何从 Site Recovery 保管库中注销服务器，以及如何禁用虚拟机和物理服务器的保护。"
-    services="site-recovery"
-    documentationcenter=""
-    author="rayne-wiselman"
-    manager="cfreeman"
-    editor="" />  
+---
+title: 删除服务器并禁用保护 | Azure
+description: 本文介绍如何从 Site Recovery 保管库中注销服务器，以及如何禁用虚拟机和物理服务器的保护。
+services: site-recovery
+documentationcenter: 
+author: rayne-wiselman
+manager: cfreeman
+editor: 
 
-<tags
-    ms.assetid="ef1f31d5-285b-4a0f-89b5-0123cd422d80"
-    ms.service="site-recovery"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage-backup-recovery"
-    ms.date="12/19/2016"
-    wacn.date="01/04/2016"
-    ms.author="raynew" />  
-
+ms.assetid: ef1f31d5-285b-4a0f-89b5-0123cd422d80
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 12/19/2016
+wacn.date: 01/04/2016
+ms.author: raynew
+---
 
 # 删除服务器并禁用保护
 
-Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) 策略。该服务可以协调虚拟机和物理服务器的复制、故障转移与恢复。虚拟机可复制到 Azure 中，也可复制到本地辅助数据中心中。如需快速概览，请阅读[什么是 Azure Site Recovery？](/documentation/articles/site-recovery-overview/)
+Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) 策略。该服务可以协调虚拟机和物理服务器的复制、故障转移与恢复。虚拟机可复制到 Azure 中，也可复制到本地辅助数据中心中。如需快速概览，请阅读[什么是 Azure Site Recovery？](./site-recovery-overview.md)
 
 本文介绍如何从 Azure 门户的恢复服务保管库中取消注册服务器，以及如何禁用受 Site Recovery 保护的计算机的保护。
 
@@ -43,7 +42,6 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
 
 不管配置服务器是否连接到 Azure，说明都是相同的。
 
-
 ## 取消注册连接的 VMM 服务器
 
 根据最佳实践要求，我们建议在 VMM 服务器连接到 Azure 之后取消注册该服务器。这样可确保正确清理 VMM 服务器（以及其他具有配对云的 VMM 服务器）上的设置。只有在连接出现永久性问题时，才应删除未连接的服务器。如果未连接 VMM 服务器，需手动运行一个脚本来清理设置。
@@ -54,8 +52,6 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
 4. 删除 VMM 服务器或主动 VMM 节点。在“Site Recovery 基础结构”>“对于 System Center VMM”>“VMM 服务器”中，右键单击服务器 >“删除”。
 5. 手动卸载 VMM 服务器上的提供程序。如果有一个群集，请从所有节点删除。
 6. 若要复制到 Azure，请从已删除云的 Hyper-V 主机中手动删除 Microsoft 恢复服务代理。
-
-
 
 ### 取消注册未连接的 VMM 服务器
 
@@ -160,8 +156,6 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
 	    }
 	    popd
 
-
-
 ## 禁用对物理服务器的保护
 
 1. 在“受保护的项”>“复制的项”中，右键单击计算机 >“删除”。
@@ -210,7 +204,6 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
 	    $vm = Get-WmiObject -Namespace "root\virtualization\v2" -Query "Select * From Msvm_ComputerSystem Where ElementName = '$vmName'" -computername $hostName
 	    $replicationService = Get-WmiObject -Namespace "root\virtualization\v2"  -Query "Select * From Msvm_ReplicationService"  -computername $hostName
 	    $replicationService.RemoveReplicationRelationship($vm.__PATH)
-
 
 ## 在 Hyper-V 站点中禁用对 Hyper-V VM 的保护
 

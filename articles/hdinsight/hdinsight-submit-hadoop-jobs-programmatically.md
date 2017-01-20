@@ -1,46 +1,46 @@
-<properties
-	pageTitle="在 HDInsight 中提交 Hadoop 作业 | Azure"
-	description="了解如何将 Hadoop 作业提交到 Azure HDInsight Hadoop。"
-	editor="cgronlun"
-	manager="paulettm"
-	services="hdinsight"
-	documentationCenter=""
-	tags="azure-portal"
-	authors="mumian"/>
+---
+title: 在 HDInsight 中提交 Hadoop 作业 | Azure
+description: 了解如何将 Hadoop 作业提交到 Azure HDInsight Hadoop。
+editor: cgronlun
+manager: paulettm
+services: hdinsight
+documentationCenter: 
+tags: azure-portal
+authors: mumian
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/14/2016"
-	wacn.date="01/05/2017"
-	ms.author="jgao"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/14/2016
+wacn.date: 01/05/2017
+ms.author: jgao
+---
 
 # 在 HDInsight 中提交 Hadoop 作业
 
 学习如何使用 Azure PowerShell 提交 MapReduce 和 Hive 作业，以及如何使用 HDInsight .NET SDK 提交 MapReduce、Hadoop 流式处理和 Hive 作业。
 
-> [AZURE.NOTE] 这篇文章的步骤必须在 Windows 客户端使用。关于在 HDInsight 把 Linux, OS X 或者 Unix 客户端与 MapReduce, Hive 或者 Pig 一起使用，请查看以下文章，并选择 “Curl” 链接。
-><p> - [在 HDInsight 使用 Hive](/documentation/articles/hdinsight-use-hive/)
-><p> - [在 HDInsight 使用 Pig](/documentation/articles/hdinsight-use-pig/)
-><p> - [在 HDInsight 使用 MapReduce](/documentation/articles/hdinsight-use-mapreduce/)
+> [!NOTE] 这篇文章的步骤必须在 Windows 客户端使用。关于在 HDInsight 把 Linux, OS X 或者 Unix 客户端与 MapReduce, Hive 或者 Pig 一起使用，请查看以下文章，并选择 “Curl” 链接。
+><p> - [在 HDInsight 使用 Hive](./hdinsight-use-hive.md)
+><p> - [在 HDInsight 使用 Pig](./hdinsight-use-pig.md)
+><p> - [在 HDInsight 使用 MapReduce](./hdinsight-use-mapreduce.md)
 
 ##先决条件
 
 在开始阅读本文前，你必须具有：
 
 * **一个 Azure HDInsight 群集**。有关说明，请参阅 [HDInsight 入门][hdinsight-get-started]或[在 HDInsight 中创建 Hadoop 群集][hdinsight-provision]。
-- **配备 Azure PowerShell 的工作站**。请参阅[安装 Azure PowerShell 1.0 或更新](/documentation/articles/hdinsight-administer-use-powershell/#install-azure-powershell-10-and-greater)。
+- **配备 Azure PowerShell 的工作站**。请参阅[安装 Azure PowerShell 1.0 或更新](./hdinsight-administer-use-powershell.md#install-azure-powershell-10-and-greater)。
 
 ##使用 PowerShell 提交 MapReduce 作业
 
-请参阅[在基于 Windows 的 HDInsight 中运行 Hadoop MapReduce 示例](/documentation/articles/hdinsight-run-samples/)。
+请参阅[在基于 Windows 的 HDInsight 中运行 Hadoop MapReduce 示例](./hdinsight-run-samples.md)。
 
 ##使用 PowerShell 提交 Hive 作业
 
-请参阅[使用 PowerShell 运行 Hive 查询](/documentation/articles/hdinsight-hadoop-use-hive-powershell/)
+请参阅[使用 PowerShell 运行 Hive 查询](./hdinsight-hadoop-use-hive-powershell.md)
 
 ## 使用 Visual Studio 提交 Hive 作业
 
@@ -188,7 +188,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 
 ##使用适用于 Visual Studio 的 HDInsight 工具提交作业
 
-你可以使用适用于 Visual Studio 的 HDInsight 工具来运行 Hive 查询和 Pig 脚本。请参阅[适用于 HDInsight 的 Visual Studio Hadoop 工具入门](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/)。
+你可以使用适用于 Visual Studio 的 HDInsight 工具来运行 Hive 查询和 Pig 脚本。请参阅[适用于 HDInsight 的 Visual Studio Hadoop 工具入门](./hdinsight-hadoop-visual-studio-tools-get-started.md)。
 
 ##后续步骤
 在本文中，你已经学习了几种创建 HDInsight 群集的方法。若要了解更多信息，请参阅下列文章：
@@ -200,19 +200,18 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 * [将 Hive 与 HDInsight 配合使用][hdinsight-use-hive]
 * [将 Pig 与 HDInsight 配合使用][hdinsight-use-pig]
 
-
-[azure-certificate]: /documentation/articles/cloud-services-certs-create/
+[azure-certificate]: ../cloud-services/cloud-services-certs-create.md
 [azure-management-portal]: https://manage.windowsazure.cn/
 
-[hdinsight-visual-studio-tools]: /documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/
-[hdinsight-use-sqoop]: /documentation/articles/hdinsight-use-sqoop/
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
-[hdinsight-use-mapreduce]: /documentation/articles/hdinsight-use-mapreduce/
-[hdinsight-use-hive]: /documentation/articles/hdinsight-use-hive/
-[hdinsight-use-pig]: /documentation/articles/hdinsight-use-pig/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-[hdinsight-admin-powershell]: /documentation/articles/hdinsight-administer-use-powershell/
+[hdinsight-visual-studio-tools]: ./hdinsight-hadoop-visual-studio-tools-get-started.md
+[hdinsight-use-sqoop]: ./hdinsight-use-sqoop.md
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-use-mapreduce]: ./hdinsight-use-mapreduce.md
+[hdinsight-use-hive]: ./hdinsight-use-hive.md
+[hdinsight-use-pig]: ./hdinsight-use-pig.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
+[hdinsight-admin-powershell]: ./hdinsight-administer-use-powershell.md
 
 [hdinsight-powershell-reference]: https://msdn.microsoft.com/zh-cn/library/dn858087.aspx
 

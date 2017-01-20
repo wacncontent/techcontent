@@ -1,31 +1,32 @@
-<properties 
-	pageTitle="在 Azure VM 中配置 AlwaysOn 可用性组 - 经典"
-	description="在 Azure 虚拟机中创建 AlwaysOn 可用性组。本教程主要使用用户界面和工具而不是脚本。"
-	services="virtual-machines-windows"
-	documentationCenter="na"
-	authors="MikeRayMSFT"
-	manager="jhubbard"
-	editor="" />
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="09/22/2016"
-	wacn.date="11/21/2016"
-	ms.author="mikeray" />
+---
+title: 在 Azure VM 中配置 AlwaysOn 可用性组 - 经典
+description: 在 Azure 虚拟机中创建 AlwaysOn 可用性组。本教程主要使用用户界面和工具而不是脚本。
+services: virtual-machines-windows
+documentationCenter: na
+authors: MikeRayMSFT
+manager: jhubbard
+editor: 
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 09/22/2016
+wacn.date: 11/21/2016
+ms.author: mikeray
+---
 
 # 在 Azure 中配置 AlwaysOn 可用性组 - 经典
 
-> [AZURE.SELECTOR]
-- [Resource Manager: 手动](/documentation/articles/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual/)
-- [经典: UI](/documentation/articles/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/)
-- [经典: PowerShell](/documentation/articles/virtual-machines-windows-classic-ps-sql-alwayson-availability-groups/)
+> [!div class="op_single_selector"]
+- [Resource Manager: 手动](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)
+- [经典: UI](./virtual-machines-windows-classic-portal-sql-alwayson-availability-groups.md)
+- [经典: PowerShell](./virtual-machines-windows-classic-ps-sql-alwayson-availability-groups.md)
 
 <br/>
 
-> [AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+> [!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 本端到端教程介绍如何使用 Azure 虚拟机上运行的 SQL Server AlwaysOn 实施可用性组。
 
@@ -55,7 +56,7 @@
 
 - 你已经深入了解 AlwaysOn 可用性组。有关详细信息，请参阅 [AlwaysOn 可用性组 (SQL Server)](https://msdn.microsoft.com/zh-cn/library/hh510230.aspx)。
 
->[AZURE.NOTE]如果你想将 AlwaysOn 可用性组与 SharePoint 结合使用，另请参阅[为 SharePoint 2013 配置 SQL Server 2012 AlwaysOn 可用性组](https://technet.microsoft.com/zh-cn/library/jj715261.aspx)。
+>[!NOTE]如果你想将 AlwaysOn 可用性组与 SharePoint 结合使用，另请参阅[为 SharePoint 2013 配置 SQL Server 2012 AlwaysOn 可用性组](https://technet.microsoft.com/zh-cn/library/jj715261.aspx)。
 
 ## 创建虚拟网络和域控制器服务器
 
@@ -114,7 +115,7 @@
 
 1. 选择“Active Directory 域服务”和“DNS 服务器”角色。出现提示时，添加这些角色所需的任何其他功能。
 
-	>[AZURE.NOTE]你将收到无静态 IP 地址的验证警告。如果你要测试配置，请单击“继续”。对于生产方案，请[使用 PowerShell 设置域控制器计算机的静态 IP 地址](/documentation/articles/virtual-networks-reserved-private-ip/)。
+	>[!NOTE]你将收到无静态 IP 地址的验证警告。如果你要测试配置，请单击“继续”。对于生产方案，请[使用 PowerShell 设置域控制器计算机的静态 IP 地址](../virtual-network/virtual-networks-reserved-private-ip.md)。
 
 	![添加角色对话框](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784624.png)
 
@@ -321,7 +322,7 @@
 |用于管理群集的访问点|在“群集名称”中键入 **Cluster1**|
 |确认|除非你使用的是存储空间，否则请使用默认值。请参阅此表后面的备注。|
 
-	>[AZURE.WARNING]如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“确认”页上的“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
+	>[!WARNING]如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“确认”页上的“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
 
 1. 在左窗格中，展开“故障转移群集管理器”，然后单击“Cluster1.corp.contoso.com”。
 
@@ -345,7 +346,7 @@
 
 1. 在“确认”页中，单击“下一步”以添加节点。
 
-	>[AZURE.WARNING]如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
+	>[!WARNING]如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
 
 1. 向群集添加节点后，单击“完成”。“故障转移群集管理器”现在应显示你的群集具有三个节点，并将这些节点在“节点”容器中列出。
 
@@ -513,7 +514,7 @@
 
 	![新建可用性组向导，选择初始数据同步](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665529.gif)
 
-1. 在“验证”页中，单击“下一步”。此页应与以下页类似。因为你尚未配置可用性组侦听器，会出现一个侦听器配置警告。你可以忽略此警告，因为本教程不会配置侦听器。若要在完成本教程后配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](/documentation/articles/virtual-machines-windows-classic-ps-sql-int-listener/)。
+1. 在“验证”页中，单击“下一步”。此页应与以下页类似。因为你尚未配置可用性组侦听器，会出现一个侦听器配置警告。你可以忽略此警告，因为本教程不会配置侦听器。若要在完成本教程后配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](./virtual-machines-windows-classic-ps-sql-int-listener.md)。
 
 	![新建可用性组向导，验证](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665530.gif)
 
@@ -535,11 +536,11 @@
 
 	![故障转移群集管理器中的可用性组](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665534.gif)
 
->[AZURE.WARNING]请勿尝试从故障转移群集管理器对可用性组进行故障转移。所有故障转移操作都应在 SSMS 中的 **AlwaysOn 仪表板**内进行。有关详细信息，请参阅[将 WSFC 故障转移群集管理器用于可用性组的限制](https://msdn.microsoft.com/zh-cn/library/ff929171.aspx)。
+>[!WARNING]请勿尝试从故障转移群集管理器对可用性组进行故障转移。所有故障转移操作都应在 SSMS 中的 **AlwaysOn 仪表板**内进行。有关详细信息，请参阅[将 WSFC 故障转移群集管理器用于可用性组的限制](https://msdn.microsoft.com/zh-cn/library/ff929171.aspx)。
 
 ## 后续步骤
-现在，你已通过在 Azure 中创建可用性组，成功实施了 SQL Server AlwaysOn。若要为此可用性组配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](/documentation/articles/virtual-machines-windows-classic-ps-sql-int-listener/)。
+现在，你已通过在 Azure 中创建可用性组，成功实施了 SQL Server AlwaysOn。若要为此可用性组配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](./virtual-machines-windows-classic-ps-sql-int-listener.md)。
 
-有关在 Azure 中使用 SQL Server 的其他信息，请参阅 [Azure 虚拟机上的 SQL Server](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/)。
+有关在 Azure 中使用 SQL Server 的其他信息，请参阅 [Azure 虚拟机上的 SQL Server](./virtual-machines-windows-sql-server-iaas-overview.md)。
 
 <!---HONumber=70-->

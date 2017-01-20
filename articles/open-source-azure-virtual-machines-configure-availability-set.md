@@ -1,17 +1,16 @@
-<properties
-   pageTitle="在 Azure 平台配置可用性集 | Azure"
-   description="本文介绍如何在创建虚拟机同时创建可用性集、以及如何将现有的虚拟机添加到可用性集"
-   services="open-source"
-   documentationCenter=""
-   authors=""
-   manager=""
-   editor=""/>
+---
+title: 在 Azure 平台配置可用性集 | Azure
+description: 本文介绍如何在创建虚拟机同时创建可用性集、以及如何将现有的虚拟机添加到可用性集
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-   ms.service="open-source-website"  
-   ms.date=""
-   wacn.date="06/14/2016"/>
-
+ms.service: open-source-website
+ms.date: 
+wacn.date: 06/14/2016
+---
 
 # 在 Azure 平台配置可用性集
 
@@ -62,7 +61,6 @@
 8. 这时可以创建新的虚拟机，再加入到此可用性集里来。但是，在创建虚拟机时必须选择之前的虚拟机所创建的云服务，才能选择到和之前虚拟机所处的同样一个可用性集。也就是说，要想处于同样的可用性集，必须处于同样的云服务。
 
 	![7](./media/open-source-azure-virtual-machines-configure-availability-set/7.png)
-
 
 ## <a name="add-to-availability-set" id="add-to-availability-set"></a>将现有的虚拟机添加到可用性集
 
@@ -125,7 +123,6 @@
 
 8. 在 newtest1 执行 echo “newtest1” > /var/www/html/index.html。 在 newtest2 执行 echo “newtest2” > /var/www/html/index.html。
 
-
 9. 在浏览器访问[http://newtest1.chinacloudapp.cn/](http://newtest1.chinacloudapp.cn/) 结果如下:
 
 	![20](./media/open-source-azure-virtual-machines-configure-availability-set/20.png)
@@ -134,29 +131,13 @@
 
 	![21](./media/open-source-azure-virtual-machines-configure-availability-set/21.png)
 
-
 11. 停掉虚拟机 newtest1。
 
 	![22](./media/open-source-azure-virtual-machines-configure-availability-set/22.png)
-
 
 12. 再度访问[http://newtest1.chinacloudapp.cn](http://newtest1.chinacloudapp.cn/) 还是能够访问。
 
 	![23](./media/open-source-azure-virtual-machines-configure-availability-set/23.png)
 
 	配置成功。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

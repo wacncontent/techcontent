@@ -1,32 +1,31 @@
-<properties
-	pageTitle="适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令 | Azure"
-	description="了解如何使用基于 Azure Resource Manager 的新 PowerShell 命令来管理 Azure Web Apps。"
-	services="app-service\web"
-	documentationCenter=""
-	authors="ahmedelnably"
-	manager="stefsch"
-	editor=""/>  
+---
+title: 适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令 | Azure
+description: 了解如何使用基于 Azure Resource Manager 的新 PowerShell 命令来管理 Azure Web Apps。
+services: app-service\web
+documentationCenter: 
+authors: ahmedelnably
+manager: stefsch
+editor: 
 
-
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/29/2016"
-	wacn.date="10/31/2016"
-	ms.author="aelnably"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/29/2016
+wacn.date: 10/31/2016
+ms.author: aelnably
+---
 
 # 使用基于 Azure Resource Manager 的 PowerShell 来管理 Azure Web Apps#
 
-> [AZURE.SELECTOR]
-- [Azure CLI](/documentation/articles/app-service-web-app-azure-resource-manager-xplat-cli/)
-- [Azure PowerShell](/documentation/articles/app-service-web-app-azure-resource-manager-powershell/)
+> [!div class="op_single_selector"]
+- [Azure CLI](./app-service-web-app-azure-resource-manager-xplat-cli.md)
+- [Azure PowerShell](./app-service-web-app-azure-resource-manager-powershell.md)
 
 Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Resource Manager 的 PowerShell 命令来管理 Web 应用。
 
-若要了解如何管理资源组，请参阅[将 Azure PowerShell 与 Azure Resource Manager 搭配使用](/documentation/articles/powershell-azure-resource-manager/)。
+若要了解如何管理资源组，请参阅[将 Azure PowerShell 与 Azure Resource Manager 搭配使用](../azure-resource-manager/powershell-azure-resource-manager.md)。
 
 若要了解 PowerShell cmdlet 的完整参数和选项列表，请参阅 [Web 应用的基于 Azure Resource Manager 的 PowerShell Cmdlet 的完整 Cmdlet 参考](https://msdn.microsoft.com/zh-cn/library/mt619237.aspx)
 
@@ -63,7 +62,6 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 若要获取特定的 App Service 计划，请使用：
 
     Get-AzureRmAppServicePlan -Name ContosoAppServicePlan
-
 
 ### 配置现有的 App Service 计划 ###
 
@@ -118,7 +116,6 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
     Remove-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup
 
-
 ### 列出现有的 Web 应用 ###
 
 若要列出现有的 Web 应用，请使用 **Get-AzureRmWebApp** cmdlet。
@@ -148,7 +145,6 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 	$appsettings = @{appsetting1 = "appsetting1value"; appsetting2 = "appsetting2value"}
 	Set-AzureRmWebApp -Name ContosoWebApp -ResourceGroupName ContosoAzureResourceGroup -AppSettings $appsettings
-
 
 示例 (3)：将 Web 应用设置为在 64 位模式下运行
 
@@ -194,13 +190,12 @@ Azure PowerShell 1.0.0 中添加了新命令，可让用户使用基于 Azure Re
 
 ### 管理 Web 应用证书 ###
 
-若要了解如何管理 Web 应用证书，请参阅[使用 PowerShell 创建 SSL 证书绑定](/documentation/articles/app-service-web-app-powershell-ssl-binding/)
-
+若要了解如何管理 Web 应用证书，请参阅[使用 PowerShell 创建 SSL 证书绑定](./app-service-web-app-powershell-ssl-binding.md)
 
 ### 后续步骤 ###
-- 若要了解 Azure Resource Manager PowerShell 支持，请参阅[将 Azure PowerShell 与 Azure Resource Manager 搭配使用](/documentation/articles/powershell-azure-resource-manager/)。
-- 若要了解如何使用 PowerShell 管理 App Service SSL 证书，请参阅[使用 PowerShell 创建 SSL 证书绑定](/documentation/articles/app-service-web-app-powershell-ssl-binding/)。
+- 若要了解 Azure Resource Manager PowerShell 支持，请参阅[将 Azure PowerShell 与 Azure Resource Manager 搭配使用](../azure-resource-manager/powershell-azure-resource-manager.md)。
+- 若要了解如何使用 PowerShell 管理 App Service SSL 证书，请参阅[使用 PowerShell 创建 SSL 证书绑定](./app-service-web-app-powershell-ssl-binding.md)。
 - 若要了解适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell cmdlet 的完整列表，请参阅 [Azure Cmdlet Reference of Web Apps Azure Resource Manager PowerShell Cmdlets](https://msdn.microsoft.com/zh-cn/library/mt619237.aspx)（Web 应用 Azure Resource Manager PowerShell Cmdlet 的 Azure Cmdlet 参考）。
-- - 若要了解使用 CLI 管理应用服务的相关信息，请参阅[使用适用于 Azure Web 应用的基于 Azure Resource Manager 的 XPlat CLI](/documentation/articles/app-service-web-app-azure-resource-manager-xplat-cli/)。
+- - 若要了解使用 CLI 管理应用服务的相关信息，请参阅[使用适用于 Azure Web 应用的基于 Azure Resource Manager 的 XPlat CLI](./app-service-web-app-azure-resource-manager-xplat-cli.md)。
 
 <!---HONumber=Mooncake_1024_2016-->

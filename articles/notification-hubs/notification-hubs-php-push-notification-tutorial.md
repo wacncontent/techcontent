@@ -1,31 +1,31 @@
-<properties 
-	pageTitle="如何结合使用通知中心与 PHP" 
-	description="了解如何从 PHP 后端使用 Azure 通知中心。" 
-	services="notification-hubs" 
-	documentationCenter="" 
-	authors="wesmc7777" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 如何结合使用通知中心与 PHP
+description: 了解如何从 PHP 后端使用 Azure 通知中心。
+services: notification-hubs
+documentationCenter: 
+authors: wesmc7777
+manager: dwrede
+editor: 
 
-<tags 
-	ms.service="notification-hubs" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="php" 
-	ms.devlang="php" 
-	ms.topic="article" 
-	ms.date="06/07/2016" 
-	wacn.date="01/09/2017" 
-	ms.author="wesmc"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: php
+ms.devlang: php
+ms.topic: article
+ms.date: 06/07/2016
+wacn.date: 01/09/2017
+ms.author: wesmc
+---
 
 # 如何通过 PHP 使用通知中心
-[AZURE.INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
+[!INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
 
 如 MSDN 主题[通知中心 REST API](http://msdn.microsoft.com/zh-cn/library/dn223264.aspx) 中所述，你可以使用通知中心 REST 接口从 Java/PHP/Ruby 后端访问所有通知中心功能。
 
 本主题中，我们将向你介绍如何：
 
 * 以 PHP 构建 REST 客户端以获取通知中心功能；
-* 请按照你选定的移动平台的[入门教程](/documentation/articles/notification-hubs-ios-apple-push-notification-apns-get-started/)以 PHP 实现后端部分。
+* 请按照你选定的移动平台的[入门教程](./notification-hubs-ios-apple-push-notification-apns-get-started.md)以 PHP 实现后端部分。
 
 ## 客户端接口
 主要的客户端接口可提供 [.NET 通知中心 SDK](http://msdn.microsoft.com/zh-cn/library/jj933431.aspx) 中提供的相同方法，这将允许你直接翻译当前此站点上提供的所有教程和示例，这些内容均来自 Internet 上的社区。
@@ -85,7 +85,6 @@
 			}
 		}
 	}
-
 
 ### 创建安全令牌
 有关安全令牌创建的详细信息，请访问[此处](http://msdn.microsoft.com/library/dn495627.aspx)。
@@ -234,14 +233,12 @@
 	$notification->headers[] = 'X-NotificationClass : 2';
 	$hub->sendNotification($notification, null);
 
-
 ### Kindle Fire
 	$message = '{"data":{"msg":"Hello from PHP!"}}';
 	$notification = new Notification("adm", $message);
 	$hub->sendNotification($notification, null);
 
 运行 PHP 代码，现在应该生成显示在目标设备上的通知。
-
 
 ## 后续步骤
 在本主题中，我们介绍了如何为通知中心创建简单的 Java REST 客户端。从这里你可以：
@@ -253,7 +250,6 @@
 有关详细信息，另请参阅 [PHP 开发人员中心](/develop/php/)。
 
 [PHP REST 包装器示例]: https://github.com/Azure/azure-notificationhubs-samples/tree/master/notificationhubs-rest-php
-[入门教程]: /documentation/articles/notification-hubs-ios-apple-push-notification-apns-get-started/
+[入门教程]: ./notification-hubs-ios-apple-push-notification-apns-get-started.md
  
-
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

@@ -1,23 +1,24 @@
 <!-- need to be verified -->
 
-<properties
-    pageTitle="自动缩放 HPC Pack 群集节点 | Azure"
-    description="自动扩展和收缩 Azure 中的 HPC Pack 群集计算节点数"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    author="dlepow"
-    manager=""
-    editor="tysonn" />
-<tags 
-    ms.assetid="38762cd1-f917-464c-ae5d-b02b1eb21e3f"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-multiple"
-    ms.workload="big-compute"
-    ms.date="11/14/2016"
-    wacn.date="12/20/2016"
-    ms.author="danlep" />
+---
+title: 自动缩放 HPC Pack 群集节点 | Azure
+description: 自动扩展和收缩 Azure 中的 HPC Pack 群集计算节点数
+services: virtual-machines-windows
+documentationcenter: 
+author: dlepow
+manager: 
+editor: tysonn
+
+ms.assetid: 38762cd1-f917-464c-ae5d-b02b1eb21e3f
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-multiple
+ms.workload: big-compute
+ms.date: 11/14/2016
+wacn.date: 12/20/2016
+ms.author: danlep
+---
 
 # 在 Azure 中根据群集工作负荷自动扩展和收缩 HPC Pack 群集资源
 如果在 HPC Pack 群集中部署 Azure“突发”节点，或者在 Azure VM 中创建 HPC Pack 群集，可能需要借助某种方法根据群集上的工作负荷自动扩展或收缩群集资源（例如节点或核心）。以这种方法缩放群集资源可以更有效地使用 Azure 资源并控制其成本。
@@ -31,7 +32,7 @@
 ## 设置 AutoGrowShrink 群集属性
 ### 先决条件
 
-* **HPC Pack 2012 R2 Update 2 或更高版群集** - 群集头节点既可以部署在本地，也可以部署在 Azure VM 中。请参阅[使用 HPC Pack 设置一个混合群集](/documentation/articles/cloud-services-setup-hybrid-hpcpack-cluster/)，开始使用本地头节点和 Azure“突发”节点。若要在 Azure VM 中快速部署 HPC Pack 群集，请参阅 [HPC Pack IaaS 部署脚本](/documentation/articles/virtual-machines-windows-classic-hpcpack-cluster-powershell-script/)。
+* **HPC Pack 2012 R2 Update 2 或更高版群集** - 群集头节点既可以部署在本地，也可以部署在 Azure VM 中。请参阅[使用 HPC Pack 设置一个混合群集](../cloud-services/cloud-services-setup-hybrid-hpcpack-cluster.md)，开始使用本地头节点和 Azure“突发”节点。若要在 Azure VM 中快速部署 HPC Pack 群集，请参阅 [HPC Pack IaaS 部署脚本](./virtual-machines-windows-classic-hpcpack-cluster-powershell-script.md)。
 
 * **对于 Azure 中包含头节点的群集（经典部署模型）** - 如果使用 HPC Pack IaaS 部署脚本在经典部署模型中创建群集，请通过在群集配置文件中设置 AutoGrowShrink 选项来启用 **AutoGrowShrink** 群集属性。有关详细信息，请[下载的脚本](https://www.microsoft.com/download/details.aspx?id=44949)随附的文档。
 
@@ -70,7 +71,7 @@
 
     Set-HpcClusterProperty -ExcludeNodeGroups <group1,group2,group3>
 
->[AZURE.NOTE] 
+>[!NOTE] 
 从 HPC Pack 2016 开始支持此参数
 >
 
@@ -80,7 +81,7 @@
 * **EnableGrowShrink** - 用于启用或禁用 **AutoGrowShrink** 属性的开关。
 * **ParamSweepTasksPerCore** - 用于扩展一个核心的参数扫描任务数目。默认为每个任务扩展一个核心。
 
-  > [AZURE.NOTE]
+  > [!NOTE]
   HPC Pack QFE KB3134307 将 **ParamSweepTasksPerCore** 更改为 **TasksPerResourceUnit**。它基于作业资源类型，可以是节点、套接字或核心。
   >
   >
@@ -92,18 +93,18 @@
 * **GrowByMin** - 用于指示自动扩展策略是否基于作业所需的最少资源的开关。默认值为 false，这意味着 HPC Pack 将基于作业所需的资源数上限为作业扩展节点。
 * **SoaJobGrowThreshold** - 传入 SOA 请求以触发自动扩展过程的阈值。默认值为 50000。
 
-  > [AZURE.NOTE]
+  > [!NOTE]
   从 HPC Pack 2012 R2 Update 3 开始支持此参数。
   >
   >
 * **SoaRequestsPerCore** - 用于扩展一个核心的传入 SOA 请求数目。默认值为 20000。
 
-  > [AZURE.NOTE]
+  > [!NOTE]
   从 HPC Pack 2012 R2 Update 3 开始支持此参数。
   >
 * **ExcludeNodeGroups** - 指定的节点组中的节点不会自动扩展和收缩。
   
-  > [AZURE.NOTE]
+  > [!NOTE]
   从 HPC Pack 2016 开始支持此参数。
   >
 
@@ -118,12 +119,10 @@
 ## 运行 AzureAutoGrowShrink.ps1 脚本
 ### 先决条件
 
-* **HPC Pack 2012 R2 Update 1 或更高版本群集** - **AzureAutoGrowShrink.ps1** 脚本已安装在 %CCP\_HOME%bin 文件夹中。群集头节点既可以部署在本地，也可以部署在 Azure VM 中。请参阅[使用 HPC Pack 设置一个混合群集](/documentation/articles/cloud-services-setup-hybrid-hpcpack-cluster/)，开始使用本地头节点和 Azure“突发”节点。若要在 Azure VM 中快速部署 HPC Pack 群集，请参阅 [HPC Pack IaaS 部署脚本](/documentation/articles/virtual-machines-windows-classic-hpcpack-cluster-powershell-script/)，或使用 [Azure 快速入门模板](https://github.com/Azure/azure-quickstart-templates/tree/master/create-hpc-cluster/)。
+* **HPC Pack 2012 R2 Update 1 或更高版本群集** - **AzureAutoGrowShrink.ps1** 脚本已安装在 %CCP\_HOME%bin 文件夹中。群集头节点既可以部署在本地，也可以部署在 Azure VM 中。请参阅[使用 HPC Pack 设置一个混合群集](../cloud-services/cloud-services-setup-hybrid-hpcpack-cluster.md)，开始使用本地头节点和 Azure“突发”节点。若要在 Azure VM 中快速部署 HPC Pack 群集，请参阅 [HPC Pack IaaS 部署脚本](./virtual-machines-windows-classic-hpcpack-cluster-powershell-script.md)，或使用 [Azure 快速入门模板](https://github.com/Azure/azure-quickstart-templates/tree/master/create-hpc-cluster/)。
 * **Azure PowerShell 1.4.0** - 该脚本当前依赖于此特定版本的 Azure PowerShell。
 * **对于具有 Azure 突发节点的群集** - 在安装了 HPC Pack 的客户端计算机上或在头节点上运行脚本。如果在客户端计算机上运行，请确保将变量 $env:CCP\_SCHEDULER 设置为指向头节点。Azure“突发”节点必须已添加到群集，但是可以处于“未部署”状态。
-* **对于 Azure VM 中部署的群集（经典部署模型）**- 请在头节点 VM 上运行脚本，因为所依赖的 **Start-HpcIaaSNode.ps1** 和 **Stop-HpcIaaSNode.ps1** 脚本安装在这个位置。那些脚本还需要 Azure 管理证书或发布设置文件（请参阅[管理 Azure 的 HPC Pack 群集中的计算节点](/documentation/articles/virtual-machines-windows-classic-hpcpack-cluster-node-manage/)）。请确保需要的所有计算节点 VM 都已添加到群集。它们可能处于停止状态。
-
-
+* **对于 Azure VM 中部署的群集（经典部署模型）**- 请在头节点 VM 上运行脚本，因为所依赖的 **Start-HpcIaaSNode.ps1** 和 **Stop-HpcIaaSNode.ps1** 脚本安装在这个位置。那些脚本还需要 Azure 管理证书或发布设置文件（请参阅[管理 Azure 的 HPC Pack 群集中的计算节点](./virtual-machines-windows-classic-hpcpack-cluster-node-manage.md)）。请确保需要的所有计算节点 VM 都已添加到群集。它们可能处于停止状态。
 
 ### 语法
 

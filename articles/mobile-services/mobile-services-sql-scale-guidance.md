@@ -1,24 +1,23 @@
-<properties 
-	pageTitle="缩放 Azure SQL 数据库支持的移动服务 | Azure" 
-	description="了解如何诊断和修复 SQL 数据库支持的移动服务中的可扩展性问题" 
-	services="mobile-services" 
-	documentationCenter="" 
-	authors="lindydonna" 
-	manager="dwrede" 
-	editor="mollybos"/>
+---
+title: 缩放 Azure SQL 数据库支持的移动服务 | Azure
+description: 了解如何诊断和修复 SQL 数据库支持的移动服务中的可扩展性问题
+services: mobile-services
+documentationCenter: 
+authors: lindydonna
+manager: dwrede
+editor: mollybos
 
-<tags 
-	ms.service="mobile-services" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="multiple" 
-	ms.topic="article" 
-	ms.date="07/21/2016" 
-	wacn.date="09/26/2016" 
-	ms.author="donnam;ricksal"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: donnam;ricksal
+---
 
 # 扩展 Azure SQL 数据库支持的移动服务
-
 
 Azure 移动服务可轻松启动和构建连接云托管后端的应用，从而将数据存储在 SQL 数据库中。随着应用的增长，服务示例的扩展与在门户中的调整扩展设置一样简单，可轻松提高计算和网络容量。然而，扩展支持服务的 SQL 数据库要求在服务接收更多负载的同时进行主动规划和监控。本文档将指导您实行一组最佳实践，以确保 SQL 支持的移动服务能够持续提供最佳性能。
 
@@ -48,7 +47,6 @@ Azure 移动服务可轻松启动和构建连接云托管后端的应用，从�
 - 基本
 - 标准
 - 高级
-
 
 关于如何为数据库选择合适的层级，下面提供几点建议：
 
@@ -90,7 +88,6 @@ Azure 移动服务可轻松启动和构建连接云托管后端的应用，从�
 随着时间的推移，您的服务负载通常分布不均，但包含高需求“峰值”。如果不纵向扩展数据库应对峰值，并让数据库在低需求期间保持低利用率，通常可以调整服务体系结构，以避免出现此类峰值，或在不对数据库造成干扰的情况下处理峰值情况。
 
 本文余下部分将介绍自定义指南，以帮助实施这些缓解措施。
-
 
 ###  配置警报
 
@@ -135,7 +132,6 @@ Azure 移动服务可轻松启动和构建连接云托管后端的应用，从�
 - 对于**不经常更新**但含有大量数据的表格，应使用多个索引。这样可以提升不修改数据（例如，SELECT 语句）的查询的性能，因为查询优化器具备更多选项，可查找最佳的访问方法。
 
 为小表格编制索引也许不是最佳方法，因为查询优化器遍历用于搜索数据的索引所耗费的时间比执行简单表扫描的时间更长。因此，小表格的索引可能从来不用，但仍然须随表格中数据的更改而进行维护。
-
 
 <a name="CreatingIndexes"></a>
 ###  创建索引
@@ -183,9 +179,9 @@ Azure 移动服务可轻松启动和构建连接云托管后端的应用，从�
 
 - **始终在数据库中执行联接操作。** 你经常需要合并来自两个或更多表的记录，且这些要合并的记录共享相同的字段（称为*联接*）。此操作涉及到同时从两个表中提取所有实体，然后循环访问所有实体，因此，如果未正确执行此操作，可能会降低效率。此类操作最好在数据库中执行，但有时却很容易误由客户端执行，或者在移动服务代码中执行。
     - 请不要在应用程序代码中执行联接
-    - 请不要在移动服务代码中执行联接。在使用 JavaScript 后端时，请注意，[table 对象](http://msdn.microsoft.com/zh-cn/library/windowsazure/jj554210.aspx)不处理联接。请务必直接使用 [mssql 对象](http://msdn.microsoft.com/zh-cn/library/windowsazure/jj554212.aspx)，以确保在数据库中执行联接。有关详细信息，请参阅[联接关系表](/documentation/articles/mobile-services-how-to-use-server-scripts/#joins)。如果使用 .NET 后端，并且通过 LINQ 查询，实体框架将在数据库级别自动处理联接。
+    - 请不要在移动服务代码中执行联接。在使用 JavaScript 后端时，请注意，[table 对象](http://msdn.microsoft.com/zh-cn/library/windowsazure/jj554210.aspx)不处理联接。请务必直接使用 [mssql 对象](http://msdn.microsoft.com/zh-cn/library/windowsazure/jj554212.aspx)，以确保在数据库中执行联接。有关详细信息，请参阅[联接关系表](./mobile-services-how-to-use-server-scripts.md#joins)。如果使用 .NET 后端，并且通过 LINQ 查询，实体框架将在数据库级别自动处理联接。
 - **实现分页。** 查询数据库有时可能会导致大量记录返回到客户端。为了尽可能减少操作的大小和延迟，请考虑实现分页。
-    - 默认情况下，你的移动服务将所有传入的查询限制在大小为 50 的页面中，但您可以手动请求多达 1000 条记录。有关详细信息，请参阅适用于 [iOS](/documentation/articles/mobile-services-ios-how-to-use-client-library/#paging)、[Android](/documentation/articles/mobile-services-android-how-to-use-client-library/#paging)、[HTML/JavaScript](/documentation/articles/mobile-services-html-how-to-use-client-library/#paging) 和 Xamarin 的“在页中返回数据”。
+    - 默认情况下，你的移动服务将所有传入的查询限制在大小为 50 的页面中，但您可以手动请求多达 1000 条记录。有关详细信息，请参阅适用于 [iOS](./mobile-services-ios-how-to-use-client-library.md#paging)、[Android](./mobile-services-android-how-to-use-client-library.md#paging)、[HTML/JavaScript](./mobile-services-html-how-to-use-client-library.md#paging) 和 Xamarin 的“在页中返回数据”。
     - 通过移动服务代码进行的查询没有默认页面大小。如果您的应用不实现分页，也不用作防御措施，请考虑将默认限制应用于您的查询。在 JavaScript 后端是，对 [query 对象](http://msdn.microsoft.com/zh-cn/library/azure/jj613353.aspx)使用 **take** 运算符。如果你使用 .NET 后端，请考虑以 [Take 方法]作为 LINQ 查询的一部分。
 
 有关改进查询设计的详细信息，请参阅本文末尾的[高级查询设计](#AdvancedQuery)。
@@ -195,9 +191,9 @@ Azure 移动服务可轻松启动和构建连接云托管后端的应用，从�
 
 假设您要向所有客户发送推送通知，提醒他们查看应用中的新内容。他们点击该通知时，该应用将启动，这样可能会触发调用您的移动服务，并根据 SQL 数据库执行查询。由于可能会有数百万客户在仅仅几分钟的跨度内执行该操作，将形成 SQL 负载高峰，该峰值大大高于您应用的稳定状态负载。通过在峰值期间将应用扩展到更高版本的 SQL 层，然后再回缩可解决这种问题，但这种解决方法需要手动干预，并且会导致成本上升。通常，细微调整移动服务体系结构可显著平衡访问 SQL 数据库的负载客户端，并消除问题需求峰值。这些调整通常可以轻松执行，而对客户体验的影响可降至最低。下面是一些示例：
 
-- **将负载分散到不同时间。** 如果你对特定事件（例如广播推送通知）的执行时间进行控制，并预期这些事件会产生需求上的高峰，且这些事件的执行时间并不重要，请考虑将其分散到不同时间。在上述示例中，或许你的应用程序客户可以在一天的不同时间分批获取新应用程序内容的通知，而无需在几乎相同的时间获取。请考虑将客户分成允许交错传送到每个批的组。使用通知中心时，应用附加标记以跟踪批，然后将推送通知传送到该标记，这样便可提供实现此策略的简单途径。有关标记的详细信息，请参阅[使用通知中心发送突发新闻](/documentation/articles/notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns/)。
-- **在可能的情况下使用 Blob 和表存储。** 客户在高峰期所查看的内容经常是较为静态的，且不需要存储在 SQL 数据库中，因为你不可能需要对该内容的关系查询功能。在此情况下，请考虑将内容存储在 Blob 或表存储中。你可以直接从设备访问 Blob 存储中的公共 Blob。若要以安全方式访问 Blob 或使用表存储，必须通过移动服务自定义 API 保护存储访问密钥。有关详细信息，请参阅[使用移动服务将图像上载到 Azure 存储空间](/documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-upload-data-blob-storage/)。
-- **使用内存中缓存**。另一种方法是将流量峰值期间通常访问的数据存储于内存中缓存，比如 [Azure 缓存](/documentation/services/redis-cache/)。这意味着传入的请求能够从内存中提取所需的信息，而不是重复查询数据库。
+- **将负载分散到不同时间。** 如果你对特定事件（例如广播推送通知）的执行时间进行控制，并预期这些事件会产生需求上的高峰，且这些事件的执行时间并不重要，请考虑将其分散到不同时间。在上述示例中，或许你的应用程序客户可以在一天的不同时间分批获取新应用程序内容的通知，而无需在几乎相同的时间获取。请考虑将客户分成允许交错传送到每个批的组。使用通知中心时，应用附加标记以跟踪批，然后将推送通知传送到该标记，这样便可提供实现此策略的简单途径。有关标记的详细信息，请参阅[使用通知中心发送突发新闻](../notification-hubs/notification-hubs-windows-notification-dotnet-push-xplat-segmented-wns.md)。
+- **在可能的情况下使用 Blob 和表存储。** 客户在高峰期所查看的内容经常是较为静态的，且不需要存储在 SQL 数据库中，因为你不可能需要对该内容的关系查询功能。在此情况下，请考虑将内容存储在 Blob 或表存储中。你可以直接从设备访问 Blob 存储中的公共 Blob。若要以安全方式访问 Blob 或使用表存储，必须通过移动服务自定义 API 保护存储访问密钥。有关详细信息，请参阅[使用移动服务将图像上载到 Azure 存储空间](./mobile-services-dotnet-backend-windows-universal-dotnet-upload-data-blob-storage.md)。
+- **使用内存中缓存**。另一种方法是将流量峰值期间通常访问的数据存储于内存中缓存，比如 [Azure 缓存](../redis-cache/index.md/)。这意味着传入的请求能够从内存中提取所需的信息，而不是重复查询数据库。
 
 <a name="Advanced"></a>
 ##  高级故障排除
@@ -206,7 +202,7 @@ Azure 移动服务可轻松启动和构建连接云托管后端的应用，从�
 ### 先决条件
 若要执行本部分的诊断任务，你需要访问 SQL 数据库的管理工具，比如 **SQL Server Management Studio** 或内置于 **Azure 管理门户**的管理功能。
 
-SQL Server Management Studio 是一个免费 Windows 应用，可提供最先进的功能。如果你无法访问 Windows 计算机（例如，你使用的是 Mac），请考虑按照[创建运行 Windows Server 的虚拟机](/documentation/articles/virtual-machines-windows-hero-tutorial/)中的说明在 Azure 中设置虚拟机，然后远程连接到该虚拟机。如果你使用 VM 的主要目的是运行 SQL Server Management Studio，则一个**基本 A0**（以前称为“超小型”）实例应该够用。
+SQL Server Management Studio 是一个免费 Windows 应用，可提供最先进的功能。如果你无法访问 Windows 计算机（例如，你使用的是 Mac），请考虑按照[创建运行 Windows Server 的虚拟机](../virtual-machines/virtual-machines-windows-hero-tutorial.md)中的说明在 Azure 中设置虚拟机，然后远程连接到该虚拟机。如果你使用 VM 的主要目的是运行 SQL Server Management Studio，则一个**基本 A0**（以前称为“超小型”）实例应该够用。
 
 Azure 管理门户提供内置管理体验，虽然限制更多，但无需本地安装即可提供。
 
@@ -264,7 +260,6 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 
 ####  高级指标
 
-
 如果使用基础层、标准层和高级层，管理门户可随时提供部分指标。无论你使用哪种层，都可以通过 **[sys.resource\_stats](http://msdn.microsoft.com/zh-cn/library/dn269979.aspx)** 管理视图轻松获取这些指标以及其他指标。请考虑下列查询：
 
     SELECT TOP 10 * 
@@ -272,7 +267,7 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
     WHERE database_name = 'todoitem_db' 
     ORDER BY start_time DESC
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 请在你服务器的 **master** 数据库上执行此查询，因为只有该数据库显示 **sys.resource\_stats** 视图。
 
 结果将会包含以下有用的度量值：CPU（层限制百分比）、存储 (MB)、物理数据读取（层限制百分比）、日志写入（层限制百分比）、内存（层限制百分比）、工作线程计数、会话计数等。
@@ -286,7 +281,7 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
     and event_type like 'throttling%'
     order by start_time desc
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 请在服务器的 **master** 数据库上执行此查询，**sys.event\_log** 视图只会出现在该数据库上。
 
 <a name="AdvancedIndexing" ></a>
@@ -300,7 +295,7 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 
 若要提供真实类比：请考虑使用书本或技术手册。每页的内容为一条记录，页码为聚集索引，书背后的主题索引为非聚集索引。主题索引的每个条目指向聚集索引，页码。
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 默认情况下，Azure 移动服务的 JavaScript 后端将 **\_createdAt** 设置为聚集索引。如果你要删除这列，或想要不同的聚集索引，请务必遵循以下[聚集索引设计指南](#ClusteredIndexes)。在.NET 后端，类 `EntityData` 会使用批注 `[Index(IsClustered = true)]` 将 `CreatedAt` 定义为聚集索引。
 
 <a name="ClusteredIndexes"></a>
@@ -378,7 +373,6 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 
 通常难以诊断数据库中开销最大的查询。
 
-
 ####  查找前 n 个查询
 
 下列示例返回了按平均 CPU 时间排名的前五个查询的信息。该示例根据查询散列收集了查询，以便逻辑上等值的查询能够根据累积资源消耗分组。
@@ -451,7 +445,7 @@ Azure 管理门户提供内置管理体验，虽然限制更多，但无需本�
 
 [Azure 管理门户]: http://manage.windowsazure.cn
 
-[Azure SQL 数据库文档]: /documentation/services/sql-databases/
+[Azure SQL 数据库文档]: ../sql-database/index.md/
 [Managing SQL Database using SQL Server Management Studio]: http://go.microsoft.com/fwlink/p/?linkid=309723&clcid=0x409
 [使用动态管理视图监视 SQL 数据库]: http://go.microsoft.com/fwlink/p/?linkid=309725&clcid=0x409
 [Azure SQL 数据库性能和缩放]: http://go.microsoft.com/fwlink/p/?linkid=397217&clcid=0x409

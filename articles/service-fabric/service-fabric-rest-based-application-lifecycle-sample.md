@@ -1,27 +1,25 @@
-<properties
-   pageTitle="基于 REST 的应用程序生命周期示例 | Azure"
-   description="一个 Microsoft Azure Service Fabric 示例，通过使用 Service Fabric REST 接口来显示应用程序生命周期。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="rwike77"
-   manager="timlt"
-   editor=""/>  
+---
+title: 基于 REST 的应用程序生命周期示例 | Azure
+description: 一个 Microsoft Azure Service Fabric 示例，通过使用 Service Fabric REST 接口来显示应用程序生命周期。
+services: service-fabric
+documentationCenter: .net
+authors: rwike77
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="rest-api"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="08/25/2016"
-   wacn.date="10/24/2016"
-   ms.author="ryanwi"/>  
-
+ms.service: service-fabric
+ms.devlang: rest-api
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/25/2016
+wacn.date: 10/24/2016
+ms.author: ryanwi
+---
 
 # 基于 REST 的应用程序生命周期示例
 
-此示例通过 REST API 调用演示 Service Fabric 应用程序生命周期。有关 Service Fabric 应用程序生命周期的更多信息，请参阅 [Service Fabric 应用程序生命周期](/documentation/articles/service-fabric-application-lifecycle/)。
+此示例通过 REST API 调用演示 Service Fabric 应用程序生命周期。有关 Service Fabric 应用程序生命周期的更多信息，请参阅 [Service Fabric 应用程序生命周期](./service-fabric-application-lifecycle.md)。
 
 此示例执行下列过程：
 
@@ -39,7 +37,6 @@
 * 显示应用程序类型的列表，该列表包括 WordCount 1.0.0 版，但不再包括 WordCount 1.1.0 版。
 * 取消 WordCount 1.0.0 版示例的设置。
 * 显示应用程序类型的列表，该列表不再包括 WordCount。
-
 
 ## 先决条件
 
@@ -59,7 +56,6 @@
 5. 保存更改后的 ApplicationManifest.xml 文件。
 6. 以管理员身份运行以下 PowerShell 脚本，将应用程序复制到映像存储：
 
-
 		# Deploy the WordCount and upgrade applications
 		$applicationPathWordCount = "C:\Temp\WordCount"
 		$applicationPathUpgrade = "C:\Temp\WordCountUpgrade"
@@ -73,13 +69,11 @@
 		Copy-ServiceFabricApplicationPackage -ApplicationPackagePath $applicationPathWordCount -ImageStoreConnectionString $imageStoreConnection
 		Copy-ServiceFabricApplicationPackage -ApplicationPackagePath $applicationPathUpgrade -ImageStoreConnectionString $imageStoreConnection
 
-
 在 PowerShell 脚本执行完毕之后，此应用程序即可运行。
 
 ## 示例
 
 以下示例演示 Service Fabric 应用程序生命周期。
-
 
 		using System;
 		using System.Collections.Generic;
@@ -109,78 +103,65 @@
 		            Console.WriteLine("\nPress Enter to get the list of application types: ");
 		            Console.ReadLine();
 		
-		
 		            Console.WriteLine("\nGet the list of application types.");
 		            GetListOfApplicationTypes(clusterUri);
 		            Console.WriteLine("\nPress Enter to create the fabric:/WordCount application: ");
 		            Console.ReadLine();
-		
 		
 		            Console.WriteLine("\nCreate the fabric:/WordCount application.");
 		            CreateApplication(clusterUri);
 		            Console.WriteLine("\nPress Enter to get the list of applications: ");
 		            Console.ReadLine();
 		
-		
 		            Console.WriteLine("\nGet the list of applications.");
 		            GetApplicationList(clusterUri);
 		            Console.WriteLine("\nPress Enter to provision the 1.1.0 upgrade to the WordCount application: ");
 		            Console.ReadLine();
-		
 		
 		            Console.WriteLine("\nProvision the 1.1.0 upgrade to the WordCount application.");
 		            ProvisionAnApplication(clusterUri, buildPathUpgrade);
 		            Console.WriteLine("\nPress Enter to get the list of application types: ");
 		            Console.ReadLine();
 		
-		
 		            Console.WriteLine("\nGet the list of application types.");
 		            GetListOfApplicationTypes(clusterUri);
 		            Console.WriteLine("\nPress Enter to upgrade the fabric:/WordCount application: ");
 		            Console.ReadLine();
-		
 		
 		            Console.WriteLine("\nUpgrade the fabric:/WordCount application.");
 		            UpgradeApplicationByApplicationType(clusterUri);
 		            Console.WriteLine("\nPress Enter to get the list of applications: ");
 		            Console.ReadLine();
 		
-		
 		            Console.WriteLine("\nGet the list of applications.");
 		            GetApplicationList(clusterUri);
 		            Console.WriteLine("\nPress Enter to delete the fabric:/WordCount application: ");
 		            Console.ReadLine();
-		
 		
 		            Console.WriteLine("\nDelete the fabric:/WordCount application.");
 		            DeleteApplication(clusterUri);
 		            Console.WriteLine("\nPress Enter to get the list of applications: ");
 		            Console.ReadLine();
 		
-		
 		            Console.WriteLine("\nGet the list of applications.");
 		            GetApplicationList(clusterUri);
 		            Console.WriteLine("\nPress Enter to unprovision the WordCount 1.1.0 application: ");
 		            Console.ReadLine();
-		
 		
 		            Console.WriteLine("\nUnprovision the WordCount 1.1.0 application.");
 		            UnprovisionAnApplication(clusterUri, updateVersionNumber);
 		            Console.WriteLine("\nPress Enter to get the list of application types: ");
 		            Console.ReadLine();
 		
-		
 		            Console.WriteLine("\nGet the list of application types.");
 		            GetListOfApplicationTypes(clusterUri);
 		            Console.WriteLine("\nPress Enter to unprovision the WordCount 1.0.0 application: ");
 		            Console.ReadLine();
 		
-		
 		            Console.WriteLine("\nUnprovision the WordCount 1.0.0 application.");
 		            UnprovisionAnApplication(clusterUri, applicationVersionNumber);
 		            Console.WriteLine("\nPress Enter to get the final list of application types: ");
 		            Console.ReadLine();
-		
 		
 		            Console.WriteLine("\nGet the final list of application types.");
 		            GetListOfApplicationTypes(clusterUri);
@@ -224,7 +205,6 @@
 		        }
 		
 		        #endregion
-		
 		
 		        #region Get List of Application Types (REST API)
 		
@@ -296,7 +276,6 @@
 		        }
 		
 		        #endregion
-		
 		
 		        #region Provision an Application (REST API)
 		
@@ -468,7 +447,6 @@
 		                throw (e);
 		            }
 		
-		
 		            // Deserialize the response string.
 		            JavaScriptSerializer jss = new JavaScriptSerializer();
 		            List<ApplicationInfo> applicationInfos = jss.Deserialize<List<ApplicationInfo>>(responseString);
@@ -568,7 +546,6 @@
 		
 		        #endregion
 		
-		
 		        #region Delete Application (REST API)
 		
 		        /// <summary>
@@ -645,7 +622,6 @@
 		            request.ContentType = "text/json";
 		            request.Method = "POST";
 		
-		
 		            // Create the Health Policy.
 		            string requestBody = "{"Name":"fabric:/WordCount"," +
 		                                    ""TargetApplicationTypeVersion":"1.1.0"," +
@@ -705,12 +681,10 @@
 		    }
 		}
 
-
-
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 
 ## 后续步骤
 
-[Service Fabric 应用程序生命周期](/documentation/articles/service-fabric-application-lifecycle/)
+[Service Fabric 应用程序生命周期](./service-fabric-application-lifecycle.md)
 
 <!---HONumber=Mooncake_1017_2016-->

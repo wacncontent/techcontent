@@ -1,6 +1,5 @@
 虽然可以将 MongoLab URI 粘贴到您的代码中，但建议在易于管理的环境中配置它。这样，您就可以在 URI 发生更改时通过 Azure 门户更新它，而不需要使用代码。
 
-
 1. 在 Azure 门户中，选择“Web Apps”。
 1. 在“Web Apps”列表中单击 Web 应用的名称。  
 ![WebAppEntry][entry-website] 将显示“Web 应用仪表板”。

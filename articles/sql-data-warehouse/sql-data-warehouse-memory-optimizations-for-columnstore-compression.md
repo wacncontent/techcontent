@@ -1,21 +1,22 @@
-<properties
-    pageTitle="内存优化 - Azure SQL 数据仓库中的列存储索引 | Azure"
-    description="减少内存需求或增加可用内存，使列存储索引压缩到每个行组中的行数最大化。"
-    services="sql-data-warehouse"
-    documentationcenter="NA"
-    author="shivaniguptamsft"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="ef170f39-ae24-4b04-af76-53bb4c4d16d3"
-    ms.service="sql-data-warehouse"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="data-services"
-    ms.date="11/18/2016"
-    wacn.date="12/12/2016"
-    ms.author="shigu;barbkess" />
+---
+title: 内存优化 - Azure SQL 数据仓库中的列存储索引 | Azure
+description: 减少内存需求或增加可用内存，使列存储索引压缩到每个行组中的行数最大化。
+services: sql-data-warehouse
+documentationcenter: NA
+author: shivaniguptamsft
+manager: jhubbard
+editor: 
+
+ms.assetid: ef170f39-ae24-4b04-af76-53bb4c4d16d3
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 11/18/2016
+wacn.date: 12/12/2016
+ms.author: shigu;barbkess
+---
 
 # 列存储压缩的内存优化
 
@@ -39,8 +40,6 @@
 
 ## 如何估算内存需求
 
-
-
 压缩单个行组所需的最大内存大约为
 
 - 72 MB +
@@ -60,7 +59,6 @@
 
 ### 减少所用列数
 设计表时尽可能减少所用列数。如果行组已压缩到列存储中，列存储索引将单独压缩每个列段。因此，用于压缩行组的内存需求将随列数的增加而增加。
-
 
 ### 减少字符串列数
 字符串数据类型的列比数字和日期数据类型需要更多内存。若要减少内存需求，请考虑从事实表中删除字符串列，并将其置于维度较小的表中。
@@ -88,37 +86,32 @@
 
 若要减少内存压力，可使用 MAXDOP 查询提示，在每次分发中强制加载操作以串行模式运行。
 
-
 	CREATE TABLE MyFactSalesQuota 
 	WITH (DISTRIBUTION = ROUND_ROBIN)
 	AS SELECT * FROM FactSalesQUota 
 	OPTION (MAXDOP 1);
 
-
 ## 分配更多内存的方法
 
 DWU 大小和用户资源类共同确定用户查询可用的内存量。若要增加加载查询的内存授予，可增加 DWU 的数量或增加资源类。
 
-- 若要增加 DWU，请参阅[如何进行性能缩放？](/documentation/articles/sql-data-warehouse-manage-compute-overview/#scale-performance)
-- 若要更改查询的资源类，请参阅[更改用户资源类示例](/documentation/articles/sql-data-warehouse-develop-concurrency/#change-a-user-resource-class-example)。
+- 若要增加 DWU，请参阅[如何进行性能缩放？](./sql-data-warehouse-manage-compute-overview.md#scale-performance)
+- 若要更改查询的资源类，请参阅[更改用户资源类示例](./sql-data-warehouse-develop-concurrency.md#change-a-user-resource-class-example)。
 
-例如，使用 DWU 100 时，smallrc 资源类中的用户在每次分发时可使用 100 MB 的内存。有关详细信息，请参阅 [SQL 数据仓库中的并发](/documentation/articles/sql-data-warehouse-develop-concurrency/)。
+例如，使用 DWU 100 时，smallrc 资源类中的用户在每次分发时可使用 100 MB 的内存。有关详细信息，请参阅 [SQL 数据仓库中的并发](./sql-data-warehouse-develop-concurrency.md)。
 
 假设需要 700 MB 的内存以获取优质行组大小。以下示例演示可如何使用足够的内存来运行加载查询。
 
 - 使用 DWU 1000 和 mediumrc，则内存授予为 800 MB
 - 使用 DWU 600 和 largerc，则内存授予为 800 MB。
 
-
 ## 后续步骤
 
-若要了解提升 SQL 数据仓库中性能的更多方法，请参阅[性能概述](/documentation/articles/sql-data-warehouse-overview-manage-user-queries/)。
+若要了解提升 SQL 数据仓库中性能的更多方法，请参阅[性能概述](./sql-data-warehouse-overview-manage-user-queries.md)。
 
 <!--Image references-->
 
-
 <!--Article references-->
-
 
 <!--MSDN references-->
 

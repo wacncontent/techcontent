@@ -1,27 +1,27 @@
-<properties
-	pageTitle="使用 Azure CustomScript Extension 部署 Linux 应用程序"
-	description="了解如何使用 Azure CustomScript 扩展在 Linux 虚拟机上部署应用程序"
-	editor="tysonn"
-	manager="timlt"
-	documentationCenter=""
-	services="virtual-machines-linux"
-	authors="gbowerman"/>
+---
+title: 使用 Azure CustomScript Extension 部署 Linux 应用程序
+description: 了解如何使用 Azure CustomScript 扩展在 Linux 虚拟机上部署应用程序
+editor: tysonn
+manager: timlt
+documentationCenter: 
+services: virtual-machines-linux
+authors: gbowerman
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="multiple"
-	ms.tgt_pltfrm="linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/13/2016"
-	wacn.date="01/05/2017"
-	ms.author="guybo"/>
+ms.service: virtual-machines-linux
+ms.workload: multiple
+ms.tgt_pltfrm: linux
+ms.devlang: na
+ms.topic: article
+ms.date: 09/13/2016
+wacn.date: 01/05/2017
+ms.author: guybo
+---
 
 #使用适用于 Linux 的 Azure CustomScript 扩展部署 LAMP 应用程序#
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
-想查看更多关于使用资源管理器模型部署 LAMP 堆栈的信息，请点击[这里](/documentation/articles/virtual-machines-linux-create-lamp-stack/)。
+想查看更多关于使用资源管理器模型部署 LAMP 堆栈的信息，请点击[这里](./virtual-machines-linux-create-lamp-stack.md)。
 
 适用于 Linux 的 Azure CustomScript 扩展提供了一种方式来通过运行以 VM 支持的任何脚本语言（例如，Python、Bash 等）编写的任意代码来自定义你的虚拟机 (VM)。这提供了一种非常灵活的方式来在多台计算机上自动执行应用程序部署。
 
@@ -37,7 +37,7 @@
 
 虽然特定的安装命令将采用 Ubuntu，但你可以针对任何受支持的发行版改编一般步骤。
 
-*script-vm* VM 需要使用与 Azure 之间的有效链接安装 Azure CLI。有关这方面的帮助，请参阅[安装和配置 Azure 命令行界面](/documentation/articles/xplat-cli-install/)。
+*script-vm* VM 需要使用与 Azure 之间的有效链接安装 Azure CLI。有关这方面的帮助，请参阅[安装和配置 Azure 命令行界面](../xplat-cli-install.md)。
 
 ## 上载脚本
 
@@ -75,7 +75,6 @@
 
     {"fileUris":["https://mystorage.blob.core.chinacloudapi.cn/scripts/lamp_install.sh"], "commandToExecute":"sudo sh install_lamp.sh" }
 
-
 ## 部署扩展
 
 现在，我们已准备好使用 Azure CLI 将 Linux CustomScript 扩展部署到远程 VM：
@@ -107,6 +106,6 @@
 
 [Azure Linux 扩展 (GitHub)](https://github.com/Azure/azure-linux-extensions)
 
-[Azure 上的 Linux 和开源计算](/documentation/articles/virtual-machines-linux-opensource-links/)
+[Azure 上的 Linux 和开源计算](./virtual-machines-linux-opensource-links.md)
 
 <!---HONumber=70-->

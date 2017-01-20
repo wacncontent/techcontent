@@ -1,24 +1,21 @@
-<properties
-  pageTitle="使用 Azure AD 管理对应用的访问 | Azure"
-  description="介绍 Azure Active Directory 如何使组织能够指定每个用户有权访问的应用。"
-  services="active-directory"
-  documentationCenter=""
-  authors="femila"
-  manager="femila"
-  editor=""/>  
+---
+title: 使用 Azure AD 管理对应用的访问 | Azure
+description: 介绍 Azure Active Directory 如何使组织能够指定每个用户有权访问的应用。
+services: active-directory
+documentationCenter: 
+authors: femila
+manager: femila
+editor: 
 
-
- <tags
-  ms.service="active-directory"
-  ms.workload="identity"
-  ms.tgt_pltfrm="na"
-  ms.devlang="na"
-  ms.topic="article"
-  ms.date="10/13/2016"
-  wacn.date="11/08/2016"
-  ms.author="femila"/>  
-
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/13/2016
+wacn.date: 11/08/2016
+ms.author: femila
+---
 
 # 管理对应用的访问
 
@@ -28,8 +25,7 @@
 
  Azure AD 针对已配置的应用程序支持广泛的访问管理，使组织能够轻松实现正确的访问策略，范围包括自动的基于分配的策略（ABAC 或 RBAC 方案）到委派和纳入管理员管理。有了 Azure AD，你可以轻松地实现复杂策略，结合单个应用程序的多个管理模型，甚至在具有相同对象的应用程序之间重复使用管理规则。
 
- - [添加新的或现有的应用程序](/documentation/articles/active-directory-sso-integrate-saas-apps/)
-
+ - [添加新的或现有的应用程序](./active-directory-sso-integrate-saas-apps.md)
 
  Azure AD 的应用程序分配着重于两种主要分配模式：
 
@@ -46,27 +42,25 @@
 
 使用 Azure AD 可将 Salesforce 等应用程序预先配置为支持单一登录 (SSO) 和自动化预配。配置应用程序后，管理员可以执行一次性的操作来创建和分配相应的组。在本示例中，管理员可以执行以下分配：
 
-
 - 若要启用例外机制，可为每个角色创建自助组。例如，可以将“Salesforce 营销例外”组创建为自助服务组。可以为该组分配 Salesforce 营销角色，而营销领导团队可成为所有者。营销领导团队的成员可以添加或删除用户、设置加入策略甚至批准或拒绝单个用户的加入请求。信息工作者只需有相应的经验，而无需经过专门的所有者或成员培训就能做到这一点。
 
 在此情况下，所有分配的用户将自动预配到 Salesforce，因为当他们添加到不同组时，他们的角色分配会在 Salesforce 中更新。用户可以通过 Microsoft 应用程序访问面板、Office Web 客户端甚至通过浏览到其组织的 Salesforce 登录页来发现和访问 Salesforce。管理员可以使用 Azure AD 报告轻松查看使用情况和分配状态。
-
 
 ## 如何入门？
 
 首先，如果你未用过 Azure AD 并且你是 IT 管理员：
 
- - [立即试用！](/documentation/services/identity/) — 现在就可以使用此链接注册 30 天试用版，然后在不到 5 分钟内部署第一个云解决方案
+ - [立即试用！](./index.md/) — 现在就可以使用此链接注册 30 天试用版，然后在不到 5 分钟内部署第一个云解决方案
 
 支持帐户共享的 Azure AD 功能包括：
 
 - 将应用程序添加到 Azure AD
 - 分配入门
 - 应用程序分配常见问题
-- [应用使用情况仪表板/报告](/documentation/articles/active-directory-passwords-get-insights/)
+- [应用使用情况仪表板/报告](./active-directory-passwords-get-insights.md)
 
 ## 可以从何处了解详细信息？
 
-- [有关 Azure Active Directory 中应用程序管理的文章索引](/documentation/articles/active-directory-apps-index/)
+- [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
 
 <!---HONumber=Mooncake_1031_2016-->

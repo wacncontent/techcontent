@@ -1,38 +1,37 @@
-<properties
-    pageTitle="使用 PowerShell 部署和管理资源管理器部署型 VM 的备份 | Azure"
-    description="使用 PowerShell 在 Azure 中部署和管理资源管理器部署型 VM 的备份"
-    services="backup"
-    documentationcenter=""
-    author="markgalioto"
-    manager="cfreeman"
-    editor="" />  
+---
+title: 使用 PowerShell 部署和管理资源管理器部署型 VM 的备份 | Azure
+description: 使用 PowerShell 在 Azure 中部署和管理资源管理器部署型 VM 的备份
+services: backup
+documentationcenter: 
+author: markgalioto
+manager: cfreeman
+editor: 
 
-
-<tags
-    ms.assetid="68606e4f-536d-4eac-9f80-8a198ea94d52"
-    ms.service="backup"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage-backup-recovery"
-    ms.date="11/01/2016"
-    wacn.date="01/04/2017"
-    ms.author="markgal; trinadhk" />
+ms.assetid: 68606e4f-536d-4eac-9f80-8a198ea94d52
+ms.service: backup
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 11/01/2016
+wacn.date: 01/04/2017
+ms.author: markgal; trinadhk
+---
 
 # 使用 PowerShell 部署和管理资源管理器部署型 VM 的备份
 
-> [AZURE.SELECTOR]
-- [资源管理器](/documentation/articles/backup-azure-vms-automation/)
-- [经典](/documentation/articles/backup-azure-vms-classic-automation/)
+> [!div class="op_single_selector"]
+- [资源管理器](./backup-azure-vms-automation.md)
+- [经典](./backup-azure-vms-classic-automation.md)
 
 本文说明如何使用 Azure PowerShell cmdlet 从恢复服务保管库备份和恢复 Azure 虚拟机 (VM)。恢复服务保管库是一种 Azure资源管理器资源，用于保护 Azure 备份和 Azure Site Recovery 服务中的数据与资产。可以使用恢复服务保管库来保护 Azure Service Manager 部署型 VM 以及 Azure资源管理器部署型 VM。
 
->[AZURE.NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](/documentation/articles/resource-manager-deployment-model/)。本文针对使用资源管理器模型创建的 VM。
+>[!NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文针对使用资源管理器模型创建的 VM。
 
 本文将逐步指导用户使用 PowerShell 来保护 VM，以及从恢复点还原数据。
 
 ## 概念
-如果不熟悉 Azure 备份服务，可查看[什么是 Azure 备份？](/documentation/articles/backup-introduction-to-azure-backup/)大致了解该服务。 开始之前，请务必掌握与系统必备组件相关的基础知识（这些必备组件是使用 Azure 备份所必需的），并了解当前 VM 备份解决方案的限制。
+如果不熟悉 Azure 备份服务，可查看[什么是 Azure 备份？](./backup-introduction-to-azure-backup.md)大致了解该服务。 开始之前，请务必掌握与系统必备组件相关的基础知识（这些必备组件是使用 Azure 备份所必需的），并了解当前 VM 备份解决方案的限制。
 
 为提高 PowerShell 使用效率，必须了解对象的层次结构以及着手点。
 
@@ -45,7 +44,6 @@
 
 1. [下载最新版 PowerShell](https://github.com/Azure/azure-powershell/releases)（所需的最低版本：1.4.0）
 2. 键入以下命令查找可用的 Azure 备份 PowerShell cmdlet：
-
 
 		PS C:\> Get-Command *azurermrecoveryservices*
 	
@@ -79,8 +77,6 @@
 		Cmdlet          Unregister-AzureRmRecoveryServicesBackupManagem... 1.4.0      AzureRM.RecoveryServices.Backup
 		Cmdlet          Wait-AzureRmRecoveryServicesBackupJob              1.4.0      AzureRM.RecoveryServices.Backup
 
-
-
 使用 PowerShell 可以自动化以下任务：
 
 - 创建恢复服务保管库
@@ -105,12 +101,12 @@
    
 		PS C:\> New-AzureRmRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "China North"
 
-4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](/documentation/articles/storage-redundancy/#locally-redundant-storage/) 或[异地冗余存储 (GRS)](/documentation/articles/storage-redundancy/#geo-redundant-storage/)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
+4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md#locally-redundant-storage/) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage/)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
    
 		PS C:\> $vault1 = Get-AzureRmRecoveryServicesVault -Name "testVault"
 		PS C:\> Set-AzureRmRecoveryServicesBackupProperties  -Vault $vault1 -BackupStorageRedundancy GeoRedundant
 
-	> [AZURE.TIP] 许多 Azure 备份 cmdlet 要求使用恢复服务保管库对象作为输入。因此，在变量中存储备份恢复服务保管库对象可提供方便。
+	> [!TIP] 许多 Azure 备份 cmdlet 要求使用恢复服务保管库对象作为输入。因此，在变量中存储备份恢复服务保管库对象可提供方便。
 
 ## 在订阅中查看保管库
 使用 **[Get-AzureRmRecoveryServicesVault](https://msdn.microsoft.com/zh-cn/library/mt643907.aspx)** 查看当前订阅中所有保管库的列表。可以使用此命令来查看是否创建了新的保管库，或者查看订阅中的可用保管库。
@@ -125,7 +121,6 @@
 	ResourceGroupName : Contoso-docs-rg
 	SubscriptionId    : 1234-567f-8910-abc
 	Properties        : Microsoft.Azure.Commands.RecoveryServices.ARSVaultProperties
-
 
 ## <a name="backup-azure-vms"></a>备份 Azure VM
 既已经创建恢复服务保管库，可以使用它来保护虚拟机。但是，在应用保护之前，必须设置保管库上下文，并且需验证保护策略。保管库上下文定义了保管库中受保护的数据类型。保护策略是指对备份作业的运行时间以及每个备份快照的保留时长进行计划。
@@ -144,7 +139,7 @@
 	----                 ------------       -------------------- ----------                ----------
 	DefaultPolicy        AzureVM            AzureVM              4/14/2016 5:00:00 PM
 
-> [AZURE.NOTE] PowerShell 中 BackupTime 字段的时区是 UTC。
+> [!NOTE] PowerShell 中 BackupTime 字段的时区是 UTC。
 
 一个备份保护策略至少与一个保留策略相关联。保留策略定义在 Azure 备份中保留恢复点的时限。使用 **Get-AzureRmRecoveryServicesBackupRetentionPolicyObject** 可以查看默认保留策略。同理，可以使用 **Get-AzureRmRecoveryServicesBackupSchedulePolicyObject** 获取默认计划策略。计划和保留策略对象将用作 **New-AzureRmRecoveryServicesBackupProtectionPolicy** cmdlet 的输入。
 
@@ -196,7 +191,7 @@
 	------------     ---------            ------               ---------                 -------                   ----------
 	V2VM              Backup               InProgress            4/23/2016 5:00:30 PM                       cf4b3ef5-2fac-4c8e-a215-d2eba4124f27
 
-> [AZURE.NOTE]：PowerShell 中的 StartTime 和 EndTime 字段时区为 UTC。
+> [!NOTE]：PowerShell 中的 StartTime 和 EndTime 字段时区为 UTC。
 
 ## 监视备份作业
 
@@ -256,8 +251,6 @@
 	ContainerName               : IaasVMContainer;iaasvmcontainer; RGName1;V2VM
 	ContainerType               : AzureVM
 	BackupManagementType        : AzureVM
-
-
 
 ### 还原磁盘
 使用 **[Restore-AzureRmRecoveryServicesBackupItem](https://msdn.microsoft.com/zh-cn/library/mt723316.aspx)** cmdlet 将备份项的数据和配置还原到某个恢复点。确定某个恢复点后，即可使用它作为 **-RecoveryPoint** 参数的值。在以前的示例代码中，选择了 **$rp[0]** 作为要使用的恢复点。在下面的示例代码中，指定了 **$rp[0]** 作为还原到磁盘时要使用的恢复点。
@@ -330,6 +323,6 @@
 	    PS C:\> New-AzureRmVM -ResourceGroupName "test" -Location "ChinaNorth" -VM $vm
 
 ## 后续步骤
-如果愿意使用 PowerShell 来处理 Azure 资源，请参阅有关保护 Windows Server 的 PowerShell 文章：[为 Windows Server 部署和管理备份](/documentation/articles/backup-client-automation/)。此外还有一篇有关如何管理 DPM 备份的 PowerShell 文章：[为 DPM 部署和管理备份](/documentation/articles/backup-dpm-automation/)。这两篇文章都为资源管理器部署和经典部署提供了一个版本。
+如果愿意使用 PowerShell 来处理 Azure 资源，请参阅有关保护 Windows Server 的 PowerShell 文章：[为 Windows Server 部署和管理备份](./backup-client-automation.md)。此外还有一篇有关如何管理 DPM 备份的 PowerShell 文章：[为 DPM 部署和管理备份](./backup-dpm-automation.md)。这两篇文章都为资源管理器部署和经典部署提供了一个版本。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

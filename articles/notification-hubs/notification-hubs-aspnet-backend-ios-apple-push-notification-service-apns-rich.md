@@ -1,29 +1,27 @@
-<properties
-	pageTitle="Azure 通知中心富推送"
-	description="了解如何从 Azure 将富推送通知发送到 iOS 应用。代码示例是使用 .Objective-C 和 C# 编写的。"
-	documentationCenter="ios"
-	services="notification-hubs"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>
+---
+title: Azure 通知中心富推送
+description: 了解如何从 Azure 将富推送通知发送到 iOS 应用。代码示例是使用 .Objective-C 和 C# 编写的。
+documentationCenter: ios
+services: notification-hubs
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="08/02/2016"
-	ms.author="wesmc"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 08/02/2016
+ms.author: wesmc
+---
 
 #Azure 通知中心富推送
 
-
 ##概述
 
-为了吸引用户使用即时丰富内容，除纯文本之外，应用程序可能还需要以其他形式进行推送。这些通知将提升用户交互并显示 URL、声音、图像/优惠券等内容。本教程以[通知用户](/documentation/articles/notification-hubs-aspnet-backend-ios-apple-apns-notification/)主题为基础，演示如何发送包含有效负载（例如图像）的推送通知。
-
+为了吸引用户使用即时丰富内容，除纯文本之外，应用程序可能还需要以其他形式进行推送。这些通知将提升用户交互并显示 URL、声音、图像/优惠券等内容。本教程以[通知用户](./notification-hubs-aspnet-backend-ios-apple-apns-notification.md)主题为基础，演示如何发送包含有效负载（例如图像）的推送通知。
 
 本教程适用于 iOS 7 和 8。
 
@@ -38,10 +36,9 @@
     - 与使用设备接收到的 ID 请求富有效负载的后端进行联系
     - 在数据检索完成后，向用户设备发送通知，并在用户点击“了解详细信息”时立即显示有效负载
 
-
 ## WebAPI 项目
 
-1. 在 Visual Studio 中，打开您在[通知用户](/documentation/articles/notification-hubs-aspnet-backend-ios-apple-apns-notification/)教程中创建的 **AppBackend** 项目。
+1. 在 Visual Studio 中，打开您在[通知用户](./notification-hubs-aspnet-backend-ios-apple-apns-notification.md)教程中创建的 **AppBackend** 项目。
 2. 获取想要用于通知用户的图像，并将其置于项目目录的 **img** 文件夹中。
 3. 单击“解决方案资源管理器”中的**显示所有文件**，右键单击该文件夹以**包括在项目中**。
 4. 通过选定的图像，将“属性”窗口中的“生成操作”更改为**嵌入的资源**。
@@ -97,7 +94,7 @@
             }
         }
 
-	>[AZURE.NOTE] 请参阅[如何使用 Visual C# 嵌入和访问资源](http://support.microsoft.com/kb/319292)了解有关如何添加和获取项目资源的详细信息。
+	>[!NOTE] 请参阅[如何使用 Visual C# 嵌入和访问资源](http://support.microsoft.com/kb/319292)了解有关如何添加和获取项目资源的详细信息。
 
 7. 在 **NotificationsController.cs** 中，使用以下代码段重新定义 **NotificationsController**。这会将初始无提示的富通知 ID 发送到设备，并允许客户端对图像进行检索：
 
@@ -143,7 +140,7 @@
 
     ![][IOS3]
 
-3. 转到 **Main.storyboard**，并确保您具有[通知用户](/documentation/articles/notification-hubs-aspnet-backend-ios-apple-apns-notification/)教程中的视图控制器（本教程中称为“主页视图控制器”）。
+3. 转到 **Main.storyboard**，并确保您具有[通知用户](./notification-hubs-aspnet-backend-ios-apple-apns-notification.md)教程中的视图控制器（本教程中称为“主页视图控制器”）。
 
 4. 将**导航控制器**添加到您的情节提要，按住 Ctrl 键并拖动到“主页视图控制器”以便使其作为导航的**根视图**。请确保只选中“导航控制器”的“属性检查器”中的“是初始视图控制器”。
 
@@ -210,7 +207,6 @@
 
             // Notification categories
             NSSet* richPushCategories = [NSSet setWithObjects:richPushCategory, nil];
-
 
             UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound |
                                                     UIUserNotificationTypeAlert |
@@ -375,7 +371,6 @@
 3. 单击“发送推送”，您应看到应用内警报。如果您单击“详细信息”，将转到您选择要包括在应用后端中的图像。
 
 4. 您也可以单击“发送推送”并立即按下设备的主页按钮。几分钟后，您将收到推送通知。如果您点击推送通知或单击“详细信息”，将转到您的应用和富图像内容。
-
 
 [IOS1]: ./media/notification-hubs-aspnet-backend-ios-rich-push/rich-push-ios-1.png
 [IOS2]: ./media/notification-hubs-aspnet-backend-ios-rich-push/rich-push-ios-2.png

@@ -1,17 +1,17 @@
-<properties
-	pageTitle="将不同订阅中的虚拟网络连接到 ExpressRoute 线路时收到报错'Cannot parse the request'"
-	description="通过 PowerShell 将不同订阅中的虚拟网络连接到 ExpressRoute"
-	services="virtual-network"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags="Azure,PowerShell,VNet,ExpressRoute,Subscriptions"/>
+---
+title: 将不同订阅中的虚拟网络连接到 ExpressRoute 线路时收到报错'Cannot parse the request'
+description: 通过 PowerShell 将不同订阅中的虚拟网络连接到 ExpressRoute
+services: virtual-network
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: Azure,PowerShell,VNet,ExpressRoute,Subscriptions
 
-<tags
-    ms.service="virtual-network-aog"
-    ms.date="12/08/2016"
-    wacn.date="12/13/2016"/>
+ms.service: virtual-network-aog
+ms.date: 12/08/2016
+wacn.date: 12/13/2016
+---
 
 # 将不同订阅中的虚拟网络连接到 ExpressRoute 线路时收到报错“Cannot parse the request” #
 
@@ -67,18 +67,14 @@
 	$gw=Get-AzureRmVirtualNetworkGateway -Name CraneARMERtestGW -ResourceGroupName craneARMERtest 
 	New-AzureRmVirtualNetworkGatewayConnection -Name ERConnection -ResourceGroupName craneARMERtest -Location "China East" -VirtualNetworkGateway1 $gw -PeerId $ID -ConnectionType ExpressRoute -AuthorizationKey "d3d7375f-aa95-4a97-97bf-cd4a68278189" 
 
->[AZURE.NOTE]<p>此处的 `$ID` 赋值应为 `(Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER").id` 即：`"/subscriptions/8775dxxxxxxxxxxxxxxxxxxxxxxxxx518/resourceGroups/CraneER/providers/Microsoft.Network/expressRouteCircuits/21VDemoSH"`
+>[!NOTE]<p>此处的 `$ID` 赋值应为 `(Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER").id` 即：`"/subscriptions/8775dxxxxxxxxxxxxxxxxxxxxxxxxx518/resourceGroups/CraneER/providers/Microsoft.Network/expressRouteCircuits/21VDemoSH"`
 <p>而不是：`(Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER").Authorizations.id` 即：`"/subscriptions/8775dxxxxxxxxxxxxxxxxxxxxxxxxx518/resourceGroups/CraneER/providers/Microsoft.Network/expressRouteCircuits/21VDemoSH/authorizations/MyAuthorization"`。
 
 出现 “`Cannot parse the request`” 的错误是因为 `$ID` 赋错值了。在 `Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER"` 的输出中会有如下两个参数： `id` 及 `Authorizations.id` 。
 
 此处需要给 `$ID` 赋值的参数是 `.id`，而不是 `Authorizations.id`，至此问题即可解决。
 
-
 ### 其它资源 ###
 
-[将虚拟网络链接到 ExpressRoute 线路](/documentation/articles/expressroute-howto-linkvnet-arm/)
-
- 
-
+[将虚拟网络链接到 ExpressRoute 线路](./expressroute/expressroute-howto-linkvnet-arm.md)
 

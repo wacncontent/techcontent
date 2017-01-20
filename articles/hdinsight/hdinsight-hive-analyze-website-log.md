@@ -1,22 +1,22 @@
-<properties 
-	pageTitle="将 Hive 用于 Hadoop 以进行网站日志分析 | Azure" 
-	description="了解如何通过将 Hive 与 HDInsight 配合使用来分析网站日志。我们将使用日志文件作为 HDInsight 表的输入，并使用 HiveQL 来查询数据。" 
-	services="hdinsight" 
-	documentationCenter="" 
-	authors="nitinme" 
-	manager="paulettm" 
-	editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 将 Hive 用于 Hadoop 以进行网站日志分析 | Azure
+description: 了解如何通过将 Hive 与 HDInsight 配合使用来分析网站日志。我们将使用日志文件作为 HDInsight 表的输入，并使用 HiveQL 来查询数据。
+services: hdinsight
+documentationCenter: 
+authors: nitinme
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags 
-	ms.service="hdinsight" 
-	ms.workload="big-data" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="05/17/2016" 
-	wacn.date="12/12/2016" 
-	ms.author="nitinme"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/17/2016
+wacn.date: 12/12/2016
+ms.author: nitinme
+---
 
 # 将 Hive 与 HDInsight 配合使用来分析来自网站的日志
 
@@ -37,7 +37,6 @@
 - 必须已安装 Microsoft Excel 2013 或 Excel 2010。
 - 必须拥有 [Microsoft Hive ODBC 驱动程序](http://www.microsoft.com/download/details.aspx?id=40886)，才能将数据从 Hive 导入 Excel。
 
-
 ##运行示例
 
 1. 在 Azure 经典管理门户中，单击要在其上运行示例的群集，然后单击底部的“查询控制台”。或者，也可以通过使用以下 URL 直接打开查询控制台：
@@ -51,10 +50,9 @@
 3. 按照网页上提供的说明完成该示例。
 
 ##后续步骤
-尝试以下示例：[通过将 Hive 与 HDInsight 配合使用分析传感器数据](/documentation/articles/hdinsight-hive-analyze-sensor-data/)。
+尝试以下示例：[通过将 Hive 与 HDInsight 配合使用分析传感器数据](./hdinsight-hive-analyze-sensor-data.md)。
 
-
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
 [img-hdi-weblogs-sample]: ./media/hdinsight-hive-analyze-website-log/hdinsight-weblogs-sample.png
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

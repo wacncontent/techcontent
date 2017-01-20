@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="使用 PowerShell 部署和管理通知中心" 
-	description="如何使用自动化 PowerShell 创建和管理通知中心" 
-	services="notification-hubs" 
-	documentationCenter="" 
-	authors="wesmc7777" 
-	manager="erikre" 
-	editor="" />
+---
+title: 使用 PowerShell 部署和管理通知中心
+description: 如何使用自动化 PowerShell 创建和管理通知中心
+services: notification-hubs
+documentationCenter: 
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags 
-	ms.service="notification-hubs" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="powershell" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="06/29/2016" 
-	wacn.date="08/08/2016" 
-	ms.author="wesmc"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: powershell
+ms.devlang: na
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 08/08/2016
+ms.author: wesmc
+---
 
 # 使用 PowerShell 部署和管理通知中心
 
@@ -26,10 +26,9 @@
 + 创建通知中心
 + 设置凭据
 
-如果你还需要为通知中心创建新的服务总线命名空间，请参阅[使用 PowerShell 管理服务总线](/documentation/articles/service-bus-powershell-how-to-provision/)。
+如果你还需要为通知中心创建新的服务总线命名空间，请参阅[使用 PowerShell 管理服务总线](../service-bus-messaging/service-bus-powershell-how-to-provision.md)。
 
 不支持直接使用 Azure PowerShell 随附的 cmdlet 来管理通知中心。在 PowerShell 中，最佳方法是引用 Microsoft.Azure.NotificationHubs.dll 程序集。该程序集是随 [Microsoft Azure 通知中心 NuGet 包](https://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/)一起分发的。
-
 
 ## 先决条件
 
@@ -40,7 +39,6 @@
 - 配备 Azure PowerShell 的计算机。有关说明，请参阅[安装和配置 Azure PowerShell]。
 
 - 大致了解 PowerShell 脚本、NuGet 包和 .NET Framework。
-
 
 ## 包含对适用于服务总线的 .NET 程序集的引用
 
@@ -74,7 +72,6 @@ powershell
 		    Write-Error("Could not add the Microsoft.Azure.NotificationHubs.dll assembly to the script. Make sure you build the solution before running the provisioning script.")
 		}
 
-
 ## 创建 NamespaceManager 类
 
 若要预配通知中心，请从 SDK 创建 [NamespaceManager](https://msdn.microsoft.com/library/azure/microsoft.azure.notificationhubs.namespacemanager.aspx) 类的实例。
@@ -89,8 +86,6 @@ powershell
 	$NamespaceManager=[Microsoft.Azure.NotificationHubs.NamespaceManager]::CreateFromConnectionString($sbr.ConnectionString);
 	Write-Output "NamespaceManager object for the [$Namespace] namespace has been successfully created."
 
-
-
 ## 设置新通知中心 
 
 若要预配新的通知中心，请使用[通知中心的 .NET API]。
@@ -102,7 +97,7 @@ powershell
 3.`$WnsPackageSid`：从 [Windows 开发人员中心](http://go.microsoft.com/fwlink/p/?linkid=266582&clcid=0x409)将此变量设置为 Windows 应用的包 SID。  
 4.`$WnsSecretkey`：从 [Windows 开发人员中心](http://go.microsoft.com/fwlink/p/?linkid=266582&clcid=0x409)将此变量设置为 Windows 应用的机密密钥。  
 
-这些变量可用于连接命名空间，以及创建配置为使用 Windows 应用 Windows 通知中心 (WNS) 凭据处理 WNS 通知的新通知中心。有关获取包 SID 和机密密钥的信息，请参阅[通知中心入门](/documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/)教程。
+这些变量可用于连接命名空间，以及创建配置为使用 Windows 应用 Windows 通知中心 (WNS) 凭据处理 WNS 通知的新通知中心。有关获取包 SID 和机密密钥的信息，请参阅[通知中心入门](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md)教程。
 
 + 脚本代码段使用 `NamespaceManager` 对象来检查 `$Path` 标识的通知中心是否存在。
 
@@ -150,25 +145,20 @@ powershell
 	    Write-Host "The [$Namespace] namespace does not exist."
 	}
 
-
-
 ## 其他资源
 
-- [使用 PowerShell 管理服务总线](/documentation/articles/service-bus-powershell-how-to-provision/)
+- [使用 PowerShell 管理服务总线](../service-bus-messaging/service-bus-powershell-how-to-provision.md)
 - [如何使用 PowerShell 脚本创建 Service Bus 队列、主题和订阅](http://blogs.msdn.com/b/paolos/archive/2014/12/02/how-to-create-a-service-bus-queues-topics-and-subscriptions-using-a-powershell-script.aspx)
 - [如何使用 PowerShell 脚本创建 Service Bus 命名空间和事件中心](http://blogs.msdn.com/b/paolos/archive/2014/12/01/how-to-create-a-service-bus-namespace-and-an-event-hub-using-a-powershell-script.aspx)
 
 一些现成的脚本也可供下载：
 - [服务总线 PowerShell 脚本](https://code.msdn.microsoft.com/windowsazure/Service-Bus-PowerShell-a46b7059)
  
-
-
-[试用]: /pricing/free-trial/
-[安装和配置 Azure PowerShell]: /documentation/articles/powershell-install-configure/
+[试用]: https://www.azure.cn/pricing/free-trial/
+[安装和配置 Azure PowerShell]: ../powershell-install-configure.md
 [通知中心的 .NET API]: https://msdn.microsoft.com/library/azure/mt414893.aspx
 [Get-AzureSBNamespace]: https://msdn.microsoft.com/library/azure/dn495122.aspx
 [New-AzureSBNamespace]: https://msdn.microsoft.com/library/azure/dn495165.aspx
 [Get-AzureSBAuthorizationRule]: https://msdn.microsoft.com/library/azure/dn495113.aspx
  
-
 <!---HONumber=Mooncake_0801_2016-->

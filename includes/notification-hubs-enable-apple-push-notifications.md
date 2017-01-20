@@ -32,7 +32,6 @@ Apple 推送通知服务 (APNS) 使用证书对推送通知进行身份验证。
 
    	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-ios-appids.png)
 
-
 2. 更新新应用的以下三个字段，然后单击“Continue”（继续）：
 
 	* **Name（名称）**：在“App ID Description”（应用 ID 说明）部分的“Name”（名称）字段中为应用键入一个描述性名称。
@@ -47,45 +46,37 @@ Apple 推送通知服务 (APNS) 使用证书对推送通知进行身份验证。
 
    	单击“注册”后，你将会看到如下所示的“注册已完成”屏幕。单击“Done”（完成）。
 
-
     ![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-appid-registration-complete.png)
-
 
 3. 在开发人员中心的“App IDs”（应用 ID）下，找到你刚刚创建的应用 ID，然后单击其所在行。
 
    	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-ios-appids2.png)  
 
-
    	单击应用程序 ID 会显示应用程序详细信息。单击底部的“Edit”（编辑）按钮。
 
    	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-edit-appid.png)  
-
 
 4. 滚动到屏幕底部并单击“Development Push SSL Certificate”（开发推送 SSL 证书 ）部分下的“Create Certificate...”（创建证书...）按钮。
 
    	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-appid-create-cert.png)  
 
-
    	将显示“Add iOS Certificate”（添加 iOS 证书）助手。
 
-    > [AZURE.NOTE] 本教程使用开发证书。注册生产证书时使用相同的过程。你只需确保在发送通知时使用相同的证书类型。
+    > [!NOTE] 本教程使用开发证书。注册生产证书时使用相同的过程。你只需确保在发送通知时使用相同的证书类型。
 
 5. 单击“Choose File”（选择文件），浏览到你在第一个任务中创建的 CSR 文件保存到的位置，然后单击“Generate”（生成）。
 
   	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-appid-cert-choose-csr.png)  
 
-
 6. 门户创建证书之后，请单击“Download”（下载）按钮，然后单击“Done”（完成）。
 
   	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-appid-download-cert.png)  
-
 
    	随后将会下载证书并将其保存到计算机上的 Downloads 文件夹。
 
   	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-cert-downloaded.png)  
 
-
-    > [AZURE.NOTE] 默认情况下，下载的文件（开发证书）名为 **aps\_development.cer**。
+    > [!NOTE] 默认情况下，下载的文件（开发证书）名为 **aps\_development.cer**。
 
 7. 双击下载的推送证书 **aps\_development.cer**。
 
@@ -93,18 +84,15 @@ Apple 推送通知服务 (APNS) 使用证书对推送通知进行身份验证。
 
    	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-cert-in-keychain.png)  
 
-
-    > [AZURE.NOTE] 证书中的名称可能不同，但将以 **Apple Development iOS Push Services:** 作为前缀。
+    > [!NOTE] 证书中的名称可能不同，但将以 **Apple Development iOS Push Services:** 作为前缀。
 
 8. 在 Keychain Access 中，右键单击你在“Certificates”（证书）类别中创建的新推送证书。单击“导出”，为文件命名，选择“.p12”格式，然后单击“保存”。
 
 	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-export-cert-p12.png)  
 
-
 	记下导出的 .p12 证书的文件名和位置。它将用于启用 APNS 身份验证。
 
-	>[AZURE.NOTE] 本教程将创建 QuickStart.p12 文件。你的文件名和位置可能不同。
-
+	>[!NOTE] 本教程将创建 QuickStart.p12 文件。你的文件名和位置可能不同。
 
 ##为应用程序创建配置文件
 
@@ -112,33 +100,23 @@ Apple 推送通知服务 (APNS) 使用证书对推送通知进行身份验证。
 
    	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-new-provisioning-profile.png)  
 
-
 2. 选择“Development”（开发）下的“iOS App Development”（iOS 应用程序开发）作为设置配置文件类型，然后单击“Continue”（继续）。
-
 
 3. 接下来，从“App ID”（应用程序 ID）下拉列表中选择你刚刚创建的应用程序 ID，然后单击“Continue”（继续）。
 
    	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-select-appid-for-provisioning.png)  
 
-
-
 4. 在“Select certificates”（选择证书）屏幕中，选择你经常用于代码签名的开发证书，然后单击“Continue”（继续）。这不是你刚刚创建的推送证书。
 
    	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-provisioning-select-cert.png)  
-
-
 
 5. 接下来，选择要用于测试的“Devices”（设备），然后单击“Continue”（继续）。
 
    	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-provisioning-select-devices.png)  
 
-
-
 6. 最后，在“Profile Name”（配置文件名称）中为配置文件选取一个名称，并单击“Generate”（生成）。
 
    	![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-provisioning-name-profile.png)  
-
-
 
 7. 创建新的预配配置文件后，请单击下载该文件，并将其安装在你的 Xcode 开发计算机上。然后单击“Done”（完成）。
 

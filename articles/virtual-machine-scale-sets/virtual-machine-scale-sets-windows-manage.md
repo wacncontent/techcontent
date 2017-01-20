@@ -1,24 +1,22 @@
-<properties
-	pageTitle="管理虚拟机规模集中的 VM | Azure"
-	description="使用 Azure PowerShell 在虚拟机规模集中管理虚拟机。"
-	services="virtual-machine-scale-sets"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 管理虚拟机规模集中的 VM | Azure
+description: 使用 Azure PowerShell 在虚拟机规模集中管理虚拟机。
+services: virtual-machine-scale-sets
+documentationCenter: 
+authors: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machine-scale-sets"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="01/05/2017"
-	ms.author="davidmu"/>  
-
+ms.service: virtual-machine-scale-sets
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 01/05/2017
+ms.author: davidmu
+---
 
 # 在虚拟机规模集中管理虚拟机
 

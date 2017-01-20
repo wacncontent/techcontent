@@ -21,7 +21,6 @@
 	         headers:(NSDictionary *)headers
 	      completion:(MSAPIDataBlock)completion;
 
-
 例如，若要将 JSON 请求发送到名为“sendEmail”的自定义 API，请为请求参数传递 `NSDictionary`：
 
 	NSDictionary *emailHeader = @{ @"to": @"email.com", @"subject" : @"value" };
@@ -51,9 +50,6 @@
 		// do something with the result
                }
                
-               
            }];
-
-		
 
 <!---HONumber=74-->

@@ -1,26 +1,25 @@
-<properties 
-	pageTitle="使用移动服务 Android 客户端库" 
-	description="了解如何使用适用于 Azure 移动服务的 Android 客户端。" 
-	services="mobile-services" 
-	documentationCenter="android" 
-	authors="RickSaling" 
-	manager="erikre"
-	editor=""/>
+---
+title: 使用移动服务 Android 客户端库
+description: 了解如何使用适用于 Azure 移动服务的 Android 客户端。
+services: mobile-services
+documentationCenter: android
+authors: RickSaling
+manager: erikre
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-android"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="ricksal"/>
-
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-android
+ms.devlang: java
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: ricksal
+---
 
 # 如何使用适用于移动服务的 Android 客户端库
 
-[AZURE.INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
+[!INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
  
 本指南说明如何使用适用于 Azure 移动服务的 Android 客户端执行常见任务。所述的任务包括：查询数据；插入、更新和删除数据；对用户进行身份验证；处理错误；自定义客户端。
 
@@ -28,7 +27,7 @@
 
 <!-- 可以在[此处](http://go.microsoft.com/fwlink/p/?LinkId=298735)找到有关 Android 客户端库的 Javadocs API 参考。-->
 
-[AZURE.INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
+[!INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
 
 ##<a name="setup"></a>安装与先决条件
 
@@ -75,7 +74,6 @@
 
 		MobileServiceTable<ToDoItem> mToDoTable = mClient.getTable(ToDoItem.class);
 
-
 如果表名称与类型名称不同，则使用**第二个重载**。
 
 		MobileServiceTable<ToDoItem> mToDoTable = mClient.getTable("ToDoItemBackup", ToDoItem.class);
@@ -83,7 +81,6 @@
 ## <a name="api"></a>API 结构
  
 从 2.0 版客户端库开始，移动服务表操作将在所有异步作业（例如涉及查询的方法）和操作（例如插入、更新和删除）中使用 [Future](http://developer.android.com/reference/java/util/concurrent/Future.html) 和 [AsyncTask](http://developer.android.com/reference/android/os/AsyncTask.html) 对象。这就可以更方便地（在后台线程上）执行多个操作，而无需处理多个嵌套回调。
-
 
 ## <a name="querying"></a>如何从移动服务查询数据
 
@@ -117,11 +114,9 @@
             }
 		}.execute();
 
-
 与此类似的查询使用 [AsyncTask](http://developer.android.com/reference/android/os/AsyncTask.html) 对象。
 
 *result* 变量返回查询的结果，`mToDoTable.execute().get()` 语句后面的代码演示如何显示单个行。
-
 
 ### <a name="filtering"></a>如何筛选返回的数据
 
@@ -143,8 +138,6 @@
 			}
         }.execute();
 
-
-
 通过对表引用执行 **where** 方法调用来启动筛选器。然后，依次执行 **field** 方法调用和用于指定逻辑谓词的方法调用。可能的谓词方法包括 **eq**、**ne**、**gt**、**ge**、**lt**、**le** 等。
 
 执行这些操作便足以将数字和字符串字段与特定值进行比较。不过，你还可以执行其他许多操作。
@@ -160,7 +153,6 @@
 还允许使用  **add**、**sub**、**mul**、**div**、**mod**、**floor**、**ceiling**和**round** 等方法对数字字段运行各种更复杂的筛选器。以下代码片段将会筛选其中的 *duration* 为偶数的表行。
 
 		mToDoTable.where().field("duration").mod(2).eq(0).execute().get();
-
 
 你可以使用 **and**、**or**和**not** 等方法来组合谓词。以下代码片段将组合上面的两个示例。
 
@@ -195,11 +187,9 @@
 
        final MobileServiceList<ToDoItem> result = mToDoTable.top(5).execute().get();
 
-
 接下来，我们定义一个查询，以跳过前 5 个项，返回后 5 个项。
 
 		mToDoTable.skip(5).top(5).execute().get();
-
 
 ### <a name="selecting"></a>如何选择特定的列
 
@@ -207,7 +197,6 @@
 
 		mToDoTable.select("complete", "text").execute().get();
 
-	
 在这里，select 函数的参数是要返回的表列的字符串名称。
 
 **select** 方法需接在 **where** 和 **orderBy** 等方法（如果存在）的后面。它可以后接 **top** 等方法。
@@ -228,7 +217,6 @@
 					.execute().get();
 
 将方法链接在一起时，最重要的是 *where* 方法和谓词必须出现在最前面。然后，你就可以按照最符合应用程序需求的顺序调用后续方法。
-
 
 ## <a name="inserting"></a>如何在移动服务中插入数据
 
@@ -263,7 +251,6 @@
 	        }
 	    }.execute();
 
-
 此代码将插入新项，并将其添加到适配器以便在 UI 中显示。
 
 移动服务支持为表 ID 使用唯一的自定义字符串值。这样，应用程序便可为移动服务表的 ID 列使用自定义值（如电子邮件地址或用户名）。例如，如果你想要根据电子邮件地址识别每条记录，可以使用以下 JSON 对象。
@@ -294,7 +281,6 @@
 		return (hex4() + hex4() + "-" + hex4() + "-" + hex4() + "-" + hex4() + "-" + hex4() + hex4() + hex4());
 	}
 
-
 如果应用程序提供了某个 ID 的值，移动服务将按原样存储该值，包括前导和尾随空格。不会从值中裁剪掉空格。
 
 `id` 的值必须唯一，并且不能包含以下集中的字符：
@@ -304,7 +290,6 @@
 +  ID“.”和“..”
 
 也可以为表使用整数 ID。若要使用整数 ID，必须使用 `mobile table create` 命令并结合 `--integerId` 选项创建表。应在适用于 Azure 的命令行界面 (CLI) 中使用此命令。有关使用 CLI 的详细信息，请参阅 [用于管理移动服务表的 CLI]。
-
 
 ##<a name="updating"></a>如何在移动服务中更新数据
 
@@ -371,7 +356,6 @@
         }.execute();
 	}
 
-
 以下代码演示了执行删除操作的另一种方法。该代码通过指定要删除的行的 ID 字段值（假设等于 "2FA404AB-E458-44CD-BC1B-3BC847EF0902"）来删除 ToDoItem 表中的现有项。在实际的应用程序中，你会以某种方式获取 ID，并将它作为变量传入。此处为了简化测试，你可以在 Azure 经典管理门户中转到你的服务，单击“数据”并复制你要测试的 ID。
 
     public void deleteItem(View view) {
@@ -431,7 +415,6 @@
 
 用于访问数据的大多数 API 调用都与类型化编程调用类似。主要差别在于，在非类型化模型中，你要对 **MobileServiceJsonTable** 对象而不是 **MobileServiceTable** 对象调用方法。
 
-
 ### <a name="json_instance"></a>如何创建非类型化表的实例
 
 与使用类型化模型相似，首先需要获取表引用，不过，此时该引用的是一个 **MobileServicesJsonTable** 对象。对移动服务客户端的实例调用 **getTable()** 方法可获取该引用。
@@ -443,10 +426,7 @@
      */
     private MobileServiceJsonTable mJsonToDoTable;
 
-
-
 在 **onCreate** 方法中创建移动服务客户端的实例（在此处为 *mClient* 变量）后，接下来请使用以下代码创建 **MobileServiceJsonTable** 的实例。
-
 
 	// Get the Mobile Service Json Table to use
 	mJsonToDoTable = mClient.getTable("ToDoItem");
@@ -478,25 +458,19 @@
 		    }
         }.execute();
 
-
 如果需要获取所插入对象的ID，请使用此方法调用：
 
 	jsonObject.getAsJsonPrimitive("id").getAsInt());
-
 
 ### <a name="json_delete"></a>如何从非类型化表中删除数据
 
 以下代码演示了如何删除一个实例，在本例中，该实例就是我们在前一个 *insert* 示例中创建的 **JsonObject** 的实例。请注意该代码与类型化案例相同，但方法具有不同的签名，因为它引用了 **JsonObject**。
 
-
     mToDoTable.delete(item);
-
 
 还可以使用某个实例的 ID 来直接删除该实例：
 		
 	mToDoTable.delete(ID);
-
-
 
 ### <a name="json_get"></a>如何返回非类型化表中的所有行
 
@@ -536,7 +510,6 @@
 
 你可以通过连接与类型化编程模型中所用方法同名的方法来执行筛选、排序和分页。
 
-
 ## <a name="binding"></a>如何将数据绑定到用户界面
 
 数据绑定涉及到三个组件：
@@ -562,7 +535,6 @@
 	        tools:listitem="@layout/row_list_to_do" >
 	    </ListView>
 	
-
 在上面的代码中，*listitem* 属性指定列表中单个行的布局 ID。以下代码指定了一个复选框及其关联的文本。这些元素将会针对列表中的每个项实例化一次。如果使用更复杂的布局，则会在屏幕中指定更多的字段。以下代码摘自 *row\_list\_to\_do.xml* 文件。
 
 		<?xml version="1.0" encoding="utf-8"?>
@@ -577,7 +549,6 @@
 		        android:text="@string/checkbox_text" />
 		</LinearLayout>
 		
-
 ### <a name="adapter"></a>如何定义适配器
 	
 由于此处视图的数据源是一个 *ToDoItem* 数组，因此我们需要基于 *ArrayAdapter&lt;ToDoItem&gt;* 类子类化适配器。此子类将使用 *row_list_to_do* 布局为每个 *ToDoItem* 生成一个视图。
@@ -585,7 +556,6 @@
 在代码中，我们可以定义以下类作为 *ArrayAdapter&lt;E&gt;* 类的扩展：
 
 		public class ToDoItemAdapter extends ArrayAdapter<ToDoItem> {
-
 
 必须重写适配器的 *getView* 方法。以下示例代码演示了如何执行此操作：具体的代码根据应用程序而定。
 
@@ -619,7 +589,6 @@
 		ListView listViewToDo = (ListView) findViewById(R.id.listViewToDo);
 		listViewToDo.setAdapter(mAdapter);
 
-
 ### <a name="use-adapter"></a>如何使用适配器
 
 现在，你可以使用数据绑定了。以下代码演示了如何获取移动服务表中的项，清除适配器，然后调用适配器的 *add* 方法以在表中填充返回的项。
@@ -652,14 +621,13 @@
 
 ##<a name="custom-api"></a>如何：调用自定义 API
 
-自定义 API 可让你定义自定义终结点，这些终结点将会公开不映射到插入、更新、删除或读取操作的服务器功能。使用自定义 API 能够以更大的力度控制消息传送，包括读取和设置 HTTP 消息标头，以及定义除 JSON 以外的消息正文格式。有关如何在移动服务中创建自定义 API 的示例，请参阅[如何：定义自定义 API 终结点](/documentation/articles/mobile-services-dotnet-backend-define-custom-api/)。
+自定义 API 可让你定义自定义终结点，这些终结点将会公开不映射到插入、更新、删除或读取操作的服务器功能。使用自定义 API 能够以更大的力度控制消息传送，包括读取和设置 HTTP 消息标头，以及定义除 JSON 以外的消息正文格式。有关如何在移动服务中创建自定义 API 的示例，请参阅[如何：定义自定义 API 终结点](./mobile-services-dotnet-backend-define-custom-api.md)。
 
-[AZURE.INCLUDE [mobile-services-android-call-custom-api](../../includes/mobile-services-android-call-custom-api.md)]
-
+[!INCLUDE [mobile-services-android-call-custom-api](../../includes/mobile-services-android-call-custom-api.md)]
 
 ##<a name="authentication"></a>如何对用户进行身份验证
 
-移动服务支持使用各种外部标识提供者对应用用户进行身份验证和授权，这些提供者包括：Microsoft 帐户和 Azure Active Directory。你可以在表中设置权限，以便将特定操作的访问权限限制给已经过身份验证的用户。你还可以在后端中使用已经过身份验证的用户的标识来实施授权规则。有关详细信息，请参阅[身份验证入门](/documentation/articles/mobile-services-android-get-started-users/)。
+移动服务支持使用各种外部标识提供者对应用用户进行身份验证和授权，这些提供者包括：Microsoft 帐户和 Azure Active Directory。你可以在表中设置权限，以便将特定操作的访问权限限制给已经过身份验证的用户。你还可以在后端中使用已经过身份验证的用户的标识来实施授权规则。有关详细信息，请参阅[身份验证入门](./mobile-services-android-get-started-users.md)。
 
 支持两种身份验证流: 服务器流和客户端流。服务器流依赖于提供者的 Web 身份验证界面，因此可提供最简便的身份验证体验。客户端流依赖于提供者和设备特定的 SDK，因此允许与设备特定的功能（例如单一登录）进行更深入的集成。
 
@@ -669,7 +637,6 @@
 - 将表权限限制给已经过身份验证的用户
 - 向应用程序添加身份验证代码
 
-
 移动服务支持使用以下现有标识提供者对用户进行身份验证：
 
 - Microsoft 帐户
@@ -677,7 +644,7 @@
 
 你可以在表中设置权限，以便将特定操作的访问权限限制给已经过身份验证的用户。还可以使用已经过身份验证的用户的 ID 来修改请求。
 
-前两个任务可使用 [Azure 经典管理门户](https://manage.windowsazure.cn/)来完成。有关详细信息，请参阅[身份验证入门](/documentation/articles/mobile-services-android-get-started-users/)。
+前两个任务可使用 [Azure 经典管理门户](https://manage.windowsazure.cn/)来完成。有关详细信息，请参阅[身份验证入门](./mobile-services-android-get-started-users.md)。
 
 ### <a name="caching"></a>如何向应用程序添加身份验证代码
 
@@ -715,11 +682,9 @@
 
     此代码将使用 Google 登录对用户进行身份验证。此时将出现一个对话框，其中显示了已经过身份验证的用户的 ID。如果未正常完成身份验证，你将无法继续操作。
 
-    > [AZURE.NOTE]如果使用的标识提供程序不是 Google，请将传递给上述 **login** 方法的值更改为下列其中一项：_MicrosoftAccount_或 _WindowsAzureActiveDirectory_。
-
+    > [!NOTE]如果使用的标识提供程序不是 Google，请将传递给上述 **login** 方法的值更改为下列其中一项：_MicrosoftAccount_或 _WindowsAzureActiveDirectory_。
 
 3. 运行应用程序时，请使用选择的标识提供者登录。
-
 
 ### <a name="caching"></a>如何缓存身份验证令牌
 
@@ -755,7 +720,6 @@
 		    	});		}
 		}
 
-
 	private boolean LoadCache()
 	{
 		SharedPreferences prefs = getSharedPreferences("temp", Context.MODE_PRIVATE);
@@ -771,7 +735,6 @@
 		return true;
 	}
 
-
 	private void cacheUser(MobileServiceUser user)
 	{
 		SharedPreferences prefs = getSharedPreferences("temp", Context.MODE_PRIVATE);
@@ -781,9 +744,7 @@
 		editor.commit();
 	}
 
-
 如果令牌过期会发生什么情况呢？ 在这种情况下，如果你尝试使用它来建立连接，将会收到“401 未授权”响应。此时，用户必须登录以获取新令牌。使用筛选器可以截获对移动服务的调用以及来自移动服务的响应，因此不需要在应用程序中调用移动服务的每个位置编写代码来处理这种情况。此时，筛选器代码将测试 401 响应，根据需要触发登录进程，然后恢复生成 401 响应的请求。
-
 
 ## <a name="customizing"></a>如何自定义客户端
 
@@ -836,7 +797,6 @@
 - mComplete
 - mDuration
 
-
 则你必须将客户端名称序列化为与服务器上 *ToDoItem* 表的列名称匹配的 JSON 名称。以下代码利用 gson 库来执行此操作。
 
 	@com.google.gson.annotations.SerializedName("text")
@@ -856,7 +816,6 @@
 如以下代码所示，只需使用 getTable() 函数的重写之一，就能轻松地将客户端表名称映射为不同的移动服务表名称。
 
 		mToDoTable = mClient.getTable("ToDoItemBackup", ToDoItem.class);
-
 
 ### <a name="conversions"></a>如何自动执行列名称映射
 
@@ -878,8 +837,6 @@
 	        })
 	        .setPrettyPrinting());
 	
-
-
 必须在对移动服务客户端对象执行任何方法调用之前执行此代码。
 
 ### <a name="complex"></a>如何将对象或数组属性存储到表中 
@@ -925,11 +882,9 @@
 
 <!-- Images. -->
 
-
-
 <!-- URLs. -->
-[移动服务入门]: /documentation/articles/mobile-services-android-get-started/
-[移动服务快速入门]: /documentation/articles/mobile-services-android-get-started/
+[移动服务入门]: ./mobile-services-android-get-started.md
+[移动服务快速入门]: ./mobile-services-android-get-started.md
 [ASCII 控制代码 C0 和 C1]: https://zh.wikipedia.org/wiki/%E6%8E%A7%E5%88%B6%E5%AD%97%E7%AC%A6
 
 <!---HONumber=Mooncake_0118_2016-->

@@ -1,27 +1,26 @@
-<properties
-	pageTitle="使用 HDInsight .NET SDK 运行 Hive 查询 | Azure"
-	description="了解如何使用 HDInsight .NET SDK 将 Hadoop 作业提交到 Azure HDInsight Hadoop。"
-	editor="cgronlun"
-	manager="paulettm"
-	services="hdinsight"
-	documentationCenter=""
-	tags="azure-portal"
-	authors="mumian"/>
+---
+title: 使用 HDInsight .NET SDK 运行 Hive 查询 | Azure
+description: 了解如何使用 HDInsight .NET SDK 将 Hadoop 作业提交到 Azure HDInsight Hadoop。
+editor: cgronlun
+manager: paulettm
+services: hdinsight
+documentationCenter: 
+tags: azure-portal
+authors: mumian
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-   ms.date="09/14/2016"
-   wacn.date="12/16/2016"
-	ms.author="jgao"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/14/2016
+wacn.date: 12/16/2016
+ms.author: jgao
+---
 
 # 使用 HDInsight .NET SDK 运行 Hive 查询
 
-[AZURE.INCLUDE [hive-selector](../../includes/hdinsight-selector-use-hive.md)]
-
+[!INCLUDE [hive-selector](../../includes/hdinsight-selector-use-hive.md)]
 
 了解如何使用 HDInsight .NET SDK 提交 Hive 查询。
 
@@ -29,7 +28,7 @@
 
 开始阅读本文之前，必须具备以下条件：
 
-- **HDInsight 中有 Hadoop 群集**。请参阅[创建群集和 SQL 数据库](/documentation/articles/hdinsight-use-sqoop/#create-cluster-and-sql-database)。
+- **HDInsight 中有 Hadoop 群集**。请参阅[创建群集和 SQL 数据库](./hdinsight-use-sqoop.md#create-cluster-and-sql-database)。
 - **Visual Studio 2012/2013/2015**。
 
 ##使用 HDInsight .NET SDK 提交 Hive 查询
@@ -129,20 +128,18 @@ HDInsight .NET SDK 提供了 .NET 客户端库，可简化从 .NET 中使用 HDI
 
 5. 按 **F5** 运行应用程序。
 
-
 ## 后续步骤
 
 在本文中，你已经学习了几种创建 HDInsight 群集的方法。要了解更多信息，请参阅下列文章：
 
 * [Azure HDInsight 入门][hdinsight-get-started]
 * [在 HDInsight 中创建 Hadoop 群集][hdinsight-provision]
-* [使用 Azure 经典管理门户管理 HDInsight 中的 Hadoop 群集](/documentation/articles/hdinsight-administer-use-management-portal-v1/)
+* [使用 Azure 经典管理门户管理 HDInsight 中的 Hadoop 群集](./hdinsight-administer-use-management-portal-v1.md)
 * [HDInsight .NET SDK 参考](https://msdn.microsoft.com/zh-cn/library/mt271028.aspx)
-* [将 Pig 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-pig/)
-* [将 Sqoop 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-sqoop/)
+* [将 Pig 与 HDInsight 配合使用](./hdinsight-use-pig.md)
+* [将 Sqoop 与 HDInsight 配合使用](./hdinsight-use-sqoop.md)
 
-
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

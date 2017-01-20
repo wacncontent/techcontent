@@ -1,23 +1,22 @@
-<properties
-    pageTitle="在 Azure 存储中管理并发"
-    description="如何管理 Blob、队列、表和文件服务的并发"
-    services="storage"
-    documentationcenter=""
-    author="jasonnewyork"
-    manager="tadb"
-    editor="tysonn" />  
+---
+title: 在 Azure 存储中管理并发
+description: 如何管理 Blob、队列、表和文件服务的并发
+services: storage
+documentationcenter: 
+author: jasonnewyork
+manager: tadb
+editor: tysonn
 
-<tags
-    ms.assetid="cc6429c4-23ee-46e3-b22d-50dd68bd4680"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="11/16/2016"
-    wacn.date="12/05/2016"
-    ms.author="jahogg" />  
-
+ms.assetid: cc6429c4-23ee-46e3-b22d-50dd68bd4680
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 11/16/2016
+wacn.date: 12/05/2016
+ms.author: jahogg
+---
 
 # 在 Azure 存储中管理并发
 ## 概述
@@ -276,11 +275,9 @@ customer.ETag = "*"；
 
 有关 Azure 存储的详细信息，请参阅：
 
-- [Azure 存储主页](/home/features/storage/)
-- [Azure 存储简介](/documentation/articles/storage-introduction/)
-- [Blob](/documentation/articles/storage-dotnet-how-to-use-blobs/)、[表](/documentation/articles/storage-dotnet-how-to-use-tables/)、[队列](/documentation/articles/storage-dotnet-how-to-use-queues/)和[文件](/documentation/articles/storage-dotnet-how-to-use-files/)的存储使用入门
+- [Azure 存储主页](https://www.azure.cn/home/features/storage/)
+- [Azure 存储简介](./storage-introduction.md)
+- [Blob](./storage-dotnet-how-to-use-blobs.md)、[表](./storage-dotnet-how-to-use-tables.md)、[队列](./storage-dotnet-how-to-use-queues.md)和[文件](./storage-dotnet-how-to-use-files.md)的存储使用入门
 - 存储体系结构 - [Azure 存储：具有高度一致性的高可用云存储服务](http://blogs.msdn.com/b/windowsazurestorage/archive/2011/11/20/windows-azure-storage-a-highly-available-cloud-storage-service-with-strong-consistency.aspx)
-
- 
 
 <!---HONumber=Mooncake_1128_2016-->

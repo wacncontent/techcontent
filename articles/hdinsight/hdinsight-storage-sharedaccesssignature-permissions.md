@@ -1,21 +1,21 @@
-<properties
-pageTitle="使用共享访问签名限制 HDInsight 访问数据"
-description="了解如何使用共享访问签名限制对 HDInsight 访问存储在 Azure 存储 Blob 中的数据。"
-services="hdinsight"
-documentationCenter=""
-authors="Blackmist"
-manager="paulettm"
-editor="cgronlun"/>
+---
+title: 使用共享访问签名限制 HDInsight 访问数据
+description: 了解如何使用共享访问签名限制对 HDInsight 访问存储在 Azure 存储 Blob 中的数据。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
 
-<tags
-ms.service="hdinsight"
-ms.devlang="na"
-ms.topic="article"
-ms.tgt_pltfrm="na"
-ms.workload="big-data"
-ms.date="10/11/2016"
-wacn.date="01/05/2017"
-ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 10/11/2016
+wacn.date: 01/05/2017
+ms.author: larryfr
+---
 
 #使用 Azure 存储共享访问签名限制 HDInsight 访问数据
 
@@ -61,11 +61,11 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 4. 将重新生成用于创建 SAS 的帐户密钥。请注意，这样做将导致使用该帐户密钥的所有应用程序组件身份验证失败，直到这些组件更新为使用其他有效帐户密钥或者重新生成的新帐户密钥。
 
-> [AZURE.IMPORTANT] 共享访问签名 URI 与用于创建签名的帐户密钥和关联的存储访问策略（如果有）相关联。如果未指定存储访问策略，则吊销共享访问签名的唯一方法是更改帐户密钥。
+> [!IMPORTANT] 共享访问签名 URI 与用于创建签名的帐户密钥和关联的存储访问策略（如果有）相关联。如果未指定存储访问策略，则吊销共享访问签名的唯一方法是更改帐户密钥。
 
 建议始终使用存储访问策略，以便可以根据需要吊销签名或延长过期日期。本文档中的步骤使用存储访问策略生成 SAS。
 
-有关共享访问签名的详细信息，请参阅[了解 SAS 模型](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)。
+有关共享访问签名的详细信息，请参阅[了解 SAS 模型](../storage/storage-dotnet-shared-access-signature-part-1.md)。
 
 ##创建存储策略并生成 SAS
 
@@ -164,12 +164,11 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
     
     脚本运行后，会在创建存储帐户时将输出记录到 PowerShell 提示符下。然后它会提示你输入 HDInsight 群集的 HTTP 用户。这是用于保护群集的 HTTP/s 访问的用户帐户。
 
-    > [AZURE.IMPORTANT] 出现输入 HTTP/s 用户名和密码的提示时，必须提供符合以下条件的密码：
+    > [!IMPORTANT] 出现输入 HTTP/s 用户名和密码的提示时，必须提供符合以下条件的密码：
     ><p> - 长度必须至少为 10 个字符
     ><p> - 必须至少包含一个数字
     ><p> - 必须至少包含一个非字母数字字符
     ><p> - 必须至少包含一个大写或小写字母
-
 
 需要等待一段时间让此脚本完成，通常大约是 15 分钟。如果脚本完成且没有发生任何错误，则群集创建完毕。
 
@@ -177,7 +176,7 @@ HDInsight 使用 Azure 存储 Blob 存储数据。HDInsight 必须对用作群�
 
 若要验证是否已限制访问，请使用以下方法：
 
-* 对于__基于 Windows__ 的 HDInsight 群集，请使用远程桌面连接到群集。有关详细信息，请参阅[使用 RDP 连接到 HDInsight](/documentation/articles/hdinsight-administer-use-management-portal-v1/#connect-to-clusters-using-rdp)。
+* 对于__基于 Windows__ 的 HDInsight 群集，请使用远程桌面连接到群集。有关详细信息，请参阅[使用 RDP 连接到 HDInsight](./hdinsight-administer-use-management-portal-v1.md#connect-to-clusters-using-rdp)。
 
     连接后，使用桌面上的“Hadoop 命令行”图标打开命令提示符。
 
@@ -241,11 +240,11 @@ __解决方法__：使用符合以下条件的密码：
 
 现在你已了解如何将访问受限的存储添加到 HDInsight 群集，接下来请了解在群集上处理数据的其他方法：
 
-* [将 Hive 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-hive/)
+* [将 Hive 与 HDInsight 配合使用](./hdinsight-use-hive.md)
 
-* [将 Pig 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Pig 与 HDInsight 配合使用](./hdinsight-use-pig.md)
 
-* [将 MapReduce 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将 MapReduce 与 HDInsight 配合使用](./hdinsight-use-mapreduce.md)
 
 [powershell]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 

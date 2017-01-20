@@ -1,26 +1,23 @@
-<properties
-	pageTitle="更改 VM 可用性集 | Azure"
-	description="了解如何使用 Azure PowerShell 和 Resource Manager 部署模型更改虚拟机的可用性集。"
-	keywords=""
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="Drewm3"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 更改 VM 可用性集 | Azure
+description: 了解如何使用 Azure PowerShell 和 Resource Manager 部署模型更改虚拟机的可用性集。
+keywords: 
+services: virtual-machines-windows
+documentationCenter: 
+authors: Drewm3
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/15/2016"
-	wacn.date="10/17/2016"
-	ms.author="drewm"/>  
-
-
-
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/15/2016
+wacn.date: 10/17/2016
+ms.author: drewm
+---
 
 # 更改 Windows VM 的可用性集
 
@@ -76,7 +73,7 @@
 
 		New-AzureRmVM -ResourceGroupName <resourceGroupName> -Location <location> -VM <vmConfig>
 
-5. 添加数据磁盘和扩展。有关详细信息，请参阅 [Attach Data Disk to VM](/documentation/articles/virtual-machines-windows-attach-disk-portal/)（将数据磁盘附加到 VM）和 [Extension Configuration Samples](/documentation/articles/virtual-machines-windows-extensions-configuration-samples/)（扩展配置示例）。可以使用 PowerShell 或 Azure CLI 将数据磁盘和扩展添加到 VM。
+5. 添加数据磁盘和扩展。有关详细信息，请参阅 [Attach Data Disk to VM](./virtual-machines-windows-attach-disk-portal.md)（将数据磁盘附加到 VM）和 [Extension Configuration Samples](./virtual-machines-windows-extensions-configuration-samples.md)（扩展配置示例）。可以使用 PowerShell 或 Azure CLI 将数据磁盘和扩展添加到 VM。
 
 ## 示例脚本
 
@@ -143,6 +140,6 @@
 
 ## 后续步骤
 
-通过添加附加[数据磁盘](/documentation/articles/virtual-machines-windows-attach-disk-portal/)，向 VM 添加附加存储。
+通过添加附加[数据磁盘](./virtual-machines-windows-attach-disk-portal.md)，向 VM 添加附加存储。
 
 <!---HONumber=Mooncake_1010_2016-->

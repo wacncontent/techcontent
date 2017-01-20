@@ -1,29 +1,28 @@
-<properties
-	pageTitle="适用于 HTML/JavaScript 应用的 Azure 移动服务入门 | Azure"
-	description="按照本教程进行操作，开始使用 Azure 移动服务进行 HTML 开发。"
-	services="mobile-services"
-	documentationCenter=""
-	authors="ggailey777"
-	manager="dwrede"
-	editor=""/>
+---
+title: 适用于 HTML/JavaScript 应用的 Azure 移动服务入门 | Azure
+description: 按照本教程进行操作，开始使用 Azure 移动服务进行 HTML 开发。
+services: mobile-services
+documentationCenter: 
+authors: ggailey777
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-html5"
-	ms.devlang="javascript"
-	ms.topic="get-started-article" 
-	ms.date="07/21/2016" 
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
-
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-html5
+ms.devlang: javascript
+ms.topic: get-started-article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 #  <a name="getting-started"></a>移动服务入门
 
-[AZURE.INCLUDE [mobile-services-selector-get-started](../../includes/mobile-services-selector-get-started.md)]
+[!INCLUDE [mobile-services-selector-get-started](../../includes/mobile-services-selector-get-started.md)]
 &nbsp;
 
-[AZURE.INCLUDE [mobile-services-hero-slug](../../includes/mobile-services-hero-slug.md)]
+[!INCLUDE [mobile-services-hero-slug](../../includes/mobile-services-hero-slug.md)]
 
 ##概述 
 
@@ -33,7 +32,7 @@
 
 ![][0]
 
-只有在完成本教程后，才可以学习有关 HTML 应用程序的所有其他移动服务教程。对于 PhoneGap/Cordova 应用，请参阅本教程的 [PhoneGap/Cordova 版本](/documentation/articles/mobile-services-javascript-backend-phonegap-get-started/)。
+只有在完成本教程后，才可以学习有关 HTML 应用程序的所有其他移动服务教程。对于 PhoneGap/Cordova 应用，请参阅本教程的 [PhoneGap/Cordova 版本](./mobile-services-javascript-backend-phonegap-get-started.md)。
 
 ##先决条件
 
@@ -48,12 +47,11 @@
 	你可以使用任何 Web 服务器来托管应用程序，但是这些 Web 服务器必须受下载的脚本支持。
 
 + 支持 HTML5 的 Web 浏览器。
-+ 一个 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial)。 
-
++ 一个 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial)。 
 
 ##  <a name="create-new-service"></a>创建新的移动服务
 
-[AZURE.INCLUDE [mobile-services-create-new-service](../../includes/mobile-services-create-new-service.md)]
+[!INCLUDE [mobile-services-create-new-service](../../includes/mobile-services-create-new-service.md)]
 
 ##  创建新的 HTML 应用程序
 
@@ -63,7 +61,6 @@
 
 1.  在 [Azure 经典管理门户]中单击“移动服务”，然后单击你刚刚创建的移动服务。
 
-   
 2. 在快速启动选项卡中，单击“选择平台”下的“Windows”，然后展开“创建新的 HTML 应用程序”。
 
    	![][6]
@@ -82,7 +79,7 @@
 
   	![][9]
 
-	> [AZURE.IMPORTANT] 如果将快速入门应用程序部署到除 localhost 以外的 Web 服务器，则必须将该 Web 服务器的主机名添加到“允许来自主机名的请求”列表。有关详细信息，请参阅[跨域资源共享](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn155871.aspx)。
+	> [!IMPORTANT] 如果将快速入门应用程序部署到除 localhost 以外的 Web 服务器，则必须将该 Web 服务器的主机名添加到“允许来自主机名的请求”列表。有关详细信息，请参阅[跨域资源共享](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn155871.aspx)。
 
 ##  托管和运行 HTML 应用程序
 
@@ -94,7 +91,7 @@
 	+ **launch-mac.command**（Mac OS X 计算机）
 	+ **launch-linux.sh**（Linux 计算机）
 
-	> [AZURE.NOTE]在 Windows 计算机上，当 PowerShell 要求你确认是否要运行脚本时，请键入 `R`。你的 Web 浏览器可能会警告你不要运行该脚本，因为它是从 Internet 下载的。如果出现此警告，你必须请求浏览器继续加载该脚本。
+	> [!NOTE]在 Windows 计算机上，当 PowerShell 要求你确认是否要运行脚本时，请键入 `R`。你的 Web 浏览器可能会警告你不要运行该脚本，因为它是从 Internet 下载的。如果出现此警告，你必须请求浏览器继续加载该脚本。
 
 	随后将在本地计算机上启动用于托管新应用程序的 Web 服务器。
 
@@ -106,7 +103,7 @@
 
    	这样可向在 Azure 中托管的新移动服务发送 POST 请求。来自请求的数据被插入到 TodoItem 表。移动服务返回存储在表中的项，数据显示在应用的第二列中。
 
-	> [AZURE.NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 page.js 文件中。
+	> [!NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 page.js 文件中。
 
 4. 返回 [Azure 经典管理门户]，单击“数据”选项卡，然后单击“TodoItems”表。
 
@@ -125,8 +122,7 @@
 * **[移动服务 HTML/JavaScript 操作方法概念性参考]**
 了解有关如何将移动服务与 HTML/JavaScript 配合使用的详细信息
 
-
-[AZURE.INCLUDE [app-service-disqus-feedback-slug](../../includes/app-service-disqus-feedback-slug.md)]
+[!INCLUDE [app-service-disqus-feedback-slug](../../includes/app-service-disqus-feedback-slug.md)]
 
 <!-- Anchors. -->
 
@@ -146,14 +142,13 @@
 [11]: ./media/mobile-services-html-get-started/mobile-data-tab.png
 [12]: ./media/mobile-services-html-get-started/mobile-data-browse.png
 
-
 <!-- URLs. -->
-[向应用程序添加身份验证]: /documentation/articles/mobile-services-html-get-started-users/
+[向应用程序添加身份验证]: ./mobile-services-html-get-started-users.md
 
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
 [Microsoft Web 平台安装程序]: https://webgallery.microsoft.com/gallery
 [最新版本的 Python]: http://go.microsoft.com/fwlink/p/?LinkId=286342
-[移动服务 HTML/JavaScript 操作方法概念性参考]: /documentation/articles/mobile-services-html-how-to-use-client-library/
+[移动服务 HTML/JavaScript 操作方法概念性参考]: ./mobile-services-html-how-to-use-client-library.md
 [Cross-origin resource sharing]: http://msdn.microsoft.com/zh-cn/library/windowsazure/dn155871.aspx
 
 <!---HONumber=Mooncake_0118_2016-->

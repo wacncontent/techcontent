@@ -19,8 +19,8 @@
 是否有你预期会看到但没有列出的解决方案详细信息？ 请在[用户之声](https://feedback.azure.com/forums/321918-azure-iot)中向我们提供功能建议。
 
 [lnk-azureiotsuite]: https://www.azureiotsuite.cn
-[lnk-permissions]: /documentation/articles/iot-suite-permissions/
+[lnk-permissions]: ../articles/iot-suite/iot-suite-permissions.md
 [lnk-portal]: http://portal.azure.cn/
-[lnk-faq]: /documentation/articles/iot-suite-faq/
+[lnk-faq]: ../articles/iot-suite/iot-suite-faq.md
 
 <!---HONumber=Mooncake_1226_2016-->

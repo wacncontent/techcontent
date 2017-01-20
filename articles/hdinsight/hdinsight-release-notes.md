@@ -1,23 +1,23 @@
-<properties
-    pageTitle="Azure HDInsight 上的 Hadoop 组件发行说明 | Azure"
-    description="Azure HDInsight 的 Hadoop 组件的最新发行说明和版本。获取有关 Hadoop、Apache Storm 和 HBase 的开发技巧和详细信息。"
-    services="hdinsight"
-    documentationcenter=""
-    editor="cgronlun"
-    manager="jhubbard"
-    author="nitinme"
-    tags="azure-portal" />  
+---
+title: Azure HDInsight 上的 Hadoop 组件发行说明 | Azure
+description: Azure HDInsight 的 Hadoop 组件的最新发行说明和版本。获取有关 Hadoop、Apache Storm 和 HBase 的开发技巧和详细信息。
+services: hdinsight
+documentationcenter: 
+editor: cgronlun
+manager: jhubbard
+author: nitinme
+tags: azure-portal
 
-<tags
-    ms.assetid="a363e5f6-dd75-476a-87fa-46beb480c1fe"
-    ms.service="hdinsight"
-    ms.workload="big-data"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/17/2016"
-    wacn.date="01/05/2017"
-    ms.author="nitinme" />
+ms.assetid: a363e5f6-dd75-476a-87fa-46beb480c1fe
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/17/2016
+wacn.date: 01/05/2017
+ms.author: nitinme
+---
 
 # Azure HDInsight 上的 Hadoop 组件发行说明
 
@@ -112,7 +112,7 @@
 
 | 标题 | 说明 | 受影响区域（例如服务、组件或 SDK） | 群集类型（例如 Hadoop、HBase 或 STORM） | JIRA（如果适用） |
 | --- | --- | --- | --- | --- |
-| 添加了 HDInsight 3.3 版本并更新了所有 HDInsight 群集的 HDP 版本 |在此版本中，我们添加了 HDInsight v3.3（基于 HDP 2.3）并更新了其他 HDP 版本。[此处](http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_HDP_RelNotes/content/ch_relnotes_v230.html)提供了 HDP 2.3 发行说明；[此处](/documentation/articles/hdinsight-component-versioning-v1/)提供了有关 HDInsight 版本的详细信息。 |服务 |全部 |不适用 |
+| 添加了 HDInsight 3.3 版本并更新了所有 HDInsight 群集的 HDP 版本 |在此版本中，我们添加了 HDInsight v3.3（基于 HDP 2.3）并更新了其他 HDP 版本。[此处](http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_HDP_RelNotes/content/ch_relnotes_v230.html)提供了 HDP 2.3 发行说明；[此处](./hdinsight-component-versioning-v1.md)提供了有关 HDInsight 版本的详细信息。 |服务 |全部 |不适用 |
 
 ## HDInsight 2015 年 11 月 30 日发行说明
 随此版本一起部署的 HDInsight 群集的所有版本号包括：
@@ -143,7 +143,6 @@
 | 标题 | 说明 | 受影响区域（例如服务、组件或 SDK） | 群集类型（例如 Hadoop、HBase 或 STORM） | JIRA（如果适用） |
 | --- | --- | --- | --- | --- |
 | 更新了所有 HDInsight 群集的 HDInsight 版本 (Windows) |在此版本中，HDInsight 和 HDP 版本已更新 |服务 |全部 |不适用 |
-
 
 ## HDInsight 2015 年 10 月 20 日发行说明
 随此版本一起部署的 HDInsight 群集的所有版本号包括：
@@ -235,7 +234,6 @@
 <th>JIRA（如果适用）</th>
 </tr>
 
-
 <tr>
 <td>HDInsight 3.2 群集的更新后 HDP 版本</td>
 <td>在此版本中，HDInsight 3.2 部署 HDP 2.2.6.1</td>
@@ -265,7 +263,6 @@
 <th>群集类型（例如 Hadoop、HBase 或 STORM）</th>
 <th>JIRA（如果适用）</th>
 </tr>
-
 
 <tr>
 <td>其他打开的 HTTPS 端口</td>
@@ -321,7 +318,6 @@
 <th>JIRA（如果适用）</th>
 </tr>
 
-
 <tr>
 <td>修复 Storm 群集的 502 网关不正确错误</td>
 <td>此版本修复了影响作业提交 API 并导致网站在重新启动后关闭的 Bug。</td>
@@ -352,7 +348,6 @@
 <th>JIRA（如果适用）</th>
 </tr>
 
-
 <tr>
 <td>各种 Bug 修复</td>
 <td>此版本修复了与群集预配相关的 Bug。</td>
@@ -379,7 +374,6 @@
 <th>群集类型（例如 Hadoop、HBase 或 STORM）</th>
 <th>JIRA（如果适用）</th>
 </tr>
-
 
 <tr>
 <td>HDP 2.2 更新</td>
@@ -427,7 +421,6 @@
 <th>JIRA（如果适用）</th>
 </tr>
 
-
 <tr>
 <td>SCP.NET EventHub 支持</td>
 <td>HDInsight Storm 的更新群集包添加了 SCP.NET 的新功能。现在可以访问拓扑生成器中的新 API，并更轻松地使用 EventHubSpout 或 Java Spouts。必须更新 SCP.NET 客户端 SDK 才能在合约更新后使用新群集。有关新 API、用法和发行说明（包括 Bug 修复程序）的详细信息，请参阅 SCP.NET Nuget 包中的 Readme 文件。</td>
@@ -465,7 +458,6 @@
 <th>JIRA（如果适用）</th>
 </tr>
 
-
 <tr>
 <td>修复了 DLL 依赖性</td>
 <td>删除了对单元测试框架的 HDInsight 依赖性。	</td>
@@ -502,7 +494,6 @@
 <th>群集类型（例如 Hadoop、HBase 或 STORM）</th>
 <th>JIRA（如果适用）</th>
 </tr>
-
 
 <tr>
 <td>Tez Bug 修复</td>
@@ -574,7 +565,6 @@
 <th>群集类型（例如 Hadoop、HBase 或 STORM）</th>
 <th>JIRA（如果适用）</th>
 </tr>
-
 
 <tr>
 <td>可以通过 .NET SDK 在 Windows 群集上启用/禁用远程桌面凭据</td>
@@ -680,7 +670,6 @@
 <th>JIRA</th>
 </tr>
 
-
 <tr>
 <td>可靠性改进</td>
 <td>我们创建了修补程序，可让服务根据相对于群集创建增加的负载更好地扩展。</td>
@@ -688,8 +677,6 @@
 <td>全部</td>
 <td>不适用</td>
 </tr>
-
-
 
 </table>
 <br>
@@ -714,7 +701,6 @@
 <th>群集类型（例如 Hadoop、HBase 或 STORM）</th>
 <th>JIRA（如果适用）</th>
 </tr>
-
 
 <tr>
 <td>HDInsight 3.2 群集</td>
@@ -787,7 +773,6 @@
 <th>JIRA（如果适用）</th>
 </tr>
 
-
 <tr>
 <td>Bug 修复</td>
 <td>我们为 HDInsight 服务创建了各种次要 Bug 修补程序。不需要进行任何面向客户的行为更改。</td>
@@ -841,7 +826,6 @@
 <th>JIRA（如果适用）</th>
 </tr>
 
-
 <tr>
 
 <td>Bug 修复</td>
@@ -850,8 +834,6 @@
 <td>全部</td>
 <td>不适用</td>
 </tr>
-
-
 
 </table>
 <br>
@@ -874,7 +856,6 @@
 <th>群集类型</th>
 <th>JIRA（如果适用）</th>
 </tr>
-
 
 <tr>
 <td>Twitter 趋势分析和 Mahout 电影推荐的示例</td>
@@ -920,7 +901,6 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 <th>JIRA（如果适用）</th>
 </tr>
 
-
 <tr>
 <td>由于负载过大造成间歇性的群集创建失败</td>
 <td><p>改良群集创建期间用于下载 HDP 包的算法，可对因负载过大而造成的失败提供更稳健的处理。</p></td>
@@ -928,8 +908,6 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 <td>Hadoop、Hbase、Storm</td>
 <td>不适用</td>
 </tr>
-
-
 
 </table>
 <br>
@@ -948,13 +926,12 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 </tr>
 
 <tr>
-<td><a href = "/documentation/articles/hdinsight-hadoop-customize-cluster-v1/" target="_blank">群集自定义正式发布</a></td>
-<td><p>自定义可让你自定义 Azure HDInsight 群集，以搭配使用 Apache Hadoop 生态系统的项目。使用这项新功能，现在可以试验并部署 Hadoop 项目到 Azure HDInsight。这通过启用“脚本操作”功能启用，该功能可以使用自定义脚本，以任意方式修改 Hadoop 群集。此自定义适用于所有类型的 HDInsight 群集，包括 Hadoop、HBase 和 Storm。为了演示这项强大功能，我们记录了安装流行的 <a href = "/documentation/articles/hdinsight-hadoop-r-scripts/" target="_blank">R</a>、<a href = "/documentation/articles/hdinsight-hadoop-solr-install-v1/" target="_blank">Solr</a> 和 <a href = "/documentation/articles/hdinsight-hadoop-giraph-install-v1/" target="_blank">Giraph</a> 模块的过程。这个版本还添加了让客户通过 Azure 经典管理门户指定其自定义脚本操作的功能、提供如何使用帮助器方法生成自定义脚本操作的指导方针和最佳作法，并提供有关如何测试脚本操作的指导。</p></td>
+<td><a href = "./hdinsight-hadoop-customize-cluster-v1.md" target="_blank">群集自定义正式发布</a></td>
+<td><p>自定义可让你自定义 Azure HDInsight 群集，以搭配使用 Apache Hadoop 生态系统的项目。使用这项新功能，现在可以试验并部署 Hadoop 项目到 Azure HDInsight。这通过启用“脚本操作”功能启用，该功能可以使用自定义脚本，以任意方式修改 Hadoop 群集。此自定义适用于所有类型的 HDInsight 群集，包括 Hadoop、HBase 和 Storm。为了演示这项强大功能，我们记录了安装流行的 <a href = "./hdinsight-hadoop-r-scripts.md" target="_blank">R</a>、<a href = "./hdinsight-hadoop-solr-install-v1.md" target="_blank">Solr</a> 和 <a href = "./hdinsight-hadoop-giraph-install-v1.md" target="_blank">Giraph</a> 模块的过程。这个版本还添加了让客户通过 Azure 经典管理门户指定其自定义脚本操作的功能、提供如何使用帮助器方法生成自定义脚本操作的指导方针和最佳作法，并提供有关如何测试脚本操作的指导。</p></td>
 <td>功能正式发布</td>
 <td>全部</td>
 <td>不适用</td>
 </tr>
-
 
 </table>
 <br>
@@ -1109,13 +1086,9 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 </table>
 <br>
 
-
 **注意：**为了演示群集自定义所提供的新功能，此过程使用脚本操作在所述群集上安装 R 模块。有关详细信息，请参阅：
 
-* [在 HDInsight Hadoop 群集上安装并使用 R](/documentation/articles/hdinsight-hadoop-r-scripts/)
-
-
-
+* [在 HDInsight Hadoop 群集上安装并使用 R](./hdinsight-hadoop-r-scripts.md)
 
 ## HDInsight 2014 年 11 月 7 日发行说明
 
@@ -1167,7 +1140,6 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 ## 2014 年 10 月 15 日发行说明
 
 此修补程序版本修复了 Templeton 中影响 Templeton 重度用户的内存泄漏。在某些情况下，Templeton 的重度用户看到以 500 错误码表示的错误，因为请求没有足够的内存用于运行。重新启动 Templeton 服务就能解决此问题。现在已修复此问题。
-
 
 ## 2014 年 10 月 7 日发行说明
 
@@ -1225,7 +1197,7 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 * **HDInsight 已在新区域推出：**我们已将 HDInsight 的地理覆盖范围扩展到三个新的区域。HDInsight 客户可以在这些区域创建群集。
   * 中国北部
   * 中国东部
-* HDInsight 1.6 版（HDP 1.1、Hadoop 1.0.3）和 HDInsight 2.1 版（HDP 1.3、Hadoop 1.2）即将从 Azure 经典管理门户中删除。可以继续使用 Azure PowerShell cmdlet [New-AzureRmHDInsightCluster](http://msdn.microsoft.com/zh-cn/library/dn593744.aspx) 或 [HDInsight SDK](http://msdn.microsoft.com/zh-cn/library/azure/dn469975.aspx) 来创建这些版本的 Hadoop 群集。有关详细信息，请参阅 [HDInsight 组件版本控制](/documentation/articles/hdinsight-component-versioning-v1/)页。
+* HDInsight 1.6 版（HDP 1.1、Hadoop 1.0.3）和 HDInsight 2.1 版（HDP 1.3、Hadoop 1.2）即将从 Azure 经典管理门户中删除。可以继续使用 Azure PowerShell cmdlet [New-AzureRmHDInsightCluster](http://msdn.microsoft.com/zh-cn/library/dn593744.aspx) 或 [HDInsight SDK](http://msdn.microsoft.com/zh-cn/library/azure/dn469975.aspx) 来创建这些版本的 Hadoop 群集。有关详细信息，请参阅 [HDInsight 组件版本控制](./hdinsight-component-versioning-v1.md)页。
 * 此版本中发生的 Hortonworks 数据平台 (HDP) 更改：
 
 <table border="1">
@@ -1234,7 +1206,6 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 <tr><td>HDP 1.3/HDI 2.1</td><td>无更改</td></tr>
 <tr><td>HDP 2.0/HDI 3.0</td><td>无更改</td></tr>
 <tr><td>HDP 2.1/HDI 3.1</td><td>zookeeper: ['3.4.5.2.1.3.0-1948'] -> ['3.4.5.2.1.3.2-0002']</td></tr>
-
 
 </table><br>
 
@@ -1286,7 +1257,6 @@ Oozie 元存储连接到特定群集，无法在群集之间共享。
 
 <table border="1">  
 
-
 <tr><th>Name</th><th>值</th></tr>
 
 <tr><td>dfs.http.address</td><td>namenodehost:30070</td></tr>
@@ -1311,7 +1281,6 @@ Oozie 元存储连接到特定群集，无法在群集之间共享。
  **HDInsight 3.1 和 3.0（HDP 2.1 和 2.0）**
 
 <table border="1">  
-
 
 <tr><th>Name</th><th>值</th></tr>
 
@@ -1429,7 +1398,7 @@ HDInsight 3.x (HDP2.x) 中不再存在以下依赖项：
 * 0\.8.0.RELEASE']
 
 ### 驱动程序
-SQL Server 的 Java 数据库连接 (JDBC) 驱动程序由 HDInsight 在内部使用，不用于外部操作。如果希望使用开放数据库连接 (ODBC) 连接到 HDInsight，请使用 Microsoft Hive ODBC 驱动程序。有关详细信息，请参阅[使用 Microsoft Hive ODBC 驱动程序将 Excel 连接到 HDInsight](/documentation/articles/hdinsight-connect-excel-hive-ODBC-driver/)。
+SQL Server 的 Java 数据库连接 (JDBC) 驱动程序由 HDInsight 在内部使用，不用于外部操作。如果希望使用开放数据库连接 (ODBC) 连接到 HDInsight，请使用 Microsoft Hive ODBC 驱动程序。有关详细信息，请参阅[使用 Microsoft Hive ODBC 驱动程序将 Excel 连接到 HDInsight](./hdinsight-connect-excel-hive-ODBC-driver.md)。
 
 ### Bug 修复
 随着此版本的发行，我们已完成了多项 Bug 修复，并更新了以下 HDInsight 版本：
@@ -1460,6 +1429,6 @@ SQL Server 的 Java 数据库连接 (JDBC) 驱动程序由 HDInsight 在内部�
 
 [webpi-link]: http://go.microsoft.com/?linkid=9811175&clcid=0x409
 
-[hdinsight-r-scripts]: /documentation/articles/hdinsight-hadoop-r-scripts/
+[hdinsight-r-scripts]: ./hdinsight-hadoop-r-scripts.md
 
 <!---HONumber=Mooncake_1205_2016-->

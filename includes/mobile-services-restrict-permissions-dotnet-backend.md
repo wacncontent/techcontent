@@ -4,8 +4,6 @@
 
 1. 在 Visual Studio 中打开移动服务项目，展开 Controllers 文件夹，然后打开 **TodoItemController.cs**。**TodoItemController** 类可为 TodoItem 表实现数据访问。添加以下 `using` 语句：
 
-
-
 		using Microsoft.WindowsAzure.Mobile.Service.Security;
 
 2. 将以下 AuthorizeLevel 属性应用于 **TodoItemController** 类：

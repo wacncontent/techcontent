@@ -1,25 +1,37 @@
-<properties linkid="dev-net-common-tasks-cdn" urlDisplayName="CDN" pageTitle="How to use CDN - HTTPS" metaKeywords="Azure CDN, Azure CDN, Azure blobs, Azure HTTPS, CDN HTTPS, Azure caching, Azure add-ons, CDN, CDN加速, CDN服务, 主流CDN, 多场景加速, 免费CDN, CDN网站加速, 网站加速, 网页加速, 静态加速, 下载加速, VOD加速, 流媒体直播加速, 云服务,  存储账户,缓存刷新, 回源, 云加速, 加速效果, 节点, 流量, CNAME, 带宽, 网速, 防盗链,https加速, 低成本带宽, 访问加速, CDN缓存, 存储账户, 云服务, 网站, 媒体服务, ICP备案号, ICP编号, ICP, 缓存刷新, 内容预取, 日志下载, CDN帮助文档, CDN技术文档" description="Learn how to create HTTPS CDN acceleration type." metaCanonical="" services="" documentationCenter=".NET" title="" authors="" solutions="" manager="" editor="" />
-<tags ms.service="cdn"
-    ms.date="7/7/2016"
-    wacn.date="7/7/2016"
-    wacn.lang="cn"
-    />
-> [AZURE.LANGUAGE]
-- [中文](/documentation/articles/cdn-https-how-to/)
-- [English](/documentation/articles/cdn-enus-https-how-to/) 
-# Azure CDN HTTPS 加速服务
+---
+linkid: dev-net-common-tasks-cdn
+urlDisplayName: CDN
+title: How to use CDN - HTTPS
+metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure HTTPS, CDN HTTPS, Azure caching, Azure add-ons, CDN, CDN加速, CDN服务, 主流CDN, 多场景加速, 免费CDN, CDN网站加速, 网站加速, 网页加速, 静态加速, 下载加速, VOD加速, 流媒体直播加速, 云服务,  存储账户,缓存刷新, 回源, 云加速, 加速效果, 节点, 流量, CNAME, 带宽, 网速, 防盗链,https加速, 低成本带宽, 访问加速, CDN缓存, 存储账户, 云服务, 网站, 媒体服务, ICP备案号, ICP编号, ICP, 缓存刷新, 内容预取, 日志下载, CDN帮助文档, CDN技术文档
+description: Learn how to create HTTPS CDN acceleration type.
+metaCanonical: 
+services: 
+documentationCenter: .NET
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
+ms.service: cdn
+ms.date: 7/7/2016
+wacn.date: 7/7/2016
+wacn.lang: cn
+---
+
+> [AZURE.LANGUAGE]
+- [中文](./cdn-https-how-to.md)
+- [English](./cdn-enus-https-how-to.md) 
+# Azure CDN HTTPS 加速服务
 
 ## 开通流程
 目前CDN HTTPS加速服务仅对Azure付费用户开放。
 
 1. **开通申请** 请联系[Azure 技术支持团队](https://www.azure.cn/support/contact/)进行开通申请。需要客户提供需要开通HTTPS加速服务的Azure订阅ID。
 
-
 2. **自助式创建** Azure CDN团队收到开通请求并确认之后，会对用户提供的Azure订阅开通HTTPS加速服务。之后，用户可以自行登陆到Azure管理门户完成自助式的创建操作。请参考自助式创建流程。
 
     ![][1]
-
 
 3. **SSL证书申请和配置**
 收到配置请求后，Azure CDN会代为申请SSL证书（详细的证书类型请见附注）。
@@ -29,7 +41,6 @@
 
 4. **配置完成生效**
 全部配置完成后，用户可以像创建其他加速类型服务一样，做最后的CNAME记录设置。之后，通过统一的Azure CDN管理门户来完成其他相应的管理配置任务。
-
 
 ## 自助式创建流程
 1. 当用户在Azure管理门户完成HTTPS加速类型的创建之后，通过点击下图中的“管理”按钮，跳转到Azure CDN管理门户进行后续的开通操作。
@@ -82,8 +93,6 @@
 
 	1) **默认方式**：证书签发机构接收到请求后，默认会在第一时间向加速域名相关的邮箱（具体见上面的截图）发送域名确认邮件。如果客户选择这种方式来获取确认邮件，可以直接点击“确定”按钮前往下一步。
 		
-		
-
 	2) **DNS TXT方式**：如果用户无法登陆到上述邮箱来完成域名所有权确认，可以使用如下图所示的**通过创建DNS TXT记录**的方式来完成。这种方式可能会额外增加一些完成时间。
 
 	![][8]
@@ -97,8 +106,6 @@
 	当用户在本步骤确定已经成功创建了相应的DNS TXT记录后，点击本步骤中的“确定”按钮，前往下一步。
 
 	![][10]
-
-	
 
 6. 用户前往邮箱完成域名所有权认证
 	
@@ -128,9 +135,6 @@
 
 	最后，用户可以像创建其他加速类型的加速域名一样，通过自己的域名服务商完成最后的CNAME配置操作，将自定义加速域名指向Azure CDN平台所提供的以**.mschcdn.com**结尾的CDN域名，从而让整个配置生效。
 
-
-
-
 ## 附录
 
 ### 关于所使用的SSL证书
@@ -145,10 +149,8 @@ SAN 证书 – Subject Alternative Name certificates, 又称为 UCC 证书– Un
 ### 关于计费信息
 CDN HTTPS加速节点的计费信息，会和其他CDN加速节点一样可以通过相应的[Azure帐户门户](https://account.windowsazure.cn)查看，并被汇总到相应的Azure订阅下面。
 
-
 ### 关于CDN HTTPS的价格
 目前Azure CDN HTTPS加速服务包含在高级版当中，具体的计费方式请参见[Azure官方网站](https://www.azure.cn/pricing/details/cdn/)。
-
 
 <!--Image references-->
 [1]: ./media/cdn-https/h001.png

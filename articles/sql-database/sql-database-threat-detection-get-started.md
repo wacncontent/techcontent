@@ -1,23 +1,21 @@
-<properties
-   pageTitle="SQL 数据库威胁检测入门"
-   description="如何开始在 Azure 门户预览中使用 SQL 数据库威胁检测"
-   services="sql-database"
-   documentationCenter=""
-   authors="ronitr"
-   manager="jhubbard"
-   editor="v-romcal"/>  
+---
+title: SQL 数据库威胁检测入门
+description: 如何开始在 Azure 门户预览中使用 SQL 数据库威胁检测
+services: sql-database
+documentationCenter: 
+authors: ronitr
+manager: jhubbard
+editor: v-romcal
 
-
-<tags
-   ms.service="sql-database"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="07/10/2016"
-   wacn.date="01/11/2017"
-   ms.author="ronmat; ronitr"/>  
-
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 07/10/2016
+wacn.date: 01/11/2017
+ms.author: ronmat; ronitr
+---
 
 # SQL 数据库威胁检测入门
 
@@ -25,10 +23,9 @@
 
 威胁检测会检测异常的数据库活动，指出数据库有潜在的安全威胁。威胁检测目前以预览版形式提供，V12 版 Azure SQL 数据库支持此功能。
 
-威胁检测提供新的安全层，在发生异常活动时会提供安全警报，让客户检测潜在威胁并做出响应。用户可以使用 [Azure SQL 数据库审核](/documentation/articles/sql-database-auditing-get-started/)来探查可疑事件，判断这些可疑事件是否是因为有人尝试访问、破坏或利用数据库中的数据而生成的。无需成为安全专家，也不需要管理先进的安全监视系统，就能使用威胁检测轻松解决数据库的潜在威胁。
+威胁检测提供新的安全层，在发生异常活动时会提供安全警报，让客户检测潜在威胁并做出响应。用户可以使用 [Azure SQL 数据库审核](./sql-database-auditing-get-started.md)来探查可疑事件，判断这些可疑事件是否是因为有人尝试访问、破坏或利用数据库中的数据而生成的。无需成为安全专家，也不需要管理先进的安全监视系统，就能使用威胁检测轻松解决数据库的潜在威胁。
 
 威胁检测会检测异常的数据库活动，指出潜在的 SQL 注入企图。SQL 注入是 Internet 上常见的 Web 应用程序安全问题之一，用于攻击数据驱动的应用程序。攻击者利用应用程序漏洞将恶意 SQL 语句注入应用程序入口字段，以破坏或修改数据库中的数据。
-
 
 ##<a name="set-up-threat-detection-for-your-database"></a> 为数据库设置威胁检测
 
@@ -49,7 +46,6 @@
 6. 在“审核和威胁检测”配置边栏选项卡中单击“保存”，以保存新的或更新的审核与威胁检测策略。
 
 	![导航窗格][3]
-
 
 ## 检测到可疑事件时探查异常数据库活动
 
@@ -80,7 +76,6 @@
 	![导航窗格][9]
 
 7. 结果将显示在“SQL 审核日志”工作表中，使你能够对检测到的异常活动运行更深入的分析，并缓解应用程序中安全事件造成的影响。
-
 
 <!--Image references-->
 

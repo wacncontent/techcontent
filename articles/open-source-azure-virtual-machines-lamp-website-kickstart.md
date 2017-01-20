@@ -1,16 +1,16 @@
-<properties
-	pageTitle="在 Azure Linux 虚拟机上快速搭建单机版 LAMP 网站"
-	description="了解如何在 Azure Linux 虚拟机上快速搭建单机版 LAMP 网站"
-	services="open-source"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""/>
+---
+title: 在 Azure Linux 虚拟机上快速搭建单机版 LAMP 网站
+description: 了解如何在 Azure Linux 虚拟机上快速搭建单机版 LAMP 网站
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-	ms.service="open-source-website"
-	ms.date=""
-	wacn.date="07/12/2016"/>
+ms.service: open-source-website
+ms.date: 
+wacn.date: 07/12/2016
+---
 
 # 在 Azure Linux 虚拟机上快速搭建单机版 LAMP 网站
 
@@ -39,7 +39,7 @@ PowerShell 脚本运行注意事项：
 
 	Set-ExecutionPolicy -ExecutionPolicy Unrestricted
 
-如果您选择 Azure PowerShell 方式安装 LAMP，那么请按[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/) 中的说明在本地计算机上安装 Azure PowerShell。然后打开 Azure PowerShell 命令提示符，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](/documentation/articles/xplat-cli-connect/#use-the-log-in-method/)：
+如果您选择 Azure PowerShell 方式安装 LAMP，那么请按[如何安装和配置 Azure PowerShell](./powershell-install-configure.md) 中的说明在本地计算机上安装 Azure PowerShell。然后打开 Azure PowerShell 命令提示符，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](./xplat-cli-connect.md#use-the-log-in-method/)：
 
 	Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
@@ -64,11 +64,11 @@ PowerShell 脚本运行注意事项：
 
 ###<a id="azure-cli"></a>Azure CLI 方式
 
-如果您选择 Azure CLI 方式安装 LAMP，那么请[安装 Azure CLI](/documentation/articles/xplat-cli-install/)。然后请确保您是处于[资源管理器模式](/documentation/articles/resource-manager-deployment-model/)下，可通过运行以下命令来验证：
+如果您选择 Azure CLI 方式安装 LAMP，那么请[安装 Azure CLI](./xplat-cli-install.md)。然后请确保您是处于[资源管理器模式](./azure-resource-manager/resource-manager-deployment-model.md)下，可通过运行以下命令来验证：
 
 	azure config mode arm
 
-现在，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](/documentation/articles/xplat-cli-connect/)：
+现在，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](./xplat-cli-connect.md)：
 
 	azure login -e AzureChinaCloud -u <your account>
 
@@ -95,9 +95,9 @@ PowerShell 脚本运行注意事项：
 
 如果您已经建好了 LINUX 虚拟机，就可以直接运行 SHELL 脚本来安装 LAMP.  
 
-如果您还没有 Azure 下的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/). 创建 LINUX 虚拟机。  
+如果您还没有 Azure 下的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md). 创建 LINUX 虚拟机。  
 
-连接到您的 LINUX 虚拟机。如果这是您第一次使用 Azure 的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 连接到虚拟机。
+连接到您的 LINUX 虚拟机。如果这是您第一次使用 Azure 的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 连接到虚拟机。
 
 不同的 LINUX 发行版在安装 LAMP 时有少许的不同。请根据您的 LINUX 版本选择对应的步骤。
 
@@ -113,7 +113,6 @@ PowerShell 脚本运行注意事项：
 
 	$sudo bash install_single_lamp.sh mySqlPassword insertValue
 
-
 **Ubuntu Linux**: (以 Ubuntu 14.04, 64-bit system, MySQL 5.5, apache 2.4, php5 为例)
 
 下载SHELL脚本：
@@ -124,9 +123,6 @@ PowerShell 脚本运行注意事项：
 比如您运行 **sudo bash install_single_lamp_Ubuntu.sh s3cret jack**  那么 s3cret 就是您的 MySQL root 密码，jack 就是要写入 MySQL 测试表中的值。
 
 	$sudo bash install_single_lamp_Ubuntu.sh mySqlPassword insertValue
-
-
-
 
 **SUSE Linux**: (以 SLES 12, 64-bit system, MySQL Server 5.6, apache 2.4, php5 为例)
 
@@ -139,7 +135,6 @@ PowerShell 脚本运行注意事项：
 比如您运行 **sudo bash install_single_lamp_SLES.sh s3cret jack**  那么 s3cret 就是您的 MySQL root 密码，jack 就是要写入MySQL 测试表中的值。  
 
 	$sudo bash install_single_lamp_SLES.sh mySqlPassword insertValue
-
 
 ##<a id="visit-site"></a>访问网站
 
@@ -161,8 +156,6 @@ PowerShell 脚本运行注意事项：
 
 	http://mylamptest.chinaeast.cloudapp.chinacloudapi.cn/info.php
 	http://mylamptest.chinaeast.cloudapp.chinacloudapi.cn/mysql.php
-
-
 
 如果是使用 SHELL 脚本的方式安装 LAMP 的话，请参考如下方式：  
 
@@ -195,14 +188,9 @@ URL 地址为：
 
 即可。
 
-> [AZURE.NOTE] 注意：我们强烈建议您在测试完毕无误后把 mysql.php 删除掉，因为它里面包含了 MySQL root 的明文密码。  
+> [!NOTE] 注意：我们强烈建议您在测试完毕无误后把 mysql.php 删除掉，因为它里面包含了 MySQL root 的明文密码。  
 
 如果是 Redhat, Ubuntu Linux, mysql.php 在 /var/www/html/ 路径下，如果是 SUSE LINUX, mysql.php 在 /srv/www/htdocs/ 路径下。
 
-如果您想使用您自己的域名作为网站的 URL，而不是用虚拟机的云服务名字的话，请参考[使用自定义域名](/documentation/articles/cloud-services-custom-domain-name/)。
-
-
-
-
-
+如果您想使用您自己的域名作为网站的 URL，而不是用虚拟机的云服务名字的话，请参考[使用自定义域名](./cloud-services/cloud-services-custom-domain-name.md)。
 
