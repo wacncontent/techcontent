@@ -1,20 +1,21 @@
-<properties 
-   pageTitle="如何将 VM 或角色实例移到其他子网"
-   description="了解如何将 VM 和角色实例移到其他子网"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="carmonm"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="03/22/2016"
-   wacn.date="12/16/2016"
-   ms.author="jdial" />
+---
+title: 如何将 VM 或角色实例移到其他子网
+description: 了解如何将 VM 和角色实例移到其他子网
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: carmonm
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/22/2016
+wacn.date: 12/16/2016
+ms.author: jdial
+---
 
 # 如何将 VM 或角色实例移到其他子网
 

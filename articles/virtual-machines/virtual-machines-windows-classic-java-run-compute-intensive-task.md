@@ -1,26 +1,26 @@
-<properties
-	pageTitle="VM 上需要进行大量计算的 Java 应用程序 | Azure"
-	description="了解如何创建运行可由其他 Java 应用程序监视的、需要进行大量计算的 Java 应用程序的 Azure 虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter="java"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""
-	tags="azure-service-management,azure-resource-manager"/>
+---
+title: VM 上需要进行大量计算的 Java 应用程序 | Azure
+description: 了解如何创建运行可由其他 Java 应用程序监视的、需要进行大量计算的 Java 应用程序的 Azure 虚拟机。
+services: virtual-machines-windows
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: 
+tags: azure-service-management,azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="Java"
-	ms.topic="article"
-	ms.date="11/01/2016"
-	wacn.date="12/30/2016"
-	ms.author="robmcm"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/30/2016
+ms.author: robmcm
+---
 
 # 如何在虚拟机上通过 Java 运行需要进行大量计算的任务
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
  
 借助 Azure，您可以使用虚拟机来处理需要进行大量计算的任务。例如，虚拟机可以处理任务并将结果传送给客户端计算机或移动应用程序。阅读完本文后，你将了解如何创建运行可由其他 Java 应用程序监视的、需要进行大量计算的 Java 应用程序的虚拟机。
 
@@ -44,7 +44,7 @@
 
 ![旅行商问题客户端][client_output]
 
-[AZURE.INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
+[!INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
 
 ## 创建虚拟机
 
@@ -488,7 +488,7 @@
 
  如果您没有指定数字，则它将对 10 个城市运行。在解算器找到当前最短的路线后，它会将这些路线添加到该队列中。
 
-> [AZURE.NOTE]
+> [!NOTE]
 您指定的数字越大，解算器运行的时间将越长。例如，对 14 个城市运行可能需要几分钟时间，而对 15 个城市运行可能需要几小时时间。增加到 16 个或更多个城市可能需要数天的运行时间（最终数周、数月和数年时间）。这是因为，随着城市数量的增加，解算器评估的排列数会迅速增加。
 
 ### 如何运行监视客户端应用程序
@@ -514,7 +514,6 @@
 ## 如何停止 Java 应用程序
 对于解算器和客户端应用程序，如果你希望在正常完成之前结束，则可以按 **Ctrl+C** 退出。
 
-
 [solver_output]: ./media/virtual-machines-windows-classic-java-run-compute-intensive-task/WA_JavaTSPSolver.png
 [client_output]: ./media/virtual-machines-windows-classic-java-run-compute-intensive-task/WA_JavaTSPClient.png
 [svc_bus_node]: ./media/virtual-machines-windows-classic-java-run-compute-intensive-task/SvcBusQueues_02_SvcBusNode.jpg
@@ -523,6 +522,6 @@
 [namespace_list]: ./media/virtual-machines-windows-classic-java-run-compute-intensive-task/SvcBusQueues_05_NamespaceList.jpg
 [properties_pane]: ./media/virtual-machines-windows-classic-java-run-compute-intensive-task/SvcBusQueues_06_PropertiesPane.jpg
 [default_key]: ./media/virtual-machines-windows-classic-java-run-compute-intensive-task/SvcBusQueues_07_DefaultKey.jpg
-[add_ca_cert]: /documentation/articles/java-add-certificate-ca-store/
+[add_ca_cert]: ../java-add-certificate-ca-store.md
 
 <!---HONumber=Mooncake_0215_2016-->

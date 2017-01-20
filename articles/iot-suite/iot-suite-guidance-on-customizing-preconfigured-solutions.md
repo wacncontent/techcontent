@@ -1,25 +1,22 @@
-<properties
-	pageTitle="自定义预配置解决方案 | Azure"
-	description="提供有关如何自定义 Azure IoT 套件预配置解决方案的指导。"
-	services=""
-    suite="iot-suite"
-	documentationCenter=".net"
-	authors="stevehob"
-	manager="timlt"
-	editor=""/>
+---
+title: 自定义预配置解决方案 | Azure
+description: 提供有关如何自定义 Azure IoT 套件预配置解决方案的指导。
+services: 
+suite: iot-suite
+documentationCenter: .net
+authors: stevehob
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-suite"
-     ms.devlang="dotnet"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="10/11/2016"
-     wacn.date="10/31/2016"
-     ms.author="aguilaaj"/>
-
-
+ms.service: iot-suite
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/11/2016
+wacn.date: 10/31/2016
+ms.author: aguilaaj
+---
 
 # 自定义预配置解决方案
 
@@ -35,9 +32,9 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 
 ## 更改预配置规则
 
-远程监视解决方案包含三个 [Azure 流分析](/home/features/stream-analytics/)作业，这些作业可实现针对解决方案显示的设备信息、遥测数据及规则逻辑。
+远程监视解决方案包含三个 [Azure 流分析](https://www.azure.cn/home/features/stream-analytics/)作业，这些作业可实现针对解决方案显示的设备信息、遥测数据及规则逻辑。
 
-[远程监视预配置解决方案演练](/documentation/articles/iot-suite-remote-monitoring-sample-walkthrough/)深入介绍了这三个流分析作业及其语法。
+[远程监视预配置解决方案演练](./iot-suite-remote-monitoring-sample-walkthrough.md)深入介绍了这三个流分析作业及其语法。
 
 你可以直接编辑这些作业以更改逻辑，或添加特定于你的方案的逻辑。你可以按以下方式查找流分析作业：
  
@@ -51,7 +48,7 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 
 6. 启动作业
 
-> [AZURE.NOTE] 远程监视仪表板依赖特定数据，因此更改作业可能会导致仪表板出现故障。
+> [!NOTE] 远程监视仪表板依赖特定数据，因此更改作业可能会导致仪表板出现故障。
 
 ## 添加你自己的规则
 
@@ -61,7 +58,7 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 
 最常见的扩展活动之一是使用方案特定的设备。使用设备的方法有数种。这些方法包括更改模拟设备以符合你的方案，或使用 [IoT 设备 SDK][] 将物理设备连接到解决方案。
 
-有关向远程监视预配置解决方案添加设备的分步指南，请参阅 [Iot 套件连接设备](/documentation/articles/iot-suite-connecting-devices/)和远程监视 C SDK 示例（旨在搭配远程监视预配置解决方案）。
+有关向远程监视预配置解决方案添加设备的分步指南，请参阅 [Iot 套件连接设备](./iot-suite-connecting-devices.md)和远程监视 C SDK 示例（旨在搭配远程监视预配置解决方案）。
 
 ### 创建你自己的模拟设备
 
@@ -72,7 +69,6 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 ### 模拟设备的可用位置
 
 默认的位置集为中国北京。可以 [SampleDeviceFactory.cs][lnk-sample-device-factory] 中更改这些位置。
-
 
 ### 生成并使用你自己的（物理）设备
 
@@ -118,7 +114,6 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
  
       将此代码替换为以下代码：
 
-	
 		  "appRoles": [
 		  {
 		  "allowedMemberTypes": [
@@ -141,7 +136,6 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 		  "value": "ReadOnly"
 		  } ],
 
-
 9. 保存更新后的 .json 文件（可以覆盖现有文件）。
 
 10.  在 Azure 经典管理门户中，选择页面底部的“管理清单”，然后选择“上载清单”上载你在上一步保存的 .json 文件。
@@ -161,11 +155,11 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 - [配合使用动态遥测和远程监视预配置解决方案][lnk-dynamic]
 - [远程监视预配置解决方案中的设备信息元数据][lnk-devinfo]
 
-[lnk-dynamic]: /documentation/articles/iot-suite-dynamic-telemetry/
-[lnk-devinfo]: /documentation/articles/iot-suite-remote-monitoring-device-info/
+[lnk-dynamic]: ./iot-suite-dynamic-telemetry.md
+[lnk-devinfo]: ./iot-suite-remote-monitoring-device-info.md
 
-[IoT 设备 SDK]: /documentation/articles/iot-hub-sdks-summary/
-[lnk-permissions]: /documentation/articles/iot-suite-permissions/
+[IoT 设备 SDK]: ../iot-hub/iot-hub-sdks-summary.md
+[lnk-permissions]: ./iot-suite-permissions.md
 [lnk-dashboard-controller]: https://github.com/Azure/azure-iot-remote-monitoring/blob/3fd43b8a9f7e0f2774d73f3569439063705cebe4/DeviceAdministration/Web/Controllers/DashboardController.cs#L27
 [lnk-telemetry-api-controller-01]: https://github.com/Azure/azure-iot-remote-monitoring/blob/3fd43b8a9f7e0f2774d73f3569439063705cebe4/DeviceAdministration/Web/WebApiControllers/TelemetryApiController.cs#L27
 [lnk-telemetry-api-controller-02]: https://github.com/Azure/azure-iot-remote-monitoring/blob/e7003339f73e21d3930f71ceba1e74fb5c0d9ea0/DeviceAdministration/Web/WebApiControllers/TelemetryApiController.cs#L25

@@ -1,21 +1,21 @@
-<properties
-	pageTitle="手动或自动缩放实例计数 | Azure"
-	description="了解如何在 Azure 中缩放服务。"
-	authors="rboucher"
-	manager=""
-	editor=""
-	services="monitoring-and-diagnostics"
-	documentationCenter="monitoring-and-diagnostics"/>
+---
+title: 手动或自动缩放实例计数 | Azure
+description: 了解如何在 Azure 中缩放服务。
+authors: rboucher
+manager: 
+editor: 
+services: monitoring-and-diagnostics
+documentationCenter: monitoring-and-diagnostics
 
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/08/2015"
-	wacn.date="11/14/2016"
-	ms.author="robb"/>
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/08/2015
+wacn.date: 11/14/2016
+ms.author: robb
+---
 
 # 手动或自动缩放实例计数
 
@@ -25,7 +25,7 @@
 
 可以在门户中进行缩放，也可以使用 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn931953.aspx) 或 [.NET SDK](https://www.nuget.org/packages/Microsoft.Azure.Insights/) 手动或自动调整规模。
 
-> [AZURE.NOTE] 本文介绍了如何在位于 [http://portal.azure.cn](http://portal.azure.cn) 的门户预览中创建自动缩放设置。在此门户中创建的自动缩放设置无法在经典管理门户 ([http://manage.windowsazure.cn](http://manage.windowsazure.cn)) 中进行编辑。
+> [!NOTE] 本文介绍了如何在位于 [http://portal.azure.cn](http://portal.azure.cn) 的门户预览中创建自动缩放设置。在此门户中创建的自动缩放设置无法在经典管理门户 ([http://manage.windowsazure.cn](http://manage.windowsazure.cn)) 中进行编辑。
 
 ## 手动缩放
 
@@ -35,7 +35,7 @@
 
 3. 单击该磁贴会转到“缩放”边栏选项卡。在缩放边栏选项卡顶部，可以查看服务的自动缩放操作历史记录。![“缩放”分页](./media/insights-how-to-scale/Insights_ScaleBladeDayZero.png)
     
-    >[AZURE.NOTE] 只有自动缩放执行的操作才会显示在此图表中。如果手动调整实例计数，则更改不会反映在此图表中。
+    >[!NOTE] 只有自动缩放执行的操作才会显示在此图表中。如果手动调整实例计数，则更改不会反映在此图表中。
 
 4. 可以使用滑块手动调整“实例”数。
 5. 单击“保存”命令，几乎可以立即缩放到该实例数。
@@ -48,7 +48,6 @@
 
     ![显示了 CPU 百分比的“缩放”分页](./media/insights-how-to-scale/Insights_ScaleBladeCPU.png)  
 
-    
     自动缩放绝不会使服务低于或高于所设置的边界（无论负载多少）。
 
 2. 其次，为指标选择目标范围。例如，如果选择“CPU 百分比”，则可以为服务中所有实例间的平均 CPU 设置目标。当平均 CPU 超过定义的最大值时会进行扩大，同样，每当平均 CPU 下降到低于最小值时会进行缩小。
@@ -94,16 +93,13 @@
 
 ![多个缩放规则](./media/insights-how-to-scale/Insights_MultipleScaleRules.png)  
 
-
 启用这条附加规则后，如果在执行缩放操作之前负载超出 85%，你将会看到两个附加实例而不是一个。
 
 ## 基于计划的缩放
 
-
 默认情况下，当创建缩放规则时，它会始终应用。你可以在单击配置文件标头时看到该规则：
 
 ![配置文件](./media/insights-how-to-scale/Insights_Profile.png)  
-
 
 但是与在周末进行缩放相比，你可能需要在一天或一周当中进行更积极的缩放。你甚至可以在工作时间之外完全关闭服务。
 
@@ -123,7 +119,7 @@
 
 8. 与默认配置文件一样，选择希望应用此配置文件的“天”，以及一天中的“开始时间”。
 
->[AZURE.NOTE] 自动缩放会对所选择的任何“时区”使用夏令时规则。但是，在夏令时时间内，UTC 时差会显示基本时区时差，而不是夏令时 UTC 时差。
+>[!NOTE] 自动缩放会对所选择的任何“时区”使用夏令时规则。但是，在夏令时时间内，UTC 时差会显示基本时区时差，而不是夏令时 UTC 时差。
 
 9. 单击“确定”。
 
@@ -135,11 +131,10 @@
 
 ## 后续步骤
 
-* [监视服务指标](/documentation/articles/insights-how-to-customize-monitoring/)以确保你的服务可用且响应迅速。
-* [启用监视和诊断](/documentation/articles/insights-how-to-use-diagnostics/)以收集你的服务的详细高频指标。
-* 每当操作事件发生或指标超过阈值时[接收警报通知](/documentation/articles/insights-receive-alert-notifications/)。
-* 在要确切了解代码在云中的执行情况时[监视应用程序性能](/documentation/articles/insights-perf-analytics/)
-* [查看事件和审核日志](/documentation/articles/insights-debugging-with-events/)以了解在服务中发生的所有事件。
+* [监视服务指标](./insights-how-to-customize-monitoring.md)以确保你的服务可用且响应迅速。
+* [启用监视和诊断](./insights-how-to-use-diagnostics.md)以收集你的服务的详细高频指标。
+* 每当操作事件发生或指标超过阈值时[接收警报通知](./insights-receive-alert-notifications.md)。
+* 在要确切了解代码在云中的执行情况时[监视应用程序性能](./insights-perf-analytics.md)
+* [查看事件和审核日志](./insights-debugging-with-events.md)以了解在服务中发生的所有事件。
 
- 
 <!---HONumber=Mooncake_1107_2016-->

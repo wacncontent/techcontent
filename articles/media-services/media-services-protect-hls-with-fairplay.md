@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="使用 Apple FairPlay 和/或 Microsoft PlayReady 保护 HLS 内容 | Azure" 
-	description="本主题概括介绍并演示了如何使用 Azure 媒体服务通过 Apple FairPlay 动态加密 HTTP 实时传送视频流 (HLS) 内容。它还演示了如何使用媒体服务许可证传送服务将 FairPlay 许可证传送到客户端。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 Apple FairPlay 和/或 Microsoft PlayReady 保护 HLS 内容 | Azure
+description: 本主题概括介绍并演示了如何使用 Azure 媒体服务通过 Apple FairPlay 动态加密 HTTP 实时传送视频流 (HLS) 内容。它还演示了如何使用媒体服务许可证传送服务将 FairPlay 许可证传送到客户端。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/27/2016"
-	wacn.date="11/21/2016"
-	ms.author="juliako"/>  
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 11/21/2016
+ms.author: juliako
+---
 
 # 使用 Apple FairPlay 和/或 Microsoft PlayReady 保护 HLS 内容
 
@@ -25,7 +23,7 @@
 
 - **AES-128 信封明文密钥**
 
-	整个区块使用 **AES-128 CBC** 模式进行加密。iOS 和 OSX 播放器本身支持解密流。有关详细信息，请参阅[此文章](/documentation/articles/media-services-protect-with-aes128/)。
+	整个区块使用 **AES-128 CBC** 模式进行加密。iOS 和 OSX 播放器本身支持解密流。有关详细信息，请参阅[此文章](./media-services-protect-with-aes128.md)。
 
 - **Apple FairPlay**
 
@@ -36,18 +34,16 @@
 
 ![使用 FairPlay 进行保护](./media/media-services-content-protection-overview/media-services-content-protection-with-fairplay.png)  
 
-
 本主题演示如何使用 Azure 媒体服务通过 Apple FairPlay 动态加密 HLS 内容。它还演示了如何使用媒体服务许可证传送服务将 FairPlay 许可证传送到客户端。
 
->[AZURE.NOTE] 如果还想要使用 PlayReady 加密 HLS 内容，则需要创建一个通用的内容密钥并将其与你的资产相关联。你还需要配置此内容密钥的授权策略，如[使用 PlayReady 动态通用加密](/documentation/articles/media-services-protect-with-drm/)主题中所述。
+>[!NOTE] 如果还想要使用 PlayReady 加密 HLS 内容，则需要创建一个通用的内容密钥并将其与你的资产相关联。你还需要配置此内容密钥的授权策略，如[使用 PlayReady 动态通用加密](./media-services-protect-with-drm.md)主题中所述。
 
-	
 ## 要求和注意事项
 
 - 在使用 AMS 传送通过 FairPlay 加密的 HLS 和传送 FairPlay 许可证时需要以下各项。
 
-	- 一个 Azure 帐户。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
-	- 一个媒体服务帐户。若要创建媒体服务帐户，请参阅[创建帐户](/documentation/articles/media-services-create-account/)。
+	- 一个 Azure 帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
+	- 一个媒体服务帐户。若要创建媒体服务帐户，请参阅[创建帐户](./media-services-create-account.md)。
 	- 注册 [Apple 开发计划](https://developer.apple.com/)。
 	- Apple 要求内容所有者获取[部署包](https://developer.apple.com/contact/fps/)。说明已使用 Azure 媒体服务实现 KSM（密钥安全模块）的请求以及正在请求最终 FPS 包。在最终 FPS 包中将有生成证书并获取 ASK 的说明，你可以用来配置 FairPlay。
 
@@ -101,7 +97,7 @@
 	- 传送方法（在本例中为 FairPlay）、
 	- FairPlay 策略选项配置。有关如何配置 FairPlay 的详细信息，请参阅以下示例中的 ConfigureFairPlayPolicyOptions() 方法。
 	
-		>[AZURE.NOTE] 通常，可能只需配置一次 FairPlay 策略选项，因为仅有一套证书和 ASK。
+		>[!NOTE] 通常，可能只需配置一次 FairPlay 策略选项，因为仅有一套证书和 ASK。
 	- 限制（打开或令牌）
 	- 以及特定于密钥传送类型的信息，其定义了将密钥传送到客户端的方式。
 	
@@ -111,7 +107,7 @@
 	- 动态加密类型（常用的 CBC 加密）、
 	- 许可证获取 URL。
 	
-	>[AZURE.NOTE]如果要传送使用 FairPlay + 另一个 DRM 加密的流，则必须配置单独的传送策略
+	>[!NOTE]如果要传送使用 FairPlay + 另一个 DRM 加密的流，则必须配置单独的传送策略
 	>
 	>- 一个 IAssetDeliveryPolicy 用来将 DASH 配置为 CENC（PlayReady 和 WideVine）并将平滑配置为 PlayReady。
 	>- 另一个 IAssetDeliveryPolicy 用来配置 HLS 的 FairPlay
@@ -124,7 +120,7 @@
 
 	spc=<Base64 encoded SPC>
 
->[AZURE.NOTE] Azure Media Player 不支持现成的 FairPlay 播放。客户需要通过 Apple 开发人员帐户获得示例播放器，以便在 MAC OSX 上播放 FairPlay。
+>[!NOTE] Azure Media Player 不支持现成的 FairPlay 播放。客户需要通过 Apple 开发人员帐户获得示例播放器，以便在 MAC OSX 上播放 FairPlay。
  
 ##流 URL
 
@@ -140,14 +136,11 @@
 	- **cbc aapl**：Fairplay
 	- **cbc**：AES 信封加密。
 
-
 ##.NET 示例
-
 
 下面的示例演示了在适用于 .Net 的 Azure 媒体服务 SDK - 版本 3.6.0 中引入的功能（使用 Azure 媒体服务传送通过 FairPlay 加密的内容的功能）。以下 Nuget 包命令用于安装该包：
 
 	PM> Install-Package windowsazure.mediaservices -Version 3.6.0
-
 
 1. 创建控制台项目。
 1. 使用 NuGet 安装和添加 Azure 媒体服务 .NET SDK。
@@ -169,11 +162,10 @@
 			  </appSettings>
 		</configuration>
 
-1. 针对要传送内容的“流式处理终结点”，获取至少一个流式处理单位。有关详细信息，请参阅：[配置流式处理终结点](/documentation/articles/media-services-dotnet-get-started/#configure-streaming-endpoint-using-the-portal)。
+1. 针对要传送内容的“流式处理终结点”，获取至少一个流式处理单位。有关详细信息，请参阅：[配置流式处理终结点](./media-services-dotnet-get-started.md#configure-streaming-endpoint-using-the-portal)。
 
 1. 使用本部分中所示的代码覆盖 Program.cs 文件中的代码。
 			
-		
 		using System;
 		using System.Collections.Generic;
 		using System.Configuration;
@@ -360,7 +352,6 @@
 		            return key;
 		        }
 		
-		
 		        static public void AddOpenAuthorizationPolicy(IContentKey contentKey)
 		        {
 		            // Create ContentKeyAuthorizationPolicy with Open restrictions 
@@ -376,7 +367,6 @@
 		                        }
 		                    };
 		
-		
 		            // Configure FairPlay policy option.
 		            string FairPlayConfiguration = ConfigureFairPlayPolicyOptions();
 		
@@ -385,7 +375,6 @@
 		                ContentKeyDeliveryType.FairPlay,
 		                restrictions,
 		                FairPlayConfiguration);
-		
 		
 		            IContentKeyAuthorizationPolicy contentKeyAuthorizationPolicy = _context.
 		                        ContentKeyAuthorizationPolicies.
@@ -415,7 +404,6 @@
 		
 		            // Configure FairPlay policy option.
 		            string FairPlayConfiguration = ConfigureFairPlayPolicyOptions();
-		
 		
 		            IContentKeyAuthorizationPolicyOption FairPlayPolicy =
 		                _context.ContentKeyAuthorizationPolicyOptions.Create("Token option",
@@ -526,7 +514,6 @@
 		            asset.DeliveryPolicies.Add(assetDeliveryPolicy);
 		
 		        }
-		
 		
 		        /// <summary>
 		        /// Gets the streaming origin locator.

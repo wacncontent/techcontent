@@ -1,37 +1,36 @@
-<properties
-   pageTitle="如何使用 Azure Resource Manager 和 PowerShell 在 Azure VPN 网关上配置 BGP | Azure"
-   description="本文指导你完成使用 Azure Resource Manager 和 PowerShell 通过 Azure VPN 网关配置 BGP。"
-   services="vpn-gateway"
-   documentationCenter="na"
-   authors="yushwang"
-   manager="rossort"
-   editor=""
-   tags="azure-resource-manager"/>
+---
+title: 如何使用 Azure Resource Manager 和 PowerShell 在 Azure VPN 网关上配置 BGP | Azure
+description: 本文指导你完成使用 Azure Resource Manager 和 PowerShell 通过 Azure VPN 网关配置 BGP。
+services: vpn-gateway
+documentationCenter: na
+authors: yushwang
+manager: rossort
+editor: 
+tags: azure-resource-manager
 
-<tags
-   ms.service="vpn-gateway"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="04/15/2016"
-   wacn.date="01/09/2017"
-   ms.author="yushwang"/>
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 04/15/2016
+wacn.date: 01/09/2017
+ms.author: yushwang
+---
 
 # 如何使用 Azure Resource Manager 和 PowerShell 在 Azure VPN 网关上配置 BGP
 
 本文将指导你完成使用 Resource Manager 部署模型和 PowerShell 在跨界站点到站点 (S2S) VPN 连接和 VNet 到 VNet 连接上启用 BGP 的步骤。
 
-
 **关于 Azure 部署模型**
 
-[AZURE.INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
+[!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
 ## 关于 BGP
 
 BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交换路由和可访问性信息的标准路由协议。BGP 允许 Azure VPN 网关和本地 VPN 设备（称为 BGP 对等节点或邻居）交换“路由”，这些路由将通知这两个网关这些前缀的可用性和可访问性，以便这些前缀可通过涉及的网关或路由器。BGP 还可以通过将 BGP 网关从一个 BGP 对等节点获知的路由传播到所有其他 BGP 对等节点来允许在多个网络之间传输路由。
 
-有关 BGP 的优点的更多讨论，以及若要了解使用 BGP 的技术要求和注意事项，请参阅 [Azure VPN 网关的 BGP 概述](/documentation/articles/vpn-gateway-bgp-overview/)。
+有关 BGP 的优点的更多讨论，以及若要了解使用 BGP 的技术要求和注意事项，请参阅 [Azure VPN 网关的 BGP 概述](./vpn-gateway-bgp-overview.md)。
 
 ## 在 Azure VPN 网关上使用 BGP 入门
 
@@ -57,7 +56,7 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 
 ### 开始之前
 
-- 确保你拥有 Azure 订阅。如果你还没有 Azure 订阅，你可以注册一个[试用版](/pricing/1rmb-trial)。
+- 确保你拥有 Azure 订阅。如果你还没有 Azure 订阅，你可以注册一个[试用版](https://www.azure.cn/pricing/1rmb-trial)。
 	
 - 你需要安装 Azure 资源管理器 PowerShell cmdlet。有关安装 PowerShell cmdlet 的详细信息，请参阅 [How to install and configure Azure PowerShell（如何安装和配置 Azure PowerShell）](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
@@ -89,7 +88,7 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 
 #### 2\.连接到你的订阅并创建新的资源组
 
-确保切换到 PowerShell 模式，以便使用资源管理器 cmdlet。有关详细信息，请参阅[将 Windows PowerShell 与资源管理器配合使用](/documentation/articles/powershell-azure-resource-manager/)。
+确保切换到 PowerShell 模式，以便使用资源管理器 cmdlet。有关详细信息，请参阅[将 Windows PowerShell 与资源管理器配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)。
 
 打开 PowerShell 控制台并连接到你的帐户。使用下面的示例来帮助你连接：
 
@@ -196,7 +195,6 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 
 	New-AzureRmVirtualNetworkGatewayConnection -Name $Connection15 -ResourceGroupName $RG1 -VirtualNetworkGateway1 $vnet1gw -LocalNetworkGateway2 $lng5gw -Location $Location1 -ConnectionType IPsec -SharedKey 'AzureA1b2C3' -EnableBGP $True
 
-
 下面的示例列出了你将在本地 VPN 设备上的 BGP 配置节中为此练习输入的参数：
 
 	- Site5 ASN            : 65050
@@ -221,7 +219,7 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 
 必须确保新虚拟网络的 IP 地址空间 TestVNet2 不与任何 VNet 范围重叠。
 
-在此示例中，虚拟网络属于同一订阅。你可以在不同订阅之间设置 VNet 到 VNet 连接，若要了解更多详细信息，请参阅[配置 VNet 到 VNet 连接](/documentation/articles/vpn-gateway-vnet-vnet-rm-ps/)。请确保在创建连接时添加“-EnableBgp $True”以启用 BGP。
+在此示例中，虚拟网络属于同一订阅。你可以在不同订阅之间设置 VNet 到 VNet 连接，若要了解更多详细信息，请参阅[配置 VNet 到 VNet 连接](./vpn-gateway-vnet-vnet-rm-ps.md)。请确保在创建连接时添加“-EnableBgp $True”以启用 BGP。
 
 #### 1\.声明变量
 
@@ -289,7 +287,7 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 
 	New-AzureRmVirtualNetworkGatewayConnection -Name $Connection21 -ResourceGroupName $RG2 -VirtualNetworkGateway1 $vnet2gw -VirtualNetworkGateway2 $vnet1gw -Location $Location2 -ConnectionType Vnet2Vnet -SharedKey 'AzureA1b2C3' -EnableBgp $True
 
->[AZURE.IMPORTANT] 请确保为这两个连接启用 BGP。
+>[!IMPORTANT] 请确保为这两个连接启用 BGP。
 
 完成这些步骤后，连接将在几分钟后建立，BGP 对等会话将在完成 VNet 到 VNet 连接后启动。
 
@@ -299,6 +297,6 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 
 ## 后续步骤
 
-连接完成后，即可将虚拟机添加到虚拟网络。请参阅[创建虚拟机](/documentation/articles/virtual-machines-windows-creation-choices/)以获取相关步骤。
+连接完成后，即可将虚拟机添加到虚拟网络。请参阅[创建虚拟机](../virtual-machines/virtual-machines-windows-creation-choices.md)以获取相关步骤。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

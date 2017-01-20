@@ -1,21 +1,21 @@
-<properties 
-   pageTitle="SQL 数据库灾难恢复演练" 
-   description="了解有关使用 Azure SQL 数据库执行灾难恢复演练，帮助任务关键型业务应用程序弹性应对故障和中断的指南和最佳实践。" 
-   services="sql-database" 
-   documentationCenter="" 
-   authors="mihaelablendea" 
-   manager="jhubbard" 
-   editor="monicar"/>
+---
+title: SQL 数据库灾难恢复演练
+description: 了解有关使用 Azure SQL 数据库执行灾难恢复演练，帮助任务关键型业务应用程序弹性应对故障和中断的指南和最佳实践。
+services: sql-database
+documentationCenter: 
+authors: mihaelablendea
+manager: jhubbard
+editor: monicar
 
-<tags
-   ms.service="sql-database"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-management" 
-   ms.date="07/31/2016" 
-   wacn.date="12/19/2016"
-   ms.author="mihaelab"/>
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-management
+ms.date: 07/31/2016
+wacn.date: 12/19/2016
+ms.author: mihaelab
+---
 
 #执行灾难恢复演练
 
@@ -27,7 +27,7 @@
 - 恢复
 - 验证恢复后的应用程序完整性
 
-根据[针对业务连续性设计应用程序](/documentation/articles/sql-database-business-continuity/)的方式，用于执行演练的工作流会有所不同。下面将会讨论在 Azure SQL 数据库上下文中执行灾难恢复演练的最佳实践。
+根据[针对业务连续性设计应用程序](./sql-database-business-continuity.md)的方式，用于执行演练的工作流会有所不同。下面将会讨论在 Azure SQL 数据库上下文中执行灾难恢复演练的最佳实践。
 
 ##异地还原
 
@@ -39,8 +39,8 @@
 
 ####恢复
 
-- 根据[此处](/documentation/articles/sql-database-disaster-recovery/)所述，在另一台服务器中执行数据库异地还原。
-- 更改应用程序配置以连接到已恢复的数据库，并根据[在恢复后配置数据库](/documentation/articles/sql-database-disaster-recovery/)指南完成恢复。
+- 根据[此处](./sql-database-disaster-recovery.md)所述，在另一台服务器中执行数据库异地还原。
+- 更改应用程序配置以连接到已恢复的数据库，并根据[在恢复后配置数据库](./sql-database-disaster-recovery.md)指南完成恢复。
 
 ####验证
 
@@ -57,19 +57,18 @@
 ####恢复
 
 - 确保 DR 区域中的应用程序配置指向以前的辅助数据库，故障转移后，该数据库将成为完全可访问的新主数据库。
-- 执行[计划的故障转移](/documentation/articles/sql-database-geo-replication-failover-powershell/#initiate-a-planned-failover)，使辅助数据库成为新的主数据库
-- 根据[在恢复后配置数据库](/documentation/articles/sql-database-disaster-recovery/)指南完成恢复。
+- 执行[计划的故障转移](./sql-database-geo-replication-failover-powershell.md#initiate-a-planned-failover)，使辅助数据库成为新的主数据库
+- 根据[在恢复后配置数据库](./sql-database-disaster-recovery.md)指南完成恢复。
 
 ####验证
 
 - 通过验证恢复后的应用程序完整性（例如，连接字符串、登录名、基本功能测试，或标准应用程序验收过程的其他验证部分）来完成演练。
 
-
 ## 后续步骤
 
-- 若要了解业务连续性方案，请参阅[连续性方案](/documentation/articles/sql-database-business-continuity/)
-- 若要了解 Azure SQL 数据库的自动备份，请参阅 [SQL 数据库自动备份](/documentation/articles/sql-database-automated-backups/)
-- 若要了解如何使用自动备份进行恢复，请参阅[从服务启动的备份中还原数据库](/documentation/articles/sql-database-recovery-using-backups/)
-- 若要了解更快的恢复选项，请参阅[活动异地复制](/documentation/articles/sql-database-geo-replication-overview/)
+- 若要了解业务连续性方案，请参阅[连续性方案](./sql-database-business-continuity.md)
+- 若要了解 Azure SQL 数据库的自动备份，请参阅 [SQL 数据库自动备份](./sql-database-automated-backups.md)
+- 若要了解如何使用自动备份进行恢复，请参阅[从服务启动的备份中还原数据库](./sql-database-recovery-using-backups.md)
+- 若要了解更快的恢复选项，请参阅[活动异地复制](./sql-database-geo-replication-overview.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

@@ -1,28 +1,28 @@
-<properties
-   pageTitle="角色的默认 TEMP 文件夹大小太小 | Azure"
-   description="云服务角色的 TEMP 文件夹的空间有限。本文针对如何避免磁盘空间不足的问题提供了一些建议。"
-   services="cloud-services"
-   documentationCenter=""
-   authors="simonxjx"
-   manager="felixwu"
-   editor=""
-   tags="top-support-issue"/>
-<tags
-   ms.service="cloud-services"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="tbd"
-   ms.date="10/12/2016"
-   wacn.date="12/16/2016"
-   ms.author="v-six" />
+---
+title: 角色的默认 TEMP 文件夹大小太小 | Azure
+description: 云服务角色的 TEMP 文件夹的空间有限。本文针对如何避免磁盘空间不足的问题提供了一些建议。
+services: cloud-services
+documentationCenter: 
+authors: simonxjx
+manager: felixwu
+editor: 
+tags: top-support-issue
 
+ms.service: cloud-services
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: tbd
+ms.date: 10/12/2016
+wacn.date: 12/16/2016
+ms.author: v-six
+---
 
 # 云服务 Web 角色/辅助角色的默认 TEMP 文件夹大小太小
 
 云服务辅助角色或 Web 角色的默认临时目录的最大大小为 100 MB，该目录可能会在某个时候被填满。本文介绍如何避免临时目录空间不足的问题。
 
-[AZURE.INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
+[!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
 ## 为什么空间会不足？
 
@@ -68,10 +68,6 @@
 	    }
 	}
 
-
-
 阅读说明[如何增加 Azure Web 角色 ASP.NET 临时文件夹大小](http://blogs.msdn.com/b/kwill/archive/2011/07/18/how-to-increase-the-size-of-the-windows-azure-web-role-asp-net-temporary-folder.aspx)的博客。
-
-
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

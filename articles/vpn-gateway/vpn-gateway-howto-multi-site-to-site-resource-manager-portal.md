@@ -1,47 +1,42 @@
-<properties
-   pageTitle="如何使用 Azure 门户预览将多个 VPN 网关站点到站点连接添加到 Resource Manager 部署模型的虚拟网络 | Azure"
-   description="将多站点 S2S 连接添加到包含现有连接的 VPN 网关"
-   services="vpn-gateway"
-   documentationCenter="na"
-   authors="cherylmc"
-   manager="carmonm"
-   editor=""
-   tags="azure-resource-manager"/>  
+---
+title: 如何使用 Azure 门户预览将多个 VPN 网关站点到站点连接添加到 Resource Manager 部署模型的虚拟网络 | Azure
+description: 将多站点 S2S 连接添加到包含现有连接的 VPN 网关
+services: vpn-gateway
+documentationCenter: na
+authors: cherylmc
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-   ms.service="vpn-gateway"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/10/2016"
-   wacn.date="11/07/2016"
-   ms.author="cherylmc"/>  
-
-
-
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/10/2016
+wacn.date: 11/07/2016
+ms.author: cherylmc
+---
 
 # 将站点到站点连接添加到包含现有 VPN 网关连接的 VNet
 
-> [AZURE.SELECTOR]
-- [Resource Manager - 门户](/documentation/articles/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/)
-- [经典 - PowerShell](/documentation/articles/vpn-gateway-multi-site/)
+> [!div class="op_single_selector"]
+- [Resource Manager - 门户](./vpn-gateway-howto-multi-site-to-site-resource-manager-portal.md)
+- [经典 - PowerShell](./vpn-gateway-multi-site.md)
 
 本文逐步讲解如何使用 Azure 门户预览，将站点到站点 (S2S) 连接添加到包含现有连接的 VPN 网关。这种类型的连接通常称为“多站点”配置。
 
 可以参考本文将 S2S 连接添加到已有 S2S 连接、点到站点连接或 VNet 到 VNet 连接的 VNet。添加连接时，请注意一些限制。在开始之前，请查看本文的[开始之前](#before)部分检查配置。
 
-本文适用于使用 Resource Manager 部署模型创建的、具有 RouteBased VPN 网关的 VNet。本文中的步骤不适用于 ExpressRoute/站点到站点共存连接配置。有关共存连接的信息，请参阅 [ExpressRoute/S2S coexisting connections](/documentation/articles/expressroute-howto-coexist-resource-manager/)（ExpressRoute/S2S 共存连接）。
+本文适用于使用 Resource Manager 部署模型创建的、具有 RouteBased VPN 网关的 VNet。本文中的步骤不适用于 ExpressRoute/站点到站点共存连接配置。有关共存连接的信息，请参阅 [ExpressRoute/S2S coexisting connections](../expressroute/expressroute-howto-coexist-resource-manager.md)（ExpressRoute/S2S 共存连接）。
 
 ### 部署模型和方法
 
-[AZURE.INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
+[!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
 当我们发布有关此配置的新文章和其他可用工具时，将会更新此表格。有相关的文章发布时，我们会直接从此表格链接到该文章。
 
-[AZURE.INCLUDE [vpn-gateway-table-multi-site](../../includes/vpn-gateway-table-multisite-include.md)]
-
+[!INCLUDE [vpn-gateway-table-multi-site](../../includes/vpn-gateway-table-multisite-include.md)]
 
 ## <a name="before"></a>准备工作
 
@@ -51,9 +46,8 @@
 - 有一个使用 Resource Manager 部署模型创建的、包含现有连接的虚拟网络。
 - VNet 的虚拟网络网关是 RouteBased 类型。如果使用 PolicyBased VPN 网关，必须先删除虚拟网络网关，然后创建新的 RoutBased VPN 网关。
 - 此 VNet 连接到的任何 VNet 都不存在地址范围重叠的情况。
-- 有一台兼容的 VPN 设备，并且可对其进行配置。请参阅[关于 VPN 设备](/documentation/articles/vpn-gateway-about-vpn-devices/)。如果不熟悉 VPN 设备的配置，或者不熟悉本地网络配置中的 IP 地址范围，请咨询能够提供此类详细信息的人员。
+- 有一台兼容的 VPN 设备，并且可对其进行配置。请参阅[关于 VPN 设备](./vpn-gateway-about-vpn-devices.md)。如果不熟悉 VPN 设备的配置，或者不熟悉本地网络配置中的 IP 地址范围，请咨询能够提供此类详细信息的人员。
 - VPN 设备有一个面向外部的公共 IP 地址。此 IP 地址不得位于 NAT 之后。
-
 
 ## <a name="part1"></a>第 1 部分 - 配置连接
 
@@ -99,11 +93,10 @@
 
 你可以在门户中或使用 PowerShell 验证 VPN 连接。
 
-[AZURE.INCLUDE [vpn-gateway-verify-connection-rm](../../includes/vpn-gateway-verify-connection-rm-include.md)]
-
+[!INCLUDE [vpn-gateway-verify-connection-rm](../../includes/vpn-gateway-verify-connection-rm-include.md)]
 
 ## 后续步骤
 
-- 连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机文档](/documentation/services/virtual-machines/)。
+- 连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机文档](../virtual-machines/index.md/)。
 
 <!---HONumber=Mooncake_1031_2016-->

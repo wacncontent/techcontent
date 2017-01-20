@@ -1,23 +1,21 @@
-<properties
-	pageTitle="监视 DocumentDB 请求和存储 | Azure"
-	description="了解如何监视你的 DocumentDB 帐户的性能指标（如请求和服务器错误）以及使用情况指标（如存储消耗）。"
-	services="documentdb"
-	documentationCenter=""
-	authors="mimig1"
-	manager="jhubbard"
-	editor="cgronlun"/>  
+---
+title: 监视 DocumentDB 请求和存储 | Azure
+description: 了解如何监视你的 DocumentDB 帐户的性能指标（如请求和服务器错误）以及使用情况指标（如存储消耗）。
+services: documentdb
+documentationCenter: 
+authors: mimig1
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="documentdb"
-	ms.workload="data-services"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/17/2016"
-	ms.author="mimig"
-	wacn.date="11/30/2016"/>  
-
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/17/2016
+ms.author: mimig
+wacn.date: 11/30/2016
+---
 
 # 监视 DocumentDB 请求、使用情况和存储
 
@@ -43,14 +41,10 @@
 
 	![“监视”可重用功能区的屏幕截图，它显示请求数和存储使用情况](./media/documentdb-monitor-accounts/documentdb-total-requests-and-usage.png)  
 
-
-
 3.	单击“请求”或“存储”磁贴将打开一个详细的“指标”边栏选项卡。
 4.	“指标”边栏选项卡显示有关所选指标的详细信息。边栏选项卡顶部显示了按小时绘制的请求图表，其下的表格中显示了限制请求数和请求总数的聚合值。指标边栏选项卡还显示警报列表，这些警报已经定义，且根据当前指标边栏选项卡上显示的指标进行了筛选（如此，如果你的警报数量较多，将只能在此处看到相关的警报）。
 
 	![包括限制请求数的“指标”边栏选项卡屏幕截图](./media/documentdb-monitor-accounts/documentdb-metric-blade.png)  
-
-
 
 ## 在门户预览中自定义性能指标视图
 
@@ -63,8 +57,6 @@
 
 	![“编辑图表”边栏选项卡的“时间范围”部件的屏幕截图，显示如何输入自定义时间范围](./media/documentdb-monitor-accounts/madocdb5.png)  
 
-
-
 ## 在门户预览中创建并排图表
 Azure 门户预览使你能够创建并排的指标图表。
 
@@ -72,12 +64,9 @@ Azure 门户预览使你能够创建并排的指标图表。
 
 	![“自定义”选项突出显示的请求总数图表的屏幕截图](./media/documentdb-monitor-accounts/madocdb6.png)  
 
-
 2.	单击菜单上的“克隆”以复制部件，然后单击“完成自定义”。
 
 	![“克隆”和“完成自定义”选项突出显示的请求总数图表的屏幕截图](./media/documentdb-monitor-accounts/madocdb7.png)  
-
-
 
 你现在可能将此部件视为其他任何指标部件，同时自定义显示在部件中的指标和时间范围。通过执行此操作，可以同时看到两个并排的不同的指标图表。
 	![请求总数图表和过去一小时新的请求总数的屏幕截图](./media/documentdb-monitor-accounts/madocdb8.png)
@@ -116,7 +105,6 @@ Azure 门户预览使你能够创建并排的指标图表。
 
 有关详细信息，请参阅 [Retrieving Resource Metrics via the Azure Insights API](https://blogs.msdn.microsoft.com/cloud_solution_architect/2016/02/23/retrieving-resource-metrics-via-the-azure-insights-api/)（通过 Azure Insights API 检索资源指标）。
 
-
 ## 故障排除<a name="troubleshooting"></a>
 
 如果监视磁贴显示“无可用数据”消息，并且你最近向数据库发出过请求或添加过数据，则可以编辑该磁贴以反映最新使用情况。
@@ -128,11 +116,10 @@ Azure 门户预览使你能够创建并排的指标图表。
 2.	在“编辑图表”边栏选项卡上的“时间范围”部分中，单击“过去一小时”，然后单击“确定”。
 	![选择了过去一个小时的“编辑图表”边栏选项卡的屏幕截图](./media/documentdb-monitor-accounts/documentdb-no-available-data-past-hour.png)
 
-
 3.	现在磁贴应该刷新以显示当前数据和使用情况。
 	![更新后的过去一小时请求总数磁贴的屏幕截图](./media/documentdb-monitor-accounts/documentdb-no-available-data-fixed.png)
 
 ## 后续步骤
-若要了解有关 DocumentDB 容量的详细信息，请参阅 [Manage DocumentDB capacity](/documentation/articles/documentdb-manage/)（管理 DocumentDB 容量）。
+若要了解有关 DocumentDB 容量的详细信息，请参阅 [Manage DocumentDB capacity](./documentdb-manage.md)（管理 DocumentDB 容量）。
 
 <!---HONumber=Mooncake_1121_2016-->

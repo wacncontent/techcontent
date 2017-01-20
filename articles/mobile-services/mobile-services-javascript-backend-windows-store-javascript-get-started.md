@@ -1,44 +1,42 @@
-<properties
-	pageTitle="适用于 Windows 应用商店 JavaScript 应用的移动服务入门 | Azure 移动服务"
-	description="按照本教程开始使用 Azure 移动服务通过 JavaScript 进行 Windows 应用商店开发。"
-	services="mobile-services"
-	documentationCenter="windows"
-	authors="ggailey777"
-	manager="erikre"
-	editor=""/>
+---
+title: 适用于 Windows 应用商店 JavaScript 应用的移动服务入门 | Azure 移动服务
+description: 按照本教程开始使用 Azure 移动服务通过 JavaScript 进行 Windows 应用商店开发。
+services: mobile-services
+documentationCenter: windows
+authors: ggailey777
+manager: erikre
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows-store"
-	ms.devlang="javascript"
-	ms.topic="get-started-article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows-store
+ms.devlang: javascript
+ms.topic: get-started-article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 # 移动服务入门
 
-[AZURE.INCLUDE [mobile-services-selector-get-started](../../includes/mobile-services-selector-get-started.md)]
-
+[!INCLUDE [mobile-services-selector-get-started](../../includes/mobile-services-selector-get-started.md)]
 
 本教程说明如何使用 Azure 移动服务向 Windows 应用商店 JavaScript 应用添加基于云的后端服务。在本教程中，你将要创建一个新的移动服务，以及一个在新移动服务中存储应用程序数据的简单待办事项列表应用程序。要创建的移动服务将为服务器端业务逻辑使用 JavaScript。
 
 若要完成本教程，您需要以下各项：
 
-* 有效的 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个免费试用帐户。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial)。
+* 有效的 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个免费试用帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial)。
 * [Visual Studio 2013 Express for Windows] 
 
 ## 创建新的移动服务
 
-[AZURE.INCLUDE [mobile-services-create-new-service](../../includes/mobile-services-create-new-service.md)]
+[!INCLUDE [mobile-services-create-new-service](../../includes/mobile-services-create-new-service.md)]
 
 ## 创建新的 Windows 应用商店应用程序
 
 创建移动服务后，你可以在 Azure 经典管理门户中按照简单的快速入门来创建一个新的可连接到移动服务的 Windows 应用商店 8.1 JavaScript 应用。
 
 1.  在 [Azure 经典管理门户]中单击“移动服务”，然后单击你刚刚创建的移动服务。
-
 
 2. 在快速入门选项卡中，单击“选择平台”下的“Windows”，然后展开“创建新的 Windows 应用商店应用程序”。
 
@@ -68,12 +66,12 @@
 
    	这使您可以浏览此应用插入表中的数据。
 
->[AZURE.NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 default.js 文件中。
+>[!NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 default.js 文件中。
 
 ## 后续步骤
-完成快速入门后，请了解如何使用[适用于 HTML/JavaScript 的移动服务客户端](/documentation/articles/mobile-services-html-how-to-use-client-library/)。
+完成快速入门后，请了解如何使用[适用于 HTML/JavaScript 的移动服务客户端](./mobile-services-html-how-to-use-client-library.md)。
 
-[AZURE.INCLUDE [app-service-disqus-feedback-slug](../../includes/app-service-disqus-feedback-slug.md)]
+[!INCLUDE [app-service-disqus-feedback-slug](../../includes/app-service-disqus-feedback-slug.md)]
 
 <!-- Anchors. -->
 [Getting started with Mobile Services]: #getting-started

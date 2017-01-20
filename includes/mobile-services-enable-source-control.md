@@ -5,9 +5,7 @@
 
 	![设置源代码管理](./media/mobile-services-enable-source-control/mobile-setup-source-control.png)
 
-
 3. 输入“用户名”、“新密码”并确认密码，然后单击勾选按钮。
-
 
 	随后将在你的移动服务中创建 Git 存储库。记录您刚才提供的凭证；您将使用它们来访问您的订阅中的这存储库和其他移动服务存储库。
 
@@ -19,5 +17,4 @@
 
 如果在移动服务中启用源控制，您可以使用 Git 将存储库克隆到本地计算机。
  
-
 <!---HONumber=Mooncake_0118_2016-->

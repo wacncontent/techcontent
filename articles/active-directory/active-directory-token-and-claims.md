@@ -1,41 +1,37 @@
- <properties
-   pageTitle="Azure AD 令牌参考 | Azure"
-   description="本指南帮助你了解和评估 Azure Active Directory (AAD) 颁发的 SAML 2.0 令牌和 JSON Web 令牌 (JWT) 令牌中的声明。"
-   documentationCenter="na"
-   authors="msmbaldwin"
-   services="active-directory"
-   manager="mbaldwin"
-   editor=""/>  
+ ---
+title: Azure AD 令牌参考 | Azure
+description: 本指南帮助你了解和评估 Azure Active Directory (AAD) 颁发的 SAML 2.0 令牌和 JSON Web 令牌 (JWT) 令牌中的声明。
+documentationCenter: na
+authors: msmbaldwin
+services: active-directory
+manager: mbaldwin
+editor: 
 
-
-<tags
-   ms.service="active-directory"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="identity"
-   ms.date="10/06/2016"
-   wacn.date="11/30/2016"
-   ms.author="mbaldwin"/>  
-
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 10/06/2016
+wacn.date: 11/30/2016
+ms.author: mbaldwin
+---
 
 # Azure AD 令牌参考
 
 Azure Active Directory (Azure AD) 在每个身份验证流的处理中发出多种安全令牌。本文档说明每种令牌的格式、安全特征和内容。
 
-
 ## 类型的令牌  <a name="types-of-tokens"></a>
 
-Azure AD 支持 [OAuth 2.0 授权协议](/documentation/articles/active-directory-protocols-oauth-code/)，该协议使用 access\_token 与 refresh\_token。它还支持通过 [OpenID Connect](/documentation/articles/active-directory-protocols-openid-connect-code/) 进行身份验证和登录，其中引入了第三种类型的令牌 id\_token。每个令牌表示为“持有者令牌”。
+Azure AD 支持 [OAuth 2.0 授权协议](./active-directory-protocols-oauth-code.md)，该协议使用 access\_token 与 refresh\_token。它还支持通过 [OpenID Connect](./active-directory-protocols-openid-connect-code.md) 进行身份验证和登录，其中引入了第三种类型的令牌 id\_token。每个令牌表示为“持有者令牌”。
 
 持有者令牌是一种轻型安全令牌，它授予对受保护资源的“持有者”访问权限。从这个意义上来说，“持有者”是可以提供令牌的任何一方。虽然接收持有者令牌需要 Azure AD 身份验证，但是仍必须采取步骤来保护令牌，以防止被不速之客拦截令牌。因为持有者令牌没有内置机制来防止未经授权人员使用它们，所以必须在安全的通道（例如传输层安全性 (HTTPS)）中传输这些令牌。如果持有者令牌以明文传输，则可以利用中间人攻击来获得令牌，并对受保护资源进行未经授权的访问。当存储或缓存持有者令牌供以后使用时，也应遵循同样的安全原则。请始终确保你的应用以安全的方式传输和存储持有者令牌。有关持有者令牌的更多安全注意事项，请参阅 [RFC 6750 第 5 部分](http://tools.ietf.org/html/rfc6750)。
 
 Azure AD 颁发的许多令牌都以 JSON Web 令牌或 JWT 的方式实现。JWT 是一种精简的 URL 安全方法，可在两方之间传输信息。JWT 中包含的信息也称为令牌持有者及使用者相关信息的“声明”或断言。JWT 中的声明是为了传输而编码和序列化的 JSON 对象。由于 Azure AD 所颁发的 JWT 已签名但未加密，因此可以轻松地检查 JWT 的内容以进行调试。有多个工具可以进行这项操作，例如 [jwt.calebb.net](http://jwt.calebb.net)。有关 JWT 的详细信息，请参阅 [JWT 规范](http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html)。
 
-
 ## Id\_tokens  <a name="id-tokens"></a>
 
-Id\_token 是应用使用 [OpenID Connect](/documentation/articles/active-directory-protocols-openid-connect-code/) 执行身份验证时收到的一种登录安全令牌形式。它以 [JWT](#types-of-tokens) 表示，包含可让用户登录应用的声明。可以适时使用 id\_token 中的声明 - 通常用于显示帐户信息或在应用程序中进行访问控制决策。
+Id\_token 是应用使用 [OpenID Connect](./active-directory-protocols-openid-connect-code.md) 执行身份验证时收到的一种登录安全令牌形式。它以 [JWT](#types-of-tokens) 表示，包含可让用户登录应用的声明。可以适时使用 id\_token 中的声明 - 通常用于显示帐户信息或在应用程序中进行访问控制决策。
 
 Id\_token 已签名，但目前不会加密。应用收到 id\_token 时，必须[验证签名](#validating-tokens)以证明令牌的真实性，并验证令牌中的几个声明来证明其有效性。应用验证的声明根据方案要求而有所不同，但存在一些[常见声明验证](#validating-tokens)，应用必须在每种方案中执行。
 
@@ -43,11 +39,9 @@ Id\_token 已签名，但目前不会加密。应用收到 id\_token 时，必�
 
 #### 示例 id\_token
 
-
 	eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIyZDRkMTFhMi1mODE0LTQ2YTctODkwYS0yNzRhNzJhNzMwOWUiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83ZmU4MTQ0Ny1kYTU3LTQzODUtYmVjYi02ZGU1N2YyMTQ3N2UvIiwiaWF0IjoxMzg4NDQwODYzLCJuYmYiOjEzODg0NDA4NjMsImV4cCI6MTM4ODQ0NDc2MywidmVyIjoiMS4wIiwidGlkIjoiN2ZlODE0NDctZGE1Ny00Mzg1LWJlY2ItNmRlNTdmMjE0NzdlIiwib2lkIjoiNjgzODlhZTItNjJmYS00YjE4LTkxZmUtNTNkZDEwOWQ3NGY1IiwidXBuIjoiZnJhbmttQGNvbnRvc28uY29tIiwidW5pcXVlX25hbWUiOiJmcmFua21AY29udG9zby5jb20iLCJzdWIiOiJKV3ZZZENXUGhobHBTMVpzZjd5WVV4U2hVd3RVbTV5elBtd18talgzZkhZIiwiZmFtaWx5X25hbWUiOiJNaWxsZXIiLCJnaXZlbl9uYW1lIjoiRnJhbmsifQ.
 
-
-> [AZURE.TIP] 练习时，请尝试将示例 id\_token 中的声明粘贴到 [calebb.net](http://jwt.calebb.net) 中进行检查。
+> [!TIP] 练习时，请尝试将示例 id\_token 中的声明粘贴到 [calebb.net](http://jwt.calebb.net) 中进行检查。
 
 #### Id\_tokens 中的声明
 
@@ -91,12 +85,11 @@ Id\_token 已签名，但目前不会加密。应用收到 id\_token 时，必�
 
 使用刷新令牌兑换新的访问令牌时，将在令牌响应中收到新的刷新令牌。你应该保存新颁发的刷新令牌，并替换请求中使用的刷新令牌。这将保证刷新令牌尽可能长期保持有效。
 
-
 ## 验证令牌  <a name="validating-tokens"></a>
 
 目前，客户端应用必须执行的唯一令牌验证就是验证 id\_token。若要验证 id\_token，应用应该验证 id\_token 签名和 id\_token 中的声明。
 
-如果想要了解基本过程，我们提供了库和代码示例用于演示如何轻松处理令牌验证。另外还有多个第三方开放源代码库可用于 JWT 验证，几乎每个平台和语言都至少有一个选择。有关 Azure AD 身份验证库和代码示例的详细信息，请参阅 [Azure AD 身份验证库](/documentation/articles/active-directory-authentication-libraries/)。
+如果想要了解基本过程，我们提供了库和代码示例用于演示如何轻松处理令牌验证。另外还有多个第三方开放源代码库可用于 JWT 验证，几乎每个平台和语言都至少有一个选择。有关 Azure AD 身份验证库和代码示例的详细信息，请参阅 [Azure AD 身份验证库](./active-directory-authentication-libraries.md)。
 
 #### 验证签名
 
@@ -104,13 +97,11 @@ JWT 包含三个段（以 `.` 字符分隔）。第一个段称为**标头**，�
 
 Id\_Token 使用行业标准非对称式加密算法（例如 RSA 256）进行签名。Id\_token 标头包含用于签名令牌的密钥和加密方法的相关信息：
 
-
 	{
 	  "typ": "JWT",
 	  "alg": "RS256",
 	  "x5t": "kriMPdmBvx68skT8-mPAB3BseeA"
 	}
-
 
 `alg` 声明表示用于对令牌进行签名的算法，而 `x5t` 声明表示用于对令牌进行签名的特定公钥。
 
@@ -118,11 +109,9 @@ Id\_Token 使用行业标准非对称式加密算法（例如 RSA 256）进行�
 
 可以使用位于以下位置的 OpenID Connect 元数据文档来获取验证签名所需的签名密钥数据：
 
-
 	https://login.microsoftonline.com/common/.well-known/openid-configuration
 
-
-> [AZURE.TIP] 在浏览器中尝试打开此 URL！
+> [!TIP] 在浏览器中尝试打开此 URL！
 
 此元数据文档是一个 JSON 对象，包含一些有用的信息，例如执行 OpenID Connect 身份验证所需的各种终结点的位置。
 
@@ -297,6 +286,5 @@ Id\_Token 使用行业标准非对称式加密算法（例如 RSA 256）进行�
 
 ## 相关内容
 - 请参阅 Azure AD Graph [策略操作](https://msdn.microsoft.com/zh-cn/library/azure/ad/graph/api/policy-operations)和[策略实体](https://msdn.microsoft.com/zh-cn/library/azure/ad/graph/api/entity-and-complex-type-reference#policy-entity)以了解有关通过 Azure AD Graph API 管理令牌生存期策略的详细信息。
-
 
 <!---HONumber=Mooncake_1031_2016-->

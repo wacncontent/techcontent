@@ -7,7 +7,6 @@
 	services="storage"
 	documentationCenter=""/>  
 
-
 <properties
     pageTitle="使用导入/导出将数据传输到 Blob 存储 | Azure"
     description="了解如何在 Azure 门户预览中创建导入和导出作业，以便将数据传输到 Blob 存储。"
@@ -26,7 +25,6 @@
     ms.date="10/18/2016"
     wacn.date="01/06/2017"
     ms.author="renash" />  
-
 
 # 使用 Azure 导入/导出服务可将数据传输到 Blob 存储中
 
@@ -55,9 +53,7 @@
 
 ### 存储帐户
 
-
-必须拥有 Azure 订阅以及一个或多个存储帐户才能使用导入/导出服务。每个作业只能用于将数据传输到一个存储帐户或者从一个存储帐户传输数据。换言之，一个导入/导出作业不能跨多个存储帐户。有关创建新存储帐户的信息，请参阅[如何创建存储帐户](/documentation/articles/storage-create-storage-account/#create-a-storage-account)。
-
+必须拥有 Azure 订阅以及一个或多个存储帐户才能使用导入/导出服务。每个作业只能用于将数据传输到一个存储帐户或者从一个存储帐户传输数据。换言之，一个导入/导出作业不能跨多个存储帐户。有关创建新存储帐户的信息，请参阅[如何创建存储帐户](./storage-create-storage-account.md#create-a-storage-account)。
 
 ### Blob 类型
 
@@ -78,7 +74,6 @@
 
 可以使用[Azure 门户预览](https://portal.azure.cn/)或 [Azure 存储导入/导出 REST API](https://docs.microsoft.com/zh-cn/rest/api/storageimportexport/) 创建导入或导出作业。
 
-
 ### WAImportExport 工具
 创建**导入**作业的第一步是准备需要通过寄送进行数据导入的驱动器。若要准备驱动器，必须将其连接到本地服务器，然后在本地服务器上运行 WAImportExport 工具。使用此 WAImportExport 工具可以方便地将数据复制到驱动器、使用 BitLocker 加密驱动器上的数据，以及生成驱动器日志文件。
 
@@ -86,17 +81,14 @@
 
 WAImportExport 工具仅兼容 64 位 Windows 操作系统。请参阅[操作系统](#operating-system)部分以了解受支持的特定 OS 版本。
 
-下载最新版本的 [WAImportExport 工具](http://download.microsoft.com/download/3/6/B/36BFF22A-91C3-4DFC-8717-7567D37D64C5/WAImportExport.zip)。有关使用 WAImportExport 工具的详细信息，请参阅 [使用 WAImportExport 工具](/documentation/articles/storage-import-export-tool-how-to/)。
+下载最新版本的 [WAImportExport 工具](http://download.microsoft.com/download/3/6/B/36BFF22A-91C3-4DFC-8717-7567D37D64C5/WAImportExport.zip)。有关使用 WAImportExport 工具的详细信息，请参阅 [使用 WAImportExport 工具](./storage-import-export-tool-how-to.md)。
 
->[AZURE.NOTE]**以前的版本：**可以[下载 WAImportExpot V1](http://download.microsoft.com/download/0/C/D/0CD6ABA7-024F-4202-91A0-CE2656DCE413/WaImportExportV1.zip) 版本的工具，并参考 [WAImportExpot V1 用户指南](/documentation/articles/storage-import-export-tool-how-to-v1/)。WAImportExpot V1 版本的工具支持**在已将数据预先写入磁盘的情况下准备磁盘**。如果唯一可用的密钥是 SAS 密钥，则也需要 WAImportExpot V1 工具。
-
-
+>[!NOTE]**以前的版本：**可以[下载 WAImportExpot V1](http://download.microsoft.com/download/0/C/D/0CD6ABA7-024F-4202-91A0-CE2656DCE413/WaImportExportV1.zip) 版本的工具，并参考 [WAImportExpot V1 用户指南](./storage-import-export-tool-how-to-v1.md)。WAImportExpot V1 版本的工具支持**在已将数据预先写入磁盘的情况下准备磁盘**。如果唯一可用的密钥是 SAS 密钥，则也需要 WAImportExpot V1 工具。
 
 ### 硬盘驱动器
 只支持将 2.5 英寸 SSD 或者 2.5/3.5 英寸 SATA II 或 III 内部硬盘驱动器用于导入/导出服务。可以使用容量最高为 10TB 的硬盘驱动器。对于导入作业，将处理驱动器上的第一个数据卷。该数据卷必须使用 NTFS 进行格式化。将数据复制到硬盘驱动器时，可以使用 2.5 英寸 SSD 或者 2.5/3.5 英寸 SATA II 或 III 连接器直接连接该驱动器，也可以使用外部 2.5 英寸 SSD 或者 2.5/3.5 英寸 SATA II 或 III USB 适配器进行外部连接。
 
-
-> [AZURE.IMPORTANT] 此服务不支持内置 USB 适配器附带的外部硬盘驱动器。此外，不能使用外部 HDD 包装内的磁盘；请勿寄送外部 HDD。
+> [!IMPORTANT] 此服务不支持内置 USB 适配器附带的外部硬盘驱动器。此外，不能使用外部 HDD 包装内的磁盘；请勿寄送外部 HDD。
 
 ### 加密
 
@@ -121,9 +113,6 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 - 中国东部
 - 中国北部
 
-
-
-
 ### 装运
 
 **将驱动器寄送到数据中心：**
@@ -138,9 +127,9 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 
 此外还必须提供有效的中国邮政服务帐号，以便寄回驱动器。如果你已经有了一个快递商帐户号码，请确保其有效。
 
-寄送你的包裹时，必须遵循 [Azure 服务条款](/support/legal/services-terms/)中的条款。
+寄送你的包裹时，必须遵循 [Azure 服务条款](https://www.azure.cn/support/legal/services-terms/)中的条款。
 
-> [AZURE.IMPORTANT] 请注意，你发运的物理介质可能需要穿越国界。你应当负责确保你的物理介质和数据是遵照适用的法律导入和/或导出的。在寄送物理介质之前，请咨询你的顾问以验证你的介质和数据是否可以合法地寄送到所确定的数据中心。这将有助于确保它可以及时到达。
+> [!IMPORTANT] 请注意，你发运的物理介质可能需要穿越国界。你应当负责确保你的物理介质和数据是遵照适用的法律导入和/或导出的。在寄送物理介质之前，请咨询你的顾问以验证你的介质和数据是否可以合法地寄送到所确定的数据中心。这将有助于确保它可以及时到达。
 
 ## Azure 导入/导出服务是如何工作的？
 
@@ -163,7 +152,6 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 - 该中心会使用你的快递商帐户将驱动器寄送到你在导入作业中提供的回寄地址。
 
 	![图 1：导入作业流](./media/storage-import-export-service/importjob.png)
-
 
 ### 关于导出作业
 
@@ -188,9 +176,7 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 
 ![View Job State](./media/storage-import-export-service/jobstate.png)
 
-
 你会看到以下作业状态之一，具体取决于你的驱动器处于哪个处理阶段。
-
 
 |:--- |:--- |
 | Creating | 创建一个作业后，其状态设置为 Creating。当作业处于 Creating 状态时，导入/导出服务假设驱动器尚未寄送到数据中心。作业可保持 Creating 状态最多两周，之后服务会自动将其删除。 |
@@ -204,7 +190,6 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 下表描述了单个驱动器在导入或导出作业中转换时的生命周期。现在，作业中每个驱动器的当前状态会在 Azure 门户预览中显示。下表描述了每个驱动器在作业中可能经历的每种状态。
 
 ![查看驱动器状态](./media/storage-import-export-service/drivestate.png)  
-
 
 | 驱动器状态 | 说明 |
 |:--- |:--- |
@@ -223,7 +208,6 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 | NeverReceived | 标记为 NeverReceived 的驱动器（因为在作业寄送过程中未收到）通过另一次寄送送达。 | 运营团队将驱动器状态转换为 Received。 |
 | 不适用 | 不属于任何作业的驱动器将作为其他作业的一部分送至数据中心。 | 完成与原始包裹关联的作业后，驱动器将标记为额外驱动器并寄回给客户。 |
 
-
 ### 处理作业的时间
 
 处理导入/导出作业的时间各不相同，取决于不同的因素，例如寄送时间、作业类型、要复制的数据的类型和大小，以及所提供磁盘的大小。导入/导出服务没有 SLA。你可以通过 REST API 更密切地跟踪作业进度。在“列出作业”操作中有一个完成百分比参数，该参数指示复制进度。如果你需要估算何时才能完成时间要求紧的导入/导出作业，请联系我们。
@@ -232,7 +216,7 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 
 **驱动器处理费用**
 
-在导入或导出作业的过程中，处理每个驱动器都需要支付驱动器处理费用。请参阅有关 [Azure 导入/导出定价](/pricing/details/storage-import-export/)的详细信息。
+在导入或导出作业的过程中，处理每个驱动器都需要支付驱动器处理费用。请参阅有关 [Azure 导入/导出定价](https://www.azure.cn/pricing/details/storage-import-export/)的详细信息。
 
 **寄送费用**
 
@@ -240,7 +224,7 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 
 **事务费用**
 
-将数据导入 Blob 存储没有事务费用。将数据从 Blob 存储导出时，需支付标准的传出费用。有关事务费用的更多详细信息，请参阅[数据传输定价](/pricing/details/data-transfer/)。
+将数据导入 Blob 存储没有事务费用。将数据从 Blob 存储导出时，需支付标准的传出费用。有关事务费用的更多详细信息，请参阅[数据传输定价](https://www.azure.cn/pricing/details/data-transfer/)。
 
 ##<a name="quick-start"></a> 快速启动
 
@@ -248,15 +232,13 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 
 ## 如何创建导入作业？
 
-
 创建导入作业时，需将数据从硬盘驱动器复制到 Azure 存储帐户，其方法是将一个或多个包含数据的驱动器寄送到指定的数据中心。导入作业会将有关硬盘驱动器、要复制的数据、目标存储帐户和寄送信息的详细信息传至 Azure 导入/导出服务。创建导入作业是一个三步过程。首先，使用 WAImportExport 工具准备驱动器。其次，使用 Azure 门户预览提交导入作业。最后，将驱动器寄送到你在创建作业时获得的寄送地址，并在作业详细信息中更新寄送信息。
 
-> [AZURE.IMPORTANT] 一个存储帐户只能提交一个作业。寄送驱动器时，一个驱动器只能导入一个存储帐户中。例如，假设你希望将数据导入两个存储帐户中，则必须对每个存储帐户使用不同的硬盘驱动器，并针对存储帐户创建不同的作业。
+> [!IMPORTANT] 一个存储帐户只能提交一个作业。寄送驱动器时，一个驱动器只能导入一个存储帐户中。例如，假设你希望将数据导入两个存储帐户中，则必须对每个存储帐户使用不同的硬盘驱动器，并针对存储帐户创建不同的作业。
 
 ### 准备驱动器
 
 使用 Azure 导入/导出服务导入数据时，第一步是通过 WAImportExport 工具准备驱动器。按照以下步骤准备你的驱动器。
-
 
 1. 确定要导入的数据。导入的数据可以是本地服务器或网络共享中的目录和独立文件。
 2. 根据数据总大小确定所需驱动器数目。采购所需数目的 2.5 英寸 SSD 或者 2.5/3.5 英寸 SATA II 或 III 硬盘驱动器。
@@ -268,15 +250,13 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
     
     下面是 dataset CSV 文件的示例：
     
-
 	    BasePath,DstBlobPathOrPrefix,BlobType,Disposition,MetadataFile,PropertiesFile
 	    "F:\50M_original\100M_1.csv.txt","containername/100M_1.csv.txt",BlockBlob,rename,"None",None
 	    "F:\50M_original\","containername/",BlockBlob,rename,"None",None 
 
-   
     在上面的示例中, 100M\_1.csv.txt 将复制到名为“containername”的根容器中。如果名为“containername”的容器不存在，系统会创建一个。50M\_original 下的所有文件和文件夹将以递归方式复制到 containername。文件夹结构保持不变。
 
-    详细了解如何[准备 dataset CSV 文件](/documentation/articles/storage-import-export-tool-preparing-hard-drives-import/#prepare-the-dataset-csv-file)。
+    详细了解如何[准备 dataset CSV 文件](./storage-import-export-tool-preparing-hard-drives-import.md#prepare-the-dataset-csv-file)。
     
     **请记住**：默认情况下，数据将作为块 Blob 导入。可以使用 BlobType 字段值以页 Blob 的方式导入数据。例如，如果你要要导入 VHD 文件，而这些文件需要以磁盘方式装载到 Azure VM 上，则必须以页 Blob 方式导入。
     
@@ -286,65 +266,51 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 
     下面是 driveset CSV 文件的示例：
     
-
 	    DriveLetter,FormatOption,SilentOrPromptOnFormat,Encryption,ExistingBitLockerKey
 	    G,AlreadyFormatted,SilentMode,AlreadyEncrypted,060456-014509-132033-080300-252615-584177-672089-411631 |
 	    H,Format,SilentMode,Encrypt,
 
-
     在上面的示例中，假设附加了两个磁盘，并创建了盘符为 G:\\ 和 H:\\ 的基本 NFTS 卷。工具将格式化并加密托管 H:\\ 的磁盘，但不会格式化并加密托管卷 G: 的磁盘。
 
-    详细了解如何[准备 driveset CSV 文件](/documentation/articles/storage-import-export-tool-preparing-hard-drives-import/#prepare-initialdriveset-or-additionaldriveset-csv-file)。
+    详细了解如何[准备 driveset CSV 文件](./storage-import-export-tool-preparing-hard-drives-import.md#prepare-initialdriveset-or-additionaldriveset-csv-file)。
 
 6. 使用 [WAImportExport 工具](http://download.microsoft.com/download/3/6/B/36BFF22A-91C3-4DFC-8717-7567D37D64C5/WAImportExport.zip) 将数据复制到一个或多个硬盘驱动器。
 7. 可以通过在 drivset CSV 中的 Encryption 字段内指定 “Encrypt”，在硬盘驱动器上启用 BitLocker 加密。也可以手动在硬盘驱动器上启用 BitLocker 加密，然后在运行工具时，在 driveset CSV 文件中指定 “AlreadyEncrypted”并提供密钥。
 
 8. 完成磁盘准备操作以后，请勿修改硬盘驱动器上的数据，也勿修改日志文件。
 
-> [AZURE.IMPORTANT]准备的每个硬盘驱动器都会生成一个日志文件。使用 Azure 门户预览创建导入作业时，必须上传属于该导入作业的驱动器的所有日志文件。不带日志文件的驱动器将得不到处理。
-
+> [!IMPORTANT]准备的每个硬盘驱动器都会生成一个日志文件。使用 Azure 门户预览创建导入作业时，必须上传属于该导入作业的驱动器的所有日志文件。不带日志文件的驱动器将得不到处理。
 
 下面是使用 WAImportExport 工具进行硬盘驱动器准备的命令和示例。
 
 在第一个复制会话中使用新复制会话复制目录和/或文件的 WAImportExport 工具 PrepImport 命令：
 
-
 	WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> [/logdir:<LogDirectory>] [/sk:<StorageAccountKey>] [/silentmode] [/InitialDriveSet:<driveset.csv>] DataSet:<dataset.csv>
-
 
 **示例：**
 
-
 	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#1  /sk:************* /InitialDriveSet:driveset-1.csv /DataSet:dataset-1.csv /logdir:F:\logs
-
 
 若要**添加更多驱动器**，可以创建一个新的 driveset 文件并运行以下命令。如果后续复制会话中的磁盘驱动器与 InitialDriveset .csv 中指定的不同，可以指定一个新的 driveset CSV 文件并将其作为值提供给 “AdditionalDriveSet” 参数。 使用 **同一日志文件**的名称并提供**新的会话 ID**。 AdditionalDriveset CSV 文件的格式与 InitialDriveSet 的格式相同。
 
-
 	WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> /AdditionalDriveSet:<driveset.csv>
-
 
 **示例**
 
 	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#3  /AdditionalDriveSet:driveset-2.csv
 
-
 若要向同一个的 driveset 添加更多数据，后续复制会话可以调用 WAImportExport 工具的 PrepImport 命令来复制其他文件/目录：
 对于 InitialDriveset .csv 文件中为相同硬盘驱动器指定的后续复制会话，请指定**同一日志文件**的名称并提供**新的会话 ID**；不需要提供存储帐户密钥。
 
-
 	WAImportExport PrepImport /j:<JournalFile> /id:<SessionId> /j:<JournalFile> /id:<SessionId> [/logdir:<LogDirectory>] DataSet:<dataset.csv>
-
 
 **示例：**
 
-
 	WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2  /DataSet:dataset-2.csv
 
+若要更详细了解如何使用 WAImportExport 工具，请参阅[为导入作业准备硬盘驱动器](./storage-import-export-tool-preparing-hard-drives-import.md)。
 
-若要更详细了解如何使用 WAImportExport 工具，请参阅[为导入作业准备硬盘驱动器](/documentation/articles/storage-import-export-tool-preparing-hard-drives-import/)。
-
-另请参阅[准备硬盘驱动器进行导入作业的示例工作流](/documentation/articles/storage-import-export-tool-sample-preparing-hard-drives-import-job-workflow/)，以获取更详细的分步说明。
+另请参阅[准备硬盘驱动器进行导入作业的示例工作流](./storage-import-export-tool-sample-preparing-hard-drives-import-job-workflow.md)，以获取更详细的分步说明。
 
 ### 创建导入作业
 
@@ -426,7 +392,7 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
    
     如果作业处于“正在创建”、“正在发运”或“正在传送”状态，则你还可以在向导的第 2 步中更新你的承运人帐号。一旦作业处于“正在打包”状态，你将无法更新该作业的承运人帐号。
    
-	> [AZURE.NOTE] 如果在复制到硬盘时要导出的 Blob 正在使用中，Azure 导入/导出服务将生成该 Blob 的快照，然后复制快照。
+	> [!NOTE] 如果在复制到硬盘时要导出的 Blob 正在使用中，Azure 导入/导出服务将生成该 Blob 的快照，然后复制快照。
 
 7. 可以在 Azure 门户预览中的仪表板上跟踪作业进度。通过“查看作业状态”，了解上一部分中每个作业状态的含义。
 
@@ -435,7 +401,6 @@ Azure 导入/导出服务支持将数据复制到 Azure 存储帐户，以及从
 	![查看导出作业的 BitLocker 密钥](./media/storage-import-export-service/export-job-bitlocker-keys.png)
 
 请查看下面的“常见问题”部分，因为该部分介绍了客户在使用此服务时遇到的最常见问题。
-
 
 ## 常见问题
 
@@ -487,7 +452,6 @@ Azure 数据中心会将不符合支持要求的驱动器返还给你。如果�
 
 准备驱动器时，可以使用 dataset CSV 文件中名为 Disposition:<rename|no-overwrite|overwrite> 的字段指定是否应覆盖或忽略目标文件。默认情况下，该服务会将新文件重命名，而不是覆盖现有 Blob。
 
-
 **WAImportExport 工具是否与 32 位操作系统兼容？** 
 否。WAImportExport 工具仅与 64 位 Windows 操作系统兼容。有关受支持的 OS 版本的完整列表，请参阅[先决条件](#pre-requisites)中的“操作系统”部分。
 
@@ -517,12 +481,11 @@ Azure 数据中心会将不符合支持要求的驱动器返还给你。如果�
 
 **能否使用 Azure 导入/导出服务将我的备份脱机复制到 Azure 备份服务？**
 
-请参阅 [Azure 备份中的脱机备份工作流](/documentation/articles/backup-azure-backup-import-export/)。
+请参阅 [Azure 备份中的脱机备份工作流](../backup/backup-azure-backup-import-export.md)。
 
 ## 另请参阅：
 
-* [设置 WAImportExport 工具](/documentation/articles/storage-import-export-tool-how-to/)
-* [使用 AzCopy 命令行实用程序传输数据](/documentation/articles/storage-use-azcopy/)
-
+* [设置 WAImportExport 工具](./storage-import-export-tool-how-to.md)
+* [使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)
 
 <!---HONumber=Mooncake_0103_2017-->

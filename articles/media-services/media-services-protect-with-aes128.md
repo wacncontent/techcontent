@@ -1,27 +1,27 @@
-<properties
-    pageTitle="使用 AES-128 动态加密和密钥传送服务 | Azure"
-    description="借助 Azure 媒体服务，可传送使用 AES 128 位加密密钥加密的内容。媒体服务还提供密钥传送服务，将加密密钥传送给已授权的用户。本主题说明如何使用 AES-128 动态加密以及如何使用密钥传送服务。"
-    services="media-services"
-    documentationcenter=""
-    author="Juliako"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="4d2c10af-9ee0-408f-899b-33fa4c1d89b9"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/11/2016"
-    wacn.date="01/13/2017"
-    ms.author="juliako" />  
+---
+title: 使用 AES-128 动态加密和密钥传送服务 | Azure
+description: 借助 Azure 媒体服务，可传送使用 AES 128 位加密密钥加密的内容。媒体服务还提供密钥传送服务，将加密密钥传送给已授权的用户。本主题说明如何使用 AES-128 动态加密以及如何使用密钥传送服务。
+services: media-services
+documentationcenter: 
+author: Juliako
+manager: erikre
+editor: 
 
+ms.assetid: 4d2c10af-9ee0-408f-899b-33fa4c1d89b9
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/11/2016
+wacn.date: 01/13/2017
+ms.author: juliako
+---
 
 # 使用 AES-128 动态加密和密钥传送服务
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/media-services-protect-with-aes128/)
+> [!div class="op_single_selector"]
+- [.NET](./media-services-protect-with-aes128.md)
 - [Java](https://github.com/southworkscom/azure-sdk-for-media-services-java-samples)
 - [PHP](https://github.com/Azure/azure-sdk-for-php/tree/master/examples/MediaServices)
 
@@ -29,30 +29,30 @@
 
 借助 Azure 媒体服务，可以传送使用高级加密标准 (AES) 加密的 Http 实时流式处理 (HLS) 和平滑流（使用 128 位加密密钥）。媒体服务还提供密钥传送服务，将加密密钥传送给已授权的用户。如果需要媒体服务来加密资产，则需要将加密密钥与资产相关联，并配置密钥的授权策略。当播放器请求流时，媒体服务将使用指定的密钥通过 AES 加密来动态加密内容。为了解密流，播放器将从密钥传送服务请求密钥。为了确定用户是否有权获取密钥，服务将评估为密钥指定的授权策略。
 
-媒体服务支持通过多种方式对发出密钥请求的用户进行身份验证。内容密钥授权策略可能受到一种或多种授权限制：开放或令牌限制。令牌限制策略必须附带由安全令牌服务 (STS) 颁发的令牌。媒体服务支持采用[简单 Web 令牌](https://msdn.microsoft.com/zh-cn/library/gg185950.aspx#BKMK_2) (SWT) 格式和 [JSON Web 令牌](https://msdn.microsoft.com/zh-cn/library/gg185950.aspx#BKMK_3) (JWT) 格式的令牌。有关详细信息，请参阅[配置内容密钥授权策略](/documentation/articles/media-services-protect-with-aes128/#configure_key_auth_policy)。
+媒体服务支持通过多种方式对发出密钥请求的用户进行身份验证。内容密钥授权策略可能受到一种或多种授权限制：开放或令牌限制。令牌限制策略必须附带由安全令牌服务 (STS) 颁发的令牌。媒体服务支持采用[简单 Web 令牌](https://msdn.microsoft.com/zh-cn/library/gg185950.aspx#BKMK_2) (SWT) 格式和 [JSON Web 令牌](https://msdn.microsoft.com/zh-cn/library/gg185950.aspx#BKMK_3) (JWT) 格式的令牌。有关详细信息，请参阅[配置内容密钥授权策略](./media-services-protect-with-aes128.md#configure_key_auth_policy)。
 
 为了充分利用动态加密，资产必须包含一组多码率 MP4 文件或多码率平滑流源文件。还需要为资产配置传送策略（在本主题后面部分介绍）。然后，根据流式处理 URL 中指定的格式，按需流式处理服务器将确保使用选定的协议来传送流。因此，只需以单一存储格式存储文件并为其付费，然后媒体服务服务就会基于客户端的请求构建并提供相应响应。
 
 本主题适合开发受保护媒体传送应用程序的开发人员。本主题介绍如何使用授权策略来配置密钥传送服务，确保只有经过授权的客户端才能接收加密密钥。此外还将介绍如何使用动态加密。
 
->[AZURE.NOTE]若要开始使用动态加密，必须首先获取至少一个缩放单位（也称为流式处理单位）。有关详细信息，请参阅[如何缩放媒体服务](/documentation/articles/media-services-manage-origins/#scale_streaming_endpoints)。
+>[!NOTE]若要开始使用动态加密，必须首先获取至少一个缩放单位（也称为流式处理单位）。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
 ## AES-128 动态加密和密钥传送服务工作流
 下面是使用 AES 加密资产时需要执行的常规步骤，这些步骤使用媒体服务密钥传送服务，也使用动态加密。
 
-1. [创建资产并将文件上传到资产](/documentation/articles/media-services-protect-with-aes128/#create_asset)。
-1. [将包含文件的资产编码为自适应比特率 MP4 集](/documentation/articles/media-services-protect-with-aes128/#encode_asset)。
-1. [创建内容密钥并将其与编码资产相关联](/documentation/articles/media-services-protect-with-aes128/#create_contentkey)。在媒体服务中，内容密钥包含资产的加密密钥。
-1. [配置内容密钥授权策略](/documentation/articles/media-services-protect-with-aes128/#configure_key_auth_policy)。必须配置内容密钥授权策略，并且客户端必须遵守该策略，才能将内容密钥传送到客户端。
-1. [为资产配置传送策略](/documentation/articles/media-services-protect-with-aes128/#configure_asset_delivery_policy)。传送策略配置包括：密钥获取 URL 和初始化向量 \(IV\)（进行加密和解密时，AES 128 要求提供同一个初始化向量）、传送协议（例如 MPEG DASH、HLS、平滑流式处理或全部）、动态加密类型（例如信封或无动态加密）。
+1. [创建资产并将文件上传到资产](./media-services-protect-with-aes128.md#create_asset)。
+1. [将包含文件的资产编码为自适应比特率 MP4 集](./media-services-protect-with-aes128.md#encode_asset)。
+1. [创建内容密钥并将其与编码资产相关联](./media-services-protect-with-aes128.md#create_contentkey)。在媒体服务中，内容密钥包含资产的加密密钥。
+1. [配置内容密钥授权策略](./media-services-protect-with-aes128.md#configure_key_auth_policy)。必须配置内容密钥授权策略，并且客户端必须遵守该策略，才能将内容密钥传送到客户端。
+1. [为资产配置传送策略](./media-services-protect-with-aes128.md#configure_asset_delivery_policy)。传送策略配置包括：密钥获取 URL 和初始化向量 \(IV\)（进行加密和解密时，AES 128 要求提供同一个初始化向量）、传送协议（例如 MPEG DASH、HLS、平滑流式处理或全部）、动态加密类型（例如信封或无动态加密）。
 
 可将不同的策略应用到同一资产上的每个协议。例如，可以将 PlayReady 加密应用到平滑流/DASH，并将 AES 信封应用到 HLS。将阻止流式处理传送策略中未定义的任何协议（例如，添加仅将 HLS 指定为协议的单个策略）。不定义任何传送策略是例外情况。此时，将允许所有明文形式的协议。
 
-1. [创建 OnDemand 定位符](/documentation/articles/media-services-protect-with-aes128/#create_locator)以获取流 URL。
+1. [创建 OnDemand 定位符](./media-services-protect-with-aes128.md#create_locator)以获取流 URL。
 
-本主题还说明了[客户端应用程序如何从密钥传送服务请求密钥](/documentation/articles/media-services-protect-with-aes128/#client_request)。
+本主题还说明了[客户端应用程序如何从密钥传送服务请求密钥](./media-services-protect-with-aes128.md#client_request)。
 
-你可以在主题末尾找到完整的 .NET [示例](/documentation/articles/media-services-protect-with-aes128/#example)。
+你可以在主题末尾找到完整的 .NET [示例](./media-services-protect-with-aes128.md#example)。
 
 下图演示了上述工作流。在图中，使用令牌进行了身份验证。
 
@@ -68,25 +68,25 @@
 
 为了对视频进行管理、编码和流式处理，必须首先将内容上传到 Azure 媒体服务中。完成上传后，相关内容即安全地存储在云中供后续处理和流式处理。
 
-有关详细信息，请参阅[将文件上载到媒体服务帐户](/documentation/articles/media-services-dotnet-upload-files/)。
+有关详细信息，请参阅[将文件上载到媒体服务帐户](./media-services-dotnet-upload-files.md)。
 
 ##<a id="encode_asset"></a>将包含文件的资产编码为自适应比特率 MP4 集
 
-使用动态加密时，只需创建包含一组多码率 MP4 文件或多码率平滑流源文件的资产。然后，点播流服务器会确保以选定的协议按清单或分段请求中的指定格式接收流。因此，只需以单一存储格式存储文件并为其付费，然后媒体服务服务就会基于客户端的请求构建并提供相应响应。有关详细信息，请参阅[动态打包概述](/documentation/articles/media-services-dynamic-packaging-overview/)主题。
+使用动态加密时，只需创建包含一组多码率 MP4 文件或多码率平滑流源文件的资产。然后，点播流服务器会确保以选定的协议按清单或分段请求中的指定格式接收流。因此，只需以单一存储格式存储文件并为其付费，然后媒体服务服务就会基于客户端的请求构建并提供相应响应。有关详细信息，请参阅[动态打包概述](./media-services-dynamic-packaging-overview.md)主题。
 
-有关如何编码的说明，请参阅[如何使用 Media Encoder Standard 对资产进行编码](/documentation/articles/media-services-dotnet-encode-with-media-encoder-standard/)。
+有关如何编码的说明，请参阅[如何使用 Media Encoder Standard 对资产进行编码](./media-services-dotnet-encode-with-media-encoder-standard.md)。
 
 ##<a id="create_contentkey"></a>创建内容密钥并将其与编码资产相关联
 
 在媒体服务中，内容密钥包含用于加密资产的密钥。
 
-有关详细信息，请参阅[创建内容密钥](/documentation/articles/media-services-dotnet-create-contentkey/)。
+有关详细信息，请参阅[创建内容密钥](./media-services-dotnet-create-contentkey.md)。
 
 ##<a id="configure_key_auth_policy"></a>配置内容密钥授权策略
 
 媒体服务支持通过多种方式对发出密钥请求的用户进行身份验证。必须配置内容密钥授权策略，并且客户端（播放器）必须遵守该策略，才能将密钥传送到客户端。内容密钥授权策略可能受到一种或多种授权限制：开放、令牌限制或 IP 限制。
 
-有关详细信息，请参阅[配置内容密钥授权策略](/documentation/articles/media-services-dotnet-configure-content-key-auth-policy/)。
+有关详细信息，请参阅[配置内容密钥授权策略](./media-services-dotnet-configure-content-key-auth-policy.md)。
 
 ##<a id="configure_asset_delivery_policy"></a>配置资产传送策略 
 
@@ -97,15 +97,15 @@
 * 资产传送协议（例如 MPEG DASH、HLS、平滑流式处理或全部）。
 * 动态加密类型（例如 AES 信封）或无动态加密。
 
-有关详细信息，请参阅[配置资产传送策略](/documentation/articles/media-services-rest-configure-asset-delivery-policy/)。
+有关详细信息，请参阅[配置资产传送策略](./media-services-rest-configure-asset-delivery-policy.md)。
 
 ##<a id="create_locator"></a>创建 OnDemand 流定位符以获取流 URL
 
 需要为用户提供平滑流、DASH 或 HLS 的流式处理 URL。
 
->[AZURE.NOTE]如果添加或更新资产的传送策略，则必须删除现有定位符（如果有）并创建新定位符。
+>[!NOTE]如果添加或更新资产的传送策略，则必须删除现有定位符（如果有）并创建新定位符。
 
-有关如何发布资产和生成流 URL 的说明，请参阅[生成流 URL](/documentation/articles/media-services-deliver-streaming-content/)。
+有关如何发布资产和生成流 URL 的说明，请参阅[生成流 URL](./media-services-deliver-streaming-content.md)。
 
 ##获取测试令牌
 
@@ -221,7 +221,6 @@
 2. 使用 NuGet 安装和添加 Azure 媒体服务.NET SDK 扩展。安装此包也会安装适用于 .NET 的媒体服务 SDK 并添加所有其他必需的依赖项。
 3. 添加包含帐户名称和密钥信息的配置文件：
 
-	
 		<?xml version="1.0" encoding="utf-8"?>
 		<configuration>
 		    <startup> 
@@ -241,7 +240,6 @@
 	
 	请务必将变量更新为指向输入文件所在的文件夹。
 			
-		
 		using System;
 		using System.Collections.Generic;
 		using System.Configuration;
@@ -295,7 +293,6 @@
 		
 		        private static readonly string _singleMP4File =
 		            Path.Combine(_mediaFiles, @"BigBuckBunny.mp4");
-		
 		
 		        static void Main(string[] args)
 		        {

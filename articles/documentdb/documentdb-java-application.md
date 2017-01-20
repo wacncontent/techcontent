@@ -1,31 +1,31 @@
-<properties
-    pageTitle="使用 DocumentDB 的 Java 应用程序开发教程 | Azure"
-    description="此 Java Web 应用程序教程演示了如何使用 Azure DocumentDB 服务存储和访问托管在 Azure 网站上的 Java 应用程序中的数据。"
-    keywords="应用程序开发, 数据库教程, Java 应用程序, Java Web 应用程序教程, documentdb, azure, Azure"
-    services="documentdb"
-    documentationcenter="java"
-    author="dennyglee"
-    manager="jhubbard"
-    editor="mimig" />  
+---
+title: 使用 DocumentDB 的 Java 应用程序开发教程 | Azure
+description: 此 Java Web 应用程序教程演示了如何使用 Azure DocumentDB 服务存储和访问托管在 Azure 网站上的 Java 应用程序中的数据。
+keywords: 应用程序开发, 数据库教程, Java 应用程序, Java Web 应用程序教程, documentdb, azure, Azure
+services: documentdb
+documentationcenter: java
+author: dennyglee
+manager: jhubbard
+editor: mimig
 
-<tags
-    ms.assetid="0867a4a2-4bf5-4898-a1f4-44e3868f8725"
-    ms.service="documentdb"
-    ms.devlang="java"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="data-services"
-    ms.date="11/16/2016"
-    wacn.date="12/27/2016"
-    ms.author="denlee" />
+ms.assetid: 0867a4a2-4bf5-4898-a1f4-44e3868f8725
+ms.service: documentdb
+ms.devlang: java
+ms.topic: hero-article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 11/16/2016
+wacn.date: 12/27/2016
+ms.author: denlee
+---
 
 # 使用 DocumentDB 生成一个 Java Web 应用程序
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/documentdb-dotnet-application/)
-- [Node.js](/documentation/articles/documentdb-nodejs-application/)
-- [Java](/documentation/articles/documentdb-java-application/)
-- [Python](/documentation/articles/documentdb-python-application/)
+> [!div class="op_single_selector"]
+- [.NET](./documentdb-dotnet-application.md)
+- [Node.js](./documentdb-nodejs-application.md)
+- [Java](./documentdb-java-application.md)
+- [Python](./documentdb-python-application.md)
 
 此 Java Web 应用程序教程演示了如何使用 [Azure DocumentDB](https://portal.azure.cn/#gallery/Microsoft.DocumentDB) 服务存储和访问托管在 Azure 网站上的 Java 应用程序中的数据。本主题介绍以下内容：
 
@@ -36,28 +36,28 @@
 
 ![我的 ToDo 列表 Java 应用程序](./media/documentdb-java-application/image1.png)
 
-> [AZURE.TIP] 此应用程序开发教程假定你之前有使用 Java 的经验。如果你不熟悉 Java 或[必备工具](#Prerequisites)，我们建议从 GitHub 下载完整的 [todo](https://github.com/Azure-Samples/documentdb-java-todo-app) 项目，并按照[本文末尾的说明](#GetProject)构建应用程序。构建之后，你可以回顾本文以深入了解项目上下文中的代码。
+> [!TIP] 此应用程序开发教程假定你之前有使用 Java 的经验。如果你不熟悉 Java 或[必备工具](#Prerequisites)，我们建议从 GitHub 下载完整的 [todo](https://github.com/Azure-Samples/documentdb-java-todo-app) 项目，并按照[本文末尾的说明](#GetProject)构建应用程序。构建之后，你可以回顾本文以深入了解项目上下文中的代码。
 
 ## <a id="Prerequisites"></a>此 Java Web 应用程序教程的先决条件
 在开始本应用程序开发教程前，你必须具有：
 
-- 有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](/pricing/1rmb-trial/)。
+- 有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
     或
 
-    在本地安装 [Azure DocumentDB 模拟器](/documentation/articles/documentdb-nosql-local-emulator/)。
+    在本地安装 [Azure DocumentDB 模拟器](./documentdb-nosql-local-emulator.md)。
 - [Java 开发工具包 (JDK) 7+](http://www.oracle.com/technetwork/java/javase/downloads/index.html)。
 - [Eclipse IDE for Java EE Developers。](http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/lunasr1)
-- [已启用 Java 运行时环境（例如 Tomcat 或 Jetty）的 Azure 网站。](/documentation/articles/web-sites-java-get-started/)
+- [已启用 Java 运行时环境（例如 Tomcat 或 Jetty）的 Azure 网站。](../app-service-web/web-sites-java-get-started.md)
 
 如果你是首次安装这些工具，那么你可以参考 coreservlets.com 网站的 [教程：安装 TomCat7 并将其与 Eclipse 一起使用](http://www.coreservlets.com/Apache-Tomcat-Tutorial/tomcat-7-with-eclipse.html) 文章的 Quick Start 部分提供的安装过程演练。
 
 ## <a id="CreateDB"></a>步骤 1：创建 DocumentDB 数据库帐户
 让我们首先创建 DocumentDB 帐户。如果已有帐户或者在此教程中使用 DocumentDB 模拟器，则可以跳到[步骤 2：创建 Java JSP 应用程序](#CreateJSP)。
 
-[AZURE.INCLUDE [documentdb-create-dbaccount](../../includes/documentdb-create-dbaccount.md)]
+[!INCLUDE [documentdb-create-dbaccount](../../includes/documentdb-create-dbaccount.md)]
 
-[AZURE.INCLUDE [documentdb-keys](../../includes/documentdb-keys.md)]
+[!INCLUDE [documentdb-keys](../../includes/documentdb-keys.md)]
 
 ## <a id="CreateJSP"></a>步骤 2：创建 Java JSP 应用程序
 若要创建 JSP 应用程序，请执行以下步骤：
@@ -722,7 +722,7 @@
    - 在“Web 项目”框中，输入 azure-documentdb-java-sample。
    - 在“目标”框中，选择一个目标以保存 WAR 文件。
    - 单击“完成”。
-3. 现在你已经具有 WAR 文件，只需将它上载到 Azure 网站的 **webapps** 目录。有关上载此文件的说明，请参阅 [Adding an application to your Java website on Azure](/documentation/articles/web-sites-java-add-app/)（将应用程序添加到 Azure 上的 Java 网站）。
+3. 现在你已经具有 WAR 文件，只需将它上载到 Azure 网站的 **webapps** 目录。有关上载此文件的说明，请参阅 [Adding an application to your Java website on Azure](../app-service-web/web-sites-java-add-app.md)（将应用程序添加到 Azure 上的 Java 网站）。
    
     将 WAR 文件上载到 webapps 目录之后，运行时环境将检测到你已经添加了此文件，并将自动加载它。
 4. 若要查看你已完成的产品，请导航到 http://YOUR\_SITE\_NAME.chinacloudsites.cn/azure-documentdb-java-sample/ 然后开始添加你的任务！

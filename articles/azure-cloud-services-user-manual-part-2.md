@@ -1,24 +1,22 @@
-<properties
-	pageTitle="Azure 云服务操作手册 - 第二部分 | Azure"
-	description="Azure 云服务操作手册 - 第二部分 | Azure"
-	services=""
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure 云服务操作手册 - 第二部分 | Azure
+description: Azure 云服务操作手册 - 第二部分 | Azure
+services: 
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="cloud-services"
-	ms.date=""
-	wacn.date="12/15/2016"/>
-
-
+ms.service: cloud-services
+ms.date: 
+wacn.date: 12/15/2016
+---
 
 #Azure 云服务操作手册
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-[Azure 云服务操作手册 - 第一部分](/documentation/articles/azure-cloud-services-user-manual-part-1/)
+[Azure 云服务操作手册 - 第一部分](./azure-cloud-services-user-manual-part-1.md)
 
 ##<a id="azure-cloud-service-get-started"></a>2.	着手创建 Azure 云服务  
 
@@ -28,14 +26,13 @@
 
 如果一个企业的 IT 部门、销售部门、市场部门均使用 Azure，并且需要根据不同部门的 Azure 实际使用量进行内部成本核算，就要合理规划三种不同的 Azure 订阅。创建 Azure IaaS 相关资源时，将这些资源创建在不同的订阅下。
 
-具体请参考 [Azure 企业门户管理手册](/documentation/articles/azure-ea-portal-user-manual/)
+具体请参考 [Azure 企业门户管理手册](./azure-ea-portal-user-manual.md)
 
 ###<a id="azure-subscription-choose"></a>2.2 选择订阅  
 
 登陆 Azure [管理门户](http://manage.windowsazure.cn)，输入账户和密码。点击右上角的订阅按钮，如下图:  
 
 ![登陆][6]
-
 
 ###<a id="azure-emulator"></a>2.3 Azure Emulator 模拟器  
 
@@ -73,7 +70,7 @@
 2. 只有 Worker Role，没有 Web Role；  
 3. 既有 Web Role，又有 Worker Role。
 
-> [AZURE.NOTE] 上图中的 Worker Role 分为三类 (Worker Role, Cache Worker Role 和 Worker Role with Service Bus Queue)。本文只介绍 Worker Role。
+> [!NOTE] 上图中的 Worker Role 分为三类 (Worker Role, Cache Worker Role 和 Worker Role with Service Bus Queue)。本文只介绍 Worker Role。
 
 为什么 Azure 有 Web Role / Worker Role？它的好处在哪里？接下来举例说明。
 
@@ -126,7 +123,6 @@
 
 	![界面][11]
 
-
 4. 点击上图的 OK 按钮，依次添加 ASP.NET Web Role 和 Worker Role；  
 
 	![添加][12]
@@ -142,8 +138,7 @@
 
 	Azure Cache Worker Role 功能会在 2016 年 11 月 30 日下线。 
 
-	如果用户想使用 Cache 缓存服务，请使用 [Azure Redis 缓存](/documentation/services/redis-cache/)。
-
+	如果用户想使用 Cache 缓存服务，请使用 [Azure Redis 缓存](./redis-cache/index.md/)。
 
 5. 然后可以根据需求，选择相应的 ASP.NET 模板。这里选择 Web Forms，如下图：  
 
@@ -169,7 +164,6 @@ Azure 云服务的项目结构如下图所示：
 2. 该云服务包含 2 个 Role，分别是 Web Role 和 Worker Role；  
 3. 该云服务包含了 2 个配置文件(CSCFG, 云服务 Configuration)，文件名分别是 Cloud 和 Local；  
 4. 该云服务包含了 1 个定义文件(CSDEF, 云服务 Definition)。
-
 
 ####<a id="azure-cloud-service-web-role"></a>2.6.2 Web Role
 
@@ -273,7 +267,7 @@ csdef 文件 — 全称是云服务 Definition，定义了云服务的参数，�
 4. Enable Diagnostics — 表示在 Azure 云服务 Web Role 启用诊断功能，可以点击 Configure 按钮，设置需要诊断的具体参数；  
 5. Specify the storage account credentials for the Diagnostics result — 表示需要把诊断的结果数据，保存到 Azure 表存储中。这里需要配置 Azure 存储的连接字符串。  
 
-	> [AZURE.NOTE] Azure 云服务背后运行的是非持久化虚拟机，任何保存在非持久化虚拟机本地磁盘的文件都会有丢失风险，所以需要把诊断数据保存到 Azure 表存储中。  
+	> [!NOTE] Azure 云服务背后运行的是非持久化虚拟机，任何保存在非持久化虚拟机本地磁盘的文件都会有丢失风险，所以需要把诊断数据保存到 Azure 表存储中。  
 
 6. 以上图为例，把 Web Role 横向扩展为 10 台，每台计算节点的 CPU 内存为 2 Core/3.5 GB (A 系列)。如果是 D 系列虚拟机，显示如下： 
 
@@ -324,7 +318,7 @@ csdef 文件 — 全称是云服务 Definition，定义了云服务的参数，�
 
 该配置项供 Azure Cache Worker Role 使用，但是 Azure Cache Worker Role 功能会在 2016 年 11 月 30 日下线。
 
-如果用户想使用 Cache 缓存服务，请使用 Azure Redis 缓存，请参考[此处](/home/features/redis-cache/)。  
+如果用户想使用 Cache 缓存服务，请使用 Azure Redis 缓存，请参考[此处](https://www.azure.cn/home/features/redis-cache/)。  
 
 #####<a id="azure-cloud-service-config-web-role-look-back"></a>2.8.1.7 回顾  
 
@@ -364,7 +358,6 @@ csdef 文件 — 全称是云服务 Definition，定义了云服务的参数，�
 5. Specify the storage account credentials for the Diagnostics result — 表示需要把诊断的结果数据保存到 Azure 表存储中，这里需要配置 Azure 存储的连接字符串。  
 
     > [ 注意事项 ] Azure 云服务背后运行的是非持久化虚拟机，任何保存在非持久化虚拟机本地磁盘的文件都会有丢失风险，所以需要把诊断数据保存到 Azure 表存储中。  
-
 
 6. 以上图为例，把 Worker Role 横向扩展为 10 台，每台计算节点的 CPU 内存为 2 Core/3.5 GB (A 系列)。如果是 D 系列虚拟机，显示如下：  
 
@@ -408,7 +401,7 @@ csdef 文件 — 全称是云服务 Definition，定义了云服务的参数，�
 
 该配置项供 Azure Cache Worker Role 使用，但是 Azure Cache Worker Role 功能会在 2016 年 11 月 30 日下线。
 
-如果用户想使用 Cache 缓存服务，请参考 [Azure Redis 缓存](/home/features/redis-cache/)。  
+如果用户想使用 Cache 缓存服务，请参考 [Azure Redis 缓存](https://www.azure.cn/home/features/redis-cache/)。  
 
 ######<a id="azure-cloud-service-config-worker-role-look-back"></a>2.8.2.7 回顾  
 
@@ -629,7 +622,7 @@ csdef 文件 — 全称是云服务 Definition，定义了云服务的参数，�
 
 通过 Visual Studio 发布云服务，需要借助 Azure PowerShell 下载发布凭据 (publish certification)。
 
-1.  首先下载 [Azure PowerShell](/documentation/articles/powershell-install-configure/), 选择命令行工具，点击安装。如下图：  
+1.  首先下载 [Azure PowerShell](./powershell-install-configure.md), 选择命令行工具，点击安装。如下图：  
 
     ![Azure PowerShell][55]
 
@@ -868,7 +861,7 @@ Azure 关闭 Role Instance 时，会触发 Stopping 事件，并调用 Role 的 
     3. Endpoint — 配置了打开的端口，和端口映射，类似 Azure Virtual Machine 的 Public Port 和 Private Port；  
     4. Local Storage — 使用默认的设置即可；  
     5. Certificates — 设置 HTTPS 访问需要的证书；  
-    6. Caching — 使用默认的设置，如果客户想使用 Cache 缓存服务，请使用 [Azure Redis 缓存](/home/features/redis-cache/)。  
+    6. Caching — 使用默认的设置，如果客户想使用 Cache 缓存服务，请使用 [Azure Redis 缓存](https://www.azure.cn/home/features/redis-cache/)。  
 6. 还配置了 Worker Role 的相关参数。
 
 ##<a id="developer-java"></a>3.Java 开发者必读
@@ -1027,8 +1020,6 @@ Azure Project 会根据 Web 服务器的操作系统的版本来注册不同版�
 
 9. 修改 ServiceDefinition.csdef，在 ServiceDefinition 节点里添加 Startup 任务。
 
-
-
 	![Copy Always][102]
 
 	其中，commandLine 指向我们写好的 cmd 文件。需要注意的是，这个脚本必须是以 ANSI 格式编码的。
@@ -1132,7 +1123,6 @@ Azure Project 会根据 Web 服务器的操作系统的版本来注册不同版�
 
 3. 修改 public override bool OnStart()方法（位于 WebRole.cs），调用 Microsoft.Web.Administration 命名空间下面的操作设置 IIS。参考以下示例代码（Cloud Service IIS 站点的名称格式为：RoleEnvironment.CurrentRoleInstance.Id + "_Web"）：
 
-
 		using (ServerManager serverManager = new ServerManager())
       		{
           		var siteName = RoleEnvironment.CurrentRoleInstance.Id + "_Web";
@@ -1200,7 +1190,6 @@ AzCopy 命令行工具，是经过优化的、高性能 Azure Storage 管理工�
 
 上面介绍的 AzCopy 毕竟是命令行工具，如果对命令行工具不熟悉的话，可以使用 BlobBrowser。
 
-
 BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令行工具。
 
 安装完 BlobBrowser 之后，可以在界面上进行配置。如下图：
@@ -1223,12 +1212,9 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 
 注意，国内由世纪互联运维的 Azure，需要在上图中勾选 Use China Endpoint。
 
- 
-
 登录完毕后，UI 结构如下，左侧为本地文件目录，右侧为 Azure Storage Container。
 
 ![Copy Always][120]
-
 
 点击上图中的 Upload 就可以上传一个文件或者文件夹。
 
@@ -1316,11 +1302,9 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 
 10. 设置完毕后，用 VS2013 发布 Cloud Service；
 
-
 11. 可以通过 https://leissl.chinacloudapp.cn:8080/ 来访问发布成功的应用程序。
 
 	![Copy Always][133]
-
 
 ###<a id="azure-cloud-service-enhanced-content-internal-public-ip"></a>4.9 固定云服务内网 IP 和公网 IP
 ####4.9.1 管理 Virtual IP Address(公网 IP 地址)
@@ -1576,7 +1560,6 @@ Web Role 已经加入了 Web-Subnet 子网。
 	在 Worker Role 的配置中，设置 Instance count 为 3
 
 	![Copy Always][143]
-
 
 这种架构就好比一个餐厅，里面有 10 个服务员( Web Role )和 3 个厨师( Worker Role )。
 

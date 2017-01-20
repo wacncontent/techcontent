@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure IaaS 用户手册 - 第一部分 | Azure"
-	description="详细介绍如何创建和管理 Azure 虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure IaaS 用户手册 - 第一部分 | Azure
+description: 详细介绍如何创建和管理 Azure 虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.date=""
-	wacn.date="09/30/2016"/>
+ms.service: virtual-machines-windows
+ms.date: 
+wacn.date: 09/30/2016
+---
 
 # Azure IaaS 用户手册 - 第一部分
 
-- [Azure IaaS 用户手册 - 第二部分](/documentation/articles/azure-Iaas-user-manual-part2/)
-- [Azure IaaS 用户手册 - 第三部分](/documentation/articles/azure-Iaas-user-manual-part3/)
-
+- [Azure IaaS 用户手册 - 第二部分](./azure-Iaas-user-manual-part2.md)
+- [Azure IaaS 用户手册 - 第三部分](./azure-Iaas-user-manual-part3.md)
 
 ##<a name="section_3"></a> 1.	Azure IaaS 相关技术
 1.	**Azure 底层是否由 System Center 和Hyper-V 构成?**
@@ -85,7 +84,6 @@
 	以下是虚拟机可用性集的截图：
 	
 	![availability_set3](./media/azure-Iaas-user-manual-part1/availability_set3.png)
-
 
 7.	**Azure 如何保证 CPU、内存、硬盘的性能?**
 
@@ -286,7 +284,6 @@ Worker Role 将数据从 Queue 中读取，可以在后端处理复杂的业务�
 
 可以看到，Azure Storage Queue 是前端业务逻辑和后端业务处理的桥梁。
 
-
 #####<a name="section_4_3_2_3"></a> 2.3.2.3 表
 这里的 Azure 存储表是非关系型数据表，不能与 SQL Server 的表相混淆。用户可认为 Azure 存储表类似 NoSQL。
 
@@ -315,7 +312,6 @@ Azure File 有以下几个特点：
 　　3.基于 SMB2.1 协议，可以被 Windows 和 Linux 同时使用；
 
 　　4.可以通过 REST API 访问。
-
 
 ###<a name="section_4_4"></a> 2.4 Azure 虚拟机
 ####<a name="section_4_4_1"></a> 2.4.1 Azure 虚拟机操作系统
@@ -481,7 +477,6 @@ D 系列虚拟机的类型如下：
 </tbody>
 </table>
 
-
 #####<a name="section_4_4_2_4"></a> 2.4.2.4 修改 Azure 虚拟机配置
 用户可以根据实际需求，设置 Azure 虚拟机的配置，比如对于 Web Server 设置为 A7(8Core/56GB)；MySQL VM 设置为 DS14 VM，本地的 SSD 磁盘吞吐量更高。
 
@@ -489,7 +484,7 @@ D 系列虚拟机的类型如下：
 
 等待项目上线以后，如果业务需求并没有预期的那么高，可以将单台 Azure VM 的配置向下调整。这样每台 Azure VM 的每分钟单价会更加便宜，价格是动态调整的。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > Azure 数据中心的建设是有先后顺序的，最早落地的是 A 系列的虚拟机，然后是 D 系列和 DS 系列的虚拟机。一般情况下，客户在修改虚拟机配置大小的时候，会出现以下情况：
 
 > - 已经创建的 A 系列的虚拟机，无法升级到 D 系列的虚拟机
@@ -517,7 +512,7 @@ D 系列虚拟机的类型如下：
 
 ###<a name="section_4_5"></a> 2.5 Azure 成本分析
 
-除了在 [Azure 中国官网](https://www.azure.cn/)上直接购买[预付费产品](/pricing/pia/)外，我们还有面向企业级的销售方式，需要客户预付费人民币 15 万元 (不含税) 。**这并不是指客户预付费后，可以任意使用 Azure 云计算平台上的任意资源。**
+除了在 [Azure 中国官网](https://www.azure.cn/)上直接购买[预付费产品](https://www.azure.cn/pricing/pia/)外，我们还有面向企业级的销售方式，需要客户预付费人民币 15 万元 (不含税) 。**这并不是指客户预付费后，可以任意使用 Azure 云计算平台上的任意资源。**
 
 例如，客户购买 Azure 服务，类似于购买了电话费套餐。在承诺每年最低消费 15 万元的基础上，根据用户使用 Azure 不同服务的情况（比如话费按分钟计费，流量按 GB 收费，短信按每条收费等），从客户预付的 15 万元里进行扣费。
 

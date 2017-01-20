@@ -1,22 +1,21 @@
-<properties
-	pageTitle="如何使用 Azure 经典管理门户缩放媒体处理"
-	description="了解如何通过指定要为帐户预配的“按需流式处理保留单元”和“编码保留单元”数，缩放媒体服务。"
-	services="media-services"
-	documentationCenter=""
-	authors="milangada"
-	manager="erikre"
-	editor=""/>
+---
+title: 如何使用 Azure 经典管理门户缩放媒体处理
+description: 了解如何通过指定要为帐户预配的“按需流式处理保留单元”和“编码保留单元”数，缩放媒体服务。
+services: media-services
+documentationCenter: 
+authors: milangada
+manager: erikre
+editor: 
 
-<tags
-	ms.service="media-services"
-	ms.workload="media"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/15/2016"
-	wacn.date="12/27/2016"
-	ms.author="juliako;milanga"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/15/2016
+wacn.date: 12/27/2016
+ms.author: juliako;milanga
+---
 
 # 如何使用 Azure 经典管理门户缩放媒体处理
 
@@ -24,9 +23,9 @@
 
 此页概述了如何缩放媒体处理，并说明了如何使用 Azure 经典管理门户来完成它。还可以通过下面的其他技术来完成此任务：
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/media-services-dotnet-encoding-units/)
-- [门户](/documentation/articles/media-services-portal-encoding-units/)
+> [!div class="op_single_selector"]
+- [.NET](./media-services-dotnet-encoding-units.md)
+- [门户](./media-services-portal-encoding-units.md)
 - [REST](https://docs.microsoft.com/zh-cn/rest/api/media/operations/encodingreservedunittype)
 - [Java](https://github.com/southworkscom/azure-sdk-for-media-services-java-samples)
 - [PHP](https://github.com/Azure/azure-sdk-for-php/tree/master/examples/MediaServices)
@@ -48,13 +47,11 @@
 
 ##注意事项
 
->[AZURE.IMPORTANT] 请注意以下事项：
+>[!IMPORTANT] 请注意以下事项：
 
 - 保留单元可用于并行化所有媒体处理，其中包括使用 Azure Media Indexer 的索引编制作业。但是，与编码不同，使用更快的保留单元并不会加快索引编制作业的处理速度。
 
 - 如果使用共享的池，即没有任何保留单元，编码任务将具有与 S1 RU 相同的性能。但是，任务在排队状态下花费的时间可能没有上限，并且在任何给定的时间内，最多会运行一项任务。
-
-
 
 - 为 24 小时时间段指定的最大单位数将用于计算成本。
 
@@ -70,21 +67,14 @@
 
 	若要更改所选保留单元类型的保留单元数，请使用“编码”滑块。
 
-
 	![“处理器”页](./media/media-services-portal-encoding-units/media-services-encoding-scale.png)
 
 3. 按“保存”按钮保存更改。
 
 	按“保存”后，会立即分配新的保留单元。
  
-
 ##配额和限制
 
-有关配额和限制以及如何在线申请支持创建工单的信息，请参阅[配额和限制](/documentation/articles/media-services-quotas-and-limitations/)。
-
-
-
-
- 
+有关配额和限制以及如何在线申请支持创建工单的信息，请参阅[配额和限制](./media-services-quotas-and-limitations.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

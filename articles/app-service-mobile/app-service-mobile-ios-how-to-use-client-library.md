@@ -1,26 +1,25 @@
-<properties
-	pageTitle="如何使用适用于 Azure 移动应用的 iOS SDK"
-	description="如何使用适用于 Azure 移动应用的 iOS SDK"
-	services="app-service\mobile"
-	documentationCenter="ios"
-	authors="yuaxu"
-	manager="yochayk"
-	editor=""/>  
+---
+title: 如何使用适用于 Azure 移动应用的 iOS SDK
+description: 如何使用适用于 Azure 移动应用的 iOS SDK
+services: app-service\mobile
+documentationCenter: ios
+authors: yuaxu
+manager: yochayk
+editor: 
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="12/26/2016"
-	ms.author="yuaxu"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 12/26/2016
+ms.author: yuaxu
+---
 
 # 如何使用适用于 Azure 移动应用的 iOS 客户端库
 
-[AZURE.INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
+[!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
 本指南介绍如何使用最新的 [Azure 移动应用 iOS SDK][1] 执行常见任务。对于 Azure 移动应用的新手，请先完成 [Azure Mobile Apps Quick Start]（Azure 移动应用快速入门），创建后端、创建表并下载预先生成的 iOS Xcode 项目。本指南侧重于客户端 iOS SDK。若要了解有关用于后端的服务器端 SDK 的详细信息，请参阅 Server SDK 操作方法。
 
@@ -54,7 +53,6 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl"];
 let client = MSClient(applicationURLString: "AppUrl")
 ```
 
-
 ##<a name="table-reference"></a>如何：创建表引用
 
 若要访问或更新数据，请创建到后端表的引用。将 `TodoItem` 替换为表名称
@@ -70,7 +68,6 @@ MSTable *table = [client tableWithName:@"TodoItem"];
 ```
 let table = client.tableWithName("TodoItem")
 ```
-
 
 ##<a name="querying"></a>如何：查询数据
 
@@ -209,7 +206,6 @@ query.readWithCompletion { (result, error) in
 }
 ```
 
-
 ## <a name="selecting"></a><a name="parameters"></a>如何：使用 MSQuery 限制字段和展开查询字符串参数
 
 若要限制在查询中返回的字段，请在 **selectFields** 属性中指定字段的名称。此示例只返回 text 和 completed 字段：
@@ -255,7 +251,7 @@ query.parameters = ["myKey1": "value1", "myKey2": "value2"]
 
 此设置也是数据记录数目，而不是字节大小。
 
-如果要增加客户端页面大小，还应增加服务器上的页面大小。有关此操作的步骤，请参阅[“如何调整表分页大小”](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/)。
+如果要增加客户端页面大小，还应增加服务器上的页面大小。有关此操作的步骤，请参阅[“如何调整表分页大小”](./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)。
 
 **Objective-C**：
 
@@ -268,7 +264,6 @@ query.parameters = ["myKey1": "value1", "myKey2": "value2"]
 				} 
                            }];
 ```
-
 
 **Swift**：
 
@@ -434,7 +429,7 @@ table.deleteWithId("37BBF396-11F0-4B39-85C8-B319C729AF6D") { (itemId, error) in
 
 ##<a name="customapi"></a>如何调用自定义 API
 
-使用自定义 API 可以公开任何后端功能。无需映射到表操作。不仅能进一步控制消息，甚至还可以读取或设置标头，并更改响应正文格式。若要了解如何在后端上创建自定义 API，请阅读 [Custom APIs](/documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/#work-easy-apis)（自定义 API）
+使用自定义 API 可以公开任何后端功能。无需映射到表操作。不仅能进一步控制消息，甚至还可以读取或设置标头，并更改响应正文格式。若要了解如何在后端上创建自定义 API，请阅读 [Custom APIs](./app-service-mobile-node-backend-how-to-use-server-sdk.md#work-easy-apis)（自定义 API）
 
 若要调用自定义 API，请调用 `MSClient.invokeAPI`。请求和响应内容被视为 JSON。若要使用其他媒体类型，请[使用 `invokeAPI` 的其他重载][5]。若要发出 `GET` 请求而不是 `POST` 请求，请将参数 `HTTPMethod` 设置为 `"GET"`，将参数 `body` 设置为 `nil`（因为 GET 请求没有消息正文）。 如果自定义 API 支持其他 HTTP 谓词，请相应地更改 `HTTPMethod`。
 
@@ -602,7 +597,6 @@ Pod：
 	                          }];
 	}
 
-
 **Swift**：
 
 	// add the following imports to your bridging header:
@@ -628,7 +622,6 @@ Pod：
 		        }
     		}
 	}
-
 
 <!-- Anchors. -->
 
@@ -659,38 +652,37 @@ Pod：
 <!-- Images. -->
 
 <!-- URLs. -->
-[Azure Mobile Apps Quick Start]: /documentation/articles/app-service-mobile-ios-get-started/
+[Azure Mobile Apps Quick Start]: ./app-service-mobile-ios-get-started.md
 
-[Add Mobile Services to Existing App]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/-data
-[Get started with Mobile Services]: /documentation/articles/mobile-services-ios-get-started/
+[Add Mobile Services to Existing App]: ../mobile-services/mobile-services-javascript-backend-windows-store-dotnet-get-started.md-data
+[Get started with Mobile Services]: ../mobile-services/mobile-services-ios-get-started.md
 [Validate and modify data in Mobile Services by using server scripts]: /develop/mobile/tutorials/validate-modify-and-augment-data-ios
 [Mobile Services SDK]: https://go.microsoft.com/fwLink/p/?LinkID=266533
-[Authentication]: /documentation/articles/mobile-services-ios-get-started-users/
+[Authentication]: ../mobile-services/mobile-services-ios-get-started-users.md
 [iOS SDK]: https://developer.apple.com/xcode
 
 [Handling Expired Tokens]: http://go.microsoft.com/fwlink/p/?LinkId=301955
 [Live Connect SDK]: http://go.microsoft.com/fwlink/p/?LinkId=301960
 [Permissions]: http://msdn.microsoft.com/zh-cn/library/azure/jj193161.aspx
-[Service-side Authorization]: /documentation/articles/mobile-services-javascript-backend-service-side-authorization/
-[Use scripts to authorize users]: /documentation/articles/mobile-services-javascript-backend-service-side-authorization/
+[Service-side Authorization]: ../mobile-services/mobile-services-javascript-backend-service-side-authorization.md
+[Use scripts to authorize users]: ../mobile-services/mobile-services-javascript-backend-service-side-authorization.md
 [动态架构]: https://msdn.microsoft.com/zh-cn/library/azure/jj193175.aspx
 [How to: access custom parameters]: /develop/mobile/how-to-guides/work-with-server-scripts#access-headers
 [Create a table]: http://msdn.microsoft.com/zh-cn/library/azure/jj193162.aspx
 [NSDictionary object]: http://go.microsoft.com/fwlink/p/?LinkId=301965
 [ASCII control codes C0 and C1]: http://en.wikipedia.org/wiki/Data_link_escape_character#C1_set
-[CLI to manage Mobile Services tables]: /documentation/articles/virtual-machines-command-line-tools/#Mobile_Tables
-[Conflict-Handler]: /documentation/articles/mobile-services-ios-handling-conflicts-offline-data/#add-conflict-handling
+[CLI to manage Mobile Services tables]: ../virtual-machines-command-line-tools.md#Mobile_Tables
+[Conflict-Handler]: ../mobile-services/mobile-services-ios-handling-conflicts-offline-data.md#add-conflict-handling
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 [Fabric Dashboard]: https://www.fabric.io/home
 [Fabric for iOS - Getting Started]: https://docs.fabric.io/ios/fabric/getting-started.html
 [1]: https://github.com/Azure/azure-mobile-apps-ios-client/blob/master/README.md#ios-client-sdk
 [2]: http://azure.github.io/azure-mobile-apps-ios-client/
 [3]: https://msdn.microsoft.com/zh-cn/library/azure/dn495101.aspx
-[4]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#how-to-add-tags-to-a-device-installation-to-enable-push-to-tags
+[4]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#how-to-add-tags-to-a-device-installation-to-enable-push-to-tags
 [5]: http://azure.github.io/azure-mobile-services/iOS/v3/Classes/MSClient.html#//api/name/invokeAPI:data:HTTPMethod:parameters:headers:completion:
 [6]: https://github.com/Azure/azure-mobile-services/blob/master/sdk/iOS/src/MSError.h
-[7]: /documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/
-
+[7]: ./app-service-mobile-how-to-configure-active-directory-authentication.md
 
 [10]: https://developers.facebook.com/docs/ios/getting-started
 

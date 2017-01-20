@@ -1,36 +1,36 @@
 <!-- ARM: tested -->
 
-<properties 
-   pageTitle="如何使用 Azure 门户预览在 ARM 模式下设置静态专用 IP | Azure"
-   description="了解专用 IP (DIP) 以及如何在 ARM 模式下使用 Azure 门户预览对其进行管理"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="carmonm"
-   editor="tysonn"
-   tags="azure-resource-manager"
-/>
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="02/04/2016"
-   wacn.date="07/04/2016"
-   ms.author="jdial" />
+---
+title: 如何使用 Azure 门户预览在 ARM 模式下设置静态专用 IP | Azure
+description: 了解专用 IP (DIP) 以及如何在 ARM 模式下使用 Azure 门户预览对其进行管理
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: carmonm
+editor: tysonn
+tags: azure-resource-manager
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/04/2016
+wacn.date: 07/04/2016
+ms.author: jdial
+---
 
 # 如何在 Azure 门户预览中设置静态专用 IP 地址
 
-[AZURE.INCLUDE [virtual-networks-static-private-ip-selectors-arm-include](../../includes/virtual-networks-static-private-ip-selectors-arm-include.md)]
+[!INCLUDE [virtual-networks-static-private-ip-selectors-arm-include](../../includes/virtual-networks-static-private-ip-selectors-arm-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-static-private-ip-intro-include](../../includes/virtual-networks-static-private-ip-intro-include.md)]
+[!INCLUDE [virtual-networks-static-private-ip-intro-include](../../includes/virtual-networks-static-private-ip-intro-include.md)]
 
-[AZURE.INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]本文介绍资源管理器部署模型。你还可以[管理经典部署模型中的静态专用 IP 地址](/documentation/articles/virtual-networks-static-private-ip-classic-pportal/)。
+[!INCLUDE [azure-arm-classic-important-include](../../includes/azure-arm-classic-important-include.md)]本文介绍资源管理器部署模型。你还可以[管理经典部署模型中的静态专用 IP 地址](./virtual-networks-static-private-ip-classic-pportal.md)。
 
-[AZURE.INCLUDE [virtual-networks-static-ip-scenario-include](../../includes/virtual-networks-static-ip-scenario-include.md)]
+[!INCLUDE [virtual-networks-static-ip-scenario-include](../../includes/virtual-networks-static-ip-scenario-include.md)]
 
-下面的示例步骤需要已创建简单的环境。如果你想要运行本文档中所显示的步骤，首先需要构建[创建 VNet](/documentation/articles/virtual-networks-create-vnet-arm-pportal/) 中所述的测试环境。
+下面的示例步骤需要已创建简单的环境。如果你想要运行本文档中所显示的步骤，首先需要构建[创建 VNet](./virtual-networks-create-vnet-arm-pportal.md) 中所述的测试环境。
 
 ## 如何创建用于测试静态专用 IP 地址的 VM
 
@@ -87,7 +87,7 @@
 
 	![在 Azure 门户预览中创建 VM](./media/virtual-networks-static-ip-arm-pportal/figure09.png)
 
->[AZURE.NOTE] 单击“保存”后，如果你注意到分配仍设置为“动态”，则表示你键入的 IP 地址已被使用。请尝试其他 IP 地址。
+>[!NOTE] 单击“保存”后，如果你注意到分配仍设置为“动态”，则表示你键入的 IP 地址已被使用。请尝试其他 IP 地址。
 
 ## 如何从 VM 中删除静态专用 IP 地址
 若要从上面创建的 VM 中删除静态专用 IP 地址，请按照以下步骤操作。
@@ -96,8 +96,8 @@
 
 ## 后续步骤
 
-- 了解[保留公共 IP](/documentation/articles/virtual-networks-reserved-public-ip/) 地址。
-- 了解[实例层级公共 IP (ILPIP)](/documentation/articles/virtual-networks-instance-level-public-ip/) 地址。
+- 了解[保留公共 IP](./virtual-networks-reserved-public-ip.md) 地址。
+- 了解[实例层级公共 IP (ILPIP)](./virtual-networks-instance-level-public-ip.md) 地址。
 - 查阅[保留 IP REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn722420.aspx)。
 
 <!---HONumber=Mooncake_0418_2016-->

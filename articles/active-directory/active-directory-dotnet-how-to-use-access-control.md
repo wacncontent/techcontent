@@ -1,23 +1,20 @@
-<properties 
-	pageTitle="如何使用访问控制 (.NET) | Azure"
-	description="了解当用户尝试获取对网站的访问权限时，如何在 Azure 应用程序中使用访问控制服务 (ACS) 对用户进行身份验证。" 
-	services="active-directory" 
-	documentationCenter=".net" 
-	authors="msmbaldwin" 
-	manager="mbaldwin" 
-	editor=""/>
+---
+title: 如何使用访问控制 (.NET) | Azure
+description: 了解当用户尝试获取对网站的访问权限时，如何在 Azure 应用程序中使用访问控制服务 (ACS) 对用户进行身份验证。
+services: active-directory
+documentationCenter: .net
+authors: msmbaldwin
+manager: mbaldwin
+editor: 
 
-<tags 
-	ms.service="active-directory" 
-	ms.date="12/05/2015" 
-	wacn.date="01/09/2017"/>
-
+ms.service: active-directory
+ms.date: 12/05/2015
+wacn.date: 01/09/2017
+---
 
 # 如何使用 Azure Active Directory 访问控制对 Web 用户进行身份验证
 
-
 本指南演示如何使用 Azure Active Directory 访问控制（也称为访问控制服务或 ACS）在标识提供者（如 Microsoft、Google、Yahoo 和 Facebook）用户尝试获取对 Web 应用程序的访问权限时对其进行身份验证。
-
 
 ## <a name="what-is"></a>什么是 ACS？
 
@@ -38,7 +35,6 @@ ACS 具有以下可用功能：
 ACS 在基于声明的标识主体的基础上构建，它是一种创建针对本地运行或在云中运行的应用程序的身份验证机制的一致性方法。通常，应用程序和服务可使用基于声明的标识来获取所需的有关其组织内、其他组织内以及 Internet 上的用户的标识信息。
 
 若要完成本指南中的任务，您应了解本指南中使用的以下术语和概念：
-
 
 **客户端** - 尝试获取对 Web 应用程序的访问权限的浏览器。
 
@@ -73,7 +69,6 @@ ACS 在基于声明的标识主体的基础上构建，它是一种创建针对�
 -	Azure 订阅
 -	Microsoft Visual Studio 2012 
 -	Identity and Access Tool for Visual Studio 2012（若要下载，请参阅[标识和访问工具][]）
-
 
 ## <a name="create-namespace"></a>创建 Access Control 命名空间
 
@@ -294,13 +289,11 @@ Visual Studio 中的身份验证和访问工具会自动将您的应用程序与
 
 	![][9]
 
-
 4.	单击“信赖方应用程序”。
 
 	新的 MvcACS 应用程序将出现在信赖方应用程序列表中。该领域将自动设置为应用程序主页。
 
 	![][10]
-
 
 5.	单击“MvcACS”。
 
@@ -330,7 +323,6 @@ Visual Studio 中的身份验证和访问工具会自动将您的应用程序与
 
 	![][15]
 
-
 完成！ 如果你返回 Visual Studio，请打开 MvcACS 应用程序的项目，然后单击“标识和访问”，该工具将同时列出 Windows Live ID 和 Google 标识提供者。
 
 ![][16]
@@ -350,8 +342,6 @@ Visual Studio 中的身份验证和访问工具会自动将您的应用程序与
 还可以向命名空间中添加规则，这些规则确定将哪些声明发送到应用程序以便在应用程序业务逻辑中进行处理。
 
 若要进一步了解 ACS 的功能并尝试将其用于更多方案，请参阅[访问控制服务 2.0]。
-
-
 
   [What is ACS?]: #what-is
   [Concepts]: #concepts

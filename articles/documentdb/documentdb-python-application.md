@@ -1,31 +1,31 @@
-<properties
-    pageTitle="使用 DocumentDB 开发 Python Flask Web 应用程序 | Azure"
-    description="查看使用 DocumentDB 来存储和访问托管于 Azure 的 Python Flask Web 应用程序的数据的数据库教程。查找应用程序开发解决方案。"
-    keywords="应用程序开发、数据库教程、Python Flask、Python web 应用程序、Python Web 开发、DocumentDB、azure、Azure"
-    services="documentdb"
-    documentationcenter="python"
-    author="syamkmsft"
-    manager="jhubbard"
-    editor="cgronlun" />  
+---
+title: 使用 DocumentDB 开发 Python Flask Web 应用程序 | Azure
+description: 查看使用 DocumentDB 来存储和访问托管于 Azure 的 Python Flask Web 应用程序的数据的数据库教程。查找应用程序开发解决方案。
+keywords: 应用程序开发、数据库教程、Python Flask、Python web 应用程序、Python Web 开发、DocumentDB、azure、Azure
+services: documentdb
+documentationcenter: python
+author: syamkmsft
+manager: jhubbard
+editor: cgronlun
 
-<tags
-    ms.assetid="20ebec18-67c2-4988-a760-be7c30cfb745"
-    ms.service="documentdb"
-    ms.workload="data-management"
-    ms.tgt_pltfrm="na"
-    ms.devlang="python"
-    ms.topic="hero-article"
-    ms.date="11/16/2016"
-    wacn.date="12/27/2016"
-    ms.author="syamk" />
+ms.assetid: 20ebec18-67c2-4988-a760-be7c30cfb745
+ms.service: documentdb
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: hero-article
+ms.date: 11/16/2016
+wacn.date: 12/27/2016
+ms.author: syamk
+---
 
 # 使用 DocumentDB 开发 Python Flask Web 应用程序
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/documentdb-dotnet-application/)
-- [Node.js](/documentation/articles/documentdb-nodejs-application/)
-- [Java](/documentation/articles/documentdb-java-application/)
-- [Python](/documentation/articles/documentdb-python-application/)
+> [!div class="op_single_selector"]
+- [.NET](./documentdb-dotnet-application.md)
+- [Node.js](./documentdb-nodejs-application.md)
+- [Java](./documentdb-java-application.md)
+- [Python](./documentdb-python-application.md)
 
 本教程演示了如何使用 Azure DocumentDB 来存储和访问托管于 Azure 的 Python Web 应用程序的数据，并假定你之前有过一些使用 Python 和 Azure 网站的经验。
 
@@ -43,17 +43,17 @@
 ## 数据库教程先决条件
 在按照本文中的说明操作之前，你应确保已安装下列项：
 
-- 有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](/pricing/1rmb-trial/)。
+- 有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](https://www.azure.cn/pricing/1rmb-trial/)。
  
     或
 
-    在本地安装 [Azure DocumentDB 模拟器](/documentation/articles/documentdb-nosql-local-emulator/)。
+    在本地安装 [Azure DocumentDB 模拟器](./documentdb-nosql-local-emulator.md)。
 - [Visual Studio 2013](http://www.visualstudio.com/) 或更高版本，或者免费版 Visual Studio Express。本教程中的说明专为 Visual Studio 2015 所编写。
 - 来自 [GitHub](http://microsoft.github.io/PTVS/) 的 Python Tools for Visual Studio。本教程使用的是 Python Tools for VS 2015。
 - [azure.cn](/downloads/) 上提供 Azure Python SDK for Visual Studio 2.4 版本或更高版本。我们使用的是 Azure SDK for Python 2.7。
 - 来自 [python.org][2] 的 Python 2.7。我们使用的是 Python 2.7.11。
 
-> [AZURE.IMPORTANT] 如果首次安装 Python 2.7，请确保在自定义 Python 2.7.11 屏幕中，选择“向路径添加 python.exe”。
+> [!IMPORTANT] 如果首次安装 Python 2.7，请确保在自定义 Python 2.7.11 屏幕中，选择“向路径添加 python.exe”。
 > 
 > ![自定义 Python 2.7.11 屏幕的屏幕截图，你需要在该屏幕中选择“向路径添加 python.exe”](./media/documentdb-python-application/image2.png)
 
@@ -62,7 +62,7 @@
 ## 步骤 1：创建一个 DocumentDB 数据库帐户
 让我们首先创建 DocumentDB 帐户。如果已有帐户或者在此教程中使用 DocumentDB 模拟器，则可以跳到[步骤 2：创建 Python Flask web 应用程序](#step-2:-create-a-new-python-flask-web-application)。
 
-[AZURE.INCLUDE [documentdb-create-dbaccount](../../includes/documentdb-create-dbaccount.md)]
+[!INCLUDE [documentdb-create-dbaccount](../../includes/documentdb-create-dbaccount.md)]
 
 <br/>
 现在，我们将演练如何从头开始新建 Python Flask Web 应用程序。
@@ -113,7 +113,7 @@
    
         Successfully installed Babel-2.3.2 Tempita-0.5.2 WTForms-2.1 Whoosh-2.7.4 blinker-1.4 decorator-4.0.9 flask-0.9 flask-babel-0.8 flask-mail-0.7.6 flask-sqlalchemy-0.16 flask-whooshalchemy-0.55a0 flask-wtf-0.8.4 flup-1.0.2 pydocumentdb-1.6.1 pytz-2013b0 speaklater-1.3 sqlalchemy-0.7.9 sqlalchemy-migrate-0.7.2
 
-    > [AZURE.NOTE] 在相当少见的情况下，你可能会在输出窗口中看到失败。如果出现此情况，请检查错误是否与清理相关。有时候清理会失败，但安装仍是成功的（在输出窗口中向上滚动以确认这一点）。可以通过[验证虚拟环境](#verify-the-virtual-environment)来检查安装。如果安装失败，但验证成功，则可以继续操作。
+    > [!NOTE] 在相当少见的情况下，你可能会在输出窗口中看到失败。如果出现此情况，请检查错误是否与清理相关。有时候清理会失败，但安装仍是成功的（在输出窗口中向上滚动以确认这一点）。可以通过[验证虚拟环境](#verify-the-virtual-environment)来检查安装。如果安装失败，但验证成功，则可以继续操作。
 
 ### 验证虚拟环境  <a name="verify-the-virtual-environment"></a>
 
@@ -142,8 +142,6 @@ Python
 	        ('Cloud Service', 'Cloud Service'),
 	        ('Virtual Machine', 'Virtual Machine')], default='Web Site')
 
-
-
 ### 将所需的导入添加到 views.py 中
 1. 在“解决方案资源管理器”中，展开 **tutorial** 文件夹并打开 **views.py** 文件。
 2. 将以下导入语句添加到 **views.py** 文件的顶部，然后保存该文件。这些语句将导入 DocumentDB 的 PythonSDK 和 Flask 包。
@@ -154,8 +152,6 @@ Python
 	import config
 	import pydocumentdb.document_client as document_client
 	
-
-
 ### 创建数据库、集合和文档
 - 还是在 **views.py** 中，将以下代码添加到文件末尾。这将创建窗体使用的数据库。不要删除 **views.py** 中任何现有的代码。仅将其追加到末尾。
 
@@ -194,9 +190,7 @@ Python
 	        year=datetime.now().year,
 	        message='You just created a new database, collection, and document.  Your old votes have been deleted')
 
-
-> [AZURE.TIP] **CreateCollection** 方法采用可选的 **RequestOptions** 作为第三个参数。这可以用于指定集合的产品/服务类型。如果没有提供任何 offerType 值，则将使用默认的产品/服务类型创建集合。有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 中的性能级别](/documentation/articles/documentdb-performance-levels/)。
-
+> [!TIP] **CreateCollection** 方法采用可选的 **RequestOptions** 作为第三个参数。这可以用于指定集合的产品/服务类型。如果没有提供任何 offerType 值，则将使用默认的产品/服务类型创建集合。有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 中的性能级别](./documentdb-performance-levels.md)。
 
 ### 读取数据库、集合、文档，并提交窗体
 - 还是在 **views.py** 中，将以下代码添加到文件末尾。这将设置窗体、读取数据库、集合和文档。不要删除 **views.py** 中任何现有的代码。仅将其追加到末尾。
@@ -248,8 +242,6 @@ Python
 	            year=datetime.now().year,
 	            form = form)
 
-
-
 ### 创建 HTML 文件
 1. 在“解决方案资源管理器”中的 **tutorial** 文件夹中，右键单击 **templates** 文件夹，单击“添加”，然后单击“新建项”。
 2. 选择“HTML 页”，然后在名称框中键入 **create.html**。
@@ -265,7 +257,6 @@ Python
 		<p><a href="{{ url_for('vote') }}" class="btn btn-primary btn-large">Vote &raquo;</a></p>
 		{% endblock %}
 	
-
 5. 将以下代码添加到 `<body>` 元素中的 **results.html**。它将显示轮询结果。
 
 	html
@@ -292,7 +283,6 @@ Python
 		<a class="btn btn-primary" href="{{ url_for('vote') }}">Vote again?</a>
 		{% endblock %}
 	
-
 6. 将以下代码添加到 `<body>` 元素中的 **vote.html**。它将显示轮询并接受投票。注册投票时，控件权将传递到 views.py 中，我们将在该位置识别投票并相应地追加文档。
 
 	html
@@ -307,7 +297,6 @@ Python
 		</form>
 		{% endblock %}
 	
-
 7. 在 **templates** 文件夹中，将 **index.html** 的内容替换为以下内容。这将作为你的应用程序的登录页。
 	
 	html
@@ -320,7 +309,6 @@ Python
 		<p><a href="{{ url_for('vote') }}" class="btn btn-primary btn-large">Vote &raquo;</a></p>
 		{% endblock %}
 	
-
 ### 添加配置文件并更改 \_\_init\_\_.py
 1. 在“解决方案资源管理器”中，右键单击 **tutorial** 项目，单击“添加”，再单击“新建项”，选择“空 Python 文件”，然后将该文件命名为 **config.py**。Flask 中的窗体需要此配置文件。也可将其用于提供密钥。但此教程不需要此密钥。
 2. 将以下代码添加到 config.py，需要在下一步更改 **DOCUMENTDB\_HOST** 和 **DOCUMENTDB\_KEY** 的值。
@@ -337,7 +325,6 @@ Python
 		DOCUMENTDB_COLLECTION = 'voting collection'
 		DOCUMENTDB_DOCUMENT = 'voting document'
 	
-
 3. 在 [Azure 门户预览](https://portal.azure.cn/)中，单击“浏览”、“DocumentDB 帐户”导航到“密钥”边栏选项卡，双击要使用的帐户名，然后单击 **Essentials** 区域的“密钥”按钮。在“密钥”边栏选项卡中，复制 **URI** 值并将其粘贴到 **config.py** 文件中，作为 **DOCUMENTDB\_HOST** 属性的值。
 4. 返回到 Azure 门户预览，在“密钥”边栏选项卡中，复制“主密钥”或“辅助密钥”的值，并将其粘贴到 **config.py** 文件，作为 **DOCUMENTDB\_KEY** 属性的值。
 5. 在 **\_\_init\_\_.py** 文件中，添加以下行。
@@ -353,7 +340,6 @@ Python
 		app.config.from_object('config')
 		import tutorial.views
 	
-
 6. 添加所有文件后，解决方案资源管理器应如下所示：
    
     ![Visual Studio 解决方案资源管理器窗口的屏幕截图](./media/documentdb-python-application/image15.png)
@@ -406,7 +392,7 @@ Python
 
 我们将根据反馈经常更新并改进此主题。完成该教程后，请使用此页面上顶部和底部的投票按钮，并确保包括有关你想要看到的改进的反馈意见。如果你希望我们直接与你联系，欢迎将你的电子邮件地址附在评论中。
 
-若要将其他功能添加到 Web 应用程序，请查看 [DocumentDB Python SDK](/documentation/articles/documentdb-sdk-python/) 中提供的 API。
+若要将其他功能添加到 Web 应用程序，请查看 [DocumentDB Python SDK](./documentdb-sdk-python.md) 中提供的 API。
 
 有关 Azure、Visual Studio 和 Python 的详细信息，请参阅 [Python 开发人员中心](/develop/python/)。
 

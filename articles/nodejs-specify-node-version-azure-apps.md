@@ -1,22 +1,20 @@
-<properties
-	pageTitle="指定 Node.js 版本"
-	description="了解如何指定 Azure 网站和云服务使用的 Node.js 版本"
-	services=""
-	documentationCenter="nodejs"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""/>  
+---
+title: 指定 Node.js 版本
+description: 了解如何指定 Azure 网站和云服务使用的 Node.js 版本
+services: 
+documentationCenter: nodejs
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-
-<tags
-	ms.service="multiple"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="nodejs"
-	ms.topic="article"
-	ms.date="11/01/2016"
-	wacn.date="12/23/2016"/>  
-
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/23/2016
+---
 
 # 在 Azure 应用程序中指定 Node.js 版本
 托管 Node.js 应用程序时，您可能希望确保您的应用程序使用特定版本的 Node.js。有几种方法可为托管在 Azure 上的应用程序完成此操作。
@@ -25,7 +23,7 @@
 
 由 Azure 提供的 Node.js 版本会不断更新。除非另行指定，否则将使用最新可用版本。
 
-> [AZURE.NOTE] 如果你在 Azure 云服务（Web 角色或辅助角色）中托管应用程序，并且这是你首次部署应用程序，Azure 将尝试使用你在部署环境中所安装的 Node.js 的版本（如果该版本与 Azure 中提供的默认版本之一相匹配）。
+> [!NOTE] 如果你在 Azure 云服务（Web 角色或辅助角色）中托管应用程序，并且这是你首次部署应用程序，Azure 将尝试使用你在部署环境中所安装的 Node.js 的版本（如果该版本与 Azure 中提供的默认版本之一相匹配）。
 
 ## 使用 package.json 进行版本控制
 可通过将以下内容添加到你的 **package.json** 文件中来指定要使用的 Node.js 的版本：
@@ -85,13 +83,13 @@
     发布应用程序后，在浏览器中打开该网站。您应看到一则指示“Hello from Azure running node version: v0.8.1”的消息。
 
 ## 后续步骤
-了解如何指定应用程序使用的 Node.js 版本后，请学习[如何使用模块]、[生成和部署 Node.js 网站](/documentation/articles/web-sites-nodejs-develop-deploy-mac/)以及[如何使用适用于 Mac 和 Linux 的 Azure 命令行工具]。
+了解如何指定应用程序使用的 Node.js 版本后，请学习[如何使用模块]、[生成和部署 Node.js 网站](./app-service-web/web-sites-nodejs-develop-deploy-mac.md)以及[如何使用适用于 Mac 和 Linux 的 Azure 命令行工具]。
 
 有关详细信息，请参阅 [Node.js 开发人员中心](/develop/nodejs/)。
 
-[如何使用适用于 Mac 和 Linux 的 Azure 命令行工具]: /documentation/articles/xplat-cli-install/
-[Azure 命令行工具]: /documentation/articles/xplat-cli-install/
-[如何使用模块]: /documentation/articles/nodejs-use-node-modules-azure-apps/
-[build and deploy a Node.js Web Site]: /documentation/articles/web-sites-nodejs-develop-deploy-mac/
+[如何使用适用于 Mac 和 Linux 的 Azure 命令行工具]: ./xplat-cli-install.md
+[Azure 命令行工具]: ./xplat-cli-install.md
+[如何使用模块]: ./nodejs-use-node-modules-azure-apps.md
+[build and deploy a Node.js Web Site]: ./app-service-web/web-sites-nodejs-develop-deploy-mac.md
 
 <!---HONumber=Mooncake_1212_2016-->

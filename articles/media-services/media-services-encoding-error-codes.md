@@ -1,22 +1,22 @@
-<properties
-    pageTitle="编码错误代码 | Azure"
-    description="本主题列出了在执行编码任务期间发生错误时可能返回的错误代码。"
-    services="media-services"
-    documentationcenter=""
-    author="juliako"
-    manager="erikre"
-    editor="" />
-    
-<tags
-    ms.assetid="ce4e939f-5aee-41f9-859d-e4429815e9f2"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="09/19/2016"
-    wacn.date="01/13/2017"
-    ms.author="juliako" />
+---
+title: 编码错误代码 | Azure
+description: 本主题列出了在执行编码任务期间发生错误时可能返回的错误代码。
+services: media-services
+documentationcenter: 
+author: juliako
+manager: erikre
+editor: 
+
+ms.assetid: ce4e939f-5aee-41f9-859d-e4429815e9f2
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/19/2016
+wacn.date: 01/13/2017
+ms.author: juliako
+---
 
 ## 编码错误代码
 
@@ -35,14 +35,12 @@
 | ErrorCancelingTask |涵盖尝试取消任务时失败的错误类别 |
 | TransientError |涵盖暂时性问题（例如 Azure 存储空间发生暂时性网络问题）的错误类别 |
 
-
-
 ## 相关文章
-* [通过自定义媒体编码器标准预设执行高级编码任务](/documentation/articles/media-services-custom-mes-presets-with-dotnet/)
-* [配额和限制](/documentation/articles/media-services-quotas-and-limitations/)
+* [通过自定义媒体编码器标准预设执行高级编码任务](./media-services-custom-mes-presets-with-dotnet.md)
+* [配额和限制](./media-services-quotas-and-limitations.md)
 
 <!--Reference links in article-->
 
-[1]: /pricing/details/media-services/
+[1]: https://www.azure.cn/pricing/details/media-services/
 
 <!---HONumber=Mooncake_0109_2017-->

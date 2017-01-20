@@ -1,33 +1,30 @@
-<properties
-    pageTitle="使用 Azure 通知中心和 Node.js 发送推送通知"
-    description="了解如何使用通知中心从 Node.js 应用程序发送推送通知。"
-    keywords="推送通知,push notification,node.js 推送,ios 推送"
-    services="notification-hubs"
-    documentationcenter="nodejs"
-    author="ysxu"
-    manager="dwrede"
-    editor="" />  
+---
+title: 使用 Azure 通知中心和 Node.js 发送推送通知
+description: 了解如何使用通知中心从 Node.js 应用程序发送推送通知。
+keywords: 推送通知,push notification,node.js 推送,ios 推送
+services: notification-hubs
+documentationcenter: nodejs
+author: ysxu
+manager: dwrede
+editor: 
 
-    
-<tags
-    ms.assetid="ded4749c-6c39-4ff8-b2cf-1927b3e92f93"
-    ms.service="notification-hubs"
-    ms.workload="mobile"
-    ms.tgt_pltfrm="na"
-    ms.devlang="javascript"
-    ms.topic="article"
-    ms.date="10/25/2016"
-    wacn.date="12/13/2016"
-    ms.author="yuaxu" />  
-
+ms.assetid: ded4749c-6c39-4ff8-b2cf-1927b3e92f93
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: javascript
+ms.topic: article
+ms.date: 10/25/2016
+wacn.date: 12/13/2016
+ms.author: yuaxu
+---
 
 # 使用 Azure 通知中心和 Node.js 发送推送通知
-[AZURE.INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
+[!INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
 
 ## 概述
 
-> [AZURE.IMPORTANT] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](/pricing/1rmb-trial/)。
-
+> [!IMPORTANT] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 本指南将演示如何借助 Azure 通知中心，直接从 Node.js 应用程序发送推送通知。
 
@@ -54,7 +51,7 @@ Azure 通知中心提供用于向移动设备发送推送通知的易于使用�
 2. 在命令窗口中键入 **npm install azure-sb**。
 3. 可以手动运行 **ls** 或 **dir** 命令来验证是否创建了 **node\_modules** 文件夹。在该文件夹中，找到 **azure** 包，其中包含访问通知中心所需的库。
 
->[AZURE.NOTE] 可在官方 [NPM 博客](http://blog.npmjs.org/post/85484771375/how-to-install-npm)中了解有关安装 NPM 的详细信息。
+>[!NOTE] 可在官方 [NPM 博客](http://blog.npmjs.org/post/85484771375/how-to-install-npm)中了解有关安装 NPM 的详细信息。
 
 ### 导入模块
 使用某一文本编辑器将以下内容添加到应用程序的 **server.js** 文件的顶部：
@@ -69,14 +66,13 @@ Azure 通知中心提供用于向移动设备发送推送通知的易于使用�
 可通过执行以下步骤从 [Azure 门户预览]获取连接 **connectionstring** 值：
 
 1. 在左侧导航窗格中，单击“浏览”。
-2. 选择“通知中心”，然后找到要用于示例的中心。如果在创建新通知中心时需要获得帮助，可参阅 [Windows 应用商店入门教程](/documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/)。
+2. 选择“通知中心”，然后找到要用于示例的中心。如果在创建新通知中心时需要获得帮助，可参阅 [Windows 应用商店入门教程](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md)。
 3. 选择“设置”。
 4. 单击“访问策略”。你会看到共享连接字符串和完全访问连接字符串。
 
 ![Azure 门户预览 — 通知中心](./media/notification-hubs-nodejs-how-to-use-notification-hubs/notification-hubs-portal.png)  
 
-
-> [AZURE.NOTE] 还可使用 [Azure PowerShell](/documentation/articles/powershell-install-configure/) 提供的 **Get-AzureSbNamespace** cmdlet，或者在 [Azure 命令行接口 (Azure CLI)](/documentation/articles/xplat-cli-install/) 中使用 **azure sb namespace show** 命令检索连接字符串。
+> [!NOTE] 还可使用 [Azure PowerShell](../powershell-install-configure.md) 提供的 **Get-AzureSbNamespace** cmdlet，或者在 [Azure 命令行接口 (Azure CLI)](../xplat-cli-install.md) 中使用 **azure sb namespace show** 命令检索连接字符串。
 
 ## 一般体系结构
 **NotificationHubService** 对象将公开用于向特定设备和应用程序发送推送通知的以下对象实例：
@@ -200,7 +196,7 @@ Azure 通知中心提供用于向移动设备发送推送通知的易于使用�
 [SqlFilter.SqlExpression]: http://msdn.microsoft.com/zh-cn/library/windowsazure/microsoft.servicebus.messaging.sqlfilter.sqlexpression.aspx
 [Azure Service Bus Notification Hubs]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj927170.aspx
 [SqlFilter]: http://msdn.microsoft.com/zh-cn/library/windowsazure/microsoft.servicebus.messaging.sqlfilter.aspx
-[Node.js Cloud Service]: /documentation/articles/cloud-services-nodejs-develop-deploy-app/
+[Node.js Cloud Service]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
 [Previous Management Portal]: ./media/notification-hubs-nodejs-how-to-use-notification-hubs/previous-portal.png
 
 [Azure 门户预览]: https://portal.azure.cn

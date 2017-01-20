@@ -1,30 +1,29 @@
-<properties 
-	pageTitle="使用移动服务将图像上载到 Blob 存储 (Android) | 移动服务" 
-	description="了解如何使用移动服务将图像上载到 Azure 存储空间以及从 Android 应用访问图像。" 
-	services="mobile-services" 
-	documentationCenter="android" 
-	authors="RickSaling" 
-	manager="erikre"
-	editor=""/>
+---
+title: 使用移动服务将图像上载到 Blob 存储 (Android) | 移动服务
+description: 了解如何使用移动服务将图像上载到 Azure 存储空间以及从 Android 应用访问图像。
+services: mobile-services
+documentationCenter: android
+authors: RickSaling
+manager: erikre
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-android"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="ricksal"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-android
+ms.devlang: java
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: ricksal
+---
 
 # 从 Android 设备将图像上载到 Azure 存储空间
 
-[AZURE.INCLUDE [mobile-services-selector-upload-data-blob-storage](../../includes/mobile-services-selector-upload-data-blob-storage.md)]
+[!INCLUDE [mobile-services-selector-upload-data-blob-storage](../../includes/mobile-services-selector-upload-data-blob-storage.md)]
 
 本主题演示如何使 Android Azure 移动服务应用能够将图像上载到 Azure 存储空间。
 
 移动服务使用 SQL 数据库存储数据。但是，在 Azure 存储空间中存储二进制大型对象 (BLOB) 数据更有效。在本教程中，你将使移动服务快速入门应用能够使用 Android 相机拍照，并将图像上载到 Azure 存储空间。
-
 
 ## 入门所需操作
 
@@ -32,7 +31,7 @@
 
 本教程还需要以下项：
 
-+ [Azure 存储帐户](/documentation/articles/storage-create-storage-account/)
++ [Azure 存储帐户](../storage/storage-create-storage-account.md)
 + 带相机的 Android 设备
 
 ## 应用的工作方式
@@ -46,15 +45,14 @@
 
 那么，SAS 是什么？
 
-在客户端应用内部存储将数据上载到 Azure 存储服务程序所需的凭据是不安全的。你应将这些凭据存储在移动服务中，并使用它们来生成用于授权上载新图像的共享访问签名 (SAS)。移动服务会向客户端应用安全返回 SAS（一个具有 5 分钟到期期限的凭据）。然后，应用程序将使用此临时凭据来上载图像。有关详细信息，请参阅[共享访问签名，第 1 部分：了解 SAS 模型](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)
+在客户端应用内部存储将数据上载到 Azure 存储服务程序所需的凭据是不安全的。你应将这些凭据存储在移动服务中，并使用它们来生成用于授权上载新图像的共享访问签名 (SAS)。移动服务会向客户端应用安全返回 SAS（一个具有 5 分钟到期期限的凭据）。然后，应用程序将使用此临时凭据来上载图像。有关详细信息，请参阅[共享访问签名，第 1 部分：了解 SAS 模型](../storage/storage-dotnet-shared-access-signature-part-1.md)
 
 ## 代码示例
 [此处](https://github.com/Azure/mobile-services-samples/tree/master/UploadImages)提供了此应用的已完成客户端源代码部分。若要运行此代码，你必须先完成本教程的移动服务后端部分。
 
 ## 在 Azure 经典管理门户中更新已注册的插入脚本
 
-[AZURE.INCLUDE [mobile-services-configure-blob-storage](../../includes/mobile-services-configure-blob-storage.md)]
-
+[!INCLUDE [mobile-services-configure-blob-storage](../../includes/mobile-services-configure-blob-storage.md)]
 
 ## 更新快速入门应用以捕获和上载图像
 
@@ -63,7 +61,6 @@
 1. 若要添加对库的引用，请在“应用”> **build.gradle** 文件中，向 `dependencies` 节添加以下行：
 
 		compile 'com.microsoft.azure.android:azure-storage-android:0.6.0@aar'
-
 
 2. 将 `minSdkVersion` 值更改为 15（相机 API 所需的值）。
 
@@ -106,7 +103,6 @@
              android:layout_height="wrap_content"
              android:onClick="uploadPhoto"
              android:text="@string/upload_button_text" />
-
 
 ### 添加照片拍摄的代码
 
@@ -154,7 +150,6 @@
 	    }
 
 ### 添加代码以将照片文件上载到 blob 存储中
-
 
 1. 首先，我们通过向 **ToDoItem.java** 添加以下代码，将一些新的元数据字段添加到 `ToDoItem` 对象中。
 
@@ -286,7 +281,6 @@
 	        this.setSasQueryString(sasQueryString);
 	    }
 
-
 4. 在 **ToDoActivity.java** 文件中，将 **ToDoActivity.java** 中的 **addItem** 方法替换为以下代码，以便上载图像。
 
 	    /**
@@ -356,9 +350,7 @@
 	        mTextNewToDo.setText("");
 	    }
 	
-
 这段代码可向移动服务发送插入新 TodoItem 的请求。响应包含 SAS，然后可将其用于将图像从本地存储上载到 Azure 存储空间中的 Blob。
-
 
 ## 测试上载图像 
 
@@ -376,7 +368,6 @@
 
 7. 现在，你上载的图像将显示在浏览器窗口中。
 
-
 ## <a name="next-steps"></a>后续步骤
 
 现在，你已能够通过将移动服务与 Blob 服务集成安全地上载图片，请查看一些其他的后端服务和集成主题：
@@ -389,7 +380,6 @@
 
 	参考使用服务器脚本执行服务器端任务，并与其他 Azure 组件和外部资源集成的主题。
   
- 
 <!-- Anchors. -->
 [Install the Storage Client library]: #install-storage-client
 [Update the client app to capture images]: #add-select-images
@@ -401,18 +391,16 @@
 
 [2]: ./media/mobile-services-windows-store-dotnet-upload-data-blob-storage/mobile-add-storage-nuget-package-dotnet.png
 
-
 <!-- URLs. -->
-[使用 SendGrid 从移动服务发送电子邮件]: /documentation/articles/store-sendgrid-mobile-services-send-email-scripts/
+[使用 SendGrid 从移动服务发送电子邮件]: ./store-sendgrid-mobile-services-send-email-scripts.md
 
 [Send push notifications to Windows Store apps using Service Bus from a .NET back-end]: http://go.microsoft.com/fwlink/?LinkId=277073&clcid=0x409
-[移动服务服务器脚本参考]: /documentation/articles/mobile-services-how-to-use-server-scripts/
-[移动服务入门]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/
+[移动服务服务器脚本参考]: ./mobile-services-how-to-use-server-scripts.md
+[移动服务入门]: ./mobile-services-javascript-backend-windows-store-dotnet-get-started.md
 [Azure classic portal]: https://manage.windowsazure.cn/
-[How To Create a Storage Account]: /documentation/articles/storage-create-storage-account/
+[How To Create a Storage Account]: ../storage/storage-create-storage-account.md
 [Azure Storage Client library for Store apps]: http://go.microsoft.com/fwlink/p/?LinkId=276866
 
 [App settings]: http://msdn.microsoft.com/zh-cn/library/windowsazure/b6bb7d2d-35ae-47eb-a03f-6ee393e170f7
  
-
 <!---HONumber=Mooncake_0118_2016-->

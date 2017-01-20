@@ -1,24 +1,22 @@
-<properties
-	pageTitle="监视虚拟机和物理服务器的保护及其故障排除 | Windows Auzre" 
-	description="Azure Site Recovery 可以协调位于本地服务器中的虚拟机到 Azure 或辅助数据中心的复制、故障转移和恢复。参考本文来监视 VMM 或 Hyper-V 站点保护并对其进行故障排除。" 
-	services="site-recovery" 
-	documentationCenter="" 
-	authors="anbacker" 
-	manager="mkjain" 
-	editor=""/>  
+---
+title: 监视虚拟机和物理服务器的保护及其故障排除 | Windows Auzre
+description: Azure Site Recovery 可以协调位于本地服务器中的虚拟机到 Azure 或辅助数据中心的复制、故障转移和恢复。参考本文来监视 VMM 或 Hyper-V 站点保护并对其进行故障排除。
+services: site-recovery
+documentationCenter: 
+authors: anbacker
+manager: mkjain
+editor: 
 
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 10/13/2016
+wacn.date: 01/04/2017
+ms.author: rajanaki
+---
 
-<tags 
-	ms.service="site-recovery" 
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="storage-backup-recovery" 
-	ms.date="10/13/2016" 
-	wacn.date="01/04/2017"	
-	ms.author="rajanaki"/>  
-
-	
 # 监视虚拟机和物理服务器的保护及其故障排除
 
 你可以参考本监视与故障排除指南来了解如何跟踪 Azure Site Recovery 的复制运行状况，并掌握相关的故障排除方法。
@@ -38,14 +36,13 @@
 
 ### 用于在本地与 Azure 之间复制的 VMM 站点部署。
 
-在本地和 Azure 之间设置 DR 的一部分操作；下载 Azure Site Recovery 提供程序并将其安装在 VMM 服务器上，此外还需要在每个 Hyper-V 主机上安装 Azure 恢复服务代理。有关详细信息，请参阅[了解站点到 Azure 的保护](/documentation/articles/site-recovery-understanding-site-to-azure-protection/)。
+在本地和 Azure 之间设置 DR 的一部分操作；下载 Azure Site Recovery 提供程序并将其安装在 VMM 服务器上，此外还需要在每个 Hyper-V 主机上安装 Azure 恢复服务代理。有关详细信息，请参阅[了解站点到 Azure 的保护](./site-recovery-understanding-site-to-azure-protection.md)。
 
 ![用于在本地与 Azure 之间复制的 VMM 站点部署](./media/site-recovery-monitoring-and-troubleshooting/image2.png)  
 
-
 ### 用于在本地与 Azure 之间复制的 Hyper-V 站点部署
 
-与 VMM 部署相同 – 不同的是提供者和代理都安装在 Hyper-V 主机本身上。有关详细信息，请参阅[了解站点到 Azure 的保护](/documentation/articles/site-recovery-understanding-site-to-azure-protection/)。
+与 VMM 部署相同 – 不同的是提供者和代理都安装在 Hyper-V 主机本身上。有关详细信息，请参阅[了解站点到 Azure 的保护](./site-recovery-understanding-site-to-azure-protection.md)。
 
 ## 监视配置、保护和恢复操作
 
@@ -112,7 +109,6 @@ ASR 中的每个操作都被审核，可在“作业”选项卡下面跟踪。�
 | **应用程序和服务日志/Microsoft/Azure Site Recovery/Provider/Operational**（Hyper-V 主机） | 提供有用的日志用于排查许多 Azure Site Recovery 服务问题。<br/> ![Hyper-V 主机的事件源](./media/site-recovery-monitoring-and-troubleshooting/eventviewer02.png) |
 | **应用程序和服务日志/Microsoft/Windows/Hyper-V-VMMS/Admin**（Hyper-V 主机） | 提供有用的日志用于排查许多 Hyper-V 虚拟机管理问题。<br/> ![Hyper-V 主机的事件源](./media/site-recovery-monitoring-and-troubleshooting/eventviewer01.png) |
 
-
 ### Hyper-V 复制日志记录选项
 
 与 Hyper-V 复本相关的所有事件都会记录在位于“应用程序和服务日志\\Microsoft\\Windows”下的 Hyper-V-VMMS\\Admin 日志中。此外，可以针对 Hyper-V-VMMS 启用分析日志。若要启用此日志，请先在“事件查看器”中显示“分析”与“调试”日志。开启事件查看器，然后在“查看”菜单中，单击“显示分析和调试日志”。
@@ -128,8 +124,6 @@ ASR 中的每个操作都被审核，可在“作业”选项卡下面跟踪。�
 ![排查本地 Hyper-V 问题](./media/site-recovery-monitoring-and-troubleshooting/image16.png)
 
 若要查看收集的信息，请先通过禁用日志来停止跟踪会话，然后保存日志并在“事件查看器”中重新将它打开，或者根据需要使用其他工具转换它。
-
-
 
 ##<a id="reaching-out-for-microsoft-support"></a> 联系 Microsoft 技术
 
@@ -147,7 +141,7 @@ ASR 中的每个操作都被审核，可在“作业”选项卡下面跟踪。�
 
 ### 在线申请支持
 
-若需要对应 ASR 的帮助，请[在线申请支持](/support/support-ticket-form/?l=zh-cn)创建工单
+若需要对应 ASR 的帮助，请[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单
 
 ## 知识库文章
 
@@ -183,7 +177,6 @@ ASR 中的每个操作都被审核，可在“作业”选项卡下面跟踪。�
 - [找不到适合副本虚拟机的主机 - 因为没有连接逻辑网络](http://social.technet.microsoft.com/wiki/contents/articles/25502.a-suitable-host-for-the-replica-virtual-machine-can-t-be-found-due-to-no-logical-network-attached.aspx)
 - [无法连接到副本主机 - 不能建立连接](http://social.technet.microsoft.com/wiki/contents/articles/31106.cannot-connect-to-the-replica-host-machine-connection-could-not-be-established.aspx)
 
-
 ### 恢复
 - VMM 无法完成主机操作 -
     -   [故障转移到虚拟机的所选恢复点：常规拒绝访问错误。](http://social.technet.microsoft.com/wiki/contents/articles/25504.fail-over-to-the-selected-recovery-point-for-virtual-machine-general-access-denied-error.aspx)
@@ -199,7 +192,6 @@ ASR 中的每个操作都被审核，可在“作业”选项卡下面跟踪。�
 -   测试故障转移
     -   [无法启动故障转移，因为正在进行测试故障转移](http://social.technet.microsoft.com/wiki/contents/articles/31111.failover-could-not-be-initiated-since-test-failover-is-in-progress.aspx)
 -   <span style="color:green;">新</span> 故障转移将超时，显示 'PreFailoverWorkflow 任务 WaitForScriptExecutionTask 超时'，这是与虚拟机或虚拟机所属的子网相关联的网络安全组的配置设置造成的。有关详细信息，请参阅['PreFailoverWorkflow 任务 WaitForScriptExecutionTask 超时’](http://social.technet.microsoft.com/wiki/contents/articles/34503.failover-operation-timed-out-due-to-prefailoverworkflow-task-waitforscriptexecutiontask-timed-out.aspx)。
-
 
 ### 配置服务器、进程服务器、主目标
 配置服务器 (CS)、进程服务器 (PS)、主目标 (MT)

@@ -1,24 +1,21 @@
-<properties
-	pageTitle="使用 DocumentDB 和 HDInsight 运行 Hadoop 作业 | Azure"
-	description="了解如何使用 DocumentDB 和 Azure HDInsight 运行一个简单的 Hive、Pig 和 MapReduce 作业。"
-	services="documentdb"
-	authors="dennyglee"
-	manager="jhubbard"
-	editor="mimig"
-	documentationCenter=""/>  
+---
+title: 使用 DocumentDB 和 HDInsight 运行 Hadoop 作业 | Azure
+description: 了解如何使用 DocumentDB 和 Azure HDInsight 运行一个简单的 Hive、Pig 和 MapReduce 作业。
+services: documentdb
+authors: dennyglee
+manager: jhubbard
+editor: mimig
+documentationCenter: 
 
-
-
-<tags
-	ms.service="documentdb"
-	ms.workload="data-services"
-	ms.tgt_pltfrm="na"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="09/20/2016"
-	ms.author="denlee"
-	wacn.date="11/28/2016"/>  
-
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: java
+ms.topic: article
+ms.date: 09/20/2016
+ms.author: denlee
+wacn.date: 11/28/2016
+---
 
 #<a name="DocumentDB-HDInsight"></a>使用 DocumentDB 和 HDInsight 运行 Hadoop 作业
 
@@ -29,10 +26,9 @@
 - 如何使用 Hive、Pig 或 MapReduce 作业从 DocumentDB 加载数据？
 - 如何使用 Hive、Pig 或 MapReduce 作业从 DocumentDB 存储数据？
 
-
 然后，返回到本文，在这里你将获得有关如何对 DocumentDB 数据运行分析作业的完整详细信息。
 
-> [AZURE.TIP] 本教程假定你之前有使用 Apache Hadoop、Hive 和/或 Pig的经验。如果你不熟悉 Apache Hadoop、Hive 和 Pig，请访问 [Apache Hadoop 文档][apache-hadoop-doc]。本教程还假定你具有使用 DocumentDB 的经验，并且拥有一个 DocumentDB 帐户。如果你不熟悉 DocumentDB 或没有 DocumentDB 帐户，请查看[入门][getting-started]页。
+> [!TIP] 本教程假定你之前有使用 Apache Hadoop、Hive 和/或 Pig的经验。如果你不熟悉 Apache Hadoop、Hive 和 Pig，请访问 [Apache Hadoop 文档][apache-hadoop-doc]。本教程还假定你具有使用 DocumentDB 的经验，并且拥有一个 DocumentDB 帐户。如果你不熟悉 DocumentDB 或没有 DocumentDB 帐户，请查看[入门][getting-started]页。
 
 没有时间完成教程，只想获得有关 Hive、Pig 和 MapReduce 的完整示例 PowerShell 脚本？ 没问题，可在[此处][documentdb-hdinsight-samples]获得。此下载还包含对于这些示例的 hql、pig 及 java 文件。
 
@@ -62,8 +58,7 @@
 - 从 Hive、Pig 或 MapReduce 作业生成的文档的容量。有关详细信息，请参阅[管理 DocumentDB 容量和性能][documentdb-manage-collections]。
 - [*可选*] 其他集合的容量。有关详细信息，请参阅[预配的文档存储和索引开销][documentdb-manage-document-storage]。
 
-> [AZURE.WARNING] 为了避免在任何作业期间创建一个新集合，你可以将结果打印到 stdout，将输出保存到你的 WASB 容器，或指定一个现有集合。指定现有集合时，将在集合内创建新文档，如果 *ID* 中有冲突，只会影响现有文档。**连接器将自动覆盖出现 ID 冲突的现有文档**。通过将 upsert 选项设置为 false 可以关闭此功能。如果 upsert 为 false，并且发生冲突，则 Hadoop 作业将失败；并报告 ID 冲突错误。
-
+> [!WARNING] 为了避免在任何作业期间创建一个新集合，你可以将结果打印到 stdout，将输出保存到你的 WASB 容器，或指定一个现有集合。指定现有集合时，将在集合内创建新文档，如果 *ID* 中有冲突，只会影响现有文档。**连接器将自动覆盖出现 ID 冲突的现有文档**。通过将 upsert 选项设置为 false 可以关闭此功能。如果 upsert 为 false，并且发生冲突，则 Hadoop 作业将失败；并报告 ID 冲突错误。
 
 ## <a name="ProvisionHDInsight"></a>步骤 1：创建新的 HDInsight 群集。
 本教程使用 Azure 门户预览中的脚本操作自定义 HDInsight 群集。本教程将使用 Azure 门户预览创建 HDInsight 群集。有关如何使用 PowerShell cmdlet 或 HDInsight .NET SDK 的说明，请参阅“使用脚本操作自定义 HDInsight 群集”一文。
@@ -97,7 +92,6 @@
 
 	![提供 Hadoop HDInsight 初始群集详细信息][image-customprovision-page1]  
 
-
 6. 单击“凭据”，设置登录凭据和远程访问凭据。选择“群集登录用户名”和“群集登录密码”。
 
 	如果想要远程登录群集，请在边栏选项卡底部选择“是”，并提供用户名和密码。
@@ -106,7 +100,7 @@
 
 8. 在同一个边栏选项卡中，指定“默认容器”和“位置”。然后单击“选择”。
 
-	> [AZURE.NOTE] 选择靠近 DocumentDB 帐户区域的位置以提升性能
+	> [!NOTE] 选择靠近 DocumentDB 帐户区域的位置以提升性能
 
 8. 单击“定价”选择节点的数量和类型。可以先保留默认配置，以后再缩放辅助角色节点的数量。
 
@@ -144,7 +138,7 @@
 
 1. 安装 Azure PowerShell 中的说明进行操作。可在[此处][powershell-install-configure]找到说明。
 
-	> [AZURE.NOTE] 或者，只需了解 Hive 查询，可以使用 HDInsight 的联机 Hive 编辑器。若要这样做，请登录到 [Azure 门户预览][azure-portal]，单击左侧窗格中的“HDInsight”查看 HDInsight 群集的列表。单击要对其运行 Hive 查询的群集，然后单击“查询控制台”。
+	> [!NOTE] 或者，只需了解 Hive 查询，可以使用 HDInsight 的联机 Hive 编辑器。若要这样做，请登录到 [Azure 门户预览][azure-portal]，单击左侧窗格中的“HDInsight”查看 HDInsight 群集的列表。单击要对其运行 Hive 查询的群集，然后单击“查询控制台”。
 
 2. 打开 Azure PowerShell 集成脚本环境：
 	- 在运行 Windows 8 或 Windows Server 2012 或更高版本的计算机上，可以使用内置搜索。在“开始”屏幕中，键入 **powershell ise** 并单击 **Enter**。
@@ -160,10 +154,9 @@
 
 	![Azure PowerShell 的关系图][azure-powershell-diagram]  
 
-
 ## <a name="RunHive"></a>步骤 3：使用 DocumentDB 和 HDInsight 运行 Hive 作业
 
-> [AZURE.IMPORTANT] 必须使用你的配置设置填写所有由 < > 表示的变量。
+> [!IMPORTANT] 必须使用你的配置设置填写所有由 < > 表示的变量。
 
 1. 在你的 PowerShell 脚本窗格中设置以下变量。
 
@@ -179,10 +172,9 @@
 
     <p>首先，让我们从 DocumentDB 集合创建 Hive 表。将以下代码段添加到 PowerShell 脚本窗格中从 #1 开始的代码段<strong>之后</strong>。请确保包括可选的 DocumentDB.query 参数，以便将文档调整为 just_ts 和 _rid。</p>
 
-    > [AZURE.NOTE] **命名 DocumentDB.inputCollections 不是一个错误。** 是，我们允许添加多个集合作为输入：</br>
+    > [!NOTE] **命名 DocumentDB.inputCollections 不是一个错误。** 是，我们允许添加多个集合作为输入：</br>
 
 		'*DocumentDB.inputCollections*' = '*\<DocumentDB Input Collection Name 1\>*,*\<DocumentDB Input Collection Name 2\>*' A1A</br> 不使用空格分隔集合名称，仅使用单个逗号。
-
 
 		# Create a Hive table using data from DocumentDB. Pass DocumentDB the query to filter transferred data to _rid and _ts.
 		$queryStringPart1 = "drop table DocumentDB_timestamps; "  +
@@ -197,7 +189,7 @@
 
 3.  接下来，让我们为输出集合创建 Hive 表。输出文档属性将为月、日、小时、分钟和发生次数总数。
 
-	> [AZURE.NOTE] **再次，命名 DocumentDB.outputCollections 不是一个错误。** 是，我们允许添加多个集合作为输出：</br> '*DocumentDB.outputCollections*' = '*<DocumentDB Output Collection Name 1>*,*<DocumentDB Output Collection Name 2>*' </br> 不使用空格分隔集合名称，仅使用单个逗号。</br></br>文档将为跨多个集合的分布式轮循机制。一批文档将存储在一个集合中，第二批文档则存储在下一个集合中，如此类推。
+	> [!NOTE] **再次，命名 DocumentDB.outputCollections 不是一个错误。** 是，我们允许添加多个集合作为输出：</br> '*DocumentDB.outputCollections*' = '*<DocumentDB Output Collection Name 1>*,*<DocumentDB Output Collection Name 2>*' </br> 不使用空格分隔集合名称，仅使用单个逗号。</br></br>文档将为跨多个集合的分布式轮循机制。一批文档将存储在一个集合中，第二批文档则存储在下一个集合中，如此类推。
 
 		# Create a Hive table for the output data to DocumentDB.
 	    $queryStringPart2 = "drop table DocumentDB_analytics; " +
@@ -260,10 +252,9 @@
 
 	![Hive 查询结果][image-hive-query-results]  
 
-
 ## <a name="RunPig"></a>步骤 4：使用 DocumentDB 和 HDInsight 运行 Pig 作业
 
-> [AZURE.IMPORTANT] 必须使用你的配置设置填写所有由 < > 表示的变量。
+> [!IMPORTANT] 必须使用你的配置设置填写所有由 < > 表示的变量。
 
 1. 在你的 PowerShell 脚本窗格中设置以下变量。
 
@@ -276,7 +267,7 @@
 2. <p>让我们开始构造查询字符串。我们将编写 Pig 查询，该查询采用来自 DocumentDB 集合的所有文档的系统生成的时间戳 (_ts) 和唯一 ids (_rid)，按分钟计算所有文档，然后将结果存储回新 DocumentDB 集合。</p>
     <p>首先，从 DocumentDB 将文档加载到 HDInsight 中。将以下代码段添加到 PowerShell 脚本窗格中从 #1 开始的代码段<strong>之后</strong>。请确保添加了 DocumentDB.query 到可选的 DocumentDB 查询参数，以便将我们的文档调整到 just_ts 和 _rid。</p>
 
-    > [AZURE.NOTE] 是，我们允许添加多个集合作为输入：</br> 
+    > [!NOTE] 是，我们允许添加多个集合作为输入：</br> 
     '*<DocumentDB Input Collection Name 1>*,*<DocumentDB Input Collection Name 2>*'</br> 不使用空格分隔集合名称，仅使用单个逗号。</b>
 
 	文档将为跨多个集合的分布式轮循机制。一批文档将存储在一个集合中，第二批文档则存储在下一个集合中，如此类推。
@@ -297,7 +288,7 @@
 
 4. 最后，让我们将结果存储到我们新的输出集合。
 
-    > [AZURE.NOTE] 是，我们允许添加多个集合作为输出：</br> '<DocumentDB Output Collection Name 1>,<DocumentDB Output Collection Name 2>'</br> 不使用空格分隔集合名称，仅使用单个逗号。</br> 文档将是跨多个集合的分布式轮循机制。一批文档将存储在一个集合中，第二批文档则存储在下一个集合中，如此类推。
+    > [!NOTE] 是，我们允许添加多个集合作为输出：</br> '<DocumentDB Output Collection Name 1>,<DocumentDB Output Collection Name 2>'</br> 不使用空格分隔集合名称，仅使用单个逗号。</br> 文档将是跨多个集合的分布式轮循机制。一批文档将存储在一个集合中，第二批文档则存储在下一个集合中，如此类推。
 
 		# Store output data to DocumentDB.
         $queryStringPart3 = "STORE by_minute_count INTO '<DocumentDB Endpoint>' " +
@@ -346,7 +337,6 @@
 
 	![Pig 查询结果][image-pig-query-results]  
 
-
 ## <a name="RunMapReduce"></a>步骤 5：使用 DocumentDB 和 HDInsight 运行 MapReduce 作业
 
 1. 在你的 PowerShell 脚本窗格中设置以下变量。
@@ -359,7 +349,7 @@
 		# Define the MapReduce job.
 		$TallyPropertiesJobDefinition = New-AzureHDInsightMapReduceJobDefinition -JarFile "wasb:///example/jars/TallyProperties-v01.jar" -ClassName "TallyProperties" -Arguments "<DocumentDB Endpoint>","<DocumentDB Primary Key>", "<DocumentDB Database Name>","<DocumentDB Input Collection Name>","<DocumentDB Output Collection Name>","<[Optional] DocumentDB Query>"
 
-	> [AZURE.NOTE] DocumentDB Hadoop 连接器自定义安装中附带了 TallyProperties-v01.jar。
+	> [!NOTE] DocumentDB Hadoop 连接器自定义安装中附带了 TallyProperties-v01.jar。
 
 3. 添加以下命令来提交 MapReduce 作业。
 
@@ -390,7 +380,6 @@
 
 	![MapReduce 查询结果][image-mapreduce-query-results]  
 
-
 ## <a name="NextSteps"></a>后续步骤
 
 祝贺你！ 你只需使用 Azure DocumentDB 和 HDInsight 运行你的第一个 Hive、Pig 和 MapReduce 作业。
@@ -408,29 +397,29 @@
 [apache-hadoop-doc]: http://hadoop.apache.org/docs/current/
 [apache-hive]: http://hive.apache.org/
 [apache-pig]: http://pig.apache.org/
-[getting-started]: /documentation/articles/documentdb-get-started/
+[getting-started]: ./documentdb-get-started.md
 
 [azure-portal]: https://portal.azure.cn/
 [azure-powershell-diagram]: ./media/documentdb-run-hadoop-with-hdinsight/azurepowershell-diagram-med.png
 
 [documentdb-hdinsight-samples]: http://portalcontent.blob.core.windows.net/samples/documentdb-hdinsight-samples.zip
 [documentdb-github]: https://github.com/Azure/azure-documentdb-hadoop
-[documentdb-java-application]: /documentation/articles/documentdb-java-application/
-[documentdb-manage-collections]: /documentation/articles/documentdb-manage/#Collections/
-[documentdb-manage-document-storage]: /documentation/articles/documentdb-manage/#IndexOverhead/
-[documentdb-manage-throughput]: /documentation/articles/documentdb-manage/#ProvThroughput/
-[documentdb-import-data]: /documentation/articles/documentdb-import-data/
+[documentdb-java-application]: ./documentdb-java-application.md
+[documentdb-manage-collections]: ./documentdb-manage.md#Collections/
+[documentdb-manage-document-storage]: ./documentdb-manage.md#IndexOverhead/
+[documentdb-manage-throughput]: ./documentdb-manage.md#ProvThroughput/
+[documentdb-import-data]: ./documentdb-import-data.md
 
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-[hdinsight-use-hive]: /documentation/articles/hdinsight-use-hive/
-[hdinsight-use-mapreduce]: /documentation/articles/hdinsight-use-mapreduce/
-[hdinsight-use-pig]: /documentation/articles/hdinsight-use-pig/
+[hdinsight-storage]: ../hdinsight/hdinsight-hadoop-use-blob-storage.md
+[hdinsight-use-hive]: ../hdinsight/hdinsight-use-hive.md
+[hdinsight-use-mapreduce]: ../hdinsight/hdinsight-use-mapreduce.md
+[hdinsight-use-pig]: ../hdinsight/hdinsight-use-pig.md
 
 [image-customprovision-page1]: ./media/documentdb-run-hadoop-with-hdinsight/customprovision-page1.png
 [image-hive-query-results]: ./media/documentdb-run-hadoop-with-hdinsight/hivequeryresults.PNG
 [image-mapreduce-query-results]: ./media/documentdb-run-hadoop-with-hdinsight/mapreducequeryresults.PNG
 [image-pig-query-results]: ./media/documentdb-run-hadoop-with-hdinsight/pigqueryresults.PNG
 
-[powershell-install-configure]: /documentation/articles/powershell-install-configure/
+[powershell-install-configure]: ../powershell-install-configure.md
 
 <!---HONumber=Mooncake_1121_2016-->

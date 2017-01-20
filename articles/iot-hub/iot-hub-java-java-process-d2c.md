@@ -1,26 +1,25 @@
-<properties
-	pageTitle="处理 IoT 中心设备到云的消息 (Java) | Azure"
-	description="遵照该 Java 教程了解处理 IoT 中心设备到云消息的有用模式。"
-	services="iot-hub"
-	documentationCenter="java"
-	authors="dominicbetts"
-	manager="timlt"
-	editor=""/>  
+---
+title: 处理 IoT 中心设备到云的消息 (Java) | Azure
+description: 遵照该 Java 教程了解处理 IoT 中心设备到云消息的有用模式。
+services: iot-hub
+documentationCenter: java
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-hub"
-     ms.devlang="java"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="09/01/2016"
-     wacn.date="12/10/2016"
-     ms.author="dobett"/>
+ms.service: iot-hub
+ms.devlang: java
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/01/2016
+wacn.date: 12/10/2016
+ms.author: dobett
+---
 
 # 教程：如何使用 Java 处理 IoT 中心设备到云的消息
 
-[AZURE.INCLUDE [iot-hub-selector-process-d2c](../../includes/iot-hub-selector-process-d2c.md)]
+[!INCLUDE [iot-hub-selector-process-d2c](../../includes/iot-hub-selector-process-d2c.md)]
 
 ## 介绍
 
@@ -39,7 +38,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 服务总线可以帮助确保可靠处理交互式消息，因为它提供了各消息的检查点，以及基于时间范围的重复数据删除。
 
-> [AZURE.NOTE] **EventProcessorHost** 实例只是其中一种处理交互式消息的方法。其他选项包括 [Azure Service Fabric][lnk-service-fabric] 和 [Azure 流分析][lnk-stream-analytics]。
+> [!NOTE] **EventProcessorHost** 实例只是其中一种处理交互式消息的方法。其他选项包括 [Azure Service Fabric][lnk-service-fabric] 和 [Azure 流分析][lnk-stream-analytics]。
 
 在本教程最后，会运行 3 个 Java 控制台应用：
 
@@ -47,7 +46,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 * **process-d2c-messages** 使用 EventProcessorHost 类检索与事件中心兼容的终结点中的消息。然后将数据点消息可靠地存储在 Azure Blob 存储中，并将交互式消息转发到服务总线队列。
 * **process-interactive-messages** 从服务总线队列中剔除交互式消息。
 
-> [AZURE.NOTE] IoT 中心对许多设备平台和语言（包括 C、Java 和 JavaScript）提供 SDK 支持。若要了解如何将本教程中的模拟设备替换为物理设备，以及如何将设备连接到 IoT 中心，请参阅 [Azure IoT 开发人员中心]。
+> [!NOTE] IoT 中心对许多设备平台和语言（包括 C、Java 和 JavaScript）提供 SDK 支持。若要了解如何将本教程中的模拟设备替换为物理设备，以及如何将设备连接到 IoT 中心，请参阅 [Azure IoT 开发人员中心]。
 
 本教程直接适用于使用与事件中心兼容的消息的其他方式，例如 [HDInsight (Hadoop)] 项目。有关详细信息，请参阅 [Azure IoT 中心开发人员指南 - 设备到云]。
 
@@ -59,7 +58,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 + Maven 3。<br/>[准备开发环境][lnk-dev-setup]介绍了如何在 Windows 或 Linux 上安装本教程所用的 Maven。
 
-+ 有效的 Azure 帐户。<br/>如果没有 Azure 订阅，只需几分钟即可创建一个[试用帐户](/pricing/1rmb-trial/)。
++ 有效的 Azure 帐户。<br/>如果没有 Azure 订阅，只需几分钟即可创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 
 应具备 [Azure 存储]和 [Azure 服务总线]的一些基础知识。
 
@@ -98,7 +97,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
    
     此类类似于 **simulated-device** 项目中的 **MessageSender** 类。唯一的区别在于现在设置 **MessageId** 系统属性和 **messageType** 自定义属性。代码将向 **MessageId** 属性分配全局唯一标识符 (UUID)。服务总线可使用此标识符来删除收到的重复消息。本示例使用 **messageType** 属性来区分交互式消息和数据点消息。应用程序将在消息属性而不是在消息正文中传递此信息，因此事件处理器不需要反序列化消息来执行消息路由。
 
-    > [AZURE.NOTE] 有必要在设备代码中创建用于删除重复交互式消息的 **MessageId**。间歇性网络通信或其他故障可能会导致多次重复传输来自该设备的相同消息。还可将 UUID 换用为语义消息 ID，如相关消息数据字段的哈希。
+    > [!NOTE] 有必要在设备代码中创建用于删除重复交互式消息的 **MessageId**。间歇性网络通信或其他故障可能会导致多次重复传输来自该设备的相同消息。还可将 UUID 换用为语义消息 ID，如相关消息数据字段的哈希。
 
 3. 修改 **main** 方法，按以下代码片段中所示发送交互式消息和数据点消息：
    
@@ -112,7 +111,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     ````
 4. 保存并关闭 simulated-device\\src\\main\\java\\com\\mycompany\\app\\App.java 文件。
 
-    > [AZURE.NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施指数退让等重试策略。
+    > [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施指数退让等重试策略。
 
 5. 若要使用 Maven 生成 **simulated-device** 应用程序，请在 simulated-device 文件夹中的命令提示符下执行以下命令：
 
@@ -130,18 +129,18 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 事件处理器使用事件中心消息偏移作为块 ID。借助此机制，事件处理器可在向存储空间提交新块之前执行重复数据删除检查，处理提交块和检查点之间可能发生的崩溃。
 
-> [AZURE.NOTE] 本教程使用单个 Azure 存储帐户写入从 IoT 中心检索的所有消息。若要确定解决方案中是否需使用多个 Azure 存储帐户，请参阅 [Azure 存储可缩放性指导原则]。
+> [!NOTE] 本教程使用单个 Azure 存储帐户写入从 IoT 中心检索的所有消息。若要确定解决方案中是否需使用多个 Azure 存储帐户，请参阅 [Azure 存储可缩放性指导原则]。
 
 应用程序利用服务总线重复数据删除功能，在处理交互式消息时避免重复项。模拟的设备向每个交互式消息标记唯一的 **MessageId**。借助此 ID，服务总线可确保在指定的重复数据删除时间范围内，仅向接收方发送一条带相同 **MessageId** 的消息。此重复数据删除功能和服务总线队列所提供的每一消息完成语义，使其能够很容易地实现可靠的交互消息处理。
 
 为确保未在重复数据删除时间范围外重新提交任何消息，代码会将 **EventProcessorHost** 检查点机制与服务总线队列重复数据删除时间范围进行同步。同步方式是在每次超出重复数据删除时间范围时（本教程中为 1 小时），至少强制执行一次检查点。
 
-> [AZURE.NOTE] 本教程使用单个分区服务总线队列来处理所有检索自 IoT 中心的交互式消息。若要深入了解如何使用服务总线队列来满足解决方案的扩展性要求，请参阅 [Azure 服务总线]文档。
+> [!NOTE] 本教程使用单个分区服务总线队列来处理所有检索自 IoT 中心的交互式消息。若要深入了解如何使用服务总线队列来满足解决方案的扩展性要求，请参阅 [Azure 服务总线]文档。
 
 ### <a name="provision-an-azure-storage-account-and-a-service-bus-queue"></a> 预配 Azure 存储帐户和服务总线队列
 若要使用 EventProcessorHost 类，必须具有 Azure 存储帐户以使该类能记录检查点信息。可使用现有的 Azure 存储帐户，或按照[关于 Azure 存储]中的说明创建新帐户。请记下 Azure 存储帐户连接字符串。
 
-> [AZURE.NOTE] 复制并粘贴 Azure 存储帐户连接字符串时，切勿包含空格。
+> [!NOTE] 复制并粘贴 Azure 存储帐户连接字符串时，切勿包含空格。
 
 你还需要服务总线队列来可靠处理交互式消息。可在 1 小时的重复数据删除时间范围内，以编程方式创建队列，如[如何使用服务总线队列][Service Bus queue]中所述。还可按以下步骤使用 [Azure 经典管理门户][lnk-classic-portal]：
 
@@ -212,7 +211,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 **AppendAndCheckPoint** 方法首先为要附加到 blob 的块生成 **blockId**。Azure 存储要求所有块 ID 都具有相同的长度，以便此方法使用前置零填补偏移。如果 blob 中已有带此 ID 的块，此方法会将其改为当前缓冲区的内容。
 
-> [AZURE.NOTE] 为了简化代码，本教程在每个分区使用单个 blob 文件来存储消息。实际上，会在某段时间后或在文件达到特定大小后创建其他文件，从而实现文件滚动。请记住，Azure 块 blob 最多可容纳 195 GB 的数据。
+> [!NOTE] 为了简化代码，本教程在每个分区使用单个 blob 文件来存储消息。实际上，会在某段时间后或在文件达到特定大小后创建其他文件，从而实现文件滚动。请记住，Azure 块 blob 最多可容纳 195 GB 的数据。
 
 再下来是实现 **IEventProcessor** 接口：
 
@@ -654,8 +653,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
    
    ![运行 simulated-device][simulateddevice]  
 
-
-> [AZURE.NOTE] 若要查看 blob 文件中的更新，需要将 **StoreEventProcessor** 类中的 **MAX\_BLOCK\_SIZE** 常量降为较小值，例如 **1024**。此更改很有用，原因是模拟设备发出的数据需要一些时间才能达到块大小限制。块大小更小时，可更快查看正创建和更新的 blob。但是，使用较大的块可以提高应用程序的可缩放性。
+> [!NOTE] 若要查看 blob 文件中的更新，需要将 **StoreEventProcessor** 类中的 **MAX\_BLOCK\_SIZE** 常量降为较小值，例如 **1024**。此更改很有用，原因是模拟设备发出的数据需要一些时间才能达到块大小限制。块大小更小时，可更快查看正创建和更新的 blob。但是，使用较大的块可以提高应用程序的可缩放性。
 
 ## 后续步骤
 
@@ -677,39 +675,39 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 <!-- Links -->
 
-[Azure Blob 存储]: /documentation/articles/storage-dotnet-how-to-use-blobs/
+[Azure Blob 存储]: ../storage/storage-dotnet-how-to-use-blobs.md
 [Azure 数据工厂]: /documentation/services/data-factory/
-[HDInsight (Hadoop)]: /documentation/services/hdinsight/
-[Service Bus queue]: /documentation/articles/service-bus-dotnet-get-started-with-queues/
-[服务总线队列]: /documentation/articles/service-bus-dotnet-get-started-with-queues/
+[HDInsight (Hadoop)]: ../hdinsight/index.md/
+[Service Bus queue]: ../service-bus-messaging/service-bus-dotnet-get-started-with-queues.md
+[服务总线队列]: ../service-bus-messaging/service-bus-dotnet-get-started-with-queues.md
 
-[Azure IoT 中心开发人员指南 - 设备到云]: /documentation/articles/iot-hub-devguide-messaging/
+[Azure IoT 中心开发人员指南 - 设备到云]: ./iot-hub-devguide-messaging.md
 
-[Azure 存储]: /documentation/services/storage/
-[Azure 服务总线]: /documentation/services/service-bus/
+[Azure 存储]: ../storage/index.md/
+[Azure 服务总线]: ../service-bus/index.md/
 
-[IoT 中心开发人员指南]: /documentation/articles/iot-hub-devguide/
-[IoT 中心入门]: /documentation/articles/iot-hub-java-java-getstarted/
+[IoT 中心开发人员指南]: ./iot-hub-devguide.md
+[IoT 中心入门]: ./iot-hub-java-java-getstarted.md
 [Azure IoT 开发人员中心]: /develop/iot
-[lnk-service-fabric]: /documentation/services/service-fabric/
-[lnk-stream-analytics]: /documentation/services/stream-analytics/
-[lnk-event-hubs]: /documentation/services/event-hubs/
+[lnk-service-fabric]: ../service-fabric/index.md/
+[lnk-stream-analytics]: ../stream-analytics/index.md/
+[lnk-event-hubs]: ../event-hubs/index.md/
 [Transient Fault Handling]: https://msdn.microsoft.com/zh-cn/library/hh675232.aspx
 
 <!-- Links -->
-[关于 Azure 存储]: /documentation/articles/storage-create-storage-account/#create-a-storage-account
-[事件中心入门]: /documentation/articles/event-hubs-java-ephjava-getstarted/
-[Azure 存储可缩放性指导原则]: /documentation/articles/storage-scalability-targets/
+[关于 Azure 存储]: ../storage/storage-create-storage-account.md#create-a-storage-account
+[事件中心入门]: ../event-hubs/event-hubs-java-ephjava-getstarted.md
+[Azure 存储可缩放性指导原则]: ../storage/storage-scalability-targets.md
 [Azure Block Blobs]: https://msdn.microsoft.com/zh-cn/library/azure/ee691964.aspx
-[事件中心]: /documentation/articles/event-hubs-overview/
+[事件中心]: ../event-hubs/event-hubs-overview.md
 [Event Hubs Programming Guide]: https://github.com/Azure/azure-event-hubs/blob/master/java/readme.md
 [Transient Fault Handling]: https://msdn.microsoft.com/zh-cn/library/hh680901(v=pandp.50).aspx
 
 [lnk-classic-portal]: https://manage.windowsazure.cn
-[lnk-c2d]: /documentation/articles/iot-hub-java-java-process-d2c/
-[lnk-suite]: /documentation/services/iot-suite/
+[lnk-c2d]: ./iot-hub-java-java-process-d2c.md
+[lnk-suite]: ../iot-suite/index.md/
 
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/java-devbox-setup.md
-[lnk-create-an-iot-hub]: /documentation/articles/iot-hub-java-java-getstarted/
+[lnk-create-an-iot-hub]: ./iot-hub-java-java-getstarted.md
 
 <!---HONumber=Mooncake_1205_2016-->

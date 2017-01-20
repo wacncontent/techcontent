@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="我的 Cordova 项目发生了什么情况（Visual Studio 连接服务）| Microsoft Azure" 
-	description="描述使用 Visual Studio 连接服务添加 Azure 移动服务后，Azure Cordova 项目发生了什么情况" 
-	services="mobile-services" 
-	documentationCenter="na" 
-	authors="mlhoop" 
-	manager="douge" 
-	editor=""/>
+---
+title: 我的 Cordova 项目发生了什么情况（Visual Studio 连接服务）| Microsoft Azure
+description: 描述使用 Visual Studio 连接服务添加 Azure 移动服务后，Azure Cordova 项目发生了什么情况
+services: mobile-services
+documentationCenter: na
+authors: mlhoop
+manager: douge
+editor: 
 
-<tags 
-	ms.service="mobile-services" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="multiple" 
-	ms.topic="article" 
-	ms.date="07/21/2016" 
-	wacn.date="09/26/2016" 
-	ms.author="mlearned"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: mlearned
+---
 
 # 使用 Visual Studio 连接服务添加 Azure 移动服务后，我的 Azure Cordova 项目发生了什么情况？
 
@@ -34,6 +34,6 @@
 	        "<insert your key>"
 	    );
 
-[详细了解移动服务](/documentation/services/mobile-services/)
+[详细了解移动服务](./index.md/)
 
 <!---HONumber=Mooncake_0215_2016-->

@@ -1,26 +1,25 @@
-<properties 
-	pageTitle="使用 FTP 在 Azure App Service 中创建和部署 PHP-MySQL Web 应用" 
-	description="本教程演示如何创建在 MySQL 中存储数据的 PHP Web 应用并使用 FTP 部署到 Azure。" 
-	services="app-service\web" 
-	documentationCenter="php" 
-	authors="rmcmurray" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 使用 FTP 在 Azure App Service 中创建和部署 PHP-MySQL Web 应用
+description: 本教程演示如何创建在 MySQL 中存储数据的 PHP Web 应用并使用 FTP 部署到 Azure。
+services: app-service\web
+documentationCenter: php
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="PHP" 
-	ms.topic="article" 
-	ms.date="11/01/2016" 
-	wacn.date="12/30/2016" 
-	ms.author="robmcm"/>
-
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: PHP
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/30/2016
+ms.author: robmcm
+---
 
 #使用 FTP 在 Azure App Service 中创建和部署 PHP-MySQL Web 应用
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本教程演示如何创建 PHP-MySQL Web 应用以及如何使用 FTP 部署该应用。本教程假定你已在计算机上安装 [PHP][install-php]、[MySQL][install-mysql]、Web 服务器和 FTP 客户端。本教程中的说明适用于任何操作系统，包括 Windows、Mac 和 Linux。完成本指南之后，你将拥有一个在 Azure 中运行的 PHP/MySQL Web 应用。
  
@@ -98,7 +97,7 @@
 		echo "<h3>Table created.</h3>";
 		?>
 
-	> [AZURE.NOTE] 
+	> [!NOTE] 
 	你需要使用本地 MySQL 用户名和密码更新 <code>$user</code> 和 <code>$pwd</code> 的值。
 
 4. 打开 Web 浏览器并浏览到 [http://localhost/registration/createtable.php][localhost-createtable]。这将在数据库中创建 `registration_tbl` 表。
@@ -152,7 +151,7 @@
 			die(var_dump($e));
 		}
 
-	> [AZURE.NOTE]
+	> [!NOTE]
 	同样，需要使用本地 MySQL 用户名和密码更新 <code>$user</code> 和 <code>$pwd</code> 的值。
 
 7. 在数据库连接代码后面添加用于将注册信息插入数据库的代码。
@@ -286,5 +285,4 @@
 [management-portal]: https://portal.azure.cn
 [download-publish-profile]: ./media/web-sites-php-mysql-deploy-use-ftp/download_publish_profile_3.png
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

@@ -1,33 +1,32 @@
-<properties
-	pageTitle="自定义身份验证入门 | Azure"
-	description="了解如何使用用户名和密码对用户进行身份验证。"
-	documentationCenter="Mobile"
-	authors="mattchenderson"
-	manager="dwrede"
-	editor=""
-	services="mobile-services"/>
+---
+title: 自定义身份验证入门 | Azure
+description: 了解如何使用用户名和密码对用户进行身份验证。
+documentationCenter: Mobile
+authors: mattchenderson
+manager: dwrede
+editor: 
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="mahender"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: mahender
+---
 
 # 自定义身份验证入门
-
 
 ## 概述
 本主题说明如何通过颁发自己的移动服务身份验证令牌，对 Azure 移动服务 .NET 后端中的用户进行身份验证。在本教程中，你将使用应用程序的自定义用户名和密码向快速入门项目添加身份验证。
 
->[AZURE.NOTE]本教程演示了使用自定义凭据对移动服务进行身份验证的高级方法。许多应用程序最好是改用内置的社交标识提供程序，以便让用户通过 Microsoft 帐户和 Azure Active Directory 登录。如果你这是第一次体验移动服务中的身份验证，请参阅[向应用程序添加身份验证]教程。
+>[!NOTE]本教程演示了使用自定义凭据对移动服务进行身份验证的高级方法。许多应用程序最好是改用内置的社交标识提供程序，以便让用户通过 Microsoft 帐户和 Azure Active Directory 登录。如果你这是第一次体验移动服务中的身份验证，请参阅[向应用程序添加身份验证]教程。
 
 本教程基于移动服务快速入门。此外，还必须先完成[移动服务入门]教程。
 
->[AZURE.IMPORTANT]本教程旨在说明如何颁发移动服务的身份验证令牌。请不要将其视为安全指导原则。在开发应用程序时，你必须留意密码存储的安全问题，并且需要制定暴力破解攻击的管理策略。
+>[!IMPORTANT]本教程旨在说明如何颁发移动服务的身份验证令牌。请不要将其视为安全指导原则。在开发应用程序时，你必须留意密码存储的安全问题，并且需要制定暴力破解攻击的管理策略。
 
 ## 设置帐户表
 
@@ -54,7 +53,7 @@
 
         public DbSet<Account> Accounts { get; set; }
 
-	>[AZURE.NOTE]本教程中的代码段使用 `todoContext` 作为上下文名称。你必须更新项目上下文的代码段。 
+	>[!NOTE]本教程中的代码段使用 `todoContext` 作为上下文名称。你必须更新项目上下文的代码段。 
         &nbsp;
 	接下来，请设置安全功能以处理此数据。
  
@@ -63,7 +62,6 @@
 		using System.Security.Cryptography;
 
 6. 将以下代码方法添加到新类：
-
 
         public static byte[] hash(string plaintext, byte[] salt)
         {
@@ -164,7 +162,7 @@
 
         [AuthorizeLevel(AuthorizationLevel.Anonymous)]
 
->[AZURE.IMPORTANT]任何客户端均可通过 HTTP 访问此注册终结点。将此服务发布到生产环境之前，应实现某种形式的方案来验证注册，例如 SMS 或基于电子邮件的验证。这有助于防止恶意用户创建欺骗性的注册。
+>[!IMPORTANT]任何客户端均可通过 HTTP 访问此注册终结点。将此服务发布到生产环境之前，应实现某种形式的方案来验证注册，例如 SMS 或基于电子邮件的验证。这有助于防止恶意用户创建欺骗性的注册。
 
 ## 创建 LoginProvider
 
@@ -333,12 +331,11 @@
 
         [AuthorizeLevel(AuthorizationLevel.Anonymous)]
 
->[AZURE.IMPORTANT]用于生产环境的 `CustomLoginController` 也应包含暴力破解攻击检测策略。否则，你的登录解决方案可能容易受到攻击。
+>[!IMPORTANT]用于生产环境的 `CustomLoginController` 也应包含暴力破解攻击检测策略。否则，你的登录解决方案可能容易受到攻击。
 
 ## 将移动服务配置为要求身份验证
 
-[AZURE.INCLUDE [mobile-services-restrict-permissions-dotnet-backend](../../includes/mobile-services-restrict-permissions-dotnet-backend.md)]
-
+[!INCLUDE [mobile-services-restrict-permissions-dotnet-backend](../../includes/mobile-services-restrict-permissions-dotnet-backend.md)]
 
 ## 使用测试客户端测试登录流
 
@@ -378,13 +375,13 @@
 
  	![](./media/mobile-services-dotnet-backend-get-started-custom-authentication/mobile-services-dotnet-backend-custom-auth-access-success.png)
 
->[AZURE.IMPORTANT]如果你选择还要将此移动服务项目发布到 Azure 以供测试，请记住，登录和身份验证提供程序将很容易受到攻击。确保这些提供程序已经过适当的增强，或者受保护的测试数据对你而言并不重要。使用自定义身份验证方案之前请保持谨慎，以确保生产环境服务的安全。
+>[!IMPORTANT]如果你选择还要将此移动服务项目发布到 Azure 以供测试，请记住，登录和身份验证提供程序将很容易受到攻击。确保这些提供程序已经过适当的增强，或者受保护的测试数据对你而言并不重要。使用自定义身份验证方案之前请保持谨慎，以确保生产环境服务的安全。
 
 ## 使用自定义身份验证从客户端登录
 
 本部分介绍在从客户端访问自定义身份验证终结点，以获取访问移动服务所需的身份验证令牌时需要执行的步骤。由于所需的特定客户端代码取决于客户端，因此，此处提供的指引与平台无关。
 
->[AZURE.NOTE]移动服务客户端库通过 HTTPS 与服务通信。由于此解决方案需要你以纯文本发送密码，因此请务必在使用直接 REST 请求调用这些终结点时，使用 HTTPS。
+>[!NOTE]移动服务客户端库通过 HTTPS 与服务通信。由于此解决方案需要你以纯文本发送密码，因此请务必在使用直接 REST 请求调用这些终结点时，使用 HTTPS。
 
 1. 在客户端应用程序中创建所需的 UI 元素，以允许用户输入用户名和密码。
 
@@ -392,19 +389,17 @@
 
 	如果你在“帐户”表中保留了用户登录信息，则你只需调用 **CustomRegistration** 终结点一次，即可为给定的用户创建帐户。有关如何在支持的各种客户端平台上调用自定义 API 的示例，请参阅文章 [Azure 移动服务中的自定义 API – 客户端 SDK](http://blogs.msdn.com/b/carlosfigueira/archive/2013/06/19/custom-api-in-azure-mobile-services-client-sdks.aspx)。
 	 
-	> [AZURE.IMPORTANT]由于此用户设置步骤只会发生一次，因此你可以考虑以某种带外方式创建用户帐户。对于公共注册终结点，还应该考虑实施基于短信或电子邮件的验证过程或者其他防护机制，以避免生成欺骗性的帐户。你可以使用 Twilio 从移动服务发送短信。也可以使用 SendGrid 从移动服务发送电子邮件。有关使用 SendGrid 的详细信息，请参阅[使用 SendGrid 从移动服务发送电子邮件](/documentation/articles/store-sendgrid-mobile-services-send-email-scripts/)。
+	> [!IMPORTANT]由于此用户设置步骤只会发生一次，因此你可以考虑以某种带外方式创建用户帐户。对于公共注册终结点，还应该考虑实施基于短信或电子邮件的验证过程或者其他防护机制，以避免生成欺骗性的帐户。你可以使用 Twilio 从移动服务发送短信。也可以使用 SendGrid 从移动服务发送电子邮件。有关使用 SendGrid 的详细信息，请参阅[使用 SendGrid 从移动服务发送电子邮件](./store-sendgrid-mobile-services-send-email-scripts.md)。
 	
 3. 再次使用适当的 **invokeApi** 方法，但这次改为调用 **CustomLogin** 终结点，以在消息正文中传递运行时提供的用户名和密码。
 
 	这次你必须在成功登录后，捕获响应对象中返回的 *userId* 和 *authenticationToken* 值。
 	
-4. 使用返回的 *userId* 和 *authenticationToken* 值创建新的 **MobileServiceUser** 对象，并将该对象设为 **MobileServiceClient** 实例的当前用户，如[向现有应用程序添加身份验证](/documentation/articles/mobile-services-dotnet-backend-ios-get-started-users/)主题中所述。由于 CustomLogin 的结果与 **MobileServiceUser** 对象具有相同形式，因此你应该能够直接转换结果。
+4. 使用返回的 *userId* 和 *authenticationToken* 值创建新的 **MobileServiceUser** 对象，并将该对象设为 **MobileServiceClient** 实例的当前用户，如[向现有应用程序添加身份验证](./mobile-services-dotnet-backend-ios-get-started-users.md)主题中所述。由于 CustomLogin 的结果与 **MobileServiceUser** 对象具有相同形式，因此你应该能够直接转换结果。
 
 本教程到此结束。
 
-
 <!-- Anchors. -->
-
 
 <!-- Images. -->
 
@@ -414,12 +409,10 @@
 [3]: ./media/mobile-services-dotnet-backend-get-started-custom-authentication/mobile-services-dotnet-backend-custom-auth-send-register.png
 [4]: ./media/mobile-services-dotnet-backend-get-started-custom-authentication/mobile-services-dotnet-backend-custom-auth-login-result.png
 
-
 <!-- URLs. -->
-[向应用程序添加身份验证]: /documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users/
-[移动服务入门]: /documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-get-started/
+[向应用程序添加身份验证]: ./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users.md
+[移动服务入门]: ./mobile-services-dotnet-backend-windows-store-dotnet-get-started.md
 [ClaimsIdentity]: https://msdn.microsoft.com/zh-cn/library/system.security.claims.claimsidentity(v=vs.110).aspx
 [ProviderCredentials]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobile.service.security.providercredentials.aspx
  
-
 <!---HONumber=Mooncake_0118_2016-->

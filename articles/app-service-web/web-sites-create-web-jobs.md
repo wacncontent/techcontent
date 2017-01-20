@@ -1,33 +1,33 @@
-<properties 
-	pageTitle="使用 Web 作业运行后台任务" 
-	description="了解如何在 Azure Web 应用中运行后台任务。" 
-	services="app-service" 
-	documentationCenter="" 
-	authors="tdykstra" 
-	manager="wpickett" 
-	editor="jimbe"/>
+---
+title: 使用 Web 作业运行后台任务
+description: 了解如何在 Azure Web 应用中运行后台任务。
+services: app-service
+documentationCenter: 
+authors: tdykstra
+manager: wpickett
+editor: jimbe
 
-<tags 
-	ms.service="app-service" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="04/27/2016" 
-	wacn.date="12/12/2016" 
-	ms.author="tdykstra"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 04/27/2016
+wacn.date: 12/12/2016
+ms.author: tdykstra
+---
 
 # 使用 Web 作业运行后台任务
 
 ## 概述
 
-有 3 种方式可在[应用服务](/documentation/articles/app-service-changes-existing-services/) Web 应用的 Web 作业中运行程序或脚本：按需、连续或按计划。使用 Web 作业无需支付额外的费用。
+有 3 种方式可在[应用服务](./app-service-changes-existing-services.md) Web 应用的 Web 作业中运行程序或脚本：按需、连续或按计划。使用 Web 作业无需支付额外的费用。
 
-本文说明如何使用 [Azure 门户预览](https://portal.azure.cn)来部署 Web 作业。有关如何使用 Visual Studio 或连续交付过程进行部署的信息，请参阅[如何将 Azure Web 作业部署到 Web 应用](/documentation/articles/websites-dotnet-deploy-webjobs/)。
+本文说明如何使用 [Azure 门户预览](https://portal.azure.cn)来部署 Web 作业。有关如何使用 Visual Studio 或连续交付过程进行部署的信息，请参阅[如何将 Azure Web 作业部署到 Web 应用](./websites-dotnet-deploy-webjobs.md)。
 
-Azure WebJobs SDK 简化了许多 Web 作业编程任务。有关详细信息，请参阅[什么是 WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk/)。
+Azure WebJobs SDK 简化了许多 Web 作业编程任务。有关详细信息，请参阅[什么是 WebJobs SDK](./websites-dotnet-webjobs-sdk.md)。
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
 
 ## <a name="acceptablefiles"></a>可接受的脚本或程序文件类型
 
@@ -71,7 +71,7 @@ Azure WebJobs SDK 简化了许多 Web 作业编程任务。有关详细信息，
 
 2. 若要启动或停止连续 Web 作业，右键单击列表中的 Web 作业，然后单击“启动”或“停止”。
 	
-> [AZURE.NOTE] 如果 Web 应用在多个实例上运行，则连续运行的 Web 作业会在所有实例上运行。按需和按计划 Web 作业在 Azure 针对负载均衡所选择的单个实例上运行。
+> [!NOTE] 如果 Web 应用在多个实例上运行，则连续运行的 Web 作业会在所有实例上运行。按需和按计划 Web 作业在 Azure 针对负载均衡所选择的单个实例上运行。
 	
 > 要使连续 Web 作业在所有实例上可靠运行，请启用 Web 应用的 AlwaysOn* 配置设置；否则，Web 作业将在 SCM 主机站点闲置时间太长时停止运行。
 
@@ -97,7 +97,6 @@ CRON 表达式由 6 个字段组成：`{second} {minute} {hour} {day} {month} {d
 - 每个工作日的上午 9:30：`0 30 9 * * 1-5`
 
 **注意**：从 Visual Studio 部署 Web 作业时，请确保将 `settings.job` 文件属性标记为“如果较新则复制”。
-
 
 ## <a name="CreateScheduled"></a>使用 Azure 计划程序创建计划的 Web 作业
 
@@ -191,7 +190,6 @@ Azure 门户预览尚不能创建计划的 Web 作业，但在增添该功能之
 	
 	单击其中一个链接可将你带到所选作业的 Web 作业详细信息页。
 
-
 ## <a name="WHPNotes"></a>说明
 	
 - 如果没有对 scm（部署）站点发出任何请求，并且未在 Azure 中打开 Web 应用的门户，则免费模式下的 Web 应用可能会在 20 分钟后超时。对实际站点发出的请求不会对此进行重置。
@@ -205,7 +203,7 @@ Azure 门户预览尚不能创建计划的 Web 作业，但在增添该功能之
 有关详细信息，请参阅 [Azure Web 作业推荐资源][WebJobsRecommendedResources]。
 
 [PSonWebJobs]: http://blogs.msdn.com/b/nicktrog/archive/2014/01/22/running-powershell-web-jobs-on-azure-websites.aspx
-[WebJobsRecommendedResources]: /documentation/articles/websites-webjobs-resources/
+[WebJobsRecommendedResources]: ./websites-webjobs-resources.md
 
 [OnDemandWebJob]: ./media/web-sites-create-web-jobs/01aOnDemandWebJob.png
 [WebJobsList]: ./media/web-sites-create-web-jobs/02aWebJobsList.png
@@ -231,5 +229,4 @@ Azure 门户预览尚不能创建计划的 Web 作业，但在增添该功能之
 [SchedulerPortal]: ./media/web-sites-create-web-jobs/32SchedulerPortal.png
 [JobActionPageInScheduler]: ./media/web-sites-create-web-jobs/33JobActionPageInScheduler.png
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

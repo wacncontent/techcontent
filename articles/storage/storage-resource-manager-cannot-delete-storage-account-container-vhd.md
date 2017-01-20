@@ -1,29 +1,26 @@
-<properties
-	pageTitle="删除 Resource Manager 部署中的 Azure 存储帐户、容器或 VHD 时对错误进行故障排除 | Azure"
-	description="删除 Resource Manager 部署中的 Azure 存储帐户、容器或 VHD 时对错误进行故障排除"
-	services="storage"
-	documentationCenter=""
-	authors="genlin"
-	manager="felixwu"
-	editor="na"
-	tags="storage"/>  
+---
+title: 删除 Resource Manager 部署中的 Azure 存储帐户、容器或 VHD 时对错误进行故障排除 | Azure
+description: 删除 Resource Manager 部署中的 Azure 存储帐户、容器或 VHD 时对错误进行故障排除
+services: storage
+documentationCenter: 
+authors: genlin
+manager: felixwu
+editor: na
+tags: storage
 
-
-<tags
-	ms.service="storage"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/17/2016"
-	wacn.date="11/07/2016"
-	ms.author="genli;dougiman"/>  
-
+ms.service: storage
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/17/2016
+wacn.date: 11/07/2016
+ms.author: genli;dougiman
+---
 
 # 删除 Resource Manager 部署中的 Azure 存储帐户、容器或 VHD 时对错误进行故障排除
 
 尝试在 [Azure 门户预览](https://portal.azure.cn)中删除 Azure 存储帐户、容器或 VHD 时，可能会收到错误。本文提供故障排除指导，帮助解决 Azure Resource Manager 部署中的问题。
-
 
 ## 症状
 
@@ -57,12 +54,10 @@
 
 ### 步骤 1：识别有问题的 VHD 和关联的 VM
 
-
 1. 登录到 [Azure 门户预览](https://portal.azure.cn)。
 2. 在“中心”菜单上，选择“所有资源”。转到想要删除的存储帐户 >“Blob”>“VHD”。
 
 	![locateVHD1.png](./media/storage-resource-manager-cannot-delete-storage-account-container-vhd/opencontainer.png)  
-
 
 3. 检查容器中每个 VHD 的属性。找到处于“已租用”状态的 VHD。然后，确定正在使用该 VHD 的 VM。通常情况下，可通过检查 VHD 的名称确定保存该 VHD 的 VM：
 
@@ -71,7 +66,6 @@
   - 数据磁盘通常遵循以下命名约定：VMName-YYYYMMDD-HHMMSS.vhd
 
 	![locatevm.png](./media/storage-resource-manager-cannot-delete-storage-account-container-vhd/locatevm.png)  
-
 
 ### 步骤 2：从 VHD 中删除租约
 
@@ -105,11 +99,9 @@
 
 -	如果某个对象正在主动使用存储帐户（例如，VM），它可防止删除该存储帐户。
 
-
-
 ## 后续步骤
 
-- [删除存储帐户](/documentation/articles/storage-create-storage-account/#delete-a-storage-account)
+- [删除存储帐户](./storage-create-storage-account.md#delete-a-storage-account)
 - [如何在 Azure 中解除 Blob 存储的锁定租约 (PowerShell)](https://gallery.technet.microsoft.com/scriptcenter/How-to-break-the-locked-c2cd6492)
 
 <!---HONumber=Mooncake_1031_2016-->

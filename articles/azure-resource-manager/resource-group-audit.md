@@ -1,23 +1,22 @@
-<properties
-    pageTitle="使用 Resource Manager 执行审核操作 | Azure"
-    description="使用 Resource Manager 中的活动日志查看用户操作和错误。显示 Azure 门户预览、PowerShell、Azure CLI 和 REST。"
-    services="azure-resource-manager"
-    documentationcenter=""
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: 使用 Resource Manager 执行审核操作 | Azure
+description: 使用 Resource Manager 中的活动日志查看用户操作和错误。显示 Azure 门户预览、PowerShell、Azure CLI 和 REST。
+services: azure-resource-manager
+documentationcenter: 
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="fcdb3125-13ce-4c3b-9087-f514c5e41e73"
-    ms.service="azure-resource-manager"
-    ms.workload="multiple"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="08/22/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: fcdb3125-13ce-4c3b-9087-f514c5e41e73
+ms.service: azure-resource-manager
+ms.workload: multiple
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/22/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 使用资源管理器执行审核操作
 通过活动日志，可以确定：
@@ -28,9 +27,9 @@
 * 操作的状态
 * 其他可能有助于你研究操作的属性的值
 
-[AZURE.INCLUDE [resource-manager-audit-limitations](../../includes/resource-manager-audit-limitations.md)]
+[!INCLUDE [resource-manager-audit-limitations](../../includes/resource-manager-audit-limitations.md)]
 
-本主题着重于审核操作。若要了解如何使用活动日志对部署进行故障排除，请参阅 [Azure 中的资源组部署故障排除](/documentation/articles/resource-manager-troubleshoot-deployments-portal/)。
+本主题着重于审核操作。若要了解如何使用活动日志对部署进行故障排除，请参阅 [Azure 中的资源组部署故障排除](./resource-manager-troubleshoot-deployments-portal.md)。
 
 可以通过门户、PowerShell、Azure CLI、Insights REST API 或 [Insights .NET 库](https://www.nuget.org/packages/Microsoft.Azure.Insights/)检索活动日志中的信息。
 
@@ -55,7 +54,6 @@
 6. 若要自动筛选特定的资源或资源组，只需从该资源边栏选项卡中选择“活动日志”即可。请注意，将通过所选资源对活动日志进行自动筛选。
    
     ![按资源筛选](./media/resource-group-audit/filtered-by-resource.png)  
-
 
 ## 通过 PowerShell 查看活动日志
 1. 若要检索日志条目，请运行 **Get-AzureRmLog** 命令。你可以提供附加参数来筛选条目列表。如果未指定开始和结束时间，将返回最后一个小时的条目。例如，若要检索过去一小时针对某个资源组的操作，请运行：
@@ -110,8 +108,8 @@
 
 ## 后续步骤
 * Azure 活动日志可以与 Power BI 一起使用，以便更深入地了解在你的订阅中执行的操作。请参阅 [View and analyze Azure Activity Logs in Power BI and more](https://azure.microsoft.com/blog/analyze-azure-audit-logs-in-powerbi-more/)（在 Power BI 和其他组件中查看和分析 Azure 活动日志）。
-* 若要了解如何设置安全策略，请参阅 [Azure 基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)。
-* 若要了解对部署进行故障排除的命令，请参阅 [Azure 中的资源组部署故障排除](/documentation/articles/resource-manager-troubleshoot-deployments-portal/)。
-* 若要了解如何防止对所有用户的资源执行删除操作，请参阅[使用 Azure Resource Manager 锁定资源](/documentation/articles/resource-group-lock-resources/)。
+* 若要了解如何设置安全策略，请参阅 [Azure 基于角色的访问控制](../active-directory/role-based-access-control-configure.md)。
+* 若要了解对部署进行故障排除的命令，请参阅 [Azure 中的资源组部署故障排除](./resource-manager-troubleshoot-deployments-portal.md)。
+* 若要了解如何防止对所有用户的资源执行删除操作，请参阅[使用 Azure Resource Manager 锁定资源](./resource-group-lock-resources.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

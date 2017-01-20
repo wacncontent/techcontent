@@ -1,22 +1,22 @@
-<properties
-	pageTitle="使用 PowerShell cmdlet 创建虚拟机规模集 | Azure"
-	description="开始使用 Azure PowerShell cmdlet 来创建和管理你的第一个 Azure 虚拟机规模集"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="danielsollondon"
-	manager="guybo"
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: 使用 PowerShell cmdlet 创建虚拟机规模集 | Azure
+description: 开始使用 Azure PowerShell cmdlet 来创建和管理你的第一个 Azure 虚拟机规模集
+services: virtual-machines-windows
+documentationCenter: 
+authors: danielsollondon
+manager: guybo
+editor: 
+tags: azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/29/2016"
-	wacn.date="11/21/2016"
-	ms.author="danielsollondon"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/29/2016
+wacn.date: 11/21/2016
+ms.author: danielsollondon
+---
 
 # 使用 PowerShell cmdlet 创建虚拟机规模集
 

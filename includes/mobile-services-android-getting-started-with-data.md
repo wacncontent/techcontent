@@ -7,17 +7,13 @@
 	    compile 'com.google.guava:guava:18.0'
 	    compile 'com.microsoft.azure:azure-mobile-services-android-sdk:2.0.2+'
 
-
 2. 现在，通过单击“将项目与 Gradle 文件同步”来重新生成项目。
 
 3. 打开 AndroidManifest.xml 文件并添加以下代码行，以便应用能够访问 Azure 中的移动服务。
 
 		<uses-permission android:name="android.permission.INTERNET" />
 
-
 4. 在项目资源管理器中，打开位于 **GetStartedWithData => app => src => java** 文件夹中的 TodoActivity.java 文件，并取消注释以下代码行：
-
-
 
 		import java.net.MalformedURLException;
 		import android.os.AsyncTask;
@@ -32,7 +28,6 @@
 		import com.microsoft.windowsazure.mobileservices.http.ServiceFilterResponse;
 		import com.microsoft.windowsazure.mobileservices.table.MobileServiceTable;
 
- 
 5. 取消注释以下行：
 
 		import java.util.ArrayList;
@@ -50,7 +45,6 @@
 		private private MobileServiceTable<ToDoItem> mToDoTable;
 
 9. 找到文件底部的 *ProgressFilter* 类，并取消其注释。当 *MobileServiceClient* 运行网络操作时，此类显示“正在加载”指示器。
-
 
 10. 在 **Azure 经典管理门户**中单击“移动服务”，然后单击你刚刚创建的移动服务。
 
@@ -79,8 +73,6 @@
   	这将创建用于访问移动服务的  *MobileServiceClient* 的新实例。它还将创建用于代理移动服务中的数据存储的  *MobileServiceTable* 实例。
 
 13. 在上面的代码中，请将 `MobileServiceUrl` 和 `AppKey` 依次替换为移动服务的 URL 和应用程序密钥。
-
-
 
 14. 取消注释 **checkItem** 方法的以下行：
 
@@ -128,7 +120,6 @@
 	        }
 	    }.execute();
 		
-
   	此代码将创建一个新项目并将其插入到远程移动服务的表中。
 
 16. 取消注释 **refreshItemsFromTable** 方法的以下行：
@@ -158,7 +149,6 @@
 
 	这将查询移动服务，并返回未标记为“完成”的所有项。这些项目将添加到用于绑定的适配器。
 		
-
 <!-- URLs. -->
 [Mobile Services Android SDK]: http://aka.ms/Iajk6q
 

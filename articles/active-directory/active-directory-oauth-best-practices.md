@@ -1,21 +1,20 @@
-<properties
-	pageTitle="Azure AD 中 OAuth 2.0 的最佳实践 | Azure"
-	description="本文介绍在开发使用 Azure Active Directory 中的 OAuth 2.0 的应用程序时运用的最佳实践。"
-	services="active-directory"
-	documentationCenter=".net"
-	authors="priyamohanram"
-	manager="mbaldwin"
-	editor=""/>
+---
+title: Azure AD 中 OAuth 2.0 的最佳实践 | Azure
+description: 本文介绍在开发使用 Azure Active Directory 中的 OAuth 2.0 的应用程序时运用的最佳实践。
+services: active-directory
+documentationCenter: .net
+authors: priyamohanram
+manager: mbaldwin
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.date="05/31/2016"
-	wacn.date="08/22/2016"/>
-
+ms.service: active-directory
+ms.date: 05/31/2016
+wacn.date: 08/22/2016
+---
 
 # Azure Active Directory 中 OAuth 2.0 的最佳实践
 
-[AZURE.INCLUDE [active-directory-protocols](../../includes/active-directory-protocols.md)]
+[!INCLUDE [active-directory-protocols](../../includes/active-directory-protocols.md)]
 
 ## 使用 State 参数
 
@@ -72,6 +71,6 @@ Azure AD 支持客户端可查询的多种令牌颁发终结点。使用以下�
 
 ## 后续步骤
 
-[Active Directory 身份验证库 (ADAL)](/documentation/articles/active-directory-authentication-libraries/)
+[Active Directory 身份验证库 (ADAL)](./active-directory-authentication-libraries.md)
 
 <!---HONumber=AcomDC_0718_2016-->

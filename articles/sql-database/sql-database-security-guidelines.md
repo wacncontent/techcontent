@@ -1,22 +1,23 @@
-<properties
-    pageTitle="Azure SQL 数据库安全指导原则和限制 | Azure"
-    description="了解与安全性相关的 Azure SQL 数据库指导原则和限制。"
-    services="sql-database"
-    documentationcenter=""
-    author="BYHAM"
-    manager="jhubbard"
-    editor=""
-    tags="" />
-<tags
-    ms.assetid="8e71b04c-bc38-4153-8f83-f2b14faa31d9"
-    ms.service="sql-database"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="data-management"
-    ms.date="10/18/2016"
-    wacn.date="12/19/2016"
-ms.author="rickbyh" />
+---
+title: Azure SQL 数据库安全指导原则和限制 | Azure
+description: 了解与安全性相关的 Azure SQL 数据库指导原则和限制。
+services: sql-database
+documentationcenter: 
+author: BYHAM
+manager: jhubbard
+editor: 
+tags: 
+
+ms.assetid: 8e71b04c-bc38-4153-8f83-f2b14faa31d9
+ms.service: sql-database
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-management
+ms.date: 10/18/2016
+wacn.date: 12/19/2016
+ms.author: rickbyh
+---
 
 # Azure SQL 数据库安全指导原则和限制
 本主题介绍与安全性相关的 Azure SQL 数据库指导原则和限制。在管理你的 Azure SQL 数据库的安全性时应考虑以下几点：
@@ -29,10 +30,10 @@ ms.author="rickbyh" />
 
 只能通过 TCP 端口 1433 使用 Azure SQL 数据库服务。若要从计算机访问 SQL 数据库，请确保客户端计算机防火墙允许 TCP 端口 1433 上的传出 TCP 通信。如果其他应用程序不需要，则阻止 TCP 端口 1433 上的入站连接。
 
-在连接过程中，来自 Azure 虚拟机的连接将重定向到每个辅助角色特有的不同 IP 地址和端口。该端口号在 11000 到 11999 的范围内。有关 TCP 端口的详细信息，请参阅[用于 ADO.NET 4.5 和 SQL 数据库 V12 的非 1433 端口](/documentation/articles/sql-database-develop-direct-route-ports-adonet-v12/)。
+在连接过程中，来自 Azure 虚拟机的连接将重定向到每个辅助角色特有的不同 IP 地址和端口。该端口号在 11000 到 11999 的范围内。有关 TCP 端口的详细信息，请参阅[用于 ADO.NET 4.5 和 SQL 数据库 V12 的非 1433 端口](./sql-database-develop-direct-route-ports-adonet-v12.md)。
 
 ## 身份验证
-尽可能使用 Active Directory 身份验证（集成安全性）。有关配置 AD 身份验证的信息，请参阅[通过使用 Azure Active Directory 身份验证连接到 SQL 数据库](/documentation/articles/sql-database-aad-authentication/)和 SQL Server 联机丛书中的[选择身份验证模式](https://msdn.microsoft.com/zh-cn/library/ms144284.aspx)。
+尽可能使用 Active Directory 身份验证（集成安全性）。有关配置 AD 身份验证的信息，请参阅[通过使用 Azure Active Directory 身份验证连接到 SQL 数据库](./sql-database-aad-authentication.md)和 SQL Server 联机丛书中的[选择身份验证模式](https://msdn.microsoft.com/zh-cn/library/ms144284.aspx)。
 
 使用包含的数据库用户可提高可缩放性。有关详细信息，请参阅[包含的数据库用户 - 使你的数据库可移植](https://msdn.microsoft.com/zh-cn/library/ff929188.aspx)、[CREATE USER (Transact-SQL)](https://technet.microsoft.com/zh-cn/library/ms173463.aspx) 和[包含的数据库](https://technet.microsoft.com/zh-cn/library/ff929071.aspx)。
 
@@ -53,29 +54,26 @@ ms.author="rickbyh" />
 - 在 ADO.NET 应用程序中执行 ``CREATE/ALTER/DROP LOGIN`` 和 ``CREATE/ALTER/DROP DATABASE`` 语句时，不允许使用参数化命令。有关详细信息，请参阅[命令和参数](https://msdn.microsoft.com/zh-cn/library/ms254953.aspx)。
 - 在执行 ``CREATE/ALTER/DROP DATABASE`` 和 ``CREATE/ALTER/DROP LOGIN`` 语句时，上述每个语句都必须是 Transact-SQL 批处理中的唯一语句。否则将会出错。例如，以下 Transact-SQL 将检查该数据库是否存在。如果该数据库存在，则调用 ``DROP DATABASE`` 语句删除该数据库。因为 ``DROP DATABASE`` 语句不是该批处理中的唯一语句，所以执行以下 Transact-SQL 将导致错误。
 
-
 	IF EXISTS (SELECT [name]
 	           FROM   [sys].[databases]
 	           WHERE  [name] = N'database_name')
 	     DROP DATABASE [database_name];
 	GO
 
-
 - 在使用 ``FOR/FROM LOGIN`` 选项执行 ``CREATE USER`` 语句时，该语句必须是 Transact-SQL 批处理中的唯一语句。
 - 在使用 ``WITH LOGIN`` 选项执行 ``ALTER USER`` 语句时，该语句必须是 Transact-SQL 批处理中的唯一语句。
 - 若要执行 ``CREATE/ALTER/DROP`` 操作，用户需要对数据库拥有 ``ALTER ANY USER`` 权限。
 - 在数据库角色的所有者尝试在该数据库角色中添加或删除其他数据库用户时，可能会发生以下错误：“此数据库中不存在用户或角色‘Name’”。 在用户对所有者不可见时，将会发生此错误。若要解决此问题，请向角色所有者授予对该用户的 ``VIEW DEFINITION`` 权限。
 
-有关登录名和用户的详细信息，请参阅[在 Azure SQL 数据库中管理数据库和登录名](/documentation/articles/sql-database-manage-logins/)。
-
+有关登录名和用户的详细信息，请参阅[在 Azure SQL 数据库中管理数据库和登录名](./sql-database-manage-logins.md)。
 
 ## 另请参阅
 
-[Azure SQL 数据库防火墙](/documentation/articles/sql-database-firewall-configure/)
+[Azure SQL 数据库防火墙](./sql-database-firewall-configure.md)
 
-[如何：配置防火墙设置（Azure SQL 数据库）](/documentation/articles/sql-database-configure-firewall-settings/)
+[如何：配置防火墙设置（Azure SQL 数据库）](./sql-database-configure-firewall-settings.md)
 
-[在 Azure SQL 数据库中管理数据库和登录名](/documentation/articles/sql-database-manage-logins/)
+[在 Azure SQL 数据库中管理数据库和登录名](./sql-database-manage-logins.md)
 
 [SQL Server 数据库引擎和 Azure SQL 数据库安全中心](https://msdn.microsoft.com/zh-cn/library/bb510589)
 

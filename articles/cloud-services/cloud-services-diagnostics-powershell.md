@@ -1,26 +1,25 @@
-<properties 
-	pageTitle="使用 PowerShell 在 Azure 云服务中启用诊断 | Azure" 
-	description="了解如何使用 PowerShell 为云服务启用诊断" 
-	services="cloud-services" 
-	documentationCenter=".net" 
-	authors="Thraka"
-	manager="timlt"
-	editor=""/>
+---
+title: 使用 PowerShell 在 Azure 云服务中启用诊断 | Azure
+description: 了解如何使用 PowerShell 为云服务启用诊断
+services: cloud-services
+documentationCenter: .net
+authors: Thraka
+manager: timlt
+editor: 
 
-<tags
-	ms.service="cloud-services"
-	ms.workload="tbd"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="09/06/2016"
-	wacn.date="12/26/2016"
-	ms.author="adegeo"/>
-
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 09/06/2016
+wacn.date: 12/26/2016
+ms.author: adegeo
+---
 
 # 使用 PowerShell 在 Azure 云服务中启用诊断
 
-可以使用 Azure 诊断扩展从云服务收集诊断数据（如应用程序日志和性能计数器等）。本文介绍如何使用 PowerShell 为云服务启用 Azure 诊断扩展。有关本文所需的先决条件，请参阅[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)。
+可以使用 Azure 诊断扩展从云服务收集诊断数据（如应用程序日志和性能计数器等）。本文介绍如何使用 PowerShell 为云服务启用 Azure 诊断扩展。有关本文所需的先决条件，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
 
 ## 在部署云服务过程中启用诊断扩展
 
@@ -89,11 +88,9 @@ Visual Studio Online 使用类似的方法通过诊断扩展自动部署云服�
 	$webrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "WebRole" -DiagnosticsConfigurationPath $webrole_diagconfigpath -StorageAccountName $diagnosticsstorage_name -StorageAccountKey $diagnosticsstorage_key
 	$workerrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "WorkerRole" -DiagnosticsConfigurationPath $workerrole_diagconfigpath -StorageAccountName $diagnosticsstorage_name -StorageAccountKey $diagnosticsstorage_key
  
-
 ## 在现有的云服务上启用诊断扩展
 
 可以使用 [Set-AzureServiceDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/azure/mt589140.aspx) cmdlet 在已运行的云服务上启用或更新诊断配置。
-
 
 	$service_name = "MyService"
 	$webrole_diagconfigpath = "MyService.WebRole.PubConfig.xml" 
@@ -104,7 +101,6 @@ Visual Studio Online 使用类似的方法通过诊断扩展自动部署云服�
 	
 	Set-AzureServiceDiagnosticsExtension -DiagnosticsConfiguration @($webrole_diagconfig,$workerrole_diagconfig) -ServiceName $service_name 
 	  
-
 ## 获取当前诊断扩展配置
 使用 [Get AzureServiceDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/azure/mt589204.aspx) cmdlet 可以获取云服务的当前诊断配置。
 	
@@ -121,11 +117,10 @@ Visual Studio Online 使用类似的方法通过诊断扩展自动部署云服�
 
 	Remove-AzureServiceDiagnosticsExtension -ServiceName "MyService" -Role "WebRole"
 
-
 ## 后续步骤
 
-- 有关使用 Azure 诊断和其他方法排查问题的详细说明，请参阅[在 Azure 云服务和虚拟机中启用诊断](/documentation/articles/cloud-services-dotnet-diagnostics)。
+- 有关使用 Azure 诊断和其他方法排查问题的详细说明，请参阅[在 Azure 云服务和虚拟机中启用诊断](./cloud-services-dotnet-diagnostics.md)。
 - [诊断配置架构](https://msdn.microsoft.com/zh-cn/library/azure/dn782207.aspx)介绍了诊断扩展的各种 XML 配置选项。
-- 若要了解如何为虚拟机启用诊断扩展，请参阅[使用 Azure Resource Manager 模板创建具有监视和诊断功能的 Windows 虚拟机](/documentation/articles/virtual-machines-windows-extensions-diagnostics-template)
+- 若要了解如何为虚拟机启用诊断扩展，请参阅[使用 Azure Resource Manager 模板创建具有监视和诊断功能的 Windows 虚拟机](../virtual-machines/virtual-machines-windows-extensions-diagnostics-template.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

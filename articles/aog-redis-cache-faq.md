@@ -1,12 +1,17 @@
-<properties 
-	pageTitle="Redis Cache 常见问题解答" 
-	description="Redis Cache 常见问题解答" 
-	services="redis-cache" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="redis-cache-aog" ms.date="" wacn.date="08/31/2016"/>
+---
+title: Redis Cache 常见问题解答
+description: Redis Cache 常见问题解答
+services: redis-cache
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: redis-cache-aog
+ms.date: 
+wacn.date: 08/31/2016
+---
+
 # Redis Cache 常见问题解答
 
 当客户连接 azure redis 时，有时候会遇到一些错误，通常情况下我们需要排查两个方面，确认该错误是来源于 client 端，或者是 server 端。我们就这两方面经常遇到的问题做一个简单的总结。
@@ -51,7 +56,7 @@
 当出现高 cpu 使用率问题时表明 client 端的系统已经处理不过来应该执行的任务。从 redis 的角度来看，这意味着 client 很有可能因为没能及时处理 redis server 端发过来的请求而导致相应请求失败。
 
 **监控该问题：**客户可以通过监控 azure 管理门户上提供的监控服务观察系统的 cpu 使用率。需要注意的一点是尽量避免监控某个进程的 cpu，因为可能某个单一的进程 cpu 利用率很低，但是整体系统的 cpu 利用率却很高。同时也需要注意在发生超时时观察是否 cpu 也出现了利用率的峰值情况。如果是由于 cpu 高利用率的原因，在超时的异常报错信息中可以看到 "in: XXX" 该项的值会比较高(与突发流量部分类似)。
->[AZURE.NOTE]StackExchange.Redis 1.1.603 版本或者更高版本在超时发生时，会给出 "local-cpu" 使用率的信息，这将有助于我们准备判断是否 cpu 使用率会影响系统的性能。
+>[!NOTE]StackExchange.Redis 1.1.603 版本或者更高版本在超时发生时，会给出 "local-cpu" 使用率的信息，这将有助于我们准备判断是否 cpu 使用率会影响系统的性能。
 
 **解决方法：**升级虚拟机到更高的型号，保证更高的 cpu 资源，或者可以调查是什么原因导致的 cpu 突然升高。
 
@@ -84,7 +89,6 @@
 2.	通过提高虚拟机型号 (client 端和 redis server 端)来增加带宽容量，这样可以减少在传输大数据时候的传送时间。需要注意的一点是，只增加 client 端或者 server 端一端的带宽是不够的，因此客户需要评估自己的带宽使用量，然后保证与客户的虚拟机带宽容量匹配。
 3.	增加对象 ConnectionMultiplexer 的数量和轮询请求数量。如果选择这样做，客户需要注意到的是确保不要为每个 request 都创建一个新的 ConnectionMultiplexer，因为这样会大大的消耗机器性能。
 
-
 ## Server 端常见问题
 
 造成 Server 端的延迟原因有以下几种情况：
@@ -100,8 +104,8 @@
 
 **解决方法：**客户可以做几种改变从而有效的保持内存使用健康。
 
-1.	[配置内存使用规则](/documentation/articles/cache-configure/#maxmemory-policy-and-maxmemory-reserved)以及设置 key 的过期时间。需要注意的一点是如果客户 redis 中存在碎片，可能这样做效果不是很明显。
-2.	[配置最大存储保留值](/documentation/articles/cache-configure/#maxmemory-policy-and-maxmemory-reserved)从而使得有足够大的空间来放存储碎片。
+1.	[配置内存使用规则](./redis-cache/cache-configure.md#maxmemory-policy-and-maxmemory-reserved)以及设置 key 的过期时间。需要注意的一点是如果客户 redis 中存在碎片，可能这样做效果不是很明显。
+2.	[配置最大存储保留值](./redis-cache/cache-configure.md#maxmemory-policy-and-maxmemory-reserved)从而使得有足够大的空间来放存储碎片。
 3.	将大的 cache 对象分割成一个个对应的小的 cache 对象。
 4.	升级 redis 到更大的 cache。
 	

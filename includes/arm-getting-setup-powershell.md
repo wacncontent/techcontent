@@ -20,11 +20,9 @@
 	PSCompatibleVersions           {1.0, 2.0, 3.0}
 	PSRemotingProtocolVersion      2.2
 
-
 确保 **PSVersion** 的值为 3.0 或 4.0。如果不是，请参阅 [Windows Management Framework 3.0](http://www.microsoft.com/download/details.aspx?id=34595) 或 [Windows Management Framework 4.0](http://www.microsoft.com/download/details.aspx?id=40855)。
 
 ### 设置你的 Azure 帐户和订阅
-
 
 打开 Azure PowerShell 命令提示符，然后使用此命令登录到 Azure。
 
@@ -52,6 +50,6 @@
 	$subscr="<SubscriptionName from the display of Get-AzureRmSubscription>"
 	Select-AzureRmSubscription -SubscriptionName $subscr -Current
 
-有关 Azure 订阅和帐户的详细信息，请参阅[如何：连接到你的订阅](/documentation/articles/powershell-install-configure/#Connect)。
+有关 Azure 订阅和帐户的详细信息，请参阅[如何：连接到你的订阅](../articles/powershell-install-configure.md#Connect)。
 
 <!---HONumber=Mooncake_1207_2015-->

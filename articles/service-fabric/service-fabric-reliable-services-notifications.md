@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Reliable Services 通知 | Azure"
-    description="Service Fabric Reliable Services 通知的概念文档"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="mcoskun"
-    manager="timlt"
-    editor="masnider,vturecek" />
-<tags
-    ms.assetid="cdc918dd-5e81-49c8-a03d-7ddcd12a9a76"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/18/2016"
-    wacn.date="12/26/2016"
-    ms.author="mcoskun" />
+---
+title: Reliable Services 通知 | Azure
+description: Service Fabric Reliable Services 通知的概念文档
+services: service-fabric
+documentationcenter: .net
+author: mcoskun
+manager: timlt
+editor: masnider,vturecek
+
+ms.assetid: cdc918dd-5e81-49c8-a03d-7ddcd12a9a76
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/18/2016
+wacn.date: 12/26/2016
+ms.author: mcoskun
+---
 
 # Reliable Services 通知
 通知可让客户端跟踪对它们感兴趣的对象所进行的更改。两种类型的对象支持通知：*可靠状态管理器*和*可靠字典*。
@@ -48,7 +49,6 @@
 
 若要注册事务通知和/或状态管理器通知，需要在可靠状态管理器上注册 **TransactionChanged** 或 **StateManagerChanged** 事件。注册这些事件处理程序的常见位置是有状态服务的构造函数。如果在构造函数上注册，也不会错过 **IReliableStateManager** 生存期内的更改导致的任何通知。
 
-
 	public MyService(StatefulServiceContext context)
     		: base(MyService.EndpointName, context, CreateReliableStateManager(context))
 	{
@@ -56,13 +56,11 @@
     		this.StateManager.StateManagerChanged += this.OnStateManagerChangedHandler;
 	}
 
-
 **TransactionChanged** 事件处理程序使用 **NotifyTransactionChangedEventArgs** 来提供有关事件的详细信息。它包含用于指定更改类型的操作属性（例如，**NotifyTransactionChangedAction.Commit**）。也包含提供对已更改事务的引用的事务属性。
 
->[AZURE.NOTE] 现在，只有提交事务才会引发 **TransactionChanged** 事件。此操作等同于 **NotifyTransactionChangedAction.Commit**。但是在未来，可能会有其他类型的事务状态更改可以引发事件。建议你检查操作，仅在你预期的事件发生时处理事件。
+>[!NOTE] 现在，只有提交事务才会引发 **TransactionChanged** 事件。此操作等同于 **NotifyTransactionChangedAction.Commit**。但是在未来，可能会有其他类型的事务状态更改可以引发事件。建议你检查操作，仅在你预期的事件发生时处理事件。
 
 以下是 **TransactionChanged** 事件处理程序示例。
-
 
 	private void OnTransactionChangedHandler(object sender, NotifyTransactionChangedEventArgs e)
 	{
@@ -75,14 +73,12 @@
     		}
 	}
 
-
 **StateManagerChanged** 事件处理程序使用 **NotifyStateManagerChangedEventArgs** 来提供有关事件的详细信息。**NotifyStateManagerChangedEventArgs** 有两个子类：**NotifyStateManagerRebuildEventArgs** 和 **NotifyStateManagerSingleEntityChangedEventArgs**。使用 **NotifyStateManagerChangedEventArgs** 中的操作属性将 **NotifyStateManagerChangedEventArgs** 转换为正确的子类：
 
 - **NotifyStateManagerChangedAction.Rebuild**：**NotifyStateManagerRebuildEventArgs**
 - **NotifyStateManagerChangedAction.Add** 和 **NotifyStateManagerChangedAction.Remove**：**NotifyStateManagerSingleEntityChangedEventArgs**
 
 以下是 **StateManagerChanged** 通知处理程序示例。
-
 
 	public void OnStateManagerChangedHandler(object sender, NotifyStateManagerChangedEventArgs e)
 	{
@@ -96,7 +92,6 @@
     		this.ProcessStateManagerSingleEntityNotification(e);
 	}
 
-
 ## 可靠字典通知
 可靠字典为以下事件提供通知：
 
@@ -107,7 +102,6 @@
 - 删除：在删除 **IReliableDictionary** 中的项后调用。
 
 若要获取可靠字典通知，需要在 **IReliableDictionary** 上注册 **DictionaryChanged** 事件处理程序。通常在 **ReliableStateManager.StateManagerChanged** 添加通知中注册这些事件处理程序。在将 **IReliableDictionary** 添加到 **IReliableStateManager** 时注册，可确保不会错过任何通知。
-
 
 	private void ProcessStateManagerSingleEntityNotification(NotifyStateManagerChangedEventArgs e)
 	{
@@ -125,11 +119,9 @@
     		}
 	}
 
-
->[AZURE.NOTE] **ProcessStateManagerSingleEntityNotification** 是上述 **OnStateManagerChangedHandler** 示例所调用的示例方法。
+>[!NOTE] **ProcessStateManagerSingleEntityNotification** 是上述 **OnStateManagerChangedHandler** 示例所调用的示例方法。
 
 上述代码会设置 **IReliableNotificationAsyncCallback** 接口以及 **DictionaryChanged**。**NotifyDictionaryRebuildEventArgs** 包含需要以异步方式枚举的 **IAsyncEnumerable** 接口，因此，会通过 **RebuildNotificationAsyncCallback**（而不是 **OnDictionaryChangedHandler**）来触发重新生成通知。
-
 
 	public async Task OnDictionaryRebuildNotificationHandlerAsync(
     		IReliableDictionary<TKey, TValue> origin,
@@ -144,8 +136,7 @@
     		}
 	}
 
-
->[AZURE.NOTE] 在上述代码中，在处理重新生成通知的过程中，会先清除所维护的聚合状态。由于正在利用新状态重新生成可靠集合，因此与以前的所有通知不相关。
+>[!NOTE] 在上述代码中，在处理重新生成通知的过程中，会先清除所维护的聚合状态。由于正在利用新状态重新生成可靠集合，因此与以前的所有通知不相关。
 
 **DictionaryChanged** 事件处理程序使用 **NotifyDictionaryChangedEventArgs** 来提供有关事件的详细信息。**NotifyDictionaryChangedEventArgs** 有五个子类。使用 **NotifyDictionaryChangedEventArgs** 中的操作属性将 **NotifyDictionaryChangedEventArgs** 转换为正确的子类：
 
@@ -154,7 +145,6 @@
 - **NotifyDictionaryChangedAction.Add** 和 **NotifyDictionaryChangedAction.Remove**：**NotifyDictionaryItemAddedEventArgs**
 - **NotifyDictionaryChangedAction.Update**：**NotifyDictionaryItemUpdatedEventArgs**
 - **NotifyDictionaryChangedAction.Remove**：**NotifyDictionaryItemRemovedEventArgs**
-
 
 		public void OnDictionaryChangedHandler(object sender, NotifyDictionaryChangedEventArgs<TKey, TValue> e)
 		{
@@ -185,7 +175,6 @@
 	    		}
 		}
 
-
 ## 建议
 
 - *请*尽快完成通知事件。
@@ -201,9 +190,9 @@
 - 在处理错误进度的过程中，某些操作可能会恢复。通知会针对这类恢复操作加以触发，将副本状态回滚到稳定的时间点。恢复通知的一个重要区别，是具有重复键的事件会聚合在一起。例如，如果恢复事务 T1，你将看到一条针对 Delete(X) 的通知。
 
 ## 后续步骤
-- [Reliable Collections](/documentation/articles/service-fabric-work-with-reliable-collections/)
-- [Reliable Services 快速启动](/documentation/articles/service-fabric-reliable-services-quick-start/)
-- [Reliable Services 备份和还原（灾难恢复）](/documentation/articles/service-fabric-reliable-services-backup-restore/)
+- [Reliable Collections](./service-fabric-work-with-reliable-collections.md)
+- [Reliable Services 快速启动](./service-fabric-reliable-services-quick-start.md)
+- [Reliable Services 备份和还原（灾难恢复）](./service-fabric-reliable-services-backup-restore.md)
 - [Reliable Collections 的开发人员参考](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicefabric.data.collections.aspx)
 
 <!---HONumber=Mooncake_1219_2016-->

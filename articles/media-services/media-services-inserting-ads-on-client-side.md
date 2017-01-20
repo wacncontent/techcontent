@@ -1,32 +1,29 @@
-<properties 
-	pageTitle="在客户端上插入广告" 
-	description="本主题说明如何在客户端上插入广告。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 在客户端上插入广告
+description: 本主题说明如何在客户端上插入广告。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016" 
-	wacn.date="12/27/2016" 
-	ms.author="juliako"/>
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 #在客户端上插入广告
 
 本主题涵盖有关如何在客户端上插入多种类型的广告的信息。
 
-有关在实时流式处理视频中隐藏式字幕和广告支持的详细信息，请参阅[支持的隐藏式字幕和广告插入标准](/documentation/articles/media-services-live-streaming-with-onprem-encoders/#cc_and_ads)。
+有关在实时流式处理视频中隐藏式字幕和广告支持的详细信息，请参阅[支持的隐藏式字幕和广告插入标准](./media-services-live-streaming-with-onprem-encoders.md#cc_and_ads)。
 
->[AZURE.NOTE] Azure Media Player 目前不支持广告。
+>[!NOTE] Azure Media Player 目前不支持广告。
 
 ##<a id="insert_ads_into_media"></a>向媒体中插入广告
 
@@ -45,7 +42,6 @@ Azure 媒体服务通过“Windows 媒体平台：播放器框架”提供广告
 - 返回一个 MAST 文件 （使用嵌入的 VAST）
 - 返回一个含有 VPAID 广告的 VAST 文件
 
- 
 ###使用视频广告服务模板 (VAST) 文件
 
 VAST 文件指定要显示的广告。以下 XML 是线性广告 VAST 文件的示例：
@@ -154,7 +150,6 @@ VAST 文件指定要显示的广告。以下 XML 是线性广告 VAST 文件的�
 	   </NonLinearAds>
 	</Creative>
 
- 
 **<NonLinearAds>** 元素可以包含一个或多个 **<NonLinear>** 元素，其中每一个均可描述一个非线性广告。**<NonLinear>** 元素指定非线性广告的资源。资源可以是 **<StaticResouce>**、**<IFrameResource>** 或 **<HTMLResouce>**。**<StaticResource>** 描述非 HTML 资源，并定义指定资源显示方式的 creativeType 属性：
 
 Image/gif、image/jpeg、image/png - 资源显示在 HTML **<img>** 标记中。
@@ -315,8 +310,6 @@ MAST 文件允许指定定义何时显示广告的触发器。以下是一个示
 	  </triggers>
 	</MAST>
 
- 
-
 MAST 文件以 **<MAST>** 元素开头，该元素包含一个 **<triggers>** 元素。<triggers> 元素包含一个或多个定义应何时播放广告的 **<trigger>** 元素。
 
 **<trigger>** 元素包含一个 **<startConditions>** 元素，后者指定应开始播放广告的时间。**<startConditions>** 元素包含一个或多个 <condition> 元素。当每个 <condition> 评估结果为 true 时，将启动或撤销一个触发器，具体取决于 <condition> 是否分别包含在 **<startConditions**> 或 **<endConditions>** 元素中。有多个 <condition> 元素时，将它们视为隐式 OR，任何评估结果为 true 的条件均会导致触发器启动。<condition> 元素可以嵌套。预设了子 <condition> 元素时，将它们视为隐式 AND；若要启动触发器，则所有条件的评估结果必须都为 true。<condition> 元素包含定义条件的以下属性：
@@ -327,7 +320,6 @@ MAST 文件以 **<MAST>** 元素开头，该元素包含一个 **<triggers>** �
 1. **operator** – 要在评估期间使用的操作符：EQ（等于）、NEQ（不等于）、GTR（大于）、GEQ（大于或等于）、LT（小于）、LEQ（小于或等于）、MOD（取模）
 
 **<endConditions>** 也包含 <condition> 元素。某个条件的评估结果为 true 时，重置触发器。<trigger> 元素也包含 <sources> 元素，后者包含一个或多个 <source> 元素。<source> 元素定义广告响应的 URI 和广告响应的类型。此示例中为 VAST 响应提供了一个 URI。
-
 
 	<trigger id="postroll" description="postroll"  >
       <startConditions>
@@ -340,14 +332,12 @@ MAST 文件以 **<MAST>** 元素开头，该元素包含一个 **<triggers>** �
       </sources>
     </trigger>
  
-
 ###使用视频播放器广告接口定义 (VPAID)
 
 VPAID 是用于使可执行广告单元能够与视频播放器进行通信的 API。这可实现高度交互的广告体验。用户可以与广告交互；广告可以对查看者采取的操作做出响应。例如，广告可能会显示允许用户查看详细信息或更长时间版广告的按钮。视频播放器必须支持 VPAID API 且可执行广告必须实现该 API。播放器从广告服务器请求广告时，服务器可能使用包含 VPAID 广告的 VAST 响应进行响应。
 
 必须于运行时环境（例如 Adobe Flash™ 或可以在 Web 浏览器中执行的 JavaScript）中执行的代码中创建可执行广告。广告服务器返回包含 VPAID 广告的 VAST 响应时，<MediaFile> 元素中 apiFramework 属性的值必须为“VPAID”。此属性指定所含广告为 VPAID 可执行广告。类型属性必须设置为可执行文件（如“application/x-shockwave-flash”或“application/x-javascript”）的 MIME 类型。以下 XML 代码片段演示包含 VPAID 可执行广告的 VAST 响应中的 <MediaFile> 元素。
 
-	
 	<MediaFiles>
 	   <MediaFile id="1" delivery="progressive" type=”application/x-shockwaveflash”
 	              width=”640” height=”480” apiFramework=”VPAID”>
@@ -355,7 +345,6 @@ VPAID 是用于使可执行广告单元能够与视频播放器进行通信的 A
 	   </MediaFile>
 	</MediaFiles>
  
-
 可以使用 VAST 响应中 <Linear> 或 <NonLinear> 元素内的 <AdParameters> 元素来初始化可执行广告。有关 <AdParameters> 元素的详细信息，请参阅 [VAST 3.0](http://www.iab.net/media/file/VASTv3.0.pdf)。有关 VPAID API 的详细信息，请参阅 [VPAID 2.0](http://www.iab.net/media/file/VPAID_2.0_Final_04-10-2012.pdf)。
 
 ##实现带有广告支持的 Windows 或 Windows Phone 8 播放器
@@ -432,7 +421,6 @@ Microsoft Media Platform：适用于 Windows 8 和 Windows Phone 8 的播放器�
 	                <ads:AdHandlerPlugin/>
 	            </mmppf:MediaPlayer.Plugins>
 	        </mmppf:MediaPlayer>
-
 
 ###FreeWheelPage
 
@@ -569,9 +557,6 @@ ProgrammaticAdPage.xaml.cs 文件创建 AdHandlerPlugin，添加 TimelineMarker 
 	                <ads:AdHandlerPlugin/>
 	            </mmppf:MediaPlayer.Plugins>
 	        </mmppf:MediaPlayer>
-
-
-
 
 ###使用 VMAP 安排广告
 
@@ -743,7 +728,6 @@ ProgrammaticAdPage.xaml.cs 文件创建 AdHandlerPlugin，添加 TimelineMarker 
 	    [self logFrameworkError];
 	}
 
-
 以下示例演示如何安排后置式广告。
 
 	//Example:8 Schedule Post Roll Ad
@@ -808,10 +792,8 @@ ProgrammaticAdPage.xaml.cs 文件创建 AdHandlerPlugin，添加 TimelineMarker 
 	    [self logFrameworkError];
 	}
 
-
- 
 ##另请参阅
 
-[开发视频播放器应用程序](/documentation/articles/media-services-develop-video-players/)
+[开发视频播放器应用程序](./media-services-develop-video-players.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

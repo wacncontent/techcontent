@@ -1,20 +1,21 @@
-<properties 
-   pageTitle="在 Azure 自动化中计划 Runbook"
-   description="介绍如何在 Azure 自动化中创建一个计划，以便在特定的时间或按重复计划自动启动 Runbook。"
-   services="automation"
-   documentationCenter=""
-   authors="mgoedtel"
-   manager="jwhit"
-   editor="tysonn" />
-<tags 
-   ms.service="automation"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="08/05/2016"
-   wacn.date="01/09/2017"
-   ms.author="bwren" />
+---
+title: 在 Azure 自动化中计划 Runbook
+description: 介绍如何在 Azure 自动化中创建一个计划，以便在特定的时间或按重复计划自动启动 Runbook。
+services: automation
+documentationCenter: 
+authors: mgoedtel
+manager: jwhit
+editor: tysonn
+
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 08/05/2016
+wacn.date: 01/09/2017
+ms.author: bwren
+---
 
 # 在 Azure 自动化中计划 Runbook
 
@@ -59,7 +60,7 @@
 
 ### 使用 Windows PowerShell 将计划链接到 Runbook
 
-你可以使用 [Register-AzureAutomationScheduledRunbook](http://msdn.microsoft.com/zh-cn/library/azure/dn690265.aspx) 将计划链接到 Runbook。可以使用 Parameters 参数为 Runbook 的参数指定值。有关指定参数值的详细信息，请参阅[在 Azure 自动化中启动 Runbook](/documentation/articles/automation-starting-a-runbook/)。
+你可以使用 [Register-AzureAutomationScheduledRunbook](http://msdn.microsoft.com/zh-cn/library/azure/dn690265.aspx) 将计划链接到 Runbook。可以使用 Parameters 参数为 Runbook 的参数指定值。有关指定参数值的详细信息，请参阅[在 Azure 自动化中启动 Runbook](./automation-starting-a-runbook.md)。
 
 以下示例命令演示了如何使用带参数的 Azure 服务管理 cmdlet 链接计划。
 
@@ -96,7 +97,7 @@
 
 ## 后续步骤
 
-- 若要了解有关使用计划的详细信息，请参阅 [Schedule Assets in Azure Automation](/documentation/articles/automation-schedules/)（在 Azure 自动化中计划资产）
-- 若要在 Azure 自动化中开始使用 Runbook，请参阅 [Starting a Runbook in Azure Automation](/documentation/articles/automation-starting-a-runbook/)（在 Azure 自动化中启动 Runbook）
+- 若要了解有关使用计划的详细信息，请参阅 [Schedule Assets in Azure Automation](./automation-schedules.md)（在 Azure 自动化中计划资产）
+- 若要在 Azure 自动化中开始使用 Runbook，请参阅 [Starting a Runbook in Azure Automation](./automation-starting-a-runbook.md)（在 Azure 自动化中启动 Runbook）
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

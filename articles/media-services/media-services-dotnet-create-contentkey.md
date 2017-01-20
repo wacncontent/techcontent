@@ -1,39 +1,37 @@
-<properties 
-	pageTitle="使用 .NET 创建内容密钥" 
-	description="了解如何创建提供对资产进行安全访问的内容密钥。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>
+---
+title: 使用 .NET 创建内容密钥
+description: 了解如何创建提供对资产进行安全访问的内容密钥。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016" 
-	wacn.date="12/16/2016"
-	ms.author="juliako"/>  
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/16/2016
+ms.author: juliako
+---
 
 #使用 .NET 创建内容密钥
 
-> [AZURE.SELECTOR]
-- [REST](/documentation/articles/media-services-rest-create-contentkey/)
-- [.NET](/documentation/articles/media-services-dotnet-create-contentkey/)
+> [!div class="op_single_selector"]
+- [REST](./media-services-rest-create-contentkey.md)
+- [.NET](./media-services-dotnet-create-contentkey.md)
 
 媒体服务允许创建资产和传送加密的资产。**ContentKey** 提供对**资产**的安全访问。
 
-创建新资产时（例如，[上传文件](/documentation/articles/media-services-dotnet-upload-files/)之前），可以指定以下加密选项：**StorageEncrypted**、**CommonEncryptionProtected** 或 **EnvelopeEncryptionProtected**。
+创建新资产时（例如，[上传文件](./media-services-dotnet-upload-files.md)之前），可以指定以下加密选项：**StorageEncrypted**、**CommonEncryptionProtected** 或 **EnvelopeEncryptionProtected**。
 
-向客户端传送资产时，可以使用以下两个加密选项之一[将资产配置为动态加密](/documentation/articles/media-services-dotnet-configure-asset-delivery-policy/)：**DynamicEnvelopeEncryption** 或 **DynamicCommonEncryption**。
+向客户端传送资产时，可以使用以下两个加密选项之一[将资产配置为动态加密](./media-services-dotnet-configure-asset-delivery-policy.md)：**DynamicEnvelopeEncryption** 或 **DynamicCommonEncryption**。
 
 加密的资产必须与 **ContentKey** 关联。本文介绍如何创建内容密钥。
 
->[AZURE.NOTE] 使用媒体服务 .NET SDK 创建新的 **StorageEncrypted** 资产时，会自动创建 **ContentKey** 并将其链接到资产。
+>[!NOTE] 使用媒体服务 .NET SDK 创建新的 **StorageEncrypted** 资产时，会自动创建 **ContentKey** 并将其链接到资产。
 
 ##ContentKeyType
 
@@ -98,8 +96,6 @@
 call
 
 	IContentKey key = CreateEnvelopeTypeContentKey(encryptedsset);
-
-
 
 ##<a id="common_contentkey"></a>创建公共类型 ContentKey    
 

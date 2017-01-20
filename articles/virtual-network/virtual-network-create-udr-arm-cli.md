@@ -1,45 +1,44 @@
-<properties
-    pageTitle="使用 Azure CLI 控制路由和虚拟设备 | Azure"
-    description="了解如何使用 Azure CLI 控制路由和虚拟设备。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 Azure CLI 控制路由和虚拟设备 | Azure
+description: 了解如何使用 Azure CLI 控制路由和虚拟设备。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="5452a0b8-21a6-4699-8d6a-e2d8faf32c25"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="03/15/2016"
-    wacn.date="12/26/2016"
-    ms.author="jdial" />  
-
+ms.assetid: 5452a0b8-21a6-4699-8d6a-e2d8faf32c25
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/15/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 使用 Azure CLI 创建用户定义的路由 (UDR)
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/virtual-network-create-udr-arm-ps/)
-- [Azure CLI](/documentation/articles/virtual-network-create-udr-arm-cli/)
-- [模板](/documentation/articles/virtual-network-create-udr-arm-template/)
-- [PowerShell（经典）](/documentation/articles/virtual-network-create-udr-classic-ps/)
-- [CLI（经典）](/documentation/articles/virtual-network-create-udr-classic-cli/)
+> [!div class="op_single_selector"]
+- [PowerShell](./virtual-network-create-udr-arm-ps.md)
+- [Azure CLI](./virtual-network-create-udr-arm-cli.md)
+- [模板](./virtual-network-create-udr-arm-template.md)
+- [PowerShell（经典）](./virtual-network-create-udr-classic-ps.md)
+- [CLI（经典）](./virtual-network-create-udr-classic-cli.md)
 
-[AZURE.INCLUDE [virtual-network-create-udr-intro-include.md](../../includes/virtual-network-create-udr-intro-include.md)]
+[!INCLUDE [virtual-network-create-udr-intro-include.md](../../includes/virtual-network-create-udr-intro-include.md)]
 
-> [AZURE.IMPORTANT]
-在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源前，请确保了解[部署模型和工具](/documentation/articles/resource-manager-deployment-model/)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍 Resource Manager 部署模型。还可在[经典部署模型](/documentation/articles/virtual-network-create-udr-classic-cli/)中创建 UDR。
+> [!IMPORTANT]
+在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源前，请确保了解[部署模型和工具](../azure-resource-manager/resource-manager-deployment-model.md)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍 Resource Manager 部署模型。还可在[经典部署模型](./virtual-network-create-udr-classic-cli.md)中创建 UDR。
 
-[AZURE.INCLUDE [virtual-network-create-udr-scenario-include.md](../../includes/virtual-network-create-udr-scenario-include.md)]
+[!INCLUDE [virtual-network-create-udr-scenario-include.md](../../includes/virtual-network-create-udr-scenario-include.md)]
 
 以下示例 Azure CLI 命令需要基于以上方案创建的简单环境。若要运行本文档中所显示的命令，请首先通过部署[此模板](http://github.com/telmosampaio/azure-templates/tree/master/IaaS-NSG-UDR-Before)构建测试环境。下载该模板，并作必要的修改，然后通过 Azure CLI 发布。
 
->[AZURE.NOTE] 你从 GitHub 仓库 "azure-quickstart-templates" 中下载的模板，需要做一些修改才能适用于 Azure 中国云环境。例如，替换一些终结点 -- "blob.core.windows.net" 替换成 "blob.core.chinacloudapi.cn"，"cloudapp.azure.com" 替换成 "chinacloudapp.cn"；改掉一些不支持的 VM 映像，还有，改掉一些不支持的 VM 大小。
+>[!NOTE] 你从 GitHub 仓库 "azure-quickstart-templates" 中下载的模板，需要做一些修改才能适用于 Azure 中国云环境。例如，替换一些终结点 -- "blob.core.windows.net" 替换成 "blob.core.chinacloudapi.cn"，"cloudapp.azure.com" 替换成 "chinacloudapp.cn"；改掉一些不支持的 VM 映像，还有，改掉一些不支持的 VM 大小。
 
-[AZURE.INCLUDE [azure-cli-prerequisites-include.md](../../includes/azure-cli-prerequisites-include.md)]
+[!INCLUDE [azure-cli-prerequisites-include.md](../../includes/azure-cli-prerequisites-include.md)]
 
 ## 为前端子网创建 UDR
 若要根据上述方案为前端子网创建所需的路由表和路由，请按照下面的步骤操作。
@@ -132,7 +131,6 @@
         azure network route-table create -g TestRG -n UDR-BackEnd -l chinanorth
 
 2. 运行以下命令，在路由表中创建路由，将流向前端子网 (192.168.1.0/24) 的所有流量发送到 **FW1** VM (192.168.0.4)：
-
 
         azure network route-table route create -g TestRG -r UDR-BackEnd -n RouteToFrontEnd -a 192.168.1.0/24 -y VirtualAppliance -p 192.168.0.4
 

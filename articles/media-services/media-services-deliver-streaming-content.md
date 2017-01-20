@@ -1,35 +1,34 @@
-﻿<properties 
-	pageTitle="使用 .NET 发布 Azure 媒体服务内容" 
-	description="了解如何创建用于生成流式处理 URL 的定位符。代码示例用 C# 编写且使用适用于 .NET 的媒体服务 SDK。" 
-	authors="juliako" 
-	manager="erikre" 
-	editor="" 
-	services="media-services" 
-	documentationCenter=""/>
+﻿---
+title: 使用 .NET 发布 Azure 媒体服务内容
+description: 了解如何创建用于生成流式处理 URL 的定位符。代码示例用 C# 编写且使用适用于 .NET 的媒体服务 SDK。
+authors: juliako
+manager: erikre
+editor: 
+services: media-services
+documentationCenter: 
 
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="08/30/2016" 
-	wacn.date="12/12/2016"
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/30/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 # 使用 .NET 发布 Azure 媒体服务内容
  
-> [AZURE.SELECTOR]
-- [REST](/documentation/articles/media-services-rest-deliver-streaming-content/)
-- [.NET](/documentation/articles/media-services-deliver-streaming-content/)
-- [管理门户](/documentation/articles/media-services-manage-content/#publish)
+> [!div class="op_single_selector"]
+- [REST](./media-services-rest-deliver-streaming-content.md)
+- [.NET](./media-services-deliver-streaming-content.md)
+- [管理门户](./media-services-manage-content.md#publish)
 
 ##概述
 
-可通过创建 OnDemand 流式处理定位符并生成流式处理 URL 来流式传输自适应比特率 MP4 集。[对资产进行编码](/documentation/articles/media-services-encode-asset/)主题说明了如何编码成自适应比特率 MP4 集。
+可通过创建 OnDemand 流式处理定位符并生成流式处理 URL 来流式传输自适应比特率 MP4 集。[对资产进行编码](./media-services-encode-asset.md)主题说明了如何编码成自适应比特率 MP4 集。
 
->[AZURE.NOTE]如果内容已加密，则在创建定位符之前配置资产传送策略（如[本](/documentation/articles/media-services-dotnet-configure-asset-delivery-policy/)主题中所述）。
+>[!NOTE]如果内容已加密，则在创建定位符之前配置资产传送策略（如[本](./media-services-dotnet-configure-asset-delivery-policy.md)主题中所述）。
 
 也可以使用 OnDemand 流式处理定位符生成指向可渐进式下载的 MP4 文件的 URL。
 
@@ -46,7 +45,6 @@
 	如果计划进行渐进式下载，请获取资产中的 MP4 文件名。
    4. 生成清单文件或 MP4 文件的 URL。
    
-
 ###使用媒体服务 .NET SDK 
 
 生成流式处理 URL
@@ -97,8 +95,7 @@
 	URL to manifest for client streaming using MPEG DASH protocol:
 	http://amstest1.streaming.mediaservices.chinacloudapi.cn/3c5fe676-199c-4620-9b03-ba014900f214/BigBuckBunny.ism/manifest(format=mpd-time-csf)
 	
-
->[AZURE.NOTE]也可通过 SSL 连接流式传输内容。为此，请确保流式处理 URL 以 HTTPS 开头。
+>[!NOTE]也可通过 SSL 连接流式传输内容。为此，请确保流式处理 URL 以 HTTPS 开头。
 
 生成渐进式下载 URL
 
@@ -159,11 +156,9 @@
 	Console.WriteLine(hlsUri);
 	Console.WriteLine(mpegDashUri);
 
-
-
 ##另请参阅
 
-[下载资产](/documentation/articles/media-services-deliver-asset-download/)
-[配置资产传送策略](/documentation/articles/media-services-dotnet-configure-asset-delivery-policy/)
+[下载资产](./media-services-deliver-asset-download.md)
+[配置资产传送策略](./media-services-dotnet-configure-asset-delivery-policy.md)
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

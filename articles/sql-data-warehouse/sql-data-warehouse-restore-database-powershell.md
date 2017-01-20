@@ -1,27 +1,25 @@
-<properties
-   pageTitle="还原 Azure SQL 数据仓库 (PowerShell) | Azure"
-   description="用于还原 SQL 数据仓库的 PowerShell 任务。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="Lakshmi1812"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 还原 Azure SQL 数据仓库 (PowerShell) | Azure
+description: 用于还原 SQL 数据仓库的 PowerShell 任务。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: Lakshmi1812
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="lakshmir;barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: lakshmir;barbkess;sonyama
+---
 
 # 还原 Azure SQL 数据仓库 (PowerShell)
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [概述][]
 - [门户][]
 - [PowerShell][]
@@ -48,7 +46,6 @@
 5. 使用 RestorePointCreationDate 选取所需的还原点。
 6. 将数据库还原到所需的还原点。
 7. 验证已还原的数据库是否处于联机状态。
-
 
         $SubscriptionName="<YourSubscriptionName>"
         $ResourceGroupName="<YourResourceGroupName>"
@@ -78,9 +75,7 @@
         # Verify the status of restored database
         $RestoredDatabase.status
 
-
->[AZURE.NOTE] 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
-
+>[!NOTE] 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
 
 ## 还原已删除的数据库
 
@@ -92,7 +87,6 @@
 4. 获取特定的已删除数据库。
 5. 还原已删除的数据库。
 6. 验证已还原的数据库是否处于联机状态。
-
 
         $SubscriptionName="<YourSubscriptionName>"
         $ResourceGroupName="<YourResourceGroupName>"
@@ -113,9 +107,7 @@
         # 验证已还原的数据库的状态
         $RestoredDatabase.status
 
-
->[AZURE.NOTE] 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
-
+>[!NOTE] 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
 
 ## 从 Azure 地理区域还原
 
@@ -141,28 +133,24 @@
     	# 验证异地还原的数据库是否处于联机状态
     	$GeoRestoredDatabase.status
 
-
->[AZURE.NOTE] 若要在完成还原后配置数据库，请参阅 [Configure your database after recovery][]（在恢复后配置数据库）。
-
+>[!NOTE] 若要在完成还原后配置数据库，请参阅 [Configure your database after recovery][]（在恢复后配置数据库）。
 
 如果源数据库启用了 TDE，则已恢复的数据库将启用 TDE。
-
 
 ## 后续步骤
 若要了解 Azure SQL 数据库版本的业务连续性功能，请阅读 [Azure SQL 数据库业务连续性概述][]。
 
 <!--Image references-->
 
-
 <!--Article references-->
-[Azure SQL 数据库业务连续性概述]: /documentation/articles/sql-database-business-continuity/
-[Configure your database after recovery]: /documentation/articles/sql-database-disaster-recovery/
-[如何安装和配置 Azure PowerShell]: /documentation/articles/powershell-install-configure/
-[概述]: /documentation/articles/sql-data-warehouse-restore-database-overview/
-[门户]: /documentation/articles/sql-data-warehouse-restore-database-portal/
-[PowerShell]: /documentation/articles/sql-data-warehouse-restore-database-powershell/
-[REST]: /documentation/articles/sql-data-warehouse-restore-database-rest-api/
-[Configure your database after recovery]: /documentation/articles/sql-database-disaster-recovery/
+[Azure SQL 数据库业务连续性概述]: ../sql-database/sql-database-business-continuity.md
+[Configure your database after recovery]: ../sql-database/sql-database-disaster-recovery.md
+[如何安装和配置 Azure PowerShell]: ../powershell-install-configure.md
+[概述]: ./sql-data-warehouse-restore-database-overview.md
+[门户]: ./sql-data-warehouse-restore-database-portal.md
+[PowerShell]: ./sql-data-warehouse-restore-database-powershell.md
+[REST]: ./sql-data-warehouse-restore-database-rest-api.md
+[Configure your database after recovery]: ../sql-database/sql-database-disaster-recovery.md
 
 <!--MSDN references-->
 [Restore-AzureRmSqlDatabase]: https://msdn.microsoft.com/zh-cn/library/mt693390.aspx

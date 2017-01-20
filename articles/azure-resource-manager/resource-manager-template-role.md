@@ -1,23 +1,22 @@
-<properties
-    pageTitle="用于角色分配的 Resource Manager 模板 | Azure"
-    description="介绍用于通过模板部署角色分配的资源管理器架构。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="" />  
+---
+title: 用于角色分配的 Resource Manager 模板 | Azure
+description: 介绍用于通过模板部署角色分配的资源管理器架构。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: 
 
-<tags
-    ms.assetid="d9541169-00d1-4497-b57f-68896d51849b"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/03/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: d9541169-00d1-4497-b57f-68896d51849b
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/03/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 角色分配模板架构
 将用户、组或服务主体分配给指定作用域中的角色。
@@ -136,8 +135,6 @@
         "outputs": {}
     }
 
-
-
 下一个模板创建存储帐户，并将读取者角色分配到存储帐户。模板中已包含两个组和读取者角色的标识符，可简化部署。这些值可在部署时通过脚本检索，并作为参数传递。
 
     {
@@ -201,7 +198,7 @@
 * [将内置角色分配到多个现有 VM](https://github.com/Azure/azure-quickstart-templates/tree/master/201-rbac-builtinrole-multipleVMs)
 
 ## 后续步骤
-* 有关模板结构的信息，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。
-* 有关基于角色的访问控制的详细信息，请参阅 [Azure Active Directory 基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)。
+* 有关模板结构的信息，请参阅[创作 Azure 资源管理器模板](./resource-group-authoring-templates.md)。
+* 有关基于角色的访问控制的详细信息，请参阅 [Azure Active Directory 基于角色的访问控制](../active-directory/role-based-access-control-configure.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

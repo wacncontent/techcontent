@@ -1,12 +1,27 @@
-<properties linkid="dev-net-common-tasks-cdn" urlDisplayName="CDN" pageTitle="Azure CDN FAQ - Azure feature guide" metaKeywords="Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN常见问题, CDN加速, CDN服务, 配置CNAME, CNAME, CNAME记录, 缓存刷新, 缓存规则, CDN边缘节点, CDN技术文档, CDN帮助文档" description="Find answers to service configuration related to Azure CDN" metaCanonical="" services="" documentationCenter=".NET" title="" authors="" solutions="" manager="" editor="" />
-<tags ms.service="cdn"
-    ms.date="7/7/2016"
-    wacn.date="7/7/2016"
-    wacn.lang="cn"
-    />
+---
+linkid: dev-net-common-tasks-cdn
+urlDisplayName: CDN
+title: Azure CDN FAQ - Azure feature guide
+metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN常见问题, CDN加速, CDN服务, 配置CNAME, CNAME, CNAME记录, 缓存刷新, 缓存规则, CDN边缘节点, CDN技术文档, CDN帮助文档
+description: Find answers to service configuration related to Azure CDN
+metaCanonical: 
+services: 
+documentationCenter: .NET
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
+
+ms.service: cdn
+ms.date: 7/7/2016
+wacn.date: 7/7/2016
+wacn.lang: cn
+---
+
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/cdn-faq-service-config/)
-- [English](/documentation/articles/cdn-enus-faq-service-config/) 
+- [中文](./cdn-faq-service-config.md)
+- [English](./cdn-enus-faq-service-config.md) 
 #常见问题 - 服务配置
 
 + [如何配置CNAME](#step1)
@@ -84,7 +99,4 @@ access_log /var/log/nginx/access.log logCDN;
 >Linux、BSD等UNIX类操作系统下该文件路径为 /etc/hosts。修改该文件需要管理员权限。
 >**注意**
 >对于Azure Blob 和 Cloud Service，直接访问域名会得到404。此时可以通过访问一个有效URI来排查。
-
-
-
 

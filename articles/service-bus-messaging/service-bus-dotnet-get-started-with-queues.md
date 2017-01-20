@@ -1,20 +1,20 @@
-<properties
-    pageTitle="服务总线队列入门 | Azure"
-    description="如何编写用于服务总线消息传送的 C# 控制台应用程序"
-    services="service-bus"
-    documentationCenter=".net"
-    authors="jtaubensee"
-    manager="timlt"
-    editor=""/>
+---
+title: 服务总线队列入门 | Azure
+description: 如何编写用于服务总线消息传送的 C# 控制台应用程序
+services: service-bus
+documentationCenter: .net
+authors: jtaubensee
+manager: timlt
+editor: 
 
-<tags
-    ms.service="service-bus"
-    ms.date="08/23/2016"
-    wacn.date="10/24/2016"/>
+ms.service: service-bus
+ms.date: 08/23/2016
+wacn.date: 10/24/2016
+---
 
 # 服务总线队列入门
 
-[AZURE.INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
+[!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 ## 将要完成的任务
 
@@ -34,7 +34,7 @@
 
 2. Azure 订阅。
 
-[AZURE.INCLUDE [create-account-note](../../includes/create-account-note.md)]
+[!INCLUDE [create-account-note](../../includes/create-account-note.md)]
 
 ## 使用 Azure 门户创建命名空间
 
@@ -78,11 +78,9 @@
 
 4.  记下主密钥，或将其复制到剪贴板。
 
-
 ## <a name="2-create-a-queue-using-the-azure-portal"></a> 使用 Azure 门户创建队列
 
 如果你已创建服务总线队列，请跳转到[将消息发送到队列](#3-send-messages-to-the-queue)部分。
-
 
 ## <a name="3-send-messages-to-the-queue"></a> 将消息发送到队列
 
@@ -219,10 +217,8 @@
 [queue-length-send]: ./media/service-bus-dotnet-get-started-with-queues/queue-length-send.png
 [queue-length-receive]: ./media/service-bus-dotnet-get-started-with-queues/queue-length-receive.png
 
-
 <!--Reference style links - using these makes the source content way more readable than using inline links-->
 
 [github-samples]: https://github.com/Azure-Samples/azure-servicebus-messaging-samples
-
 
 <!---HONumber=Mooncake_0718_2016-->

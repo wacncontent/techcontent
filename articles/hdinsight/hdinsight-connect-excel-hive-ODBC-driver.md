@@ -1,33 +1,32 @@
-<properties
-   pageTitle="使用 Hive ODBC 驱动程序将 Excel 连接到 Hadoop | Azure"
-   description="了解如何设置和使用针对 Excel 的 Microsoft Hive ODBC 驱动程序以在 HDInsight 群集中查询数据。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="mumian"
-   manager="paulettm"
-   tags="azure-portal"
-   editor="cgronlun"/>
+---
+title: 使用 Hive ODBC 驱动程序将 Excel 连接到 Hadoop | Azure
+description: 了解如何设置和使用针对 Excel 的 Microsoft Hive ODBC 驱动程序以在 HDInsight 群集中查询数据。
+services: hdinsight
+documentationCenter: 
+authors: mumian
+manager: paulettm
+tags: azure-portal
+editor: cgronlun
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="10/19/2016"
-   wacn.date="12/30/2016"
-   ms.author="jgao"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 10/19/2016
+wacn.date: 12/30/2016
+ms.author: jgao
+---
 
 # 使用 Microsoft Hive ODBC 驱动程序将 Excel 连接到 Hadoop
 
-[AZURE.INCLUDE [ODBC-JDBC-selector](../../includes/hdinsight-selector-odbc-jdbc.md)]
+[!INCLUDE [ODBC-JDBC-selector](../../includes/hdinsight-selector-odbc-jdbc.md)]
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 Microsoft 的大数据解决方案可将 Microsoft 商业智能 (BI) 组件与已由 Azure HDInsight 部署的 Apache Hadoop 群集相集成。此集成的一个例子是，能够使用 Microsoft Hive 开放式数据库连接 (ODBC) 驱动程序将 Excel 连接到 HDInsight 中的 Hadoop 群集的 Hive 数据仓库。
 
 还可以使用用于 Excel 的 Microsoft Power Query 外接程序从 Excel 连接与 HDInsight 群集和其他数据源（包括其他非 HDInsight Hadoop 群集）关联的数据。有关安装和使用 Power Query 的信息，请参阅[利用 Power Query 将 Excel 连接到 HDInsight][hdinsight-power-query]。
-
 
 **先决条件**：
 
@@ -35,7 +34,6 @@ Microsoft 的大数据解决方案可将 Microsoft 商业智能 (BI) 组件与�
 
 - **一个 HDInsight 群集**。若要创建一个 HDInsight 群集，请参阅 [Azure HDInsight 入门][hdinsight-get-started]。
 - 装有 Office 2013 Professional Plus、Office 365 Pro Plus、Excel 2013 Standalone 或 Office 2010 Professional Plus 的**工作站**。
-
 
 ## <a id="InstallHiveODBCDriver"></a>安装 Microsoft Hive ODBC 驱动程序
 
@@ -116,13 +114,12 @@ Microsoft 的大数据解决方案可将 Microsoft 商业智能 (BI) 组件与�
 - [将数据上载到 HDInsight][hdinsight-upload-data]
 - [将 Sqoop 与 HDInsight 配合使用][hdinsight-use-sqoop]
 
-
-[hdinsight-use-sqoop]: /documentation/articles/hdinsight-use-sqoop/
-[hdinsight-analyze-flight-data]: /documentation/articles/hdinsight-analyze-flight-delay-data/
-[hdinsight-use-hive]: /documentation/articles/hdinsight-use-hive/
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
-[hdinsight-power-query]: /documentation/articles/hdinsight-connect-excel-power-query/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
+[hdinsight-use-sqoop]: ./hdinsight-use-sqoop.md
+[hdinsight-analyze-flight-data]: ./hdinsight-analyze-flight-delay-data.md
+[hdinsight-use-hive]: ./hdinsight-use-hive.md
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
+[hdinsight-power-query]: ./hdinsight-connect-excel-power-query.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
 [hive-odbc-driver-download]: http://go.microsoft.com/fwlink/?LinkID=286698
 
 [img-hdi-simbahiveodbc-datasource-admin]: ./media/hdinsight-connect-excel-hive-ODBC-driver/HDI.SimbaHiveOdbc.DataSourceAdmin1.png

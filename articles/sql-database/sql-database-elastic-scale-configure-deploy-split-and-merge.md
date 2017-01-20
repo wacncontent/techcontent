@@ -1,24 +1,25 @@
-<properties
-    pageTitle="部署拆分/合并服务 | Azure"
-    description="使用弹性数据库工具拆分和合并"
-    services="sql-database"
-    documentationcenter=""
-    author="ddove"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="9a993c0f-7052-46cd-aa59-073bea8d535a"
-    ms.service="sql-database"
-    ms.workload="sql-database"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/24/2016"
-    wacn.date="12/19/2016"
-ms.author="ddove" />
+---
+title: 部署拆分/合并服务 | Azure
+description: 使用弹性数据库工具拆分和合并
+services: sql-database
+documentationcenter: 
+author: ddove
+manager: jhubbard
+editor: 
+
+ms.assetid: 9a993c0f-7052-46cd-aa59-073bea8d535a
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/24/2016
+wacn.date: 12/19/2016
+ms.author: ddove
+---
 
 # 部署拆分/合并服务
-可使用拆分/合并工具在分片数据库之间移动数据。请参阅[在扩大云数据库之间移动数据](/documentation/articles/sql-database-elastic-scale-overview-split-and-merge/)
+可使用拆分/合并工具在分片数据库之间移动数据。请参阅[在扩大云数据库之间移动数据](./sql-database-elastic-scale-overview-split-and-merge.md)
 
 ## 下载拆分/合并包
 1. 从 [NuGet](http://docs.nuget.org/docs/start-here/installing-nuget) 下载最新的 NuGet 版本。
@@ -39,7 +40,6 @@ ms.author="ddove" />
 3. 创建将用于诊断输出的 Azure 存储帐户。转到 Azure 门户。在左侧栏中，依次单击“新建”、“数据 + 存储”、“存储”。
 
 4. 创建将包含拆分/合并服务的 Azure 云服务。转到 Azure 门户。在左侧栏中，依次单击“新建”、“计算”、“云服务”和“创建”。
-
 
 ## 配置拆分/合并服务
 
@@ -62,7 +62,7 @@ ms.author="ddove" />
         
 ### 配置安全性
 
-有关配置服务安全性的详细说明，请参阅[拆分/合并安全性配置](/documentation/articles/sql-database-elastic-scale-split-merge-security-configuration/)。
+有关配置服务安全性的详细说明，请参阅[拆分/合并安全性配置](./sql-database-elastic-scale-split-merge-security-configuration.md)。
 
 为了针对本教程创建一个简单的测试部署，我们将执行少量的配置步骤来使服务正常运行。仅一个计算机/帐户可以执行这些步骤，以便与服务进行通信。
 
@@ -120,8 +120,7 @@ ms.author="ddove" />
     <Certificate name="CA" thumbprint="" thumbprintAlgorithm="sha1" />
     <Certificate name="DataEncryptionPrimary" thumbprint="" thumbprintAlgorithm="sha1" />
 
-
-请注意，对于生产部署，应针对用于加密的 CA 使用单独的证书（服务器证书和客户端证书）。有关此内容的详细说明，请参阅[安全配置](/documentation/articles/sql-database-elastic-scale-split-merge-security-configuration/)。
+请注意，对于生产部署，应针对用于加密的 CA 使用单独的证书（服务器证书和客户端证书）。有关此内容的详细说明，请参阅[安全配置](./sql-database-elastic-scale-split-merge-security-configuration.md)。
 
 ## 部署服务
 
@@ -137,7 +136,6 @@ ms.author="ddove" />
 7. 点击右下角的勾选按钮以开始部署。它预计需要几分钟的时间才能完成。
 
 ![上传][4]
-
 
 ## 排查部署问题
 
@@ -314,7 +312,6 @@ ms.author="ddove" />
 
 请注意，拆分/合并服务不会为你创建目标数据库（或在数据库中为任何表创建架构）。在将请求发送到服务之前，必须预先创建它们。
 
-
 ## 故障排除
 
 在运行示例 powershell 脚本时，你可能会看到下面的消息：
@@ -329,7 +326,7 @@ ms.author="ddove" />
 
 在这种情况下，请检查你的配置文件，尤其是 **WorkerRoleSynchronizationStorageAccountConnectionString** 的设置。此错误通常表示辅助角色无法成功初始化首次使用的元数据数据库。
 
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/allowed-services.png
@@ -338,5 +335,4 @@ ms.author="ddove" />
 [4]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/upload.png
 [5]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/storage.png
  
-
 <!---HONumber=Mooncake_1212_2016-->

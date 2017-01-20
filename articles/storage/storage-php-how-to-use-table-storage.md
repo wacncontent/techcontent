@@ -1,31 +1,32 @@
-<properties
-    pageTitle="如何通过 PHP 使用表存储 | Azure"
-    description="了解如何通过 PHP 使用表服务来创建和删除表以及插入、删除和查询表。"
-    services="storage"
-    documentationcenter="php"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="1e57f371-6208-4753-b2a0-05db4aede8e3"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="php"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 如何通过 PHP 使用表存储 | Azure
+description: 了解如何通过 PHP 使用表服务来创建和删除表以及插入、删除和查询表。
+services: storage
+documentationcenter: php
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: 1e57f371-6208-4753-b2a0-05db4aede8e3
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: php
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 如何通过 PHP 使用表存储
-[AZURE.INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
+[!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 
 ## 概述
 本指南演示如何使用 Azure 表服务执行常见任务。示例是用 PHP 编写的，并使用了 [Azure SDK for PHP][download]。所涉及的任务包括创建和删除表以及在表中插入、删除和查询条目。有关 Azure 表服务的详细信息，请参阅[后续步骤](#next-steps)部分。
 
-[AZURE.INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
+[!INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建 PHP 应用程序
 创建访问 Azure 表服务的 PHP 应用程序的唯一要求是从代码中引用 Azure SDK for PHP 中的类。可使用任何开发工具（包括“记事本”）创建应用程序。
@@ -33,7 +34,7 @@
 在本指南中，将使用表服务功能，可在 PHP 应用程序中本地调用，或在 Azure Web 角色、辅助角色或网站中运行的代码内调用这些功能。
 
 ## 获取 Azure 客户端库
-[AZURE.INCLUDE [get-client-libraries](../../includes/get-client-libraries.md)]
+[!INCLUDE [get-client-libraries](../../includes/get-client-libraries.md)]
 
 ## 配置应用程序以访问表服务
 若要使用 Azure 表服务 API，需执行以下操作：
@@ -43,11 +44,10 @@
 
 下面的示例演示了如何包括 autoloader 文件并引用 **ServicesBuilder** 类。
 
-> [AZURE.NOTE] 本文的示例假定用户已通过 Composer 安装了用于 Azure 的 PHP 客户端库。如果手动安装了这些库，需要引用 <code>WindowsAzure.php</code> autoloader 文件。
+> [!NOTE] 本文的示例假定用户已通过 Composer 安装了用于 Azure 的 PHP 客户端库。如果手动安装了这些库，需要引用 <code>WindowsAzure.php</code> autoloader 文件。
 
 	require_once 'vendor/autoload.php';
 	use WindowsAzure\Common\ServicesBuilder;
-
 
 在下面的示例中，将始终显示 `require_once` 语句，但只会引用执行该示例所需的类。
 
@@ -61,7 +61,6 @@
 若要访问模拟器存储：
 
 	UseDevelopmentStorage=true
-
 
 若要创建任何 Azure 服务客户端，需要使用 **ServicesBuilder** 类。可执行以下操作：
 
@@ -77,7 +76,6 @@
 	use WindowsAzure\Common\ServicesBuilder;
 
 	$tableRestProxy = ServicesBuilder::getInstance()->createTableService($connectionString);
-
 
 ## 创建表
 利用 **TableRestProxy** 对象，可以使用 **createTable** 方法创建表。创建表时，可以设置表服务超时。（有关表服务超时的详细信息，请参阅[为表服务操作设置超时][table-service-timeouts]。）
@@ -179,7 +177,6 @@
 		$error_message = $e->getMessage();
 		echo $code.": ".$error_message."<br />";
 	}
-
 
 ## 检索单个条目
 利用 **TableRestProxy->getEntity** 方法，可以通过查询实体的 `PartitionKey` 和 `RowKey` 来检索它。在以下示例中，分区键 `tasksSeattle` 和行键 `1` 传递给 **getEntity** 方法。
@@ -455,7 +452,7 @@
 
 有关详细信息，另请参阅 [PHP 开发人员中心](/develop/php/)。
 
-[download]: /documentation/articles/php-download-sdk/
+[download]: ../php-download-sdk.md
 [require_once]: http://php.net/require_once
 [table-service-timeouts]: http://msdn.microsoft.com/zh-cn/library/azure/dd894042.aspx
 

@@ -1,23 +1,22 @@
-<properties
-    pageTitle="导入/导出服务日志文件格式 | Azure"
-    description="了解针对导入/导出服务作业执行步骤时创建的日志文件的格式"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 导入/导出服务日志文件格式 | Azure
+description: 了解针对导入/导出服务作业执行步骤时创建的日志文件的格式
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.assetid="38cc16bd-ad55-4625-9a85-e1726c35fd1b"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="05/25/2015"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.assetid: 38cc16bd-ad55-4625-9a85-e1726c35fd1b
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/25/2015
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 导入/导出服务日志文件格式
 当 Azure 导入/导出服务在执行导入作业或导出作业的过程中针对驱动器执行某个操作时，会将日志写入到与该作业关联的存储帐户中的块 Blob 中。
@@ -50,7 +49,6 @@
 详细日志包含有关每个 Blob（针对导入作业）或文件（针对导出作业）的复制操作状态的完整信息，错误日志仅包含执行导入作业或导出作业期间遇到错误的 Blob 或文件的信息。
   
 详细日志格式如下所示。错误日志具有相同的结构，但可筛选出成功的操作。
-
 
 	<DriveLog Version="2014-11-01">  
 	  <DriveId>drive-id</DriveId>  
@@ -101,7 +99,6 @@
 	   [<GlobalPath Hash="md5-hash">global-properties-file-path</GlobalPath>]  
 	   [<Path Hash="md5-hash">properties-file-path</Path>]  
 	</Properties>  
-
 
 下表介绍了日志文件的元素。
   
@@ -260,7 +257,6 @@
 ## 示例日志  
 下面是一个详细日志示例。
   
-
 	<?xml version="1.0" encoding="UTF-8"?>  
 	<DriveLog Version="2014-11-01">  
 	    <DriveId>WD-WMATV123456</DriveId>  
@@ -294,10 +290,8 @@
 	    <Status>CompletedWithErrors</Status>  
 	</DriveLog>  
 
-  
 相应的错误日志如下所示。
   
-
 	<?xml version="1.0" encoding="UTF-8"?>  
 	<DriveLog Version="2014-11-01">  
 	    <DriveId>WD-WMATV6965824</DriveId>  
@@ -313,10 +307,8 @@
 	    <Status>CompletedWithErrors</Status>  
 	</DriveLog>  
 
-
  以下导入作业的错误日志包含有关在导入驱动器上找不到的文件的错误。请注意，后续组件的状态为 `Cancelled`。
   
-
 	<?xml version="1.0" encoding="utf-8"?>  
 	<DriveLog Version="2014-11-01">  
 	  <DriveId>9WM35C2V</DriveId>  
@@ -336,10 +328,8 @@
 	  <Status>CompletedWithErrors</Status>  
 	</DriveLog>  
 
-
 以下导出作业的错误日志指示已将 Blob 内容成功写入驱动器，但在导出 Blob 的属性时出错。
   
-
 	<?xml version="1.0" encoding="utf-8"?>  
 	<DriveLog Version="2014-11-01">  
 	  <DriveId>9WM35C3U</DriveId>  
@@ -354,7 +344,6 @@
 	  <Status>CompletedWithErrors</Status>  
 	</DriveLog>  
 
-  
 ## 另请参阅  
 [存储导入/导出 REST](https://docs.microsoft.com/zh-CN/rest/api/storageservices/importexport/Storage-Import-Export-Service-REST-API-Reference)
 

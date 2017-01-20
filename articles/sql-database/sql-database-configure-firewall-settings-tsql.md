@@ -1,40 +1,34 @@
-<properties
-	pageTitle="使用 T-SQL 配置 Azure SQL 数据库服务器级别和数据库级别防火墙规则 | Azure"
-	description="了解如何为访问 Azure SQL 数据库的 IP 地址配置防火墙。"
-	services="sql-database"
-	documentationCenter=""
-	authors="BYHAM"
-	manager="jhubbard"
-	editor=""/>
+---
+title: 使用 T-SQL 配置 Azure SQL 数据库服务器级别和数据库级别防火墙规则 | Azure
+description: 了解如何为访问 Azure SQL 数据库的 IP 地址配置防火墙。
+services: sql-database
+documentationCenter: 
+authors: BYHAM
+manager: jhubbard
+editor: 
 
-
-<tags
-	ms.service="sql-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article" 
-	ms.date="08/30/2016" 
-	wacn.date="12/26/2016"
-	ms.author="rickbyh"/>  
-
-
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 08/30/2016
+wacn.date: 12/26/2016
+ms.author: rickbyh
+---
 
 #<a name="manage-server-level-firewall-rules-through-transact-sql"></a> 使用 T-SQL 配置 Azure SQL 数据库服务器级别和数据库级别防火墙规则
 
-
-> [AZURE.SELECTOR]
-- [概述](/documentation/articles/sql-database-firewall-configure/)
-- [Azure 门户预览](/documentation/articles/sql-database-configure-firewall-settings/)
-- [TSQL](/documentation/articles/sql-database-configure-firewall-settings-tsql/)
-- [PowerShell](/documentation/articles/sql-database-configure-firewall-settings-powershell/)
-- [REST API](/documentation/articles/sql-database-configure-firewall-settings-rest/)
-
+> [!div class="op_single_selector"]
+- [概述](./sql-database-firewall-configure.md)
+- [Azure 门户预览](./sql-database-configure-firewall-settings.md)
+- [TSQL](./sql-database-configure-firewall-settings-tsql.md)
+- [PowerShell](./sql-database-configure-firewall-settings-powershell.md)
+- [REST API](./sql-database-configure-firewall-settings-rest.md)
 
 Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数据库。可在 Azure SQL 数据库服务器中为 master 数据库或用户数据库定义服务器级别和数据库级别防火墙设置，从而有选择地允许对数据库的访问。
 
-> [AZURE.IMPORTANT] 若要允许来自 Azure 的应用程序连接到数据库服务器，必须启用 Azure 连接。有关防火墙规则和启用来自 Azure 的连接的详细信息，请参阅 [Azure SQL 数据库防火墙](/documentation/articles/sql-database-firewall-configure/)。如果要在 Azure 云边界内建立连接，可能需要打开一些其他的 TCP 端口。有关详细信息，请参阅[用于 ADO.NET 4.5 和 SQL 数据库 V12 的非 1433 端口](/documentation/articles/sql-database-develop-direct-route-ports-adonet-v12/)中的 **SQL 数据库 V12：内部与外部**部分
-
+> [!IMPORTANT] 若要允许来自 Azure 的应用程序连接到数据库服务器，必须启用 Azure 连接。有关防火墙规则和启用来自 Azure 的连接的详细信息，请参阅 [Azure SQL 数据库防火墙](./sql-database-firewall-configure.md)。如果要在 Azure 云边界内建立连接，可能需要打开一些其他的 TCP 端口。有关详细信息，请参阅[用于 ADO.NET 4.5 和 SQL 数据库 V12 的非 1433 端口](./sql-database-develop-direct-route-ports-adonet-v12.md)中的 **SQL 数据库 V12：内部与外部**部分
 
 ## 服务器级别防火墙规则
 
@@ -79,14 +73,13 @@ Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数�
 
 有关如何使用其他方式创建服务器级别防火墙规则的指导文章，请参阅：
 
-- [使用 Azure 门户预览配置 Azure SQL 数据库服务器级别防火墙规则](/documentation/articles/sql-database-configure-firewall-settings/)
-- [使用 PowerShell 配置 Azure SQL 数据库服务器级别防火墙规则](/documentation/articles/sql-database-configure-firewall-settings-powershell/)
-- [使用 REST API 配置 Azure SQL 数据库服务器级别防火墙规则](/documentation/articles/sql-database-configure-firewall-settings-rest/) 有关创建数据库的教程，请参阅[使用 Azure 门户在几分钟内创建 SQL 数据库](/documentation/articles/sql-database-get-started/)。有关从开放源代码或第三方应用程序连接到 Azure SQL 数据库的帮助信息，请参阅 [SQL 数据库的客户端快速入门代码示例](https://msdn.microsoft.com/zh-cn/library/azure/ee336282.aspx)。若要了解如何导航到数据库，请参阅[管理数据库的访问和登录安全](/documentation/articles/sql-database-manage-logins/)。
-
+- [使用 Azure 门户预览配置 Azure SQL 数据库服务器级别防火墙规则](./sql-database-configure-firewall-settings.md)
+- [使用 PowerShell 配置 Azure SQL 数据库服务器级别防火墙规则](./sql-database-configure-firewall-settings-powershell.md)
+- [使用 REST API 配置 Azure SQL 数据库服务器级别防火墙规则](./sql-database-configure-firewall-settings-rest.md) 有关创建数据库的教程，请参阅[使用 Azure 门户在几分钟内创建 SQL 数据库](./sql-database-get-started.md)。有关从开放源代码或第三方应用程序连接到 Azure SQL 数据库的帮助信息，请参阅 [SQL 数据库的客户端快速入门代码示例](https://msdn.microsoft.com/zh-cn/library/azure/ee336282.aspx)。若要了解如何导航到数据库，请参阅[管理数据库的访问和登录安全](./sql-database-manage-logins.md)。
 
 ## 其他资源
 
-- [保护数据库的安全](/documentation/articles/sql-database-security/)
+- [保护数据库的安全](./sql-database-security.md)
 - [SQL Server 数据库引擎和 Azure SQL 数据库安全中心](https://msdn.microsoft.com/zh-cn/library/bb510589)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

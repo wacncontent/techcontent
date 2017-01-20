@@ -1,22 +1,22 @@
-<properties 
-	pageTitle="Azure DocumentDB 中的数据建模 | Azure" 
-	description="了解 DocumentDB，一个 NoSQL 文档数据库的数据建模。" 
-	keywords="数据建模"
-	services="documentdb" 
-	authors="stephbaron" 
-	manager="jhubbard" 
-	editor="mimig1" 
-	documentationCenter=""/>
+---
+title: Azure DocumentDB 中的数据建模 | Azure
+description: 了解 DocumentDB，一个 NoSQL 文档数据库的数据建模。
+keywords: 数据建模
+services: documentdb
+authors: stephbaron
+manager: jhubbard
+editor: mimig1
+documentationCenter: 
 
-<tags 
-	ms.service="documentdb" 
-	ms.workload="data-services" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="08/05/2016" 
-	wacn.date="09/19/2016" 
-	ms.author="kipandya"/>
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/05/2016
+wacn.date: 09/19/2016
+ms.author: kipandya
+---
 
 #对 DocumentDB 中的数据进行建模#
 尽管无架构的数据库（如 Azure DocumentDB）能够非常容易地接受对数据模型的更改，但用户仍需花一些时间来研究数据。
@@ -90,7 +90,7 @@
 - 嵌入式数据不会在**没有限制**的情况下不断增长。
 - 嵌入式数据是文档中的数据**不可缺少**的部分。
 
-> [AZURE.NOTE] 通常非规范化数据模型具有更好的**读取**性能。
+> [!NOTE] 通常非规范化数据模型具有更好的**读取**性能。
 
 ###何时不嵌入
 
@@ -116,7 +116,7 @@
 
 如果我们要对一个典型博客或 CMS 系统建模，那么具有嵌入式评论的发布实体可能就如上面的代码所示。此示例中的问题是评论数组**没有限制**，这意味着任何单个发布的评论数都没有（实际）限制。随着文档大小的显著增长，这将成为一个问题。
 
-> [AZURE.TIP] DocumentDB 中的文档大小具有最大值。有关此方面的详细信息，请参阅 [DocumentDB 限制](/documentation/articles/documentdb-limits/)。
+> [!TIP] DocumentDB 中的文档大小具有最大值。有关此方面的详细信息，请参阅 [DocumentDB 限制](./documentdb-limits.md)。
 
 随着文档大小的不断增长，通过网络传输数据和大规模读取和更新文档的能力将受到影响。
 
@@ -220,10 +220,9 @@
         "pe": 75.82
     }
     
-
 但是当前这种方法的缺点是当显示一个人的投资组合时，如果应用程序需要显示所持有的每个股票的信息，则你需要多次访问数据库以加载每个股票文档的信息。这里我们决定提高一天当中频繁发生的写操作的效率，但是这反过来会影响读取操作，读取操作对此特定系统的性能的潜在影响较小。
 
-> [AZURE.NOTE] 规范化的数据模型**可能需要更多的往返访问服务器**。
+> [!NOTE] 规范化的数据模型**可能需要更多的往返访问服务器**。
 
 ### 外键呢？
 因为当前没有约束、外键或其他类似概念，所以文档中存在的任何文档间关系都是有效的“弱链接”，并且数据库不会验证此关系。如果你想要确保文档要引用的数据实际存在，那么你需要在应用程序中进行此验证，或通过使用 DocumentDB 上的服务器端触发器或存储过程来验证。
@@ -236,7 +235,7 @@
 - 相关数据**频繁更改**。
 - 引用的数据可能**没有限制**。
 
-> [AZURE.NOTE] 通常规范化能够提供更好的**编写**性能。
+> [!NOTE] 通常规范化能够提供更好的**编写**性能。
 
 ###将关系数据存储在何处？
 关系的增长将有助于确定用于存储引用的文档。
@@ -386,13 +385,12 @@
 
 就像有多种方法可在屏幕上表示一个数据片段一样，数据的建模方法也不会只有一种。你需要了解你的应用程序以及它如何生成、使用和处理数据。然后，通过应用此处提供的一些准则，你可以开始创建可满足你的应用程序当前需求的模型。当你的应用程序需要进行更改时，你可以利用无架构数据库的灵活性欣然接受更改，并轻松改进你的数据模型。
 
-若要了解有关 Azure DocumentDB 的详细信息，请参阅该服务的[文档](/documentation/services/documentdb/)页。
+若要了解有关 Azure DocumentDB 的详细信息，请参阅该服务的[文档](./index.md/)页。
 
-若要了解有关在 Azure DocumentDB 中优化索引的信息，请参阅[索引策略](/documentation/articles/documentdb-indexing-policies/)中的文章。
+若要了解有关在 Azure DocumentDB 中优化索引的信息，请参阅[索引策略](./documentdb-indexing-policies.md)中的文章。
 
-若要了解如何在多个分区之间对数据进行分片，请参阅[在 DocumentDB 中对数据进行分区](/documentation/articles/documentdb-partition-data/)。
+若要了解如何在多个分区之间对数据进行分片，请参阅[在 DocumentDB 中对数据进行分区](./documentdb-partition-data.md)。
 
 最后，有关多租户应用程序的数据建模和分片指导，请查阅[使用 Azure DocumentDB 扩展多租户应用程序](http://blogs.msdn.com/b/documentdb/archive/2014/12/03/scaling-a-multi-tenant-application-with-azure-documentdb.aspx)。
  
-
 <!---HONumber=Mooncake_0912_2016-->

@@ -1,30 +1,30 @@
-<properties 
-   pageTitle="在两个 Azure 虚拟网络之间配置 DNS | Azure" 
-   description="了解如何在两个 Azure 虚拟网络之间配置 VPN 连接和域名解析，以及如何配置 HBase 异地复制。" 
-   services="hdinsight,virtual-network" 
-   documentationCenter="" 
-   authors="mumian" 
-   manager="paulettm" 
-   editor="cgronlun"/>
+---
+title: 在两个 Azure 虚拟网络之间配置 DNS | Azure
+description: 了解如何在两个 Azure 虚拟网络之间配置 VPN 连接和域名解析，以及如何配置 HBase 异地复制。
+services: hdinsight,virtual-network
+documentationCenter: 
+authors: mumian
+manager: paulettm
+editor: cgronlun
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data" 
-   ms.date="06/28/2016" 
-   wacn.date="12/16/2016"
-   ms.author="jgao"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 06/28/2016
+wacn.date: 12/16/2016
+ms.author: jgao
+---
 
 # 在两个 Azure 虚拟网络之间配置 DNS
 
-> [AZURE.SELECTOR]
-- [Configure VPN connectivity](/documentation/articles/hdinsight-hbase-geo-replication-configure-VNets/)
-- [Configure DNS](/documentation/articles/hdinsight-hbase-geo-replication-configure-DNS/)
-- [Configure HBase replication](/documentation/articles/hdinsight-hbase-geo-replication/) 
+> [!div class="op_single_selector"]
+- [Configure VPN connectivity](./hdinsight-hbase-geo-replication-configure-VNets.md)
+- [Configure DNS](./hdinsight-hbase-geo-replication-configure-DNS.md)
+- [Configure HBase replication](./hdinsight-hbase-geo-replication.md) 
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 了解如何向 Azure 虚拟网络添加和配置 DNS 服务器，以处理虚拟机内部和跨虚拟网络的名称解析。
 
@@ -34,11 +34,9 @@
 - 为虚拟网络配置 DNS（本教程）
 - [配置 HBase 异地复制][hdinsight-hbase-geo-replication]
 
-
 下图演示了在[在两个虚拟网络之间配置 VPN 连接][hdinsight-hbase-geo-replication-vnet]中创建的两个虚拟网络：
 
 ![HDInsight HBase 复制虚拟网络示意图][img-vnet-diagram]  
-
 
 ##先决条件
 要阅读本教程，必须具备：
@@ -55,12 +53,11 @@
 
 		Select-AzureSubscription <AzureSubscriptionName>
 
-	[AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+	[!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 - **建立了 VPN 连接的两个 Azure 虚拟网络**。有关说明，请参阅 [在两个 Azure 虚拟网络之间配置 VPN 连接][hdinsight-hbase-replication-vnet]。
 
->[AZURE.NOTE] Azure 服务名称和虚拟机名称均必须唯一。本教程中使用的名称是 Contoso-[Azure Service/VM name]-[CN/CE]。例如，Contoso-VNet-CN 是位于中国北部数据中心的 Azure 虚拟网络；Contoso-DNS-CE 是位于中国东部数据中心的 DNS 服务器 VM。必须选择适合自己的名称。
- 
+>[!NOTE] Azure 服务名称和虚拟机名称均必须唯一。本教程中使用的名称是 Contoso-[Azure Service/VM name]-[CN/CE]。例如，Contoso-VNet-CN 是位于中国北部数据中心的 Azure 虚拟网络；Contoso-DNS-CE 是位于中国东部数据中心的 DNS 服务器 VM。必须选择适合自己的名称。
  
 ##创建用作 DNS 服务器的 Azure 虚拟机
 
@@ -91,7 +88,6 @@
 	- 公用虚拟 IP 地址
 	- 内部 IP 地址
 
-
 **在 Contoso-VNet-CE 中创建名为 Contoso-DNS-CE 的虚拟机**
 
 - 重复相同的过程，使用以下值创建虚拟机：
@@ -120,7 +116,6 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 	ServiceName 是云服务名称。由于 DNS 服务器是云服务的第一个虚拟机，因此云服务名称与虚拟机名称相同。
 
 	可能需要更新 ServiceName 和名称，以匹配你使用的名称。
-
 
 ##添加两个虚拟机的 DNS 服务器角色
 
@@ -176,7 +171,6 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 4. 在底部单击“重新启动”。
 5. 重复相同的步骤来重新启动 **Contoso-DNS-CE**。
 
-
 ##配置 DNS 条件转发器
 
 每个虚拟网络上的 DNS 服务器只能解析该虚拟网络中的 DNS 名称。需要配置一个指向对等 DNS 服务器的条件转发器，以便在对等虚拟网络中进行名称解析。
@@ -190,7 +184,6 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 3. 运行 **ipconfig**，并记下**特定于连接的 DNS 后缀**。
 4. 请不要关闭 RDP 会话，稍后你仍要用到它。 
 5. 重复相同的步骤，以找出 **Contoso-DNS-CE** 的**特定于连接的 DNS 后缀**。
-
 
 **配置 DNS 转发器**
  
@@ -210,7 +203,6 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 
 现在，可以跨虚拟网络测试主机名解析。默认情况下，防火墙会阻止 Ping。可以使用 nslookup 解析对等网络中的 DNS 服务器虚拟机（必须使用 FQDN）。
 
-
 ##后续步骤
 
 在本教程中，你已学习如何使用 VPN 连接跨虚拟网络配置名称解析。本系列教程包括的另外两篇文章：
@@ -218,10 +210,8 @@ DNS 服务器需要静态 IP 地址。不能从 Azure 经典管理门户完成�
 - [在两个 Azure 虚拟网络之间配置 VPN 连接][hdinsight-hbase-geo-replication-vnet]
 - [配置 HBase 异地复制][hdinsight-hbase-geo-replication]
 
-
-
-[hdinsight-hbase-geo-replication]: /documentation/articles/hdinsight-hbase-geo-replication/
-[hdinsight-hbase-geo-replication-vnet]: /documentation/articles/hdinsight-hbase-geo-replication-configure-VNets/
+[hdinsight-hbase-geo-replication]: ./hdinsight-hbase-geo-replication.md
+[hdinsight-hbase-geo-replication-vnet]: ./hdinsight-hbase-geo-replication-configure-VNets.md
 
 [img-vnet-diagram]: ./media/hdinsight-hbase-geo-replication-configure-DNS/HDInsight.HBase.VPN.diagram.png
 

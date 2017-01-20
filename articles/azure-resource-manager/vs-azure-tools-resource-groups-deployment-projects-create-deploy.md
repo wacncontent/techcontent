@@ -1,27 +1,27 @@
-<properties
-    pageTitle="Azure 资源组 Visual Studio 项目 | Azure"
-    description="使用 Visual Studio 创建 Azure 资源组项目，并将资源部署到 Azure。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: Azure 资源组 Visual Studio 项目 | Azure
+description: 使用 Visual Studio 创建 Azure 资源组项目，并将资源部署到 Azure。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="4bd084c8-0842-4a10-8460-080c6a085bec"
-    ms.service="azure-resource-manager"
-    ms.devlang="multiple"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/20/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />
+ms.assetid: 4bd084c8-0842-4a10-8460-080c6a085bec
+ms.service: azure-resource-manager
+ms.devlang: multiple
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/20/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 通过 Visual Studio 创建和部署 Azure 资源组
-使用 Visual Studio 和 [Azure SDK](/downloads/) 可以创建一个项目，用于将基础结构和代码部署到 Azure。例如，你可以为应用定义 Web 主机、网站和数据库，然后将该基础结构与代码一起部署。或者，你可以定义虚拟机、虚拟网络和存储帐户，然后连同虚拟机上执行的脚本一起部署该基础结构。**Azure 资源组**部署项目可让你通过单个可重复的的操作部署全部所需的资源。有关部署和管理资源的详细信息，请参阅 [Azure Resource Manager overview](/documentation/articles/resource-group-overview/)（Azure Resource Manager 概述）。
+使用 Visual Studio 和 [Azure SDK](/downloads/) 可以创建一个项目，用于将基础结构和代码部署到 Azure。例如，你可以为应用定义 Web 主机、网站和数据库，然后将该基础结构与代码一起部署。或者，你可以定义虚拟机、虚拟网络和存储帐户，然后连同虚拟机上执行的脚本一起部署该基础结构。**Azure 资源组**部署项目可让你通过单个可重复的的操作部署全部所需的资源。有关部署和管理资源的详细信息，请参阅 [Azure Resource Manager overview](./resource-group-overview.md)（Azure Resource Manager 概述）。
 
-Azure 资源组项目包含 Azure Resource Manager JSON 模板，用于定义部署到 Azure 的资源。若要了解 Resource Manager 模板的元素，请参阅 [Authoring Azure Resource Manager templates](/documentation/articles/resource-group-authoring-templates/)（创作 Azure Resource Manager 模板）。Visual Studio 允许你编辑这些模板，并提供工具来简化模板的使用。
+Azure 资源组项目包含 Azure Resource Manager JSON 模板，用于定义部署到 Azure 的资源。若要了解 Resource Manager 模板的元素，请参阅 [Authoring Azure Resource Manager templates](./resource-group-authoring-templates.md)（创作 Azure Resource Manager 模板）。Visual Studio 允许你编辑这些模板，并提供工具来简化模板的使用。
 
 在本主题中，会部署 Web 应用和 SQL 数据库。但是，对于任何类型的资源，这些步骤都几乎一样。可以轻松地部署虚拟机及其相关资源。Visual Studio 许多不同的入门模板用于部署常见方案。
 
@@ -37,10 +37,9 @@ Azure 资源组项目包含 Azure Resource Manager JSON 模板，用于定义部
    
     ![选择模板](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/select-project.png)  
 
-   
     选择的模板只是起点；你可以根据方案添加和删除资源。
    
-    > [AZURE.NOTE]
+    > [!NOTE]
     Visual Studio 将在线检索可用模板的列表。该列表可能会更改。
     > 
     > 
@@ -50,7 +49,6 @@ Azure 资源组项目包含 Azure Resource Manager JSON 模板，用于定义部
    
     ![显示节点](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/show-items.png)  
 
-   
     我们为此示例选择了 Web 应用 + SQL 模板，因此，会看到以下文件：
    
     | 文件名 | 说明 |
@@ -62,7 +60,7 @@ Azure 资源组项目包含 Azure Resource Manager JSON 模板，用于定义部
     所有资源组部署项目都包含这些基本文件。其他项目可能包含其他文件以支持其他功能。
 
 ## 自定义 Resource Manager 模板
-可以通过修改 JSON 模板（描述要部署的资源）来自定义部署项目。JSON 是“JavaScript 对象表示法”的缩写，是一种易于使用的序列化数据格式。JSON 文件使用在每个文件顶部引用的架构。如果想要了解该架构，可以下载并分析它。架构定义所允许的元素、字段的类型和格式、可能的枚举值，等等。若要了解 Resource Manager 模板的元素，请参阅 [Authoring Azure Resource Manager templates](/documentation/articles/resource-group-authoring-templates/)（创作 Azure Resource Manager 模板）。
+可以通过修改 JSON 模板（描述要部署的资源）来自定义部署项目。JSON 是“JavaScript 对象表示法”的缩写，是一种易于使用的序列化数据格式。JSON 文件使用在每个文件顶部引用的架构。如果想要了解该架构，可以下载并分析它。架构定义所允许的元素、字段的类型和格式、可能的枚举值，等等。若要了解 Resource Manager 模板的元素，请参阅 [Authoring Azure Resource Manager templates](./resource-group-authoring-templates.md)（创作 Azure Resource Manager 模板）。
 
 若要使用模板，请打开 **WebSiteSQLDatabase.json**。
 
@@ -81,7 +79,6 @@ Visual Studio 编辑器提供了工具来帮助编辑 Resource Manager 模板。
 对于本教程，请选择“存储帐户”并指定其名称。提供一个长度不超过 11 个字符并且仅包含数字和小写字母的名称。
 
 ![添加存储](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/add-storage.png)  
-
 
 请注意，不仅会添加资源，而且还添加存储帐户类型的参数，以及存储帐户名称的变量。
 
@@ -135,7 +132,7 @@ Visual Studio 还提供了 Intellisense 来帮助你了解编辑模板时可以�
 
 4. 提供空参数的值，然后选择“保存”按钮。空参数包括 **hostingPlanName**、**administratorLogin**、**administratorLoginPassword** 和 **databaseName**。
    
-    **hostingPlanName** 指定要创建的[应用服务计划](/documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/)的名称。
+    **hostingPlanName** 指定要创建的[应用服务计划](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)的名称。
    
     **administratorLogin** 指定 SQL Server 管理员的用户名。不要使用类似 **sa** 或 **admin** 的常见管理员名称。
    
@@ -147,7 +144,7 @@ Visual Studio 还提供了 Intellisense 来帮助你了解编辑模板时可以�
 
 5. 选择“部署”按钮将项目部署到 Azure。PowerShell 控制台会在 Visual Studio 实例外部打开。出现提示时，在 PowerShell 控制台中输入 SQL Server 管理员密码。**PowerShell 控制台可能会隐藏在其他项后面，或在任务栏中最小化。** 查找此控制台，然后选择它来提供密码。
    
-    > [AZURE.NOTE]
+    > [!NOTE]
     Visual Studio 可能会要求安装 Azure PowerShell cmdlet。需要安装 Azure PowerShell cmdlet 才能成功部署资源组。如果出现提示，请安装 Azure PowerShell cmdlet。
     > 
     > 
@@ -193,12 +190,10 @@ Visual Studio 还提供了 Intellisense 来帮助你了解编辑模板时可以�
    
     ![添加引用](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/add-reference.png)  
 
-   
     通过添加引用，可以将 Web 应用项目链接到资源组项目中，并自动设置三个重要属性。可以在“属性”窗口中看到这些用于引用的属性。
    
       ![查看引用](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/see-reference.png)  
 
-   
     属性包括：
    
    * “其他属性”包含要推送到 Azure 存储的 Web 部署包暂存位置。请注意文件夹 (ExampleApp) 和文件 (package.zip)。部署应用时，会提供这些值作为参数。
@@ -218,7 +213,6 @@ Visual Studio 还提供了 Intellisense 来帮助你了解编辑模板时可以�
    
     ![添加 Web 部署](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/set-new-parameters.png)  
 
-   
     对于“项目存储帐户”，请选择部署此资源组时所用的帐户。
 10. 部署完成后，请在门户中选择 Web 应用。选择 URL，浏览到站点。
     
@@ -228,9 +222,8 @@ Visual Studio 还提供了 Intellisense 来帮助你了解编辑模板时可以�
     
      ![显示已部署的应用](./media/vs-azure-tools-resource-groups-deployment-projects-create-deploy/show-deployed-app.png)  
 
-
 ## 后续步骤
-* 若要了解如何通过门户管理资源，请参阅[使用 Azure 门户预览管理 Azure 资源](/documentation/articles/resource-group-portal/)。
-* 若要详细了解模板，请参阅 [Authoring Azure Resource Manager templates](/documentation/articles/resource-group-authoring-templates/)（创作 Azure Resource Manager 模板）。
+* 若要了解如何通过门户管理资源，请参阅[使用 Azure 门户预览管理 Azure 资源](./resource-group-portal.md)。
+* 若要详细了解模板，请参阅 [Authoring Azure Resource Manager templates](./resource-group-authoring-templates.md)（创作 Azure Resource Manager 模板）。
 
 <!---HONumber=Mooncake_1219_2016-->

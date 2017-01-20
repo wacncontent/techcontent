@@ -1,41 +1,36 @@
-<properties
-	pageTitle="Linux 的认可分发 | Azure"
-	description="了解 Azure 认可的分发中的 Linux，包括 Ubuntu、OpenLogic、Oracle 和 SUSE 的指南。"
-	services="virtual-machines-linux"
-	documentationCenter=""
-	authors="szarkos"
-	manager="timlt"
-	editor="tysonn"
-	tags="azure-service-management,azure-resource-manager"/>  
+---
+title: Linux 的认可分发 | Azure
+description: 了解 Azure 认可的分发中的 Linux，包括 Ubuntu、OpenLogic、Oracle 和 SUSE 的指南。
+services: virtual-machines-linux
+documentationCenter: 
+authors: szarkos
+manager: timlt
+editor: tysonn
+tags: azure-service-management,azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/17/2016"
-	wacn.date="11/21/2016"
-	ms.author="szark"/>  
-
-
-
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 10/17/2016
+wacn.date: 11/21/2016
+ms.author: szark
+---
 
 #Azure 认可的分发中的 Linux
 
-> [AZURE.NOTE] 如果有时间，请参加这个有关体验的[快速调查](https://aka.ms/linuxdocsurvey)，帮助我们改进 Azure Linux VM 文档。每个回答都将帮助我们帮助你完成工作。
+> [!NOTE] 如果有时间，请参加这个有关体验的[快速调查](https://aka.ms/linuxdocsurvey)，帮助我们改进 Azure Linux VM 文档。每个回答都将帮助我们帮助你完成工作。
 
-Azure 库或应用商店中的 Linux 映像由很多合作伙伴提供，并且我们正在与各个 Linux 社区合作，以便向“认可的分发”列表添加更多风格。在此期间，对于该库未提供的分发，你始终可以按照[本页](/documentation/articles/virtual-machines-linux-classic-create-upload-vhd/)中的指南自备 Linux。
+Azure 库或应用商店中的 Linux 映像由很多合作伙伴提供，并且我们正在与各个 Linux 社区合作，以便向“认可的分发”列表添加更多风格。在此期间，对于该库未提供的分发，你始终可以按照[本页](./virtual-machines-linux-classic-create-upload-vhd.md)中的指南自备 Linux。
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
-
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
 
 ## 支持的分发和版本 ##
 
 下表列出了 Azure 支持的 Linux 分发和版本。有关更多详细信息，另请参阅 [support for Linux images in Azure](https://support.microsoft.com/kb/2941892)（Azure 中对 Linux 映像的支持）。
 
-Hyper-V 和 Azure 的 Linux 集成服务 (LIS) 驱动程序是 Microsoft 直接为上游 Linux 内核提供的内核模块。LIS 驱动程序在默认情况下内置于分发的内核中，或者作为较旧的基于 RHEL/CentOS 的分发在[此处](http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409)作为单独的下载提供。有关 LIS 驱动程序的详细信息，请参阅[此文](/documentation/articles/virtual-machines-linux-create-upload-generic/#linux-kernel-requirements)。
+Hyper-V 和 Azure 的 Linux 集成服务 (LIS) 驱动程序是 Microsoft 直接为上游 Linux 内核提供的内核模块。LIS 驱动程序在默认情况下内置于分发的内核中，或者作为较旧的基于 RHEL/CentOS 的分发在[此处](http://go.microsoft.com/fwlink/?LinkID=403033&clcid=0x409)作为单独的下载提供。有关 LIS 驱动程序的详细信息，请参阅[此文](./virtual-machines-linux-create-upload-generic.md#linux-kernel-requirements)。
 
 Azure Linux 代理已预安装在 Azure 库映像中，并通常可从分发的包存储库中获得。源代码可在 [GitHub](https://github.com/azure/walinuxagent) 上找到。
 
@@ -47,7 +42,6 @@ Debian | Debian 7.9+、8.2+ | 在内核中 | 包：在“waagent”下的存储�
 SUSE Linux Enterprise | SLES 11 SP4、SLES 12+ 和 <p> SLES for SAP 11.3+ | 在内核中 | 包：在“WALinuxAgent”下的 [Cloud:Tools](https://build.opensuse.org/project/show/Cloud:Tools) 存储库中<br/>源代码：[GitHub](https://github.com/windows-azure/walinuxagent)
 openSUSE | openSUSE 13.2+ | 在内核中 | 包：在“WALinuxAgent”下的 [Cloud:Tools](https://build.opensuse.org/project/show/Cloud:Tools) 存储库中<br/>源代码：[GitHub](https://github.com/Azure/WALinuxAgent)
 Ubuntu|Ubuntu 12.04、14.04 和 16.04 | 在内核中 | 包：在“walinuxagent”下的存储库中<br/>源代码：[GitHub](https://github.com/Azure/WALinuxAgent)
-
 
 ## 合作伙伴
 
@@ -62,7 +56,6 @@ OpenLogic 是针对云和数据中心的企业开放源解决方案的行业领�
 从 CoreOS 网站：
 
 *CoreOS 在设计时就已考虑到了安全性、一致性和可靠性。CoreOS 使用 Linux 容器在更高的抽象级别管理你的服务，而不是通过 yum 或 apt 来安装程序包。单个服务的代码和所有依赖项都打包在一个容器中，这个容器可以运行在一个或多个 CoreOS 计算机中。*
-
 
 ### Credativ
 [http://www.credativ.co.uk/credativ-blog/debian-images-microsoft-azure](http://www.credativ.co.uk/credativ-blog/debian-images-microsoft-azure)

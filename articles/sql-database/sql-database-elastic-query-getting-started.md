@@ -1,38 +1,38 @@
-<properties
-	pageTitle="跨已扩展的云数据库（水平分区）进行报告 | Azure"
-	description="如何使用跨数据库数据库查询"
-	services="sql-database"
-	documentationCenter=""  
-	manager="jhubbard"
-	authors="sidneyh"/>
+---
+title: 跨已扩展的云数据库（水平分区）进行报告 | Azure
+description: 如何使用跨数据库数据库查询
+services: sql-database
+documentationCenter: 
+manager: jhubbard
+authors: sidneyh
 
-<tags
-	ms.service="sql-database"
-	ms.workload="sql-database"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="05/23/2016"
-	wacn.date="12/26/2016"
-	ms.author="SilviaDoomra" />
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/23/2016
+wacn.date: 12/26/2016
+ms.author: SilviaDoomra
+---
 
 # 跨已扩展的云数据库进行报告（预览）
 
-可以使用[弹性查询](/documentation/articles/sql-database-elastic-query-overview/)从单个连接点中的多个 Azure SQL 数据库中创建报告。必须对数据库进行水平分区（也称为“分片”）。
+可以使用[弹性查询](./sql-database-elastic-query-overview.md)从单个连接点中的多个 Azure SQL 数据库中创建报告。必须对数据库进行水平分区（也称为“分片”）。
 
-如果拥有现有的数据库，请参阅[将现有数据库迁移到已扩展的数据库](/documentation/articles/sql-database-elastic-convert-to-use-elastic-tools/)。
+如果拥有现有的数据库，请参阅[将现有数据库迁移到已扩展的数据库](./sql-database-elastic-convert-to-use-elastic-tools.md)。
 
-若要了解需要查询的 SQL 对象，请参阅[跨水平分区的数据库进行查询](/documentation/articles/sql-database-elastic-query-horizontal-partitioning/)。
+若要了解需要查询的 SQL 对象，请参阅[跨水平分区的数据库进行查询](./sql-database-elastic-query-horizontal-partitioning.md)。
 
 ## 先决条件
 
-下载并运行[弹性数据库工具示例入门](/documentation/articles/sql-database-elastic-scale-get-started/)。
+下载并运行[弹性数据库工具示例入门](./sql-database-elastic-scale-get-started.md)。
 
 ## 使用示例应用创建分片映射管理器
 
 在此处，将创建分片映射管理器以及多个分片，然后将数据插入到分片中。如果分片中正好设置了分片数据，则可以跳过下面的步骤，直接转到下一部分。
 
-1. 生成并运行**弹性数据库工具入门**示例应用程序。按照步骤一直执行到[下载并运行示例应用](/documentation/articles/sql-database-elastic-scale-get-started/#Getting-started-with-elastic-database-tools)部分中的步骤 7 为止。在步骤 7 结束时，会显示以下的命令提示符：
+1. 生成并运行**弹性数据库工具入门**示例应用程序。按照步骤一直执行到[下载并运行示例应用](./sql-database-elastic-scale-get-started.md#Getting-started-with-elastic-database-tools)部分中的步骤 7 为止。在步骤 7 结束时，会显示以下的命令提示符：
 
 	![命令提示符][1]
 
@@ -54,7 +54,6 @@
 
 	注意：可以使用现有的数据库。如果这样做，该数据库不能是要对其执行查询的某一个分片。此数据库将用于为弹性数据库查询创建元数据对象。
 
-
 ## 创建数据库对象
 
 ### 数据库范围的主密钥和凭据
@@ -70,7 +69,7 @@
 		WITH IDENTITY = '<username>',
 		SECRET = '<password>';
 
-	“username”和“password”应与[弹性数据库工具入门](/documentation/articles/sql-database-elastic-scale-get-started/)中[下载并运行示例应用](/documentation/articles/sql-database-elastic-scale-get-started/#Getting-started-with-elastic-database-tools)的步骤 6 中所使用的登录信息相同。
+	“username”和“password”应与[弹性数据库工具入门](./sql-database-elastic-scale-get-started.md)中[下载并运行示例应用](./sql-database-elastic-scale-get-started.md#Getting-started-with-elastic-database-tools)的步骤 6 中所使用的登录信息相同。
 
 ### 外部数据源
 
@@ -133,10 +132,9 @@
 ### 成本
 使用弹性数据库查询功能不会产生额外的费用。
 
-有关定价信息，请参阅 [SQL 数据库定价详细信息](/pricing/details/sql-database/)。
+有关定价信息，请参阅 [SQL 数据库定价详细信息](https://www.azure.cn/pricing/details/sql-database/)。
 
-
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-query-getting-started/cmd-prompt.png

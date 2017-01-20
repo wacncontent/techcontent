@@ -1,32 +1,31 @@
-<properties
-    pageTitle="为 Azure 移动应用启用脱机同步 (Xamarin Android)"
-    description="了解如何在 Xamarin Android 应用程序中使用应用服务移动应用缓存和同步脱机数据"
-    documentationCenter="xamarin"
-    authors="adrianhall"
-    manager="dwrede"
-    editor=""
-    services="app-service\mobile"/>  
+---
+title: 为 Azure 移动应用启用脱机同步 (Xamarin Android)
+description: 了解如何在 Xamarin Android 应用程序中使用应用服务移动应用缓存和同步脱机数据
+documentationCenter: xamarin
+authors: adrianhall
+manager: dwrede
+editor: 
+services: app-service\mobile
 
-
-<tags
-    ms.service="app-service-mobile"
-    ms.workload="mobile"
-    ms.tgt_pltfrm="mobile-xamarin-android"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="10/01/2016"
-    wacn.date="11/21/2016"
-    ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-android
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: adrianha
+---
 
 # 为 Xamarin.Android 移动应用启用脱机同步
 
-[AZURE.INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
+[!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
 ## 概述
 
 本教程介绍适用于 Xamarin.Android 的 Azure 移动应用的脱机同步功能。脱机同步允许最终用户与移动应用交互（查看、添加或修改数据），即使在没有网络连接时也是如此。在本地数据库中存储更改。设备重新联机后，这些更改会与远程服务同步。
 
-在本教程中，将更新[创建 Xamarin Android 应用]教程中的客户端项目，支持 Azure 移动应用的脱机功能。如果不使用下载的快速入门服务器项目，必须将数据访问扩展包添加到项目。有关服务器扩展包的详细信息，请参阅 [Work with the .NET backend server SDK for Azure Mobile Apps](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/)（使用适用于 Azure 移动应用的 .NET 后端服务器 SDK）。
+在本教程中，将更新[创建 Xamarin Android 应用]教程中的客户端项目，支持 Azure 移动应用的脱机功能。如果不使用下载的快速入门服务器项目，必须将数据访问扩展包添加到项目。有关服务器扩展包的详细信息，请参阅 [Work with the .NET backend server SDK for Azure Mobile Apps](./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)（使用适用于 Azure 移动应用的 .NET 后端服务器 SDK）。
 
 若要了解有关脱机同步功能的详细信息，请参阅主题 [Azure 移动应用中的脱机数据同步]。
 
@@ -103,7 +102,6 @@
             await client.SyncContext.InitializeAsync(store);
         }
 
-
 * `ToDoActivity` 的 `toDoTable` 成员属于 `IMobileServiceSyncTable` 类型而不是 `IMobileServiceTable` 类型。IMobileServiceSyncTable 会将所有创建、读取、更新和删除 (CRUD) 表操作定向到本地存储数据库。
 
 	通过调用 `IMobileServiceSyncContext.PushAsync()` 确定将更改推送到 Azure 移动应用后端的时间。对于调用 `PushAsync` 时客户端应用修改的所有表，此同步上下文通过跟踪和推送这些表中的更改来帮助保持表关系。
@@ -132,17 +130,17 @@
 
 <!-- URLs. -->
 
-[Create a Xamarin Android app]: /documentation/articles/app-service-mobile-xamarin-android-get-started/
-[Offline Data Sync in Azure Mobile Apps]: /documentation/articles/app-service-mobile-offline-data-sync/
+[Create a Xamarin Android app]: ./app-service-mobile-xamarin-android-get-started.md
+[Offline Data Sync in Azure Mobile Apps]: ./app-service-mobile-offline-data-sync.md
 
 <!-- Images -->
 
 <!-- URLs. -->
-[创建 Xamarin Android 应用]: /documentation/articles/app-service-mobile-xamarin-android-get-started/
-[Azure 移动应用中的脱机数据同步]: /documentation/articles/app-service-mobile-offline-data-sync/
+[创建 Xamarin Android 应用]: ./app-service-mobile-xamarin-android-get-started.md
+[Azure 移动应用中的脱机数据同步]: ./app-service-mobile-offline-data-sync.md
 [Xamarin Studio]: http://xamarin.com/download
 [Xamarin extension]: http://xamarin.com/visual-studio
 [SyncContext]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobileservices.mobileserviceclient.synccontext(v=azure.10).aspx
-[8]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/
+[8]: ./app-service-mobile-dotnet-how-to-use-client-library.md
 
 <!---HONumber=Mooncake_1114_2016-->

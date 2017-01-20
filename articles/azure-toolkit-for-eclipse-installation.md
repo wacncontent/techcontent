@@ -1,23 +1,22 @@
 <!-- Remove intelij, hello world for temp -->
-<properties
-	pageTitle="安装 Azure Toolkit for Eclipse | Azure"
-	description="了解如何安装 Azure Toolkit for Eclipse。"
-	services=""
-	documentationCenter="java"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""/>  
+---
+title: 安装 Azure Toolkit for Eclipse | Azure
+description: 了解如何安装 Azure Toolkit for Eclipse。
+services: 
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-
-<tags
-	ms.service="multiple"
-	ms.workload="na"
-	ms.tgt_pltfrm="multiple"
-	ms.devlang="Java"
-	ms.topic="article"
-	ms.date="11/01/2016" 
-	wacn.date="12/05/2016" 
-	ms.author="robmcm"/>
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/05/2016
+ms.author: robmcm
+---
 
 <!-- Legacy MSDN URL = https://msdn.microsoft.com/library/azure/hh690946.aspx -->
 
@@ -28,7 +27,7 @@
 
 以下步骤说明如何安装 Azure Toolkit for Eclipse。
 
-[AZURE.INCLUDE [azure-toolkit-for-eclipse-prerequisites](../../includes/azure-toolkit-for-eclipse-prerequisites.md)]
+[!INCLUDE [azure-toolkit-for-eclipse-prerequisites](../../includes/azure-toolkit-for-eclipse-prerequisites.md)]
 
 ## 安装 Azure Toolkit for Eclipse
 1. 启动 Eclipse。
@@ -60,7 +59,6 @@
    
     ![查看许可证][04]  
 
-   
     Eclipse 将下载并安装必要的包。
    
     ![安装进度][05]  
@@ -68,7 +66,6 @@
 9. 如果系统提示重新启动 Eclipse 以完成安装，请单击“是”。
    
     ![重新启动提示][06]  
-
 
 ## 另请参阅
 有关 Azure Toolkits for Java IDE 的详细信息，请参阅以下链接：
@@ -84,15 +81,14 @@
 
 <!-- URL List -->
 
-
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij.md
 [在 Eclipse 中创建 Azure 的 Hello World Web 应用]: /documentation/articles/app-service-web-eclipse-create-hello-world-web-app/
 [在 IntelliJ 中创建 Azure 的 Hello World Web 应用]: /documentation/articles/app-service-web-intellij-create-hello-world-web-app/
-[Installing the Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
-[安装 Azure Toolkit for IntelliJ]: /documentation/articles/azure-toolkit-for-intellij-installation/
-[Azure Toolkit for Eclipse 的新增功能]: /documentation/articles/azure-toolkit-for-eclipse-whats-new/
-[Azure Toolkit for IntelliJ 中的新增功能]: /documentation/articles/azure-toolkit-for-intellij-whats-new/
+[Installing the Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
+[安装 Azure Toolkit for IntelliJ]: ./azure-toolkit-for-intellij-installation.md
+[Azure Toolkit for Eclipse 的新增功能]: ./azure-toolkit-for-eclipse-whats-new.md
+[Azure Toolkit for IntelliJ 中的新增功能]: ./azure-toolkit-for-intellij-whats-new.md
 
 [Azure Java 开发人员中心]: /develop/java/
 
@@ -104,6 +100,5 @@
 [04]: ./media/azure-toolkit-for-eclipse-installation/eclipse-installation-04.png
 [05]: ./media/azure-toolkit-for-eclipse-installation/eclipse-installation-05.png
 [06]: ./media/azure-toolkit-for-eclipse-installation/eclipse-installation-06.png
-
 
 <!---HONumber=Mooncake_1128_2016-->

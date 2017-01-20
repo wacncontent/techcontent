@@ -1,28 +1,28 @@
-<properties
-	pageTitle="在 HDInsight 中使用 Hadoop Sqoop | Azure"
-	description="学习如何从工作站使用 Azure PowerShell 在 Hadoop 群集和 Azure SQL 数据库之间运行 Sqoop 导入和导出。"
-	editor="cgronlun"
-	manager="paulettm"
-	services="hdinsight"
-	documentationCenter=""
-	tags="azure-portal"
-	authors="mumian"/>
+---
+title: 在 HDInsight 中使用 Hadoop Sqoop | Azure
+description: 学习如何从工作站使用 Azure PowerShell 在 Hadoop 群集和 Azure SQL 数据库之间运行 Sqoop 导入和导出。
+editor: cgronlun
+manager: paulettm
+services: hdinsight
+documentationCenter: 
+tags: azure-portal
+authors: mumian
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="11/15/2016"
-	wacn.date="01/05/2017"
-	ms.author="jgao"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/15/2016
+wacn.date: 01/05/2017
+ms.author: jgao
+---
 
 #将 Sqoop 与 HDInsight 中的 Hadoop 配合使用
 
-[AZURE.INCLUDE [sqoop-selector](../../includes/hdinsight-selector-use-sqoop.md)]
+[!INCLUDE [sqoop-selector](../../includes/hdinsight-selector-use-sqoop.md)]
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 了解如何使用 HDInsight 中的 Sqoop 在 HDInsight 群集和 Azure SQL 数据库或 SQL Server 数据库之间进行导入和导出。
 
@@ -73,7 +73,7 @@ HDInsight 群集附带了某些示例数据。以后会用到以下两个示例�
 4. 如果选择为数据库创建新的 SQL 数据库服务器，请单击“下一步”。如果选择现有服务，请确保它满足[以下条件](#sql_server_condition)，然后单击“完成”。
 5. 输入登录用户名和密码，然后为 SQL Server 选择区域（如果选择创建新服务器）。
 
-> [AZURE.NOTE] SQl Server 的资源组名称是“Default-Sql-chinaeast”或“Default-Sql-chinanorth”，具体取决于 SQL Server 的区域。
+> [!NOTE] SQl Server 的资源组名称是“Default-Sql-chinaeast”或“Default-Sql-chinanorth”，具体取决于 SQL Server 的区域。
 
 在 [Azure 经典管理门户](https://manage.windowsazure.cn)上创建群集。
 
@@ -86,53 +86,51 @@ HDInsight 群集附带了某些示例数据。以后会用到以下两个示例�
 
 - **Azure SQL 数据库**：必须为 Azure SQL 数据库服务器配置防火墙规则，允许从工作站进行访问。有关创建 Azure SQL 数据库和配置防火墙的说明，请参阅 [Azure SQL 数据库入门][sqldatabase-get-started]。 
 
-    > [AZURE.NOTE] 默认情况下，可以从 Azure HDInsight 这样的 Azure 服务连接 Azure SQL 数据库。如果禁用了此防火墙设置，则必须从 Azure 经典管理门户启用。有关创建 Azure SQL 数据库和配置防火墙规则的说明，请参阅[创建和配置 SQL 数据库][sqldatabase-create-configue]。
+    > [!NOTE] 默认情况下，可以从 Azure HDInsight 这样的 Azure 服务连接 Azure SQL 数据库。如果禁用了此防火墙设置，则必须从 Azure 经典管理门户启用。有关创建 Azure SQL 数据库和配置防火墙规则的说明，请参阅[创建和配置 SQL 数据库][sqldatabase-create-configue]。
 
     <a name="sql_server_condition"></a>
 
 - **SQL Server**：如果 HDInsight 群集与 SQL Server 位于 Azure 中的同一虚拟网络，则可以使用本文中的步骤将数据导入或导出 SQL Server 数据库。
 
-    > [AZURE.NOTE] HDInsight 仅支持基于位置的虚拟网络，并且当前不适用于基于地缘组的虚拟网络。
+    > [!NOTE] HDInsight 仅支持基于位置的虚拟网络，并且当前不适用于基于地缘组的虚拟网络。
 
-    * 若要创建和配置虚拟网络，请参阅[虚拟网络配置任务](/home/features/virtual-machines/)。
+    * 若要创建和配置虚拟网络，请参阅[虚拟网络配置任务](https://www.azure.cn/home/features/virtual-machines/)。
 
         * 在数据中心使用 SQL Server 时，必须将虚拟网络配置为*站点到站点*或*点到站点*。
 
-            > [AZURE.NOTE] 对于**点到站点**虚拟网络，SQL Server 必须运行 VPN 客户端配置应用程序，该应用程序可从 Azure 虚拟网络配置的“仪表板”中获得。
+            > [!NOTE] 对于**点到站点**虚拟网络，SQL Server 必须运行 VPN 客户端配置应用程序，该应用程序可从 Azure 虚拟网络配置的“仪表板”中获得。
 
         * 在 Azure 虚拟机上使用 SQL Server 时，如果托管 SQL Server 的虚拟机是 HDInsight 所在虚拟网络的成员，则可以使用任何虚拟网络配置。
 
-    * 若要在虚拟网络上创建 HDInsight 群集，请参阅[使用自定义选项在 HDInsight 中创建 Hadoop 群集](/documentation/articles/hdinsight-provision-clusters-v1/)
+    * 若要在虚拟网络上创建 HDInsight 群集，请参阅[使用自定义选项在 HDInsight 中创建 Hadoop 群集](./hdinsight-provision-clusters-v1.md)
 
-    > [AZURE.NOTE] SQL Server 还必须允许身份验证。必须使用 SQL Server 登录名来完成本文中的步骤。
+    > [!NOTE] SQL Server 还必须允许身份验证。必须使用 SQL Server 登录名来完成本文中的步骤。
 	
-
 ## 运行 Sqoop 作业
 
 HDInsight 可以使用各种方法运行 Sqoop 作业。使用下表来确定哪种方法最适合你，然后访问此链接进行演练。
 
 | **使用此方法**，如果想要... | ...**交互式** shell | ...**批处理** | ...使用此**群集操作系统** | ...从此**客户端操作系统** |
 |:--------------------------------------------------------------|:---------------------------:|:-----------------------:|:------------------------------------------|:-----------------------------------------|
-| [.NET SDK for Hadoop](/documentation/articles/hdinsight-hadoop-use-sqoop-dotnet-sdk/) | &nbsp; | ✔ | Windows | Windows（暂时） |
-| [Azure PowerShell](/documentation/articles/hdinsight-hadoop-use-sqoop-powershell/) | &nbsp; | ✔ | Windows | Windows |
+| [.NET SDK for Hadoop](./hdinsight-hadoop-use-sqoop-dotnet-sdk.md) | &nbsp; | ✔ | Windows | Windows（暂时） |
+| [Azure PowerShell](./hdinsight-hadoop-use-sqoop-powershell.md) | &nbsp; | ✔ | Windows | Windows |
 
 ##后续步骤
 
 现在你已经学习了如何使用 Sqoop。若要了解更多信息，请参阅以下文章：
 
-- [将 Hive 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-hive/)
-- [将 Pig 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-pig/)
+- [将 Hive 与 HDInsight 配合使用](./hdinsight-use-hive.md)
+- [将 Pig 与 HDInsight 配合使用](./hdinsight-use-pig.md)
 - [将 Oozie 与 HDInsight 配合使用][hdinsight-use-oozie]：在 Oozie 工作流中使用 Sqoop 操作。
 - [使用 HDInsight 分析航班延误数据][hdinsight-analyze-flight-data]：使用 Hive 分析航班延误数据，然后使用 Sqoop 将数据导出到 Azure SQL 数据库。
 - [将数据上传到 HDInsight][hdinsight-upload-data]：了解将数据上传到 HDInsight/Azure Blob 存储的其他方法。
-
 
 ## 附录 A - PowerShell 示例
 
 PowerShell 示例将执行以下步骤：
 
 1. 连接到 Azure。
-2. 创建 Azure 资源组。有关详细信息，请参阅[将 Azure PowerShell 与 Azure 资源管理器配合使用](/documentation/articles/powershell-azure-resource-manager/)
+2. 创建 Azure 资源组。有关详细信息，请参阅[将 Azure PowerShell 与 Azure 资源管理器配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)
 3. 创建一个 Azure SQL 数据库服务器、一个 Azure SQL 数据库和两个表。 
 
 	如果改用 SQL Server，请使用以下语句来创建表：
@@ -180,9 +178,9 @@ PowerShell 示例将执行以下步骤：
 
 	源文件为 tutorials/usesqoop/data/sample.log。数据导出到的表的名称为 log4jlogs。
 	
-	> [AZURE.NOTE] 除了连接字符串信息，此部分中的步骤还应适用于 Azure SQL 数据库或 SQL Server。这些步骤已经过以下配置测试：
+	> [!NOTE] 除了连接字符串信息，此部分中的步骤还应适用于 Azure SQL 数据库或 SQL Server。这些步骤已经过以下配置测试：
 	><p> * **Azure 虚拟网络点到站点配置**：虚拟网络已将 HDInsight 群集连接到专用数据中心的 SQL Server。
-	><p> * **Azure HDInsight 3.1**：有关在虚拟网络上创建群集的信息，请参阅[使用自定义选项在 HDInsight 中创建 Hadoop 群集](/documentation/articles/hdinsight-provision-clusters-v1/)。
+	><p> * **Azure HDInsight 3.1**：有关在虚拟网络上创建群集的信息，请参阅[使用自定义选项在 HDInsight 中创建 Hadoop 群集](./hdinsight-provision-clusters-v1.md)。
 	><p> * **SQL Server 2014**：已配置为允许身份验证和运行 VPN 客户端配置包，可以安全地连接到虚拟网络。
 
 7. 将 Hive 表导出到 Azure SQL 数据库。
@@ -190,7 +188,6 @@ PowerShell 示例将执行以下步骤：
 8. 将 mobiledata 表导入 HDInsight 群集。
 
 	若要检查修改后的数据文件，可以使用 Azure 经典管理门户、Azure 存储资源管理器工具或 Azure PowerShell。[HDInsight 入门][hdinsight-get-started]中有一个关于使用 Azure PowerShell 下载文件并显示文件内容的代码示例。
-
 
 ### PowerShell 示例
 
@@ -367,7 +364,6 @@ PowerShell 示例将执行以下步骤：
 	$conn.close()
 	
 	#endregion
-	
 	
 	#region - Create HDInsight cluster
 	
@@ -563,21 +559,19 @@ PowerShell 示例将执行以下步骤：
 	
 	#endregion
 
-
-
 [azure-management-portal]: https://manage.windowsazure.cn/
 
-[hdinsight-versions]: /documentation/articles/hdinsight-component-versioning-v1/
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-[hdinsight-analyze-flight-data]: /documentation/articles/hdinsight-analyze-flight-delay-data/
-[hdinsight-use-oozie]: /documentation/articles/hdinsight-use-oozie/
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
-[hdinsight-submit-jobs]: /documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/
+[hdinsight-versions]: ./hdinsight-component-versioning-v1.md
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
+[hdinsight-analyze-flight-data]: ./hdinsight-analyze-flight-delay-data.md
+[hdinsight-use-oozie]: ./hdinsight-use-oozie.md
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
+[hdinsight-submit-jobs]: ./hdinsight-submit-hadoop-jobs-programmatically.md
 
-[sqldatabase-get-started]: /documentation/articles/sql-database-get-started/
-[sqldatabase-create-configue]: /documentation/articles/sql-database-get-started/
+[sqldatabase-get-started]: ../sql-database/sql-database-get-started.md
+[sqldatabase-create-configue]: ../sql-database/sql-database-get-started.md
 
 [powershell-start]: http://technet.microsoft.com/zh-cn/library/hh847889.aspx
 [powershell-install]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs

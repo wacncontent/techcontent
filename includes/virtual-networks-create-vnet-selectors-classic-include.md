@@ -1,10 +1,10 @@
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/virtual-networks-create-vnet-arm-pportal/)
-- [PowerShell](/documentation/articles/virtual-networks-create-vnet-arm-ps/)
-- [Azure CLI](/documentation/articles/virtual-networks-create-vnet-arm-cli/)
-- [Azure 门户预览 (经典)](/documentation/articles/virtual-networks-create-vnet-classic-pportal/)
-- [经典管理门户](/documentation/articles/virtual-networks-create-vnet-classic-portal/)
-- [PowerShell (经典)](/documentation/articles/virtual-networks-create-vnet-classic-netcfg-ps/)
-- [CLI (经典)](/documentation/articles/virtual-networks-create-vnet-classic-cli/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](../articles/virtual-network/virtual-networks-create-vnet-arm-pportal.md)
+- [PowerShell](../articles/virtual-network/virtual-networks-create-vnet-arm-ps.md)
+- [Azure CLI](../articles/virtual-network/virtual-networks-create-vnet-arm-cli.md)
+- [Azure 门户预览 (经典)](../articles/virtual-network/virtual-networks-create-vnet-classic-pportal.md)
+- [经典管理门户](../articles/virtual-network/virtual-networks-create-vnet-classic-portal.md)
+- [PowerShell (经典)](../articles/virtual-network/virtual-networks-create-vnet-classic-netcfg-ps.md)
+- [CLI (经典)](../articles/virtual-network/virtual-networks-create-vnet-classic-cli.md)
 
 <!---HONumber=69-->

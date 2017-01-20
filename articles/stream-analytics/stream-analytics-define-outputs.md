@@ -1,23 +1,22 @@
-<properties
-	pageTitle="流分析输出：存储、分析选项 | Azure"
-	description="了解有关设定流分析数据输出选项（包括 Power BI）目标，用于分析结果的信息。"
-	keywords="数据转换, 分析结果, 数据存储选项"
-	services="stream-analytics,documentdb,sql-database,event-hubs,service-bus,storage"
-	documentationCenter="" 
-	authors="jeffstokes72"
-	manager="jhubbard" 
-	editor="cgronlun"/>  
+---
+title: 流分析输出：存储、分析选项 | Azure
+description: 了解有关设定流分析数据输出选项（包括 Power BI）目标，用于分析结果的信息。
+keywords: 数据转换, 分析结果, 数据存储选项
+services: stream-analytics,documentdb,sql-database,event-hubs,service-bus,storage
+documentationCenter: 
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="stream-analytics"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="data-services"
-	ms.date="12/05/2016"
-	wacn.date="01/03/2017"
-	ms.author="jeffstok"/>
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 12/05/2016
+wacn.date: 01/03/2017
+ms.author: jeffstok
+---
 
 # 流分析输出：存储、分析选项
 
@@ -25,11 +24,9 @@
 
 为了启用多种应用程序模式，Azure 流分析提供了不同的选项来存储输出和查看分析结果。这样可以轻松地查看作业输出，并可灵活地使用和存储作业输出，以便进行数据仓库操作和其他操作。必须先存在作业中配置的输出，然后才能启动作业并开始事件的流动。例如，如果你使用 Blob 存储作为输出，该作业将不会自动创建存储帐户。在启动 ASA 作业之前，需要由用户创建该存储帐户。
 
-
-
 ## SQL 数据库
 
-可以将 [Azure SQL 数据库](/documentation/services/sql-databases/)用作本质上为关系型数据的输出，也可以将其用于所依赖的内容在关系数据库中托管的应用程序。流分析作业将写入到 Azure SQL 数据库的现有表中。请注意表架构必须与字段及其正从作业输出的类型完全匹配。[Azure SQL 数据仓库](/documentation/services/sql-data-warehouse/)也可以通过 SQL 数据库输出选项指定为输出（此项为预览功能）。下表列出了属性名称和用于创建 SQL 数据库输出的属性说明。
+可以将 [Azure SQL 数据库](../sql-database/index.md/)用作本质上为关系型数据的输出，也可以将其用于所依赖的内容在关系数据库中托管的应用程序。流分析作业将写入到 Azure SQL 数据库的现有表中。请注意表架构必须与字段及其正从作业输出的类型完全匹配。[Azure SQL 数据仓库](../sql-data-warehouse/index.md/)也可以通过 SQL 数据库输出选项指定为输出（此项为预览功能）。下表列出了属性名称和用于创建 SQL 数据库输出的属性说明。
 
 | 属性名称 | 说明 |
 |---------------|-------------|
@@ -40,11 +37,11 @@
 | 密码 | 用于连接到数据库的密码 |
 | 表 | 将写入输出的表名称。表名称区分大小写，并且该表的架构应与字段数量以及作业输出正在生成的字段类型完全匹配。 |
 
-> [AZURE.NOTE] 目前，流分析中的作业输出支持 Azure SQL 数据库产品/服务。但是，不支持附加了数据库，运行 SQL Server 的 Azure 虚拟机。这在将来的版本中可能会有所改变。
+> [!NOTE] 目前，流分析中的作业输出支持 Azure SQL 数据库产品/服务。但是，不支持附加了数据库，运行 SQL Server 的 Azure 虚拟机。这在将来的版本中可能会有所改变。
 
 ## Blob 存储
 
-Blob 存储提供了一种经济高效且可缩放的解决方案，用于在云中存储大量非结构化数据。如需 Azure Blob 存储及其用法的简介，请参阅文档：[如何使用 Blob](/documentation/articles/storage-dotnet-how-to-use-blobs/)。
+Blob 存储提供了一种经济高效且可缩放的解决方案，用于在云中存储大量非结构化数据。如需 Azure Blob 存储及其用法的简介，请参阅文档：[如何使用 Blob](../storage/storage-dotnet-how-to-use-blobs.md)。
 
 下表列出了用于创建 blob 输出的属性名称及其说明。
 
@@ -103,7 +100,7 @@ Blob 存储提供了一种经济高效且可缩放的解决方案，用于在云
 
 ## 事件中心
 
-[事件中心](/documentation/services/event-hubs/)是具有高扩展性的发布-订阅事件引入器。事件中心每秒可收集数百万个事件。当流分析作业的输出将要成为另一个流式处理作业的输入时，可以将事件中心用作输出。
+[事件中心](../event-hubs/index.md/)是具有高扩展性的发布-订阅事件引入器。事件中心每秒可收集数百万个事件。当流分析作业的输出将要成为另一个流式处理作业的输入时，可以将事件中心用作输出。
 
 将事件中心数据流配置成输出时，需要使用几个参数。
 
@@ -122,7 +119,7 @@ Blob 存储提供了一种经济高效且可缩放的解决方案，用于在云
 
 ## 表存储
 
-[Azure 表存储](/documentation/articles/storage-introduction/)提供了具有高可用性且可大规模缩放的存储，因此应用程序可以自动缩放以满足用户需求。表存储是 Microsoft 推出的 NoSQL 键/属性存储，适用于对架构的约束性较少的结构化数据。Azure 表存储可用于持久地存储数据，方便进行高效的检索。
+[Azure 表存储](../storage/storage-introduction.md)提供了具有高可用性且可大规模缩放的存储，因此应用程序可以自动缩放以满足用户需求。表存储是 Microsoft 推出的 NoSQL 键/属性存储，适用于对架构的约束性较少的结构化数据。Azure 表存储可用于持久地存储数据，方便进行高效的检索。
 
 下表列出了用于创建表输出的属性名称及其说明。
 
@@ -138,7 +135,7 @@ Blob 存储提供了一种经济高效且可缩放的解决方案，用于在云
 
 ## 服务总线队列
 
-[服务总线队列](/documentation/articles/service-bus-queues-topics-subscriptions/)为一个或多个竞争使用方提供先入先出 (FIFO) 消息传递方式。通常情况下，接收方会按照消息添加到队列中的临时顺序来接收并处理消息，并且每条消息仅由一个消息使用方接收并处理。
+[服务总线队列](../service-bus-messaging/service-bus-queues-topics-subscriptions.md)为一个或多个竞争使用方提供先入先出 (FIFO) 消息传递方式。通常情况下，接收方会按照消息添加到队列中的临时顺序来接收并处理消息，并且每条消息仅由一个消息使用方接收并处理。
 
 下表列出了用于创建队列输出的属性名称及其说明。
 
@@ -156,7 +153,7 @@ Blob 存储提供了一种经济高效且可缩放的解决方案，用于在云
 
 ## 服务总线主题
 
-服务总线队列提供的是一对一的从发送方到接收方的通信方法，而[服务总线主题](/documentation/articles/service-bus-queues-topics-subscriptions/)提供的则是一对多形式的通信。
+服务总线队列提供的是一对一的从发送方到接收方的通信方法，而[服务总线主题](../service-bus-messaging/service-bus-queues-topics-subscriptions.md)提供的则是一对多形式的通信。
 
 下表列出了用于创建表输出的属性名称及其说明。
 
@@ -174,7 +171,7 @@ Blob 存储提供了一种经济高效且可缩放的解决方案，用于在云
 <a name="documentdb"></a>
 ## DocumentDB
 
-[Azure DocumentDB](/home/features/documentdb/) 是完全托管的 NoSQL 文档数据库服务，提供针对无架构数据的查询和事务、可预测且可靠的性能，以及快速开发。
+[Azure DocumentDB](https://www.azure.cn/home/features/documentdb/) 是完全托管的 NoSQL 文档数据库服务，提供针对无架构数据的查询和事务、可预测且可靠的性能，以及快速开发。
 
 下表列出了用于创建 DocumentDB 输出的属性名称及其说明。
 
@@ -211,23 +208,22 @@ Blob 存储提供了一种经济高效且可缩放的解决方案，用于在云
 </tbody>
 </table>
 
-
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。
 
 ## 后续步骤
 我们已经向你介绍了流分析，这是一种托管服务，用于对物联网的数据进行流式分析。若要了解有关此服务的详细信息，请参阅：
 
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
 
 <!--Link references-->
 [stream.analytics.developer.guide]: /documentation/articles/stream-analytics-developer-guide/
-[stream.analytics.scale.jobs]: /documentation/articles/stream-analytics-scale-jobs/
-[stream.analytics.introduction]: /documentation/articles/stream-analytics-introduction/
-[stream.analytics.get.started]: /documentation/articles/stream-analytics-get-started/
+[stream.analytics.scale.jobs]: ./stream-analytics-scale-jobs.md
+[stream.analytics.introduction]: ./stream-analytics-introduction.md
+[stream.analytics.get.started]: ./stream-analytics-get-started.md
 [stream.analytics.query.language.reference]: http://go.microsoft.com/fwlink/?LinkID=513299
 [stream.analytics.rest.api.reference]: http://go.microsoft.com/fwlink/?LinkId=517301
 

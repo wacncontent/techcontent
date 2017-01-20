@@ -1,24 +1,21 @@
-<properties
-	pageTitle="Azure AD 联合元数据 | Azure"
-	description="本文介绍 Azure Active Directory 针对接受 Azure Active Directory 令牌的服务发布的联合元数据文档。"
-	services="active-directory"
-	documentationCenter=".net"
-	authors="priyamohanram"
-	manager="mbaldwin"
-	editor=""/>  
+---
+title: Azure AD 联合元数据 | Azure
+description: 本文介绍 Azure Active Directory 针对接受 Azure Active Directory 令牌的服务发布的联合元数据文档。
+services: active-directory
+documentationCenter: .net
+authors: priyamohanram
+manager: mbaldwin
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/03/2016"
-	wacn.date="11/08/2016"
-	ms.author="priyamo"/>  
-
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/03/2016
+wacn.date: 11/08/2016
+ms.author: priyamo
+---
 
 # 联合元数据
 
@@ -93,9 +90,7 @@ Azure AD 发布的联合元数据文档可以包含多个签名密钥，例如�
 
 以下元数据显示了一个 `RoleDescriptor` 元素示例。
 
-
 	<RoleDescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fed="http://docs.oasis-open.org/wsfed/federation/200706" xsi:type="fed:SecurityTokenServiceType"protocolSupportEnumeration="http://docs.oasis-open.org/wsfed/federation/200706">
-
 
 在特定于 SAML 的部分中，WS 联合身份验证元数据读取器读取 `IDPSSODescriptor` 元素中的证书。
 
@@ -144,7 +139,6 @@ Azure AD 发布的联合元数据文档可以包含多个签名密钥，例如�
 	</IDPSSODescriptor>
 
 同样，通用 SAML 2.0 协议终结点的终结点发布在独立于租户的联合元数据中，如以下示例中所示。
-
 
 	<IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
 	…

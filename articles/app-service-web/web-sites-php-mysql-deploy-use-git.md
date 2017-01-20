@@ -1,32 +1,32 @@
-<properties
-	pageTitle="使用 Git 在 Azure App Service 中创建和部署 PHP-MySQL Web 应用"
-	description="本教程演示如何创建在 MySQL 中存储数据的 PHP Web 应用并使用 Git 部署到 Azure。"
-	services="app-service\web"
-	documentationCenter="php"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""
-	tags="mysql"/>
+---
+title: 使用 Git 在 Azure App Service 中创建和部署 PHP-MySQL Web 应用
+description: 本教程演示如何创建在 MySQL 中存储数据的 PHP Web 应用并使用 Git 部署到 Azure。
+services: app-service\web
+documentationCenter: php
+authors: rmcmurray
+manager: wpickett
+editor: 
+tags: mysql
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="PHP"
-	ms.topic="article"
-	ms.date="11/01/2016"
-	wacn.date="12/30/2016"
-	ms.author="robmcm"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: PHP
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/30/2016
+ms.author: robmcm
+---
 
 # 使用 Git 在 Azure App Service 中创建和部署 PHP-MySQL Web 应用
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-本教程演示如何创建 PHP-MySQL Web 应用以及如何使用 Git 将该应用部署到[应用服务](/documentation/articles/app-service-changes-existing-services/)。需要使用计算机上已安装的 [PHP][install-php]、MySQL 命令行工具（[MySQL][install-mysql] 的一部分）和 [Git][install-git]。本教程中的说明适用于任何操作系统，包括 Windows、Mac 和 Linux。完成本指南之后，你将拥有一个在 Azure 中运行的 PHP/MySQL Web 应用。
+本教程演示如何创建 PHP-MySQL Web 应用以及如何使用 Git 将该应用部署到[应用服务](./app-service-changes-existing-services.md)。需要使用计算机上已安装的 [PHP][install-php]、MySQL 命令行工具（[MySQL][install-mysql] 的一部分）和 [Git][install-git]。本教程中的说明适用于任何操作系统，包括 Windows、Mac 和 Linux。完成本指南之后，你将拥有一个在 Azure 中运行的 PHP/MySQL Web 应用。
 
 你将学习以下内容：
 
-* 如何使用 [Azure 门户预览][management-portal]创建 Web 应用和 MySQL 数据库。由于[应用服务 Web 应用](/documentation/articles/app-service-changes-existing-services/)已默认启用 PHP，因此运行 PHP 代码没有任何特殊要求。
+* 如何使用 [Azure 门户预览][management-portal]创建 Web 应用和 MySQL 数据库。由于[应用服务 Web 应用](./app-service-changes-existing-services.md)已默认启用 PHP，因此运行 PHP 代码没有任何特殊要求。
 * 如何使用 Git 将应用程序发布和重新发布到 Azure。
 * 如何启用该编辑器扩展才能在每个 `git push` 自动执行编辑器任务。
 
@@ -37,7 +37,6 @@
 ## 设置开发环境
 
 本教程假定计算机上已安装 [PHP][install-php]、MySQL 命令行工具（[MySQL][install-mysql] 的一部分）和 [Git][install-git]。
-
 
 ##<a id="create-web-site-and-set-up-git"></a>创建 Web 应用并设置 Git 发布
 
@@ -69,7 +68,6 @@
 		$a.Properties.scmType = "LocalGit"
 
 		Set-AzureRmResource -PropertyObject $a.Properties -ResourceId /subscriptions/<subscription id>/resourcegroups/<resource group name>/providers/Microsoft.Web/sites/<web app name>/Config/web -ApiVersion 2015-08-01
-
 
 ## 获取远程 MySQL 连接信息
 
@@ -108,7 +106,6 @@
 4. 在本地应用程序文件夹的根目录中创建 **index.php** 文件。
 
 5. 在文本编辑器或 IDE 中打开 **index.php** 文件，添加以下代码，并完成用 `//TODO:` 注释标记的必需更改。
-
 
 		<html>
 		<head>
@@ -200,12 +197,11 @@
 
 现在，你可以浏览到 **http://localhost:8000/** 以测试应用程序。
 
-
 ## 发布应用
 
 在本地测试你的应用之后，可以使用 Git 将其发布到 Web Apps。你将初始化本地 Git 存储库并发布该应用程序。
 
-> [AZURE.NOTE]
+> [!NOTE]
 这些步骤与 Azure 门户预览中的“创建 Web 应用并设置 Git 发布”一节的结尾显示的步骤相同。
 
 1. （可选）如果你忘记或误放了 Git 远程存储库 URL，请导航到 Azure 门户预览上的 Web 应用属性。

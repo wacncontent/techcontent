@@ -1,24 +1,25 @@
-<properties
-	pageTitle="使用事件中心流式处理热路径中的 Azure 诊断数据 | Azure"
-	description="说明如何使用事件中心从头到尾配置 Azure 诊断，包括对常见方案的指导。"
-	services="event-hubs"
-	documentationCenter="na"
-	authors="sethmanheim"
-	manager="timlt"
-	editor="" />
-<tags
-	ms.service="event-hubs"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="na"
-	ms.date="07/14/2016"
-	wacn.date="08/15/2016"
-	ms.author="sethm" />
+---
+title: 使用事件中心流式处理热路径中的 Azure 诊断数据 | Azure
+description: 说明如何使用事件中心从头到尾配置 Azure 诊断，包括对常见方案的指导。
+services: event-hubs
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
+
+ms.service: event-hubs
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 07/14/2016
+wacn.date: 08/15/2016
+ms.author: sethm
+---
 
 # 使用事件中心流式处理热路径中的 Azure 诊断数据
 
-Azure 诊断提供了灵活的方法用于收集来自云服务虚拟机 (VM) 的指标和日志，并将结果传输到 Azure 存储空间。从 2016 年 3 月 (SDK 2.9) 这一时间范围开始，可以将诊断接收为完全自定义的数据源，并使用 [Azure 事件中心](/documentation/services/event-hubs/)在数秒内传输热路径数据。
+Azure 诊断提供了灵活的方法用于收集来自云服务虚拟机 (VM) 的指标和日志，并将结果传输到 Azure 存储空间。从 2016 年 3 月 (SDK 2.9) 这一时间范围开始，可以将诊断接收为完全自定义的数据源，并使用 [Azure 事件中心](./index.md/)在数秒内传输热路径数据。
 
 支持的数据类型包括：
 
@@ -42,8 +43,8 @@ Azure 诊断提供了灵活的方法用于收集来自云服务虚拟机 (VM) �
 - Azure 诊断扩展 1.6（[Azure SDK for.NET 2.9 或更高版本](/downloads/)默认以此为目标）
 - [Visual Studio 2013 或更高版本](https://www.visualstudio.com/downloads/)
 - 在应用程序中使用 *.wadcfgx* 文件和以下任一方法的 Azure 诊断现有配置：
-	- Windows PowerShell：[使用 PowerShell 在 Azure 云服务中启用诊断](/documentation/articles/cloud-services-diagnostics-powershell/)
-- 根据文章[事件中心入门](/documentation/articles/event-hubs-csharp-ephcs-getstarted/)预配的事件中心命名空间
+	- Windows PowerShell：[使用 PowerShell 在 Azure 云服务中启用诊断](../cloud-services/cloud-services-diagnostics-powershell.md)
+- 根据文章[事件中心入门](./event-hubs-csharp-ephcs-getstarted.md)预配的事件中心命名空间
 
 ## 将 Azure 诊断连接到事件中心接收器
 默认情况下，Azure 诊断始终将日志和指标接收到 Azure 存储帐户。应用程序可能会额外接收到事件中心，方法是将 **Sinks** 节添加到 .wadcfgx 文件的 **PublicConfig** 节中的 **WadCfg** 元素。在 Visual Studio 中，.wadcfgx 文件存储在“云服务项目”>“角色”>“(RoleName)”>“diagnostics.wadcfgx”文件中。
@@ -60,7 +61,7 @@ Azure 诊断提供了灵活的方法用于收集来自云服务虚拟机 (VM) �
 
 “接收器”名称可以设置为任何有效的字符串，前提是在整个配置文件中一致地使用相同的值。
 
-> [AZURE.NOTE]  此节中可能配置了其他接收器，例如 *applicationInsights*。Azure 诊断允许定义一个或多个接收器，前提是每个接收器也已在 **PrivateConfig** 节中声明。
+> [!NOTE]  此节中可能配置了其他接收器，例如 *applicationInsights*。Azure 诊断允许定义一个或多个接收器，前提是每个接收器也已在 **PrivateConfig** 节中声明。
 
 此外，必须在 *.wadcfgx* 配置文件的**PrivateConfig** 节中声明并定义事件中心接收器。
 
@@ -71,7 +72,7 @@ Azure 诊断提供了灵活的方法用于收集来自云服务虚拟机 (VM) �
 
 `SharedAccessKeyName` 值必须匹配已在**服务总线/事件中心**命名空间中定义的共享访问签名 (SAS) 密钥和策略。浏览到[Azure 经典管理门户](https://manage.windowsazure.cn)中的事件中心仪表板，单击“配置”选项卡，然后设置具有“发送”权限的命名策略（例如 “SendRule”）。**StorageAccount** 也已在 **PrivateConfig** 中声明。如果这里的值有效，就不需要更改。在本示例中，我们将值保留为空，这表示下游资产将设置这些值。例如，*ServiceConfiguration.Cloud.cscfg* 环境配置文件会设置适合环境的名称和密钥。
 
-> [AZURE.WARNING] 事件中心 SAS 密钥以纯文本形式存储在 *.wadcfgx* 文件中。通常，系统会将此密钥签入源代码管理，或作为生成服务器中的资产提供，因此应该适当地保护它。建议在此处使用具有仅发送权限的 SAS 密钥，使恶意用户只能写入事件中心，而无法侦听或进行管理。
+> [!WARNING] 事件中心 SAS 密钥以纯文本形式存储在 *.wadcfgx* 文件中。通常，系统会将此密钥签入源代码管理，或作为生成服务器中的资产提供，因此应该适当地保护它。建议在此处使用具有仅发送权限的 SAS 密钥，使恶意用户只能写入事件中心，而无法侦听或进行管理。
 
 ## 配置 Azure 诊断日志和指标以使用事件中心接收
 
@@ -125,13 +126,13 @@ Visual Studio 提供最简单的路径供你部署应用程序和事件中心接
 
 ![][0]
 
-> [AZURE.NOTE] 当你更新 Azure 诊断配置文件 (.wadcfgx) 时，建议使用 Visual Studio 发布或 Windows PowerShell 脚本将更新推送到整个应用程序以及配置。
+> [!NOTE] 当你更新 Azure 诊断配置文件 (.wadcfgx) 时，建议使用 Visual Studio 发布或 Windows PowerShell 脚本将更新推送到整个应用程序以及配置。
 
 ## 查看热路径数据
 
 如前文所述，侦听和处理事件中心数据有许多用例。
 
-一种简单的方法是创建小型测试控制台应用程序用于侦听事件中心并列显输出流。可在控制台应用程序中插入以下代码（[事件中心入门](/documentation/articles/event-hubs-csharp-ephcs-getstarted/)一文中已详细说明）。
+一种简单的方法是创建小型测试控制台应用程序用于侦听事件中心并列显输出流。可在控制台应用程序中插入以下代码（[事件中心入门](./event-hubs-csharp-ephcs-getstarted.md)一文中已详细说明）。
 
 请注意，控制台应用程序必须包含[事件处理器主机 Nuget 包](https://www.nuget.org/packages/Microsoft.Azure.ServiceBus.EventProcessorHost/)。
 
@@ -232,7 +233,7 @@ Visual Studio 提供最简单的路径供你部署应用程序和事件中心接
 	请尝试查看 Azure 存储表，其中包含日志和 Azure 诊断本身的错误：**WADDiagnosticInfrastructureLogsTable**。一个选项是使用 [Azure 存储资源管理器](http://www.storageexplorer.com)等工具连接到此存储帐户，查看此表，然后添加过去 24 小时的时间戳查询。你可以使用此工具导出 .csv 文件，并在 Microsoft Excel 之类的应用程序中打开它。Excel 能轻松地搜索电话卡字符串（如 **EventHubs**），以便查看系统报告了哪些错误。
 
 ## 后续步骤
-•	[了解有关事件中心的详细信息](/documentation/services/event-hubs/)
+•	[了解有关事件中心的详细信息](./index.md/)
 
 ## 附录：完整的 Azure 诊断配置文件 (.wadcfgx) 示例
 	<?xml version="1.0" encoding="utf-8"?>

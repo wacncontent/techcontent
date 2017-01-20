@@ -1,29 +1,30 @@
-<properties
-    pageTitle="使用 SqlPackage.exe 确定 SQL 数据库兼容性 | Azure"
-    description="Azure SQL 数据库, 数据库迁移, SQL 数据库兼容性, SqlPackage"
-    services="sql-database"
-    documentationcenter=""
-    author="CarlRabeler"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="ebe2cf3e-9561-4ede-8fb9-f3e6ce3fb7a6"
-    ms.service="sql-database"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="sqldb-migrate"
-    ms.date="11/08/2016"
-    wacn.date="12/19/2016"
-ms.author="carlrab" />
+---
+title: 使用 SqlPackage.exe 确定 SQL 数据库兼容性 | Azure
+description: Azure SQL 数据库, 数据库迁移, SQL 数据库兼容性, SqlPackage
+services: sql-database
+documentationcenter: 
+author: CarlRabeler
+manager: jhubbard
+editor: 
+
+ms.assetid: ebe2cf3e-9561-4ede-8fb9-f3e6ce3fb7a6
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: sqldb-migrate
+ms.date: 11/08/2016
+wacn.date: 12/19/2016
+ms.author: carlrab
+---
 
 # 使用 SqlPackage.exe 确定 SQL 数据库兼容性
 
-> [AZURE.SELECTOR]
-- [SSDT](/documentation/articles/sql-database-cloud-migrate-fix-compatibility-issues-ssdt/)
-- [SqlPackage](/documentation/articles/sql-database-cloud-migrate-determine-compatibility-sqlpackage/)
-- [SSMS](/documentation/articles/sql-database-cloud-migrate-determine-compatibility-ssms/)
-- [SAMW](/documentation/articles/sql-database-cloud-migrate-fix-compatibility-issues/)
+> [!div class="op_single_selector"]
+- [SSDT](./sql-database-cloud-migrate-fix-compatibility-issues-ssdt.md)
+- [SqlPackage](./sql-database-cloud-migrate-determine-compatibility-sqlpackage.md)
+- [SSMS](./sql-database-cloud-migrate-determine-compatibility-ssms.md)
+- [SAMW](./sql-database-cloud-migrate-fix-compatibility-issues.md)
 
 在本文中，你将了解如何使用 [SqlPackage](https://msdn.microsoft.com/zh-cn/library/hh550080.aspx) 命令提示符实用程序确定要迁移到 SQL 数据库的 SQL Server 数据库是否兼容。
 
@@ -50,18 +51,17 @@ ms.author="carlrab" />
 
 	![通过“任务”菜单导出数据层应用程序](./media/sql-database-cloud-migrate/TestForCompatibilityUsingSQLPackage02.png)  
 
-
 ## 后续步骤
 
 - [最新版本的 SSDT](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx) 
 [最新版本的 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)
-- [修复数据库迁移的兼容性问题](/documentation/articles/sql-database-cloud-migrate/#fix-database-migration-compatibility-issues)
-- [将兼容的 SQL Server 数据库迁移到 SQL 数据库](/documentation/articles/sql-database-cloud-migrate/#migrate-a-compatible-sql-server-database-to-sql-database)
+- [修复数据库迁移的兼容性问题](./sql-database-cloud-migrate.md#fix-database-migration-compatibility-issues)
+- [将兼容的 SQL Server 数据库迁移到 SQL 数据库](./sql-database-cloud-migrate.md#migrate-a-compatible-sql-server-database-to-sql-database)
 
 ## 其他资源
 
-- [SQL 数据库 V12](/documentation/articles/sql-database-v12-whats-new/)
-- [Transact-SQL 部分支持或不支持的函数](/documentation/articles/sql-database-transact-sql-information/)
+- [SQL 数据库 V12](./sql-database-v12-whats-new.md)
+- [Transact-SQL 部分支持或不支持的函数](./sql-database-transact-sql-information.md)
 - [使用 SQL Server 迁移助手迁移非 SQL Server 数据库](http://blogs.msdn.com/b/ssma/)
 
 <!---HONumber=Mooncake_1212_2016-->

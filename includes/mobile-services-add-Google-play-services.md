@@ -6,7 +6,6 @@
 
    	![](./media/notification-hubs-android-get-started/notification-hub-create-android-app4.png)
 
-
 3. 打开应用目录中的 **build.gradle** 文件。
 
 	![](./media/mobile-services-android-get-started-push/android-studio-push-build-gradle.png)
@@ -24,5 +23,4 @@
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
  
-
 <!---HONumber=71-->

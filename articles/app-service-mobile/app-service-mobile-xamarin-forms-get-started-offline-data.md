@@ -1,26 +1,25 @@
-<properties
-    pageTitle="为 Azure 移动应用启用脱机同步 (Xamarin.Forms) | Azure"
-    description="了解如何在 Xamarin.Forms 应用程序中使用应用服务移动应用缓存和同步脱机数据"
-    documentationCenter="xamarin"
-    authors="adrianhall"
-    manager="yochayk"
-    editor=""
-    services="app-service\mobile"/>  
+---
+title: 为 Azure 移动应用启用脱机同步 (Xamarin.Forms) | Azure
+description: 了解如何在 Xamarin.Forms 应用程序中使用应用服务移动应用缓存和同步脱机数据
+documentationCenter: xamarin
+authors: adrianhall
+manager: yochayk
+editor: 
+services: app-service\mobile
 
-
-<tags
-    ms.service="app-service-mobile"
-    ms.workload="mobile"
-    ms.tgt_pltfrm="mobile-xamarin-ios"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="10/04/2016"
-    wacn.date="12/26/2016"
-    ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-ios
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/04/2016
+wacn.date: 12/26/2016
+ms.author: adrianha
+---
 
 # 为 Xamarin.Forms 移动应用启用脱机同步
 
-[AZURE.INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
+[!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
 ## 概述
 本教程介绍适用于 Xamarin.Forms 的 Azure 移动应用的脱机同步功能。脱机同步允许最终用户与移动应用交互（查看、添加或修改数据），即使在没有网络连接时也是如此。在本地数据库中存储更改。设备重新联机后，这些更改会与远程服务同步。
@@ -121,7 +120,6 @@
 
 在所提供的代码中，将查询远程 TodoItem 表中的所有记录，但它还可以筛选记录，只需将查询 ID 和查询传递给 **PushAsync** 即可。有关详细信息，请参阅 [Azure 移动应用中的脱机数据同步][2]中的 *增量同步* 部分。
 
-
 ## 运行客户端应用
 
 现已启用脱机同步，可在每个平台上至少运行一次客户端应用程序，以填充本地存储数据库。稍后，模拟脱机场景，并在应用处于脱机状态时修改本地存储中的数据。
@@ -168,13 +166,13 @@
 
 <!-- URLs. -->
 
-[1]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
-[2]: /documentation/articles/app-service-mobile-offline-data-sync/
+[1]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[2]: ./app-service-mobile-offline-data-sync.md
 [3]: http://go.microsoft.com/fwlink/p/?LinkID=716919
 [4]: http://go.microsoft.com/fwlink/p/?LinkID=716920
 [5]: http://sqlite.org/2016/sqlite-uwp-3120200.vsix
 [6]: https://www.getpostman.com/
 [7]: http://www.telerik.com/fiddler
-[8]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/
+[8]: ./app-service-mobile-dotnet-how-to-use-client-library.md
 
 <!---HONumber=Mooncake_1219_2016-->

@@ -1,24 +1,23 @@
-<properties
-	pageTitle="开始使用 Visual Studio .NET 移动服务项目（连接服务）| Microsoft Azure"
-	description="如何在 Visual Studio .NET 项目中开始使用 Azure 移动服务"
-	services="mobile-services"
-	documentationCenter=""
-	authors="mlhoop"
-	manager="douge"
-	editor=""/>
+---
+title: 开始使用 Visual Studio .NET 移动服务项目（连接服务）| Microsoft Azure
+description: 如何在 Visual Studio .NET 项目中开始使用 Azure 移动服务
+services: mobile-services
+documentationCenter: 
+authors: mlhoop
+manager: douge
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="vs-getting-started"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="mlearned"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: mlearned
+---
 
 #  移动服务入门（.NET 项目）
-
 
 为了跟踪这些代码，您需要首先执行的步骤取决于您连接的移动服务类型。
 
@@ -43,7 +42,7 @@
 
 	IMobileServiceTable<TodoItem> todoTable = App.<yourClient>.GetTable<TodoItem>();
 
-如果您的表权限已设置为**具有应用程序密钥的任何人**，则此代码有效。如果您更改权限以保护您的移动服务，您将需要添加用户身份验证支持。请参阅[身份验证入门](/documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users/)。
+如果您的表权限已设置为**具有应用程序密钥的任何人**，则此代码有效。如果您更改权限以保护您的移动服务，您将需要添加用户身份验证支持。请参阅[身份验证入门](./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users.md)。
 
 ##添加表项
 
@@ -67,7 +66,6 @@
         // handle exception
     }
 
-
 ##更新表项
 
 更新数据表中的行。参数项是指要更新的 TodoItem 对象。
@@ -80,7 +78,6 @@
 
 	await todoTable.DeleteAsync(item);
 
-
-[详细了解移动服务](/documentation/services/mobile-services/)
+[详细了解移动服务](./index.md/)
 
 <!---HONumber=Mooncake_0215_2016-->

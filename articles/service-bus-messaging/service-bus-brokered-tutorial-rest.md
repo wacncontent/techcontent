@@ -1,32 +1,31 @@
-<properties 
-   pageTitle="服务总线中转消息传送 REST 教程 | Azure"
-   description="中转消息传送 REST 教程。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-    editor="" />  
+---
+title: 服务总线中转消息传送 REST 教程 | Azure
+description: 中转消息传送 REST 教程。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
 
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/27/2016"
-    ms.author="sethm"
-    wacn.date="01/09/2017"/>  
-
+ms.service: service-bus
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/27/2016
+ms.author: sethm
+wacn.date: 01/09/2017
+---
 
 # 服务总线中转消息传送 REST 教程
 
-[AZURE.INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
+[!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 本教程介绍了如何创建基本的基于 REST 的 Azure 服务总线队列和主题/订阅。
 
 ## 创建命名空间
 
-第一步是创建服务命名空间并获取[共享访问签名](/documentation/articles/service-bus-sas-overview/) (SAS) 密钥。命名空间为每个通过服务总线公开的应用程序提供应用程序边界。创建服务命名空间时，系统将自动生成 SAS 密钥。服务命名空间与 SAS 密钥的组合为服务总线提供了一个用于验证应用程序访问权限的凭据。
+第一步是创建服务命名空间并获取[共享访问签名](./service-bus-sas-overview.md) (SAS) 密钥。命名空间为每个通过服务总线公开的应用程序提供应用程序边界。创建服务命名空间时，系统将自动生成 SAS 密钥。服务命名空间与 SAS 密钥的组合为服务总线提供了一个用于验证应用程序访问权限的凭据。
 
 ### 创建命名空间并获取 SAS 密钥
 
@@ -44,7 +43,7 @@
 
 本教程中的代码将执行以下操作。
 
-- 使用命名空间和[共享访问签名](/documentation/articles/service-bus-sas-overview/) (SAS) 密钥来获取对服务总线命名空间资源的访问权限。
+- 使用命名空间和[共享访问签名](./service-bus-sas-overview.md) (SAS) 密钥来获取对服务总线命名空间资源的访问权限。
 
 - 创建队列、将消息发送到队列，并读取来自队列的消息。
 
@@ -66,7 +65,6 @@
 
 3. 在 Program.cs 中，确保 `using` 语句如下所示：
 
-	
 		using System;
 		using System.Globalization;
 		using System.IO;
@@ -75,21 +73,17 @@
 		using System.Text;
 		using System.Xml;
 	
-
 4. 如有需要，将该程序的命名空间从 Visual Studio 默认值重命名为 `Microsoft.ServiceBus.Samples`。
 
 5. 在 `Program` 类中，添加以下全局变量：
-	
 	
 		static string serviceNamespace;
 		static string baseAddress;
 		static string token;
 		const string sbHostName = "servicebus.chinacloudapi.cn";
 	
-
 6. 在 `Main()` 中，粘贴以下代码：
 
-	
 		Console.Write("Enter your service namespace: ");
 		serviceNamespace = Console.ReadLine();
 	
@@ -158,7 +152,6 @@
 		Console.WriteLine("\nPress ENTER to exit.");
 		Console.ReadLine();
 	
-
 ## 创建管理凭据
 
 下一步是编写一个方法，用于处理上一步中输入的命名空间和 SAS 密钥，并返回一个 SAS 令牌。此示例创建了一个有效期为一小时的 SAS 令牌。
@@ -166,7 +159,6 @@
 ### 创建 GetSASToken() 方法
 
 在 `Main()` 方法后面的 `Program` 类中粘贴以下代码：
-
 
 		private static string GetSASToken(string SASKeyName, string SASKeyValue)
 		{
@@ -186,7 +178,6 @@
 下一步是编写使用 REST 样式的 HTTP PUT 命令来创建队列的方法。
 
 在上一步中添加的 `GetSASToken()` 代码后直接粘贴以下代码：
-
 
 		// Uses HTTP PUT to create the queue
 		private static string CreateQueue(string queueName, string token)
@@ -209,14 +200,12 @@
 		    return Encoding.UTF8.GetString(response);
 		}
 
-
 ## 向队列发送消息
 
 在此步骤中，你将添加一个方法，该方法使用 REST 样式的 HTTP POST 命令将消息发送到上一步中创建的队列。
 
 1. 在上一步中添加的 `CreateQueue()` 代码后直接粘贴以下代码：
 
-	
 		// Sends a message to the "queueName" queue, given the name and the value to enqueue
 		// Uses an HTTP POST request.
 		private static void SendMessage(string queueName, string body)
@@ -229,30 +218,24 @@
 		    webClient.UploadData(fullAddress, "POST", Encoding.UTF8.GetBytes(body));
 		}
 	
-
 2. 标准中转消息属性位于 `BrokerProperties` HTTP 标头中。中转站属性必须以 JSON 格式序列化。若要指定 30 秒的 **TimeToLive** 值并向消息添加消息标签“M1”，请在前面的示例所示的 `webClient.UploadData()` 调用之前添加以下代码：
 
-	
 		// Add brokered message properties "TimeToLive" and "Label"
 		webClient.Headers.Add("BrokerProperties", "{ "TimeToLive":30, "Label":"M1"}");
 	
-
 	请注意，已添加并将继续添加中转消息属性。因此，发送请求必须指定支持属于请求一部分的所有中转消息属性的 API 版本。如果指定的 API 版本不支持中转消息属性，则忽略该属性。
 
 3. 自定义消息属性被定义为一组键值对。每个自定义属性都存储在其自身的 TPPT 标头中。若要添加自定义属性“Priority”和“Customer”，请在前面的示例所示的 `webClient.UploadData()` 调用之前直接添加以下代码：
 
-	
 		// Add custom properties "Priority" and "Customer".
 		webClient.Headers.Add("Priority", "High");
 		webClient.Headers.Add("Customer", "12345");
 	
-
 ## 从队列接收并删除消息
 
 下一步是添加使用 REST 样式的 HTTP DELETE 命令从队列接收并删除消息的方法。
 
 在上一步中添加的 `SendMessage()` 代码后直接粘贴以下代码：
-
 
 		// Receives and deletes the next message from the given resource (queue, topic, or subscription)
 		// using the resourceName and an HTTP DELETE request
@@ -270,7 +253,6 @@
 		    return responseStr;
 		}
 
-
 ## 创建主题和订阅
 
 下一步是编写使用 REST 样式的 HTTP PUT 命令来创建主题的方法。然后，编写创建对该主题的订阅的方法。
@@ -278,7 +260,6 @@
 ### 创建主题
 
 在上一步中添加的 `ReceiveAndDeleteMessage()` 代码后直接粘贴以下代码：
-
 
 		// Using an HTTP PUT request.
 		private static string CreateTopic(string topicName)
@@ -300,11 +281,9 @@
 		    return Encoding.UTF8.GetString(response);
 		}
 
-
 ### 创建订阅
 
 以下代码将创建对上一步中创建的主题的订阅。在 `CreateTopic()` 定义后直接添加以下代码：
-
 
 		private static string CreateSubscription(string topicName, string subscriptionName)
 		{
@@ -325,7 +304,6 @@
 		    return Encoding.UTF8.GetString(response);
 		}
 
-
 ## 检索消息资源
 
 在此步骤中添加的代码用于检索消息属性，然后删除在前面的步骤中创建的消息资源。
@@ -333,7 +311,6 @@
 ### 用指定资源检索 Atom 馈送
 
 在上一步中添加的 `CreateSubscription()` 方法后直接添加以下代码：
-
 
 		private static string GetResources(string resourceAddress)
 		{
@@ -344,11 +321,9 @@
 		    return FormatXml(webClient.DownloadString(fullAddress));
 		}
 
-
 ### 删除消息传送实体
 
 在上一步中添加的代码后直接添加以下代码：
-
 
 		private static string DeleteResource(string resourceName)
 		{
@@ -361,11 +336,9 @@
 		    return Encoding.UTF8.GetString(response);
 		}
 
-
 ### 格式化 Atom 馈送
 
 `GetResources()` 方法包含对 `FormatXml()` 方法的调用，用于对检索到的 Atom 馈送进行再次格式化，以增强其可读性。以下是 `FormatXml()` 的定义；请在在上一部分中添加的 `DeleteResource()` 代码后直接添加它：
-
 
 		// Formats the XML string to be more human-readable; intended for display purposes
 		private static string FormatXml(string inputXml)
@@ -383,7 +356,6 @@
 		    return builder.ToString();
 		}
 
-
 ## 构建并运行应用程序
 
 现在可以构建并运行应用程序。在 Visual Studio 中的“生成”菜单上，单击“生成解决方案”，或按 **Ctrl+Shift+B**。
@@ -395,7 +367,6 @@
 ### 示例
 
 下例为完整的代码，它是遵循本教程中所有步骤之后的预期结果。
-
 
 		using System;
 		using System.Globalization;
@@ -629,13 +600,12 @@
 		    }
 		}
 
-
 ## 后续步骤
 
 请参阅以下文章以了解更多信息：
 
-- [服务总线消息传送概述](/documentation/articles/service-bus-messaging-overview/)
-- [Azure 服务总线基础知识](/documentation/articles/service-bus-fundamentals-hybrid-solutions/)
-- [服务总线中继 REST 教程](/documentation/articles/service-bus-relay-rest-tutorial/)
+- [服务总线消息传送概述](./service-bus-messaging-overview.md)
+- [Azure 服务总线基础知识](./service-bus-fundamentals-hybrid-solutions.md)
+- [服务总线中继 REST 教程](./service-bus-relay-rest-tutorial.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

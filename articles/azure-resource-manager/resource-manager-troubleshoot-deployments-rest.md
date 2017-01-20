@@ -1,37 +1,36 @@
-<properties
-    pageTitle="使用 REST API 查看部署操作 | Azure"
-    description="介绍如何使用 Azure Resource Manager REST API 来检测 Resource Manager 部署的问题。"
-    services="azure-resource-manager,virtual-machines"
-    documentationcenter=""
-    tags="top-support-issue"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: 使用 REST API 查看部署操作 | Azure
+description: 介绍如何使用 Azure Resource Manager REST API 来检测 Resource Manager 部署的问题。
+services: azure-resource-manager,virtual-machines
+documentationcenter: 
+tags: top-support-issue
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="af2abbef-5454-45d3-b5cf-4ae10347e630"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-multiple"
-    ms.workload="infrastructure"
-    ms.date="06/13/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: af2abbef-5454-45d3-b5cf-4ae10347e630
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-multiple
+ms.workload: infrastructure
+ms.date: 06/13/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 使用 Azure Resource Manager REST API 查看部署操作
->[AZURE.SELECTOR]
-- [门户](/documentation/articles/resource-manager-troubleshoot-deployments-portal/)
-- [PowerShell](/documentation/articles/resource-manager-troubleshoot-deployments-powershell/)
-- [Azure CLI](/documentation/articles/resource-manager-troubleshoot-deployments-cli/)
-- [REST API](/documentation/articles/resource-manager-troubleshoot-deployments-rest/)
+>[!div class="op_single_selector"]
+- [门户](./resource-manager-troubleshoot-deployments-portal.md)
+- [PowerShell](./resource-manager-troubleshoot-deployments-powershell.md)
+- [Azure CLI](./resource-manager-troubleshoot-deployments-cli.md)
+- [REST API](./resource-manager-troubleshoot-deployments-rest.md)
 
 如果你在将资源部署到 Azure 时收到错误，可能想要查看有关已执行的部署操作的更多详细信息。REST API 提供操作来让你查找错误并确定可能的解决方法。
 
-[AZURE.INCLUDE [resource-manager-troubleshoot-introduction](../../includes/resource-manager-troubleshoot-introduction.md)]
+[!INCLUDE [resource-manager-troubleshoot-introduction](../../includes/resource-manager-troubleshoot-introduction.md)]
 
-如果部署之前先验证模板和基础结构，则可以避免一些错误。你还可以在部署过程中记录其他请求和响应信息，以方便以后进行故障排除。若要了解有关验证和记录请求和响应信息的内容，请参阅 [Deploy a resource group with Azure Resource Manager template](/documentation/articles/resource-group-template-deploy-rest/)（使用 Azure Resource Manager 模板部署资源组）。
+如果部署之前先验证模板和基础结构，则可以避免一些错误。你还可以在部署过程中记录其他请求和响应信息，以方便以后进行故障排除。若要了解有关验证和记录请求和响应信息的内容，请参阅 [Deploy a resource group with Azure Resource Manager template](./resource-group-template-deploy-rest.md)（使用 Azure Resource Manager 模板部署资源组）。
 
 ## 使用 REST API 进行故障排除
 1. 使用[创建模板部署](https://docs.microsoft.com/rest/api/resources/deployments#Deployments_CreateOrUpdate)操作来部署资源。若要保留可能有助于调试的信息，请将 JSON 请求中的 **debugSetting** 属性设置为 **requestContent** 和/或 **responseContent**。
@@ -107,8 +106,8 @@
         GET https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/microsoft.insights/eventtypes/management/values?api-version={api-version}&$filter={filter-expression}&$select={comma-separated-property-names}
 
 ## 后续步骤
-* 有关解决特定部署错误的帮助，请参阅 [Resolve common errors when deploying resources to Azure with Azure Resource Manager](/documentation/articles/resource-manager-common-deployment-errors/)（解决使用 Azure Resource Manager 将资源部署到 Azure 时的常见错误）。
-* 若要了解如何使用审核日志来监视其他类型的操作，请参阅 [Audit operations with Resource Manager](/documentation/articles/resource-group-audit/)（使用 Resource Manager 执行审核操作）。
-* 若要在执行部署之前验证部署，请参阅 [Deploy a resource group with Azure Resource Manager template](/documentation/articles/resource-group-template-deploy/)（使用 Azure Resource Manager 模板部署资源组）。
+* 有关解决特定部署错误的帮助，请参阅 [Resolve common errors when deploying resources to Azure with Azure Resource Manager](./resource-manager-common-deployment-errors.md)（解决使用 Azure Resource Manager 将资源部署到 Azure 时的常见错误）。
+* 若要了解如何使用审核日志来监视其他类型的操作，请参阅 [Audit operations with Resource Manager](./resource-group-audit.md)（使用 Resource Manager 执行审核操作）。
+* 若要在执行部署之前验证部署，请参阅 [Deploy a resource group with Azure Resource Manager template](./resource-group-template-deploy.md)（使用 Azure Resource Manager 模板部署资源组）。
 
 <!---HONumber=Mooncake_1219_2016-->

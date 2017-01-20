@@ -1,12 +1,16 @@
-<properties 
-	pageTitle="保留正在使用的 VIP" 
-	description="本页介绍如何使用 PowerShell 来使用保留 IP。" 
-	services="virtual network" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-network-aog" ms.date="" wacn.date="06/08/2016"/>
+---
+title: 保留正在使用的 VIP
+description: 本页介绍如何使用 PowerShell 来使用保留 IP。
+services: virtual network
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-network-aog
+ms.date: 
+wacn.date: 06/08/2016
+---
 
 #保留正在使用的 VIP
 ###本文包含以下内容
@@ -20,7 +24,7 @@
 * 建议使用在虚拟网络内。
 
 ## <a id="operation"></a>操作步骤
-1. 下载并安装最新版的 Azure PowerShell，配置 Azure 管理账户。参考链接：[如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/) 
+1. 下载并安装最新版的 Azure PowerShell，配置 Azure 管理账户。参考链接：[如何安装和配置 Azure PowerShell](./powershell-install-configure.md) 
 2.	查看需要固定 VIP 的云服务信息
 
 	命令行：`PS C:\> get-azuredeployment -ServiceName` 其中 sh3prd 为云服务名称，可以看到当前的云服务 ReservedIPName 为空。
@@ -83,6 +87,5 @@
 * 适用每个订阅 20 个保留 IP 地址这一限额。如果您有与由世纪互联运营的 Azure 的企业协议，则可以保留最多 100 个 IP 地址。如果您需要增加此限额，请联系世纪互联的技术支持。
 * 前 5 个保留的 IP 如果在使用中则为免费，如果只保留了 IP 而没有使用则将被计费。
  
-更多详细请阅读：[IP 地址定价](/pricing/details/reserved-ip-addresses/)
-
+更多详细请阅读：[IP 地址定价](https://www.azure.cn/pricing/details/reserved-ip-addresses/)
 

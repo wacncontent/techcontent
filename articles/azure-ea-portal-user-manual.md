@@ -1,16 +1,16 @@
-<properties
-	pageTitle="Azure 企业门户管理手册 | Azure"
-	description="详细介绍如何管理Azure账户、订阅及查看相应的账单。"
-	services="ea-portal"
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure 企业门户管理手册 | Azure
+description: 详细介绍如何管理Azure账户、订阅及查看相应的账单。
+services: ea-portal
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="ea-portal"
-	ms.date=""
-	wacn.date="09/21/2016"/>
+ms.service: ea-portal
+ms.date: 
+wacn.date: 09/21/2016
+---
 
 #Azure 企业门户管理手册
 
@@ -172,7 +172,6 @@ Azure 企业门户拥有以下功能：
 (2)	使用 Azure 企业门户前，确认签署 Azure 企业协议(Enterprise Agreement)合同；
 
 (3)	确认已把测试账户信息提交给世纪互联后台的运维团队，并在后台录入。
-
 
 ###<a id="simulations"></a>2.3 模拟场景
 
@@ -464,10 +463,6 @@ Azure 可以通过下载 Excel，将一段时间内 Azure 的详细账单，通�
 
 ###<a id="azure-billing-exceed"></a>3.5 关于 Azure 超额使用  
 当用户的累积使用情况，达到整个合同金额的75%，90%，100%，125%时， Azure 会自动发送邮件给相应的联系人，提供合同金额并给予提示。
-
-
-
-
 
 <!--image-->
 [1]: ./media/azure-ea-portal-user-manual/enterprise-azure-role-and-portal.png

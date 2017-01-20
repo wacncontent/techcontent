@@ -1,23 +1,22 @@
-<properties
-    pageTitle="Azure 自动化中的变量资产 | Azure"
-    description="变量资产是可供 Azure 自动化中的所有 Runbook 使用的值。本文介绍了变量的详细信息，以及如何在文本创作中使用变量。"
-    services="automation"
-    documentationcenter=""
-    author="mgoedtel"
-    manager="jwhit"
-    editor="tysonn" />  
+---
+title: Azure 自动化中的变量资产 | Azure
+description: 变量资产是可供 Azure 自动化中的所有 Runbook 使用的值。本文介绍了变量的详细信息，以及如何在文本创作中使用变量。
+services: automation
+documentationcenter: 
+author: mgoedtel
+manager: jwhit
+editor: tysonn
 
-<tags
-    ms.assetid="b880c15f-46f5-4881-8e98-e034cc5a66ec"
-    ms.service="automation"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="11/14/2016"
-    wacn.date="01/09/2017"
-    ms.author="magoedte;bwren" />  
-
+ms.assetid: b880c15f-46f5-4881-8e98-e034cc5a66ec
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/14/2016
+wacn.date: 01/09/2017
+ms.author: magoedte;bwren
+---
 
 # Azure 自动化中的变量资产
 
@@ -33,7 +32,7 @@
 
 创建变量时，可以指定将其加密存储。当变量加密后，它将安全地存储在 Azure 自动化中并且不能从 Azure PowerShell 模块随附的 [Get-AzureAutomationVariable](http://msdn.microsoft.com/zh-cn/library/dn913772.aspx) cmdlet 检索变量值。可以检索加密值的唯一方法是从 Runbook 中的 **Get-AutomationVariable** 活动检索。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Azure 自动化中的安全资产包括凭据、证书、连接和加密的变量。这些资产已使用针对每个自动化帐户生成的唯一密钥加密并存储在 Azure 自动化中。此密钥由主证书加密，并存储在 Azure 自动化中。在存储安全资产之前，会先使用主证书来解密自动化帐户的密钥，然后使用该密钥来加密资产。
 
 ## <a id="variable-types"></a>变量类型
@@ -68,7 +67,7 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 |Get-AutomationVariable|检索现有变量的值。|
 |Set-AutomationVariable|设置现有变量的值。|
 
->[AZURE.NOTE] 应避免在 Runbook 中的 **Get-AutomationVariable** 的 -Name 参数中使用变量，因为这可能会使设计时发现 Runbook 与自动化变量之间的依赖关系变得复杂化。
+>[!NOTE] 应避免在 Runbook 中的 **Get-AutomationVariable** 的 -Name 参数中使用变量，因为这可能会使设计时发现 Runbook 与自动化变量之间的依赖关系变得复杂化。
 
 ## 创建新的自动化变量
 
@@ -85,7 +84,6 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 
 下面的示例命令演示如何创建字符串类型的变量，然后返回其值。
 
-
     New-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name 'MyStringVariable' -Encrypted $false -Value 'My String'
     $string = (Get-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name 'MyStringVariable').Value
 
@@ -98,12 +96,9 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
     $vmName = $vmValue.Name
     $vmIpAddress = $vmValue.IpAddress
 
-
-
 ## 在 Runbook 中使用变量
 
 使用 **Set-AutomationVariable** 活动设置 Runbook 中的自动化变量的值，并使用 **Get-AutomationVariable** 来检索该值。不应在 Runbook 中使用 **Set-AzureAutomationVariable** 或 **Get-AzureAutomationVariable** cmdlet，因为它们的效率低于工作流活动。你也无法使用 **Get-AzureAutomationVariable** 检索安全变量的值。从 Runbook 中创建新变量的唯一方法是使用 [New-AzureAutomationVariable](http://msdn.microsoft.com/zh-cn/library/dn913771.aspx) cmdlet。
-
 
 ### 文本 Runbook 示例
 
@@ -129,14 +124,12 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
     $vm = Get-AzureVM -ServiceName "MyVM" -Name "MyVM"
     Set-AutomationVariable -Name "MyComplexVariable" -Value $vm
 
-
 在下面的代码中，从该变量检索值并将其用于启动虚拟机。
 
     $vmObject = Get-AutomationVariable -Name "MyComplexVariable"
     if ($vmObject.PowerState -eq 'Stopped') {
        Start-AzureVM -ServiceName $vmObject.ServiceName -Name $vmObject.Name
     }
-
 
 #### 设置和检索变量中的集合
 

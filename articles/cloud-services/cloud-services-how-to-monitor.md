@@ -1,26 +1,25 @@
-<properties 
-	pageTitle="如何监视云服务 | Azure" 
-	description="了解如何使用 Azure 经典管理门户监视云服务。" 
-	services="cloud-services" 
-	documentationCenter="" 
-	authors="rboucher" 
-    manager="timlt" 
-	editor=""/>
+---
+title: 如何监视云服务 | Azure
+description: 了解如何使用 Azure 经典管理门户监视云服务。
+services: cloud-services
+documentationCenter: 
+authors: rboucher
+manager: timlt
+editor: 
 
-<tags 
-    ms.service="cloud-services" 
-    ms.workload="tbd" 
-    ms.tgt_pltfrm="na" 
-    ms.devlang="na" 
-    ms.topic="article" 
-    ms.date="12/07/2016" 
-    wacn.date="01/03/2017" 
-    ms.author="robb"/>
-
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/07/2016
+wacn.date: 01/03/2017
+ms.author: robb
+---
 
 #如何监视云服务
 
-[AZURE.INCLUDE [免责声明](../../includes/disclaimer.md)]
+[!INCLUDE [免责声明](../../includes/disclaimer.md)]
 
 可在 Azure 经典管理门户中监视云服务的 `key` 性能指标。可将每个服务角色的监视级别设置为“最低”和“详细”，并且可以自定义监视显示信息。详细监视数据存储在存储帐户中，可在门户外部访问该存储帐户。
 
@@ -36,19 +35,18 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 
 启用详细监视将增加与数据存储、数据传输和存储事务相关的存储成本。最低监视不需要存储帐户。即使你将监视级别设置为“详细监视”，在最低监视级别公开的度量值数据也不会存储在你的存储帐户中。
 
-
 ## 如何：为云服务配置监视
 可使用以下过程在 Azure 经典管理门户中配置详细监视或最低监视。
 
 ### 开始之前
 
-* 创建用于存储监视数据的*经典*存储帐户。可对不同的角色使用不同的存储帐户。有关详细信息，请参阅[如何创建存储帐户](/documentation/articles/storage-create-storage-account/#create-a-storage-account)。
+* 创建用于存储监视数据的*经典*存储帐户。可对不同的角色使用不同的存储帐户。有关详细信息，请参阅[如何创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account)。
 
-* 为云服务角色启用 Azure 诊断。请参阅[为云服务配置诊断](/documentation/articles/cloud-services-dotnet-diagnostics/)。
+* 为云服务角色启用 Azure 诊断。请参阅[为云服务配置诊断](./cloud-services-dotnet-diagnostics.md)。
 
 确保“角色”配置中存在诊断连接字符串。只有先启用 Azure Diagnostics 并在“角色”配置中包含了诊断连接字符串，才能启用详细监视。
 
-> [AZURE.NOTE] 面向 Azure SDK 2.5 的项目不会将诊断连接字符串自动加入项目模板。对于这些项目，需要手动将诊断连接字符串添加到“角色”配置。
+> [!NOTE] 面向 Azure SDK 2.5 的项目不会将诊断连接字符串自动加入项目模板。对于这些项目，需要手动将诊断连接字符串添加到“角色”配置。
 
 **手动将诊断连接字符串添加到“角色”配置**
 
@@ -59,7 +57,6 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 5. 单击“...”按钮设置连接字符串的值。这将会打开用于选择存储帐户的对话框。
 
 	![Visual Studio 设置](./media/cloud-services-how-to-monitor/CloudServices_Monitor_VisualStudioDiagnosticsConnectionString.png)
-
 
 ### 将监视级别更改为详细监视或最低监视
 
@@ -75,7 +72,7 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 
 ## 如何：接收云服务度量值的警报
 
-根据云服务监视度量值，可能收到警告。在 Azure 经典管理门户上的“管理服务”页上，可创建在所选度量值达到指定值时触发警报的规则。也可选择在触发警报时发送电子邮件。有关详细信息，请参阅[如何：在 Azure 中接收警报通知和管理警报规则](/documentation/articles/insights-receive-alert-notifications/)。
+根据云服务监视度量值，可能收到警告。在 Azure 经典管理门户上的“管理服务”页上，可创建在所选度量值达到指定值时触发警报的规则。也可选择在触发警报时发送电子邮件。有关详细信息，请参阅[如何：在 Azure 中接收警报通知和管理警报规则](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)。
 
 ## 如何：向度量值表中添加度量值
 
@@ -85,14 +82,11 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 
 	![详细显示](./media/cloud-services-how-to-monitor/CloudServices_DefaultVerboseDisplay.png)  
 
- 
 2. 向度量值表中添加度量值：
 
 	a.单击“添加度量值”打开“选择度量值”，如下所示。将展开第一个可用度量值以显示可用选项。对于每个度量值，最上面的选项显示所有角色的汇总监视数据。此外，还可以选择要显示有关其数据的独立角色。
 
 	![添加度量值](./media/cloud-services-how-to-monitor/CloudServices_AddMetrics.png)  
-
-
 
 	b.选择要显示的指标：
 
@@ -101,10 +95,9 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 
 	度量值表中最多可显示 50 个度量值。
 
-	> [AZURE.TIP] 在详细监视中，度量值列表可以包含几十个度量值。要显示滚动条，请将鼠标指针悬停于对话框右侧。若要筛选列表，请单击搜索图标，并在搜索框中输入文本，如下所示。
+	> [!TIP] 在详细监视中，度量值列表可以包含几十个度量值。要显示滚动条，请将鼠标指针悬停于对话框右侧。若要筛选列表，请单击搜索图标，并在搜索框中输入文本，如下所示。
  
 	![添加度量值搜索](./media/cloud-services-how-to-monitor/CloudServices_AddMetrics_Search.png)  
-
 
 3. 在选择度量值后，请单击“确定”（复选标记）。
 
@@ -112,8 +105,6 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 
 	![监视度量值](./media/cloud-services-how-to-monitor/CloudServices_Monitor_UpdatedMetrics.png)  
 
-
- 
 4. 若要从度量值表中删除某个度量值，请单击该度量值以选中它，然后单击“删除度量值”。（在选择度量值后，你只会看到“删除度量值”。）
 
 ### 向度量值表中添加自定义度量值
@@ -150,16 +141,13 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 
 	当选择度量值表中的度量值时，这些度量值将添加到度量值图表中。在较窄的显示器上，由“更多 n 项”下拉列表包含显示器无法显示的度量值标题。
 
- 
 2. 若要切换显示相对值（仅显示每个度量值的最终值）和绝对值（显示 Y 轴），请在图表顶部选择“相对”或“绝对”。
 
 	![相对或绝对](./media/cloud-services-how-to-monitor/CloudServices_Monitor_RelativeAbsolute.png)  
 
-
 3. 若要更改度量值图表显示的时间范围，请在图表顶部选择 1 小时、24 小时或者 7 天。
 
 	![监视器显示时段](./media/cloud-services-how-to-monitor/CloudServices_Monitor_DisplayPeriod.png)  
-
 
 	在仪表板度量值图表中，显示度量值的方式是不同的。将显示一组标准度量值，并且可通过选择度量值标题来添加或删除度量值。
 
@@ -200,5 +188,4 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 
 	WAD8b7c4233802442b494d0cc9eb9d8dd9fPT1HRITable (hourly aggregations for role instances)
  
-
 <!---HONumber=Mooncake_1226_2016-->

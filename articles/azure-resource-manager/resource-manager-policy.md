@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Azure Resource Manager 策略 | Azure"
-    description="介绍如何使用 Azure 资源管理器策略来防止订阅、资源组或单个资源等不同的范围发生冲突。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="ravbhatnagar"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="abde0f73-c0fe-4e6d-a1ee-32a6fce52a2d"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="12/07/2016"
-    wacn.date="01/06/2017"
-    ms.author="gauravbh;tomfitz" />
+---
+title: Azure Resource Manager 策略 | Azure
+description: 介绍如何使用 Azure 资源管理器策略来防止订阅、资源组或单个资源等不同的范围发生冲突。
+services: azure-resource-manager
+documentationcenter: na
+author: ravbhatnagar
+manager: timlt
+editor: tysonn
+
+ms.assetid: abde0f73-c0fe-4e6d-a1ee-32a6fce52a2d
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 12/07/2016
+wacn.date: 01/06/2017
+ms.author: gauravbh;tomfitz
+---
 
 # 使用策略来管理资源和控制访问
 借助 Azure Resource Manager，可通过自定义策略控制访问。使用策略可以防止组织中的用户违反管理组织资源所需的惯例。
@@ -93,7 +94,7 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 ## 策略评估
 创建资源时会对策略进行评估。部署模板时，将在模板中的每个资源创建期间评估策略。
 
-> [AZURE.NOTE]
+> [!NOTE]
 当前，策略不对不支持标记、种类和位置的资源类型进行评估，例如 Microsoft.Resources/deployments 资源类型。将来会添加此支持。若要避免向后兼容问题，创作策略时应显式指定类型。例如，未指定类型的标记策略应用于所有类型。在此情况下，如果有嵌套资源不支持标记，并且部署资源类型已添加到策略评估中，则模板部署可能会失败。
 > 
 > 
@@ -203,7 +204,6 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 | Microsoft.SQL/servers/elasticPools/dtu | |
 | Microsoft.SQL/servers/elasticPools/edition | |
 
-
 ## 效果
 策略支持三种类型的效果 - **deny**、**audit** 和 **append**。
 
@@ -222,7 +222,6 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
     ]
 
 值可以是字符串或 JSON 格式对象。
-
 
 ## 策略定义示例
 现在，让我们看看如何定义策略以实现前述方案。
@@ -286,7 +285,6 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
         ]
       }
     }
-
 
 ### 遵循地区：确保资源位置
 以下示例中的策略拒绝位置不是中国北部或西欧的请求。
@@ -360,7 +358,6 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
         "effect": "deny"
       }
     }
-
 
 ### 命名约定
 以下示例演示如何使用“like”条件支持的通配符。该条件指明，如果名称符合所述模式 (namePrefix*nameSuffix)，则拒绝请求。
@@ -510,7 +507,6 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
       }
     }'    
 
-
 可以指定包含策略的 .json 文件的路径，不必指定内联策略。
 
     azure policy definition create --name regionPolicyDefinition --description "Policy to allow resource creation only in certain regions" --policy "path-to-policy-json-on-disk"
@@ -571,6 +567,6 @@ RBAC 着重于**用户**在不同的范围可执行的操作。例如，将特�
 若要获取策略，请使用[获取策略定义](https://docs.microsoft.com/rest/api/resources/policydefinitions#PolicyDefinitions_Get)操作。
 
 ## 后续步骤
-* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](/documentation/articles/resource-manager-subscription-governance/)。
+* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](./resource-manager-subscription-governance.md)。
 
 <!---HONumber=Mooncake_0103_2017-->

@@ -1,31 +1,32 @@
-<properties
-    pageTitle="如何通过 Python 使用表存储 | Azure"
-    description="使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。"
-    services="storage"
-    documentationcenter="python"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="7ddb9f3e-4e6d-4103-96e6-f0351d69a17b"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="python"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 如何通过 Python 使用表存储 | Azure
+description: 使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。
+services: storage
+documentationcenter: python
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: 7ddb9f3e-4e6d-4103-96e6-f0351d69a17b
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 如何通过 Python 使用表存储
-[AZURE.INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
+[!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 
 ## 概述
 本指南将演示如何使用 Azure 表存储服务执行常见方案。这些示例用 Python 编写并使用 [Azure Storage SDK for Python]。涉及的方案包括创建和删除表、以及在表中插入和查询实体。
 
-[AZURE.INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
+[!INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建表
 可通过 **TableService** 对象使用表服务。以下代码创建 **TableService** 对象。在希望在其中以编程方式访问 Azure 存储的任何 Python 文件中，将代码添加到文件的顶部附近：
@@ -89,7 +90,6 @@
 		batch.insert_entity(task12)
 		batch.insert_entity(task13)
 
-
 ## 查询实体
 若要查询表中的实体，请使用 **get\_entity** 方法并传递 **PartitionKey** 和 **RowKey**。
 
@@ -110,7 +110,7 @@
 
 以下代码中的查询只返回表中实体的说明。
 
-[AZURE.NOTE] 下面的代码段仅对云存储服务有效。不受存储模拟器支持。
+[!NOTE] 下面的代码段仅对云存储服务有效。不受存储模拟器支持。
 
 	tasks = table_service.query_entities('tasktable', filter="PartitionKey eq 'tasksSeattle'", select='description')
 	for task in tasks:

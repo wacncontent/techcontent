@@ -1,20 +1,20 @@
-<properties
-	pageTitle="Azure SQL 数据库用户手册 - 第二部分 | Azure"
-	description="Azure SQL 数据库用户手册 - 第二部分 | Azure"
-	services=""
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure SQL 数据库用户手册 - 第二部分 | Azure
+description: Azure SQL 数据库用户手册 - 第二部分 | Azure
+services: 
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="sql-database"
-	ms.date=""
-	wacn.date="10/28/2016"/>
+ms.service: sql-database
+ms.date: 
+wacn.date: 10/28/2016
+---
 
 #Azure SQL 数据库用户手册
 
-- [Azure SQL 数据库用户手册 - 第一部分](/documentation/articles/azure-sql-database-user-manual-part-1/)
+- [Azure SQL 数据库用户手册 - 第一部分](./azure-sql-database-user-manual-part-1.md)
 
 ##<a id="azure-sql-database-get-started"></a>2. 开始使用 Azure SQL 数据库  
 
@@ -90,8 +90,7 @@ Azure SQL 数据库中的服务器是虚拟的，可在同一个服务器下创�
 
 ![创数据库完毕][12]
  
-> [AZURE.NOTE]：创建完 Azure SQL 数据库，不管有没有客户端连接，都开始计费。  
-
+> [!NOTE]：创建完 Azure SQL 数据库，不管有没有客户端连接，都开始计费。  
 
 (7)	继续创建另一个数据库，命名为 CRMDB。步骤同上。  
 
@@ -127,7 +126,6 @@ Azure SQL 数据库中的服务器是虚拟的，可在同一个服务器下创�
 
 	![error][17]
  
-
 7. 回到 Azure 经典管理门户，点击下图的“管理允许的 IP 地址”：  
 
 	![允许 IP 地址][18]
@@ -227,7 +225,6 @@ Azure SQL 数据库中的服务器是虚拟的，可在同一个服务器下创�
 
 3.	在本地计算机，安装最新的 [SQL Server Data Tools](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx)
 
-
 使用 SSDT 有以下关键步骤:  
 
 1.	使用 Visual Studio SQL Server Object Explorer，连接到本地计算机的 SQL Server 数据库
@@ -259,7 +256,6 @@ Azure SQL 数据库中的服务器是虚拟的，可在同一个服务器下创�
 
 	![Target Platform][30]
  
-
 6. 然后点击项目，右键，点击 Build 。如下图：  
 
 	![Build][31]
@@ -286,7 +282,6 @@ Azure SQL 数据库中的服务器是虚拟的，可在同一个服务器下创�
 	![与源数据库比较一][37]  
 	![与源数据库比较二][38]
  
-
 12. 检查副本数据库与源数据库的差异。  
 
 	![与源数据库的差异][39]
@@ -297,24 +292,20 @@ Azure SQL 数据库中的服务器是虚拟的，可在同一个服务器下创�
 
 	![Publish][40]
  
-
 14. 在弹出的窗口中，输入Azure SQL 数据库的用户名、密码，并输入之前的数据库名称。
 
 	![数据库的用户名、密码][41]  
 	![输入数据库名称][42] 
 
-
 15. 点击上图的 Publish，Visual Studio 就会把副本数据库的 Table Schema 发布到 Azure SQL 数据库 V12  
 
 	![Table Schema 发布][43] 
  
-
 16. Table Schema 发布完以后，可查看到发布结果。  
 
 	![发布结果][44] 
  
 17. 最后可以通过 BCP 工具，把本地 SQL Server 的表数据，插入到 Azure SQL 数据库的表中  
-
 
 ####<a id="export-data-tier-application"></a>2.6.3 Export Data Tier Application  
 
@@ -453,7 +444,6 @@ Azure SQL 数据库提供了内置的监控功能，用户可以监控数据库�
 
 	![度量值][60]
  
-
 ###<a id="scale-up-service-tier-and-performance-level"></a>2.9 切换数据库服务层和性能级别
 
 之前介绍了 Azure SQL 数据库支持无缝升级。  
@@ -591,7 +581,6 @@ SQL Azure 故障转移和数据有关，是破坏性方法，所以需要周期�
 
 		$database_beijing | Set-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaEast" -Failover
 
-
 		#Failover, 上海Database读写，北京Database只读
 		$database_shanghai = Get-AzureRmSqlDatabase –DatabaseName "TestDB" –ResourceGroupName "Default-SQL-ChinaEast" –ServerName "hfgmi3msar" 
 
@@ -607,7 +596,6 @@ SQL Azure 故障转移和数据有关，是破坏性方法，所以需要周期�
 		$secondaryLink = $database1 | New-AzureRmSqlDatabaseSecondary –PartnerResourceGroupName "Default-SQL-ChinaNorth" –PartnerServerName "dbcljcn986" -AllowConnections "All"
  
 	![创建只读数据库][67]  
-
 
 6.	当执行以下脚本的时候，主站点会变成 Azure 北京数据中心，备份站点为 Azure 上海数据中心  
 

@@ -14,7 +14,6 @@
                 }];
             }
 
-
 2. 按以下方式替换 _QSTodoListViewController.m_ 的 `viewDidLoad` 中的 `[self refresh]`：
 
             [self loginAndGetData];
@@ -36,7 +35,6 @@
                     self.onRefresh(self.refreshControl)
                 }
             }
-
 
 2. 删除 _ToDoTableViewController.swift_ 中 `viewDidLoad()` 末尾的 `self.refreshControl?.beginRefreshing()` 和 `self.onRefresh(self.refreshControl)` 行。在其位置上添加对 `loginAndGetData()` 的调用：
 

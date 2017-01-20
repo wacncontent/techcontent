@@ -1,24 +1,22 @@
-<properties
-	pageTitle="在虚拟机规模集上部署应用 | Azure"
-	description="在虚拟机规模集上部署应用"
-	services="virtual-machine-scale-sets"
-	documentationCenter=""
-	authors="gbowerman"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 在虚拟机规模集上部署应用 | Azure
+description: 在虚拟机规模集上部署应用
+services: virtual-machine-scale-sets
+documentationCenter: 
+authors: gbowerman
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machine-scale-sets"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/26/2016"
-	wacn.date="10/17/2016"
-	ms.author="guybo"/>  
-
+ms.service: virtual-machine-scale-sets
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/26/2016
+wacn.date: 10/17/2016
+ms.author: guybo
+---
 
 # 在虚拟机规模集上部署应用
 
@@ -26,13 +24,13 @@
 
 - 部署时在平台映像中安装新软件。在本文的语境中，平台映像是指从 Azure 应用商店获取的操作系统映像，例如 Ubuntu 16.04、Windows Server 2012 R2 等。
 
-可以使用 [VM 扩展](/documentation/articles/virtual-machines-windows-extensions-features/)在平台映像中安装新软件。VM 扩展是部署 VM 时运行的软件。可以使用自定义脚本扩展，在部署时运行所需的任何代码。[此处](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vmss-lapstack-autoscale)提供了包含以下两个 VM 扩展的示例 Azure Resource Manager 模板：用于安装 Apache 和 PHP 的“Linux 自定义脚本扩展”，用于发出 Azure 自动缩放所用性能数据的“诊断扩展”。
+可以使用 [VM 扩展](../virtual-machines/virtual-machines-windows-extensions-features.md)在平台映像中安装新软件。VM 扩展是部署 VM 时运行的软件。可以使用自定义脚本扩展，在部署时运行所需的任何代码。[此处](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vmss-lapstack-autoscale)提供了包含以下两个 VM 扩展的示例 Azure Resource Manager 模板：用于安装 Apache 和 PHP 的“Linux 自定义脚本扩展”，用于发出 Azure 自动缩放所用性能数据的“诊断扩展”。
 
 此方法的优点是在应用程序代码与 OS 之间提供某种程度的隔离，可以单独维护应用程序。当然，这也意味着会出现更多的运动组件，如果脚本需要下载和配置的项很多，VM 部署时间也可能更长。
 
 **如果在自定义脚本扩展命令中传递敏感信息（例如密码），请务必在自定义脚本扩展的 `protectedSettings` 属性（而不是 `settings` 属性）中指定 `commandToExecute`。**
 
-- 创建在单个 VHD 中包含 OS 和应用程序的自定义 VM 映像。此处的规模集由一组 VM 构成，这些 VM 是从创建的映像复制的，必须对其进行维护。这种方法不需要在部署 VM 时进行额外的配置。但是，在 `2016-03-30` 版（和更低版本）的 VM 规模集中，VM 的 OS 磁盘限制为一个存储帐户。因此，一个规模集中最多能包含 40 个 VM，而不像在平台映像中，每个规模集限制为 100 个 VM。有关详细信息，请参阅 [Scale Set Design Overview](/documentation/articles/virtual-machine-scale-sets-design-overview/)（规模集设计概述）。
+- 创建在单个 VHD 中包含 OS 和应用程序的自定义 VM 映像。此处的规模集由一组 VM 构成，这些 VM 是从创建的映像复制的，必须对其进行维护。这种方法不需要在部署 VM 时进行额外的配置。但是，在 `2016-03-30` 版（和更低版本）的 VM 规模集中，VM 的 OS 磁盘限制为一个存储帐户。因此，一个规模集中最多能包含 40 个 VM，而不像在平台映像中，每个规模集限制为 100 个 VM。有关详细信息，请参阅 [Scale Set Design Overview](./virtual-machine-scale-sets-design-overview.md)（规模集设计概述）。
 
 - 可以部署一个平台或自定义映像（简单地说，就是一个容器主机），然后将应用程序安装为一个或多个可以使用 Orchestrator 或配置管理工具进行管理的容器。这种方法的优势是可以从应用程序层抽象化云基础结构，并且可以独立维护应用程序。
 

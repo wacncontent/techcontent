@@ -1,35 +1,33 @@
-<properties
-	pageTitle="Azure 备份 - 使用 PowerShell 部署和管理 DPM 的备份 | Azure"
-	description="了解如何使用 PowerShell 部署和管理 Data Protection Manager (DPM) 的 Azure 备份"
-	services="backup"
-	documentationCenter=""
-	authors="Nkolli1"
-	manager="shreeshd"
-	editor=""/>  
+---
+title: Azure 备份 - 使用 PowerShell 部署和管理 DPM 的备份 | Azure
+description: 了解如何使用 PowerShell 部署和管理 Data Protection Manager (DPM) 的 Azure 备份
+services: backup
+documentationCenter: 
+authors: Nkolli1
+manager: shreeshd
+editor: 
 
-<tags
-	ms.service="backup"
-	ms.workload="storage-backup-recovery"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="11/15/2016"
-	ms.author="jimpark; trinadhk; anuragm; markgal"/>  
-
-
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 11/15/2016
+ms.author: jimpark; trinadhk; anuragm; markgal
+---
 
 # 使用 PowerShell 部署和管理 Data Protection Manager (DPM) 服务器的 Azure 备份
 
-> [AZURE.SELECTOR]
-- [ARM](/documentation/articles/backup-dpm-automation/)
-- [经典](/documentation/articles/backup-dpm-automation-classic/)
+> [!div class="op_single_selector"]
+- [ARM](./backup-dpm-automation.md)
+- [经典](./backup-dpm-automation-classic.md)
 
 本文说明如何使用 PowerShell 在 DPM 服务器上设置 Azure 备份，以及管理备份和恢复。
 
 ## 设置 PowerShell 环境
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-include.md)]
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-include.md)]
 
 在可以使用 PowerShell 管理 Data Protection Manager 的 Azure 备份之前，需要在 PowerShell 中设置适当的环境。在 PowerShell 会话开始时，请确保运行以下命令，以便导入正确的模块以及正确引用 DPM cmdlet：
 
@@ -62,16 +60,14 @@
 
 ### 创建备份保管库
 
-> [AZURE.WARNING] 对于第一次使用 Azure 备份的客户，你需要注册用于订阅的 Azure 备份提供程序。可通过运行以下命令来执行此操作：Register-AzureProvider -ProviderNamespace "Microsoft.Backup"
+> [!WARNING] 对于第一次使用 Azure 备份的客户，你需要注册用于订阅的 Azure 备份提供程序。可通过运行以下命令来执行此操作：Register-AzureProvider -ProviderNamespace "Microsoft.Backup"
 
 可以使用 **New-AzureRMBackupVault** cmdlet 创建新的备份保管库。备份保管库是一种 ARM 资源，因此需要将它放置在资源组中。在权限提升的 Azure PowerShell 控制台中运行以下命令：
 
-			
 	PS C:\> New-AzureResourceGroup –Name “test-rg” -Region “West US”
 	PS C:\> $backupvault = New-AzureRMBackupVault –ResourceGroupName “test-rg” –Name “test-vault” –Region “West US” –Storage GRS
 
 可以使用 **Get-AzureRMBackupVault** cmdlet 获取给定订阅中所有备份保管库的列表。
-
 
 ### 在 DPM 服务器上安装 Azure 备份代理
 在安装 Azure 备份代理之前，必须先将安装程序下载到 Windows Server 上。可以从 [Microsoft 下载中心](http://download.microsoft.com/download/4/3/7/4376BBCE-9123-46FD-AAE1-599EAB6D2BD2/MARSAgentInstaller.exe)或者备份保管库的“仪表板”页获取最新版本的安装程序。将安装程序保存到方便访问的位置，例如 *C:\\Downloads*。
@@ -107,7 +103,7 @@
 | /pw | 代理密码 | - |
 
 ### 注册到 Azure 备份服务
-在可注册 Azure 备份服务之前，需要确保符合[先决条件](/documentation/articles/backup-azure-dpm-introduction-classic/)。你必须：
+在可注册 Azure 备份服务之前，需要确保符合[先决条件](./backup-azure-dpm-introduction-classic.md)。你必须：
 
 - 具备有效的 Azure 订阅
 - 有一个备份保管库
@@ -126,7 +122,7 @@
 
 这将使用指定的保管库凭据向 Azure 保管库注册名为“TestingServer”的 DPM 服务器。
 
-> [AZURE.IMPORTANT] 请勿使用相对路径来指定保管库凭据文件。必须提供绝对路径作为 cmdlet 的输入。
+> [!IMPORTANT] 请勿使用相对路径来指定保管库凭据文件。必须提供绝对路径作为 cmdlet 的输入。
 
 ### 初始配置设置
 DPM 服务器在注册到 Azure 备份保管库后，将使用默认的订阅设置启动。这些订阅设置包括网络、加密和临时区域。若要开始更改订阅设置，需要先使用 [Get-DPMCloudSubscriptionSetting](https://technet.microsoft.com/zh-cn/library/jj612793) cmdlet 获取现有（默认）设置中的句柄：
@@ -153,7 +149,6 @@ DPM 服务器在注册到 Azure 备份保管库后，将使用默认的订阅设
 
 在上述示例中，过渡区域将在 PowerShell 对象 ```$setting``` 中设置为 *C:\\StagingArea*。请确保指定的文件夹已存在，否则订阅设置的最终提交将会失败。
 
-
 ### 加密设置
 发送到 Azure 备份的备份数据将会加密，以保护数据的机密性。加密通行短语是在还原时用于解密数据的“密码”。必须妥善保管设置好的通行短语，并保证其安全。
 
@@ -163,7 +158,7 @@ DPM 服务器在注册到 Azure 备份保管库后，将使用默认的订阅设
 
 	PS C:\> Set-DPMCloudSubscriptionSetting -DPMServerName "TestingServer" -SubscriptionSetting $setting -EncryptionPassphrase $Passphrase
 
-> [AZURE.IMPORTANT] 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
+> [!IMPORTANT] 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
 
 此时，你应该已对 ```$setting``` 对象做出了全部所需的更改。请记得提交更改。
 
@@ -219,7 +214,7 @@ DPM 服务器在注册到 Azure 备份保管库后，将使用默认的订阅设
 
 	PS C:\> Set-DPMPolicyObjective -ProtectionGroup $MPG -RetentionRangeInDays 10 -SynchronizationFrequencyMinutes 360
 
-为了将备份转移到 Azure（DPM 将此称为联机备份），可将保留范围配置为[使用祖父-父-子方案 (GFS) 的长期保留](/documentation/articles/backup-azure-backup-cloud-as-tape/)。也就是说，你可以定义组合保留策略，其中包括每日、每周、每月和每年保留策略。在此示例中，我们将创建一个用于表示所需复杂保留配置的数组，然后使用 [Set-DPMPolicyObjective](https://technet.microsoft.com/zh-cn/library/hh881762) cmdlet 配置保留范围。
+为了将备份转移到 Azure（DPM 将此称为联机备份），可将保留范围配置为[使用祖父-父-子方案 (GFS) 的长期保留](./backup-azure-backup-cloud-as-tape.md)。也就是说，你可以定义组合保留策略，其中包括每日、每周、每月和每年保留策略。在此示例中，我们将创建一个用于表示所需复杂保留配置的数组，然后使用 [Set-DPMPolicyObjective](https://technet.microsoft.com/zh-cn/library/hh881762) cmdlet 配置保留范围。
 
 	PS C:\> $RRlist = @()
 	PS C:\> $RRList += (New-Object -TypeName Microsoft.Internal.EnterpriseStorage.Dls.UI.ObjectModel.OMCommon.RetentionRange -ArgumentList 180, Days)
@@ -294,6 +289,6 @@ DPM 服务器在注册到 Azure 备份保管库后，将使用默认的订阅设
 
 ## 后续步骤
 
-- 有关适用于 DPM 的 Azure 备份的详细信息，请参阅 [DPM 备份简介](/documentation/articles/backup-azure-dpm-introduction-classic/)
+- 有关适用于 DPM 的 Azure 备份的详细信息，请参阅 [DPM 备份简介](./backup-azure-dpm-introduction-classic.md)
 
 <!---HONumber=Mooncake_1107_2016-->

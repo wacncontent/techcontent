@@ -1,30 +1,28 @@
-<properties 
-	pageTitle="模拟的混合云测试环境 | Azure" 
-	description="使用两个 Azure 虚拟网络和 VNet 到 VNet 连接创建模拟的混合云环境，以便进行 IT 专业人员测试或开发测试。" 
-	services="virtual-machines-windows" 
-	documentationCenter="" 
-	authors="JoeDavies-MSFT" 
-	manager="timlt" 
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: 模拟的混合云测试环境 | Azure
+description: 使用两个 Azure 虚拟网络和 VNet 到 VNet 连接创建模拟的混合云环境，以便进行 IT 专业人员测试或开发测试。
+services: virtual-machines-windows
+documentationCenter: 
+authors: JoeDavies-MSFT
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags 
-	ms.service="virtual-machines-windows" 
-	ms.workload="infrastructure-services" 
-	ms.tgt_pltfrm="vm-windows" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/30/2016" 
-	wacn.date="11/21/2016" 
-	ms.author="josephd"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/30/2016
+wacn.date: 11/21/2016
+ms.author: josephd
+---
 
 # 设置用于测试的模拟混合云环境
 
 本文逐步说明如何使用两个 Azure 虚拟网络在 Azure 上创建模拟混合云环境。这是生成的配置。
 
 ![](./media/virtual-machines-windows-ps-hybrid-cloud-test-env-sim/virtual-machines-windows-ps-hybrid-cloud-test-env-sim-ph4.png)  
-
 
 此配置将模拟混合云生产环境，其中包括：
 
@@ -45,7 +43,7 @@
 3.	创建 VNet 到 VNet 的 VPN 连接。
 4.	配置 DC2。
 
->[AZURE.NOTE] Azure 中的虚拟机和虚拟网关在运行时会持续产生货币成本。此成本是针对 MSDN 或付费订阅进行计费的。在实施时，Azure VPN 网关将由两台 Azure 虚拟机组成。为了将费用降到最低，请创建测试环境，并尽可能快地执行所需的测试和演示。
+>[!NOTE] Azure 中的虚拟机和虚拟网关在运行时会持续产生货币成本。此成本是针对 MSDN 或付费订阅进行计费的。在实施时，Azure VPN 网关将由两台 Azure 虚拟机组成。为了将费用降到最低，请创建测试环境，并尽可能快地执行所需的测试和演示。
 
 ## 阶段 1：配置 TestLab 虚拟网络
 
@@ -53,7 +51,7 @@
 
 接下来，请启动 Azure PowerShell 提示符。
 
-> [AZURE.NOTE] 以下命令集使用 Azure PowerShell 1.0 及更高版本。
+> [!NOTE] 以下命令集使用 Azure PowerShell 1.0 及更高版本。
 
 登录到你的帐户。
 
@@ -212,6 +210,6 @@
 
 ## 后续步骤
 
-- 在此环境中设置[基于 Web 的业务线应用程序](/documentation/articles/virtual-machines-windows-ps-hybrid-cloud-test-env-lob/)。
+- 在此环境中设置[基于 Web 的业务线应用程序](./virtual-machines-windows-ps-hybrid-cloud-test-env-lob.md)。
 
 <!---HONumber=Mooncake_0905_2016-->

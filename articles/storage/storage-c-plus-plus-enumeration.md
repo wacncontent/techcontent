@@ -1,28 +1,27 @@
-<properties 
-    pageTitle="使用用于 C++ 的 Azure 存储客户端库列出 Azure 存储资源 | Azure" 
-    description="了解如何在用于 C++ 的 Azure 存储客户端库中使用列表 API 枚举容器、blob、队列、表和实体。"
-    documentationCenter=".net" 
-    services="storage"
-    author="dineshmurthy"
-    manager="jahogg"
-    editor="tysonn" />  
+---
+title: 使用用于 C++ 的 Azure 存储客户端库列出 Azure 存储资源 | Azure
+description: 了解如何在用于 C++ 的 Azure 存储客户端库中使用列表 API 枚举容器、blob、队列、表和实体。
+documentationCenter: .net
+services: storage
+author: dineshmurthy
+manager: jahogg
+editor: tysonn
 
-<tags
-    ms.assetid="33563639-2945-4567-9254-bc4a7e80698f"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/17/2016"
-    wacn.date="12/26/2016"
-    ms.author="dineshm" />  
-
+ms.assetid: 33563639-2945-4567-9254-bc4a7e80698f
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/17/2016
+wacn.date: 12/26/2016
+ms.author: dineshm
+---
 
 # 使用 C++ 列出 Azure 存储资源
 使用 Azure 存储进行开发时，很多情况下列表操作很重要。本文介绍如何使用用于 C++ 的 Azure 存储客户端库中提供的列表 API 最有效率地枚举 Azure 存储中的对象。
 
->[AZURE.NOTE] 本指南主要面向适用于 C++ 版本 2.x 的 Azure 存储客户端库，该库可通过 [NuGet](http://www.nuget.org/packages/wastorage) 或 [GitHub](https://github.com/Azure/azure-storage-cpp) 获取。
+>[!NOTE] 本指南主要面向适用于 C++ 版本 2.x 的 Azure 存储客户端库，该库可通过 [NuGet](http://www.nuget.org/packages/wastorage) 或 [GitHub](https://github.com/Azure/azure-storage-cpp) 获取。
 
 存储客户端库提供了多种方法，用于列出或查询 Azure 存储中的对象。本文将探讨以下方案：
 
@@ -175,11 +174,11 @@ SDK 中的此类贪婪列表 API 在 C#、Java 或 JavaScript Node.js 环境中�
 ## 后续步骤
 有关 Azure 存储以及用于 C++ 的客户端库的详细信息，请参阅以下资源。
 
--	[如何通过 C++ 使用 Blob 存储](/documentation/articles/storage-c-plus-plus-how-to-use-blobs/)
--	[如何通过 C++ 使用表存储](/documentation/articles/storage-c-plus-plus-how-to-use-tables/)
--	[如何通过 C++ 使用队列存储](/documentation/articles/storage-c-plus-plus-how-to-use-queues/)
+-	[如何通过 C++ 使用 Blob 存储](./storage-c-plus-plus-how-to-use-blobs.md)
+-	[如何通过 C++ 使用表存储](./storage-c-plus-plus-how-to-use-tables.md)
+-	[如何通过 C++ 使用队列存储](./storage-c-plus-plus-how-to-use-queues.md)
 -	[适用于 C++ 的 Azure 存储客户端库 API 文档。](http://azure.github.io/azure-storage-cpp/)
 -	[Azure 存储团队博客](http://blogs.msdn.com/b/windowsazurestorage/)
--	[Azure 存档文档](/documentation/services/storage/)
+-	[Azure 存档文档](./index.md/)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

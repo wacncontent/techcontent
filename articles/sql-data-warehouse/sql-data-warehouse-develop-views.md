@@ -1,34 +1,31 @@
-<properties
-   pageTitle="SQL 数据仓库中的视图 | Azure"
-   description="有关在开发解决方案时使用 Azure SQL 数据仓库中的 Transact-SQL 视图的技巧。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库中的视图 | Azure
+description: 有关在开发解决方案时使用 Azure SQL 数据仓库中的 Transact-SQL 视图的技巧。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/12/2016"
-   ms.author="jrj;barbkess;sonyama"/>
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/17/2017
+ms.author: jrj;barbkess;sonyama
+---
 
 # SQL 数据仓库中的视图
 SQL 数据仓库中的视图特别有用。可以通过多种不同的方式使用这些视图以提升解决方案的质量。本文重点介绍几个示例，说明如何使用视图来丰富你的解决方案，以及需要注意的限制。
 
-> [AZURE.NOTE] 本文不讨论 `CREATE VIEW` 的语法。有关这方面的参考信息，请参阅 MSDN 上的 [CREATE VIEW][] 文章。
+> [!NOTE] 本文不讨论 `CREATE VIEW` 的语法。有关这方面的参考信息，请参阅 MSDN 上的 [CREATE VIEW][] 文章。
 
 ## 体系结构摘要
 一种很常见的应用模式是在加载数据时，使用 CREATE TABLE AS SELECT (CTAS) 并后接对象重命名模式来重建表。
 
 以下示例将新的日期记录添加到日期维度。请注意，这里先创建了一个新表 DimDate\_New，然后将它重命名以替换表的原始版本。
-
 
 	CREATE TABLE dbo.DimDate_New
 	WITH (DISTRIBUTION = ROUND_ROBIN
@@ -44,8 +41,6 @@ SQL 数据仓库中的视图特别有用。可以通过多种不同的方式使�
 
 	RENAME OBJECT DimDate TO DimDate_Old;
 	RENAME OBJECT DimDate_New TO DimDate;
-
-
 
 但是，此方法可能导致表在用户的视图中出现然后消失，并返回“表不存在”错误消息。使用视图可为用户提供一致的呈现层，同时将基础对象重命名。通过视图向用户提供对数据的访问权限，意味着用户不需要基础表的可见性。这提供了一致的用户体验，同时确保数据仓库设计人员可以改进数据模型，并在数据加载过程中使用 CTAS 充分发挥性能。
 
@@ -66,13 +61,12 @@ SQL 数据仓库中的视图只是元数据。因此无法使用以下选项：
 
 <!--Image references-->
 
-
 <!--Article references-->
-[SQL Data Warehouse development overview]: /documentation/articles/sql-data-warehouse-overview-develop/
+[SQL Data Warehouse development overview]: ./sql-data-warehouse-overview-develop.md
 
 <!--MSDN references-->
 [CREATE VIEW]: https://msdn.microsoft.com/zh-cn/library/ms187956.aspx
 
 <!--Other Web references-->
 
-<!---HONumber=Mooncake_1205_2016-->
+<!---HONumber=Mooncake_Quality_Review_0117_2017-->

@@ -1,15 +1,17 @@
-<properties 
-	pageTitle="如何在 web role 中抓取 IIS dump 文件置" 
-	description="如何在 web role 中抓取 IIS dump 文件" 
-	services="cloud-service" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags 
-	ms.service="cloud-service-aog"
-	ms.date="" 
-	wacn.date="09/29/2016"/>
+---
+title: 如何在 web role 中抓取 IIS dump 文件置
+description: 如何在 web role 中抓取 IIS dump 文件
+services: cloud-service
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: cloud-service-aog
+ms.date: 
+wacn.date: 09/29/2016
+---
+
 # 如何在 web role 中抓取 IIS dump 文件
 
 Azure 云服务中的 role 可以理解为一种部署方式，而我们要运行的程序，都是要运行在进程上的。 Azure 云服务中有两种 role，分别是 web role 和 worker role，这两种 role 的主要区别在于，web role 上的项目是被部署在 IIS 服务上，而 worker role 上的项目被部署在独立的进程上。因此，我们一般都使用 web role 来部署一些对外公开访问的网站或者服务。
@@ -26,7 +28,6 @@ C:\Resources\Directory\{DeploymentID}.{Rolename}.DiagnosticStore\LogFiles\Web �
 	/Api/Aggregator/MemberInfoQuery - 80 - xx.xxx.xxx.xxx HTTP/1.1 - - -   
 	yourcloudservicename.chinacloudapp.cn 200 0 0 1574 453 140
 
-
 如果您的 IIS 日志在问题期间返回 503 或者 404，则说明您的 IIS server 无法正常成功处理请求，比如 503.2，它表示您当前时间的并发请求超过了限定数，也就是您的 web 应用因为某些原因对外面的请求处理不过来，至于为什么我们就必须通过生成 dump 文件来分析。  
 
 	2016-6-31 01:52:25 W3SVC1273337584 RD77890D5837721 xx.xxx.xxx.x POST  
@@ -36,7 +37,6 @@ C:\Resources\Directory\{DeploymentID}.{Rolename}.DiagnosticStore\LogFiles\Web �
 ## RDP 到 role 上抓取 dump 文件：
 
 如果当您查看 IIS 日志，发现 IIS 返回是不正常的情况(404/503…)并且该问题还持续发生，您可以通过 RDP 到对应的 role 上抓取 dump 来分析 IIS 进程( w3wp.exe )是否存在 hang 住或者其他逻辑问题，具体方法如下：
-
 
 1. 请配置好您 web role RDP, 并登录到相应的 role 上。
 2. 打开您的 task manager -> details ->找到 w3wp.exe 并选中。
@@ -68,7 +68,6 @@ C:\Resources\Directory\{DeploymentID}.{Rolename}.DiagnosticStore\LogFiles\Web �
 	      </traceFailedRequests>
 	    </tracing>
 	                
-	    
 	    </system.webServer>
 	    </configuration>
 
@@ -85,4 +84,3 @@ C:\Resources\Directory\{DeploymentID}.{Rolename}.DiagnosticStore\LogFiles\Web �
 5. 验证该问题，可以生成 dump 文件：  
  ![iis-dump](./media/aog-cloud-services-how-to-catch-iisdump/iis-dump.png "iis-dump")
 	
-

@@ -1,35 +1,36 @@
-<properties
-    pageTitle="管理弹性数据库客户端库中的凭据 | Azure"
-    description="如何为弹性数据库应用设置适当的凭据级别：管理员到只读"
-    services="sql-database"
-    documentationcenter=""
-    manager="jhubbard"
-    author="ddove"
-    editor="" />
-<tags
-    ms.assetid="72e0edaf-795e-4856-84a5-6594f735fb7e"
-    ms.service="sql-database"
-    ms.workload="sql-database"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/24/2016"
-    wacn.date="12/19/2016"
-ms.author="ddove" />
+---
+title: 管理弹性数据库客户端库中的凭据 | Azure
+description: 如何为弹性数据库应用设置适当的凭据级别：管理员到只读
+services: sql-database
+documentationcenter: 
+manager: jhubbard
+author: ddove
+editor: 
+
+ms.assetid: 72e0edaf-795e-4856-84a5-6594f735fb7e
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/24/2016
+wacn.date: 12/19/2016
+ms.author: ddove
+---
 
 # 用于访问弹性数据库客户端库的凭据
 
-[弹性数据库客户端库](http://www.nuget.org/packages/Microsoft.Azure.SqlDatabase.ElasticScale.Client)使用三种不同的凭据来访问[分片映射管理器](/documentation/articles/sql-database-elastic-scale-shard-map-management/)。使用凭据时，应根据具体需求尽可能采用最低的访问级别。
+[弹性数据库客户端库](http://www.nuget.org/packages/Microsoft.Azure.SqlDatabase.ElasticScale.Client)使用三种不同的凭据来访问[分片映射管理器](./sql-database-elastic-scale-shard-map-management.md)。使用凭据时，应根据具体需求尽可能采用最低的访问级别。
 
-* **管理凭据**：用于创建或操作分片映射管理器。（请参阅[词汇表](/documentation/articles/sql-database-elastic-scale-glossary/)。）
+* **管理凭据**：用于创建或操作分片映射管理器。（请参阅[词汇表](./sql-database-elastic-scale-glossary.md)。）
 * **访问凭据**：用于访问现有分片映射管理器以获取有关分片的信息。
 * **连接凭据**：用于连接到分片。
 
-另请参阅[管理 Azure SQL 数据库的数据库和登录名](/documentation/articles/sql-database-manage-logins/)。
+另请参阅[管理 Azure SQL 数据库的数据库和登录名](./sql-database-manage-logins.md)。
  
 ## 关于管理凭据
 
-使用管理凭据可以针对操作分片映射的应用程序创建 [**ShardMapManager**](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.aspx) 对象。（有关示例，请参阅[使用弹性数据库工具添加分片](/documentation/articles/sql-database-elastic-scale-add-a-shard/)和[数据相关的路由](/documentation/articles/sql-database-elastic-scale-data-dependent-routing/)）弹性缩放客户端库的用户创建 SQL 用户和 SQL 登录名，并确保在全局分片映射数据库以及所有分片数据库上授予每个用户读/写权限。对分片映射执行更改时，可使用这些凭据维护全局分片映射和本地分片映射。例如，使用管理凭据创建分片映射管理器对象（使用 [**GetSqlShardMapManager**](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.getsqlshardmapmanager.aspx)）：
+使用管理凭据可以针对操作分片映射的应用程序创建 [**ShardMapManager**](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.aspx) 对象。（有关示例，请参阅[使用弹性数据库工具添加分片](./sql-database-elastic-scale-add-a-shard.md)和[数据相关的路由](./sql-database-elastic-scale-data-dependent-routing.md)）弹性缩放客户端库的用户创建 SQL 用户和 SQL 登录名，并确保在全局分片映射数据库以及所有分片数据库上授予每个用户读/写权限。对分片映射执行更改时，可使用这些凭据维护全局分片映射和本地分片映射。例如，使用管理凭据创建分片映射管理器对象（使用 [**GetSqlShardMapManager**](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.getsqlshardmapmanager.aspx)）：
 
 	// Obtain a shard map manager. 
 	ShardMapManager shardMapManager = ShardMapManagerFactory.GetSqlShardMapManager( 
@@ -45,7 +46,7 @@ ms.author="ddove" />
 
 ## 访问凭据
   
-在不用于管理分片映射的应用程序中创建分片映射管理器时，请使用在全局分片映射上具有只读权限的凭据。在这些凭据下从全局分片映射检索的信息可用于[数据相关的路由](/documentation/articles/sql-database-elastic-scale-data-dependent-routing/)，并且用于在客户端上填充分片映射缓存。通过与如上所示的 **GetSqlShardMapManager** 相同的调用模式提供凭据：
+在不用于管理分片映射的应用程序中创建分片映射管理器时，请使用在全局分片映射上具有只读权限的凭据。在这些凭据下从全局分片映射检索的信息可用于[数据相关的路由](./sql-database-elastic-scale-data-dependent-routing.md)，并且用于在客户端上填充分片映射缓存。通过与如上所示的 **GetSqlShardMapManager** 相同的调用模式提供凭据：
 
     // Obtain shard map manager. 
     ShardMapManager shardMapManager = ShardMapManagerFactory.GetSqlShardMapManager( 
@@ -69,12 +70,10 @@ ms.author="ddove" />
 与管理员凭据一样，请不要使用“用户名@服务器”格式的值，而应使用“用户名”格式的值。另请注意：连接字符串不包含服务器名称和数据库名称。这是因为，**OpenConnectionForKey** 调用基于键自动将连接指向正确的分片。因此，无需提供数据库名称和服务器名称。
 
 ## 另请参阅
-[在 Azure SQL 数据库中管理数据库和登录名](/documentation/articles/sql-database-manage-logins/)
+[在 Azure SQL 数据库中管理数据库和登录名](./sql-database-manage-logins.md)
 
-[保护 SQL 数据库](/documentation/articles/sql-database-security/)
+[保护 SQL 数据库](./sql-database-security.md)
 
-
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
  
-
 <!---HONumber=Mooncake_1212_2016-->

@@ -1,17 +1,16 @@
-<properties 
-	pageTitle="使用 Azure 媒体服务交付按需媒体" 
-	description="本主题讨论了使用 Azure 媒体服务交付按需媒体的一些常见应用场景。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 Azure 媒体服务交付按需媒体
+description: 本主题讨论了使用 Azure 媒体服务交付按需媒体的一些常见应用场景。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-<tags
-	ms.service="media-services"
-	ms.date="06/22/2016"
-	wacn.date="12/26/2016"/>
-
+ms.service: media-services
+ms.date: 06/22/2016
+wacn.date: 12/26/2016
+---
 
 #使用 Azure 媒体服务交付按需媒体
 
@@ -66,7 +65,6 @@
 
 1. 使用已编制索引的内容。
 
-
 ###提供渐进式下载 
 
 1. 将优质夹层文件上传到资产中。
@@ -81,15 +79,10 @@
 
 本文包含一些链接，指向说明如何设置开发环境和执行上述任务的主题。
 
-
 ##概念
 
-有关与按需交付内容相关的概念，请参阅[媒体服务概念](/documentation/articles/media-services-concepts/)。
-
-
-
+有关与按需交付内容相关的概念，请参阅[媒体服务概念](./media-services-concepts.md)。
 
 [vod-overview]: ./media/media-services-video-on-demand-workflow/media-services-video-on-demand.png
  
-
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

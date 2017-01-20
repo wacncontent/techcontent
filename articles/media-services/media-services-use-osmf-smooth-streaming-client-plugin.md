@@ -1,28 +1,25 @@
-<properties 
-	pageTitle="适用于 Open Source Media Framework 的平滑流式处理插件" 
-	description="了解如何使用适用于 Adobe Open Source Media Framework 的 Azure 媒体服务平滑流式处理插件。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="dwrede" 
-	editor=""/>  
+---
+title: 适用于 Open Source Media Framework 的平滑流式处理插件
+description: 了解如何使用适用于 Adobe Open Source Media Framework 的 Azure 媒体服务平滑流式处理插件。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: dwrede
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016"
-	wacn.date="11/21/2016"
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 11/21/2016
+ms.author: juliako
+---
 
 # 如何使用适用于 Adobe Open Source Media Framework 的 Microsoft 平滑流式处理插件
 
 ##概述
-
 
 适用于 Open Source Media Framework 2.0 的 Microsoft 平滑流式处理插件 (SS for OSMF) 扩展了 OSMF 的默认功能，并在新的和现有的 OSMF 播放器中添加了 Microsoft 平滑流式处理内容播放功能。该插件还为 Strobe Media Playback (SMP) 添加了平滑流式处理播放功能。
 
@@ -53,7 +50,6 @@ SS for OSMF 包括两个版本的插件：
 
 有关支持的功能、不支持的功能和已知问题的完整列表，请参阅[本文档](http://download.microsoft.com/download/3/1/B/31B63D97-574E-4A8D-BF8D-170744181724/Smooth_Streaming_Plugin_for_OSMF.pdf)。
 
-
 ## 加载插件
 可静态（在编译时）或动态（在运行时）加载 OSMF 插件。适用于 OSMF 的平滑流式处理插件的下载内容包括动态和静态版本。
 
@@ -80,8 +76,6 @@ package
 	import org.osmf.events.MediaPlayerStateChangeEvent;
 	import org.osmf.layout.*;
 	
-	
-	
 	[SWF(width="1024", height="768", backgroundColor='#405050', frameRate="25")]
 	public class TestPlayer extends Sprite
 	{        
@@ -89,7 +83,6 @@ package
 		public var _mediaFactory:DefaultMediaFactory;
 		private var _mediaPlayerSprite:MediaPlayerSprite;
 		
-
 		public function TestPlayer( )
 		{
 			stage.quality = StageQuality.HIGH;
@@ -144,7 +137,6 @@ package
 			// The plugin is failed to load ...
 		}
 		
-		
 		private function onPlayerStateChange(event:MediaPlayerStateChangeEvent) : void
 		{
 			var state:String;
@@ -198,7 +190,6 @@ package
 }
 ```
 
-
 ###SS for OSMF 动态加载
 
 以下代码段演示如何动态加载 SS for OSMF 插件以及如何使用 OSMF MediaFactory 类播放基本视频。在包含 SS for OSMF 代码之前，如果要使用 FILE 协议进行加载，请将“MSAdaptiveStreamingPlugin-v1.0.3-osmf2.0.swf”动态插件复制到项目文件夹；如果要进行 HTTP 加载，请将该插件复制到 Web 服务器下。不需要在项目引用中包含“MSAdaptiveStreamingPlugin-v1.0.3-osmf2.0.swc”。
@@ -217,7 +208,6 @@ package
 	import flash.events.Event;
 	import flash.system.Capabilities;
 
-	
 	//Sets the size of the SWF
 	
 	[SWF(width="1024", height="768", backgroundColor='#405050', frameRate="25")]
@@ -226,7 +216,6 @@ package
 		public var _container:MediaContainer;
 		public var _mediaFactory:DefaultMediaFactory;
 		private var _mediaPlayerSprite:MediaPlayerSprite;
-		
 		
 		public function TestPlayer( )
 		{
@@ -283,7 +272,6 @@ package
 		{
 			// The plugin is failed to load ...
 		}
-		
 		
 		private function onPlayerStateChange(event:MediaPlayerStateChangeEvent) : void
 		{
@@ -348,8 +336,6 @@ package
 	**注意** 你的内容 Web 服务器需要有效的 crossdomain.xml。 
 4.	使用常用的文本编辑器将该代码复制并粘贴到一个简单的 HTML 页，如以下示例所示：
 
-
-
 		<html>
 		<body>
 		<object width="920" height="640"> 
@@ -370,8 +356,6 @@ package
 		</object>
 		</body>
 		</html>
-
-
 
 5. 将平滑流式处理 OSMF 插件添加到 embed 代码中，然后保存。
 
@@ -394,13 +378,10 @@ package
 		</object>
 		</html>
 
-
 6. 	保存 HTML 页，然后发布到 Web 服务器。使用你最常用的、已启用 Flash&reg; Player 的 Internet 浏览器（Internet Explorer、Chrome、Firefox 等）浏览到已发布的网页。
 7. 	在 Adobe&reg; Flash&reg; Player 中欣赏平滑流式处理内容。
 
 有关一般性 OSMF 开发的详细信息，请参阅官方的 [OSMF 开发页](http://osmf.org/resources.html)。
-
-
 
 ##另请参阅
 

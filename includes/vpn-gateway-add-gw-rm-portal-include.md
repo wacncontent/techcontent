@@ -3,7 +3,6 @@
 
 	![创建虚拟网络网关边栏选项卡字段](./media/vpn-gateway-add-gw-rm-portal-include/createvnetgw300.png "创建虚拟网络网关边栏选项卡字段")  
 
-
 3. **名称**：为网关命名。这与为网关子网命名不同。它是要创建的网关对象的名称。
 
 4. **网关类型**：选择“VPN”。VPN 网关使用虚拟网络网关类型“VPN”。

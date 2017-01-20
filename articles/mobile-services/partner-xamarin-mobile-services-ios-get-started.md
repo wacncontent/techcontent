@@ -1,24 +1,24 @@
-<properties
-	pageTitle="用于 Xamarin iOS 应用的移动服务入门 | Azure"
-	description="按照本教程进行操作，开始使用 Azure 移动服务进行 Xamarin iOS 开发。"
-	services="mobile-services"
-	documentationCenter="xamarin"
-	authors="conceptdev"
-	manager="dwrede"
-	editor=""/>
+---
+title: 用于 Xamarin iOS 应用的移动服务入门 | Azure
+description: 按照本教程进行操作，开始使用 Azure 移动服务进行 Xamarin iOS 开发。
+services: mobile-services
+documentationCenter: xamarin
+authors: conceptdev
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-xamarin-ios"
-	ms.devlang="dotnet"
-	ms.topic="hero-article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="craig.dunn@xamarin.com"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-ios
+ms.devlang: dotnet
+ms.topic: hero-article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: craig.dunn@xamarin.com
+---
 
 # <a name="getting-started"></a>移动服务入门
-[AZURE.INCLUDE [mobile-services-selector-get-started](../../includes/mobile-services-selector-get-started.md)]
+[!INCLUDE [mobile-services-selector-get-started](../../includes/mobile-services-selector-get-started.md)]
 
 以下是完成的应用程序的屏幕快照：
 
@@ -26,11 +26,11 @@
 
 完成本教程需要 XCode 和 Xamarin Studio（对于 OS X）或 Visual Studio（对于 Windows）以及联网的 Mac。[设置和安装 Visual Studio 和 Xamarin](https://msdn.microsoft.com/zh-cn/library/mt613162.aspx) 中提供了完整的安装说明。
 
-> [AZURE.IMPORTANT]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个免费的移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial)。
+> [!IMPORTANT]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个免费的移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial)。
 
 ##  <a name="create-new-service"></a>创建新的移动服务
 
-[AZURE.INCLUDE [mobile-services-create-new-service](../../includes/mobile-services-create-new-service.md)]
+[!INCLUDE [mobile-services-create-new-service](../../includes/mobile-services-create-new-service.md)]
 
 ##  创建新的 Xamarin iOS 应用程序
 
@@ -74,7 +74,7 @@
 
 	这样可向在 Azure 中托管的新移动服务发送 POST 请求。来自请求的数据被插入到 TodoItem 表。移动服务返回存储在表中的项，数据显示在列表中。
 
-	> [AZURE.NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 TodoService.cs C# 文件中。
+	> [!NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 TodoService.cs C# 文件中。
 
 4. 返回 [Azure 经典管理门户]，单击“数据”选项卡，然后单击“TodoItems”表。
 
@@ -83,7 +83,6 @@
 	这使您可以浏览此应用插入表中的数据。
 
 	![][12]
-
 
 ##  后续步骤
 完成快速入门后，请了解如何在移动服务中执行其他重要任务：
@@ -97,10 +96,7 @@
 * [推送通知入门] 
 了解如何向应用程序发送一条很基本的推送通知。
 
-
-
-
-[AZURE.INCLUDE [app-service-disqus-feedback-slug](../../includes/app-service-disqus-feedback-slug.md)]
+[!INCLUDE [app-service-disqus-feedback-slug](../../includes/app-service-disqus-feedback-slug.md)]
 
 <!-- Anchors. -->
 [Getting started with Mobile Services]: #getting-started
@@ -118,11 +114,10 @@
 [11]: ./media/partner-xamarin-mobile-services-ios-get-started/mobile-data-tab.png
 [12]: ./media/partner-xamarin-mobile-services-ios-get-started/mobile-data-browse.png
 
-
 <!-- URLs. -->
-[脱机数据同步入门]: /documentation/articles/mobile-services-xamarin-ios-get-started-offline-data/
-[身份验证入门]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started-users/
-[推送通知入门]: /documentation/articles/partner-xamarin-mobile-services-ios-get-started-push/
+[脱机数据同步入门]: ./mobile-services-xamarin-ios-get-started-offline-data.md
+[身份验证入门]: ./partner-xamarin-mobile-services-ios-get-started-users.md
+[推送通知入门]: ./partner-xamarin-mobile-services-ios-get-started-push.md
 
 [Xamarin Studio]: http://xamarin.com/download
 [Mobile Services iOS SDK]: https://go.microsoft.com/fwLink/p/?LinkID=266533

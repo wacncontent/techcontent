@@ -1,22 +1,21 @@
-<properties
-	pageTitle="模板"
-	description="本主题介绍 Azure 通知中心的模板。"
-	services="notification-hubs"
-	documentationCenter=".net"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>  
+---
+title: 模板
+description: 本主题介绍 Azure 通知中心的模板。
+services: notification-hubs
+documentationCenter: .net
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="08/23/2016"
-	ms.author="wesmc"/>  
-
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: multiple
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 08/23/2016
+ms.author: wesmc
+---
 
 # 模板
 
@@ -60,7 +59,6 @@
 
 ![](./media/notification-hubs-templates/notification-hubs-hello.png)
 
-
 iOS 客户端应用注册的模板如下所示：
 
 	{"aps": {"alert": "$(message)"}}
@@ -99,13 +97,11 @@ Windows 应用商店客户端应用的相应模板为：
 
 发送到通知中心的消息包含以下属性：
 
-
 <table border="1">
 <tr><td>day1_image</td><td>day2_image</td><td>day3_image</td><td>day4_image</td><td>day5_image</td></tr>
 <tr><td>day1_tempC</td><td>day2_tempC</td><td>day3_tempC</td><td>day4_tempC</td><td>day5_tempC</td></tr>
 <tr><td>day1_tempF</td><td>day2_tempF</td><td>day3_tempF</td><td>day4_tempF</td><td>day5_tempF</td></tr>
 </table><br/>
-
 
 通过使用此模式，后端只需发送一条消息，而不必为应用用户存储特定的个性化选项。下图演示了此方案：
 
@@ -113,13 +109,11 @@ Windows 应用商店客户端应用的相应模板为：
 
 ##如何注册模板
 
-若要使用安装模型（首选）或注册模型来注册模板，请参阅[注册管理](/documentation/articles/notification-hubs-push-notification-registration-management/)。
+若要使用安装模型（首选）或注册模型来注册模板，请参阅[注册管理](./notification-hubs-push-notification-registration-management.md)。
 
 ##模板表达式语言
 
 模板限定为 XML 或 JSON 文档格式。此外，只能在特定位置放置表达式；例如，对于 XML 放置节点属性或值，对于 JSON 放置字符串属性值。
-
-
 
 下表显示了模板中允许使用的语言：
 
@@ -137,7 +131,6 @@ Windows 应用商店客户端应用的相应模板为：
 
 使用连接时，必须使用 {} 括住整个表达式。例如，{$(prop) + ‘ - ’ + $(prop2)}。|
 
-
 例如，下面所示不是有效的 XML 模板：
 
 	<tile>
@@ -147,7 +140,6 @@ Windows 应用商店客户端应用的相应模板为：
 	    </binding>  
 	  </visual>
 	</tile>
-
 
 如前所述，使用串联时，表达式必须用大括号括住。例如：
 

@@ -1,21 +1,21 @@
-<properties
- pageTitle="IoT 中心 HA 和 DR | Azure"
- description="介绍可帮助你构建包含灾难恢复功能的高可用性 IoT 解决方案的功能。"
- services="iot-hub"
- documentationCenter=""
- authors="fsautomata"
- manager="timlt"
- editor=""/>
+---
+title: IoT 中心 HA 和 DR | Azure
+description: 介绍可帮助你构建包含灾难恢复功能的高可用性 IoT 解决方案的功能。
+services: iot-hub
+documentationCenter: 
+authors: fsautomata
+manager: timlt
+editor: 
 
-<tags
- ms.service="iot-hub"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="02/03/2016"
- wacn.date="01/04/2017"
- ms.author="elioda"/>
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 02/03/2016
+wacn.date: 01/04/2017
+ms.author: elioda
+---
 
 # IoT 中心高可用性和灾难恢复
 
@@ -52,12 +52,11 @@ IoT 解决方案中部署拓扑的完整处理已超出本文的范围，但为�
 - [IoT 中心入门（教程）][lnk-get-started]
 - [Azure IoT 中心是什么？][]
 
-
 [防故障：弹性云体系结构指南]: https://msdn.microsoft.com/zh-cn/library/azure/jj853352.aspx
-[Azure 流量管理器]: /documentation/services/traffic-manager/
-[IoT 中心开发人员指南 - 标识注册表]: /documentation/articles/iot-hub-devguide-identity-registry/
+[Azure 流量管理器]: ../traffic-manager/index.md/
+[IoT 中心开发人员指南 - 标识注册表]: ./iot-hub-devguide-identity-registry.md
 
-[lnk-get-started]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
-[Azure IoT 中心是什么？]: /documentation/articles/iot-hub-what-is-iot-hub/
+[lnk-get-started]: ./iot-hub-csharp-csharp-getstarted.md
+[Azure IoT 中心是什么？]: ./iot-hub-what-is-iot-hub.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

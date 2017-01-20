@@ -1,25 +1,25 @@
-<properties
-	pageTitle="Azure AD 中的签名密钥滚动更新 | Azure"
-	description="本文介绍 Azure Active Directory 的签名密钥滚动更新最佳实践"
-	services="active-directory"
-	documentationCenter=".net"
-	authors="gsacavdm"
-	manager="krassk"
-	editor=""/>
+---
+title: Azure AD 中的签名密钥滚动更新 | Azure
+description: 本文介绍 Azure Active Directory 的签名密钥滚动更新最佳实践
+services: active-directory
+documentationCenter: .net
+authors: gsacavdm
+manager: krassk
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/18/2016"
-	wacn.date="11/21/2016"
-	ms.author="gsacavdm"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/18/2016
+wacn.date: 11/21/2016
+ms.author: gsacavdm
+---
 
 # Azure Active Directory 中的签名密钥滚动更新
 
-[AZURE.INCLUDE [active-directory-protocols](../../includes/active-directory-protocols.md)]
+[!INCLUDE [active-directory-protocols](../../includes/active-directory-protocols.md)]
 
 本主题介绍你需要了解的有关 Azure Active Directory (Azure AD) 中用来为安全令牌签名的公钥的信息。必须注意的是，这些密钥每 6 周按计划滚动更新一次。在紧急情况下，密钥可以远远不到 6 周就更改一次。所有使用 Azure AD 的应用程序应该都能以编程方式处理密钥滚动更新过程。请继续阅读以了解密钥的工作原理，以及如何更新应用程序以处理密钥滚动更新。
 
@@ -70,7 +70,6 @@ Azure App Service 的服务身份验证/授权 (EasyAuth) 功能已包含必要�
 
 你可以通过查看应用程序的 Startup.cs 或 Startup.Auth.cs 中的以下代码片段，来确认应用程序是否正在使用上述任何中间件
 
-
 	app.UseOpenIdConnectAuthentication(
 		 new OpenIdConnectAuthenticationOptions
 		 {
@@ -83,13 +82,11 @@ Azure App Service 的服务身份验证/授权 (EasyAuth) 功能已包含必要�
 		 // ...
 	 	});
 
-	
 	 app.UseWindowsAzureActiveDirectoryBearerAuthentication(
 		 new WindowsAzureActiveDirectoryBearerAuthenticationOptions
 		 {
 		 // ...
 		 });
-
 
 ### <a name="owincore"></a>使用 .NET Core OpenID Connect 或 JwtBearerAuthentication 中间件保护资源的 Web 应用程序/API
 
@@ -97,13 +94,11 @@ Azure App Service 的服务身份验证/授权 (EasyAuth) 功能已包含必要�
 
 你可以通过查看应用程序的 Startup.cs 或 Startup.Auth.cs 中的以下代码片段，来确认应用程序是否正在使用上述任何中间件
 
-
 	app.UseOpenIdConnectAuthentication(
 		 new OpenIdConnectAuthenticationOptions
 		 {
 			 // ...
 		 });
-
 
 	app.UseJwtBearerAuthentication(
 	    new JwtBearerAuthenticationOptions
@@ -111,20 +106,17 @@ Azure App Service 的服务身份验证/授权 (EasyAuth) 功能已包含必要�
 		 // ...
 	 	});
 
-
 ### <a name="passport"></a>使用 Node.js passport-azure-ad 模块保护资源的 Web 应用程序/API
 
 如果你的应用程序使用 Node.js passport-ad 模块，则它已包含必要的逻辑来自动处理密钥滚动更新。
 
 你可以通过搜索应用程序的 app.js 中的以下代码片段，来确认应用程序是否正在使用 passport-ad
 
-
 	var OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
 	
 	passport.use(new OIDCStrategy({
 		//...
 	));
-
 
 ### <a name="vs2015"></a>保护资源的和使用 Visual Studio 2015 创建的 Web 应用程序/API
 
@@ -153,7 +145,6 @@ Azure App Service 的服务身份验证/授权 (EasyAuth) 功能已包含必要�
 如果你在 Visual Studio 2013 中使用 Web API 模板创建了 Web API 应用程序，然后从“更改身份验证”菜单中选择了“组织帐户”，则应用程序中已包含必需的逻辑。如果你已手动配置身份验证，请参阅下面的说明，了解如何配置 Web API 来自动更新其密钥信息。
 
 以下代码片段演示如何从联合元数据文档获取最新密钥，然后使用 [JWT 令牌处理程序](https://msdn.microsoft.com/library/dn205065.aspx)来验证令牌。该代码片段假设你使用自己的缓存机制来持久保存密钥（以便验证将来从 Azure AD 获取的令牌），无论是将它保存在数据库中、配置文件中，还是保存在其他位置。
-
 
 	using System;
 	using System.Collections.Generic;
@@ -272,7 +263,6 @@ Azure App Service 的服务身份验证/授权 (EasyAuth) 功能已包含必要�
 	    RefreshValidationSettings();
 	}
 
-
 执行这些步骤后，系统将使用联合元数据文档中的最新信息（包括最新密钥）更新应用程序的 Web.config。每次在 IIS 中回收应用程序池时，都会进行此更新；默认情况下，IIS 设置为每 29 个小时回收一次应用程序。
 
 遵循以下步骤验证密钥滚动更新逻辑是否正常工作。
@@ -289,14 +279,12 @@ Azure App Service 的服务身份验证/授权 (EasyAuth) 功能已包含必要�
 
 3. 生成然后运行应用程序。如果你能完成登录过程，则应用程序将通过从你的目录的联合元数据文档下载所需的信息来成功地更新密钥。如果你在登录时遇到问题，请通过阅读 [Adding Sign-On to Your Web Application Using Azure AD（使用 Azure AD 将登录名添加到 Web 应用程序中）](https://github.com/Azure-Samples/active-directory-dotnet-webapp-openidconnect)主题，或下载并检查以下代码示例来确保你应用程序中的更改是正确的：[Multi-Tenant Cloud Application for Azure Active Directory（用于 Azure Active Directory 的多租户云应用程序）](https://code.msdn.microsoft.com/multi-tenant-cloud-8015b84b)。
 
-
 ### <a name="vs2010"></a>保护资源的和使用 Visual Studio 2008 或 2010 和 Windows Identity Foundation (WIF) v1.0 for .NET 3.5 创建的 Web 应用程序
 
 如果你在 WIF v1.0 中构建应用程序，则系统未提供相应的机制来自动刷新应用程序的配置以使用新密钥。更新密钥的最简单方法是使用 WIF SDK 中包含的 FedUtil 工具，该工具可以检索最新的元数据文档并更新你的配置。下面提供了相关说明。或者，也可以执行以下操作之一：
 
 - 按照下面的“手动检索最新密钥并更新应用程序”部分中的说明操作，并编写逻辑以通过编程方式执行这些步骤。
 - 将应用程序更新到 .NET 4.5，该版本包括位于系统命名空间中的 WIF 的最新版本。然后，你可以使用[验证颁发者名称注册表 (VINR)](https://msdn.microsoft.com/library/dn205067.aspx) 来执行应用程序配置的自动更新。
-
 
 1. 请确认你已在开发计算机上为 Visual Studio 2008 或 2010 安装了 WIF v1.0 SDK。如果尚未安装，可以[从此处下载](https://www.microsoft.com/zh-cn/download/details.aspx?id=4451)。
 2. 在 Visual Studio 中打开解决方案，然后右键单击相应的项目并选择“更新联合元数据”。如果此选项不可用，则表示 FedUtil 和/或 WIF v1.0 SDK 尚未安装。
@@ -333,7 +321,7 @@ Azure App Service 的服务身份验证/授权 (EasyAuth) 功能已包含必要�
 
 若要从联合元数据文档检索最新密钥，请执行以下操作：
 
-1. 在 Web 浏览器中，转到 `https://login.microsoftonline.com/your_directory_name/federationmetadata/2007-06/federationmetadata.xml`。你将看到联合元数据 XML 文档的内容。有关此文档的详细信息，请参阅 [Federation Metadata（联合元数据）](/documentation/articles/active-directory-federation-metadata/)主题。
+1. 在 Web 浏览器中，转到 `https://login.microsoftonline.com/your_directory_name/federationmetadata/2007-06/federationmetadata.xml`。你将看到联合元数据 XML 文档的内容。有关此文档的详细信息，请参阅 [Federation Metadata（联合元数据）](./active-directory-federation-metadata.md)主题。
 2. 为了更新应用程序以使用新密钥，请找到每个 **<RoleDescriptor>** 块，然后复制每个块的 **<X509Certificate>** 元素的值。例如：
 	
 		<RoleDescriptor xmlns:fed="http://docs.oasis-open.org/wsfed/federation/200706" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" protocolSupportEnumeration="http://docs.oasis-open.org/wsfed/federation/200706" xsi:type="fed:SecurityTokenServiceType">

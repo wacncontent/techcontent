@@ -1,41 +1,41 @@
-<properties
-   pageTitle="创建和上载 FreeBSD VM 映像 | Azure"
-   description="了解如何创建和上载包含 FreeBSD 操作系统的虚拟硬盘 (VHD) 以创建 Azure 虚拟机。"
-   services="virtual-machines-linux"
-   documentationCenter=""
-   authors="KylieLiang"
-   manager="timlt"
-   editor=""
-   tags="azure-service-management"/>
+---
+title: 创建和上载 FreeBSD VM 映像 | Azure
+description: 了解如何创建和上载包含 FreeBSD 操作系统的虚拟硬盘 (VHD) 以创建 Azure 虚拟机。
+services: virtual-machines-linux
+documentationCenter: 
+authors: KylieLiang
+manager: timlt
+editor: 
+tags: azure-service-management
 
-<tags
-   ms.service="virtual-machines-linux"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-linux"
-   ms.workload="infrastructure-services"
-   ms.date="08/29/2016"
-   wacn.date="01/05/2017"
-   ms.author="kyliel"/>
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure-services
+ms.date: 08/29/2016
+wacn.date: 01/05/2017
+ms.author: kyliel
+---
 
 # 创建 FreeBSD VHD 并将其上载到 Azure
 
 本文说明如何创建和上载包含 FreeBSD 操作系统的虚拟硬盘 (VHD)。将其上载后，可以使用它作为你自己的映像在 Azure 中创建虚拟机 (VM)。
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-classic-include.md)]
 
-想查看更多关于使用资源管理器模型上传 VHD，请点击[这里](/documentation/articles/virtual-machines-linux-upload-vhd/)。
+想查看更多关于使用资源管理器模型上传 VHD，请点击[这里](./virtual-machines-linux-upload-vhd.md)。
 
 ## 先决条件
 本文假定你拥有以下项目：
 
-- **Azure 订阅** - 如果你没有帐户，只需花费几分钟就能创建一个帐户。请参阅[创建试用帐户](/pricing/1rmb-trial/)。
+- **Azure 订阅** - 如果你没有帐户，只需花费几分钟就能创建一个帐户。请参阅[创建试用帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 
 - **Azure PowerShell 工具** - 必须安装 Azure PowerShell 模块并将其配置为使用你的 Azure 订阅。若要下载该模块，请参阅 [Azure 下载](/downloads/)。可在此处获取介绍如何安装和配置该模块的教程。使用 [Azure 下载](/downloads/) cmdlet 上载 VHD。
 
 - **安装在 .vhd 文件中的 FreeBSD 操作系统** - 必须将受支持的 FreeBSD 操作系统安装到虚拟硬盘。可使用多个工具创建 .vhd 文件。例如，可使用虚拟化解决方案（如 Hyper-V）创建 .vhd 文件并安装操作系统。有关如何安装和使用 Hyper-V 的说明，请参阅[安装 Hyper-V 和创建虚拟机](http://technet.microsoft.com/zh-cn/library/hh846766.aspx)。
 
-> [AZURE.NOTE] Azure 不支持更新的 VHDX 格式。可使用 Hyper-V 管理器或 [convert-vhd](https://technet.microsoft.com/zh-cn/library/hh848454.aspx) cmdlet 将磁盘转换为 VHD 格式。此外，MSDN 上还有[有关如何将 FreeBSD 与 Hyper-V 配合使用的教程](http://blogs.msdn.com/b/kylie/archive/2014/12/25/running-freebsd-on-hyper-v.aspx)。
+> [!NOTE] Azure 不支持更新的 VHDX 格式。可使用 Hyper-V 管理器或 [convert-vhd](https://technet.microsoft.com/zh-cn/library/hh848454.aspx) cmdlet 将磁盘转换为 VHD 格式。此外，MSDN 上还有[有关如何将 FreeBSD 与 Hyper-V 配合使用的教程](http://blogs.msdn.com/b/kylie/archive/2014/12/25/running-freebsd-on-hyper-v.aspx)。
 
 此任务包括以下五个步骤。
 
@@ -102,7 +102,7 @@
 		# ln -sf /usr/local/sbin/waagent /usr/sbin/waagent  
 		# ln -sf /usr/local/sbin/waagent2.0 /usr/sbin/waagent2.0
 
-    >[AZURE.IMPORTANT] 安装 Azure 代理之后，验证它是否正在运行是一个好主意：
+    >[!IMPORTANT] 安装 Azure 代理之后，验证它是否正在运行是一个好主意：
 
 		# waagent -version
 		WALinuxAgent-2.1.4 running on freebsd 10.3
@@ -138,10 +138,9 @@
 
 	- 在“位置/地缘组”下拉菜单中，选择存储帐户的**位置或地缘组**。地缘组让你能够将你的云服务和存储放在同一数据中心。
 
-	- 在“复制”字段中，决定是否要对存储帐户使用**异地冗余**复制。默认情况下启用地域复制。此选项会将你的数据免费复制到辅助位置，以便在主位置发生严重故障时将你的存储故障转移到该位置。将自动分配辅助位置，并且无法对其进行更改。如果你因法律要求或组织策略需要更好地控制基于云的存储的位置，可以关闭地域复制。但是，请注意，如果稍后你打开地域复制，则将现有数据复制到辅助位置时将向你收取一次性数据传输费用。不具有地域复制的存储服务将以优惠价提供。有关管理存储帐户的异地复制的更多详细信息，请参阅：[创建、管理或删除存储帐户](/documentation/articles/storage-create-storage-account/)。
+	- 在“复制”字段中，决定是否要对存储帐户使用**异地冗余**复制。默认情况下启用地域复制。此选项会将你的数据免费复制到辅助位置，以便在主位置发生严重故障时将你的存储故障转移到该位置。将自动分配辅助位置，并且无法对其进行更改。如果你因法律要求或组织策略需要更好地控制基于云的存储的位置，可以关闭地域复制。但是，请注意，如果稍后你打开地域复制，则将现有数据复制到辅助位置时将向你收取一次性数据传输费用。不具有地域复制的存储服务将以优惠价提供。有关管理存储帐户的异地复制的更多详细信息，请参阅：[创建、管理或删除存储帐户](../storage/storage-create-storage-account.md)。
 
 	![输入存储帐户详细信息](./media/virtual-machines-linux-classic-freebsd-create-upload-vhd/Storage-create-account.png)
-
 
 5. 选择“创建存储帐户”。该帐户现在会出现在“存储”下。
 
@@ -159,7 +158,7 @@
 
 	![容器名称](./media/virtual-machines-linux-classic-freebsd-create-upload-vhd/storageaccount_containervalues.png)
 
-    > [AZURE.NOTE] 默认情况下，该容器是专用容器，只能由帐户所有者访问。若要允许对容器中的 Blob 进行公共读取访问，但不允许对容器属性和元数据进行公共读取访问，请使用“公共 Blob”选项。若要允许对容器和 Blob 进行完全公共读取访问，请使用“公共容器”选项。
+    > [!NOTE] 默认情况下，该容器是专用容器，只能由帐户所有者访问。若要允许对容器中的 Blob 进行公共读取访问，但不允许对容器属性和元数据进行公共读取访问，请使用“公共 Blob”选项。若要允许对容器和 Blob 进行完全公共读取访问，请使用“公共容器”选项。
 
 ## 步骤 3：准备连接到 Azure
 
@@ -206,7 +205,6 @@
 - **VHDName** 是显示在 Azure 经典管理门户中用于标识虚拟硬盘的标签。
 - **PathToVHDFile** 是 .vhd 文件的完整路径和名称。
 
-
 从你在上一步中使用的 Azure PowerShell 窗口中，键入：
 
 		Add-AzureVhd -Destination "<BlobStorageURL>/<YourImagesFolder>/<VHDName>.vhd" -LocalFilePath <PathToVHDFile>
@@ -218,7 +216,7 @@
 
 		Add-AzureVMImage -ImageName <Your Image's Name> -MediaLocation <location of the VHD> -OS <Type of the OS on the VHD>
 
-    > [AZURE.NOTE]使用 Linux 作为 OS 类型。当前的 Azure PowerShell 版本只接受“Linux”或“Windows”作为参数。
+    > [!NOTE]使用 Linux 作为 OS 类型。当前的 Azure PowerShell 版本只接受“Linux”或“Windows”作为参数。
 
 2. 完成前面的步骤后，当你在 Azure 经典管理门户上选择“映像”选项卡时，将列出新映像。
 

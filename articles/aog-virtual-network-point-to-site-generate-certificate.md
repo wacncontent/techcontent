@@ -1,32 +1,29 @@
-<properties
-	pageTitle="本文讲解如何使用 Powershell 来生成点到站点连接所使用的自签名证书"
-	description="本文讲解如何使用 Powershell 来生成点到站点连接所使用的自签名证书"
-	services="virtual-network"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 本文讲解如何使用 Powershell 来生成点到站点连接所使用的自签名证书
+description: 本文讲解如何使用 Powershell 来生成点到站点连接所使用的自签名证书
+services: virtual-network
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="virtual-network-aog"
-	ms.date="10/27/2016"
-	wacn.date="11/03/2016"/>
-
-
+ms.service: virtual-network-aog
+ms.date: 10/27/2016
+wacn.date: 11/03/2016
+---
 
 # 本文讲解如何使用 Powershell 来生成点到站点连接所使用的自签名证书。
 
-使用点到站点 ( P2S ) 配置可以创建从单个客户端计算机到虚拟网络的安全连接。关于如何逐步配置 P2S 连接，可以参阅：[配置与 VNet 的点到站点连接](/documentation/articles/vpn-gateway-point-to-site-create/)。
+使用点到站点 ( P2S ) 配置可以创建从单个客户端计算机到虚拟网络的安全连接。关于如何逐步配置 P2S 连接，可以参阅：[配置与 VNet 的点到站点连接](./vpn-gateway/vpn-gateway-point-to-site-create.md)。
 
-在 P2S 接连的配置过程中，其中一个步骤是创建用于身份验证的证书。证书用于对点到站点 VPN 的 VPN 客户端进行身份验证。可以使用企业证书解决方案生成的证书，或使用自签名证书。要使用 `Makecert.exe` 创建自签名证书，可以参阅：[为点到站点连接使用自签名证书](/documentation/articles/vpn-gateway-certificates-point-to-site/)。除此之后，还可以用 Powershell 命令 `New-SelfSignedCertificate` 来生成自签名证书。
+在 P2S 接连的配置过程中，其中一个步骤是创建用于身份验证的证书。证书用于对点到站点 VPN 的 VPN 客户端进行身份验证。可以使用企业证书解决方案生成的证书，或使用自签名证书。要使用 `Makecert.exe` 创建自签名证书，可以参阅：[为点到站点连接使用自签名证书](./vpn-gateway/vpn-gateway-certificates-point-to-site.md)。除此之后，还可以用 Powershell 命令 `New-SelfSignedCertificate` 来生成自签名证书。
 
 ###创建自签名根证书
 
 1.	确认当前安装的 Powershell 为最新版本。
 
 2.	打开 Powershell，以管理员身份运行以下命令。将 RootCertName 替换为要使用的根证书名称：
-
 
 		$root=New-SelfSignedCertificate -Subject "CN=RootCertName" -KeyUsage CertSign,CRLSign,DataEncipherment,DigitalSignature,KeyAgreement,KeyEncipherment -Type Custom -KeyLength 2048 -KeySpec KeyExchange -KeyExportPolicy Exportable -CertStoreLocation Cert:\CurrentUser\My\ -HashAlgorithm SHA1 -NotAfter (Get-Date).AddMonths(240)
 
@@ -40,7 +37,6 @@
 
 4.	在向导中，单击“下一步”，选择“否，不导出私钥”，然后单击“下一步”。
 
-	
  	 ![](./media/aog-virtual-network-point-to-site-generate-certificate/export-next.png)
 
 5.	在“导出文件格式”页上，选择“Base-64 编码的 X.509 (.CER)”。 然后，单击“下一步”。
@@ -51,12 +47,11 @@
 
 ###上传证书
 
-将根证书 .cer 文件上载到 Azure 经典管理门户，请参照[配置与 VNet 的点到站点连接](/documentation/articles/vpn-gateway-point-to-site-create/)。
+将根证书 .cer 文件上载到 Azure 经典管理门户，请参照[配置与 VNet 的点到站点连接](./vpn-gateway/vpn-gateway-point-to-site-create.md)。
 
 ### 创建客户端证书
 
 8.	打开 Powershell，以管理员身份运行以下命令。将 ClientCertName 替换为要使用的根证书名称：
-
 
 		New-SelfSignedCertificate -Subject "CN=ClientCertName" -KeyUsage CertSign,CRLSign,DataEncipherment,DigitalSignature,KeyAgreement,KeyEncipherment -Type Custom -KeyExportPolicy Exportable -KeySpec KeyExchange -Signer $root -HashAlgorithm SHA1 -NotAfter (Get-Date).AddMonths(240) -CertStoreLocation Cert:\CurrentUser\My\
 
@@ -75,7 +70,5 @@
 
 ###后续步骤
 
-证书配置完成之后，完成 P2S 连接还需配置 VPN 客户端，可以参阅：[配置与 VNet 的点到站点连接](/documentation/articles/vpn-gateway-point-to-site-create/)。
-
-
+证书配置完成之后，完成 P2S 连接还需配置 VPN 客户端，可以参阅：[配置与 VNet 的点到站点连接](./vpn-gateway/vpn-gateway-point-to-site-create.md)。
 

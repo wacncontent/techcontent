@@ -1,24 +1,22 @@
-<properties
-	pageTitle="使用 Azure Resource Manager 和 C# 管理 VM | Azure"
-	description="使用 Azure Resource Manager 和 C# 来管理虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 使用 Azure Resource Manager 和 C# 管理 VM | Azure
+description: 使用 Azure Resource Manager 和 C# 来管理虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="na"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="12/16/2016"
-	ms.author="davidmu"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: na
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 12/16/2016
+ms.author: davidmu
+---
 
 # 使用 Azure Resource Manager 与 C 来管理 Azure 虚拟机#  
 
@@ -27,7 +25,7 @@
 若要完成本文中的任务，你需要：
 
 - [Visual Studio](http://msdn.microsoft.com/zh-cn/library/dd831853.aspx)
-- [身份验证令牌](/documentation/articles/resource-group-authenticate-service-principal/)
+- [身份验证令牌](../azure-resource-manager/resource-group-authenticate-service-principal.md)
 
 ## 创建 Visual Studio 项目并安装包
 
@@ -480,6 +478,6 @@
 
 ## 后续步骤
 
-如果部署出现问题，请参阅[使用 Azure 门户预览排除资源组部署故障](/documentation/articles/resource-manager-troubleshoot-deployments-portal/)
+如果部署出现问题，请参阅[使用 Azure 门户预览排除资源组部署故障](../azure-resource-manager/resource-manager-troubleshoot-deployments-portal.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

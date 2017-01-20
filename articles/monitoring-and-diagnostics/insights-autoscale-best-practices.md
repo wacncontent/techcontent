@@ -1,23 +1,21 @@
-<properties
-	pageTitle="Azure Insights：Azure Insights 自动调整规模的最佳做法 | Azure"
-	description="了解原理，有效地在 Azure Insights 中使用自动缩放。"
-	authors="kamathashwin"
-	manager=""
-	editor=""
-	services="monitoring-and-diagnostics"
-	documentationCenter="monitoring-and-diagnostics"/>  
+---
+title: Azure Insights：Azure Insights 自动调整规模的最佳做法 | Azure
+description: 了解原理，有效地在 Azure Insights 中使用自动缩放。
+authors: kamathashwin
+manager: 
+editor: 
+services: monitoring-and-diagnostics
+documentationCenter: monitoring-and-diagnostics
 
-
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/20/2016"
-	ms.author="ashwink"
-	wacn.date="12/26/2016"/>  
-
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/20/2016
+ms.author: ashwink
+wacn.date: 12/26/2016
+---
 
 # Azure Insights 自动缩放的最佳做法
 
@@ -28,7 +26,7 @@
 - 一个资源只能具有 *一个* 自动缩放设置
 - 自动缩放设置可以具有一个或多个配置文件，每个配置文件可以具有一个或多个自动缩放规则。
 - 自动缩放设置可水平缩放实例，它在增加实例时是 *扩大*，在减少实例数时是 *缩小*。自动缩放设置具有最大、最小和默认实例值。
-- 自动缩放作业始终读取要作为缩放依据的关联指标，检查它是否超过针对扩大或缩小配置的阈值。可以在 [Azure Insights 自动调整规模常用指标](/documentation/articles/insights-autoscale-common-metrics/)查看可以作为自动调整规模依据的指标的列表。
+- 自动缩放作业始终读取要作为缩放依据的关联指标，检查它是否超过针对扩大或缩小配置的阈值。可以在 [Azure Insights 自动调整规模常用指标](./insights-autoscale-common-metrics.md)查看可以作为自动调整规模依据的指标的列表。
 - 所有阈值都在实例级别进行计算。例如，“如果实例计数为 2，则在平均 CPU > 80% 时按 1 个实例进行扩大”表示在所有实例间的平均 CPU 大于 80% 时进行扩大。
 - 你会始终通过电子邮件收到故障通知。具体而言，目标资源的所有者、参与者和访问者会收到电子邮件。当自动缩放从故障中恢复并开始正常工作时，你也始终会收到 *恢复* 电子邮件。
 - 可以选择加入以通过电子邮件和 webhook 接收成功缩放操作通知。

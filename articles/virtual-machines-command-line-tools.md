@@ -1,31 +1,30 @@
-<properties
-	pageTitle="服务管理模式下的 Azure CLI 命令 | Azure"
-	description="在服务管理模式下使用 Azure 命令行界面 (CLI) 命令管理经典部署模型中的部署"
-	services="virtual-machines-linux,virtual-machines-windows,mobile-services, cloud-services"
-	documentationCenter=""
-	authors="dlepow"
-	manager="timlt"
-	editor="tysonn"
-	tags="azure-service-management"/>  
+---
+title: 服务管理模式下的 Azure CLI 命令 | Azure
+description: 在服务管理模式下使用 Azure 命令行界面 (CLI) 命令管理经典部署模型中的部署
+services: virtual-machines-linux,virtual-machines-windows,mobile-services, cloud-services
+documentationCenter: 
+authors: dlepow
+manager: timlt
+editor: tysonn
+tags: azure-service-management
 
-
-<tags
-	ms.service="multiple"
-	ms.workload="multiple"
-	ms.tgt_pltfrm="vm-multiple"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/22/2016"
-	wacn.date="11/21/2016"
-	ms.author="danlep"/>
+ms.service: multiple
+ms.workload: multiple
+ms.tgt_pltfrm: vm-multiple
+ms.devlang: na
+ms.topic: article
+ms.date: 09/22/2016
+wacn.date: 11/21/2016
+ms.author: danlep
+---
 
 # Azure 服务管理 (asm) 模式下的 Azure CLI 命令
 
-[AZURE.IMPORTANT]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用 [Resource Manager model](/documentation/articles/azure-cli-arm-commands/)。
+[!IMPORTANT]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](./azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用 [Resource Manager model](./virtual-machines/azure-cli-arm-commands.md)。
 
 本文提供经常用于在经典部署模型中创建和管理 Azure 资源的 Azure CLI 命令的语法和选项。通过在 Azure 服务管理 (asm) 模式下运行 CLI 可以访问这些命令。本参考内容并不完整，你的 CLI 版本可能会显示略微不同的命令或参数。
 
-若要开始，请先[安装 Azure CLI](/documentation/articles/xplat-cli-install) 并[连接到 Azure 订阅](/documentation/articles/xplat-cli-connect/)。
+若要开始，请先[安装 Azure CLI](./xplat-cli-install.md) 并[连接到 Azure 订阅](./xplat-cli-connect.md)。
 
 有关命令行当前的命令语法和选项，请键入 `azure help`；若要显示特定命令的帮助，请键入 `azure help [command]`。还可以在创建和管理特定 Azure 服务的说明文档中找到 CLI 示例。
 
@@ -39,10 +38,10 @@
 
 	azure config mode asm
 
->[AZURE.NOTE] CLI 的 Azure Resource Manager 模式与 Azure 服务管理模式互斥。即，在一种模式下创建的资源不能通过另一种模式进行管理。
+>[!NOTE] CLI 的 Azure Resource Manager 模式与 Azure 服务管理模式互斥。即，在一种模式下创建的资源不能通过另一种模式进行管理。
 
 ## 管理帐户信息和发布设置
-CLI 可以连接到帐户的一种方式是使用 Azure 订阅信息。（有关其他选项，请参阅[从 Azure CLI 连接到 Azure 订阅](/documentation/articles/xplat-cli-connect/)。） 可以从 Azure 经典门户中的发布设置文件中获取此信息，如下所述。可以导入发布设置文件作为永久性本地配置设置，CLI 会将此设置用于后续操作。只需导入一次发布设置即可。
+CLI 可以连接到帐户的一种方式是使用 Azure 订阅信息。（有关其他选项，请参阅[从 Azure CLI 连接到 Azure 订阅](./xplat-cli-connect.md)。） 可以从 Azure 经典门户中的发布设置文件中获取此信息，如下所述。可以导入发布设置文件作为永久性本地配置设置，CLI 会将此设置用于后续操作。只需导入一次发布设置即可。
 
 **account download [options]**
 
@@ -57,7 +56,6 @@ CLI 可以连接到帐户的一种方式是使用 Azure 订阅信息。（有关
 
 **account import [options] &lt;file>**
 
-
 此命令导入 publishsettings 文件或证书，以便在未来的会话中可供该工具使用。
 
 	~$ azure account import publishsettings.publishsettings
@@ -69,7 +67,7 @@ CLI 可以连接到帐户的一种方式是使用 Azure 订阅信息。（有关
 	warn:   Remember to delete it now that it has been imported.
 	info:   Account publish settings imported successfully
 
-> [AZURE.NOTE] publishsettings 文件可以包含有关多个订阅的详细信息（即，订阅名称和 ID）。在导入 publishsettings 文件时，第一个订阅将用作默认订阅。若要使用其他订阅，请运行以下命令：<code>~$ azure config set subscription &lt;other-subscription-id&gt;</code>
+> [!NOTE] publishsettings 文件可以包含有关多个订阅的详细信息（即，订阅名称和 ID）。在导入 publishsettings 文件时，第一个订阅将用作默认订阅。若要使用其他订阅，请运行以下命令：<code>~$ azure config set subscription &lt;other-subscription-id&gt;</code>
 
 **account clear [options]**
 
@@ -321,12 +319,10 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 此命令关闭 Azure 虚拟机。可以使用 -p 选项指定在关闭时不释放计算资源。
 
-	
 	~$ azure vm shutdown my-vm
 	info:   Executing command vm shutdown
 	info:   vm shutdown command OK  
 	
-
 **vm capture &lt;vm-name> &lt;target-image-name>**
 
 此命令捕获 Azure 虚拟机映像。
@@ -659,7 +655,6 @@ Azure 云服务是托管在 Web 角色和辅助角色上的应用程序和服务
 
 若要强制删除，请使用 `-q` 参数。
 
-
 ##<a name="Commands_to_manage_your_Azure_certificates"></a>用于管理 Azure 证书的命令
 
 Azure 服务证书是连接到 Azure 帐户的 SSL 证书。有关 Azure 证书的详细信息，请参阅[管理证书](http://msdn.microsoft.com/zh-cn/library/azure/gg981929.aspx)。
@@ -696,7 +691,6 @@ Azure 服务证书是连接到 Azure 帐户的 SSL 证书。有关 Azure 证书�
 	+ Deleting certificate
 	info:   nghinazz : cert deleted
 	info:   service cert delete command OK
-
 
 ##<a name="Commands_to_manage_your_web_sites"></a>用于管理网站的命令
 
@@ -749,7 +743,7 @@ Azure 网站是可通过 URI 访问的 Web 配置。尽管网站托管在虚拟�
 	info:   Repository initialized
 	info:   site create command OK
 
-> [AZURE.NOTE] 站点名称必须是唯一的。无法创建与现有站点具有相同 DNS 名称的站点。
+> [!NOTE] 站点名称必须是唯一的。无法创建与现有站点具有相同 DNS 名称的站点。
 
 **site browse [options] [name]**
 
@@ -808,7 +802,6 @@ Azure 网站是可通过 URI 访问的 Web 配置。尽管网站托管在虚拟�
 
 **-q** 或 **--quiet**：不提示确认。在自动化脚本中使用此选项。
 
-
 **site start [options] [name]**
 
 此命令启动 Web 应用。
@@ -836,7 +829,6 @@ Azure 网站是可通过 URI 访问的 Web 配置。尽管网站托管在虚拟�
 此命令支持以下附加选项：
 
 **--slot** &lt;slot>：要重新启动的插槽的名称。
-
 
 **site location list [options]**
 
@@ -1132,7 +1124,6 @@ Azure 网站是可通过 URI 访问的 Web 配置。尽管网站托管在虚拟�
 
 **site scale instances [options] &lt;instances> [name]**
 
-
 ## 用于管理 Azure 移动服务的命令
 
 Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 Azure 服务。移动服务命令分为以下几类：
@@ -1274,7 +1265,7 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 + **-k`<skip>`** 或 **--skip`<skip>`**：跳过 `<skip>` 指定的行数。
 + **-p`<top>`** 或 **--top `<top>`**：返回由 `<top>` 指定的特定行数。
 
-> [AZURE.NOTE] **--query** 参数优先于 **--type**、**--skip** 和 **--top**。
+> [!NOTE] **--query** 参数优先于 **--type**、**--skip** 和 **--top**。
 
 **mobile recover [options] [unhealthyservicename] [healthyservicename]**
 
@@ -1295,12 +1286,11 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 
 密钥类型为 `master` 和 `application`。
 
-> [AZURE.NOTE] 当重新生成密钥时，使用旧密钥的客户端可能无法访问你的移动服务。当重新生成应用程序密钥时，应使用新密钥值更新应用程序。
+> [!NOTE] 当重新生成密钥时，使用旧密钥的客户端可能无法访问你的移动服务。当重新生成应用程序密钥时，应使用新密钥值更新应用程序。
 
 **mobile key set [options] [servicename] [type] [value]**
 
 此命令将移动服务密钥设置为一个特定值。
-
 
 ###<a name="Mobile_Configuration"></a>用于管理移动服务配置的命令
 
@@ -1342,7 +1332,6 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 	~$ azure mobile config set todolist dynamicSchemaEnabled false
 	info:    Executing command mobile config set
 	info:    mobile config set command OK
-
 
 ###<a name="Mobile_Tables"></a>用于管理移动服务表的命令
 
@@ -1456,10 +1445,9 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 	info:    Deleted 7 rows.
 	info:    mobile data truncate command OK
 
-
 ###<a name="Mobile_Scripts"></a>用于管理脚本的命令
 
-本部分中的命令用于管理属于移动服务的服务器脚本。有关详细信息，请参阅[使用移动服务中的服务器脚本](/documentation/articles/mobile-services-how-to-use-server-scripts/)。
+本部分中的命令用于管理属于移动服务的服务器脚本。有关详细信息，请参阅[使用移动服务中的服务器脚本](./mobile-services/mobile-services-how-to-use-server-scripts.md)。
 
 **mobile script list [options] [servicename]**
 
@@ -1507,7 +1495,6 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 
 该文件的名称必须由表和操作名称组成，并且该文件必须位于相对于命令执行位置的 table 子文件夹中。你还可以使用 **-f `<file>`** 或 **--file `<file>`** 参数指定其他包含要注册的脚本的文件的文件名和路径。
 
-
 **mobile script delete [options] [servicename] [scriptname]**
 
 此命令从 TodoItem 表中删除现有插入脚本。
@@ -1554,7 +1541,7 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 	+ **none**（按需作业）
 + **-t`<time>`** **--startTime `<time>`** 脚本的首次运行开始时间，采用 ISO 格式；默认值为 `now`。
 
-> [AZURE.NOTE] 创建的新作业处于禁用状态，因为还必须上传脚本。请使用 **mobile script upload** 命令上载脚本并使用 **mobile job update** 命令启用作业。
+> [!NOTE] 创建的新作业处于禁用状态，因为还必须上传脚本。请使用 **mobile script upload** 命令上载脚本并使用 **mobile job update** 命令启用作业。
 
 **mobile job update [options] [servicename] [jobname]**
 
@@ -1584,7 +1571,7 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 	info:    Executing command mobile job delete
 	info:    mobile job delete command OK
 
-> [AZURE.NOTE] 删除作业也将删除已上传的脚本。
+> [!NOTE] 删除作业也将删除已上传的脚本。
 
 ###<a name="Mobile_Scale"></a>用于缩放移动服务的命令
 
@@ -1615,8 +1602,7 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 + **-c`<mode>`** 或 **--computeMode `<mode>`**：计算模式必须为 `Free` 或 `Reserved`。
 + **-i`<count>`** 或 **--numberOfInstances`<count>`**：在保留模式下运行时使用的实例数。
 
-> [AZURE.NOTE] 将计算模式设置为`Reserved`时，同一区域中的所有移动服务都将在高级模式下运行。
-
+> [!NOTE] 将计算模式设置为`Reserved`时，同一区域中的所有移动服务都将在高级模式下运行。
 
 ###用于为移动服务启用预览版功能的命令
 
@@ -1780,7 +1766,6 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 	data:    enabled: true
 	info:    sb namespace create command OK
 
-
 **sb namespace delete &lt;name>**
 
 删除某个命名空间。
@@ -1802,7 +1787,6 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 	data:    -------------------  -----------  ------
 	data:    mysbnamespacea-test  China North  Active
 	info:    sb namespace list command OK
-
 
 **sb namespace location list**
 
@@ -2291,7 +2275,6 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 	data:    vnet3      Created  AG1
 	data:    vnet4      Created  AG1
 	info:    network vnet list command OK
-
 
 **network vnet delete &lt;name>**
 

@@ -1,18 +1,32 @@
-<properties linkid="dev-net-common-tasks-cdn" urlDisplayName="CDN" pageTitle="How to use the Azure Content Delivery Network portal advanced features - Azure feature guide" metaKeywords="Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, cache refresh, content prefetch, log download, cache rules, CDN help files, CDN technical documentation, CDN" description="Learn how to use the advanced features of the Azure portal to manage Content Delivery Network endpoints" metaCanonical="" services="" documentationCenter=".NET" title="" authors="" solutions="" manager="" editor="" />
-<tags ms.service="cdn_en"
-    ms.date="7/7/2016"
-    wacn.date="7/7/2016"
-    wacn.lang="en"
-    />
-> [AZURE.LANGUAGE]
-- [中文](/documentation/articles/cdn-management-portal-how-to-use/)
-- [English](/documentation/articles/cdn-enus-management-portal-how-to-use/) 
-# Azure Content Delivery Network portal user guide
+---
+linkid: dev-net-common-tasks-cdn
+urlDisplayName: CDN
+title: How to use the Azure Content Delivery Network portal advanced features - Azure feature guide
+metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, cache refresh, content prefetch, log download, cache rules, CDN help files, CDN technical documentation, CDN
+description: Learn how to use the advanced features of the Azure portal to manage Content Delivery Network endpoints
+metaCanonical: 
+services: 
+documentationCenter: .NET
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
+ms.service: cdn_en
+ms.date: 7/7/2016
+wacn.date: 7/7/2016
+wacn.lang: en
+---
+
+> [AZURE.LANGUAGE]
+- [中文](./cdn-management-portal-how-to-use.md)
+- [English](./cdn-enus-management-portal-how-to-use.md) 
+# Azure Content Delivery Network portal user guide
 
 The Azure CDN caches static content in storage blobs, cloud services, and websites on the Azure platform by using large numbers of physical nodes distributed across Mainland China. These nodes provide developers with a solution for delivering high-bandwidth content. This service also currently supports the use of source stations that have not been deployed on the Azure platform.
 
-For more details and pricing for Content Delivery Network, see [Introduction to the Azure Content Delivery Network service](/home/features/cdn/).
+For more details and pricing for Content Delivery Network, see [Introduction to the Azure Content Delivery Network service](https://www.azure.cn/home/features/cdn/).
 
 + [Overview](#step1)
 + [Domain name management](#step2)
@@ -45,7 +59,6 @@ Total traffic in gigabytes (GB) that were used by all enabled domain names under
 ### **Usages in current month**
 
 Details of traffic in GB for each day in the current month under the current Azure subscriptions. If you need more detailed traffic information, you can click “Usage Chart” in the left navigation pane.
-
 
 ### **Bandwidth in current month**
 Details of the peak bandwidth in megabytes per second (Mb/s) for each day in the current month. If you need more detailed bandwidth information, click “Bandwidth Chart” in the left navigation pane.
@@ -154,7 +167,6 @@ Select the subscription (choose one), time range, and accelerated domains (indiv
 -   There are multiple time range types to check bandwidth, including the last 24 hours, yesterday, today, the last 7 days, the last 15 days, the last 30 days, or the last month. You can also check bandwidth and return-to-source bandwidt for a specific time period, which cannot exceed 90 days.
 -   Bandwidth chart displays the time at which peak bandwidth levels occur.
 
-
 ## **Cache refresh**<a id="step5"></a>
 
 Clicking “Cache Refresh” in the bottom-left navigation pane performs a manual refresh of the specified files or folders.
@@ -223,7 +235,6 @@ Select the subscription (choose one), status, time range, and accelerated domain
 -   Accelerated domain, which are URLs that are used to access CDN cache content.
 -   Status (common statuses: successful, failed, or in progress)
 -   Submit time
-
 
 If you successfully submitted the precache rules, the status column shows the word “Successful”. If you did not successfully submit them, you must check that the precache rules were correct. If there are any problems, you must re-create and re-submit the precache rules.
 
@@ -296,8 +307,6 @@ he original domain is OK (HTTP status code is 200) - means the domain works
 3. The CDN cache is OK - means the contents accessed from both origin and CDN endpoints are the same (by HTTP host header：HTTP Status Code，Last Modified Time，Content Length).
 
 >**Note** that using the service check function does not guarantee that there are no anomalies in any of the CDN edge servers where the domain is located.
-
- 
 
 [1]: ./media/cdn-en-unified-portal/007.png
 [2]: ./media/cdn-en-unified-portal/008.png

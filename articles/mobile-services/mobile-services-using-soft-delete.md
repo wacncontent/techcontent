@@ -1,24 +1,23 @@
-<properties 
-	pageTitle="使用移动服务中的软删除（Windows 应用商店）| Azure" 
-	description="了解如何在你的应用程序中使用 Azure 移动服务软删除功能" 
-	documentationCenter="" 
-	authors="wesmc7777" 
-	manager="dwrede" 
-	editor="" 
-	services="mobile-services"/>
+---
+title: 使用移动服务中的软删除（Windows 应用商店）| Azure
+description: 了解如何在你的应用程序中使用 Azure 移动服务软删除功能
+documentationCenter: 
+authors: wesmc7777
+manager: dwrede
+editor: 
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="wesmc"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: wesmc
+---
 
 #  使用移动服务中的软删除
-
 
 ##概述
 
@@ -28,17 +27,12 @@
 
 软删除支持首次与 1.0.402 版 Azure 移动服务.NET 后端发布的.NET 后端。可以从 [Azure 移动服务.NET 后端](http://go.microsoft.com/fwlink/?LinkId=513165)获取最新的 NuGet 包。
 
-
 使用软删除的一些潜在优势：
 
 * 使用[移动服务的脱机数据同步]时，客户端 SDK 会自动查询已删除的记录，并将其从本地数据库中删除。如果不启用软删除，你需要在后端编写附加代码，以便客户端 SDK 知道要从本地存储中清除哪些记录。否则，客户端本地存储和后端将在这些已删除的记录方面发生不一致，而你必须调用客户端方法 `PurgeAsync()` 来清除本地存储。
 * 某些应用程序具有一项业务要求，即永远不以物理方式删除数据，或仅在已审核后删除数据。软删除功能在该场景中非常有用。
 * 软删除可被用于实施“取消删除”功能，以便可以恢复意外删除的数据。
 但是，软删除的记录会占用数据库中的空间，因此你应该考虑创建一个计划的作业定期硬删除软删除的记录。有关示例，请参阅[在 .NET 后端使用软删除](#using-with-dotnet)和[在 JavaScript 后端使用软删除](#using-with-javascript)。客户端代码也应定期调用 `PurgeAsync()`，以便这些硬删除的记录不会保留在设备的本地数据存储中。
-
-
-
-
 
 ## 启用面向.NET 后端的软删除
 
@@ -59,7 +53,6 @@
             DomainManager = new EntityDomainManager<TodoItem>(context, Request, Services, enableSoftDelete: true);
         }
 
-
 ## 启用面向 JavaScript 后端的软删除
 
 如果你正在为你的移动服务创建一个新表，那么你可以在表创建页面上启用软删除。
@@ -78,7 +71,6 @@
     ![][1]
 
 ##  <a name="using-with-dotnet"></a>在 .NET 后端使用软删除
-
 
 以下计划的作业清除存在时间超过一个月的软删除的记录：
 
@@ -105,10 +97,6 @@
             return Task.FromResult(true);
         }
     }
-
-
-
-
 
 ## <a name="using-with-javascript"></a>在 JavaScript 后端使用软删除
 
@@ -146,12 +134,6 @@
         }});
     }
 
-
-
-
-
-
-
 <!-- Images -->
 
 [0]: ./media/mobile-services-using-soft-delete/enable-soft-delete-button.png
@@ -161,7 +143,7 @@
 <!-- URLs. -->
 
 [SQL 位类型]: http://msdn.microsoft.com/zh-cn/library/ms177603.aspx
-[移动服务的脱机数据同步]: /documentation/articles/mobile-services-windows-store-dotnet-get-started-offline-data/
+[移动服务的脱机数据同步]: ./mobile-services-windows-store-dotnet-get-started-offline-data.md
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
 
 <!---HONumber=Mooncake_0118_2016-->

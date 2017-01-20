@@ -1,29 +1,28 @@
-<properties
-    pageTitle="开始使用 Azure Active Directory 和 Visual Studio 连接服务（MVC 项目）| Azure"
-    description="通过 Visual Studio 连接服务连接到或创建 Azure AD 之后，如何在 MVC 项目中开始使用 Azure Active Directory"
-    services="active-directory"
-    documentationcenter=""
-    author="TomArcher"
-    manager="douge"
-    editor="" />  
+---
+title: 开始使用 Azure Active Directory 和 Visual Studio 连接服务（MVC 项目）| Azure
+description: 通过 Visual Studio 连接服务连接到或创建 Azure AD 之后，如何在 MVC 项目中开始使用 Azure Active Directory
+services: active-directory
+documentationcenter: 
+author: TomArcher
+manager: douge
+editor: 
 
-<tags
-    ms.assetid="1c8b6a58-5144-4965-a905-625b9ee7b22b"
-    ms.service="active-directory"
-    ms.workload="web"
-    ms.tgt_pltfrm="vs-getting-started"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/18/2016"
-    wacn.date="01/05/2017"
-    ms.author="tarcher" />  
-
+ms.assetid: 1c8b6a58-5144-4965-a905-625b9ee7b22b
+ms.service: active-directory
+ms.workload: web
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: na
+ms.topic: article
+ms.date: 11/18/2016
+wacn.date: 01/05/2017
+ms.author: tarcher
+---
 
 # 开始使用 Azure Active Directory 和 Visual Studio 连接服务（MVC 项目）
 
-> [AZURE.SELECTOR]
-> - [入门](/documentation/articles/vs-active-directory-dotnet-getting-started/)
-> - [发生了什么情况](/documentation/articles/vs-active-directory-dotnet-what-happened/)
+> [!div class="op_single_selector"]
+> - [入门](./vs-active-directory-dotnet-getting-started.md)
+> - [发生了什么情况](./vs-active-directory-dotnet-what-happened.md)
  
 ## 访问控制器需要身份验证 
 
@@ -77,6 +76,6 @@
     &lt;/html&gt;
 </pre>
 
-[详细了解 Azure Active Directory](/home/features/identity/)
+[详细了解 Azure Active Directory](https://www.azure.cn/home/features/identity/)
 
 <!---HONumber=Mooncake_1226_2016-->

@@ -1,26 +1,23 @@
-<properties 
-	pageTitle="如何使用 Azure 经典管理门户管理 Azure 媒体服务的媒体内容" 
-	description="了解如何管理 Azure 媒体服务中的媒体内容。包括：上传、编制索引、编码、加密以及发布。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 如何使用 Azure 经典管理门户管理 Azure 媒体服务的媒体内容
+description: 了解如何管理 Azure 媒体服务中的媒体内容。包括：上传、编制索引、编码、加密以及发布。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="08/17/2016"  
-	wacn.date="12/27/2016"
-	ms.author="juliako"/>  
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/17/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 # 使用 Azure 经典管理门户管理 Azure 媒体服务的内容
-
 
 本主题说明如何使用 Azure 经典管理门户来管理媒体服务帐户中的媒体内容。
 
@@ -34,12 +31,9 @@
 - 发布/取消发布内容
 - 播放内容
 
-
 ##<a id="upload"></a>如何：上传内容
 
-
-[AZURE.INCLUDE [media-services-selector-upload-files](../../includes/media-services-selector-upload-files.md)]
-
+[!INCLUDE [media-services-selector-upload-files](../../includes/media-services-selector-upload-files.md)]
 
 1. 在 [Azure 经典管理门户](http://manage.windowsazure.cn)中，单击“媒体服务”，然后单击媒体服务帐户名。
 2. 选择“内容”页。 
@@ -61,11 +55,11 @@
 
 ##<a id="index"></a>如何：为内容编制索引
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/media-services-index-content/)
-- [门户](/documentation/articles/media-services-manage-content/#index)
+> [!div class="op_single_selector"]
+- [.NET](./media-services-index-content.md)
+- [门户](./media-services-manage-content.md#index)
 
-使用 Azure 媒体索引器，可以使媒体文件内容可供搜索，并为隐藏的字幕和关键字生成全文本脚本。可根据下面所示的步骤，使用 Azure 经典管理门户为内容编制索引。但是，如果想以更大的力度控制文件和索引作业的完成方式，可以使用适用于 .NET 的媒体服务 SDK 或 REST API。有关详细信息，请参阅[使用 Azure 媒体索引器为媒体文件编制索引](/documentation/articles/media-services-index-content/)。
+使用 Azure 媒体索引器，可以使媒体文件内容可供搜索，并为隐藏的字幕和关键字生成全文本脚本。可根据下面所示的步骤，使用 Azure 经典管理门户为内容编制索引。但是，如果想以更大的力度控制文件和索引作业的完成方式，可以使用适用于 .NET 的媒体服务 SDK 或 REST API。有关详细信息，请参阅[使用 Azure 媒体索引器为媒体文件编制索引](./media-services-index-content.md)。
 
 下面的步骤演示如何使用 Azure 经典管理门户为内容编制索引。
 
@@ -81,10 +75,10 @@
 
 ##<a id="encode"></a>如何：对内容进行编码
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/media-services-dotnet-encode-with-media-encoder-standard/)
-- [REST](/documentation/articles/media-services-rest-encode-asset/)
-- [门户](/documentation/articles/media-services-manage-content/#encode)
+> [!div class="op_single_selector"]
+- [.NET](./media-services-dotnet-encode-with-media-encoder-standard.md)
+- [REST](./media-services-rest-encode-asset.md)
+- [门户](./media-services-manage-content.md#encode)
 
 若要通过 Internet 传送数字视频，必须对媒体进行压缩。媒体服务提供了一个 Media Encoder ，可让你指定如何为内容编码（例如，要使用的编解码器、文件格式、分辨率和比特率。）
 
@@ -95,7 +89,7 @@
 若要使用动态打包，必须执行下列操作：
 
 - 将夹层（源）文件编码成一组自适应比特率 MP4 文件或自适应比特率平滑流文件（本教程稍后将演示编码步骤）。
-- 针对你要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](/documentation/articles/media-services-manage-origins/#scale_streaming_endpoints)。
+- 针对你要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
 通过动态打包，只需要存储及支付一种存储格式的文件，媒体服务就会根据客户端的要求创建并提供适当的响应。
 
@@ -112,8 +106,6 @@
 
 	![Process2][process2]  
 
-
-
 	[媒体编码器标准版的任务预设字符串](https://msdn.microsoft.com/zh-cn/library/mt269960)主题说明了每个预设的含义。
 
 4. 然后，输入所需的友好输出内容名称或接受默认值。然后，单击复选按钮开始编码操作。可在门户底部跟踪进度。
@@ -127,13 +119,11 @@
 
 ##<a id="encrypt"></a>如何：对内容进行加密
 
-
 如果希望媒体服务采用 AES 密钥或 PlayReady DRM 动态加密资产，请确保执行以下操作：
 
 - 将夹层（源）文件编码成一组自适应比特率 MP4 文件或自适应比特率平滑流式处理文件（编码步骤将在[编码](#encode)部分演示）。
-- 针对要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](/documentation/articles/media-services-manage-origins/#scale_streaming_endpoints)。
-- 配置“默认 aes 明文密钥服务策略”或“默认 playready 许可证服务策略”。有关详细信息，请参阅[配置内容密钥授权策略](/documentation/articles/media-services-portal-configure-content-key-auth-policy/)。
-
+- 针对要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](./media-services-manage-origins.md#scale_streaming_endpoints)。
+- 配置“默认 aes 明文密钥服务策略”或“默认 playready 许可证服务策略”。有关详细信息，请参阅[配置内容密钥授权策略](./media-services-portal-configure-content-key-auth-policy.md)。
 
 	准备好启用加密后，请按“内容”页底部的“加密”按钮。
 
@@ -143,15 +133,15 @@
 
 另请参阅：
 
-- [使用 PlayReady DRM 进行保护](/documentation/articles/media-services-rest-deliver-streaming-content/)
-- [使用 AES-128 密钥进行保护](/documentation/articles/media-services-protect-with-aes128/)
+- [使用 PlayReady DRM 进行保护](./media-services-rest-deliver-streaming-content.md)
+- [使用 AES-128 密钥进行保护](./media-services-protect-with-aes128.md)
 
 ##<a id="publish"></a>如何：发布内容
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/media-services-deliver-streaming-content/)
-- [REST](/documentation/articles/media-services-rest-deliver-streaming-content/)
-- [门户](/documentation/articles/media-services-manage-content/#publish)
+> [!div class="op_single_selector"]
+- [.NET](./media-services-deliver-streaming-content.md)
+- [REST](./media-services-rest-deliver-streaming-content.md)
+- [门户](./media-services-manage-content.md#publish)
 
 ###概述
 
@@ -175,10 +165,9 @@ SAS URL 采用以下格式：
 
 	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
 
-
 附带到期日期的定位符。使用门户发布资产时，会创建到期日期在 100 年以后的定位符。
 
->[AZURE.NOTE] 如果在 2015 年 3 月之前使用了门户创建定位符，则会创建到期日期在两年以后的定位符。
+>[!NOTE] 如果在 2015 年 3 月之前使用了门户创建定位符，则会创建到期日期在两年以后的定位符。
 
 若要更新定位符的到期日期，请使用 [REST](https://docs.microsoft.com/zh-cn/rest/api/media/operations/locator) 或 [.NET] (https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.ilocator.update(v=azure.10).aspx) API。请注意，更新 SAS 定位符的到期日期时，URL 会发生变化。
 
@@ -190,8 +179,6 @@ SAS URL 采用以下格式：
 2. 然后单击“发布”按钮。
 	
  ![PublishedContent][publishedcontent]  
-
-
 
 ## 如何：从门户播放内容
 
@@ -205,7 +192,6 @@ SAS URL 采用以下格式：
 - **媒体服务内容播放器**从默认的流式处理终结点播放。如果要从非默认流式处理终结点播放，请使用其他播放器。例如 [Azure 媒体服务播放器](http://amsplayer.azurewebsites.net/azuremediaplayer.html)。
 
 ![AMSPlayer][AMSPlayer]  
-
 
 <!-- Images -->
 

@@ -1,34 +1,32 @@
-<properties
-	pageTitle="使用 PowerShell 创建 Windows VM | Azure"
-	description="使用 Azure PowerShell 和经典部署模型创建 Windows 虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="cynthn"
-	manager="timlt"
-	editor=""
-	tags="azure-service-management"/>
+---
+title: 使用 PowerShell 创建 Windows VM | Azure
+description: 使用 Azure PowerShell 和经典部署模型创建 Windows 虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: cynthn
+manager: timlt
+editor: 
+tags: azure-service-management
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="01/05/2017"
-	ms.author="cynthn"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 01/05/2017
+ms.author: cynthn
+---
 
 # 使用 Powershell 和经典部署模型创建 Windows 虚拟机 
 
-> [AZURE.SELECTOR]
-- [Azure 经典管理门户](/documentation/articles/virtual-machines-windows-classic-tutorial/)
-- [PowerShell - Windows](/documentation/articles/virtual-machines-windows-classic-create-powershell/)
+> [!div class="op_single_selector"]
+- [Azure 经典管理门户](./virtual-machines-windows-classic-tutorial.md)
+- [PowerShell - Windows](./virtual-machines-windows-classic-create-powershell.md)
 
 <br>
 
-
-> [AZURE.IMPORTANT] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。学习如何[使用资源管理器模型执行这些步骤](/documentation/articles/virtual-machines-windows-ps-create/)。
-
+> [!IMPORTANT] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。学习如何[使用资源管理器模型执行这些步骤](./virtual-machines-windows-ps-create.md)。
 
 这些步骤演示了如何使用构建基块方法自定义一组 Azure PowerShell 命令以创建和预配置基于 Windows 的 Azure 虚拟机。可以使用此过程快速创建用于基于 Windows 的新虚拟机的命令集并扩展现有部署，或者创建多个命令集以快速构建出自定义开发/测试或 IT 专业环境。
 
@@ -100,7 +98,7 @@
 	$availset="<set name>"
 	$vm1=New-AzureVMConfig -Name $vmname -InstanceSize $vmsize -ImageName $image -AvailabilitySetName $availset
 
-有关 D、DS 或 G 系列虚拟机的 InstanceSize 值，请参阅 [Azure 的虚拟机和云服务大小](/documentation/articles/cloud-services-sizes-specs/)。
+有关 D、DS 或 G 系列虚拟机的 InstanceSize 值，请参阅 [Azure 的虚拟机和云服务大小](../cloud-services/cloud-services-sizes-specs.md)。
 
 （可选）为独立 Windows 计算机指定本地管理员帐户和密码。
 
@@ -256,9 +254,8 @@
 	$vnetname="AZDatacenter"
 	New-AzureVM -ServiceName $svcname -VMs $vm1 -VNetName $vnetname
 
-
 ## 后续步骤
 
-如果需要大于 127 GB 的操作系统磁盘，你可以[展开操作系统驱动器](/documentation/articles/virtual-machines-windows-expand-os-disk/)。
+如果需要大于 127 GB 的操作系统磁盘，你可以[展开操作系统驱动器](./virtual-machines-windows-expand-os-disk.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

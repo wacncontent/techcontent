@@ -1,17 +1,17 @@
-<properties
-	pageTitle="如何通过修改注册表的方式解锁被锁定的用户"
-	description="通过修改注册表的方式修复意外操作导致用户的锁定"
-	services="virtual-machines"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags="虚拟机,regedit,SAM"/>
+---
+title: 如何通过修改注册表的方式解锁被锁定的用户
+description: 通过修改注册表的方式修复意外操作导致用户的锁定
+services: virtual-machines
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 虚拟机,regedit,SAM
 
-<tags
-    ms.service="virtual-machines-aog"
-    ms.date="12/08/2016"
-    wacn.date="12/08/2016"/>
+ms.service: virtual-machines-aog
+ms.date: 12/08/2016
+wacn.date: 12/08/2016
+---
 
 # 如何通过修改注册表的方式解锁被锁定的用户 #
 
@@ -50,7 +50,6 @@
 
 	![0038-11](./media/aog-virtual-machines-qa-regedit-modification-unlock-user/0038-11.png)
 	![0038-10](./media/aog-virtual-machines-qa-regedit-modification-unlock-user/0038-10.png)
-
 
 16. 返回选择 SAM_TEMP，点击左上角 FILE 菜单,选择 Unload Hive，点击 Yes 确认；
 17. 分离磁盘，并基于该磁盘新建虚拟机，再次尝试用相同的用户登陆该虚拟机。

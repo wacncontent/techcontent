@@ -1,23 +1,22 @@
-<properties
-    pageTitle="教程：在 Azure 存储中使用 Azure 密钥保管库加密和解密 Blob | Azure"
-    description="本教程指导用户如何将 Azure 存储的客户端加密与 Azure 密钥保管库配合使用来加密和解密 blob。"
-    services="storage"
-    documentationcenter=""
-    author="robinsh"
-    manager="carmonm"
-    editor="tysonn" />  
+---
+title: 教程：在 Azure 存储中使用 Azure 密钥保管库加密和解密 Blob | Azure
+description: 本教程指导用户如何将 Azure 存储的客户端加密与 Azure 密钥保管库配合使用来加密和解密 blob。
+services: storage
+documentationcenter: 
+author: robinsh
+manager: carmonm
+editor: tysonn
 
-<tags
-    ms.assetid="027e8631-c1bf-48c1-9d9b-f6843e88b583"
-    ms.service="storage"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="required"
-    ms.date="10/18/2016"
-    wacn.date="12/05/2016"
-    ms.author="lakasa;robinsh" />  
-
+ms.assetid: 027e8631-c1bf-48c1-9d9b-f6843e88b583
+ms.service: storage
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: required
+ms.date: 10/18/2016
+wacn.date: 12/05/2016
+ms.author: lakasa;robinsh
+---
 
 # 教程：在 Azure 存储空间中使用 Azure 密钥保管库加密和解密 Blob
 ## 介绍
@@ -25,9 +24,9 @@
 
 **估计完成时间**：20 分钟。
 
-有关 Azure 密钥保管库的概述信息，请参阅[什么是 Azure 密钥保管库？](/documentation/articles/key-vault-whatis/)
+有关 Azure 密钥保管库的概述信息，请参阅[什么是 Azure 密钥保管库？](../key-vault/key-vault-whatis.md)
 
-有关 Azure 存储的客户端加密的概述信息，请参阅 [Azure 存储的客户端加密和 Azure 密钥保管库](/documentation/articles/storage-client-side-encryption/)
+有关 Azure 存储的客户端加密的概述信息，请参阅 [Azure 存储的客户端加密和 Azure 密钥保管库](./storage-client-side-encryption.md)
 
 ## 先决条件
 若要完成本教程，必须具备以下项目：
@@ -37,7 +36,7 @@
 * Azure PowerShell
 
 ## 客户端加密概述
-有关 Azure 存储的客户端加密的概述，请参阅 [Azure 存储的客户端加密和 Azure 密钥保管库](/documentation/articles/storage-client-side-encryption/)
+有关 Azure 存储的客户端加密的概述，请参阅 [Azure 存储的客户端加密和 Azure 密钥保管库](./storage-client-side-encryption.md)
 
 下面是客户端加密的工作原理的简要说明：
 
@@ -47,7 +46,7 @@
 4. 然后，将已加密的数据上传到 Azure 存储服务。
 
 ## 设置 Azure 密钥保管库
-若要继续本教程，需要执行 [Azure 密钥保管库入门](/documentation/articles/key-vault-get-started/)教程中所述的以下步骤：
+若要继续本教程，需要执行 [Azure 密钥保管库入门](../key-vault/key-vault-get-started.md)教程中所述的以下步骤：
 
 * 创建密钥保管库。
 * 将密钥或密码添加到密钥保管库。
@@ -71,7 +70,6 @@
 	Install-Package Microsoft.Azure.KeyVault
 	Install-Package Microsoft.Azure.KeyVault.Extensions
 
-
 将 AppSettings 添加到 App.Config。
 
 	<appSettings>
@@ -92,7 +90,6 @@
 	using Microsoft.Azure.KeyVault;
 	using System.Threading;		
 	using System.IO;
-
 
 ## 添加方法以便为控制台应用程序获取令牌
 以下方法由密钥保管库类使用，这些类需要进行身份验证才能访问密钥保管库。
@@ -127,8 +124,7 @@
 	// This is where the GetToken method from above is used.
 	KeyVaultKeyResolver cloudResolver = new KeyVaultKeyResolver(GetToken);
 
-
-> [AZURE.NOTE] 密钥保管库对象模型
+> [!NOTE] 密钥保管库对象模型
 >
 >务必了解，实际上有两个密钥保管库对象模型：一个基于 REST API（KeyVault 命名空间），另一个是客户端加密的扩展。
 
@@ -136,16 +132,13 @@
 
 > 密钥保管库扩展似乎是专为 Azure 存储中的客户端加密而创建的类。根据密钥解析程序的概念，它们包含密钥 (IKey) 和类的接口。需要了解两种 IKey 实现：RSAKey 和 SymmetricKey。现在它们碰巧与密钥保管库中包含的内容保持一致，但此时它们是独立的类（因此，密钥保管库客户端检索到的密钥与秘密检索未实现 IKey）。
 
-
 ## 加密 Blob 和上传
 添加以下代码以加密 Blob 并将其上传到 Azure 存储帐户。使用的 **ResolveKeyAsync** 方法会返回 IKey。
-
 
 	// Retrieve the key that you created previously.
 	// The IKey that is returned here is an RsaKey.
 	// Remember that we used the names contosokeyvault and testrsakey1.
     var rsa = cloudResolver.ResolveKeyAsync("https://contosokeyvault.vault.chinacloudapi.cn/keys/TestRSAKey1", CancellationToken.None).GetAwaiter().GetResult();
-
 
 	// Now you simply use the RSA key to encrypt by setting it in the BlobEncryptionPolicy.
 	BlobEncryptionPolicy policy = new BlobEncryptionPolicy(rsa, null);
@@ -158,15 +151,11 @@
 	using (var stream = System.IO.File.OpenRead(@"C:\data\MyFile.txt"))
 		blob.UploadFromStream(stream, stream.Length, null, options, null);
 
-
 下面是一个 blob 的 [Azure 经典管理门户](https://manage.windowsazure.cn)的屏幕截图，该 blob 已使用客户端加密通过密钥保管库中存储的密钥进行加密。**KeyId** 属性是密钥保管库中充当 KEK 的密钥的 URI。**EncryptedKey** 属性包含 CEK 的加密版本。
 
 ![显示包含加密元数据的 Blob 元数据的屏幕截图](./media/storage-encrypt-decrypt-blobs-key-vault/blobmetadata.png)
 
-
-> [AZURE.NOTE] 如果查看 BlobEncryptionPolicy 构造函数，将看到它可以接受密钥和/或解析程序。请注意，现在无法将解析程序用于加密，因为它当前不支持默认密钥。
-
-
+> [!NOTE] 如果查看 BlobEncryptionPolicy 构造函数，将看到它可以接受密钥和/或解析程序。请注意，现在无法将解析程序用于加密，因为它当前不支持默认密钥。
 
 ## 解密 Blob 并下载
 当使用解析程序类有意义时，实际上就是解密。用于加密的密钥的 ID 与其元数据中的 Blob 相关联，因此没有理由检索该密钥，请记住密钥与 Blob 之间的关联关系。只需确保该密钥保留在密钥保管库中。
@@ -183,9 +172,7 @@ RSA 密钥的私钥则保留在密钥保管库中，因此，为了进行解密�
     using (var np = File.Open(@"C:\data\MyFileDecrypted.txt", FileMode.Create))
 	    blob.DownloadToStream(np, null, options, null);
 
-
-> [AZURE.NOTE] 可以通过几个其他类型的解析程序来简化密钥管理，其中包括：AggregateKeyResolver 和 CachingKeyResolver。
-
+> [!NOTE] 可以通过几个其他类型的解析程序来简化密钥管理，其中包括：AggregateKeyResolver 和 CachingKeyResolver。
 
 ## 使用密钥保管库密码
 将密码用于客户端加密的方式是通过 SymmetricKey 类，因为密码实际上是一种对称密钥。但是，如上所述，密钥保管库中的密码不会完全映射到 SymmetricKey。这里要注意几个问题：

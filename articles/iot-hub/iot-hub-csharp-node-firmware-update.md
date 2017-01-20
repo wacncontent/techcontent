@@ -1,22 +1,19 @@
-<properties
-	pageTitle="如何通过 Azure IoT 中心进行固件更新"
-	description="本教程演示如何进行固件更新"
-	services="iot-hub"
-	documentationcenter=".net"
-	author="juanjperez"
-	manager="timlt"
-	editor=""/>  
+---
+title: 如何通过 Azure IoT 中心进行固件更新
+description: 本教程演示如何进行固件更新
+services: iot-hub
+documentationcenter: .net
+author: juanjperez
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="iot-hub"
-	ms.date="11/17/2016"
-	wacn.date="12/19/2016"/>  
-
-
+ms.service: iot-hub
+ms.date: 11/17/2016
+wacn.date: 12/19/2016
+---
 
 # 教程：如何进行固件更新
-[AZURE.INCLUDE [iot-hub-selector-firmware-update](../../includes/iot-hub-selector-firmware-update.md)]
+[!INCLUDE [iot-hub-selector-firmware-update](../../includes/iot-hub-selector-firmware-update.md)]
 
 ## 介绍
 在[设备管理入门][lnk-dm-getstarted]教程中，了解了如何使用[设备孪生][lnk-devtwin]和[云到设备 (C2D) 方法][lnk-c2dmethod]基元来远程重新启动设备。本教程使用相同的 IoT 中心基元，介绍如何进行端到端模拟固件更新。
@@ -38,11 +35,11 @@
 * Node.js 版本 0.12.x 或更高版本，<br/>[准备开发环境][lnk-dev-setup]介绍了如何在 Windows 或 Linux 上安装本教程所用的 Node.js。
 * 有效的 Azure 帐户。（如果没有帐户，只需花费几分钟就能创建一个[帐户][lnk-free-trial]。）
 
-按照[设备管理入门](/documentation/articles/iot-hub-csharp-node-device-management-get-started/)一文创建 IoT 中心并获取连接字符串。
+按照[设备管理入门](./iot-hub-csharp-node-device-management-get-started.md)一文创建 IoT 中心并获取连接字符串。
 
-[AZURE.INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
+[!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
 
-[AZURE.INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
+[!INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
 
 ## 使用直接方法在设备上触发远程固件更新
 在此部分中，会创建一个 .NET 控制台应用（使用 C#），它使用直接方法在设备上启动远程固件更新，并使用设备孪生查询定期获取该设备上活动固件更新的状态。
@@ -50,7 +47,6 @@
 1. 在 Visual Studio 中，使用“控制台应用程序”项目模板将 Visual C# Windows 经典桌面项目添加到当前解决方案。将项目命名为 **TriggerFWUpdate**。
 
     ![新的 Visual C# Windows 经典桌面项目][img-createapp]  
-
 
 2. 在解决方案资源管理器中，右键单击“TriggerFWUpdate”项目，然后单击“管理 NuGet 包”。
 3. 在“Nuget 包管理器”窗口中，选择“浏览”，搜索 **microsoft.azure.devices**，选择“安装”以安装 **Microsoft.Azure.Devices** 包，然后接受使用条款。此过程将下载、安装 [Microsoft Azure IoT Service SDK][lnk-nuget-service-sdk]（Microsoft Azure IoT 服务 SDK）NuGet 包及其依赖项并添加对它的引用。
@@ -110,8 +106,6 @@
   - 创建一个 Node.js 控制台应用，用于响应通过云调用的直接方法
   - 触发模拟的固件更新
   - 使用设备孪生报告的属性，允许通过设备孪生查询标识设备及其上次完成固件更新的时间
-
-
 
 1. 新建名为 **manageddevice** 的空文件夹。在 **manageddevice** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
    
@@ -314,7 +308,7 @@
     });
     ```
 
-> [AZURE.NOTE]
+> [!NOTE]
 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 > 
 > 
@@ -341,13 +335,13 @@
 [img-servicenuget]: ./media/iot-hub-csharp-node-firmware-update/servicesdknuget.png
 [img-createapp]: ./media/iot-hub-csharp-node-firmware-update/createnetapp.png
 
-[lnk-devtwin]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-c2dmethod]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-dm-getstarted]: /documentation/articles/iot-hub-node-node-device-management-get-started/
-[lnk-tutorial-jobs]: /documentation/articles/iot-hub-node-node-schedule-jobs/
+[lnk-devtwin]: ./iot-hub-devguide-device-twins.md
+[lnk-c2dmethod]: ./iot-hub-devguide-direct-methods.md
+[lnk-dm-getstarted]: ./iot-hub-node-node-device-management-get-started.md
+[lnk-tutorial-jobs]: ./iot-hub-node-node-schedule-jobs.md
 
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/node-devbox-setup.md
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-transient-faults]: https://msdn.microsoft.com/zh-cn/library/hh680901(v=pandp.50).aspx
 [lnk-rpi-implementation]: https://github.com/Azure/azure-iot-sdks/tree/master/c/iothub_client/samples/iothub_client_sample_mqtt_dm/pi_device
 [lnk-nuget-service-sdk]: https://www.nuget.org/packages/Microsoft.Azure.Devices/

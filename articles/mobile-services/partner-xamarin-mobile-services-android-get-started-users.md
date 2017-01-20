@@ -1,25 +1,25 @@
-<properties 
-	pageTitle="身份验证入门 (Xamarin.Android) - 移动服务" 
-	description="了解如何在 Xamarin.Android 的 Azure 移动服务应用程序中使用身份验证。" 
-	services="mobile-services" 
-	documentationCenter="xamarin" 
-	manager="dwrede" 
-	authors="lindydonna" 
-	editor=""/>
+---
+title: 身份验证入门 (Xamarin.Android) - 移动服务
+description: 了解如何在 Xamarin.Android 的 Azure 移动服务应用程序中使用身份验证。
+services: mobile-services
+documentationCenter: xamarin
+manager: dwrede
+authors: lindydonna
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-xamarin-android"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016" 
-	ms.author="donnam"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-android
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: donnam
+---
 
 #  向移动服务应用程序添加身份验证
 
-[AZURE.INCLUDE [mobile-services-selector-get-started-users](../../includes/mobile-services-selector-get-started-users.md)]
+[!INCLUDE [mobile-services-selector-get-started-users](../../includes/mobile-services-selector-get-started-users.md)]
 
 <p>本主题说明如何通过 Xamarin.Android 应用程序对 Azure 移动服务中的用户进行身份验证。在本教程中，你将要使用移动服务支持的标识提供程序向快速入门项目添加身份验证。在移动服务成功完成身份验证和授权后，将显示用户 ID 值。</p>
 
@@ -35,13 +35,11 @@
 
 ## <a name="register"></a>注册应用程序以进行身份验证并配置移动服务
 
-[AZURE.INCLUDE [mobile-services-register-authentication](../../includes/mobile-services-register-authentication.md)]
+[!INCLUDE [mobile-services-register-authentication](../../includes/mobile-services-register-authentication.md)]
 
 ## <a name="permissions"></a>将权限限制给已经过身份验证的用户
 
-
-[AZURE.INCLUDE [mobile-services-restrict-permissions-javascript-backend](../../includes/mobile-services-restrict-permissions-javascript-backend.md)]
-
+[!INCLUDE [mobile-services-restrict-permissions-javascript-backend](../../includes/mobile-services-restrict-permissions-javascript-backend.md)]
 
 3. 在 Xamarin Studio 中，打开你在完成[移动服务入门]教程后创建的项目。
 
@@ -74,7 +72,7 @@
 
     这将会创建一个用于处理身份验证过程的新方法。将使用 Microsoft 帐户登录对用户进行身份验证。此时将出现一个对话框，其中显示了已经过身份验证的用户的 ID。如果未正常完成身份验证，你将无法继续操作。
 
-    > [AZURE.NOTE] 如果使用的标识提供者不是 Microsoft，请将传递给上述 **login** 方法的值更改为WindowsAzureActiveDirectory。
+    > [!NOTE] 如果使用的标识提供者不是 Microsoft，请将传递给上述 **login** 方法的值更改为WindowsAzureActiveDirectory。
 
 3. 在 **OnCreate** 方法中，在实例化 `MobileServiceClient` 对象的代码后面添加以下代码行。
 
@@ -107,7 +105,6 @@
 
 		await CreateTable();
 
-
 6. 在“运行”菜单中单击“开始调试”以启动应用，然后使用所选的标识提供者登录。
 
    	当你成功登录时，应用应该运行而不出现错误，你应该能够查询移动服务，并对数据进行更新。
@@ -134,9 +131,7 @@
 [15]: ./media/partner-xamarin-mobile-services-android-get-started-users/mobile-portal-change-table-perms.png
 
 <!-- URLs. -->
-[移动服务入门]: /documentation/articles/partner-xamarin-mobile-services-android-get-started/
-[使用脚本为用户授权]: /documentation/articles/mobile-services-javascript-backend-service-side-authorization/
-
-
+[移动服务入门]: ./partner-xamarin-mobile-services-android-get-started.md
+[使用脚本为用户授权]: ./mobile-services-javascript-backend-service-side-authorization.md
 
 <!---HONumber=Mooncake_0118_2016-->

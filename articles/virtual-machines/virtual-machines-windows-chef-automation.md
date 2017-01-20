@@ -1,22 +1,22 @@
-<properties
-   pageTitle="使用 Chef 部署 Azure 虚拟机 | Azure"
-   description="了解如何使用 Chef 在 Azure 中自动执行虚拟机的部署和配置"
-   services="virtual-machines-windows"
-   documentationCenter=""
-   authors="diegoviso"
-   manager="timlt"
-   tags="azure-service-management,azure-resource-manager"
-   editor=""/>
+---
+title: 使用 Chef 部署 Azure 虚拟机 | Azure
+description: 了解如何使用 Chef 在 Azure 中自动执行虚拟机的部署和配置
+services: virtual-machines-windows
+documentationCenter: 
+authors: diegoviso
+manager: timlt
+tags: azure-service-management,azure-resource-manager
+editor: 
 
-<tags
-ms.service="virtual-machines-windows"
-ms.workload="infrastructure-services"
-ms.tgt_pltfrm="vm-multiple"
-ms.devlang="na"
-ms.topic="article"
-ms.date="05/19/2015"
-wacn.date="11/12/2015"
-ms.author="diviso"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-multiple
+ms.devlang: na
+ms.topic: article
+ms.date: 05/19/2015
+wacn.date: 11/12/2015
+ms.author: diviso
+---
 
 # 使用 Chef 自动执行 Azure 虚拟机部署
 
@@ -134,7 +134,6 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 
 ![][8]
 
-
 若要确保所有项都已正确配置，请运行：
 
 	knife azure image list
@@ -225,8 +224,6 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 
 希望这对你有所帮助！ 现在就使用 Azure 开始你的基础结构即代码之旅吧！
 
-
-
 <!--Image references-->
 [2]: ./media/virtual-machines-windows-chef-automation/2.png
 [3]: ./media/virtual-machines-windows-chef-automation/3.png
@@ -239,7 +236,6 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 [10]: ./media/virtual-machines-windows-chef-automation/10.png
 [11]: ./media/virtual-machines-windows-chef-automation/11.png
 [13]: ./media/virtual-machines-windows-chef-automation/13.png
-
 
 <!--Link references-->
 

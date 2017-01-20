@@ -1,31 +1,28 @@
-<properties
-	pageTitle="网络基础结构准则 | Azure"
-	description="了解用于在 Azure 基础结构服务中部署虚拟网络的关键设计和实施准则。"
-	documentationCenter=""
-	services="virtual-machines-linux"
-	authors="iainfoulds"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 网络基础结构准则 | Azure
+description: 了解用于在 Azure 基础结构服务中部署虚拟网络的关键设计和实施准则。
+documentationCenter: 
+services: virtual-machines-linux
+authors: iainfoulds
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/08/2016"
-	wacn.date="12/26/2016"
-	ms.author="iainfou"/>  
-
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 09/08/2016
+wacn.date: 12/26/2016
+ms.author: iainfou
+---
 
 # 网络基础结构准则
 
-[AZURE.INCLUDE [virtual-machines-linux-infrastructure-guidelines-intro](../../includes/virtual-machines-linux-infrastructure-guidelines-intro.md)]
+[!INCLUDE [virtual-machines-linux-infrastructure-guidelines-intro](../../includes/virtual-machines-linux-infrastructure-guidelines-intro.md)]
 
 本文重点介绍 Azure 内虚拟网络的必要计划步骤，以及现有本地环境之间的连接性。
-
 
 ## 虚拟网络的实施准则
 
@@ -43,10 +40,9 @@
 - 与本地网络团队合作，确保在创建跨界虚拟网络时配置适当的路由。
 - 使用命名约定创建虚拟网络。
 
-
 ## 虚拟网络
 
-需要通过虚拟网络来支持虚拟机 (VM) 之间的通信。与物理网络一样，可以定义子网、自定义 IP 地址、DNS 设置、安全筛选以及负载均衡。通过使用[站点到站点 VPN](/documentation/articles/vpn-gateway-about-vpngateways/) 或 [Express Route 线路](/documentation/articles/expressroute-introduction/)，可以将 Azure 虚拟网络连接到本地网络。你可以了解有关[虚拟网络及其组件](/documentation/articles/virtual-networks-overview/)的详细信息。
+需要通过虚拟网络来支持虚拟机 (VM) 之间的通信。与物理网络一样，可以定义子网、自定义 IP 地址、DNS 设置、安全筛选以及负载均衡。通过使用[站点到站点 VPN](../vpn-gateway/vpn-gateway-about-vpngateways.md) 或 [Express Route 线路](../expressroute/expressroute-introduction.md)，可以将 Azure 虚拟网络连接到本地网络。你可以了解有关[虚拟网络及其组件](../virtual-network/virtual-networks-overview.md)的详细信息。
 
 通过使用资源组，可以灵活地设计虚拟网络组件。VM 可以连接到其资源组之外的虚拟网络。常见的设计方法是创建可由一般小组管理且包含核心网络基础结构的集中式资源组。将 VM 及其应用程序部署到单独的资源组。此方法允许应用程序所有者访问包含其 VM 的资源组，而无需开放对更多虚拟网络资源的配置访问。
 
@@ -57,17 +53,14 @@
 
 ![仅限云的基本虚拟网络关系图](./media/virtual-machines-common-infrastructure-service-guidelines/vnet01.png)  
 
-
 此方法通常用于面向 Internet 的工作负荷，如基于 Internet 的 Web 服务器。你可以使用 SSH 或点到站点 VPN 连接来管理这些 VM。
 
 由于仅限 Azure 的虚拟网络未连接到本地网络，因此它们可以使用专用 IP 地址空间的任何部分。地址空间可以是正在本地使用的同一专用空间。
-
 
 ### 跨界虚拟网络
 如果本地用户和计算机需要持续连接到 Azure 虚拟网络中的 VM，则需创建跨界虚拟网络。使用 ExpressRoute 或站点到站点 VPN 连接将虚拟网络连接到本地网络。
 
 ![跨界虚拟网络关系图](./media/virtual-machines-common-infrastructure-service-guidelines/vnet02.png)  
-
 
 在此配置中，Azure 虚拟网络实质上是本地网络基于云的扩展。
 
@@ -90,26 +83,23 @@
 28-59 | 6 | /26
 60-123 | 7 | /25
 
-> [AZURE.NOTE] 对于普通的本地子网，具有 n 个主机位的子网的最大主机地址数为 2<sup>n</sup> - 2 个。对于 Azure 子网，具有 n 个主机位的子网的最大主机地址数为 2<sup>n</sup> - 5 个（2 + 3 作为 Azure 在每个子网上使用的地址数）。
+> [!NOTE] 对于普通的本地子网，具有 n 个主机位的子网的最大主机地址数为 2<sup>n</sup> - 2 个。对于 Azure 子网，具有 n 个主机位的子网的最大主机地址数为 2<sup>n</sup> - 5 个（2 + 3 作为 Azure 在每个子网上使用的地址数）。
 
 如果选择的子网大小太小，将需要对子网中的 VM 重新分配 IP 并重新进行部署。
 
-
 ## 网络安全组
-可以使用网络安全组，将筛选规则应用到流经虚拟网络的流量。可以生成精细的筛选规则来保护虚拟网络环境、控制入站和出站流量、源和目标 IP 范围、允许的端口，等等。网络安全组可以应用于虚拟网络内的子网，或直接应用于给定的虚拟网络接口。建议在虚拟网络上使用某个级别的网络安全组来筛选流量。你可以了解有关[网络安全组](/documentation/articles/virtual-networks-nsg/)的详细信息。
-
+可以使用网络安全组，将筛选规则应用到流经虚拟网络的流量。可以生成精细的筛选规则来保护虚拟网络环境、控制入站和出站流量、源和目标 IP 范围、允许的端口，等等。网络安全组可以应用于虚拟网络内的子网，或直接应用于给定的虚拟网络接口。建议在虚拟网络上使用某个级别的网络安全组来筛选流量。你可以了解有关[网络安全组](../virtual-network/virtual-networks-nsg.md)的详细信息。
 
 ## 附加网络组件
 与本地物理网络基础结构一样，Azure 虚拟网络除了子网和 IP 地址之外，还可以包含更多组件。在设计应用程序基础结构时，你可能会想引入以下某些附加组件：
 
-- [VPN 网关](/documentation/articles/vpn-gateway-about-vpngateways/) - 将 Azure 虚拟网络连接到其他 Azure 虚拟网络，或者通过站点到站点 VPN 连接连接到本地网络。为专用、安全的连接实现 Express Route 连接。还可以使用点到站点 VPN 连接为用户提供直接访问权限。
-- [负载均衡器](/documentation/articles/load-balancer-overview/) - 根据需要为外部和内部流量提供流量负载均衡。
-- [应用程序网关](/documentation/articles/application-gateway-introduction/) - 应用程序层的 HTTP 负载均衡，除了部署 Azure Load Balancer 之外，还能为 Web 应用程序提供一些额外的好处。
-- [流量管理器](/documentation/articles/traffic-manager-overview/) - 基于 DNS 的流量分配，可将最终用户定向到最接近的可用应用程序终结点，让你可以在不同区域内的 Azure 数据中心之外托管应用程序。
-
+- [VPN 网关](../vpn-gateway/vpn-gateway-about-vpngateways.md) - 将 Azure 虚拟网络连接到其他 Azure 虚拟网络，或者通过站点到站点 VPN 连接连接到本地网络。为专用、安全的连接实现 Express Route 连接。还可以使用点到站点 VPN 连接为用户提供直接访问权限。
+- [负载均衡器](../load-balancer/load-balancer-overview.md) - 根据需要为外部和内部流量提供流量负载均衡。
+- [应用程序网关](../application-gateway/application-gateway-introduction.md) - 应用程序层的 HTTP 负载均衡，除了部署 Azure Load Balancer 之外，还能为 Web 应用程序提供一些额外的好处。
+- [流量管理器](../traffic-manager/traffic-manager-overview.md) - 基于 DNS 的流量分配，可将最终用户定向到最接近的可用应用程序终结点，让你可以在不同区域内的 Azure 数据中心之外托管应用程序。
 
 ## <a name="next-steps"></a>后续步骤
 
-[AZURE.INCLUDE [virtual-machines-linux-infrastructure-guidelines-next-steps](../../includes/virtual-machines-linux-infrastructure-guidelines-next-steps.md)]
+[!INCLUDE [virtual-machines-linux-infrastructure-guidelines-next-steps](../../includes/virtual-machines-linux-infrastructure-guidelines-next-steps.md)]
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -1,28 +1,28 @@
-<properties 
-	pageTitle="在 Linux 上使用 Django 创建 Python Web 应用 | Azure" 
-	description="了解如何在 Azure 中使用 Linux 虚拟机托管基于 Django 的 Web 应用程序。" 
-	services="virtual-machines-linux" 
-	documentationCenter="python" 
-	authors="huguesv" 
-	manager="wpickett" 
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: 在 Linux 上使用 Django 创建 Python Web 应用 | Azure
+description: 了解如何在 Azure 中使用 Linux 虚拟机托管基于 Django 的 Web 应用程序。
+services: virtual-machines-linux
+documentationCenter: python
+authors: huguesv
+manager: wpickett
+editor: 
+tags: azure-resource-manager
 
-<tags 
-	ms.service="virtual-machines-linux" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="vm-linux" 
-	ms.devlang="python" 
-	ms.topic="article" 
-	ms.date="11/17/2015" 
-	wacn.date="06/13/2016" 
-	ms.author="huvalo"/>
-	
+ms.service: virtual-machines-linux
+ms.workload: web
+ms.tgt_pltfrm: vm-linux
+ms.devlang: python
+ms.topic: article
+ms.date: 11/17/2015
+wacn.date: 06/13/2016
+ms.author: huvalo
+---
+
 # Linux VM 上的 Django Hello World Web 应用程序
 
-> [AZURE.SELECTOR]
-- [Windows](/documentation/articles/virtual-machines-windows-classic-python-django-web-app/)
-- [Mac/Linux](/documentation/articles/virtual-machines-linux-python-django-web-app/)
+> [!div class="op_single_selector"]
+- [Windows](./virtual-machines-windows-classic-python-django-web-app.md)
+- [Mac/Linux](./virtual-machines-linux-python-django-web-app.md)
 
 <br>
 
@@ -39,19 +39,19 @@
 
 ![显示 Azure 上的 hello world 页面的浏览器窗口](./media/virtual-machines-linux-python-django-web-app/mac-linux-django-helloworld-browser.png)
 
-[AZURE.INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
+[!INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
 
 ## 创建并配置 Azure 虚拟机以托管 Django
 
-1. 按照[此处](/documentation/articles/virtual-machines-linux-quick-create-portal/)提供的说明可创建 Ubuntu Server 14.04 LTS 分发的 Azure 虚拟机。如果你喜欢，你可以选择密码登陆，而不是 SSH 公钥。
+1. 按照[此处](./virtual-machines-linux-quick-create-portal.md)提供的说明可创建 Ubuntu Server 14.04 LTS 分发的 Azure 虚拟机。如果你喜欢，你可以选择密码登陆，而不是 SSH 公钥。
 
-1. 按照[这里](/documentation/articles/virtual-networks-create-nsg-arm-ps/)的说明，编辑网络安全组，允许 http 访问端口 80
+1. 按照[这里](../virtual-network/virtual-networks-create-nsg-arm-ps.md)的说明，编辑网络安全组，允许 http 访问端口 80
 
-1. 默认情况下，你的心虚拟机没有完全限定域名（FQDN）。你可以按照[这里](/documentation/articles/virtual-machines-linux-portal-create-fqdn/)的说明，创建一个。这个步骤对于本教程而言只是可选的。
+1. 默认情况下，你的心虚拟机没有完全限定域名（FQDN）。你可以按照[这里](./virtual-machines-linux-portal-create-fqdn.md)的说明，创建一个。这个步骤对于本教程而言只是可选的。
 
 ## <a id="setup"> </a>设置开发环境
 
-**注意：**如果你需要安装 Python 或希望使用客户端库，请参阅 [Python 安装指南](/documentation/articles/python-how-to-install/)。
+**注意：**如果你需要安装 Python 或希望使用客户端库，请参阅 [Python 安装指南](../python-how-to-install.md)。
 
 Ubuntu Linux VM 已预安装了 Python 2.7，但它没有安装 Apache 或 Django。按照以下步骤可连接到你的 VM 并安装 Apache 和 Django。
 
@@ -69,7 +69,6 @@ Ubuntu Linux VM 已预安装了 Python 2.7，但它没有安装 Apache 或 Djang
 1.  输入以下带 mod-wsgi 的命令来安装 Apache：
 
 		$ sudo apt-get install apache2 libapache2-mod-wsgi
-
 
 ## 创建新的 Django 应用程序
 
@@ -99,7 +98,6 @@ Ubuntu Linux VM 已预安装了 Python 2.7，但它没有安装 Apache 或 Djang
 			url(r'^$', 'helloworld.views.home', name='home'),
 		)
 
-
 ## 设置 Apache
 
 1.  创建 Apache 虚拟主机配置文件 **/etc/apache2/sites-available/helloworld.conf**。将内容设置为以下项，并将 yourVmName 替换为你所使用的计算机的实际名称（例如 pyubuntu）。
@@ -121,7 +119,6 @@ Ubuntu Linux VM 已预安装了 Python 2.7，但它没有安装 Apache 或 Djang
 1.  最后，在你的浏览器中加载网页：
 
 	![显示 Azure 上的 hello world 页面的浏览器窗口](./media/virtual-machines-linux-python-django-web-app/mac-linux-django-helloworld-browser.png)
-
 
 ## 关闭你的 Azure 虚拟机
 

@@ -1,50 +1,49 @@
-<properties
-    pageTitle="捕获用作模板的 Linux VM | Azure"
-    description="了解如何捕获并通用化使用 Azure Resource Manager 部署模型创建的、基于 Linux 的 Azure 虚拟机 (VM) 的映像。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="iainfoulds"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 捕获用作模板的 Linux VM | Azure
+description: 了解如何捕获并通用化使用 Azure Resource Manager 部署模型创建的、基于 Linux 的 Azure 虚拟机 (VM) 的映像。
+services: virtual-machines-linux
+documentationcenter: 
+author: iainfoulds
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="e608116f-f478-41be-b787-c2ad91b5a802"
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/25/2016"
-    wacn.date="01/05/2017"
-    ms.author="iainfou" />  
-
+ms.assetid: e608116f-f478-41be-b787-c2ad91b5a802
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 10/25/2016
+wacn.date: 01/05/2017
+ms.author: iainfou
+---
 
 # 捕获 Azure 上运行的 Linux 虚拟机
-遵循本文中的步骤可在 Resource Manager 部署模型中通用化和捕获 Azure Linux 虚拟机 (VM)。通用化 VM 时，需删除个人帐户信息，并准备好要用作映像的 VM。然后捕获 OS 的通用化虚拟硬盘 (VHD) 映像、附加数据磁盘的 VHD 以及新 VM 部署的 [Resource Manager 模板](/documentation/articles/resource-group-overview/)。
+遵循本文中的步骤可在 Resource Manager 部署模型中通用化和捕获 Azure Linux 虚拟机 (VM)。通用化 VM 时，需删除个人帐户信息，并准备好要用作映像的 VM。然后捕获 OS 的通用化虚拟硬盘 (VHD) 映像、附加数据磁盘的 VHD 以及新 VM 部署的 [Resource Manager 模板](../azure-resource-manager/resource-group-overview.md)。
 
 若要使用映像创建 VM，请为每个新 VM 设置网络资源，然后使用模板（JavaScript 对象表示法 (JSON) 文件）从捕获的 VHD 映像部署该 VM。这样，便可以如同使用 Azure 应用商店中的映像一样，复制该 VM 及其当前软件配置。
 
-> [AZURE.TIP]
-如果想要创建现有 Linux VM 的副本（包括其专用化备份或调试状态），请参阅[创建在 Azure 上运行的 Linux 虚拟机副本](/documentation/articles/virtual-machines-linux-copy-vm/)。如果想要从本地 VM 上载 Linux VHD，请参阅[上载自定义磁盘映像并从其创建 Linux VM](/documentation/articles/virtual-machines-linux-upload-vhd/)。
+> [!TIP]
+如果想要创建现有 Linux VM 的副本（包括其专用化备份或调试状态），请参阅[创建在 Azure 上运行的 Linux 虚拟机副本](./virtual-machines-linux-copy-vm.md)。如果想要从本地 VM 上载 Linux VHD，请参阅[上载自定义磁盘映像并从其创建 Linux VM](./virtual-machines-linux-upload-vhd.md)。
 
 ## 开始之前
 请确保符合以下先决条件：
 
-* **在 Resource Manager 部署模型中创建的 Azure VM** - 如果尚未创建 Linux VM，可以使用[门户](/documentation/articles/virtual-machines-linux-quick-create-portal/)、[Azure CLI](/documentation/articles/virtual-machines-linux-quick-create-cli/) 或 [Resource Manager 模板](/documentation/articles/virtual-machines-linux-cli-deploy-templates/)。
+* **在 Resource Manager 部署模型中创建的 Azure VM** - 如果尚未创建 Linux VM，可以使用[门户](./virtual-machines-linux-quick-create-portal.md)、[Azure CLI](./virtual-machines-linux-quick-create-cli.md) 或 [Resource Manager 模板](./virtual-machines-linux-cli-deploy-templates.md)。
   
-    根据需要配置 VM。例如，[添加数据磁盘](/documentation/articles/virtual-machines-linux-add-disk/)、应用更新，并安装应用程序。
-* **Azure CLI** - 在本地计算机上安装 [Azure CLI](/documentation/articles/xplat-cli-install/)。
+    根据需要配置 VM。例如，[添加数据磁盘](./virtual-machines-linux-add-disk.md)、应用更新，并安装应用程序。
+* **Azure CLI** - 在本地计算机上安装 [Azure CLI](../xplat-cli-install.md)。
 
 ## 步骤 1：删除 Azure Linux 代理
-首先，在 Linux VM 上结合 **deprovision** 参数运行 **waagent** 命令。此命令将删除文件与数据，使 VM 准备好通用化。有关详细信息，请参阅 [Azure Linux 代理用户指南](/documentation/articles/virtual-machines-linux-agent-user-guide/)。
+首先，在 Linux VM 上结合 **deprovision** 参数运行 **waagent** 命令。此命令将删除文件与数据，使 VM 准备好通用化。有关详细信息，请参阅 [Azure Linux 代理用户指南](./virtual-machines-linux-agent-user-guide.md)。
 
 1. 使用 SSH 客户端连接到 Linux VM。
 2. 在 SSH 窗口中，键入以下命令：
 
         sudo waagent -deprovision+user
 
-   > [AZURE.NOTE]
+   > [!NOTE]
    仅在要捕获为映像的 VM 上运行此命令。不保证映像中的所有敏感信息被清除，或者映像适合用于分发。
  
 3. 键入 **y** 继续。添加 **-force** 参数即可免除此确认步骤。
@@ -53,7 +52,7 @@
 ## <a name="capture-the-vm" id="step-2-capture-the-vm"></a> 步骤 2：捕获 VM
 使用 Azure CLI 来通用化和捕获 VM。在以下示例中，请将示例参数名称替换为你自己的值。示例参数名称包括 **myResourceGroup**、**myVnet** 和 **myVM**。
 
-1. 从本计算机打开 Azure CLI 并[登录到你的 Azure 订阅](/documentation/articles/xplat-cli-connect/)。
+1. 从本计算机打开 Azure CLI 并[登录到你的 Azure 订阅](../xplat-cli-connect.md)。
 2. 请确保你处于 Resource Manager 模式。
 
         azure config mode arm
@@ -70,7 +69,7 @@
 
         azure vm capture -g myResourceGroup -n myVM -p myVHDNamePrefix -t myTemplate.json
 
-   > [AZURE.IMPORTANT]
+   > [!IMPORTANT]
    默认情况下，映像 VHD 文件在原始 VM 所用的相同存储帐户中创建。使用*同一个存储帐户*来存储从映像创建的所有新 VM 的 VHD。
 
 6. 若要查找捕获的映像的位置，请在文本编辑器中打开 JSON 模板。在 **storageProfile** 中，查找**系统**容器中**映像**的 **uri**。例如，OS 磁盘映像的 URI 类似于 `https://xxxxxxxxxxxxxx.blob.core.chinacloudapi.cn/system/Microsoft.Compute/Images/vhds/MyVHDNamePrefix-osDisk.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.vhd`
@@ -177,6 +176,6 @@
 对于其他命令选项，运行 `azure help vm create`。
 
 ## 后续步骤
-要使用 CLI 管理 VM，请参阅[使用 Azure 资源管理器模板和 Azure CLI 部署和管理虚拟机](/documentation/articles/virtual-machines-linux-cli-deploy-templates/)中的任务。
+要使用 CLI 管理 VM，请参阅[使用 Azure 资源管理器模板和 Azure CLI 部署和管理虚拟机](./virtual-machines-linux-cli-deploy-templates.md)中的任务。
 
 <!---HONumber=Mooncake_1212_2016-->

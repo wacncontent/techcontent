@@ -1,18 +1,17 @@
 
-<properties 
-   pageTitle="Azure SDK for .NET 2.7 和 .NET 2.7.1 发行说明" 
-   description="Azure SDK for .NET 2.7 和 .NET 2.7.1 发行说明" 
-   services="app-service\web" 
-   documentationCenter=".net" 
-   authors="Juliako" 
-   manager="dwrede" 
-   editor=""/>
+---
+title: Azure SDK for .NET 2.7 和 .NET 2.7.1 发行说明
+description: Azure SDK for .NET 2.7 和 .NET 2.7.1 发行说明
+services: app-service\web
+documentationCenter: .net
+authors: Juliako
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="app-service"
-	ms.date="01/19/2016"
-	wacn.date="03/28/2016"/>
-
+ms.service: app-service
+ms.date: 01/19/2016
+wacn.date: 03/28/2016
+---
 
 # Azure SDK for .NET 2.7 和 .NET 2.7.1 发行说明
 
@@ -34,7 +33,6 @@
 
 只能在 Visual Studio 2015 中使用 Azure SDK 2.7 附带的登录改进。Azure SDK 2.7.1 中附带了对 Visual Studio 2013 的支持。
 
-
 ###移动 SDK
 
 更新了 **Mobile Apps** 模板，以反映最新的 [NuGet 包](https://www.nuget.org/packages/Microsoft.Azure.Mobile.Server/)和设置过程。
@@ -45,7 +43,7 @@
 
 ###HDInsight 工具 
 
-此版本做了以下更新。这些更新目前以预览版提供。有关详细信息，请参阅[此博客](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/)。
+此版本做了以下更新。这些更新目前以预览版提供。有关详细信息，请参阅[此博客](./hdinsight/hdinsight-hadoop-visual-studio-tools-get-started.md)。
 
 - 为 Tez 上的 Hive 作业绘制 Hive 图形
 - 完全支持 Hive DML IntelliSense
@@ -54,8 +52,8 @@
 
 ####重大变化
 
-- 使用此版本的工具时，必须先升级旧的 **Storm** 项目。有关详细信息，请参阅[此博客](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/)。
-- 不再支持 Visual Studio Web Express。有关详细信息，请参阅[此博客](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/)。
+- 使用此版本的工具时，必须先升级旧的 **Storm** 项目。有关详细信息，请参阅[此博客](./hdinsight/hdinsight-hadoop-visual-studio-tools-get-started.md)。
+- 不再支持 Visual Studio Web Express。有关详细信息，请参阅[此博客](./hdinsight/hdinsight-hadoop-visual-studio-tools-get-started.md)。
 
 ###Azure Web 应用工具
 
@@ -68,7 +66,6 @@
 ####已知问题
 
 服务器资源管理器的“槽”节点下面不会出现 Web 应用部署槽节点，而云资源管理器下面不会加载 Web 应用部署槽的子节点。此问题已解决，下一个 SDK 版本将不再发生。
-
 
 ###<a id="cloud_explorer"></a>适用于 Visual Studio 2015 的云资源管理器
 
@@ -84,13 +81,11 @@ Azure SDK 2.7 包含适用于 Visual Studio 2015 的云资源管理器，可让�
 - 快速切换枚举资源时要使用的帐户（使用工具栏上的“设置”命令） 
 - 筛选枚举资源时要使用的订阅（使用工具栏上的“设置”命令） 
  
- 
 ###Azure 资源管理器工具 
 
 Azure 资源管理器工具已更新为使用基于角色的访问控制 (RBAC) 和新的订阅类型。除了经典存储之外，这些更改还附带了使用新存储帐户在部署期间存储项目的功能。
 
 如果在 SDK 2.7 中使用旧版 SDK 中的 Azure 资源组，则需要使用新的存储帐户而不是经典存储帐户来部署新的部署脚本。在你更改项目以添加新的脚本之前，系统会发出提示。旧脚本将重命名，你需要手动修改新的脚本。
- 
  
 ###存储资源管理器工具 
 

@@ -1,24 +1,21 @@
-<properties
-	pageTitle="Azure 通知中心"
-	description="了解如何在 Azure 中使用通知中心。代码示例是使用 .NET API 通过 C# 编写的。"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""
-	services="notification-hubs"
-	documentationCenter=""/>  
+---
+title: Azure 通知中心
+description: 了解如何在 Azure 中使用通知中心。代码示例是使用 .NET API 通过 C# 编写的。
+authors: wesmc7777
+manager: erikre
+editor: 
+services: notification-hubs
+documentationCenter: 
 
-
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="multiple"
-	ms.devlang="multiple"
-	ms.topic="hero-article"
-	ms.date="08/25/2016"
-	ms.author="wesmc"
-   	wacn.date="01/10/2017"/>  
-
-
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: multiple
+ms.devlang: multiple
+ms.topic: hero-article
+ms.date: 08/25/2016
+ms.author: wesmc
+wacn.date: 01/10/2017
+---
 
 #Azure 通知中心
 
@@ -35,8 +32,6 @@ Azure 通知中心提供易用的基础结构，使你能够从任何后端（�
 - 向体育/财经/游戏应用程序的用户或组发送事件通知。
 - 向用户通知企业事件，如新消息/电子邮件和销售商机。
 - 发送多重身份验证所需的一次性密码。
-
-
 
 ##什么是推送通知？
 
@@ -87,7 +82,6 @@ Azure 通知中心提供易用的基础结构，使你能够从任何后端（�
 
 ![][1]
 
-
 通知中心提供了随时可用的推送通知基础结构，该基础结构具有以下优势：
 
 - **多个平台。**
@@ -100,7 +94,6 @@ Azure 通知中心提供易用的基础结构，使你能够从任何后端（�
 - **适用于任何后端**：云或本地后端、.NET、PHP、Java、Node 等。
 
 - **扩展。** 通知中心可扩展到数百万台设备，并且无需重新架构或分片。
-
 
 - **丰富的传送模式集**：
 
@@ -117,7 +110,6 @@ Azure 通知中心提供易用的基础结构，使你能够从任何后端（�
 - **安全性**：共享访问机密 (SAS) 或联合身份验证。
 
 - **丰富的遥测功能**：可以在门户中或以编程方式使用。
-
 
 ##与 App Service Mobile Apps 集成 <a name="integration-with-app-service-mobile-apps"></a>
 
@@ -142,8 +134,6 @@ Mobile Apps 开发人员可以借助以下工作流来利用通知中心：
 
 - **[Azure 门户预览]中的集成体验。** Mobile Apps 以可视化方式呈现推送功能，开发人员可以通过 Mobile Apps 轻松使用关联的通知中心。
 
-
-
 ##后续步骤
 
 可以通过以下主题了解有关通知中心的更多信息：
@@ -159,19 +149,18 @@ Mobile Apps 开发人员可以借助以下工作流来利用通知中心：
 + [Microsoft.WindowsAzure.Messaging.NotificationHub]
 + [Microsoft.ServiceBus.Notifications]
 
-
   [0]: ./media/notification-hubs-overview/registration-diagram.png
   [1]: ./media/notification-hubs-overview/notification-hub-diagram.png
-  [客户如何使用通知中心]: /home/features/notification-hubs/
-  [通知中心教程和指南]: /documentation/services/notification-hubs/
-  [iOS]: /documentation/articles/notification-hubs-ios-apple-push-notification-apns-get-started/
-  [Windows Universal]: /documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/
-  [Windows Phone]: /documentation/articles/notification-hubs-windows-mobile-push-notifications-mpns/
-  [Kindle]: /documentation/articles/notification-hubs-kindle-amazon-adm-push-notification/
+  [客户如何使用通知中心]: https://www.azure.cn/home/features/notification-hubs/
+  [通知中心教程和指南]: ./index.md/
+  [iOS]: ./notification-hubs-ios-apple-push-notification-apns-get-started.md
+  [Windows Universal]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
+  [Windows Phone]: ./notification-hubs-windows-mobile-push-notifications-mpns.md
+  [Kindle]: ./notification-hubs-kindle-amazon-adm-push-notification.md
   [Microsoft.WindowsAzure.Messaging.NotificationHub]: http://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.messaging.notificationhub.aspx
   [Microsoft.ServiceBus.Notifications]: http://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.notifications.aspx
-  [应用服务移动应用]: /documentation/articles/app-service-mobile-value-prop/
-  [模板]: /documentation/articles/notification-hubs-templates-cross-platform-push-messages/
+  [应用服务移动应用]: ../app-service-mobile/app-service-mobile-value-prop.md
+  [模板]: ./notification-hubs-templates-cross-platform-push-messages.md
   [Azure 门户预览]: https://portal.azure.cn
   [标记]: http://msdn.microsoft.com/zh-cn/library/azure/dn530749.aspx
 

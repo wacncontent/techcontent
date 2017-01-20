@@ -1,23 +1,23 @@
-<properties
-    pageTitle="导出包含 VM 扩展的 Azure 资源组 | Azure"
-    description="导出包含虚拟机扩展的 Resource Manager 模板。"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    author="neilpeterson"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="7f4e2ca6-f1c7-4f59-a2cc-8f63132de279"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="infrastructure-services"
-    ms.date="12/05/2016"
-    wacn.date="01/13/2017"
-    ms.author="nepeters" />  
+---
+title: 导出包含 VM 扩展的 Azure 资源组 | Azure
+description: 导出包含虚拟机扩展的 Resource Manager 模板。
+services: virtual-machines-windows
+documentationcenter: 
+author: neilpeterson
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
+ms.assetid: 7f4e2ca6-f1c7-4f59-a2cc-8f63132de279
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 12/05/2016
+wacn.date: 01/13/2017
+ms.author: nepeters
+---
 
 # 导出包含 VM 扩展的资源组
 
@@ -49,7 +49,6 @@
 4. 在“资源组”边栏选项卡中，单击“自动化脚本”
 
 ![模板导出](./media/virtual-machines-windows-extensions-export-templates/template-export.png)  
-
 
 Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一个参数文件以及多个示例部署脚本（例如 PowerShell 和 Azure CLI）。目前可以使用下载按钮下载导出的模板、将其作为新模板添加到模板库，或使用部署按钮重新对其进行部署。
 
@@ -134,7 +133,7 @@ Azure Resource Manager 自动化脚本生成一个 Resource Manager 模板、一
         }
     }
 
-如果使用模板参数提供属性值，则需创建这些参数。为受保护的设置值创建模板参数时，请确保使用 `SecureObject` 参数类型，以便保护敏感值。如需详细了解如何使用参数，请参阅[创作 Azure Resource Manager 模板](/documentation/articles/resource-group-authoring-templates/)。
+如果使用模板参数提供属性值，则需创建这些参数。为受保护的设置值创建模板参数时，请确保使用 `SecureObject` 参数类型，以便保护敏感值。如需详细了解如何使用参数，请参阅[创作 Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)。
 
 以 `IaasDiagnostic` 扩展为例，将在 Resource Manager 模板的参数部分创建以下参数。
 

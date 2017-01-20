@@ -1,21 +1,21 @@
-<properties
-	pageTitle="查看事件和审核日志"
-	description="了解如何查看 Azure 订阅中发生的所有事件。"
-	authors="rboucher"
-	manager=""
-	editor=""
-	services="azure-portal" 
-	documentationCenter="na"/>
+---
+title: 查看事件和审核日志
+description: 了解如何查看 Azure 订阅中发生的所有事件。
+authors: rboucher
+manager: 
+editor: 
+services: azure-portal
+documentationCenter: na
 
-<tags
-	ms.service="azure-portal"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="04/28/2015"
-	wacn.date="12/05/2016"
-	ms.author="robb"/>
+ms.service: azure-portal
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 04/28/2015
+wacn.date: 12/05/2016
+ms.author: robb
+---
 
 # 查看事件和活动日志
 
@@ -30,7 +30,7 @@
 3. 此时会打开一个边栏选项卡，其中显示过去 7 天影响任何订阅的所有事件。顶部是一个按级别显示数据的图表，下部是日志的完整列表：
     ![所有事件](./media/insights-debugging-with-events/Insights_AllEvents.png)
 
-    >[AZURE.NOTE] 在 Azure 门户预览中只能查看给定订阅的 500 个最新事件。
+    >[!NOTE] 在 Azure 门户预览中只能查看给定订阅的 500 个最新事件。
 
 4. 可以单击任何日志条目来查看组成它的事件。例如，向资源组部署某种内容时，可能会创建或修改许多不同的资源。对于每个条目，可以查看：
     * 事件的“级别”— 例如，可能只是要跟踪的某种内容（“信息”），或是当出现了需要了解的错误内容时（“错误”）。
@@ -75,9 +75,8 @@
 
 ## 后续步骤
 
-* 发生事件时[接收警报通知](/documentation/articles/insights-receive-alert-notifications/)。
-* [监视服务指标](/documentation/articles/insights-how-to-customize-monitoring/)以确保你的服务可用且响应迅速。
-* [跟踪服务运行状况](/documentation/articles/insights-service-health/)以在 Azure 遇到性能下降或服务中断时及时发现。  
-
+* 发生事件时[接收警报通知](./insights-receive-alert-notifications.md)。
+* [监视服务指标](./insights-how-to-customize-monitoring.md)以确保你的服务可用且响应迅速。
+* [跟踪服务运行状况](./insights-service-health.md)以在 Azure 遇到性能下降或服务中断时及时发现。  
 
 <!---HONumber=Mooncake_0503_2016-->

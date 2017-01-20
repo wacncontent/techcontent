@@ -1,40 +1,38 @@
-<properties
-    pageTitle="通过资源管理器部署模型使用 Azure 备份将 Windows Server 或客户端备份到 Azure | Azure"
-    description="通过创建备份保管库、下载凭据、安装备份代理并完成文件和文件夹的初始备份，将 Windows 服务器或客户端备份到 Azure。"
-    services="backup"
-    documentationcenter=""
-    author="markgalioto"
-    manager="cfreeman"
-    editor=""
-    keywords="备份保管库; 备份 Windows 服务器; 备份 windows;" />  
+---
+title: 通过资源管理器部署模型使用 Azure 备份将 Windows Server 或客户端备份到 Azure | Azure
+description: 通过创建备份保管库、下载凭据、安装备份代理并完成文件和文件夹的初始备份，将 Windows 服务器或客户端备份到 Azure。
+services: backup
+documentationcenter: 
+author: markgalioto
+manager: cfreeman
+editor: 
+keywords: 备份保管库; 备份 Windows 服务器; 备份 windows;
 
-<tags
-    ms.assetid="7f5b1943-b3c1-4ddb-8fb7-3560533c68d5"
-    ms.service="backup"
-    ms.workload="storage-backup-recovery"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/16/2016"
-    wacn.date="01/06/2017"
-    ms.author="jimpark; trinadhk; markgal" />  
-
+ms.assetid: 7f5b1943-b3c1-4ddb-8fb7-3560533c68d5
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/16/2016
+wacn.date: 01/06/2017
+ms.author: jimpark; trinadhk; markgal
+---
 
 # 通过资源管理器部署模型将 Windows Server 或客户端备份到 Azure
 
-> [AZURE.SELECTOR]
-- [资源管理器](/documentation/articles/backup-configure-vault/)
-- [经典部署模型](/documentation/articles/backup-configure-vault-classic/)
+> [!div class="op_single_selector"]
+- [资源管理器](./backup-configure-vault.md)
+- [经典部署模型](./backup-configure-vault-classic.md)
 
 本文介绍如何通过资源管理器部署模型使用 Azure 备份将 Windows Server（或 Windows 客户端）文件和文件夹备份到 Azure。
 
-[AZURE.INCLUDE [了解部署模型](../../includes/backup-deployment-models.md)]
+[!INCLUDE [了解部署模型](../../includes/backup-deployment-models.md)]
 
 ![备份过程的步骤](./media/backup-configure-vault/initial-backup-process.png)  
 
-
 ## 开始之前
-若要将服务器或客户端备份到 Azure，你需要一个 Azure 帐户。如果没有帐户，只需几分钟的时间就能创建一个[试用帐户](/pricing/1rmb-trial/)。
+若要将服务器或客户端备份到 Azure，你需要一个 Azure 帐户。如果没有帐户，只需几分钟的时间就能创建一个[试用帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 
 ## 步骤 1：创建恢复服务保管库
 恢复服务保管库是存储所有按时间创建的备份和恢复点的实体。恢复服务保管库还包含应用到受保护文件和文件夹的备份策略。在创建恢复服务保管库时，你还应选择适当的存储冗余选项。
@@ -57,14 +55,14 @@
 
         New-AzureRmRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "West US"
 
-4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](/documentation/articles/storage-redundancy/) 或[异地冗余存储 (GRS)](/documentation/articles/storage-redundancy/#geo-redundant-storage)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
+4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
 
         $vault1 = Get-AzureRmRecoveryServicesVault –Name "testVault"
         Set-AzureRmRecoveryServicesBackupProperties  -Vault $vault1 -BackupStorageRedundancy GeoRedundant
 
 ## 步骤 2 - 下载文件
 
->[AZURE.NOTE] 通过 Azure 门户预览启用备份功能即将推出。目前，可以使用本地 Azure 恢复服务代理备份文件和文件夹。
+>[!NOTE] 通过 Azure 门户预览启用备份功能即将推出。目前，可以使用本地 Azure 恢复服务代理备份文件和文件夹。
 
 #### 下载恢复服务代理
 
@@ -88,7 +86,7 @@
    - 提供已下载的保管库凭据
    - 将加密通行短语保存在安全的位置。
 
-    >[AZURE.NOTE] 如果你丢失或忘记了通行短语，Microsoft 无法帮助你恢复备份数据。请将文件保存在安全的位置。还原备份时需要用到此文件。
+    >[!NOTE] 如果你丢失或忘记了通行短语，Microsoft 无法帮助你恢复备份数据。请将文件保存在安全的位置。还原备份时需要用到此文件。
 
 现已安装代理，且已向保管库注册计算机。接下来可以配置和计划备份。
 
@@ -117,8 +115,7 @@
 
     ![Windows Server 备份项](./media/backup-configure-vault/specify-backup-schedule-close.png)  
 
-
-    >[AZURE.NOTE] 有关如何指定备份计划的详细信息，请参阅[使用 Azure 备份来取代磁带基础结构](/documentation/articles/backup-azure-backup-cloud-as-tape/)一文。
+    >[!NOTE] 有关如何指定备份计划的详细信息，请参阅[使用 Azure 备份来取代磁带基础结构](./backup-azure-backup-cloud-as-tape.md)一文。
 
 8. 在“选择保留策略”页上，为备份复制选择“保留策略”。
 
@@ -132,7 +129,7 @@
 ### <a name="enable-network-throttling"></a>启用网络限制
 备份代理提供网络限制。限制功能将控制数据传输期间的网络带宽使用方式。如果需要在上班时间内备份数据，但不希望备份程序干扰其他 Internet 流量，此控制机制很有帮助。限制适用于备份和还原活动。
 
->[AZURE.NOTE] 网络限制在 Windows Server 2008 R2 SP1、Windows Server 2008 SP2 或 Windows 7（带 Service Pack）上不可用。Azure 备份网络限制功能需要在本地操作系统上使用服务质量 (QoS)。虽然 Azure 备份可以保护这些操作系统，但这些平台上的可用 QoS 版本不兼容 Azure 备份网络限制。网络限制可用于所有其他[支持的操作系统](/documentation/articles/backup-azure-backup-faq/)。
+>[!NOTE] 网络限制在 Windows Server 2008 R2 SP1、Windows Server 2008 SP2 或 Windows 7（带 Service Pack）上不可用。Azure 备份网络限制功能需要在本地操作系统上使用服务质量 (QoS)。虽然 Azure 备份可以保护这些操作系统，但这些平台上的可用 QoS 版本不兼容 Azure 备份网络限制。网络限制可用于所有其他[支持的操作系统](./backup-azure-backup-faq.md)。
 
 **启用网络限制**
 
@@ -159,13 +156,12 @@
 
 ![IR 完成](./media/backup-configure-vault/ircomplete.png)  
 
-
 ## 有疑问？
 如果你有疑问，或者希望包含某种功能，请[给我们反馈](http://aka.ms/azurebackup_feedback)。
 
 ## 后续步骤
 有关备份 VM 或其他工作负荷的详细信息，请参阅：
 
-- 如果需要还原备份，请参阅[将文件还原到 Windows 计算机](/documentation/articles/backup-azure-restore-windows-server/)一文。
+- 如果需要还原备份，请参阅[将文件还原到 Windows 计算机](./backup-azure-restore-windows-server.md)一文。
 
 <!---HONumber=Mooncake_1212_2016-->

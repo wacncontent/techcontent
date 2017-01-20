@@ -1,27 +1,25 @@
-<properties
-	pageTitle="如何使用 Android 移动应用客户端库"
-	description="如何使用 Azure 移动应用的 Android 客户端 SDK。"
-	services="app-service\mobile"
-	documentationCenter="android"
-	authors="yuaxu"
-	manager="erikre"
-	editor=""/>  
+---
+title: 如何使用 Android 移动应用客户端库
+description: 如何使用 Azure 移动应用的 Android 客户端 SDK。
+services: app-service\mobile
+documentationCenter: android
+authors: yuaxu
+manager: erikre
+editor: 
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-android"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="12/02/2016"
-	ms.author="yuaxu"/>
-
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-android
+ms.devlang: java
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 12/02/2016
+ms.author: yuaxu
+---
 
 # 如何使用移动应用的 Android 客户端库
 
-[AZURE.INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
+[!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
 本指南说明如何使用用于移动应用的 Android 客户端 SDK 来实现常见方案，例如：
 
@@ -46,7 +44,7 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
 
 ## 安装与先决条件
 
-完成[移动应用快速入门](/documentation/articles/app-service-mobile-android-get-started/)教程。此任务可确保满足开发 Azure 移动应用的所有先决条件。快速入门还帮助配置帐户及创建第一个移动应用后端。
+完成[移动应用快速入门](./app-service-mobile-android-get-started.md)教程。此任务可确保满足开发 Azure 移动应用的所有先决条件。快速入门还帮助配置帐户及创建第一个移动应用后端。
 
 如果决定不完成快速入门教程，请完成以下任务：
 
@@ -191,7 +189,6 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
 	        android:text="@string/checkbox_text" />
 	</LinearLayout>
 
-
 #### <a name="adapter"></a>如何定义适配器
 
 此处视图的数据源是一个 **ToDoItem** 数组，因此我们需要基于 **ArrayAdapter<ToDoItem>** 类子类化适配器。此子类会使用 **row\_list\_to\_do** 布局为每个 **ToDoItem** 生成一个视图。
@@ -233,7 +230,6 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
                 }
             }
         });
-
 
 		return row;
 	}
@@ -356,7 +352,6 @@ ToDoItemAdapter 构造函数的第二个参数是对布局的引用。我们现�
 第一个示例说明如何选择表中的前 5 个项。该查询返回 **ToDoItems** 表中的项。**mToDoTable** 是对前面创建的后端表的引用。
 
     List<ToDoItem> result = mToDoTable.top(5).execute().get();
-
 
 以下查询跳过前 5 个项，返回接下来的 5 个项：
 
@@ -553,7 +548,7 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 教程已详细说明如何添加这些功能。
 
-应用服务支持使用各种外部标识提供者[对应用用户进行身份验证](/documentation/articles/app-service-mobile-android-get-started-users/)，这些提供者包括：Microsoft 帐户和 Azure Active Directory。你可以在表中设置权限，以便将特定操作的访问权限限制给已经过身份验证的用户。你还可以在后端中使用已经过身份验证的用户的标识来实施授权规则。
+应用服务支持使用各种外部标识提供者[对应用用户进行身份验证](./app-service-mobile-android-get-started-users.md)，这些提供者包括：Microsoft 帐户和 Azure Active Directory。你可以在表中设置权限，以便将特定操作的访问权限限制给已经过身份验证的用户。你还可以在后端中使用已经过身份验证的用户的标识来实施授权规则。
 
 支持两种身份验证流: **服务器**流和**客户端**流。服务器流依赖于标识提供者的 Web 界面，因此可提供最简单的身份验证体验。无需其他 SDK 即可实现服务器流身份验证。服务器流身份验证不会与移动设备深度集成，因此仅建议用于概念验证方案。
 
@@ -576,7 +571,6 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 使用 **getUserId** 方法从 **MobileServiceUser** 获取已登录用户的 ID。有关如何使用 Futures 调用异步登录 API 的示例，请参阅 [Get started with authentication]（身份验证入门）。
 
-
 ### <a name="caching"></a>如何缓存身份验证令牌
 
 缓存身份验证令牌需要将用户 ID 和身份验证令牌存储在设备本地。下次启动应用时，只需检查缓存，如果这些值存在，则可以跳过登录过程，并使用这些数据重新进入客户端。但是，这些数据是敏感的，为安全起见，应该以加密形式存储，以防手机失窃。
@@ -589,7 +583,7 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 可以借助 Active Directory 身份验证库 (ADAL) 使用 Azure Active Directory 将用户登录到应用程序。使用客户端流登录通常比使用 `loginAsync()` 方法更有利，因为它提供更直观的 UX 风格，并允许其他自定义。
 
-1. 根据 [How to configure App Service for Active Directory login](/documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/)（如何为 Active Directory 登录配置应用服务）教程中的说明，为 AAD 登录配置移动应用。请务必完成注册本机客户端应用程序的可选步骤。
+1. 根据 [How to configure App Service for Active Directory login](./app-service-mobile-how-to-configure-active-directory-authentication.md)（如何为 Active Directory 登录配置应用服务）教程中的说明，为 AAD 登录配置移动应用。请务必完成注册本机客户端应用程序的可选步骤。
 
 2. 通过修改 build.gradle 文件并包含以下定义来安装 ADAL：
 
@@ -681,7 +675,6 @@ Select 函数的参数是要返回的表列的字符串名称。
 		}
 		}
 
-
 ## 如何将推送通知添加到应用
 
 可以[阅读概述][6]，其中介绍了 Azure 通知中心如何支持各种推送通知。每次插入一条记录，都会向所有设备发送一条推送通知。
@@ -763,7 +756,6 @@ Select 函数的参数是要返回的表列的字符串名称。
 
 	mToDoTable = mClient.getTable("ToDoItemBackup", ToDoItem.class);
 
-
 ### <a name="conversions"></a>如何自动执行列名称映射
 
 可以使用 gson API，指定适用于每个列的转换策略。在发送数据到 Azure App Service 之前，Android 客户端库会在幕后使用 gson 将 Java 对象序列化为 JSON 数据。下面的代码使用 **setFieldNamingStrategy()** 方法设置策略。此示例会删除初始字符（“m”），然后将每个字段名称的下一个字符小写。例如，它会将“mId”变为“id”。
@@ -786,7 +778,6 @@ Select 函数的参数是要返回的表列的字符串名称。
 到目前为止，我们的序列化示例已涉及整数和字符串等基元类型。基元类型可轻松地序列化为 JSON。如果想要添加不会自动序列化为 JSON 的复杂对象，需要提供 JSON 序列化方法。若要查看如何提供自定义 JSON 序列化的示例，请阅读博客文章 [Customizing serialization using the gson library in the Mobile Services Android client][2]（在移动服务 Android 客户端中使用 gson 库自定义序列化）。
 
 <!-- Anchors. -->
-
 
 [What is Mobile Services]: #what-is
 [Concepts]: #concepts
@@ -822,27 +813,26 @@ Select 函数的参数是要返回的表列的字符串名称。
 <!-- Images. -->
 
 <!-- URLs. -->
-[Get started with Azure Mobile Apps]: /documentation/articles/app-service-mobile-android-get-started/
+[Get started with Azure Mobile Apps]: ./app-service-mobile-android-get-started.md
 [ASCII control codes C0 and C1]: http://en.wikipedia.org/wiki/Data_link_escape_character#C1_set
 [Mobile Services SDK for Android]: http://go.microsoft.com/fwlink/p/?LinkID=717033
 [Azure 门户预览]: https://portal.azure.cn
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
-[Get started with authentication]: /documentation/articles/app-service-mobile-android-get-started-users/
-[身份验证入门]: /documentation/articles/app-service-mobile-android-get-started-users/
+[Get started with authentication]: ./app-service-mobile-android-get-started-users.md
+[身份验证入门]: ./app-service-mobile-android-get-started-users.md
 [2]: http://hashtagfail.com/post/44606137082/mobile-services-android-serialization-gson
 
-
-[6]: /documentation/articles/notification-hubs-push-notification-overview/#integration-with-app-service-mobile-apps
-[7]: /documentation/articles/app-service-mobile-android-get-started-users/#cache-tokens
+[6]: ../notification-hubs/notification-hubs-push-notification-overview.md#integration-with-app-service-mobile-apps
+[7]: ./app-service-mobile-android-get-started-users.md#cache-tokens
 [8]: http://azure.github.io/azure-mobile-apps-android-client/com/microsoft/windowsazure/mobileservices/table/MobileServiceTable.html
 [9]: http://azure.github.io/azure-mobile-apps-android-client/com/microsoft/windowsazure/mobileservices/MobileServiceClient.html
-[10]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
-[11]: /documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/
+[10]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[11]: ./app-service-mobile-node-backend-how-to-use-server-sdk.md
 [12]: http://azure.github.io/azure-mobile-apps-android-client/
-[13]: /documentation/articles/app-service-mobile-android-get-started/#create-a-new-azure-mobile-app-backend
+[13]: ./app-service-mobile-android-get-started.md#create-a-new-azure-mobile-app-backend
 [14]: http://go.microsoft.com/fwlink/p/?LinkID=717034
-[15]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#how-to-define-a-table-controller
-[16]: /documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/#TableOperations
+[15]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#how-to-define-a-table-controller
+[16]: ./app-service-mobile-node-backend-how-to-use-server-sdk.md#TableOperations
 [Future]: http://developer.android.com/reference/java/util/concurrent/Future.html
 [AsyncTask]: http://developer.android.com/reference/android/os/AsyncTask.html
 

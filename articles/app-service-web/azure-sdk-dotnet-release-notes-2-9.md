@@ -1,23 +1,22 @@
-<properties
-    pageTitle="用于 .NET 2.9 的 Azure SDK 发行说明"
-    description="用于 .NET 2.9 的 Azure SDK 发行说明"
-    services="app-service\web"
-    documentationcenter=".net"
-    author="Juliako"
-    manager="erikre"
-    editor="" />  
+---
+title: 用于 .NET 2.9 的 Azure SDK 发行说明
+description: 用于 .NET 2.9 的 Azure SDK 发行说明
+services: app-service\web
+documentationcenter: .net
+author: Juliako
+manager: erikre
+editor: 
 
-<tags
-    ms.assetid="c83d815b-fc19-4260-821e-7d2a7206dffc"
-    ms.service="app-service"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="integration"
-    ms.date="11/16/2016"
-    wacn.date="12/05/2016"
-    ms.author="juliako;mikhegn" />  
-
+ms.assetid: c83d815b-fc19-4260-821e-7d2a7206dffc
+ms.service: app-service
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: integration
+ms.date: 11/16/2016
+wacn.date: 12/05/2016
+ms.author: juliako;mikhegn
+---
 
 # 用于 .NET 的 Azure SDK 2.9 发行说明
 
@@ -41,9 +40,8 @@
  
 ### Windows Server 2016 虚拟机
 
-- Visual Studio 现在支持将云服务部署到 OS 系列 5 (Windows Server 2016) 虚拟机。对于现有的云服务，可以更改设置以针对新的 OS 系列。创建新的云服务时，如果选择使用 .net 4.6 或更高版本创建服务，则服务将默认使用 OS 系列 5。有关详细信息，可以查看[来宾 OS 系列支持表](/documentation/articles/cloud-services-guestos-update-matrix/)。
+- Visual Studio 现在支持将云服务部署到 OS 系列 5 (Windows Server 2016) 虚拟机。对于现有的云服务，可以更改设置以针对新的 OS 系列。创建新的云服务时，如果选择使用 .net 4.6 或更高版本创建服务，则服务将默认使用 OS 系列 5。有关详细信息，可以查看[来宾 OS 系列支持表](../cloud-services/cloud-services-guestos-update-matrix.md)。
 
- 
 ### Azure 角色中缓存 
 
 - 对 Azure 角色中缓存的支持于 2016 年 11 月 30 日结束。有关更多详细信息，请单击[此处](https://azure.microsoft.com/blog/azure-managed-cache-and-in-role-cache-services-to-be-retired-on-11-30-2016/)。
@@ -51,7 +49,6 @@
 ### Azure Stack 的 Azure Resource Manager 模板
 
 - 我们已引入 Azure Stack 作为 Azure Resource Manager 模板的部署目标。
-
 
 ## 用于 .NET 的 Azure SDK 2.9 摘要
 
@@ -82,7 +79,7 @@
 用于 Visual Studio 的 **HDInsight 工具**现在支持 HDInsight 3.3 版，包括显示 Tez 图形和其他语言修复。
 
 ## Azure 资源管理器
-此版本添加了对 ARM 模板的[密钥保管库](/documentation/articles/resource-manager-keyvault-parameter/)支持。
+此版本添加了对 ARM 模板的[密钥保管库](../azure-resource-manager/resource-manager-keyvault-parameter.md)支持。
 
 ## 另请参阅
 [Azure SDK 2.9 通知文章](https://azure.microsoft.com/blog/announcing-visual-studio-azure-tools-and-sdk-2-9/)

@@ -1,23 +1,22 @@
-<properties
-    pageTitle="常见 DocumentDB 用例 | Azure"
-    description="了解 DocumentDB 最常见的五个用例：用户生成的内容、事件日志记录、目录数据、用户首选项数据和物联网 (IoT)。"
-    services="documentdb"
-    author="h0n"
-    manager="jhubbard"
-    editor="monicar"
-    documentationcenter="" />  
+---
+title: 常见 DocumentDB 用例 | Azure
+description: 了解 DocumentDB 最常见的五个用例：用户生成的内容、事件日志记录、目录数据、用户首选项数据和物联网 (IoT)。
+services: documentdb
+author: h0n
+manager: jhubbard
+editor: monicar
+documentationcenter: 
 
-<tags
-    ms.assetid="eca68a58-1a8c-4851-8cf8-6e4d2b889905"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/11/2016"
-    wacn.date="12/20/2016"
-    ms.author="hawong" />  
-
+ms.assetid: eca68a58-1a8c-4851-8cf8-6e4d2b889905
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/11/2016
+wacn.date: 12/20/2016
+ms.author: hawong
+---
 
 # 常见 DocumentDB 用例
 本文概述了 DocumentDB 的几个常见用例。本文中的建议可以作为使用 DocumentDB 开发应用程序的一个起点。
@@ -78,7 +77,7 @@ Azure 提供了可为 IoT 用例所利用的丰富服务。Azure IoT 服务是�
 
 与事件日志数据相关的主要用例通常有两个。第一个用例是对数据的子集执行即席查询以进行故障排除。在故障排除期间，通常将按时间顺序从日志中检索数据的子集。然后，通过筛选包含错误级别或错误消息的数据集进行深入探究。这就是在 DocumentDB 中存储事件日志的优越之处。由于 DocumentDB 中存储的日志数据默认自动编制索引，因此可以随时进行查询。此外，还可以按时间顺序在多个数据分区中保存日志数据。根据保留策略，可以将较旧的日志滚动到不常访问的存储区。
 
-第二个用例是对大型日志数据脱机执行长时间运行数据分析作业。此用例的示例包括服务器可用性分析、应用程序错误分析和点击流数据分析。通常使用 Hadoop 执行这些类型的分析。使用 DocumentDB 的 Hadoop 连接器，DocumentDB 数据库可用作 Pig、Hive 和 Map/Reduce 作业的数据源和接收器。有关 DocumentDB 的 Hadoop 连接器的详细信息，请参阅[使用 DocumentDB 和 HDInsight 运行 Hadoop 作业](/documentation/articles/documentdb-run-hadoop-with-hdinsight/)。
+第二个用例是对大型日志数据脱机执行长时间运行数据分析作业。此用例的示例包括服务器可用性分析、应用程序错误分析和点击流数据分析。通常使用 Hadoop 执行这些类型的分析。使用 DocumentDB 的 Hadoop 连接器，DocumentDB 数据库可用作 Pig、Hive 和 Map/Reduce 作业的数据源和接收器。有关 DocumentDB 的 Hadoop 连接器的详细信息，请参阅[使用 DocumentDB 和 HDInsight 运行 Hadoop 作业](./documentdb-run-hadoop-with-hdinsight.md)。
 
 ## 游戏
 数据库层是游戏应用程序的关键组件。新式游戏可在移动/控制台客户端执行图形处理，但需依赖云传输自定义的个性化内容，例如游戏中的统计数据、社交媒体集成以及高分排行榜。游戏要求读取和写入具有极低的延迟，以提供具有吸引力的游戏内体验，并且数据库层需要在新游戏发布和功能更新期间处理请求率的高峰和低谷。
@@ -92,7 +91,7 @@ DocumentDB 用于大型游戏，例如 [Next Games](http://www.nextgames.com/) �
 - DocumentDB 作为托管的平台即服务 (PaaS) 只需最少的设置和管理工作即可实现快速迭代和缩短上市时间。
 
 ## 后续步骤
-若要开始使用 DocumentDB，可创建一个[帐户](/pricing/1rmb-trial/)，然后了解 DocumentDB 并查找所需信息。
+若要开始使用 DocumentDB，可创建一个[帐户](https://www.azure.cn/pricing/1rmb-trial/)，然后了解 DocumentDB 并查找所需信息。
 
 或者，如果想要了解有关使用 DocumentDB 的客户的详细信息，可以参阅下面的客户案例：
 

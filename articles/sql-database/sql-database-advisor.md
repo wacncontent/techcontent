@@ -1,31 +1,31 @@
-<properties 
-   pageTitle="Azure SQL 数据库顾问" 
-   description="Azure SQL 数据库顾问为你的现有 SQL 数据库提供建议，这样可以提高当前的查询性能。" 
-   services="sql-database" 
-   documentationCenter="" 
-   authors="stevestein" 
-   manager="jhubbard" 
-   editor="monicar"/>
+---
+title: Azure SQL 数据库顾问
+description: Azure SQL 数据库顾问为你的现有 SQL 数据库提供建议，这样可以提高当前的查询性能。
+services: sql-database
+documentationCenter: 
+authors: stevestein
+manager: jhubbard
+editor: monicar
 
-<tags
-   ms.service="sql-database"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="data-management" 
-   ms.date="09/30/2016"
-   wacn.date="10/31/2016"
-   ms.author="sstein"/>
+ms.service: sql-database
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-management
+ms.date: 09/30/2016
+wacn.date: 10/31/2016
+ms.author: sstein
+---
 
 # SQL 数据库顾问
 
-> [AZURE.SELECTOR]
-- [SQL 数据库顾问概述](/documentation/articles/sql-database-advisor/)
-- [Azure 门户预览](/documentation/articles/sql-database-advisor-portal/)
+> [!div class="op_single_selector"]
+- [SQL 数据库顾问概述](./sql-database-advisor.md)
+- [Azure 门户预览](./sql-database-advisor-portal.md)
 
 Azure SQL 数据库可以学习和适应你的应用程序并提供自定义的建议，使你能够将 SQL 数据库的性能最大化。Azure SQL 数据库顾问提供有关创建和删除索引、参数化查询，以及解决架构问题的建议。该顾问通过分析 SQL 数据库的使用历史记录来评估性能。提供的建议最适合运行数据库的典型工作负荷。
 
-以下建议适用于 V12 服务器（建议不适用于 V11 服务器）。现在你可以将创建和删除索引建议设置为自动应用，请参阅[自动索引管理](/documentation/articles/sql-database-advisor-portal/#enable-automatic-index-management)以获取详细信息。
+以下建议适用于 V12 服务器（建议不适用于 V11 服务器）。现在你可以将创建和删除索引建议设置为自动应用，请参阅[自动索引管理](./sql-database-advisor-portal.md#enable-automatic-index-management)以获取详细信息。
 
 ## 创建索引建议 
 
@@ -68,13 +68,13 @@ Azure SQL 数据库可以学习和适应你的应用程序并提供自定义的�
 
 监视建议并继续应用它们以优化性能。数据库工作负荷是动态的，并且不断地更改。SQL 数据库顾问将继续监视和提供可能提高数据库性能的建议。
 
- - 有关如何在 Azure 门户预览中使用 SQL 数据库顾问的步骤，请参阅 [Azure 门户预览中的 SQL 数据库顾问](/documentation/articles/sql-database-advisor-portal/)。
- - 若要了解排名靠前的查询的性能影响，请参阅[查询性能见解](/documentation/articles/sql-database-query-performance/)。
+ - 有关如何在 Azure 门户预览中使用 SQL 数据库顾问的步骤，请参阅 [Azure 门户预览中的 SQL 数据库顾问](./sql-database-advisor-portal.md)。
+ - 若要了解排名靠前的查询的性能影响，请参阅[查询性能见解](./sql-database-query-performance.md)。
 
 ## 其他资源
 
 - [查询存储](https://msdn.microsoft.com/zh-cn/library/dn817826.aspx)
 - [CREATE INDEX](https://msdn.microsoft.com/zh-cn/library/ms188783.aspx)
-- [基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)
+- [基于角色的访问控制](../active-directory/role-based-access-control-configure.md)
 
 <!---HONumber=Mooncake_1024_2016-->

@@ -1,14 +1,31 @@
-<properties linkid="" urlDisplayName="" pageTitle="MySQL Service Questions – Azure Cloud" metaKeywords="Azure Cloud, technical documentation, documents and resources, MySQL, database, FAQ, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="Provides quick answers for common technical questions encountered by users when using MySQL Database on Azure. Contact technical support if you have any further questions." metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: MySQL Service Questions – Azure Cloud
+metaKeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, FAQ, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+description: Provides quick answers for common technical questions encountered by users when using MySQL Database on Azure. Contact technical support if you have any further questions.
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql_en" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="en" />
+ms.service: mysql_en
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: en
+---
 
 # Service consulting
-> [AZURE.SELECTOR]
-- [All issues](/documentation/articles/mysql-database-enus-tech-faq/)
-- [Service consulting](/documentation/articles/mysql-database-enus-serviceinquiry/)
-- [Connection issues](/documentation/articles/mysql-database-enus-connectioninquiry/)
-- [Security consulting](/documentation/articles/mysql-database-enus-securityinquiry/)
-- [Compatibility issues](/documentation/articles/mysql-database-enus-compatibilityinquiry/)
+> [!div class="op_single_selector"]
+- [All issues](./mysql-database-enus-tech-faq.md)
+- [Service consulting](./mysql-database-enus-serviceinquiry.md)
+- [Connection issues](./mysql-database-enus-connectioninquiry.md)
+- [Security consulting](./mysql-database-enus-securityinquiry.md)
+- [Compatibility issues](./mysql-database-enus-compatibilityinquiry.md)
 
 ### **Is the amount of storage space for data backups limited?**
   
@@ -20,7 +37,7 @@ Users can create multiple databases on a single MySQL server, and there is no li
 	
 ### **What are the current limitations of MySQL Database on Azure?**
 	
-For details, see [service limitations of MySQL Database on Azure](/documentation/articles/mysql-database-operation-limitation/).
+For details, see [service limitations of MySQL Database on Azure](./mysql-database-operation-limitation.md).
 
 ### **Why doesn’t MySQL Database on Azure support databases in MyISAM format?**
 
@@ -41,6 +58,6 @@ For performance reasons, we use two 256 MB log files for new database instance c
 Yes. While our [Management Portal](https://manage.windowsazure.cn/) and the PowerShell command line only support setting read/write privileges for the entire database when creating users or databases, you can use the **grant** command to fine-tune user privilege settings.
 
 ### **What system time does MySQL Database on Azure currently use? How can I change it?**
-MySQL on Azure currently defaults to using UTC (Coordinated Universal Time) as the system time. Users can configure offsets using the Management Portal or PowerShell to update the time. For more information see [Change time zones on MySQL on Azure](/documentation/articles/mysql-database-timezone-config/).
+MySQL on Azure currently defaults to using UTC (Coordinated Universal Time) as the system time. Users can configure offsets using the Management Portal or PowerShell to update the time. For more information see [Change time zones on MySQL on Azure](./mysql-database-timezone-config.md).
 
 <!---HONumber=Acom_0218_2016_MySql-->

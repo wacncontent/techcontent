@@ -1,22 +1,21 @@
-<properties 
-   pageTitle="服务总线中转消息传送 .NET 教程 | Azure"
-   description="中转消息传送 .NET 教程。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-    editor="" />  
+---
+title: 服务总线中转消息传送 .NET 教程 | Azure
+description: 中转消息传送 .NET 教程。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
 
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/27/2016"
-    ms.author="sethm"
-    wacn.date="01/04/2017"/>  
-
+ms.service: service-bus
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/27/2016
+ms.author: sethm
+wacn.date: 01/04/2017
+---
 
 # 服务总线中转消息传送 .NET 教程
 
@@ -24,7 +23,7 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
 
 第二个消息传送解决方案启用了“中转”消息传送功能。可将它们视为异步或分离式消息传送功能，支持使用服务总线消息传送基础结构的发布-订阅、临时分离和负载均衡方案。分离式通信具有很多优点；例如，客户端和服务器可以根据需要进行连接并以异步方式执行其操作。
 
-本教程旨在提供有关队列的概述和实践经验，队列是服务总线中转消息传送的一个核心组件。完成本教程中的一系列主题后，你将获得一个应用程序，它能填充消息列表、创建队列和向队列发送消息。最后，该应用程序从队列接收消息并将其显示出来，然后清理其资源并退出。有关介绍如何构建使用服务总线中继的应用程序的相应教程，请参阅[服务总线中继消息传送教程](/documentation/articles/service-bus-relay-tutorial/)。
+本教程旨在提供有关队列的概述和实践经验，队列是服务总线中转消息传送的一个核心组件。完成本教程中的一系列主题后，你将获得一个应用程序，它能填充消息列表、创建队列和向队列发送消息。最后，该应用程序从队列接收消息并将其显示出来，然后清理其资源并退出。有关介绍如何构建使用服务总线中继的应用程序的相应教程，请参阅[服务总线中继消息传送教程](./service-bus-relay-tutorial.md)。
 
 ## 简介和先决条件
 
@@ -34,7 +33,7 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
 
 ### 创建服务命名空间并获取 SAS 密钥
 
-第一步是创建服务命名空间并获取[共享访问签名](/documentation/articles/service-bus-sas-overview/) (SAS) 密钥。命名空间为每个通过服务总线公开的应用程序提供应用程序边界。创建服务命名空间时，系统将自动生成 SAS 密钥。服务命名空间与 SAS 密钥的组合为服务总线提供了一个用于验证应用程序访问权限的凭据。
+第一步是创建服务命名空间并获取[共享访问签名](./service-bus-sas-overview.md) (SAS) 密钥。命名空间为每个通过服务总线公开的应用程序提供应用程序边界。创建服务命名空间时，系统将自动生成 SAS 密钥。服务命名空间与 SAS 密钥的组合为服务总线提供了一个用于验证应用程序访问权限的凭据。
 
 1. 单击**“配置”**。
 
@@ -53,15 +52,12 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
 	2. 在“管理 Nuget 包”对话框中，单击“浏览”选项卡，搜索“Azure 服务总线”，然后单击“安装”。<br />
 1. 在解决方案资源管理器中，双击 Program.cs 文件以在 Visual Studio 编辑器中将其打开。将命名空间名称从其默认名称 `QueueSample` 更改为 `Microsoft.ServiceBus.Samples`。
 
-
 	Microsoft.ServiceBus.Samples
 	{
 	    ...
 
-
 2. 修改 `using` 语句，如以下代码中所示。
 
-	
     	using System;
     	using System.Collections.Generic;
     	using System.Data;
@@ -70,10 +66,8 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	using System.Threading.Tasks;
     	using Microsoft.ServiceBus.Messaging;
 	
-
 3. 创建一个名为 Data.csv 的文本文件，并将以下逗号分隔文本中的内容复制到其中。
 
-	
     	IssueID,IssueTitle,CustomerID,CategoryID,SupportPackage,Priority,Severity,Resolved
     	1,Package lost,1,1,Basic,5,1,FALSE
     	2,Package damaged,1,1,Basic,5,1,FALSE
@@ -91,7 +85,6 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	14,Package damaged,6,7,Premium,5,5,FALSE
     	15,Product defective,6,2,Premium,5,5,FALSE
 	
-
 	保存并关闭 Data.csv 文件，并记住保存位置。
 
 4. 在解决方案资源管理器中，右键单击项目的名称（此示例中为 **QueueSample**），并依次单击“添加”和“现有项”。
@@ -102,7 +95,6 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
 
 1. 在 `Program` 类的 `Main()` 方法前面，声明两个变量：其中之一为 **DataTable** 类型，用于包含 Data.csv 中的消息列表。另一个应为 List 对象类型，强类型化为 [BrokeredMessage](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.aspx)。后者是中转消息列表，本教程中的后续步骤将用到它。
 
-	
     	namespace Microsoft.ServiceBus.Samples
     	{
     	    publicclass Program
@@ -111,10 +103,8 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	        privatestatic DataTable issues;
     	        privatestatic List<BrokeredMessage> MessageList;
 	
-
 2. 在 `Main()` 之外，定义 `ParseCSV()` 方法，用于解析 Data.csv 中的消息列表并将消息加载到 [DataTable](https://msdn.microsoft.com/zh-cn/library/azure/system.data.datatable.aspx) 表，如下所示。该方法将返回 **DataTable** 对象。
 
-	
     	static DataTable ParseCSVFile()
     	{
     	    DataTable tableIssues = new DataTable("Issues");
@@ -148,10 +138,8 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	    return tableIssues;
     	}
 	
-
 3. 在 `Main()` 方法中，添加一条用于调用 `ParseCSVFile()` 方法的语句：
 
-	
     	public static void Main(string[] args)
     	{
     	
@@ -160,12 +148,10 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	
     	}
 	
-
 ### 创建用于加载消息列表的方法
 
 1. 在 `Main()` 之外，定义 `GenerateMessages()` 方法，用于接收 `ParseCSVFile()` 返回的 **DataTable** 对象，并将该表加载到强类型化的中转消息列表中。该方法随后返回 **List** 对象，如下面的示例所示。
 
-	
     	static List<BrokeredMessage> GenerateMessages(DataTable issues)
     	{
     	    // Instantiate the brokered list object
@@ -184,10 +170,8 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	    return result;
     	}
 	
-
 1. 在 `Main()` 中，在调用 `ParseCSVFile()` 后面直接添加一条语句，该语句将调用以 `ParseCSVFile()` 的返回值作为参数的 `GenerateMessages()` 方法：
 
-	
     	public static void Main(string[] args)
     	{
     	
@@ -196,12 +180,10 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	    MessageList = GenerateMessages(issues);
     	}
 	
-
 ### 获取用户凭据
 
 1. 首先创建三个全局字符串变量，用于保存这些值。在以前的变量声明之后直接声明这些变量，例如：
 
-	
     	namespace Microsoft.ServiceBus.Samples
     	{
     	    publicclass Program
@@ -216,10 +198,8 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	        private static string sasKeyValue;
     	        …
 	
-
 2. 接下来，创建一个函数，用于接受并存储服务命名空间和 SAS 密钥。在 `Main()` 之外添加此方法。例如：
 
-	
     	static void CollectUserInput()
     	{
     	    // User service namespace
@@ -231,10 +211,8 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	    sasKeyValue = Console.ReadLine();
     	}
 	
-
 1. 在 `Main()` 中，在调用 `GenerateMessages()` 的后面直接添加一条语句用于调用 `CollectUserInput()` 方法：
 
-	
     	public static void Main(string[] args)
     	{
     	
@@ -246,7 +224,6 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	    CollectUserInput();
     	}
 	
-
 ### 生成解决方案
 
 在 Visual Studio 的“生成”菜单中，单击“生成解决方案”或按 **Ctrl+Shift+B** 确认到目前为止的操作的准确性。
@@ -257,7 +234,6 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
 
 1. 为清楚起见，本教程将所有队列操作置于单独的方法中。在 `Program` 类的 `Main()` 方法后面创建异步的 `Queue()` 方法。例如：
  
-	
     	public static void Main(string[] args)
     	{
     	…
@@ -266,27 +242,21 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
     	{
     	}
 	
-
 1. 下一步是使用 [TokenProvider](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.tokenprovider.aspx) 对象创建 SAS 凭据。此创建方法用于接受在 `CollectUserInput()` 方法中获取的 SAS 密钥名称和值。将以下代码添加到 `Queue()` 方法中：
 
-	
     	static async Task Queue()
     	{
     	    // Create management credentials
     	    TokenProvider credentials = TokenProvider.CreateSharedAccessSignatureTokenProvider(sasKeyName,sasKeyValue);
     	}
 	
-
 2. 使用 URI 创建新的命名空间管理对象，此 URI 包含在上一步中获得的作为参数的命名空间名称和管理凭据。直接在上一步中添加的代码后面添加以下代码。请确保将 替换为服务命名空间的名称：
-	
 	
     	NamespaceManager namespaceClient = new NamespaceManager(ServiceBusEnvironment.CreateServiceUri("sb", "<yourNamespace>", string.Empty), credentials);
 	
-
 ### 示例
 
 此时，你的代码应如下所示：
-
 
 using System;
 using System.Collections.Generic;
@@ -390,7 +360,6 @@ namespace Microsoft.ServiceBus.Samples
   }
 }
 
-
 ## 将消息发送到队列
 
 在此步骤中，你将创建一个队列，然后将中转消息列表中包含的消息发送到该队列。
@@ -399,7 +368,6 @@ namespace Microsoft.ServiceBus.Samples
 
 1. 首先创建队列。例如，将其命名为 `myQueue`，并在上一步的 `Queue()` 方法中添加的管理操作后面直接声明它：
 
-	
     QueueDescription myQueue;
 
     if (namespaceClient.QueueExists("IssueTrackingQueue"))
@@ -409,21 +377,15 @@ namespace Microsoft.ServiceBus.Samples
 
     myQueue = namespaceClient.CreateQueue("IssueTrackingQueue");
 	
-
 1. 在 `Queue()` 方法中，使用新创建的服务总线 URI 作为参数创建一个消息工厂对象。在上一步中添加的管理操作后面直接添加以下代码。请确保将 `<yourNamespace>` 替换为服务命名空间的名称：
 
-	
 	MessagingFactory factory = MessagingFactory.Create(ServiceBusEnvironment.CreateServiceUri("sb", "<yourNamespace>", string.Empty), credentials);
 	
-
 3. 接下来，使用 [QueueClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.aspx) 类创建队列对象。在最后一步中添加的代码后直接添加以下代码：
 
-	
 	QueueClient myQueueClient = factory.CreateQueueClient("IssueTrackingQueue");
 	
-
 4. 然后添加以下代码，用于循环遍历你之前创建的中转消息列表，并将其中每条消息发送到队列。在上一步中的 `CreateQueueClient()` 声明后直接添加以下代码：
-	
 	
 	// Send messages
 	Console.WriteLine("Now sending messages to the queue.");
@@ -435,7 +397,6 @@ namespace Microsoft.ServiceBus.Samples
 	    Console.WriteLine(string.Format("Message sent: {0}, {1}", issue.Label, issue.MessageId));
 	}
 	
-
 ## 从队列接收消息
 
 在此步骤中，你将从上一步中创建的队列获取消息列表。
@@ -443,7 +404,6 @@ namespace Microsoft.ServiceBus.Samples
 ### 创建接收器并从队列接收消息
 
 在 `Queue()` 方法中，使用 [QueueClient.ReceiveAsync](https://msdn.microsoft.com/zh-cn/library/azure/dn130423.aspx) 方法循环访问队列和接收消息，并将每条消息输出到控制台。在上一步中添加的代码后直接添加以下代码：
-
 
 Console.WriteLine("Now receiving messages from Queue.");
 BrokeredMessage message;
@@ -456,23 +416,19 @@ while ((message = await myQueueClient.ReceiveAsync(new TimeSpan(hours: 0, minute
         Thread.Sleep(1000);
     }
 
-
 请注意，`Thread.Sleep` 只用来模拟消息处理，在实际消息传送应用程序中可能无需使用它。
 
 ### 结束 Queue 方法并清理资源
 
 在前面的代码后面直接添加以下代码，以清除消息工厂对象和队列资源：
 
-	
 	factory.Close();
 	myQueueClient.Close();
 	namespaceClient.DeleteQueue("IssueTrackingQueue");
 	
-
 ### 调用 Queue 方法
 
 最后一步是添加用于从 `Main()` 调用 `Queue()` 方法的代码。在 Main() 的末尾添加以下突出显示的行：
-	
 	
 	public static void Main(string[] args)
 	{
@@ -487,11 +443,9 @@ while ((message = await myQueueClient.ReceiveAsync(new TimeSpan(hours: 0, minute
 	    Queue();
 	}
 	
-
 ### 示例
 
 下面的代码包含完整的 **QueueSample** 应用程序。
-
 
         using System;
         using System.Collections.Generic;
@@ -570,7 +524,6 @@ while ((message = await myQueueClient.ReceiveAsync(new TimeSpan(hours: 0, minute
                     myQueueClient.Close();
                     namespaceClient.DeleteQueue("IssueTrackingQueue");
         
-        
                 }
         
                 static void CollectUserInput()
@@ -637,7 +590,6 @@ while ((message = await myQueueClient.ReceiveAsync(new TimeSpan(hours: 0, minute
             }
         }
         
-
 ## 生成并运行 QueueSample 应用程序
 
 完成上述步骤后，即可生成并运行 **QueueSample** 应用程序。
@@ -648,12 +600,12 @@ while ((message = await myQueueClient.ReceiveAsync(new TimeSpan(hours: 0, minute
 
 ## 后续步骤
 
-本教程介绍了如何使用服务总线中转消息传送功能构建服务总线客户端应用程序和服务。有关使用服务总线[中继消息传送](/documentation/articles/service-bus-messaging-overview/#Relayed-messaging)的类似教程，请参阅[服务总线中继消息传送教程](/documentation/articles/service-bus-relay-tutorial/)。
+本教程介绍了如何使用服务总线中转消息传送功能构建服务总线客户端应用程序和服务。有关使用服务总线[中继消息传送](./service-bus-messaging-overview.md#Relayed-messaging)的类似教程，请参阅[服务总线中继消息传送教程](./service-bus-relay-tutorial.md)。
 
-若要了解有关[服务总线](/home/features/messaging/)的详细信息，请参阅以下主题。
+若要了解有关[服务总线](https://www.azure.cn/home/features/messaging/)的详细信息，请参阅以下主题。
 
-- [服务总线消息传送概述](/documentation/articles/service-bus-messaging-overview/)
-- [服务总线基础知识](/documentation/articles/service-bus-fundamentals-hybrid-solutions/)
-- [服务总线体系结构](/documentation/articles/service-bus-architecture/)
+- [服务总线消息传送概述](./service-bus-messaging-overview.md)
+- [服务总线基础知识](./service-bus-fundamentals-hybrid-solutions.md)
+- [服务总线体系结构](./service-bus-architecture.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

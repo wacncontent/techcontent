@@ -1,24 +1,22 @@
-<properties 
-   pageTitle="Azure SDK for .NET 2.6 发行说明" 
-   description="Azure SDK for .NET 2.6 发行说明" 
-   services="app-service/web" 
-   documentationCenter=".net" 
-   authors="Juliako" 
-   manager="dwrede" 
-   editor=""/>
+---
+title: Azure SDK for .NET 2.6 发行说明
+description: Azure SDK for .NET 2.6 发行说明
+services: app-service/web
+documentationCenter: .net
+authors: Juliako
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="app-service"
-	ms.date="01/19/2016"
-	wacn.date="03/28/2016"/>
-
+ms.service: app-service
+ms.date: 01/19/2016
+wacn.date: 03/28/2016
+---
 
 # Azure SDK for .NET 2.6 发行说明
 
 本文档包含 Azure SDK for .NET 2.6 发行版的发行说明。
 
-使用 Azure SDK 2.6，你可以开发针对 .NET 4.5.2 或 .NET 4.6 的云服务应用程序 (PaaS)，前提是你在云服务角色上手动安装目标 .NET Framework。请参阅[在云服务角色上安装 .NET](/documentation/articles/cloud-services-dotnet-install-dotnet/)。
-
+使用 Azure SDK 2.6，你可以开发针对 .NET 4.5.2 或 .NET 4.6 的云服务应用程序 (PaaS)，前提是你在云服务角色上手动安装目标 .NET Framework。请参阅[在云服务角色上安装 .NET](./cloud-services/cloud-services-dotnet-install-dotnet.md)。
 
 ##Service Bus 更新
 
@@ -38,7 +36,7 @@
 
 	HDInsight Tools for Visual Studio 现在支持连接到 HDInsight Emulator，因此，你可以在本地开发 Hive 脚本而不会引入任何成本，然后再针对 HDInsight 群集执行这些脚本即可。
 
-	有关详细信息，请参阅[此手册](/documentation/articles/hdinsight-hadoop-emulator-get-started/)。
+	有关详细信息，请参阅[此手册](./hdinsight/hdinsight-hadoop-emulator-get-started.md)。
 
 - **针对泛型 Hadoop 群集的 HDInsight Tools for Visual Studio 支持**（预览版）
 
@@ -48,7 +46,7 @@
 	- 通过增强型 IntelliSense/自动完成支持编写 Hive 查询； 
 	- 在你的群集中通过直观的 UI 查看所有作业。 
 
-	有关详细信息，请参阅[此手册](/documentation/articles/hdinsight-hadoop-emulator-get-started/)。
+	有关详细信息，请参阅[此手册](./hdinsight/hdinsight-hadoop-emulator-get-started.md)。
 
 ##角色中缓存更新
 
@@ -58,7 +56,7 @@
 
 	目前已计划在 2016 年 8 月 1 日删除 Azure 存储空间版本 2011-08-18。从 Azure SDK 2.5 或更低版本到 2.6 的任何角色中缓存迁移必须在该日期之前完成。有关停用 Azure 存储空间版本 2011-08-18 的详细信息，请参阅[有关删除 Azure 存储服务版本的最新信息：延期到 2016 年](http://blogs.msdn.com/b/windowsazurestorage/archive/2015/10/19/microsoft-azure-storage-service-version-removal-update-extension-to-2016.aspx)。
 
->[AZURE.IMPORTANT] 我们特此宣布将在 2016 年 11 月 30 日停用 Azure 托管缓存服务和 Azure 角色中缓存。我们建议你迁移到 Azure Redis 缓存，以便为这次停用做好准备。有关日期和迁移指导的详细信息，请参阅[哪种 Azure 缓存产品适合我？](/documentation/articles/cache-faq/#which-azure-cache-offering-is-right-for-me)
+>[!IMPORTANT] 我们特此宣布将在 2016 年 11 月 30 日停用 Azure 托管缓存服务和 Azure 角色中缓存。我们建议你迁移到 Azure Redis 缓存，以便为这次停用做好准备。有关日期和迁移指导的详细信息，请参阅[哪种 Azure 缓存产品适合我？](./redis-cache/cache-faq.md#which-azure-cache-offering-is-right-for-me)
 
 ##Azure Web 应用工具
 

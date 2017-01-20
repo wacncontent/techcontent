@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="媒体服务 PlayReady 许可证模板概述" 
-	description="本主题概述了用于配置 PlayReady 许可证的 PlayReady 许可证模板。" 
-	authors="juliako" 
-	manager="erikre" 
-	editor="" 
-	services="media-services" 
-	documentationCenter=""/>  
+---
+title: 媒体服务 PlayReady 许可证模板概述
+description: 本主题概述了用于配置 PlayReady 许可证的 PlayReady 许可证模板。
+authors: juliako
+manager: erikre
+editor: 
+services: media-services
+documentationCenter: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
- 	ms.date="09/26/2016"  
- 	wacn.date="12/16/2016"  
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/16/2016
+ms.author: juliako
+---
 
 #媒体服务 PlayReady 许可证模板概述
 
@@ -32,7 +30,7 @@ Azure 媒体服务现在提供可用于传送 Microsoft PlayReady 许可证的�
 - 音频\\视频内容输入控件的输出保护级别。
 - 有关详细信息，请参阅 [PlayReady 符合性规则](https://www.microsoft.com/playready/licensing/compliance/)文档中的输出控件部分 (3.5)。
 
->[AZURE.NOTE]目前，只能配置 PlayReady 许可证（此权限是必需的）的 PlayRight。PlayRight 为客户端提供播放内容的权限。PlayRight 还允许配置特定于播放的限制。有关详细信息，请参阅 [PlayReadyPlayRight](/documentation/articles/media-services-playready-license-template-overview/#PlayReadyPlayRight)。
+>[!NOTE]目前，只能配置 PlayReady 许可证（此权限是必需的）的 PlayRight。PlayRight 为客户端提供播放内容的权限。PlayRight 还允许配置特定于播放的限制。有关详细信息，请参阅 [PlayReadyPlayRight](./media-services-playready-license-template-overview.md#PlayReadyPlayRight)。
 
 若要使用媒体服务配置 PlayReady 许可证，必须配置媒体服务 PlayReady 许可证模板。该模板在 XML 中定义。
 
@@ -51,13 +49,13 @@ Azure 媒体服务现在提供可用于传送 Microsoft PlayReady 许可证的�
 
 XML 符合 PlayReady 许可证模板 XML 架构部分中定义的 PlayReady 许可证模板 XML 架构。
 
-媒体服务还可定义一组可用于序列化到 XML 和从 XML 反序列化的 .NET 类。有关主类的描述，请参阅用于配置许可证模板的[媒体服务 .NET 类](/documentation/articles/media-services-playready-license-template-overview/#classes)。
+媒体服务还可定义一组可用于序列化到 XML 和从 XML 反序列化的 .NET 类。有关主类的描述，请参阅用于配置许可证模板的[媒体服务 .NET 类](./media-services-playready-license-template-overview.md#classes)。
 
-有关使用 .NET 类来配置 PlayReady 许可证模板的端到端示例，请参阅[使用 PlayReady 动态加密和许可证传送服务](/documentation/articles/media-services-protect-with-drm/)。
+有关使用 .NET 类来配置 PlayReady 许可证模板的端到端示例，请参阅[使用 PlayReady 动态加密和许可证传送服务](./media-services-protect-with-drm.md)。
 
 ##<a id="classes"></a>用于配置许可证模板的媒体服务 .NET 类
 
-以下是用于配置媒体服务 PlayReady 许可证模板的主要 .NET 类。这些类映射到 [PlayReady 许可证模板 XML 架构](/documentation/articles/media-services-playready-license-template-overview/#schema)中定义的类型。
+以下是用于配置媒体服务 PlayReady 许可证模板的主要 .NET 类。这些类映射到 [PlayReady 许可证模板 XML 架构](./media-services-playready-license-template-overview.md#schema)中定义的类型。
 
 [MediaServicesLicenseTemplateSerializer](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.contentkeyauthorization.mediaserviceslicensetemplateserializer.aspx) 类用于序列化到媒体服务许可证模板 XML 序列化和从该 XML 进行反序列化。
 
@@ -67,17 +65,15 @@ XML 符合 PlayReady 许可证模板 XML 架构部分中定义的 PlayReady 许�
 
 这是模板层次结构中的“顶层”类。表示响应模板包括许可证模板列表，而且这些许可证模板（直接或间接）包括所有构成要序列化的模板数据的其他类。
 
-
 ###PlayReadyLicenseTemplate
 
 [PlayReadyLicenseTemplate](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.contentkeyauthorization.playreadylicensetemplate.aspx) - 该类表示用于创建要返回给最终用户的 PlayReady 许可证的许可证模板。它包含许可证中内容密钥上的数据以及使用内容密钥时由 PlayReady DRM 运行时强制执行的任何权限或限制。
-
 
 ###<a id="PlayReadyPlayRight"></a>PlayReadyPlayRight
 
 [PlayReadyPlayRight](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.contentkeyauthorization.playreadyplayright.aspx) - 此类表示 PlayReady 许可证的 PlayRight。它会授予用户播放许可证中和 PlayRight 本身（用于播放特定策略）配置的零个或多个限制的制约内容的权限。PlayRight 上的很多策略都与输出限制有关，输出限制用于控制可以播放的内容的输出类型和使用给定输出时必须使用的任何限制。例如，如果启用了 DigitalVideoOnlyContentRestriction，DRM 运行时将只允许通过数字输出显示视频（不允许模拟视频输出传递内容）。
 
->[AZURE.IMPORTANT]这些限制类型可以非常强大，但也会影响使用者体验。如果输出保护配置了太多限制，内容可能会无法在某些客户端上播放。有关详细信息，请参阅 [PlayReady 符合性规则](https://www.microsoft.com/playready/licensing/compliance/)文档。
+>[!IMPORTANT]这些限制类型可以非常强大，但也会影响使用者体验。如果输出保护配置了太多限制，内容可能会无法在某些客户端上播放。有关详细信息，请参阅 [PlayReady 符合性规则](https://www.microsoft.com/playready/licensing/compliance/)文档。
 
 有关 Silverlight 支持的保护级别的示例，请参阅：[Silverlight 支持的输出保护](https://msdn.microsoft.com/zh-cn/library/cc838192(v=VS.95).aspx#Silverlight_Support_for_Output_Protection)。
 

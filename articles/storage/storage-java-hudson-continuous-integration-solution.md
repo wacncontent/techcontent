@@ -1,22 +1,22 @@
-<properties
-    pageTitle="如何将 Hudson 与 Blob 存储一起使用 | Azure"
-    description="介绍如何将 Hudson 与 Azure Blob 存储一起用作生成项目的存储库。"
-    services="storage"
-    documentationcenter="java"
-    author="dineshmurthy"
-    manager="jahogg"
-    editor="tysonn" />  
+---
+title: 如何将 Hudson 与 Blob 存储一起使用 | Azure
+description: 介绍如何将 Hudson 与 Azure Blob 存储一起用作生成项目的存储库。
+services: storage
+documentationcenter: java
+author: dineshmurthy
+manager: jahogg
+editor: tysonn
 
-<tags
-    ms.assetid="119becdd-72c4-4ade-a439-070233c1e1ac"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="10/18/2016"
-    wacn.date="12/26/2016"
-    ms.author="dinesh" />
+ms.assetid: 119becdd-72c4-4ade-a439-070233c1e1ac
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: Java
+ms.topic: article
+ms.date: 10/18/2016
+wacn.date: 12/26/2016
+ms.author: dinesh
+---
 
 # 将 Azure 存储用于 Hudson 持续集成解决方案
 ## 概述
@@ -55,7 +55,7 @@ Hudson 通过允许开发人员轻松地集成其代码更改以及自动和频�
      
       虽然典型 Hudson CI 解决方案将设置为作为一个服务运行，但在本教程中，通过命令行运行 Hudson WAR 就足够了。
 * 一个 Azure 帐户。注册 Azure 帐户的位置位于 <https://www.azure.cn>。
-* 一个 Azure 存储帐户。如果你还没有存储帐户，则可使用[创建存储帐户](/documentation/articles/storage-create-storage-account/#create-a-storage-account)中的步骤创建一个。
+* 一个 Azure 存储帐户。如果你还没有存储帐户，则可使用[创建存储帐户](./storage-create-storage-account.md#create-a-storage-account)中的步骤创建一个。
 * 建议熟悉 Hudson CI 解决方案（但不是必需的），因为以下内容将使用一个基本示例向你演示使用 Blob 服务作为 Hudson CI 生成项目的存储库时所需的步骤。
 
 ## 如何将 Blob 服务用于 Hudson CI
@@ -108,7 +108,7 @@ Hudson 通过允许开发人员轻松地集成其代码更改以及自动和频�
     **提示**
    
     在你为“执行 Windows 批处理命令”输入脚本的“命令”部分下方，有一个指向 Hudson 所识别环境变量的链接。单击此链接可了解环境变量名称和说明。请注意，不允许将包含特殊字符的环境变量（如 **BUILD\_URL** 环境变量）用作容器名称或通用虚拟路径。
-8. 对于此示例，请单击“默认将新容器设为公开的”。（如果要使用私有容器，你将需要创建共享访问签名以允许访问。这超出了本文的范围。可以在[创建共享访问签名 (SAS)](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)中了解有关共享访问签名的详细信息。
+8. 对于此示例，请单击“默认将新容器设为公开的”。（如果要使用私有容器，你将需要创建共享访问签名以允许访问。这超出了本文的范围。可以在[创建共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)中了解有关共享访问签名的详细信息。
 9. [可选]如果你希望在上载生成项目之前清除容器的内容，请单击“在上载前清除容器”（如果你不希望清除容器的内容，则使该复选框保持未选中状态）。
 10. 对于“要上传的项目列表”，请输入 **text/*.txt**。
 11. 对于“已上载项目的通用虚拟路径”，输入 **${BUILD\_ID}/${BUILD\_NUMBER}**。

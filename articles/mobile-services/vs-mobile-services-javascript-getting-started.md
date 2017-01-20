@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="通过使用 Visual Studio 连接服务添加移动服务后开始使用 Javascript 移动应用 | Microsoft Azure" 
-	description="如何在 Visual Studio 中的 JavaScript 项目内开始使用 Azure 移动服务" 
-	services="mobile-services" 
-	documentationCenter="" 
-	authors="mlhoop" 
-	manager="douge" 
-	editor=""/>
+---
+title: 通过使用 Visual Studio 连接服务添加移动服务后开始使用 Javascript 移动应用 | Microsoft Azure
+description: 如何在 Visual Studio 中的 JavaScript 项目内开始使用 Azure 移动服务
+services: mobile-services
+documentationCenter: 
+authors: mlhoop
+manager: douge
+editor: 
 
-<tags 
-	ms.service="mobile-services" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="vs-getting-started" 
-	ms.devlang="JavaScript" 
-	ms.topic="article" 
-	ms.date="07/21/2016" 
-	wacn.date="09/26/2016" 
-	ms.author="mlearned"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: JavaScript
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: mlearned
+---
 
 # 通过使用 Visual Studio 连接服务添加 Azure 移动服务后开始使用 Javascript 移动应用
 
@@ -85,8 +85,6 @@
 	    todoItems.splice(todoItems.indexOf(item), 1);
     }
 
-
-
-[详细了解移动服务](/documentation/services/mobile-services/)
+[详细了解移动服务](./index.md/)
 
 <!---HONumber=Mooncake_0215_2016-->

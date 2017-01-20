@@ -1,29 +1,27 @@
-<properties
-   pageTitle="将 Desired State Configuration 与虚拟机规模集配合使用 | Azure"
-   description="将虚拟机规模集与 Azure DSC 扩展配合使用"
-   services="virtual-machine-scale-sets"
-   documentationCenter=""
-   authors="zjalexander"
-   manager="timlt"
-   editor=""
-   tags="azure-service-management,azure-resource-manager"
-   keywords=""/>  
+---
+title: 将 Desired State Configuration 与虚拟机规模集配合使用 | Azure
+description: 将虚拟机规模集与 Azure DSC 扩展配合使用
+services: virtual-machine-scale-sets
+documentationCenter: 
+authors: zjalexander
+manager: timlt
+editor: 
+tags: azure-service-management,azure-resource-manager
+keywords: 
 
-
-<tags
-   ms.service="virtual-machine-scale-sets"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-windows"
-   ms.workload="na"
-   ms.date="09/15/2016"
-   wacn.date="10/31/2016"
-   ms.author="zachal"/>  
-
+ms.service: virtual-machine-scale-sets
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: na
+ms.date: 09/15/2016
+wacn.date: 10/31/2016
+ms.author: zachal
+---
 
 # 将虚拟机规模集与 Azure DSC 扩展配合使用
 
-[虚拟机规模集 (VMSS)](/documentation/articles/virtual-machine-scale-sets-overview/) 可与 [Azure Desired State Configuration (DSC)](/documentation/articles/virtual-machines-windows-extensions-dsc-overview/) 扩展处理程序配合使用。VMSS 提供部署和管理大量虚拟机的方法，并且可根据负载情况实现弹性扩大和缩小。VM 联机时，DSC 用于配置 VM，使它们能够运行生产软件。
+[虚拟机规模集 (VMSS)](./virtual-machine-scale-sets-overview.md) 可与 [Azure Desired State Configuration (DSC)](../virtual-machines/virtual-machines-windows-extensions-dsc-overview.md) 扩展处理程序配合使用。VMSS 提供部署和管理大量虚拟机的方法，并且可根据负载情况实现弹性扩大和缩小。VM 联机时，DSC 用于配置 VM，使它们能够运行生产软件。
 
 ## 部署到 VM 和部署到 VMSS 之间的差异
 
@@ -95,14 +93,14 @@ VMSS 节点有一个“properties”节，其中包含“VirtualMachineProfile�
 
 ## VMSS 的行为
 
-VMSS 的行为与单一 VM 的行为相同。创建新 VM 后，会自动使用 DSC 扩展对其进行预配。如果扩展需要更新的 WMF 版本，则 VM 会重新启动，然后联机。VM 联机后，将下载 DSC 配置 .zip 文件，并在 VM 上预配该文件。在 [Azure DSC Extension Overview](/documentation/articles/virtual-machines-windows-extensions-dsc-overview/)（Azure DSC 扩展概述）中可以找到详细信息。
+VMSS 的行为与单一 VM 的行为相同。创建新 VM 后，会自动使用 DSC 扩展对其进行预配。如果扩展需要更新的 WMF 版本，则 VM 会重新启动，然后联机。VM 联机后，将下载 DSC 配置 .zip 文件，并在 VM 上预配该文件。在 [Azure DSC Extension Overview](../virtual-machines/virtual-machines-windows-extensions-dsc-overview.md)（Azure DSC 扩展概述）中可以找到详细信息。
 
 ## 后续步骤 ##
-检查 [Azure Resource Manager template for the DSC extension](/documentation/articles/virtual-machines-windows-extensions-dsc-template/)（适用于 DSC 扩展的 Azure Resource Manager 模板）。
+检查 [Azure Resource Manager template for the DSC extension](../virtual-machines/virtual-machines-windows-extensions-dsc-template.md)（适用于 DSC 扩展的 Azure Resource Manager 模板）。
 
-了解[DSC 扩展安全处理凭据](/documentation/articles/virtual-machines-windows-extensions-dsc-credentials/)的方法。
+了解[DSC 扩展安全处理凭据](../virtual-machines/virtual-machines-windows-extensions-dsc-credentials.md)的方法。
 
-有关 Azure DSC 扩展处理程序的详细信息，请参阅 [Introduction to the Azure Desired State Configuration extension handler](/documentation/articles/virtual-machines-windows-extensions-dsc-overview/)（Azure Desired State Configuration 扩展处理程序简介）。
+有关 Azure DSC 扩展处理程序的详细信息，请参阅 [Introduction to the Azure Desired State Configuration extension handler](../virtual-machines/virtual-machines-windows-extensions-dsc-overview.md)（Azure Desired State Configuration 扩展处理程序简介）。
 
 有关 PowerShell DSC 的详细信息，请[访问 PowerShell 文档中心](https://msdn.microsoft.com/powershell/dsc/overview)。
 

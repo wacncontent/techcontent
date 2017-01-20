@@ -1,37 +1,36 @@
-<properties
-    pageTitle="设置使用 SQL 数据库的 Web 应用"
-    description="使用 Azure 资源管理器模板来部署包含 SQL 数据库的 Web 应用。"
-    services="app-service"
-    documentationcenter=""
-    author="cephalin"
-    manager="wpickett"
-    editor="" />  
+---
+title: 设置使用 SQL 数据库的 Web 应用
+description: 使用 Azure 资源管理器模板来部署包含 SQL 数据库的 Web 应用。
+services: app-service
+documentationcenter: 
+author: cephalin
+manager: wpickett
+editor: 
 
-<tags
-    ms.assetid="fb9648e1-9bf2-4537-bc4a-ab8d4953168c"
-    ms.service="app-service"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="04/27/2016"
-    wacn.date="01/03/2017"
-    ms.author="cephalin" />  
-
+ms.assetid: fb9648e1-9bf2-4537-bc4a-ab8d4953168c
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 04/27/2016
+wacn.date: 01/03/2017
+ms.author: cephalin
+---
 
 # 设置使用 SQL 数据库的 Web 应用
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 在本主题中，会学习如何创建用于部署 Web 应用和 SQL 数据库的 Azure Resource Manager 模板。你将了解如何定义要部署的资源以及如何定义执行部署时指定的参数。可将此模板用于自己的部署，或自定义此模板以满足要求。
 
-有关创建模板的详细信息，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。
+有关创建模板的详细信息，请参阅[创作 Azure 资源管理器模板](../azure-resource-manager/resource-group-authoring-templates.md)。
 
-有关部署应用的详细信息，请参阅[通过可预测的方式在 Azure 中部署复杂应用程序](/documentation/articles/app-service-deploy-complex-application-predictably/)。
+有关部署应用的详细信息，请参阅[通过可预测的方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)。
 
 有关完整的模板，请参阅[使用 SQL 数据库的 Web 应用的模板](https://github.com/Azure/azure-quickstart-templates/blob/master/201-web-app-sql-database/azuredeploy.json)。
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
 
 ## 将部署的内容
 在此模板中，你将部署：
@@ -46,10 +45,10 @@
 
 [![部署到 Azure](./media/app-service-web-arm-with-sql-database-provision/deploybutton.png)](https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-web-app-sql-database%2Fazuredeploy.json)
 
->[AZURE.NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”部署的模板，以适应 Azure 中国云环境。例如，替换某些终结点 -- 将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”。Azure 中国目前还不支持 Application Insight，所以需要把资源“Microsoft.Insights/components”删掉。
+>[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”部署的模板，以适应 Azure 中国云环境。例如，替换某些终结点 -- 将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”。Azure 中国目前还不支持 Application Insight，所以需要把资源“Microsoft.Insights/components”删掉。
 
 ## 要指定的参数
-[AZURE.INCLUDE [app-service-web-deploy-web-parameters](../../includes/app-service-web-deploy-web-parameters.md)]
+[!INCLUDE [app-service-web-deploy-web-parameters](../../includes/app-service-web-deploy-web-parameters.md)]
 
 ### administratorLogin
 要用于数据库服务器管理员的帐户名称。
@@ -134,7 +133,6 @@
         "sqlserverName": "[concat('sqlserver', uniqueString(resourceGroup().id))]"
     },
 
-
 ## 要部署的资源
 ### SQL Server 和数据库
 创建一个新的 SQL Server 和数据库。在 **serverName** 参数中指定服务器的名称，在 **serverLocation** 参数中指定其位置。在创建新服务器时，必须提供数据库服务器管理员的登录名和密码。
@@ -186,7 +184,7 @@
       ]
     },
 
-[AZURE.INCLUDE [app-service-web-deploy-web-host](../../includes/app-service-web-deploy-web-host.md)]
+[!INCLUDE [app-service-web-deploy-web-host](../../includes/app-service-web-deploy-web-host.md)]
 
 ### Web 应用
     {
@@ -222,7 +220,6 @@
         }
       ]
     },
-
 
 ### 自动缩放
     {
@@ -291,7 +288,6 @@
         "targetResourceUri": "[resourceId('Microsoft.Web/serverfarms', variables('hostingPlanName'))]"
       }
     },
-
 
 ### 状态代码 403 和 500 的警报规则、高 CPU 及 HTTP 队列长度
     {
@@ -432,7 +428,7 @@
     },
 
 ## 运行部署的命令
-[AZURE.INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
+[!INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
 
 ### PowerShell
     New-AzureRmResourceGroupDeployment -TemplateFile path/to/azuredeploy.json
@@ -444,11 +440,11 @@
 
 ### Azure CLI 2.0（预览版）
 
-[AZURE.INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
+[!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
     az resource group deployment create -g {resource-group-name} --template-file path/to/azuredeploy.json --parameters '@azuredeploy.parameters.json'
 
-> [AZURE.NOTE]
+> [!NOTE]
 有关参数 JSON 文件的内容，请参阅 [azuredeploy.parameters.json](https://github.com/Azure/azure-quickstart-templates/blob/master/201-web-app-sql-database/azuredeploy.parameters.json)。
 >
 >

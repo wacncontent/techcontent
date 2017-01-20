@@ -1,22 +1,21 @@
-<properties
-	pageTitle="使用 Azure 媒体视频缩略图创建视频摘要 | Azure"
-	description="视频摘要可通过自动选择来自源视频的有趣片段帮助你创建长视频的摘要。当你要提供有关长视频内容的快速概述时，这很有用。"
-	services="media-services"
-	documentationCenter=""
-	authors="juliako"
-	manager="erikre"
-	editor=""/>  
+---
+title: 使用 Azure 媒体视频缩略图创建视频摘要 | Azure
+description: 视频摘要可通过自动选择来自源视频的有趣片段帮助你创建长视频的摘要。当你要提供有关长视频内容的快速概述时，这很有用。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags
-	ms.service="media-services"
-	ms.workload="media"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="09/26/2016"   
-	wacn.date="11/25/2016"
-	ms.author="milanga;juliako;"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 11/25/2016
+ms.author: milanga;juliako;
+---
 
 #使用 Azure 媒体视频缩略图创建视频摘要
 ##概述
@@ -53,14 +52,12 @@ outputAudio|指定生成的视频是否包含音频。<br/>允许的值为：Tru
 fadeInFadeOut|指定单独动态缩略图之间是否使用淡入淡出转换。<br/>允许的值为：True 或 False。默认值为 True。
 maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数。默认值取决于原始视频的持续时间。
 
-
 下表描述了当 **maxMotionThumbnailInSecs** 未使用时的默认持续时间。
 
 ||||
 ---|---|---|---|---
 视频持续时间|d < 3 分钟|3 分钟 < d < 15 分钟|15 分钟 < d < 30 分钟| 30 分钟 < d
 缩略图持续时间|15 秒（2-3 个场景）| 30 秒（3-5 个场景）|60 秒（5-10 个场景）|90 秒（10-15 个场景）
-
 
 下面的 JSON 设置可用的参数。
 	
@@ -138,7 +135,6 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
                     // Used the chached credentials to create CloudMediaContext.
                     _context = new CloudMediaContext(_apiServer, _cachedCredentials);
 	
-
 	            // Run the thumbnail job.
 	            var asset = RunVideoThumbnailJob(@"C:\supportFiles\VideoThumbnail\BigBuckBunny.mp4",
 	                                        @"C:\supportFiles\VideoThumbnail\config.json");
@@ -274,10 +270,9 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
 
 [视频缩略图输出](http://ampdemo.azureedge.net/azuremediaplayer.html?url=http%3A%2F%2Fnimbuscdn-nimbuspm.streaming.mediaservices.windows.net%2Fd06f24dc-bc81-488e-a8d0-348b7dc41b56%2FHololens%2520Demo_VideoThumbnails_MotionThumbnail.mp4)
 
-
 ##相关链接
 
-[Azure Media Services Analytics Overview（Azure 媒体服务分析概述）](/documentation/articles/media-services-analytics-overview/)
+[Azure Media Services Analytics Overview（Azure 媒体服务分析概述）](./media-services-analytics-overview.md)
 
 [Azure Media Analytics demos（Azure 媒体分析演示）](http://azuremedialabs.azurewebsites.net/demos/Analytics.html)
 

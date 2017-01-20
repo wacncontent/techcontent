@@ -1,35 +1,31 @@
-<properties
-	pageTitle="通知中心本地化的突发新闻教程 - iOS"
-	description="了解如何使用 Azure 服务总线通知中心发送本地化的突发新闻通知 (iOS)。"
-	services="notification-hubs"
-	documentationCenter="ios"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>  
+---
+title: 通知中心本地化的突发新闻教程 - iOS
+description: 了解如何使用 Azure 服务总线通知中心发送本地化的突发新闻通知 (iOS)。
+services: notification-hubs
+documentationCenter: ios
+authors: wesmc7777
+manager: erikre
+editor: 
 
-
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="10/03/2016"
-	ms.author="wesmc"
-	wacn.date="11/22/2016"/>  
-
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 10/03/2016
+ms.author: wesmc
+wacn.date: 11/22/2016
+---
 
 # 使用通知中心将本地化的突发新闻发送到 iOS 设备
 
-> [AZURE.SELECTOR]
-- [Windows 应用商店 C#](/documentation/articles/notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification/)
-- [iOS](/documentation/articles/notification-hubs-ios-xplat-localized-apns-push-notification/)
-
+> [!div class="op_single_selector"]
+- [Windows 应用商店 C#](./notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification.md)
+- [iOS](./notification-hubs-ios-xplat-localized-apns-push-notification.md)
 
 ##概述
 
-本主题演示如何使用 Azure 通知中心的[模板](/documentation/articles/notification-hubs-templates-cross-platform-push-messages/)功能广播已按语言和设备本地化的突发新闻通知。在本教程中，你从在[使用通知中心发送突发新闻]中创建的 iOS 应用开始操作。完成时，你将可以注册感兴趣的突发新闻类别，指定要接收通知的语言并仅接收采用该语言的这些类别的推送通知。
-
+本主题演示如何使用 Azure 通知中心的[模板](./notification-hubs-templates-cross-platform-push-messages.md)功能广播已按语言和设备本地化的突发新闻通知。在本教程中，你从在[使用通知中心发送突发新闻]中创建的 iOS 应用开始操作。完成时，你将可以注册感兴趣的突发新闻类别，指定要接收通知的语言并仅接收采用该语言的这些类别的推送通知。
 
 此方案包含两个部分：
 
@@ -37,15 +33,11 @@
 
 - 后端使用 Azure 通知中心的**标记**和**模板**功能广播通知。
 
-
-
 ##先决条件
 
 你必须已完成学习[使用通知中心发送突发新闻]教程并具有可用的代码，因为本教程直接围绕该代码展开论述。
 
 可以选用 Visual Studio 2012 或更高版本。
-
-
 
 ##模板概念
 
@@ -69,12 +61,11 @@
 		}
 	}
 
-模板是很强大的功能，你可以在[模板](/documentation/articles/notification-hubs-templates-cross-platform-push-messages/)一文中了解其更多信息。
+模板是很强大的功能，你可以在[模板](./notification-hubs-templates-cross-platform-push-messages.md)一文中了解其更多信息。
 
 ##应用程序用户界面
 
 我们现在修改在[使用通知中心发送突发新闻]主题中创建的“突发新闻”应用，以使用模板发送本地化的突发新闻。
-
 
 在 MainStoryboard\_iPhone.storyboard 中，添加使用我们支持的三种语言的分段控件：英语、法语和汉语。
 
@@ -85,7 +76,6 @@
 ![][14]
 
 ##构建 iOS 应用程序
-
 
 1. 在 Notification.h 中，添加 *retrieveLocale* 方法，然后修改存储区和 subscribe 方法，如下所示：
 
@@ -172,9 +162,7 @@
 
 ##（可选）通过 .NET 控制台应用发送本地化的模板通知。
 
-[AZURE.INCLUDE [notification-hubs-localized-back-end](../../includes/notification-hubs-localized-back-end.md)]
-
-
+[!INCLUDE [notification-hubs-localized-back-end](../../includes/notification-hubs-localized-back-end.md)]
 
 ##（可选）通过设备发送本地化的模板通知
 
@@ -243,9 +231,6 @@
 		    [dataTask resume];
 		}
 
-
-
-
 ## 后续步骤
 
 有关使用模板的详细信息，请参阅：
@@ -253,31 +238,20 @@
 - [使用通知中心通知用户：ASP.NET]
 - [使用通知中心通知用户：移动服务]
 
-
-
-
-
-
 <!-- Images. -->
-
 
 [13]: ./media/notification-hubs-ios-send-localized-breaking-news/ios_localized1.png
 [14]: ./media/notification-hubs-ios-send-localized-breaking-news/ios_localized2.png
 
-
-
-
-
-
 <!-- URLs. -->
 
 [How To: Service Bus Notification Hubs (iOS Apps)]: http://msdn.microsoft.com/zh-cn/library/jj927168.aspx
-[使用通知中心发送突发新闻]: /documentation/articles/notification-hubs-ios-xplat-segmented-apns-push-notification/
-[使用通知中心通知用户：ASP.NET]: /documentation/articles/notification-hubs-aspnet-backend-windows-dotnet-wns-notification/
-[使用通知中心通知用户：移动服务]: /documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users/
+[使用通知中心发送突发新闻]: ./notification-hubs-ios-xplat-segmented-apns-push-notification.md
+[使用通知中心通知用户：ASP.NET]: ./notification-hubs-aspnet-backend-windows-dotnet-wns-notification.md
+[使用通知中心通知用户：移动服务]: ../mobile-services/mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users.md
 [Submit an app page]: http://go.microsoft.com/fwlink/p/?LinkID=266582
 [My Applications]: http://go.microsoft.com/fwlink/p/?LinkId=262039
-[Get started with Mobile Services]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/#create-new-service/
+[Get started with Mobile Services]: ../mobile-services/mobile-services-javascript-backend-windows-store-dotnet-get-started.md#create-new-service/
 
 [wns object]: http://go.microsoft.com/fwlink/p/?LinkId=260591
 [Notification Hubs Guidance]: http://msdn.microsoft.com/zh-cn/library/jj927170.aspx

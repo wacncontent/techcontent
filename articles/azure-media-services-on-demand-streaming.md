@@ -1,14 +1,17 @@
-<properties
-	pageTitle="Azure 媒体服务实现视频点播操作手册"
-    description="Azure 媒体服务实现视频点播操作手册"
-    services=""
-    documentationCenter=""
-    authors=""
-    manager=""
-    editor=""
-    tags=""/>
+---
+title: Azure 媒体服务实现视频点播操作手册
+description: Azure 媒体服务实现视频点播操作手册
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags ms.service="multiple" ms.date="" wacn.date="08/10/2016"/>
+ms.service: multiple
+ms.date: 
+wacn.date: 08/10/2016
+---
 
 #Azure 媒体服务实现视频点播操作手册
 
@@ -70,7 +73,7 @@
 
 ![12](./media/azure-media-services-on-demand-streaming/12.png)
 
->[AZURE.NOTE]开启流式处理端点需要 20 分钟左右的时间。
+>[!NOTE]开启流式处理端点需要 20 分钟左右的时间。
 
 ##Step 5: 发布视频
 
@@ -96,15 +99,15 @@
 
 	![18](./media/azure-media-services-on-demand-streaming/18.png)
 
->[AZURE.NOTE]您也可以使用 Azure Media Player 模拟视频 APP，测试已编码视频是否可正常播放，打开 Azure Media Player 页面，在 URL 框中输入 Azure 媒体服务生成的**发布 URL**，并点击 **Update Player** 按钮。即可实现自适应码率视频的播放。 [下载　Azure Media Player](http://ampdemo.azureedge.net/azuremediaplayer.html)
+>[!NOTE]您也可以使用 Azure Media Player 模拟视频 APP，测试已编码视频是否可正常播放，打开 Azure Media Player 页面，在 URL 框中输入 Azure 媒体服务生成的**发布 URL**，并点击 **Update Player** 按钮。即可实现自适应码率视频的播放。 [下载　Azure Media Player](http://ampdemo.azureedge.net/azuremediaplayer.html)
 
 如需上传并编码多个视频，按照 Step2、3 的操作即可。
 
 ##Step6: 使用 CDN 为视频点播加速
 
-如果视频 APP 的用户分布地域比较广，并且为了满足不同网络环境的用户都能流畅观看，建议使用 Azure CDN 服务加速您的视频点播， Azure CDN 服务可以将用户请求分配到最优的 CDN 节点，为用户提供高速网络访问的体验。如何创建并使用 CDN 详见：[VOD 视频点播加速 CDN 节点创建](/documentation/articles/cdn-how-to-create-VOD-CDN-endpoint/)和[使用 Azure CDN](/documentation/articles/cdn-how-to-use/)。
+如果视频 APP 的用户分布地域比较广，并且为了满足不同网络环境的用户都能流畅观看，建议使用 Azure CDN 服务加速您的视频点播， Azure CDN 服务可以将用户请求分配到最优的 CDN 节点，为用户提供高速网络访问的体验。如何创建并使用 CDN 详见：[VOD 视频点播加速 CDN 节点创建](./cdn/cdn-how-to-create-VOD-CDN-endpoint.md)和[使用 Azure CDN](./cdn/cdn-how-to-use.md)。
 
 ##常见问题与相关文档
 
-- [Azure 按需媒体编码器](/documentation/articles/media-services-encode-asset/)
-- [媒体编码器标准格式和编解码器](/documentation/articles/media-services-media-encoder-standard-formats/)
+- [Azure 按需媒体编码器](./media-services/media-services-encode-asset.md)
+- [媒体编码器标准格式和编解码器](./media-services/media-services-media-encoder-standard-formats.md)

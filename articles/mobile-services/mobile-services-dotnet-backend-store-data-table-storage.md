@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="构建使用表存储的 .NET 后端移动服务 | Azure 移动服务" 
-	description="了解如何对 .NET 后端移动服务使用 Azure 表存储。" 
-	services="mobile-services" 
-	documentationCenter="" 
-	authors="ggailey777" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 构建使用表存储的 .NET 后端移动服务 | Azure 移动服务
+description: 了解如何对 .NET 后端移动服务使用 Azure 表存储。
+services: mobile-services
+documentationCenter: 
+authors: ggailey777
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 # 构建使用表存储的 .NET 后端移动服务
 
@@ -35,7 +35,7 @@
 
   	这会将 Azure 存储空间服务支持添加到 .NET 后端移动服务项目。
 
-3. 如果你尚未创建你的存储帐户，请参阅[如何创建存储帐户](/documentation/articles/storage-create-storage-account/)。
+3. 如果你尚未创建你的存储帐户，请参阅[如何创建存储帐户](../storage/storage-create-storage-account.md)。
 
 4. 在 [Azure 经典管理门户]中，单击“存储”，单击存储帐户，然后单击“管理密钥”。
 
@@ -71,7 +71,7 @@
 	        public bool Complete { get; set; }
 	    }
 
-	>[AZURE.NOTE]**StorageData** 类型的 Id 属性需要一个复合键，该键是格式为 *partitionId*,*rowValue* 的字符串。
+	>[!NOTE]**StorageData** 类型的 Id 属性需要一个复合键，该键是格式为 *partitionId*,*rowValue* 的字符串。
 
 2. 在 **TodoItemController** 中添加以下 using 语句。
 
@@ -136,24 +136,19 @@
 
 现在你已知道，为 .NET 后端使用表存储是如此简单，接下来建议你了解其他一些后端存储选项：
 
-+ [使用混合连接来连接到本地 SQL Server](/documentation/articles/mobile-services-dotnet-backend-hybrid-connections-get-started/)</br>混合连接可让移动服务安全地连接到本地资产。这样，移动客户端便可以使用 Azure 访问你的本地数据。支持的资产包括静态 TCP 端口上运行的任何资源，例如 Microsoft SQL Server、MySQL、HTTP Web API 和大多数自定义 Web 服务。
-
-
++ [使用混合连接来连接到本地 SQL Server](./mobile-services-dotnet-backend-hybrid-connections-get-started.md)</br>混合连接可让移动服务安全地连接到本地资产。这样，移动客户端便可以使用 Azure 访问你的本地数据。支持的资产包括静态 TCP 端口上运行的任何资源，例如 Microsoft SQL Server、MySQL、HTTP Web API 和大多数自定义 Web 服务。
 
 <!-- Anchors. -->
 [Create a non-relational store]: #create-store
 [Modify data and controllers]: #modify-service
 [Test the application]: #test-application
 
-
 <!-- Images. -->
 
-
 <!-- URLs. -->
-[移动服务入门]: /documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-get-started/
+[移动服务入门]: ./mobile-services-dotnet-backend-windows-store-dotnet-get-started.md
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
-[What is the Table Service]: /documentation/articles/storage-dotnet-how-to-use-tables/#what-is
+[What is the Table Service]: ../storage/storage-dotnet-how-to-use-tables.md#what-is
 [MongoLab Add-on Page]: /gallery/store/mongolab/mongolab
  
-
 <!---HONumber=Mooncake_0118_2016-->

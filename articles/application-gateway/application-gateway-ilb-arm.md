@@ -1,28 +1,27 @@
-<properties
-    pageTitle="使用 Azure Resource Manager 创建和配置具有内部负载均衡器 (ILB) 的应用程序网关 | Azure"
-    description="本页提供有关使用 Azure Resource Manager 创建、配置、启动和删除具有内部负载均衡器 (ILB) 的 Azure 应用程序网关的说明"
-    documentationcenter="na"
-    services="application-gateway"
-    author="georgewallace"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: 使用 Azure Resource Manager 创建和配置具有内部负载均衡器 (ILB) 的应用程序网关 | Azure
+description: 本页提供有关使用 Azure Resource Manager 创建、配置、启动和删除具有内部负载均衡器 (ILB) 的 Azure 应用程序网关的说明
+documentationcenter: na
+services: application-gateway
+author: georgewallace
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="75cfd5a2-e378-4365-99ee-a2b2abda2e0d"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/14/2016"
-    wacn.date="01/03/2017"
-    ms.author="gwallace" />  
-
+ms.assetid: 75cfd5a2-e378-4365-99ee-a2b2abda2e0d
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/14/2016
+wacn.date: 01/03/2017
+ms.author: gwallace
+---
 
 # 使用 Azure Resource Manager 创建具有内部负载均衡器 (ILB) 的应用程序网关
-> [AZURE.SELECTOR]
-- [Azure 经典 PowerShell](/documentation/articles/application-gateway-ilb/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-ilb-arm/)
+> [!div class="op_single_selector"]
+- [Azure 经典 PowerShell](./application-gateway-ilb.md)
+- [Azure Resource Manager PowerShell](./application-gateway-ilb-arm.md)
 
 可以配置使用面向 Internet 的 VIP 或不向 Internet 公开的内部终结点（也称为内部负载均衡器 (ILB) 终结点）的 Azure 应用程序网关。配置使用 ILB 的网关适用于不向 Internet 公开的内部业务线应用程序。对于位于不向 Internet 公开的安全边界内的多层应用程序中的服务和层也很有用，但仍需要执行轮循负载分布、会话粘性或安全套接字层 (SSL) 终止。
 
@@ -55,7 +54,7 @@
 
 ## 创建 Resource Manager 的资源组
 
-确保切换 PowerShell 模式，以便使用 Azure Resource Manager cmdlet。[将 Windows PowerShell 与 Resource Manager 配合使用](/documentation/articles/powershell-azure-resource-manager/)中提供了详细信息。
+确保切换 PowerShell 模式，以便使用 Azure Resource Manager cmdlet。[将 Windows PowerShell 与 Resource Manager 配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)中提供了详细信息。
 
 ### 步骤 1
 
@@ -157,7 +156,7 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 此步骤会配置应用程序网关的实例大小。
 
-> [AZURE.NOTE]
+> [!NOTE]
 *InstanceCount* 的默认值为 2，最大值为 10。*GatewaySize* 的默认值为 Medium。可以在 Standard\_Small、Standard\_Medium 和 Standard\_Large 之间进行选择。
 
 ## 使用 New-AzureApplicationGateway 创建应用程序网关
@@ -190,7 +189,6 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 <br/>  
 
-
     VERBOSE: 9:49:34 PM - Begin Operation: Stop-AzureApplicationGateway
     VERBOSE: 10:10:06 PM - Completed Operation: Stop-AzureApplicationGateway
     Name       HTTP Status Code     Operation ID                             Error
@@ -203,14 +201,13 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 <br/>  
 
-
     VERBOSE: 10:49:34 PM - Begin Operation: Remove-AzureApplicationGateway
     VERBOSE: 10:50:36 PM - Completed Operation: Remove-AzureApplicationGateway
     Name       HTTP Status Code     Operation ID                             Error
     ----       ----------------     ------------                             ----
     Successful OK                   055f3a96-8681-2094-a304-8d9a11ad8301
 
-> [AZURE.NOTE]
+> [!NOTE]
 可以使用 **-force** 开关来禁止显示该删除的确认消息。
 
 若要验证是否已删除服务，可以使用 `Get-AzureRmApplicationGateway` cmdlet。此步骤不是必需的。
@@ -219,20 +216,19 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 <br/>  
 
-
     VERBOSE: 10:52:46 PM - Begin Operation: Get-AzureApplicationGateway
 
     Get-AzureApplicationGateway : ResourceNotFound: The gateway does not exist.
 
 ## 后续步骤
 
-如果你要配置 SSL 卸载，请参阅 [Configure an application gateway for SSL offload](/documentation/articles/application-gateway-ssl/)（配置应用程序网关以进行 SSL 卸载）。
+如果你要配置 SSL 卸载，请参阅 [Configure an application gateway for SSL offload](./application-gateway-ssl.md)（配置应用程序网关以进行 SSL 卸载）。
 
-若要将应用程序网关配置为与 ILB 配合使用，请参阅[创建具有内部负载均衡器 (ILB) 的应用程序网关](/documentation/articles/application-gateway-ilb/)。
+若要将应用程序网关配置为与 ILB 配合使用，请参阅[创建具有内部负载均衡器 (ILB) 的应用程序网关](./application-gateway-ilb.md)。
 
 如需大体上更详细地了解负载均衡选项，请参阅：
 
-* [Azure Load Balancer](/documentation/services/load-balancer/)
-* [Azure 流量管理器](/documentation/services/traffic-manager/)
+* [Azure Load Balancer](../load-balancer/index.md/)
+* [Azure 流量管理器](../traffic-manager/index.md/)
 
 <!---HONumber=Mooncake_1226_2016-->

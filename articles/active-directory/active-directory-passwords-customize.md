@@ -1,25 +1,25 @@
-<properties 
-	pageTitle="自定义：Azure AD 密码管理 | Azure" 
-	description="如何根据需要在 Azure AD 中自定义密码管理外观、行为和通知。" 
-	services="active-directory" 
-	documentationCenter="" 
-	authors="asteen" 
-	manager="femila"
-	editor="curtand"/>
+---
+title: 自定义：Azure AD 密码管理 | Azure
+description: 如何根据需要在 Azure AD 中自定义密码管理外观、行为和通知。
+services: active-directory
+documentationCenter: 
+authors: asteen
+manager: femila
+editor: curtand
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/03/2016"
-	wacn.date="01/06/2017"
-	ms.author="asteen"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/03/2016
+wacn.date: 01/06/2017
+ms.author: asteen
+---
 
 # 自定义密码管理以符合组织的需求
 
-> [AZURE.IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](/documentation/articles/active-directory-passwords-update-your-own-password/)。
+> [!IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
 
 为了尽可能地向用户提供最佳体验，我们建议你了解并试用你可以使用的所有密码管理配置选项。事实上，你可以转到 [Azure 经典管理门户](https://manage.windowsazure.cn)的“Active Directory 扩展”中的配置选项卡，立即开始探索。本主题将引导你从 [Azure 经典管理门户](https://manage.windowsazure.cn)中目录的“配置”选项卡，完成管理员可以进行的不同密码管理自定义，包括：
 
@@ -129,11 +129,10 @@
             </tr>
           </tbody></table>
 
-
 ## 密码管理行为 <a name="password-management-behavior"></a>
 下表说明了每个控件对注册密码重置并重置密码的用户体验有何影响。可以在 [Azure 经典管理门户](https://manage.windowsazure.cn)中目录的“配置”选项卡的“用户密码重置策略”部分下配置这些选项。
 
-> [AZURE.NOTE]你所使用的管理员帐户必须分配了 AAD Premium 许可证才能看到这些策略控件。<br><br>这些策略控件仅适用于重置密码的最终用户，而不是管理员。**Microsoft 为管理员指定了默认的备用电子邮件和/或移动电话策略，这些策略无法更改。**
+> [!NOTE]你所使用的管理员帐户必须分配了 AAD Premium 许可证才能看到这些策略控件。<br><br>这些策略控件仅适用于重置密码的最终用户，而不是管理员。**Microsoft 为管理员指定了默认的备用电子邮件和/或移动电话策略，这些策略无法更改。**
 
 <table>
             <tbody><tr>
@@ -857,7 +856,6 @@
             </tr>
           </tbody></table>
 
-
 <br/>
 <br/>
 <br/>
@@ -865,15 +863,14 @@
 ## 密码重置文档的链接
 以下是所有 Azure AD 密码重置文档页面的链接：
 
-* **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](/documentation/articles/active-directory-passwords-update-your-own-password/)。
-* [**工作原理**](/documentation/articles/active-directory-passwords-how-it-works/) - 了解六个不同的服务组件及其功能
-* [**入门**](/documentation/articles/active-directory-passwords-getting-started/) - 了解如何让用户重置及更改云密码或本地密码
-* [**最佳实践**](/documentation/articles/active-directory-passwords-best-practices/) - 了解如何快速部署且有效管理组织的密码
-* [**深入分析**](/documentation/articles/active-directory-passwords-get-insights/) - 了解集成式报告功能
-* [**常见问题**](/documentation/articles/active-directory-passwords-faq/) - 获取常见问题的解答
-* [**故障排除**](/documentation/articles/active-directory-passwords-troubleshoot/) - 了解如何快速排查服务的问题
-* [**了解更多**](/documentation/articles/active-directory-passwords-learn-more/) - 深入探索服务工作原理的技术细节
-
+* **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
+* [**工作原理**](./active-directory-passwords-how-it-works.md) - 了解六个不同的服务组件及其功能
+* [**入门**](./active-directory-passwords-getting-started.md) - 了解如何让用户重置及更改云密码或本地密码
+* [**最佳实践**](./active-directory-passwords-best-practices.md) - 了解如何快速部署且有效管理组织的密码
+* [**深入分析**](./active-directory-passwords-get-insights.md) - 了解集成式报告功能
+* [**常见问题**](./active-directory-passwords-faq.md) - 获取常见问题的解答
+* [**故障排除**](./active-directory-passwords-troubleshoot.md) - 了解如何快速排查服务的问题
+* [**了解更多**](./active-directory-passwords-learn-more.md) - 深入探索服务工作原理的技术细节
 
 [001]: ./media/active-directory-passwords-customize/001.jpg "Image_001.jpg"
 

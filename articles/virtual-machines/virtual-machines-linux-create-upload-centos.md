@@ -1,50 +1,47 @@
-<properties
-	pageTitle="在 Azure 中创建和上载基于 CentOS 的 Linux VHD"
-	description="了解如何创建和上载包含基于 CentOS 的 Linux 操作系统的 Azure 虚拟硬盘 (VHD)。"
-	services="virtual-machines-linux"
-	documentationCenter=""
-	authors="szarkos"
-	manager="timlt"
-	editor="tysonn"
-	tags="azure-resource-manager,azure-service-management"/>
+---
+title: 在 Azure 中创建和上载基于 CentOS 的 Linux VHD
+description: 了解如何创建和上载包含基于 CentOS 的 Linux 操作系统的 Azure 虚拟硬盘 (VHD)。
+services: virtual-machines-linux
+documentationCenter: 
+authors: szarkos
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager,azure-service-management
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="05/09/2016"
-	wacn.date="06/29/2016"
-	ms.author="szarkos"/>
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 05/09/2016
+wacn.date: 06/29/2016
+ms.author: szarkos
+---
 
 # 为 Azure 准备基于 CentOS 的虚拟机
-
 
 - [为 Azure 准备 CentOS 6.x 虚拟机](#centos-6.x)
 - [为 Azure 准备 CentOS 7.0+ 虚拟机](#centos-7.0+)
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
 
 ##先决条件##
 
 本文假设你已在虚拟硬盘中安装了 CentOS（或类似的衍生产品）Linux 操作系统。存在多个用于创建 .vhd 文件的工具，例如 Hyper-V 等虚拟化解决方案。有关说明，请参阅[安装 Hyper-V 角色和配置虚拟机](http://technet.microsoft.com/zh-cn/library/hh846766.aspx)。
 
-
 **CentOS 安装说明**
 
-- 请同时阅读[通用 Linux 安装笔记](/documentation/articles/virtual-machines-linux-create-upload-generic/#general-linux-installation-notes)来查看更多为 Azure 准备 Linux 的提示。
+- 请同时阅读[通用 Linux 安装笔记](./virtual-machines-linux-create-upload-generic.md#general-linux-installation-notes)来查看更多为 Azure 准备 Linux 的提示。
 
 - Azure 不支持 VHDX 格式，仅支持**固定大小的 VHD**。可使用 Hyper-V 管理器或 convert-vhd cmdlet 将磁盘转换为 VHD 格式。
 
-- 在安装 Linux 系统时，建议使用标准分区而不是 LVM（通常是许多安装的默认值）。这将避免 LVM 与克隆 VM 发生名称冲突，特别是在 OS 磁盘需要连接到另一台 VM 以进行故障排除的情况下。如果首选，LVM 或 [RAID](/documentation/articles/virtual-machines-linux-configure-raid/) 可以在数据磁盘上使用。
+- 在安装 Linux 系统时，建议使用标准分区而不是 LVM（通常是许多安装的默认值）。这将避免 LVM 与克隆 VM 发生名称冲突，特别是在 OS 磁盘需要连接到另一台 VM 以进行故障排除的情况下。如果首选，LVM 或 [RAID](./virtual-machines-linux-configure-raid.md) 可以在数据磁盘上使用。
 
 - 由于低于 2.6.37 的 Linux 内核版本中的 bug，更大的 VM 不支持 NUMA。此问题主要影响使用上游 Red Hat 2.6.32 内核的分发。手动安装的 Azure Linux 代理 (waagent) 将自动在 Linux 内核的 GRUB 配置中禁用 NUMA。可以在下面的步骤中找到有关此内容的详细信息。
 
 - 不要在操作系统磁盘上配置交换分区。可以配置 Linux 代理，以在临时资源磁盘上创建交换文件。可以在下面的步骤中找到有关此内容的详细信息。
 
 - 所有 VHD 的大小必须是 1 MB 的倍数。
-
 
 ## <a id="centos-6.x"> </a>CentOS 6.x ##
 
@@ -78,18 +75,15 @@
 		# sudo ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
 		# sudo rm -f /etc/udev/rules.d/70-persistent-net.rules
 
-
 7. 通过运行以下命令，确保网络服务将在引导时启动：
 
 		# sudo chkconfig network on
-
 
 8. **仅限 CentOS 6.3**：安装适用于 Linux Integration Services (LIS) 的驱动程序
 
 	**重要说明：该步骤仅适用于 CentOS 6.3 及更低版本。** 在 CentOS 6.4+ 中，*标准内核中已提供 *Linux Integration Services。
 
 	- 按照 [LIS 下载页](https://www.microsoft.com/download/details.aspx?id=46842)上的安装说明进行操作并将 RPM 安装到你的映像上。  
-
 
 9. 通过运行以下命令安装 python-pyasn1 包：
 
@@ -141,7 +135,6 @@
 
 	**注意：**本指南的余下部分假设你至少会使用 [openlogic] 存储库，下面将使用该存储库安装 Azure Linux 代理。
 
-
 11.	将下列行添加到 /etc/yum.conf：
 
 		http_caching=packages
@@ -176,7 +169,6 @@
 
 	根据需要可以配置 `crashkernel` 选项，但请注意此参数会使虚拟机中的可用内存量减少 128MB 或更多，这在较小的虚拟机上可能会出现问题。
 
-
 16.	请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
 
 17. 通过运行以下命令来安装 Azure Linux 代理：
@@ -203,9 +195,7 @@
 
 20. 在 Hyper-V 管理器中单击**“操作”->“关闭”**。Linux VHD 现已准备好上载到 Azure。
 
-
 ----------
-
 
 ## <a id="centos-7.0+"> </a>CentOS 7.0+ ##
 
@@ -216,7 +206,6 @@
  - NetworkManager 包不再与 Azure Linux 代理冲突。默认情况下将安装此包，建议你不要删除它。
  - GRUB2 现在用作默认引导加载程序，因此用于编辑内核参数的过程已更改（请参见下文）。
  - XFS 现在是默认文件系统。如果需要，仍可以使用 ext4 文件系统。
-
 
 **配置步骤**
 
@@ -294,8 +283,6 @@
 		gpgcheck=1
 		enabled=0
 		gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-
-
 
 	**注意：**本指南的余下部分假设你至少会使用 [openlogic] 存储库，下面将使用该存储库安装 Azure Linux 代理。
 

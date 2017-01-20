@@ -32,7 +32,6 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
 
 1. 对于下面的示例，请首先在你最喜欢的 Java 开发环境中为控制台/shell 应用程序创建一个新的 Maven 项目。该类将称为 ```ErrorNotificationHandler```。
 
-
     	import java.util.function.Consumer;
     	import com.microsoft.azure.eventprocessorhost.ExceptionReceivedEventArgs;
     
@@ -45,9 +44,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
     		}
     	}
 
-
 2. 使用以下代码创建名为 ```EventProcessor``` 的新类。
-
 
     	import com.microsoft.azure.eventhubs.EventData;
     	import com.microsoft.azure.eventprocessorhost.CloseReason;
@@ -99,9 +96,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
     		}
     	}
 
-
 3. 使用以下代码创建一个名为 ```EventProcessorSample``` 的最终类。
-
 
     	import com.microsoft.azure.eventprocessorhost.*;
     	import com.microsoft.azure.servicebus.ConnectionStringBuilder;
@@ -165,9 +160,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
     		}
     	}
 
-
 4. 将以下字段替换为创建事件中心和存储帐户时所使用的值。
-
 
     	final String namespaceName = "----ServiceBusNamespaceName-----";
     	final String eventHubName = "----EventHubName-----";
@@ -178,17 +171,15 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
     	final String storageAccountName = "---StorageAccountName----"
     	final String storageAccountKey = "---StorageAccountKey----";
 
-
-> [AZURE.NOTE] 本教程使用了一个 EventProcessorHost 实例。若要增加吞吐量，建议运行多个 EventProcessorHost 实例。在那些情况下，为了对接收到的事件进行负载均衡，各个不同实例会自动相互协调。如果希望多个接收方都各自处理全部事件，则必须使用 **ConsumerGroup** 概念。在从不同计算机中接收事件时，根据部署 EventProcessorHost 实例的计算机（或角色）来指定该实例的名称可能会很有用。
+> [!NOTE] 本教程使用了一个 EventProcessorHost 实例。若要增加吞吐量，建议运行多个 EventProcessorHost 实例。在那些情况下，为了对接收到的事件进行负载均衡，各个不同实例会自动相互协调。如果希望多个接收方都各自处理全部事件，则必须使用 **ConsumerGroup** 概念。在从不同计算机中接收事件时，根据部署 EventProcessorHost 实例的计算机（或角色）来指定该实例的名称可能会很有用。
 
 <!-- Links -->
-[Event Hubs Overview]: /documentation/articles/event-hubs-overview/
-[Azure 存储帐户]: /documentation/articles/storage-create-storage-account/
+[Event Hubs Overview]: ../articles/event-hubs/event-hubs-overview.md
+[Azure 存储帐户]: ../articles/storage/storage-create-storage-account.md
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 
 <!-- Images -->
 [11]: ./media/service-bus-event-hubs-getstarted/create-eph-csharp2.png
 [12]: ./media/service-bus-event-hubs-getstarted/create-eph-csharp3.png
-
 
 <!---HONumber=Mooncake_0718_2016-->

@@ -1,33 +1,31 @@
-<properties 
-	pageTitle="使用 REST 将文件上传到媒体服务帐户 | Azure" 
-	description="了解如何通过创建和上传资产将媒体内容加入媒体服务。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 REST 将文件上传到媒体服务帐户 | Azure
+description: 了解如何通过创建和上传资产将媒体内容加入媒体服务。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/19/2016" 
-	wacn.date="12/12/2016"
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/19/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 # 使用 REST 将文件上传到媒体服务帐户
 
- > [AZURE.SELECTOR]
- - [.NET](/documentation/articles/media-services-dotnet-upload-files/)
- - [REST](/documentation/articles/media-services-rest-upload-files/)
+ > [!div class="op_single_selector"]
+ - [.NET](./media-services-dotnet-upload-files.md)
+ - [REST](./media-services-rest-upload-files.md)
 
 在媒体服务中，可以将数字文件上传到资产中。[资产](https://docs.microsoft.com/zh-cn/rest/api/media/operations/asset)实体可以包含视频、音频、图像、缩略图集合、图文轨迹和隐藏式字幕文件（以及有关这些文件的元数据。） 将文件上传到资产后，相关内容即安全地存储在云中供后续处理和流式处理。
 
->[AZURE.NOTE]选择资产文件名时需考虑下列事项：
+>[!NOTE]选择资产文件名时需考虑下列事项：
 >
 >- 构建流内容的 URL 时，媒体服务会使用 IAssetFile.Name 属性的值（如 http://{AMSAccount}.origin.mediaservices.chinacloudapi.cn/{GUID}/{IAssetFile.Name}/streamingParameters.）。出于此原因，不允许使用百分号编码。**Name** 属性的值不能含有任何以下[百分号编码保留字符](http://zh.wikipedia.org/wiki/百分号编码#.E4.BF.9D.E7.95.99.E5.AD.97.E7.AC.A6.E7.9A.84.E7.99.BE.E5.88.86.E5.8F.B7.E7.BC.96.E7.A0.81)：!*'();:@&=+$,/?%#"。此外，文件扩展名中只能含有一个“.”。
 >
@@ -39,17 +37,17 @@
 - 对资产加密（可选）
 - 将文件上传到 blob 存储
 
-AMS 还可用于批量上传资产。有关详细信息，请参阅[此](/documentation/articles/media-services-rest-upload-files/#upload_in_bulk)部分。
+AMS 还可用于批量上传资产。有关详细信息，请参阅[此](./media-services-rest-upload-files.md#upload_in_bulk)部分。
 
 ##上传资产
 
 ###创建资产
 
->[AZURE.NOTE] 使用媒体服务 REST API 时，需注意以下事项：
+>[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
 >
->访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](/documentation/articles/media-services-rest-how-to-use/)。
+>访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 
->请按照[使用 REST API 连接到媒体服务](/documentation/articles/media-services-rest-connect-programmatically/)中所述对媒体服务 URI 执行后续调用。
+>请按照[使用 REST API 连接到媒体服务](./media-services-rest-connect-programmatically.md)中所述对媒体服务 URI 执行后续调用。
  
 资产是媒体服务中多种类型的对象或多组对象（包括视频、音频、图像、缩略图集合、文本轨道和隐藏的解释性字幕文件）的容器。在 REST API 中，创建资产需要向媒体服务发送 POST 请求，并将任何有关资产的属性信息放入请求正文中。
 
@@ -59,14 +57,13 @@ AMS 还可用于批量上传资产。有关详细信息，请参阅[此](/docume
 
 - **StorageEncrypted** = **1**：如果要使用 AES-256 位加密法对文件加密以方便上载和存储，请指定此值。
 
-	如果资产已通过存储加密，则必须配置资产传送策略。有关详细信息，请参阅[配置资产传送策略](/documentation/articles/media-services-rest-configure-asset-delivery-policy/)。
+	如果资产已通过存储加密，则必须配置资产传送策略。有关详细信息，请参阅[配置资产传送策略](./media-services-rest-configure-asset-delivery-policy.md)。
 
 - **CommonEncryptionProtected** = **2**：如果要上传使用常见加密法（例如 PlayReady）保护的文件，请指定此值。
 
 - **EnvelopeEncryptionProtected** = **4**：如果要上传使用 AES 文件加密的 HLS，请指定此值。请注意，Transform Manager 必须已对文件进行编码和加密。
 
->[AZURE.NOTE]如果资产要使用加密，则必须按以下主题中所述创建 **ContentKey** 并将其链接到你的资产：[如何创建 ContentKey](/documentation/articles/media-services-rest-create-contentkey/)。请注意，将文件上传到资产后，需要使用加密**资产**期间获取的值更新 **AssetFile** 实体上的加密属性。使用 **MERGE** HTTP 请求完成此操作。
-
+>[!NOTE]如果资产要使用加密，则必须按以下主题中所述创建 **ContentKey** 并将其链接到你的资产：[如何创建 ContentKey](./media-services-rest-create-contentkey.md)。请注意，将文件上传到资产后，需要使用加密**资产**期间获取的值更新 **AssetFile** 实体上的加密属性。使用 **MERGE** HTTP 请求完成此操作。
 
 以下示例说明了如何创建资产。
 
@@ -84,7 +81,6 @@ AMS 还可用于批量上传资产。有关详细信息，请参阅[此](/docume
 	
 	{"Name":"BigBuckBunny.mp4"}
 	
-
 **HTTP 响应**
 
 如果成功，将返回以下响应：
@@ -144,7 +140,6 @@ AMS 还可用于批量上传资产。有关详细信息，请参阅[此](/docume
 	   "ParentAssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1"
 	}
 
-
 **HTTP 响应**
 
 	HTTP/1.1 201 Created
@@ -178,7 +173,6 @@ AMS 还可用于批量上传资产。有关详细信息，请参阅[此](/docume
 	   "MimeType":"video/mp4",
 	   "ContentChecksum":null
 	}
-
 
 ### 创建具有写入权限的 AccessPolicy。 
 
@@ -231,7 +225,6 @@ AMS 还可用于批量上传资产。有关详细信息，请参阅[此](/docume
 
 若要检索实际上传 URL，请创建一个 SAS 定位符。定位符为希望访问资产中文件的客户端定义连接终结点的开始时间和类型。可以为给定 AccessPolicy 和资产对创建多个定位符实体，以处理不同的客户端请求和需求。这其中的任一定位符都可使用 AccessPolicy 的 StartTime 值和 DurationInMinutes 值来确定可以使用某 URL 的时间长度。有关详细信息，请参阅[定位符](https://docs.microsoft.com/zh-cn/rest/api/media/operations/locator)。
 
-
 SAS URL 采用以下格式：
 
 	{https://myaccount.blob.core.chinacloudapi.cn}/{asset name}/{video file name}?{SAS signature}
@@ -261,7 +254,6 @@ SAS URL 采用以下格式：
 	   "StartTime":"2015-02-18T16:45:53",
 	   "Type":1
 	}
-
 
 **HTTP 响应**
 
@@ -299,10 +291,9 @@ SAS URL 采用以下格式：
 	
 设置 AccessPolicy 和定位符后，即可使用 Azure 存储 REST API 将具体的文件上传到 Azure BLOB 存储容器。也可以按页或块 BLOB 来上传。
 
->[AZURE.NOTE] 必须将要上传的文件的文件名添加到在上一节收到的定位符 **Path** 值中。例如，https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . .
+>[!NOTE] 必须将要上传的文件的文件名添加到在上一节收到的定位符 **Path** 值中。例如，https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . .
 
 有关使用 Azure 存储 blob 的详细信息，请参阅 [Blob 服务 REST API](http://msdn.microsoft.com/zh-cn/library/azure/dd135733.aspx)。
-
 
 ### 更新 AssetFile 
 
@@ -326,7 +317,6 @@ SAS URL 采用以下格式：
 	   "ParentAssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1"
 	}
 
-
 **HTTP 响应**
 
 如果成功，将返回以下响应：HTTP/1.1 204 无内容
@@ -334,7 +324,6 @@ SAS URL 采用以下格式：
 ### 删除定位符和 AccessPolicy 
 
 **HTTP 请求**
-
 
 	DELETE https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Locators('nb%3Alid%3AUUID%3Aaf57bdd8-6751-4e84-b403-f3c140444b54') HTTP/1.1
 	DataServiceVersion: 1.0;NetFx
@@ -345,7 +334,6 @@ SAS URL 采用以下格式：
 	x-ms-version: 2.11
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
-	
 **HTTP 响应**
 
 如果成功，将返回以下响应：
@@ -376,7 +364,6 @@ SAS URL 采用以下格式：
 ###创建 IngestManifest
 
 IngestManifest 是一个容器，用于放置一组资产、资产文件以及可用于确定该组资产或文件的批量引入进度的统计信息。
-
 
 **HTTP 请求**
 
@@ -430,11 +417,9 @@ IngestManifestAsset 表示 IngestManifest 内与批量引入一起使用的资�
 	Expect: 100-continue
 	{ "ParentIngestManifestId" : "nb:mid:UUID:5c77f186-414f-8b48-8231-17f9264e2048", "Asset" : { "Id" : "nb:cid:UUID:b757929a-5a57-430b-b33e-c05c6cbef02e"}}
 
-
 ###为每个资产创建 IngestManifestFile
 
 IngestManifestFile 代表将作为批量引入资产的一部分上载的实际视频或音频 blob 对象。除非资产使用加密选项，否则不需要与加密相关的属性。本部分使用的示例演示了如何创建 IngestManifestFile，以便将 StorageEncryption 用于之前创建的资产。
-
 
 **HTTP 响应**
 
@@ -459,7 +444,6 @@ IngestManifestFile 代表将作为批量引入资产的一部分上载的实际�
 
 可以通过轮询 IngestManifest 的 Statistics 属性来监视 IngestManifest 的批量引入操作的进度。该属性为复杂类型，即 [IngestManifestStatistics](https://docs.microsoft.com/zh-cn/rest/api/media/operations/ingestmanifeststatistics)。若要轮询 Statistics 属性，请提交一个传递 IngestManifest ID 的 HTTP GET 请求。
  
-
 ##创建用于加密的 ContentKey
 
 如果资产将使用加密，则在创建资产文件之前，必须创建用于加密的 ContentKey。对于存储空间加密，应在请求正文中包括以下属性。
@@ -472,7 +456,6 @@ EncryptedContentKey | 我们创建一个新的内容密钥值，这是一个 256
 ProtectionKeyId | 这是存储加密 X.509 证书的保护密钥 ID，用于加密内容密钥。
 ProtectionKeyType | 这是用于加密内容密钥的保护密钥的加密类型。对于我们的示例，此值为 StorageEncryption(1)。
 Checksum | 内容密钥的 MD5 计算的校验和。它通过使用内容密钥加密内容 ID 计算得出。此示例代码演示了如何计算校验和。
-
 
 **HTTP 响应**
 	
@@ -519,8 +502,6 @@ ContentKey 通过发送 HTTP POST 请求关联到一个或多个资产。以下�
 	Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=070500D0-F35C-4A5A-9249-485BBF4EC70B&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1334275521&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=GxdBb%2fmEyN7iHdNxbawawHRftLhPFFqxX1JZckuv3hY%3d
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
+[How to Get a Media Processor]: ./media-services-get-media-processor.md
  
-[How to Get a Media Processor]: /documentation/articles/media-services-get-media-processor/
- 
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

@@ -1,27 +1,24 @@
-<properties
-	pageTitle="如何通过 Java 使用服务总线队列 | Azure"
-	description="了解如何在 Azure 中使用 Service Bus 队列。用 Java 编写的代码示例。"
-	services="service-bus"
-	documentationCenter="java"
-	authors="sethmanheim"
-	manager="timlt"
-	/>  
+---
+title: 如何通过 Java 使用服务总线队列 | Azure
+description: 了解如何在 Azure 中使用 Service Bus 队列。用 Java 编写的代码示例。
+services: service-bus
+documentationCenter: java
+authors: sethmanheim
+manager: timlt
 
-
-<tags
-	ms.service="service-bus"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="Java"
-	ms.topic="article"
-	ms.date="10/04/2016"
-	ms.author="sethm"
-	wacn.date="01/04/2017"/>  
-
+ms.service: service-bus
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: Java
+ms.topic: article
+ms.date: 10/04/2016
+ms.author: sethm
+wacn.date: 01/04/2017
+---
 
 # 如何使用 Service Bus 队列
 
-[AZURE.INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
+[!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 本文介绍了如何使用服务总线队列。这些示例是采用 Java 编写的并且使用了 [Azure SDK for Java][]。涉及的任务包括**创建队列**、**发送和接收消息**以及**删除队列**。
 
@@ -81,13 +78,11 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 4.  记下主密钥，或将其复制到剪贴板。
 
-
 ## 配置应用程序以使用 Service Bus
 
 在生成本示例之前，请确保已安装 [Azure SDK for Java][]。如果使用了 Eclipse，则可以安装包含 Azure SDK for Java 的 [Azure Toolkit for Eclipse][]。然后，你可以将 **Microsoft Azure Libraries for Java** 添加到你的项目：
 
 ![](./media/service-bus-java-how-to-use-queues/eclipselibs.png)  
-
 
 将以下 `import` 语句添加到 Java 文件顶部：
 
@@ -242,7 +237,7 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
   [Azure SDK for Java]: /develop/java/
   [Azure Toolkit for Eclipse]: https://msdn.microsoft.com/zh-cn/library/azure/hh694271.aspx
 
-  [队列、主题和订阅]: /documentation/articles/service-bus-queues-topics-subscriptions/
+  [队列、主题和订阅]: ./service-bus-queues-topics-subscriptions.md
   [BrokeredMessage]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.aspx
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

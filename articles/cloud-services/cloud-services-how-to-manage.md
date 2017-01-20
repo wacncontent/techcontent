@@ -1,31 +1,25 @@
-<properties 
-	pageTitle="常见的云服务管理任务（经典）| Azure" 
-	description="了解如何在 Azure 经典管理门户中管理云服务。" 
-	services="cloud-services" 
-	documentationCenter="" 
-	authors="Thraka" 
-	manager="timlt" 
-	editor=""/>
+---
+title: 常见的云服务管理任务（经典）| Azure
+description: 了解如何在 Azure 经典管理门户中管理云服务。
+services: cloud-services
+documentationCenter: 
+authors: Thraka
+manager: timlt
+editor: 
 
-<tags 
-	ms.service="cloud-services" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="11/16/2016"
-	wacn.date="12/12/2016"
-	ms.author="adegeo"/>
-
-
-
-
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/16/2016
+wacn.date: 12/12/2016
+ms.author: adegeo
+---
 
 # 如何管理云服务
 
-
 在 Azure 经典管理门户的“云服务”区域中，可以更新服务角色或部署、将预留部署升级到生产环境、将资源链接到云服务，以便查看资源依赖关系并对资源进行整体缩放，以及删除云服务或部署。
-
 
 ## 如何：更新云服务角色或部署
 
@@ -53,8 +47,6 @@
 
 8. 单击“确定”（复选标记）以开始更新服务。
 
-
-
 ## <a name="how-to-swap-deployments-to-promote-a-staged-deployment-to-production"></a>如何：交换部署以将暂留部署升级到生产环境
 
 使用“交换”可将云服务的预留部署升级到生产环境。决定部署云服务的新版本时，可在云服务过渡环境中暂存和测试新版本，同时让客户在生产环境中继续使用当前版本。准备好将新版本提升到生产环境时，可使用“交换”来切换这两个部署 URL。
@@ -81,7 +73,7 @@
 
 要显示云服务对其他资源的依赖性，可将 Azure SQL 数据库实例或存储帐户链接到云服务。可以在“链接的资源”页上链接和取消链接资源，然后在云服务仪表板上监视其使用情况。如果链接的存储帐户启用了监视，可在云服务仪表板上监视“请求总数”。
 
-使用“链接”可将新的或现有的 SQL 数据库实例或存储帐户链接到云服务。然后即可在“缩放”页上缩放数据库以及正使用它的云服务角色。（存储帐户可在使用率增加时自动缩放。） 有关详细信息，请参阅[如何缩放云服务和链接的资源](/documentation/articles/cloud-services-how-to-scale/)。
+使用“链接”可将新的或现有的 SQL 数据库实例或存储帐户链接到云服务。然后即可在“缩放”页上缩放数据库以及正使用它的云服务角色。（存储帐户可在使用率增加时自动缩放。） 有关详细信息，请参阅[如何缩放云服务和链接的资源](./cloud-services-how-to-scale.md)。
 
 还可在 Azure 经典管理门户的“数据库”节点中监视、管理和缩放数据库。
 
@@ -113,8 +105,7 @@
 
 	可以在消息区域中跟踪链接操作的进度。
 
-
-	链接完成时，可在云服务仪表板上监视链接的资源的状态。有关缩放链接的 SQL 数据库的信息，请参阅[如何缩放云服务和链接的资源](/documentation/articles/cloud-services-how-to-scale/)。
+	链接完成时，可在云服务仪表板上监视链接的资源的状态。有关缩放链接的 SQL 数据库的信息，请参阅[如何缩放云服务和链接的资源](./cloud-services-how-to-scale.md)。
 
 ### 取消链接链接的资源
 
@@ -125,8 +116,6 @@
 3. 单击“取消链接”。然后在出现确认提示时，单击“是”。
 
 	取消链接 SQL 数据库对该数据库或应用程序与该数据库的连接没有任何影响。仍可在 Azure 经典管理门户的“SQL 数据库”区域中管理该数据库。
-
-
 
 ## 如何：删除部署和云服务
 
@@ -144,21 +133,20 @@
 
 	![“删除”菜单](./media/cloud-services-how-to-manage/CloudServices_DeleteMenu.png)
 
-
 3. 若要删除部署，请单击“删除生产部署”或“删除过渡部署”。然后在出现确认提示时单击“是”。
 
 4. 如果要删除云服务，请在需要时重复步骤 3 以删除其他部署。
 
 5. 要删除云服务，则单击“删除云服务”。然后在出现确认提示时单击“是”。
 
-> [AZURE.NOTE]
-如果为云服务配置了详细监视，那么在删除云服务时，Azure 不会从存储帐户中删除监视数据。需要手动删除这些数据。有关在何处查找度量值表的信息，请参阅[如何监视云服务](/documentation/articles/cloud-services-how-to-monitor/)中的“如何：在 Azure 经典管理门户外部访问详细监视数据”。
+> [!NOTE]
+如果为云服务配置了详细监视，那么在删除云服务时，Azure 不会从存储帐户中删除监视数据。需要手动删除这些数据。有关在何处查找度量值表的信息，请参阅[如何监视云服务](./cloud-services-how-to-monitor.md)中的“如何：在 Azure 经典管理门户外部访问详细监视数据”。
 
 ## 后续步骤
 
- * [云服务的常规配置](/documentation/articles/cloud-services-how-to-configure/)。
-* 了解如何[部署云服务](/documentation/articles/cloud-services-how-to-create-deploy/)。
-* 配置[自定义域名](/documentation/articles/cloud-services-custom-domain-name/)。
-* 配置 [SSL 证书](/documentation/articles/cloud-services-configure-ssl-certificate/)。
+ * [云服务的常规配置](./cloud-services-how-to-configure.md)。
+* 了解如何[部署云服务](./cloud-services-how-to-create-deploy.md)。
+* 配置[自定义域名](./cloud-services-custom-domain-name.md)。
+* 配置 [SSL 证书](./cloud-services-configure-ssl-certificate.md)。
 
 <!---HONumber=Mooncake_1128_2016-->

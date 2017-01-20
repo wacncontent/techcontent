@@ -1,26 +1,26 @@
-<properties
-	pageTitle="基础结构命名准则 | Azure"
-	description="了解在 Azure 基础结构服务中进行命名的关键设计和实施准则。"
-	documentationCenter=""
-	services="virtual-machines-windows"
-	authors="iainfoulds"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: 基础结构命名准则 | Azure
+description: 了解在 Azure 基础结构服务中进行命名的关键设计和实施准则。
+documentationCenter: 
+services: virtual-machines-windows
+authors: iainfoulds
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/08/2016"
-	wacn.date="12/26/2016"
-	ms.author="iainfou"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/08/2016
+wacn.date: 12/26/2016
+ms.author: iainfou
+---
 
 # 基础结构命名准则
 
-[AZURE.INCLUDE [virtual-machines-windows-infrastructure-guidelines-intro](../../includes/virtual-machines-windows-infrastructure-guidelines-intro.md)]
+[!INCLUDE [virtual-machines-windows-infrastructure-guidelines-intro](../../includes/virtual-machines-windows-infrastructure-guidelines-intro.md)]
 
 本文着重介绍如何对各项 Azure 资源实行命名约定，以便在环境中生成一组易于识别的逻辑资源。
 
@@ -66,7 +66,6 @@
 | 角色 | sql、ora、sp、iis | 取决于虚拟机的角色。 |
 | 实例 | 01、02、03 等 | 适用于具有多个实例的资源。例如，云服务中经过负载均衡的 Web 服务器。 |
 
-
 建立命名约定时，请确保这些命名约定明确说明要对每种类型的资源使用哪些词缀，以及在哪个位置使用（前缀还是后缀）。
 
 ## 日期
@@ -101,14 +100,13 @@
 
 ## 存储帐户名称
 
-存储帐户具有特殊的命名规则。只能使用小写字母和数字。有关详细信息，请参阅[创建存储帐户](/documentation/articles/storage-create-storage-account/#create-a-storage-account)。此外，存储帐户名称与 core.chinacloudapi.cn 组合在一起应该是一个全局有效的唯一 DNS 名称。例如，如果存储帐户名为 mystorageaccount，则生成的以下 DNS 名称应该是唯一的：
+存储帐户具有特殊的命名规则。只能使用小写字母和数字。有关详细信息，请参阅[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account)。此外，存储帐户名称与 core.chinacloudapi.cn 组合在一起应该是一个全局有效的唯一 DNS 名称。例如，如果存储帐户名为 mystorageaccount，则生成的以下 DNS 名称应该是唯一的：
 
 - mystorageaccount.blob.core.chinacloudapi.cn
 - mystorageaccount.table.core.chinacloudapi.cn
 - mystorageaccount.queue.core.chinacloudapi.cn
 
-
 ## <a name="next-steps"></a> 后续步骤
-[AZURE.INCLUDE [virtual-machines-windows-infrastructure-guidelines-next-steps](../../includes/virtual-machines-windows-infrastructure-guidelines-next-steps.md)]
+[!INCLUDE [virtual-machines-windows-infrastructure-guidelines-next-steps](../../includes/virtual-machines-windows-infrastructure-guidelines-next-steps.md)]
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

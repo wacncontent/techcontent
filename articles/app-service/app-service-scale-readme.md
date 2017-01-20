@@ -1,22 +1,22 @@
-<properties
-	pageTitle="Azure 应用服务：缩放应用服务应用程序"
-	description="了解在应用服务中缩放应用程序的复杂细节。"
-	keywords="应用服务, azure 应用服务, 缩放, 可缩放, 应用服务计划, 应用服务成本"
-	services="app-service"
-	documentationCenter=""
-	authors="btardif"
-	manager="wpickett"
-	editor=""/>
+---
+title: Azure 应用服务：缩放应用服务应用程序
+description: 了解在应用服务中缩放应用程序的复杂细节。
+keywords: 应用服务, azure 应用服务, 缩放, 可缩放, 应用服务计划, 应用服务成本
+services: app-service
+documentationCenter: 
+authors: btardif
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/07/2016"
-	wacn.date="11/21/2016"
-	ms.author="byvinyal"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/07/2016
+wacn.date: 11/21/2016
+ms.author: byvinyal
+---
 
 # Azure 应用服务：缩放应用服务应用程序
 
@@ -37,6 +37,6 @@
 
 此部分有助于用户了解缩放过程的所有因素，通过策略充分利用必需的应用服务功能，实现缩放目标。
 
-[AZURE.INCLUDE [app-service-blueprint-scaling-app-service-applications](../../includes/app-service-blueprint-scaling-app-service-applications.md)]
+[!INCLUDE [app-service-blueprint-scaling-app-service-applications](../../includes/app-service-blueprint-scaling-app-service-applications.md)]
 
 <!---HONumber=Mooncake_0919_2016-->

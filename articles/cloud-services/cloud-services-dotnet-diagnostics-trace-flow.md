@@ -1,29 +1,25 @@
-<properties
-	pageTitle="使用 Azure 诊断跟踪云服务应用程序中的流 | Azure"
-	description="将跟踪消息添加到 Azure 应用程序，以帮助调试、性能度量、监视和流量分析等。"
-	services="cloud-services"
-	documentationCenter=".net"
-	authors="rboucher"
-	manager="jwhit"
-	editor=""/>  
+---
+title: 使用 Azure 诊断跟踪云服务应用程序中的流 | Azure
+description: 将跟踪消息添加到 Azure 应用程序，以帮助调试、性能度量、监视和流量分析等。
+services: cloud-services
+documentationCenter: .net
+authors: rboucher
+manager: jwhit
+editor: 
 
-
-<tags
-	ms.service="cloud-services"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="02/20/2016"
-	wacn.date="12/26/2016"
-	ms.author="robb"/>
-
-
+ms.service: cloud-services
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 02/20/2016
+wacn.date: 12/26/2016
+ms.author: robb
+---
 
 # 使用 Azure 诊断跟踪云服务应用程序的流
 
 跟踪是在应用程序运行时监视其执行情况的一种方式。可以使用 [System.Diagnostics.Trace](https://msdn.microsoft.com/zh-cn/library/system.diagnostics.trace.aspx)、[System.Diagnostics.Debug](https://msdn.microsoft.com/zh-cn/library/system.diagnostics.debug.aspx) 和 [System.Diagnostics.TraceSource](https://msdn.microsoft.com/zh-cn/library/system.diagnostics.tracesource.aspx) 类在日志、文本文件或其他设备中记录有关错误和应用程序执行情况的信息，供以后进行分析。有关跟踪的详细信息，请参阅[跟踪和检测应用程序](https://msdn.microsoft.com/zh-cn/library/zs6s4h68.aspx)。
-
 
 ## 使用 Trace 语句和 Trace 开关
 
@@ -37,10 +33,9 @@
 
 Trace、Debug 和 TraceSource 都需要设置“侦听器”来收集和记录发送的消息。侦听器可收集、存储和路由跟踪消息。它们将跟踪输出传输到适当的目标，如日志、窗口或文本文件。Azure 诊断使用 [DiagnosticMonitorTraceListener](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.diagnostics.diagnosticmonitortracelistener.aspx) 类。
 
-完成以下过程之前，必须初始化 Azure 诊断监视器。若要执行此操作，请参阅[在 Azure 中启用诊断](/documentation/articles/cloud-services-dotnet-diagnostics/)。
+完成以下过程之前，必须初始化 Azure 诊断监视器。若要执行此操作，请参阅[在 Azure 中启用诊断](./cloud-services-dotnet-diagnostics.md)。
 
 请注意，如果使用 Visual Studio 提供的模板，将自动添加侦听器的配置。
-
 
 ### 添加跟踪侦听器
 
@@ -63,14 +58,13 @@ Trace、Debug 和 TraceSource 都需要设置“侦听器”来收集和记录�
 		</trace>
 	</system.diagnostics>
 	```
-	>[AZURE.IMPORTANT] 确保与 Microsoft.WindowsAzure.Diagnostics 程序集建立项目引用。更新上述 xml 中的版本号，以便与引用的 Microsoft.WindowsAzure.Diagnostics 程序集的版本匹配。
+	>[!IMPORTANT] 确保与 Microsoft.WindowsAzure.Diagnostics 程序集建立项目引用。更新上述 xml 中的版本号，以便与引用的 Microsoft.WindowsAzure.Diagnostics 程序集的版本匹配。
 
 3. 保存 config 文件。
 
 有关侦听器的详细信息，请参阅[跟踪侦听器](https://msdn.microsoft.com/zh-cn/library/4y5y10s7.aspx)。
 
 完成添加侦听器步骤后，可以将 Trace 语句添加到代码。
-
 
 ### 将 Trace 语句添加到代码
 

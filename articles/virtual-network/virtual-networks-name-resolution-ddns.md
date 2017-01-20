@@ -1,24 +1,24 @@
-<properties
-   pageTitle="使用动态 DNS 注册主机名"
-   description="本页详细介绍如何设置动态 DNS 以在自己的 DNS 服务器中注册主机名。"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="GarethBradshawMSFT"
-   manager="carmonm"
-   editor="tysonn" />
-<tags
-   ms.service="dns"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="08/31/2016"
-   wacn.date="12/26/2016"
-   ms.author="sewhee" />
+---
+title: 使用动态 DNS 注册主机名
+description: 本页详细介绍如何设置动态 DNS 以在自己的 DNS 服务器中注册主机名。
+services: virtual-network
+documentationCenter: na
+authors: GarethBradshawMSFT
+manager: carmonm
+editor: tysonn
 
+ms.service: dns
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 08/31/2016
+wacn.date: 12/26/2016
+ms.author: sewhee
+---
 
 # 使用动态 DNS 在自己的 DNS 服务器中注册主机名
-[Azure 为虚拟机 (VM) 和角色实例提供名称解析](/documentation/articles/virtual-networks-name-resolution-for-vms-and-role-instances/)。但是，如果名称解析需求超过 Azure 所提供的范围，可提供自己的 DNS 服务器。这样即可定制 DNS 解决方案以满足自己的特定需求。例如，可能需要通过 Active Directory 域控制器来访问本地资源。
+[Azure 为虚拟机 (VM) 和角色实例提供名称解析](./virtual-networks-name-resolution-for-vms-and-role-instances.md)。但是，如果名称解析需求超过 Azure 所提供的范围，可提供自己的 DNS 服务器。这样即可定制 DNS 解决方案以满足自己的特定需求。例如，可能需要通过 Active Directory 域控制器来访问本地资源。
 
 将自定义 DNS 服务器作为 Azure VM 托管时，可将针对同一 VNet 的主机名查询转发到 Azure 以解析主机名。如果不希望使用此路由，可使用动态 DNS 在 DNS 服务器中注册 VM 主机名。Azure 不具备直接在你的 DNS 服务器中创建记录的功能（如凭据），因此通常需要替代方案。以下是一些常见的替代方案。
 

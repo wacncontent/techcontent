@@ -1,36 +1,36 @@
-<properties
-    pageTitle="使用 Resource Manager 中的 PowerShell 创建应用程序网关的自定义探测 | Azure"
-    description="了解如何使用资源管理器中的 PowerShell 创建应用程序网关的自定义探测"
-    services="application-gateway"
-    documentationcenter="na"
-    author="georgewallace"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 Resource Manager 中的 PowerShell 创建应用程序网关的自定义探测 | Azure
+description: 了解如何使用资源管理器中的 PowerShell 创建应用程序网关的自定义探测
+services: application-gateway
+documentationcenter: na
+author: georgewallace
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="68feb660-7fa4-4f69-a7e4-bdd7bdc474db"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="11/16/2016"
-    wacn.date="01/09/2017"
-    ms.author="gwallace" />
+ms.assetid: 68feb660-7fa4-4f69-a7e4-bdd7bdc474db
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/16/2016
+wacn.date: 01/09/2017
+ms.author: gwallace
+---
 
 # 使用适用于 Azure 资源管理器的 PowerShell 创建 Azure 应用程序网关的自定义探测
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/application-gateway-create-probe-portal/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-create-probe-ps/)
-- [Azure 经典 PowerShell](/documentation/articles/application-gateway-create-probe-classic-ps/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./application-gateway-create-probe-portal.md)
+- [Azure Resource Manager PowerShell](./application-gateway-create-probe-ps.md)
+- [Azure 经典 PowerShell](./application-gateway-create-probe-classic-ps.md)
 
-[AZURE.INCLUDE [azure-probe-intro-include](../../includes/application-gateway-create-probe-intro-include.md)]
+[!INCLUDE [azure-probe-intro-include](../../includes/application-gateway-create-probe-intro-include.md)]
 
-> [AZURE.NOTE]
-Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是[经典部署模型](/documentation/articles/application-gateway-create-probe-classic-ps/)。
+> [!NOTE]
+Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是[经典部署模型](./application-gateway-create-probe-classic-ps.md)。
 
-[AZURE.INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
+[!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
 ### 步骤 1
 
@@ -153,8 +153,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
     $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 **InstanceCount** 的默认值为 2，最大值为 10。**GatewaySize** 的默认值为 Medium。可以在 **Standard\_Small**、**Standard\_Medium** 和 **Standard\_Large** 之间进行选择。
 > 
 > 
@@ -205,7 +204,6 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
     $getgw =  Get-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-rg
 
-
 ### 步骤 2
 
 使用 `Remove-AzureRmApplicationGatewayProbeConfig` 将探测配置从应用程序网关删除。
@@ -215,7 +213,6 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 ### 步骤 3
 
 使用 `Set-AzureRmApplicationGatewayBackendHttpSettings` 更新后端池设置，删除探测与超时设置。
-
 
      $getgw = Set-AzureRmApplicationGatewayBackendHttpSettings -ApplicationGateway $getgw -Name $getgw.BackendHttpSettingsCollection.name -Port 80 -Protocol http -CookieBasedAffinity Disabled
 
@@ -232,7 +229,6 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
     Get-AzureRmPublicIpAddress -ResourceGroupName appgw-RG -Name publicIP01
 
 <br/>  
-
 
     Name                     : publicIP01
     ResourceGroupName        : appgw-RG
@@ -256,6 +252,6 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
 ## 后续步骤
 
-访问[配置 SSL 卸载](/documentation/articles/application-gateway-ssl-arm/)，了解如何配置 SSL 卸载
+访问[配置 SSL 卸载](./application-gateway-ssl-arm.md)，了解如何配置 SSL 卸载
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

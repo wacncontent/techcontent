@@ -1,34 +1,29 @@
-<properties 
-	pageTitle="如何配置云服务（经典管理门户）| Azure" 
-	description="了解如何在 Azure 中配置云服务。了解如何更新云服务配置以及配置对角色实例的远程访问。" 
-	services="cloud-services" 
-	documentationCenter="" 
-	authors="Thraka" 
-	manager="timlt" 
-	editor=""/>
+---
+title: 如何配置云服务（经典管理门户）| Azure
+description: 了解如何在 Azure 中配置云服务。了解如何更新云服务配置以及配置对角色实例的远程访问。
+services: cloud-services
+documentationCenter: 
+authors: Thraka
+manager: timlt
+editor: 
 
-<tags 
-	ms.service="cloud-services" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="10/11/2016" 
-	wacn.date="12/12/2016"
-	ms.author="adegeo"/>
-
-
-
-
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/11/2016
+wacn.date: 12/12/2016
+ms.author: adegeo
+---
 
 # 如何配置云服务
 
-
 你可以在 Azure 经典管理门户中配置最常使用的云服务设置。或者，如果希望直接更新配置文件，可下载要更新的服务配置文件，然后上传更新文件并通过配置更改更新云服务。无论使用哪种方法，配置更新都将应用于所有角色实例。
 
-Azure 经典管理门户还允许你[为 Azure 云服务中的角色启用远程桌面连接](/documentation/articles/cloud-services-role-enable-remote-desktop/)。
+Azure 经典管理门户还允许你[为 Azure 云服务中的角色启用远程桌面连接](./cloud-services-role-enable-remote-desktop.md)。
 
-如果每个角色至少具有两个角色实例，那么 Azure 在配置更新期间只能确保 99.95% 的服务可用性。这使得一台虚拟机可以在另一台虚拟机正更新时处理客户端请求。有关详细信息，请参阅[服务级别协议](/support/legal/sla)。
+如果每个角色至少具有两个角色实例，那么 Azure 在配置更新期间只能确保 99.95% 的服务可用性。这使得一台虚拟机可以在另一台虚拟机正更新时处理客户端请求。有关详细信息，请参阅[服务级别协议](https://www.azure.cn/support/legal/sla)。
 
 ## 更改云服务
 
@@ -72,17 +67,16 @@ Azure 经典管理门户还允许你[为 Azure 云服务中的角色启用远程
     
     3. 如果云服务包含任何只有一个实例的角色，请选中“即使一个或多个角色包含单个实例也应用配置”复选框以使这些角色的配置更新继续进行。
     
-        除非每个角色至少定义两个实例，否则服务配置更新期间，Azure 无法保证至少 99.95% 的云服务可用性。有关详细信息，请参阅[服务级别协议](/support/legal/sla)。
+        除非每个角色至少定义两个实例，否则服务配置更新期间，Azure 无法保证至少 99.95% 的云服务可用性。有关详细信息，请参阅[服务级别协议](https://www.azure.cn/support/legal/sla)。
     
     4. 单击“确定”（复选标记）。
 
-
 ## 后续步骤
 
-* 了解如何[部署云服务](/documentation/articles/cloud-services-how-to-create-deploy/)。
-* 配置[自定义域名](/documentation/articles/cloud-services-custom-domain-name/)。
-* [管理云服务](/documentation/articles/cloud-services-how-to-manage/)。
-* [为 Azure 云服务中的角色启用远程桌面连接](/documentation/articles/cloud-services-role-enable-remote-desktop/)
-* 配置 [SSL 证书](/documentation/articles/cloud-services-configure-ssl-certificate/)。
+* 了解如何[部署云服务](./cloud-services-how-to-create-deploy.md)。
+* 配置[自定义域名](./cloud-services-custom-domain-name.md)。
+* [管理云服务](./cloud-services-how-to-manage.md)。
+* [为 Azure 云服务中的角色启用远程桌面连接](./cloud-services-role-enable-remote-desktop.md)
+* 配置 [SSL 证书](./cloud-services-configure-ssl-certificate.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

@@ -1,32 +1,30 @@
-<properties 
-	pageTitle="如何使用 REST API 检查作业进度 | Azure" 
-	description="了解如何跟踪作业进度。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 如何使用 REST API 检查作业进度 | Azure
+description: 了解如何跟踪作业进度。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016"   
-	wacn.date="12/27/2016"   
-	ms.author="juliako"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 #如何：检查作业进度
 
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/media-services-portal-check-job-progress/)
-- [.NET](/documentation/articles/media-services-check-job-progress/)
-- [REST](/documentation/articles/media-services-rest-check-job-progress/)
+> [!div class="op_single_selector"]
+- [门户](./media-services-portal-check-job-progress.md)
+- [.NET](./media-services-check-job-progress.md)
+- [REST](./media-services-rest-check-job-progress.md)
 
 当你运行作业时，通常需要采用某种方式跟踪作业进度。你可以使用作业的 State 属性查看该作业的状态。有关 State 属性的详细信息，请参阅[作业实体属性](https://docs.microsoft.com/zh-cn/rest/api/media/operations/job#a-namejobentitypropertiesa-job-entity-properties)。
-
 
 请求：
 	
@@ -39,8 +37,6 @@
 	x-ms-version: 2.11
 	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 	
-
-
 响应：
 	
 	HTTP/1.1 200 OK

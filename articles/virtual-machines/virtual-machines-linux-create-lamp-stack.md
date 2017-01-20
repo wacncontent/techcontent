@@ -1,25 +1,25 @@
-<properties
-	pageTitle="在 Linux 虚拟机上部署 LAMP | Azure"
-	description="了解如何在 Linux VM 上安装 LAMP 堆栈"
-	services="virtual-machines-linux"
-	documentationCenter="virtual-machines"
-	authors="jluk"
-	manager="squillace"
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: 在 Linux 虚拟机上部署 LAMP | Azure
+description: 了解如何在 Linux VM 上安装 LAMP 堆栈
+services: virtual-machines-linux
+documentationCenter: virtual-machines
+authors: jluk
+manager: squillace
+editor: 
+tags: azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="NA"
-	ms.topic="article"
-	ms.date="06/07/2016"
-	wacn.date="12/26/2016"
-	ms.author="jluk"/>
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: NA
+ms.topic: article
+ms.date: 06/07/2016
+wacn.date: 12/26/2016
+ms.author: jluk
+---
 
 # 在 Azure 上部署 LAMP 堆栈
-本文将介绍如何在 Azure 上部署 Apache Web 服务器、MySQL 和 PHP（LAMP 堆栈）。你需要一个 Azure 帐户（[获取试用版](/pricing/1rmb-trial/)）和[连接到 Azure 帐户](/documentation/articles/xplat-cli-connect/)的 [Azure CLI](/documentation/articles/xplat-cli-install/)。
+本文将介绍如何在 Azure 上部署 Apache Web 服务器、MySQL 和 PHP（LAMP 堆栈）。你需要一个 Azure 帐户（[获取试用版](https://www.azure.cn/pricing/1rmb-trial/)）和[连接到 Azure 帐户](../xplat-cli-connect.md)的 [Azure CLI](../xplat-cli-install.md)。
 
 本文介绍了两种方法用于安装所涉及的 LAMP：
 
@@ -36,10 +36,9 @@
 	user@ubuntu$ sudo apt-get update
 	user@ubuntu$ sudo apt-get install apache2 mysql-server php5 php5-mysql
 
-
 ## 在新的 VM 上部署 LAMP 的演练
 
-首先创建一个包含 VM 的新[资源组](/documentation/articles/resource-group-overview/)：
+首先创建一个包含 VM 的新[资源组](../azure-resource-manager/resource-group-overview.md)：
 
     $ azure group create uniqueResourceGroup chinanorth
     info:    Executing command group create
@@ -96,8 +95,8 @@
 
 ## 在现有 VM 上部署 LAMP 的演练
 
-如果你需要有关创建 Linux VM 方面的帮助，可以转到[此处以了解如何创建 Linux VM](/documentation/articles/virtual-machines-linux-quick-create-cli/)。
-接下来，你需要通过 SSH 登录 Linux VM。如果你需要有关创建 SSH 密钥方面的帮助，可以转到[此处以了解如何在 Linux/Mac 上创建 SSH 密钥](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)。
+如果你需要有关创建 Linux VM 方面的帮助，可以转到[此处以了解如何创建 Linux VM](./virtual-machines-linux-quick-create-cli.md)。
+接下来，你需要通过 SSH 登录 Linux VM。如果你需要有关创建 SSH 密钥方面的帮助，可以转到[此处以了解如何在 Linux/Mac 上创建 SSH 密钥](./virtual-machines-linux-mac-create-ssh-keys.md)。
 如果你已经有 SSH 密钥，则继续并使用 `ssh username@uniqueDNS` 通过 SSH 登录 Linux VM。
 
 既然你正在使用 Linux VM，我们将向你介绍如何在基于 Debian 的分发版上安装 LAMP 堆栈。对于其他 Linux 分发版，确切的命令可能会有所不同。
@@ -127,7 +126,6 @@
 运行以下命令即可查看以程序包形式提供的其他 PHP 扩展：
 
 	user@ubuntu$ apt-cache search php5
-
 
 #### 创建 info.php 文档
 

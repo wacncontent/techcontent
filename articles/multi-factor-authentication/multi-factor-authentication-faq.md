@@ -1,25 +1,23 @@
-<properties
-	pageTitle="Azure 多重身份验证常见问题"
-	description="提供与 Azure 多重身份验证相关的常见问题与解答列表。Azure 多重身份验证是要求使用多种方式（而不仅仅是用户名和密码）来验证用户身份的一种方法。它为用户登录和事务提供了额外的安全层。"
-	services="multi-factor-authentication"
-	documentationCenter=""
-	authors="billmath"
-	manager="stevenpo"
-	editor="curtand"/>  
+---
+title: Azure 多重身份验证常见问题
+description: 提供与 Azure 多重身份验证相关的常见问题与解答列表。Azure 多重身份验证是要求使用多种方式（而不仅仅是用户名和密码）来验证用户身份的一种方法。它为用户登录和事务提供了额外的安全层。
+services: multi-factor-authentication
+documentationCenter: 
+authors: billmath
+manager: stevenpo
+editor: curtand
 
-
-<tags
-	ms.service="multi-factor-authentication"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/13/2016"
-	wacn.date="12/30/2016"
-	ms.author="kgremban"/>
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/13/2016
+wacn.date: 12/30/2016
+ms.author: kgremban
+---
 
 # Azure 多重身份验证常见问题
-
 
 本“常见问题”文章解答有关 Azure 多重身份验证和使用多重身份验证服务的常见问题，包括计费模式和可用性相关问题。
 
@@ -43,8 +41,6 @@
   
   使用此链接可联系 Microsoft 支持专业人员。他们会询问一些问题来帮助确定支持选项，这些选项可能包括电子邮件、在线提交或电话支持。
 
-
-
 **问：Azure 多重身份验证服务器如何处理用户数据？**
 
 使用多重身份验证服务器时，用户的数据只存储在本地服务器中。云中不会持久存储任何用户数据。当用户执行双因素身份验证时，多重身份验证服务器会将数据发送到 Azure 多重身份验证云服务执行身份验证。将这些身份验证请求发送到云服务时，会在请求和日志中发送以下列表中字段内的数据，在客户的身份验证和使用情况报告中使用。某些字段是可选的，可以在多重身份验证服务器中配置。从多重身份验证服务器到多重身份验证云服务的通信通过出站端口 443 使用安全套接字层 (SSL) 或传输层安全性 (TLS)。双因素身份验证日志中包含的数据字段如下：
@@ -60,12 +56,7 @@
 - **多重身份验证服务器 IP**
 - **客户端 IP**（如果可用）
 
-
-
 除了上述字段以外，身份验证结果（成功或拒绝）和任何拒绝原因也与身份验证数据一起存储，可在身份验证和使用情况报告中使用。
-
-
-
 
 ## 计费
 
@@ -105,31 +96,28 @@ Azure 多重身份验证可作为独立的服务购买，按照每位用户和�
 
 组织使用基于消费量的计费模式时，不需要 Azure Active Directory。你可以视需要将多重身份验证提供链接到目录。如果组织未链接到目录，可以将多重身份验证服务器或多重身份验证 SDK 部署在本地。授权模式需要 Azure Active Directory，因为在购买许可证并将其分配给目录中的用户时，许可证将添加到目录。
 
-
 ## 可用性
 
 **问：如果用户未收到电话答复或者无法使用电话，该怎么办？**
 
 如果用户以前配置了备用电话，应在登录页出现提示时选择该电话，然后重试。如果用户未配置其他方法，则应与组织管理员联系，请管理员更新分配用作用户主要电话（手机或办公电话）的号码。
 
-
 **问：如果用户由于不再能够访问某个帐户而联系管理员，管理员该如何处理？**
 
-管理员可以要求用户再次完成注册过程来重置其帐户。详细了解如何[在云中使用 Azure 多重身份验证管理用户和设备设置](/documentation/articles/multi-factor-authentication-manage-users-and-devices/)。
+管理员可以要求用户再次完成注册过程来重置其帐户。详细了解如何[在云中使用 Azure 多重身份验证管理用户和设备设置](./multi-factor-authentication-manage-users-and-devices.md)。
 
 **问：如果包含应用密码的用户手机遗失或遭窃，管理员该如何处理？**
 
-管理员可以删除该用户的所有应用密码，防止未经授权的访问。用户购买替代设备后，即可重新创建密码。详细了解如何[在云中使用 Azure 多重身份验证管理用户和设备设置](/documentation/articles/multi-factor-authentication-manage-users-and-devices/)。
+管理员可以删除该用户的所有应用密码，防止未经授权的访问。用户购买替代设备后，即可重新创建密码。详细了解如何[在云中使用 Azure 多重身份验证管理用户和设备设置](./multi-factor-authentication-manage-users-and-devices.md)。
 
 **问：如果用户无法登录非浏览器应用，该怎么办？**
 
 - 配置为使用多重身份验证的用户需要通过一个应用密码来登录某些非浏览器应用。
 - 用户需要清除（删除）登录信息，重新启动该应用，然后使用其用户名和应用密码登录。
 
-获取有关创建应用密码的详细信息，以及其他[有关应用密码的帮助](/documentation/articles/multi-factor-authentication-end-user-app-passwords/)。
+获取有关创建应用密码的详细信息，以及其他[有关应用密码的帮助](./multi-factor-authentication-end-user-app-passwords.md)。
 
-
->[AZURE.NOTE] 适用于 Office 2013 客户端的新式验证
+>[!NOTE] 适用于 Office 2013 客户端的新式验证
 >
 > Office 2013 客户端（包括 Outlook）支持新式验证协议。可以将 Office 2013 配置为支持多重身份验证。配置 Office 2013 之后，Office 2013 客户端就不需要应用密码。有关详细信息，请参阅 [Office 2013 modern authentication public preview announcement](https://blogs.office.com/2015/03/23/office-2013-modern-authentication-public-preview-announced/)（Office 2013 新式验证公共预览版发布声明）。
 
@@ -155,7 +143,6 @@ Windows Server 2012 R2 中的安全性更改改变了 Azure 多重身份验证�
 
 通过公共电话网络拨打多重身份验证电话时，有时会通过不支持来电显示的运营商路由电话。因此，尽管多重身份验证系统始终会发送呼叫号码，但并不保证会显示该号码。
 
-
 ## 错误
 
 **问：如果用户使用移动应用通知进行身份验证时看到“身份验证请求不适用于已激活的帐户”错误消息，该怎么办？**
@@ -167,9 +154,6 @@ Windows Server 2012 R2 中的安全性更改改变了 Azure 多重身份验证�
 3. 单击“其他安全验证”。
 4. 从移动应用中删除现有帐户。
 5. 单击“配置”，然后按照说明重新配置移动应用。
-
-
-
 
 **问：如果用户在尝试使用非浏览器应用程序登录时看到 0x800434D4L 错误消息，该怎么办？**
 

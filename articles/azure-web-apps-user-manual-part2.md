@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure Web 应用用户手册 - 第二部分 | Azure"
-	description="详细介绍如何创建和管理 Azure Web 应用。"
-	services="app-service-web"
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure Web 应用用户手册 - 第二部分 | Azure
+description: 详细介绍如何创建和管理 Azure Web 应用。
+services: app-service-web
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="app-service-web"
-	ms.date=""
-	wacn.date="07/05/2016"/>
+ms.service: app-service-web
+ms.date: 
+wacn.date: 07/05/2016
+---
 
 # Azure Web 应用用户手册 - 第二部分
 
-- [Azure Web 应用用户手册 - 第一部分](/documentation/articles/azure-web-apps-user-manual-part1/)
-- [Azure Web 应用用户手册 - 第三部分](/documentation/articles/azure-web-apps-user-manual-part3/)
+- [Azure Web 应用用户手册 - 第一部分](./azure-web-apps-user-manual-part1.md)
+- [Azure Web 应用用户手册 - 第三部分](./azure-web-apps-user-manual-part3.md)
 
 ##<a name="section_4"></a> 2. 开始创建 Azure Web 应用
 ###<a name="section_4_1"></a> 2.1 规划好 Azure 订阅
@@ -173,13 +173,13 @@ Contoso 公司已经采购了 Azure 中国的服务，并且开发部门使用 V
 
 ###<a name="section_4_9"></a> 2.9 缩放 Azure Web 应用
 ####<a name="section_4_9_1"></a> 2.9.1 横向扩展 Azure Web 应用
-在[第 1.8 节](/documentation/articles/azure-web-apps-user-manual-part1/#section_3_8)中，已经介绍了 Azure Web 应用单个实例大小，如下：
+在[第 1.8 节](./azure-web-apps-user-manual-part1.md#section_3_8)中，已经介绍了 Azure Web 应用单个实例大小，如下：
 
 * (1)	小型，配置为：单核心，1.75GB 内存
 * (2)	中型，配置为：双核心，3.5GB 内存
 * (3)	大型，配置为：四核心，7GB 内存
 
-在[第 1.9 节](/documentation/articles/azure-web-apps-user-manual-part1/#section_3_9)中，介绍了 Azure Web 应用提供不同的服务类型，如下图所示：
+在[第 1.9 节](./azure-web-apps-user-manual-part1.md#section_3_9)中，介绍了 Azure Web 应用提供不同的服务类型，如下图所示：
 
 <table border="1">
 <thead>
@@ -213,13 +213,13 @@ Contoso 公司已经采购了 Azure 中国的服务，并且开发部门使用 V
 
 	![scale5](./media/azure-web-apps-user-manual-part2/scale5.png)
 
->[AZURE.NOTE]
+>[!NOTE]
 >本节中横向扩展的 Azure Web 应用，是按照固定的实例个数，24*7 静态响应客户端请求的。
 
 ####<a name="section_4_9_2"></a> 2.9.2 动态缩放 Azure Web 应用
 Azure 还具有弹性扩展的优势，在访问量比较高的情况下，可以设置若干多台 Azure Web 应用做负载均衡；在访问量比较低的情况下，可以减少 Azure Web 应用的并发数量。
 
->[AZURE.NOTE]
+>[!NOTE]
 >只有在 Azure Web 应用标准模式下，才支持自动扩展功能。
 
 假设一个场景，某个部署在 Azure Web 应用的企业官网，访问量是固定的。

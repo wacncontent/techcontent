@@ -1,16 +1,16 @@
-<properties
-   pageTitle="共享访问签名概述 | Microsoft Azure"
-   description="共享访问签名是什么，其工作原理是怎样的，以及如何在 Node、PHP 和 C# 编程中使用它们。"
-   services="service-bus,event-hubs"
-   documentationCenter="na"
-   authors="djrosanova"
-   manager="timlt"
-   editor=""/>
+---
+title: 共享访问签名概述 | Microsoft Azure
+description: 共享访问签名是什么，其工作原理是怎样的，以及如何在 Node、PHP 和 C# 编程中使用它们。
+services: service-bus,event-hubs
+documentationCenter: na
+authors: djrosanova
+manager: timlt
+editor: 
 
-<tags
-   ms.service="service-bus"
-    ms.date="10/02/2016"
-   wacn.date="01/04/2017"/>
+ms.service: service-bus
+ms.date: 10/02/2016
+wacn.date: 01/04/2017
+---
 
 # 共享访问签名
 
@@ -20,7 +20,7 @@
 
 共享访问签名是基于 SHA-256 安全哈希或 URI 的身份验证机制。SAS 是所有服务总线服务使用的非常强大的机制。在实际应用中，SAS 有两个组件：*共享访问策略*和*共享访问签名*（通常称为*令牌*）。
 
-你可以在[对服务总线进行共享访问签名身份验证](/documentation/articles/service-bus-shared-access-signature-authentication/)中找到有关共享访问签名与服务总线的更详细信息。
+你可以在[对服务总线进行共享访问签名身份验证](./service-bus-shared-access-signature-authentication.md)中找到有关共享访问签名与服务总线的更详细信息。
 
 ## 共享访问策略
 
@@ -40,17 +40,13 @@
 
 策略本身不是服务总线的访问令牌。它是使用主密钥或辅助密钥生成访问令牌时所依据的对象。令牌是通过采用以下格式妥善编写一个字符串而生成的：
 
-
 		SharedAccessSignature sig=<signature-string>&se=<expiry>&skn=<keyName>&sr=<URL-encoded-resourceURI>
-
 
 其中，`signature-string` 是令牌范围的 SHA-256 哈希（前一部分已介绍**范围**），后面附加了 CRLF 和过期时间（自纪元算起，以秒为单位：1970 年 1 月 1 日 `00:00:00 UTC`）。
 
 哈希类似于以下虚构代码，它返回 32 个字节。
 
-
 		SHA-256('https://<yournamespace>.servicebus.chinacloudapi.cn/'+'\n'+ 1438205742)
-
 
 非哈希值位于 **SharedAccessSignature** 字符串中，这样，接收方便可以使用相同的参数计算哈希，以确保它返回相同的结果。URI 指定范围，而密钥名称标识要用于计算哈希的策略。从安全性的立场来看，这非常重要。如果签名与接收方（服务总线）的计算结果不符，则拒绝访问。此时，我们可以确保发送方可访问密钥，并且应该被授予策略中指定的权限。
 
@@ -59,7 +55,6 @@
 在代码中如何实际执行此操作？ 让我们探讨一下几个示例。
 
 ### NodeJS
-
 
 		function createSharedAccessToken(uri, saName, saKey) { 
 		    if (!uri || !saName || !saKey) { 
@@ -76,9 +71,7 @@
 		        encodeURIComponent(hash) + '&se=' + ttl + '&skn=' + saName; 
 		}
  
-
 ### Java
-
 
 		private static String GetSASToken(String resourceUri, String keyName, String key)
 		  {
@@ -99,7 +92,6 @@
 
 		      return sasToken;
 		  }
-
 
 		public static String getHMAC256(String key, String input) {
 		    Mac sha256_HMAC = null;
@@ -125,9 +117,7 @@
 		    return hash;
 		}
 
-
 ### PHP
-
 
 		function generateSasToken($uri, $sasKeyName, $sasKeyValue) 
 		{ 
@@ -144,9 +134,7 @@
 		return $token; 
 		}
 
- 
 ### C&#35;
-
 
 		private static string createToken(string resourceUri, string keyName, string key)
 		{
@@ -160,18 +148,15 @@
 		    return sasToken;
 		}
 
-
 ## 使用共享访问签名（在 HTTP 级别）
  
 在了解如何为服务总线中的任何实体创建共享访问签名后，便可以执行 HTTP POST 了：
-
 
 		POST https://<yournamespace>.servicebus.chinacloudapi.cn/<yourentity>/messages
 		Content-Type: application/json
 		Authorization: SharedAccessSignature sr=https%3A%2F%2F<yournamespace>.servicebus.chinacloudapi.cn%2F<yourentity>&sig=<yoursignature from code above>&se=1438205742&skn=KeyName
 		ContentType: application/atom+xml;type=entry;charset=utf-8
  
-	
 请记住，这适用于所有情况。你可以为队列、主题、订阅、事件中心或中继创建 SAS。如果对事件中心使用按发布者标识，只需附加 `/publishers/< publisherid>`。
 
 如果你为发送方或客户端提供 SAS 令牌，它们不会直接获取密钥，并且他们无法逆向改编哈希来获取它。因此，你可以控制它们有权访问的项，以及可访问的时间长短。要记住的一个重点是，如果你更改策略中的主密钥，基于该密钥创建的所有共享访问签名都将失效。
@@ -185,7 +170,6 @@
 下面的步骤演示如何使用 [AMQP.Net Lite](https://github.com/Azure/amqpnetlite) 库通过 AMQP 协议发送 SAS 令牌。如果你不能使用官方的服务总线 SDK（例如，在 WinRT、Net Compact Framework、.Net Micro Framework 和 Mono 中）进行 C&#35; 开发，则这很有用。当然，此库对于帮助了解基于声明的安全性如何在 AMQP 级别工作非常有用，就如同你可以了解它如何在 HTTP 级别工作一样（使用 HTTP POST 请求并在“Authorization”标头内部发送 SAS 令牌）。如果你不需要此类有关 AMQP 的深入知识，可以将官方的服务总线 SDK 用于 .Net Framework 应用程序，该 SDK 会为你执行此操作。
 
 ### C&#35;
-
 
 		/// <summary>
 		/// Send Claim Based Security (CBS) token
@@ -234,10 +218,9 @@
 		    return result;
 		}
 
-
 `PutCbsToken()` 方法接收代表服务的 TCP 连接的 *connection*（[AMQP .NET Lite 库](https://github.com/Azure/amqpnetlite)提供的 AMQP Connection 类实例），以及表示要发送的 SAS 令牌的 *sasToken* 参数。
 
-> [AZURE.NOTE] 请务必在 **SASL 身份验证机制设置为 EXTERNAL** 的情况下创建连接（而不是在不需要发送 SAS 令牌时使用的包含用户名与密码的默认 PLAIN）。
+> [!NOTE] 请务必在 **SASL 身份验证机制设置为 EXTERNAL** 的情况下创建连接（而不是在不需要发送 SAS 令牌时使用的包含用户名与密码的默认 PLAIN）。
 
 接下来，发布者将创建两个 AMQP 链接来发送 SAS 令牌和接收来自服务的回复（此令牌验证结果）。
 
@@ -249,7 +232,7 @@ AMQP 消息包含一组属性，比简单消息包含更多信息。SAS 令牌�
 
 有关如何使用这些 SAS 令牌的详细信息，请参阅[服务总线 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/hh780717.aspx)。
 
-有关服务总线身份验证的详细信息，请参阅[服务总线身份验证和授权](/documentation/articles/service-bus-authentication-and-authorization/)。
+有关服务总线身份验证的详细信息，请参阅[服务总线身份验证和授权](./service-bus-authentication-and-authorization.md)。
 
 此[博客文章](http://developers.de/blogs/damir_dobric/archive/2013/10/17/how-to-create-shared-access-signature-for-service-bus.aspx)中介绍了更多关于 C# 和 Java 脚本中的 SAS 的示例。
 

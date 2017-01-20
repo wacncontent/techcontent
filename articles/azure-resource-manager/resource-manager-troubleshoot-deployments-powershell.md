@@ -1,37 +1,36 @@
-<properties
-    pageTitle="使用 PowerShell 查看部署操作 | Azure"
-    description="介绍如何使用 Azure PowerShell 来检测 Resource Manager 部署的问题。"
-    services="azure-resource-manager,virtual-machines"
-    documentationcenter=""
-    tags="top-support-issue"
-    author="tfitzmac"
-    manager="timlt"
-    editor="" />  
+---
+title: 使用 PowerShell 查看部署操作 | Azure
+description: 介绍如何使用 Azure PowerShell 来检测 Resource Manager 部署的问题。
+services: azure-resource-manager,virtual-machines
+documentationcenter: 
+tags: top-support-issue
+author: tfitzmac
+manager: timlt
+editor: 
 
-<tags
-    ms.assetid="51cb9716-ab95-4024-afc4-ae9cf5b2f4b7"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-multiple"
-    ms.workload="infrastructure"
-    ms.date="06/14/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: 51cb9716-ab95-4024-afc4-ae9cf5b2f4b7
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-multiple
+ms.workload: infrastructure
+ms.date: 06/14/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 使用 Azure PowerShell 查看部署操作
->[AZURE.SELECTOR]
-[Portal](/documentation/articles/resource-manager-troubleshoot-deployments-portal/)
-[PowerShell](/documentation/articles/resource-manager-troubleshoot-deployments-powershell/)
-[Azure CLI](/documentation/articles/resource-manager-troubleshoot-deployments-cli/)
-[REST API](/documentation/articles/resource-manager-troubleshoot-deployments-rest/)
+>[!div class="op_single_selector"]
+[Portal](./resource-manager-troubleshoot-deployments-portal.md)
+[PowerShell](./resource-manager-troubleshoot-deployments-powershell.md)
+[Azure CLI](./resource-manager-troubleshoot-deployments-cli.md)
+[REST API](./resource-manager-troubleshoot-deployments-rest.md)
 
 可以通过 Azure PowerShell 查看部署操作。当你在部署过程中收到错误时，可能最想要查看操作，因此本文将重点介绍如何查看已失败的操作。PowerShell 提供 cmdlet 来让你轻松找到错误并确定可能的解决方法。
 
-[AZURE.INCLUDE [resource-manager-troubleshoot-introduction](../../includes/resource-manager-troubleshoot-introduction.md)]
+[!INCLUDE [resource-manager-troubleshoot-introduction](../../includes/resource-manager-troubleshoot-introduction.md)]
 
-如果部署之前先验证模板和基础结构，则可以避免一些错误。你还可以在部署过程中记录其他请求和响应信息，以方便以后进行故障排除。若要了解有关验证和记录请求和响应信息的内容，请参阅 [Deploy a resource group with Azure Resource Manager template](/documentation/articles/resource-group-template-deploy/)（使用 Azure Resource Manager 模板部署资源组）。
+如果部署之前先验证模板和基础结构，则可以避免一些错误。你还可以在部署过程中记录其他请求和响应信息，以方便以后进行故障排除。若要了解有关验证和记录请求和响应信息的内容，请参阅 [Deploy a resource group with Azure Resource Manager template](./resource-group-template-deploy.md)（使用 Azure Resource Manager 模板部署资源组）。
 
 ## 使用部署操作进行故障排除
 1. 若要获取部署的总体状态，请使用 **Get-AzureRmResourceGroupDeployment** 命令。你可以筛选结果，以便只获取失败的部署。
@@ -108,7 +107,7 @@
         DnsRecordInUse DNS record dns.chinanorth.chinacloudapp.cn is already used by another public IP. {}
 
 ## 使用审核日志进行故障排除
-[AZURE.INCLUDE [resource-manager-audit-limitations](../../includes/resource-manager-audit-limitations.md)]
+[!INCLUDE [resource-manager-audit-limitations](../../includes/resource-manager-audit-limitations.md)]
 
 若要查看部署相关的错误，请使用以下步骤：
 
@@ -145,8 +144,8 @@
         DnsRecordInUse DNS record dns.chinanorth.chinacloudapp.cn is already used by another public IP. {}
 
 ## 后续步骤
-* 有关解决特定部署错误的帮助，请参阅 [Resolve common errors when deploying resources to Azure with Azure Resource Manager](/documentation/articles/resource-manager-common-deployment-errors/)（解决使用 Azure Resource Manager 将资源部署到 Azure 时的常见错误）。
-* 若要了解如何使用审核日志来监视其他类型的操作，请参阅 [Audit operations with Resource Manager](/documentation/articles/resource-group-audit/)（使用 Resource Manager 执行审核操作）。
-* 若要在执行部署之前验证部署，请参阅 [Deploy a resource group with Azure Resource Manager template](/documentation/articles/resource-group-template-deploy/)（使用 Azure Resource Manager 模板部署资源组）。
+* 有关解决特定部署错误的帮助，请参阅 [Resolve common errors when deploying resources to Azure with Azure Resource Manager](./resource-manager-common-deployment-errors.md)（解决使用 Azure Resource Manager 将资源部署到 Azure 时的常见错误）。
+* 若要了解如何使用审核日志来监视其他类型的操作，请参阅 [Audit operations with Resource Manager](./resource-group-audit.md)（使用 Resource Manager 执行审核操作）。
+* 若要在执行部署之前验证部署，请参阅 [Deploy a resource group with Azure Resource Manager template](./resource-group-template-deploy.md)（使用 Azure Resource Manager 模板部署资源组）。
 
 <!---HONumber=Mooncake_1219_2016-->

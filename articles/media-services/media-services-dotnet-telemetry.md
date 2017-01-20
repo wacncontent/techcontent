@@ -1,29 +1,28 @@
-<properties
-    pageTitle="使用 .NET 配置 Azure 媒体服务遥测 | Azure"
-    description="本文说明如何通过 .NET SDK 使用 Azure 媒体服务遥测。"
-    services="media-services"
-    documentationcenter=""
-    author="Juliako"
-    manager="erikre"
-    editor="" />  
+---
+title: 使用 .NET 配置 Azure 媒体服务遥测 | Azure
+description: 本文说明如何通过 .NET SDK 使用 Azure 媒体服务遥测。
+services: media-services
+documentationcenter: 
+author: Juliako
+manager: erikre
+editor: 
 
-<tags
-    ms.assetid="4e4a9ec3-8ddb-4938-aec1-d7172d3db858"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/17/2016"
-    wacn.date="12/12/2016"
-    ms.author="juliako" />  
-
+ms.assetid: 4e4a9ec3-8ddb-4938-aec1-d7172d3db858
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/17/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 # 使用 .NET 配置 Azure 媒体服务遥测
 
 本主题介绍使用 .NET SDK 配置 Azure 媒体服务 (AMS) 遥测可采取的常规步骤。
 
->[AZURE.NOTE]有关 AMS 遥测定义和使用方法的详细介绍，请参阅[概述](/documentation/articles/media-services-telemetry-overview/)主题。
+>[!NOTE]有关 AMS 遥测定义和使用方法的详细介绍，请参阅[概述](./media-services-telemetry-overview.md)主题。
 
 可通过以下方式之一使用遥测数据：
 
@@ -56,7 +55,7 @@
 
 ## 使用遥测信息
 
-有关使用遥测信息的信息，请参阅[此主题](/documentation/articles/media-services-telemetry-overview/)。
+有关使用遥测信息的信息，请参阅[此主题](./media-services-telemetry-overview.md)。
  
 ## 示例  
 	
@@ -103,7 +102,6 @@
 	        private static CloudMediaContext _context = null;
 	        private static MediaServicesCredentials _cachedCredentials = null;
 		private static Uri _apiServer = null;
-		
 		
 	        private static IStreamingEndpoint _streamingEndpoint = null;
 	        private static IChannel _channel = null;
@@ -175,7 +173,6 @@
 	                    _streamingEndpoint.Id,
 	                    start,
 	                    end);
-	
 	
 	            Console.Title = "Streaming endpoint metrics:";
 	

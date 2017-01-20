@@ -1,31 +1,28 @@
-<properties
-    pageTitle="为站点恢复运行 Hyper-V Capacity Planner 工具 | Azure"
-    description="本文介绍如何针对 Azure Site Recovery 运行 Hyper-V Capacity Planner 工具"
-    services="site-recovery"
-    documentationcenter="na"
-    author="rayne-wiselman"
-    manager="jwhit"
-    editor="" />  
+---
+title: 为站点恢复运行 Hyper-V Capacity Planner 工具 | Azure
+description: 本文介绍如何针对 Azure Site Recovery 运行 Hyper-V Capacity Planner 工具
+services: site-recovery
+documentationcenter: na
+author: rayne-wiselman
+manager: jwhit
+editor: 
 
-<tags
-    ms.assetid="2bc3832f-4d6e-458d-bf0c-f00567200ca0"
-    ms.service="site-recovery"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage-backup-recovery"
-    ms.date="11/15/2016"
-    wacn.date="01/04/2017"
-    ms.author="nisoneji" />  
-
+ms.assetid: 2bc3832f-4d6e-458d-bf0c-f00567200ca0
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 11/15/2016
+wacn.date: 01/04/2017
+ms.author: nisoneji
+---
 
 # 为站点恢复运行 Hyper-V Capacity Planner 工具
 
 作为 Azure Site Recovery 部署的一部分，需要确定复制和带宽要求。站点恢复的 Hyper-V Capacity Planner 工具可帮助用户针对 Hyper-V 虚拟机复制执行此操作。
 
-
-本文介绍如何运行 Hyper-V Capacity Planner 工具。此工具应与[站点恢复容量规划](/documentation/articles/site-recovery-capacity-planner/)中的信息一起使用。
-
+本文介绍如何运行 Hyper-V Capacity Planner 工具。此工具应与[站点恢复容量规划](./site-recovery-capacity-planner.md)中的信息一起使用。
 
 ## 开始之前
 
@@ -111,7 +108,6 @@
 
 	![](./media/site-recovery-capacity-planning-for-hyper-v-replication/image6.png)
 
-
 ## 步骤 4：解释结果
 以下是重要度量值。你可以忽略未列在此处的度量值。它们与站点恢复无关。
 
@@ -130,16 +126,16 @@
 ## 更多资源
 - 有关该工具的详细信息，请阅读随工具下载的文档。
 - 观看 Keith Mayer 的 [TechNet 博客](http://blogs.technet.com/b/keithmayer/archive/2014/02/27/guided-hands-on-lab-capacity-planner-for-windows-server-2012-hyper-v-replica.aspx)中的工具演练。
-- 获取本地到本地 Hyper-V 复制的性能测试[结果](/documentation/articles/site-recovery-performance-and-scaling-testing-on-premises-to-on-premises/)
+- 获取本地到本地 Hyper-V 复制的性能测试[结果](./site-recovery-performance-and-scaling-testing-on-premises-to-on-premises.md)
 
 ## 后续步骤
 
 你已完成容量计划，可以开始部署站点恢复了：
 
-- [将 VMM 云中的 Hyper-V VM 复制到 Azure](/documentation/articles/site-recovery-vmm-to-azure/)
-- [将 Hyper-V VM（不带 VMM）复制到 Azure](/documentation/articles/site-recovery-hyper-v-site-to-azure/)
-- [在 VMM 站点之间复制 Hyper-V VM](/documentation/articles/site-recovery-vmm-to-vmm/)
-- [使用 SAN 在 VMM 站点之间复制 Hyper-V VM](/documentation/articles/site-recovery-vmm-san/)
-- [在单个 VMM 服务器上复制 hyper-V VM](/documentation/articles/site-recovery-single-vmm/)
+- [将 VMM 云中的 Hyper-V VM 复制到 Azure](./site-recovery-vmm-to-azure.md)
+- [将 Hyper-V VM（不带 VMM）复制到 Azure](./site-recovery-hyper-v-site-to-azure.md)
+- [在 VMM 站点之间复制 Hyper-V VM](./site-recovery-vmm-to-vmm.md)
+- [使用 SAN 在 VMM 站点之间复制 Hyper-V VM](./site-recovery-vmm-san.md)
+- [在单个 VMM 服务器上复制 hyper-V VM](./site-recovery-single-vmm.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

@@ -1,30 +1,29 @@
-<properties 
-	pageTitle="DocumentDB .NET API 和 SDK | Azure" 
-	description="了解有关 .NET API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB.NET SDK 各版本之间的更改。" 
-	services="documentdb" 
-	documentationCenter=".net" 
-	authors="rnagpal" 
-	manager="jhubbard" 
-	editor="cgronlun"/>  
+---
+title: DocumentDB .NET API 和 SDK | Azure
+description: 了解有关 .NET API 和 SDK 的全部信息，包括发布日期、停用日期和 DocumentDB.NET SDK 各版本之间的更改。
+services: documentdb
+documentationCenter: .net
+authors: rnagpal
+manager: jhubbard
+editor: cgronlun
 
-
-<tags 
-	ms.service="documentdb" 
-	ms.workload="data-services" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="10/27/2016" 
-	ms.author="rnagpal"
-	wacn.date="01/04/2017"/>
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/27/2016
+ms.author: rnagpal
+wacn.date: 01/04/2017
+---
 
 # DocumentDB API 和 SDK 
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/documentdb-sdk-dotnet/)
-- [Node.js](/documentation/articles/documentdb-sdk-node/)
-- [Java](/documentation/articles/documentdb-sdk-java/)
-- [Python](/documentation/articles/documentdb-sdk-python/)
+> [!div class="op_single_selector"]
+- [.NET](./documentdb-sdk-dotnet.md)
+- [Node.js](./documentdb-sdk-node.md)
+- [Java](./documentdb-sdk-java.md)
+- [Python](./documentdb-sdk-python.md)
 - [REST](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx)
 - [SQL](https://msdn.microsoft.com/zh-cn/library/azure/dn782250.aspx)
 
@@ -32,23 +31,22 @@
 
 <table>  
 
-
 <tr><td>**SDK 下载**</td><td><a href="https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/">NuGet</a></td></tr>
 
 <tr><td>**API 文档**</td><td><a href="https://msdn.microsoft.com/zh-cn/library/azure/dn948556.aspx">.NET API 参考文档</a></td></tr>
 
-<tr><td>**示例**</td><td><a href="/documentation/articles/documentdb-dotnet-samples/">.NET 代码示例</a></td></tr>
+<tr><td>**示例**</td><td><a href="./documentdb-dotnet-samples.md">.NET 代码示例</a></td></tr>
 
-<tr><td>**入门**</td><td><a href="/documentation/articles/documentdb-get-started/">DocumentDB .NET SDK 入门</a></td></tr>
+<tr><td>**入门**</td><td><a href="./documentdb-get-started.md">DocumentDB .NET SDK 入门</a></td></tr>
 
-<tr><td>**Web 应用教程**</td><td><a href="/documentation/articles/documentdb-dotnet-application/">使用 DocumentDB 开发 Web 应用程序</a></td></tr>
+<tr><td>**Web 应用教程**</td><td><a href="./documentdb-dotnet-application.md">使用 DocumentDB 开发 Web 应用程序</a></td></tr>
 
 <tr><td>**当前受支持的框架**</td><td><a href="https://www.microsoft.com/zh-cn/download/details.aspx?id=30653">Microsoft .NET Framework 4.5</a></td></tr>
 </table>
 
 ## 发行说明
 
-> [AZURE.IMPORTANT] 从版本 1.9.2 开始，查询已分区集合时，可能会出现 System.NotSupportedException。为了避免此错误，请确保主机进程为 64 位。对于可执行的项目，可以通过在项目属性窗口中的“生成”选项卡上取消选中“首选 32 位”选项来实现此目的。
+> [!IMPORTANT] 从版本 1.9.2 开始，查询已分区集合时，可能会出现 System.NotSupportedException。为了避免此错误，请确保主机进程为 64 位。对于可执行的项目，可以通过在项目属性窗口中的“生成”选项卡上取消选中“首选 32 位”选项来实现此目的。
 
 ### <a name="1.10.0"/>[1\.10.0](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.10.0)
 
@@ -92,7 +90,6 @@
   - 添加了用于设置给定 DocumentDB 终结点 URI 的 ServicePoint.ConnectionLimit 的配置选项。使用 ConnectionPolicy.MaxConnectionLimit 可以更改默认值（设置为 50）。
   - 弃用了 IPartitionResolver 及其实现。对 IPartitionResolver 的支持现已过时。建议使用分区集合来提高存储和吞吐量。
 
-
 ### <a name="1.7.1"/>[1\.7.1](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.7.1)
   - 向采用 RequestOptions 作为参数的基于 Uri 的 ExecuteStoredProcedureAsync 方法添加了重载。
   
@@ -103,7 +100,7 @@
   - 修复了用于将其打包为 Azure 云服务解决方案的一部分的 .NET SDK 的 Nuget 包中的 Bug。
   
 ### <a name="1.6.2"/>[1\.6.2](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.6.2)
-  - 实现了[分区集合](/documentation/articles/documentdb-partition-data/)和[用户定义的性能级别](/documentation/articles/documentdb-performance-levels/)。
+  - 实现了[分区集合](./documentdb-partition-data.md)和[用户定义的性能级别](./documentdb-performance-levels.md)。
 
 ### <a name="1.5.3"/>[1\.5.3](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.5.3)
   - **[已修复]** 查询 DocumentDB 终结点引发：“System.Net.Http.HttpRequestException：将内容复制到流时出错”。
@@ -169,9 +166,8 @@
 ### <a name="1.0.0"/>[1\.0.0](https://www.nuget.org/packages/Microsoft.Azure.DocumentDB/1.0.0)
 - GA SDK
 
-> [AZURE.NOTE]
+> [!NOTE]
 预览版和 GA 版之间的 NuGet 程序包名称有所更改。从 **Microsoft.Azure.Documents.Client** 更改为 **Microsoft.Azure.DocumentDB** <br/>
-
 
 ### <a name="0.9.x-preview"/>[0\.9.x-preview](https://www.nuget.org/packages/Microsoft.Azure.Documents.Client)
 - 预览版 SDK [已过时]
@@ -183,7 +179,7 @@ Microsoft 至少会在停用 SDK 的 **12 个月**之前发出通知，以便顺
 
 使用已停用的 SDK 对 DocumentDB 发出的任何请求都将被服务拒绝。
 
-> [AZURE.WARNING]
+> [!WARNING]
 **1.0.0** 版之前的所有 Azure DocumentDB SDK for .NET 版本都将在 **2016 年 2 月 29 日**停用。
  
 <br/>
@@ -218,10 +214,10 @@ Microsoft 至少会在停用 SDK 的 **12 个月**之前发出通知，以便顺
 | [0\.9.0-prelease](#0.9.x-preview) |2014 年 8 月 21 日 |2016 年 2 月 29 日 |
 
 ## 常见问题
-[AZURE.INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
+[!INCLUDE [documentdb sdk 常见问题](../../includes/documentdb-sdk-faq.md)]
 
 ## 另请参阅
 
-若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](/home/features/documentdb/) 服务页。
+若要了解有关 DocumentDB 的详细信息，请参阅 [Azure DocumentDB](https://www.azure.cn/home/features/documentdb/) 服务页。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

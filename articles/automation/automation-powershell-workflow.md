@@ -1,20 +1,21 @@
-<properties 
-   pageTitle="了解 PowerShell 工作流"
-   description="本文旨在作为熟悉 PowerShell 创作人员的一个速成教程，以便其了解 PowerShell 和 PowerShell 工作流之间的具体差异。"
-   services="automation"
-   documentationCenter=""
-   authors="mgoedtel"
-   manager="jwhit"
-   editor="tysonn" />
-<tags 
-   ms.service="automation"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="09/12/2016"
-   wacn.date="01/03/2017"
-   ms.author="bwren" />
+---
+title: 了解 PowerShell 工作流
+description: 本文旨在作为熟悉 PowerShell 创作人员的一个速成教程，以便其了解 PowerShell 和 PowerShell 工作流之间的具体差异。
+services: automation
+documentationCenter: 
+authors: mgoedtel
+manager: jwhit
+editor: tysonn
+
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 09/12/2016
+wacn.date: 01/03/2017
+ms.author: bwren
+---
 
 # 学习 Windows PowerShell 工作流
 
@@ -93,7 +94,6 @@ Azure 中国区目前仅支持文本 PowerShell 工作流 Runbook。
 		Stop-Service -Name $Service.Name
 	}
 
-
 ## <a name="InlineScript" id="inlinescript"></a> InlineScript
 
 当您需要将一个或多个命令作为传统的 PowerShell 脚本而不是 PowerShell 工作流运行时，**InlineScript** 活动非常有用。尽管工作流中的命令将发送到 Windows Workflow Foundation 进行处理，但 InlineScript 块中的命令将由 Windows PowerShell 处理。
@@ -118,7 +118,6 @@ InlineScript 使用如下所示的语法。
 		$Output.Name
 	}
 
-
 您可以将值传递到 InlineScript 块，但是您必须使用 **$Using** 作用域修饰符。下面的示例与前面的示例相同，只是服务名称由变量提供。
 
 	Workflow Stop-MyService
@@ -134,7 +133,6 @@ InlineScript 使用如下所示的语法。
 		$Output.Name
 	}
 
-
 尽管 InlineScript 活动可能在某些工作流中非常关键，但它们不支持工作流构造，并且只能出于以下原因才使用：
 
 - 您无法在 InlineScript 块内部使用[检查点](#Checkpoints)。如果块中发生失败，它必须从块的开头恢复。
@@ -142,7 +140,6 @@ InlineScript 使用如下所示的语法。
 - 因为 InlineScript 会在 InlineScript 块的整个长度内占有 Windows PowerShell 会话，因此会影响工作流的可伸缩性。
 
 有关使用 InlineScript 的进一步信息，请参阅[在工作流中运行 Windows PowerShell 命令](http://technet.microsoft.com/zh-cn/library/jj574197.aspx)和 [about\_InlineScript](http://technet.microsoft.com/zh-cn/library/jj649082.aspx)。
-
 
 ##<a name="parallel-processing" id="parallel-execution"></a> 并行处理
 
@@ -156,7 +153,6 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
       <Activity2>
     }
     <Activity3>
-
 
 例如，请注意以下将多个文件复制到网络目标的 PowerShell 命令。这些命令将依次进行，因此必须完成一个文件的复制，然后才能开始复制下一个文件。
 
@@ -177,7 +173,6 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
 
 		Write-Output "Files copied."
 	}
-
 
 您可以使用 **ForEach-Parallel** 构造同时处理集合中的每个项的处理命令。尽管脚本块中的命令按顺序运行，但集合中的项是并行处理的。这将使用如下所示的语法。在这种情况下，Activity1 将在同一时间对集合中的所有项启动。对于每个项，Activity2 将在 Activity1 完成后启动。只有在对所有项完成 Activity1 和 Activity2 后，activity3 才会启动。
 
@@ -203,8 +198,7 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
 		Write-Output "All files copied."
 	}
 
-> [AZURE.NOTE]  我们不建议并行运行子 Runbook，这是由于这已被证实将导致不可靠的结果。来自子 Runbook 的输出有时将不会显示，一个子 Runbook 中的设置可能会影响其他并行子 Runbook
-
+> [!NOTE]  我们不建议并行运行子 Runbook，这是由于这已被证实将导致不可靠的结果。来自子 Runbook 的输出有时将不会显示，一个子 Runbook 中的设置可能会影响其他并行子 Runbook
 
 ## <a name="Checkpoints" id="checkpoints"></a> 检查点
 
@@ -240,7 +234,6 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
 
 下面的相同代码演示如何在 PowerShell 工作流 Runbook 中处理此问题。
 
-       
     workflow CreateTestVms
     {
        $Cred = Get-AzureAutomationCredential -Name "MyCredential"
@@ -263,14 +256,12 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
          }
      } 
 
-
 此外，如果你使用配置了服务主体的运行方式帐户进行身份验证，则不需要此处理。
 
 关于检查点的详细信息，请参阅[将检查点添加到脚本工作流](http://technet.microsoft.com/zh-cn/library/jj574114.aspx)。
 
-
 ## 后续步骤
 
-- 若要开始使用 PowerShell 工作流 Runbook，请参阅 [My first PowerShell workflow runbook](/documentation/articles/automation-first-runbook-textual/)（我的第一个 PowerShell 工作流 Runbook）
+- 若要开始使用 PowerShell 工作流 Runbook，请参阅 [My first PowerShell workflow runbook](./automation-first-runbook-textual.md)（我的第一个 PowerShell 工作流 Runbook）
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

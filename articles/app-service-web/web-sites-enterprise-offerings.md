@@ -1,27 +1,27 @@
-<properties 
-	pageTitle="面向企业的 Azure App Service Web Apps 产品" 
-	description="演示如何使用 Azure App Service Web Apps 为你的企业创建企业网站解决方案" 
-	services="app-service\web" 
-	documentationCenter="" 
-	authors="apwestgarth" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 面向企业的 Azure App Service Web Apps 产品
+description: 演示如何使用 Azure App Service Web Apps 为你的企业创建企业网站解决方案
+services: app-service\web
+documentationCenter: 
+authors: apwestgarth
+manager: wpickett
+editor: 
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="07/29/2016" 
-	wacn.date="01/05/2017" 
-	ms.author="anwestg"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/29/2016
+wacn.date: 01/05/2017
+ms.author: anwestg
+---
 
 # 适用于企业的 Azure App Service Web Apps 产品白皮书 #
 
-降低成本以及在快速发展的环境中更快地交付 IT 解决方案的要求为开发人员、IT 专业人员和管理人员带来了新的挑战。用户日益期望其业务线 (LOB) Web 应用程序能够在任何设备上快速运行和响应。同时，企业正在尝试利用由于与云和移动服务集成所带来的生产力和效率提高，这简单可到使用 Active Directory 实现的跨设备的单一登录，复杂可到使用从内部 LOB 应用程序（反过来也可以从公司 Salesforce 实施中拉取数据）中提取的数据在 Office365 中进行协作。[Azure App Service Web Apps](/documentation/articles/app-service-changes-existing-services/) 是一种用于开发、测试和运行 Web 及移动应用程序、Web API 和一般网站的企业级云服务。它可以用于在针对缩放和可用性优化的全国数据中心网络上运行企业网站、Intranet 网站、业务应用和数字营销活动，同时还支持持续集成和现代 DevOps 实践。
+降低成本以及在快速发展的环境中更快地交付 IT 解决方案的要求为开发人员、IT 专业人员和管理人员带来了新的挑战。用户日益期望其业务线 (LOB) Web 应用程序能够在任何设备上快速运行和响应。同时，企业正在尝试利用由于与云和移动服务集成所带来的生产力和效率提高，这简单可到使用 Active Directory 实现的跨设备的单一登录，复杂可到使用从内部 LOB 应用程序（反过来也可以从公司 Salesforce 实施中拉取数据）中提取的数据在 Office365 中进行协作。[Azure App Service Web Apps](./app-service-changes-existing-services.md) 是一种用于开发、测试和运行 Web 及移动应用程序、Web API 和一般网站的企业级云服务。它可以用于在针对缩放和可用性优化的全国数据中心网络上运行企业网站、Intranet 网站、业务应用和数字营销活动，同时还支持持续集成和现代 DevOps 实践。
 
-本白皮书重点介绍专门侧重于运行 LOB Web 应用程序的 [Web Apps](/home/features/app-service/web-apps/) 服务的功能，涵盖现有 Web 应用程序的迁移和平台上全新 LOB Web 应用程序的部署。
+本白皮书重点介绍专门侧重于运行 LOB Web 应用程序的 [Web Apps](https://www.azure.cn/home/features/app-service/web-apps/) 服务的功能，涵盖现有 Web 应用程序的迁移和平台上全新 LOB Web 应用程序的部署。
 
 ## 目标受众 ##
 
@@ -47,7 +47,7 @@ App Service Web Apps 是用于托管此类应用程序的理想之选，其提�
 
 另一种方法是在本地使用现有投资。在示例场景中（员工支出系统），你可能想要在自己的内部基础架构中维护数据存储。这可能是为了与内部系统 （报表、工资单、计费等）集成，或者为了满足 IT 监管要求。在 Azure 中国，Web 应用只提供一种方法支持你连接到本地基础结构：
 
-- [虚拟网络集成](/documentation/articles/app-service-vnet-integration-powershell/) - Web 应用与 Azure 虚拟网络的集成支持你将 Web 应用连接到 Azure 虚拟网络，后者反过来又能够通过站点到站点 VPN 连接到你的本地基础结构。
+- [虚拟网络集成](./app-service-vnet-integration-powershell.md) - Web 应用与 Azure 虚拟网络的集成支持你将 Web 应用连接到 Azure 虚拟网络，后者反过来又能够通过站点到站点 VPN 连接到你的本地基础结构。
 
 下图展示了一个具有适用于本地资源的连接选项的高级解决方案示例。
 
@@ -76,9 +76,9 @@ App Service Web Apps 构建于一种“平台即服务”模型之上，可大�
 
 ### 企业类托管 ###
 
-App Service Web Apps 提供了一个稳定、可靠的平台，后者已被证实能够满足从小型内部开发和测试工作负荷到高度可扩展的高流量网站的各种业务需求。通过使用 Web Apps，你可以使用与 Microsoft 公司用于处理高价值 Web 工作负荷相同的企业类托管平台。Web Apps 以及 Azure 平台上的所有服务均符合安全要求和遵从法规要求，如 ISO (ISO/IEC 27001:2005）；SOC1 和 SOC2 SSAE 16/ISAE 3402 Attestations、HIPAA BAA、PCI 和 Fedramp，是每个元素和功能的核心，有关详细信息，请参阅[http://aka.ms/azurecompliance](/support/trust-center/compliance/)。
+App Service Web Apps 提供了一个稳定、可靠的平台，后者已被证实能够满足从小型内部开发和测试工作负荷到高度可扩展的高流量网站的各种业务需求。通过使用 Web Apps，你可以使用与 Microsoft 公司用于处理高价值 Web 工作负荷相同的企业类托管平台。Web Apps 以及 Azure 平台上的所有服务均符合安全要求和遵从法规要求，如 ISO (ISO/IEC 27001:2005）；SOC1 和 SOC2 SSAE 16/ISAE 3402 Attestations、HIPAA BAA、PCI 和 Fedramp，是每个元素和功能的核心，有关详细信息，请参阅[http://aka.ms/azurecompliance](https://www.azure.cn/support/trust-center/compliance/)。
 
-Azure 平台支持基于角色的身份验证控制，从而支持对 Web 应用内的资源进行企业级控制。RBAC 支持企业在 Azure 环境中为其所有资产实施自己的访问管理策略，将用户分配到组并反过来根据 Web 应用等资产将所需的权限分配给这些组。关于 Azure 中 RBAC 的详细信息，请参阅 [http://aka.ms/azurerbac](/documentation/articles/role-based-access-control-configure/)。通过利用 Web Apps，你可以确保将 Web 应用程序部署在安全可靠的环境中，并完全地控制要将资产部署到的区域。
+Azure 平台支持基于角色的身份验证控制，从而支持对 Web 应用内的资源进行企业级控制。RBAC 支持企业在 Azure 环境中为其所有资产实施自己的访问管理策略，将用户分配到组并反过来根据 Web 应用等资产将所需的权限分配给这些组。关于 Azure 中 RBAC 的详细信息，请参阅 [http://aka.ms/azurerbac](../active-directory/role-based-access-control-configure.md)。通过利用 Web Apps，你可以确保将 Web 应用程序部署在安全可靠的环境中，并完全地控制要将资产部署到的区域。
 
 通过支持往回连接到你的内部资源（如数据仓库或 SharePoint 环境），应用服务 Web 应用还能够充分利用你的本地投资。如之前在[高级别的解决方案](#high-level-solution)中所讨论的，用户可以使用混合连接和虚拟网络连接建立到本地基础结构和服务的连接。
 
@@ -101,7 +101,7 @@ Azure 平台提供了一些替代方法，可以将 Azure SQL 数据库用作 We
 
 随着企业的成长，其员工数量也会增长（通过收购或自然的有机增长），因此也必须对 Web 应用程序进行扩展以满足这些新需求。事实上，现在经常可以看到同地协同团队和远程办公员工的快速扩展，例如在美国、欧洲和亚洲设有办事处的公司，以及在很多地区组建移动销售团队的公司。Web Apps 能够方便、自动处理弹性缩放比例的更改。
 
-应用服务 Web 应用允许通过 Azure 门户预览将 Web 应用程序配置为可自动进行缩放，具体取决于以下两个矢量：计划时间或按 CPU 使用率。Web Apps 自动缩放提供了一种经济高效而又极其灵活的方式来满足所有业务应用程序（从诸如我们的支出报表系统之类的 Web 应用程序到市场营销网站）在使用上不断变化的要求，而这会在短时升级过程中带来流量的显著提高。有关使用 Web Apps 扩展 Web 应用程序的详细信息和指南，请参阅[如何扩展网站](/documentation/articles/web-sites-scale/)。
+应用服务 Web 应用允许通过 Azure 门户预览将 Web 应用程序配置为可自动进行缩放，具体取决于以下两个矢量：计划时间或按 CPU 使用率。Web Apps 自动缩放提供了一种经济高效而又极其灵活的方式来满足所有业务应用程序（从诸如我们的支出报表系统之类的 Web 应用程序到市场营销网站）在使用上不断变化的要求，而这会在短时升级过程中带来流量的显著提高。有关使用 Web Apps 扩展 Web 应用程序的详细信息和指南，请参阅[如何扩展网站](./web-sites-scale.md)。
 
 除 Web Apps 的缩放灵活性之外，整个平台可通过 Web 应用程序及其资产跨多个数据中心和地理区域的可能分布，来启用业务连续性和复原功能。
 
@@ -109,8 +109,8 @@ Azure 平台提供了一些替代方法，可以将 Azure SQL 数据库用作 We
 App Service Web Apps 提供了一款灵活、经济高效、响应迅速的解决方案在快速发展的环境中满足企业不断变化的需求。Web Apps 帮助企业利用托管平台以及现代化的 DevOps 功能和减少的人工管理提高了生产力和效率，同时提供企业扩展功能、弹性、安全性以及与本地资产的集成。
 
 ## 行动号召 ##
-有关 Azure App Service Web Apps 服务的详细信息，请访问 [http://aka.ms/enterprisewebsites](/home/features/app-service/web-apps/)，在这里你可以查看更多信息；并登录 [https://www.azure.cn/pricing/1rmb-trial/](/pricing/1rmb-trial/) 立即注册试用版，评估该服务并发现为你企业带来的优势。
+有关 Azure App Service Web Apps 服务的详细信息，请访问 [http://aka.ms/enterprisewebsites](https://www.azure.cn/home/features/app-service/web-apps/)，在这里你可以查看更多信息；并登录 [https://www.azure.cn/pricing/1rmb-trial/](https://www.azure.cn/pricing/1rmb-trial/) 立即注册试用版，评估该服务并发现为你企业带来的优势。
 
-[AZURE.INCLUDE [app-service-web-whats-changed](../../includes/app-service-web-whats-changed.md)]
+[!INCLUDE [app-service-web-whats-changed](../../includes/app-service-web-whats-changed.md)]
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

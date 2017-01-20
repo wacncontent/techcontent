@@ -1,21 +1,21 @@
-<properties
-	pageTitle="创建具有 .NET 后端的 Windows 应用商店排行榜应用 | Azure 移动服务"
-	description="了解如何使用 Azure 移动服务构建具有 .NET 后端的 Windows 应用商店排行榜应用。"
-	documentationCenter="windows"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""
-	services="mobile-services"/>
+---
+title: 创建具有 .NET 后端的 Windows 应用商店排行榜应用 | Azure 移动服务
+description: 了解如何使用 Azure 移动服务构建具有 .NET 后端的 Windows 应用商店排行榜应用。
+documentationCenter: windows
+authors: rmcmurray
+manager: wpickett
+editor: 
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows-store"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="11/10/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows-store
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 11/10/2016
+ms.author: glenga
+---
 
 # 使用 Azure 移动服务 .NET 后端创建排行榜应用程序
 
@@ -40,7 +40,6 @@ Web API 是一个开源框架，可为 .NET 开发人员提供创建 REST API �
 
 本教程使用 [Visual Studio 2013 最新更新版](http://go.microsoft.com/fwlink/p/?LinkID=390465)。
 
-
 ## 关于示例应用程序
 
 排行榜显示游戏的玩家列表，以及每个玩家的分数和排名。排行榜可作为较大游戏的一部分，或作为单独的应用程序。排行榜是实际的应用程序，但简单易懂且可用于教程。下面是该应用程序的屏幕截图：
@@ -61,7 +60,6 @@ PlayerRank 具有 Player 的外键。每个玩家各有零个或一个 PlayerRan
 客户端应用程序可对 Player 执行一组完整的 CRUD 操作。它可读取或删除现有的 PlayerRank 实体，但无法直接加以创建或更新。这是因为排名值是由服务所计算的。实际做法是，在客户端提交分数后，由服务更新所有玩家的排名。
 
 在[此处](http://code.msdn.microsoft.com/Leaderboard-App-with-Azure-9acf63af)下载完成的项目。
-
 
 ## 创建项目
 
@@ -110,7 +108,7 @@ PlayerRank 具有 Player 的外键。每个玩家各有零个或一个 PlayerRan
 	    }
 	}
 
-请注意，这两个类都继承自 **EntityData** 类。派生自 **EntityData** 可方便应用程序使用数据，并将跨平台客户端库用于 Azure 移动服务。**EntityData** 还可方便应用程序[处理数据库写入冲突](/documentation/articles/mobile-services-windows-store-dotnet-handle-database-conflicts/)。
+请注意，这两个类都继承自 **EntityData** 类。派生自 **EntityData** 可方便应用程序使用数据，并将跨平台客户端库用于 Azure 移动服务。**EntityData** 还可方便应用程序[处理数据库写入冲突](./mobile-services-windows-store-dotnet-handle-database-conflicts.md)。
 
 `PlayerRank` 类具有指向相关 `Player` 实体的[导航属性](http://msdn.microsoft.com/zh-cn/data/jj713564.aspx)。**[ForeignKey]** 属性让 EF 知道 `Player` 属性表示外键。
 
@@ -132,7 +130,6 @@ PlayerRank 具有 Player 的外键。每个玩家各有零个或一个 PlayerRan
 2.	在“数据上下文类”下，选择“MobileServiceContext”。
 3.	将控制器命名为“PlayerController”。
 4.	单击**“添加”**。
-
 
 此步骤将名为 PlayerController.cs 的文件添加到项目中。
 
@@ -261,7 +258,6 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
             // MobileServiceContext context = new MobileServiceContext();
             DomainManager = new EntityDomainManager<PlayerRank>(context, Request, Services);
         }
-
 
 从 `PlayerRankController` 中删除以下方法：
 
@@ -604,7 +600,6 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 	        const string serviceUrl = "http://localhost:port/";
 	        public static MobileServiceClient MobileService = new MobileServiceClient(serviceUrl);
 	
-	
 	        // ...
 	    }
 	}
@@ -628,7 +623,6 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
         }
 
        // ...
-
 
 前面已经提到，我不会介绍应用程序的所有 XAML。MVVM 模式的优点之一是能够区分表示形式和应用程序逻辑，因此，如果你不喜欢示例应用程序，可以轻松更改 UI。
 
@@ -675,7 +669,6 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 ![][14]
 
-
 选择现有的移动服务，或单击“新建”以创建一个新的服务。然后单击“确定”以发布。
 
 ![][15]
@@ -695,7 +688,6 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 ![][17]
 
- 
 将服务 URL 和应用程序密钥传递给 **MobileServiceClient** 构造函数。
 
     sealed partial class App : Application
@@ -755,9 +747,9 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 <!-- URLs. -->
 
-[详细了解 Azure 移动服务]: /documentation/services/mobile-services/
+[详细了解 Azure 移动服务]: ./index.md/
 [详细了解 Web API]: http://asp.net/web-api
-[处理数据库写入冲突]: /documentation/articles/mobile-services-windows-store-dotnet-handle-database-conflicts/
-[身份验证入门]: /documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users/
+[处理数据库写入冲突]: ./mobile-services-windows-store-dotnet-handle-database-conflicts.md
+[身份验证入门]: ./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users.md
 
 <!---HONumber=Mooncake_0215_2016-->

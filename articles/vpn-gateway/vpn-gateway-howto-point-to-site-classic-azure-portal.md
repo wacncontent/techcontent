@@ -1,45 +1,43 @@
-<properties
-    pageTitle="使用 Azure 门户预览配置与 Azure 虚拟网络的点到站点 VPN 网关连接 | Azure"
-    description="使用 Azure 门户预览创建点到站点 VPN 网关连接，安全连接到 Azure 虚拟网络。"
-    services="vpn-gateway"
-    documentationcenter="na"
-    author="cherylmc"
-    manager="carmonm"
-    editor=""
-    tags="azure-service-management" />  
+---
+title: 使用 Azure 门户预览配置与 Azure 虚拟网络的点到站点 VPN 网关连接 | Azure
+description: 使用 Azure 门户预览创建点到站点 VPN 网关连接，安全连接到 Azure 虚拟网络。
+services: vpn-gateway
+documentationcenter: na
+author: cherylmc
+manager: carmonm
+editor: 
+tags: azure-service-management
 
-<tags
-    ms.assetid="65e14579-86cf-4d29-a6ac-547ccbd743bd"
-    ms.service="vpn-gateway"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/17/2016"
-    wacn.date="12/26/2016"
-    ms.author="cherylmc" />  
-
+ms.assetid: 65e14579-86cf-4d29-a6ac-547ccbd743bd
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/17/2016
+wacn.date: 12/26/2016
+ms.author: cherylmc
+---
 
 # 使用 Azure 门户预览配置与 VNet 的点到站点连接
-> [AZURE.SELECTOR]
-- [Resource Manager - Azure 门户预览](/documentation/articles/vpn-gateway-howto-point-to-site-resource-manager-portal/)
-- [Resource Manager - PowerShell](/documentation/articles/vpn-gateway-howto-point-to-site-rm-ps/)
-- [经典 - Azure 门户预览](/documentation/articles/vpn-gateway-howto-point-to-site-classic-azure-portal/)
+> [!div class="op_single_selector"]
+- [Resource Manager - Azure 门户预览](./vpn-gateway-howto-point-to-site-resource-manager-portal.md)
+- [Resource Manager - PowerShell](./vpn-gateway-howto-point-to-site-rm-ps.md)
+- [经典 - Azure 门户预览](./vpn-gateway-howto-point-to-site-classic-azure-portal.md)
 
 本文逐步讲解如何使用 Azure 门户预览，在经典部署模型中创建具有点到站点连接的 VNet。通过点到站点 (P2S) 配置，可以创建单台客户端计算机到虚拟网络的安全连接。如果要从远程位置（例如从家里或会议室）连接到 VNet，P2S 连接会很有用。如果只有少数客户端需要连接到虚拟网络，也可以使用 P2S。
 
-点到站点连接不需要 VPN 设备或面向公众的 IP 地址即可运行。可通过从客户端计算机启动连接来建立 VPN 连接。有关点到站点连接的详细信息，请参阅 [VPN Gateway FAQ](/documentation/articles/vpn-gateway-vpn-faq/#point-to-site-connections)（VPN 网关常见问题）及 [About VPN Gateway](/documentation/articles/vpn-gateway-about-vpngateways/#point-to-site)（关于 VPN 网关）。
+点到站点连接不需要 VPN 设备或面向公众的 IP 地址即可运行。可通过从客户端计算机启动连接来建立 VPN 连接。有关点到站点连接的详细信息，请参阅 [VPN Gateway FAQ](./vpn-gateway-vpn-faq.md#point-to-site-connections)（VPN 网关常见问题）及 [About VPN Gateway](./vpn-gateway-about-vpngateways.md#point-to-site)（关于 VPN 网关）。
 
 ### P2S 连接的部署模型和方法
-[AZURE.INCLUDE [部署模型](../../includes/vpn-gateway-deployment-models-include.md)]
+[!INCLUDE [部署模型](../../includes/vpn-gateway-deployment-models-include.md)]
 
 下表显示了 P2S 配置的两种部署模型和可用的部署方法。当有配置步骤相关的文章发布时，我们会直接从此表格链接到该文章。
 
-[AZURE.INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-table-point-to-site-include.md)]
+[!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-table-point-to-site-include.md)]
 
 ## 基本工作流
 ![点到站点连接示意图](./media/vpn-gateway-howto-point-to-site-rm-ps/p2srm.png "点到站点")  
-
 
 以下部分逐步讲解如何建立与虚拟网络的安全点到站点连接。
 
@@ -84,7 +82,7 @@
     ![创建虚拟网络边栏选项卡](./media/vpn-gateway-howto-point-to-site-classic-azure-portal/vnet125.png "创建虚拟网络边栏选项卡")  
 
 5. 确认“订阅”正确无误。可以使用下拉列表更改订阅。
-6. 单击“资源组”并选择现有的资源组，或键入新的资源组名称创建新资源组。如果要创建新组，请根据计划的配置值来命名资源组。有关资源组的详细信息，请访问 [Azure 资源管理器概述](/documentation/articles/resource-group-overview/#resource-groups)。
+6. 单击“资源组”并选择现有的资源组，或键入新的资源组名称创建新资源组。如果要创建新组，请根据计划的配置值来命名资源组。有关资源组的详细信息，请访问 [Azure 资源管理器概述](../azure-resource-manager/resource-group-overview.md#resource-groups)。
 7. 接下来，选择 VNet 的“位置”设置。该位置决定了要部署到此 VNet 中的资源所在的位置。
 8. 如果想要在仪表板上轻松找到 VNet，请选择“固定到仪表板”，然后单击“创建”。
    
@@ -124,13 +122,13 @@
 
 7. 单击“子网配置所需的设置”添加**网关子网**。尽管创建的网关子网最小可为 /29，但建议至少选择 /28 或 /27，创建包含更多地址的更大子网。这样便可以留出足够多的地址，满足将来可能需要使用的其他配置。
    
-   > [AZURE.IMPORTANT]
-   处理网关子网时，请避免将网络安全组 (NSG) 关联到网关子网。将网络安全组与此子网关联可能会导致 VPN 网关停止按预期方式工作。有关网络安全组的详细信息，请参阅[什么是网络安全组？](/documentation/articles/virtual-networks-nsg/)
+   > [!IMPORTANT]
+   处理网关子网时，请避免将网络安全组 (NSG) 关联到网关子网。将网络安全组与此子网关联可能会导致 VPN 网关停止按预期方式工作。有关网络安全组的详细信息，请参阅[什么是网络安全组？](../virtual-network/virtual-networks-nsg.md)
    > 
    > 
    
     ![Add GatewaySubnet](./media/vpn-gateway-howto-point-to-site-classic-azure-portal/gwsubnet125.png "Add GatewaySubnet")
-8. 选择网关**大小**。这是用于创建虚拟网络网关的网关 SKU。在门户中，默认 SKU 为“基本”。有关网关 SKU 的详细信息，请参阅 [About VPN Gateway Settings](/documentation/articles/vpn-gateway-about-vpn-gateway-settings/#gwsku)（关于 VPN 网关设置）。
+8. 选择网关**大小**。这是用于创建虚拟网络网关的网关 SKU。在门户中，默认 SKU 为“基本”。有关网关 SKU 的详细信息，请参阅 [About VPN Gateway Settings](./vpn-gateway-about-vpn-gateway-settings.md#gwsku)（关于 VPN 网关设置）。
    
     ![网关大小](./media/vpn-gateway-howto-point-to-site-classic-azure-portal/gwsize125.png)  
 
@@ -147,7 +145,7 @@ Azure 使用证书对点到站点 VPN 的 VPN 客户端进行身份验证。从�
 如果使用的是企业解决方案，可以使用现有的证书链。如果使用的不是企业 CA 解决方案，可以创建自签名根证书。创建自签名证书的方法之一是使用 Makecert。
 
 * 如果使用企业证书系统，请获取要使用的根证书的 .cer 文件。
-* 如果使用的不是企业证书解决方案，则需要生成自签名根证书。有关适用于 Windows 10 的步骤，请参阅 [Working with self-signed root certificates for Point-to-Site configurations](/documentation/articles/vpn-gateway-certificates-point-to-site/)（为点到站点配置使用自签名根证书）。
+* 如果使用的不是企业证书解决方案，则需要生成自签名根证书。有关适用于 Windows 10 的步骤，请参阅 [Working with self-signed root certificates for Point-to-Site configurations](./vpn-gateway-certificates-point-to-site.md)（为点到站点配置使用自签名根证书）。
 
 1. 若要从证书中获取 .cer 文件，请打开 **certmgr.msc** 并找到根证书。右键单击自签名根证书，单击“所有任务”，然后单击“导出”。此操作将打开“证书导出向导”。
 2. 在向导中，单击“下一步”，选择“否，不导出私钥”，然后单击“下一步”。
@@ -159,7 +157,7 @@ Azure 使用证书对点到站点 VPN 的 VPN 客户端进行身份验证。从�
 可以为每个要连接的客户端生成唯一证书，也可以在多个客户端上使用相同的证书。生成唯一客户端证书的优势是能够根据需要吊销单个证书。否则，如果每个人都使用相同的客户端证书，在需要吊销某个客户端的证书时，必须为所有使用该证书进行身份验证的客户端生成并安装新证书。
 
 * 如果使用的是企业证书解决方案，请使用通用名称值格式“name@yourdomain.com”生成客户端证书，而不要使用“域名\\用户名”格式。
-* 如果使用自签名的证书解决方案，请参阅 [Working with self-signed root certificates for Point-to-Site configurations](/documentation/articles/vpn-gateway-certificates-point-to-site/)（为点到站点配置使用自签名根证书）生成客户端证书。
+* 如果使用自签名的证书解决方案，请参阅 [Working with self-signed root certificates for Point-to-Site configurations](./vpn-gateway-certificates-point-to-site.md)（为点到站点配置使用自签名根证书）生成客户端证书。
 
 ### <a name="exportclientcert"></a>第 3 部分：导出客户端证书
 在要连接到虚拟网络的每台计算机上安装客户端证书。身份验证时需要客户端证书。可以自动安装客户端证书，也可以手动安装。以下步骤指导如何手动导出和安装客户端证书。
@@ -187,7 +185,7 @@ Azure 使用证书对点到站点 VPN 的 VPN 客户端进行身份验证。从�
 ## <a name="vpnclientconfig"></a>第 4 节 - 生成 VPN 客户端配置包
 若要连接到虚拟网络，还需配置 VPN 客户端。客户端计算机要求提供客户端证书和正确的 VPN 客户端配置包来建立连接。
 
-VPN 客户端包中含有用于配置 Windows 内置 VPN 客户端软件的配置信息。该程序包不安装额外的软件。这些设置特定于要连接到的虚拟网络。有关客户端支持的操作系统列表，请参阅“VPN Gateway FAQ”（VPN 网关常见问题）中的 [Point-to-Site connections](/documentation/articles/vpn-gateway-vpn-faq/#point-to-site-connections)（点到站点连接）部分。
+VPN 客户端包中含有用于配置 Windows 内置 VPN 客户端软件的配置信息。该程序包不安装额外的软件。这些设置特定于要连接到的虚拟网络。有关客户端支持的操作系统列表，请参阅“VPN Gateway FAQ”（VPN 网关常见问题）中的 [Point-to-Site connections](./vpn-gateway-vpn-faq.md#point-to-site-connections)（点到站点连接）部分。
 
 ### 生成 VPN 客户端配置包
 1. 在 Azure 门户预览中，在 VNet“概述”边栏选项卡上的“VPN 连接”中，单击客户端图形打开“点到站点 VPN 连接”边栏选项卡。
@@ -215,7 +213,6 @@ VPN 客户端包中含有用于配置 Windows 内置 VPN 客户端软件的配�
    
     ![VPN 客户端](./media/vpn-gateway-howto-point-to-site-classic-azure-portal/vpn.png "VNet VPN 客户端")  
 
-
 ## <a name="connect"></a>第 6 节 - 连接到 Azure
 ### 连接到 VNet
 1. 若要连接到 VNet，请在客户端计算机上导航到 VPN 连接，找到创建的 VPN 连接。其名称与虚拟网络的名称相同。单击“连接”。可能会出现与使用证书相关的弹出消息。如果出现此消息，请单击“继续”以使用提升的权限。
@@ -226,7 +223,6 @@ VPN 客户端包中含有用于配置 Windows 内置 VPN 客户端软件的配�
 3. 现在应已建立连接。
    
     ![已建立连接](./media/vpn-gateway-howto-point-to-site-classic-azure-portal/connected.png "已建立连接")  
-
 
 ### 验证 VPN 连接
 1. 若要验证你的 VPN 连接是否处于活动状态，请打开提升的命令提示符，然后运行 *ipconfig/all*。
@@ -246,6 +242,6 @@ VPN 客户端包中含有用于配置 Windows 内置 VPN 客户端软件的配�
         NetBIOS over Tcpip..............: Enabled
 
 ## 后续步骤
-连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](/documentation/services/virtual-machines/)。
+连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md/)。
 
 <!---HONumber=Mooncake_1219_2016-->

@@ -1,27 +1,27 @@
-<properties
-   pageTitle="将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型 | Azure"
-   description="本页概述桥接经典部署模型与 Resource Manager 部署模型时所要了解的知识。"
-   documentationCenter="na"
-   services="expressroute"
-   authors="ganesr"
-   manager="carmonm"
-   editor=""/>
-<tags
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/10/2016"
-   wacn.date="10/31/2016"
-   ms.author="ganesr"/>
+---
+title: 将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型 | Azure
+description: 本页概述桥接经典部署模型与 Resource Manager 部署模型时所要了解的知识。
+documentationCenter: na
+services: expressroute
+authors: ganesr
+manager: carmonm
+editor: 
 
+ms.service: expressroute
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/10/2016
+wacn.date: 01/17/2017
+ms.author: ganesr
+---
 
 # 将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型
 
-本文概述将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型的效果。
+本文概述将 Azure ExpressRoute 线路从经典部署模型转移到 Azure Resource Manager 部署模型的效果。
 
-[AZURE.INCLUDE [vpn-gateway-sm-rm](../../includes/vpn-gateway-classic-rm-include.md)]
+[!INCLUDE [vpn-gateway-sm-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
 可以使用一条 ExpressRoute 线路连接到在经典部署模型和 Resource Manager 部署模型中部署的虚拟网络。无论 ExpressRoute 线路的创建方式为何，现在都可以链接到这两种部署模型中的虚拟网络。
 
@@ -43,17 +43,16 @@
 
 - 默认情况下，在 Resource Manager 部署模型中创建的 ExpressRoute 线路无法访问经典部署模型。
 - 默认情况下，可以从这两种部署模型访问从经典部署模型转移到 Resource Manager 部署模型的 ExpressRoute 线路。
-- 无论是在 Resource Manager 部署模型还是经典部署模型中创建的，ExpressRoute 线路始终都可以访问 Resource Manager 部署模型。这意味着，你可以根据[如何链接虚拟网络](/documentation/articles/expressroute-howto-linkvnet-arm/)中的说明，与 Resource Manager 部署模型中创建的虚拟网络建立连接。
+- 无论是在 Resource Manager 部署模型还是经典部署模型中创建的，ExpressRoute 线路始终都可以访问 Resource Manager 部署模型。这意味着，你可以根据[如何链接虚拟网络](./expressroute-howto-linkvnet-arm.md)中的说明，与 Resource Manager 部署模型中创建的虚拟网络建立连接。
 - 对经典部署模型的访问权限由 ExpressRoute 线路中的 **allowClassicOperations** 参数控制。
 
->[AZURE.IMPORTANT] 将应用[服务限制](/documentation/articles/azure-subscription-service-limits/)页中所述的所有配额。例如，标准线路最多可以有 10 个跨经典部署模型和 Resource Manager 部署模型的虚拟网络链接/连接。
-
+>[!IMPORTANT] 将应用[服务限制](../azure-subscription-service-limits.md)页中所述的所有配额。例如，标准线路最多可以有 10 个跨经典部署模型和 Resource Manager 部署模型的虚拟网络链接/连接。
 
 ## 控制对经典部署模型的访问权限
 
 设置 ExpressRoute 线路的 **allowClassicOperations** 参数，即可让单个 ExpressRoute 线路链接到这两种部署模型中的虚拟网络。
 
-将 **allowClassicOperations** 设置为 TRUE 即可从这两种部署模型中的虚拟网络链接到 ExpressRoute 线路。可以遵循有关[如何链接经典部署模型中的虚拟网络](/documentation/articles/expressroute-howto-linkvnet-classic/)的指导链接到经典部署模型中的虚拟网络。可以遵循有关[如何链接 Resource Manager 部署模型中的虚拟网络](/documentation/articles/expressroute-howto-linkvnet-arm/)的指导链接到 Resource Manager 部署模型中的虚拟网络。
+将 **allowClassicOperations** 设置为 TRUE 即可从这两种部署模型中的虚拟网络链接到 ExpressRoute 线路。可以遵循有关[如何链接经典部署模型中的虚拟网络](./expressroute-howto-linkvnet-classic.md)的指导链接到经典部署模型中的虚拟网络。可以遵循有关[如何链接 Resource Manager 部署模型中的虚拟网络](./expressroute-howto-linkvnet-arm.md)的指导链接到 Resource Manager 部署模型中的虚拟网络。
 
 将 **allowClassicOperations** 设置为 FALSE 会阻止从经典部署模型访问线路。但是，经典部署模型中的所有虚拟网络链接将会保留。在此情况下，ExpressRoute 线路不显示在经典部署模型中。
 
@@ -75,9 +74,10 @@
 ExpressRoute 线路相当于经典部署模型与 Resource Manager 部署模型之间的桥梁。经典部署模型的虚拟网络中的虚拟机与 Resource Manager 部署模型的虚拟网络中的虚拟机之间的流量将流经 ExpressRoute，前提是这两个虚拟网络链接到相同的 ExpressRoute 线路。
 
 聚合吞吐量受限于虚拟网络网关的吞吐容量。在这种情况下，流量不进入连接服务提供商的网络或你的网络。虚拟网络之间的流量完全包含在 Microsoft 网络中。
-## 对 Azure 公共互连资源的访问权限
 
-你可以继续访问通常可通过 Azure 公共互连访问的资源，而不会出现任何中断。
+## 对 Azure 公共对等互连资源的访问权限
+
+你可以继续访问通常可通过 Azure 公共对等互连访问的资源，而不会出现任何中断。
 
 ## 支持的操作
 
@@ -100,15 +100,15 @@ ExpressRoute 线路相当于经典部署模型与 Resource Manager 部署模型�
 
 ## 配置
 
-遵循[将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型](/documentation/articles/expressroute-howto-move-arm/)中所述的说明。
+遵循[将 ExpressRoute 线路从经典部署模型转移到 Resource Manager 部署模型](./expressroute-howto-move-arm.md)中所述的说明。
 
 ## 后续步骤
 
-- 有关工作流信息，请参阅 [ExpressRoute 线路预配工作流和线路状态](/documentation/articles/expressroute-workflows/)。
+- 有关工作流信息，请参阅 [ExpressRoute 线路预配工作流和线路状态](./expressroute-workflows.md)。
 - 配置 ExpressRoute 连接的步骤：
 
-	- [创建 ExpressRoute 线路](/documentation/articles/expressroute-howto-circuit-arm/)
-	- [配置路由](/documentation/articles/expressroute-howto-routing-arm/)
-	- [将虚拟网络链接到 ExpressRoute 线路](/documentation/articles/expressroute-howto-linkvnet-arm/)
+	- [创建 ExpressRoute 线路](./expressroute-howto-circuit-arm.md)
+	- [配置路由](./expressroute-howto-routing-arm.md)
+	- [将虚拟网络链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-arm.md)
 
-<!---HONumber=Mooncake_0509_2016-->
+<!---HONumber=Mooncake_Quality_Review_0117_2017-->

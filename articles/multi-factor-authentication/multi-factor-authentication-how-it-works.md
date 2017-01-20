@@ -1,28 +1,27 @@
-<properties 
-	pageTitle="Azure Multi-Factor Authentication - 工作原理" 
-	description="Azure Multi-Factor Authentication 可帮助保护对数据和应用程序的访问，同时可以满足用户对简单登录过程的需求。它通过要求第二种形式的身份验证提供额外的安全性，并通过一系列简单的身份验证选项提供增强式身份验证。" 
-	services="multi-factor-authentication" 
-	documentationCenter="" 
-	authors="billmath" 
-	manager="stevenpo" 
-	editor="curtland"/>
+---
+title: Azure Multi-Factor Authentication - 工作原理
+description: Azure Multi-Factor Authentication 可帮助保护对数据和应用程序的访问，同时可以满足用户对简单登录过程的需求。它通过要求第二种形式的身份验证提供额外的安全性，并通过一系列简单的身份验证选项提供增强式身份验证。
+services: multi-factor-authentication
+documentationCenter: 
+authors: billmath
+manager: stevenpo
+editor: curtland
 
-<tags
-	ms.service="multi-factor-authentication"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/04/2016"
-	wacn.date="09/28/2016"
-	ms.author="kgremban"/>
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/04/2016
+wacn.date: 09/28/2016
+ms.author: kgremban
+---
 
 #Azure 多重身份验证的工作原理
 
 多重身份验证的安全性在于它的分层方法。破坏多重身份验证系统对于攻击者来说是巨大的挑战。即使攻击者设法得到用户的密码，如果没有同时占有可信设备也没有用处。如果用户丢失了设备，捡到该设备的人也无法使用它，除非他（她）也知道该用户的密码。
 
 ![验证](./media/multi-factor-authentication-how-it-works/howitworks.png)
-
 
 Azure 多重身份验证可帮助保护对数据和应用程序的访问，同时可以满足用户对简单登录过程的需求。它通过要求第二种形式的身份验证提供额外的安全性，并通过一系列简单的身份验证选项提供增强式身份验证：
 
@@ -155,16 +154,10 @@ Azure 多重身份验证有两个不同的版本。下表较详细地描述了�
 
 ##如何获取多重身份验证
 
-
-
 如果你是 Office 365 用户或 Azure 订户，并想要充分利用多重身份验证提供的其他功能，请继续阅读其他部分。
 
-如果你没有上述任何产品并想要使用多重身份验证，首先你需要一个 Azure 订阅或 [Azure 试用版订阅](/pricing/1rmb-trial/)。
+如果你没有上述任何产品并想要使用多重身份验证，首先你需要一个 Azure 订阅或 [Azure 试用版订阅](https://www.azure.cn/pricing/1rmb-trial/)。
 
+选择最适合你的组织的按用户或按使用量模式。接下来，若要开始使用，请参阅[入门](./multi-factor-authentication-get-started-cloud.md)
 
-选择最适合你的组织的按用户或按使用量模式。接下来，若要开始使用，请参阅[入门](/documentation/articles/multi-factor-authentication-get-started-cloud/)
-
-
-
- 
 <!---HONumber=Mooncake_0530_2016-->

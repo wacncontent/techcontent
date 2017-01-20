@@ -1,25 +1,22 @@
-<properties 
-	pageTitle="以编程方式监视流分析的作业 | Azure" 
-	description="了解如何以编程方式监视通过 REST API、Azure SDK 或 Powershell 创建的流分析作业。"
-	keywords=".net 监视器, 作业监视器, 监视应用"
-	services="stream-analytics" 
-	documentationCenter="" 
-	authors="jeffstokes72" 
-	manager="jhubbard" 
-	editor="cgronlun"/>  
+---
+title: 以编程方式监视流分析的作业 | Azure
+description: 了解如何以编程方式监视通过 REST API、Azure SDK 或 Powershell 创建的流分析作业。
+keywords: .net 监视器, 作业监视器, 监视应用
+services: stream-analytics
+documentationCenter: 
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags 
-	ms.service="stream-analytics" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.tgt_pltfrm="na" 
-	ms.workload="data-services" 
-	ms.date="09/26/2016" 
-	wacn.date="01/09/2017" 
-	ms.author="jeffstok"/>  
-
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 09/26/2016
+wacn.date: 01/09/2017
+ms.author: jeffstok
+---
 
 # 以编程方式创建流分析作业监视器
  本文说明如何为流分析作业启用监视功能。通过 REST API、Azure SDK 或 Powershell 创建的流分析作业并不默认启用监视功能。你可以在 Azure 经典管理门户中手动启用此功能，只需导航到作业的“监视”页并单击“启用”按钮即可；你也可以按本文所述步骤自动化此过程。流分析作业的监视数据将显示在 Azure 经典管理门户的“监视”选项卡中。
@@ -38,15 +35,12 @@
 1.	创建 Visual Studio C# .Net 控制台应用程序。
 2.	在程序包管理器控制台中运行以下命令以安装 NuGet 包。第一个是 Azure 流分析管理 .NET SDK。第二个是 Azure Insights SDK，用于启用监视功能。最后一个是用于进行身份验证的 Azure Active Directory 客户端。
 
-    
 	    Install-Package Microsoft.Azure.Management.StreamAnalytics
 	    Install-Package Microsoft.Azure.Insights -Pre
 	    Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
     
-
 3.	将下面的 appSettings 部分添加到 App.config 文件。
 
-    
 	    <appSettings>
 	    	<!--CSM Prod related values-->
 	    	<add key="ResourceGroupName" value="RESOURCE GROUP NAME" />
@@ -63,12 +57,10 @@
 	
     将 *SubscriptionId* 和 *ActiveDirectoryTenantId* 的值替换为 Azure 订阅和租户 ID。你可以通过运行以下 PowerShell cmdlet 来获取这些值：
 
-    
 	    Get-AzureAccount
     
 4.	将以下 using 语句添加到项目中的源文件 (Program.cs)。
 
-    
 	        using System;
 	        using System.Configuration;
 	        using System.Threading;
@@ -142,7 +134,7 @@
 
 以下代码将为**现有**流分析作业启用监视功能。代码的第一部分针对流分析服务执行 GET 请求，目的是检索特定流分析作业的信息。它使用“Id”属性（从 GET 请求检索而得）作为代码第二部分中 Put 方法的参数，目的是将 PUT 请求发送到 Insights 服务以启用流分析作业的监视功能。
 
-> [AZURE.WARNING]
+> [!WARNING]
 > 如果你此前为其他流分析作业启用了监视功能，不管是通过 Azure 经典管理门户进行的还是通过以下代码以编程方式完成的，**我们都建议你在提供存储帐户名称时提供你此前在启用监视功能时所使用的那个相同的存储帐户名称。**
 > 
 > 存储帐户与你创建流分析作业时所在的区域相关联，并不特定于作业本身。
@@ -168,19 +160,15 @@
 	    };
 	    insightsClient.ServiceDiagnosticSettingsOperations.Put(jobGetResponse.Job.Id, insightPutParameters);
 
-
-
 ## 获取支持
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。
 
-
 ## 后续步骤
 
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
  
-
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

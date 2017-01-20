@@ -1,18 +1,23 @@
-<properties 
-	pageTitle="手动安装 Azure for Python SDK" 
-	description="手动安装 Azure for Python SDK" 
-	services="" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="na-aog" ms.date="" wacn.date="12/05/2016"/>
+---
+title: 手动安装 Azure for Python SDK
+description: 手动安装 Azure for Python SDK
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: na-aog
+ms.date: 
+wacn.date: 12/05/2016
+---
+
 # 手动安装 Azure for Python SDK #
 
 ### 问题描述 ###
 
 Windows 环境下搭建 Azure 的 Python 开发环境，由于需要最新的 API，因此需要安装新的 azure-sdk-for-python。
-azure-sdk-for-python 已经发布了较多的版本，而[官网](/documentation/articles/python-how-to-install/)给出的 Windows 环境的 SDK 安装包都是老的版本：
+azure-sdk-for-python 已经发布了较多的版本，而[官网](./python-how-to-install.md)给出的 Windows 环境的 SDK 安装包都是老的版本：
 
 ![python-2.7](./media/aog-sdk-python-install/python-2.7.png)
 
@@ -44,4 +49,3 @@ azure-sdk-for-python 已经发布了较多的版本，而[官网](/documentation
 
  ![install-source](./media/aog-sdk-python-install/install-source.png)
  
-

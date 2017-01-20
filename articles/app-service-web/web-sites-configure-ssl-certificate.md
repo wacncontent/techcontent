@@ -1,36 +1,36 @@
-<properties
-	pageTitle="使用 HTTPS 保护应用的自定义域 | Azure"
-	description="了解如何配置 SSL 证书绑定以在 Azure App Service 中保护应用的自定义域名。还将学习如何通过多个工具获取 SSL 证书。"
-	services="app-service"
-	documentationCenter=".net"
-	authors="cephalin"
-	manager="wpickett"
-	editor="jimbe"
-	tags="top-support-issue"/>
+---
+title: 使用 HTTPS 保护应用的自定义域 | Azure
+description: 了解如何配置 SSL 证书绑定以在 Azure App Service 中保护应用的自定义域名。还将学习如何通过多个工具获取 SSL 证书。
+services: app-service
+documentationCenter: .net
+authors: cephalin
+manager: wpickett
+editor: jimbe
+tags: top-support-issue
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/08/2016"
-	wacn.date="12/12/2016"
-	ms.author="cephalin"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/08/2016
+wacn.date: 12/12/2016
+ms.author: cephalin
+---
 
 # 使用 HTTPS 保护应用的自定义域
 
-本文演示如何为 Web 应用、移动应用后端或 [Azure App Service](/documentation/articles/app-service-value-prop-what-is/)（使用自定义域名）中的 API 应用启用 HTTPS。仅限服务器的身份验证。如果需要相互身份验证（包括客户端身份验证），请参阅[如何为应用服务配置 TLS 相互身份验证](/documentation/articles/app-service-web-configure-tls-mutual-auth/)。
+本文演示如何为 Web 应用、移动应用后端或 [Azure App Service](../app-service/app-service-value-prop-what-is.md)（使用自定义域名）中的 API 应用启用 HTTPS。仅限服务器的身份验证。如果需要相互身份验证（包括客户端身份验证），请参阅[如何为应用服务配置 TLS 相互身份验证](./app-service-web-configure-tls-mutual-auth.md)。
 
 若要使用 HTTPS 保护拥有自定义域名的应用，可为该域名添加证书。默认情况下，Azure 使用单个 SSL 证书保护 ***.chinacloudsites.cn** 通配符域，因此客户端可以通过 **https://*&lt;appname>*.chinacloudsites.cn** 访问你的应用。但是，如果要使用 **contoso.com**、**www.contoso.com** 和 ***.contoso.com** 等自定义域，则默认证书不能提供保护。此外，与所有[通配符证书](https://casecurity.org/2014/02/26/pros-and-cons-of-single-domain-multi-domain-and-wildcard-certificates/)类似，默认证书的安全性没有使用证书的自定义域高。
 
->[AZURE.NOTE] 可随时在 [Azure 论坛](/support/forums/)获取 Azure 专家的帮助。如需更加个性化的支持，请转到 [Azure 支持](/support/contact/)，然后单击“获取支持”。
+>[!NOTE] 可随时在 [Azure 论坛](https://www.azure.cn/support/forums/)获取 Azure 专家的帮助。如需更加个性化的支持，请转到 [Azure 支持](https://www.azure.cn/support/contact/)，然后单击“获取支持”。
 
 ## <a name="bkmk_domainname"></a>所需条件
 若要使用 HTTPS 保护自定义域名，需将自定义 SSL 证书绑定到 Azure 中的该自定义域。绑定自定义证书前，需要执行以下操作：
 
-- **配置自定义域** - 应用服务只允许向应用中已配置的域名添加证书。有关说明，请参阅[将自定义域名映射到 Azure 应用](/documentation/articles/web-sites-custom-domain-name/)。
-- **增加到基本层或更高层** 较低定价层中的应用服务计划不支持自定义 SSL 证书。有关说明，请参阅[增加 Azure 中的应用](/documentation/articles/web-sites-scale/)。
+- **配置自定义域** - 应用服务只允许向应用中已配置的域名添加证书。有关说明，请参阅[将自定义域名映射到 Azure 应用](./web-sites-custom-domain-name.md)。
+- **增加到基本层或更高层** 较低定价层中的应用服务计划不支持自定义 SSL 证书。有关说明，请参阅[增加 Azure 中的应用](./web-sites-scale.md)。
 - **获取 SSL 证书** - 如果还没有该证书，需先从受信任的[证书颁发机构](http://zh.wikipedia.org/wiki/证书颁发机构) (CA) 获取。证书必须满足下列所有要求：
 
 	- 由受信任的 CA（而非私人 CA 服务器）签名。
@@ -124,7 +124,6 @@
 
 3. 向 CA 提交 CSR 以获取 SSL 证书。有关 Microsoft 信任的 CA 列表，请参阅 [Microsoft 信任的根证书程序：参与者][cas] (Microsoft Trusted Root Certificate Program: Participants)。
 
-
 3. 使用 CA 发回的证书完成 CSR。有关完成 CSR 的详细信息，请参阅[安装 Internet 服务器证书 (IIS 7)][installcertiis]。
 
 4. 如果 CA 使用中间证书，请先安装再继续操作。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。为 Microsoft IIS 选择版本。
@@ -133,7 +132,7 @@
 
 4. 从 IIS 管理器导出 SSL 证书。有关导出证书的详细信息，请参阅[导出服务器证书 (IIS 7)][exportcertiis] (Export a Server Certificate (IIS 7))。
 
-	>[AZURE.IMPORTANT] 在“证书导出向导”中，确保选择“是, 导出私钥”
+	>[!IMPORTANT] 在“证书导出向导”中，确保选择“是, 导出私钥”
 	><p>
 	>![导出私钥][certwiz1]
 	><p>
@@ -167,7 +166,6 @@
 
 3. 向 CA 提交 CSR 以获取 SSL 证书。有关 Microsoft 信任的 CA 列表，请参阅 [Microsoft 信任的根证书程序：参与者][cas] (Microsoft Trusted Root Certificate Program: Participants)。
 
-
 4. CA 发回请求证书后，将其保存到工作目录中名为 **myserver.crt** 的文件下。如果 CA 提供的是文本格式，只需在文本编辑器中将内容复制到 **myserver.crt**，然后进行保存。该文件应如下所示：
 
 		-----BEGIN CERTIFICATE-----
@@ -196,7 +194,7 @@
 
 	系统提示后，定义密码以保护该 .pfx 文件。
 
-	> [AZURE.NOTE] 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
+	> [!NOTE] 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
 
 现可将导出的 PFX 文件上传到应用服务。请参阅[步骤 2. 上传和绑定自定义 SSL 证书](#bkmk_configuressl)。
 
@@ -252,7 +250,6 @@
 
 3. 向 CA 提交 CSR 以获取 SSL 证书。有关 Microsoft 信任的 CA 列表，请参阅 [Microsoft 信任的根证书程序：参与者][cas] (Microsoft Trusted Root Certificate Program: Participants)。
 
-
 4. CA 发回请求证书后，将其保存到名为 **myserver.crt** 的文件下。如果 CA 提供的是文本格式，只需在文本编辑器中将内容复制到 **myserver.crt**，然后进行保存。该文件应如下所示：
 
 		-----BEGIN CERTIFICATE-----
@@ -281,13 +278,13 @@
 
 	系统提示后，定义密码以保护该 .pfx 文件。
 
-	> [AZURE.NOTE] 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
+	> [!NOTE] 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
 
 现可将导出的 PFX 文件上传到应用服务。请参阅[步骤 2. 上传和绑定自定义 SSL 证书](#bkmk_configuressl)。
 
 ### <a name="bkmk_sscertreq"></a>使用 Certreq.exe 生成自签名证书 ###
 
->[AZURE.IMPORTANT] 自签名证书仅用于测试目的。在访问受自签名证书保护的网站时，大多数浏览器会返回错误。某些浏览器甚至可能会拒绝导航到站点。
+>[!IMPORTANT] 自签名证书仅用于测试目的。在访问受自签名证书保护的网站时，大多数浏览器会返回错误。某些浏览器甚至可能会拒绝导航到站点。
 
 1. 创建文本文件（如 **mycert.txt**），向其复制以下文本并将其文件保存到工作目录中。将 `<your-domain>` 占位符替换为应用的自定义域名。
 
@@ -340,7 +337,7 @@
 
 ### <a name="bkmk_ssopenssl"></a>使用 OpenSSL 生成自签名证书 ###
 
->[AZURE.IMPORTANT] 自签名证书仅用于测试目的。在访问受自签名证书保护的网站时，大多数浏览器会返回错误。某些浏览器甚至可能会拒绝导航到站点。
+>[!IMPORTANT] 自签名证书仅用于测试目的。在访问受自签名证书保护的网站时，大多数浏览器会返回错误。某些浏览器甚至可能会拒绝导航到站点。
 
 1. 创建一个名为 **serverauth.cnf** 的文本文件，然后向其复制以下内容，并将其保存到工作目录中：
 
@@ -398,7 +395,6 @@
 - 应用是否正在**基本**层或更高层上运行，
 - 是否有 CA 的自定义域 SSL 证书。
 
-
 1. 在浏览器中，打开 **[Azure 门户预览](https://portal.azure.cn/)**。
 2. 单击页面左侧的“应用服务”选项。
 3. 单击要分配此证书的应用的名称。
@@ -420,17 +416,17 @@
 
 因为此 IP 地址专用，下述情况将需要进一步配置应用：
 
-- [使用 A 记录将自定义域映射](/documentation/articles/web-sites-custom-domain-name/#a)到 Azure 应用，且刚添加 **基于 IP 的 SSL** 绑定。此应用场景下，需按以下步骤重新映射现有的 A 记录以指向专用 IP 地址：
+- [使用 A 记录将自定义域映射](./web-sites-custom-domain-name.md#a)到 Azure 应用，且刚添加 **基于 IP 的 SSL** 绑定。此应用场景下，需按以下步骤重新映射现有的 A 记录以指向专用 IP 地址：
 
 	1. 配置基于 IP 的 SSL 绑定后，将会向你的应用分配专用 IP 地址。可以在“自定义域”页面中应用设置的下面（紧靠在“主机名”部分的上方）找到此 IP 地址。此 IP 地址作为“外部 IP 地址”列出
     
 	    ![虚拟 IP 地址](./media/web-sites-configure-ssl-certificate/virtual-ip-address.png)
 
-	2. [将自定义域名的 A 记录重新映射到新的 IP 地址](/documentation/articles/web-sites-custom-domain-name/#a)。
+	2. [将自定义域名的 A 记录重新映射到新的 IP 地址](./web-sites-custom-domain-name.md#a)。
 
-- 应用中已有一个或多个 **SNI SSL** 绑定，且刚添加**基于 IP 的 SSL** 绑定。绑定完成后，*&lt;appname>*.chinacloudsites.cn 域名指向新的 IP 地址。因此，任何[从自定义域映射](/documentation/articles/web-sites-custom-domain-name/#cname)到 *&lt;appname>* chinacloudsites.cn 的现有 CNAME（包括 **SNI SSL** 保护的）也会收到新地址的流量，其中该地址仅针对**基于 IP 的 SSL** 创建。此应用场景中，需按以下步骤将 **SNI SSL** 流量发回原始共享 IP 地址：
+- 应用中已有一个或多个 **SNI SSL** 绑定，且刚添加**基于 IP 的 SSL** 绑定。绑定完成后，*&lt;appname>*.chinacloudsites.cn 域名指向新的 IP 地址。因此，任何[从自定义域映射](./web-sites-custom-domain-name.md#cname)到 *&lt;appname>* chinacloudsites.cn 的现有 CNAME（包括 **SNI SSL** 保护的）也会收到新地址的流量，其中该地址仅针对**基于 IP 的 SSL** 创建。此应用场景中，需按以下步骤将 **SNI SSL** 流量发回原始共享 IP 地址：
 
-	1. 标识所有到带 **SNI SSL** 绑定的自定义域的 [CNAME 映射](/documentation/articles/web-sites-custom-domain-name/#cname)。
+	1. 标识所有到带 **SNI SSL** 绑定的自定义域的 [CNAME 映射](./web-sites-custom-domain-name.md#cname)。
 
 	2. 将每个 CNAME 记录重新映射到 **sni.**&lt;appname>.chinacloudsites.cn，而不是 &lt;appname>.chinacloudsites.cn。
 
@@ -446,7 +442,7 @@
 
 如果仍想允许到应用的 HTTP 访问，请跳过此步骤。应用服务*不*强制实施 HTTPS，因此访问者仍可使用 HTTP 访问应用。如果想要对应用强制实施 HTTPS，则可在应用的 `web.config` 文件中定义重写规则。无论应用的语言框架如何，每个应用服务应用都有此文件。
 
-> [AZURE.NOTE] 存在语言特定的请求重定向。ASP.NET MVC 可使用 [RequireHttps](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.requirehttpsattribute.aspx) 筛选器，而非 `web.config` 中的重写规则（请参阅[将安全的 ASP.NET MVC 5 应用部署到 Web 应用](/documentation/articles/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/)）。
+> [!NOTE] 存在语言特定的请求重定向。ASP.NET MVC 可使用 [RequireHttps](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.requirehttpsattribute.aspx) 筛选器，而非 `web.config` 中的重写规则（请参阅[将安全的 ASP.NET MVC 5 应用部署到 Web 应用](./web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database.md)）。
 
 执行以下步骤:
 
@@ -483,20 +479,20 @@
 
 	用户使用 HTTP 请求页面时，此规则都会将 HTTP 301（永久重定向）返回到 HTTPS 协议。它会从 http://contoso.com 重定向到 https://contoso.com。
 
-	>[AZURE.IMPORTANT] 如果 `web.config` 中已有其他 `<rule>` 标记，则将复制的 `<rule>` 标记置于另一 `<rule>` 标记前。
+	>[!IMPORTANT] 如果 `web.config` 中已有其他 `<rule>` 标记，则将复制的 `<rule>` 标记置于另一 `<rule>` 标记前。
 
 4. 将文件保存在 Kudu 调试控制台。此操作立即生效并将所有请求重定向到 HTTPS。
 
 有关 IIS URL 重写模块的详细信息，请参阅 [URL 重写](http://www.iis.net/downloads/microsoft/url-rewrite)文档。
 
 ## 更多资源 ##
-- [Azure 信任中心](/support/trust-center/security/)
-- [Azure 网站中解锁的设置选项](/blog/2014/01/28/more-to-explore-configuration-options-unlocked-in-windows-azure-web-sites/)
-- [启用诊断日志记录](/documentation/articles/web-sites-enable-diagnostic-log/)
-- [在 Azure App Service 中配置 Web 应用](/documentation/articles/web-sites-configure/)
+- [Azure 信任中心](https://www.azure.cn/support/trust-center/security/)
+- [Azure 网站中解锁的设置选项](https://www.azure.cn/blog/2014/01/28/more-to-explore-configuration-options-unlocked-in-windows-azure-web-sites/)
+- [启用诊断日志记录](./web-sites-enable-diagnostic-log.md)
+- [在 Azure App Service 中配置 Web 应用](./web-sites-configure.md)
 - [Azure 管理门户](https://manage.windowsazure.cn)
 
-[customdomain]: /documentation/articles/web-sites-custom-domain-name/
+[customdomain]: ./web-sites-custom-domain-name.md
 [iiscsr]: http://technet.microsoft.com/zh-cn/library/cc732906(WS.10).aspx
 [cas]: http://social.technet.microsoft.com/wiki/contents/articles/31634.microsoft-trusted-root-certificate-program-participants-v-2016-april.aspx
 [installcertiis]: http://technet.microsoft.com/zh-cn/library/cc771816(WS.10).aspx
@@ -508,7 +504,7 @@
 [website]: ./media/web-sites-configure-ssl-certificate/sslwebsite.png
 [scale]: ./media/web-sites-configure-ssl-certificate/sslscale.png
 [standard]: ./media/web-sites-configure-ssl-certificate/sslreserved.png
-[pricing]: /pricing/overview/
+[pricing]: https://www.azure.cn/pricing/overview/
 [configure]: ./media/web-sites-configure-ssl-certificate/sslconfig.png
 [uploadcert]: ./media/web-sites-configure-ssl-certificate/ssluploadcert.png
 [uploadcertdlg]: ./media/web-sites-configure-ssl-certificate/ssluploaddlg.png

@@ -1,25 +1,26 @@
-<properties 
-   pageTitle="如何设置静态内部专用 IP"
-   description="了解静态内部 IP (DIP) 以及如何对其进行管理"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="carmonm"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="03/22/2016"
-   wacn.date="12/12/2016"
-   ms.author="jdial" />
+---
+title: 如何设置静态内部专用 IP
+description: 了解静态内部 IP (DIP) 以及如何对其进行管理
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: carmonm
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/22/2016
+wacn.date: 12/12/2016
+ms.author: jdial
+---
 
 # 如何设置静态内部专用 IP
 大多数情况下，不需要指定虚拟机的静态内部 IP 地址。虚拟网络中的 VM 将自动从指定的范围接收内部 IP 地址。但在某些情况下，需要为特定 VM 指定静态 IP 地址。例如，在你的 VM 需要运行 DNS 或将要成为域控制器的情况下。
 
->[AZURE.NOTE] 静态内部 IP 地址会始终与 VM 关联在一起，即使经历“停止/取消预配”状态变化。
+>[!NOTE] 静态内部 IP 地址会始终与 VM 关联在一起，即使经历“停止/取消预配”状态变化。
 
 ## 如何验证特定 IP 地址是否可用：
 若要验证 IP 地址 *10.0.0.7* 在名为 *TestVnet* 的 VNet 中是否可用，请运行以下 PowerShell 命令并验证 *IsAvailable* 的值：
@@ -32,7 +33,7 @@
 	OperationId          : fd3097e1-5f4b-9cac-8afa-bba1e3492609
 	OperationStatus      : Succeeded
 
->[AZURE.NOTE]如果你想要在安全的环境中测试上述命令，请遵循[创建虚拟网络](/documentation/articles/virtual-networks-create-vnet-arm-pportal/)中的准则创建名为 *TestVnet* 的 VNet，并确保其使用 *10.0.0.0/8* 地址空间。
+>[!NOTE]如果你想要在安全的环境中测试上述命令，请遵循[创建虚拟网络](./virtual-networks-create-vnet-arm-pportal.md)中的准则创建名为 *TestVnet* 的 VNet，并确保其使用 *10.0.0.0/8* 地址空间。
 
 ## 如何在创建 VM 时指定静态内部 IP
 下面的 PowerShell 脚本将创建名为 *TestService* 的全新云服务，然后从 Azure 中检索映像，接着在新的云服务中使用检索的映像创建名为 *TestVM* 的 VM，对该 VM 进行设置，使之位于名为 *Subnet-1* 的子网中，最后再将 *10.0.0.7* 设置为 VM 的静态内部 IP：
@@ -93,9 +94,9 @@
 
 ## 后续步骤
 
-[保留 IP](/documentation/articles/virtual-networks-reserved-public-ip/)
+[保留 IP](./virtual-networks-reserved-public-ip.md)
 
-[实例级公共 IP (ILPIP)](/documentation/articles/virtual-networks-instance-level-public-ip/)
+[实例级公共 IP (ILPIP)](./virtual-networks-instance-level-public-ip.md)
 
 [保留 IP REST API](https://msdn.microsoft.com/zh-CN/library/azure/dn722420.aspx)
 

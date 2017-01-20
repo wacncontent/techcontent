@@ -1,25 +1,25 @@
-<properties
-	pageTitle="应用服务中的 CORS 支持 | Azure"
-	description="了解如何在 Azure 应用服务中使用 CORS 支持。"
-	services="app-service\api"
-	documentationCenter=".net"
-	authors="tdykstra"
-	manager="wpickett"
-	editor=""/>
+---
+title: 应用服务中的 CORS 支持 | Azure
+description: 了解如何在 Azure 应用服务中使用 CORS 支持。
+services: app-service\api
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="app-service-api"
-	ms.workload="na"
-	ms.tgt_pltfrm="dotnet"
-	ms.devlang="na"
-	ms.topic="get-started-article"
-	ms.date="08/27/2016"
-	wacn.date="01/05/2017"
-	ms.author="rachelap"/>
+ms.service: app-service-api
+ms.workload: na
+ms.tgt_pltfrm: dotnet
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 08/27/2016
+wacn.date: 01/05/2017
+ms.author: rachelap
+---
 
 # 借助 CORS 从 JavaScript 使用 API 应用
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 应用服务提供内置的[跨域资源共享 (CORS)](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) 支持，可让 JavaScript 客户端对 API 应用中托管的 API 进行跨域调用。应用服务允许配置对 API 的 CORS 访问，无需在 API 中编写任何代码。
 
@@ -27,11 +27,11 @@
 
 * [如何配置 CORS](#corsconfig) 部分概述如何为任何 API 应用、Web 应用或移动应用配置 CORS。此部分适用于应用服务支持的所有框架，包括 .NET、Node.js 和 Java。
 
-* 本文从[继续学习 .NET 入门教程](#tutorialstart)部分开始演示 CORS 支持，其内容基于[第一篇 API 应用入门教程](/documentation/articles/app-service-api-dotnet-get-started/)中完成的工作。
+* 本文从[继续学习 .NET 入门教程](#tutorialstart)部分开始演示 CORS 支持，其内容基于[第一篇 API 应用入门教程](./app-service-api-dotnet-get-started.md)中完成的工作。
 
 ## <a id="corsconfig"></a>如何在 Azure 应用服务中配置 CORS
 
-可以在 Azure 门户预览中或使用 [Azure Resource Manager](/documentation/articles/resource-group-overview/) 工具配置 CORS。
+可以在 Azure 门户预览中或使用 [Azure Resource Manager](../azure-resource-manager/resource-group-overview.md) 工具配置 CORS。
 
 #### 在 Azure 门户预览中配置 CORS
 
@@ -47,9 +47,7 @@
 
 11. 在文本框中，输入要允许的一个或多个 JavaScript 调用源 URL。
 
-
 	例如，如果已将 JavaScript 应用程序部署到名为 todolistangular 的 Web 应用，请输入“https://todolistangular.chinacloudsites.cn”。或者，输入星号 (*) 指定接受所有原始域。
-
 
 13. 单击“保存”。
 
@@ -59,7 +57,7 @@
 
 #### 使用 Azure Resource Manager工具配置 CORS
 
-也可以使用 [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 和 [Azure CLI](/documentation/articles/xplat-cli-install/) 等命令行工具中的 [Azure Resource Manager 模板](/documentation/articles/resource-group-authoring-templates/)来配置 API 应用的 CORS。
+也可以使用 [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 和 [Azure CLI](../xplat-cli-install.md) 等命令行工具中的 [Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)来配置 API 应用的 CORS。
 
 有关可设置 CORS 属性的 Azure Resource Manager 模板的示例，请打开[本教程的示例应用程序存储库中的 azuredeploy.json 文件](https://github.com/azure-samples/app-service-api-dotnet-todo-list/blob/master/azuredeploy.json)。找到如以下示例中所示的模板部分：
 
@@ -73,11 +71,11 @@
 
 如果学习的是适用于 API 应用的 Node.js 或 Java 入门系列教程，则已经完成了入门系列教程。请跳到[后续步骤](#next-steps)部分查找有关进一步了解 API 应用的建议。
 
-本文余下内容是 .NET 入门系列教程的延续，假设读者已成功完成[第一篇教程](/documentation/articles/app-service-api-dotnet-get-started/)。
+本文余下内容是 .NET 入门系列教程的延续，假设读者已成功完成[第一篇教程](./app-service-api-dotnet-get-started.md)。
 
 ## 将 ToDoListAngular 项目部署到新 Web 应用
 
-在[第一篇教程](/documentation/articles/app-service-api-dotnet-get-started/)中，已创建中间层 API 应用和数据层 API 应用。在本教程中，将创建单页应用程序 (SPA) Web 应用来调用中间层 API 应用。为使 SPA 正常运行，必须在中间层 API 应用中启用 CORS。
+在[第一篇教程](./app-service-api-dotnet-get-started.md)中，已创建中间层 API 应用和数据层 API 应用。在本教程中，将创建单页应用程序 (SPA) Web 应用来调用中间层 API 应用。为使 SPA 正常运行，必须在中间层 API 应用中启用 CORS。
 
 在 [ToDoList 示例应用程序](https://github.com/Azure-Samples/app-service-api-dotnet-todo-list)中，ToDoListAngular 项目是一个简单的 AngularJS 客户端，它调用中间层 ToDoListAPI Web API 项目。*app/scripts/todoListSvc.js* 文件中的 JavaScript 代码使用 AngularJS HTTP 提供程序调用 API。
 
@@ -102,7 +100,7 @@
 
 ### 为 ToDoListAngular 项目创建新的 Web 应用
 
-创建新应用服务 Web 应用并向其部署项目的过程，与在[本系列教程的第一篇教程中所述的创建和部署 API 应用](/documentation/articles/app-service-api-dotnet-get-started/#createapiapp)的过程类似。唯一的差别在于，应用类型是 **Web 应用**而不是 **API 应用**。有关对话框的屏幕截图，请参阅
+创建新应用服务 Web 应用并向其部署项目的过程，与在[本系列教程的第一篇教程中所述的创建和部署 API 应用](./app-service-api-dotnet-get-started.md#createapiapp)的过程类似。唯一的差别在于，应用类型是 **Web 应用**而不是 **API 应用**。有关对话框的屏幕截图，请参阅
 
 1. 在“解决方案资源管理器”中，右键单击 ToDoListAngular 项目，然后单击“发布”。
 
@@ -224,7 +222,7 @@
  
 Web API CORS 支持比应用服务 CORS 支持更有弹性。例如，在代码中可为不同操作方法指定不同的接受来源，但对于应用服务 CORS，只能为所有 API 应用的方法指定一组接受的来源。
 
-> [AZURE.NOTE] 请不要尝试在一个 API 应用中同时使用 Web API CORS 和应用服务 CORS。否则，会优先使用应用服务 CORS，而 Web API CORS 不起作用。例如，如果在应用服务中启用一个来源域，同时在 Web API 代码中启用所有来源域，则 Azure API 应用仅接受来自 Azure 中指定的域的调用。
+> [!NOTE] 请不要尝试在一个 API 应用中同时使用 Web API CORS 和应用服务 CORS。否则，会优先使用应用服务 CORS，而 Web API CORS 不起作用。例如，如果在应用服务中启用一个来源域，同时在 Web API 代码中启用所有来源域，则 Azure API 应用仅接受来自 Azure 中指定的域的调用。
 
 ### 如何在 Web API 代码中启用 CORS
 
@@ -280,10 +278,10 @@ Web API CORS 支持比应用服务 CORS 支持更有弹性。例如，在代码�
 
 * 如果同时在应用程序代码和 Azure 应用服务中配置 CORS，请注意应用服务的 CORS 设置会覆盖在应用程序代码中编写的任何内容。
 
-有关可简化故障排除过程的 Visual Studio 功能的详细信息，请参阅 [Troubleshooting Azure App Service apps in Visual Studio](/documentation/articles/web-sites-dotnet-troubleshoot-visual-studio/)（在 Visual Studio 中对 Azure 应用服务应用进行故障排除）。
+有关可简化故障排除过程的 Visual Studio 功能的详细信息，请参阅 [Troubleshooting Azure App Service apps in Visual Studio](../app-service-web/web-sites-dotnet-troubleshoot-visual-studio.md)（在 Visual Studio 中对 Azure 应用服务应用进行故障排除）。
 
 ## <a name="next-steps"></a>后续步骤 
 
-本文介绍了如何启用应用服务 CORS 支持，使客户端 JavaScript 代码可以调用不同域中的 API。有关 API 应用的详细信息，请阅读 [introduction to authentication in App Service](/documentation/articles/app-service-authentication-overview/)（应用服务中的身份验证简介），然后转到 [user authentication for API apps](/documentation/articles/app-service-api-dotnet-user-principal-auth/)（API 应用的用户身份验证）教程。
+本文介绍了如何启用应用服务 CORS 支持，使客户端 JavaScript 代码可以调用不同域中的 API。有关 API 应用的详细信息，请阅读 [introduction to authentication in App Service](../app-service/app-service-authentication-overview.md)（应用服务中的身份验证简介），然后转到 [user authentication for API apps](./app-service-api-dotnet-user-principal-auth.md)（API 应用的用户身份验证）教程。
 
 <!---HONumber=Mooncake_0919_2016-->

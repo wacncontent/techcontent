@@ -1,32 +1,32 @@
-<properties
-    pageTitle="密钥保管库机密与 Resource Manager 模板 | Azure"
-    description="说明在部署期间如何以参数形式从密钥保管库传递机密。"
-    services="azure-resource-manager,key-vault"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="c582c144-4760-49d3-b793-a3e1e89128e2"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="12/09/2016"
-    wacn.date="01/06/2017"
-    ms.author="tomfitz" />  
+---
+title: 密钥保管库机密与 Resource Manager 模板 | Azure
+description: 说明在部署期间如何以参数形式从密钥保管库传递机密。
+services: azure-resource-manager,key-vault
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
+ms.assetid: c582c144-4760-49d3-b793-a3e1e89128e2
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 12/09/2016
+wacn.date: 01/06/2017
+ms.author: tomfitz
+---
 
 # 在部署过程中使用密钥保管库传递安全参数值
 
-在部署过程中，需要将安全值（例如密码）作为参数传递时，可从 [Azure 密钥保管库](/documentation/articles/key-vault-whatis/)检索值。通过引用参数文件中的密钥保管库和密钥来检索值。值永远不会公开，因为仅引用其密钥保管库 ID。不需要每次部署资源时手动输入机密的值。密钥保管库与部署到的资源组不需要位于同一订阅中。引用密钥保管库时，需要包括订阅 ID。
+在部署过程中，需要将安全值（例如密码）作为参数传递时，可从 [Azure 密钥保管库](../key-vault/key-vault-whatis.md)检索值。通过引用参数文件中的密钥保管库和密钥来检索值。值永远不会公开，因为仅引用其密钥保管库 ID。不需要每次部署资源时手动输入机密的值。密钥保管库与部署到的资源组不需要位于同一订阅中。引用密钥保管库时，需要包括订阅 ID。
 
 本主题说明如何创建密钥保管库和密钥、为 Resource Manager 模板配置密钥访问权限，以及将密钥作为参数传递。如果已经拥有密钥保管库和密钥，但需要检查模板和用户访问权限，请转到[启用密钥访问权限](#enable-access-to-the-secret)部分。如果已经拥有密钥保管库和密钥，并确定已针对模板和用户访问权限进行配置，请转到[通过静态 ID 引用密钥](#reference-a-secret-with-static-id)部分。
 
 ## 部署密钥保管库和机密
 
-可通过 Resource Manager 模板部署密钥保管库和密钥。有关示例，请参阅[密钥保管库模板](/documentation/articles/resource-manager-template-keyvault/)和[密钥保管库密钥模板](/documentation/articles/resource-manager-template-keyvault-secret/)。请在创建密钥保管库时将 **enabledForTemplateDeployment** 属性设置为 **true**，以便从其他 Resource Manager 模板引用它。
+可通过 Resource Manager 模板部署密钥保管库和密钥。有关示例，请参阅[密钥保管库模板](./resource-manager-template-keyvault.md)和[密钥保管库密钥模板](./resource-manager-template-keyvault-secret.md)。请在创建密钥保管库时将 **enabledForTemplateDeployment** 属性设置为 **true**，以便从其他 Resource Manager 模板引用它。
 
 或者，可通过 Azure 门户预览创建密钥保管库和密钥。
 
@@ -34,11 +34,9 @@
 
     ![创建新的密钥保管库](./media/resource-manager-keyvault-parameter/new-key-vault.png)  
 
-
 2. 为密钥保管库提供值。暂时可以忽略“访问策略”和“高级访问策略”设置。相关部分会介绍这些设置。选择“创建”。
 
     ![设置密钥保管库](./media/resource-manager-keyvault-parameter/create-key-vault.png)  
-
 
 3. 现在拥有一个密钥保管库。选择该密钥保管库。
 
@@ -46,22 +44,19 @@
 
     ![选择密钥](./media/resource-manager-keyvault-parameter/select-secret.png)  
 
-
 5. 选择“添加”。
 
     ![选择添加](./media/resource-manager-keyvault-parameter/add-secret.png)  
-
 
 6. 选择“手动”作为上传选项。为密钥提供名称和值。选择“创建”。
 
     ![提供密钥](./media/resource-manager-keyvault-parameter/provide-secret.png)  
 
-
 现已创建密钥保管库和密钥。
 
 ## <a name="enable-access-to-the-secret"></a> 启用密钥访问权限
 
-无论使用的是新密钥保管库还是现有密钥保管库，请确保部署模板的用户可以访问密钥。部署引用某个密钥的模板的用户必须具有密钥保管库的 `Microsoft.KeyVault/vaults/deploy/action` 权限。[所有者](/documentation/articles/role-based-access-built-in-roles/#owner)和[参与者](/documentation/articles/role-based-access-built-in-roles/#contributor)角色都授予此访问权限。也可创建一个授予该权限的[自定义角色](/documentation/articles/role-based-access-control-custom-roles/)，然后将用户添加到该角色。此外，必须授予 Resource Manager 在部署过程中访问密钥保管库的能力。
+无论使用的是新密钥保管库还是现有密钥保管库，请确保部署模板的用户可以访问密钥。部署引用某个密钥的模板的用户必须具有密钥保管库的 `Microsoft.KeyVault/vaults/deploy/action` 权限。[所有者](../active-directory/role-based-access-built-in-roles.md#owner)和[参与者](../active-directory/role-based-access-built-in-roles.md#contributor)角色都授予此访问权限。也可创建一个授予该权限的[自定义角色](../active-directory/role-based-access-control-custom-roles.md)，然后将用户添加到该角色。此外，必须授予 Resource Manager 在部署过程中访问密钥保管库的能力。
 
 可通过门户检查或执行这些步骤。
 
@@ -69,21 +64,17 @@
 
     ![选择访问控制](./media/resource-manager-keyvault-parameter/select-access-control.png)  
 
-
 2. 如果想要用于部署模板的帐户尚不是所有者或参与者（或尚未添加到授予 `Microsoft.KeyVault/vaults/deploy/action` 权限的自定义角色），请选择“添加”
 
     ![添加用户](./media/resource-manager-keyvault-parameter/add-user.png)  
-
 
 3. 选择参与者或所有者角色，然后搜索要分配到该角色的标识。选择“确定”完成将标识添加到角色的操作。
 
     ![添加用户](./media/resource-manager-keyvault-parameter/search-user.png)  
 
-
 4. 若要在部署过程中通过模板启用访问权限，请选择“高级访问控制”。选择“启用对 Azure Resource Manager 的访问以进行模板部署”选项。
 
     ![启用模板访问权限](./media/resource-manager-keyvault-parameter/select-template-access.png)  
-
 
 ## <a name="reference-a-secret-with-static-id"></a> 通过静态 ID 引用机密
 
@@ -185,8 +176,8 @@
     }
 
 ## 后续步骤
-* 有关密钥保管库的一般信息，请参阅 [Azure 密钥保管库入门](/documentation/articles/key-vault-get-started/)。
-* 有关对虚拟机使用密钥保管库的信息，请参阅 [Azure Resource Manager 的安全注意事项](/documentation/articles/best-practices-resource-manager-security/)。
+* 有关密钥保管库的一般信息，请参阅 [Azure 密钥保管库入门](../key-vault/key-vault-get-started.md)。
+* 有关对虚拟机使用密钥保管库的信息，请参阅 [Azure Resource Manager 的安全注意事项](./best-practices-resource-manager-security.md)。
 * 有关引用密钥机密的完整示例，请参阅[密钥保管库示例](https://github.com/rjmax/ArmExamples/tree/master/keyvaultexamples)。
 
 <!---HONumber=Mooncake_0103_2017-->

@@ -1,26 +1,27 @@
-<properties
-    pageTitle="Service Fabric 应用程序升级教程| Azure"
-    description="本文演示了如何使用 Visual Studio 部署 Service Fabric 应用程序、更改代码，以及进行升级。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="mani-ramaswamy"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="a3181a7a-9ab1-4216-b07a-05b79bd826a4"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="11/15/2016"
-    wacn.date="12/26/2016"
-    ms.author="subramar" />
+---
+title: Service Fabric 应用程序升级教程| Azure
+description: 本文演示了如何使用 Visual Studio 部署 Service Fabric 应用程序、更改代码，以及进行升级。
+services: service-fabric
+documentationcenter: .net
+author: mani-ramaswamy
+manager: timlt
+editor: 
+
+ms.assetid: a3181a7a-9ab1-4216-b07a-05b79bd826a4
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 11/15/2016
+wacn.date: 12/26/2016
+ms.author: subramar
+---
 
 # 使用 Visual Studio 进行 Service Fabric 应用程序升级的教程
->[AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/service-fabric-application-upgrade-tutorial-powershell/)
-- [Visual Studio](/documentation/articles/service-fabric-application-upgrade-tutorial/)
+>[!div class="op_single_selector"]
+- [PowerShell](./service-fabric-application-upgrade-tutorial-powershell.md)
+- [Visual Studio](./service-fabric-application-upgrade-tutorial.md)
 
 Azure Service Fabric 确保只升级已更改的服务，并在整个升级过程中监视应用程序的运行状况，从而可以简化云应用程序的升级过程。它还能在应用程序发生任何问题时自动回滚到旧版本。Service Fabric 应用程序升级造成的*停机时间为零*，因为可以在不停机的情况下升级应用程序。本教程介绍如何从 Visual Studio 完成滚动升级。
 
@@ -29,13 +30,11 @@ Azure Service Fabric 确保只升级已更改的服务，并在整个升级过�
 
 ![Service Fabric 应用程序的上下文菜单][image1]  
 
-
 选择“发布”会显示一个弹出窗口，可以将“目标配置文件”设置为 **PublishProfiles\\Local.xml**。在单击“发布”之前，该窗口应如下所示。
 
 ![发布 Service Fabric 应用程序][image2]  
 
-
-现在，可在对话框中单击“发布”。可以使用 [Service Fabric Explorer 查看群集和应用程序](/documentation/articles/service-fabric-visualizing-your-cluster/)。“可视对象”应用程序有一个 Web 服务，在浏览器的地址栏中输入 [http://localhost:8082/visualobjects/](http://localhost:8082/visualobjects/) 即可转到该服务。你应会在屏幕上看到 10 个四处移动的浮动可视对象。
+现在，可在对话框中单击“发布”。可以使用 [Service Fabric Explorer 查看群集和应用程序](./service-fabric-visualizing-your-cluster.md)。“可视对象”应用程序有一个 Web 服务，在浏览器的地址栏中输入 [http://localhost:8082/visualobjects/](http://localhost:8082/visualobjects/) 即可转到该服务。你应会在屏幕上看到 10 个四处移动的浮动可视对象。
 
 ## 步骤 2：更新可视对象示例
 你可能会注意到，使用步骤 1 中部署的版本，可视对象不会旋转。让我们将此应用程序升级到可视对象也会旋转的版本。
@@ -46,18 +45,16 @@ Azure Service Fabric 确保只升级已更改的服务，并在整个升级过�
 
 ![版本控制对话框][image3]  
 
-
 将已修改的项目及其代码包连同应用程序的版本一起更新为 2.0.0。完成更改后，清单应该如下所示（粗体部分即为所做的更改）：
 
 ![更新版本][image4]  
-
 
 如果选择“自动更新应用程序和服务版本”，Visual Studio 工具可以自动滚动更新版本。如果使用 [SemVer](http://www.semver.org)，则在选择该选项后，需要单独更新代码和/或配置包版本。
 
 保存更改，然后选中“升级应用程序”框。
 
 ## 步骤 3：升级应用程序
-请熟悉[应用程序升级参数](/documentation/articles/service-fabric-application-upgrade-parameters/)和[升级过程](/documentation/articles/service-fabric-application-upgrade/)，充分了解可应用的各种升级参数、超时和运行状况标准。在本演练中，服务运行状况评估条件设置为默认值（不受监视模式）。若要配置这些设置，可以选择“配置升级设置”，然后视需要修改参数。
+请熟悉[应用程序升级参数](./service-fabric-application-upgrade-parameters.md)和[升级过程](./service-fabric-application-upgrade.md)，充分了解可应用的各种升级参数、超时和运行状况标准。在本演练中，服务运行状况评估条件设置为默认值（不受监视模式）。若要配置这些设置，可以选择“配置升级设置”，然后视需要修改参数。
 
 现在，我们已经准备好选择“发布”来开始升级应用程序。此选项会将应用程序升级到对象会旋转的版本 2.0.0。Service Fabric 每次会升级一个更新域（先更新一些对象，再更新另一些对象），在升级期间，仍可访问服务。可以通过客户端（浏览器）检查是否可以访问服务。
 
@@ -69,17 +66,15 @@ Azure Service Fabric 确保只升级已更改的服务，并在整个升级过�
 
 ## 后续步骤
 
-[使用 PowerShell 升级应用程序](/documentation/articles/service-fabric-application-upgrade-tutorial-powershell/)逐步讲解了如何使用 PowerShell 进行应用程序升级。
+[使用 PowerShell 升级应用程序](./service-fabric-application-upgrade-tutorial-powershell.md)逐步讲解了如何使用 PowerShell 进行应用程序升级。
 
-使用[升级参数](/documentation/articles/service-fabric-application-upgrade-parameters/)来控制应用程序的升级方式。
+使用[升级参数](./service-fabric-application-upgrade-parameters.md)来控制应用程序的升级方式。
 
-了解如何使用[数据序列化](/documentation/articles/service-fabric-application-upgrade-data-serialization/)，使应用程序在升级后保持兼容。
+了解如何使用[数据序列化](./service-fabric-application-upgrade-data-serialization.md)，使应用程序在升级后保持兼容。
 
-参考[高级主题](/documentation/articles/service-fabric-application-upgrade-advanced/)，了解如何在升级应用程序时使用高级功能。
+参考[高级主题](./service-fabric-application-upgrade-advanced.md)，了解如何在升级应用程序时使用高级功能。
 
-参考[对应用程序升级进行故障排除](/documentation/articles/service-fabric-application-upgrade-troubleshooting/)中的步骤来解决应用程序升级时的常见问题。
-
-
+参考[对应用程序升级进行故障排除](./service-fabric-application-upgrade-troubleshooting.md)中的步骤来解决应用程序升级时的常见问题。
 
 [image1]: ./media/service-fabric-application-upgrade-tutorial/upgrade7.png
 [image2]: ./media/service-fabric-application-upgrade-tutorial/upgrade1.png

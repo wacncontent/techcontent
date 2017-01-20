@@ -1,19 +1,34 @@
-<properties linkid="dev-net-common-tasks-cdn" urlDisplayName="CDN" pageTitle="How to Create Web Acceleration-Type CDNs – Azure Feature Guide" metaKeywords="Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN acceleration, CDN service, mainstream CDN, Web acceleration, Web, webpage acceleration, static acceleration, cache rules, image acceleration, CDN technical documentation, CDN help files, portal website acceleration" description="Learn how to create Web Acceleration-type CDNs on Azure Management Portal, and learn about default caching rules for Web CDNs." metaCanonical="" services="" documentationCenter=".NET" title="" authors="" solutions="" manager="" editor="" />
-<tags ms.service="cdn_en"
-    ms.date="7/7/2016"
-    wacn.date="7/7/2016"
-    wacn.lang="en"
-    />
+---
+linkid: dev-net-common-tasks-cdn
+urlDisplayName: CDN
+title: How to Create Web Acceleration-Type CDNs – Azure Feature Guide
+metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN acceleration, CDN service, mainstream CDN, Web acceleration, Web, webpage acceleration, static acceleration, cache rules, image acceleration, CDN technical documentation, CDN help files, portal website acceleration
+description: Learn how to create Web Acceleration-type CDNs on Azure Management Portal, and learn about default caching rules for Web CDNs.
+metaCanonical: 
+services: 
+documentationCenter: .NET
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
+
+ms.service: cdn_en
+ms.date: 7/7/2016
+wacn.date: 7/7/2016
+wacn.lang: en
+---
+
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/cdn-how-to-create-Web-CDN-endpoint/)
-- [English](/documentation/articles/cdn-enus-how-to-create-Web-CDN-endpoint/) 
+- [中文](./cdn-how-to-create-Web-CDN-endpoint.md)
+- [English](./cdn-enus-how-to-create-Web-CDN-endpoint.md) 
 #Creating Web Acceleration CDN Nodes
 
 The Web Acceleration service is the most basic and most widely used CDN acceleration service, and is mainly intended to accelerate small files with low update frequencies, such as HTML files, CSS, images, JS, and Flash animation. Caching these small files on Azure CDN edge nodes reduces access pressure on source stations and meets users’ needs in terms of nearby website access, improving the website access experience and helping to boost user traffic on the website.
 
 Web Acceleration CDN nodes are suitable for use with portal-type websites with large amounts of visits, such as those belonging to small, medium or large enterprises, or government agency or corporate websites.
 
-This article is about creating domain names for Web Acceleration. You can also refer to [Using Azure CDN](/documentation/articles/cdn-enus-how-to-use/) to find out about the basics of creating Azure CDN acceleration nodes.
+This article is about creating domain names for Web Acceleration. You can also refer to [Using Azure CDN](./cdn-enus-how-to-use.md) to find out about the basics of creating Azure CDN acceleration nodes.
 
 ###**Default cache rules for Web Acceleration**
 
@@ -59,6 +74,6 @@ The Azure CDN sets default cache rules (see below) for web acceleration. You can
 Once the endpoint has been created, it will appear in the list of subscribed endpoints. The list view shows the custom domains used to access cached content, as well as the origin domains.
  The origin domain is the original location of the content cached on the CDN. Custom domains are URLs used to access CDN cache content.
 
->**Note** that configurations created for endpoints cannot be used immediately; they must first pass checks to confirm that the ICP custom domain name matches the ICP number. For more details, see the second half of Step 2: Create new CDN endpoints in [Using Azure CDN](/documentation/articles/cdn-enus-how-to-use/).
+>**Note** that configurations created for endpoints cannot be used immediately; they must first pass checks to confirm that the ICP custom domain name matches the ICP number. For more details, see the second half of Step 2: Create new CDN endpoints in [Using Azure CDN](./cdn-enus-how-to-use.md).
 
 <!---HONumber=CDN_1201_2015-->

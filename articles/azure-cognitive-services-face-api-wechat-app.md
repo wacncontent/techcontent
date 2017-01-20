@@ -1,14 +1,19 @@
-<properties
-	pageTitle="人脸识别API+微信应用开发操作手册"
-    description="人脸识别API+微信应用开发操作手册"
-    services=""
-    documentationCenter=""
-    authors=""
-    manager=""
-    editor=""
-    tags=""/>
+---
+title: 人脸识别API+微信应用开发操作手册
+description: 人脸识别API+微信应用开发操作手册
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags ms.service="multiple" ms.date="" wacn.date="09/09/2016" wacn.lang="cn"/>
+ms.service: multiple
+ms.date: 
+wacn.date: 09/09/2016
+wacn.lang: cn
+---
+
 #人脸识别 API + 微信应用开发操作手册
 
 ##软件版本说明：
@@ -70,13 +75,13 @@
 
 	![11](./media/azure-cognitive-services-face-api-wechat-app/11.png)
 	
-	>[AZURE.NOTE]在本文档所展示的全部内容中，后续需要将修改后的应用代码作为 web service 发布到某个 web 站点，并在 JS 接口安全域名处输入发布代码的 web 站点域名。在实际操作时，您可以先通过 Azure Web App 创建一个空白的 web 站点，并在此处填入该 web 站点的域名，在后续步骤中将完成修改的代码上传到该站点。
+	>[!NOTE]在本文档所展示的全部内容中，后续需要将修改后的应用代码作为 web service 发布到某个 web 站点，并在 JS 接口安全域名处输入发布代码的 web 站点域名。在实际操作时，您可以先通过 Azure Web App 创建一个空白的 web 站点，并在此处填入该 web 站点的域名，在后续步骤中将完成修改的代码上传到该站点。
 	
 ##Step3： 确认现有非关系型数据库可用性：MongoDB
 
 1. 登陆到现有的已连接到 Internet 的 Mongo DB 服务器，本演示中使用的 MongoDB 部署在 Azure VM 中。红框中填写的是虚拟机的公共 IP 地址，端口号默认 22。
 
-	>[AZURE.NOTE]如果您没有已存在的适用的 Mongo DB 服务器，您可以直接在 Azure 订阅中创建一台 Linux VM 并进行 MongoDB 部署。
+	>[!NOTE]如果您没有已存在的适用的 Mongo DB 服务器，您可以直接在 Azure 订阅中创建一台 Linux VM 并进行 MongoDB 部署。
 
 	![12](./media/azure-cognitive-services-face-api-wechat-app/12.png)
 	
@@ -88,7 +93,6 @@
 
 	![14](./media/azure-cognitive-services-face-api-wechat-app/14.png)
 	
-
 ##Step4： 从 [Github 下载项目](https://github.com/MSAICognitiveServices/FaceWechat)并修改 Web.config 配置文件
 
 1. 通过 Visual Studio 2015 编辑 **Web.config** 文件，找到 AppID 和 AppSecret 字段，将字段值修改为微信公众号测试页面（ [Step 2-> 2](#step2-2) ）中显示的AppID和Appsecret。
@@ -105,7 +109,6 @@
 
 	![17](./media/azure-cognitive-services-face-api-wechat-app/17.png)
     
-	
 2. 修改项目中 **Controllers** 文件夹下的 **ProjecToxfordClientHelper.cs** 文件，修改 **serviceHost** 值与 **Ocp-Apim-Subscription-Key** 值分别为  [Step 1-> 8](#step1-8) 中所记录的 Endpoint（接口地址）地址和 Key 值。
 
 	![18](./media/azure-cognitive-services-face-api-wechat-app/18.png)
@@ -129,7 +132,7 @@
 	 
 5. 将本地发布好的应用程序上传到公网 Web 服务器中，本演示中的 Web 服务器使用 Azure Web App 服务。
 
-	>[AZURE.NOTE]应用程序上传的目标服务器，要求必须与本演示中 [Step2->3](#step2-3) 中设置的 “JS 接口安全域名” 地址一致。
+	>[!NOTE]应用程序上传的目标服务器，要求必须与本演示中 [Step2->3](#step2-3) 中设置的 “JS 接口安全域名” 地址一致。
 	 
 ##Step7： 结果验证
 
@@ -145,20 +148,20 @@
 	
 	![24](./media/azure-cognitive-services-face-api-wechat-app/24.png)	
 
-	>[AZURE.NOTE]本演示中使用的数据库是 test 数据库，test 数据库是 MongoDB 的默认数据库，也是配置在 web.config 中的数据库。
+	>[!NOTE]本演示中使用的数据库是 test 数据库，test 数据库是 MongoDB 的默认数据库，也是配置在 web.config 中的数据库。
 
 ##扩展服务
 
 ###Web 应用
 	
-Web 应用服务是由 Azure 提供的 PaaS 网站托管服务，通过该服务您可以将您的网站应用托管至 Azure，您也可以使用 Web 应用服务来发布您的微信应用。关于 Web 应用服务更多信息请参考 [Web 应用介绍](/home/features/web-site/)。
+Web 应用服务是由 Azure 提供的 PaaS 网站托管服务，通过该服务您可以将您的网站应用托管至 Azure，您也可以使用 Web 应用服务来发布您的微信应用。关于 Web 应用服务更多信息请参考 [Web 应用介绍](https://www.azure.cn/home/features/web-site/)。
  
 ###虚拟机
 
-虚拟机服务是 Azure 提供的通用型计算服务。您可以通过虚拟机来运行您的数据库、中间件等。本演示中通过虚拟机来运行 Mongo DB 数据库。关于虚拟机更多信息请参考[虚拟机服务介绍](/home/features/virtual-machines/)。
+虚拟机服务是 Azure 提供的通用型计算服务。您可以通过虚拟机来运行您的数据库、中间件等。本演示中通过虚拟机来运行 Mongo DB 数据库。关于虚拟机更多信息请参考[虚拟机服务介绍](https://www.azure.cn/home/features/virtual-machines/)。
  
 ###Document DB
-Document DB 是由 Azure 提供的 PaaS NoSQL 数据库服务，您可以使用该服务来满足您应用的 NoSQL 存储需求。本演示中通过虚拟机来运行 MongoDB，在您的环境中您可以尝试使用 Document DB 来运行，降低您的部署和维护工作量。更多关于 Document DB 的信息请参考 [Document DB 服务介绍](/home/features/documentdb/)。
+Document DB 是由 Azure 提供的 PaaS NoSQL 数据库服务，您可以使用该服务来满足您应用的 NoSQL 存储需求。本演示中通过虚拟机来运行 MongoDB，在您的环境中您可以尝试使用 Document DB 来运行，降低您的部署和维护工作量。更多关于 Document DB 的信息请参考 [Document DB 服务介绍](https://www.azure.cn/home/features/documentdb/)。
 
 ##常见问题与相关文档：
 
@@ -166,5 +169,3 @@ Document DB 是由 Azure 提供的 PaaS NoSQL 数据库服务，您可以使用�
 - [Microsoft 认知服务 API 参考](https://dev.cognitive.azure.cn/docs/services/563879b61984550e40cbbe8d/)
 - 了解微信公众平台开发相关信息，请点击[这里](https://mp.weixin.qq.com/wiki/home/index.html)
 
- 
- 

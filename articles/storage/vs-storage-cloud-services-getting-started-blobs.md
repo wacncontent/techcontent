@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Blob 存储和 Visual Studio 连接服务（云服务）入门 | Azure"
-    description="在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的云服务项目中使用 Azure Blob 存储"
-    services="storage"
-    documentationcenter=""
-    author="TomArcher"
-    manager="douge"
-    editor="" />
-<tags
-    ms.assetid="1144a958-f75a-4466-bb21-320b7ae8f304"
-    ms.service="storage"
-    ms.workload="web"
-    ms.tgt_pltfrm="vs-getting-started"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/02/2016"
-    wacn.date="01/06/2017"
-    ms.author="tarcher" />  
+---
+title: Blob 存储和 Visual Studio 连接服务（云服务）入门 | Azure
+description: 在使用 Visual Studio 连接服务连接到存储帐户后，如何开始在 Visual Studio 的云服务项目中使用 Azure Blob 存储
+services: storage
+documentationcenter: 
+author: TomArcher
+manager: douge
+editor: 
 
+ms.assetid: 1144a958-f75a-4466-bb21-320b7ae8f304
+ms.service: storage
+ms.workload: web
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: na
+ms.topic: article
+ms.date: 12/02/2016
+wacn.date: 01/06/2017
+ms.author: tarcher
+---
 
 # 开始使用 Azure Blob 存储和 Visual Studio 连接服务（云服务项目）
 
@@ -28,9 +28,9 @@ Azure Blob 存储是一项可存储大量非结构化数据的服务，用户可
 
 正如文件位于文件夹中一样，存储 Blob 位于容器中。创建存储空间后，可以在存储空间中创建一个或多个容器。例如，在名为“Scrapbook”的存储空间中，可以在名为“images”的存储空间中创建容器，用于存储图片，还可以在名为“audio”的存储空间中创建另一个容器，用于存储音频文件。创建这些容器后，您可以向它们上载单独的 Blob 文件。
 
-- 有关以编程方式操作 Blob 的详细信息，请参阅[通过 .NET 开始使用 Azure Blob 存储](/documentation/articles/storage-dotnet-how-to-use-blobs/)。
-- 有关 Azure 存储空间的常规信息，请参阅[存储空间文档](/documentation/services/storage/)。
-- 有关 Azure 云服务的常规信息，请参阅[云服务文档](/documentation/services/cloud-services/)。
+- 有关以编程方式操作 Blob 的详细信息，请参阅[通过 .NET 开始使用 Azure Blob 存储](./storage-dotnet-how-to-use-blobs.md)。
+- 有关 Azure 存储空间的常规信息，请参阅[存储空间文档](./index.md/)。
+- 有关 Azure 云服务的常规信息，请参阅[云服务文档](../cloud-services/index.md/)。
 - 有关对 ASP.NET 应用程序进行编程的详细信息，请参阅 [ASP.NET](http://www.asp.net)。
 
 ## 使用代码访问 blob 容器
@@ -60,17 +60,16 @@ Azure Blob 存储是一项可存储大量非结构化数据的服务，用户可
         // Get a reference to a container named “mycontainer.”
         CloudBlobContainer container = blobClient.GetContainerReference("mycontainer");
 
-> [AZURE.NOTE] 在接下来的部分中，将在代码的前面使用先前过程中显示的全部代码。
+> [!NOTE] 在接下来的部分中，将在代码的前面使用先前过程中显示的全部代码。
 
 ## 使用代码创建容器
 
-> [AZURE.NOTE]在 ASP.NET 中执行 Azure 存储调用的一些 API 是异步的。有关详细信息，请参阅[使用 Async 和 Await 进行异步编程](http://msdn.microsoft.com/zh-cn/library/hh191443.aspx)。以下示例中的代码假定正在使用异步编程方法。
+> [!NOTE]在 ASP.NET 中执行 Azure 存储调用的一些 API 是异步的。有关详细信息，请参阅[使用 Async 和 Await 进行异步编程](http://msdn.microsoft.com/zh-cn/library/hh191443.aspx)。以下示例中的代码假定正在使用异步编程方法。
 
 若要在存储帐户中创建容器，所需做的只是添加对 **CreateIfNotExistsAsync** 的调用，如以下代码所示：
 
     // If “mycontainer” doesn’t exist, create it.
     await container.CreateIfNotExistsAsync();
-
 
 如果要让容器中的文件可供所有人使用，则可以使用以下代码将容器设置为公共容器。
 
@@ -78,7 +77,6 @@ Azure Blob 存储是一项可存储大量非结构化数据的服务，用户可
     {
         PublicAccess = BlobContainerPublicAccessType.Blob
     });
-
 
 Internet 中的所有人都可以查看公共容器中的 Blob，但是，仅在你具有相应的访问密钥时，才能修改或删除它们。
 
@@ -143,7 +141,6 @@ Azure 存储支持块 Blob 和页 Blob。大多数情况下，推荐使用块 Bl
 	Directory: https://<accountname>.blob.core.chinacloudapi.cn/photos/2011/
 	Block blob of length 505623: https://<accountname>.blob.core.chinacloudapi.cn/photos/photo1.jpg
 
-
 另外，也可以将 **ListBlobs** 方法的 **UseFlatBlobListing** 参数设置为 **true**。这导致每个 Blob 作为 **CloudBlockBlob** 返回，而无论目录如何。下面是对 **ListBlobs** 的调用：
 
     // Loop over items within the container and output the length and URI.
@@ -200,7 +197,6 @@ Azure 存储支持块 Blob 和页 Blob。大多数情况下，推荐使用块 Bl
     // Delete the blob.
     blockBlob.Delete();
 
-
 ## 以异步方式列出页中的 Blob
 
 如果要列出大量 Blob，或需要控制一个列表操作中返回的结果数，则可以结果页的方式列出 Blob。此示例显示如何以页面形式异步返回结果，这样就不会在等待返回大型结果集时阻止操作的执行。
@@ -240,6 +236,6 @@ Azure 存储支持块 Blob 和页 Blob。大多数情况下，推荐使用块 Bl
 
 ## 后续步骤
 
-[AZURE.INCLUDE [vs-storage-dotnet-blobs-next-steps](../../includes/vs-storage-dotnet-blobs-next-steps.md)]
+[!INCLUDE [vs-storage-dotnet-blobs-next-steps](../../includes/vs-storage-dotnet-blobs-next-steps.md)]
 
 <!---HONumber=Mooncake_0103_2017-->

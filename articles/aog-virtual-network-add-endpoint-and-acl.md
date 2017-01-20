@@ -1,13 +1,17 @@
 
-<properties 
-	pageTitle="虚拟机添加相应端口并配置 ACL" 
-	description="本页介绍如何为虚拟机添加相应端口并配置 ACL。" 
-	services="virtual network" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-network-aog" ms.date="" wacn.date="08/01/2016"/>
+---
+title: 虚拟机添加相应端口并配置 ACL
+description: 本页介绍如何为虚拟机添加相应端口并配置 ACL。
+services: virtual network
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-network-aog
+ms.date: 
+wacn.date: 08/01/2016
+---
 
 #虚拟机添加相应端口并配置 ACL
 
@@ -62,4 +66,4 @@
 
 ## <a id="resource"></a>相关参考资料
 
-- [如何设置虚拟机的终结点](/documentation/articles/virtual-machines-windows-classic-setup-endpoints/)
+- [如何设置虚拟机的终结点](./virtual-machines/virtual-machines-windows-classic-setup-endpoints.md)

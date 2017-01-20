@@ -1,19 +1,20 @@
-<properties 
-	pageTitle="通过 Azure Active Directory 认证 Azure 自动化服务" 
-	description="如何在 Azure 自动化服务中使用 Azure AD 认证" 
-	services="automation" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags 
-	ms.service="automation-aog"
-	ms.date="" 
-	wacn.date="02/01/2016"/>
+---
+title: 通过 Azure Active Directory 认证 Azure 自动化服务
+description: 如何在 Azure 自动化服务中使用 Azure AD 认证
+services: automation
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: automation-aog
+ms.date: 
+wacn.date: 02/01/2016
+---
 
 #通过 Azure Active Directory 认证 Azure 自动化服务
 
-关于 Azure 自动化的详细概念请阅读[这篇文章](/home/features/automation/)。
+关于 Azure 自动化的详细概念请阅读[这篇文章](https://www.azure.cn/home/features/automation/)。
 
 Azure 自动化是通过 Windows PowserShell 工作流（也称为 Runbook）来处理 Azure 的资源和第三方应用的创建、部署、监视和维护工作的。在执行 Runbook 的时候自然需要认证是否拥有合理的身份来执行操作。本文介绍如何通过 Azure Active Directory 来授权。
 
@@ -34,7 +35,6 @@ Azure 自动化是通过 Windows PowserShell 工作流（也称为 Runbook）来
 ![](./media/aog-automation-connect-mooncake/create-new-user.PNG)
 
 输入名字、姓氏和显示名称：
-
 
 ![](./media/aog-automation-connect-mooncake/create-user2.PNG)
 
@@ -72,11 +72,4 @@ Azure 自动化是通过 Windows PowserShell 工作流（也称为 Runbook）来
 	$Cred = Get-AutomationPSCredential -Name "Powercredential"; 
     Add-AzureAccount -Credential $Cred -Environment AzureChinaCloud;
     Select-AzureSubscription -SubscriptionName "<subscription name>";  
-
-
-
-
-
-
-
 

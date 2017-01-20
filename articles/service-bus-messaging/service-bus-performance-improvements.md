@@ -1,21 +1,21 @@
-<properties 
-   pageTitle="使用服务总线提高性能的最佳做法 | Azure"
-   description="介绍如何使用 Azure 服务总线在交换中转消息时优化性能。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-    editor="" />  
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/25/2016"
-    ms.author="sethm"
-    wacn.date="01/09/2017"/>  
+---
+title: 使用服务总线提高性能的最佳做法 | Azure
+description: 介绍如何使用 Azure 服务总线在交换中转消息时优化性能。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
 
+ms.service: service-bus
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/25/2016
+ms.author: sethm
+wacn.date: 01/09/2017
+---
 
 # 使用服务总线消息传送改进性能的最佳实践
 
@@ -58,10 +58,8 @@ AMQP 和 SBMP 都很高效，因为只要存在消息工厂，就可以保持与
 			Task.WaitAll(send1, send2);
 			Console.WriteLine("All messages sent");
 
-
     这是异步接收操作的示例：
 	
-
 			Task receive1 = queueClient.ReceiveAsync().ContinueWith(ProcessReceivedMessage);
 			Task receive2 = queueClient.ReceiveAsync().ContinueWith(ProcessReceivedMessage);
 	
@@ -84,7 +82,7 @@ AMQP 和 SBMP 都很高效，因为只要存在消息工厂，就可以保持与
 
 如果将接收模式设置为 [ReceiveAndDelete][] 时，这两个步骤将合并到单个请求中。这减少了操作的总体数目，并可以提高总消息吞吐量。性能提高的同时也出现丢失消息的风险。
 
-服务总线不支持“接收与删除”操作的事务。此外，在客户端想要延迟消息或将其放入[死信队列](/documentation/articles/service-bus-dead-letter-queues/)的情况下，需要使用扫视-锁定语义。
+服务总线不支持“接收与删除”操作的事务。此外，在客户端想要延迟消息或将其放入[死信队列](./service-bus-dead-letter-queues.md)的情况下，需要使用扫视-锁定语义。
 
 ## 客户端批处理
 
@@ -290,7 +288,6 @@ Express 实体可实现高吞吐量同时减少延迟的情况。使用快速实
   [SubscriptionClient.PrefetchCount]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.subscriptionclient.prefetchcount.aspx
   [ForcePersistence]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.forcepersistence.aspx
   [EnablePartitioning]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.enablepartitioning.aspx
-  [分区消息实体]: /documentation/articles/service-bus-partitioning/
+  [分区消息实体]: ./service-bus-partitioning.md
   
-
 <!---HONumber=Mooncake_1219_2016-->

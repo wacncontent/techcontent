@@ -1,23 +1,23 @@
-<properties
-    pageTitle="Azure 虚拟机代理概述 | Azure"
-    description="Azure 虚拟机代理概述"
-    services="virtual-machines-windows"
-    documentationcenter="virtual-machines"
-    author="neilpeterson"
-    manager="timlt"
-    editor="tysonn"
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="0a1f212e-053e-4a39-9910-8d622959f594"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="infrastructure-services"
-    ms.date="11/17/2016"
-    wacn.date="01/13/2017"
-    ms.author="nepeters" />  
+---
+title: Azure 虚拟机代理概述 | Azure
+description: Azure 虚拟机代理概述
+services: virtual-machines-windows
+documentationcenter: virtual-machines
+author: neilpeterson
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager
 
+ms.assetid: 0a1f212e-053e-4a39-9910-8d622959f594
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 11/17/2016
+wacn.date: 01/13/2017
+ms.author: nepeters
+---
 
 # Azure 虚拟机代理概述
 

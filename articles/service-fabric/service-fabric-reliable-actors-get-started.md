@@ -1,26 +1,27 @@
-<properties
-   pageTitle="Service Fabric Reliable Actors 入门 | Azure"
-   description="本教程将向你演示使用 Service Fabric Reliable Actors 创建、调试和部署简单的基于执行组件的服务的步骤。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="vturecek"
-   manager="timlt"
-   editor=""/>
+---
+title: Service Fabric Reliable Actors 入门 | Azure
+description: 本教程将向你演示使用 Service Fabric Reliable Actors 创建、调试和部署简单的基于执行组件的服务的步骤。
+services: service-fabric
+documentationCenter: .net
+authors: vturecek
+manager: timlt
+editor: 
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/25/2016"
-   wacn.date="11/28/2016"
-   ms.author="vturecek"/>
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/25/2016
+wacn.date: 01/17/2017
+ms.author: vturecek
+---
+
 # Reliable Actors 入门
 本文介绍了 Azure Service Fabric Reliable Actors 的基础知识，并演示了如何在 Visual Studio 中创建、调试和部署简单的 Reliable Actor 应用程序。
 
 ## 安装和设置
-在开始之前，确保你的计算机上已设置 Service Fabric 开发环境。如果需要设置此环境，请参阅有关[如何设置开发环境](/documentation/articles/service-fabric-get-started/)的详细说明。
+在开始之前，确保你的计算机上已设置 Service Fabric 开发环境。如果需要设置此环境，请参阅有关[如何设置开发环境](./service-fabric-get-started.md)的详细说明。
 
 ## 基本概念
 若要开始使用 Reliable Actors，只需了解几个基本概念：
@@ -44,21 +45,17 @@
 ## 在 Visual Studio 中创建新项目
 安装了适用于 Visual Studio 的 Service Fabric 工具之后，你可以创建新的项目类型。新的项目类型位于“新建项目”对话框的“云”类别下面。
 
-
 ![适用于 Visual Studio 的 Service Fabric 工具 - 新建项目][1]  
-
 
 在下一个对话框中，可以选择你想要创建的项目类型。
 
 ![Service Fabric 项目模板][5]  
-
 
 对于 HelloWorld 项目，我们使用 Service Fabric Reliable Actors 服务。
 
 创建此解决方案之后，可看到以下结构：
 
 ![Service Fabric 项目结构][2]  
-
 
 ## Reliable Actors 基本构建基块
 
@@ -68,15 +65,12 @@
 
 * **接口项目 (MyActor.Interfaces)**。这是包含执行组件的接口定义的项目。在 MyActor.Interfaces 项目中，你可以定义在解决方案中执行组件所使用的接口。可在任何项目中使用任何名称定义执行组件接口。不过，因为该接口定义了执行组件实现和调用执行组件的客户端所共享的执行组件协定，所以合理的做法是在独立于执行组件实现的程序集中定义接口，并且其他多个项目可以共享接口。
 
-
 	public interface IMyActor : IActor
 	{
     	Task<string> HelloWorld();
 	}
 
-
 * **执行组件服务项目 (MyActor)**。这是用于定义要托管执行组件的 Service Fabric 服务的项目。它包含执行组件的实现。执行组件实现是派生自基类型 `Actor` 的一个类，用于实现 MyActor.Interfaces 项目中定义的接口。
-
 
 	[StatePersistence(StatePersistence.Persisted)]
 	internal class MyActor : Actor, IMyActor
@@ -87,9 +81,7 @@
     	}
 	}
 
-
 执行组件服务必须使用 Service Fabric 运行时中的服务类型注册。为了使执行组件服务能够运行执行组件实例，还必须向执行组件服务注册你的执行组件类型。`ActorRuntime` 注册方法将为执行组件执行此操作。
-
 
 	internal static class Program
 	{
@@ -110,15 +102,11 @@
     	}
 	}
 
-
-
 如果在 Visual Studio 中从新项目开始，并且只有一个执行组件定义，那么默认情况下，在 Visual Studio 生成的代码中包含此注册。如果在服务中定义其他执行组件，则需要使用以下操作添加执行组件注册：
 
 	ActorRuntime.RegisterActorAsync<MyOtherActor>();
 
-
-> [AZURE.TIP] Service Fabric 执行组件运行时发出一些[与执行组件方法相关的事件和性能计数器](/documentation/articles/service-fabric-reliable-actors-diagnostics/#actor-method-events-and-performance-counters)。它们可用于进行诊断和性能监视。
-
+> [!TIP] Service Fabric 执行组件运行时发出一些[与执行组件方法相关的事件和性能计数器](./service-fabric-reliable-actors-diagnostics.md#actor-method-events-and-performance-counters)。它们可用于进行诊断和性能监视。
 
 ## 调试
 
@@ -128,15 +116,12 @@
 
 ![Service Fabric 调试输出窗口][3]  
 
-
-
 ## 后续步骤
- - [Reliable Actors 如何使用 Service Fabric 平台](/documentation/articles/service-fabric-reliable-actors-platform/)
- - [执行组件状态管理](/documentation/articles/service-fabric-reliable-actors-state-management/)
- - [执行组件生命周期和垃圾回收](/documentation/articles/service-fabric-reliable-actors-lifecycle/)
+ - [Reliable Actors 如何使用 Service Fabric 平台](./service-fabric-reliable-actors-platform.md)
+ - [执行组件状态管理](./service-fabric-reliable-actors-state-management.md)
+ - [执行组件生命周期和垃圾回收](./service-fabric-reliable-actors-lifecycle.md)
  - [执行组件 API 参考文档](https://msdn.microsoft.com/zh-cn/library/azure/dn971626.aspx)
  - [代码示例](https://github.com/Azure/servicefabric-samples)
-
 
 <!--Image references-->
 
@@ -146,4 +131,4 @@
 [4]: ./media/service-fabric-reliable-actors-get-started/vs-context-menu.png
 [5]: ./media/service-fabric-reliable-actors-get-started/reliable-actors-newproject1.PNG
 
-<!---HONumber=Mooncake_1121_2016-->
+<!---HONumber=Mooncake_Quality_Review_0117_2017-->

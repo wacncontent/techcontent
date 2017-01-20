@@ -1,33 +1,33 @@
-<properties 
-	pageTitle="如何通过 WebJobs SDK 使用 Azure 表存储" 
-	description="了解如何通过 WebJobs SDK 使用 Azure 表存储。创建表，将实体添加到表，并读取现有表。" 
-	services="app-service\web, storage" 
-	documentationCenter=".net" 
-	authors="tdykstra" 
-	manager="wpickett" 
-	editor="jimbe"/>
+---
+title: 如何通过 WebJobs SDK 使用 Azure 表存储
+description: 了解如何通过 WebJobs SDK 使用 Azure 表存储。创建表，将实体添加到表，并读取现有表。
+services: app-service\web, storage
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: jimbe
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="06/01/2016" 
-	wacn.date="12/16/2016" 
-	ms.author="tdykstra"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/01/2016
+wacn.date: 12/16/2016
+ms.author: tdykstra
+---
 
 # 如何通过 WebJobs SDK 使用 Azure 表存储
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 ## 概述
 
-本指南提供了 C# 代码示例，用于演示如何使用 [WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk/) 版本 1.x 读取和写入 Azure 存储表。
+本指南提供了 C# 代码示例，用于演示如何使用 [WebJobs SDK](./websites-dotnet-webjobs-sdk.md) 版本 1.x 读取和写入 Azure 存储表。
 
-本指南假设你了解[如何使用指向存储帐户的连接字符串在 Visual Studio 中创建 WebJob 项目](/documentation/articles/websites-dotnet-webjobs-sdk-get-started/)或创建[多个存储帐户](https://github.com/Azure/azure-webjobs-sdk/blob/master/test/Microsoft.Azure.WebJobs.Host.EndToEndTests/MultipleStorageAccountsEndToEndTests.cs)。
+本指南假设你了解[如何使用指向存储帐户的连接字符串在 Visual Studio 中创建 WebJob 项目](./websites-dotnet-webjobs-sdk-get-started.md)或创建[多个存储帐户](https://github.com/Azure/azure-webjobs-sdk/blob/master/test/Microsoft.Azure.WebJobs.Host.EndToEndTests/MultipleStorageAccountsEndToEndTests.cs)。
 		
-一些代码段显示了[手动调用](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/#manual)（即：不是使用触发器属性之一调用）的函数中使用的 `Table` 属性。
+一些代码段显示了[手动调用](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#manual)（即：不是使用触发器属性之一调用）的函数中使用的 `Table` 属性。
 
 ## <a id="ingress"></a>如何向表中添加实体
 
@@ -121,7 +121,6 @@
 		    }
 		}
 
-
 本示例中的 `Person` 类不必实现 `ITableEntity`。
 
 ## <a id="storageapi"></a>如何直接使用.NET 存储 API 处理表
@@ -144,11 +143,11 @@
 		    tableBinding.Execute(insertOperation);
 		}
 
-有关如何使用 `CloudTable` 对象的详细信息，请参阅[如何通过 .NET 使用表存储](/documentation/articles/storage-dotnet-how-to-use-tables/)。
+有关如何使用 `CloudTable` 对象的详细信息，请参阅[如何通过 .NET 使用表存储](../storage/storage-dotnet-how-to-use-tables.md)。
 
 ## <a id="queues"></a>队列操作指南文章涵盖的相关主题
 
-有关如何处理队列消息触发的表处理，或者不特定于表处理的 WebJobs SDK 方案的信息，请参阅[如何通过 WebJobs SDK 使用 Azure 队列存储](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/)。
+有关如何处理队列消息触发的表处理，或者不特定于表处理的 WebJobs SDK 方案的信息，请参阅[如何通过 WebJobs SDK 使用 Azure 队列存储](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md)。
 
 该文章涵盖的主题包括：
 
@@ -163,7 +162,6 @@
 
 ## <a id="nextsteps"></a>后续步骤
 
-本指南提供的代码示例演示了如何处理常见方案以操作 Azure 表。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 推荐资源](/documentation/articles/websites-webjobs-resources/)。
+本指南提供的代码示例演示了如何处理常见方案以操作 Azure 表。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 推荐资源](./websites-webjobs-resources.md)。
  
-
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

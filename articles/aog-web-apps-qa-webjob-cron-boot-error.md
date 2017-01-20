@@ -1,17 +1,17 @@
-<properties
-	pageTitle="创建的 WebJobs 无法按照 CRON 的设置来启动"
-	description="设置中国 UTC 时间使 WebJobs 可以按照 CRON 启动"
-	services="app-service-web"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags="Azure,Portal,Web Jobs,CRON,UTC"/>
+---
+title: 创建的 WebJobs 无法按照 CRON 的设置来启动
+description: 设置中国 UTC 时间使 WebJobs 可以按照 CRON 启动
+services: app-service-web
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: Azure,Portal,Web Jobs,CRON,UTC
 
-<tags
-    ms.service="app-service-web-aog"
-    ms.date="12/08/2016"
-    wacn.date="12/08/2016"/>
+ms.service: app-service-web-aog
+ms.date: 12/08/2016
+wacn.date: 12/08/2016
+---
 
 # 创建的 WebJobs 无法按照 CRON 的设置来启动 #
 
@@ -45,7 +45,7 @@ json
 - 每天上午 `9:30：0 30 9 * * *`
 - 各工作日的上午 `9:30：0 30 9 * * 1-5`
 
->[AZURE.NOTE] 从 Visual Studio 部署 WebJobs 时，请确保将 `settings.job` 文件属性标记为 “如果较新则复制”。
+>[!NOTE] 从 Visual Studio 部署 WebJobs 时，请确保将 `settings.job` 文件属性标记为 “如果较新则复制”。
 
 Azure 平台默认是 UTC 时间，所以如果要基于中国时间配置则需要转换：中国时间 = UTC+8。
 

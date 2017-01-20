@@ -1,34 +1,31 @@
-<properties
-	pageTitle="使用通知中心发送突发新闻 (Windows Universal)"
-	description="结合注册中的标记使用 Azure 通知中心将突发新闻发送到通用 Windows 应用。"
-	services="notification-hubs"
-	documentationCenter="windows"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>  
+---
+title: 使用通知中心发送突发新闻 (Windows Universal)
+description: 结合注册中的标记使用 Azure 通知中心将突发新闻发送到通用 Windows 应用。
+services: notification-hubs
+documentationCenter: windows
+authors: wesmc7777
+manager: erikre
+editor: 
 
-
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="11/11/2016"
-	ms.author="wesmc"/>  
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 11/11/2016
+ms.author: wesmc
+---
 
 # 使用通知中心发送突发新闻
 
-
-[AZURE.INCLUDE [notification-hubs-selector-breaking-news](../../includes/notification-hubs-selector-breaking-news.md)]
-
+[!INCLUDE [notification-hubs-selector-breaking-news](../../includes/notification-hubs-selector-breaking-news.md)]
 
 ##概述
 
-本主题演示如何使用 Azure 通知中心将突发新闻通知广播到 Windows 应用商店或 Windows Phone 8.1（非 Silverlight）应用。如果你要以 Windows Phone 8.1 Silverlight 为目标，请参阅 [Windows Phone](/documentation/articles/notification-hubs-windows-phone-push-xplat-segmented-mpns-notification/) 版本。完成时，你可以注册感兴趣的突发新闻类别并仅接收这些类别的推送通知。此方案对于很多应用程序来说是常见模式，在其中必须将通知发送到以前声明过对它们感兴趣的一组用户，这样的应用程序有 RSS 阅读器、针对音乐迷的应用程序等。
+本主题演示如何使用 Azure 通知中心将突发新闻通知广播到 Windows 应用商店或 Windows Phone 8.1（非 Silverlight）应用。如果你要以 Windows Phone 8.1 Silverlight 为目标，请参阅 [Windows Phone](./notification-hubs-windows-phone-push-xplat-segmented-mpns-notification.md) 版本。完成时，你可以注册感兴趣的突发新闻类别并仅接收这些类别的推送通知。此方案对于很多应用程序来说是常见模式，在其中必须将通知发送到以前声明过对它们感兴趣的一组用户，这样的应用程序有 RSS 阅读器、针对音乐迷的应用程序等。
 
-在创建通知中心的注册时，通过加入一个或多个标记来启用广播方案。将通知发送到标签时，已注册该标签的所有设备将接收通知。因为标签是简单的字符串，它们不必提前设置。有关标记的详细信息，请参阅[通知中心路由和标记表达式](/documentation/articles/notification-hubs-tags-segment-push-message/)。
+在创建通知中心的注册时，通过加入一个或多个标记来启用广播方案。将通知发送到标签时，已注册该标签的所有设备将接收通知。因为标签是简单的字符串，它们不必提前设置。有关标记的详细信息，请参阅[通知中心路由和标记表达式](./notification-hubs-tags-segment-push-message.md)。
 
 ##先决条件
 
@@ -61,7 +58,6 @@
             <ToggleSwitch Header="Sports" Name="SportsToggle" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center"/>
             <Button Name="SubscribeButton" Content="Subscribe" HorizontalAlignment="Center" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Click="SubscribeButton_Click"/>
         </Grid>
-
 
 2. 右键单击“共享”项目，添加名为 **Notifications** 的新类，向类定义添加 **public** 修饰符，然后将以下 **using** 语句添加到新的代码文件：
 
@@ -116,10 +112,7 @@
 
 	请注意，如果一个设备使用同一标签注册多个模板，针对该标签的传入消息将导致多个通知发送到设备（每个通知对应一个模板）。当同一逻辑消息必须导致多个可视通知时，此行为很有用，例如在 Windows 应用商店应用程序显示徽章和 toast。
 
-	有关模板的详细信息，请参阅[模板](/documentation/articles/notification-hubs-templates-cross-platform-push-messages/)。
-
-
-
+	有关模板的详细信息，请参阅[模板](./notification-hubs-templates-cross-platform-push-messages.md)。
 
 4. 在 App.xaml.cs 项目文件中，将以下属性添加到 **App** 类：
 
@@ -129,7 +122,7 @@
 
 	在上面的代码中，将 `<hub name>` 和 `<connection string with listen access>` 占位符替换为你的通知中心的名称和你之前获取的 *DefaultListenSharedAccessSignature* 的连接字符串。
 
-	> [AZURE.NOTE] 由于使用客户端应用程序分发的凭据通常是不安全的，你只应使用客户端应用程序分发具有侦听访问权限的密钥。侦听访问权限允许应用程序注册通知，但是无法修改现有注册，也无法发送通知。在受保护的后端服务中使用完全访问权限密钥，以便发送通知和更改现有注册。
+	> [!NOTE] 由于使用客户端应用程序分发的凭据通常是不安全的，你只应使用客户端应用程序分发具有侦听访问权限的密钥。侦听访问权限允许应用程序注册通知，但是无法修改现有注册，也无法发送通知。在受保护的后端服务中使用完全访问权限密钥，以便发送通知和更改现有注册。
 
 5. 在 MainPage.xaml.cs 中，添加以下行：
 
@@ -162,7 +155,7 @@
 
 这些步骤用于在启动时将在本地存储区中存储的类别注册到通知中心。
 
-> [AZURE.NOTE] 由于 Windows 通知服务 (WNS) 分配的通道 URI 随时可能更改，因此你应该经常注册通知以避免通知失败。此示例在每次应用程序启动时注册通知。对于经常运行（一天一次以上）的应用程序，如果每次注册间隔时间不到一天，你可以跳过注册来节省带宽。
+> [!NOTE] 由于 Windows 通知服务 (WNS) 分配的通道 URI 随时可能更改，因此你应该经常注册通知以避免通知失败。此示例在每次应用程序启动时注册通知。对于经常运行（一天一次以上）的应用程序，如果每次注册间隔时间不到一天，你可以跳过注册来节省带宽。
 
 1. 打开 App.xaml.cs 文件，并将 **InitNotificationsAsync** 方法更新为使用 `notifications` 类来基于类别订阅。
 
@@ -195,7 +188,7 @@
 
 ##发送带标记的通知
 
-[AZURE.INCLUDE [notification-hubs-send-categories-template](../../includes/notification-hubs-send-categories-template.md)]
+[!INCLUDE [notification-hubs-send-categories-template](../../includes/notification-hubs-send-categories-template.md)]
 
 ##运行应用并生成通知
 
@@ -229,8 +222,6 @@
 
 	了解如何扩展突发新闻应用程序以允许发送本地化的通知。
 
-
-
 <!-- Anchors. -->
 [Add category selection to the app]: #adding-categories
 [Register for notifications]: #register
@@ -243,19 +234,17 @@
 
 [14]: ./media/notification-hubs-windows-store-dotnet-send-breaking-news/notification-hub-windows-toast-2.png
 
-
 [19]: ./media/notification-hubs-windows-store-dotnet-send-breaking-news/notification-hub-windows-reg-2.png
 
 <!-- URLs.-->
-[get-started]: /documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/
-[使用通知中心广播本地化的突发新闻]: /documentation/articles/notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification/
-[Notify users with Notification Hubs]: /documentation/articles/notification-hubs-windows-store-dotnet-get-started-wns-push-notification/
-[Mobile Service]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/
+[get-started]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
+[使用通知中心广播本地化的突发新闻]: ./notification-hubs-windows-store-dotnet-xplat-localized-wns-push-notification.md
+[Notify users with Notification Hubs]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
+[Mobile Service]: ../mobile-services/mobile-services-javascript-backend-windows-store-dotnet-get-started.md
 [Notification Hubs Guidance]: http://msdn.microsoft.com/library/jj927170.aspx
 [Notification Hubs How-To for Windows Store]: http://msdn.microsoft.com/library/jj927172.aspx
 [Submit an app page]: http://go.microsoft.com/fwlink/p/?LinkID=266582
 [My Applications]: http://go.microsoft.com/fwlink/p/?LinkId=262039
-
 
 [wns object]: http://go.microsoft.com/fwlink/p/?LinkId=260591
 

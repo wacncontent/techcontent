@@ -1,26 +1,26 @@
-<properties
-    pageTitle="使用 HDInsight 中的 Hadoop 分析航班延误数据 | Azure"
-    description="了解如何使用单个 Windows PowerShell 脚本来创建 HDInsight 群集、运行 Hive 作业、运行 Sqoop 作业和删除群集。"
-    services="hdinsight"
-    documentationcenter=""
-    author="mumian"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags
-    ms.assetid="00e26aa9-82fb-4dbe-b87d-ffe8e39a5412"
-    ms.service="hdinsight"
-    ms.workload="big-data"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/19/2016"
-    wacn.date="01/06/2017"
-    ms.author="jgao" />  
+---
+title: 使用 HDInsight 中的 Hadoop 分析航班延误数据 | Azure
+description: 了解如何使用单个 Windows PowerShell 脚本来创建 HDInsight 群集、运行 Hive 作业、运行 Sqoop 作业和删除群集。
+services: hdinsight
+documentationcenter: 
+author: mumian
+manager: jhubbard
+editor: cgronlun
 
+ms.assetid: 00e26aa9-82fb-4dbe-b87d-ffe8e39a5412
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/19/2016
+wacn.date: 01/06/2017
+ms.author: jgao
+---
 
 # 使用 HDInsight 中的 Hive 分析航班延误数据
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 Hive 提供了通过类似 SQL 的脚本语言（称为 *[HiveQL][hadoop-hiveql]*）运行 Hadoop MapReduce 作业的方法，此方法可用于对大量数据进行汇总、查询和分析。
 
@@ -33,7 +33,6 @@ Azure HDInsight 的主要优势之一就是隔离数据存储和计算。HDInsig
 下图演示了本教程的方案和结构：
 
 ![HDI.FlightDelays.flow][img-hdi-flightdelays-flow]  
-
 
 请注意，图中的编号对应于章节标题。**M** 代表主进程。**A** 代表附录中的内容。
 
@@ -49,7 +48,7 @@ Azure HDInsight 的主要优势之一就是隔离数据存储和计算。HDInsig
 ### <a id="prerequisite"></a>先决条件
 要阅读本教程，必须具备以下项：
 
-* **一个 Azure 订阅**。请参阅[获取 Azure 试用版](/pricing/1rmb-trial/)。
+* **一个 Azure 订阅**。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 * **配备 Azure PowerShell 的工作站**。
 
 **本教程中使用的文件**
@@ -286,7 +285,6 @@ Hadoop MapReduce 属于批处理。运行 Hive 作业时，最具成本效益的
         Write-Host "`tCurrent system time: " (get-date) -ForegroundColor Yellow
         [String]$exportDir = "wasb://$blobContainerName@$storageAccountName.blob.core.chinacloudapi.cn/tutorials/flightdelays/output"
 
-
         $sqoopDef = New-AzureHDInsightSqoopJobDefinition -Command "export --connect $sqlDatabaseConnectionString --table $sqlDatabaseTableName --export-dir $exportDir --fields-terminated-by \001 "
         $sqoopJob = Start-AzureHDInsightJob -Cluster $hdinsightClusterName -JobDefinition $sqoopDef #-Debug -Verbose
         Wait-AzureHDInsightJob -WaitTimeoutInSeconds 3600 -Job $sqoopJob
@@ -331,11 +329,9 @@ Hadoop MapReduce 属于批处理。运行 Hive 作业时，最具成本效益的
 
     ![HDI.FlightDelays.RunHiveJob.output][img-hdi-flightdelays-run-hive-job-output]  
 
-
 3. 连接到 SQL 数据库，并在 AvgDelays 表中按城市查看平均航班延迟：
 
     ![HDI.FlightDelays.AvgDelays.Dataset][image-hdi-flightdelays-avgdelays-dataset]  
-
 
 - - -
 
@@ -345,7 +341,7 @@ Hadoop MapReduce 属于批处理。运行 Hive 作业时，最具成本效益的
 * **使用将由 HDInsight 群集用作默认文件系统的同一 Azure 存储帐户。** 由于 HDInsight 群集将具有存储帐户访问密钥，因此你无需进行任何其他更改。
 * **使用与 HDInsight 群集默认文件系统不同的 Azure 存储帐户。** 如果选择了此项，你必须修改[创建 HDInsight 群集和运行 Hive/Sqoop 作业](#runjob)中的 Windows PowerShell 脚本的创建部分，以链接该存储帐户作为额外的存储帐户。有关说明，请参阅[在 HDInsight 中创建 Hadoop 群集][hdinsight-provision]。这样，HDInsight 群集就会知道存储帐户的访问密钥。
 
-> [AZURE.NOTE]
+> [!NOTE]
 数据文件的 WASB 路径会在 HiveQL 脚本文件中进行硬编码。必须相应地进行更新。
 
 **下载航班数据**
@@ -393,18 +389,11 @@ Hadoop MapReduce 属于批处理。运行 Hive 作业时，最具成本效益的
         $destFolder = "tutorials/flightdelays/data" #The blob name prefix for the files to be uploaded
         #EndRegion
 
-
         if (-not (Get-AzureAccount)){
             Add-AzureAccount -Environment AzureChinaCloud
         }
 
-
-        
-
-
-
         $storageAccountKey = get-azurestoragekey -StorageAccountName $storageAccountName | %{$_.Primary}
-
 
         $hqlLocalFileName = "C:\tutorials\flightdelays\flightdelays.hql"
         $hqlBlobName = "tutorials/flightdelays/flightdelays.hql"
@@ -441,7 +430,7 @@ Hadoop MapReduce 属于批处理。运行 Hive 作业时，最具成本效益的
 
 路径 tutorials/flightdelay/data 是上传文件时创建的虚拟文件夹。验证是否有 12 个文件，每个月对应一个文件。
 
-> [AZURE.NOTE]
+> [!NOTE]
 必须更新 Hive 查询，才能从新位置进行读取。
 >
 > 必须配置容器访问权限，使其成为公用，或者将存储帐户绑定到 HDInsight 群集。否则，Hive 查询字符串将无法访问数据文件。
@@ -713,7 +702,6 @@ HiveQL 脚本将执行以下操作：
                 )"
         #endregion
 
-
         #region - Add the Azure account
         Write-Host "`nConnecting to your Azure subscription ..." -ForegroundColor Green
         $azureAccounts= Get-AzureAccount
@@ -796,7 +784,7 @@ HiveQL 脚本将执行以下操作：
 
         Write-host "`nEnd of the PowerShell script" -ForegroundColor Green
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     该脚本使用具象状态传输 (REST) 服务 http://bot.whatismyipaddress.com 来检索外部 IP 地址。IP 地址用于创建 SQL 数据库服务器的防火墙规则。
 
     该脚本中使用的某些变量：
@@ -818,23 +806,23 @@ HiveQL 脚本将执行以下操作：
 * [将 Pig 与 HDInsight 配合使用][hdinsight-use-pig]
 * [为 HDInsight 开发 Java MapReduce 程序][hdinsight-develop-mapreduce]
 
-[azure-purchase-options]: /pricing/overview/
-[azure-member-offers]: /pricing/member-offers/
-[azure-trial]: /pricing/1rmb-trial/
+[azure-purchase-options]: https://www.azure.cn/pricing/overview/
+[azure-member-offers]: https://www.azure.cn/pricing/member-offers/
+[azure-trial]: https://www.azure.cn/pricing/1rmb-trial/
 
 [rita-website]: http://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236&DB_Short_Name=On-Time
 [powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 
-[hdinsight-use-oozie]: /documentation/articles/hdinsight-use-oozie/
-[hdinsight-use-hive]: /documentation/articles/hdinsight-use-hive/
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
-[hdinsight-use-sqoop]: /documentation/articles/hdinsight-use-sqoop/
-[hdinsight-use-pig]: /documentation/articles/hdinsight-use-pig/
+[hdinsight-use-oozie]: ./hdinsight-use-oozie.md
+[hdinsight-use-hive]: ./hdinsight-use-hive.md
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-use-sqoop]: ./hdinsight-use-sqoop.md
+[hdinsight-use-pig]: ./hdinsight-use-pig.md
 [hdinsight-develop-streaming]: /documentation/articles/hdinsight-hadoop-develop-deploy-streaming-jobs/
-[hdinsight-develop-mapreduce]: /documentation/articles/hdinsight-develop-deploy-java-mapreduce/
+[hdinsight-develop-mapreduce]: ./hdinsight-develop-deploy-java-mapreduce.md
 
 [hadoop-hiveql]: https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL
 [hadoop-shell-commands]: http://hadoop.apache.org/docs/r0.18.3/hdfs_shell.html

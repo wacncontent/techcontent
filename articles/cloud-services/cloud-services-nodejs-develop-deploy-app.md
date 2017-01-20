@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Node.js 入门指南 | Azure"
-	description="了解如何创建简单的 Node.js Web 应用程序并将其部署到 Azure 云服务。"
-	services="cloud-services"
-	documentationCenter="nodejs"
-	authors="rmcmurray"
-	manager="wpickett"
-	editor=""/>
+---
+title: Node.js 入门指南 | Azure
+description: 了解如何创建简单的 Node.js Web 应用程序并将其部署到 Azure 云服务。
+services: cloud-services
+documentationCenter: nodejs
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-
-<tags
-	ms.service="cloud-services"
-	ms.workload="tbd"
-	ms.tgt_pltfrm="na" 
-	ms.devlang="nodejs"
-	ms.topic="hero-article"
-	ms.date="11/01/2016" 
-	wacn.date="01/03/2017" 
-	ms.author="robmcm"/>
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: hero-article
+ms.date: 11/01/2016
+wacn.date: 01/03/2017
+ms.author: robmcm
+---
 
 # 生成 Node.js 应用程序并将其部署到 Azure 云服务
 
@@ -24,7 +23,7 @@
 
 有关云服务以及如何将它们与 Azure 网站和虚拟机进行比较的更多信息，请参阅 [Azure 网站、云服务和虚拟机的比较]。
 
->[AZURE.TIP] 想要构建简单网站？ 如果方案仅涉及简单网站前端，请考虑[使用轻型 Web 应用]。可随 Web 应用的增长和需求的变化轻松升级到云服务。
+>[!TIP] 想要构建简单网站？ 如果方案仅涉及简单网站前端，请考虑[使用轻型 Web 应用]。可随 Web 应用的增长和需求的变化轻松升级到云服务。
 
 按照本教程，生成托管在 Web 角色中的简单 Web 应用程序。使用计算模拟器在本地测试应用程序，然后使用 PowerShell 命令行工具部署该应用程序。
 
@@ -34,13 +33,12 @@
 
 ## 先决条件
 
-> [AZURE.NOTE] 本教程使用 Azure PowerShell，因此要求使用 Windows 系统。
+> [!NOTE] 本教程使用 Azure PowerShell，因此要求使用 Windows 系统。
 
 - 安装和配置 [Azure PowerShell]。
 - 下载并安装用于 .NET 2.7 的 Azure SDK。在安装设置中，选择：
     - MicrosoftAzureAuthoringTools
     - MicrosoftAzureComputeEmulator
-
 
 ## 创建 Azure 云服务项目
 
@@ -72,7 +70,7 @@
 
 	**Add-azurenodewebrole** cmdlet 将创建一个基本 Node.js 应用程序。它还会修改 **.csfg** 和 **.csdef** 文件，以添加新角色的配置条目。
 
-	> [AZURE.NOTE] 如果不指定角色名称，将使用默认名称。可以提供一个名称作为第一个 cmdlet 参数：`Add-AzureNodeWebRole MyRole`
+	> [!NOTE] 如果不指定角色名称，将使用默认名称。可以提供一个名称作为第一个 cmdlet 参数：`Add-AzureNodeWebRole MyRole`
 
 Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（默认为 **WebRole1**）的目录中。代码如下：
 
@@ -87,8 +85,8 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
 ## 将应用程序部署到 Azure
 
-> [AZURE.NOTE]
-要完成本教程，需要一个 Azure 帐户。[注册以获取免费帐户](/pricing/1rmb-trial/)。
+> [!NOTE]
+要完成本教程，需要一个 Azure 帐户。[注册以获取免费帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 
 ### 下载 Azure 发布设置
 
@@ -106,8 +104,7 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
         Import-AzurePublishSettingsFile -Environment AzureChinaCloud [path to file]
 
-
-	> [AZURE.NOTE] 导入发布设置之后，请考虑删除下载的 .publishSettings 文件，因为其他人可能利用其中信息访问你的帐户。
+	> [!NOTE] 导入发布设置之后，请考虑删除下载的 .publishSettings 文件，因为其他人可能利用其中信息访问你的帐户。
 
 ### 发布应用程序
 
@@ -126,7 +123,7 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
 ![Publish-AzureService 命令的输出][The output of the Publish-AzureService command]
 
-> [AZURE.NOTE]
+> [!NOTE]
 首次发布后应用程序后，它可能需要几分钟才能部署完成并可供使用。
 
 部署完成后，系统将打开浏览器窗口并导航到云服务。
@@ -144,7 +141,6 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 3.  如果云服务尚不存在，将创建一个新的**云服务**。**云服务**是一个容器，用于在将应用程序部署到 Azure 后托管该应用程序。有关详细信息，请参阅[创建 Azure 托管服务概述]。
 
 4.  将部署包发布到 Azure。
-
 
 ## 停止并删除应用程序
 
@@ -168,7 +164,7 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
 	![Remove-AzureService 命令的状态][The status of the Remove-AzureService command]
 
-	> [AZURE.NOTE] 删除服务不会删除最初发布服务时创建的存储帐户，用户仍需为使用的存储付费。如果没有任何其他对象使用存储，请删除它。
+	> [!NOTE] 删除服务不会删除最初发布服务时创建的存储帐户，用户仍需为使用的存储付费。如果没有任何其他对象使用存储，请删除它。
 
 ## 后续步骤
 
@@ -176,16 +172,15 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
 <!-- URL List -->
 
-[Azure 网站、云服务和虚拟机的比较]: /documentation/articles/choose-web-site-cloud-service-vm/
-[使用轻型 Web 应用]:/documentation/articles/web-sites-nodejs-develop-deploy-mac/
-[Azure Powershell]: /documentation/articles/powershell-install-configure/
-[将 PowerShell 连接]: /documentation/articles/powershell-install-configure/#Connect
+[Azure 网站、云服务和虚拟机的比较]: ../app-service-web/choose-web-site-cloud-service-vm.md
+[使用轻型 Web 应用]:../app-service-web/web-sites-nodejs-develop-deploy-mac.md
+[Azure Powershell]: ../powershell-install-configure.md
+[将 PowerShell 连接]: ../powershell-install-configure.md#Connect
 [nodejs.org]: http://nodejs.org/
-[创建 Azure 托管服务概述]: /documentation/services/cloud-services/
+[创建 Azure 托管服务概述]: ./index.md/
 [Node.js 开发人员中心]: /develop/nodejs/
 
 <!-- IMG List -->
-
 
 [The result of the New-AzureService helloworld command]: ./media/cloud-services-nodejs-develop-deploy-app/node9.png
 [The output of the Add-AzureNodeWebRole command]: ./media/cloud-services-nodejs-develop-deploy-app/node11.png

@@ -1,21 +1,21 @@
-<properties
-   pageTitle="将 SQL 数据提取到 Azure 事件中心 | Azure"
-   description="从 SQL 示例进行事件中心导入的概述"
-   services="event-hubs"
-   documentationCenter="na"
-   authors="spyrossak"
-   manager="timlt"
-   editor=""/>
+---
+title: 将 SQL 数据提取到 Azure 事件中心 | Azure
+description: 从 SQL 示例进行事件中心导入的概述
+services: event-hubs
+documentationCenter: na
+authors: spyrossak
+manager: timlt
+editor: 
 
-<tags 
-   ms.service="event-hubs"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="08/25/2016"
-   wacn.date="10/10/2016"
-   ms.author="spyros;sethm" />
+ms.service: event-hubs
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/25/2016
+wacn.date: 10/10/2016
+ms.author: spyros;sethm
+---
 
 # 将数据从 SQL 提取到 Azure 事件中心
 

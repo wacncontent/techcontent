@@ -1,36 +1,33 @@
-<properties
-	pageTitle="使用 PowerShell 部署和管理 Windows Server/客户端的备份 | Azure"
-	description="了解如何使用 PowerShell 部署和管理 Azure 备份"
-	services="backup"
-	documentationCenter=""
-	authors="saurabhsensharma"
-	manager="shivamg"
-	editor=""/>  
+---
+title: 使用 PowerShell 部署和管理 Windows Server/客户端的备份 | Azure
+description: 了解如何使用 PowerShell 部署和管理 Azure 备份
+services: backup
+documentationCenter: 
+authors: saurabhsensharma
+manager: shivamg
+editor: 
 
-
-<tags
-	ms.service="backup"
-	ms.workload="storage-backup-recovery"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/01/2016"
-	wacn.date="10/26/2016"
-	ms.author="saurabhsensharma;markgal;jimpark;nkolli;trinadhk"/>  
-
-
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/01/2016
+wacn.date: 10/26/2016
+ms.author: saurabhsensharma;markgal;jimpark;nkolli;trinadhk
+---
 
 # 使用 PowerShell 部署和管理 Windows Server/Windows 客户端的 Azure 备份
 
-> [AZURE.SELECTOR]
-- [ARM](/documentation/articles/backup-client-automation/)
-- [经典](/documentation/articles/backup-client-automation-classic/)
+> [!div class="op_single_selector"]
+- [ARM](./backup-client-automation.md)
+- [经典](./backup-client-automation-classic.md)
 
 本文说明如何使用 PowerShell 在 Windows Server 或 Windows 客户端上设置 Azure 备份，以及管理备份和恢复。
 
 ## 安装 Azure PowerShell
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-include.md)]
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-include.md)]
 
 Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的基础上进行了一些重大的更改，尤其是对 cmdlet 的命名方式进行了更改。1.0 版 cmdlet 遵循命名模式 {谓词}-AzureRm{名词}；而 0.9.8 名称不包括 **Rm**（例如，使用 New-AzureResourceGroup 而不是 New-AzureRmResourceGroup）。在使用 Azure PowerShell 0.9.8 时，首先必须通过运行 **Switch-AzureMode AzureResourceManager** 命令启用资源管理器模式。此命令在 1.0 或更高版中并不需要。
 
@@ -38,13 +35,11 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 
 [下载最新的 PowerShell 版本](https://github.com/Azure/azure-powershell/releases)（所需最低版本：1.0.0）
 
-
-[AZURE.INCLUDE [arm-getting-setup-powershell](../../includes/arm-getting-setup-powershell.md)]
-
+[!INCLUDE [arm-getting-setup-powershell](../../includes/arm-getting-setup-powershell.md)]
 
 ## 创建备份保管库
 
-> [AZURE.WARNING] 对于第一次使用 Azure 备份的客户，你需要注册用于订阅的 Azure 备份提供程序。可通过运行以下命令来执行此操作：Register-AzureProvider -ProviderNamespace "Microsoft.Backup"
+> [!WARNING] 对于第一次使用 Azure 备份的客户，你需要注册用于订阅的 Azure 备份提供程序。可通过运行以下命令来执行此操作：Register-AzureProvider -ProviderNamespace "Microsoft.Backup"
 
 可以使用 **New-AzureRMBackupVault** cmdlet 创建新的备份保管库。备份保管库是一种 ARM 资源，因此需要将它放置在资源组中。在权限提升的 Azure PowerShell 控制台中运行以下命令：
 
@@ -52,7 +47,6 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 	PS C:\> $backupvault = New-AzureRMBackupVault -ResourceGroupName "test-rg" -Name "test-vault" -Region "China North" -Storage GeoRedundant
 
 使用 **Get-AzureRMBackupVault** cmdlet 列出订阅中的备份保管库。
-
 
 ## 安装 Azure 备份代理
 在安装 Azure 备份代理之前，必须先将安装程序下载到 Windows Server 上。可以从 [Microsoft 下载中心](http://aka.ms/azurebackup_agent)或者备份保管库的“仪表板”页获取最新版本的安装程序。将安装程序保存到方便访问的位置，例如 *C:\\Downloads*。
@@ -88,9 +82,8 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 | /pu | 代理主机用户名 | - |
 | /pw | 代理密码 | - |
 
-
 ## 注册到 Azure 备份服务
-在可注册 Azure 备份服务之前，需要确保符合[先决条件](/documentation/articles/backup-configure-vault/)。你必须：
+在可注册 Azure 备份服务之前，需要确保符合[先决条件](./backup-configure-vault.md)。你必须：
 
 - 具备有效的 Azure 订阅
 - 有一个备份保管库
@@ -114,7 +107,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 
 	Machine registration succeeded.
 
-> [AZURE.IMPORTANT] 请勿使用相对路径来指定保管库凭据文件。必须提供绝对路径作为 cmdlet 的输入。
+> [!IMPORTANT] 请勿使用相对路径来指定保管库凭据文件。必须提供绝对路径作为 cmdlet 的输入。
 
 ## 网络设置
 如果 Windows 计算机通过代理服务器连接到 Internet，则也可以向代理提供代理设置。此示例未使用代理服务器，因此我们要显式清除任何代理相关的信息。
@@ -135,7 +128,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 	PS C:\> ConvertTo-SecureString -String "Complex!123_STRING" -AsPlainText -Force | Set-OBMachineSetting
 	Server properties updated successfully
 
-> [AZURE.IMPORTANT] 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
+> [!IMPORTANT] 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
 
 ## 备份文件和文件夹
 从 Windows Server 和客户端到 Azure 备份的所有备份由策略控制。原则包含三个部分：策略由三个部分组成：
@@ -243,7 +236,6 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 	
 	State           : New
 	PolicyState     : Valid
-	
 	
 	PS C:\> Add-OBFileSpec -Policy $newpolicy -FileSpec $exclusions
 	
@@ -500,7 +492,6 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 	Job completed.
 	The recovery operation completed successfully.
 
-
 ## 卸载 Azure 备份代理
 可以使用以下命令卸载 Azure 备份代理：
 
@@ -547,7 +538,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 ## 后续步骤
 有关适用于 Windows Server/客户端的 Azure 备份的详细信息，请参阅
 
-- [Azure 备份简介](/documentation/articles/backup-introduction-to-azure-backup/)
-- [备份 Windows Server](/documentation/articles/backup-configure-vault/)
+- [Azure 备份简介](./backup-introduction-to-azure-backup.md)
+- [备份 Windows Server](./backup-configure-vault.md)
 
 <!---HONumber=Mooncake_1017_2016-->

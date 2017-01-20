@@ -1,22 +1,34 @@
-<properties linkid="" urlDisplayName="" pageTitle="如何在客户端配置验证机制确认长连接有效性- Azure 微软云" metaKeywords="Azure 云，技术文档，文档与资源，MySQL,数据库，连接池，connection pool, Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="
-配置验证机制，保障数据库的访问速度" metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: 如何在客户端配置验证机制确认长连接有效性- Azure 微软云
+metaKeywords: Azure 云，技术文档，文档与资源，MySQL,数据库，连接池，connection pool, Azure MySQL, MySQL PaaS,Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="cn" />
+ms.service: mysql
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: cn
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-validationquery/)
-- [English](/documentation/articles/mysql-database-enus-validationquery/)
+- [中文](./mysql-database-validationquery.md)
+- [English](./mysql-database-enus-validationquery.md)
 
 # 如何在客户端配置验证机制确认长连接有效性<sup style="color: #a5ce00; font-weight: bold; text-transform: uppercase; font-family: '微软雅黑'; font-size: 20px;" class="wa-previewTag"></sup>
 
-
-在[如何高效连接到MySQL Database on Azure](/documentation/articles/mysql-database-connection-pool/)一文中谈到，为了更好地使用数据库的连接资源，我们推荐您使用连接池或长连接的方法进行数据库访问。但需要注意的是连接池或长连接也存在时效性。这是因为服务器会设置超时机制，如果一个连接在一段时间内处于闲置状态，服务器就会关闭这个链接，以释放不必要的资源占用。这就造成了如果客户端长时间在idle状态，再次访问数据库较慢的问题，相当于客户端与服务器间重新建立了连接请求。因此，为了保障在使用过程中，连接的有效性，本文以Tomcat JDBC 连接池为例，介绍如何在客户端配置验证机制确认长连接的有效性。
+在[如何高效连接到MySQL Database on Azure](./mysql-database-connection-pool.md)一文中谈到，为了更好地使用数据库的连接资源，我们推荐您使用连接池或长连接的方法进行数据库访问。但需要注意的是连接池或长连接也存在时效性。这是因为服务器会设置超时机制，如果一个连接在一段时间内处于闲置状态，服务器就会关闭这个链接，以释放不必要的资源占用。这就造成了如果客户端长时间在idle状态，再次访问数据库较慢的问题，相当于客户端与服务器间重新建立了连接请求。因此，为了保障在使用过程中，连接的有效性，本文以Tomcat JDBC 连接池为例，介绍如何在客户端配置验证机制确认长连接的有效性。
 
 通过设定testOnBorrow参数，在有新的请求时，如果连接池中有闲置的可用连接，在返回这个闲置连接之前，连接池会自动验证这个连接的有效性，如果有效，直接返回，如果无效，连接池会回收这个无效连接，重新建立一个新的有效连接并返回。这样会有效地保障数据库的访问速度。
 
 具体设置用户可参考[JDBC Connection Pool官方介绍文档](https://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html#Common_Attributes)。主要需要配置以下三个参数： TestOnBorrow (设为ture), ValidationQuery (设为 SELECT 1), ValidationQueryTimeout (设为1)，具体示例代码如下：
-
-
 
  	public class SimpleTestOnBorrowExample {
       	public static void main(String[] args) throws Exception {
@@ -52,6 +64,4 @@
           	}
       	}
   	}
-
-
 

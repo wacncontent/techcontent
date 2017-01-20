@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure 移动应用中的脱机数据同步 | Azure"
-	description="Azure 移动应用脱机数据同步功能的概念参考和概述"
-	documentationCenter="windows"
-	authors="adrianhall"
-	manager="dwrede"
-	editor=""
-	services="app-service\mobile"/>
+---
+title: Azure 移动应用中的脱机数据同步 | Azure
+description: Azure 移动应用脱机数据同步功能的概念参考和概述
+documentationCenter: windows
+authors: adrianhall
+manager: dwrede
+editor: 
+services: app-service\mobile
 
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="11/21/2016"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: adrianha
+---
 
 # Azure 移动应用中的脱机数据同步
 
@@ -39,7 +39,7 @@
 * [iOS: Enable offline sync]（iOS：启用脱机同步）
 * [Xamarin iOS: Enable offline sync]（Xamarin iOS：启用脱机同步）
 * [Xamarin Android: Enable offline sync]（Xamarin Android：启用脱机同步）
-* [Xamarin.Forms: Enable offline sync](/documentation/articles/app-service-mobile-xamarin-forms-get-started-offline-data/)（Xamarin.Forms：启用脱机同步）
+* [Xamarin.Forms: Enable offline sync](./app-service-mobile-xamarin-forms-get-started-offline-data.md)（Xamarin.Forms：启用脱机同步）
 * [Windows 8.1: Enable offline sync]（Windows 8.1：启用脱机同步）
 
 ## 什么是同步表？
@@ -99,11 +99,11 @@
 * [Windows 8.1: Enable offline sync]（Windows 8.1：启用脱机同步）
 
 <!-- Links -->
-[.NET 客户端 SDK]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/
-[Android: Enable offline sync]: /documentation/articles/app-service-mobile-android-get-started-offline-data/
-[iOS: Enable offline sync]: /documentation/articles/app-service-mobile-ios-get-started-offline-data/
-[Xamarin iOS: Enable offline sync]: /documentation/articles/app-service-mobile-xamarin-ios-get-started-offline-data/
-[Xamarin Android: Enable offline sync]: /documentation/articles/app-service-mobile-xamarin-ios-get-started-offline-data/
-[Windows 8.1: Enable offline sync]: /documentation/articles/app-service-mobile-windows-store-dotnet-get-started-offline-data/
+[.NET 客户端 SDK]: ./app-service-mobile-dotnet-how-to-use-client-library.md
+[Android: Enable offline sync]: ./app-service-mobile-android-get-started-offline-data.md
+[iOS: Enable offline sync]: ./app-service-mobile-ios-get-started-offline-data.md
+[Xamarin iOS: Enable offline sync]: ./app-service-mobile-xamarin-ios-get-started-offline-data.md
+[Xamarin Android: Enable offline sync]: ./app-service-mobile-xamarin-ios-get-started-offline-data.md
+[Windows 8.1: Enable offline sync]: ./app-service-mobile-windows-store-dotnet-get-started-offline-data.md
 
 <!---HONumber=Mooncake_0919_2016-->

@@ -19,11 +19,9 @@
             </intent-filter>
         </receiver>
 
-
 4. 打开文件“ToDoActivity.java”，并添加以下 import 语句：
 
 		import com.microsoft.windowsazure.notifications.NotificationsManager;
-
 
 5. 将以下私有变量添加到类：将 _`<PROJECT_NUMBER>`_ 替换为 Google 在前一个过程中为你的应用分配的项目编号：
 
@@ -37,15 +35,11 @@
 
 8. 在“名称”中键入 `MyHandler`，然后单击“确定”。
 
-
 	![](./media/mobile-services-android-get-started-push/android-studio-create-class.png)  
-
-
 
 9. 在 MyHandler 文件中，将类声明替换为
 
 		public class MyHandler extends NotificationsHandler {
-
 
 10. 为 `MyHandler` 类添加以下 import 语句：
 
@@ -58,11 +52,9 @@
 		import android.os.Bundle;
 		import android.support.v4.app.NotificationCompat;
 
-
 11. 接下来，将该成员添加到 `MyHandler`类：
 
 		public static final int NOTIFICATION_ID = 1;
-
 
 12. 在 `MyHandler` 类中，添加以下代码以覆盖 **onRegistered** 方法，用于在移动服务通知中心中注册你的设备。
 
@@ -84,7 +76,6 @@
 	    		}
 		    }.execute();
 		}
-
 
 13. 在 `MyHandler` 类中，添加以下代码以覆盖 **onReceive** 方法，这样可在收到通知时显示通知。
 
@@ -110,9 +101,7 @@
         		notificationManager.notify(NOTIFICATION_ID, notification);
 		}
 
-
 14. 回到 TodoActivity.java 文件中，更新 *ToDoActivity* 类的 **onCreate** 方法，以注册通知处理程序类。请确保在 *MobileServiceClient* 实例化之后再添加此代码。
-
 
 		NotificationsManager.handleNotifications(this, SENDER_ID, MyHandler.class);
 

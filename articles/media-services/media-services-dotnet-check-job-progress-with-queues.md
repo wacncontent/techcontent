@@ -1,29 +1,29 @@
-<properties 
-	pageTitle="使用 Azure 队列存储通过 .NET 监视媒体服务作业通知 | Azure" 
-	description="了解如何使用 Azure 队列存储监视媒体服务作业通知。代码示例用 C# 编写，并使用用于 .NET 的媒体服务 SDK。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>
+---
+title: 使用 Azure 队列存储通过 .NET 监视媒体服务作业通知 | Azure
+description: 了解如何使用 Azure 队列存储监视媒体服务作业通知。代码示例用 C# 编写，并使用用于 .NET 的媒体服务 SDK。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="08/19/2016" 
-	wacn.date="10/10/2016"   
-	ms.author="juliako"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 08/19/2016
+wacn.date: 10/10/2016
+ms.author: juliako
+---
 
 # 使用 Azure 队列存储通过 .NET 监视媒体服务作业通知
 
-当你运行作业时，通常需要采用某种方式来跟踪作业进度。可以通过使用 Azure 队列存储监视媒体服务作业通知（如本主题中所述）或定义 StateChanged 事件处理程序（如[此](/documentation/articles/media-services-check-job-progress/)主题中所述）来检查进度。
+当你运行作业时，通常需要采用某种方式来跟踪作业进度。可以通过使用 Azure 队列存储监视媒体服务作业通知（如本主题中所述）或定义 StateChanged 事件处理程序（如[此](./media-services-check-job-progress.md)主题中所述）来检查进度。
 
 ## 使用 Azure 队列存储监视媒体服务作业通知
 
-Azure 媒体服务可以在处理媒体作业时向 [Azure 队列存储](/documentation/articles/storage-dotnet-how-to-use-queues/#what-is)传送通知消息。本主题说明如何从队列存储获取这些通知消息。
+Azure 媒体服务可以在处理媒体作业时向 [Azure 队列存储](../storage/storage-dotnet-how-to-use-queues.md#what-is)传送通知消息。本主题说明如何从队列存储获取这些通知消息。
 
 用户可以从任何位置访问已传给到队列存储中的消息。Azure 队列消息体系结构十分可靠，而且具有高度可缩放性。建议使用其他方法轮询队列存储。
 
@@ -54,11 +54,10 @@ Azure 媒体服务可以在处理媒体作业时向 [Azure 队列存储](/docume
 1. 每隔 10 秒检查队列一次，等待作业进入“已完成”状态。处理消息后删除消息。
 1. 删除队列和通知终结点。
 
->[AZURE.NOTE]监视作业状态的建议方法是侦听通知消息，如以下示例所示。
+>[!NOTE]监视作业状态的建议方法是侦听通知消息，如以下示例所示。
 >
 >或者，你可以使用 **IJob.State** 属性检查作业状态。在 **IJob** 的状态设置为“已完成”之前，可能会先收到一条指示作业已完成的通知消息。**IJob.State** 属性在延迟片刻之后反映正确的状态。
 
-	
 	using System;
 	using System.Linq;
 	using System.Configuration;
@@ -118,7 +117,6 @@ Azure 媒体服务可以在处理媒体作业时向 [Azure 队列存储](/docume
 
 			private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
 
-			
 			// Azure China uses a different API server and a different ACS Base Address from the Global.
 			private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
 			private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
@@ -134,7 +132,6 @@ Azure 媒体服务可以在处理媒体作业时向 [Azure 队列存储](/docume
 	            string mediaServicesAccountName = ConfigurationManager.AppSettings["MediaServicesAccountName"];
 	            string mediaServicesAccountKey = ConfigurationManager.AppSettings["MediaServicesAccountKey"];
 	            string storageConnectionString = ConfigurationManager.AppSettings["StorageConnectionString"];
-	
 	
 	            string endPointAddress = Guid.NewGuid().ToString();
 	
@@ -159,7 +156,6 @@ Azure 媒体服务可以在处理媒体作业时向 [Azure 队列存储](/docume
 	                    _context.NotificationEndPoints.Create(
 	                    Guid.NewGuid().ToString(), NotificationEndPointType.AzureQueue, endPointAddress);
 	
-	
 	            if (_notificationEndPoint != null)
 	            {
 	                IJob job = SubmitEncodingJobWithNotificationEndPoint(_singleInputMp4Path);
@@ -170,7 +166,6 @@ Azure 媒体服务可以在处理媒体作业时向 [Azure 队列存储](/docume
 	            _queue.Delete();      
 	            _notificationEndPoint.Delete();
 	       }
-	
 	
 	        static public CloudQueue CreateQueue(string storageAccountConnectionString, string endPointAddress)
 	        {
@@ -188,7 +183,6 @@ Azure 媒体服务可以在处理媒体作业时向 [Azure 队列存储](/docume
 	            return queue;
 	        }
 	 
-	
 	        public static IJob SubmitEncodingJobWithNotificationEndPoint(string inputMediaFilePath)
 	        {
 	            // Declare a new job.
@@ -361,5 +355,4 @@ Azure 媒体服务可以在处理媒体作业时向 [Azure 队列存储](/docume
 	job with Id: nb:jid:UUID:526291de-f166-be47-b62a-11ffe6d4be54 reached expected 
 	State: Finished
 	
-
 <!---HONumber=Mooncake_0926_2016-->

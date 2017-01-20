@@ -1,26 +1,26 @@
-<properties
-	pageTitle="使用 Bootstrap 自定义 HDInsight 群集 | Azure"
-	description="了解如何使用 Bootstrap 自定义 HDInsight 群集。"
-	services="hdinsight"
-	documentationCenter=""
-	authors="mumian"
-	manager="paulettm"
-	editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 使用 Bootstrap 自定义 HDInsight 群集 | Azure
+description: 了解如何使用 Bootstrap 自定义 HDInsight 群集。
+services: hdinsight
+documentationCenter: 
+authors: mumian
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/02/2016"
-	wacn.date="01/05/2017"
-	ms.author="jgao"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/02/2016
+wacn.date: 01/05/2017
+ms.author: jgao
+---
 
 # 使用 Bootstrap 自定义 HDInsight 群集
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 有时，你可能需要配置配置文件，包括：
 
@@ -46,13 +46,13 @@ Bootstrap 的使用方式有 2 种：
 
 - 使用 Azure PowerShell
 
-	[AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+	[!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 - 使用 .NET SDK
 
 有关在创建时在 HDInsight 群集上安装其他组件的信息，请参阅：
 
-- [使用脚本操作自定义 HDInsight 群集 (Windows)](/documentation/articles/hdinsight-hadoop-customize-cluster-v1/)
+- [使用脚本操作自定义 HDInsight 群集 (Windows)](./hdinsight-hadoop-customize-cluster-v1.md)
 
 ## <a name="use-azure-powershell"></a> 使用 Azure PowerShell
 
@@ -100,14 +100,13 @@ Bootstrap 的使用方式有 2 种：
 - [在 HDInsight 中创建 Hadoop 群集][hdinsight-provision-cluster]说明了如何使用其他自定义选项创建 HDInsight 群集。
 - [为 HDInsight 开发脚本操作脚本][hdinsight-write-script]
 - [在 HDInsight 群集上安装并使用 R][hdinsight-install-r]
-- [在 HDInsight 群集上安装并使用 Solr](/documentation/articles/hdinsight-hadoop-solr-install-v1/)
-- [在 HDInsight 群集上安装并使用 Giraph](/documentation/articles/hdinsight-hadoop-giraph-install-v1/)
+- [在 HDInsight 群集上安装并使用 Solr](./hdinsight-hadoop-solr-install-v1.md)
+- [在 HDInsight 群集上安装并使用 Giraph](./hdinsight-hadoop-giraph-install-v1.md)
 
-[hdinsight-install-r]: /documentation/articles/hdinsight-hadoop-r-scripts/
-[hdinsight-write-script]: /documentation/articles/hdinsight-hadoop-script-actions/
-[hdinsight-provision-cluster]: /documentation/articles/hdinsight-provision-clusters-v1/
+[hdinsight-install-r]: ./hdinsight-hadoop-r-scripts.md
+[hdinsight-write-script]: ./hdinsight-hadoop-script-actions.md
+[hdinsight-provision-cluster]: ./hdinsight-provision-clusters-v1.md
 [powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
-
 
 [img-hdi-cluster-states]: ./media/hdinsight-hadoop-customize-cluster-v1/HDI-Cluster-state.png "群集创建期间的阶段"
 

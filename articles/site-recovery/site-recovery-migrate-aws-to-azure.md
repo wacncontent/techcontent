@@ -1,32 +1,29 @@
-<properties
-    pageTitle="使用 Site Recovery 将虚拟机从 Amazon Web Services 迁移到 Azure | Azure"
-    description="本文介绍如何使用 Azure Site Recovery 将 Amazon Web Services (AWS) 中运行的虚拟机迁移到 Azure。"
-    services="site-recovery"
-    documentationcenter=""
-    author="rayne-wiselman"
-    manager="jwhit"
-    editor="" />  
+---
+title: 使用 Site Recovery 将虚拟机从 Amazon Web Services 迁移到 Azure | Azure
+description: 本文介绍如何使用 Azure Site Recovery 将 Amazon Web Services (AWS) 中运行的虚拟机迁移到 Azure。
+services: site-recovery
+documentationcenter: 
+author: rayne-wiselman
+manager: jwhit
+editor: 
 
-<tags
-    ms.assetid="ddb412fd-32a8-4afa-9e39-738b11b91118"
-    ms.service="site-recovery"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="backup-recovery"
-    ms.date="11/01/2016"
-    wacn.date="01/04/2017"
-    ms.author="raynew" />  
-
+ms.assetid: ddb412fd-32a8-4afa-9e39-738b11b91118
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: backup-recovery
+ms.date: 11/01/2016
+wacn.date: 01/04/2017
+ms.author: raynew
+---
 
 # 使用 Azure Site Recovery 将 Amazon Web Services (AWS) 中的虚拟机迁移到 Azure
 ## 概述
 欢迎使用 Azure Site Recovery。根据本文所述的方法，使用 Site Recovery 将 AWS 中运行的 EC2 实例迁移到 Azure。开始之前，请注意：
 
-
 - **目前仅能从 AWS 迁移到 Azure。可以从 AWS 将 VM 故障转移到 Azure，但不能重新对其进行故障回复。没有任何正在进行的复制。**
 - 本文中的迁移说明以将物理计算机复制到 Azure 的说明为基础。
-
 
 请将任何评论或问题发布到本文底部，或者发布到 [Azure 恢复服务论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=hypervrecovmgr)
 
@@ -37,7 +34,6 @@
 * Windows Server 2008 R2 SP1+（仅限 Citrix PV 驱动程序或 AWS PV 驱动程序；**不支持运行 RedHat PV 驱动程序的实例**）
 * Windows Server 2012
 * Windows Server 2012 R2
-
 
 ## 先决条件
 以下是执行此部署所需的组件
@@ -65,10 +61,10 @@
 
 	向组添加计算机之后，系统将启用保护，并且依据保护组设置运行初始复制。
 
-9. [运行非计划的故障转移](/documentation/articles/site-recovery-failover/#run-an-unplanned-failover)。初始复制完成后，可以为每个 VM 运行从 AWS 到 Azure 的非计划故障转移。（可选）你可以创建一个恢复计划并运行非计划的故障转移，从 AWS 向 Azure 迁移多个虚拟机。[详细了解](/documentation/articles/site-recovery-create-recovery-plans/)恢复计划。
+9. [运行非计划的故障转移](./site-recovery-failover.md#run-an-unplanned-failover)。初始复制完成后，可以为每个 VM 运行从 AWS 到 Azure 的非计划故障转移。（可选）你可以创建一个恢复计划并运行非计划的故障转移，从 AWS 向 Azure 迁移多个虚拟机。[详细了解](./site-recovery-create-recovery-plans.md)恢复计划。
 		
 ## 后续步骤
 
-若要详细了解其他复制方案，请参阅[什么是 Azure Site Recovery？](/documentation/articles/site-recovery-overview/)
+若要详细了解其他复制方案，请参阅[什么是 Azure Site Recovery？](./site-recovery-overview.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

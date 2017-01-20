@@ -10,7 +10,6 @@
 
      ![SQL Server Management Studio：连接到 SQL 数据库服务器](./media/sql-database-create-new-database-user/sql-database-create-new-database-user-1.png)  
 
-
 2. 右键单击选定的数据库，然后单击“查询”。
 
      ![SQL Server Management Studio：连接到 SQL 数据库服务器](./media/sql-database-create-new-database-user/sql-database-create-new-database-user-2.png)

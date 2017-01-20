@@ -1,25 +1,22 @@
-<properties 
-	pageTitle="使用 PowerShell 监视和管理流分析作业 | Azure" 
-	description="了解如何使用 Azure PowerShell 和 cmdlet 监视和管理流分析作业。" 
-	keywords="azure powershell、azure powershell cmdlet、powershell 命令、powershell 脚本"	
-	services="stream-analytics" 
-	documentationCenter="" 
-	authors="jeffstokes72" 
-	manager="jhubbard" 
-	editor="cgronlun"/>  
+---
+title: 使用 PowerShell 监视和管理流分析作业 | Azure
+description: 了解如何使用 Azure PowerShell 和 cmdlet 监视和管理流分析作业。
+keywords: azure powershell、azure powershell cmdlet、powershell 命令、powershell 脚本
+services: stream-analytics
+documentationCenter: 
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags 
-	ms.service="stream-analytics" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.tgt_pltfrm="na" 
-	ms.workload="data-services" 
-	ms.date="09/26/2016" 
-	wacn.date="11/14/2016" 
-	ms.author="jeffstok"/>  
-
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 09/26/2016
+wacn.date: 11/14/2016
+ms.author: jeffstok
+---
 
 # 使用 Azure PowerShell cmdlet 监视和管理流分析作业
 
@@ -27,7 +24,7 @@
 
 ## 针对流分析运行 Azure PowerShell cmdlet 的先决条件
 
- - 在订阅中创建 Azure 资源组。下面是 Azure PowerShell 脚本示例。有关 Azure PowerShell 的信息，请参阅[安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)；
+ - 在订阅中创建 Azure 资源组。下面是 Azure PowerShell 脚本示例。有关 Azure PowerShell 的信息，请参阅[安装和配置 Azure PowerShell](../powershell-install-configure.md)；
 
 Azure PowerShell 0.9.8：
 
@@ -57,9 +54,7 @@ Azure PowerShell 1.0：
 		# Create an Azure resource group
 		New-AzureRMResourceGroup -Name <YOUR RESOURCE GROUP NAME> -Location <LOCATION>
 		
-
-
-> [AZURE.NOTE] 以编程方式创建的流分析作业默认情况下并不启用监视功能。你可以在 Azure 经典管理门户中手动启用监视功能，只需导航到作业的“监视”页，然后单击“启用”按钮即可；你也可以通过编程方式来执行此操作，只需遵循 [Azure 流分析 - 以编程方式监视流分析作业](/documentation/articles/stream-analytics-monitor-jobs/)中的步骤即可。
+> [!NOTE] 以编程方式创建的流分析作业默认情况下并不启用监视功能。你可以在 Azure 经典管理门户中手动启用监视功能，只需导航到作业的“监视”页，然后单击“启用”按钮即可；你也可以通过编程方式来执行此操作，只需遵循 [Azure 流分析 - 以编程方式监视流分析作业](./stream-analytics-monitor-jobs.md)中的步骤即可。
 
 ## 适用于流分析的 Azure PowerShell cmdlet
 下面的 Azure PowerShell cmdlet 可用于监视和管理 Azure 流分析作业。请注意，Azure PowerShell 具有不同版本。**在所列示例中，第一个命令用于 Azure PowerShell 0.9.8，第二个命令用于 Azure PowerShell 1.0。** Azure PowerShell 1.0 命令将在命令中始终包含“AzureRM”。
@@ -399,7 +394,6 @@ Azure PowerShell 1.0：
 
 此 PowerShell 命令启动作业 StreamingJob，并将自定义输出开始时间设置为 2012 年 12 月 12 日 12:12:12（UTC）。
 
-
 ### Stop-AzureStreamAnalyticsJob | Stop-AzureRMStreamAnalyticsJob
 以异步方式停止流分析作业在  Azure 中的运行，并取消分配所使用的资源。在订阅中，你将始终可以通过 Azure 经典管理门户和管理 API 来使用作业定义和元数据，方便你编辑和重新启动该作业。处于停止状态的作业不收费。
 
@@ -448,31 +442,26 @@ Azure PowerShell 1.0：
 ## 获取支持
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureStreamAnalytics)。
 
-
 ## 后续步骤
 
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
  
-
-
-
 [msdn-switch-azuremode]: http://msdn.microsoft.com/zh-cn/library/dn722470.aspx
-[powershell-install]: /documentation/articles/powershell-install-configure/
+[powershell-install]: ../powershell-install-configure.md
 [msdn-rest-api-create-stream-analytics-job]: https://msdn.microsoft.com/zh-cn/library/dn834994.aspx
 [msdn-rest-api-create-stream-analytics-input]: https://msdn.microsoft.com/zh-cn/library/dn835010.aspx
 [msdn-rest-api-create-stream-analytics-output]: https://msdn.microsoft.com/zh-cn/library/dn835015.aspx
 [msdn-rest-api-create-stream-analytics-transformation]: https://msdn.microsoft.com/zh-cn/library/dn835007.aspx
 
-[stream.analytics.introduction]: /documentation/articles/stream-analytics-introduction/
-[stream.analytics.get.started]: /documentation/articles/stream-analytics-get-started/
+[stream.analytics.introduction]: ./stream-analytics-introduction.md
+[stream.analytics.get.started]: ./stream-analytics-get-started.md
 [stream.analytics.developer.guide]: /documentation/articles/stream-analytics-developer-guide/
-[stream.analytics.scale.jobs]: /documentation/articles/stream-analytics-scale-jobs/
+[stream.analytics.scale.jobs]: ./stream-analytics-scale-jobs.md
 [stream.analytics.query.language.reference]: http://go.microsoft.com/fwlink/?LinkID=513299
 [stream.analytics.rest.api.reference]: https://msdn.microsoft.com/zh-cn/library/dn835031.aspx
  
-
 <!---HONumber=Mooncake_1107_2016-->

@@ -1,14 +1,17 @@
-<properties
-	pageTitle="SQL 数据库 + Web 应用操作手册"
-    description="SQL 数据库 + Web 应用操作手册"
-    services=""
-    documentationCenter=""
-    authors=""
-    manager=""
-    editor=""
-    tags=""/>
+---
+title: SQL 数据库 + Web 应用操作手册
+description: SQL 数据库 + Web 应用操作手册
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags ms.service="multiple" ms.date="" wacn.date="07/26/2016"/>
+ms.service: multiple
+ms.date: 
+wacn.date: 07/26/2016
+---
 
 #SQL 数据库 + Web 应用操作手册
 
@@ -35,7 +38,6 @@
 接下来我们要对 SQL 服务器进行配置，点击进入我们新建的服务器，选择**配置选项卡**。我们要把自己当前的 IP 地址加到防火墙规则里，IP 地址支持单个的，也支持地址段，可以根据实际的需要设置。点击**保存**，完成设置。
 
 ![05](./media/azure-web-apps-sqlserver/05.png)
-	
 	
 ##Step 3: 创建 SQL 数据库
 
@@ -79,21 +81,21 @@
 	
 	![14](./media/azure-web-apps-sqlserver/14.png)
 	
-	至此，我们就完成了在 Azure 上创建一个 SQL 服务器和一个连接到这个 SQL 服务器的 Web 应用。 部署应用到 Azure 详见[将应用部署到  Azure](/documentation/articles/web-sites-deploy/)
+	至此，我们就完成了在 Azure 上创建一个 SQL 服务器和一个连接到这个 SQL 服务器的 Web 应用。 部署应用到 Azure 详见[将应用部署到  Azure](./app-service-web/web-sites-deploy.md)
 	 
 ##扩展服务 
 
 ###1. Redis 缓存扩展
 
-如果您的网站运行过程中负载较高，我们推荐您使用 Azure Redis 缓存做扩展部署，它能够实现您的网站进行高吞吐量、低延迟的数据访问 ，极大提升应用程序响应性和用户体验。参考配置文档：[将 Azure 中的 Web 应用连接到 Redis 缓存](/documentation/articles/web-sites-connect-to-redis-using-memcache-protocol/)。
+如果您的网站运行过程中负载较高，我们推荐您使用 Azure Redis 缓存做扩展部署，它能够实现您的网站进行高吞吐量、低延迟的数据访问 ，极大提升应用程序响应性和用户体验。参考配置文档：[将 Azure 中的 Web 应用连接到 Redis 缓存](./app-service-web/web-sites-connect-to-redis-using-memcache-protocol.md)。
 
 ###2. CDN 扩展
 
-如果您的网站用户分布地域比较广、需要向不同网络运营商提供服务覆盖、存在文件下载（例如软件安装包、影音文件等）分发的业务需求，建议您的 Web 应用搭配 Azure CDN 扩展部署，将用户请求分配到最优节点，优化用户享受高速网络访问的体验。参考配置文档：[Web 加速 CDN 节点创建](/documentation/articles/cdn-how-to-create-Web-CDN-endpoint/)。
+如果您的网站用户分布地域比较广、需要向不同网络运营商提供服务覆盖、存在文件下载（例如软件安装包、影音文件等）分发的业务需求，建议您的 Web 应用搭配 Azure CDN 扩展部署，将用户请求分配到最优节点，优化用户享受高速网络访问的体验。参考配置文档：[Web 加速 CDN 节点创建](./cdn/cdn-how-to-create-Web-CDN-endpoint.md)。
 
 ##常见问题与相关文档
 
-* [SQL 数据库入门指导](/documentation/articles/sql-database-get-started/)
-* [SQL Server 数据库的迁移指南](/documentation/articles/sql-database-cloud-migrate/)
-* [SQL 数据库常见问题](/documentation/articles/sql-database-faq/)
+* [SQL 数据库入门指导](./sql-database/sql-database-get-started.md)
+* [SQL Server 数据库的迁移指南](./sql-database/sql-database-cloud-migrate.md)
+* [SQL 数据库常见问题](./sql-database/sql-database-faq.md)
 

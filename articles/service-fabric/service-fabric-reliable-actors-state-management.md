@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Reliable Actors 状态管理 | Azure"
-    description="介绍如何管理、持久保存和复制 Reliable Actors 状态以实现高可用性。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="vturecek"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="37cf466a-5293-44c0-a4e0-037e5d292214"
-    ms.service="service-fabric"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="10/19/2016"
-    wacn.date="12/26/2016"
-    ms.author="vturecek" />
+---
+title: Reliable Actors 状态管理 | Azure
+description: 介绍如何管理、持久保存和复制 Reliable Actors 状态以实现高可用性。
+services: service-fabric
+documentationcenter: .net
+author: vturecek
+manager: timlt
+editor: 
+
+ms.assetid: 37cf466a-5293-44c0-a4e0-037e5d292214
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 10/19/2016
+wacn.date: 12/26/2016
+ms.author: vturecek
+---
 
 # Reliable Actors 状态管理
 Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组件在 Reliable Services 上执行，因此，它们可以使用 Reliable Services 所用的相同持久性和复制机制可靠地保护状态。这样，执行组件就不会在发生故障之后、在内存回收后重新激活时或者由于资源平衡和升级的原因而在群集中的节点之间移动时丢失其状态。
@@ -51,7 +52,6 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 
 ### 非持久化状态
 
-
 	[StatePersistence(StatePersistence.None)]
 	class MyActor : Actor, IMyActor
 	{
@@ -61,7 +61,6 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 
 ### 默认值和生成的设置
 如果使用 `StatePersistence` 属性，在执行组件服务启动时，系统会在运行时自动选择状态提供程序。但是，副本计数将在编译时由 Visual Studio 执行组件构建工具设置。生成工具在 ApplicationManifest.xml 中自动为执行组件服务生成*默认服务*。参数是针对**副本集大小下限**和**目标副本集大小**创建的。当然，可以手动更改这些参数，但是，`StatePersistence` 属性每次更改时，参数会设置为所选 `StatePersistence` 属性的默认副本集大小值，并替代所有旧值。换而言之，更改 `StatePersistence` 属性值时，在 ServiceManifest.xml 中设置的值**仅**会在生成时被替代。
-
 
 	<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="Application12Type" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
 	   <Parameters>
@@ -81,7 +80,6 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 	   </DefaultServices>
 	</ApplicationManifest>
 
-
 ## 状态管理器
 每个执行组件实例都有其自身的状态管理器：一种类似于字典的数据结构，能够可靠地存储密钥-值对。状态管理器是围绕状态提供程序的包装。它可用于存储数据，而不论使用的是哪一种持久性设置，但不保证运行中的执行组件服务可在保留数据的同时，以通过滚动升级从易失性（仅在内存中）状态设置更改保存的状态设置。但是，针对运行中的服务更改副本计数是可行的。
 
@@ -98,7 +96,6 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 
 如果给定键的条目不存在，可以使用引发 `KeyNotFoundException` 的标准 *Get* 操作来检索状态：
 
-
 	[StatePersistence(StatePersistence.Persisted)]
 	class MyActor : Actor, IMyActor
 	{
@@ -112,9 +109,7 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 	    }
 	}
 
-
 如果给定键的条目不存在，还可以使用不引发异常的 *TryGet* 方法来检索状态：
-
 
 	class MyActor : Actor, IMyActor
 	{
@@ -134,13 +129,11 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 	    }
 	}
 
-
 ### 保存状态
 
 状态管理器检索方法将返回对本地内存中对象的引用。只是在本地内存中修改此对象并不会永久存储该对象。从状态管理器检索和修改对象时，必须将它重新插入状态管理器才能永久保存。
 
 可以使用无条件的 *Set*（相当于 `dictionary["key"] = value` 语法）来插入状态：
-
 
 	[StatePersistence(StatePersistence.Persisted)]
 	class MyActor : Actor, IMyActor
@@ -155,9 +148,7 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 	    }
 	}
 
-
 可以使用 *Add* 方法来添加状态，但尝试添加已存在的键时会引发 `InvalidOperationException`：
-
 
 	[StatePersistence(StatePersistence.Persisted)]
 	class MyActor : Actor, IMyActor
@@ -172,9 +163,7 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 	    }
 	}
 
-
 还可以使用 *TryAdd* 方法来添加状态，但尝试添加已存在的键时不会引发异常：
-
 
 	[StatePersistence(StatePersistence.Persisted)]
 	class MyActor : Actor, IMyActor
@@ -194,11 +183,9 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 	    }
 	}
 
-
 在执行组件方法结束时，状态管理器将自动保存通过插入或更新操作添加或修改的任何值。根据所用的设置，“保存”可能包括持久保存到磁盘和复制。未修改的值不会持久保存或复制。如果未修改任何值，保存操作不起作用。如果保存失败，将丢弃修改的状态并重新加载原始状态。
 
 还可以通过对执行组件基调用 `SaveStateAsync` 方法来手动保存状态：
-
 
 	async Task IMyActor.SetCountAsync(int count)
 	{
@@ -207,11 +194,9 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 	    await this.SaveStateAsync();
 	}
 
-
 ### 删除状态
 
 可以通过调用 *Remove* 方法，从执行组件的状态管理器中永久删除状态。尝试删除不存在的键时，此方法会引发 `KeyNotFoundException`：
-
 
 	[StatePersistence(StatePersistence.Persisted)]
 	class MyActor : Actor, IMyActor
@@ -226,9 +211,7 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 	    }
 	}
 
-
 还可以使用 *TryRemove* 方法永久删除状态，此方法在尝试删除不存在的键时不会引发异常：
-
 
 	[StatePersistence(StatePersistence.Persisted)]
 	class MyActor : Actor, IMyActor
@@ -248,11 +231,10 @@ Reliable Actors 是可封装逻辑与状态的单线程对象。由于执行组�
 	    }
 	}
 
-
 ## 后续步骤
- - [执行组件类型序列化](/documentation/articles/service-fabric-reliable-actors-notes-on-actor-type-serialization/)
- - [执行组件多态性和面向对象的设计模式](/documentation/articles/service-fabric-reliable-actors-polymorphism/)
- - [执行组件诊断和性能监视](/documentation/articles/service-fabric-reliable-actors-diagnostics/)
+ - [执行组件类型序列化](./service-fabric-reliable-actors-notes-on-actor-type-serialization.md)
+ - [执行组件多态性和面向对象的设计模式](./service-fabric-reliable-actors-polymorphism.md)
+ - [执行组件诊断和性能监视](./service-fabric-reliable-actors-diagnostics.md)
  - [执行组件 API 参考文档](https://msdn.microsoft.com/zh-cn/library/azure/dn971626.aspx)
  - [代码示例](https://github.com/Azure/servicefabric-samples)
 

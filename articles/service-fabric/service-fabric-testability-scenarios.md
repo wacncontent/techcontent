@@ -1,21 +1,21 @@
-<properties
-   pageTitle="混沌和故障转移测试 | Azure"
-   description="使用 Service Fabric 混沌测试和故障转移测试方案来引发故障，然后验证服务的可靠性。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="motanv"
-   manager="timlt"
-   editor="toddabel"/>
+---
+title: 混沌和故障转移测试 | Azure
+description: 使用 Service Fabric 混沌测试和故障转移测试方案来引发故障，然后验证服务的可靠性。
+services: service-fabric
+documentationCenter: .net
+authors: motanv
+manager: timlt
+editor: toddabel
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="07/08/2016"
-   wacn.date="08/08/2016"
-   ms.author="motanv"/>
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 07/08/2016
+wacn.date: 08/08/2016
+ms.author: motanv
+---
 
 # 可测试性方案
 大型分布式系统，例如云基础结构，在本质上都是不可靠的。Azure Service Fabric 使开发人员能够编写出可以在不可靠基础结构上运行的服务。若要编写高质量的服务，开发人员需要能够引入这种不可靠的基础结构来测试其服务的稳定性。
@@ -48,7 +48,6 @@
 
 ### 如何运行混沌测试
 C# 示例
-
 
 	using System;
 	using System.Fabric;
@@ -121,9 +120,7 @@ C# 示例
 	    }
 	}
 
-
 PowerShell
-
 
 	$connection = "localhost:19000"
 	$timeToRun = 60
@@ -134,8 +131,6 @@ PowerShell
 	Connect-ServiceFabricCluster $connection
 	
 	Invoke-ServiceFabricChaosTestScenario -TimeToRunMinute $timeToRun -MaxClusterStabilizationTimeoutSec $maxStabilizationTimeSecs -MaxConcurrentFaults $concurrentFaults -EnableMoveReplicaFaults -WaitTimeBetweenIterationsSec $waitTimeBetweenIterationsSec
-
-
 
 ## 故障转移测试
 
@@ -160,7 +155,6 @@ PowerShell
 ### 如何运行故障转移测试
 
 **C#**
-
 
 	using System;
 	using System.Fabric;
@@ -232,10 +226,7 @@ PowerShell
 	    }
 	}
 
-
-
 **PowerShell**
-
 
 	$connection = "localhost:19000"
 	$timeToRun = 60

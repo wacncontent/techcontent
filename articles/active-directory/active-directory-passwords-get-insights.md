@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="深入分析：Azure AD 密码管理报告 | Azure" 
-	description="本文介绍如何使用报告来深入分析组织中的密码管理操作。" 
-	services="active-directory" 
-	documentationCenter="" 
-	authors="asteen" 
-	manager="femila"
-	editor="curtand"/>  
+---
+title: 深入分析：Azure AD 密码管理报告 | Azure
+description: 本文介绍如何使用报告来深入分析组织中的密码管理操作。
+services: active-directory
+documentationCenter: 
+authors: asteen
+manager: femila
+editor: curtand
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/12/2016"
-	wacn.date="11/21/2016"
-	ms.author="asteen"/>  
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/12/2016
+wacn.date: 11/21/2016
+ms.author: asteen
+---
 
 # 如何使用密码管理报告获取 Operational Insights
 本部分介绍如何使用 Azure Active Directory 的密码管理报告来查看组织中用户对密码重置和更改的使用情况。
@@ -135,26 +135,23 @@
 我们无法访问你的本地密码重置服务。检查同步计算机的事件日志|已失败
 我们在重置用户的本地密码时遇到问题。检查同步计算机的事件日志 | 已失败
 此用户不是密码重置用户组的成员。将此用户添加到该组以解决此问题。|已失败
-已对此租户完全禁用密码重置。若要解决此问题，请参阅[此文](/documentation/articles/active-directory-passwords-getting-started/#enable-users-to-reset-their-azure-ad-passwords)。 | 已失败
+已对此租户完全禁用密码重置。若要解决此问题，请参阅[此文](./active-directory-passwords-getting-started.md#enable-users-to-reset-their-azure-ad-passwords)。 | 已失败
 用户已成功重置密码|已成功
 
 ## 密码重置文档的链接
 以下是所有 Azure AD 密码重置文档页面的链接：
 
-* [**重置自己的密码**](/documentation/articles/active-directory-passwords-update-your-own-password/) - 了解如何以系统用户的身份重置或更改自己的密码
-* [**工作原理**](/documentation/articles/active-directory-passwords-how-it-works/) - 了解六个不同的服务组件及其功能
-* [**入门**](/documentation/articles/active-directory-passwords-getting-started/) - 了解如何让用户重置及更改云密码或本地密码
-* [**自定义**](/documentation/articles/active-directory-passwords-customize/) - 了解如何根据组织的需求自定义服务的外观和行为
-* [**最佳实践**](/documentation/articles/active-directory-passwords-best-practices/) - 了解如何快速部署且有效管理组织的密码
-* [**常见问题**](/documentation/articles/active-directory-passwords-faq/) - 获取常见问题的解答
-* [**故障排除**](/documentation/articles/active-directory-passwords-troubleshoot/) - 了解如何快速排查服务的问题
-* [**了解更多**](/documentation/articles/active-directory-passwords-learn-more/) - 深入探索服务工作原理的技术细节
-
-
+* [**重置自己的密码**](./active-directory-passwords-update-your-own-password.md) - 了解如何以系统用户的身份重置或更改自己的密码
+* [**工作原理**](./active-directory-passwords-how-it-works.md) - 了解六个不同的服务组件及其功能
+* [**入门**](./active-directory-passwords-getting-started.md) - 了解如何让用户重置及更改云密码或本地密码
+* [**自定义**](./active-directory-passwords-customize.md) - 了解如何根据组织的需求自定义服务的外观和行为
+* [**最佳实践**](./active-directory-passwords-best-practices.md) - 了解如何快速部署且有效管理组织的密码
+* [**常见问题**](./active-directory-passwords-faq.md) - 获取常见问题的解答
+* [**故障排除**](./active-directory-passwords-troubleshoot.md) - 了解如何快速排查服务的问题
+* [**了解更多**](./active-directory-passwords-learn-more.md) - 深入探索服务工作原理的技术细节
 
 [001]: ./media/active-directory-passwords-get-insights/001.jpg "Image_001.jpg"
 [002]: ./media/active-directory-passwords-get-insights/002.jpg "Image_002.jpg"
 [003]: ./media/active-directory-passwords-get-insights/003.jpg "Image_003.jpg"
  
-
 <!---HONumber=Mooncake_0815_2016-->

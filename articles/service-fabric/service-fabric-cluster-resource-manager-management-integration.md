@@ -1,24 +1,21 @@
-<properties
-   pageTitle="Service Fabric 群集资源管理器 - 管理集成 | Azure"
-   description="概述群集资源管理器与 Service Fabric 管理之间的集成点。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="masnider"
-   manager="timlt"
-   editor=""/>  
+---
+title: Service Fabric 群集资源管理器 - 管理集成 | Azure
+description: 概述群集资源管理器与 Service Fabric 管理之间的集成点。
+services: service-fabric
+documentationCenter: .net
+authors: masnider
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="Service-Fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="08/19/2016"
-   wacn.date="11/17/2016"
-   ms.author="masnider"/>  
-
-
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 08/19/2016
+wacn.date: 11/17/2016
+ms.author: masnider
+---
 
 # 群集资源管理器与 Service Fabric 群集管理的集成
 Service Fabric 群集资源管理器不是负责处理管理操作（如应用程序升级）的主要 Service Fabric 组件，但会参与此类操作。群集资源管理器帮助管理的第一种方式是从资源和均衡的立场跟踪所需群集及其中服务的状态，并且在无法将群集放入所需配置时发出运行状况报告（例如，容量不足时，或者有关服务放置位置的规则发生冲突时）。集成的另一部分与升级的工作方式有关：群集资源管理器将改变其行为。下面我们将讨论这两种情况。
@@ -31,7 +28,6 @@ Service Fabric 群集资源管理器不是负责处理管理操作（如应用�
 下面是此类运行状况报告的示例。在这种情况下，运行状况报告适用于系统服务的分区之一，因为该分区的副本暂时打包成少量的升级域，这类似于连续失败时发生的情况：
 
 	PS C:\Users\User > Get-WindowsFabricPartitionHealth -PartitionId '00000000-0000-0000-0000-000000000001'
-
 
 	PartitionId           : 00000000-0000-0000-0000-000000000001
 	AggregatedHealthState : Warning
@@ -68,7 +64,6 @@ Service Fabric 群集资源管理器不是负责处理管理操作（如应用�
                         	IsExpired             : False
                         	Transitions           : Ok->Warning = 8/10/2015 7:13:02 PM, LastError = 1/1/0001 12:00:00 AM
 
-
 下面是此运行状况消息指出的情况：
 
 1.	所有副本本身运行状况正常（这是 Service Fabric 的第一要务）
@@ -92,7 +87,7 @@ Service Fabric 群集资源管理器不是负责处理管理操作（如应用�
 -	PlacementConstraint：如果你看到此消息，则表示我们已消除一些节点，因为它们不符合服务的放置约束。我们在此消息中描绘当前配置的放置约束。如果有提供任何放置约束，这通常就是正常的，但是，如果放置约束中有 bug，造成消除太多节点，就会在此处看到该结果。
 -	NodeCapacity：如果你看到此约束，则表示我们无法将副本放在指定的节点上，因为这会导致节点超出容量。
 -	Affinity：此约束表示我们无法将副本放在受影响的节点上，因为这会导致违反相关性约束。
--	FaultDomain 和 UpgradeDomain：如果将副本放在指定的节点上会导致副本打包在特定的容错域或升级域中，此约束将消除节点。[容错域与升级域约束及最终行为](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/)中的主题提供了几个介绍此约束的示例
+-	FaultDomain 和 UpgradeDomain：如果将副本放在指定的节点上会导致副本打包在特定的容错域或升级域中，此约束将消除节点。[容错域与升级域约束及最终行为](./service-fabric-cluster-resource-manager-cluster-description.md)中的主题提供了几个介绍此约束的示例
 -	PreferredLocation：通常你看不到这个会导致节点从解决方案中删除的约束，因为该约束默认情况下仅用于优化。此外，首选的位置约束通常只出现在升级期间（用于将副本移回到开始升级时的位置），然而也有可能会出现在其他情况下。
 
 ###<a name="constraint-priorities"></a> 约束优先级
@@ -104,7 +99,6 @@ Service Fabric 群集资源管理器不是负责处理管理操作（如应用�
 
 ClusterManifest.xml
 
-
         <Section Name="PlacementAndLoadBalancing">
             <Parameter Name="PlacementConstraintPriority" Value="0" />
             <Parameter Name="CapacityConstraintPriority" Value="0" />
@@ -113,7 +107,6 @@ ClusterManifest.xml
             <Parameter Name="UpgradeDomainConstraintPriority" Value="1" />
             <Parameter Name="PreferredLocationConstraintPriority" Value="2" />
         </Section>
-
 
 在此处可以发现，有针对升级域和容错域定义的约束，升级域约束为“软”约束。此外，还有一个奇怪的具有优先级的“PreferredLocation”约束。这是什么？
 
@@ -134,9 +127,9 @@ PreferredLocation 约束稍有不同，因此它是唯一设置为“Optimizatio
 升级期间还会发生另一种情况，那就是群集资源管理器对正在升级的实体关闭平衡。因此，如果你有两个不同的应用程序实例并在其中一个实例上开始升级，则该应用程序实例的平衡将会暂停，但另一个不会。阻止反应式平衡可防止对升级本身做出不必要的反应（“哎呀！ 这是一个空节点！ 最好在其中填充各种内容！”），因此会阻止群集中的服务额外进行大量的移动，而这种移动必须在完成升级后服务需要移回节点时撤消。如果有问题的升级是群集升级，则整个群集在升级期间将暂停均衡（约束检查 – 确保强制实施规则 – 保持活动，只禁用主动重新均衡）。
 
 ### 宽松规则
-在升级期间，即使群集整体相当受限或已满，通常你还是想要完成升级。在升级期间能够管理群集容量甚至比群集升级期间通常有 5% 到 20% 的容量关闭更为重要，该工作负荷通常必须转到某个位置。这就是[缓冲容量](/documentation/articles/service-fabric-cluster-resource-manager-cluster-description/#buffered-capacity)概念真正派上用场的地方 – 尽管在正常操作期间遵守缓冲容量（留出一些可用空间），但群集资源管理器将在升级期间填满总容量（占用缓冲区）。
+在升级期间，即使群集整体相当受限或已满，通常你还是想要完成升级。在升级期间能够管理群集容量甚至比群集升级期间通常有 5% 到 20% 的容量关闭更为重要，该工作负荷通常必须转到某个位置。这就是[缓冲容量](./service-fabric-cluster-resource-manager-cluster-description.md#buffered-capacity)概念真正派上用场的地方 – 尽管在正常操作期间遵守缓冲容量（留出一些可用空间），但群集资源管理器将在升级期间填满总容量（占用缓冲区）。
 
 ## 后续步骤
-- 参阅 [Service Fabric 群集资源管理器简介](/documentation/articles/service-fabric-cluster-resource-manager-introduction/)，帮助自己入门
+- 参阅 [Service Fabric 群集资源管理器简介](./service-fabric-cluster-resource-manager-introduction.md)，帮助自己入门
 
 <!---HONumber=Mooncake_1017_2016-->

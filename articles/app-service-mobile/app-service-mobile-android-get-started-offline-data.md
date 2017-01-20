@@ -1,31 +1,30 @@
-<properties
-	pageTitle="为 Azure 移动应用启用脱机同步 (Android)"
-	description="了解如何在 Android 应用程序中使用应用服务移动应用来缓存和同步脱机数据"
-	documentationCenter="android"
-	authors="yuaxu"
-	manager="erikre"
-	services="app-service\mobile"/>  
+---
+title: 为 Azure 移动应用启用脱机同步 (Android)
+description: 了解如何在 Android 应用程序中使用应用服务移动应用来缓存和同步脱机数据
+documentationCenter: android
+authors: yuaxu
+manager: erikre
+services: app-service\mobile
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-android"
-	ms.devlang="java"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="12/26/2016"
-	ms.author="yuaxu"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-android
+ms.devlang: java
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 12/26/2016
+ms.author: yuaxu
+---
 
 # 为 Android 移动应用启用脱机同步
 
-[AZURE.INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
+[!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
 ## 概述
 
 本教程介绍适用于 Android 的 Azure 移动应用的脱机同步功能。脱机同步允许最终用户与移动应用交互（查看、添加或修改数据），即使在没有网络连接时也是如此。更改存储在本地数据库中；设备重新联机后，这些更改会与远程后端同步。
 
-对于首次体验 Azure 移动应用的读者，请先完成 [Create an Android App]（创建 Android 应用）教程。如果不使用下载的快速入门服务器项目，必须将数据访问扩展包添加到项目。有关服务器扩展包的详细信息，请参阅 [Work with the .NET backend server SDK for Azure Mobile Apps](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/)（使用适用于 Azure 移动应用的 .NET 后端服务器 SDK）。
+对于首次体验 Azure 移动应用的读者，请先完成 [Create an Android App]（创建 Android 应用）教程。如果不使用下载的快速入门服务器项目，必须将数据访问扩展包添加到项目。有关服务器扩展包的详细信息，请参阅 [Work with the .NET backend server SDK for Azure Mobile Apps](./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md)（使用适用于 Azure 移动应用的 .NET 后端服务器 SDK）。
 
 若要了解有关脱机同步功能的详细信息，请参阅 [Offline Data Sync in Azure Mobile Apps]（Azure 移动应用中的脱机数据同步）主题。
 
@@ -105,12 +104,11 @@
 
 * [Azure 移动应用中的脱机数据同步]
 
-
 <!-- URLs. -->
 
-[Offline Data Sync in Azure Mobile Apps]: /documentation/articles/app-service-mobile-offline-data-sync/
-[Azure 移动应用中的脱机数据同步]: /documentation/articles/app-service-mobile-offline-data-sync/
+[Offline Data Sync in Azure Mobile Apps]: ./app-service-mobile-offline-data-sync.md
+[Azure 移动应用中的脱机数据同步]: ./app-service-mobile-offline-data-sync.md
 
-[Create an Android App]: /documentation/articles/app-service-mobile-android-get-started/
+[Create an Android App]: ./app-service-mobile-android-get-started.md
 
 <!---HONumber=Mooncake_1219_2016-->

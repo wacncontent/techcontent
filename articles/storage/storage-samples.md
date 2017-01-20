@@ -1,28 +1,29 @@
-<properties
-    pageTitle="Azure 存储示例 | Azure"
-    description="查看、下载和运行 Azure 存储空间的示例代码和应用程序使用 .NET、Java、Node.js 和 C++ 存储客户端库发现 Blob、队列、表和文件的入门示例。"
-    services="storage"
-    documentationcenter="na"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="8fceeff7-dd8a-47d6-b2cd-564a34a2a776"
-    ms.service="storage"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: Azure 存储示例 | Azure
+description: 查看、下载和运行 Azure 存储空间的示例代码和应用程序使用 .NET、Java、Node.js 和 C++ 存储客户端库发现 Blob、队列、表和文件的入门示例。
+services: storage
+documentationcenter: na
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: 8fceeff7-dd8a-47d6-b2cd-564a34a2a776
+ms.service: storage
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # Azure 存储示例
 ## 概述
 可以使用以下链接查看和下载有用的 Azure 存储示例。
 
 ## 入门示例
-* [五分钟内开始使用 Azure 存储](/documentation/articles/storage-getting-started-guide/)
+* [五分钟内开始使用 Azure 存储](./storage-getting-started-guide.md)
 * [适用于 Azure 存储的 Visual Studio 快速入门](https://github.com/Azure/azure-storage-net/tree/master/Samples/GettingStarted/VisualStudioQuickStarts)
 
 ## .NET 示例

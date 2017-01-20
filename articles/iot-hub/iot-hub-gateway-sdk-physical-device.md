@@ -1,24 +1,21 @@
-<properties
-	pageTitle="通过网关 SDK 使用实际设备 | Azure"
-	description="Azure IoT 中心网关 SDK 演练使用 Texas Instruments SensorTag 通过 Intel Edison 计算模块上运行的网关将数据发送到 IoT 中心"
-	services="iot-hub"
-	documentationCenter=""
-	authors="chipalost"
-	manager="timlt"
-	editor=""/>  
+---
+title: 通过网关 SDK 使用实际设备 | Azure
+description: Azure IoT 中心网关 SDK 演练使用 Texas Instruments SensorTag 通过 Intel Edison 计算模块上运行的网关将数据发送到 IoT 中心
+services: iot-hub
+documentationCenter: 
+authors: chipalost
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-hub"
-     ms.devlang="cpp"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="11/14/2016"
-     wacn.date="12/12/2016"
-     ms.author="andbuc"/>
-
-
+ms.service: iot-hub
+ms.devlang: cpp
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/14/2016
+wacn.date: 01/17/2017
+ms.author: andbuc
+---
 
 # Azure IoT 网关 SDK - 使用 Linux 通过实际设备发送设备到云消息
 
@@ -54,7 +51,6 @@
 
 ![](./media/iot-hub-gateway-sdk-physical-device/gateway_ble_upload_data_flow.png)  
 
-
 通过以下步骤将遥测项从 BLE 设备传输到 IoT 中心：
 
 1. BLE 设备生成温度样本并将其通过蓝牙发送到网关的 BLE 模块。
@@ -66,7 +62,6 @@
 以下块图说明了设备命令数据流管道：
 
 ![](./media/iot-hub-gateway-sdk-physical-device/gateway_ble_command_data_flow.png)  
-
 
 1. IoT 中心模块会定期在 IoT 中心中轮询新的命令消息。
 2. 当 IoT 中心模块收到新的命令消息时，它会将其发布到中转站。
@@ -136,7 +131,6 @@ BLE 模块通过 BlueZ 堆栈与蓝牙硬件通信。需要 BlueZ 5.37 版才能
 
 ### 从 Raspberry Pi 3 设备启用到 SensorTag 设备的连接
 运行示例前，需要确认 Raspberry Pi 3 可以连接到 SensorTag 设备。
-
 
 1. 确保安装 `rfkill` 实用程序。
    
@@ -413,7 +407,6 @@ BLE 设备的示例配置假定使用 Texas Instruments SensorTag 设备。任�
 - **mapping** 模块将消息发送到 **BLEC2D** 模块。
 - **BLEC2D** 模块将消息发回 **SensorTag** 模块。
 
-
         "links" : [
             {"source" : "*", "sink" : "Logger" },
             {"source" : "SensorTag", "sink" : "mapping" },
@@ -424,12 +417,9 @@ BLE 设备的示例配置假定使用 Texas Instruments SensorTag 设备。任�
             {"source" : "BLEC2D", "sink" : "SensorTag"}
          ]
 
-
 若要运行示例，请将 JSON 配置文件的路径传递到 **ble\_gateway** 二进制文件。如果使用 **gateway\_sample.json** 文件，请执行如下命令。从 azure-iot-gateway-sdk 目录执行此命令
 
-
         ./build/samples/ble_gateway/ble_gateway ./samples/ble_gateway/src/gateway_sample.json
-
 
 在运行示例前，可能需要按 SensorTag 设备上的小按钮，使其可被发现。
 
@@ -499,14 +489,13 @@ BLE 模块还支持从 Azure IoT 中心将指令发送到设备。可使用 Azur
 
 <!-- Links -->
 
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-explorer-tools]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/manage_iot_hub.md
 [lnk-sdk]: https://github.com/Azure/azure-iot-gateway-sdk/
 [lnk-noobs]: https://www.raspberrypi.org/documentation/installation/noobs.md
 [lnk-raspbian]: https://www.raspberrypi.org/downloads/raspbian/
 
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-create-hub]: ./iot-hub-create-through-portal.md
 
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-create-hub]: /documentation/articles/iot-hub-create-through-portal/
-
-<!---HONumber=Mooncake_1205_2016-->
+<!---HONumber=Mooncake_Quality_Review_0117_2017-->

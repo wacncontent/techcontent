@@ -1,12 +1,16 @@
-<properties 
-	pageTitle="使用 docker-machine 管理 Azure 容器虚拟机" 
-	description="如何使用 docker-machine 管理 Azure 容器虚拟机" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machine-aog" ms.date="" wacn.date="10/28/2016"/>
+---
+title: 使用 docker-machine 管理 Azure 容器虚拟机
+description: 如何使用 docker-machine 管理 Azure 容器虚拟机
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machine-aog
+ms.date: 
+wacn.date: 10/28/2016
+---
 
 # 使用 docker-machine 管理 Azure 容器虚拟机 #
 

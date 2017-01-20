@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="通过命令行管理移动服务 | Azure" 
-	description="了解如何使用命令行工具创建、 部署和管理您的 Azure 移动服务。" 
-	services="mobile-services" 
-	documentationCenter="Mobile" 
-	authors="ggailey777" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 通过命令行管理移动服务 | Azure
+description: 了解如何使用命令行工具创建、 部署和管理您的 Azure 移动服务。
+services: mobile-services
+documentationCenter: Mobile
+authors: ggailey777
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="NA"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: NA
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 #  使用命令行工具自动操作移动服务 
 
@@ -75,7 +75,7 @@
 
 ## 如何列出订阅中的现有移动服务
 
-> [AZURE.NOTE]CLI 中与“list”和“script”相关的命令只适用于 JavaScript 后端。
+> [!NOTE]CLI 中与“list”和“script”相关的命令只适用于 JavaScript 后端。
 
 以下命令将返回 Azure 订阅中所有移动服务的列表：
 
@@ -91,7 +91,7 @@
 
 如果包含 `-a` 和 `-q` 参数的话，此命令还会删除该移动服务使用的 SQL 数据库和服务器且不显示任何提示。
 
-> [AZURE.NOTE]如果不随 <code>-a</code> 或 <code>-d</code> 一起指定 <code>-q</code> 参数，则执行将会暂停，并且系统会提示你针对 SQL 数据库选择删除选项。仅当没有其他任何服务使用该数据库或服务器时，才能使用 <code>-a</code> 参数；否则，请使用 <code>-d</code> 参数，以便只删除属于要删除的移动服务的数据。
+> [!NOTE]如果不随 <code>-a</code> 或 <code>-d</code> 一起指定 <code>-q</code> 参数，则执行将会暂停，并且系统会提示你针对 SQL 数据库选择删除选项。仅当没有其他任何服务使用该数据库或服务器时，才能使用 <code>-a</code> 参数；否则，请使用 <code>-d</code> 参数，以便只删除属于要删除的移动服务的数据。
 
 ## 如何在移动服务中创建表
 
@@ -166,18 +166,8 @@
 
 <!-- Images. -->
 
-
-
-
-
-
-
-
-
-
-
 <!-- URLs. -->
-[移动服务服务器脚本参考]: /documentation/articles/mobile-services-how-to-use-server-scripts/
+[移动服务服务器脚本参考]: ./mobile-services-how-to-use-server-scripts.md
 
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
 [nodejs-org]: http://nodejs.org/
@@ -185,7 +175,7 @@
 
 [mac-installer]: http://go.microsoft.com/fwlink/p?LinkId=252249
 [windows-installer]: http://go.microsoft.com/fwlink/p?LinkID=275464
-[reference-docs]: /documentation/articles/virtual-machines-command-line-tools/#Commands_to_manage_mobile_services
-[如何安装适用于 Mac 和 Linux 的 Azure 命令行工具]: /documentation/articles/xplat-cli-install/
+[reference-docs]: ../virtual-machines-command-line-tools.md#Commands_to_manage_mobile_services
+[如何安装适用于 Mac 和 Linux 的 Azure 命令行工具]: ../xplat-cli-install.md
 
 <!---HONumber=Mooncake_0118_2016-->

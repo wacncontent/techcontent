@@ -1,38 +1,37 @@
-<properties
-	pageTitle="使用移动服务托管客户端库 (Windows | Xamarin) | Microsoft Azure"
-	description="了解如何在 Windows 和 Xamarin 应用中使用 Azure 移动服务的 .NET 客户端。"
-	services="mobile-services"
-	documentationCenter=""
-	authors="ggailey777"
-	manager="dwrede"
-	editor=""/>
+---
+title: 使用移动服务托管客户端库 (Windows | Xamarin) | Microsoft Azure
+description: 了解如何在 Windows 和 Xamarin 应用中使用 Azure 移动服务的 .NET 客户端。
+services: mobile-services
+documentationCenter: 
+authors: ggailey777
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 # 如何使用 Azure 移动服务的托管客户端库
 
-[AZURE.INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
+[!INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
 
 ##概述 
 
-本指南说明如何在 Windows 应用和 Xamarin 应用中使用 Azure 移动服务的托管客户端库执行常见方案。所述的任务包括查询数据、插入、更新和删除数据、对用户进行身份验证和处理错误。如果你是第一次使用移动服务，最好先完成[移动服务快速入门](/documentation/articles/mobile-services-dotnet-backend-xamarin-ios-get-started/)教程。
+本指南说明如何在 Windows 应用和 Xamarin 应用中使用 Azure 移动服务的托管客户端库执行常见方案。所述的任务包括查询数据、插入、更新和删除数据、对用户进行身份验证和处理错误。如果你是第一次使用移动服务，最好先完成[移动服务快速入门](./mobile-services-dotnet-backend-xamarin-ios-get-started.md)教程。
 
-[AZURE.INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
+[!INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
 
 ##<a name="setup"></a>安装与先决条件
 
 假设你已创建一个移动服务和一个表。有关详细信息，请参阅[创建表](http://go.microsoft.com/fwlink/?LinkId=298592)。在本主题使用的代码中，表的名称为 `TodoItem`，其中包含以下列：`Id`、`Text` 和 `Complete`。
 
 相应的类型化客户端 .NET 类型如下：
-
 
 	public class TodoItem
 	{
@@ -53,7 +52,6 @@
 
 以下代码将创建用于访问移动服务的 `MobileServiceClient` 对象。
 
-
 	MobileServiceClient client = new MobileServiceClient(
 		"AppUrl",
 		"AppKey"
@@ -61,7 +59,7 @@
 
 在上面的代码中，请将 `AppUrl` 和 `AppKey` 依次替换为移动服务 URL 和应用程序密钥。在 Azure 经典管理门户中选择你的移动服务，然后单击“仪表板”即可获取这两个值。
 
->[AZURE.IMPORTANT]应用程序密钥用于针对移动服务筛选出随机请求，将随应用程序一起分发。由于此密钥未加密，因此不能被认为是安全的。为确保安全访问你的移动服务数据，你必须改为在允许用户访问前对用户进行身份验证。有关详细信息，请参阅[如何：对用户进行身份验证](#authentication)。
+>[!IMPORTANT]应用程序密钥用于针对移动服务筛选出随机请求，将随应用程序一起分发。由于此密钥未加密，因此不能被认为是安全的。为确保安全访问你的移动服务数据，你必须改为在允许用户访问前对用户进行身份验证。有关详细信息，请参阅[如何：对用户进行身份验证](#authentication)。
 
 ##<a name="instantiating"></a>如何创建表引用
 
@@ -82,7 +80,7 @@
 - [选择特定的列]
 - [按 ID 查找数据]
 
->[AZURE.NOTE]将强制使用服务器驱动的页大小来防止返回所有行。这可以防止对大型数据集发出的默认请求对服务造成负面影响。若要返回 50 个以上的行，请根据[在页中返回数据]所述使用 `Take` 方法。
+>[!NOTE]将强制使用服务器驱动的页大小来防止返回所有行。这可以防止对大型数据集发出的默认请求对服务造成负面影响。若要返回 50 个以上的行，请根据[在页中返回数据]所述使用 `Take` 方法。
 
 ### <a name="filtering"></a>如何筛选返回的数据
 
@@ -174,7 +172,6 @@
 
     [EnableQuery(MaxTop=1000)]
 
-
 ### <a name="selecting"></a>如何选择特定的列
 
 你可以通过在查询中添加 `Select` 子句来指定要包含在结果中的属性集。例如，以下代码演示了如何做到只选择一个字段，以及如何选择并格式化多个字段：
@@ -207,7 +204,7 @@
 
 ##<a name="inserting"></a>如何在移动服务中插入数据
 
-> [AZURE.NOTE]如果你想要对某个类型执行插入、查找、删除或更新操作，则需要创建一个名为 **Id** 的成员。正因如此，示例类 **TodoItem** 包含了一个名为 **Id** 的成员。更新和删除操作中始终必须存在一个有效的 ID 值。
+> [!NOTE]如果你想要对某个类型执行插入、查找、删除或更新操作，则需要创建一个名为 **Id** 的成员。正因如此，示例类 **TodoItem** 包含了一个名为 **Id** 的成员。更新和删除操作中始终必须存在一个有效的 ID 值。
 
 以下代码演示了如何在表中插入新行。参数包含要作为 .NET 对象插入的数据。
 
@@ -230,7 +227,6 @@
 	jo.Add("Complete", false);
 	var inserted = await table.InsertAsync(jo);
 
-
 ###使用 ID 值
 
 移动服务支持为表的 **ID** 列使用唯一的自定义字符串值。这样，应用程序便可为 ID 使用自定义值（如电子邮件地址或用户名）。
@@ -241,16 +237,15 @@
 + 更方便地合并不同表或数据库中的记录。
 + ID 值能够更好地与应用程序的逻辑相集成。
 
-如果插入的记录中未设置字符串 ID 值，移动服务将为 ID 生成唯一值。你可以在客户端上或在 .NET 移动后端服务中，使用 `Guid.NewGuid()` 方法生成自己的 ID 值。若要了解有关在 JavaScript 后端移动服务中生成 GUID 的详细信息，请参阅[如何：生成唯一的 ID 值](/documentation/articles/mobile-services-how-to-use-server-scripts/#generate-guids)。
+如果插入的记录中未设置字符串 ID 值，移动服务将为 ID 生成唯一值。你可以在客户端上或在 .NET 移动后端服务中，使用 `Guid.NewGuid()` 方法生成自己的 ID 值。若要了解有关在 JavaScript 后端移动服务中生成 GUID 的详细信息，请参阅[如何：生成唯一的 ID 值](./mobile-services-how-to-use-server-scripts.md#generate-guids)。
 
-也可以为表使用整数 ID。若要使用整数 ID，必须结合 `--integerId` 选项使用 `mobile table create` 命令创建表。应在适用于 Azure 的命令行界面 (CLI) 中使用此命令。有关使用 CLI 的详细信息，请参阅[用于管理移动服务表的 CLI](/documentation/articles/virtual-machines-command-line-tools/#Mobile_Tables)。
+也可以为表使用整数 ID。若要使用整数 ID，必须结合 `--integerId` 选项使用 `mobile table create` 命令创建表。应在适用于 Azure 的命令行界面 (CLI) 中使用此命令。有关使用 CLI 的详细信息，请参阅[用于管理移动服务表的 CLI](../virtual-machines-command-line-tools.md#Mobile_Tables)。
 
 ##<a name="modifying"></a>如何：在移动服务中修改数据
 
 以下代码演示了如何使用新的信息更新具有相同 ID 的现有实例。参数包含要作为 .NET 对象更新的数据。
 
 	await todoTable.UpdateAsync(todoItem);
-
 
 若要插入非类型化数据，你可以按此方式利用 Json.NET。请注意，在执行更新时，必须指定 ID，移动服务将凭此 ID 来识别要更新的实例。可以从 `InsertAsync` 调用的结果中获取该 ID。
 
@@ -261,7 +256,6 @@
 	var inserted = await table.UpdateAsync(jo);
 
 如果你尝试更新某个项但未提供“ID”值，则服务无法识别要更新的实例，从而导致移动服务 SDK 引发 `ArgumentException`。
-
 
 ##<a name="deleting"></a>如何在移动服务中删除数据
 
@@ -279,7 +273,7 @@
 
 ##<a name="custom-api"></a>如何：调用自定义 API
 
-自定义 API 可让你定义自定义终结点，这些终结点将会公开不映射到插入、更新、删除或读取操作的服务器功能。使用自定义 API 能够以更大的力度控制消息传送，包括读取和设置 HTTP 消息标头，以及定义除 JSON 以外的消息正文格式。有关如何在移动服务中创建自定义 API 的示例，请参阅[如何：定义自定义 API 终结点](/documentation/articles/mobile-services-dotnet-backend-define-custom-api/)。
+自定义 API 可让你定义自定义终结点，这些终结点将会公开不映射到插入、更新、删除或读取操作的服务器功能。使用自定义 API 能够以更大的力度控制消息传送，包括读取和设置 HTTP 消息标头，以及定义除 JSON 以外的消息正文格式。有关如何在移动服务中创建自定义 API 的示例，请参阅[如何：定义自定义 API 终结点](./mobile-services-dotnet-backend-define-custom-api.md)。
 
 通过在客户端上调用某一个 [InvokeApiAsync] 方法重载来调用自定义 API。例如，以下代码行向移动服务上的 **completeAll** API 发送 POST 请求：
 
@@ -305,15 +299,15 @@
 		    await MobileService.GetPush().RegisterNativeAsync(channel.Uri, tags);
 		}
 
-请注意，在此示例中，注册包含两个标记。有关 Windows 应用的详细信息，请参阅[向应用添加推送通知](/documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-push/)。
+请注意，在此示例中，注册包含两个标记。有关 Windows 应用的详细信息，请参阅[向应用添加推送通知](./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-push.md)。
 
-Xamarin 应用需要一些额外的代码才能将 iOS 或 Android 应用上运行的 Xamarin 应用分别注册到 Apple Push Notification 服务 (APNS) 和 Google Cloud Messaging (GCM) 服务。有关详细信息，请参阅**向应用添加推送通知** ([Xamarin.iOS](/documentation/articles/partner-xamarin-mobile-services-ios-get-started-push/#add-push)。
+Xamarin 应用需要一些额外的代码才能将 iOS 或 Android 应用上运行的 Xamarin 应用分别注册到 Apple Push Notification 服务 (APNS) 和 Google Cloud Messaging (GCM) 服务。有关详细信息，请参阅**向应用添加推送通知** ([Xamarin.iOS](./partner-xamarin-mobile-services-ios-get-started-push.md#add-push)。
 
->[AZURE.NOTE]当你需要发送通知给特定的已注册用户时，必须在注册之前要求身份验证，然后验证是否已授权该用户注册特定标记。例如，必须检查以确保用户注册的标记不是其他人的用户 ID。有关详细信息，请参阅[向经过身份验证的用户发送推送通知](/documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users/)。
+>[!NOTE]当你需要发送通知给特定的已注册用户时，必须在注册之前要求身份验证，然后验证是否已授权该用户注册特定标记。例如，必须检查以确保用户注册的标记不是其他人的用户 ID。有关详细信息，请参阅[向经过身份验证的用户发送推送通知](./mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users.md)。
 
 ##<a name="pull-notifications"></a>如何：在 Windows 应用中使用定期通知
 
-Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定期通知后，Windows 将定期访问自定义 API 终结点以更新开始菜单上的应用磁贴。若要使用定期通知，必须[定义一个自定义 API](/documentation/articles/mobile-services-javascript-backend-define-custom-api/)，以便使用磁贴特定的格式返回 XML 数据。有关详细信息，请参阅[定期通知](https://msdn.microsoft.com/zh-cn/library/windows/apps/hh761461.aspx)。
+Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定期通知后，Windows 将定期访问自定义 API 终结点以更新开始菜单上的应用磁贴。若要使用定期通知，必须[定义一个自定义 API](./mobile-services-javascript-backend-define-custom-api.md)，以便使用磁贴特定的格式返回 XML 数据。有关详细信息，请参阅[定期通知](https://msdn.microsoft.com/zh-cn/library/windows/apps/hh761461.aspx)。
 
 以下示例将启用定期通知，以便从 *tiles* 自定义终结点请求磁贴模板数据：
 
@@ -347,12 +341,10 @@ Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定
         public byte[] Version { set; get; }
     }
 
-
 使用非类型化表的应用程序通过在表的 `SystemProperties` 中设置 `Version` 标志来启用乐观并发，如下所示。
 
 	//Enable optimistic concurrency by retrieving __version
 	todoTable.SystemProperties |= MobileServiceSystemProperties.Version;
-
 
 以下代码演示了如何解决检测到的写入冲突。若要提交解决方法，必须在 `UpdateAsync()` 调用中包含正确的 `__version` 值。
 
@@ -377,7 +369,6 @@ Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定
 	        await ResolveConflict(item, exception.Item);
     	}
 	}
-
 
 	private async Task ResolveConflict(TodoItem localItem, TodoItem serverItem)
 	{
@@ -411,9 +402,7 @@ Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定
 	    await msgDialog.ShowAsync();
 	}
 
-
 有关使用移动服务乐观并发的更完整示例，请参阅[乐观并发教程]。
-
 
 ##<a name="binding"></a>如何：将移动服务数据绑定到 Windows 用户界面
 
@@ -439,7 +428,6 @@ Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定
 
 		ListBox lb = new ListBox();
 		lb.ItemsSource = items;
-
 
 若要在 Windows Phone 8 和“Silverlight”应用上使用新的集合，请在 `IMobileServiceTableQuery<T>` 和 `IMobileServiceTable<T>` 上使用 `ToCollection` 扩展方法。若要实际加载数据，请调用 `LoadMoreItemsAsync()`。
 
@@ -495,7 +483,7 @@ Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定
 
 ####单一登录将 Microsoft 帐户与 Live SDK 配合使用
 
-若要对用户进行身份验证，必须在 Microsoft 帐户开发人员中心注册你的应用程序。然后，必须将此注册连接到你的移动服务。完成[注册应用以使用 Microsoft 帐户登录](/documentation/articles/mobile-services-how-to-register-microsoft-authentication/)中的步骤，以创建 Microsoft 帐户注册并将注册连接到你的移动服务。如果你同时拥有 Windows 应用商店和 Windows Phone 8/Silverlight 版本的应用，请先注册 Windows 应用商店版本。
+若要对用户进行身份验证，必须在 Microsoft 帐户开发人员中心注册你的应用程序。然后，必须将此注册连接到你的移动服务。完成[注册应用以使用 Microsoft 帐户登录](./mobile-services-how-to-register-microsoft-authentication.md)中的步骤，以创建 Microsoft 帐户注册并将注册连接到你的移动服务。如果你同时拥有 Windows 应用商店和 Windows Phone 8/Silverlight 版本的应用，请先注册 Windows 应用商店版本。
 
 下面的代码使用 Live SDK 进行身份验证，并使用返回的令牌来登录到你的移动服务。
 
@@ -546,7 +534,6 @@ Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定
         }
     }
 
-
 ###<a name="caching"></a>缓存身份验证令牌
 在某些情况下，完成首次用户身份验证后，可以避免调用 login 方法。你可以使用适用于 Windows 应用商店应用程序的 [PasswordVault] 来缓存当前用户首次登录时使用的标识，以后每次该用户登录时，系统都会检查缓存中是否存在该用户标识。如果缓存为空，则用户仍然需要完成整个登录过程。
 
@@ -574,7 +561,6 @@ Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定
 	 // Log out
 	client.Logout();
 	vault.Remove(vault.Retrieve("Facebook", user.UserId));
-
 
 对于 Windows Phone 应用程序，可以使用 [ProtectedData] 类加密和缓存数据，并在隔离的存储中存储敏感信息。
 
@@ -706,10 +692,8 @@ Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定
 
 <!-- Images. -->
 
-
-
 <!-- URLs. -->
-[向应用程序添加身份验证]: /documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users/
+[向应用程序添加身份验证]: ./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users.md
 [PasswordVault]: http://msdn.microsoft.com/zh-cn/library/windows/apps/windows.security.credentials.passwordvault.aspx
 [ProtectedData]: http://msdn.microsoft.com/zh-cn/library/system.security.cryptography.protecteddata%28VS.95%29.aspx
 [LoginAsync 方法]: http://msdn.microsoft.com/zh-cn/library/windowsazure/microsoft.windowsazure.mobileservices.mobileserviceclientextensions.loginasync.aspx
@@ -718,8 +702,8 @@ Windows 支持使用定期通知（提取通知）更新动态磁贴。启用定
 [UserID]: http://msdn.microsoft.com/zh-cn/library/windowsazure/microsoft.windowsazure.mobileservices.mobileserviceuser.userid.aspx
 [MobileServiceAuthenticationToken]: http://msdn.microsoft.com/zh-cn/library/windowsazure/microsoft.windowsazure.mobileservices.mobileserviceuser.mobileserviceauthenticationtoken.aspx
 [ASCII control codes C0 and C1]: http://en.wikipedia.org/wiki/Data_link_escape_character#C1_set
-[CLI to manage Mobile Services tables]: /documentation/articles/virtual-machines-command-line-tools/#Commands_to_manage_mobile_services
-[乐观并发教程]: /documentation/articles/mobile-services-windows-store-dotnet-handle-database-conflicts/
+[CLI to manage Mobile Services tables]: ../virtual-machines-command-line-tools.md#Commands_to_manage_mobile_services
+[乐观并发教程]: ./mobile-services-windows-store-dotnet-handle-database-conflicts.md
 [MobileServiceClient]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobileservices.mobileserviceclient.aspx
 
 [IncludeTotalCount]: http://msdn.microsoft.com/zh-cn/library/windowsazure/dn250560.aspx

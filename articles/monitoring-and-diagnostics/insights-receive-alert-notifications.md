@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="接收警报通知" 
-	description="在满足警报规则条件时收到通知。" 
-	authors="stepsic-microsoft-com" 
-	manager="ronmart" 
-	editor="" 
-	services="azure-portal" 
-	documentationCenter="na"/>
+---
+title: 接收警报通知
+description: 在满足警报规则条件时收到通知。
+authors: stepsic-microsoft-com
+manager: ronmart
+editor: 
+services: azure-portal
+documentationCenter: na
 
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/08/2015"
-	wacn.date="10/17/2016"
-	ms.author="robb"/>
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/08/2015
+wacn.date: 10/17/2016
+ms.author: robb
+---
 
 # 接收警报通知
 
@@ -57,16 +57,15 @@
 
 ![事件](./media/insights-receive-alert-notifications/Insights_EditAlert.png)
 
-
 当然可以编辑此警报规则，如果想要暂时停止接收有关通知，可以**禁用**或**启用**它。
 
 ## 后续步骤
 
-* [为你的警报配置 webhook](/documentation/articles/insights-webhooks-alerts/) 可将通知路由到各个通道
-* [监视服务指标](/documentation/articles/insights-how-to-customize-monitoring/)以确保你的服务可用且响应迅速。
-* [启用监视和诊断](/documentation/articles/insights-how-to-use-diagnostics/)以收集有关服务的详细高频率指标。
-* 在要确切了解代码在云中的执行情况时[监视应用程序性能](/documentation/articles/insights-perf-analytics/)。
-* [查看事件并审核日志](/documentation/articles/insights-debugging-with-events/)以了解在服务中发生的所有事件。
-* [跟踪服务运行状况](/documentation/articles/insights-service-health/)以在 Azure 遇到性能下降或服务中断时及时发现。
+* [为你的警报配置 webhook](./insights-webhooks-alerts.md) 可将通知路由到各个通道
+* [监视服务指标](./insights-how-to-customize-monitoring.md)以确保你的服务可用且响应迅速。
+* [启用监视和诊断](./insights-how-to-use-diagnostics.md)以收集有关服务的详细高频率指标。
+* 在要确切了解代码在云中的执行情况时[监视应用程序性能](./insights-perf-analytics.md)。
+* [查看事件并审核日志](./insights-debugging-with-events.md)以了解在服务中发生的所有事件。
+* [跟踪服务运行状况](./insights-service-health.md)以在 Azure 遇到性能下降或服务中断时及时发现。
  
 <!---HONumber=Mooncake_0503_2016-->

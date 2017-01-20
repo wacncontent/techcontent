@@ -1,23 +1,22 @@
-<properties
-    pageTitle="Azure Resource Manager 请求限制 | Azure"
-    description="介绍在达到订阅限制后如何对 Azure Resource Manager 请求进行限制。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: Azure Resource Manager 请求限制 | Azure
+description: 介绍在达到订阅限制后如何对 Azure Resource Manager 请求进行限制。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="e1047233-b8e4-4232-8919-3268d93a3824"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="10/07/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: e1047233-b8e4-4232-8919-3268d93a3824
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/07/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 限制 Resource Manager 请求数
 对于每个订阅和租户，Resource Manager 将读取请求数限制为 15,000/小时，将写入请求数限制为 1,200/小时。如果应用程序或脚本达到了这些限制，则需对请求数进行限制。本主题介绍如何在达到限制之前确定剩余的请求数，以及在达到限制后如何响应。

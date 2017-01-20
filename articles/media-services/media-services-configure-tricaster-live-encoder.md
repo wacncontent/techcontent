@@ -1,41 +1,40 @@
-<properties 
-	pageTitle="将 NewTek TriCaster 编码器配置为发送单比特率实时流" 
-	description="本主题说明如何配置 Tricaster 实时编码器，以便将单比特率流发送到 AMS 频道进行实时编码。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="cenkdin" 
-	manager="erikre" 
-	editor=""/>
+---
+title: 将 NewTek TriCaster 编码器配置为发送单比特率实时流
+description: 本主题说明如何配置 Tricaster 实时编码器，以便将单比特率流发送到 AMS 频道进行实时编码。
+services: media-services
+documentationCenter: 
+authors: cenkdin
+manager: erikre
+editor: 
 
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="ne" 
-	ms.topic="article" 
-	ms.date="10/12/2016" 
-	wacn.date="12/16/2016" 
-	ms.author="juliako;cenkd;anilmur"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: ne
+ms.topic: article
+ms.date: 10/12/2016
+wacn.date: 12/16/2016
+ms.author: juliako;cenkd;anilmur
+---
 
 #使用 NewTek TriCaster 编码器发送单比特率实时流
 
-> [AZURE.SELECTOR]
-- [Tricaster](/documentation/articles/media-services-configure-tricaster-live-encoder/)
-- [Elemental Live](/documentation/articles/media-services-configure-elemental-live-encoder/)
-- [Wirecast](/documentation/articles/media-services-configure-wirecast-live-encoder/)
-- [FMLE](/documentation/articles/media-services-configure-fmle-live-encoder/)
+> [!div class="op_single_selector"]
+- [Tricaster](./media-services-configure-tricaster-live-encoder.md)
+- [Elemental Live](./media-services-configure-elemental-live-encoder.md)
+- [Wirecast](./media-services-configure-wirecast-live-encoder.md)
+- [FMLE](./media-services-configure-fmle-live-encoder.md)
 
-本主题说明如何配置 [NewTek TriCaster](http://newtek.com/products/tricaster-40.html) 实时编码器，以便将单比特率流发送到 AMS 频道进行实时编码。有关详细信息，请参阅[使用能够通过 Azure 媒体服务执行实时编码的频道](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)。
+本主题说明如何配置 [NewTek TriCaster](http://newtek.com/products/tricaster-40.html) 实时编码器，以便将单比特率流发送到 AMS 频道进行实时编码。有关详细信息，请参阅[使用能够通过 Azure 媒体服务执行实时编码的频道](./media-services-manage-live-encoder-enabled-channels.md)。
 
-本教程演示了如何通过 Azure 媒体服务浏览器 (AMSE) 工具管理 Azure 媒体服务 (AMS)。此工具仅在 Windows 电脑上运行。如果使用的是 Mac 或 Linux，则可使用 Azure 经典管理门户创建[频道](/documentation/articles/media-services-portal-creating-live-encoder-enabled-channel/#create-a-channel)和[节目](/documentation/articles/media-services-portal-creating-live-encoder-enabled-channel/#create-and-manage-a-program)。
+本教程演示了如何通过 Azure 媒体服务浏览器 (AMSE) 工具管理 Azure 媒体服务 (AMS)。此工具仅在 Windows 电脑上运行。如果使用的是 Mac 或 Linux，则可使用 Azure 经典管理门户创建[频道](./media-services-portal-creating-live-encoder-enabled-channel.md#create-a-channel)和[节目](./media-services-portal-creating-live-encoder-enabled-channel.md#create-and-manage-a-program)。
 
->[AZURE.NOTE]使用 Tricaster 将贡献源发送到已启用实时编码的 AMS 频道时，如果使用了 Tricaster 的某些功能（例如，在源之间快速剪切，或者切入/切出静态图像），实时事件可能会出现视频/音频抖动。AMS 团队正在努力解决这些问题，在此之前，不建议使用这些功能。
-
+>[!NOTE]使用 Tricaster 将贡献源发送到已启用实时编码的 AMS 频道时，如果使用了 Tricaster 的某些功能（例如，在源之间快速剪切，或者切入/切出静态图像），实时事件可能会出现视频/音频抖动。AMS 团队正在努力解决这些问题，在此之前，不建议使用这些功能。
 
 ##先决条件
 
-- [创建 Azure 媒体服务帐户](/documentation/articles/media-services-create-account/)
-- 确保在运行流式处理终结点时，至少为其分配了一个流式处理单元。有关详细信息，请参阅[在媒体服务帐户中管理流式处理终结点](/documentation/articles/media-services-manage-origins/)
+- [创建 Azure 媒体服务帐户](./media-services-create-account.md)
+- 确保在运行流式处理终结点时，至少为其分配了一个流式处理单元。有关详细信息，请参阅[在媒体服务帐户中管理流式处理终结点](./media-services-manage-origins.md)
 - 安装最新版本的 [AMSE](https://github.com/Azure/Azure-Media-Services-Explorer) 工具。
 - 启动该工具并连接到 AMS 帐户。
 
@@ -53,18 +52,16 @@
 
 2. 指定频道名称，说明字段为选填字段。在“频道设置”下针对“实时编码”选项选择“标准”，将“输入协议”设置为“RTMP”。所有其他设置可保留原样。
 
-
 确保选中“立即启动新频道”。
 
 3. 单击“创建频道”。
 ![tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster2.png)
 
->[AZURE.NOTE] 启动频道可能需要长达 20 分钟的时间。
+>[!NOTE] 启动频道可能需要长达 20 分钟的时间。
 
+启动频道时，你可以[配置编码器](./media-services-configure-tricaster-live-encoder.md#configure_tricaster_rtmp)。
 
-启动频道时，你可以[配置编码器](/documentation/articles/media-services-configure-tricaster-live-encoder/#configure_tricaster_rtmp)。
-
->[AZURE.IMPORTANT] 请注意，只要频道进入就绪状态，就会开始计费。有关详细信息，请参阅[频道的状态](/documentation/articles/media-services-manage-live-encoder-enabled-channels/#states)。
+>[!IMPORTANT] 请注意，只要频道进入就绪状态，就会开始计费。有关详细信息，请参阅[频道的状态](./media-services-manage-live-encoder-enabled-channels.md#states)。
 
 ##<a id="configure_tricaster_rtmp"></a>配置 NewTek TriCaster 编码器
 
@@ -83,7 +80,6 @@
 - 编码解码器：AAC (LC)
 - 比特率：192 kbps
 - 采样速率：44.1 kHz
-
 
 ###配置步骤
 
@@ -124,7 +120,7 @@
 
 	![tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster11.png)
 
->[AZURE.IMPORTANT] 在单击“流”之前，**必须**确保频道已就绪。
+>[!IMPORTANT] 在单击“流”之前，**必须**确保频道已就绪。
 >另外，请确保不要让频道在没有输入/贡献源的情况下处于就绪状态的时间超出 15 分钟。
 
 ##测试播放
@@ -135,7 +131,7 @@
 
 如果流出现在播放器中，则编码器已正确配置，可以连接到 AMS。
 
-如果收到错误，则需重置频道并调整编码器设置。请参阅[故障排除](/documentation/articles/media-services-troubleshooting-live-streaming/)主题以获取相关指导。
+如果收到错误，则需重置频道并调整编码器设置。请参阅[故障排除](./media-services-troubleshooting-live-streaming.md)主题以获取相关指导。
 
 ##创建节目
 
@@ -154,9 +150,8 @@
 
 现在可以将流嵌入到播放器中，也可将其分发给受众进行实时观看。
 
-
 ## 故障排除
 
-请参阅[故障排除](/documentation/articles/media-services-troubleshooting-live-streaming/)主题以获取相关指导。
+请参阅[故障排除](./media-services-troubleshooting-live-streaming.md)主题以获取相关指导。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

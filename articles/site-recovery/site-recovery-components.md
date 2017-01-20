@@ -1,24 +1,22 @@
-<properties
-    pageTitle="站点恢复的工作原理 | Azure"
-    description="本文提供站点恢复体系结构的概述"
-    services="site-recovery"
-    documentationcenter=""
-    author="rayne-wiselman"
-    manager="jwhit"
-    editor="" />  
+---
+title: 站点恢复的工作原理 | Azure
+description: 本文提供站点恢复体系结构的概述
+services: site-recovery
+documentationcenter: 
+author: rayne-wiselman
+manager: jwhit
+editor: 
 
-
-<tags
-    ms.assetid="c413efcd-d750-4b22-b34b-15bcaa03934a"
-    ms.service="site-recovery"
-    ms.workload="backup-recovery"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="11/14/2016"
-    wacn.date="01/03/2017"
-    ms.author="raynew" />  
-
+ms.assetid: c413efcd-d750-4b22-b34b-15bcaa03934a
+ms.service: site-recovery
+ms.workload: backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 11/14/2016
+wacn.date: 01/03/2017
+ms.author: raynew
+---
 
 # Azure Site Recovery 的工作原理
 
@@ -26,24 +24,21 @@
 
 请将任何评论或问题发布到本文底部，或者发布到 [Azure 恢复服务论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=hypervrecovmgr)。
 
-
 ## 概述
 
 组织需要制定 BCDR 策略来确定应用、工作负荷和数据如何在计划和非计划停机期间保持运行和可用，并尽快恢复正常运行情况。BCDR 策略应保持业务数据的安全性和可恢复性，并确保在发生灾难时工作负荷持续可用。
 
-站点恢复是一项 Azure 服务，可以通过协调从本地物理服务器和虚拟机到云 (Azure) 或辅助数据中心的的复制，来为 BCDR 策略提供辅助。当主要位置发生故障时，你可以故障转移到辅助位置，使应用和工作负荷保持可用。当主要位置恢复正常时，你可以故障转移回到主要位置。有关详细信息，请参阅[什么是 Site Recovery？](/documentation/articles/site-recovery-overview/)
+站点恢复是一项 Azure 服务，可以通过协调从本地物理服务器和虚拟机到云 (Azure) 或辅助数据中心的的复制，来为 BCDR 策略提供辅助。当主要位置发生故障时，你可以故障转移到辅助位置，使应用和工作负荷保持可用。当主要位置恢复正常时，你可以故障转移回到主要位置。有关详细信息，请参阅[什么是 Site Recovery？](./site-recovery-overview.md)
 
 ## 部署方案
 
 部署站点恢复可在许多方案中协调复制：
 
-
 - **复制 Hyper-V VM（不包含 VMM）**：可将不由 VMM 管理的 Hyper-V VM 复制到 Azure。
 - **复制在 System Center VMM 云中管理的 Hyper-V VM**：可将 VMM 云中的 Hyper-V 主机服务器上运行的本地 Hyper-V 虚拟机复制到 Azure 或辅助数据中心。可以使用标准 Hyper-V 副本或使用 SAN 复制进行复制。
-- **迁移 VM**：可使用站点恢复在区域之间[迁移 Azure IaaS VM](/documentation/articles/site-recovery-migrate-azure-to-azure/)，或者[将 AWS Windows 实例迁移](/documentation/articles/site-recovery-migrate-aws-to-azure/)到 Azure IaaS VM。目前仅支持迁移，这意味着你可以故障转移这些 VM，但无法故障回复。
+- **迁移 VM**：可使用站点恢复在区域之间[迁移 Azure IaaS VM](./site-recovery-migrate-azure-to-azure.md)，或者[将 AWS Windows 实例迁移](./site-recovery-migrate-aws-to-azure.md)到 Azure IaaS VM。目前仅支持迁移，这意味着你可以故障转移这些 VM，但无法故障回复。
 
-Site Recovery 可以复制这些 VM 和物理服务器上运行的大多数应用。有关受支持应用的完整摘要，请参阅 [Azure Site Recovery 可以保护哪些工作负荷？](/documentation/articles/site-recovery-workload/)
-
+Site Recovery 可以复制这些 VM 和物理服务器上运行的大多数应用。有关受支持应用的完整摘要，请参阅 [Azure Site Recovery 可以保护哪些工作负荷？](./site-recovery-workload.md)
 
 ### Azure
 
@@ -52,7 +47,6 @@ Site Recovery 可以复制这些 VM 和物理服务器上运行的大多数应�
 	- **Azure 存储空间**：需要使用 Azure 存储帐户来存储复制的数据。复制的数据存储在 Azure 存储空间，Azure VM 在发生故障转移时启动。
 	- **Azure 网络**：需要启动 Azure 虚拟网络，以便发生故障转移时 Azure VM 能够连接到其中。
 	
-
 ## 将 VMM 云中的 Hyper-V VM 复制到 Azure
 
 若要在站点恢复部署期间部署此方案，需要在 VMM 服务器上安装 Azure Site Recovery 提供程序。提供程序通过 Internet 使用 Site Recovery 服务协调和安排复制。Site Recovery 部署期间在 Hyper-V 主机服务器上安装了 Azure 恢复服务代理，并且通过 HTTPS 443 在该代理与 Azure 存储空间之间复制数据。来自提供程序和代理的通信都是安全且经过加密的。Azure 存储空间中的复制数据也已加密。
@@ -69,7 +63,7 @@ Site Recovery 可以复制这些 VM 和物理服务器上运行的大多数应�
 
 	![VMM 到 Azure](./media/site-recovery-components/arch-onprem-onprem-azure-vmm.png)
 
-深入了解确切的[部署要求](/documentation/articles/site-recovery-vmm-to-azure/#before-you-start)。
+深入了解确切的[部署要求](./site-recovery-vmm-to-azure.md#before-you-start)。
 	
 ### 本地辅助站点
  
@@ -80,7 +74,6 @@ Site Recovery 可以复制这些 VM 和物理服务器上运行的大多数应�
 ### Azure
 
 使用 InMage Scout 部署此方案。若要获取该程序，需有一个 Azure 订阅。创建站点恢复保管库之后，可以下载 InMage Scout 并安装最新的更新，以设置部署。
-
 
 ## 将 Hyper-V VM 复制到 Azure（不使用 VMM）
 
@@ -98,8 +91,7 @@ Site Recovery 可以复制这些 VM 和物理服务器上运行的大多数应�
 - **Azure 帐户**：需要一个 Azure 帐户。
 - **Azure 存储空间**：需要使用 Azure 存储帐户来存储复制的数据。复制的数据存储在 Azure 空间，Azure VM 在发生故障转移时启动。
 
-[详细了解](/documentation/articles/site-recovery-hyper-v-site-to-azure/#before-you-start)部署要求。
-
+[详细了解](./site-recovery-hyper-v-site-to-azure.md#before-you-start)部署要求。
 
 ## 将 VMM 云中的 Hyper-V VM 复制到 Azure
 
@@ -119,7 +111,7 @@ Site Recovery 可以复制这些 VM 和物理服务器上运行的大多数应�
 - **Azure 存储空间**：需要使用 Azure 存储帐户来存储复制的数据。复制的数据存储在 Azure 空间，Azure VM 在发生故障转移时启动。
 - **Azure 网络**：如果想要确保 Azure VM 在故障转移后连接到网络，则需要设置网络映射。为此，需要设置 Azure 网络。
 
-[详细了解](/documentation/articles/site-recovery-vmm-to-azure/#before-you-start)部署要求。
+[详细了解](./site-recovery-vmm-to-azure.md#before-you-start)部署要求。
 
 ## 将 Hyper-V VM 复制到辅助数据中心
 
@@ -137,8 +129,7 @@ Site Recovery 可以复制这些 VM 和物理服务器上运行的大多数应�
 
 需要一个 Azure 订阅。
 
-[详细了解](/documentation/articles/site-recovery-vmm-to-vmm/#before-you-start)部署要求。
-
+[详细了解](./site-recovery-vmm-to-vmm.md#before-you-start)部署要求。
 
 ## 使用 SAN 复制将 Hyper-V VM 复制到辅助数据中心
 
@@ -157,8 +148,7 @@ Site Recovery 可以复制这些 VM 和物理服务器上运行的大多数应�
 
 需要一个 Azure 订阅。
 
-[详细了解](/documentation/articles/site-recovery-vmm-san/#before-you-start)部署要求。
-
+[详细了解](./site-recovery-vmm-san.md#before-you-start)部署要求。
 
 ## Hyper-V 保护生命周期
 
@@ -172,12 +162,10 @@ Site Recovery 可以复制这些 VM 和物理服务器上运行的大多数应�
 	- **复制错误**：如果发生复制错误，将会进行内置重试。如果是无法恢复的错误，例如身份验证或授权错误，或者副本计算机处于无效状态，则不会重试。如果是可恢复的错误，例如网络错误，或磁盘空间/内存不足，则会发生重试。重试的间隔将会递增（依次为 1、2、4、8、10、30 分钟）。
 5. **计划/非计划的故障转移**：如果需要，可以运行计划或非计划的故障转移。如果运行计划的故障转移，则源 VM 将关闭以确保不会丢失数据。副本 VM 在创建后处于待提交状态。你需要提交它们以完成故障转移，除非使用 SAN 复制，在此情况下提交是自动的。主站点已启动并运行之后，可以发生故障转移。如果已复制到 Azure，则自动进行反向复制。否则你需要手动开始反向复制。
  
-
 ![工作流](./media/site-recovery-components/arch-hyperv-azure-workflow.png)  
-
 
 ## 后续步骤
 
-[准备部署](/documentation/articles/site-recovery-best-practices/)。
+[准备部署](./site-recovery-best-practices.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

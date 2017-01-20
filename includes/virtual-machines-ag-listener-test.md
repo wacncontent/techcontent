@@ -10,7 +10,7 @@
 
 		sqlcmd -S "<ListenerName>,<EndpointPort>" -d "<DatabaseName>" -Q "select @@servername, db_name()" -l 15
 
-> [AZURE.NOTE]如果 EndpointPort 值为 1433，则不需要在调用时指定它。前面的调用还假定客户端计算机加入了同一个域，并且调用方已被授予使用 windows 身份验证访问数据库的权限。
+> [!NOTE]如果 EndpointPort 值为 1433，则不需要在调用时指定它。前面的调用还假定客户端计算机加入了同一个域，并且调用方已被授予使用 windows 身份验证访问数据库的权限。
 
 在测试侦听器时，请务必对可用性组进行故障转移，以确保客户端可以在故障转移之间连接到侦听器。
 

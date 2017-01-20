@@ -1,35 +1,33 @@
-<properties 
-	pageTitle="将现有 Blob 复制到媒体服务资产中" 
-	description="本主题说明如何将现有 blob 复制到媒体服务资产。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 将现有 Blob 复制到媒体服务资产中
+description: 本主题说明如何将现有 blob 复制到媒体服务资产。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="ne" 
-	ms.topic="article" 
-	ms.date="10/13/2016" 
-	wacn.date="11/14/2016" 
-	ms.author="juliako"/>  
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: ne
+ms.topic: article
+ms.date: 10/13/2016
+wacn.date: 11/14/2016
+ms.author: juliako
+---
 
 #将现有 Blob 复制到媒体服务资产中
 
 本主题介绍如何将存储帐户中的 blob 复制到新的 Azure 媒体服务资产。
 
-Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存在于不与媒体服务帐户关联的存储帐户中。本主题演示如何将 blob 从存储帐户复制到媒体服务资产。请注意，你还可以跨数据中心复制。但是，这样做可能会产生费用。有关定价的详细信息，请参阅[数据传输](/pricing/#header-11)。
+Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存在于不与媒体服务帐户关联的存储帐户中。本主题演示如何将 blob 从存储帐户复制到媒体服务资产。请注意，你还可以跨数据中心复制。但是，这样做可能会产生费用。有关定价的详细信息，请参阅[数据传输](https://www.azure.cn/pricing/#header-11)。
 
->[AZURE.NOTE] 在不使用媒体服务 API 的情况下，你不应该尝试更改媒体服务生成的 BLOB 容器内容。
+>[!NOTE] 在不使用媒体服务 API 的情况下，你不应该尝试更改媒体服务生成的 BLOB 容器内容。
 
 ##先决条件
 
-- 在新的或现有的 Azure 订阅中拥有两个媒体服务帐户。请参阅主题[如何创建媒体服务帐户](/documentation/articles/media-services-create-account/)。
+- 在新的或现有的 Azure 订阅中拥有两个媒体服务帐户。请参阅主题[如何创建媒体服务帐户](./media-services-create-account.md)。
 - 操作系统：Windows 10、Windows 7、Windows 2008 R2 或 Windows 8。
 - .NET Framework 4.5。
 - Visual Studio 2010 SP1（专业版、高级专业版、旗舰版或学习版）或更高版本。
@@ -70,7 +68,6 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
 		  <add key="ExternalStorageAccountKey" value="External-Storage-Account-Key"/>
 		</appSettings>
 
-
 ##将 Blob 从存储帐户复制到媒体服务资产中
 
 下面的代码示例执行以下任务：
@@ -81,7 +78,7 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
 1. 创建一个新资产。为此资产创建的 Blob 容器位于 \_destinationStorageAccount 中。
 1. 使用 Azure 存储 SDK 将指定的 Blob 复制到与此资产关联的容器中。
 
-	>[AZURE.NOTE]如果定位符已过期，复制操作不会引发异常。
+	>[!NOTE]如果定位符已过期，复制操作不会引发异常。
 
 1. 由于在本示例中我们要复制平滑流文件，因此示例演示了如何将 .ism 文件设置为主文件。例如，如果我们复制了一个 .mp4 文件，则该 mp4 文件将设置为主文件。
 1. 为与此资产关联的 OnDemandOrigin 定位符创建平滑流 URL。
@@ -298,7 +295,6 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
 	                        System.Threading.Thread.Sleep(1000);
 	                    }
 	
-	
 	                    // Display the size of the destination blob.
 	                    Console.WriteLine(destinationBlob.Properties.Length);
 	
@@ -322,7 +318,5 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
 	                ismAssetFiles.First().Update();
 	            }
 	        }
-
- 
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

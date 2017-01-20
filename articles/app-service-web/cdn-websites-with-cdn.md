@@ -1,38 +1,36 @@
-<properties 
-	pageTitle="在 Azure App Service 中使用 Azure CDN" 
-	description="本教程演示如何将 Web 应用部署到 Azure App Service，以便从集成的 Azure CDN 终结点提供内容" 
-	services="app-service\web,cdn" 
-	documentationCenter=".net" 
-	authors="cephalin" 
-	manager="wpickett" 
-	editor="jimbe"/>
+---
+title: 在 Azure App Service 中使用 Azure CDN
+description: 本教程演示如何将 Web 应用部署到 Azure App Service，以便从集成的 Azure CDN 终结点提供内容
+services: app-service\web,cdn
+documentationCenter: .net
+authors: cephalin
+manager: wpickett
+editor: jimbe
 
-<tags 
-	ms.service="app-service" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="07/01/2016" 
-	wacn.date="12/26/2016" 
-	ms.author="cephalin"/>
-
-
+ms.service: app-service
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/01/2016
+wacn.date: 12/26/2016
+ms.author: cephalin
+---
 
 # 在 Azure App Service 中使用 Azure CDN
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
-[应用服务](/documentation/articles/app-service-changes-existing-services/)可以与 [Azure CDN](/home/features/cdn/) 集成，增强[应用服务 Web 应用](/documentation/articles/app-service-changes-existing-services/)中固有的全局缩放功能，在全国通过靠近客户的服务器节点提供 Web 应用内容（如需已更新的包含所有最新节点位置的列表，请单击[此处](http://msdn.microsoft.com/zh-cn/library/azure/gg680302.aspx)）。在特定情况下（例如提供静态映像），此集成可以大幅提高 Azure 应用服务 Web 应用的性能，在全国显著改善 Web 应用的用户体验。
+[应用服务](./app-service-changes-existing-services.md)可以与 [Azure CDN](https://www.azure.cn/home/features/cdn/) 集成，增强[应用服务 Web 应用](./app-service-changes-existing-services.md)中固有的全局缩放功能，在全国通过靠近客户的服务器节点提供 Web 应用内容（如需已更新的包含所有最新节点位置的列表，请单击[此处](http://msdn.microsoft.com/zh-cn/library/azure/gg680302.aspx)）。在特定情况下（例如提供静态映像），此集成可以大幅提高 Azure 应用服务 Web 应用的性能，在全国显著改善 Web 应用的用户体验。
 
 将 Web 应用与 Azure CDN 集成具有以下优点：
 
-- 在 Web 应用的[持续部署](/documentation/articles/app-service-continuous-deployment/)过程中集成内容部署（映像、脚本和样式表）
+- 在 Web 应用的[持续部署](./app-service-continuous-deployment.md)过程中集成内容部署（映像、脚本和样式表）
 - 轻松升级 Azure 应用服务的 Web 应用中的 NuGet 包，例如 jQuery 或 Bootstrap 版本
 - 在同一 Visual Studio 界面中管理 Web 应用程序和 CDN 提供的内容
 - 将 ASP.NET 绑定和缩减与 Azure CDN 集成
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
 
 ## 要生成的项目 ##
 
@@ -42,11 +40,11 @@
 
 本教程需要满足以下前提条件：
 
--	有效的 [Azure 帐户](/pricing/1rmb-trial/)
+-	有效的 [Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)
 -	带有[用于 .NET 的 Azure SDK](http://go.microsoft.com/fwlink/p/?linkid=323510&clcid=0x409) 的 Visual Studio 2015如果使用 Visual Studio，步骤可能有所不同。
 
-> [AZURE.NOTE] 完成本教程需要有一个 Azure 帐户：
-> + 可以[注册一个 Azure 帐户](/pricing/1rmb-trial/) — 获取可用来试用付费版 Azure 服务的信用额度，用完信用额度后，仍可以保留帐户和使用免费的 Azure 服务（如 Web 应用）。
+> [!NOTE] 完成本教程需要有一个 Azure 帐户：
+> + 可以[注册一个 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/) — 获取可用来试用付费版 Azure 服务的信用额度，用完信用额度后，仍可以保留帐户和使用免费的 Azure 服务（如 Web 应用）。
 
 ##<a name="deploy-a-web-app-to-azure-with-an-integrated-cdn-endpoint"></a> 将 Web 应用部署到具有集成 CDN 终结点的 Azure ##
 
@@ -56,31 +54,25 @@
 
 	![](./media/cdn-websites-with-cdn/1-new-project.png)  
 
-
 3. 选择“MVC”，然后单击“确定”。
 
 	![](./media/cdn-websites-with-cdn/2-webapp-template.png)  
-
 
 4. 如果尚未登录 Azure 帐户，请单击右上角的帐户图标，并按照对话框提示登录 Azure 帐户。完成后，如下所示配置应用，然后单击“新建”来为应用创建新应用服务计划。
 
 	![](./media/cdn-websites-with-cdn/3-configure-webapp.png)  
 
-
 5. 如下所示在对话框中配置一个新应用服务计划，然后单击“确定”。
 
 	![](./media/cdn-websites-with-cdn/4-app-service-plan.png)  
-
 
 8. 单击“创建”以创建 Web 应用。
 
 	![](./media/cdn-websites-with-cdn/5-create-website.png)  
 
-
 9. 创建完 ASP.NET 应用程序后，可以将其发布到 Azure，只需在“Azure 应用服务活动”窗格中单击“立刻将 `<app name>` 发布到此 Web 应用”即可。单击“发布”完成此过程。
 
 	![](./media/cdn-websites-with-cdn/6-publish-website.png)  
-
 
 	发布完成后，可在浏览器中看到发布的 Web 应用。
 
@@ -89,27 +81,23 @@
 
 	![](./media/cdn-websites-with-cdn/7-create-cdn.png)  
 
-
-	> [AZURE.NOTE] 创建 CDN 终结点以后，管理门户就会显示其 URL 以及所集成的源域。不过，需要一定的时间才能将新 CDN 终结点的配置完全传播到所有 CDN 节点位置。
+	> [!NOTE] 创建 CDN 终结点以后，管理门户就会显示其 URL 以及所集成的源域。不过，需要一定的时间才能将新 CDN 终结点的配置完全传播到所有 CDN 节点位置。
 
 3. 返回经典管理门户，在“CDN”选项卡中，单击刚才创建的 CDN 终结点的名称。
 
 	![](./media/cdn-websites-with-cdn/8-select-cdn.png)  
 
-
 3. 单击“启用查询字符串”在 CDN 缓存中启用查询字符串。启用此功能后，通过不同的查询字符串进行访问的同一链接就可以缓存为不同的项。
 
 	![](./media/cdn-websites-with-cdn/9-enable-query-string.png)  
 
-
 启用此功能后，通过不同的查询字符串进行访问的同一链接就可以缓存为不同的项。
 
->[AZURE.NOTE] 虽然启用查询字符串对于教程的此部分来说不是必需的，但为方便起见，最好是尽早启用此功能，因为在这里所做的任何更改都需要一定的时间才能传播到所有 CDN 节点，而你并不想让任何非查询字符串支持的内容充斥 CDN 缓存（稍后将讨论如何更新 CDN 内容）。
+>[!NOTE] 虽然启用查询字符串对于教程的此部分来说不是必需的，但为方便起见，最好是尽早启用此功能，因为在这里所做的任何更改都需要一定的时间才能传播到所有 CDN 节点，而你并不想让任何非查询字符串支持的内容充斥 CDN 缓存（稍后将讨论如何更新 CDN 内容）。
 
 2. 现在，导航到 CDN 终结点地址。如果终结点已准备就绪，则会看到 Web 应用。如果收到 **HTTP 404** 错误，则说明 CDN 终结点尚未准备好。CDN 配置传播到所有边缘节点可能需要长达 1 小时。
 
 	![](./media/cdn-websites-with-cdn/11-access-success.png)  
-
 
 1. 接下来，可尝试访问 ASP.NET 项目中的 **~/Content/bootstrap.css** 文件。在浏览器窗口中，导航到 **http://*&lt;cdnName>*.azureedge.net/Content/bootstrap.css**。在我的设置中，此 URL 为：
 
@@ -122,7 +110,6 @@
 	导航到 **http://*&lt;cdnName>*.azureedge.net/Content/bootstrap.css** 时，系统会提示下载 bootstrap.css，该文件来自你在 Azure 中的 Web 应用。
 
 	![](./media/cdn-websites-with-cdn/12-file-access.png)  
-
 
 你可以直接通过 CDN 终结点，采用类似方式访问 **http://*&lt;serviceName>*.chinacloudapp.cn/** 中提供的任何可公开访问的 URL。例如：
 
@@ -176,13 +163,11 @@
 
 ![](./media/cdn-websites-with-cdn/cdn-5-memegenerator.PNG)  
 
-
 你提供了一个简单的 `Index` 操作，让客户能够指定照片中的夸张元素，然后待这些元素发布到操作后制作表情包。由于这是 Chuck Norris，可以想见该页面会在全球热传。这是通过 Azure CDN 提供半动态内容的一个很好的示例。
 
 按照上述步骤设置此控制器操作：
 
 1. 在 *\\Controllers* 文件夹中，创建一个名为 *MemeGeneratorController.cs* 的 .cs 新文件，然后使用以下代码替换其中的内容。将 `~/Content/chuck.bmp` 替换为你的文件路径，将 `yourCDNName` 替换为你的 CDN 名称。
-
 
         using System;
         using System.Collections.Generic;
@@ -283,11 +268,9 @@
 
 	![](./media/cdn-websites-with-cdn/cdn-6-addview.PNG)  
 
-
 3.  接受下面的设置，然后单击“添加”。
 
 	![](./media/cdn-websites-with-cdn/cdn-7-configureview.PNG)  
-
 
 4. 打开这个新的 *Views\\MemeGenerator\\Index.cshtml*，将其中的内容替换为下面这个简单的 HTML，以便提交夸张元素：
 
@@ -407,7 +390,6 @@
                 "~/Content/bootstrap.css",
                 "~/Content/site.css"));
         }
-
 
 	请确保将 `<yourCDNName>` 替换为 Azure CDN 的名称。
 
@@ -565,11 +547,10 @@
 
 	![](./media/cdn-websites-with-cdn/13-test-fallback.png)  
 
-
 7. 刷新 Azure Web 应用的浏览器窗口。现在可看到所有脚本和样式表都已正常加载。
 
 ## 更多信息 
-- [Azure 内容交付网络 (CDN) 概述](/documentation/articles/cdn-overview/)
+- [Azure 内容交付网络 (CDN) 概述](../cdn/cdn-overview.md)
 - [ASP.NET 绑定和缩减](http://www.asp.net/mvc/tutorials/mvc-4/bundling-and-minification)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

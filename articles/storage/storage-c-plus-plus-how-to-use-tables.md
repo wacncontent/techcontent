@@ -1,35 +1,35 @@
-<properties
-    pageTitle="如何使用表存储 (C++) | Azure"
-    description="使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。"
-    services="storage"
-    documentationcenter=".net"
-    author="dineshmurthy"
-    manager="jahogg"
-    editor="tysonn" />  
+---
+title: 如何使用表存储 (C++) | Azure
+description: 使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。
+services: storage
+documentationcenter: .net
+author: dineshmurthy
+manager: jahogg
+editor: tysonn
 
-<tags
-    ms.assetid="f191f308-e4b2-4de9-85cb-551b82b1ea7c"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/16/2016"
-    wacn.date="12/05/2016"
-    ms.author="dineshm" />
+ms.assetid: f191f308-e4b2-4de9-85cb-551b82b1ea7c
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/16/2016
+wacn.date: 12/05/2016
+ms.author: dineshm
+---
 
 # 如何通过 C++ 使用表存储
 
-[AZURE.INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
+[!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 
 ## 概述  
 本指南将演示如何使用 Azure 表存储服务执行常见方案。示例用 C++ 编写，并使用[适用于 C++ 的 Azure 存储客户端库](https://github.com/Azure/azure-storage-cpp/blob/master/README.md)。涉及的方案包括**创建和删除表**，以及**使用表实体**。
 
->[AZURE.NOTE] 本指南主要面向适用于 C++ 的 Azure 存储客户端库 1.0.0 版及更高版本。建议的版本是存储空间客户端库 2.2.0，它可以通过 [NuGet](http://www.nuget.org/packages/wastorage) 或 [GitHub](https://github.com/Azure/azure-storage-cpp/) 获得。
+>[!NOTE] 本指南主要面向适用于 C++ 的 Azure 存储客户端库 1.0.0 版及更高版本。建议的版本是存储空间客户端库 2.2.0，它可以通过 [NuGet](http://www.nuget.org/packages/wastorage) 或 [GitHub](https://github.com/Azure/azure-storage-cpp/) 获得。
 
-[AZURE.INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
+[!INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建 C++ 应用程序
 在本指南中，将使用可在 C++ 应用程序内运行的存储功能。为此，需要安装适用于 C++ 的 Azure 存储客户端库，并在 Azure 订阅中创建 Azure 存储帐户。
@@ -48,12 +48,12 @@
 	#include "was/table.h"
 
 ## 设置 Azure 存储连接字符串  
-Azure 存储客户端使用存储连接字符串来存储用于访问数据管理服务的终结点和凭据。运行客户端应用程序时，必须提供以下格式的存储连接字符串。使用 [Azure 门户预览](https://portal.azure.cn)中列出的存储帐户的存储帐户名称和存储访问密钥作为 *AccountName* 和 *AccountKey* 值。有关存储帐户和访问密钥的信息，请参阅[关于 Azure 存储帐户](/documentation/articles/storage-create-storage-account/)。此示例演示如何声明一个静态字段以保存连接字符串：
+Azure 存储客户端使用存储连接字符串来存储用于访问数据管理服务的终结点和凭据。运行客户端应用程序时，必须提供以下格式的存储连接字符串。使用 [Azure 门户预览](https://portal.azure.cn)中列出的存储帐户的存储帐户名称和存储访问密钥作为 *AccountName* 和 *AccountKey* 值。有关存储帐户和访问密钥的信息，请参阅[关于 Azure 存储帐户](./storage-create-storage-account.md)。此示例演示如何声明一个静态字段以保存连接字符串：
 
 	// Define the connection string with your values.
 	const utility::string_t storage_connection_string(U("DefaultEndpointsProtocol=https;AccountName=your_storage_account;AccountKey=your_storage_account_key;EndpointSuffix=core.chinacloudapi.cn"));
 
-若要在本地基于 Windows 的计算机中测试应用程序，可以使用随 [Azure SDK](/downloads/) 一起安装的 Azure [存储模拟器](/documentation/articles/storage-use-emulator/)。存储模拟器是一种用于模拟本地开发计算机上提供的 Azure Blob、队列和表服务的实用程序。以下示例演示如何声明静态字段以将连接字符串保存到本地存储模拟器：
+若要在本地基于 Windows 的计算机中测试应用程序，可以使用随 [Azure SDK](/downloads/) 一起安装的 Azure [存储模拟器](./storage-use-emulator.md)。存储模拟器是一种用于模拟本地开发计算机上提供的 Azure Blob、队列和表服务的实用程序。以下示例演示如何声明静态字段以将连接字符串保存到本地存储模拟器：
 
 	// Define the connection string with Azure storage emulator.
 	const utility::string_t storage_connection_string(U("UseDevelopmentStorage=true;"));  
@@ -89,7 +89,7 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 	table.create_if_not_exists();  
 
 ## 将实体添加到表
-若要将实体添加到表，请创建一个新的 **table_entity** 对象并将其传递到 **table_operation::insert_entity**。以下代码使用客户的名字作为行键，并使用姓氏作为分区键。实体的分区键和行键共同唯一地标识表中的实体。查询分区键相同的实体的速度快于查询分区键不同的实体的速度，但使用不同的分区键可实现更高的并行操作可伸缩性。有关详细信息，请参阅 [Azure 存储性能和可伸缩性清单](/documentation/articles/storage-performance-checklist/)。
+若要将实体添加到表，请创建一个新的 **table_entity** 对象并将其传递到 **table_operation::insert_entity**。以下代码使用客户的名字作为行键，并使用姓氏作为分区键。实体的分区键和行键共同唯一地标识表中的实体。查询分区键相同的实体的速度快于查询分区键不同的实体的速度，但使用不同的分区键可实现更高的并行操作可伸缩性。有关详细信息，请参阅 [Azure 存储性能和可伸缩性清单](./storage-performance-checklist.md)。
 
 以下代码创建了包含要存储的某些客户数据的 **table_entity** 类的新实例。接下来，该代码调用 **table_operation::insert_entity** 以创建一个 **table_operation** 对象，以便将实体插入表中，并将新的表实体与之关联。最后，该代码调用 **cloud_table** 对象的 execute 方法。而新的 **table_operation** 向表服务发送请求，以将新的客户实体插入"people"表中。  
 
@@ -361,7 +361,7 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 		std::wcout << std::endl;
 	}
 
->[AZURE.NOTE] 查询实体的几个属性是比检索所有属性更高效的操作。
+>[!NOTE] 查询实体的几个属性是比检索所有属性更高效的操作。
 
 ## 删除实体
 检索到实体后可将其轻松删除。检索到实体后，对要删除的实体调用 **table\_operation::delete\_entity**。然后调用 **cloud\_table.execute** 方法。以下代码检索并删除分区键为“Smith”、行键为“Jeff”的实体。
@@ -410,11 +410,10 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 ## 后续步骤
 既已了解表存储的基础知识，可打开以下链接了解有关 Azure 存储的详细信息：
 
--	[如何通过 C++ 使用 Blob 存储](/documentation/articles/storage-c-plus-plus-how-to-use-blobs/)
--	[如何通过 C++ 使用队列存储](/documentation/articles/storage-c-plus-plus-how-to-use-queues/)
--	[使用 C++ 列出 Azure 存储资源](/documentation/articles/storage-c-plus-plus-enumeration/)
+-	[如何通过 C++ 使用 Blob 存储](./storage-c-plus-plus-how-to-use-blobs.md)
+-	[如何通过 C++ 使用队列存储](./storage-c-plus-plus-how-to-use-queues.md)
+-	[使用 C++ 列出 Azure 存储资源](./storage-c-plus-plus-enumeration.md)
 -	[适用于 C++ 的存储空间客户端库参考](http://azure.github.io/azure-storage-cpp)
--	[Azure 存储文档](/documentation/services/storage/)
+-	[Azure 存储文档](./index.md/)
  
-
 <!---HONumber=Mooncake_1128_2016-->

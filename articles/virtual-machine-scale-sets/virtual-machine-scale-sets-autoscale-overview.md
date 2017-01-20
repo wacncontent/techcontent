@@ -1,23 +1,22 @@
-<properties
-	pageTitle="自动缩放和虚拟机规模集 | Azure"
-	description="了解如何使用诊断和自动缩放资源自动缩放规模集中的虚拟机。"
-    services="virtual-machine-scale-sets"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 自动缩放和虚拟机规模集 | Azure
+description: 了解如何使用诊断和自动缩放资源自动缩放规模集中的虚拟机。
+services: virtual-machine-scale-sets
+documentationCenter: 
+authors: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machine-scale-sets"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/18/2016"
-	wacn.date="12/30/2016"
-	ms.author="davidmu"/>
+ms.service: virtual-machine-scale-sets
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/18/2016
+wacn.date: 12/30/2016
+ms.author: davidmu
+---
 
 # 自动缩放和虚拟机规模集
 
@@ -29,7 +28,7 @@
 
 ## 使用 Resource Manager 模板设置缩放
 
-可使用模板以单次协调的操作来部署所有资源，而无需单独部署和管理应用程序的每个资源。在模板中，会定义应用程序资源，并针对不同的环境指定部署参数。模板中包含可用于为部署构造值的 JSON 和表达式。若要了解详细信息，请参阅 [Authoring Azure Resource Manager templates](/documentation/articles/resource-group-authoring-templates/)（创作 Azure Resource Manager 模板）。
+可使用模板以单次协调的操作来部署所有资源，而无需单独部署和管理应用程序的每个资源。在模板中，会定义应用程序资源，并针对不同的环境指定部署参数。模板中包含可用于为部署构造值的 JSON 和表达式。若要了解详细信息，请参阅 [Authoring Azure Resource Manager templates](../azure-resource-manager/resource-group-authoring-templates.md)（创作 Azure Resource Manager 模板）。
 
 在模板中，可以指定容量元素：
 
@@ -87,7 +86,6 @@
 当诊断扩展运行时，会将数据收集到一个表中，该表位于您指定的存储帐户中。在 WADPerformanceCounters 表中，可以找到收集的数据：
 
 ![](./media/virtual-machine-scale-sets-autoscale-overview/ThreadCountBefore2.png)  
-
 
 ### 配置 autoScaleSettings 资源
 
@@ -183,7 +181,6 @@ autoscaleSettings 资源使用诊断扩展中的信息，以决定是增加规�
 
 ![](./media/virtual-machine-scale-sets-autoscale-overview/ThreadCountAfter.png)  
 
-
 触发扩大操作，使规模集的容量增加 1：
 
     "sku": {
@@ -198,11 +195,11 @@ autoscaleSettings 资源使用诊断扩展中的信息，以决定是增加规�
 
 ## 使用 Azure PowerShell 设置缩放
 
-若要查看使用 PowerShell 设置自动缩放的示例，请参阅 [Azure Insights PowerShell 快速入门示例](/documentation/articles/insights-powershell-samples/)。
+若要查看使用 PowerShell 设置自动缩放的示例，请参阅 [Azure Insights PowerShell 快速入门示例](../monitoring-and-diagnostics/insights-powershell-samples.md)。
 
 ## 使用 Azure CLI 设置缩放
 
-若要查看使用 Azure CLI 设置自动缩放的示例，请参阅 [Azure Insights Cross-platform CLI quick start samples](/documentation/articles/insights-cli-samples/)（Azure Insights 跨平台 CLI 快速入门示例）。
+若要查看使用 Azure CLI 设置自动缩放的示例，请参阅 [Azure Insights Cross-platform CLI quick start samples](../monitoring-and-diagnostics/insights-cli-samples.md)（Azure Insights 跨平台 CLI 快速入门示例）。
 
 ## 调查缩放操作
 
@@ -216,9 +213,9 @@ autoscaleSettings 资源使用诊断扩展中的信息，以决定是增加规�
 
 ## 后续步骤
 
-- 请参阅 [Automatically scale machines in a Virtual Machine Scale Set](/documentation/articles/virtual-machine-scale-sets-windows-autoscale/)（自动缩放虚拟机规模集中的虚拟机），以查看有关如何创建已配置自动缩放的规模集的示例。
-- 在 [Azure Insights PowerShell 快速启动示例](/documentation/articles/insights-powershell-samples/)中查找 Azure Insights 监视功能的示例
-- 若要了解有关通知功能的相关信息，请参阅[使用自动缩放操作在 Azure Insights 中发送电子邮件和 webhook 警报通知](/documentation/articles/insights-autoscale-to-webhook-email/)。
-- 了解如何[使用审核日志在 Azure Insights 中发送电子邮件和 webhook 警报通知](/documentation/articles/insights-auditlog-to-webhook-email/)
+- 请参阅 [Automatically scale machines in a Virtual Machine Scale Set](./virtual-machine-scale-sets-windows-autoscale.md)（自动缩放虚拟机规模集中的虚拟机），以查看有关如何创建已配置自动缩放的规模集的示例。
+- 在 [Azure Insights PowerShell 快速启动示例](../monitoring-and-diagnostics/insights-powershell-samples.md)中查找 Azure Insights 监视功能的示例
+- 若要了解有关通知功能的相关信息，请参阅[使用自动缩放操作在 Azure Insights 中发送电子邮件和 webhook 警报通知](../monitoring-and-diagnostics/insights-autoscale-to-webhook-email.md)。
+- 了解如何[使用审核日志在 Azure Insights 中发送电子邮件和 webhook 警报通知](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md)
 
 <!---HONumber=Mooncake_1024_2016-->

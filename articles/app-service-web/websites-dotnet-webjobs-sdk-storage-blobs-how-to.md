@@ -1,39 +1,39 @@
-<properties 
-	pageTitle="如何通过 WebJobs SDK 使用 Azure Blob 存储" 
-	description="了解如何通过 WebJobs SDK 使用 Azure Blob 存储。在新 Blob 出现在容器中时触发进程并处理“有害 Blob”。" 
-	services="app-service\web, storage" 
-	documentationCenter=".net" 
-	authors="tdykstra" 
-	manager="wpickett" 
-	editor="jimbe"/>
+---
+title: 如何通过 WebJobs SDK 使用 Azure Blob 存储
+description: 了解如何通过 WebJobs SDK 使用 Azure Blob 存储。在新 Blob 出现在容器中时触发进程并处理“有害 Blob”。
+services: app-service\web, storage
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: jimbe
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="06/01/2016" 
-	wacn.date="12/16/2016" 
-	ms.author="tdykstra"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/01/2016
+wacn.date: 12/16/2016
+ms.author: tdykstra
+---
 
 # 如何通过 WebJobs SDK 使用 Azure Blob 存储
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 ## 概述
 
-本指南提供 C# 代码示例，用于演示如何在创建或更新 Azure Blob 后触发进程。这些代码示例使用 [WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk/) 版本 1.x。
+本指南提供 C# 代码示例，用于演示如何在创建或更新 Azure Blob 后触发进程。这些代码示例使用 [WebJobs SDK](./websites-dotnet-webjobs-sdk.md) 版本 1.x。
 
-有关演示如何创建 Blob 的代码示例，请参阅[如何通过 WebJobs SDK 使用 Azure 队列存储](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/)。
+有关演示如何创建 Blob 的代码示例，请参阅[如何通过 WebJobs SDK 使用 Azure 队列存储](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md)。
 		
-本指南假设你了解[如何使用指向存储帐户的连接字符串在 Visual Studio 中创建 WebJob 项目](/documentation/articles/websites-dotnet-webjobs-sdk-get-started/)或创建[多个存储帐户](https://github.com/Azure/azure-webjobs-sdk/blob/master/test/Microsoft.Azure.WebJobs.Host.EndToEndTests/MultipleStorageAccountsEndToEndTests.cs)。
+本指南假设你了解[如何使用指向存储帐户的连接字符串在 Visual Studio 中创建 WebJob 项目](./websites-dotnet-webjobs-sdk-get-started.md)或创建[多个存储帐户](https://github.com/Azure/azure-webjobs-sdk/blob/master/test/Microsoft.Azure.WebJobs.Host.EndToEndTests/MultipleStorageAccountsEndToEndTests.cs)。
 
 ## <a id="trigger"></a> 如何在创建或更新 Blob 后触发函数
 
 本部分说明如何使用 `BlobTrigger` 属性。
 
-> [AZURE.NOTE] WebJobs SDK 会扫描日志文件，以观察新的或更改的 Blob。此过程非常缓慢；创建 Blob 之后数分钟或更长时间内可能仍不会触发函数。如果你的应用程序需要立即处理 Blob，推荐的方法是在创建该 Blob 时创建队列消息，并在处理该 Blob 的函数上使用 [QueueTrigger](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/#trigger) 属性（而非 `BlobTrigger` 属性）。
+> [!NOTE] WebJobs SDK 会扫描日志文件，以观察新的或更改的 Blob。此过程非常缓慢；创建 Blob 之后数分钟或更长时间内可能仍不会触发函数。如果你的应用程序需要立即处理 Blob，推荐的方法是在创建该 Blob 时创建队列消息，并在处理该 Blob 的函数上使用 [QueueTrigger](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#trigger) 属性（而非 `BlobTrigger` 属性）。
 
 ### Blob 名称和扩展名的单个占位符  
 
@@ -157,7 +157,7 @@
 
 当 `BlobTrigger` 函数失败时，如果失败是暂时性错误导致的，则 SDK 会再次调用该函数。如果失败是由 Blob 的内容导致的，则该函数每次尝试处理 Blob 时都会失败。默认情况下，对于给定的 Blob，SDK 调用一个函数最多 5 次。如果第五次尝试失败，SDK 会将消息添加到名为 *webjobs-blobtrigger-poison* 的队列中。
 
-最大尝试次数可配置。将使用相同的 [MaxDequeueCount](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/#configqueue) 设置处理有害 Blob 和有害队列消息。
+最大尝试次数可配置。将使用相同的 [MaxDequeueCount](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#configqueue) 设置处理有害 Blob 和有害队列消息。
 
 有害 Blob 的队列消息是包含以下属性的 JSON 对象：
 
@@ -222,7 +222,7 @@ Blob 回执存储在 AzureWebJobsStorage 连接字符串指定的 Azure 存储�
 
 ## <a id="queues"></a> 队列文章涵盖的相关主题
 
-有关如何处理队列消息触发的 Blob 处理，或者不特定于 Blob 处理的 WebJobs SDK 方案的信息，请参阅[如何通过 WebJobs SDK 使用 Azure 队列存储](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/)。
+有关如何处理队列消息触发的 Blob 处理，或者不特定于 Blob 处理的 WebJobs SDK 方案的信息，请参阅[如何通过 WebJobs SDK 使用 Azure 队列存储](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md)。
 
 该文章涵盖的相关主题包括：
 
@@ -238,7 +238,6 @@ Blob 回执存储在 AzureWebJobsStorage 连接字符串指定的 Azure 存储�
 
 ## <a id="nextsteps"></a>后续步骤
 
-本指南提供的代码示例演示了如何处理常见方案以操作 Azure Blob。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 推荐资源](/documentation/articles/websites-webjobs-resources/)。
+本指南提供的代码示例演示了如何处理常见方案以操作 Azure Blob。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 推荐资源](./websites-webjobs-resources.md)。
  
-
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

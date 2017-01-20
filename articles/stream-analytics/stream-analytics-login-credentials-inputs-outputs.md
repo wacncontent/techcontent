@@ -1,24 +1,22 @@
-<properties 
-	pageTitle="流分析：轮转输入和输出的登录凭据 | Azure" 
-	description="了解如何更新流分析输入和输出的凭据。"
-	keywords="登录凭据"
-	services="stream-analytics" 
-	documentationCenter="" 
-	authors="jeffstokes72" 
-	manager="jhubbard" 
-	editor="cgronlun"/>  
+---
+title: 流分析：轮转输入和输出的登录凭据 | Azure
+description: 了解如何更新流分析输入和输出的凭据。
+keywords: 登录凭据
+services: stream-analytics
+documentationCenter: 
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags 
-	ms.service="stream-analytics" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.tgt_pltfrm="na" 
-	ms.workload="data-services" 
-	ms.date="11/11/2016"
-	wacn.date="01/09/2017"
-	ms.author="jeffstok"/>  
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 11/11/2016
+wacn.date: 01/09/2017
+ms.author: jeffstok
+---
 
 # 在流分析作业中轮转输入和输出的登录凭据
 ## 摘要
@@ -73,7 +71,7 @@ Azure 流分析目前不允许在作业运行时替换输入/输出上的凭据�
 
 ### SQL 数据库
 
->[AZURE.NOTE] 注意：需要连接到 SQL 数据库服务。我们会根据 Azure 管理门户上的管理经验来说明具体如何做，但是，也可以选择使用某些客户端工具，例如 SQL Server Management Studio。
+>[!NOTE] 注意：需要连接到 SQL 数据库服务。我们会根据 Azure 管理门户上的管理经验来说明具体如何做，但是，也可以选择使用某些客户端工具，例如 SQL Server Management Studio。
 
 1. 转到 Azure 管理门户的 SQL 数据库扩展：  
    ![graphic14][graphic14]
@@ -196,9 +194,9 @@ Azure 流分析目前不允许在作业运行时替换输入/输出上的凭据�
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-CN/home?forum=AzureStreamAnalytics)。
 
 ## 后续步骤
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
 

@@ -1,34 +1,33 @@
-<properties
-    pageTitle="了解 Node.js - DocumentDB Node.js 教程 | Azure"
-    description="了解 Node.js! 教程探讨了如何使用 Azure DocumentDB 存储和访问托管在 Azure 网站上的 Node.js Express Web 应用程序中的数据。"
-    keywords="应用程序开发, 数据库教程, 了解 node.js, node.js 教程, documentdb, azure, Azure"
-    services="documentdb"
-    documentationcenter="nodejs"
-    author="syamkmsft"
-    manager="jhubbard"
-    editor="cgronlun" />  
+---
+title: 了解 Node.js - DocumentDB Node.js 教程 | Azure
+description: 了解 Node.js! 教程探讨了如何使用 Azure DocumentDB 存储和访问托管在 Azure 网站上的 Node.js Express Web 应用程序中的数据。
+keywords: 应用程序开发, 数据库教程, 了解 node.js, node.js 教程, documentdb, azure, Azure
+services: documentdb
+documentationcenter: nodejs
+author: syamkmsft
+manager: jhubbard
+editor: cgronlun
 
-<tags
-    ms.assetid="9da9e63b-e76a-434e-96dd-195ce2699ef3"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="nodejs"
-    ms.topic="hero-article"
-    ms.date="11/16/2016"
-    wacn.date="12/27/2016"
-    ms.author="syamk" />
+ms.assetid: 9da9e63b-e76a-434e-96dd-195ce2699ef3
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: hero-article
+ms.date: 11/16/2016
+wacn.date: 12/27/2016
+ms.author: syamk
+---
 
 # <a name="_Toc395783175"></a>使用 DocumentDB 生成 Node.js Web 应用程序
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/documentdb-dotnet-application/)
-- [Node.js](/documentation/articles/documentdb-nodejs-application/)
-- [Java](/documentation/articles/documentdb-java-application/)
-- [Python](/documentation/articles/documentdb-python-application/)
+> [!div class="op_single_selector"]
+- [.NET](./documentdb-dotnet-application.md)
+- [Node.js](./documentdb-nodejs-application.md)
+- [Java](./documentdb-java-application.md)
+- [Python](./documentdb-python-application.md)
 
 本 Node.js 教程展示如何使用 Azure DocumentDB 服务存储和访问托管在 Azure 网站上的 Node.js Express 应用程序中的数据。
-
 
 再返回到本 Node.js 教程，你将了解以下问题的答案：
 
@@ -43,15 +42,15 @@
 
 ## <a name="_Toc395783176"></a>先决条件
 
-> [AZURE.TIP] 本 Node.js 教程假定你之前有使用 Node.js 和 Azure 网站的经验。
+> [!TIP] 本 Node.js 教程假定你之前有使用 Node.js 和 Azure 网站的经验。
 
 在按照本文中的说明操作之前，你应确保已拥有下列项：
 
-- 有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](/pricing/1rmb-trial/)。
+- 有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
    或
 
-   在本地安装 [Azure DocumentDB 模拟器](/documentation/articles/documentdb-nosql-local-emulator/)。
+   在本地安装 [Azure DocumentDB 模拟器](./documentdb-nosql-local-emulator.md)。
 - [Node.js][Node.js] 版本 v0.10.29 或更高版本。
 - [Express 生成器](http://www.expressjs.com/starter/generator.html)（你可以通过 `npm install express-generator -g` 安装它）
 - [Git][Git]。
@@ -59,9 +58,9 @@
 ## <a name="_Toc395637761"></a>步骤 1：创建 DocumentDB 数据库帐户
 让我们首先创建 DocumentDB 帐户。如果已有帐户或者在此教程中使用 DocumentDB 模拟器，则可以跳到[步骤 2：创建 Node.js 应用程序](#_Toc395783178)。
 
-[AZURE.INCLUDE [documentdb-create-dbaccount](../../includes/documentdb-create-dbaccount.md)]
+[!INCLUDE [documentdb-create-dbaccount](../../includes/documentdb-create-dbaccount.md)]
 
-[AZURE.INCLUDE [documentdb-keys](../../includes/documentdb-keys.md)]
+[!INCLUDE [documentdb-keys](../../includes/documentdb-keys.md)]
 
 ## <a name="_Toc395783178"></a>步骤 2：了解如何创建新的 Node.js 应用程序
 现在让我们来了解如何使用 [Express](http://expressjs.com/) 框架创建基本的 Hello World Node.js 项目。
@@ -80,7 +79,6 @@
 5. 可以通过将浏览器导航到 http://localhost:3000 来查看新的应用程序。
    
     ![了解 Node.js - 浏览器窗口中 Hello World 应用程序的屏幕截图](./media/documentdb-nodejs-application/image12.png)  
-
 
 ## <a name="_Toc395783179"></a>步骤 3：安装其他模块
 **package.json** 文件是在项目的根目录中创建的文件之一。此文件包含一系列其他模块，它们是 Node.js 应用程序必需的。稍后，在你将此应用程序部署到 Azure 网站时，使用此文件以确定需要在 Azure 上安装哪些模块来支持你的应用程序。我们仍需要为本教程多安装两个包。
@@ -172,10 +170,9 @@
    
         module.exports = DocDBUtils;
    
-    > [AZURE.TIP] createCollection 采用一个用以指定集合 Offer 类型的可选 requestOptions 参数。如果没有提供任何 requestOptions.offerType 值，则将使用默认 Offer 类型创建集合。
+    > [!TIP] createCollection 采用一个用以指定集合 Offer 类型的可选 requestOptions 参数。如果没有提供任何 requestOptions.offerType 值，则将使用默认 Offer 类型创建集合。
     >
-    > 有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 中的性能级别](/documentation/articles/documentdb-performance-levels/)
-
+    > 有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 中的性能级别](./documentdb-performance-levels.md)
 
 5. 保存并关闭 **docdbUtils.js** 文件。
 6. 在 **taskDao.js** 文件的开头，添加以下代码以引用我们上面创建的 **DocumentDBClient** 和 **docdbUtils.js**：
@@ -510,7 +507,7 @@
 4. 若要完成任务，只需选中“完成”列中的复选框，然后单击“更新任务”。
 
 ## <a name="_Toc395783182"></a>步骤 7：将应用程序开发项目部署到 Azure 网站
-1. 如果尚未部署，则启用 Azure 网站的 git 存储库。可以在 [Local Git Deployment to Azure App Service](/documentation/articles/app-service-deploy-local-git/)（从本地 GIT 部署到 Azure App Service）主题中找到如何执行此操作的说明。
+1. 如果尚未部署，则启用 Azure 网站的 git 存储库。可以在 [Local Git Deployment to Azure App Service](../app-service-web/app-service-deploy-local-git.md)（从本地 GIT 部署到 Azure App Service）主题中找到如何执行此操作的说明。
 2. 将 Azure 网站添加为 git 远程。
    
         git remote add azure https://username@your-azure-website.scm.chinacloudsites.cn:443/your-azure-website.git

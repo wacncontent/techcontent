@@ -1,34 +1,32 @@
-<properties
-	pageTitle="从 Azure SQL 数据库备份中还原单个表 | Azure"
-	description="了解如何从 Azure SQL 数据库备份中还原单个表。"
-	services="sql-database"
-	documentationCenter=""
-	authors="dalechen"
-	manager="felixwu"
-	editor=""/>
+---
+title: 从 Azure SQL 数据库备份中还原单个表 | Azure
+description: 了解如何从 Azure SQL 数据库备份中还原单个表。
+services: sql-database
+documentationCenter: 
+authors: dalechen
+manager: felixwu
+editor: 
 
-<tags
-	ms.service="sql-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/31/2016"
-	wacn.date="10/17/2016"
-	ms.author="daleche"/>  
-
-
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/31/2016
+wacn.date: 10/17/2016
+ms.author: daleche
+---
 
 # 如何从 Azure SQL 数据库备份中还原单个表
 
-你可能会遇到这种情况，不小心修改了 SQL 数据库中的某些数据，而现在你希望恢复单个受影响的表。本文介绍如何在数据库中从某个 SQL 数据库[自动备份](/documentation/articles/sql-database-automated-backups/)还原单个表。
+你可能会遇到这种情况，不小心修改了 SQL 数据库中的某些数据，而现在你希望恢复单个受影响的表。本文介绍如何在数据库中从某个 SQL 数据库[自动备份](./sql-database-automated-backups.md)还原单个表。
 
 ## 准备步骤：重命名表，并还原数据库的一个副本
 1. 确定 Azure SQL 数据库中你要替换为还原的副本的表。使用 Microsoft SQL Management Studio 重命名此表。例如，将此表重命名为 &lt;table name&gt;\_old。
 
 	**注意**为了避免受到阻止，请确保你要重命名的表没有任何正在运行的活动。如果你遇到问题，请确保在维护时段内执行此过程。
 
-2. 使用[时间点还原](/documentation/articles/sql-database-recovery-using-backups/#point-in-time-restore)步骤，将数据库的一个备份还原到想要恢复到的一个时间点。
+2. 使用[时间点还原](./sql-database-recovery-using-backups.md#point-in-time-restore)步骤，将数据库的一个备份还原到想要恢复到的一个时间点。
 
 	**说明**：
 	- 还原的数据库的名称的格式为 DBName+TimeStamp；例如，**Adventureworks2012\_2016-01-01T22-12Z**。此步骤不会覆盖服务器上现有的数据库名称。这是一项安全措施，目的是让用户在删除其当前数据库之前确认还原的数据库，然后重命名此还原的数据库供生产之用。
@@ -76,6 +74,6 @@
 
 ## 后续步骤
 
-[SQL 数据库自动备份](/documentation/articles/sql-database-automated-backups/)
+[SQL 数据库自动备份](./sql-database-automated-backups.md)
 
 <!---HONumber=Mooncake_1010_2016-->

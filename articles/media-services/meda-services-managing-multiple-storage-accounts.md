@@ -1,24 +1,21 @@
-<properties 
-	pageTitle="跨多个存储帐户管理媒体服务资产" 
-	description="本文提供如何跨多个存储帐户管理媒体服务资产的指导。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 跨多个存储帐户管理媒体服务资产
+description: 本文提供如何跨多个存储帐户管理媒体服务资产的指导。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: dwrede
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016" 
-	wacn.date="12/27/2016"    
-	ms.author="juliako"/>  
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 #跨多个存储帐户管理媒体服务资产
 
@@ -44,7 +41,6 @@
 ##使用 Azure 服务管理 REST API 附加存储帐户
 
 目前，只能使用 [Azure 服务管理 REST API](https://docs.microsoft.com/zh-cn/rest/api/media/operations/azure-media-services-rest-api-reference) 附加多个存储帐户。[如何：使用媒体服务管理 REST API](https://docs.microsoft.com/zh-cn/rest/api/media/management/how-to-use-media-services-management-rest-api) 主题中的代码示例定义了将存储帐户附加到指定媒体服务帐户的 **AttachStorageAccountToMediaServiceAccount** 方法。此主题中的代码定义了列出已附加到指定媒体服务帐户的所有存储帐户的 **ListStorageAccountDetails** 方法。
-
 
 ##跨多个存储帐户管理媒体服务资产
 
@@ -84,7 +80,6 @@
 				private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
 				private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
 				
-
 		        private static CloudMediaContext _context;
 		        private static MediaServicesCredentials _cachedCredentials = null;
 				private static Uri _apiServer = null;
@@ -105,7 +100,6 @@
 		            // Used the cached credentials to create CloudMediaContext.
 		            _context = new CloudMediaContext(_apiServer, _cachedCredentials);
 	
-		
 		            // Display the storage accounts associated with 
 		            // the specified Media Services account:
 		            foreach (var sa in _context.StorageAccounts)
@@ -204,7 +198,6 @@
 		            return outputAsset;
 		        }
 		
-		
 		        private static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
 		        {
 		            var processor = _context.MediaProcessors.Where(p => p.Name == mediaProcessorName).
@@ -267,5 +260,4 @@
 		    }
 		}
  
-
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

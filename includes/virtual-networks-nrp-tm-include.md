@@ -24,7 +24,6 @@
 
 采用 Json 格式的流量管理器示例：
 
-
         {
             "apiVersion": "[variables('tmApiVersion')]",
             "type": "Microsoft.Network/trafficManagerProfiles",
@@ -79,7 +78,6 @@
             }
         }
 
- 
 ## 其他资源
 
 有关详细信息，请阅读[流量管理器的 REST API 文档](https://msdn.microsoft.com/zh-cn/library/azure/mt163664.aspx)。

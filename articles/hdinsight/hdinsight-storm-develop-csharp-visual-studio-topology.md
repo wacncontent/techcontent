@@ -1,26 +1,26 @@
-<properties
-   pageTitle="使用 Visual Studio 和 C# 创建 Apache Storm 拓扑 | Azure"
-   description="了解如何通过使用用于 Visual Studio 的 HDInsight 工具创建一个简单的单词计数拓扑，来以 C# 语言创建一个 Storm 拓扑。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="Blackmist"
-   manager="paulettm"
-   editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 使用 Visual Studio 和 C# 创建 Apache Storm 拓扑 | Azure
+description: 了解如何通过使用用于 Visual Studio 的 HDInsight 工具创建一个简单的单词计数拓扑，来以 C# 语言创建一个 Storm 拓扑。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="java"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="11/17/2016"
-   wacn.date="12/30/2016"
-   ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: java
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 11/17/2016
+wacn.date: 12/30/2016
+ms.author: larryfr
+---
 
 # 使用 Hadoop Tools for Visual Studio 开发 Apache Storm on HDInsight 的 C# 拓扑
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 了解如何使用用于 Visual Studio 的 HDInsight 工具创建 C# Storm 拓扑。本教程逐步说明在 Visual Studio 中创建新的 Storm 项目、在本地测试该项目，然后将它部署到 Apache Storm on HDInsight 群集的过程。
 
@@ -38,13 +38,13 @@
 
 -	Azure SDK 2.5.1 或更高版本
 
--	用于 Visual Studio 的 HDInsight 工具 - 参阅[开始使用用于 Visual Studio 的 HDInsight 工具](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/) 安装并配置用于 Visual Studio 的 HDInsight 工具。
+-	用于 Visual Studio 的 HDInsight 工具 - 参阅[开始使用用于 Visual Studio 的 HDInsight 工具](./hdinsight-hadoop-visual-studio-tools-get-started.md) 安装并配置用于 Visual Studio 的 HDInsight 工具。
 
-    > [AZURE.NOTE] Visual Studio Express 不支持用于 Visual Studio 的 HDInsight 工具
+    > [!NOTE] Visual Studio Express 不支持用于 Visual Studio 的 HDInsight 工具
 
--	Apache Storm on HDInsight 群集：参阅 [Apache Storm on HDInsight 入门](/documentation/articles/hdinsight-apache-storm-tutorial-get-started/)了解创建群集的步骤。
+-	Apache Storm on HDInsight 群集：参阅 [Apache Storm on HDInsight 入门](./hdinsight-apache-storm-tutorial-get-started.md)了解创建群集的步骤。
 
-	> [AZURE.NOTE] 用于 Visual Studio 的 HDInsight 工具目前只支持 Storm on HDInsight 版本 3.2 群集。
+	> [!NOTE] 用于 Visual Studio 的 HDInsight 工具目前只支持 Storm on HDInsight 版本 3.2 群集。
 
 ##模板
 
@@ -63,13 +63,13 @@
 | Storm 混合示例 | 如何使用 Java 组件 |
 | Storm 示例 | 一个基本的单词计数拓扑 |
 
-> [AZURE.NOTE]HBase 读取器和写入器示例使用 HBase REST API 与 HDInsight 群集上的 HBase 通信，而不是 HBase Java API。
+> [!NOTE]HBase 读取器和写入器示例使用 HBase REST API 与 HDInsight 群集上的 HBase 通信，而不是 HBase Java API。
 
 在本文档的步骤中，你将使用基本 Storm 应用程序项目类型来创建新拓扑。
 
 ##创建 C# 拓扑
 
-1.	如果你尚未安装最新版本的用于 Visual Studio 的 HDInsight 工具，请参阅[开始使用用于 Visual Studio 的 HDInsight 工具](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/)。
+1.	如果你尚未安装最新版本的用于 Visual Studio 的 HDInsight 工具，请参阅[开始使用用于 Visual Studio 的 HDInsight 工具](./hdinsight-hadoop-visual-studio-tools-get-started.md)。
 
 2.	打开 Visual Studio，选择“文件”>“新建”>“项目”。
 
@@ -111,15 +111,12 @@
 	    	"i am at two with nature"
 		};
 		
-		
 		public Spout(Context ctx)
 		{
 	    	// Set the instance context
 	    	this.ctx = ctx;
 			
-			
 	    	Context.Logger.Info("Generator constructor called");
-			
 			
 	    	// Declare Output schema
 	    	Dictionary<string, List<Type>> outputSchema = new Dictionary<string, List<Type>>();
@@ -129,13 +126,11 @@
 	    	this.ctx.DeclareComponentSchema(new ComponentStreamSchema(null, outputSchema));
 		}
 		
-		
 		// Get an instance of the spout
 		public static Spout Get(Context ctx, Dictionary<string, Object> parms)
 		{
 	    	return new Spout(ctx);
 		}
-		
 		
 		public void NextTuple(Dictionary<string, Object> parms)
 		{
@@ -143,23 +138,19 @@
 	    	// The sentence to be emitted
 	    	string sentence;
 			
-			
 	    	// Get a random sentence
 	    	sentence = sentences[r.Next(0, sentences.Length - 1)];
 	    	Context.Logger.Info("Emit: {0}", sentence);
 	    	// Emit it
 	    	this.ctx.Emit(new Values(sentence));
 			
-			
 	    	Context.Logger.Info("NextTuple exit");
 		}
-		
 		
 		public void Ack(long seqId, Dictionary<string, Object> parms)
 		{
 	    	// Only used for transactional topologies
 		}
-		
 		
 		public void Fail(long seqId, Dictionary<string, Object> parms)
 		{
@@ -178,7 +169,7 @@
 
 	-	**Counter.cs**：实现 Bolt，以统计每个单词的数目，并发出一串新单词和每个单词的计数。
 
-	> [AZURE.NOTE]这些 Bolt 只会读取和写入流，但是你也可以使用 Bolt 来与数据库或服务等源进行通信。
+	> [!NOTE]这些 Bolt 只会读取和写入流，但是你也可以使用 Bolt 来与数据库或服务等源进行通信。
 
 3.	打开 **Splitter.cs**。请注意，默认情况下它只包含一个方法 **Execute**。在 Bolt 收到要处理的 Tuple 时将调用此方法。此时，你可以读取和处理传入 Tuple，以及发出传出 Tuple。
 
@@ -186,13 +177,11 @@
 
 		private Context ctx;
 		
-		
 		// Constructor
 		public Splitter(Context ctx)
 		{
 	    	Context.Logger.Info("Splitter constructor called");
 	    	this.ctx = ctx;
-			
 			
 	    	// Declare Input and Output schemas
 	    	Dictionary<string, List<Type>> inputSchema = new Dictionary<string, List<Type>>();
@@ -204,19 +193,16 @@
 	    	this.ctx.DeclareComponentSchema(new ComponentStreamSchema(inputSchema, outputSchema));
 		}
 		
-		
 		// Get a new instance of the bolt
 		public static Splitter Get(Context ctx, Dictionary<string, Object> parms)
 		{
 	    	return new Splitter(ctx);
 		}
 		
-		
 		// Called when a new tuple is available
 		public void Execute(SCPTuple tuple)
 		{
 	    	Context.Logger.Info("Execute enter");
-			
 			
 	    	// Get the sentence from the tuple
 	    	string sentence = tuple.GetString(0);
@@ -228,7 +214,6 @@
 	        	this.ctx.Emit(new Values(word));
 	    	}
 			
-			
 	    	Context.Logger.Info("Execute exit");
 		}
 
@@ -238,10 +223,8 @@
 
 		private Context ctx;
 		
-		
 		// Dictionary for holding words and counts
 		private Dictionary<string, int> counts = new Dictionary<string, int>();
-		
 		
 		// Constructor
 		public Counter(Context ctx)
@@ -250,12 +233,10 @@
 	    	// Set instance context
 	    	this.ctx = ctx;
 			
-			
 	    	// Declare Input and Output schemas
 	    	Dictionary<string, List<Type>> inputSchema = new Dictionary<string, List<Type>>();
 	    	// A tuple containing a string field - the word
 	    	inputSchema.Add("default", new List<Type>() { typeof(string) });
-			
 			
 	    	Dictionary<string, List<Type>> outputSchema = new Dictionary<string, List<Type>>();
 	    	// A tuple containing a string and integer field - the word and the word count
@@ -263,19 +244,16 @@
 	    	this.ctx.DeclareComponentSchema(new ComponentStreamSchema(inputSchema, outputSchema));
 		}
 		
-		
 		// Get a new instance
 		public static Counter Get(Context ctx, Dictionary<string, Object> parms)
 		{
 	    	return new Counter(ctx);
 		}
 		
-		
 		// Called when a new tuple is available
 		public void Execute(SCPTuple tuple)
 		{
 	    	Context.Logger.Info("Execute enter");
-			
 			
 	    	// Get the word from the tuple
 	    	string word = tuple.GetString(0);
@@ -287,11 +265,9 @@
 	    	// Update the count in the dictionary
 	    	counts[word] = count;
 			
-			
 	    	Context.Logger.Info("Emit: {0}, count: {1}", word, count);
 	    	// Emit the word and count information
 	    	this.ctx.Emit(Constants.DEFAULT_STREAM_ID, new List<SCPTuple> { tuple }, new Values(word, count));
-			
 			
 	    	Context.Logger.Info("Execute exit");
 		}
@@ -371,19 +347,19 @@ Spout 和 Bolt 以图形方式排列，用于定义数据在组件之间的流�
 
 1.	在“解决方案资源管理器”中，右键单击项目，然后选择“提交到 Storm on HDInsight”。
 
-	> [AZURE.NOTE]如果出现提示，请输入你 Azure 订阅的登录凭据。如果你有多个订阅，请登录包含 Storm on HDInsight 群集的订阅。
+	> [!NOTE]如果出现提示，请输入你 Azure 订阅的登录凭据。如果你有多个订阅，请登录包含 Storm on HDInsight 群集的订阅。
 
 2.	从“Storm 群集”下拉列表中选择你的 Storm on HDInsight 群集，然后选择“提交”。你可以使用“输出”窗口监视提交是否成功。
 
 3.	成功提交拓扑之后，应该会出现群集的“Storm 拓扑”。从列表中选择“WordCount”拓扑，以查看有关正在运行的拓扑的信息。
 
-	> [AZURE.NOTE]你也可以展开“Azure”>“HDInsight”，右键单击 Storm on HDInsight 群集，然后选择“查看 Storm 拓扑”，来从“服务器资源管理器”查看“Storm 拓扑”。
+	> [!NOTE]你也可以展开“Azure”>“HDInsight”，右键单击 Storm on HDInsight 群集，然后选择“查看 Storm 拓扑”，来从“服务器资源管理器”查看“Storm 拓扑”。
 
 	使用 Spout 或 Bolt 的链接查看有关这些组件的信息。将会针对每个选择的项打开一个新窗口。
 
 4.	从“拓扑摘要”视图中，单击“终止”以停止拓扑。
 
-	> [AZURE.NOTE]Storm 拓扑会一直运行，直到它被停用，或者群集被删除。
+	> [!NOTE]Storm 拓扑会一直运行，直到它被停用，或者群集被删除。
 
 ##事务拓扑
 
@@ -419,11 +395,11 @@ Spout 和 Bolt 以图形方式排列，用于定义数据在组件之间的流�
 
 	-	事务版本在 **HybridTopologyTx\_csharpSpout\_javaBolt** 中定义
 
-		> [AZURE.NOTE]此版本还演示了如何使用文本文件中的 clojure 代码作为 Java 组件。
+		> [!NOTE]此版本还演示了如何使用文本文件中的 clojure 代码作为 Java 组件。
 
 若要切换在提交项目时使用的拓扑，只需将 `[Active(true)]` 语句式移到你要在提交给群集之前使用的拓扑。
 
-> [AZURE.NOTE]在 **JavaDependency** 文件夹中，所需的所有 Java 文件都会提供为此项目的一部分。
+> [!NOTE]在 **JavaDependency** 文件夹中，所需的所有 Java 文件都会提供为此项目的一部分。
 
 创建和提交混合拓扑时，需注意以下事项：
 
@@ -441,7 +417,7 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 -	**TopologyBuilder.SetEventHubSpout** 方法：将事件中心 Spout 组件添加到拓扑
 
-> [AZURE.NOTE]相比于其他 Java 组件，尽管这些方法可让你更轻松地使用事件中心 Spout，但你仍然必须使用 CustomizedInteropJSONSerializer 来序列化 Spout 生成的数据。
+> [!NOTE]相比于其他 Java 组件，尽管这些方法可让你更轻松地使用事件中心 Spout，但你仍然必须使用 CustomizedInteropJSONSerializer 来序列化 Spout 生成的数据。
 
 ##如何更新 SCP.NET
 
@@ -451,7 +427,7 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 2. 从包管理器中选择“更新”。如果有可用的更新，将会列出更新。单击“更新”按钮可让包安装更新。
 
-> [AZURE.IMPORTANT]如果你的项目是通过一个未使用 NuGet 进行包更新的旧版 SCP.NET 创建的，则你必须执行以下步骤更新到新版本：
+> [!IMPORTANT]如果你的项目是通过一个未使用 NuGet 进行包更新的旧版 SCP.NET 创建的，则你必须执行以下步骤更新到新版本：
 ><p> 1. 在“解决方案资源管理器”中，右键单击项目，然后选择“管理 NuGet 包”。
 ><p> 2. 使用“搜索”字段搜索 **Microsoft.SCP.Net.SDK**，然后将其添加到项目中。
 
@@ -461,13 +437,13 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 虽然很容易就可以将拓扑部署到群集，但是，在某些情况下，你可能需要在本地测试拓扑。使用以下步骤，在开发环境上本地执行和测试本教程中的示例拓扑。
 
-> [AZURE.WARNING]本地测试只适用于仅限 C# 的基本拓扑。不应将本地测试用于混合拓扑或用于使用多个流的拓扑，否则你会收到错误。
+> [!WARNING]本地测试只适用于仅限 C# 的基本拓扑。不应将本地测试用于混合拓扑或用于使用多个流的拓扑，否则你会收到错误。
 
 1.	在“解决方案资源管理器”中，右键单击项目，然后选择“属性”。在项目属性中，将“输出类型”更改为“控制台应用程序”。
 
 	![输出类型](./media/hdinsight-storm-develop-csharp-visual-studio-topology/outputtype.png)
 
-	> [AZURE.NOTE]将拓扑部署到群集之前，请记得将“输出类型”更改回“类库”。
+	> [!NOTE]将拓扑部署到群集之前，请记得将“输出类型”更改回“类库”。
 
 2.	在“解决方案资源管理器”中，右键单击项目，然后依次选择“添加”>“新建项”。选择“类”，并输入 **LocalTest.cs** 作为类名称。最后，单击“添加”。
 
@@ -483,7 +459,6 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 	    	// An empty dictionary for use when creating components
 	    	Dictionary<string, Object> emptyDictionary = new Dictionary<string, object>();
 			
-			
 	    	#region Test the spout
 	    	{
 	        	Console.WriteLine("Starting spout");
@@ -492,7 +467,6 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 	        	LocalContext spoutCtx = LocalContext.Get();
 	        	// Get a new instance of the spout, using the local context
 	        	Spout sentences = Spout.Get(spoutCtx, emptyDictionary);
-				
 				
 	        	// Emit 10 tuples
 	        	for (int i = 0; i < 10; i++)
@@ -505,7 +479,6 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 	    	}
 	    	#endregion
 			
-			
 	    	#region Test the splitter bolt
 	    	{
 	        	Console.WriteLine("Starting splitter bolt");
@@ -514,7 +487,6 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 	        	LocalContext splitterCtx = LocalContext.Get();
 	        	// Get a new instance of the bolt
 	        	Splitter splitter = Splitter.Get(splitterCtx, emptyDictionary);
-				
 				
 	        	// Set the data stream to the data created by the spout
 	        	splitterCtx.ReadFromFileToMsgQueue("sentences.txt");
@@ -531,7 +503,6 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 	    	}
 	    	#endregion
 			
-			
 	    	#region Test the counter bolt
 	    	{
 	        	Console.WriteLine("Starting counter bolt");
@@ -540,7 +511,6 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 	        	LocalContext counterCtx = LocalContext.Get();
 	        	// Get a new instance of the bolt
 	        	Counter counter = Counter.Get(counterCtx, emptyDictionary);
-				
 				
 	        	// Set the data stream to the data created by splitter bolt
 	        	counterCtx.ReadFromFileToMsgQueue("splitter.txt");
@@ -567,7 +537,6 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 		// Initialize the runtime
 		SCPRuntime.Initialize();
 		
-		
 		//If we are not running under the local context, throw an error
 		if (Context.pluginType != SCPPluginType.SCP_NET_LOCAL)
 		{
@@ -584,23 +553,21 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 7.	使用“Windows 资源管理器”找到包含项目的目录，例如，**C:\\Users<你的用户名>\\Documents\\Visual Studio 2013\\Projects\\WordCount\\WordCount**。在此目录中打开 Bin，然后单击“调试”。你应会看到运行测试时生成的文本文件：sentences.txt、counter.txt 和 splitter.txt。打开每个文本文件并检查数据。
 
-	> [AZURE.NOTE]字符串数据会保存为这些文件中的十进制值数组。例如，**splitter.txt** 文件中的 [[97,103,111]] 是单词“and”。
+	> [!NOTE]字符串数据会保存为这些文件中的十进制值数组。例如，**splitter.txt** 文件中的 [[97,103,111]] 是单词“and”。
 
 虽然在本地测试基本字数应用程序相当简单，但是真正的价值在于与外部数据来源进行通信或执行复杂数据分析的复杂拓扑。处理此类项目时，你可能需要在组件中设置断点并逐步运行代码，以找出问题。
 
-> [AZURE.NOTE]在部署到 Storm on HDInsight 群集之前，请记得将“项目类型”设置回“类库”。
+> [!NOTE]在部署到 Storm on HDInsight 群集之前，请记得将“项目类型”设置回“类库”。
 
 ###记录信息
 
 你可以使用 `Context.Logger` 轻松记录拓扑组件中的信息。例如，以下代码会创建一个信息日志条目：
 
-
 	Context.Logger.Info("Component started");
-
 
 你可以从“服务器资源管理器”中的“Hadoop 服务日志”查看记录的信息。展开 Storm on HDInsight 群集的条目，然后展开“Hadoop 服务日志”。最后，选择要查看的日志文件。
 
-> [AZURE.NOTE]日志存储在群集使用的 Azure 存储帐户中。如果此订阅与用来登录 Visual Studio 的订阅不同，则必须登录包含存储帐户的订阅才能查看此信息。
+> [!NOTE]日志存储在群集使用的 Azure 存储帐户中。如果此订阅与用来登录 Visual Studio 的订阅不同，则必须登录包含存储帐户的订阅才能查看此信息。
 
 ###查看错误信息
 
@@ -616,7 +583,7 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 ##后续步骤
 
-在了解如何使用用于 Visual Studio 的 HDInsight 工具开发和部署 Storm 拓扑后，请了解如何[使用 Storm on HDInsight 从 Azure 事件中心处理事件](/documentation/articles/hdinsight-storm-develop-csharp-event-hub-topology/)。
+在了解如何使用用于 Visual Studio 的 HDInsight 工具开发和部署 Storm 拓扑后，请了解如何[使用 Storm on HDInsight 从 Azure 事件中心处理事件](./hdinsight-storm-develop-csharp-event-hub-topology.md)。
 
 有关将流数据拆分为多个流的 C# 拓扑示例，请参阅 [C# Storm 示例](https://github.com/Blackmist/csharp-storm-example)。
 
@@ -626,24 +593,24 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 **Microsoft SCP.NET**
 
-* [SCP 编程指引](/documentation/articles/hdinsight-storm-scp-programming-guide/)
+* [SCP 编程指引](./hdinsight-storm-scp-programming-guide.md)
 
 **Apache Storm on HDInsight**
 
--	[使用 Apache Storm on HDInsight 部署和监视拓扑](/documentation/articles/hdinsight-storm-deploy-monitor-topology/)
+-	[使用 Apache Storm on HDInsight 部署和监视拓扑](./hdinsight-storm-deploy-monitor-topology.md)
 
--	[Storm on HDInsight 的示例拓扑](/documentation/articles/hdinsight-storm-example-topology/)
+-	[Storm on HDInsight 的示例拓扑](./hdinsight-storm-example-topology.md)
 
 **Apache HDInsight 上的 Hadoop**
 
--	[将 Hive 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-hive/)
+-	[将 Hive 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-hive.md)
 
--	[将 Pig 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-pig/)
+-	[将 Pig 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-pig.md)
 
--	[将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+-	[将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-mapreduce.md)
 
 **Apache HBase on HDInsight**
 
--	[HBase on HDInsight 入门](/documentation/articles/hdinsight-hbase-tutorial-get-started-v1/)
+-	[HBase on HDInsight 入门](./hdinsight-hbase-tutorial-get-started-v1.md)
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

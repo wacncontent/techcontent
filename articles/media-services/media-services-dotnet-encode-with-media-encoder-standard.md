@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="使用 .NET 通过媒体编码器标准版对资产进行编码" 
-	description="本主题介绍如何使用 .NET 通过媒体编码器标准版对资产进行编码。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 .NET 通过媒体编码器标准版对资产进行编码
+description: 本主题介绍如何使用 .NET 通过媒体编码器标准版对资产进行编码。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
- 	ms.date="09/19/2016" 
- 	wacn.date="11/14/2016"
-	ms.author="juliako;anilmur"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/19/2016
+wacn.date: 11/14/2016
+ms.author: juliako;anilmur
+---
 
 # 使用 .NET 通过媒体编码器标准版对资产进行编码
 
@@ -25,15 +23,15 @@
 
 本主题介绍如何使用 .NET 通过媒体编码器标准 (MES) 对资产进行编码。媒体编码器标准使用[此处](https://msdn.microsoft.com/zh-cn/library/azure/mt269960.aspx)所述的编码器预设之一进行配置。
 
-建议始终将夹层文件编码为自适应比特率 MP4 集，然后使用[动态打包](/documentation/articles/media-services-dynamic-packaging-overview/)将该集转换为所需的格式。若要利用动态打包，首先必须获取计划从中传送内容的流式处理终结点的至少一个点播流单元。有关详细信息，请参阅[如何缩放媒体服务](/documentation/articles/media-services-manage-origins/#scale_streaming_endpoints)。
+建议始终将夹层文件编码为自适应比特率 MP4 集，然后使用[动态打包](./media-services-dynamic-packaging-overview.md)将该集转换为所需的格式。若要利用动态打包，首先必须获取计划从中传送内容的流式处理终结点的至少一个点播流单元。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
-如果你的输出资产已经过存储加密，则必须配置资产传送策略。有关详细信息，请参阅[配置资产传送策略](/documentation/articles/media-services-dotnet-configure-asset-delivery-policy/)。
+如果你的输出资产已经过存储加密，则必须配置资产传送策略。有关详细信息，请参阅[配置资产传送策略](./media-services-dotnet-configure-asset-delivery-policy.md)。
 
->[AZURE.NOTE]MES 将生成一个输出文件，其名称包含输入文件名的前 32 个字符。该名称基于预设文件中指定的内容。例如，"FileName": "{Basename}\_{Index}{Extension}"。{Basename} 将替换为输入文件名的前 32 个字符。
+>[!NOTE]MES 将生成一个输出文件，其名称包含输入文件名的前 32 个字符。该名称基于预设文件中指定的内容。例如，"FileName": "{Basename}\_{Index}{Extension}"。{Basename} 将替换为输入文件名的前 32 个字符。
 
 ###MES 格式
 
-[格式和编解码器](/documentation/articles/media-services-media-encoder-standard-formats/)
+[格式和编解码器](./media-services-media-encoder-standard-formats.md)
 
 ###MES 预设
 
@@ -48,7 +46,6 @@
 输出资产还包含提供输出资产相关元数据的文件。元数据 XML 文件的名称采用下列格式：<source_file_name>\_manifest.xml（例如，BigBuckBunny\_manifest.xml）。[此处](http://msdn.microsoft.com/zh-cn/library/azure/dn783217.aspx)描述了此输出元数据 XML 的架构。
 
 如果想要检查这两个元数据文件中的任意一个，可以创建 SAS 定位器并将文件下载到本地计算机。你可以就如何创建 SAS 定位器并下载使用媒体服务 .NET SDK 扩展的文件找到相关示例。
-
 
 ##示例
 
@@ -71,7 +68,6 @@
 		    // processor to use for the specific task.
 		    IMediaProcessor processor = GetLatestMediaProcessorByName("Media Encoder Standard");
 		
-
 		    // Create a task with the encoding details, using a string preset.
 		    // In this case "H264 Multiple Bitrate 720p" preset is used.
 		    ITask task = job.Tasks.AddNew("My encoding task",
@@ -124,7 +120,6 @@
 		    }
 		}
 		
-		
 		private static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
 		{
 		    var processor = _context.MediaProcessors.Where(p => p.Name == mediaProcessorName).
@@ -136,11 +131,8 @@
 		    return processor;
 		}
 
-
-
-
 ##另请参阅 
 
-[如何使用媒体编码器标准通过 .NET 来生成缩略图](/documentation/articles/media-services-dotnet-generate-thumbnail-with-mes/)  
-[媒体服务编码概述](/documentation/articles/media-services-encode-asset/)
+[如何使用媒体编码器标准通过 .NET 来生成缩略图](./media-services-dotnet-generate-thumbnail-with-mes.md)  
+[媒体服务编码概述](./media-services-encode-asset.md)
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

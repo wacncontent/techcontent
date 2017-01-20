@@ -1,30 +1,30 @@
-<properties
-    pageTitle="开始使用 .NET 传送点播内容 | Azure"
-    description="本教程将引导你完成使用 Azure 媒体服务和 .NET 实施点播内容传送应用程序的步骤。"
-    services="media-services"
-    documentationcenter=""
-    author="Juliako"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="388b8928-9aa9-46b1-b60a-a918da75bd7b"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="hero-article"
-    ms.date="12/15/2016"
-    wacn.date="01/13/2017"
-    ms.author="juliako" />
+---
+title: 开始使用 .NET 传送点播内容 | Azure
+description: 本教程将引导你完成使用 Azure 媒体服务和 .NET 实施点播内容传送应用程序的步骤。
+services: media-services
+documentationcenter: 
+author: Juliako
+manager: erikre
+editor: 
+
+ms.assetid: 388b8928-9aa9-46b1-b60a-a918da75bd7b
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: hero-article
+ms.date: 12/15/2016
+wacn.date: 01/13/2017
+ms.author: juliako
+---
 
 # 使用 .NET SDK 开始传送点播内容
 
-[AZURE.INCLUDE [media-services-selector-get-started](../../includes/media-services-selector-get-started.md)]
+[!INCLUDE [media-services-selector-get-started](../../includes/media-services-selector-get-started.md)]
 
->[AZURE.NOTE]
-若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
+>[!NOTE]
+若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
  
-
 ## 概述
 本教程将引导你完成使用用于 .NET 的 Azure 媒体服务 (AMS) SDK 实施视频点播 (VoD) 内容传送应用程序的步骤。
 
@@ -57,12 +57,10 @@
 
 - 若要完成本教程，你需要一个 Azure 帐户。
 	
-	如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/?WT.mc_id=A261C142F)。获取可用来尝试付费版 Azure 服务的信用额度。即使在信用额度用完后，也可保留帐户并使用免费的 Azure 服务和功能，例如 Azure App Service 中的 Web 应用功能。
+	如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。获取可用来尝试付费版 Azure 服务的信用额度。即使在信用额度用完后，也可保留帐户并使用免费的 Azure 服务和功能，例如 Azure App Service 中的 Web 应用功能。
 - 操作系统：Windows 8 或更高版本、Windows 2008 R2、Windows 7。
 - .NET Framework 4.0 或更高版本
 - Visual Studio 2010 SP1（Professional、Premium、Ultimate 或 Express）或更高版本。
-
-
 
 ##使用门户创建媒体服务帐户
 
@@ -117,11 +115,9 @@
 
 分配所有新的单元大约需要 20 分钟才能完成。
 
->[AZURE.NOTE] 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
+>[!NOTE] 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
 >
-> 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅[媒体服务定价详细信息](/pricing/details/media-services/)。
-
-
+> 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅[媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
 
 ##创建和配置 Visual Studio 项目
 
@@ -158,20 +154,19 @@
 		using System.IO;
 		using Microsoft.WindowsAzure.MediaServices.Client;
 		
-
 6. 创建新的文件夹（文件夹可位于本地驱动器上任意位置），然后复制要编码和流式传输或渐进式下载的 .mp4 文件。在此示例中，我们使用了“C:\\VideoFiles”路径。
 
 ## 连接到媒体服务帐户
 
 使用采用 .NET 的媒体服务时，你必须将 **CloudMediaContext** 类用于大多数媒体服务编程任务：连接到媒体服务帐户；创建、更新、访问和删除以下对象：资产、资产文件、作业、访问策略、定位符等等。
 
-使用以下代码覆盖默认程序类。该代码演示如何从 App.config 文件中读取连接值，以及如何创建 **CloudMediaContext** 对象以连接到媒体服务。有关连接到媒体服务的详细信息，请参阅[使用适用于 .NET 的媒体服务 SDK 连接到媒体服务](/documentation/articles/media-services-dotnet-connect-programmatically/)。
+使用以下代码覆盖默认程序类。该代码演示如何从 App.config 文件中读取连接值，以及如何创建 **CloudMediaContext** 对象以连接到媒体服务。有关连接到媒体服务的详细信息，请参阅[使用适用于 .NET 的媒体服务 SDK 连接到媒体服务](./media-services-dotnet-connect-programmatically.md)。
 
 请确保将文件名和路径更新为媒体文件所在位置。
 
 **Main** 函数调用将在本部分中进一步定义的方法。
 
-> [AZURE.NOTE]在添加所有函数的定义前，会一直收到编译错误。
+> [!NOTE]在添加所有函数的定义前，会一直收到编译错误。
 
     class Program
     {
@@ -268,7 +263,6 @@
 	    return inputAsset;
 	}
 
-
 ##将源文件编码为一组自适应比特率 MP4 文件
 
 将资产引入媒体服务后，即可对媒体进行编码、传输复用、打水印等处理，然后将其传送至客户端。将根据多个后台角色实例调度把那个运行这些活动，以确保较高的性能和可用性。这些活动称为作业，每个作业由原子任务构成，这些原子任务在资产文件上完成具体的工作。
@@ -300,7 +294,6 @@
 	        options);
 	
 	    Console.WriteLine("Submitting transcoding job...");
-	
 	
 	    // Submit the job and wait until it is completed.
 	    job.Submit();
@@ -367,7 +360,6 @@
             AccessPermissions.Read,
             TimeSpan.FromDays(30));
 
-
         IEnumerable<IAssetFile> mp4AssetFiles = asset
                 .AssetFiles
                 .ToList()
@@ -382,7 +374,6 @@
         // Get the URls for progressive download for each MP4 file that was generated as a result
         // of encoding.
         List<Uri> mp4ProgressiveDownloadUris = mp4AssetFiles.Select(af => af.GetSasUri()).ToList();
-
 
         // Display  the streaming URLs.
         Console.WriteLine("Use the following URLs for adaptive streaming: ");
@@ -450,23 +441,17 @@ MPEG DASH
 
 	https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_56kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
-
 若要流式传输视频，请将 URL 粘贴到 [Azure 媒体服务播放器](http://amsplayer.azurewebsites.net/azuremediaplayer.html)的“URL”文本框中。
 
 若要测试渐进式下载，请将 URL 粘贴到浏览器（例如 Internet Explorer、Chrome 或 Safari）中。
 
 有关详细信息，请参阅以下主题：
 
-- [使用现有播放器播放内容](/documentation/articles/media-services-playback-content-with-existing-players/)
-- [开发视频播放器应用程序](/documentation/articles/media-services-develop-video-players/)
-- [使用 DASH.js 在 HTML5 应用程序中嵌入 MPEG-DASH 自适应流式处理视频](/documentation/articles/media-services-embed-mpeg-dash-in-html5/)
-
-
-
+- [使用现有播放器播放内容](./media-services-playback-content-with-existing-players.md)
+- [开发视频播放器应用程序](./media-services-develop-video-players.md)
+- [使用 DASH.js 在 HTML5 应用程序中嵌入 MPEG-DASH 自适应流式处理视频](./media-services-embed-mpeg-dash-in-html5.md)
 
 <!-- Anchors. -->
-
-
 
 <!-- URLs. -->
 

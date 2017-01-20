@@ -1,26 +1,21 @@
-<properties 
-	pageTitle="使用 Express 构建 Web 应用程序 (Node.js) | Azure" 
-	description="本教程以云服务教程为基础，演示如何使用 Express 模块。" 
-	services="cloud-services" 
-	documentationCenter="nodejs" 
-	authors="rmcmurray" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 使用 Express 构建 Web 应用程序 (Node.js) | Azure
+description: 本教程以云服务教程为基础，演示如何使用 Express 模块。
+services: cloud-services
+documentationCenter: nodejs
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags 
-	ms.service="cloud-services" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="nodejs" 
-	ms.topic="article" 
-	ms.date="11/01/2016" 
-	wacn.date="12/05/2016" 
-	ms.author="robmcm"/>
-
-
-
-
-
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/05/2016
+ms.author: robmcm
+---
 
 # 使用 Express 在 Azure 云服务中生成 Node.js Web 应用程序
 
@@ -31,7 +26,7 @@ Node.js 包含核心运行时中最小的一个功能集。开发人员在开发
 ![显示“Welcome to Express in Azure”的 Web 浏览器](./media/cloud-services-nodejs-develop-deploy-express-app/node36.png)
 
 ##创建云服务项目
-[AZURE.INCLUDE [install-dev-tools](../../includes/install-dev-tools.md)]
+[!INCLUDE [install-dev-tools](../../includes/install-dev-tools.md)]
 
 执行下列步骤可新建一个名为“expressapp”的云服务项目：
 
@@ -39,7 +34,7 @@ Node.js 包含核心运行时中最小的一个功能集。开发人员在开发
 
 	![Azure PowerShell 图标](./media/cloud-services-nodejs-develop-deploy-express-app/azure-powershell-start.png)
 
-	[AZURE.INCLUDE [install-dev-tools](../../includes/install-dev-tools.md)]
+	[!INCLUDE [install-dev-tools](../../includes/install-dev-tools.md)]
 
 2. 将目录切换到 **c:\\node** 目录，然后输入下列命令以新建一个名为 **expressapp** 的解决方案和名为 **WebRole1** 的 Web 角色：
 
@@ -47,7 +42,7 @@ Node.js 包含核心运行时中最小的一个功能集。开发人员在开发
 		PS C:\Node\expressapp> Add-AzureNodeWebRole
 		PS C:\Node\expressapp> Set-AzureServiceProjectRole WebRole1 Node 0.10.21
 
-	> [AZURE.NOTE] 默认情况下，**Add-azurenodewebrole** 使用旧版 Node.js。上述 **Set-azureserviceprojectrole** 语句将指示 Azure 使用 v0.10.21 版本的节点。请注意，这些参数区分大小写。通过检查 **WebRole1\\package.json** 中的 **engines** 属性可以验证是否已选择正确的 Node.js 版本。
+	> [!NOTE] 默认情况下，**Add-azurenodewebrole** 使用旧版 Node.js。上述 **Set-azureserviceprojectrole** 语句将指示 Azure 使用 v0.10.21 版本的节点。请注意，这些参数区分大小写。通过检查 **WebRole1\\package.json** 中的 **engines** 属性可以验证是否已选择正确的 Node.js 版本。
 
 ##安装 Express
 
@@ -66,7 +61,6 @@ Node.js 包含核心运行时中最小的一个功能集。开发人员在开发
 	系统将提示是否覆盖之前创建的应用程序。输入 **y** 或 **yes** 以继续操作。Express 会生成用于生成应用程序的 app.js 文件和一个文件夹结构。
 
 	![express 命令的输出](./media/cloud-services-nodejs-develop-deploy-express-app/node23.png)
-
 
 5.  若要安装在 package.json 文件中定义的其他依赖项，请输入以下命令：
 
@@ -134,10 +128,8 @@ Node.js 包含核心运行时中最小的一个功能集。开发人员在开发
 
 有关详细信息，请参阅 [Node.js 开发人员中心](/develop/nodejs/)。
 
-  [Node.js Web Application]: /documentation/articles/cloud-services-nodejs-develop-deploy-app/
+  [Node.js Web Application]: ./cloud-services-nodejs-develop-deploy-app.md
   [Express]: http://expressjs.com/
   [http://jade-lang.com]: http://jade-lang.com
-
- 
 
 <!---HONumber=Mooncake_1128_2016-->

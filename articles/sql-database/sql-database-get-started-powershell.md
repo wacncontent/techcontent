@@ -1,39 +1,33 @@
-<properties 
-    pageTitle="使用 PowerShell 设置新的 SQL 数据库 | Azure" 
-    description="了解如何使用 PowerShell 创建 SQL 数据库。可以通过 PowerShell cmdlet 管理常见的数据库设置任务。"
-    keywords="新建 sql 数据库, 数据库设置"
-	services="sql-database"
-    documentationCenter=""
-    authors="stevestein"
-    manager="jhubbard"
-    editor="cgronlun"/>  
+---
+title: 使用 PowerShell 设置新的 SQL 数据库 | Azure
+description: 了解如何使用 PowerShell 创建 SQL 数据库。可以通过 PowerShell cmdlet 管理常见的数据库设置任务。
+keywords: 新建 sql 数据库, 数据库设置
+services: sql-database
+documentationCenter: 
+authors: stevestein
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-    ms.service="sql-database"
-    ms.devlang="NA"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="powershell"
-    ms.workload="data-management"
-    ms.date="08/19/2016"
-    wacn.date="12/12/2016"
-    ms.author="sstein"/>  
-
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: hero-article
+ms.tgt_pltfrm: powershell
+ms.workload: data-management
+ms.date: 08/19/2016
+wacn.date: 12/12/2016
+ms.author: sstein
+---
 
 # 使用 PowerShell cmdlet 创建 SQL 数据库并执行常见的数据库设置任务
 
+> [!div class="op_single_selector"]
+- [Azure 门户](./sql-database-get-started.md)
+- [PowerShell](./sql-database-get-started-powershell.md)
+- [C#](./sql-database-get-started-csharp.md)
 
-> [AZURE.SELECTOR]
-- [Azure 门户](/documentation/articles/sql-database-get-started/)
-- [PowerShell](/documentation/articles/sql-database-get-started-powershell/)
-- [C#](/documentation/articles/sql-database-get-started-csharp/)
+了解如何使用 PowerShell cmdlet 创建 SQL 数据库。（有关如何创建弹性数据库的信息，请参阅[使用 PowerShell 创建新的弹性数据库池](./sql-database-elastic-pool-create-powershell.md)。）
 
-
-
-了解如何使用 PowerShell cmdlet 创建 SQL 数据库。（有关如何创建弹性数据库的信息，请参阅[使用 PowerShell 创建新的弹性数据库池](/documentation/articles/sql-database-elastic-pool-create-powershell/)。）
-
-
-[AZURE.INCLUDE [启动 PowerShell 会话](../../includes/sql-database-powershell.md)]
+[!INCLUDE [启动 PowerShell 会话](../../includes/sql-database-powershell.md)]
 
 ##<a name="database-setup-create-a-resource-group-server-and-firewall-rule"></a> 数据库设置：创建资源组、服务器和防火墙规则
 
@@ -42,7 +36,6 @@
 运行以下命令创建资源组：
 
 	New-AzureRmResourceGroup -Name "resourcegroupsqlgsps" -Location "China North"
-
 
 ### 创建服务器
 
@@ -64,8 +57,7 @@ SQL 数据库在 Azure SQL 数据库服务器中创建。运行 **New-AzureRmSql
 
 若要允许其他 Azure 服务访问该服务器，请添加一个防火墙规则并将 StartIpAddress 和 EndIpAddress 都设置为 0.0.0.0。此规则允许来自任何 Azure 订阅的 Azure 流量访问该服务器。
 
-有关详细信息，请参阅 [Azure SQL 数据库防火墙](/documentation/articles/sql-database-firewall-configure/)。
-
+有关详细信息，请参阅 [Azure SQL 数据库防火墙](./sql-database-firewall-configure.md)。
 
 ## 创建 SQL 数据库
 
@@ -73,9 +65,7 @@ SQL 数据库在 Azure SQL 数据库服务器中创建。运行 **New-AzureRmSql
 
 以下命令通过 S1 性能级别在标准服务层创建一个（空白）SQL 数据库：
 
-
 	New-AzureRmSqlDatabase -ResourceGroupName "resourcegroupsqlgsps" -ServerName "server1" -DatabaseName "database1" -Edition "Standard" -RequestedServiceObjectiveName "S1"
-
 
 成功创建数据库后，会显示数据库详细信息。
 
@@ -115,7 +105,6 @@ SQL 数据库在 Azure SQL 数据库服务器中创建。运行 **New-AzureRmSql
     
     $fireWallRule = New-AzureRmSqlServerFirewallRule -ResourceGroupName $resourceGroupName -ServerName $serverName -FirewallRuleName $firewallRuleName -StartIpAddress $firewallStartIp -EndIpAddress $firewallEndIp
     
-    
     # CREATE A SQL DATABASE
     $databaseName = "{database-name}"
     $databaseEdition = "{Standard}"
@@ -123,24 +112,17 @@ SQL 数据库在 Azure SQL 数据库服务器中创建。运行 **New-AzureRmSql
     
     $sqlDatabase = New-AzureRmSqlDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -DatabaseName $databaseName -Edition $databaseEdition -RequestedServiceObjectiveName $databaseSlo
     
-   
     # REMOVE ALL RESOURCES THE SCRIPT JUST CREATED
     #Remove-AzureRmResourceGroup -Name $resourceGroupName
-
-
-
-
-
 
 ## 后续步骤
 创建 SQL 数据库并执行基本的数据库设置任务后，可以执行以下操作：
 
-- [使用 PowerShell 管理 SQL 数据库](/documentation/articles/sql-database-command-line-tools/)
-- [使用 SQL Server Management Studio 连接到 SQL 数据库并执行示例 T-SQL 查询](/documentation/articles/sql-database-connect-query-ssms/)
-
+- [使用 PowerShell 管理 SQL 数据库](./sql-database-command-line-tools.md)
+- [使用 SQL Server Management Studio 连接到 SQL 数据库并执行示例 T-SQL 查询](./sql-database-connect-query-ssms.md)
 
 ## 其他资源
 
-- [Azure SQL 数据库](/documentation/services/sql-databases/)
+- [Azure SQL 数据库](./index.md/)
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

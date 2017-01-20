@@ -1,12 +1,16 @@
-<properties 
-	pageTitle="使用 NSG 实现 DMZ 区域" 
-	description="本页介绍如何使用 Powershell 指令构建 NSG" 
-	services="virtual network" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-network-aog" ms.date="" wacn.date="08/01/2016"/>
+---
+title: 使用 NSG 实现 DMZ 区域
+description: 本页介绍如何使用 Powershell 指令构建 NSG
+services: virtual network
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-network-aog
+ms.date: 
+wacn.date: 08/01/2016
+---
 
 #使用 NSG 实现 DMZ 区域
 
@@ -76,7 +80,6 @@
 		$BackendNSG | Set-AzureNetworkSecurityGroupToSubnet -VirtualNetworkName $VNetName -SubnetName $Subnet2Name;
 		$DBNSG | Set-AzureNetworkSecurityGroupToSubnet -VirtualNetworkName $VNetName -SubnetName $Subnet3Name; 
  
- 
 4. 配置成功后，可以使用下面的命令查看每个 AzureNetworkSecurityGroup 的规则：
 
 		Get-AzureNetworkSecurityGroup -Name "DMZNSG" -Detailed 
@@ -94,7 +97,6 @@
 对下面这个命令的一些参数做一下简单说明：
 
 		Set-AzureNetworkSecurityRule -Name "DB-DMZ" -Type Outbound -Priority 300 -Action Deny -SourceAddressPrefix "10.0.0.64/27" -SourcePortRange * -DestinationAddressPrefix "10.0.0.0/27" -DestinationPortRange * -Protocol TCP;
-
 
 **Name**：指定过滤规则的名称
 
@@ -124,7 +126,6 @@
  
 ##  <a id="resource"></a>参考文档
 
-- [网络安全组](/documentation/articles/virtual-networks-nsg/)
-- [如何在 PowerShell 中创建 NSG（经典）](/documentation/articles/virtual-networks-create-nsg-classic-ps/)
-
+- [网络安全组](./virtual-network/virtual-networks-nsg.md)
+- [如何在 PowerShell 中创建 NSG（经典）](./virtual-network/virtual-networks-create-nsg-classic-ps.md)
 

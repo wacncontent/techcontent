@@ -1,28 +1,28 @@
-<properties
-    pageTitle="通过自定义 MES 预设执行高级编码 | Azure"
-    description="本主题说明如何通过自定义 Media Encoder Standard 任务预设执行高级编码。"
-    services="media-services"
-    documentationcenter=""
-    author="juliako"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="2a4ade25-e600-4bce-a66e-e29cf4a38369"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/28/2016"
-    wacn.date="01/13/2017"
-    ms.author="juliako" />  
+---
+title: 通过自定义 MES 预设执行高级编码 | Azure
+description: 本主题说明如何通过自定义 Media Encoder Standard 任务预设执行高级编码。
+services: media-services
+documentationcenter: 
+author: juliako
+manager: erikre
+editor: 
 
+ms.assetid: 2a4ade25-e600-4bce-a66e-e29cf4a38369
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/28/2016
+wacn.date: 01/13/2017
+ms.author: juliako
+---
 
 # 通过自定义 MES 预设执行高级编码 
 
 ## 概述
 
-本主题演示如何自定义 Media Encoder Standard 预设。[通过使用自定义预设的 Media Encoder Standard 进行编码](/documentation/articles/media-services-custom-mes-presets-with-dotnet/)主题演示如何使用 .NET 创建编码任务和执行此任务的作业。自定义预设后，请将其提供给编码任务。
+本主题演示如何自定义 Media Encoder Standard 预设。[通过使用自定义预设的 Media Encoder Standard 进行编码](./media-services-custom-mes-presets-with-dotnet.md)主题演示如何使用 .NET 创建编码任务和执行此任务的作业。自定义预设后，请将其提供给编码任务。
 
 本主题演示了执行以下编码任务的自定义预设：
 
@@ -53,18 +53,15 @@
 	
 ##<a id="thumbnails"></a>生成缩略图
 
-本部分说明如何自定义生成缩略图的预设。下面定义的预设包含有关如何将文件编码的信息，以及生成缩略图时所需的信息。可使用[此部分](/documentation/articles/media-services-mes-presets-overview/)所述的任何 MES 预设，并添加生成缩略图的代码。
+本部分说明如何自定义生成缩略图的预设。下面定义的预设包含有关如何将文件编码的信息，以及生成缩略图时所需的信息。可使用[此部分](./media-services-mes-presets-overview.md)所述的任何 MES 预设，并添加生成缩略图的代码。
 
->[AZURE.NOTE]如果要编码为单比特率视频，以下预设中的 **SceneChangeDetection** 设置只能设置为 true。如果要编码为多比特率视频并将 **SceneChangeDetection** 设置为 true，则编码器将返回错误。
+>[!NOTE]如果要编码为单比特率视频，以下预设中的 **SceneChangeDetection** 设置只能设置为 true。如果要编码为多比特率视频并将 **SceneChangeDetection** 设置为 true，则编码器将返回错误。
 
-
-
-有关架构的信息，请参阅[此主题](/documentation/articles/media-services-mes-schema/)。
+有关架构的信息，请参阅[此主题](./media-services-mes-schema.md)。
 
 请务必仔细阅读[注意事项](#considerations)部分。
 
 ###<a id="json"></a>JSON 预设
-
 
 	{
 	  "Version": 1.0,
@@ -164,9 +161,7 @@
 	  ]
 	}
 
-
 ###<a id="xml"></a>XML 预设
-
 
 	<?xml version="1.0" encoding="utf-16"?>
 	<Preset xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.0" xmlns="http://www.windowsazure.com/media/encoding/Preset/2014/03">
@@ -261,7 +256,7 @@
 ## <a id="trim_video"></a>修剪视频（裁剪）
 本部分说明如何修改编码器预设，以裁剪或修剪其输入为所谓的夹层文件或按需文件的输入视频。也可以使用编码器来剪切或剪裁从实时流捕获或存档的资产 – [此博客](https://azure.microsoft.com/blog/sub-clipping-and-live-archive-extraction-with-media-encoder-standard/)提供了详细信息。
 
-若要裁剪视频，可以使用[此部分](/documentation/articles/media-services-mes-presets-overview/)所述的任何 MES 预设，并修改 **Sources** 元素（如下所示）。StartTime 的值需与输入视频的绝对时间戳匹配。例如，如果输入视频第一帧的时间戳为 12:00:10.000，则 StartTime 应大于或等于 12:00:10.000。在以下示例中，假设输入视频的起始时间戳为零。**Sources** 应位于预设的开始处。
+若要裁剪视频，可以使用[此部分](./media-services-mes-presets-overview.md)所述的任何 MES 预设，并修改 **Sources** 元素（如下所示）。StartTime 的值需与输入视频的绝对时间戳匹配。例如，如果输入视频第一帧的时间戳为 12:00:10.000，则 StartTime 应大于或等于 12:00:10.000。在以下示例中，假设输入视频的起始时间戳为零。**Sources** 应位于预设的开始处。
  
 ###<a id="json"></a>JSON 预设
 	
@@ -385,7 +380,7 @@
 
 ###XML 预设
 	
-若要修剪视频，可以使用[此处](/documentation/articles/media-services-mes-presets-overview/)所述的任何 MES 预设并修改 **Sources** 元素（如下所示）。
+若要修剪视频，可以使用[此处](./media-services-mes-presets-overview.md)所述的任何 MES 预设并修改 **Sources** 元素（如下所示）。
 
 	<?xml version="1.0" encoding="utf-16"?>
 	<Preset xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.0" xmlns="http://www.windowsazure.com/media/encoding/Preset/2014/03">
@@ -508,8 +503,7 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 
 除了定义预设文件外，还必须让媒体服务知道资产中的哪个文件是覆盖层图像，哪个文件是要在其上覆盖图像的源视频。视频文件必须是**主**文件。
 
-如果使用 .NET，请将以下两个函数添加到[此主题](/documentation/articles/media-services-custom-mes-presets-with-dotnet/#encoding_with_dotnet)中定义的 .NET 示例。**UploadMediaFilesFromFolder** 函数从文件夹上传文件（例如 BigBuckBunny.mp4 和 Image001.png），并将 mp4 文件设置为资产中的主文件。**EncodeWithOverlay** 函数使用传递给它的自定义预设文件（例如，下面的预设）来创建编码任务。
-
+如果使用 .NET，请将以下两个函数添加到[此主题](./media-services-custom-mes-presets-with-dotnet.md#encoding_with_dotnet)中定义的 .NET 示例。**UploadMediaFilesFromFolder** 函数从文件夹上传文件（例如 BigBuckBunny.mp4 和 Image001.png），并将 mp4 文件设置为资产中的主文件。**EncodeWithOverlay** 函数使用传递给它的自定义预设文件（例如，下面的预设）来创建编码任务。
 
 	static public IAsset UploadMediaFilesFromFolder(string folderPath)
 	{
@@ -562,8 +556,7 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
         return job.OutputMediaAssets[0];
     }
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 当前限制：
 >
 >不支持覆盖层不透明度设置。
@@ -647,7 +640,6 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 	  ]
 	}
 
-
 ###XML 预设
 	
 	<?xml version="1.0" encoding="utf-16"?>
@@ -711,14 +703,13 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 	  </Outputs>
 	</Preset>
 
-
 ##<a id="silent_audio"></a>在输入不包含音频时插入静音曲目
 
 默认情况下，如果要向编码器发送仅包含视频而不包含音频的输入，则输出资产将包含仅有视频数据的文件。某些播放器可能无法处理此类输出流。对于这种方案，你可以使用此设置来强制编码器将静音曲目添加到输出。
 
 若要强制编码器在输入不包含音频时生成包含静音曲目的资产，请指定“InsertSilenceIfNoAudio”值。
 
-可使用[此部分](/documentation/articles/media-services-mes-presets-overview/)中所述的任何 MES 预设，并进行以下修改：
+可使用[此部分](./media-services-mes-presets-overview.md)中所述的任何 MES 预设，并进行以下修改：
 
 ###JSON 预设
 
@@ -767,7 +758,6 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 	  </Filters>
 	</Source>
 	</Sources>
-
 
 ##<a id="audio_only"></a>仅音频预设
 
@@ -837,10 +827,8 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 	1. 重复调用 task. InputAssets.Add() 以便依次添加更多视频。
 	2. 通过按相同顺序添加更多条目，对 JSON 中的“Sources”元素进行相应编辑。
 
-
 ###.NET 代码
 
-	
 	IAsset asset1 = _context.Assets.Where(asset => asset.Id == "nb:cid:UUID:606db602-efd7-4436-97b4-c0b867ba195b").FirstOrDefault();
 	IAsset asset2 = _context.Assets.Where(asset => asset.Id == "nb:cid:UUID:a7e2b90f-0565-4a94-87fe-0a9fa07b9c7e").FirstOrDefault();
 	
@@ -930,19 +918,19 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 
 ##<a id="crop"></a>使用媒体编码器标准版裁剪视频
 
-请参阅主题 [Crop videos with Media Encoder Standard](/documentation/articles/media-services-crop-video/)（使用媒体编码器标准版裁剪视频）主题。
+请参阅主题 [Crop videos with Media Encoder Standard](./media-services-crop-video.md)（使用媒体编码器标准版裁剪视频）主题。
 
 ##<a id="no_video"></a>在输入不包含视频时插入视频轨迹
 
 默认情况下，如果要向编码器发送仅包含音频而不包含视频的输入，则输出资产将包含仅有音频数据的文件。某些播放器（包括 Azure 媒体播放器）（请参阅[此处](https://feedback.azure.com/forums/169396-azure-media-services/suggestions/8082468-audio-only-scenarios)）可能无法处理这样的流。对于这种方案，可使用此设置来强制编码器将单色视频轨迹添加到输出。
 
->[AZURE.NOTE]强制编码器插入输出视频轨迹会增加输出资产的大小，从而增加编码任务的相关成本。应运行测试来验证此成本增加对每月费用的影响不大。
+>[!NOTE]强制编码器插入输出视频轨迹会增加输出资产的大小，从而增加编码任务的相关成本。应运行测试来验证此成本增加对每月费用的影响不大。
 
 ### 仅以最低比特率插入视频
 
 假设要使用多比特率编码预设（如[“H264 多比特率 720p”](https://msdn.microsoft.com/zh-cn/library/mt269960.aspx)）对整个输入目录进行编码以实现流式处理，且输入目录中混合了视频文件和仅音频文件。在此方案中，如果输入不包含视频，用户可能想要强制编码器仅以最低比特率插入单色视频轨迹，而不是按每个输出比特率插入视频。要实现此目的，需要指定“InsertBlackIfNoVideoBottomLayerOnly”标志。
 
-可使用[此部分](/documentation/articles/media-services-mes-presets-overview/)中所述的任何 MES 预设，并进行以下修改：
+可使用[此部分](./media-services-mes-presets-overview.md)中所述的任何 MES 预设，并进行以下修改：
 
 #### JSON 预设
 
@@ -963,9 +951,9 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 
 ### 按所有输出比特率插入视频
 
-假设要使用多比特率编码预设（如[“H264 多比特率 720p”](/documentation/articles/media-services-mes-preset-H264-Multiple-Bitrate-720p/)）对整个输入目录进行编码以实现流式处理，且输入目录中混合了视频文件和仅音频文件。在此方案中，如果输入不包含视频，用户可能想要强制编码器按所有输出比特率插入单色视频轨迹。这可确保对于视频轨迹和音频曲目的数目，输出资产都是同源的。要实现此目的，需要指定“InsertBlackIfNoVideo”标志。
+假设要使用多比特率编码预设（如[“H264 多比特率 720p”](./media-services-mes-preset-H264-Multiple-Bitrate-720p.md)）对整个输入目录进行编码以实现流式处理，且输入目录中混合了视频文件和仅音频文件。在此方案中，如果输入不包含视频，用户可能想要强制编码器按所有输出比特率插入单色视频轨迹。这可确保对于视频轨迹和音频曲目的数目，输出资产都是同源的。要实现此目的，需要指定“InsertBlackIfNoVideo”标志。
 
-可使用[此部分](/documentation/articles/media-services-mes-presets-overview/)中所述的任何 MES 预设，并进行以下修改：
+可使用[此部分](./media-services-mes-presets-overview.md)中所述的任何 MES 预设，并进行以下修改：
 
 #### JSON 预设
 
@@ -985,7 +973,7 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 	<Condition>InsertBlackIfNoVideo</Condition>
 
 ## <a id="rotate_video"></a>旋转视频
-[Media Encoder Standard](/documentation/articles/media-services-dotnet-encode-with-media-encoder-standard/) 支持的旋转角度为 0/90/180/270。默认行为是“自动”，即尝试在传入的视频文件中检测旋转元数据并对其进行补偿。包含[此部分](/documentation/articles/media-services-mes-presets-overview/)中定义的预设之一的以下 **Sources** 元素：
+[Media Encoder Standard](./media-services-dotnet-encode-with-media-encoder-standard.md) 支持的旋转角度为 0/90/180/270。默认行为是“自动”，即尝试在传入的视频文件中检测旋转元数据并对其进行补偿。包含[此部分](./media-services-mes-presets-overview.md)中定义的预设之一的以下 **Sources** 元素：
 
 ### JSON 预设
     "Sources": [
@@ -1009,14 +997,12 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
         </Source>
     </Sources>
 
-另请参阅[此](/documentation/articles/media-services-mes-schema/#PreserveResolutionAfterRotation)主题，了解有关编码器如何在触发旋转补偿后解释预设中的宽度和高度设置的详细信息。
+另请参阅[此](./media-services-mes-schema.md#PreserveResolutionAfterRotation)主题，了解有关编码器如何在触发旋转补偿后解释预设中的宽度和高度设置的详细信息。
 
 可以使用值“0”指示编码器忽略输入视频中的旋转元数据（如果存在）。
 
-
-
 ## 另请参阅
-[媒体服务编码概述](/documentation/articles/media-services-encode-asset/)
+[媒体服务编码概述](./media-services-encode-asset.md)
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Description_Update: remove "创建编码作业" code; Update MSDN links to A.cn links; Add code sample for "创建覆盖层"-->

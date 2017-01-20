@@ -1,12 +1,16 @@
-<properties 
-	pageTitle="将虚拟机添加到可用性集中" 
-	description="本页介绍如何将虚拟机添加到可用性集中。" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machine-aog" ms.date="" wacn.date="06/08/2015"/>
+---
+title: 将虚拟机添加到可用性集中
+description: 本页介绍如何将虚拟机添加到可用性集中。
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machine-aog
+ms.date: 
+wacn.date: 06/08/2015
+---
 
 #将虚拟机添加到可用性集中
 
@@ -32,7 +36,6 @@
  
 3. 第二台VM-配置-可用性集（本例：MYVM）-保存
 
-	
 	![](./media/aog-virtual-machine-add-vm-to-availability-group/add-to-aviliablily.png) 
  
 4. 从新虚拟机的仪表板中，单击“配置”，您会看到该虚拟机现在是新可用性集的一个成员

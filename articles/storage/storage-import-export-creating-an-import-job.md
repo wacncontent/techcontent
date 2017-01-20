@@ -1,23 +1,22 @@
-<properties
-    pageTitle="为 Azure 导入/导出服务创建导入作业 | Azure"
-    description="了解如何为 Azure 导入/导出服务创建导入作业"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 为 Azure 导入/导出服务创建导入作业 | Azure
+description: 了解如何为 Azure 导入/导出服务创建导入作业
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.assetid="8b886e83-6148-4149-9d0f-5d48ec822475"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/16/2016"
-    wacn.date="01/06/2016"
-    ms.author="renash" />  
-
+ms.assetid: 8b886e83-6148-4149-9d0f-5d48ec822475
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/16/2016
+wacn.date: 01/06/2016
+ms.author: renash
+---
 
 # 创建导入作业
 
@@ -33,13 +32,13 @@
 
 -   使用寄送详细信息更新导入作业。
 
- 有关导入/导出服务的概述以及演示如何使用 [Azure 门户预览](https://portal.azure.cn/)创建和管理导入和导出作业的教程，请参阅 [使用 Azure 导入/导出服务将数据传输到 Blob 存储](/documentation/articles/storage-import-export-service/)。
+ 有关导入/导出服务的概述以及演示如何使用 [Azure 门户预览](https://portal.azure.cn/)创建和管理导入和导出作业的教程，请参阅 [使用 Azure 导入/导出服务将数据传输到 Blob 存储](./storage-import-export-service.md)。
 
 ## 使用 Azure 导入/导出工具准备驱动器
 
 无论是通过门户还是 REST API 创建作业，为导入作业准备驱动器的步骤都是相同的。
 
-下面是驱动器准备工作的简要概述。有关完整说明，请参阅 [Azure 导入/导出工具参考](/documentation/articles/storage-import-export-tool-how-to-v1/)。可从[此处](http://go.microsoft.com/fwlink/?LinkID=301900)下载 Azure 导入/导出工具。
+下面是驱动器准备工作的简要概述。有关完整说明，请参阅 [Azure 导入/导出工具参考](./storage-import-export-tool-how-to-v1.md)。可从[此处](http://go.microsoft.com/fwlink/?LinkID=301900)下载 Azure 导入/导出工具。
 
 准备驱动器的过程包括以下步骤：
 
@@ -97,12 +96,12 @@
 ## 寄送驱动器
 必须将驱动器寄送到在上一步骤中获取的地址，并向导入/导出服务提供包裹的跟踪号。
 
-> [AZURE.NOTE]必须通过支持的、可提供包裹跟踪号的承运人寄送驱动器。
+> [!NOTE]必须通过支持的、可提供包裹跟踪号的承运人寄送驱动器。
 
 ## 使用寄送信息更新导入作业
 获取跟踪号后，请调用[更新作业属性](https://docs.microsoft.com/zh-CN/rest/api/storageimportexport/jobs#Jobs_Update)操作更新承运人名称、作业跟踪号以及运送回邮的承运人帐号。可以选择性地指定驱动器数量和寄送日期。
 
 ## 另请参阅
-[使用导入/导出服务 REST API](/documentation/articles/storage-import-export-using-the-rest-api/)
+[使用导入/导出服务 REST API](./storage-import-export-using-the-rest-api.md)
 
 <!---HONumber=Mooncake_1226_2016-->

@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用增量快照备份和恢复 Azure 虚拟机 | Azure"
-    description="创建自定义解决方案，以使用增量快照备份和恢复 Azure 虚拟机磁盘。"
-    services="storage"
-    documentationcenter="na"
-    author="aungoo-msft"
-    manager="tadb"
-    editor="tysonn" />  
+---
+title: 使用增量快照备份和恢复 Azure 虚拟机 | Azure
+description: 创建自定义解决方案，以使用增量快照备份和恢复 Azure 虚拟机磁盘。
+services: storage
+documentationcenter: na
+author: aungoo-msft
+manager: tadb
+editor: tysonn
 
-<tags
-    ms.assetid="3524b987-bd65-4e35-83e7-fbc2136643e5"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/17/2016"
-    wacn.date="12/26/2016"
-    ms.author="aungoo" />
+ms.assetid: 3524b987-bd65-4e35-83e7-fbc2136643e5
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/17/2016
+wacn.date: 12/26/2016
+ms.author: aungoo
+---
 
 # 使用增量快照备份 Azure 虚拟机磁盘
 ## 概述
@@ -30,10 +30,10 @@ Blob 快照是在某个时间点捕获的 Blob 只读版本。在创建快照后
 ## 完整快照复制
 可将快照作为 Blob 复制到另一个存储帐户，以保留基本 Blob 的备份。你还可以复制快照覆盖基本 Blob，这类似于将 Blob 还原到以前的版本。将快照从某个存储帐户复制到另一个存储帐户时，将占用与基本页 Blob 相同的空间。因此，将整个快照从某个存储帐户复制到另一个存储帐户时速度较慢，并且会消耗目标存储帐户中的大量空间。
 
->[AZURE.NOTE] 如果将基本 Blob 复制到另一个目标，则不会一起复制 Blob 的快照。同样，如果使用副本覆盖基本 Blob，与基本 Blob 关联的快照不会受到影响，并且可让基本 Blob 名称保持不变。
+>[!NOTE] 如果将基本 Blob 复制到另一个目标，则不会一起复制 Blob 的快照。同样，如果使用副本覆盖基本 Blob，与基本 Blob 关联的快照不会受到影响，并且可让基本 Blob 名称保持不变。
 
 ### 使用快照备份磁盘
-作为虚拟机磁盘的备份策略，你可以创建磁盘或页 Blob 的定期快照，并使用[复制 Blob](https://msdn.microsoft.com/zh-cn/library/azure/dd894037.aspx) 操作或 [AzCopy](/documentation/articles/storage-use-azcopy/) 之类的工具将其复制到另一个存储帐户。你可将快照复制到具有不同名称的目标页 Blob。生成的目标页 Blob 是可编写的页 Blob，而不是快照。本文稍后将介绍使用快照创建虚拟机磁盘备份的步骤。
+作为虚拟机磁盘的备份策略，你可以创建磁盘或页 Blob 的定期快照，并使用[复制 Blob](https://msdn.microsoft.com/zh-cn/library/azure/dd894037.aspx) 操作或 [AzCopy](./storage-use-azcopy.md) 之类的工具将其复制到另一个存储帐户。你可将快照复制到具有不同名称的目标页 Blob。生成的目标页 Blob 是可编写的页 Blob，而不是快照。本文稍后将介绍使用快照创建虚拟机磁盘备份的步骤。
 
 ### 使用快照还原磁盘
 需要将磁盘还原到以前在某个备份快照中捕获的稳定版本时，可以复制一个快照来覆盖基本页 Blob。将快照升级到基本页 Blob 之后，快照将会保留，但会使用可读写的副本覆盖其源。本文稍后将介绍从快照还原以前磁盘版本的步骤。
@@ -79,9 +79,9 @@ Blob 快照是在某个时间点捕获的 Blob 只读版本。在创建快照后
 
 假设在某个 DS 系列 Azure VM 上附加了一个高级存储 P30 磁盘。名为 *mypremiumdisk* 的 P30 磁盘存储在名为 *mypremiumaccount* 的高级存储帐户中。名为 *mybackupstdaccount* 的标准存储帐户用于存储 *mypremiumdisk* 的备份。我们希望每隔 12 小时保留 *mypremiumdisk* 的一个快照。
 
-若要了解如何创建存储帐户和磁盘，请参阅 [关于 Azure 存储帐户](/documentation/articles/storage-create-storage-account/)。
+若要了解如何创建存储帐户和磁盘，请参阅 [关于 Azure 存储帐户](./storage-create-storage-account.md)。
 
-若要了解如何备份 Azure VM，请参阅 [规划 Azure VM 备份](/documentation/articles/backup-azure-vms-introduction/)。
+若要了解如何备份 Azure VM，请参阅 [规划 Azure VM 备份](../backup/backup-azure-vms-introduction.md)。
 
 ## 使用增量快照维护磁盘备份的步骤
 下述步骤将创建 *mypremiumdisk* 的快照，并在 *mybackupstdaccount* 中维护备份。备份将是名为 *mybackupstdpageblob* 的标准页 Blob。备份页 Blob 始终反映与 *mypremiumdisk* 的最新快照相同的状态。
@@ -113,6 +113,6 @@ Blob 快照是在某个时间点捕获的 Blob 只读版本。在创建快照后
 使用以下链接详细了解如何创建 Blob 的快照和规划 VM 备份基础结构。
 
 - [创建 Blob 的快照](https://msdn.microsoft.com/zh-cn/library/azure/hh488361.aspx)
-- [Plan your VM Backup Infrastructure（规划 VM 备份基础结构）](/documentation/articles/backup-azure-vms-introduction/)
+- [Plan your VM Backup Infrastructure（规划 VM 备份基础结构）](../backup/backup-azure-vms-introduction.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

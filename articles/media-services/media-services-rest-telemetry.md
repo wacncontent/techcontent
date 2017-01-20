@@ -1,29 +1,28 @@
-<properties
-    pageTitle="使用 REST 配置 Azure 媒体服务遥测 |Azure"
-    description="本文介绍如何通过 REST API 使用 Azure 媒体服务遥测..."
-    services="media-services"
-    documentationcenter=""
-    author="Juliako"
-    manager="erikre"
-    editor="" />  
+---
+title: 使用 REST 配置 Azure 媒体服务遥测 |Azure
+description: 本文介绍如何通过 REST API 使用 Azure 媒体服务遥测...
+services: media-services
+documentationcenter: 
+author: Juliako
+manager: erikre
+editor: 
 
-<tags
-    ms.assetid="4e4a9ec3-8ddb-4938-aec1-d7172d3db858"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/17/2016"
-    wacn.date="12/12/2016"
-    ms.author="juliako" />  
-
+ms.assetid: 4e4a9ec3-8ddb-4938-aec1-d7172d3db858
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/17/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 # 使用 REST 配置 Azure 媒体服务遥测
 
 本主题介绍使用 REST API 配置 Azure 媒体服务 (AMS) 遥测可采取的常规步骤。
 
->[AZURE.NOTE]有关 AMS 遥测定义和使用方法的详细介绍，请参阅[概述](/documentation/articles/media-services-telemetry-overview/)主题。
+>[!NOTE]有关 AMS 遥测定义和使用方法的详细介绍，请参阅[概述](./media-services-telemetry-overview.md)主题。
 
 本主题中所述步骤如下：
 
@@ -39,8 +38,6 @@
 
 - 添加监视配置
 
-
- 
 ## 获取与媒体服务帐户关联的存储帐户
 
 ###请求
@@ -114,7 +111,7 @@
 	
 	{"Name":"monitoring","EndPointAddress":"https://telemetryvalidationstore.table.core.chinacloudapi.cn/","EndPointType":2}
 
->[AZURE.NOTE]请务必将“https://telemetryvalidationstore.table.core.chinacloudapi.cn”值更改为存储帐户。
+>[!NOTE]请务必将“https://telemetryvalidationstore.table.core.chinacloudapi.cn”值更改为存储帐户。
 
 ###响应
 
@@ -202,6 +199,6 @@
 
 ## 使用遥测信息
 
-有关使用遥测信息的信息，请参阅[此主题](/documentation/articles/media-services-telemetry-overview/)。
+有关使用遥测信息的信息，请参阅[此主题](./media-services-telemetry-overview.md)。
 
 <!---HONumber=Mooncake_1205_2016-->

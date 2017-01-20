@@ -1,6 +1,5 @@
 
 
-
 Azure 上有多个标准大小可供选择。其中某些大小的注意事项包括：
 
 * D 系列的 VM 旨在运行需要更高计算能力和临时磁盘性能的应用程序。D 系列 VM 可为临时磁盘提供更快的处理器、更高的内存内核比和固态驱动器 (SSD)。有关详细信息，请参阅 Azure 博客[新的 D 系列虚拟机大小](https://azure.microsoft.com/blog/2014/09/22/new-d-series-virtual-machine-sizes/)上的公告。
@@ -9,11 +8,11 @@ Azure 上有多个标准大小可供选择。其中某些大小的注意事项�
   
     F 系列还为 Azure 的 VM 大小命名引入了新标准。对于将来发布的此系列和 VM 大小，系列名称字母后面的数字与 CPU 核心数量一致。其他功能，如针对高级存储进行了优化，使用 CPU 核心计数后面的字母指定。此命名格式将用于将来发布的 VM 大小，但是不会追溯更改任何已发布的现有的 VM 大小的名称。
 
-* DS 系列、DSv2 系列和 Fs 系列的 VM 可使用高级存储，从而为 I/O 密集型工作负荷提供高性能、低延迟的存储。这些 VM 使用固态硬盘 (SSD) 托管虚拟机的磁盘，并提供本地 SSD 磁盘高速缓存。高级存储在某些区域可用。有关详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](/documentation/articles/storage-premium-storage/)。
+* DS 系列、DSv2 系列和 Fs 系列的 VM 可使用高级存储，从而为 I/O 密集型工作负荷提供高性能、低延迟的存储。这些 VM 使用固态硬盘 (SSD) 托管虚拟机的磁盘，并提供本地 SSD 磁盘高速缓存。高级存储在某些区域可用。有关详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](../articles/storage/storage-premium-storage.md)。
 *   A 系列和 Av2 系列的 VM 可以部署在各种不同的硬件类型和处理器上。根据硬件限制大小，为运行中的实例提供一致的处理器性能，不论硬件部署的位置。若要判断此大小部署所在的物理硬件，请从虚拟机中查询虚拟硬件。
 * A0 大小在物理硬件上过度订阅。仅针对此特定大小，其他客户部署可能影响正在运行的工作负荷的性能。以下概述的相对性能为预期的基准，受限于近似变化性的 15%。
 
-虚拟机的大小会影响定价。此外，大小还会影响虚拟机的处理能力、内存和存储容量。存储成本根据存储帐户中的已使用页数进行单独计算。有关详细信息，请参阅[虚拟机定价详细信息](/pricing/details/virtual-machines/)和 [Azure 存储定价](/pricing/details/storage/)。
+虚拟机的大小会影响定价。此外，大小还会影响虚拟机的处理能力、内存和存储容量。存储成本根据存储帐户中的已使用页数进行单独计算。有关详细信息，请参阅[虚拟机定价详细信息](https://www.azure.cn/pricing/details/virtual-machines/)和 [Azure 存储定价](https://www.azure.cn/pricing/details/storage/)。
 
 以下注意事项可能有助于确定大小：
 
@@ -25,13 +24,12 @@ Azure 上有多个标准大小可供选择。其中某些大小的注意事项�
 ## 性能注意事项
 我们已创建 Azure 计算单元 (ACU)，提供一种比较 Azure SKU 的计算 (CPU) 性能的方法。这有助于轻松确定最有可能满足性能需求的 SKU。ACU 目前在小型 (Standard\_A1) VM 上标准为 100，而所有其他 SKU 表示 SKU 在运行标准基准测试时大约可以有多快。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 ACU 只是一种规则。工作负荷的结果可能会有所不同。
 > 
 > 
 
 <br>  
-
 
 | SKU 系列 | ACU/核心 |
 | --- | --- |
@@ -96,7 +94,6 @@ ACU 标有 *使用 Intel® Turbo 技术来增加 CPU 频率，并提升性能。
 
 <br>  
 
-
 ## <a name="dv2-series"></a>Dv2 系列
 | 大小 | CPU 核心数 | 内存：GiB | 本地 SSD：GiB | 最大数据磁盘数 | 数据磁盘最大吞吐量：IOPS | 最大网卡数/网络带宽等级 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -113,7 +110,6 @@ ACU 标有 *使用 Intel® Turbo 技术来增加 CPU 频率，并提升性能。
 
 <br>  
 
-
 ## <a name="ds-series" id="standard-tier-ds-series"></a>DS 系列*
 | 大小 | CPU 核心数 | 内存：GiB | 本地 SSD：GiB | 最大数据磁盘数 | 缓存磁盘最大吞吐量：IOPS / MBps（以 GiB 为单位的缓存大小） | 非缓存磁盘最大吞吐量：IOPS / MBps | 最大网卡数/网络带宽等级 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -128,12 +124,9 @@ ACU 标有 *使用 Intel® Turbo 技术来增加 CPU 频率，并提升性能。
 
 MBps = 每秒 10^6 字节，GiB = 1024^3 字节。
 
-*DS 系列 VM 可能的最大磁盘吞吐量（IOPS 或 MBps）可能受限于附加磁盘的数量、大小和条带化。有关详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](/documentation/articles/storage-premium-storage/)。
-
-
+*DS 系列 VM 可能的最大磁盘吞吐量（IOPS 或 MBps）可能受限于附加磁盘的数量、大小和条带化。有关详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](../articles/storage/storage-premium-storage.md)。
 
 <br>  
-
 
 ## <a name="dsv2-series"></a>DSv2 系列*
 | 大小 | CPU 核心数 | 内存：GiB | 本地 SSD：GiB | 最大数据磁盘数 | 缓存磁盘最大吞吐量：IOPS / MBps（以 GiB 为单位的缓存大小） | 非缓存磁盘最大吞吐量：IOPS / MBps | 最大网卡数/网络带宽等级 |
@@ -151,11 +144,9 @@ MBps = 每秒 10^6 字节，GiB = 1024^3 字节。
 
 MBps = 每秒 10^6 字节，GiB = 1024^3 字节。
 
-*DSv2 系列 VM 可能的最大磁盘吞吐量（IOPS 或 MBps）可能受限于附加磁盘的数量、大小和条带化。有关详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](/documentation/articles/storage-premium-storage/)。
-
+*DSv2 系列 VM 可能的最大磁盘吞吐量（IOPS 或 MBps）可能受限于附加磁盘的数量、大小和条带化。有关详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](../articles/storage/storage-premium-storage.md)。
 
 <br>  
-
 
 ## <a name="f-series"></a>F 系列
 | 大小 | CPU 核心数 | 内存：GiB | 本地 SSD：GiB | 最大数据磁盘数 | 磁盘最大吞吐量：IOPS | 最大网卡数/网络带宽等级 |
@@ -168,7 +159,6 @@ MBps = 每秒 10^6 字节，GiB = 1024^3 字节。
 
 <br>  
 
-
 ## <a name="fs-series"></a>Fs 系列*
 | 大小 | CPU 核心数 | 内存：GiB | 本地 SSD：GiB | 最大数据磁盘数 | 缓存磁盘最大吞吐量：IOPS / MBps（以 GiB 为单位的缓存大小） | 非缓存磁盘最大吞吐量：IOPS / MBps | 最大网卡数/网络带宽等级 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -180,10 +170,9 @@ MBps = 每秒 10^6 字节，GiB = 1024^3 字节。
 
 MBps = 每秒 10^6 字节，GiB = 1024^3 字节。
 
-*Fs 系列 VM 可能的最大磁盘吞吐量（IOPS 或 MBps）可能受限于附加磁盘的数量、大小和条带化。有关详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](/documentation/articles/storage-premium-storage/)。
+*Fs 系列 VM 可能的最大磁盘吞吐量（IOPS 或 MBps）可能受限于附加磁盘的数量、大小和条带化。有关详细信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](../articles/storage/storage-premium-storage.md)。
 
 <br>  
-
 
 ## 注意：使用 CLI 和 PowerShell 的标准 A0 - A4
 在经典部署模型中，CLI 和 PowerShell 中的一些 VM 大小名称略有不同：
@@ -195,6 +184,6 @@ MBps = 每秒 10^6 字节，GiB = 1024^3 字节。
 * Standard\_A4 是超大型
 
 ## 后续步骤
-* 了解 [Azure 订阅和服务的限制、配额和约束](/documentation/articles/azure-subscription-service-limits/)。
+* 了解 [Azure 订阅和服务的限制、配额和约束](../articles/azure-subscription-service-limits.md)。
 
 <!---HONumber=Mooncake_1212_2016-->

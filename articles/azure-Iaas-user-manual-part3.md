@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure IaaS 用户手册 - 第三部分 | Azure"
-	description="详细介绍如何创建和管理 Azure 虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure IaaS 用户手册 - 第三部分 | Azure
+description: 详细介绍如何创建和管理 Azure 虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.date=""
-	wacn.date="09/21/2016"/>
+ms.service: virtual-machines-windows
+ms.date: 
+wacn.date: 09/21/2016
+---
 
 # Azure IaaS 用户手册 - 第三部分
 
-- [Azure IaaS 用户手册 - 第一部分](/documentation/articles/azure-Iaas-user-manual-part1/)
-- [Azure IaaS 用户手册 - 第二部分](/documentation/articles/azure-Iaas-user-manual-part2/)
+- [Azure IaaS 用户手册 - 第一部分](./azure-Iaas-user-manual-part1.md)
+- [Azure IaaS 用户手册 - 第二部分](./azure-Iaas-user-manual-part2.md)
 
 ##<a name="section_6"></a> 4.	高级内容
 ###<a name="section_6_1"></a> 4.1 设置虚拟机端口映射
@@ -55,7 +55,7 @@ Azure 虚拟机在默认情况下，只开启了 RDP 的端口和 PowerShell 的
 
 在此次模拟场景中，可以对之前创建的 ContosoWeb01 和 ContosoWeb02 这两台虚拟机，设置 80 端口的负载均衡。
 
->[AZURE.NOTE]
+>[!NOTE]
 >Azure 的负载均衡目前只支持四层，不能保留 Session。
 
 负载均衡的算法是 Azure 设置好的，不能修改。算法主要依赖于五要素 (source IP, source port, destination IP, destination port, protocol type)。具体内容可以参考[这篇博客](http://azure.microsoft.com/blog/2014/04/08/microsoft-azure-load-balancing-services/)
@@ -117,7 +117,6 @@ Azure Load Balancer (负载均衡器)的规则，是由五要素组成 source IP
 最新的 Azure Load Balancer 可以将规则进行修改，改为 二要素 sourceIP，(Source IP，Destination IP) 或 三要素 sourceIPProtocol，(Source IP, Destination IP, Protocol)。这样由同一个客户端发起的请求，会指向同一个 Azure 目标服务器。通过这种方式，就可以保留 Session。如下图所示：
 
 ![advance14](./media/azure-Iaas-user-manual-part3/advance14.png)
-
 
 ###<a name="section_6_4"></a> 4.4 设置 Web 服务器固定 IP
 注意：默认情况下，客户通过管理界面 Management Portal 创建的虚拟机的 Virtual IP，其实是从数据中心的 IP 池中随机获得的。当客户关闭虚拟机，虚拟机状态为 Stop (Deallocate) 的时候，Virtual IP 会被释放，DNS 会绑定到另外一个 IP 地址。

@@ -35,12 +35,9 @@
 	            android:text="@string/complete_button_text" />
 	    </LinearLayout>
 	
-
 4. 打开 res\values\string.xml 文件并添加以下代码行：
 
     	<string name="complete_button_text">Complete All</string>
-
-
 
 5. 在 Package Explorer 的  *src* 文件夹中，右键单击项目名称 (`com.example.{your projects name}`)，然后依次选择**新建**、**类**。在对话框的类名称字段中，输入 **MarkAllResult**、选择"确定"，然后使用以下代码替代生成的类定义：
 
@@ -100,7 +97,6 @@
 1. 在"运行"菜单中，单击"运行"，以便在 Android 模拟器中启动项目。
 
 	这将执行使用 Android SDK 构建的应用，该应用使用客户端库发送一个查询，该查询从您的移动服务返回项目。
-
 
 2. 在应用的"插入 TodoItem"中键入一些文本，然后单击"添加"。
 

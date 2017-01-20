@@ -1,24 +1,25 @@
 <!-- need to be verified -->
 
-<properties
-    pageTitle="调整 Windows VM 的大小 | Azure"
-    description="使用 Azure Powershell 调整在 Resource Manager 部署模型中创建的 Windows 虚拟机的大小。"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    author="Drewm3"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />
-<tags 
-    ms.assetid="057ff274-6dad-415e-891c-58f8eea9ed78"
-    ms.service="virtual-machines-windows"
-    ms.workload="na"
-    ms.tgt_pltfrm="vm-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/19/2016"
-    wacn.date="12/20/2016"
-    ms.author="drewm" />
+---
+title: 调整 Windows VM 的大小 | Azure
+description: 使用 Azure Powershell 调整在 Resource Manager 部署模型中创建的 Windows 虚拟机的大小。
+services: virtual-machines-windows
+documentationcenter: 
+author: Drewm3
+manager: timlt
+editor: 
+tags: azure-resource-manager
+
+ms.assetid: 057ff274-6dad-415e-891c-58f8eea9ed78
+ms.service: virtual-machines-windows
+ms.workload: na
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 10/19/2016
+wacn.date: 12/20/2016
+ms.author: drewm
+---
 
 # 调整 Windows VM 的大小
 本文说明如何使用 Azure Powershell 调整在 Resource Manager 部署模型中创建的 Windows VM 的大小。
@@ -46,7 +47,7 @@
         Update-AzureRmVM -VM $vm -ResourceGroupName $rgname
         Start-AzureRmVM -ResourceGroupName $rgname -Name $vmname
 
-> [AZURE.WARNING]
+> [!WARNING]
 解除分配 VM 会释放分配给该 VM 的所有动态 IP 地址。OS 和数据磁盘不受影响。
 > 
 > 
@@ -92,6 +93,6 @@
         }
 
 ## 后续步骤
-* 若要提高可伸缩性，请运行多个 VM 实例并进行横向扩展。有关详细信息，请参阅[自动缩放虚拟机规模集中的 Windows 计算机](/documentation/articles/virtual-machine-scale-sets-windows-autoscale/)。
+* 若要提高可伸缩性，请运行多个 VM 实例并进行横向扩展。有关详细信息，请参阅[自动缩放虚拟机规模集中的 Windows 计算机](../virtual-machine-scale-sets/virtual-machine-scale-sets-windows-autoscale.md)。
 
 <!---HONumber=Mooncake_1212_2016-->

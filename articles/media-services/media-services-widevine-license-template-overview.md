@@ -1,22 +1,21 @@
-<properties 
-	pageTitle="Widevine 许可证模板概述 | Azure" 
-	description="本主题概述了用于配置 Widevine 许可证的 Widevine 许可证模板。" 
-	authors="juliako" 
-	manager="erikre" 
-	editor="" 
-	services="media-services" 
-	documentationCenter=""/>  
+---
+title: Widevine 许可证模板概述 | Azure
+description: 本主题概述了用于配置 Widevine 许可证的 Widevine 许可证模板。
+authors: juliako
+manager: erikre
+editor: 
+services: media-services
+documentationCenter: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016"  
-	wacn.date="12/26/2016"  
-	ms.author="juliako"/>
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/26/2016
+ms.author: juliako
+---
 
 #Widevine 许可证模板概述
 
@@ -76,9 +75,7 @@ parse_only | 布尔值。true 或 false | 解析许可证请求，但不颁发�
 
 如果有预先存在的策略，则不需要在内容密钥规范中指定任何值。与此内容关联且预先存在的策略将用于确定输出保护，例如 HDCP 和 CGMS。如果预先存在的策略未注册到 Widevine 许可证服务器，内容提供者可以在许可证请求中注入值。
 
-
 无论选项 use_policy_overrides_exclusively 为何，都必须为所有跟踪指定每个 content_key_specs。
-
 
 名称 | 值 | 说明
 ---|---|---
@@ -87,7 +84,6 @@ content_key_specs <br/> security_level | uint32 | 定义客户端对播放稳定
 content_key_specs <br/> required_output_protection.hdc | 字符串 - HDCP_NONE、HDCP_V1 或 HDCP_V2 | 指示是否需要 HDCP
 content_key_specs <br/>key | Base64 <br/>编码的字符串|用于此跟踪的内容密钥。如果指定，则需要 track_type 或 key_id。此选项可让内容提供者注入此跟踪的内容密钥，而不是让 Widevine 许可证服务器生成或查找密钥。
 content_key_specs.key_id| Base64 编码的二进制字符串，16 字节 | 密钥的唯一标识符。 
-
 
 ##策略重写 
 
@@ -198,10 +194,8 @@ override\_provider\_client\_token | 布尔值。true 或 false |如果为 false 
         return configuration;
     }
 
-
-
 ##另请参阅
 
-[使用 PlayReady 和/或 Widevine DRM 动态通用加密](/documentation/articles/media-services-protect-with-drm/)
+[使用 PlayReady 和/或 Widevine DRM 动态通用加密](./media-services-protect-with-drm.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

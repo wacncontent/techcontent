@@ -48,7 +48,7 @@
 
 	请注意，此类派生自 **GcmServiceBase**，“服务”属性必须应用于此类。
 
-	>[AZURE.NOTE]**GcmServiceBase** 类实现 **OnRegistered()**、**OnUnRegistered()**、**OnMessage()** 和 **OnError()** 方法。必须在 **PushHandlerService** 类中重写这些方法。
+	>[!NOTE]**GcmServiceBase** 类实现 **OnRegistered()**、**OnUnRegistered()**、**OnMessage()** 和 **OnError()** 方法。必须在 **PushHandlerService** 类中重写这些方法。
 
 5. 将以下代码添加到 **PushHandlerService** 类，以便重写 **OnRegistered **事件处理程序。
 
@@ -89,7 +89,7 @@
             }
         }
 
-	此方法使用返回的 GCM 注册 ID 向 Azure 注册以获取推送通知。仅能在创建注册后向其添加标记。有关详细信息，请参阅[如何：将标记添加到设备安装以启用“推送到标记”](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#how-to-add-tags-to-a-device-installation-to-enable-push-to-tags)。
+	此方法使用返回的 GCM 注册 ID 向 Azure 注册以获取推送通知。仅能在创建注册后向其添加标记。有关详细信息，请参阅[如何：将标记添加到设备安装以启用“推送到标记”](../articles/app-service-mobile/app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#how-to-add-tags-to-a-device-installation-to-enable-push-to-tags)。
 
 10. 在 **PushHandlerService** 中使用以下代码重写 **OnMessage** 方法：
 
