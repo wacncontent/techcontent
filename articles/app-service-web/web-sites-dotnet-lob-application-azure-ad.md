@@ -1,27 +1,27 @@
-<properties
-    pageTitle="使用 Azure Active Directory 身份验证创建业务线 Azure 应用 | Azure"
-    description="了解如何在 Azure App Service 中创建使用 Azure Active Directory 进行身份验证的 ASP.NET MVC 业务线应用"
-    services="app-service\web, active-directory"
-    documentationcenter=".net"
-    author="cephalin"
-    manager="wpickett"
-    editor="" />  
+---
+title: 使用 Azure Active Directory 身份验证创建业务线 Azure 应用 | Azure
+description: 了解如何在 Azure App Service 中创建使用 Azure Active Directory 进行身份验证的 ASP.NET MVC 业务线应用
+services: app-service\web, active-directory
+documentationcenter: .net
+author: cephalin
+manager: wpickett
+editor: 
 
-<tags
-    ms.assetid="ad947bdb-4463-43ff-a5e3-91d9b2169b60"
-    ms.service="app-service-web"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="web"
-    ms.date="09/01/2016"
-    wacn.date="12/05/2016"
-    ms.author="cephalin" />
+ms.assetid: ad947bdb-4463-43ff-a5e3-91d9b2169b60
+ms.service: app-service-web
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: web
+ms.date: 09/01/2016
+wacn.date: 12/05/2016
+ms.author: cephalin
+---
 
 # 使用 Azure Active Directory 身份验证创建业务线 Azure 应用
-本文说明如何在 [Azure App Service Web Apps](/documentation/articles/app-service-changes-existing-services/) 中使用[身份验证/授权](/documentation/articles/app-service-authentication-overview/)功能创建 .NET 业务线应用。另外，还说明如何在应用程序中使用 [Azure Active Directory 图形 API](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/api-catalog) 查询目录数据。
+本文说明如何在 [Azure App Service Web Apps](./app-service-changes-existing-services.md) 中使用[身份验证/授权](../app-service/app-service-authentication-overview.md)功能创建 .NET 业务线应用。另外，还说明如何在应用程序中使用 [Azure Active Directory 图形 API](https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/api-catalog) 查询目录数据。
 
-使用的 Azure Active Directory 租户可以是仅限 Azure 的目录。或者，可以将它[与本地 Active Directory 同步](/documentation/articles/active-directory-aadconnect/)，为本地和远程工作者创建单一登录体验。本文使用 Azure 帐户的默认目录。
+使用的 Azure Active Directory 租户可以是仅限 Azure 的目录。或者，可以将它[与本地 Active Directory 同步](../active-directory/active-directory-aadconnect.md)，为本地和远程工作者创建单一登录体验。本文使用 Azure 帐户的默认目录。
 
 ## <a name="bkmk_build"></a>要构建的项目
 将在 App Service Web Apps 中构建用于跟踪工作项并具有以下功能的简单的业务线创建-读取-更新-删除 (CRUD) 应用程序：
@@ -33,7 +33,7 @@
 如果 Azure 中的业务线应用需要基于角色的访问控制 (RBAC)，请参阅[后续步骤](#next)。
 
 ## <a name="bkmk_need"></a>所需条件
-[AZURE.INCLUDE [free-trial-note](../../includes/free-trial-note.md)]
+[!INCLUDE [free-trial-note](../../includes/free-trial-note.md)]
 
 若要完成本教程，你需要以下项目：
 
@@ -96,7 +96,7 @@
     
      ![](./media/web-sites-dotnet-lob-application-azure-ad/11-get-app-key.png)
     
-    > [AZURE.IMPORTANT]
+    > [!IMPORTANT]
     > 如果现在离开此页，将无法再次访问此客户端密钥。
 1. 使用 REST API 配置应用：从以下 URL 获取。
 
@@ -147,9 +147,9 @@
 8. 将 json 放置在 URL 的上面。
 17. 现在，若要测试是否获得了用于访问 Azure Active Directory 图形 API 的授权令牌，请在浏览器中导航到 **https://&lt;*appname*>.chinacloudsites.cn/.auth/me**。如果一切都配置正确，应会在 JSON 响应中看到 `access_token` 属性。
     
-    `~/.auth/me` URL 路径由应用服务身份验证/授权进行管理，提供与经过身份验证的会话相关的所有信息。有关详细信息，请参阅 [Authentication and authorization in Azure App Service（Azure 应用服务中的身份验证和授权）](/documentation/articles/app-service-authentication-overview/)。
+    `~/.auth/me` URL 路径由应用服务身份验证/授权进行管理，提供与经过身份验证的会话相关的所有信息。有关详细信息，请参阅 [Authentication and authorization in Azure App Service（Azure 应用服务中的身份验证和授权）](../app-service/app-service-authentication-overview.md)。
     
-    > [AZURE.NOTE]
+    > [!NOTE]
     `access_token` 到时会过期。但是，应用服务身份验证/授权使用 `~/.auth/refresh` 提供令牌刷新功能。有关此功能的用法详细信息，请参阅 [App Service Token Store（应用服务令牌存储）](https://cgillum.tech/2016/03/07/app-service-token-store/)。
     > 
     > 
@@ -278,7 +278,7 @@
    
     请注意，`AadPicker` 对象使用 `token` 和 `tenant` 发出 Azure Active Directory 图形 API 调用。稍后将要添加 `AadPicker`。
    
-    > [AZURE.NOTE]
+    > [!NOTE]
     也可以使用 `~/.auth/me` 直接从客户端获取 `token` 和 `tenant`，但这是一个额外的服务器调用。例如：
     > 
     > $.ajax({
@@ -337,7 +337,7 @@
     
         AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
     
-    > [AZURE.NOTE]
+    > [!NOTE]
     之所以需要这一行代码，是因为默认的 MVC 模板对某些操作使用 <code>[ValidateAntiForgeryToken]</code> 装饰。由于 Brock Allen 在 [MVC 4, AntiForgeryToken and Claims（MVC 4、AntiForgeryToken 和声明）](http://brockallen.com/2012/07/08/mvc-4-antiforgerytoken-and-claims/)中所述的行为，HTTP POST 可能无法通过防伪令牌验证，因为：
     > 
     > * Azure Active Directory 不发送防伪令牌默认所需的 http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider。
@@ -362,13 +362,13 @@
 如果 Azure 中的业务线应用需要基于角色的访问控制 (RBAC)，请参阅 [WebApp-RoleClaims-DotNet](https://github.com/Azure-Samples/active-directory-dotnet-webapp-roleclaims) 获取 Azure Active Directory 团队提供的示例。该示例演示了如何为 Azure Active Directory 应用程序启用角色，然后使用 `[Authorize]` 装饰为用户授权。
 
 ## <a name="bkmk_resources"></a>其他资源
-* [Azure 应用服务中的身份验证和授权](/documentation/articles/app-service-authentication-overview/)
-* [Authenticate with on-premises Active Directory in your Azure app（在 Azure 应用中使用本地 Active Directory 进行身份验证）](/documentation/articles/web-sites-authentication-authorization/)
-* [Create a line-of-business app in Azure with AD FS authentication（在 Azure 中使用 AD FS 身份验证创建业务线应用）](/documentation/articles/web-sites-dotnet-lob-application-adfs/)
+* [Azure 应用服务中的身份验证和授权](../app-service/app-service-authentication-overview.md)
+* [Authenticate with on-premises Active Directory in your Azure app（在 Azure 应用中使用本地 Active Directory 进行身份验证）](./web-sites-authentication-authorization.md)
+* [Create a line-of-business app in Azure with AD FS authentication（在 Azure 中使用 AD FS 身份验证创建业务线应用）](./web-sites-dotnet-lob-application-adfs.md)
 * [App Service Auth and the Azure AD Graph API（应用服务身份验证和 Azure AD 图形 API）](https://cgillum.tech/2016/03/25/app-service-auth-aad-graph-api/)
 * [Azure Active Directory Samples and Documentation（Azure Active Directory 示例和文档）](https://github.com/AzureADSamples)
-* [Azure Active Directory 支持的令牌和声明类型](/documentation/articles/active-directory-token-and-claims/)
+* [Azure Active Directory 支持的令牌和声明类型](../active-directory/active-directory-token-and-claims.md)
 
-[Protect the Application with SSL and the Authorize Attribute]: /documentation/articles/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/#protect-the-application-with-ssl-and-the-authorize-attribute
+[Protect the Application with SSL and the Authorize Attribute]: ./web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database.md#protect-the-application-with-ssl-and-the-authorize-attribute
 
 <!---HONumber=Mooncake_1128_2016-->

@@ -1,18 +1,16 @@
-<properties
-	pageTitle="设备管理入门"
-	description="本教程演示如何开始使用 Azure IoT 中心的设备管理"
-	services="iot-hub"
-	documentationcenter=".net"
-	author="juanjperez"
-	manager=" timlt"
-	editor=""/>  
+---
+title: 设备管理入门
+description: 本教程演示如何开始使用 Azure IoT 中心的设备管理
+services: iot-hub
+documentationcenter: .net
+author: juanjperez
+manager:  timlt
+editor: 
 
-
-<tags
-	ms.service="iot-hub"
-	ms.date="09/30/2016"
-	wacn.date="12/19/2016"/>  
-
+ms.service: iot-hub
+ms.date: 09/30/2016
+wacn.date: 12/19/2016
+---
 
 # 教程：设备管理入门
 ## 介绍
@@ -45,9 +43,9 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
 * Node.js 版本 0.12.x 或更高版本，<br/>[准备开发环境][lnk-dev-setup]介绍了如何在 Windows 或 Linux 上安装本教程所用的 Node.js。
 * 有效的 Azure 帐户。（如果没有帐户，只需花费几分钟就能创建一个[帐户][lnk-free-trial]。）
 
-[AZURE.INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
+[!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
 
-[AZURE.INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
+[!INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
 
 ## 创建模拟设备应用程序
 在本部分，用户需
@@ -55,8 +53,6 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
   - 创建一个 Node.js 控制台应用，用于响应通过云调用的直接方法
   - 触发模拟的设备重启
   - 使用设备孪生报告的属性，允许通过设备孪生查询标识设备及其上次重启的时间
-
-
 
 1. 新建名为 **manageddevice** 的空文件夹。在 **manageddevice** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
    
@@ -138,7 +134,7 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
     ```
 8. 保存并关闭 **dmpatterns\_getstarted\_device.js** 文件。
    
-   [AZURE.NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+   [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 使用直接方法在设备上触发远程重新启动
 在此部分中，会创建一个 Node.js 控制台应用，它使用直接方法在设备上启动远程重新启动，并使用设备孪生查询找到该设备上次重新启动时间。
@@ -259,16 +255,16 @@ IoT 解决方案可以扩展已定义的设备管理模式集，或通过使用�
 
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/node-devbox-setup.md
 
-[lnk-free-trial]: /pricing/1rmb-trial/
-[lnk-fwupdate]: /documentation/articles/iot-hub-node-node-firmware-update/
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
+[lnk-fwupdate]: ./iot-hub-node-node-firmware-update.md
 [Azure portal]: https://portal.azure.cn/
-[Using resource groups to manage your Azure resources]: /documentation/articles/resource-group-portal/
+[Using resource groups to manage your Azure resources]: ../azure-resource-manager/resource-group-portal.md
 [lnk-dm-github]: https://github.com/Azure/azure-iot-device-management
-[lnk-tutorial-jobs]: /documentation/articles/iot-hub-node-node-schedule-jobs/
-[lnk-gateway-SDK]: /documentation/articles/iot-hub-linux-gateway-sdk-get-started/
+[lnk-tutorial-jobs]: ./iot-hub-node-node-schedule-jobs.md
+[lnk-gateway-SDK]: ./iot-hub-linux-gateway-sdk-get-started.md
 
-[lnk-devtwin]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-c2dmethod]: /documentation/articles/iot-hub-devguide-direct-methods/
+[lnk-devtwin]: ./iot-hub-devguide-device-twins.md
+[lnk-c2dmethod]: ./iot-hub-devguide-direct-methods.md
 [lnk-transient-faults]: https://msdn.microsoft.com/zh-cn/library/hh680901(v=pandp.50).aspx
 
 <!---HONumber=Mooncake_1212_2016-->

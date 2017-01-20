@@ -1,28 +1,26 @@
-<properties
-   pageTitle="在 Linux 上使用 C 连接设备 | Azure"
-   description="介绍如何使用在 Linux 上运行的以 C 编写的应用程序将设备连接到 Azure IoT 套件预配置远程监视解决方案。"
-   services=""
-   suite="iot-suite"
-   documentationCenter="na"
-   authors="dominicbetts"
-   manager="timlt"
-   editor=""/>  
+---
+title: 在 Linux 上使用 C 连接设备 | Azure
+description: 介绍如何使用在 Linux 上运行的以 C 编写的应用程序将设备连接到 Azure IoT 套件预配置远程监视解决方案。
+services: 
+suite: iot-suite
+documentationCenter: na
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="iot-suite"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="10/05/2016"
-   wacn.date="12/05/2016"
-   ms.author="dobett"/>
-
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/05/2016
+wacn.date: 12/05/2016
+ms.author: dobett
+---
 
 # 将设备连接到远程监视预配置解决方案 (Linux)
 
-[AZURE.INCLUDE [iot-suite-selector-connecting](../../includes/iot-suite-selector-connecting.md)]
+[!INCLUDE [iot-suite-selector-connecting](../../includes/iot-suite-selector-connecting.md)]
 
 ## 生成并运行示例 C 客户端 Linux
 
@@ -440,6 +438,6 @@ int main(void)
     ./sample_app
     ```
 
-[AZURE.INCLUDE [iot-suite-visualize-connecting](../../includes/iot-suite-visualize-connecting.md)]
+[!INCLUDE [iot-suite-visualize-connecting](../../includes/iot-suite-visualize-connecting.md)]
 
 <!---HONumber=Mooncake_1128_2016-->

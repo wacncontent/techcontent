@@ -1,36 +1,36 @@
-<properties
-    pageTitle="在经典部署模型中使用 Azure CLI 创建内部负载均衡器 | Azure"
-    description="了解如何在经典部署模型中使用 Azure CLI 创建内部负载均衡器"
-    services="load-balancer"
-    documentationcenter="na"
-    author="kumudd"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management" />
-<tags
-    ms.assetid="becbbbde-a118-4269-9444-d3153f00bf34"
-    ms.service="load-balancer"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/09/2016"
-    wacn.date="01/13/2017"
-    ms.author="kumud" />  
+---
+title: 在经典部署模型中使用 Azure CLI 创建内部负载均衡器 | Azure
+description: 了解如何在经典部署模型中使用 Azure CLI 创建内部负载均衡器
+services: load-balancer
+documentationcenter: na
+author: kumudd
+manager: timlt
+editor: 
+tags: azure-service-management
 
+ms.assetid: becbbbde-a118-4269-9444-d3153f00bf34
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/09/2016
+wacn.date: 01/13/2017
+ms.author: kumud
+---
 
 # 开始使用 Azure CLI 创建内部负载均衡器（经典）
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/load-balancer-get-started-ilb-classic-ps/)
-- [Azure CLI](/documentation/articles/load-balancer-get-started-ilb-classic-cli/)
-- [云服务](/documentation/articles/load-balancer-get-started-ilb-classic-cloud/)
+> [!div class="op_single_selector"]
+- [PowerShell](./load-balancer-get-started-ilb-classic-ps.md)
+- [Azure CLI](./load-balancer-get-started-ilb-classic-cli.md)
+- [云服务](./load-balancer-get-started-ilb-classic-cloud.md)
 
-[AZURE.INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
+[!INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
 
-> [AZURE.IMPORTANT]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](/documentation/articles/load-balancer-get-started-ilb-arm-cli/)。
+> [!IMPORTANT]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](./load-balancer-get-started-ilb-arm-cli.md)。
 
-[AZURE.INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
+[!INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
 
 ## 为虚拟机创建内部负载均衡器集
 
@@ -44,7 +44,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 本指南演示如何基于上述方案创建内部负载均衡器。
 
-1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
+1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到经典模式，如下所示。
 
         azure config mode asm
@@ -80,7 +80,6 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
     data:    ------  -------  ----------  -----------------------------
     data:    ilbset  Private  subnet-1    192.168.2.7
     info:    service internal-load-balancer list command OK
-
 
 ### 步骤 2
 
@@ -161,9 +160,9 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 ## 后续步骤
 
-[使用源 IP 关联配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[使用源 IP 关联配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
-[为负载均衡器配置空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)
+[为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: update meta properties & wording update & update link references & update code-->

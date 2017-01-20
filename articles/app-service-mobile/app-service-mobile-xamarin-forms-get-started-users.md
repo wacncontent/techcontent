@@ -1,26 +1,25 @@
-<properties
-	pageTitle="Xamarin.Forms 应用中的移动应用身份验证入门 | Azure"
-	description="了解如何使用移动应用通过各种标识提供者（包括 AAD 和 Microsoft）对 Xamarin Forms 应用的用户进行身份验证。"
-	services="app-service\mobile"
-	documentationCenter="xamarin"
-	authors="adrianhall"
-	manager="dwrede"
-	editor=""/>  
+---
+title: Xamarin.Forms 应用中的移动应用身份验证入门 | Azure
+description: 了解如何使用移动应用通过各种标识提供者（包括 AAD 和 Microsoft）对 Xamarin Forms 应用的用户进行身份验证。
+services: app-service\mobile
+documentationCenter: xamarin
+authors: adrianhall
+manager: dwrede
+editor: 
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-xamarin"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="12/26/2016"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 12/26/2016
+ms.author: adrianha
+---
 
 # 向 Xamarin.Forms 应用添加身份验证
 
-[AZURE.INCLUDE [app-service-mobile-selector-get-started-users](../../includes/app-service-mobile-selector-get-started-users.md)]
+[!INCLUDE [app-service-mobile-selector-get-started-users](../../includes/app-service-mobile-selector-get-started-users.md)]
 
 ##概述
 本主题演示如何从客户端应用程序对应用服务移动应用的用户进行身份验证。在本教程中，使用应用服务支持的标识提供者向 Xamarin Forms 快速入门项目添加身份验证。移动应用成功进行身份验证和授权后，将显示用户 ID 值，该用户将能够访问受限制的表数据。
@@ -32,11 +31,11 @@
 
 ##注册应用以进行身份验证并配置应用服务
 
-[AZURE.INCLUDE [app-service-mobile-register-authentication](../../includes/app-service-mobile-register-authentication.md)]
+[!INCLUDE [app-service-mobile-register-authentication](../../includes/app-service-mobile-register-authentication.md)]
 
 ##将权限限制给已经过身份验证的用户
 
-[AZURE.INCLUDE [app-service-mobile-restrict-permissions-dotnet-backend](../../includes/app-service-mobile-restrict-permissions-dotnet-backend.md)]
+[!INCLUDE [app-service-mobile-restrict-permissions-dotnet-backend](../../includes/app-service-mobile-restrict-permissions-dotnet-backend.md)]
 
 ## 向可移植类库添加身份验证
 移动应用使用 [MobileServiceClient][4] 的 [LoginAsync][3] 扩展方法通过应用服务身份验证登录用户。此示例使用服务器托管的身份验证流，在应用中显示提供程序的登录界面。有关详细信息，请参阅[服务器托管的身份验证][5]。若要在生产应用中提供更好的用户体验，则应考虑改用[客户端托管的身份验证][6]。
@@ -50,14 +49,14 @@
         using System.Threading.Tasks;
 2. 在 App.cs 中，在 `App` 类定义前添加以下 `IAuthenticate` 接口定义。
 
-	    public interface IAuthenticate
-	    {
-	        Task<bool> Authenticate();
-	    }
+        public interface IAuthenticate
+        {
+            Task<bool> Authenticate();
+        }
 
 3. 若要使用平台特定的实现初始化接口，可向 **App** 类添加以下静态成员。
 
-	    public static IAuthenticate Authenticator { get; private set; }
+        public static IAuthenticate Authenticator { get; private set; }
 
         public static void Init(IAuthenticate authenticator)
         {
@@ -66,34 +65,33 @@
 
 4. 从可移植类库项目中打开 TodoList.xaml，在 *buttonsPanel* 布局元素中现有按钮之后添加以下 **Button** 元素：
 
-      	<Button x:Name="loginButton" Text="Sign-in" MinimumHeightRequest="30" 
-			Clicked="loginButton_Clicked"/>
+          <Button x:Name="loginButton" Text="Sign-in" MinimumHeightRequest="30" 
+            Clicked="loginButton_Clicked"/>
 
-	此按钮将通过移动应用后端触发服务器托管的身份验证。
+    此按钮将通过移动应用后端触发服务器托管的身份验证。
 
 5. 从可移植类库项目中打开 TodoList.xaml.cs，然后将以下字段添加到 `TodoList` 类：
 
-		// Track whether the user has authenticated. 
+        // Track whether the user has authenticated. 
         bool authenticated = false;
-
 
 6. 将 **OnAppearing** 方法替换为以下代码：
 
-	    protected override async void OnAppearing()
-	    {
-	        base.OnAppearing();
-	
-	        // Refresh items only when authenticated.
-	        if (authenticated == true)
-	        {
-	            // Set syncItems to true in order to synchronize the data 
-	            // on startup when running in offline mode.
-	            await RefreshItems(true, syncItems: false);
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+    
+            // Refresh items only when authenticated.
+            if (authenticated == true)
+            {
+                // Set syncItems to true in order to synchronize the data 
+                // on startup when running in offline mode.
+                await RefreshItems(true, syncItems: false);
 
-				// Hide the Sign-in button.
+                // Hide the Sign-in button.
                 this.loginButton.IsVisible = false;
-	        }
-	    }
+            }
+        }
 
     该代码可确保仅在用户经过身份验证后，才从服务刷新数据。
 
@@ -111,7 +109,6 @@
 
 8. 保存更改，重新生成可移植类库项目，并验证没有错误。
 
-
 ##向 Android 应用添加身份验证
 
 本部分演示如何在 Android 应用项目中实现 **IAuthenticate** 接口。如果不要支持 Android 设备，请跳过本部分。
@@ -120,13 +117,12 @@
 2. 按 F5 在调试器中启动项目，然后验证启动该应用后，是否会引发状态代码为 401（“未授权”）的未处理异常。之所以会生成 401 代码，是因为对后端的访问仅限于授权用户。
 3. 在 Android 项目中打开 MainActivity.cs，并添加以下 `using` 语句：
 
-		using Microsoft.WindowsAzure.MobileServices;
-		using System.Threading.Tasks;
+        using Microsoft.WindowsAzure.MobileServices;
+        using System.Threading.Tasks;
 
 4. 更新 **MainActivity** 类，以实现 **IAuthenticate** 接口，如下所示：
 
-		public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity, IAuthenticate
-
+        public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity, IAuthenticate
 
 5. 通过添加 **MobileServiceUser** 字段和 **IAuthenticate** 接口所需的 **Authenticate** 方法，更新 **MainActivity** 类，如下所示：
    
@@ -163,8 +159,7 @@
             return success;
         }
 
-
-	如果使用的是 Microsoft 以外的其他标识提供者，请为 [MobileServiceAuthenticationProvider] 选择其他值。
+    如果使用的是 Microsoft 以外的其他标识提供者，请为 [MobileServiceAuthenticationProvider] 选择其他值。
 
 6. 在 **MainActivity** 类的 **OnCreate** 方法中调用 `LoadApplication()` 之前添加以下代码：
 
@@ -224,7 +219,7 @@
             return success;
         }
 
-	如果使用的是 Microsoft 以外的其他标识提供者，请为 [MobileServiceAuthenticationProvider] 选择其他值。
+    如果使用的是 Microsoft 以外的其他标识提供者，请为 [MobileServiceAuthenticationProvider] 选择其他值。
 
 6. 在 **FinishedLaunching** 方法中调用 `LoadApplication()` 之前添加以下代码行：
 
@@ -240,12 +235,12 @@
 2. 按 F5 在调试器中启动项目，然后验证启动该应用后，是否会引发状态代码为 401（“未授权”）的未处理异常。之所以会发生此 401 响应，是因为对后端的访问仅限于授权用户。
 3. 打开 Windows 应用项目的 MainPage.xaml.cs，并添加以下 `using` 语句：
 
-		using Microsoft.WindowsAzure.MobileServices;
-		using System.Threading.Tasks;
-		using Windows.UI.Popups;
-		using <your_Portable_Class_Library_namespace>;
+        using Microsoft.WindowsAzure.MobileServices;
+        using System.Threading.Tasks;
+        using Windows.UI.Popups;
+        using <your_Portable_Class_Library_namespace>;
 
-	将 `<your_Portable_Class_Library_namespace>` 替换为可移植类库的命名空间。
+    将 `<your_Portable_Class_Library_namespace>` 替换为可移植类库的命名空间。
 
 4. 更新 **MainPage** 类，以实现 **IAuthenticate** 接口，如下所示：
    
@@ -269,7 +264,7 @@
                         .LoginAsync(MobileServiceAuthenticationProvider.Microsoft);
                     if (user != null)
                     {
-						success = true;
+                        success = true;
                         message = string.Format("You are now signed-in as {0}.", user.UserId);
                     }
                 }
@@ -280,14 +275,13 @@
                 message = string.Format("Authentication Failed: {0}", ex.Message);
             }
 
-			// Display the success or failure message.
+            // Display the success or failure message.
             await new MessageDialog(message, "Sign-in result").ShowAsync();
 
             return success;
         }
 
-
-	如果使用的是 Microsoft 以外的其他标识提供者，请为 [MobileServiceAuthenticationProvider] 选择其他值。
+    如果使用的是 Microsoft 以外的其他标识提供者，请为 [MobileServiceAuthenticationProvider] 选择其他值。
 
 6. 在 **MainPage** 类的构造函数中调用 `LoadApplication()` 之前添加以下代码行：
 
@@ -325,20 +319,18 @@
 
 完成此基本身份验证教程后，请考虑继续学习以下教程之一：
 
-
-+ [为应用启用脱机同步](/documentation/articles/app-service-mobile-xamarin-forms-get-started-offline-data/)  
++ [为应用启用脱机同步](./app-service-mobile-xamarin-forms-get-started-offline-data.md)  
   了解如何使用移动应用后端向应用添加脱机支持。脱机同步允许最终用户与移动应用交互（查看、添加或修改数据），即使在没有网络连接时也是如此。
 
 <!-- Images. -->
 
-
 <!-- URLs. -->
-[1]: /documentation/articles/app-service-mobile-xamarin-forms-get-started/
-[2]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
+[1]: ./app-service-mobile-xamarin-forms-get-started.md
+[2]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
 [3]: https://msdn.microsoft.com/zh-cn/library/azure/dn268341(v=azure.10).aspx
 [4]: https://msdn.microsoft.com/zh-cn/library/azure/JJ553674(v=azure.10).aspx
-[5]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/#serverflow
-[6]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/#clientflow
+[5]: ./app-service-mobile-dotnet-how-to-use-client-library.md#serverflow
+[6]: ./app-service-mobile-dotnet-how-to-use-client-library.md#clientflow
 [7]: https://msdn.microsoft.com/zh-cn/library/azure/jj730936(v=azure.10).aspx
 
 <!---HONumber=Mooncake_1219_2016-->

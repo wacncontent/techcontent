@@ -1,12 +1,17 @@
-<properties 
-	pageTitle="使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry" 
-	description="这篇文章将介绍如何使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machines-aog" ms.date="" wacn.date="08/31/2016"/>
+---
+title: 使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry
+description: 这篇文章将介绍如何使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machines-aog
+ms.date: 
+wacn.date: 08/31/2016
+---
+
 # 使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry
 
 这篇文章将介绍如何使用 Azure CLI 在 Azure China Cloud 云平台上手动部署一套 Cloud Foundry。本文的目的在于：
@@ -15,7 +20,6 @@
 2.	了解用于管理 Cloud Foundry 的分布式系统生命周期管理软件的 Bosh 的搭建和使用。通过本文，你将明白如何通过 bosh-init 工具安装bosh 虚拟机，如果通过 bosh CLI 命令部署和管理 deployment。
 3.	让读者熟悉 Azure CLI 命令集，Bosh CLI 命令集和 CF CLI 命令集。
 
- 
 任何 PaaS 都必须依附于底层的 IaaS 环境，这里我们使用 Azure 云平台。下图中显示了 CF 与 IaaS，及其管理软件的关系。
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/foundation.png)
@@ -35,17 +39,17 @@
 
 ###<a id="prepare_ssh"></a> 为跳板虚拟机准备 ssh-key
 
-从这一步开始，到跳板机安装完成，所有操作将在 Azure CLI 中完成。关于如何安装 Azure CLI 请参见[链接](/documentation/articles/xplat-cli-install/)。
+从这一步开始，到跳板机安装完成，所有操作将在 Azure CLI 中完成。关于如何安装 Azure CLI 请参见[链接](./xplat-cli-install.md)。
 
 打开 Azure CLI，将 CLI 切换到 ARM 模式。
 
-	azure config mode arm
+    azure config mode arm
  
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/config-arm.png)
 
 登录Azure:
 
-	azure login -e AzureChinaCloud
+    azure login -e AzureChinaCloud
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/CLI-login.png)
 
@@ -61,7 +65,6 @@
 
 接下来使用命令查询账号的基本信息，如果一个账号下有多个订阅，使用 account set 命令选中其中一个。
 
-
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/account-list.png)
  
 查询该订阅的详细信息，并用变量记录下订阅号和租户号，后续命令中会使用。
@@ -70,21 +73,19 @@
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/account-select.png)
  
- 
 ###<a id="prepare_bosh"></a>  为 bosh 准备服务主体
 
 接下来我们将为 bosh 创建一个 AAD 账号，该账号将用于 bosh 与 Azure 订阅之间的认证授权。
 
-	azure ad app create --name lqicfad01 --password Lq1cfAD01 --home-page "https://lqicf01" --identifier-uris "https://lqicf01"
+    azure ad app create --name lqicfad01 --password Lq1cfAD01 --home-page "https://lqicf01" --identifier-uris "https://lqicf01"
  
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/create-ad-app.png)
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/set-clientid.png)
 
- 
 为该账号创建服务主体。
 
-	azure ad sp create -a %Client_ID%
+    azure ad sp create -a %Client_ID%
  
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/azure-ad-sp.png)
 
@@ -92,12 +93,11 @@
  
 并赋予其对应权限，使其拥有在 Azure 平台上对授权的订阅有进行资源创建管理的权限，如创建或删除虚拟机，创建或删除网卡等。
 
-	azure role assignment create --spn %SPN% --roleName "Virtual Machine Contributor" --subscription %Sub_ID%
+    azure role assignment create --spn %SPN% --roleName "Virtual Machine Contributor" --subscription %Sub_ID%
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/role-assign.png)
 
-
-	azure role assignment create --spn %SPN% --roleName "Network Contributor" --subscription %Sub_ID%
+    azure role assignment create --spn %SPN% --roleName "Network Contributor" --subscription %Sub_ID%
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/role-assign2.png)
  
@@ -119,13 +119,13 @@
 
 ####<a id="ready_arm"></a> 资源组
 
-	azure group create --name lqicfrg01 --location "China East"
+    azure group create --name lqicfrg01 --location "China East"
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/azure-group-create.png)
  
 ####<a id="ready_account"></a> 存储账号
 
-	azure storage account create --location "China East" --type GRS --resource-group lqicfrg01 lqicfsa01
+    azure storage account create --location "China East" --type GRS --resource-group lqicfrg01 lqicfsa01
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/azure-storage-create.png)
  
@@ -139,9 +139,9 @@
  
 接下里要在存储里创建两个容器，bosh 和 stemcell。Bosh 用于存放 bosh director 虚拟机的磁盘等数据；stemcell 用于存放下载的stemcell 镜像文件。这两个容器名字不能更改。
 
-	azure storage container create --account-name lqicfsa01 --account-key %Storage_Key% --container bosh
+    azure storage container create --account-name lqicfsa01 --account-key %Storage_Key% --container bosh
 
-	azure storage container create --account-name lqicfsa01 --account-key %Storage_Key% permission Blob --container stemcell
+    azure storage container create --account-name lqicfsa01 --account-key %Storage_Key% permission Blob --container stemcell
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/azure-storage-container-create.png)
  
@@ -149,22 +149,21 @@
 
 CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF 分配一个公网 IP，这样应用可以通过该 IP 从外网被访问到。
 
-	azure network create --resource-group lqicfrg01 --location "China East" --allocation-meth Static --name lqicfip01-cf
+    azure network create --resource-group lqicfrg01 --location "China East" --allocation-meth Static --name lqicfip01-cf
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/network-public-ip-create.png)
  
-
 ####<a id="ready_vnet"></a> 虚拟网络及其子网
 
 为整套环境创建一个虚拟网络。该网络包含三个子网，分别用户 bosh director 环境，CF 环境和 Diego 环境。
 
-	azure network vnet create --resource-group lqicfrg01 --name lqicfvnet01 --location "china East" --address-prefixes 10.0.0.0/16
+    azure network vnet create --resource-group lqicfrg01 --name lqicfvnet01 --location "china East" --address-prefixes 10.0.0.0/16
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/vnet-create.png)	 
 
-	azure network vnet subnet create --resource-group lqicfrg01 --vnet-name lqicfvnet01 --name lqicfvnet01-bosh --address-prefixes 10.0.1.0/24
-	azure network vnet subnet create --resource-group lqicfrg01 --vnet-name lqicfvnet01 --name lqicfvnet01-cf --address-prefix 10.0.2.0/24
-	azure network vnet subnet create --resource-group lqicfrg01 --vnet-name lqicfvnet01 --name lqicfvnet01-diego --address-prefix 10.0.3.0/24
+    azure network vnet subnet create --resource-group lqicfrg01 --vnet-name lqicfvnet01 --name lqicfvnet01-bosh --address-prefixes 10.0.1.0/24
+    azure network vnet subnet create --resource-group lqicfrg01 --vnet-name lqicfvnet01 --name lqicfvnet01-cf --address-prefix 10.0.2.0/24
+    azure network vnet subnet create --resource-group lqicfrg01 --vnet-name lqicfvnet01 --name lqicfvnet01-diego --address-prefix 10.0.3.0/24
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/vnet-subnet-create.png)	 
  
@@ -172,19 +171,19 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 为防止不必要的网络流量以及考虑到各个子网的安全性，为 bosh 和 CF 分别创建了网络安全组。
 
-	azure network nsg create --resource-group lqicfrg01 --location "China East" --name lqicfnsg01-bosh
-	azure network nsg create --resource-group lqicfrg01 --location "China East" --name lqicfnsg01-cf
+    azure network nsg create --resource-group lqicfrg01 --location "China East" --name lqicfnsg01-bosh
+    azure network nsg create --resource-group lqicfrg01 --location "China East" --name lqicfnsg01-cf
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/network-nsg-create.png)	 
  
 为不同安全组设置规则。
-	
-	azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-bosh --access Allow --protocol Tcp --direction Inbound --priority 200 --source-address-prefix Internet --source-port-range * --destination-address-prefix * --name ssh --destination-port-range 22
-	azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-bosh --access Allow --protocol Tcp --direction Inbound --priority 201 --source-address-prefix Internet --source-port-range * --destination-address-prefix * --name bosh-agent --destination-port-range 6868
-	azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-bosh --access Allow --protocol Tcp --direction Inbound --priority 202 --source-address-prefix Internet --source-port-range * --destination-address-prefix * --name bosh-director --destination-port-range 25555
-	azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-bosh --access Allow --protocol * --direction Inbound --priority 203 --source-address-prefix Internet --source-port-range * --destination-address-prefix * --name dns --destination-port-range 53
-	azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-cf --access Allow --protocol Tcp --direction Inbound --priority 201 source-address-prefix Internet --source-port-range * --destination-address-prefix * --name cf-https --destination-port-range 443
-	azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-cf --access Allow --protocol Tcp --direction Inbound --priority 202 source-address-prefix Internet --source-port-range * --destination-address-prefix * --name cf-log --destination-port-range 4443
+    
+    azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-bosh --access Allow --protocol Tcp --direction Inbound --priority 200 --source-address-prefix Internet --source-port-range * --destination-address-prefix * --name ssh --destination-port-range 22
+    azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-bosh --access Allow --protocol Tcp --direction Inbound --priority 201 --source-address-prefix Internet --source-port-range * --destination-address-prefix * --name bosh-agent --destination-port-range 6868
+    azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-bosh --access Allow --protocol Tcp --direction Inbound --priority 202 --source-address-prefix Internet --source-port-range * --destination-address-prefix * --name bosh-director --destination-port-range 25555
+    azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-bosh --access Allow --protocol * --direction Inbound --priority 203 --source-address-prefix Internet --source-port-range * --destination-address-prefix * --name dns --destination-port-range 53
+    azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-cf --access Allow --protocol Tcp --direction Inbound --priority 201 source-address-prefix Internet --source-port-range * --destination-address-prefix * --name cf-https --destination-port-range 443
+    azure network nsg rule create --resource-group lqicfrg01 --nsg-name lqicfnsg01-cf --access Allow --protocol Tcp --direction Inbound --priority 202 source-address-prefix Internet --source-port-range * --destination-address-prefix * --name cf-log --destination-port-range 4443
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/network-nsg-rule.png)	
 
@@ -194,8 +193,8 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 首先创建获取 IP，并将 IP 绑定到网卡。
 
-	azure network public-ip create --resource-group lqicfrg01 --location "china east" --allocation-method Dynamic --name lqicfip01-bosh
-	azure network nic create --resource-group lqicfrg01 --location "china East" --name lqicfnic01-bosh --public-ip-name lqicfip01-bosh --private-ip-address 10.0.1.10 --subnet-vnet-name lqicfvnet01 --subnet-name lqicfvnet01-bosh
+    azure network public-ip create --resource-group lqicfrg01 --location "china east" --allocation-method Dynamic --name lqicfip01-bosh
+    azure network nic create --resource-group lqicfrg01 --location "china East" --name lqicfnic01-bosh --public-ip-name lqicfip01-bosh --private-ip-address 10.0.1.10 --subnet-vnet-name lqicfvnet01 --subnet-name lqicfvnet01-bosh
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/network-public-ip-create.png)	 
 
@@ -203,15 +202,14 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
  
 查询并选择需要的镜像文件用于创建 VM:
 
-	azure vm image list --location "china east" --publisher canonical --offer UbuntuServer
+    azure vm image list --location "china east" --publisher canonical --offer UbuntuServer
 
- 
 创建 VM:
 
-	azure vm create --resource-group lqicfrg01 --name lqicfvm01-bosh --location "China East" --os-type linux --nic-name lqicfnic01-bosh --vnet-name lqicfvnet01 --vnet-subnet-name lqicfvnet01-bosh --storage-account-name lqicfsa01 --image-urn canonical:UbuntuServer:14.04.3-LTS:14.04.201606270 --ssh-publickey-file C:\Test\lqicfvm01-bosh.pub --admin-username boshuser
+    azure vm create --resource-group lqicfrg01 --name lqicfvm01-bosh --location "China East" --os-type linux --nic-name lqicfnic01-bosh --vnet-name lqicfvnet01 --vnet-subnet-name lqicfvnet01-bosh --storage-account-name lqicfsa01 --image-urn canonical:UbuntuServer:14.04.3-LTS:14.04.201606270 --ssh-publickey-file C:\Test\lqicfvm01-bosh.pub --admin-username boshuser
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/vm-create.png)	
-	 
+     
 创建完成后，用户将可以使用 ssh 密钥通过 putty 登录到跳板机上。
 
 ####<a id="ready_config"></a> 配置跳板机
@@ -224,15 +222,13 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/update-os.png)
 
- 
 安装 Bosh 和 CF 需要的软件包。
 
-	sudo apt-get install -y build-essential ruby2.0 ruby2.0-dev libxml2-dev libsqlite3-dev libxslt1-dev libpq-dev libmysqlclient-dev zlibc zlib1g-dev openssl libxstl-dev libssl-dev libreadline6 libreadline6-dev libyam                                                                                                                                                             l-dev sqlite3 libffi-dev
+    sudo apt-get install -y build-essential ruby2.0 ruby2.0-dev libxml2-dev libsqlite3-dev libxslt1-dev libpq-dev libmysqlclient-dev zlibc zlib1g-dev openssl libxstl-dev libssl-dev libreadline6 libreadline6-dev libyam                                                                                                                                                             l-dev sqlite3 libffi-dev
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/install-bosh.png)
-	 
+     
 将命令指向最新的软件版本。
-
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/update-software.png)
  
@@ -246,12 +242,9 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/update-gem2.png)
 
-
-
- 
 下载安装 bosh-init。该工具用于部署安装 bosh director。
 
-	wget -O bosh-init https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-0.0.51-linux-amd64
+    wget -O bosh-init https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-0.0.51-linux-amd64
  
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/install-bosh-init.png)
 
@@ -313,7 +306,6 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/portal-list-change.png) 
  
-
 ##<a id="concept"></a> 部署 CF
 
 本小节包含
@@ -322,7 +314,6 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 - [上传 stemcell 和 release](#upload)
 - [指定当前部署](#specific_deploy)
 - [部署 CF](#deploy_cf)
-
 
 因为没有注册域名，这里使用 xip.io 作为 CF 实验环境的域名；该域名解析会将域名直接解析为前面添加的 IP 地址。
 接下来我们将通过命令 bosh 命令行操作 Bosh Director 来管理 deployment。首先是要创建一个 deployment。基本步骤为
@@ -343,16 +334,15 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 1. 在 director 上为每个 resource pool 指定一个 stemcell,下面为 manifest 文件的部分截屏，显示的是 stemcell 的信息。
 
-	![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/stemcel.png) 
+    ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/stemcel.png) 
  
-	将 stemcell 从网站上下载下来，并上传到 bosh director 指定的存储账号中，这里是我们之前创建的容器 stemcell。
+    将 stemcell 从网站上下载下来，并上传到 bosh director 指定的存储账号中，这里是我们之前创建的容器 stemcell。
 
-	![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/upload-stemcell.png) 
+    ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/upload-stemcell.png) 
 
- 
 2. 将该 deployment 需要的所有 release 上传到 director。需要的 release 已经定义在 manifest 文件中，请确保所有 release 已经传到 director。
 
-	![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/single-vm-cf.png) 
+    ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/single-vm-cf.png) 
  
 > 两种方式：URL 或者本地。如果网络不好，URL 方式有可能会上传失败，因此可以通过先下载到本地再上传的方式。
  
@@ -366,16 +356,11 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/bosh-upload-cf-release2.png) 
  
- 
- 
- 
 ###<a id="specific_deploy"></a> 指定当前部署
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/prepare-deploy.png) 
  
 如果 yml 文件格式有误，将会提示错误，请根据错误修正文件。
-
-
 
 ###<a id="deploy_cf"></a> 部署 CF
 
@@ -387,7 +372,7 @@ CF 公网 IP 是最后一步中部署 CF 环境中需要使用的。需要给 CF
 
 如此，CF 搭建完成。你可以在 Azure 门户预览上看到该资源组中会新增几台虚拟机等资源。使用 CF 需要安装 Cloud Foundry CLI。使用 wget 下载（该命令可能会失败，请再次运行）。
 
-	wget -O cf.deb http://go-cli.s3-website-us-east-1.amazonaws.com/releases/v6.14.1/cf-cli-installer_6.14.1_x86-64.deb
+    wget -O cf.deb http://go-cli.s3-website-us-east-1.amazonaws.com/releases/v6.14.1/cf-cli-installer_6.14.1_x86-64.deb
 
 ![](./media/aog-virtual-machines-linux-deploy-cloud-foundry-manual/install-cf-cli.png) 
  

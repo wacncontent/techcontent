@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure SQL 数据库用户手册 - 第一部分 | Azure"
-	description="Azure SQL 数据库用户手册 - 第一部分 | Azure"
-	services=""
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure SQL 数据库用户手册 - 第一部分 | Azure
+description: Azure SQL 数据库用户手册 - 第一部分 | Azure
+services: 
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="sql-database"
-	ms.date=""
-	wacn.date="10/19/2016"/>
+ms.service: sql-database
+ms.date: 
+wacn.date: 10/19/2016
+---
 
 #Azure SQL 数据库用户手册
 
-- [Azure SQL 数据库用户手册 - 第二部分](/documentation/articles/azure-sql-database-user-manual-part-2/)
+- [Azure SQL 数据库用户手册 - 第二部分](./azure-sql-database-user-manual-part-2.md)
 
- 
 ##<a id="overview"></a>1. 总体介绍
 
 ###<a id="what-is-azure-sql-database"></a>1.1 什么是 Azure SQL 数据库  
@@ -39,101 +38,101 @@ Azure 提供数据库即服务 (Database-as-a-Service)，包括 Azure SQL 数据
 Azure SQL 数据库与传统 SQL Server 2008, 2012, 2014 虚拟机主要有以下几方面区别：  
 
 <table width="100%" border="1" cellspacing="0" cellpadding="0">
-	<tr>
-		<td>内容</td>
-		<td>SQL Server 虚拟机</td>
-		<td>Azure SQL 数据库</td>
-	</tr>
-	<tr>
-		<td><b>应用迁移</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>迁移现有应用</td>
-		<td>快速</td>
-		<td>中等</td>
-	</tr>
-	<tr>
-		<td>迁移新的应用</td>
-		<td>中等</td>
-		<td>快速</td>
-	</tr>
-	<tr>
-		<td><b>管理成本</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>管理操作系统</td>
-		<td>是</td>
-		<td>否</td>
-	</tr>
-	<tr>
-		<td>虚拟机高可用</td>
-		<td>需要手工设置</td>
-		<td>N/A</td>
-	</tr>
-	<tr>
-		<td>数据库高可用</td>
-		<td>需要手工设置(比如 SQL Server Always-On，SQL Server replication 等)</td>
-		<td>99.99% 服务级别协议</td>
-	</tr>
-	<tr>
-		<td>使用成本</td>
-		<td>中等</td>
-		<td>低</td>
-	</tr>
-	<tr>
-		<td><b>扩展(Scale)</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>向上扩展 (Scale-Up)</td>
-		<td>D14 (16Core / 112G)</td>
-		<td>P11</td>
-	</tr>
-	<tr>
-		<td>横向扩展 (Scale-Out)</td>
-		<td>需要手工设置 (比如 SQL Server Always-On，SQL Server replication 等)</td>
-		<td>需要用户自己设计 Scale-Out</td>
-	</tr>
-	<tr>
-		<td>数据库最大容量</td>
-		<td>32 TB (D14 16Core / 112G)</td>
-		<td>1 TB</td>
-	</tr>
-	<tr>
-		<td><b>管理平台</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>操作系统和虚拟机</td>
-		<td>用户完全控制</td>
-		<td>N/A</td>
-	</tr>
-	<tr>
-		<td>SQL Server 组件兼容性</td>
-		<td>对 SQL Server 产品全部支持，包括 SSIS, SSAS, SSRS</td>
-		<td>只提供数据库引擎</td>
-	</tr>
-	<tr>
-		<td><b>其他</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>服务级别</td>
-		<td>服务器，实例，数据库</td>
-		<td>数据库</td>
-	</tr>
-	<tr>
-		<td>兼容性</td>
-		<td>完全兼容</td>
-		<td>部分兼容</td>
-	</tr>
+    <tr>
+        <td>内容</td>
+        <td>SQL Server 虚拟机</td>
+        <td>Azure SQL 数据库</td>
+    </tr>
+    <tr>
+        <td><b>应用迁移</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>迁移现有应用</td>
+        <td>快速</td>
+        <td>中等</td>
+    </tr>
+    <tr>
+        <td>迁移新的应用</td>
+        <td>中等</td>
+        <td>快速</td>
+    </tr>
+    <tr>
+        <td><b>管理成本</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>管理操作系统</td>
+        <td>是</td>
+        <td>否</td>
+    </tr>
+    <tr>
+        <td>虚拟机高可用</td>
+        <td>需要手工设置</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td>数据库高可用</td>
+        <td>需要手工设置(比如 SQL Server Always-On，SQL Server replication 等)</td>
+        <td>99.99% 服务级别协议</td>
+    </tr>
+    <tr>
+        <td>使用成本</td>
+        <td>中等</td>
+        <td>低</td>
+    </tr>
+    <tr>
+        <td><b>扩展(Scale)</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>向上扩展 (Scale-Up)</td>
+        <td>D14 (16Core / 112G)</td>
+        <td>P11</td>
+    </tr>
+    <tr>
+        <td>横向扩展 (Scale-Out)</td>
+        <td>需要手工设置 (比如 SQL Server Always-On，SQL Server replication 等)</td>
+        <td>需要用户自己设计 Scale-Out</td>
+    </tr>
+    <tr>
+        <td>数据库最大容量</td>
+        <td>32 TB (D14 16Core / 112G)</td>
+        <td>1 TB</td>
+    </tr>
+    <tr>
+        <td><b>管理平台</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>操作系统和虚拟机</td>
+        <td>用户完全控制</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td>SQL Server 组件兼容性</td>
+        <td>对 SQL Server 产品全部支持，包括 SSIS, SSAS, SSRS</td>
+        <td>只提供数据库引擎</td>
+    </tr>
+    <tr>
+        <td><b>其他</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>服务级别</td>
+        <td>服务器，实例，数据库</td>
+        <td>数据库</td>
+    </tr>
+    <tr>
+        <td>兼容性</td>
+        <td>完全兼容</td>
+        <td>部分兼容</td>
+    </tr>
 </table>
 
 ####<a id="migrate-application"></a>1.2.1 应用迁移
@@ -425,7 +424,7 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 
 1.	[行级安全性(RLS)](https://msdn.microsoft.com/zh-cn/library/dn765131.aspx)  
 
-2.	[动态数据屏蔽](/documentation/articles/sql-database-dynamic-data-masking-get-started/)  
+2.	[动态数据屏蔽](./sql-database/sql-database-dynamic-data-masking-get-started.md)  
 
 3.	[包含的数据库用户](https://msdn.microsoft.com/zh-cn/library/ff929188.aspx)  
 
@@ -433,7 +432,7 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 
 5.	[透明数据加密 (TDE)](https://msdn.microsoft.com/zh-cn/library/0bf7e8ff-1416-4923-9c4c-49341e208c62.aspx)  
 
-6.	[使用 Azure Active Directory 身份验证连接到 SQL 数据库](/documentation/articles/sql-database-aad-authentication/)  
+6.	[使用 Azure Active Directory 身份验证连接到 SQL 数据库](./sql-database/sql-database-aad-authentication.md)  
 
 7.	[始终加密](https://msdn.microsoft.com/zh-cn/library/mt163865.aspx) (预览)  
 
@@ -604,10 +603,9 @@ Azure SQL 数据库的时区默认为 UTC 时区，且无法进行修改和配�
 
 ###<a id="pricing"></a>1.8 价格
 
-有关 Azure SQL 数据库的价格，请参考[此处](/pricing/details/sql-database/)。  
+有关 Azure SQL 数据库的价格，请参考[此处](https://www.azure.cn/pricing/details/sql-database/)。  
 
 请注意: Azure SQL 数据库按照不同的服务层来收费，即按照基本、标准和高级服务层来收费，不收取存储及事务费用。  
-
 
 <!--image reference-->
 [1]: ./media/azure-sql-database-user-manual-part-1/azure-sql-database-user-manual-1.png

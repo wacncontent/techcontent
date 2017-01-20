@@ -1,23 +1,22 @@
-<properties
-pageTitle="使用 Maven 构建 HBase 应用程序并将其部署到基于 Windows 的 HDInsight | Azure"
-description="了解如何使用 Apache Maven 构建基于 Java 的 Apache HBase 应用程序，然后将其部署到基于 Windows 的 Azure HDInsight 群集。"
-services="hdinsight"
-documentationCenter=""
-authors="Blackmist"
-manager="jhubbard"
-editor="cgronlun"
-tags="azure-portal"/>  
+---
+title: 使用 Maven 构建 HBase 应用程序并将其部署到基于 Windows 的 HDInsight | Azure
+description: 了解如何使用 Apache Maven 构建基于 Java 的 Apache HBase 应用程序，然后将其部署到基于 Windows 的 Azure HDInsight 群集。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: jhubbard
+editor: cgronlun
+tags: azure-portal
 
-
-<tags
-ms.service="hdinsight"
-ms.workload="big-data"
-ms.tgt_pltfrm="na"
-ms.devlang="na"
-ms.topic="article"
-ms.date="10/03/2016"
-wacn.date="12/12/2016"
-ms.author="larryfr"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/03/2016
+wacn.date: 12/12/2016
+ms.author: larryfr
+---
 
 # 借助 Maven 构建可将 HBase 与基于 Windows 的 HDInsight (Hadoop) 配合使用的 Java 应用程序
 
@@ -31,9 +30,9 @@ ms.author="larryfr"/>
 
 * [Maven](http://maven.apache.org/)
 
-* [装有 HBase 的基于 Windows 的 HDInsight 群集](/documentation/articles/hdinsight-hbase-tutorial-get-started-v1/#create-hbase-cluster)
+* [装有 HBase 的基于 Windows 的 HDInsight 群集](./hdinsight-hbase-tutorial-get-started-v1.md#create-hbase-cluster)
 
-    > [AZURE.NOTE] 本文档中的步骤已在 HDInsight 群集版本 3.2 和 3.3 中测试。示例中提供的默认值适用于 HDInsight 3.3 群集。
+    > [!NOTE] 本文档中的步骤已在 HDInsight 群集版本 3.2 和 3.3 中测试。示例中提供的默认值适用于 HDInsight 3.3 群集。
 
 ## 创建项目
 
@@ -63,14 +62,14 @@ ms.author="larryfr"/>
 
     此部分会告知 Maven，项目需要 __hbase-client__ 版本 __1.1.2__。在编译时，从默认的 Maven 存储库下载此依赖项。你可以使用 [Maven 中央存储库](http://search.maven.org/#artifactdetails%7Corg.apache.hbase%7Chbase-client%7C0.98.4-hadoop2%7Cjar)搜索来了解有关此依赖性的详细信息。
 
-    > [AZURE.IMPORTANT] 版本号必须与 HDInsight 群集随附的 HBase 版本匹配。可以使用下表来查找正确的版本号。
+    > [!IMPORTANT] 版本号必须与 HDInsight 群集随附的 HBase 版本匹配。可以使用下表来查找正确的版本号。
 
     | HDInsight 群集版本 | 要使用的 HBase 版本 |
     | ----- | ----- |
     | 3\.2 | 0\.98.4-hadoop2 |
     | 3\.3 | 1\.1.2 |
 
-    有关 HDInsight 版本和组件的详细信息，请参阅 [What are the different Hadoop components available with HDInsight](/documentation/articles/hdinsight-component-versioning-v1/)（HDInsight 提供哪些不同的 Hadoop 组件）。
+    有关 HDInsight 版本和组件的详细信息，请参阅 [What are the different Hadoop components available with HDInsight](./hdinsight-component-versioning-v1.md)（HDInsight 提供哪些不同的 Hadoop 组件）。
 
 2. 如果使用 HDInsight 3.3 群集，则还必须将以下代码添加到 `<dependencies>` 节：
 
@@ -129,7 +128,7 @@ ms.author="larryfr"/>
 
     `<resources>` 部分会配置包含 HBase 配置信息的资源 (__conf\\hbase-site.xml__)。
 
-    > [AZURE.NOTE] 你也可以通过代码设置配置值。有关如何完成此操作的说明，请参阅所采用的 __CreateTable__ 示例中的注释。
+    > [!NOTE] 你也可以通过代码设置配置值。有关如何完成此操作的说明，请参阅所采用的 __CreateTable__ 示例中的注释。
 
     此 `<plugins>` 部分会配置 [Maven 编译器插件](http://maven.apache.org/plugins/maven-compiler-plugin/)和 [Maven 阴影插件](http://maven.apache.org/plugins/maven-shade-plugin/)。该编译器插件用于编译拓扑。该阴影插件用于防止在由 Maven 构建的 JAR 程序包中复制许可证。使用此插件的原因在于，重复的许可证文件会导致 HDInsight 群集在运行时出错。将 maven-shade-plugin 用于 `ApacheLicenseResourceTransformer` 实现可防止发生此错误。
 
@@ -179,7 +178,7 @@ ms.author="larryfr"/>
 
     此文件将用于加载 HDInsight 群集的 HBase 配置。
 
-    > [AZURE.NOTE] 这是最小的 hbase-site.xml 文件，其中包含 HDInsight 群集的最低基本设置。
+    > [!NOTE] 这是最小的 hbase-site.xml 文件，其中包含 HDInsight 群集的最低基本设置。
 
 3. 保存 __hbase-site.xml__ 文件。
 
@@ -370,14 +369,13 @@ ms.author="larryfr"/>
 
 3. 完成该命令后，__hbaseapp\\target__ 目录会包含名为 __hbaseapp-1.0-SNAPSHOT.jar__ 的文件。
 
-    > [AZURE.NOTE] __hbaseapp-1.0-SNAPSHOT.jar__ 文件是 uber jar（有时称为 fat jar），其中包含运行应用程序所需的所有依赖项。
+    > [!NOTE] __hbaseapp-1.0-SNAPSHOT.jar__ 文件是 uber jar（有时称为 fat jar），其中包含运行应用程序所需的所有依赖项。
 
 ## 上载 JAR 文件并启动作业
 
-你可以使用多种方法将文件上载到 HDInsight 群集，如[在 HDInsight 中为 Hadoop 作业上载数据](/documentation/articles/hdinsight-upload-data/)中所述。以下步骤使用 Azure PowerShell。
+你可以使用多种方法将文件上载到 HDInsight 群集，如[在 HDInsight 中为 Hadoop 作业上载数据](./hdinsight-upload-data.md)中所述。以下步骤使用 Azure PowerShell。
 
-[AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
-
+[!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 1. 安装并配置 Azure PowerShell 后，请创建名为 __hbase-runner.psm1__ 的新文件。使用以下项作为此文件的内容：
 

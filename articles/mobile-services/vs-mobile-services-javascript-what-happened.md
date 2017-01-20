@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="通过使用 Visual Studio 连接服务将移动服务添加到 Javascript 应用时会发生什么情况 | Microsoft Azure" 
-	description="描述 Visual Studio 中的 Azure 移动服务项目发生了什么情况" 
-	services="mobile-services" 
-	documentationCenter="" 
-	authors="mlhoop" 
-	manager="douge" 
-	editor=""/>
+---
+title: 通过使用 Visual Studio 连接服务将移动服务添加到 Javascript 应用时会发生什么情况 | Microsoft Azure
+description: 描述 Visual Studio 中的 Azure 移动服务项目发生了什么情况
+services: mobile-services
+documentationCenter: 
+authors: mlhoop
+manager: douge
+editor: 
 
-<tags 
-	ms.service="mobile-services" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="NA" 
-	ms.devlang="JavaScript" 
-	ms.topic="article" 
-	ms.date="07/21/2016" 
-	wacn.date="09/26/2016" 
-	ms.author="mlearned"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: NA
+ms.devlang: JavaScript
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: mlearned
+---
 
 # 当我使用连接的 Visual Studio 服务添加 Azure 移动服务时，我的 Javascript 项目会发生什么情况？
 
@@ -34,9 +34,5 @@
 ##添加了连接服务文件
 
 在服务文件夹中，添加了连接服务配置文件。
-
-
-
- 
 
 <!---HONumber=Mooncake_0215_2016-->

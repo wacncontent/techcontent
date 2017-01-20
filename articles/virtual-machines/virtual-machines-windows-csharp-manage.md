@@ -1,24 +1,22 @@
-<properties
-	pageTitle="使用 Azure Resource Manager 和 C# 管理 VM | Azure"
-	description="使用 Azure Resource Manager 和 C# 来管理虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 使用 Azure Resource Manager 和 C# 管理 VM | Azure
+description: 使用 Azure Resource Manager 和 C# 来管理虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="na"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="12/16/2016"
-	ms.author="davidmu"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: na
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 12/16/2016
+ms.author: davidmu
+---
 
 # 使用 Azure Resource Manager 与 C 来管理 Azure 虚拟机#  
 
@@ -27,7 +25,7 @@
 若要完成本文中的任务，你需要：
 
 - [Visual Studio](http://msdn.microsoft.com/zh-cn/library/dd831853.aspx)
-- [身份验证令牌](/documentation/articles/resource-group-authenticate-service-principal/)
+- [身份验证令牌](../azure-resource-manager/resource-group-authenticate-service-principal.md)
 
 ## 创建 Visual Studio 项目并安装包
 
@@ -67,8 +65,8 @@
     
 3. 若要获取创建凭据所需的令牌，请将以下方法添加到 Program 类：
 
-	    private static async Task<AuthenticationResult> GetAccessTokenAsync()
-	    {
+        private static async Task<AuthenticationResult> GetAccessTokenAsync()
+        {
           var cc = new ClientCredential("{client-id}", "{client-secret}");
           var context = new AuthenticationContext("https://login.chinacloudapi.cn/{tenant-id}");
           var token = await context.AcquireTokenAsync("https://management.chinacloudapi.cn/", cc);
@@ -78,7 +76,7 @@
           }
           return token;
         }
-	
+    
     将 {client-id} 替换为 Azure Active Directory 应用程序的标识符，将 {client-secret} 替换为 AD 应用程序的访问密钥，并将 {tenant-id} 替换为你的订阅的租户标识符。可以通过运行 Get-AzureRmSubscription 找到租户 ID。可使用 Azure 门户预览找到访问密钥。
     
 4. 若要创建凭据，请将以下代码添加到 Program.cs 中的 Main 方法：
@@ -191,7 +189,7 @@
 
 4. 在 Visual Studio 中单击“启动”，然后使用订阅所用的相同用户名和密码登录到 Azure AD。
 
-	运行此方法时，应会显示与下例类似的内容：
+    运行此方法时，应会显示与下例类似的内容：
     
         Getting information about the virtual machine...
         hardwareProfile
@@ -274,7 +272,7 @@
           await computeManagementClient.VirtualMachines.PowerOffAsync(groupName, vmName);
         }
 
-	若要解除分配虚拟机，请将 PowerOff 调用更改为以下代码：
+    若要解除分配虚拟机，请将 PowerOff 调用更改为以下代码：
 
         computeManagementClient.VirtualMachines.Deallocate(groupName, vmName);
 
@@ -326,7 +324,7 @@
 
 5. 在 Visual Studio 中单击“启动”，然后使用订阅所用的相同用户名和密码登录到 Azure AD。
 
-	你应会看到虚拟机的状态更改为“正在运行”。
+    你应会看到虚拟机的状态更改为“正在运行”。
 
 ## 重新启动正在运行的虚拟机
 
@@ -480,6 +478,6 @@
 
 ## 后续步骤
 
-如果部署出现问题，请参阅[使用 Azure 门户预览排除资源组部署故障](/documentation/articles/resource-manager-troubleshoot-deployments-portal/)
+如果部署出现问题，请参阅[使用 Azure 门户预览排除资源组部署故障](../azure-resource-manager/resource-manager-troubleshoot-deployments-portal.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

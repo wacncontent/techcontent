@@ -1,30 +1,27 @@
-<properties
-    pageTitle="使用资源管理器部署模型将数据还原到 Windows Server 或 Windows 客户端 | Azure"
-    description="了解如何从 Windows Server 或 Windows 客户端还原。"
-    services="backup"
-    documentationcenter=""
-    author="saurabhsensharma"
-    manager="shivamg"
-    editor="" />  
+---
+title: 使用资源管理器部署模型将数据还原到 Windows Server 或 Windows 客户端 | Azure
+description: 了解如何从 Windows Server 或 Windows 客户端还原。
+services: backup
+documentationcenter: 
+author: saurabhsensharma
+manager: shivamg
+editor: 
 
-    
-<tags
-    ms.assetid="742f4b9e-c0ab-4eeb-8e22-ee29b83c22c4"
-    ms.service="backup"
-    ms.workload="storage-backup-recovery"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/01/2016"
-    wacn.date="01/06/2017"
-    ms.author="trinadhk; jimpark; markgal;" />  
-
+ms.assetid: 742f4b9e-c0ab-4eeb-8e22-ee29b83c22c4
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 01/06/2017
+ms.author: trinadhk; jimpark; markgal;
+---
 
 # 使用资源管理器部署模型将文件还原到 Windows Server 或 Windows 客户端计算机
-> [AZURE.SELECTOR]
-- [资源管理器模型](/documentation/articles/backup-azure-restore-windows-server/)
-- [经典部署模型](/documentation/articles/backup-azure-restore-windows-server-classic/)
-
+> [!div class="op_single_selector"]
+- [资源管理器模型](./backup-azure-restore-windows-server.md)
+- [经典部署模型](./backup-azure-restore-windows-server-classic.md)
 
 本文介绍执行两种还原操作所需的步骤：
 
@@ -33,7 +30,7 @@
 
 在这两种情况下，都将从 Azure 恢复服务保管库检索数据。
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-rm-include.md)]
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-rm-include.md)]
 
 ## 将数据恢复到同一台计算机
 如果你意外删除了某个文件并想要在同一台计算机（备份位置）中还原文件，以下步骤可帮助你恢复数据。
@@ -76,7 +73,7 @@
 - *目标计算机* - 要将数据恢复到其中的计算机。
 - *示例保管库* - *源计算机*和*目标计算机*注册到其中的恢复服务保管库。<br/>
 
-> [AZURE.NOTE] 从一台计算机创建的备份无法在运行更低版本操作系统的计算机上还原。例如，如果备份是从 Windows 7 计算机创建的，它可以在 Windows 8 或更高版本的计算机上还原。但是，如果反过来则无法还原。
+> [!NOTE] 从一台计算机创建的备份无法在运行更低版本操作系统的计算机上还原。例如，如果备份是从 Windows 7 计算机创建的，它可以在 Windows 8 或更高版本的计算机上还原。但是，如果反过来则无法还原。
 
 1. 在“目标计算机”中打开“Azure 备份”管理单元。
 2. 确保“目标计算机”和“源计算机”已还原到同一个恢复服务保管库。

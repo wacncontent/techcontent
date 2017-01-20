@@ -1,26 +1,26 @@
 <!-- Temp remove tables-overview, next task on -->
-<properties
-   pageTitle="SQL 数据仓库中表的数据类型 | Azure"
-   description="Azure SQL 数据仓库表的数据类型入门。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>
+---
+title: SQL 数据仓库中表的数据类型 | Azure
+description: Azure SQL 数据仓库表的数据类型入门。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: 
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="jrj;barbkess;sonyama"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: jrj;barbkess;sonyama
+---
 
 # SQL 数据仓库中表的数据类型
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [数据类型][]
 - [分布][]
 - [索引][]
@@ -43,7 +43,6 @@ SQL 数据仓库支持最常用的数据类型。下面是 SQL 数据仓库支�
 |[datetime][]|[nvarchar][]|[uniqueidentifier][]|
 |[datetime2][]|[real][]|[varbinary][]|
 |[datetimeoffset][]|[smalldatetime][]|[varchar][]|
-
 
 ## 数据类型最佳实践
 
@@ -74,14 +73,12 @@ SQL 数据仓库支持最常用的数据类型。下面是 SQL 数据仓库支�
 
 可以在当前 SQL 数据库上运行以下 SQL 来识别 Azure SQL 数据仓库不支持的列：
 
-
     SELECT  t.[name], c.[name], c.[system_type_id], c.[user_type_id], y.[is_user_defined], y.[name]
     FROM sys.tables  t
     JOIN sys.columns c on t.[object_id]    = c.[object_id]
     JOIN sys.types   y on c.[user_type_id] = y.[user_type_id]
     WHERE y.[name] IN ('geography','geometry','hierarchyid','image','text','ntext','sql_variant','timestamp','xml')
     AND  y.[is_user_defined] = 1;
-
 
 ## 后续步骤
 
@@ -90,19 +87,19 @@ SQL 数据仓库支持最常用的数据类型。下面是 SQL 数据仓库支�
 <!--Image references-->
 
 <!--Article references-->
-[Overview]: /documentation/articles/sql-data-warehouse-tables-overview/
-[概述]: /documentation/articles/sql-data-warehouse-tables-overview/
-[数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[Distribute]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[分布]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[Index]: /documentation/articles/sql-data-warehouse-tables-index/
-[索引]: /documentation/articles/sql-data-warehouse-tables-index/
-[Partition]: /documentation/articles/sql-data-warehouse-tables-partition/
-[Statistics]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[统计信息]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[Temporary]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[临时]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[SQL Data Warehouse Best Practices]: /documentation/articles/sql-data-warehouse-best-practices/
+[Overview]: ./sql-data-warehouse-tables-overview.md
+[概述]: ./sql-data-warehouse-tables-overview.md
+[数据类型]: ./sql-data-warehouse-tables-data-types.md
+[Distribute]: ./sql-data-warehouse-tables-distribute.md
+[分布]: ./sql-data-warehouse-tables-distribute.md
+[Index]: ./sql-data-warehouse-tables-index.md
+[索引]: ./sql-data-warehouse-tables-index.md
+[Partition]: ./sql-data-warehouse-tables-partition.md
+[Statistics]: ./sql-data-warehouse-tables-statistics.md
+[统计信息]: ./sql-data-warehouse-tables-statistics.md
+[Temporary]: ./sql-data-warehouse-tables-temporary.md
+[临时]: ./sql-data-warehouse-tables-temporary.md
+[SQL Data Warehouse Best Practices]: ./sql-data-warehouse-best-practices.md
 
 <!--MSDN references-->
 

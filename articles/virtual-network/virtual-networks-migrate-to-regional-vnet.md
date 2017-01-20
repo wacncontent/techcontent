@@ -1,20 +1,21 @@
-<properties 
-   pageTitle="如何从地缘组迁移到区域虚拟网络 (VNet)"
-   description="了解如何从地缘组迁移到区域 VNet"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="carmonm"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="03/15/2016"
-   wacn.date="12/12/2016"
-   ms.author="jdial" />
+---
+title: 如何从地缘组迁移到区域虚拟网络 (VNet)
+description: 了解如何从地缘组迁移到区域 VNet
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: carmonm
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/15/2016
+wacn.date: 12/12/2016
+ms.author: jdial
+---
 
 # 如何从地缘组迁移到区域虚拟网络 (VNet)
 
@@ -28,7 +29,7 @@
 
 今后，在创建新的 VNet 时，可以使用*区域*。你可以将此视为经典管理门户中的一个选项。请注意，在网络配置文件中，这显示为*位置*。
 
->[AZURE.IMPORTANT] 尽管从技术上讲仍可以创建与地缘组关联的虚拟网络，但是，没有令人信服的理由让人这么做。许多新功能，例如网络安全组，仅当使用区域 VNet 时才可用，而不能用于与地缘组关联的虚拟网络。
+>[!IMPORTANT] 尽管从技术上讲仍可以创建与地缘组关联的虚拟网络，但是，没有令人信服的理由让人这么做。许多新功能，例如网络安全组，仅当使用区域 VNet 时才可用，而不能用于与地缘组关联的虚拟网络。
 
 ### 关于与地缘组关联的 VNet
 
@@ -42,36 +43,35 @@
 
 1. 在**经典管理门户**的 VNet 页上，单击右上角的“联系 Microsoft 支持”。
 
-	![VNet 区域迁移请求](./media/virtual-networks-migrate-to-regional-vnet/IC790447.png)  
-
+    ![VNet 区域迁移请求](./media/virtual-networks-migrate-to-regional-vnet/IC790447.png)  
 
 2. 在 “联系 Microsoft 支持” 页上，选择以下项︰订阅︰如果你有多个订阅，请选择与你要迁移的 VNet 对应的订阅。支持类型︰技术 产品类型︰虚拟网络 (VNet) 问题类型︰将虚拟网络迁移到区域虚拟网络
 
-	- **订阅︰** 如果你有多个订阅，请选择与你要迁移的 VNet 对应的订阅。
+    - **订阅︰** 如果你有多个订阅，请选择与你要迁移的 VNet 对应的订阅。
 
-	- **支持类型：***技术*
+    - **支持类型：***技术*
 
-	- **产品类型：***虚拟网络 (VNet)*
+    - **产品类型：***虚拟网络 (VNet)*
 
-	- **问题类型：***将虚拟网络迁移到区域虚拟网络*
+    - **问题类型：***将虚拟网络迁移到区域虚拟网络*
 
 3. 先决条件：必须已为你的 VNet 启用迁移，才能执行以下步骤。如果你收到确认（如果是提前迁移请求），或此页已更新可反映启用了所有 VNet 以进行迁移，则会知道 VNet 已启用。
 
-4. 导出网络配置文件。可以使用 PowerShell 或经典管理门户。有关使用经典管理门户的说明，请参阅[使用网络配置文件配置 VNet](/documentation/articles/virtual-networks-using-network-configuration-file/)。
+4. 导出网络配置文件。可以使用 PowerShell 或经典管理门户。有关使用经典管理门户的说明，请参阅[使用网络配置文件配置 VNet](./virtual-networks-using-network-configuration-file.md)。
 
 5. 编辑网络配置文件，将旧值替换为新值。
 
-	> [AZURE.NOTE] **位置**是已为与 VNet 关联的地缘组指定的区域。例如，如果你的 VNet 与位于中国北部的地缘组关联，则在迁移时，你的“位置”必须指向中国北部。
-	
-	编辑网络配置文件中的以下行，将相应值替换为你自己的值：
+    > [!NOTE] **位置**是已为与 VNet 关联的地缘组指定的区域。例如，如果你的 VNet 与位于中国北部的地缘组关联，则在迁移时，你的“位置”必须指向中国北部。
+    
+    编辑网络配置文件中的以下行，将相应值替换为你自己的值：
 
-	**旧值：** \<VirtualNetworkSitename="VNetChinsNorth" AffinityGroup="VNetDemoAG"\> 
+    **旧值：** \<VirtualNetworkSitename="VNetChinsNorth" AffinityGroup="VNetDemoAG"\> 
 
-	**新值：** \<VirtualNetworkSitename="VNetChinsNorth" Location="China North"\>
+    **新值：** \<VirtualNetworkSitename="VNetChinsNorth" Location="China North"\>
 
-6. 保存所做的更改，并将网络配置[导入](/documentation/articles/virtual-networks-using-network-configuration-file/)到 Azure。
+6. 保存所做的更改，并将网络配置[导入](./virtual-networks-using-network-configuration-file.md)到 Azure。
 
->[AZURE.NOTE]此迁移不会导致你的服务出现任何停机情况。
+>[!NOTE]此迁移不会导致你的服务出现任何停机情况。
 
 ## <a name="Affinity-groups-and-VMs"></a> 地缘组和 VM
 
@@ -89,5 +89,4 @@
 
 在 VM 部署后，系统会将其部署到单个缩放单位。地缘组可以限制可用于新 VM 部署的 VM 大小集，但是部署的任何现有 VM 已限制为在其中部署该 VM 的缩放单位中可用的 VM 大小集。因此，从地缘组中删除 VM 将不产生任何影响。
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

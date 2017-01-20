@@ -1,23 +1,22 @@
-<properties
-    pageTitle="导入/导出服务清单文件格式 | Azure"
-    description="了解驱动器清单文件的格式。清单文件描述 Azure Blob 存储中的 Blob 与构成导入/导出服务中导入或导出作业的驱动器上的文件之间的映射。"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 导入/导出服务清单文件格式 | Azure
+description: 了解驱动器清单文件的格式。清单文件描述 Azure Blob 存储中的 Blob 与构成导入/导出服务中导入或导出作业的驱动器上的文件之间的映射。
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.assetid="f3119e1c-2c25-48ad-8752-a6ed4adadbb0"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="05/25/2015"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.assetid: f3119e1c-2c25-48ad-8752-a6ed4adadbb0
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/25/2015
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 导入/导出服务清单文件格式
 驱动器清单文件描述 Azure Blob 存储中的 Blob 与构成导入或导出作业的驱动器上的文件之间的映射。对于某个导入操作而言，该清单文件作为驱动器准备过程的一部分创建，在将该驱动器送至 Azure 数据中心之前已存储在驱动器上。在导出操作过程中，Azure 导入/导出服务将在驱动器上创建并存储该清单。
@@ -26,68 +25,66 @@
   
 下面介绍驱动器清单文件的一般格式：
   
-
-	<?xml version="1.0" encoding="UTF-8"?>  
-	<DriveManifest Version="2014-11-01">  
-	  <Drive>  
-	    <DriveId>drive-id</DriveId>  
-	    import-export-credential  
+    <?xml version="1.0" encoding="UTF-8"?>  
+    <DriveManifest Version="2014-11-01">  
+      <Drive>  
+        <DriveId>drive-id</DriveId>  
+        import-export-credential  
   
-	    <!-- First Blob List -->  
-	    <BlobList>  
-	      <!-- Global properties and metadata that applies to all blobs -->  
-	      [<MetadataPath Hash="md5-hash">global-metadata-file-path</MetadataPath>]  
-	      [<PropertiesPath   
-	        Hash="md5-hash">global-properties-file-path</PropertiesPath>]  
+        <!-- First Blob List -->  
+        <BlobList>  
+          <!-- Global properties and metadata that applies to all blobs -->  
+          [<MetadataPath Hash="md5-hash">global-metadata-file-path</MetadataPath>]  
+          [<PropertiesPath   
+            Hash="md5-hash">global-properties-file-path</PropertiesPath>]  
   
-	      <!-- First Blob -->  
-	      <Blob>  
-	        <BlobPath>blob-path-relative-to-account</BlobPath>  
-	        <FilePath>file-path-relative-to-transfer-disk</FilePath>  
-	        [<ClientData>client-data</ClientData>]  
-	        [<Snapshot>snapshot</Snapshot>]  
-	        <Length>content-length</Length>  
-	        [<ImportDisposition>import-disposition</ImportDisposition>]  
-	        page-range-list-or-block-list          
-	        [<MetadataPath Hash="md5-hash">metadata-file-path</MetadataPath>]  
-	        [<PropertiesPath Hash="md5-hash">properties-file-path</PropertiesPath>]  
-	      </Blob>  
+          <!-- First Blob -->  
+          <Blob>  
+            <BlobPath>blob-path-relative-to-account</BlobPath>  
+            <FilePath>file-path-relative-to-transfer-disk</FilePath>  
+            [<ClientData>client-data</ClientData>]  
+            [<Snapshot>snapshot</Snapshot>]  
+            <Length>content-length</Length>  
+            [<ImportDisposition>import-disposition</ImportDisposition>]  
+            page-range-list-or-block-list          
+            [<MetadataPath Hash="md5-hash">metadata-file-path</MetadataPath>]  
+            [<PropertiesPath Hash="md5-hash">properties-file-path</PropertiesPath>]  
+          </Blob>  
   
-	      <!-- Second Blob -->  
-	      <Blob>  
-	      . . .  
-	      </Blob>  
-	    </BlobList>  
+          <!-- Second Blob -->  
+          <Blob>  
+          . . .  
+          </Blob>  
+        </BlobList>  
   
-	    <!-- Second Blob List -->  
-	    <BlobList>  
-	    . . .  
-	    </BlobList>  
-	  </Drive>  
-	</DriveManifest>  
+        <!-- Second Blob List -->  
+        <BlobList>  
+        . . .  
+        </BlobList>  
+      </Drive>  
+    </DriveManifest>  
   
-	import-export-credential ::=   
-	  <StorageAccountKey>storage-account-key</StorageAccountKey> | <ContainerSas>container-sas</ContainerSas>  
+    import-export-credential ::=   
+      <StorageAccountKey>storage-account-key</StorageAccountKey> | <ContainerSas>container-sas</ContainerSas>  
   
-	page-range-list-or-block-list ::=   
-	  page-range-list | block-list  
+    page-range-list-or-block-list ::=   
+      page-range-list | block-list  
   
-	page-range-list ::=   
-	    <PageRangeList>  
-	      [<PageRange Offset="page-range-offset" Length="page-range-length"   
-	       Hash="md5-hash"/>]  
-	      [<PageRange Offset="page-range-offset" Length="page-range-length"   
-	       Hash="md5-hash"/>]  
-	    </PageRangeList>  
+    page-range-list ::=   
+        <PageRangeList>  
+          [<PageRange Offset="page-range-offset" Length="page-range-length"   
+           Hash="md5-hash"/>]  
+          [<PageRange Offset="page-range-offset" Length="page-range-length"   
+           Hash="md5-hash"/>]  
+        </PageRangeList>  
   
-	block-list ::=  
-	    <BlockList>  
-	      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]  
-	       Hash="md5-hash"/>]  
-	      [<Block Offset="block-offset" Length="block-length" [Id="block-id"]   
-	       Hash="md5-hash"/>]  
-	    </BlockList>  
-
+    block-list ::=  
+        <BlockList>  
+          [<Block Offset="block-offset" Length="block-length" [Id="block-id"]  
+           Hash="md5-hash"/>]  
+          [<Block Offset="block-offset" Length="block-length" [Id="block-id"]   
+           Hash="md5-hash"/>]  
+        </BlockList>  
 
 下表指定了驱动器清单 XML 格式的数据元素和属性。
   

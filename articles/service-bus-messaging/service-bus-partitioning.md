@@ -1,22 +1,21 @@
-<properties 
-    pageTitle="分区的队列和主题 | Azure"
-    description="介绍如何使用多个消息中转站对服务总线队列和主题进行分区。"
-    services="service-bus"
-    documentationCenter="na"
-    authors="sethmanheim"
-    manager="timlt"
-    editor="" />  
- 
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/02/2016"
-    ms.author="sethm;hillaryc"
-    wacn.date="01/09/2017"/>  
+---
+title: 分区的队列和主题 | Azure
+description: 介绍如何使用多个消息中转站对服务总线队列和主题进行分区。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
 
+ms.service: service-bus
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/02/2016
+ms.author: sethm;hillaryc
+wacn.date: 01/09/2017
+---
 
 # 分区的队列和主题
 
@@ -40,13 +39,11 @@ Azure 服务总线使用多个消息中转站来处理消息，并用多个消�
 
 有多种方法可以创建分区的队列或主题。当从你的应用程序中创建队列或主题时，可以通过分别将 [QueueDescription.EnablePartitioning][] 或 [TopicDescription.EnablePartitioning][] 属性设置为 **true** 来启用队列或主题的分区。这些属性必须在队列或主题创建时设置。无法更改现有队列或主题上的这些属性。例如：
 
-
-		// Create partitioned topic
-		NamespaceManager ns = NamespaceManager.CreateFromConnectionString(myConnectionString);
-		TopicDescription td = new TopicDescription(TopicName);
-		td.EnablePartitioning = true;
-		ns.CreateTopic(td);
-
+        // Create partitioned topic
+        NamespaceManager ns = NamespaceManager.CreateFromConnectionString(myConnectionString);
+        TopicDescription td = new TopicDescription(TopicName);
+        td.EnablePartitioning = true;
+        ns.CreateTopic(td);
 
 或者，可以在 Visual Studio 中或在 [Azure 经典管理门户][]中创建分区的队列或主题。当在门户中创建新的队列或主题时，请将队列或主题“设置”窗口的“常规设置”边栏选项卡中的“启用分区”选项设为“true”。在 Visual Studio 中，单击“新队列”或“新主题”对话框中的“启用分区”复选框。
 
@@ -78,17 +75,15 @@ Azure 服务总线使用多个消息中转站来处理消息，并用多个消�
 
 作为事务一部分发送的消息必须指定分区键。这可以是以下属性之一：[BrokeredMessage.SessionId][]、[BrokeredMessage.PartitionKey][] 或 [BrokeredMessage.MessageId][]。所有作为同一事务一部分发送的消息必须指定相同的分区键。如果你尝试在事务中发送一条没有分区键的消息，服务总线会返回 **InvalidOperationException** 异常。如果你尝试在同一事务中发送多条具有不同分区键的消息，服务总线会返回 **InvalidOperationException** 异常。例如：
 
-
-		CommittableTransaction committableTransaction = new CommittableTransaction();
-		using (TransactionScope ts = new TransactionScope(committableTransaction))
-		{
-		    BrokeredMessage msg = new BrokeredMessage("This is a message");
-		    msg.PartitionKey = "myPartitionKey";
-		    messageSender.Send(msg); 
-		    ts.Complete();
-		}
-		committableTransaction.Commit();
-
+        CommittableTransaction committableTransaction = new CommittableTransaction();
+        using (TransactionScope ts = new TransactionScope(committableTransaction))
+        {
+            BrokeredMessage msg = new BrokeredMessage("This is a message");
+            msg.PartitionKey = "myPartitionKey";
+            messageSender.Send(msg); 
+            ts.Complete();
+        }
+        committableTransaction.Commit();
 
 如果设置了任何作为分区键的属性，服务总线会将消息固定到特定片段。无论是否使用事务，该行为都会发生。建议你如非必须不要指定分区键。
 
@@ -98,17 +93,15 @@ Azure 服务总线使用多个消息中转站来处理消息，并用多个消�
 
 与常规（非分区）的队列或主题不同，不可能使用单一事务来将多条消息发送到不同会话。如果进行尝试，服务总线返回 **InvalidOperationException **异常。例如：
 
-
-		CommittableTransaction committableTransaction = new CommittableTransaction();
-		using (TransactionScope ts = new TransactionScope(committableTransaction))
-		{
-		    BrokeredMessage msg = new BrokeredMessage("This is a message");
-		    msg.SessionId = "mySession";
-		    messageSender.Send(msg); 
-		    ts.Complete();
-		}
-		committableTransaction.Commit();
-
+        CommittableTransaction committableTransaction = new CommittableTransaction();
+        using (TransactionScope ts = new TransactionScope(committableTransaction))
+        {
+            BrokeredMessage msg = new BrokeredMessage("This is a message");
+            msg.SessionId = "mySession";
+            messageSender.Send(msg); 
+            ts.Complete();
+        }
+        committableTransaction.Commit();
 
 ## 使用分区实体自动进行消息转发
 
@@ -139,7 +132,7 @@ Azure 服务总线支持从分区实体、向分区的实体或在分区的实�
 
 请参阅[针对服务总线分区队列和主题的 AMQP 1.0 支持][]的讨论，了解有关分区消息传送实体的详细信息。
 
-  [服务总线体系结构]: /documentation/articles/service-bus-architecture/
+  [服务总线体系结构]: ./service-bus-architecture.md
   [Azure 经典管理门户]: http://manage.windowsazure.cn
   [QueueDescription.EnablePartitioning]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.enablepartitioning.aspx
   [TopicDescription.EnablePartitioning]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.topicdescription.enablepartitioning.aspx
@@ -154,6 +147,6 @@ Azure 服务总线支持从分区实体、向分区的实体或在分区的实�
   [MessagingFactorySettings.OperationTimeout]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactorysettings.operationtimeout.aspx
   [OperationTimeout]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.messagingfactorysettings.operationtimeout.aspx
   [QueueDescription.ForwardTo]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.forwardto.aspx
-  [针对服务总线分区队列和主题的 AMQP 1.0 支持]: /documentation/articles/service-bus-partitioned-queues-and-topics-amqp-overview/
+  [针对服务总线分区队列和主题的 AMQP 1.0 支持]: ./service-bus-partitioned-queues-and-topics-amqp-overview.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

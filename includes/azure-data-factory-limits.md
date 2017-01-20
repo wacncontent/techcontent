@@ -17,16 +17,14 @@
 
 <sup>2</sup> 按需 HDInsight 核心并未分配在包含数据工厂的订阅中。因此，上述限制为数据工厂针对按需 HDInsight 核心所强制的核心限制，不同于 Azure 订阅关联的核心限制。
 
-
 **资源** | **默认下限** | **最小限制**
 -------- | ------------------- | -------------
 计划间隔 | 15 分钟 | 5 分钟
 重试尝试之间的间隔 | 1 秒 | 1 秒
 重试超时值 | 1 秒 | 1 秒
 
-
 ### Web 服务调用限制
 
-Azure 资源管理器限制 API 调用。你可以根据 <!--[-->Azure 资源管理器 API 限制<!--](/documentation/articles/azure-subscription-service-limits/#resource-group-limits)-->中规定的频率执行 API 调用。
+Azure 资源管理器限制 API 调用。你可以根据 <!--[-->Azure 资源管理器 API 限制<!--](../articles/azure-subscription-service-limits.md#resource-group-limits)-->中规定的频率执行 API 调用。
 
 <!---HONumber=71-->

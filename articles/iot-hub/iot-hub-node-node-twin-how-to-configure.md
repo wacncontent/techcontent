@@ -1,34 +1,32 @@
-<properties
-	pageTitle="使用克隆属性 | Azure"
-	description="本教程演示如何使用克隆属性"
-	services="iot-hub"
-	documentationCenter=".net"
-	authors="fsautomata"
-	manager="timlt"
-	editor=""/>  
+---
+title: 使用克隆属性 | Azure
+description: 本教程演示如何使用克隆属性
+services: iot-hub
+documentationCenter: .net
+authors: fsautomata
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-hub"
-     ms.devlang="node"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="09/13/2016"
-     wacn.date="12/12/2016"
-     ms.author="elioda"/>  
-
+ms.service: iot-hub
+ms.devlang: node
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/13/2016
+wacn.date: 12/12/2016
+ms.author: elioda
+---
 
 # 教程：使用所需属性配置设备
 
-[AZURE.INCLUDE [iot-hub-selector-twin-how-to-configure](../../includes/iot-hub-selector-twin-how-to-configure.md)]
+[!INCLUDE [iot-hub-selector-twin-how-to-configure](../../includes/iot-hub-selector-twin-how-to-configure.md)]
 
 在本教程结束时，用户将有两个 Node.js 控制台应用程序：
 
 * **SimulateDeviceConfiguration.js**，一个模拟设备应用，它等待所需配置更新并报告模拟配置更新过程的状态。
 * **SetDesiredConfigurationAndQuery.js**，一个旨在从后端运行的 Node.js 应用，它在设备上设置所需配置并查询配置更新过程。
 
-> [AZURE.NOTE] [IoT 中心 SDK][lnk-hub-sdks] 一文提供了各种 SDK 的相关信息，你可以使用这些 SDK 构建设备和后端应用程序。
+> [!NOTE] [IoT 中心 SDK][lnk-hub-sdks] 一文提供了各种 SDK 的相关信息，你可以使用这些 SDK 构建设备和后端应用程序。
 
 若要完成本教程，你需要以下各项：
 
@@ -38,9 +36,9 @@
 
 如果学习过 [Get started with device twins][lnk-twin-tutorial]（设备孪生入门）教程，则用户已经有一个启用了设备管理的中心和一个名为 **myDeviceId** 的设备标识，因此可跳到[创建模拟设备应用][lnk-how-to-configure-createapp]部分。
 
-[AZURE.INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
+[!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
 
-[AZURE.INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
+[!INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
 
 ## <a name="create-the-simulated-device-app"></a> 创建模拟设备应用
 在此部分，用户需创建一个 Node.js 控制台应用，该应用可作为 **myDeviceId** 连接到中心并等待所需配置更新，然后针对模拟配置更新过程报告更新。
@@ -94,7 +92,7 @@
    
     请注意，为简单起见，前面的代码对初始配置使用硬编码默认值。实际应用可能会从本地存储加载该配置。
    
-    > [AZURE.IMPORTANT] 所需属性更改事件始终在设备连接时发出一次，请确保在执行任何操作之前检查所需属性中是否存在实际更改。
+    > [!IMPORTANT] 所需属性更改事件始终在设备连接时发出一次，请确保在执行任何操作之前检查所需属性中是否存在实际更改。
 
 5. 在进行 `client.open()` 调用前添加以下方法：
    
@@ -141,7 +139,7 @@
    
     请注意，为了节省带宽，在更新报告属性时，请仅指定要修改的属性（在上面的代码中名为 **patch**），而不要替换整个文档。
    
-    > [AZURE.NOTE] 本教程不模拟并发配置更新的任何行为。某些配置更新过程可能无法在更新运行期间适应目标配置的更改，另外一些过程可能必须对更改进行排队，还有一些过程可能会拒绝更改并显示错误条件。请务必考虑特定配置过程的所需行为，并在启动配置更改之前添加相应的逻辑。
+    > [!NOTE] 本教程不模拟并发配置更新的任何行为。某些配置更新过程可能无法在更新运行期间适应目标配置的更改，另外一些过程可能必须对更改进行排队，还有一些过程可能会拒绝更改并显示错误条件。请务必考虑特定配置过程的所需行为，并在启动配置更改之前添加相应的逻辑。
 
 6. 运行设备应用：
    
@@ -200,7 +198,7 @@
 
     **Registry** 对象会公开从服务与设备孪生进行交互所需的所有方法。前面的代码在初始化 **Registry** 对象后检索 **myDeviceId** 的设备孪生，并使用新的遥测配置对象更新其所需属性。在此之后，它调用 **queryTwins** 函数事件 10 秒。
 
-    > [AZURE.IMPORTANT] 为进行说明，此应用程序每 10 秒查询 IoT 中心一次。使用查询跨多个设备生成面向用户的报表，而不检测更改。如果解决方案需要设备事件的实时通知，请使用[设备到云消息][lnk-d2c]。
+    > [!IMPORTANT] 为进行说明，此应用程序每 10 秒查询 IoT 中心一次。使用查询跨多个设备生成面向用户的报表，而不检测更改。如果解决方案需要设备事件的实时通知，请使用[设备到云消息][lnk-d2c]。
 
 1. 恰好在 `registry.getDeviceTwin()` 调用前添加以下代码以实现 **queryTwins** 函数：
    
@@ -231,7 +229,7 @@
    
     你应看到报告配置采用五分钟（而不是 24 小时）的新活动发送频率从 **Success** 更改为 **Pending**，然后再次更改为 **Success**。
    
-    > [AZURE.IMPORTANT] 设备报告操作与查询结果之间最多存在一分钟的延迟。这是为了使查询基础结构可以采用非常大的规模来工作。若要检索单个克隆的一致视图，请使用 **Registry** 类中的 **getDeviceTwin** 方法。
+    > [!IMPORTANT] 设备报告操作与查询结果之间最多存在一分钟的延迟。这是为了使查询基础结构可以采用非常大的规模来工作。若要检索单个克隆的一致视图，请使用 **Registry** 类中的 **getDeviceTwin** 方法。
 
 ## 后续步骤
 在本教程中，从后端应用程序将所需配置设置为*所需属性*，并编写一个模拟设备应用来检测该更改及模拟多步骤更新过程（将其状态作为*报告属性*报告给设备孪生）。
@@ -241,25 +239,24 @@
 - 通过 [Get started with IoT Hub][lnk-iothub-getstarted]（IoT 中心入门）教程学习如何从设备发送遥测；
 - 通过 [Use direct methods][lnk-methods-tutorial]（使用直接方法）教程学习如何以交互方式控制设备（例如如何从用户控制的应用打开风扇）。
 
-
 <!-- links -->
 
-[lnk-hub-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-hub-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 
-[lnk-devguide-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-d2c]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-messages
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-twin-tutorial]: /documentation/articles/iot-hub-node-node-twin-getstarted/
+[lnk-devguide-jobs]: ./iot-hub-devguide-jobs.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-d2c]: ./iot-hub-devguide-messaging.md#device-to-cloud-messages
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-twin-tutorial]: ./iot-hub-node-node-twin-getstarted.md
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/node-devbox-setup.md
 [lnk-connect-device]: /develop/iot/
-[lnk-gateway-SDK]: /documentation/articles/iot-hub-linux-gateway-sdk-get-started/
-[lnk-iothub-getstarted]: /documentation/articles/iot-hub-node-node-getstarted/
-[lnk-methods-tutorial]: /documentation/articles/iot-hub-node-node-direct-methods/
+[lnk-gateway-SDK]: ./iot-hub-linux-gateway-sdk-get-started.md
+[lnk-iothub-getstarted]: ./iot-hub-node-node-getstarted.md
+[lnk-methods-tutorial]: ./iot-hub-node-node-direct-methods.md
 
 [lnk-guid]: https://en.wikipedia.org/wiki/Globally_unique_identifier
 
-[lnk-how-to-configure-createapp]: /documentation/articles/iot-hub-node-node-twin-how-to-configure/#create-the-simulated-device-app
+[lnk-how-to-configure-createapp]: ./iot-hub-node-node-twin-how-to-configure.md#create-the-simulated-device-app
 
 <!---HONumber=Mooncake_1205_2016-->

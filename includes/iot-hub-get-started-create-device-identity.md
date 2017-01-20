@@ -17,7 +17,6 @@
 
 ![][img-identity]  
 
-
 若要了解以编程方式创建设备标识的方法，请参阅 [IoT 中心入门][lnk-getstarted]。
 
 <!-- images and links -->
@@ -26,6 +25,6 @@
 
 [iot-hub-explorer]: https://github.com/Azure/azure-iot-sdks/tree/master/tools/iothub-explorer
 
-[lnk-getstarted]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
+[lnk-getstarted]: ../articles/iot-hub/iot-hub-csharp-csharp-getstarted.md
 
 <!---HONumber=Mooncake_1212_2016-->

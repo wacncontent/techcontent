@@ -1,28 +1,27 @@
-<properties
-	pageTitle="读取保存在 Azure 存储中的消息"
-	description="在将从设备到云的消息写入 Azure 表存储时，对其进行监视。"
-	services="iot-hub"
-	documentationcenter=""
-	author="shizn"
-	manager="timlt"
-	tags=""
-	keywords=""/>  
+---
+title: 读取保存在 Azure 存储中的消息
+description: 在将从设备到云的消息写入 Azure 表存储时，对其进行监视。
+services: iot-hub
+documentationcenter: 
+author: shizn
+manager: timlt
+tags: 
+keywords: 
 
-
-<tags
-	ms.service="iot-hub"
-	ms.date="10/21/2016"
-	wacn.date="12/19/2016"/>  
+ms.service: iot-hub
+ms.date: 10/21/2016
+wacn.date: 12/19/2016
+---
 
 # 读取保存在 Azure 存储中的消息
 ## 执行的操作
-在将从 Raspberry Pi 3 发送到 IoT 中心的从设备到云的消息写入到 Azure 表存储时，对其进行监视。如果有问题，可在[故障排除页](/documentation/articles/iot-hub-raspberry-pi-kit-node-troubleshooting/)上查找解决方案。
+在将从 Raspberry Pi 3 发送到 IoT 中心的从设备到云的消息写入到 Azure 表存储时，对其进行监视。如果有问题，可在[故障排除页](./iot-hub-raspberry-pi-kit-node-troubleshooting.md)上查找解决方案。
 
 ## 你要学习的知识
 在本文中，用户将学习如何通过 gulp 的 read-message 任务读取保存在 Azure 表存储中的消息。
 
 ## 需要什么
-在开始此过程之前，用户必须已成功完成[在 Raspberry Pi 3 上运行 Azure blink 示例应用程序](/documentation/articles/iot-hub-raspberry-pi-kit-node-lesson3-run-azure-blink/)。
+在开始此过程之前，用户必须已成功完成[在 Raspberry Pi 3 上运行 Azure blink 示例应用程序](./iot-hub-raspberry-pi-kit-node-lesson3-run-azure-blink.md)。
 
 ## 从存储帐户中读取新消息
 在以前的文章中，用户已在 Pi 上运行示例应用程序。示例应用程序发送消息到 Azure IoT 中心。发送到 IoT 中心的消息通过 Azure 函数应用存储在 Azure 表存储中。需要使用 Azure 存储连接字符串读取 Azure 表存储中的消息。
@@ -54,11 +53,10 @@
    
     ![gulp run --read-storage](./media/iot-hub-raspberry-pi-lessons/lesson3/gulp_read_message.png)  
 
-
 ## 摘要
 用户已成功地将 Pi 连接到云中的 IoT 中心，并已使用 blink 示例应用程序发送从设备到云的消息。用户还使用 Azure 函数应用将传入的 IoT 中心消息存储到 Azure 表存储中。用户现在可以将从云到设备的消息从 IoT 中心发送到 Pi。
 
 ## 后续步骤
-[发送云到设备的消息](/documentation/articles/iot-hub-raspberry-pi-kit-node-lesson4-send-cloud-to-device-messages/)
+[发送云到设备的消息](./iot-hub-raspberry-pi-kit-node-lesson4-send-cloud-to-device-messages.md)
 
 <!---HONumber=Mooncake_1212_2016-->

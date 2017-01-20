@@ -1,24 +1,21 @@
-<properties
-   pageTitle="了解你的帐单 | Azure"
-   description="了解如何阅读并理解 Azure 订阅的使用情况和计费"
-   services=""
-   documentationCenter=""
-   authors="erihur"
-   manager="stevenpo"
-   editor=""
-   tags="billing"/>  
+---
+title: 了解你的帐单 | Azure
+description: 了解如何阅读并理解 Azure 订阅的使用情况和计费
+services: 
+documentationCenter: 
+authors: erihur
+manager: stevenpo
+editor: 
+tags: billing
 
-
-<tags
-   ms.service="billing"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="10/31/2016"
-   wacn.date="12/30/2016"/>  
-
-
+ms.service: billing
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/31/2016
+wacn.date: 12/30/2016
+---
 
 # 了解你的 Azure 帐单
 
@@ -37,7 +34,6 @@ Azure 订阅的费用因资费套餐而异, 请注意，先前计费期间的最
 3. 单击“帐单历史记录”。
 
     ![摘要 - 帐单 1](./media/billing-understand-your-bill/ContentViewaBillforMA1.png)
-
 
 4. “帐单”部分中列出了您最近 6 个计费周期（外加当前的未计费周期）的对帐单。当前期间的对帐单是生成估算值时的估计费用。此信息每天只会更新一次，而且可能不包含截到本日为止的所有使用量。你的每月帐单可能与这项估计有所不同。
 

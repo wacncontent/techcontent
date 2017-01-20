@@ -1,32 +1,32 @@
-<properties
-    pageTitle="Azure 存储的 .NET 客户端加密 | Azure"
-    description="用于 .NET 的 Azure 存储客户端库支持客户端加密以及与 Azure 密钥保管库集成，以便最大程度地保护 Azure 存储应用程序。"
-    services="storage"
-    documentationcenter=".net"
-    author="robinsh"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: Azure 存储的 .NET 客户端加密 | Azure
+description: 用于 .NET 的 Azure 存储客户端库支持客户端加密以及与 Azure 密钥保管库集成，以便最大程度地保护 Azure 存储应用程序。
+services: storage
+documentationcenter: .net
+author: robinsh
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="becfccca-510a-479e-a798-2044becd9a64"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="12/29/2016"
-    ms.author="robinsh" />
+ms.assetid: becfccca-510a-479e-a798-2044becd9a64
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 12/29/2016
+ms.author: robinsh
+---
 
 # Azure 存储的客户端加密和 Azure 密钥保管库
-[AZURE.INCLUDE [storage-selector-client-side-encryption-include](../../includes/storage-selector-client-side-encryption-include.md)]
+[!INCLUDE [storage-selector-client-side-encryption-include](../../includes/storage-selector-client-side-encryption-include.md)]
 
 ## 概述
-[用于 .NET Nuget 包的 Azure 存储客户端库](https://www.nuget.org/packages/WindowsAzure.Storage)支持在上传到 Azure 存储之前加密客户端应用程序中的数据，以及在下载到客户端时解密数据。此库还支持与 [Azure 密钥保管库](/home/features/key-vault/)集成，以便管理存储帐户密钥。
+[用于 .NET Nuget 包的 Azure 存储客户端库](https://www.nuget.org/packages/WindowsAzure.Storage)支持在上传到 Azure 存储之前加密客户端应用程序中的数据，以及在下载到客户端时解密数据。此库还支持与 [Azure 密钥保管库](https://www.azure.cn/home/features/key-vault/)集成，以便管理存储帐户密钥。
 
-有关使用客户端的加密和 Azure 密钥保管库引导你完成加密 Blob 的过程的分步教程，请参阅[使用 Azure 密钥保管库在 Azure 存储中加密和解密 Blob](/documentation/articles/storage-encrypt-decrypt-blobs-key-vault/)。
+有关使用客户端的加密和 Azure 密钥保管库引导你完成加密 Blob 的过程的分步教程，请参阅[使用 Azure 密钥保管库在 Azure 存储中加密和解密 Blob](./storage-encrypt-decrypt-blobs-key-vault.md)。
 
-有关使用 Java 的客户端加密，请参阅 [Azure 存储的 Java 客户端加密](/documentation/articles/storage-client-side-encryption-java/)。
+有关使用 Java 的客户端加密，请参阅 [Azure 存储的 Java 客户端加密](./storage-client-side-encryption-java.md)。
 
 ## 通过信封技术加密和解密
 加密和解密的过程遵循信封技术。
@@ -58,7 +58,7 @@
 
 在加密过程中，客户端库将生成 16 个字节的随机初始化向量 (IV) 和 32 个字节的随机内容加密密钥 (CEK) 并将使用此信息对 Blob 数据执行信封加密。然后，已包装的 CEK 和一些附加加密元数据将与服务上的已加密 Blob 一起存储为 Blob 元数据。
 
-> [AZURE.WARNING] 若要针对 Blob 编辑或上传自己的元数据，需确保此元数据已保留。如果在没有此元数据的情况下上传新元数据，则已包装的 CEK、IV 和其他元数据将丢失，而 Blob 内容将永远无法再检索。
+> [!WARNING] 若要针对 Blob 编辑或上传自己的元数据，需确保此元数据已保留。如果在没有此元数据的情况下上传新元数据，则已包装的 CEK、IV 和其他元数据将丢失，而 Blob 内容将永远无法再检索。
 
 下载已加密的 Blob 需要使用 **DownloadTo***/**BlobReadStream** 便捷方法检索整个 Blob 的内容。将已包装的 CEK 解包，与 IV（在本示例中存储为 Blob 元数据）一起使用将解密后的数据返回给用户。
 
@@ -78,7 +78,7 @@
 ### 表
 客户端库支持对插入和替换操作的实体属性进行加密。
 
->[AZURE.NOTE] 当前不支持合并。由于属性的子集可能以前已使用不同的密钥加密，因此只合并新属性和更新元数据将导致数据丢失。合并需要进行额外的服务调用以从服务中读取预先存在的实体，或者需要为属性使用一个新密钥，由于性能方面的原因，这两种方案都不适用。
+>[!NOTE] 当前不支持合并。由于属性的子集可能以前已使用不同的密钥加密，因此只合并新属性和更新元数据将导致数据丢失。合并需要进行额外的服务调用以从服务中读取预先存在的实体，或者需要为属性使用一个新密钥，由于性能方面的原因，这两种方案都不适用。
 
 表数据加密的工作方式如下：
 
@@ -98,7 +98,7 @@
 若要执行查询操作，必须指定一个能够解析结果集中的所有密钥的密钥解析程序。如果查询结果中包含的实体不能解析为提供程序，则客户端库将引发错误。对于执行服务器端投影的任何查询，在默认情况下，客户端库将为所选列添加特殊的加密元数据属性（\_ClientEncryptionMetadata1 和 \_ClientEncryptionMetadata2）。
 
 ## Azure 密钥保管库
-Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密钥和机密。通过使用 Azure 密钥保管库，用户可以使用受硬件安全模块 (HSM) 保护的密钥加密密钥和机密（例如身份验证密钥、存储帐户密钥、数据加密密钥、.PFX 文件和密码）。有关详细信息，请参阅[什么是 Azure 密钥保管库？](/documentation/articles/key-vault-whatis/)。
+Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密钥和机密。通过使用 Azure 密钥保管库，用户可以使用受硬件安全模块 (HSM) 保护的密钥加密密钥和机密（例如身份验证密钥、存储帐户密钥、数据加密密钥、.PFX 文件和密码）。有关详细信息，请参阅[什么是 Azure 密钥保管库？](../key-vault/key-vault-whatis.md)。
 
 存储客户端库使用密钥保管库核心库，以便在整个 Azure 上提供一个通用框架进行密钥管理。用户还可以从使用密钥保管库扩展库中获得其他好处。扩展库围绕简单无缝的对称/RSA 本地和云密钥提供程序以及使用聚合和缓存提供有用的功能。
 
@@ -120,13 +120,12 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 ## 最佳实践
 仅在用于 .NET 的存储空间客户端库中提供加密支持。Windows Phone 和 Windows 运行时当前不支持加密。
 
->[AZURE.IMPORTANT] 使用客户端加密时，请注意以下要点：
+>[!IMPORTANT] 使用客户端加密时，请注意以下要点：
 >
 >- 读取或写入到已加密的 Blob 时，请使用完整 Blob 上传命令和范围/完整 Blob 下载命令。避免使用协议操作（如“放置块”、“放置块列表”、“写入页”、“清除页”或“追加块”）写入到已加密的 Blob，否则可能会损坏已加密的 Blob 并使其不可读。
 >- 对于表，存在类似的约束。请注意，不要在未更新加密元数据的情况下更新已加密的属性。
 >- 如果你在已加密的 Blob 上设置元数据，则可能会覆盖解密所需的与加密相关的元数据，因为设置元数据不是累加性的。这也适用于快照；避免在创建已加密的 Blob 的快照时指定元数据。如果必须设置元数据，则一定要调用 **FetchAttributes** 方法首先获取当前加密元数据，并在设置元数据时避免并发写入。
 >- 对于仅使用加密数据的用户，在默认请求选项中启用 **RequireEncryption** 属性。有关详细信息，请参阅下文。
-
 
 ## 客户端 API/接口
 在创建 EncryptionPolicy 对象时，用户可以只提供密钥（实现 IKey）、只提供解析程序（实现 IKeyResolver），或两者都提供。IKey 是使用密钥标识符标识的基本密钥类型，它提供了包装/解包逻辑。IKeyResolver 用于在解密过程中解析密钥。它定义了 ResolveKey 方法，该方法根据给定的密钥标识符返回 IKey。由此，用户能够在多个位置中托管的多个密钥之间进行选择。
@@ -144,90 +143,88 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 ### Blob 服务加密
 创建 **BlobEncryptionPolicy** 对象并在请求选项中设置它（使用 API 或通过使用 **DefaultRequestOptions** 在客户端级别设置）。其他所有事项均由客户端库在内部处理。
 
-	// Create the IKey used for encryption.
- 	RsaKey key = new RsaKey("private:key1" /* key identifier */);
+    // Create the IKey used for encryption.
+     RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
- 	// Create the encryption policy to be used for upload and download.
- 	BlobEncryptionPolicy policy = new BlobEncryptionPolicy(key, null);
+     // Create the encryption policy to be used for upload and download.
+     BlobEncryptionPolicy policy = new BlobEncryptionPolicy(key, null);
 
- 	// Set the encryption policy on the request options.
- 	BlobRequestOptions options = new BlobRequestOptions() { EncryptionPolicy = policy };
+     // Set the encryption policy on the request options.
+     BlobRequestOptions options = new BlobRequestOptions() { EncryptionPolicy = policy };
 
- 	// Upload the encrypted contents to the blob.
- 	blob.UploadFromStream(stream, size, null, options, null);
+     // Upload the encrypted contents to the blob.
+     blob.UploadFromStream(stream, size, null, options, null);
 
- 	// Download and decrypt the encrypted contents from the blob.
- 	MemoryStream outputStream = new MemoryStream();
- 	blob.DownloadToStream(outputStream, null, options, null);
+     // Download and decrypt the encrypted contents from the blob.
+     MemoryStream outputStream = new MemoryStream();
+     blob.DownloadToStream(outputStream, null, options, null);
 
 ### 队列服务加密
 创建 **QueueEncryptionPolicy** 对象并在请求选项中设置它（使用 API 或通过使用 **DefaultRequestOptions** 在客户端级别设置）。其他所有事项均由客户端库在内部处理。
 
+    // Create the IKey used for encryption.
+     RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
-	// Create the IKey used for encryption.
- 	RsaKey key = new RsaKey("private:key1" /* key identifier */);
+     // Create the encryption policy to be used for upload and download.
+     QueueEncryptionPolicy policy = new QueueEncryptionPolicy(key, null);
 
- 	// Create the encryption policy to be used for upload and download.
- 	QueueEncryptionPolicy policy = new QueueEncryptionPolicy(key, null);
+     // Add message
+     QueueRequestOptions options = new QueueRequestOptions() { EncryptionPolicy = policy };
+     queue.AddMessage(message, null, null, options, null);
 
- 	// Add message
- 	QueueRequestOptions options = new QueueRequestOptions() { EncryptionPolicy = policy };
- 	queue.AddMessage(message, null, null, options, null);
-
- 	// Retrieve message
- 	CloudQueueMessage retrMessage = queue.GetMessage(null, options, null);
+     // Retrieve message
+     CloudQueueMessage retrMessage = queue.GetMessage(null, options, null);
 
 ### 表服务加密
 除了创建加密策略和在请求选项上设置它以外，您还必须在 **TableRequestOptions** 中指定 **EncryptionResolver**，或在实体上设置 [EncryptProperty] 特性。
 
 #### 使用解析程序
 
+    // Create the IKey used for encryption.
+     RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
-	// Create the IKey used for encryption.
- 	RsaKey key = new RsaKey("private:key1" /* key identifier */);
+     // Create the encryption policy to be used for upload and download.
+     TableEncryptionPolicy policy = new TableEncryptionPolicy(key, null);
 
- 	// Create the encryption policy to be used for upload and download.
- 	TableEncryptionPolicy policy = new TableEncryptionPolicy(key, null);
+     TableRequestOptions options = new TableRequestOptions()
+     {
+        EncryptionResolver = (pk, rk, propName) =>
+         {
+            if (propName == "foo")
+             {
+                return true;
+             }
+             return false;
+         },
+         EncryptionPolicy = policy
+     };
 
- 	TableRequestOptions options = new TableRequestOptions()
- 	{
-    	EncryptionResolver = (pk, rk, propName) =>
-     	{
-        	if (propName == "foo")
-         	{
-            	return true;
-         	}
-         	return false;
-     	},
-     	EncryptionPolicy = policy
- 	};
+     // Insert Entity
+     currentTable.Execute(TableOperation.Insert(ent), options, null);
 
- 	// Insert Entity
- 	currentTable.Execute(TableOperation.Insert(ent), options, null);
+     // Retrieve Entity
+     // No need to specify an encryption resolver for retrieve
+     TableRequestOptions retrieveOptions = new TableRequestOptions()
+     {
+        EncryptionPolicy = policy
+     };
 
- 	// Retrieve Entity
- 	// No need to specify an encryption resolver for retrieve
- 	TableRequestOptions retrieveOptions = new TableRequestOptions()
- 	{
-    	EncryptionPolicy = policy
- 	};
-
- 	TableOperation operation = TableOperation.Retrieve(ent.PartitionKey, ent.RowKey);
- 	TableResult result = currentTable.Execute(operation, retrieveOptions, null);
+     TableOperation operation = TableOperation.Retrieve(ent.PartitionKey, ent.RowKey);
+     TableResult result = currentTable.Execute(operation, retrieveOptions, null);
 
 #### 使用特性
 如上所述，如果实体实现了 TableEntity，则可以使用 [EncryptProperty] 特性修饰属性，而不用指定 **EncryptionResolver**。
 
-	[EncryptProperty]
- 	public string EncryptedProperty1 { get; set; }
+    [EncryptProperty]
+     public string EncryptedProperty1 { get; set; }
 
 ## 加密和性能
 注意，加密你的存储数据会导致额外的性能开销。必须生成内容密钥和 IV，内容本身必须进行加密，并且其他元数据必须进行格式化并上传。此开销将因所加密的数据量而有所不同。我们建议客户在开发过程中始终测试其应用程序的性能。
 
 ## 后续步骤
-- [教程：在 Azure 存储空间中使用 Azure 密钥保管库加密和解密 blob](/documentation/articles/storage-encrypt-decrypt-blobs-key-vault/)
+- [教程：在 Azure 存储空间中使用 Azure 密钥保管库加密和解密 blob](./storage-encrypt-decrypt-blobs-key-vault.md)
 - 下载[适用于 .NET NuGet 包的 Azure 存储客户端库](https://www.nuget.org/packages/WindowsAzure.Storage)
 - 下载 Azure 密钥保管库 NuGet [核心](http://www.nuget.org/packages/Microsoft.Azure.KeyVault.Core/)、[客户端](http://www.nuget.org/packages/Microsoft.Azure.KeyVault/)和[扩展](http://www.nuget.org/packages/Microsoft.Azure.KeyVault.Extensions/)包
-- 访问 [Azure 密钥保管库文档](/documentation/articles/key-vault-whatis/)
+- 访问 [Azure 密钥保管库文档](../key-vault/key-vault-whatis.md)
 
 <!---HONumber=Mooncake_1226_2016-->

@@ -1,21 +1,21 @@
-<properties
-	pageTitle="使用 SCIM 启用从 Azure Active Directory 到应用程序的用户和组自动预配 | Azure"
-	description="Azure Active Directory 可以使用 SCIM 协议规范中定义的接口，自动将用户和组预配到以 Web 服务为前端的任何应用程序或标识存储"
-	services="active-directory"
-	documentationCenter=""
-	authors="asmalser-msft"
-	manager="stevenpo"
-	editor=""/>
+---
+title: 使用 SCIM 启用从 Azure Active Directory 到应用程序的用户和组自动预配 | Azure
+description: Azure Active Directory 可以使用 SCIM 协议规范中定义的接口，自动将用户和组预配到以 Web 服务为前端的任何应用程序或标识存储
+services: active-directory
+documentationCenter: 
+authors: asmalser-msft
+manager: stevenpo
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="02/09/2016"
-	wacn.date="04/28/2016"
-	ms.author="asmalser-msft"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 02/09/2016
+wacn.date: 04/28/2016
+ms.author: asmalser-msft
+---
 
 #使用 SCIM 启用从 Azure Active Directory 到应用程序的用户和组自动预配
 
@@ -98,7 +98,7 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
 * Visual Studio 2013 或更高版本
 * [Azure SDK for .NET](/downloads/)
 * 支持将 ASP.NET Framework 4.5 用作 SCIM 终结点的 Windows 计算机。必须能够从云访问此计算机
-* [具有 Azure AD Premium 试用版或许可版的 Azure 订阅](/documentation/services/identity/)
+* [具有 Azure AD Premium 试用版或许可版的 Azure 订阅](./index.md/)
 * Amazon AWS 示例需要 [AWS Toolkit for Visual Studio](http://docs.aws.amazon.com/AWSToolkitVS/latest/UserGuide/tkv_setup.html) 中的库。请参阅示例随附的自述文件以获取其他详细信息
 
 ###入门
@@ -125,7 +125,6 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
 
 8.	在 Windows 中，于“Windows 设置”>“网络和 Internet 设置”下面，选择“Windows 防火墙”>“高级设置”，然后创建允许对端口 9000 进行入站访问的“入站规则”。
 9.	如果 Windows 计算机位于路由器后面，则你需要将路由器配置为在面向 Internet 的端口 9000 与 Windows 计算机上的端口 9000 之间执行网络访问转换。为了使 Azure AD 能够在云中访问此终结点，必须执行此操作。
-
 
 **在 Azure AD 中注册示例 SCIM 终结点：**
 
@@ -362,7 +361,6 @@ Azure Active Directory 可将两种类型的资源预配到 SCIM Web 服务。�
 | telephone-Number | phoneNumbers[type eq "work"].value |
 | user-PrincipalName | userName |
 
-
 ###表 2：默认组属性映射
 
 | Azure Active Directory 组 | http://schemas.microsoft.com/2006/11/ResourceManagement/ADSCIM/Group |
@@ -373,7 +371,6 @@ Azure Active Directory 可将两种类型的资源预配到 SCIM Web 服务。�
 | members | members |
 | objectId | id |
 | proxyAddresses | emails[type eq "other"].Value |
-
 
 ##用户预配和取消预配
 
@@ -409,13 +406,13 @@ Azure Active Directory 可将两种类型的资源预配到 SCIM Web 服务。�
     }
 
     public interface Microsoft.SystemForCrossDomainIdentityManagement.IRetrievalParameters
-	{
+    {
       system.Collections.Generic.IReadOnlyCollection<string> ExcludedAttributePaths 
       { get; }
       System.Collections.Generic.IReadOnlyCollection<string> RequestedAttributePaths 
       { get; }
       string SchemaIdentifier 
-	  { get; }
+      { get; }
     }
 
     public interface Microsoft.SystemForCrossDomainIdentityManagement.IFilter
@@ -646,8 +643,6 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
       { get; set; }
     }
 
-
-
 对于上述更新用户的请求示例，作为修补参数值提供的对象将具有这些属性值：
 
 * ResourceIdentifier.Identifier: "54D382A4-2050-4C03-94D1-E769F1D15682"
@@ -663,7 +658,7 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
 
     DELETE ~/scim/Users/54D382A4-2050-4C03-94D1-E769F1D15682 HTTP/1.1
     Authorization: Bearer ...
-	
+    
 如果使用 Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库构建了服务，则将请求转换为对服务提供者的 Delete 方法调用。该方法具有以下签名：
 
     // System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
@@ -691,8 +686,8 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
 图：组预配和取消预配顺序
 
 ##相关文章
-- [有关 Azure Active Directory 中应用程序管理的文章索引](/documentation/articles/active-directory-apps-index/)
-	
+- [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
+    
 <!--Image references-->
 [1]: ./media/active-directory-scim-provisioning/scim-figure-1.PNG
 [2]: ./media/active-directory-scim-provisioning/scim-figure-2.PNG

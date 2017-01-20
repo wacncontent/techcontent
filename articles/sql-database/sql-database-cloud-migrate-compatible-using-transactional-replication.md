@@ -1,29 +1,30 @@
-<properties
-    pageTitle="使用事务复制迁移到 SQL 数据库 | Azure"
-    description="Azure SQL 数据库, 数据库迁移, 导入数据库, 事务复制"
-    services="sql-database"
-    documentationcenter=""
-    author="CarlRabeler"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="eebdd725-833d-4151-9b2b-a0303f39e30f"
-    ms.service="sql-database"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="sqldb-migrate"
-    ms.date="11/08/2016"
-    wacn.date="12/19/2016"
-ms.author="carlrab" />
+---
+title: 使用事务复制迁移到 SQL 数据库 | Azure
+description: Azure SQL 数据库, 数据库迁移, 导入数据库, 事务复制
+services: sql-database
+documentationcenter: 
+author: CarlRabeler
+manager: jhubbard
+editor: 
+
+ms.assetid: eebdd725-833d-4151-9b2b-a0303f39e30f
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: sqldb-migrate
+ms.date: 11/08/2016
+wacn.date: 12/19/2016
+ms.author: carlrab
+---
 
 # 使用事务复制将 SQL Server 数据库迁移到 Azure SQL 数据库
 
-> [AZURE.SELECTOR]
-- [SSMS 迁移向导](/documentation/articles/sql-database-cloud-migrate-compatible-using-ssms-migration-wizard/)
-- [导出到 BACPAC 文件](/documentation/articles/sql-database-cloud-migrate-compatible-export-bacpac-ssms/)
-- [从 BACPAC 文件导入](/documentation/articles/sql-database-cloud-migrate-compatible-import-bacpac-ssms/)
-- [事务复制](/documentation/articles/sql-database-cloud-migrate-compatible-using-transactional-replication/)
+> [!div class="op_single_selector"]
+- [SSMS 迁移向导](./sql-database-cloud-migrate-compatible-using-ssms-migration-wizard.md)
+- [导出到 BACPAC 文件](./sql-database-cloud-migrate-compatible-export-bacpac-ssms.md)
+- [从 BACPAC 文件导入](./sql-database-cloud-migrate-compatible-import-bacpac-ssms.md)
+- [事务复制](./sql-database-cloud-migrate-compatible-using-transactional-replication.md)
 
 在本文中，你将了解如何使用 SQL Server 事务复制以最短的停机时间将兼容的 SQL Server 数据库迁移到 Azure SQL 数据库。
 
@@ -46,9 +47,7 @@ ms.author="carlrab" />
  - SQL Server 2012 SP2 CU8 和更高版本
  - SQL Server 2012 SP3 和更高版本
 
-
-> [AZURE.IMPORTANT] 使用最新版本的 SQL Server Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。较旧版本的 SQL Server Management Studio 不能将 SQL 数据库设置为订阅服务器。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
-
+> [!IMPORTANT] 使用最新版本的 SQL Server Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。较旧版本的 SQL Server Management Studio 不能将 SQL 数据库设置为订阅服务器。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ## 后续步骤
 
@@ -59,8 +58,8 @@ ms.author="carlrab" />
 ## 其他资源
 
 - [事务复制](https://msdn.microsoft.com/zh-cn/library/mt589530.aspx)
-- [SQL 数据库 V12](/documentation/articles/sql-database-v12-whats-new/)
-- [Transact-SQL 部分支持或不支持的函数](/documentation/articles/sql-database-transact-sql-information/)
+- [SQL 数据库 V12](./sql-database-v12-whats-new.md)
+- [Transact-SQL 部分支持或不支持的函数](./sql-database-transact-sql-information.md)
 - [使用 SQL Server 迁移助手迁移非 SQL Server 数据库](http://blogs.msdn.com/b/ssma/)
 
 <!---HONumber=Mooncake_1212_2016-->

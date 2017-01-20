@@ -1,14 +1,28 @@
-<properties linkid="dev-net-common-tasks-cdn" urlDisplayName="CDN" pageTitle="Azure CDN FAQ - Azure feature guide" metaKeywords="Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN常见问题, 回源流量, ICP备案号, CDN默认缓存规则, 回源域名, 订阅, CNAME, 下载加速, Web加速, 网站加速, 流媒体直播加速, VOD加速, 视频点播加速, CDN价格, CDN收费, 技术文档, 帮助文档" description="Find answers to common service consulting or inquiries related to Azure CDN" metaCanonical="" services="" documentationCenter=".NET" title="" authors="" solutions="" manager="" editor="" />
-<tags ms.service="cdn"
-    ms.date="7/7/2016"
-    wacn.date="7/7/2016"
-    wacn.lang="cn"
-    />
-> [AZURE.LANGUAGE]
-- [中文](/documentation/articles/cdn-faq-service-inquiry/)
-- [English](/documentation/articles/cdn-enus-faq-service-inquiry/) 
-#常见问题 - 咨询
+---
+linkid: dev-net-common-tasks-cdn
+urlDisplayName: CDN
+title: Azure CDN FAQ - Azure feature guide
+metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN常见问题, 回源流量, ICP备案号, CDN默认缓存规则, 回源域名, 订阅, CNAME, 下载加速, Web加速, 网站加速, 流媒体直播加速, VOD加速, 视频点播加速, CDN价格, CDN收费, 技术文档, 帮助文档
+description: Find answers to common service consulting or inquiries related to Azure CDN
+metaCanonical: 
+services: 
+documentationCenter: .NET
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
+ms.service: cdn
+ms.date: 7/7/2016
+wacn.date: 7/7/2016
+wacn.lang: cn
+---
+
+> [AZURE.LANGUAGE]
+- [中文](./cdn-faq-service-inquiry.md)
+- [English](./cdn-enus-faq-service-inquiry.md) 
+#常见问题 - 咨询
 
 + [CDN的概念和作用](#step2)
 + [什么是CNAME](#step3)
@@ -88,7 +102,7 @@ CNAME(Canonical Name record)，通常是别名指向。例如，假设用户自�
 Azure CDN支持的加速类型包括：Web加速，下载加速，VOD加速，流媒体直播加速和HTTPS加速。
 
 现阶段提供的CDN主要是静态加速，包含一部分动态加速技术。比如：通过多线路节点回源，TCP优化等。不支持对PHP，ASP.NET，JSP等动态网页的加速，后续会逐步增加更多对动态页面的加速。
-	
+    
 ## **CDN加速类型中的“WEB加速”、“下载加速”、“VOD加速”、“流媒体直播加速”、“HTTPS加速”具体有什么区别？**<a id="step12"></a>
 
 不同的CDN加速类型对应于不同的使用场景：
@@ -125,7 +139,7 @@ Azure CDN支持的加速类型包括：Web加速，下载加速，VOD加速，�
 - **流媒体直播加速类型，系统默认的缓存规则：**
   1. 对ts文件缓存2分钟
   2. 对m3u8 文件缓存2秒钟 
-	
+    
 **缓存规则逻辑：**
 
    1. 如果用户配置了不缓存的规则，优先匹配；然后匹配需要缓存的规则；缓存规则自上而下匹配。
@@ -155,13 +169,12 @@ CDN不会去主动缓存文件，有用户请求那么节点才会去缓存，�
 ## **预加载可以使用泛域名吗？**<a id="step16"></a>
 
 预加载必须是子域名，并且是能够正常访问的URL（状态码是200的）。
-	 
+     
 ## **“源站地址（回源地址）”和“回源域名（回源host header）”的区别是什么？**<a id="step17"></a>	 
 
 回源地址表示源站实际可以被访问到的地址，可以是IP也可以是域名。如果是域名，CDN在回源是会对该域名进行地址解析，然后用解析出来的IP再进行访问。
 
 回源域名表示CDN回源时，HTTP请求头（request header）中的Host字段值。这个字段值一般是域名形式的字符串，被源站用来识别是否与源站服务器上配置的域名相同。
-
 
 ## **Blob使用CDN加速，是否直接使用blob地址，而不使用自定义域名，是否还需要备案，为什么？**<a id="step20"></a>
 CDN（内容分发网络）说白了就是一组网络内容缓存节点，和客户的源站不是等价的。缓存节点上，只包含用户设置需要缓存的内容，且有可能会过期。

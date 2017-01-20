@@ -1,29 +1,27 @@
-<properties
-   pageTitle="将数据从 SQL Server 载入 Azure SQL 数据仓库 (SSIS)| Azure"
-   description="演示如何创建 SQL Server Integration Services (SSIS) 包，以便将数据从各种数据源移动到 SQL 数据仓库。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="lodipalm"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 将数据从 SQL Server 载入 Azure SQL 数据仓库 (SSIS)| Azure
+description: 演示如何创建 SQL Server Integration Services (SSIS) 包，以便将数据从各种数据源移动到 SQL 数据仓库。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: lodipalm
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/12/2016"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/12/2016
+---
 
 # 将数据从 SQL Server 载入 Azure SQL 数据仓库 (SSIS)
 
-> [AZURE.SELECTOR]
-- [SSIS](/documentation/articles/sql-data-warehouse-load-from-sql-server-with-integration-services/)
-- [PolyBase](/documentation/articles/sql-data-warehouse-load-from-sql-server-with-polybase/)
-- [bcp](/documentation/articles/sql-data-warehouse-load-from-sql-server-with-bcp/)
-
+> [!div class="op_single_selector"]
+- [SSIS](./sql-data-warehouse-load-from-sql-server-with-integration-services.md)
+- [PolyBase](./sql-data-warehouse-load-from-sql-server-with-polybase.md)
+- [bcp](./sql-data-warehouse-load-from-sql-server-with-bcp.md)
 
 创建 SQL Server Integration Services (SSIS) 包，以将 SQL Server 的数据加载到 Azure SQL 数据仓库。可以在数据通过 SSIS 数据流进行传递时，选择性地对其进行重构、转换和清理。
 

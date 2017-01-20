@@ -1,31 +1,31 @@
-<properties 
-	pageTitle="什么是 Azure WebJobs SDK" 
-	description="Azure WebJobs SDK 简介。介绍 SDK，适用的典型方案以及代码示例。" 
-	services="app-service\web, storage" 
-	documentationCenter=".net" 
-	authors="tdykstra" 
-	manager="wpickett" 
-	editor="jimbe"/>
+---
+title: 什么是 Azure WebJobs SDK
+description: Azure WebJobs SDK 简介。介绍 SDK，适用的典型方案以及代码示例。
+services: app-service\web, storage
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: jimbe
 
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="06/01/2016" 
-	wacn.date="12/12/2016" 
-	ms.author="tdykstra"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 06/01/2016
+wacn.date: 12/12/2016
+ms.author: tdykstra
+---
 
 # 什么是 Azure WebJobs SDK
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 ## <a id="overview"></a>概述
 
 本文解释什么是 WebJobs SDK，回顾部分适用的典型方案并概述如何在代码中使用它。
 
-[Web 作业](/documentation/articles/websites-webjobs-resources/)是 Azure 应用服务的一项功能，可以在与 Web 应用、API 应用或移动应用相同的上下文中运行程序或脚本。[WebJobs SDK](/documentation/articles/websites-webjobs-resources/) 用于简化针对 Web 作业执行的常见任务（如图像处理、队列处理、RSS 聚合、文件维护和发送电子邮件）编写的代码。WebJobs SDK 的内置功能使用 Azure 存储空间和 Service Bus，用于计划任务和处理错误，以及用于许多其他常见方案。此外，还可以扩展其设计。[WebJobs SDK 是开源代码](https://github.com/Azure/azure-webjobs-sdk/)，包含[扩展的开源代码存储库](https://github.com/Azure/azure-webjobs-sdk-extensions/wiki/Binding-Extensions-Overview)。
+[Web 作业](./websites-webjobs-resources.md)是 Azure 应用服务的一项功能，可以在与 Web 应用、API 应用或移动应用相同的上下文中运行程序或脚本。[WebJobs SDK](./websites-webjobs-resources.md) 用于简化针对 Web 作业执行的常见任务（如图像处理、队列处理、RSS 聚合、文件维护和发送电子邮件）编写的代码。WebJobs SDK 的内置功能使用 Azure 存储空间和 Service Bus，用于计划任务和处理错误，以及用于许多其他常见方案。此外，还可以扩展其设计。[WebJobs SDK 是开源代码](https://github.com/Azure/azure-webjobs-sdk/)，包含[扩展的开源代码存储库](https://github.com/Azure/azure-webjobs-sdk-extensions/wiki/Binding-Extensions-Overview)。
 
 WebJobs SDK 包括以下组件：
 
@@ -39,7 +39,7 @@ WebJobs SDK 包括以下组件：
 
 * 图像处理或其他需要频繁使用 CPU 的工作。网站的一项常见功能是上载图像或视频。通常，在上载内容后要进行处理，但又不想在执行此操作时让用户等候。
 
-* 队列处理。Web 前端与后端服务进行通信的常见方式是使用队列。当网站需要完成工作时，它会将消息推送到队列。后端服务会从队列提取消息，并完成工作。可以在图像处理中使用队列：例如，在用户上载多个文件后，会将文件名放置在由后端选取队列消息处理的队列消息中。或者，可以使用队列提高网站响应能力。例如，无需将目录直接写入 SQL 数据库，而可以写入队列并告知用户已完成，然后由后端服务处理高延迟的关系型数据库工作。有关使用图像处理队列的示例，请参阅 [WebJobs SDK 入门教程](/documentation/articles/websites-dotnet-webjobs-sdk-get-started/)。
+* 队列处理。Web 前端与后端服务进行通信的常见方式是使用队列。当网站需要完成工作时，它会将消息推送到队列。后端服务会从队列提取消息，并完成工作。可以在图像处理中使用队列：例如，在用户上载多个文件后，会将文件名放置在由后端选取队列消息处理的队列消息中。或者，可以使用队列提高网站响应能力。例如，无需将目录直接写入 SQL 数据库，而可以写入队列并告知用户已完成，然后由后端服务处理高延迟的关系型数据库工作。有关使用图像处理队列的示例，请参阅 [WebJobs SDK 入门教程](./websites-dotnet-webjobs-sdk-get-started.md)。
 
 * RSS 聚合。如果有维护 RSS 源列表的网站，可以在后台进程中提取源中的所有文章。
 
@@ -59,21 +59,21 @@ WebJobs SDK 包括以下组件：
 
 使用 Azure 存储空间处理典型任务的代码十分简单。在控制台应用程序的 `Main` 方法中创建 `JobHost` 对象，协调调用编写的方法。WebJobs SDK 框架根据方法中使用的 WebJobs SDK 属性，了解调用方法的时间和要使用的参数值。SDK 提供指定调用函数的条件的*触发器*，并提供指定如何获取传入和传出方法参数信息的*绑定器*。
 
-例如，[QueueTrigger](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/) 属性导致在队列中收到消息时调用函数，如果消息格式为字节数组或自定义类型的 JSON，该消息将自动反序列化。每次在 Azure 存储帐户中新建一个 blob 时，[BlobTrigger](/documentation/articles/websites-dotnet-webjobs-sdk-storage-blobs-how-to/) 属性都会触发一个流程。
+例如，[QueueTrigger](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md) 属性导致在队列中收到消息时调用函数，如果消息格式为字节数组或自定义类型的 JSON，该消息将自动反序列化。每次在 Azure 存储帐户中新建一个 blob 时，[BlobTrigger](./websites-dotnet-webjobs-sdk-storage-blobs-how-to.md) 属性都会触发一个流程。
 
 以下是用于轮询队列并为收到的每个队列消息创建 Blob 的简单程序：
 
-		public static void Main()
-		{
-		    JobHost host = new JobHost();
-		    host.RunAndBlock();
-		}
+        public static void Main()
+        {
+            JobHost host = new JobHost();
+            host.RunAndBlock();
+        }
 
-		public static void ProcessQueueMessage([QueueTrigger("webjobsqueue")] string inputText, 
+        public static void ProcessQueueMessage([QueueTrigger("webjobsqueue")] string inputText, 
             [Blob("containername/blobname")]TextWriter writer)
-		{
-		    writer.WriteLine(inputText);
-		}
+        {
+            writer.WriteLine(inputText);
+        }
 
 `JobHost` 对象是一组后台函数的容器。`JobHost` 对象可监视函数，观察触发函数的事件，并在发生触发事件时执行函数。可调用 `JobHost` 方法，指示要在当前线程或后台线程中执行容器进程。在此示例中，`RunAndBlock` 方法将在当前线程中持续运行该进程。
 
@@ -81,12 +81,12 @@ WebJobs SDK 包括以下组件：
 
 `QueueTrigger` 属性将 `inputText` 参数绑定到队列消息的值。`Blob` 将 `TextWriter` 对象绑定到“containername”容器中名为“blobname”的 Blob。
 
-		public static void ProcessQueueMessage([QueueTrigger("webjobsqueue")]] string inputText, 
-		    [Blob("containername/blobname")]TextWriter writer)
+        public static void ProcessQueueMessage([QueueTrigger("webjobsqueue")]] string inputText, 
+            [Blob("containername/blobname")]TextWriter writer)
 
 然后，该函数使用这些参数将队列消息的值写入 Blob：
 
-		writer.WriteLine(inputText);
+        writer.WriteLine(inputText);
 
 WebJobs SDK 的触发器和绑定器功能可大幅简化编写代码。处理队列、blob 或文件，或启动计划任务所需的低级代码由 WebJobs SDK 框架编写。例如，该框架可创建尚不存在的队列、打开队列、读取队列消息并在处理完成后删除队列消息、创建尚不存在的 Blob 容器、写入 Blob 等。
 
@@ -141,14 +141,14 @@ WebJobs SDK 的触发器和绑定器功能可大幅简化编写代码。处理�
 
 使用 `TimerTrigger` 属性可以触发要按计划运行的函数。可通过 Azure 从整体上计划 Web 作业，也可使用 WebJobs SDK `TimerTrigger` 计划 Web 作业的各个函数。下面是代码示例。
 
-	public class Functions
-	{
-    	public static void ProcessTimer([TimerTrigger("*/15 * * * * *", RunOnStartup = true)]
-    	TimerInfo info, [Queue("queue")] out string message)
-    	{
-        	message = info.FormatNextOccurrences(1);
-    	}
-	}
+    public class Functions
+    {
+        public static void ProcessTimer([TimerTrigger("*/15 * * * * *", RunOnStartup = true)]
+        TimerInfo info, [Queue("queue")] out string message)
+        {
+            message = info.FormatNextOccurrences(1);
+        }
+    }
 
 有关更多示例代码，请参阅 GitHub.com 上 azure-webjobs-sdk-extensions 存储库中的 [TimerSamples.cs](https://github.com/Azure/azure-webjobs-sdk-extensions/blob/master/src/ExtensionsSample/Samples/TimerSamples.cs)。
 
@@ -170,13 +170,12 @@ WebJobs SDK 的触发器和绑定器功能可大幅简化编写代码。处理�
 * 可以从仪表板重放函数。
 * 可在仪表板中查看日志，链接到特定的 WebJob（使用 Console.Out、Console.Error、Trace 等编写的应用程序日志）或链接到生成它们的特定函数调用（使用 SDK 传递给函数作为参数的 `TextWriter` 对象编写的日志）。
 
-有关详细信息，请参阅[如何手动调用函数](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/#manual)和[如何编写日志](/documentation/articles/websites-dotnet-webjobs-sdk-storage-queues-how-to/#logs)
+有关详细信息，请参阅[如何手动调用函数](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#manual)和[如何编写日志](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#logs)
 
 ## <a id="nextsteps"></a>后续步骤
 
-有关 WebJobs SDK 的详细信息，请参阅[Azure WebJobs 推荐资源](/documentation/articles/websites-webjobs-resources/)。
+有关 WebJobs SDK 的详细信息，请参阅[Azure WebJobs 推荐资源](./websites-webjobs-resources.md)。
 
 有关 WebJobs SDK 的最新增强功能的信息，请参阅[发行说明](https://github.com/Azure/azure-webjobs-sdk/wiki/Release-Notes)。
  
-
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

@@ -1,33 +1,32 @@
-<properties
-    pageTitle="如何设置计算机以使用 .NET 进行媒体服务开发"
-    description="了解使用适用于 .NET 的媒体服务 SDK 进行媒体服务开发所要满足的先决条件。此外，了解如何创建 Visual Studio 应用程序。"
-    services="media-services"
-    documentationcenter=""
-    author="juliako"
-    manager="erikre"
-    editor="" />  
+---
+title: 如何设置计算机以使用 .NET 进行媒体服务开发
+description: 了解使用适用于 .NET 的媒体服务 SDK 进行媒体服务开发所要满足的先决条件。此外，了解如何创建 Visual Studio 应用程序。
+services: media-services
+documentationcenter: 
+author: juliako
+manager: erikre
+editor: 
 
-<tags
-    ms.assetid="ec2804c7-c656-4fbf-b3e4-3f0f78599a7f"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="10/24/2016"
-    wacn.date="12/12/2016"
-    ms.author="juliako" />  
-
+ms.assetid: ec2804c7-c656-4fbf-b3e4-3f0f78599a7f
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/24/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 # 使用 .NET 进行媒体服务开发
-[AZURE.INCLUDE [media-services-selector-setup](../../includes/media-services-selector-setup.md)]
+[!INCLUDE [media-services-selector-setup](../../includes/media-services-selector-setup.md)]
 
 本主题介绍如何开始使用 .NET 开发媒体服务应用程序。
 
 **Azure 媒体服务 .NET SDK** 库允许你使用 .NET 为媒体服务编程。为了进一步方便使用 .NET 进行开发，我们提供了 **Azure 媒体服务 .NET SDK 扩展**库。此库包含一组扩展方法和帮助器函数，可简化你的 .NET 代码。这两个库都通过 **NuGet** 和 **GitHub** 提供。
 
 ## 先决条件
--   在新的或现有的 Azure 订阅中拥有一个媒体服务帐户。请参阅主题[如何创建媒体服务帐户](/documentation/articles/media-services-create-account/)。
+-   在新的或现有的 Azure 订阅中拥有一个媒体服务帐户。请参阅主题[如何创建媒体服务帐户](./media-services-create-account.md)。
 -   操作系统：Windows 10、Windows 7、Windows 2008 R2 或 Windows 8。
 -   .NET Framework 4.5。
 -    Visual Studio 2015、Visual Studio 2013、Visual Studio 2012 或 Visual Studio 2010 SP1（专业版、高级版、旗舰版或速成版）。
@@ -61,27 +60,26 @@
 
 若要获取**帐户名**和**帐户密钥**信息，请打开“Azure 经典管理门户”，选择你的媒体服务帐户，然后单击“管理密钥”按钮。
 
-
-	<configuration>
-	...
-	  <appSettings>
-	    <add key="MediaServicesAccountName" value="Media-Services-Account-Name" />
-	    <add key="MediaServicesAccountKey" value="Media-Services-Account-Key" />
-	  </appSettings>
-	  
-	</configuration>
+    <configuration>
+    ...
+      <appSettings>
+        <add key="MediaServicesAccountName" value="Media-Services-Account-Name" />
+        <add key="MediaServicesAccountKey" value="Media-Services-Account-Key" />
+      </appSettings>
+      
+    </configuration>
 
 5. 使用以下代码覆盖位于 Program.cs 文件开头的现有 using 语句。
 
-		using System;
-		using System.Collections.Generic;
-		using System.Linq;
-		using System.Text;
-		using System.Threading.Tasks;
-		using System.Configuration;
-		using System.Threading;
-		using System.IO;
-		using Microsoft.WindowsAzure.MediaServices.Client;
+        using System;
+        using System.Collections.Generic;
+        using System.Linq;
+        using System.Text;
+        using System.Threading.Tasks;
+        using System.Configuration;
+        using System.Threading;
+        using System.IO;
+        using Microsoft.WindowsAzure.MediaServices.Client;
 
 现在，你可以开始开发媒体服务应用程序了。
 

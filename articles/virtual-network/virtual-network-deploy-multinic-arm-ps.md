@@ -1,40 +1,39 @@
-<properties
-    pageTitle="使用 PowerShell 创建具有多个 NIC 的 VM | Azure"
-    description="了解如何使用 PowerShell 通过 Azure Resource Manager 创建具有多个 NIC 的 VM。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 PowerShell 创建具有多个 NIC 的 VM | Azure
+description: 了解如何使用 PowerShell 通过 Azure Resource Manager 创建具有多个 NIC 的 VM。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="88880483-8f9e-4eeb-b783-64b8613407d9"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/02/2016"
-    wacn.date="12/26/2016"
-    ms.author="jdial" />  
-
+ms.assetid: 88880483-8f9e-4eeb-b783-64b8613407d9
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/02/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 使用 PowerShell 创建具有多个 NIC 的 VM
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/virtual-network-deploy-multinic-arm-ps/)
-- [Azure CLI](/documentation/articles/virtual-network-deploy-multinic-arm-cli/)
-- [模板](/documentation/articles/virtual-network-deploy-multinic-arm-template/)
-- [PowerShell（经典）](/documentation/articles/virtual-network-deploy-multinic-classic-ps/)
-- [Azure CLI（经典）](/documentation/articles/virtual-network-deploy-multinic-classic-cli/)
+> [!div class="op_single_selector"]
+- [PowerShell](./virtual-network-deploy-multinic-arm-ps.md)
+- [Azure CLI](./virtual-network-deploy-multinic-arm-cli.md)
+- [模板](./virtual-network-deploy-multinic-arm-template.md)
+- [PowerShell（经典）](./virtual-network-deploy-multinic-classic-ps.md)
+- [Azure CLI（经典）](./virtual-network-deploy-multinic-classic-cli.md)
 
-[AZURE.INCLUDE [virtual-network-deploy-multinic-intro-include.md](../../includes/virtual-network-deploy-multinic-intro-include.md)]
+[!INCLUDE [virtual-network-deploy-multinic-intro-include.md](../../includes/virtual-network-deploy-multinic-intro-include.md)]
 
-> [AZURE.NOTE]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是[经典部署模型](/documentation/articles/virtual-network-deploy-multinic-classic-ps/)。
+> [!NOTE]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是[经典部署模型](./virtual-network-deploy-multinic-classic-ps.md)。
 >
 
-[AZURE.INCLUDE [virtual-network-deploy-multinic-scenario-include.md](../../includes/virtual-network-deploy-multinic-scenario-include.md)]
+[!INCLUDE [virtual-network-deploy-multinic-scenario-include.md](../../includes/virtual-network-deploy-multinic-scenario-include.md)]
 
 以下步骤将名为 *IaaSStory* 的资源组用于 Web 服务器，并将名为 *IaaSStory-BackEnd* 的资源组用于数据库服务器。
 
@@ -45,11 +44,11 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 2. 在模板页中“父资源组”的右侧，单击“部署到 Azure”。
 3. 如果需要，更改参数值，然后按照 Azure 门户预览中的步骤部署资源组。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 请确保存储帐户名称是唯一的。Azure 中不能存在重复的存储帐户名称。
 > 
 
-[AZURE.INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
+[!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
 ## 创建后端 VM
 后端 VM 取决于以下资源的创建：
@@ -177,36 +176,36 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 保存脚本并从 **PowerShell** 命令提示符或 **PowerShell ISE** 运行它。最初的输出会如下所示：
 
-		ResourceGroupName : IaaSStory-Backend
-		Location          : chinanorth
-		ProvisioningState : Succeeded
-		Tags              :
-		Permissions       :
-			Actions  NotActions
-			=======  ==========
-				*                  
+        ResourceGroupName : IaaSStory-Backend
+        Location          : chinanorth
+        ProvisioningState : Succeeded
+        Tags              :
+        Permissions       :
+            Actions  NotActions
+            =======  ==========
+                *                  
 
-		ResourceId        : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory-Backend
+        ResourceId        : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory-Backend
 
 2. 几分钟后，填写提示的凭据，然后单击“确定”。下面的输出表示单个 VM。请注意，整个过程需要 8 分钟才能完成。
 
-		ResourceGroupName            :
-		Id                           :
-		Name                         : DB2
-		Type                         :
-		Location                     :
-		Tags                         :
-		TagsText                     : null
-		AvailabilitySetReference     : Microsoft.Azure.Management.Compute.Models.AvailabilitySetReference
-		AvailabilitySetReferenceText : 	{
- 									"ReferenceUri": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/IaaSStory-Backend/providers/Microsoft.Compute/availabilitySets/ASDB"
-									}
-		Extensions                   :
-		ExtensionsText               : null
-		HardwareProfile              : Microsoft.Azure.Management.Compute.Models.HardwareProfile
-		HardwareProfileText          : {
-										"VirtualMachineSize": "Standard_DS3"
-									   }
+        ResourceGroupName            :
+        Id                           :
+        Name                         : DB2
+        Type                         :
+        Location                     :
+        Tags                         :
+        TagsText                     : null
+        AvailabilitySetReference     : Microsoft.Azure.Management.Compute.Models.AvailabilitySetReference
+        AvailabilitySetReferenceText : 	{
+                                     "ReferenceUri": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/IaaSStory-Backend/providers/Microsoft.Compute/availabilitySets/ASDB"
+                                    }
+        Extensions                   :
+        ExtensionsText               : null
+        HardwareProfile              : Microsoft.Azure.Management.Compute.Models.HardwareProfile
+        HardwareProfileText          : {
+                                        "VirtualMachineSize": "Standard_DS3"
+                                       }
         InstanceView                 :
         InstanceViewText             : null
         NetworkProfile               :

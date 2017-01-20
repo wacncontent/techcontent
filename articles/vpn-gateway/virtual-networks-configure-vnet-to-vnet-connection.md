@@ -1,41 +1,40 @@
-<properties
-    pageTitle="为经典部署模型配置 VNet 到 VNet 连接 | Azure"
-    description="如何使用 PowerShell 和 Azure 经典管理门户将 Azure 虚拟网络连接到一起。"
-    services="vpn-gateway"
-    documentationcenter="na"
-    author="cherylmc"
-    manager="carmonm"
-    editor=""
-    tags="azure-service-management" />  
+---
+title: 为经典部署模型配置 VNet 到 VNet 连接 | Azure
+description: 如何使用 PowerShell 和 Azure 经典管理门户将 Azure 虚拟网络连接到一起。
+services: vpn-gateway
+documentationcenter: na
+author: cherylmc
+manager: carmonm
+editor: 
+tags: azure-service-management
 
-<tags
-    ms.assetid="7413827f-233d-4c7c-a133-9c99cf031833"
-    ms.service="vpn-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="08/31/2016"
-    wacn.date="01/05/2017"
-    ms.author="cherylmc" />
+ms.assetid: 7413827f-233d-4c7c-a133-9c99cf031833
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 08/31/2016
+wacn.date: 01/05/2017
+ms.author: cherylmc
+---
 
 # 为经典部署模型配置 VNet 到 VNet 连接
-> [AZURE.SELECTOR]
-- [Resource Manager - Azure 门户预览](/documentation/articles/vpn-gateway-howto-vnet-vnet-resource-manager-portal/)
-- [Resource Manager - PowerShell](/documentation/articles/vpn-gateway-vnet-vnet-rm-ps/)
-- [经典 - 经典管理门户](/documentation/articles/virtual-networks-configure-vnet-to-vnet-connection/)
+> [!div class="op_single_selector"]
+- [Resource Manager - Azure 门户预览](./vpn-gateway-howto-vnet-vnet-resource-manager-portal.md)
+- [Resource Manager - PowerShell](./vpn-gateway-vnet-vnet-rm-ps.md)
+- [经典 - 经典管理门户](./virtual-networks-configure-vnet-to-vnet-connection.md)
 
 本文逐步讲解如何执行相关步骤，使用经典部署模型（也称为服务管理）来创建虚拟网络并将其连接到一起。以下步骤使用 Azure 经典管理门户来创建 VNet 和网关，使用 PowerShell 来配置 VNet 到 VNet 连接。无法在门户中配置该连接。
 
 ![VNet 到 VNet 连接示意图](./media/virtual-networks-configure-vnet-to-vnet-connection/v2vclassic.png)  
 
-
 ### VNet 到 VNet 连接的部署模型和方法
-[AZURE.INCLUDE [部署模型](../../includes/vpn-gateway-deployment-models-include.md)]
+[!INCLUDE [部署模型](../../includes/vpn-gateway-deployment-models-include.md)]
 
 下表显示了 VNet 到 VNet 配置当前可用的部署模型和方法。当有配置步骤相关的文章发布时，我们会直接从此表格链接到该文章。
 
-[AZURE.INCLUDE [vpn-gateway-table-vnet-vnet](../../includes/vpn-gateway-table-vnet-to-vnet-include.md)]
+[!INCLUDE [vpn-gateway-table-vnet-vnet](../../includes/vpn-gateway-table-vnet-to-vnet-include.md)]
 
 ## 关于 VNet 到 VNet 的连接
 将虚拟网络连接到虚拟网络（VNet 到 VNet）类似于将虚拟网络连接到本地站点位置。这两种连接类型都使用 VPN 网关来提供使用 IPsec/IKE 的安全隧道。
@@ -93,7 +92,6 @@
 
   ![虚拟网络详细信息](./media/virtual-networks-configure-vnet-to-vnet-connection/IC736055.png)  
 
-
 * **名称** - 为虚拟网络命名。例如，VNet1。
 * **位置** - 当你创建虚拟网络时，你会将它与一个 Azure 位置（区域）相关联。例如，如果你希望部署到虚拟网络的 VM 的物理位置位于中国北部，请选择该位置。创建虚拟网络后，将无法更改与虚拟网络关联的位置。
 
@@ -101,7 +99,6 @@
 在“DNS 服务器和 VPN 连接”页上，输入以下信息，然后单击右下角的“下一步”箭头。
 
   ![DNS 服务器和 VPN 连接](./media/virtual-networks-configure-vnet-to-vnet-connection/IC736056.jpg)  
-
 
 * **DNS 服务器** - 输入 DNS 服务器名称和 IP 地址，或从下拉列表中选择一个以前注册的 DNS 服务器。此设置不创建 DNS 服务器。此设置允许指定要用于对此虚拟网络进行名称解析的 DNS 服务器。如果希望在虚拟网络之间进行名称解析，则必须配置自己的 DNS 服务器，而不是使用 Azure 提供的名称解析。
 * 进行 P2S 或 S2S 连接时，请勿选择任何复选框。单击右下角的箭头转到下一屏幕。
@@ -112,7 +109,6 @@
 如果要创建的 VNet 也会连接到本地网络，则所选范围不要与本地网络所用范围重叠，这一点尤其重要。在这种情况下，需要与网络管理员协调。网络管理员可能需要从本地网络地址空间中划分一个 IP 地址范围供 VNet 使用。
 
   ![“虚拟网络地址空间”页](./media/virtual-networks-configure-vnet-to-vnet-connection/IC736057.jpg)  
-
 
 * **地址空间** - 包括起始 IP 和地址计数。请确保你指定的地址空间不与本地网络的任一地址空间重叠。本示例为 VNet1 使用 10.1.0.0/16。
 * **添加子网** - 包括起始 IP 和地址计数。附加的子网不是必需的，但你可能需要为具有静态 DIP 的 VM 创建一个单独的子网。或者，你可能需要在子网中拥有与其他角色实例分开的 VM。
@@ -193,10 +189,9 @@
    
     ![网关状态 - 已连接](./media/virtual-networks-configure-vnet-to-vnet-connection/IC736059.jpg)  
 
-   
-[AZURE.INCLUDE [vpn-gateway-no-nsg-include](../../includes/vpn-gateway-no-nsg-include.md)]
+[!INCLUDE [vpn-gateway-no-nsg-include](../../includes/vpn-gateway-no-nsg-include.md)]
 
 ## 后续步骤
-你可以将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机文档](/documentation/services/virtual-machines/)。
+你可以将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机文档](../virtual-machines/index.md/)。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

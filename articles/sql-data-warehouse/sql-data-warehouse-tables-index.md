@@ -1,26 +1,26 @@
 <!-- Temp remove overview, partition, statistics and temporary -->
-<properties
-   pageTitle="为 SQL 数据仓库中的表编制索引 | Azure"
-   description="Azure SQL 数据仓库中的表索引入门。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>
+---
+title: 为 SQL 数据仓库中的表编制索引 | Azure
+description: Azure SQL 数据仓库中的表索引入门。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: 
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="07/12/2016"
-   wacn.date="12/12/2016"
-   ms.author="jrj;barbkess;sonyama"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 07/12/2016
+wacn.date: 12/12/2016
+ms.author: jrj;barbkess;sonyama
+---
 
 # 为 SQL 数据仓库中的表编制索引
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [数据类型][]
 - [分布][]
 - [索引][]
@@ -39,7 +39,6 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 
 若要创建聚集列存储表，只需在 WITH 子句中指定 CLUSTERED COLUMNSTORE INDEX，或省略 WITH 子句：
 
-
     CREATE TABLE myTable   
       (  
         id int NOT NULL,  
@@ -47,7 +46,6 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
         zipCode varchar(6)  
       )  
     WITH ( CLUSTERED COLUMNSTORE INDEX );
-
 
 在某些情况下，聚集列存储可能不是很好的选择：
 
@@ -64,7 +62,6 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 
 若要创建堆表，只需在 WITH 子句中指定 HEAP：
 
-
     CREATE TABLE myTable   
       (  
         id int NOT NULL,  
@@ -73,13 +70,11 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
       )  
     WITH ( HEAP );
 
-
 ## 聚集与非聚集索引
 
 需要快速检索单个行时，聚集索引可能优于聚集列存储表。对于需要单个或极少数行查找才能极速执行的查询，请考虑使用聚集索引或非聚集辅助索引。使用聚集索引的缺点是只有在聚集索引列上使用高度可选筛选器的查询才可受益。若要改善其他列中的筛选器，可将非聚集索引添加到其他列。但是，添加到表中的每个索引将会增大空间和加载处理时间。
 
 若要创建聚集索引表，只需在 WITH 子句中指定 CLUSTERED INDEX：
-
 
     CREATE TABLE myTable   
       (  
@@ -89,19 +84,15 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
       )  
     WITH ( CLUSTERED INDEX (id) );
 
-
 若要在表中添加非聚集索引，只需在 WITH 子句中指定 CLUSTERED INDEX：
 
-
     CREATE INDEX zipCodeIndex ON t1 (zipCode);
-
 
 ## 优化聚集列存储索引
 
 聚集列存储表将数据组织成多个段。拥有较高的段质量是在列存储表中实现最佳查询性能的关键。压缩行组中的行数可以测量分段质量。每个压缩的行组至少有 10 万行时的段质量最佳，而随着每个行组的行数趋于 1,048,576 行（这是行组可以包含的最大行数），性能会随之提升。
 
 可以在系统上创建并使用以下视图来计算每个行组的平均行数，以及识别所有欠佳的聚集列存储索引。此视图中的最后一列将生成为 SQL 语句，以用于重建索引。
-
 
     CREATE VIEW dbo.vColumnstoreDensity
     AS
@@ -148,18 +139,14 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
     ,       t.[name]
     ;
 
-
 现在你已创建视图，请运行此查询来识别哪些表的行组中包含的行少于 10 万个。当然，如果你要寻求更理想的段质量，可以将 10 万这个阈值增大。
-
 
     SELECT	*
     FROM	[dbo].[vColumnstoreDensity]
     WHERE	COMPRESSED_rowgroup_rows_AVG < 100000
             OR INVISIBLE_rowgroup_rows_AVG < 100000
 
-
 运行查询后就可以开始查看数据并分析结果。下表解释了要在行组分析中查看的内容。
-
 
 | 列 | 如何使用此数据 |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -229,45 +216,33 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 
 以下示例演示如何通过提高资源类向用户分配更多内存。有关资源类以及如何创建新用户的详细信息，请参阅 [concurrency and workload management][Concurrency]（并发性和工作负荷管理）一文。
 
-
   EXEC sp_addrolemember 'xlargerc', 'LoadUser'
-
 
 ### 步骤 2：使用更高的用户资源类重建聚集列存储索引
 以步骤 1 中所述用户的身份（例如 LoadUser，该用户现在使用更高的资源类）登录，然后执行 ALTER INDEX 语句。请确保此用户对重建索引的表拥有 ALTER 权限。这些示例演示如何重新生成整个列存储索引或如何重建单个分区。对于大型表，一次重建一个分区的索引比较合适。
 
 或者，可以使用 [CTAS][] 将表复制到新表，而不要重建索引。哪种方法最合适？ 如果数据量很大，[CTAS][] 的速度通常比 [ALTER INDEX][] 要快。对于少量的数据，[ALTER INDEX][] 更容易使用，不需要你换出表。有关如何使用 CTAS 重建索引的详细信息，请参阅下面的**使用 CTAS 和分区切换重建索引**。
 
-
     -- Rebuild the entire clustered index
     ALTER INDEX ALL ON [dbo].[DimProduct] REBUILD
-    
-    
     
     -- Rebuild a single partition
     ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5
     
-    
-    
     -- Rebuild a single partition with archival compression
     ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE)
     
-    
-    
     -- Rebuild a single partition with columnstore compression
     ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_COMPRESSION = COLUMNSTORE)
-
 
 在 SQL 数据仓库中重建索引是一项脱机操作。有关重建索引的详细信息，请参阅 [Columnstore Indexes Defragmentation][]（列存储索引碎片整理）中的 ALTER INDEX REBUILD 部分和语法主题 [ALTER INDEX][]。
  
 ### 步骤 3：验证聚集列存储段质量是否已改善
 重新运行识别出段质量不佳的表的查询，并验证段质量是否已改善。如果段质量并未改善，原因可能是表中的行太宽。请考虑在重建索引时使用较高的资源类或 DWU。如果需要更多内存，
 
- 
 ## 使用 CTAS 和分区切换重建索引
 
 此示例使用 [CTAS][] 和分区切换重建表分区。
-
 
     -- Step 1: Select the partition of data and write it out to a new table using CTAS
     CREATE TABLE [dbo].[FactInternetSales_20000101_20010101]
@@ -305,7 +280,6 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
     -- Step 4: Switch IN the rebuilt data
     ALTER TABLE [dbo].[FactInternetSales_20000101_20010101] SWITCH PARTITION 2 TO  [dbo].[FactInternetSales] PARTITION 2;
 
-
 有关使用 `CTAS` 重新创建分区的更多详细信息，请参阅 [Partition][]（分区）一文。
 
 ## 后续步骤
@@ -315,21 +289,21 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 <!--Image references-->
 
 <!--Article references-->
-[Overview]: /documentation/articles/sql-data-warehouse-tables-overview/
-[概述]: /documentation/articles/sql-data-warehouse-tables-overview/
-[Data Types]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[Distribute]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[分布]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[索引]: /documentation/articles/sql-data-warehouse-tables-index/
-[Partition]: /documentation/articles/sql-data-warehouse-tables-partition/
-[Statistics]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[统计信息]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[Temporary]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[临时]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[Concurrency]: /documentation/articles/sql-data-warehouse-develop-concurrency/
-[CTAS]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[SQL Data Warehouse Best Practices]: /documentation/articles/sql-data-warehouse-best-practices/
+[Overview]: ./sql-data-warehouse-tables-overview.md
+[概述]: ./sql-data-warehouse-tables-overview.md
+[Data Types]: ./sql-data-warehouse-tables-data-types.md
+[数据类型]: ./sql-data-warehouse-tables-data-types.md
+[Distribute]: ./sql-data-warehouse-tables-distribute.md
+[分布]: ./sql-data-warehouse-tables-distribute.md
+[索引]: ./sql-data-warehouse-tables-index.md
+[Partition]: ./sql-data-warehouse-tables-partition.md
+[Statistics]: ./sql-data-warehouse-tables-statistics.md
+[统计信息]: ./sql-data-warehouse-tables-statistics.md
+[Temporary]: ./sql-data-warehouse-tables-temporary.md
+[临时]: ./sql-data-warehouse-tables-temporary.md
+[Concurrency]: ./sql-data-warehouse-develop-concurrency.md
+[CTAS]: ./sql-data-warehouse-develop-ctas.md
+[SQL Data Warehouse Best Practices]: ./sql-data-warehouse-best-practices.md
 
 <!--MSDN references-->
 [ALTER INDEX]: https://msdn.microsoft.com/zh-cn/library/ms188388.aspx

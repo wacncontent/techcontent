@@ -1,17 +1,17 @@
-<properties
-                pageTitle="如何激活 Trend Micro Deep Sercurity for Azure"
-                description="如何激活使用趋势科技的 DSA "
-                services="virtual-machines"
-                documentationCenter=""
-                authors=""
-                manager=""
-                editor=""
-                tags="Azure VM,DSA,Trend Micro"/>
+---
+title: 如何激活 Trend Micro Deep Sercurity for Azure
+description: 如何激活使用趋势科技的 DSA 
+services: virtual-machines
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: Azure VM,DSA,Trend Micro
 
-<tags
-                ms.service="virtual-machines-aog"
-                ms.date="12/23/2016"
-                wacn.date="12/23/2016"/>
+ms.service: virtual-machines-aog
+ms.date: 12/23/2016
+wacn.date: 12/23/2016
+---
 
 # 如何激活 Trend Micro Deep Security Agent
 
@@ -22,19 +22,18 @@ Trend Micro Deep Security Agent (DSA) 可以配合 Deep Security Manager 工作�
 
 ![install](./media/aog-virtual-machines-howto-activate-dsa/install.png)
 
-详细操作步骤可以参考[如何在 Windows VM 上安装和配置 Trend Micro Deep Security 即服务](/documentation/articles/virtual-machines-windows-classic-install-trend/)。
+详细操作步骤可以参考[如何在 Windows VM 上安装和配置 Trend Micro Deep Security 即服务](./virtual-machines/virtual-machines-windows-classic-install-trend.md)。
 
 ### 激活步骤如下： ###
 
 1.	在 [Trend Micro 官网](https://app.deepsecurity.trendmicro.com/SignUp.screen)注册一个试用版账号。
 2.	登陆账号，下载对应平台（如 Microsoft Windows 64bit）的激活脚本。
 
-	![active](./media/aog-virtual-machines-howto-activate-dsa/active.png)
+    ![active](./media/aog-virtual-machines-howto-activate-dsa/active.png)
 
 3.	将该 PowerShell 脚本拷贝到安装有 DSA 的虚拟机上运行即可完成激活操作。
 
-	![active-2](./media/aog-virtual-machines-howto-activate-dsa/active-2.png)
-
+    ![active-2](./media/aog-virtual-machines-howto-activate-dsa/active-2.png)
 
 ### 更多 Trend Micro DSA 信息请参考: ###
 

@@ -1,35 +1,36 @@
-<properties
-	pageTitle="SQL Server VM 的存储配置 | Azure"
-	description="本主题介绍 Azure 在预配期间如何配置 SQL Server VM 的存储（Resource Manager 部署模型）。此外，还说明了如何为现有的 SQL Server VM 配置存储。"
-	services="virtual-machines-windows"
-	documentationCenter="na"
-	authors="ninarn"
-	manager="jhubbard"    
-	tags="azure-resource-manager"/>
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="11/11/2016"
-	wacn.date="12/30/2016"
-	ms.author="ninarn" />
+---
+title: SQL Server VM 的存储配置 | Azure
+description: 本主题介绍 Azure 在预配期间如何配置 SQL Server VM 的存储（Resource Manager 部署模型）。此外，还说明了如何为现有的 SQL Server VM 配置存储。
+services: virtual-machines-windows
+documentationCenter: na
+authors: ninarn
+manager: jhubbard
+tags: azure-resource-manager
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 11/11/2016
+wacn.date: 12/30/2016
+ms.author: ninarn
+---
 
 # SQL Server VM 的存储配置
 
 当你在 Azure 中配置 SQL Server 虚拟机映像时，门户可帮助你自动完成存储配置。这包括将存储附加到 VM、使该存储可供 SQL Server 访问，并对其进行配置以根据特定的性能要求优化。
 
-本主题介绍 Azure 如何在预配期间针对 SQL Server VM 以及针对现有的 VM 配置存储。此配置基于运行 SQL Server 的 Azure VM 的[性能最佳实践](/documentation/articles/virtual-machines-windows-sql-performance/)。
+本主题介绍 Azure 如何在预配期间针对 SQL Server VM 以及针对现有的 VM 配置存储。此配置基于运行 SQL Server 的 Azure VM 的[性能最佳实践](./virtual-machines-windows-sql-performance.md)。
 
-[AZURE.INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-rm-include.md)] 经典部署模型。
+[!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-rm-include.md)] 经典部署模型。
 
 ## 先决条件
 若要使用自动存储配置设置，虚拟机需有以下特征：
 
-- 是使用 [SQL Server 库映像](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/#option-1-create-a-sql-vm-with-per-minute-licensing)预配的。
-- 使用 [Resource Manager 部署模型](/documentation/articles/resource-manager-deployment-model/)。
-- 使用[高级存储](/documentation/articles/storage-premium-storage/)。
+- 是使用 [SQL Server 库映像](./virtual-machines-windows-sql-server-iaas-overview.md#option-1-create-a-sql-vm-with-per-minute-licensing)预配的。
+- 使用 [Resource Manager 部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。
+- 使用[高级存储](../storage/storage-premium-storage.md)。
 
 ## 新的 VM
 以下部分介绍了如何为新的 SQL Server 虚拟机配置存储。
@@ -47,7 +48,7 @@
 - 将存储池与虚拟机上的新驱动器相关联。
 - 根据指定的工作负荷类型（“数据仓库”、“事务处理”或“常规”）优化此新驱动器。
 
-有关 Azure 如何配置存储设置的详细信息，请参阅[存储配置部分](#storage-configuration)。有关如何在 Azure 门户预览中创建 SQL Server VM 的完整演练，请参阅[预配教程](/documentation/articles/virtual-machines-windows-portal-sql-server-provision/)。
+有关 Azure 如何配置存储设置的详细信息，请参阅[存储配置部分](#storage-configuration)。有关如何在 Azure 门户预览中创建 SQL Server VM 的完整演练，请参阅[预配教程](./virtual-machines-windows-portal-sql-server-provision.md)。
 
 ### Resource Manager 模板
 如果使用以下 Resource Manager 模板，则会按默认附加两个不带存储池配置的高级数据磁盘。但是，你可以自定义这些模板，以更改附加到虚拟机的高级数据磁盘的数目。
@@ -65,7 +66,6 @@
 - 可用
 
 ![为现有 SQL Server VM 配置存储](./media/virtual-machines-windows-sql-storage-configuration/sql-vm-storage-configuration-existing.png)  
-
 
 若要配置存储以添加新驱动器或扩展现有的驱动器，请单击图表上方的“编辑”链接。
 
@@ -102,9 +102,9 @@ Azure 将根据你的规范创建新驱动器。在此方案中，Azure 将执�
 
 - 如果你为 VM 选择了小于 2 TB 的存储，则 Azure 不会创建存储池。
 - 如果你为 VM 选择了至少 2 TB 的存储，则 Azure 将配置存储池。本主题的下一部分提供了存储池配置详细信息。
-- 自动存储配置始终使用[高级存储](/documentation/articles/storage-premium-storage/) P30 数据磁盘。因此，所选 TB 数目与附加到 VM 的数据磁盘数目之间存在 1:1 映射。
+- 自动存储配置始终使用[高级存储](../storage/storage-premium-storage.md) P30 数据磁盘。因此，所选 TB 数目与附加到 VM 的数据磁盘数目之间存在 1:1 映射。
 
-有关价格信息，请参阅“磁盘存储”选项卡上的“存储定价”页。[](/pricing/details/storage/)
+有关价格信息，请参阅“磁盘存储”选项卡上的“存储定价”页。[](https://www.azure.cn/pricing/details/storage/)
 
 ### 创建存储池
 Azure 使用以下设置在 SQL Server VM 上创建存储池。
@@ -134,9 +134,9 @@ Azure 使用以下设置在 SQL Server VM 上创建存储池。
 | **事务处理** | 针对传统数据库 OLTP 工作负荷优化存储 | 跟踪标志 1117<br/>跟踪标志 1118 |
 | **数据仓库** | 针对分析和报告工作负荷优化存储 | 跟踪标志 610<br/>跟踪标志 1117 |
 
->[AZURE.NOTE] 如果在存储配置步骤中选择 SQL 虚拟机来对它进行预配，则只能指定此工作负荷类型。
+>[!NOTE] 如果在存储配置步骤中选择 SQL 虚拟机来对它进行预配，则只能指定此工作负荷类型。
 
 ## 后续步骤
-有关其他与在 Azure VM 中运行 SQL Server 相关的主题，请参阅 [SQL Server on Azure Virtual Machines](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/)（Azure 虚拟机上的 SQL Server）。
+有关其他与在 Azure VM 中运行 SQL Server 相关的主题，请参阅 [SQL Server on Azure Virtual Machines](./virtual-machines-windows-sql-server-iaas-overview.md)（Azure 虚拟机上的 SQL Server）。
 
 <!---HONumber=Mooncake_0829_2016-->

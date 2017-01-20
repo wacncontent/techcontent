@@ -1,33 +1,32 @@
-<properties
-    pageTitle="使用 Azure 模板创建 Linux VM | Azure"
-    description="使用 Azure Resource Manager 模板在 Azure 上创建 Linux VM。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="vlivech"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management,azure-resource-manager" />  
+---
+title: 使用 Azure 模板创建 Linux VM | Azure
+description: 使用 Azure Resource Manager 模板在 Azure 上创建 Linux VM。
+services: virtual-machines-linux
+documentationcenter: 
+author: vlivech
+manager: timlt
+editor: 
+tags: azure-service-management,azure-resource-manager
 
-<tags
-    ms.assetid="721b8378-9e47-411e-842c-ec3276d3256a"
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.date="10/24/2016"
-    wacn.date="12/20/2016"
-    ms.author="v-livech" />  
-
+ms.assetid: 721b8378-9e47-411e-842c-ec3276d3256a
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: hero-article
+ms.date: 10/24/2016
+wacn.date: 12/20/2016
+ms.author: v-livech
+---
 
 # 使用 Azure 模板创建 Linux VM
 本文说明如何使用 Azure 模板在 Azure 上快速部署 Linux 虚拟机。本文要求满足以下条件：
 
-* 一个 Azure 帐户（[获取试用版](/pricing/1rmb-trial/)）
-* 已使用 `azure login -e AzureChinaCloud` 登录 [Azure CLI](/documentation/articles/xplat-cli-install/)。
+* 一个 Azure 帐户（[获取试用版](https://www.azure.cn/pricing/1rmb-trial/)）
+* 已使用 `azure login -e AzureChinaCloud` 登录 [Azure CLI](../xplat-cli-install.md)。
 * Azure CLI *必须处于* Azure Resource Manager 模式`azure config mode arm`。
 
-也可以使用 [Azure 门户预览](/documentation/articles/virtual-machines-linux-quick-create-portal/)快速部署 Linux VM 模板。
+也可以使用 [Azure 门户预览](./virtual-machines-linux-quick-create-portal.md)快速部署 Linux VM 模板。
 
 ## 快速命令摘要
 
@@ -44,7 +43,7 @@ Azure Resource Manager 模板是可用于一次性简易任务（如启动 Ubunt
 ## 创建 Linux VM
 下面的代码示例演示如何调用 `azure group create` 创建资源组，并同时使用[此 Azure Resource Manager 模板](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vm-sshkey/azuredeploy.json)部署受 SSH 保护的 Linux VM。请记住，在示例中必须使用环境中唯一的名称。此示例使用 `myResourceGroup` 作为资源组名称，使用 `myVM` 作为 VM 名称。
 
->[AZURE.NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
     azure group create \
         --name myResourceGroup \

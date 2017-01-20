@@ -1,12 +1,16 @@
-<properties 
-	pageTitle="使用 Azure Automation 实现自动开关虚拟机的操作" 
-	description="本页介绍如何使用 Azure Automation 实现自动开关虚拟机的操作。" 
-	services="automation" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="automation-aog" ms.date="" wacn.date="06/08/2016"/>
+---
+title: 使用 Azure Automation 实现自动开关虚拟机的操作
+description: 本页介绍如何使用 Azure Automation 实现自动开关虚拟机的操作。
+services: automation
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: automation-aog
+ms.date: 
+wacn.date: 06/08/2016
+---
 
 #使用 Azure Automation 实现自动开关虚拟机的操作
  
@@ -57,7 +61,7 @@
 
 ![](./media/aog-automation-how-to-turn-on-off-vm/define-credential-name-password.jpg)
 
-**注意**： 这个步骤中的用户是通过 AAD 创建出来的，我们可以参考[这个链接](/documentation/articles/active-directory-create-users/)来了解如何创建 AAD 用户。本例子是使用管理账号来做的， 
+**注意**： 这个步骤中的用户是通过 AAD 创建出来的，我们可以参考[这个链接](./active-directory/active-directory-create-users.md)来了解如何创建 AAD 用户。本例子是使用管理账号来做的， 
 
 完成后保存。
  
@@ -69,13 +73,13 @@
 
 在弹出的编辑界面中输入下面的代码：
 
-	workflow DanRunbook
-	{
-	    $Cred = Get-AutomationPSCredential -Name "DanCredential"; 
-	    Add-AzureAccount -Credential $Cred -Environment AzureChinaCloud;
-	    Select-AzureSubscription -SubscriptionName "Internal-002";    
-	    Start-AzureVM -ServiceName "DanEastCS" -Name "Dan08Test";
-	}
+    workflow DanRunbook
+    {
+        $Cred = Get-AutomationPSCredential -Name "DanCredential"; 
+        Add-AzureAccount -Credential $Cred -Environment AzureChinaCloud;
+        Select-AzureSubscription -SubscriptionName "Internal-002";    
+        Start-AzureVM -ServiceName "DanEastCS" -Name "Dan08Test";
+    }
 
 workflow 后面的 DanRunbook 需要与你的 Runbook 的名称一致，请按照实际情况修改。
 这里面第一行里面的 DanCredential 这个名字就是我们前面创建的 Credential 的名称，需要根据实际创建进行替换。Internal-002 是订阅名称 DanEastCS 是云服务的名称，Dan08Test 是虚拟机的名称，也都需要根据具体的情况进行替换。
@@ -113,13 +117,13 @@ JOB 执行结束后，可以看到我们的虚拟机已经成功启动了。
  
 这样我们的开机脚本就设置完成了，同样的原理，可以使用下面的脚本配置一个关机脚本：
 
-	workflow StopVMRunbook
-	{
-	    $Cred = Get-AutomationPSCredential -Name "DanCredential"; 
-	    Add-AzureAccount -Credential $Cred -Environment AzureChinaCloud;
-	    Select-AzureSubscription -SubscriptionName "Internal-002";	    
-	    Stop-AzureVM -ServiceName "DanEastCS" -Name "Dan08Test" -Force;
-	}
+    workflow StopVMRunbook
+    {
+        $Cred = Get-AutomationPSCredential -Name "DanCredential"; 
+        Add-AzureAccount -Credential $Cred -Environment AzureChinaCloud;
+        Select-AzureSubscription -SubscriptionName "Internal-002";	    
+        Stop-AzureVM -ServiceName "DanEastCS" -Name "Dan08Test" -Force;
+    }
 
 这个脚本创建在名为 StopVMRunbook 的 Runbook 中。
 需要注意的是，这里 Stop-AzureVM 这个命令一定要添加 -Force 参数，不然在命令执行的时候会停在确认是否要关闭虚拟机的界面而无法完成关闭操作。

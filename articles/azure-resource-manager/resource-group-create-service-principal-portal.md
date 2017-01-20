@@ -1,28 +1,28 @@
-<properties
-    pageTitle="在门户中创建服务主体 | Azure"
-    description="介绍如何创建新的 Active Directory 应用程序和服务主体，在 Azure 资源管理器中将此服务主体与基于角色的访问控制配合使用可以管理对资源的访问权限。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="7068617b-ac5e-47b3-a1de-a18c918297b6"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/30/2016"
-    wacn.date="01/06/2017"
-    ms.author="tomfitz" />  
+---
+title: 在门户中创建服务主体 | Azure
+description: 介绍如何创建新的 Active Directory 应用程序和服务主体，在 Azure 资源管理器中将此服务主体与基于角色的访问控制配合使用可以管理对资源的访问权限。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
+ms.assetid: 7068617b-ac5e-47b3-a1de-a18c918297b6
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/30/2016
+wacn.date: 01/06/2017
+ms.author: tomfitz
+---
 
 # 使用门户创建可访问资源的 Active Directory 应用程序和服务主体
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/resource-group-authenticate-service-principal/)
-- [Azure CLI](/documentation/articles/resource-group-authenticate-service-principal-cli/)
-- [门户](/documentation/articles/resource-group-create-service-principal-portal/)
+> [!div class="op_single_selector"]
+- [PowerShell](./resource-group-authenticate-service-principal.md)
+- [Azure CLI](./resource-group-authenticate-service-principal-cli.md)
+- [门户](./resource-group-create-service-principal-portal.md)
 
 当应用程序需要访问或修改资源时，必须设置 Active Directory (AD) 应用程序，并为其分配所需的权限。本主题演示如何通过门户执行这些步骤。重点介绍单租户应用程序，其中应用程序只应在一个组织内运行。通常会将单租户应用程序作为在组织中运行的业务线应用程序使用。
  
@@ -59,9 +59,8 @@
 
      ![查看角色](./media/resource-group-create-service-principal-portal/view-role.png)  
 
-
 ### <a name="check-azure-subscription-permissions"></a> 检查 Azure 订阅权限
-在 Azure 订阅中，帐户必须具有 `Microsoft.Authorization/*/Write` 访问权限才能向角色分配 AD 应用。通过[所有者](/documentation/articles/role-based-access-built-in-roles/#owner)角色或[用户访问管理员](/documentation/articles/role-based-access-built-in-roles/#user-access-administrator)角色授权此操作。如果帐户分配到“参与者”角色，则权限不足。尝试将服务主体分配到角色时，将收到错误。
+在 Azure 订阅中，帐户必须具有 `Microsoft.Authorization/*/Write` 访问权限才能向角色分配 AD 应用。通过[所有者](../active-directory/role-based-access-built-in-roles.md#owner)角色或[用户访问管理员](../active-directory/role-based-access-built-in-roles.md#user-access-administrator)角色授权此操作。如果帐户分配到“参与者”角色，则权限不足。尝试将服务主体分配到角色时，将收到错误。
 
 检查订阅权限的方法如下：
 
@@ -75,7 +74,6 @@
 
      ![搜索用户](./media/resource-group-create-service-principal-portal/show-user.png)  
 
-     
 3. 选择“Azure 资源”。
 
      ![选择资源](./media/resource-group-create-service-principal-portal/select-azure-resources.png)  
@@ -84,13 +82,11 @@
 
      ![显示权限](./media/resource-group-create-service-principal-portal/view-assigned-roles.png)  
 
-
 ## 创建 Active Directory 应用程序
 1. 通过 [Azure 门户预览](https://portal.azure.cn)登录 Azure 帐户。
 2. 选择“Azure Active Directory”。
 
      ![选择 azure active directory](./media/resource-group-create-service-principal-portal/select-active-directory.png)  
-
 
 4. 选择“应用注册”。
 
@@ -100,11 +96,9 @@
 
      ![添加应用](./media/resource-group-create-service-principal-portal/select-add-app.png)  
 
-
 6. 为应用提供名称和 URL。选择“Web 应用/API”或“本机”作为要创建的应用程序的类型。设置值后，选择“创建”。
 
      ![命名应用程序](./media/resource-group-create-service-principal-portal/create-app.png)  
-
 
 你已创建应用程序。
 
@@ -138,14 +132,12 @@
 
      ![选择 active directory 属性](./media/resource-group-create-service-principal-portal/select-ad-properties.png)  
 
-
 2. 复制“目录 ID”。此值即为租户 ID。
 
      ![租户 ID](./media/resource-group-create-service-principal-portal/copy-directory-id.png)  
 
-
 ## 将应用程序分配到角色
-若要访问订阅中的资源，必须将应用程序分配到角色。决定哪个角色表示应用程序的相应权限。若要了解有关可用角色的信息，请参阅 [RBAC：内置角色](/documentation/articles/role-based-access-built-in-roles/)。
+若要访问订阅中的资源，必须将应用程序分配到角色。决定哪个角色表示应用程序的相应权限。若要了解有关可用角色的信息，请参阅 [RBAC：内置角色](../active-directory/role-based-access-built-in-roles.md)。
 
 可将作用域设置为订阅、资源组或资源级别。较低级别的作用域将继承权限。例如，将某个应用程序添加到资源组的“读取者”角色意味着该应用程序可以读取该资源组及其包含的所有资源。
 
@@ -153,16 +145,13 @@
 
      ![选择订阅](./media/resource-group-create-service-principal-portal/select-subscription.png)  
 
-
 2. 选择特定订阅（资源组或资源），向其中分配应用程序。
 
      ![选择进行分配的订阅](./media/resource-group-create-service-principal-portal/select-one-subscription.png)  
 
-
 3. 选择“访问控制 (IAM)”。
 
      ![选择访问权限](./media/resource-group-create-service-principal-portal/select-access-control.png)  
-
 
 4. 选择“添加”。
 
@@ -171,7 +160,6 @@
 6. 选择要分配到应用程序的角色。下图显示“读者”角色。
 
      ![选择角色](./media/resource-group-create-service-principal-portal/select-role.png)  
-
 
 8. 搜索你的应用程序，然后选择它。
 
@@ -210,7 +198,7 @@
 * [使用 Ruby 管理 Azure 资源和资源组](https://github.com/Azure-Samples/resource-manager-ruby-resources-and-groups/)
 
 ## 后续步骤
-* 若要设置多租户应用程序，请参阅[使用 Azure Resource Manager API 进行授权的开发人员指南](/documentation/articles/resource-manager-api-authentication/)。
-* 若要了解如何指定安全策略，请参阅 [Azure 基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)。
+* 若要设置多租户应用程序，请参阅[使用 Azure Resource Manager API 进行授权的开发人员指南](./resource-manager-api-authentication.md)。
+* 若要了解如何指定安全策略，请参阅 [Azure 基于角色的访问控制](../active-directory/role-based-access-control-configure.md)。
 
 <!---HONumber=Mooncake_0103_2017-->

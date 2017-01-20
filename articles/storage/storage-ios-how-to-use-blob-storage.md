@@ -1,32 +1,32 @@
-<properties
-    pageTitle="如何通过 iOS 使用 Azure Blob 存储 | Azure"
-    description="使用 Azure Blob 存储（对象存储）将非结构化数据存储在云中。"
-    services="storage"
-    documentationcenter="ios"
-    author="micurd"
-    manager="jahogg"
-    editor="tysonn" />
-<tags
-    ms.assetid="df188021-86fc-4d31-a810-1b0e7bcd814b"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="objective-c"
-    ms.topic="article"
-    ms.date="11/21/2016"
-    wacn.date="01/06/2017"
-    ms.author="micurd" />  
+---
+title: 如何通过 iOS 使用 Azure Blob 存储 | Azure
+description: 使用 Azure Blob 存储（对象存储）将非结构化数据存储在云中。
+services: storage
+documentationcenter: ios
+author: micurd
+manager: jahogg
+editor: tysonn
 
+ms.assetid: df188021-86fc-4d31-a810-1b0e7bcd814b
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 11/21/2016
+wacn.date: 01/06/2017
+ms.author: micurd
+---
 
 # 如何通过 iOS 使用 Blob 存储
-[AZURE.INCLUDE [storage-selector-blob-include](../../includes/storage-selector-blob-include.md)]
+[!INCLUDE [storage-selector-blob-include](../../includes/storage-selector-blob-include.md)]
 
 ## 概述
 本文将演示如何使用 Azure Blob 存储执行常见任务。示例是用 Objective-C 编写的，并使用了[用于 iOS 的 Azure 存储客户端库](https://github.com/Azure/azure-storage-ios)。涉及的任务包括上传、列出、下载和删除 Blob。有关 Blob 的详细信息，请参阅[后续步骤](#next-steps)部分。也可下载[示例应用](https://github.com/Azure/azure-storage-ios/tree/master/BlobSample)，快速了解如何在 iOS 应用程序中使用 Azure 存储。
 
-[AZURE.INCLUDE [storage-blob-concepts-include](../../includes/storage-blob-concepts-include.md)]
+[!INCLUDE [storage-blob-concepts-include](../../includes/storage-blob-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 将 Azure 存储 iOS 库导入到应用程序
 可使用 [Azure 存储 CocoaPod](https://cocoapods.org/pods/AZSClient) 或导入 **Framework** 文件，将 Azure 存储 iOS 库导入到应用程序。
@@ -71,10 +71,10 @@
     // Include the following import statement to use blob APIs.
     #import <AZSClient/AZSClient.h>
 
-[AZURE.INCLUDE [存储移动身份验证指南](../../includes/storage-mobile-authentication-guidance.md)]
+[!INCLUDE [存储移动身份验证指南](../../includes/storage-mobile-authentication-guidance.md)]
 
 ## 异步操作
-> [AZURE.NOTE] 执行对服务的请求的所有方法都是异步操作。在代码示例中，可发现这些方法都拥有完成处理程序。请求完成**后**，将运行完成处理程序内的代码。正在发出请求**时**，将运行完成处理程序后的代码。
+> [!NOTE] 执行对服务的请求的所有方法都是异步操作。在代码示例中，可发现这些方法都拥有完成处理程序。请求完成**后**，将运行完成处理程序内的代码。正在发出请求**时**，将运行完成处理程序后的代码。
 
 ## 创建容器
 Azure 存储中的每个 Blob 都必须驻留在一个容器中。以下示例演示如何在存储帐户中创建一个名为 *newcontainer* 的容器（如果它尚不存在）。在选择容器的名称时，请注意上面提到的命名规则。
@@ -251,7 +251,6 @@ Azure 存储中的每个 Blob 都必须驻留在一个容器中。以下示例�
         }];
     }
 
-
 ## 下载 Blob
 以下示例演示如何将 Blob 下载到 NSString 对象。
 
@@ -351,6 +350,6 @@ Azure 存储中的每个 Blob 都必须驻留在一个容器中。以下示例�
 - [Azure 存储空间服务 REST API](https://msdn.microsoft.com/zh-cn/library/azure/dd179355.aspx)
 - [Azure 存储团队博客](http://blogs.msdn.com/b/windowsazurestorage)
 
-如果你对此库有任何疑问，请随意将问题发布到我们的 [MSDN Azure 论坛](https://social.msdn.microsoft.com/forums/azure/zh-cn/home?forum=windowsazuredata)或[堆栈溢出](http://stackoverflow.com/questions/tagged/windows-azure-storage+or+windows-azure-storage+or+azure-storage-blobs+or+azure-storage-tables+or+azure-table-storage+or+windows-azure-queues+or+azure-storage-queues+or+azure-storage-emulator+or+azure-storage-files)。如果你有 Azure 存储空间的功能建议，请将建议发布到 [Azure 存储空间反馈](/product-feedback)。
+如果你对此库有任何疑问，请随意将问题发布到我们的 [MSDN Azure 论坛](https://social.msdn.microsoft.com/forums/azure/zh-cn/home?forum=windowsazuredata)或[堆栈溢出](http://stackoverflow.com/questions/tagged/windows-azure-storage+or+windows-azure-storage+or+azure-storage-blobs+or+azure-storage-tables+or+azure-table-storage+or+windows-azure-queues+or+azure-storage-queues+or+azure-storage-emulator+or+azure-storage-files)。如果你有 Azure 存储空间的功能建议，请将建议发布到 [Azure 存储空间反馈](https://www.azure.cn/product-feedback)。
 
 <!---HONumber=Mooncake_0103_2017-->

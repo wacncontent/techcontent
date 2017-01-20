@@ -1,21 +1,21 @@
-<properties
- pageTitle="面向 IT 专业人员的 Azure IoT 中心信息 | Azure"
- description="帮助 IT 专业人员使用 Azure IoT 中心的信息，例如端口要求和安全背景信息。"
- services="iot-hub"
- documentationCenter=""
- authors="dominicbetts"
- manager="timlt"
- editor=""/>
+---
+title: 面向 IT 专业人员的 Azure IoT 中心信息 | Azure
+description: 帮助 IT 专业人员使用 Azure IoT 中心的信息，例如端口要求和安全背景信息。
+services: iot-hub
+documentationCenter: 
+authors: dominicbetts
+manager: timlt
+editor: 
 
-<tags
- ms.service="iot-hub"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="08/09/2016"
- ms.author="dobett"
- wacn.date="01/04/2017"/>
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/09/2016
+ms.author: dobett
+wacn.date: 01/04/2017
+---
 
 # 配置和管理对 IoT 中心的访问权限
 
@@ -51,11 +51,11 @@
 - [开发人员指南][lnk-devguide]
 - [使用网关 SDK 模拟设备][lnk-gateway]
 
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/#security
+[lnk-devguide]: ./iot-hub-devguide.md#security
 
-[lnk-design]: /documentation/articles/iot-hub-guidance/
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
-[lnk-tokens]: /documentation/articles/iot-hub-sas-tokens/
+[lnk-design]: ./iot-hub-guidance.md
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
+[lnk-tokens]: ./iot-hub-sas-tokens.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

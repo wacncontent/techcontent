@@ -1,26 +1,25 @@
-<properties
-    pageTitle="为 Azure 移动应用启用脱机同步 (Xamarin.Forms) | Azure"
-    description="了解如何在 Xamarin.Forms 应用程序中使用应用服务移动应用缓存和同步脱机数据"
-    documentationCenter="xamarin"
-    authors="adrianhall"
-    manager="yochayk"
-    editor=""
-    services="app-service\mobile"/>  
+---
+title: 为 Azure 移动应用启用脱机同步 (Xamarin.Forms) | Azure
+description: 了解如何在 Xamarin.Forms 应用程序中使用应用服务移动应用缓存和同步脱机数据
+documentationCenter: xamarin
+authors: adrianhall
+manager: yochayk
+editor: 
+services: app-service\mobile
 
-
-<tags
-    ms.service="app-service-mobile"
-    ms.workload="mobile"
-    ms.tgt_pltfrm="mobile-xamarin-ios"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="10/04/2016"
-    wacn.date="12/26/2016"
-    ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-xamarin-ios
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/04/2016
+wacn.date: 12/26/2016
+ms.author: adrianha
+---
 
 # 为 Xamarin.Forms 移动应用启用脱机同步
 
-[AZURE.INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
+[!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
 ## 概述
 本教程介绍适用于 Xamarin.Forms 的 Azure 移动应用的脱机同步功能。脱机同步允许最终用户与移动应用交互（查看、添加或修改数据），即使在没有网络连接时也是如此。在本地数据库中存储更改。设备重新联机后，这些更改会与远程服务同步。
@@ -53,7 +52,7 @@
 
 * 表操作之前，必须初始化本地存储区。在 **TodoItemManager** 类构造函数中使用以下代码初始化本地存储数据库：
 
-	    var store = new MobileServiceSQLiteStore(OfflineDbPath);
+        var store = new MobileServiceSQLiteStore(OfflineDbPath);
         store.DefineTable<TodoItem>();
 
         //Initializes the SyncContext using the default IMobileServiceSyncHandler.
@@ -61,15 +60,15 @@
 
         this.todoTable = client.GetSyncTable<TodoItem>();
 
-	此代码使用 **MobileServiceSQLiteStore** 类创建一个新的本地 SQLite 数据库。
+    此代码使用 **MobileServiceSQLiteStore** 类创建一个新的本地 SQLite 数据库。
 
     **DefineTable** 方法在本地存储中创建一个与所提供类型的字段匹配的表。该类型无需包括远程数据库中的所有列。可以只存储列的子集。
 
 * **TodoItemManager** 中的 **todoTable** 字段是 **IMobileServiceSyncTable** 类型，而不是 **IMobileServiceTable**。此类使用本地数据库进行所有创建、读取、更新和删除 (CRUD) 表操作。用户决定何时通过对 **IMobileServiceSyncContext** 调用 **PushAsync** 将这些更改推送到移动应用后端。调用 **PushAsync** 时此同步上下文通过跟踪和推送客户端应用修改的所有表中的更改来帮助保持表关系。
 
-	将调用以下 **SyncAsync** 方法来与移动应用后端进行同步：
+    将调用以下 **SyncAsync** 方法来与移动应用后端进行同步：
 
-		public async Task SyncAsync()
+        public async Task SyncAsync()
         {
             ReadOnlyCollection<MobileServiceTableOperationError> syncErrors = null;
 
@@ -106,7 +105,7 @@
                     }
 
                     Debug.WriteLine(@"Error executing sync operation. Item: {0} ({1}). Operation discarded.",
-						error.TableName, error.Item["id"]);
+                        error.TableName, error.Item["id"]);
                 }
             }
         }
@@ -120,7 +119,6 @@
 如果对一个表执行拉取操作，并且该表具有由上下文跟踪的未完成的本地更新，那么该拉取操作将自动触发之前的上下文推送操作。在此示例中刷新、添加和完成项目时，可省略显式 **PushAsync** 调用。
 
 在所提供的代码中，将查询远程 TodoItem 表中的所有记录，但它还可以筛选记录，只需将查询 ID 和查询传递给 **PushAsync** 即可。有关详细信息，请参阅 [Azure 移动应用中的脱机数据同步][2]中的 *增量同步* 部分。
-
 
 ## 运行客户端应用
 
@@ -147,7 +145,7 @@
 
 5. （可选）使用 Visual Studio 查看 Azure SQL 数据库表，以了解后端数据库中的数据是否未更改。
 
-	在 Visual Studio 中，打开“服务器资源管理器”。导航到“Azure”->“SQL 数据库”中的数据库。右键单击数据库并选择“在 SQL Server 对象资源管理器中打开”。现在便可以浏览 SQL 数据库表及其内容。
+    在 Visual Studio 中，打开“服务器资源管理器”。导航到“Azure”->“SQL 数据库”中的数据库。右键单击数据库并选择“在 SQL Server 对象资源管理器中打开”。现在便可以浏览 SQL 数据库表及其内容。
 
 ## 更新客户端应用以重新连接移动后端
 
@@ -168,13 +166,13 @@
 
 <!-- URLs. -->
 
-[1]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
-[2]: /documentation/articles/app-service-mobile-offline-data-sync/
+[1]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[2]: ./app-service-mobile-offline-data-sync.md
 [3]: http://go.microsoft.com/fwlink/p/?LinkID=716919
 [4]: http://go.microsoft.com/fwlink/p/?LinkID=716920
 [5]: http://sqlite.org/2016/sqlite-uwp-3120200.vsix
 [6]: https://www.getpostman.com/
 [7]: http://www.telerik.com/fiddler
-[8]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/
+[8]: ./app-service-mobile-dotnet-how-to-use-client-library.md
 
 <!---HONumber=Mooncake_1219_2016-->

@@ -1,39 +1,38 @@
 <!-- ARM: tested -->
 
-<properties
-	pageTitle="使用 Azure 资源管理器模板创建具有监视和诊断功能的 Windows 虚拟机 | Azure"
-	description="使用 Azure 资源管理器模板新建具有 Azure 诊断扩展的 Windows 虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="sbtron"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: 使用 Azure 资源管理器模板创建具有监视和诊断功能的 Windows 虚拟机 | Azure
+description: 使用 Azure 资源管理器模板新建具有 Azure 诊断扩展的 Windows 虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: sbtron
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="12/15/2015"
-	wacn.date="06/07/2016"
-	ms.author="saurabh"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 12/15/2015
+wacn.date: 06/07/2016
+ms.author: saurabh
+---
 
 # 使用 Azure 资源管理器模板创建具有监视和诊断功能的 Windows 虚拟机
 
-> [AZURE.NOTE]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](/documentation/articles/resource-manager-deployment-model/)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
+> [!NOTE]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
 
-Azure 诊断扩展可在基于 Windows 的 Azure 虚拟机上提供监视和诊断功能。通过将该扩展纳入为 Azure 资源管理器模板的一部分，可以在虚拟机上启用这些功能。有关将任何扩展纳入为虚拟机模板一部分的详细信息，请参阅[使用 VM 扩展创作 Azure 资源管理器模板](/documentation/articles/virtual-machines-windows-extensions-authoring-templates/)。本文介绍如何将 Azure 诊断扩展添加到 Windows 虚拟机模板中。
+Azure 诊断扩展可在基于 Windows 的 Azure 虚拟机上提供监视和诊断功能。通过将该扩展纳入为 Azure 资源管理器模板的一部分，可以在虚拟机上启用这些功能。有关将任何扩展纳入为虚拟机模板一部分的详细信息，请参阅[使用 VM 扩展创作 Azure 资源管理器模板](./virtual-machines-windows-extensions-authoring-templates.md)。本文介绍如何将 Azure 诊断扩展添加到 Windows 虚拟机模板中。
   
-
 ## 将 Azure 诊断扩展添加到 VM 资源定义中 
 
 若要在 Windows 虚拟机上启用诊断扩展，需要将该扩展添加为资源管理器模板中的 VM 资源。
 
 对于简单的基于资源管理器的虚拟机，请将扩展配置添加到该虚拟机的 *resources* 数组：
 
-	"resources": [
+    "resources": [
                 {
                     "name": "Microsoft.Insights.VMDiagnosticsSettings",
                     "type": "extensions",
@@ -63,10 +62,9 @@ Azure 诊断扩展可在基于 Windows 的 Azure 虚拟机上提供监视和诊�
                 }
             ]
 
-
 另一个常见惯例是在模板的根资源节点处添加扩展配置，而不是在虚拟机的资源节点下进行定义。使用这个方法时，必须用 *name* 和 *type* 值显式指定扩展与虚拟机之间的分层关系。例如：
   
-	"name": "[concat(variables('vmName'),'Microsoft.Insights.VMDiagnosticsSettings')]",
+    "name": "[concat(variables('vmName'),'Microsoft.Insights.VMDiagnosticsSettings')]",
     "type": "Microsoft.Compute/virtualMachines/extensions",
 
 扩展始终与虚拟机关联，你可以直接在虚拟机的资源节点下定义扩展，也可以在基础级别定义扩展并使用分层命名约定将其与虚拟机关联。
@@ -91,25 +89,24 @@ Azure 诊断扩展可在基于 Windows 的 Azure 虚拟机上提供监视和诊�
             "type": "string",
             "metadata": {
         "description": "The name of an existing storage account to which diagnostics data will be transfered."
-			}        
-		},
+            }        
+        },
         "existingdiagnosticsStorageResourceGroup": {
             "type": "string",
             "metadata": {
         "description": "The resource group for the storage account specified in existingdiagnosticsStorageAccountName"
-      		}
+              }
         }
 
 最佳做法是在不同于虚拟机资源组的其他资源组中指定诊断存储帐户。资源组可以视为具有自己的生存期的部署单位，可以部署虚拟机以及在新配置更新时重新部署，但是你可能想要跨这些虚拟机部署继续在相同的存储帐户中存储诊断数据。在不同的资源中拥有存储帐户可让存储帐户接受来自各种虚拟机部署的数据，方便解决各种版本之间的问题。
 
->[AZURE.NOTE] 如果从 Visual Studio 创建 Windows 虚拟机模板，默认存储帐户可能会设置为使用将虚拟机 VHD 上载到的存储帐户。这是为了简化 VM 的初始设置。你应该重构模板以使用可以当作参数传入的不同存储帐户。
+>[!NOTE] 如果从 Visual Studio 创建 Windows 虚拟机模板，默认存储帐户可能会设置为使用将虚拟机 VHD 上载到的存储帐户。这是为了简化 VM 的初始设置。你应该重构模板以使用可以当作参数传入的不同存储帐户。
 
 ## <a name="diagnostics-configuration-variables"></a> 诊断配置变量
  
 上述诊断扩展 json 代码段会定义 *accountid* 变量，以简化获取诊断存储的存储帐户密钥的过程：
-	
-	"accountid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/',parameters('existingdiagnosticsStorageResourceGroup'), '/providers/','Microsoft.Storage/storageAccounts/', parameters('existingdiagnosticsStorageAccountName'))]"
-
+    
+    "accountid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/',parameters('existingdiagnosticsStorageResourceGroup'), '/providers/','Microsoft.Storage/storageAccounts/', parameters('existingdiagnosticsStorageAccountName'))]"
 
 诊断扩展的 *xmlcfg* 属性使用连接在一起的多个变量定义。这些变量值的格式为 xml，因此必须在设置 json 变量时正确转义。
 
@@ -124,20 +121,20 @@ Azure 诊断扩展可在基于 Windows 的 Azure 虚拟机上提供监视和诊�
 
 上述配置中的指标定义 xml 节点是一个重要的配置元素，因为它定义如何聚合和存储之前在 *PerformanceCounter* 节点中的 xml 定义的性能计数器。
 
-> [AZURE.IMPORTANT] 这些度量值是促使 Azure 门户预览中生成监视图表和警报的因素。如果你需要在 Azure 门户预览中查看 VM 监视数据，则必须在诊断配置中包括 **Metrics** 节点以及 *resourceID* 和 **MetricAggregation**。
+> [!IMPORTANT] 这些度量值是促使 Azure 门户预览中生成监视图表和警报的因素。如果你需要在 Azure 门户预览中查看 VM 监视数据，则必须在诊断配置中包括 **Metrics** 节点以及 *resourceID* 和 **MetricAggregation**。
 
 以下是指标定义 xml 的示例：
 
-		<Metrics resourceId="/subscriptions/subscription().subscriptionId/resourceGroups/resourceGroup().name/providers/Microsoft.Compute/virtualMachines/vmName">
-			<MetricAggregation scheduledTransferPeriod="PT1H"/>
-			<MetricAggregation scheduledTransferPeriod="PT1M"/>
-		</Metrics>
+        <Metrics resourceId="/subscriptions/subscription().subscriptionId/resourceGroups/resourceGroup().name/providers/Microsoft.Compute/virtualMachines/vmName">
+            <MetricAggregation scheduledTransferPeriod="PT1H"/>
+            <MetricAggregation scheduledTransferPeriod="PT1M"/>
+        </Metrics>
 
 *resourceID* 属性唯一标识你的订阅中的虚拟机。请确保使用 subscription() 和 resourceGroup() 函数，这样，模板就会根据你要部署到的订阅和资源组自动更新这些值。
 
 如果要在一个循环中创建多个虚拟机，则必须用 copyIndex() 函数填充 *resourceID* 值，以便正确区分每个 VM。*xmlCfg* 值可以更新以支持此功能，如下所示：
 
-	"xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), concat(parameters('vmNamePrefix'), copyindex()), variables('wadcfgxend')))]", 
+    "xmlCfg": "[base64(concat(variables('wadcfgxstart'), variables('wadmetricsresourceid'), concat(parameters('vmNamePrefix'), copyindex()), variables('wadcfgxend')))]", 
 
 MetricAggregation 值 *PT1H* 和 *PT1M* 表示一分钟的聚合和一小时的聚合。
 
@@ -164,11 +161,10 @@ MetricAggregation 值 *PT1H* 和 *PT1M* 表示一分钟的聚合和一小时的�
 - **Count**：针对性能计数器报告的值总数。
 - **Average**：聚合期间性能计数器的平均（总计/计数）值。
 
-
 ## 后续步骤
 
 - 有关具有诊断扩展的 Windows 虚拟机的完整示例模板，请参阅 [201-vm-monitoring-diagnostics-extension](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-monitoring-diagnostics-extension)   
-- 使用 [Azure PowerShell](/documentation/articles/virtual-machines-windows-ps-manage/) 或 [Azure 命令行](/documentation/articles/virtual-machines-linux-cli-deploy-templates/)部署资源管理器模板
-- 了解有关[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)的详细信息
+- 使用 [Azure PowerShell](./virtual-machines-windows-ps-manage.md) 或 [Azure 命令行](./virtual-machines-linux-cli-deploy-templates.md)部署资源管理器模板
+- 了解有关[创作 Azure 资源管理器模板](../azure-resource-manager/resource-group-authoring-templates.md)的详细信息
 
 <!---HONumber=Mooncake_0118_2016-->

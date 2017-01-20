@@ -1,29 +1,29 @@
-<properties
-	pageTitle="使用 PowerShell 创建 SSL 证书绑定"
-	description="了解如何使用 PowerShell 将 SSL 证书绑定到 Web 应用。"
-	services="app-service\web"
-	documentationCenter=""
-	authors="ahmedelnably"
-	manager="stefsch"
-	editor=""/>
+---
+title: 使用 PowerShell 创建 SSL 证书绑定
+description: 了解如何使用 PowerShell 将 SSL 证书绑定到 Web 应用。
+services: app-service\web
+documentationCenter: 
+authors: ahmedelnably
+manager: stefsch
+editor: 
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="01/13/2016"
-	wacn.date="09/26/2016"
-	ms.author="ahmedelnably"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/13/2016
+wacn.date: 09/26/2016
+ms.author: ahmedelnably
+---
 
 # 使用 PowerShell 创建 Azure App Service SSL 证书绑定 #
 
 发行的 Azure PowerShell 版本 1.1.0 中添加了新的 cmdlet，可让用户将现有的或新的 SSL 证书绑定到现有的 Web 应用。
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
 
-若要了解如何使用基于 Azure Resource Manager 的 Azure PowerShell cmdlet 来管理 Web Apps，请查看[适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令](/documentation/articles/app-service-web-app-azure-resource-manager-powershell/)
+若要了解如何使用基于 Azure Resource Manager 的 Azure PowerShell cmdlet 来管理 Web Apps，请查看[适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令](./app-service-web-app-azure-resource-manager-powershell.md)
 
 ## 上载和绑定新的 SSL 证书 ##
 
@@ -48,7 +48,7 @@
 
 我们可以使用以下命令获取已上载到特定资源组的证书列表
 
-	Get-AzureRmWebAppCertificate -ResourceGroupName myresourcegroup
+    Get-AzureRmWebAppCertificate -ResourceGroupName myresourcegroup
 
 请注意，证书位于特定位置和资源组的本地，如果配置的 Web 应用与所需的证书位于不同的位置和资源组，用户需要重新上载证书
 
@@ -66,10 +66,10 @@
 
 请注意，如果删除的 SSL 绑定是在该位置使用该证书的最后一个绑定，则会按默认删除该证书；如果用户想要保留证书，可以使用 DeleteCertificate 选项来保留证书
 
-	Remove-AzureRmWebAppSSLBinding -ResourceGroupName myresourcegroup -WebAppName mytestapp -Name www.contoso.com -DeleteCertificate $false
+    Remove-AzureRmWebAppSSLBinding -ResourceGroupName myresourcegroup -WebAppName mytestapp -Name www.contoso.com -DeleteCertificate $false
 
 ### 参考 ###
-- [适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令](/documentation/articles/app-service-web-app-azure-resource-manager-powershell/)
-- [将 Azure PowerShell 与 Azure Resource Manager 配合使用](/documentation/articles/powershell-azure-resource-manager/)
+- [适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令](./app-service-web-app-azure-resource-manager-powershell.md)
+- [将 Azure PowerShell 与 Azure Resource Manager 配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)
 
 <!---HONumber=Mooncake_0627_2016-->

@@ -1,10 +1,27 @@
-<properties linkid="" urlDisplayName="" pageTitle="使用PowerShell管理MySQL Database on Azure - Azure 微软云" metaKeywords="Azure 云,技术文档,文档与资源,MySQL,数据库,入门指南,Azure MySQL, MySQL PaaS,Azure MySQL PaaS, API, Azure MySQL Service, Azure RDS" description="本文介绍如何通过API实现更多MySQL Database on Azure的查询、创建、修改、删除等操作。" metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="sofia" solutions="" manager="" editor="" />  
+---
+linkid: 
+urlDisplayName: 
+title: 使用PowerShell管理MySQL Database on Azure - Azure 微软云
+metaKeywords: Azure 云,技术文档,文档与资源,MySQL,数据库,入门指南,Azure MySQL, MySQL PaaS,Azure MySQL PaaS, API, Azure MySQL Service, Azure RDS
+description: 本文介绍如何通过API实现更多MySQL Database on Azure的查询、创建、修改、删除等操作。
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: sofia
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="cn" />
+ms.service: mysql
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: cn
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-api-slowquerylog/)
-- [English](/documentation/articles/mysql-database-enus-api-slowquerylog/)
+- [中文](./mysql-database-api-slowquerylog.md)
+- [English](./mysql-database-enus-api-slowquerylog.md)
 
 #更新服务器-开启慢查询日志
 
@@ -90,7 +107,7 @@ Json示例文件如下：
   "sku": { "name": "MS2" },
   "properties": {
     "version": "5.5",
-	"slow_query_log": ON,
+    "slow_query_log": ON,
     "dailyBackupTimeInHour": 10,
     "provisioningState": "Succeeded"
   }

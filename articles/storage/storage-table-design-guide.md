@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Azure 存储表设计指南 | Azure"
-    description="在 Azure 表存储中设计可伸缩的高性能表"
-    services="storage"
-    documentationcenter="na"
-    author="jasonnewyork"
-    manager="tadb"
-    editor="tysonn" />
-<tags
-    ms.assetid="8e228b0c-2998-4462-8101-9f16517393ca"
-    ms.service="storage"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage"
-    ms.date="11/28/2016"
-    wacn.date="01/06/2017"
-    ms.author="jahogg" />
+---
+title: Azure 存储表设计指南 | Azure
+description: 在 Azure 表存储中设计可伸缩的高性能表
+services: storage
+documentationcenter: na
+author: jasonnewyork
+manager: tadb
+editor: tysonn
+
+ms.assetid: 8e228b0c-2998-4462-8101-9f16517393ca
+ms.service: storage
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage
+ms.date: 11/28/2016
+wacn.date: 01/06/2017
+ms.author: jahogg
+---
 
 # Azure 存储表设计指南：设计可伸缩的高性能表
 
@@ -25,11 +26,11 @@
 
 ## 关于 Azure 表服务
 
-本部分重点介绍表服务的一些主要功能，这些功能尤其与设计性能和可伸缩性相关。如果不熟悉 Azure 存储和表服务，在阅读本文的其他部分之前，请先阅读 [Azure 存储简介](/documentation/articles/storage-introduction/) 和[通过 .NET 开始使用表存储](/documentation/articles/storage-dotnet-how-to-use-tables/)。尽管本指南的重点是介绍表服务，但它也将包括 Azure 队列和 Blob 服务的一些讨论，并介绍如何在解决方案中将这些 Azure 队列和 Blob 服务与表服务一起使用。  
+本部分重点介绍表服务的一些主要功能，这些功能尤其与设计性能和可伸缩性相关。如果不熟悉 Azure 存储和表服务，在阅读本文的其他部分之前，请先阅读 [Azure 存储简介](./storage-introduction.md) 和[通过 .NET 开始使用表存储](./storage-dotnet-how-to-use-tables.md)。尽管本指南的重点是介绍表服务，但它也将包括 Azure 队列和 Blob 服务的一些讨论，并介绍如何在解决方案中将这些 Azure 队列和 Blob 服务与表服务一起使用。  
 
 什么是表服务？ 从名称可以推测出，表服务将使用表格格式来存储数据。在标准术语中，表的每一行表示一个实体，而列存储该实体的各种属性。每个实体都有一对密钥来唯一标识它，并具有一个时间戳列，表服务使用该列来跟踪上次更新实体的时间（此操作是自动发生的，无法手动使用任意值来覆盖时间戳）。表服务使用此上次修改时间戳 (LMT) 来管理开放式并发。
 
->[AZURE.NOTE] 表服务 REST API 操作还返回它从上次修过时间戳 (LMT) 获得的 **ETag** 值。在本文档中，我们将互换使用术语 ETag 和 LMT，因为它们是指同一基础数据。
+>[!NOTE] 表服务 REST API 操作还返回它从上次修过时间戳 (LMT) 获得的 **ETag** 值。在本文档中，我们将互换使用术语 ETag 和 LMT，因为它们是指同一基础数据。
 
 下面的示例演示了一个简单的表设计，该表用于存储员工和部门实体。本指南后面所示的许多示例都基于此简单设计。
 
@@ -120,7 +121,6 @@
 </tr>
 </table>
 
-
 到目前为止，这看起来非常类似于关系数据库中的表，主要区别是有必需的列，以及能够在同一个表中存储多种实体类型。此外，每个用户定义的属性（如 **FirstName** 或 **Age**）还具有数据类型（如 integer 或 string），就像关系数据库中的列一样。虽然与关系数据库中不同，表服务的架构灵活性质意味着每个实体的属性不需要具有相同的数据类型。若要在单个属性中存储复杂数据类型，必须使用序列化格式（例如，JSON 或 XML）。有关表服务的详细信息（例如支持的数据类型、支持的日期范围、命名规则和大小限制），请参阅 [了解表服务数据模型](http://msdn.microsoft.com/zh-cn/library/azure/dd179338.aspx)。
 
 正如你将看到的，你所选的 **PartitionKey** 和 **RowKey** 是良好的表设计的基础。存储在表中的每个实体都必须具有唯一的 **PartitionKey** 和 **RowKey**。与关系数据库表中的键一样，将对 **PartitionKey** 和 **RowKey** 值进行索引，以创建聚集索引，从而实现快速查找；但是，表服务不创建任何辅助索引，因此，这两个属性是仅有的两个编制索引的属性（后面所述的一些模式将显示如何解决这种明显的限制）。
@@ -128,7 +128,7 @@
 表由一个或多个分区组成，正如你将看到的，你所做的很多设计决策都将围绕选择合适的 **PartitionKey** 和 **RowKey** 进行，以便优化你的解决方案。一个解决方案可以仅由单个表构成，该表包含组织成分区的所有实体，但通常一个解决方案将具有多个表。表可帮助你在逻辑上组织你的实体，帮助你使用访问控制列表管理对数据的访问，并且你可以使用单个存储操作删除整个表。
 
 ### 表分区  
-帐户名称、表名称和 **PartitionKey** 共同标识表服务用于存储实体的存储服务中的分区。作为实体寻址方案的一部分，分区定义事务的作用域（请参阅下面的[实体组事务](#entity-group-transactions)），并形成表服务如何缩放的基础。有关分区的详细信息，请参阅 [Azure 存储空间可伸缩性和性能目标](/documentation/articles/storage-scalability-targets/)。
+帐户名称、表名称和 **PartitionKey** 共同标识表服务用于存储实体的存储服务中的分区。作为实体寻址方案的一部分，分区定义事务的作用域（请参阅下面的[实体组事务](#entity-group-transactions)），并形成表服务如何缩放的基础。有关分区的详细信息，请参阅 [Azure 存储空间可伸缩性和性能目标](./storage-scalability-targets.md)。
 
 在表服务中，单个节点为一个或多个完整的分区提供服务，并且该服务可通过对节点上的分区进行动态负载均衡来进行缩放。如果某个节点负载过轻，表服务可以将该节点提供服务的分区范围*拆分*为不同节点；当流量下降时，该服务可将无操作的节点的分区范围*合并*为单个节点。
 
@@ -137,7 +137,7 @@
 ###<a id="entity-group-transactions"></a> 实体组事务
 在表服务中，实体组事务 (EGT) 是唯一内置机制，用于对多个实体执行原子更新。在一些文档中，EGT 也称为*批处理事务*。EGT 只能应用于存储在同一分区（共享给定表中的同一分区键）的实体，因此每当你需要对多个实体执行原子事务行为时，都需要确保这些实体位于同一分区。这通常是将多个实体类型保存在同一个表（和分区）中，而不是对不同实体类型使用多个表的原因。单个 EGT 最多可应用于 100 个实体。如果你提交多个用于处理的并发 EGT，请确保不在 EGT 共用实体上操作这些 EGT，这一点很重要，否则处理会延迟。
 
-EGT 还为你引入了潜在的权衡以便在设计中进行评估：使用更多分区将增加应用程序的可伸缩性，因为 Azure 有更多机会对节点的请求进行负载均衡，但这可能会限制应用程序执行原子事务和维护数据高一致性的能力。此外，在分区级别还有特定的可伸缩性目标，这些目标可能会限制可以对单个节点预期的事务吞吐量：有关 Azure 存储帐户和表服务的可伸缩性目标的详细信息，请参阅 [Azure 存储可伸缩性和性能目标](/documentation/articles/storage-scalability-targets/)。本指南的后面部分将讨论各种设计策略，这些策略可帮助你管理此类权衡，并讨论如何根据客户端应用程序的特定要求最好地选择分区键。  
+EGT 还为你引入了潜在的权衡以便在设计中进行评估：使用更多分区将增加应用程序的可伸缩性，因为 Azure 有更多机会对节点的请求进行负载均衡，但这可能会限制应用程序执行原子事务和维护数据高一致性的能力。此外，在分区级别还有特定的可伸缩性目标，这些目标可能会限制可以对单个节点预期的事务吞吐量：有关 Azure 存储帐户和表服务的可伸缩性目标的详细信息，请参阅 [Azure 存储可伸缩性和性能目标](./storage-scalability-targets.md)。本指南的后面部分将讨论各种设计策略，这些策略可帮助你管理此类权衡，并讨论如何根据客户端应用程序的特定要求最好地选择分区键。  
 
 ### 容量注意事项
 下表包括设计表服务解决方案时要注意的一些关键值：
@@ -155,7 +155,7 @@ EGT 还为你引入了潜在的权衡以便在设计中进行评估：使用更�
 有关详细信息，请参阅[了解表服务数据模型](http://msdn.microsoft.com/zh-cn/library/azure/dd179338.aspx)。
 
 ### 成本注意事项  
-表存储的价格相对便宜，但在评估任何使用表服务的解决方案时，应同时针对容量使用情况和事务数量进行成本估算。但是，在许多情况下，为提高解决方案的性能或可伸缩性，存储非规范化或重复的数据是可采取的有效方法。有关定价的详细信息，请参阅 [Azure 存储定价](/pricing/details/storage/)。
+表存储的价格相对便宜，但在评估任何使用表服务的解决方案时，应同时针对容量使用情况和事务数量进行成本估算。但是，在许多情况下，为提高解决方案的性能或可伸缩性，存储非规范化或重复的数据是可采取的有效方法。有关定价的详细信息，请参阅 [Azure 存储定价](https://www.azure.cn/pricing/details/storage/)。
 
 ## 表设计准则  
 这些列表汇总了一些设计表时需要牢记的重要原则，本指南稍后会更详细地对其进行解释。本指南的内容与设计关系数据库通常所遵循的指导原则大不相同。
@@ -183,7 +183,7 @@ EGT 还为你引入了潜在的权衡以便在设计中进行评估：使用更�
 
 将表服务解决方案设计为能够高效读取数据的良好起点是问“我的应用程序将需要执行哪些查询来从表服务中检索它所需的数据？”
 
->[AZURE.NOTE] 使用表服务时，预先将设计做正确很重要，因为以后进行更改会很难并且开销会很高。例如，在关系数据库中，通常只需通过向现有数据库添加索引就可以解决性能问题：而这不是表服务的选项。
+>[!NOTE] 使用表服务时，预先将设计做正确很重要，因为以后进行更改会很难并且开销会很高。例如，在关系数据库中，通常只需通过向现有数据库添加索引就可以解决性能问题：而这不是表服务的选项。
 
 本部分重点介绍在设计要查询的表时必须解决的关键问题。本部分中涵盖的主题包括：
 
@@ -233,7 +233,7 @@ EGT 还为你引入了潜在的权衡以便在设计中进行评估：使用更�
 
 理想的 **PartitionKey** 是这样的，你可以使用高效查询，并具有足够多的分区以确保你的解决方案是可扩展的。通常，你会发现你的实体将具有合适的属性，可以将你的实体分布到足够多的分区。
 
->[AZURE.NOTE]例如，在存储有关用户或员工的信息的系统中，UserID 可以是一个好的 PartitionKey。你可拥有多个使用某个给定 UserID 作为分区键的实体。存储有关用户数据的每个实体分组到单个分区，因此通过实体组事务可访问这些实体，同时仍具有高度可伸缩性。
+>[!NOTE]例如，在存储有关用户或员工的信息的系统中，UserID 可以是一个好的 PartitionKey。你可拥有多个使用某个给定 UserID 作为分区键的实体。存储有关用户数据的每个实体分组到单个分区，因此通过实体组事务可访问这些实体，同时仍具有高度可伸缩性。
 
 在选择 **PartitionKey** 时还有一些与如何插入、更新和删除实体相关的其他注意事项：请参阅下面的[针对数据修改的设计](#design-for-data-modification)。
 
@@ -303,7 +303,7 @@ EGT 还为你引入了潜在的权衡以便在设计中进行评估：使用更�
 
 请注意，当前不支持合并。由于属性的子集可能以前已使用不同的密钥加密，因此只合并新属性和更新元数据将导致数据丢失。合并需要进行额外的服务调用以从服务中读取预先存在的实体，或者需要为属性使用一个新密钥，由于性能方面的原因，这两种方案都不适用。
 
-有关对表数据进行加密的信息，请参阅 [Azure 存储的客户端加密和 Azure 密钥保管库](/documentation/articles/storage-client-side-encryption/)。
+有关对表数据进行加密的信息，请参阅 [Azure 存储的客户端加密和 Azure 密钥保管库](./storage-client-side-encryption.md)。
 
 ##<a id="modelling-relationships"></a> 为关系建模
 
@@ -511,7 +511,7 @@ EGT 还为你引入了潜在的权衡以便在设计中进行评估：使用更�
 -	在 **RowKey** 中填充数字值（例如，员工 ID 000223）以实现正确地排序以及根据上限和下限进行筛选。  
 -	不一定需要重复实体的所有属性。例如，如果使用 **RowKey** 中的电子邮件地址查找实体的查询永远不会需要员工的年龄，则这些实体可以具有以下结构：
 
-	![][11]
+    ![][11]
 
 -	通常，最好存储重复数据并确保可以使用单个查询检索所有所需数据，而不是使用一个查询通过辅助索引找到实体，使用另一个查询通过主索引查找所需数据。
 
@@ -573,7 +573,7 @@ EGT 在多个共享同一分区键的实体之间启用原子事务。由于性�
 -	[实体组事务](#entity-group-transactions)
 -	[合并或替换](#merge-or-replace)
 
->[AZURE.NOTE]如果事务隔离对你的解决方案很重要，应考虑重新设计你的表，以便能够使用 EGT。
+>[!NOTE]如果事务隔离对你的解决方案很重要，应考虑重新设计你的表，以便能够使用 EGT。
 
 ###<a id="index-entities-pattern"></a> 索引实体模式
 维护索引实体以启用返回实体列表的高效搜索。
@@ -1004,14 +1004,14 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 
 执行点查询的最简单方法是使用 **Retrieve** 表操作，如以下 C# 代码段中所示，该代码段检索 **PartitionKey** 值为“Sales”并且 **RowKey** 值为“212”的实体：
 
-	TableOperation retrieveOperation =
-		TableOperation.Retrieve<EmployeeEntity>("Sales", "212");
-	var retrieveResult = employeeTable.Execute(retrieveOperation);
-	if (retrieveResult.Result != null)
-	{
+    TableOperation retrieveOperation =
+        TableOperation.Retrieve<EmployeeEntity>("Sales", "212");
+    var retrieveResult = employeeTable.Execute(retrieveOperation);
+    if (retrieveResult.Result != null)
+    {
     EmployeeEntity employee = (EmployeeEntity)retrieveResult.Result;
     ...
-	}  
+    }  
 
 请注意此示例如何将它检索的实体要求为 **EmployeeEntity** 类型。
 
@@ -1019,23 +1019,23 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 
 可以通过将 LINQ 与存储客户端库配合使用，并为查询指定 **where** 子句来检索多个实体。若要避免表扫描，应始终在 where 子句中包括 **PartitionKey** 值，如有可能也包括 **RowKey** 值以避免表和分区扫描。表服务支持一组有限的比较运算符（大于、大于等于、小于、小于等于、等于和不等于）可用于 where 子句。下面的 C# 代码段在销售部门（假定 **RowKey** 存储部门名称）中查找姓氏以“B”开头（假定 **PartitionKey** 存储姓氏）的所有员工：
 
-	TableQuery<EmployeeEntity> employeeQuery =
-  			employeeTable.CreateQuery<EmployeeEntity>();
-	var query = (from employee in employeeQuery
+    TableQuery<EmployeeEntity> employeeQuery =
+              employeeTable.CreateQuery<EmployeeEntity>();
+    var query = (from employee in employeeQuery
                 where employee.PartitionKey == "Sales" &&
                 employee.RowKey.CompareTo("B") >= 0 &&
                 employee.RowKey.CompareTo("C") < 0
                 select employee).AsTableQuery();
-	var employees = query.Execute();  
+    var employees = query.Execute();  
 
 请注意该查询如何同时指定 **RowKey** 和 **PartitionKey** 以确保更佳性能。
 
 以下代码示例演示使用 Fluent API 的等效功能（有关 Fluent API 各个方面的详细信息，请参阅[设计 Fluent API 的最佳实践](http://visualstudiomagazine.com/articles/2013/12/01/best-practices-for-designing-a-fluent-api.aspx)）：
 
-	TableQuery<EmployeeEntity> employeeQuery = new TableQuery<EmployeeEntity>().Where(
- 	 TableQuery.CombineFilters(
-    	TableQuery.CombineFilters(
-      	TableQuery.GenerateFilterCondition(
+    TableQuery<EmployeeEntity> employeeQuery = new TableQuery<EmployeeEntity>().Where(
+      TableQuery.CombineFilters(
+        TableQuery.CombineFilters(
+          TableQuery.GenerateFilterCondition(
         "PartitionKey", QueryComparisons.Equal, "Sales"),
       TableOperators.And,
       TableQuery.GenerateFilterCondition(
@@ -1043,12 +1043,11 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
     ),
     TableOperators.And,
     TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.LessThan, "C")
- 	 )
-	);
-	var employees = employeeTable.ExecuteQuery(employeeQuery);  
+      )
+    );
+    var employees = employeeTable.ExecuteQuery(employeeQuery);  
 
-
->[AZURE.NOTE]该示例嵌套了多个 **CombineFilters** 方法以包含三个筛选条件。
+>[!NOTE]该示例嵌套了多个 **CombineFilters** 方法以包含三个筛选条件。
 
 #### 通过查询检索大量实体  
 
@@ -1060,36 +1059,36 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 
 如果你使用的是存储客户端库，当它从表服务返回实体时，可以自动为你处理继续标记。以下 C# 代码示例使用存储客户端库自动处理继续标记（如果表服务在响应中返回继续标记）：
 
-	string filter = TableQuery.GenerateFilterCondition(
-  		"PartitionKey", QueryComparisons.Equal, "Sales");
-	TableQuery<EmployeeEntity> employeeQuery =
-  		new TableQuery<EmployeeEntity>().Where(filter);
+    string filter = TableQuery.GenerateFilterCondition(
+          "PartitionKey", QueryComparisons.Equal, "Sales");
+    TableQuery<EmployeeEntity> employeeQuery =
+          new TableQuery<EmployeeEntity>().Where(filter);
 
-	var employees = employeeTable.ExecuteQuery(employeeQuery);
-	foreach (var emp in employees)
-	{
-  		...
-	}  
+    var employees = employeeTable.ExecuteQuery(employeeQuery);
+    foreach (var emp in employees)
+    {
+          ...
+    }  
 
 以下 C# 代码显式处理继续标记：
 
-	string filter = TableQuery.GenerateFilterCondition(
-  		"PartitionKey", QueryComparisons.Equal, "Sales");
-	TableQuery<EmployeeEntity> employeeQuery =
-  		new TableQuery<EmployeeEntity>().Where(filter);
+    string filter = TableQuery.GenerateFilterCondition(
+          "PartitionKey", QueryComparisons.Equal, "Sales");
+    TableQuery<EmployeeEntity> employeeQuery =
+          new TableQuery<EmployeeEntity>().Where(filter);
 
-	TableContinuationToken continuationToken = null;
+    TableContinuationToken continuationToken = null;
 
-	do
-	{
-  		var employees = employeeTable.ExecuteQuerySegmented(
-    		employeeQuery, continuationToken);
-  	foreach (var emp in employees)
-  	{
-   	 ...
-  	}
-  	continuationToken = employees.ContinuationToken;
-	} while (continuationToken != null);  
+    do
+    {
+          var employees = employeeTable.ExecuteQuerySegmented(
+            employeeQuery, continuationToken);
+      foreach (var emp in employees)
+      {
+        ...
+      }
+      continuationToken = employees.ContinuationToken;
+    } while (continuationToken != null);  
 
 通过显式使用继续标记，可以控制应用程序何时检索下一个数据段。例如，如果客户端应用程序允许用户翻阅表中存储的实体，用户可能会决定不翻阅查询检索的所有实体，因此应用程序仅当用户翻阅完当前段中的所有实体后才会使用继续标记检索下一段。此方法具有以下几个优点：
 
@@ -1097,27 +1096,27 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 -	它使你可以在 .NET 中执行异步 IO。  
 -	它使你可以将继续标记序列化到持久存储，以便可以在应用程序崩溃时继续。  
 
->[AZURE.NOTE]继续标记通常返回包含 1,000 个实体的段，尽管它可能会更少。这也适用于你通过使用 **Take** 返回与查找条件匹配的前 n 个实体来限制查询返回的条目数的情况：表服务可能会返回包含少于 n 个实体的段和一个继续标记，你使用该标记可以检索剩余实体。
+>[!NOTE]继续标记通常返回包含 1,000 个实体的段，尽管它可能会更少。这也适用于你通过使用 **Take** 返回与查找条件匹配的前 n 个实体来限制查询返回的条目数的情况：表服务可能会返回包含少于 n 个实体的段和一个继续标记，你使用该标记可以检索剩余实体。
 
 以下 C# 代码演示如何修改段内返回的实体数：
 
-	employeeQuery.TakeCount = 50;  
+    employeeQuery.TakeCount = 50;  
 
 ####<a id="server-side-projection"></a> 服务器端投影  
 
 单个实体最多可以具有 255 个属性，并且大小最多可以为 1 MB。当你查询表并检索实体时，你可能不需要所有属性，并可以避免不必要地传输数据（以帮助减少延迟和降低成本）。你可以使用服务器端投影来只传输你需要的属性。以下示例只检索查询选择的实体的 **Email** 属性（与 **PartitionKey**、**RowKey**、**Timestamp** 和 **ETag** 一起）。
 
-	string filter = TableQuery.GenerateFilterCondition(
-  		"PartitionKey", QueryComparisons.Equal, "Sales");
-	List<string> columns = new List<string>() { "Email" };
-	TableQuery<EmployeeEntity> employeeQuery =
-  		new TableQuery<EmployeeEntity>().Where(filter).Select(columns);
+    string filter = TableQuery.GenerateFilterCondition(
+          "PartitionKey", QueryComparisons.Equal, "Sales");
+    List<string> columns = new List<string>() { "Email" };
+    TableQuery<EmployeeEntity> employeeQuery =
+          new TableQuery<EmployeeEntity>().Where(filter).Select(columns);
 
-	var entities = employeeTable.ExecuteQuery(employeeQuery);
-	foreach (var e in entities)
-	{
-  		Console.WriteLine("RowKey: {0}, EmployeeEmail: {1}", e.RowKey, e.Email);
-	}  
+    var entities = employeeTable.ExecuteQuery(employeeQuery);
+    foreach (var e in entities)
+    {
+          Console.WriteLine("RowKey: {0}, EmployeeEmail: {1}", e.RowKey, e.Email);
+    }  
 
 请注意如何获得 **RowKey** 值（即使它未包含在要检索的属性列表中）。
 
@@ -1131,7 +1130,7 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 
 #### 管理并发  
 
-默认情况下，表服务在单个实体级别实现针对 **Insert**、**Merge** 和 **Delete** 操作的开放式并发检查，尽管客户端可以强制表服务跳过这些检查。有关表服务如何管理并发的详细信息，请参阅[在 Azure 存储中管理并发](/documentation/articles/storage-concurrency/)。
+默认情况下，表服务在单个实体级别实现针对 **Insert**、**Merge** 和 **Delete** 操作的开放式并发检查，尽管客户端可以强制表服务跳过这些检查。有关表服务如何管理并发的详细信息，请参阅[在 Azure 存储中管理并发](./storage-concurrency.md)。
 
 ####<a id="merge-or-replace"></a> 合并或替换  
 
@@ -1139,7 +1138,7 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 
 要更新实体时，你可以使用 **TableOperation** 类的 **Merge** 方法来减少你发送到表服务的数据量。**Merge** 方法会将存储实体的任何属性替换为请求中包含的实体的属性值，但会将请求中未包含的存储实体的任何属性保持不变。如果你使用大型实体并且只需在请求中更新少量属性，则此方法很有用。
 
->[AZURE.NOTE]如果该实体不存在，**Replace** 和 **Merge** 方法将失败。作为替代方法，你可以使用 **InsertOrReplace** 和 **InsertOrMerge** 方法，这两个方法在实体不存在时会创建一个新实体。
+>[!NOTE]如果该实体不存在，**Replace** 和 **Merge** 方法将失败。作为替代方法，你可以使用 **InsertOrReplace** 和 **InsertOrMerge** 方法，这两个方法在实体不存在时会创建一个新实体。
 
 ###<a id="working-with-heterogeneous-entity-types"></a> 处理异类实体类型  
 
@@ -1336,7 +1335,7 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 
 此部分中讨论的技术与本指南中前面部分[模型关系](#modelling-relationships)讨论的[继承关系](#inheritance-relationships)有关。
 
->[AZURE.NOTE]你应考虑在实体类型值中包含版本号以允许客户端应用程序演变 POCO 对象并处理不同版本。
+>[!NOTE]你应考虑在实体类型值中包含版本号以允许客户端应用程序演变 POCO 对象并处理不同版本。
 
 本部分的剩余部分将介绍存储客户端库中便于处理同一表中的多个实体类型的一些功能。
 
@@ -1348,96 +1347,96 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 
 第二个选项是使用 **DynamicTableEntity** 类型（属性包）而不是具体的 POCO 实体类型（此选项还可以提高性能，因为无需序列化实体和将实体反序列化为 .NET 类型）。以下 C# 代码可能会从表中检索多个不同类型的实体，但会将所有实体作 **DynamicTableEntity** 实例返回。然后，它使用 **EntityType** 属性来确定每个实体的类型：
 
-	string filter = 	TableQuery.CombineFilters(
-    	TableQuery.GenerateFilterCondition("PartitionKey",
+    string filter = 	TableQuery.CombineFilters(
+        TableQuery.GenerateFilterCondition("PartitionKey",
       QueryComparisons.Equal, "Sales"),
-    	TableOperators.And,
-    	TableQuery.CombineFilters(
+        TableOperators.And,
+        TableQuery.CombineFilters(
         TableQuery.GenerateFilterCondition("RowKey",
-          			QueryComparisons.GreaterThanOrEqual, "B"),
-        	TableOperators.And,
-        	TableQuery.GenerateFilterCondition("RowKey",
+                      QueryComparisons.GreaterThanOrEqual, "B"),
+            TableOperators.And,
+            TableQuery.GenerateFilterCondition("RowKey",
           QueryComparisons.LessThan, "F")
         )
     );
-	TableQuery<DynamicTableEntity> entityQuery =
-  	new TableQuery<DynamicTableEntity>().Where(filter);
-	var employees = employeeTable.ExecuteQuery(entityQuery);
+    TableQuery<DynamicTableEntity> entityQuery =
+      new TableQuery<DynamicTableEntity>().Where(filter);
+    var employees = employeeTable.ExecuteQuery(entityQuery);
 
-	IEnumerable<DynamicTableEntity> entities = employeeTable.ExecuteQuery(entityQuery);
-	foreach (var e in entities)
-	{
+    IEnumerable<DynamicTableEntity> entities = employeeTable.ExecuteQuery(entityQuery);
+    foreach (var e in entities)
+    {
     EntityProperty entityTypeProperty;
     if (e.Properties.TryGetValue("EntityType", out entityTypeProperty))
     {
         if (entityTypeProperty.StringValue == "Employee")
         {
             // Use entityTypeProperty, RowKey, PartitionKey, Etag, and Timestamp
-      	  }
-   	 }
-	}  
+            }
+        }
+    }  
 
 请注意，若要检索其他属性，必须对 **DynamicTableEntity** 类的 **Properties** 属性使用 **TryGetValue** 方法。
 
 第三个选项是组合使用 **DynamicTableEntity** 类型和 **EntityResolver** 实例。使用此选项可以在同一查询中解析为多种 POCO 类型。在此示例中，**EntityResolver** 委托使用 **EntityType** 属性来区分查询返回的两种实体类型。 **Resolve** 方法使用 **resolver** 委托将 **DynamicTableEntity** 实例解析为 **TableEntity** 实例。
 
-	EntityResolver<TableEntity> resolver = (pk, rk, ts, props, etag) =>
-	{
+    EntityResolver<TableEntity> resolver = (pk, rk, ts, props, etag) =>
+    {
 
-  		TableEntity resolvedEntity = null;
-  		if (props["EntityType"].StringValue == "Department")
-  		{
-    		resolvedEntity = new DepartmentEntity();
-  		}
-  		else if (props["EntityType"].StringValue == "Employee")
-  		{
-    		resolvedEntity = new EmployeeEntity();
-  		}
-  		else throw new ArgumentException("Unrecognized entity", "props");
+          TableEntity resolvedEntity = null;
+          if (props["EntityType"].StringValue == "Department")
+          {
+            resolvedEntity = new DepartmentEntity();
+          }
+          else if (props["EntityType"].StringValue == "Employee")
+          {
+            resolvedEntity = new EmployeeEntity();
+          }
+          else throw new ArgumentException("Unrecognized entity", "props");
 
-  		resolvedEntity.PartitionKey = pk;
-  		resolvedEntity.RowKey = rk;
-  		resolvedEntity.Timestamp = ts;
-  		resolvedEntity.ETag = etag;
-  		resolvedEntity.ReadEntity(props, null);
-  		return resolvedEntity;
-	};
+          resolvedEntity.PartitionKey = pk;
+          resolvedEntity.RowKey = rk;
+          resolvedEntity.Timestamp = ts;
+          resolvedEntity.ETag = etag;
+          resolvedEntity.ReadEntity(props, null);
+          return resolvedEntity;
+    };
 
-	string filter = TableQuery.GenerateFilterCondition(
-  		"PartitionKey", QueryComparisons.Equal, "Sales");
-	TableQuery<DynamicTableEntity> entityQuery =
-  		new TableQuery<DynamicTableEntity>().Where(filter);
+    string filter = TableQuery.GenerateFilterCondition(
+          "PartitionKey", QueryComparisons.Equal, "Sales");
+    TableQuery<DynamicTableEntity> entityQuery =
+          new TableQuery<DynamicTableEntity>().Where(filter);
 
-	var entities = employeeTable.ExecuteQuery(entityQuery, resolver);
-	foreach (var e in entities)
-	{
-  		if (e is DepartmentEntity)
-  		{
-    	...
-  		}
-  		if (e is EmployeeEntity)
-  		{
-    	...
-  		}
-	}  
+    var entities = employeeTable.ExecuteQuery(entityQuery, resolver);
+    foreach (var e in entities)
+    {
+          if (e is DepartmentEntity)
+          {
+        ...
+          }
+          if (e is EmployeeEntity)
+          {
+        ...
+          }
+    }  
 
 #### 修改异类实体类型  
 
 无需知道实体的类型就可删除该实体，在插入实体时你始终知道该实体的类型。但是，你可以使用 **DynamicTableEntity** 类型来更新实体，而不必知道其类型，也无需使用 POCO 实体类。以下代码示例检索单个实体，并在更新该实体前检查 **EmployeeCount** 属性是否存在。
 
-	TableResult result =
-  		employeeTable.Execute(TableOperation.Retrieve(partitionKey, rowKey));
-	DynamicTableEntity department = (DynamicTableEntity)result.Result;
+    TableResult result =
+          employeeTable.Execute(TableOperation.Retrieve(partitionKey, rowKey));
+    DynamicTableEntity department = (DynamicTableEntity)result.Result;
 
-	EntityProperty countProperty;
+    EntityProperty countProperty;
 
-	if (!department.Properties.TryGetValue("EmployeeCount", out countProperty))
-	{
-  		throw new
-    		InvalidOperationException("Invalid entity, EmployeeCount property not found.");
-	}
-	countProperty.Int32Value += 1;
-	employeeTable.Execute(TableOperation.Merge(department));  
+    if (!department.Properties.TryGetValue("EmployeeCount", out countProperty))
+    {
+          throw new
+            InvalidOperationException("Invalid entity, EmployeeCount property not found.");
+    }
+    countProperty.Int32Value += 1;
+    employeeTable.Execute(TableOperation.Merge(department));  
 
 ###<a id="controlling-access-with-shared-access-signatures"></a> 使用共享访问签名控制访问权限  
 
@@ -1447,7 +1446,7 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 -	可以卸下 Web 角色和辅助角色在管理传递到客户端设备（如最终用户计算机和移动设备）的实体时执行的一些工作负荷。  
 -	可以向客户端分配一组受约束且有时间限制的权限（如允许对特定资源进行只读访问）。  
 
-有关在表服务中使用 SAS 令牌的详细信息，请参阅[使用共享访问签名 (SAS)](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)。
+有关在表服务中使用 SAS 令牌的详细信息，请参阅[使用共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)。
 
 但是，仍必须生成授权客户端应用程序访问表服务中的实体的 SAS 令牌：应在可安全地访问存储帐户密钥的环境中执行此操作。通常，使用 Web 角色或辅助角色生成 SAS 令牌并将其传递给需要访问你的实体的客户端应用程序。由于生成 SAS 令牌并将其传递到客户端仍有开销，你应考虑如何最有效地减少此开销，尤其是在大容量方案中。
 
@@ -1459,48 +1458,48 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 
 在客户端实例中，可以通过以异步方式执行存储操作来提高吞吐量。使用存储客户端库，可以轻松地编写异步查询和修改。例如，你可以从用于检索某个分区中的所有实体的同步方法开始，如以下 C# 代码中所示：
 
-	private static void ManyEntitiesQuery(CloudTable employeeTable, string department)
-	{
-  		string filter = TableQuery.GenerateFilterCondition(
-    		"PartitionKey", QueryComparisons.Equal, department);
-  		TableQuery<EmployeeEntity> employeeQuery =
-    		new TableQuery<EmployeeEntity>().Where(filter);
+    private static void ManyEntitiesQuery(CloudTable employeeTable, string department)
+    {
+          string filter = TableQuery.GenerateFilterCondition(
+            "PartitionKey", QueryComparisons.Equal, department);
+          TableQuery<EmployeeEntity> employeeQuery =
+            new TableQuery<EmployeeEntity>().Where(filter);
 
-  		TableContinuationToken continuationToken = null;
+          TableContinuationToken continuationToken = null;
 
-  		do
-  		{
-    		var employees = employeeTable.ExecuteQuerySegmented(
-      			employeeQuery, continuationToken);
-    		foreach (var emp in employees)
-    	{
-      	...
-    	}
-    		continuationToken = employees.ContinuationToken;
-  		} while (continuationToken != null);
-	}  
+          do
+          {
+            var employees = employeeTable.ExecuteQuerySegmented(
+                  employeeQuery, continuationToken);
+            foreach (var emp in employees)
+        {
+          ...
+        }
+            continuationToken = employees.ContinuationToken;
+          } while (continuationToken != null);
+    }  
 
 可以轻松地修改此代码，使查询以异步方式运行，如下所示：
 
-	private static async Task ManyEntitiesQueryAsync(CloudTable employeeTable, string department)
-	{
-  		string filter = TableQuery.GenerateFilterCondition(
-    		"PartitionKey", QueryComparisons.Equal, department);
-  		TableQuery<EmployeeEntity> employeeQuery =
-    		new TableQuery<EmployeeEntity>().Where(filter);
-  		TableContinuationToken continuationToken = null;
+    private static async Task ManyEntitiesQueryAsync(CloudTable employeeTable, string department)
+    {
+          string filter = TableQuery.GenerateFilterCondition(
+            "PartitionKey", QueryComparisons.Equal, department);
+          TableQuery<EmployeeEntity> employeeQuery =
+            new TableQuery<EmployeeEntity>().Where(filter);
+          TableContinuationToken continuationToken = null;
 
-  		do
-  		{
-    		var employees = await employeeTable.ExecuteQuerySegmentedAsync(
-      			employeeQuery, continuationToken);
-    		foreach (var emp in employees)
-    		{
-     		 ...
-    		}
-    		continuationToken = employees.ContinuationToken;
-  			} while (continuationToken != null);
-	}  
+          do
+          {
+            var employees = await employeeTable.ExecuteQuerySegmentedAsync(
+                  employeeQuery, continuationToken);
+            foreach (var emp in employees)
+            {
+              ...
+            }
+            continuationToken = employees.ContinuationToken;
+              } while (continuationToken != null);
+    }  
 
 在此异步示例中，你可以看到对同步版本进行了以下更改：
 
@@ -1513,23 +1512,23 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 
 此外，还可以用异步方式插入、更新和删除实体。以下 C# 示例说明了一个简单的同步方法，该方法用于插入或替换员工实体：
 
-	private static void SimpleEmployeeUpsert(CloudTable employeeTable,
-  		EmployeeEntity employee)
-	{
-  		TableResult result = employeeTable
-    		.Execute(TableOperation.InsertOrReplace(employee));
-  		Console.WriteLine("HTTP Status: {0}", result.HttpStatusCode);
-	}  
+    private static void SimpleEmployeeUpsert(CloudTable employeeTable,
+          EmployeeEntity employee)
+    {
+          TableResult result = employeeTable
+            .Execute(TableOperation.InsertOrReplace(employee));
+          Console.WriteLine("HTTP Status: {0}", result.HttpStatusCode);
+    }  
 
 可以轻松地修改此代码，使更新以异步方式运行，如下所示：
 
-	private static async Task SimpleEmployeeUpsertAsync(CloudTable employeeTable,
-  		EmployeeEntity employee)
-	{
-  		TableResult result = await employeeTable
-    		.ExecuteAsync(TableOperation.InsertOrReplace(employee));
-  		Console.WriteLine("HTTP Status: {0}", result.HttpStatusCode);
-	}  
+    private static async Task SimpleEmployeeUpsertAsync(CloudTable employeeTable,
+          EmployeeEntity employee)
+    {
+          TableResult result = await employeeTable
+            .ExecuteAsync(TableOperation.InsertOrReplace(employee));
+          Console.WriteLine("HTTP Status: {0}", result.HttpStatusCode);
+    }  
 
 在此异步示例中，你可以看到对同步版本进行了以下更改：
 
@@ -1537,9 +1536,6 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 -	不是调用 **Execute** 方法来更新实体，该方法现在调用 **ExecuteAsync** 方法，并使用 **await** 修饰符来以异步方式检索结果。
 
 客户端应用程序可以调用多个类似这样的异步方法，每个方法调用都将在一个单独的线程中运行。
-
-
-
 
 [1]: ./media/storage-table-design-guide/storage-table-design-IMAGE01.png
 [2]: ./media/storage-table-design-guide/storage-table-design-IMAGE02.png
@@ -1571,5 +1567,4 @@ Storage Analytics 在内部缓存日志消息，然后定期更新相应的 blob
 [28]: ./media/storage-table-design-guide/storage-table-design-IMAGE28.png
 [29]: ./media/storage-table-design-guide/storage-table-design-IMAGE29.png
  
-
 <!---HONumber=Mooncake_0103_2017-->

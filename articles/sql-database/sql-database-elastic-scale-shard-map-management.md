@@ -1,21 +1,22 @@
-<properties
-    pageTitle="分片映射管理 | Azure"
-    description="如何使用弹性数据库客户端库 ShardMapManager"
-    services="sql-database"
-    documentationcenter=""
-    manager="jhubbard"
-    author="ddove"
-    editor="" />
-<tags
-    ms.assetid="0e9d647a-9ba9-4875-aa22-662d01283439"
-    ms.service="sql-database"
-    ms.workload="sql-database"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/24/2016"
-    wacn.date="12/19/2016"
-ms.author="ddove" />
+---
+title: 分片映射管理 | Azure
+description: 如何使用弹性数据库客户端库 ShardMapManager
+services: sql-database
+documentationcenter: 
+manager: jhubbard
+author: ddove
+editor: 
+
+ms.assetid: 0e9d647a-9ba9-4875-aa22-662d01283439
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/24/2016
+wacn.date: 12/19/2016
+ms.author: ddove
+---
 
 # 使用分片映射管理器扩大数据库
 
@@ -23,8 +24,7 @@ ms.author="ddove" />
 
 ![分片映射管理](./media/sql-database-elastic-scale-shard-map-management/glossary.png)
 
-了解如何构建这些映射对于分片映射管理至关重要。使用[弹性数据库客户端库](/documentation/articles/sql-database-elastic-database-client-library/)中发现的 [ShardMapManager 类](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.aspx)完成此操作以管理分片映射。
-
+了解如何构建这些映射对于分片映射管理至关重要。使用[弹性数据库客户端库](./sql-database-elastic-database-client-library.md)中发现的 [ShardMapManager 类](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.aspx)完成此操作以管理分片映射。
 
 ## 分片映射
 
@@ -32,8 +32,8 @@ ms.author="ddove" />
 
 1. 每个数据库一个租户
 2. 每个数据库多个租户（两种类型）：
-	3. 列表映射
-	4. 范围映射
+    3. 列表映射
+    4. 范围映射
  
 对于单租户模型，创建“列表映射”分片映射。单租户模型将每个租户分配给一个数据库。这是适用于 SaaS 开发人员的有效模型，因为它可以简化管理。
 
@@ -73,7 +73,6 @@ ms.author="ddove" />
 | 6 | Database\_B |
 | ... | ... |
  
-
 ### 范围分片映射 
 在**范围分片映射**中，键范围由 **[Low Value, High Value)** 对描述，其中 *Low Value* 是范围中的最小键，而 *High Value* 是第一个大于范围的值。
 
@@ -108,7 +107,7 @@ ms.author="ddove" />
 在此代码中，应用程序尝试使用 [TryGetSqlShardMapManager 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.trygetsqlshardmapmanager.aspx)打开现有的 **ShardMapManager**。如果表示全局 **ShardMapManager** (GSM) 的对象尚未存在于数据库内，则客户端库将在此处使用 [CreateSqlShardMapManager 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.createsqlshardmapmanager.aspx)创建这些对象。
 
     // Try to get a reference to the Shard Map Manager 
- 	// via the Shard Map Manager database.  
+     // via the Shard Map Manager database.  
     // If it doesn't already exist, then create it. 
     ShardMapManager shardMapManager; 
     bool shardMapManagerExists = ShardMapManagerFactory.TryGetSqlShardMapManager(
@@ -140,7 +139,7 @@ ms.author="ddove" />
 
 创建分片映射管理器后，使用 [TryGetRangeShardMap](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.trygetrangeshardmap.aspx)、[TryGetListShardMap](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.trygetlistshardmap.aspx) 或者 [GetShardMap](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.getshardmap.aspx) 方法获取 [RangeShardMap](https://msdn.microsoft.com/zh-cn/library/azure/dn807318.aspx) 或 [ListShardMap](https://msdn.microsoft.com/zh-cn/library/azure/dn807370.aspx)。
 
-	/// <summary>
+    /// <summary>
     /// Creates a new Range Shard Map with the specified name, or gets the Range Shard Map if it already exists.
     /// </summary>
     public static RangeShardMap<T> CreateOrGetRangeShardMap<T>(ShardMapManager shardMapManager, string shardMapName)
@@ -169,11 +168,11 @@ ms.author="ddove" />
 
 若要管理分片映射（添加或更改分片、分片映射等），必须使用**在 GSM 数据库和用作分片的每个数据库上都具有读/写权限的凭据**实例化 **ShardMapManager**。在输入或更改分片映射信息时，这些凭据必须允许编写 GSM 和 LSM 中的表，以及在新分片上创建 LSM 表。
 
-请参阅[用于访问弹性数据库客户端库的凭据](/documentation/articles/sql-database-elastic-scale-manage-credentials/)。
+请参阅[用于访问弹性数据库客户端库的凭据](./sql-database-elastic-scale-manage-credentials.md)。
 
 ### 仅元数据受影响 
 
-用于填充或更改 **ShardMapManager** 数据的方法不会更改存储在分片本身中的用户数据。例如，诸如 **CreateShard**、**DeleteShard**、**UpdateMapping** 等的方法仅影响分片映射元数据。不会删除、添加或更改分片中所包含的用户数据。但是，这些方法旨在与你执行的单独操作结合使用，以创建或删除实际数据库，或者将行从一个分片移动到另一个分片，以使分片环境恢复均衡。（弹性数据库工具附带的**拆分/合并**工具将使用这些 API 并安排在分片之间移动实际数据。） 请参阅[使用弹性数据库拆分/合并工具进行缩放](/documentation/articles/sql-database-elastic-scale-overview-split-and-merge/)。
+用于填充或更改 **ShardMapManager** 数据的方法不会更改存储在分片本身中的用户数据。例如，诸如 **CreateShard**、**DeleteShard**、**UpdateMapping** 等的方法仅影响分片映射元数据。不会删除、添加或更改分片中所包含的用户数据。但是，这些方法旨在与你执行的单独操作结合使用，以创建或删除实际数据库，或者将行从一个分片移动到另一个分片，以使分片环境恢复均衡。（弹性数据库工具附带的**拆分/合并**工具将使用这些 API 并安排在分片之间移动实际数据。） 请参阅[使用弹性数据库拆分/合并工具进行缩放](./sql-database-elastic-scale-overview-split-and-merge.md)。
 
 ## 填充分片映射示例
  
@@ -199,23 +198,23 @@ ms.author="ddove" />
             // Check if shard exists and if not, 
             // create it (Idempotent / tolerant of re-execute) 
             if (!sm.TryGetShard(new ShardLocation(
-	                                 shardServer, 
-	                                 "sample_shard_0"), 
-	                                 out shard0)) 
+                                     shardServer, 
+                                     "sample_shard_0"), 
+                                     out shard0)) 
             { 
                 Shard0 = sm.CreateShard(new ShardLocation(
-	                                        shardServer, 
-	                                        "sample_shard_0")); 
+                                            shardServer, 
+                                            "sample_shard_0")); 
             } 
 
             if (!sm.TryGetShard(new ShardLocation(
-	                                shardServer, 
-	                                "sample_shard_1"), 
-	                                out shard1)) 
+                                    shardServer, 
+                                    "sample_shard_1"), 
+                                    out shard1)) 
             { 
                 Shard1 = sm.CreateShard(new ShardLocation(
-	                                         shardServer, 
-	                                        "sample_shard_1"));  
+                                             shardServer, 
+                                            "sample_shard_1"));  
             } 
 
             RangeMapping<long> rmpg=null; 
@@ -225,46 +224,46 @@ ms.author="ddove" />
             if (!sm.TryGetMappingForKey(0, out rmpg)) 
             { 
                 sm.CreateRangeMapping(
-	                      new RangeMappingCreationInfo<long>
-	                      (new Range<long>(0, 50), 
-	                      shard0, 
-	                      MappingStatus.Online)); 
+                          new RangeMappingCreationInfo<long>
+                          (new Range<long>(0, 50), 
+                          shard0, 
+                          MappingStatus.Online)); 
             } 
 
             if (!sm.TryGetMappingForKey(50, out rmpg)) 
             { 
                 sm.CreateRangeMapping(
-	                     new RangeMappingCreationInfo<long> 
+                         new RangeMappingCreationInfo<long> 
                          (new Range<long>(50, 100), 
-	                     shard1, 
-	                     MappingStatus.Online)); 
+                         shard1, 
+                         MappingStatus.Online)); 
             } 
 
             if (!sm.TryGetMappingForKey(100, out rmpg)) 
             { 
                 sm.CreateRangeMapping(
-	                     new RangeMappingCreationInfo<long>
+                         new RangeMappingCreationInfo<long>
                          (new Range<long>(100, 150), 
-	                     shard0, 
-	                     MappingStatus.Online)); 
+                         shard0, 
+                         MappingStatus.Online)); 
             } 
 
             if (!sm.TryGetMappingForKey(150, out rmpg)) 
             { 
                 sm.CreateRangeMapping(
-	                     new RangeMappingCreationInfo<long> 
+                         new RangeMappingCreationInfo<long> 
                          (new Range<long>(150, 200), 
-	                     shard1, 
-	                     MappingStatus.Online)); 
+                         shard1, 
+                         MappingStatus.Online)); 
             } 
 
             if (!sm.TryGetMappingForKey(200, out rmpg)) 
             { 
                sm.CreateRangeMapping(
-	                     new RangeMappingCreationInfo<long> 
+                         new RangeMappingCreationInfo<long> 
                          (new Range<long>(200, 300), 
-	                     shard0, 
-	                     MappingStatus.Online)); 
+                         shard0, 
+                         MappingStatus.Online)); 
             } 
 
             // List the shards and mappings 
@@ -290,9 +289,9 @@ ms.author="ddove" />
 
 分片映射管理器主要由需要数据库连接的应用程序用来执行特定于应用的数据操作。这些连接必须与正确的数据库关联。这称为**依赖于数据的路由**。对于这些应用程序，通过使用在 GSM 数据库上具有只读访问权限的凭据，实例化来自工厂的分片映射管理器对象。以后，单独的连接请求将提供连接相应分片数据库时所需的凭据。
 
-请注意，这些应用程序（使用具有只读权限的凭据打开的 **ShardMapManager**）将无法对映射进行更改。为了满足这些需求，请创建特定于管理的应用程序或 PowerShell 脚本，以提供如前所述的更高级别权限的凭据。请参阅[用于访问弹性数据库客户端库的凭据](/documentation/articles/sql-database-elastic-scale-manage-credentials/)。
+请注意，这些应用程序（使用具有只读权限的凭据打开的 **ShardMapManager**）将无法对映射进行更改。为了满足这些需求，请创建特定于管理的应用程序或 PowerShell 脚本，以提供如前所述的更高级别权限的凭据。请参阅[用于访问弹性数据库客户端库的凭据](./sql-database-elastic-scale-manage-credentials.md)。
 
-有关更多详细信息，请参阅[依赖于数据的路由](/documentation/articles/sql-database-elastic-scale-data-dependent-routing/)。
+有关更多详细信息，请参阅[依赖于数据的路由](./sql-database-elastic-scale-data-dependent-routing.md)。
 
 ## 修改分片映射 
 
@@ -328,11 +327,11 @@ ms.author="ddove" />
 
 对于已经存在的分片映射，应用程序通常仅需要添加新分片，以处理预期的新键或键范围数据。例如，由租户 ID 分片的应用程序可能需要为新的租户预配新分片，或者在每个新的月份开始之前，每月分片的数据可能需要预配新分片。
 
-如果新的键值范围还不是现有映射的组成部分且无需移动数据，则添加新分片以及将新键或范围关联到该分片非常简单。有关添加新分片的详细信息，请参阅[添加新分片](/documentation/articles/sql-database-elastic-scale-add-a-shard/)。
+如果新的键值范围还不是现有映射的组成部分且无需移动数据，则添加新分片以及将新键或范围关联到该分片非常简单。有关添加新分片的详细信息，请参阅[添加新分片](./sql-database-elastic-scale-add-a-shard.md)。
 
-但是，在需要移动数据的情况下，需要拆分/合并工具并结合使用必要的分片映射更新，才能安排在分片之间移动数据。有关使用拆分/合并工具的详细信息，请参阅[拆分/合并概述](/documentation/articles/sql-database-elastic-scale-overview-split-and-merge/)
+但是，在需要移动数据的情况下，需要拆分/合并工具并结合使用必要的分片映射更新，才能安排在分片之间移动数据。有关使用拆分/合并工具的详细信息，请参阅[拆分/合并概述](./sql-database-elastic-scale-overview-split-and-merge.md)
 
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
  
 <!--Image references-->
 [1]: ./media/sql-database-elastic-scale-shard-map-management/listmapping.png

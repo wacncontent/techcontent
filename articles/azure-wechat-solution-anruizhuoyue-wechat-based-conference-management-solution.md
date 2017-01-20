@@ -1,16 +1,18 @@
-<properties
-	pageTitle="基于认知服务的智慧云会务管理系统部署说明 | Azure"
-    description="基于认知服务的智慧云会务管理系统部署说明"
-    services=""
-    documentationCenter=""
-    authors=""
-    manager=""
-    editor=""
-    tags=""/>
+---
+title: 基于认知服务的智慧云会务管理系统部署说明 | Azure
+description: 基于认知服务的智慧云会务管理系统部署说明
+services: 
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags ms.service="multiple" ms.date="" wacn.date="01/17/2017"/>
+ms.service: multiple
+ms.date: 
+wacn.date: 01/17/2017
+---
 
- 
 # 基于认知服务的智慧云会务管理系统部署说明
 
 ## 主要开发技术说明

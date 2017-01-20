@@ -1,24 +1,23 @@
-<properties
-    pageTitle="Azure Resource Manager 模板的可用性和缩放 | Azure"
-    description="Azure 虚拟机 DotNet Core 教程"
-    services="virtual-machines-linux"
-    documentationcenter="virtual-machines"
-    author="neilpeterson"
-    manager="timlt"
-    editor="tysonn"
-    tags="azure-service-management" />  
+---
+title: Azure Resource Manager 模板的可用性和缩放 | Azure
+description: Azure 虚拟机 DotNet Core 教程
+services: virtual-machines-linux
+documentationcenter: virtual-machines
+author: neilpeterson
+manager: timlt
+editor: tysonn
+tags: azure-service-management
 
-<tags
-    ms.assetid="8fcfea79-f017-4658-8c51-74242fcfb7f6"
-    ms.service="virtual-machines-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-linux"
-    ms.workload="infrastructure"
-    ms.date="11/21/2016"
-    wacn.date="12/20/2016"
-    ms.author="nepeters" />  
-
+ms.assetid: 8fcfea79-f017-4658-8c51-74242fcfb7f6
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
+ms.date: 11/21/2016
+wacn.date: 12/20/2016
+ms.author: nepeters
+---
 
 # Azure Resource Manager 模板的可用性和缩放
 可用性和缩放是指满足特定需求而要达到的运行时间与能力。如果应用程序必须在 99.9% 的时间保持运行状态，则就需要一个允许多个并发计算资源的体系结构。例如，具有较高程度可用性的配置不会使用单个网站，而是使用同一站点的多个实例，这些实例采用均衡技术。在此配置中，可以关闭一个应用程序实例进行维护，剩余的实例继续正常运行。另一方面，缩放是指应用程序为需求提供服务的能力。使用负载均衡的应用程序时，在池中添加或删除实例，即可让应用程序根据需求缩放。
@@ -58,8 +57,7 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 
 ![可用性集](./media/virtual-machines-linux-dotnet-core/aset.png)  
 
-
-有关可用性集的深入信息，请参阅 [Manage availability of virtual machines](/documentation/articles/virtual-machines-linux-manage-availability/)（管理虚拟机的可用性）。
+有关可用性集的深入信息，请参阅 [Manage availability of virtual machines](./virtual-machines-linux-manage-availability.md)（管理虚拟机的可用性）。
 
 ## 网络负载均衡器
 可用性集提供应用程序容错能力，而负载均衡器可让单个网络地址上有多个应用程序实例可供使用。多个应用程序实例可以托管在多个虚拟机上，每个虚拟机都连接到负载均衡器。访问应用程序时，负载均衡器将传入请求路由到每个附加的成员。可以通过使用 Visual Studio 中的“添加新资源向导”或者在 Azure Resource Manager 模板中插入格式正确的 JSON 资源，来添加负载均衡器。
@@ -96,7 +94,6 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 
 ![网络负载均衡器](./media/virtual-machines-linux-dotnet-core/nlb.png)  
 
-
 ## 负载均衡器规则
 使用负载均衡器时，可配置规则来控制如何在各个目标资源之间均衡流量。在示例音乐应用商店应用程序中，流量将进入公共 IP 地址的端口 80，然后分发到所有虚拟机的端口 80。
 
@@ -128,7 +125,6 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 
 ![网络负载均衡器规则](./media/virtual-machines-linux-dotnet-core/lbrule.png)  
 
-
 ## 负载均衡器探测
 负载均衡器还需要监视每个虚拟机，以便只将请求提供给正在运行的系统。这种监视通过不断探测预定义的端口来进行。音乐应用商店部署配置为探测所有包含的虚拟机上的端口 80。
 
@@ -149,7 +145,6 @@ Azure 门户预览中显示的可用性集。下面说明了每个虚拟机及�
 Azure 门户预览中显示的负载均衡器探测。
 
 ![网络负载均衡器探测](./media/virtual-machines-linux-dotnet-core/lbprobe.png)  
-
 
 ## 入站 NAT 规则
 使用负载均衡器时，需要部署规则来提供对每个虚拟机的非负载均衡访问。例如，与每个虚拟机创建 SSH 连接时，不应该对此流量进行负载均衡，而应配置一个预先确定的路径。预先确定的路径是使用入站 NAT 规则资源配置的。使用此资源可将入站通信映射到各个虚拟机。
@@ -188,8 +183,7 @@ Azure 门户预览中显示的一个示例入站 NAT 规则。在部署中为每
 
 ![入站 NAT 规则](./media/virtual-machines-linux-dotnet-core/natrule.png)  
 
-
-有关 Azure 网络负载均衡器的深入信息，请参阅 [Azure 基础结构服务的负载均衡](/documentation/articles/virtual-machines-linux-load-balance/)。
+有关 Azure 网络负载均衡器的深入信息，请参阅 [Azure 基础结构服务的负载均衡](./virtual-machines-linux-load-balance.md)。
 
 ## 部署多个 VM
 最后，为使可用性集或负载均衡器有效运行，需要部署多个虚拟机。可以使用 Azure Resource Manager 模板复制函数来部署多个 VM。使用复制函数时，不需要定义有限数量的虚拟机，而可以在部署时动态提供此值。复制函数使用要创建的实例数目，可以部署适当数目的虚拟机和关联的资源。
@@ -240,11 +234,11 @@ Azure 门户预览中显示的一个示例入站 NAT 规则。在部署中为每
 
 `copyIndex` 函数在音乐应用商店示例模板中多次使用。利用 `copyIndex` 的资源和函数包括特定于单个虚拟机实例的任何对象，例如网络接口、负载均衡器规则以及依赖于函数的任何对象。
 
-有关复制函数的详细信息，请参阅[在 Azure Resource Manager 中创建多个资源实例](/documentation/articles/resource-group-create-multiple/)。
+有关复制函数的详细信息，请参阅[在 Azure Resource Manager 中创建多个资源实例](../azure-resource-manager/resource-group-create-multiple.md)。
 
 ## 后续步骤
 <hr>
 
-[步骤 4 - 使用 Azure Resource Manager 模板部署应用程序](/documentation/articles/virtual-machines-linux-dotnet-core-5-app-deployment/)
+[步骤 4 - 使用 Azure Resource Manager 模板部署应用程序](./virtual-machines-linux-dotnet-core-5-app-deployment.md)
 
 <!---HONumber=Mooncake_1212_2016-->

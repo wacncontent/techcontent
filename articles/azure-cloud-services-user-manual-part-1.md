@@ -1,24 +1,20 @@
-<properties
-	pageTitle="Azure 云服务操作手册 - 第一部分 | Azure"
-	description="Azure 云服务操作手册 - 第一部分 | Azure"
-	services=""
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure 云服务操作手册 - 第一部分 | Azure
+description: Azure 云服务操作手册 - 第一部分 | Azure
+services: 
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="cloud-services"
-	ms.date=""
-	wacn.date="09/21/2016"/>
-
-
+ms.service: cloud-services
+ms.date: 
+wacn.date: 09/21/2016
+---
 
 #Azure 云服务操作手册
 
-[Azure 云服务操作手册 - 第二部分](/documentation/articles/azure-cloud-services-user-manual-part-2/)
-
-
+[Azure 云服务操作手册 - 第二部分](./azure-cloud-services-user-manual-part-2.md)
 
 ##<a id="azure-cloud-services-related-content"></a>1. Azure 云服务相关服务  
 
@@ -63,8 +59,6 @@ Azure 带宽虽然是共享带宽，其价格还是非常具有竞争优势的�
 * 静态的照片文件保存到 Azure Block Blob。
 
 **通过将静态内容请求发送到 Azure Storage，将动态内容的请求发送到 Azure 云主机，就可以大大减少云主机独享带宽的的压力。**
-
-  
 
 ###<a id="azure-cloud-services-what-is"></a>1.2 什么是 Azure 云服务  
 
@@ -145,66 +139,66 @@ Azure 带宽虽然是共享带宽，其价格还是非常具有竞争优势的�
 以上三种计算服务，优势和使用场景如下表：  
 
 <table width="100%" border="1" cellspacing="0" cellpadding="0">
-	<tr>
-		<td>计算服务</td>
-		<td>优势、劣势和使用场景</td>
-	</tr>
-	<tr>
-		<td>Azure 虚拟机</td>
-		<td>
-			<b>优势：</b>
-			<p>1. 同时支持 Windows 和 Linux 虚拟机</p>
-			<p>2. 支持托管机房 Hyper-V VHD 迁移到云端</p>
-			<p>3. 支持虚拟网络，将企业内网与云端网络连接，实现混合云</p>
-			<p>4. 支持高级存储 (SSD,固态硬盘)</p>
-			<p>5. 单个虚拟机最大计算资源 16 Core / 112 GB</p><br />
-			<b>劣势：</b>
-			<p>1. 需要 IT 运维人员，管理操作系统</p>
-			<p>2. 使用成本相对其他计算服务来说，比较昂贵</p><br />
-			<b>使用场景：</b>
-			<p>1. 适合传统应用的迁移</p>
-			<p>2. 需要使用 Linux 操作系统的应用部署</p>
-			<p>3. 将多个应用程序部署在同一台 VM 上，比如 SQL Server, MySQL, MongoDB, SharePoint</p>
-			<p>4. 企业内网+云端的混合云部署</p>
-		</td>
-	</tr>
-	<tr>
-		<td>Azure Web 应用</td>
-		<td>
-			<b>优势：</b>
-			<p>1. 在 Azure 上构建高度可扩展的 Web 站点</p>
-			<p>2. 通过 FTP, Git 或者 TFS 快速部署</p><br />
-			<b>劣势：</b>
-			<p>1. 不支持管理操作系统</p>
-			<p>2. 单个节点最大计算资源 4 Core / 7 GB</p>
-			<p>3. 横向扩展最多 10 个节点负载均衡</p>
-			<p>4. 国内由世纪互联运维的 Azure China，暂时不支持将 Web 应用加入到Azure 虚拟机虚拟网络里</p>
-			<br />
-			<b>使用场景：</b>
-			<p>1. 新应用的开发部署</p>
-			<p>2. 持续开发。直接从源代码库使用 Git 或者 Team Foundation 进行部署</p>
-		</td>
-	</tr>
-	<tr>
-		<td>云服务</td>
-		<td>
-			<b>优势：</b>
-			<p>1. 利用丰富的 PaaS 环境，创建高度可用的，可扩展的应用程序和服务。支持高级的多层架构，自动部署和弹性计算</p>
-			<p>2. 使用 Web Role 和 Worker Role，Web Role 可以响应前端的显示，而将复杂的业务放在后端进行处理</p>
-			<p>3. 支持虚拟网络，将企业内网与云端网络连接，实现混合云</p>
-			<p>4. 相比 Web 应用，可以使用 Startup Task 在 PaaS VM 注册第三方组件、安装外部软件</p>
-			<p>5. 单个计算节点，最大计算资源 16 Core / 112 GB</p>
-			<br />
-			<b>劣势：</b>
-			<p>1. 不支持管理操作系统</p>
-			<p>2. 非持久化虚拟机</p>
-			<br />
-			<b>使用场景：</b>
-			<p>1. 新应用的开发部署</p>
-			<p>2. 企业内网+云端的混合云部署</p>
-			<p>3. 多层的应用程序，每层都可以自我扩展。使用 Web Role 和 Worker Role，Web Role 可以响应前端的显示，而将复杂的业务放在后端进行处理。</p>
-		</td>
-	</tr>
+    <tr>
+        <td>计算服务</td>
+        <td>优势、劣势和使用场景</td>
+    </tr>
+    <tr>
+        <td>Azure 虚拟机</td>
+        <td>
+            <b>优势：</b>
+            <p>1. 同时支持 Windows 和 Linux 虚拟机</p>
+            <p>2. 支持托管机房 Hyper-V VHD 迁移到云端</p>
+            <p>3. 支持虚拟网络，将企业内网与云端网络连接，实现混合云</p>
+            <p>4. 支持高级存储 (SSD,固态硬盘)</p>
+            <p>5. 单个虚拟机最大计算资源 16 Core / 112 GB</p><br />
+            <b>劣势：</b>
+            <p>1. 需要 IT 运维人员，管理操作系统</p>
+            <p>2. 使用成本相对其他计算服务来说，比较昂贵</p><br />
+            <b>使用场景：</b>
+            <p>1. 适合传统应用的迁移</p>
+            <p>2. 需要使用 Linux 操作系统的应用部署</p>
+            <p>3. 将多个应用程序部署在同一台 VM 上，比如 SQL Server, MySQL, MongoDB, SharePoint</p>
+            <p>4. 企业内网+云端的混合云部署</p>
+        </td>
+    </tr>
+    <tr>
+        <td>Azure Web 应用</td>
+        <td>
+            <b>优势：</b>
+            <p>1. 在 Azure 上构建高度可扩展的 Web 站点</p>
+            <p>2. 通过 FTP, Git 或者 TFS 快速部署</p><br />
+            <b>劣势：</b>
+            <p>1. 不支持管理操作系统</p>
+            <p>2. 单个节点最大计算资源 4 Core / 7 GB</p>
+            <p>3. 横向扩展最多 10 个节点负载均衡</p>
+            <p>4. 国内由世纪互联运维的 Azure China，暂时不支持将 Web 应用加入到Azure 虚拟机虚拟网络里</p>
+            <br />
+            <b>使用场景：</b>
+            <p>1. 新应用的开发部署</p>
+            <p>2. 持续开发。直接从源代码库使用 Git 或者 Team Foundation 进行部署</p>
+        </td>
+    </tr>
+    <tr>
+        <td>云服务</td>
+        <td>
+            <b>优势：</b>
+            <p>1. 利用丰富的 PaaS 环境，创建高度可用的，可扩展的应用程序和服务。支持高级的多层架构，自动部署和弹性计算</p>
+            <p>2. 使用 Web Role 和 Worker Role，Web Role 可以响应前端的显示，而将复杂的业务放在后端进行处理</p>
+            <p>3. 支持虚拟网络，将企业内网与云端网络连接，实现混合云</p>
+            <p>4. 相比 Web 应用，可以使用 Startup Task 在 PaaS VM 注册第三方组件、安装外部软件</p>
+            <p>5. 单个计算节点，最大计算资源 16 Core / 112 GB</p>
+            <br />
+            <b>劣势：</b>
+            <p>1. 不支持管理操作系统</p>
+            <p>2. 非持久化虚拟机</p>
+            <br />
+            <b>使用场景：</b>
+            <p>1. 新应用的开发部署</p>
+            <p>2. 企业内网+云端的混合云部署</p>
+            <p>3. 多层的应用程序，每层都可以自我扩展。使用 Web Role 和 Worker Role，Web Role 可以响应前端的显示，而将复杂的业务放在后端进行处理。</p>
+        </td>
+    </tr>
 </table>
 
 ###<a id="azure-cloud-service-supported-languages"></a>1.5 Azure 云服务支持的开发语言  
@@ -232,51 +226,51 @@ Azure 云服务单个实例，分为 A 系列和 D 系列：
 A系列计算节点的类型如下：  
 
 <table width="100%" border="1" cellspacing="0" cellpadding="0">
-	<tr>
-		<td>虚拟机类型</td>
-		<td>CPU</td>
-		<td>内存</td>
-	</tr>
-	<tr>
-		<td>A0</td>
-		<td>共享</td>
-		<td>768 MB</td>
-	</tr>
-	<tr>
-		<td>A1</td>
-		<td>1</td>
-		<td>1.75 GB</td>
-	</tr>
-	<tr>
-		<td>A2</td>
-		<td>2</td>
-		<td>3.5 GB</td>
-	</tr>
-	<tr>
-		<td>A3</td>
-		<td>4</td>
-		<td>7 GB</td>
-	</tr>
-	<tr>
-		<td>A4</td>
-		<td>8</td>
-		<td>14 GB</td>
-	</tr>
-	<tr>
-		<td>A5</td>
-		<td>2</td>
-		<td>14 GB</td>
-	</tr>
-	<tr>
-		<td>A6</td>
-		<td>4</td>
-		<td>28 GB</td>
-	</tr>
-	<tr>
-		<td>A7</td>
-		<td>8</td>
-		<td>56 GB</td>
-	</tr>
+    <tr>
+        <td>虚拟机类型</td>
+        <td>CPU</td>
+        <td>内存</td>
+    </tr>
+    <tr>
+        <td>A0</td>
+        <td>共享</td>
+        <td>768 MB</td>
+    </tr>
+    <tr>
+        <td>A1</td>
+        <td>1</td>
+        <td>1.75 GB</td>
+    </tr>
+    <tr>
+        <td>A2</td>
+        <td>2</td>
+        <td>3.5 GB</td>
+    </tr>
+    <tr>
+        <td>A3</td>
+        <td>4</td>
+        <td>7 GB</td>
+    </tr>
+    <tr>
+        <td>A4</td>
+        <td>8</td>
+        <td>14 GB</td>
+    </tr>
+    <tr>
+        <td>A5</td>
+        <td>2</td>
+        <td>14 GB</td>
+    </tr>
+    <tr>
+        <td>A6</td>
+        <td>4</td>
+        <td>28 GB</td>
+    </tr>
+    <tr>
+        <td>A7</td>
+        <td>8</td>
+        <td>56 GB</td>
+    </tr>
 </table>
 
 除了 A0 的虚拟机类型，它的 CPU 是和别的用户共享的。其他类型的虚拟机，比如 A1-A7，它的 CPU 是独占的，不是和别的用户共享的。 
@@ -286,51 +280,51 @@ A系列计算节点的类型如下：
 D系列虚拟机的类型如下：  
 
 <table width="100%" border="1" cellspacing="0" cellpadding="0">
-	<tr>
-		<td>虚拟机类型</td>
-		<td>CPU</td>
-		<td>内存</td>
-	</tr>
-	<tr>
-		<td>D1</td>
-		<td>1</td>
-		<td>3.5 GB</td>
-	</tr>
-	<tr>
-		<td>D2</td>
-		<td>2</td>
-		<td>7 GB</td>
-	</tr>
-	<tr>
-		<td>D3</td>
-		<td>4</td>
-		<td>14 GB</td>
-	</tr>
-	<tr>
-		<td>D4</td>
-		<td>8</td>
-		<td>28 GB</td>
-	</tr>
-	<tr>
-		<td>D11</td>
-		<td>2</td>
-		<td>14 GB</td>
-	</tr>
-	<tr>
-		<td>D12</td>
-		<td>4</td>
-		<td>28 GB</td>
-	</tr>
-	<tr>
-		<td>D13</td>
-		<td>8</td>
-		<td>56 GB</td>
-	</tr>
-	<tr>
-		<td>D14</td>
-		<td>16</td>
-		<td>112 GB</td>
-	</tr>
+    <tr>
+        <td>虚拟机类型</td>
+        <td>CPU</td>
+        <td>内存</td>
+    </tr>
+    <tr>
+        <td>D1</td>
+        <td>1</td>
+        <td>3.5 GB</td>
+    </tr>
+    <tr>
+        <td>D2</td>
+        <td>2</td>
+        <td>7 GB</td>
+    </tr>
+    <tr>
+        <td>D3</td>
+        <td>4</td>
+        <td>14 GB</td>
+    </tr>
+    <tr>
+        <td>D4</td>
+        <td>8</td>
+        <td>28 GB</td>
+    </tr>
+    <tr>
+        <td>D11</td>
+        <td>2</td>
+        <td>14 GB</td>
+    </tr>
+    <tr>
+        <td>D12</td>
+        <td>4</td>
+        <td>28 GB</td>
+    </tr>
+    <tr>
+        <td>D13</td>
+        <td>8</td>
+        <td>56 GB</td>
+    </tr>
+    <tr>
+        <td>D14</td>
+        <td>16</td>
+        <td>112 GB</td>
+    </tr>
 </table>
 
 相比 A 系列的 Azure 虚拟机，D 系列的优势在于：  
@@ -369,7 +363,6 @@ D系列虚拟机的类型如下：
 
    通过将静态内容请求发送到 Azure 存储，将动态内容请求发送到 Azure 云主机，可以大大减少云主机独享带宽的压力。
  
-
 ###<a id="azure-cloud-service-cost-analysis"></a>1.9 Azure 云服务成本分析
 
 Azure 云服务按照分钟计费，计费的单价为每小时。  
@@ -412,12 +405,10 @@ Azure 云服务运行时，会收取计算费用；关闭后，继续收取计�
 
 (6) 如果需要保存持久化的文件，一定要使用 Azure 存储！  
 
-
 <!--image reference-->
 [1]: ./media/azure-cloud-services-user-manual-part-1/1.png
 [2]: ./media/azure-cloud-services-user-manual-part-1/2.png
 [3]: ./media/azure-cloud-services-user-manual-part-1/3.png
 [4]: ./media/azure-cloud-services-user-manual-part-1/4.png
 [5]: ./media/azure-cloud-services-user-manual-part-1/5.png
-
 

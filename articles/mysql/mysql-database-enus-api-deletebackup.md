@@ -1,10 +1,27 @@
-<properties linkid="" urlDisplayName="" pageTitle="Use Windows PowerShell to manage MySQL Database on Azure – Azure cloud" metakeywords="Azure Cloud, technical documentation, documents and resources, MySQL, database, beginner’s guide, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, API, Azure MySQL Service, Azure RDS" description="This article explains how to use the API to carry out more operations for MySQL Database on Azure, including query, create, modify and delete operations." metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="sofia" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: Use Windows PowerShell to manage MySQL Database on Azure – Azure cloud
+metakeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, beginner’s guide, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, API, Azure MySQL Service, Azure RDS
+description: This article explains how to use the API to carry out more operations for MySQL Database on Azure, including query, create, modify and delete operations.
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: sofia
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql_en" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="en" />
+ms.service: mysql_en
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: en
+---
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - 中文版(/documentation/articles/mysql-database-api-deletebackup/)
-- [English](/documentation/articles/mysql-database-enus-api-deletebackup/)
+- [English](./mysql-database-enus-api-deletebackup.md)
 
 #Delete backup files
 
@@ -18,7 +35,7 @@
   <tr>
     <td>DELETE   </td>
     <td>https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.MySql/servers/{server-name}/backups/{backup-file-name}?api-version=2015-09-01
-	</td>
+    </td>
   </tr>
 </table>
 

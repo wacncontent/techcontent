@@ -1,16 +1,16 @@
-<properties
-	pageTitle="Azure PowerShell 1.0 预览版资源管理器更改 | Azure"
-	description="介绍针对 Azure PowerShell 1.0 预览版设计的资源管理器 cmdlet 所发生的更改。"
-	services="azure-resource-manager"
-	documentationCenter="na"
-	authors="ravbhatnagar"
-	manager="ryjones"
-	editor=""/>
+---
+title: Azure PowerShell 1.0 预览版资源管理器更改 | Azure
+description: 介绍针对 Azure PowerShell 1.0 预览版设计的资源管理器 cmdlet 所发生的更改。
+services: azure-resource-manager
+documentationCenter: na
+authors: ravbhatnagar
+manager: ryjones
+editor: 
 
-<tags
-	ms.service="azure-resource-manager"
-	ms.date="10/09/2015"
-	wacn.date="11/12/2015"/>
+ms.service: azure-resource-manager
+ms.date: 10/09/2015
+wacn.date: 11/12/2015
+---
 
 #对 Azure 资源管理器管理 PowerShell cmdlet 的更改
 

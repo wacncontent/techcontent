@@ -1,24 +1,21 @@
-<properties
-   pageTitle="在本地监视和诊断使用 Azure Service Fabric 编写的服务 | Azure"
-   description="了解如何监视和诊断本地开发计算机上使用 Microsoft Azure Service Fabric 编写的服务。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="ms-toddabel"
-   manager="timlt"
-   editor=""/>  
+---
+title: 在本地监视和诊断使用 Azure Service Fabric 编写的服务 | Azure
+description: 了解如何监视和诊断本地开发计算机上使用 Microsoft Azure Service Fabric 编写的服务。
+services: service-fabric
+documentationCenter: .net
+authors: ms-toddabel
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/06/2016"
-   wacn.date="01/04/2017"
-   ms.author="toddabel"/>  
-
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/06/2016
+wacn.date: 01/04/2017
+ms.author: toddabel
+---
 
 # 在本地计算机开发安装过程中监视和诊断服务
 监视、检测、诊断和故障排除允许服务继续运行，同时对用户体验造成最小中断。虽然监视和诊断在实际部署的生产环境中相当重要，但是效力将取决于在服务开发过程中采用类似的模型，以便在你移到实际安装时能确保其正常工作。Service Fabric 使服务开发人员能够轻松实现可以跨单个计算机本地开发安装和实际生产群集安装无缝工作的诊断。
@@ -31,10 +28,9 @@
 * **Service Fabric 系统代码也使用 ETW 进行内部跟踪。** 这可让你查看与 Service Fabric 系统跟踪交错的应用程序跟踪。同时帮助你更轻松地了解基础系统中应用程序代码与事件之间的序列和相互关系。
 * **Service Fabric Visual Studio 工具中有内置支持，可以查看 ETW 事件。**
 
-
 ##<a name="view-service-fabric-system-events-in-visual-studio"></a> 在 Visual Studio 中查看 Service Fabric 系统事件
 
-Service Fabric 发出 ETW 事件以帮助应用程序开发人员了解平台中发生的情况。如果你还没有这么做，请继续遵循[在 Visual Studio 中创建第一个应用程序](/documentation/articles/service-fabric-create-your-first-application-in-visual-studio/)中的步骤。此信息将帮助你启动应用程序，并运行可显示跟踪消息的诊断事件查看器。
+Service Fabric 发出 ETW 事件以帮助应用程序开发人员了解平台中发生的情况。如果你还没有这么做，请继续遵循[在 Visual Studio 中创建第一个应用程序](./service-fabric-create-your-first-application-in-visual-studio.md)中的步骤。此信息将帮助你启动应用程序，并运行可显示跟踪消息的诊断事件查看器。
 
 1. 如果诊断事件窗口未自动显示，请在 Visual Studio 中转到“视图”选项卡上，选择“其他窗口”，然后选择“诊断事件查看器”。
 
@@ -60,7 +56,7 @@ Service Fabric Visual Studio 项目模板包含示例代码。该代码演示如
 
 ## 后续步骤
 你添加到上述应用程序用于进行本地诊断的相同跟踪代码将与工具一起工作，在 Azure 群集上运行应用程序时，你可以使用这些工具查看这些事件。请查看以下文章，其中介绍了不同的工具选项，以及如何设置这些选项。
-* [如何使用 Azure 诊断收集日志](/documentation/articles/service-fabric-diagnostics-how-to-setup-wad/)
-* [Using ElasticSearch as a Service Fabric application trace store（将 ElasticSearch 用作 Service Fabric 应用程序跟踪存储）](/documentation/articles/service-fabric-diagnostic-how-to-use-elasticsearch/)
+* [如何使用 Azure 诊断收集日志](./service-fabric-diagnostics-how-to-setup-wad.md)
+* [Using ElasticSearch as a Service Fabric application trace store（将 ElasticSearch 用作 Service Fabric 应用程序跟踪存储）](./service-fabric-diagnostic-how-to-use-elasticsearch.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

@@ -1,30 +1,31 @@
-<properties
-    pageTitle="Azure PowerShell 与资源管理器 | Azure"
-    description="介绍如何使用 Azure PowerShell 将作为资源组的多个资源部署到 Azure。"
-    services="azure-resource-manager"
-    documentationcenter=""
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="b33b7303-3330-4af8-8329-c80ac7e9bc7f"
-    ms.service="azure-resource-manager"
-    ms.workload="multiple"
-    ms.tgt_pltfrm="powershell"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/05/2016"
-    wacn.date="01/06/2017"
-    ms.author="tomfitz" />  
+---
+title: Azure PowerShell 与资源管理器 | Azure
+description: 介绍如何使用 Azure PowerShell 将作为资源组的多个资源部署到 Azure。
+services: azure-resource-manager
+documentationcenter: 
+author: tfitzmac
+manager: timlt
+editor: tysonn
+
+ms.assetid: b33b7303-3330-4af8-8329-c80ac7e9bc7f
+ms.service: azure-resource-manager
+ms.workload: multiple
+ms.tgt_pltfrm: powershell
+ms.devlang: na
+ms.topic: article
+ms.date: 12/05/2016
+wacn.date: 01/06/2017
+ms.author: tomfitz
+---
 
 # 使用 PowerShell 和 Resource Manager 管理 Azure 资源
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/resource-group-portal/)
-- [Azure CLI](/documentation/articles/xplat-cli-azure-resource-manager/)
-- [Azure PowerShell](/documentation/articles/powershell-azure-resource-manager/)
-- [REST API](/documentation/articles/resource-manager-rest-api/)
+> [!div class="op_single_selector"]
+- [门户](./resource-group-portal.md)
+- [Azure CLI](./xplat-cli-azure-resource-manager.md)
+- [Azure PowerShell](./powershell-azure-resource-manager.md)
+- [REST API](./resource-manager-rest-api.md)
 
-本主题介绍如何使用 Azure PowerShell 和 Azure Resource Manager 管理解决方案。如果不熟悉 Resource Manager，请参阅 [Resource Manager 概述](/documentation/articles/resource-group-overview/)。本主题重点介绍管理任务。用户将能够：
+本主题介绍如何使用 Azure PowerShell 和 Azure Resource Manager 管理解决方案。如果不熟悉 Resource Manager，请参阅 [Resource Manager 概述](./resource-group-overview.md)。本主题重点介绍管理任务。用户将能够：
 
 1. 创建资源组
 2. 将资源添加到资源组
@@ -115,7 +116,7 @@
 ## 将资源添加到资源组
 若要将资源添加到资源组中，可使用 **New-AzureRmResource** cmdlet 或特定于要创建的资源类型的 cmdlet（例如 **New-AzureRmStorageAccount**）。使用特定于资源类型的 cmdlet 可能更轻松，因为它包含新资源组所需属性的参数。若要使用 **New-AzureRmResource**，必须了解将不会提示而设置所有属性。
 
-但是，通过 cmdlet 添加资源可能导致将来出现混乱，因为新的资源不存在于 Resource Manager 模板中。Azure 建议在 Resource Manager 模板中定义 Azure 解决方案的基础结构。通过模板，可以可靠地重复部署解决方案。本主题不演示如何将 Resource Manager 模板部署到订阅。有关详细信息，请参阅[使用 Resource Manager 模板和 Azure PowerShell 部署资源](/documentation/articles/resource-group-template-deploy/)。本主题使用 PowerShell cmdlet 创建存储帐户，但稍后从资源组生成模板。
+但是，通过 cmdlet 添加资源可能导致将来出现混乱，因为新的资源不存在于 Resource Manager 模板中。Azure 建议在 Resource Manager 模板中定义 Azure 解决方案的基础结构。通过模板，可以可靠地重复部署解决方案。本主题不演示如何将 Resource Manager 模板部署到订阅。有关详细信息，请参阅[使用 Resource Manager 模板和 Azure PowerShell 部署资源](./resource-group-template-deploy.md)。本主题使用 PowerShell cmdlet 创建存储帐户，但稍后从资源组生成模板。
 
 以下 cmdlet 可创建存储帐户。请勿使用示例所示的名称，而是为存储帐户提供唯一名称。此名称必须为 3 到 24 个字符，只能使用数字和小写字母。如果使用示例所示名称，将收到错误，因为该名称被使用。
 
@@ -173,7 +174,7 @@
 
     Remove-AzureRmResourceLock -LockName LockStorage -ResourceName mystoragename -ResourceType Microsoft.Storage/storageAccounts -ResourceGroupName TestRG1
 
-有关设置锁的详细信息，请参阅[使用 Azure Resource Manager 锁定资源](/documentation/articles/resource-group-lock-resources/)。
+有关设置锁的详细信息，请参阅[使用 Azure Resource Manager 锁定资源](./resource-group-lock-resources.md)。
 
 ## 导出 Resource Manager 模板
 对于现有的资源组（通过 PowerShell 或门户等其他方法部署），可以查看资源组的 Resource Manager 模板。导出模板有两个好处：
@@ -181,7 +182,7 @@
 1. 由于模板中定义了所有基础结构，因此将来可以轻松地自动完成解决方案的部署。
 2. 可以查看代表解决方案的 JavaScript 对象表示法 (JSON)，以此熟悉模板语法。
 
-> [AZURE.NOTE]
+> [!NOTE]
 导出模板功能处于预览状态，并非所有的资源类型目前都支持导出模板。尝试导出模板时，你可能会看到一个错误，指出未导出某些资源。如果需要，你可以在下载模板之后，在模板中手动定义这些资源。
 >
 >
@@ -190,7 +191,7 @@
 
     Export-AzureRmResourceGroup -ResourceGroupName TestRG1 -Path c:\Azure\Templates\Downloads\TestRG1.json
 
-可使用许多选项和方案导出 Resource Manager 模板。有关详细信息，请参阅[从现有资源导出 Azure Resource Manager 模板](/documentation/articles/resource-manager-export-template/)。
+可使用许多选项和方案导出 Resource Manager 模板。有关详细信息，请参阅[从现有资源导出 Azure Resource Manager 模板](./resource-manager-export-template.md)。
 
 ## 删除资源或资源组
 可以删除资源或资源组。删除资源组时，还会删除该资源组中的所有资源。
@@ -207,17 +208,17 @@
 
 ## 使用 Azure 自动化运行 Resource Manager 脚本
 
-本主题演示如何通过 Azure PowerShell 对资源执行基本操作。如果使用更高级的管理方案，通常需要创建脚本，然后按需或按计划重复使用该脚本。通过 [Azure 自动化](/documentation/articles/automation-intro/)，可自动执行用于管理 Azure 解决方案的常用脚本。
+本主题演示如何通过 Azure PowerShell 对资源执行基本操作。如果使用更高级的管理方案，通常需要创建脚本，然后按需或按计划重复使用该脚本。通过 [Azure 自动化](../automation/automation-intro.md)，可自动执行用于管理 Azure 解决方案的常用脚本。
 
 以下主题演示如何使用 Azure 自动化、Resource Manager 和 PowerShell 来有效执行管理任务：
 
-- 有关创建 Runbook 的信息，请参阅[我的第一个 Runbook](/documentation/articles/automation-first-runbook-textual/)。
-- 有关使用脚本库的信息，请参阅 [Azure 自动化的 Runbook 和模块库](/documentation/articles/automation-runbook-gallery/)。
+- 有关创建 Runbook 的信息，请参阅[我的第一个 Runbook](../automation/automation-first-runbook-textual.md)。
+- 有关使用脚本库的信息，请参阅 [Azure 自动化的 Runbook 和模块库](../automation/automation-runbook-gallery.md)。
 
 ## 后续步骤
-* 若要了解如何创建资源管理器模板，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。
-* 若要了解部署模板，请参阅[使用 Azure 资源管理器模板部署应用程序](/documentation/articles/resource-group-template-deploy/)。
-* 可以将现有资源移动到新的资源组。有关示例，请参阅[将资源移动到新的资源组或订阅中](/documentation/articles/resource-group-move-resources/)。
-* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](/documentation/articles/resource-manager-subscription-governance/)。
+* 若要了解如何创建资源管理器模板，请参阅[创作 Azure 资源管理器模板](./resource-group-authoring-templates.md)。
+* 若要了解部署模板，请参阅[使用 Azure 资源管理器模板部署应用程序](./resource-group-template-deploy.md)。
+* 可以将现有资源移动到新的资源组。有关示例，请参阅[将资源移动到新的资源组或订阅中](./resource-group-move-resources.md)。
+* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](./resource-manager-subscription-governance.md)。
 
 <!---HONumber=Mooncake_0103_2017-->

@@ -1,30 +1,30 @@
 <!-- ARM: tested -->
 
-<properties
-   pageTitle="对 Linux VM 扩展故障进行故障排除 | Azure"
-   description="了解如何对 Azure Linux VM 扩展故障进行故障排除"
-   services="virtual-machines-linux"
-   documentationCenter=""
-   authors="kundanap"
-   manager="timlt"
-   editor=""
-   tags="top-support-issue,azure-resource-manager"/>
+---
+title: 对 Linux VM 扩展故障进行故障排除 | Azure
+description: 了解如何对 Azure Linux VM 扩展故障进行故障排除
+services: virtual-machines-linux
+documentationCenter: 
+authors: kundanap
+manager: timlt
+editor: 
+tags: top-support-issue,azure-resource-manager
 
-<tags
-   ms.service="virtual-machines-linux"
-   ms.devlang="na"
-   ms.topic="support-article"
-   ms.tgt_pltfrm="vm-linux"
-   ms.workload="infrastructure-services"
-   ms.date="03/29/2016"
-   wacn.date="06/29/2016"
-   ms.author="kundanap"/>
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: support-article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure-services
+ms.date: 03/29/2016
+wacn.date: 06/29/2016
+ms.author: kundanap
+---
 
 # 对 Azure Linux VM 扩展故障进行故障排除。
 
-> [AZURE.NOTE]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](/documentation/articles/resource-manager-deployment-model/)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
+> [!NOTE]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
 
-[AZURE.INCLUDE [virtual-machines-common-extensions-troubleshoot](../../includes/virtual-machines-common-extensions-troubleshoot.md)]
+[!INCLUDE [virtual-machines-common-extensions-troubleshoot](../../includes/virtual-machines-common-extensions-troubleshoot.md)]
 
 ## 查看扩展状态：
 Azure 资源管理器模板可从 Azure Powershell 或 Azure CLI 执行。一旦执行该模板，就可以从 Azure 资源管理器或命令行工具查看扩展状态。下面是一些示例：

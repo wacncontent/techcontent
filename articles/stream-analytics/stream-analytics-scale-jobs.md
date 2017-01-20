@@ -1,24 +1,22 @@
-<properties
-	pageTitle="扩展流分析作业以增加吞吐量 | Azure"
-	description="了解如何通过配置输入分区、细化查询定义和设置作业流式处理单位来扩展流分析作业。"
-	keywords="数据流式处理, 流数据处理, 优化分析"
-	services="stream-analytics"
-	documentationCenter=""
-	authors="jeffstokes72"
-	manager="jhubbard"
-	editor="cgronlun"/>  
+---
+title: 扩展流分析作业以增加吞吐量 | Azure
+description: 了解如何通过配置输入分区、细化查询定义和设置作业流式处理单位来扩展流分析作业。
+keywords: 数据流式处理, 流数据处理, 优化分析
+services: stream-analytics
+documentationCenter: 
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="stream-analytics"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="data-services"
-	ms.date="09/26/2016"
-	wacn.date="01/04/2017"
-	ms.author="jeffstok"/>  
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 09/26/2016
+wacn.date: 01/04/2017
+ms.author: jeffstok
+---
 
 # 扩展 Azure 流分析作业，以增加流数据处理吞吐量
 
@@ -27,12 +25,12 @@
 ## 流分析作业的组成部分有哪些？
 流分析作业定义包括输入、查询和输出。输入是作业读取数据流的地方，查询是用于转换数据输入流的一种方式，而输出则是作业将作业结果发送到的地方。
 
-若要对数据进行流式处理，作业需要至少一个输入源。可以将数据流输入源存储在 Azure Service Bus 事件中心或 Azure Blob 存储中。有关详细信息，请参阅 [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)和[开始使用 Azure 流分析](/documentation/articles/stream-analytics-get-started/)。
+若要对数据进行流式处理，作业需要至少一个输入源。可以将数据流输入源存储在 Azure Service Bus 事件中心或 Azure Blob 存储中。有关详细信息，请参阅 [Azure 流分析简介](./stream-analytics-introduction.md)和[开始使用 Azure 流分析](./stream-analytics-get-started.md)。
 
 ## 配置流式处理单位
 流式处理单位 (SU) 代表执行 Azure 流分析作业所需的资源和计算能力。在已经对 CPU、内存以及读取和写入速率进行测量的情况下，可以使用 SU 来描述相对的事件处理能力。每个流式处理单位大致相当于 1MB/秒的吞吐量。
 
-应根据输入的分区配置和为作业定义的查询来选择特定作业所需的 SU 数目。使用 Azure 经典管理门户选择作业的流式处理单位数时，最多可以选择定额数。默认情况下，每个 Azure 订阅的定额为最多 50 个流式处理单位，这适用于特定区域的所有分析作业。若要提高订阅的流式处理单位数，请联系 [Microsoft 支持](/support/contact/)。
+应根据输入的分区配置和为作业定义的查询来选择特定作业所需的 SU 数目。使用 Azure 经典管理门户选择作业的流式处理单位数时，最多可以选择定额数。默认情况下，每个 Azure 订阅的定额为最多 50 个流式处理单位，这适用于特定区域的所有分析作业。若要提高订阅的流式处理单位数，请联系 [Microsoft 支持](https://www.azure.cn/support/contact/)。
 
 作业能够使用的流式处理单位数取决于输入的分区配置以及为作业定义的查询。另请注意，必须使用有效的流单位值。有效值以 1、3、6 开始，往上再按 6 递增，如下所示。
 
@@ -47,10 +45,10 @@
 2.	一旦数据按它在输入端上需要的样式进行布局，则我们需要确保你的查询已进行分区。这要求你在所有步骤中使用 **Partition By**。允许采用多个步骤，但它们都必须由相同的密钥进行分区。另一个需要注意的问题是，目前，需要将分区键设置为“PartitionId”才能够进行完全并行作业。
 3.	当前仅事件中心和 Blob 支持已分区的输出。对于事件中心输出，你需要将“PartitionKey”字段配置为“PartitionId”。对于 Blob，你不必执行任何操作。
 4.	另外还要注意，输入分区数必须等于的输出分区数。Blob 输出当前不支持分区，但这也没关系，因为它将继承上游查询的分区方案。将允许完全并行作业的分区值的示例：
-	1.	8 个事件中心输入分区和 8 个事件中心输出分区
-	2.	8 个事件中心输入分区和 Blob 输出
-	3.	8 个 Blob 输入分区和 Blob 输出
-	4.	8 个 Blob 输入分区和 8 个事件中心输出分区
+    1.	8 个事件中心输入分区和 8 个事件中心输出分区
+    2.	8 个事件中心输入分区和 Blob 输出
+    3.	8 个 Blob 输入分区和 Blob 输出
+    4.	8 个 Blob 输入分区和 8 个事件中心输出分区
 
 以下是一些易并行的示例方案。
 
@@ -93,7 +91,6 @@
 
 此查询具有分组键，在这种情况下，相同的密钥需要由同一个查询实例进行处理。我们可以使用与前面的查询相同的策略。查询包含多个步骤。是否每个步骤都包含 ** PartitionId** 的 **Partition By**？ 是的，因此我们没问题。对于输出，我们需要如上文所述，将 **PartitionKey** 设置为 **PartitionId**，我们还可以看到它的分区数与输入的相同。此拓扑是易并行。
 
-
 ## 非易并行的示例方案
 
 ### 分区计数不匹配 ###
@@ -133,25 +130,25 @@ PowerBI 输出当前不支持分区。
 ### 查询中的步骤
 查询可以有一个或多个步骤。每一步都是一个使用 **WITH** 关键字定义的子查询。位于 **WITH** 关键字外的唯一查询也计为一步，例如以下查询中的 **SELECT** 语句：
 
-	WITH Step1 AS (
-		SELECT COUNT(*) AS Count, TollBoothId
-		FROM Input1 Partition By PartitionId
-		GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-	)
+    WITH Step1 AS (
+        SELECT COUNT(*) AS Count, TollBoothId
+        FROM Input1 Partition By PartitionId
+        GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+    )
 
-	SELECT SUM(Count) AS Count, TollBoothId
-	FROM Step1
-	GROUP BY TumblingWindow(minute,3), TollBoothId
+    SELECT SUM(Count) AS Count, TollBoothId
+    FROM Step1
+    GROUP BY TumblingWindow(minute,3), TollBoothId
 
 前面的查询有两步。
 
-> [AZURE.NOTE] 此示例查询将在本文后面部分介绍。
+> [!NOTE] 此示例查询将在本文后面部分介绍。
 
 ### 对步骤进行分区
 
 对步骤进行分区需要下列条件：
 
-- 输入源必须进行分区。有关详细信息，请参阅 [Event Hubs Programming Guide（事件中心编程指南）](/documentation/articles/event-hubs-programming-guide/)。
+- 输入源必须进行分区。有关详细信息，请参阅 [Event Hubs Programming Guide（事件中心编程指南）](../event-hubs/event-hubs-programming-guide.md)。
 - 查询的 **SELECT** 语句必须从进行了分区的输入源读取。
 - 步骤中的查询必须有 **Partition By** 关键字
 
@@ -189,8 +186,6 @@ PowerBI 输出当前不支持分区。
 </td>
 <td>6</td></tr>
 
-
-
 <tr><td>
 <ul>
 <li>数据流输入被分为 3 个分区。</li>
@@ -204,34 +199,33 @@ PowerBI 输出当前不支持分区。
 ### 缩放示例
 以下查询计算三分钟时段内通过收费站（总共三个收费亭）的车辆数。此查询可以扩展到 6 个流式处理单位。
 
-	SELECT COUNT(*) AS Count, TollBoothId
-	FROM Input1
-	GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+    SELECT COUNT(*) AS Count, TollBoothId
+    FROM Input1
+    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
 
 若要对查询使用更多的流式处理单位，必须对数据流输入和查询进行分区。如果将数据流分区设置为 3，则可将以下修改的查询扩展到 18 个流式处理单位：
 
-	SELECT COUNT(*) AS Count, TollBoothId
-	FROM Input1 Partition By PartitionId
-	GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+    SELECT COUNT(*) AS Count, TollBoothId
+    FROM Input1 Partition By PartitionId
+    GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
 
 对查询进行分区后，将在独立的分区组中处理和聚合输入事件。此外，还会为每个组生成输出事件。在数据流输入中，当**“分组方式”**字段不是“分区键”时，进行分区可能会导致某些意外的结果。例如，在前面的示例查询中，**TollBoothId** 字段不是 Input1 的“分区键”。可以将 TollBooth #1 提供的数据分布到多个分区中。
 
 将通过流分析对每个 Input1 分区分开进行处理，并会在相同的翻转窗口中为同一收费亭创建多个有关已通过车辆计数的记录。如果不能更改输入分区键，则可通过添加额外的不分区步骤来解决此问题，例如：
 
-	WITH Step1 AS (
-		SELECT COUNT(*) AS Count, TollBoothId
-		FROM Input1 Partition By PartitionId
-		GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
-	)
+    WITH Step1 AS (
+        SELECT COUNT(*) AS Count, TollBoothId
+        FROM Input1 Partition By PartitionId
+        GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
+    )
 
-	SELECT SUM(Count) AS Count, TollBoothId
-	FROM Step1
-	GROUP BY TumblingWindow(minute, 3), TollBoothId
+    SELECT SUM(Count) AS Count, TollBoothId
+    FROM Step1
+    GROUP BY TumblingWindow(minute, 3), TollBoothId
 
 此查询可以扩展到 24 个流式处理单位。
 
->[AZURE.NOTE] 如果要联接两个流，请确保流是按进行联接的列的分区键分区的，并且两个流中的分区数目是相同的。
-
+>[!NOTE] 如果要联接两个流，请确保流是按进行联接的列的分区键分区的，并且两个流中的分区数目是相同的。
 
 ## 配置流分析作业分区
 
@@ -244,11 +238,9 @@ PowerBI 输出当前不支持分区。
 
 ![Azure 流分析流单位规模][img.stream.analytics.streaming.units.scale]  
 
-
 在 Azure 门户预览中，可以在“设置”下访问缩放设置：
 
 ![Azure 门户预览流分析作业配置][img.stream.analytics.preview.portal.settings.scale]  
-
 
 ## 监视作业性能
 
@@ -256,11 +248,9 @@ PowerBI 输出当前不支持分区。
 
 ![Azure 流分析监视作业][img.stream.analytics.monitor.job]  
 
-
 计算预计的工作负荷吞吐量（以事件数/秒为单位）。如果吞吐量少于预期，则可调整输入分区和查询，并可为作业添加额外的流式处理单位。
 
 ## 基于规模的流分析吞吐量 - Raspberry Pi 方案
-
 
 若要了解在典型方案中流分析作业如何根据多个流式处理单位的处理吞吐量进行伸缩，我们在这里进行了一个试验，将传感器数据（客户端）发送到事件中心并对其进行处理，然后将警报或统计信息作为输出发送到另一数据中心。
 
@@ -271,11 +261,11 @@ PowerBI 输出当前不支持分区。
 查询：“关灯时发送警报”
 
     SELECT AVG(lght),
-	 “LightOff” as AlertText
-	FROM input TIMESTAMP
-	BY devicetime
-	 WHERE
-		lght< 0.05 GROUP BY TumblingWindow(second, 1)
+     “LightOff” as AlertText
+    FROM input TIMESTAMP
+    BY devicetime
+     WHERE
+        lght< 0.05 GROUP BY TumblingWindow(second, 1)
 
 衡量吞吐量：在这种情况下，吞吐量是指由流分析在固定的时间（10 分钟）内处理的输入数据的量。若要使输入数据达到最佳的处理吞吐量，必须对数据流输入和查询进行分区。此外，还需在查询中添加 **COUNT()**，以便度量所处理的输入事件数。为了确保作业不会单纯地等待输入事件的到来，输入事件中心的每个分区已预先加载了足够的输入数据（大约 300MB）。
 
@@ -324,21 +314,17 @@ PowerBI 输出当前不支持分区。
 
 ![img.stream.analytics.perfgraph][img.stream.analytics.perfgraph]  
 
-
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。
 
-
 ## 后续步骤
 
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [Azure 流分析入门](/documentation/articles/stream-analytics-get-started/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [Azure 流分析入门](./stream-analytics-get-started.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
 
-
 <!--Image references-->
-
 
 [img.stream.analytics.monitor.job]: ./media/stream-analytics-scale-jobs/StreamAnalytics.job.monitor.png
 [img.stream.analytics.configure.scale]: ./media/stream-analytics-scale-jobs/StreamAnalytics.configure.scale.png
@@ -352,10 +338,9 @@ PowerBI 输出当前不支持分区。
 [azure.management.portal]: http://manage.windowsazure.cn
 [azure.event.hubs.developer.guide]: http://msdn.microsoft.com/zh-cn/library/azure/dn789972.aspx
 
-[stream.analytics.introduction]: /documentation/articles/stream-analytics-introduction/
-[stream.analytics.get.started]: /documentation/articles/stream-analytics-get-started/
+[stream.analytics.introduction]: ./stream-analytics-introduction.md
+[stream.analytics.get.started]: ./stream-analytics-get-started.md
 [stream.analytics.query.language.reference]: http://go.microsoft.com/fwlink/?LinkID=513299
 [stream.analytics.rest.api.reference]: http://go.microsoft.com/fwlink/?LinkId=517301
  
-
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

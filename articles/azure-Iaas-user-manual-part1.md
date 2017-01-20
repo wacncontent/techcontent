@@ -1,137 +1,135 @@
-<properties
-	pageTitle="Azure IaaS 用户手册 - 第一部分 | Azure"
-	description="详细介绍如何创建和管理 Azure 虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure IaaS 用户手册 - 第一部分 | Azure
+description: 详细介绍如何创建和管理 Azure 虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.date=""
-	wacn.date="09/30/2016"/>
+ms.service: virtual-machines-windows
+ms.date: 
+wacn.date: 09/30/2016
+---
 
 # Azure IaaS 用户手册 - 第一部分
 
-- [Azure IaaS 用户手册 - 第二部分](/documentation/articles/azure-Iaas-user-manual-part2/)
-- [Azure IaaS 用户手册 - 第三部分](/documentation/articles/azure-Iaas-user-manual-part3/)
-
+- [Azure IaaS 用户手册 - 第二部分](./azure-Iaas-user-manual-part2.md)
+- [Azure IaaS 用户手册 - 第三部分](./azure-Iaas-user-manual-part3.md)
 
 ##<a name="section_3"></a> 1.	Azure IaaS 相关技术
 1.	**Azure 底层是否由 System Center 和Hyper-V 构成?**
 
-	Azure 虽然支持 Hyper-V 的 VHD 直接上传至 Azure 云端进行管理，但是 Azure 底层技术是微软自主研发的独有技术。如果客户想构建属于自己的私有云平台，可以使用 Azure Stack，采用微软的 System Center + Windows Server 产品，构建自己的私有云平台。
+    Azure 虽然支持 Hyper-V 的 VHD 直接上传至 Azure 云端进行管理，但是 Azure 底层技术是微软自主研发的独有技术。如果客户想构建属于自己的私有云平台，可以使用 Azure Stack，采用微软的 System Center + Windows Server 产品，构建自己的私有云平台。
 
 2.	**是否可以在 Azure 虚拟机中再创建虚拟机？**
 
-	Azure 数据中心由成千上万台 RACK 组成，每个 RACK 都安装了 Windows Server 2012 的操作系统，称为 Host OS，即物理服务器的操作系统。
+    Azure 数据中心由成千上万台 RACK 组成，每个 RACK 都安装了 Windows Server 2012 的操作系统，称为 Host OS，即物理服务器的操作系统。
 
-	这些 Windows Server 2012 采用特殊版本的 Hyper-V 虚拟化技术，虚拟出若干虚拟机，称为 Guest OS。
+    这些 Windows Server 2012 采用特殊版本的 Hyper-V 虚拟化技术，虚拟出若干虚拟机，称为 Guest OS。
 
-	Host OS 内含一个 Fabric Agent 中控软件，以监控目前虚拟机各项信息给 Fabric Controller。
+    Host OS 内含一个 Fabric Agent 中控软件，以监控目前虚拟机各项信息给 Fabric Controller。
 
-	Azure 的最终用户只能接触到 Guest OS，而无法接触到 Host OS，因此用户无法在 Guest OS 中再创建虚拟机。
+    Azure 的最终用户只能接触到 Guest OS，而无法接触到 Host OS，因此用户无法在 Guest OS 中再创建虚拟机。
 
 3.	**如果 Azure 所在的服务器宕机了，Azure 虚拟机怎么恢复？**
 
-	在传统 IDC 机房托管中，如果物理服务器发生了宕机，那所有的虚拟机都会宕机，需要人工或者监控软件来进行重新部署。
+    在传统 IDC 机房托管中，如果物理服务器发生了宕机，那所有的虚拟机都会宕机，需要人工或者监控软件来进行重新部署。
 
-	从文件高可用来说，Azure 虚拟机是以 VHD 格式保存的，并且在同一个数据中心做了三重冗余（支持跨数据中心的异地冗余），保证 Azure 虚拟机底层 VHD 文件的99.9% 服务级别协议。
+    从文件高可用来说，Azure 虚拟机是以 VHD 格式保存的，并且在同一个数据中心做了三重冗余（支持跨数据中心的异地冗余），保证 Azure 虚拟机底层 VHD 文件的99.9% 服务级别协议。
 
-	从数据中心架构来说，Azure 具有自我管理功能。Azure Fabric Controller 是管理 Azure 数据中心的中控管理系统，可将其看作 Azure 数据中心的大脑。Azure Fabric Controller 本身是融合了很多微软系统管理技术的集成，包含对虚拟机的管理 ( System Center Virtual Machine Manager )，对作业环境的管理 ( System Center Operation Manager ) 等，在 Fabric Controller 中被发挥得淋漓尽致。
+    从数据中心架构来说，Azure 具有自我管理功能。Azure Fabric Controller 是管理 Azure 数据中心的中控管理系统，可将其看作 Azure 数据中心的大脑。Azure Fabric Controller 本身是融合了很多微软系统管理技术的集成，包含对虚拟机的管理 ( System Center Virtual Machine Manager )，对作业环境的管理 ( System Center Operation Manager ) 等，在 Fabric Controller 中被发挥得淋漓尽致。
 
-	Azure Fabric Controller 负责自动化的管理数据中心内所有的实体服务器，包含由用户要求的 Azure Guest OS 的部署工作，定时的 Hotfix 修补，机器状态的监控，以及管理不同版本的 VM 镜像等重要核心工作。Fabric Controller 本身也具有高可用性。
+    Azure Fabric Controller 负责自动化的管理数据中心内所有的实体服务器，包含由用户要求的 Azure Guest OS 的部署工作，定时的 Hotfix 修补，机器状态的监控，以及管理不同版本的 VM 镜像等重要核心工作。Fabric Controller 本身也具有高可用性。
 
-	Fabric Controller 也处理虚拟机的健康管理 ( Health Management ) 工作，当 Azure Guest OS 死机时，会由 Fabric Controller 自动选择不同的实体机器重新部署并启动。
+    Fabric Controller 也处理虚拟机的健康管理 ( Health Management ) 工作，当 Azure Guest OS 死机时，会由 Fabric Controller 自动选择不同的实体机器重新部署并启动。
 
-	在单台 Guest OS的 情况下，当 Guest OS 宕机时，重新部署并启动 Guest OS 需要花费一定的时间，会引起客户应用的短暂离线，所以 Azure 没有单个实例的 服务级别协议。
+    在单台 Guest OS的 情况下，当 Guest OS 宕机时，重新部署并启动 Guest OS 需要花费一定的时间，会引起客户应用的短暂离线，所以 Azure 没有单个实例的 服务级别协议。
 
 4.	**Azure 有没有单个实例的服务级别协议?**
 
-	Azure 没有单个实例的服务级别协议。例如，客户有一个应用部署在传统 IDC 机房中，一台 AD Server，一台 Web Server，一台 SQL Server。
+    Azure 没有单个实例的服务级别协议。例如，客户有一个应用部署在传统 IDC 机房中，一台 AD Server，一台 Web Server，一台 SQL Server。
 
-	在 Azure 虚拟机中，用户也可以选择使用一台 Azure 虚拟机部署 AD Server，一台 Azure 虚拟机部署 Web 应用程序，使用另一台虚拟机部署 SQL Server。但是这样的场景是没有服务级别协议保障的。
+    在 Azure 虚拟机中，用户也可以选择使用一台 Azure 虚拟机部署 AD Server，一台 Azure 虚拟机部署 Web 应用程序，使用另一台虚拟机部署 SQL Server。但是这样的场景是没有服务级别协议保障的。
 
-	Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台以上的 Azure 虚拟机同时运行，且所有的虚拟机都需要在同一个可用性集中。对于上面实例，用户如果想在 Azure 中实现 99.95% 的服务级别协议，需要同时部署：
+    Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台以上的 Azure 虚拟机同时运行，且所有的虚拟机都需要在同一个可用性集中。对于上面实例，用户如果想在 Azure 中实现 99.95% 的服务级别协议，需要同时部署：
 
-	-	两台 AD Server，放在同一个可用性集 A 中。
-	-	两台虚拟机部署 Web 应用程序，且 Web 应用程序所在的虚拟机需要放在另外一个可用性集 B 中。
-	-	两台虚拟机部署 SQL Server，采用 SQL Server 2012 Enterprise 提供的 Always-On 功能，实现 High Availability。且 SQL Server 所在的虚拟机需要在另外一个可用性集 C 中。
+    -	两台 AD Server，放在同一个可用性集 A 中。
+    -	两台虚拟机部署 Web 应用程序，且 Web 应用程序所在的虚拟机需要放在另外一个可用性集 B 中。
+    -	两台虚拟机部署 SQL Server，采用 SQL Server 2012 Enterprise 提供的 Always-On 功能，实现 High Availability。且 SQL Server 所在的虚拟机需要在另外一个可用性集 C 中。
 
 6.	**什么是可用性集?**
 
-	这里有两个非常重要的概念：故障域 (Fault Domain) 和更新域 (Update Domain)。可以参考[此博客](https://blogs.technet.microsoft.com/yungchou/2013/05/14/window-azure-fault-domain-and-upgrade-domain-explained-explained-reprised/)了解详情。
+    这里有两个非常重要的概念：故障域 (Fault Domain) 和更新域 (Update Domain)。可以参考[此博客](https://blogs.technet.microsoft.com/yungchou/2013/05/14/window-azure-fault-domain-and-upgrade-domain-explained-explained-reprised/)了解详情。
 
-	![availablity_set](./media/azure-Iaas-user-manual-part1/availablity_set.png)
+    ![availablity_set](./media/azure-Iaas-user-manual-part1/availablity_set.png)
  
-	关于故障域，就如同书房有一个插线板，插线板上接了笔记本电脑、手机充电器、电视机等电器。如果这个插线板断电，那这个插线板上的所有电器都会断电。这个插线板和它上面的电器组成了一个故障域。
+    关于故障域，就如同书房有一个插线板，插线板上接了笔记本电脑、手机充电器、电视机等电器。如果这个插线板断电，那这个插线板上的所有电器都会断电。这个插线板和它上面的电器组成了一个故障域。
 
-	Azure 数据中心基础设施由很多 RACK 组成，每一个 RACK 都被称为故障域。当 RACK 出现硬件故障时，在 RACK 上的服务，例如 Azure 的计算服务、存储服务等都会发生问题。
+    Azure 数据中心基础设施由很多 RACK 组成，每一个 RACK 都被称为故障域。当 RACK 出现硬件故障时，在 RACK 上的服务，例如 Azure 的计算服务、存储服务等都会发生问题。
 
-	当客户部署了 2 台 Azure 虚拟机，但是没有设置可用性集时，Azure 可能会把这 2 个 Azure 虚拟机部署在同一个 RACK 上，这样就可能会出现单点故障。因为如果 1 个 RACK 宕机，上面运行的 2 个 Azure 虚拟机都会宕机。两个 Azure 虚拟机宕机的概率和一个 Azure 虚拟机的概率一样。
+    当客户部署了 2 台 Azure 虚拟机，但是没有设置可用性集时，Azure 可能会把这 2 个 Azure 虚拟机部署在同一个 RACK 上，这样就可能会出现单点故障。因为如果 1 个 RACK 宕机，上面运行的 2 个 Azure 虚拟机都会宕机。两个 Azure 虚拟机宕机的概率和一个 Azure 虚拟机的概率一样。
 
-	而在设置了可用性集的情况下，Azure 就会把这 2 台 Azure 虚拟机部署在 2 个不同的 RACK 上。Azure 从数据中心底层设计上，可以保证这 2 个不同的 RACK 不会同时宕机。
+    而在设置了可用性集的情况下，Azure 就会把这 2 台 Azure 虚拟机部署在 2 个不同的 RACK 上。Azure 从数据中心底层设计上，可以保证这 2 个不同的 RACK 不会同时宕机。
 
-	关于更新域，比如有 2 台 Azure 虚拟机做了负载均衡，名称为 VM1 和 VM2，都部署了 Web Application，版本为1.0，并部署在不同的更新域 Update Domain 中。将来一旦软件版本做了更新，升级到了 2.0 版本，就有以下两种选择：
+    关于更新域，比如有 2 台 Azure 虚拟机做了负载均衡，名称为 VM1 和 VM2，都部署了 Web Application，版本为1.0，并部署在不同的更新域 Update Domain 中。将来一旦软件版本做了更新，升级到了 2.0 版本，就有以下两种选择：
 
-	- (1) 用户同时更新这 2 台 Azure 虚拟机的软件版本。这时如果有客户端发起请求，会造成服务器端无法响应。
-	- (2) Azure Fabric Controller 监控这 2 台 Azure 虚拟机。首先更新 Update Domain 0 中的虚拟机软件。更新完毕后再更新 Update Domain 1 中的虚拟机软件，一直到所有的 Azure 虚拟机中的 Web 应用程序更新完毕，这样保证在同一时刻至少有 1 台 Azure 虚拟机能够响应客户端的请求。
+    - (1) 用户同时更新这 2 台 Azure 虚拟机的软件版本。这时如果有客户端发起请求，会造成服务器端无法响应。
+    - (2) Azure Fabric Controller 监控这 2 台 Azure 虚拟机。首先更新 Update Domain 0 中的虚拟机软件。更新完毕后再更新 Update Domain 1 中的虚拟机软件，一直到所有的 Azure 虚拟机中的 Web 应用程序更新完毕，这样保证在同一时刻至少有 1 台 Azure 虚拟机能够响应客户端的请求。
 
-	以下是故障域 (Fault Domain) 和更新域 (Update Domain) 的截图：
+    以下是故障域 (Fault Domain) 和更新域 (Update Domain) 的截图：
  
-	![availablity_set2](./media/azure-Iaas-user-manual-part1/availablity_set2.png)
+    ![availablity_set2](./media/azure-Iaas-user-manual-part1/availablity_set2.png)
 
-	以下是虚拟机可用性集的截图：
-	
-	![availability_set3](./media/azure-Iaas-user-manual-part1/availability_set3.png)
-
+    以下是虚拟机可用性集的截图：
+    
+    ![availability_set3](./media/azure-Iaas-user-manual-part1/availability_set3.png)
 
 7.	**Azure 如何保证 CPU、内存、硬盘的性能?**
 
-	传统的 Hyper-V 技术，其CPU 是共享的。比如您的 ThinkPad T430S 是 4Core/8GB，安装了 Windows Server 2012 R2 操作系统，并且使用 Hyper-V 虚拟出 3 台虚拟机。那该笔记本的物理操作系统 + 3 台虚拟机操作系统本质上都是共享 4Core CPU 的。
+    传统的 Hyper-V 技术，其CPU 是共享的。比如您的 ThinkPad T430S 是 4Core/8GB，安装了 Windows Server 2012 R2 操作系统，并且使用 Hyper-V 虚拟出 3 台虚拟机。那该笔记本的物理操作系统 + 3 台虚拟机操作系统本质上都是共享 4Core CPU 的。
 
-	Azure 上提供的虚拟机分为 A 系列、D 系列和 Dv2 系列。以 A 系列举例：
+    Azure 上提供的虚拟机分为 A 系列、D 系列和 Dv2 系列。以 A 系列举例：
 
-	<table border="1">
-	<thead>
-	<tr>
-	<th>虚拟机类型</th>			<th>CPU</th>	<th>RAM</th>	<th>外挂磁盘数</th>	<th>MAX IOPS</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-	<td>Extra Small (A0)</td>	<td>共享</td>	<td>768MB</td>	<td>1</td>			<td>500</td>
-	</tr>
-	<tr>
-	<td>Small (A1)</td>			<td>1</td>		<td>1.75GB</td>	<td>2</td>			<td>2 X 500</td>
-	</tr>
-	<tr>
-	<td>Medium (A2)</td>		<td>2</td>		<td>3.5GB</td>	<td>4</td>			<td>4 X 500</td>
-	</tr>
-	<tr>
-	<td>Large (A3)</td>			<td>4</td>		<td>7GB</td>	<td>8</td>			<td>8 X 500</td>
-	</tr>
-	<tr>
-	<td>Extra Large (A4)</td>	<td>8</td>		<td>14GB</td>	<td>16</td>			<td>16 X 500</td>
-	</tr>
-	<tr>
-	<td>A5</td>					<td>2</td>		<td>14GB</td>	<td>4</td>			<td>4 X 500</td>
-	</tr>
-	<tr>
-	<td>A6</td>					<td>4</td>		<td>28GB</td>	<td>8</td>			<td>8 X 500</td>
-	</tr>
-	<tr>
-	<td>A7</td>					<td>8</td>		<td>56GB</td>	<td>16</td>			<td>16 X 500</td>
-	</tr>
-	</tbody>
-	</table>
+    <table border="1">
+    <thead>
+    <tr>
+    <th>虚拟机类型</th>			<th>CPU</th>	<th>RAM</th>	<th>外挂磁盘数</th>	<th>MAX IOPS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Extra Small (A0)</td>	<td>共享</td>	<td>768MB</td>	<td>1</td>			<td>500</td>
+    </tr>
+    <tr>
+    <td>Small (A1)</td>			<td>1</td>		<td>1.75GB</td>	<td>2</td>			<td>2 X 500</td>
+    </tr>
+    <tr>
+    <td>Medium (A2)</td>		<td>2</td>		<td>3.5GB</td>	<td>4</td>			<td>4 X 500</td>
+    </tr>
+    <tr>
+    <td>Large (A3)</td>			<td>4</td>		<td>7GB</td>	<td>8</td>			<td>8 X 500</td>
+    </tr>
+    <tr>
+    <td>Extra Large (A4)</td>	<td>8</td>		<td>14GB</td>	<td>16</td>			<td>16 X 500</td>
+    </tr>
+    <tr>
+    <td>A5</td>					<td>2</td>		<td>14GB</td>	<td>4</td>			<td>4 X 500</td>
+    </tr>
+    <tr>
+    <td>A6</td>					<td>4</td>		<td>28GB</td>	<td>8</td>			<td>8 X 500</td>
+    </tr>
+    <tr>
+    <td>A7</td>					<td>8</td>		<td>56GB</td>	<td>16</td>			<td>16 X 500</td>
+    </tr>
+    </tbody>
+    </table>
 
-	除了 A0 的虚拟机类型，CPU 和别的用户共享。其他类型的虚拟机，比如 A1-A7，CPU 是独占的，不和别的用户共享。比如物理服务器是 20Core，那这个物理服务器只能虚拟出 2 台 A7 的 Azure 虚拟机（8Core/56GB），另外多余的 4Core 要预留给物理服务器。
+    除了 A0 的虚拟机类型，CPU 和别的用户共享。其他类型的虚拟机，比如 A1-A7，CPU 是独占的，不和别的用户共享。比如物理服务器是 20Core，那这个物理服务器只能虚拟出 2 台 A7 的 Azure 虚拟机（8Core/56GB），另外多余的 4Core 要预留给物理服务器。
 
-	关于硬盘的性能保证，Azure 是保证磁盘的 IOPS。
+    关于硬盘的性能保证，Azure 是保证磁盘的 IOPS。
 
-	注意：Azure 虚拟机 CPU 和 RAM 是固定搭配的，不可以按照用户的想法随意更改。
+    注意：Azure 虚拟机 CPU 和 RAM 是固定搭配的，不可以按照用户的想法随意更改。
 
 ##<a name="section_4"></a> 2.	Azure IaaS 相关服务
 ###<a name="section_4_1"></a> 2.1 Azure 虚拟机的带宽问题
@@ -146,19 +144,19 @@ Azure 虚拟网络，其主要作用有以下几点：
 
 1.	**将多台 Azure 虚拟机整合在统一网段或者子网里**
 
-	Azure 虚拟机有两个 IP 地址：Public IP (VIP，其实是负载均衡器的 IP 地址，近似认为是公网 IP) 和 Private IP。
-	
-	Public IP 是公网 IP，Azure China 的公网 IP 段请参考[此处](http://www.microsoft.com/en-us/download/details.aspx?id=42064)。
+    Azure 虚拟机有两个 IP 地址：Public IP (VIP，其实是负载均衡器的 IP 地址，近似认为是公网 IP) 和 Private IP。
+    
+    Public IP 是公网 IP，Azure China 的公网 IP 段请参考[此处](http://www.microsoft.com/en-us/download/details.aspx?id=42064)。
 
-	Private IP 是内网 IP，Azure 数据中心的基础架构非常强大，通过 Private IP 可以实现数据中心内网的快速通信。
+    Private IP 是内网 IP，Azure 数据中心的基础架构非常强大，通过 Private IP 可以实现数据中心内网的快速通信。
 
-	在没有 Azure 虚拟网络的情况下，多台 Azure 虚拟机想通过 Private IP 进行通信是不可能的，因为 Azure 出于安全性考虑， 在 VM 与 VM 之间的 VLAN 做了隔离。
+    在没有 Azure 虚拟网络的情况下，多台 Azure 虚拟机想通过 Private IP 进行通信是不可能的，因为 Azure 出于安全性考虑， 在 VM 与 VM 之间的 VLAN 做了隔离。
 
-	一般企业级的应用，都会有多台服务器来实现复杂的业务逻辑。比如一般 B/S 应用需要 Web Server，SQL Server 等。通过 Azure 虚拟机实现 Web Server 与 SQL Server，并且放在同一个虚拟网络里，就可以实现多台 Azure 虚拟机通过 Private IP 来互相通信。
+    一般企业级的应用，都会有多台服务器来实现复杂的业务逻辑。比如一般 B/S 应用需要 Web Server，SQL Server 等。通过 Azure 虚拟机实现 Web Server 与 SQL Server，并且放在同一个虚拟网络里，就可以实现多台 Azure 虚拟机通过 Private IP 来互相通信。
 
 2.	**固定内网 IP 地址 (Private IP)**
 
-	在某些情况下，需要对 Azure 虚拟机固定内网 IP 地址，比如 AD 服务器，比如 Windows Server Cluster 集群，都需要依赖固定内网 IP 地址。这时候也需要使用 Azure 虚拟网络。
+    在某些情况下，需要对 Azure 虚拟机固定内网 IP 地址，比如 AD 服务器，比如 Windows Server Cluster 集群，都需要依赖固定内网 IP 地址。这时候也需要使用 Azure 虚拟网络。
 
 ###<a name="section_4_3"></a> 2.3 Azure 存储服务
 Azure 存储服务是云端的文件存储服务，简单理解是用户可以将本地的文件、图片、照片、虚拟机的 VHD (虚拟磁盘)等二进制文件保存在云端的存储服务中。
@@ -174,50 +172,50 @@ Azure 存储服务本身提供 99.9% 的服务级别协议，它提供三种高�
 
 1.	**本地数据中心的三重冗余 (Local Redundant Storage, LRS)。**客户可以选择将存储服务在同一个数据中心做三重冗余，比如在上海的数据中心。任意一个保存在上海存储服务的文件，都有一个主文件和二个子副本。
 
-	比如客户上传了 10 GB 文件，其实 Azure 存储服务在同一个数据中心保存了 30GB 文件。但是 Azure 只会收取用户实际上传的 10GB 费用。
+    比如客户上传了 10 GB 文件，其实 Azure 存储服务在同一个数据中心保存了 30GB 文件。但是 Azure 只会收取用户实际上传的 10GB 费用。
 
-	对于 LRS 来说，事务在同一个数据中心的三重冗余同步执行。
+    对于 LRS 来说，事务在同一个数据中心的三重冗余同步执行。
 
 2.	**跨数据中心的三重冗余 (Geo Redundant Storage, GRS)。**Azure 在所有地区数据中心的建设都是成对的，比如北京数据中心和上海数据中心。这是因为 Auzre 充分考虑了异地冗余的能力。在北京和上海数据中心之间会有专线连接，这个专线是内网数据中心之前数据同步专用的。
 
-	比如用户在上海数据中心 (主要位置) 创建了存储账号，并且开启了跨数据中心同步，则上海数据中心是主节点，北京数据中心是备份节点。当用户往上海数据中心上传 10GB 文件，该文件不仅在上海数据中心做了三重冗余，在北京的数据中心 (辅助位置) 同样做了三重冗余，文件一共做了六重冗余。即使上海数据中心因为地震、战争、洪水完全被摧毁，用户的数据还是安全的保存在北京的数据中心，真正做到了万无一失。
+    比如用户在上海数据中心 (主要位置) 创建了存储账号，并且开启了跨数据中心同步，则上海数据中心是主节点，北京数据中心是备份节点。当用户往上海数据中心上传 10GB 文件，该文件不仅在上海数据中心做了三重冗余，在北京的数据中心 (辅助位置) 同样做了三重冗余，文件一共做了六重冗余。即使上海数据中心因为地震、战争、洪水完全被摧毁，用户的数据还是安全的保存在北京的数据中心，真正做到了万无一失。
 
-	在 GRS 情况下，对于上海数据中心来说，事务在同一个数据中心的三重冗余同步执行。对于北京数据中心来说，事务是异步从上海发送到北京的数据中心。
+    在 GRS 情况下，对于上海数据中心来说，事务在同一个数据中心的三重冗余同步执行。对于北京数据中心来说，事务是异步从上海发送到北京的数据中心。
 
-	下表显示了当前的主要位置和辅助位置配对：
+    下表显示了当前的主要位置和辅助位置配对：
 
-	<table border="1">
-	<thead>
-	<tr>
-	<th>主要位置</th>	<th>辅助位置</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr>
-	<td>中国东部</td>	<td>中国北部</td>
-	</tr>
-	<tr>
-	<td>中国北部</td>	<td>中国东部</td>
-	</tr>
-	</tbody>
-	</table>
+    <table border="1">
+    <thead>
+    <tr>
+    <th>主要位置</th>	<th>辅助位置</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <td>中国东部</td>	<td>中国北部</td>
+    </tr>
+    <tr>
+    <td>中国北部</td>	<td>中国东部</td>
+    </tr>
+    </tbody>
+    </table>
 
 3.	**读取访问地域冗余 (Read Access – Geo Redundant Storage, RA-GRS)**
 
-	如果用户在上海数据中心 (主要位置) 创建了存储账号，并且开启了 RA-GRS，事务就会异步的复制到北京的数据中心。RA-GRS 提供了对复制到北京数据中心 (辅助位置) 的 "只读" 访问权，实现对存储账户的更高读取可用性。
+    如果用户在上海数据中心 (主要位置) 创建了存储账号，并且开启了 RA-GRS，事务就会异步的复制到北京的数据中心。RA-GRS 提供了对复制到北京数据中心 (辅助位置) 的 "只读" 访问权，实现对存储账户的更高读取可用性。
 
-	请注意：
-	- **(1)	在跨数据中心的三重冗余 (Geo Redundant Storage, GRS) 情况下，备份节点的数据不可读。**
-	- **(2)	读取访问地域冗余 (Read Access – Geo Redundant Storage, RA-GRS) 情况下，备份节点的数据可读。**
+    请注意：
+    - **(1)	在跨数据中心的三重冗余 (Geo Redundant Storage, GRS) 情况下，备份节点的数据不可读。**
+    - **(2)	读取访问地域冗余 (Read Access – Geo Redundant Storage, RA-GRS) 情况下，备份节点的数据可读。**
 
-	这样用户可以指定对于 Azure 存储的访问是指向上海数据中心 (主要位置）还是北京数据中心 (辅助位置) ，提高读取的高可用性。
+    这样用户可以指定对于 Azure 存储的访问是指向上海数据中心 (主要位置）还是北京数据中心 (辅助位置) ，提高读取的高可用性。
 
-	启用该功能后，在主要区域无法读取数据时，可使用辅助位置读取更高可用性。该功能为 "选择使用"，要求存储账户进行跨地域冗余复制。
+    启用该功能后，在主要区域无法读取数据时，可使用辅助位置读取更高可用性。该功能为 "选择使用"，要求存储账户进行跨地域冗余复制。
 
-	假设您在上海数据中心 (主要位置) 创建了 Azure Storage，Storage Name 为 leizhangstorage，并且开启了**读取访问地域冗余 (Read Access – Geo Redundant Storage, RA-GRS)。**
-	- (1)	可以通过 http://<accountname>.blob.core.chinacloudapi.cn 访问主要位置的 Azure 存储帐户。
-	- (2)	还可以通过 http://<accountname>-secondary.blob.core.chinacloudapi.cn 访问辅助位置的 Azure 存储帐户
-	- (3)	在发生上海数据中心 (主要位置) 无法读取数据的时候，可以使用辅助位置的数据读取来提供高可用性。
+    假设您在上海数据中心 (主要位置) 创建了 Azure Storage，Storage Name 为 leizhangstorage，并且开启了**读取访问地域冗余 (Read Access – Geo Redundant Storage, RA-GRS)。**
+    - (1)	可以通过 http://<accountname>.blob.core.chinacloudapi.cn 访问主要位置的 Azure 存储帐户。
+    - (2)	还可以通过 http://<accountname>-secondary.blob.core.chinacloudapi.cn 访问辅助位置的 Azure 存储帐户
+    - (3)	在发生上海数据中心 (主要位置) 无法读取数据的时候，可以使用辅助位置的数据读取来提供高可用性。
 
 ####<a name="section_4_3_2"></a> 2.3.2 Azure存储服务的类型
 Azure 存储服务提供四种不同类型的存储服务: Blob, 表, 队列和文件。
@@ -229,9 +227,9 @@ Blob 分为两种类型：
 
 1.	Block Blob （块 Blob）。这种类型适合存储二进制文件，支持断点续传，可以最大以 4M 为一个区块单位，单一文件最大可以存储 200GB，且区块不会连续存储，可能会在不同的存储服务器分块存放。为了适应文件的上传和下载而专门进行了优化。
 
-	Block Blob 可以通过 2 种方式创建。不超过 64MB 的 Block Blobs 可以通过调用 PutBlob 操作进行上传。大于 64M 的 Block Blobs 必须分块上传，且每块的大小不能超过 4MB。
+    Block Blob 可以通过 2 种方式创建。不超过 64MB 的 Block Blobs 可以通过调用 PutBlob 操作进行上传。大于 64M 的 Block Blobs 必须分块上传，且每块的大小不能超过 4MB。
 
-	Block Blob 可以近似理解为网盘。
+    Block Blob 可以近似理解为网盘。
 
 2.	Page Blob （页 Blob)。这类存储优化了随机访问。它会在存储区中划分一个连续的区域供应用程序存放数据，可以用来存放 VHD，单一文件最大可以存储1TB。
 
@@ -239,7 +237,7 @@ Blob 服务由 Blob 本身以及其收纳容器 (Container) 构成，容器可�
 
 用户可通过 REST API 来访问 Blob
 
-	http://<accountname>.blob.core.chinacloudapi.cn/<containername>/<blobname>
+    http://<accountname>.blob.core.chinacloudapi.cn/<containername>/<blobname>
 
 accountname 表示 Azure 存储账号下的资源，全局唯一。
 
@@ -255,11 +253,11 @@ blobname 表示要访问的资源名称，可以认为是一个 mp3 文件，或
 
 保存在 leizhangstorage 存储账号下，containername 为 photo，blobname 为 myphoto.jpg。则这个 URL 地址为：
 
-	http://leizhangstorage.blob.core.chinacloudapi.cn/photo/myphoto.jpg
+    http://leizhangstorage.blob.core.chinacloudapi.cn/photo/myphoto.jpg
 
 保存在 leizhangstorage 存储账号下，containername 为 vhd，blobname 为 myvm.vhd。则这个 URL 地址为：
 
-	http://leizhangstorage.blob.core.chinacloudapi.cn/vhd/myvm.vhd
+    http://leizhangstorage.blob.core.chinacloudapi.cn/vhd/myvm.vhd
 
 Container 的命名规则:
 
@@ -285,7 +283,6 @@ Web Role 可以快速响应前端的业务请求，并将输入保存到 Azure S
 Worker Role 将数据从 Queue 中读取，可以在后端处理复杂的业务逻辑。
 
 可以看到，Azure Storage Queue 是前端业务逻辑和后端业务处理的桥梁。
-
 
 #####<a name="section_4_3_2_3"></a> 2.3.2.3 表
 这里的 Azure 存储表是非关系型数据表，不能与 SQL Server 的表相混淆。用户可认为 Azure 存储表类似 NoSQL。
@@ -315,7 +312,6 @@ Azure File 有以下几个特点：
 　　3.基于 SMB2.1 协议，可以被 Windows 和 Linux 同时使用；
 
 　　4.可以通过 REST API 访问。
-
 
 ###<a name="section_4_4"></a> 2.4 Azure 虚拟机
 ####<a name="section_4_4_1"></a> 2.4.1 Azure 虚拟机操作系统
@@ -420,27 +416,27 @@ D 系列虚拟机的类型如下：
 
 1.	**单台 VM 的 CPU Core 更多**
 
-	相比 A 系列单台 VM 最大 8Core/56GB RAM 的配置，D 系列虚拟机单台最大的配置为 16Core/112GB RAM
+    相比 A 系列单台 VM 最大 8Core/56GB RAM 的配置，D 系列虚拟机单台最大的配置为 16Core/112GB RAM
 
 2.	**D 系列的 CPU 性能比 A 系列提升约 60%**
 
-	Azure A 系列的虚拟机，Intel E5 的 CPU 是经过调试的，性能是人为降低的。
+    Azure A 系列的虚拟机，Intel E5 的 CPU 是经过调试的，性能是人为降低的。
 
-	因为 Azure 数据中心在建设时，有 AMD 的 CPU 和 Intel 的 CPU，为了让 Intel CPU 性能和 AMD CPU 性能接近，保证运算能力的一致性，人为降低了 Intel CPU 的计算能力。
+    因为 Azure 数据中心在建设时，有 AMD 的 CPU 和 Intel 的 CPU，为了让 Intel CPU 性能和 AMD CPU 性能接近，保证运算能力的一致性，人为降低了 Intel CPU 的计算能力。
 
-	所以如果用 Super PI 等测试 A 系列的虚拟机，会发现其性能与物理机是有差距的。
+    所以如果用 Super PI 等测试 A 系列的虚拟机，会发现其性能与物理机是有差距的。
 
-	D 系列虚拟机，是 100% 体现 Intel E5 的处理能力，CPU 性能比 A 系列提升 60%。
+    D 系列虚拟机，是 100% 体现 Intel E5 的处理能力，CPU 性能比 A 系列提升 60%。
 
 3.	**新增本地临时 SSD 存储**
 
-	注意是临时存储，这个存储在 Windows 里显示为 D 盘，在 Linux 系统里是 /dev/sdb1
+    注意是临时存储，这个存储在 Windows 里显示为 D 盘，在 Linux 系统里是 /dev/sdb1
 
-	优点: IOPS 高；<br/>缺点：非持久化存储，文件会有丢失的风险，不能保留重要的文件。
+    优点: IOPS 高；<br/>缺点：非持久化存储，文件会有丢失的风险，不能保留重要的文件。
 
 4.	**更大的本地临时磁盘**
 
-	如上面表格所示，本地的临时磁盘最大为 800G。
+    如上面表格所示，本地的临时磁盘最大为 800G。
 
 #####<a name="section_4_4_2_3"></a> 2.4.2.3 DS 系列虚拟机
 不管是 A 系列 VM 还是 D 系列 VM，本地持久化磁盘都是 SAS 盘，IOPS 是每块盘 500。
@@ -481,7 +477,6 @@ D 系列虚拟机的类型如下：
 </tbody>
 </table>
 
-
 #####<a name="section_4_4_2_4"></a> 2.4.2.4 修改 Azure 虚拟机配置
 用户可以根据实际需求，设置 Azure 虚拟机的配置，比如对于 Web Server 设置为 A7(8Core/56GB)；MySQL VM 设置为 DS14 VM，本地的 SSD 磁盘吞吐量更高。
 
@@ -489,7 +484,7 @@ D 系列虚拟机的类型如下：
 
 等待项目上线以后，如果业务需求并没有预期的那么高，可以将单台 Azure VM 的配置向下调整。这样每台 Azure VM 的每分钟单价会更加便宜，价格是动态调整的。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > Azure 数据中心的建设是有先后顺序的，最早落地的是 A 系列的虚拟机，然后是 D 系列和 DS 系列的虚拟机。一般情况下，客户在修改虚拟机配置大小的时候，会出现以下情况：
 
 > - 已经创建的 A 系列的虚拟机，无法升级到 D 系列的虚拟机
@@ -517,7 +512,7 @@ D 系列虚拟机的类型如下：
 
 ###<a name="section_4_5"></a> 2.5 Azure 成本分析
 
-除了在 [Azure 中国官网](https://www.azure.cn/)上直接购买[预付费产品](/pricing/pia/)外，我们还有面向企业级的销售方式，需要客户预付费人民币 15 万元 (不含税) 。**这并不是指客户预付费后，可以任意使用 Azure 云计算平台上的任意资源。**
+除了在 [Azure 中国官网](https://www.azure.cn/)上直接购买[预付费产品](https://www.azure.cn/pricing/pia/)外，我们还有面向企业级的销售方式，需要客户预付费人民币 15 万元 (不含税) 。**这并不是指客户预付费后，可以任意使用 Azure 云计算平台上的任意资源。**
 
 例如，客户购买 Azure 服务，类似于购买了电话费套餐。在承诺每年最低消费 15 万元的基础上，根据用户使用 Azure 不同服务的情况（比如话费按分钟计费，流量按 GB 收费，短信按每条收费等），从客户预付的 15 万元里进行扣费。
 
@@ -557,16 +552,16 @@ D 系列虚拟机的类型如下：
 1.	Linux 操作系统最便宜
 2.	Windows Server 操作系统比 Linux 操作系统要贵一些
 
-	在同样操作系统情况下，虚拟机计算能力越强，其小时价格越贵。比如虚拟机类型为 A7 一定比 A1 贵。（具体的单价请联系 Azure 销售代表或参考 Azure [官方文档]）(/pricing/overview)。
+    在同样操作系统情况下，虚拟机计算能力越强，其小时价格越贵。比如虚拟机类型为 A7 一定比 A1 贵。（具体的单价请联系 Azure 销售代表或参考 Azure [官方文档]）(/pricing/overview)。
 
 3.	预装了 SQL Server 数据库的 Windows Server 虚拟机最贵 (因为需要 Windows Server License + SQL Server License)，Azure 把一次性购买 SQL Server License 的费用平摊到 Azure 计算的小时费用。
 
-	* a)	根据 SQL Server 数据库的不同版本，价格依次递增 (Web版, 标准版, 企业版)，企业版价格最贵。
-	* b)	预装了 SQL Server 2012 数据库的 Windows Server 虚拟机价格因素由以下几方面构成：
-	* c)	虚拟机类型：A0 - A7，计算能力越强越贵，A7 最贵。
-	* d)	数据库版本：Web版, 标准版, 企业版
-	* e)	例如，虚拟机类型为 A7，且安装了 SQL Server 企业版的虚拟机价格最贵。
-	* f)	如果客户已经采购了 on-premise 的 SQL Server 的 SA 服务，客户可以选择只使用 Windows Server VM，然后在 VM 安装 SQL Server License，可以把本地的 License 移动到云端，即 License Mobility。这样 Azure 只会收取 Windows Server 的小时费用，而不会收取 SQL Server License 的小时费用。
+    * a)	根据 SQL Server 数据库的不同版本，价格依次递增 (Web版, 标准版, 企业版)，企业版价格最贵。
+    * b)	预装了 SQL Server 2012 数据库的 Windows Server 虚拟机价格因素由以下几方面构成：
+    * c)	虚拟机类型：A0 - A7，计算能力越强越贵，A7 最贵。
+    * d)	数据库版本：Web版, 标准版, 企业版
+    * e)	例如，虚拟机类型为 A7，且安装了 SQL Server 企业版的虚拟机价格最贵。
+    * f)	如果客户已经采购了 on-premise 的 SQL Server 的 SA 服务，客户可以选择只使用 Windows Server VM，然后在 VM 安装 SQL Server License，可以把本地的 License 移动到云端，即 License Mobility。这样 Azure 只会收取 Windows Server 的小时费用，而不会收取 SQL Server License 的小时费用。
 
 虚拟机运行的时候收费计算费用。关闭虚拟机后，不收取计算费用。
 

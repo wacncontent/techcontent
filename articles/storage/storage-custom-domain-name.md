@@ -1,28 +1,28 @@
-<properties
-    pageTitle="为 Blob 存储终结点配置域名 | Azure"
-    description="了解如何在 Azure 经典门户中将自定义用户域映射到 Azure 存储帐户的 Blob 存储终结点。"
-    services="storage"
-    documentationcenter=""
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: 为 Blob 存储终结点配置域名 | Azure
+description: 了解如何在 Azure 经典门户中将自定义用户域映射到 Azure 存储帐户的 Blob 存储终结点。
+services: storage
+documentationcenter: 
+author: mmacy
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="aaafd8c5-eacb-49dc-8c8b-3f7011ad5e92"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="12/29/2016"
-    ms.author="marsma" />
+ms.assetid: aaafd8c5-eacb-49dc-8c8b-3f7011ad5e92
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 12/29/2016
+ms.author: marsma
+---
 
 # 为 Blob 存储终结点配置自定义域名
 ## 概述
 你可以配置自定义域以便访问 Azure 存储帐户中的 Blob 数据。Blob 存储的默认终结点是 `<storage-account-name>.blob.core.chinacloudapi.cn`。如果你将自定义域和子域（例如 **www.contoso.com**）映射到你的存储帐户的 Blob 终结点，则你的用户也可以使用该域访问你的存储帐户中的 Blob 数据。
 
->[AZURE.IMPORTANT] Azure 存储空间尚不支持对自定义域使用 HTTPS。我们已注意到客户对这项功能感兴趣，会在将来的版本中添加。
+>[!IMPORTANT] Azure 存储空间尚不支持对自定义域使用 HTTPS。我们已注意到客户对这项功能感兴趣，会在将来的版本中添加。
 
 有两种方法可用于将你的自定义域指向你的存储帐户的 Blob 终结点。最简单方法是创建一个 CNAME 记录，将你的自定义域和子域映射到 Blob 终结点。CNAME 记录是一种 DNS 功能，用于将源域映射到目标域。在此情况下，源域是你的自定义域和子域 -- 请注意，始终需要子域。目标域是你的 Blob 服务终结点。
 
@@ -83,7 +83,7 @@ Blob|**默认 URL**：http://mystorageaccount.blob.core.chinacloudapi.cn/myconta
 
 10. 单击“注册”按钮以预先注册你的自定义域。
 
-	如果预先注册成功，你将会看到一条消息“你的自定义域处于活动状态”。
+    如果预先注册成功，你将会看到一条消息“你的自定义域处于活动状态”。
 
 11. 此时，你的自定义域已由 Azure 进行了验证，但传输到你的域的流量尚未路由到你的存储帐户。若要完成此过程，请返回到你的 DNS 注册机构的网站，创建将你的子域映射到你的 Blob 终结点的另一条 CNAME 记录。例如，将该子域指定为 **www** 或 **photos**，将主机名指定为 **mystorageaccount.blob.core.chinacloudapi.cn**（其中，**mystorageaccount** 是你的存储帐户的名称）。完成此步骤后，也就完成了你的自定义域的注册。
 

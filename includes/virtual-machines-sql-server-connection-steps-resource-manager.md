@@ -4,13 +4,13 @@
 
 若要从 Internet 连接到 SQL Server 数据库引擎，请首先配置用于公共 IP 地址的 DNS 标签。
 
-> [AZURE.NOTE] 如果你打算只连接到同一虚拟网络中的 SQL Server 实例，或者只进行本地连接，则此步骤不是必需的。
+> [!NOTE] 如果你打算只连接到同一虚拟网络中的 SQL Server 实例，或者只进行本地连接，则此步骤不是必需的。
 
 若要创建 DNS 标签，请首先在门户预览中选择“虚拟机”。选择要显示其属性的 SQL Server VM。
 
 1. 在虚拟机边栏选项卡中，选择“公共 IP 地址”。
 
-	![公共 ip 地址](./media/virtual-machines-sql-server-connection-steps/rm-public-ip-address.png)
+    ![公共 ip 地址](./media/virtual-machines-sql-server-connection-steps/rm-public-ip-address.png)
 
 2. 在公共 IP 地址的属性中，展开“配置”。
 
@@ -18,7 +18,7 @@
 
 4. 点击 “保存” 按钮
 
-	![dns 标签](./media/virtual-machines-sql-server-connection-steps/rm-dns-label.png)
+    ![dns 标签](./media/virtual-machines-sql-server-connection-steps/rm-dns-label.png)
 
 ### <a name="connect-to-the-database-engine-from-another-computer"></a> 从其他计算机连接到数据库引擎
  
@@ -34,6 +34,6 @@
 
 7. 单击“连接”。
 
-	![ssms 连接](./media/virtual-machines-sql-server-connection-steps/rm-ssms-connect.png)
+    ![ssms 连接](./media/virtual-machines-sql-server-connection-steps/rm-ssms-connect.png)
 
 <!---HONumber=Mooncake_0411_2016-->

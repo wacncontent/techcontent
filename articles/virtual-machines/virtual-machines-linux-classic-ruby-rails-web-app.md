@@ -1,31 +1,31 @@
-<properties
-    pageTitle="在 Linux VM 上托管 Ruby on Rails 网站 | Azure"
-    description="在 Azure 上使用 Linux 虚拟机设置和托管基于 Ruby on Rails 的网站。"
-    services="virtual-machines-linux"
-    documentationcenter="ruby"
-    author="rmcmurray"
-    manager="erikre"
-    editor=""
-    tags="azure-service-management" />
-<tags
-    ms.assetid="aad32685-3550-4bff-9c73-beb8d70b3291"
-    ms.service="virtual-machines-linux"
-    ms.workload="web"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="ruby"
-    ms.topic="article"
-    ms.date="11/01/2016"
-    wacn.date="01/13/2017"
-    ms.author="robmcm" />  
+---
+title: 在 Linux VM 上托管 Ruby on Rails 网站 | Azure
+description: 在 Azure 上使用 Linux 虚拟机设置和托管基于 Ruby on Rails 的网站。
+services: virtual-machines-linux
+documentationcenter: ruby
+author: rmcmurray
+manager: erikre
+editor: 
+tags: azure-service-management
 
+ms.assetid: aad32685-3550-4bff-9c73-beb8d70b3291
+ms.service: virtual-machines-linux
+ms.workload: web
+ms.tgt_pltfrm: vm-linux
+ms.devlang: ruby
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 01/13/2017
+ms.author: robmcm
+---
 
 # Azure VM 上的 Ruby on Rails Web 应用程序
 本教程介绍如何在 Azure 中使用 Linux 虚拟机托管 Ruby on Rails 网站。
 
 本教程使用 Ubuntu Server 14.04 LTS 进行验证。如果使用其他 Linux 发行版，可能需要修改安装 Rails 的步骤。
 
-> [AZURE.IMPORTANT]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。
+> [!IMPORTANT]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。
 > 
 > 
 
@@ -124,18 +124,17 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 * [使用内容传送网络提供高带宽内容][cdn-howto]
 
 <!-- WA.com links -->
-[blobs]: /documentation/articles/storage-ruby-how-to-use-blob-storage/
+[blobs]: ../storage/storage-ruby-how-to-use-blob-storage.md
 [cdn-howto]: /develop/ruby/app-services/
 [management-portal]: https://manage.windowsazure.cn/
-[tables]: /documentation/articles/storage-ruby-how-to-use-table-storage/
-[vm-instructions]: /documentation/articles/virtual-machines-linux-classic-createportal/
+[tables]: ../storage/storage-ruby-how-to-use-table-storage.md
+[vm-instructions]: ./virtual-machines-linux-classic-createportal.md
 
 <!-- External Links -->
 [rails-guides]: http://guides.rubyonrails.org/
 [sqlite3]: http://www.sqlite.org/
 
 <!-- Images -->
-
 
 [default-rails-cloud]: ./media/virtual-machines-linux-classic-ruby-rails-web-app/basicrailscloud.png
 [vmlist]: ./media/virtual-machines-linux-classic-ruby-rails-web-app/vmlist.png

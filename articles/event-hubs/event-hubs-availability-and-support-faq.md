@@ -1,31 +1,31 @@
-<properties 
-    pageTitle="事件中心常见问题 (FAQ) | Azure"
-    description="事件中心常见问题。"
-    services="event-hubs"
-    documentationCenter="na"
-    authors="sethmanheim"
-    manager="timlt"
-    editor="" />  
+---
+title: 事件中心常见问题 (FAQ) | Azure
+description: 事件中心常见问题。
+services: event-hubs
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
 
-<tags 
-    ms.service="event-hubs"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/01/2016"
-    wacn.date="01/03/2017"
-    ms.author="sethm" />
+ms.service: event-hubs
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/01/2016
+wacn.date: 01/03/2017
+ms.author: sethm
+---
 
 # 事件中心常见问题
 
-事件中心可以大规模引入、保留和处理来自高吞吐量数据源和/或大量设备的数据事件。如果与服务总线队列和主题搭配使用，事件中心能够以持续可管控方式实现[物联网 (IoT)](/home/features/iot-hub/) 方案的部署。
+事件中心可以大规模引入、保留和处理来自高吞吐量数据源和/或大量设备的数据事件。如果与服务总线队列和主题搭配使用，事件中心能够以持续可管控方式实现[物联网 (IoT)](https://www.azure.cn/home/features/iot-hub/) 方案的部署。
 
 本文介绍定价信息，并解答一些有关事件中心的常见问题：
 
 ## 定价信息
 
-有关事件中心定价的完整信息，请参阅[事件中心定价详细信息](/pricing/details/event-hubs/)。
+有关事件中心定价的完整信息，请参阅[事件中心定价详细信息](https://www.azure.cn/pricing/details/event-hubs/)。
 
 ## 事件中心入口事件是怎样计算的？
 
@@ -73,11 +73,11 @@
 
 ## 中转连接费用是否适用于事件中心？
 
-对于发送者，连接费用只在使用 AMQP 协议时适用。使用 HTTP 发送事件没有连接费用，无论发送系统或设备的数量是多少。如果打算使用 AMQP（例如，为了实现更高效的事件流式传输，或者为了对 IoT 命令和控制方案启用双向通信），请参考[服务总线定价信息](/pricing/details/messaging/)，以了解有关中转连接构成方面的信息，以及如何测算这些构成。
+对于发送者，连接费用只在使用 AMQP 协议时适用。使用 HTTP 发送事件没有连接费用，无论发送系统或设备的数量是多少。如果打算使用 AMQP（例如，为了实现更高效的事件流式传输，或者为了对 IoT 命令和控制方案启用双向通信），请参考[服务总线定价信息](https://www.azure.cn/pricing/details/messaging/)，以了解有关中转连接构成方面的信息，以及如何测算这些构成。
 
 ## 事件中心基本和标准这两种服务层有什么不同？
 
-事件中心标准层提供的功能要超出事件中心基本层以及某些竞争对手系统的功能。这些功能包括：超过 24 小时的保留期，能够使用一个 AMQP 连接将命令发送到大量设备而延迟为次秒级，并且能够从那些设备将遥测发送到事件中心。有关功能列表，请参阅[事件中心定价详细信息](/pricing/details/event-hubs/)。
+事件中心标准层提供的功能要超出事件中心基本层以及某些竞争对手系统的功能。这些功能包括：超过 24 小时的保留期，能够使用一个 AMQP 连接将命令发送到大量设备而延迟为次秒级，并且能够从那些设备将遥测发送到事件中心。有关功能列表，请参阅[事件中心定价详细信息](https://www.azure.cn/pricing/details/event-hubs/)。
 
 ## 上市地区
 
@@ -89,9 +89,9 @@
 
 ## 支持和 SLA
 
-事件中心的技术支持可通过[社区论坛](/support/forums/)获得。计费和订阅管理支持免费提供。
+事件中心的技术支持可通过[社区论坛](https://www.azure.cn/support/forums/)获得。计费和订阅管理支持免费提供。
 
-若要详细了解我们的 SLA，请访问[服务级别协议](/support/legal/sla)页面。
+若要详细了解我们的 SLA，请访问[服务级别协议](https://www.azure.cn/support/legal/sla)页面。
 
 ## 后续步骤
 
@@ -100,7 +100,7 @@
 - [事件中心概述][]
 - [使用事件中心的完整示例应用程序][]
 
-[事件中心概述]: /documentation/articles/event-hubs-overview/
+[事件中心概述]: ./event-hubs-overview.md
 [使用事件中心的完整示例应用程序]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-286fd097
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

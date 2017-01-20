@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用 Blob 存储的本地应用程序 (Java) | Azure"
-    description="了解如何创建将图像上传到 Azure 并在浏览器中显示图像的控制台应用程序。使用 Java 的代码示例。"
-    services="storage"
-    documentationcenter="java"
-    author="tamram"
-    manager="carmonm"
-    editor="tysonn" />  
+---
+title: 使用 Blob 存储的本地应用程序 (Java) | Azure
+description: 了解如何创建将图像上传到 Azure 并在浏览器中显示图像的控制台应用程序。使用 Java 的代码示例。
+services: storage
+documentationcenter: java
+author: tamram
+manager: carmonm
+editor: tysonn
 
-<tags
-    ms.assetid="ccc9a7d7-6fe4-467b-b7fd-a73f17539e3f"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="11/17/2016"
-    wacn.date="12/05/2016"
-    ms.author="tamram" />
+ms.assetid: ccc9a7d7-6fe4-467b-b7fd-a73f17539e3f
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/17/2016
+wacn.date: 12/05/2016
+ms.author: tamram
+---
 
 # 使用 Blob 存储的本地应用程序
 ## 概述
@@ -25,11 +25,11 @@
 ## 先决条件
 * 已安装 Java 开发人员工具包 (JDK) 版本1.6 或更高版本。
 * 已安装 Azure SDK。
-* 适用于 Azure Libraries for Java 的 JAR 以及任何适用的依赖项 JAR 已安装并且位于 Java 编译器使用的生成路径中。若要了解如何安装用于 Java 的 Azure Libraries，请参阅 [下载 Azure SDK for Java](/documentation/articles/java-download-azure-sdk/)。
-* 已设置了一个 Azure 存储帐户。本文中的代码将使用存储帐户的帐户名称和帐户密钥。有关创建存储帐户的信息，请参阅[如何创建存储帐户](/documentation/articles/storage-create-storage-account/#create-a-storage-account)；有关检索帐户密钥的信息，请参阅[查看并复制存储访问密钥](/documentation/articles/storage-create-storage-account/#view-and-copy-storage-access-keys)。
+* 适用于 Azure Libraries for Java 的 JAR 以及任何适用的依赖项 JAR 已安装并且位于 Java 编译器使用的生成路径中。若要了解如何安装用于 Java 的 Azure Libraries，请参阅 [下载 Azure SDK for Java](../java-download-azure-sdk.md)。
+* 已设置了一个 Azure 存储帐户。本文中的代码将使用存储帐户的帐户名称和帐户密钥。有关创建存储帐户的信息，请参阅[如何创建存储帐户](./storage-create-storage-account.md#create-a-storage-account)；有关检索帐户密钥的信息，请参阅[查看并复制存储访问密钥](./storage-create-storage-account.md#view-and-copy-storage-access-keys)。
 * 已创建存储在路径 c:\\myimages\\image1.jpg 处的已命名本地图像文件。或者，在示例中修改 **FileInputStream** 构造函数以使用其他图像路径和文件名。
 
-[AZURE.INCLUDE [create-account-note](../../includes/create-account-note.md)]
+[!INCLUDE [create-account-note](../../includes/create-account-note.md)]
 
 ## 使用 Azure Blob 存储上传文件
 此处提供分步过程。如果要跳过这些过程，则可在本文后面找到完整的代码。
@@ -52,7 +52,7 @@
            "DefaultEndpointsProtocol=http;" +
                "AccountName=your_account_name;" +
                "AccountKey=your_account_name;" +
-	       "EndpointSuffix=core.chinacloudapi.cn";
+           "EndpointSuffix=core.chinacloudapi.cn";
 
 添加对 **main** 的声明，包括 **try** 块并包括必需的左大括号 **{**。
 
@@ -214,7 +214,7 @@
                 "DefaultEndpointsProtocol=http;" +
                        "AccountName=your_account_name;" +
                        "AccountKey=your_account_name;" +
-		       "EndpointSuffix=core.chinacloudapi.cn";
+               "EndpointSuffix=core.chinacloudapi.cn";
 
         public static void main(String[] args) {
             try {
@@ -299,7 +299,6 @@
 
 ## <a name="bkmk_deletecontainer"> </a>删除容器
 
-
 由于存储是收费的，因此可能希望在完成对此示例的试验后删除 **gettingstarted** 容器。若要删除容器，请使用 **CloudBlobContainer.delete** 方法：
 
     container = serviceClient.getContainerReference("gettingstarted");
@@ -316,7 +315,7 @@
                 "DefaultEndpointsProtocol=http;" +
                    "AccountName=your_account_name;" +
                    "AccountKey=your_account_key;" +
-		   "EndpointSuffix=core.chinacloudapi.cn";
+           "EndpointSuffix=core.chinacloudapi.cn";
 
         public static void main(String[] args)
         {
@@ -350,7 +349,7 @@
         }
     }
 
-有关其他 Blob 存储类和方法的概述，请参阅[如何通过 Java 使用 Blob 存储](/documentation/articles/storage-java-how-to-use-blob-storage/)。
+有关其他 Blob 存储类和方法的概述，请参阅[如何通过 Java 使用 Blob 存储](./storage-java-how-to-use-blob-storage.md)。
 
 ## 后续步骤
 请访问下面的链接了解有关更复杂的存储任务的详细信息。

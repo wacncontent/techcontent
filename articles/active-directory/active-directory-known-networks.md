@@ -1,26 +1,23 @@
-<properties 
-	pageTitle="已知网络 | Azure" 
-	description="配置已知网络后，你可以避免将你组织拥有的 IP 地址包含在“从多个地理区域登录”和“从具有可疑活动的 IP 地址登录”报告中。" 
-	services="active-directory" 
-	documentationCenter="" 
-	authors="markusvi" 
-	manager="femila"  
-	editor=""/>  
+---
+title: 已知网络 | Azure
+description: 配置已知网络后，你可以避免将你组织拥有的 IP 地址包含在“从多个地理区域登录”和“从具有可疑活动的 IP 地址登录”报告中。
+services: active-directory
+documentationCenter: 
+authors: markusvi
+manager: femila
+editor: 
 
-
-<tags 
-	ms.service="active-directory" 
-	ms.workload="identity" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="10/10/2016" 
-	wacn.date="11/08/2016" 
-	ms.author="markvi"/>  
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/10/2016
+wacn.date: 11/08/2016
+ms.author: markvi
+---
 
 # 已知网络
-
 
 你可以使用 Azure Active Directory 的访问和使用情况报告来监控你所在组织的目录的完整性和安全性。使用此信息，目录管理员可以更好地确定哪里可能存在安全风险，以便制定相应的计划来降低风险。
 
@@ -33,7 +30,6 @@
 - 组织中的用户多次以错误的密码尝试登录，从而触发了“从具有可疑活动的 IP 地址登录”报告
 
 若要防止在这种情况下生成误导性的安全报告，你应该在组织的公共 IP 地址列表中添加已知的 IP 地址范围。
-
 
 ###若要添加组织的公共 IP 地址范围，请执行以下步骤： 
 
@@ -51,8 +47,6 @@
 
 7.	在出现的对话框中添加地址范围，然后在完成时单击选中按钮。<br><br>![云应用程序发现的工作原理](./media/active-directory-known-networks/known-netwoks-04.png)
 
-
 **其他资源**
-
 
 <!---HONumber=Mooncake_1031_2016-->

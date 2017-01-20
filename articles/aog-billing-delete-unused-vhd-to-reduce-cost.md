@@ -1,12 +1,16 @@
-<properties 
-	pageTitle="释放虚拟磁盘未使用空间来减少计费容量" 
-	description="如何释放未使用的虚拟磁盘空间来减少费用" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="billing-aog" ms.date="" wacn.date="05/27/2016"/>
+---
+title: 释放虚拟磁盘未使用空间来减少计费容量
+description: 如何释放未使用的虚拟磁盘空间来减少费用
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: billing-aog
+ms.date: 
+wacn.date: 05/27/2016
+---
 
 #释放虚拟磁盘未使用空间来减少计费容量
 
@@ -22,18 +26,17 @@
 
 在 Windows 系统中，这个功能是通过驱动器优化提供的，默认每周会自动执行一次。当然也可以在“控制面板->系统和安全->对你的驱动器进行碎片整理和优化”中进行手动执行或更改设置。另一个必要条件是启用 UnMap，因为在 Azure 虚拟机上是默认不启用的，需要通过以下命令启用。
 
-	fsutil behavior set DisableDeleteNotify 0
+    fsutil behavior set DisableDeleteNotify 0
 
 在支持 TRIM 功能的 Linux 系统中，可以用fstrim命令来执行。例如对一个挂载在 /mnt/data 的 Azure 磁盘执行TRIM操作可以用以下命令：
 
-	sudo /sbin/fstrim /mnt/data
+    sudo /sbin/fstrim /mnt/data
 
 现在我们明白了虚拟磁盘计费的原理，就可以理解导致“已释放”空间被计费问题的原因。为了减少计费容量，首先要确定操作系统是否支持 TRIM 功能。尤其在 Linux 的情况下，各种不同的系统和版本的支持情况都略有不同，需要用户自己根据实际配置去确认和启用。如果系统支持，还须在必要时去执行它。为了方便维护，可以建一个计划任务来定期执行。
 最后，笔者再介绍一个用于查询 Azure 上的虚拟磁盘实际可计费大小的工具 [https://github.com/sandrinodimattia/WindowsAzure-VhdSize/releases/tag/v1.0](https://github.com/sandrinodimattia/WindowsAzure-VhdSize/releases/tag/v1.0)。它由 Azure MVP，Sandrino Di Mattia 开发，默认用于国际版 Azure，也可用于中国版。用法：wazvhdsize.exe <存储账户名> <访问密钥> <VHD的URL>
 
 ![](./media/aog-virtual-machine-delete-vhd-unused/real-vhd-tool.png)
  
-
 ##常见问题
 
 问：如果在虚拟机上挂载一个 100 GB 的数据盘，是只对使用的部分收费，还是整个 100 GB 收费？

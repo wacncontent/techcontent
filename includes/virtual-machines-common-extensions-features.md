@@ -1,6 +1,6 @@
 
 
-有关 VM 代理以及它们如何工作以支持 VM 扩展的详细信息，请参阅 VM 代理和 VM 扩展概述：[Windows](/documentation/articles/virtual-machines-windows-classic-manage-extensions/) 或者 [Linux](/documentation/articles/virtual-machines-linux-classic-manage-extensions/)。
+有关 VM 代理以及它们如何工作以支持 VM 扩展的详细信息，请参阅 VM 代理和 VM 扩展概述：[Windows](../articles/virtual-machines/virtual-machines-windows-classic-manage-extensions.md) 或者 [Linux](../articles/virtual-machines/virtual-machines-linux-classic-manage-extensions.md)。
 
 ##Azure VM 扩展
 
@@ -12,7 +12,7 @@ VM 扩展实现了你要用于 VM 的大多数关键功能，包括重置密码�
 
 |VM 扩展名称|功能说明|更多信息
 |---|---|---|
-|VMAccessAgent (Windows)|创建、更新和重置用户信息以及 RDP 连接配置。|[Windows](/documentation/articles/virtual-machines-windows-classic-extensions-customscript/)
+|VMAccessAgent (Windows)|创建、更新和重置用户信息以及 RDP 连接配置。|[Windows](../articles/virtual-machines/virtual-machines-windows-classic-extensions-customscript.md)
 |VMAccessForLinux (Linux)|创建、更新和重置用户信息以及 RDP 连接配置。|[Linux](https://github.com/Azure/azure-linux-extensions/tree/master/VMAccess)
 
 ##部署和配置管理
@@ -33,7 +33,7 @@ VM 扩展实现了你要用于 VM 的大多数关键功能，包括重置密码�
 
 |VM 扩展名称|功能说明|更多信息|
 |---|---|---|
-|**TrendMicroDSA**|启用 TrendMicro 的 Deep Security 平台支持可提供入侵检测和防护、防火墙、防恶意软件、Web 信誉评估、日志检查和完整性监视。|[如何在 Azure VM 上安装和配置 Trend Micro Deep Security 即服务](/documentation/articles/virtual-machines-windows-classic-install-trend/)|
+|**TrendMicroDSA**|启用 TrendMicro 的 Deep Security 平台支持可提供入侵检测和防护、防火墙、防恶意软件、Web 信誉评估、日志检查和完整性监视。|[如何在 Azure VM 上安装和配置 Trend Micro Deep Security 即服务](../articles/virtual-machines/virtual-machines-windows-classic-install-trend.md)|
 |**IaaSAntimalware**|用于 Azure 云服务和虚拟机的 Microsoft 反恶意软件是一种实时保护功能，当已知恶意软件或不需要的软件试图在你的系统上安装自身或运行时，它可使用可配置的警报帮助识别和删除病毒、间谍软件和其他恶意软件。||
 
 ##VM 操作和管理
@@ -42,7 +42,7 @@ VM 扩展实现了你要用于 VM 的大多数关键功能，包括重置密码�
 
 |**VM 扩展名称**|功能说明|更多信息|
 |---|---|---|
-|**AzureVmLogCollector**|可以使用 **AzureVMLogCollector** 扩展按需从一个或多个云服务 VM（从 web 角色和辅助角色）执行一次性日志收集，并将收集到的文件传输到 Azure 存储帐户 - 所有这些操作都无需远程登录到任何 VM。 |[AzureLogCollector 扩展](/documentation/articles/virtual-machines-windows-log-collector-extension/)|
+|**AzureVmLogCollector**|可以使用 **AzureVMLogCollector** 扩展按需从一个或多个云服务 VM（从 web 角色和辅助角色）执行一次性日志收集，并将收集到的文件传输到 Azure 存储帐户 - 所有这些操作都无需远程登录到任何 VM。 |[AzureLogCollector 扩展](../articles/virtual-machines/virtual-machines-windows-log-collector-extension.md)|
 |**IaaSDiagnostics**|启用、禁用和配置 Azure 诊断，也可由 **AzureCATExtensionHandler** 用于支持 SAP 监视。|[使用 Azure 诊断扩展监视 Azure 虚拟机](http://azure.microsoft.com/blog/2014/09/02/windows-azure-virtual-machine-monitoring-with-wad-extension/)|
 |**OSPatchingForLinux**|使 Azure VM 管理员能够使用自定义配置自动执行 VM OS 更新。可以使用 OSPatching 扩展为虚拟机配置 OS 更新，包括：指定安装 OS 修补程序的频率和时间，指定要安装哪些修补程序，并配置更新后的重新启动行为|[OS 修补扩展博客文章](http://azure.microsoft.com/blog/2014/10/23/automate-linux-vm-os-updates-using-ospatching-extension/)。另请参阅 Github 上 [OS 修补扩展](https://github.com/Azure/azure-linux-extensions)中的自述文件和源。|
 

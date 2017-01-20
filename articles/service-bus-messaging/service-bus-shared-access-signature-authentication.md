@@ -1,27 +1,28 @@
-<properties 
-   pageTitle="服务总线的共享访问签名身份验证 | Microsoft Azure"
-   description="关于服务总线的 SAS 身份验证的详细信息。"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-   editor="" />
-<tags 
-   ms.service="service-bus"
-    ms.date="10/02/2016"
-   wacn.date="01/04/2017" />
+---
+title: 服务总线的共享访问签名身份验证 | Microsoft Azure
+description: 关于服务总线的 SAS 身份验证的详细信息。
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
+
+ms.service: service-bus
+ms.date: 10/02/2016
+wacn.date: 01/04/2017
+---
 
 # 服务总线的共享访问签名身份验证
 
-通过[共享访问签名 (SAS)](/documentation/articles/service-bus-sas-overview/) 身份验证，应用程序能够使用在命名空间或在关联了特定权限的消息传送实体（队列或主题）上配置的访问密钥向服务总线进行身份验证。然后可以使用此密钥生成 SAS 令牌，客户端反过来可用它向服务总线进行身份验证。
+通过[共享访问签名 (SAS)](./service-bus-sas-overview.md) 身份验证，应用程序能够使用在命名空间或在关联了特定权限的消息传送实体（队列或主题）上配置的访问密钥向服务总线进行身份验证。然后可以使用此密钥生成 SAS 令牌，客户端反过来可用它向服务总线进行身份验证。
 
-Azure SDK 2.0 版和更高版本包括 SAS 身份验证支持。有关服务总线身份验证的详细信息，请参阅[服务总线身份验证和授权](/documentation/articles/service-bus-authentication-and-authorization/)。
+Azure SDK 2.0 版和更高版本包括 SAS 身份验证支持。有关服务总线身份验证的详细信息，请参阅[服务总线身份验证和授权](./service-bus-authentication-and-authorization.md)。
 
 ## 概念
 
 服务总线中的 SAS 身份验证涉及配置具有服务总线资源相关权限的加密密钥。客户端通过提供 SAS 令牌，声明访问服务总线资源。此令牌包括正在访问的 URI 资源，以及一个由配置密钥签名的到期时间。
 
-你可以在服务总线[中继](/documentation/articles/service-bus-fundamentals-hybrid-solutions/#relays)、[队列](/documentation/articles/service-bus-fundamentals-hybrid-solutions/#queues)、[主题](/documentation/articles/service-bus-fundamentals-hybrid-solutions/#topics)和[事件中心](/documentation/services/event-hubs/)上配置共享访问签名授权规则。
+你可以在服务总线[中继](./service-bus-fundamentals-hybrid-solutions.md#relays)、[队列](./service-bus-fundamentals-hybrid-solutions.md#queues)、[主题](./service-bus-fundamentals-hybrid-solutions.md#topics)和[事件中心](../event-hubs/index.md/)上配置共享访问签名授权规则。
 
 SAS 身份验证使用以下元素：
 
@@ -60,15 +61,11 @@ SAS 身份验证使用以下元素：
 
 任何有权访问共享访问授权规则中指定的签名密钥的客户端均可以生成 SAS 令牌。格式如下：
 
-
-		SharedAccessSignature sig=<signature-string>&se=<expiry>&skn=<keyName>&sr=<URL-encoded-resourceURI>
-
+        SharedAccessSignature sig=<signature-string>&se=<expiry>&skn=<keyName>&sr=<URL-encoded-resourceURI>
 
 SAS 令牌的**签名**使用签名字符串的 HMAC-SHA256 哈希来计算，此字符串包含授权规则的 [PrimaryKey](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.sharedaccessauthorizationrule.primarykey.aspx) 属性。签名字符串由资源 URI 和到期时间组成，格式如下：
 
-
-		StringToSign = <resourceURI> + "\n" + expiry;
-
+        StringToSign = <resourceURI> + "\n" + expiry;
 
 请注意，对此操作应使用编码的资源 URI。资源 URI 是向其声明访问权限的服务总线资源的完整 URI。例如，`http://<namespace>.servicebus.chinacloudapi.cn/<entityPath>` 或 `sb://<namespace>.servicebus.chinacloudapi.cn/<entityPath>`；即，`http://contoso.servicebus.chinacloudapi.cn/contosoTopics/T1/Subscriptions/S3`。
 
@@ -90,52 +87,46 @@ SAS 令牌中的 [KeyName](https://msdn.microsoft.com/zh-cn/library/azure/micros
 
 ## 访问命名空间上的共享访问授权规则
 
-在服务总线命名空间根路径上的操作需要证书身份验证。你必须上载用于 Azure 订阅的管理证书若要上传管理证书，请在 [Azure 经典管理门户][]的左窗格中单击“设置”。有关 Azure 管理证书的详细信息，请参阅 [Azure 证书概述](/documentation/articles/cloud-services-certs-create/#what-are-management-certificates)。
+在服务总线命名空间根路径上的操作需要证书身份验证。你必须上载用于 Azure 订阅的管理证书若要上传管理证书，请在 [Azure 经典管理门户][]的左窗格中单击“设置”。有关 Azure 管理证书的详细信息，请参阅 [Azure 证书概述](../cloud-services/cloud-services-certs-create.md#what-are-management-certificates)。
 
 访问服务总线命名空间上的共享访问授权规则的终结点如下所示：
 
-
-		https://management.core.chinacloudapi.cn/{subscriptionId}/services/ServiceBus/namespaces/{namespace}/AuthorizationRules/
-
+        https://management.core.chinacloudapi.cn/{subscriptionId}/services/ServiceBus/namespaces/{namespace}/AuthorizationRules/
 
 若要在服务总线命名空间上创建 [SharedAccessAuthorizationRule](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.sharedaccessauthorizationrule.aspx) 对象，在此终结点上使用序列化为 JSON 或 XML 的规则信息执行 POST 操作。例如：
 
+        // Base address for accessing authorization rules on a namespace
+        string baseAddress = @"https://management.core.chinacloudapi.cn/<subscriptionId>/services/ServiceBus/namespaces/<namespace>/AuthorizationRules/";
 
-		// Base address for accessing authorization rules on a namespace
-		string baseAddress = @"https://management.core.chinacloudapi.cn/<subscriptionId>/services/ServiceBus/namespaces/<namespace>/AuthorizationRules/";
+        // Configure authorization rule with base64-encoded 256-bit key and Send rights
+        var sendRule = new SharedAccessAuthorizationRule("contosoSendAll",
+            SharedAccessAuthorizationRule.GenerateRandomKey(),
+            new[] { AccessRights.Send });
 
-		// Configure authorization rule with base64-encoded 256-bit key and Send rights
-		var sendRule = new SharedAccessAuthorizationRule("contosoSendAll",
-		    SharedAccessAuthorizationRule.GenerateRandomKey(),
-		    new[] { AccessRights.Send });
+        // Operations on the Service Bus namespace root require certificate authentication.
+        WebRequestHandler handler = new WebRequestHandler
+        {
+            ClientCertificateOptions = ClientCertificateOption.Manual
+        };
+        // Access the management certificate by subject name
+        handler.ClientCertificates.Add(GetCertificate(<certificateSN>));
 
-		// Operations on the Service Bus namespace root require certificate authentication.
-		WebRequestHandler handler = new WebRequestHandler
-		{
-		    ClientCertificateOptions = ClientCertificateOption.Manual
-		};
-		// Access the management certificate by subject name
-		handler.ClientCertificates.Add(GetCertificate(<certificateSN>));
+        HttpClient httpClient = new HttpClient(handler)
+        {
+            BaseAddress = new Uri(baseAddress)
+        };
+        httpClient.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+        httpClient.DefaultRequestHeaders.Add("x-ms-version", "2015-01-01");
 
-		HttpClient httpClient = new HttpClient(handler)
-		{
-		    BaseAddress = new Uri(baseAddress)
-		};
-		httpClient.DefaultRequestHeaders.Accept.Add(
-		    new MediaTypeWithQualityHeaderValue("application/json"));
-		httpClient.DefaultRequestHeaders.Add("x-ms-version", "2015-01-01");
-
-		// Execute a POST operation on the baseAddress above to create an auth rule
-		var postResult = httpClient.PostAsJsonAsync("", sendRule).Result;
-
+        // Execute a POST operation on the baseAddress above to create an auth rule
+        var postResult = httpClient.PostAsJsonAsync("", sendRule).Result;
 
 与之类似，使用终结点上的 GET 操作来读取在命名空间上配置的授权规则。
 
 若要更新或删除特定的授权规则，请使用以下终结点：
 
-
-		https://management.core.chinacloudapi.cn/{subscriptionId}/services/ServiceBus/namespaces/{namespace}/AuthorizationRules/{KeyName}
-
+        https://management.core.chinacloudapi.cn/{subscriptionId}/services/ServiceBus/namespaces/{namespace}/AuthorizationRules/{KeyName}
 
 ## 访问实体上的共享访问授权规则
 
@@ -143,51 +134,47 @@ SAS 令牌中的 [KeyName](https://msdn.microsoft.com/zh-cn/library/azure/micros
 
 下面的代码演示了如何向队列添加授权规则。
 
+        // Create an instance of NamespaceManager for the operation
+        NamespaceManager nsm = NamespaceManager.CreateFromConnectionString( 
+            <connectionString> );
+        QueueDescription qd = new QueueDescription( <qPath> );
 
-		// Create an instance of NamespaceManager for the operation
-		NamespaceManager nsm = NamespaceManager.CreateFromConnectionString( 
-		    <connectionString> );
-		QueueDescription qd = new QueueDescription( <qPath> );
+        // Create a rule with send rights with keyName as "contosoQSendKey"
+        // and add it to the queue description.
+        qd.Authorization.Add(new SharedAccessAuthorizationRule("contosoSendKey", 
+            SharedAccessAuthorizationRule.GenerateRandomKey(), 
+            new[] { AccessRights.Send }));
 
-		// Create a rule with send rights with keyName as "contosoQSendKey"
-		// and add it to the queue description.
-		qd.Authorization.Add(new SharedAccessAuthorizationRule("contosoSendKey", 
-		    SharedAccessAuthorizationRule.GenerateRandomKey(), 
-		    new[] { AccessRights.Send }));
+        // Create a rule with listen rights with keyName as "contosoQListenKey"
+        // and add it to the queue description.
+        qd.Authorization.Add(new SharedAccessAuthorizationRule("contosoQListenKey",
+            SharedAccessAuthorizationRule.GenerateRandomKey(),
+            new[] { AccessRights.Listen }));
 
-		// Create a rule with listen rights with keyName as "contosoQListenKey"
-		// and add it to the queue description.
-		qd.Authorization.Add(new SharedAccessAuthorizationRule("contosoQListenKey",
-		    SharedAccessAuthorizationRule.GenerateRandomKey(),
-		    new[] { AccessRights.Listen }));
+        // Create a rule with manage rights with keyName as "contosoQManageKey"
+        // and add it to the queue description.
+        // A rule with manage rights must also have send and receive rights.
+        qd.Authorization.Add(new SharedAccessAuthorizationRule("contosoQManageKey",
+            SharedAccessAuthorizationRule.GenerateRandomKey(),
+            new[] {AccessRights.Manage, AccessRights.Listen, AccessRights.Send }));
 
-		// Create a rule with manage rights with keyName as "contosoQManageKey"
-		// and add it to the queue description.
-		// A rule with manage rights must also have send and receive rights.
-		qd.Authorization.Add(new SharedAccessAuthorizationRule("contosoQManageKey",
-		    SharedAccessAuthorizationRule.GenerateRandomKey(),
-		    new[] {AccessRights.Manage, AccessRights.Listen, AccessRights.Send }));
-
-		// Create the queue.
-		nsm.CreateQueue(qd);
-
+        // Create the queue.
+        nsm.CreateQueue(qd);
 
 ## 使用共享访问签名授权
 
 使用具有服务总线 .NET 库的 Azure.NET SDK 的应用程序可以通过 [SharedAccessSignatureTokenProvider](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.sharedaccesssignaturetokenprovider.aspx) 类使用 SAS 授权。下面的代码演示了使用令牌提供程序向服务总线队列发送消息。
 
+        Uri runtimeUri = ServiceBusEnvironment.CreateServiceUri("sb", 
+            <yourServiceNamespace>, string.Empty);
+        MessagingFactory mf = MessagingFactory.Create(runtimeUri, 
+            TokenProvider.CreateSharedAccessSignatureTokenProvider(keyName, key));
+        QueueClient sendClient = mf.CreateQueueClient(qPath);
 
-		Uri runtimeUri = ServiceBusEnvironment.CreateServiceUri("sb", 
-		    <yourServiceNamespace>, string.Empty);
-		MessagingFactory mf = MessagingFactory.Create(runtimeUri, 
-		    TokenProvider.CreateSharedAccessSignatureTokenProvider(keyName, key));
-		QueueClient sendClient = mf.CreateQueueClient(qPath);
-
-		//Sending hello message to queue.
-		BrokeredMessage helloMessage = new BrokeredMessage("Hello, Service Bus!");
-		helloMessage.MessageId = "SAS-Sample-Message";
-		sendClient.Send(helloMessage);
-
+        //Sending hello message to queue.
+        BrokeredMessage helloMessage = new BrokeredMessage("Hello, Service Bus!");
+        helloMessage.MessageId = "SAS-Sample-Message";
+        sendClient.Send(helloMessage);
 
 应用程序还可以通过使用可接受连接字符串的方法中的 SAS 连接字符串来使用 SAS 进行身份验证。
 
@@ -248,9 +235,9 @@ SAS 令牌中的 [KeyName](https://msdn.microsoft.com/zh-cn/library/azure/micros
 
 ## 后续步骤
 
-有关服务总线中的 SAS 的高级概述，请参阅[共享访问签名](/documentation/articles/service-bus-sas-overview/)。
+有关服务总线中的 SAS 的高级概述，请参阅[共享访问签名](./service-bus-sas-overview.md)。
 
-有关服务总线身份验证的更多背景信息，请参阅[服务总线身份验证和授权](/documentation/articles/service-bus-authentication-and-authorization/)。
+有关服务总线身份验证的更多背景信息，请参阅[服务总线身份验证和授权](./service-bus-authentication-and-authorization.md)。
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

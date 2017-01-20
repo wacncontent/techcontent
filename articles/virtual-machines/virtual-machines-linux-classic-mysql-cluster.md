@@ -1,25 +1,25 @@
-<properties
-	pageTitle="使用负载均衡集群集化 Linux 上的 MySQL"
-	description="该文章作为示例说明了在 Azure 中使用 MySQL 设置负载均衡的高可用性 Linux 群集的模式"
-	services="virtual-machines"
-	documentationCenter=""
-	authors="bureado"
-	manager="timlt"
-	editor=""/>
+---
+title: 使用负载均衡集群集化 Linux 上的 MySQL
+description: 该文章作为示例说明了在 Azure 中使用 MySQL 设置负载均衡的高可用性 Linux 群集的模式
+services: virtual-machines
+documentationCenter: 
+authors: bureado
+manager: timlt
+editor: 
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="04/14/2015"
-	wacn.date="01/05/2017"
-	ms.author="jparrel"/>
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 04/14/2015
+wacn.date: 01/05/2017
+ms.author: jparrel
+---
 
 # 使用负载均衡集群集化 Linux 上的 MySQL
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 发布 MySQL 群集的资源管理器模板，请点击[这里](https://github.com/Azure/azure-quickstart-templates/tree/master/mysql-replication/)。
 

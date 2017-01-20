@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure IaaS 用户手册 - 第二部分 | Azure"
-	description="详细介绍如何创建和管理 Azure 虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure IaaS 用户手册 - 第二部分 | Azure
+description: 详细介绍如何创建和管理 Azure 虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.date=""
-	wacn.date="09/27/2016"/>
+ms.service: virtual-machines-windows
+ms.date: 
+wacn.date: 09/27/2016
+---
 
 # Azure IaaS 用户手册 - 第二部分
 
-- [Azure IaaS 用户手册 - 第一部分](/documentation/articles/azure-Iaas-user-manual-part1/)
-- [Azure IaaS 用户手册 - 第三部分](/documentation/articles/azure-Iaas-user-manual-part3/)
+- [Azure IaaS 用户手册 - 第一部分](./azure-Iaas-user-manual-part1.md)
+- [Azure IaaS 用户手册 - 第三部分](./azure-Iaas-user-manual-part3.md)
 
 ##<a name="section_5"></a> 3.	开始创建 Azure 虚拟机
 ###<a name="section_5_1"></a> 3.1 模拟场景
@@ -38,15 +38,15 @@ Contoso 公司已经采购了 Azure 服务，计划把现有托管在 IDC 的企
 
 1.	**选择的 Azure 数据中心离最终用户越近越好**
 
-	考虑到 Contoso 公司的企业官网主要的用户群在华东地区，建议 Contoso 公司将应用部署到 Azure 在中国东部的数据中心。
+    考虑到 Contoso 公司的企业官网主要的用户群在华东地区，建议 Contoso 公司将应用部署到 Azure 在中国东部的数据中心。
 
 2.	**如果需要在 Azure 部署多台应用服务器，则需要将所有的应用服务器放在同一个数据中心**
 
-	建议用户将 Web 服务器和 SQL Server 服务器都部署在 Azure 中国东部数据中心，不要将 Web 服务器和 SQL Server 服务器部署在不同的数据中心，会产生内部通信的延时。
+    建议用户将 Web 服务器和 SQL Server 服务器都部署在 Azure 中国东部数据中心，不要将 Web 服务器和 SQL Server 服务器部署在不同的数据中心，会产生内部通信的延时。
 
 3.	**利用 CDN**
 
-	CDN 能将静态内容缓存到离用户最近的 CDN 节点服务器，提高应用程序的用户体验。
+    CDN 能将静态内容缓存到离用户最近的 CDN 节点服务器，提高应用程序的用户体验。
 
 ####<a name="section_5_2_2"></a> 3.2.2 Azure 是如何解决大并发
 建议使用多台 Azure 虚拟机，利用横向扩展的方式来解决大量的并发。
@@ -62,7 +62,7 @@ Contoso 公司已经采购了 Azure 服务，计划把现有托管在 IDC 的企
 ####<a name="section_5_2_3"></a> 3.2.3 选择最合适的虚拟机配置
 传统的虚拟机化技术，CPU 是共享的。Azure 虚拟机，除了 A0 的虚拟机类型，它的 CPU 是和别的用户共享的。其他类型的虚拟机，比如 A1-A7，它的 CPU 是独占的，不是和别的用户共享的。
 
-如[第 2.4.2 章](/documentation/articles/azure-Iaas-user-manual-part1/#section_4_4_2)，Azure 虚拟机分为 A 系列、 D 系列和 Dv2 系列，并且拥有不同的 CPU 和内存配置。
+如[第 2.4.2 章](./azure-Iaas-user-manual-part1.md#section_4_4_2)，Azure 虚拟机分为 A 系列、 D 系列和 Dv2 系列，并且拥有不同的 CPU 和内存配置。
 
 如果您在传统 IDC 托管中已经部署了硬件服务器。则在 Azure 平台选择最接近的 Azure 虚拟机配置即可。
 
@@ -73,7 +73,7 @@ Contoso 公司已经采购了 Azure 服务，计划把现有托管在 IDC 的企
 1.	相比 A 系列单台 VM 最大 8Core/56GB RAM 的配置，D 系列虚拟机单台最大的配置为 16Core/112GB RAM
 2.	D 系列的 CPU 性能比 A 系列提升约 60%
 
-其他内容，请参考[第 2.4.2 章](/documentation/articles/azure-Iaas-user-manual-part1/#section_4_4_2)。
+其他内容，请参考[第 2.4.2 章](./azure-Iaas-user-manual-part1.md#section_4_4_2)。
 
 ####<a name="section_5_2_4"></a> 3.2.4 规划好高可用
 在 Azure 虚拟机中，您也可以选择使用一台 Azure 虚拟机部署 AD Server，一台 Azure 虚拟机部署 Web 应用程序，使用另一台虚拟机部署 SQL Server。但是这样的场景是没有服务级别协议保障的。
@@ -127,7 +127,7 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 比如 Contoso 公司需要在月底进行一次大型的数字营销活动，需要使用 300 个 CPU Core，则可以提前联系世纪互联支持团队，让世纪互联运维团队将默认的 100 CPU Core 提升到 300个。
 
-[世纪互联支持团队](/support/contact)
+[世纪互联支持团队](https://www.azure.cn/support/contact)
 
 ![scenario2](./media/azure-Iaas-user-manual-part2/scenario2.png)
 
@@ -145,18 +145,18 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 1.	使用 Azure [经典管理门户](https://manage.windowsazure.cn)
 
-	优势：
-	* (1)	可以通过用户界面的方式，创建相应的 Azure 虚拟机，方便简单。
+    优势：
+    * (1)	可以通过用户界面的方式，创建相应的 Azure 虚拟机，方便简单。
 
-	劣势：
-	* (1)	某些 Azure 虚拟机的高级功能，比如固定内网 IP，固定公网 IP，设置虚拟机时区等，都需要借助于 Azure PowerShell。Azure 管理界面不具备相应的功能。
-	* (2)	当用户需要批量创建 Azure 虚拟机，批量配置虚拟机端口等，通过 Azure 管理界面就非常麻烦。
+    劣势：
+    * (1)	某些 Azure 虚拟机的高级功能，比如固定内网 IP，固定公网 IP，设置虚拟机时区等，都需要借助于 Azure PowerShell。Azure 管理界面不具备相应的功能。
+    * (2)	当用户需要批量创建 Azure 虚拟机，批量配置虚拟机端口等，通过 Azure 管理界面就非常麻烦。
 
 2.	使用 Azure PowerShell，创建 Azure 虚拟机。
 
-	Azure PowerShell 可以批量创建虚拟机，其他高级功能也需要通过 Azure PowerShell 来进行配置。
+    Azure PowerShell 可以批量创建虚拟机，其他高级功能也需要通过 Azure PowerShell 来进行配置。
 
-	关于 Azure PowerShell 的详细内容，请参考[第 3.5 章](#section_5_5)内容。
+    关于 Azure PowerShell 的详细内容，请参考[第 3.5 章](#section_5_5)内容。
 
 ####<a name="section_5_3_2"></a> 3.3.2 规划
 在创建 Azure 虚拟机之前，首先需要对 Azure 虚拟机进行规划。规划主要分为：
@@ -170,14 +170,14 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 1.	数据中心选择中国东部
 2.	虚拟网络
 
-	* (1)	创建 Azure 虚拟网络，命名为 ContosoVNet，同时设置虚拟网络的 IP Range 为10.0.0.0 - 10.0.3.255
-	* (2)	设置 3 个 Sub-net
+    * (1)	创建 Azure 虚拟网络，命名为 ContosoVNet，同时设置虚拟网络的 IP Range 为10.0.0.0 - 10.0.3.255
+    * (2)	设置 3 个 Sub-net
 
-		AD-Subnet，IP Range 为10.0.0.0 – 10.0.0.255
+        AD-Subnet，IP Range 为10.0.0.0 – 10.0.0.255
 
-		Web-Subnet，IP Range 为10.0.1.0 – 10.0.1.255
+        Web-Subnet，IP Range 为10.0.1.0 – 10.0.1.255
 
-		DB-Subnet，IP Range 为10.0.2.0 – 10.0.2.255
+        DB-Subnet，IP Range 为10.0.2.0 – 10.0.2.255
 
 3.	在中国东部创建 2 个存储账号 contosostor1 和 contosostor2
 4.	创建 6 台 Azure 虚拟机
@@ -239,67 +239,67 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 ####<a name="section_5_4_1"></a> 3.4.1 创建虚拟网络
 1.	在 Azure 管理界面的左下角，点击 ”新建” 按钮。如下图:
 
-	![vm_create](./media/azure-Iaas-user-manual-part2/vm_create.png)
+    ![vm_create](./media/azure-Iaas-user-manual-part2/vm_create.png)
 
 2.	在弹出的窗口中，点击 ”网络服务”，”虚拟网络”，”自定义创建”。如下图:
 
-	![vm_create2](./media/azure-Iaas-user-manual-part2/vm_create2.png)
+    ![vm_create2](./media/azure-Iaas-user-manual-part2/vm_create2.png)
 
 3.	在弹出的窗口中，将名称命名为 ContosoVNet，位置选择 ”中国东部”
 
-	![vm_create3](./media/azure-Iaas-user-manual-part2/vm_create3.png)
+    ![vm_create3](./media/azure-Iaas-user-manual-part2/vm_create3.png)
 
 4.	下一步，设置 DNS 地址：
 
-	![vm_create4](./media/azure-Iaas-user-manual-part2/vm_create4.png)
+    ![vm_create4](./media/azure-Iaas-user-manual-part2/vm_create4.png)
 
-	注意：因为需要使用 AD Server，这里的 DNS 就是 AD Server 的内网 IP 地址。
+    注意：因为需要使用 AD Server，这里的 DNS 就是 AD Server 的内网 IP 地址。
 
-	注意: 在 Azure 云环境，Azure 虚拟机的 Private IP，DNS Server 都必须通过虚拟网络来设置。不可以通过远程桌面连接 (Remote Desktop)，来修改 Azure 虚拟机的本地 TCP/IP 地址。如果这样操作的话，Azure 虚拟机会运行不正常。
+    注意: 在 Azure 云环境，Azure 虚拟机的 Private IP，DNS Server 都必须通过虚拟网络来设置。不可以通过远程桌面连接 (Remote Desktop)，来修改 Azure 虚拟机的本地 TCP/IP 地址。如果这样操作的话，Azure 虚拟机会运行不正常。
 
-	如果用户场景不需要设置 AD 服务器，则 DNS 服务器配置页面可以不输入任何信息，直接选择下一步。
+    如果用户场景不需要设置 AD 服务器，则 DNS 服务器配置页面可以不输入任何信息，直接选择下一步。
 
 5.	最后，设置虚拟网络的 IP Range 和 Subnet。如下图：
 
-	![vm_create5](./media/azure-Iaas-user-manual-part2/vm_create5.png)
+    ![vm_create5](./media/azure-Iaas-user-manual-part2/vm_create5.png)
 
-	上图中：
-	* (1)	IP Range 为 10.0.0.0 – 10.0.3.255
-	* (2)	子网 AD-Subnet 的 IP Range 为 10.0.0.0 – 10.0.0.255。注意每个子网的前 4 个 IP 是 Azure 系统保留的，对于 AD-Subnet 来说，可用的 IP Range 为 10.0.0.4 – 10.0.0.255
-	* (3)	子网 Web-Subnet 的 IP Range 为 10.0.1.0 – 10.0.1.255。同上，该子网实际可用的 IP Range 为 10.0.1.4 – 10.0.1.255。
-	* (4)	子网 DB-Subnet 的 IP Range 为 10.0.2.0 – 10.0.3.255。同上，该子网的实际可用 IP Range 为 10.0.2.0 – 10.0.3.255。
-	* (5)	定义了虚拟网络以后，创建的 Azure 虚拟机的内网 IP 地址，就是在虚拟网络中定义的可用地址范围和子网来定义的。
+    上图中：
+    * (1)	IP Range 为 10.0.0.0 – 10.0.3.255
+    * (2)	子网 AD-Subnet 的 IP Range 为 10.0.0.0 – 10.0.0.255。注意每个子网的前 4 个 IP 是 Azure 系统保留的，对于 AD-Subnet 来说，可用的 IP Range 为 10.0.0.4 – 10.0.0.255
+    * (3)	子网 Web-Subnet 的 IP Range 为 10.0.1.0 – 10.0.1.255。同上，该子网实际可用的 IP Range 为 10.0.1.4 – 10.0.1.255。
+    * (4)	子网 DB-Subnet 的 IP Range 为 10.0.2.0 – 10.0.3.255。同上，该子网的实际可用 IP Range 为 10.0.2.0 – 10.0.3.255。
+    * (5)	定义了虚拟网络以后，创建的 Azure 虚拟机的内网 IP 地址，就是在虚拟网络中定义的可用地址范围和子网来定义的。
 
 6.	创建完毕后，就可以在 Azure 管理界面上查看到您创建成功的虚拟网络 ContosoVNet。如下图：
 
-	![vm_create6](./media/azure-Iaas-user-manual-part2/vm_create6.png)
+    ![vm_create6](./media/azure-Iaas-user-manual-part2/vm_create6.png)
 
 ####<a name="section_5_4_2"></a> 3.4.2 创建存储账号
 根据模拟场景，需要创建 2 个存储账号：contosostor1 和 contosostor2。注意存储账号的名称只能是小写英文字符。
 
 1.	首先，在 Azure 管理界面的左下角，点击 ”新建” 按钮。如下图:
 
-	![vm_create](./media/azure-Iaas-user-manual-part2/vm_create.png)
+    ![vm_create](./media/azure-Iaas-user-manual-part2/vm_create.png)
 
 2.	创建存储账号 contostor1，位置选择中国东部
 
-	![vm_create7](./media/azure-Iaas-user-manual-part2/vm_create7.png)
+    ![vm_create7](./media/azure-Iaas-user-manual-part2/vm_create7.png)
 
-	复制选项中，可以根据自身的需求，选择本地冗余或者异地冗余。
+    复制选项中，可以根据自身的需求，选择本地冗余或者异地冗余。
 
-	注意: 从成本角度来说，异地冗余的成本会比本地冗余要高。
+    注意: 从成本角度来说，异地冗余的成本会比本地冗余要高。
 
 3.	创建另外一个存储账号 contostor2，位置选择中国东部
 
-	![vm_create8](./media/azure-Iaas-user-manual-part2/vm_create8.png)
+    ![vm_create8](./media/azure-Iaas-user-manual-part2/vm_create8.png)
 
-	复制选项中，可以根据自身的需求，选择本地冗余或者异地冗余。
+    复制选项中，可以根据自身的需求，选择本地冗余或者异地冗余。
 
 4.	这样在存储栏目里，就可以看到创建成功的两个存储账号，如下图:
 
-	![vm_create9](./media/azure-Iaas-user-manual-part2/vm_create9.png)
+    ![vm_create9](./media/azure-Iaas-user-manual-part2/vm_create9.png)
 
-	注意：一个 Azure 存储账号的 IOPS 上限为 20000，考虑到每块磁盘的最大 IOPS 为 500，建议不要在同一个存储账号保存超过 40 块磁盘。
+    注意：一个 Azure 存储账号的 IOPS 上限为 20000，考虑到每块磁盘的最大 IOPS 为 500，建议不要在同一个存储账号保存超过 40 块磁盘。
 
 ####<a name="section_5_4_3"></a> 3.4.3 创建虚拟机说明
 在上面的章节中，已经创建了如下内容：
@@ -339,7 +339,7 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 4.	子网 DB-Subnet 的 IP Range 为 10.0.2.0 – 10.0.3.255。同上，该子网的实际可用 IP Range 为 10.0.2.0 – 10.0.3.255。
 5.	定义了虚拟网络以后，创建的 Azure 虚拟机的内网 IP 地址，就是在虚拟网络中定义的可用地址范围和子网来定义的。
 
->[AZURE.NOTE]
+>[!NOTE]
 >使用 Azure 管理界面创建的虚拟机，是无法固定内网 IP 地址的。必须通过 Azure PowerShell，才能固定虚拟机的内网 IP 地址。
 
 在 Azure 云平台是没有 DHCP 这个概念的。如果将第一台虚拟机 VM01，通过管理界面进行创建，加入到 AD-Subnet 的话，这台虚拟机 VM01 会自动获得第一个可用的内网 IP (Private IP)，为 10.0.0.4。
@@ -352,12 +352,12 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 假设将虚拟机通过管理界面关机。经过一段时间后，将 VM03 首先通过管理界面开机，则 VM03 会自动获得第一个可用的内网 IP 地址，为 10.0.0.4。
 
->[AZURE.IMPORTANT]
+>[!IMPORTANT]
 >如果通过管理界面创建 Azure 虚拟机，通过管理界面开关虚拟机，内网 IP 地址会变化。
 
 如果需要固定内网 IP 地址，请直接阅读[第 3.5 章](#section_5_5)，只有通过 PowerShell 创建的虚拟机，内网 IP 地址才是固定的。
 
->[AZURE.IMPORTANT]
+>[!IMPORTANT]
 >使用管理界面创建的 Azure 虚拟机，默认时区是 UTC 时区。而平时使用的时区是 UTC+8 (北京时区)。
 
 #####<a name="section_5_4_4_2"></a> 3.4.4.2 创建第一台 AD Server
@@ -406,82 +406,82 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 1.	在 Azure [经典管理门户](https://manage.windowsazure.cn/)。选择新建，计算，虚拟机，从库中。如下图：
 
-	![vm_create12](./media/azure-Iaas-user-manual-part2/vm_create12.png)
+    ![vm_create12](./media/azure-Iaas-user-manual-part2/vm_create12.png)
 
 2.	镜像选择 Windows Server 2012 R2 Datacenter (en-us)
 
-	![vm_create13](./media/azure-Iaas-user-manual-part2/vm_create13.png)
+    ![vm_create13](./media/azure-Iaas-user-manual-part2/vm_create13.png)
 
 3.	设置虚拟机配置
 
-	![vm_create14](./media/azure-Iaas-user-manual-part2/vm_create14.png)
+    ![vm_create14](./media/azure-Iaas-user-manual-part2/vm_create14.png)
 
-	根据上图，设置虚拟机名称为 ContosoAD01，虚拟机类型为标准。虚拟机配置为 D2 (2Core/7GB)。用户名密码按照之前的规划进行设置。
+    根据上图，设置虚拟机名称为 ContosoAD01，虚拟机类型为标准。虚拟机配置为 D2 (2Core/7GB)。用户名密码按照之前的规划进行设置。
 
 4.	在接下来配置文件里，您可以输入以下信息：
 
-	![vm_create15](./media/azure-Iaas-user-manual-part2/vm_create15.png)
+    ![vm_create15](./media/azure-Iaas-user-manual-part2/vm_create15.png)
 
-	在上面的图片中，需要注意以下内容
-	* (1)	因为创建的是第一台 AD 服务器，所以选择创建新的云服务
-	* (2)	在 DNS 名称中，输入自定义的 DNS 名称 ContosoADCS
-	* (3)	在虚拟网络中，选择之前创建的虚拟机网络名称 ContosoVNet
-		<br/>选择对应的虚拟网络子网 AD-Subnet
-	* (4)	存储账户，选择之前创建的存储账号 contosostor1
-	* (5)	对于可用性集，因为创建的是新的云服务，所以需要创建新的可用性集，命名为 ADAvbSet
+    在上面的图片中，需要注意以下内容
+    * (1)	因为创建的是第一台 AD 服务器，所以选择创建新的云服务
+    * (2)	在 DNS 名称中，输入自定义的 DNS 名称 ContosoADCS
+    * (3)	在虚拟网络中，选择之前创建的虚拟机网络名称 ContosoVNet
+        <br/>选择对应的虚拟网络子网 AD-Subnet
+    * (4)	存储账户，选择之前创建的存储账号 contosostor1
+    * (5)	对于可用性集，因为创建的是新的云服务，所以需要创建新的可用性集，命名为 ADAvbSet
 
-	在配置页面的下方，还会指定终节点，您可以使用系统默认设置。
+    在配置页面的下方，还会指定终节点，您可以使用系统默认设置。
 
-	![vm_create16](./media/azure-Iaas-user-manual-part2/vm_create16.png)
+    ![vm_create16](./media/azure-Iaas-user-manual-part2/vm_create16.png)
 
-	关于终结点的内容，将在[第 4 章](/documentation/articles/azure-Iaas-user-manual-part3/#section_6)做详细的介绍。
+    关于终结点的内容，将在[第 4 章](./azure-Iaas-user-manual-part3.md#section_6)做详细的介绍。
 
 5.	最后点击确认，这样就完成创建第一个 AD Server。在虚拟机创建列表中就会显示 ”正在启动 (正在配置)”
 
-	![vm_create17](./media/azure-Iaas-user-manual-part2/vm_create17.png)
+    ![vm_create17](./media/azure-Iaas-user-manual-part2/vm_create17.png)
 
-	>[AZURE.NOTE]
-	>注意：在客户点击创建的时间点，Azure 就开始计费。而不是等到虚拟机创建完毕才开始计费。
+    >[!NOTE]
+    >注意：在客户点击创建的时间点，Azure 就开始计费。而不是等到虚拟机创建完毕才开始计费。
 
 <br/>
 
 1.	等待 ContosoAD01 这台虚拟机创建完毕，状态为 ”正在运行”。
 
-	然后点击虚拟机名称，如下图红色区域：
+    然后点击虚拟机名称，如下图红色区域：
 
-	![vm_create18](./media/azure-Iaas-user-manual-part2/vm_create18.png)
+    ![vm_create18](./media/azure-Iaas-user-manual-part2/vm_create18.png)
 
 2.	点击后，页面会进行跳转。可以查看到 ContosoAD01 这个虚拟机的配置信息。如下图:
 
-	![vm_create19](./media/azure-Iaas-user-manual-part2/vm_create19.png)
+    ![vm_create19](./media/azure-Iaas-user-manual-part2/vm_create19.png)
 
-	里面的 DNS 名称，主机名称和虚拟机大小，就是之前在创建虚拟机的配置页面里进行配置的。
+    里面的 DNS 名称，主机名称和虚拟机大小，就是之前在创建虚拟机的配置页面里进行配置的。
 
-	注意：内部 IP 地址是从 AD-Subnet 子网中获得的第一个有效 IP，为 10.0.0.4
+    注意：内部 IP 地址是从 AD-Subnet 子网中获得的第一个有效 IP，为 10.0.0.4
 
 #####<a name="section_5_4_4_3"></a> 3.4.4.3 创建第二台AD Server
 创建完第一台 AD Server 之后，从高可用的角度来说，需要创建第 2 台 AD Server。步骤如下：
 
 1.	选择新建，计算，虚拟机，从库中。如下图：
 
-	![vm_create12](./media/azure-Iaas-user-manual-part2/vm_create12.png)
+    ![vm_create12](./media/azure-Iaas-user-manual-part2/vm_create12.png)
 
 2.	镜像选择 Windows Server 2012 R2 Datacenter (en-us)
 
-	![vm_create12](./media/azure-Iaas-user-manual-part2/vm_create13.png)
+    ![vm_create12](./media/azure-Iaas-user-manual-part2/vm_create13.png)
 
 3.	设置虚拟机配置。注意虚拟机名称命名为 ContosoAD02
 
-	![vm_create20](./media/azure-Iaas-user-manual-part2/vm_create20.png)
+    ![vm_create20](./media/azure-Iaas-user-manual-part2/vm_create20.png)
 
 4.	在接下来配置文件里，输入以下信息：
 
-	![vm_create21](./media/azure-Iaas-user-manual-part2/vm_create21.png)
+    ![vm_create21](./media/azure-Iaas-user-manual-part2/vm_create21.png)
 
-	注意，创建的第 2 台 AD Server 中，与第一台配置稍有不同:
-	* (1)	复用之前已经创建的云服务 ContosoADCS
-	* (2)	选择对应的虚拟网络和存储账户
-	* (3)	选择之前已经创建的可用性集 ADAvbSet。
+    注意，创建的第 2 台 AD Server 中，与第一台配置稍有不同:
+    * (1)	复用之前已经创建的云服务 ContosoADCS
+    * (2)	选择对应的虚拟网络和存储账户
+    * (3)	选择之前已经创建的可用性集 ADAvbSet。
 
 #####<a name="section_5_4_4_4"></a> 3.4.4.4 观察 AD Server
 等待第 2 台虚拟机创建完毕，状态变为 ”正在运行”。然后观察一下 Azure 管理界面。
@@ -560,17 +560,17 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 1.	在创建第一台 Web Server 的时候，需要创建新的云服务。如下图:
 
-	![vm_create25](./media/azure-Iaas-user-manual-part2/vm_create25.png)
+    ![vm_create25](./media/azure-Iaas-user-manual-part2/vm_create25.png)
 
 2.	在创建第 2 台 Web Server 的时候，需要注意:
 
-	* (1)	复用之前已经创建的云服务 ContosoWebCS
-	* (2)	选择对应的虚拟网络和存储账户，子网为 Web-Subnet
-	* (3)	选择之前已经创建的可用性集 WebAvbSet。
+    * (1)	复用之前已经创建的云服务 ContosoWebCS
+    * (2)	选择对应的虚拟网络和存储账户，子网为 Web-Subnet
+    * (3)	选择之前已经创建的可用性集 WebAvbSet。
 
-	如下图：
+    如下图：
 
-	![vm_create26](./media/azure-Iaas-user-manual-part2/vm_create26.png)
+    ![vm_create26](./media/azure-Iaas-user-manual-part2/vm_create26.png)
 
 注意创建 Web Server 的先后顺序，第 1 个创建成功的 Web Server ContosoWeb01，会从子网 Web-Subnet 中，自动获得第一个可用的内网 IP，为 10.0.1.4。第 2 个创建成功的 ContosoWeb02，会自动获得第 2 个可用的内网 IP，地址为 10.0.1.5。
 
@@ -630,7 +630,7 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 ![vm_create28](./media/azure-Iaas-user-manual-part2/vm_create28.png)
 
-有关 SQL Server 虚拟机配置 Always-On 的文档，请参考 [文档](/documentation/articles/virtual-machines-windows-classic-ps-sql-alwayson-availability-groups/)
+有关 SQL Server 虚拟机配置 Always-On 的文档，请参考 [文档](./virtual-machines/virtual-machines-windows-classic-ps-sql-alwayson-availability-groups.md)
 
 #####<a name="section_5_4_4_7"></a> 3.4.4.7 总结
 一般情况下，创建 Azure 虚拟机之前需要做如下准备:
@@ -657,46 +657,46 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 ####<a name="section_5_5_2"></a> 3.5.2 配置 PowerShell
 1.	在 Azure 中国的 [官方网站](/downloads)，安装 Azure PowerShell。如下图：
 
-	![vm_powershell](./media/azure-Iaas-user-manual-part2/vm_powershell.png)
+    ![vm_powershell](./media/azure-Iaas-user-manual-part2/vm_powershell.png)
 
 2.	安装完毕后，以管理员身份运行 Azure PowerShell。如下图：
 
-	![vm_powershell2](./media/azure-Iaas-user-manual-part2/vm_powershell2.png)
+    ![vm_powershell2](./media/azure-Iaas-user-manual-part2/vm_powershell2.png)
 
 3.	如果您是第一次运行 Azure PowerShell，需要在本地创建证书文件。以便本地计算机和 Azure 建立可靠的安全连接。请在 Azure PowerShell 输入以下命令：
 
-		Get-AzurePublishSettingsFile -Environment AzureChinaCloud
+        Get-AzurePublishSettingsFile -Environment AzureChinaCloud
 
-	输入命令后，计算机会弹出新的浏览器窗口，导航至 Azure 中国网站，并要求输入 Org ID 和密码进行登陆
+    输入命令后，计算机会弹出新的浏览器窗口，导航至 Azure 中国网站，并要求输入 Org ID 和密码进行登陆
 
 4.	如果在运行 Azure PowerShell 之后报错，错误信息为系统上禁止运行脚本，请在 PowerShell 中执行
 
-		Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+        Set-ExecutionPolicy -ExecutionPolicy Unrestricted
 
 5.	登陆完毕后，系统会要求保存扩展名为 publishsettings 的文件，您可以保存至本地计算机 (这里保存在 D 盘上)。如下图:
 
-	![vm_powershell3](./media/azure-Iaas-user-manual-part2/vm_powershell3.png)
+    ![vm_powershell3](./media/azure-Iaas-user-manual-part2/vm_powershell3.png)
 
 6.	然后回到 Azure PowerShell 窗口，继续输入以下命令
 
-		Import-AzurePublishSettingsFile <PathToFile>
+        Import-AzurePublishSettingsFile <PathToFile>
 
-	PathToFile 就是保存步骤 4 中扩展名为 publishsettings 的文件位置 (文件路径+文件名)，比如将该文件保存至 D 盘根目录，就输入以下命令：
+    PathToFile 就是保存步骤 4 中扩展名为 publishsettings 的文件位置 (文件路径+文件名)，比如将该文件保存至 D 盘根目录，就输入以下命令：
 
-		Import-AzurePublishSettingsFile 'D:\内部使用-6-2-2014-credentials.publishsettings'
+        Import-AzurePublishSettingsFile 'D:\内部使用-6-2-2014-credentials.publishsettings'
 
-	上面的命令实际上是将本地的 publishsettings 文件上传至 Azure 中国的 Management Certificates。您可以打开[经典管理门户](https://manage.windowsazure.cn)。点击设置，并选择管理证书，查看上传的 publishsettings 文件。如下图：
+    上面的命令实际上是将本地的 publishsettings 文件上传至 Azure 中国的 Management Certificates。您可以打开[经典管理门户](https://manage.windowsazure.cn)。点击设置，并选择管理证书，查看上传的 publishsettings 文件。如下图：
 
-	![vm_powershell4](./media/azure-Iaas-user-manual-part2/vm_powershell4.png)
+    ![vm_powershell4](./media/azure-Iaas-user-manual-part2/vm_powershell4.png)
 
 7.	这样，本地计算机就和 Azure 中国建立了可靠安全的连接了。在不删除上传的 Management Certificates 情况下，下次运行 Azure PowerShell 将不必再次运行上面的运行。接下来可以运行您的命令了。
 
-	比如输入命令 Get-AzureSubscription，可以查看到当前的订阅
+    比如输入命令 Get-AzureSubscription，可以查看到当前的订阅
 
-	![vm_powershell5](./media/azure-Iaas-user-manual-part2/vm_powershell5.png)
+    ![vm_powershell5](./media/azure-Iaas-user-manual-part2/vm_powershell5.png)
 
 ####<a name="section_5_5_3"></a> 3.5.3 使用 PowerShell 创建 Windows VM
->[AZURE.NOTE]
+>[!NOTE]
 >本节所有的 Azure PowerShell，在执行的时候请不要用换行符。请复制到记事本后，根据自己的情况，修改相应的参数。
 
 首先，请预先准备以下内容：
@@ -716,30 +716,29 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 1.	使用命令 Get-AzureSubscription，通过 PowerShell 查看多个订阅，如下图:
 
-	![vm_powershell6](./media/azure-Iaas-user-manual-part2/vm_powershell6.png)
+    ![vm_powershell6](./media/azure-Iaas-user-manual-part2/vm_powershell6.png)
 
-	上图中，可以查看到，这里的 Azure PowerShell 已经关联两个订阅，分别为 POC 和 Internal Billing。
+    上图中，可以查看到，这里的 Azure PowerShell 已经关联两个订阅，分别为 POC 和 Internal Billing。
 
 2.	在某些情况下，需要设置默认的订阅，可以执行以下命令：
 
-		Select-AzureSubscription "<SubscriptionName>" –Default
+        Select-AzureSubscription "<SubscriptionName>" –Default
 
-	比如设置 POC 这个订阅为默认订阅，就执行以下命令：
+    比如设置 POC 这个订阅为默认订阅，就执行以下命令：
 
-		Select-AzureSubscription "POC" –Default
+        Select-AzureSubscription "POC" –Default
 
-	然后重新执行 Get-AzureSubscription，可以看到 POC 这个订阅，IsDefault 属性为 True。
+    然后重新执行 Get-AzureSubscription，可以看到 POC 这个订阅，IsDefault 属性为 True。
 　
-	即 POC 这个订阅被设置为了默认的订阅
+    即 POC 这个订阅被设置为了默认的订阅
 
-	![vm_powershell7](./media/azure-Iaas-user-manual-part2/vm_powershell7.png)
+    ![vm_powershell7](./media/azure-Iaas-user-manual-part2/vm_powershell7.png)
 
 3.	有时，需要在多个订阅之前进行切换。可以执行以下命令
 
-		Select-AzureSubscription "<SubscriptionName>" –Current
+        Select-AzureSubscription "<SubscriptionName>" –Current
 
-	这样，可以把某个订阅设置为当前的订阅。
-
+    这样，可以把某个订阅设置为当前的订阅。
 
 以 AD Server 为例，使用 Azure PowerShell 创建 AD01 和 AD02
 
@@ -786,60 +785,59 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 1.	设置当前订阅的存储账号
 
-	<pre><code>Set-AzureSubscription -SubscriptionName '[SubscriptionName]' -CurrentStorageAccount '[StorageName]'</code></pre>
+    <pre><code>Set-AzureSubscription -SubscriptionName '[SubscriptionName]' -CurrentStorageAccount '[StorageName]'</code></pre>
 
-	以此模拟场景为例，实际的 PowerShell 命令为
+    以此模拟场景为例，实际的 PowerShell 命令为
 
-	<pre><code>Set-AzureSubscription -SubscriptionName 'Marketing_Subscription' -CurrentStorageAccount 'contosostor1'</code></pre>
+    <pre><code>Set-AzureSubscription -SubscriptionName 'Marketing_Subscription' -CurrentStorageAccount 'contosostor1'</code></pre>
 
 2.	设置当前订阅
 
-	<pre><code>Select-AzureSubscription -SubscriptionName '[SubscriptionName]' –Current</code></pre>
+    <pre><code>Select-AzureSubscription -SubscriptionName '[SubscriptionName]' –Current</code></pre>
 
-	以此模拟场景为例，设置当前订阅的名称为：
+    以此模拟场景为例，设置当前订阅的名称为：
 
-	<pre><code>Select-AzureSubscription -SubscriptionName 'Marketing_Subscription' –Current</code></pre>
+    <pre><code>Select-AzureSubscription -SubscriptionName 'Marketing_Subscription' –Current</code></pre>
 
 3.	通过精确查询，查询到 Azure 虚拟机镜像
 
-		$imageList = Get-AzureVMImage | where {$_.ImageName -eq "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-Datacenter-201506.01-en.us-127GB.vhd"}
-		$image=$imageList[0]
+        $imageList = Get-AzureVMImage | where {$_.ImageName -eq "55bc2b193643443bb879a78bda516fc8__Windows-Server-2012-Datacenter-201506.01-en.us-127GB.vhd"}
+        $image=$imageList[0]
 
-	或者使用模糊查询，查询到某个虚拟机镜像
+    或者使用模糊查询，查询到某个虚拟机镜像
 
-		$imageList = Get-AzureVMImage | where {$_.ImageName -like "*Windows-Server-2012-Datacenter*"}
-		$image=$imageList[0]
+        $imageList = Get-AzureVMImage | where {$_.ImageName -like "*Windows-Server-2012-Datacenter*"}
+        $image=$imageList[0]
 
 4.	根据实际情况，修改下面的参数
 
-		$ServiceName= "[虚拟机名称]"
-		$VMSize= "[虚拟机大小]"
-		$AvbSetName="[可用性集名称]"
-		$adminusername="[虚拟机登录名]"
-		$adminpassword="[虚拟机密码]"
-		$SubnetName="[子网名称]"
-		$PrivateIP="[内网IP地址]"
-		$CloudServiceName="[云服务名称]"
-		$VNetName="[虚拟网络名称]"
-		$Location="[Azure数据中心]"
+        $ServiceName= "[虚拟机名称]"
+        $VMSize= "[虚拟机大小]"
+        $AvbSetName="[可用性集名称]"
+        $adminusername="[虚拟机登录名]"
+        $adminpassword="[虚拟机密码]"
+        $SubnetName="[子网名称]"
+        $PrivateIP="[内网IP地址]"
+        $CloudServiceName="[云服务名称]"
+        $VNetName="[虚拟网络名称]"
+        $Location="[Azure数据中心]"
 
-		New-AzureVMConfig -Name $ServiceName -InstanceSize $VMSize -ImageName $image.ImageName -AvailabilitySetName $AvbSetName ` | Add-AzureProvisioningConfig -Windows -AdminUsername $adminusername -Password $adminpassword -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames $SubnetName | Set-AzureStaticVNetIP -IPAddress $PrivateIP | New-AzureVM -ServiceName $CloudServiceName -VNetName $VNetName -Location $Location
+        New-AzureVMConfig -Name $ServiceName -InstanceSize $VMSize -ImageName $image.ImageName -AvailabilitySetName $AvbSetName ` | Add-AzureProvisioningConfig -Windows -AdminUsername $adminusername -Password $adminpassword -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames $SubnetName | Set-AzureStaticVNetIP -IPAddress $PrivateIP | New-AzureVM -ServiceName $CloudServiceName -VNetName $VNetName -Location $Location
 
+    以创建第一台 ContosoAD01 为例，实际的 PowerShell 如下：
 
-	以创建第一台 ContosoAD01 为例，实际的 PowerShell 如下：
-
-		$ServiceName= "ContosoAD01"
-		$VMSize= "Standard_D2"
-		$AvbSetName="ADAvbSet"
-		$adminusername="AzureAdmin"
-		$adminpassword="Contoso!000"
-		$SubnetName="AD-Subnet "
-		$PrivateIP="10.0.0.4"
-		$CloudServiceName="ContosoADCS"
-		$VNetName="ContosoVNet "
-		$Location="China East"
-		
-		New-AzureVMConfig -Name $ServiceName -InstanceSize $VMSize -ImageName $image.ImageName -AvailabilitySetName $AvbSetName ` | Add-AzureProvisioningConfig -Windows -AdminUsername $adminusername -Password $adminpassword -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames $SubnetName | Set-AzureStaticVNetIP -IPAddress $PrivateIP | New-AzureVM -ServiceName $CloudServiceName -VNetName $VNetName -Location $Location
+        $ServiceName= "ContosoAD01"
+        $VMSize= "Standard_D2"
+        $AvbSetName="ADAvbSet"
+        $adminusername="AzureAdmin"
+        $adminpassword="Contoso!000"
+        $SubnetName="AD-Subnet "
+        $PrivateIP="10.0.0.4"
+        $CloudServiceName="ContosoADCS"
+        $VNetName="ContosoVNet "
+        $Location="China East"
+        
+        New-AzureVMConfig -Name $ServiceName -InstanceSize $VMSize -ImageName $image.ImageName -AvailabilitySetName $AvbSetName ` | Add-AzureProvisioningConfig -Windows -AdminUsername $adminusername -Password $adminpassword -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames $SubnetName | Set-AzureStaticVNetIP -IPAddress $PrivateIP | New-AzureVM -ServiceName $CloudServiceName -VNetName $VNetName -Location $Location
 
 执行上面的 PowerShell，Azure PowerShell 会显示执行成功 Success，如下图:
 
@@ -851,7 +849,7 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 这样第一台 ContosoAD01 就算创建完毕了。
 
->[AZURE.IMPORTANT]
+>[!IMPORTANT]
 >不同于使用 Azure 管理界面创建，使用 PowerShell 创建 Azure 虚拟机，内网 IP 是固定的，而且创建的时候指定了时区为 UTC+8 北京时间。
 
 接下去可以创建第 2 台 ContosoAD02，使用相同的云服务，命令如下：
@@ -869,32 +867,26 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 1. 以管理员身份，运行 Azure PowerShell，下载 publishsettings 文件  
 
-	Get-AzurePublishSettingsFile -Environment AzureChinaCloud
-	
-
+    Get-AzurePublishSettingsFile -Environment AzureChinaCloud
+    
 2. 将 publishsettings 下载到本地磁盘，然后执行上传 publishsettings 命令  
 
-	Import-AzurePublishSettingsFile <PathToFile>
-	
-
+    Import-AzurePublishSettingsFile <PathToFile>
+    
 上面步骤 1、2 执行成功后，下次运行 Azure PowerShell 将不必再次运行上面的命令。
-
 
 3. 创建新的存储账号，选择当前的订阅，并设置存储账号  
 
-	Set-AzureSubscription -SubscriptionName '[SubscriptionName]' -CurrentStorageAccount '[StorageName]'
-	
-
+    Set-AzureSubscription -SubscriptionName '[SubscriptionName]' -CurrentStorageAccount '[StorageName]'
+    
 4. 在上海数据中心，获得固定的 Public IPV4 地址  
 
-	$NginxReservedIP = New-AzureReservedIP -ReservedIPName 'NginxPublicIP' -Label 'NginxPublicIP' -Location 'China East'
-	
-
+    $NginxReservedIP = New-AzureReservedIP -ReservedIPName 'NginxPublicIP' -Label 'NginxPublicIP' -Location 'China East'
+    
 查看这个 IP 地址  
 
-	Get-AzureReservedIP -ReservedIPName 'NginxPublicIP'
-	
-
+    Get-AzureReservedIP -ReservedIPName 'NginxPublicIP'
+    
 5. 创建虚拟网络 Virtual Network，命名为 MyVNet (位置选择 China East)。注意 Virtual Network 不能属于地缘组里。
 
 -　　MyVNet IP Rang为10.0.0.0-10.0.0.255，
@@ -905,12 +897,11 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 6. 通过模糊查询，查询到 CentOS 7.0 镜像  
 
-	$imageList = Get-AzureVMImage `
-	| where {$_.ImageName -like "*CentOS-70*"}
-	$image=$imageList[0]
-	
+    $imageList = Get-AzureVMImage `
+    | where {$_.ImageName -like "*CentOS-70*"}
+    $image=$imageList[0]
+    
 7. 创建 3 台虚拟机：
-
 
 -　　DNS为MyNginx，并且绑定 Public IP (NginxPublicIP)
 
@@ -928,22 +919,18 @@ Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台
 
 -　　并设置该虚拟机的时区为 UTC+8 时区 (北京时间)
 
-
 创建第 1 台虚拟机 (Nginx01，内网 IP 是 10.0.0.4) 的命令如下：  
 
-	New-AzureVMConfig -Name 'Nginx01' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.4' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' –ReservedIPName 'NginxPublicIP' -Location 'China East'
-	
-
+    New-AzureVMConfig -Name 'Nginx01' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.4' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' –ReservedIPName 'NginxPublicIP' -Location 'China East'
+    
 创建第 2 台虚拟机 (Nginx02，内网 IP 是 10.0.0.5) 的命令如下：
 
-	New-AzureVMConfig -Name 'Nginx02' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.5' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
-	
-
+    New-AzureVMConfig -Name 'Nginx02' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.5' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
+    
 创建第 3 台 虚拟机 (Nginx03，内网 IP 是10.0.0.6) 的命令如下：  
 
-	New-AzureVMConfig -Name 'Nginx03' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.6' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
-	
-
+    New-AzureVMConfig -Name 'Nginx03' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.6' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
+    
 ###<a name="section_5_6"></a> 3.6 管理 Azure 虚拟机
 ####<a name="section_5_6_1"></a> 3.6.1 远程桌面连接 Windows 虚拟机
 选中在之前创建成功的 ContosoAD01 这台虚拟机，如下图：

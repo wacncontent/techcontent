@@ -560,12 +560,12 @@ article.<a id="Ref" name="Ref"></a>
   [0]: ./media/application-model/application-model-3.jpg
   [1]: ./media/application-model/application-model-4.jpg
   [2]: ./media/application-model/application-model-5.jpg
-  [Configuring a Custom Domain Name in Azure]: /documentation/articles/cloud-services-custom-domain-name/
+  [Configuring a Custom Domain Name in Azure]: ../articles/cloud-services/cloud-services-custom-domain-name.md
   [Data Storage Offerings in Azure]: /develop/net/how-to-guides/blob-storage-v17/
   [3]: ./media/application-model/application-model-6.jpg
   [4]: ./media/application-model/application-model-7.jpg
   
-  [Azure Pricing]: /zh-cn/pricing/overview/
+  [Azure Pricing]: https://www.azure.cn/pricing/overview/
   [http://msdn.microsoft.com/zh-cn/library/azure/ee758710.aspx]: http://msdn.microsoft.com/zh-cn/library/azure/ee758710.aspx
   [http://msdn.microsoft.com/zh-cn/library/hh560567.aspx]: http://msdn.microsoft.com/zh-cn/library/hh560567.aspx
   [Azure Management Portal]: http://manage.windowsazure.cn/

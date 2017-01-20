@@ -1,31 +1,31 @@
-<properties 
-	pageTitle="如何缩放 Azure Redis 缓存 | Azure" 
-	description="了解如何缩放你的 Azure Redis 缓存实例" 
-	services="redis-cache" 
-	documentationCenter="" 
-	authors="steved0x" 
-	manager="douge" 
-	editor=""/>
+---
+title: 如何缩放 Azure Redis 缓存 | Azure
+description: 了解如何缩放你的 Azure Redis 缓存实例
+services: redis-cache
+documentationCenter: 
+authors: steved0x
+manager: douge
+editor: 
 
-<tags 
-	ms.service="cache" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="cache-redis" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/07/2016" 
-	wacn.date="01/03/2017" 
-	ms.author="sdanie"/>
+ms.service: cache
+ms.workload: tbd
+ms.tgt_pltfrm: cache-redis
+ms.devlang: na
+ms.topic: article
+ms.date: 09/07/2016
+wacn.date: 01/03/2017
+ms.author: sdanie
+---
 
 # 如何缩放 Azure Redis 缓存
 
->[AZURE.NOTE] Azure Redis 缓存缩放功能目前处于预览状态。
+>[!NOTE] Azure Redis 缓存缩放功能目前处于预览状态。
 
 Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能的选择更加灵活。如果创建缓存后，你的应用程序的要求发生更改，可以使用 [Azure 门户预览](https://portal.azure.cn)中的“更改定价层”边栏选项卡缩放缓存的大小。
 
 ## 何时缩放
 
-你可以使用 Azure Redis 缓存的[监视](/documentation/articles/cache-how-to-monitor/)功能来监视你的缓存应用程序的运行状况和性能，并帮助确定是否需要缩放缓存。
+你可以使用 Azure Redis 缓存的[监视](./cache-how-to-monitor.md)功能来监视你的缓存应用程序的运行状况和性能，并帮助确定是否需要缩放缓存。
 
 你可以监视以下指标以帮助确定是否需要进行缩放。
 
@@ -34,10 +34,10 @@ Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能�
 -	网络带宽
 -	CPU 使用率
 
-如果确定缓存不再满足应用程序的要求，可以更改到适合应用程序的更大或更小缓存定价层。有关确定应使用哪个缓存定价层的详细信息，请参阅[我应当使用哪些 Redis 缓存产品/服务和大小](/documentation/articles/cache-faq/#what-redis-cache-offering-and-size-should-i-use)。
+如果确定缓存不再满足应用程序的要求，可以更改到适合应用程序的更大或更小缓存定价层。有关确定应使用哪个缓存定价层的详细信息，请参阅[我应当使用哪些 Redis 缓存产品/服务和大小](./cache-faq.md#what-redis-cache-offering-and-size-should-i-use)。
 
 ## 缩放缓存
-若要缩放缓存，请在 [Azure 门户预览](https://portal.azure.cn)中[浏览到缓存](/documentation/articles/cache-configure/#configure-redis-cache-settings)，然后单击“设置”、“定价层”。
+若要缩放缓存，请在 [Azure 门户预览](https://portal.azure.cn)中[浏览到缓存](./cache-configure.md#configure-redis-cache-settings)，然后单击“设置”、“定价层”。
 
 也可以单击“Redis 缓存”边栏选项卡中的“定价层”部分。
 
@@ -47,7 +47,7 @@ Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能�
 
 ![定价层][redis-cache-pricing-tier-blade]
 
->[AZURE.NOTE] 你可以扩展到不同定价层，但有以下限制。
+>[!NOTE] 你可以扩展到不同定价层，但有以下限制。
 ><p>
 ><p>-	不能从较高的定价层缩放到较低的定价层。
 ><p>    -    不能从**高级**缓存向下缩放到**标准**或**基本**缓存。
@@ -74,15 +74,15 @@ Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能�
 
 修改 `Size`、`Sku` 或 `ShardCount` 属性后，可以在 PowerShell 中使用 [Set-AzureRmRedisCache](https://msdn.microsoft.com/zh-cn/library/azure/mt634518.aspx) cmdlet 缩放 Azure Redis 缓存实例。以下示例演示了如何将名为 `myCache` 的缓存缩放为 2.5 GB 缓存。
 
-	Set-AzureRmRedisCache -ResourceGroupName myGroup -Name myCache -Size 2.5GB
+    Set-AzureRmRedisCache -ResourceGroupName myGroup -Name myCache -Size 2.5GB
 
-有关使用 PowerShell 进行缩放的详细信息，请参阅[使用 PowerShell 缩放 Redis 缓存](/documentation/articles/cache-howto-manage-redis-cache-powershell/#scale)。
+有关使用 PowerShell 进行缩放的详细信息，请参阅[使用 PowerShell 缩放 Redis 缓存](./cache-howto-manage-redis-cache-powershell.md#scale)。
 
 ### <a name="scale-using-azure-cli"></a> 使用 Azure CLI 进行缩放
 
 若要使用 Azure CLI 缩放 Azure Redis 缓存实例，请调用 `azure rediscache set` 命令并传入所需的配置更改，包括新大小、sku 或群集大小，具体取决于所需的缩放操作。
 
-有关使用 Azure CLI 进行缩放的详细信息，请参阅[更改现有 Redis 缓存的设置](/documentation/articles/cache-manage-cli/#scale)。
+有关使用 Azure CLI 进行缩放的详细信息，请参阅[更改现有 Redis 缓存的设置](./cache-manage-cli.md#scale)。
 
 ### <a name="scale-using-maml"></a> 使用 MAML 进行缩放
 
@@ -128,9 +128,9 @@ Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能�
 -	不能从**高级**缓存向下缩放到**基本**或**标准**定价层。
 -	可以从一个**高级**缓存定价层缩放到另一个高级缓存定价层。
 -	不能从**基本**缓存直接缩放到**高级**缓存。必须先在一个缩放操作中从**基本**缩放到**标准**，然后再在后续的缩放操作中从**标准**缩放到**高级**。
--	如果在创建**高级**缓存时启用了群集，则可以[更改群集大小](/documentation/articles/cache-how-to-premium-clustering/#cluster-size)。目前，不能在创建时没有群集的以前存在的缓存上启用群集。
+-	如果在创建**高级**缓存时启用了群集，则可以[更改群集大小](./cache-how-to-premium-clustering.md#cluster-size)。目前，不能在创建时没有群集的以前存在的缓存上启用群集。
 
-    有关详细信息，请参阅[如何为高级 Azure Redis 缓存配置群集](/documentation/articles/cache-how-to-premium-clustering/)。
+    有关详细信息，请参阅[如何为高级 Azure Redis 缓存配置群集](./cache-how-to-premium-clustering.md)。
 
 ### <a name="after-scaling-do-i-have-to-change-my-cache-name-or-access-keys"></a> 缩放后，我是否需要更改缓存名称或访问密钥？
 
@@ -150,12 +150,12 @@ Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能�
 
 ### <a name="is-my-custom-databases-setting-affected-during-scaling"></a> 在缩放过程中，自定义数据库设置是否会受影响？
 
-某些定价层具有不同的[数据库限制](/documentation/articles/cache-configure/#databases)，因此，如果在缓存创建过程中为 `databases` 设置配置了自定义值，则在向下缩放时需注意一些注意事项。
+某些定价层具有不同的[数据库限制](./cache-configure.md#databases)，因此，如果在缓存创建过程中为 `databases` 设置配置了自定义值，则在向下缩放时需注意一些注意事项。
 
 -	缩放到的定价层的 `databases` 限制低于当前层：
-	-	如果你使用的是默认 `databases` 数（对于所有定价层来说为 16），则不会丢失数据。
-	-	如果你使用的是在你要缩放到的层的限制内的自定义 `databases` 数，则将保留此 `databases` 设置并且不会丢失数据。
-	-	如果你使用的是超出新层限制的自定义 `databases` 数，则 `databases` 设置将降低到新层的限制，并且已删除数据库中的所有数据都将丢失。
+    -	如果你使用的是默认 `databases` 数（对于所有定价层来说为 16），则不会丢失数据。
+    -	如果你使用的是在你要缩放到的层的限制内的自定义 `databases` 数，则将保留此 `databases` 设置并且不会丢失数据。
+    -	如果你使用的是超出新层限制的自定义 `databases` 数，则 `databases` 设置将降低到新层的限制，并且已删除数据库中的所有数据都将丢失。
 -	所缩小到的定价层的 `databases` 限制等于或高于当前层时，将保留 `databases` 设置并且不会丢失数据。
 
 注意，当标准和高级缓存有 99.9% 可用性 SLA 时，则没有数据丢失方面的 SLA。
@@ -188,11 +188,6 @@ Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能�
 
 我们现在发布此功能是为了获取反馈。基于该反馈，我们将很快发布此功能的正式版本。
 
-
-
-
-
-  
 <!-- IMAGES -->
 
 [redis-cache-pricing-tier-part]: ./media/cache-how-to-scale/redis-cache-pricing-tier-part.png

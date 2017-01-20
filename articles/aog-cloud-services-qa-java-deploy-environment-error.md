@@ -1,15 +1,17 @@
-<properties 
-	pageTitle="关于部署在云服务下的 Java 应用程序会出现过渡环境被 “同步” 到生产环境的问题" 
-	description="关于部署在云服务下的 Java 应用程序会出现过渡环境被 “同步” 到生产环境的问题" 
-	services="cloud-service" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags 
-	ms.service="cloud-service-aog"
-	ms.date="" 
-	wacn.date="12/05/2016"/>
+---
+title: 关于部署在云服务下的 Java 应用程序会出现过渡环境被 “同步” 到生产环境的问题
+description: 关于部署在云服务下的 Java 应用程序会出现过渡环境被 “同步” 到生产环境的问题
+services: cloud-service
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: cloud-service-aog
+ms.date: 
+wacn.date: 12/05/2016
+---
+
 # 关于部署在云服务下的 Java 应用程序会出现过渡环境被 “同步” 到生产环境的问题 #
 
 ### 问题描述 ###
@@ -28,7 +30,7 @@
 
 1. .NET +Visual Studio
 
- 使用 Visual Studio 在部署应用时指定的存储账户会存储相关的诊断数据，详细的说明可以参考[链接 1 ](/documentation/articles/cloud-services-dotnet-diagnostics-storage/)和[链接 2](/documentation/articles/cloud-services-dotnet-diagnostics/)。而应用程序的代码是不会存放在该存储账户中的。 
+ 使用 Visual Studio 在部署应用时指定的存储账户会存储相关的诊断数据，详细的说明可以参考[链接 1 ](./cloud-services/cloud-services-dotnet-diagnostics-storage.md)和[链接 2](./cloud-services/cloud-services-dotnet-diagnostics.md)。而应用程序的代码是不会存放在该存储账户中的。 
 
 2. Java+eclipse
 

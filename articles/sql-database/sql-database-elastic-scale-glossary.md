@@ -1,32 +1,33 @@
-<properties
-    pageTitle="弹性数据库工具词汇表 | Azure"
-    description="用于弹性数据库工具的术语的说明"
-    services="sql-database"
-    documentationcenter=""
-    manager="jhubbard"
-    author="ddove"
-    editor="" />
-<tags
-    ms.assetid="a23a4e81-6706-452d-afc1-a550e5e47af9"
-    ms.service="sql-database"
-    ms.workload="sql-database"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/24/2016"
-    wacn.date="12/19/2016"
-ms.author="ddove" />
+---
+title: 弹性数据库工具词汇表 | Azure
+description: 用于弹性数据库工具的术语的说明
+services: sql-database
+documentationcenter: 
+manager: jhubbard
+author: ddove
+editor: 
+
+ms.assetid: a23a4e81-6706-452d-afc1-a550e5e47af9
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/24/2016
+wacn.date: 12/19/2016
+ms.author: ddove
+---
 
 # 弹性数据库工具词汇表
-Azure SQL 数据库中的[弹性数据库工具](/documentation/articles/sql-database-elastic-scale-introduction/)功能的术语定义如下。这些工具用于管理[分片映射](/documentation/articles/sql-database-elastic-scale-shard-map-management/)，包括[客户端库](/documentation/articles/sql-database-elastic-database-client-library/)、[拆分/合并工具](/documentation/articles/sql-database-elastic-scale-overview-split-and-merge/)、[弹性池](/documentation/articles/sql-database-elastic-pool/)和[查询](/documentation/articles/sql-database-elastic-query-overview/)。
+Azure SQL 数据库中的[弹性数据库工具](./sql-database-elastic-scale-introduction.md)功能的术语定义如下。这些工具用于管理[分片映射](./sql-database-elastic-scale-shard-map-management.md)，包括[客户端库](./sql-database-elastic-database-client-library.md)、[拆分/合并工具](./sql-database-elastic-scale-overview-split-and-merge.md)、[弹性池](./sql-database-elastic-pool.md)和[查询](./sql-database-elastic-query-overview.md)。
 
-这些术语用于[使用弹性数据库工具添加分片](/documentation/articles/sql-database-elastic-scale-add-a-shard/)和[使用 RecoveryManager 类解决分片映射问题](/documentation/articles/sql-database-elastic-database-recovery-manager/)。
+这些术语用于[使用弹性数据库工具添加分片](./sql-database-elastic-scale-add-a-shard.md)和[使用 RecoveryManager 类解决分片映射问题](./sql-database-elastic-database-recovery-manager.md)。
 
 ![弹性缩放术语][1]
 
 **数据库**：Azure SQL 数据库。
 
-**依赖于数据的路由**：使应用程序能够连接到给定了特定分片键的分片的功能。请参阅[依赖于数据的路由](/documentation/articles/sql-database-elastic-scale-data-dependent-routing/)。与**[多分片查询](/documentation/articles/sql-database-elastic-scale-multishard-querying/)**进行比较。
+**依赖于数据的路由**：使应用程序能够连接到给定了特定分片键的分片的功能。请参阅[依赖于数据的路由](./sql-database-elastic-scale-data-dependent-routing.md)。与**[多分片查询](./sql-database-elastic-scale-multishard-querying.md)**进行比较。
 
 **全局分片映射**：**分片集**内分片键及其各自分片之间的映射。全局分片映射存储在**分片映射管理器**中。与**局部分片映射**进行比较。
 
@@ -66,7 +67,6 @@ Azure SQL 数据库中的[弹性数据库工具](/documentation/articles/sql-dat
 
 ![映射][2]
 
-
 ##动词
 
 **横向缩放**：通过将分片添加到分片映射或删除分片，向外（或向内）扩展分片集合的行为。
@@ -83,12 +83,11 @@ Azure SQL 数据库中的[弹性数据库工具](/documentation/articles/sql-dat
 
 **纵向缩放**：向上（或向下）缩放单个分片的性能水平的行为。例如，将分片从标准版更改为高级版（这会导致需要更多的计算资源）。
 
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-scale-glossary/glossary.png
 [2]: ./media/sql-database-elastic-scale-glossary/mappings.png
 [3]: ./media/sql-database-elastic-scale-glossary/h_versus_vert.png
  
-
 <!---HONumber=Mooncake_1212_2016-->

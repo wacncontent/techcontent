@@ -1,31 +1,28 @@
-<properties 
-	pageTitle="在计算模拟器中本地分析云服务 | Azure" 
-	services="cloud-services"
-	description="使用 Visual Studio 探查器调查云服务中的性能问题" 
-	documentationCenter=""
-	authors="TomArcher" 
-	manager="douge" 
-	editor=""
-	tags="" 
-	/>
+---
+title: 在计算模拟器中本地分析云服务 | Azure
+services: cloud-services
+description: 使用 Visual Studio 探查器调查云服务中的性能问题
+documentationCenter: 
+authors: TomArcher
+manager: douge
+editor: 
+tags: 
 
-<tags 
-	ms.service="cloud-services" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="multiple" 
-	ms.topic="article" 
-	ms.date="11/18/2016" 
-	wacn.date="01/03/2017" 
-	ms.author="tarcher"/>
+ms.service: cloud-services
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 11/18/2016
+wacn.date: 01/03/2017
+ms.author: tarcher
+---
 
 # 在 Azure 计算模拟器中使用 Visual Studio 探查器本地测试云服务的性能
 
 可通过各种工具和技术测试云服务的性能。在将云服务发布到 Azure 后，可以让 Visual Studio 收集分析数据，然后在本地进行分析，如[分析 Azure 应用程序][1]中所述。还可以使用诊断跟踪各种性能计数器，如[在 Azure 中使用性能计数器][2]中所述。此外，在将应用程序部署到云之前，可能需要在计算模拟器中本地分析应用程序。
 
 本文介绍了 CPU 采样分析方法，可在模拟器中本地执行该方法。CPU 采样是一种干预性不是很强的分析方法。探查器将按照指定的采样时间间隔拍摄调用堆栈的快照。将收集一段时间内的数据，并将其显示在报告中。此分析方法倾向于指示在具有大量计算的应用程序中执行大多数 CPU 工作的位置。这使得能够侧重于应用程序花费最多时间的“热路径”。
-
-
 
 ## 1：配置 Visual Studio 以进行分析
 
@@ -43,19 +40,19 @@
 
 为了进行演示，可将一些代码添加到项目中，这些代码将占用大量时间，从而演示某些明显的性能问题。例如，将以下代码添加到辅助角色项目：
 
-	public class Concatenator
-	{
-	    public static string Concatenate(int number)
-	    {
-	        int count;
-	        string s = "";
-	        for (count = 0; count < number; count++)
-	        {
-	            s += "\n" + count.ToString();
-	        }
-	        return s;
-	    }
-	}
+    public class Concatenator
+    {
+        public static string Concatenate(int number)
+        {
+            int count;
+            string s = "";
+            for (count = 0; count < number; count++)
+            {
+                s += "\n" + count.ToString();
+            }
+            return s;
+        }
+    }
 
 从辅助角色的 RoleEntryPoint 派生类中的 RunAsync 方法调用此代码。（忽略有关以同步方式运行方法的警告。）
 
@@ -87,9 +84,9 @@
 
  还可以通过附加到 WaIISHost.exe 来附加到 Web 角色。如果应用程序中有多个辅助角色进程，则需要使用 processID 来区分它们。可以通过访问 Process 对象以编程方式查询 processID。例如，如果将此代码添加到角色中 RoleEntryPoint 派生类的 Run 方法，则可在计算模拟器 UI 中查看日志以了解要连接到的进程。
 
-	var process = System.Diagnostics.Process.GetCurrentProcess();
-	var message = String.Format("Process ID: {0}", process.Id);
-	Trace.WriteLine(message, "Information");
+    var process = System.Diagnostics.Process.GetCurrentProcess();
+    var message = String.Format("Process ID: {0}", process.Id);
+    Trace.WriteLine(message, "Information");
 
 若要查看日志，请启动计算模拟器 UI。
 
@@ -113,7 +110,6 @@
 
 ![探查器报告][11]
 
-
 如果在热路径中看到 String.wstrcpy，请单击“仅我的代码”以将视图更改为仅显示用户代码。如果看到 String.Concat，请尝试按“显示所有代码”按钮。
 
 可以看到 Concatenate 方法和 String.Concat 占用了大部分执行时间。
@@ -128,16 +124,16 @@
 
 还可以比较代码更改之前和之后的性能。停止正在运行的进程，并编辑代码以将字符串串联操作替换为使用 StringBuilder：
 
-	public static string Concatenate(int number)
-	{
-	    int count;
-	    System.Text.StringBuilder builder = new System.Text.StringBuilder("");
-	    for (count = 0; count < number; count++)
-	    {
-	         builder.Append("\n" + count.ToString());
-	    }
-	    return builder.ToString();
-	}
+    public static string Concatenate(int number)
+    {
+        int count;
+        System.Text.StringBuilder builder = new System.Text.StringBuilder("");
+        for (count = 0; count < number; count++)
+        {
+             builder.Append("\n" + count.ToString());
+        }
+        return builder.ToString();
+    }
 
 执行其他性能运行，然后比较性能。在“性能资源管理器”中，如果运行位于同一会话中，则只需选择两个报告，打开快捷菜单，然后选择“比较性能报告”。如果要与其他性能会话中的运行进行比较，请打开“分析”菜单，然后选择“比较性能报告”。在显示的对话框中指定这两个文件。
 
@@ -167,8 +163,6 @@
 
 Visual Studio 探查器不支持在模拟器中测试 Azure 二进制文件，但如果要测试内存分配，则可以在分析时选择该选项。此外，可以选择并发分析，这有助于确定线程是否正在浪费时间竞争锁；也可以选择层交互分析，这有助于跟踪在应用程序的各个层之间（最常见的是数据层和辅助角色之间）进行交互时的性能问题。可以查看应用程序生成的数据库查询，并使用分析数据改进对数据库的使用。
 
-
-
 [1]: http://msdn.microsoft.com/zh-cn/library/azure/hh369930.aspx
 [2]: http://msdn.microsoft.com/zh-cn/library/azure/hh411542.aspx
 [3]: http://blogs.msdn.com/b/habibh/archive/2009/06/30/walkthrough-using-the-tier-interaction-profiler-in-visual-studio-team-system-2010.aspx
@@ -186,5 +180,4 @@ Visual Studio 探查器不支持在模拟器中测试 Azure 二进制文件，�
 [16]: ./media/cloud-services-performance-testing-visual-studio-profiler/ProfilingLocally012.png
 [17]: ./media/cloud-services-performance-testing-visual-studio-profiler/ProfilingLocally08.png
  
-
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -1,30 +1,27 @@
-<properties
-	pageTitle="流分析：实时检测欺诈行为 | Azure"
-	description="了解如何通过流分析创建实时欺诈行为检测解决方案。使用事件中心进行实时事件处理。"
-	keywords="异常检测、欺诈检测、实时异常检测"
-	services="stream-analytics"
-	documentationCenter=""
-	authors="jeffstokes72"
-	manager="jhubbard"
-	editor="cgronlun" />  
+---
+title: 流分析：实时检测欺诈行为 | Azure
+description: 了解如何通过流分析创建实时欺诈行为检测解决方案。使用事件中心进行实时事件处理。
+keywords: 异常检测、欺诈检测、实时异常检测
+services: stream-analytics
+documentationCenter: 
+authors: jeffstokes72
+manager: jhubbard
+editor: cgronlun
 
-
-<tags
-	ms.service="stream-analytics"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="data-services"
-	ms.date="11/14/2016"
-	wacn.date="12/05/2016"
-	ms.author="jeffstok" />  
-
-
+ms.service: stream-analytics
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 11/14/2016
+wacn.date: 12/05/2016
+ms.author: jeffstok
+---
 
 # Azure 流分析入门：实时检测欺诈行为
 了解如何创建端到端解决方案，以便通过 Azure 流分析实时检测欺诈行为。将事件引入 Azure 事件中心、编写用于聚合或提醒的流分析查询，以及将结果发送到输出接收器，以便通过实时处理数据来获得见解。虽然介绍的是电信方面的实时异常检测，但作为示例的技术同样适用于其他类型的欺诈检测，例如盗窃信用卡或身份的情况。
 
-流分析是一种完全托管的服务，可以在云中通过流式数据进行低延迟、高度可用、可伸缩且复杂的事件处理。有关详细信息，请参阅 [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)。
+流分析是一种完全托管的服务，可以在云中通过流式数据进行低延迟、高度可用、可伸缩且复杂的事件处理。有关详细信息，请参阅 [Azure 流分析简介](./stream-analytics-introduction.md)。
 
 ## 方案：实时进行电信和 SIM 欺诈检测
 电信公司的传入呼叫数据量很大。公司需要从其数据中获取以下信息：
@@ -39,7 +36,7 @@
 * 或者，从 [GitHub](https://aka.ms/azure-stream-analytics-telcogenerator) 获取事件生成器的源代码
 
 ## 创建 Azure 事件中心输入和使用者组
-示例应用程序会生成事件并将其推送到事件中心实例进行实时处理。Service Bus 事件中心是适合流分析的首选事件引入方法。有关事件中心的详细信息，可参阅 [Azure 服务总线文档](/documentation/services/service-bus/)。
+示例应用程序会生成事件并将其推送到事件中心实例进行实时处理。Service Bus 事件中心是适合流分析的首选事件引入方法。有关事件中心的详细信息，可参阅 [Azure 服务总线文档](../service-bus/index.md/)。
 
 创建事件中心：
 
@@ -58,7 +55,7 @@
 
 1. 下载 [TelcoGenerator.zip 文件](http://download.microsoft.com/download/8/B/D/8BD50991-8D54-4F59-AB83-3354B69C8A7E/TelcoGenerator.zip)，将其解压缩到某个目录。
 
-    > [AZURE.NOTE] Windows 可能会阻止下载的 zip 文件。右键单击该文件，选择“属性”。如果看到“此文件来自其他计算机，可能被阻止以帮助保护该计算机。”消息，则选中“取消阻止”框，然后在该 zip 文件上单击“应用”。
+    > [!NOTE] Windows 可能会阻止下载的 zip 文件。右键单击该文件，选择“属性”。如果看到“此文件来自其他计算机，可能被阻止以帮助保护该计算机。”消息，则选中“取消阻止”框，然后在该 zip 文件上单击“应用”。
 
 2. 将 telcodatagen.exe.config 中的 Microsoft.ServiceBus.ConnectionString 和 EventHubName 值替换为事件中心的连接字符串和名称。
 
@@ -96,7 +93,6 @@
 
    ![流分析服务图标](./media/stream-analytics-real-time-fraud-detection/stream-analytics-service-icon.png)  
 
-
    新作业在显示时的状态为**“已创建”**。请注意，页面底部的**“启动”**按钮已禁用。你必须先配置作业输入、输出和查询，然后才能启动作业。
 
 ### 指定作业输入
@@ -132,7 +128,6 @@
 
    ![在 JSON 文件中下载并保存已处理的数据](./media/stream-analytics-real-time-fraud-detection/stream-analytics-download-save-json-file.png)  
 
-
 #### 传递查询
 如果想要将每个事件存档，可使用传递查询来读取事件或消息有效负载中的所有字段。开始时，执行简单的传递查询来投射事件中的所有字段。
 
@@ -141,14 +136,13 @@
 
      SELECT * FROM CallStream
 
-	> [AZURE.IMPORTANT] 请确保输入源的名称与此前指定的输入的名称相匹配。
+    > [!IMPORTANT] 请确保输入源的名称与此前指定的输入的名称相匹配。
 
 3. 单击查询编辑器下的**“测试”**。
 4. 提供测试文件。可以使用在前面步骤中创建的文件，也可以使用 [telco.json](https://github.com/Azure/azure-stream-analytics/blob/master/Samples/SampleDataFiles/Telco.json)。
 5. 单击“选中”按钮，查看在查询定义下方显示的结果。
 
    ![查询定义结果](./media/stream-analytics-real-time-fraud-detection/stream-analytics-sim-fraud-output.png)  
-
 
 ### 列投影
 现在，我们将返回的字段缩减为较小的集合。
@@ -171,7 +165,7 @@
      FROM CallStream TIMESTAMP BY CallRecTime
      GROUP BY TUMBLINGWINDOW(s, 5), SwitchNum
 
-	此查询使用 **Timestamp By** 关键字在要用于临时计算的负载中指定时间戳字段。如果未指定此字段，则会根据每个事件到达事件中心的时间执行窗口化操作。请参阅[流分析查询语言参考中的“到达时间与应用程序时间”](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)。
+    此查询使用 **Timestamp By** 关键字在要用于临时计算的负载中指定时间戳字段。如果未指定此字段，则会根据每个事件到达事件中心的时间执行窗口化操作。请参阅[流分析查询语言参考中的“到达时间与应用程序时间”](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)。
 
     请注意，你可以使用 **System.Timestamp** 属性访问每个窗口结束时的时间戳。
     
@@ -232,13 +226,12 @@
 
 ![欺诈行为检测：实时查看欺诈性事件](./media/stream-analytics-real-time-fraud-detection/stream-ananlytics-view-real-time-fraudent-events.png)  
 
-
 ## 获取支持
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-CN/home?forum=AzureStreamAnalytics)。
 
 ## 后续步骤
-- [Azure 流分析简介](/documentation/articles/stream-analytics-introduction/)
-- [缩放 Azure 流分析作业](/documentation/articles/stream-analytics-scale-jobs/)
+- [Azure 流分析简介](./stream-analytics-introduction.md)
+- [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
 

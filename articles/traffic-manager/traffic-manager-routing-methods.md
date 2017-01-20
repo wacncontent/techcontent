@@ -1,24 +1,21 @@
-<properties
-    pageTitle="流量管理器 - 流量路由方法 | Azure"
-    description="本文将帮助你了解流量管理器使用的各种流量路由方法。"
-    services="traffic-manager"
-    documentationCenter=""
-    authors="sdwheeler"
-    manager="carmonm"
-    editor=""
-/>  
+---
+title: 流量管理器 - 流量路由方法 | Azure
+description: 本文将帮助你了解流量管理器使用的各种流量路由方法。
+services: traffic-manager
+documentationCenter: 
+authors: sdwheeler
+manager: carmonm
+editor: 
 
-<tags
-    ms.service="traffic-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/11/2016"
-    wacn.date="01/03/2017"
-    ms.author="sewhee"
-/>  
-
+ms.service: traffic-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/11/2016
+wacn.date: 01/03/2017
+ms.author: sewhee
+---
 
 # 流量管理器流量路由方法
 
@@ -41,14 +38,13 @@ Azure 流量管理器支持使用三种流量路由方法来确定如何将网�
 - **加权：**如果想要跨一组终结点来分配流量，不管是平均分配还是根据所定义的权重进行分配，可以选择“加权”。
 - **性能**：如果终结点位于不同的地理位置，并且你希望最终用户依据最低网络延迟使用“最近的”终结点，可以选择“性能”。
 
-所有流量管理器配置文件都包括监视终结点运行状况以及终结点自动故障转移的设置。有关详细信息，请参阅 [Traffic Manager Endpoint Monitoring](/documentation/articles/traffic-manager-monitoring/)（流量管理器终结点监视）。一个流量管理器配置文件只能使用一种流量路由方法。你可以随时为配置文件选择其他流量路由方法。一分钟内即可应用所做的更改，不会导致停机。可以通过嵌套式流量管理器配置文件来组合使用多种流量路由方法。使用嵌套可以启用复杂且灵活的流量路由配置，满足更大、更复杂应用程序的需求。有关详细信息，请参阅[嵌套式流量管理器配置文件](/documentation/articles/traffic-manager-nested-profiles/)。
+所有流量管理器配置文件都包括监视终结点运行状况以及终结点自动故障转移的设置。有关详细信息，请参阅 [Traffic Manager Endpoint Monitoring](./traffic-manager-monitoring.md)（流量管理器终结点监视）。一个流量管理器配置文件只能使用一种流量路由方法。你可以随时为配置文件选择其他流量路由方法。一分钟内即可应用所做的更改，不会导致停机。可以通过嵌套式流量管理器配置文件来组合使用多种流量路由方法。使用嵌套可以启用复杂且灵活的流量路由配置，满足更大、更复杂应用程序的需求。有关详细信息，请参阅[嵌套式流量管理器配置文件](./traffic-manager-nested-profiles.md)。
 
 ## <a name="priority-traffic-routing-method"></a>“优先级”流量路由方法
 
 组织往往会提供一个或多个备份服务来防范主服务发生故障，从而确保其服务的可靠性。Azure 客户可以通过“优先级”流量路由方法来轻松实现此故障转移模式。
 
 ![Azure 流量管理器的“优先级”流量路由方法][1]  
-
 
 流量管理器配置文件包含服务终结点的优先顺序列表。默认情况下，流量管理器将所有流量发送到主终结点（优先级最高）。如果主终结点不可用，流量管理器会将流量路由到第二个终结点。如果主终结点和辅助终结点都不可用，流量将转到第三个终结点，依此类推。终结点的可用性取决于配置的状态（已启用或已禁用）和正在进行的终结点监视。
 
@@ -63,7 +59,6 @@ Azure 流量管理器支持使用三种流量路由方法来确定如何将网�
 使用“加权”流量路由方法可以均匀分布流量，或使用预定义的权重。
 
 ![Azure 流量管理器的“加权”流量路由方法][2]  
-
 
 在“加权”流量路由方法中，需要为流量管理器配置文件中的每个终结点分配一个权重。该权重是从 1 到 1000 的整数。此参数是可选的。如果省略此参数，流量管理器将使用默认权重“1”。
 
@@ -93,20 +88,19 @@ Azure 门户预览支持加权流量路由的配置。无法在经典管理门�
 
 ![Azure 流量管理器的“性能”流量路由方法][3]  
 
-
 “最靠近”的终结点不一定是地理距离最近的终结点。“性能”流量路由方法通过测试网络延迟来确定最靠近的终结点。流量管理器维护一份 Internet 延迟表，用于跟踪 IP 地址范围与每个 Azure 数据中心之间的往返时间。
 
 流量管理器在 Internet 延迟表中查找传入 DNS 请求的源 IP 地址。流量管理器在处理该 IP 地址范围的请求时保持最低延迟的 Azure 数据中心内选择一个可用终结点，然后在 DNS 响应中返回该终结点。
 
-如[流量管理器工作原理](/documentation/articles/traffic-manager-how-traffic-manager-works/)中所述，流量管理器不会直接从客户端接收 DNS 查询。DNS 查询来自客户端配置使用的递归 DNS 服务。因此，用于确定“最靠近”终结点的 IP 地址不是客户端的 IP 地址，而是递归 DNS 服务的 IP 地址。在实践中，此 IP 地址是客户端的适当代理。
+如[流量管理器工作原理](./traffic-manager-how-traffic-manager-works.md)中所述，流量管理器不会直接从客户端接收 DNS 查询。DNS 查询来自客户端配置使用的递归 DNS 服务。因此，用于确定“最靠近”终结点的 IP 地址不是客户端的 IP 地址，而是递归 DNS 服务的 IP 地址。在实践中，此 IP 地址是客户端的适当代理。
 
 流量管理器定期更新 Internet 延迟表，反映全国 Internet 的变化以及新的 Azure 区域。但是，由于 Internet 上的负载会实时变化，应用程序性能也会随之变化。“性能”流量路由不会监视给定服务终结点上的负载。但是，如果某个终结点变得不可用，流量管理器不会在 DNS 查询响应中返回该终结点。
 
 需要注意的要点：
 
-- 如果配置文件包含同一 Azure 区域中的多个终结点，流量管理器会在该区域中的可用终结点之间均匀分布流量。如果想要在某个区域中采用不同的流量分布，可以使用[嵌套式流量管理器配置文件](/documentation/articles/traffic-manager-nested-profiles/)。
+- 如果配置文件包含同一 Azure 区域中的多个终结点，流量管理器会在该区域中的可用终结点之间均匀分布流量。如果想要在某个区域中采用不同的流量分布，可以使用[嵌套式流量管理器配置文件](./traffic-manager-nested-profiles.md)。
 
-- 如果给定 Azure 区域中的所有已启用终结点已降级，流量管理器会将流量分布到其他所有可用终结点，而不是下一个最靠近的终结点。这种逻辑不会使下一个最靠近的终结点过载，从而可以防止发生连锁故障。如果想要定义首选故障转移顺序，请使用[嵌套式流量管理器配置文件](/documentation/articles/traffic-manager-nested-profiles/)。
+- 如果给定 Azure 区域中的所有已启用终结点已降级，流量管理器会将流量分布到其他所有可用终结点，而不是下一个最靠近的终结点。这种逻辑不会使下一个最靠近的终结点过载，从而可以防止发生连锁故障。如果想要定义首选故障转移顺序，请使用[嵌套式流量管理器配置文件](./traffic-manager-nested-profiles.md)。
 
 - 对外部终结点或嵌套式终结点使用“性能”流量路由方法时，需要指定这些终结点的位置。请选择离你的部署最近的 Azure 区域。这些位置是 Internet 延迟表支持的值。
 
@@ -116,9 +110,9 @@ Azure 门户预览支持加权流量路由的配置。无法在经典管理门�
 
 ## 后续步骤
 
-了解如何使用[流量管理器终结点监视](/documentation/articles/traffic-manager-monitoring/)开发高可用性应用程序
+了解如何使用[流量管理器终结点监视](./traffic-manager-monitoring.md)开发高可用性应用程序
 
-了解如何[创建流量管理器配置文件](/documentation/articles/traffic-manager-manage-profiles/)
+了解如何[创建流量管理器配置文件](./traffic-manager-manage-profiles.md)
 
 <!--Image references-->
 

@@ -1,38 +1,36 @@
-<properties
-	pageTitle="从 Azure SQL 数据库备份中还原单个表 | Azure"
-	description="了解如何从 Azure SQL 数据库备份中还原单个表。"
-	services="sql-database"
-	documentationCenter=""
-	authors="dalechen"
-	manager="felixwu"
-	editor=""/>
+---
+title: 从 Azure SQL 数据库备份中还原单个表 | Azure
+description: 了解如何从 Azure SQL 数据库备份中还原单个表。
+services: sql-database
+documentationCenter: 
+authors: dalechen
+manager: felixwu
+editor: 
 
-<tags
-	ms.service="sql-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/31/2016"
-	wacn.date="10/17/2016"
-	ms.author="daleche"/>  
-
-
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/31/2016
+wacn.date: 10/17/2016
+ms.author: daleche
+---
 
 # 如何从 Azure SQL 数据库备份中还原单个表
 
-你可能会遇到这种情况，不小心修改了 SQL 数据库中的某些数据，而现在你希望恢复单个受影响的表。本文介绍如何在数据库中从某个 SQL 数据库[自动备份](/documentation/articles/sql-database-automated-backups/)还原单个表。
+你可能会遇到这种情况，不小心修改了 SQL 数据库中的某些数据，而现在你希望恢复单个受影响的表。本文介绍如何在数据库中从某个 SQL 数据库[自动备份](./sql-database-automated-backups.md)还原单个表。
 
 ## 准备步骤：重命名表，并还原数据库的一个副本
 1. 确定 Azure SQL 数据库中你要替换为还原的副本的表。使用 Microsoft SQL Management Studio 重命名此表。例如，将此表重命名为 &lt;table name&gt;\_old。
 
-	**注意**为了避免受到阻止，请确保你要重命名的表没有任何正在运行的活动。如果你遇到问题，请确保在维护时段内执行此过程。
+    **注意**为了避免受到阻止，请确保你要重命名的表没有任何正在运行的活动。如果你遇到问题，请确保在维护时段内执行此过程。
 
-2. 使用[时间点还原](/documentation/articles/sql-database-recovery-using-backups/#point-in-time-restore)步骤，将数据库的一个备份还原到想要恢复到的一个时间点。
+2. 使用[时间点还原](./sql-database-recovery-using-backups.md#point-in-time-restore)步骤，将数据库的一个备份还原到想要恢复到的一个时间点。
 
-	**说明**：
-	- 还原的数据库的名称的格式为 DBName+TimeStamp；例如，**Adventureworks2012\_2016-01-01T22-12Z**。此步骤不会覆盖服务器上现有的数据库名称。这是一项安全措施，目的是让用户在删除其当前数据库之前确认还原的数据库，然后重命名此还原的数据库供生产之用。
-	- 服务根据不同的性能层使用不同的备份保留期指标来自动备份从基本到高级的所有性能层：
+    **说明**：
+    - 还原的数据库的名称的格式为 DBName+TimeStamp；例如，**Adventureworks2012\_2016-01-01T22-12Z**。此步骤不会覆盖服务器上现有的数据库名称。这是一项安全措施，目的是让用户在删除其当前数据库之前确认还原的数据库，然后重命名此还原的数据库供生产之用。
+    - 服务根据不同的性能层使用不同的备份保留期指标来自动备份从基本到高级的所有性能层：
 
 | 数据库还原 | 基本层 | 标准层 | 高级层 |
 | :-- | :-- | :-- | :-- |
@@ -51,7 +49,7 @@
  ![SQL 数据库迁移向导 - 选择源 - 步骤 1](./media/sql-database-cloud-migrate-restore-single-table-azure-backup/2.png)
 4. 在“选择源”对话框中，选择“准备步骤”部分中的还原的数据库名称作为你的源，然后单击“下一步”。
 
-	![SQL 数据库迁移向导 - 选择源 - 步骤 2](./media/sql-database-cloud-migrate-restore-single-table-azure-backup/3.png)
+    ![SQL 数据库迁移向导 - 选择源 - 步骤 2](./media/sql-database-cloud-migrate-restore-single-table-azure-backup/3.png)
 
 5. 在“选择对象”对话框中，选择“选择特定的数据库对象”选项，然后选择你想要迁移到目标服务器的表。
 ![SQL 数据库迁移向导 - 选择对象](./media/sql-database-cloud-migrate-restore-single-table-azure-backup/4.png)
@@ -63,11 +61,11 @@
 ![SQL 数据库迁移向导 - 结果摘要](./media/sql-database-cloud-migrate-restore-single-table-azure-backup/6.png)
 
 8. 在“设置目标服务器连接”页面上，单击“连接到服务器”，然后输入详细信息，如下所示：
-	- **服务器名称**：目标服务器实例
-	- **身份验证**：**SQL Server 身份验证**。输入你的登录凭据。
-	- **数据库**：**Master 数据库（列出所有数据库）**。此选项可列出目标服务器上的所有数据库。
+    - **服务器名称**：目标服务器实例
+    - **身份验证**：**SQL Server 身份验证**。输入你的登录凭据。
+    - **数据库**：**Master 数据库（列出所有数据库）**。此选项可列出目标服务器上的所有数据库。
 
-	![SQL 数据库迁移向导 - 设置目标服务器连接](./media/sql-database-cloud-migrate-restore-single-table-azure-backup/7.png)
+    ![SQL 数据库迁移向导 - 设置目标服务器连接](./media/sql-database-cloud-migrate-restore-single-table-azure-backup/7.png)
 
 9. 单击“连接”，选择你要将此表移动到的目标数据库，然后单击“下一步”。将完成运行之前生成的脚本，你会看到复制到目标数据库的最近移动的表。
 
@@ -76,6 +74,6 @@
 
 ## 后续步骤
 
-[SQL 数据库自动备份](/documentation/articles/sql-database-automated-backups/)
+[SQL 数据库自动备份](./sql-database-automated-backups.md)
 
 <!---HONumber=Mooncake_1010_2016-->

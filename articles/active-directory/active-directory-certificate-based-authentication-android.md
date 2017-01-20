@@ -1,28 +1,26 @@
-<properties
-    pageTitle="Android 上基于证书的身份验证入门 | Azure"
-    description="了解如何在 Android 设备的解决方案中配置基于证书的身份验证"
-    services="active-directory"
-    author="MarkusVi"
-    documentationcenter="na"
-    manager="femila" />  
+---
+title: Android 上基于证书的身份验证入门 | Azure
+description: 了解如何在 Android 设备的解决方案中配置基于证书的身份验证
+services: active-directory
+author: MarkusVi
+documentationcenter: na
+manager: femila
 
-<tags
-    ms.assetid="c6ad7640-8172-4541-9255-770f39ecce0e"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="12/16/2016"
-    wacn.date="01/05/2017"
-    ms.author="markvi" />  
-
+ms.assetid: c6ad7640-8172-4541-9255-770f39ecce0e
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 12/16/2016
+wacn.date: 01/05/2017
+ms.author: markvi
+---
 
 # Android 上基于证书的身份验证入门
->[AZURE.SELECTOR]
-- [iOS](/documentation/articles/active-directory-certificate-based-authentication-ios/)
-- [Android](/documentation/articles/active-directory-certificate-based-authentication-android/)
-
+>[!div class="op_single_selector"]
+- [iOS](./active-directory-certificate-based-authentication-ios.md)
+- [Android](./active-directory-certificate-based-authentication-android.md)
 
 本主题介绍如何在 Android 设备上为 Office 365 企业版、商业版和教育版计划中租户的用户配置并使用基于证书的身份验证 (CBA)。
 
@@ -74,9 +72,6 @@
 
 `Set-MSOLDomainFederationSettings -domainname <domain> -PromptLoginBehavior Disabled`  
 
-
-
-
 ### Exchange ActiveSync 客户端支持
 支持 Android 5.0 (Lollipop) 或更高版本上的某些 Exchange ActiveSync 应用程序。若要确定你的电子邮件应用程序是否支持此功能，请联系应用程序开发人员。
 
@@ -110,7 +105,6 @@
         IntermediateAuthority = 1 
     } 
 
-
 若要上传信息，可以通过 Windows PowerShell 使用 Azure AD 模块。下面是添加、删除或修改证书颁发机构的示例。
 
 ### 为 Azure AD 租户配置基于证书的身份验证
@@ -137,13 +131,12 @@
 ### 检索证书颁发机构列表
 检索当前存储在 Azure Active Directory 中的租户的证书颁发机构：
 
-	Get-AzureADTrustedCertificateAuthority 
-
+    Get-AzureADTrustedCertificateAuthority 
 
 ### 删除证书颁发机构
 1. 检索证书颁发机构：
    
-     	$c=Get-AzureADTrustedCertificateAuthority
+         $c=Get-AzureADTrustedCertificateAuthority
 2. 删除证书颁发机构的证书：
    
         Remove-AzureADTrustedCertificateAuthority -CertificateAuthorityInformation $c[2] 
@@ -151,7 +144,7 @@
 ### 修改证书颁发机构
 1. 检索证书颁发机构：
    
-     	$c=Get-AzureADTrustedCertificateAuthority
+         $c=Get-AzureADTrustedCertificateAuthority
 2. 修改证书颁发机构上的属性：
    
         $c[0].AuthorityType=1 
@@ -198,11 +191,11 @@
         connect-msolservice -credential $msolcred 
 2. 检索用户的当前 StsRefreshTokensValidFrom 值：
    
-     	$user = Get-MsolUser -UserPrincipalName test@yourdomain.com` 
-     	$user.StsRefreshTokensValidFrom
+         $user = Get-MsolUser -UserPrincipalName test@yourdomain.com` 
+         $user.StsRefreshTokensValidFrom
 3. 将用户的新 StsRefreshTokensValidFrom 值配置为等于当前时间戳：
    
-     	Set-MsolUser -UserPrincipalName test@yourdomain.com -StsRefreshTokensValidFrom ("03/05/2016")
+         Set-MsolUser -UserPrincipalName test@yourdomain.com -StsRefreshTokensValidFrom ("03/05/2016")
 
 所设日期必须属于将来。如果日期不属于将来，则不会设置 **StsRefreshTokensValidFrom** 属性。如果日期属于将来，**StsRefreshTokensValidFrom** 会设置为当前时间（而不是由 Set-MsolUser 命令指示的日期）。
 

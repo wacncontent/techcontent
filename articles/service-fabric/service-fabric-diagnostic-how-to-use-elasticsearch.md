@@ -1,28 +1,27 @@
-<properties
-   pageTitle="将 Elasticsearch 用作 Service Fabric 应用程序跟踪存储 | Azure"
-   description="介绍 Service Fabric 应用程序如何使用 Elasticsearch 和 Kibana 来存储、索引和搜索应用程序跟踪（日志）"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="karolz-ms"
-   manager="adegeo"
-   editor=""/>
+---
+title: 将 Elasticsearch 用作 Service Fabric 应用程序跟踪存储 | Azure
+description: 介绍 Service Fabric 应用程序如何使用 Elasticsearch 和 Kibana 来存储、索引和搜索应用程序跟踪（日志）
+services: service-fabric
+documentationCenter: .net
+authors: karolz-ms
+manager: adegeo
+editor: 
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotNet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="08/09/2016"
-   wacn.date="01/17/2017"
-   ms.author="karolz@microsoft.com"/>
-
+ms.service: service-fabric
+ms.devlang: dotNet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 08/09/2016
+wacn.date: 01/17/2017
+ms.author: karolz@microsoft.com
+---
 
 # 将 Elasticsearch 用作 Service Fabric 应用程序跟踪存储
 ## 介绍
-本文介绍 [Azure Service Fabric](/documentation/services/service-fabric/) 应用程序如何使用 **Elasticsearch** 和 **Kibana** 来存储、索引和搜索应用程序跟踪。[Elasticsearch](https://www.elastic.co/guide/index.html) 是开源的、分布式和可缩放的实时搜索和分析引擎，很适合执行此任务。它可以安装在 Azure 中运行的 Windows 和 Linux 虚拟机上。Elasticsearch 可以非常高效地处理使用**Windows 事件跟踪 (ETW)** 之类的技术所生成的*结构化*跟踪。
+本文介绍 [Azure Service Fabric](./index.md/) 应用程序如何使用 **Elasticsearch** 和 **Kibana** 来存储、索引和搜索应用程序跟踪。[Elasticsearch](https://www.elastic.co/guide/index.html) 是开源的、分布式和可缩放的实时搜索和分析引擎，很适合执行此任务。它可以安装在 Azure 中运行的 Windows 和 Linux 虚拟机上。Elasticsearch 可以非常高效地处理使用**Windows 事件跟踪 (ETW)** 之类的技术所生成的*结构化*跟踪。
 
-Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也是 Service Fabric 应用程序获取其诊断信息的建议方法。使用相同的机制可让运行时提供和应用程序提供的跟踪之间相互关联，使故障排除更轻松。Visual Studio 中的 Service Fabric 项目模板包含日志记录 API（基于 .NET **EventSource** 类），该 API 默认情况下会发出 ETW 跟踪。有关使用 ETW 的 Service Fabric 应用程序跟踪的一般概述，请参阅[在本地计算机开发安装过程中监视和诊断服务](/documentation/articles/service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally/)。
+Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也是 Service Fabric 应用程序获取其诊断信息的建议方法。使用相同的机制可让运行时提供和应用程序提供的跟踪之间相互关联，使故障排除更轻松。Visual Studio 中的 Service Fabric 项目模板包含日志记录 API（基于 .NET **EventSource** 类），该 API 默认情况下会发出 ETW 跟踪。有关使用 ETW 的 Service Fabric 应用程序跟踪的一般概述，请参阅[在本地计算机开发安装过程中监视和诊断服务](./service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)。
 
 需要在 Service Fabric 群集节点上实时（当应用程序正在运行时）捕获跟踪并发送至 Elasticsearch 终结点，Elasticsearch 中才会显示跟踪。跟踪捕获有两个主要选项：
 
@@ -34,9 +33,8 @@ Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也
 
 下面介绍如何在 Azure 上设置 Elasticsearch，讨论这两种捕获选项的优缺点，并说明如何配置 Service Fabric 服务以将数据发送到 Elasticsearch。
 
-
 ## 在 Azure 上设置 Elasticsearch
-若要在 Azure 上设置 Elasticsearch 服务，最直接的方法是使用 [**Azure Resource Manager 模板**](/documentation/articles/resource-group-overview/)。Azure 快速入门模板存储库提供完整的 [Elasticsearch 快速入门 Azure Resource Manager 模板](https://github.com/Azure/azure-quickstart-templates/tree/master/elasticsearch)。此模板会针对缩放单位使用不同的存储帐户（节点组）。它也可以设置具有不同配置和附加各种数量的数据磁盘的个别客户端与服务器节点。
+若要在 Azure 上设置 Elasticsearch 服务，最直接的方法是使用 [**Azure Resource Manager 模板**](../azure-resource-manager/resource-group-overview.md)。Azure 快速入门模板存储库提供完整的 [Elasticsearch 快速入门 Azure Resource Manager 模板](https://github.com/Azure/azure-quickstart-templates/tree/master/elasticsearch)。此模板会针对缩放单位使用不同的存储帐户（节点组）。它也可以设置具有不同配置和附加各种数量的数据磁盘的个别客户端与服务器节点。
 
 我们在此处使用另一个模板（名为 **ES-MultiNode**，来自 [Azure 诊断工具存储库](https://github.com/Azure/azure-diagnostics-tools)）。此模板更易于使用，会创建受 HTTP 基本身份验证保护的 Elasticsearch 群集。在继续操作之前，请先从 GitHub 将存储库下载到计算机（通过克隆存储库或下载 zip 文件）。ES-MultiNode 模板位于具有相同名称的文件夹中。
 
@@ -51,11 +49,9 @@ Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也
 
 3. 假设 Git 已安装，但未包含在系统路径中，请打开 Azure PowerShell 窗口并运行下列命令：
 
-    
-	    $ENV:PATH += ";<Git installation folder>\usr\bin"
-	    $ENV:OPENSSL_CONF = "<Git installation folder>\usr\ssl\openssl.cnf"
-	    
-
+        $ENV:PATH += ";<Git installation folder>\usr\bin"
+        $ENV:OPENSSL_CONF = "<Git installation folder>\usr\ssl\openssl.cnf"
+        
     用你计算机上的 Git 位置替换 `<Git installation folder>`；默认值为 **"C:\\Program Files\\Git"**。请注意第一个路径开头的分号字符。
 
 4. 确保你已登录到 Azure（通过 [`Add-AzureRmAccount`](https://msdn.microsoft.com/zh-cn/library/mt619267.aspx) cmdlet），并且已选择应该用来创建弹性搜索群集的订阅。可以使用 `Get-AzureRmContext` 和 `Get-AzureRmSubscription` cmdlet 来验证是否选择了正确的订阅。
@@ -77,9 +73,7 @@ Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也
 
 你现在可以开始运行脚本。发出以下命令：
 
-
-	CreateElasticSearchCluster -ResourceGroupName <es-group-name> -Region <azure-region> -EsPassword <es-password>
-
+    CreateElasticSearchCluster -ResourceGroupName <es-group-name> -Region <azure-region> -EsPassword <es-password>
 
 其中
 
@@ -89,7 +83,7 @@ Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也
 |`<azure-region>`  |应该创建弹性搜索群集的 Azure 区域的名称。|         
 |`<es-password>`   |弹性搜索用户的密码。|
 
->[AZURE.NOTE] 如果从 Test-AzureResourceGroup cmdlet 收到 NullReferenceException，表示你忘记登录到 Azure (`Add-AzureRmAccount`)。
+>[!NOTE] 如果从 Test-AzureResourceGroup cmdlet 收到 NullReferenceException，表示你忘记登录到 Azure (`Add-AzureRmAccount`)。
 
 如果运行脚本时发生错误，而且你确定错误起因于错误的模板参数值，请更正参数文件，然后以不同资源组名再次运行脚本。你也可以将 `-RemoveExistingResourceGroup` 参数添加到脚本调用，以重复使用相同的资源组名，并让脚本清理旧的资源组。
 
@@ -178,72 +172,69 @@ Microsoft.Diagnostic.Listeners 库是 PartyCluster 示例 Service Fabric 应用�
 ### Elasticsearch 侦听器实例化和配置
 将诊断数据发送到 Elasticsearch 所需的最后一个步骤就是创建 `ElasticSearchListener` 的实例并使用 Elasticsearch 连接数据来配置它。侦听器会自动捕获所有通过服务项目中定义的 EventSource 类引发的事件。它必须在服务的生存期内保持活动状态，所以创建它的最佳位置是在服务初始化代码中。以下是无状态服务的初始化代码在完成必要更改后的样子（以 `****` 开头的注释指出新增的部分）：
 
-
-	using System;
-	using System.Diagnostics;
-	using System.Fabric;
-	using System.Threading;
-	using System.Threading.Tasks;
-	using Microsoft.ServiceFabric.Services.Runtime;
-	
-	// **** Add the following directives
-	using Microsoft.Diagnostics.EventListeners;
-	using Microsoft.Diagnostics.EventListeners.Fabric;
-	
-	namespace Stateless1
-	{
-	    internal static class Program
-	    {
-	        /// <summary>
-	        /// This is the entry point of the service host process.
-	        /// </summary>        
-	        private static void Main()
-	        {
-	            try
-	            {
-	                // **** Instantiate ElasticSearchListener
-	                var configProvider = new FabricConfigurationProvider("ElasticSearchEventListener");
-	                ElasticSearchListener esListener = null;
-	                if (configProvider.HasConfiguration)
-	                {
-	                    esListener = new ElasticSearchListener(configProvider);
-	                }
-	
-	                // The ServiceManifest.XML file defines one or more service type names.
-	                // Registering a service maps a service type name to a .NET type.
-	                // When Service Fabric creates an instance of this service type,
-	                // an instance of the class is created in this host process.
-	
-	                ServiceRuntime.RegisterServiceAsync("Stateless1Type", 
-	                    context => new Stateless1(context)).GetAwaiter().GetResult();
-	
-	                ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(Stateless1).Name);
-	
-	                // Prevents this host process from terminating so services keep running.
-	                Thread.Sleep(Timeout.Infinite);
-	
-	                // **** Ensure that the ElasticSearchListner instance is not garbage-collected prematurely
-	                GC.KeepAlive(esListener);
-	            }
-	            catch (Exception e)
-	            {
-	                ServiceEventSource.Current.ServiceHostInitializationFailed(e);
-	                throw;
-	            }
-	        }
-	    }
-	}
-
+    using System;
+    using System.Diagnostics;
+    using System.Fabric;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.ServiceFabric.Services.Runtime;
+    
+    // **** Add the following directives
+    using Microsoft.Diagnostics.EventListeners;
+    using Microsoft.Diagnostics.EventListeners.Fabric;
+    
+    namespace Stateless1
+    {
+        internal static class Program
+        {
+            /// <summary>
+            /// This is the entry point of the service host process.
+            /// </summary>        
+            private static void Main()
+            {
+                try
+                {
+                    // **** Instantiate ElasticSearchListener
+                    var configProvider = new FabricConfigurationProvider("ElasticSearchEventListener");
+                    ElasticSearchListener esListener = null;
+                    if (configProvider.HasConfiguration)
+                    {
+                        esListener = new ElasticSearchListener(configProvider);
+                    }
+    
+                    // The ServiceManifest.XML file defines one or more service type names.
+                    // Registering a service maps a service type name to a .NET type.
+                    // When Service Fabric creates an instance of this service type,
+                    // an instance of the class is created in this host process.
+    
+                    ServiceRuntime.RegisterServiceAsync("Stateless1Type", 
+                        context => new Stateless1(context)).GetAwaiter().GetResult();
+    
+                    ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(Stateless1).Name);
+    
+                    // Prevents this host process from terminating so services keep running.
+                    Thread.Sleep(Timeout.Infinite);
+    
+                    // **** Ensure that the ElasticSearchListner instance is not garbage-collected prematurely
+                    GC.KeepAlive(esListener);
+                }
+                catch (Exception e)
+                {
+                    ServiceEventSource.Current.ServiceHostInitializationFailed(e);
+                    throw;
+                }
+            }
+        }
+    }
 
 Elasticsearch 连接数据应该放在服务配置文件 (**PackageRoot\\Config\\Settings.xml**) 中的单独节中。该节的名称必须与传递给 `FabricConfigurationProvider` 构造函数的值对应，例如：
 
-
-	<Section Name="ElasticSearchEventListener">
-  		<Parameter Name="serviceUri" Value="http://myBigCluster.chinaeast.chinacloudapp.cn/es/" />
-  		<Parameter Name="userName" Value="(ES user name)" />
-  		<Parameter Name="password" Value="(ES user password)" />
-  		<Parameter Name="indexNamePrefix" Value="myapp" />
-	</Section>
+    <Section Name="ElasticSearchEventListener">
+          <Parameter Name="serviceUri" Value="http://myBigCluster.chinaeast.chinacloudapp.cn/es/" />
+          <Parameter Name="userName" Value="(ES user name)" />
+          <Parameter Name="password" Value="(ES user password)" />
+          <Parameter Name="indexNamePrefix" Value="myapp" />
+    </Section>
 
 `serviceUri`、`userName` 和 `password` 参数的值分别对应于 Elasticsearch 群集终结点地址、Elasticsearch 用户名和密码。`indexNamePrefix` 是 Elasticsearch 索引的前缀；Microsoft.Diagnostics.Listeners 库每天为其数据创建新索引。
 
@@ -252,9 +243,8 @@ Elasticsearch 连接数据应该放在服务配置文件 (**PackageRoot\\Config\
 
 ![显示 PartyCluster 应用程序事件的 Kibana][2]  
 
-
 ## 后续步骤
-- [深入了解诊断和监视 Service Fabric 服务](/documentation/articles/service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally/)
+- [深入了解诊断和监视 Service Fabric 服务](./service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)
 
 <!--Image references-->
 

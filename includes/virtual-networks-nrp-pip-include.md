@@ -20,26 +20,26 @@
 
 采用 JSON 格式的示例公共 IP 地址：
 
-	{
-	   "name": "PIP01",
-	   "location": "North US",
-	   "tags": { "key": "value" },
-	   "properties": {
-	      "publicIPAllocationMethod": "Static",
-	      "idleTimeoutInMinutes": 4,
-		  "ipAddress": "104.42.233.77",
-	      "dnsSettings": {
-	         "domainNameLabel": "mylabel",
-			 "fqdn": "mylabel.chinanorth.chinacloudapp.cn",
-	         "reverseFqdn": "contoso.com."
-	      }
-	   }
-	} 
+    {
+       "name": "PIP01",
+       "location": "North US",
+       "tags": { "key": "value" },
+       "properties": {
+          "publicIPAllocationMethod": "Static",
+          "idleTimeoutInMinutes": 4,
+          "ipAddress": "104.42.233.77",
+          "dnsSettings": {
+             "domainNameLabel": "mylabel",
+             "fqdn": "mylabel.chinanorth.chinacloudapp.cn",
+             "reverseFqdn": "contoso.com."
+          }
+       }
+    } 
 
 ### 其他资源
 
-- 获取有关[公共 IP 地址](/documentation/articles/virtual-networks-reserved-public-ip/)的详细信息。
-- 了解[实例层级公共 IP 地址](/documentation/articles/virtual-networks-instance-level-public-ip/)。
+- 获取有关[公共 IP 地址](../articles/virtual-network/virtual-networks-reserved-public-ip.md)的详细信息。
+- 了解[实例层级公共 IP 地址](../articles/virtual-network/virtual-networks-instance-level-public-ip.md)。
 - 阅读公共 IP 地址的 [REST API 参考文档](https://msdn.microsoft.com/zh-cn/library/azure/mt163638.aspx)。
 
 <!---HONumber=82-->

@@ -1,28 +1,27 @@
-<properties
-	pageTitle="使用 Azure 门户预览将 Azure SQL 数据库存档到 BACPAC 文件"
-	description="使用 Azure 门户预览将 Azure SQL 数据库存档到 BACPAC 文件"
-	services="sql-database"
-	documentationCenter=""
-	authors="stevestein"
-	manager="jhubbard"
-	editor=""/>
+---
+title: 使用 Azure 门户预览将 Azure SQL 数据库存档到 BACPAC 文件
+description: 使用 Azure 门户预览将 Azure SQL 数据库存档到 BACPAC 文件
+services: sql-database
+documentationCenter: 
+authors: stevestein
+manager: jhubbard
+editor: 
 
-<tags
-	ms.service="sql-database"
-	ms.devlang="NA"
-	ms.date="08/15/2016"
-	wacn.date="01/11/2017"
-	ms.author="sstein"
-	ms.workload="data-management"
-	ms.topic="article"
-	ms.tgt_pltfrm="NA"/>
-
+ms.service: sql-database
+ms.devlang: NA
+ms.date: 08/15/2016
+wacn.date: 01/11/2017
+ms.author: sstein
+ms.workload: data-management
+ms.topic: article
+ms.tgt_pltfrm: NA
+---
 
 # 使用 Azure 门户预览将 Azure SQL 数据库存档到 BACPAC 文件
 
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/sql-database-export/)
-- [PowerShell](/documentation/articles/sql-database-export-powershell/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./sql-database-export.md)
+- [PowerShell](./sql-database-export-powershell.md)
 
 本文说明了如何使用 [Azure 门户预览](https://portal.azure.cn)将 Azure SQL 数据库存档到 BACPAC 文件（存储在 Azure Blob 存储中）。
 
@@ -30,7 +29,7 @@
 
 ***注意事项***
 
-- 为保证存档的事务处理方式一致，须确保导出期间未发生写入活动，或者正在从 Azure SQL 数据库的[事务处理方式一致性副本](/documentation/articles/sql-database-copy/)中导出。
+- 为保证存档的事务处理方式一致，须确保导出期间未发生写入活动，或者正在从 Azure SQL 数据库的[事务处理方式一致性副本](./sql-database-copy.md)中导出。
 - 存档到 Azure Blob 存储的 BACPAC 文件的大小上限为 200 GB。若要将较大的 BACPAC 文件存档到本地存储，请使用 [SqlPackage](https://msdn.microsoft.com/zh-cn/library/hh550080.aspx) 命令提示符实用程序。此实用程序随 Visual Studio 和 SQL Server 一起提供。你还可以[下载](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx)最新版本的 SQL Server Data Tools 以获取此实用程序。
 - 不支持使用 BACPAC 文件存档到 Azure 高级存储。
 - 如果导出操作耗时超过 20 个小时，可能会取消操作。为提高导出过程中的性能，你可以进行如下操作：
@@ -38,20 +37,19 @@
  - 在导出期间终止所有读取和写入活动。
  - 对所有大型表格上的非 null 值使用[聚集索引](https://msdn.microsoft.com/zh-cn/library/ms190457.aspx)。如果不使用聚集索引，当时间超过 6-12 个小时时，导出可能会失败。原因是导出服务需要完成表格扫描才能尝试导出整个表格。确认表格是否已就导出进行优化的好方法是运行 **DBCC SHOW\_STATISTICS** 并确保 *RANGE\_HI\_KEY* 不是 null 且其值分布良好。有关详细信息，请参阅 [DBCC SHOW\_STATISTICS](https://msdn.microsoft.com/zh-cn/library/ms174384.aspx)。
 
-
-> [AZURE.NOTE] BACPAC 不能用于备份和还原操作。Azure SQL 数据库会自动为每个用户数据库创建备份。有关详细信息，请参阅[业务连续性概述](/documentation/articles/sql-database-business-continuity/)。
+> [!NOTE] BACPAC 不能用于备份和还原操作。Azure SQL 数据库会自动为每个用户数据库创建备份。有关详细信息，请参阅[业务连续性概述](./sql-database-business-continuity.md)。
 
 若要完成本文，你需要以下各项：
 
 - Azure 订阅。
 - Azure SQL 数据库。
-- [Azure 标准存储帐户](/documentation/articles/storage-create-storage-account/)，具有可在标准存储中存储 BACPAC 的 blob 容器。
+- [Azure 标准存储帐户](../storage/storage-create-storage-account.md)，具有可在标准存储中存储 BACPAC 的 blob 容器。
 
 ##<a name="export-your-database"></a> 导出数据库
 
 打开要导出的数据库对应的 SQL 数据库边栏选项卡。
 
-> [AZURE.IMPORTANT] 若要确保获得事务处理一致性 BACPAC 文件，应首先[创建数据库的副本](/documentation/articles/sql-database-copy/)，然后导出该数据库副本。
+> [!IMPORTANT] 若要确保获得事务处理一致性 BACPAC 文件，应首先[创建数据库的副本](./sql-database-copy.md)，然后导出该数据库副本。
 
 1.	转到 [Azure 门户预览](https://portal.azure.cn)。
 2.	单击“SQL 数据库”。
@@ -89,10 +87,8 @@
 
 ## 后续步骤
 
-- 若要了解如何将 BACPAC 导入到 Azure SQL 数据库，请参阅[将 BACPCAC 导入 Azure SQL 数据库](/documentation/articles/sql-database-import/)
+- 若要了解如何将 BACPAC 导入到 Azure SQL 数据库，请参阅[将 BACPCAC 导入 Azure SQL 数据库](./sql-database-import.md)
 - 若要了解如何将 BACPAC 导入到 SQL Server 数据库，请参阅[将 BACPCAC 导入 SQL Server 数据库](https://msdn.microsoft.com/zh-cn/library/hh710052.aspx)
-
-
 
 <!--Image references-->
 [1]: ./media/sql-database-export/export.png

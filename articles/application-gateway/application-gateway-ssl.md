@@ -1,30 +1,30 @@
-<properties
-   pageTitle="使用经典部署配置应用程序网关以进行 SSL 卸载 | Azure"
-   description="本文提供有关使用 Azure 经典部署模型创建支持 SSL 卸载的应用程序网关的说明。"
-   documentationCenter="na"
-   services="application-gateway"
-   authors="georgewallace"
-   manager="carmonm"
-   editor="tysonn"/>
-<tags
-   ms.service="application-gateway"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="11/16/2016"
-   wacn.date="01/03/2017"
-   ms.author="gwallace"/>
+---
+title: 使用经典部署配置应用程序网关以进行 SSL 卸载 | Azure
+description: 本文提供有关使用 Azure 经典部署模型创建支持 SSL 卸载的应用程序网关的说明。
+documentationCenter: na
+services: application-gateway
+authors: georgewallace
+manager: carmonm
+editor: tysonn
+
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/16/2016
+wacn.date: 01/03/2017
+ms.author: gwallace
+---
 
 # 使用经典部署模型配置应用程序网关以进行 SSL 卸载
 
-> [AZURE.SELECTOR]
--[Azure Portal Preview](/documentation/articles/application-gateway-ssl-portal/)
--[Azure Resource Manager PowerShell](/documentation/articles/application-gateway-ssl-arm/)
--[Azure Classic PowerShell](/documentation/articles/application-gateway-ssl/)
+> [!div class="op_single_selector"]
+-[Azure Portal Preview](./application-gateway-ssl-portal.md)
+-[Azure Resource Manager PowerShell](./application-gateway-ssl-arm.md)
+-[Azure Classic PowerShell](./application-gateway-ssl.md)
 
 可将 Azure 应用程序网关配置为在网关上终止安全套接字层 (SSL) 会话，以避免 Web 场中出现开销较高的 SSL 解密任务。SSL 卸载还简化了 Web 应用程序的前端服务器设置与管理。
-
 
 ## 开始之前
 
@@ -41,20 +41,19 @@
 5. [启动网关](#start-the-gateway)
 6. [验证网关状态](#verify-the-gateway-status)
 
-
 ## <a name="create-a-new-application-gateway"></a> 创建应用程序网关
 
 若要创建网关，请使用 **New-AzureApplicationGateway** cmdlet，并将值替换为你自己的值。此时不会开始计收网关的费用。计费将在后面已成功启动网关时开始。
 
 此示例在第一行显示 cmdlet，接着显示输出。
 
-	PS C:\> New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
+    PS C:\> New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
 
-	VERBOSE: 4:31:35 PM - Begin Operation: New-AzureApplicationGateway
-	VERBOSE: 4:32:37 PM - Completed Operation: New-AzureApplicationGateway
-	Name       HTTP Status Code     Operation ID                             Error
-	----       ----------------     ------------                             ----
-	Successful OK                   55ef0460-825d-2981-ad20-b9a8af41b399
+    VERBOSE: 4:31:35 PM - Begin Operation: New-AzureApplicationGateway
+    VERBOSE: 4:32:37 PM - Completed Operation: New-AzureApplicationGateway
+    Name       HTTP Status Code     Operation ID                             Error
+    ----       ----------------     ------------                             ----
+    Successful OK                   55ef0460-825d-2981-ad20-b9a8af41b399
 
 若要验证是否已创建网关，可以使用 **Get-AzureApplicationGateway** cmdlet。
 
@@ -62,21 +61,20 @@
 
 此示例在第一行显示 cmdlet，接着显示输出。
 
-	PS C:\> Get-AzureApplicationGateway AppGwTest
+    PS C:\> Get-AzureApplicationGateway AppGwTest
 
-	VERBOSE: 4:39:39 PM - Begin Operation:
-	Get-AzureApplicationGateway VERBOSE: 4:39:40 PM - Completed
-	Operation: Get-AzureApplicationGateway
-	Name: AppGwTest
-	Description:
-	VnetName: testvnet1
-	Subnets: {Subnet-1}
-	InstanceCount: 2
-	GatewaySize: Medium
-	State: Stopped
-	VirtualIPs:
-	DnsName:
-
+    VERBOSE: 4:39:39 PM - Begin Operation:
+    Get-AzureApplicationGateway VERBOSE: 4:39:40 PM - Completed
+    Operation: Get-AzureApplicationGateway
+    Name: AppGwTest
+    Description:
+    VnetName: testvnet1
+    Subnets: {Subnet-1}
+    InstanceCount: 2
+    GatewaySize: Medium
+    State: Stopped
+    VirtualIPs:
+    DnsName:
 
 ## <a name="upload-ssl-certificates"></a> 上载 SSL 证书
 
@@ -84,29 +82,29 @@
 
 此示例在第一行显示 cmdlet，接着显示输出。将示例中的值替换为你自己的值。
 
-	PS C:\> Add-AzureApplicationGatewaySslCertificate  -Name AppGwTest -CertificateName GWCert -Password <password> -CertificateFile <full path to pfx file>
+    PS C:\> Add-AzureApplicationGatewaySslCertificate  -Name AppGwTest -CertificateName GWCert -Password <password> -CertificateFile <full path to pfx file>
 
-	VERBOSE: 5:05:23 PM - Begin Operation: Get-AzureApplicationGatewaySslCertificate
-	VERBOSE: 5:06:29 PM - Completed Operation: Get-AzureApplicationGatewaySslCertificate
-	Name       HTTP Status Code     Operation ID                             Error
-	----       ----------------     ------------                             ----
-	Successful OK                   21fdc5a0-3bf7-2c12-ad98-192e0dd078ef
+    VERBOSE: 5:05:23 PM - Begin Operation: Get-AzureApplicationGatewaySslCertificate
+    VERBOSE: 5:06:29 PM - Completed Operation: Get-AzureApplicationGatewaySslCertificate
+    Name       HTTP Status Code     Operation ID                             Error
+    ----       ----------------     ------------                             ----
+    Successful OK                   21fdc5a0-3bf7-2c12-ad98-192e0dd078ef
 
 接下来，验证证书上载。使用 **Get-AzureApplicationGatewayCertificate** cmdlet。
 
 此示例在第一行显示 cmdlet，接着显示输出。
 
-	PS C:\> Get-AzureApplicationGatewaySslCertificate AppGwTest
+    PS C:\> Get-AzureApplicationGatewaySslCertificate AppGwTest
 
-	VERBOSE: 5:07:54 PM - Begin Operation: Get-AzureApplicationGatewaySslCertificate
-	VERBOSE: 5:07:55 PM - Completed Operation: Get-AzureApplicationGatewaySslCertificate
-	Name           : SslCert
-	SubjectName    : CN=gwcert.app.test.contoso.com
-	Thumbprint     : AF5ADD77E160A01A6......EE48D1A
-	ThumbprintAlgo : sha1RSA
-	State..........: Provisioned
+    VERBOSE: 5:07:54 PM - Begin Operation: Get-AzureApplicationGatewaySslCertificate
+    VERBOSE: 5:07:55 PM - Completed Operation: Get-AzureApplicationGatewaySslCertificate
+    Name           : SslCert
+    SubjectName    : CN=gwcert.app.test.contoso.com
+    Thumbprint     : AF5ADD77E160A01A6......EE48D1A
+    ThumbprintAlgo : sha1RSA
+    State..........: Provisioned
 
->[AZURE.NOTE] 证书密码的长度必须是 4 到 12 个字符，可包含字母或数字。不接受特殊字符。
+>[!NOTE] 证书密码的长度必须是 4 到 12 个字符，可包含字母或数字。不接受特殊字符。
 
 ## <a name="configure-the-gateway"></a> 配置网关
 
@@ -126,88 +124,80 @@
 
 **启用基于 Cookie 的相关性**：可以配置应用程序网关，确保来自客户端会话的请求始终定向到 Web 场中的同一 VM。这是通过注入允许网关适当定向流量的会话 Cookie 来实现的。若要启用基于 Cookie 的相关性，请在 **BackendHttpSettings** 元素中将 **CookieBasedAffinity** 设置为 *Enabled*。
 
-
-
 可以通过创建配置对象或使用配置 XML 文件来构造配置。若要使用配置 XML 文件构造配置，请使用以下示例。
 
 **配置 XML 示例**
 
-
-	    <?xml version="1.0" encoding="utf-8"?>
-	<ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
-	    <FrontendIPConfigurations />
-	    <FrontendPorts>
-	        <FrontendPort>
-	            <Name>FrontendPort1</Name>
-	            <Port>443</Port>
-	        </FrontendPort>
-	    </FrontendPorts>
-	    <BackendAddressPools>
-	        <BackendAddressPool>
-	            <Name>BackendPool1</Name>
-	            <IPAddresses>
-	                <IPAddress>10.0.0.1</IPAddress>
-	                <IPAddress>10.0.0.2</IPAddress>
-	            </IPAddresses>
-	        </BackendAddressPool>
-	    </BackendAddressPools>
-	    <BackendHttpSettingsList>
-	        <BackendHttpSettings>
-	            <Name>BackendSetting1</Name>
-	            <Port>80</Port>
-	            <Protocol>Http</Protocol>
-	            <CookieBasedAffinity>Enabled</CookieBasedAffinity>
-	        </BackendHttpSettings>
-	    </BackendHttpSettingsList>
-	    <HttpListeners>
-	        <HttpListener>
-	            <Name>HTTPListener1</Name>
-	            <FrontendPort>FrontendPort1</FrontendPort>
-	            <Protocol>Https</Protocol>
-	            <SslCert>GWCert</SslCert>
-	        </HttpListener>
-	    </HttpListeners>
-	    <HttpLoadBalancingRules>
-	        <HttpLoadBalancingRule>
-	            <Name>HttpLBRule1</Name>
-	            <Type>basic</Type>
-	            <BackendHttpSettings>BackendSetting1</BackendHttpSettings>
-	            <Listener>HTTPListener1</Listener>
-	            <BackendAddressPool>BackendPool1</BackendAddressPool>
-	        </HttpLoadBalancingRule>
-	    </HttpLoadBalancingRules>
-	</ApplicationGatewayConfiguration>
-
+        <?xml version="1.0" encoding="utf-8"?>
+    <ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
+        <FrontendIPConfigurations />
+        <FrontendPorts>
+            <FrontendPort>
+                <Name>FrontendPort1</Name>
+                <Port>443</Port>
+            </FrontendPort>
+        </FrontendPorts>
+        <BackendAddressPools>
+            <BackendAddressPool>
+                <Name>BackendPool1</Name>
+                <IPAddresses>
+                    <IPAddress>10.0.0.1</IPAddress>
+                    <IPAddress>10.0.0.2</IPAddress>
+                </IPAddresses>
+            </BackendAddressPool>
+        </BackendAddressPools>
+        <BackendHttpSettingsList>
+            <BackendHttpSettings>
+                <Name>BackendSetting1</Name>
+                <Port>80</Port>
+                <Protocol>Http</Protocol>
+                <CookieBasedAffinity>Enabled</CookieBasedAffinity>
+            </BackendHttpSettings>
+        </BackendHttpSettingsList>
+        <HttpListeners>
+            <HttpListener>
+                <Name>HTTPListener1</Name>
+                <FrontendPort>FrontendPort1</FrontendPort>
+                <Protocol>Https</Protocol>
+                <SslCert>GWCert</SslCert>
+            </HttpListener>
+        </HttpListeners>
+        <HttpLoadBalancingRules>
+            <HttpLoadBalancingRule>
+                <Name>HttpLBRule1</Name>
+                <Type>basic</Type>
+                <BackendHttpSettings>BackendSetting1</BackendHttpSettings>
+                <Listener>HTTPListener1</Listener>
+                <BackendAddressPool>BackendPool1</BackendAddressPool>
+            </HttpLoadBalancingRule>
+        </HttpLoadBalancingRules>
+    </ApplicationGatewayConfiguration>
 
 ## <a name="set-the-gateway-configuration"></a> 设置网关配置
 
 接下来，你将设置应用程序网关。可以对配置对象或配置 XML 文件使用 **Set-AzureApplicationGatewayConfig** cmdlet。
 
+    PS C:\> Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile D:\config.xml
 
-	PS C:\> Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile D:\config.xml
-
-	VERBOSE: 7:54:59 PM - Begin Operation: Set-AzureApplicationGatewayConfig
-	VERBOSE: 7:55:32 PM - Completed Operation: Set-AzureApplicationGatewayConfig
-	Name       HTTP Status Code     Operation ID                             Error
-	----       ----------------     ------------                             ----
-	Successful OK                   9b995a09-66fe-2944-8b67-9bb04fcccb9d
+    VERBOSE: 7:54:59 PM - Begin Operation: Set-AzureApplicationGatewayConfig
+    VERBOSE: 7:55:32 PM - Completed Operation: Set-AzureApplicationGatewayConfig
+    Name       HTTP Status Code     Operation ID                             Error
+    ----       ----------------     ------------                             ----
+    Successful OK                   9b995a09-66fe-2944-8b67-9bb04fcccb9d
 
 ## <a name="start-the-gateway"></a> 启动网关
 
 配置网关后，使用 **Start-AzureApplicationGateway** cmdlet 来启动网关。成功启动网关后，将开始计收应用程序网关的费用。
 
-
 **注意：****Start-AzureApplicationGateway** cmdlet 可能需要长达 15-20 分钟的时间才能完成。
 
+    PS C:\> Start-AzureApplicationGateway AppGwTest
 
-	PS C:\> Start-AzureApplicationGateway AppGwTest
-
-	VERBOSE: 7:59:16 PM - Begin Operation: Start-AzureApplicationGateway
-	VERBOSE: 8:05:52 PM - Completed Operation: Start-AzureApplicationGateway
-	Name       HTTP Status Code     Operation ID                             Error
-	----       ----------------     ------------                             ----
-	Successful OK                   fc592db8-4c58-2c8e-9a1d-1c97880f0b9b
-
+    VERBOSE: 7:59:16 PM - Begin Operation: Start-AzureApplicationGateway
+    VERBOSE: 8:05:52 PM - Completed Operation: Start-AzureApplicationGateway
+    Name       HTTP Status Code     Operation ID                             Error
+    ----       ----------------     ------------                             ----
+    Successful OK                   fc592db8-4c58-2c8e-9a1d-1c97880f0b9b
 
 ## <a name="verify-the-gateway-status"></a> 验证网关状态
 
@@ -215,24 +205,22 @@
 
 此示例演示了一个正常运行并已准备好接收流量的应用程序网关。
 
-	PS C:\> Get-AzureApplicationGateway AppGwTest
+    PS C:\> Get-AzureApplicationGateway AppGwTest
 
-	Name          : AppGwTest2
-	Description   :
-	VnetName      : testvnet1
-	Subnets       : {Subnet-1}
-	InstanceCount : 2
-	GatewaySize   : Medium
-	State         : Running
-	VirtualIPs    : {23.96.22.241}
-	DnsName       : appgw-4c960426-d1e6-4aae-8670-81fd7a519a43.chinacloudapp.cn
-
+    Name          : AppGwTest2
+    Description   :
+    VnetName      : testvnet1
+    Subnets       : {Subnet-1}
+    InstanceCount : 2
+    GatewaySize   : Medium
+    State         : Running
+    VirtualIPs    : {23.96.22.241}
+    DnsName       : appgw-4c960426-d1e6-4aae-8670-81fd7a519a43.chinacloudapp.cn
 
 ## 后续步骤
 
-
 如需负载均衡选项的其他常规信息，请参阅：
 
-- [Azure 流量管理器](/documentation/services/traffic-manager/)
+- [Azure 流量管理器](../traffic-manager/index.md/)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

@@ -1,16 +1,16 @@
-<properties 
-	pageTitle="使用消息传送构建可靠弹性的云应用 | Azure" 
-	description="了解如何使用 Azure 中的消息传送构建可靠弹性的云应用程序。" 
-	services="service-bus" 
-	authors="sethmanheim" 
-	manager="timlt" 
-	editor="" 
-	documentationCenter=""/>
+---
+title: 使用消息传送构建可靠弹性的云应用 | Azure
+description: 了解如何使用 Azure 中的消息传送构建可靠弹性的云应用程序。
+services: service-bus
+authors: sethmanheim
+manager: timlt
+editor: 
+documentationCenter: 
 
-<tags 
-	ms.service="service-bus" 
-	ms.date="05/10/2016" 
-	wacn.date="01/09/2017"/>
+ms.service: service-bus
+ms.date: 05/10/2016
+wacn.date: 01/09/2017
+---
 
 # 使用消息传送构建可靠弹性的云应用 
  
@@ -18,23 +18,23 @@
  
 ## 探究
 
-- [Azure 服务总线基础](/documentation/articles/service-bus-fundamentals-hybrid-solutions/)
+- [Azure 服务总线基础](./service-bus-fundamentals-hybrid-solutions.md)
 - [基于队列的负载均衡模式](http://msdn.microsoft.com/zh-cn/library/dn589783.aspx)
 - [使用者竞争](http://msdn.microsoft.com/zh-cn/library/dn568101.aspx)
 - [客户案例](https://customers.microsoft.com/Pages/Home.aspx)
  
 ## 构建
-- [如何使用 Service Bus 队列](/documentation/articles/service-bus-dotnet-get-started-with-queues/)
-- [使服务总线应用程序免受服务总线服务中断和灾难影响的最佳实践](/documentation/articles/service-bus-outages-disasters/)
+- [如何使用 Service Bus 队列](./service-bus-dotnet-get-started-with-queues.md)
+- [使服务总线应用程序免受服务总线服务中断和灾难影响的最佳实践](./service-bus-outages-disasters.md)
 - [中转消息传送：请求响应示例](https://code.msdn.microsoft.com/Brokered-Messaging-Request-0ce8fcaf) 
-- [使用 Azure 服务总线的多层应用程序](/documentation/articles/service-bus-dotnet-multi-tier-app-using-service-bus-queues/)
+- [使用 Azure 服务总线的多层应用程序](./service-bus-dotnet-multi-tier-app-using-service-bus-queues.md)
  
 ## 热门
-- [Azure 队列和 Azure 服务总线队列 - 比较与对照](/documentation/articles/service-bus-azure-and-service-bus-queues-compared-contrasted/)
+- [Azure 队列和 Azure 服务总线队列 - 比较与对照](./service-bus-azure-and-service-bus-queues-compared-contrasted.md)
 - [服务总线 REST API 参考](http://msdn.microsoft.com/zh-cn/library/azure/hh780717.aspx)
 - [服务总线 RP REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/mt639375.aspx)
 
 ## 相关服务
-- [云服务](/home/features/cloud-services/)
+- [云服务](https://www.azure.cn/home/features/cloud-services/)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

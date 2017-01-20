@@ -1,12 +1,27 @@
-<properties linkid="dev-net-common-tasks-cdn" urlDisplayName="CDN" pageTitle="Azure Content Delivery Network FAQs: Azure feature guide" metaKeywords="Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN FAQS, origin traffic, ICP record number, CDN default cache rules, origin domain name, subscribe, CNAME, download acceleration, Web acceleration, website acceleration, live streaming acceleration, VOD acceleration, video on demand acceleration, CDN price, CDN fees, technical documentation, help files" description="Find answers to common service consulting questions or inquiries related to Azure Content Delivery Network" metaCanonical="" services="" documentationCenter=".NET" title="" authors="" solutions="" manager="" editor="" />
-<tags ms.service="cdn_en"
-    ms.date=""
-    wacn.date="2/23/2016"
-    wacn.lang="en"
-    />
+---
+linkid: dev-net-common-tasks-cdn
+urlDisplayName: CDN
+title: Azure Content Delivery Network FAQs: Azure feature guide
+metaKeywords: Azure CDN, Azure CDN, Azure blobs, Azure caching, Azure add-ons, CDN FAQ, CDN FAQS, origin traffic, ICP record number, CDN default cache rules, origin domain name, subscribe, CNAME, download acceleration, Web acceleration, website acceleration, live streaming acceleration, VOD acceleration, video on demand acceleration, CDN price, CDN fees, technical documentation, help files
+description: Find answers to common service consulting questions or inquiries related to Azure Content Delivery Network
+metaCanonical: 
+services: 
+documentationCenter: .NET
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
+
+ms.service: cdn_en
+ms.date: 
+wacn.date: 2/23/2016
+wacn.lang: en
+---
+
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/cdn-faq-service-inquiry/)
-- [English](/documentation/articles/cdn-enus-faq-service-inquiry/) 
+- [中文](./cdn-faq-service-inquiry.md)
+- [English](./cdn-enus-faq-service-inquiry.md) 
 #FAQs – Consulting
 
 + [Azure CDN price consulting](#step1)
@@ -30,7 +45,6 @@
 + [If I use Content Delivery Network acceleration with a blob, do I directly use the blob address, rather than the custom domain name? Does it need ICP number and why?](#step19)
 + [If there are multiple subscriptions, how do I switch between them?](#step20)
 
-
 ##**Price consulting**<a id="step1"></a>
 
 ### **Is all data transferred charged at a higher rate once the amount of data transferred each month exceeds 10 terabytes (TB)?**
@@ -43,7 +57,7 @@ No, this is not included. When Content Delivery Network receives a request for a
 
 ### **How are Content Delivery Network fees calculated?**
 
-Fees for Content Delivery Network are currently calculated on the basis of traffic. Charging by bandwidth is not supported at the moment. For more specific information on pricing, refer to [Pricing details](/pricing/details/cdn/).
+Fees for Content Delivery Network are currently calculated on the basis of traffic. Charging by bandwidth is not supported at the moment. For more specific information on pricing, refer to [Pricing details](https://www.azure.cn/pricing/details/cdn/).
 
 ## **The concept and role of Azure Content Delivery Network**<a id="step2"></a>
 
@@ -84,7 +98,7 @@ Azure CDN has no limit on the number of accelerated domain names that can be add
 Currently, Azure CDN principally provides static acceleration, but also includes some dynamic acceleration technologies. Examples include returning to origin by using multiline nodes and Transmission Control Protocol (TCP) optimization. Active webpage acceleration techniques such as PHP, ASP.NET, and JSP are not supported, but more dynamic page acceleration methods will be gradually added in the future.
 
 Acceleration types supported by Azure CDN include web acceleration, Video on Demand (VoD) acceleration, live streaming media (direct broadcast) acceleration, and HTTPS acceleration.
-	
+    
 ## **What are the specific differences between the web acceleration, VoD acceleration, live streaming media acceleration, and HTTPS acceleration in the Content Delivery Network acceleration type options?**<a id="step11"></a>
 
 Different Content Delivery Network acceleration types correspond to different usage scenarios:
@@ -121,7 +135,7 @@ The differences in terms of how these acceleration types work with the CDN back-
 - **The system’s default cache rules for live streaming media acceleration are:**
   1. TS files are cached for two minutes.
   2. M3U8 files are cached for two seconds. 
-	
+    
 **Cache rule logic:**
 
    1. If the user configured no-cache rules, these rules will be applied as top priority. Then, configured cache rules will be applied from top to bottom.
@@ -139,7 +153,7 @@ If the custom domain name is a wildcard domain name, the refresh URL must specif
 ## **Can wildcard domain names be used with preloading?**<a id="step15"></a>
 
 Preloading requires a subdomain, which must be accessible (The HTTP status code is 200).
-	 
+     
 ## **What is the difference between the “Origin Domain” and the “Origin Host Header”?**<a id="step16"></a>
 
 The Origin Domain indicates the actual, accessible origin address, which may be an IP address or a domain name. If it is a domain name, CDN will perform address parsing for the domain name when returning to source. It will then use the parsed IP address to access it.
@@ -152,7 +166,7 @@ When you create CDN in the Azure CDN portal, enter the return-to-source access h
 
 ## **What are the differences between the Standard and Premium version of CDN?**<a id="step18"></a>
      
-First, the pricing is different. See [Pricing details](/pricing/details/cdn/) for specifics. Second, the current premium CDN service includes only HTTPS acceleration services, although other advanced acceleration services will gradually be added in the future. If you wish to use HTTPS acceleration services at this time, use the support page to contact the Azure support team to enable HTTPS acceleration services.
+First, the pricing is different. See [Pricing details](https://www.azure.cn/pricing/details/cdn/) for specifics. Second, the current premium CDN service includes only HTTPS acceleration services, although other advanced acceleration services will gradually be added in the future. If you wish to use HTTPS acceleration services at this time, use the support page to contact the Azure support team to enable HTTPS acceleration services.
 
 ## **If I use Content Delivery Network acceleration with a blob, do I directly use the blob address, rather than the custom domain name? Does it need ICP number and why?**<a id="step19"></a>
 
@@ -173,6 +187,4 @@ If you have multiple subscriptions, as shown in the diagram, you can click the t
     
 ![FAQs](./media/cdn-doc/faq-inquiry-001.png)
     
-
-
 <!---HONumber=CDN_1201_2015-->

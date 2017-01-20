@@ -1,29 +1,26 @@
-<properties
-	pageTitle="使用 Azure IoT 中心的直接方法 (C#)"
-	description="本教程介绍如何使用直接方法"
-	services="iot-hub"
-	documentationcenter=""
-	author="nberdy"
-	manager="timlt"
-	editor=""/>  
+---
+title: 使用 Azure IoT 中心的直接方法 (C#)
+description: 本教程介绍如何使用直接方法
+services: iot-hub
+documentationcenter: 
+author: nberdy
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="iot-hub"
-	ms.date="10/05/2016"
-	wacn.date="12/19/2016"/>  
-
-
+ms.service: iot-hub
+ms.date: 10/05/2016
+wacn.date: 12/19/2016
+---
 
 # 教程：使用直接方法 (C#)
-[AZURE.INCLUDE [iot-hub-selector-c2d-methods](../../includes/iot-hub-selector-c2d-methods.md)]
+[!INCLUDE [iot-hub-selector-c2d-methods](../../includes/iot-hub-selector-c2d-methods.md)]
 
 在本教程结束时，用户将有一个 .NET 控制台应用程序，以及一个 Node.js 控制台应用程序：
 
 * **CallMethodOnDevice.sln**：一个 .NET 应用，可从后端运行，用于调用模拟设备上的方法并显示响应。
 * **SimulatedDevice.js**：一个 Node.js 应用，它模拟使用早前创建的设备标识连接到 IoT 中心的设备，并响应通过云调用的方法。
 
-> [AZURE.NOTE]
+> [!NOTE]
 [Azure IoT SDK][lnk-hub-sdks] 一文提供了各种 SDK 的相关信息，用户可以使用这些 SDK 构建可在设备上和解决方案后端运行的应用程序。
 > 
 > 
@@ -34,9 +31,9 @@
 * Node.js 0.10.x 或更高版本。
 * 有效的 Azure 帐户。（如果没有帐户，只需花费几分钟就能创建一个[帐户][lnk-free-trial]。）
 
-[AZURE.INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
+[!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
 
-[AZURE.INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
+[!INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
 
 ## 创建模拟设备应用程序
 在本部分，用户需创建一个 Node.js 控制台应用，用于响应通过后端调用的方法。
@@ -95,7 +92,7 @@
     ```
 8. 保存并关闭 **SimulatedDevice.js** 文件。
 
-> [AZURE.NOTE]
+> [!NOTE]
 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如连接重试）。
 > 
 > 
@@ -111,7 +108,6 @@
 3. 在“Nuget 包管理器”窗口中，选择“浏览”，搜索 **microsoft.azure.devices**，选择“安装”以安装 **Microsoft.Azure.Devices** 包，然后接受使用条款。此过程将下载、安装 [Microsoft Azure IoT Service SDK][lnk-nuget-service-sdk]（Microsoft Azure IoT 服务 SDK）NuGet 包及其依赖项并添加对它的引用。
    
     ![“NuGet 包管理器”窗口][11]  
-
 
 4. 在 **Program.cs** 文件顶部添加以下 `using` 语句：
    
@@ -161,7 +157,6 @@
    
     ![][9]  
 
-
 ## 后续步骤
 在本教程中，在 Azure 门户中配置了新的 IoT 中心，然后在中心的标识注册表中创建了设备标识。你已通过此设备标识启用模拟设备应用的相关功能，使之能够响应通过云调用的方法。你还创建了一个应用，用于调用设备上的方法并显示来自设备的响应。
 
@@ -187,18 +182,18 @@
 
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/node-devbox-setup.md
 
-[lnk-hub-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-hub-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-portal]: https://portal.azure.cn/
 [lnk-nuget-service-sdk]: https://www.nuget.org/packages/Microsoft.Azure.Devices/
 
-[lnk-devguide-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-[lnk-tutorial-jobs]: /documentation/articles/iot-hub-node-node-schedule-jobs/
-[lnk-devguide-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-devguide-jobs]: ./iot-hub-devguide-jobs.md
+[lnk-tutorial-jobs]: ./iot-hub-node-node-schedule-jobs.md
+[lnk-devguide-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 
-[Send Cloud-to-Device messages with IoT Hub]: /documentation/articles/iot-hub-csharp-csharp-c2d/
-[Process Device-to-Cloud messages]: /documentation/articles/iot-hub-csharp-csharp-process-d2c/
-[IoT 中心入门]: /documentation/articles/iot-hub-node-node-getstarted/
+[Send Cloud-to-Device messages with IoT Hub]: ./iot-hub-csharp-csharp-c2d.md
+[Process Device-to-Cloud messages]: ./iot-hub-csharp-csharp-process-d2c.md
+[IoT 中心入门]: ./iot-hub-node-node-getstarted.md
 
 <!---HONumber=Mooncake_1212_2016-->

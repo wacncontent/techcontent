@@ -1,27 +1,28 @@
-<properties
-    pageTitle="Azure 存储安全指南 | Azure"
-    description="详细介绍保护 Azure 存储的多种方法，包括但不限于 RBAC、存储服务加密、客户端加密、SMB 3.0 和 Azure 磁盘加密。"
-    services="storage"
-    documentationcenter=".net"
-    author="robinsh"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="6f931d94-ef5a-44c6-b1d9-8a3c9c327fb2"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="robinsh" />
+---
+title: Azure 存储安全指南 | Azure
+description: 详细介绍保护 Azure 存储的多种方法，包括但不限于 RBAC、存储服务加密、客户端加密、SMB 3.0 和 Azure 磁盘加密。
+services: storage
+documentationcenter: .net
+author: robinsh
+manager: timlt
+editor: tysonn
+
+ms.assetid: 6f931d94-ef5a-44c6-b1d9-8a3c9c327fb2
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: robinsh
+---
 
 #Azure 存储安全指南
 
 ##概述
 
-Azure 存储提供一套完善的安全功能，这些功能相辅相成，让开发人员能够生成安全的应用程序。存储帐户本身可以通过基于角色的访问控制和 Azure Active Directory 来保护。在应用程序和 Azure 之间传输数据时，可以使用[客户端加密](/documentation/articles/storage-client-side-encryption/)、HTTPS 或 SMB 3.0 来保护数据。使用[存储服务加密 (SSE)](/documentation/articles/storage-service-encryption/) 写入 Azure 存储时，可将数据设置为自动加密。可以使用[共享访问签名](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)来授予对 Azure 存储中数据对象的委派访问权限。
+Azure 存储提供一套完善的安全功能，这些功能相辅相成，让开发人员能够生成安全的应用程序。存储帐户本身可以通过基于角色的访问控制和 Azure Active Directory 来保护。在应用程序和 Azure 之间传输数据时，可以使用[客户端加密](./storage-client-side-encryption.md)、HTTPS 或 SMB 3.0 来保护数据。使用[存储服务加密 (SSE)](./storage-service-encryption.md) 写入 Azure 存储时，可将数据设置为自动加密。可以使用[共享访问签名](./storage-dotnet-shared-access-signature-part-1.md)来授予对 Azure 存储中数据对象的委派访问权限。
 
 本文将概述其中可用于 Azure 存储的每项安全功能。提供了详述每项功能的文章的链接，让你能够轻松深入每个主题。
 
@@ -61,7 +62,7 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 ###如何使用基于角色的访问控制 (RBAC) 来保护存储帐户
 
-下面介绍 RBAC 的定义及其用法。每个 Azure 订阅都有 Azure Active Directory。可以向该目录中的用户、组和应用程序授予访问权限，以便其管理使用 Resource Manager 部署模型的 Azure 订阅中的资源。这称为基于角色的访问控制 (RBAC)。若要管理此访问权限，可以使用 [Azure 门户预览](https://portal.azure.cn/)、[Azure CLI 工具](/documentation/articles/xplat-cli-install/)、[PowerShell](/documentation/articles/powershell-install-configure/) 或 [Azure 存储资源提供程序 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163683.aspx)。
+下面介绍 RBAC 的定义及其用法。每个 Azure 订阅都有 Azure Active Directory。可以向该目录中的用户、组和应用程序授予访问权限，以便其管理使用 Resource Manager 部署模型的 Azure 订阅中的资源。这称为基于角色的访问控制 (RBAC)。若要管理此访问权限，可以使用 [Azure 门户预览](https://portal.azure.cn/)、[Azure CLI 工具](../xplat-cli-install.md)、[PowerShell](../powershell-install-configure.md) 或 [Azure 存储资源提供程序 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163683.aspx)。
 
 使用 Resource Manager 模型可以将存储帐户放在资源组中，并使用 Azure Active Directory 来控制对该特定存储帐户的管理平面的访问。例如，你可以授权特定用户访问存储帐户密钥，而其他用户可以查看有关存储帐户的信息，但无法访问存储帐户密钥。
 
@@ -81,7 +82,7 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 -   存储的角色包括（但不限于）：
 
-	-	所有者 – 他们可以管理一切，包括访问权限。
+    -	所有者 – 他们可以管理一切，包括访问权限。
 
     -	参与者 – 他们可以执行所有者可执行的所有操作，但分配访问权限除外。拥有此角色的用户可以查看和重新生成存储帐户密钥。他们可以使用存储帐户密钥来访问数据对象。
 
@@ -93,7 +94,7 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
     -	虚拟机参与者 – 他们可以管理虚拟机，但无法管理已连接的存储帐户。此角色可以列出存储帐户密钥，意味着分配此角色的用户可以更新数据平面。
 
-		为了让用户能够创建虚拟机，他们必须能够在存储帐户中创建相应的 VHD 文件。为此，他们需要能够检索存储帐户密钥，并将它传递给创建 VM 的 API。因此，他们必须拥有此权限才能列出存储帐户密钥。
+        为了让用户能够创建虚拟机，他们必须能够在存储帐户中创建相应的 VHD 文件。为此，他们需要能够检索存储帐户密钥，并将它传递给创建 VM 的 API。因此，他们必须拥有此权限才能列出存储帐户密钥。
 
 - 利用定义自定义角色的功能，可以从可对 Azure 资源执行的操作的列表中整理出一组操作。
 
@@ -103,30 +104,29 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 ####资源
 
--   [Azure Active Directory 基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)
+-   [Azure Active Directory 基于角色的访问控制](../active-directory/role-based-access-control-configure.md)
 
     此文解释了 Azure Active Directory 基于角色的访问控制及其工作原理。
 
--   [RBAC：内置角色](/documentation/articles/role-based-access-built-in-roles/)
+-   [RBAC：内置角色](../active-directory/role-based-access-built-in-roles.md)
 
     此文详细说明了 RBAC 中所有可用的内置角色。
 
--   [了解资源管理器部署和经典部署](/documentation/articles/resource-manager-deployment-model/)
+-   [了解资源管理器部署和经典部署](../azure-resource-manager/resource-manager-deployment-model.md)
 
     此文介绍了 Resource Manager 部署和经典部署模型，并说明使用 Resource Manager 和资源组的优点
 
+-   [使用 REST API 管理基于角色的访问控制](../active-directory/role-based-access-control-manage-access-rest.md)
 
--   [使用 REST API 管理基于角色的访问控制](/documentation/articles/role-based-access-control-manage-access-rest/)
-
-	此文说明如何使用 REST API 来管理 RBAC。
+    此文说明如何使用 REST API 来管理 RBAC。
 
 -   [Azure 存储资源提供程序 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/mt163683.aspx)
 
-	有关使用 API 以编程方式管理存储帐户的参考信息。
+    有关使用 API 以编程方式管理存储帐户的参考信息。
 
 -   [使用 Azure Resource Manager 进行身份验证的开发人员指南](http://www.dushyantgill.com/blog/2015/05/23/developers-guide-to-auth-with-azure-resource-manager-api/)
 
-	此文说明如何使用 Resource Manager API 进行身份验证。
+    此文说明如何使用 Resource Manager API 进行身份验证。
 
 -   [Ignite 中提供的适用于 Azure 的基于角色的访问控制](https://channel9.msdn.com/events/Ignite/2015/BRK2707)
 
@@ -166,7 +166,7 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 可以过几天后迁移，更改每个应用程序来使用新的密钥并进行发布。全部完成之后，应该返回并重新生成旧密钥，使其不再可用。
 
-另一种做法是将存储帐户密钥作为机密放在 [Azure 密钥保管库](/home/features/key-vault/)中，并让应用程序从中检索该密钥。然后，重新生成密钥并更新 Azure 密钥保管库时，就不需要重新部署应用程序，因为它们将自动从 Azure 密钥保管库中选择新密钥。请注意，可以让应用程序每次在需要密钥时读取它，或者，可以将它缓存在内存中，如果使用密钥时失败，将再次从 Azure 密钥保管库中检索该密钥。
+另一种做法是将存储帐户密钥作为机密放在 [Azure 密钥保管库](https://www.azure.cn/home/features/key-vault/)中，并让应用程序从中检索该密钥。然后，重新生成密钥并更新 Azure 密钥保管库时，就不需要重新部署应用程序，因为它们将自动从 Azure 密钥保管库中选择新密钥。请注意，可以让应用程序每次在需要密钥时读取它，或者，可以将它缓存在内存中，如果使用密钥时失败，将再次从 Azure 密钥保管库中检索该密钥。
 
 使用 Azure 密钥保管库还可以提高存储密钥的安全级别。如果使用此方法，永远都不需要将存储密钥硬编码于配置文件中，这样将删除某人不需特定权限即可访问密钥的途径。
 
@@ -176,13 +176,13 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 ####资源
 
--   [关于 Azure 存储帐户](/documentation/articles/storage-create-storage-account/#regenerate-storage-access-keys)
+-   [关于 Azure 存储帐户](./storage-create-storage-account.md#regenerate-storage-access-keys)
 
-	此文提供存储帐户的概述，并介绍如何查看、复制和重新生成存储访问密钥。
+    此文提供存储帐户的概述，并介绍如何查看、复制和重新生成存储访问密钥。
 
 -   [Azure 存储资源提供程序 REST API 参考](https://msdn.microsoft.com/zh-cn/library/mt163683.aspx)
 
-	此文包含有关检索存储帐户密钥，以及使用 REST API 为 Azure 帐户重新生成存储帐户密钥的具体文章链接。注意：这适用于 Resource Manager 存储帐户。
+    此文包含有关检索存储帐户密钥，以及使用 REST API 为 Azure 帐户重新生成存储帐户密钥的具体文章链接。注意：这适用于 Resource Manager 存储帐户。
 
 -   [对存储帐户的操作](https://msdn.microsoft.com/zh-cn/library/ee460790.aspx)
 
@@ -190,7 +190,7 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 -   [告别密钥管理 – 使用 Azure AD 管理对 Azure 存储空间数据的访问](http://www.dushyantgill.com/blog/2015/04/26/say-goodbye-to-key-management-manage-access-to-azure-storage-data-using-azure-ad/)
 
-	本文介绍如何使用 Active Directory 来控制 Azure 密钥保管库中 Azure 存储密钥的访问。此外，说明如何使用 Azure 自动化作业每小时重新生成密钥。
+    本文介绍如何使用 Active Directory 来控制 Azure 密钥保管库中 Azure 存储密钥的访问。此外，说明如何使用 Azure 自动化作业每小时重新生成密钥。
 
 ##<a id="data-plane-security"></a>数据平面安全
 
@@ -230,15 +230,15 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 其中提供有关允许的访问权限的信息，以及准许该访问权限的时间长度。下面提供了一个示例：此 URI 将提供对 Blob 的读取权限，期限为五分钟。请注意，SAS 查询参数必须以 URL 编码，例如 %3A 表示冒号 (:)，%20 表示空格。
 
-	http://mystorage.blob.core.chinacloudapi.cn/mycontainer/myblob.txt (URL to the blob)
-	?sv=2015-04-05 (storage service version)
-	&st=2015-12-10T22%3A18%3A26Z (start time, in UTC time and URL encoded)
-	&se=2015-12-10T22%3A23%3A26Z (end time, in UTC time and URL encoded)
-	&sr=b (resource is a blob)
-	&sp=r (read access)
-	&sip=168.1.5.60-168.1.5.70 (requests can only come from this range of IP addresses)
-	&spr=https (only allow HTTPS requests)
-	&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D (signature used for the authentication of the SAS)
+    http://mystorage.blob.core.chinacloudapi.cn/mycontainer/myblob.txt (URL to the blob)
+    ?sv=2015-04-05 (storage service version)
+    &st=2015-12-10T22%3A18%3A26Z (start time, in UTC time and URL encoded)
+    &se=2015-12-10T22%3A23%3A26Z (end time, in UTC time and URL encoded)
+    &sr=b (resource is a blob)
+    &sp=r (read access)
+    &sip=168.1.5.60-168.1.5.70 (requests can only come from this range of IP addresses)
+    &spr=https (only allow HTTPS requests)
+    &sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D (signature used for the authentication of the SAS)
 
 ####Azure 存储服务如何对共享访问签名进行身份验证
 
@@ -278,40 +278,40 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 -   下面是参考文章。
 
-	-	[服务 SAS](https://msdn.microsoft.com/zh-cn/library/dn140256.aspx)
+    -	[服务 SAS](https://msdn.microsoft.com/zh-cn/library/dn140256.aspx)
 
-		此文提供有关使用服务级别 SAS 配合 Blob、队列、表范围和文件的示例。
+        此文提供有关使用服务级别 SAS 配合 Blob、队列、表范围和文件的示例。
 
-	-	[构造服务 SAS](https://msdn.microsoft.com/zh-cn/library/dn140255.aspx)
+    -	[构造服务 SAS](https://msdn.microsoft.com/zh-cn/library/dn140255.aspx)
 
-	-	[构造帐户 SAS](https://msdn.microsoft.com/zh-cn/library/mt584140.aspx)
+    -	[构造帐户 SAS](https://msdn.microsoft.com/zh-cn/library/mt584140.aspx)
 
 -   这些是使用 .NET 客户端库来创建共享访问签名和存储访问策略的教程。
 
-    -	[使用共享访问签名 (SAS)](/documentation/articles/storage-dotnet-shared-access-signature-part-1/)
-    -	[共享访问签名，第 2 部分：创建 SAS 并将 SAS 用于 Blob 服务](/documentation/articles/storage-dotnet-shared-access-signature-part-2/)
+    -	[使用共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)
+    -	[共享访问签名，第 2 部分：创建 SAS 并将 SAS 用于 Blob 服务](./storage-dotnet-shared-access-signature-part-2.md)
 
         此文包含 SAS 模型的说明、共享访问签名的示例，以及 SAS 用法最佳实践的建议。还介绍了如何撤销授予的权限。
-	
+    
 -   按 IP 地址限制访问 (IP ACL)
 
-    -	[什么是终结点访问控制列表 (ACL)？](/documentation/articles/virtual-networks-acl/)
+    -	[什么是终结点访问控制列表 (ACL)？](../virtual-network/virtual-networks-acl.md)
 
     -	[构造服务 SAS](https://msdn.microsoft.com/zh-cn/library/azure/dn140255.aspx)
 
-		这是适用于服务级别 SAS 的参考文章，其中包括执行 IP ACL 的示例。
+        这是适用于服务级别 SAS 的参考文章，其中包括执行 IP ACL 的示例。
 
-	-	[构造帐户 SAS](https://msdn.microsoft.com/zh-cn/library/azure/mt584140.aspx)
+    -	[构造帐户 SAS](https://msdn.microsoft.com/zh-cn/library/azure/mt584140.aspx)
 
-    	这是适用于帐户级别 SAS 的参考文章，其中包括执行 IP ACL 的示例。
+        这是适用于帐户级别 SAS 的参考文章，其中包括执行 IP ACL 的示例。
 
 -   身份验证
 
-	-    [Azure 存储服务的身份验证](https://msdn.microsoft.com/zh-cn/library/azure/dd179428.aspx)
+    -    [Azure 存储服务的身份验证](https://msdn.microsoft.com/zh-cn/library/azure/dd179428.aspx)
 
 -   共享访问签名入门教程
 
-	-	[SAS 入门教程](https://github.com/Azure-Samples/storage-dotnet-sas-getting-started)
+    -	[SAS 入门教程](https://github.com/Azure-Samples/storage-dotnet-sas-getting-started)
 
 ##<a id="encryption-in-transit"></a>传输中加密
 
@@ -323,9 +323,9 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 ####资源
 
--   [在 Azure 应用服务中为应用启用 HTTPS](/documentation/articles/web-sites-configure-ssl-certificate/)
+-   [在 Azure 应用服务中为应用启用 HTTPS](../app-service-web/web-sites-configure-ssl-certificate.md)
 
-	此文说明如何为 Azure Web 应用启用 HTTPS。
+    此文说明如何为 Azure Web 应用启用 HTTPS。
 
 ###传输期间对 Azure 文件共享使用加密
 
@@ -335,13 +335,13 @@ Azure 存储提供一套完善的安全功能，这些功能相辅相成，让�
 
 ####资源
 
--   [如何通过 Linux 使用 Azure 文件存储](/documentation/articles/storage-how-to-use-files-linux/)
+-   [如何通过 Linux 使用 Azure 文件存储](./storage-how-to-use-files-linux.md)
 
     此文介绍如何在 Linux 系统上装载 Azure 文件共享，以及上传/下载文件。
 
--   [在 Windows 上开始使用 Azure 文件存储](/documentation/articles/storage-dotnet-how-to-use-files/)
+-   [在 Windows 上开始使用 Azure 文件存储](./storage-dotnet-how-to-use-files.md)
 
-	此文概述 Azure 文件共享，以及如何通过 PowerShell 与 .NET 来装载和使用这些文件共享。
+    此文概述 Azure 文件共享，以及如何通过 PowerShell 与 .NET 来装载和使用这些文件共享。
 
 -   [Azure 文件存储内部](https://azure.microsoft.com/blog/inside-azure-file-storage/)
 
@@ -387,15 +387,13 @@ SSE 允许请求存储服务在将数据写入 Azure 存储时自动加密数据
 
 ####资源
 
--   [在 Azure 存储中使用 Azure 密钥保管库加密和解密 Blob](/documentation/articles/storage-encrypt-decrypt-blobs-key-vault/)
+-   [在 Azure 存储中使用 Azure 密钥保管库加密和解密 Blob](./storage-encrypt-decrypt-blobs-key-vault.md)
 
     此文说明如何配合 Azure 密钥保管库使用客户端加密，包括如何使用 PowerShell 来创建 KEK 并将它存储在保管库中。
 
--   [Azure 存储的客户端加密和 Azure 密钥保管库](/documentation/articles/storage-client-side-encryption/)
+-   [Azure 存储的客户端加密和 Azure 密钥保管库](./storage-client-side-encryption.md)
 
     此文介绍客户端加密，并提供使用存储客户端库从四个存储服务加密和解密资源的示例。此外介绍了 Azure 密钥保管库。
-
-
 
 ####资源
 
@@ -493,25 +491,25 @@ SSE 由 Azure 存储管理。使用 SSE 不是针对传输中数据安全性提�
 
 ####资源
 
--   [存储分析](/documentation/articles/storage-analytics/)
+-   [存储分析](./storage-analytics.md)
 
-	此文概述存储分析及其启用方法。
+    此文概述存储分析及其启用方法。
 
 -   [存储分析日志格式](https://msdn.microsoft.com/zh-cn/library/azure/hh343259.aspx)
 
-	此文介绍存储分析日志格式，并详细说明其中的可用字段，包括身份验证类型（指示请求使用的身份验证类型）。
+    此文介绍存储分析日志格式，并详细说明其中的可用字段，包括身份验证类型（指示请求使用的身份验证类型）。
 
--   [在 Azure 门户中监视存储帐户](/documentation/articles/storage-monitor-storage-account/)
+-   [在 Azure 门户中监视存储帐户](./storage-monitor-storage-account.md)
 
-	此文说明如何配置和监视存储帐户的指标与日志记录。
+    此文说明如何配置和监视存储帐户的指标与日志记录。
 
--   [使用 Azure 存储度量值和日志记录、AzCopy 及 Message Analyzer 进行点对点故障排除](/documentation/articles/storage-e2e-troubleshooting/)
+-   [使用 Azure 存储度量值和日志记录、AzCopy 及 Message Analyzer 进行点对点故障排除](./storage-e2e-troubleshooting.md)
 
-	此文介绍如何使用存储分析进行故障排除，并说明如何使用 Microsoft Message Analyzer。
+    此文介绍如何使用存储分析进行故障排除，并说明如何使用 Microsoft Message Analyzer。
 
 -   [Microsoft Message Analyzer 操作指南](https://technet.microsoft.com/zh-cn/library/jj649776.aspx)
 
-	此文提供 Microsoft Message Analyzer 的参考信息，包括教程、快速入门和功能摘要的链接。
+    此文提供 Microsoft Message Analyzer 的参考信息，包括教程、快速入门和功能摘要的链接。
 
 ##<a id="Cross-Origin-Resource-Sharing-CORS"></a>跨源资源共享 (CORS)
 
@@ -535,15 +533,15 @@ Azure 存储允许启用 CORS – 跨域资源共享。对于每个存储帐户�
 
 默认情况下，对所有服务禁用了 CORS。可以使用 REST API 或存储客户端库调用某个方法来设置服务策略，以启用 CORS。执行该操作时，将在 XML 中包含 CORS 规则。以下示例将针对存储帐户的 Blob 服务使用“设置服务属性”操作来设置 CORS 规则。可以使用存储客户端库或 REST API 针对 Azure 存储执行该操作。
 
-	<Cors>    
-	    <CorsRule>
-	        <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>
-	        <AllowedMethods>PUT,GET</AllowedMethods>
-	        <AllowedHeaders>x-ms-meta-data*,x-ms-meta-target*,x-ms-meta-abc</AllowedHeaders>
-	        <ExposedHeaders>x-ms-meta-*</ExposedHeaders>
-	        <MaxAgeInSeconds>200</MaxAgeInSeconds>
-	    </CorsRule>
-	<Cors>
+    <Cors>    
+        <CorsRule>
+            <AllowedOrigins>http://www.contoso.com, http://www.fabrikam.com</AllowedOrigins>
+            <AllowedMethods>PUT,GET</AllowedMethods>
+            <AllowedHeaders>x-ms-meta-data*,x-ms-meta-target*,x-ms-meta-abc</AllowedHeaders>
+            <ExposedHeaders>x-ms-meta-*</ExposedHeaders>
+            <MaxAgeInSeconds>200</MaxAgeInSeconds>
+        </CorsRule>
+    <Cors>
 
 下面是每一行的含义：
 
@@ -561,46 +559,46 @@ Azure 存储允许启用 CORS – 跨域资源共享。对于每个存储帐户�
 
 有关 CORS 及其启用方法的详细信息，请参阅以下资源。
 
--   [Azure.cn 上对 Azure 存储服务的跨域资源共享 (CORS) 支持](/documentation/articles/storage-cors-support/)
+-   [Azure.cn 上对 Azure 存储服务的跨域资源共享 (CORS) 支持](./storage-cors-support.md)
 
-	此文概述 CORS，以及如何为不同的存储服务设置规则。
+    此文概述 CORS，以及如何为不同的存储服务设置规则。
 
 -   [MSDN 上对 Azure 存储服务的跨域资源共享 (CORS) 支持](https://msdn.microsoft.com/zh-cn/library/azure/dn535601.aspx)
 
-	这是有关对 Azure 存储服务的 CORS 支持的参考文档。其中提供了适用于每个存储服务的文章链接，并提供示例演示，解释 CORS 文件中的每个元素。
+    这是有关对 Azure 存储服务的 CORS 支持的参考文档。其中提供了适用于每个存储服务的文章链接，并提供示例演示，解释 CORS 文件中的每个元素。
 
 -   [Azure 存储：CORS 简介](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/02/03/windows-azure-storage-introducing-cors.aspx)
 
-	这是宣布推出 CORS 并演示其用法的第一篇博客文章的链接。
+    这是宣布推出 CORS 并演示其用法的第一篇博客文章的链接。
 
 ##有关 Azure 存储安全性的常见问题
 
 1.  **如果无法使用 HTTPS 协议，应如何验证传入或传出 Azure 存储的 Blob 的完整性？**
 
-	如果出于任何原因需要使用 HTTP 而不是 HTTPS，并且正在使用块 Blob，可以使用 MD5 检查来帮助验证传输中 Blob 的完整性。这将有助于防止网络/传输层错误，但不一定可帮助防止中间攻击。
+    如果出于任何原因需要使用 HTTP 而不是 HTTPS，并且正在使用块 Blob，可以使用 MD5 检查来帮助验证传输中 Blob 的完整性。这将有助于防止网络/传输层错误，但不一定可帮助防止中间攻击。
 
-	如果可以使用提供传输级安全的 HTTPS，则使用 MD5 检查就很多余且不必要。
-	
-	有关详细信息，请查看 [Azure Blob MD5 Overview](http://blogs.msdn.com/b/windowsazurestorage/archive/2011/02/18/windows-azure-blob-md5-overview.aspx)（Azure Blob MD5 概述）。
+    如果可以使用提供传输级安全的 HTTPS，则使用 MD5 检查就很多余且不必要。
+    
+    有关详细信息，请查看 [Azure Blob MD5 Overview](http://blogs.msdn.com/b/windowsazurestorage/archive/2011/02/18/windows-azure-blob-md5-overview.aspx)（Azure Blob MD5 概述）。
 
 2.  **美国政府实施的 FIPS 合规性要求是怎样的？**
 
-	美国联邦信息处理标准 (FIPS) 定义了美国联邦政府计算机系统批准使用的加密算法，以保护敏感数据。如果在 Windows 服务器或桌面上启用 FIPS 模式，将告知 OS 仅应使用经 FIPS 验证的加密算法。如果某个应用程序使用不合规的算法，即表示该应用程序违规。使用 .NET Framework 4.5.2 或更高版本，应用程序可在计算机处于 FIPS 模式时自动切换加密算法来使用符合 FIPS 的算法。
+    美国联邦信息处理标准 (FIPS) 定义了美国联邦政府计算机系统批准使用的加密算法，以保护敏感数据。如果在 Windows 服务器或桌面上启用 FIPS 模式，将告知 OS 仅应使用经 FIPS 验证的加密算法。如果某个应用程序使用不合规的算法，即表示该应用程序违规。使用 .NET Framework 4.5.2 或更高版本，应用程序可在计算机处于 FIPS 模式时自动切换加密算法来使用符合 FIPS 的算法。
 
-	Microsoft 允许每个客户决定是否启用 FIPS 模式。我们相信，客户没有充分的理由违反政府法规，不按默认启用 FIPS 模式。
+    Microsoft 允许每个客户决定是否启用 FIPS 模式。我们相信，客户没有充分的理由违反政府法规，不按默认启用 FIPS 模式。
 
-	**资源**
+    **资源**
 
 -	[为什么我们不再建议使用“FIPS 模式”](http://blogs.technet.com/b/secguide/archive/2014/04/07/why-we-re-not-recommending-fips-mode-anymore.aspx)
 
-	此博客文章提供 FIPS 概述，并说明他们为什么默认不启用 FIPS 模式。
+    此博客文章提供 FIPS 概述，并说明他们为什么默认不启用 FIPS 模式。
 
 -   [FIPS 140 验证](https://technet.microsoft.com/zh-cn/library/cc750357.aspx)
 
-	此文提供有关 Microsoft 产品和加密模块如何遵守美国联邦政府 FIPS 标准的信息。
+    此文提供有关 Microsoft 产品和加密模块如何遵守美国联邦政府 FIPS 标准的信息。
 
 -   [“系统加密：使用符合 FIPS 的算法进行加密、哈希处理和签名”安全设置在 Windows XP 和更高 Windows 版本中的效果](https://support.microsoft.com/zh-cn/kb/811833)
 
-	此文介绍如何在较旧的 Windows 计算机中使用 FIPS 模式。
+    此文介绍如何在较旧的 Windows 计算机中使用 FIPS 模式。
 
 <!---HONumber=Mooncake_0103_2017-->

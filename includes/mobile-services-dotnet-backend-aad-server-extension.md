@@ -1,6 +1,6 @@
 ### （可选）为 Azure Active Directory 配置 .NET 移动服务
 
->[AZURE.NOTE]这些步骤是可选的，因为它们仅适用于 Azure Active Directory 登录提供者。
+>[!NOTE]这些步骤是可选的，因为它们仅适用于 Azure Active Directory 登录提供者。
 
 1. 安装 [WindowsAzure.MobileServices.Backend.Security NuGet 包](https://www.nuget.org/packages/WindowsAzure.MobileServices.Backend.Security)。
 

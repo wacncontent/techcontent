@@ -1,39 +1,38 @@
-<properties
-    pageTitle="使用 Azure 门户预览创建具有静态公共 IP 的 VM | Azure"
-    description="了解如何使用 Azure 门户预览通过 Azure Resource Manager 创建具有静态公共 IP 地址的 VM。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 Azure 门户预览创建具有静态公共 IP 的 VM | Azure
+description: 了解如何使用 Azure 门户预览通过 Azure Resource Manager 创建具有静态公共 IP 地址的 VM。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="e9546bcc-f300-428f-b94a-056c5bd29035"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/04/2016"
-    wacn.date="12/26/2016"
-    ms.author="jdial" />  
-
+ms.assetid: e9546bcc-f300-428f-b94a-056c5bd29035
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/04/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 使用 Azure 门户预览创建具有静态公共 IP 的 VM
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/virtual-network-deploy-static-pip-arm-portal/)
-- [PowerShell](/documentation/articles/virtual-network-deploy-static-pip-arm-ps/)
-- [Azure CLI](/documentation/articles/virtual-network-deploy-static-pip-arm-cli/)
-- [模板](/documentation/articles/virtual-network-deploy-static-pip-arm-template/)
-- [PowerShell（经典）](/documentation/articles/virtual-networks-reserved-public-ip/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./virtual-network-deploy-static-pip-arm-portal.md)
+- [PowerShell](./virtual-network-deploy-static-pip-arm-ps.md)
+- [Azure CLI](./virtual-network-deploy-static-pip-arm-cli.md)
+- [模板](./virtual-network-deploy-static-pip-arm-template.md)
+- [PowerShell（经典）](./virtual-networks-reserved-public-ip.md)
 
-[AZURE.INCLUDE [virtual-network-deploy-static-pip-intro-include.md](../../includes/virtual-network-deploy-static-pip-intro-include.md)]
+[!INCLUDE [virtual-network-deploy-static-pip-intro-include.md](../../includes/virtual-network-deploy-static-pip-intro-include.md)]
 
-> [AZURE.NOTE]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型。
+> [!NOTE]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型。
 
-[AZURE.INCLUDE [virtual-network-deploy-static-pip-scenario-include.md](../../includes/virtual-network-deploy-static-pip-scenario-include.md)]
+[!INCLUDE [virtual-network-deploy-static-pip-scenario-include.md](../../includes/virtual-network-deploy-static-pip-scenario-include.md)]
 
 ## 使用静态公共 IP 创建 VM
 

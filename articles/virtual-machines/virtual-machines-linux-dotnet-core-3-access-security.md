@@ -1,31 +1,28 @@
-<properties
-   pageTitle="Azure Resource Manager 模板中的访问权限和安全性 | Azure" 
-   description="Azure 虚拟机 DotNet Core 教程"
-   services="virtual-machines-linux"
-   documentationCenter="virtual-machines"
-   authors="neilpeterson"
-   manager="timlt"
-   editor="tysonn"
-   tags="azure-service-management"/>  
+---
+title: Azure Resource Manager 模板中的访问权限和安全性 | Azure
+description: Azure 虚拟机 DotNet Core 教程
+services: virtual-machines-linux
+documentationCenter: virtual-machines
+authors: neilpeterson
+manager: timlt
+editor: tysonn
+tags: azure-service-management
 
-
-<tags
-   ms.service="virtual-machines-linux"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-linux"
-   ms.workload="infrastructure"
-   ms.date="11/21/2016"
-   wacn.date="12/30/2016"
-   ms.author="nepeters"/>  
-
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
+ms.date: 11/21/2016
+wacn.date: 12/30/2016
+ms.author: nepeters
+---
 
 # Azure Resource Manager 模板中的访问权限和安全性
 
 可能需要通过 Internet 或与 Azure 建立的 VPN/Express Route 连接才能访问托管在 Azure 中的应用程序。在音乐应用商店应用程序示例中，网站通过公共 IP 地址在 Internet 上提供访问。建立访问方式后，应该保护对应用程序的连接，以及对虚拟机资源本身的访问。这种访问安全性是通过网络安全组提供的。
 
 本文档详细说明如何在示例 Azure Resource Manager 模板中保护音乐应用商店应用程序。所有依赖项和独特配置都已突出显示。为了获得最佳体验，请将一个解决方案实例预先部署到 Azure 订阅，然后将它与 Azure Resource Manager 模板配合运行。可通过以下链接找到完整模板 – [Ubuntu 上的音乐应用商店部署](https://github.com/Microsoft/dotnet-core-sample-templates/tree/master/dotnet-core-music-linux)。
-
 
 ## 公共 IP 地址
 
@@ -70,8 +67,7 @@ Azure 门户预览中显示的公共 IP 地址。请注意，公共 IP 地址与
 
 ![公共 IP 地址](./media/virtual-machines-linux-dotnet-core/pubip.png)  
 
-
-有关 Azure 公共 IP 地址的详细信息，请参阅 [Azure 中的 IP 地址](/documentation/articles/virtual-network-ip-addresses-overview-arm/)。
+有关 Azure 公共 IP 地址的详细信息，请参阅 [Azure 中的 IP 地址](../virtual-network/virtual-network-ip-addresses-overview-arm.md)。
 
 ## 网络安全组
 
@@ -127,13 +123,12 @@ Azure 门户预览中的网络安全组如下所示。请注意，NSG 可与子�
 
 ![网络安全组](./media/virtual-machines-linux-dotnet-core/nsg.png)  
 
-
-有关网络安全组的深入信息，请参阅[什么是网络安全组](/documentation/articles/virtual-networks-nsg/)。
+有关网络安全组的深入信息，请参阅[什么是网络安全组](../virtual-network/virtual-networks-nsg.md)。
 
 ## 后续步骤
 
 <hr>
 
-[步骤 3 - Azure Resource Manager 模板的可用性和缩放](/documentation/articles/virtual-machines-linux-dotnet-core-4-availability-scale/)
+[步骤 3 - Azure Resource Manager 模板的可用性和缩放](./virtual-machines-linux-dotnet-core-4-availability-scale.md)
 
 <!---HONumber=Mooncake_1114_2016-->

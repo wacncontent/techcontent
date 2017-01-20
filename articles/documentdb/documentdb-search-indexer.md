@@ -1,21 +1,21 @@
-<properties
-    pageTitle="使用索引器连接 DocumentDB 和 Azure 搜索 | Azure"
-    description="本文介绍如何将 Azure 搜索索引器与 DocumentDB 作为数据源联合使用。"
-    services="documentdb"
-    documentationCenter=""
-    authors="AndrewHoh"
-    manager="jhubbard"
-    editor="mimig"/>
+---
+title: 使用索引器连接 DocumentDB 和 Azure 搜索 | Azure
+description: 本文介绍如何将 Azure 搜索索引器与 DocumentDB 作为数据源联合使用。
+services: documentdb
+documentationCenter: 
+authors: AndrewHoh
+manager: jhubbard
+editor: mimig
 
-<tags
-    ms.service="documentdb"
-    ms.devlang="rest-api"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="data-services"
-    ms.date="07/08/2016"
-    wacn.date="08/22/2016"
-    ms.author="denlee"/>
+ms.service: documentdb
+ms.devlang: rest-api
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 07/08/2016
+wacn.date: 08/22/2016
+ms.author: denlee
+---
 
 #使用索引器连接 DocumentDB 和 Azure 搜索
 
@@ -81,7 +81,6 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
     SELECT s.id, s.Title, s.Abstract, s._ts FROM Sessions s WHERE s._ts > @HighWaterMark
 
-
 ###<a id="DataDeletionDetectionPolicy"></a>捕获已删除的文档
 
 在源表中删除行时，你也应该从搜索索引中删除这些行。数据删除检测策略旨在有效识别已删除的数据项。目前，唯一支持的策略是 `Soft Delete` 策略（删除标有某种类型的标志），它按如下所示指定：
@@ -92,7 +91,7 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
         "softDeleteMarkerValue" : "the value that identifies a document as deleted"
     }
 
-> [AZURE.NOTE] 如果你使用的是自定义投影，则将需要在 SELECT 子句中包含 softDeleteColumnName 属性。
+> [!NOTE] 如果你使用的是自定义投影，则将需要在 SELECT 子句中包含 softDeleteColumnName 属性。
 
 ###<a id="CreateDataSourceExample"></a>请求正文示例
 
@@ -127,14 +126,13 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 如果你还没有目标 Azure 搜索索引，请创建一个。你可以通过使用[创建索引 API](https://msdn.microsoft.com/library/azure/dn798941.aspx)。
 
-	POST https://[Search service name].search.chinacloudapi.cn/indexes?api-version=[api-version]
-	Content-Type: application/json
-	api-key: [Search service admin key]
-
+    POST https://[Search service name].search.chinacloudapi.cn/indexes?api-version=[api-version]
+    Content-Type: application/json
+    api-key: [Search service admin key]
 
 确保目标索引的架构与源 JSON 文档的架构或自定义查询投影的输出的架构兼容。
 
->[AZURE.NOTE] 对于分区集合，默认文档键是 DocumentDB 的 `_rid` 属性，它在 Azure 搜索中重命名为 `rid`。此外，DocumentDB 的 `_rid` 值包含在 Azure 搜索键中无效的字符；因此，`_rid` 值采用 Base64 编码。
+>[!NOTE] 对于分区集合，默认文档键是 DocumentDB 的 `_rid` 属性，它在 Azure 搜索中重命名为 `rid`。此外，DocumentDB 的 `_rid` 值包含在 Azure 搜索键中无效的字符；因此，`_rid` 值采用 Base64 编码。
 
 ###图 A：JSON 数据类型与 Azure 搜索数据类型之间的映射
 
@@ -271,7 +269,7 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 祝贺你！ 你已学习了如何使用 DocumentDB 索引器将 Azure DocumentDB 与 Azure 搜索进行集成。
 
- - 若要了解有关 Azure DocumentDB 的详细信息，请参阅 [DocumentDB 服务页](/documentation/services/documentdb/)。
+ - 若要了解有关 Azure DocumentDB 的详细信息，请参阅 [DocumentDB 服务页](./index.md/)。
 
  - 要了解有关 Azure 搜索的详细信息，请参阅[搜索服务页](https://azure.microsoft.com/services/search/)。
 

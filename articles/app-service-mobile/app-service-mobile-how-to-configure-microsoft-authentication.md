@@ -1,25 +1,25 @@
-<properties
-	pageTitle="如何为应用服务应用程序配置 Microsoft 帐户身份验证"
-	description="了解如何为应用服务应用程序配置 Microsoft 帐户身份验证。"
-	authors="mattchenderson"
-	services="app-service"
-	documentationCenter=""
-	manager="erikre"
-	editor=""/>  
+---
+title: 如何为应用服务应用程序配置 Microsoft 帐户身份验证
+description: 了解如何为应用服务应用程序配置 Microsoft 帐户身份验证。
+authors: mattchenderson
+services: app-service
+documentationCenter: 
+manager: erikre
+editor: 
 
-<tags
-	ms.service="app-service"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="11/21/2016"
-	ms.author="mahender"/>
+ms.service: app-service
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: mahender
+---
 
 # 如何将应用服务应用程序配置为使用 Microsoft 帐户登录
 
-[AZURE.INCLUDE [app-service-mobile-selector-authentication](../../includes/app-service-mobile-selector-authentication.md)]
+[!INCLUDE [app-service-mobile-selector-authentication](../../includes/app-service-mobile-selector-authentication.md)]
 
 本主题说明如何将 Azure 应用服务配置为使用 Microsoft 帐户作为身份验证提供程序。
 
@@ -37,13 +37,12 @@
 
 6. 在“重定向 URI”下，提供应用程序的终结点，然后单击“保存”。
  
-	>[AZURE.NOTE] 重定向 URI 是应用程序 URL 加上路径 _/.auth/login/microsoftaccount/callback_。例如，`https://contoso.chinacloudsites.cn/.auth/login/microsoftaccount/callback`。
-	>请务必使用 HTTPS 方案。
+    >[!NOTE] 重定向 URI 是应用程序 URL 加上路径 _/.auth/login/microsoftaccount/callback_。例如，`https://contoso.chinacloudsites.cn/.auth/login/microsoftaccount/callback`。
+    >请务必使用 HTTPS 方案。
 
 7. 在“应用程序机密”下，单击“生成新密码”。请记下显示的值。关闭页面后，就不再显示该值。
 
-
-    > [AZURE.IMPORTANT] 密码是一个非常重要的安全凭据。请不要与任何人共享密码或者在客户端应用程序中分发它。
+    > [!IMPORTANT] 密码是一个非常重要的安全凭据。请不要与任何人共享密码或者在客户端应用程序中分发它。
 
 ## <a name="secrets"></a>将 Microsoft 帐户信息添加到应用服务应用程序
 
@@ -55,7 +54,7 @@
 
     ![][1]
 
-	默认情况下，应用服务提供身份验证但不限制对站点内容和 API 的已授权访问。必须在应用代码中为用户授权。
+    默认情况下，应用服务提供身份验证但不限制对站点内容和 API 的已授权访问。必须在应用代码中为用户授权。
 
 4. （可选）若要限制只有通过 Microsoft 帐户身份验证的用户可以访问站点，请将“请求未经身份验证时需执行的操作”设置为“Microsoft 帐户”。这会要求对所有请求进行身份验证，所有未经身份验证的请求将重定向到 Microsoft 帐户进行身份验证。
 
@@ -65,8 +64,7 @@
 
 ## <a name="related-content"></a>相关内容
 
-[AZURE.INCLUDE [app-service-mobile-related-content-get-started-users](../../includes/app-service-mobile-related-content-get-started-users.md)]
-
+[!INCLUDE [app-service-mobile-related-content-get-started-users](../../includes/app-service-mobile-related-content-get-started-users.md)]
 
 <!-- Images. -->
 

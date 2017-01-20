@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure AD Connect 同步服务功能和配置 | Azure"
-	description="介绍 Azure AD Connect 同步服务的服务端功能。"
-	services="active-directory"
-	documentationCenter=""
-	authors="andkjell"
-	manager="stevenpo"
-	editor=""/>
+---
+title: Azure AD Connect 同步服务功能和配置 | Azure
+description: 介绍 Azure AD Connect 同步服务的服务端功能。
+services: active-directory
+documentationCenter: 
+authors: andkjell
+manager: stevenpo
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/22/2016"
-	wacn.date="11/21/2016"
-	ms.author="andkjell;markvi"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/22/2016
+wacn.date: 11/21/2016
+ms.author: andkjell;markvi
+---
 
 # Azure AD Connect 同步服务功能
 
@@ -43,19 +43,19 @@ SynchronizeUpnForManagedUsers | 允许同步引擎更新托管/许可（非联�
 
 启用某个功能后，无法再次将其禁用。
 
->[AZURE.NOTE] 从 2016 年 8 月 24 日起，将为新的 Azure AD 目录默认启用 *重复属性复原* 功能。今后还会针对此日期之前创建的目录推出并启用此功能。在为目录启用此功能之前的短时间内，用户会收到电子邮件通知。
+>[!NOTE] 从 2016 年 8 月 24 日起，将为新的 Azure AD 目录默认启用 *重复属性复原* 功能。今后还会针对此日期之前创建的目录推出并启用此功能。在为目录启用此功能之前的短时间内，用户会收到电子邮件通知。
 
 以下设置是由 Azure AD Connect 配置，无法通过 `Set-MsolDirSyncFeature` 修改：
 
 DirSyncFeature | 注释
 --- | ---
-DirectoryExtensions | [Azure AD Connect 同步：目录扩展](/documentation/articles/active-directory-aadconnectsync-feature-directory-extensions/)
-PasswordSync | [使用 Azure AD Connect 同步实现密码同步](/documentation/articles/active-directory-aadconnectsync-implement-password-synchronization/)
-UnifiedGroupWriteback | [预览：组写回](/documentation/articles/active-directory-aadconnect-feature-preview/#group-writeback/)
+DirectoryExtensions | [Azure AD Connect 同步：目录扩展](./active-directory-aadconnectsync-feature-directory-extensions.md)
+PasswordSync | [使用 Azure AD Connect 同步实现密码同步](./active-directory-aadconnectsync-implement-password-synchronization.md)
+UnifiedGroupWriteback | [预览：组写回](./active-directory-aadconnect-feature-preview.md#group-writeback/)
 UserWriteback | 目前不支持。
 
 ## 重复属性复原
-将属性"隔离"并分配临时值，而不是使预配包含重复 UPNs/proxyAddresses 的对象失败。解决冲突时，自动将临时 UPN 更改为适当的值。可以单独为 UPN 和 proxyAddress 启用此行为。有关详细信息，请参阅 [Identity synchronization and duplicate attribute resiliency](/documentation/articles/active-directory-aadconnectsyncservice-duplicate-attribute-resiliency/)（标识同步和重复属性复原）。
+将属性"隔离"并分配临时值，而不是使预配包含重复 UPNs/proxyAddresses 的对象失败。解决冲突时，自动将临时 UPN 更改为适当的值。可以单独为 UPN 和 proxyAddress 启用此行为。有关详细信息，请参阅 [Identity synchronization and duplicate attribute resiliency](./active-directory-aadconnectsyncservice-duplicate-attribute-resiliency.md)（标识同步和重复属性复原）。
 
 ## UserPrincipalName 软匹配
 启用此功能后，将对 UPN 以及[主 SMTP 地址](https://support.microsoft.com/zh-cn/kb/2641663)应用并始终启用软匹配。软匹配功能用于将 Azure AD 中的现有云用户与本地用户进行匹配。
@@ -64,13 +64,11 @@ UserWriteback | 目前不支持。
 
 在新建的 Azure AD 目录中，默认已打开此功能。可以运行以下命令查看是否已启用此功能：
 
-	Get-MsolDirSyncFeatures -Feature EnableSoftMatchOnUpn
-
+    Get-MsolDirSyncFeatures -Feature EnableSoftMatchOnUpn
 
 如果没有为 Azure AD 目录启用此功能，可以运行以下命令来启用它：
 
-	Set-MsolDirSyncFeature -Feature EnableSoftMatchOnUpn -Enable $true
-
+    Set-MsolDirSyncFeature -Feature EnableSoftMatchOnUpn -Enable $true
 
 ## 同步 userPrincipalName 更新
 在过去，除非以下两个条件都成立，否则会阻止在本地使用同步服务对 UserPrincipalName 属性进行更新：
@@ -84,19 +82,17 @@ UserWriteback | 目前不支持。
 
 在新建的 Azure AD 目录中，默认已打开此功能。可以运行以下命令查看是否已启用此功能：
 
-	Get-MsolDirSyncFeatures -Feature SynchronizeUpnForManagedUsers
-
+    Get-MsolDirSyncFeatures -Feature SynchronizeUpnForManagedUsers
 
 如果没有为 Azure AD 目录启用此功能，可以运行以下命令来启用它：
 
-	Set-MsolDirSyncFeature -Feature SynchronizeUpnForManagedUsers -Enable $true
-
+    Set-MsolDirSyncFeature -Feature SynchronizeUpnForManagedUsers -Enable $true
 
 启用此功能后，现有的 userPrincipalName 值将保持不变。下一次在本地更改 userPrincipalName 属性时，对用户进行正常的增量同步会更新 UPN。
 
 ## 另请参阅
 
-- [Azure AD Connect 同步](/documentation/articles/active-directory-aadconnectsync-whatis/)
-- [Integrating your on-premises identities with Azure Active Directory](/documentation/articles/active-directory-aadconnect/)（将本地标识与 Azure Active Directory 集成）。
+- [Azure AD Connect 同步](./active-directory-aadconnectsync-whatis.md)
+- [Integrating your on-premises identities with Azure Active Directory](./active-directory-aadconnect.md)（将本地标识与 Azure Active Directory 集成）。
 
 <!---HONumber=Mooncake_0926_2016-->

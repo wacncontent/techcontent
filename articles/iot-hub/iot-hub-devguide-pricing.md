@@ -1,18 +1,16 @@
-<properties
-pageTitle="开发人员指南 - 定价示例"
-description="Azure IoT 中心开发人员指南 - 有关各种 Azure IoT 中心设备和服务 SDK 的信息以及指向这些 SDK 的链接。"
-services="iot-hub"
-documentationcenter=""
-author="dominicbetts"
-manager="timlt"
-editor=""/>  
+---
+title: 开发人员指南 - 定价示例
+description: Azure IoT 中心开发人员指南 - 有关各种 Azure IoT 中心设备和服务 SDK 的信息以及指向这些 SDK 的链接。
+services: iot-hub
+documentationcenter: 
+author: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
-ms.service="iot-hub"
-ms.date="09/30/2016"
-wacn.date="12/19/2016"/>  
-
+ms.service: iot-hub
+ms.date: 09/30/2016
+wacn.date: 12/19/2016
+---
 
 # 定价信息
 
@@ -49,8 +47,7 @@ wacn.date="12/19/2016"/>
 
 设备和后端总共使用 185 条消息/天。
 
-
-[lnk-pricing]: /pricing/details/iot-hub
-[lnk-message-size]: /documentation/articles/iot-hub-devguide-messaging/#message-size
+[lnk-pricing]: https://www.azure.cn/pricing/details/iot-hub
+[lnk-message-size]: ./iot-hub-devguide-messaging.md#message-size
 
 <!---HONumber=Mooncake_1212_2016-->

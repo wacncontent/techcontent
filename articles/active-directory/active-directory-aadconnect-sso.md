@@ -1,35 +1,33 @@
-<properties
-    pageTitle="Azure AD Connect：单一登录 | Azure"
-    description="本主题介绍了你需要了解的如何从本地 Active Directory (AD) 单一登录到基于云的 Azure Active Directory (Azure AD) 和连接的服务的信息。"
-    services="active-directory"
-    keywords="什么是 Azure AD Connect, 安装 Active Directory, Azure AD 所需的组件, SSO, 单一登录"
-    documentationcenter=""
-    author="billmath"
-    manager="femila"/>
+---
+title: Azure AD Connect：单一登录 | Azure
+description: 本主题介绍了你需要了解的如何从本地 Active Directory (AD) 单一登录到基于云的 Azure Active Directory (Azure AD) 和连接的服务的信息。
+services: active-directory
+keywords: 什么是 Azure AD Connect, 安装 Active Directory, Azure AD 所需的组件, SSO, 单一登录
+documentationcenter: 
+author: billmath
+manager: femila
 
-<tags
-    ms.assetid="9f994aca-6088-40f5-b2cc-c753a4f41da7"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/06/2016"
-    ms.author="billmath"
-    wacn.date="01/10/2017" />
+ms.assetid: 9f994aca-6088-40f5-b2cc-c753a4f41da7
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/06/2016
+ms.author: billmath
+wacn.date: 01/10/2017
+---
 
 # 什么是单一登录 (SSO)（预览）
-单一登录是可以在 Azure Active Directory Connect 中启用的用于[密码哈希同步](/documentation/articles/active-directory-aadconnectsync-implement-password-synchronization/)或[直通身份验证](/documentation/articles/active-directory-aadconnect-pass-through-authentication/)的选项。如果启用了该选项，那么当用户使用其公司的计算机并连接到公司网络时不需要输入密码即可登录到 Azure Active Directory (Azure AD) 或其他云服务。
+单一登录是可以在 Azure Active Directory Connect 中启用的用于[密码哈希同步](./active-directory-aadconnectsync-implement-password-synchronization.md)或[直通身份验证](./active-directory-aadconnect-pass-through-authentication.md)的选项。如果启用了该选项，那么当用户使用其公司的计算机并连接到公司网络时不需要输入密码即可登录到 Azure Active Directory (Azure AD) 或其他云服务。
 
 启用单一登录后，用户访问连接到 Azure Active Directory 服务（如 Office 365、Microsoft Intune、CRM Online 和 SaaS 服务）的资源时，用户无需键入其密码，而是使用从本地 Active Directory 自动获取的 Kerberos 票证。
 
 ![单一登录](./media/active-directory-aadconnect-sso/sso1.png)  
 
-
 向最终用户提供 SSO 功能后，对基于云的服务的访问更加熟悉，并向组织提供安全而简单的流程，无需其他任何本地的组件。
 
 SSO 是通过 AAD Connect 启用的一项功能，该功能用于密码哈希同步或直通身份验证和本地 Active Directory。若要让最终用户在环境中使用单一登录，需要确保用户：
-
 
 - 在已加入域的计算机上
 - 具有与域控制器的直接连接，例如在公司的有线或无线网络上，或通过远程访问连接，如 VPN 连接。
@@ -58,7 +56,6 @@ SSO 是通过 AAD Connect 启用的一项功能，该功能用于密码哈希同
 
 ![单一登录](./media/active-directory-aadconnect-sso/sso2.png)  
 
-
 首先，用户尝试访问资源。资源可以是一台计算机或一个 URL。就 Azure AD 而言，它是服务的 URL，如 SharePoint online，下面将其描述为“Azure AD 资源”。
 
 1.	Azure AD 资源通过“401 未授权”响应质询客户端，以提供 Kerberos 票证。
@@ -72,15 +69,13 @@ SSO 是通过 AAD Connect 启用的一项功能，该功能用于密码哈希同
 ## 为直通身份验证或密码哈希同步启用 SSO
 Azure AD Connect 提供了简单的过程来为直通身份验证或密码哈希同步启用单一登录。需要确保具有同步的每个林中一个域的域管理员权限，以允许为计算机帐户配置 Kerberos 服务主体名称 (SPN)。用户名和密码未存储在 Azure AD Connect 或 Azure AD 中，并且仅用于此操作。
 
-安装 Azure AD Connect 时选择自定义安装，以便能够在用户登录页面上配置单一登录。有关详细信息，请参阅 [Custom installation of Azure AD Connect](/documentation/articles/active-directory-aadconnect-get-started-custom/)（Azure AD Connect 的自定义安装）。
+安装 Azure AD Connect 时选择自定义安装，以便能够在用户登录页面上配置单一登录。有关详细信息，请参阅 [Custom installation of Azure AD Connect](./active-directory-aadconnect-get-started-custom.md)（Azure AD Connect 的自定义安装）。
 
 ![单一登录](./media/active-directory-aadconnect-sso/sso3.png)  
-
 
 启用单一登录后，可以继续完成向导，直到到达单一登录页面。
 
 ![单一登录](./media/active-directory-aadconnect-sso/sso4.png)  
-
 
 对于列出的每个林，提供相应的帐户详细信息，并为 Azure 目录启用单一登录。
 
@@ -94,21 +89,20 @@ Azure AD Connect 提供了简单的过程来为直通身份验证或密码哈希
 3.	导航到“用户配置\\管理模板\\Windows 组件\\Internet Explorer\\Internet 控制面板\\安全性”页面，并选择“区域分配列表的站点”。
 ![单一登录](./media/active-directory-aadconnect-sso/sso6.png)</br>
 4.	启用策略，并在对话框中输入以下值/数据。</br>
-    	
-		Value: https://autologon.microsoftazuread-sso.com
-    	Data: 1
-    	Value: https://aadg.chinacloudapi.cn.nsatc.net 
-    	Data: 1'
+        
+        Value: https://autologon.microsoftazuread-sso.com
+        Data: 1
+        Value: https://aadg.chinacloudapi.cn.nsatc.net 
+        Data: 1'
 5.	如下图所示：
 
-	![单一登录](./media/active-directory-aadconnect-sso/sso7.png)  
-
+    ![单一登录](./media/active-directory-aadconnect-sso/sso7.png)  
 
 6.	请单击两次“确定”。
 
 现在已为用户准备好单一登录。
 
->[AZURE.NOTE]
+>[!NOTE]
 默认情况下，Chrome 使用和 Internet Explorer 相同的一组受信任的站点 URL。如果为 Chrome 配置了不同设置，则需要单独更新这些 URL。
 
 ## 单一登录故障排除
@@ -125,10 +119,10 @@ Azure AD Connect 提供了简单的过程来为直通身份验证或密码哈希
 ## 事件日志条目
 如果启用了正确的审核功能，那么用户每次使用单一登录登录时，就会在域控制器的事件日志中记录一个条目。若要查找这些事件，可以查看与计算机帐户 AzureADSSOAcc$ 关联的安全性事件 4769 的事件日志。下面的筛选器查找与此计算机帐户关联的所有安全性事件：
 
-	<QueryList>
-	  <Query Id="0" Path="Security">
-	<Select Path="Security">*[EventData[Data[@Name='ServiceName'] and (Data='AZUREADSSOACC$')]]</Select>
-	  </Query>
-	</QueryList>
+    <QueryList>
+      <Query Id="0" Path="Security">
+    <Select Path="Security">*[EventData[Data[@Name='ServiceName'] and (Data='AZUREADSSOACC$')]]</Select>
+      </Query>
+    </QueryList>
 
 <!---HONumber=Mooncake_1226_2016-->

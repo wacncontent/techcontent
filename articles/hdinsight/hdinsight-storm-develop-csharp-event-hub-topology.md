@@ -1,26 +1,26 @@
-<properties
-    pageTitle="使用 Storm on HDInsight 处理事件中心的事件 | Azure"
-    description="了解如何使用在 Visual Studio 中通过用于 Visual Studio 的 HDInsight 工具创建的 C# Storm 拓扑处理事件中心数据。"
-    services="hdinsight,notification hubs"
-    documentationcenter=""
-    author="Blackmist"
-    manager="jhubbard"
-    editor="cgronlun" />  
+---
+title: 使用 Storm on HDInsight 处理事件中心的事件 | Azure
+description: 了解如何使用在 Visual Studio 中通过用于 Visual Studio 的 HDInsight 工具创建的 C# Storm 拓扑处理事件中心数据。
+services: hdinsight,notification hubs
+documentationcenter: 
+author: Blackmist
+manager: jhubbard
+editor: cgronlun
 
-<tags
-    ms.assetid="67f9d08c-eea0-401b-952b-db765655dad0"
-    ms.service="hdinsight"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="big-data"
-    ms.date="11/18/2016"
-    wacn.date="12/12/2016"
-    ms.author="larryfr" />
+ms.assetid: 67f9d08c-eea0-401b-952b-db765655dad0
+ms.service: hdinsight
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 11/18/2016
+wacn.date: 12/12/2016
+ms.author: larryfr
+---
 
 # 使用 Storm on HDInsight 从 Azure 事件中心处理事件 (C#)
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 Azure 事件中心可处理网站、应用和设备的大量数据。借助事件中心 Spout，可轻松使用 Apache Storm on HDInsight 实时分析这些数据。还可以使用事件中心 Bolt 从 Storm 向事件中心写入数据。
 
@@ -31,19 +31,19 @@ Azure 事件中心可处理网站、应用和设备的大量数据。借助事�
 
 ## 先决条件
 
-* [Apache Storm on HDInsight 群集](/documentation/articles/hdinsight-apache-storm-tutorial-get-started/)
+* [Apache Storm on HDInsight 群集](./hdinsight-apache-storm-tutorial-get-started.md)
 
-* [Azure 事件中心](/documentation/articles/event-hubs-csharp-ephcs-getstarted/)
+* [Azure 事件中心](../event-hubs/event-hubs-csharp-ephcs-getstarted.md)
 
 * [Azure .NET SDK](/downloads/)
 
-* [用于 Visual Studio 的 HDInsight 工具](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/)
+* [用于 Visual Studio 的 HDInsight 工具](./hdinsight-hadoop-visual-studio-tools-get-started.md)
 
 ## 已完成的项目
 
 可以从 GitHub 下载本教程中创建的项目的完整版本：[eventhub-storm-hybrid](https://github.com/Azure-Samples/hdinsight-dotnet-java-storm-eventhub)。但是，仍然需要按照本教程中的步骤提供配置设置。
 
-> [AZURE.NOTE] 使用已完成的项目时，必须使用 **NuGet 包管理器**还原此解决方案所需的程序包。
+> [!NOTE] 使用已完成的项目时，必须使用 **NuGet 包管理器**还原此解决方案所需的程序包。
 
 ## 事件中心 Spout 和 Bolt
 
@@ -55,7 +55,7 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 [HDInsight Storm 示例](https://github.com/hdinsight/hdinsight-storm-examples)项目中 **lib** 文件夹下包含了最新版本的 **eventhubs-storm-Spout-0.9-jar-with-dependencies.jar** 文件。要下载该文件，请使用以下方法之一。
 
-> [AZURE.NOTE] 已提交 Spout 和 Bolt 以包含在 Apache Storm 项目中。有关详细信息，请参阅 GitHub 中的 [STORM-583: Initial check-in for storm-event hubs](https://github.com/apache/storm/pull/336/files)（STORM-583：Storm 事件中心的初始签入）。
+> [!NOTE] 已提交 Spout 和 Bolt 以包含在 Apache Storm 项目中。有关详细信息，请参阅 GitHub 中的 [STORM-583: Initial check-in for storm-event hubs](https://github.com/apache/storm/pull/336/files)（STORM-583：Storm 事件中心的初始签入）。
 
 * **下载 ZIP 文件**：在 [HDInsight Storm 示例](https://github.com/hdinsight/hdinsight-storm-examples)站点中，选择右窗格中的“下载 ZIP”下载包含项目的 .zip 文件。
 
@@ -77,7 +77,7 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
     ![向导页 1](./media/hdinsight-storm-develop-csharp-event-hub-topology/wiz1.png)
 
-    > [AZURE.NOTE] 应选择与 Storm on HDInsight 服务器相同的**位置**，以减少延迟和成本。
+    > [!NOTE] 应选择与 Storm on HDInsight 服务器相同的**位置**，以减少延迟和成本。
 
 2. 在“配置事件中心”屏幕上，输入“分区计数”和“消息保留期”值。对于本示例，请使用分区计数 8 和消息保留期 1。记下分区计数，因为稍后需要用到。
 
@@ -104,10 +104,9 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
     ![快速创建存储](./media/hdinsight-storm-develop-csharp-event-hub-topology/storagecreate.png)  
 
-
 2. 输入存储帐户的**名称**，选择**位置**，然后单击**复选标记**以创建存储帐户。
 
-    > [AZURE.NOTE] 应选择与事件中心和 Storm on HDInsight 服务器相同的**位置**，以减少延迟和成本。
+    > [!NOTE] 应选择与事件中心和 Storm on HDInsight 服务器相同的**位置**，以减少延迟和成本。
 
 3. 创建新存储帐户后，选择该帐户，然后使用页面底部的“管理访问密钥”链接检索“存储帐户名称”和“主访问密钥”。保存此信息，因为稍后将要用到。
 
@@ -123,7 +122,7 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 在本节中，将使用事件中心 Bolt 创建向事件中心写入数据的拓扑。
 
-1. 如果尚未安装最新版本的用于 Visual Studio 的 HDInsight 工具，请参阅 [Get started using HDInsight Tools for Visual Studio](/documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/)（开始使用用于 Visual Studio 的 HDInsight 工具）。
+1. 如果尚未安装最新版本的用于 Visual Studio 的 HDInsight 工具，请参阅 [Get started using HDInsight Tools for Visual Studio](./hdinsight-hadoop-visual-studio-tools-get-started.md)（开始使用用于 Visual Studio 的 HDInsight 工具）。
 
 2. 打开 Visual Studio，选择“文件”>“新建”>“项目”。
 
@@ -234,12 +233,11 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 此时，已完成对 **Program.cs** 的操作。已经定义拓扑，但现在必须修改 **Spout.cs**，使它能够以事件中心 Bolt 可以使用的格式生成数据。
 
-> [AZURE.NOTE] 此拓扑将默认创建一个工作进程，以充分满足示例需求。如果要针对生产群集改写此拓拟，应添加以下代码以更改工作进程数：
+> [!NOTE] 此拓扑将默认创建一个工作进程，以充分满足示例需求。如果要针对生产群集改写此拓拟，应添加以下代码以更改工作进程数：
 
     StormConfig config = new StormConfig();
     config.setNumWorkers(1);
     topologyBuilder.SetTopologyConfig(config);
-
 
 ### 修改 Spout
 
@@ -252,7 +250,7 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
     这样可以更轻松地使用 JSON 数据。
     
-    > [AZURE.NOTE] 应该已经安装 JSON.NET 包，因为它是用于 C# Storm 拓扑的 SCP.NET 框架所必需的。
+    > [!NOTE] 应该已经安装 JSON.NET 包，因为它是用于 C# Storm 拓扑的 SCP.NET 框架所必需的。
 
 3. 找到以下代码：
 
@@ -388,16 +386,15 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
     此代码指示拓扑使用 Bolt（在 Bolt.cs 中定义）。此处使用先前定义的自定义序列化程序，以便此 Bolt 可使用上游 Java 组件生成的数据。在此示例中为 EventHubSpout。
 
-    > [AZURE.IMPORTANT] SetBolt 的最后一个参数（值为 `true`）启用此 Bolt 的 ACK 功能。该参数是必需的，因为 EventHubSpout 组件期望它发出数据的 ACK。如果下游组件未返回 ACK，则 Spout 在处理大约 1000 条消息后将停止接收。
+    > [!IMPORTANT] SetBolt 的最后一个参数（值为 `true`）启用此 Bolt 的 ACK 功能。该参数是必需的，因为 EventHubSpout 组件期望它发出数据的 ACK。如果下游组件未返回 ACK，则 Spout 在处理大约 1000 条消息后将停止接收。
 
 此时，已完成对 **Program.cs** 的操作。已经定义拓扑，但现在必须创建一个帮助器类以将数据写入表存储，然后必须修改 **Bolt.cs** 以便可了解 Spout 生成的数据。
 
-> [AZURE.NOTE] 此拓扑将默认创建一个工作进程，以充分满足示例需求。如果要针对生产群集改写此拓拟，应添加以下代码以更改工作线程数：
+> [!NOTE] 此拓扑将默认创建一个工作进程，以充分满足示例需求。如果要针对生产群集改写此拓拟，应添加以下代码以更改工作线程数：
 
     StormConfig config = new StormConfig();
     config.setNumWorkers(1);
     topologyBuilder.SetTopologyConfig(config);
-
 
 ### 创建帮助器类
 
@@ -495,7 +492,7 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
     将实体插入到表中后，为元组调用 `Ack()`，以通知 Spout 已成功处理数据。
 
-    > [AZURE.IMPORTANT] EventHubSpout 组件需要来自下游组件（如此 Bolt）的每个元组的 ACK。如果未收到 ACK，EventHubSpout 将假定元组处理失败。
+    > [!IMPORTANT] EventHubSpout 组件需要来自下游组件（如此 Bolt）的每个元组的 ACK。如果未收到 ACK，EventHubSpout 将假定元组处理失败。
 
 此时，已完成创建一个拓扑，该拓扑可从事件中心读取数据，并将其存储到表存储（位于先前创建的表中）。
 
@@ -508,7 +505,6 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 2. 在“提交拓扑”屏幕上，选择“Storm 群集”。展开“其他配置”，选择“Java 文件路径”，选择“...”，然后选择前面下载的 jar 文件所在的目录。最后，单击“提交”。
    
     ![提交对话框的图像](./media/hdinsight-storm-develop-csharp-event-hub-topology/submit.png)  
-
 
 3. 提交拓扑后，将会出现“Storm 拓扑查看器”。选择左窗格中的 **EventHubReader** 拓扑，以查看该拓扑的统计信息。目前，不会发生任何情况，因为尚未将任何事件写入事件中心。
    
@@ -534,14 +530,14 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 ## 删除群集
 
-[AZURE.INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
+[!INCLUDE [delete-cluster-warning](../../includes/hdinsight-delete-cluster-warning.md)]
 
 ## 后续步骤
 
 在本文档中，已学习如何使用 C# 拓扑中的 Java 事件中心 Spout 和 Bolt 处理 Azure 事件中心中的数据。要了解有关创建 C# 拓扑的详细信息，请参阅以下主题。
 
-* [使用 Visual Studio 开发适用于 Apache Storm on HDInsight 的 C# 拓扑](/documentation/articles/hdinsight-storm-develop-csharp-visual-studio-topology/)
-* [SCP 编程指南](/documentation/articles/hdinsight-storm-scp-programming-guide/)
-* [Storm on HDInsight 的示例拓扑](/documentation/articles/hdinsight-storm-example-topology/)
+* [使用 Visual Studio 开发适用于 Apache Storm on HDInsight 的 C# 拓扑](./hdinsight-storm-develop-csharp-visual-studio-topology.md)
+* [SCP 编程指南](./hdinsight-storm-scp-programming-guide.md)
+* [Storm on HDInsight 的示例拓扑](./hdinsight-storm-example-topology.md)
 
 <!---HONumber=Mooncake_1205_2016-->

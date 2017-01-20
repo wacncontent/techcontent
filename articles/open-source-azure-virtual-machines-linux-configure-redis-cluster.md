@@ -1,17 +1,16 @@
-<properties
-   pageTitle="在 Azure Linux 虚拟机上配置 Redis 集群 | Azure"
-   description="本文档介绍如何在 Azure Linux 虚拟机上安装配置免费的 Redis 集群。"
-   services="open-source"
-   documentationCenter=""
-   authors=""
-   manager=""
-   editor=""/>
+---
+title: 在 Azure Linux 虚拟机上配置 Redis 集群 | Azure
+description: 本文档介绍如何在 Azure Linux 虚拟机上安装配置免费的 Redis 集群。
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-   ms.service="open-source-website"  
-   ms.date=""
-   wacn.date="06/14/2016"/>
-
+ms.service: open-source-website
+ms.date: 
+wacn.date: 06/14/2016
+---
 
 # 在 Azure Linux 虚拟机上配置 Redis 集群
 
@@ -32,14 +31,14 @@ Redis 内置了复制，LUA 脚本，LRU 驱动时间，事务和不同级别的
 
 本文档介绍如何在 Azure Linux 虚拟机上安装配置免费的 Redis 集群。
 
-Azure 有提供收费的 Redis 服务，请参考 [Azure Redis tutorial](/documentation/services/redis-cache/) 获取详细信息。
+Azure 有提供收费的 Redis 服务，请参考 [Azure Redis tutorial](./redis-cache/index.md/) 获取详细信息。
 
 ## <a name="install"></a>安装 Redis
 
-如果您还没有 Azure 下的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 创建 LINUX 虚拟机。
+如果您还没有 Azure 下的 LINUX 虚拟机，请参考 [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 创建 LINUX 虚拟机。
 
 连接到您的 LINUX 虚拟机。如果这是您第一次使用 Azure 的 LINUX 虚拟机，请参考
- [Azure Linux VM tutorial](/documentation/articles/virtual-machines-linux-quick-create-portal/) 连接到虚拟机。
+ [Azure Linux VM tutorial](./virtual-machines/virtual-machines-linux-quick-create-portal.md) 连接到虚拟机。
 
 不同的 LINUX 发行版在安装 Redis 时有少许的不同。请根据您的 LINUX 版本选择对应的步骤。
 
@@ -86,7 +85,7 @@ Azure 有提供收费的 Redis 服务，请参考 [Azure Redis tutorial](/docume
         "bar"
         127.0.0.1:6379>
 
-4. 打开6379端口。6379端口是 Redis 的默认端口。请参考[创建终结点](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/)打开端口 
+4. 打开6379端口。6379端口是 Redis 的默认端口。请参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)打开端口 
 5. 停掉 Redis 的命令
 
         $sudo ./redis-cli shutdown
@@ -152,7 +151,6 @@ Redis 复制很简单易用，它通过配置允许 slave Redis Servers 是 Mast
 
 如果结果类似上面输出，表明复制配置成功。
 
-
 ## <a name="redis-cluster"></a>Redis 集群
 
 本节是 Redis 集群的一般介绍，没有涉及复杂难懂的分布式概念的赘述，只是提供了从用户角度来如何搭建测试以及使用的方法，如果您打算使用并深入了解 Redis 集群，推荐阅读完本节后,仔细阅读[官网文档](http://redis.io/topics/cluster-spec)
@@ -163,7 +161,6 @@ Redis 集群的优势
 
 1. 自动分割数据到不同的节点上。
 2. 整个集群的部分节点失败或者不可达的情况下能够继续处理命令。
-
 
 ## <a name="config-redis-cluster"></a>配置 Redis 集群
 

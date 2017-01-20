@@ -1,17 +1,17 @@
-<properties
-	pageTitle="使用 Zabbix 监控 Nginx"
-	description="本文介绍在 Azure Linux 虚拟机上使用 Zabbix 监控 Nginx"
-	services="open-source"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""/>
+---
+title: 使用 Zabbix 监控 Nginx
+description: 本文介绍在 Azure Linux 虚拟机上使用 Zabbix 监控 Nginx
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-	ms.service="open-source-website"
-	ms.date=""
-	wacn.date="06/14/2016"/>
- 
+ms.service: open-source-website
+ms.date: 
+wacn.date: 06/14/2016
+---
+
 #使用 Zabbix 监控 Nginx
 
 1.	Nginx server 必须安装 zabbix agent 软件包，以及打开10050,10051和它的服务端口，比如80. 然后启动 zabbix agent 进程，添加到监控列表。
@@ -157,29 +157,3 @@
 
   ![](./media/open-source-azure-virtual-machines-linux-configure-zabbix-2/37.png)
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

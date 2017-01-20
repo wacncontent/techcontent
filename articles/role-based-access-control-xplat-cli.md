@@ -1,22 +1,22 @@
-<properties
-	pageTitle="使用 Azure 命令行界面管理基于角色的访问控制"
-	description="使用 Azure 命令行界面管理基于角色的访问控制"
-	services="azure-portal"
-	documentationCenter="na"
-	authors="IHenkel"
-	manager="stevenpo"
-	editor=""/>
+---
+title: 使用 Azure 命令行界面管理基于角色的访问控制
+description: 使用 Azure 命令行界面管理基于角色的访问控制
+services: azure-portal
+documentationCenter: na
+authors: IHenkel
+manager: stevenpo
+editor: 
 
-<tags 
-	ms.service="azure-portal" 
-	ms.date="08/14/2015"
-	wacn.date="12/15/2015"/>
+ms.service: azure-portal
+ms.date: 08/14/2015
+wacn.date: 12/15/2015
+---
 
 # 使用 Azure 命令行界面 (Azure CLI) 管理基于角色的访问控制 #
 
-> [AZURE.SELECTOR]
-- [Windows PowerShell](/documentation/articles/role-based-access-control-powershell/)
-- [Azure CLI](/documentation/articles/role-based-access-control-xplat-cli/)
+> [!div class="op_single_selector"]
+- [Windows PowerShell](./role-based-access-control-powershell.md)
+- [Azure CLI](./role-based-access-control-xplat-cli.md)
 
 使用 Azure 门户预览中基于角色的访问控制 (RBAC) 和 Azure 资源管理器 API 可以精细地管理对订阅和资源的访问。使用此功能，可以通过在特定范围内为 Active Directory 用户、组或服务主体分配某些角色来向其授予访问权限。
 
@@ -28,8 +28,7 @@
 
 在使用 Azure CLI 管理 RBAC 之前，必须具备以下条件：
 
-- Azure CLI 0.8.8 版或更高。若要安装最新版本并将其与 Azure 订阅相关联，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)。
-
+- Azure CLI 0.8.8 版或更高。若要安装最新版本并将其与 Azure 订阅相关联，请参阅[安装和配置 Azure CLI](./xplat-cli-install.md)。
 
 ## 本教程的内容 ##
 
@@ -58,7 +57,7 @@
     # Use the subscription name to select the one you want to work on.
     azure account set <subscription name>
 
-有关详细信息，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)。
+有关详细信息，请参阅[安装和配置 Azure CLI](./xplat-cli-install.md)。
 
 ## <a id="check"></a>检查现有的角色分配 ##
 
@@ -88,16 +87,14 @@
 
 - 要将角色分配给谁：可以使用以下 Azure Active Directory cmdlet 查看你在目录中拥有哪些用户、组和服务主体。
 
-	    
-	    azure ad user list  
-	    azure ad user show  
-	    azure ad group list  
-	    azure ad group show  
-	    azure ad group member list  
-	    azure ad sp list  
-	    azure ad sp show  
+        azure ad user list  
+        azure ad user show  
+        azure ad group list  
+        azure ad group show  
+        azure ad group member list  
+        azure ad sp list  
+        azure ad sp show  
     
-
 - 你要分配哪些角色：可以使用以下 cmdlet 查看支持的角色定义。
 
     `azure role list`
@@ -125,9 +122,9 @@
 ## <a id="verify"></a>验证权限 ##
 
 检查你的帐户具有一些角色分配后，你可以通过运行以下命令实际查看这些角色分配授予你的权限：
-	
-	    PS C:\> azure group list
-	    PS C:\> azure resource list
+    
+        PS C:\> azure group list
+        PS C:\> azure resource list
 
 这两个 cmdlet 将仅返回你具有读取权限的资源组或资源。并且它还会显示你具有的权限。
 
@@ -137,12 +134,10 @@
 
 若要了解有关使用 Azure CLI 管理基于角色的访问控制及相关主题的详细信息，请执行以下操作：
 
-
-- [安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)
-
+- [安装和配置 Azure CLI](./xplat-cli-install.md)
 
 - [Azure 博客](http://blogs.msdn.com/azure)：了解 Azure 中的新功能。
-- [使用 Windows PowerShell 配置基于角色的访问控制](/documentation/articles/role-based-access-control-powershell/)
-- [故障排除基于角色的访问控制](/documentation/articles/role-based-access-control-troubleshooting/)
+- [使用 Windows PowerShell 配置基于角色的访问控制](./role-based-access-control-powershell.md)
+- [故障排除基于角色的访问控制](./active-directory/role-based-access-control-troubleshooting.md)
 
 <!---HONumber=71-->

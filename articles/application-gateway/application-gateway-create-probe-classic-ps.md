@@ -1,36 +1,36 @@
-<properties
-    pageTitle="在经典部署模型中使用 PowerShell 创建应用程序网关的自定义探测 | Azure"
-    description="了解如何使用经典部署模型中的 PowerShell 创建应用程序网关的自定义探测"
-    services="application-gateway"
-    documentationcenter="na"
-    author="georgewallace"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management" />  
+---
+title: 在经典部署模型中使用 PowerShell 创建应用程序网关的自定义探测 | Azure
+description: 了解如何使用经典部署模型中的 PowerShell 创建应用程序网关的自定义探测
+services: application-gateway
+documentationcenter: na
+author: georgewallace
+manager: timlt
+editor: 
+tags: azure-service-management
 
-<tags
-    ms.assetid="338a7be1-835c-48e9-a072-95662dc30f5e"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/13/2016"
-    wacn.date="01/09/2017"
-    ms.author="gwallace" />
+ms.assetid: 338a7be1-835c-48e9-a072-95662dc30f5e
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/13/2016
+wacn.date: 01/09/2017
+ms.author: gwallace
+---
 
 # 使用 PowerShell 创建 Azure 应用程序网关（经典）的自定义探测
 
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/application-gateway-create-probe-portal/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-create-probe-ps/)
-- [Azure 经典 PowerShell](/documentation/articles/application-gateway-create-probe-classic-ps/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./application-gateway-create-probe-portal.md)
+- [Azure Resource Manager PowerShell](./application-gateway-create-probe-ps.md)
+- [Azure 经典 PowerShell](./application-gateway-create-probe-classic-ps.md)
 
-[AZURE.INCLUDE [azure-probe-intro-include](../../includes/application-gateway-create-probe-intro-include.md)]
+[!INCLUDE [azure-probe-intro-include](../../includes/application-gateway-create-probe-intro-include.md)]
 
-> [AZURE.IMPORTANT] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](/documentation/articles/application-gateway-create-probe-ps/)。
+> [!IMPORTANT] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](./application-gateway-create-probe-ps.md)。
 
-[AZURE.INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
+[!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
 ## 创建应用程序网关
 
@@ -52,7 +52,7 @@
 
     Get-AzureApplicationGateway AppGwTest
 
-> [AZURE.NOTE]
+> [!NOTE]
 *InstanceCount* 的默认值为 2，最大值为 10。*GatewaySize* 的默认值为 Medium。可以选择 Small、Medium 或 Large。
 > 
 > 
@@ -118,7 +118,7 @@
         <HttpListener>
             <Name>listener1</Name>
             <FrontendIP>fip1</FrontendIP>
-	    <FrontendPort>port1</FrontendPort>
+        <FrontendPort>port1</FrontendPort>
             <Protocol>Http</Protocol>
         </HttpListener>
     </HttpListeners>
@@ -137,7 +137,7 @@
 
 以下示例演示如何使用配置文件设置应用程序网关以负载均衡公共端口 80 上的 HTTP 流量，然后使用自定义探测将网络流量发送到两个 IP 地址之间的后端端口 80。
 
->[AZURE.IMPORTANT] 协议项 Http 或 Https 区分大小写。
+>[!IMPORTANT] 协议项 Http 或 Https 区分大小写。
 
 已添加用于配置自定义探测的新配置项 <Probe>。
 
@@ -199,8 +199,8 @@
 
 ## 后续步骤
 
-如果要配置安全套接字层 (SSL) 卸载，请参阅[配置应用程序网关以进行 SSL 卸载](/documentation/articles/application-gateway-ssl/)。
+如果要配置安全套接字层 (SSL) 卸载，请参阅[配置应用程序网关以进行 SSL 卸载](./application-gateway-ssl.md)。
 
-如果你想要将应用程序网关配置为与内部负载均衡器配合使用，请参阅 [Create an application gateway with an internal load balancer (ILB)](/documentation/articles/application-gateway-ilb/)（创建具有内部负载均衡器 (ILB) 的应用程序网关）。
+如果你想要将应用程序网关配置为与内部负载均衡器配合使用，请参阅 [Create an application gateway with an internal load balancer (ILB)](./application-gateway-ilb.md)（创建具有内部负载均衡器 (ILB) 的应用程序网关）。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

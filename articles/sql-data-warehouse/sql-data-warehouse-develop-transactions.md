@@ -1,22 +1,21 @@
-<properties
-   pageTitle="SQL 数据仓库中的事务 | Azure"
-   description="有关在开发解决方案时实现 Azure SQL 数据仓库中的事务的技巧。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库中的事务 | Azure
+description: 有关在开发解决方案时实现 Azure SQL 数据仓库中的事务的技巧。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/17/2017"
-   ms.author="jrj;barbkess;sonyama"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/17/2017
+ms.author: jrj;barbkess;sonyama
+---
 
 # SQL 数据仓库中的事务
 如你所料，SQL 数据仓库支持支持事务作为数据仓库工作负荷的一部分。但是，为了确保 SQL 数据仓库的性能维持在一定的程度，相比于 SQL Server，其某些功能会受到限制。本文将突出两者的差异，并列出其他信息。
@@ -51,49 +50,49 @@ SQL 数据仓库实现 ACID 事务。但是，事务支持的隔离仅限于 `RE
 
 为优化和最大程度减少写入到日志中的数据量，请参阅[事务最佳实践][Transactions best practices]文章。
 
-> [AZURE.WARNING] 最大事务大小仅可在哈希或者 ROUND\_ROBIN 分布式表（其中数据均匀分布）中实现。如果事务以偏斜方式向分布写入数据，那么更有可能在达到最大事务大小之前达到该限制。
+> [!WARNING] 最大事务大小仅可在哈希或者 ROUND\_ROBIN 分布式表（其中数据均匀分布）中实现。如果事务以偏斜方式向分布写入数据，那么更有可能在达到最大事务大小之前达到该限制。
 <!--REPLICATED_TABLE-->
 
 ## 事务状态
 SQL 数据仓库使用 XACT\_STATE() 函数（采用值 -2）来报告失败的事务。这表示事务已失败并标记为仅可回滚
 
-> [AZURE.NOTE] XACT\_STATE 函数使用 -2 表示失败的事务，以代表 SQL Server 中不同的行为。SQL Server 使用值 -1 来代表无法提交的事务。SQL Server 可以容忍事务内的某些错误，而无需将其标记为无法提交。例如，`SELECT 1/0` 导致错误，但不强制事务进入无法提交状态。SQL Server 还允许读取无法提交的事务。但是，SQL 数据仓库不允许执行此操作。如果 SQL 数据仓库事务内部发生错误，它将自动进入 -2 状态，并且在该语句回退之前，您无法执行任何 Select 语句。因此，必须查看应用程序代码是否使用 XACT\_STATE()，因为您可能需要修改代码。
+> [!NOTE] XACT\_STATE 函数使用 -2 表示失败的事务，以代表 SQL Server 中不同的行为。SQL Server 使用值 -1 来代表无法提交的事务。SQL Server 可以容忍事务内的某些错误，而无需将其标记为无法提交。例如，`SELECT 1/0` 导致错误，但不强制事务进入无法提交状态。SQL Server 还允许读取无法提交的事务。但是，SQL 数据仓库不允许执行此操作。如果 SQL 数据仓库事务内部发生错误，它将自动进入 -2 状态，并且在该语句回退之前，您无法执行任何 Select 语句。因此，必须查看应用程序代码是否使用 XACT\_STATE()，因为您可能需要修改代码。
 
 例如，在 SQL Server 中，您可能会看到如下所示的事务：
 
-	SET NOCOUNT ON;
-	DECLARE @xact_state smallint = 0;
+    SET NOCOUNT ON;
+    DECLARE @xact_state smallint = 0;
 
-	BEGIN TRAN
-	    BEGIN TRY
-	        DECLARE @i INT;
-	        SET     @i = CONVERT(int,'ABC');
-	    END TRY
-	    BEGIN CATCH
-        	SET @xact_state = XACT_STATE();
-	
-	        SELECT  ERROR_NUMBER()    AS ErrNumber
-	        ,       ERROR_SEVERITY()  AS ErrSeverity
-	        ,       ERROR_STATE()     AS ErrState
-	        ,       ERROR_PROCEDURE() AS ErrProcedure
-	        ,       ERROR_MESSAGE()   AS ErrMessage
-	        ;
+    BEGIN TRAN
+        BEGIN TRY
+            DECLARE @i INT;
+            SET     @i = CONVERT(int,'ABC');
+        END TRY
+        BEGIN CATCH
+            SET @xact_state = XACT_STATE();
+    
+            SELECT  ERROR_NUMBER()    AS ErrNumber
+            ,       ERROR_SEVERITY()  AS ErrSeverity
+            ,       ERROR_STATE()     AS ErrState
+            ,       ERROR_PROCEDURE() AS ErrProcedure
+            ,       ERROR_MESSAGE()   AS ErrMessage
+            ;
 
-	        IF @@TRANCOUNT > 0
-	        BEGIN
-	            PRINT 'ROLLBACK';
-	            ROLLBACK TRAN;
-	        END
-	
-	    END CATCH;
-	
-	IF @@TRANCOUNT >0
-	BEGIN
-	    PRINT 'COMMIT';
-	    COMMIT TRAN;
-	END
-	
-	SELECT @xact_state AS TransactionState;
+            IF @@TRANCOUNT > 0
+            BEGIN
+                PRINT 'ROLLBACK';
+                ROLLBACK TRAN;
+            END
+    
+        END CATCH;
+    
+    IF @@TRANCOUNT >0
+    BEGIN
+        PRINT 'COMMIT';
+        COMMIT TRAN;
+    END
+    
+    SELECT @xact_state AS TransactionState;
 
 如果将代码按如上所示保持原样，会获得以下错误消息：
 
@@ -103,38 +102,38 @@ Msg 111233, Level 16, State 1, Line 1 111233；当前事务已中止，所有挂
 
 在 SQL 数据仓库中，该代码需要稍做更改：
 
-	SET NOCOUNT ON;
-	DECLARE @xact_state smallint = 0;
-		
-	BEGIN TRAN
-	    BEGIN TRY
-	        DECLARE @i INT;
-        	SET     @i = CONVERT(INT,'ABC');
-	    END TRY
-	    BEGIN CATCH
-	        SET @xact_state = XACT_STATE();
-        		
-	        IF @@TRANCOUNT > 0
-	        BEGIN
-	            PRINT 'ROLLBACK';
-	            ROLLBACK TRAN;
-	        END
-	
-	        SELECT  ERROR_NUMBER()    AS ErrNumber
-	        ,       ERROR_SEVERITY()  AS ErrSeverity
-	        ,       ERROR_STATE()     AS ErrState
-	        ,       ERROR_PROCEDURE() AS ErrProcedure
-	        ,       ERROR_MESSAGE()   AS ErrMessage
-	        ;
-	    END CATCH;
-	
-	IF @@TRANCOUNT >0
-	BEGIN
-	    PRINT 'COMMIT';
-	    COMMIT TRAN;
-	END
-	
-	SELECT @xact_state AS TransactionState;
+    SET NOCOUNT ON;
+    DECLARE @xact_state smallint = 0;
+        
+    BEGIN TRAN
+        BEGIN TRY
+            DECLARE @i INT;
+            SET     @i = CONVERT(INT,'ABC');
+        END TRY
+        BEGIN CATCH
+            SET @xact_state = XACT_STATE();
+                
+            IF @@TRANCOUNT > 0
+            BEGIN
+                PRINT 'ROLLBACK';
+                ROLLBACK TRAN;
+            END
+    
+            SELECT  ERROR_NUMBER()    AS ErrNumber
+            ,       ERROR_SEVERITY()  AS ErrSeverity
+            ,       ERROR_STATE()     AS ErrState
+            ,       ERROR_PROCEDURE() AS ErrProcedure
+            ,       ERROR_MESSAGE()   AS ErrMessage
+            ;
+        END CATCH;
+    
+    IF @@TRANCOUNT >0
+    BEGIN
+        PRINT 'COMMIT';
+        COMMIT TRAN;
+    END
+    
+    SELECT @xact_state AS TransactionState;
 
 现在观察到了预期行为。事务中的错误得到了管理，并且 ERROR\_* 函数提供了预期值。
 
@@ -168,11 +167,11 @@ SQL 数据仓库有一些与事务相关的其他限制。
 <!--Image references-->
 
 <!--Article references-->
-[DWU]: /documentation/articles/sql-data-warehouse-overview-what-is/#data-warehouse-units
-[development overview]: /documentation/articles/sql-data-warehouse-overview-develop/
-[Transactions best practices]: /documentation/articles/sql-data-warehouse-develop-best-practices-transactions/
-[SQL Data Warehouse best practices]: /documentation/articles/sql-data-warehouse-best-practices/
-[LABEL]: /documentation/articles/sql-data-warehouse-develop-label/
+[DWU]: ./sql-data-warehouse-overview-what-is.md#data-warehouse-units
+[development overview]: ./sql-data-warehouse-overview-develop.md
+[Transactions best practices]: ./sql-data-warehouse-develop-best-practices-transactions.md
+[SQL Data Warehouse best practices]: ./sql-data-warehouse-best-practices.md
+[LABEL]: ./sql-data-warehouse-develop-label.md
 
 <!--MSDN references-->
 

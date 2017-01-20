@@ -1,4 +1,4 @@
-在本部分中，更新现有移动应用后端项目中的代码，以便在每次添加新项目时推送通知。用于推送通知的客户端采用模板注册进行注册，因此单个推送通知消息可发送到所有客户端平台中。每个客户端模板注册都包含一个 *messageParam* 参数。发送通知后，*messageParam* 包含被插入项的文本的字符串。若要深入了解如何通过通知中心使用模板，请参阅[模板](/documentation/articles/notification-hubs-templates-cross-platform-push-messages/)。
+在本部分中，更新现有移动应用后端项目中的代码，以便在每次添加新项目时推送通知。用于推送通知的客户端采用模板注册进行注册，因此单个推送通知消息可发送到所有客户端平台中。每个客户端模板注册都包含一个 *messageParam* 参数。发送通知后，*messageParam* 包含被插入项的文本的字符串。若要深入了解如何通过通知中心使用模板，请参阅[模板](../articles/notification-hubs/notification-hubs-templates-cross-platform-push-messages.md)。
 
 选择以下与后端项目类型匹配的过程：[.NET 后端](#dotnet)或 [Node.js 后端](#nodejs)。
 
@@ -7,17 +7,16 @@
 
 3. 在服务器项目中，打开“控制器”>“TodoItemController.cs”，使用以下语句进行添加：
 
-		using System.Collections.Generic;
-		using Microsoft.Azure.NotificationHubs;
-		using Microsoft.Azure.Mobile.Server.Config;
-	
-
+        using System.Collections.Generic;
+        using Microsoft.Azure.NotificationHubs;
+        using Microsoft.Azure.Mobile.Server.Config;
+    
 2. 在 **PostTodoItem** 方法中，在调用 **InsertAsync** 后添加如下代码：
 
         // Get the settings for the server project.
         HttpConfiguration config = this.Configuration;
         MobileAppSettingsDictionary settings = 
-			this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
+            this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
         
         // Get the Notification Hubs credentials for the Mobile App.
         string notificationHubName = settings.NotificationHubName;
@@ -48,56 +47,56 @@
                 .Error(ex.Message, null, "Push.SendAsync Error");
         }
 
-	插入新项时，会发送包含 item.text 的模板通知。
+    插入新项时，会发送包含 item.text 的模板通知。
 
 4. 重新发布服务器项目。
 
 ### <a name="nodejs"></a>Node.js 后端项目
 
-1. 如果尚未执行此操作，请[下载快速入门后端项目](/documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/#download-quickstart)或使用 [Azure 门户预览中的在线编辑器](/documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/#online-editor)。
+1. 如果尚未执行此操作，请[下载快速入门后端项目](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#download-quickstart)或使用 [Azure 门户预览中的在线编辑器](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#online-editor)。
 
 2. 将 todoitem.js 文件中的现有代码替换为以下内容：
 
-		var azureMobileApps = require('azure-mobile-apps'),
-	    promises = require('azure-mobile-apps/src/utilities/promises'),
-	    logger = require('azure-mobile-apps/src/logger');
-	
-		var table = azureMobileApps.table();
-		
-		table.insert(function (context) {
-	    // For more information about the Notification Hubs JavaScript SDK, 
-	    // see http://aka.ms/nodejshubs
-	    logger.info('Running TodoItem.insert');
-	    
-	    // Define the template payload.
-	    var payload = '{"messageParam": "' + context.item.text + '" }';  
-	    
-	    // Execute the insert.  The insert returns the results as a Promise,
-	    // Do the push as a post-execute action within the promise flow.
-	    return context.execute()
-	        .then(function (results) {
-	            // Only do the push if configured
-	            if (context.push) {
-					// Send a template notification.
-	                context.push.send(null, payload, function (error) {
-	                    if (error) {
-	                        logger.error('Error while sending push notification: ', error);
-	                    } else {
-	                        logger.info('Push notification sent successfully!');
-	                    }
-	                });
-	            }
-	            // Don't forget to return the results from the context.execute()
-	            return results;
-	        })
-	        .catch(function (error) {
-	            logger.error('Error while running context.execute: ', error);
-	        });
-		});
+        var azureMobileApps = require('azure-mobile-apps'),
+        promises = require('azure-mobile-apps/src/utilities/promises'),
+        logger = require('azure-mobile-apps/src/logger');
+    
+        var table = azureMobileApps.table();
+        
+        table.insert(function (context) {
+        // For more information about the Notification Hubs JavaScript SDK, 
+        // see http://aka.ms/nodejshubs
+        logger.info('Running TodoItem.insert');
+        
+        // Define the template payload.
+        var payload = '{"messageParam": "' + context.item.text + '" }';  
+        
+        // Execute the insert.  The insert returns the results as a Promise,
+        // Do the push as a post-execute action within the promise flow.
+        return context.execute()
+            .then(function (results) {
+                // Only do the push if configured
+                if (context.push) {
+                    // Send a template notification.
+                    context.push.send(null, payload, function (error) {
+                        if (error) {
+                            logger.error('Error while sending push notification: ', error);
+                        } else {
+                            logger.info('Push notification sent successfully!');
+                        }
+                    });
+                }
+                // Don't forget to return the results from the context.execute()
+                return results;
+            })
+            .catch(function (error) {
+                logger.error('Error while running context.execute: ', error);
+            });
+        });
 
-		module.exports = table;  
+        module.exports = table;  
 
-	插入新项时，会发送包含 item.text 的模板通知。
+    插入新项时，会发送包含 item.text 的模板通知。
 
 2. 编辑本地计算机上的文件时，请重新发布服务器项目。
 

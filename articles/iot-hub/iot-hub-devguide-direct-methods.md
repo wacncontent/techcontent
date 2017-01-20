@@ -1,23 +1,21 @@
-<properties
- pageTitle="开发人员指南 - 直接方法 | Azure"
- description="Azure IoT 中心开发人员指南 - 使用直接方法调用设备上的代码"
- services="iot-hub"
- documentationCenter=".net"
- authors="nberdy"
- manager="timlt"
- editor=""/>  
+---
+title: 开发人员指南 - 直接方法 | Azure
+description: Azure IoT 中心开发人员指南 - 使用直接方法调用设备上的代码
+services: iot-hub
+documentationCenter: .net
+authors: nberdy
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="09/30/2016"
- wacn.date="12/12/2016" 
- ms.author="nberdy"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 12/12/2016
+ms.author: nberdy
+---
 
 # 在设备上调用直接方法（预览版）
 
@@ -36,7 +34,7 @@
 ## 方法生命周期
 直接方法在设备上实现，可能需要在方法有效负载中进行 0 次或 0 次以上的输入才能正确地实例化。可以通过面向服务的 URI (`{iot hub}/twins/{device id}/methods/`) 调用直接方法。设备通过特定于设备的 MQTT 主题 (`$iothub/methods/POST/{method name}/`) 接收直接方法。将来可能会支持在更多的设备端网络协议上使用直接方法。
 
-> [AZURE.NOTE] 调用设备上的直接方法时，属性名称和值只能包含 US ASCII 可打印字母数字，但下列组中的任一项除外：``{'$', '(', ')', '<', '>', '@', ',', ';', ':', '\', '"', '/', '[', ']', '?', '=', '{', '}', SP, HT}``。
+> [!NOTE] 调用设备上的直接方法时，属性名称和值只能包含 US ASCII 可打印字母数字，但下列组中的任一项除外：``{'$', '(', ')', '<', '>', '@', ',', ';', ':', '\', '"', '/', '[', ']', '?', '=', '{', '}', SP, HT}``。
 
 直接方法是同步的，在超时期限（默认：30 秒，最长可设置为 3600 秒）过后，其结果不是成功就是失败。直接方法适用于交互式场景，即当且仅当设备处于联机状态且可接收命令时，用户希望设备做出响应，例如打开手机的灯。在此类方案中，用户需要立即看到结果是成功还是失败，以便云服务可以尽快根据结果进行操作。设备可能返回某些消息正文作为方法的结果，但系统不会要求方法一定这样做。无法保证基于方法调用的排序或者任何并发语义。
 
@@ -131,16 +129,15 @@
 
 <!-- links and images -->
 
+[lnk-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 
-[lnk-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
-
-[lnk-devguide-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-[lnk-methods-tutorial]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-devguide-messages]: /documentation/articles/iot-hub-devguide-messaging/
-[lnk-c2d-guidance]: /documentation/articles/iot-hub-devguide-c2d-guidance/
+[lnk-devguide-jobs]: ./iot-hub-devguide-jobs.md
+[lnk-methods-tutorial]: ./iot-hub-node-node-direct-methods.md
+[lnk-devguide-messages]: ./iot-hub-devguide-messaging.md
+[lnk-c2d-guidance]: ./iot-hub-devguide-c2d-guidance.md
 
 <!---HONumber=Mooncake_1205_2016-->

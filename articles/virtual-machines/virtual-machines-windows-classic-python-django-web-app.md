@@ -1,33 +1,29 @@
-<properties
-	pageTitle="使用 Django 创建 Python Web 应用| Azure"
-	description="本教程演示如何在 Azure 中使用 Windows Server 2012 R2 Datacenter 虚拟机托管基于 Django 的 Web 应用。"
-	services="virtual-machines-windows"
-	documentationCenter="python"
-	authors="huguesv"
-	manager="wpickett"
-	editor=""/>
+---
+title: 使用 Django 创建 Python Web 应用| Azure
+description: 本教程演示如何在 Azure 中使用 Windows Server 2012 R2 Datacenter 虚拟机托管基于 Django 的 Web 应用。
+services: virtual-machines-windows
+documentationCenter: python
+authors: huguesv
+manager: wpickett
+editor: 
 
-
-<tags 
-	ms.service="virtual-machines-windows" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="vm-windows" 
-	ms.devlang="python" 
-	ms.topic="article" 
-	ms.date="08/04/2015" 
-	wacn.date="01/05/2017" 
-	ms.author="huvalo"/>
-
-
-
+ms.service: virtual-machines-windows
+ms.workload: web
+ms.tgt_pltfrm: vm-windows
+ms.devlang: python
+ms.topic: article
+ms.date: 08/04/2015
+wacn.date: 01/05/2017
+ms.author: huvalo
+---
 
 # Django Hello World Web 应用
 
-> [AZURE.SELECTOR]
-- [Windows](/documentation/articles/virtual-machines-windows-classic-python-django-web-app/)
-- [Mac/Linux](/documentation/articles/virtual-machines-linux-python-django-web-app/)
+> [!div class="op_single_selector"]
+- [Windows](./virtual-machines-windows-classic-python-django-web-app.md)
+- [Mac/Linux](./virtual-machines-linux-python-django-web-app.md)
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 想发布 Django，请查看这个[资源管理器模板](https://github.com/Azure/azure-quickstart-templates/tree/master/django-app/).
 
@@ -44,16 +40,16 @@
 
 ![显示 Azure 上的 hello world 页面的浏览器窗口][1]
 
-[AZURE.INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
+[!INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
 
 ## 创建并配置 Azure 虚拟机以托管 Django
 
-1. 按照[此处](/documentation/articles/virtual-machines-windows-classic-tutorial/)提供的说明可创建 Windows Server 2012 R2 Datacenter 分发的 Azure 虚拟机。
+1. 按照[此处](./virtual-machines-windows-classic-tutorial.md)提供的说明可创建 Windows Server 2012 R2 Datacenter 分发的 Azure 虚拟机。
 
 1. 指示 Azure 将来自 Web 的端口 80 通信定向到虚拟机上的端口 80：
  - 在 Azure 经典管理门户中导航到你新创建的虚拟机，然后单击“终结点”。
  - 单击屏幕底部的“添加”按钮。
-	![添加终结点](./media/virtual-machines-windows-classic-python-django-web-app/django-helloworld-addendpoint.png)
+    ![添加终结点](./media/virtual-machines-windows-classic-python-django-web-app/django-helloworld-addendpoint.png)
 
  - 打开 **TCP** 协议的**公用端口 80** 作为**专用端口 80**。![][port80]
 1. 在“仪表板”选项卡上，单击“连接”以使用**远程桌面**远程登录到新创建的 Azure 虚拟机。  
@@ -81,7 +77,7 @@
 
 1. 安装具有 FastCGI 支持的 IIS。执行此操作可能需要几分钟。
 
-		start /wait %windir%\System32\PkgMgr.exe /iu:IIS-WebServerRole;IIS-WebServer;IIS-CommonHttpFeatures;IIS-StaticContent;IIS-DefaultDocument;IIS-DirectoryBrowsing;IIS-HttpErrors;IIS-HealthAndDiagnostics;IIS-HttpLogging;IIS-LoggingLibraries;IIS-RequestMonitor;IIS-Security;IIS-RequestFiltering;IIS-HttpCompressionStatic;IIS-WebServerManagementTools;IIS-ManagementConsole;WAS-WindowsActivationService;WAS-ProcessModel;WAS-NetFxEnvironment;WAS-ConfigurationAPI;IIS-CGI
+        start /wait %windir%\System32\PkgMgr.exe /iu:IIS-WebServerRole;IIS-WebServer;IIS-CommonHttpFeatures;IIS-StaticContent;IIS-DefaultDocument;IIS-DirectoryBrowsing;IIS-HttpErrors;IIS-HealthAndDiagnostics;IIS-HttpLogging;IIS-LoggingLibraries;IIS-RequestMonitor;IIS-Security;IIS-RequestFiltering;IIS-HttpCompressionStatic;IIS-WebServerManagementTools;IIS-ManagementConsole;WAS-WindowsActivationService;WAS-ProcessModel;WAS-NetFxEnvironment;WAS-ConfigurationAPI;IIS-CGI
 
 ## 创建新的 Django 应用程序
 
@@ -89,13 +85,13 @@
 
     对于 Python 2.7，使用以下命令。
 
-		C:\Python27\Scripts\django-admin.exe startproject helloworld
+        C:\Python27\Scripts\django-admin.exe startproject helloworld
 
     对于 Python 3.4，使用以下命令。
 
-		C:\Python34\Scripts\django-admin.exe startproject helloworld
+        C:\Python34\Scripts\django-admin.exe startproject helloworld
 
-	![New-AzureService 命令的结果](./media/virtual-machines-windows-classic-python-django-web-app/django-helloworld-cmd-new-azure-service.png)
+    ![New-AzureService 命令的结果](./media/virtual-machines-windows-classic-python-django-web-app/django-helloworld-cmd-new-azure-service.png)
 
 1.  **django-admin** 命令生成基于 Django 的 Web 应用的基本结构：
 
@@ -105,17 +101,17 @@
 
 1.  在 *C:\\inetpub\\wwwroot\\helloworld\\helloworld* 目录中创建一个名为 **views.py** 的新文件。这会包含呈现“hello world”页面的视图。启动编辑器并输入以下代码：
 
-		from django.http import HttpResponse
-		def home(request):
-    		html = "<html><body>Hello World!</body></html>"
-    		return HttpResponse(html)
+        from django.http import HttpResponse
+        def home(request):
+            html = "<html><body>Hello World!</body></html>"
+            return HttpResponse(html)
 
 1.  将 urls.py 文件的内容替换为以下代码。
 
-		from django.conf.urls import patterns, url
-		urlpatterns = patterns('',
-			url(r'^$', 'helloworld.views.home', name='home'),
-		)
+        from django.conf.urls import patterns, url
+        urlpatterns = patterns('',
+            url(r'^$', 'helloworld.views.home', name='home'),
+        )
 
 ## 配置 IIS
 
@@ -172,7 +168,6 @@
 1. 最后，在你的浏览器中加载网页。
 
 ![显示 Azure 上的 hello world 页面的浏览器窗口][1]
-
 
 ## 关闭你的 Azure 虚拟机
 

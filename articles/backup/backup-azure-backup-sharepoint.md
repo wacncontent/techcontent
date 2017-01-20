@@ -1,24 +1,21 @@
-<properties
-	pageTitle="在 Azure 中使用 DPM/Azure 备份服务器保护 SharePoint 场 | Azure"
-	description="本文概述如何在 Azure 中使用 DPM/Azure 备份服务器保护 SharePoint 场"
-	services="backup"
-	documentationCenter=""
-	authors="adigan"
-	manager="Nkolli1"
-	editor=""/>  
+---
+title: 在 Azure 中使用 DPM/Azure 备份服务器保护 SharePoint 场 | Azure
+description: 本文概述如何在 Azure 中使用 DPM/Azure 备份服务器保护 SharePoint 场
+services: backup
+documentationCenter: 
+authors: adigan
+manager: Nkolli1
+editor: 
 
-
-<tags
-	ms.service="backup"
-	ms.workload="storage-backup-recovery"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/29/2016"
-	wacn.date="11/15/2016"
-	ms.author="adigan;giridham;jimpark;trinadhk;markgal"/>  
-
-
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/29/2016
+wacn.date: 11/15/2016
+ms.author: adigan;giridham;jimpark;trinadhk;markgal
+---
 
 # 将 SharePoint 场备份到 Azure
 使用 System Center Data Protection Manager (DPM) 将 SharePoint 场备份到 Azure，其方法与备份其他数据源极为类似。Azure 备份提供灵活的备份计划来创建每日、每周、每月或每年备份点，并提供适用于各种备份点的保留策略选项。利用 DPM，不仅可以存储本地磁盘副本以实现快速的恢复时间目标 (RTO)，还可以将副本存储到 Azure 以进行经济高效的长期保留。
@@ -34,7 +31,7 @@ DPM 的 Azure 备份支持以下方案。
 在将 SharePoint 场备份到 Azure 之前，需要确保满足几个条件。
 
 ### 先决条件
-在继续之前，请确保符合使用 Azure 备份保护工作负荷的所有[先决条件](/documentation/articles/backup-azure-dpm-introduction-classic/#prerequisites/)。先决条件包括如下任务：创建备份保管库、下载保管库凭据、安装 Azure 备份代理，以及在保管库中注册 DPM/Azure 备份服务器。
+在继续之前，请确保符合使用 Azure 备份保护工作负荷的所有[先决条件](./backup-azure-dpm-introduction-classic.md#prerequisites/)。先决条件包括如下任务：创建备份保管库、下载保管库凭据、安装 Azure 备份代理，以及在保管库中注册 DPM/Azure 备份服务器。
 
 ### DPM 代理
 必须在运行 SharePoint Server 或 SQL Server 的服务器以及属于 SharePoint 场的任何其他服务器上安装 DPM 代理。有关如何设置保护代理的详细信息，请参阅 [设置保护代理](https://technet.microsoft.com/zh-cn/library/hh758034(v=sc.12).aspx)。唯一的例外是，你只能在单个 Web 前端 (WFE) 服务器上安装代理。DPM 只需将一台 WFE 服务器上的代理作为保护的入口点。
@@ -69,7 +66,7 @@ DPM 以 LocalSystem 帐户的形式运行。若要备份 SQL Server 数据库，
   - 授予 WSS\_Admin\_WPG 组对 DPM 文件夹 (%Program Files%\\Microsoft Data Protection Manager\\DPM) 的完全控制权。
   - 授予 WSS\_Admin\_WPG 组对 DPM 注册表项 (HKEY\_LOCAL\_MACHINE\\SOFTWARE\\Microsoft\\Microsoft Data Protection Manager) 的读取访问权限。
 
->[AZURE.NOTE] 每当 SharePoint 场管理员凭据发生更改时，都需要重新运行 ConfigureSharePoint.exe。
+>[!NOTE] 每当 SharePoint 场管理员凭据发生更改时，都需要重新运行 ConfigureSharePoint.exe。
 
 ## 使用 DPM 备份 SharePoint 场
 如前所述配置 DPM 和 SharePoint 场之后，可以使用 DPM 保护 SharePoint。
@@ -87,19 +84,19 @@ DPM 以 LocalSystem 帐户的形式运行。若要备份 SQL Server 数据库，
 
     ![选择组成员](./media/backup-azure-backup-sharepoint/select-group-members2.png)
 
-    >[AZURE.NOTE] 在已安装 DPM 代理的情况下，你可以在向导中看到该服务器。DPM 还会显示其结构。由于已运行 ConfigureSharePoint.exe，DPM 将与 SharePoint VSS 写入器服务及其对应的 SQL Server 数据库通信，并识别 SharePoint 场结构、关联的内容数据库和任何对应项。
+    >[!NOTE] 在已安装 DPM 代理的情况下，你可以在向导中看到该服务器。DPM 还会显示其结构。由于已运行 ConfigureSharePoint.exe，DPM 将与 SharePoint VSS 写入器服务及其对应的 SQL Server 数据库通信，并识别 SharePoint 场结构、关联的内容数据库和任何对应项。
 
 4. 在“选择数据保护方法”页上，输入“保护组”的名称，然后选择偏好的“保护方法”。单击“下一步”。
 
     ![选择数据保护方法](./media/backup-azure-backup-sharepoint/select-data-protection-method1.png)
 
-    >[AZURE.NOTE] 磁盘保护方法有助于实现短暂的恢复时间目标。相比于磁带，Azure 是经济高效的长期保护目标。有关详细信息，请参阅[使用 Azure 备份来取代磁带基础结构](/documentation/articles/backup-azure-backup-cloud-as-tape/)
+    >[!NOTE] 磁盘保护方法有助于实现短暂的恢复时间目标。相比于磁带，Azure 是经济高效的长期保护目标。有关详细信息，请参阅[使用 Azure 备份来取代磁带基础结构](./backup-azure-backup-cloud-as-tape.md)
 
 5. 在“指定短期目标”页上，选择偏好的“保留范围”，并指定备份时间。
 
     ![指定短期目标](./media/backup-azure-backup-sharepoint/specify-short-term-goals2.png)
 
-    >[AZURE.NOTE] 由于恢复大多数针对少于五天的数据进行，因此我们在此示例中选择了在磁盘上保留五天，并确保在非生产时段进行备份。
+    >[!NOTE] 由于恢复大多数针对少于五天的数据进行，因此我们在此示例中选择了在磁盘上保留五天，并确保在非生产时段进行备份。
 
 6. 复查为保护组分配的存储池磁盘空间，然后单击“下一步”。
 
@@ -107,7 +104,7 @@ DPM 以 LocalSystem 帐户的形式运行。若要备份 SQL Server 数据库，
 
     ![选择副本创建方法](./media/backup-azure-backup-sharepoint/choose-replica-creation-method.png)
 
-    >[AZURE.NOTE] 若要确保不会影响网络流量，请选择生产时段之外的时间。
+    >[!NOTE] 若要确保不会影响网络流量，请选择生产时段之外的时间。
 
 8. DPM 可对副本执行一致性检查，以确保数据完整性。有两个可用的选项。你可以定义运行一致性检查的计划，或在副本变得不一致时，让 DPM 自动运行一致性检查。选择你偏好的选项，然后单击“下一步”。
 
@@ -121,13 +118,13 @@ DPM 以 LocalSystem 帐户的形式运行。若要备份 SQL Server 数据库，
 
     ![Online\_backup\_schedule](./media/backup-azure-backup-sharepoint/specify-online-backup-schedule.png)
 
-    >[AZURE.NOTE] DPM 每天在不同的时间最多以 Azure 为目标执行两次备份。Azure 备份还可以使用 [Azure 备份网络限制](/documentation/articles/backup-configure-vault/#enable-network-throttling)，来控制高峰期和非高峰期用于备份的 WAN 带宽量。
+    >[!NOTE] DPM 每天在不同的时间最多以 Azure 为目标执行两次备份。Azure 备份还可以使用 [Azure 备份网络限制](./backup-configure-vault.md#enable-network-throttling)，来控制高峰期和非高峰期用于备份的 WAN 带宽量。
 
 11. 根据选择的备份计划，在“指定联机保留策略”页上，选择每日、每周、每月和每年备份点的保留策略。
 
     ![Online\_retention\_policy](./media/backup-azure-backup-sharepoint/specify-online-retention.png)
 
-    >[AZURE.NOTE] DPM 使用 grandfather-father-son 保留方案，可让你为不同的备份点选择不同的保留策略。
+    >[!NOTE] DPM 使用 grandfather-father-son 保留方案，可让你为不同的备份点选择不同的保留策略。
 
 12. 类似于磁盘，需要在 Azure 中创建初始引用点副本。选择在 Azure 中创建初始备份副本的偏好选项，然后单击“下一步”。
 
@@ -168,7 +165,7 @@ DPM 以 LocalSystem 帐户的形式运行。若要备份 SQL Server 数据库，
 
     ![恢复类型](./media/backup-azure-backup-sharepoint/select-recovery-type.png)
 
-    >[AZURE.NOTE] 示例中所选的“恢复到原始”会将该项恢复到原始 SharePoint 站点。
+    >[!NOTE] 示例中所选的“恢复到原始”会将该项恢复到原始 SharePoint 站点。
 
 8. 选择你要使用的“恢复过程”。
     - 如果 SharePoint 场未更改，并且与正在还原的恢复点相同，请选择“不使用恢复场进行恢复”。
@@ -188,7 +185,7 @@ DPM 以 LocalSystem 帐户的形式运行。若要备份 SQL Server 数据库，
 
     ![恢复选项](./media/backup-azure-backup-sharepoint/recovery-options.png)
 
-    >[AZURE.NOTE] 你可以选择限制网络带宽使用率。这可以在生产时段最大程度地降低对生产服务器的影响。
+    >[!NOTE] 你可以选择限制网络带宽使用率。这可以在生产时段最大程度地降低对生产服务器的影响。
 
 11. 复查摘要信息，然后单击“恢复”开始恢复文件。
 
@@ -198,7 +195,7 @@ DPM 以 LocalSystem 帐户的形式运行。若要备份 SQL Server 数据库，
 
     ![恢复状态](./media/backup-azure-backup-sharepoint/recovery-monitoring.png)
 
-    >[AZURE.NOTE] 文件现已还原。你可以刷新 SharePoint 站点来检查已还原的文件。
+    >[!NOTE] 文件现已还原。你可以刷新 SharePoint 站点来检查已还原的文件。
 
 ## 使用 DPM 从 Azure 还原 SharePoint 数据库
 
@@ -208,7 +205,7 @@ DPM 以 LocalSystem 帐户的形式运行。若要备份 SQL Server 数据库，
 
 2. 双击 SharePoint 恢复点以显示可用的 SharePoint 目录信息。
 
-    > [AZURE.NOTE] 由于 SharePoint 场在 Azure 中受长期保留保护，因此 DPM 服务器上没有可用的目录信息（元数据）。这样，每当需要恢复时间点 SharePoint 内容数据库时，你都需要重新编录 SharePoint 场。
+    > [!NOTE] 由于 SharePoint 场在 Azure 中受长期保留保护，因此 DPM 服务器上没有可用的目录信息（元数据）。这样，每当需要恢复时间点 SharePoint 内容数据库时，你都需要重新编录 SharePoint 场。
 
 3. 单击“重新编目”。
 

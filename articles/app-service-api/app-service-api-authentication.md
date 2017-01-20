@@ -1,27 +1,27 @@
-<properties
-	pageTitle="Azure 应用服务中 API 应用的身份验证和授权 | Azure"
-	description="了解 Azure 应用服务为 API 应用提供的身份验证和授权服务。"
-	services="app-service\api"
-	documentationCenter=".net"
-	authors="tdykstra"
-	manager="wpickett"
-	editor=""/>
+---
+title: Azure 应用服务中 API 应用的身份验证和授权 | Azure
+description: 了解 Azure 应用服务为 API 应用提供的身份验证和授权服务。
+services: app-service\api
+documentationCenter: .net
+authors: tdykstra
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="app-service-api"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="05/23/2016"
-	wacn.date="09/26/2016"
-	ms.author="rachelap"/>
+ms.service: app-service-api
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/23/2016
+wacn.date: 09/26/2016
+ms.author: rachelap
+---
 
 # Azure 应用服务中 API 应用的身份验证和授权
 
 ## 概述 
 
-> [AZURE.NOTE] 本主题将会移入 [App Service Authentication / Authorization](/documentation/articles/app-service-authentication-overview/)（应用服务身份验证/授权）合并主题，其中涉及 Web 应用、移动应用和 API 应用。
+> [!NOTE] 本主题将会移入 [App Service Authentication / Authorization](../app-service/app-service-authentication-overview.md)（应用服务身份验证/授权）合并主题，其中涉及 Web 应用、移动应用和 API 应用。
 
 Azure 应用服务提供内置的身份验证与授权服务，可实现 [OAuth 2.0](#oauth) 和 [OpenID Connect](#oauth)。本文介绍 Azure 应用服务中 API 应用可用的服务和选项。
 
@@ -52,17 +52,17 @@ Azure 应用服务提供内置的身份验证与授权服务，可实现 [OAuth 
 
 1. 只允许经过身份验证的请求进入 API 应用。
 
-	如果应用服务收到来自浏览器的匿名请求，会将其重定向到所选身份验证提供程序（Azure AD 等）的登录页。
+    如果应用服务收到来自浏览器的匿名请求，会将其重定向到所选身份验证提供程序（Azure AD 等）的登录页。
 
-	使用此选项时，不需要在应用中编写任何身份验证代码。由于 HTTP 标头中已提供最重要的声明，因此授权代码变得相当简单。
+    使用此选项时，不需要在应用中编写任何身份验证代码。由于 HTTP 标头中已提供最重要的声明，因此授权代码变得相当简单。
 
 2. 允许所有请求进入 API 应用，但会验证经过身份验证的请求，并在 HTTP 标头中传递身份验证信息。
 
-	使用此选项可以更灵活地处理匿名请求，但如果想要防止匿名用户使用 API，则必须编写代码。由于最常用的声明在 HTTP 请求的标头中传递，因此授权代码相对简单。
-	
+    使用此选项可以更灵活地处理匿名请求，但如果想要防止匿名用户使用 API，则必须编写代码。由于最常用的声明在 HTTP 请求的标头中传递，因此授权代码相对简单。
+    
 3. 允许所有请求进入 API，不处理请求中的身份验证信息。
 
-	此选项将身份验证和授权任务全部交由应用程序代码来处理。
+    此选项将身份验证和授权任务全部交由应用程序代码来处理。
 
 在 [Azure 门户预览](https://portal.azure.cn/)上的“身份验证/授权”边栏选项卡中选择所需的选项。
 
@@ -72,26 +72,26 @@ Azure 应用服务提供内置的身份验证与授权服务，可实现 [OAuth 
 
 ![](./media/app-service-api-authentication/actiontotake.png)
 
-有关如何配置身份验证的详细信息，请参阅 [How to configure your App Service application to use Azure Active Directory login](/documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）。此文章适用于 API 应用和移动应用，并链接到有关其他身份验证提供程序的其他文章。
+有关如何配置身份验证的详细信息，请参阅 [How to configure your App Service application to use Azure Active Directory login](../app-service-mobile/app-service-mobile-how-to-configure-active-directory-authentication.md)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）。此文章适用于 API 应用和移动应用，并链接到有关其他身份验证提供程序的其他文章。
  
 ## <a id="internal"></a>服务帐户身份验证
 
 应用服务身份验证适用于从某个 API 应用调用另一个 API 应用之类的内部方案。在此方案中，可以使用服务帐户凭据（而不是用户凭据）来获取令牌。在 Azure Active Directory 中，服务帐户也称为 *服务主体* ，使用此类帐户的身份验证也称为服务到服务方案。
 
-对于服务到服务方案，请使用 Azure Active Directory 保护所调用的 API 应用，并在调用 API 应用时提供 AAD 服务主体授权令牌。通过提供客户端 ID 和客户端机密，可以从 AAD 应用程序获取令牌。不需要像过去处理移动服务 Zumo 令牌时那样使用仅限 Azure 的特殊代码。[Service principal authentication for API Apps](/documentation/articles/app-service-api-dotnet-service-principal-auth/)（API 应用的服务主体身份验证）教程讲解了这种使用 ASP.NET API 应用的方案示例。
+对于服务到服务方案，请使用 Azure Active Directory 保护所调用的 API 应用，并在调用 API 应用时提供 AAD 服务主体授权令牌。通过提供客户端 ID 和客户端机密，可以从 AAD 应用程序获取令牌。不需要像过去处理移动服务 Zumo 令牌时那样使用仅限 Azure 的特殊代码。[Service principal authentication for API Apps](./app-service-api-dotnet-service-principal-auth.md)（API 应用的服务主体身份验证）教程讲解了这种使用 ASP.NET API 应用的方案示例。
 
-若要处理服务到服务方案但不使用应用服务身份验证，请使用客户端证书或基本身份验证。有关 Azure 中客户端证书的信息，请参阅 [How To Configure TLS Mutual Authentication for Web Apps](/documentation/articles/app-service-web-configure-tls-mutual-auth/)（如何为 Web 应用配置 TLS 相互身份验证）。有关 ASP.NET 中基本身份验证的信息，请参阅 [Authentication Filters in ASP.NET Web API 2](http://www.asp.net/web-api/overview/security/authentication-filters)（ASP.NET Web API 2 中的身份验证筛选器）。
+若要处理服务到服务方案但不使用应用服务身份验证，请使用客户端证书或基本身份验证。有关 Azure 中客户端证书的信息，请参阅 [How To Configure TLS Mutual Authentication for Web Apps](../app-service-web/app-service-web-configure-tls-mutual-auth.md)（如何为 Web 应用配置 TLS 相互身份验证）。有关 ASP.NET 中基本身份验证的信息，请参阅 [Authentication Filters in ASP.NET Web API 2](http://www.asp.net/web-api/overview/security/authentication-filters)（ASP.NET Web API 2 中的身份验证筛选器）。
 
 ## 移动客户端身份验证
 
-有关如何处理来自移动客户端的身份验证的信息，请参阅[有关移动应用身份验证的文档](/documentation/articles/app-service-mobile-ios-get-started-users/)。移动应用和 API 应用的应用服务身份验证运用相同的工作原理。
+有关如何处理来自移动客户端的身份验证的信息，请参阅[有关移动应用身份验证的文档](../app-service-mobile/app-service-mobile-ios-get-started-users.md)。移动应用和 API 应用的应用服务身份验证运用相同的工作原理。
   
 ## 详细信息
 
 有关 Azure 应用服务中的身份验证和授权的详细信息，请参阅以下资源：
 
 * [Expanding App Service authentication / authorization](https://azure.microsoft.com/blog/announcing-app-service-authentication-authorization/)（扩展应用服务身份验证/授权）
-* [How to configure your App Service application to use Azure Active Directory login](/documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）（页面顶部提供了其他身份验证提供程序的链接）。
+* [How to configure your App Service application to use Azure Active Directory login](../app-service-mobile/app-service-mobile-how-to-configure-active-directory-authentication.md)（如何将应用服务应用程序配置为使用 Azure Active Directory 登录）（页面顶部提供了其他身份验证提供程序的链接）。
 
 <a name="oauth"></a>
 
@@ -103,12 +103,12 @@ Azure 应用服务提供内置的身份验证与授权服务，可实现 [OAuth 
 
 有关 Azure Active Directory 的详细信息，请参阅以下资源。
 
-* [Azure AD scenarios](/documentation/articles/active-directory-authentication-scenarios/)（Azure AD 方案）
-* [Azure AD developers' guide](/documentation/articles/active-directory-developers-guide/)（Azure AD 开发人员指南）
+* [Azure AD scenarios](../active-directory/active-directory-authentication-scenarios.md)（Azure AD 方案）
+* [Azure AD developers' guide](../active-directory/active-directory-developers-guide.md)（Azure AD 开发人员指南）
 * [Azure AD 示例](https://github.com/azure-samples?query=active-directory)
 
 ## 后续步骤
 
-本文说明了可用于 API 应用的应用服务身份验证和授权功能。入门系列教程的下一篇文章说明如何[在应用服务 API 应用中实现用户身份验证](/documentation/articles/app-service-api-dotnet-user-principal-auth/)。
+本文说明了可用于 API 应用的应用服务身份验证和授权功能。入门系列教程的下一篇文章说明如何[在应用服务 API 应用中实现用户身份验证](./app-service-api-dotnet-user-principal-auth.md)。
 
 <!---HONumber=Mooncake_0919_2016-->

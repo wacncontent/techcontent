@@ -1,28 +1,26 @@
-<properties
-	pageTitle="获取工具 (macOS 10.10)"
-	description="下载并安装适用于 macOS 上 Pi 的第一个示例应用程序的必需工具和软件。"
-	services="iot-hub"
-	documentationcenter=""
-	author="shizn"
-	manager="timlt"
-	tags=""
-	keywords=""/>  
+---
+title: 获取工具 (macOS 10.10)
+description: 下载并安装适用于 macOS 上 Pi 的第一个示例应用程序的必需工具和软件。
+services: iot-hub
+documentationcenter: 
+author: shizn
+manager: timlt
+tags: 
+keywords: 
 
-
-<tags
-	ms.service="iot-hub"
-	ms.date="10/21/2016"
-	wacn.date="12/19/2016"/>  
-
+ms.service: iot-hub
+ms.date: 10/21/2016
+wacn.date: 12/19/2016
+---
 
 # 获取工具 (macOS 10.10)
-> [AZURE.SELECTOR]
-- [Windows 7 或更高版本](/documentation/articles/iot-hub-raspberry-pi-kit-node-lesson1-get-the-tools-win32/)
-- [Ubuntu 16.04](/documentation/articles/iot-hub-raspberry-pi-kit-node-lesson1-get-the-tools-ubuntu/)
-- [macOS 10.10](/documentation/articles/iot-hub-raspberry-pi-kit-node-lesson1-get-the-tools-mac/)
+> [!div class="op_single_selector"]
+- [Windows 7 或更高版本](./iot-hub-raspberry-pi-kit-node-lesson1-get-the-tools-win32.md)
+- [Ubuntu 16.04](./iot-hub-raspberry-pi-kit-node-lesson1-get-the-tools-ubuntu.md)
+- [macOS 10.10](./iot-hub-raspberry-pi-kit-node-lesson1-get-the-tools-mac.md)
 
 ## 执行的操作
-下载适用于 Raspberry Pi 3 的第一个示例应用程序的开发工具和软件。如果有问题，可在[故障排除页](/documentation/articles/iot-hub-raspberry-pi-kit-node-troubleshooting/)上查找解决方案。
+下载适用于 Raspberry Pi 3 的第一个示例应用程序的开发工具和软件。如果有问题，可在[故障排除页](./iot-hub-raspberry-pi-kit-node-troubleshooting.md)上查找解决方案。
 
 ## 你要学习的知识
 本文介绍：
@@ -52,9 +50,7 @@
 
 2. 运行以下命令，安装 Git 和 Node.js：
    
-
         brew install node git
-
 
 ## 安装其他 Node.js 开发工具
 使用 [gulp.js](http://gulpjs.com) 将示例应用程序自动部署到 Pi。使用 [device-discovery-cli](https://github.com/Azure/device-discovery-cli) 检索有关 IoT 设备的网络信息。
@@ -63,7 +59,7 @@
 
         sudo npm install -g device-discovery-cli gulp
 
-如果无法在 macOS 上安装 Node.js 和这些额外的开发工具，请参阅[故障排除指南](/documentation/articles/iot-hub-raspberry-pi-kit-node-troubleshooting/)，了解常见问题的解决方案。
+如果无法在 macOS 上安装 Node.js 和这些额外的开发工具，请参阅[故障排除指南](./iot-hub-raspberry-pi-kit-node-troubleshooting.md)，了解常见问题的解决方案。
 
 ## 安装 Visual Studio Code
 [下载](https://code.visualstudio.com/docs/setup/osx)并安装 Visual Studio Code。Visual Studio Code 是一种轻型但却功能强大的源代码编辑器，适用于 Windows、Linux 和 macOS。本教程后面需使用此编辑器编辑示例代码。
@@ -72,6 +68,6 @@
 用户已为第一个示例应用程序安装所需的开发工具和软件。下一任务是在 Pi 上创建、部署和运行示例应用程序。
 
 ## 后续步骤
-[创建和部署 blink 示例应用程序](/documentation/articles/iot-hub-raspberry-pi-kit-node-lesson1-deploy-blink-app/)
+[创建和部署 blink 示例应用程序](./iot-hub-raspberry-pi-kit-node-lesson1-deploy-blink-app.md)
 
 <!---HONumber=Mooncake_1212_2016-->

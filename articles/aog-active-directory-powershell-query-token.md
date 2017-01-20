@@ -1,17 +1,17 @@
-<properties
-                pageTitle="如何在不添加应用程序的前提下使用 PowerShell 获取 Azure Active Directory 令牌"
-                description="使用 PowerShell 在不添加应用程序的前提下获取 Azure Active Directory 令牌"
-                services="active-directory"
-                documentationCenter=""
-                authors=""
-                manager=""
-                editor=""
-                tags="PowerShell,azure AD,token"/>
+---
+title: 如何在不添加应用程序的前提下使用 PowerShell 获取 Azure Active Directory 令牌
+description: 使用 PowerShell 在不添加应用程序的前提下获取 Azure Active Directory 令牌
+services: active-directory
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: PowerShell,azure AD,token
 
-<tags
-                ms.service="active-directory-aog"
-                ms.date="12/16/2016"
-                wacn.date="12/16/2016"/>
+ms.service: active-directory-aog
+ms.date: 12/16/2016
+wacn.date: 12/16/2016
+---
 
 # 如何在不添加应用程序的前提下使用 PowerShell 获取 Azure Active Directory 令牌
 
@@ -30,57 +30,54 @@ Azure AD Graph API 通过 OData REST API 终结点提供对 Azure AD 的编程�
 
 **Powershell 代码：**  
 
-
-	function GetAuthToken
-	{
-			param
-			(
-			      [Parameter(Mandatory=$true)]
-			      $TenantName
-			)
-		
-			# Load Active Directory Authentication Library (ADAL) Assemblies
-			$adal = "${env:ProgramFiles(x86)}\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Services\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
-		
-			$adalforms = "${env:ProgramFiles(x86)}\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Services\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll"
-		
-			[System.Reflection.Assembly]::LoadFrom($adal) | Out-Null
-		
-			[System.Reflection.Assembly]::LoadFrom($adalforms) | Out-Null
-		
-			# Set well-known client ID for Azure PowerShell
-			$clientId = "1950a258-227b-4e31-a9cf-717495945fc2" 
-		
-			# Set redirect URI for Azure PowerShell
-			$redirectUri = "urn:ietf:wg:oauth:2.0:oob"
-		
-			# Set Resource URI to Azure Active Directory Graph API
-			$resourceAppIdURI = "https://graph.chinacloudapi.cn"
-		
-			# Set Authority to Azure AD Tenant
-			$authority = "https://login.chinacloudapi.cn/$TenantName"
-		
-			# Create AuthenticationContext tied to Azure AD Tenant
-			$authContext = New-Object "Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext" -ArgumentList $authority
-		
-			# Acquire token
-			$authResult = $authContext.AcquireToken($resourceAppIdURI, $clientId,$redirectUri, "Auto")
-		
-			return $authResult
-	}
-
+    function GetAuthToken
+    {
+            param
+            (
+                  [Parameter(Mandatory=$true)]
+                  $TenantName
+            )
+        
+            # Load Active Directory Authentication Library (ADAL) Assemblies
+            $adal = "${env:ProgramFiles(x86)}\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Services\Microsoft.IdentityModel.Clients.ActiveDirectory.dll"
+        
+            $adalforms = "${env:ProgramFiles(x86)}\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Services\Microsoft.IdentityModel.Clients.ActiveDirectory.WindowsForms.dll"
+        
+            [System.Reflection.Assembly]::LoadFrom($adal) | Out-Null
+        
+            [System.Reflection.Assembly]::LoadFrom($adalforms) | Out-Null
+        
+            # Set well-known client ID for Azure PowerShell
+            $clientId = "1950a258-227b-4e31-a9cf-717495945fc2" 
+        
+            # Set redirect URI for Azure PowerShell
+            $redirectUri = "urn:ietf:wg:oauth:2.0:oob"
+        
+            # Set Resource URI to Azure Active Directory Graph API
+            $resourceAppIdURI = "https://graph.chinacloudapi.cn"
+        
+            # Set Authority to Azure AD Tenant
+            $authority = "https://login.chinacloudapi.cn/$TenantName"
+        
+            # Create AuthenticationContext tied to Azure AD Tenant
+            $authContext = New-Object "Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext" -ArgumentList $authority
+        
+            # Acquire token
+            $authResult = $authContext.AcquireToken($resourceAppIdURI, $clientId,$redirectUri, "Auto")
+        
+            return $authResult
+    }
 
 通过以下方式调用上述脚本中的方法：
 
-	$token = GetAuthToken -TenantName "<your Azure AD tenant>.partner.onmschina.cn"
+    $token = GetAuthToken -TenantName "<your Azure AD tenant>.partner.onmschina.cn"
 
 例如：
 
-	$token = GetAuthToken -TenantName "xuhuadd.partner.onmschina.cn"  
-	$token 
+    $token = GetAuthToken -TenantName "xuhuadd.partner.onmschina.cn"  
+    $token 
 
 **结果截图：**  
 
 ![result](./media/aog-active-directory-powershell-query-token/result.png)
-
 

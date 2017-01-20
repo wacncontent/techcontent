@@ -1,20 +1,21 @@
-<properties
- pageTitle="Azure 计划程序中的计划和计费方式"
- description="Azure 计划程序中的计划和计费方式"
- services="scheduler"
- documentationCenter=".NET"
- authors="krisragh"
- manager="dwrede"
- editor=""/>
-<tags
- ms.service="scheduler"
- ms.workload="infrastructure-services"
- ms.tgt_pltfrm="na"
- ms.devlang="dotnet"
- ms.topic="article"
- ms.date="08/18/2016"
- wacn.date="01/04/2017"
- ms.author="krisragh"/>
+---
+title: Azure 计划程序中的计划和计费方式
+description: Azure 计划程序中的计划和计费方式
+services: scheduler
+documentationCenter: .NET
+authors: krisragh
+manager: dwrede
+editor: 
+
+ms.service: scheduler
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 08/18/2016
+wacn.date: 01/04/2017
+ms.author: krisragh
+---
 
 # Azure 计划程序中的计划和计费方式
 
@@ -24,7 +25,7 @@
 
 |**作业集合计划**|**每个作业集合的作业数上限**|**最大重复次数**|**每个订阅的最大作业集合数**|**限制**|
 |:---|:---|:---|:---|:---|
-|**免费**|每个作业集合 5 个作业|每小时一次。执行作业的频率不能超过每小时一次|一个订阅最多允许 1 个免费作业集合|无法使用 [HTTP 出站授权对象](/documentation/articles/scheduler-outbound-authentication/)
+|**免费**|每个作业集合 5 个作业|每小时一次。执行作业的频率不能超过每小时一次|一个订阅最多允许 1 个免费作业集合|无法使用 [HTTP 出站授权对象](./scheduler-outbound-authentication.md)
 |**标准**|每个作业集合 50 个作业|每分钟一次。执行作业的频率不能超过每分钟一次|一个订阅最多允许 100 个标准作业集合|访问计划程序的完整功能集|
 |**P10 高级**|每个作业集合 50 个作业|每分钟一次。执行作业的频率不能超过每分钟一次|一个订阅最多允许 10,000 个 P10 高级作业集合。|访问计划程序的完整功能集|
 |**P20 高级**|每个作业集合 1,000 个作业|每分钟一次。执行作业的频率不能超过每分钟一次|一个订阅最多允许 10,000 个 P20 高级作业集合。|访问计划程序的完整功能集|
@@ -36,7 +37,7 @@
 - 订阅中已存在免费作业集合
 - 作业集合中某个作业的重复周期高于免费作业集合中作业允许的重复周期。免费作业集合允许的最大重复周期为每小时一次
 - 作业集合中有 5 个以上的作业
-- 作业集合中某个作业的 HTTP 或 HTTPS 操作使用了 [HTTP 出站授权对象](/documentation/articles/scheduler-outbound-authentication/)
+- 作业集合中某个作业的 HTTP 或 HTTPS 操作使用了 [HTTP 出站授权对象](./scheduler-outbound-authentication.md)
 
 ## 计费和 Azure 计划
 
@@ -72,29 +73,24 @@ P20 高级作业集合提供的功能与 P10 高级作业集合相同，但每�
 
 ## 定价
 
-有关定价详细信息，请参阅[计划程序定价](/pricing/details/scheduler/)。
+有关定价详细信息，请参阅[计划程序定价](https://www.azure.cn/pricing/details/scheduler/)。
 
 ## 另请参阅
 
+ [计划程序是什么？](./scheduler-intro.md)
 
- [计划程序是什么？](/documentation/articles/scheduler-intro/)
+ [Azure 计划程序的概念、术语和实体层次结构](./scheduler-concepts-terms.md)
 
- [Azure 计划程序的概念、术语和实体层次结构](/documentation/articles/scheduler-concepts-terms/)
-
- [开始在管理门户中使用计划程序](/documentation/articles/scheduler-get-started-portal/)
+ [开始在管理门户中使用计划程序](./scheduler-get-started-portal.md)
 
  [Azure 计划程序 REST API 参考](https://msdn.microsoft.com/zh-cn/library/mt629143)
 
- [Azure 计划程序 PowerShell Cmdlet 参考](/documentation/articles/scheduler-powershell-reference/)
+ [Azure 计划程序 PowerShell Cmdlet 参考](./scheduler-powershell-reference.md)
 
- [Azure 计划程序的高可用性和可靠性](/documentation/articles/scheduler-high-availability-reliability/)
+ [Azure 计划程序的高可用性和可靠性](./scheduler-high-availability-reliability.md)
 
- [Azure 计划程序的限制、默认值和错误代码](/documentation/articles/scheduler-limits-defaults-errors/)
+ [Azure 计划程序的限制、默认值和错误代码](./scheduler-limits-defaults-errors.md)
 
- [Azure 计划程序出站身份验证](/documentation/articles/scheduler-outbound-authentication/)
+ [Azure 计划程序出站身份验证](./scheduler-outbound-authentication.md)
  
-  
-
-  
-
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

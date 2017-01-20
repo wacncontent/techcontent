@@ -1,24 +1,25 @@
-<properties
-	pageTitle="缓存 ASP.NET 会话状态提供程序 | Azure"
-	description="了解如何使用 Azure Redis 缓存存储 ASP.NET 会话状态"
-	services="redis-cache"
-	documentationCenter="na"
-	authors="steved0x"
-	manager="douge"
-	editor="tysonn" />
-<tags
-	ms.service="cache"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="cache-redis"
-	ms.workload="tbd"
-	ms.date="09/01/2016"
-	wacn.date="01/09/2017"
-	ms.author="sdanie" />
+---
+title: 缓存 ASP.NET 会话状态提供程序 | Azure
+description: 了解如何使用 Azure Redis 缓存存储 ASP.NET 会话状态
+services: redis-cache
+documentationCenter: na
+authors: steved0x
+manager: douge
+editor: tysonn
+
+ms.service: cache
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: cache-redis
+ms.workload: tbd
+ms.date: 09/01/2016
+wacn.date: 01/09/2017
+ms.author: sdanie
+---
 
 # Azure Redis 缓存的 ASP.NET 会话状态提供程序
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 Azure Redis Cache 提供一个会话状态提供程序，可用于在缓存而不是内存或 SQL Server 数据库中存储您的会话状态。若要使用缓存会话状态提供程序，首先配置你的缓存，然后使用 Redis 缓存会话状态 NuGet 包为缓存配置 ASP.NET 应用程序。
 
@@ -32,44 +33,43 @@ Azure Redis Cache 提供一个会话状态提供程序，可用于在缓存而�
 
 在搜索文本框中键入 **RedisSessionStateProvider**，从结果中选择它，然后单击“安装”。
 
->[AZURE.IMPORTANT] 如果你使用高级层的聚类分析功能，则必须使用 [RedisSessionStateProvider](https://www.nuget.org/packages/Microsoft.Web.RedisSessionStateProvider) 2.0.1 或更高版本，否则会引发异常。这是一项重大更改；有关详细信息，请参阅 [2\.0.0 版重大更改详细信息](https://github.com/Azure/aspnet-redis-providers/wiki/v2.0.0-Breaking-Change-Details)。
+>[!IMPORTANT] 如果你使用高级层的聚类分析功能，则必须使用 [RedisSessionStateProvider](https://www.nuget.org/packages/Microsoft.Web.RedisSessionStateProvider) 2.0.1 或更高版本，否则会引发异常。这是一项重大更改；有关详细信息，请参阅 [2\.0.0 版重大更改详细信息](https://github.com/Azure/aspnet-redis-providers/wiki/v2.0.0-Breaking-Change-Details)。
 
 ![Azure Redis 缓存会话状态提供程序](./media/cache-aspnet-session-state-provider/redis-cache-session-state-provider.png)  
 
-
-Redis 会话状态提供程序 NuGet 包依赖于 StackExchange.Redis.StrongName 包。如果你的项目中没有 StackExchange.Redis.StrongName 包，则将会安装它。请注意，除了强命名的 StackExchange.Redis.StrongName 包外，还有 StackExchange.Redis 非强命名版本。如果你的项目使用的是非强命名 StackExchange.Redis 版本，则必须在安装 Redis 会话状态提供程序 NuGet 包之前或之后将其卸载，否则你的项目中将出现命名冲突。有关这些包的详细信息，请参阅[配置 .NET 缓存客户端](/documentation/articles/cache-dotnet-how-to-use-azure-redis-cache/#configure-the-cache-clients)。
+Redis 会话状态提供程序 NuGet 包依赖于 StackExchange.Redis.StrongName 包。如果你的项目中没有 StackExchange.Redis.StrongName 包，则将会安装它。请注意，除了强命名的 StackExchange.Redis.StrongName 包外，还有 StackExchange.Redis 非强命名版本。如果你的项目使用的是非强命名 StackExchange.Redis 版本，则必须在安装 Redis 会话状态提供程序 NuGet 包之前或之后将其卸载，否则你的项目中将出现命名冲突。有关这些包的详细信息，请参阅[配置 .NET 缓存客户端](./cache-dotnet-how-to-use-azure-redis-cache.md#configure-the-cache-clients)。
 
 NuGet 程序包会下载并添加所需的程序集引用，并将以下部分添加到您的 web.config 文件，包含 ASP.NET 应用程序所需的配置，以使用 Redis Cache 会话状态提供程序。
 
     <sessionState mode="Custom" customProvider="MySessionStateStore">
         <providers>
         <!--
-		<add name="MySessionStateStore"
-     	  	host = "127.0.0.1" [String]
-    		port = "" [number]
-    		accessKey = "" [String]
-    		ssl = "false" [true|false]
-    		throwOnError = "true" [true|false]
-    		retryTimeoutInMilliseconds = "0" [number]
-    		databaseId = "0" [number]
-    		applicationName = "" [String]
-    		connectionTimeoutInMilliseconds = "5000" [number]
-    		operationTimeoutInMilliseconds = "5000" [number]
-		/>
+        <add name="MySessionStateStore"
+               host = "127.0.0.1" [String]
+            port = "" [number]
+            accessKey = "" [String]
+            ssl = "false" [true|false]
+            throwOnError = "true" [true|false]
+            retryTimeoutInMilliseconds = "0" [number]
+            databaseId = "0" [number]
+            applicationName = "" [String]
+            connectionTimeoutInMilliseconds = "5000" [number]
+            operationTimeoutInMilliseconds = "5000" [number]
+        />
         -->
-		<add name="MySessionStateStore" type="Microsoft.Web.Redis.RedisSessionStateProvider" host="127.0.0.1" accessKey="" ssl="false"/>
+        <add name="MySessionStateStore" type="Microsoft.Web.Redis.RedisSessionStateProvider" host="127.0.0.1" accessKey="" ssl="false"/>
         </providers>
     </sessionState>
 
 注释部分提供了属性及每个属性的示例设置的一个示例。
 
-使用来自 Azure 门户预览中的缓存边栏选项卡的值配置属性，并根据需要配置其他值。有关访问缓存属性的说明，请参阅[配置 Redis 缓存设置](/documentation/articles/cache-configure/#configure-redis-cache-settings)。
+使用来自 Azure 门户预览中的缓存边栏选项卡的值配置属性，并根据需要配置其他值。有关访问缓存属性的说明，请参阅[配置 Redis 缓存设置](./cache-configure.md#configure-redis-cache-settings)。
 
 -	**host** - 指定缓存终结点。
 -	**port** - 使用非 SSL 端口或 SSL 端口，具体取决于 SSL 设置。
 -	**accessKey** - 使用缓存的主密钥或辅助密钥。
 -	**ssl** - 如果要使用 SSL 保护缓存/客户端通信，则为 true；否则为 false。请务必指定正确的端口。
-	-	默认情况下，将为新缓存禁用非 SSL 端口。为此设置指定 true 可使用 SSL 端口。有关启用非 SSL 端口的详细信息，请参阅[配置缓存](/documentation/articles/cache-configure/)主题中的[访问端口](/documentation/articles/cache-configure/#access-ports)部分。
+    -	默认情况下，将为新缓存禁用非 SSL 端口。为此设置指定 true 可使用 SSL 端口。有关启用非 SSL 端口的详细信息，请参阅[配置缓存](./cache-configure.md)主题中的[访问端口](./cache-configure.md#access-ports)部分。
 -	**throwOnError** - 如果你想要在失败时引发异常，则为 true；如果你想要操作以静默方式失败，则为 false。可以通过检查静态 Microsoft.Web.Redis.RedisSessionStateProvider.LastException 属性来检查失败。默认值为 true。
 -	**retryTimeoutInMilliseconds** - 将在此时间间隔内重试失败的操作，以毫秒为单位指定。首次重试在 20 毫秒后进行，然后重试每隔一秒进行，直到 retryTimeoutInMilliseconds 间隔到期。在此时间间隔过后，将立即重试操作最后一次。如果操作仍失败，则会将异常返回给调用方，具体取决于 throwOnError 设置。默认值为 0，这意味着不重试。
 -	**databaseId** - 指定要用于缓存输出数据的数据库。如果未指定，则使用默认值 0。
@@ -94,7 +94,7 @@ NuGet 程序包会下载并添加所需的程序集引用，并将以下部分�
 
 执行这些步骤后，你的应用程序已配置为使用 Redis 缓存会话状态提供程序。在应用程序中使用会话状态时，会话状态将存储在 Azure Redis 缓存实例中。
 
->[AZURE.NOTE] 请注意，与可以存储在默认的内存中 ASP.NET 会话状态提供程序中的数据不同，在缓存中存储的数据必须可序列化。使用适用于 Redis 的会话状态提供程序时，请确保在会话状态中存储的数据类型可序列化。
+>[!NOTE] 请注意，与可以存储在默认的内存中 ASP.NET 会话状态提供程序中的数据不同，在缓存中存储的数据必须可序列化。使用适用于 Redis 的会话状态提供程序时，请确保在会话状态中存储的数据类型可序列化。
 
 ## <a name="aspnet-session-state-options"></a> ASP.NET 会话状态选项
 
@@ -108,6 +108,6 @@ NuGet 程序包会下载并添加所需的程序集引用，并将以下部分�
 
 ## 后续步骤
 
-了解 [Azure Redis 缓存的 ASP.NET 输出缓存提供程序](/documentation/articles/cache-aspnet-output-cache-provider/)。
+了解 [Azure Redis 缓存的 ASP.NET 输出缓存提供程序](./cache-aspnet-output-cache-provider.md)。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

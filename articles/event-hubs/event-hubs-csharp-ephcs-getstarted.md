@@ -1,27 +1,25 @@
-<properties
-	pageTitle="通过 C# 使用事件中心入门 | Azure"
-	description="遵循本教程开始使用以 C# 编写的 Azure 事件中心和 EventProcessorHost。"
-	services="event-hubs"
-	documentationCenter=""
-	authors="jtaubensee"
-	manager="timlt"
-	editor=""/>  
+---
+title: 通过 C# 使用事件中心入门 | Azure
+description: 遵循本教程开始使用以 C# 编写的 Azure 事件中心和 EventProcessorHost。
+services: event-hubs
+documentationCenter: 
+authors: jtaubensee
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="event-hubs"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="hero-article"
-	ms.date="09/02/2016"
-	wacn.date="01/04/2017"
-	ms.author="jotaub;sethm"/>  
-
+ms.service: event-hubs
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: hero-article
+ms.date: 09/02/2016
+wacn.date: 01/04/2017
+ms.author: jotaub;sethm
+---
 
 # 事件中心入门
 
-[AZURE.INCLUDE [service-bus-selector-get-started](../../includes/service-bus-selector-get-started.md)]
+[!INCLUDE [service-bus-selector-get-started](../../includes/service-bus-selector-get-started.md)]
 
 ## 介绍
 
@@ -33,13 +31,13 @@
 
 + [Microsoft Visual Studio](http://visualstudio.com)
 
-+ 有效的 Azure 帐户。如果没有帐户，只需几分钟时间就可以创建一个帐户。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/)。
++ 有效的 Azure 帐户。如果没有帐户，只需几分钟时间就可以创建一个帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
-[AZURE.INCLUDE [event-hubs-create-event-hub](../../includes/event-hubs-create-event-hub.md)]
+[!INCLUDE [event-hubs-create-event-hub](../../includes/event-hubs-create-event-hub.md)]
 
-[AZURE.INCLUDE [service-bus-event-hubs-get-started-send-csharp](../../includes/service-bus-event-hubs-get-started-send-csharp.md)]
+[!INCLUDE [service-bus-event-hubs-get-started-send-csharp](../../includes/service-bus-event-hubs-get-started-send-csharp.md)]
 
-[AZURE.INCLUDE [service-bus-event-hubs-get-started-receive-ephcs](../../includes/service-bus-event-hubs-get-started-receive-ephcs.md)]
+[!INCLUDE [service-bus-event-hubs-get-started-receive-ephcs](../../includes/service-bus-event-hubs-get-started-receive-ephcs.md)]
 
 ## 运行应用程序
 
@@ -55,25 +53,21 @@
 
 5. 单击“启动项目”，然后单击“多个启动项目”按钮。将“Receiver”和“Sender”项目的“操作”框设置为“启动”。
 
-	![][19]  
-
+    ![][19]  
 
 6. 单击“项目依赖项”。在“项目”框中，单击“Sender”。在“依赖于”框中，确保选中“Receiver”。
 
-	![][20]  
-
+    ![][20]  
 
 7. 单击“确定”，关闭“属性”对话框。
 
 1.	从 Visual Studio 中，按 F5 运行“Receiver”项目，然后等待它为所有分区启动接收方。
 
-	![][21]  
-
+    ![][21]  
 
 2.	“Sender”项目将自动运行。在控制台窗口中按“Enter”，便会看到事件出现在接收方窗口中。
 
-	![][22]  
-
+    ![][22]  
 
 在“Sender”窗口中按“Ctrl+C”结束 Sender 应用程序，然后在“Receiver”窗口中按“Enter”关闭该应用程序。
 
@@ -95,10 +89,9 @@
 
 [Azure Classic Portal]: https://manage.windowsazure.cn/
 [事件处理程序主机]: https://www.nuget.org/packages/Microsoft.Azure.ServiceBus.EventProcessorHost
-[事件中心概述]: /documentation/articles/event-hubs-overview/
+[事件中心概述]: ./event-hubs-overview.md
 [使用事件中心的完整示例应用程序]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-286fd097
 [使用事件中心扩大事件处理]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-45f43fc3
-[queued messaging solution]: /documentation/articles/service-bus-dotnet-multi-tier-app-using-service-bus-queues/
+[queued messaging solution]: ../service-bus-messaging/service-bus-dotnet-multi-tier-app-using-service-bus-queues.md
  
-
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

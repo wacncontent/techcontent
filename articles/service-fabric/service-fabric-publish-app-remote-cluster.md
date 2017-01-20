@@ -1,26 +1,25 @@
-<properties
-    pageTitle="使用 Visual Studio 将应用发布到远程群集 | Azure"
-    description="了解如何使用 Visual Studio 将应用程序发布到远程 Service Fabric 群集。"
-    services="service-fabric"
-    documentationCenter="na"
-    authors="cawams"
-    manager="timlt"
-    editor="" />
+---
+title: 使用 Visual Studio 将应用发布到远程群集 | Azure
+description: 了解如何使用 Visual Studio 将应用程序发布到远程 Service Fabric 群集。
+services: service-fabric
+documentationCenter: na
+authors: cawams
+manager: timlt
+editor: 
 
-<tags
-    ms.service="multiple"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="multiple"
-    ms.date="07/29/2016"
-    wacn.date="01/17/2017"
-    ms.author="cawa" />
-
+ms.service: multiple
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: multiple
+ms.date: 07/29/2016
+wacn.date: 01/17/2017
+ms.author: cawa
+---
 
 # 使用 Visual Studio 将应用程序发布到远程群集
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 适用于 Visual Studio 的 Azure Service Fabric 扩展提供简单、可重复且可编写脚本的方式，用于将应用程序发布到 Service Fabric 群集。
 
@@ -42,9 +41,9 @@ Service Fabric 应用程序项目中名为 PublishProfiles 的文件夹包含 XM
 
 ### 应用程序参数文件
 
-的 Service Fabric 应用程序项目中名为 ApplicationParameters 的文件夹包含用户指定的应用程序清单参数值 XML 文件。应用程序清单文件可以参数化，以便可以针对部署设置使用不同的值。若要了解有关参数化应用程序的详细信息，请参阅[在 Service Fabric 中管理多个环境](/documentation/articles/service-fabric-manage-multiple-environment-app-configuration/)。
+的 Service Fabric 应用程序项目中名为 ApplicationParameters 的文件夹包含用户指定的应用程序清单参数值 XML 文件。应用程序清单文件可以参数化，以便可以针对部署设置使用不同的值。若要了解有关参数化应用程序的详细信息，请参阅[在 Service Fabric 中管理多个环境](./service-fabric-manage-multiple-environment-app-configuration.md)。
 
->[AZURE.NOTE] 对于执行组件服务，应该先构建项目，然后尝试使用编辑器或通过“发布”对话框编辑文件。这是因为在构建期间将生成一部分清单文件。
+>[!NOTE] 对于执行组件服务，应该先构建项目，然后尝试使用编辑器或通过“发布”对话框编辑文件。这是因为在构建期间将生成一部分清单文件。
 
 ## 使用“发布 Service Fabric 应用程序”对话框发布应用程序
 
@@ -62,23 +61,23 @@ Service Fabric 应用程序项目中名为 PublishProfiles 的文件夹包含 XM
 
     ![“选择 Service Fabric 群集”对话框][1]
 
-    >[AZURE.NOTE] 如果你要发布到任意终结点（例如合作群集），请参阅下面的“发布到任意群集终结点”部分。
+    >[!NOTE] 如果你要发布到任意终结点（例如合作群集），请参阅下面的“发布到任意群集终结点”部分。
 
-    在你选择终结点后，Visual Studio 将验证与所选 Service Fabric 群集的连接。如果群集未受到保护，Visual Studio 可以立即与其连接。但是，如果群集受保护，则你需要在本地计算机上安装证书才能继续。有关详细信息，请参阅[如何配置安全连接](/documentation/articles/service-fabric-visualstudio-configure-secure-connections/)。完成后，选择“确定”按钮。选定的群集将出现在“发布 Service Fabric 应用程序”对话框中。
+    在你选择终结点后，Visual Studio 将验证与所选 Service Fabric 群集的连接。如果群集未受到保护，Visual Studio 可以立即与其连接。但是，如果群集受保护，则你需要在本地计算机上安装证书才能继续。有关详细信息，请参阅[如何配置安全连接](./service-fabric-visualstudio-configure-secure-connections.md)。完成后，选择“确定”按钮。选定的群集将出现在“发布 Service Fabric 应用程序”对话框中。
 
 3. 在“应用程序参数文件”下拉列表框中，导航到应用程序参数文件。应用程序参数文件保留应用程序清单文件中参数的用户指定值。若要添加或更改参数，请选择“编辑”按钮。在“参数”网格中输入或更改参数值。完成后，请选择“保存”按钮。
 
     ![“编辑参数”对话框][2]
 
-4. 使用“升级应用程序”复选框指定此发布操作是否为升级。升级发布操作不同于一般发布操作。有关差异列表的信息，请参阅 [Service Fabric 应用程序升级](/documentation/articles/service-fabric-application-upgrade/)。若要配置升级设置，请选择“配置升级设置”链接。升级参数编辑器随即会出现。若要了解有关升级参数的详细信息，请参阅[配置 Service Fabric 应用程序的升级](/documentation/articles/service-fabric-visualstudio-configure-upgrade/)。
+4. 使用“升级应用程序”复选框指定此发布操作是否为升级。升级发布操作不同于一般发布操作。有关差异列表的信息，请参阅 [Service Fabric 应用程序升级](./service-fabric-application-upgrade.md)。若要配置升级设置，请选择“配置升级设置”链接。升级参数编辑器随即会出现。若要了解有关升级参数的详细信息，请参阅[配置 Service Fabric 应用程序的升级](./service-fabric-visualstudio-configure-upgrade.md)。
 
-5. 选择“清单版本...”按钮以查看“编辑版本”对话框。需要更新应用程序和服务版本才能进行升级。请参阅 [Service Fabric 应用程序升级教程](/documentation/articles/service-fabric-application-upgrade-tutorial/)，以了解应用程序和服务清单版本如何影响升级过程。
+5. 选择“清单版本...”按钮以查看“编辑版本”对话框。需要更新应用程序和服务版本才能进行升级。请参阅 [Service Fabric 应用程序升级教程](./service-fabric-application-upgrade-tutorial.md)，以了解应用程序和服务清单版本如何影响升级过程。
 
     ![“编辑版本”对话框][3]
 
     如果应用程序和服务版本使用 1.0.0 等语义版本设置，或格式为 1.0.0.0 的数字值，请选择“自动更新应用程序和服务版本”选项。如果你选择此选项，则每当代码、配置或数据包版本更新时，服务和应用程序版本号将自动更新。如果你想要以手动方式编辑版本，请清除该复选框以禁用此功能。
 
-    >[AZURE.NOTE] 对于执行组件项目的所有包条目，请先构建项目以便在服务清单文件中生成这些条目。
+    >[!NOTE] 对于执行组件项目的所有包条目，请先构建项目以便在服务清单文件中生成这些条目。
 
 6. 指定完所有必要的设置后，选择“发布”按钮以将应用程序发布到选定的 Service Fabric 群集。指定的设置将应用到发布过程。
 
@@ -88,11 +87,9 @@ Visual Studio 发布体验已针对发布到远程群集（与某个 Azure 订�
 
 如果要连接到未受保护的群集，只需提供群集连接终结点，例如 `partycluster1.chinaeast.chinacloudapp.cn:19000`。在此情况下，发布配置文件中的连接终结点看起来类似于：
 
+    <ClusterConnectionParameters ConnectionEndpoint="partycluster1.chinaeast.chinacloudapp.cn:19000" />
 
-	<ClusterConnectionParameters ConnectionEndpoint="partycluster1.chinaeast.chinacloudapp.cn:19000" />
-
-
-  如果要连接到受保护的群集，则还需要提供本地存储中用于身份验证的客户端证书的详细信息。有关详细信息，请参阅[配置与 Service Fabric 群集的安全连接](/documentation/articles/service-fabric-visualstudio-configure-secure-connections/)。
+  如果要连接到受保护的群集，则还需要提供本地存储中用于身份验证的客户端证书的详细信息。有关详细信息，请参阅[配置与 Service Fabric 群集的安全连接](./service-fabric-visualstudio-configure-secure-connections.md)。
 
   设置发布配置文件后，可以在发布对话框中引用它，如下所示。
 
@@ -102,8 +99,7 @@ Visual Studio 发布体验已针对发布到远程群集（与某个 Azure 订�
 
 ## 后续步骤
 
-若要了解如何在持续集成环境中自动化发布过程，请参阅[设置 Service Fabric 持续集成](/documentation/articles/service-fabric-set-up-continuous-integration/)。
-
+若要了解如何在持续集成环境中自动化发布过程，请参阅[设置 Service Fabric 持续集成](./service-fabric-set-up-continuous-integration.md)。
 
 [0]: ./media/service-fabric-publish-app-remote-cluster/PublishDialog.png
 [1]: ./media/service-fabric-publish-app-remote-cluster/SelectCluster.png

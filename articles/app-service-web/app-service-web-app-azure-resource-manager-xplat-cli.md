@@ -1,39 +1,38 @@
-<properties
-    pageTitle="适用于 Azure Web 应用的基于 Azure Resource Manager 的跨平台命令行工具 | Azure"
-    description="了解如何使用新的基于 Azure Resource Manager 的跨平台命令行工具来管理 Azure Web 应用。"
-    services="app-service\web"
-    documentationcenter=""
-    author="ahmedelnably"
-    manager="stefsch"
-    editor="" />  
+---
+title: 适用于 Azure Web 应用的基于 Azure Resource Manager 的跨平台命令行工具 | Azure
+description: 了解如何使用新的基于 Azure Resource Manager 的跨平台命令行工具来管理 Azure Web 应用。
+services: app-service\web
+documentationcenter: 
+author: ahmedelnably
+manager: stefsch
+editor: 
 
-<tags
-    ms.assetid="d415b195-4262-416f-b59f-7e1aef200054"
-    ms.service="app-service-web"
-    ms.workload="web"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="09/29/2016"
-    wacn.date="01/03/2017"
-    ms.author="aelnably" />  
-
+ms.assetid: d415b195-4262-416f-b59f-7e1aef200054
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/29/2016
+wacn.date: 01/03/2017
+ms.author: aelnably
+---
 
 # 使用用于 Azure App Service 的基于 Azure Resource Manager 的 XPlat CLI
-> [AZURE.SELECTOR]
-- [Azure CLI](/documentation/articles/app-service-web-app-azure-resource-manager-xplat-cli/)
-- [Azure PowerShell](/documentation/articles/app-service-web-app-azure-resource-manager-powershell/)
+> [!div class="op_single_selector"]
+- [Azure CLI](./app-service-web-app-azure-resource-manager-xplat-cli.md)
+- [Azure PowerShell](./app-service-web-app-azure-resource-manager-powershell.md)
 
 在发布的 Azure 跨平台命令行工具版本 0.10.5 中，添加了新的命令。这些命令使用户能够使用基于 Azure Resource Manager 的 PowerShell 命令来管理应用服务。
 
-若要了解管理资源组的相关信息，请参阅[使用 Azure CLI 管理 Azure 资源和资源组](/documentation/articles/xplat-cli-azure-resource-manager/)。
+若要了解管理资源组的相关信息，请参阅[使用 Azure CLI 管理 Azure 资源和资源组](../azure-resource-manager/xplat-cli-azure-resource-manager.md)。
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 还可试用 [Azure CLI 2.0（预览版）](https://github.com/Azure/azure-cli)，它是使用 Python 为资源管理部署模型编写的下一代 CLI。
 >
 >
 
-[AZURE.INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
+[!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
 ## 管理 App Service 计划
 ### 创建 App Service 计划
@@ -76,7 +75,6 @@
 若要更改现有应用服务计划的 SKU，请使用：
 
     azure appserviceplan config --name ContosoAppServicePlan --resource-group ContosoAzureResourceGroup --sku S1
-
 
 ### 删除现有的 App Service 计划
 若要删除现有的应用服务计划，请先移动或删除所有已分配的应用。然后使用 **azure webapp delete** 命令删除应用服务计划。
@@ -172,7 +170,7 @@
     azure webapp config hostnames delete --name ContosoWebApp --resource-group ContosoAzureResourceGroup --hostname www.contoso.com
 
 ## 后续步骤
-* 若要了解 Azure Resource Manager CLI 支持的相关信息，请参阅[使用 Azure CLI 管理 Azure 资源和资源组](/documentation/articles/xplat-cli-azure-resource-manager/)。
-* 若要了解使用 PowerShell 管理应用服务的相关信息，请参阅[使用基于 Azure Resource Manager 的 PowerShell 来管理 Azure Web 应用](/documentation/articles/app-service-web-app-azure-resource-manager-powershell/)。
+* 若要了解 Azure Resource Manager CLI 支持的相关信息，请参阅[使用 Azure CLI 管理 Azure 资源和资源组](../azure-resource-manager/xplat-cli-azure-resource-manager.md)。
+* 若要了解使用 PowerShell 管理应用服务的相关信息，请参阅[使用基于 Azure Resource Manager 的 PowerShell 来管理 Azure Web 应用](./app-service-web-app-azure-resource-manager-powershell.md)。
 
 <!---HONumber=Mooncake_1226_2016-->

@@ -1,28 +1,28 @@
-<properties
-    pageTitle="在 Azure App Service Web 应用中配置 PHP | Azure"
-    description="了解如何在 Azure App Service 中为 Web Apps 配置默认 PHP 安装或添加自定义 PHP 安装。"
-    services="app-service"
-    documentationcenter="php"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />  
+---
+title: 在 Azure App Service Web 应用中配置 PHP | Azure
+description: 了解如何在 Azure App Service 中为 Web Apps 配置默认 PHP 安装或添加自定义 PHP 安装。
+services: app-service
+documentationcenter: php
+author: rmcmurray
+manager: erikre
+editor: 
 
-<tags
-    ms.assetid="95c4072b-8570-496b-9c48-ee21a223fb60"
-    ms.service="app-service"
-    ms.workload="web"
-    ms.tgt_pltfrm="na"
-    ms.devlang="PHP"
-    ms.topic="article"
-    ms.date="12/16/2016"
-    wacn.date="01/03/2017"
-    ms.author="robmcm" />
+ms.assetid: 95c4072b-8570-496b-9c48-ee21a223fb60
+ms.service: app-service
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: PHP
+ms.topic: article
+ms.date: 12/16/2016
+wacn.date: 01/03/2017
+ms.author: robmcm
+---
 
 # 在 Azure App Service Web Apps 中配置 PHP
 ## <a name="WhatIs"></a>介绍
-本指南将演示如何执行以下操作：在 [Azure App Service](/documentation/articles/app-service-changes-existing-services/) 中配置 Web 应用的内置 PHP 运行时，提供自定义 PHP 运行时，以及启用扩展。若要使用应用服务，请注册[试用版]。若要充分利用本指南，你应先在应用服务中创建一个 PHP Web 应用。
+本指南将演示如何执行以下操作：在 [Azure App Service](./app-service-changes-existing-services.md) 中配置 Web 应用的内置 PHP 运行时，提供自定义 PHP 运行时，以及启用扩展。若要使用应用服务，请注册[试用版]。若要充分利用本指南，你应先在应用服务中创建一个 PHP Web 应用。
 
-[AZURE.INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
+[!INCLUDE [app-service-web-to-api-and-mobile](../../includes/app-service-web-to-api-and-mobile.md)]
 
 ## <a name="ChangeBuiltInPHP"></a>如何：更改内置 PHP 版本
 默认情况下，安装 PHP 5.4 后，创建应用服务 Web 应用时立即可以使用。查看可用发行版、其默认配置以及已启用扩展的最佳方式是部署调用 [phpinfo()] 函数的脚本。
@@ -66,7 +66,7 @@ PHP 5.5 和 PHP 5.6 也可用，但它们在默认情况下不启用。若要更
    
         azure site show {app-name}
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 等效于上述设置的[Azure CLI 2.0（预览版）](https://github.com/Azure/azure-cli)命令为：
 >
 >
@@ -75,7 +75,7 @@ PHP 5.5 和 PHP 5.6 也可用，但它们在默认情况下不启用。若要更
     az appservice web config update --php-version {5.5 | 5.6 | 7.0} -g {resource-group-name} -n {app-name}
     az appservice web config show -g {resource-group-name} -n {app-name}
 
-[AZURE.INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
+[!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
 ## 如何：更改内置 PHP 配置
 对于任何内置 PHP 运行时，你都可以通过执行以下步骤更改任何配置选项。（有关 php.ini 指令的信息，请参阅 [php.ini 指令的列表]。）
@@ -157,11 +157,10 @@ PHP 5.5 和 PHP 5.6 也可用，但它们在默认情况下不启用。若要更
    
     ![保存配置设置][save-button]  
 
-
 ## <a name="composer"></a>如何在 Azure 中启用编辑器自动化
-默认情况下，应用服务与 composer.json（如果 PHP 项目中有）不相关。如果使用 [Git 部署](/documentation/articles/app-service-web-php-get-started/)，可以在 `git push` 期间通过启用编辑器扩展启用 composer.json 处理。
+默认情况下，应用服务与 composer.json（如果 PHP 项目中有）不相关。如果使用 [Git 部署](./app-service-web-php-get-started.md)，可以在 `git push` 期间通过启用编辑器扩展启用 composer.json 处理。
 
-> [AZURE.NOTE]
+> [!NOTE]
 可以[在这里为应用服务中的一流编辑器支持投票](https://feedback.azure.com/forums/169385-web-apps-formerly-websites/suggestions/6477437-first-class-support-for-composer-and-pip)！
 > 
 > 
@@ -183,7 +182,7 @@ PHP 5.5 和 PHP 5.6 也可用，但它们在默认情况下不启用。若要更
 ## 后续步骤
 有关详细信息，请参阅 [PHP 开发中心](/develop/php/)。
 
-[试用版]: /pricing/1rmb-trial/
+[试用版]: https://www.azure.cn/pricing/1rmb-trial/
 [phpinfo()]: http://php.net/manual/en/function.phpinfo.php
 [select-php-version]: ./media/web-sites-php-configure/select-php-version.png
 [php.ini 指令的列表]: http://www.php.net/manual/en/ini.list.php

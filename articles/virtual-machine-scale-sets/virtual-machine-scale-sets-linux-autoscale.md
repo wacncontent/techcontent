@@ -1,29 +1,28 @@
-<properties
-    pageTitle="自动缩放 Linux 虚拟机规模集 | Azure"
-    description="使用 Azure CLI 为 Linux 虚拟机规模集设置自动缩放"
-    services="virtual-machine-scale-sets"
-    documentationcenter=""
-    author="davidmu1"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 自动缩放 Linux 虚拟机规模集 | Azure
+description: 使用 Azure CLI 为 Linux 虚拟机规模集设置自动缩放
+services: virtual-machine-scale-sets
+documentationcenter: 
+author: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="83e93d9c-cac0-41d3-8316-6016f5ed0ce4"
-    ms.service="virtual-machine-scale-sets"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="09/27/2016"
-    wacn.date="12/12/2016"
-    ms.author="davidmu" />  
-
+ms.assetid: 83e93d9c-cac0-41d3-8316-6016f5ed0ce4
+ms.service: virtual-machine-scale-sets
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 12/12/2016
+ms.author: davidmu
+---
 
 # 自动缩放虚拟机规模集中的 Linux 计算机
-使用虚拟机规模集可轻松地将相同的虚拟机作为集来进行部署和管理。规模集为超大规模应用程序提供高度可缩放且可自定义的计算层，并且它们支持 Windows 平台映像、Linux 平台映像、自定义映像和扩展。有关详细信息，请参阅[虚拟机规模集概述](/documentation/articles/virtual-machine-scale-sets-overview/)。
+使用虚拟机规模集可轻松地将相同的虚拟机作为集来进行部署和管理。规模集为超大规模应用程序提供高度可缩放且可自定义的计算层，并且它们支持 Windows 平台映像、Linux 平台映像、自定义映像和扩展。有关详细信息，请参阅[虚拟机规模集概述](./virtual-machine-scale-sets-overview.md)。
 
-本教程将演示如何使用最新版本的 Ubuntu Linux 创建 Linux 虚拟机的规模集。本教程还演示了如何自动缩放规模集中的计算机。通过使用 Azure CLI 创建和部署 Azure Resource Manager 模板，以创建规模集并设置缩放。有关模板的详细信息，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。若要了解有关规模集自动缩放的详细信息，请参阅[自动缩放和虚拟机规模集](/documentation/articles/virtual-machine-scale-sets-autoscale-overview/)。
+本教程将演示如何使用最新版本的 Ubuntu Linux 创建 Linux 虚拟机的规模集。本教程还演示了如何自动缩放规模集中的计算机。通过使用 Azure CLI 创建和部署 Azure Resource Manager 模板，以创建规模集并设置缩放。有关模板的详细信息，请参阅[创作 Azure 资源管理器模板](../azure-resource-manager/resource-group-authoring-templates.md)。若要了解有关规模集自动缩放的详细信息，请参阅[自动缩放和虚拟机规模集](./virtual-machine-scale-sets-autoscale-overview.md)。
 
 在本教程中，你将部署以下资源和扩展：
 
@@ -37,19 +36,19 @@
 * Microsoft.Insights.VMDiagnosticsSettings
 * Microsoft.Insights/autoscaleSettings
 
-有关 Resource Manager 资源的详细信息，请参阅 [Azure Resource Manager vs. classic deployment](/documentation/articles/resource-manager-deployment-model/)（Azure Resource Manager 与经典部署）。
+有关 Resource Manager 资源的详细信息，请参阅 [Azure Resource Manager vs. classic deployment](../azure-resource-manager/resource-manager-deployment-model.md)（Azure Resource Manager 与经典部署）。
 
-在开始执行本教程中的步骤之前，请[安装 Azure CLI](/documentation/articles/xplat-cli-install/)。
+在开始执行本教程中的步骤之前，请[安装 Azure CLI](../xplat-cli-install.md)。
 
 ## 步骤 1：创建资源组和存储帐户
-1. **登录 Azure** - 在命令行接口（Bash、终端、命令行提示符）中，切换到 Resource Manager 模式，然后[使用工作或学校 ID 登录](/documentation/articles/xplat-cli-connect/#scenario-1-azure-login-with-interactive-login)。按照提示进行操作以获取 Azure 帐户的交互式登录体验。
+1. **登录 Azure** - 在命令行接口（Bash、终端、命令行提示符）中，切换到 Resource Manager 模式，然后[使用工作或学校 ID 登录](../xplat-cli-connect.md#scenario-1-azure-login-with-interactive-login)。按照提示进行操作以获取 Azure 帐户的交互式登录体验。
    
         azure config mode arm
    
         azure login -e AzureChinaCloud
    
-    > [AZURE.NOTE]
-    如果有工作或学校 ID，而且未启用双因素身份验证，则可以在没有交互式会话的情况下，使用 `azure login -e AzureChinaCloud  -u` 以及 ID 进行登录。如果没有工作或学校 ID，则可以[从 Microsoft 个人帐户创建工作或学校 ID](/documentation/articles/virtual-machines-linux-create-aad-work-id/)。
+    > [!NOTE]
+    如果有工作或学校 ID，而且未启用双因素身份验证，则可以在没有交互式会话的情况下，使用 `azure login -e AzureChinaCloud  -u` 以及 ID 进行登录。如果没有工作或学校 ID，则可以[从 Microsoft 个人帐户创建工作或学校 ID](../virtual-machines/virtual-machines-linux-create-aad-work-id.md)。
     > 
     > 
 2. **创建资源组** - 所有资源都必须部署到资源组。对于本教程，将资源组命名为 **vmsstest1**。
@@ -112,7 +111,7 @@
     * 虚拟网络和子网的 IP 地址名称和前缀。
     * 虚拟网络、负载均衡器和网络接口的名称和标识符。
     * 与规模集中虚拟机关联的帐户的存储帐户名称。
-    * 已安装在虚拟机上的诊断扩展的设置。有关诊断扩展的详细信息，请参阅[使用 Azure Resource Manager 模板创建具有监视和诊断功能的 Windows 虚拟机](/documentation/articles/virtual-machines-windows-extensions-diagnostics-template/)。
+    * 已安装在虚拟机上的诊断扩展的设置。有关诊断扩展的详细信息，请参阅[使用 Azure Resource Manager 模板创建具有监视和诊断功能的 Windows 虚拟机](../virtual-machines/virtual-machines-windows-extensions-diagnostics-template.md)。
 4. 将存储帐户资源添加到已添加到模板中的资源父元素下。此模板使用一个循环来创建所建议的五个存储帐户，其中将存储操作系统磁盘和诊断数据。这组帐户可在一个规模集中最多支持 100 个虚拟机，这是当前的最大值。每个存储帐户通过将变量中定义的字母指示符与模板的参数中提供的后缀组合来命名。
    
         {
@@ -126,7 +125,7 @@
           "location": "[resourceGroup().location]",
           "properties": { "accountType": "Standard_LRS" }
         },
-5. 添加虚拟网络资源。有关详细信息，请参阅[网络资源提供程序](/documentation/articles/resource-groups-networking/)。
+5. 添加虚拟网络资源。有关详细信息，请参阅[网络资源提供程序](../virtual-network/resource-groups-networking.md)。
    
         {
           "apiVersion": "2015-06-15",
@@ -169,7 +168,7 @@
             }
           }
         },
-7. 添加规模集使用的负载均衡器资源。有关详细信息，请参阅 [Azure Resource Manager 对负载均衡器的支持](/documentation/articles/load-balancer-arm/)。
+7. 添加规模集使用的负载均衡器资源。有关详细信息，请参阅 [Azure Resource Manager 对负载均衡器的支持](../load-balancer/load-balancer-arm.md)。
    
         {
           "apiVersion": "2015-06-15",
@@ -476,7 +475,7 @@
 
 成功部署所有资源应大约需要 15 分钟。
 
-> [AZURE.NOTE]
+> [!NOTE]
 还可以利用门户的功能来部署资源。请使用此链接：https://portal.azure.cn/#create/Microsoft.Template/uri/<link to VM Scale Set JSON template>
 > 
 > 
@@ -490,7 +489,7 @@
         azure resource show -n vmsstest1 -r Microsoft.Compute/virtualMachineScaleSets -o 2015-06-15 -g vmsstestrg1
 * 就像连接任何其他虚拟机一样连接到 jumpbox 虚拟机，然后可以远程访问规模集中的虚拟机，以监视单个进程。
 
-> [AZURE.NOTE]
+> [!NOTE]
 用于获取有关规模集的信息的完整 REST API 可在[虚拟机规模集](https://msdn.microsoft.com/zh-cn/library/mt589023.aspx)中找到。
 > 
 > 
@@ -501,8 +500,8 @@
         azure group delete vmsstestrg1
 
 ## 后续步骤
-* 在 [Azure 监视器跨平台 CLI 快速入门示例](/documentation/articles/insights-cli-samples/)中查找 Azure 监视器监视功能的示例
-* 了解如何[使用审核日志在 Azure 监视器中发送电子邮件和 webhook 警报通知](/documentation/articles/insights-auditlog-to-webhook-email/)
+* 在 [Azure 监视器跨平台 CLI 快速入门示例](../monitoring-and-diagnostics/insights-cli-samples.md)中查找 Azure 监视器监视功能的示例
+* 了解如何[使用审核日志在 Azure 监视器中发送电子邮件和 webhook 警报通知](../monitoring-and-diagnostics/insights-auditlog-to-webhook-email.md)
 * 请查看[自动缩放运行 Ubuntu/Apache/PHP 应用的 VM 规模集](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vmss-lapstack-autoscale)模板，该模板设置 LAMP 堆栈以执行虚拟机规模集的自动缩放功能。
 
 <!---HONumber=Mooncake_1205_2016-->

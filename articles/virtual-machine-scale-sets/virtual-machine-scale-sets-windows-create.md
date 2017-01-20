@@ -1,27 +1,26 @@
-<properties
-    pageTitle="使用 PowerShell 创建虚拟机规模集 | Azure"
-    description="使用 PowerShell 创建虚拟机规模集"
-    services="virtual-machine-scale-sets"
-    documentationcenter=""
-    author="davidmu1"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 PowerShell 创建虚拟机规模集 | Azure
+description: 使用 PowerShell 创建虚拟机规模集
+services: virtual-machine-scale-sets
+documentationcenter: 
+author: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="7bb03323-8bcc-4ee4-9a3e-144ca6d644e2"
-    ms.service="virtual-machine-scale-sets"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="10/18/2016"
-    wacn.date="01/05/2017"
-    ms.author="davidmu" />  
-
+ms.assetid: 7bb03323-8bcc-4ee4-9a3e-144ca6d644e2
+ms.service: virtual-machine-scale-sets
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 10/18/2016
+wacn.date: 01/05/2017
+ms.author: davidmu
+---
 
 # 使用 Azure PowerShell 创建 Windows 虚拟机规模集
-这些步骤采用填空方法来创建 Azure 虚拟机规模集。有关规模集的详细信息，请参阅[虚拟机规模集概述](/documentation/articles/virtual-machine-scale-sets-overview/)。
+这些步骤采用填空方法来创建 Azure 虚拟机规模集。有关规模集的详细信息，请参阅[虚拟机规模集概述](./virtual-machine-scale-sets-overview.md)。
 
 执行本文中的步骤大约需要 30 分钟时间。
 
@@ -129,7 +128,7 @@
    
         $vmss = New-AzureRmVmssConfig -Location $locName -SkuCapacity 3 -SkuName "Standard_A0" -UpgradePolicyMode "manual"
    
-    此示例演示了使用三台虚拟机创建规模集。有关规模集容量的详细信息，请参阅[虚拟机规模集概述](/documentation/articles/virtual-machine-scale-sets-overview/)。此步骤还包括在规模集中设置虚拟机的大小（也称为 SkuName）。若要查找符合需要的大小，请查看[虚拟机的大小](/documentation/articles/virtual-machines-windows-sizes/)。
+    此示例演示了使用三台虚拟机创建规模集。有关规模集容量的详细信息，请参阅[虚拟机规模集概述](./virtual-machine-scale-sets-overview.md)。此步骤还包括在规模集中设置虚拟机的大小（也称为 SkuName）。若要查找符合需要的大小，请查看[虚拟机的大小](../virtual-machines/virtual-machines-windows-sizes.md)。
 5. 将网络接口配置添加到规模集配置中：
    
         Add-AzureRmVmssNetworkInterfaceConfiguration -VirtualMachineScaleSet $vmss -Name $vmssConfig -Primary $true -IPConfiguration $ipConfig
@@ -171,7 +170,7 @@
         $imageOffer = "WindowsServer"
         $imageSku = "2012-R2-Datacenter"
    
-    若要查找其他要使用的映像的相关信息，请参阅 [Navigate and select Azure virtual machine images with Windows PowerShell and the Azure CLI](/documentation/articles/virtual-machines-windows-cli-ps-findimage/)（使用 Windows PowerShell 和 Azure CLI 来导航和选择 Azure 虚拟机映像）。
+    若要查找其他要使用的映像的相关信息，请参阅 [Navigate and select Azure virtual machine images with Windows PowerShell and the Azure CLI](../virtual-machines/virtual-machines-windows-cli-ps-findimage.md)（使用 Windows PowerShell 和 Azure CLI 来导航和选择 Azure 虚拟机映像）。
 3. 将 **$vhdContainers** 的值替换为包含虚拟硬盘的存储路径的列表，如“https://mystorage.blob.core.chinacloudapi.cn/vhds”，然后创建变量：
    
         $vhdContainers = @("https://myst1.blob.core.chinacloudapi.cn/vhds","https://myst2.blob.core.chinacloudapi.cn/vhds","https://myst3.blob.core.chinacloudapi.cn/vhds")
@@ -216,7 +215,7 @@
         Get-AzureRmVmssVM -ResourceGroupName "resource group name" -VMScaleSetName "scale set name"
 
 ## 后续步骤
-* 使用[在虚拟机规模集中管理虚拟机](/documentation/articles/virtual-machine-scale-sets-windows-manage/)中的信息管理刚刚创建的规模集
-* 请考虑使用[自动缩放和虚拟机规模集](/documentation/articles/virtual-machine-scale-sets-autoscale-overview/)中的信息设置规模集的自动缩放
+* 使用[在虚拟机规模集中管理虚拟机](./virtual-machine-scale-sets-windows-manage.md)中的信息管理刚刚创建的规模集
+* 请考虑使用[自动缩放和虚拟机规模集](./virtual-machine-scale-sets-autoscale-overview.md)中的信息设置规模集的自动缩放
 
 <!---HONumber=Mooncake_1205_2016-->

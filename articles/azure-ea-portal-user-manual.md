@@ -1,16 +1,16 @@
-<properties
-	pageTitle="Azure 企业门户管理手册 | Azure"
-	description="详细介绍如何管理Azure账户、订阅及查看相应的账单。"
-	services="ea-portal"
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure 企业门户管理手册 | Azure
+description: 详细介绍如何管理Azure账户、订阅及查看相应的账单。
+services: ea-portal
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="ea-portal"
-	ms.date=""
-	wacn.date="09/21/2016"/>
+ms.service: ea-portal
+ms.date: 
+wacn.date: 09/21/2016
+---
 
 #Azure 企业门户管理手册
 
@@ -32,7 +32,7 @@ Org ID 是 Azure China 特殊的用户名系统。
 
 比如公司名为 contoso 的企业，可以注册 Org ID 为 
 
-	contoso.partner.onmschina.cn
+    contoso.partner.onmschina.cn
 
 注意后面的 partner.onmschina.cn 为固定后缀。
 
@@ -40,12 +40,12 @@ Org ID 是 Azure China 特殊的用户名系统。
 创建完 Org ID 后，可以使用这个 Org ID，创建不同的账户。  
 
 比如如果需要创建管理员账号，就可创建账户为  
-	
-	admin@contoso.partner.onmschina.cn
+    
+    admin@contoso.partner.onmschina.cn
 
 或者可以给员工 xiaowang 创建普通用户账号为  
 
-	xiaowang@contoso.partner.onmschina.cn
+    xiaowang@contoso.partner.onmschina.cn
 
 以上 2 个账户的账户名不同，密码也不同。使用不同的账户名和密码，就可以用 Azure China 进行管理。
 
@@ -77,31 +77,31 @@ Org ID 是 Azure China 特殊的用户名系统。
 ###<a id="account-subscription-relation"></a>1.5 账户和订阅的关系
 在 Azure 中，账户和订阅的关系是多对多的。假设有 2 个订阅 IT 和 Market，账户管理员可以创建若干个账户，对应关系如下：
 <table width="100%" border="1" cellspacing="0" cellpadding="0" style="text-align:center">
-	<tr>
-		<td>序号</td>
-		<td>账户</td>
-		<td>订阅</td>
-	</tr>
-	<tr>
-		<td>1</td>
-		<td>xiaozhang@contoso.partner.onmschina.cn</td>
-		<td>IT</td>
-	</tr>
-	<tr>
-		<td>2</td>
-		<td>mike@contoso.partner.onmschina.cn</td>
-		<td>Market</td>
-	</tr>
-	<tr>
-		<td>3</td>
-		<td>tom@contoso.partner.onmschina.cn</td>
-		<td>Market</td>
-	</tr>
-	<tr>
-		<td>4</td>
-		<td>xiaozhang@contoso.partner.onmschina.cn</td>
-		<td>Market</td>
-	</tr>
+    <tr>
+        <td>序号</td>
+        <td>账户</td>
+        <td>订阅</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>xiaozhang@contoso.partner.onmschina.cn</td>
+        <td>IT</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>mike@contoso.partner.onmschina.cn</td>
+        <td>Market</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>tom@contoso.partner.onmschina.cn</td>
+        <td>Market</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>xiaozhang@contoso.partner.onmschina.cn</td>
+        <td>Market</td>
+    </tr>
 </table> 
 
 上表中，Mike 和 Tom 可以使用的订阅只有一个，他们可以使用订阅 Market，来使用 Azure 云服务。 xiaozhang 的账号不同，他可以使用 2 个订阅 (IT 和 Market)。xiaozhang 可以同时使用这 2 个不同的订阅，来使用 Azure 云服务。
@@ -113,26 +113,26 @@ Org ID 是 Azure China 特殊的用户名系统。
 
 同时账户管理员可以创建三个订阅和三个账户。对应关系如下：
 <table width="100%" border="1" cellspacing="0" cellpadding="0" style="text-align:center">
-	<tr>
-		<td>序号</td>
-		<td>账户</td>
-		<td>订阅</td>
-	</tr>
-	<tr>
-		<td>1</td>
-		<td>beijing@contoso.partner.onmschina.cn </td>
-		<td>Beijing_sub</td>
-	</tr>
-	<tr>
-		<td>2</td>
-		<td>shanghai@contoso.partner.onmschina.cn </td>
-		<td>Shanghai_sub</td>
-	</tr>
-	<tr>
-		<td>3</td>
-		<td>hangzhou@contoso.partner.onmschina.cn</td>
-		<td>Hangzhou_sub</td>
-	</tr>
+    <tr>
+        <td>序号</td>
+        <td>账户</td>
+        <td>订阅</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>beijing@contoso.partner.onmschina.cn </td>
+        <td>Beijing_sub</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>shanghai@contoso.partner.onmschina.cn </td>
+        <td>Shanghai_sub</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>hangzhou@contoso.partner.onmschina.cn</td>
+        <td>Hangzhou_sub</td>
+    </tr>
 </table> 
 
 这样北京、上海和杭州的用户可以使用上面三个不同的账户，进行各自的软件研发和部署。同时，Contoso 集团总部在月底会收到世纪互联发送的 Azure 账单，里面显示了三个不同的订阅 ( Beijing\_sub，Shanghai\_sub，Hangzhou\_sub ) 分别产生的费用，以及 Azure 总的费用。根据账单的信息，Contoso 集团可以根据 Azure 提供的账单，对三个研发基地进行内部成本核算。
@@ -172,7 +172,6 @@ Azure 企业门户拥有以下功能：
 (2)	使用 Azure 企业门户前，确认签署 Azure 企业协议(Enterprise Agreement)合同；
 
 (3)	确认已把测试账户信息提交给世纪互联后台的运维团队，并在后台录入。
-
 
 ###<a id="simulations"></a>2.3 模拟场景
 
@@ -426,16 +425,16 @@ Azure 可以通过下载 Excel，将一段时间内 Azure 的详细账单，通�
   
 1.	点击报表，下载使用量；  
 
-	![下载使用量][32]  
+    ![下载使用量][32]  
 
 2.	点击上图的按钮，下载使用量数据。如果未显示，则点击下图的”刷新”按钮；  
 
-	![刷新][33]  
+    ![刷新][33]  
 
 3.	下载完毕后，点击下载的Excel文件。全选第3行的列名，然后按CTRL+SHIFT+END，选中所有的表格内容；
 4.	然后点击”插入”->”数据透视表”。如下图：  
 
-	![数据透视表][34]  
+    ![数据透视表][34]  
 
 5.	在透视表中拖动字段。如下图：  
 
@@ -452,22 +451,18 @@ Azure 可以通过下载 Excel，将一段时间内 Azure 的详细账单，通�
 
 1.	以企业管理员身份 ( admin@contoso.partner.onmschina.cn ) ，登陆 [Azure 企业门户](http://ea.windowsazure.cn)。  
 
-	![登陆][37]  
+    ![登陆][37]  
 
 2.	在添加联系人的弹出框中，输入相应的收件人邮箱地址：  
 
-	![添加联系人][38]  
+    ![添加联系人][38]  
 
 3.	这样就可以按照一定的通知频率，通知相应的收件人。用户会收到类似如下图的邮件内容：  
 
-	![添加联系人][39]  
+    ![添加联系人][39]  
 
 ###<a id="azure-billing-exceed"></a>3.5 关于 Azure 超额使用  
 当用户的累积使用情况，达到整个合同金额的75%，90%，100%，125%时， Azure 会自动发送邮件给相应的联系人，提供合同金额并给予提示。
-
-
-
-
 
 <!--image-->
 [1]: ./media/azure-ea-portal-user-manual/enterprise-azure-role-and-portal.png

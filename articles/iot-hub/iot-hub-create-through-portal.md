@@ -1,28 +1,25 @@
-<properties
-	 pageTitle="使用 Azure 门户创建 IoT 中心 | Azure"
-	 description="概述如何通过 Azure 门户创建和管理 Azure IoT 中心"
-	 services="iot-hub"
-	 documentationCenter=""
-	 authors="dominicbetts"
-	 manager="timlt"
-	 editor=""/>  
+---
+title: 使用 Azure 门户创建 IoT 中心 | Azure
+description: 概述如何通过 Azure 门户创建和管理 Azure IoT 中心
+services: iot-hub
+documentationCenter: 
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
-	 ms.service="iot-hub"
-	 ms.devlang="na"
-	 ms.topic="article"
-	 ms.tgt_pltfrm="na"
-	 ms.workload="na"
-	 ms.date="09/30/2016"
-	 wacn.date="12/12/2016"
-	 ms.author="dobett"/>  
-
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 12/12/2016
+ms.author: dobett
+---
 
 # 使用 Azure 门户创建 IoT 中心
 
-[AZURE.INCLUDE [iot-hub-resource-manager-selector](../../includes/iot-hub-resource-manager-selector.md)]
-
+[!INCLUDE [iot-hub-resource-manager-selector](../../includes/iot-hub-resource-manager-selector.md)]
 
 ## 介绍
 本文介绍如何在 Azure 门户中查找 IoT 中心服务，以及如何创建和管理 IoT 中心。
@@ -59,8 +56,7 @@
 
 ![][4]  
 
-
-> [AZURE.NOTE] IoT 中心只允许每个 Azure 订阅有一个免费中心。
+> [!NOTE] IoT 中心只允许每个 Azure 订阅有一个免费中心。
 
 ### IoT 中心单位
 
@@ -73,7 +69,6 @@
 对于资源组，你不需要显式创建空资源组。在创建资源时，可以选择创建新的资源组，或使用现有的资源组。
 
 ![][5]  
-
 
 ### 选择订阅
 Azure IoT 中心自动显示用户帐户所链接的 Azure 订阅列表。可在此处选择其中一个选项，将 IoT 中心与该 Azure 订阅关联。
@@ -100,9 +95,9 @@ Azure IoT 中心自动显示用户帐户所链接的 Azure 订阅列表。可在
 
 - 单击“添加”打开边栏选项卡。可在此处输入新的策略名称以及想要与此策略关联的权限，如下图所示。
 
-	有许多权限可与这些共享策略相关联。前两个策略（**注册表读取**和**注册表写入**）用于向设备标识存储或标识注册表授予读取和写入访问权限。选择写入选项会自动选择读取选项。
+    有许多权限可与这些共享策略相关联。前两个策略（**注册表读取**和**注册表写入**）用于向设备标识存储或标识注册表授予读取和写入访问权限。选择写入选项会自动选择读取选项。
 
- 	“服务连接”策略向连接到 IoT 中心的服务授予访问云端终结点（例如使用者组）的权限。“设备连接”策略授予在 IoT 中心的设备端终结点上发送和接收消息的权限。
+     “服务连接”策略向连接到 IoT 中心的服务授予访问云端终结点（例如使用者组）的权限。“设备连接”策略授予在 IoT 中心的设备端终结点上发送和接收消息的权限。
 
 - 单击“创建”将此新建策略添加到现有列表。
 
@@ -124,10 +119,9 @@ Azure IoT 中心自动显示用户帐户所链接的 Azure 订阅列表。可在
 
 **使用者组**：使用者组是一种类似于其他消息传送系统的设置，可用于通过特定方式拉取数据，以将其他应用程序或服务连接到 IoT 中心。创建的每个 IoT 中心都包含一个默认使用者组。但是，你可以在 IoT 中心添加或删除使用者组。
 
-> [AZURE.NOTE] 无法编辑或删除默认使用者组。
+> [!NOTE] 无法编辑或删除默认使用者组。
 
 ![][11]  
-
 
 ## 定价和缩放
 
@@ -137,7 +131,6 @@ Azure IoT 中心自动显示用户帐户所链接的 Azure 订阅列表。可在
 - Azure 订阅中只能有一个免费层 IoT 中心。
 
 ![][12]  
-
 
 只有在当天发送的消息数目不冲突时，才允许从较高层（S2 或 S3）转到较低层（S1 或 S2）。例如，如果每天的消息数目超过 400,000，则可更改 IoT 中心的层。但是，如果更改为 S1 层，则会在该天对中心进行限制。
 
@@ -158,7 +151,6 @@ Azure IoT 中心自动显示用户帐户所链接的 Azure 订阅列表。可在
 - [开发人员指南][lnk-devguide]
 - [使用 IoT 网关 SDK 模拟设备][lnk-gateway]
 
-
   [4]: ./media/iot-hub-create-through-portal/create-iothub.png
   [5]: ./media/iot-hub-create-through-portal/location1.png
   [8]: ./media/iot-hub-create-through-portal/portal-settings.png
@@ -166,11 +158,11 @@ Azure IoT 中心自动显示用户帐户所链接的 Azure 订阅列表。可在
   [11]: ./media/iot-hub-create-through-portal/messaging-settings.png
   [12]: ./media/iot-hub-create-through-portal/pricing-error.png
 
-[lnk-bulk]: /documentation/articles/iot-hub-bulk-identity-mgmt/
-[lnk-metrics]: /documentation/articles/iot-hub-metrics/
-[lnk-monitor]: /documentation/articles/iot-hub-operations-monitoring/
+[lnk-bulk]: ./iot-hub-bulk-identity-mgmt.md
+[lnk-metrics]: ./iot-hub-metrics.md
+[lnk-monitor]: ./iot-hub-operations-monitoring.md
 
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
 
 <!---HONumber=Mooncake_1205_2016-->

@@ -6,21 +6,17 @@
 
      ![使用名称/值对标记资源](./media/resource-manager-tag-resources/tag-resources.png)  
 
-
 1. 若要在门户中查看标记的分类，请选择“更多服务”和“标记”。
 
      ![通过“浏览”中心查找标记](./media/resource-manager-tag-resources/browse-tags.png)  
-
 
 1. 随后将显示订阅中标记的摘要。
 
      ![显示所有标记](./media/resource-manager-tag-resources/tag-taxonomy.png)  
 
-
 1. 选择任一标记会显示带有该标记的资源和资源组。
 
      ![显示带标记的资源](./media/resource-manager-tag-resources/show-tagged-resources.png)  
-
 
 1. 将最重要的标记固定到仪表板，以便快速进行访问。
 

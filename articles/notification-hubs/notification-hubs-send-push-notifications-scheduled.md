@@ -1,24 +1,24 @@
-<properties
-	pageTitle="如何发送预定通知 | Azure"
-	description="本主题介绍如何使用 Azure 通知中心发送预定通知。"
-	services="notification-hubs"
-	documentationCenter=".net"
-	keywords="推送通知,push notification,计划推送通知"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-android"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="08/23/2016"
-	ms.author="wesmc"/>
+---
+title: 如何发送预定通知 | Azure
+description: 本主题介绍如何使用 Azure 通知中心发送预定通知。
+services: notification-hubs
+documentationCenter: .net
+keywords: 推送通知,push notification,计划推送通知
+authors: wesmc7777
+manager: erikre
+editor: 
+
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-android
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 08/23/2016
+ms.author: wesmc
+---
 
 # 如何：发送预定通知
-
 
 ##概述
 
@@ -26,12 +26,12 @@
 
 发送通知时，只需如以下示例中所示，使用通知中心 SDK 中的 [ScheduledNotification](https://msdn.microsoft.com/library/microsoft.azure.notificationhubs.schedulednotification.aspx) 类：
 
-	Notification notification = new AppleNotification("{\"aps\":{\"alert\":\"Happy birthday!\"}}");
-	var scheduled = await hub.ScheduleNotificationAsync(notification, new DateTime(2014, 7, 19, 0, 0, 0));
+    Notification notification = new AppleNotification("{\"aps\":{\"alert\":\"Happy birthday!\"}}");
+    var scheduled = await hub.ScheduleNotificationAsync(notification, new DateTime(2014, 7, 19, 0, 0, 0));
 
 此外，你可以使用其 notificationId 取消以前计划的通知：
 
-	await hub.CancelNotificationAsync(scheduled.ScheduledNotificationId);
+    await hub.CancelNotificationAsync(scheduled.ScheduledNotificationId);
 
 可以发送的预定通知数没有限制。
 

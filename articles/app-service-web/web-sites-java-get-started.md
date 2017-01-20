@@ -1,29 +1,29 @@
-<properties
-    pageTitle="在 Azure App Service 中创建 Java Web 应用 | Azure"
-    description="本教程演示如何将 Java Web 应用部署到 Azure App Service。"
-    services="app-service\web"
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />  
+---
+title: 在 Azure App Service 中创建 Java Web 应用 | Azure
+description: 本教程演示如何将 Java Web 应用部署到 Azure App Service。
+services: app-service\web
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: 
 
-<tags
-    ms.assetid="d6e73cc3-8b71-4742-a197-3edeabc6a289"
-    ms.service="app-service-web"
-    ms.workload="web"
-    ms.tgt_pltfrm="na"
-    ms.devlang="Java"
-    ms.topic="get-started-article"
-    ms.date="11/01/2016"
-    wacn.date="01/05/2017"
-    ms.author="robmcm" />
+ms.assetid: d6e73cc3-8b71-4742-a197-3edeabc6a289
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: Java
+ms.topic: get-started-article
+ms.date: 11/01/2016
+wacn.date: 01/05/2017
+ms.author: robmcm
+---
 
 # 在 Azure App Service 中创建 Java Web 应用
-[AZURE.INCLUDE [选项卡](../../includes/app-service-web-get-started-nav-tabs.md)]
+[!INCLUDE [选项卡](../../includes/app-service-web-get-started-nav-tabs.md)]
 
 本教程介绍如何通过使用 [Azure 门户预览][在 Azure 应用服务中创建 Java Web 应用]。Azure 门户预览是可用于管理 Azure 资源的 Web 界面。
 
-> [AZURE.NOTE]
+> [!NOTE]
 要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以[注册试用版]。
 > 
 > 
@@ -89,14 +89,14 @@
 
 <!-- URL List -->
 
-[将应用程序或网页添加到 Java Web 应用]: /documentation/articles/web-sites-java-add-app/
-[Azure App Service 计划概述]: /documentation/articles/azure-web-sites-web-hosting-plans-in-depth-overview/
+[将应用程序或网页添加到 Java Web 应用]: ./web-sites-java-add-app.md
+[Azure App Service 计划概述]: ../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md
 [Azure 门户预览]: https://portal.azure.cn/
-[注册试用版]: /pricing/1rmb-trial/
-[在 Azure 应用服务中创建 Java Web 应用]: /documentation/articles/app-service-changes-existing-services/
+[注册试用版]: https://www.azure.cn/pricing/1rmb-trial/
+[在 Azure 应用服务中创建 Java Web 应用]: ./app-service-changes-existing-services.md
 [Java 开发中心]: /develop/java/
-[Resource Manager 概述]: /documentation/articles/resource-group-overview/
-[将自定义 Java Web 应用上载到 Azure]: /documentation/articles/web-sites-java-custom-upload/
+[Resource Manager 概述]: ../azure-resource-manager/resource-group-overview.md
+[将自定义 Java Web 应用上载到 Azure]: ./web-sites-java-custom-upload.md
 
 <!-- IMG List -->
 

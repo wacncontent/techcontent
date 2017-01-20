@@ -1,26 +1,26 @@
-<properties
-   pageTitle="将 MapReduce 和 Curl 与 HDInsight 中的 Hadoop 配合使用 | Azure"
-   description="了解如何使用 Curl 在 HDInsight 的 Hadoop 上远程运行 MapReduce 作业。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="Blackmist"
-   manager="paulettm"
-   editor="cgronlun"
-   tags="azure-portal"/>
+---
+title: 将 MapReduce 和 Curl 与 HDInsight 中的 Hadoop 配合使用 | Azure
+description: 了解如何使用 Curl 在 HDInsight 的 Hadoop 上远程运行 MapReduce 作业。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="09/27/2016"
-   wacn.date="12/16/2016"
-   ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 09/27/2016
+wacn.date: 12/16/2016
+ms.author: larryfr
+---
 
 #使用 Curl 在 HDInsight 的 Hadoop 上远程运行 MapReduce 作业
 
-[AZURE.INCLUDE [mapreduce-selector](../../includes/hdinsight-selector-use-mapreduce.md)]
+[!INCLUDE [mapreduce-selector](../../includes/hdinsight-selector-use-mapreduce.md)]
 
 本文介绍如何使用 Curl 在 HDInsight 的 Hadoop 群集中运行 MapReduce 作业。
 
@@ -38,7 +38,7 @@
 
 ## <a id="curl"></a>使用 Curl 运行 MapReduce 作业
 
-> [AZURE.NOTE]使用 Curl 或者与 WebHCat 进行任何其他形式的 REST 通信时，必须提供 HDInsight 群集管理员用户名和密码，对请求进行身份验证。此外，用来向服务器发送请求的 URI 必须包括群集名称。
+> [!NOTE]使用 Curl 或者与 WebHCat 进行任何其他形式的 REST 通信时，必须提供 HDInsight 群集管理员用户名和密码，对请求进行身份验证。此外，用来向服务器发送请求的 URI 必须包括群集名称。
 ><p>
 ><p> 对本部分中的所有命令，请将 **USERNAME** 替换为在群集上进行身份验证的用户名，并将 **PASSWORD** 替换为用户帐户的密码。将 **CLUSTERNAME** 替换为群集名称。
 ><p>
@@ -61,11 +61,11 @@
 
 2. 要提交 MapReduce 作业，请使用以下命令：
 
-		curl -u USERNAME:PASSWORD -d user.name=USERNAME -d jar=wasbs:///example/jars/hadoop-mapreduce-examples.jar -d class=wordcount -d arg=wasbs:///example/data/gutenberg/davinci.txt -d arg=wasbs:///example/data/CurlOut https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/mapreduce/jar
+        curl -u USERNAME:PASSWORD -d user.name=USERNAME -d jar=wasbs:///example/jars/hadoop-mapreduce-examples.jar -d class=wordcount -d arg=wasbs:///example/data/gutenberg/davinci.txt -d arg=wasbs:///example/data/CurlOut https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/mapreduce/jar
 
     URI 的末尾 (/mapreduce/jar) 可告知 WebHCat，此请求从 jar 文件中的类启动 MapReduce 作业。此命令中使用的参数如下：
 
-	* **-d**：由于未使用 `-G`，请求默认为 POST 方法。`-d` 指定与请求一起发送的数据值。
+    * **-d**：由于未使用 `-G`，请求默认为 POST 方法。`-d` 指定与请求一起发送的数据值。
 
         * **user.name**：正在运行命令的用户
         * **jar**：包含要运行的类的 jar 文件所在位置
@@ -80,21 +80,21 @@
 
         curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/jobs/JOBID | jq .status.state
 
-	如果作业已完成，则状态是“SUCCEEDED”。
+    如果作业已完成，则状态是“SUCCEEDED”。
 
-    > [AZURE.NOTE]此 Curl 请求返回具有作业相关信息的 JSON 文档；使用 jq 可以仅检索状态值。
+    > [!NOTE]此 Curl 请求返回具有作业相关信息的 JSON 文档；使用 jq 可以仅检索状态值。
 
 4. 在作业的状态更改为 **SUCCEEDED** 后，可以从 Azure Blob 存储中检索作业的结果。随查询一起传递的 `statusdir` 参数包含输出文件的位置；在这种情况下为 **wasbs:///example/curl**。此地址将作业的输出存储在 HDInsight 群集所用的默认存储容器的 **example/curl** 目录中。
 
-可以使用 [Azure CLI](/documentation/articles/xplat-cli-install/) 列出并下载这些文件。例如，要列出 **example/curl** 中的文件，请使用以下命令：
+可以使用 [Azure CLI](../xplat-cli-install.md) 列出并下载这些文件。例如，要列出 **example/curl** 中的文件，请使用以下命令：
 
-	azure storage blob list <container-name> example/curl
+    azure storage blob list <container-name> example/curl
 
 要下载文件，请使用以下命令：
 
-	azure storage blob download <container-name> <blob-name> <destination-file>
+    azure storage blob download <container-name> <blob-name> <destination-file>
 
-> [AZURE.NOTE]必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。有关详细信息，请参阅[如何将数据上载到 HDInsight](/documentation/articles/hdinsight-upload-data/)。
+> [!NOTE]必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。有关详细信息，请参阅[如何将数据上载到 HDInsight](./hdinsight-upload-data.md)。
 
 ## <a id="summary"></a>摘要
 
@@ -106,12 +106,12 @@
 
 有关 HDInsight 中的 MapReduce 作业的一般信息：
 
-* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-mapreduce.md)
 
 有关 HDInsight 上 Hadoop 的其他使用方法的信息：
 
-* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-hive/)
+* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-hive.md)
 
-* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-pig.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

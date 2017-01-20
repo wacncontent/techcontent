@@ -1,23 +1,22 @@
-<properties
-	pageTitle="创建并上载 Red Hat Enterprise Linux VHD，以供在 Azure 中使用"
-	description="了解如何创建和上载包含 Red Hat Linux 操作系统的 Azure 虚拟硬盘 (VHD)。"
-	services="virtual-machines-linux"
-	documentationCenter=""
-	authors="SuperScottz"
-	manager="timlt"
-	editor="tysonn"
-    tags="azure-resource-manager,azure-service-management"/>
+---
+title: 创建并上载 Red Hat Enterprise Linux VHD，以供在 Azure 中使用
+description: 了解如何创建和上载包含 Red Hat Linux 操作系统的 Azure 虚拟硬盘 (VHD)。
+services: virtual-machines-linux
+documentationCenter: 
+authors: SuperScottz
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager,azure-service-management
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="02/17/2016"
-	wacn.date="12/12/2016"
-	ms.author="mingzhan"/>
-
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 02/17/2016
+wacn.date: 12/12/2016
+ms.author: mingzhan
+---
 
 # 为 Azure 准备基于 Red Hat 的虚拟机
 
@@ -36,7 +35,6 @@
 [从 VMware 准备 RHEL 7.1/7.2 虚拟机](#rhel7xvmware)
 
 [从 kickstart 文件准备 RHEL 7.1/7.2 虚拟机](#rhel7xkickstart)
-
 
 ## 从 Hyper-V 管理器准备基于 Red Hat 的虚拟机
 ### 先决条件
@@ -57,7 +55,6 @@
 - 使用 **qemu-img** 将磁盘映像转换成 VHD 格式时，请注意，2.2.1 及更高版本的 qemu-img 中存在一个已知的 bug。此 bug 会导致 VHD 格式不正常。我们有望在即将发布的 qemu-img 版本中解决此问题。我们建议你暂时使用 qemu-img 2.2.0 或更低版本。
 
 ### <a id="rhel67hyperv"> </a>从 Hyper-V 管理器准备 RHEL 6.7 虚拟机###
-
 
 1.	在 Hyper-V 管理器中，选择虚拟机。
 
@@ -190,7 +187,7 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
         rhgb quiet crashkernel=auto
 
-	图形引导和无人参与引导不适用于云环境，在该环境中我们想要将所有日志都发送到串行端口。可以根据需要配置 crashkernel 选项，但请注意，此参数会使 VM 中的可用内存量减少 128 MB 或更多。这可能对于较小的 VM 大小有问题。
+    图形引导和无人参与引导不适用于云环境，在该环境中我们想要将所有日志都发送到串行端口。可以根据需要配置 crashkernel 选项，但请注意，此参数会使 VM 中的可用内存量减少 128 MB 或更多。这可能对于较小的 VM 大小有问题。
 
 8.	完成 `/etc/default/grub` 编辑后，运行以下命令以重新生成 grub 配置：
 
@@ -229,11 +226,9 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 15.	在 Hyper-V 管理器中单击“操作”>“关闭”。Linux VHD 现已准备好上载到 Azure。 
 
-
 ## 从 KVM 准备基于 Red Hat 的虚拟机
 
 ### <a id="rhel67kvm"></a>从 KVM 准备 RHEL 6.7 虚拟机###
-
 
 1.	从 Red Hat 网站上下载 RHEL 6.7 的 KVM 映像。
 
@@ -252,7 +247,7 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
         ><fs> vi /etc/shadow
         ><fs> exit
 
-	将 root 用户的第二个字段从“!!”更改为加密密码。
+    将 root 用户的第二个字段从“!!”更改为加密密码。
 
 3.	在 KVM 中通过 qcow2 映像创建虚拟机，将磁盘类型设置为 **qcow2**，将虚拟网络接口设备型号设置为 **virtio**。然后启动虚拟机，并以 root 用户身份登录。
 
@@ -322,7 +317,7 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
     重新启动 sshd：
 
-		# service sshd restart
+        # service sshd restart
 
 13.	WALinuxAgent 包 `WALinuxAgent-<version>` 已推送到 Red Hat extras 存储库。通过运行以下命令启用 extras 存储库：
 
@@ -370,9 +365,7 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
          # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.7.raw rhel-6.7.vhd
 
-
 ### <a id="rhel7xkvm"></a>从 KVM 准备 RHEL 7.1/7.2 虚拟机###
-
 
 1.	从 Red Hat 网站上下载 RHEL 7.1（或 7.2）的 KVM 映像。我们将使用 RHEL 7.1 作为此处的示例。
 
@@ -512,7 +505,6 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
          # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.1.raw rhel-7.1.vhd
 
-
 ## 从 VMware 准备基于 Red Hat 的虚拟机
 ### 先决条件
 本部分假设你已在 VMware 中安装了 RHEL 虚拟机。有关如何在 VMware 中安装操作系统的详细信息，请参阅 [VMware 来宾操作系统安装指南](http://partnerweb.vmware.com/GOSIG/home.html)。
@@ -522,8 +514,6 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 - 不要在操作系统磁盘上配置交换分区。可将 Linux 代理配置为在临时资源磁盘上创建交换文件。可以在下面的步骤中找到有关此操作的详细信息。
 
 - 当你创建虚拟硬盘时，选择“将虚拟磁盘存储为单个文件”。
-
-
 
 ### <a id="rhel67vmware"></a>从 VMware 准备 RHEL 6.7 虚拟机###
 
@@ -581,13 +571,13 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 9.	将 Hyper-V 模块添加到 initramfs 中：
 
-	    Edit `/etc/dracut.conf` and add content:
+        Edit `/etc/dracut.conf` and add content:
 
-	        add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
+            add_drivers+="hv_vmbus hv_netvsc hv_storvsc"
 
-	    Rebuild initramfs:
+        Rebuild initramfs:
 
-	        # dracut -f -v
+            # dracut -f -v
 
 10.	请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。修改 `/etc/ssh/sshd_config` 以包含以下行：
 
@@ -635,7 +625,6 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
     将原始磁盘转换为固定大小的 VHD：
 
         # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-6.7.raw rhel-6.7.vhd
-
 
 ### <a id="rhel7xvmware"></a>从 VMware 准备 RHEL 7.1/7.2 虚拟机###
 
@@ -737,16 +726,11 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
         # qemu-img convert -f raw -o subformat=fixed -O vpc rhel-7.1.raw rhel-7.1.vhd
 
-
 ## 使用 kickstart 文件自动从 ISO 准备基于 Red Hat 的虚拟机
-
 
 ### <a id="rhel7xkickstart"></a>从 kickstart 文件准备 RHEL 7.1/7.2 虚拟机###
 
-
 1.	创建包含以下内容的 kickstart 文件，然后保存该文件。有关 kickstart 安装的详细信息，请参阅 [Kickstart 安装指南](https://access.redhat.com/documentation/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-kickstart-installations.html)。
-
-
 
         # Kickstart for provisioning a RHEL 7 Azure VM
 
@@ -801,8 +785,6 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
         # Power down the machine after install
         poweroff
-
-
 
         %packages
         @base
@@ -898,8 +880,7 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 此问题是间歇性的。但在 Hyper-V 和 Azure 中进行频繁的磁盘 I/O 操作过程中出现更加频繁。
 
-
-[AZURE.NOTE] 此已知问题已被 Red Hat 解决。若要安装关联的修补程序，请运行以下命令：
+[!NOTE] 此已知问题已被 Red Hat 解决。若要安装关联的修补程序，请运行以下命令：
 
     # sudo yum update
 
@@ -922,7 +903,7 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 有关详细信息，请参阅有关[重新生成 initramfs](https://access.redhat.com/solutions/1958) 的信息。
 
 ## 后续步骤
-现在，你可以使用 Red Hat Enterprise Linux 虚拟硬盘在 Azure 中创建新的虚拟机。如果这是你第一次将 .vhd 文件上载到 Azure，请参阅[创建并上载包含 Linux 操作系统的虚拟硬盘](/documentation/articles/virtual-machines-linux-classic-create-upload-vhd/)中的步骤 2 和步骤 3。
+现在，你可以使用 Red Hat Enterprise Linux 虚拟硬盘在 Azure 中创建新的虚拟机。如果这是你第一次将 .vhd 文件上载到 Azure，请参阅[创建并上载包含 Linux 操作系统的虚拟硬盘](./virtual-machines-linux-classic-create-upload-vhd.md)中的步骤 2 和步骤 3。
 
 有关已通过认证可运行 Red Hat Enterprise Linux 的虚拟机监控程序的更多详细信息，请参阅 [Red Hat 网站](https://access.redhat.com/certified-hypervisors)。
 

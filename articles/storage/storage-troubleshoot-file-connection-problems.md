@@ -1,24 +1,23 @@
-<properties
-    pageTitle="Azure 文件存储问题疑难解答 | Azure"
-    description="Azure 文件存储问题疑难解答"
-    services="storage"
-    documentationcenter=""
-    author="genlin"
-    manager="felixwu"
-    editor="na"
-    tags="storage" />  
+---
+title: Azure 文件存储问题疑难解答 | Azure
+description: Azure 文件存储问题疑难解答
+services: storage
+documentationcenter: 
+author: genlin
+manager: felixwu
+editor: na
+tags: storage
 
-<tags
-    ms.assetid="fbc5f600-131e-4b99-828a-42d0de85fff7"
-    ms.service="storage"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/13/2016"
-    wacn.date="12/05/2016"
-    ms.author="genli" />  
-
+ms.assetid: fbc5f600-131e-4b99-828a-42d0de85fff7
+ms.service: storage
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/13/2016
+wacn.date: 12/05/2016
+ms.author: genli
+---
 
 # Azure 文件存储问题疑难解答
 本文列出了从 Windows 和 Linux 客户端连接时与 Azure 文件存储相关的常见问题。它还提供了这些问题的可能原因和解决方法。
@@ -67,7 +66,7 @@
 问题原因是已达到文件所允许的并发打开句柄数上限。
 
 ### 解决方案
-关闭某些句柄以减少并发打开句柄数，然后重试。有关详细信息，请参阅 [Azure 存储性能和可伸缩性核对清单](/documentation/articles/storage-performance-checklist/)。
+关闭某些句柄以减少并发打开句柄数，然后重试。有关详细信息，请参阅 [Azure 存储性能和可伸缩性核对清单](./storage-performance-checklist.md)。
 
 <a id="slowboth"></a>
 
@@ -84,15 +83,13 @@
 
 `reg query HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters\Policies`  
 
-
 如果已安装，将显示以下输出：
 
 **HKEY\_LOCAL\_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\Policies**
 
 **{96c345ef-3cac-477b-8fcd-bea1a564241c} REG\_DWORD 0x1**
 
-> [AZURE.NOTE]自 2015 年 12 月起，Azure 应用商店中的 Windows Server 2012 R2 映像默认安装有修补程序 KB3114025。
-
+> [!NOTE]自 2015 年 12 月起，Azure 应用商店中的 Windows Server 2012 R2 映像默认安装有修补程序 KB3114025。
 
 <a id="additional"></a>
 
@@ -116,7 +113,6 @@
 Comcast 和某些 IT 组织阻止此端口。若要了解是否由此造成“系统错误 53”，可使用 Portqry 查询 TCP:445 终结点。如果 TCP:445 终结点显示为“已筛选”，则表示 TCP端口受阻。示例查询如下：
 
 `g:\DataDump\Tools\Portqry>PortQry.exe -n [storage account name].file.core.chinacloudapi.cn -p TCP -e 445`  
-
 
 如果 TCP 445 受到网络路径中的规则阻止，将显示以下输出：
 
@@ -163,11 +159,9 @@ Azure 文件仅支持 NTLMv2 身份验证。请确保客户端上应用了组策
 
 `New-SmbMapping -LocalPath y: -RemotePath \\server\share  -UserName acountName -Password "password can contain / and \ etc"`  
 
-
 可在批处理文件中执行以下命令
 
 `Echo new-smbMapping ... | powershell -command –`  
-
 
 • 将密钥用双引号括起以解决此问题（除非第一个字符是“/”）。若是此例外，则使用交互模式，然后单独输入密码或重新生成密钥，获取不以正斜杠 (/) 字符开头的密钥。
 
@@ -239,7 +233,7 @@ file\_mode=0755,dir\_mode=0755,serverino,rsize=65536,wsize=65536,actimeo=1)
 如果 **serverino** 选项不存在，请选中 **serverino** 选项，卸载并再次装载 Azure 文件。
 
 ## 了解详细信息
-* [在 Windows 上开始使用 Azure 文件存储](/documentation/articles/storage-dotnet-how-to-use-files/)
-* [开始在 Linux 上使用 Azure 文件存储](/documentation/articles/storage-how-to-use-files-linux/)
+* [在 Windows 上开始使用 Azure 文件存储](./storage-dotnet-how-to-use-files.md)
+* [开始在 Linux 上使用 Azure 文件存储](./storage-how-to-use-files-linux.md)
 
 <!---HONumber=Mooncake_1128_2016-->

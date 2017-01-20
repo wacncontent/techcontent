@@ -1,33 +1,31 @@
 
-<properties
-	pageTitle="Azure AD v2.0 OAuth 客户端凭据流 | Azure"
-	description="使用 Azure AD 的 OAuth 2.0 身份验证协议实现构建 Web 应用程序。"
-	services="active-directory"
-	documentationCenter=""
-	authors="dstrockis"
-	manager="msmbaldwin"
-	editor=""/>  
+---
+title: Azure AD v2.0 OAuth 客户端凭据流 | Azure
+description: 使用 Azure AD 的 OAuth 2.0 身份验证协议实现构建 Web 应用程序。
+services: active-directory
+documentationCenter: 
+authors: dstrockis
+manager: msmbaldwin
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/26/2016"
-	wacn.date="10/31/2016"
-	ms.author="dastrock"/>  
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 10/31/2016
+ms.author: dastrock
+---
 
 # v2.0 协议 - OAuth 2.0 客户端凭据流
 
 通过 [OAuth 2.0 客户端凭据授予](http://tools.ietf.org/html/rfc6749#section-4.4)（有时称为“双重 OAuth”），可以使用应用程序的标识来访问 Web 托管的资源。它通常用于必须在后台运行的服务器到服务器交互，不需要最终用户立即干预。此类应用程序通常称为**守护程序**或**服务帐户**。
 
-> [AZURE.NOTE]
-	v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](/documentation/articles/active-directory-v2-limitations/)。
+> [!NOTE]
+    v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
-在较典型的“三重 OAuth”中，客户端应用程序有权代表特定用户访问资源。该权限通常在[许可](/documentation/articles/active-directory-v2-scopes/)过程中由用户**委托**给应用程序。但是，在客户端凭据流中，权限**直接**授予应用程序本身。当应用向资源出示令牌时，该资源将强制要求该应用本身拥有执行某个操作的授权 - 而不是某个用户拥有授权。
+在较典型的“三重 OAuth”中，客户端应用程序有权代表特定用户访问资源。该权限通常在[许可](./active-directory-v2-scopes.md)过程中由用户**委托**给应用程序。但是，在客户端凭据流中，权限**直接**授予应用程序本身。当应用向资源出示令牌时，该资源将强制要求该应用本身拥有执行某个操作的授权 - 而不是某个用户拥有授权。
 
 ## 获取直接授权 
 应用通常通过两种方式接收直接授权来访问资源：通过资源上的访问控制列表，或者通过 Azure AD 中的应用程序权限分配。资源可选择其他多种方式向其客户端授权，每个资源服务器可以选择最适合其应用程序的方式。以下两种方法在 Azure AD 中很常见，建议用于想要执行客户端凭据流的客户端和资源。
@@ -52,7 +50,7 @@
 
 #### 在应用注册门户中请求权限
 
-- 在 [apps.dev.microsoft.com](https://apps.dev.microsoft.com/?referrer=/documentation/articles&deeplink=/appList) 中导航到你的应用程序，或[创建一个应用](/documentation/articles/active-directory-v2-app-registration/)（如果没有）。需要确保应用程序至少创建了一个应用程序机密。
+- 在 [apps.dev.microsoft.com](https://apps.dev.microsoft.com/?referrer=/documentation/articles&deeplink=/appList) 中导航到你的应用程序，或[创建一个应用](./active-directory-v2-app-registration.md)（如果没有）。需要确保应用程序至少创建了一个应用程序机密。
 - 找到“直接应用程序权限”部分并添加应用所需的权限。
 - 请务必**保存**应用注册
 
@@ -60,28 +58,22 @@
 
 在构建使用应用程序权限的应用程序时，应用通常需要一个页面/查看，使管理员能够审批应用的权限。此页面可以是应用注册流的一部分、应用设置的一部分，或专用“连接”流的一部分。在许多情况下，合理的结果是应用只在用户使用工作或学校 Microsoft 帐户登录之后才显示此“连接”视图。
 
-将用户登录到应用后，可以识别用户所属的组织，然后要求他们审批应用程序权限。尽管在严格意义上不需要这样做，但有助于为组织用户带来更直观的体验。若要让用户登录，请遵循 [v2.0 协议教程](/documentation/articles/active-directory-v2-protocols/)。
+将用户登录到应用后，可以识别用户所属的组织，然后要求他们审批应用程序权限。尽管在严格意义上不需要这样做，但有助于为组织用户带来更直观的体验。若要让用户登录，请遵循 [v2.0 协议教程](./active-directory-v2-protocols.md)。
 
 #### 向目录管理员请求权限
 
 准备向公司管理员请求权限时，可以将用户重定向到 v2.0 **管理员许可终结点**。
 
+    // Line breaks for legibility only
+    
+    GET https://login.microsoftonline.com/{tenant}/adminconsent?
+    client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+    &state=12345
+    &redirect_uri=http://localhost/myapp/permissions
 
-	// Line breaks for legibility only
-	
-	GET https://login.microsoftonline.com/{tenant}/adminconsent?
-	client_id=6731de76-14a6-49ae-97bc-6eba6914391e
-	&state=12345
-	&redirect_uri=http://localhost/myapp/permissions
+    // Pro Tip: Try pasting the below request in a browser!
 
-
-
-	// Pro Tip: Try pasting the below request in a browser!
-
-
-
-	https://login.microsoftonline.com/common/adminconsent?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&state=12345&redirect_uri=http://localhost/myapp/permissions
-
+    https://login.microsoftonline.com/common/adminconsent?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&state=12345&redirect_uri=http://localhost/myapp/permissions
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -95,9 +87,7 @@
 ##### 成功的响应
 如果管理员批准了应用程序的权限，成功响应如下：
 
-
-	GET http://localhost/myapp/permissions?tenant=a8990e1f-ff32-408a-9f8e-78d3b9139b95&state=state=12345&admin_consent=True
-
+    GET http://localhost/myapp/permissions?tenant=a8990e1f-ff32-408a-9f8e-78d3b9139b95&state=state=12345&admin_consent=True
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -105,13 +95,10 @@
 | state | 同样随令牌响应返回的请求中所包含的值。其可以是你想要的任何内容的字符串。该状态用于对发出身份验证请求出现之前，有关用户在应用中的状态的信息（例如前面所在的页面或视图）编码。 |
 | admin\_consent | 将设置为 `True`。 |
 
-
 ##### 错误响应
 如果管理员未批准了应用程序的权限，失败响应如下：
 
-
-	GET http://localhost/myapp/permissions?error=permission_denied&error_description=The+admin+canceled+the+request
-
+    GET http://localhost/myapp/permissions?error=permission_denied&error_description=The+admin+canceled+the+request
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -123,16 +110,13 @@
 ## 获取令牌
 获取应用程序的必要授权后，可以继续获取 API 的访问令牌。若要使用客户端凭据授予获取令牌，请将 POST 请求发送到 `/token` v2.0 终结点：
 
+    POST /common/oauth2/v2.0/token HTTP/1.1
+    Host: login.microsoftonline.com
+    Content-Type: application/x-www-form-urlencoded
+    
+    client_id=535fb089-9ff3-47b6-9bfb-4f1264799865&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=qWgdYAmab0YSkuL1qKv5bPX&grant_type=client_credentials
 
-	POST /common/oauth2/v2.0/token HTTP/1.1
-	Host: login.microsoftonline.com
-	Content-Type: application/x-www-form-urlencoded
-	
-	client_id=535fb089-9ff3-47b6-9bfb-4f1264799865&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=qWgdYAmab0YSkuL1qKv5bPX&grant_type=client_credentials
-
-
-	curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d 'client_id=535fb089-9ff3-47b6-9bfb-4f1264799865&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=qWgdYAmab0YSkuL1qKv5bPX&grant_type=client_credentials' 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
-
+    curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d 'client_id=535fb089-9ff3-47b6-9bfb-4f1264799865&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=qWgdYAmab0YSkuL1qKv5bPX&grant_type=client_credentials' 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -144,13 +128,11 @@
 #### 成功的响应
 成功响应如下所示：
 
-
-	{
-	  "token_type": "Bearer",
-	  "expires_in": 3599,
-	  "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBP..."
-	}
-
+    {
+      "token_type": "Bearer",
+      "expires_in": 3599,
+      "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNBVGZNNXBP..."
+    }
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -161,18 +143,16 @@
 #### 错误响应
 错误响应如下所示：
 
-
-	{
-	  "error": "invalid_scope",
-	  "error_description": "AADSTS70011: The provided value for the input parameter 'scope' is not valid. The scope https://foo.microsoft.com/.default is not valid.\r\nTrace ID: 255d1aef-8c98-452f-ac51-23d051240864\r\nCorrelation ID: fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7\r\nTimestamp: 2016-01-09 02:02:12Z",
-	  "error_codes": [
-	    70011
-	  ],
-	  "timestamp": "2016-01-09 02:02:12Z",
-	  "trace_id": "255d1aef-8c98-452f-ac51-23d051240864",
-	  "correlation_id": "fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7"
-	}
-
+    {
+      "error": "invalid_scope",
+      "error_description": "AADSTS70011: The provided value for the input parameter 'scope' is not valid. The scope https://foo.microsoft.com/.default is not valid.\r\nTrace ID: 255d1aef-8c98-452f-ac51-23d051240864\r\nCorrelation ID: fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7\r\nTimestamp: 2016-01-09 02:02:12Z",
+      "error_codes": [
+        70011
+      ],
+      "timestamp": "2016-01-09 02:02:12Z",
+      "trace_id": "255d1aef-8c98-452f-ac51-23d051240864",
+      "correlation_id": "fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7"
+    }
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -186,19 +166,13 @@
 ## 使用令牌
 获取令牌后，可以使用该令牌对资源发出请求。当令牌过期时，只需向 `/token` 终结点重复该请求，即可获取全新的访问令牌。
 
+    GET /v1.0/me/messages
+    Host: https://graph.microsoft.com
+    Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
 
-	GET /v1.0/me/messages
-	Host: https://graph.microsoft.com
-	Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
+    // Pro Tip: Try the below command out! (but replace the token with your own)
 
-
-
-	// Pro Tip: Try the below command out! (but replace the token with your own)
-
-
-
-	curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q" 'https://graph.microsoft.com/v1.0/me/messages'
-
+    curl -X GET -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q" 'https://graph.microsoft.com/v1.0/me/messages'
 
 ## 代码示例
 若要查看使用管理员许可终结点实现 client\_credentials 授予的应用程序示例，请参阅 [v2.0 daemon code sample](https://github.com/Azure-Samples/active-directory-dotnet-daemon-v2)（v2.0 守护程序代码示例）。

@@ -1,19 +1,18 @@
-<properties
-	pageTitle="使用 Zabbix 监控 MySQL"
-	description="本文介绍如何在 Azure Linux 虚拟机上使用 Zabbix 监控 MySQL"
-	services="open-source"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""/>
+---
+title: 使用 Zabbix 监控 MySQL
+description: 本文介绍如何在 Azure Linux 虚拟机上使用 Zabbix 监控 MySQL
+services: open-source
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
-<tags
-	ms.service="open-source-website"
-	ms.date=""
-	wacn.date="06/14/2016"/>
+ms.service: open-source-website
+ms.date: 
+wacn.date: 06/14/2016
+---
 
 #使用 Zabbix 监控 MySQL
-
 
 ##监控 MySQL 和 MySQL 主从复制
 
@@ -95,7 +94,6 @@
     
   ![](./media/open-source-azure-virtual-machines-linux-configure-zabbix-3/3.png)
  
-
 我们现在可以继续下一步了: 配置 zabbix ，使用 zabbix mysql 模板监控 mysql 状态。步骤如下
 
 1.	在 mysql 主服务器上执行
@@ -176,7 +174,6 @@
         #+---------------+-----------------+
         #1 row in set (0.00 sec)
          
-         
         #Get InnoDB Transaction states
          
         #TRX_STATE  Transaction execution state. One of RUNNING, LOCK WAIT, ROLLING BACK or COMMITTING.
@@ -188,10 +185,6 @@
         #| running |   1 |
         #+---------+-----+
         #1 row in set (0.00 sec)
-         
-         
-         
-         
          
         innodb_metric=$1
          
@@ -317,7 +310,6 @@
 
 7.	导入 mysql 模板 ，关联到 mysq l主服务器。
 
-
     如果出现下面的问题
     
   ![](./media/open-source-azure-virtual-machines-linux-configure-zabbix-3/4.png)
@@ -337,7 +329,6 @@
 9.	现在您可以检查 mysql 状态了。打开 http://zabbix server ip/zabbix, 登录, 点击 “Monitoring” -- > “Graphs” -- > 选择 mysql 主服务器和一个想要查看的图形，比如 “MySQL Connections/Threads”
  
   ![](./media/open-source-azure-virtual-machines-linux-configure-zabbix-3/7.png)
-
 
 现在设置主从复制监控. 步骤如下:
 
@@ -394,4 +385,3 @@
 
   ![](./media/open-source-azure-virtual-machines-linux-configure-zabbix-3/14.png)
  
-

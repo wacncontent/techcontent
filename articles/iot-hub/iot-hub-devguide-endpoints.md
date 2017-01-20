@@ -1,23 +1,21 @@
-<properties
- pageTitle="开发人员指南 - IoT 中心终结点 | Azure"
- description="Azure IoT 中心开发人员指南 - 有关 IoT 中心终结点的参考信息"
- services="iot-hub"
- documentationCenter=".net"
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: 开发人员指南 - IoT 中心终结点 | Azure
+description: Azure IoT 中心开发人员指南 - 有关 IoT 中心终结点的参考信息
+services: iot-hub
+documentationCenter: .net
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="09/30/2016"
- wacn.date="12/12/2016" 
- ms.author="dobett"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 12/12/2016
+ms.author: dobett
+---
 
 # 参考 - IoT 中心终结点
 
@@ -73,26 +71,25 @@ Azure IoT 中心属于多租户服务，向各种执行组件公开功能。下�
 [lnk-amqp]: https://www.amqp.org/
 [lnk-mqtt]: http://mqtt.org/
 [lnk-websockets]: https://tools.ietf.org/html/rfc6455
-[lnk-arm]: /documentation/articles/resource-group-overview/
-[lnk-event-hubs]: /documentation/services/event-hubs/
+[lnk-arm]: ../azure-resource-manager/resource-group-overview.md
+[lnk-event-hubs]: ../event-hubs/index.md/
 
 [lnk-tls]: https://tools.ietf.org/html/rfc5246
 
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-accesscontrol]: ./iot-hub-devguide-security.md#access-control-and-permissions
+[lnk-importexport]: ./iot-hub-devguide-identity-registry.md#import-and-export-device-identities
+[lnk-d2c]: ./iot-hub-devguide-messaging.md#device-to-cloud-messages
+[lnk-device-identities]: ./iot-hub-devguide-identity-registry.md
+[lnk-upload]: ./iot-hub-devguide-file-upload.md
+[lnk-c2d]: ./iot-hub-devguide-messaging.md#cloud-to-device-messages
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-jobs]: ./iot-hub-devguide-jobs.md
 
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-accesscontrol]: /documentation/articles/iot-hub-devguide-security/#access-control-and-permissions
-[lnk-importexport]: /documentation/articles/iot-hub-devguide-identity-registry/#import-and-export-device-identities
-[lnk-d2c]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-messages
-[lnk-device-identities]: /documentation/articles/iot-hub-devguide-identity-registry/
-[lnk-upload]: /documentation/articles/iot-hub-devguide-file-upload/
-[lnk-c2d]: /documentation/articles/iot-hub-devguide-messaging/#cloud-to-device-messages
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-
-[lnk-devguide-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-devguide-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-devguide-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-devguide-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 
 <!---HONumber=Mooncake_1205_2016-->

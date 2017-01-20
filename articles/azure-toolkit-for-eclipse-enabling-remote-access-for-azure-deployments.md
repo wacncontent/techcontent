@@ -1,21 +1,21 @@
-<properties
-    pageTitle="在 Eclipse 中为 Azure 部署启用远程访问"
-    description="了解如何使用 Azure Toolkit for Eclipse 为 Azure 部署启用远程访问。"
-    services=""
-    documentationCenter="java"
-    authors="rmcmurray"
-    manager="wpickett"
-    editor=""/>
+---
+title: 在 Eclipse 中为 Azure 部署启用远程访问
+description: 了解如何使用 Azure Toolkit for Eclipse 为 Azure 部署启用远程访问。
+services: 
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="11/01/2016" 
-    wacn.date="12/05/2016" 
-    ms.author="robmcm"/>
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/05/2016
+ms.author: robmcm
+---
 
 <!-- Legacy MSDN URL = https://msdn.microsoft.com/library/azure/hh690951.aspx -->
 
@@ -24,12 +24,11 @@
 
 ## 如何在部署到 Azure 之前启用远程访问
 
-> [AZURE.NOTE] 若要在将应用程序部署到 Azure 之前启用远程访问，你需要在 Windows 上运行 Eclipse。
+> [!NOTE] 若要在将应用程序部署到 Azure 之前启用远程访问，你需要在 Windows 上运行 Eclipse。
 
 下图显示了用于启用远程访问的“远程访问”属性对话框。
 
 ![][ic719494]  
-
 
 可通过两种方法显示“远程访问”属性对话框：
 
@@ -93,7 +92,7 @@
   * 单击“连接”按钮后，系统会提示你打开 RDP 文件。打开该文件并按照提示操作。（你也可以将此文件保存到本地计算机，然后通过双击来运行该文件，这样即可远程登录到虚拟机，而无需首先进入管理门户。）
   * 当系统提示你输入用户名和密码时，请输入你为远程用户指定的值，然后即可登录。
 
-> [AZURE.NOTE] 如果你在非 Windows 操作系统上操作，则需要使用与你的操作系统兼容的远程桌面客户端，并遵照相应的步骤以使用已下载 RDP 文件中的设置配置该客户端。
+> [!NOTE] 如果你在非 Windows 操作系统上操作，则需要使用与你的操作系统兼容的远程桌面客户端，并遵照相应的步骤以使用已下载 RDP 文件中的设置配置该客户端。
 
 ## 另请参阅
 [适用于 Eclipse 的 Azure 工具包][]
@@ -108,9 +107,9 @@
 
 [Azure Java 开发人员中心]: /develop/java/
 [Azure Management Portal]: http://manage.windowsazure.cn
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
 
 <!-- IMG List -->
 
@@ -118,6 +117,5 @@
 [ic719495]: ./media/azure-toolkit-for-eclipse-enabling-remote-access-for-azure-deployments/ic719495.png
 [ic719494]: ./media/azure-toolkit-for-eclipse-enabling-remote-access-for-azure-deployments/ic719494.png
 [ic659273]: ./media/azure-toolkit-for-eclipse-enabling-remote-access-for-azure-deployments/ic659273.png
-
 
 <!---HONumber=Mooncake_1128_2016-->

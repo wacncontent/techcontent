@@ -1,21 +1,21 @@
-<properties
-	pageTitle="在生产环境中 Web Apps 的测试入门"
-	description="了解 Azure App Service Web Apps 的生产中测试 (TiP) 功能。"
-	services="app-service\web"
-	documentationCenter=""
-	authors="cephalin"
-	manager="wpickett"
-	editor=""/>
+---
+title: 在生产环境中 Web Apps 的测试入门
+description: 了解 Azure App Service Web Apps 的生产中测试 (TiP) 功能。
+services: app-service\web
+documentationCenter: 
+authors: cephalin
+manager: wpickett
+editor: 
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="01/13/2016"
-	wacn.date="09/26/2016"
-	ms.author="cephalin"/>
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 01/13/2016
+wacn.date: 09/26/2016
+ms.author: cephalin
+---
 
 # 在生产环境中 Web Apps 的测试入门
 
@@ -23,7 +23,7 @@
 
 ## App Service Web Apps 中的流量路由
 
-通过 [Azure App Service](/documentation/articles/app-service-changes-existing-services/) 中的流量路由功能，可以将部分实时用户流量定向到一个或多个[部署槽](/documentation/articles/web-sites-staged-publishing/)，然后使用 [Azure HDInsight](/home/features/hdinsight/) 来分析应用，或使用第三方工具来验证更改。例如，可以使用 App Service 实现以下方案：
+通过 [Azure App Service](./app-service-changes-existing-services.md) 中的流量路由功能，可以将部分实时用户流量定向到一个或多个[部署槽](./web-sites-staged-publishing.md)，然后使用 [Azure HDInsight](https://www.azure.cn/home/features/hdinsight/) 来分析应用，或使用第三方工具来验证更改。例如，可以使用 App Service 实现以下方案：
 
 - 在部署到整个站点之前找出更新中的功能错误或性能瓶颈
 - 对 beta 应用测量可用性度量值，以执行更改的“受控试验”。
@@ -40,17 +40,17 @@
 
 在每个 TiP 方案的基本级别中，将预定义百分比的实际流量路由到非生产部署槽。为此，请执行以下步骤：
 
->[AZURE.NOTE] 此处的步骤假设已有[非生产部署槽](/documentation/articles/web-sites-staged-publishing/)，并且所需的 Web 应用内容[已部署](/documentation/articles/web-sites-deploy/)给它。
+>[!NOTE] 此处的步骤假设已有[非生产部署槽](./web-sites-staged-publishing.md)，并且所需的 Web 应用内容[已部署](./web-sites-deploy.md)给它。
 
 1. 登录到 [Azure 门户预览](https://portal.azure.cn/)。
 2. 在 Web 应用的边栏选项卡中，单击“设置”>“流量路由”。![](./media/app-service-web-test-in-production/01-traffic-routing.png)
 3. 选择要将流量路由到的槽以及所需的总流量百分比，然后单击“保存”。
 
-	![](./media/app-service-web-test-in-production/02-select-slot.png)
+    ![](./media/app-service-web-test-in-production/02-select-slot.png)
 
 4. 转到部署槽的边栏选项卡。现在你应会看到路由到该处的实时流量。
 
-	![](./media/app-service-web-test-in-production/03-traffic-routed.png)
+    ![](./media/app-service-web-test-in-production/03-traffic-routed.png)
 
 配置流量路由后，指定百分比的客户端将随机路由到非生产槽。但是，要特别注意的是，一旦客户端自动路由到特定槽，它将在客户端会话生存期内都“固定”到该槽。这是使用 Cookie 固定用户会话来实现的。如果你查看 HTTP 请求，就会发现每个后续请求中都有一个 `TipMix` Cookie。
 
@@ -78,12 +78,12 @@
 
 若要让用户选择加入 beta 应用，请将相同的查询参数设置为非生产槽的名称，例如：
 
-		<webappname>.chinacloudsites.cn/?x-ms-routing-name=staging
+        <webappname>.chinacloudsites.cn/?x-ms-routing-name=staging
 
 ## 更多资源 ##
 
--   [为 Azure App Service 中的 Web 应用设置过渡环境](/documentation/articles/web-sites-staged-publishing/)
--	[通过可预测的方式在 Azure 中部署复杂应用程序](/documentation/articles/app-service-deploy-complex-application-predictably/)
--   [使用 Azure App Service 进行敏捷软件开发](/documentation/articles/app-service-agile-software-development/)
--	[对 Web 应用有效使用 DevOps 环境](/documentation/articles/app-service-web-staged-publishing-realworld-scenarios/)
+-   [为 Azure App Service 中的 Web 应用设置过渡环境](./web-sites-staged-publishing.md)
+-	[通过可预测的方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)
+-   [使用 Azure App Service 进行敏捷软件开发](./app-service-agile-software-development.md)
+-	[对 Web 应用有效使用 DevOps 环境](./app-service-web-staged-publishing-realworld-scenarios.md)
 <!---HONumber=Mooncake_0328_2016-->

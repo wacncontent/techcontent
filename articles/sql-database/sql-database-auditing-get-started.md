@@ -1,21 +1,21 @@
-<properties
-	pageTitle="SQL 数据库审核入门 | Azure"
-	description="SQL 数据库审核入门"
-	services="sql-database"
-	documentationCenter=""
-	authors="ronitr"
-	manager="jhubbard"
-	editor=""/>
+---
+title: SQL 数据库审核入门 | Azure
+description: SQL 数据库审核入门
+services: sql-database
+documentationCenter: 
+authors: ronitr
+manager: jhubbard
+editor: 
 
-<tags
-	ms.service="sql-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/05/2016"
-	wacn.date="12/19/2016"
-	ms.author="CarlRabeler; ronitr; giladm"/>  
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/05/2016
+wacn.date: 12/19/2016
+ms.author: CarlRabeler; ronitr; giladm
+---
 
 # SQL 数据库审核入门
 Azure SQL 数据库审核跟踪数据库事件，并将事件写入 Azure 存储帐户中的审核日志。
@@ -38,7 +38,7 @@ SQL 数据库审核可让你：
 - **报告**数据库活动。可以使用预配置的报告和仪表板快速开始使用活动和事件报告。
 - **分析**报告。可以查找可疑事件、异常活动和趋势。
 
-> [AZURE.NOTE] 现在，你可以使用新的**威胁检测**功能（目前以预览版提供），针对可能表示出现安全威胁的异常数据库活动接收前瞻性的警报。可以在审核配置边栏选项卡中启用和配置威胁检测。
+> [!NOTE] 现在，你可以使用新的**威胁检测**功能（目前以预览版提供），针对可能表示出现安全威胁的异常数据库活动接收前瞻性的警报。可以在审核配置边栏选项卡中启用和配置威胁检测。
 
 你可以为以下事件类别配置审核：
 
@@ -58,7 +58,7 @@ SQL 数据库审核可让你：
 
 可以为特定数据库定义审核策略，也可以将审核策略定义为默认服务器策略。默认服务器审核策略将应用于服务器上所有未定义特定重写数据库审核策略的数据库。
 
-在设置审核之前，请检查是否正在使用[“下层客户端”](/documentation/articles/sql-database-auditing-and-dynamic-data-masking-downlevel-clients/)。
+在设置审核之前，请检查是否正在使用[“下层客户端”](./sql-database-auditing-and-dynamic-data-masking-downlevel-clients.md)。
 
 ##<a id="subheading-3"></a>分析审核日志和报告
 
@@ -68,9 +68,7 @@ SQL 数据库审核可让你：
 
 可以使用 Power Query 将审核日志从 Azure 存储帐户直接导入 Excel 模板。然后可以浏览审核记录，并在日志数据顶部创建仪表板和报表。
 
-
 ![导航窗格][4]
-
 
 ##<a id="subheading-4"></a>使用 Azure 经典管理门户为数据库设置审核
 
@@ -80,27 +78,25 @@ SQL 数据库审核可让你：
 
 3. 将审核设置为“已启用”。
 
-	![导航窗格][5]
+    ![导航窗格][5]
 
 4. 根据需要编辑“按事件记录日志”，以自定义要审核的事件。
 
-	![导航窗格][6]
+    ![导航窗格][6]
 
 5. 选择“存储帐户”并配置“保持期”。
 
-	![导航窗格][7]
+    ![导航窗格][7]
 
 6. 单击“保存”。
-
 
 ##<a id="subheading-6"></a>重新生成存储密钥
 
 在生产环境中，你可能会定期刷新存储密钥。刷新密钥时，需要重新保存审核策略。过程如下：
 
-
 1. 在审核配置边栏选项卡中，将“存储访问密钥”从“主要”切换为“辅助”，然后单击“保存”。
 
-	![][8]
+    ![][8]
 
 2. 转到存储配置边栏选项卡，并**重新生成**主访问密钥。
 
@@ -119,9 +115,6 @@ SQL 数据库审核可让你：
 - [Set-AzureRMSqlServerAuditingPolicy](https://msdn.microsoft.com/zh-cn/library/azure/mt603794.aspx)
 - [Use-AzureRMSqlServerAuditingPolicy](https://msdn.microsoft.com/zh-cn/library/azure/mt619353.aspx)
 
-
-
-
 <!--Anchors-->
 [Azure SQL 数据库审核基础知识]: #subheading-1
 [分析审核日志和报告]: #subheading-3
@@ -129,7 +122,6 @@ SQL 数据库审核可让你：
 [Practices for usage in production]: #subheading-5
 [Storage Key Regeneration]: #subheading-6
 [Automation]: #subheading-7
-
 
 <!--Image references-->
 [1]: ./media/sql-database-auditing-get-started/1_auditing_get_started_settings.png
