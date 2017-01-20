@@ -52,7 +52,7 @@ wacn.date: 01/21/2016
 
 ## 如何使用 PowerShell 管理访问权限
 
-[!INCLUDE [powershell-preview-inline-include](../../includes/powershell-preview-inline-include.md)]
+[!INCLUDE [powershell-preview-inline-include](../includes/powershell-preview-inline-include.md)]
 
 ### 查看可用角色
 若要查看订阅的所有可用角色，请运行 **Get-AzureRmRoleDefinition** 命令。

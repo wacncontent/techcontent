@@ -14,7 +14,7 @@ wacn.date: 12/15/2016
 
 #Azure 云服务操作手册
 
-[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../includes/azure-sdk-developer-differences.md)]
 
 [Azure 云服务操作手册 - 第一部分](./azure-cloud-services-user-manual-part-1.md)
 
