@@ -40,11 +40,11 @@ Azure Blob 存储是一种稳健、通用的存储解决方案，它与 HDInsigh
 
 HDInsight 提供对在本地附加到计算节点的分布式文件系统的访问。可使用完全限定 URI 访问该文件系统，例如：
 
-	hdfs://<namenodehost>/<path>
+    hdfs://<namenodehost>/<path>
 
 另外，HDInsight 提供了访问 Azure Blob 存储中所存储数据的功能。语法为：
 
-	wasb[s]://<containername>@<accountname>.blob.core.chinacloudapi.cn/<path>
+    wasb[s]://<containername>@<accountname>.blob.core.chinacloudapi.cn/<path>
 
 > [!NOTE] 在低于 3.0 的 HDInsight 版本中，使用的是 `asv://` 而不是 `wasb://`。不应在 HDInsight 群集 3.0 或更高版本中使用 `asv://`，否则会导致出错。
 
@@ -56,7 +56,7 @@ Hadoop 支持默认文件系统的概念。默认文件系统意指默认方案�
 
 - **没有连接到群集的存储帐户中的公共容器或公共 Blob：**你对这些容器中的 Blob 具有只读权限。
 
-	> [!NOTE]
+    > [!NOTE]
         > 利用公共容器，可获得该容器中可用的所有 Blob 的列表以及容器元数据。利用公共 Blob，只有知道正确 URL 时才可访问 Blob。有关详细信息，请参阅<a href="../storage/storage-manage-access-to-resources.md">限制对容器和 Blob 的访问</a>。
 
 - **没有连接到群集的存储帐户中的私有容器：**不能访问这些容器中的 Blob，除非在提交 WebHCat 作业时定义存储帐户。本文稍后部分对此做了解释。
@@ -110,7 +110,7 @@ Blob 存储可用于结构化和非结构化数据。Blob 存储容器将数据�
 
 若要创建容器，请使用以下命令：
 
-	azure storage container create <containername> --account-name <storageaccountname> --account-key <storageaccountkey>
+    azure storage container create <containername> --account-name <storageaccountname> --account-key <storageaccountkey>
 
 ### 使用 Azure PowerShell
 
@@ -118,28 +118,28 @@ Blob 存储可用于结构化和非结构化数据。Blob 存储容器将数据�
 
 [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
-	$subscriptionName = "<SubscriptionName>"	# Azure subscription name
-	$storageAccountName = "<AzureStorageAccountName>" # The storage account that you will create
-	$containerName="<BlobContainerToBeCreated>" # The Blob container name that you will create
+    $subscriptionName = "<SubscriptionName>"	# Azure subscription name
+    $storageAccountName = "<AzureStorageAccountName>" # The storage account that you will create
+    $containerName="<BlobContainerToBeCreated>" # The Blob container name that you will create
 
-	# Connect to your Azure account and selec the current subscription
-	
-	Add-AzureAccount -Environment AzureChinaCloud
+    # Connect to your Azure account and selec the current subscription
+    
+    Add-AzureAccount -Environment AzureChinaCloud
 
-	Select-AzureSubscription $subscriptionName #only required if you have multiple subscriptions
+    Select-AzureSubscription $subscriptionName #only required if you have multiple subscriptions
 
-	# Create a storage context object
-	$storageAccountkey = get-azurestoragekey $storageAccountName | %{$_.Primary}
-	$destContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
+    # Create a storage context object
+    $storageAccountkey = get-azurestoragekey $storageAccountName | %{$_.Primary}
+    $destContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
 
-	# Create a Blob storage container
-	New-AzureStorageContainer -Name $containerName -Context $destContext
+    # Create a Blob storage container
+    New-AzureStorageContainer -Name $containerName -Context $destContext
 
 ## <a id="addressing"></a>确定 Blob 存储空间中文件的地址
 
 用于从 HDInsight 访问 Blob 存储中的文件的 URI 方案为：
 
-	wasb[s]://<BlobStorageContainerName>@<StorageAccountName>.blob.core.chinacloudapi.cn/<path>
+    wasb[s]://<BlobStorageContainerName>@<StorageAccountName>.blob.core.chinacloudapi.cn/<path>
 
 URI 方案提供了使用 *wasb:* 前缀的未加密访问和使用 *wasbs* 的 SSL 加密访问。建议尽量使用 *wasbs* ，即使在访问位于同一 Azure 区域内的数据时也是如此。
 
@@ -148,15 +148,15 @@ URI 方案提供了使用 *wasb:* 前缀的未加密访问和使用 *wasbs* 的 
 
 如果既不指定 &lt;BlobStorageContainerName&gt; 也不指定 &lt;StorageAccountName&gt;，将使用默认文件系统。对于默认文件系统中的文件，可使用相对路径或绝对路径。例如，可以使用以下任一方式引用随 HDInsight 群集提供的 *hadoop-mapreduce-examples.jar* 文件：
 
-	wasbs://mycontainer@myaccount.blob.core.chinacloudapi.cn/example/jars/hadoop-mapreduce-examples.jar
-	wasbs:///example/jars/hadoop-mapreduce-examples.jar
-	/example/jars/hadoop-mapreduce-examples.jar
+    wasbs://mycontainer@myaccount.blob.core.chinacloudapi.cn/example/jars/hadoop-mapreduce-examples.jar
+    wasbs:///example/jars/hadoop-mapreduce-examples.jar
+    /example/jars/hadoop-mapreduce-examples.jar
 
 > [!NOTE] 在 HDInsight 版本 2.1 和 1.6 群集中，文件名是 <i>hadoop-examples.jar</i>。
 
 &lt;path&gt; 是文件或目录 HDFS 路径名。由于 Azure Blob 存储容器只是键值存储，因此没有真正的分层文件系统。Blob 键中的斜线字符 (/) 解释为目录分隔符。例如，*hadoop-mapreduce-examples.jar* 的 Blob 名称是：
 
-	example/jars/hadoop-mapreduce-examples.jar
+    example/jars/hadoop-mapreduce-examples.jar
 
 > [!NOTE] 在 HDInsight 外部使用 Blob 时，大多数实用程序无法识别 WASB 格式，应改用基本路径格式，如 `example/jars/hadoop-mapreduce-examples.jar`。
 
@@ -164,23 +164,23 @@ URI 方案提供了使用 *wasb:* 前缀的未加密访问和使用 *wasbs* 的 
 
 使用以下命令列出与 Blob 有关的命令：
 
-	azure storage blob
+    azure storage blob
 
 **使用 Azure CLI 上传文件的示例**
 
-	azure storage blob upload <sourcefilename> <containername> <blobname> --account-name <storageaccountname> --account-key <storageaccountkey>
+    azure storage blob upload <sourcefilename> <containername> <blobname> --account-name <storageaccountname> --account-key <storageaccountkey>
 
 **使用 Azure CLI 下载文件的示例**
 
-	azure storage blob download <containername> <blobname> <destinationfilename> --account-name <storageaccountname> --account-key <storageaccountkey>
+    azure storage blob download <containername> <blobname> <destinationfilename> --account-name <storageaccountname> --account-key <storageaccountkey>
 
 **使用 Azure CLI 删除文件的示例**
 
-	azure storage blob delete <containername> <blobname> --account-name <storageaccountname> --account-key <storageaccountkey>
+    azure storage blob delete <containername> <blobname> --account-name <storageaccountname> --account-key <storageaccountkey>
 
 **使用 Azure CLI 列出文件的示例**
 
-	azure storage blob list <containername> <blobname|prefix> --account-name <storageaccountname> --account-key <storageaccountkey>
+    azure storage blob list <containername> <blobname|prefix> --account-name <storageaccountname> --account-key <storageaccountkey>
 
 ## <a id="powershell"></a>使用 Azure PowerShell 访问 Blob
 
@@ -188,7 +188,7 @@ URI 方案提供了使用 *wasb:* 前缀的未加密访问和使用 *wasbs* 的 
 
 使用以下命令列出与 Blob 有关的 cmdlet：
 
-	Get-Command *blob*
+    Get-Command *blob*
 
 ![Blob 相关 PowerShell cmdlet 的列表。][img-hdi-powershell-blobcommands]
 
@@ -200,85 +200,85 @@ URI 方案提供了使用 *wasb:* 前缀的未加密访问和使用 *wasbs* 的 
 
 以下脚本会将块 Blob 下载到当前文件夹。运行该脚本之前，请将该目录更改为你有写入权限的文件夹。
 
-	$storageAccountName = "<AzureStorageAccountName>"   # The storage account used for the default file system specified at provision.
-	$containerName = "<BlobStorageContainerName>"  # The default file system container has the same name as the cluster.
-	$blob = "example/data/sample.log" # The name of the blob to be downloaded.
-	
-	# Use Import-AzurePublishSettingsFile if you haven't connected to your Azure subscription
+    $storageAccountName = "<AzureStorageAccountName>"   # The storage account used for the default file system specified at provision.
+    $containerName = "<BlobStorageContainerName>"  # The default file system container has the same name as the cluster.
+    $blob = "example/data/sample.log" # The name of the blob to be downloaded.
+    
+    # Use Import-AzurePublishSettingsFile if you haven't connected to your Azure subscription
 
-	# Use these two commands if you have multiple subscriptions
-	#$subscriptionName = "<SubscriptionName>"
-	#Select-AzureSubscription $subscriptionName
+    # Use these two commands if you have multiple subscriptions
+    #$subscriptionName = "<SubscriptionName>"
+    #Select-AzureSubscription $subscriptionName
 
-	Write-Host "Create a context object ... " -ForegroundColor Green
-	$storageAccountKey = Get-AzureStorageKey $storageAccountName | %{ $_.Primary }
-	$storageContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
-	
-	Write-Host "Download the blob ..." -ForegroundColor Green
-	Get-AzureStorageBlobContent -Container $ContainerName -Blob $blob -Context $storageContext -Force
-	
-	Write-Host "List the downloaded file ..." -ForegroundColor Green
-	cat "./$blob"
+    Write-Host "Create a context object ... " -ForegroundColor Green
+    $storageAccountKey = Get-AzureStorageKey $storageAccountName | %{ $_.Primary }
+    $storageContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
+    
+    Write-Host "Download the blob ..." -ForegroundColor Green
+    Get-AzureStorageBlobContent -Container $ContainerName -Blob $blob -Context $storageContext -Force
+    
+    Write-Host "List the downloaded file ..." -ForegroundColor Green
+    cat "./$blob"
 
 ###删除文件
 
 以下脚本显示如何删除文件。
 
-	$storageAccountName = "<AzureStorageAccountName>"   # The storage account used for the default file system specified at provision.
-	$containerName = "<BlobStorageContainerName>"  # The default file system container has the same name as the cluster.
-	$blob = "example/data/sample.log" # The name of the blob to be downloaded.
+    $storageAccountName = "<AzureStorageAccountName>"   # The storage account used for the default file system specified at provision.
+    $containerName = "<BlobStorageContainerName>"  # The default file system container has the same name as the cluster.
+    $blob = "example/data/sample.log" # The name of the blob to be downloaded.
 
-	# Use Import-AzurePublishSettingsFile if you haven't connected to your Azure subscription
+    # Use Import-AzurePublishSettingsFile if you haven't connected to your Azure subscription
 
-	# Use these two commands if you have multiple subscriptions
-	#$subscriptionName = "<SubscriptionName>"
-	#Select-AzureSubscription $subscriptionName
+    # Use these two commands if you have multiple subscriptions
+    #$subscriptionName = "<SubscriptionName>"
+    #Select-AzureSubscription $subscriptionName
 
-	Write-Host "Create a context object ... " -ForegroundColor Green
-	$storageAccountKey = Get-AzureStorageKey $storageAccountName | %{ $_.Primary }
-	$storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
+    Write-Host "Create a context object ... " -ForegroundColor Green
+    $storageAccountKey = Get-AzureStorageKey $storageAccountName | %{ $_.Primary }
+    $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
 
-	Write-Host "Delete the blob ..." -ForegroundColor Green
-	Remove-AzureStorageBlob -Container $containerName -Context $storageContext -blob $blob
+    Write-Host "Delete the blob ..." -ForegroundColor Green
+    Remove-AzureStorageBlob -Container $containerName -Context $storageContext -blob $blob
 
 ###列出文件
 
 以下脚本显示如何列出文件夹中的文件。（下一个示例显示如何使用 **Invoke-Hive** cmdlet 来执行 **dfs ls** 命令以列出文件夹。）
 
-	$storageAccountName = "<AzureStorageAccountName>"   # The storage account used for the default file system specified at provision.
-	$containerName = "<BlobStorageContainerName>"  # The default file system container has the same name as the cluster.
-	$blobPrefix = "example/data/"
+    $storageAccountName = "<AzureStorageAccountName>"   # The storage account used for the default file system specified at provision.
+    $containerName = "<BlobStorageContainerName>"  # The default file system container has the same name as the cluster.
+    $blobPrefix = "example/data/"
 
-	# Use Import-AzurePublishSettingsFile if you haven't connected to your Azure subscription
+    # Use Import-AzurePublishSettingsFile if you haven't connected to your Azure subscription
 
-	# Use these two commands if you have multiple subscriptions
-	#$subscriptionName = "<SubscriptionName>"
-	#Select-AzureSubscription $subscriptionName
+    # Use these two commands if you have multiple subscriptions
+    #$subscriptionName = "<SubscriptionName>"
+    #Select-AzureSubscription $subscriptionName
 
-	Write-Host "Create a context object ... " -ForegroundColor Green
-	$storageAccountKey = Get-AzureStorageKey $storageAccountName | %{ $_.Primary }
-	$storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
+    Write-Host "Create a context object ... " -ForegroundColor Green
+    $storageAccountKey = Get-AzureStorageKey $storageAccountName | %{ $_.Primary }
+    $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
 
-	Write-Host "List the files in $blobPrefix ..."
-	Get-AzureStorageBlob -Container $containerName -Context $storageContext -prefix $blobPrefix
+    Write-Host "List the files in $blobPrefix ..."
+    Get-AzureStorageBlob -Container $containerName -Context $storageContext -prefix $blobPrefix
 
 ###使用未定义的存储帐户运行 Hive 查询
 
 此示例显示如何列出在创建过程中未定义的存储帐户的文件夹。
 
-	$clusterName = "<HDInsightClusterName>"
+    $clusterName = "<HDInsightClusterName>"
 
-	$undefinedStorageAccount = "<UnboundedStorageAccountUnderTheSameSubscription>"
-	$undefinedContainer = "<UnboundedBlobContainerAssociatedWithTheStorageAccount>"
+    $undefinedStorageAccount = "<UnboundedStorageAccountUnderTheSameSubscription>"
+    $undefinedContainer = "<UnboundedBlobContainerAssociatedWithTheStorageAccount>"
 
-	$undefinedStorageKey = Get-AzureStorageKey $undefinedStorageAccount | %{ $_.Primary }
+    $undefinedStorageKey = Get-AzureStorageKey $undefinedStorageAccount | %{ $_.Primary }
 
-	Use-AzureHDInsightCluster $clusterName
+    Use-AzureHDInsightCluster $clusterName
 
-	$defines = @{}
-	$defines.Add("fs.azure.account.key.$undefinedStorageAccount.blob.core.chinacloudapi.cn", $undefinedStorageKey)
+    $defines = @{}
+    $defines.Add("fs.azure.account.key.$undefinedStorageAccount.blob.core.chinacloudapi.cn", $undefinedStorageKey)
 
-	Invoke-Hive -Defines $defines -Query "dfs -ls wasbs://$undefinedContainer@$undefinedStorageAccount.blob.core.chinacloudapi.cn/;"
+    Invoke-Hive -Defines $defines -Query "dfs -ls wasbs://$undefinedContainer@$undefinedStorageAccount.blob.core.chinacloudapi.cn/;"
 
 ## <a id="nextsteps"></a>后续步骤
 

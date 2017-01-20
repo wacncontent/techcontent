@@ -98,7 +98,7 @@ Azure CDN has no limit on the number of accelerated domain names that can be add
 Currently, Azure CDN principally provides static acceleration, but also includes some dynamic acceleration technologies. Examples include returning to origin by using multiline nodes and Transmission Control Protocol (TCP) optimization. Active webpage acceleration techniques such as PHP, ASP.NET, and JSP are not supported, but more dynamic page acceleration methods will be gradually added in the future.
 
 Acceleration types supported by Azure CDN include web acceleration, Video on Demand (VoD) acceleration, live streaming media (direct broadcast) acceleration, and HTTPS acceleration.
-	
+    
 ## **What are the specific differences between the web acceleration, VoD acceleration, live streaming media acceleration, and HTTPS acceleration in the Content Delivery Network acceleration type options?**<a id="step11"></a>
 
 Different Content Delivery Network acceleration types correspond to different usage scenarios:
@@ -135,7 +135,7 @@ The differences in terms of how these acceleration types work with the CDN back-
 - **The system’s default cache rules for live streaming media acceleration are:**
   1. TS files are cached for two minutes.
   2. M3U8 files are cached for two seconds. 
-	
+    
 **Cache rule logic:**
 
    1. If the user configured no-cache rules, these rules will be applied as top priority. Then, configured cache rules will be applied from top to bottom.
@@ -153,7 +153,7 @@ If the custom domain name is a wildcard domain name, the refresh URL must specif
 ## **Can wildcard domain names be used with preloading?**<a id="step15"></a>
 
 Preloading requires a subdomain, which must be accessible (The HTTP status code is 200).
-	 
+     
 ## **What is the difference between the “Origin Domain” and the “Origin Host Header”?**<a id="step16"></a>
 
 The Origin Domain indicates the actual, accessible origin address, which may be an IP address or a domain name. If it is a domain name, CDN will perform address parsing for the domain name when returning to source. It will then use the parsed IP address to access it.

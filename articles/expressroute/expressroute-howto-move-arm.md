@@ -38,18 +38,18 @@ ms.author: ganesr
 
 登录到 Azure 经典环境并收集服务密钥。可以使用以下 PowerShell 代码段来收集信息：
 
-	# Sign in to your Azure account
-	Add-AzureAccount -Environment AzureChinaCloud
+    # Sign in to your Azure account
+    Add-AzureAccount -Environment AzureChinaCloud
 
-	# Select the appropriate Azure subscription
-	Select-AzureSubscription "<Enter Subscription Name here>"
+    # Select the appropriate Azure subscription
+    Select-AzureSubscription "<Enter Subscription Name here>"
 
-	# Import the PowerShell modules for Azure and ExpressRoute
-	Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1'
-	Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\ExpressRoute\ExpressRoute.psd1'
+    # Import the PowerShell modules for Azure and ExpressRoute
+    Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1'
+    Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\ExpressRoute\ExpressRoute.psd1'
 
-	# Get the service keys of all your ExpressRoute circuits
-	Get-AzureDedicatedCircuit
+    # Get the service keys of all your ExpressRoute circuits
+    Get-AzureDedicatedCircuit
 
 复制你要转移到 Resource Manager 部署模型的线路的**服务密钥**。
 
@@ -57,14 +57,14 @@ ms.author: ganesr
 
 可以使用以下代码段创建新的资源组：
 
-	# Sign in to your Azure Resource Manager environment
-	Login-AzureRmAccount -Environment $(Get-AzureRmEnvironment -Name AzureChinaCloud)
+    # Sign in to your Azure Resource Manager environment
+    Login-AzureRmAccount -Environment $(Get-AzureRmEnvironment -Name AzureChinaCloud)
 
-	# Select the appropriate Azure subscription
-	Get-AzureRmSubscription -SubscriptionName "<Enter Subscription Name here>" | Select-AzureRmSubscription
+    # Select the appropriate Azure subscription
+    Get-AzureRmSubscription -SubscriptionName "<Enter Subscription Name here>" | Select-AzureRmSubscription
 
-	#Create a new resource group if you don't already have one
-	New-AzureRmResourceGroup -Name "DemoRG" -Location "chinaeast"
+    #Create a new resource group if you don't already have one
+    New-AzureRmResourceGroup -Name "DemoRG" -Location "chinaeast"
 
 你也可以使用现有的资源组（如果有）。
 
@@ -74,7 +74,7 @@ ms.author: ganesr
 
 可以运行以下代码段来实现此目的：
 
-	Move-AzureRmExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "DemoRG" -Location "chinaeast" -ServiceKey "<Service-key>"
+    Move-AzureRmExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "DemoRG" -Location "chinaeast" -ServiceKey "<Service-key>"
 
 >[!NOTE] 转移完成之后，列在前一个 cmdlet 中的新名称用于处理资源。线路实质上已重命名。
 

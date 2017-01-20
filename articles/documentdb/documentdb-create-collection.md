@@ -35,7 +35,7 @@ wacn.date: 11/30/2016
 
 3. 在“添加集合”边栏选项卡的“ID”框中，输入新集合的 ID。集合名称的长度必须为 1 到 255 个字符，且不能包含 `/ \ # ?` 或尾随空格。对名称进行验证后，ID 框中会出现一个绿色的复选标记。
 
-	![屏幕截图：突出显示“数据库”边栏选项卡上的“添加集合”按钮、“添加集合”边栏选项卡上的设置以及“确定”按钮 — 用于 DocumentDB 的 Azure 门户预览 — 用于 NoSQL JSON 数据库的云端数据库创建程序](./media/documentdb-create-collection/docdb-collection-creation-5-8.png)
+    ![屏幕截图：突出显示“数据库”边栏选项卡上的“添加集合”按钮、“添加集合”边栏选项卡上的设置以及“确定”按钮 — 用于 DocumentDB 的 Azure 门户预览 — 用于 NoSQL JSON 数据库的云端数据库创建程序](./media/documentdb-create-collection/docdb-collection-creation-5-8.png)
 
 4. 默认情况下，“定价层”设置为“标准”，因此可以为集合自定义吞吐量和存储。有关定价层的详细信息，请参阅 [DocumentDB 中的性能级别](./documentdb-performance-levels.md)。
 
@@ -55,11 +55,11 @@ wacn.date: 11/30/2016
 
 9. 新集合现在会出现在“概述”边栏选项卡上的“集合”可重用功能区中。
  
-	![屏幕截图：数据库边栏选项卡中的新集合 — 用于 DocumentDB 的 Azure 门户预览 — 用于 NoSQL JSON 数据库的云端数据库创建程序](./media/documentdb-create-collection/docdb-collection-creation-9.png)  
+    ![屏幕截图：数据库边栏选项卡中的新集合 — 用于 DocumentDB 的 Azure 门户预览 — 用于 NoSQL JSON 数据库的云端数据库创建程序](./media/documentdb-create-collection/docdb-collection-creation-9.png)  
 
 10. **可选：**若要在门户中修改集合的吞吐量，请在“资源”菜单上单击“缩放”。
 
-	![资源菜单的屏幕截图，其中已选择“缩放”](./media/documentdb-create-collection/docdb-collection-creation-scale.png)  
+    ![资源菜单的屏幕截图，其中已选择“缩放”](./media/documentdb-create-collection/docdb-collection-creation-scale.png)  
 
 ## 什么是 DocumentDB 集合？  <a name="what-is-a-documentdb-collection"></a>
 

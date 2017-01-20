@@ -94,7 +94,7 @@ SQL Server 提供多种方法来完成每个任务。本文概述了每个任务
  - [仅从 BACPAC 文件中将架构导入](./sql-database-cloud-migrate-compatible-import-bacpac-ssms.md)到 SQL 数据库。
  - 使用 [BCP](https://msdn.microsoft.com/zh-cn/library/ms162802.aspx) 将数据提取到平面文件中，然后再将这些文件[并行加载](https://technet.microsoft.com/zh-cn/library/dd425070.aspx)到 Azure SQL 数据库。
 
-	 ![SQL Server 数据库迁移 - 将 SQL 数据库迁移到云。](./media/sql-database-cloud-migrate/01SSMSDiagram_new.png)  
+     ![SQL Server 数据库迁移 - 将 SQL 数据库迁移到云。](./media/sql-database-cloud-migrate/01SSMSDiagram_new.png)  
 
 ## 后续步骤
 - [最新版本的 SSDT](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx)

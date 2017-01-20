@@ -20,7 +20,7 @@ manager: timlt
 
 3. 在“磁盘”下，表格将列出所有附加的磁盘的名称和类型。例如，此屏幕显示带有一个操作系统 (OS) 磁盘和一个数据磁盘的虚拟机：
 
-	![查找数据磁盘](./media/howto-detach-disk-windows-linux/FindDataDisks.png)
+    ![查找数据磁盘](./media/howto-detach-disk-windows-linux/FindDataDisks.png)
 
 ## 分离磁盘
 
@@ -30,7 +30,7 @@ manager: timlt
 
 3. 选择数据磁盘，然后单击复选标记以分离该磁盘。
 
-	![分离磁盘详细信息](./media/howto-detach-disk-windows-linux/DetachDiskDetails.png)
+    ![分离磁盘详细信息](./media/howto-detach-disk-windows-linux/DetachDiskDetails.png)
 
 磁盘保留在存储中，但不再附加到虚拟机。
 

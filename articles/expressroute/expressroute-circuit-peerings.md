@@ -80,8 +80,8 @@ Azure 存储空间、SQL 数据库和网站等服务是使用公共 IP 地址提
 - 查找服务提供商。请参阅 [ExpressRoute service providers and locations](./expressroute-locations.md)（ExpressRoute 服务提供商和位置）。
 - 确保符合所有先决条件。请参阅 [ExpressRoute 先决条件](./expressroute-prerequisites.md)。
 - 配置 ExpressRoute 连接。
-	- [创建 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)
-	- [配置路由（线路对等互连）](./expressroute-howto-routing-classic.md)
-	- [将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-classic.md)
+    - [创建 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)
+    - [配置路由（线路对等互连）](./expressroute-howto-routing-classic.md)
+    - [将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-classic.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

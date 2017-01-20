@@ -53,29 +53,29 @@ SSHD 是在 Linux VM 上运行的 SSH 服务器。SSH 是从 MacBook 或 Linux �
 ## 快速命令
 *只需要 TLDR 版本的资深 Linux 管理员请从此处开始。其他需要详细说明和演练的用户请跳过本部分。*
 
-	sudo vim /etc/ssh/sshd_config
+    sudo vim /etc/ssh/sshd_config
 
 如下所示编辑配置文件：
 
-	# Change PasswordAuthentication to this:
-	PasswordAuthentication no
-	
-	# Change PubkeyAuthentication to this:
-	PubkeyAuthentication yes
-	
-	# Change PermitRootLogin to this:
-	PermitRootLogin no
-	
-	# Change ChallengeResponseAuthentication to this:
-	ChallengeResponseAuthentication no
+    # Change PasswordAuthentication to this:
+    PasswordAuthentication no
+    
+    # Change PubkeyAuthentication to this:
+    PubkeyAuthentication yes
+    
+    # Change PermitRootLogin to this:
+    PermitRootLogin no
+    
+    # Change ChallengeResponseAuthentication to this:
+    ChallengeResponseAuthentication no
 
 重新启动 SSHD 服务。在基于 Debian 的分发版上：
 
-	sudo service ssh restart
+    sudo service ssh restart
 
 在基于 Red Hat 的分发版上：
 
-	sudo service sshd restart
+    sudo service sshd restart
 
 ## 详细演练
 
@@ -83,28 +83,28 @@ SSHD 是在 Linux VM 上运行的 SSH 服务器。SSH 是从 MacBook 或 Linux �
 
 我们将在 T2 上编辑 SSHD 配置文件。
 
-	sudo vim /etc/ssh/sshd_config
+    sudo vim /etc/ssh/sshd_config
 
 在这里，我们只需编辑设置来禁用密码，并启用 SSH 密钥登录。此文件中有许多需要研究和更改的设置，它们能让 Linux 和 SSH 的安全性符合要求。
 
 #### 禁用密码登录
 
-	# Change PasswordAuthentication to this:
-	PasswordAuthentication no
+    # Change PasswordAuthentication to this:
+    PasswordAuthentication no
 
 #### 启用公钥身份验证
 
-	# Change PubkeyAuthentication to this:
-	PubkeyAuthentication yes
+    # Change PubkeyAuthentication to this:
+    PubkeyAuthentication yes
 #### 禁用 Root 登录
-	
-	# Change PermitRootLogin to this:
-	PermitRootLogin no
+    
+    # Change PermitRootLogin to this:
+    PermitRootLogin no
 
 #### 禁用质询-响应身份验证
 
-	# Change ChallengeResponseAuthentication to this:
-	ChallengeResponseAuthentication no
+    # Change ChallengeResponseAuthentication to this:
+    ChallengeResponseAuthentication no
 
 ### 重新启动 SSHD
 从 T1 shell 验证你是否仍保持登录。此步骤非常重要，因为我们已禁用密码，这样做能够避免当 SSH 密钥不正确时 VM 被锁定。如果 Linux VM 上有任何不正确的设置，你可以使用 T1 来修复 sshd\_config，因为你仍保持登录状态，并且 SSH 在 SSHD 服务重新启动期间会保持连接的活动状态。
@@ -113,11 +113,11 @@ SSHD 是在 Linux VM 上运行的 SSH 服务器。SSH 是从 MacBook 或 Linux �
 
 ##### 在 Debian 系列上
 
-	sudo service ssh restart
+    sudo service ssh restart
 
 ##### 在 RedHat 系列上
 
-	sudo service sshd restart
+    sudo service sshd restart
 
 VM 上的密码现已禁用，可以防止有人尝试进行避免暴力破解密码登录。由于只允许 SSH 密钥，你可以使用更快速、更安全的方式登录。
 

@@ -47,7 +47,7 @@ ms.author: jdial
 
 4. 在“创建网络安全组”边栏选项卡中，在 “RG-NSG” 资源组中创建名为 “NSG-FrontEnd” 的 NSG，然后单击“创建”。
 
-	![Azure 门户预览 - NSG](./media/virtual-networks-create-nsg-arm-pportal/figure13.png)
+    ![Azure 门户预览 - NSG](./media/virtual-networks-create-nsg-arm-pportal/figure13.png)
 
 ## <a name="Create-rules-in-an-existing-NSG"></a> 在现有 NSG 中创建规则
 
@@ -57,19 +57,19 @@ ms.author: jdial
 
 3. 在 NSG 列表中，单击“NSG-FrontEnd”>“入站安全规则”
 
-	![Azure 门户预览 - NSG-FrontEnd](./media/virtual-networks-create-nsg-arm-pportal/figure2.png)
+    ![Azure 门户预览 - NSG-FrontEnd](./media/virtual-networks-create-nsg-arm-pportal/figure2.png)
 
 4. 在“入站安全规则”列表中，单击“添加”。
 
-	![Azure 门户预览 - 添加规则](./media/virtual-networks-create-nsg-arm-pportal/figure3.png)
+    ![Azure 门户预览 - 添加规则](./media/virtual-networks-create-nsg-arm-pportal/figure3.png)
 
 5. 在“添加入站安全规则”边栏选项卡中创建一个名为 “web-rule” 的规则，其优先级为 “200”，允许通过 “TCP” 访问端口 “80” 进入来自任何来源的任何 VM，然后单击“确定”。请注意，这些设置中大多数已为默认值。
 
-	![Azure 门户预览 - 规则设置](./media/virtual-networks-create-nsg-arm-pportal/figure4.png)
+    ![Azure 门户预览 - 规则设置](./media/virtual-networks-create-nsg-arm-pportal/figure4.png)
 
 6. 几秒钟后你将看到 NSG 中的新规则。
 
-	![Azure 门户预览 - 新建规则](./media/virtual-networks-create-nsg-arm-pportal/figure5.png)
+    ![Azure 门户预览 - 新建规则](./media/virtual-networks-create-nsg-arm-pportal/figure5.png)
 
 7. 重复到第 6 步以创建名为 “rdp-rule” 的入站规则，其优先级为 “250”，允许通过 “TCP” 经端口 “3389” 访问来自任何来源的任何 VM。
 
@@ -78,15 +78,15 @@ ms.author: jdial
 1. 单击“浏览 >”>“资源组”>“RG-NSG”。
 2. 在“RG-NSG”边栏选项卡中，单击“...”>“TestVNet”。
 
-	![Azure 门户预览 - TestVNet](./media/virtual-networks-create-nsg-arm-pportal/figure14.png)
+    ![Azure 门户预览 - TestVNet](./media/virtual-networks-create-nsg-arm-pportal/figure14.png)
 
 3. 在“设置”边栏选项卡中，单击“子网”>“FrontEnd”>“网络安全组”>“NSG-FrontEnd”。
 
-	![Azure 门户预览 - 子网设置](./media/virtual-networks-create-nsg-arm-pportal/figure15.png)
+    ![Azure 门户预览 - 子网设置](./media/virtual-networks-create-nsg-arm-pportal/figure15.png)
 
 4. 在“FrontEnd”边栏选项卡中，单击“保存”。
 
-	![Azure 门户预览 - 子网设置](./media/virtual-networks-create-nsg-arm-pportal/figure16.png)
+    ![Azure 门户预览 - 子网设置](./media/virtual-networks-create-nsg-arm-pportal/figure16.png)
 
 ## 创建 NSG-BackEnd NSG
 
@@ -95,9 +95,9 @@ ms.author: jdial
 1. 重复[创建 NSG-FrontEnd NSG](#Create-the-NSG-FrontEnd-NSG) 中的步骤以创建名为 *NSG-BackEnd* 的 NSG
 2. 重复[在现有 NSG 中创建规则](#Create-rules-in-an-existing-NSG)中的步骤以创建下表中的**入站**规则。
 
-	|入站规则|出站规则|
-	|---|---|
-	|![Azure 门户预览 - 入站规则](./media/virtual-networks-create-nsg-arm-pportal/figure17.png)|![Azure 门户预览 - 出站规则](./media/virtual-networks-create-nsg-arm-pportal/figure18.png)|
+    |入站规则|出站规则|
+    |---|---|
+    |![Azure 门户预览 - 入站规则](./media/virtual-networks-create-nsg-arm-pportal/figure17.png)|![Azure 门户预览 - 出站规则](./media/virtual-networks-create-nsg-arm-pportal/figure18.png)|
 
 3. 重复[将 NSG 关联到 FrontEnd 子网](#Associate-the-NSG-to-the-FrontEnd-subnet)中的步骤以将 **NSG-Backend** NSG 关联到 **BackEnd** 子网。
 

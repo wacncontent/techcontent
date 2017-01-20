@@ -3,17 +3,17 @@
 
 1. 返回移动服务的“推送”选项卡，然后单击“通知中心”链接。
 
-	![](./media/mobile-services-dotnet-backend-configure-local-push/link-to-notification-hub.png)
+    ![](./media/mobile-services-dotnet-backend-configure-local-push/link-to-notification-hub.png)
 
-	这会浏览到您的移动服务使用的通知中心。
+    这会浏览到您的移动服务使用的通知中心。
 
 2. 在通知中心页中，记下你的通知中心名称，然后单击“查看连接字符串”。
 
-	![](./media/mobile-services-dotnet-backend-configure-local-push/notification-hub-page.png)
+    ![](./media/mobile-services-dotnet-backend-configure-local-push/notification-hub-page.png)
 
 3. 在“访问连接信息”中，复制 **DefaultFullSharedAccessSignature** 连接字符串。
 
-	![](./media/mobile-services-dotnet-backend-configure-local-push/notification-hub-connection-string.png)
+    ![](./media/mobile-services-dotnet-backend-configure-local-push/notification-hub-connection-string.png)
 
 4. 在 Visual Studio 中的移动服务项目内，打开服务的 Web.config 文件并在 **connectionStrings** 中，将 **MS_NotificationHubConnectionString** 的连接字符串替换为来自上一步的连接字符串。
 

@@ -309,7 +309,7 @@ VNETLocal 始终是该特定网络的虚拟网络的已定义地址前缀（也�
          Address Prefix    Next hop type    Next hop IP address Status   Source     
          --------------    -------------    ------------------- ------   ------     
          {10.0.1.0/24}     VNETLocal                            Active 
-		 {10.0.0.0/16}     VirtualAppliance 10.0.0.4            Active    
+         {10.0.0.0/16}     VirtualAppliance 10.0.0.4            Active    
          {0.0.0.0/0}       VirtualAppliance 10.0.0.4            Active
 
 >[!NOTE] 现在可以将 UDR 应用到在其上连接了 ExpressRoute 线路的网关子网。

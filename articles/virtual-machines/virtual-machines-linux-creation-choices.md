@@ -27,22 +27,22 @@ ms.author: iainfou
 Azure CLI 可通过 npm 包、提供发行版的程序包或 Docker 容器跨平台使用。你可以阅读更多有关[如何安装和配置 Azure CLI](../xplat-cli-install.md) 的信息。以下教程提供了有关使用 Azure CLI 的示例。阅读下面每篇文章，了解更多有关所示的 CLI 快速启动命令的更多详细信息：
 
 - [Create a Linux VM from the Azure CLI for dev and test](./virtual-machines-linux-quick-create-cli.md)（从 Azure CLI 创建用于开发和测试的 Linux VM）
-	- 以下示例使用名为 `azure_id_rsa.pub` 的公钥创建 CoreOS VM：
+    - 以下示例使用名为 `azure_id_rsa.pub` 的公钥创建 CoreOS VM：
 
-			azure vm quick-create -ssh-publickey-file ~/.ssh/azure_id_rsa.pub \
-				--image-urn CoreOS
+            azure vm quick-create -ssh-publickey-file ~/.ssh/azure_id_rsa.pub \
+                --image-urn CoreOS
 
 - [使用 Azure 模板创建受保护的 Linux VM](./virtual-machines-linux-create-ssh-secured-vm-from-template.md)
-	- 以下示例使用 GitHub 上存储的模板创建 VM：
+    - 以下示例使用 GitHub 上存储的模板创建 VM：
 
         azure group create --name myResourceGroup --location ChinaNorth 
           --template-file /path/to/101-vm-sshkey/azuredeploy.json
 
 - [使用 Azure CLI 创建完整的 Linux 环境](./virtual-machines-linux-create-cli-complete.md)
-	- 包括在可用性集中创建负载均衡器和多个 VM。
+    - 包括在可用性集中创建负载均衡器和多个 VM。
 
 - [将磁盘添加到 Linux VM](./virtual-machines-linux-add-disk.md)
-	- 以下示例将一个 5Gb 磁盘添加到名为 `TestVM` 的现有 VM：
+    - 以下示例将一个 5Gb 磁盘添加到名为 `TestVM` 的现有 VM：
 
         azure vm disk attach-new --resource-group myResourceGroup  --vm-name myVM \
           --size-in-GB 5
@@ -62,19 +62,19 @@ Azure CLI 可通过 npm 包、提供发行版的程序包或 Docker 容器跨平
 
 列出可用的发布者，如下所示：
 
-	azure vm image list-publishers --location ChinaNorth
+    azure vm image list-publishers --location ChinaNorth
 
 列出特定发布者的可用产品，如下所示：
 
-	azure vm image list-offers --location ChinaNorth --publisher Canonical
+    azure vm image list-offers --location ChinaNorth --publisher Canonical
 
 列出给定产品的可用 SKU （分发版），如下所示：
 
-	azure vm image list-skus --location ChinaNorth --publisher Canonical --offer UbuntuServer
+    azure vm image list-skus --location ChinaNorth --publisher Canonical --offer UbuntuServer
 
 列出给定版本的所有可用映像，如下所示：
 
-	azure vm image list --location ChinaNorth --publisher Canonical --offer UbuntuServer --sku 16.04.0-LTS
+    azure vm image list --location ChinaNorth --publisher Canonical --offer UbuntuServer --sku 16.04.0-LTS
 
 有关浏览和使用可用映像的更多示例，请参阅[使用 Azure CLI 导航并选择 Azure 虚拟机映像](./virtual-machines-linux-cli-ps-findimage.md)。
 
@@ -98,7 +98,7 @@ Azure CLI 可通过 npm 包、提供发行版的程序包或 Docker 容器跨平
 - [Information for non-endorsed distributions（有关未认可分发版的信息）](./virtual-machines-linux-create-upload-generic.md)
 
 - [How to capture a Linux virtual machine as a Resource Manager template](./virtual-machines-linux-capture-image.md)（如何捕获用作 Resource Manager 模板的 Linux 虚拟机）。
-	- 用于捕获现有 VM 的快速入门示例命令：
+    - 用于捕获现有 VM 的快速入门示例命令：
 
         azure vm deallocate --resource-group myResourceGroup --vm-name myVM
         azure vm generalize --resource-group myResourceGroup --vm-name myVM

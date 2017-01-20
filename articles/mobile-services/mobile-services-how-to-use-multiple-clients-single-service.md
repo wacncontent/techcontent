@@ -49,29 +49,29 @@ ms.author: glenga
 
 下面的代码从 .NET 后端服务将推送通知发送到所有 iOS 和 Windows 应用商店设备注册：
 
-	// Define a push notification for APNS.
-	ApplePushMessage apnsMessage = new ApplePushMessage(item.Text, TimeSpan.FromHours(1));    
+    // Define a push notification for APNS.
+    ApplePushMessage apnsMessage = new ApplePushMessage(item.Text, TimeSpan.FromHours(1));    
 
-	// Define a push notification for WNS.
-	WindowsPushMessage wnsMessage = new WindowsPushMessage();
+    // Define a push notification for WNS.
+    WindowsPushMessage wnsMessage = new WindowsPushMessage();
     wnsMessage.XmlPayload = @"<?xml version=""1.0"" encoding=""utf-8""?>" +
                          @"<toast><visual><binding template=""ToastText01"">" +
                          @"<text id=""1"">" + item.Text + @"</text>" +
                          @"</binding></visual></toast>";
     
-	// Send push notifications to all registered iOS and Windows Store devices. 
+    // Send push notifications to all registered iOS and Windows Store devices. 
     await Services.Push.SendAsync(apnsMessage);
-	await Services.Push.SendAsync(wnsMessage);
+    await Services.Push.SendAsync(wnsMessage);
 
 有关如何将推送通知发送到其他本机客户端平台的示例，请单击上表标题中的平台链接。
 
 如果你使用模板客户端注册（而不是本机客户端注册），则只需提供 [TemplatePushMessage] 对象调用 [SendAsync] 一次即可发送同一通知，如下所示：
 
-	// Create a new template message and add the 'message' parameter.    
-	var templatePayload = new TemplatePushMessage();
+    // Create a new template message and add the 'message' parameter.    
+    var templatePayload = new TemplatePushMessage();
     templatePayload.Add("message", item.Text);
 
-	// Send a push notification to all template registrations.
+    // Send a push notification to all template registrations.
     await Services.Push.SendAsync(templatePayload); 
  
 ### JavaScript 后端
@@ -84,18 +84,18 @@ ms.author: glenga
 
 下面的代码将向所有 Android 和 Windows Phone 注册发送推送通知：
 
-	// Define a push notification for GCM.
-	var gcmPayload = 
+    // Define a push notification for GCM.
+    var gcmPayload = 
     '{"data":{"message" : item.text }}';
 
-	// Define the payload for a Windows Phone toast notification.
-	var mpnsPayload = '<?xml version="1.0" encoding="utf-8"?>' +
+    // Define the payload for a Windows Phone toast notification.
+    var mpnsPayload = '<?xml version="1.0" encoding="utf-8"?>' +
     '<wp:Notification xmlns:wp="WPNotification"><wp:Toast>' +
     '<wp:Text1>New Item</wp:Text1><wp:Text2>' + item.text + 
     '</wp:Text2></wp:Toast></wp:Notification>';
 
-	// Send push notifications to all registered Android and Windows Phone 8.0 devices. 
-	push.mpns.send(null, mpnsPayload, 'toast', 22, {
+    // Send push notifications to all registered Android and Windows Phone 8.0 devices. 
+    push.mpns.send(null, mpnsPayload, 'toast', 22, {
             success: function(pushResponse) {
                 // Push succeeds.
                 },              
@@ -116,10 +116,10 @@ ms.author: glenga
 
 如果你使用模板客户端注册（而不是本机客户端注册），则只需提供模板消息负载调用全局 [push 对象]的 **send** 函数一次即可发送同一通知，如下所示：
 
-	// Create a new template message with the 'message' parameter.    
-	var templatePayload = { "message": item.text };
+    // Create a new template message with the 'message' parameter.    
+    var templatePayload = { "message": item.text };
 
-	// Send a push notification to all template registrations.
+    // Send a push notification to all template registrations.
     push.send(null, templatePayload, {
             success: function(pushResponse) {
                 // Push succeeds.
@@ -135,8 +135,8 @@ ms.author: glenga
 可使用跨平台工具，这些工具在仍共享单一代码库（通常是 JavaScript）的同时，在移动设备上提供了更丰富的本机体验。移动服务通过提供以下开发平台的快速入门教程，可让你轻松创建和管理跨平台应用程序开发平台的后端服务：
 
 + [**PhoneGap**](https://go.microsoft.com/fwLink/p/?LinkID=390707)**/**[**Cordova**](http://cordova.apache.org/)<br/>PhoneGap（Apache Cordova 项目的分发产品）是一个免费的开源框架，它允许你使用标准 Web API、HTML 和 JavaScript 开发可在 Android、iOS 和 Windows 设备上运行的单个应用程序。PhoneGap 提供了基于 Web 视图的 UI，但通过允许访问设备上的本机资源增强了用户体验，这些资源包括推送通知、加速计、相机、存储、地理位置和应用程序内浏览器。有关详细信息，请参阅 [PhoneGap 快速入门教程][PhoneGap]。
-	
-	现在 Visual Studio 还允许你使用用于 Visual Studio 的多设备混合应用程序扩展（它是预发行软件）构建跨平台的 Cordova 应用程序。有关详细信息，请参阅[使用 HTML 和 JavaScript 的多设备混合应用程序入门](http://msdn.microsoft.com/zh-cn/library/dn771545.aspx)。
+    
+    现在 Visual Studio 还允许你使用用于 Visual Studio 的多设备混合应用程序扩展（它是预发行软件）构建跨平台的 Cordova 应用程序。有关详细信息，请参阅[使用 HTML 和 JavaScript 的多设备混合应用程序入门](http://msdn.microsoft.com/zh-cn/library/dn771545.aspx)。
 
 + **Sencha Touch**<br/>Sencha Touch 提供了一组针对触摸屏优化的控件，这些控件使用单个 HTML 和 JavaScript 代码库在各种移动设备上提供类似本机的体验。Sencha Touch 可与 PhoneGap 或 Cordova 库一起使用，为用户提供对本机设备资源的访问权限。有关详细信息，请参阅 [Sencha Touch 快速入门教程][Sencha]。
 

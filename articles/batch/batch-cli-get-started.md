@@ -51,11 +51,11 @@ ms.author: marsma
 
 示例：
 
-	azure batch account create --location "China North"  --resource-group "resgroup001" "batchaccount001"
+    azure batch account create --location "China North"  --resource-group "resgroup001" "batchaccount001"
 
 使用指定的参数创建新的 Batch 帐户。必须至少指定一个位置、资源组和帐户名。如果没有资源组，请运行 `azure group create` 创建资源组，并为 `--location` 选项指定一个 Azure 区域（例如“China North”）。例如：
 
-	azure group create --name "resgroup001" --location "China North"
+    azure group create --name "resgroup001" --location "China North"
 
 > [!NOTE] Batch 帐户名必须是创建帐户的 Azure 区域内的唯一名称。它只能包含小写字母数字字符，且长度必须为 3-24 个字符。不能在 Batch 帐户名中使用 `-` 或 `_` 等特殊字符。
 
@@ -81,7 +81,7 @@ ms.author: marsma
 
 示例：
 
-	azure batch account delete --resource-group "resgroup001" "batchaccount001"
+    azure batch account delete --resource-group "resgroup001" "batchaccount001"
 
 删除指定的 Batch 帐户。出现提示时，请确认删除帐户（删除帐户可能需要一段时间才能完成）。
 
@@ -93,11 +93,11 @@ ms.author: marsma
 
 用法：
 
-	azure batch account keys list [options] <name>
+    azure batch account keys list [options] <name>
 
 示例：
 
-	azure batch account keys list --resource-group "resgroup001" "batchaccount001"
+    azure batch account keys list --resource-group "resgroup001" "batchaccount001"
 
 列出给定 Batch 帐户的帐户密钥。
 
@@ -109,7 +109,7 @@ ms.author: marsma
 
 示例：
 
-	azure batch account keys renew --resource-group "resgroup001" --primary "batchaccount001"
+    azure batch account keys renew --resource-group "resgroup001" --primary "batchaccount001"
 
 为给定的 Batch 帐户重新生成指定的帐户密钥。
 
@@ -147,7 +147,7 @@ ms.author: marsma
 
 示例（云服务配置）：
 
-	azure batch pool create --id "pool002" --target-dedicated 1 --vm-size "small" --os-family "4"
+    azure batch pool create --id "pool002" --target-dedicated 1 --vm-size "small" --os-family "4"
 
 在 Batch 服务中创建计算节点的池。
 

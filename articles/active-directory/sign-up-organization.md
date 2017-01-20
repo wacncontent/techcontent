@@ -25,7 +25,7 @@ wacn.date: 01/03/2017
 
 - **工作或学校帐户**（由管理员针对商业/学术用途颁发）— 提供对所有小型、中型和企业业务级 Microsoft 云服务（例如 Azure、Microsoft Intune 或 Office 365）的访问。当你以组织身份注册其中某个服务时，系统会在 Azure Active Directory 中自动预配一个基于云的目录，以代表你的组织。[了解详细信息](./active-directory-administer.md)
 
-	此目录创建后，管理员即可创建用户，并根据其需要访问的云服务订阅（例如 Azure），向其分配许可证。
+    此目录创建后，管理员即可创建用户，并根据其需要访问的云服务订阅（例如 Azure），向其分配许可证。
 
 是否要作为组织注册 Azure？ [**立即注册**](https://www.azure.cn/pricing/)
 

@@ -65,39 +65,39 @@ ms.author: crwilcox
   <th>Python 2.7</th>
   <tr>
     <td>
-		<a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh'>64 位</href>
-	</td>
+        <a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh'>64 位</href>
+    </td>
     <td>
-		<a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.3.0-Linux-x86_64.sh'>64 位</href>
-	</td>
+        <a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.3.0-Linux-x86_64.sh'>64 位</href>
+    </td>
   </tr>
   <tr>
     <td>
-		<a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86.sh'>32 位</href>
-	</td>
+        <a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86.sh'>32 位</href>
+    </td>
     <td>
-		<a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.3.0-Linux-x86.sh'>32 位</href>
-	</td>  
+        <a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.3.0-Linux-x86.sh'>32 位</href>
+    </td>  
   </tr>
 </table>
 
 #### 在 Ubuntu 上安装 Anaconda3 2.3.0（64 位）
 作为一个示例，这演示如何在 Ubuntu 上安装 Anaconda
 
-	# install anaconda
-	cd ~
-	mkdir -p anaconda
-	cd anaconda/
-	curl -O https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh
-	sudo bash Anaconda3-2.3.0-Linux-x86_64.sh -b -f -p /anaconda3
+    # install anaconda
+    cd ~
+    mkdir -p anaconda
+    cd anaconda/
+    curl -O https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh
+    sudo bash Anaconda3-2.3.0-Linux-x86_64.sh -b -f -p /anaconda3
 
-	# clean up home directory
-	cd ..
-	rm -rf anaconda/
+    # clean up home directory
+    cd ..
+    rm -rf anaconda/
 
-	# Update Jupyter to the latest install and generate its config file
-	sudo /anaconda3/bin/conda install jupyter -y
-	/anaconda3/bin/jupyter-notebook --generate-config
+    # Update Jupyter to the latest install and generate its config file
+    sudo /anaconda3/bin/conda install jupyter -y
+    /anaconda3/bin/jupyter-notebook --generate-config
 
 ![屏幕快照](./media/virtual-machines-linux-jupyter-notebook/anaconda-install.png)
 

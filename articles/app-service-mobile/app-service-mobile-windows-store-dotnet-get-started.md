@@ -59,7 +59,7 @@ ms.author: adrianha
 
 1. 回到移动应用后端的“快速入门”边栏选项卡，单击“创建新应用”>“下载”，然后将压缩的项目文件提取到本地计算机上。
 
-	![下载 Windows 快速入门项目](./media/app-service-mobile-windows-store-dotnet-get-started/mobile-app-windows-quickstart.png)
+    ![下载 Windows 快速入门项目](./media/app-service-mobile-windows-store-dotnet-get-started/mobile-app-windows-quickstart.png)
 
 3. （可选）将 UWP 应用项目添加到服务器项目所在的解决方案。这样更易于调试和测试同一 Visual Studio 解决方案中的应用和后端（如果选择这样做）。若要向解决方案添加 UWP 应用项目，必须使用 Visual Studio 2015 或更高版本。
 
@@ -67,15 +67,15 @@ ms.author: adrianha
 
 5. 在应用的“插入 TodoItem”文本框中键入有意义的文本（例如 *Complete the tutorial* ），然后单击“保存”。
 
-	![Windows 快速入门完整桌面](./media/app-service-mobile-windows-store-dotnet-get-started/mobile-quickstart-startup.png)
+    ![Windows 快速入门完整桌面](./media/app-service-mobile-windows-store-dotnet-get-started/mobile-quickstart-startup.png)
 
-	这样可向在 Azure 中托管的新移动应用后端发送 POST 请求。
+    这样可向在 Azure 中托管的新移动应用后端发送 POST 请求。
 
 6. （可选）停止该应用，然后在其他设备或移动模拟器上重新启动它。
 
-	![Windows 快速入门完整手机](./media/app-service-mobile-windows-store-dotnet-get-started/mobile-quickstart-completed.png)
+    ![Windows 快速入门完整手机](./media/app-service-mobile-windows-store-dotnet-get-started/mobile-quickstart-completed.png)
 
-	请注意，UWP 应用启动后，将从 Azure 加载上一步中保存的数据。
+    请注意，UWP 应用启动后，将从 Azure 加载上一步中保存的数据。
 
 ##后续步骤
 

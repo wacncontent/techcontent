@@ -32,8 +32,8 @@ ms.author: cynthn
 
 4. 在虚拟机边栏选项卡上，单击“连接”。
 
-	![显示如何连接到 VM 的 Azure 门户预览屏幕截图。](./media/virtual-machines-windows-connect-logon/connect.png)
-	
+    ![显示如何连接到 VM 的 Azure 门户预览屏幕截图。](./media/virtual-machines-windows-connect-logon/connect.png)
+    
  > [!TIP] 如果门户中的“连接”按钮不可用，且未通过 [Express Route](../expressroute/expressroute-introduction.md) 或[站点到站点 VPN](../vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-portal.md) 连接连接到 Azure，则在使用 RDP 前需要先为 VM 创建并分配一个公共 IP 地址。有关详细信息，请参阅 [Azure 中的公共 IP 地址](../virtual-network/virtual-network-ip-addresses-overview-arm.md)。
 
 ## 登录到虚拟机

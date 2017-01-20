@@ -55,44 +55,44 @@ ms.author: josephd
 
 登录到你的帐户。
 
-	Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 使用以下命令获取订阅名称。
 
-	Get-AzureRMSubscription | Sort SubscriptionName | Select SubscriptionName
+    Get-AzureRMSubscription | Sort SubscriptionName | Select SubscriptionName
 
 设置你的 Azure 订阅。使用在阶段 1 构建基础配置时使用的同一订阅。将引号内的所有内容（包括 < and > 字符）替换为相应的名称。
 
-	$subscr="<subscription name>"
-	Get-AzureRmSubscription -SubscriptionName $subscr | Select-AzureRmSubscription
+    $subscr="<subscription name>"
+    Get-AzureRmSubscription -SubscriptionName $subscr | Select-AzureRmSubscription
 
 接着，将网关子网添加到使用基础配置的 TestLab 虚拟网络，该网络将用于托管 Azure 网关。
 
-	$rgName="<name of your resource group that you used for your TestLab virtual network>"
-	$locName="<Azure location name where you placed the TestLab virtual network, such as China North>"
-	$vnet=Get-AzureRmVirtualNetwork -ResourceGroupName $rgName -Name TestLab
-	Add-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -AddressPrefix 10.255.255.248/29 -VirtualNetwork $vnet
-	Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
+    $rgName="<name of your resource group that you used for your TestLab virtual network>"
+    $locName="<Azure location name where you placed the TestLab virtual network, such as China North>"
+    $vnet=Get-AzureRmVirtualNetwork -ResourceGroupName $rgName -Name TestLab
+    Add-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -AddressPrefix 10.255.255.248/29 -VirtualNetwork $vnet
+    Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 
 再接着，请求将一个公共 IP 地址分配到 TestLab 虚拟网络的网关。
 
-	$gwpip=New-AzureRmPublicIpAddress -Name TestLab_pip -ResourceGroupName $rgName -Location $locName -AllocationMethod Dynamic
+    $gwpip=New-AzureRmPublicIpAddress -Name TestLab_pip -ResourceGroupName $rgName -Location $locName -AllocationMethod Dynamic
 
 最后，创建网关。
 
-	$vnet=Get-AzureRmVirtualNetwork -Name TestLab -ResourceGroupName $rgName
-	$subnet=Get-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -VirtualNetwork $vnet
-	$gwipconfig=New-AzureRmVirtualNetworkGatewayIpConfig -Name TestLab_GWConfig -SubnetId $subnet.Id -PublicIpAddressId $gwpip.Id 
-	New-AzureRmVirtualNetworkGateway -Name TestLab_GW -ResourceGroupName $rgName -Location $locName -IpConfigurations $gwipconfig -GatewayType Vpn -VpnType RouteBased
+    $vnet=Get-AzureRmVirtualNetwork -Name TestLab -ResourceGroupName $rgName
+    $subnet=Get-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -VirtualNetwork $vnet
+    $gwipconfig=New-AzureRmVirtualNetworkGatewayIpConfig -Name TestLab_GWConfig -SubnetId $subnet.Id -PublicIpAddressId $gwpip.Id 
+    New-AzureRmVirtualNetworkGateway -Name TestLab_GW -ResourceGroupName $rgName -Location $locName -IpConfigurations $gwipconfig -GatewayType Vpn -VpnType RouteBased
 
 请注意，新网关可能需要 20 分钟或更长的时间才能完成。
 
 在本地计算机上的 Azure 门户预览中，使用 CORP\\User1 凭据连接到 DC1。若要配置 CORP 域，以便计算机和用户使用其本地域控制器进行身份验证，请在 DC1 上从管理员级 Windows PowerShell 命令提示符运行这些命令。
 
-	New-ADReplicationSite -Name "TestLab" 
-	New-ADReplicationSite -Name "TestVNET"
-	New-ADReplicationSubnet -Name "10.0.0.0/8" -Site "TestLab"
-	New-ADReplicationSubnet -Name "192.168.0.0/16" -Site "TestVNET"
+    New-ADReplicationSite -Name "TestLab" 
+    New-ADReplicationSite -Name "TestVNET"
+    New-ADReplicationSubnet -Name "10.0.0.0/8" -Site "TestLab"
+    New-ADReplicationSubnet -Name "192.168.0.0/16" -Site "TestVNET"
 
 这是你当前的配置。
 
@@ -102,25 +102,25 @@ ms.author: josephd
 
 首先，创建 TestVNET 虚拟网络，并通过网络安全组对其进行保护。
 
-	$rgName="<name of the resource group that you used for your TestLab virtual network>"
-	$locName="<Azure location name where you placed the TestLab virtual network, such as China North>"
-	$locShortName="<Azure location name from $locName in all lowercase letters with spaces removed. Example:  chinanorth>"
-	$testSubnet=New-AzureRMVirtualNetworkSubnetConfig -Name "TestSubnet" -AddressPrefix 192.168.0.0/24
-	$gatewaySubnet=New-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -AddressPrefix 192.168.255.248/29
-	New-AzureRMVirtualNetwork -Name "TestVNET" -ResourceGroupName $rgName -Location $locName -AddressPrefix 192.168.0.0/16 -Subnet $testSubnet,$gatewaySubnet -DNSServer 10.0.0.4
-	$rule1=New-AzureRMNetworkSecurityRuleConfig -Name "RDPTraffic" -Description "Allow RDP to all VMs on the subnet" -Access Allow -Protocol Tcp -Direction Inbound -Priority 100 -SourceAddressPrefix Internet -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange 3389
-	New-AzureRMNetworkSecurityGroup -Name "TestSubnet" -ResourceGroupName $rgName -Location $locShortName -SecurityRules $rule1
-	$vnet=Get-AzureRMVirtualNetwork -ResourceGroupName $rgName -Name TestVNET
-	$nsg=Get-AzureRMNetworkSecurityGroup -Name "TestSubnet" -ResourceGroupName $rgName
-	Set-AzureRMVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name "TestSubnet" -AddressPrefix 192.168.0.0/24 -NetworkSecurityGroup $nsg
+    $rgName="<name of the resource group that you used for your TestLab virtual network>"
+    $locName="<Azure location name where you placed the TestLab virtual network, such as China North>"
+    $locShortName="<Azure location name from $locName in all lowercase letters with spaces removed. Example:  chinanorth>"
+    $testSubnet=New-AzureRMVirtualNetworkSubnetConfig -Name "TestSubnet" -AddressPrefix 192.168.0.0/24
+    $gatewaySubnet=New-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -AddressPrefix 192.168.255.248/29
+    New-AzureRMVirtualNetwork -Name "TestVNET" -ResourceGroupName $rgName -Location $locName -AddressPrefix 192.168.0.0/16 -Subnet $testSubnet,$gatewaySubnet -DNSServer 10.0.0.4
+    $rule1=New-AzureRMNetworkSecurityRuleConfig -Name "RDPTraffic" -Description "Allow RDP to all VMs on the subnet" -Access Allow -Protocol Tcp -Direction Inbound -Priority 100 -SourceAddressPrefix Internet -SourcePortRange * -DestinationAddressPrefix * -DestinationPortRange 3389
+    New-AzureRMNetworkSecurityGroup -Name "TestSubnet" -ResourceGroupName $rgName -Location $locShortName -SecurityRules $rule1
+    $vnet=Get-AzureRMVirtualNetwork -ResourceGroupName $rgName -Name TestVNET
+    $nsg=Get-AzureRMNetworkSecurityGroup -Name "TestSubnet" -ResourceGroupName $rgName
+    Set-AzureRMVirtualNetworkSubnetConfig -VirtualNetwork $vnet -Name "TestSubnet" -AddressPrefix 192.168.0.0/24 -NetworkSecurityGroup $nsg
 
 接下来，请求将一个公共 IP 地址分配给 TestVNET 虚拟网络的网关，然后创建你的网关。
 
-	$gwpip=New-AzureRmPublicIpAddress -Name TestVNET_pip -ResourceGroupName $rgName -Location $locName -AllocationMethod Dynamic
-	$vnet=Get-AzureRmVirtualNetwork -Name TestVNET -ResourceGroupName $rgName
-	$subnet=Get-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -VirtualNetwork $vnet
-	$gwipconfig=New-AzureRmVirtualNetworkGatewayIpConfig -Name "TestVNET_GWConfig" -SubnetId $subnet.Id -PublicIpAddressId $gwpip.Id
-	New-AzureRmVirtualNetworkGateway -Name "TestVNET_GW" -ResourceGroupName $rgName -Location $locName -IpConfigurations $gwipconfig -GatewayType Vpn -VpnType RouteBased
+    $gwpip=New-AzureRmPublicIpAddress -Name TestVNET_pip -ResourceGroupName $rgName -Location $locName -AllocationMethod Dynamic
+    $vnet=Get-AzureRmVirtualNetwork -Name TestVNET -ResourceGroupName $rgName
+    $subnet=Get-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -VirtualNetwork $vnet
+    $gwipconfig=New-AzureRmVirtualNetworkGatewayIpConfig -Name "TestVNET_GWConfig" -SubnetId $subnet.Id -PublicIpAddressId $gwpip.Id
+    New-AzureRmVirtualNetworkGateway -Name "TestVNET_GW" -ResourceGroupName $rgName -Location $locName -IpConfigurations $gwipconfig -GatewayType Vpn -VpnType RouteBased
 
 这是你当前的配置。
 
@@ -132,11 +132,11 @@ ms.author: josephd
 
 接下来，使用以下命令创建 VNet 到 VNet VPN 连接，这可能需要一定的时间才能完成。
 
-	$sharedKey="<pre-shared key value>"
-	$gwTestLab=Get-AzureRmVirtualNetworkGateway -Name TestLab_GW -ResourceGroupName $rgName
-	$gwTestVNET=Get-AzureRmVirtualNetworkGateway -Name TestVNET_GW -ResourceGroupName $rgName
-	New-AzureRmVirtualNetworkGatewayConnection -Name TestLab_to_TestVNET -ResourceGroupName $rgName -VirtualNetworkGateway1 $gwTestLab -VirtualNetworkGateway2 $gwTestVNET -Location $locName -ConnectionType Vnet2Vnet -SharedKey $sharedKey
-	New-AzureRmVirtualNetworkGatewayConnection -Name TestVNET_to_TestLab -ResourceGroupName $rgName -VirtualNetworkGateway1 $gwTestVNET -VirtualNetworkGateway2 $gwTestLab -Location $locName -ConnectionType Vnet2Vnet -SharedKey $sharedKey
+    $sharedKey="<pre-shared key value>"
+    $gwTestLab=Get-AzureRmVirtualNetworkGateway -Name TestLab_GW -ResourceGroupName $rgName
+    $gwTestVNET=Get-AzureRmVirtualNetworkGateway -Name TestVNET_GW -ResourceGroupName $rgName
+    New-AzureRmVirtualNetworkGatewayConnection -Name TestLab_to_TestVNET -ResourceGroupName $rgName -VirtualNetworkGateway1 $gwTestLab -VirtualNetworkGateway2 $gwTestVNET -Location $locName -ConnectionType Vnet2Vnet -SharedKey $sharedKey
+    New-AzureRmVirtualNetworkGatewayConnection -Name TestVNET_to_TestLab -ResourceGroupName $rgName -VirtualNetworkGateway1 $gwTestVNET -VirtualNetworkGateway2 $gwTestLab -Location $locName -ConnectionType Vnet2Vnet -SharedKey $sharedKey
 
 几分钟后，连接应建立完毕。预览
 
@@ -148,30 +148,30 @@ ms.author: josephd
 
 首先，请为 DC2 创建虚拟机。在本地计算机的 Azure PowerShell 命令提示符处运行这些命令。
 
-	$rgName="<your resource group name>"
-	$locName="<your Azure location, such as China North>"
-	$saName="<the storage account name for the base configuration>"
-	$vnet=Get-AzureRMVirtualNetwork -Name TestVNET -ResourceGroupName $rgName
-	$pip=New-AzureRMPublicIpAddress -Name DC2-NIC -ResourceGroupName $rgName -Location $locName -AllocationMethod Dynamic
-	$nic=New-AzureRMNetworkInterface -Name DC2-NIC -ResourceGroupName $rgName -Location $locName -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id -PrivateIpAddress 192.168.0.4
-	$vm=New-AzureRMVMConfig -VMName DC2 -VMSize Standard_A1
-	$storageAcc=Get-AzureRMStorageAccount -ResourceGroupName $rgName -Name $saName
-	$vhdURI=$storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/DC2-TestVNET-ADDSDisk.vhd"
-	Add-AzureRMVMDataDisk -VM $vm -Name ADDS-Data -DiskSizeInGB 20 -VhdUri $vhdURI  -CreateOption empty
-	$cred=Get-Credential -Message "Type the name and password of the local administrator account for DC2."
-	$vm=Set-AzureRMVMOperatingSystem -VM $vm -Windows -ComputerName DC2 -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
-	$vm=Set-AzureRMVMSourceImage -VM $vm -PublisherName MicrosoftWindowsServer -Offer WindowsServer -Skus 2012-R2-Datacenter -Version "latest"
-	$vm=Add-AzureRMVMNetworkInterface -VM $vm -Id $nic.Id
-	$osDiskUri=$storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/DC2-TestLab-OSDisk.vhd"
-	$vm=Set-AzureRMVMOSDisk -VM $vm -Name DC2-TestVNET-OSDisk -VhdUri $osDiskUri -CreateOption fromImage
-	New-AzureRMVM -ResourceGroupName $rgName -Location $locName -VM $vm
+    $rgName="<your resource group name>"
+    $locName="<your Azure location, such as China North>"
+    $saName="<the storage account name for the base configuration>"
+    $vnet=Get-AzureRMVirtualNetwork -Name TestVNET -ResourceGroupName $rgName
+    $pip=New-AzureRMPublicIpAddress -Name DC2-NIC -ResourceGroupName $rgName -Location $locName -AllocationMethod Dynamic
+    $nic=New-AzureRMNetworkInterface -Name DC2-NIC -ResourceGroupName $rgName -Location $locName -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id -PrivateIpAddress 192.168.0.4
+    $vm=New-AzureRMVMConfig -VMName DC2 -VMSize Standard_A1
+    $storageAcc=Get-AzureRMStorageAccount -ResourceGroupName $rgName -Name $saName
+    $vhdURI=$storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/DC2-TestVNET-ADDSDisk.vhd"
+    Add-AzureRMVMDataDisk -VM $vm -Name ADDS-Data -DiskSizeInGB 20 -VhdUri $vhdURI  -CreateOption empty
+    $cred=Get-Credential -Message "Type the name and password of the local administrator account for DC2."
+    $vm=Set-AzureRMVMOperatingSystem -VM $vm -Windows -ComputerName DC2 -Credential $cred -ProvisionVMAgent -EnableAutoUpdate
+    $vm=Set-AzureRMVMSourceImage -VM $vm -PublisherName MicrosoftWindowsServer -Offer WindowsServer -Skus 2012-R2-Datacenter -Version "latest"
+    $vm=Add-AzureRMVMNetworkInterface -VM $vm -Id $nic.Id
+    $osDiskUri=$storageAcc.PrimaryEndpoints.Blob.ToString() + "vhds/DC2-TestLab-OSDisk.vhd"
+    $vm=Set-AzureRMVMOSDisk -VM $vm -Name DC2-TestVNET-OSDisk -VhdUri $osDiskUri -CreateOption fromImage
+    New-AzureRMVM -ResourceGroupName $rgName -Location $locName -VM $vm
 
 接下来，从 Azure 门户预览连接到新的 DC2 虚拟机。
 
 接下来，配置 Windows 防火墙规则，以允许进行基本的连接测试所需的流量。在 DC2 上的管理员级 Windows PowerShell 命令提示符下运行这些命令。
 
-	Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -enabled True
-	ping dc1.corp.contoso.com
+    Set-NetFirewallRule -DisplayName "File and Printer Sharing (Echo Request - ICMPv4-In)" -enabled True
+    ping dc1.corp.contoso.com
 
 使用 ping 命令时，会从 IP 地址 10.0.0.4 传回四个成功的答复。这是对 VNet 到 VNet 连接的流量测试。
 
@@ -190,8 +190,8 @@ ms.author: josephd
 
 接下来，将 DC2 配置为 corp.contoso.com 域的副本域控制器。在 DC2 上的 Windows PowerShell 命令提示符下运行这些命令。
 
-	Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
-	Install-ADDSDomainController -Credential (Get-Credential CORP\User1) -DomainName "corp.contoso.com" -InstallDns:$true -DatabasePath "F:\NTDS" -LogPath "F:\Logs" -SysvolPath "F:\SYSVOL"
+    Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
+    Install-ADDSDomainController -Credential (Get-Credential CORP\User1) -DomainName "corp.contoso.com" -InstallDns:$true -DatabasePath "F:\NTDS" -LogPath "F:\Logs" -SysvolPath "F:\SYSVOL"
 
 请注意，系统会提示你输入 CORP\\User1 密码和目录服务还原模式 (DSRM) 密码，然后重新启动 DC2。
 

@@ -51,7 +51,7 @@ ms.author: jotaub;sethm
 
 2.	运行 **sender** 程序，然后就会看到事件出现在接收方窗口中。
 
-	![][23]
+    ![][23]
 
 > [!NOTE]  在本教程中，只出于开发目的以本地模式使用 Storm。请参阅 [HDInsight Storm overview]（HDInsight Storm 概述）和官方 [Apache Storm] 文档，了解 Storm 开发和模式的详细信息。
 

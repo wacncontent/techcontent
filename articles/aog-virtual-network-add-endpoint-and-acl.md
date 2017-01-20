@@ -40,29 +40,29 @@ wacn.date: 08/01/2016
 
 1.	终结点-添加
 
-	![](./media/aog-virtual-network-add-endpoint-and-acl/endpoint-list.png)
+    ![](./media/aog-virtual-network-add-endpoint-and-acl/endpoint-list.png)
 
 2.	添加独立终结点
 
-	![](./media/aog-virtual-network-add-endpoint-and-acl/add-endpoint.png) 
+    ![](./media/aog-virtual-network-add-endpoint-and-acl/add-endpoint.png) 
  
 3.	名称（添加协议），其他默认即可 
  
-	![](./media/aog-virtual-network-add-endpoint-and-acl/endpoint-detail.png)
+    ![](./media/aog-virtual-network-add-endpoint-and-acl/endpoint-detail.png)
  
 4.	添加的相应端口已在列表中
  
-	![](./media/aog-virtual-network-add-endpoint-and-acl/endpoint-result-list.png)
+    ![](./media/aog-virtual-network-add-endpoint-and-acl/endpoint-result-list.png)
 
 ###配置 ACL
 
 1.	管理 ACL
  
-	![](./media/aog-virtual-network-add-endpoint-and-acl/acl-list.png)
+    ![](./media/aog-virtual-network-add-endpoint-and-acl/acl-list.png)
 
 2. 添加允许或拒绝的远程子网
 
-	![](./media/aog-virtual-network-add-endpoint-and-acl/add-acl.png)
+    ![](./media/aog-virtual-network-add-endpoint-and-acl/add-acl.png)
 
 ## <a id="resource"></a>相关参考资料
 

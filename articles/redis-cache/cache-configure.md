@@ -33,19 +33,19 @@ Azure Redis 缓存在“设置”边栏选项卡上提供以下设置。
 
 -	[支持和故障排除设置](#support-amp-troubleshooting-settings)
 -	[常规设置](#general-settings)
-	-	[属性](#properties)
-	-	[访问密钥](#access-keys)
-	-	[高级设置](#advanced-settings)
-	-	[Redis 缓存顾问](#redis-cache-advisor)
+    -	[属性](#properties)
+    -	[访问密钥](#access-keys)
+    -	[高级设置](#advanced-settings)
+    -	[Redis 缓存顾问](#redis-cache-advisor)
 -	[缩放设置](#scale-settings)
-	-	[定价层](#pricing-tier)
-	-	[Redis 群集大小](#cluster-size)
+    -	[定价层](#pricing-tier)
+    -	[Redis 群集大小](#cluster-size)
 -	[数据管理设置](#data-management-settings)
-	-	[Redis 数据持久性](#redis-data-persistence)
-	-	[导入/导出](#importexport)
+    -	[Redis 数据持久性](#redis-data-persistence)
+    -	[导入/导出](#importexport)
 -	[管理设置](#administration-settings)
-	-	[重新启动](#reboot)
-	-	[计划更新](#schedule-updates)
+    -	[重新启动](#reboot)
+    -	[计划更新](#schedule-updates)
 -	[诊断设置](#diagnostics-settings)
 -	[网络设置](#network-settings)
 -	[资源管理设置](#resource-management-settings)
@@ -300,19 +300,19 @@ Azure 门户预览中的“用户”部分对基于角色的访问控制 (RBAC) 
 <sup>1</sup>每个 Azure Redis 缓存定价层的 `databases` 限制是不同的，可以在创建缓存时进行设置。如果在创建缓存期间未指定 `databases` 设置，则默认值为 16。
 
 -	基本缓存和标准缓存
-	-	C0 (250 MB) 缓存 - 最多支持 16 个数据库
-	-	C1 (1 GB) 缓存 - 最多支持 16 个数据库
-	-	C2 (2.5 GB) 缓存 - 最多支持 16 个数据库
-	-	C3 (6 GB) 缓存 - 最多支持 16 个数据库
-	-	C4 (13 GB) 缓存 - 最多支持 32 个数据库
-	-	C5 (26 GB) 缓存 - 最多支持 48 个数据库
-	-	C6 (53 GB) 缓存 - 最多支持 64 个数据库
+    -	C0 (250 MB) 缓存 - 最多支持 16 个数据库
+    -	C1 (1 GB) 缓存 - 最多支持 16 个数据库
+    -	C2 (2.5 GB) 缓存 - 最多支持 16 个数据库
+    -	C3 (6 GB) 缓存 - 最多支持 16 个数据库
+    -	C4 (13 GB) 缓存 - 最多支持 32 个数据库
+    -	C5 (26 GB) 缓存 - 最多支持 48 个数据库
+    -	C6 (53 GB) 缓存 - 最多支持 64 个数据库
 -	高级缓存
-	-	P1 (6 GB - 60 GB) - 最多支持 16 个数据库
-	-	P2 (13 GB - 130 GB) - 最多支持 32 个数据库
-	-	P3 (26 GB - 260 GB) - 最多支持 48 个数据库
-	-	P4 (53 GB - 530 GB) - 最多支持 64 个数据库
-	-   所有启用了 Redis 群集的高级缓存 - Redis 群集仅支持使用数据库 0，因此任何启用了 Redis 群集的高级缓存的 `databases` 限制实际上是 1，并且不允许使用 [Select](http://redis.io/commands/select) 命令。
+    -	P1 (6 GB - 60 GB) - 最多支持 16 个数据库
+    -	P2 (13 GB - 130 GB) - 最多支持 32 个数据库
+    -	P3 (26 GB - 260 GB) - 最多支持 48 个数据库
+    -	P4 (53 GB - 530 GB) - 最多支持 64 个数据库
+    -   所有启用了 Redis 群集的高级缓存 - Redis 群集仅支持使用数据库 0，因此任何启用了 Redis 群集的高级缓存的 `databases` 限制实际上是 1，并且不允许使用 [Select](http://redis.io/commands/select) 命令。
 
 >[!NOTE] `databases` 设置只能在创建缓存期间配置，并且只能使用 PowerShell、CLI 或其他管理客户端进行配置。有关在创建缓存期间使用 PowerShell 配置 `databases` 的示例，请参阅 [New-AzureRmRedisCache](./cache-howto-manage-redis-cache-powershell.md#databases)。
 
@@ -320,18 +320,18 @@ Azure 门户预览中的“用户”部分对基于角色的访问控制 (RBAC) 
 <sup>2</sup>`maxclients` 对于每个 Azure Redis 缓存定价层都是不同的。
 
 -	基本缓存和标准缓存
-	-	C0 (250 MB) 缓存 - 最多支持 256 个连接
-	-	C1 (1 GB) 缓存 - 最多支持 1,000 个连接
-	-	C2 (2.5 GB) 缓存 - 最多支持 2,000 个连接
-	-	C3 (6 GB) 缓存 - 最多支持 5,000 个连接
-	-	C4 (13 GB) 缓存 - 最多支持 10,000 个连接
-	-	C5 (26 GB) 缓存 - 最多支持 15,000 个连接
-	-	C6 (53 GB) 缓存 - 最多支持 20,000 个连接
+    -	C0 (250 MB) 缓存 - 最多支持 256 个连接
+    -	C1 (1 GB) 缓存 - 最多支持 1,000 个连接
+    -	C2 (2.5 GB) 缓存 - 最多支持 2,000 个连接
+    -	C3 (6 GB) 缓存 - 最多支持 5,000 个连接
+    -	C4 (13 GB) 缓存 - 最多支持 10,000 个连接
+    -	C5 (26 GB) 缓存 - 最多支持 15,000 个连接
+    -	C6 (53 GB) 缓存 - 最多支持 20,000 个连接
 -	高级缓存
-	-	P1 (6 GB - 60 GB) - 最多支持 7,500 个连接
-	-	P2 (13 GB - 130 GB) - 最多支持 15,000 个连接
-	-	P3 (26 GB - 260 GB) - 最多支持 30,000 个连接
-	-	P4 (53 GB - 530 GB) - 最多支持 40,000 个连接
+    -	P1 (6 GB - 60 GB) - 最多支持 7,500 个连接
+    -	P2 (13 GB - 130 GB) - 最多支持 15,000 个连接
+    -	P3 (26 GB - 260 GB) - 最多支持 30,000 个连接
+    -	P4 (53 GB - 530 GB) - 最多支持 40,000 个连接
 
 ## <a name="redis-commands-not-supported-in-azure-redis-cache"></a>Azure Redis 缓存中不支持的 Redis 命令
 

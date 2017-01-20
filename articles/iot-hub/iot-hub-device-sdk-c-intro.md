@@ -73,17 +73,17 @@ SDK 中包含的自述文件提供了有关准备开发环境和获取设备凭�
 
 -   在打开**VS2015 开发人员命令提示符**之前，请先安装 Git 命令行工具。若要安装这些工具，请完成以下步骤：
 
-	1. 启动 **Visual Studio 2015** 安装程序（或从“程序和功能”控制面板选择“Microsoft Visual Studio 2015”，然后选择“更改”）。
-	
-	2. 确保在安装程序中选择“Git for Windows”功能，但也可以选中“Visual Studio 的 GitHub 扩展”选项以提供 IDE 集成：
+    1. 启动 **Visual Studio 2015** 安装程序（或从“程序和功能”控制面板选择“Microsoft Visual Studio 2015”，然后选择“更改”）。
+    
+    2. 确保在安装程序中选择“Git for Windows”功能，但也可以选中“Visual Studio 的 GitHub 扩展”选项以提供 IDE 集成：
 
-  		![](./media/iot-hub-device-sdk-c-intro/10-GitTools.PNG)
+          ![](./media/iot-hub-device-sdk-c-intro/10-GitTools.PNG)
 
-	3. 完成安装向导以安装工具。
+    3. 完成安装向导以安装工具。
 
-	4. 将 Git 工具 **bin** 目录添加到系统 **PATH** 环境变量。在 Windows 上，屏幕如下所示：
+    4. 将 Git 工具 **bin** 目录添加到系统 **PATH** 环境变量。在 Windows 上，屏幕如下所示：
 
-  		![](./media/iot-hub-device-sdk-c-intro/11-GitToolsPath.PNG)
+          ![](./media/iot-hub-device-sdk-c-intro/11-GitToolsPath.PNG)
 
 ### 获取设备凭据
 
@@ -123,7 +123,7 @@ SDK 开放源代码存储库中提供了两个工具用来帮助管理 IoT 中�
 
 完成上述步骤后，可以开始运行一些代码。两个示例的主源文件顶部都有一个常量，此常量可让你输入连接字符串。例如，**iothub\_client\_sample\_amqp** 应用程序中的相应行如下所示。
 
-		static const char* connectionString = "[device connection string]";
+        static const char* connectionString = "[device connection string]";
 
 如果要继续，请在此输入设备连接字符串，重新编译解决方案，然后即可运行示例。
 
@@ -154,8 +154,8 @@ Windows 版本的 **iothub\_client\_sample\_ampq** 应用程序包含以下 Visu
 
 只有在分配 IoT 中心客户端句柄之后，才可以开始使用库：
 
-		IOTHUB_CLIENT_HANDLE iotHubClientHandle;
-		iotHubClientHandle = IoTHubClient_CreateFromConnectionString(connectionString, AMQP_Protocol);
+        IOTHUB_CLIENT_HANDLE iotHubClientHandle;
+        iotHubClientHandle = IoTHubClient_CreateFromConnectionString(connectionString, AMQP_Protocol);
 
 请注意，我们要将设备连接字符串副本（从设备资源管理器获取的连接字符串）传递给此函数。我们还需指定要使用的协议。本示例使用 AMQP，但也可以选择 MQTT 和 HTTP。
 
@@ -167,24 +167,24 @@ Windows 版本的 **iothub\_client\_sample\_ampq** 应用程序包含以下 Visu
 
 首先创建一条消息：
 
-		EVENT_INSTANCE message;
-		sprintf_s(msgText, sizeof(msgText), "Message_%d_From_IoTHubClient_Over_AMQP", i);
-		message.messageHandle = IoTHubMessage_CreateFromByteArray((const unsigned char*)msgText, strlen(msgText);
+        EVENT_INSTANCE message;
+        sprintf_s(msgText, sizeof(msgText), "Message_%d_From_IoTHubClient_Over_AMQP", i);
+        message.messageHandle = IoTHubMessage_CreateFromByteArray((const unsigned char*)msgText, strlen(msgText);
 
 接下来发送消息：
 
-		IoTHubClient_SendEventAsync(iotHubClientHandle, message.messageHandle, SendConfirmationCallback, &message);
+        IoTHubClient_SendEventAsync(iotHubClientHandle, message.messageHandle, SendConfirmationCallback, &message);
 
 每次发送消息时，指定发送数据时所调用的回调函数的引用：
 
-		static void SendConfirmationCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void* userContextCallback)
-		{
-		    EVENT_INSTANCE* eventInstance = (EVENT_INSTANCE*)userContextCallback;
-		    (void)printf("Confirmation[%d] received for message tracking id = %d with result = %s\r\n", callbackCounter, eventInstance->messageTrackingId, ENUM_TO_STRING(IOTHUB_CLIENT_CONFIRMATION_RESULT, result));
-		    /* Some device specific action code goes here... */
-		    callbackCounter++;
-		    IoTHubMessage_Destroy(eventInstance->messageHandle);
-		}
+        static void SendConfirmationCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void* userContextCallback)
+        {
+            EVENT_INSTANCE* eventInstance = (EVENT_INSTANCE*)userContextCallback;
+            (void)printf("Confirmation[%d] received for message tracking id = %d with result = %s\r\n", callbackCounter, eventInstance->messageTrackingId, ENUM_TO_STRING(IOTHUB_CLIENT_CONFIRMATION_RESULT, result));
+            /* Some device specific action code goes here... */
+            callbackCounter++;
+            IoTHubMessage_Destroy(eventInstance->messageHandle);
+        }
 
 处理完消息后，请注意对 **IoTHubMessage\_Destroy** 函数的调用。必须进行此调用，才能释放在创建消息时分配的资源。
 
@@ -192,27 +192,27 @@ Windows 版本的 **iothub\_client\_sample\_ampq** 应用程序包含以下 Visu
 
 接收消息是一个异步操作。首先，请注册当设备接收消息时所要调用的回调：
 
-		int receiveContext = 0;
-		IoTHubClient_SetMessageCallback(iotHubClientHandle, ReceiveMessageCallback, &receiveContext);
+        int receiveContext = 0;
+        IoTHubClient_SetMessageCallback(iotHubClientHandle, ReceiveMessageCallback, &receiveContext);
 
 最后一个参数是指向所需对象的 void 指针。在本示例中，这是一个指向整数的指针，但也可以是指向更复杂数据结构的指针。这样，回调函数便可与此函数的调用方以共享状态运行。
 
 当设备接收消息时，将调用注册的回调函数：
 
-		static IOTHUBMESSAGE_DISPOSITION_RESULT ReceiveMessageCallback(IOTHUB_MESSAGE_HANDLE message, void* userContextCallback)
-		{
-		    int* counter = (int*)userContextCallback;
-		    const char* buffer;
-		    size_t size;
-		    if (IoTHubMessage_GetByteArray(message, (const unsigned char**)&buffer, &size) == IOTHUB_MESSAGE_OK)
-		    {
-		        (void)printf("Received Message [%d] with Data: <<<%.*s>>> & Size=%d\r\n", *counter, (int)size, buffer, (int)size);
-		    }
+        static IOTHUBMESSAGE_DISPOSITION_RESULT ReceiveMessageCallback(IOTHUB_MESSAGE_HANDLE message, void* userContextCallback)
+        {
+            int* counter = (int*)userContextCallback;
+            const char* buffer;
+            size_t size;
+            if (IoTHubMessage_GetByteArray(message, (const unsigned char**)&buffer, &size) == IOTHUB_MESSAGE_OK)
+            {
+                (void)printf("Received Message [%d] with Data: <<<%.*s>>> & Size=%d\r\n", *counter, (int)size, buffer, (int)size);
+            }
 
-		    /* Some device specific action code goes here... */
-		    (*counter)++;
-		    return IOTHUBMESSAGE_ACCEPTED;
-		}
+            /* Some device specific action code goes here... */
+            (*counter)++;
+            return IOTHUBMESSAGE_ACCEPTED;
+        }
 
 请注意，需使用 **IoTHubMessage\_GetByteArray** 函数来检索消息（在本示例中是一个字符串）。
 
@@ -220,7 +220,7 @@ Windows 版本的 **iothub\_client\_sample\_ampq** 应用程序包含以下 Visu
 
 完成发送事件和接收消息后，你可以取消初始化 IoT 库。为此，请发出以下函数调用：
 
-		IoTHubClient_Destroy(iotHubClientHandle);
+        IoTHubClient_Destroy(iotHubClientHandle);
 
 这将释放 **IoTHubClient\_CreateFromConnectionString** 函数以前分配的资源。
 
@@ -254,11 +254,11 @@ azure-iot-sdks 存储库中的 **serializer** 文件夹中有一个 **samples** 
 
 必须先调用初始化 API，然后才可以开始使用**序列化程序**库：
 
-		serializer_init(NULL);
+        serializer_init(NULL);
 
-		IOTHUB_CLIENT_HANDLE iotHubClientHandle = IoTHubClient_CreateFromConnectionString(connectionString, AMQP_Protocol);
+        IOTHUB_CLIENT_HANDLE iotHubClientHandle = IoTHubClient_CreateFromConnectionString(connectionString, AMQP_Protocol);
 
-		ContosoAnemometer* myWeather = CREATE_MODEL_INSTANCE(WeatherStation, ContosoAnemometer);
+        ContosoAnemometer* myWeather = CREATE_MODEL_INSTANCE(WeatherStation, ContosoAnemometer);
 
 对 **serializer\_init** 函数进行的调用是一次性调用，用于初始化底层库。然后，需调用 **IoTHubClient\_CreateFromConnectionString** 函数，这是 **IoTHubClient** 示例中的同一 API。此调用将设置设备连接字符串（也可用于选择要使用的协议）。请注意，本示例使用 AMQP 作为传输方式，但也可以使用 HTTP。
 
@@ -268,17 +268,17 @@ azure-iot-sdks 存储库中的 **serializer** 文件夹中有一个 **samples** 
 
 **序列化程序**库中的模型定义了设备可发送到 IoT 中心的事件以及可接收的消息（在建模语言中称为 *操作* ）。正如 **simplesample\_amqp** 示例应用程序中所示，可以使用一组 C 宏来定义模型：
 
-		BEGIN_NAMESPACE(WeatherStation);
+        BEGIN_NAMESPACE(WeatherStation);
 
-		DECLARE_MODEL(ContosoAnemometer,
-		WITH_DATA(ascii_char_ptr, DeviceId),
-		WITH_DATA(double, WindSpeed),
-		WITH_ACTION(TurnFanOn),
-		WITH_ACTION(TurnFanOff),
-		WITH_ACTION(SetAirResistance, int, Position)
-		);
+        DECLARE_MODEL(ContosoAnemometer,
+        WITH_DATA(ascii_char_ptr, DeviceId),
+        WITH_DATA(double, WindSpeed),
+        WITH_ACTION(TurnFanOn),
+        WITH_ACTION(TurnFanOff),
+        WITH_ACTION(SetAirResistance, int, Position)
+        );
 
-		END_NAMESPACE(WeatherStation);
+        END_NAMESPACE(WeatherStation);
 
 **BEGIN\_NAMESPACE** 和 **END\_NAMESPACE** 这两个宏都以模型的命名空间作为参数。介于这两个宏之间的内容应该就是模型的定义和模型使用的数据结构。
 
@@ -290,54 +290,54 @@ azure-iot-sdks 存储库中的 **serializer** 文件夹中有一个 **samples** 
 
 模型定义了可以发送到 IoT 中心的事件。在本示例中，这是指使用 **WITH\_DATA** 宏来定义的两个事件之一。例如，如果你想要将 **WindSpeed** 事件发送到 IoT 中心，就需要执行以下几个步骤。第一个步骤是设置要发送的数据：
 
-		myWeather->WindSpeed = 15;
+        myWeather->WindSpeed = 15;
 
 前面定义的模型可让你通过设置 **struct** 的成员来实现此目的。接下来，序列化想要发送的事件：
 
-		unsigned char* destination;
-		size_t destinationSize;
+        unsigned char* destination;
+        size_t destinationSize;
 
-		SERIALIZE(&destination, &destinationSize, myWeather->WindSpeed);
+        SERIALIZE(&destination, &destinationSize, myWeather->WindSpeed);
 
 此代码将此事件序列化到缓冲区（由 **destination** 引用）。最后，使用以下代码将事件发送到 IoT 中心：
 
-		sendMessage(iotHubClientHandle, destination, destinationSize);
+        sendMessage(iotHubClientHandle, destination, destinationSize);
 
 在示例应用程序中，这是将已序列化的事件发送到 IoT 中心的帮助器函数：
 
-		static void sendMessage(IOTHUB_CLIENT_HANDLE iotHubClientHandle, const unsigned char* buffer, size_t size)
-		{
-		    static unsigned int messageTrackingId;
-		    IOTHUB_MESSAGE_HANDLE messageHandle = IoTHubMessage_CreateFromByteArray(buffer, size);
-		    if (messageHandle != NULL)
-		    {
-		        if (IoTHubClient_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, (void*)(uintptr_t)messageTrackingId) != IOTHUB_CLIENT_OK)
-		        {
-		            printf("failed to hand over the message to IoTHubClient");
-		        }
-		        else
-		        {
-		            printf("IoTHubClient accepted the message for delivery\r\n");
-		        }
+        static void sendMessage(IOTHUB_CLIENT_HANDLE iotHubClientHandle, const unsigned char* buffer, size_t size)
+        {
+            static unsigned int messageTrackingId;
+            IOTHUB_MESSAGE_HANDLE messageHandle = IoTHubMessage_CreateFromByteArray(buffer, size);
+            if (messageHandle != NULL)
+            {
+                if (IoTHubClient_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, (void*)(uintptr_t)messageTrackingId) != IOTHUB_CLIENT_OK)
+                {
+                    printf("failed to hand over the message to IoTHubClient");
+                }
+                else
+                {
+                    printf("IoTHubClient accepted the message for delivery\r\n");
+                }
 
-		        IoTHubMessage_Destroy(messageHandle);
-		    }
-		    free((void*)buffer);
-		    messageTrackingId++;
-		}
+                IoTHubMessage_Destroy(messageHandle);
+            }
+            free((void*)buffer);
+            messageTrackingId++;
+        }
 
 此代码非常类似于 **iothub\_client\_sample\_amqp** 应用程序中的代码，在此代码中我们使用某个字节数组创建了一条消息，然后使用 **IoTHubClient\_SendEventAsync** 将它发送到 IoT 中心。此后，只需释放以前分配的消息句柄和已序列化的数据缓冲区。
 
 **IoTHubClient\_SendEventAsync** 的倒数第二个参数是对成功发送数据后所调用的回调函数的引用。下面是回调函数的示例：
 
-		void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void* userContextCallback)
-		{
-		    int messageTrackingId = (intptr_t)userContextCallback;
+        void sendCallback(IOTHUB_CLIENT_CONFIRMATION_RESULT result, void* userContextCallback)
+        {
+            int messageTrackingId = (intptr_t)userContextCallback;
 
-		    (void)printf("Message Id: %d Received.\r\n", messageTrackingId);
+            (void)printf("Message Id: %d Received.\r\n", messageTrackingId);
 
-		    (void)printf("Result Call Back Called! Result is: %s \r\n", ENUM_TO_STRING(IOTHUB_CLIENT_CONFIRMATION_RESULT, result));
-		}
+            (void)printf("Result Call Back Called! Result is: %s \r\n", ENUM_TO_STRING(IOTHUB_CLIENT_CONFIRMATION_RESULT, result));
+        }
 
 第二个参数是指向用户上下文的指针，即我们传递给 **IoTHubClient\_SendEventAsync** 的同一个指针。在本例中，该上下文是一个简易计数器，但也可以是你想要的任何装置。
 
@@ -347,43 +347,43 @@ azure-iot-sdks 存储库中的 **serializer** 文件夹中有一个 **samples** 
 
 接收消息的方式类似于在 **IoTHubClient** 库中处理消息。首先，需要注册消息回调函数：
 
-		IoTHubClient_SetMessageCallback(iotHubClientHandle, IoTHubMessage, myWeather)
+        IoTHubClient_SetMessageCallback(iotHubClientHandle, IoTHubMessage, myWeather)
 
 然后编写在接收消息时要调用的回调函数：
 
-		static IOTHUBMESSAGE_DISPOSITION_RESULT IoTHubMessage(IOTHUB_MESSAGE_HANDLE message, void* userContextCallback)
-		{
-		    IOTHUBMESSAGE_DISPOSITION_RESULT result;
-		    const unsigned char* buffer;
-		    size_t size;
-		    if (IoTHubMessage_GetByteArray(message, &buffer, &size) != IOTHUB_MESSAGE_OK)
-		    {
-		        printf("unable to IoTHubMessage_GetByteArray\r\n");
-		        result = EXECUTE_COMMAND_ERROR;
-		    }
-		    else
-		    {
-		        /*buffer is not zero terminated*/
-		        char* temp = malloc(size + 1);
-		        if (temp == NULL)
-		        {
-		            printf("failed to malloc\r\n");
-		            result = EXECUTE_COMMAND_ERROR;
-		        }
-		        else
-		        {
-		            memcpy(temp, buffer, size);
-		            temp[size] = '\0';
-		            EXECUTE_COMMAND_RESULT executeCommandResult = EXECUTE_COMMAND(userContextCallback, temp);
-		            result =
-		                (executeCommandResult == EXECUTE_COMMAND_ERROR) ? IOTHUBMESSAGE_ABANDONED :
-		                (executeCommandResult == EXECUTE_COMMAND_SUCCESS) ? IOTHUBMESSAGE_ACCEPTED :
-		                IOTHUBMESSAGE_REJECTED;
-		            free(temp);
-		        }
-		    }
-		    return result;
-		}
+        static IOTHUBMESSAGE_DISPOSITION_RESULT IoTHubMessage(IOTHUB_MESSAGE_HANDLE message, void* userContextCallback)
+        {
+            IOTHUBMESSAGE_DISPOSITION_RESULT result;
+            const unsigned char* buffer;
+            size_t size;
+            if (IoTHubMessage_GetByteArray(message, &buffer, &size) != IOTHUB_MESSAGE_OK)
+            {
+                printf("unable to IoTHubMessage_GetByteArray\r\n");
+                result = EXECUTE_COMMAND_ERROR;
+            }
+            else
+            {
+                /*buffer is not zero terminated*/
+                char* temp = malloc(size + 1);
+                if (temp == NULL)
+                {
+                    printf("failed to malloc\r\n");
+                    result = EXECUTE_COMMAND_ERROR;
+                }
+                else
+                {
+                    memcpy(temp, buffer, size);
+                    temp[size] = '\0';
+                    EXECUTE_COMMAND_RESULT executeCommandResult = EXECUTE_COMMAND(userContextCallback, temp);
+                    result =
+                        (executeCommandResult == EXECUTE_COMMAND_ERROR) ? IOTHUBMESSAGE_ABANDONED :
+                        (executeCommandResult == EXECUTE_COMMAND_SUCCESS) ? IOTHUBMESSAGE_ACCEPTED :
+                        IOTHUBMESSAGE_REJECTED;
+                    free(temp);
+                }
+            }
+            return result;
+        }
 
 此代码是一个样板 - 对任何解决方案都是相同的。此函数将接收消息并通过调用 **EXECUTE\_COMMAND** 将它路由到相应的函数。此时调用的函数取决于模型中的操作定义。
 
@@ -393,12 +393,12 @@ WITH_ACTION(SetAirResistance, int, Position)
 
 你必须使用此签名来定义函数：
 
-		EXECUTE_COMMAND_RESULT SetAirResistance(ContosoAnemometer* device, int Position)
-		{
-		    (void)device;
-		    (void)printf("Setting Air Resistance Position to %d.\r\n", Position);
-		    return EXECUTE_COMMAND_SUCCESS;
-		}
+        EXECUTE_COMMAND_RESULT SetAirResistance(ContosoAnemometer* device, int Position)
+        {
+            (void)device;
+            (void)printf("Setting Air Resistance Position to %d.\r\n", Position);
+            return EXECUTE_COMMAND_SUCCESS;
+        }
 
 请注意，函数的名称与模型中的操作名称匹配，而函数的参数与为该操作指定的参数匹配。第一个参数始终是必需的，包含指向模型实例的指针。
 
@@ -408,11 +408,11 @@ WITH_ACTION(SetAirResistance, int, Position)
 
 完成发送数据和接收消息后，你可以取消初始化 IoT 库。
 
-		        DESTROY_MODEL_INSTANCE(myWeather);
-		    }
-		    IoTHubClient_Destroy(iotHubClientHandle);
-		}
-		serializer_deinit();
+                DESTROY_MODEL_INSTANCE(myWeather);
+            }
+            IoTHubClient_Destroy(iotHubClientHandle);
+        }
+        serializer_deinit();
 
 上述 3 个函数均符合以前所述的 3 个初始化函数。调用这些 API 可确保释放以前分配的资源。
 

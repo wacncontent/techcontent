@@ -19,19 +19,19 @@ Azure 资源组部署是一种通过单个部署操作将相关的一组 Azure �
 
 1. 通过选择 **文件，在 Visual Studio 2015 中创建一个新项目| New | Project**.
 
-	![File New][file_new]
+    ![File New][file_new]
 
 2. **Visual C# 下| Cloud**, choose **Azure Resource Manager** to create a project for deploying an ARM Template.
 
-	![Create Project][create_project]
+    ![Create Project][create_project]
 
 3.  在模板列表中，选择 Linux 或 Windows 虚拟机规模集模板。
 
-	![选择模板][select_Template]
+    ![选择模板][select_Template]
 
 4. 创建项目后，将看到 PowerShell 部署脚本、Azure Resource Manager 模板和虚拟机规模集的参数文件。
 
-	![解决方案资源管理器][solution_explorer]  
+    ![解决方案资源管理器][solution_explorer]  
 
 ## 自定义项目
 
@@ -45,23 +45,23 @@ Azure 资源组部署是一种通过单个部署操作将相关的一组 Azure �
 
 6. 将 ARM 模板部署到 Azure，以创建 VM 规模集资源。右键单击项目节点，选择 **部署| New Deployment**.
 
-	![Deploy Template][5deploy_Template]
+    ![Deploy Template][5deploy_Template]
 
 7. 在“部署到资源组”对话框中选择订阅。
 
-	![部署模板][6deploy_Template]
+    ![部署模板][6deploy_Template]
 
 8. 还可以从此处创建要将模板部署到的新 Azure 资源组。
 
-	![新建资源组][new_resource]
+    ![新建资源组][new_resource]
 
 9. 接下来，选择“编辑参数”按钮以输入参数，这些参数将传递到你的模板，创建部署时需要某些值，例如 OS 的用户名和密码。
 
-	![编辑参数][edit_parameters]  
+    ![编辑参数][edit_parameters]  
 
 10. 现在单击“部署”。“输出”窗口将显示部署进度。请注意，该操作正在执行 **Deploy-AzureResourceGroup.ps1** 脚本。
 
-	![输出窗口][output_window]  
+    ![输出窗口][output_window]  
 
 ## 浏览 VM 规模集
 

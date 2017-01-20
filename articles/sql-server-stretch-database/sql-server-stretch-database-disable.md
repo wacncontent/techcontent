@@ -53,7 +53,7 @@ ms.author: douglasl
 
     此命令不可取消。
 
-	USE <Stretch 启用的数据库名>;
+    USE <Stretch 启用的数据库名>;
     GO
     ALTER TABLE <Stretch 启用的表名>  
        SET ( REMOTE\_DATA\_ARCHIVE ( MIGRATION\_STATE = INBOUND ) ) ;

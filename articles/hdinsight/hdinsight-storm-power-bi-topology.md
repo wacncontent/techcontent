@@ -72,7 +72,7 @@ Power BI 允许以可视方式将数据显示为报表。使用适用于 Storm o
 
 1. 替换以下示例中“{”与“}”之间的值，构建正确的 __ADO.NET（SQL 身份验证）__信息。
 
-		Server=tcp:{your_dns}.database.chinacloudapi.cn,1433;Data Source={your_dns}.database.chinacloudapi.cn;Initial Catalog=j{your_dns};Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+        Server=tcp:{your_dns}.database.chinacloudapi.cn,1433;Data Source={your_dns}.database.chinacloudapi.cn;Initial Catalog=j{your_dns};Persist Security Info=False;User ID={your_username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
 
 1. 在 Visual Studio 中打开该示例。在“解决方案资源管理器”中打开“App.config”文件，然后找到以下条目：
 

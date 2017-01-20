@@ -69,15 +69,15 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 1. 打开 **Microsoft Excel**。
 2. 在“Power Query”菜单中，依次单击“来自 Azure”和“来自 Azure 表存储”。
  
-	![HDInsight Hadoop Excel PowerQuery 打开 Azure 表存储](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-using-excel-power-query-open.png)
+    ![HDInsight Hadoop Excel PowerQuery 打开 Azure 表存储](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-using-excel-power-query-open.png)
 3. 输入存储帐户名称。对于 Azure 中国区，该名称必须是 FQDN。
 4. 输入存储帐户密钥。将显示一系列表：
 
-	![存储在 Azure 表存储中的 HDInsight Hadoop 日志](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-table-names.png)
+    ![存储在 Azure 表存储中的 HDInsight Hadoop 日志](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-table-names.png)
 5. 右键单击“导航器”窗格中的 hadoopservicelog 表，然后选择“编辑”。将显示 4 个列。（可选）删除“分区键”、“行键”和“时间戳”列，方法是：选择这些项，然后在功能区的选项中单击“删除列”。
 6. 单击“内容”列上的展开图标，选择要导入 Excel 电子表格中的列。选择 TraceLevel 和 ComponentName 进行本次演示：这样可以大致知道哪些组件有问题。
 
-	![HDInsight Hadoop 日志选择列](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-using-excel-power-query-filter.png)
+    ![HDInsight Hadoop 日志选择列](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-using-excel-power-query-filter.png)
 7. 单击“确定”导入数据。
 8. 选择“TraceLevel”、“角色”和“ComponentName”列，然后单击功能区中的“分组依据”控件。
 9. 单击“分组依据”对话框中的“确定”
@@ -95,10 +95,10 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 4. 依次展开“存储帐户”、群集的默认存储帐户和“表”。
 5. 双击“hadoopservicelog”。
 6. 添加筛选器。例如：
-	
-		TraceLevel eq 'ERROR'
+    
+        TraceLevel eq 'ERROR'
 
-	![HDInsight Hadoop 日志选择列](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-visual-studio-filter.png)
+    ![HDInsight Hadoop 日志选择列](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-visual-studio-filter.png)
  
 ##写入 Azure Blob 存储的日志
 

@@ -8,8 +8,8 @@
 
 4. 选择“打开现有 Android Studio 项目”，浏览到该项目在 *GettingStartedWithData* 的 *AndroidStudio* 文件夹中位置，然后单击“确定”。
 
- 	![](./media/mobile-services-android-get-started/android-studio-import-project.png)
+     ![](./media/mobile-services-android-get-started/android-studio-import-project.png)
 
-	现在，你可以使用该项目。
+    现在，你可以使用该项目。
  
 <!---HONumber=71-->

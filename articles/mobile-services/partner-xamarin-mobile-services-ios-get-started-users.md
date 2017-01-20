@@ -45,7 +45,7 @@ ms.author: donnam
 
 2. 在 iPhone 模拟器中按“运行”按钮以生成项目并启动应用程序；验证启动该应用程序后，是否会引发状态代码为 401（“未授权”）的未处理异常。
    
-   	发生此异常的原因是应用程序尝试以未经身份验证的用户身份访问移动服务，但 _TodoItem_ 表现在要求身份验证。
+       发生此异常的原因是应用程序尝试以未经身份验证的用户身份访问移动服务，但 _TodoItem_ 表现在要求身份验证。
 
 接下来，你需要更新应用程序，以便在从移动服务请求资源之前对用户进行身份验证。
 
@@ -53,9 +53,9 @@ ms.author: donnam
 
 1. 打开 **QSToDoService** 项目文件并添加以下变量
 
-		// Mobile Service logged in user
-		private MobileServiceUser user; 
-		public MobileServiceUser User { get { return user; } }
+        // Mobile Service logged in user
+        private MobileServiceUser user; 
+        public MobileServiceUser User { get { return user; } }
 
 2. 然后，向 **TodoService** 添加一个名为 **Authenticate** 的新方法，其定义为：
 
@@ -71,7 +71,7 @@ ms.author: donnam
             }
         }
 
-	> [!NOTE]如果使用的标识提供程序不是 Microsoft 帐户，请将传递给上述 **LoginAsync** 方法的值更改为WindowsAzureActiveDirectory。
+    > [!NOTE]如果使用的标识提供程序不是 Microsoft 帐户，请将传递给上述 **LoginAsync** 方法的值更改为WindowsAzureActiveDirectory。
 
 3. 从 **ToDoService** 构造函数将对 **ToDoItem** 表的请求移到名为 **CreateTable** 的新方法中：
 
@@ -80,7 +80,7 @@ ms.author: donnam
             // Create an MSTable instance to allow us to work with the ToDoItem table
             todoTable = client.GetSyncTable<ToDoItem>();
         }
-	
+    
 4. 创建一个名为 **LoginAndGetData** 的新异步公共方法，其定义为：
 
         public async Task LoginAndGetData(MonoTouch.UIKit.UIViewController view)
@@ -109,10 +109,10 @@ ms.author: donnam
             await RefreshAsync();
         }
 6. 从 **TodoListViewController.ViewDidLoad** 中删除对 **RefreshAsync** 的原始调用。
-		
+        
 7. 按“运行”按钮以生成项目，在 iPhone 模拟器中启动应用，然后使用你选择的标识提供者登录。
 
-   	当你成功登录时，应用应该运行而不出现错误，你应该能够查询移动服务，并对数据进行更新。
+       当你成功登录时，应用应该运行而不出现错误，你应该能够查询移动服务，并对数据进行更新。
 
 ## 获取已完成的示例
 下载已完成的示例项目。请务必使用你自己的 Azure 设置更新 **applicationURL** 和 **applicationKey** 变量。

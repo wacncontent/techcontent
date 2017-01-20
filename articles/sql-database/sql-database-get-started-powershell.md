@@ -35,13 +35,13 @@ ms.author: sstein
 
 运行以下命令创建资源组：
 
-	New-AzureRmResourceGroup -Name "resourcegroupsqlgsps" -Location "China North"
+    New-AzureRmResourceGroup -Name "resourcegroupsqlgsps" -Location "China North"
 
 ### 创建服务器
 
 SQL 数据库在 Azure SQL 数据库服务器中创建。运行 **New-AzureRmSqlServer** 来创建服务器。服务器的名称在所有 Azure SQL 数据库服务器中必须是唯一的。如果服务器名称已使用，将出现错误。还必须指出的是，此命令可能需要数分钟才能运行完毕。可以编辑该命令，使用所选择的任何有效位置，但应使用上一步骤中创建的资源组所用的相同位置。
 
-	New-AzureRmSqlServer -ResourceGroupName "resourcegroupsqlgsps" -ServerName "server1" -Location "China North" -ServerVersion "12.0"
+    New-AzureRmSqlServer -ResourceGroupName "resourcegroupsqlgsps" -ServerName "server1" -Location "China North" -ServerVersion "12.0"
 
 运行此命令时，系统会提示输入用户名和密码。请不要输入 Azure 凭据，而是输入服务器管理员的用户名和密码。本文末尾的脚本演示了如何在代码中设置服务器凭据。
 
@@ -51,7 +51,7 @@ SQL 数据库在 Azure SQL 数据库服务器中创建。运行 **New-AzureRmSql
 
 若要访问服务器，需要建立一条防火墙规则。运行以下命令，将开始和结束 IP 地址替换为计算机的有效值。
 
-	New-AzureRmSqlServerFirewallRule -ResourceGroupName "resourcegroupsqlgsps" -ServerName "server1" -FirewallRuleName "rule1" -StartIpAddress "192.168.0.0" -EndIpAddress "192.168.0.0"
+    New-AzureRmSqlServerFirewallRule -ResourceGroupName "resourcegroupsqlgsps" -ServerName "server1" -FirewallRuleName "rule1" -StartIpAddress "192.168.0.0" -EndIpAddress "192.168.0.0"
 
 成功创建规则后，会显示防火墙规则详细信息。
 
@@ -65,7 +65,7 @@ SQL 数据库在 Azure SQL 数据库服务器中创建。运行 **New-AzureRmSql
 
 以下命令通过 S1 性能级别在标准服务层创建一个（空白）SQL 数据库：
 
-	New-AzureRmSqlDatabase -ResourceGroupName "resourcegroupsqlgsps" -ServerName "server1" -DatabaseName "database1" -Edition "Standard" -RequestedServiceObjectiveName "S1"
+    New-AzureRmSqlDatabase -ResourceGroupName "resourcegroupsqlgsps" -ServerName "server1" -DatabaseName "database1" -Edition "Standard" -RequestedServiceObjectiveName "S1"
 
 成功创建数据库后，会显示数据库详细信息。
 

@@ -24,13 +24,13 @@ ms.author: milanga;juliako;
 
 - **面部检测**
 
-	面部检测能够找出并跟踪视频中的人脸。可以同时跟踪多个面部，随着对象移动持续进行跟踪，并将时间和位置的元数据以 JSON 文件的格式返回。跟踪期间，该服务将在人员于屏幕上四处移动时，尝试为他们的面部赋予相同的 ID，即使他们被挡住或暂时离帧。
+    面部检测能够找出并跟踪视频中的人脸。可以同时跟踪多个面部，随着对象移动持续进行跟踪，并将时间和位置的元数据以 JSON 文件的格式返回。跟踪期间，该服务将在人员于屏幕上四处移动时，尝试为他们的面部赋予相同的 ID，即使他们被挡住或暂时离帧。
 
-	>[!NOTE]此服务并不执行面部识别。面部离帧或被挡住太久的人员，将在回来时赋予新的 ID。
+    >[!NOTE]此服务并不执行面部识别。面部离帧或被挡住太久的人员，将在回来时赋予新的 ID。
 
 - **情绪检测**
-	
-	情绪检测是面部检测媒体处理器的可选组件，它根据检测到的面部返回多个情绪属性的分析，包括快乐、悲伤、恐惧、愤怒等等。
+    
+    情绪检测是面部检测媒体处理器的可选组件，它根据检测到的面部返回多个情绪属性的分析，包括快乐、悲伤、恐惧、愤怒等等。
 
 **Azure 媒体面部检测器** MP 目前以预览版提供。
 
@@ -82,52 +82,52 @@ facesDetected|位于 JSON 结果的末尾，汇总在生成视频期间算法所
 ### JSON 输出
 下面是 JSON 输出被截断的示例。
 
-	{
-	"version": 1,
-	"timescale": 30000,
-	"offset": 0,
-	"framerate": 29.97,
-	"width": 1280,
-	"height": 720,
-	"fragments": [
-	    {
-	    "start": 0,
-	    "duration": 60060
-	    },
-	    {
-	    "start": 60060,
-	    "duration": 60060,
-	    "interval": 1001,
-	    "events": [
-	        [
-	        {
-	            "id": 0,
-	            "x": 0.519531,
-	            "y": 0.180556,
-	            "width": 0.0867188,
-	            "height": 0.154167
-	        }
-	        ],
-	        [
-	        {
-	            "id": 0,
-	            "x": 0.517969,
-	            "y": 0.181944,
-	            "width": 0.0867188,
-	            "height": 0.154167
-	        }
-	        ],
-	        [
-	        {
-	            "id": 0,
-	            "x": 0.517187,
-	            "y": 0.183333,
-	            "width": 0.0851562,
-	            "height": 0.151389
-	        }
-	        ],
+    {
+    "version": 1,
+    "timescale": 30000,
+    "offset": 0,
+    "framerate": 29.97,
+    "width": 1280,
+    "height": 720,
+    "fragments": [
+        {
+        "start": 0,
+        "duration": 60060
+        },
+        {
+        "start": 60060,
+        "duration": 60060,
+        "interval": 1001,
+        "events": [
+            [
+            {
+                "id": 0,
+                "x": 0.519531,
+                "y": 0.180556,
+                "width": 0.0867188,
+                "height": 0.154167
+            }
+            ],
+            [
+            {
+                "id": 0,
+                "x": 0.517969,
+                "y": 0.181944,
+                "width": 0.0867188,
+                "height": 0.154167
+            }
+            ],
+            [
+            {
+                "id": 0,
+                "x": 0.517187,
+                "y": 0.183333,
+                "width": 0.0851562,
+                "height": 0.151389
+            }
+            ],
 
-		. . . 
+        . . . 
 
 ## 情绪检测输入和输出示例
 ### 输入视频
@@ -135,15 +135,15 @@ facesDetected|位于 JSON 结果的末尾，汇总在生成视频期间算法所
 
 ### 任务配置（预设）
 在使用 **Azure 媒体面部检测器**创建任务时，必须指定配置预设。以下配置预设指定基于情绪检测创建 JSON。
- 	
-	{
-	  "version": "1.0",
-	  "options": {
-	    "aggregateEmotionWindowMs": "987",
-	    "mode": "aggregateEmotion",
-	    "aggregateEmotionIntervalMs": "342"
-	  }
-	}
+     
+    {
+      "version": "1.0",
+      "options": {
+        "aggregateEmotionWindowMs": "987",
+        "mode": "aggregateEmotion",
+        "aggregateEmotionIntervalMs": "342"
+      }
+    }
 
 ####属性说明
 
@@ -166,156 +166,156 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
 
 聚合情绪的 JSON 输出（已截断）：
  
-	{
-	 "version": 1,
-	 "timescale": 30000,
-	 "offset": 0,
-	 "framerate": 29.97,
-	 "width": 1280,
-	 "height": 720,
-	 "fragments": [
-	   {
-	     "start": 0,
-	     "duration": 60060,
-	     "interval": 15015,
-	     "events": [
-	       [
-	         {
-	           "windowFaceDistribution": {
-	             "neutral": 0,
-	             "happiness": 0,
-	             "surprise": 0,
-	             "sadness": 0,
-	             "anger": 0,
-	             "disgust": 0,
-	             "fear": 0,
-	             "contempt": 0
-	           },
-	           "windowMeanScores": {
-	             "neutral": 0,
-	             "happiness": 0,
-	             "surprise": 0,
-	             "sadness": 0,
-	             "anger": 0,
-	             "disgust": 0,
-	             "fear": 0,
-	             "contempt": 0
-	           }
-	         }
-	       ],
-	       [
-	         {
-	           "windowFaceDistribution": {
-	             "neutral": 0,
-	             "happiness": 0,
-	             "surprise": 0,
-	             "sadness": 0,
-	             "anger": 0,
-	             "disgust": 0,
-	             "fear": 0,
-	             "contempt": 0
-	           },
-	           "windowMeanScores": {
-	             "neutral": 0,
-	             "happiness": 0,
-	             "surprise": 0,
-	             "sadness": 0,
-	             "anger": 0,
-	             "disgust": 0,
-	             "fear": 0,
-	             "contempt": 0
-	           }
-	         }
-	       ],
-	       [
-	         {
-	           "windowFaceDistribution": {
-	             "neutral": 0,
-	             "happiness": 0,
-	             "surprise": 0,
-	             "sadness": 0,
-	             "anger": 0,
-	             "disgust": 0,
-	             "fear": 0,
-	             "contempt": 0
-	           },
-	           "windowMeanScores": {
-	             "neutral": 0,
-	             "happiness": 0,
-	             "surprise": 0,
-	             "sadness": 0,
-	             "anger": 0,
-	             "disgust": 0,
-	             "fear": 0,
-	             "contempt": 0
-	           }
-	         }
-	       ],
-	       [
-	         {
-	           "windowFaceDistribution": {
-	             "neutral": 0,
-	             "happiness": 0,
-	             "surprise": 0,
-	             "sadness": 0,
-	             "anger": 0,
-	             "disgust": 0,
-	             "fear": 0,
-	             "contempt": 0
-	           },
-	           "windowMeanScores": {
-	             "neutral": 0,
-	             "happiness": 0,
-	             "surprise": 0,
-	             "sadness": 0,
-	             "anger": 0,
-	             "disgust": 0,
-	             "fear": 0,
-	             "contempt": 0
-	           }
-	         }
-	       ]
-	     ]
-	   },
-	   {
-	     "start": 60060,
-	     "duration": 60060,
-	     "interval": 15015,
-	     "events": [
-	       [
-	         {
-	           "windowFaceDistribution": {
-	             "neutral": 1,
-	             "happiness": 0,
-	             "surprise": 0,
-	             "sadness": 0,
-	             "anger": 0,
-	             "disgust": 0,
-	             "fear": 0,
-	             "contempt": 0
-	           },
-	           "windowMeanScores": {
-	             "neutral": 0.688541,
-	             "happiness": 0.0586323,
-	             "surprise": 0.227184,
-	             "sadness": 0.00945675,
-	             "anger": 0.00592107,
-	             "disgust": 0.00154993,
-	             "fear": 0.00450447,
-	             "contempt": 0.0042109
-	           }
-	         }
-	       ],
-	       [
-	         {
-	           "windowFaceDistribution": {
-	             "neutral": 1,
-	             "happiness": 0,
-	             "surprise": 0,
-	             "sadness": 0,
-	             "anger": 0,
-	             "disgust": 0,
-	             "fear": 0,
+    {
+     "version": 1,
+     "timescale": 30000,
+     "offset": 0,
+     "framerate": 29.97,
+     "width": 1280,
+     "height": 720,
+     "fragments": [
+       {
+         "start": 0,
+         "duration": 60060,
+         "interval": 15015,
+         "events": [
+           [
+             {
+               "windowFaceDistribution": {
+                 "neutral": 0,
+                 "happiness": 0,
+                 "surprise": 0,
+                 "sadness": 0,
+                 "anger": 0,
+                 "disgust": 0,
+                 "fear": 0,
+                 "contempt": 0
+               },
+               "windowMeanScores": {
+                 "neutral": 0,
+                 "happiness": 0,
+                 "surprise": 0,
+                 "sadness": 0,
+                 "anger": 0,
+                 "disgust": 0,
+                 "fear": 0,
+                 "contempt": 0
+               }
+             }
+           ],
+           [
+             {
+               "windowFaceDistribution": {
+                 "neutral": 0,
+                 "happiness": 0,
+                 "surprise": 0,
+                 "sadness": 0,
+                 "anger": 0,
+                 "disgust": 0,
+                 "fear": 0,
+                 "contempt": 0
+               },
+               "windowMeanScores": {
+                 "neutral": 0,
+                 "happiness": 0,
+                 "surprise": 0,
+                 "sadness": 0,
+                 "anger": 0,
+                 "disgust": 0,
+                 "fear": 0,
+                 "contempt": 0
+               }
+             }
+           ],
+           [
+             {
+               "windowFaceDistribution": {
+                 "neutral": 0,
+                 "happiness": 0,
+                 "surprise": 0,
+                 "sadness": 0,
+                 "anger": 0,
+                 "disgust": 0,
+                 "fear": 0,
+                 "contempt": 0
+               },
+               "windowMeanScores": {
+                 "neutral": 0,
+                 "happiness": 0,
+                 "surprise": 0,
+                 "sadness": 0,
+                 "anger": 0,
+                 "disgust": 0,
+                 "fear": 0,
+                 "contempt": 0
+               }
+             }
+           ],
+           [
+             {
+               "windowFaceDistribution": {
+                 "neutral": 0,
+                 "happiness": 0,
+                 "surprise": 0,
+                 "sadness": 0,
+                 "anger": 0,
+                 "disgust": 0,
+                 "fear": 0,
+                 "contempt": 0
+               },
+               "windowMeanScores": {
+                 "neutral": 0,
+                 "happiness": 0,
+                 "surprise": 0,
+                 "sadness": 0,
+                 "anger": 0,
+                 "disgust": 0,
+                 "fear": 0,
+                 "contempt": 0
+               }
+             }
+           ]
+         ]
+       },
+       {
+         "start": 60060,
+         "duration": 60060,
+         "interval": 15015,
+         "events": [
+           [
+             {
+               "windowFaceDistribution": {
+                 "neutral": 1,
+                 "happiness": 0,
+                 "surprise": 0,
+                 "sadness": 0,
+                 "anger": 0,
+                 "disgust": 0,
+                 "fear": 0,
+                 "contempt": 0
+               },
+               "windowMeanScores": {
+                 "neutral": 0.688541,
+                 "happiness": 0.0586323,
+                 "surprise": 0.227184,
+                 "sadness": 0.00945675,
+                 "anger": 0.00592107,
+                 "disgust": 0.00154993,
+                 "fear": 0.00450447,
+                 "contempt": 0.0042109
+               }
+             }
+           ],
+           [
+             {
+               "windowFaceDistribution": {
+                 "neutral": 1,
+                 "happiness": 0,
+                 "surprise": 0,
+                 "sadness": 0,
+                 "anger": 0,
+                 "disgust": 0,
+                 "fear": 0,
 
 ## 限制
 * 支持的输入视频格式包括 MP4、MOV 和 WMV。
@@ -335,178 +335,178 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
 3. 下载输出 JSON 文件。
    
         using System;
-		using System.Configuration;
-		using System.IO;
-		using System.Linq;
-		using Microsoft.WindowsAzure.MediaServices.Client;
-		using System.Threading;
-		using System.Threading.Tasks;
-		
-		namespace FaceDetection
-		{
-		    class Program
-		    {
-		        // Read values from the App.config file.
-		        private static readonly string _mediaServicesAccountName =
-		            ConfigurationManager.AppSettings["MediaServicesAccountName"];
-		        private static readonly string _mediaServicesAccountKey =
-		            ConfigurationManager.AppSettings["MediaServicesAccountKey"];
-			    
-			private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
+        using System.Configuration;
+        using System.IO;
+        using System.Linq;
+        using Microsoft.WindowsAzure.MediaServices.Client;
+        using System.Threading;
+        using System.Threading.Tasks;
+        
+        namespace FaceDetection
+        {
+            class Program
+            {
+                // Read values from the App.config file.
+                private static readonly string _mediaServicesAccountName =
+                    ConfigurationManager.AppSettings["MediaServicesAccountName"];
+                private static readonly string _mediaServicesAccountKey =
+                    ConfigurationManager.AppSettings["MediaServicesAccountKey"];
+                
+            private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
 
-			// Azure China uses a different API server and a different ACS Base Address from the Global.
-			private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
-			private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
+            // Azure China uses a different API server and a different ACS Base Address from the Global.
+            private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
+            private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
 
-		        // Field for service context.
-		        private static CloudMediaContext _context = null;
-		        private static MediaServicesCredentials _cachedCredentials = null;
-			private static Uri _apiServer = null;
-		
-		        static void Main(string[] args)
-		        {
-		
-		            // Create and cache the Media Services credentials in a static class variable.
-		           _cachedCredentials = new MediaServicesCredentials(
+                // Field for service context.
+                private static CloudMediaContext _context = null;
+                private static MediaServicesCredentials _cachedCredentials = null;
+            private static Uri _apiServer = null;
+        
+                static void Main(string[] args)
+                {
+        
+                    // Create and cache the Media Services credentials in a static class variable.
+                   _cachedCredentials = new MediaServicesCredentials(
                                 _mediaServicesAccountName,
                                 _mediaServicesAccountKey,
-								_defaultScope,
-								_chinaAcsBaseAddressUrl);
+                                _defaultScope,
+                                _chinaAcsBaseAddressUrl);
 
-				// Create the API server Uri
-				_apiServer = new Uri(_chinaApiServerUrl);
-		            // Used the cached credentials to create CloudMediaContext.
-		            _context = new CloudMediaContext(_apiServer, _cachedCredentials);
-		
-		            // Run the FaceDetection job.
-		            var asset = RunFaceDetectionJob(@"C:\supportFiles\FaceDetection\BigBuckBunny.mp4",
-		                                        @"C:\supportFiles\FaceDetection\config.json");
-		
-		            // Download the job output asset.
-		            DownloadAsset(asset, @"C:\supportFiles\FaceDetection\Output");
-		        }
-		
-		        static IAsset RunFaceDetectionJob(string inputMediaFilePath, string configurationFile)
-		        {
-		            // Create an asset and upload the input media file to storage.
-		            IAsset asset = CreateAssetAndUploadSingleFile(inputMediaFilePath,
-		                "My Face Detection Input Asset",
-		                AssetCreationOptions.None);
-		
-		            // Declare a new job.
-		            IJob job = _context.Jobs.Create("My Face Detection Job");
-		
-		            // Get a reference to Azure Media Face Detector.
-		            string MediaProcessorName = "Azure Media Face Detector";
-		
-		            var processor = GetLatestMediaProcessorByName(MediaProcessorName);
-		
-		            // Read configuration from the specified file.
-		            string configuration = File.ReadAllText(configurationFile);
-		
-		            // Create a task with the encoding details, using a string preset.
-		            ITask task = job.Tasks.AddNew("My Face Detection Task",
-		                processor,
-		                configuration,
-		                TaskOptions.None);
-		
-		            // Specify the input asset.
-		            task.InputAssets.Add(asset);
-		
-		            // Add an output asset to contain the results of the job.
-		            task.OutputAssets.AddNew("My Face Detectoion Output Asset", AssetCreationOptions.None);
-		
-		            // Use the following event handler to check job progress.  
-		            job.StateChanged += new EventHandler<JobStateChangedEventArgs>(StateChanged);
-		
-		            // Launch the job.
-		            job.Submit();
-		
-		            // Check job execution and wait for job to finish.
-		            Task progressJobTask = job.GetExecutionProgressTask(CancellationToken.None);
-		
-		            progressJobTask.Wait();
-		
-		            // If job state is Error, the event handling
-		            // method for job progress should log errors.  Here we check
-		            // for error state and exit if needed.
-		            if (job.State == JobState.Error)
-		            {
-		                ErrorDetail error = job.Tasks.First().ErrorDetails.First();
-		                Console.WriteLine(string.Format("Error: {0}. {1}",
-		                                                error.Code,
-		                                                error.Message));
-		                return null;
-		            }
-		
-		            return job.OutputMediaAssets[0];
-		        }
-		
-		        static IAsset CreateAssetAndUploadSingleFile(string filePath, string assetName, AssetCreationOptions options)
-		        {
-		            IAsset asset = _context.Assets.Create(assetName, options);
-		
-		            var assetFile = asset.AssetFiles.Create(Path.GetFileName(filePath));
-		            assetFile.Upload(filePath);
-		
-		            return asset;
-		        }
-		
-		        static void DownloadAsset(IAsset asset, string outputDirectory)
-		        {
-		            foreach (IAssetFile file in asset.AssetFiles)
-		            {
-		                file.Download(Path.Combine(outputDirectory, file.Name));
-		            }
-		        }
-		
-		        static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
-		        {
-		            var processor = _context.MediaProcessors
-		                .Where(p => p.Name == mediaProcessorName)
-		                .ToList()
-		                .OrderBy(p => new Version(p.Version))
-		                .LastOrDefault();
-		
-		            if (processor == null)
-		                throw new ArgumentException(string.Format("Unknown media processor",
-		                                                           mediaProcessorName));
-		
-		            return processor;
-		        }
-		
-		        static private void StateChanged(object sender, JobStateChangedEventArgs e)
-		        {
-		            Console.WriteLine("Job state changed event:");
-		            Console.WriteLine("  Previous state: " + e.PreviousState);
-		            Console.WriteLine("  Current state: " + e.CurrentState);
-		
-		            switch (e.CurrentState)
-		            {
-		                case JobState.Finished:
-		                    Console.WriteLine();
-		                    Console.WriteLine("Job is finished.");
-		                    Console.WriteLine();
-		                    break;
-		                case JobState.Canceling:
-		                case JobState.Queued:
-		                case JobState.Scheduled:
-		                case JobState.Processing:
-		                    Console.WriteLine("Please wait...\n");
-		                    break;
-		                case JobState.Canceled:
-		                case JobState.Error:
-		                    // Cast sender as a job.
-		                    IJob job = (IJob)sender;
-		                    // Display or log error details as needed.
-		                    // LogJobStop(job.Id);
-		                    break;
-		                default:
-		                    break;
-		            }
-		        }
-		
-		    }
+                // Create the API server Uri
+                _apiServer = new Uri(_chinaApiServerUrl);
+                    // Used the cached credentials to create CloudMediaContext.
+                    _context = new CloudMediaContext(_apiServer, _cachedCredentials);
+        
+                    // Run the FaceDetection job.
+                    var asset = RunFaceDetectionJob(@"C:\supportFiles\FaceDetection\BigBuckBunny.mp4",
+                                                @"C:\supportFiles\FaceDetection\config.json");
+        
+                    // Download the job output asset.
+                    DownloadAsset(asset, @"C:\supportFiles\FaceDetection\Output");
+                }
+        
+                static IAsset RunFaceDetectionJob(string inputMediaFilePath, string configurationFile)
+                {
+                    // Create an asset and upload the input media file to storage.
+                    IAsset asset = CreateAssetAndUploadSingleFile(inputMediaFilePath,
+                        "My Face Detection Input Asset",
+                        AssetCreationOptions.None);
+        
+                    // Declare a new job.
+                    IJob job = _context.Jobs.Create("My Face Detection Job");
+        
+                    // Get a reference to Azure Media Face Detector.
+                    string MediaProcessorName = "Azure Media Face Detector";
+        
+                    var processor = GetLatestMediaProcessorByName(MediaProcessorName);
+        
+                    // Read configuration from the specified file.
+                    string configuration = File.ReadAllText(configurationFile);
+        
+                    // Create a task with the encoding details, using a string preset.
+                    ITask task = job.Tasks.AddNew("My Face Detection Task",
+                        processor,
+                        configuration,
+                        TaskOptions.None);
+        
+                    // Specify the input asset.
+                    task.InputAssets.Add(asset);
+        
+                    // Add an output asset to contain the results of the job.
+                    task.OutputAssets.AddNew("My Face Detectoion Output Asset", AssetCreationOptions.None);
+        
+                    // Use the following event handler to check job progress.  
+                    job.StateChanged += new EventHandler<JobStateChangedEventArgs>(StateChanged);
+        
+                    // Launch the job.
+                    job.Submit();
+        
+                    // Check job execution and wait for job to finish.
+                    Task progressJobTask = job.GetExecutionProgressTask(CancellationToken.None);
+        
+                    progressJobTask.Wait();
+        
+                    // If job state is Error, the event handling
+                    // method for job progress should log errors.  Here we check
+                    // for error state and exit if needed.
+                    if (job.State == JobState.Error)
+                    {
+                        ErrorDetail error = job.Tasks.First().ErrorDetails.First();
+                        Console.WriteLine(string.Format("Error: {0}. {1}",
+                                                        error.Code,
+                                                        error.Message));
+                        return null;
+                    }
+        
+                    return job.OutputMediaAssets[0];
+                }
+        
+                static IAsset CreateAssetAndUploadSingleFile(string filePath, string assetName, AssetCreationOptions options)
+                {
+                    IAsset asset = _context.Assets.Create(assetName, options);
+        
+                    var assetFile = asset.AssetFiles.Create(Path.GetFileName(filePath));
+                    assetFile.Upload(filePath);
+        
+                    return asset;
+                }
+        
+                static void DownloadAsset(IAsset asset, string outputDirectory)
+                {
+                    foreach (IAssetFile file in asset.AssetFiles)
+                    {
+                        file.Download(Path.Combine(outputDirectory, file.Name));
+                    }
+                }
+        
+                static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
+                {
+                    var processor = _context.MediaProcessors
+                        .Where(p => p.Name == mediaProcessorName)
+                        .ToList()
+                        .OrderBy(p => new Version(p.Version))
+                        .LastOrDefault();
+        
+                    if (processor == null)
+                        throw new ArgumentException(string.Format("Unknown media processor",
+                                                                   mediaProcessorName));
+        
+                    return processor;
+                }
+        
+                static private void StateChanged(object sender, JobStateChangedEventArgs e)
+                {
+                    Console.WriteLine("Job state changed event:");
+                    Console.WriteLine("  Previous state: " + e.PreviousState);
+                    Console.WriteLine("  Current state: " + e.CurrentState);
+        
+                    switch (e.CurrentState)
+                    {
+                        case JobState.Finished:
+                            Console.WriteLine();
+                            Console.WriteLine("Job is finished.");
+                            Console.WriteLine();
+                            break;
+                        case JobState.Canceling:
+                        case JobState.Queued:
+                        case JobState.Scheduled:
+                        case JobState.Processing:
+                            Console.WriteLine("Please wait...\n");
+                            break;
+                        case JobState.Canceled:
+                        case JobState.Error:
+                            // Cast sender as a job.
+                            IJob job = (IJob)sender;
+                            // Display or log error details as needed.
+                            // LogJobStop(job.Id);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+        
+            }
         }
 
 ## 相关链接

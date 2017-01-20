@@ -51,13 +51,13 @@ ms.author: billmath
 1. 单击“添加新规则”。
 2. 在“说明”页上输入以下内容：
 ![入站规则筛选](./media/active-directory-aadconnectsync-change-the-configuration/description2.png)
-	- 名称：为规则提供说明性名称。
-	- 说明：提供一些说明以便他人可以理解规则的用途。
-	- 连接的系统：可从中找到对象的系统。这种情况下，选择 Active Directory 连接器。
-	- 连接的系统/Metaverse 对象类型：分别选择“用户”和“人员”。
-	- 链接类型：将该值更改为“联接”。
-	- 优先级：提供系统中唯一的值。较低的数值表示较高的优先级。
-	- 标记：留空。只有 Microsoft 中现成可用的规则应该会要求在此框中填入值。
+    - 名称：为规则提供说明性名称。
+    - 说明：提供一些说明以便他人可以理解规则的用途。
+    - 连接的系统：可从中找到对象的系统。这种情况下，选择 Active Directory 连接器。
+    - 连接的系统/Metaverse 对象类型：分别选择“用户”和“人员”。
+    - 链接类型：将该值更改为“联接”。
+    - 优先级：提供系统中唯一的值。较低的数值表示较高的优先级。
+    - 标记：留空。只有 Microsoft 中现成可用的规则应该会要求在此框中填入值。
 3. 在“范围筛选器”页上，输入“givenName ISNOTNULL”。
 ![入站规则范围筛选器](./media/active-directory-aadconnectsync-change-the-configuration/scopingfilter.png) 
 此部分用于定义规则应该应用到哪些对象。如果留空，该规则会应用到所有用户对象。但也可包括会议室、服务帐户和其他非个人用户对象。

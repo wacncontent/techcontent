@@ -28,10 +28,10 @@ ms.author: douglasl
 
 若要查看已启用延伸的表在 SQL Server 中使用的空间量，请运行以下语句。
 
-	USE <Stretch-enabled database name>;
-	GO
-	EXEC sp_spaceused '<Stretch-enabled table name>', 'true', 'LOCAL_ONLY';
-	GO
+    USE <Stretch-enabled database name>;
+    GO
+    EXEC sp_spaceused '<Stretch-enabled table name>', 'true', 'LOCAL_ONLY';
+    GO
 
 ## 管理数据迁移
 
@@ -53,10 +53,10 @@ ms.author: douglasl
 
 若要查看已启用延伸的表在 Azure 中使用的空间量，请运行以下语句。
 
-	USE <Stretch-enabled database name>;
-	GO
-	EXEC sp_spaceused '<Stretch-enabled table name>', 'true', 'REMOTE_ONLY';
-	GO
+    USE <Stretch-enabled database name>;
+    GO
+    EXEC sp_spaceused '<Stretch-enabled table name>', 'true', 'REMOTE_ONLY';
+    GO
 
 ### 删除迁移的数据  
 如果你希望删除已经迁移到 Azure 的数据，请按照 [sys.sp\_rda\_reconcile\_batch](https://msdn.microsoft.com/zh-cn/library/mt707768.aspx) 中所述步骤进行操作。
@@ -104,10 +104,10 @@ ms.author: douglasl
 
 例如，以下查询仅返回本地结果。
 
-	 USE <Stretch-enabled database name>;
-	 GO
-	 SELECT * FROM <Stretch_enabled table name> WITH (REMOTE_DATA_ARCHIVE_OVERRIDE = LOCAL_ONLY) WHERE ... ;
-	 GO
+     USE <Stretch-enabled database name>;
+     GO
+     SELECT * FROM <Stretch_enabled table name> WITH (REMOTE_DATA_ARCHIVE_OVERRIDE = LOCAL_ONLY) WHERE ... ;
+     GO
 
 ## <a name="adminHints"></a>进行管理更新和删除操作  
  默认情况下，在启用了延伸的表中不能“更新”或“删除”可进行迁移的行或已迁移的行。当你必须解决问题时，db\_owner 角色的成员可以通过将 **WITH ( REMOTE\_DATA\_ARCHIVE\_OVERRIDE = *value* )** 查询提示添加到语句来运行“更新”或“删除”操作。REMOTE\_DATA\_ARCHIVE\_OVERRIDE 查询提示可具有以下值。

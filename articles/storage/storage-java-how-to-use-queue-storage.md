@@ -55,7 +55,7 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
         "DefaultEndpointsProtocol=http;" +
         "AccountName=your_storage_account;" +
         "AccountKey=your_storage_account_key;" +
-	"EndpointSuffix=core.chinacloudapi.cn";
+    "EndpointSuffix=core.chinacloudapi.cn";
 
 在 Azure 的角色中运行的应用程序中，此字符串可存储在服务配置文件 *ServiceConfiguration.cscfg* 中，并可通过调用 **RoleEnvironment.getConfigurationSettings** 方法进行访问。下面是从服务配置文件中名为 *StorageConnectionString* 的 **Setting** 元素中获取连接字符串的示例：
 
@@ -73,18 +73,18 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
     try
     {
-    	// Retrieve storage account from connection-string.
-    	CloudStorageAccount storageAccount =
-	       CloudStorageAccount.parse(storageConnectionString);
+        // Retrieve storage account from connection-string.
+        CloudStorageAccount storageAccount =
+           CloudStorageAccount.parse(storageConnectionString);
 
-	   // Create the queue client.
-	   CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
+       // Create the queue client.
+       CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
 
-	   // Retrieve a reference to a queue.
-	   CloudQueue queue = queueClient.getQueueReference("myqueue");
+       // Retrieve a reference to a queue.
+       CloudQueue queue = queueClient.getQueueReference("myqueue");
 
-	   // Create the queue if it doesn't already exist.
-	   queue.createIfNotExists();
+       // Create the queue if it doesn't already exist.
+       queue.createIfNotExists();
     }
     catch (Exception e)
     {
@@ -98,22 +98,22 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
     try
     {
-    	// Retrieve storage account from connection-string.
-    	CloudStorageAccount storageAccount =
-	       CloudStorageAccount.parse(storageConnectionString);
+        // Retrieve storage account from connection-string.
+        CloudStorageAccount storageAccount =
+           CloudStorageAccount.parse(storageConnectionString);
 
-    	// Create the queue client.
-    	CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
+        // Create the queue client.
+        CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
 
-    	// Retrieve a reference to a queue.
-    	CloudQueue queue = queueClient.getQueueReference("myqueue");
+        // Retrieve a reference to a queue.
+        CloudQueue queue = queueClient.getQueueReference("myqueue");
 
-    	// Create the queue if it doesn't already exist.
-    	queue.createIfNotExists();
+        // Create the queue if it doesn't already exist.
+        queue.createIfNotExists();
 
-    	// Create a message and add it to the queue.
-    	CloudQueueMessage message = new CloudQueueMessage("Hello, World");
-    	queue.addMessage(message);
+        // Create a message and add it to the queue.
+        CloudQueueMessage message = new CloudQueueMessage("Hello, World");
+        queue.addMessage(message);
     }
     catch (Exception e)
     {
@@ -127,24 +127,24 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
     try
     {
-    	// Retrieve storage account from connection-string.
-    	CloudStorageAccount storageAccount =
-	       CloudStorageAccount.parse(storageConnectionString);
+        // Retrieve storage account from connection-string.
+        CloudStorageAccount storageAccount =
+           CloudStorageAccount.parse(storageConnectionString);
 
-    	// Create the queue client.
-    	CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
+        // Create the queue client.
+        CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
 
-    	// Retrieve a reference to a queue.
-    	CloudQueue queue = queueClient.getQueueReference("myqueue");
+        // Retrieve a reference to a queue.
+        CloudQueue queue = queueClient.getQueueReference("myqueue");
 
-    	// Peek at the next message.
-    	CloudQueueMessage peekedMessage = queue.peekMessage();
+        // Peek at the next message.
+        CloudQueueMessage peekedMessage = queue.peekMessage();
 
-    	// Output the message value.
-    	if (peekedMessage != null)
-    	{
-		  System.out.println(peekedMessage.getMessageContentAsString());
-	   }
+        // Output the message value.
+        if (peekedMessage != null)
+        {
+          System.out.println(peekedMessage.getMessageContentAsString());
+       }
     }
     catch (Exception e)
     {
@@ -164,11 +164,11 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
         CloudStorageAccount storageAccount =
             CloudStorageAccount.parse(storageConnectionString);
 
-    	// Create the queue client.
-    	CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
+        // Create the queue client.
+        CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
 
-    	// Retrieve a reference to a queue.
-    	CloudQueue queue = queueClient.getQueueReference("myqueue");
+        // Retrieve a reference to a queue.
+        CloudQueue queue = queueClient.getQueueReference("myqueue");
 
         // The maximum number of messages that can be retrieved is 32.
         final int MAX_NUMBER_OF_MESSAGES_TO_PEEK = 32;
@@ -201,21 +201,21 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
     try
     {
-    	// Retrieve storage account from connection-string.
-    	CloudStorageAccount storageAccount =
-	       CloudStorageAccount.parse(storageConnectionString);
+        // Retrieve storage account from connection-string.
+        CloudStorageAccount storageAccount =
+           CloudStorageAccount.parse(storageConnectionString);
 
-    	// Create the queue client.
-    	CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
+        // Create the queue client.
+        CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
 
-    	// Retrieve a reference to a queue.
-    	CloudQueue queue = queueClient.getQueueReference("myqueue");
+        // Retrieve a reference to a queue.
+        CloudQueue queue = queueClient.getQueueReference("myqueue");
 
-    	// Retrieve the first visible message in the queue.
-    	CloudQueueMessage message = queue.retrieveMessage();
+        // Retrieve the first visible message in the queue.
+        CloudQueueMessage message = queue.retrieveMessage();
 
-    	if (message != null)
-    	{
+        if (message != null)
+        {
             // Modify the message content.
             message.setMessageContent("Updated contents.");
             // Set it to be visible in 60 seconds.
@@ -224,7 +224,7 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
                 MessageUpdateFields.VISIBILITY);
             // Update the message.
             queue.updateMessage(message, 60, updateFields, null, null);
-    	}
+        }
     }
     catch (Exception e)
     {
@@ -238,24 +238,24 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
     try
     {
-    	// Retrieve storage account from connection-string.
-    	CloudStorageAccount storageAccount =
-	       CloudStorageAccount.parse(storageConnectionString);
+        // Retrieve storage account from connection-string.
+        CloudStorageAccount storageAccount =
+           CloudStorageAccount.parse(storageConnectionString);
 
-    	// Create the queue client.
-    	CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
+        // Create the queue client.
+        CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
 
-    	// Retrieve a reference to a queue.
-    	CloudQueue queue = queueClient.getQueueReference("myqueue");
+        // Retrieve a reference to a queue.
+        CloudQueue queue = queueClient.getQueueReference("myqueue");
 
-	   // Download the approximate message count from the server.
-    	queue.downloadAttributes();
+       // Download the approximate message count from the server.
+        queue.downloadAttributes();
 
-    	// Retrieve the newly cached approximate message count.
-    	long cachedMessageCount = queue.getApproximateMessageCount();
+        // Retrieve the newly cached approximate message count.
+        long cachedMessageCount = queue.getApproximateMessageCount();
 
-    	// Display the queue length.
-    	System.out.println(String.format("Queue length: %d", cachedMessageCount));
+        // Display the queue length.
+        System.out.println(String.format("Queue length: %d", cachedMessageCount));
     }
     catch (Exception e)
     {
@@ -269,24 +269,24 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
     try
     {
-    	// Retrieve storage account from connection-string.
-    	CloudStorageAccount storageAccount =
-    	    CloudStorageAccount.parse(storageConnectionString);
+        // Retrieve storage account from connection-string.
+        CloudStorageAccount storageAccount =
+            CloudStorageAccount.parse(storageConnectionString);
 
-    	// Create the queue client.
-    	CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
+        // Create the queue client.
+        CloudQueueClient queueClient = storageAccount.createCloudQueueClient();
 
-    	// Retrieve a reference to a queue.
-    	CloudQueue queue = queueClient.getQueueReference("myqueue");
+        // Retrieve a reference to a queue.
+        CloudQueue queue = queueClient.getQueueReference("myqueue");
 
-    	// Retrieve the first visible message in the queue.
-    	CloudQueueMessage retrievedMessage = queue.retrieveMessage();
+        // Retrieve the first visible message in the queue.
+        CloudQueueMessage retrievedMessage = queue.retrieveMessage();
 
-    	if (retrievedMessage != null)
-    	{
-    		// Process the message in less than 30 seconds, and then delete the message.
-    		queue.deleteMessage(retrievedMessage);
-    	}
+        if (retrievedMessage != null)
+        {
+            // Process the message in less than 30 seconds, and then delete the message.
+            queue.deleteMessage(retrievedMessage);
+        }
     }
     catch (Exception e)
     {

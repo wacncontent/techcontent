@@ -72,17 +72,17 @@ ms.author: wesmc
 
 1. 在 Xamarin Studio 中，创建新的 iOS 项目，然后选择“统一 API”>“单视图应用程序”模板。
 
-   	![Xamarin Studio - 选择应用程序类型][31]
+       ![Xamarin Studio - 选择应用程序类型][31]
 
 2. 添加对 Azure 消息传送组件的引用。在“解决方案”视图中，右键单击你项目的“Components”文件夹，然后选择“获取更多组件”。搜索“Azure 消息传送”组件，并向你的项目添加该组件。
 
 3. 在 **AppDelegate.cs** 中，添加以下 using 语句：
 
-    	using WindowsAzure.Messaging;
+        using WindowsAzure.Messaging;
 
 4. 声明 **SBNotificationHub** 的实例：
 
-		private SBNotificationHub Hub { get; set; }
+        private SBNotificationHub Hub { get; set; }
 
 5. 使用以下变量创建 **Constants.cs** 类：
 
@@ -95,16 +95,16 @@ ms.author: wesmc
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
             if (UIDevice.CurrentDevice.CheckSystemVersion (8, 0)) {
-    			var pushSettings = UIUserNotificationSettings.GetSettingsForTypes (
+                var pushSettings = UIUserNotificationSettings.GetSettingsForTypes (
                        UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
                        new NSSet ());
 
-			    UIApplication.SharedApplication.RegisterUserNotificationSettings (pushSettings);
-			    UIApplication.SharedApplication.RegisterForRemoteNotifications ();
-			} else {
-			    UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
-			    UIApplication.SharedApplication.RegisterForRemoteNotificationTypes (notificationTypes);
-			}
+                UIApplication.SharedApplication.RegisterUserNotificationSettings (pushSettings);
+                UIApplication.SharedApplication.RegisterForRemoteNotifications ();
+            } else {
+                UIRemoteNotificationType notificationTypes = UIRemoteNotificationType.Alert | UIRemoteNotificationType.Badge | UIRemoteNotificationType.Sound;
+                UIApplication.SharedApplication.RegisterForRemoteNotificationTypes (notificationTypes);
+            }
 
             return true;
         }
@@ -203,19 +203,19 @@ ms.author: wesmc
 
 1. 在 Visual Studio 中创建新的 Visual C# 控制台应用程序：
 
-   	![Visual Studio - 新建控制台应用程序][213]
+       ![Visual Studio - 新建控制台应用程序][213]
 
 2. 在 Visual Studio 中，依次单击“工具”、“NuGet 包管理器”和“包管理器控制台”。
 
-	包管理器控制台应显示在 Visual Studio 工作区的底部。
+    包管理器控制台应显示在 Visual Studio 工作区的底部。
 
 3. 在“包管理器控制台”窗口中，将“默认项目”设置为新的控制台应用程序项目，然后在控制台窗口中执行以下命令：
 
         Install-Package Microsoft.Azure.NotificationHubs
 
-	这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 包</a>添加对 Azure 通知中心 SDK 的引用。
+    这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 包</a>添加对 Azure 通知中心 SDK 的引用。
 
-	![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-package-manager.png)
+    ![](./media/notification-hubs-windows-store-dotnet-get-started/notification-hub-package-manager.png)
 
 4. 打开 `Program.cs` 文件，并添加以下 `using` 语句，确保我们可以使用 Azure 类和你主类中的函数：
 
@@ -233,7 +233,7 @@ ms.author: wesmc
 4. 在 `Main` 方法中添加以下行：
 
          SendNotificationAsync();
-		 Console.ReadLine();
+         Console.ReadLine();
 
 5. 按 F5 键以运行应用。数秒内，你应在设备上看到一条推送通知。无论你使用 Wi-Fi 或移动电话数据网络，确保设备上存在可用的 Internet 连接。
 
@@ -249,32 +249,32 @@ ms.author: wesmc
 
 2. 选择顶部的“计划程序”选项卡。
 
-   	![Azure 经典门户 - 计划程序][215]
+       ![Azure 经典门户 - 计划程序][215]
 
 3. 创建新的计划作业，插入名称，然后选择“按需”。
 
-   	![Azure 经典门户 - 新建作业][216]
+       ![Azure 经典门户 - 新建作业][216]
 
 4. 创建作业时，单击该作业名称。然后单击顶部栏上的“脚本”选项卡。
 
 5. 在你的计划程序函数中插入以下脚本。确保将占位符替换为你先前获取的通知中心名称和 *DefaultFullSharedAccessSignature* 的连接字符串。单击“保存”。
 
-		var azure = require('azure');
-		var notificationHubService = azure.createNotificationHubService('<Hubname>', '<SAS Full access >');
-		notificationHubService.apns.send(
-	    	null,
-    		{"aps":
-        		{
-          		"alert": "Hello from Mobile Services!"
-        		}
-    		},
-    		function (error)
-    		{
-	        	if (!error) {
-    	        	console.warn("Notification successful");
-        		}
-    		}
-		);
+        var azure = require('azure');
+        var notificationHubService = azure.createNotificationHubService('<Hubname>', '<SAS Full access >');
+        notificationHubService.apns.send(
+            null,
+            {"aps":
+                {
+                  "alert": "Hello from Mobile Services!"
+                }
+            },
+            function (error)
+            {
+                if (!error) {
+                    console.warn("Notification successful");
+                }
+            }
+        );
 
 6. 单击底部栏上的“运行一次”。你应在设备上收到警报。
 

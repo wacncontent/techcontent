@@ -48,13 +48,13 @@ Azure 将映像存储在**“我的映像”**下。上传的任何映像都会�
 
 4. 	此时会显示**“系统准备工具”**对话框。请执行以下操作：
 
-	- 在**“系统清理操作”**中，选择**“进入系统全新体验(OOBE)”**，并确保选中**“一般化”**。有关使用 Sysprep 的详细信息，请参阅[如何使用 Sysprep：简介][]。
+    - 在**“系统清理操作”**中，选择**“进入系统全新体验(OOBE)”**，并确保选中**“一般化”**。有关使用 Sysprep 的详细信息，请参阅[如何使用 Sysprep：简介][]。
 
-	- 在**“关机选项”**中选择**“关机”**。
+    - 在**“关机选项”**中选择**“关机”**。
 
-	- 单击**“确定”**。
+    - 单击**“确定”**。
 
-	![运行 Sysprep](./media/virtual-machines-windows-classic-capture-image/SysprepGeneral.png)
+    ![运行 Sysprep](./media/virtual-machines-windows-classic-capture-image/SysprepGeneral.png)
 
 7.	sysprep 命令将关闭虚拟机，这会在 Azure 经典管理门户中将虚拟机的状态更改为“已停止”。
 
@@ -62,9 +62,9 @@ Azure 将映像存储在**“我的映像”**下。上传的任何映像都会�
 
 9.	在命令栏中，单击**“捕获”**。
 
-	![捕获虚拟机](./media/virtual-machines-windows-classic-capture-image/CaptureVM.png)  
+    ![捕获虚拟机](./media/virtual-machines-windows-classic-capture-image/CaptureVM.png)  
 
-	此时将显示**“捕获虚拟机”**对话框。
+    此时将显示**“捕获虚拟机”**对话框。
 
 10.	在**“映像名称”**中，键入新映像的名称。
 
@@ -72,7 +72,7 @@ Azure 将映像存储在**“我的映像”**下。上传的任何映像都会�
 
 12.	单击复选标记以捕获映像。新映像现在将显示在**“映像”**下。
 
- 	![成功捕获映像](./media/virtual-machines-windows-classic-capture-image/VMCapturedImageAvailable.png)
+     ![成功捕获映像](./media/virtual-machines-windows-classic-capture-image/VMCapturedImageAvailable.png)
 
 ##后续步骤
 

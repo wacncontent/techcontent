@@ -22,7 +22,7 @@ ms.author: dastrock
   适用于 Windows Universal 应用的快速入门教程尚未完全准备好...稍后返回检查并在 Twitter 的 @AzureAD 中查找更新。
 
 > [!NOTE]
-	v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
-	## Get security updates for our products
+    v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
+    ## Get security updates for our products
 
 <!---HONumber=Mooncake_0418_2016-->

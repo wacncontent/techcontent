@@ -30,23 +30,23 @@ ms.author: marsma
 
 csharp
 
-	// Get a collection of all of the tasks and all of their properties for job-001
-	IPagedEnumerable<CloudTask> allTasks =
-		batchClient.JobOperations.ListTasks("job-001");
+    // Get a collection of all of the tasks and all of their properties for job-001
+    IPagedEnumerable<CloudTask> allTasks =
+        batchClient.JobOperations.ListTasks("job-001");
 
 但是，用户可以通过向查询应用“详细信息级别”，执行效率高得多的列表查询。在 [JobOperations.ListTasks][net_list_tasks] 方法中提供 [ODATADetailLevel][odata] 对象即可实现此目的。此代码段仅返回已完成任务的 ID、命令行和计算节点信息属性：
 
 csharp
 
-	// Configure an ODATADetailLevel specifying a subset of tasks and
-	// their properties to return
-	ODATADetailLevel detailLevel = new ODATADetailLevel();
-	detailLevel.FilterClause = "state eq 'completed'";
-	detailLevel.SelectClause = "id,commandLine,nodeInfo";
+    // Configure an ODATADetailLevel specifying a subset of tasks and
+    // their properties to return
+    ODATADetailLevel detailLevel = new ODATADetailLevel();
+    detailLevel.FilterClause = "state eq 'completed'";
+    detailLevel.SelectClause = "id,commandLine,nodeInfo";
 
-	// Supply the ODATADetailLevel to the ListTasks method
-	IPagedEnumerable<CloudTask> completedTasks =
-		batchClient.JobOperations.ListTasks("job-001", detailLevel);
+    // Supply the ODATADetailLevel to the ListTasks method
+    IPagedEnumerable<CloudTask> completedTasks =
+        batchClient.JobOperations.ListTasks("job-001", detailLevel);
 
 在此示例方案中，如果作业中存在数以千计的任务，则通常情况下，第二个查询的结果的返回速度将远远快于第一个查询。[下面](#efficient-querying-in-batch-net)提供了有关使用批处理 .NET API 列出项时使用 ODATADetailLevel 的详细信息。
 
@@ -101,29 +101,29 @@ expand 字符串用于减少获取特定信息所需的 API 调用数。使用 e
 
 csharp
 
-	// First we need an ODATADetailLevel instance on which to set the filter, select,
-	// and expand clause strings
-	ODATADetailLevel detailLevel = new ODATADetailLevel();
+    // First we need an ODATADetailLevel instance on which to set the filter, select,
+    // and expand clause strings
+    ODATADetailLevel detailLevel = new ODATADetailLevel();
 
-	// We want to pull only the "test" pools, so we limit the number of items returned
-	// by using a FilterClause and specifying that the pool IDs must start with "test"
-	detailLevel.FilterClause = "startswith(id, 'test')";
+    // We want to pull only the "test" pools, so we limit the number of items returned
+    // by using a FilterClause and specifying that the pool IDs must start with "test"
+    detailLevel.FilterClause = "startswith(id, 'test')";
 
-	// To further limit the data that crosses the wire, configure the SelectClause to
-	// limit the properties that are returned on each CloudPool object to only
-	// CloudPool.Id and CloudPool.Statistics
-	detailLevel.SelectClause = "id, stats";
+    // To further limit the data that crosses the wire, configure the SelectClause to
+    // limit the properties that are returned on each CloudPool object to only
+    // CloudPool.Id and CloudPool.Statistics
+    detailLevel.SelectClause = "id, stats";
 
-	// Specify the ExpandClause so that the .NET API pulls the statistics for the
-	// CloudPools in a single underlying REST API call. Note that we use the pool's
-	// REST API element name "stats" here as opposed to "Statistics" as it appears in
-	// the .NET API (CloudPool.Statistics)
-	detailLevel.ExpandClause = "stats";
+    // Specify the ExpandClause so that the .NET API pulls the statistics for the
+    // CloudPools in a single underlying REST API call. Note that we use the pool's
+    // REST API element name "stats" here as opposed to "Statistics" as it appears in
+    // the .NET API (CloudPool.Statistics)
+    detailLevel.ExpandClause = "stats";
 
-	// Now get our collection of pools, minimizing the amount of data that is returned
-	// by specifying the detail level that we configured above
-	List<CloudPool> testPools =
-		await myBatchClient.PoolOperations.ListPools(detailLevel).ToListAsync();
+    // Now get our collection of pools, minimizing the amount of data that is returned
+    // by specifying the detail level that we configured above
+    List<CloudPool> testPools =
+        await myBatchClient.PoolOperations.ListPools(detailLevel).ToListAsync();
 
 > [!TIP] 使用 Select 和 Expand 子句配置的 [ODATADetailLevel][odata] 实例也可以传递给相应的 Get 方法（例如 [PoolOperations.GetPool](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.pooloperations.getpool.aspx)），以便限制返回的数据量。
 
@@ -187,17 +187,17 @@ filter、select 和 expand 字符串中的属性名称*必须*反映其 REST API
 ### 高效列表查询代码示例
 请查看 GitHub 上的 [EfficientListQueries][efficient_query_sample] 示例项目，了解列表查询如何有效地影响应用程序的性能。此 C# 控制台应用程序创建大量的任务并将其添加到作业。然后，它对 [JobOperations.ListTasks][net_list_tasks] 方法进行多次调用，并传递配置了不同属性值的 [ODATADetailLevel][odata] 对象，以改变要返回的数据量。生成的输出如下所示：
 
-	Adding 5000 tasks to job jobEffQuery...
-	5000 tasks added in 00:00:47.3467587, hit ENTER to query tasks...
+    Adding 5000 tasks to job jobEffQuery...
+    5000 tasks added in 00:00:47.3467587, hit ENTER to query tasks...
 
-	4943 tasks retrieved in 00:00:04.3408081 (ExpandClause:  | FilterClause: state eq 'active' | SelectClause: id,state)
-	0 tasks retrieved in 00:00:00.2662920 (ExpandClause:  | FilterClause: state eq 'running' | SelectClause: id,state)
-	59 tasks retrieved in 00:00:00.3337760 (ExpandClause:  | FilterClause: state eq 'completed' | SelectClause: id,state)
-	5000 tasks retrieved in 00:00:04.1429881 (ExpandClause:  | FilterClause:  | SelectClause: id,state)
-	5000 tasks retrieved in 00:00:15.1016127 (ExpandClause:  | FilterClause:  | SelectClause: id,state,environmentSettings)
-	5000 tasks retrieved in 00:00:17.0548145 (ExpandClause: stats | FilterClause:  | SelectClause: )
+    4943 tasks retrieved in 00:00:04.3408081 (ExpandClause:  | FilterClause: state eq 'active' | SelectClause: id,state)
+    0 tasks retrieved in 00:00:00.2662920 (ExpandClause:  | FilterClause: state eq 'running' | SelectClause: id,state)
+    59 tasks retrieved in 00:00:00.3337760 (ExpandClause:  | FilterClause: state eq 'completed' | SelectClause: id,state)
+    5000 tasks retrieved in 00:00:04.1429881 (ExpandClause:  | FilterClause:  | SelectClause: id,state)
+    5000 tasks retrieved in 00:00:15.1016127 (ExpandClause:  | FilterClause:  | SelectClause: id,state,environmentSettings)
+    5000 tasks retrieved in 00:00:17.0548145 (ExpandClause: stats | FilterClause:  | SelectClause: )
 
-	Sample complete, hit ENTER to continue...
+    Sample complete, hit ENTER to continue...
 
 如所用时间中所示，限制返回的属性和项数可以大大缩短查询响应时间。你可以在 GitHub 的 [azure-batch-samples][github_samples] 存储库中查找此项目和其他示例项目。
 
@@ -215,13 +215,13 @@ filter、select 和 expand 字符串中的属性名称*必须*反映其 REST API
 
 csharp
 
-	internal static ODATADetailLevel OnlyChangedAfter(DateTime time)
-	{
-	    return new ODATADetailLevel(
-	        selectClause: "id, state",
-	        filterClause: string.Format("stateTransitionTime gt DateTime'{0:o}'", time)
-	    );
-	}
+    internal static ODATADetailLevel OnlyChangedAfter(DateTime time)
+    {
+        return new ODATADetailLevel(
+            selectClause: "id, state",
+            filterClause: string.Format("stateTransitionTime gt DateTime'{0:o}'", time)
+        );
+    }
 
 ## 后续步骤
 ### 并行节点任务

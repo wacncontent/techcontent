@@ -36,11 +36,11 @@ wacn.date: 12/15/2015
 
 若要获得您在此教程中看到的任何 cmdlet 的详细帮助，请使用 Get-Help cmdlet。
 
-	Get-Help <cmdlet-name> -Detailed
+    Get-Help <cmdlet-name> -Detailed
 
 例如，若要获得有关 Add-AzureAccount cmdlet 的帮助，请键入：
 
-	Get-Help Add-AzureAccount -Detailed
+    Get-Help Add-AzureAccount -Detailed
 
 另请阅读以下教程以熟悉如何在 Windows PowerShell 中设置和使用 Azure 资源管理器：
 
@@ -99,9 +99,9 @@ wacn.date: 12/15/2015
 要将角色分配给谁：可以使用以下 Azure Active Directory cmdlet 查看你在 AD 租户中拥有哪些用户、组和服务主体。
 
     PS C:\> Get-AzureADUser
-	PS C:\> Get-AzureADGroup
-	PS C:\> Get-AzureADGroupMember
-	PS C:\> Get-AzureADServicePrincipal
+    PS C:\> Get-AzureADGroup
+    PS C:\> Get-AzureADGroupMember
+    PS C:\> Get-AzureADServicePrincipal
 
 你要分配哪些角色：可以使用以下 cmdlet 查看支持的角色定义。
 
@@ -117,19 +117,19 @@ wacn.date: 12/15/2015
 
 这将在当前订阅级别，为用户创建作为“读者”的角色分配。
 
-	 PS C:\> New-AzureRoleAssignment -Mail <user email> -RoleDefinitionName Reader
+     PS C:\> New-AzureRoleAssignment -Mail <user email> -RoleDefinitionName Reader
 
 这将在资源组级别创建角色分配。
 
-	PS C:\> New-AzureRoleAssignment -Mail <user email> -RoleDefinitionName Contributor -ResourceGroupName group1
+    PS C:\> New-AzureRoleAssignment -Mail <user email> -RoleDefinitionName Contributor -ResourceGroupName group1
 
 这将在资源组级别为组创建角色分配。
 
-	PS C:\> New-AzureRoleAssignment -ObjectID <group object ID> -RoleDefinitionName Reader -ResourceGroupName group1
+    PS C:\> New-AzureRoleAssignment -ObjectID <group object ID> -RoleDefinitionName Reader -ResourceGroupName group1
 
 这将在资源级别创建角色分配。
 
-	PS C:\> $resources = Get-AzureResource
+    PS C:\> $resources = Get-AzureResource
     PS C:\> New-AzureRoleAssignment -Mail <user email> -RoleDefinitionName Owner -Scope $resources[0].ResourceId
 
 ## 验证权限

@@ -36,7 +36,7 @@ DocumentDB 数据库帐户是目前唯一可以使用资源管理器模板和 Az
 
 在命令提示符处，键入 `azure --version` 即可查看安装的是否为版本 0.10.4 或更高版本。系统可能会在此步骤提示参与 Azure CLI 数据收集，此时可以选择 y 或 n 来选择参与或不参与。
 
-	azure --version
+    azure --version
     0.10.4 (node: 4.2.4)
 
 如果你的版本不是 0.10.4 或更高版本，则需要使用某个本机安装程序[安装 Azure CLI](../xplat-cli-install.md) 或进行更新，或者通过在 **npm** 中键入 `npm update -g azure-cli` 进行更新或键入 `npm install -g azure-cli` 进行安装。
@@ -47,7 +47,7 @@ DocumentDB 数据库帐户是目前唯一可以使用资源管理器模板和 Az
 
 需有一个工作或学校帐户或者一个 Microsoft 帐户标识，才能使用 Azure 资源管理模板。如果你有其中一个帐户，请键入以下命令：
 
-	azure login -e azureChinaCloud
+    azure login -e azureChinaCloud
 
 这将生成以下输出：
 
@@ -82,7 +82,7 @@ DocumentDB 数据库帐户是目前唯一可以使用资源管理器模板和 Az
 
 默认情况下，Azure CLI 在服务管理模式下启动（**asm** 模式）。键入以下内容，切换到资源组模式。
 
-	azure config mode arm
+    azure config mode arm
 
 这将提供以下输出：
 
@@ -462,11 +462,11 @@ DocumentDB 能够跨不同的 Azure 区域[在全球分发数据][distribute-glo
 
 - 可在资源组的日志文件中找到有用的信息。若要查看日志文件，请运行下列命令：
 
-    	azure group log show <resourcegroupname> --last-deployment
+        azure group log show <resourcegroupname> --last-deployment
 
     输入示例：
 
-    	azure group log show new_res_group --last-deployment
+        azure group log show new_res_group --last-deployment
 
     有关其他信息，则请参阅 [Azure 中的资源组部署故障排除](../azure-resource-manager/resource-manager-troubleshoot-deployments-cli.md)。
 

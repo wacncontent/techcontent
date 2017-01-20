@@ -40,9 +40,9 @@ ms.author: juliako
 - **EnvelopeEncrypted** – 如果要上传使用 AES 加密的 HLS，请使用此选项。请注意，Transform Manager 必须已对文件进行编码和加密。
 - **StorageEncrypted** - 使用 AES-256 位加密在本地加密明文内容，然后将其上传到 Azure Storage 中以加密形式静态存储相关内容。受存储加密保护的资产将在编码前自动解密并放入经过加密的文件系统中，并可选择在重新上传为新的输出资产前重新加密。存储加密的主要用例是在磁盘上通过静态增强加密来保护高品质的输入媒体文件。
 
-	媒体服务为资产提供磁盘上的存储加密，而不是通过数字权限管理器 (DRM) 等线路提供加密。
+    媒体服务为资产提供磁盘上的存储加密，而不是通过数字权限管理器 (DRM) 等线路提供加密。
 
-	如果资产已通过存储加密，则必须配置资产传送策略。有关详细信息，请参阅[配置资产传送策略](./media-services-dotnet-configure-asset-delivery-policy.md)。
+    如果资产已通过存储加密，则必须配置资产传送策略。有关详细信息，请参阅[配置资产传送策略](./media-services-dotnet-configure-asset-delivery-policy.md)。
 
 如果指定使用 **CommonEncrypted** 选项或 **EnvelopeEncypted** 选项加密资产，则需要将资产关联到 **ContentKey**。有关详细信息，请参阅[如何创建 ContentKey](./media-services-dotnet-create-contentkey.md)。
 
@@ -60,8 +60,8 @@ ms.author: juliako
 - 创建用于提供资产访问权限的 Locator 实例。
 - 将单个媒体文件上传到媒体服务。
 
-		static public IAsset CreateAssetAndUploadSingleFile(AssetCreationOptions assetCreationOptions, string singleFilePath)
-		{
+        static public IAsset CreateAssetAndUploadSingleFile(AssetCreationOptions assetCreationOptions, string singleFilePath)
+        {
             if (!File.Exists(singleFilePath))
             {
                 Console.WriteLine("File does not exist.");
@@ -91,28 +91,28 @@ ms.author: juliako
             policy.Delete();
 
             return inputAsset;
-		}
+        }
 
 ##使用媒体服务 .NET SDK 上传多个文件 
 
 以下代码演示如何创建资产及上传多个文件。
 
 代码将执行以下操作：
-	
+    
 - 	使用上一步中定义的 CreateEmptyAsset 方法创建一个空资产。
- 	
+     
 - 	创建用于定义权限以及资产访问持续时间的 **AccessPolicy** 实例。
- 	
+     
 - 	创建用于提供资产访问权限的 **Locator** 实例。
- 	
+     
 - 	创建 **BlobTransferClient** 实例。此类型表示对 Azure Blob 进行操作的客户端。此示例中使用客户端来监视上传进度。
- 	
+     
 - 	枚举指定目录下的所有文件，并为每个文件创建一个 **AssetFile** 实例。
- 	
+     
 - 	使用 **UploadAsync** 方法将文件上传到媒体服务中。
- 	
+     
 >[!NOTE] 使用 UploadAsync 方法可确保调用不会阻塞并且文件并行上传。
- 	
+     
         static public IAsset CreateAssetAndUploadMultipleFiles(AssetCreationOptions assetCreationOptions, string folderPath)
         {
             var assetName = "UploadMultipleFiles_" + DateTime.UtcNow.ToString();
@@ -160,14 +160,14 @@ ms.author: juliako
 
             return asset;
         }
-	
-	static void  blobTransferClient_TransferProgressChanged(object sender, BlobTransferProgressChangedEventArgs e)
-	{
-	    if (e.ProgressPercentage > 4) // Avoid startup jitter, as the upload tasks are added.
-	    {
-	        Console.WriteLine("{0}% upload competed for {1}.", e.ProgressPercentage, e.LocalFile);
-	    }
-	}
+    
+    static void  blobTransferClient_TransferProgressChanged(object sender, BlobTransferProgressChangedEventArgs e)
+    {
+        if (e.ProgressPercentage > 4) // Avoid startup jitter, as the upload tasks are added.
+        {
+            Console.WriteLine("{0}% upload competed for {1}.", e.ProgressPercentage, e.LocalFile);
+        }
+    }
 
 上传大量资产时，请注意以下事项。
 
@@ -183,114 +183,114 @@ ms.author: juliako
 
 若要创建新的 IngestManifest，请调用 CloudMediaContext 中的 IngestManifests 集合公开的 Create 方法。此方法将使用你提供的清单名称创建一个新的 IngestManifest。
 
-	IIngestManifest manifest = context.IngestManifests.Create(name);
+    IIngestManifest manifest = context.IngestManifests.Create(name);
 
 创建将与批量 IngestManifest 关联的资产。在要批量引入的资产上配置所需的加密选项。
 
-	// Create the assets that will be associated with this bulk ingest manifest
-	IAsset destAsset1 = _context.Assets.Create(name + "_asset_1", AssetCreationOptions.None);
-	IAsset destAsset2 = _context.Assets.Create(name + "_asset_2", AssetCreationOptions.None);
+    // Create the assets that will be associated with this bulk ingest manifest
+    IAsset destAsset1 = _context.Assets.Create(name + "_asset_1", AssetCreationOptions.None);
+    IAsset destAsset2 = _context.Assets.Create(name + "_asset_2", AssetCreationOptions.None);
 
 一个 IngestManifestAsset 将一个资产与一个用于批量引入的批量 IngestManifest 相关联。它还关联构成每个资产的 AssetFiles。若要创建 IngestManifestAsset，请使用服务器上下文中的 Create 方法。
 
 以下示例演示如何添加两个新的 IngestManifestAssets，这两项将以前创建的两个资产关联到批量引入清单。每个 IngestManifestAsset 还关联一组将在批量引入期间为每个资产上传的文件。
 
-	string filename1 = _singleInputMp4Path;
-	string filename2 = _primaryFilePath;
-	string filename3 = _singleInputFilePath;
-	
-	IIngestManifestAsset bulkAsset1 =  manifest.IngestManifestAssets.Create(destAsset1, new[] { filename1 });
-	IIngestManifestAsset bulkAsset2 =  manifest.IngestManifestAssets.Create(destAsset2, new[] { filename2, filename3 });
-	
+    string filename1 = _singleInputMp4Path;
+    string filename2 = _primaryFilePath;
+    string filename3 = _singleInputFilePath;
+    
+    IIngestManifestAsset bulkAsset1 =  manifest.IngestManifestAssets.Create(destAsset1, new[] { filename1 });
+    IIngestManifestAsset bulkAsset2 =  manifest.IngestManifestAssets.Create(destAsset2, new[] { filename2, filename3 });
+    
 可以使用任何能够将资产文件上传到 Blob 存储容器 URI（由 IngestManifest 的 **IIngestManifest.BlobStorageUriForUpload** 属性提供）的高速客户端应用程序。一项引人注目的高速上传服务是[适用于 Azure 应用程序的点播 Aspera](https://datamarket.azure.com/application/2cdbc511-cb12-4715-9871-c7e7fbbb82a6)。你还可以编写代码来上传资产文件，如以下代码示例所示。
-	
-	static void UploadBlobFile(string destBlobURI, string filename)
-	{
-	    Task copytask = new Task(() =>
-	    {
-	        var storageaccount = new CloudStorageAccount(new StorageCredentials(_storageAccountName, _storageAccountKey), true);
-	        CloudBlobClient blobClient = storageaccount.CreateCloudBlobClient();
-	        CloudBlobContainer blobContainer = blobClient.GetContainerReference(destBlobURI);
-	
-	        string[] splitfilename = filename.Split('\\');
-	        var blob = blobContainer.GetBlockBlobReference(splitfilename[splitfilename.Length - 1]);
-	
-	        using (var stream = System.IO.File.OpenRead(filename))
-	            blob.UploadFromStream(stream);
-	
-	        lock (consoleWriteLock)
-	        {
-	            Console.WriteLine("Upload for {0} completed.", filename);
-	        }
-	    });
-	
-	    copytask.Start();
-	}
+    
+    static void UploadBlobFile(string destBlobURI, string filename)
+    {
+        Task copytask = new Task(() =>
+        {
+            var storageaccount = new CloudStorageAccount(new StorageCredentials(_storageAccountName, _storageAccountKey), true);
+            CloudBlobClient blobClient = storageaccount.CreateCloudBlobClient();
+            CloudBlobContainer blobContainer = blobClient.GetContainerReference(destBlobURI);
+    
+            string[] splitfilename = filename.Split('\\');
+            var blob = blobContainer.GetBlockBlobReference(splitfilename[splitfilename.Length - 1]);
+    
+            using (var stream = System.IO.File.OpenRead(filename))
+                blob.UploadFromStream(stream);
+    
+            lock (consoleWriteLock)
+            {
+                Console.WriteLine("Upload for {0} completed.", filename);
+            }
+        });
+    
+        copytask.Start();
+    }
 
 以下代码示例展示了用于上传本主题中使用的示例资产文件的代码。
-	
-	UploadBlobFile(manifest.BlobStorageUriForUpload, filename1);
-	UploadBlobFile(manifest.BlobStorageUriForUpload, filename2);
-	UploadBlobFile(manifest.BlobStorageUriForUpload, filename3);
-	
+    
+    UploadBlobFile(manifest.BlobStorageUriForUpload, filename1);
+    UploadBlobFile(manifest.BlobStorageUriForUpload, filename2);
+    UploadBlobFile(manifest.BlobStorageUriForUpload, filename3);
+    
 可以通过轮询 **IngestManifest** 的 Statistics 属性来确定与 **IngestManifest** 关联的所有资产的批量引入进度。若要更新进度信息，每次轮询 Statistics 属性时，都必须使用新的 **CloudMediaContext**。
 
 以下示例演示如何按 **ID** 轮询 IngestManifest。
-	
-	static void MonitorBulkManifest(string manifestID)
-	{
-	   bool bContinue = true;
-	   while (bContinue)
-	   {
-	      CloudMediaContext context = GetContext();
-	      IIngestManifest manifest = context.IngestManifests.Where(m => m.Id == manifestID).FirstOrDefault();
-	
-	      if (manifest != null)
-	      {
-	         lock(consoleWriteLock)
-	         {
-	            Console.WriteLine("\nWaiting on all file uploads.");
-	            Console.WriteLine("PendingFilesCount  : {0}", manifest.Statistics.PendingFilesCount);
-	            Console.WriteLine("FinishedFilesCount : {0}", manifest.Statistics.FinishedFilesCount);
-	            Console.WriteLine("{0}% complete.\n", (float)manifest.Statistics.FinishedFilesCount / (float)(manifest.Statistics.FinishedFilesCount + manifest.Statistics.PendingFilesCount) * 100);
-	
-	            if (manifest.Statistics.PendingFilesCount == 0)
-	            {
-	               Console.WriteLine("Completed\n");
-	               bContinue = false;
-	            }
-	         }
-	
-	         if (manifest.Statistics.FinishedFilesCount < manifest.Statistics.PendingFilesCount)
-	            Thread.Sleep(60000);
-	      }
-	      else // Manifest is null
-	         bContinue = false;
-	   }
-	}
-	
+    
+    static void MonitorBulkManifest(string manifestID)
+    {
+       bool bContinue = true;
+       while (bContinue)
+       {
+          CloudMediaContext context = GetContext();
+          IIngestManifest manifest = context.IngestManifests.Where(m => m.Id == manifestID).FirstOrDefault();
+    
+          if (manifest != null)
+          {
+             lock(consoleWriteLock)
+             {
+                Console.WriteLine("\nWaiting on all file uploads.");
+                Console.WriteLine("PendingFilesCount  : {0}", manifest.Statistics.PendingFilesCount);
+                Console.WriteLine("FinishedFilesCount : {0}", manifest.Statistics.FinishedFilesCount);
+                Console.WriteLine("{0}% complete.\n", (float)manifest.Statistics.FinishedFilesCount / (float)(manifest.Statistics.FinishedFilesCount + manifest.Statistics.PendingFilesCount) * 100);
+    
+                if (manifest.Statistics.PendingFilesCount == 0)
+                {
+                   Console.WriteLine("Completed\n");
+                   bContinue = false;
+                }
+             }
+    
+             if (manifest.Statistics.FinishedFilesCount < manifest.Statistics.PendingFilesCount)
+                Thread.Sleep(60000);
+          }
+          else // Manifest is null
+             bContinue = false;
+       }
+    }
+    
 ##使用 .NET SDK Extensions 上传文件 
 
 以下示例演示如何使用 .NET SDK Extensions 上传单个文件。在此情况下，将使用 **CreateFromFile** 方法，但也可以使用异步版本 (**CreateFromFileAsync**)。**CreateFromFile** 方法可让你指定文件名、加密选项和回调，以报告文件的上载进度。
 
-	static public IAsset UploadFile(string fileName, AssetCreationOptions options)
-	{
-	    IAsset inputAsset = _context.Assets.CreateFromFile(
-	        fileName,
-	        options,
-	        (af, p) =>
-	        {
-	            Console.WriteLine("Uploading '{0}' - Progress: {1:0.##}%", af.Name, p.Progress);
-	        });
-	
-	    Console.WriteLine("Asset {0} created.", inputAsset.Id);
-	
-	    return inputAsset;
-	}
+    static public IAsset UploadFile(string fileName, AssetCreationOptions options)
+    {
+        IAsset inputAsset = _context.Assets.CreateFromFile(
+            fileName,
+            options,
+            (af, p) =>
+            {
+                Console.WriteLine("Uploading '{0}' - Progress: {1:0.##}%", af.Name, p.Progress);
+            });
+    
+        Console.WriteLine("Asset {0} created.", inputAsset.Id);
+    
+        return inputAsset;
+    }
 
 以下示例调用 UploadFile 函数，并指定存储加密作为资产创建选项。
 
-	var asset = UploadFile(@"C:\VideoFiles\BigBuckBunny.mp4", AssetCreationOptions.StorageEncrypted);
+    var asset = UploadFile(@"C:\VideoFiles\BigBuckBunny.mp4", AssetCreationOptions.StorageEncrypted);
 
 ##后续步骤
 将资产上传到媒体服务后，请转到[如何获取媒体处理器][]主题。

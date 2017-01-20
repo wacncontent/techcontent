@@ -64,9 +64,9 @@ ms.author: cephalin
    
         app.UseWsFederationAuthentication(
            new WsFederationAuthenticationOptions
-	    {
-	       Wtrealm = realm,
-	       MetadataAddress = metadata                                      
+        {
+           Wtrealm = realm,
+           MetadataAddress = metadata                                      
            });
    
     在 OWIN 领域中，此代码片段实际上配置 WS-Federation 所需的最低要求。这比 WIF 要精简得多，因为 Web.config 中的各个位置都注入了 XML。所需的唯一信息就是信赖方 (RP) 标识符和 AD FS 服务元数据文件的 URL。下面是一个示例：

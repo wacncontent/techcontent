@@ -48,15 +48,15 @@ wacn.date: 10/24/2016
 
 3.  在门户的下方窗格中，单击“创建”。
 
-	![](./media/service-bus-java-how-to-use-queues/sb-queues-03.png)
+    ![](./media/service-bus-java-how-to-use-queues/sb-queues-03.png)
 
 4.  在“添加新命名空间”对话框中，输入命名空间名称。系统会立即检查该名称是否可用。
 
-	![](./media/service-bus-java-how-to-use-queues/sb-queues-04.png)
+    ![](./media/service-bus-java-how-to-use-queues/sb-queues-04.png)
 
 5.  在确保命名空间名称可用后，选择应承载你的命名空间的国家或地区（确保使用在其中部署计算资源的同一国家/地区）。
 
-	重要说明：选取要部署应用程序的**相同区域**。这将为你提供最佳性能。
+    重要说明：选取要部署应用程序的**相同区域**。这将为你提供最佳性能。
 
 6. 	将对话框中的其他字段保留其默认值（“消息传递”和“标准层”），然后单击复选标记。系统现已创建命名空间并已将其启用。您可能需要等待几分钟，因为系统将为您的帐户配置资源。
 
@@ -68,13 +68,13 @@ wacn.date: 10/24/2016
 
 1.  在左侧导航窗格中，单击“Service Bus”节点以显示可用命名空间的列表：
 
-	![](./media/service-bus-java-how-to-use-queues/sb-queues-13.png)
+    ![](./media/service-bus-java-how-to-use-queues/sb-queues-13.png)
 
 2.  从显示的列表中单击你刚刚创建的命名空间。
 
 3.  单击“配置”以查看命名空间的共享访问策略。
 
-	![](./media/service-bus-java-how-to-use-queues/sb-queues-14.png)
+    ![](./media/service-bus-java-how-to-use-queues/sb-queues-14.png)
 
 4.  记下主密钥，或将其复制到剪贴板。
 
@@ -172,7 +172,7 @@ wacn.date: 10/24/2016
     Console.ReadLine();
     ```
 
-	Program.cs 文件的内容如下所示：
+    Program.cs 文件的内容如下所示：
 
     ```
     using System;

@@ -51,17 +51,17 @@ ms.author: dobett
 
 1. 新建名为 iot-java-get-started 的空文件夹。使用命令提示符中的以下命令，在 iot-java-get-started 文件夹中创建名为 **create-device-identity** 的新 Maven 项目。请注意，这是一条很长的命令：
 
-	    mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=create-device-identity -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+        mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=create-device-identity -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
     
 2. 在命令提示符下，导航到新的 create-device-identity 文件夹。
 
 3. 使用文本编辑器，打开 create-device-identity 文件夹中的 pom.xml 文件，并在 **dependencies** 节点中添加以下依赖项。这可让你在应用程序中使用 iothub-service-sdk 包：
 
-	    <dependency>
-	      <groupId>com.microsoft.azure.iothub-java-client</groupId>
-	      <artifactId>iothub-java-service-client</artifactId>
-	      <version>1.0.7</version>
-	    </dependency>
+        <dependency>
+          <groupId>com.microsoft.azure.iothub-java-client</groupId>
+          <artifactId>iothub-java-service-client</artifactId>
+          <version>1.0.7</version>
+        </dependency>
     
 4. 保存并关闭 pom.xml 文件。
 
@@ -69,48 +69,48 @@ ms.author: dobett
 
 6. 在该文件中添加以下 **import** 语句：
 
-	    import com.microsoft.azure.iot.service.exceptions.IotHubException;
-	    import com.microsoft.azure.iot.service.sdk.Device;
-	    import com.microsoft.azure.iot.service.sdk.RegistryManager;
+        import com.microsoft.azure.iot.service.exceptions.IotHubException;
+        import com.microsoft.azure.iot.service.sdk.Device;
+        import com.microsoft.azure.iot.service.sdk.RegistryManager;
 
-	    import java.io.IOException;
-	    import java.net.URISyntaxException;
+        import java.io.IOException;
+        import java.net.URISyntaxException;
     
 7. 将以下类级变量添加到 **App** 类，并将 **{yourhubconnectionstring}** 替换为前面记下的值：
 
-	    private static final String connectionString = "{yourhubconnectionstring}";
-	    private static final String deviceId = "myFirstJavaDevice";
+        private static final String connectionString = "{yourhubconnectionstring}";
+        private static final String deviceId = "myFirstJavaDevice";
     
 8. 修改 **main** 方法的签名，包含如下所示的异常：
 
-	    public static void main( String[] args ) throws IOException, URISyntaxException, Exception
+        public static void main( String[] args ) throws IOException, URISyntaxException, Exception
     
 9. 添加以下代码作为 **main** 方法的主体。此代码将在 IoT 中心标识注册表中创建名为 *javadevice* 的设备（如果还没有该设备）。然后，显示稍后需要用到的设备 ID 和密钥：
 
-	    RegistryManager registryManager = RegistryManager.createFromConnectionString(connectionString);
+        RegistryManager registryManager = RegistryManager.createFromConnectionString(connectionString);
 
-	    Device device = Device.createFromId(deviceId, null, null);
-	    try {
-	      device = registryManager.addDevice(device);
-	    } catch (IotHubException iote) {
-	      try {
-	        device = registryManager.getDevice(deviceId);
-	      } catch (IotHubException iotf) {
-	        iotf.printStackTrace();
-	      }
-	    }
-	    System.out.println("Device id: " + device.getDeviceId());
-	    System.out.println("Device key: " + device.getPrimaryKey());
+        Device device = Device.createFromId(deviceId, null, null);
+        try {
+          device = registryManager.addDevice(device);
+        } catch (IotHubException iote) {
+          try {
+            device = registryManager.getDevice(deviceId);
+          } catch (IotHubException iotf) {
+            iotf.printStackTrace();
+          }
+        }
+        System.out.println("Device id: " + device.getDeviceId());
+        System.out.println("Device key: " + device.getPrimaryKey());
     
 10. 保存并关闭 App.java 文件。
 
 11. 若要使用 Maven 生成 **create-device-identity** 应用程序，请在命令提示符下的 create-device-identity 文件夹中执行以下命令：
 
-	    mvn clean package -DskipTests
+        mvn clean package -DskipTests
     
 12. 若要使用 Maven 运行 **create-device-identity** 应用程序，请在命令提示符下的 create-device-identity 文件夹中执行以下命令：
 
-	    mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
+        mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
     
 13. 记下**设备 ID** 和**设备密钥**。稍后在创建连接到作为设备的 IoT 中心的应用程序时需要这些数据。
 
@@ -124,17 +124,17 @@ ms.author: dobett
 
 1. 在命令提示符下，在*创建设备标识*部分中创建的 iot-java-get-started 文件夹中，使用以下命令创建名为 **read-d2c-messages** 的新 Maven 项目。请注意，这是一条很长的命令：
 
-	    mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=read-d2c-messages -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+        mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=read-d2c-messages -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
     
 2. 在命令提示符下，导航到新的 read-d2c-messages 文件夹。
 
 3. 使用文本编辑器，打开 read-d2c-messages 文件夹中的 pom.xml 文件，并在 **dependencies** 节点中添加以下依赖项。这可让你在应用程序中使用 eventhubs-client 包，以从事件中心兼容的终结点进行读取：
 
-	    <dependency> 
-	        <groupId>com.microsoft.azure</groupId> 
-	        <artifactId>azure-eventhubs</artifactId> 
-	        <version>0.7.1</version> 
-	    </dependency>
+        <dependency> 
+            <groupId>com.microsoft.azure</groupId> 
+            <artifactId>azure-eventhubs</artifactId> 
+            <version>0.7.1</version> 
+        </dependency>
     
 4. 保存并关闭 pom.xml 文件。
 
@@ -142,21 +142,21 @@ ms.author: dobett
 
 6. 在该文件中添加以下 **import** 语句：
 
-	    import java.io.IOException;
-	    import com.microsoft.azure.eventhubs.*;
-	    import com.microsoft.azure.servicebus.*;
+        import java.io.IOException;
+        import com.microsoft.azure.eventhubs.*;
+        import com.microsoft.azure.servicebus.*;
     
-	    import java.io.IOException;
-	    import java.nio.charset.Charset;
-	    import java.time.*;
-	    import java.util.Collection;
-	    import java.util.concurrent.ExecutionException;
-	    import java.util.function.*;
-	    import java.util.logging.*;
+        import java.io.IOException;
+        import java.nio.charset.Charset;
+        import java.time.*;
+        import java.util.Collection;
+        import java.util.concurrent.ExecutionException;
+        import java.util.function.*;
+        import java.util.logging.*;
     
 7. 将以下类级变量添加到 **App** 类。将 **{youriothubkey}**、**{youreventhubcompatibleendpoint}** 和 **{youreventhubcompatiblename}** 替换为前面记下的值：
 
-	    private static String connStr = "Endpoint={youreventhubcompatibleendpoint};EntityPath={youreventhubcompatiblename};SharedAccessKeyName=iothubowner;SharedAccessKey={youriothubkey}";
+        private static String connStr = "Endpoint={youreventhubcompatibleendpoint};EntityPath={youreventhubcompatiblename};SharedAccessKeyName=iothubowner;SharedAccessKey={youriothubkey}";
     
 8. 将以下 **receiveMessages** 方法添加到 **App** 类。此方法创建 **EventHubClient** 实例以连接到与事件中心兼容的终结点，然后以异步方式创建 **PartitionReceiver** 实例，以便从事件中心分区读取。它将持续循环并输出消息详细信息，直到应用程序终止。
 
@@ -218,24 +218,24 @@ ms.author: dobett
 
 9. 修改 **main** 方法的签名，包含如下所示的异常：
 
-	    public static void main( String[] args ) throws IOException
+        public static void main( String[] args ) throws IOException
     
 10. 在 **App** 类的 **main** 方法中添加以下代码。此代码将创建两个（**EventHubClient** 和 **PartitionReceiver**）实例并让你在处理完消息后关闭应用程序：
 
-	    EventHubClient client0 = receiveMessages("0");
-	    EventHubClient client1 = receiveMessages("1");
-	    System.out.println("Press ENTER to exit.");
-	    System.in.read();
-	    try
-	    {
-	      client0.closeSync();
-	      client1.closeSync();
-	      System.exit(0);
-	    }
-	    catch (ServiceBusException sbe)
-	    {
-	      System.exit(1);
-	    }
+        EventHubClient client0 = receiveMessages("0");
+        EventHubClient client1 = receiveMessages("1");
+        System.out.println("Press ENTER to exit.");
+        System.in.read();
+        try
+        {
+          client0.closeSync();
+          client1.closeSync();
+          System.exit(0);
+        }
+        catch (ServiceBusException sbe)
+        {
+          System.exit(1);
+        }
     
     > [!NOTE] 此代码假设已在 F1（免费）层创建 IoT 中心。免费 IoT 中心有“0”和“1”这两个分区。
 
@@ -243,7 +243,7 @@ ms.author: dobett
 
 12. 若要使用 Maven 生成 **read-d2c-messages** 应用程序，请在命令提示符下的 read-d2c-messages 文件夹中执行以下命令：
 
-	    mvn clean package -DskipTests
+        mvn clean package -DskipTests
     
 ## 创建模拟设备应用程序
 
@@ -251,133 +251,133 @@ ms.author: dobett
 
 1. 在命令提示符下，在*创建设备标识*部分中创建的 iot-java-get-started 文件夹中，使用以下命令创建名为 **simulated-device** 的新 Maven 项目。请注意，这是一条很长的命令：
 
-	    mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=simulated-device -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+        mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=simulated-device -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
     
 2. 在命令提示符下，导航到新的 simulated-device 文件夹。
 
 3. 使用文本编辑器，打开 simulated-device 文件夹中的 pom.xml 文件，并在 **dependencies** 节点中添加以下依赖项。这样，你便可以使用应用程序中的 iothub-java-client 包来与 IoT 中心通信，并将 Java 对象序列化为 JSON：
 
-	    <dependency>
-	      <groupId>com.microsoft.azure.iothub-java-client</groupId>
-	      <artifactId>iothub-java-device-client</artifactId>
-	      <version>1.0.8</version>
-	    </dependency>
-	    <dependency>
-	      <groupId>com.google.code.gson</groupId>
-	      <artifactId>gson</artifactId>
-	      <version>2.3.1</version>
-	    </dependency>
+        <dependency>
+          <groupId>com.microsoft.azure.iothub-java-client</groupId>
+          <artifactId>iothub-java-device-client</artifactId>
+          <version>1.0.8</version>
+        </dependency>
+        <dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>2.3.1</version>
+        </dependency>
     
 4. 保存并关闭 pom.xml 文件。
 5. 使用文本编辑器打开 simulated-device\\src\\main\\java\\com\\mycompany\\app\\App.java 文件。
 6. 在该文件中添加以下 **import** 语句：
    
-	    import com.microsoft.azure.iothub.DeviceClient;
-	    import com.microsoft.azure.iothub.IotHubClientProtocol;
-	    import com.microsoft.azure.iothub.Message;
-	    import com.microsoft.azure.iothub.IotHubStatusCode;
-	    import com.microsoft.azure.iothub.IotHubEventCallback;
-	    import com.microsoft.azure.iothub.IotHubMessageResult;
-	    import com.google.gson.Gson;
-	    import java.io.IOException;
-	    import java.net.URISyntaxException;
-	    import java.util.Random;
-	    import java.util.concurrent.Executors;
-	    import java.util.concurrent.ExecutorService;
+        import com.microsoft.azure.iothub.DeviceClient;
+        import com.microsoft.azure.iothub.IotHubClientProtocol;
+        import com.microsoft.azure.iothub.Message;
+        import com.microsoft.azure.iothub.IotHubStatusCode;
+        import com.microsoft.azure.iothub.IotHubEventCallback;
+        import com.microsoft.azure.iothub.IotHubMessageResult;
+        import com.google.gson.Gson;
+        import java.io.IOException;
+        import java.net.URISyntaxException;
+        import java.util.Random;
+        import java.util.concurrent.Executors;
+        import java.util.concurrent.ExecutorService;
     
 7. 将以下类级变量添加到 **App** 类，并将 **{youriothubname}** 替换为你的 IoT 中心名称，将 **{yourdevicekey}** 替换为“创建设备标识”部分中生成的设备密钥值：
 
-	    private static String connString = "HostName={youriothubname}.azure-devices.cn;DeviceId=myFirstJavaDevice;SharedAccessKey={yourdevicekey}";
-	    private static IotHubClientProtocol protocol = IotHubClientProtocol.AMQP;
-	    private static String deviceId = "myFirstJavaDevice";
-	    private static DeviceClient client;
+        private static String connString = "HostName={youriothubname}.azure-devices.cn;DeviceId=myFirstJavaDevice;SharedAccessKey={yourdevicekey}";
+        private static IotHubClientProtocol protocol = IotHubClientProtocol.AMQP;
+        private static String deviceId = "myFirstJavaDevice";
+        private static DeviceClient client;
     
     本示例应用程序在实例化 **DeviceClient** 对象时使用 **protocol** 变量。你可以使用 HTTPS 或 AMQPS 协议来与 IoT 中心通信。
 
 8. 在 **App** 类中添加以下嵌套的 **TelemetryDataPoint** 类，以指定设备要发送到 IoT 中心的遥测数据：
    
-	    private static class TelemetryDataPoint {
-	      public String deviceId;
-	      public double windSpeed;
+        private static class TelemetryDataPoint {
+          public String deviceId;
+          public double windSpeed;
    
-	      public String serialize() {
-	        Gson gson = new Gson();
-	        return gson.toJson(this);
-	      }
-	    }
+          public String serialize() {
+            Gson gson = new Gson();
+            return gson.toJson(this);
+          }
+        }
     
 9. 在 **App** 类中添加以下嵌套的 **EventCallback** 类，以显示 IoT 中心在处理来自模拟设备的消息时返回的确认状态。处理消息时，此方法还会通知应用程序中的主线程：
    
-	    private static class EventCallback implements IotHubEventCallback
-	    {
-	      public void execute(IotHubStatusCode status, Object context) {
-	        System.out.println("IoT Hub responded to message with status: " + status.name());
+        private static class EventCallback implements IotHubEventCallback
+        {
+          public void execute(IotHubStatusCode status, Object context) {
+            System.out.println("IoT Hub responded to message with status: " + status.name());
    
-	        if (context != null) {
-	          synchronized (context) {
-	            context.notify();
-	          }
-	        }
-	      }
-	    }
+            if (context != null) {
+              synchronized (context) {
+                context.notify();
+              }
+            }
+          }
+        }
     
 10. 在 **App** 类中添加以下嵌套的 **MessageSender** 类。此类中的 **run** 方法将生成要发送到 IoT 中心的示例遥测数据，并在发送下一条消息之前等待确认：
     
-	    private static class MessageSender implements Runnable {
-	      public volatile boolean stopThread = false;
+        private static class MessageSender implements Runnable {
+          public volatile boolean stopThread = false;
     
-	      public void run()  {
-	        try {
-	          double avgWindSpeed = 10; // m/s
-	          Random rand = new Random();
+          public void run()  {
+            try {
+              double avgWindSpeed = 10; // m/s
+              Random rand = new Random();
     
-	          while (!stopThread) {
-	            double currentWindSpeed = avgWindSpeed + rand.nextDouble() * 4 - 2;
-	            TelemetryDataPoint telemetryDataPoint = new TelemetryDataPoint();
-	            telemetryDataPoint.deviceId = deviceId;
-	            telemetryDataPoint.windSpeed = currentWindSpeed;
+              while (!stopThread) {
+                double currentWindSpeed = avgWindSpeed + rand.nextDouble() * 4 - 2;
+                TelemetryDataPoint telemetryDataPoint = new TelemetryDataPoint();
+                telemetryDataPoint.deviceId = deviceId;
+                telemetryDataPoint.windSpeed = currentWindSpeed;
     
-	            String msgStr = telemetryDataPoint.serialize();
-	            Message msg = new Message(msgStr);
-	            System.out.println("Sending: " + msgStr);
+                String msgStr = telemetryDataPoint.serialize();
+                Message msg = new Message(msgStr);
+                System.out.println("Sending: " + msgStr);
     
-	            Object lockobj = new Object();
-	            EventCallback callback = new EventCallback();
-	            client.sendEventAsync(msg, callback, lockobj);
+                Object lockobj = new Object();
+                EventCallback callback = new EventCallback();
+                client.sendEventAsync(msg, callback, lockobj);
     
-	            synchronized (lockobj) {
-	              lockobj.wait();
-	            }
-	            Thread.sleep(1000);
-	          }
-	        } catch (InterruptedException e) {
-	          System.out.println("Finished.");
-	        }
-	      }
-	    }
+                synchronized (lockobj) {
+                  lockobj.wait();
+                }
+                Thread.sleep(1000);
+              }
+            } catch (InterruptedException e) {
+              System.out.println("Finished.");
+            }
+          }
+        }
     
     IoT 中心确认前面的消息一秒后，此方法将发送新的设备到云消息。该消息包含具有 deviceId 的 JSON 序列化对象和一个随机生成的编号，用于模拟风速传感器。
 11. 将 **main** 方法替换为以下代码，该代码创建用于向 IoT 中心发送设备到云消息的线程：
     
-	    public static void main( String[] args ) throws IOException, URISyntaxException {
-	      client = new DeviceClient(connString, protocol);
-	      client.open();
+        public static void main( String[] args ) throws IOException, URISyntaxException {
+          client = new DeviceClient(connString, protocol);
+          client.open();
     
-	      MessageSender sender = new MessageSender();
+          MessageSender sender = new MessageSender();
     
-	      ExecutorService executor = Executors.newFixedThreadPool(1);
-	      executor.execute(sender);
+          ExecutorService executor = Executors.newFixedThreadPool(1);
+          executor.execute(sender);
     
-	      System.out.println("Press ENTER to exit.");
-	      System.in.read();
-	      executor.shutdownNow();
-	      client.close();
-	    }
+          System.out.println("Press ENTER to exit.");
+          System.in.read();
+          executor.shutdownNow();
+          client.close();
+        }
     
 12. 保存并关闭 App.java 文件。
 13. 若要使用 Maven 生成 **simulated-device** 应用程序，请在 simulated-device 文件夹中的命令提示符下执行以下命令：
     
-	    mvn clean package -DskipTests
+        mvn clean package -DskipTests
     
 > [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
@@ -387,13 +387,13 @@ ms.author: dobett
 
 1. 在命令提示符下的 read-d2c 文件夹中，运行以下命令以开始监视 IoT 中心的第一个分区：
 
-	    mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
+        mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
     
     ![用于监视设备到云消息的 Java IoT 中心服务客户端应用程序][7]
 
 2. 在 simulated-device 文件夹中的命令提示符下，运行以下命令开始将遥测数据发送到 IoT 中心：
 
-	    mvn exec:java -Dexec.mainClass="com.mycompany.app.App" 
+        mvn exec:java -Dexec.mainClass="com.mycompany.app.App" 
     
     ![用于发送设备到云消息的 Java IoT 中心设备客户端应用程序][8]
 

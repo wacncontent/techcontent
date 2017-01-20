@@ -46,18 +46,18 @@ Azure 使角色实例联机时，会调用 **OnStart** 方法。OnStart 代码�
 如果 **OnStart** 返回 **true**，则该实例已成功初始化，并且 Azure 已调用 **RoleEntryPoint.Run** 方法。如果 **OnStart** 返回 **false**，则角色将立即终止，而不执行任何计划中的关闭序列。
 
 下面的代码示例演示如何重写 **OnStart** 方法。当角色实例启动并设置将日志记录数据传输到存储帐户时，此方法将配置并启动诊断监视器：
-	
-	public override bool OnStart()
-	{
-	    var config = DiagnosticMonitor.GetDefaultInitialConfiguration();
-	
-	    config.DiagnosticInfrastructureLogs.ScheduledTransferLogLevelFilter = LogLevel.Error;
-	    config.DiagnosticInfrastructureLogs.ScheduledTransferPeriod = TimeSpan.FromMinutes(5);
-	
-	    DiagnosticMonitor.Start("DiagnosticsConnectionString", config);
-	
-	    return true;
-	}
+    
+    public override bool OnStart()
+    {
+        var config = DiagnosticMonitor.GetDefaultInitialConfiguration();
+    
+        config.DiagnosticInfrastructureLogs.ScheduledTransferLogLevelFilter = LogLevel.Error;
+        config.DiagnosticInfrastructureLogs.ScheduledTransferPeriod = TimeSpan.FromMinutes(5);
+    
+        DiagnosticMonitor.Start("DiagnosticsConnectionString", config);
+    
+        return true;
+    }
 
 ## OnStop 方法
 

@@ -37,7 +37,7 @@ ms.author: cynthn
 -	**保存通用映像**：`Save-AzureVMImage -ServiceName "myServiceName" -Name "MyVMtoCapture" -OSState "Generalized" -ImageName "MyVmImage" -ImageLabel "This is my generalized image"`
 -	**保存专用映像**：`Save-AzureVMImage -ServiceName "mySvc2" -Name "MyVMToCapture2" -ImageName "myFirstVMImageSP" -OSState "Specialized" -Verbose`
 
-	>[Azure.Tip] 如果要创建包含数据磁盘和操作系统磁盘的 VM 映像，OSState 参数是必需的。如果未使用此参数，该 cmdlet 将创建 OS 映像。该参数的值根据操作系统磁盘是否已准备好重用来指示映像是通用的还是专用的。
+    >[Azure.Tip] 如果要创建包含数据磁盘和操作系统磁盘的 VM 映像，OSState 参数是必需的。如果未使用此参数，该 cmdlet 将创建 OS 映像。该参数的值根据操作系统磁盘是否已准备好重用来指示映像是通用的还是专用的。
 
 -	**删除映像**：`Remove-AzureVMImage -ImageName "MyOldVmImage"`
 

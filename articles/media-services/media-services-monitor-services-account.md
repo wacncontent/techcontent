@@ -24,7 +24,7 @@ Azure 媒体服务仪表板显示了可用于管理媒体服务帐户的使用�
 
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，单击“媒体服务”，然后单击媒体服务帐户名以打开仪表板。 
 
-	![MediaServices\_Dashboard][dashboard]
+    ![MediaServices\_Dashboard][dashboard]
 
 2. 若要监视编码作业或数据，只需先将编码作业提交给媒体服务，或通过使用 Azure 媒体按需流式处理将内容流式传输给客户。大约一小时后，应可在仪表板上看到监视数据。
 
@@ -32,9 +32,9 @@ Azure 媒体服务仪表板显示了可用于管理媒体服务帐户的使用�
 1. 单击“速览”部分下的“存储帐户”名称。
 2. 在存储帐户页上，单击“配置页”链接，然后向下滚动到 Blob、表和队列服务的“监视”设置，如下所示。
 
-	>[!NOTE] Blob 是媒体服务中唯一受支持的存储类型。
+    >[!NOTE] Blob 是媒体服务中唯一受支持的存储类型。
 
-	![StorageOptions][storage_options_scoped]
+    ![StorageOptions][storage_options_scoped]
 
 3. 在“监视”中，为 Blob 设置监视级别和数据保留策略：
 

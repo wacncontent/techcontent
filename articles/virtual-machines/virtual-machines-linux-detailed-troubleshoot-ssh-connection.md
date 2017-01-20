@@ -37,15 +37,15 @@ ms.author: iainfou
 
 1. 对于使用经典部署模型创建的 VM，请选择“浏览”>“虚拟机(经典)”> *VM 名称*。
 
-	- 或 -
+    - 或 -
 
-	对于使用 Resource Manager 模型创建的 VM，请选择“浏览”>“虚拟机”> *VM 名称*。
+    对于使用 Resource Manager 模型创建的 VM，请选择“浏览”>“虚拟机”> *VM 名称*。
 
-	VM 的状态窗格应显示“正在运行”。向下滚动以显示计算、存储和网络资源的最近活动。
+    VM 的状态窗格应显示“正在运行”。向下滚动以显示计算、存储和网络资源的最近活动。
 
 2. 选择“设置”以检查终结点、IP 地址和其他设置。
 
-	若要识别使用 Resource Manager 创建的 VM 中的终结点，请验证是否已定义[网络安全组](../virtual-network/virtual-networks-nsg.md)。此外，请验证是否已对网络安全组应用规则，以及子网中是否引用了这些规则。
+    若要识别使用 Resource Manager 创建的 VM 中的终结点，请验证是否已定义[网络安全组](../virtual-network/virtual-networks-nsg.md)。此外，请验证是否已对网络安全组应用规则，以及子网中是否引用了这些规则。
 
 在 [Azure 经典管理门户](https://manage.windowsazure.cn)中，针对使用经典部署模型创建的 VM 执行以下操作：
 

@@ -185,7 +185,7 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
     where two_part_name in 
         (
         select two_part_name
-    	from dbo.vTableSizes
+        from dbo.vTableSizes
         where row_count > 0
         group by two_part_name
         having min(row_count * 1.000)/max(row_count * 1.000) > .10

@@ -126,9 +126,9 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 如果你还没有目标 Azure 搜索索引，请创建一个。你可以通过使用[创建索引 API](https://msdn.microsoft.com/library/azure/dn798941.aspx)。
 
-	POST https://[Search service name].search.chinacloudapi.cn/indexes?api-version=[api-version]
-	Content-Type: application/json
-	api-key: [Search service admin key]
+    POST https://[Search service name].search.chinacloudapi.cn/indexes?api-version=[api-version]
+    Content-Type: application/json
+    api-key: [Search service admin key]
 
 确保目标索引的架构与源 JSON 文档的架构或自定义查询投影的输出的架构兼容。
 

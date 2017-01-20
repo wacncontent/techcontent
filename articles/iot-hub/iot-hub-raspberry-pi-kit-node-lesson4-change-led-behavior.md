@@ -39,7 +39,7 @@ wacn.date: 12/19/2016
           wpi.digitalWrite(CONFIG_PIN, 0);
         }
    
-	![增加了函数的 App.js 文件](./media/iot-hub-raspberry-pi-lessons/lesson4/updated_app_js.png)  
+    ![增加了函数的 App.js 文件](./media/iot-hub-raspberry-pi-lessons/lesson4/updated_app_js.png)  
 
 3. 在 `receiveMessageCallback` 函数的 switch-case 块的默认条件之前添加以下条件：
    

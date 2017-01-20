@@ -38,7 +38,7 @@ ms.author: iainfou
 
 2.	在“安全扩展插件”下，选中“Trend Micro Deep Security Agent”。
 
-	![安装 VM 代理和 Deep Security Agent](./media/virtual-machines-windows-classic-install-trend/InstallVMAgentandTrend.png)  
+    ![安装 VM 代理和 Deep Security Agent](./media/virtual-machines-windows-classic-install-trend/InstallVMAgentandTrend.png)  
 
 3.	单击复选标记可创建虚拟机。
 
@@ -52,10 +52,10 @@ ms.author: iainfou
 
 首先，请验证是否已安装 VM 代理。填写云服务名称和虚拟机名称，然后在管理员级别的 Azure PowerShell 命令提示符下运行以下命令。替换引号内的所有内容，包括 < and > 字符。
 
-	$CSName = "<cloud service name>"
-	$VMName = "<virtual machine name>"
-	$vm = Get-AzureVM -ServiceName $CSName -Name $VMName
-	write-host $vm.VM.ProvisionGuestAgent
+    $CSName = "<cloud service name>"
+    $VMName = "<virtual machine name>"
+    $vm = Get-AzureVM -ServiceName $CSName -Name $VMName
+    write-host $vm.VM.ProvisionGuestAgent
 
 如果不知道云服务名称和虚拟机名称，运行 **Get-AzureVM** 即可显示当前订阅中所有虚拟机的该信息。
 
@@ -63,9 +63,9 @@ ms.author: iainfou
 
 如果已安装 VM 代理，请运行以下命令。
 
-	$Agent = Get-AzureVMAvailableExtension TrendMicro.DeepSecurity -ExtensionName TrendMicroDSA
+    $Agent = Get-AzureVMAvailableExtension TrendMicro.DeepSecurity -ExtensionName TrendMicroDSA
 
-	Set-AzureVMExtension -Publisher TrendMicro.DeepSecurity -Version $Agent.Version -ExtensionName TrendMicroDSA -VM $vm | Update-AzureVM
+    Set-AzureVMExtension -Publisher TrendMicro.DeepSecurity -Version $Agent.Version -ExtensionName TrendMicroDSA -VM $vm | Update-AzureVM
 
 ## 后续步骤
 

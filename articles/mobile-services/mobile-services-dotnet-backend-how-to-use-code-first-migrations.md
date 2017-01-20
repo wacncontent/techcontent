@@ -66,47 +66,47 @@ Code First 迁移使用快照方法来生成代码，执行这些代码会对数
  
 2. 在“工具”菜单中，展开“NuGet Package Manager”，然后单击“Package Manager Console”。
 
-	此时会显示 Package Manager Console，你可以使用它来管理 Code First 迁移。
+    此时会显示 Package Manager Console，你可以使用它来管理 Code First 迁移。
 
 3. 在 Package Manager Console 中运行以下命令：
 
-		PM> Enable-Migrations
+        PM> Enable-Migrations
 
-	这将为你的项目启用代码优先迁移。
+    这将为你的项目启用代码优先迁移。
 
 4. 在控制台中运行以下命令：
 
-		PM> Add-Migration Initial
+        PM> Add-Migration Initial
 
-	这将创建一个名为 *Initial* 的新迁移。迁移代码存储在迁移项目文件夹中。
+    这将创建一个名为 *Initial* 的新迁移。迁移代码存储在迁移项目文件夹中。
 
 5. 展开 App\_Start 文件夹，打开 WebApiConfig.cs 项目文件并添加以下 **using** 语句：
 
-		using System.Data.Entity.Migrations;
-		using todolistService.Migrations;
+        using System.Data.Entity.Migrations;
+        using todolistService.Migrations;
 
-	在上述代码中，必须将 _todolistService_ 字符串替换为项目的命名空间，对于下载的快速入门项目，该命名空间为 <em>mobile&#95;service&#95;name</em>Service。
+    在上述代码中，必须将 _todolistService_ 字符串替换为项目的命名空间，对于下载的快速入门项目，该命名空间为 <em>mobile&#95;service&#95;name</em>Service。
  
 6. 在这同一个代码文件中，注释掉对 **Database.SetInitializer** 方法的调用，并在该调用的后面添加以下代码：
 
         var migrator = new DbMigrator(new Configuration());
         migrator.Update();
 
-	这样就会禁用用于删除然后重新创建数据库的默认 Code First 数据库初始值设定项，并将其替换为应用最新迁移的显式请求。此时，除非为数据创建了迁移，否则，在访问数据时，进行任何数据模型更改都会导致 InvalidOperationException。另外，你的服务必须使用 Code First 迁移将数据模型更改迁移到数据库。
+    这样就会禁用用于删除然后重新创建数据库的默认 Code First 数据库初始值设定项，并将其替换为应用最新迁移的显式请求。此时，除非为数据创建了迁移，否则，在访问数据时，进行任何数据模型更改都会导致 InvalidOperationException。另外，你的服务必须使用 Code First 迁移将数据模型更改迁移到数据库。
 
 7.  按 F5 在本地计算机上启动移动服务项目。
  
-	此时，数据库已与数据模型同步。如果你提供了种子数据，可以通过依次单击“试用”、“GET 表/todoitem”、“试用此项”和“发送”来验证该数据。有关详细信息，请参阅[在迁移中设定数据种子]。
+    此时，数据库已与数据模型同步。如果你提供了种子数据，可以通过依次单击“试用”、“GET 表/todoitem”、“试用此项”和“发送”来验证该数据。有关详细信息，请参阅[在迁移中设定数据种子]。
 
 8.   现在，对数据模型进行更改（例如，向 TodoItem 类型添加一个新的 UserId 属性），重新生成项目，然后在 Package Manager 中运行以下命令：
 
-		PM> Add-Migration NewUserId
+        PM> Add-Migration NewUserId
                                                                
-	这将创建一个名为 *NewUserId* 的新迁移。迁移文件夹中添加了一个用于实施此更改的新代码文件
+    这将创建一个名为 *NewUserId* 的新迁移。迁移文件夹中添加了一个用于实施此更改的新代码文件
 
 9.  再次按 F5 以在本地计算机上重新启动移动服务项目。
 
-	迁移已应用到数据库，并且数据库已重新与数据模型同步。如果你提供了种子数据，可以通过依次单击“试用”、“GET 表/todoitem”、“试用此项”和“发送”来验证该数据。有关详细信息，请参阅[在迁移中设定数据种子]。
+    迁移已应用到数据库，并且数据库已重新与数据模型同步。如果你提供了种子数据，可以通过依次单击“试用”、“GET 表/todoitem”、“试用此项”和“发送”来验证该数据。有关详细信息，请参阅[在迁移中设定数据种子]。
 
 10. 将移动服务重新发布到 Azure，然后运行客户端应用程序以访问数据，并验证是否可以加载数据且不出错。
 
@@ -146,7 +146,7 @@ Code First 迁移使用快照方法来生成代码，执行这些代码会对数
 ###设定表中新列的种子
 
 以下代码只设定 UserId 列的种子：
- 		    
+             
         context.TodoItems.AddOrUpdate(
             t => t.UserId,
                 new TodoItem { UserId = 1 },

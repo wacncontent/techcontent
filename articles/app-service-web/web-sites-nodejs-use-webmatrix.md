@@ -39,7 +39,7 @@ ms.author: robmcm
 2. 登录到 [Azure 经典管理门户](https://manage.windowsazure.cn)，然后单击“[发布配置文件](https://manage.windowsazure.cn/publishsettings/index?client=powershell&schemaversion=1.0)”以下载帐户的发布配置文件。
 2. 如果这是你首次使用 WebMatrix 3，系统将提示你登录 Azure。你也可以单击“登录”按钮，并选择“添加帐户”。选择此项以使用 Microsoft 帐户**导入帐户**，并选择在上一步中下载的配置文件。
 
-	![添加帐户][addaccount]
+    ![添加帐户][addaccount]
 
 4. 系统将提示你输入帐户的名称。输入所需的任何内容，然后单击“确定”。
 
@@ -47,33 +47,33 @@ ms.author: robmcm
 
 1. 在开始屏幕上，单击“新建”按钮，然后选择“模板库”，从模板库创建新站点：
 
-	![从模板库创建新 Web 应用][sitefromtemplate]
+    ![从模板库创建新 Web 应用][sitefromtemplate]
 
 2. 在“从模板创建站点”对话框中，选择“节点”，然后选择“Express 站点”。最后单击“下一步”。如果缺少“Express 站点”模板的任何必备组件，系统将提示你进行安装。
 
-	![选择 Express 模板][webmatrix-templates]
+    ![选择 Express 模板][webmatrix-templates]
 
 3. 如果已登录到 Azure 中，则现在可以选择为本地站点创建应用服务 Web 应用。选择一个唯一名称，然后选择要在其中创建应用服务 Web 应用的数据中心：
 
-	![在 Azure 中创建 Web 应用][nodesitefromtemplateazure]
-	
+    ![在 Azure 中创建 Web 应用][nodesitefromtemplateazure]
+    
 4. 在 WebMatrix 完成生成本地站点和创建应用服务 Web 应用后，将显示 WebMatrix IDE。
 
-	![WebMatrix IDE][webmatrix-ide]
+    ![WebMatrix IDE][webmatrix-ide]
 
 ##将应用程序发布到 Azure
 
 1. 在 WebMatrix 中，从“主页”功能区单击“发布”，为站点显示“发布预览”对话框。
 
-	![发布预览][webmatrix-node-publishpreview]
+    ![发布预览][webmatrix-node-publishpreview]
 
 2. 单击“继续”。发布完成后，应用服务 Web 应用的 URL 将显示在 WebMatrix IDE 底部
 
-	![发布完成][webmatrix-publish-complete]
+    ![发布完成][webmatrix-publish-complete]
 
 3. 单击链接以在浏览器中打开应用服务 Web 应用。
 
-	![Express Web 应用][webmatrix-node-express-site]
+    ![Express Web 应用][webmatrix-node-express-site]
 
 ##修改并重新发布应用程序
 
@@ -81,19 +81,19 @@ ms.author: robmcm
 
 1. 在 WebMatrix 中，选择“文件”，然后展开“views”文件夹。双击打开 **index.jade** 文件。
 
-	![显示 index.jade 的 WebMatrix][webmatrix-modify-index]
+    ![显示 index.jade 的 WebMatrix][webmatrix-modify-index]
 
 2. 将段落行更改为以下内容：
 
-		p Welcome to #{title} with WebMatrix on Azure!
+        p Welcome to #{title} with WebMatrix on Azure!
 
 3. 保存更改，然后单击发布图标。最后，在“发布预览”对话框中单击“继续”，并等待发布更新。
 
-	![发布预览][webmatrix-republish]
+    ![发布预览][webmatrix-republish]
 
 4. 发布完成后，使用发布过程完成时返回的链接查看更新的应用服务 Web 应用。
 
-	![Azure Node Web 应用][webmatrix-node-completed]
+    ![Azure Node Web 应用][webmatrix-node-completed]
 
 ##后续步骤
 

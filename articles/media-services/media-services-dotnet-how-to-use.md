@@ -60,26 +60,26 @@ ms.author: juliako
 
 若要获取**帐户名**和**帐户密钥**信息，请打开“Azure 经典管理门户”，选择你的媒体服务帐户，然后单击“管理密钥”按钮。
 
-	<configuration>
-	...
-	  <appSettings>
-	    <add key="MediaServicesAccountName" value="Media-Services-Account-Name" />
-	    <add key="MediaServicesAccountKey" value="Media-Services-Account-Key" />
-	  </appSettings>
-	  
-	</configuration>
+    <configuration>
+    ...
+      <appSettings>
+        <add key="MediaServicesAccountName" value="Media-Services-Account-Name" />
+        <add key="MediaServicesAccountKey" value="Media-Services-Account-Key" />
+      </appSettings>
+      
+    </configuration>
 
 5. 使用以下代码覆盖位于 Program.cs 文件开头的现有 using 语句。
 
-		using System;
-		using System.Collections.Generic;
-		using System.Linq;
-		using System.Text;
-		using System.Threading.Tasks;
-		using System.Configuration;
-		using System.Threading;
-		using System.IO;
-		using Microsoft.WindowsAzure.MediaServices.Client;
+        using System;
+        using System.Collections.Generic;
+        using System.Linq;
+        using System.Text;
+        using System.Threading.Tasks;
+        using System.Configuration;
+        using System.Threading;
+        using System.IO;
+        using Microsoft.WindowsAzure.MediaServices.Client;
 
 现在，你可以开始开发媒体服务应用程序了。
 

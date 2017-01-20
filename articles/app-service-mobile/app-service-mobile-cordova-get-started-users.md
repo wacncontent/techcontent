@@ -52,7 +52,7 @@ ms.author: adrianha
     下面显示了 Content-Security-Policy（针对 Azure Active Directory 实现）的示例：
 
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'
-			data: gap: https://login.chinacloudapi.cn https://yourapp.chinacloudsites.cn; style-src 'self'">
+            data: gap: https://login.chinacloudapi.cn https://yourapp.chinacloudsites.cn; style-src 'self'">
 
     应该将 `https://login.chinacloudapi.cn` 替换为上表中的 OAuth 主机。有关此元标记的详细信息，请参阅 [Content-Security-Policy 文档]。
 

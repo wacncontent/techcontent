@@ -143,80 +143,80 @@ Azure 密钥保管库可帮助保护云应用程序和服务使用的加密密�
 ### Blob 服务加密
 创建 **BlobEncryptionPolicy** 对象并在请求选项中设置它（使用 API 或通过使用 **DefaultRequestOptions** 在客户端级别设置）。其他所有事项均由客户端库在内部处理。
 
-	// Create the IKey used for encryption.
- 	RsaKey key = new RsaKey("private:key1" /* key identifier */);
+    // Create the IKey used for encryption.
+     RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
- 	// Create the encryption policy to be used for upload and download.
- 	BlobEncryptionPolicy policy = new BlobEncryptionPolicy(key, null);
+     // Create the encryption policy to be used for upload and download.
+     BlobEncryptionPolicy policy = new BlobEncryptionPolicy(key, null);
 
- 	// Set the encryption policy on the request options.
- 	BlobRequestOptions options = new BlobRequestOptions() { EncryptionPolicy = policy };
+     // Set the encryption policy on the request options.
+     BlobRequestOptions options = new BlobRequestOptions() { EncryptionPolicy = policy };
 
- 	// Upload the encrypted contents to the blob.
- 	blob.UploadFromStream(stream, size, null, options, null);
+     // Upload the encrypted contents to the blob.
+     blob.UploadFromStream(stream, size, null, options, null);
 
- 	// Download and decrypt the encrypted contents from the blob.
- 	MemoryStream outputStream = new MemoryStream();
- 	blob.DownloadToStream(outputStream, null, options, null);
+     // Download and decrypt the encrypted contents from the blob.
+     MemoryStream outputStream = new MemoryStream();
+     blob.DownloadToStream(outputStream, null, options, null);
 
 ### 队列服务加密
 创建 **QueueEncryptionPolicy** 对象并在请求选项中设置它（使用 API 或通过使用 **DefaultRequestOptions** 在客户端级别设置）。其他所有事项均由客户端库在内部处理。
 
-	// Create the IKey used for encryption.
- 	RsaKey key = new RsaKey("private:key1" /* key identifier */);
+    // Create the IKey used for encryption.
+     RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
- 	// Create the encryption policy to be used for upload and download.
- 	QueueEncryptionPolicy policy = new QueueEncryptionPolicy(key, null);
+     // Create the encryption policy to be used for upload and download.
+     QueueEncryptionPolicy policy = new QueueEncryptionPolicy(key, null);
 
- 	// Add message
- 	QueueRequestOptions options = new QueueRequestOptions() { EncryptionPolicy = policy };
- 	queue.AddMessage(message, null, null, options, null);
+     // Add message
+     QueueRequestOptions options = new QueueRequestOptions() { EncryptionPolicy = policy };
+     queue.AddMessage(message, null, null, options, null);
 
- 	// Retrieve message
- 	CloudQueueMessage retrMessage = queue.GetMessage(null, options, null);
+     // Retrieve message
+     CloudQueueMessage retrMessage = queue.GetMessage(null, options, null);
 
 ### 表服务加密
 除了创建加密策略和在请求选项上设置它以外，您还必须在 **TableRequestOptions** 中指定 **EncryptionResolver**，或在实体上设置 [EncryptProperty] 特性。
 
 #### 使用解析程序
 
-	// Create the IKey used for encryption.
- 	RsaKey key = new RsaKey("private:key1" /* key identifier */);
+    // Create the IKey used for encryption.
+     RsaKey key = new RsaKey("private:key1" /* key identifier */);
 
- 	// Create the encryption policy to be used for upload and download.
- 	TableEncryptionPolicy policy = new TableEncryptionPolicy(key, null);
+     // Create the encryption policy to be used for upload and download.
+     TableEncryptionPolicy policy = new TableEncryptionPolicy(key, null);
 
- 	TableRequestOptions options = new TableRequestOptions()
- 	{
-    	EncryptionResolver = (pk, rk, propName) =>
-     	{
-        	if (propName == "foo")
-         	{
-            	return true;
-         	}
-         	return false;
-     	},
-     	EncryptionPolicy = policy
- 	};
+     TableRequestOptions options = new TableRequestOptions()
+     {
+        EncryptionResolver = (pk, rk, propName) =>
+         {
+            if (propName == "foo")
+             {
+                return true;
+             }
+             return false;
+         },
+         EncryptionPolicy = policy
+     };
 
- 	// Insert Entity
- 	currentTable.Execute(TableOperation.Insert(ent), options, null);
+     // Insert Entity
+     currentTable.Execute(TableOperation.Insert(ent), options, null);
 
- 	// Retrieve Entity
- 	// No need to specify an encryption resolver for retrieve
- 	TableRequestOptions retrieveOptions = new TableRequestOptions()
- 	{
-    	EncryptionPolicy = policy
- 	};
+     // Retrieve Entity
+     // No need to specify an encryption resolver for retrieve
+     TableRequestOptions retrieveOptions = new TableRequestOptions()
+     {
+        EncryptionPolicy = policy
+     };
 
- 	TableOperation operation = TableOperation.Retrieve(ent.PartitionKey, ent.RowKey);
- 	TableResult result = currentTable.Execute(operation, retrieveOptions, null);
+     TableOperation operation = TableOperation.Retrieve(ent.PartitionKey, ent.RowKey);
+     TableResult result = currentTable.Execute(operation, retrieveOptions, null);
 
 #### 使用特性
 如上所述，如果实体实现了 TableEntity，则可以使用 [EncryptProperty] 特性修饰属性，而不用指定 **EncryptionResolver**。
 
-	[EncryptProperty]
- 	public string EncryptedProperty1 { get; set; }
+    [EncryptProperty]
+     public string EncryptedProperty1 { get; set; }
 
 ## 加密和性能
 注意，加密你的存储数据会导致额外的性能开销。必须生成内容密钥和 IV，内容本身必须进行加密，并且其他元数据必须进行格式化并上传。此开销将因所加密的数据量而有所不同。我们建议客户在开发过程中始终测试其应用程序的性能。

@@ -33,7 +33,7 @@ wacn.date: 12/16/2016
 
 下面的服务定义文件展示为一个 Web 角色声明的两个本地存储资源：
 
-	<?xml version="1.0" encoding="utf-8"?>
+    <?xml version="1.0" encoding="utf-8"?>
     <ServiceDefinition xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" name="MyService">
       <WebRole name="MyService_WebRole" vmsize="Medium">
         <InputEndpoints>

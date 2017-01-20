@@ -329,7 +329,7 @@ Visual Studio 不会显示部署的进度。如果你想要查看输出，请参
 
 或
 
-	pyvenv env
+    pyvenv env
 
 安装应用程序所需的任何外部软件包。可以使用该存储库的根处 requirements.txt 文件在虚拟环境中安装软件包：
 

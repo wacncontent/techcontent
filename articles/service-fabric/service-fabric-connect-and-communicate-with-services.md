@@ -59,11 +59,11 @@ Azure 中的 Service Fabric 群集位于 Azure Load Balancer 之后。发送到�
 
 1. 编写侦听端口 80 的服务。在服务的 ServiceManifest.xml 中配置端口 80，并在服务中打开一个侦听器，例如自承载的 Web 服务器。
  
-    	<Resources>
-        	<Endpoints>
-            	<Endpoint Name="WebEndpoint" Protocol="http" Port="80" />
-        	</Endpoints>
-    	</Resources>
+        <Resources>
+            <Endpoints>
+                <Endpoint Name="WebEndpoint" Protocol="http" Port="80" />
+            </Endpoints>
+        </Resources>
 
         class HttpCommunicationListener : ICommunicationListener
         {

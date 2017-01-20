@@ -47,7 +47,7 @@ ms.author: adrianha
 
          const string applicationURL = @"https://your-service.azurewebsites.fail";
 
-	还可以通过在设备上禁用 wifi 和手机网络或使用飞行模式来演示脱机行为。
+    还可以通过在设备上禁用 wifi 和手机网络或使用飞行模式来演示脱机行为。
 
 2. 构建并运行应用程序。请注意，在应用启动时，同步刷新将失败。
 
@@ -79,9 +79,9 @@ ms.author: adrianha
 
 * 表操作之前，必须初始化本地存储区。`QSTodoListViewController.ViewDidLoad()` 执行 `QSTodoService.InitializeStoreAsync()` 时，对本地存储数据库进行初始化。此方法使用 Azure 移动应用客户端 SDK 提供的 `MobileServiceSQLiteStore` 类创建一个新的本地 SQLite 数据库。
 
-	`DefineTable` 方法与所提供的类型中的字段相匹配的本地存储中创建一个表 `ToDoItem` 这种情况下。该类型无需包括远程数据库中的所有列。可以只存储列的子集。
+    `DefineTable` 方法与所提供的类型中的字段相匹配的本地存储中创建一个表 `ToDoItem` 这种情况下。该类型无需包括远程数据库中的所有列。可以只存储列的子集。
 
-		// QSTodoService.cs
+        // QSTodoService.cs
 
         public async Task InitializeStoreAsync()
         {
@@ -94,16 +94,16 @@ ms.author: adrianha
 
 * `QSTodoService` 的 `todoTable` 成员属于 `IMobileServiceSyncTable` 类型而不是 `IMobileServiceTable` 类型。IMobileServiceSyncTable 会将所有创建、读取、更新和删除 (CRUD) 表操作定向到本地存储数据库。
 
-	通过调用 `IMobileServiceSyncContext.PushAsync()` 确定将这些更改推送到 Azure 移动应用后端的时间。对于调用 `PushAsync` 时客户端应用修改的所有表，此同步上下文通过跟踪和推送这些表中的更改来帮助保持表关系。
+    通过调用 `IMobileServiceSyncContext.PushAsync()` 确定将这些更改推送到 Azure 移动应用后端的时间。对于调用 `PushAsync` 时客户端应用修改的所有表，此同步上下文通过跟踪和推送这些表中的更改来帮助保持表关系。
 
-	每当刷新 todoitem 列表或者添加或完成 todoitem 时，所提供的代码便会调用 `QSTodoService.SyncAsync()` 进行同步。该应用在每次本地更改后同步。如果对具有由上下文跟踪的未完成本地更新的表执行拉取操作，该拉取操作将自动先触发上下文推送操作。
+    每当刷新 todoitem 列表或者添加或完成 todoitem 时，所提供的代码便会调用 `QSTodoService.SyncAsync()` 进行同步。该应用在每次本地更改后同步。如果对具有由上下文跟踪的未完成本地更新的表执行拉取操作，该拉取操作将自动先触发上下文推送操作。
 
     在所提供的代码中，将查询远程 `TodoItem` 表中的所有记录，但它还可以筛选记录，只需将查询 ID 和查询传递给 `PushAsync` 即可。有关详细信息，请参阅 [Azure 移动应用中的脱机数据同步]中的*增量同步*部分。
 
-	<!-- Need updated conflict handling info : `InitializeAsync` uses the default conflict handler, which fails whenever there is a conflict. To provide a custom conflict handler, see the tutorial [Handling conflicts with offline support for Mobile Services].
-	-->
+    <!-- Need updated conflict handling info : `InitializeAsync` uses the default conflict handler, which fails whenever there is a conflict. To provide a custom conflict handler, see the tutorial [Handling conflicts with offline support for Mobile Services].
+    -->
 
-		// QSTodoService.cs
+        // QSTodoService.cs
 
         public async Task SyncAsync()
         {

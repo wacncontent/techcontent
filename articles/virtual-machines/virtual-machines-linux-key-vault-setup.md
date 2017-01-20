@@ -31,12 +31,12 @@ ms.author: singhkay
 
 使用 CLI 时，必须先创建密钥保管库，然后分配部署策略。可以使用以下命令来执行此操作：
 
-	azure keyvault set-policy ContosoKeyVault -enabled-for-deployment true
+    azure keyvault set-policy ContosoKeyVault -enabled-for-deployment true
 
 ## 使用模板设置密钥保管库
 使用模板时，必须将密钥保管库资源的 `enabledForDeployment` 属性设置为 `true`。
 
-	{
+    {
       "type": "Microsoft.KeyVault/vaults",
       "name": "ContosoKeyVault",
       "apiVersion": "2015-06-01",

@@ -77,7 +77,7 @@ Microsoft Avro Library 包含代码生成实用工具，可让你自动根据先
 
 若要测试实用工具，你可以从随着源代码提供的示例 JSON 架构文件生成 C# 类。运行以下命令：
 
-	Microsoft.Hadoop.Avro.Tools codegen /i:C:\SDK\src\Microsoft.Hadoop.Avro.Tools\SampleJSON\SampleJSONSchema.avsc /o:
+    Microsoft.Hadoop.Avro.Tools codegen /i:C:\SDK\src\Microsoft.Hadoop.Avro.Tools\SampleJSON\SampleJSONSchema.avsc /o:
 
 这应该在当前目录中生成两个 C# 文件：SensorData.cs 和 Location.cs。
 
@@ -125,7 +125,7 @@ Microsoft Avro Library 可以使用反射从要序列化的 C# 对象的数据�
         using System.Linq;
         using System.Runtime.Serialization;
         using Microsoft.Hadoop.Avro.Container;
-		using Microsoft.Hadoop.Avro;
+        using Microsoft.Hadoop.Avro;
 
         //Sample class used in serialization samples
         [DataContract(Name = "SensorDataValue", Namespace = "Sensors")]
@@ -239,8 +239,8 @@ Microsoft Avro Library 可以使用反射从要序列化的 C# 对象的数据�
 
 此示例中的架构假定在读取器与写入器之间共享，因此无需采用 Avro 对象容器格式。有关在架构必须包含在已序列化的数据中时，如何使用通用记录和对象容器格式将数据序列化到内存缓冲区，以及对内存缓冲区中的数据进行反序列化的示例，请参阅<a href="#Scenario4">使用对象容器文件通过通用记录进行序列化</a>示例。
 
-	namespace Microsoft.Hadoop.Avro.Sample
-	{
+    namespace Microsoft.Hadoop.Avro.Sample
+    {
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -248,7 +248,7 @@ Microsoft Avro Library 可以使用反射从要序列化的 C# 对象的数据�
     using System.Runtime.Serialization;
     using Microsoft.Hadoop.Avro.Container;
     using Microsoft.Hadoop.Avro.Schema;
-	using Microsoft.Hadoop.Avro;
+    using Microsoft.Hadoop.Avro;
 
     //This class contains all methods demonstrating
     //the usage of Microsoft Avro Library
@@ -342,7 +342,7 @@ Microsoft Avro Library 可以使用反射从要序列化的 C# 对象的数据�
             Console.Read();
         }
     }
-	}
+    }
     // The example is expected to display the following output:
     // SERIALIZATION USING GENERIC RECORD
     //
@@ -370,7 +370,7 @@ Microsoft Avro Library 可以使用反射从要序列化的 C# 对象的数据�
         using System.Linq;
         using System.Runtime.Serialization;
         using Microsoft.Hadoop.Avro.Container;
-		using Microsoft.Hadoop.Avro;
+        using Microsoft.Hadoop.Avro;
 
         //Sample class used in serialization samples
         [DataContract(Name = "SensorDataValue", Namespace = "Sensors")]
@@ -611,7 +611,7 @@ Microsoft Avro Library 可以使用反射从要序列化的 C# 对象的数据�
         using System.Runtime.Serialization;
         using Microsoft.Hadoop.Avro.Container;
         using Microsoft.Hadoop.Avro.Schema;
-		using Microsoft.Hadoop.Avro;
+        using Microsoft.Hadoop.Avro;
 
         //This class contains all methods demonstrating
         //the usage of Microsoft Avro Library
@@ -876,7 +876,7 @@ Microsoft Avro Library 可以使用反射从要序列化的 C# 对象的数据�
         using System.Linq;
         using System.Runtime.Serialization;
         using Microsoft.Hadoop.Avro.Container;
-		using Microsoft.Hadoop.Avro;
+        using Microsoft.Hadoop.Avro;
 
         #region Defining objects for serialization
         //Sample class used in serialization samples

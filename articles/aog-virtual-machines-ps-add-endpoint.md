@@ -29,10 +29,10 @@ wacn.date: 02/01/2016
 
 相关指令：[Get-AzureVM](https://msdn.microsoft.com/zh-cn/library/azure/dn495236.aspx)、[Get-AzureEndpoint](https://msdn.microsoft.com/zh-cn/library/azure/dn495158.aspx)
 
-	#servicename 为虚拟机对应的云服务的名称
-	#name 为虚拟机的名称
-	Get-AzureVM -Servicename 'pstest' -Name 'pstest'| Get-AzureEndpoint
-	
+    #servicename 为虚拟机对应的云服务的名称
+    #name 为虚拟机的名称
+    Get-AzureVM -Servicename 'pstest' -Name 'pstest'| Get-AzureEndpoint
+    
 ![](./media/aog-virtual-machines-ps-add-endpoint/get-endpoint-info.PNG)
 
 从上面信息可以看到目前虚拟机上拥有两个终结点：PowerShell 和 Remote Desktop。现在通过 PowerShell 增加终结点。
@@ -41,7 +41,7 @@ wacn.date: 02/01/2016
 
 相关指令：[Add-AzureEndpoint](https://msdn.microsoft.com/zh-cn/library/azure/dn495300.aspx)、[Update-AzureVM](https://msdn.microsoft.com/zh-cn/library/azure/dn495230.aspx)
 
-	Get-AzureVM -ServiceName "pstest" -Name "pstest" | Add-AzureEndpoint -Name "HttpIn" -Protocol "tcp" -PublicPort 80 -LocalPort 8080 | Update-AzureVM
+    Get-AzureVM -ServiceName "pstest" -Name "pstest" | Add-AzureEndpoint -Name "HttpIn" -Protocol "tcp" -PublicPort 80 -LocalPort 8080 | Update-AzureVM
 
 该指令在虚拟机上增加了一个终结点，名称 HttpIn,协议 tcp，公用端口 80，私有端口 8080。可以通过 Get-AzureEndpoint 查看结果。
 
@@ -53,9 +53,9 @@ wacn.date: 02/01/2016
 
 ![](./media/aog-virtual-machines-ps-add-endpoint/excel-input.PNG)
 
-	$vm = Get-AzureVM -Servicename 'pstest' -Name 'pstest'
-	$csvFile = 'D:\endpoint.csv'
-	$endpoints = Import-Csv $csvFile -header Name,Protocol,PublicPort,LocalPort | foreach {
+    $vm = Get-AzureVM -Servicename 'pstest' -Name 'pstest'
+    $csvFile = 'D:\endpoint.csv'
+    $endpoints = Import-Csv $csvFile -header Name,Protocol,PublicPort,LocalPort | foreach {
         New-Object PSObject -prop @{
             Name = $_.Name;
             Protocol = $_.Protocol;
@@ -63,7 +63,7 @@ wacn.date: 02/01/2016
             LocalPort = [int32]$_.LocalPort;
         }
     }
-	Foreach ($endpoint in $endpoints)
+    Foreach ($endpoint in $endpoints)
     {
     Add-AzureEndpoint -VM $vm -Name $endpoint.Name -Protocol $endpoint.Protocol.ToLower() -PublicPort $endpoint.PublicPort -LocalPort $endpoint.LocalPort | Update-AzureVM
     }

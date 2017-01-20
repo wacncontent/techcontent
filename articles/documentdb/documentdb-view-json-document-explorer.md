@@ -30,7 +30,7 @@ ms.author: kirillg
 
 2. 在资源菜单中，单击“文档资源管理器”。
  
-	![文档资源管理器命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/documentexplorercommand.png)  
+    ![文档资源管理器命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/documentexplorercommand.png)  
 
     在“文档资源管理器”边栏选项卡上，将根据在其中启动文档资源管理器的上下文对“数据库”和“集合”下拉列表进行预填充。
 
@@ -42,13 +42,13 @@ ms.author: kirillg
 
     将在“文档”边栏选项卡上显示最小 JSON 代码段。
 
-	![文档资源管理器创建文档体验的屏幕截图，你可以在其中查看和编辑 JSON](./media/documentdb-view-JSON-document-explorer/createdocument.png)  
+    ![文档资源管理器创建文档体验的屏幕截图，你可以在其中查看和编辑 JSON](./media/documentdb-view-JSON-document-explorer/createdocument.png)  
 
 2. 在“文档”边栏选项卡中，键入或粘贴你要创建的 JSON 文档的内容，然后单击“保存”以便将文档提交到在“文档资源管理器”边栏选项卡中指定的数据库和集合。
 
-	![文档资源管理器“保存”命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/savedocument1.png)  
+    ![文档资源管理器“保存”命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/savedocument1.png)  
 
-	> [!NOTE] 如果你不提供“id”属性，文档资源管理器将自动添加 id 属性并生成一个 GUID 作为 id 值。
+    > [!NOTE] 如果你不提供“id”属性，文档资源管理器将自动添加 id 属性并生成一个 GUID 作为 id 值。
 
     如果已有来自 JSON 文件、MongoDB、SQL Server、CSV 文件、Azure 表存储、Amazon DynamoDB、HBase 或其他 DocumentDB 集合的数据，你可以使用 DocumentDB 的[数据迁移工具](./documentdb-import-data.md)快速导入数据。
 
@@ -70,7 +70,7 @@ ms.author: kirillg
 
 2. 在“文档资源管理器”选择文档，单击“删除”，然后确认删除。确认后，将立即从“文档资源管理器”列表中删除该文档。
 
-	![文档资源管理器“删除”命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/deletedocument.png)  
+    ![文档资源管理器“删除”命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/deletedocument.png)  
 
 ## 使用 JSON 文档
 
@@ -101,25 +101,25 @@ ms.author: kirillg
 
 3.  将在命令栏的下方显示筛选设置。在筛选设置中，提供 WHERE 子句和/或 ORDER BY 子句，然后单击“筛选”。
 
-	![文档资源管理器“设置”边栏选项卡的屏幕截图](./media/documentdb-view-JSON-document-explorer/documentexplorerfiltersettings2.png)  
+    ![文档资源管理器“设置”边栏选项卡的屏幕截图](./media/documentdb-view-JSON-document-explorer/documentexplorerfiltersettings2.png)  
 
-	文档资源管理器将自动刷新与筛选查询匹配的文档结果。在 [SQL query and SQL syntax](./documentdb-sql-query.md)（SQL 查询和 SQL 语法）一文中阅读有关 DocumentDB SQL 语法的信息，或打印 [SQL 查询备忘单](./documentdb-sql-query-cheat-sheet.md)的副本。
+    文档资源管理器将自动刷新与筛选查询匹配的文档结果。在 [SQL query and SQL syntax](./documentdb-sql-query.md)（SQL 查询和 SQL 语法）一文中阅读有关 DocumentDB SQL 语法的信息，或打印 [SQL 查询备忘单](./documentdb-sql-query-cheat-sheet.md)的副本。
 
     可使用“数据库”和“集合”下拉列表框轻松更改当前查看其中文档的集合，而无需关闭并重新启动文档资源管理器。
 
     文档资源管理器还支持按文档的 id 属性筛选当前加载的一组文档。只需在文档筛选器中的 id 框中键入即可。
 
-	![文档资源管理器的屏幕截图，其中突出显示了筛选器](./media/documentdb-view-JSON-document-explorer/documentexplorerfilter.png)
+    ![文档资源管理器的屏幕截图，其中突出显示了筛选器](./media/documentdb-view-JSON-document-explorer/documentexplorerfilter.png)
 
-	系统将根据你提供的条件筛选文档资源管理器列表中的结果。
+    系统将根据你提供的条件筛选文档资源管理器列表中的结果。
 
-	![文档资源管理器的屏幕截图，其中包含了筛选结果](./media/documentdb-view-JSON-document-explorer/documentexplorerfilterresults.png)
+    ![文档资源管理器的屏幕截图，其中包含了筛选结果](./media/documentdb-view-JSON-document-explorer/documentexplorerfilterresults.png)
 
-	> [!IMPORTANT] 文档资源管理器的筛选器功能仅从***当前***加载的文档集中进行筛选，而并不对当前所选集合执行查询。
+    > [!IMPORTANT] 文档资源管理器的筛选器功能仅从***当前***加载的文档集中进行筛选，而并不对当前所选集合执行查询。
 
 4. 若要刷新由文档资源管理器加载的文档列表，请单击边栏选项卡顶部的“刷新”。
 
-	![文档资源管理器“刷新”命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/documentexplorerrefresh.png)
+    ![文档资源管理器“刷新”命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/documentexplorerrefresh.png)
 
 ## 批量添加文档  <a name="bulk-add-documents"></a>
 
@@ -129,19 +129,19 @@ ms.author: kirillg
 
 2. 若要开始上载过程，请单击“上载文档”。
 
-	![文档资源管理器批量引入功能的屏幕截图](./media/documentdb-view-JSON-document-explorer/uploaddocument1.png)  
+    ![文档资源管理器批量引入功能的屏幕截图](./media/documentdb-view-JSON-document-explorer/uploaddocument1.png)  
 
     将打开“上载文档”边栏选项卡。
 
 2. 单击浏览按钮以打开文件资源管理器窗口，选择要上载的一个或多个 JSON 文档，然后单击“打开”。
 
-	![文档资源管理器批量引入过程的屏幕截图](./media/documentdb-view-JSON-document-explorer/uploaddocument2.png)  
+    ![文档资源管理器批量引入过程的屏幕截图](./media/documentdb-view-JSON-document-explorer/uploaddocument2.png)  
 
-	> [!NOTE] 文档资源管理器当前仅支持每个单独上传操作最多上传 100 个 JSON 文档。
+    > [!NOTE] 文档资源管理器当前仅支持每个单独上传操作最多上传 100 个 JSON 文档。
 
 3. 选好之后，单击“上载”按钮。这些文档将自动添加到“文档资源管理器”网格，上传结果显示为操作进度。导入失败将报告为单独的文件。
 
-	![文档资源管理器批量引入结果的屏幕截图](./media/documentdb-view-JSON-document-explorer/uploaddocument3.png)  
+    ![文档资源管理器批量引入结果的屏幕截图](./media/documentdb-view-JSON-document-explorer/uploaddocument3.png)  
 
 4. 操作完成后，你可以选择另外最多 100 个文档进行上传。
 

@@ -34,7 +34,7 @@ ms.author: cynthn
 
 2. 在登录虚拟机后，打开“服务器管理器”。在左窗格中，选择“文件和存储服务”。
 
-	![打开服务器管理器](./media/virtual-machines-windows-classic-attach-disk/fileandstorageservices.png)
+    ![打开服务器管理器](./media/virtual-machines-windows-classic-attach-disk/fileandstorageservices.png)
 
 3. 展开菜单并选择“磁盘”。
 
@@ -44,7 +44,7 @@ ms.author: cynthn
 
 6.	使用默认值完成向导操作。完成向导后，“卷”部分将列出新卷。现在，磁盘处于联机状态并已准备好存储数据。
 
-	![已成功初始化卷](./media/virtual-machines-windows-classic-attach-disk/newvolumecreated.png)
+    ![已成功初始化卷](./media/virtual-machines-windows-classic-attach-disk/newvolumecreated.png)
 
 > [!NOTE] VM 的大小决定可以在其上附加的磁盘数量。有关详细信息，请参阅[虚拟机大小](./virtual-machines-windows-sizes.md)。
 

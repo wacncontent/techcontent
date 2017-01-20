@@ -31,7 +31,7 @@ ms.author: masnider
 
 代码：
 
-	this.ServicePartition.ReportMoveCost(MoveCost.Medium);
+    this.ServicePartition.ReportMoveCost(MoveCost.Medium);
 
 MoveCost 有四个级别：“零”、“低”、“中”和“高”。这些级别相对于彼此，但零除外。“零”表示移动副本不会产生成本，不应计入解决方案的分数。将移动成本设置为“高”*不*保证副本不移动，只是除非有移动的好理由，否则我们不移动它。
 

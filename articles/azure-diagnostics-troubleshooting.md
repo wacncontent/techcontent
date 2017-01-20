@@ -25,15 +25,15 @@ Diagnostics 由两个组件构成：来宾代理插件和监视代理。可以�
 
 在云服务角色中，来宾代理插件的日志文件位于：
 
-	C:\Logs\Plugins\Microsoft.Azure.Diagnostics.PaaSDiagnostics\1.6.3.0\
+    C:\Logs\Plugins\Microsoft.Azure.Diagnostics.PaaSDiagnostics\1.6.3.0\
 
 在 Azure 虚拟机中，来宾代理插件的日志文件位于：
 
-	C:\Packages\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics\1.6.3.0\Logs\
+    C:\Packages\Plugins\Microsoft.Azure.Diagnostics.IaaSDiagnostics\1.6.3.0\Logs\
 
 日志文件的最后一行包含退出代码。
 
-	DiagnosticsPluginLauncher.exe Information: 0 : [4/16/2016 6:24:15 AM] DiagnosticPlugin exited with code 0
+    DiagnosticsPluginLauncher.exe Information: 0 : [4/16/2016 6:24:15 AM] DiagnosticPlugin exited with code 0
 
 该插件返回以下退出代码：
 

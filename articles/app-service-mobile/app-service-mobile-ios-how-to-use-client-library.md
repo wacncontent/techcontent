@@ -77,13 +77,13 @@ let table = client.tableWithName("TodoItem")
 
 ```
 [table readWithCompletion:^(MSQueryResult *result, NSError *error) {
-		if(error) { // error is nil if no error occured
-				NSLog(@"ERROR %@", error);
-		} else {
-				for(NSDictionary *item in result.items) { // items is NSArray of records that match query
-						NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
-				}
-		}
+        if(error) { // error is nil if no error occured
+                NSLog(@"ERROR %@", error);
+        } else {
+                for(NSDictionary *item in result.items) { // items is NSArray of records that match query
+                        NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
+                }
+        }
 }];
 ```
 
@@ -114,13 +114,13 @@ table.readWithCompletion { (result, error) in
 NSPredicate * predicate = [NSPredicate predicateWithFormat:@"complete == NO"];
 // Query the TodoItem table
 [table readWithPredicate:predicate completion:^(MSQueryResult *result, NSError *error) {
-		if(error) {
-				NSLog(@"ERROR %@", error);
-		} else {
-				for(NSDictionary *item in result.items) {
-						NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
-				}
-		}
+        if(error) {
+                NSLog(@"ERROR %@", error);
+        } else {
+                for(NSDictionary *item in result.items) {
+                        NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
+                }
+        }
 }];
 ```
 
@@ -180,13 +180,13 @@ let query = table.queryWithPredicate(NSPredicate(format: "complete == NO"))
 [query orderByAscending:@"text"];
 [query orderByDescending:@"complete"];
 [query readWithCompletion:^(MSQueryResult *result, NSError *error) {
-		if(error) {
-				NSLog(@"ERROR %@", error);
-		} else {
-				for(NSDictionary *item in result.items) {
-						NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
-				}
-		}
+        if(error) {
+                NSLog(@"ERROR %@", error);
+        } else {
+                for(NSDictionary *item in result.items) {
+                        NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
+                }
+        }
 }];
 ```
 
@@ -228,8 +228,8 @@ query.selectFields = ["text", "complete"]
 
 ```
 query.parameters = @{
-	@"myKey1" : @"value1",
-	@"myKey2" : @"value2",
+    @"myKey1" : @"value1",
+    @"myKey2" : @"value2",
 };
 ```
 
@@ -260,8 +260,8 @@ query.parameters = ["myKey1": "value1", "myKey2": "value2"]
   [table  pullWithQuery:query queryId:@nil settings:pullSettings
                         completion:^(NSError * _Nullable error) {
                                if(error) {
-					NSLog(@"ERROR %@", error);
-				} 
+                    NSLog(@"ERROR %@", error);
+                } 
                            }];
 ```
 
@@ -289,11 +289,11 @@ table.pullWithQuery(query, queryId:nil, settings: pullSettings) { (error) in
 ```
 NSDictionary *newItem = @{@"id": @"custom-id", @"text": @"my new item", @"complete" : @NO};
 [table insert:newItem completion:^(NSDictionary *result, NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	} else {
-		NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    } else {
+        NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
+    }
 }];
 ```
 
@@ -320,11 +320,11 @@ table.insert(newItem) { (result, error) in
 NSMutableDictionary *newItem = [oldItem mutableCopy]; // oldItem is NSDictionary
 [newItem setValue:@"Updated text" forKey:@"text"];
 [table update:newItem completion:^(NSDictionary *result, NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	} else {
-		NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    } else {
+        NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
+    }
 }];
 ```
 
@@ -349,11 +349,11 @@ if let newItem = oldItem.mutableCopy() as? NSMutableDictionary {
 
 ```
 [table update:@{@"id":@"custom-id", @"text":"my EDITED item"} completion:^(NSDictionary *result, NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	} else {
-		NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    } else {
+        NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
+    }
 }];
 ```
 
@@ -379,11 +379,11 @@ table.update(["id": "custom-id", "text": "my EDITED item"]) { (result, error) in
 
 ```
 [table delete:item completion:^(id itemId, NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	} else {
-		NSLog(@"Todo Item ID: %@", itemId);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    } else {
+        NSLog(@"Todo Item ID: %@", itemId);
+    }
 }];
 ```
 
@@ -405,11 +405,11 @@ table.delete(newItem as [NSObject: AnyObject]) { (itemId, error) in
 
 ```
 [table deleteWithId:@"37BBF396-11F0-4B39-85C8-B319C729AF6D" completion:^(id itemId, NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	} else {
-		NSLog(@"Todo Item ID: %@", itemId);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    } else {
+        NSLog(@"Todo Item ID: %@", itemId);
+    }
 }];
 ```
 
@@ -475,9 +475,9 @@ client.invokeAPI("sendEmail",
 
 ```
 [client.push registerDeviceToken:deviceToken template:iOSTemplate completion:^(NSError *error) {
-	if(error) {
-		NSLog(@"ERROR %@", error);
-	}
+    if(error) {
+        NSLog(@"ERROR %@", error);
+    }
 }];
 ```
 
@@ -547,12 +547,12 @@ if (error.code == MSErrorPreconditionFailed) {
 
 2. 使用 Cocoapods 安装 ADAL。编辑 Podfile 以包含以下定义，将 **YOUR-PROJECT** 替换为 Xcode 项目的名称：
 
-		source 'https://github.com/CocoaPods/Specs.git'
-		link_with ['YOUR-PROJECT']
-		xcodeproj 'YOUR-PROJECT'
+        source 'https://github.com/CocoaPods/Specs.git'
+        link_with ['YOUR-PROJECT']
+        xcodeproj 'YOUR-PROJECT'
 Pod：
 
-		pod 'ADALiOS'
+        pod 'ADALiOS'
 
 3. 使用终端，从包含项目的目录运行 `pod install`，然后打开生成的 Xcode 工作区（而不是项目）。
 
@@ -565,63 +565,63 @@ Pod：
 
 **Objective-C**：
 
-	#import <ADALiOS/ADAuthenticationContext.h>
-	#import <ADALiOS/ADAuthenticationSettings.h>
-	// ...
-	- (void) authenticate:(UIViewController*) parent
-	           completion:(void (^) (MSUser*, NSError*))completionBlock;
-	{
-	    NSString *authority = @"INSERT-AUTHORITY-HERE";
-	    NSString *resourceId = @"INSERT-RESOURCE-ID-HERE";
-	    NSString *clientId = @"INSERT-CLIENT-ID-HERE";
-	    NSURL *redirectUri = [[NSURL alloc]initWithString:@"INSERT-REDIRECT-URI-HERE"];
-	    ADAuthenticationError *error;
-	    ADAuthenticationContext *authContext = [ADAuthenticationContext authenticationContextWithAuthority:authority error:&error];
-	    authContext.parentController = parent;
-	    [ADAuthenticationSettings sharedInstance].enableFullScreen = YES;
-	    [authContext acquireTokenWithResource:resourceId
-	                                 clientId:clientId
-	                              redirectUri:redirectUri
-	                          completionBlock:^(ADAuthenticationResult *result) {
-	                              if (result.status != AD_SUCCEEDED)
-	                              {
-	                                  completionBlock(nil, result.error);;
-	                              }
-	                              else
-	                              {
-	                                  NSDictionary *payload = @{
-	                                                            @"access_token" : result.tokenCacheStoreItem.accessToken
-	                                                            };
-	                                  [client loginWithProvider:@"aad" token:payload completion:completionBlock];
-	                              }
-	                          }];
-	}
+    #import <ADALiOS/ADAuthenticationContext.h>
+    #import <ADALiOS/ADAuthenticationSettings.h>
+    // ...
+    - (void) authenticate:(UIViewController*) parent
+               completion:(void (^) (MSUser*, NSError*))completionBlock;
+    {
+        NSString *authority = @"INSERT-AUTHORITY-HERE";
+        NSString *resourceId = @"INSERT-RESOURCE-ID-HERE";
+        NSString *clientId = @"INSERT-CLIENT-ID-HERE";
+        NSURL *redirectUri = [[NSURL alloc]initWithString:@"INSERT-REDIRECT-URI-HERE"];
+        ADAuthenticationError *error;
+        ADAuthenticationContext *authContext = [ADAuthenticationContext authenticationContextWithAuthority:authority error:&error];
+        authContext.parentController = parent;
+        [ADAuthenticationSettings sharedInstance].enableFullScreen = YES;
+        [authContext acquireTokenWithResource:resourceId
+                                     clientId:clientId
+                                  redirectUri:redirectUri
+                              completionBlock:^(ADAuthenticationResult *result) {
+                                  if (result.status != AD_SUCCEEDED)
+                                  {
+                                      completionBlock(nil, result.error);;
+                                  }
+                                  else
+                                  {
+                                      NSDictionary *payload = @{
+                                                                @"access_token" : result.tokenCacheStoreItem.accessToken
+                                                                };
+                                      [client loginWithProvider:@"aad" token:payload completion:completionBlock];
+                                  }
+                              }];
+    }
 
 **Swift**：
 
-	// add the following imports to your bridging header:
-	//		#import <ADALiOS/ADAuthenticationContext.h>
-	//		#import <ADALiOS/ADAuthenticationSettings.h>
+    // add the following imports to your bridging header:
+    //		#import <ADALiOS/ADAuthenticationContext.h>
+    //		#import <ADALiOS/ADAuthenticationSettings.h>
 
-	func authenticate(parent: UIViewController, completion: (MSUser?, NSError?) -> Void) {
-		let authority = "INSERT-AUTHORITY-HERE"
-		let resourceId = "INSERT-RESOURCE-ID-HERE"
-		let clientId = "INSERT-CLIENT-ID-HERE"
-		let redirectUri = NSURL(string: "INSERT-REDIRECT-URI-HERE")
-		var error: AutoreleasingUnsafeMutablePointer<ADAuthenticationError?> = nil
-		let authContext = ADAuthenticationContext(authority: authority, error: error)
-		authContext.parentController = parent
-		ADAuthenticationSettings.sharedInstance().enableFullScreen = true
-		authContext.acquireTokenWithResource(resourceId, clientId: clientId, redirectUri: redirectUri) { (result) in
-		        if result.status != AD_SUCCEEDED {
-		            completion(nil, result.error)
-		        }
-		        else {
-		            let payload: [String: String] = ["access_token": result.tokenCacheStoreItem.accessToken]
-		            client.loginWithProvider("aad", token: payload, completion: completion)
-		        }
-    		}
-	}
+    func authenticate(parent: UIViewController, completion: (MSUser?, NSError?) -> Void) {
+        let authority = "INSERT-AUTHORITY-HERE"
+        let resourceId = "INSERT-RESOURCE-ID-HERE"
+        let clientId = "INSERT-CLIENT-ID-HERE"
+        let redirectUri = NSURL(string: "INSERT-REDIRECT-URI-HERE")
+        var error: AutoreleasingUnsafeMutablePointer<ADAuthenticationError?> = nil
+        let authContext = ADAuthenticationContext(authority: authority, error: error)
+        authContext.parentController = parent
+        ADAuthenticationSettings.sharedInstance().enableFullScreen = true
+        authContext.acquireTokenWithResource(resourceId, clientId: clientId, redirectUri: redirectUri) { (result) in
+                if result.status != AD_SUCCEEDED {
+                    completion(nil, result.error)
+                }
+                else {
+                    let payload: [String: String] = ["access_token": result.tokenCacheStoreItem.accessToken]
+                    client.loginWithProvider("aad", token: payload, completion: completion)
+                }
+            }
+    }
 
 <!-- Anchors. -->
 

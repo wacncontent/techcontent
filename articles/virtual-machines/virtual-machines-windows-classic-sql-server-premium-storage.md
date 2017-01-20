@@ -124,22 +124,22 @@ ms.author: jroth
 
 1. 记下 Diskname 和 LUN。
 
-	![DisknameAndLUN][2]
+    ![DisknameAndLUN][2]
 
 1. 通过远程桌面连接到 VM。然后转到**计算机管理** | **设备管理器** | **磁盘驱动器**。查看每个 Microsoft 虚拟磁盘的属性
 
-	![VirtualDiskProperties][3]
+    ![VirtualDiskProperties][3]
 
 1. 此处的 LUN 号是对你在将 VHD 附加到 VM 时指定的 LUN 号的引用。
 1. 对于 Microsoft 虚拟磁盘，转到“详细信息”选项卡，然后在“属性”列表中转到“驱动程序键”。在**“值”**中，注意**“偏移量”**，该项在下面的屏幕截图中为 0002。0002 表示存储池引用的 PhysicalDisk2。
 
-	![VirtualDiskPropertyDetails][4]
+    ![VirtualDiskPropertyDetails][4]
 
 2. 对于每个存储池，转储关联的磁盘：
 
     Get-StoragePool -FriendlyName AMS1pooldata | Get-PhysicalDisk
 
-	![GetStoragePool][5]
+    ![GetStoragePool][5]
 
 现在，你可以使用此信息将附加 VHD 关联到存储池中的物理磁盘。
 
@@ -474,9 +474,9 @@ ms.author: jroth
 - 在迁移期间，会暂时失去高可用性和灾难恢复。
 - 由于这是 1 对 1 迁移，你必须使用支持你的 VHD 数量的最小 VM 大小，因此你可能不能减小 VM 大小。
 - 此方案会使用 Azure **Start-AzureStorageBlobCopy** commandlet，它是异步的。复制完成后没有 SLA。复制时间各不相同，这取决于在队列中等待的时间，还取决于要传输的数据量。如果传输转到另一个在其他区域中支持高级存储的 Azure 数据中心，则复制时间将增加。如果你只有 2 个节点，请考虑在复制所用时间长于测试时的可能的缓解措施。这可以包括以下建议。
-	- 在使用商定的停机时间进行迁移之前，添加临时的第 3 个 SQL Server 节点以实现 HA。
-	- 在 Azure 计划的维护之外运行迁移。
-	- 确保已正确配置群集仲裁。  
+    - 在使用商定的停机时间进行迁移之前，添加临时的第 3 个 SQL Server 节点以实现 HA。
+    - 在 Azure 计划的维护之外运行迁移。
+    - 确保已正确配置群集仲裁。  
 
 ##### 大致步骤
 
@@ -489,8 +489,8 @@ ms.author: jroth
 - 创建新的云服务并在该云服务中重新部署 SQL2 VM。使用复制的原始操作系统 VHD 创建 VM 并附加复制的 VHD。
 - 配置 ILB/ELB 并添加终结点。
 - 通过以下任一方法更新侦听器：
-	- 将 AlwaysOn 组脱机并使用新的 ILB/ELB IP 地址更新 AlwaysOn 侦听器。
-	- 或者通过 PowerShell 将新云服务 ILB/ELB 的 IP 地址资源添加到 Windows 群集。然后，将 IP 地址资源的可能所有者设置为已迁移节点 SQL2，并在网络名称中将此项设置为 OR 依赖关系。请参阅[附录](#appendix-migrating-a-multisite-alwayson-cluster-to-premium-storage)的“在同一子网中添加 IP 地址资源”部分。
+    - 将 AlwaysOn 组脱机并使用新的 ILB/ELB IP 地址更新 AlwaysOn 侦听器。
+    - 或者通过 PowerShell 将新云服务 ILB/ELB 的 IP 地址资源添加到 Windows 群集。然后，将 IP 地址资源的可能所有者设置为已迁移节点 SQL2，并在网络名称中将此项设置为 OR 依赖关系。请参阅[附录](#appendix-migrating-a-multisite-alwayson-cluster-to-premium-storage)的“在同一子网中添加 IP 地址资源”部分。
 - 检查客户端的 DNS 配置/传播。
 - 迁移 SQL1 VM，并完成步骤 2 - 4。
 - 如果使用步骤 5ii，则将 SQL1 添加为已添加的 IP 地址资源的可能所有者
@@ -521,9 +521,9 @@ ms.author: jroth
 - 根据客户端对 SQL Server 的访问权限，当 SQL Server 在应用程序的备用 DC 中运行时，延迟时间可能会增加。
 - VHD 到高级存储的复制时间可能会很长。这可能会影响是否要在可用性组中保留节点的决策。在所需的迁移过程中，运行日志密集型工作负载时请考虑这一点，因为主节点将必须在其事务日志中保留未复制的事务。因此，此日志可能会显著增长。
 - 此方案会使用 Azure **Start-AzureStorageBlobCopy** commandlet，它是异步的。完成后没有 SLA。复制时间各不相同，这取决于在队列中等待的时间，还取决于要传输的数据量。因此，你在第 2 个数据中心中只有一个节点，在复制所用时间长于测试的情况下，你应该采取缓解措施。这可以包括以下建议。
-	- 在使用商定的停机时间进行迁移之前，添加临时的第 2 个 SQL 节点以实现 HA。
-	- 在 Azure 计划的维护之外运行迁移。
-	- 确保已正确配置群集仲裁。
+    - 在使用商定的停机时间进行迁移之前，添加临时的第 2 个 SQL 节点以实现 HA。
+    - 在 Azure 计划的维护之外运行迁移。
+    - 确保已正确配置群集仲裁。
 
 此方案假定你已记录安装，并知道如何存储映射以便对最佳磁盘缓存设置进行更改。
 
@@ -994,10 +994,10 @@ ms.author: jroth
 
        #Start async copy
        Start-AzureStorageBlobCopy -srcUri "https://$origstorageaccountname2nd.blob.core.chinacloudapi.cn/vhds/$vhdname" `
-	    -SrcContext $origContext `
-	    -DestContainer $containerName `
-	    -DestBlob $vhdname `
-	    -DestContext $xioContextnode2
+        -SrcContext $origContext `
+        -DestContainer $containerName `
+        -DestBlob $vhdname `
+        -DestContext $xioContextnode2
        }
 
     #Check for copy progress
@@ -1101,15 +1101,15 @@ ms.author: jroth
 
 1. 对于当前的 IP 地址资源，将可能的所有者更改为“现有的主 SQL Server”（在以下示例中为“dansqlams4”）：
 
-	![Appendix13][23]
+    ![Appendix13][23]
 
 1. 对于新的 IP 地址资源，将可能的所有者更改为“已迁移的辅助 SQL Server”（在以下示例中为“dansqlams5”）：
 
-	![Appendix14][24]
+    ![Appendix14][24]
 
 1. 设置了此项后便可以进行故障转移了，迁移了最后一个节点后，应编辑“可能的所有者”，以便将该节点添加为可能的所有者：
 
-	![Appendix15][25]
+    ![Appendix15][25]
 
 ## 其他资源
 - [Azure 高级存储](../storage/storage-premium-storage.md)

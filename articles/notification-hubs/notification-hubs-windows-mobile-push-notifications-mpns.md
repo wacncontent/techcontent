@@ -60,21 +60,21 @@ wacn.date: 11/22/2016
 
 1. 在 Visual Studio 中创建一个新的 Windows Phone 8 应用程序。
 
-   	![Visual Studio - 新建项目 - Windows Phone 应用][13]
+       ![Visual Studio - 新建项目 - Windows Phone 应用][13]
 
-	在 Visual Studio 2013 Update 2 或更高版本中，必须改为创建 Windows Phone Silverlight 应用程序。
+    在 Visual Studio 2013 Update 2 或更高版本中，必须改为创建 Windows Phone Silverlight 应用程序。
 
-	![Visual Studio - 新建项目 - 空白应用 - Windows Phone Silverlight][11]
+    ![Visual Studio - 新建项目 - 空白应用 - Windows Phone Silverlight][11]
 
 2. 在 Visual Studio 中，右键单击该解决方案，然后单击“管理 NuGet 包”。
 
-	此时将显示“管理 NuGet 包”对话框。
+    此时将显示“管理 NuGet 包”对话框。
 
 3. 搜索 `WindowsAzure.Messaging.Managed`，单击“安装”，然后接受使用条款。
 
-	![Visual Studio - NuGet 包管理器][20]
+    ![Visual Studio - NuGet 包管理器][20]
 
-	此时将使用 <a href="http://nuget.org/packages/WindowsAzure.Messaging.Managed/">WindowsAzure.Messaging.Managed NuGet 包</a>下载、安装并添加对 Windows 的 Azure 消息传送库的引用。
+    此时将使用 <a href="http://nuget.org/packages/WindowsAzure.Messaging.Managed/">WindowsAzure.Messaging.Managed NuGet 包</a>下载、安装并添加对 Windows 的 Azure 消息传送库的引用。
 
 4. 打开文件 App.xaml.cs 并添加以下 `using` 语句：
 
@@ -83,7 +83,7 @@ wacn.date: 11/22/2016
 
 5. 在 App.xaml.cs 中 **Application\_Launching** 方法的顶部添加以下代码：
 
-	    var channel = HttpNotificationChannel.Find("MyPushChannel");
+        var channel = HttpNotificationChannel.Find("MyPushChannel");
         if (channel == null)
         {
             channel = new HttpNotificationChannel("MyPushChannel");
@@ -107,17 +107,17 @@ wacn.date: 11/22/2016
     确保插入你的中心名称以及在前一部分中获取的名为 **DefaultListenSharedAccessSignature** 的连接字符串。
     此代码从 MPNS 检索应用的通道 URI，然后将该通道 URI 注册到你的通知中心。它还保证每次启动应用程序时都在通知中心注册通道 URI。
 
-	>[!NOTE]本教程将一个 toast 通知发送到设备。而当你发送磁贴通知时，必须在通道上调用 **BindToShellTile** 方法。若要同时支持 toast 通知和磁贴通知，请同时调用 **BindToShellTile** 和 **BindToShellToast**。
+    >[!NOTE]本教程将一个 toast 通知发送到设备。而当你发送磁贴通知时，必须在通道上调用 **BindToShellTile** 方法。若要同时支持 toast 通知和磁贴通知，请同时调用 **BindToShellTile** 和 **BindToShellToast**。
 
 6. 在解决方案资源管理器中，展开“属性”，打开 `WMAppManifest.xml` 文件，单击“功能”选项卡并确保选中 **ID\_CAP\_PUSH\_NOTIFICATION** 功能。
 
-   	![Visual Studio - Windows Phone 应用功能][14]
+       ![Visual Studio - Windows Phone 应用功能][14]
 
-   	这样可确保你的应用程序可收到推送通知。如果没有它，则将无法成功向应用发送推送通知。
+       这样可确保你的应用程序可收到推送通知。如果没有它，则将无法成功向应用发送推送通知。
 
 7. 按 `F5` 键以运行应用。
 
-	随后应用中将显示注册消息。
+    随后应用中将显示注册消息。
 
 8. 关闭应用。
 
@@ -133,19 +133,19 @@ wacn.date: 11/22/2016
 
 1. 右键单击解决方案，选择“添加”和“新建项目...”，然后在“Visual C#”下依次单击“Windows”、“控制台应用程序”和“确定”。
 
-   	![Visual Studio - 新建项目 - 控制台应用程序][6]
+       ![Visual Studio - 新建项目 - 控制台应用程序][6]
 
-	这会将新的 Visual C# 控制台应用程序添加到解决方案。你也可以在单独的解决方案中进行此项操作。
+    这会将新的 Visual C# 控制台应用程序添加到解决方案。你也可以在单独的解决方案中进行此项操作。
 
 4. 依次单击“工具”、“库包管理器”、“包管理器控制台”。
 
-	这会显示包管理器控制台。
+    这会显示包管理器控制台。
 
 5.  在“包管理器控制台”窗口中，将“默认项目”设置为新的控制台应用程序项目，然后在控制台窗口中执行以下命令：
 
         Install-Package Microsoft.Azure.NotificationHubs
 
-	这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 程序包</a>添加对 Azure 通知中心 SDK 的引用。
+    这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 程序包</a>添加对 Azure 通知中心 SDK 的引用。
 
 6. 打开 `Program.cs` 文件并添加以下 `using` 语句：
 
@@ -156,7 +156,7 @@ wacn.date: 11/22/2016
         private static async void SendNotificationAsync()
         {
             NotificationHubClient hub = NotificationHubClient
-				.CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
+                .CreateClientFromConnectionString("<connection string with full access>", "<hub name>");
             string toast = "<?xml version="1.0" encoding="utf-8"?>" +
                 "<wp:Notification xmlns:wp="WPNotification">" +
                    "<wp:Toast>" +
@@ -166,18 +166,18 @@ wacn.date: 11/22/2016
             await hub.SendMpnsNativeNotificationAsync(toast);
         }
 
-	确保将 `<hub name>` 占位符替换为出现在门户中的通知中心名称。此外，使用你在“配置通知中心”部分中获取的名称为 **DefaultFullSharedAccessSignature** 的连接字符串替换连接字符串占位符。
+    确保将 `<hub name>` 占位符替换为出现在门户中的通知中心名称。此外，使用你在“配置通知中心”部分中获取的名称为 **DefaultFullSharedAccessSignature** 的连接字符串替换连接字符串占位符。
 
-	>[!NOTE]确保你使用的是具有**完全**访问权限的连接字符串，而不是具有**侦听**访问权限的连接字符串。侦听访问字符串无权发送推送通知。
+    >[!NOTE]确保你使用的是具有**完全**访问权限的连接字符串，而不是具有**侦听**访问权限的连接字符串。侦听访问字符串无权发送推送通知。
 
 4. 在 `Main` 方法中添加以下行：
 
          SendNotificationAsync();
-		 Console.ReadLine();
+         Console.ReadLine();
 
 5. 在 Windows Phone 模拟器正在运行且应用已关闭的情况下，将控制台应用程序项目设置为默认启动项目，然后按 `F5` 键运行应用。
 
-	你将会收到 toast 推送通知。点击 toast 标题可加载应用。
+    你将会收到 toast 推送通知。点击 toast 标题可加载应用。
 
 可以在 MSDN 上的 [toast 目录]和[磁贴目录]主题中找到所有可能的负载。
 

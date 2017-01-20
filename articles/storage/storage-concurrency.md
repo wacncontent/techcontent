@@ -49,36 +49,36 @@ Azure 存储服务支持所有三个策略，尽管它具有独特的功能，�
 
 以下 C# 代码段（使用客户端存储库 4.2.0）显示一个简单示例，说明如何根据从以前检索到或插入的 Blob 访问的 ETag 值构造 **If-Match AccessCondition**。然后，在更新该 Blob 时使用 **AccessCondition** 对象：**AccessCondition** 对象将 **If-Match** 标头添加到请求中。如果其他进程已更新该 Blob，则 Blob 服务将返回 HTTP 412 (不满足前提条件) 状态消息。可以从此处下载完整示例：[使用 Azure 存储管理并发](http://code.msdn.microsoft.com/Managing-Concurrency-using-56018114)。
 
-	// Retrieve the ETag from the newly created blob
-	// Etag is already populated as UploadText should cause a PUT Blob call 
-	// to storage blob service which returns the etag in response.
-	string orignalETag = blockBlob.Properties.ETag;
-	 
-	// This code simulates an update by a third party.
-	string helloText = "Blob updated by a third party.";
-	 
-	// No etag, provided so orignal blob is overwritten (thus generating a new etag)
-	blockBlob.UploadText(helloText);
-	Console.WriteLine("Blob updated. Updated ETag = {0}", 
-	blockBlob.Properties.ETag);
-	 
-	// Now try to update the blob using the orignal ETag provided when the blob was created
-	try
-	{
-	    Console.WriteLine("Trying to update blob using orignal etag to generate if-match access condition");
-	    blockBlob.UploadText(helloText,accessCondition:
-	    AccessCondition.GenerateIfMatchCondition(orignalETag));
-	}
-	catch (StorageException ex)
-	{
-	    if (ex.RequestInformation.HttpStatusCode == (int)HttpStatusCode.PreconditionFailed)
-	    {
-	        Console.WriteLine("Precondition failure as expected. Blob's orignal etag no longer matches");
-	        // TODO: client can decide on how it wants to handle the 3rd party updated content.
-	    }
-	    else
-	        throw;
-	}  
+    // Retrieve the ETag from the newly created blob
+    // Etag is already populated as UploadText should cause a PUT Blob call 
+    // to storage blob service which returns the etag in response.
+    string orignalETag = blockBlob.Properties.ETag;
+     
+    // This code simulates an update by a third party.
+    string helloText = "Blob updated by a third party.";
+     
+    // No etag, provided so orignal blob is overwritten (thus generating a new etag)
+    blockBlob.UploadText(helloText);
+    Console.WriteLine("Blob updated. Updated ETag = {0}", 
+    blockBlob.Properties.ETag);
+     
+    // Now try to update the blob using the orignal ETag provided when the blob was created
+    try
+    {
+        Console.WriteLine("Trying to update blob using orignal etag to generate if-match access condition");
+        blockBlob.UploadText(helloText,accessCondition:
+        AccessCondition.GenerateIfMatchCondition(orignalETag));
+    }
+    catch (StorageException ex)
+    {
+        if (ex.RequestInformation.HttpStatusCode == (int)HttpStatusCode.PreconditionFailed)
+        {
+            Console.WriteLine("Precondition failure as expected. Blob's orignal etag no longer matches");
+            // TODO: client can decide on how it wants to handle the 3rd party updated content.
+        }
+        else
+            throw;
+    }  
 
 存储服务还包括支持其他条件标头，例如 **If-Modified-Since**、**If-Unmodified-Since** 和 **If-None-Match**，以及这些标头的组合。有关详细信息，请参阅 MSDN 上的[为 Blob 服务操作指定条件标头](http://msdn.microsoft.com/zh-cn/library/dd179371.aspx)。
 
@@ -128,30 +128,30 @@ Azure 存储服务支持所有三个策略，尽管它具有独特的功能，�
 
 以下 C# 代码段显示一个示例，说明如何在 30 秒内对 Blob 获取独占租约，更新 Blob 的内容，然后释放该租约。尝试获取新租约时，如果 Blob 中已经存在有效租约，Blob 服务将返回“HTTP (409) 冲突”状态结果。在发出请求以在存储服务中更新 Blob 时，下面的代码段使用 **AccessCondition** 对象封装租约信息。可以在这里下载完整的示例：[使用 Azure 存储空间管理并发](http://code.msdn.microsoft.com/Managing-Concurrency-using-56018114)。
 
-	// Acquire lease for 15 seconds
-	string lease = blockBlob.AcquireLease(TimeSpan.FromSeconds(15), null);
-	Console.WriteLine("Blob lease acquired. Lease = {0}", lease);
-	 
-	// Update blob using lease. This operation will succeed
-	const string helloText = "Blob updated";
-	var accessCondition = AccessCondition.GenerateLeaseCondition(lease);
-	blockBlob.UploadText(helloText, accessCondition: accessCondition);
-	Console.WriteLine("Blob updated using an exclusive lease");
-	 
-	//Simulate third party update to blob without lease
-	try
-	{
-	    // Below operation will fail as no valid lease provided
-	    Console.WriteLine("Trying to update blob without valid lease");
-	    blockBlob.UploadText("Update without lease, will fail");
-	}
-	catch (StorageException ex)
-	{
-	    if (ex.RequestInformation.HttpStatusCode == (int)HttpStatusCode.PreconditionFailed)
-	        Console.WriteLine("Precondition failure as expected. Blob's lease does not match");
-	    else
-	        throw;
-	}  
+    // Acquire lease for 15 seconds
+    string lease = blockBlob.AcquireLease(TimeSpan.FromSeconds(15), null);
+    Console.WriteLine("Blob lease acquired. Lease = {0}", lease);
+     
+    // Update blob using lease. This operation will succeed
+    const string helloText = "Blob updated";
+    var accessCondition = AccessCondition.GenerateLeaseCondition(lease);
+    blockBlob.UploadText(helloText, accessCondition: accessCondition);
+    Console.WriteLine("Blob updated using an exclusive lease");
+     
+    //Simulate third party update to blob without lease
+    try
+    {
+        // Below operation will fail as no valid lease provided
+        Console.WriteLine("Trying to update blob without valid lease");
+        blockBlob.UploadText("Update without lease, will fail");
+    }
+    catch (StorageException ex)
+    {
+        if (ex.RequestInformation.HttpStatusCode == (int)HttpStatusCode.PreconditionFailed)
+            Console.WriteLine("Precondition failure as expected. Blob's lease does not match");
+        else
+            throw;
+    }  
 
 如果尝试对租赁的 Blob 执行写入操作，而不传递租约 ID，则请求将失败，并显示 412 错误。请注意，如果该租约在调用 **UploadText** 方法前到期，而你仍传递租约 ID，则请求也将失败，并显示 **412** 错误。有关如何管理租约到期时间和租约 ID 的详细信息，请参阅[租赁 Blob](http://msdn.microsoft.com/zh-cn/library/azure/ee691972.aspx) REST 说明文档。
 
@@ -208,20 +208,20 @@ Azure 存储服务支持所有三个策略，尽管它具有独特的功能，�
 
 以下 C# 代码段显示以前创建或检索到的客户实体是如何更新其电子邮件地址的。初始插入或检索操作将 ETag 值存储在客户对象中，因为示例在执行替换操作时使用相同的对象实例，所以将 ETag 值自动发送回表服务，从而使该服务可以检查是否存在并发违规情况。如果其他进程已更新表存储中的实体，则该服务将返回 HTTP 412 (不满足前提条件) 状态消息。可以在这里下载完整的示例：[使用 Azure 存储空间管理并发](http://code.msdn.microsoft.com/Managing-Concurrency-using-56018114)。
 
-	try
-	{
-	    customer.Email = "updatedEmail@contoso.org";
-	    TableOperation replaceCustomer = TableOperation.Replace(customer);
-	    customerTable.Execute(replaceCustomer);
-	    Console.WriteLine("Replace operation succeeded.");
-	}
-	catch (StorageException ex)
-	{
-	    if (ex.RequestInformation.HttpStatusCode == 412)
-	        Console.WriteLine("Optimistic concurrency violation – entity has changed since it was retrieved.");
-	    else
-	        throw; 
-	}  
+    try
+    {
+        customer.Email = "updatedEmail@contoso.org";
+        TableOperation replaceCustomer = TableOperation.Replace(customer);
+        customerTable.Execute(replaceCustomer);
+        Console.WriteLine("Replace operation succeeded.");
+    }
+    catch (StorageException ex)
+    {
+        if (ex.RequestInformation.HttpStatusCode == 412)
+            Console.WriteLine("Optimistic concurrency violation – entity has changed since it was retrieved.");
+        else
+            throw; 
+    }  
 
 若要明确禁用并发检查，应在执行替换操作前将 **employee** 对象的 **ETag** 属性设置为“\*”。
 

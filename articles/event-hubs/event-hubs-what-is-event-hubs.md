@@ -37,7 +37,7 @@ ms.author: sethm
 
 - [事件中心概述](./event-hubs-overview.md)
 - [事件中心编程指南](./event-hubs-programming-guide.md)
-- [事件中心可用性和支持常见问题](./event-hubs-availability-and-support-faq.md)
+- [事件中心可用性和支持常见问题](./event-hubs-faq.md)
 - 使用[事件中心教程]入门
 - [使用事件中心的完整示例应用程序]
 

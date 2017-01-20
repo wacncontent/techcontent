@@ -2,11 +2,11 @@
 
 当您发送模板通知时，您只需提供一组属性，在本例中，我们将发送一组包含当前新闻的本地化版本的属性，例如：
 
-	{
-		"News_English": "World News in English!",
-    	"News_French": "World News in French!",
-    	"News_Mandarin": "World News in Mandarin!"
-	}
+    {
+        "News_English": "World News in English!",
+        "News_French": "World News in French!",
+        "News_Mandarin": "World News in Mandarin!"
+    }
 
 本部分演示如何使用控制台应用发送通知
 
@@ -20,12 +20,12 @@
         {
             // Define the notification hub.
             NotificationHubClient hub = 
-				NotificationHubClient.CreateClientFromConnectionString(
-					"<connection string with full access>", "<hub name>");
+                NotificationHubClient.CreateClientFromConnectionString(
+                    "<connection string with full access>", "<hub name>");
 
             // Sending the notification as a template notification. All template registrations that contain 
-			// "messageParam" or "News_<local selected>" and the proper tags will receive the notifications. 
-			// This includes APNS, GCM, WNS, and MPNS template registrations.
+            // "messageParam" or "News_<local selected>" and the proper tags will receive the notifications. 
+            // This includes APNS, GCM, WNS, and MPNS template registrations.
             Dictionary<string, string> templateParams = new Dictionary<string, string>();
 
             // Create an array of breaking news categories.
@@ -41,7 +41,7 @@
                 {
                     string key = "News_" + locale;
 
-					// Your real localized news content would go here.
+                    // Your real localized news content would go here.
                     templateParams[key] = "Breaking " + category + " News in " + locale + "!";
                 }
 
@@ -55,17 +55,17 @@
 
 在移动服务计划程序中，可以使用以下脚本：
 
-	var azure = require('azure');
+    var azure = require('azure');
     var notificationHubService = azure.createNotificationHubService('<hub name>', '<connection string with full access>');
     var notification = {
-			"News_English": "World News in English!",
-			"News_French": "World News in French!",
-			"News_Mandarin", "World News in Mandarin!"
-	}
-	notificationHubService.send('World', notification, function(error) {
-		if (!error) {
-			console.warn("Notification successful");
-		}
-	});
-	
+            "News_English": "World News in English!",
+            "News_French": "World News in French!",
+            "News_Mandarin", "World News in Mandarin!"
+    }
+    notificationHubService.send('World', notification, function(error) {
+        if (!error) {
+            console.warn("Notification successful");
+        }
+    });
+    
 <!---HONumber=Mooncake_0104_2016-->

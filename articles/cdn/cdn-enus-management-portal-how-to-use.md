@@ -99,15 +99,15 @@ You can click “Cache rule configuration” and then set cache rules for select
 
 - Folder-based configuration.
 
-	Folders must begin with “/”, for example, /pic, /doc, or /htdoc/data. The back end matches all files within the designated folders, **including subfolders**.
+    Folders must begin with “/”, for example, /pic, /doc, or /htdoc/data. The back end matches all files within the designated folders, **including subfolders**.
 
 - File extension-based configuration.
 
-	The back end matches common file extensions, such as .jpg, .png, .gif, .txt, .m4v, or .mp3 **within all folders**.
+    The back end matches common file extensions, such as .jpg, .png, .gif, .txt, .m4v, or .mp3 **within all folders**.
 
 - Full path-based configuration
 
-	These are used to specify **a single file**, and must start with a forward slash (/). For example, "/sites/doc/example.doc". **Note**: If the path entered by the user is “/”, it will match the homepage.
+    These are used to specify **a single file**, and must start with a forward slash (/). For example, "/sites/doc/example.doc". **Note**: If the path entered by the user is “/”, it will match the homepage.
 
 >**Note** that the character strings entered by the user when configuring rules must not include special characters such as “{”, “}”, “(”, “)”, “[”, “]”, “.”, “?”, “*”, “\\”, “^”, or “$”.
 

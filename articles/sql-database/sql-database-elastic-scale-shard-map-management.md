@@ -32,8 +32,8 @@ ms.author: ddove
 
 1. 每个数据库一个租户
 2. 每个数据库多个租户（两种类型）：
-	3. 列表映射
-	4. 范围映射
+    3. 列表映射
+    4. 范围映射
  
 对于单租户模型，创建“列表映射”分片映射。单租户模型将每个租户分配给一个数据库。这是适用于 SaaS 开发人员的有效模型，因为它可以简化管理。
 
@@ -107,7 +107,7 @@ ms.author: ddove
 在此代码中，应用程序尝试使用 [TryGetSqlShardMapManager 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.trygetsqlshardmapmanager.aspx)打开现有的 **ShardMapManager**。如果表示全局 **ShardMapManager** (GSM) 的对象尚未存在于数据库内，则客户端库将在此处使用 [CreateSqlShardMapManager 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.createsqlshardmapmanager.aspx)创建这些对象。
 
     // Try to get a reference to the Shard Map Manager 
- 	// via the Shard Map Manager database.  
+     // via the Shard Map Manager database.  
     // If it doesn't already exist, then create it. 
     ShardMapManager shardMapManager; 
     bool shardMapManagerExists = ShardMapManagerFactory.TryGetSqlShardMapManager(
@@ -139,7 +139,7 @@ ms.author: ddove
 
 创建分片映射管理器后，使用 [TryGetRangeShardMap](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.trygetrangeshardmap.aspx)、[TryGetListShardMap](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.trygetlistshardmap.aspx) 或者 [GetShardMap](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.getshardmap.aspx) 方法获取 [RangeShardMap](https://msdn.microsoft.com/zh-cn/library/azure/dn807318.aspx) 或 [ListShardMap](https://msdn.microsoft.com/zh-cn/library/azure/dn807370.aspx)。
 
-	/// <summary>
+    /// <summary>
     /// Creates a new Range Shard Map with the specified name, or gets the Range Shard Map if it already exists.
     /// </summary>
     public static RangeShardMap<T> CreateOrGetRangeShardMap<T>(ShardMapManager shardMapManager, string shardMapName)
@@ -198,23 +198,23 @@ ms.author: ddove
             // Check if shard exists and if not, 
             // create it (Idempotent / tolerant of re-execute) 
             if (!sm.TryGetShard(new ShardLocation(
-	                                 shardServer, 
-	                                 "sample_shard_0"), 
-	                                 out shard0)) 
+                                     shardServer, 
+                                     "sample_shard_0"), 
+                                     out shard0)) 
             { 
                 Shard0 = sm.CreateShard(new ShardLocation(
-	                                        shardServer, 
-	                                        "sample_shard_0")); 
+                                            shardServer, 
+                                            "sample_shard_0")); 
             } 
 
             if (!sm.TryGetShard(new ShardLocation(
-	                                shardServer, 
-	                                "sample_shard_1"), 
-	                                out shard1)) 
+                                    shardServer, 
+                                    "sample_shard_1"), 
+                                    out shard1)) 
             { 
                 Shard1 = sm.CreateShard(new ShardLocation(
-	                                         shardServer, 
-	                                        "sample_shard_1"));  
+                                             shardServer, 
+                                            "sample_shard_1"));  
             } 
 
             RangeMapping<long> rmpg=null; 
@@ -224,46 +224,46 @@ ms.author: ddove
             if (!sm.TryGetMappingForKey(0, out rmpg)) 
             { 
                 sm.CreateRangeMapping(
-	                      new RangeMappingCreationInfo<long>
-	                      (new Range<long>(0, 50), 
-	                      shard0, 
-	                      MappingStatus.Online)); 
+                          new RangeMappingCreationInfo<long>
+                          (new Range<long>(0, 50), 
+                          shard0, 
+                          MappingStatus.Online)); 
             } 
 
             if (!sm.TryGetMappingForKey(50, out rmpg)) 
             { 
                 sm.CreateRangeMapping(
-	                     new RangeMappingCreationInfo<long> 
+                         new RangeMappingCreationInfo<long> 
                          (new Range<long>(50, 100), 
-	                     shard1, 
-	                     MappingStatus.Online)); 
+                         shard1, 
+                         MappingStatus.Online)); 
             } 
 
             if (!sm.TryGetMappingForKey(100, out rmpg)) 
             { 
                 sm.CreateRangeMapping(
-	                     new RangeMappingCreationInfo<long>
+                         new RangeMappingCreationInfo<long>
                          (new Range<long>(100, 150), 
-	                     shard0, 
-	                     MappingStatus.Online)); 
+                         shard0, 
+                         MappingStatus.Online)); 
             } 
 
             if (!sm.TryGetMappingForKey(150, out rmpg)) 
             { 
                 sm.CreateRangeMapping(
-	                     new RangeMappingCreationInfo<long> 
+                         new RangeMappingCreationInfo<long> 
                          (new Range<long>(150, 200), 
-	                     shard1, 
-	                     MappingStatus.Online)); 
+                         shard1, 
+                         MappingStatus.Online)); 
             } 
 
             if (!sm.TryGetMappingForKey(200, out rmpg)) 
             { 
                sm.CreateRangeMapping(
-	                     new RangeMappingCreationInfo<long> 
+                         new RangeMappingCreationInfo<long> 
                          (new Range<long>(200, 300), 
-	                     shard0, 
-	                     MappingStatus.Online)); 
+                         shard0, 
+                         MappingStatus.Online)); 
             } 
 
             // List the shards and mappings 

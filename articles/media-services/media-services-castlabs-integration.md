@@ -81,11 +81,11 @@ jti|有关此令牌的唯一标识符（每个令牌只能在 castLabs 系统中
 2.	将资产上传到 AMS。
 3.	从上传的资源中获取 UUID 并更改 Program.cs 文件中的第 32 行：
 
-		 var objIAsset = _context.Assets.Where(x => x.Id == "nb:cid:UUID:dac53a5d-1500-80bd-b864-f1e4b62594cf").FirstOrDefault();
+         var objIAsset = _context.Assets.Where(x => x.Id == "nb:cid:UUID:dac53a5d-1500-80bd-b864-f1e4b62594cf").FirstOrDefault();
 
 4.	使用 AssetId 来命名 castLabs 系统中的资源（Program.cs 文件中的第 44 行）。
 
-	必须为 **castLabs** 设置 AssetId；它必须是唯一的字母数字字符串。
+    必须为 **castLabs** 设置 AssetId；它必须是唯一的字母数字字符串。
 
 5.	运行该程序。
 
@@ -105,8 +105,8 @@ jti|有关此令牌的唯一标识符（每个令牌只能在 castLabs 系统中
 4.	单击“高级选项”复选框。
 5.	在“保护”下拉列表中选择 PlayReady 和/或 Widevine。
 6.	将从 STS 获取的令牌粘贴到“令牌”文本框中。
-	
-	castLab 许可证服务器不需要在令牌前面加“Bearer=”前缀。因此，请在提交令牌之前删除该前缀。
+    
+    castLab 许可证服务器不需要在令牌前面加“Bearer=”前缀。因此，请在提交令牌之前删除该前缀。
 7.	更新播放器。
 8.	视频应正在播放。
 

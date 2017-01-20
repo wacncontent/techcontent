@@ -22,7 +22,7 @@ As of circa 2015-09-04, the following topics might include this include:
 4. 单击“配置”。 
 
 5. 在“允许的 IP 地址”部分添加你想要启用的范围的下限和上限 IP 地址值。
-	- 为方便起见，可以让下限值以 **.0** 结尾，让上限值以 **.255** 结尾。
+    - 为方便起见，可以让下限值以 **.0** 结尾，让上限值以 **.255** 结尾。
 
 <!-- Image references. -->
 

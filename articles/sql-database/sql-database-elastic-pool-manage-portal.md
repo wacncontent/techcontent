@@ -47,11 +47,11 @@ ms.tgt_pltfrm: NA
 1. 选择要使用的池。
 2. “弹性池监视”下是标记为“资源利用率”的图表。单击该图表。
 
-	![弹性池监视][3]
+    ![弹性池监视][3]
 
-	“指标”边栏选项卡会打开，其中显示指定指标在指定时间范围内的详细视图。
+    “指标”边栏选项卡会打开，其中显示指定指标在指定时间范围内的详细视图。
 
-	![“度量值”分页][9]
+    ![“度量值”分页][9]
 
 ### 自定义图表显示
 
@@ -59,12 +59,12 @@ ms.tgt_pltfrm: NA
  
 2. 在“指标”边栏选项卡上，单击“编辑”。
 
-	![单击“编辑”][6]
+    ![单击“编辑”][6]
 
 - 在“编辑图表”边栏选项卡中，选择新时间范围（前一个小时、今天或过去一周），或单击“自定义”以选择过去两周中的任何日期范围。选择图表类型（条形图或折线图），然后选择要监视的资源。
 > [AZURE.Note]仅可同时在图表中显示具有相同度量单位的指标。例如，如果选择“eDTU 百分比”，则之后只能选择以百分比为度量单位的其他指标。
 
-	![单击“编辑”](./media/sql-database-elastic-pool-manage-portal/edit-chart.png)
+    ![单击“编辑”](./media/sql-database-elastic-pool-manage-portal/edit-chart.png)
 
 - 然后，单击“确定”。
 
@@ -74,25 +74,25 @@ ms.tgt_pltfrm: NA
 
 1. “弹性数据库监视”下有一个图表，其中显示五个数据库的指标。默认情况下，该图表显示池中按前一个小时平均 eDTU 使用率排名前五的数据库。单击该图表。
 
-	![弹性池监视][4]
+    ![弹性池监视][4]
 
 2. “数据库资源利用率”边栏选项卡随即出现。这可提供池中数据库使用率的详细视图。使用该边栏选项卡下半部分中的网格，可以选择池中的任何数据库以在图表中显示其使用率（最多 5 个数据库）。还可以通过单击“编辑图表”来自定义在图表中显示的指标和时间范围。
 
-	![“数据库资源利用率”边栏选项卡][8]
+    ![“数据库资源利用率”边栏选项卡][8]
 
 ### 自定义视图
 
 1. 在“数据库资源利用率”边栏选项卡中，单击“编辑图表”。
 
-	![单击“编辑图表”](./media/sql-database-elastic-pool-manage-portal/db-utilization-blade.png)
+    ![单击“编辑图表”](./media/sql-database-elastic-pool-manage-portal/db-utilization-blade.png)
 
 2. 在“编辑图表”边栏选项卡中，选择新时间范围（前一个小时或过去 24 小时），或单击“自定义”以选择过去 2 周内的另一天进行显示。
 
-	![单击“自定义”](./media/sql-database-elastic-pool-manage-portal/editchart-date-time.png)
+    ![单击“自定义”](./media/sql-database-elastic-pool-manage-portal/editchart-date-time.png)
 
 3. 单击“数据库比较依据”下拉列表，选择要在比较数据库时使用的其他指标。
 
-	![编辑图表](./media/sql-database-elastic-pool-manage-portal/edit-comparison-metric.png)
+    ![编辑图表](./media/sql-database-elastic-pool-manage-portal/edit-comparison-metric.png)
 
 ### 选择要监视的数据库
 
@@ -127,11 +127,11 @@ ms.tgt_pltfrm: NA
 
 2. 在“配置池”边栏选项卡中，单击“添加到池”。
 
-	![单击“添加到池”](./media/sql-database-elastic-pool-manage-portal/add-to-pool.png)
+    ![单击“添加到池”](./media/sql-database-elastic-pool-manage-portal/add-to-pool.png)
 
 3. 在“添加数据库”边栏选项卡中，选择要添加到池的一个或多个数据库。然后单击“选择”。
 
-	![选择要添加的数据库](./media/sql-database-elastic-pool-manage-portal/add-databases-pool.png)
+    ![选择要添加的数据库](./media/sql-database-elastic-pool-manage-portal/add-databases-pool.png)
 
     “配置池”边栏选项卡现在会列出选定要添加的数据库，其状态设置为“挂起”。
 

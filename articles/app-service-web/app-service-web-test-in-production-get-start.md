@@ -46,11 +46,11 @@ ms.author: cephalin
 2. 在 Web 应用的边栏选项卡中，单击“设置”>“流量路由”。![](./media/app-service-web-test-in-production/01-traffic-routing.png)
 3. 选择要将流量路由到的槽以及所需的总流量百分比，然后单击“保存”。
 
-	![](./media/app-service-web-test-in-production/02-select-slot.png)
+    ![](./media/app-service-web-test-in-production/02-select-slot.png)
 
 4. 转到部署槽的边栏选项卡。现在你应会看到路由到该处的实时流量。
 
-	![](./media/app-service-web-test-in-production/03-traffic-routed.png)
+    ![](./media/app-service-web-test-in-production/03-traffic-routed.png)
 
 配置流量路由后，指定百分比的客户端将随机路由到非生产槽。但是，要特别注意的是，一旦客户端自动路由到特定槽，它将在客户端会话生存期内都“固定”到该槽。这是使用 Cookie 固定用户会话来实现的。如果你查看 HTTP 请求，就会发现每个后续请求中都有一个 `TipMix` Cookie。
 
@@ -78,7 +78,7 @@ ms.author: cephalin
 
 若要让用户选择加入 beta 应用，请将相同的查询参数设置为非生产槽的名称，例如：
 
-		<webappname>.chinacloudsites.cn/?x-ms-routing-name=staging
+        <webappname>.chinacloudsites.cn/?x-ms-routing-name=staging
 
 ## 更多资源 ##
 

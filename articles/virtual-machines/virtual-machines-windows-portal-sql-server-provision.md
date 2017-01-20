@@ -39,7 +39,7 @@ Azure 虚拟机 (VM) 库包括几种内含 Microsoft SQL Server 的映像。只�
 
 1. 使用帐户登录到 [Azure 门户预览](https://portal.azure.cn)。
 
-	>[!NOTE] 如果没有 Azure 帐户，请访问 [Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
+    >[!NOTE] 如果没有 Azure 帐户，请访问 [Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 
 1. 在 Azure 门户中单击“新建”。该门户将打开“新建”边栏选项卡。SQL Server VM 资源位于应用商店的“虚拟机”组中。
 
@@ -47,7 +47,7 @@ Azure 虚拟机 (VM) 库包括几种内含 Microsoft SQL Server 的映像。只�
 
 1. 若要查看所有可用的映像，请单击“虚拟机”边栏选项卡中的“查看全部”。
 
-	![Azure 虚拟机边栏选项卡](./media/virtual-machines-windows-portal-sql-server-provision/azure-compute-blade.png)  
+    ![Azure 虚拟机边栏选项卡](./media/virtual-machines-windows-portal-sql-server-provision/azure-compute-blade.png)  
 
 1. 在“基于 Windows”下，选择想要创建的 SQL Server 或单击“更多”查看更多可用的映像。
 
@@ -55,7 +55,7 @@ Azure 虚拟机 (VM) 库包括几种内含 Microsoft SQL Server 的映像。只�
 
 1. 在“选择部署模型”下面，验证是否已选择“Resource Manager”。对于新虚拟机，建议使用“Resource Manager”部署模型。单击“创建”。
 
-	![使用 Resource Manager 创建 SQL VM](./media/virtual-machines-windows-portal-sql-server-provision/azure-compute-sql-deployment-model.png)  
+    ![使用 Resource Manager 创建 SQL VM](./media/virtual-machines-windows-portal-sql-server-provision/azure-compute-sql-deployment-model.png)  
 
 ## <a name="configure-the-vm"></a> 配置 VM
 有五个用于配置 SQL Server 虚拟机的边栏选项卡。
@@ -77,12 +77,12 @@ Azure 虚拟机 (VM) 库包括几种内含 Microsoft SQL Server 的映像。只�
 * 如果有多个订阅，验证该订阅是否是新 VM 的正确订阅。
 * 在“资源组”框中，键入新资源组的名称。此外，若要使用现有的资源组，请单击“选择现有项”。资源组是 Azure（虚拟机、存储帐户、虚拟网络等）中相关资源的集合。
 
-	>[!NOTE] 如果你只是测试或了解 Azure 中的 SQL Server 部署，使用新的资源组很有帮助。测试完成后，删除资源组会自动删除 VM 和与该资源组相关联的所有资源。有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
+    >[!NOTE] 如果你只是测试或了解 Azure 中的 SQL Server 部署，使用新的资源组很有帮助。测试完成后，删除资源组会自动删除 VM 和与该资源组相关联的所有资源。有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
 
 * 选择此部署的**位置**。
 * 单击“确定”保存设置。
 
-	![SQL 基本信息边栏选项卡](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-basic.png)  
+    ![SQL 基本信息边栏选项卡](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-basic.png)  
 
 ## <a name="2-choose-virtual-machine-size"></a> 2.选择虚拟机大小
 执行“大小”设置步骤时，请在“选择大小”边栏选项卡中选择虚拟机大小。边栏选项卡最初将根据你选择的模板显示建议的计算机大小。系统还会估算每月运行 VM 的费用。
@@ -235,7 +235,7 @@ Azure 虚拟机 (VM) 库包括几种内含 Microsoft SQL Server 的映像。只�
 1. 构建 Azure VM 后，该 VM 的图标将显示在 Azure 仪表板上。也可以通过浏览现有虚拟机找到该 VM。单击新的 SQL 虚拟机。显示虚拟机详细信息的“虚拟机”边栏选项卡。
 1. 在“虚拟机”边栏选项卡的顶部，单击“连接”。
 1. 浏览器将为 VM 下载 RDP 文件。打开该 RDP 文件。
-	![通过远程桌面连接到 SQL VM](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-vm-remote-desktop.png)
+    ![通过远程桌面连接到 SQL VM](./media/virtual-machines-windows-portal-sql-server-provision/azure-sql-vm-remote-desktop.png)
 1. “远程桌面连接”会通知你，无法识别此远程连接的发布者。单击“连接”以继续。
 1. 在**“Windows 安全性”**对话框中，单击**“使用另一帐户”**。
 1. 对于“用户名”键入 **<user name>**，其中 <user name> 是配置 VM 时指定的用户名。必须在姓名前添加初始反斜杠。

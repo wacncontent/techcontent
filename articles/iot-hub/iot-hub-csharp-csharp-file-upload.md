@@ -97,7 +97,7 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
 
 2. 搜索 `Microsoft.Azure.Devices`、单击“安装”，并接受使用条款。
 
-	随后将会下载、安装 [Azure IoT - 服务 SDK NuGet 包]并在 **ReadFileUploadNotification** 项目中添加对它的引用。
+    随后将会下载、安装 [Azure IoT - 服务 SDK NuGet 包]并在 **ReadFileUploadNotification** 项目中添加对它的引用。
 
 3. 在 **Program.cs** 文件的顶部添加以下语句：
 
@@ -105,7 +105,7 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
 
 4. 将以下字段添加到 **Program** 类。将占位符值替换为在 [Get started with IoT Hub]（IoT 中心入门）中获取的 IoT 中心连接字符串：
 
-		static ServiceClient serviceClient;
+        static ServiceClient serviceClient;
         static string connectionString = "{iot hub connection string}";
         
 5. 将以下方法添加到 **Program** 类：

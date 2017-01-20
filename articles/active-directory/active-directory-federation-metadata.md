@@ -90,7 +90,7 @@ Azure AD 发布的联合元数据文档可以包含多个签名密钥，例如�
 
 以下元数据显示了一个 `RoleDescriptor` 元素示例。
 
-	<RoleDescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fed="http://docs.oasis-open.org/wsfed/federation/200706" xsi:type="fed:SecurityTokenServiceType"protocolSupportEnumeration="http://docs.oasis-open.org/wsfed/federation/200706">
+    <RoleDescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fed="http://docs.oasis-open.org/wsfed/federation/200706" xsi:type="fed:SecurityTokenServiceType"protocolSupportEnumeration="http://docs.oasis-open.org/wsfed/federation/200706">
 
 在特定于 SAML 的部分中，WS 联合身份验证元数据读取器读取 `IDPSSODescriptor` 元素中的证书。
 
@@ -132,18 +132,18 @@ Azure AD 发布的联合元数据文档可以包含多个签名密钥，例如�
 
 以下元数据显示了特定于租户的终结点的 `PassiveResistorEndpoint` 示例。
 
-	<IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-	 …
-	<SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.microsoftonline.com/contoso.partner.onmschina.cn/saml2" />
-	<SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.microsoftonline.com/contoso.partner.onmschina.cn/saml2" />
-	</IDPSSODescriptor>
+    <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+     …
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.microsoftonline.com/contoso.partner.onmschina.cn/saml2" />
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.microsoftonline.com/contoso.partner.onmschina.cn/saml2" />
+    </IDPSSODescriptor>
 
 同样，通用 SAML 2.0 协议终结点的终结点发布在独立于租户的联合元数据中，如以下示例中所示。
 
-	<IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-	…
-	    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.microsoftonline.com/common/saml2" />
-	    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.microsoftonline.com/common/saml2" />
-	  </IDPSSODescriptor>
+    <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    …
+        <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.microsoftonline.com/common/saml2" />
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://login.microsoftonline.com/common/saml2" />
+      </IDPSSODescriptor>
 
 <!---HONumber=Mooncake_1031_2016-->

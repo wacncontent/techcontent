@@ -91,14 +91,14 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 查找 **NetworkInterfaces** 和 **Subnets** 属性，如下所示：
 
-	"networkInterfaces": [],
-	...
-	"subnets": [
-		{
-			"id": "/subscriptions/[Subscription Id]/resourceGroups/RG-NSG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/FrontEnd"
-		}
-	],
-	...
+    "networkInterfaces": [],
+    ...
+    "subnets": [
+        {
+            "id": "/subscriptions/[Subscription Id]/resourceGroups/RG-NSG/providers/Microsoft.Network/virtualNetworks/TestVNet/subnets/FrontEnd"
+        }
+    ],
+    ...
 
 在上述示例中，NSG 不与任何网络接口 (NIC) 关联，而是与名为 **FrontEnd** 的子网关联。
 
@@ -123,24 +123,24 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 预期输出：
 
-	info:    Executing command network nsg rule create
-	+ Looking up the network security rule "allow-https"
-	+ Creating a network security rule "allow-https"
-	+ Looking up the network security group "NSG-FrontEnd"
-	data:    Id                              : /subscriptions/[Subscription Id]/resourceGroups/RG-NSG/providers/Microsoft.Network/networkSecurityGroups/NSG-FrontEnd/securityRules/allow-https
-	data:    Name                            : allow-https
-	data:    Type                            : Microsoft.Network/networkSecurityGroups/securityRules
-	data:    Provisioning state              : Succeeded
-	data:    Description                     : Allow access to port 443 for HTTPS
-	data:    Source IP                       : *
-	data:    Source Port                     : *
-	data:    Destination IP                  : *
-	data:    Destination Port                : 443
-	data:    Protocol                        : Tcp
-	data:    Direction                       : Inbound
-	data:    Access                          : Allow
-	data:    Priority                        : 102
-	info:    network nsg rule create command OK
+    info:    Executing command network nsg rule create
+    + Looking up the network security rule "allow-https"
+    + Creating a network security rule "allow-https"
+    + Looking up the network security group "NSG-FrontEnd"
+    data:    Id                              : /subscriptions/[Subscription Id]/resourceGroups/RG-NSG/providers/Microsoft.Network/networkSecurityGroups/NSG-FrontEnd/securityRules/allow-https
+    data:    Name                            : allow-https
+    data:    Type                            : Microsoft.Network/networkSecurityGroups/securityRules
+    data:    Provisioning state              : Succeeded
+    data:    Description                     : Allow access to port 443 for HTTPS
+    data:    Source IP                       : *
+    data:    Source Port                     : *
+    data:    Destination IP                  : *
+    data:    Destination Port                : 443
+    data:    Protocol                        : Tcp
+    data:    Direction                       : Inbound
+    data:    Access                          : Allow
+    data:    Priority                        : 102
+    info:    network nsg rule create command OK
 
 ### 更改规则
 若要将上面创建的规则更改为仅允许来自 **Internet** 的入站流量，请运行以下命令：
@@ -330,10 +330,10 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
     预期输出：
 
-		info:    Executing command network nsg delete
-		+ Looking up the network security group "NSG-FrontEnd"
-		+ Deleting network security group "NSG-FrontEnd"
-		info:    network nsg delete command OK
+        info:    Executing command network nsg delete
+        + Looking up the network security group "NSG-FrontEnd"
+        + Deleting network security group "NSG-FrontEnd"
+        info:    network nsg delete command OK
 
 ## 后续步骤
 * 为 NSG [启用日志记录](./virtual-network-nsg-manage-log.md)。

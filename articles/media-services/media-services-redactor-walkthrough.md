@@ -41,7 +41,7 @@ ms.author: rli; juliako;
 1. 从 [此处下载 AMSE 工具](https://github.com/Azure/Azure-Media-Services-Explorer)。
 1. 使用服务密钥登录媒体服务帐户。
 
-	若要获取帐户名和密钥信息，请转到 [Azure 经典管理门户](https://manage.windowsazure.cn/)获取。
+    若要获取帐户名和密钥信息，请转到 [Azure 经典管理门户](https://manage.windowsazure.cn/)获取。
 
 ![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough001.png)  
 
@@ -62,20 +62,20 @@ ms.author: rli; juliako;
 
 1. 将原始视频资产上传到第一步中的输出，并设置为主要资产。
 
-	![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough005.png)  
+    ![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough005.png)  
 
 2. （可选）上传“Dance\_idlist.txt”文件，它包含要修订的 ID 的换行符分隔列表。
 
-	![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough006.png)  
+    ![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough006.png)  
 
 3. （可选）编辑 annotations.json 文件，例如增加边界框边界。
 4. 右键单击第一步中的输出资产，选择 Redactor，在“修正”模式下运行。
 
-	![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough007.png)  
+    ![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough007.png)  
 
 5. 下载或共享最终修正的输出资产。
 
-	![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough008.png)  
+    ![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough008.png)  
 
 ##Azure Media Redactor Visualizer 开源工具
 
@@ -89,12 +89,12 @@ ms.author: rli; juliako;
 
 1.	下载并生成整个解决方案。
 
-	![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough009.png)  
+    ![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough009.png)  
 
 2.	从[此处](https://ffmpeg.org/download.html)下载 FFMPEG。此项目最初使用具有静态链接的版本 be1d324 (2016-10-04) 开发。
 3.	将 ffmpeg.exe 和 ffprobe.exe 复制到与 AzureMediaRedactor.exe 相同的输出文件夹。
 
-	![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough010.png)  
+    ![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough010.png)  
 
 4. 运行 AzureMediaRedactor.exe。
 
@@ -104,11 +104,11 @@ ms.author: rli; juliako;
 2. 下载原始视频文件和修正 - 分析作业的输出。
 3. 运行可视化工具应用程序并选择上述文件。
 
-	![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough011.png)  
+    ![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough011.png)  
 
 4. 预览文件。通过右侧边栏选择要进行模糊处理的人脸。
-	
-	![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough012.png)  
+    
+    ![面部修正](./media/media-services-redactor-walkthrough/media-services-redactor-walkthrough012.png)  
 
 5.	将更新底部文本字段，使其带有面部 ID。创建名为“idlist.txt”的文件，将这些 ID 作为换行符分隔列表。
 6.	将此文件上传到步骤 1 中的输出资产。也将原始视频上传到此资产并设置为主要资产。

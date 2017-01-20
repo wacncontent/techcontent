@@ -29,13 +29,13 @@ ms.author: cynthn
 可以将通用和专用 VHD 上传到 Azure。每种类型都需要在开始之前准备 VM。
 
 - **通用 VHD** - 通用 VHD 包含使用 Sysprep 删除所有个人帐户信息。如果想要使用 VHD 作为映像来创建新的 VM，应该：
-	- [准备好要上传到 Azure 的 Windows VHD](./virtual-machines-windows-prepare-for-upload-vhd-image.md)。
-	- [使用 Sysprep 通用化虚拟机](./virtual-machines-windows-generalize-vhd.md)。
+    - [准备好要上传到 Azure 的 Windows VHD](./virtual-machines-windows-prepare-for-upload-vhd-image.md)。
+    - [使用 Sysprep 通用化虚拟机](./virtual-machines-windows-generalize-vhd.md)。
 
 - **专用 VHD** - 专用 VHD 保留原始 VM 中的用户帐户、应用程序和其他状态数据。如果想要使用当前 VHD 创建新 VM，请确保完成以下步骤。
-	- [准备好要上传到 Azure 的 Windows VHD](./virtual-machines-windows-prepare-for-upload-vhd-image.md)。**不要**使用 Sysprep 通用化 VM。
-	- 删除安装于 VM 上的任何来宾虚拟化工具和代理，即 VMware 工具。
-	- 确保 VM 配置为通过 DHCP 来提取其 IP 地址和 DNS 设置。这确保服务器在启动时在 VNet 中获取 IP 地址。
+    - [准备好要上传到 Azure 的 Windows VHD](./virtual-machines-windows-prepare-for-upload-vhd-image.md)。**不要**使用 Sysprep 通用化 VM。
+    - 删除安装于 VM 上的任何来宾虚拟化工具和代理，即 VMware 工具。
+    - 确保 VM 配置为通过 DHCP 来提取其 IP 地址和 DNS 设置。这确保服务器在启动时在 VNet 中获取 IP 地址。
 
 ## 登录到 Azure
 
@@ -43,15 +43,15 @@ ms.author: cynthn
 
 1. 打开 Azure PowerShell 并登录到 Azure 帐户。将打开一个弹出窗口，可以输入 Azure 帐户凭据。
 
-		Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+        Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 2. 获取可用订阅的订阅 ID。
 
-		Get-AzureRmSubscription
+        Get-AzureRmSubscription
 
 3. 使用订阅 ID 设置正确的订阅。将 `<subscriptionID>` 替换为正确订阅的 ID。
 
-		Select-AzureRmSubscription -SubscriptionId "<subscriptionID>"
+        Select-AzureRmSubscription -SubscriptionId "<subscriptionID>"
 
 ## <a name="createstorage"></a> 获取存储帐户
 
@@ -59,7 +59,7 @@ ms.author: cynthn
 
 显示可用的存储帐户，请键入：
 
-	Get-AzureRmStorageAccount
+    Get-AzureRmStorageAccount
 
 如果要使用现有存储帐户，请转到[上载 VM 映像](#upload-the-vm-vhd-to-your-storage-account)部分。
 
@@ -67,23 +67,23 @@ ms.author: cynthn
 
 1. 需要应在其中创建存储帐户的资源组的名称。若要查找订阅中的所有资源组，请键入：
 
-		Get-AzureRmResourceGroup
+        Get-AzureRmResourceGroup
 
-	若要在**中国北部**区域中创建名称为 **myResourceGroup** 的资源组，请键入：
+    若要在**中国北部**区域中创建名称为 **myResourceGroup** 的资源组，请键入：
 
-		New-AzureRmResourceGroup -Name myResourceGroup -Location "China North"
+        New-AzureRmResourceGroup -Name myResourceGroup -Location "China North"
 
 2. 使用 [New-AzureRmStorageAccount](https://msdn.microsoft.com/zh-cn/library/mt607148.aspx) cmdlet 在此资源组中创建名称为 **mystorageaccount** 存储帐户：
 
-		New-AzureRmStorageAccount -ResourceGroupName myResourceGroup -Name mystorageaccount -Location "China North" -SkuName "Standard_LRS" -Kind "Storage"
-			
-	-SkuName 的有效值为：
+        New-AzureRmStorageAccount -ResourceGroupName myResourceGroup -Name mystorageaccount -Location "China North" -SkuName "Standard_LRS" -Kind "Storage"
+            
+    -SkuName 的有效值为：
 
-	- **Standard\_LRS** - 本地冗余存储。
-	- **Standard\_ZRS** - 区域冗余存储。
-	- **Standard\_GRS** - 异地冗余存储。
-	- **Standard\_RAGRS** - 读取访问权限异地冗余存储。
-	- **Premium\_LRS** - 高级本地冗余存储。
+    - **Standard\_LRS** - 本地冗余存储。
+    - **Standard\_ZRS** - 区域冗余存储。
+    - **Standard\_GRS** - 异地冗余存储。
+    - **Standard\_RAGRS** - 读取访问权限异地冗余存储。
+    - **Premium\_LRS** - 高级本地冗余存储。
 
 ## <a name="upload-the-vm-vhd-to-your-storage-account"></a> 将 VHD 上传到存储帐户
 
@@ -97,16 +97,16 @@ Add-AzureRmVhd -ResourceGroupName $rgName -Destination $urlOfUploadedImageVhd -L
 
 如果成功，显示如下所示的响应：
 
-	  C:\> Add-AzureRmVhd -ResourceGroupName myResourceGroup -Destination https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myUploadedVHD.vhd -LocalFilePath "C:\Users\Public\Documents\Virtual hard disks\myVHD.vhd"
-	  MD5 hash is being calculated for the file C:\Users\Public\Documents\Virtual hard disks\myVHD.vhd.
-	  MD5 hash calculation is completed.
-	  Elapsed time for the operation: 00:03:35
-	  Creating new page blob of size 53687091712...
-	  Elapsed time for upload: 01:12:49
+      C:\> Add-AzureRmVhd -ResourceGroupName myResourceGroup -Destination https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myUploadedVHD.vhd -LocalFilePath "C:\Users\Public\Documents\Virtual hard disks\myVHD.vhd"
+      MD5 hash is being calculated for the file C:\Users\Public\Documents\Virtual hard disks\myVHD.vhd.
+      MD5 hash calculation is completed.
+      Elapsed time for the operation: 00:03:35
+      Creating new page blob of size 53687091712...
+      Elapsed time for upload: 01:12:49
 
-	  LocalFilePath           DestinationUri
-	  -------------           --------------
-	  C:\Users\Public\Doc...  https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myUploadedVHD.vhd
+      LocalFilePath           DestinationUri
+      -------------           --------------
+      C:\Users\Public\Doc...  https://mystorageaccount.blob.core.chinacloudapi.cn/mycontainer/myUploadedVHD.vhd
 
 完成执行此命令可能需要一段时间，具体取决于网络连接速度和 VHD 文件的大小
 

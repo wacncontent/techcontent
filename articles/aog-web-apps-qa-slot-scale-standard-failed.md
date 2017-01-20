@@ -33,16 +33,16 @@ wacn.date: 12/08/2016
 
 1. 确保 Web 应用当前为标准模式（仅标准模式支持部署槽）；
 
-	![step-1-standard](./media/aog-web-apps-qa-slot-scale-standard-failed/step-1-standard.png)
+    ![step-1-standard](./media/aog-web-apps-qa-slot-scale-standard-failed/step-1-standard.png)
 
 2. 在仪表板标签页，选择添加新的部署槽；
 
-	![step-2-add-slot](./media/aog-web-apps-qa-slot-scale-standard-failed/step-2-add-slot.png)
+    ![step-2-add-slot](./media/aog-web-apps-qa-slot-scale-standard-failed/step-2-add-slot.png)
 
 3. 在 Web 应用列表处，选中相应槽，点击删除；
 
-	![step-3-delete-slot](./media/aog-web-apps-qa-slot-scale-standard-failed/step-3-delete-slot.png)
+    ![step-3-delete-slot](./media/aog-web-apps-qa-slot-scale-standard-failed/step-3-delete-slot.png)
 
 4. 删除部署槽后即可成功缩放至基本模式。
 
-	![step-4-scale-tier](./media/aog-web-apps-qa-slot-scale-standard-failed/step-4-scale-tier.png)
+    ![step-4-scale-tier](./media/aog-web-apps-qa-slot-scale-standard-failed/step-4-scale-tier.png)

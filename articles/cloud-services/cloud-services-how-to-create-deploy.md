@@ -62,7 +62,7 @@ Azure 经典门户提供两种创建和部署云服务的方法：“快速创�
 
 1. 在 [Azure 经典管理门户](http://manage.windowsazure.cn)中，单击“新建”>“计算”>“云服务”>“快速创建”。
 
-	![CloudServices\_QuickCreate](./media/cloud-services-how-to-create-deploy/CloudServices_QuickCreate.png)  
+    ![CloudServices\_QuickCreate](./media/cloud-services-how-to-create-deploy/CloudServices_QuickCreate.png)  
 
 2. 在“URL”中，输入要在公用 URL 中使用的子域名称，以便在生产部署中访问云服务。生产部署的 URL 格式为：http://*myURL*.chinacloudapp.cn。
 
@@ -70,19 +70,19 @@ Azure 经典门户提供两种创建和部署云服务的方法：“快速创�
 
 4. 单击“创建云服务”。
 
-	![CloudServices\_Region](./media/cloud-services-how-to-create-deploy/CloudServices_Regionlist.png)
+    ![CloudServices\_Region](./media/cloud-services-how-to-create-deploy/CloudServices_Regionlist.png)
 
-	可以在窗口底部的消息区域中监视过程的状态。
+    可以在窗口底部的消息区域中监视过程的状态。
 
-	“云服务”区域随即打开，显示新的云服务。状态更改为“已创建”时，即成功完成云服务创建。
+    “云服务”区域随即打开，显示新的云服务。状态更改为“已创建”时，即成功完成云服务创建。
 
-	![CloudServices\_CloudServicesPage](./media/cloud-services-how-to-create-deploy/CloudServices_CloudServicesPage.png)
+    ![CloudServices\_CloudServicesPage](./media/cloud-services-how-to-create-deploy/CloudServices_CloudServicesPage.png)
 
 ## <a name="how-to-upload-a-certificate-for-a-cloud-service"></a> 如何：为云服务上传证书
 
 1. 在 [Azure 经典管理门户](http://manage.windowsazure.cn)中单击“云服务”，单击云服务的名称，然后单击“证书”。
 
-	![CloudServices\_QuickCreate](./media/cloud-services-how-to-create-deploy/CloudServices_EmptyDashboard.png)
+    ![CloudServices\_QuickCreate](./media/cloud-services-how-to-create-deploy/CloudServices_EmptyDashboard.png)
 
 2. 单击“上传证书”或“上传”。
 
@@ -92,11 +92,11 @@ Azure 经典门户提供两种创建和部署云服务的方法：“快速创�
 
 5. 单击“确定”（复选标记）。
 
-	![CloudServices\_AddaCertificate](./media/cloud-services-how-to-create-deploy/CloudServices_AddaCertificate.png)
+    ![CloudServices\_AddaCertificate](./media/cloud-services-how-to-create-deploy/CloudServices_AddaCertificate.png)
 
-	可在消息区域中查看上传进度，如下所示。上传完成时，证书即添加到表中。在消息区域中，单击“确定”关闭消息。
+    可在消息区域中查看上传进度，如下所示。上传完成时，证书即添加到表中。在消息区域中，单击“确定”关闭消息。
 
-	![CloudServices\_CertificateProgress](./media/cloud-services-how-to-create-deploy/CloudServices_CertificateProgress.png)
+    ![CloudServices\_CertificateProgress](./media/cloud-services-how-to-create-deploy/CloudServices_CertificateProgress.png)
 
 ## <a name="deploy"></a> 如何：部署云服务
 
@@ -116,17 +116,17 @@ Azure 经典门户提供两种创建和部署云服务的方法：“快速创�
 
 6. 单击“确定”（复选标记）以开始云服务部署。
 
-	![CloudServices\_UploadaPackage](./media/cloud-services-how-to-create-deploy/CloudServices_UploadaPackage.png)
+    ![CloudServices\_UploadaPackage](./media/cloud-services-how-to-create-deploy/CloudServices_UploadaPackage.png)
 
-	可以在消息区域中监视部署状态。单击“确定”隐藏消息。
+    可以在消息区域中监视部署状态。单击“确定”隐藏消息。
 
-	![CloudServices\_UploadProgress](./media/cloud-services-how-to-create-deploy/CloudServices_UploadProgress.png)
+    ![CloudServices\_UploadProgress](./media/cloud-services-how-to-create-deploy/CloudServices_UploadProgress.png)
 
 ## 验证部署已成功完成
 
 1. 单击“仪表板”。
 
-	状态应显示该服务**正在运行**。
+    状态应显示该服务**正在运行**。
 
 2. 在“速览”下，单击网站 URL 以在 Web 浏览器中打开云服务。
 

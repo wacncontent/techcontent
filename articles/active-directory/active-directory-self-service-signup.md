@@ -146,29 +146,29 @@ wacn.date: 12/13/2016
         connect-msolservice -credential $msolcred
 2. 获取域的列表：
 
-    	Get-MsolDomain
+        Get-MsolDomain
 3. 然后 Get-MsolDomainVerificationDns cmdlet 来创建质询：
 
-    	Get-MsolDomainVerificationDns -DomainName *your\_domain\_name* -Mode DnsTxtRecord
+        Get-MsolDomainVerificationDns -DomainName *your\_domain\_name* -Mode DnsTxtRecord
 
     例如：
 
-    	Get-MsolDomainVerificationDns -DomainName contoso.com -Mode DnsTxtRecord
+        Get-MsolDomainVerificationDns -DomainName contoso.com -Mode DnsTxtRecord
 4. 复制从此命令返回的值（质询）。
 
     例如：
 
-    	MS=32DD01B82C05D27151EA9AE93C5890787F0E65D9
+        MS=32DD01B82C05D27151EA9AE93C5890787F0E65D9
 5. 在公共 DNS 命名空间中，创建包含你在上一步复制的值的 DNS txt 记录。
 
     此记录的名称即是父域的名称，因此，如果你要使用 Windows Server 中的 DNS 角色创建此资源记录，请将记录名称保留空白，而只在文本框中粘贴该值
 6. 运行 Confirm-MsolDomain cmdlet 以验证质询：
 
-    	Confirm-MsolEmailVerifiedDomain -DomainName *your\_domain\_name*
+        Confirm-MsolEmailVerifiedDomain -DomainName *your\_domain\_name*
 
     例如：
 
-    	Confirm-MsolEmailVerifiedDomain -DomainName contoso.com
+        Confirm-MsolEmailVerifiedDomain -DomainName contoso.com
 
 如果质询成功，你将返回到提示符，且不会显示错误。
 

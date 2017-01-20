@@ -37,8 +37,8 @@ ms.author: mahender
 
 6. 在“重定向 URI”下，提供应用程序的终结点，然后单击“保存”。
  
-	>[!NOTE] 重定向 URI 是应用程序 URL 加上路径 _/.auth/login/microsoftaccount/callback_。例如，`https://contoso.chinacloudsites.cn/.auth/login/microsoftaccount/callback`。
-	>请务必使用 HTTPS 方案。
+    >[!NOTE] 重定向 URI 是应用程序 URL 加上路径 _/.auth/login/microsoftaccount/callback_。例如，`https://contoso.chinacloudsites.cn/.auth/login/microsoftaccount/callback`。
+    >请务必使用 HTTPS 方案。
 
 7. 在“应用程序机密”下，单击“生成新密码”。请记下显示的值。关闭页面后，就不再显示该值。
 
@@ -54,7 +54,7 @@ ms.author: mahender
 
     ![][1]
 
-	默认情况下，应用服务提供身份验证但不限制对站点内容和 API 的已授权访问。必须在应用代码中为用户授权。
+    默认情况下，应用服务提供身份验证但不限制对站点内容和 API 的已授权访问。必须在应用代码中为用户授权。
 
 4. （可选）若要限制只有通过 Microsoft 帐户身份验证的用户可以访问站点，请将“请求未经身份验证时需执行的操作”设置为“Microsoft 帐户”。这会要求对所有请求进行身份验证，所有未经身份验证的请求将重定向到 Microsoft 帐户进行身份验证。
 

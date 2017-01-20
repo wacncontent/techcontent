@@ -40,7 +40,7 @@ ms.author: sstein
 
 首先必须与 Azure 帐户建立访问连接，因此请启动 PowerShell，然后运行以下 cmdlet。在登录屏幕中，输入登录 Azure 门户时所用的相同电子邮件和密码。
 
-	Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 成功登录后，屏幕上将显示一些信息，包括登录时所用的 ID 和有权访问的 Azure 订阅。
 
@@ -48,7 +48,7 @@ ms.author: sstein
 
 需要订阅 ID 才可选择订阅。可复制上一步所示信息中的订阅 ID；如果具有多个订阅且需要更多详细信息，可运行 **Get-AzureRmSubscription** cmdlet 并复制结果集中的所需订阅信息。以下 cmdlet 使用订阅 ID 设置当前订阅：
 
-	Select-AzureRmSubscription -SubscriptionId 4cac86b0-1e56-bbbb-aaaa-000000000000
+    Select-AzureRmSubscription -SubscriptionId 4cac86b0-1e56-bbbb-aaaa-000000000000
 
 成功运行 **Select-AzureRmSubscription** 后，将返回到 PowerShell 提示符处。
 

@@ -60,47 +60,47 @@ ms.author: vturecek
 
 ### 辅助角色
 
-	using Microsoft.WindowsAzure.ServiceRuntime;
+    using Microsoft.WindowsAzure.ServiceRuntime;
 
-	namespace WorkerRole1
-	{
-	    public class WorkerRole : RoleEntryPoint
-	    {
-	        public override void Run()
-	        {
-	        }
+    namespace WorkerRole1
+    {
+        public class WorkerRole : RoleEntryPoint
+        {
+            public override void Run()
+            {
+            }
 
-	        public override bool OnStart()
-	        {
-	        }
+            public override bool OnStart()
+            {
+            }
 
-	        public override void OnStop()
-	        {
-	        }
-	    }
-	}
+            public override void OnStop()
+            {
+            }
+        }
+    }
 
 ### Service Fabric 无状态服务
 
-	using System.Collections.Generic;
-	using System.Threading;
-	using System.Threading.Tasks;
-	using Microsoft.ServiceFabric.Services.Communication.Runtime;
-	using Microsoft.ServiceFabric.Services.Runtime;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using Microsoft.ServiceFabric.Services.Communication.Runtime;
+    using Microsoft.ServiceFabric.Services.Runtime;
 
-	namespace Stateless1
-	{
-	    public class Stateless1 : StatelessService
-	    {
-	        protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
-	        {
-	        }
+    namespace Stateless1
+    {
+        public class Stateless1 : StatelessService
+        {
+            protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
+            {
+            }
 
-	        protected override Task RunAsync(CancellationToken cancelServiceInstance)
-	        {
-	        }
-	    }
-	}
+            protected override Task RunAsync(CancellationToken cancelServiceInstance)
+            {
+            }
+        }
+    }
 
 两者都有可从中开始处理的主要“Run”重写。Service Fabric 服务将 `Run`、`Start` 和 `Stop` 合并到一个入口点 `RunAsync`。当 `RunAsync` 启动时，服务应开始工作；发出 `RunAsync` 方法的 CancellationToken 信号时，应停止工作。
 
@@ -137,7 +137,7 @@ Service Fabric 为侦听客户端请求的服务提供可选的通信设置入�
 #### 云服务
 可通过 `RoleEnvironment` 访问 ServiceConfiguration.*.cscfg 中的配置设置。这些设置可全局提供给同一云服务部署中的所有角色实例使用。
 
-	string value = RoleEnvironment.GetConfigurationSettingValue("Key");
+    string value = RoleEnvironment.GetConfigurationSettingValue("Key");
 
 #### Service Fabric
 
@@ -145,34 +145,34 @@ Service Fabric 为侦听客户端请求的服务提供可选的通信设置入�
 
 通过服务的 `CodePackageActivationContext` 可在每个服务实例中访问配置设置。
 
-	ConfigurationPackage configPackage = this.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
+    ConfigurationPackage configPackage = this.Context.CodePackageActivationContext.GetConfigurationPackageObject("Config");
 
-	// Access Settings.xml
-	KeyedCollection<string, ConfigurationProperty> parameters = configPackage.Settings.Sections["MyConfigSection"].Parameters;
+    // Access Settings.xml
+    KeyedCollection<string, ConfigurationProperty> parameters = configPackage.Settings.Sections["MyConfigSection"].Parameters;
 
-	string value = parameters["Key"]?.Value;
+    string value = parameters["Key"]?.Value;
 
-	// Access custom configuration file:
-	using (StreamReader reader = new StreamReader(Path.Combine(configPackage.Path, "CustomConfig.json")))
-	{
-	    MySettings settings = JsonConvert.DeserializeObject<MySettings>(reader.ReadToEnd());
-	}
+    // Access custom configuration file:
+    using (StreamReader reader = new StreamReader(Path.Combine(configPackage.Path, "CustomConfig.json")))
+    {
+        MySettings settings = JsonConvert.DeserializeObject<MySettings>(reader.ReadToEnd());
+    }
 
 ### 配置更新事件
 #### 云服务
 当环境中发生更改（例如配置更改）时，使用 `RoleEnvironment.Changed` 事件来通知所有角色实例。通过此事件可以使用配置更新，却无需回收角色实例或重新启动辅助角色进程。
 
-	RoleEnvironment.Changed += RoleEnvironmentChanged;
+    RoleEnvironment.Changed += RoleEnvironmentChanged;
 
-	private void RoleEnvironmentChanged(object sender, RoleEnvironmentChangedEventArgs e)
-	{
-	   // Get the list of configuration changes
-	   var settingChanges = e.Changes.OfType<RoleEnvironmentConfigurationSettingChange>();
-	foreach (var settingChange in settingChanges) 
-	   {
-	      Trace.WriteLine("Setting: " + settingChange.ConfigurationSettingName, "Information");
-	   }
-	}
+    private void RoleEnvironmentChanged(object sender, RoleEnvironmentChangedEventArgs e)
+    {
+       // Get the list of configuration changes
+       var settingChanges = e.Changes.OfType<RoleEnvironmentConfigurationSettingChange>();
+    foreach (var settingChange in settingChanges) 
+       {
+          Trace.WriteLine("Setting: " + settingChange.ConfigurationSettingName, "Information");
+       }
+    }
 
 #### ServiceFabic
 
@@ -180,14 +180,14 @@ Service Fabric 为侦听客户端请求的服务提供可选的通信设置入�
 
 通过这些事件可以使用服务包中的更改，而无需重新启动服务实例。
  
-	this.Context.CodePackageActivationContext.ConfigurationPackageModifiedEvent +=
-	                    this.CodePackageActivationContext_ConfigurationPackageModifiedEvent;
+    this.Context.CodePackageActivationContext.ConfigurationPackageModifiedEvent +=
+                        this.CodePackageActivationContext_ConfigurationPackageModifiedEvent;
 
-	private void CodePackageActivationContext_ConfigurationPackageModifiedEvent(object sender, PackageModifiedEventArgs<ConfigurationPackage> e)
-	{
-	    this.UpdateCustomConfig(e.NewPackage.Path);
-	    this.UpdateSettings(e.NewPackage.Settings);
-	}
+    private void CodePackageActivationContext_ConfigurationPackageModifiedEvent(object sender, PackageModifiedEventArgs<ConfigurationPackage> e)
+    {
+        this.UpdateCustomConfig(e.NewPackage.Path);
+        this.UpdateSettings(e.NewPackage.Settings);
+    }
 
 ## 启动任务
 启动任务是应用程序启动前执行的操作。启动任务通常用于以提升的权限运行设置脚本。云服务和 Service Fabric 均支持启动任务。两者的主要差异是，云服务中的启动任务绑定到 VM，因为 VM 是角色实例的一部分；而 Service Fabric 中的启动任务则绑定到服务，而不绑定到任何特定 VM。
@@ -201,29 +201,29 @@ Service Fabric 为侦听客户端请求的服务提供可选的通信设置入�
 ### 云服务
 在云服务中，在 ServiceDefintion.csdef 中针对每个角色配置了启动入口点。
 
-	<ServiceDefinition>
-	    <Startup>
-	        <Task commandLine="Startup.cmd" executionContext="limited" taskType="simple" >
-	            <Environment>
-	                <Variable name="MyVersionNumber" value="1.0.0.0" />
-	            </Environment>
-	        </Task>
-	    </Startup>
-	    ...
-	</ServiceDefinition>
+    <ServiceDefinition>
+        <Startup>
+            <Task commandLine="Startup.cmd" executionContext="limited" taskType="simple" >
+                <Environment>
+                    <Variable name="MyVersionNumber" value="1.0.0.0" />
+                </Environment>
+            </Task>
+        </Startup>
+        ...
+    </ServiceDefinition>
 
 ### Service Fabric
 Service Fabric 中的启动入口点是在 ServiceManifest.xml 中针对每个服务配置的。
 
-	<ServiceManifest>
-	  <CodePackage Name="Code" Version="1.0.0">
-	    <SetupEntryPoint>
-	      <ExeHost>
-	        <Program>Startup.bat</Program>
-	      </ExeHost>
-	    </SetupEntryPoint>
-	    ...
-	</ServiceManifest>
+    <ServiceManifest>
+      <CodePackage Name="Code" Version="1.0.0">
+        <SetupEntryPoint>
+          <ExeHost>
+            <Program>Startup.bat</Program>
+          </ExeHost>
+        </SetupEntryPoint>
+        ...
+    </ServiceManifest>
 
 ## 有关开发环境的说明
 云服务和 Service Fabric 都使用项目模板来与 Visual Studio 集成，并支持在本地和 Azure 中调试、配置及部署。此外，云服务和 Service Fabric 都提供本地开发运行时环境。差别在于，云服务的开发运行时模拟其运行所在的 Azure 环境，Service Fabric 不使用模拟器，而是使用完整的 Service Fabric 运行时。在本地开发计算机运行的 Service Fabric 环境就是在生产时运行的同一环境。

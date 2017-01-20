@@ -50,28 +50,28 @@ ms.author: cherylmc
 
 1. 配置 ExpressRoute 线路。在继续之前，请确保线路完全由连接提供商设置。
 
-	![](./media/expressroute-howto-routing-portal-resource-manager/listprovisioned.png)
+    ![](./media/expressroute-howto-routing-portal-resource-manager/listprovisioned.png)
 
 2. 配置线路的 Azure 专用对等互连。在继续执行后续步骤之前，请确保已准备好以下各项：
 
-	- 主链路的 /30 子网。它不能是保留给虚拟网络使用的任何地址空间的一部分。
-	- 辅助链路的 /30 子网。它不能是保留给虚拟网络使用的任何地址空间的一部分。
-	- 用于建立此对等互连的有效 VLAN ID。请确保线路中没有其他对等互连使用同一个 VLAN ID。
-	- 对等互连的 AS 编号。可以使用 2 字节和 4 字节 AS 编号。可以将专用 AS 编号用于此对等互连。请务必不要使用 65515。
-	- MD5 哈希（如果选择使用）。**这是可选的**。
+    - 主链路的 /30 子网。它不能是保留给虚拟网络使用的任何地址空间的一部分。
+    - 辅助链路的 /30 子网。它不能是保留给虚拟网络使用的任何地址空间的一部分。
+    - 用于建立此对等互连的有效 VLAN ID。请确保线路中没有其他对等互连使用同一个 VLAN ID。
+    - 对等互连的 AS 编号。可以使用 2 字节和 4 字节 AS 编号。可以将专用 AS 编号用于此对等互连。请务必不要使用 65515。
+    - MD5 哈希（如果选择使用）。**这是可选的**。
 
 3. 选择 Azure 专用对等行，如下所示。
-	
-	![](./media/expressroute-howto-routing-portal-resource-manager/rprivate1.png)
-	
+    
+    ![](./media/expressroute-howto-routing-portal-resource-manager/rprivate1.png)
+    
 4. 配置专用对等互连。下图显示了一个配置示例。
 
-	![](./media/expressroute-howto-routing-portal-resource-manager/rprivate2.png)
+    ![](./media/expressroute-howto-routing-portal-resource-manager/rprivate2.png)
 
 5. 指定所有参数后，请保存配置。成功接受配置后，你将看到类似于下面示例的内容。
 
-	![](./media/expressroute-howto-routing-portal-resource-manager/rprivate3.png)
-	
+    ![](./media/expressroute-howto-routing-portal-resource-manager/rprivate3.png)
+    
 ### 查看 Azure 专用对等互连详细信息
 
 可以通过选择对等互连查看 Azure 专用对等互连的属性。
@@ -98,29 +98,29 @@ ms.author: cherylmc
 
 1. 配置 ExpressRoute 线路。在进一步继续之前，请确保线路完全由连接提供商设置。
 
-	![](./media/expressroute-howto-routing-portal-resource-manager/listprovisioned.png)
+    ![](./media/expressroute-howto-routing-portal-resource-manager/listprovisioned.png)
 
 2. 配置线路的 Azure 公共对等互连。在继续执行后续步骤之前，请确保已准备好以下各项：
 
-	- 主链路的 /30 子网。
-	- 辅助链路的 /30 子网。
-	- 用于设置此对等互连的所有 IP 地址必须都是有效的公共 IPv4 地址。
-	- 用于建立此对等互连的有效 VLAN ID。请确保线路中没有其他对等互连使用同一个 VLAN ID。
-	- 对等互连的 AS 编号。可以使用 2 字节和 4 字节 AS 编号。
-	- MD5 哈希（如果选择使用）。**这是可选的**。
+    - 主链路的 /30 子网。
+    - 辅助链路的 /30 子网。
+    - 用于设置此对等互连的所有 IP 地址必须都是有效的公共 IPv4 地址。
+    - 用于建立此对等互连的有效 VLAN ID。请确保线路中没有其他对等互连使用同一个 VLAN ID。
+    - 对等互连的 AS 编号。可以使用 2 字节和 4 字节 AS 编号。
+    - MD5 哈希（如果选择使用）。**这是可选的**。
 
 3. 选择 Azure 公共对等互连行，如下所示。
-	
-	![](./media/expressroute-howto-routing-portal-resource-manager/rpublic1.png)
-	
+    
+    ![](./media/expressroute-howto-routing-portal-resource-manager/rpublic1.png)
+    
 4. 配置公共对等互连。下图显示了一个配置示例。
 
-	![](./media/expressroute-howto-routing-portal-resource-manager/rpublic2.png)
+    ![](./media/expressroute-howto-routing-portal-resource-manager/rpublic2.png)
 
 5. 指定所有参数后，请保存配置。成功接受配置后，你将看到类似于下面示例的内容。
 
-	![](./media/expressroute-howto-routing-portal-resource-manager/rpublic3.png)
-	
+    ![](./media/expressroute-howto-routing-portal-resource-manager/rpublic3.png)
+    
 ### 查看 Azure 公共对等互连详细信息
 
 可以通过选择对等互连查看 Azure 公共对等互连的属性。

@@ -20,20 +20,20 @@ wacn.date: 11/03/2016
 1.	登录网站 FTP，打开 web.config 文件，默认情况下 web.config 文件位于 `site\wwwroot` 下.
 2.	在 web.config 文件中，修改 JAVA_OPTS 参数的值，比如: 
 
-		<environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true -Xms256m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m"/>
+        <environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true -Xms256m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m"/>
 
-	各参数的含义如下：
+    各参数的含义如下：
 
             -Xms<size>        			设置初始 Java 堆大小
             -Xmx<size>         			设置最大 Java 堆大小
             -XX:PermSize<size>  		设置初始 PermGen 大小
             -XX:MaxPermSize<size> 		设置最大 PermGen 大小
 
-	另外当日志中发现如下错误时，才需要考虑增加 MaxPermSize 的值
+    另外当日志中发现如下错误时，才需要考虑增加 MaxPermSize 的值
                java.lang.OutOfMemoryError: PermGen space
 
 3.	当网站所需要的总内存超过 2G 的时候，需要登录 Azure Portal，在配置页面下，将网站运行模式改成 64 位, 如图:
 
- 	![](./media/aog-web-app-java-memory-out/bit-change.png)
+     ![](./media/aog-web-app-java-memory-out/bit-change.png)
 
 4.	在 Azure Portal 上重启网站，使配置生效。

@@ -49,7 +49,7 @@ wacn.date: 01/04/2017
 
 1. 运行以下 Azure Powershell cmdlet：
 
-    	get-sbClientConfiguration
+        get-sbClientConfiguration
 
 2. 将连接字符串粘贴到示例的 App.config 文件中。
 

@@ -65,9 +65,9 @@ ms.author: cephalin
 -	Git Shell（与 [GitHub for Windows](https://windows.github.com/) 一起安装）- 可让你在相同的会话中运行 Git 和 PowerShell 命令
 -	最新的 [Azure PowerShell](https://github.com/Azure/azure-powershell/releases/download/0.9.4-June2015/azure-powershell.0.9.4.msi) 软件
 -	基本了解以下知识：
-	-	[Azure 资源管理器](../azure-resource-manager/resource-group-overview.md)模板部署（另请参阅[通过可预测的方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)）
-	-	[Git](http://git-scm.com/documentation)
-	-	[PowerShell](https://technet.microsoft.com/zh-cn/library/bb978526.aspx)
+    -	[Azure 资源管理器](../azure-resource-manager/resource-group-overview.md)模板部署（另请参阅[通过可预测的方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)）
+    -	[Git](http://git-scm.com/documentation)
+    -	[PowerShell](https://technet.microsoft.com/zh-cn/library/bb978526.aspx)
 
 > [!NOTE] 完成本教程需要有一个 Azure 帐户：
 > + 可以[注册一个 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/) — 获取可用来试用付费版 Azure 服务的信用额度，甚至在用完信用额度后，仍可以保留帐户和使用免费的 Azure 服务（如 Web 应用）。
@@ -80,47 +80,47 @@ ms.author: cephalin
 
 1.	创建 [ToDoApp](https://github.com/azure-appservice-samples/ToDoApp) 存储库的专属分叉。有关创建分叉的信息，请参阅[分叉存储库](https://help.github.com/articles/fork-a-repo/)。创建分叉后，可以在浏览器中查看它。
  
-	![](./media/app-service-agile-software-development/production-1-private-repo.png)
+    ![](./media/app-service-agile-software-development/production-1-private-repo.png)
 
 2.	打开 Git Shell 会话。如果你还没有 Git Shell，请立即安装 [GitHub for Windows](https://windows.github.com/)。
 
 3.	通过执行以下命令创建分叉的本地复本：
 
-		git clone https://github.com/<your_fork>/ToDoApp.git 
+        git clone https://github.com/<your_fork>/ToDoApp.git 
 
 4.	创建本地复本后，请导航到 *&lt;repository\_root>* \\ARMTemplates 并运行 deploy.ps1 脚本，如下所示：
 
-		.\deploy.ps1 -RepoUrl https://github.com/<your_fork>/todoapp.git
+        .\deploy.ps1 -RepoUrl https://github.com/<your_fork>/todoapp.git
 
-	>[!NOTE] 在使用这些模板之前，需要进行以下编辑，以适应 Azure 中国区的云环境：
-	> <p>1. 打开文件“ProdAndStage.json”，然后搜索“sourcecontrols”。
-	> <p>2. 在“properties”内添加 `"IsManualIntegration": true` 
-	> <p>3. 在“ProdAndStage.json”和“deploy.ps1”中，将“West US”或“East US”替换为“China East”或“China North”
-	> <p>
-	> <P>[这里](https://github.com/bbetstcw/ToDoApp)可以找到一个已经改好的版本。
-	> <p>Azure 中国区，我们无法通过新门户设置 GitHub 凭据。因此，连续部署仅适用于公共存储库。
+    >[!NOTE] 在使用这些模板之前，需要进行以下编辑，以适应 Azure 中国区的云环境：
+    > <p>1. 打开文件“ProdAndStage.json”，然后搜索“sourcecontrols”。
+    > <p>2. 在“properties”内添加 `"IsManualIntegration": true` 
+    > <p>3. 在“ProdAndStage.json”和“deploy.ps1”中，将“West US”或“East US”替换为“China East”或“China North”
+    > <p>
+    > <P>[这里](https://github.com/bbetstcw/ToDoApp)可以找到一个已经改好的版本。
+    > <p>Azure 中国区，我们无法通过新门户设置 GitHub 凭据。因此，连续部署仅适用于公共存储库。
 
 4.	出现提示时，键入所需的用户名和密码来访问数据库。
 
-	你应会看到各种 Azure 资源的设置进度。部署完成后，脚本将在浏览器中启动应用程序，并发出友好的提示音。
+    你应会看到各种 Azure 资源的设置进度。部署完成后，脚本将在浏览器中启动应用程序，并发出友好的提示音。
 
-	![](./media/app-service-agile-software-development/production-2-app-in-browser.png)
+    ![](./media/app-service-agile-software-development/production-2-app-in-browser.png)
  
-	>[!TIP] 查看 *&lt;repository\_root>* \\ARMTemplates\\Deploy.ps1，以了解它如何生成具有唯一 ID 的资源。可以使用相同的方法来创建相同部署的复本，而不必担心资源名称冲突。
+    >[!TIP] 查看 *&lt;repository\_root>* \\ARMTemplates\\Deploy.ps1，以了解它如何生成具有唯一 ID 的资源。可以使用相同的方法来创建相同部署的复本，而不必担心资源名称冲突。
  
 6.	返回 Git Shell 会话，运行：
 
-		.\swap -Name ToDoApp<unique_string>master
+        .\swap -Name ToDoApp<unique_string>master
 
-	![](./media/app-service-agile-software-development/production-4-swap.png)
+    ![](./media/app-service-agile-software-development/production-4-swap.png)
 
 7.	脚本完成后，请返回浏览到前端的地址 (http://ToDoApp *&lt;unique_string>* master.chinacloudsites.cn/)，以查看在生产环境中运行的应用程序。
  
 5.	登录到 [Azure 门户预览](https://portal.azure.cn/)并查看创建的内容。
 
-	应该可以在相同的资源组中看到两个 Web 应用，其中一个的名称具有 `Api` 后缀。当你查看资源组视图时，还会看到 SQL 数据库和服务器、App Service 计划以及 Web 应用的过渡槽。浏览不同的资源，并将它们与 *&lt;repository\_root>* \\ARMTemplates\\ProdAndStage.json 进行比较，以查看它们在模板中的配置方式。
+    应该可以在相同的资源组中看到两个 Web 应用，其中一个的名称具有 `Api` 后缀。当你查看资源组视图时，还会看到 SQL 数据库和服务器、App Service 计划以及 Web 应用的过渡槽。浏览不同的资源，并将它们与 *&lt;repository\_root>* \\ARMTemplates\\ProdAndStage.json 进行比较，以查看它们在模板中的配置方式。
 
-	![](./media/app-service-agile-software-development/production-3-resource-group-view.png)
+    ![](./media/app-service-agile-software-development/production-3-resource-group-view.png)
 
 你现在已经设置了生产环境。接下来，将要开始更新应用程序。
 
@@ -130,38 +130,38 @@ ms.author: cephalin
 
 1.	首先创建测试环境。在 Git Shell 会话中，运行以下命令来创建名为 **NewUpdate** 的新分支的环境。
 
-		git checkout -b NewUpdate
-		git push origin NewUpdate 
-		.\deploy.ps1 -TemplateFile .\Dev.json -RepoUrl https://github.com/<your_fork>/ToDoApp.git -Branch NewUpdate
+        git checkout -b NewUpdate
+        git push origin NewUpdate 
+        .\deploy.ps1 -TemplateFile .\Dev.json -RepoUrl https://github.com/<your_fork>/ToDoApp.git -Branch NewUpdate
 
-	>[!NOTE] 应该对“Dev.json”进行相同的修改，就像你对“ProdAndStage.json”所做的修改一样
-	> <p>
-	> <P>[这里](https://github.com/bbetstcw/ToDoApp)可以找到一个已经改好的版本。
+    >[!NOTE] 应该对“Dev.json”进行相同的修改，就像你对“ProdAndStage.json”所做的修改一样
+    > <p>
+    > <P>[这里](https://github.com/bbetstcw/ToDoApp)可以找到一个已经改好的版本。
 
 1.	出现提示时，键入所需的用户名和密码来访问数据库。
 
-	部署完成后，脚本将在浏览器中启动应用程序，并发出友好的提示音。这时，你已创建了带有自身测试环境的新分支。请花点时间来了解有关此测试环境的一些要点：
+    部署完成后，脚本将在浏览器中启动应用程序，并发出友好的提示音。这时，你已创建了带有自身测试环境的新分支。请花点时间来了解有关此测试环境的一些要点：
 
-	-	可以在任何 Azure 订阅中创建测试环境。这意味着，你可以分开管理生产环境和测试环境。
-	-	测试环境在 Azure 中实时运行。
-	-	测试环境类似于生产环境，差别在于过渡槽和缩放设置。因为这是 ProdandStage.json 与 Dev.json 之间的唯一差别，所以你可以得知这项信息。
-	-	你可以在其自身 App Service 计划与不同的价格层（例如**免费**）中管理测试环境。
-	-	删除这个测试环境就像删除资源组一样简单。[稍后](#delete)你将学习如何执行这项操作。
+    -	可以在任何 Azure 订阅中创建测试环境。这意味着，你可以分开管理生产环境和测试环境。
+    -	测试环境在 Azure 中实时运行。
+    -	测试环境类似于生产环境，差别在于过渡槽和缩放设置。因为这是 ProdandStage.json 与 Dev.json 之间的唯一差别，所以你可以得知这项信息。
+    -	你可以在其自身 App Service 计划与不同的价格层（例如**免费**）中管理测试环境。
+    -	删除这个测试环境就像删除资源组一样简单。[稍后](#delete)你将学习如何执行这项操作。
 
 2.	运行以下命令，以继续创建开发分支：
 
-		git checkout -b Dev
-		git push origin Dev
-		.\deploy.ps1 -TemplateFile .\Dev.json -RepoUrl https://github.com/<your_fork>/ToDoApp.git -Branch Dev
+        git checkout -b Dev
+        git push origin Dev
+        .\deploy.ps1 -TemplateFile .\Dev.json -RepoUrl https://github.com/<your_fork>/ToDoApp.git -Branch Dev
 
 3.	出现提示时，键入所需的用户名和密码来访问数据库。
 
-	请花点时间来了解有关此开发环境的一些要点：
+    请花点时间来了解有关此开发环境的一些要点：
 
-	-	开发环境的配置与测试环境相同，因为它是使用相同模板部署的。
-	-	在开发人员自己的 Azure 订阅中，可以创建每个开发环境，但分开管理测试环境。
-	-	开发环境在 Azure 中实时运行。
-	-	删除开发环境就像删除资源组一样简单。[稍后](#delete)你将学习如何执行这项操作。
+    -	开发环境的配置与测试环境相同，因为它是使用相同模板部署的。
+    -	在开发人员自己的 Azure 订阅中，可以创建每个开发环境，但分开管理测试环境。
+    -	开发环境在 Azure 中实时运行。
+    -	删除开发环境就像删除资源组一样简单。[稍后](#delete)你将学习如何执行这项操作。
 
 >[!NOTE] 有多位开发人员处理新的更新时，只要执行以下操作，每一位都可以轻松创建分支和专用开发环境：
 ><p>1.	在 GitHub 中创建其在存储库中的专属分叉（请参阅[分叉存储库](https://help.github.com/articles/fork-a-repo/)）。
@@ -184,33 +184,33 @@ ms.author: cephalin
 
 1.	确保处于本地存储库的 Dev 分支中。为此，请在 Git Shell 中运行以下命令：
 
-		git checkout Dev
+        git checkout Dev
 
 2.	通过将代码更改为使用 [Bootstrap](http://getbootstrap.com/components/) 列表，对应用的 UI 层进行简单更改。打开 *&lt;repository\_root>* \\src\\MultiChannelToDo.Web\\index.cshtml，进行下面突出显示的更改：
 
-	![](./media/app-service-agile-software-development/commit-1-changes.png)
+    ![](./media/app-service-agile-software-development/commit-1-changes.png)
 
-	>[!NOTE] 如果无法看到上述图像：
-	><p>
-	><p>- 在第 18 行，将 `check-list` 更改为 `list-group`。
-	><p>- 在第 19 行，将 `class="check-list-item"` 更改为 `class="list-group-item"`。
+    >[!NOTE] 如果无法看到上述图像：
+    ><p>
+    ><p>- 在第 18 行，将 `check-list` 更改为 `list-group`。
+    ><p>- 在第 19 行，将 `class="check-list-item"` 更改为 `class="list-group-item"`。
 
 3.	保存更改。返回到 Git Shell 并运行以下命令：
 
-		cd <repository_root>
-		git add .
-		git commit -m "changed to bootstrap style"
-		git push origin Dev
+        cd <repository_root>
+        git add .
+        git commit -m "changed to bootstrap style"
+        git push origin Dev
  
-	这些 git 命令与另一个源代码管理系统（例如 TFS）中的“签入你的代码”类似。运行 `git push` 时，新的提交将触发自动将代码推送到 Azure，然后重建应用程序，以反映开发环境中的更改。
+    这些 git 命令与另一个源代码管理系统（例如 TFS）中的“签入你的代码”类似。运行 `git push` 时，新的提交将触发自动将代码推送到 Azure，然后重建应用程序，以反映开发环境中的更改。
 
 4.	若要验证是否已将此代码推送到开发环境，请登录到[经典管理门户](https://www.windowsazure.cn)，转到开发环境的 Web 应用，查看“部署”页面。你应该可以在这里看到最新提交消息。
 
 5.	在这里，单击“浏览”以查看 Azure 中实时应用程序中的新更改。
 
-	![](./media/app-service-agile-software-development/commit-3-webapp-in-browser.png)
+    ![](./media/app-service-agile-software-development/commit-3-webapp-in-browser.png)
 
-	这对应用程序而言是相当小的更改。不过，多次对复杂 Web 应用程序进行更改通常会产生不利和非预期的负面影响。如果能够轻松测试实时构建版本中的每个提交，便可以在客户看到这些问题之前找出问题。
+    这对应用程序而言是相当小的更改。不过，多次对复杂 Web 应用程序进行更改通常会产生不利和非预期的负面影响。如果能够轻松测试实时构建版本中的每个提交，便可以在客户看到这些问题之前找出问题。
 
 到目前为止，你应已认识到，作为 **NewUpdate** 项目的开发人员，如何轻松自行创建开发环境，然后构建每项提交并测试每个构建版本。
 
@@ -226,10 +226,10 @@ ms.author: cephalin
 
 现在，将代码推送到 **NewUpdate** 分支。在 Git Shell 中运行以下命令：
 
-	git checkout NewUpdate
-	git pull origin NewUpdate
-	git merge Dev
-	git push origin NewUpdate
+    git checkout NewUpdate
+    git pull origin NewUpdate
+    git merge Dev
+    git push origin NewUpdate
 
 就这么简单！
 
@@ -241,19 +241,19 @@ ms.author: cephalin
 
 在 Git Shell 中运行以下命令：
 
-	git checkout master
-	git pull origin master
-	git merge NewUpdate
-	git push origin master
+    git checkout master
+    git pull origin master
+    git merge NewUpdate
+    git push origin master
 
 请记住，根据在 ProdandStage.json 中设置过渡和生产环境的方式，新代码将推送到“过渡”槽，并在该处运行。因此，如果你导航到过渡槽的 URL，则会看到新代码正在该处运行。为此，请在 Git Shell 中运行 `Show-AzureWebsite` cmdlet。
 
-	Show-AzureWebsite -Name ToDoApp<unique_string>master -Slot Staging
+    Show-AzureWebsite -Name ToDoApp<unique_string>master -Slot Staging
  
 现在，在过渡槽中验证更新之后，唯一要做的就是将它交换到生产环境。在 Git Shell 中，只要运行以下命令：
 
-	cd <repository_root>\ARMTemplates
-	.\swap.ps1 -Name ToDoApp<unique_string>master
+    cd <repository_root>\ARMTemplates
+    .\swap.ps1 -Name ToDoApp<unique_string>master
 
 祝贺你！ 新的更新已成功发布到生产 Web 应用程序。不仅如此，完成的方式也只是轻松地创建开发和测试环境，以及构建和测试每项提交。这些是敏捷软件开发的重要构建块。
 
@@ -261,12 +261,12 @@ ms.author: cephalin
 
 由于你特意将开发和测试环境构建为独立的资源组，因此可以很容易删除它们。若要删除你在本教程中创建的环境（GitHub 分支和 Azure 项目），只需在 Git Shell 中运行以下命令：
 
-	git branch -d Dev
-	git push origin :Dev
-	git branch -d NewUpdate
-	git push origin :NewUpdate
-	Remove-AzureRmResourceGroup -Name ToDoApp<unique_string>dev-group -Force -Verbose
-	Remove-AzureRmResourceGroup -Name ToDoApp<unique_string>newupdate-group -Force -Verbose
+    git branch -d Dev
+    git push origin :Dev
+    git branch -d NewUpdate
+    git push origin :NewUpdate
+    Remove-AzureRmResourceGroup -Name ToDoApp<unique_string>dev-group -Force -Verbose
+    Remove-AzureRmResourceGroup -Name ToDoApp<unique_string>newupdate-group -Force -Verbose
 
 ## 摘要 ##
 

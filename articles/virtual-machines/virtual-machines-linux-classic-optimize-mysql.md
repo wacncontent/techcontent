@@ -67,7 +67,7 @@ ms.author: ningk
 
 通过查看内核消息日志，可以看到虚拟机中添加的驱动器。例如，若要在 Ubuntu 上查看，请使用以下命令：
 
-	sudo grep SCSI /var/log/dmesg
+    sudo grep SCSI /var/log/dmesg
 
 ####步骤 2：创建具有更多磁盘的 RAID
 有关详细的 RAID 设置步骤，请参照本文：
@@ -78,26 +78,26 @@ ms.author: ningk
 
 若要在 Debian、Ubuntu 或 Linux Mint 上安装 XFS，请使用以下命令：
 
-	apt-get -y install xfsprogs  
+    apt-get -y install xfsprogs  
 
 若要在 Fedora、CentOS 或 RHEL 上安装 XFS，请使用以下命令：
 
-	yum -y install xfsprogs  xfsdump
+    yum -y install xfsprogs  xfsdump
 
 ####步骤 3：设置新的存储路径
 请使用以下命令：
 
-	root@mysqlnode1:~# mkdir -p /RAID0/mysql
+    root@mysqlnode1:~# mkdir -p /RAID0/mysql
 
 ####步骤 4：将原始数据复制到新的存储路径
 请使用以下命令：
 
-	root@mysqlnode1:~# cp -rp /var/lib/mysql/* /RAID0/mysql/
+    root@mysqlnode1:~# cp -rp /var/lib/mysql/* /RAID0/mysql/
 
 ####步骤 5：修改权限以便 MySQL 访问（读取和写入）数据磁盘
 请使用以下命令：
 
-	root@mysqlnode1:~# chown -R mysql.mysql /RAID0/mysql && chmod -R 755 /RAID0/mysql
+    root@mysqlnode1:~# chown -R mysql.mysql /RAID0/mysql && chmod -R 755 /RAID0/mysql
 
 ##调整磁盘 I/O 计划算法
 Linux 实现了四种类型的 I/O 计划算法：
@@ -120,36 +120,36 @@ Linux 实现了四种类型的 I/O 计划算法：
 ###步骤 1.查看当前的 I/O 计划程序
 请使用以下命令：
 
-	root@mysqlnode1:~# cat /sys/block/sda/queue/scheduler
+    root@mysqlnode1:~# cat /sys/block/sda/queue/scheduler
 
 你将看到以下输出，指示当前的计划程序。
 
-	noop [deadline] cfq
+    noop [deadline] cfq
 
 ###步骤 2.更改当前设备 (/dev/sda) 的 I/O 计划算法
 使用以下命令：
 
-	azureuser@mysqlnode1:~$ sudo su -
-	root@mysqlnode1:~# echo "noop" >/sys/block/sda/queue/scheduler
-	root@mysqlnode1:~# sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"/g' /etc/default/grub
-	root@mysqlnode1:~# update-grub
+    azureuser@mysqlnode1:~$ sudo su -
+    root@mysqlnode1:~# echo "noop" >/sys/block/sda/queue/scheduler
+    root@mysqlnode1:~# sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"/g' /etc/default/grub
+    root@mysqlnode1:~# update-grub
 
 >[!NOTE]对 /dev/sda 单独进行此设置毫无用处。需对数据库所在的所有数据磁盘进行设置。
 
 你应该会看到以下输出，指示已成功重新生成 grub.cfg 并且默认计划程序已更新为 NOOP。
 
-	Generating grub configuration file ...
-	Found linux image: /boot/vmlinuz-3.13.0-34-generic
-	Found initrd image: /boot/initrd.img-3.13.0-34-generic
-	Found linux image: /boot/vmlinuz-3.13.0-32-generic
-	Found initrd image: /boot/initrd.img-3.13.0-32-generic
-	Found memtest86+ image: /memtest86+.elf
-	Found memtest86+ image: /memtest86+.bin
-	done
+    Generating grub configuration file ...
+    Found linux image: /boot/vmlinuz-3.13.0-34-generic
+    Found initrd image: /boot/initrd.img-3.13.0-34-generic
+    Found linux image: /boot/vmlinuz-3.13.0-32-generic
+    Found initrd image: /boot/initrd.img-3.13.0-32-generic
+    Found memtest86+ image: /memtest86+.elf
+    Found memtest86+ image: /memtest86+.bin
+    done
 
 对于 Redhat 分发系列，只需以下命令：
 
-	echo 'echo noop >/sys/block/sda/queue/scheduler' >> /etc/rc.local
+    echo 'echo noop >/sys/block/sda/queue/scheduler' >> /etc/rc.local
 
 ##配置系统文件操作设置
 最佳做法之一是禁用文件系统上的 atime 日志记录功能。Atime 指最后一次文件访问的时间。无论何时访问文件，文件系统都会在日志中记录时间戳。但是，很少使用此信息。如果不需要，可以禁用它，这样将减少总体磁盘访问时间。
@@ -158,15 +158,15 @@ Linux 实现了四种类型的 I/O 计划算法：
 
 例如，编辑 vim /etc/fstab 文件，并按下面所示添加 noatime。
 
-	# CLOUD_IMG: This file was created/modified by the Cloud Image build process
-	UUID=3cc98c06-d649-432d-81df-6dcd2a584d41       /        ext4   defaults,discard        0 0
-	#Add the “noatime” option below to disable atime logging
-	UUID="431b1e78-8226-43ec-9460-514a9adf060e"     /RAID0   xfs   defaults,nobootwait, noatime 0 0
-	/dev/sdb1       /mnt    auto    defaults,nobootwait,comment=cloudconfig 0       2
+    # CLOUD_IMG: This file was created/modified by the Cloud Image build process
+    UUID=3cc98c06-d649-432d-81df-6dcd2a584d41       /        ext4   defaults,discard        0 0
+    #Add the “noatime” option below to disable atime logging
+    UUID="431b1e78-8226-43ec-9460-514a9adf060e"     /RAID0   xfs   defaults,nobootwait, noatime 0 0
+    /dev/sdb1       /mnt    auto    defaults,nobootwait,comment=cloudconfig 0       2
 
 然后，使用以下命令重新装载文件系统：
 
-	mount -o remount /RAID0
+    mount -o remount /RAID0
 
 测试修改后的结果。请注意，当你修改测试文件时，系统不会更新访问时间。
 
@@ -184,22 +184,22 @@ MySQL 是高并发数据库。对于 Linux，默认的并发句柄数量是 1024
 ###步骤 1：修改 limits.conf 文件
 在 /etc/security/limits.conf 文件中添加以下四行，以增加允许的最大并发句柄数。请注意，65536 是系统可以支持的最大数量。
 
-	* soft nofile 65536
-	* hard nofile 65536
-	* soft nproc 65536
-	* hard nproc 65536
+    * soft nofile 65536
+    * hard nofile 65536
+    * soft nproc 65536
+    * hard nproc 65536
 
 ###步骤 2：更新系统的新限制
 运行以下命令：
 
-	ulimit -SHn 65536
-	ulimit -SHu 65536
+    ulimit -SHn 65536
+    ulimit -SHu 65536
 
 ###步骤 3：确保在启动时更新限制
 在 /etc/rc.local 文件中放入以下启动命令，以便其在每次启动时生效。
 
-	echo “ulimit -SHn 65536” >>/etc/rc.local
-	echo “ulimit -SHu 65536” >>/etc/rc.local
+    echo “ulimit -SHn 65536” >>/etc/rc.local
+    echo “ulimit -SHu 65536” >>/etc/rc.local
 
 ##MySQL 数据库优化
 可以在 Azure 上使用与在本地计算机上相同的性能优化策略来配置 MySQL。
@@ -230,12 +230,12 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 ###步骤 1：通过在末尾添加以下行来修改 my.cnf 文件   
 
-	long_query_time = 2
-	slow_query_log = 1
-	slow_query_log_file = /RAID0/mysql/mysql-slow.log
+    long_query_time = 2
+    slow_query_log = 1
+    slow_query_log_file = /RAID0/mysql/mysql-slow.log
 
 ###步骤 2：重新启动 mysql 服务器
-	service  mysql  restart
+    service  mysql  restart
 
 ###步骤 3：使用“show”命令检查该设置是否生效
 
@@ -256,7 +256,7 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 **测试命令：**
 
-	fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=5G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite
+    fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=5G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite
 
 >AZURE。请注意：此测试的工作负荷使用 64 个线程，并尝试达到 RAID 的上限。
 
@@ -269,14 +269,14 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 **测试命令：**
 
-	mysqlslap -p0ps.123 --concurrency=2 --iterations=1 --number-int-cols=10 --number-char-cols=10 -a --auto-generate-sql-guid-primary --number-of-queries=10000 --auto-generate-sql-load-type=write –engine=innodb
+    mysqlslap -p0ps.123 --concurrency=2 --iterations=1 --number-int-cols=10 --number-char-cols=10 -a --auto-generate-sql-guid-primary --number-of-queries=10000 --auto-generate-sql-load-type=write –engine=innodb
 
 **不同 RAID 级别的 MySQL 性能 (OLTP) 比较**  
 ![][12]
 
 **测试命令：**
 
-	time sysbench --test=oltp --db-driver=mysql --mysql-user=root --mysql-password=0ps.123  --mysql-table-engine=innodb --mysql-host=127.0.0.1 --mysql-port=3306 --mysql-socket=/var/run/mysqld/mysqld.sock --mysql-db=test --oltp-table-size=1000000 prepare
+    time sysbench --test=oltp --db-driver=mysql --mysql-user=root --mysql-password=0ps.123  --mysql-table-engine=innodb --mysql-host=127.0.0.1 --mysql-port=3306 --mysql-socket=/var/run/mysqld/mysqld.sock --mysql-db=test --oltp-table-size=1000000 prepare
 
 <a name="AppendixC"></a>附录 C：   
 **不同区块大小的磁盘性能 (IOPS) 比较**  
@@ -286,8 +286,8 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 **测试命令：**
 
-	fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=30G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite
-	fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=1G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite  
+    fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=30G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite
+    fio -filename=/path/test -iodepth=64 -ioengine=libaio -direct=1 -rw=randwrite -bs=4k -size=1G -numjobs=64 -runtime=30 -group_reporting -name=test-randwrite  
 
 请注意，用于此测试的文件大小分别为 30GB 和 1GB，并且使用的是 RAID 0（4 个磁盘）XFS 文件系统。
 
@@ -299,7 +299,7 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 **测试命令：**
 
-	mysqlslap -p0ps.123 --concurrency=2 --iterations=1 --number-int-cols=10 --number-char-cols=10 -a --auto-generate-sql-guid-primary --number-of-queries=10000 --auto-generate-sql-load-type=write –engine=innodb,misam
+    mysqlslap -p0ps.123 --concurrency=2 --iterations=1 --number-int-cols=10 --number-char-cols=10 -a --auto-generate-sql-guid-primary --number-of-queries=10000 --auto-generate-sql-load-type=write –engine=innodb,misam
 
 **默认值和优化值的配置设置如下所示：**
 

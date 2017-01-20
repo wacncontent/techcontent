@@ -219,18 +219,18 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 
 下面是使用 X.509 客户端证书注册设备的示例 C# 代码片段：
 
-		var device = new Device(deviceId)
-		{
-		  Authentication = new AuthenticationMechanism()
-		  {
-		    X509Thumbprint = new X509Thumbprint()
-		    {
-		      PrimaryThumbprint = "921BC9694ADEB8929D4F7FE4B9A3A6DE58B0790B"
-		    }
-		  }
-		};
-		RegistryManager registryManager = RegistryManager.CreateFromConnectionString(deviceGatewayConnectionString);
-		await registryManager.AddDeviceAsync(device);
+        var device = new Device(deviceId)
+        {
+          Authentication = new AuthenticationMechanism()
+          {
+            X509Thumbprint = new X509Thumbprint()
+            {
+              PrimaryThumbprint = "921BC9694ADEB8929D4F7FE4B9A3A6DE58B0790B"
+            }
+          }
+        };
+        RegistryManager registryManager = RegistryManager.CreateFromConnectionString(deviceGatewayConnectionString);
+        await registryManager.AddDeviceAsync(device);
 
 ## 在运行时操作期间使用 X.509 客户端证书
 
@@ -242,9 +242,9 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
 
 下面是示例代码片段：
 
-		var authMethod = new DeviceAuthenticationWithX509Certificate("<device id>", x509Certificate);
+        var authMethod = new DeviceAuthenticationWithX509Certificate("<device id>", x509Certificate);
 
-		var deviceClient = DeviceClient.Create("<IotHub DNS HostName>", authMethod);
+        var deviceClient = DeviceClient.Create("<IotHub DNS HostName>", authMethod);
 
 [lnk-apis-sdks]: https://github.com/Azure/azure-iot-sdks/blob/master/readme.md
 [lnk-guidance-security]: ./iot-hub-guidance.md#customauth

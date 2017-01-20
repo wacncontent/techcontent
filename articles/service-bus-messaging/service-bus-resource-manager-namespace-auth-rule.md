@@ -52,85 +52,85 @@ wacn.date: 12/26/2016
 
 要创建的服务总线命名空间的名称。
 
-		"serviceBusNamespaceName": {
-		"type": "string"
-		}
+        "serviceBusNamespaceName": {
+        "type": "string"
+        }
 
 ### namespaceAuthorizationRuleName 
 
 命名空间的授权规则的名称。
 
-		"namespaceAuthorizationRuleName ": {
-		"type": "string"
-		}
+        "namespaceAuthorizationRuleName ": {
+        "type": "string"
+        }
 
 ### serviceBusQueueName
 
 服务总线命名空间中的队列的名称。
 
-		"serviceBusQueueName": {
-		"type": "string"
-		}
+        "serviceBusQueueName": {
+        "type": "string"
+        }
 
 ### serviceBusApiVersion
 
 模板的服务总线 API 版本。
 
-		"serviceBusApiVersion": {
-		"type": "string"
-		}
+        "serviceBusApiVersion": {
+        "type": "string"
+        }
 ## 要部署的资源
 
 创建**消息传送**类型的标准服务总线命名空间，以及命名空间和实体的服务总线授权规则。
 
-		"resources": [
-		        {
-		            "apiVersion": "[variables('sbVersion')]",
-		            "name": "[parameters('serviceBusNamespaceName')]",
-		            "type": "Microsoft.ServiceBus/namespaces",
-		            "location": "[variables('location')]",
-		            "kind": "Messaging",
-		            "sku": {
-		                "name": "StandardSku",
-		                "tier": "Standard"
-		            },
-		            "resources": [
-		                {
-		                    "apiVersion": "[variables('sbVersion')]",
-		                    "name": "[parameters('serviceBusQueueName')]",
-		                    "type": "Queues",
-		                    "dependsOn": [
-		                        "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
-		                    ],
-		                    "properties": {
-		                        "path": "[parameters('serviceBusQueueName')]"
-		                    },
-		                    "resources": [
-		                        {
-		                            "apiVersion": "[variables('sbVersion')]",
-		                            "name": "[parameters('queueAuthorizationRuleName')]",
-		                            "type": "authorizationRules",
-		                            "dependsOn": [
-		                                "[parameters('serviceBusQueueName')]"
-		                            ],
-		                            "properties": {
-		                                "Rights": ["Listen"]
-		                            }
-		                        }
-		                    ]
-		                }
-		            ]
-		        }, {
-		            "apiVersion": "[variables('sbVersion')]",
-		            "name": "[variables('namespaceAuthRuleName')]",
-		            "type": "Microsoft.ServiceBus/namespaces/authorizationRules",
-		            "dependsOn": ["[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"],
-		            "location": "[resourceGroup().location]",
-		            "properties": {
-		                "Rights": ["Send"]
-		            }
-		        }
-		    ]
+        "resources": [
+                {
+                    "apiVersion": "[variables('sbVersion')]",
+                    "name": "[parameters('serviceBusNamespaceName')]",
+                    "type": "Microsoft.ServiceBus/namespaces",
+                    "location": "[variables('location')]",
+                    "kind": "Messaging",
+                    "sku": {
+                        "name": "StandardSku",
+                        "tier": "Standard"
+                    },
+                    "resources": [
+                        {
+                            "apiVersion": "[variables('sbVersion')]",
+                            "name": "[parameters('serviceBusQueueName')]",
+                            "type": "Queues",
+                            "dependsOn": [
+                                "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
+                            ],
+                            "properties": {
+                                "path": "[parameters('serviceBusQueueName')]"
+                            },
+                            "resources": [
+                                {
+                                    "apiVersion": "[variables('sbVersion')]",
+                                    "name": "[parameters('queueAuthorizationRuleName')]",
+                                    "type": "authorizationRules",
+                                    "dependsOn": [
+                                        "[parameters('serviceBusQueueName')]"
+                                    ],
+                                    "properties": {
+                                        "Rights": ["Listen"]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }, {
+                    "apiVersion": "[variables('sbVersion')]",
+                    "name": "[variables('namespaceAuthRuleName')]",
+                    "type": "Microsoft.ServiceBus/namespaces/authorizationRules",
+                    "dependsOn": ["[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"],
+                    "location": "[resourceGroup().location]",
+                    "properties": {
+                        "Rights": ["Send"]
+                    }
+                }
+            ]
 
 ## 运行部署的命令
 
@@ -138,13 +138,13 @@ wacn.date: 12/26/2016
 
 ### PowerShell
 
-		New-AzureRmResourceGroupDeployment -ResourceGroupName <resource-group-name> -TemplateFile <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/301-servicebus-create-authrule-namespace-and-queue/azuredeploy.json>
+        New-AzureRmResourceGroupDeployment -ResourceGroupName <resource-group-name> -TemplateFile <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/301-servicebus-create-authrule-namespace-and-queue/azuredeploy.json>
 
 ## Azure CLI
 
-		azure config mode arm
+        azure config mode arm
 
-		azure group deployment create <my-resource-group> <my-deployment-name> --template-uri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/301-servicebus-create-authrule-namespace-and-queue/azuredeploy.json>
+        azure group deployment create <my-resource-group> <my-deployment-name> --template-uri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/301-servicebus-create-authrule-namespace-and-queue/azuredeploy.json>
 
 ## 后续步骤
 

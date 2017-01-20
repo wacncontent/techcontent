@@ -43,9 +43,9 @@ ms.author: rortloff;barbkess;sonyama
 
 若要创建 SQL Server 验证的用户，请使用服务器管理员登录名连接到服务器上的 **master** 数据库，并创建新的服务器登录名。另外，最好是在针对 Azure SQL 数据仓库用户的 master 数据库中创建一个用户。在 master 中创建用户以后，用户即可使用 SSMS 之类的工具登录，不需指定数据库名称。此外，用户还可以使用对象资源管理器查看 SQL Server 上的所有数据库。
 
-	-- Connect to master database and create a login
-	CREATE LOGIN ApplicationLogin WITH PASSWORD = 'strong_password';
-	CREATE USER ApplicationUser FOR LOGIN ApplicationLogin;
+    -- Connect to master database and create a login
+    CREATE LOGIN ApplicationLogin WITH PASSWORD = 'strong_password';
+    CREATE USER ApplicationUser FOR LOGIN ApplicationLogin;
 
 然后，使用服务器管理员登录名连接到“SQL 数据仓库数据库”，并基于刚刚创建的服务器登录名创建数据库用户。
 

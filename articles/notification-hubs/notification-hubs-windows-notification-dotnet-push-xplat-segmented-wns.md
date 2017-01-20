@@ -61,14 +61,14 @@ ms.author: wesmc
 
 2. 右键单击“共享”项目，添加名为 **Notifications** 的新类，向类定义添加 **public** 修饰符，然后将以下 **using** 语句添加到新的代码文件：
 
-		using Windows.Networking.PushNotifications;
-		using Microsoft.WindowsAzure.Messaging;
-		using Windows.Storage;
-		using System.Threading.Tasks;
+        using Windows.Networking.PushNotifications;
+        using Microsoft.WindowsAzure.Messaging;
+        using Windows.Storage;
+        using System.Threading.Tasks;
 
 3. 将以下代码添加到新的 **Notifications** 类：
 
-		private NotificationHub hub;
+        private NotificationHub hub;
 
         public Notifications(string hubName, string listenConnectionString)
         {
@@ -81,7 +81,7 @@ ms.author: wesmc
             return await SubscribeToCategories(categories);
         }
 
-		public IEnumerable<string> RetrieveCategories()
+        public IEnumerable<string> RetrieveCategories()
         {
             var categories = (string) ApplicationData.Current.LocalSettings.Values["categories"];
             return categories != null ? categories.Split(','): new string[0];
@@ -97,40 +97,40 @@ ms.author: wesmc
             }
 
             // Using a template registration to support notifications across platforms.
-			// Any template notifications that contain messageParam and a corresponding tag expression
-			// will be delivered for this registration.
+            // Any template notifications that contain messageParam and a corresponding tag expression
+            // will be delivered for this registration.
 
             const string templateBodyWNS = "<toast><visual><binding template="ToastText01"><text id="1">$(messageParam)</text></binding></visual></toast>";
 
             return await hub.RegisterTemplateAsync(channel.Uri, templateBodyWNS, "simpleWNSTemplateExample",
-					categories);
+                    categories);
         }
 
     此类使用本地存储区存储此设备必须接收的新闻类别。请注意，我们没有调用 *RegisterNativeAsync* 方法，而是调用了 *RegisterTemplateAsync*，以使用模板注册来注册类别。
-	
-	我们还提供模板的名称（“simpleWNSTemplateExample”），因为我们可能要注册多个模板（例如一个用于 toast 通知，一个用于磁贴），需要命名它们以便可以更新或删除它们。
+    
+    我们还提供模板的名称（“simpleWNSTemplateExample”），因为我们可能要注册多个模板（例如一个用于 toast 通知，一个用于磁贴），需要命名它们以便可以更新或删除它们。
 
-	请注意，如果一个设备使用同一标签注册多个模板，针对该标签的传入消息将导致多个通知发送到设备（每个通知对应一个模板）。当同一逻辑消息必须导致多个可视通知时，此行为很有用，例如在 Windows 应用商店应用程序显示徽章和 toast。
+    请注意，如果一个设备使用同一标签注册多个模板，针对该标签的传入消息将导致多个通知发送到设备（每个通知对应一个模板）。当同一逻辑消息必须导致多个可视通知时，此行为很有用，例如在 Windows 应用商店应用程序显示徽章和 toast。
 
-	有关模板的详细信息，请参阅[模板](./notification-hubs-templates-cross-platform-push-messages.md)。
+    有关模板的详细信息，请参阅[模板](./notification-hubs-templates-cross-platform-push-messages.md)。
 
 4. 在 App.xaml.cs 项目文件中，将以下属性添加到 **App** 类：
 
-		public Notifications notifications = new Notifications("<hub name>", "<connection string with listen access>");
+        public Notifications notifications = new Notifications("<hub name>", "<connection string with listen access>");
 
-	此属性用于创建和访问 **Notifications** 实例。
+    此属性用于创建和访问 **Notifications** 实例。
 
-	在上面的代码中，将 `<hub name>` 和 `<connection string with listen access>` 占位符替换为你的通知中心的名称和你之前获取的 *DefaultListenSharedAccessSignature* 的连接字符串。
+    在上面的代码中，将 `<hub name>` 和 `<connection string with listen access>` 占位符替换为你的通知中心的名称和你之前获取的 *DefaultListenSharedAccessSignature* 的连接字符串。
 
-	> [!NOTE] 由于使用客户端应用程序分发的凭据通常是不安全的，你只应使用客户端应用程序分发具有侦听访问权限的密钥。侦听访问权限允许应用程序注册通知，但是无法修改现有注册，也无法发送通知。在受保护的后端服务中使用完全访问权限密钥，以便发送通知和更改现有注册。
+    > [!NOTE] 由于使用客户端应用程序分发的凭据通常是不安全的，你只应使用客户端应用程序分发具有侦听访问权限的密钥。侦听访问权限允许应用程序注册通知，但是无法修改现有注册，也无法发送通知。在受保护的后端服务中使用完全访问权限密钥，以便发送通知和更改现有注册。
 
 5. 在 MainPage.xaml.cs 中，添加以下行：
 
-		using Windows.UI.Popups;
+        using Windows.UI.Popups;
 
 6. 在 MainPage.xaml.cs 项目文件中，添加以下方法：
 
-		private async void SubscribeButton_Click(object sender, RoutedEventArgs e)
+        private async void SubscribeButton_Click(object sender, RoutedEventArgs e)
         {
             var categories = new HashSet<string>();
             if (WorldToggle.IsOn) categories.Add("World");
@@ -147,7 +147,7 @@ ms.author: wesmc
             await dialog.ShowAsync();
         }
 
-	此方法创建一个类别列表并使用 **Notifications** 类将该列表存储在本地存储区中，将相应的标签注册到你的通知中心。更改类别时，使用新类别重新创建注册。
+    此方法创建一个类别列表并使用 **Notifications** 类将该列表存储在本地存储区中，将相应的标签注册到你的通知中心。更改类别时，使用新类别重新创建注册。
 
 你的应用程序现在可以将一组类别存储在设备的本地存储区中了，每当用户更改所选类别时，会将这些类别注册到通知中心。
 
@@ -159,14 +159,14 @@ ms.author: wesmc
 
 1. 打开 App.xaml.cs 文件，并将 **InitNotificationsAsync** 方法更新为使用 `notifications` 类来基于类别订阅。
 
-		// *** Remove or comment out these lines *** 
-	    //var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-	    //var hub = new NotificationHub("your hub name", "your listen connection string");
-	    //var result = await hub.RegisterNativeAsync(channel.Uri);
-	
-	    var result = await notifications.SubscribeToCategories();
+        // *** Remove or comment out these lines *** 
+        //var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+        //var hub = new NotificationHub("your hub name", "your listen connection string");
+        //var result = await hub.RegisterNativeAsync(channel.Uri);
+    
+        var result = await notifications.SubscribeToCategories();
 
-	这确保每次应用程序启动时，它从本地存储区检索类别并请求注册这些类别。**InitNotificationsAsync** 方法是在学习[通知中心入门][get-started]教程过程中创建的。
+    这确保每次应用程序启动时，它从本地存储区检索类别并请求注册这些类别。**InitNotificationsAsync** 方法是在学习[通知中心入门][get-started]教程过程中创建的。
 
 3. 在 MainPage.xaml.cs 项目文件的 *OnNavigatedTo* 方法中添加以下代码：
 
@@ -182,7 +182,7 @@ ms.author: wesmc
             if (categories.Contains("Sports")) SportsToggle.IsOn = true;
         }
 
-	这基于以前保存的类别状态更新主页。
+    这基于以前保存的类别状态更新主页。
 
 应用程序现在已完成，可以在设备的本地存储区中存储一组类别了，每当用户更改所选类别时将使用这些类别注册到通知中心。接下来，我们将定义一个后端，它可将类别通知发送到此应用程序。
 
@@ -194,25 +194,25 @@ ms.author: wesmc
 
 1. 在 Visual Studio 中，按 F5 编译并启动应用程序。
 
-	![][1]
+    ![][1]
 
-	请注意，应用程序 UI 提供了一组开关，你可以使用它们选择要订阅的类别。
+    请注意，应用程序 UI 提供了一组开关，你可以使用它们选择要订阅的类别。
 
 2. 启用一个或多个类别开关，然后单击“订阅”。
 
-	应用程序将所选类别转换为标签并针对所选标签从通知中心请求注册新设备。返回注册的类别并显示在对话框中。
+    应用程序将所选类别转换为标签并针对所选标签从通知中心请求注册新设备。返回注册的类别并显示在对话框中。
 
-	![][19]
+    ![][19]
 
 4. 使用以下方式之一从后端发送新通知：
 
-	+ **控制台应用：**启动控制台应用。
+    + **控制台应用：**启动控制台应用。
 
-	+ **Java/PHP：**运行你的应用/脚本。
+    + **Java/PHP：**运行你的应用/脚本。
 
-	所选类别的通知作为 toast 通知显示。
+    所选类别的通知作为 toast 通知显示。
 
-	![][14]
+    ![][14]
 
 ##后续步骤
 
@@ -220,7 +220,7 @@ ms.author: wesmc
 
 + [使用通知中心广播本地化的突发新闻]
 
-	了解如何扩展突发新闻应用程序以允许发送本地化的通知。
+    了解如何扩展突发新闻应用程序以允许发送本地化的通知。
 
 <!-- Anchors. -->
 [Add category selection to the app]: #adding-categories

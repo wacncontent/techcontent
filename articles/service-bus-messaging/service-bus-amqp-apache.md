@@ -40,56 +40,56 @@ wacn.date: 01/09/2017
 
 2.  安装必备组件包：
 
-		# required dependencies 
-		yum install gcc cmake libuuid-devel
-		
-		# dependencies needed for ssl support
-		yum install openssl-devel
-		
-		# dependencies needed for bindings
-		yum install swig python-devel ruby-devel php-devel java-1.6.0-openjdk
-		
-		# dependencies needed for python docs
-		yum install epydoc
+        # required dependencies 
+        yum install gcc cmake libuuid-devel
+        
+        # dependencies needed for ssl support
+        yum install openssl-devel
+        
+        # dependencies needed for bindings
+        yum install swig python-devel ruby-devel php-devel java-1.6.0-openjdk
+        
+        # dependencies needed for python docs
+        yum install epydoc
 
 1.  下载 Proton 库：
 
-	```
-	[azureuser@this-user ~]$ wget http://apache.panu.it/qpid/proton/0.9/qpid-proton-0.9.tar.gz
-	--2016-04-17 14:45:03--  http://apache.panu.it/qpid/proton/0.9/qpid-proton-0.9.tar.gz
-	Resolving apache.panu.it (apache.panu.it)... 81.208.22.71
-	Connecting to apache.panu.it (apache.panu.it)|81.208.22.71|:80... connected.
-	HTTP request sent, awaiting response... 200 OK
-	Length: 868226 (848K) [application/x-gzip]
-	Saving to: ‘qpid-proton-0.9.tar.gz’
-	
-	qpid-proton-0.9.tar.gz                               
-	
-	100%[====================================================================================================================>] 847.88K   102KB/s    in 8.4s    
-	
-	2016-04-17 14:45:12 (101 KB/s) - ‘qpid-proton-0.9.tar.gz’ saved [868226/868226]
-	```
+    ```
+    [azureuser@this-user ~]$ wget http://apache.panu.it/qpid/proton/0.9/qpid-proton-0.9.tar.gz
+    --2016-04-17 14:45:03--  http://apache.panu.it/qpid/proton/0.9/qpid-proton-0.9.tar.gz
+    Resolving apache.panu.it (apache.panu.it)... 81.208.22.71
+    Connecting to apache.panu.it (apache.panu.it)|81.208.22.71|:80... connected.
+    HTTP request sent, awaiting response... 200 OK
+    Length: 868226 (848K) [application/x-gzip]
+    Saving to: ‘qpid-proton-0.9.tar.gz’
+    
+    qpid-proton-0.9.tar.gz                               
+    
+    100%[====================================================================================================================>] 847.88K   102KB/s    in 8.4s    
+    
+    2016-04-17 14:45:12 (101 KB/s) - ‘qpid-proton-0.9.tar.gz’ saved [868226/868226]
+    ```
 
 1.  从分发存档中提取 Proton 代码：
 
-		tar xvfz qpid-proton-0.9.tar.gz
+        tar xvfz qpid-proton-0.9.tar.gz
 
 1.  使用从自述文件中获取的以下步骤生成并安装代码：
 
-		From the directory where you found this README file:	
-		
-		mkdir build cd build
-				
-		# Set the install prefix. You may need to adjust depending on your		
-		# system.		
-		cmake -DCMAKE\_INSTALL\_PREFIX=/usr ..
-				
-		# Omit the docs target if you do not wish to build or install		
-		# documentation.		
-		make all docs
-				
-		# Note that this step will require root privileges.		
-		make install
+        From the directory where you found this README file:	
+        
+        mkdir build cd build
+                
+        # Set the install prefix. You may need to adjust depending on your		
+        # system.		
+        cmake -DCMAKE\_INSTALL\_PREFIX=/usr ..
+                
+        # Omit the docs target if you do not wish to build or install		
+        # documentation.		
+        make all docs
+                
+        # Note that this step will require root privileges.		
+        make install
 
 执行这些步骤后，Proton 将安装在计算机上并可供使用。
 

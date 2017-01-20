@@ -37,7 +37,7 @@ ms.author: ahmedelnably
 
 若要创建新的 App Service 计划，我们可以按以下示例中所示使用 New-AzureRmAppServicePlan 命令
 
-	New-AzureRmAppServicePlan -Location "China East" -ResourceGroupName DestinationAzureResourceGroup -Name NewAppServicePlan -Tier Premium
+    New-AzureRmAppServicePlan -Location "China East" -ResourceGroupName DestinationAzureResourceGroup -Name NewAppServicePlan -Tier Premium
 
 使用 New-AzureRmWebApp 命令，我们可以在中国北部区域创建新的 Web 应用，并将它连接到现有的高级层 App Service 计划，而且我们可以使用相同的资源组作为源 Web 应用，或定义新的资源组，如下所示：
 
@@ -81,7 +81,7 @@ ms.author: ahmedelnably
 
 获取流量管理器 ID 之后，根据以下演示在新 Web 应用中创建源 Web 应用的克隆，同时将它们添加到现有的流量管理器配置文件：
 
-	$destapp = New-AzureRmWebApp -ResourceGroupName <Resource group name> -Name dest-webapp -Location "China East" -AppServicePlan DestinationAppServicePlan -SourceWebApp $srcapp -TrafficManagerProfileId $TMProfileID
+    $destapp = New-AzureRmWebApp -ResourceGroupName <Resource group name> -Name dest-webapp -Location "China East" -AppServicePlan DestinationAppServicePlan -SourceWebApp $srcapp -TrafficManagerProfileId $TMProfileID
 
 ## 当前限制 ##
 

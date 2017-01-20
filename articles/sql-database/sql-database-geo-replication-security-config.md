@@ -52,33 +52,33 @@ ms.author: carlrab
 
 只有服务器管理员或 **LoginManager** 服务器角色的成员，才能使用以下 SELECT 语句确定源服务器上的登录名。
 
-	SELECT [name], [sid] 
-	FROM [sys].[sql_logins] 
-	WHERE [type_desc] = 'SQL_Login'
+    SELECT [name], [sid] 
+    FROM [sys].[sql_logins] 
+    WHERE [type_desc] = 'SQL_Login'
 
 只有 db\_owner 数据库角色的成员、dbo 用户或服务器管理员，才能确定主数据库中的所有数据库用户主体。
 
-	SELECT [name], [sid]
-	FROM [sys].[database_principals]
-	WHERE [type_desc] = 'SQL_USER'
+    SELECT [name], [sid]
+    FROM [sys].[database_principals]
+    WHERE [type_desc] = 'SQL_USER'
 
 #### 2\.查找步骤 1 中确定的登录名的 SID：
 通过将前一部分中所述的查询输出进行比较以及对 SID 进行匹配，可以将服务器登录名映射到数据库用户。包含数据库用户以及匹配 SID 的登录名有权以该数据库用户主体的身份访问该数据库。
 
 可以使用以下查询来查看所有用户主体及其在数据库中的 SID。只有 db\_owner 数据库角色的成员或服务器管理员才能运行此查询。
 
-	SELECT [name], [sid]
-	FROM [sys].[database_principals]
-	WHERE [type_desc] = 'SQL_USER'
+    SELECT [name], [sid]
+    FROM [sys].[database_principals]
+    WHERE [type_desc] = 'SQL_USER'
 
 >[!NOTE] **INFORMATION\_SCHEMA** 和 **sys** 用户具有 *NULL* SID，**guest** SID 为 **0x00**。如果数据库创建者是服务器管理员而不是 **DbManager** 的成员，则 **dbo** SID 可能以 *0x01060000000001648000000000048454* 开头。
 
 #### 3\.在目标服务器上创建登录名：
 最后一个步骤是转到一个或多个目标服务器，并使用相应的 SID 生成登录名。基本语法如下。
 
-	CREATE LOGIN [<login name>]
-	WITH PASSWORD = <login password>,
-	SID = <desired login SID>
+    CREATE LOGIN [<login name>]
+    WITH PASSWORD = <login password>,
+    SID = <desired login SID>
 
 >[!NOTE] 如果要授予用户对辅助数据库而不是主数据库的访问权限，可以使用以下语法更改主服务器上的用户登录名来实现此目的。
 >

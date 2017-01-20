@@ -34,17 +34,17 @@ MySQL Database on Azure目前有如下几点限制，如果您有任何疑问，
 5.	用户没有File 权限，[了解更多MySQL 5.5 用户权限](https://dev.mysql.com/doc/refman/5.5/en/privileges-provided.html)。
 6.	MySQL built-in system table不支持写权限，目前以下table不支持读写权限。
 
-	* columns_priv
-	* db
-	* general_log
-	* host
-	* ndb_binlog_index
-	* plugin
-	* procs_priv
-	* servers
-	* slow_log
-	* tables_priv
-	* user
-	* proxies_priv
+    * columns_priv
+    * db
+    * general_log
+    * host
+    * ndb_binlog_index
+    * plugin
+    * procs_priv
+    * servers
+    * slow_log
+    * tables_priv
+    * user
+    * proxies_priv
 
 7.	目前不支持MyISAM存储引擎

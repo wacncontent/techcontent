@@ -48,34 +48,34 @@ Microsoft 的大数据解决方案可将 Microsoft 商业智能 (BI) 组件与�
 1. 在 Windows 8 或 Windows 10 中，按 Windows 键以打开“开始”屏幕，然后键入“数据源”。
 2. 单击“设置 ODBC 数据源(32 位)”或“设置 ODBC 数据源(64 位)”，具体取决于 Office 版本。如果你使用的是 Windows 7，请从“管理工具”选择“ODBC 数据源(32 位)”或“ODBC 数据源(64 位)”。这将启动“ODBC 数据源管理器”对话框。
 
-	![ODBC 数据源管理器][img-hdi-simbahiveodbc-datasource-admin]
+    ![ODBC 数据源管理器][img-hdi-simbahiveodbc-datasource-admin]
 
 3. 从“用户 DNS”单击“添加”打开“新建数据源”向导。
 4. 选择“Microsoft Hive ODBC 驱动程序”，然后单击“完成”。这将启动“Microsoft Hive ODBC 驱动程序 DNS 安装程序”对话框。
 
 5. 键入或选择以下值：
 
-	|	属性|说明|
-	|------|-------------|
-	|	数据源名称|为你的数据源提供名称|
-	|	主机|输入 &lt;HDInsightClusterName>.azurehdinsight.cn。例如 myHDICluster.azurehdinsight.cn|
-	|	端口|使用 <strong>443</strong>。（此端口已从 563 更改为 443。）|
-	|	数据库|使用<strong>“默认”</strong>。|
-	|	Hive 服务器类型|选择<strong>“Hive Server 2”</strong>|
-	|	机制|选择<strong>“Azure HDInsight 服务”</strong>|
-	|	HTTP 路径|将此字段留空。|
-	|	用户名|输入 HDInsight 群集用户的用户名。这是在群集设置过程中创建的用户名。如果你使用了“快速创建”选项，则默认用户名是 <strong>admin</strong>。|
-	|	密码|输入 HDInsight 群集用户的密码。|
+    |	属性|说明|
+    |------|-------------|
+    |	数据源名称|为你的数据源提供名称|
+    |	主机|输入 &lt;HDInsightClusterName>.azurehdinsight.cn。例如 myHDICluster.azurehdinsight.cn|
+    |	端口|使用 <strong>443</strong>。（此端口已从 563 更改为 443。）|
+    |	数据库|使用<strong>“默认”</strong>。|
+    |	Hive 服务器类型|选择<strong>“Hive Server 2”</strong>|
+    |	机制|选择<strong>“Azure HDInsight 服务”</strong>|
+    |	HTTP 路径|将此字段留空。|
+    |	用户名|输入 HDInsight 群集用户的用户名。这是在群集设置过程中创建的用户名。如果你使用了“快速创建”选项，则默认用户名是 <strong>admin</strong>。|
+    |	密码|输入 HDInsight 群集用户的密码。|
 
-	在单击“高级选项”时，有一些重要参数要注意：
+    在单击“高级选项”时，有一些重要参数要注意：
 
-	|	参数|说明|
-	|-------|---------|
-	|	使用本机查询|选择此项时，ODBC 驱动程序将不会尝试将 TSQL 转换为 HiveQL。仅当你 100% 确定提交的是纯 HiveQL 语句时，才应使用此项。连接 SQL Server 或 Azure SQL 数据库时，应将此项保留为未选中状态。|
-	|	每块提取的行数|提取大量记录时，可能需要调整此参数以确保最佳性能。|
-	|	默认字符串列长度、二进制列长度、十进制列小数位数|数据类型长度和精度可能会影响返回数据的方式。由于精度损失和/或截断，可能会返回不正确的信息。|
+    |	参数|说明|
+    |-------|---------|
+    |	使用本机查询|选择此项时，ODBC 驱动程序将不会尝试将 TSQL 转换为 HiveQL。仅当你 100% 确定提交的是纯 HiveQL 语句时，才应使用此项。连接 SQL Server 或 Azure SQL 数据库时，应将此项保留为未选中状态。|
+    |	每块提取的行数|提取大量记录时，可能需要调整此参数以确保最佳性能。|
+    |	默认字符串列长度、二进制列长度、十进制列小数位数|数据类型长度和精度可能会影响返回数据的方式。由于精度损失和/或截断，可能会返回不正确的信息。|
 
-	![Advanced options][img-HiveOdbc-DataSource-AdvancedOptions]
+    ![Advanced options][img-HiveOdbc-DataSource-AdvancedOptions]
 
 6. 单击“测试”以测试数据源。正确配置数据源时，将显示“测试成功完成!”。
 7. 单击“确定”关闭“测试”对话框。现在，新的数据源应该在“ODBC 数据源管理器”中列出。
@@ -88,7 +88,7 @@ Microsoft 的大数据解决方案可将 Microsoft 商业智能 (BI) 组件与�
 1. 在 Excel 中打开新工作簿或现有工作簿。
 2. 在“数据”选项卡中，依次单击“从其他数据源”、“从数据连接向导”以启动“数据连接向导”。
 
-	![打开数据连接向导][img-hdi-simbahiveodbc.excel.dataconnection]
+    ![打开数据连接向导][img-hdi-simbahiveodbc.excel.dataconnection]
 
 3. 选择“ODBC DSN”作为数据源，然后单击“下一步”。
 4. 从 ODBC 数据源中，选择你在上一步中创建的数据源名称，然后单击“下一步”。
@@ -100,7 +100,7 @@ Microsoft 的大数据解决方案可将 Microsoft 商业智能 (BI) 组件与�
 9. 在“导入数据”对话框中，你可以更改或指定查询。为此，请单击“属性”。这可能需要几秒钟时间。
 10. 单击“定义”选项卡，然后在“命令文本”文本框中的 Hive select 语句后面追加“LIMIT 200”。此修改将返回的记录集限制为 200。
 
-	![连接属性][img-hdi-simbahiveodbc-excel-connectionproperties]
+    ![连接属性][img-hdi-simbahiveodbc-excel-connectionproperties]
 
 11. 单击“确定”关闭“连接属性”对话框。
 12. 单击“确定”关闭“导入数据”对话框。  

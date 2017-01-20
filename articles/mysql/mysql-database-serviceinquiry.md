@@ -34,9 +34,9 @@ wacn.lang: cn
 ### **一个服务器是否限制数据库的数量?**
 
 在一个MySQL服务器中，用户可创建多个数据库，数量上没有限制，但是多个数据库会共享服务器资源，如数据库数量较多，性能需求较高，建议创建多个MySQL服务器。
-	
+    
 ### **MySQL Database on Azure目前有哪些限制?**
-	
+    
 了解更多[MySQL Database on Azure服务限制](./mysql-database-operation-limitation.md)
 
 ### **为什么MySQL Database on Azure不支持MYISAM格式的数据库?**
@@ -50,9 +50,9 @@ wacn.lang: cn
 5. MySQL的发展也是在向InnoDB转移,在最新的5.7中MySQL可以完全不是MyISAM,系统的数据库也被转移到了InnoDB。
 
 ### **为什么新建的空的数据库服务器默认大小为530M? 为什么数据库显示使用存储空间大于实际使用的存储空间?**
-	
+    
 出于性能考虑，我们为新创建的数据库实例配置使用两个256M的日志文件。因此您在管理门户中看到的存储空间使用统计包括了日志文件的大小。但是日志文件大小在使用过程中不会改变。
-	
+    
 ### **MYSQL Database on Azure 是否支持用户通过命令行设置权限**
 
 支持,虽然我们的[管理门户](https://manage.windowsazure.cn/) 以及PowerShell 命令行在创建用户或数据库时只支持对整个数据库设置读写权限，但你可以用“grant”命令对用户权限进行更细化的设置。

@@ -47,23 +47,23 @@ ms.author: guybo
 
 此脚本将 LAMP 堆栈安装到 Ubuntu（包括设置 MySQL 的无提示安装类）、编写简单的 PHP 文件并启动 Apache：
 
-	#!/bin/bash
-	# set up a silent install of MySQL
-	dbpass="mySQLPassw0rd"
+    #!/bin/bash
+    # set up a silent install of MySQL
+    dbpass="mySQLPassw0rd"
 
-	export DEBIAN_FRONTEND=noninteractive
-	echo mysql-server-5.6 mysql-server/root_password password $dbpass | debconf-set-selections
-	echo mysql-server-5.6 mysql-server/root_password_again password $dbpass | debconf-set-selections
+    export DEBIAN_FRONTEND=noninteractive
+    echo mysql-server-5.6 mysql-server/root_password password $dbpass | debconf-set-selections
+    echo mysql-server-5.6 mysql-server/root_password_again password $dbpass | debconf-set-selections
 
-	# install the LAMP stack
-	apt-get -y install apache2 mysql-server php5 php5-mysql  
+    # install the LAMP stack
+    apt-get -y install apache2 mysql-server php5 php5-mysql  
 
-	# write some PHP
-	echo <center><h1>My Demo App</h1><br/></center> > /var/www/html/phpinfo.php
-	echo <\?php phpinfo()\; \?> >> /var/www/html/phpinfo.php
+    # write some PHP
+    echo <center><h1>My Demo App</h1><br/></center> > /var/www/html/phpinfo.php
+    echo <\?php phpinfo()\; \?> >> /var/www/html/phpinfo.php
 
-	# restart Apache
-	apachectl restart
+    # restart Apache
+    apachectl restart
 
 **上载**
 

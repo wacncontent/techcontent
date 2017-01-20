@@ -41,9 +41,9 @@ ms.author: robmcm
 
 使用所选编辑器打开 `wp-config.php` 文件并在 `/* That's all, stop editing! Happy blogging. */` 行的上方添加以下内容。
 
-	/* Multisite */
+    /* Multisite */
 
-	define( 'WP_ALLOW_MULTISITE', true );
+    define( 'WP_ALLOW_MULTISITE', true );
 
 请务必保存该文件并将其上载回服务器！
 

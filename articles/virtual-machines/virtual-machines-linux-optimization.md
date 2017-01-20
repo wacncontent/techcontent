@@ -79,37 +79,37 @@ ms.author: rclaus
 
 请使用以下命令：
 
-	admin@mylinuxvm:~# cat /sys/block/sda/queue/scheduler
+    admin@mylinuxvm:~# cat /sys/block/sda/queue/scheduler
 
 你将看到以下输出，指示当前的计划程序。
 
-	noop [deadline] cfq
+    noop [deadline] cfq
 
 ###更改当前设备 (/dev/sda) 的 I/O 计划算法
 
 使用以下命令：
 
-	azureuser@mylinuxvm:~$ sudo su -
-	root@mylinuxvm:~# echo "noop" >/sys/block/sda/queue/scheduler
-	root@mylinuxvm:~# sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"/g' /etc/default/grub
-	root@mylinuxvm:~# update-grub
+    azureuser@mylinuxvm:~$ sudo su -
+    root@mylinuxvm:~# echo "noop" >/sys/block/sda/queue/scheduler
+    root@mylinuxvm:~# sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"/g' /etc/default/grub
+    root@mylinuxvm:~# update-grub
 
 >[!NOTE] 对 /dev/sda 单独进行此设置毫无用处。需要在循序 I/O 是主导的 I/O 模式的所有数据磁盘上设置此项。
 
 你应该会看到以下输出，指示已成功重新生成 grub.cfg 并且默认计划程序已更新为 NOOP。
 
-	Generating grub configuration file ...
-	Found linux image: /boot/vmlinuz-3.13.0-34-generic
-	Found initrd image: /boot/initrd.img-3.13.0-34-generic
-	Found linux image: /boot/vmlinuz-3.13.0-32-generic
-	Found initrd image: /boot/initrd.img-3.13.0-32-generic
-	Found memtest86+ image: /memtest86+.elf
-	Found memtest86+ image: /memtest86+.bin
-	done
+    Generating grub configuration file ...
+    Found linux image: /boot/vmlinuz-3.13.0-34-generic
+    Found initrd image: /boot/initrd.img-3.13.0-34-generic
+    Found linux image: /boot/vmlinuz-3.13.0-32-generic
+    Found initrd image: /boot/initrd.img-3.13.0-32-generic
+    Found memtest86+ image: /memtest86+.elf
+    Found memtest86+ image: /memtest86+.bin
+    done
 
 对于 Redhat 系列分发版本，只需以下命令：
 
-	echo 'echo noop >/sys/block/sda/queue/scheduler' >> /etc/rc.local
+    echo 'echo noop >/sys/block/sda/queue/scheduler' >> /etc/rc.local
 
 ## 使用软件 RAID 来实现更高的 I/Ops
 

@@ -49,8 +49,8 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
 ### 添加命名空间声明
 将下列 `using` 语句添加到 `program.cs` 文件顶部：
 
-	using Microsoft.Azure; // Namespace for CloudConfigurationManager 
-	using Microsoft.WindowsAzure.Storage; // Namespace for CloudStorageAccount
+    using Microsoft.Azure; // Namespace for CloudConfigurationManager 
+    using Microsoft.WindowsAzure.Storage; // Namespace for CloudStorageAccount
     using Microsoft.WindowsAzure.Storage.Queue; // Namespace for Queue storage types
 
 ### 解析连接字符串
@@ -120,8 +120,8 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
     // Peek at the next message
     CloudQueueMessage peekedMessage = queue.PeekMessage();
 
-	// Display message.
-	Console.WriteLine(peekedMessage.AsString);
+    // Display message.
+    Console.WriteLine(peekedMessage.AsString);
 
 ##<a name="change-the-contents-of-a-queued-message"></a> 更改已排队消息的内容
 
@@ -137,7 +137,7 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
     // Retrieve a reference to a queue.
     CloudQueue queue = queueClient.GetQueueReference("myqueue");
 
-	// Get the message from the queue and update the message contents.
+    // Get the message from the queue and update the message contents.
     CloudQueueMessage message = queue.GetMessage();
     message.SetMessageContent("Updated contents.");
     queue.UpdateMessage(message,
@@ -227,14 +227,14 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
     // Retrieve a reference to a queue.
     CloudQueue queue = queueClient.GetQueueReference("myqueue");
 
-	// Fetch the queue attributes.
-	queue.FetchAttributes();
+    // Fetch the queue attributes.
+    queue.FetchAttributes();
 
     // Retrieve the cached approximate message count.
     int? cachedMessageCount = queue.ApproximateMessageCount;
 
-	// Display number of messages.
-	Console.WriteLine("Number of messages in queue: " + cachedMessageCount);
+    // Display number of messages.
+    Console.WriteLine("Number of messages in queue: " + cachedMessageCount);
 
 ## 删除队列
 

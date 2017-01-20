@@ -71,11 +71,11 @@ ms.author: seanmck
 
 若要防范这种可能性，请务必定期[将状态备份到](./service-fabric-reliable-services-backup-restore.md)异地冗余存储，并确保已验证您能够还原备份。执行备份的频率取决于恢复点目标 (RPO)。即使尚未完全实现备份和还原，但还是应该实现 `OnDataLoss` 事件的处理程序，以便在发生该事件时进行记录，如下所示：
 
-	protected virtual Task<bool> OnDataLoss(CancellationToken cancellationToken)
-	{
-	  ServiceEventSource.Current.ServiceMessage(this, "OnDataLoss event received.");
-	  return Task.FromResult(false);
-	}
+    protected virtual Task<bool> OnDataLoss(CancellationToken cancellationToken)
+    {
+      ServiceEventSource.Current.ServiceMessage(this, "OnDataLoss event received.");
+      return Task.FromResult(false);
+    }
 
 ### 软件故障和其他数据丢失根源
 在数据丢失的原因中，服务的代码缺陷、人为操作失误和安全违规比大范围的数据中心故障更为常见。但是，在所有情况下，恢复策略都一样：定期备份所有的有状态服务并运用还原该状态的能力。

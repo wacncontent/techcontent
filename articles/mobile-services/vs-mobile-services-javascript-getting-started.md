@@ -29,7 +29,7 @@ ms.author: mlearned
 
 客户端对象已添加到您的项目。其名称是移动服务的名称，后面附加“Client”。以下代码将获取对表（包含 TodoItem 数据）的引用，您可以将该引用用于后续操作以便读取和更新数据表。
 
-	var todoTable = yourMobileServiceClient.getTable('TodoItem');
+    var todoTable = yourMobileServiceClient.getTable('TodoItem');
 
 ##添加条目 
 
@@ -81,8 +81,8 @@ ms.author: mlearned
 
 删除数据表中的行。对返回的 [Promise](https://msdn.microsoft.com/zh-cn/library/dn802826.aspx) 对象调用 done 方法以获取插入对象的副本并处理任何错误。
 
-	todoTable.del(todoItem).done(function (item) {
-	    todoItems.splice(todoItems.indexOf(item), 1);
+    todoTable.del(todoItem).done(function (item) {
+        todoItems.splice(todoItems.indexOf(item), 1);
     }
 
 [详细了解移动服务](./index.md/)

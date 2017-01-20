@@ -59,15 +59,15 @@ ms.author: robmcm
 
 9. 若要启用 Git 发布，必须提供用户名和密码。记下你创建的用户名和密码。（如果之前已设置 Git 存储库，则会跳过此步骤。）
 
-	![创建发布凭据][credentials]
+    ![创建发布凭据][credentials]
 
 11. 使用以下 PowerShell 命令行设置“本地 Git 存储库”。
 
-		$a = Get-AzureRmResource -ResourceId /subscriptions/<subscription id>/resourcegroups/<resource group name>/providers/Microsoft.Web/sites/<web app name>/Config/web -ApiVersion 2015-08-01
+        $a = Get-AzureRmResource -ResourceId /subscriptions/<subscription id>/resourcegroups/<resource group name>/providers/Microsoft.Web/sites/<web app name>/Config/web -ApiVersion 2015-08-01
 
-		$a.Properties.scmType = "LocalGit"
+        $a.Properties.scmType = "LocalGit"
 
-		Set-AzureRmResource -PropertyObject $a.Properties -ResourceId /subscriptions/<subscription id>/resourcegroups/<resource group name>/providers/Microsoft.Web/sites/<web app name>/Config/web -ApiVersion 2015-08-01
+        Set-AzureRmResource -PropertyObject $a.Properties -ResourceId /subscriptions/<subscription id>/resourcegroups/<resource group name>/providers/Microsoft.Web/sites/<web app name>/Config/web -ApiVersion 2015-08-01
 
 ## 获取远程 MySQL 连接信息
 
@@ -79,7 +79,7 @@ ms.author: robmcm
 
 3. 在“数据库”页中，可以获取此 MYSQL 数据库服务器下的所有数据库。
 
-	数据源将为 `tcp:<your MYSQL server name>.database.chinacloudapi.cn,<port>`
+    数据源将为 `tcp:<your MYSQL server name>.database.chinacloudapi.cn,<port>`
 
 ## 在本地生成并测试应用
 
@@ -93,107 +93,107 @@ ms.author: robmcm
 
 1. 使用之前检索的 `Data Source`、`User Id`、`Password` 和 `Database` 的值，连接到远程 MySQL 服务器：
 
-		mysql -h{Data Source] -u[User Id] -p[Password] -D[Database]
+        mysql -h{Data Source] -u[User Id] -p[Password] -D[Database]
 
 2. 此时将出现 MySQL 命令提示符：
 
-		mysql>
+        mysql>
 
 3. 粘贴以下 `CREATE TABLE` 命令以在你的数据库中创建 `registration_tbl` 表：
 
-		CREATE TABLE registration_tbl(id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), name VARCHAR(30), email VARCHAR(30), date DATE);
+        CREATE TABLE registration_tbl(id INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(id), name VARCHAR(30), email VARCHAR(30), date DATE);
 
 4. 在本地应用程序文件夹的根目录中创建 **index.php** 文件。
 
 5. 在文本编辑器或 IDE 中打开 **index.php** 文件，添加以下代码，并完成用 `//TODO:` 注释标记的必需更改。
 
-		<html>
-		<head>
-		<Title>Registration Form</Title>
-		<style type="text/css">
-			body { background-color: #fff; border-top: solid 10px #000;
-			    color: #333; font-size: .85em; margin: 20; padding: 20;
-			    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-			}
-			h1, h2, h3,{ color: #000; margin-bottom: 0; padding-bottom: 0; }
-			h1 { font-size: 2em; }
-			h2 { font-size: 1.75em; }
-			h3 { font-size: 1.2em; }
-			table { margin-top: 0.75em; }
-			th { font-size: 1.2em; text-align: left; border: none; padding-left: 0; }
-			td { padding: 0.25em 2em 0.25em 0em; border: 0 none; }
-		</style>
-		</head>
-		<body>
-		<h1>Register here!</h1>
-		<p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
-		<form method="post" action="index.php" enctype="multipart/form-data" >
-		      Name  <input type="text" name="name" id="name"/></br>
-		      Email <input type="text" name="email" id="email"/></br>
-		      <input type="submit" name="submit" value="Submit" />
-		</form>
-		<?php
-			// DB connection info
-			//TODO: Update the values for $host, $user, $pwd, and $db
-			//using the values you retrieved earlier from the Azure Portal.
-			$host = "value of Data Source";
-			$user = "value of User Id";
-			$pwd = "value of Password";
-			$db = "value of Database";
-			// Connect to database.
-			try {
-				$conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
-				$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-			}
-			catch(Exception $e){
-				die(var_dump($e));
-			}
-			// Insert registration info
-			if(!empty($_POST)) {
-			try {
-				$name = $_POST['name'];
-				$email = $_POST['email'];
-				$date = date("Y-m-d");
-				// Insert data
-				$sql_insert = "INSERT INTO registration_tbl (name, email, date)
-						   VALUES (?,?,?)";
-				$stmt = $conn->prepare($sql_insert);
-				$stmt->bindValue(1, $name);
-				$stmt->bindValue(2, $email);
-				$stmt->bindValue(3, $date);
-				$stmt->execute();
-			}
-			catch(Exception $e) {
-				die(var_dump($e));
-			}
-			echo "<h3>Your're registered!</h3>";
-			}
-			// Retrieve data
-			$sql_select = "SELECT * FROM registration_tbl";
-			$stmt = $conn->query($sql_select);
-			$registrants = $stmt->fetchAll();
-			if(count($registrants) > 0) {
-				echo "<h2>People who are registered:</h2>";
-				echo "<table>";
-				echo "<tr><th>Name</th>";
-				echo "<th>Email</th>";
-				echo "<th>Date</th></tr>";
-				foreach($registrants as $registrant) {
-					echo "<tr><td>".$registrant['name']."</td>";
-					echo "<td>".$registrant['email']."</td>";
-					echo "<td>".$registrant['date']."</td></tr>";
-		    	}
-		 		echo "</table>";
-			} else {
-				echo "<h3>No one is currently registered.</h3>";
-			}
-		?>
-		</body>
-		</html>
+        <html>
+        <head>
+        <Title>Registration Form</Title>
+        <style type="text/css">
+            body { background-color: #fff; border-top: solid 10px #000;
+                color: #333; font-size: .85em; margin: 20; padding: 20;
+                font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+            }
+            h1, h2, h3,{ color: #000; margin-bottom: 0; padding-bottom: 0; }
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.75em; }
+            h3 { font-size: 1.2em; }
+            table { margin-top: 0.75em; }
+            th { font-size: 1.2em; text-align: left; border: none; padding-left: 0; }
+            td { padding: 0.25em 2em 0.25em 0em; border: 0 none; }
+        </style>
+        </head>
+        <body>
+        <h1>Register here!</h1>
+        <p>Fill in your name and email address, then click <strong>Submit</strong> to register.</p>
+        <form method="post" action="index.php" enctype="multipart/form-data" >
+              Name  <input type="text" name="name" id="name"/></br>
+              Email <input type="text" name="email" id="email"/></br>
+              <input type="submit" name="submit" value="Submit" />
+        </form>
+        <?php
+            // DB connection info
+            //TODO: Update the values for $host, $user, $pwd, and $db
+            //using the values you retrieved earlier from the Azure Portal.
+            $host = "value of Data Source";
+            $user = "value of User Id";
+            $pwd = "value of Password";
+            $db = "value of Database";
+            // Connect to database.
+            try {
+                $conn = new PDO( "mysql:host=$host;dbname=$db", $user, $pwd);
+                $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+            }
+            catch(Exception $e){
+                die(var_dump($e));
+            }
+            // Insert registration info
+            if(!empty($_POST)) {
+            try {
+                $name = $_POST['name'];
+                $email = $_POST['email'];
+                $date = date("Y-m-d");
+                // Insert data
+                $sql_insert = "INSERT INTO registration_tbl (name, email, date)
+                           VALUES (?,?,?)";
+                $stmt = $conn->prepare($sql_insert);
+                $stmt->bindValue(1, $name);
+                $stmt->bindValue(2, $email);
+                $stmt->bindValue(3, $date);
+                $stmt->execute();
+            }
+            catch(Exception $e) {
+                die(var_dump($e));
+            }
+            echo "<h3>Your're registered!</h3>";
+            }
+            // Retrieve data
+            $sql_select = "SELECT * FROM registration_tbl";
+            $stmt = $conn->query($sql_select);
+            $registrants = $stmt->fetchAll();
+            if(count($registrants) > 0) {
+                echo "<h2>People who are registered:</h2>";
+                echo "<table>";
+                echo "<tr><th>Name</th>";
+                echo "<th>Email</th>";
+                echo "<th>Date</th></tr>";
+                foreach($registrants as $registrant) {
+                    echo "<tr><td>".$registrant['name']."</td>";
+                    echo "<td>".$registrant['email']."</td>";
+                    echo "<td>".$registrant['date']."</td></tr>";
+                }
+                 echo "</table>";
+            } else {
+                echo "<h3>No one is currently registered.</h3>";
+            }
+        ?>
+        </body>
+        </html>
 
 4.  在终端中转到应用程序文件夹，并键入以下命令：
 
-		php -S localhost:8000
+        php -S localhost:8000
 
 现在，你可以浏览到 **http://localhost:8000/** 以测试应用程序。
 
@@ -208,19 +208,19 @@ ms.author: robmcm
 
 1. 打开 GitBash（或终端，如果 Git 在 `PATH` 中），将目录更改为应用程序的根目录，并运行以下命令：
 
-		git init
-		git add .
-		git commit -m "initial commit"
-		git remote add azure [URL for remote repository]
-		git push azure master
+        git init
+        git add .
+        git commit -m "initial commit"
+        git remote add azure [URL for remote repository]
+        git push azure master
 
-	系统将提示你输入之前创建的密码。
+    系统将提示你输入之前创建的密码。
 
-	![通过 Git 初始推送到 Azure][git-initial-push]
+    ![通过 Git 初始推送到 Azure][git-initial-push]
 
 2. 浏览到 **http://[site name].chinacloudsites.cn/index.php** 以开始使用应用程序（此信息将存储在你的帐户仪表板上）：
 
-	![Azure PHP 网站][running-app]
+    ![Azure PHP 网站][running-app]
 
 发布应用之后，你可以开始对其进行更改并使用 Git 发布所做的更改。
 
@@ -231,18 +231,18 @@ ms.author: robmcm
 1. 本地对应用进行更改。
 2. 打开 GitBash（或终端，如果 Git 在 `PATH` 中），将目录更改为应用的根目录，并运行以下命令：
 
-		git add .
-		git commit -m "comment describing changes"
-		git push azure master
+        git add .
+        git commit -m "comment describing changes"
+        git push azure master
 
-	系统将提示你输入之前创建的密码。
+    系统将提示你输入之前创建的密码。
 
-	![通过 Git 将网站更改推送到 Azure][git-change-push]
+    ![通过 Git 将网站更改推送到 Azure][git-change-push]
 
 3. 浏览到 **http://[site name].chinacloudsites.cn/index.php** 以查看应用及可能做出的任何更改：
 
-	![Azure PHP 网站][running-app]
-	
+    ![Azure PHP 网站][running-app]
+    
 ## <a name="composer"></a> 使用编辑器扩展启用编辑器自动化
 
 默认情况下，如果 PHP 项目中有 composer.json，则应用服务中的 git 部署过程与其不相关。`git push` 期间可以通过启用编辑器扩展启用 composer.json 处理。

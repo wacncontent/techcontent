@@ -41,12 +41,12 @@ ms.author: vturecek
 
 登录到 Azure 帐户：
 
-	Login-AzureRmAccount -EnvironmentName AzureChinacloud
+    Login-AzureRmAccount -EnvironmentName AzureChinacloud
 
 选择订阅：
 
-	Get-AzureRmSubscription
-	Set-AzureRmContext -SubscriptionId <guid>
+    Get-AzureRmSubscription
+    Set-AzureRmContext -SubscriptionId <guid>
 
 ## 设置密钥保管库
 
@@ -62,48 +62,48 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 第一个步骤是专门针对密钥保管库创建资源组。建议将密钥保管库放入其自身的资源组中，以便可以删除计算与存储资源组（例如包含 Service Fabric 群集的资源组），而不会丢失密钥和密码。包含密钥保管库的资源组必须与正在使用它的群集位于同一区域。
 
-		PS C:\Users\vturecek> New-AzureRmResourceGroup -Name mycluster-keyvault -Location 'China East'
-		WARNING: The output object type of this cmdlet will be modified in a future release.
-	
-		ResourceGroupName : mycluster-keyvault
-		Location          : chinaeast
-		ProvisioningState : Succeeded
-		Tags              :
-		ResourceId        : /subscriptions/<guid>/resourceGroups/mycluster-keyvault
+        PS C:\Users\vturecek> New-AzureRmResourceGroup -Name mycluster-keyvault -Location 'China East'
+        WARNING: The output object type of this cmdlet will be modified in a future release.
+    
+        ResourceGroupName : mycluster-keyvault
+        Location          : chinaeast
+        ProvisioningState : Succeeded
+        Tags              :
+        ResourceId        : /subscriptions/<guid>/resourceGroups/mycluster-keyvault
 
 ### 创建密钥保管库 
 
 在新资源组中创建密钥保管库。**必须针对部署启用**密钥保管库，使 Service Fabric 资源提供程序能够从中获取证书并将其安装在群集节点上：
 
-		PS C:\Users\vturecek> New-AzureRmKeyVault -VaultName 'myvault' -ResourceGroupName 'mycluster-keyvault' -Location 'China East' -EnabledForDeployment
-	
-		Vault Name                       : myvault
-		Resource Group Name              : mycluster-keyvault
-		Location                         : China East
-		Resource ID                      : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
-		Vault URI                        : https://myvault.vault.chinacloudapi.cn
-		Tenant ID                        : <guid>
-		SKU                              : Standard
-		Enabled For Deployment?          : False
-		Enabled For Template Deployment? : False
-		Enabled For Disk Encryption?     : False
-		Access Policies                  :
-		                                   Tenant ID                :    <guid>
-		                                   Object ID                :    <guid>
-		                                   Application ID           :
-		                                   Display Name             :    
-		                                   Permissions to Keys      :    get, create, delete, list, update, import, backup, restore
-		                                   Permissions to Secrets   :    all
-	
-		Tags                             :
+        PS C:\Users\vturecek> New-AzureRmKeyVault -VaultName 'myvault' -ResourceGroupName 'mycluster-keyvault' -Location 'China East' -EnabledForDeployment
+    
+        Vault Name                       : myvault
+        Resource Group Name              : mycluster-keyvault
+        Location                         : China East
+        Resource ID                      : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
+        Vault URI                        : https://myvault.vault.chinacloudapi.cn
+        Tenant ID                        : <guid>
+        SKU                              : Standard
+        Enabled For Deployment?          : False
+        Enabled For Template Deployment? : False
+        Enabled For Disk Encryption?     : False
+        Access Policies                  :
+                                           Tenant ID                :    <guid>
+                                           Object ID                :    <guid>
+                                           Application ID           :
+                                           Display Name             :    
+                                           Permissions to Keys      :    get, create, delete, list, update, import, backup, restore
+                                           Permissions to Secrets   :    all
+    
+        Tags                             :
 
 如果有现有的密钥保管库，可以使用 Azure CLI 针对部署启用该保管库：
 
-	> azure login -e AzureChinaCloud
-	> azure account set "your account"
-	> azure config mode arm 
-	> azure keyvault list
-	> azure keyvault set-policy --vault-name "your vault name" --enabled-for-deployment true
+    > azure login -e AzureChinaCloud
+    > azure account set "your account"
+    > azure config mode arm 
+    > azure keyvault list
+    > azure keyvault set-policy --vault-name "your vault name" --enabled-for-deployment true
 
 ## 将证书添加到密钥保管库
 
@@ -148,27 +148,27 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
  1. 将存储库的整个内容下载到本地目录。
  2. 在 PowerShell 窗口中导入该模块：
 
-  	PS C:\Users\vturecek> Import-Module "C:\users\vturecek\Documents\ServiceFabricRPHelpers\ServiceFabricRPHelpers.psm1"
+      PS C:\Users\vturecek> Import-Module "C:\users\vturecek\Documents\ServiceFabricRPHelpers\ServiceFabricRPHelpers.psm1"
 
 此 PowerShell 模块中的 `Invoke-AddCertToKeyVault` 命令自动将证书私钥的格式设置为 JSON 字符串，并将它上载到密钥保管库。使用该字符串可将群集证书与任何其他应用程序证书添加到密钥保管库。针对要在群集中安装的其他任何证书重复此步骤。
 
-	PS C:\Users\vturecek> Invoke-AddCertToKeyVault -SubscriptionId <guid> -ResourceGroupName mycluster-keyvault -Location "China East" -VaultName myvault -CertificateName mycert -Password "<password>" -UseExistingCertificate -ExistingPfxFilePath "C:\path\to\mycertkey.pfx"
-	
-		Switching context to SubscriptionId <guid>
-		Ensuring ResourceGroup mycluster-keyvault in China East
-		WARNING: The output object type of this cmdlet will be modified in a future release.
-		Using existing valut myvault in China East
-		Reading pfx file from C:\path\to\key.pfx
-		Writing secret to myvault in vault myvault
-	
-	Name  : CertificateThumbprint
-	Value : <value>
+    PS C:\Users\vturecek> Invoke-AddCertToKeyVault -SubscriptionId <guid> -ResourceGroupName mycluster-keyvault -Location "China East" -VaultName myvault -CertificateName mycert -Password "<password>" -UseExistingCertificate -ExistingPfxFilePath "C:\path\to\mycertkey.pfx"
+    
+        Switching context to SubscriptionId <guid>
+        Ensuring ResourceGroup mycluster-keyvault in China East
+        WARNING: The output object type of this cmdlet will be modified in a future release.
+        Using existing valut myvault in China East
+        Reading pfx file from C:\path\to\key.pfx
+        Writing secret to myvault in vault myvault
+    
+    Name  : CertificateThumbprint
+    Value : <value>
 
-	Name  : SourceVault
-	Value : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
+    Name  : SourceVault
+    Value : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
 
-	Name  : CertificateURL
-	Value : https://myvault.vault.chinalcoudapi.cn:443/secrets/mycert/4d087088df974e869f1c0978cb100e47
+    Name  : CertificateURL
+    Value : https://myvault.vault.chinalcoudapi.cn:443/secrets/mycert/4d087088df974e869f1c0978cb100e47
 
 这就是配置 Service Fabric 群集 Resource Manager 模板时所要满足的所有密钥保管库先决条件。该模板可安装用于节点身份验证、管理终结点安全性与身份验证以及使用 X.509 证书的其他任何应用程序安全功能的证书。此时，应已在 Azure 中设置以下各项：
 
@@ -244,14 +244,14 @@ Service Fabric 使用 X.509 证书保护群集。Azure 密钥保管库用于管�
 
 - 在主证书字段中，填充使用 `Invoke-AddCertToKeyVault` PowerShell 命令将**群集证书**上载到密钥保管库后获取的输出。
 
-	名称：CertificateThumbprint 
-	值：<value>
+    名称：CertificateThumbprint 
+    值：<value>
 
-	名称：SourceVault 
-	值：/subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
+    名称：SourceVault 
+    值：/subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
 
-	名称：CertificateURL 
-	值：https://myvault.vault.chinacloudapi.cn:443/secrets/mycert/4d087088df974e869f1c0978cb100e47
+    名称：CertificateURL 
+    值：https://myvault.vault.chinacloudapi.cn:443/secrets/mycert/4d087088df974e869f1c0978cb100e47
 
 - 选中“配置高级设置”复选框，输入**管理客户端**和**只读客户端**的客户端证书。在这些字段中，输入管理客户端证书的指纹和只读用户客户端证书的指纹（如果适用）。当管理员尝试连接群集时，仅当他们的证书指纹与此处输入的指纹值匹配时，才被授予访问权限。
 

@@ -81,7 +81,7 @@ ms.author: juliako
 ---|---
 引用组|Windows/扩展
 引用|选择适用于 Windows 8 和 Microsoft Visual C++ 运行时程序包的 Microsoft 平滑流式处理客户端 SDK
-	
+    
 3.	单击“确定”。
 
 添加引用后，必须选择目标平台（x64 或 x86），添加引用对于任何 CPU 平台配置都不起作用。在解决方案资源管理器中，你会看到这些添加的引用出现了对应的黄色警告标记。
@@ -91,49 +91,49 @@ ms.author: juliako
 1.	在解决方案资源管理器中，双击“MainPage.xaml”以在设计视图中将其打开。
 2.	在该 XAML 文件中找到 **&lt;Grid&gt;** 和 **&lt;/Grid&gt;** 标记，并在这两个标记之间粘贴以下代码：
 
-		<Grid.RowDefinitions>
-		    <RowDefinition Height="20"/>    <!-- spacer -->
-		    <RowDefinition Height="50"/>    <!-- media controls -->
-		    <RowDefinition Height="100*"/>  <!-- media element -->
-		    <RowDefinition Height="80*"/>   <!-- media stream and track selection -->
-		    <RowDefinition Height="50"/>    <!-- status bar -->
-		</Grid.RowDefinitions>
-		
-		<StackPanel Name="spMediaControl" Grid.Row="1" Orientation="Horizontal">
-		    <TextBlock x:Name="tbSource" Text="Source :  " FontSize="16" FontWeight="Bold" VerticalAlignment="Center" />
-		    <TextBox x:Name="txtMediaSource" Text="http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest" FontSize="10" Width="700" Margin="0,4,0,10" />
-		    <Button x:Name="btnSetSource" Content="Set Source" Width="111" Height="43" Click="btnSetSource_Click"/>
-		    <Button x:Name="btnPlay" Content="Play" Width="111" Height="43" Click="btnPlay_Click"/>
-		    <Button x:Name="btnPause" Content="Pause"  Width="111" Height="43" Click="btnPause_Click"/>
-		    <Button x:Name="btnStop" Content="Stop"  Width="111" Height="43" Click="btnStop_Click"/>
-		    <CheckBox x:Name="chkAutoPlay" Content="Auto Play" Height="55" Width="Auto" IsChecked="{Binding AutoPlay, ElementName=mediaElement, Mode=TwoWay}"/>
-		    <CheckBox x:Name="chkMute" Content="Mute" Height="55" Width="67" IsChecked="{Binding IsMuted, ElementName=mediaElement, Mode=TwoWay}"/>
-		</StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>    <!-- spacer -->
+            <RowDefinition Height="50"/>    <!-- media controls -->
+            <RowDefinition Height="100*"/>  <!-- media element -->
+            <RowDefinition Height="80*"/>   <!-- media stream and track selection -->
+            <RowDefinition Height="50"/>    <!-- status bar -->
+        </Grid.RowDefinitions>
+        
+        <StackPanel Name="spMediaControl" Grid.Row="1" Orientation="Horizontal">
+            <TextBlock x:Name="tbSource" Text="Source :  " FontSize="16" FontWeight="Bold" VerticalAlignment="Center" />
+            <TextBox x:Name="txtMediaSource" Text="http://ecn.channel9.msdn.com/o9/content/smf/smoothcontent/elephantsdream/Elephants_Dream_1024-h264-st-aac.ism/manifest" FontSize="10" Width="700" Margin="0,4,0,10" />
+            <Button x:Name="btnSetSource" Content="Set Source" Width="111" Height="43" Click="btnSetSource_Click"/>
+            <Button x:Name="btnPlay" Content="Play" Width="111" Height="43" Click="btnPlay_Click"/>
+            <Button x:Name="btnPause" Content="Pause"  Width="111" Height="43" Click="btnPause_Click"/>
+            <Button x:Name="btnStop" Content="Stop"  Width="111" Height="43" Click="btnStop_Click"/>
+            <CheckBox x:Name="chkAutoPlay" Content="Auto Play" Height="55" Width="Auto" IsChecked="{Binding AutoPlay, ElementName=mediaElement, Mode=TwoWay}"/>
+            <CheckBox x:Name="chkMute" Content="Mute" Height="55" Width="67" IsChecked="{Binding IsMuted, ElementName=mediaElement, Mode=TwoWay}"/>
+        </StackPanel>
 
-		<StackPanel Name="spMediaElement" Grid.Row="2" Height="435" Width="1072"
-		            HorizontalAlignment="Center" VerticalAlignment="Center">
-		    <MediaElement x:Name="mediaElement" Height="356" Width="924" MinHeight="225"
-		                  HorizontalAlignment="Center" VerticalAlignment="Center" 
-		                  AudioCategory="BackgroundCapableMedia" />
-		    <StackPanel Orientation="Horizontal">
-		        <Slider x:Name="sliderProgress" Width="924" Height="44"
-		                HorizontalAlignment="Center" VerticalAlignment="Center"
-		                PointerPressed="sliderProgress_PointerPressed"/>
-		        <Slider x:Name="sliderVolume" 
-		                HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical" 
-		                Height="79" Width="148" Minimum="0" Maximum="1" StepFrequency="0.1" 
-		                Value="{Binding Volume, ElementName=mediaElement, Mode=TwoWay}" 
-		                ToolTipService.ToolTip="{Binding Value, RelativeSource={RelativeSource Mode=Self}}"/>
-		    </StackPanel>
-		</StackPanel>
+        <StackPanel Name="spMediaElement" Grid.Row="2" Height="435" Width="1072"
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+            <MediaElement x:Name="mediaElement" Height="356" Width="924" MinHeight="225"
+                          HorizontalAlignment="Center" VerticalAlignment="Center" 
+                          AudioCategory="BackgroundCapableMedia" />
+            <StackPanel Orientation="Horizontal">
+                <Slider x:Name="sliderProgress" Width="924" Height="44"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        PointerPressed="sliderProgress_PointerPressed"/>
+                <Slider x:Name="sliderVolume" 
+                        HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical" 
+                        Height="79" Width="148" Minimum="0" Maximum="1" StepFrequency="0.1" 
+                        Value="{Binding Volume, ElementName=mediaElement, Mode=TwoWay}" 
+                        ToolTipService.ToolTip="{Binding Value, RelativeSource={RelativeSource Mode=Self}}"/>
+            </StackPanel>
+        </StackPanel>
 
-		<StackPanel Name="spStatus" Grid.Row="4" Orientation="Horizontal">
-		    <TextBlock x:Name="tbStatus" Text="Status :  " 
-		       FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
-		    <TextBox x:Name="txtStatus" FontSize="10" Width="700" VerticalAlignment="Center"/>
-		</StackPanel>
+        <StackPanel Name="spStatus" Grid.Row="4" Orientation="Horizontal">
+            <TextBlock x:Name="tbStatus" Text="Status :  " 
+               FontSize="16" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+            <TextBox x:Name="txtStatus" FontSize="10" Width="700" VerticalAlignment="Center"/>
+        </StackPanel>
 
-	MediaElement 控件用于播放媒体。在下一课中，我们将使用名为 sliderProgress 的滚动条控件来控制媒体进度。
+    MediaElement 控件用于播放媒体。在下一课中，我们将使用名为 sliderProgress 的滚动条控件来控制媒体进度。
 
 3.	按 **CTRL+S** 保存文件。
 
@@ -146,61 +146,61 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 1.	在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看代码”。
 2.	在该文件的顶部，添加以下 using 语句：
 
-		using Windows.Media;
+        using Windows.Media;
 
 3.	在 **MainPage** 类的开头，添加以下数据成员：
 
-		private MediaExtensionManager extensions = new MediaExtensionManager();
+        private MediaExtensionManager extensions = new MediaExtensionManager();
 
 4.	在 **MainPage** 构造函数的末尾，添加以下两行：
 
-		extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "text/xml");
-		extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "application/vnd.ms-sstr+xml");
-		
+        extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "text/xml");
+        extensions.RegisterByteStreamHandler("Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", ".ism", "application/vnd.ms-sstr+xml");
+        
 5.	在 **MainPage** 类的末尾，粘贴以下代码：
 
-		#region UI Button Click Events
-		private void btnPlay_Click(object sender, RoutedEventArgs e)
-		{
-		    mediaElement.Play();
-		    txtStatus.Text = "MediaElement is playing ...";
-		}
-		
-		private void btnPause_Click(object sender, RoutedEventArgs e)
-		{
-		    mediaElement.Pause();
-		    txtStatus.Text = "MediaElement is paused";
-		}
-		
-		private void btnSetSource_Click(object sender, RoutedEventArgs e)
-		{
-		    sliderProgress.Value = 0;
-		    mediaElement.Source = new Uri(txtMediaSource.Text);
-		
-		    if (chkAutoPlay.IsChecked == true)
-		    {
-		        txtStatus.Text = "MediaElement is playing ...";
-		    }
-		    else
-		    {
-		        txtStatus.Text = "Click the Play button to play the media source.";
-		    }
-		}
-		
-		private void btnStop_Click(object sender, RoutedEventArgs e)
-		{
-		    mediaElement.Stop();
-		    txtStatus.Text = "MediaElement is stopped";
-		}
-		
-		private void sliderProgress_PointerPressed(object sender, PointerRoutedEventArgs e)
-		{
-		    txtStatus.Text = "Seek to position " + sliderProgress.Value;
-		    mediaElement.Position = new TimeSpan(0, 0, (int)(sliderProgress.Value));
-		}
-		#endregion
+        #region UI Button Click Events
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+            mediaElement.Play();
+            txtStatus.Text = "MediaElement is playing ...";
+        }
+        
+        private void btnPause_Click(object sender, RoutedEventArgs e)
+        {
+            mediaElement.Pause();
+            txtStatus.Text = "MediaElement is paused";
+        }
+        
+        private void btnSetSource_Click(object sender, RoutedEventArgs e)
+        {
+            sliderProgress.Value = 0;
+            mediaElement.Source = new Uri(txtMediaSource.Text);
+        
+            if (chkAutoPlay.IsChecked == true)
+            {
+                txtStatus.Text = "MediaElement is playing ...";
+            }
+            else
+            {
+                txtStatus.Text = "Click the Play button to play the media source.";
+            }
+        }
+        
+        private void btnStop_Click(object sender, RoutedEventArgs e)
+        {
+            mediaElement.Stop();
+            txtStatus.Text = "MediaElement is stopped";
+        }
+        
+        private void sliderProgress_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            txtStatus.Text = "Seek to position " + sliderProgress.Value;
+            mediaElement.Position = new TimeSpan(0, 0, (int)(sliderProgress.Value));
+        }
+        #endregion
 
-	现已定义 sliderProgress\_PointerPressed 事件处理程序。若要使它正常工作，还需要执行其他操作，本教程的下一课将予以介绍。
+    现已定义 sliderProgress\_PointerPressed 事件处理程序。若要使它正常工作，还需要执行其他操作，本教程的下一课将予以介绍。
 6.	按 **CTRL+S** 保存文件。
 
 完成的代码隐藏文件应如下所示：
@@ -239,37 +239,37 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 1.	在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看代码”。
 2.	在该文件的开头，添加以下 using 语句：
 
-		using Microsoft.Media.AdaptiveStreaming;
+        using Microsoft.Media.AdaptiveStreaming;
 
 3.	在 MainPage 类的开头，添加以下数据成员：
 
-		private Windows.Foundation.Collections.PropertySet propertySet = new Windows.Foundation.Collections.PropertySet();             
-		private IAdaptiveSourceManager adaptiveSourceManager;
-	
+        private Windows.Foundation.Collections.PropertySet propertySet = new Windows.Foundation.Collections.PropertySet();             
+        private IAdaptiveSourceManager adaptiveSourceManager;
+    
 4.	在 **MainPage** 构造函数中的 **this.Initialize Components();** 行以及上一课编写的注册代码行的后面添加以下代码：
-	
-		// Gets the default instance of AdaptiveSourceManager which manages Smooth 
-		//Streaming media sources.
-		adaptiveSourceManager = AdaptiveSourceManager.GetDefault();
-		// Sets property key value to AdaptiveSourceManager default instance.
-		// {A5CE1DE8-1D00-427B-ACEF-FB9A3C93DE2D}" must be hardcoded.
-		propertySet["{A5CE1DE8-1D00-427B-ACEF-FB9A3C93DE2D}"] = adaptiveSourceManager;
-	
+    
+        // Gets the default instance of AdaptiveSourceManager which manages Smooth 
+        //Streaming media sources.
+        adaptiveSourceManager = AdaptiveSourceManager.GetDefault();
+        // Sets property key value to AdaptiveSourceManager default instance.
+        // {A5CE1DE8-1D00-427B-ACEF-FB9A3C93DE2D}" must be hardcoded.
+        propertySet["{A5CE1DE8-1D00-427B-ACEF-FB9A3C93DE2D}"] = adaptiveSourceManager;
+    
 5.	在 **MainPage** 构造函数中，修改两个 RegisterByteStreamHandler 方法以添加第四个参数：
 
-		// Registers Smooth Streaming byte-stream handler for ".ism" extension and, 
-		// "text/xml" and "application/vnd.ms-ss" mime-types and pass the propertyset. 
-		// http://*.ism/manifest URI resources will be resolved by Byte-stream handler.
-		extensions.RegisterByteStreamHandler(
-		    "Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", 
-		    ".ism", 
-		    "text/xml", 
-		    propertySet );
-		extensions.RegisterByteStreamHandler(
-		    "Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", 
-		    ".ism", 
-		    "application/vnd.ms-sstr+xml", 
-		propertySet);
+        // Registers Smooth Streaming byte-stream handler for ".ism" extension and, 
+        // "text/xml" and "application/vnd.ms-ss" mime-types and pass the propertyset. 
+        // http://*.ism/manifest URI resources will be resolved by Byte-stream handler.
+        extensions.RegisterByteStreamHandler(
+            "Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", 
+            ".ism", 
+            "text/xml", 
+            propertySet );
+        extensions.RegisterByteStreamHandler(
+            "Microsoft.Media.AdaptiveStreaming.SmoothByteStreamHandler", 
+            ".ism", 
+            "application/vnd.ms-sstr+xml", 
+        propertySet);
 
 6.	按 **CTRL+S** 保存文件。
 
@@ -278,21 +278,21 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 1.	在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看代码”。
 2.	在 **MainPage** 类中，添加以下数据成员：
 
-		private AdaptiveSource adaptiveSource = null;
+        private AdaptiveSource adaptiveSource = null;
 
 3.	在 **MainPage** 类的末尾，添加以下事件处理程序：
-	
-		#region Adaptive Source Manager Level Events
-		private void mediaElement_AdaptiveSourceOpened(AdaptiveSource sender, AdaptiveSourceOpenedEventArgs args)
-		{
-		    adaptiveSource = args.AdaptiveSource;
-		}
-		#endregion Adaptive Source Manager Level Events
+    
+        #region Adaptive Source Manager Level Events
+        private void mediaElement_AdaptiveSourceOpened(AdaptiveSource sender, AdaptiveSourceOpenedEventArgs args)
+        {
+            adaptiveSource = args.AdaptiveSource;
+        }
+        #endregion Adaptive Source Manager Level Events
 
 4.	在 **MainPage** 构造函数的末尾，添加以下行以订阅自适应源打开事件：
-	
-	adaptiveSourceManager.AdaptiveSourceOpenedEvent += 
-		new AdaptiveSourceOpenedEventHandler(mediaElement\_AdaptiveSourceOpened);
+    
+    adaptiveSourceManager.AdaptiveSourceOpenedEvent += 
+        new AdaptiveSourceOpenedEventHandler(mediaElement\_AdaptiveSourceOpened);
 
 5.	按 **CTRL+S** 保存文件。
 
@@ -300,39 +300,39 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 
 1.	在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看代码”。
 2.	在 **MainPage** 类中，添加以下数据成员：
-	
-		private AdaptiveSourceStatusUpdatedEventArgs adaptiveSourceStatusUpdate; 
-		private Manifest manifestObject;
-	
+    
+        private AdaptiveSourceStatusUpdatedEventArgs adaptiveSourceStatusUpdate; 
+        private Manifest manifestObject;
+    
 3.	在 **MainPage** 类的末尾，添加以下事件处理程序：
 
-		#region Adaptive Source Level Events
-		private void mediaElement_ManifestReady(AdaptiveSource sender, ManifestReadyEventArgs args)
-		{
-		    adaptiveSource = args.AdaptiveSource;
-		    manifestObject = args.AdaptiveSource.Manifest;
-		}
-		
-		private void mediaElement_AdaptiveSourceStatusUpdated(AdaptiveSource sender, AdaptiveSourceStatusUpdatedEventArgs args)
-		{
-		    adaptiveSourceStatusUpdate = args;
-		}
-		
-		private void mediaElement_AdaptiveSourceFailed(AdaptiveSource sender, AdaptiveSourceFailedEventArgs args)
-		{
-		    txtStatus.Text = "Error: " + args.HttpResponse;
-		}
-		#endregion Adaptive Source Level Events
+        #region Adaptive Source Level Events
+        private void mediaElement_ManifestReady(AdaptiveSource sender, ManifestReadyEventArgs args)
+        {
+            adaptiveSource = args.AdaptiveSource;
+            manifestObject = args.AdaptiveSource.Manifest;
+        }
+        
+        private void mediaElement_AdaptiveSourceStatusUpdated(AdaptiveSource sender, AdaptiveSourceStatusUpdatedEventArgs args)
+        {
+            adaptiveSourceStatusUpdate = args;
+        }
+        
+        private void mediaElement_AdaptiveSourceFailed(AdaptiveSource sender, AdaptiveSourceFailedEventArgs args)
+        {
+            txtStatus.Text = "Error: " + args.HttpResponse;
+        }
+        #endregion Adaptive Source Level Events
 
 4.	在 **mediaElement AdaptiveSourceOpened** 方法的末尾，添加以下代码以订阅事件：
-	
-		adaptiveSource.ManifestReadyEvent +=
-	                mediaElement_ManifestReady;
-	    adaptiveSource.AdaptiveSourceStatusUpdatedEvent += 
-		    mediaElement_AdaptiveSourceStatusUpdated;
-		adaptiveSource.AdaptiveSourceFailedEvent += 
-		    mediaElement_AdaptiveSourceFailed;
-	
+    
+        adaptiveSource.ManifestReadyEvent +=
+                    mediaElement_ManifestReady;
+        adaptiveSource.AdaptiveSourceStatusUpdatedEvent += 
+            mediaElement_AdaptiveSourceStatusUpdated;
+        adaptiveSource.AdaptiveSourceFailedEvent += 
+            mediaElement_AdaptiveSourceFailed;
+    
 5.	按 **CTRL+S** 保存文件。
 
 相同的事件也可以在自适应源管理器级别使用，因此可用于处理应用中所有媒体元素通用的功能。每个 AdaptiveSource 包含其自身的事件，所有的 AdaptiveSource 事件将级联在 AdaptiveSourceManager 之下。
@@ -341,29 +341,29 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 
 1.	在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看代码”。
 2.	在 **MainPage** 类的末尾，添加以下事件处理程序：
-	
-		#region Media Element Event Handlers 
-		private void MediaOpened(object sender, RoutedEventArgs e)
-		{
-		    txtStatus.Text = "MediaElement opened";
-		}
-		
-		private void MediaFailed(object sender, ExceptionRoutedEventArgs e)
-		{
-		    txtStatus.Text= "MediaElement failed: " + e.ErrorMessage;
-		}
-		
-		private void MediaEnded(object sender, RoutedEventArgs e)
-		{
-		    txtStatus.Text ="MediaElement ended.";
-		}
-		#endregion Media Element Event Handlers
+    
+        #region Media Element Event Handlers 
+        private void MediaOpened(object sender, RoutedEventArgs e)
+        {
+            txtStatus.Text = "MediaElement opened";
+        }
+        
+        private void MediaFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            txtStatus.Text= "MediaElement failed: " + e.ErrorMessage;
+        }
+        
+        private void MediaEnded(object sender, RoutedEventArgs e)
+        {
+            txtStatus.Text ="MediaElement ended.";
+        }
+        #endregion Media Element Event Handlers
 
 3.	在 **MainPage** 构造函数的末尾，添加以下代码以订阅事件：
-	
-		mediaElement.MediaOpened += MediaOpened;
-		mediaElement.MediaEnded += MediaEnded;
-		mediaElement.MediaFailed += MediaFailed;
+    
+        mediaElement.MediaOpened += MediaOpened;
+        mediaElement.MediaEnded += MediaEnded;
+        mediaElement.MediaFailed += MediaFailed;
 
 4.	按 **CTRL+S** 保存文件。
 
@@ -371,114 +371,114 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 
 1.	在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看代码”。
 2.	在该文件的开头，添加以下 using 语句：
-	
-		using Windows.UI.Core;
+    
+        using Windows.UI.Core;
 
 3.	在 **MainPage** 类中，添加以下数据成员：
-	
-		public static CoreDispatcher _dispatcher;
-		private DispatcherTimer sliderPositionUpdateDispatcher;
-	
+    
+        public static CoreDispatcher _dispatcher;
+        private DispatcherTimer sliderPositionUpdateDispatcher;
+    
 4.	在 **MainPage** 构造函数的末尾，添加以下代码：
 
-		_dispatcher = Window.Current.Dispatcher;
-		PointerEventHandler pointerpressedhandler = new PointerEventHandler(sliderProgress_PointerPressed);
-		sliderProgress.AddHandler(Control.PointerPressedEvent, pointerpressedhandler, true);    
-	
+        _dispatcher = Window.Current.Dispatcher;
+        PointerEventHandler pointerpressedhandler = new PointerEventHandler(sliderProgress_PointerPressed);
+        sliderProgress.AddHandler(Control.PointerPressedEvent, pointerpressedhandler, true);    
+    
 5.	在 **MainPage** 类的末尾，添加以下代码：
-	
-		#region sliderMediaPlayer
-		private double SliderFrequency(TimeSpan timevalue)
-		{
-		    long absvalue = 0;
-		    double stepfrequency = -1;
-		
-		    if (manifestObject != null)
-		    {
-		        absvalue = manifestObject.Duration - (long)manifestObject.StartTime;
-		    }
-		    else
-		    {
-		        absvalue = mediaElement.NaturalDuration.TimeSpan.Ticks;
-		    }
-		
-		    TimeSpan totalDVRDuration = new TimeSpan(absvalue);
-		
-		    if (totalDVRDuration.TotalMinutes >= 10 && totalDVRDuration.TotalMinutes < 30)
-		    {
-		       stepfrequency = 10;
-		    }
-		    else if (totalDVRDuration.TotalMinutes >= 30 
-		             && totalDVRDuration.TotalMinutes < 60)
-		    {
-		        stepfrequency = 30;
-		    }
-		    else if (totalDVRDuration.TotalHours >= 1)
-		    {
-		        stepfrequency = 60;
-		    }
-		
-		    return stepfrequency;
-		}
-		
-		void updateSliderPositionoNTicks(object sender, object e)
-		{
-		    sliderProgress.Value = mediaElement.Position.TotalSeconds;
-		}
-		
-		public void setupTimer()
-		{
-		    sliderPositionUpdateDispatcher = new DispatcherTimer();
-		    sliderPositionUpdateDispatcher.Interval = new TimeSpan(0, 0, 0, 0, 300);
-		    startTimer();
-		}
+    
+        #region sliderMediaPlayer
+        private double SliderFrequency(TimeSpan timevalue)
+        {
+            long absvalue = 0;
+            double stepfrequency = -1;
+        
+            if (manifestObject != null)
+            {
+                absvalue = manifestObject.Duration - (long)manifestObject.StartTime;
+            }
+            else
+            {
+                absvalue = mediaElement.NaturalDuration.TimeSpan.Ticks;
+            }
+        
+            TimeSpan totalDVRDuration = new TimeSpan(absvalue);
+        
+            if (totalDVRDuration.TotalMinutes >= 10 && totalDVRDuration.TotalMinutes < 30)
+            {
+               stepfrequency = 10;
+            }
+            else if (totalDVRDuration.TotalMinutes >= 30 
+                     && totalDVRDuration.TotalMinutes < 60)
+            {
+                stepfrequency = 30;
+            }
+            else if (totalDVRDuration.TotalHours >= 1)
+            {
+                stepfrequency = 60;
+            }
+        
+            return stepfrequency;
+        }
+        
+        void updateSliderPositionoNTicks(object sender, object e)
+        {
+            sliderProgress.Value = mediaElement.Position.TotalSeconds;
+        }
+        
+        public void setupTimer()
+        {
+            sliderPositionUpdateDispatcher = new DispatcherTimer();
+            sliderPositionUpdateDispatcher.Interval = new TimeSpan(0, 0, 0, 0, 300);
+            startTimer();
+        }
 
-		public void startTimer()
-		{
-		    sliderPositionUpdateDispatcher.Tick += updateSliderPositionoNTicks;
-		    sliderPositionUpdateDispatcher.Start();
-		}
-		
-		// Slider start and end time must be updated in case of live content
-		public async void setSliderStartTime(long startTime)
-		{
-		    await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-		    {
-		        TimeSpan timespan = new TimeSpan(adaptiveSourceStatusUpdate.StartTime);
-		        double absvalue = (int)Math.Round(timespan.TotalSeconds, MidpointRounding.AwayFromZero);
-		        sliderProgress.Minimum = absvalue;
-		    });
-		}
-		
-		// Slider start and end time must be updated in case of live content
-		public async void setSliderEndTime(long startTime)
-		{
-		    await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-		    {
-		        TimeSpan timespan = new TimeSpan(adaptiveSourceStatusUpdate.EndTime);
-		        double absvalue = (int)Math.Round(timespan.TotalSeconds, MidpointRounding.AwayFromZero);
-		        sliderProgress.Maximum = absvalue;
-		    });
-		}
-		#endregion sliderMediaPlayer
+        public void startTimer()
+        {
+            sliderPositionUpdateDispatcher.Tick += updateSliderPositionoNTicks;
+            sliderPositionUpdateDispatcher.Start();
+        }
+        
+        // Slider start and end time must be updated in case of live content
+        public async void setSliderStartTime(long startTime)
+        {
+            await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                TimeSpan timespan = new TimeSpan(adaptiveSourceStatusUpdate.StartTime);
+                double absvalue = (int)Math.Round(timespan.TotalSeconds, MidpointRounding.AwayFromZero);
+                sliderProgress.Minimum = absvalue;
+            });
+        }
+        
+        // Slider start and end time must be updated in case of live content
+        public async void setSliderEndTime(long startTime)
+        {
+            await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                TimeSpan timespan = new TimeSpan(adaptiveSourceStatusUpdate.EndTime);
+                double absvalue = (int)Math.Round(timespan.TotalSeconds, MidpointRounding.AwayFromZero);
+                sliderProgress.Maximum = absvalue;
+            });
+        }
+        #endregion sliderMediaPlayer
 
-	**注意：**CoreDispatcher 用于从非 UI 线程对 UI 线程进行更改。如果调度程序线程出现瓶颈，开发人员可以选择使用他（她）想要更新的 UI 元素提供的调度程序。例如：
-	
-		await sliderProgress.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { TimeSpan 
-		  timespan = new TimeSpan(adaptiveSourceStatusUpdate.EndTime); 
-		double absvalue  = (int)Math.Round(timespan.TotalSeconds, MidpointRounding.AwayFromZero); 
-		  sliderProgress.Maximum = absvalue; }); 
-		
+    **注意：**CoreDispatcher 用于从非 UI 线程对 UI 线程进行更改。如果调度程序线程出现瓶颈，开发人员可以选择使用他（她）想要更新的 UI 元素提供的调度程序。例如：
+    
+        await sliderProgress.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { TimeSpan 
+          timespan = new TimeSpan(adaptiveSourceStatusUpdate.EndTime); 
+        double absvalue  = (int)Math.Round(timespan.TotalSeconds, MidpointRounding.AwayFromZero); 
+          sliderProgress.Maximum = absvalue; }); 
+        
 6.	在 **mediaElement\_AdaptiveSourceStatusUpdated** 方法的末尾，添加以下代码：
-	
-		setSliderStartTime(args.StartTime);
-		setSliderEndTime(args.EndTime);
+    
+        setSliderStartTime(args.StartTime);
+        setSliderEndTime(args.EndTime);
 
 7.	在 **MediaOpened** 方法的末尾，添加以下代码：
-	
-	sliderProgress.StepFrequency = SliderFrequency(mediaElement.NaturalDuration.TimeSpan); 
-	sliderProgress.Width = mediaElement.Width; 
-	setupTimer();
+    
+    sliderProgress.StepFrequency = SliderFrequency(mediaElement.NaturalDuration.TimeSpan); 
+    sliderProgress.Width = mediaElement.Width; 
+    setupTimer();
 
 8.	按 **CTRL+S** 保存文件。
 
@@ -504,39 +504,39 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 1. 在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看设计器”。
 2. 找到 &lt;Grid.RowDefinitions&gt;，并按如下所示修改 RowDefinitions：
 
-		<Grid.RowDefinitions>            
-			<RowDefinition Height="20"/>
-		    <RowDefinition Height="50"/>
-		    <RowDefinition Height="100"/>
-		    <RowDefinition Height="80"/>
-		    <RowDefinition Height="50"/>
-		</Grid.RowDefinitions>
+        <Grid.RowDefinitions>            
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
 
 3. 在 &lt;Grid&gt;&lt;/Grid&gt; 标记中，添加以下代码以定义一个列表框控件，使用户能够看到可用流的列表并选择流：
 
-		<Grid Name="gridStreamAndBitrateSelection" Grid.Row="3">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="300"/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="250*"/>
-				<ColumnDefinition Width="250*"/>
-			</Grid.ColumnDefinitions>
-			<StackPanel Name="spStreamSelection" Grid.Row="1" Grid.Column="0">
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Name="tbAvailableStreams" Text="Available Streams:" FontSize="16" VerticalAlignment="Center"></TextBlock>
-					<Button Name="btnChangeStreams" Content="Submit" Click="btnChangeStream_Click"/>
-				</StackPanel>
-			    <ListBox x:Name="lbAvailableStreams" Height="200" Width="200" Background="Transparent" HorizontalAlignment="Left" 
-			    	ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-				        	<CheckBox Content="{Binding Name}" IsChecked="{Binding isChecked, Mode=TwoWay}" />
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
-			</StackPanel>
-		</Grid>
+        <Grid Name="gridStreamAndBitrateSelection" Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250*"/>
+                <ColumnDefinition Width="250*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Name="spStreamSelection" Grid.Row="1" Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Name="tbAvailableStreams" Text="Available Streams:" FontSize="16" VerticalAlignment="Center"></TextBlock>
+                    <Button Name="btnChangeStreams" Content="Submit" Click="btnChangeStream_Click"/>
+                </StackPanel>
+                <ListBox x:Name="lbAvailableStreams" Height="200" Width="200" Background="Transparent" HorizontalAlignment="Left" 
+                    ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox Content="{Binding Name}" IsChecked="{Binding isChecked, Mode=TwoWay}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Grid>
 
 4. 按 **CTRL+S** 保存更改。
 
@@ -544,206 +544,206 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 
 1. 在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看代码”。
 2. 在 SSPlayer 命名空间中添加一个新类：
-		#region class Stream
-	
-	    public class Stream
-	    {
-	        private IManifestStream stream;
-	        public bool isCheckedValue;
-	        public string name;
-	
-	        public string Name
-	        {
-	            get { return name; }
-	            set { name = value; }
-	        }
-	
-	        public IManifestStream ManifestStream
-	        {
-	            get { return stream; }
-	            set { stream = value; }
-	        }
-	
-	        public bool isChecked
-	        {
-	            get { return isCheckedValue; }
-	            set
-	            {
-	                // mMke the video stream always checked.
-	                if (stream.Type == MediaStreamType.Video)
-	                {
-	                    isCheckedValue = true;
-	                }
-	                else
-	                {
-	                    isCheckedValue = value;
-	                }
-	            }
-	        }
-	
-	        public Stream(IManifestStream streamIn)
-	        {
-	            stream = streamIn;
-	            name = stream.Name;
-	        }
-	    }
-	    #endregion class Stream
+        #region class Stream
+    
+        public class Stream
+        {
+            private IManifestStream stream;
+            public bool isCheckedValue;
+            public string name;
+    
+            public string Name
+            {
+                get { return name; }
+                set { name = value; }
+            }
+    
+            public IManifestStream ManifestStream
+            {
+                get { return stream; }
+                set { stream = value; }
+            }
+    
+            public bool isChecked
+            {
+                get { return isCheckedValue; }
+                set
+                {
+                    // mMke the video stream always checked.
+                    if (stream.Type == MediaStreamType.Video)
+                    {
+                        isCheckedValue = true;
+                    }
+                    else
+                    {
+                        isCheckedValue = value;
+                    }
+                }
+            }
+    
+            public Stream(IManifestStream streamIn)
+            {
+                stream = streamIn;
+                name = stream.Name;
+            }
+        }
+        #endregion class Stream
 
 3. 在 MainPage 类的开头，添加以下变量定义：
 
-		private List<Stream> availableStreams;
-		private List<Stream> availableAudioStreams;
-		private List<Stream> availableTextStreams;
-		private List<Stream> availableVideoStreams;
+        private List<Stream> availableStreams;
+        private List<Stream> availableAudioStreams;
+        private List<Stream> availableTextStreams;
+        private List<Stream> availableVideoStreams;
 
 4. 在 MainPage 类中，添加以下区域：
 
-		#region stream selection
-		///<summary>
-		///Functionality to select streams from IManifestStream available streams
-		/// </summary>
-		
-		// This function is called from the mediaElement_ManifestReady event handler 
-		// to retrieve the streams and populate them to the local data members.
-		public void getStreams(Manifest manifestObject)
-		{
-		    availableStreams = new List<Stream>();
-		    availableVideoStreams = new List<Stream>();
-		    availableAudioStreams = new List<Stream>();
-		    availableTextStreams = new List<Stream>();
-		
-		    try
-		    {
-		        for (int i = 0; i<manifestObject.AvailableStreams.Count; i++)
-		        {
-		            Stream newStream = new Stream(manifestObject.AvailableStreams[i]);
-		            newStream.isChecked = false;
-		
-		            //populate the stream lists based on the types
-		            availableStreams.Add(newStream);
-		
-		            switch (newStream.ManifestStream.Type)
-		            {
-		                case MediaStreamType.Video:
-		                    availableVideoStreams.Add(newStream);
-		                    break;
-		                case MediaStreamType.Audio:
-		                    availableAudioStreams.Add(newStream);
-		                    break;
-		                case MediaStreamType.Text:
-		                    availableTextStreams.Add(newStream);
-		                    break;
-		            }
-		
-		            // Select the default selected streams from the manifest.
-		            for (int j = 0; j<manifestObject.SelectedStreams.Count; j++)
-		            {
-		                string selectedStreamName = manifestObject.SelectedStreams[j].Name;
-		                if (selectedStreamName.Equals(newStream.Name))
-		                {
-		                    newStream.isChecked = true;
-		                    break;
-		                }
-		            }
-		        }
-		    }
-		    catch (Exception e)
-		    {
-		        txtStatus.Text = "Error: " + e.Message;
-		    }
-		}
-		
-		// This function set the list box ItemSource
-		private async void refreshAvailableStreamsListBoxItemSource()
-		{
-		    try
-		    {
-		        //update the stream check box list on the UI
-		        await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, ()
-		            => { lbAvailableStreams.ItemsSource = availableStreams; });
-		    }
-		    catch (Exception e)
-		    {
-		        txtStatus.Text = "Error: " + e.Message;
-		    }
-		}
-		
-		// This function creates a selected streams list
-		private void createSelectedStreamsList(List<IManifestStream> selectedStreams)
-		{
-		    bool isOneVideoSelected = false;
-		    bool isOneAudioSelected = false;
-		
-		    // Only one video stream can be selected
-		    for (int j = 0; j<availableVideoStreams.Count; j++)
-		    {
-		        if (availableVideoStreams[j].isChecked && (!isOneVideoSelected))
-		        {
-		            selectedStreams.Add(availableVideoStreams[j].ManifestStream);
-		            isOneVideoSelected = true;
-		        }
-		    }
-		
-		    // Select the frist video stream from the list if no video stream is selected
-		    if (!isOneVideoSelected)
-		    {
-		        availableVideoStreams[0].isChecked = true;
-		        selectedStreams.Add(availableVideoStreams[0].ManifestStream);
-		    }
-		
-		    // Only one audio stream can be selected
-		    for (int j = 0; j<availableAudioStreams.Count; j++)
-		    {
-		        if (availableAudioStreams[j].isChecked && (!isOneAudioSelected))
-		        {
-		            selectedStreams.Add(availableAudioStreams[j].ManifestStream);
-		            isOneAudioSelected = true;
-		            txtStatus.Text = "The audio stream is changed to " + availableAudioStreams[j].ManifestStream.Name;
-		        }
-		    }
-		
-		    // Select the frist audio stream from the list if no audio steam is selected.
-		    if (!isOneAudioSelected)
-		    {
-		        availableAudioStreams[0].isChecked = true;
-		        selectedStreams.Add(availableAudioStreams[0].ManifestStream);
-		    }
-		
-		    // Multiple text streams are supported.
-		    for (int j = 0; j < availableTextStreams.Count; j++)
-		    {
-		        if (availableTextStreams[j].isChecked)
-		        {
-		            selectedStreams.Add(availableTextStreams[j].ManifestStream);
-		        }
-		    }
-		}
-		
-		// Change streams on a smooth streaming presentation with multiple video streams.
-		private async void changeStreams(List<IManifestStream> selectStreams)
-		{
-		    try
-		    {
-		        IReadOnlyList<IStreamChangedResult> returnArgs =
-		            await manifestObject.SelectStreamsAsync(selectStreams);
-		    }
-		    catch (Exception e)
-		    {
-		        txtStatus.Text = "Error: " + e.Message;
-		    }
-		}
-		#endregion stream selection
+        #region stream selection
+        ///<summary>
+        ///Functionality to select streams from IManifestStream available streams
+        /// </summary>
+        
+        // This function is called from the mediaElement_ManifestReady event handler 
+        // to retrieve the streams and populate them to the local data members.
+        public void getStreams(Manifest manifestObject)
+        {
+            availableStreams = new List<Stream>();
+            availableVideoStreams = new List<Stream>();
+            availableAudioStreams = new List<Stream>();
+            availableTextStreams = new List<Stream>();
+        
+            try
+            {
+                for (int i = 0; i<manifestObject.AvailableStreams.Count; i++)
+                {
+                    Stream newStream = new Stream(manifestObject.AvailableStreams[i]);
+                    newStream.isChecked = false;
+        
+                    //populate the stream lists based on the types
+                    availableStreams.Add(newStream);
+        
+                    switch (newStream.ManifestStream.Type)
+                    {
+                        case MediaStreamType.Video:
+                            availableVideoStreams.Add(newStream);
+                            break;
+                        case MediaStreamType.Audio:
+                            availableAudioStreams.Add(newStream);
+                            break;
+                        case MediaStreamType.Text:
+                            availableTextStreams.Add(newStream);
+                            break;
+                    }
+        
+                    // Select the default selected streams from the manifest.
+                    for (int j = 0; j<manifestObject.SelectedStreams.Count; j++)
+                    {
+                        string selectedStreamName = manifestObject.SelectedStreams[j].Name;
+                        if (selectedStreamName.Equals(newStream.Name))
+                        {
+                            newStream.isChecked = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                txtStatus.Text = "Error: " + e.Message;
+            }
+        }
+        
+        // This function set the list box ItemSource
+        private async void refreshAvailableStreamsListBoxItemSource()
+        {
+            try
+            {
+                //update the stream check box list on the UI
+                await _dispatcher.RunAsync(CoreDispatcherPriority.Normal, ()
+                    => { lbAvailableStreams.ItemsSource = availableStreams; });
+            }
+            catch (Exception e)
+            {
+                txtStatus.Text = "Error: " + e.Message;
+            }
+        }
+        
+        // This function creates a selected streams list
+        private void createSelectedStreamsList(List<IManifestStream> selectedStreams)
+        {
+            bool isOneVideoSelected = false;
+            bool isOneAudioSelected = false;
+        
+            // Only one video stream can be selected
+            for (int j = 0; j<availableVideoStreams.Count; j++)
+            {
+                if (availableVideoStreams[j].isChecked && (!isOneVideoSelected))
+                {
+                    selectedStreams.Add(availableVideoStreams[j].ManifestStream);
+                    isOneVideoSelected = true;
+                }
+            }
+        
+            // Select the frist video stream from the list if no video stream is selected
+            if (!isOneVideoSelected)
+            {
+                availableVideoStreams[0].isChecked = true;
+                selectedStreams.Add(availableVideoStreams[0].ManifestStream);
+            }
+        
+            // Only one audio stream can be selected
+            for (int j = 0; j<availableAudioStreams.Count; j++)
+            {
+                if (availableAudioStreams[j].isChecked && (!isOneAudioSelected))
+                {
+                    selectedStreams.Add(availableAudioStreams[j].ManifestStream);
+                    isOneAudioSelected = true;
+                    txtStatus.Text = "The audio stream is changed to " + availableAudioStreams[j].ManifestStream.Name;
+                }
+            }
+        
+            // Select the frist audio stream from the list if no audio steam is selected.
+            if (!isOneAudioSelected)
+            {
+                availableAudioStreams[0].isChecked = true;
+                selectedStreams.Add(availableAudioStreams[0].ManifestStream);
+            }
+        
+            // Multiple text streams are supported.
+            for (int j = 0; j < availableTextStreams.Count; j++)
+            {
+                if (availableTextStreams[j].isChecked)
+                {
+                    selectedStreams.Add(availableTextStreams[j].ManifestStream);
+                }
+            }
+        }
+        
+        // Change streams on a smooth streaming presentation with multiple video streams.
+        private async void changeStreams(List<IManifestStream> selectStreams)
+        {
+            try
+            {
+                IReadOnlyList<IStreamChangedResult> returnArgs =
+                    await manifestObject.SelectStreamsAsync(selectStreams);
+            }
+            catch (Exception e)
+            {
+                txtStatus.Text = "Error: " + e.Message;
+            }
+        }
+        #endregion stream selection
 
 5. 找到 mediaElement\_ManifestReady 方法，并在函数的末尾追加以下代码：
-	
-		getStreams(manifestObject);
+    
+        getStreams(manifestObject);
         refreshAvailableStreamsListBoxItemSource();
 
-	因此，当 MediaElement 清单准备就绪时，该代码将获取可用流的列表，并将该列表的内容填充到 UI 列表框。
+    因此，当 MediaElement 清单准备就绪时，该代码将获取可用流的列表，并将该列表的内容填充到 UI 列表框。
 
 6. 在 MainPage 类中，找到 UI 按钮单击事件区域，然后添加以下函数定义：
 
-		private void btnChangeStream_Click(object sender, RoutedEventArgs e)
+        private void btnChangeStream_Click(object sender, RoutedEventArgs e)
         {
             List<IManifestStream> selectedStreams = new List<IManifestStream>();
 
@@ -776,20 +776,20 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 1. 在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看设计器”。
 2. 找到名为 **gridStreamAndBitrateSelection** 的 Grid 标记，并在该标记的末尾追加以下代码：
 
-		<StackPanel Name="spBitRateSelection" Grid.Row="1" Grid.Column="1">
-		 <StackPanel Orientation="Horizontal">
-		     <TextBlock Name="tbBitRate" Text="Available Bitrates:" FontSize="16" VerticalAlignment="Center"/>
-		     <Button Name="btnChangeTracks" Content="Submit" Click="btnChangeTrack_Click" />
-		 </StackPanel>
-		 <ListBox x:Name="lbAvailableVideoTracks" Height="200" Width="200" Background="Transparent" HorizontalAlignment="Left" 
-		          ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
-		     <ListBox.ItemTemplate>
-		         <DataTemplate>
-		             <CheckBox Content="{Binding Bitrate}" IsChecked="{Binding isChecked, Mode=TwoWay}"/>
-		         </DataTemplate>
-		     </ListBox.ItemTemplate>
-		 </ListBox>
-		</StackPanel>
+        <StackPanel Name="spBitRateSelection" Grid.Row="1" Grid.Column="1">
+         <StackPanel Orientation="Horizontal">
+             <TextBlock Name="tbBitRate" Text="Available Bitrates:" FontSize="16" VerticalAlignment="Center"/>
+             <Button Name="btnChangeTracks" Content="Submit" Click="btnChangeTrack_Click" />
+         </StackPanel>
+         <ListBox x:Name="lbAvailableVideoTracks" Height="200" Width="200" Background="Transparent" HorizontalAlignment="Left" 
+                  ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+             <ListBox.ItemTemplate>
+                 <DataTemplate>
+                     <CheckBox Content="{Binding Bitrate}" IsChecked="{Binding isChecked, Mode=TwoWay}"/>
+                 </DataTemplate>
+             </ListBox.ItemTemplate>
+         </ListBox>
+        </StackPanel>
 
 3. 按 **CTRL+S** 保存更改
 
@@ -797,51 +797,51 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 
 1. 在解决方案资源管理器中，右键单击“MainPage.xaml”，然后单击“查看代码”。
 2. 在 SSPlayer 命名空间中添加一个新类：
-	
-		#region class Track
-	    public class Track
-	    {
-	        private IManifestTrack trackInfo;
-	        public string _bitrate;
-	        public bool isCheckedValue;
-	
-	        public IManifestTrack TrackInfo
-	        {
-	            get { return trackInfo; }
-	            set { trackInfo = value; }
-	        }
-	
-	        public string Bitrate
-	        {
-	            get { return _bitrate; }
-	            set { _bitrate = value; }
-	        }
-	
-	        public bool isChecked
-	        {
-	            get { return isCheckedValue; }
-	            set
-	            {
-	                isCheckedValue = value;
-	            }
-	        }
-	
-	        public Track(IManifestTrack trackInfoIn)
-	        {
-	            trackInfo = trackInfoIn;
-	            _bitrate = trackInfoIn.Bitrate.ToString();
-	        }
-	        //public Track() { }
-	    }
-	    #endregion class Track
+    
+        #region class Track
+        public class Track
+        {
+            private IManifestTrack trackInfo;
+            public string _bitrate;
+            public bool isCheckedValue;
+    
+            public IManifestTrack TrackInfo
+            {
+                get { return trackInfo; }
+                set { trackInfo = value; }
+            }
+    
+            public string Bitrate
+            {
+                get { return _bitrate; }
+                set { _bitrate = value; }
+            }
+    
+            public bool isChecked
+            {
+                get { return isCheckedValue; }
+                set
+                {
+                    isCheckedValue = value;
+                }
+            }
+    
+            public Track(IManifestTrack trackInfoIn)
+            {
+                trackInfo = trackInfoIn;
+                _bitrate = trackInfoIn.Bitrate.ToString();
+            }
+            //public Track() { }
+        }
+        #endregion class Track
 
 3. 在 MainPage 类的开头，添加以下变量定义：
-	
-		private List<Track> availableTracks;
+    
+        private List<Track> availableTracks;
 
 4. 在 MainPage 类中，添加以下区域：
-	
-		#region track selection
+    
+        #region track selection
         /// <summary>
         /// Functionality to select video streams
         /// </summary>
@@ -880,7 +880,7 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
             }
         }
 
-		// This function gets the video stream that is playing
+        // This function gets the video stream that is playing
         private IManifestStream getVideoStream()
         {
             IManifestStream videoStream = null;
@@ -895,7 +895,7 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
             return videoStream;
         }
 
-		// This function set the UI list box control ItemSource
+        // This function set the UI list box control ItemSource
         private async void refreshAvailableTracksListBoxItemSource()
         {
             try
@@ -910,7 +910,7 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
             }        
         }
 
-		// This function creates a list of the selected tracks.
+        // This function creates a list of the selected tracks.
         private void createSelectedTracksList(List<IManifestTrack> selectedTracks)
         {
             // Create a list of selected tracks
@@ -923,7 +923,7 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
             }
         }
 
-		// This function selects the tracks based on user selection 
+        // This function selects the tracks based on user selection 
         private void changeTracks(List<IManifestTrack> selectedTracks)
         {
             IManifestStream videoStream = getVideoStream();
@@ -940,12 +940,12 @@ MediaElement 控件并非原本就支持平滑流式处理内容。若要启用�
 
 5. 找到 mediaElement\_ManifestReady 方法，并在函数的末尾追加以下代码：
 
-		getTracks(manifestObject);
-		refreshAvailableTracksListBoxItemSource();
+        getTracks(manifestObject);
+        refreshAvailableTracksListBoxItemSource();
 
 6. 在 MainPage 类中，找到 UI 按钮单击事件区域，然后添加以下函数定义：
 
-		private void btnChangeStream_Click(object sender, RoutedEventArgs e)
+        private void btnChangeStream_Click(object sender, RoutedEventArgs e)
         {
             List<IManifestStream> selectedStreams = new List<IManifestStream>();
 

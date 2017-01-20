@@ -65,8 +65,8 @@ ms.author: davidmu
     
 3. 若要获取创建凭据所需的令牌，请将以下方法添加到 Program 类：
 
-	    private static async Task<AuthenticationResult> GetAccessTokenAsync()
-	    {
+        private static async Task<AuthenticationResult> GetAccessTokenAsync()
+        {
           var cc = new ClientCredential("{client-id}", "{client-secret}");
           var context = new AuthenticationContext("https://login.chinacloudapi.cn/{tenant-id}");
           var token = await context.AcquireTokenAsync("https://management.chinacloudapi.cn/", cc);
@@ -76,7 +76,7 @@ ms.author: davidmu
           }
           return token;
         }
-	
+    
     将 {client-id} 替换为 Azure Active Directory 应用程序的标识符，将 {client-secret} 替换为 AD 应用程序的访问密钥，并将 {tenant-id} 替换为你的订阅的租户标识符。可以通过运行 Get-AzureRmSubscription 找到租户 ID。可使用 Azure 门户预览找到访问密钥。
     
 4. 若要创建凭据，请将以下代码添加到 Program.cs 中的 Main 方法：
@@ -189,7 +189,7 @@ ms.author: davidmu
 
 4. 在 Visual Studio 中单击“启动”，然后使用订阅所用的相同用户名和密码登录到 Azure AD。
 
-	运行此方法时，应会显示与下例类似的内容：
+    运行此方法时，应会显示与下例类似的内容：
     
         Getting information about the virtual machine...
         hardwareProfile
@@ -272,7 +272,7 @@ ms.author: davidmu
           await computeManagementClient.VirtualMachines.PowerOffAsync(groupName, vmName);
         }
 
-	若要解除分配虚拟机，请将 PowerOff 调用更改为以下代码：
+    若要解除分配虚拟机，请将 PowerOff 调用更改为以下代码：
 
         computeManagementClient.VirtualMachines.Deallocate(groupName, vmName);
 
@@ -324,7 +324,7 @@ ms.author: davidmu
 
 5. 在 Visual Studio 中单击“启动”，然后使用订阅所用的相同用户名和密码登录到 Azure AD。
 
-	你应会看到虚拟机的状态更改为“正在运行”。
+    你应会看到虚拟机的状态更改为“正在运行”。
 
 ## 重新启动正在运行的虚拟机
 

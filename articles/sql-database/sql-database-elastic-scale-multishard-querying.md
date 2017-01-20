@@ -49,14 +49,14 @@ ms.author: torsteng
             cmd.ExecutionPolicy = MultiShardExecutionPolicy.PartialResults; 
 
             using (MultiShardDataReader sdr = cmd.ExecuteReader()) 
-            	{ 
-                	while (sdr.Read())
-                    	{ 
-                        	var c1Field = sdr.GetString(0); 
-                        	var c2Field = sdr.GetFieldValue<int>(1); 
-                        	var c3Field = sdr.GetFieldValue<Int64>(2);
-                    	} 
-             	} 
+                { 
+                    while (sdr.Read())
+                        { 
+                            var c1Field = sdr.GetString(0); 
+                            var c2Field = sdr.GetFieldValue<int>(1); 
+                            var c3Field = sdr.GetFieldValue<Int64>(2);
+                        } 
+                 } 
            } 
     } 
 

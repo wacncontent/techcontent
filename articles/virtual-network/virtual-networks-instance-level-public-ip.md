@@ -65,32 +65,32 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 预期输出：
  
-	DeploymentName              : FTPService
-	Name                        : FTPInstance
-	Label                       : 
-	VM                          : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.PersistentVM
-	InstanceStatus              : ReadyRole
-	IpAddress                   : 100.74.118.91
-	InstanceStateDetails        : 
-	PowerState                  : Started
-	InstanceErrorCode           : 
-	InstanceFaultDomain         : 0
-	InstanceName                : FTPInstance
-	InstanceUpgradeDomain       : 0
-	InstanceSize                : Small
-	HostName                    : FTPInstance
-	AvailabilitySetName         : 
-	DNSName                     : http://ftpservice888.chinacloudapp.cn/
-	Status                      : ReadyRole
-	GuestAgentStatus            : 	Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
-	ResourceExtensionStatusList : {Microsoft.Compute.BGInfo}
-	PublicIPAddress             : 104.43.142.188
-	PublicIPName                : ftpip
-	NetworkInterfaces           : {}
-	ServiceName                 : FTPService
-	OperationDescription        : Get-AzureVM
-	OperationId                 : 568d88d2be7c98f4bbb875e4d823718e
-	OperationStatus             : OK
+    DeploymentName              : FTPService
+    Name                        : FTPInstance
+    Label                       : 
+    VM                          : Microsoft.WindowsAzure.Commands.ServiceManagement.Model.PersistentVM
+    InstanceStatus              : ReadyRole
+    IpAddress                   : 100.74.118.91
+    InstanceStateDetails        : 
+    PowerState                  : Started
+    InstanceErrorCode           : 
+    InstanceFaultDomain         : 0
+    InstanceName                : FTPInstance
+    InstanceUpgradeDomain       : 0
+    InstanceSize                : Small
+    HostName                    : FTPInstance
+    AvailabilitySetName         : 
+    DNSName                     : http://ftpservice888.chinacloudapp.cn/
+    Status                      : ReadyRole
+    GuestAgentStatus            : 	Microsoft.WindowsAzure.Commands.ServiceManagement.Model.GuestAgentStatus
+    ResourceExtensionStatusList : {Microsoft.Compute.BGInfo}
+    PublicIPAddress             : 104.43.142.188
+    PublicIPName                : ftpip
+    NetworkInterfaces           : {}
+    ServiceName                 : FTPService
+    OperationDescription        : Get-AzureVM
+    OperationId                 : 568d88d2be7c98f4bbb875e4d823718e
+    OperationStatus             : OK
 
 ## 如何删除 VM 的 ILPIP
 若要删除在以上脚本中添加到 VM 的 ILPIP，请运行以下 PowerShell 命令：

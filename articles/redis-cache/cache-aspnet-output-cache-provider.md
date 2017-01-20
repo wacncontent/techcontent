@@ -67,7 +67,7 @@ NuGet 包会下载并添加所需的程序集引用，并将以下部分添加�
 -	**port** - 使用非 SSL 端口或 SSL 端口，具体取决于 SSL 设置。
 -	**accessKey** - 使用缓存的主密钥或辅助密钥。
 -	**ssl** - 如果要使用 ssl 保护缓存/客户端通信，则为 true；否则为 false。请务必指定正确的端口。
-	-	默认情况下，将为新缓存禁用非 SSL 端口。为此设置指定 true 可使用 SSL 端口。有关启用非 SSL 端口的详细信息，请参阅[配置缓存](./cache-configure.md)主题中的[访问端口](./cache-configure.md#access-ports)部分。
+    -	默认情况下，将为新缓存禁用非 SSL 端口。为此设置指定 true 可使用 SSL 端口。有关启用非 SSL 端口的详细信息，请参阅[配置缓存](./cache-configure.md)主题中的[访问端口](./cache-configure.md#access-ports)部分。
 -	**databaseId** - 指定要用于缓存输出数据的数据库。如果未指定，则使用默认值 0。
 -	**applicationName** - 密钥存储在 redis 中作为 <AppName>\_<SessionId>\_Data。这使多个应用程序可以共享同一密钥。此参数是可选的，如果未提供它，则使用默认值。
 -	**connectionTimeoutInMilliseconds** - 此设置允许你覆盖 StackExchange.Redis 客户端中的 connectTimeout 设置。如果未指定，则使用默认 connectTimeout 设置 5000。有关详细信息，请参阅 [StackExchange.Redis 配置模型](http://go.microsoft.com/fwlink/?LinkId=398705)。

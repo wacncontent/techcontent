@@ -54,10 +54,10 @@ ALTER DATABASE [database_name] SET ENCRYPTION OFF;
 
 ```sql
 SELECT
-	[name],
-	[is_encrypted]
+    [name],
+    [is_encrypted]
 FROM
-	sys.databases;
+    sys.databases;
 ```
 
 结果 ```1``` 表示数据库已加密，```0``` 表示数据库未加密。

@@ -26,7 +26,7 @@ ms.author: kirillg
 
 2. 在资源菜单中，单击“查询资源管理器”。
 
-	![Azure 门户预览的屏幕截图，其中突出显示了查询资源管理器](./media/documentdb-query-collections-query-explorer/queryexplorercommand.png)  
+    ![Azure 门户预览的屏幕截图，其中突出显示了查询资源管理器](./media/documentdb-query-collections-query-explorer/queryexplorercommand.png)  
 
 3. 在“查询资源管理器”边栏选项卡中，从下拉列表中选择要查询的**数据库**和**集合**，然后键入要运行的查询。
 
@@ -36,11 +36,11 @@ ms.author: kirillg
 
     单击“运行查询”查看结果。
 
-	![在查询资源管理器（一个 SQL 查询编辑器）中编写 SQL 查询的屏幕截图](./media/documentdb-query-collections-query-explorer/queryexplorerinitial.png)  
+    ![在查询资源管理器（一个 SQL 查询编辑器）中编写 SQL 查询的屏幕截图](./media/documentdb-query-collections-query-explorer/queryexplorerinitial.png)  
 
 4. “结果”边栏选项卡将显示查询的输出。
 
-	![在查询资源管理器中编写 SQL 查询的结果的屏幕截图](./media/documentdb-query-collections-query-explorer/queryresults1.png)  
+    ![在查询资源管理器中编写 SQL 查询的结果的屏幕截图](./media/documentdb-query-collections-query-explorer/queryresults1.png)  
 
 ## 处理结果
 

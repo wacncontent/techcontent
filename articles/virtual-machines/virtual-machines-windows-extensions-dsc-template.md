@@ -26,8 +26,8 @@ ms.author: zachal
 
 模板的“资源”部分中要使用以下代码片段。
 
-			"name": "Microsoft.Powershell.DSC",
-			"type": "extensions",
+            "name": "Microsoft.Powershell.DSC",
+            "type": "extensions",
              "location": "[resourceGroup().location]",
              "apiVersion": "2015-06-15",
              "dependsOn": [

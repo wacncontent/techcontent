@@ -41,15 +41,15 @@ ms.author: juliako;mingfeiy
 
 平滑流式处理：
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
 
 HLS：
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
 
 MPEG DASH
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf) 
+    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf) 
 
 ## 注意事项
 * 如果某个资产存在 OnDemand（流式处理）定位符，则不能删除与该资产关联的 AssetDeliveryPolicy。在删除策略之前，建议先从资产中删除该策略。
@@ -107,7 +107,7 @@ Azure 媒体服务还允许你添加 Widevine 加密。以下示例演示将 Pla
 
     static public void CreateAssetDeliveryPolicy(IAsset asset, IContentKey key)
     {
-    	// Get the PlayReady license service URL.
+        // Get the PlayReady license service URL.
         Uri acquisitionUrl = key.GetKeyDeliveryUrl(ContentKeyDeliveryType.PlayReadyLicense);
         
         // GetKeyDeliveryUrl for Widevine attaches the KID to the URL.

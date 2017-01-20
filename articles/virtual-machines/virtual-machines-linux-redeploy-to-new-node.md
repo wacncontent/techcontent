@@ -29,11 +29,11 @@ ms.author: iainfou
 
 使用以下 Azure CLI 命令可重新部署虚拟机：
 
-	azure vm redeploy --resourcegroup <resourcegroup> --vm-name <vmname> 
+    azure vm redeploy --resourcegroup <resourcegroup> --vm-name <vmname> 
 
 在重新部署 VM 的过程时，可以看到 VM 的状态发生更改。在将 VM 重新部署到新主机的过程中，VM 的 `PowerState` 将从“正在运行”变为“正在更新”，然后变为“正在启动”，最后变为“正在运行”。使用以下命令检查资源组中的 VM 的状态：
 
-	azure vm list -g <resourcegroup>
+    azure vm list -g <resourcegroup>
 
 [!INCLUDE [virtual-machines-common-redeploy-to-new-node](../../includes/virtual-machines-common-redeploy-to-new-node.md)]
 

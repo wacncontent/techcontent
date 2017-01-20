@@ -6,7 +6,7 @@
         options.PushAuthorization = 
             Microsoft.WindowsAzure.Mobile.Service.Security.AuthorizationLevel.User;
  
-	这会强制用户在注册推送通知之前进行身份验证。
+    这会强制用户在注册推送通知之前进行身份验证。
 
 3. 右键单击该项目，单击“添加”，然后单击“类...”。
 
@@ -14,18 +14,18 @@
 
 5. 在代码页的顶部，添加以下 **using** 语句：
 
-		using System.Threading.Tasks; 
-		using System.Web.Http; 
-		using System.Web.Http.Controllers; 
-		using Microsoft.WindowsAzure.Mobile.Service; 
-		using Microsoft.WindowsAzure.Mobile.Service.Notifications; 
-		using Microsoft.WindowsAzure.Mobile.Service.Security; 
+        using System.Threading.Tasks; 
+        using System.Web.Http; 
+        using System.Web.Http.Controllers; 
+        using Microsoft.WindowsAzure.Mobile.Service; 
+        using Microsoft.WindowsAzure.Mobile.Service.Notifications; 
+        using Microsoft.WindowsAzure.Mobile.Service.Security; 
 
 6. 将现有的 **PushRegistrationHandler** 类替换为以下代码：
  
-	    public class PushRegistrationHandler : INotificationHandler
-	    {
-	        public Task Register(ApiServices services, HttpRequestContext context,
+        public class PushRegistrationHandler : INotificationHandler
+        {
+            public Task Register(ApiServices services, HttpRequestContext context,
             NotificationRegistration registration)
         {
             try
@@ -68,23 +68,23 @@
             }
             return true;
         }
-	
+    
         public Task Unregister(ApiServices services, HttpRequestContext context, 
             string deviceId)
         {
             // This is where you can hook into registration deletion.
             return Task.FromResult(true);
         }
-    	}
+        }
 
-	在注册期间将调用 **Register** 方法。这样，你便可以向注册添加一个标记（已登录用户的 ID）。将验证提供的标记以防止用户注册其他用户的 ID。通知发送给该用户后，用户可在此设备和用户所注册的其他任何设备上接收通知。
+    在注册期间将调用 **Register** 方法。这样，你便可以向注册添加一个标记（已登录用户的 ID）。将验证提供的标记以防止用户注册其他用户的 ID。通知发送给该用户后，用户可在此设备和用户所注册的其他任何设备上接收通知。
 
 7. 展开 Controllers 文件夹、打开 TodoItemController.cs 项目文件、找到 **PostTodoItem** 方法，然后将调用 **SendAsync** 的代码行替换为以下代码：
 
         // Get the logged-in user.
-		var currentUser = this.User as ServiceUser;
-		
-		// Use a tag to only send the notification to the logged-in user.
+        var currentUser = this.User as ServiceUser;
+        
+        // Use a tag to only send the notification to the logged-in user.
         var result = await Services.Push.SendAsync(message, currentUser.Id);
 
 8. 重新发布移动服务项目。

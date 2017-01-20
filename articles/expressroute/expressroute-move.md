@@ -107,8 +107,8 @@ ExpressRoute 线路相当于经典部署模型与 Resource Manager 部署模型�
 - 有关工作流信息，请参阅 [ExpressRoute 线路预配工作流和线路状态](./expressroute-workflows.md)。
 - 配置 ExpressRoute 连接的步骤：
 
-	- [创建 ExpressRoute 线路](./expressroute-howto-circuit-arm.md)
-	- [配置路由](./expressroute-howto-routing-arm.md)
-	- [将虚拟网络链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-arm.md)
+    - [创建 ExpressRoute 线路](./expressroute-howto-circuit-arm.md)
+    - [配置路由](./expressroute-howto-routing-arm.md)
+    - [将虚拟网络链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-arm.md)
 
 <!---HONumber=Mooncake_Quality_Review_0117_2017-->

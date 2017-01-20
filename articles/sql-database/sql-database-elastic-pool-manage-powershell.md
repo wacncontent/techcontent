@@ -40,7 +40,7 @@ ms.author: srinia
 
 使用 [Set-AzureRmSqlDatabase](https://msdn.microsoft.com/zh-cn/library/azure/mt619433.aspx) 可以将数据库移入或移出池。
 
-	Set-AzureRmSqlDatabase -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
+    Set-AzureRmSqlDatabase -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
 
 ##<a name="change-performance-settings-of-a-pool"></a> 更改池的性能设置
 
@@ -52,13 +52,13 @@ ms.author: srinia
 
 创建池需要一些时间。可以使用 [Get-AzureRmSqlElasticPoolActivity](https://msdn.microsoft.com/zh-cn/library/azure/mt603812.aspx) cmdlet 跟踪池操作（包括创建和更新）的状态。
 
-	Get-AzureRmSqlElasticPoolActivity –ResourceGroupName “resourcegroup1” –ServerName “server1” –ElasticPoolName “elasticpool1” 
+    Get-AzureRmSqlElasticPoolActivity –ResourceGroupName “resourcegroup1” –ServerName “server1” –ElasticPoolName “elasticpool1” 
 
 ## 获取将弹性数据库移入和移出池的状态
 
 移动数据库需要一些时间。可以使用 [Get AzureRmSqlDatabaseActivity](https://msdn.microsoft.com/zh-cn/library/azure/mt603687.aspx) cmdlet 跟踪移动状态。
 
-	Get-AzureRmSqlDatabaseActivity -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
+    Get-AzureRmSqlDatabaseActivity -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
 
 ## 获取池的资源使用情况数据
 
@@ -87,7 +87,7 @@ ms.author: srinia
 
 检索指标：
 
-	$metrics = (Get-AzureRmMetric -ResourceId /subscriptions/<subscriptionId>/resourceGroups/FabrikamData01/providers/Microsoft.Sql/servers/fabrikamsqldb02/elasticPools/franchisepool -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime "4/18/2015" -EndTime "4/21/2015")  
+    $metrics = (Get-AzureRmMetric -ResourceId /subscriptions/<subscriptionId>/resourceGroups/FabrikamData01/providers/Microsoft.Sql/servers/fabrikamsqldb02/elasticPools/franchisepool -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime "4/18/2015" -EndTime "4/21/2015")  
 
 ##<a name="elastic-database-monitoring"></a> 获取弹性数据库的资源使用情况数据
 
@@ -185,36 +185,36 @@ ms.author: srinia
 
 该示例将检索给定的弹性池及其所有数据库的资源消耗指标值。所收集的数据被格式化并写入到 .csv 格式文件中。可以使用 Excel 浏览该文件。
 
-	$subscriptionId = '<Azure subscription id>'	      # Azure subscription ID
-	$resourceGroupName = '<resource group name>'             # Resource Group
-	$serverName = <server name>                              # server name
-	$poolName = <elastic pool name>                          # pool name
-		
-	# Login to Azure account and select the subscription.
-	Login-AzureRmAccount -EnvironmentName AzrueChinaCloud
-	Set-AzureRmContext -SubscriptionId $subscriptionId
-	
-	# Get resource usage metrics for an elastic pool for the specified time interval.
-	$startTime = '4/27/2016 00:00:00'  # start time in UTC
-	$endTime = '4/27/2016 01:00:00'    # end time in UTC
-	
-	# Construct the pool resource ID and retrive pool metrics at 5 minute granularity.
-	$poolResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/elasticPools/' + $poolName
-	$poolMetrics = (Get-AzureRmMetric -ResourceId $poolResourceId -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime $startTime -EndTime $endTime) 
-	
-	# Get the list of databases in this pool.
-	$dbList = Get-AzureRmSqlElasticPoolDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -ElasticPoolName $poolName
-	
-	# Get resource usage metrics for a database in an elastic database for the specified time interval.
-	$dbMetrics = @()
-	foreach ($db in $dbList)
-	{
-	    $dbResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/databases/' + $db.DatabaseName
-	    $dbMetrics = $dbMetrics + (Get-AzureRmMetric -ResourceId $dbResourceId -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime $startTime -EndTime $endTime)
-	}
-	
-	#Optionally you can format the metrics and output as .csv file using the following script block.
-	$command = {
+    $subscriptionId = '<Azure subscription id>'	      # Azure subscription ID
+    $resourceGroupName = '<resource group name>'             # Resource Group
+    $serverName = <server name>                              # server name
+    $poolName = <elastic pool name>                          # pool name
+        
+    # Login to Azure account and select the subscription.
+    Login-AzureRmAccount -EnvironmentName AzrueChinaCloud
+    Set-AzureRmContext -SubscriptionId $subscriptionId
+    
+    # Get resource usage metrics for an elastic pool for the specified time interval.
+    $startTime = '4/27/2016 00:00:00'  # start time in UTC
+    $endTime = '4/27/2016 01:00:00'    # end time in UTC
+    
+    # Construct the pool resource ID and retrive pool metrics at 5 minute granularity.
+    $poolResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/elasticPools/' + $poolName
+    $poolMetrics = (Get-AzureRmMetric -ResourceId $poolResourceId -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime $startTime -EndTime $endTime) 
+    
+    # Get the list of databases in this pool.
+    $dbList = Get-AzureRmSqlElasticPoolDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -ElasticPoolName $poolName
+    
+    # Get resource usage metrics for a database in an elastic database for the specified time interval.
+    $dbMetrics = @()
+    foreach ($db in $dbList)
+    {
+        $dbResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/databases/' + $db.DatabaseName
+        $dbMetrics = $dbMetrics + (Get-AzureRmMetric -ResourceId $dbResourceId -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime $startTime -EndTime $endTime)
+    }
+    
+    #Optionally you can format the metrics and output as .csv file using the following script block.
+    $command = {
     param($metricList, $outputFile)
 
     # Format metrics into a table.
@@ -233,13 +233,13 @@ ms.author: srinia
     
     # Output the metrics into a .csv file.
     write-output $table | Export-csv -Path $outputFile -Append -NoTypeInformation
-	}
-	
-	# Format and output pool metrics
-	Invoke-Command -ScriptBlock $command -ArgumentList $poolMetrics,c:\temp\poolmetrics.csv
-	
-	# Format and output database metrics
-	Invoke-Command -ScriptBlock $command -ArgumentList $dbMetrics,c:\temp\dbmetrics.csv
+    }
+    
+    # Format and output pool metrics
+    Invoke-Command -ScriptBlock $command -ArgumentList $poolMetrics,c:\temp\poolmetrics.csv
+    
+    # Format and output database metrics
+    Invoke-Command -ScriptBlock $command -ArgumentList $dbMetrics,c:\temp\dbmetrics.csv
 
 ## 弹性池操作延迟
 

@@ -49,7 +49,7 @@ ms.author: sethm
 
 2.	运行 **Sender** 项目，在控制台窗口中按 **Enter**，然后会看到事件出现在接收方窗口中。
 
-   	![][22]
+       ![][22]
 
 > [!NOTE]  在本教程中，只出于开发目的以本地模式使用 Storm。请参阅 [HDInsight Storm 概述][]和官方 [Apache Storm][] 文档，以了解 Storm 部署和模式的详细信息。
 

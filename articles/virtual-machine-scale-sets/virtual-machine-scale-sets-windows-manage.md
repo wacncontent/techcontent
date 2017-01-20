@@ -171,11 +171,11 @@ ms.author: davidmu
 
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要停止的虚拟机的标识符，然后运行该命令：
 
-	Stop-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
+    Stop-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
 
 在资源浏览器中，我们可以看到该实例的状态是“已解除分配”：
 
-	"statuses": [
+    "statuses": [
       {
         "code": "ProvisioningState/succeeded",
         "level": "Info",
@@ -195,7 +195,7 @@ ms.author: davidmu
 
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要重启的虚拟机的标识符，然后运行该命令：
 
-	Restart-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
+    Restart-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
     
 不使用 -InstanceId 参数即可重启规模集中的所有虚拟机。
 
@@ -203,7 +203,7 @@ ms.author: davidmu
 
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要删除的虚拟机的标识符，然后运行该命令：
 
-	Remove-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
+    Remove-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
 
 不使用 -InstanceId 参数即可一次性删除整个虚拟机规模集。
 

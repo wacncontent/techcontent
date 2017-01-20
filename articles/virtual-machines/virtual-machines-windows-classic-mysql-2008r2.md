@@ -55,19 +55,19 @@ ms.author: cynthn
 9.	在“产品配置”页上，单击“下一步”。
 10.	在“类型和网络”页上，指定所需的配置类型和连接选项，包括 TCP 端口（如果需要）。选择“显示高级选项”，然后单击“下一步”。
 
-	![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_TypeNetworking.png)
+    ![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_TypeNetworking.png)
 
 11.	在“帐户和角色”页上，指定强 MySQL 根密码。根据需要添加额外的 MySQL 用户帐户，然后单击“下一步”。
 
-	![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_AccountsRoles_Filled.png)
+    ![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_AccountsRoles_Filled.png)
 
 12.	在“Windows 服务”页上，指定要对默认设置进行的更改，以便根据需要将 MySQL Server 作为 Windows 服务运行，然后单击“下一步”。
 
-	![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_WindowsService.png)
+    ![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_WindowsService.png)
 
 13.	在“高级选项”页上，指定需要对日志记录选项进行的更改，然后单击“下一步”。
 
-	![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_AdvOptions.png)
+    ![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_AdvOptions.png)
 
 14.	在“应用服务器配置”页上，单击“执行”。完成配置步骤后，单击“完成”。
 15.	在“产品配置”页上，单击“下一步”。
@@ -75,7 +75,7 @@ ms.author: cynthn
 17.	在“开始”屏幕中键入“mysql”，然后单击“MySQL 5.6 命令行客户端”。
 18.	输入你在步骤 11 中指定的根密码，此时会显示一个提示，你可以在其中发出命令以配置 MySQL。有关命令和语法的详细信息，请参阅 [MySQL 参考手册](http://dev.mysql.com/doc/refman/5.6/en/server-configuration-defaults.html)。
 
-	![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_CommandPrompt.png)
+    ![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_CommandPrompt.png)
 
 19.	你还可以使用 C:\\Program Files (x86)\\MySQL\\MySQL Server 5.6\\my-default.ini 文件中的条目来配置服务器配置的默认设置，例如基本目录和驱动器以及数据目录和驱动器。有关详细信息，请参阅 [5\.1.2 服务器配置的默认值](http://dev.mysql.com/doc/refman/5.6/en/server-configuration-defaults.html)。
 
@@ -97,7 +97,7 @@ ms.author: cynthn
 
 若要添加 Windows 防火墙规则以允许来自 Internet 的 MySQL 流量，请在 MySQL Server 虚拟机上提升的 Windows PowerShell 命令提示符下运行以下命令。
 
-	New-NetFirewallRule -DisplayName "MySQL56" -Direction Inbound –Protocol TCP –LocalPort 3306 -Action Allow -Profile Public
+    New-NetFirewallRule -DisplayName "MySQL56" -Direction Inbound –Protocol TCP –LocalPort 3306 -Action Allow -Profile Public
 
 ## 测试你的远程连接
 
@@ -106,15 +106,15 @@ ms.author: cynthn
 1.	在 Azure 经典管理门户中，依次单击“虚拟机”、你的 MySQL Server 虚拟机的名称和“仪表板”。
 2.	在虚拟机仪表板中，记下“速览”部分下面的“DNS 名称”值。下面是一个示例：
 
-	![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_DNSName.png)
+    ![](./media/virtual-machines-windows-classic-mysql-2008r2/MySQL_DNSName.png)
 
 3.	从运行 MySQL 的本地计算机或 MySQL 客户端上，运行以下命令，以便以 MySQL 用户身份登录。
 
-		mysql -u <yourMysqlUsername> -p -h <yourDNSname>
+        mysql -u <yourMysqlUsername> -p -h <yourDNSname>
 
-	例如，如果 MySQL 用户名为 dbadmin3，虚拟机的 DNS 名称为 testmysql.chinacloudapp.cn，请使用以下命令。
+    例如，如果 MySQL 用户名为 dbadmin3，虚拟机的 DNS 名称为 testmysql.chinacloudapp.cn，请使用以下命令。
 
-		mysql -u dbadmin3 -p -h testmysql.chinacloudapp.cn
+        mysql -u dbadmin3 -p -h testmysql.chinacloudapp.cn
 
 ## 下一步
 

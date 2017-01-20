@@ -69,7 +69,7 @@ wacn.date: 12/12/2016
 
 4. 创建资源组。（若要使用现有资源组，请跳过此步骤。）
 
-    	New-AzureRmResourceGroup -Name NRP-RG -location "China East"
+        New-AzureRmResourceGroup -Name NRP-RG -location "China East"
 
 ## 为前端 IP 池创建虚拟网络和公共 IP 地址
 
@@ -80,7 +80,7 @@ wacn.date: 12/12/2016
 
 2. 使用 DNS 名称 **loadbalancernrp.chinaeast.chinacloudapp.cn** 创建要由前端 IP 池使用的名为 **PublicIP** 的 Azure 公共 IP 地址 资源。以下命令使用静态分配类型。
 
-	    $publicIP = New-AzureRmPublicIpAddress -Name PublicIp -ResourceGroupName NRP-RG -Location 'China East' –AllocationMethod Static -DomainNameLabel loadbalancernrp 
+        $publicIP = New-AzureRmPublicIpAddress -Name PublicIp -ResourceGroupName NRP-RG -Location 'China East' –AllocationMethod Static -DomainNameLabel loadbalancernrp 
 
     >[!IMPORTANT] 负载均衡器将公共 IP 的域标签用作 FQDN 的前缀。这不同于经典部署模型，后者将云服务用作负载均衡器 FQDN。
 
@@ -128,7 +128,7 @@ wacn.date: 12/12/2016
 
 4. 使用之前创建的对象创建负载均衡器。
 
-	    $NRPLB = New-AzureRmLoadBalancer -ResourceGroupName NRP-RG -Name NRP-LB -Location 'China East' -FrontendIpConfiguration $frontendIP -InboundNatRule $inboundNATRule1,$inboundNatRule2 -LoadBalancingRule $lbrule -BackendAddressPool $beAddressPool -Probe $healthProbe
+        $NRPLB = New-AzureRmLoadBalancer -ResourceGroupName NRP-RG -Name NRP-LB -Location 'China East' -FrontendIpConfiguration $frontendIP -InboundNatRule $inboundNATRule1,$inboundNatRule2 -LoadBalancingRule $lbrule -BackendAddressPool $beAddressPool -Probe $healthProbe
 
 ## 创建 NIC
 
@@ -141,11 +141,11 @@ wacn.date: 12/12/2016
 
 2. 创建名为 **lb-nic1-be** 的 NIC，并将其与第一个 NAT 规则和第一个（且仅有的）后端地址池相关联。
 
-	    $backendnic1= New-AzureRmNetworkInterface -ResourceGroupName NRP-RG -Name lb-nic1-be -Location 'China East' -PrivateIpAddress 10.0.2.6 -Subnet $backendSubnet -LoadBalancerBackendAddressPool $nrplb.BackendAddressPools[0] -LoadBalancerInboundNatRule $nrplb.InboundNatRules[0]
+        $backendnic1= New-AzureRmNetworkInterface -ResourceGroupName NRP-RG -Name lb-nic1-be -Location 'China East' -PrivateIpAddress 10.0.2.6 -Subnet $backendSubnet -LoadBalancerBackendAddressPool $nrplb.BackendAddressPools[0] -LoadBalancerInboundNatRule $nrplb.InboundNatRules[0]
 
 3. 创建名为 **lb-nic2-be** 的 NIC，并将其与第二个 NAT 规则和第一个（且仅有的）后端地址池相关联。
 
-	    $backendnic2= New-AzureRmNetworkInterface -ResourceGroupName NRP-RG -Name lb-nic2-be -Location 'China East' -PrivateIpAddress 10.0.2.7 -Subnet $backendSubnet -LoadBalancerBackendAddressPool $nrplb.BackendAddressPools[0] -LoadBalancerInboundNatRule $nrplb.InboundNatRules[1]
+        $backendnic2= New-AzureRmNetworkInterface -ResourceGroupName NRP-RG -Name lb-nic2-be -Location 'China East' -PrivateIpAddress 10.0.2.7 -Subnet $backendSubnet -LoadBalancerBackendAddressPool $nrplb.BackendAddressPools[0] -LoadBalancerInboundNatRule $nrplb.InboundNatRules[1]
 
 4. 检查 NIC。
 
@@ -155,7 +155,7 @@ wacn.date: 12/12/2016
 
         Name                 : lb-nic1-be
         ResourceGroupName    : NRP-RG
-	    Location             : chinaeast
+        Location             : chinaeast
         Id                   : /subscriptions/f50504a2-1865-4541-823a-b32842e3e0ee/resourceGroups/NRP-RG/providers/Microsoft.Network/networkInterfaces/lb-nic1-be
         Etag                 : W/"d448256a-e1df-413a-9103-a137e07276d1"
         ResourceGuid         : 896cac4f-152a-40b9-b079-3e2201a5906e

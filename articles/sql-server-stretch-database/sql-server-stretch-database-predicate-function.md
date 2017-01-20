@@ -41,7 +41,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
     WITH SCHEMABINDING
     AS
     RETURN	SELECT 1 AS is_eligible
-    		WHERE <predicate>
+            WHERE <predicate>
 
 该函数的参数必须是表中列的标识符。
 
@@ -78,12 +78,12 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE @column1 < CONVERT(datetime, '1/1/2016', 101)
+                WHERE @column1 < CONVERT(datetime, '1/1/2016', 101)
         GO
     
         ALTER TABLE stretch_table_name SET ( REMOTE_DATA_ARCHIVE = ON (
-        	FILTER_PREDICATE = dbo.fn_stretchpredicate(date),
-        	MIGRATION_STATE = OUTBOUND
+            FILTER_PREDICATE = dbo.fn_stretchpredicate(date),
+            MIGRATION_STATE = OUTBOUND
         ) )
     
 -   向函数参数应用 IS NULL 或 IS NOT NULL 运算符。
@@ -97,12 +97,12 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE @column1 IN (N'Completed', N'Returned', N'Cancelled')
+                WHERE @column1 IN (N'Completed', N'Returned', N'Cancelled')
         GO
     
         ALTER TABLE table1 SET ( REMOTE_DATA_ARCHIVE = ON (
-        	FILTER_PREDICATE = dbo.fn_stretchpredicate(shipment_status),
-        	MIGRATION_STATE = OUTBOUND
+            FILTER_PREDICATE = dbo.fn_stretchpredicate(shipment_status),
+            MIGRATION_STATE = OUTBOUND
         ) )
     
 ### 比较运算符
@@ -132,8 +132,8 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
 通过运行 **ALTER TABLE** 语句并将现有的内联表值函数指定为 **FILTER\_PREDICATE** 参数的值，来向表中添加筛选器函数。例如：
 
     ALTER TABLE stretch_table_name SET ( REMOTE_DATA_ARCHIVE = ON (
-    	FILTER_PREDICATE = dbo.fn_stretchpredicate(column1, column2),
-    	MIGRATION_STATE = <desired_migration_state>
+        FILTER_PREDICATE = dbo.fn_stretchpredicate(column1, column2),
+        MIGRATION_STATE = <desired_migration_state>
     ) )
 
 将函数作为谓词绑定到表后，将发生以下情况。
@@ -284,8 +284,8 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         GO
     
         ALTER TABLE table1 SET ( REMOTE_DATA_ARCHIVE = ON (
-        	FILTER_PREDICATE = dbo.fn_stretchpredicate(date, shipment_status),
-        	MIGRATION_STATE = OUTBOUND
+            FILTER_PREDICATE = dbo.fn_stretchpredicate(date, shipment_status),
+            MIGRATION_STATE = OUTBOUND
         ) )
     
 -   以下示例使用了多个条件，并使用 CONVERT 执行确定性转换。
@@ -305,7 +305,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE @column1 < SQRT(400) + 10
+                WHERE @column1 < SQRT(400) + 10
         GO
     
 -   以下示例使用 BETWEEN 和 NOT BETWEEN 运算符。这种用法是有效的，因为在将 BETWEEN 和 NOT BETWEEN 运算符替换为等效的 AND 和 OR 表达式后，生成的谓词符合本文所述的规则。
@@ -315,8 +315,8 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE @column1 BETWEEN 0 AND 100
-        			AND (@column2 NOT BETWEEN 200 AND 300 OR @column1 = 50)
+                WHERE @column1 BETWEEN 0 AND 100
+                    AND (@column2 NOT BETWEEN 200 AND 300 OR @column1 = 50)
         GO
     
     在将 BETWEEN 和 NOT BETWEEN 运算符替换为等效的 AND 和 OR 表达式后，上面的函数等效于下面的函数。
@@ -326,7 +326,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE @column1 >= 0 AND @column1 <= 100AND (@column2 < 200 OR @column2 > 300 OR @column1 = 50)
+                WHERE @column1 >= 0 AND @column1 <= 100AND (@column2 < 200 OR @column2 > 300 OR @column1 = 50)
         GO
     
 ## 无效的筛选器函数的示例
@@ -338,7 +338,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE @column1 < CONVERT(datetime, '1/1/2016')
+                WHERE @column1 < CONVERT(datetime, '1/1/2016')
         GO
     
 -   以下函数无效，因为它包含不确定性函数调用。
@@ -348,7 +348,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE @column1 < DATEADD(day, -60, GETDATE())
+                WHERE @column1 < DATEADD(day, -60, GETDATE())
         GO
     
 -   以下函数无效，因为它包含子查询。
@@ -358,7 +358,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE @column1 IN (SELECT SupplierID FROM Supplier WHERE Status = 'Defunct'))
+                WHERE @column1 IN (SELECT SupplierID FROM Supplier WHERE Status = 'Defunct'))
         GO
     
 -   以下函数无效，因为使用代数运算符或内置函数的表达式在你定义函数时必须求值为常量。不能在代数表达式或函数调用中包含列引用。
@@ -368,7 +368,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE @column1 % 2 =  0
+                WHERE @column1 % 2 =  0
         GO
     
         CREATE FUNCTION dbo.fn_example9(@column1 int)
@@ -376,7 +376,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE SQRT(@column1) = 30
+                WHERE SQRT(@column1) = 30
         GO
     
 -   以下函数无效，因为在将 BETWEEN 运算符替换为等效的 AND 表达式后，该函数将违反本文所述的规则。
@@ -386,7 +386,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE (@column1 BETWEEN 1 AND 200 OR @column1 = 300) AND @column2 > 1000
+                WHERE (@column1 BETWEEN 1 AND 200 OR @column1 = 300) AND @column2 > 1000
         GO
     
     在将 BETWEEN 运算符替换为等效的 AND 表达式后，上面的函数等效于下面的函数。此函数无效，因为基元条件只能使用 OR 逻辑运算符。
@@ -396,7 +396,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         WITH SCHEMABINDING
         AS
         RETURN	SELECT 1 AS is_eligible
-        		WHERE (@column1 >= 1 AND @column1 <= 200 OR @column1 = 300) AND @column2 > 1000
+                WHERE (@column1 >= 1 AND @column1 <= 200 OR @column1 = 300) AND @column2 > 1000
         GO
     
 ## Stretch Database 如何应用筛选器函数
@@ -410,8 +410,8 @@ Stretch Database 使用 CROSS APPLY 运算符对表应用筛选器函数并确�
 可以通过再次运行 **ALTER TABLE** 语句并为 **FILTER\_PREDICATE** 参数指定新值，来替换以前指定的筛选器函数。例如：
 
     ALTER TABLE stretch_table_name SET ( REMOTE_DATA_ARCHIVE = ON (
-    	FILTER_PREDICATE = dbo.fn_stretchpredicate2(column1, column2),
-    	MIGRATION_STATE = <desired_migration_state>
+        FILTER_PREDICATE = dbo.fn_stretchpredicate2(column1, column2),
+        MIGRATION_STATE = <desired_migration_state>
 
 新的内联表值函数具有以下要求。
 
@@ -433,8 +433,8 @@ Stretch Database 使用 CROSS APPLY 运算符对表应用筛选器函数并确�
     WITH SCHEMABINDING
     AS
     RETURN	SELECT 1 AS is_eligible
-    		WHERE @column1 < CONVERT(datetime, '1/1/2016', 101)
-    			AND (@column2 < -100 OR @column2 > 100)
+            WHERE @column1 < CONVERT(datetime, '1/1/2016', 101)
+                AND (@column2 < -100 OR @column2 > 100)
     GO
 
 以下函数是有效的替换，因为新日期常量（指定一个更迟的截止日期）会使该谓词的限制强度更低。
@@ -444,8 +444,8 @@ Stretch Database 使用 CROSS APPLY 运算符对表应用筛选器函数并确�
     WITH SCHEMABINDING
     AS
     RETURN	SELECT 1 AS is_eligible
-    		WHERE @column1 < CONVERT(datetime, '2/1/2016', 101)
-    			AND (@column2 < -50 OR @column2 > 50)
+            WHERE @column1 < CONVERT(datetime, '2/1/2016', 101)
+                AND (@column2 < -50 OR @column2 > 50)
     GO
 
 ### 无效替换的示例
@@ -456,8 +456,8 @@ Stretch Database 使用 CROSS APPLY 运算符对表应用筛选器函数并确�
     WITH SCHEMABINDING
     AS
     RETURN	SELECT 1 AS is_eligible
-    		WHERE @column1 < CONVERT(datetime, '1/1/2015', 101)
-    			AND (@column2 < -100 OR @column2 > 100)
+            WHERE @column1 < CONVERT(datetime, '1/1/2015', 101)
+                AND (@column2 < -100 OR @column2 > 100)
     GO
 
 以下函数不是有效的替换，因为删除了某个比较运算符。
@@ -467,8 +467,8 @@ Stretch Database 使用 CROSS APPLY 运算符对表应用筛选器函数并确�
     WITH SCHEMABINDING
     AS
     RETURN	SELECT 1 AS is_eligible
-    		WHERE @column1 < CONVERT(datetime, '1/1/2016', 101)
-    			AND (@column2 < -50)
+            WHERE @column1 < CONVERT(datetime, '1/1/2016', 101)
+                AND (@column2 < -50)
     GO
 
 以下函数不是有效的替换，因为使用 AND 逻辑运算符添加了新的条件。
@@ -478,17 +478,17 @@ Stretch Database 使用 CROSS APPLY 运算符对表应用筛选器函数并确�
     WITH SCHEMABINDING
     AS
     RETURN	SELECT 1 AS is_eligible
-    		WHERE @column1 < CONVERT(datetime, '1/1/2016', 101)
-    			AND (@column2 < -100 OR @column2 > 100)
-    			AND (@column2 <> 0)
+            WHERE @column1 < CONVERT(datetime, '1/1/2016', 101)
+                AND (@column2 < -100 OR @column2 > 100)
+                AND (@column2 <> 0)
     GO
 
 ## 从表中删除筛选器函数
 若要迁移整个表而不是选定的行，可以通过将 **FILTER\_PREDICATE** 设置为 null 来删除现有函数。例如：
 
     ALTER TABLE stretch_table_name SET ( REMOTE_DATA_ARCHIVE = ON (
-    	FILTER_PREDICATE = NULL,
-    	MIGRATION_STATE = <desired_migration_state>
+        FILTER_PREDICATE = NULL,
+        MIGRATION_STATE = <desired_migration_state>
     ) )
 
 删除筛选器函数后，表中的所有行都符合迁移条件。因此，稍后不能为同一个表指定筛选器函数，除非你先从 Azure 取回该表的所有远程数据。存在此限制是为了避免这样的情况，即当你提供新的筛选器函数时不符合迁移条件的行已迁移到 Azure。

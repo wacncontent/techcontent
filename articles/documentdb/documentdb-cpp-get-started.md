@@ -91,7 +91,7 @@ ms.author: aasthan
         using namespace documentdb;
         using namespace std;
         using namespace web::json;
-	
+    
 2. 接下来将以下代码添加到主函数，并替换帐户配置和主要密钥以匹配步骤 3 中的 DocumentDB 设置。
    
         DocumentDBConfiguration conf (L"<account_configuration_uri>", L"<primary_key>");

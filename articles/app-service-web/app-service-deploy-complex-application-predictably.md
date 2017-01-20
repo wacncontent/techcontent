@@ -70,11 +70,11 @@ ms.author: cephalin
 
 6.	登录到 Azure 门户预览。注意，Web 应用已连接到“外部项目”下的 GitHub 存储库。
 
-	![](./media/app-service-deploy-complex-application-predictably/gettemplate-3-portalresourcegroup.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/gettemplate-3-portalresourcegroup.png)  
 
 7.	在资源组边栏选项卡中，请注意资源组中已存在两个 Web 应用。
 
-	![](./media/app-service-deploy-complex-application-predictably/gettemplate-4-portalresourcegroupclicked.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/gettemplate-4-portalresourcegroupclicked.png)  
 
 你刚才在几分钟内看到的全部内容就是一个经过完全部署的由两个微服务构成的应用程序，以及所有组件、依赖项、设置、数据库和连续发布，均由 Azure 资源管理器中的自动化协调所设置。所有这一切均是通过两项内容完成：
 
@@ -89,11 +89,11 @@ ms.author: cephalin
 
 1.	使用你最喜欢的 git 工具克隆 [ToDoApp](https://github.com/azure-appservice-samples/ToDoApp) 存储库。在下面的屏幕截图中，我将在 Visual Studio 2013 的团队资源管理器中执行此操作。
 
-	![](./media/app-service-deploy-complex-application-predictably/examinejson-1-vsclone.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/examinejson-1-vsclone.png)  
 
 2.	在 Visual Studio 中从存储库根打开 azuredeploy.json。如果没有看到“JSON 概要”窗格，则需要安装 Azure.NET SDK。
 
-	![](./media/app-service-deploy-complex-application-predictably/examinejson-2-vsjsoneditor.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/examinejson-2-vsjsoneditor.png)  
 
 我不打算介绍 JSON 格式的每个细节，但[更多资源](#resources)部分包含可用于学习资源组模板语言的链接。在这里，我只打算向你展示有趣的功能，可帮助你开始制作自己的自定义模板来部署应用。
 
@@ -127,7 +127,7 @@ ms.author: cephalin
 -	SQLServer 资源具有两个嵌套的资源，而每个具有不同的 `type` 值。
 -	`"resources": […]` 内（其中定义了数据库和防火墙规则）的嵌套资源具有 `dependsOn` 元素，后者指定根级别 SQLServer 资源的资源 ID。这将告知 Azure Resource Manager：“创建此资源之前，另一个资源必须已经存在；如果在模板中定义另一个资源，则先创建一个。”
 
-	>[!NOTE] 有关如何使用 `resourceId()` 函数的详细信息，请参阅 [Azure 资源管理器模板函数](../azure-resource-manager/resource-group-template-functions.md)。
+    >[!NOTE] 有关如何使用 `resourceId()` 函数的详细信息，请参阅 [Azure 资源管理器模板函数](../azure-resource-manager/resource-group-template-functions.md)。
 
 -	`dependsOn` 元素的影响在于让 Azure 资源管理器能够知道哪些资源可以并行创建，哪些资源必须按顺序创建。
 
@@ -182,60 +182,60 @@ Web 应用取决于两个不同的资源。这意味着只有在创建 App Servi
 
 2.	单击“Visual C#”>“云”>“Azure 资源组”，然后单击“确定”。
 
-	![](./media/app-service-deploy-complex-application-predictably/deploy-1-vsproject.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-1-vsproject.png)  
 
 3.	在“选择 Azure 模板”中，选择“空白模板”，然后单击“确定”。
 
 4.	将 azuredeploy.json 拖动到新项目的“模板”文件夹。
 
-	![](./media/app-service-deploy-complex-application-predictably/deploy-2-copyjson.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-2-copyjson.png)  
 
 5.	从解决方案资源管理器中打开复制的 azuredeploy.json。
 
 6.	为了进行演示，让我们通过单击“添加资源”，将一些标准 Application Insight 资源添加到我们的 JSON 文件。如果你只对部署 JSON 文件感兴趣，请跳至部署步骤。
 
-	![](./media/app-service-deploy-complex-application-predictably/deploy-3-newresource.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-3-newresource.png)  
 
 7.	选择“适用于 Web 应用的 Application Insights”，确保选择了现有 App Service 计划和 Web 应用，然后单击“添加”。
 
-	![](./media/app-service-deploy-complex-application-predictably/deploy-4-newappinsight.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-4-newappinsight.png)  
 
-	现在你将能够看到几个新资源在 App Service 计划或 Web 应用上具有依赖项，具体取决于该资源及它的作用。这些资源不由其现有定义启用，而你将要对此进行更改。
+    现在你将能够看到几个新资源在 App Service 计划或 Web 应用上具有依赖项，具体取决于该资源及它的作用。这些资源不由其现有定义启用，而你将要对此进行更改。
 
-	![](./media/app-service-deploy-complex-application-predictably/deploy-5-appinsightresources.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-5-appinsightresources.png)  
 
 8.	在“JSON 概要”中，单击“appInsights AutoScale”以突出显示其 JSON 代码。这是针对你 App Service 计划的缩放设置。
 
 9.	在突出显示的 JSON 代码中，找到 `location` 和 `enabled` 属性并对其进行如下设置。
 
-	![](./media/app-service-deploy-complex-application-predictably/deploy-6-autoscalesettings.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-6-autoscalesettings.png)  
 
 10.	在“JSON 概要”中，单击“CPUHigh appInsights”以突出显示其 JSON 代码。这是一个警报。
 
 11.	找到 `location` 和 `isEnabled` 属性并对其进行如下设置。对其他三个警报（紫色警报）执行相同的操作。
 
-	![](./media/app-service-deploy-complex-application-predictably/deploy-7-alerts.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-7-alerts.png)  
 
 12.	你现在可以开始部署了。右键单击该项目，并选择“部署”>“新建部署”。
 
-	![](./media/app-service-deploy-complex-application-predictably/deploy-8-newdeployment.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-8-newdeployment.png)  
 
 13.	如果你尚未执行该操作，则登录到 Azure 帐户。
 
 14.	选择订阅中的现有资源组或创建一个新资源组，选择“azuredeploy.json”，然后单击“编辑参数”。
 
-	![](./media/app-service-deploy-complex-application-predictably/deploy-9-deployconfig.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-9-deployconfig.png)  
 
-	现在你将能够在一张不错的表中编辑在模板文件中定义的所有参数。定义默认值的参数将已具有其默认值，并且定义允许值的列表的参数将显示为下拉列表。
+    现在你将能够在一张不错的表中编辑在模板文件中定义的所有参数。定义默认值的参数将已具有其默认值，并且定义允许值的列表的参数将显示为下拉列表。
 
-	![](./media/app-service-deploy-complex-application-predictably/deploy-10-parametereditor.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-10-parametereditor.png)  
 
 15.	填写所有空参数，并使用 **repoUrl** 中的 [ToDoApp 的 GitHub 存储库地址](https://github.com/azure-appservice-samples/ToDoApp.git)。然后单击“保存”。
  
-	![](./media/app-service-deploy-complex-application-predictably/deploy-11-parametereditorfilled.png)  
+    ![](./media/app-service-deploy-complex-application-predictably/deploy-11-parametereditorfilled.png)  
 
-	>[!NOTE] 自动缩放是**标准**层或更高层中提供的一项功能，而计划级别警报是**基本**层或更高层中提供的功能，你需要将 **sku** 参数设置为**标准**或**高级**，使所有新 App Insights 资源亮起。
-	
+    >[!NOTE] 自动缩放是**标准**层或更高层中提供的一项功能，而计划级别警报是**基本**层或更高层中提供的功能，你需要将 **sku** 参数设置为**标准**或**高级**，使所有新 App Insights 资源亮起。
+    
 16.	单击“部署”。如果选择了“保存密码”，密码将**以纯文本格式**保存在参数文件中。否则，你将需要在部署过程中输入数据库密码。
 
 就这么简单！ 现在只需转到 [Azure 门户预览](https://portal.azure.cn/)，便可看到添加到 JSON 部署的应用程序中的新警报和自动缩放设置。

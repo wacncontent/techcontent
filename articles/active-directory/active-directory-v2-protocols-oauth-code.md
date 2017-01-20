@@ -24,7 +24,7 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 <!-- TODO: Need link to libraries -->
 
 > [!NOTE]
-	v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
+    v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
 有关 OAuth 2.0 授权代码流的说明，请参阅 [OAuth 2.0 规范第 4.1 部分](http://tools.ietf.org/html/rfc6749)。它用于在大部分的应用类型（包括 [Web 应用](./active-directory-v2-flows.md)和[本机安装的应用](./active-directory-v2-flows.md)）中执行身份验证与授权。它可让应用程序安全地获取 access\_tokens，用于访问以 v2.0 终结点保护的资源。
 
@@ -36,15 +36,15 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 ## 请求授权代码
 授权代码流始于客户端将用户定向到的 `/authorize` 终结点。在这项请求中，客户端指示必须向用户获取的权限：
 
-	// Line breaks for legibility only
-	
-	https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
-	client_id=6731de76-14a6-49ae-97bc-6eba6914391e
-	&response_type=code
-	&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
-	&response_mode=query
-	&scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
-	&state=12345
+    // Line breaks for legibility only
+    
+    https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
+    client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+    &response_type=code
+    &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+    &response_mode=query
+    &scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
+    &state=12345
 
 > [!TIP] 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `code` 的 `https://localhost/myapp/`。
     <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&response_mode=query&scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&state=12345" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
@@ -69,9 +69,9 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 #### 成功的响应
 使用 `response_mode=query` 的成功响应如下所示：
 
-	GET https://login.microsoftonline.com/common/oauth2/nativeclient?
-	code=AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq...
-	&state=12345
+    GET https://login.microsoftonline.com/common/oauth2/nativeclient?
+    code=AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq...
+    &state=12345
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -81,9 +81,9 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 #### 错误响应
 错误响应可能也发送到 `redirect_uri`，让应用可以适当地处理：
 
-	GET https://login.microsoftonline.com/common/oauth2/nativeclient?
-	error=access_denied
-	&error_description=the+user+canceled+the+authentication
+    GET https://login.microsoftonline.com/common/oauth2/nativeclient?
+    error=access_denied
+    &error_description=the+user+canceled+the+authentication
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -107,18 +107,18 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 ## 请求访问令牌
 你已获取 authorization\_code 并获得用户授权，现在可以将 `POST` 请求发送到 `/token` 终结点，兑换 `code` 以获取所需资源的 `access_token`：
 
-	// Line breaks for legibility only
-	
-	POST /{tenant}/oauth2/v2.0/token HTTP/1.1
-	Host: https://login.microsoftonline.com
-	Content-Type: application/x-www-form-urlencoded
-	
-	client_id=6731de76-14a6-49ae-97bc-6eba6914391e
-	&scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
-	&code=OAAABAAAAiL9Kn2Z27UubvWFPbm0gLWQJVzCTE9UkP3pSx1aXxUjq3n8b2JRLk4OxVXr...
-	&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
-	&grant_type=authorization_code
-	&client_secret=JqQX2PNo9bpM0uEihUPzyrh    // NOTE: Only required for web apps
+    // Line breaks for legibility only
+    
+    POST /{tenant}/oauth2/v2.0/token HTTP/1.1
+    Host: https://login.microsoftonline.com
+    Content-Type: application/x-www-form-urlencoded
+    
+    client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+    &scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
+    &code=OAAABAAAAiL9Kn2Z27UubvWFPbm0gLWQJVzCTE9UkP3pSx1aXxUjq3n8b2JRLk4OxVXr...
+    &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+    &grant_type=authorization_code
+    &client_secret=JqQX2PNo9bpM0uEihUPzyrh    // NOTE: Only required for web apps
 
 > [!TIP] 尝试在 Postman 中执行此请求！ （别忘了替换 `code`）
     [![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
@@ -136,14 +136,14 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 #### 成功的响应
 成功的令牌响应如下：
 
-	{
-		"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...",
-		"token_type": "Bearer",
-		"expires_in": 3599,
-		"scope": "https%3A%2F%2Fgraph.microsoft.com%2Fmail.read",
-		"refresh_token": "AwABAAAAvPM1KaPlrEqdFSBzjqfTGAMxZGUTdM0t4B4...",
-		"id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIyZDRkMTFhMi1mODE0LTQ2YTctOD...",
-	}
+    {
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...",
+        "token_type": "Bearer",
+        "expires_in": 3599,
+        "scope": "https%3A%2F%2Fgraph.microsoft.com%2Fmail.read",
+        "refresh_token": "AwABAAAAvPM1KaPlrEqdFSBzjqfTGAMxZGUTdM0t4B4...",
+        "id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIyZDRkMTFhMi1mODE0LTQ2YTctOD...",
+    }
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -157,17 +157,17 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 #### 错误响应
 错误响应如下所示：
 
-	{
-	  "error": "invalid_scope",
-	  "error_description": "AADSTS70011: The provided value for the input parameter 'scope' is not valid. The scope https://foo.microsoft.com/mail.read is not valid.\r\nTrace ID: 255d1aef-8c98-452f-ac51-23d051240864\r\nCorrelation ID: fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7\r\nTimestamp: 2016-01-09 02:02:12Z",
-	  "error_codes": [
-	    70011
-	  ],
-	  "timestamp": "2016-01-09 02:02:12Z",
-	  "trace_id": "255d1aef-8c98-452f-ac51-23d051240864",
-	  "correlation_id": "fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7"
-	}
-	
+    {
+      "error": "invalid_scope",
+      "error_description": "AADSTS70011: The provided value for the input parameter 'scope' is not valid. The scope https://foo.microsoft.com/mail.read is not valid.\r\nTrace ID: 255d1aef-8c98-452f-ac51-23d051240864\r\nCorrelation ID: fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7\r\nTimestamp: 2016-01-09 02:02:12Z",
+      "error_codes": [
+        70011
+      ],
+      "timestamp": "2016-01-09 02:02:12Z",
+      "trace_id": "255d1aef-8c98-452f-ac51-23d051240864",
+      "correlation_id": "fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7"
+    }
+    
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
 | error | 用于分类发生的错误类型与响应错误的错误码字符串。 |
@@ -196,25 +196,25 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 > [!TIP] 在 Postman 中执行此请求！ （先替换 `Authorization` 标头）
     [![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
 
-	GET /v1.0/me/messages
-	Host: https://graph.microsoft.com
-	Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
-	
+    GET /v1.0/me/messages
+    Host: https://graph.microsoft.com
+    Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
+    
 ## 刷新访问令牌
 Access\_token 生存期很短，必须在其过期后刷新，才能继续访问资源。为此，你可以向 `/token` 终结点提交另一个 `POST` 请求，但这次要提供 `refresh_token` 而不是 `code`：
 
-	// Line breaks for legibility only
-	
-	POST /{tenant}/oauth2/v2.0/token HTTP/1.1
-	Host: https://login.microsoftonline.com
-	Content-Type: application/x-www-form-urlencoded
-	
-	client_id=6731de76-14a6-49ae-97bc-6eba6914391e
-	&scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
-	&refresh_token=OAAABAAAAiL9Kn2Z27UubvWFPbm0gLWQJVzCTE9UkP3pSx1aXxUjq...
-	&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
-	&grant_type=refresh_token
-	&client_secret=JqQX2PNo9bpM0uEihUPzyrh	  // NOTE: Only required for web apps
+    // Line breaks for legibility only
+    
+    POST /{tenant}/oauth2/v2.0/token HTTP/1.1
+    Host: https://login.microsoftonline.com
+    Content-Type: application/x-www-form-urlencoded
+    
+    client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+    &scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
+    &refresh_token=OAAABAAAAiL9Kn2Z27UubvWFPbm0gLWQJVzCTE9UkP3pSx1aXxUjq...
+    &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+    &grant_type=refresh_token
+    &client_secret=JqQX2PNo9bpM0uEihUPzyrh	  // NOTE: Only required for web apps
 
 > [!TIP] 尝试在 Postman 中执行此请求！ （别忘了替换 `refresh_token`）
     [![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
@@ -232,14 +232,14 @@ Access\_token 生存期很短，必须在其过期后刷新，才能继续访问
 #### 成功的响应
 成功的令牌响应如下：
 
-	{
-		"access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...",
-		"token_type": "Bearer",
-		"expires_in": 3599,
-		"scope": "https%3A%2F%2Fgraph.microsoft.com%2Fmail.read",
-		"refresh_token": "AwABAAAAvPM1KaPlrEqdFSBzjqfTGAMxZGUTdM0t4B4...",
-		"id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIyZDRkMTFhMi1mODE0LTQ2YTctOD...",
-	}
+    {
+        "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...",
+        "token_type": "Bearer",
+        "expires_in": 3599,
+        "scope": "https%3A%2F%2Fgraph.microsoft.com%2Fmail.read",
+        "refresh_token": "AwABAAAAvPM1KaPlrEqdFSBzjqfTGAMxZGUTdM0t4B4...",
+        "id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIyZDRkMTFhMi1mODE0LTQ2YTctOD...",
+    }
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -251,17 +251,17 @@ Access\_token 生存期很短，必须在其过期后刷新，才能继续访问
 | id\_token | 无符号 JSON Web 令牌 (JWT)。应用程序可以 base64Url 解码此令牌的段，以请求已登录用户的相关信息。应用程序可以缓存并显示值，但不应依赖于这些值来获取任何授权或安全边界。有关 id\_token 的详细信息，请参阅 [v2.0 终结点令牌参考](./active-directory-v2-tokens.md)。 |
 
 #### 错误响应
-	
-	{
-	  "error": "invalid_scope",
-	  "error_description": "AADSTS70011: The provided value for the input parameter 'scope' is not valid. The scope https://foo.microsoft.com/mail.read is not valid.\r\nTrace ID: 255d1aef-8c98-452f-ac51-23d051240864\r\nCorrelation ID: fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7\r\nTimestamp: 2016-01-09 02:02:12Z",
-	  "error_codes": [
-	    70011
-	  ],
-	  "timestamp": "2016-01-09 02:02:12Z",
-	  "trace_id": "255d1aef-8c98-452f-ac51-23d051240864",
-	  "correlation_id": "fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7"
-	}
+    
+    {
+      "error": "invalid_scope",
+      "error_description": "AADSTS70011: The provided value for the input parameter 'scope' is not valid. The scope https://foo.microsoft.com/mail.read is not valid.\r\nTrace ID: 255d1aef-8c98-452f-ac51-23d051240864\r\nCorrelation ID: fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7\r\nTimestamp: 2016-01-09 02:02:12Z",
+      "error_codes": [
+        70011
+      ],
+      "timestamp": "2016-01-09 02:02:12Z",
+      "trace_id": "255d1aef-8c98-452f-ac51-23d051240864",
+      "correlation_id": "fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7"
+    }
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |

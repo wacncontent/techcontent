@@ -2,7 +2,7 @@
 
 2. 单击“+新建”，在“搜索应用商店”中键入“移动应用”。选择“移动应用快速启动”，单击“创建”。
 
-	![突出显示移动应用快速启动的 Azure 门户](./media/app-service-mobile-dotnet-backend-create-new-service/search-mobile-apps-quickstart.png)
+    ![突出显示移动应用快速启动的 Azure 门户](./media/app-service-mobile-dotnet-backend-create-new-service/search-mobile-apps-quickstart.png)
 
 3. 对于“资源组”，选择现有资源组，或创建新组（使用与应用相同的名称。）
  

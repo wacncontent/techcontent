@@ -35,16 +35,16 @@ ms.author: szark
 
 有工具可用于生成适用于 Azure 的 Debian VHD，如来自 [credativ](http://www.credativ.com/) 的 [azure-manage](https://gitlab.credativ.com/de/azure-manage) 脚本。这是建议的方法，而不是从头开始创建映像。例如，要创建 Debian 8 VHD，请运行以下命令以下载 azure-manage（以及依赖项），并运行 azure\_build\_image 脚本：
 
-	# sudo apt-get update
-	# sudo apt-get install git qemu-utils mbr kpartx debootstrap
+    # sudo apt-get update
+    # sudo apt-get install git qemu-utils mbr kpartx debootstrap
 
-	# sudo apt-get install python3-pip
-	# sudo pip3 install azure-storage azure-servicemanagement-legacy pytest pyyaml
-	# git clone https://gitlab.credativ.com/de/azure-manage.git
-	# cd azure-manage
-	# sudo pip3 install .
+    # sudo apt-get install python3-pip
+    # sudo pip3 install azure-storage azure-servicemanagement-legacy pytest pyyaml
+    # git clone https://gitlab.credativ.com/de/azure-manage.git
+    # cd azure-manage
+    # sudo pip3 install .
 
-	# sudo azure_build_image --option release=jessie --option image_size_gb=30 --option image_prefix=debian-jessie-azure section
+    # sudo azure_build_image --option release=jessie --option image_size_gb=30 --option image_prefix=debian-jessie-azure section
 
 ## 手动准备 Debian VHD
 
@@ -64,32 +64,32 @@ ms.author: szark
 
 6. 将 Debian 的 Azure 存储库添加到 Debian 7 或 8 的 /etc/apt/sources.list 中：
 
-	**Debian 7.x "Wheezy"**
+    **Debian 7.x "Wheezy"**
 
-		deb http://debian-archive.trafficmanager.cn/debian wheezy-backports main
-		deb-src http://debian-archive.trafficmanager.cn/debian wheezy-backports main
-		deb http://debian-archive.trafficmanager.cn/debian-azure wheezy main
-		deb-src http://debian-archive.trafficmanager.cn/debian-azure wheezy main
+        deb http://debian-archive.trafficmanager.cn/debian wheezy-backports main
+        deb-src http://debian-archive.trafficmanager.cn/debian wheezy-backports main
+        deb http://debian-archive.trafficmanager.cn/debian-azure wheezy main
+        deb-src http://debian-archive.trafficmanager.cn/debian-azure wheezy main
 
-	**Debian 8.x "Jessie"**
+    **Debian 8.x "Jessie"**
 
-		deb http://debian-archive.trafficmanager.cn/debian jessie-backports main
-		deb-src http://debian-archive.trafficmanager.cn/debian jessie-backports main
-		deb http://debian-archive.trafficmanager.cn/debian-azure jessie main
-		deb-src http://debian-archive.trafficmanager.cn/debian-azure jessie main
+        deb http://debian-archive.trafficmanager.cn/debian jessie-backports main
+        deb-src http://debian-archive.trafficmanager.cn/debian jessie-backports main
+        deb http://debian-archive.trafficmanager.cn/debian-azure jessie main
+        deb-src http://debian-archive.trafficmanager.cn/debian-azure jessie main
 
 7. 安装 Azure Linux 代理：
 
-		# sudo apt-get update
-		# sudo apt-get install waagent
+        # sudo apt-get update
+        # sudo apt-get install waagent
 
 8. 对于 Debian 7，需要从 wheezy-backports 存储库运行基于 3.16 的内核。首先使用以下内容创建名为 /etc/apt/preferences.d/linux.pref 的文件：
 
-		Package: linux-image-amd64 initramfs-tools
-		Pin: release n=wheezy-backports
-		Pin-Priority: 500
+        Package: linux-image-amd64 initramfs-tools
+        Pin: release n=wheezy-backports
+        Pin-Priority: 500
 
-	然后运行“sudo apt-get install linux-image-amd64”以安装新的内核。
+    然后运行“sudo apt-get install linux-image-amd64”以安装新的内核。
 
 8. 取消对虚拟机的预配并对其进行准备，以便在 Azure 上进行预配并运行：
 

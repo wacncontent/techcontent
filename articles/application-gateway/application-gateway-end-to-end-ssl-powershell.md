@@ -157,7 +157,7 @@ SSL 2.0 和 SSL 3.0 默认处于禁用状态且无法启用。这些版本被视
 
 配置应用程序网关的证书。此证书用于加密和解密应用程序网关上的流量。
 
-	$cert = New-AzureRmApplicationGatewaySslCertificate -Name cert01 -CertificateFile <full path to .pfx file> -Password <password for certificate file>
+    $cert = New-AzureRmApplicationGatewaySslCertificate -Name cert01 -CertificateFile <full path to .pfx file> -Password <password for certificate file>
 
 > [!NOTE]
 此示例配置用于 SSL 连接的证书。该证书需采用 .pfx 格式，并且密码必须为 4 到 12 个字符。
@@ -168,7 +168,7 @@ SSL 2.0 和 SSL 3.0 默认处于禁用状态且无法启用。这些版本被视
 
 创建应用程序网关的 HTTP 侦听器。分配要使用的前端 IP 配置、端口和 SSL 证书。
 
-	$listener = New-AzureRmApplicationGatewayHttpListener -Name listener01 -Protocol Https -FrontendIPConfiguration $fipconfig -FrontendPort $fp -SslCertificate $cert
+    $listener = New-AzureRmApplicationGatewayHttpListener -Name listener01 -Protocol Https -FrontendIPConfiguration $fipconfig -FrontendPort $fp -SslCertificate $cert
 
 ### 步骤 7
 

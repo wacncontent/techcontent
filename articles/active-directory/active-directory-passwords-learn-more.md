@@ -309,18 +309,18 @@ ms.author: asteen
 
 #####备用电子邮件
 
-	Connect-MsolService
-	Set-MsolUser -UserPrincipalName user@domain.com -AlternateEmailAddresses @("email@domain.com")
+    Connect-MsolService
+    Set-MsolUser -UserPrincipalName user@domain.com -AlternateEmailAddresses @("email@domain.com")
 
 #####移动电话
-	
-	Connect-MsolService
-	Set-MsolUser -UserPrincipalName user@domain.com -MobilePhone "+1 1234567890"
+    
+    Connect-MsolService
+    Set-MsolUser -UserPrincipalName user@domain.com -MobilePhone "+1 1234567890"
 
 #####办公电话
-	
-	Connect-MsolService
-	Set-MsolUser -UserPrincipalName user@domain.com -PhoneNumber "+1 1234567890"
+    
+    Connect-MsolService
+    Set-MsolUser -UserPrincipalName user@domain.com -PhoneNumber "+1 1234567890"
 
 #### 使用 PowerShell 读取密码重置数据
 可以使用 Azure AD PowerShell 读取以下字段的值。
@@ -334,29 +334,29 @@ ms.author: asteen
 若要开始，首先需要[下载并安装 Azure AD PowerShell 模块](https://msdn.microsoft.com/zh-cn/library/azure/jj151815.aspx#bkmk_installmodule)。安装后，你可以遵照以下步骤配置每个字段。
 
 ##### 备用电子邮件
-	
-	Connect-MsolService
-	Get-MsolUser -UserPrincipalName user@domain.com | select AlternateEmailAddresses
+    
+    Connect-MsolService
+    Get-MsolUser -UserPrincipalName user@domain.com | select AlternateEmailAddresses
 
 ##### 移动电话
-	
-	Connect-MsolService
-	Get-MsolUser -UserPrincipalName user@domain.com | select MobilePhone
+    
+    Connect-MsolService
+    Get-MsolUser -UserPrincipalName user@domain.com | select MobilePhone
 
 ##### 办公电话
-	
-	Connect-MsolService
-	Get-MsolUser -UserPrincipalName user@domain.com | select PhoneNumber
+    
+    Connect-MsolService
+    Get-MsolUser -UserPrincipalName user@domain.com | select PhoneNumber
 
 ##### 身份验证电话
-	
-	Connect-MsolService
-	Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select PhoneNumber
+    
+    Connect-MsolService
+    Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select PhoneNumber
 
 ##### 身份验证电子邮件
-	
-	Connect-MsolService
-	Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select Email
+    
+    Connect-MsolService
+    Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select Email
 
 ## 密码重置文档的链接
 以下是所有 Azure AD 密码重置文档页面的链接：

@@ -110,31 +110,31 @@ Azure IoT 套件提供的预配置解决方案演示了套件中的服务如何�
 
 8. 在 .json 文件的第三行，你会看到：
  
-		"appRoles" : [],
+        "appRoles" : [],
  
       将此代码替换为以下代码：
 
-		  "appRoles": [
-		  {
-		  "allowedMemberTypes": [
-		  "User"
-		  ],
-		  "description": "Administrator access to the application",
-		  "displayName": "Admin",
-		  "id": "a400a00b-f67c-42b7-ba9a-f73d8c67e433",
-		  "isEnabled": true,
-		  "value": "Admin"
-		  },
-		  {
-		  "allowedMemberTypes": [
-		  "User"
-		  ],
-		  "description": "Read only access to device information",
-		  "displayName": "Read Only",
-		  "id": "e5bbd0f5-128e-4362-9dd1-8f253c6082d7",
-		  "isEnabled": true,
-		  "value": "ReadOnly"
-		  } ],
+          "appRoles": [
+          {
+          "allowedMemberTypes": [
+          "User"
+          ],
+          "description": "Administrator access to the application",
+          "displayName": "Admin",
+          "id": "a400a00b-f67c-42b7-ba9a-f73d8c67e433",
+          "isEnabled": true,
+          "value": "Admin"
+          },
+          {
+          "allowedMemberTypes": [
+          "User"
+          ],
+          "description": "Read only access to device information",
+          "displayName": "Read Only",
+          "id": "e5bbd0f5-128e-4362-9dd1-8f253c6082d7",
+          "isEnabled": true,
+          "value": "ReadOnly"
+          } ],
 
 9. 保存更新后的 .json 文件（可以覆盖现有文件）。
 

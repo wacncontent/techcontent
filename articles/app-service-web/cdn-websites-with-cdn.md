@@ -52,44 +52,44 @@ ms.author: cephalin
 
 1. 在 Visual Studio 2015 中转到“文件”>“新建”>“项目”>“Web”>“ASP.NET Web 应用程序”，以便从菜单栏创建新 ASP.NET Web 应用程序。为该应用程序提供一个名称，然后单击“确定”。
 
-	![](./media/cdn-websites-with-cdn/1-new-project.png)  
+    ![](./media/cdn-websites-with-cdn/1-new-project.png)  
 
 3. 选择“MVC”，然后单击“确定”。
 
-	![](./media/cdn-websites-with-cdn/2-webapp-template.png)  
+    ![](./media/cdn-websites-with-cdn/2-webapp-template.png)  
 
 4. 如果尚未登录 Azure 帐户，请单击右上角的帐户图标，并按照对话框提示登录 Azure 帐户。完成后，如下所示配置应用，然后单击“新建”来为应用创建新应用服务计划。
 
-	![](./media/cdn-websites-with-cdn/3-configure-webapp.png)  
+    ![](./media/cdn-websites-with-cdn/3-configure-webapp.png)  
 
 5. 如下所示在对话框中配置一个新应用服务计划，然后单击“确定”。
 
-	![](./media/cdn-websites-with-cdn/4-app-service-plan.png)  
+    ![](./media/cdn-websites-with-cdn/4-app-service-plan.png)  
 
 8. 单击“创建”以创建 Web 应用。
 
-	![](./media/cdn-websites-with-cdn/5-create-website.png)  
+    ![](./media/cdn-websites-with-cdn/5-create-website.png)  
 
 9. 创建完 ASP.NET 应用程序后，可以将其发布到 Azure，只需在“Azure 应用服务活动”窗格中单击“立刻将 `<app name>` 发布到此 Web 应用”即可。单击“发布”完成此过程。
 
-	![](./media/cdn-websites-with-cdn/6-publish-website.png)  
+    ![](./media/cdn-websites-with-cdn/6-publish-website.png)  
 
-	发布完成后，可在浏览器中看到发布的 Web 应用。
+    发布完成后，可在浏览器中看到发布的 Web 应用。
 
 1. 若要创建 CDN 终结点，请登录 [Azure 经典管理门户](https://manage.windowsazure.cn)。
 2. 单击“新建 > 应用服务 > CDN > 快速创建”。选择 **http://*&lt;sitename>*.chinacloudsites.cn/** 并单击**“创建”**。
 
-	![](./media/cdn-websites-with-cdn/7-create-cdn.png)  
+    ![](./media/cdn-websites-with-cdn/7-create-cdn.png)  
 
-	> [!NOTE] 创建 CDN 终结点以后，管理门户就会显示其 URL 以及所集成的源域。不过，需要一定的时间才能将新 CDN 终结点的配置完全传播到所有 CDN 节点位置。
+    > [!NOTE] 创建 CDN 终结点以后，管理门户就会显示其 URL 以及所集成的源域。不过，需要一定的时间才能将新 CDN 终结点的配置完全传播到所有 CDN 节点位置。
 
 3. 返回经典管理门户，在“CDN”选项卡中，单击刚才创建的 CDN 终结点的名称。
 
-	![](./media/cdn-websites-with-cdn/8-select-cdn.png)  
+    ![](./media/cdn-websites-with-cdn/8-select-cdn.png)  
 
 3. 单击“启用查询字符串”在 CDN 缓存中启用查询字符串。启用此功能后，通过不同的查询字符串进行访问的同一链接就可以缓存为不同的项。
 
-	![](./media/cdn-websites-with-cdn/9-enable-query-string.png)  
+    ![](./media/cdn-websites-with-cdn/9-enable-query-string.png)  
 
 启用此功能后，通过不同的查询字符串进行访问的同一链接就可以缓存为不同的项。
 
@@ -97,19 +97,19 @@ ms.author: cephalin
 
 2. 现在，导航到 CDN 终结点地址。如果终结点已准备就绪，则会看到 Web 应用。如果收到 **HTTP 404** 错误，则说明 CDN 终结点尚未准备好。CDN 配置传播到所有边缘节点可能需要长达 1 小时。
 
-	![](./media/cdn-websites-with-cdn/11-access-success.png)  
+    ![](./media/cdn-websites-with-cdn/11-access-success.png)  
 
 1. 接下来，可尝试访问 ASP.NET 项目中的 **~/Content/bootstrap.css** 文件。在浏览器窗口中，导航到 **http://*&lt;cdnName>*.azureedge.net/Content/bootstrap.css**。在我的设置中，此 URL 为：
 
-		http://az673227.azureedge.net/Content/bootstrap.css
+        http://az673227.azureedge.net/Content/bootstrap.css
 
-	这对应于 CDN 终结点的以下源 URL：
+    这对应于 CDN 终结点的以下源 URL：
 
-		http://cdnwebapp.chinacloudsites.cn/Content/bootstrap.css
+        http://cdnwebapp.chinacloudsites.cn/Content/bootstrap.css
 
-	导航到 **http://*&lt;cdnName>*.azureedge.net/Content/bootstrap.css** 时，系统会提示下载 bootstrap.css，该文件来自你在 Azure 中的 Web 应用。
+    导航到 **http://*&lt;cdnName>*.azureedge.net/Content/bootstrap.css** 时，系统会提示下载 bootstrap.css，该文件来自你在 Azure 中的 Web 应用。
 
-	![](./media/cdn-websites-with-cdn/12-file-access.png)  
+    ![](./media/cdn-websites-with-cdn/12-file-access.png)  
 
 你可以直接通过 CDN 终结点，采用类似方式访问 **http://*&lt;serviceName>*.chinacloudapp.cn/** 中提供的任何可公开访问的 URL。例如：
 
@@ -140,14 +140,14 @@ ms.author: cephalin
 
 执行完此操作后，Azure Web 应用中的所有静态文件将会遵守 CDN 缓存中的同一规则。若要对缓存设置进行更细致的控制，可将 *Web.config* 文件添加到一个文件夹中，然后在该处添加你的设置。例如，可将 *Web.config* 文件添加到 *\\Content* 文件夹中，然后使用以下 XML 替换其中的内容：
 
-	<?xml version="1.0"?>
-	<configuration>
-	  <system.webServer>
-	    <staticContent>
-	      <clientCache cacheControlMode="UseMaxAge" cacheControlMaxAge="15.00:00:00"/>
-	    </staticContent>
-	  </system.webServer>
-	</configuration>
+    <?xml version="1.0"?>
+    <configuration>
+      <system.webServer>
+        <staticContent>
+          <clientCache cacheControlMode="UseMaxAge" cacheControlMaxAge="15.00:00:00"/>
+        </staticContent>
+      </system.webServer>
+    </configuration>
 
 此设置可以让 *\\Content* 文件夹中的所有静态文件缓存 15 天。
 
@@ -266,23 +266,23 @@ ms.author: cephalin
 
 2. 右键单击默认的 `Index()` 操作，然后选择“添加视图”。
 
-	![](./media/cdn-websites-with-cdn/cdn-6-addview.PNG)  
+    ![](./media/cdn-websites-with-cdn/cdn-6-addview.PNG)  
 
 3.  接受下面的设置，然后单击“添加”。
 
-	![](./media/cdn-websites-with-cdn/cdn-7-configureview.PNG)  
+    ![](./media/cdn-websites-with-cdn/cdn-7-configureview.PNG)  
 
 4. 打开这个新的 *Views\\MemeGenerator\\Index.cshtml*，将其中的内容替换为下面这个简单的 HTML，以便提交夸张元素：
 
-		<h2>Meme Generator</h2>
-		
-		<form action="" method="post">
-		    <input type="text" name="top" placeholder="Enter top text here" />
-		    <br />
-		    <input type="text" name="bottom" placeholder="Enter bottom text here" />
-		    <br />
-		    <input class="btn" type="submit" value="Generate meme" />
-		</form>
+        <h2>Meme Generator</h2>
+        
+        <form action="" method="post">
+            <input type="text" name="top" placeholder="Enter top text here" />
+            <br />
+            <input type="text" name="bottom" placeholder="Enter bottom text here" />
+            <br />
+            <input class="btn" type="submit" value="Generate meme" />
+        </form>
 
 5. 重新发布到 Azure Web 应用，然后在浏览器中导航到 **http://*&lt;serviceName>*.chinacloudapp.cn/MemeGenerator/Index**。
 
@@ -309,15 +309,15 @@ ms.author: cephalin
 
 如果连接了本地调试器，就可以通过本地重定向获得常规的调试体验。如果是在 Azure Web 应用中运行，则会重定向到：
 
-	http://<yourCDNName>.azureedge.net/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
+    http://<yourCDNName>.azureedge.net/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
 
 这对应于 CDN 终结点的以下源 URL：
 
-	http://<yourSiteName>.chinacloudsites.cn/cdn/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
+    http://<yourSiteName>.chinacloudsites.cn/cdn/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
 
 由于已应用过 URL 重写规则，缓存到 CDN 终结点的实际文件为：
 
-	http://<yourSiteName>.chinacloudsites.cn/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
+    http://<yourSiteName>.chinacloudsites.cn/MemeGenerator/Generate?top=<formInput>&bottom=<formInput>
 
 然后，可以使用 `Generate` 方法的 `OutputCacheAttribute` 属性来指定 Azure CDN 认可的操作结果缓存方式。以下代码指定缓存在 1 小时（3,600 秒）后过期。
 
@@ -363,7 +363,7 @@ ms.author: cephalin
 按照以下步骤操作，将 ASP.NET 绑定和缩减功能集成到 CDN 终结点。
 
 1. 回到 *App\_Start\\BundleConfig.cs*，修改 `bundles.Add()` 方法以使用其他[捆绑包构造函数](http://msdn.microsoft.com/zh-cn/library/jj646464.aspx)来指定 CDN 地址。为此，请使用以下代码替换 `RegisterBundles` 方法定义：
-	
+    
         public static void RegisterBundles(BundleCollection bundles)
         {
           bundles.UseCdn = true;
@@ -391,31 +391,31 @@ ms.author: cephalin
                 "~/Content/site.css"));
         }
 
-	请确保将 `<yourCDNName>` 替换为 Azure CDN 的名称。
+    请确保将 `<yourCDNName>` 替换为 Azure CDN 的名称。
 
-	你要使用纯单词来设置 `bundles.UseCdn = true` 且已将仔细编写的 CDN URL 添加到每个捆绑包。例如，代码中的第一个构造函数：
+    你要使用纯单词来设置 `bundles.UseCdn = true` 且已将仔细编写的 CDN URL 添加到每个捆绑包。例如，代码中的第一个构造函数：
 
-		new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "bundles/jquery"))
+        new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "bundles/jquery"))
 
-	相当于：
+    相当于：
 
-		new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "http://<yourCDNName>.azureedge.net/bundles/jquery?<W.X.Y.Z>"))
+        new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "http://<yourCDNName>.azureedge.net/bundles/jquery?<W.X.Y.Z>"))
 
-	进行本地调试时，此构造函数会指示 ASP.NET 绑定和缩减功能呈现各个脚本文件，但会使用指定的 CDN 地址来访问相关脚本。不过，请注意这个仔细编写的 CDN URL 存在两个重要的特征：
-	
-	- 此 CDN URL 的源是 `http://<yourSiteName>.chinacloudsites.cn/bundles/jquery?<W.X.Y.Z>`，这实际上是 Web 应用程序中脚本捆绑包的虚拟目录。
-	- 由于你使用的是 CDN 构造函数，因此捆绑包的 CDN 脚本标记不再包含在呈现的 URL 中自动生成的版本字符串。每次对脚本捆绑包进行修改而造成 Azure CDN 中出现缓存未命中的情况时，你都必须手动生成唯一的脚本字符串。同时，这个唯一的版本字符串在部署过程中必须保持不变，以便在捆绑包部署完以后，最大程度地提高 Azure CDN 中的缓存命中率。
+    进行本地调试时，此构造函数会指示 ASP.NET 绑定和缩减功能呈现各个脚本文件，但会使用指定的 CDN 地址来访问相关脚本。不过，请注意这个仔细编写的 CDN URL 存在两个重要的特征：
+    
+    - 此 CDN URL 的源是 `http://<yourSiteName>.chinacloudsites.cn/bundles/jquery?<W.X.Y.Z>`，这实际上是 Web 应用程序中脚本捆绑包的虚拟目录。
+    - 由于你使用的是 CDN 构造函数，因此捆绑包的 CDN 脚本标记不再包含在呈现的 URL 中自动生成的版本字符串。每次对脚本捆绑包进行修改而造成 Azure CDN 中出现缓存未命中的情况时，你都必须手动生成唯一的脚本字符串。同时，这个唯一的版本字符串在部署过程中必须保持不变，以便在捆绑包部署完以后，最大程度地提高 Azure CDN 中的缓存命中率。
 
 3. 查询字符串 `<W.X.Y.Z>` 的功能是从 ASP.NET 项目中的 *Properties\\AssemblyInfo.cs* 进行拉取。你可以建立一个部署工作流，这样当你每次将相关内容发布到 Azure 时，程序集版本就会递增一次。你也可以使用通配符“*”直接修改项目中的 *Properties\\AssemblyInfo.cs*，以便每次进行构建时让版本字符串自动递增。例如，如下所示更改 `AssemblyVersion`：
-	
-		[assembly: AssemblyVersion("1.0.0.*")]
-	
-	在这里，可以使用任何其他的策略来简化部署过程中唯一字符串的生成。
+    
+        [assembly: AssemblyVersion("1.0.0.*")]
+    
+    在这里，可以使用任何其他的策略来简化部署过程中唯一字符串的生成。
 
 3. 重新发布 ASP.NET 应用程序并访问主页。
  
 4. 查看页面的 HTML 代码。每次重新发布对 Azure Web 应用的更改时，都可以看到所呈现的 CDN URL，其中包含唯一版本字符串。例如：
-	
+    
         ...
         <link href="http://az673227.azureedge.net/Content/css?1.0.0.25449" rel="stylesheet"/>
         <script src="http://az673227.azureedge.net/bundles/modernizer?1.0.0.25449"></script>
@@ -427,7 +427,7 @@ ms.author: cephalin
 5. 在 Visual Studio 中，键入 `F5` 即可调试 ASP.NET 应用程序。
 
 6. 查看页面的 HTML 代码。你仍然会看到每个脚本文件独立呈现，因此，在 Visual Studio 中的调试体验是一致的。
-	
+    
         ...
         <link href="/Content/bootstrap.css" rel="stylesheet"/>
         <link href="/Content/site.css" rel="stylesheet"/>
@@ -445,7 +445,7 @@ ms.author: cephalin
 [捆绑包](http://msdn.microsoft.com/zh-cn/library/system.web.optimization.bundle.aspx)类包含一个名为 [CdnFallbackExpression](http://msdn.microsoft.com/zh-cn/library/system.web.optimization.bundle.cdnfallbackexpression.aspx) 的属性，该属性可以让你配置回退机制以应对 CDN 故障情况。若要使用此属性，请执行以下步骤：
 
 1. 在 ASP.NET 项目中打开 *App\_Start\\BundleConfig.cs*（你已在其中将 CDN URL 添加到了每个[捆绑包构造函数](http://msdn.microsoft.com/zh-cn/library/jj646464.aspx)），然后将 `CdnFallbackExpression` 代码添加到所示的四个位置，以便将回退机制添加到默认捆绑包中。
-	
+    
         public static void RegisterBundles(BundleCollection bundles)
         {
           var version = System.Reflection.Assembly.GetAssembly(typeof(BundleConfig))
@@ -478,16 +478,16 @@ ms.author: cephalin
                 "~/Content/site.css"));
         }
 
-	当 `CdnFallbackExpression` 不为 null 时，会将脚本注入 HTML 中以测试捆绑包是否已成功加载，而如果没有成功加载，则会直接从源 Web 服务器访问捆绑包。需要将此属性设置成一个 JavaScript 表达式，以便测试相应的 CDN 捆绑包是否已正确加载。根据内容的不同，测试每个捆绑包所需的表达式也会有所不同。对于上面的默认捆绑包：
-	
-	- `window.jquery` 在 jquery-{version}.js 中定义
-	- `$.validator` 在 jquery.validate.js 中定义
-	- `window.Modernizr` 在 modernizer-{version}.js 中定义
-	- `$.fn.modal` 在 bootstrap.js 中定义
-	
-	你可能已注意到，我并没有为 `~/Cointent/css` 捆绑包设置 CdnFallbackExpression。这是因为，目前 [System.Web.Optimization 中的 Bug](https://aspnetoptimization.codeplex.com/workitem/104) 会针对回退 CSS 注入 `<script>` 标记而非预期的 `<link>` 标记。
-	
-	不过，你可以使用一个不错的[样式捆绑包回退](https://github.com/EmberConsultingGroup/StyleBundleFallback)，是由 [Ember Consulting Group](https://github.com/EmberConsultingGroup) 提供的。
+    当 `CdnFallbackExpression` 不为 null 时，会将脚本注入 HTML 中以测试捆绑包是否已成功加载，而如果没有成功加载，则会直接从源 Web 服务器访问捆绑包。需要将此属性设置成一个 JavaScript 表达式，以便测试相应的 CDN 捆绑包是否已正确加载。根据内容的不同，测试每个捆绑包所需的表达式也会有所不同。对于上面的默认捆绑包：
+    
+    - `window.jquery` 在 jquery-{version}.js 中定义
+    - `$.validator` 在 jquery.validate.js 中定义
+    - `window.Modernizr` 在 modernizer-{version}.js 中定义
+    - `$.fn.modal` 在 bootstrap.js 中定义
+    
+    你可能已注意到，我并没有为 `~/Cointent/css` 捆绑包设置 CdnFallbackExpression。这是因为，目前 [System.Web.Optimization 中的 Bug](https://aspnetoptimization.codeplex.com/workitem/104) 会针对回退 CSS 注入 `<script>` 标记而非预期的 `<link>` 标记。
+    
+    不过，你可以使用一个不错的[样式捆绑包回退](https://github.com/EmberConsultingGroup/StyleBundleFallback)，是由 [Ember Consulting Group](https://github.com/EmberConsultingGroup) 提供的。
 
 2. 若要将此解决方法用于 CSS，可在 ASP.NET 项目的 *App\_Start* 文件夹中创建一个名为 *StyleBundleExtensions.cs* 的 .cs 新文件，然后将其内容替换为 [GitHub 提供的代码](https://github.com/EmberConsultingGroup/StyleBundleFallback/blob/master/Website/App_Start/StyleBundleExtensions.cs)。
 
@@ -501,51 +501,51 @@ ms.author: cephalin
             "~/Content/bootstrap.css",
             "~/Content/site.css"));
 
-	这个新扩展方法使用相同的机制将脚本注入 HTML 中，以便查看 DOM 中是否存在匹配的类名、规则名和规则值（在 CSS 捆绑包中定义），如果没有找到匹配项，则会回退到源 Web 服务器。
+    这个新扩展方法使用相同的机制将脚本注入 HTML 中，以便查看 DOM 中是否存在匹配的类名、规则名和规则值（在 CSS 捆绑包中定义），如果没有找到匹配项，则会回退到源 Web 服务器。
 
 4. 重新发布到 Azure Web 应用并访问主页。
 5. 查看页面的 HTML 代码。你会发现如下所示的已注入脚本：
 
-			...
-		<link href="http://az673227.azureedge.net/Content/css?1.0.0.25474" rel="stylesheet"/>
-		<script>(function() {
-		                var loadFallback,
-		                    len = document.styleSheets.length;
-		                for (var i = 0; i < len; i++) {
-		                    var sheet = document.styleSheets[i];
-                    	if (sheet.href.indexOf('http://az673227.azureedge.net/Content/css?1.0.0.25474') !== -1) {
-		                        var meta = document.createElement('meta');
-		                        meta.className = 'sr-only';
-		                        document.head.appendChild(meta);
-		                        var value = window.getComputedStyle(meta).getPropertyValue('width');
-		                        document.head.removeChild(meta);
-		                        if (value !== '1px') {
-		                            document.write('<link href="/Content/css" rel="stylesheet" type="text/css" />');
-		                        }
-		                    }
-		                }
-		                return true;
-		            }())||document.write('<script src="/Content/css"><\/script>');</script>
-		
-		<script src="http://az673227.azureedge.net/bundles/modernizer?1.0.0.25474"></script>
-		 	<script>(window.Modernizr)||document.write('<script src="/bundles/modernizr"><\/script>');</script>
-			... 
-		<script src="http://az673227.azureedge.net/bundles/jquery?1.0.0.25474"></script>
-			<script>(window.jquery)||document.write('<script src="/bundles/jquery"><\/script>');</script>
-		
-		<script src="http://az673227.azureedge.net/bundles/bootstrap?1.0.0.25474"></script>
-		 	<script>($.fn.modal)||document.write('<script src="/bundles/bootstrap"><\/script>');</script>
-			...
+            ...
+        <link href="http://az673227.azureedge.net/Content/css?1.0.0.25474" rel="stylesheet"/>
+        <script>(function() {
+                        var loadFallback,
+                            len = document.styleSheets.length;
+                        for (var i = 0; i < len; i++) {
+                            var sheet = document.styleSheets[i];
+                        if (sheet.href.indexOf('http://az673227.azureedge.net/Content/css?1.0.0.25474') !== -1) {
+                                var meta = document.createElement('meta');
+                                meta.className = 'sr-only';
+                                document.head.appendChild(meta);
+                                var value = window.getComputedStyle(meta).getPropertyValue('width');
+                                document.head.removeChild(meta);
+                                if (value !== '1px') {
+                                    document.write('<link href="/Content/css" rel="stylesheet" type="text/css" />');
+                                }
+                            }
+                        }
+                        return true;
+                    }())||document.write('<script src="/Content/css"><\/script>');</script>
+        
+        <script src="http://az673227.azureedge.net/bundles/modernizer?1.0.0.25474"></script>
+             <script>(window.Modernizr)||document.write('<script src="/bundles/modernizr"><\/script>');</script>
+            ... 
+        <script src="http://az673227.azureedge.net/bundles/jquery?1.0.0.25474"></script>
+            <script>(window.jquery)||document.write('<script src="/bundles/jquery"><\/script>');</script>
+        
+        <script src="http://az673227.azureedge.net/bundles/bootstrap?1.0.0.25474"></script>
+             <script>($.fn.modal)||document.write('<script src="/bundles/bootstrap"><\/script>');</script>
+            ...
 
-	请注意，CSS 捆绑包的注入脚本仍包含以下行中 `CdnFallbackExpression` 属性的残存错误：
+    请注意，CSS 捆绑包的注入脚本仍包含以下行中 `CdnFallbackExpression` 属性的残存错误：
 
-		}())||document.write('<script src="/Content/css"><\/script>');</script>
+        }())||document.write('<script src="/Content/css"><\/script>');</script>
 
-	不过，由于 || 表达式的第一部分始终会返回 true（在紧邻其上的行中），因此始终不会运行 document.write() 函数。
+    不过，由于 || 表达式的第一部分始终会返回 true（在紧邻其上的行中），因此始终不会运行 document.write() 函数。
 
 6. 若要测试该回退脚本是否可正常运行，请回到 CDN 终结点的仪表板，然后单击“禁用终结点”。
 
-	![](./media/cdn-websites-with-cdn/13-test-fallback.png)  
+    ![](./media/cdn-websites-with-cdn/13-test-fallback.png)  
 
 7. 刷新 Azure Web 应用的浏览器窗口。现在可看到所有脚本和样式表都已正常加载。
 

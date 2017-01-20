@@ -46,11 +46,11 @@ ms.author: cynthn
 
 2. 以管理员身份打开“命令提示符”窗口。将目录更改为 **%windir%\\system32\\sysprep**，然后运行 `sysprep.exe`。
 
-	![打开“命令提示符”窗口](./media/virtual-machines-windows-classic-createupload-vhd/sysprep_commandprompt.png)  
+    ![打开“命令提示符”窗口](./media/virtual-machines-windows-classic-createupload-vhd/sysprep_commandprompt.png)  
 
 3.	此时会显示**“系统准备工具”**对话框。
 
-	![启动 Sysprep](./media/virtual-machines-windows-classic-createupload-vhd/sysprepgeneral.png)
+    ![启动 Sysprep](./media/virtual-machines-windows-classic-createupload-vhd/sysprepgeneral.png)
 
 4.  在**“系统准备工具”**中，选择**“进入系统全新体验(OOBE)”**并确保选中**“一般化”**。
 
@@ -64,23 +64,23 @@ ms.author: cynthn
 
 1. 登录
 
-		Add-AzureAccount -Environment AzureChinaCloud
+        Add-AzureAccount -Environment AzureChinaCloud
 
 1. 设置你的 Azure 订阅。
 
-    	Select-AzureSubscription -SubscriptionName <SubscriptionName> 
+        Select-AzureSubscription -SubscriptionName <SubscriptionName> 
 
 2. 新建存储帐户。存储帐户的名称应该唯一且包含 3-24 个字符。名称可以是字母和数字的任意组合。还需要指定一个位置，例如“中国东部”。
-    	
-		New-AzureStorageAccount -StorageAccountName <StorageAccountName> -Location <Location>
+        
+        New-AzureStorageAccount -StorageAccountName <StorageAccountName> -Location <Location>
 
 3. 将新存储帐户设置为默认值。
-    	
-		Set-AzureSubscription -CurrentStorageAccountName <StorageAccountName> -SubscriptionName <SubscriptionName>
+        
+        Set-AzureSubscription -CurrentStorageAccountName <StorageAccountName> -SubscriptionName <SubscriptionName>
 
 4. 创建新容器。
 
-    	New-AzureStorageContainer -Name <ContainerName> -Permission Off
+        New-AzureStorageContainer -Name <ContainerName> -Permission Off
 
 ## 步骤 3：上载 .vhd 文件
 
@@ -88,13 +88,13 @@ ms.author: cynthn
 
 在上一步骤使用的 Azure PowerShell 窗口中键入以下命令，并将 &lsaquo; 和 &rsaquo; 括号中的变量替换为自己的信息。
 
-		Add-AzureVhd -Destination "https://<StorageAccountName>.blob.core.chinacloudapi.cn/<ContainerName>/<vhdName>.vhd" -LocalFilePath <LocalPathtoVHDFile>
+        Add-AzureVhd -Destination "https://<StorageAccountName>.blob.core.chinacloudapi.cn/<ContainerName>/<vhdName>.vhd" -LocalFilePath <LocalPathtoVHDFile>
 
 ## 步骤 4：将映像添加到自定义映像列表
 
 使用 [Add-AzureVMImage])(https://msdn.microsoft.com/zh-cn/library/mt589167.aspx) cmdlet 将映像添加到自定义映像列表。
 
-		Add-AzureVMImage -ImageName <ImageName> -MediaLocation "https://<StorageAccountName>.blob.core.chinacloudapi.cn/<ContainerName>/<vhdName>.vhd" -OS "Windows"
+        Add-AzureVMImage -ImageName <ImageName> -MediaLocation "https://<StorageAccountName>.blob.core.chinacloudapi.cn/<ContainerName>/<vhdName>.vhd" -OS "Windows"
 
 ## 后续步骤
 

@@ -63,20 +63,20 @@ Azure 移动应用 Node SDK 支持两个数据库驱动程序 - node-mssql 驱�
 
 4. 创建 app.js 文件，实现基本移动服务器。
 
-		var express = require('express'),
-			azureMobileApps = require('azure-mobile-apps');
+        var express = require('express'),
+            azureMobileApps = require('azure-mobile-apps');
 
-		var app = express(),
-			mobile = azureMobileApps();
+        var app = express(),
+            mobile = azureMobileApps();
 
-		// Define a TodoItem table
-		mobile.tables.add('TodoItem');
+        // Define a TodoItem table
+        mobile.tables.add('TodoItem');
 
-		// Add the mobile API so it is accessible as a Web API
-		app.use(mobile);
+        // Add the mobile API so it is accessible as a Web API
+        app.use(mobile);
 
-		// Start listening on HTTP
-		app.listen(process.env.PORT || 3000);
+        // Start listening on HTTP
+        app.listen(process.env.PORT || 3000);
 
 此应用程序创建具有单个终结点 (`/tables/TodoItem`) 的移动优化 WebAPI，让用户使用动态架构访问基础 SQL 数据存储，而无需经过身份验证。它适用于以下客户端库快速入门：
 
@@ -102,7 +102,7 @@ Visual Studio 2015 需要使用一个扩展在 IDE 中开发 Node.js 应用程�
 
 4. 填写项目名称。单击“确定”。
 
-	![Visual Studio 2015 中的“新建项目”][1]  
+    ![Visual Studio 2015 中的“新建项目”][1]  
 
 5. 右键单击“npm”节点，然后选择“安装新的 npm 包...”。
 
@@ -110,7 +110,7 @@ Visual Studio 2015 需要使用一个扩展在 IDE 中开发 Node.js 应用程�
 
 7. 在搜索框中输入 _azure-mobile-apps_。单击“azure-mobile-apps 2.0.0”包，然后单击“安装包”。
 
-	![安装新的 npm 包][2]  
+    ![安装新的 npm 包][2]  
 
 8. 单击“关闭”。
 
@@ -152,16 +152,16 @@ Visual Studio 2015 需要使用一个扩展在 IDE 中开发 Node.js 应用程�
 
 4. 使用 Git 克隆 URL 执行 `git clone` 命令，并根据需要输入密码，如以下示例所示：
 
-		$ git clone https://username@todolist.scm.chinacloudsites.cn:443/todolist.git
+        $ git clone https://username@todolist.scm.chinacloudsites.cn:443/todolist.git
 
 5. 浏览到本地目录（在前面的示例中为 /todolist），可以看到项目文件已下载。在 `/tables` 目录中定位到 `todoitem.json` 文件。此文件定义对表的权限。此外，可在同一目录中找到 `todoitem.js` 文件，它定义表的 CRUD 操作脚本。
 
 6. 更改项目文件之后，请执行以下命令添加、提交更改，然后将更改上载到站点：
 
-		$ git commit -m "updated the table script"
-		$ git push origin master
+        $ git commit -m "updated the table script"
+        $ git push origin master
 
-	将新文件添加到项目时，必须先执行 `git add .` 命令。
+    将新文件添加到项目时，必须先执行 `git add .` 命令。
 
 每次将一组新的提交内容推送到站点时，将重新发布站点。
 
@@ -206,7 +206,7 @@ azure-mobile-apps Node.js Server SDK 提供将存储在 Azure SQL 数据库中�
         azureMobileApps = require('azure-mobile-apps');
 
     var app = express(),
-	    mobile = azureMobileApps();
+        mobile = azureMobileApps();
 
     // Define the database schema that is exposed
     mobile.tables.import('./tables');
@@ -278,7 +278,7 @@ Azure 移动应用 Node.js SDK 利用 [mssql Node.js 包]来建立和使用 SQL 
   5. 单击“IP 地址”选项卡。
   6. 找到“IPAll”节点。在“TCP 端口”字段中输入 **1433**。
 
-	 	 ![Configure SQL Express for TCP/IP][3]
+          ![Configure SQL Express for TCP/IP][3]
 
   7. 单击“确定”。在弹出对话框中单击“确定”。
   8. 在左侧的树菜单中，单击“SQL Server 服务”。
@@ -292,14 +292,14 @@ Azure 移动应用 Node.js SDK 利用 [mssql Node.js 包]来建立和使用 SQL 
   3. 确保已选择“SQL Server 和 Windows 身份验证模式”
   4. 单击“确定”
 
-  		![Configure SQL Express Authentication][4]
+          ![Configure SQL Express Authentication][4]
 
   5. 在对象资源管理器中展开“安全性”>“登录”。
   6. 右键单击“登录”，然后选择“新建登录名...”
   7. 输入登录名。选择“SQL Server 身份验证”。输入密码，然后在“确认密码”中输入相同的密码。密码必须符合 Windows 复杂性要求。
   8. 单击“确定”
 
-  		![Add a new user to SQL Express][5]
+          ![Add a new user to SQL Express][5]
 
   9. 右键单击新登录名并选择“属性”
   10. 选择“服务器角色”页
@@ -396,7 +396,7 @@ _azureMobile.js_ 文件中的大多数设置在 [Azure 门户预览]中都有等
 
 8. 单击“服务器”。在“添加服务器”边栏选项卡中的“服务器名称”字段内输入唯一的服务器名称，然后提供合适的“服务器管理员登录名”和“密码”。务必选中“允许 Azure 服务访问服务器”。单击**“确定”**。
 
-	![创建 Azure SQL 数据库][6]  
+    ![创建 Azure SQL 数据库][6]  
 
 9. 在“新建数据库”边栏选项卡中，单击“确定”。
 
@@ -548,14 +548,14 @@ _azureMobile.js_ 文件中的大多数设置在 [Azure 门户预览]中都有等
 
     // Ensure that only records for the authenticated user are retrieved
     table.read(function (context) {
-		context.query.where({ userId: context.user.id });
-		return context.execute();
-	});
+        context.query.where({ userId: context.user.id });
+        return context.execute();
+    });
 
     // When adding records, add or overwrite the userId with the authenticated user
     table.insert(function (context) {
-	    context.item.userId = context.user.id;
-	    return context.execute();
+        context.item.userId = context.user.id;
+        return context.execute();
     });
 
     module.exports = table;
@@ -575,19 +575,19 @@ _azureMobile.js_ 文件中的大多数设置在 [Azure 门户预览]中都有等
     // Define the columns within the table
     table.columns = {
         "text": "string",
-		"complete": "boolean"
-	};
+        "complete": "boolean"
+    };
 
-	// Turn off dynamic schema
-	table.dynamicSchema = false;
+    // Turn off dynamic schema
+    table.dynamicSchema = false;
 
-	// Turn on Soft Delete
-	table.softDelete = true;
+    // Turn on Soft Delete
+    table.softDelete = true;
 
-	// Require authentication to access the table
-	table.access = 'authenticated';
+    // Require authentication to access the table
+    table.access = 'authenticated';
 
-	module.exports = table;
+    module.exports = table;
 
 应建立记录清除机制 - 从客户端应用程序、通过 Web 作业或通过自定义 API。
 
@@ -595,27 +595,27 @@ _azureMobile.js_ 文件中的大多数设置在 [Azure 门户预览]中都有等
 
 在创建新应用程序时，可能需要在表中植入数据。这可以在表定义 JavaScript 文件中实现，如下所示：
 
-	var azureMobileApps = require('azure-mobile-apps');
+    var azureMobileApps = require('azure-mobile-apps');
 
-	var table = azureMobileApps.table();
+    var table = azureMobileApps.table();
 
-	// Define the columns within the table
-	table.columns = {
-		"text": "string",
-		"complete": "boolean"
-	};
-	table.seed = [
-		{ text: 'Example 1', complete: false },
-		{ text: 'Example 2', complete: true }
-	];
+    // Define the columns within the table
+    table.columns = {
+        "text": "string",
+        "complete": "boolean"
+    };
+    table.seed = [
+        { text: 'Example 1', complete: false },
+        { text: 'Example 2', complete: true }
+    ];
 
-	// Turn off dynamic schema
-	table.dynamicSchema = false;
+    // Turn off dynamic schema
+    table.dynamicSchema = false;
 
-	// Require authentication to access the table
-	table.access = 'authenticated';
+    // Require authentication to access the table
+    table.access = 'authenticated';
 
-	module.exports = table;
+    module.exports = table;
 
 仅当表是由 Azure 移动应用 SDK 所创建时，才能植入数据。如果表已在数据库中，则不会在表中插入任何数据。如果打开了动态架构，将从植入的数据推断架构。
 
@@ -647,27 +647,27 @@ Swagger 终结点将位于 http://_yoursite_.chinacloudsites.cn/swagger。可以
 
 以下代码演示如何使用推送对象向已注册的 iOS 设备发送广播推送通知：
 
-	// Create an APNS payload.
+    // Create an APNS payload.
     var payload = '{"aps": {"alert": "This is an APNS payload."}}';
 
     // Only do the push if configured
     if (context.push) {
-	    // Send a push notification using APNS.
+        // Send a push notification using APNS.
         context.push.apns.send(null, payload, function (error) {
             if (error) {
                 // Do something or log the error.
-	        }
+            }
         });
     }
 
 通过从客户端创建模板推送注册，可以改为向所有受支持平台上的设备发送模板推送消息。以下代码演示如何发送模板通知：
 
-	// Define the template payload.
-	var payload = '{"messageParam": "This is a template payload."}';
+    // Define the template payload.
+    var payload = '{"messageParam": "This is a template payload."}';
 
     // Only do the push if configured
     if (context.push) {
-		// Send a template notification.
+        // Send a template notification.
         context.push.send(null, payload, function (error) {
             if (error) {
                 // Do something or log the error.
@@ -681,7 +681,7 @@ Swagger 终结点将位于 http://_yoursite_.chinacloudsites.cn/swagger。可以
 
     // Only do the push if configured
     if (context.push) {
-		// Send a notification to the current user.
+        // Send a notification to the current user.
         context.push.send(context.user.id, payload, function (error) {
             if (error) {
                 // Do something or log the error.
@@ -710,31 +710,31 @@ Swagger 终结点将位于 http://_yoursite_.chinacloudsites.cn/swagger。可以
 
 下面是根据前面使用的基本应用示例所做的原型 api 定义。
 
-	var express = require('express'),
-		azureMobileApps = require('azure-mobile-apps');
+    var express = require('express'),
+        azureMobileApps = require('azure-mobile-apps');
 
-	var app = express(),
-		mobile = azureMobileApps();
+    var app = express(),
+        mobile = azureMobileApps();
 
-	// Import the Custom API
-	mobile.api.import('./api');
+    // Import the Custom API
+    mobile.api.import('./api');
 
-	// Add the mobile API so it is accessible as a Web API
-	app.use(mobile);
+    // Add the mobile API so it is accessible as a Web API
+    app.use(mobile);
 
-	// Start listening on HTTP
-	app.listen(process.env.PORT || 3000);
+    // Start listening on HTTP
+    app.listen(process.env.PORT || 3000);
 
 让我们使用一个通过 _Date.now()_ 方法返回服务器日期的示例 API。下面是 api/date.js 文件：
 
-	var api = {
-		get: function (req, res, next) {
-			var date = { currentTime: Date.now() };
-			res.status(200).type('application/json').send(date);
-		});
-	};
+    var api = {
+        get: function (req, res, next) {
+            var date = { currentTime: Date.now() };
+            res.status(200).type('application/json').send(date);
+        });
+    };
 
-	module.exports = api;
+    module.exports = api;
 
 每个参数是标准的 RESTful 谓词之一 - GET、POST、PATCH 或 DELETE。此方法是发送所需输出的标准 [ExpressJS 中间件]函数。
 
@@ -742,29 +742,29 @@ Swagger 终结点将位于 http://_yoursite_.chinacloudsites.cn/swagger。可以
 
 Azure 移动应用 SDK 对表终结点和自定义 API 使用相同的方式实现身份验证。若要在前一部分开发的 API 中添加身份验证，请添加 **access** 属性：
 
-	var api = {
-		get: function (req, res, next) {
-			var date = { currentTime: Date.now() };
-			res.status(200).type('application/json').send(date);
-		});
-	};
-	// All methods must be authenticated.
-	api.access = 'authenticated';
+    var api = {
+        get: function (req, res, next) {
+            var date = { currentTime: Date.now() };
+            res.status(200).type('application/json').send(date);
+        });
+    };
+    // All methods must be authenticated.
+    api.access = 'authenticated';
 
-	module.exports = api;
+    module.exports = api;
 
 也可以指定对特定操作的身份验证：
 
-	var api = {
-		get: function (req, res, next) {
-			var date = { currentTime: Date.now() };
-			res.status(200).type('application/json').send(date);
-		}
-	};
-	// The GET methods must be authenticated.
-	api.get.access = 'authenticated';
+    var api = {
+        get: function (req, res, next) {
+            var date = { currentTime: Date.now() };
+            res.status(200).type('application/json').send(date);
+        }
+    };
+    // The GET methods must be authenticated.
+    api.get.access = 'authenticated';
 
-	module.exports = api;
+    module.exports = api;
 
 对于要求身份验证的自定义 API，必须使用与表终结点相同的令牌。
 
@@ -772,25 +772,25 @@ Azure 移动应用 SDK 对表终结点和自定义 API 使用相同的方式实�
 
 Azure 移动应用 SDK 使用[正文分析器中间件](https://github.com/expressjs/body-parser)来接受和解码提交件的正文内容。可以将正文分析器预先配置为接受大型文件上载：
 
-	var express = require('express'),
+    var express = require('express'),
         bodyParser = require('body-parser'),
-		azureMobileApps = require('azure-mobile-apps');
+        azureMobileApps = require('azure-mobile-apps');
 
-	var app = express(),
-		mobile = azureMobileApps();
+    var app = express(),
+        mobile = azureMobileApps();
 
     // Set up large body content handling
     app.use(bodyParser.json({ limit: '50mb' }));
     app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
-	// Import the Custom API
-	mobile.api.import('./api');
+    // Import the Custom API
+    mobile.api.import('./api');
 
-	// Add the mobile API so it is accessible as a Web API
-	app.use(mobile);
+    // Add the mobile API so it is accessible as a Web API
+    app.use(mobile);
 
-	// Start listening on HTTP
-	app.listen(process.env.PORT || 3000);
+    // Start listening on HTTP
+    app.listen(process.env.PORT || 3000);
 
 传输前，该文件采用 Base-64 编码。这将增加实际上传大小，因此必须考虑其大小。
 
@@ -870,7 +870,7 @@ Azure 门户预览允许在应用服务编辑器中编辑 Node.js 后端脚本�
 
 1. 在移动应用后端边栏选项卡中，单击“所有设置”>“简易表”或“简易 API”，单击表或 API，然后单击“编辑脚本”。脚本文件将在应用服务编辑器中打开。
 
-	![应用服务编辑器](./media/app-service-mobile-node-backend-how-to-use-server-sdk/mobile-apps-visual-studio-editor.png)
+    ![应用服务编辑器](./media/app-service-mobile-node-backend-how-to-use-server-sdk/mobile-apps-visual-studio-editor.png)
 
 2. 在在线编辑器中更改代码文件。键入内容时，更改会自动保存。
 

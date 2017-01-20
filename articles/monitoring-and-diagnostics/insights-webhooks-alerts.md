@@ -42,36 +42,36 @@ Webhook 可以使用以下任一方法进行身份验证：
 
 POST 操作对于所有基于度量值的警报包含以下 JSON 有效负载和架构。
 
-		{
-		"status": "Activated",
-		"context": {
-		            "timestamp": "2015-08-14T22:26:41.9975398Z",
-		            "id": "/subscriptions/s1/resourceGroups/useast/providers/microsoft.insights/alertrules/ruleName1",
-		            "name": "ruleName1",
-		            "description": "some description",
-		            "conditionType": "Metric",
-		            "condition": {
-		                        "metricName": "Requests",
-		                        "metricUnit": "Count",
-		                        "metricValue": "10",
-		                        "threshold": "10",
-		                        "windowSize": "15",
-		                        "timeAggregation": "Average",
-		                        "operator": "GreaterThanOrEqual"
-		                },
-		            "subscriptionId": "s1",
-		            "resourceGroupName": "useast",                                
-		            "resourceName": "mysite1",
-		            "resourceType": "microsoft.foo/sites",
-		            "resourceId": "/subscriptions/s1/resourceGroups/useast/providers/microsoft.foo/sites/mysite1",
-		            "resourceRegion": "chinanorth",
-		            "portalLink": "https://portal.azure.cn/#resource/subscriptions/s1/resourceGroups/useast/providers/microsoft.foo/sites/mysite1"
-		},
-		"properties": {
-		              "key1": "value1",
-		              "key2": "value2"
-		              }
-		}
+        {
+        "status": "Activated",
+        "context": {
+                    "timestamp": "2015-08-14T22:26:41.9975398Z",
+                    "id": "/subscriptions/s1/resourceGroups/useast/providers/microsoft.insights/alertrules/ruleName1",
+                    "name": "ruleName1",
+                    "description": "some description",
+                    "conditionType": "Metric",
+                    "condition": {
+                                "metricName": "Requests",
+                                "metricUnit": "Count",
+                                "metricValue": "10",
+                                "threshold": "10",
+                                "windowSize": "15",
+                                "timeAggregation": "Average",
+                                "operator": "GreaterThanOrEqual"
+                        },
+                    "subscriptionId": "s1",
+                    "resourceGroupName": "useast",                                
+                    "resourceName": "mysite1",
+                    "resourceType": "microsoft.foo/sites",
+                    "resourceId": "/subscriptions/s1/resourceGroups/useast/providers/microsoft.foo/sites/mysite1",
+                    "resourceRegion": "chinanorth",
+                    "portalLink": "https://portal.azure.cn/#resource/subscriptions/s1/resourceGroups/useast/providers/microsoft.foo/sites/mysite1"
+        },
+        "properties": {
+                      "key1": "value1",
+                      "key2": "value2"
+                      }
+        }
 
 | 字段 | 必需 | 一组固定的值 | 说明 |
 | :-------------| :-------------   | :-------------   | :-------------   |

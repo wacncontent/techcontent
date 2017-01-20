@@ -105,13 +105,13 @@ ms.author: douglasl
 
     如果 SQL Server 上的 Active Directory 已与 Azure Active Directory 联合，则你可以选择使用 SQL Server 的联合服务帐户来与远程 Azure 服务器通信。如需详细了解此选项的要求，请参阅 [ALTER DATABASE SET 选项 (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/bb522682.aspx)。
 
-	-   **创建新服务器**
+    -   **创建新服务器**
 
         1.  为服务器管理员创建登录名和密码。
 
         2.  （可选）使用 SQL Server 的联合服务帐户来与远程 Azure 服务器通信。
 
-		![创建新的 Azure 服务器 - Stretch Database 向导][StretchWizardImage4]  
+        ![创建新的 Azure 服务器 - Stretch Database 向导][StretchWizardImage4]  
 
     -   **现有服务器**
 
@@ -123,7 +123,7 @@ ms.author: douglasl
 
             -   选择“Active Directory 集成身份验证”可以使用 SQL Server 的联合服务帐户来与远程 Azure 服务器通信。如果所选服务器未与 Azure Active Directory 集成，此选项就不会出现。
 
-		![选择现有的 Azure 服务器 - Stretch Database 向导][StretchWizardImage5]  
+        ![选择现有的 Azure 服务器 - Stretch Database 向导][StretchWizardImage5]  
 
 ## <a name="Credentials"></a>安全凭据
 必须使用数据库主密钥来保护延伸数据库在连接到远程数据库时所用的凭据。

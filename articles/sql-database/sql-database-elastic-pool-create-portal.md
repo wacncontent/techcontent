@@ -79,7 +79,7 @@ ms.tgt_pltfrm: NA
 
 3. 使用“配置池”页面上的控件浏览设置并配置池。请参阅 [Elastic pools limits](./sql-database-elastic-pool.md#eDTU-and-storage-limits-for-elastic-pools-and-elastic-databases)（弹性池限制）以了解有关每个服务层的限制的详细信息，以及参阅 [Price and performance considerations for elastic database pools](./sql-database-elastic-pool-guidance.md)（弹性数据库池的价格和性能注意事项）以了解有关正确调整池大小的详细指南。有关池设置的详细信息，请参阅 [Elastic database pool properties](./sql-database-elastic-pool.md#elastic-database-pool-properties)（弹性数据库池属性）。
 
-	![配置弹性池](./media/sql-database-elastic-pool-create-portal/configure-performance.png)
+    ![配置弹性池](./media/sql-database-elastic-pool-create-portal/configure-performance.png)
 
 4. 更改设置后单击“配置池”边栏选项卡中的“选择”。
 5. 单击“确定”以创建池。
