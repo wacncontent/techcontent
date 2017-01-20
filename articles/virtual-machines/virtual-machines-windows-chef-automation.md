@@ -92,11 +92,11 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 
 在你选择的编辑器中打开该文件并修改“cookbook_path”：从路径中删除 /../，使其如下所示：
 
-	cookbook_path  ["#{current_dir}/cookbooks"]
+    cookbook_path  ["#{current_dir}/cookbooks"]
 
 另外，请添加以下行以反映你的 Azure 发布设置文件的名称。
 
-	knife[:azure_publish_settings_file] = "yourfilename.publishsettings" 
+    knife[:azure_publish_settings_file] = "yourfilename.publishsettings" 
 
 你的 knife.rb 文件现在看起来应当如下所示：
 
@@ -126,7 +126,7 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 
 运行以下命令：
 
-	chef gem install knife-azure ––pre
+    chef gem install knife-azure ––pre
 
 **注意：**–pre 参数确保你收到 knife azure 插件的最新 RC 版本，该版本提供对最新 API 集的访问。
 
@@ -136,7 +136,7 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 
 若要确保所有项都已正确配置，请运行：
 
-	knife azure image list
+    knife azure image list
 
 如果所有项都已正确配置，你会看到可用 Azure 映像的列表滚动显示。
 
@@ -148,7 +148,7 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 
 在 C:\\Chef 目录下运行以下命令：
 
-	chef generate cookbook webserver
+    chef generate cookbook webserver
 
 这将在 **C:\\Chef\\cookbooks\\webserver** 目录下生成一组文件。 现在，我们需要定义我们希望 Chef 客户端在托管 VM 上执行的一组命令。
 
@@ -156,19 +156,19 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 
 修改 **C:\\chef\\cookbooks\\webserver\\recipes\\default.rb** 并添加以下行：
 
-	powershell_script 'Install IIS' do
- 		action :run
- 		code 'add-windowsfeature Web-Server'
-	end
+    powershell_script 'Install IIS' do
+         action :run
+         code 'add-windowsfeature Web-Server'
+    end
 
-	service 'w3svc' do
- 		action [ :enable, :start ]
-	end
+    service 'w3svc' do
+         action [ :enable, :start ]
+    end
 
-	template 'c:\inetpub\wwwroot\Default.htm' do
- 		source 'Default.htm.erb'
- 		rights :read, 'Everyone'
-	end
+    template 'c:\inetpub\wwwroot\Default.htm' do
+         source 'Default.htm.erb'
+         rights :read, 'Everyone'
+    end
 
 在完成后，保存该文件。
 
@@ -178,7 +178,7 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 
 执行以下命令来生成模板：
 
-	chef generate template webserver Default.htm
+    chef generate template webserver Default.htm
 
 现在导航到文件 **C:\\chef\\cookbooks\\webserver\\templates\\default\\Default.htm.erb** 并编辑该文件。
 
@@ -188,7 +188,7 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 
 在此步骤中，我们将制作我们已在本地计算机上创建的食谱的副本并将其上载到 Chef 托管服务器。上载完成后，食谱将显示在“策略”选项卡下。
 
-	knife cookbook upload webserver
+    knife cookbook upload webserver
 
 ![][9]
 
@@ -200,7 +200,7 @@ PEM 文件包含你的组织和用于通信的管理私钥，而 **knife.rb** �
 
 下面是该命令的示例：
 
-	knife azure server create --azure-dns-name 'diegotest01' --azure-vm-name 'testserver01' --azure-vm-size 'Small' --azure-storage-account 'portalvhdsxxxx' --bootstrap-protocol 'cloud-api' --azure-source-image 'a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-Datacenter-201411.01-en.us-127GB.vhd' --azure-service-location 'China North' --winrm-user azureuser --winrm-password 'myPassword123' --tcp-endpoints 80,3389 --r 'recipe[webserver]'
+    knife azure server create --azure-dns-name 'diegotest01' --azure-vm-name 'testserver01' --azure-vm-size 'Small' --azure-storage-account 'portalvhdsxxxx' --bootstrap-protocol 'cloud-api' --azure-source-image 'a699494373c04fc0bc8f2bb1389d6106__Windows-Server-2012-Datacenter-201411.01-en.us-127GB.vhd' --azure-service-location 'China North' --winrm-user azureuser --winrm-password 'myPassword123' --tcp-endpoints 80,3389 --r 'recipe[webserver]'
 
 各个参数不言自明。替换你的特定变量并运行。
 

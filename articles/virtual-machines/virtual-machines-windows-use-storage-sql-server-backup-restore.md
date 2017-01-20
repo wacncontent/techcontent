@@ -70,8 +70,8 @@ SQL Server 2016 引入了新功能；你可以使用[文件快照备份](http://
 
 1. 接着，完成以下教程之一，这些教程会引导你创建存储帐户以及执行还原。
 
-	- **SQL Server 2014**：[教程：SQL Server 2014 备份和还原到 Azure Blob 存储服务](https://msdn.microsoft.com/zh-cn/library/jj720558(v=sql.120).aspx)。
-	- **SQL Server 2016**：[教程：将 Azure Blob 存储服务用于 SQL Server 2016 数据库](https://msdn.microsoft.com/zh-cn/library/dn466438.aspx)
+    - **SQL Server 2014**：[教程：SQL Server 2014 备份和还原到 Azure Blob 存储服务](https://msdn.microsoft.com/zh-cn/library/jj720558(v=sql.120).aspx)。
+    - **SQL Server 2016**：[教程：将 Azure Blob 存储服务用于 SQL Server 2016 数据库](https://msdn.microsoft.com/zh-cn/library/dn466438.aspx)
 
 1. 查看其他文档，从[使用 Azure Blob 存储服务进行 SQL Server 备份和还原](https://msdn.microsoft.com/zh-cn/library/jj919148.aspx)开始。
 

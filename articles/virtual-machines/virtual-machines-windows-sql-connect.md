@@ -52,11 +52,11 @@ ms.author: jroth
 
 完成此步骤以后，任何可以访问 Internet 的客户端都可以连接到 SQL Server 实例，只需指定虚拟机的公共 IP 地址或分配到该 IP 地址的 DNS 标签即可。如果 SQL Server 端口为 1433，则不需在连接字符串中进行指定。
 
-	"Server=sqlvmlabel.chinaeast.chinacloudapp.cn;Integrated Security=false;User ID=<login_name>;Password=<your_password>"
+    "Server=sqlvmlabel.chinaeast.chinacloudapp.cn;Integrated Security=false;User ID=<login_name>;Password=<your_password>"
 
 尽管客户端可通过 Internet 进行连接，但这并不意味着任何人都可以连接到 SQL Server。外部客户端必须有正确的用户名和密码。为了提高安全性，可以不使用 1433 这个众所周知的端口。例如，如果你将 SQL Server 配置为在端口 1500 上进行侦听并制定了适当的防火墙和网络安全组规则，则可将端口号附加到服务器名称上进行连接，示例如下：
 
-	"Server=sqlvmlabel.chinaeast.chinacloudapp.cn,1500;Integrated Security=false;User ID=<login_name>;Password=<your_password>"
+    "Server=sqlvmlabel.chinaeast.chinacloudapp.cn,1500;Integrated Security=false;User ID=<login_name>;Password=<your_password>"
 
 >[!NOTE] 务必注意，使用此方法与 SQL Server 通信时，Azure 数据中心的所有传出数据都将服从一般[出站数据传输定价](https://www.azure.cn/pricing/details/data-transfer/)。
 
@@ -72,7 +72,7 @@ ms.author: jroth
 
 假设你已在虚拟网络中配置 DNS，则可在连接字符串中指定 SQL Server VM 计算机名来连接 SQL Server 实例。以下示例还假设同时已配置 Windows 身份验证，并且用户已获得访问 SQL Server 实例的权限。
 
-	"Server=mysqlvm;Integrated Security=true"
+    "Server=mysqlvm;Integrated Security=true"
 
 请注意，在此方案中，你还可以指定 VM 的 IP 地址。
 

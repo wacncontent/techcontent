@@ -50,13 +50,13 @@ ms.author: sdanie
 
 ## 在缓存中添加一些内容并检索此内容
 
-	>>> import redis
-	>>> r = redis.StrictRedis(host='<name>.redis.cache.chinacloudapi.cn',
-	      port=6380, db=0, password='<key>', ssl=True)
-	>>> r.set('foo', 'bar')
-	True
-	>>> r.get('foo')
-	b'bar'
+    >>> import redis
+    >>> r = redis.StrictRedis(host='<name>.redis.cache.chinacloudapi.cn',
+          port=6380, db=0, password='<key>', ssl=True)
+    >>> r.set('foo', 'bar')
+    True
+    >>> r.get('foo')
+    b'bar'
 
 将 `<name>` 替换为你的缓存名称，将 `key` 替换为你的缓存访问密钥。
 

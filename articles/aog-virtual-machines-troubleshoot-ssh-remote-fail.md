@@ -31,7 +31,7 @@ SSH 之另一项优点为其传输的数据可以是经过压缩的，所以可�
 1. ssh 相关<span style="background:#FFFF00">文件权限有误</span>导致无法启动, 报错参考如下:
     `Starting sshd: /var/empty/sshd must be owned by root and not group or world-writable.`
 2. ssh <span style="background:#FFFF00">配置文件内容有误, 或语法有误</span>, 报错参考如下:
-	`Starting sshd: [FAILED]`
+    `Starting sshd: [FAILED]`
 
 ## 解决方案 ##
 

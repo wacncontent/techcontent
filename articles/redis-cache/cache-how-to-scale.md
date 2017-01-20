@@ -74,7 +74,7 @@ Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能�
 
 修改 `Size`、`Sku` 或 `ShardCount` 属性后，可以在 PowerShell 中使用 [Set-AzureRmRedisCache](https://msdn.microsoft.com/zh-cn/library/azure/mt634518.aspx) cmdlet 缩放 Azure Redis 缓存实例。以下示例演示了如何将名为 `myCache` 的缓存缩放为 2.5 GB 缓存。
 
-	Set-AzureRmRedisCache -ResourceGroupName myGroup -Name myCache -Size 2.5GB
+    Set-AzureRmRedisCache -ResourceGroupName myGroup -Name myCache -Size 2.5GB
 
 有关使用 PowerShell 进行缩放的详细信息，请参阅[使用 PowerShell 缩放 Redis 缓存](./cache-howto-manage-redis-cache-powershell.md#scale)。
 
@@ -153,9 +153,9 @@ Azure Redis 缓存具有不同的缓存产品/服务，使缓存大小和功能�
 某些定价层具有不同的[数据库限制](./cache-configure.md#databases)，因此，如果在缓存创建过程中为 `databases` 设置配置了自定义值，则在向下缩放时需注意一些注意事项。
 
 -	缩放到的定价层的 `databases` 限制低于当前层：
-	-	如果你使用的是默认 `databases` 数（对于所有定价层来说为 16），则不会丢失数据。
-	-	如果你使用的是在你要缩放到的层的限制内的自定义 `databases` 数，则将保留此 `databases` 设置并且不会丢失数据。
-	-	如果你使用的是超出新层限制的自定义 `databases` 数，则 `databases` 设置将降低到新层的限制，并且已删除数据库中的所有数据都将丢失。
+    -	如果你使用的是默认 `databases` 数（对于所有定价层来说为 16），则不会丢失数据。
+    -	如果你使用的是在你要缩放到的层的限制内的自定义 `databases` 数，则将保留此 `databases` 设置并且不会丢失数据。
+    -	如果你使用的是超出新层限制的自定义 `databases` 数，则 `databases` 设置将降低到新层的限制，并且已删除数据库中的所有数据都将丢失。
 -	所缩小到的定价层的 `databases` 限制等于或高于当前层时，将保留 `databases` 设置并且不会丢失数据。
 
 注意，当标准和高级缓存有 99.9% 可用性 SLA 时，则没有数据丢失方面的 SLA。

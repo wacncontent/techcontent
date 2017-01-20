@@ -42,11 +42,11 @@ ms.author: thmullan;jackr
 
 作为最佳实践，应用程序应使用不同的帐户进行身份验证 – 这样，就可以限制授予应用程序的权限，并在应用程序代码容易受到 SQL 注入攻击的情况下降低恶意活动的风险。建议的方法是创建[包含的数据库用户](https://msdn.microsoft.com/zh-cn/library/ff929188)，使应用程序能够直接向单一数据库进行身份验证。可以通过执行以下 T-SQL 命令，在以服务器管理员身份登录连接到用户数据库时，创建使用 SQL 身份验证的包含数据库用户：
 
-	CREATE USER ApplicationUser WITH PASSWORD = 'strong_password'; -- SQL Authentication
+    CREATE USER ApplicationUser WITH PASSWORD = 'strong_password'; -- SQL Authentication
 
 如果创建了 Azure AD 管理员，可以通过执行以下 T-SQL 命令，在以 Azure AD 管理员身份登录连接到用户数据库时，创建使用 Azure Active Directory 身份验证的包含数据库用户：
 
-	CREATE USER [Azure_AD_principal_name | Azure_AD_group_display_name] FROM EXTERNAL PROVIDER; -- Azure Active Directory Authentication
+    CREATE USER [Azure_AD_principal_name | Azure_AD_group_display_name] FROM EXTERNAL PROVIDER; -- Azure Active Directory Authentication
 
 在任一情况下，应用程序的连接字符串应该指定这些用户凭据而不是服务器管理员登录名以连接到数据库。
 
@@ -55,8 +55,8 @@ ms.author: thmullan;jackr
 ##<a name="authorization"></a> 授权
 授权是指可以在 Azure SQL 数据库中执行哪些操作，这由你的用户帐户角色成员身份和权限来控制。作为最佳实践，应向用户授予所需的最低权限。Azure SQL 数据库允许在 T-SQL 中使用角色方便管理这种权限：
 
-	ALTER ROLE db_datareader ADD MEMBER ApplicationUser; -- allows ApplicationUser to read data
-	ALTER ROLE db_datawriter ADD MEMBER ApplicationUser; -- allows ApplicationUser to write data
+    ALTER ROLE db_datareader ADD MEMBER ApplicationUser; -- allows ApplicationUser to read data
+    ALTER ROLE db_datawriter ADD MEMBER ApplicationUser; -- allows ApplicationUser to write data
 
 用于连接的服务器管理员帐户是 db\_owner 所有者的成员，该帐户有权在数据库中执行任何操作。请保存此帐户，以便部署架构升级并执行其他管理操作。权限受到更多限制的“ApplicationUser”帐户可让用户使用应用程序所需的最低权限从应用程序连接到数据库。
 
@@ -74,7 +74,7 @@ ms.author: thmullan;jackr
 
 Azure SQL 数据库将会帮助你通过使用[透明数据加密](https://msdn.microsoft.com/zh-cn/library/dn948096.aspx)来加密处于“静止”状态或存储在数据库文件的数据，从而保护数据。若要加密数据库，请以数据库所有者身份连接，然后执行：
 
-	ALTER DATABASE [AdventureWorks] SET ENCRYPTION ON;
+    ALTER DATABASE [AdventureWorks] SET ENCRYPTION ON;
 
 如需通过其他方法加密数据机密，请考虑：
 

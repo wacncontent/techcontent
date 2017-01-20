@@ -36,75 +36,75 @@ ms.author: juliako
 
 打开 **CustomPreset\_JSON.json** 文件，删除 **H264Layers** 中的前三层，使文件如下所示。
 
-	{  
-	  "Version": 1.0,  
-	  "Codecs": [  
-	    {  
-	      "KeyFrameInterval": "00:00:02",  
-	      "H264Layers": [  
-	        {  
-	          "Profile": "Auto",  
-	          "Level": "auto",  
-	          "Bitrate": 1000,  
-	          "MaxBitrate": 1000,  
-	          "BufferWindow": "00:00:05",  
-	          "Width": 640,  
-	          "Height": 360,  
-	          "BFrames": 3,  
-	          "ReferenceFrames": 3,  
-	          "AdaptiveBFrame": true,  
-	          "Type": "H264Layer",  
-	          "FrameRate": "0/1"  
-	        },  
-	        {  
-	          "Profile": "Auto",  
-	          "Level": "auto",  
-	          "Bitrate": 650,  
-	          "MaxBitrate": 650,  
-	          "BufferWindow": "00:00:05",  
-	          "Width": 640,  
-	          "Height": 360,  
-	          "BFrames": 3,  
-	          "ReferenceFrames": 3,  
-	          "AdaptiveBFrame": true,  
-	          "Type": "H264Layer",  
-	          "FrameRate": "0/1"  
-	        },  
-	        {  
-	          "Profile": "Auto",  
-	          "Level": "auto",  
-	          "Bitrate": 400,  
-	          "MaxBitrate": 400,  
-	          "BufferWindow": "00:00:05",  
-	          "Width": 320,  
-	          "Height": 180,  
-	          "BFrames": 3,  
-	          "ReferenceFrames": 3,  
-	          "AdaptiveBFrame": true,  
-	          "Type": "H264Layer",  
-	          "FrameRate": "0/1"  
-	        }  
-	      ],  
-	      "Type": "H264Video"  
-	    },  
-	    {  
-	      "Profile": "AACLC",  
-	      "Channels": 2,  
-	      "SamplingRate": 48000,  
-	      "Bitrate": 128,  
-	      "Type": "AACAudio"  
-	    }  
-	  ],  
-	  "Outputs": [  
-	    {  
-	      "FileName": "{Basename}_{Width}x{Height}_{VideoBitrate}.mp4",  
-	      "Format": {  
-	        "Type": "MP4Format"  
-	      }  
-	    }  
-	  ]  
-	}  
-	
+    {  
+      "Version": 1.0,  
+      "Codecs": [  
+        {  
+          "KeyFrameInterval": "00:00:02",  
+          "H264Layers": [  
+            {  
+              "Profile": "Auto",  
+              "Level": "auto",  
+              "Bitrate": 1000,  
+              "MaxBitrate": 1000,  
+              "BufferWindow": "00:00:05",  
+              "Width": 640,  
+              "Height": 360,  
+              "BFrames": 3,  
+              "ReferenceFrames": 3,  
+              "AdaptiveBFrame": true,  
+              "Type": "H264Layer",  
+              "FrameRate": "0/1"  
+            },  
+            {  
+              "Profile": "Auto",  
+              "Level": "auto",  
+              "Bitrate": 650,  
+              "MaxBitrate": 650,  
+              "BufferWindow": "00:00:05",  
+              "Width": 640,  
+              "Height": 360,  
+              "BFrames": 3,  
+              "ReferenceFrames": 3,  
+              "AdaptiveBFrame": true,  
+              "Type": "H264Layer",  
+              "FrameRate": "0/1"  
+            },  
+            {  
+              "Profile": "Auto",  
+              "Level": "auto",  
+              "Bitrate": 400,  
+              "MaxBitrate": 400,  
+              "BufferWindow": "00:00:05",  
+              "Width": 320,  
+              "Height": 180,  
+              "BFrames": 3,  
+              "ReferenceFrames": 3,  
+              "AdaptiveBFrame": true,  
+              "Type": "H264Layer",  
+              "FrameRate": "0/1"  
+            }  
+          ],  
+          "Type": "H264Video"  
+        },  
+        {  
+          "Profile": "AACLC",  
+          "Channels": 2,  
+          "SamplingRate": 48000,  
+          "Bitrate": 128,  
+          "Type": "AACAudio"  
+        }  
+      ],  
+      "Outputs": [  
+        {  
+          "FileName": "{Basename}_{Width}x{Height}_{VideoBitrate}.mp4",  
+          "Format": {  
+            "Type": "MP4Format"  
+          }  
+        }  
+      ]  
+    }  
+    
 ## <a id="encoding_with_dotnet"></a>使用媒体服务 .NET SDK 进行编码
 
 以下代码示例使用媒体服务 .NET SDK 执行下列任务：
@@ -113,8 +113,8 @@ ms.author: juliako
 - 获取对 Media Encoder Standard 编码器的引用。
 - 加载前面部分中创建的自定义 JSON 预设。
   
-		// Load the JSON from the local file.
-		string configuration = File.ReadAllText(fileName);  
+        // Load the JSON from the local file.
+        string configuration = File.ReadAllText(fileName);  
 
 - 将编码任务添加到作业。
 - 指定要编码的输入资产。
@@ -148,16 +148,16 @@ ms.author: juliako
                     ConfigurationManager.AppSettings["MediaServicesAccountName"];
                 private static readonly string _mediaServicesAccountKey =
                     ConfigurationManager.AppSettings["MediaServicesAccountKey"];
-		private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
-		    
-		// Azure China uses a different API server and a different ACS Base Address from the Global.
-		private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
-		private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
-		    
+        private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
+            
+        // Azure China uses a different API server and a different ACS Base Address from the Global.
+        private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
+        private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
+            
                 // Field for service context.
                 private static CloudMediaContext _context = null;
                 private static MediaServicesCredentials _cachedCredentials = null;
-		private static Uri _apiServer = null;
+        private static Uri _apiServer = null;
   
                 private static readonly string _mediaFiles =
                     Path.GetFullPath(@"../..\Media");
@@ -167,18 +167,18 @@ ms.author: juliako
   
                 static void Main(string[] args)
                 {
-			// Create and cache the Media Services credentials in a static class variable.
-                	_cachedCredentials = new MediaServicesCredentials(
-                                	_mediaServicesAccountName,
-                                	_mediaServicesAccountKey,
-									_defaultScope,
-									_chinaAcsBaseAddressUrl);
+            // Create and cache the Media Services credentials in a static class variable.
+                    _cachedCredentials = new MediaServicesCredentials(
+                                    _mediaServicesAccountName,
+                                    _mediaServicesAccountKey,
+                                    _defaultScope,
+                                    _chinaAcsBaseAddressUrl);
 
-			// Create the API server Uri
-			_apiServer = new Uri(_chinaApiServerUrl);
+            // Create the API server Uri
+            _apiServer = new Uri(_chinaApiServerUrl);
 
-                	// Used the chached credentials to create CloudMediaContext.
-                	_context = new CloudMediaContext(_apiServer, _cachedCredentials);
+                    // Used the chached credentials to create CloudMediaContext.
+                    _context = new CloudMediaContext(_apiServer, _cachedCredentials);
 
                     // Get an uploaded asset.
                     var asset = _context.Assets.FirstOrDefault();

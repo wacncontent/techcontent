@@ -49,7 +49,7 @@ ms.author: huvalo
 1. 指示 Azure 将来自 Web 的端口 80 通信定向到虚拟机上的端口 80：
  - 在 Azure 经典管理门户中导航到你新创建的虚拟机，然后单击“终结点”。
  - 单击屏幕底部的“添加”按钮。
-	![添加终结点](./media/virtual-machines-windows-classic-python-django-web-app/django-helloworld-addendpoint.png)
+    ![添加终结点](./media/virtual-machines-windows-classic-python-django-web-app/django-helloworld-addendpoint.png)
 
  - 打开 **TCP** 协议的**公用端口 80** 作为**专用端口 80**。![][port80]
 1. 在“仪表板”选项卡上，单击“连接”以使用**远程桌面**远程登录到新创建的 Azure 虚拟机。  
@@ -77,7 +77,7 @@ ms.author: huvalo
 
 1. 安装具有 FastCGI 支持的 IIS。执行此操作可能需要几分钟。
 
-		start /wait %windir%\System32\PkgMgr.exe /iu:IIS-WebServerRole;IIS-WebServer;IIS-CommonHttpFeatures;IIS-StaticContent;IIS-DefaultDocument;IIS-DirectoryBrowsing;IIS-HttpErrors;IIS-HealthAndDiagnostics;IIS-HttpLogging;IIS-LoggingLibraries;IIS-RequestMonitor;IIS-Security;IIS-RequestFiltering;IIS-HttpCompressionStatic;IIS-WebServerManagementTools;IIS-ManagementConsole;WAS-WindowsActivationService;WAS-ProcessModel;WAS-NetFxEnvironment;WAS-ConfigurationAPI;IIS-CGI
+        start /wait %windir%\System32\PkgMgr.exe /iu:IIS-WebServerRole;IIS-WebServer;IIS-CommonHttpFeatures;IIS-StaticContent;IIS-DefaultDocument;IIS-DirectoryBrowsing;IIS-HttpErrors;IIS-HealthAndDiagnostics;IIS-HttpLogging;IIS-LoggingLibraries;IIS-RequestMonitor;IIS-Security;IIS-RequestFiltering;IIS-HttpCompressionStatic;IIS-WebServerManagementTools;IIS-ManagementConsole;WAS-WindowsActivationService;WAS-ProcessModel;WAS-NetFxEnvironment;WAS-ConfigurationAPI;IIS-CGI
 
 ## 创建新的 Django 应用程序
 
@@ -85,13 +85,13 @@ ms.author: huvalo
 
     对于 Python 2.7，使用以下命令。
 
-		C:\Python27\Scripts\django-admin.exe startproject helloworld
+        C:\Python27\Scripts\django-admin.exe startproject helloworld
 
     对于 Python 3.4，使用以下命令。
 
-		C:\Python34\Scripts\django-admin.exe startproject helloworld
+        C:\Python34\Scripts\django-admin.exe startproject helloworld
 
-	![New-AzureService 命令的结果](./media/virtual-machines-windows-classic-python-django-web-app/django-helloworld-cmd-new-azure-service.png)
+    ![New-AzureService 命令的结果](./media/virtual-machines-windows-classic-python-django-web-app/django-helloworld-cmd-new-azure-service.png)
 
 1.  **django-admin** 命令生成基于 Django 的 Web 应用的基本结构：
 
@@ -101,17 +101,17 @@ ms.author: huvalo
 
 1.  在 *C:\\inetpub\\wwwroot\\helloworld\\helloworld* 目录中创建一个名为 **views.py** 的新文件。这会包含呈现“hello world”页面的视图。启动编辑器并输入以下代码：
 
-		from django.http import HttpResponse
-		def home(request):
-    		html = "<html><body>Hello World!</body></html>"
-    		return HttpResponse(html)
+        from django.http import HttpResponse
+        def home(request):
+            html = "<html><body>Hello World!</body></html>"
+            return HttpResponse(html)
 
 1.  将 urls.py 文件的内容替换为以下代码。
 
-		from django.conf.urls import patterns, url
-		urlpatterns = patterns('',
-			url(r'^$', 'helloworld.views.home', name='home'),
-		)
+        from django.conf.urls import patterns, url
+        urlpatterns = patterns('',
+            url(r'^$', 'helloworld.views.home', name='home'),
+        )
 
 ## 配置 IIS
 

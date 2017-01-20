@@ -30,8 +30,8 @@ ms.author: iainfou
 本文假设拥有以下项目：
 
 - **安装在 .vhd 文件中的 Linux 操作系统** - 已将 [Azure 认可的 Linux 分发](./virtual-machines-linux-endorsed-distros.md)（或参阅[关于未认可分发的信息](./virtual-machines-linux-create-upload-generic.md)）安装在 VHD 格式的虚拟磁盘中。可使用多种工具创建 VM 和 VHD：
-	- 安装并配置 [QEMU](https://en.wikibooks.org/wiki/QEMU/Installing_QEMU) 或 [KVM](http://www.linux-kvm.org/page/RunningKVM)，并小心使用 VHD 作为你的映像格式。如有需要，可以使用 `qemu-img convert` [转换映像](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats)。
-	- 也可以在 [Windows 10](https://msdn.microsoft.com/virtualization/hyperv_on_windows/quick_start/walkthrough_install) 或 [Windows Server 2012/2012 R2](https://technet.microsoft.com/zh-cn/library/hh846766.aspx) 上使用 Hyper-V。
+    - 安装并配置 [QEMU](https://en.wikibooks.org/wiki/QEMU/Installing_QEMU) 或 [KVM](http://www.linux-kvm.org/page/RunningKVM)，并小心使用 VHD 作为你的映像格式。如有需要，可以使用 `qemu-img convert` [转换映像](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats)。
+    - 也可以在 [Windows 10](https://msdn.microsoft.com/virtualization/hyperv_on_windows/quick_start/walkthrough_install) 或 [Windows Server 2012/2012 R2](https://technet.microsoft.com/zh-cn/library/hh846766.aspx) 上使用 Hyper-V。
 
 > [!NOTE] Azure 不支持更新的 VHDX 格式。创建 VM 时，请将 VHD 指定为映像格式。如有需要，可以使用 [`qemu-img convert`](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats) 或 [`Convert-VHD`](https://technet.microsoft.com/zh-cn/library/hh848454.aspx) PowerShell cmdlet 将 VHDX 磁盘转换为 VHD。此外，Azure 不支持上载动态 VHD，因此，上载之前，你需要将此类磁盘转换为静态 VHD。可以使用 [Azure VHD Utilities for GO](https://github.com/Microsoft/azure-vhd-utils-for-go) 等工具在上载到 Azure 的过程中转换动态磁盘。
 
@@ -59,7 +59,7 @@ Azure 支持各种 Linux 分发版（请参阅 [Endorsed Distributions](./virtua
 
 请确保在经典部署模型中使用 Azure CLI (`azure config mode asm`)，然后登录帐户：
 
-	azure login -e AzureChinaCloud
+    azure login -e AzureChinaCloud
 
 <a id="upload"> </a>
 ## 步骤 3：向 Azure 上载映像
@@ -68,9 +68,9 @@ Azure 支持各种 Linux 分发版（请参阅 [Endorsed Distributions](./virtua
 
 在 Azure CLI 中使用以下命令来上载映像：
 
-	azure vm image create <ImageName> `
-		--blob-url <BlobStorageURL>/<YourImagesFolder>/<VHDName> `
-		--os Linux <PathToVHDFile>
+    azure vm image create <ImageName> `
+        --blob-url <BlobStorageURL>/<YourImagesFolder>/<VHDName> `
+        --os Linux <PathToVHDFile>
 
 在上述示例中：
 
@@ -81,15 +81,15 @@ Azure 支持各种 Linux 分发版（请参阅 [Endorsed Distributions](./virtua
 
 下面显示一个完整示例：
 
-	azure vm image create UbuntuLTS `
-		--blob-url https://teststorage.blob.core.chinacloudapi.cn/vhds/UbuntuLTS.vhd `
-		--os Linux /home/ahmet/UbuntuLTS.vhd
+    azure vm image create UbuntuLTS `
+        --blob-url https://teststorage.blob.core.chinacloudapi.cn/vhds/UbuntuLTS.vhd `
+        --os Linux /home/ahmet/UbuntuLTS.vhd
 
 ## 步骤 4：从映像创建 VM
 使用 `azure vm create` 以与创建常规 VM 相同的方式创建 VM。指定在上一步中为映像提供的名称。在以下示例中，使用上一步中指定的映像名称 **UbuntuLTS**：
 
-	azure vm create --userName ops --password P@ssw0rd! --vm-size Small --ssh `
-		--location "China North" "DeployedUbuntu" UbuntuLTS
+    azure vm create --userName ops --password P@ssw0rd! --vm-size Small --ssh `
+        --location "China North" "DeployedUbuntu" UbuntuLTS
 
 若要创建自己的 VM，请提供自己的用户名 + 密码、位置、DNS 名称和映像名称。
 

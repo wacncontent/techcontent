@@ -43,25 +43,25 @@ Azure Batch 服务日志包含 Azure Batch 服务在 Batch 资源（诸如池或
 
 json
 
-	{
-		"poolId": "myPool1",
-		"displayName": "Production Pool",
-		"vmSize": "Small",
-		"cloudServiceConfiguration": {
-			"osFamily": "4",
-			"targetOsVersion": "*"
-		},
-		"networkConfiguration": {
-			"subnetId": " "
-		},
-		"resizeTimeout": "300000",
-		"targetDedicated": 2,
-		"maxTasksPerNode": 1,
-		"vmFillType": "Spread",
-		"enableAutoscale": false,
-		"enableInterNodeCommunication": false,
-		"isAutoPool": false
-	}
+    {
+        "poolId": "myPool1",
+        "displayName": "Production Pool",
+        "vmSize": "Small",
+        "cloudServiceConfiguration": {
+            "osFamily": "4",
+            "targetOsVersion": "*"
+        },
+        "networkConfiguration": {
+            "subnetId": " "
+        },
+        "resizeTimeout": "300000",
+        "targetDedicated": 2,
+        "maxTasksPerNode": 1,
+        "vmFillType": "Spread",
+        "enableAutoscale": false,
+        "enableInterNodeCommunication": false,
+        "isAutoPool": false
+    }
 
 每个事件正文都位于指定 Azure 存储帐户中的一个 .json 文件中。
 

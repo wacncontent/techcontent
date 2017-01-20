@@ -47,12 +47,12 @@ ms.author: annahar
 
 5. 创建要分配给 NIC 的 NIC 和 IP 配置。可根据需要添加、删除或更改配置。方案所述的配置如下所示：
 
-	**IPConfig-1**
+    **IPConfig-1**
 
-	输入以下命令，创建：
+    输入以下命令，创建：
 
-	- 一个具有静态公共 IP 地址的公共 IP 地址资源
-	- 一个具有公共 IP 地址资源和动态专用 IP 地址的 IP 配置
+    - 一个具有静态公共 IP 地址的公共 IP 地址资源
+    - 一个具有公共 IP 地址资源和动态专用 IP 地址的 IP 配置
 
         azure network public-ip create --resource-group myResourceGroup --location chinaeast --name myPublicIP --domain-name-label mypublicdns --allocation-method Static
 

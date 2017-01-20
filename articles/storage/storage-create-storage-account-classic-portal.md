@@ -50,22 +50,22 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
 2. 单击页面底部任务栏中的“新建”。选择“数据服务”|“存储”，然后单击“快速创建”。
 
-	![新建存储帐户](./media/storage-create-storage-account-classic-portal/storage_NewStorageAccount.png)  
+    ![新建存储帐户](./media/storage-create-storage-account-classic-portal/storage_NewStorageAccount.png)  
 
 3. 在 **URL** 中，输入存储帐户的名称。
 
-	> [!NOTE] 存储帐户名称必须为 3 到 24 个字符，并且只能包含数字和小写字母。
-	>  
-	> 你的存储帐户名称在 Azure 中必须是唯一的。Azure 经典管理门户将指出你选择的存储帐户名称是否已经存在。
+    > [!NOTE] 存储帐户名称必须为 3 到 24 个字符，并且只能包含数字和小写字母。
+    >  
+    > 你的存储帐户名称在 Azure 中必须是唯一的。Azure 经典管理门户将指出你选择的存储帐户名称是否已经存在。
 
-	请参阅下面的[存储帐户终结点](#storage-account-endpoints)以了解如何使用存储帐户名称来定位 Azure 存储中你的对象。
+    请参阅下面的[存储帐户终结点](#storage-account-endpoints)以了解如何使用存储帐户名称来定位 Azure 存储中你的对象。
 
 4. 在“位置/地缘组”中，选择靠近你或客户的存储帐户的位置。如果其他 Azure 服务（例如 Azure 虚拟机或云服务）将要访问你存储帐户中的数据，可能需要从列表中选择一个地缘组，以便将存储帐户与用于改进性能和降低成本的其他 Azure 服务组合到同一个数据中心。
 
-	请注意，在创建存储帐户时，必须选择一个地缘组。不能将现有帐户移到一个地缘组中。有关地缘组的更多信息，请参阅下面的[服务与地缘组的归置](#service-co-location-with-an-affinity-group)。
+    请注意，在创建存储帐户时，必须选择一个地缘组。不能将现有帐户移到一个地缘组中。有关地缘组的更多信息，请参阅下面的[服务与地缘组的归置](#service-co-location-with-an-affinity-group)。
 
-	>[!IMPORTANT] 若要确定哪些位置可用于你的订阅，可以调用[列出所有资源提供程序](https://msdn.microsoft.com/zh-cn/library/azure/dn790524.aspx)操作。若要从 PowerShell 列出提供程序，请调用 [Get-AzureLocation](https://msdn.microsoft.com/zh-cn/library/azure/dn757693.aspx)。通过 .NET，使用 ProviderOperationsExtensions 类的 [List](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.management.resources.provideroperationsextensions.list.aspx) 方法。
-	>
+    >[!IMPORTANT] 若要确定哪些位置可用于你的订阅，可以调用[列出所有资源提供程序](https://msdn.microsoft.com/zh-cn/library/azure/dn790524.aspx)操作。若要从 PowerShell 列出提供程序，请调用 [Get-AzureLocation](https://msdn.microsoft.com/zh-cn/library/azure/dn757693.aspx)。通过 .NET，使用 ProviderOperationsExtensions 类的 [List](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.management.resources.provideroperationsextensions.list.aspx) 方法。
+    >
 <!--	>Additionally, see [Azure Regions](https://azure.microsoft.com/regions/#services) for more information about what services are available in which region.-->
 
 5. 如果你有多个 Azure 订阅，则会显示“订阅”字段。在“订阅”中，输入要使用存储帐户的 Azure 订阅。
@@ -74,7 +74,7 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
 6. 单击“创建存储帐户”。
 
-	创建存储帐户可能需要花费几分钟的时间。若要检查状态，可以监视 Azure 经典管理门户底部的通知。创建存储帐户后，你的新存储帐户将处于“联机”状态并且随时可供使用。
+    创建存储帐户可能需要花费几分钟的时间。若要检查状态，可以监视 Azure 经典管理门户底部的通知。创建存储帐户后，你的新存储帐户将处于“联机”状态并且随时可供使用。
 
 ![存储页面](./media/storage-create-storage-account-classic-portal/Storage_StoragePage.png)
 
@@ -119,9 +119,9 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
 2. 单击“管理密钥”。
 
- 	“管理访问密钥”页面打开。
+     “管理访问密钥”页面打开。
 
-	![管理密钥](./media/storage-create-storage-account-classic-portal/Storage_ManageKeys.png)  
+    ![管理密钥](./media/storage-create-storage-account-classic-portal/Storage_ManageKeys.png)  
 
 3. 若要复制存储访问密钥，请选择密钥文本。然后右键单击，并单击“复制”。
 
@@ -158,9 +158,9 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
 2. 单击存储帐户条目中除名称以外的任何位置，然后单击“删除”。
 
-	 -或-
+     -或-
 
-	单击存储帐户的名称以打开仪表板，然后单击“删除”。
+    单击存储帐户的名称以打开仪表板，然后单击“删除”。
 
 3. 单击“是”以确认要删除存储帐户。
 

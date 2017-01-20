@@ -33,11 +33,11 @@ ms.author: robmcm
 
 2.  登录到 [Azure 经典管理门户]，然后选择“云服务”。创建云服务并将“过渡”列状态更新为“正在运行”后，单击服务名称。
 
-	![显示正运行服务的门户][cloud-service]
+    ![显示正运行服务的门户][cloud-service]
 
 3.  选择“仪表板”，然后选择“过渡”。
 
-	![云服务仪表板][cloud-service-dashboard]
+    ![云服务仪表板][cloud-service-dashboard]
 
 4. 注意右侧“站点 URL”条目中的值。DNS 名称是 Azure 生成的经过模糊处理的内部 ID。
 

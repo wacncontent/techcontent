@@ -92,40 +92,40 @@ ms.author: cenkdin;anilmur;juliako
 2. 一旦创建新的事件，即可向下滚动到输出组并添加 **UDP/TS** 输出组。
 
 3. 创建新的输出时，可先选择“新建流”，然后单击“添加输出”。
-	
-	![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental13.png)
-	
-	>[!NOTE] 建议将 Elemental 事件的时间代码设置为“系统时钟”，方便编码器在出现流故障时重新进行连接。
+    
+    ![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental13.png)
+    
+    >[!NOTE] 建议将 Elemental 事件的时间代码设置为“系统时钟”，方便编码器在出现流故障时重新进行连接。
 
 4. 由于已创建输出，因此此时可单击“添加流”。现在可以配置输出设置。
 5. 向下滚动到刚创建的“流 1”，单击左侧的“视频”选项卡，展开“高级”设置部分。
 
-	![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental4.png)
+    ![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental4.png)
 
-	虽然 Elemental Live 的可用自定义设置有很多，但在一开始向 AMS 进行流式传输时，建议使用以下设置。
-	
-	- 分辨率：1280 x 720
-	- 帧速率：30
-	- GOP 大小：60 帧
-	- 隔行扫描模式：渐进式
-	- 比特率：5000000 位/秒（可根据网络限制进行调整）
-	
-	![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental5.png)
+    虽然 Elemental Live 的可用自定义设置有很多，但在一开始向 AMS 进行流式传输时，建议使用以下设置。
+    
+    - 分辨率：1280 x 720
+    - 帧速率：30
+    - GOP 大小：60 帧
+    - 隔行扫描模式：渐进式
+    - 比特率：5000000 位/秒（可根据网络限制进行调整）
+    
+    ![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental5.png)
 
 6. 获取频道的输入 URL。
-	
-	导航回 AMSE 工具，查看频道完成状态。状态从“正在启动”变为“正在运行”后，即可获取输入 URL。
-	  
-	频道正在运行时，右键单击频道名称，向下导航，将鼠标悬停在“将输入 URL 复制到剪贴板”上方，然后选择“主要输入 URL”。
-	
-	![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental6.png)
-	
+    
+    导航回 AMSE 工具，查看频道完成状态。状态从“正在启动”变为“正在运行”后，即可获取输入 URL。
+      
+    频道正在运行时，右键单击频道名称，向下导航，将鼠标悬停在“将输入 URL 复制到剪贴板”上方，然后选择“主要输入 URL”。
+    
+    ![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental6.png)
+    
 1. 将此信息粘贴到 Elemental 的“主目标”字段中。所有其他设置可以保留默认值。
-	
-	![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental14.png)
+    
+    ![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental14.png)
 
-	若要实现额外的冗余，可通过为 UDP/TS 流式处理创建单独的“输出”选项卡来对辅助输入 URL 重复这些步骤。
-	
+    若要实现额外的冗余，可通过为 UDP/TS 流式处理创建单独的“输出”选项卡来对辅助输入 URL 重复这些步骤。
+    
 7. 单击“创建”（如果已创建新事件）或“更新”（如果正在编辑预先存在的事件），然后开始启动编码器。
 
 >[!IMPORTANT] 在 Elemental Live Web 界面上单击“启动”之前，**必须**确保频道已就绪。另外，请确保不要让频道在没有事件的情况下处于就绪状态的时间超出 15 分钟。
@@ -136,7 +136,7 @@ ms.author: cenkdin;anilmur;juliako
   
 1. 导航回 AMSE 工具，然后右键单击要测试的频道。在菜单中，将鼠标悬停在“播放预览”上方，然后选择“使用 Azure Media Player”。
 
-	![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental8.png)
+    ![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental8.png)
 
 如果流出现在播放器中，则编码器已正确配置，可以连接到 AMS。
 
@@ -146,13 +146,13 @@ ms.author: cenkdin;anilmur;juliako
 
 1. 确认频道可以播放后，即可创建节目。在 AMSE 工具的“实时”选项卡下，右键单击节目区域，然后选择“创建新节目”。
 
-	![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental9.png)
+    ![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental9.png)
 
 2. 为节目命名，然后根据需要调整“存档时段长度”（默认为 4 小时）。你还可以指定存储位置，也可以将其保留为默认值。
 3. 选中“立即启动节目”框。
 4. 单击“创建节目”。
   
-	注意：创建节目需要的时间比创建频道需要的时间少。
+    注意：创建节目需要的时间比创建频道需要的时间少。
  
 5. 节目运行后，可通过下述方式来确认其是否能够播放：右键单击该节目，导航到“播放节目”，然后选择“使用 Azure Media Player”。
 6. 确认以后，再次右键单击该节目，然后选择“将输出 URL 复制到剪贴板”（也可通过菜单从“节目信息和设置”选项检索此信息）。

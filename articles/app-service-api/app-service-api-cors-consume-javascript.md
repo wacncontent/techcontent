@@ -39,21 +39,21 @@ ms.author: rachelap
 
 2. 单击“应用程序服务”，然后单击 API 应用的名称。
 
-	![在门户中选择 API 应用](./media/app-service-api-cors-consume-javascript/browseapiapps.png)
+    ![在门户中选择 API 应用](./media/app-service-api-cors-consume-javascript/browseapiapps.png)
 
 10. 在“API 应用”右侧打开的“设置”边栏选项卡中，找到“API”部分，然后单击“CORS”。
 
-	![在“设置”边栏选项卡中选择 CORS](./media/app-service-api-cors-consume-javascript/clicksettings.png)
+    ![在“设置”边栏选项卡中选择 CORS](./media/app-service-api-cors-consume-javascript/clicksettings.png)
 
 11. 在文本框中，输入要允许的一个或多个 JavaScript 调用源 URL。
 
-	例如，如果已将 JavaScript 应用程序部署到名为 todolistangular 的 Web 应用，请输入“https://todolistangular.chinacloudsites.cn”。或者，输入星号 (*) 指定接受所有原始域。
+    例如，如果已将 JavaScript 应用程序部署到名为 todolistangular 的 Web 应用，请输入“https://todolistangular.chinacloudsites.cn”。或者，输入星号 (*) 指定接受所有原始域。
 
 13. 单击“保存”。
 
-	![点击“保存”(Save)](./media/app-service-api-cors-consume-javascript/corsinportal.png)
+    ![点击“保存”(Save)](./media/app-service-api-cors-consume-javascript/corsinportal.png)
 
-	单击“保存”后，API 应用将接受来自指定 URL 的 JavaScript 调用。
+    单击“保存”后，API 应用将接受来自指定 URL 的 JavaScript 调用。
 
 #### 使用 Azure Resource Manager工具配置 CORS
 
@@ -61,11 +61,11 @@ ms.author: rachelap
 
 有关可设置 CORS 属性的 Azure Resource Manager 模板的示例，请打开[本教程的示例应用程序存储库中的 azuredeploy.json 文件](https://github.com/azure-samples/app-service-api-dotnet-todo-list/blob/master/azuredeploy.json)。找到如以下示例中所示的模板部分：
 
-		"cors": {
-		    "allowedOrigins": [
-		        "todolistangular.chinacloudsites.cn"
-		    ]
-		}
+        "cors": {
+            "allowedOrigins": [
+                "todolistangular.chinacloudsites.cn"
+            ]
+        }
 
 ## <a id="tutorialstart"></a>继续学习 .NET 入门教程
 
@@ -79,24 +79,24 @@ ms.author: rachelap
 
 在 [ToDoList 示例应用程序](https://github.com/Azure-Samples/app-service-api-dotnet-todo-list)中，ToDoListAngular 项目是一个简单的 AngularJS 客户端，它调用中间层 ToDoListAPI Web API 项目。*app/scripts/todoListSvc.js* 文件中的 JavaScript 代码使用 AngularJS HTTP 提供程序调用 API。
 
-		angular.module('todoApp')
-		.factory('todoListSvc', ['$http', function ($http) {
+        angular.module('todoApp')
+        .factory('todoListSvc', ['$http', function ($http) {
 
-		    $http.defaults.useXDomain = true;
-		    delete $http.defaults.headers.common['X-Requested-With']; 
-		
-		    return {
-		        getItems : function(){
-		            return $http.get(apiEndpoint + '/api/TodoList');
-		        },
+            $http.defaults.useXDomain = true;
+            delete $http.defaults.headers.common['X-Requested-With']; 
+        
+            return {
+                getItems : function(){
+                    return $http.get(apiEndpoint + '/api/TodoList');
+                },
 
-		        /* Get by ID, Put, and Delete methods not shown */
+                /* Get by ID, Put, and Delete methods not shown */
 
-		        postItem : function(item){
-		            return $http.post(apiEndpoint + '/api/TodoList', item);
-		        }
-		    };
-		}]);
+                postItem : function(item){
+                    return $http.post(apiEndpoint + '/api/TodoList', item);
+                }
+            };
+        }]);
 
 ### 为 ToDoListAngular 项目创建新的 Web 应用
 
@@ -118,9 +118,9 @@ ms.author: rachelap
 
 7. 单击“创建”。
 
-	Visual Studio 将创建 Web 应用、创建其发布配置文件，并显示“发布 Web”向导的“连接”步骤。
+    Visual Studio 将创建 Web 应用、创建其发布配置文件，并显示“发布 Web”向导的“连接”步骤。
 
-	暂时不要单击“发布”。在下一部分将配置新 Web 应用来调用应用服务中运行的中间层 API 应用。
+    暂时不要单击“发布”。在下一部分将配置新 Web 应用来调用应用服务中运行的中间层 API 应用。
 
 ### 在 Web 应用设置中设置中间层 URL
 
@@ -130,49 +130,49 @@ ms.author: rachelap
 
 3. 在“应用设置”部分中，添加以下键和值：
 
-	|键|值|示例
-	|---|---|---|
-	|toDoListAPIURL|https://{your middle tier API app name}.chinacloudsites.cn|https://todolistapi0121.chinacloudsites.cn|
+    |键|值|示例
+    |---|---|---|
+    |toDoListAPIURL|https://{your middle tier API app name}.chinacloudsites.cn|https://todolistapi0121.chinacloudsites.cn|
 
 4. 单击“保存”。
 
-	在 Azure 中运行代码时，此值将覆盖 *Web.config* 文件中的 localhost URL。
+    在 Azure 中运行代码时，此值将覆盖 *Web.config* 文件中的 localhost URL。
 
-	用于获取设置值的代码位于 *index.cshtml* 中：
+    用于获取设置值的代码位于 *index.cshtml* 中：
 
-		<script type="text/javascript">
-		    var apiEndpoint = "@System.Configuration.ConfigurationManager.AppSettings["toDoListAPIURL"]";
-		</script>
-		<script src="app/scripts/todoListSvc.js"></script>
+        <script type="text/javascript">
+            var apiEndpoint = "@System.Configuration.ConfigurationManager.AppSettings["toDoListAPIURL"]";
+        </script>
+        <script src="app/scripts/todoListSvc.js"></script>
 
-	*todoListSvc.js* 中的代码使用该设置：
+    *todoListSvc.js* 中的代码使用该设置：
 
-		return {
-		    getItems : function(){
-		        return $http.get(apiEndpoint + '/api/TodoList');
-		    },
-		    getItem : function(id){
-		        return $http.get(apiEndpoint + '/api/TodoList/' + id);
-		    },
-		    postItem : function(item){
-		        return $http.post(apiEndpoint + '/api/TodoList', item);
-		    },
-		    putItem : function(item){
-		        return $http.put(apiEndpoint + '/api/TodoList/', item);
-		    },
-		    deleteItem : function(id){
-		        return $http({
-		            method: 'DELETE',
-		            url: apiEndpoint + '/api/TodoList/' + id
-		        });
-		    }
-		};
+        return {
+            getItems : function(){
+                return $http.get(apiEndpoint + '/api/TodoList');
+            },
+            getItem : function(id){
+                return $http.get(apiEndpoint + '/api/TodoList/' + id);
+            },
+            postItem : function(item){
+                return $http.post(apiEndpoint + '/api/TodoList', item);
+            },
+            putItem : function(item){
+                return $http.put(apiEndpoint + '/api/TodoList/', item);
+            },
+            deleteItem : function(id){
+                return $http({
+                    method: 'DELETE',
+                    url: apiEndpoint + '/api/TodoList/' + id
+                });
+            }
+        };
 
 ### 将 ToDoListAngular Web 项目部署到新 Web 应用
 
 *  在 Visual Studio 的“发布 Web”向导的“连接”步骤中，单击“发布”。
 
-	Visual Studio 会将 ToDoListAngular 项目部署到新的 Web 应用，并在浏览器中打开该 Web 应用的 URL。
+    Visual Studio 会将 ToDoListAngular 项目部署到新的 Web 应用，并在浏览器中打开该 Web 应用的 URL。
 
 ### 在不启用 CORS 的情况下测试应用程序 
 
@@ -180,9 +180,9 @@ ms.author: rachelap
 
 3. 在显示 AngularJS UI 的浏览器窗口中，单击“待办事项列表”链接。
 
-	JavaScript 代码会尝试调用中间层 API 应用，但调用失败，因为前端运行所在的域与后端不同。浏览器的“开发人员工具控制台”窗口将显示跨域错误消息。
+    JavaScript 代码会尝试调用中间层 API 应用，但调用失败，因为前端运行所在的域与后端不同。浏览器的“开发人员工具控制台”窗口将显示跨域错误消息。
 
-	![跨域错误消息](./media/app-service-api-cors-consume-javascript/consoleaccessdenied.png)
+    ![跨域错误消息](./media/app-service-api-cors-consume-javascript/consoleaccessdenied.png)
 
 ## 为中间层 API 应用配置 CORS
 
@@ -192,29 +192,29 @@ ms.author: rachelap
 
 2. 单击“应用程序服务”，然后单击 ToDoListAPI（中间层）API 应用。
 
-	![在门户中选择 API 应用](./media/app-service-api-cors-consume-javascript/browseapiapps.png)
+    ![在门户中选择 API 应用](./media/app-service-api-cors-consume-javascript/browseapiapps.png)
 
 10. 在“API 应用”右侧打开的“设置”边栏选项卡中，找到“API”部分，然后单击“CORS”。
 
-	![在门户中选择 CORS](./media/app-service-api-cors-consume-javascript/clicksettings.png)
+    ![在门户中选择 CORS](./media/app-service-api-cors-consume-javascript/clicksettings.png)
 
 12. 在文本框中输入 ToDoListAngular（前端）Web 应用的 URL。例如，如果将 ToDoListAngular 项目部署到名为 todolistangular0121 的 Web 应用，则允许来自 URL `https://todolistangular0121.chinacloudsites.cn` 的调用。
 
-	或者，输入星号 (*) 指定接受所有原始域。
+    或者，输入星号 (*) 指定接受所有原始域。
 
 13. 单击“保存”。
 
-	![点击“保存”(Save)](./media/app-service-api-cors-consume-javascript/corsinportal.png)
+    ![点击“保存”(Save)](./media/app-service-api-cors-consume-javascript/corsinportal.png)
 
-	单击“保存”后，API 应用将接受来自指定 URL 的 JavaScript 调用。在此屏幕截图中，ToDoListAPI0223 API 应用将接受来自 ToDoListAngular Web 应用的 JavaScript 客户端调用。
+    单击“保存”后，API 应用将接受来自指定 URL 的 JavaScript 调用。在此屏幕截图中，ToDoListAPI0223 API 应用将接受来自 ToDoListAngular Web 应用的 JavaScript 客户端调用。
 
 ### 在启用 CORS 的情况下测试应用程序
 
 * 在浏览器中打开 Web 应用的 HTTPS URL。
 
-	这一次，应用程序将允许查看、添加、编辑和删除待办事项。
+    这一次，应用程序将允许查看、添加、编辑和删除待办事项。
 
-	![示例应用的待办事项列表页](./media/app-service-api-cors-consume-javascript/corssuccess.png)
+    ![示例应用的待办事项列表页](./media/app-service-api-cors-consume-javascript/corssuccess.png)
 
 ## 应用服务 CORS 与 Web API CORS
 
@@ -232,33 +232,33 @@ Web API CORS 支持比应用服务 CORS 支持更有弹性。例如，在代码�
 
 1. 在 **WebApiConfig** 类的 **Register** 方法中添加 `config.EnableCors()` 代码行，如以下示例中所示。
 
-		public static class WebApiConfig
-		{
-		    public static void Register(HttpConfiguration config)
-		    {
-		        // Web API configuration and services
-	            
-		        // The following line enables you to control CORS by using Web API code
-		        config.EnableCors();
-	
-		        // Web API routes
-		        config.MapHttpAttributeRoutes();
-	
-		        config.Routes.MapHttpRoute(
-		            name: "DefaultApi",
-		            routeTemplate: "api/{controller}/{id}",
-		            defaults: new { id = RouteParameter.Optional }
-		        );
-		    }
-		}
+        public static class WebApiConfig
+        {
+            public static void Register(HttpConfiguration config)
+            {
+                // Web API configuration and services
+                
+                // The following line enables you to control CORS by using Web API code
+                config.EnableCors();
+    
+                // Web API routes
+                config.MapHttpAttributeRoutes();
+    
+                config.Routes.MapHttpRoute(
+                    name: "DefaultApi",
+                    routeTemplate: "api/{controller}/{id}",
+                    defaults: new { id = RouteParameter.Optional }
+                );
+            }
+        }
 
 1. 在 Web API 控制器中，为 `System.Web.Http.Cors` 命名空间添加 `using` 语句，将 `EnableCors` 属性添加到控制器类或各个操作方法。在以下示例中，CORS 支持适用于整个控制器。
 
-		namespace ToDoListAPI.Controllers 
-		{
-		    [HttpOperationExceptionFilterAttribute]
-		    [EnableCors(origins:"https://todolistangular0121.chinacloudsites.cn", headers:"accept,content-type,origin,x-my-header", methods: "get,post")]
-		    public class ToDoListController : ApiController
+        namespace ToDoListAPI.Controllers 
+        {
+            [HttpOperationExceptionFilterAttribute]
+            [EnableCors(origins:"https://todolistangular0121.chinacloudsites.cn", headers:"accept,content-type,origin,x-my-header", methods: "get,post")]
+            public class ToDoListController : ApiController
  
 ## 将 Azure API 管理与 API 应用配合使用
 

@@ -120,18 +120,18 @@ ms.author: lakshmir;barbkess;sonyama
 5. 创建对数据库的恢复请求。
 6. 验证异地还原的数据库的状态。
 
-    	Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    	Get-AzureRmSubscription
-    	Select-AzureRmSubscription -SubscriptionName "<Subscription_name>"
+        Login-AzureRmAccount -EnvironmentName AzureChinaCloud
+        Get-AzureRmSubscription
+        Select-AzureRmSubscription -SubscriptionName "<Subscription_name>"
     
-    	# 获取要恢复的数据库
-    	$GeoBackup = Get-AzureRmSqlDatabaseGeoBackup -ResourceGroupName "<YourResourceGroupName>" -ServerName "<YourServerName>" -DatabaseName "<YourDatabaseName>"
+        # 获取要恢复的数据库
+        $GeoBackup = Get-AzureRmSqlDatabaseGeoBackup -ResourceGroupName "<YourResourceGroupName>" -ServerName "<YourServerName>" -DatabaseName "<YourDatabaseName>"
     
-    	# 恢复数据库
-    	$GeoRestoredDatabase = Restore-AzureRmSqlDatabase –FromGeoBackup -ResourceGroupName "<YourResourceGroupName>" -ServerName "<YourTargetServer>" -TargetDatabaseName "<NewDatabaseName>" –ResourceId $GeoBackup.ResourceID
+        # 恢复数据库
+        $GeoRestoredDatabase = Restore-AzureRmSqlDatabase –FromGeoBackup -ResourceGroupName "<YourResourceGroupName>" -ServerName "<YourTargetServer>" -TargetDatabaseName "<NewDatabaseName>" –ResourceId $GeoBackup.ResourceID
     
-    	# 验证异地还原的数据库是否处于联机状态
-    	$GeoRestoredDatabase.status
+        # 验证异地还原的数据库是否处于联机状态
+        $GeoRestoredDatabase.status
 
 >[!NOTE] 若要在完成还原后配置数据库，请参阅 [Configure your database after recovery][]（在恢复后配置数据库）。
 

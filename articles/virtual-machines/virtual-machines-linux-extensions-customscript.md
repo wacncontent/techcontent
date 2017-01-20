@@ -61,14 +61,14 @@ ms.author: nepeters
 
 使用 Azure CLI 来运行自定义脚本扩展时，请创建一个或多个至少包含文件 URI 和脚本执行命令的配置文件。
 
-	azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-	  --auto-upgrade-minor-version --public-config-path /script-config.json
+    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+      --auto-upgrade-minor-version --public-config-path /script-config.json
 
 （可选）可以使用 `--public-config` 和 `--private-config` 选项来运行命令，这样，便可以在执行期间指定配置，而无需使用单独的配置文件。
 
-	azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-	  --auto-upgrade-minor-version \
-	  --public-config '{"fileUris": ["https://gist.github.com/ahmetalpbalkan/b5d4a856fe15464015ae87d5587a4439/raw/466f5c30507c990a4d5a2f5c79f901fa89a80841/hello.sh"],"commandToExecute": "./hello.sh"}'
+    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+      --auto-upgrade-minor-version \
+      --public-config '{"fileUris": ["https://gist.github.com/ahmetalpbalkan/b5d4a856fe15464015ae87d5587a4439/raw/466f5c30507c990a4d5a2f5c79f901fa89a80841/hello.sh"],"commandToExecute": "./hello.sh"}'
 
 ### Azure CLI 示例
 
@@ -81,8 +81,8 @@ ms.author: nepeters
 
 Azure CLI 命令：
 
-	azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-	  --auto-upgrade-minor-version --public-config-path /public.json
+    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+      --auto-upgrade-minor-version --public-config-path /public.json
 
 **示例 2** - 不包含脚本文件的公共配置。
 
@@ -92,8 +92,8 @@ Azure CLI 命令：
 
 Azure CLI 命令：
 
-	azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-	  --auto-upgrade-minor-version --public-config-path /public.json
+    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+      --auto-upgrade-minor-version --public-config-path /public.json
 
 **示例 3** - 使用公共配置文件指定脚本文件 URI，使用受保护的配置文件指定要执行的命令。
 
@@ -111,8 +111,8 @@ Azure CLI 命令：
 
 Azure CLI 命令：
 
-	azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-	  --auto-upgrade-minor-version --public-config-path ./public.json --private-config-path ./protected.json
+    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+      --auto-upgrade-minor-version --public-config-path ./public.json --private-config-path ./protected.json
 
 ## Resource Manager 模板
 

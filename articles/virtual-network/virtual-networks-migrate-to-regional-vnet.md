@@ -43,17 +43,17 @@ ms.author: jdial
 
 1. 在**经典管理门户**的 VNet 页上，单击右上角的“联系 Microsoft 支持”。
 
-	![VNet 区域迁移请求](./media/virtual-networks-migrate-to-regional-vnet/IC790447.png)  
+    ![VNet 区域迁移请求](./media/virtual-networks-migrate-to-regional-vnet/IC790447.png)  
 
 2. 在 “联系 Microsoft 支持” 页上，选择以下项︰订阅︰如果你有多个订阅，请选择与你要迁移的 VNet 对应的订阅。支持类型︰技术 产品类型︰虚拟网络 (VNet) 问题类型︰将虚拟网络迁移到区域虚拟网络
 
-	- **订阅︰** 如果你有多个订阅，请选择与你要迁移的 VNet 对应的订阅。
+    - **订阅︰** 如果你有多个订阅，请选择与你要迁移的 VNet 对应的订阅。
 
-	- **支持类型：***技术*
+    - **支持类型：***技术*
 
-	- **产品类型：***虚拟网络 (VNet)*
+    - **产品类型：***虚拟网络 (VNet)*
 
-	- **问题类型：***将虚拟网络迁移到区域虚拟网络*
+    - **问题类型：***将虚拟网络迁移到区域虚拟网络*
 
 3. 先决条件：必须已为你的 VNet 启用迁移，才能执行以下步骤。如果你收到确认（如果是提前迁移请求），或此页已更新可反映启用了所有 VNet 以进行迁移，则会知道 VNet 已启用。
 
@@ -61,13 +61,13 @@ ms.author: jdial
 
 5. 编辑网络配置文件，将旧值替换为新值。
 
-	> [!NOTE] **位置**是已为与 VNet 关联的地缘组指定的区域。例如，如果你的 VNet 与位于中国北部的地缘组关联，则在迁移时，你的“位置”必须指向中国北部。
-	
-	编辑网络配置文件中的以下行，将相应值替换为你自己的值：
+    > [!NOTE] **位置**是已为与 VNet 关联的地缘组指定的区域。例如，如果你的 VNet 与位于中国北部的地缘组关联，则在迁移时，你的“位置”必须指向中国北部。
+    
+    编辑网络配置文件中的以下行，将相应值替换为你自己的值：
 
-	**旧值：** \<VirtualNetworkSitename="VNetChinsNorth" AffinityGroup="VNetDemoAG"\> 
+    **旧值：** \<VirtualNetworkSitename="VNetChinsNorth" AffinityGroup="VNetDemoAG"\> 
 
-	**新值：** \<VirtualNetworkSitename="VNetChinsNorth" Location="China North"\>
+    **新值：** \<VirtualNetworkSitename="VNetChinsNorth" Location="China North"\>
 
 6. 保存所做的更改，并将网络配置[导入](./virtual-networks-using-network-configuration-file.md)到 Azure。
 

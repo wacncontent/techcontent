@@ -157,7 +157,7 @@ ms.author: narayanannamalai;annahar
         RemoteGateways                   : null
         RemoteVirtualNetworkAddressSpace : null
 
-	对等互连在该方案中建立好后，应该能够启动两个 Vnet 中任何虚拟机之间的连接。默认情况下，“允许虚拟网络访问”为“True”，且 VNet 对等互连将设置正确的 ACL 以允许 Vnet 之间的通信。仍可应用网络安全组 (NSG) 规则来阻止特定子网或虚拟机之间的连接，从而实现两个虚拟网络之间访问权限的细粒度控制。有关创建 NSG 规则的详细信息，请参阅此[文章](./virtual-networks-create-nsg-arm-ps.md)。
+    对等互连在该方案中建立好后，应该能够启动两个 Vnet 中任何虚拟机之间的连接。默认情况下，“允许虚拟网络访问”为“True”，且 VNet 对等互连将设置正确的 ACL 以允许 Vnet 之间的通信。仍可应用网络安全组 (NSG) 规则来阻止特定子网或虚拟机之间的连接，从而实现两个虚拟网络之间访问权限的细粒度控制。有关创建 NSG 规则的详细信息，请参阅此[文章](./virtual-networks-create-nsg-arm-ps.md)。
 
 [!INCLUDE [virtual-networks-create-vnet-scenario-crosssub-include](../../includes/virtual-networks-create-vnetpeering-scenario-crosssub-include.md)]
 
@@ -167,7 +167,7 @@ ms.author: narayanannamalai;annahar
 
         New-AzureRmRoleAssignment -SignInName <UserB ID> -RoleDefinitionName "Network Contributor" -Scope /subscriptions/<Subscription-A-ID>/resourceGroups/<ResourceGroupName>/providers/Microsoft.Network/VirtualNetwork/VNet5
 
-	这不是必须的，只要请求匹配，即使用户分别提出针对各个 Vnet 的对等互连请求，也可建立对等互连。添加另一个 VNet 的特权用户作为本地 VNet 用户可以更轻松地执行安装程序。
+    这不是必须的，只要请求匹配，即使用户分别提出针对各个 Vnet 的对等互连请求，也可建立对等互连。添加另一个 VNet 的特权用户作为本地 VNet 用户可以更轻松地执行安装程序。
 
 2. 使用订阅 B 的特权用户 B 帐户登录到 Azure，并运行以下 cmdlet：
 
@@ -209,7 +209,7 @@ ms.author: narayanannamalai;annahar
 
         New-AzureRmResourceGroupDeployment -ResourceGroupName VNet101 -TemplateFile .\VNetPeeringVNet5.json -DeploymentDebugLogLevel all
 
-	以下是定义 JSON 文件的方法：
+    以下是定义 JSON 文件的方法：
 
         {
         "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
@@ -237,13 +237,13 @@ ms.author: narayanannamalai;annahar
         ]
         }
 
- 	此方案中的对等互连建立好后，应该能够跨订阅启动两个 Vnet 中的任何虚拟机之间的连接。
+     此方案中的对等互连建立好后，应该能够跨订阅启动两个 Vnet 中的任何虚拟机之间的连接。
 
 [!INCLUDE [virtual-networks-create-vnet-scenario-transit-include](../../includes/virtual-networks-create-vnetpeering-scenario-transit-include.md)]
 
 1. 在此方案中，可以部署以下示例模板以建立 VNet 对等互连。需要将“允许转发的流量”属性设置为“Ture”，以允许对等 VNet 中的网络虚拟设备发送和接收流量。
 
-	以下模板用于创建从 HubVNet 到 VNet1 的 VNet 对等互连。请注意将 AllowForwardedTraffic 设置为 false。
+    以下模板用于创建从 HubVNet 到 VNet1 的 VNet 对等互连。请注意将 AllowForwardedTraffic 设置为 false。
 
         {
         "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",

@@ -35,12 +35,12 @@ Makecert 是创建自签名证书的方式之一。以下步骤将演示如何�
 1. 从运行 Windows 10 的计算机中下载并安装[用于 Windows 10 的 Windows 软件开发包 (SDK)](https://dev.windows.com/downloads/windows-10-sdk)。
 
 2. 安装之后，可以在以下路径中找到 makecert.exe 实用工具：C:\\Program Files (x86)\\Windows Kits\\10\\bin<arch>。
-		
-	示例：`C:\Program Files (x86)\Windows Kits\10\bin\x64`
+        
+    示例：`C:\Program Files (x86)\Windows Kits\10\bin\x64`
 
 3. 接下来，在计算机上的“个人”证书存储中创建并安装证书。以下示例将创建一个相应的 *.cer* 文件，在配置 P2S 时需要将此文件上传到 Azure。以管理员身份运行以下命令。将 *ARMP2SRootCert* 和 *ARMP2SRootCert.cer* 替换为要使用的证书名称。<br><br>该证书位于“证书”-“当前用户\\个人\\证书”中。
 
-    	makecert -sky exchange -r -n "CN=ARMP2SRootCert" -pe -a sha1 -len 2048 -ss My "ARMP2SRootCert.cer"
+        makecert -sky exchange -r -n "CN=ARMP2SRootCert" -pe -a sha1 -len 2048 -ss My "ARMP2SRootCert.cer"
 
 ###  <a name="rootpublickey"></a>获取公钥
 
@@ -73,12 +73,12 @@ Makecert 是创建自签名证书的方式之一。以下步骤将演示如何�
 1. 在用于创建自签名证书的同一台计算机上，以管理员身份打开命令提示符。
 
 2. 在本示例中，"ARMP2SRootCert" 是指生成的自签名证书。
-	- 将 *"ARMP2SRootCert"* 更改为生成客户端证书所用的自签名根证书。
-	- 将 *ClientCertificateName* 更改为生成客户端证书所用的名称。
+    - 将 *"ARMP2SRootCert"* 更改为生成客户端证书所用的自签名根证书。
+    - 将 *ClientCertificateName* 更改为生成客户端证书所用的名称。
 
-	修改并运行示例，生成客户端证书。如果未经修改就运行以下示例，个人证书存储中将有一个从根证书 ARMP2SRootCert 生成的客户端证书，名为 ClientCertificateName。
+    修改并运行示例，生成客户端证书。如果未经修改就运行以下示例，个人证书存储中将有一个从根证书 ARMP2SRootCert 生成的客户端证书，名为 ClientCertificateName。
 
-    	makecert.exe -n "CN=ClientCertificateName" -pe -sky exchange -m 96 -ss My -in "ARMP2SRootCert" -is my -a sha1
+        makecert.exe -n "CN=ClientCertificateName" -pe -sky exchange -m 96 -ss My -in "ARMP2SRootCert" -is my -a sha1
 
 4. 所有证书都存储在计算机上的“证书”-“当前用户\\个人\\证书”存储中。你可以按照此过程生成所需数目的客户端证书。
 

@@ -10,13 +10,13 @@
 
 1. 在“Web 应用”选项卡中，单击 Web 应用的名称，选择“设置”，然后选择“自定义域”
 
-	![](./media/custom-dns-web-site/dncmntask-cname-6.png)
+    ![](./media/custom-dns-web-site/dncmntask-cname-6.png)
 
 1. 在“自定义域”边栏选项卡上，单击“添加主机名”。
-	
+    
 1. 使用“主机名”文本框输入要与此 Web 应用相关联的流量管理器域名。
 
-	![](./media/custom-dns-web-site/dncmntask-cname-8.png)
+    ![](./media/custom-dns-web-site/dncmntask-cname-8.png)
 
 1. 单击“验证”以保存域名配置。
 
@@ -24,7 +24,7 @@
 
 8.  验证成功后，“添加主机名”按钮变为激活状态，就可以分配主机名了。导航到浏览器中的自定义域名。现在应该会看到应用正在使用自定义域名运行。
 
-	完成配置后，自定义域名将在 Web 应用的“域名”部分列出。
+    完成配置后，自定义域名将在 Web 应用的“域名”部分列出。
 
 此时，应可在浏览器中输入流量管理器域名，并查看它是否成功转至 Web 应用。
 

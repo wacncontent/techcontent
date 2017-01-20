@@ -22,11 +22,11 @@ ms.author: jrj;barbkess;sonyama
 
 一个简单的示例：
 
-	DECLARE @sql_fragment1 VARCHAR(8000)=' SELECT name '
-	,       @sql_fragment2 VARCHAR(8000)=' FROM sys.system_views '
-	,       @sql_fragment3 VARCHAR(8000)=' WHERE name like ''%table%''';
+    DECLARE @sql_fragment1 VARCHAR(8000)=' SELECT name '
+    ,       @sql_fragment2 VARCHAR(8000)=' FROM sys.system_views '
+    ,       @sql_fragment3 VARCHAR(8000)=' WHERE name like ''%table%''';
 
-	EXEC( @sql_fragment1 + @sql_fragment2 + @sql_fragment3);
+    EXEC( @sql_fragment1 + @sql_fragment2 + @sql_fragment3);
 
 如果字符串较短，则可以像平时一样使用 [sp\_executesql][sp_executesql]。
 

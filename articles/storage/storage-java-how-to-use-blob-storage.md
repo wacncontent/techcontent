@@ -54,7 +54,7 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
         "DefaultEndpointsProtocol=http;" +
         "AccountName=your_storage_account;" +
         "AccountKey=your_storage_account_key;" +
-	"EndpointSuffix=core.chinacloudapi.cn";
+    "EndpointSuffix=core.chinacloudapi.cn";
 
 在 Azure 的角色中运行的应用程序中，此字符串可存储在服务配置文件  *ServiceConfiguration.cscfg* 中，并可通过调用 **RoleEnvironment.getConfigurationSettings** 方法进行访问。下面的示例从服务配置文件中名为  *StorageConnectionString* 的 **Setting** 元素获取连接字符串
 
@@ -73,20 +73,20 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
 使用 **CloudBlobClient** 对象获取对你要使用的容器的引用。可使用 **createIfNotExists** 方法创建容器（如果不存在），否则将返回现有容器。默认情况下，新容器是专用容器，因此您必须指定存储访问密钥（如之前所做的那样）才能从该容器下载 Blob。
 
-	try
+    try
     {
         // Retrieve storage account from connection-string.
-    	CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+        CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
-    	// Create the blob client.
-	   CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+        // Create the blob client.
+       CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
-	   // Get a reference to a container.
-	   // The container name must be lower case
-	   CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
+       // Get a reference to a container.
+       // The container name must be lower case
+       CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
 
-	   // Create the container if it does not exist.
-    	container.createIfNotExists();
+       // Create the container if it does not exist.
+        container.createIfNotExists();
     }
     catch (Exception e)
     {
@@ -110,24 +110,24 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
 若要将文件上传到 Blob，请获取容器引用，并使用它获取 Blob 引用。获取 Blob 引用后，可以通过对该 Blob 引用调用 upload 来上传任何数据流。此操作将创建 Blob（如果该 Blob 不存在），或者覆盖它（如果该 Blob 存在）。下面的代码示例演示了这一点，并假定已创建容器。
 
-	try
+    try
     {
         // Retrieve storage account from connection-string.
-    	CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+        CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
-    	// Create the blob client.
-    	CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+        // Create the blob client.
+        CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
-	   // Retrieve reference to a previously created container.
-    	CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
+       // Retrieve reference to a previously created container.
+        CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
 
         // Define the path to a local file.
         final String filePath = "C:\\myimages\\myimage.jpg";
 
-    	// Create or overwrite the "myimage.jpg" blob with contents from a local file.
-    	CloudBlockBlob blob = container.getBlockBlobReference("myimage.jpg");
-    	File source = new File(filePath);
-    	blob.upload(new FileInputStream(source), source.length());
+        // Create or overwrite the "myimage.jpg" blob with contents from a local file.
+        CloudBlockBlob blob = container.getBlockBlobReference("myimage.jpg");
+        File source = new File(filePath);
+        blob.upload(new FileInputStream(source), source.length());
     }
     catch (Exception e)
     {
@@ -139,21 +139,21 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
 若要列出容器中的 Blob，请先获取容器引用，就像上传 Blob 时执行的操作一样。可将容器的 **listBlobs** 方法用于 **for** 循环。以下代码将容器中每个 Blob 的 URI 输出到控制台。
 
-	try
+    try
     {
         // Retrieve storage account from connection-string.
-    	CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+        CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
-    	// Create the blob client.
-    	CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+        // Create the blob client.
+        CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
-    	// Retrieve reference to a previously created container.
-    	CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
+        // Retrieve reference to a previously created container.
+        CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
 
-    	// Loop over blobs within the container and output the URI to each of them.
-    	for (ListBlobItem blobItem : container.listBlobs()) {
-	       System.out.println(blobItem.getUri());
-	   }
+        // Loop over blobs within the container and output the URI to each of them.
+        for (ListBlobItem blobItem : container.listBlobs()) {
+           System.out.println(blobItem.getUri());
+       }
     }
     catch (Exception e)
     {
@@ -173,24 +173,24 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
     try
     {
-    	// Retrieve storage account from connection-string.
-	   CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+        // Retrieve storage account from connection-string.
+       CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
-	   // Create the blob client.
-	   CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+       // Create the blob client.
+       CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
-	   // Retrieve reference to a previously created container.
-	   CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
+       // Retrieve reference to a previously created container.
+       CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
 
-	   // Loop through each blob item in the container.
-	   for (ListBlobItem blobItem : container.listBlobs()) {
-	       // If the item is a blob, not a virtual directory.
-	       if (blobItem instanceof CloudBlob) {
-	           // Download the item and save it to a file with the same name.
-    	        CloudBlob blob = (CloudBlob) blobItem;
-    	        blob.download(new FileOutputStream("C:\\mydownloads\\" + blob.getName()));
-    	    }
-    	}
+       // Loop through each blob item in the container.
+       for (ListBlobItem blobItem : container.listBlobs()) {
+           // If the item is a blob, not a virtual directory.
+           if (blobItem instanceof CloudBlob) {
+               // Download the item and save it to a file with the same name.
+                CloudBlob blob = (CloudBlob) blobItem;
+                blob.download(new FileOutputStream("C:\\mydownloads\\" + blob.getName()));
+            }
+        }
     }
     catch (Exception e)
     {
@@ -203,20 +203,20 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
     try
     {
-	   // Retrieve storage account from connection-string.
-	   CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+       // Retrieve storage account from connection-string.
+       CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
-	   // Create the blob client.
-	   CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+       // Create the blob client.
+       CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
-	   // Retrieve reference to a previously created container.
-	   CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
+       // Retrieve reference to a previously created container.
+       CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
 
-	   // Retrieve reference to a blob named "myimage.jpg".
-	   CloudBlockBlob blob = container.getBlockBlobReference("myimage.jpg");
+       // Retrieve reference to a blob named "myimage.jpg".
+       CloudBlockBlob blob = container.getBlockBlobReference("myimage.jpg");
 
-	   // Delete the blob.
-	   blob.deleteIfExists();
+       // Delete the blob.
+       blob.deleteIfExists();
     }
     catch (Exception e)
     {
@@ -229,17 +229,17 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 
     try
     {
-	   // Retrieve storage account from connection-string.
-	   CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
+       // Retrieve storage account from connection-string.
+       CloudStorageAccount storageAccount = CloudStorageAccount.parse(storageConnectionString);
 
-	   // Create the blob client.
-	   CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
+       // Create the blob client.
+       CloudBlobClient blobClient = storageAccount.createCloudBlobClient();
 
-	   // Retrieve reference to a previously created container.
-	   CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
+       // Retrieve reference to a previously created container.
+       CloudBlobContainer container = blobClient.getContainerReference("mycontainer");
 
-	   // Delete the blob container.
-	   container.deleteIfExists();
+       // Delete the blob container.
+       container.deleteIfExists();
     }
     catch (Exception e)
     {

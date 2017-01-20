@@ -29,7 +29,7 @@ ms.author: mlearned
 
 以下代码将创建对表（`todoTable`，其中包含 TodoItem 的数据）的引用，你可以将该引用用于后续操作以便读取和更新数据表。您将需要 TodoItem 类，并将其属性设置为解释移动服务为响应您的查询而发送的 JSON。
 
-	public class TodoItem
+    public class TodoItem
     {
         public string Id { get; set; }
 
@@ -40,7 +40,7 @@ ms.author: mlearned
         public bool Complete { get; set; }
     }
 
-	IMobileServiceTable<TodoItem> todoTable = App.<yourClient>.GetTable<TodoItem>();
+    IMobileServiceTable<TodoItem> todoTable = App.<yourClient>.GetTable<TodoItem>();
 
 如果您的表权限已设置为**具有应用程序密钥的任何人**，则此代码有效。如果您更改权限以保护您的移动服务，您将需要添加用户身份验证支持。请参阅[身份验证入门](./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users.md)。
 
@@ -48,8 +48,8 @@ ms.author: mlearned
 
 将新的项目插入数据表。
 
-	TodoItem todoItem = new TodoItem() { Text = "My first to do item", Complete = false };
-	await todoTable.InsertAsync(todoItem);
+    TodoItem todoItem = new TodoItem() { Text = "My first to do item", Complete = false };
+    await todoTable.InsertAsync(todoItem);
 
 ##读取或查询表
 
@@ -70,13 +70,13 @@ ms.author: mlearned
 
 更新数据表中的行。参数项是指要更新的 TodoItem 对象。
 
-	await todoTable.UpdateAsync(item);
+    await todoTable.UpdateAsync(item);
 
 ##删除表项
 
 删除数据库中的行。参数项是指要删除的 TodoItem 对象。
 
-	await todoTable.DeleteAsync(item);
+    await todoTable.DeleteAsync(item);
 
 [详细了解移动服务](./index.md/)
 

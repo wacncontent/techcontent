@@ -60,8 +60,8 @@ Azure 流分析作业可以连接到一个或多个数据输入，每个数据�
     ![添加事件中心数据输入](./media/stream-analytics-add-inputs/4-stream-analytics-add-inputs.png)  
 
 5. 指定输入数据的序列化设置：
-	- 要确保查询按你期望的方式进行，请指定传入数据的**事件序列化格式**。支持的序列化格式为 JSON、CSV 和 Avro。
-	- 验证数据的**编码**。目前只支持 UTF-8 这种编码格式。
+    - 要确保查询按你期望的方式进行，请指定传入数据的**事件序列化格式**。支持的序列化格式为 JSON、CSV 和 Avro。
+    - 验证数据的**编码**。目前只支持 UTF-8 这种编码格式。
 
     ![针对数据输入的数据序列化设置](./media/stream-analytics-add-inputs/5-stream-analytics-add-inputs.png)  
 

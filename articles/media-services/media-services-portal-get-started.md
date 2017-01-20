@@ -33,7 +33,7 @@ wacn.date: 12/27/2016
 
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，依次单击“新建”、“媒体服务”和“快速创建”。
 
-	![媒体服务快速创建](./media/media-services-portal-get-started/wams-QuickCreate.png)
+    ![媒体服务快速创建](./media/media-services-portal-get-started/wams-QuickCreate.png)
 
 2. 在“名称”中，输入新帐户的名称。媒体服务帐户名称由小写字母或数字构成（不含空格），长度为 3 到 24 个字符。
 
@@ -45,15 +45,15 @@ wacn.date: 12/27/2016
 
 6. 单击窗体底部的“快速创建”。
 
-	可以在窗口底部的消息区域中监视过程的状态。
+    可以在窗口底部的消息区域中监视过程的状态。
 
-	成功创建帐户后，状态将更改为“活动”。
+    成功创建帐户后，状态将更改为“活动”。
 
-	在页面底部，将出现“管理密钥”按钮。单击此按钮时，会显示一个对话框，其中包含媒体服务帐户名以及主密钥和辅助密钥。需要帐户名和主密钥信息，才能以编程方式访问媒体服务帐户。
+    在页面底部，将出现“管理密钥”按钮。单击此按钮时，会显示一个对话框，其中包含媒体服务帐户名以及主密钥和辅助密钥。需要帐户名和主密钥信息，才能以编程方式访问媒体服务帐户。
 
-	![“媒体服务”页](./media/media-services-portal-get-started/wams-mediaservices-page.png)
+    ![“媒体服务”页](./media/media-services-portal-get-started/wams-mediaservices-page.png)
 
-	双击帐户名时，默认情况下将显示“快速启动”页。可从此页执行某些管理任务，而这些管理任务也可从该门户的其他页执行。例如，可以从此页上传视频文件，也可以从“内容”页执行此操作。
+    双击帐户名时，默认情况下将显示“快速启动”页。可从此页执行某些管理任务，而这些管理任务也可从该门户的其他页执行。例如，可以从此页上传视频文件，也可以从“内容”页执行此操作。
 
 ## 使用门户配置流式处理终结点
 
@@ -76,15 +76,15 @@ wacn.date: 12/27/2016
 
 3. 若要指定流式处理单元数，请选择“缩放”选项卡并移动“保留容量”滑块。
 
-	![“缩放”页](./media/media-services-portal-get-started/media-services-origin-scale.png)
+    ![“缩放”页](./media/media-services-portal-get-started/media-services-origin-scale.png)
 
 4. 单击“保存”按钮保存更改。
 
-	分配所有新的单元大约需要 20 分钟才能完成。
+    分配所有新的单元大约需要 20 分钟才能完成。
 
-	>[!NOTE] 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
-	>
-	> 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅 [媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
+    >[!NOTE] 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
+    >
+    > 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅 [媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
 
 ## 上传内容
 
@@ -93,12 +93,12 @@ wacn.date: 12/27/2016
 3. 单击该页上或者门户底部的“上传”按钮。
 4. 在“上传内容”对话框中，浏览到所需的资产文件。单击该文件，然后单击“打开”或按 Enter。
 
-	![UploadContentDialog][uploadcontent]
+    ![UploadContentDialog][uploadcontent]
 
 5. 在“上传内容”对话框中，单击复选按钮以接受“文件”和“内容名称”。
 6. 随后将开始上传，可从门户底部跟踪进度。
 
-	![JobStatus][status]
+    ![JobStatus][status]
 
 上传完成后，内容列表中会列出新的资产。根据约定，名称的末尾将附加“**-Source**”，以便将新内容作为编码任务的源内容进行跟踪。
 
@@ -133,18 +133,18 @@ wacn.date: 12/27/2016
 4. 在“处理”对话框中，选择“Media Encoder Standard”处理器。
 5. 选择其中一个“编码配置”。
 
-	![Process2][process2]  
+    ![Process2][process2]  
 
-	[媒体编码器标准版的任务预设字符串](https://msdn.microsoft.com/zh-cn/library/mt269960)主题说明了每个预设的含义。
+    [媒体编码器标准版的任务预设字符串](https://msdn.microsoft.com/zh-cn/library/mt269960)主题说明了每个预设的含义。
 
 5. 然后，输入所需的友好输出内容名称或接受默认值。然后，单击复选按钮开始编码操作。可在门户底部跟踪进度。
 6. 选择“确定”。
 
-	完成编码后，“内容”页将包含已编码的文件。
+    完成编码后，“内容”页将包含已编码的文件。
 
-	若要查看编码作业的进度，请切换到“作业”页。
+    若要查看编码作业的进度，请切换到“作业”页。
 
-	如果在完成编码后未更新文件大小值，请选择“同步元数据”按钮。这会将输出资产文件大小与存储中的实际文件大小同步，并刷新“内容”页上的值。
+    如果在完成编码后未更新文件大小值，请选择“同步元数据”按钮。这会将输出资产文件大小与存储中的实际文件大小同步，并刷新“内容”页上的值。
 
 ## 发布内容
 
@@ -156,19 +156,19 @@ wacn.date: 12/27/2016
 
 SAS URL 采用以下格式。
 
-	{blob container name}/{asset name}/{file name}/{SAS signature}
+    {blob container name}/{asset name}/{file name}/{SAS signature}
 
 流式处理 URL 采用以下格式，你可以用它来播放平滑流资产。
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
 
 若要生成 HLS 流式处理 URL，请将 (format=m3u8-aapl) 附加到 URL。
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
 
 若要生成 MPEG DASH 流式处理 URL，请将 (format=mpd-time-csf) 追加到 URL。
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
 
 定位符附带到期日期。使用门户发布资产时，会创建到期日期在 100 年后的定位符。
 

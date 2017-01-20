@@ -178,25 +178,25 @@ Batch 服务在应用程序包的存储和检索操作中使用关联的存储�
 
 csharp
 
-	// Create the unbound CloudPool
-	CloudPool myCloudPool =
-	    batchClient.PoolOperations.CreatePool(
-	        poolId: "myPool",
-	        targetDedicated: "1",
-	        virtualMachineSize: "small",
-	        cloudServiceConfiguration: new CloudServiceConfiguration(osFamily: "4"));
+    // Create the unbound CloudPool
+    CloudPool myCloudPool =
+        batchClient.PoolOperations.CreatePool(
+            poolId: "myPool",
+            targetDedicated: "1",
+            virtualMachineSize: "small",
+            cloudServiceConfiguration: new CloudServiceConfiguration(osFamily: "4"));
 
-	// Specify the application and version to install on the compute nodes
-	myCloudPool.ApplicationPackageReferences = new List<ApplicationPackageReference>
-	{
-	    new ApplicationPackageReference {
-	        ApplicationId = "litware",
-	        Version = "1.1001.2b" }
-	};
+    // Specify the application and version to install on the compute nodes
+    myCloudPool.ApplicationPackageReferences = new List<ApplicationPackageReference>
+    {
+        new ApplicationPackageReference {
+            ApplicationId = "litware",
+            Version = "1.1001.2b" }
+    };
 
-	// Commit the pool so that it's created in the Batch service. As the nodes join
-	// the pool, the specified application package will be installed on each.
-	await myCloudPool.CommitAsync();
+    // Commit the pool so that it's created in the Batch service. As the nodes join
+    // the pool, the specified application package will be installed on each.
+    await myCloudPool.CommitAsync();
 
 >[!IMPORTANT] 如果应用程序包部署出于任何原因而失败，Batch 服务会将该节点标记为 [unusable][net_nodestate]，并且不会在该节点上计划执行任何任务。在此情况下，应该**重新启动**节点，以重新启动包部署。重新启动节点也会在节点上再次启用任务计划。
 
@@ -207,19 +207,19 @@ csharp
 
 csharp
 
-	CloudTask task =
-	    new CloudTask(
-	        "litwaretask001",
-	        "cmd /c %AZ_BATCH_APP_PACKAGE_LITWARE%\\litware.exe -args -here");
+    CloudTask task =
+        new CloudTask(
+            "litwaretask001",
+            "cmd /c %AZ_BATCH_APP_PACKAGE_LITWARE%\\litware.exe -args -here");
 
-	task.ApplicationPackageReferences = new List<ApplicationPackageReference>
-	{
-	    new ApplicationPackageReference
-	    {
-	        ApplicationId = "litware",
-	        Version = "1.1001.2b"
-	    }
-	};
+    task.ApplicationPackageReferences = new List<ApplicationPackageReference>
+    {
+        new ApplicationPackageReference
+        {
+            ApplicationId = "litware",
+            Version = "1.1001.2b"
+        }
+    };
 
 ## 执行安装的应用程序
 为池或任务指定的包下载并解压缩到节点的 `AZ_BATCH_ROOT_DIR` 中的命名目录。Batch 还会创建包含命名目录路径的环境变量。在引用节点上的应用程序时，任务的命令行使用此环境变量。变量格式如下：
@@ -238,10 +238,10 @@ csharp
 
 csharp
 
-	string taskId = "blendertask01";
-	string commandLine =
-	    @"cmd /c %AZ_BATCH_APP_PACKAGE_BLENDER%\blender.exe -args -here";
-	CloudTask blenderTask = new CloudTask(taskId, commandLine);
+    string taskId = "blendertask01";
+    string commandLine =
+        @"cmd /c %AZ_BATCH_APP_PACKAGE_BLENDER%\blender.exe -args -here";
+    CloudTask blenderTask = new CloudTask(taskId, commandLine);
 
 > [!TIP] 有关计算节点环境设置的详细信息，请参阅 [Batch feature overview](./batch-api-basics.md)（Batch 功能概述）中的 [Environment settings for tasks](./batch-api-basics.md#environment-settings-for-tasks/)（任务的环境设置）。
 
@@ -256,15 +256,15 @@ csharp
 
 csharp
 
-	string newVersion = "2.76b";
-	CloudPool boundPool = await batchClient.PoolOperations.GetPoolAsync("myPool");
-	boundPool.ApplicationPackageReferences = new List<ApplicationPackageReference>
-	{
-	    new ApplicationPackageReference {
-	        ApplicationId = "blender",
-	        Version = newVersion }
-	};
-	await boundPool.CommitAsync();
+    string newVersion = "2.76b";
+    CloudPool boundPool = await batchClient.PoolOperations.GetPoolAsync("myPool");
+    boundPool.ApplicationPackageReferences = new List<ApplicationPackageReference>
+    {
+        new ApplicationPackageReference {
+            ApplicationId = "blender",
+            Version = newVersion }
+    };
+    await boundPool.CommitAsync();
 
 配置新版本后，任何加入池的*新*节点都将部署 2.76b 版。若要将 2.76b 安装到*已在*池中的节点上，请将节点重新启动或重置映像。请注意，重新启动的节点保留前次包部署的文件。
 
@@ -273,17 +273,17 @@ csharp
 
 csharp
 
-	// List the applications and their application packages in the Batch account.
-	List<ApplicationSummary> applications = await batchClient.ApplicationOperations.ListApplicationSummaries().ToListAsync();
-	foreach (ApplicationSummary app in applications)
-	{
-	    Console.WriteLine("ID: {0} | Display Name: {1}", app.Id, app.DisplayName);
-	
-	    foreach (string version in app.Versions)
-	    {
-	        Console.WriteLine("  {0}", version);
-	    }
-	}
+    // List the applications and their application packages in the Batch account.
+    List<ApplicationSummary> applications = await batchClient.ApplicationOperations.ListApplicationSummaries().ToListAsync();
+    foreach (ApplicationSummary app in applications)
+    {
+        Console.WriteLine("ID: {0} | Display Name: {1}", app.Id, app.DisplayName);
+    
+        foreach (string version in app.Versions)
+        {
+            Console.WriteLine("  {0}", version);
+        }
+    }
 
 ## 总结
 当客户使用提供的启用 Batch 服务来处理操作时，可以通过应用程序包帮助他们选择作业的应用程序，以及指定要使用的确切版本。你还可以在服务中提供让客户上载及跟踪其应用程序的功能。

@@ -40,17 +40,17 @@ ms.author: robmcm
 
 3. 输入以下 Azure Powershell cmdlet：
 
-		Enable-AzureServiceProjectRemoteDesktop
+        Enable-AzureServiceProjectRemoteDesktop
 
 4. 在提示符处，输入用户名和密码。
 
-	![enable-azureserviceprojectremotedesktop][enable-rdp]
+    ![enable-azureserviceprojectremotedesktop][enable-rdp]
 
 3.  输入以下 PowerShell cmdlet 以发布更改：
 
-    	Publish-AzureServiceProject
+        Publish-AzureServiceProject
 
-	![publish-azureserviceproject][publish-project]
+    ![publish-azureserviceproject][publish-project]
 
 ## 步骤 2：连接到角色实例
 
@@ -58,7 +58,7 @@ ms.author: robmcm
 
 1.  在 [Azure 经典管理门户]中选择“云服务”，然后选择服务。
 
-	![Azure 经典管理门户][cloud-services]
+    ![Azure 经典管理门户][cloud-services]
 
 2.  单击“实例”，然后单击“生产”或“过渡”查看服务实例。选择一个实例，然后单击页面底部的“连接”。
 
@@ -86,11 +86,11 @@ ms.author: robmcm
 
 1.  输入以下 Azure Powershell cmdlet：
 
-    	Disable-AzureServiceProjectRemoteDesktop
+        Disable-AzureServiceProjectRemoteDesktop
 
 2.  输入以下 PowerShell cmdlet 以发布更改：
 
-    	Publish-AzureServiceProject
+        Publish-AzureServiceProject
 
 ## 其他资源
 

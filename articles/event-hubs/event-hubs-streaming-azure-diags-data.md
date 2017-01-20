@@ -43,17 +43,17 @@ Azure 诊断提供了灵活的方法用于收集来自云服务虚拟机 (VM) �
 - Azure 诊断扩展 1.6（[Azure SDK for.NET 2.9 或更高版本](/downloads/)默认以此为目标）
 - [Visual Studio 2013 或更高版本](https://www.visualstudio.com/downloads/)
 - 在应用程序中使用 *.wadcfgx* 文件和以下任一方法的 Azure 诊断现有配置：
-	- Windows PowerShell：[使用 PowerShell 在 Azure 云服务中启用诊断](../cloud-services/cloud-services-diagnostics-powershell.md)
+    - Windows PowerShell：[使用 PowerShell 在 Azure 云服务中启用诊断](../cloud-services/cloud-services-diagnostics-powershell.md)
 - 根据文章[事件中心入门](./event-hubs-csharp-ephcs-getstarted.md)预配的事件中心命名空间
 
 ## 将 Azure 诊断连接到事件中心接收器
 默认情况下，Azure 诊断始终将日志和指标接收到 Azure 存储帐户。应用程序可能会额外接收到事件中心，方法是将 **Sinks** 节添加到 .wadcfgx 文件的 **PublicConfig** 节中的 **WadCfg** 元素。在 Visual Studio 中，.wadcfgx 文件存储在“云服务项目”>“角色”>“(RoleName)”>“diagnostics.wadcfgx”文件中。
   
-	  <SinksConfig>
-	    <Sink name="HotPath">
-	      <EventHub Url="https://diags-mycompany-ns.servicebus.chinacloudapi.cn/diageventhub" SharedAccessKeyName="SendRule" />
-	    </Sink>
-	  </SinksConfig>
+      <SinksConfig>
+        <Sink name="HotPath">
+          <EventHub Url="https://diags-mycompany-ns.servicebus.chinacloudapi.cn/diageventhub" SharedAccessKeyName="SendRule" />
+        </Sink>
+      </SinksConfig>
 
 在本示例中，事件中心 URL 设置为事件中心的完全限定的命名空间（ServiceBus 命名空间 +“/”+ 事件中心名称）。
 
@@ -65,10 +65,10 @@ Azure 诊断提供了灵活的方法用于收集来自云服务虚拟机 (VM) �
 
 此外，必须在 *.wadcfgx* 配置文件的**PrivateConfig** 节中声明并定义事件中心接收器。
 
-	  <PrivateConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
-	    <StorageAccount name="" key="" endpoint="" />
-	    <EventHub Url="https://diags-mycompany-ns.servicebus.chinacloudapi.cn/diageventhub" SharedAccessKeyName="SendRule" SharedAccessKey="9B3SwghJOGEUvXigc6zHPInl2iYxrgsKHZoy4nm9CUI=" />
-	  </PrivateConfig>
+      <PrivateConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+        <StorageAccount name="" key="" endpoint="" />
+        <EventHub Url="https://diags-mycompany-ns.servicebus.chinacloudapi.cn/diageventhub" SharedAccessKeyName="SendRule" SharedAccessKey="9B3SwghJOGEUvXigc6zHPInl2iYxrgsKHZoy4nm9CUI=" />
+      </PrivateConfig>
 
 `SharedAccessKeyName` 值必须匹配已在**服务总线/事件中心**命名空间中定义的共享访问签名 (SAS) 密钥和策略。浏览到[Azure 经典管理门户](https://manage.windowsazure.cn)中的事件中心仪表板，单击“配置”选项卡，然后设置具有“发送”权限的命名策略（例如 “SendRule”）。**StorageAccount** 也已在 **PrivateConfig** 中声明。如果这里的值有效，就不需要更改。在本示例中，我们将值保留为空，这表示下游资产将设置这些值。例如，*ServiceConfiguration.Cloud.cscfg* 环境配置文件会设置适合环境的名称和密钥。
 
@@ -138,166 +138,166 @@ Visual Studio 提供最简单的路径供你部署应用程序和事件中心接
 
 请记得将 **Main** 函数中尖括号内的值替换为资源的值。
 
-	//Console application code for EventHub test client
-	using System;
-	using System.Collections.Generic;
-	using System.Diagnostics;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
-	using Microsoft.ServiceBus.Messaging;
-	
-	namespace EventHubListener
-	{
-	    class SimpleEventProcessor : IEventProcessor
-	    {
-	        Stopwatch checkpointStopWatch;
-	
-	        async Task IEventProcessor.CloseAsync(PartitionContext context, CloseReason reason)
-	        {
-	            Console.WriteLine("Processor Shutting Down. Partition '{0}', Reason: '{1}'.", context.Lease.PartitionId, reason);
-	            if (reason == CloseReason.Shutdown)
-	            {
-	                await context.CheckpointAsync();
-	            }
-	        }
-	
-	        Task IEventProcessor.OpenAsync(PartitionContext context)
-	        {
-	            Console.WriteLine("SimpleEventProcessor initialized.  Partition: '{0}', Offset: '{1}'", context.Lease.PartitionId, context.Lease.Offset);
-	            this.checkpointStopWatch = new Stopwatch();
-	            this.checkpointStopWatch.Start();
-	            return Task.FromResult<object>(null);
-	        }
-	
-	        async Task IEventProcessor.ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
-	        {
-	            foreach (EventData eventData in messages)
-	            {
-	                string data = Encoding.UTF8.GetString(eventData.GetBytes());
-	
-	                Console.WriteLine(string.Format("Message received.  Partition: '{0}', Data: '{1}'",
-	                    context.Lease.PartitionId, data));
-	
-	                foreach (var x in eventData.Properties)
-	                {
-	                    Console.WriteLine(string.Format("    {0} = {1}", x.Key, x.Value));
-	                }
-	            }
-	
-	            //Call checkpoint every 5 minutes, so that worker can resume processing from 5 minutes back if it restarts.
-	            if (this.checkpointStopWatch.Elapsed > TimeSpan.FromMinutes(5))
-	            {
-	                await context.CheckpointAsync();
-	                this.checkpointStopWatch.Restart();
-	            }
-	        }
-	    }
-	
-	    class Program
-	    {
-	        static void Main(string[] args)
-	        {
-	            string eventHubConnectionString = "Endpoint= <Your Connection String>”
-	            string eventHubName = "<EventHub Name>";
-	            string storageAccountName = "<Storage Account Name>";
-	            string storageAccountKey = "<Storage Account Key>”;
-	            string storageConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};EndpointSuffix=core.chinacloudapi.cn", storageAccountName, storageAccountKey);
-	
-	            string eventProcessorHostName = Guid.NewGuid().ToString();
-	            EventProcessorHost eventProcessorHost = new EventProcessorHost(eventProcessorHostName, eventHubName, EventHubConsumerGroup.DefaultGroupName, eventHubConnectionString, storageConnectionString);
-	            Console.WriteLine("Registering EventProcessor...");
-	            var options = new EventProcessorOptions();
-	            options.ExceptionReceived += (sender, e) => { Console.WriteLine(e.Exception); };
-	            eventProcessorHost.RegisterEventProcessorAsync<SimpleEventProcessor>(options).Wait();
-	
-	            Console.WriteLine("Receiving. Press enter key to stop worker.");
-	            Console.ReadLine();
-	            eventProcessorHost.UnregisterEventProcessorAsync().Wait();
-	        }
-	    }
-	}
+    //Console application code for EventHub test client
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Microsoft.ServiceBus.Messaging;
+    
+    namespace EventHubListener
+    {
+        class SimpleEventProcessor : IEventProcessor
+        {
+            Stopwatch checkpointStopWatch;
+    
+            async Task IEventProcessor.CloseAsync(PartitionContext context, CloseReason reason)
+            {
+                Console.WriteLine("Processor Shutting Down. Partition '{0}', Reason: '{1}'.", context.Lease.PartitionId, reason);
+                if (reason == CloseReason.Shutdown)
+                {
+                    await context.CheckpointAsync();
+                }
+            }
+    
+            Task IEventProcessor.OpenAsync(PartitionContext context)
+            {
+                Console.WriteLine("SimpleEventProcessor initialized.  Partition: '{0}', Offset: '{1}'", context.Lease.PartitionId, context.Lease.Offset);
+                this.checkpointStopWatch = new Stopwatch();
+                this.checkpointStopWatch.Start();
+                return Task.FromResult<object>(null);
+            }
+    
+            async Task IEventProcessor.ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
+            {
+                foreach (EventData eventData in messages)
+                {
+                    string data = Encoding.UTF8.GetString(eventData.GetBytes());
+    
+                    Console.WriteLine(string.Format("Message received.  Partition: '{0}', Data: '{1}'",
+                        context.Lease.PartitionId, data));
+    
+                    foreach (var x in eventData.Properties)
+                    {
+                        Console.WriteLine(string.Format("    {0} = {1}", x.Key, x.Value));
+                    }
+                }
+    
+                //Call checkpoint every 5 minutes, so that worker can resume processing from 5 minutes back if it restarts.
+                if (this.checkpointStopWatch.Elapsed > TimeSpan.FromMinutes(5))
+                {
+                    await context.CheckpointAsync();
+                    this.checkpointStopWatch.Restart();
+                }
+            }
+        }
+    
+        class Program
+        {
+            static void Main(string[] args)
+            {
+                string eventHubConnectionString = "Endpoint= <Your Connection String>”
+                string eventHubName = "<EventHub Name>";
+                string storageAccountName = "<Storage Account Name>";
+                string storageAccountKey = "<Storage Account Key>”;
+                string storageConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};EndpointSuffix=core.chinacloudapi.cn", storageAccountName, storageAccountKey);
+    
+                string eventProcessorHostName = Guid.NewGuid().ToString();
+                EventProcessorHost eventProcessorHost = new EventProcessorHost(eventProcessorHostName, eventHubName, EventHubConsumerGroup.DefaultGroupName, eventHubConnectionString, storageConnectionString);
+                Console.WriteLine("Registering EventProcessor...");
+                var options = new EventProcessorOptions();
+                options.ExceptionReceived += (sender, e) => { Console.WriteLine(e.Exception); };
+                eventProcessorHost.RegisterEventProcessorAsync<SimpleEventProcessor>(options).Wait();
+    
+                Console.WriteLine("Receiving. Press enter key to stop worker.");
+                Console.ReadLine();
+                eventProcessorHost.UnregisterEventProcessorAsync().Wait();
+            }
+        }
+    }
 
 ## 排查事件中心接收器问题
 
 - 事件中心不按预期显示传入或传出事件活动。
 
-	检查是否已成功预配事件中心。*.wadcfgx* 中 **PrivateConfig** 节的所有连接信息必须与门户中显示的资源值匹配。请确保已在门户中定义 SAS 策略（本示例中为“SendRule”），并为其授予*发送*权限。
+    检查是否已成功预配事件中心。*.wadcfgx* 中 **PrivateConfig** 节的所有连接信息必须与门户中显示的资源值匹配。请确保已在门户中定义 SAS 策略（本示例中为“SendRule”），并为其授予*发送*权限。
 
 - 进行更新后，事件中心不再显示传入或传出事件活动。
 
-	首先，确保事件中心和配置信息如先前所述的那样准确无误。有时候，系统会在部署更新时重置 **PrivateConfig**。建议的解决方法是在项目中对 *.wadcfgx* 进行所有更改，然后推送完整的应用程序更新。如果不可行，请确保诊断更新推送完整的 **PrivateConfig**，包括 SAS 密钥。
+    首先，确保事件中心和配置信息如先前所述的那样准确无误。有时候，系统会在部署更新时重置 **PrivateConfig**。建议的解决方法是在项目中对 *.wadcfgx* 进行所有更改，然后推送完整的应用程序更新。如果不可行，请确保诊断更新推送完整的 **PrivateConfig**，包括 SAS 密钥。
 
 - 我试过了上述建议，但事件中心仍无法正常运行。
 
-	请尝试查看 Azure 存储表，其中包含日志和 Azure 诊断本身的错误：**WADDiagnosticInfrastructureLogsTable**。一个选项是使用 [Azure 存储资源管理器](http://www.storageexplorer.com)等工具连接到此存储帐户，查看此表，然后添加过去 24 小时的时间戳查询。你可以使用此工具导出 .csv 文件，并在 Microsoft Excel 之类的应用程序中打开它。Excel 能轻松地搜索电话卡字符串（如 **EventHubs**），以便查看系统报告了哪些错误。
+    请尝试查看 Azure 存储表，其中包含日志和 Azure 诊断本身的错误：**WADDiagnosticInfrastructureLogsTable**。一个选项是使用 [Azure 存储资源管理器](http://www.storageexplorer.com)等工具连接到此存储帐户，查看此表，然后添加过去 24 小时的时间戳查询。你可以使用此工具导出 .csv 文件，并在 Microsoft Excel 之类的应用程序中打开它。Excel 能轻松地搜索电话卡字符串（如 **EventHubs**），以便查看系统报告了哪些错误。
 
 ## 后续步骤
 •	[了解有关事件中心的详细信息](./index.md/)
 
 ## 附录：完整的 Azure 诊断配置文件 (.wadcfgx) 示例
-	<?xml version="1.0" encoding="utf-8"?>
-	<DiagnosticsConfiguration xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
-	  <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
-	    <WadCfg>
-	      <DiagnosticMonitorConfiguration overallQuotaInMB="4096" sinks="applicationInsights.errors">
-	        <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter="Error" />
-	        <Directories scheduledTransferPeriod="PT1M">
-	          <IISLogs containerName="wad-iis-logfiles" />
-	          <FailedRequestLogs containerName="wad-failedrequestlogs" />
-	        </Directories>
-	        <PerformanceCounters scheduledTransferPeriod="PT1M" sinks="HotPath">
-	          <PerformanceCounterConfiguration counterSpecifier="\Memory\Available MBytes" sampleRate="PT3M" />
-	          <PerformanceCounterConfiguration counterSpecifier="\Web Service(_Total)\ISAPI Extension Requests/sec" sampleRate="PT3M" />
-	          <PerformanceCounterConfiguration counterSpecifier="\Web Service(_Total)\Bytes Total/Sec" sampleRate="PT3M" />
-	          <PerformanceCounterConfiguration counterSpecifier="\ASP.NET Applications(__Total__)\Requests/Sec" sampleRate="PT3M" />
-	          <PerformanceCounterConfiguration counterSpecifier="\ASP.NET Applications(__Total__)\Errors Total/Sec" sampleRate="PT3M" />
-	          <PerformanceCounterConfiguration counterSpecifier="\ASP.NET\Requests Queued" sampleRate="PT3M" />
-	          <PerformanceCounterConfiguration counterSpecifier="\ASP.NET\Requests Rejected" sampleRate="PT3M" />
-	          <PerformanceCounterConfiguration counterSpecifier="\Processor(_Total)\% Processor Time" sampleRate="PT3M" />
-	        </PerformanceCounters>
-	        <WindowsEventLog scheduledTransferPeriod="PT1M">
-	          <DataSource name="Application!*" />
-	        </WindowsEventLog>
-	        <CrashDumps>
-	          <CrashDumpConfiguration processName="WaIISHost.exe" />
-	          <CrashDumpConfiguration processName="WaWorkerHost.exe" />
-	          <CrashDumpConfiguration processName="w3wp.exe" />
-	        </CrashDumps>
-	        <Logs scheduledTransferPeriod="PT1M" sinks="HotPath" scheduledTransferLogLevelFilter="Error" />
-	      </DiagnosticMonitorConfiguration>
-	      <SinksConfig>
-	        <Sink name="HotPath">
-	          <EventHub Url="https://diageventhub-py-ns.servicebus.chinacloudapi.cn/diageventhub-py" SharedAccessKeyName="SendRule" />
-	        </Sink>
-	        <Sink name="applicationInsights">
-	          <ApplicationInsights />
-	          <Channels>
-	            <Channel logLevel="Error" name="errors" />
-	          </Channels>
-	        </Sink>
-	      </SinksConfig>
-	    </WadCfg>
-	    <StorageAccount />
-	  </PublicConfig>
-	  <PrivateConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
-	    <StorageAccount name="" key="" endpoint="" />
-	    <EventHub Url="https://diageventhub-py-ns.servicebus.chinacloudapi.cn/diageventhub-py" SharedAccessKeyName="SendRule" SharedAccessKey="YOUR_KEY_HERE" />
-	  </PrivateConfig>
-	  <IsEnabled>true</IsEnabled>
-	</DiagnosticsConfiguration>
+    <?xml version="1.0" encoding="utf-8"?>
+    <DiagnosticsConfiguration xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+      <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+        <WadCfg>
+          <DiagnosticMonitorConfiguration overallQuotaInMB="4096" sinks="applicationInsights.errors">
+            <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter="Error" />
+            <Directories scheduledTransferPeriod="PT1M">
+              <IISLogs containerName="wad-iis-logfiles" />
+              <FailedRequestLogs containerName="wad-failedrequestlogs" />
+            </Directories>
+            <PerformanceCounters scheduledTransferPeriod="PT1M" sinks="HotPath">
+              <PerformanceCounterConfiguration counterSpecifier="\Memory\Available MBytes" sampleRate="PT3M" />
+              <PerformanceCounterConfiguration counterSpecifier="\Web Service(_Total)\ISAPI Extension Requests/sec" sampleRate="PT3M" />
+              <PerformanceCounterConfiguration counterSpecifier="\Web Service(_Total)\Bytes Total/Sec" sampleRate="PT3M" />
+              <PerformanceCounterConfiguration counterSpecifier="\ASP.NET Applications(__Total__)\Requests/Sec" sampleRate="PT3M" />
+              <PerformanceCounterConfiguration counterSpecifier="\ASP.NET Applications(__Total__)\Errors Total/Sec" sampleRate="PT3M" />
+              <PerformanceCounterConfiguration counterSpecifier="\ASP.NET\Requests Queued" sampleRate="PT3M" />
+              <PerformanceCounterConfiguration counterSpecifier="\ASP.NET\Requests Rejected" sampleRate="PT3M" />
+              <PerformanceCounterConfiguration counterSpecifier="\Processor(_Total)\% Processor Time" sampleRate="PT3M" />
+            </PerformanceCounters>
+            <WindowsEventLog scheduledTransferPeriod="PT1M">
+              <DataSource name="Application!*" />
+            </WindowsEventLog>
+            <CrashDumps>
+              <CrashDumpConfiguration processName="WaIISHost.exe" />
+              <CrashDumpConfiguration processName="WaWorkerHost.exe" />
+              <CrashDumpConfiguration processName="w3wp.exe" />
+            </CrashDumps>
+            <Logs scheduledTransferPeriod="PT1M" sinks="HotPath" scheduledTransferLogLevelFilter="Error" />
+          </DiagnosticMonitorConfiguration>
+          <SinksConfig>
+            <Sink name="HotPath">
+              <EventHub Url="https://diageventhub-py-ns.servicebus.chinacloudapi.cn/diageventhub-py" SharedAccessKeyName="SendRule" />
+            </Sink>
+            <Sink name="applicationInsights">
+              <ApplicationInsights />
+              <Channels>
+                <Channel logLevel="Error" name="errors" />
+              </Channels>
+            </Sink>
+          </SinksConfig>
+        </WadCfg>
+        <StorageAccount />
+      </PublicConfig>
+      <PrivateConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">
+        <StorageAccount name="" key="" endpoint="" />
+        <EventHub Url="https://diageventhub-py-ns.servicebus.chinacloudapi.cn/diageventhub-py" SharedAccessKeyName="SendRule" SharedAccessKey="YOUR_KEY_HERE" />
+      </PrivateConfig>
+      <IsEnabled>true</IsEnabled>
+    </DiagnosticsConfiguration>
 
 本示例的补充 *ServiceConfiguration.Cloud.cscfg* 如下所示。
 
-	<?xml version="1.0" encoding="utf-8"?>
-	<ServiceConfiguration serviceName="MyFixItCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2015-04.2.6">
-	  <Role name="MyFixIt.WorkerRole">
-	    <Instances count="1" />
-	    <ConfigurationSettings>
-	      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="YOUR_CONNECTION_STRING" />
-	    </ConfigurationSettings>
-	  </Role>
-	</ServiceConfiguration>
+    <?xml version="1.0" encoding="utf-8"?>
+    <ServiceConfiguration serviceName="MyFixItCloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2015-04.2.6">
+      <Role name="MyFixIt.WorkerRole">
+        <Instances count="1" />
+        <ConfigurationSettings>
+          <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="YOUR_CONNECTION_STRING" />
+        </ConfigurationSettings>
+      </Role>
+    </ServiceConfiguration>
 
 <!-- Images. -->
 [0]: ./media/event-hubs-streaming-azure-diags-data/dashboard.png

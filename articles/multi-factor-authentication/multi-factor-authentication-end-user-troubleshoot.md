@@ -37,11 +37,11 @@ ms.author: kgremban
 1. 像往常一样进行登录。
 2. 当提示进一步验证你的帐户时，选择“使用其他验证选项”。
 
-	![其他验证方法](./media/multi-factor-authentication-end-user-manage/differentverification.png)  
+    ![其他验证方法](./media/multi-factor-authentication-end-user-manage/differentverification.png)  
 
 3. 选择你有权访问的电话号码。
 
-	![备用号码](./media/multi-factor-authentication-end-user-manage/altphone2.png)  
+    ![备用号码](./media/multi-factor-authentication-end-user-manage/altphone2.png)  
 
 4. 在返回到你的帐户后，[管理你的设置](./multi-factor-authentication-end-user-manage-settings.md)以更改身份验证电话号码。
 
@@ -60,11 +60,11 @@ ms.author: kgremban
 
 1. 在等待你验证的页面上选择“使用其他验证选项”。
 
-	![其他验证方法](./media/multi-factor-authentication-end-user-troubleshoot/diff_option.png)  
+    ![其他验证方法](./media/multi-factor-authentication-end-user-troubleshoot/diff_option.png)  
 
 2. 选择要使用的电话号码或发送方式。
 
-	如果你收到了多个验证码，则只有最新的一个验证码才起作用。
+    如果你收到了多个验证码，则只有最新的一个验证码才起作用。
 
 如果你没有配置其他方法，请联系管理员并要求他们清除你的设置。你下次登录时，会再次提示你[设置多重身份验证](./multi-factor-authentication-end-user-first-time.md)。
 

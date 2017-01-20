@@ -40,10 +40,10 @@ ms.author: ggailey777
 
 + PhoneGap 支持针对多个平台进行开发。除了 PhoneGap 工具本身以外，还必须为你所要针对的每个平台安装工具：
 
-	- Windows Phone：安装 [Visual Studio 2012 Express for Windows Phone](https://go.microsoft.com/fwLink/p/?LinkID=268374)
-	- iOS：安装 [Xcode]（需要 v4.4+）
-	- Android：[安装 Android 开发人员工具][Android SDK]
-	<br/>（适用于 Android 的移动服务 SDK 支持用于 Android 2.2 或更高版本的应用程序。运行快速入门应用程序需要安装 Android 4.2 或更高版本。)
+    - Windows Phone：安装 [Visual Studio 2012 Express for Windows Phone](https://go.microsoft.com/fwLink/p/?LinkID=268374)
+    - iOS：安装 [Xcode]（需要 v4.4+）
+    - Android：[安装 Android 开发人员工具][Android SDK]
+    <br/>（适用于 Android 的移动服务 SDK 支持用于 Android 2.2 或更高版本的应用程序。运行快速入门应用程序需要安装 Android 4.2 或更高版本。)
 
 ##  创建新的移动服务
 
@@ -57,11 +57,11 @@ ms.author: ggailey777
 
 2. 在快速启动选项卡中，单击“选择平台”下的“PhoneGap”，然后展开“创建新的 PhoneGap 应用程序”。
 
-   	![][0]
+       ![][0]
 
-   	此时将显示三个简单步骤，描述如何创建与移动服务连接的 PhoneGap 应用程序。
+       此时将显示三个简单步骤，描述如何创建与移动服务连接的 PhoneGap 应用程序。
 
-  	![][1]
+      ![][1]
 
 3. 下载并安装 PhoneGap 以及至少一个平台开发工具（Windows Phone、iOS 或 Android）（如果尚未这么做）。
 
@@ -69,7 +69,7 @@ ms.author: ggailey777
 
 5. 在“下载并运行应用程序”下面单击“下载”。
 
-	随即将会下载已连接到移动服务的示例_待办事项列表_应用程序的项目，以及移动服务 JavaScript SDK。将压缩的项目文件保存到本地计算机，并记下保存位置。
+    随即将会下载已连接到移动服务的示例_待办事项列表_应用程序的项目，以及移动服务 JavaScript SDK。将压缩的项目文件保存到本地计算机，并记下保存位置。
 
 ##  运行新的 PhoneGap 应用程序
 
@@ -79,48 +79,48 @@ ms.author: ggailey777
 
 2.	对于每个平台，请根据下面的说明打开并运行该项目。
 
-	+ **Windows Phone 8**
+    + **Windows Phone 8**
 
-	1. Windows Phone 8：在 Visual Studio 2012 Express for Windows Phone 中，打开 **platforms\\wp8** 文件夹中的 .sln 文件。
-	
-	2. 按 **F5** 键以重新构建项目并启动此应用。
-	
-	  	![][2]
+    1. Windows Phone 8：在 Visual Studio 2012 Express for Windows Phone 中，打开 **platforms\\wp8** 文件夹中的 .sln 文件。
+    
+    2. 按 **F5** 键以重新构建项目并启动此应用。
+    
+          ![][2]
 
-	+ **iOS**
+    + **iOS**
 
-	1. 在 Xcode 中，打开 **platforms/ios** 文件夹中的项目。
-	
-	2. 按“运行”按钮以生成项目，并在 iPhone 模拟器中启动应用，这是此项目的默认设置。
-	
-	  	![][3]
+    1. 在 Xcode 中，打开 **platforms/ios** 文件夹中的项目。
+    
+    2. 按“运行”按钮以生成项目，并在 iPhone 模拟器中启动应用，这是此项目的默认设置。
+    
+          ![][3]
 
-	+ **Android**
+    + **Android**
 
-		1. 在 Eclipse 中，依次单击“文件”、“导入”，展开“Android”，单击“工作区中的现有 Android 代码”，然后单击“下一步”。 
-		
-		2. 单击“浏览”，浏览到已展开项目文件所在的位置，单击“确定”，并确认 TodoActivity 项目已选中，然后单击“完成”。<p>这样可将项目文件导入当前工作区。</p>
-		
-		3. 在“运行”菜单中，单击“运行”，以便在 Android 模拟器中启动项目。
-		
-			![][4]
-	
-		>[!NOTE]若要在 Android 模拟器中运行项目，必须至少定义一个 Android 虚拟设备 (AVD)。使用 AVD 管理器创建和管理这些设备。
-			
+        1. 在 Eclipse 中，依次单击“文件”、“导入”，展开“Android”，单击“工作区中的现有 Android 代码”，然后单击“下一步”。 
+        
+        2. 单击“浏览”，浏览到已展开项目文件所在的位置，单击“确定”，并确认 TodoActivity 项目已选中，然后单击“完成”。<p>这样可将项目文件导入当前工作区。</p>
+        
+        3. 在“运行”菜单中，单击“运行”，以便在 Android 模拟器中启动项目。
+        
+            ![][4]
+    
+        >[!NOTE]若要在 Android 模拟器中运行项目，必须至少定义一个 Android 虚拟设备 (AVD)。使用 AVD 管理器创建和管理这些设备。
+            
 3. 在上述某个移动模拟器中启动应用程序后，在文本框中键入一些文本，然后单击“添加”。
 
-	这样可向在 Azure 中托管的新移动服务发送 POST 请求。来自请求的数据将插入到 **TodoItem** 表。移动服务返回存储在表中的项，数据显示在列表中。
+    这样可向在 Azure 中托管的新移动服务发送 POST 请求。来自请求的数据将插入到 **TodoItem** 表。移动服务返回存储在表中的项，数据显示在列表中。
 
-	> [!IMPORTANT]如果使用 PhoneGap 工具重新生成主项目，将会覆盖对此平台项目所做的更改。请根据以下部分中所述，在项目的 www 根目录中进行更改。
+    > [!IMPORTANT]如果使用 PhoneGap 工具重新生成主项目，将会覆盖对此平台项目所做的更改。请根据以下部分中所述，在项目的 www 根目录中进行更改。
 
 4. 返回 [Azure 经典管理门户]，单击“数据”选项卡，然后单击“TodoItem”表。
 
-	![](./media/mobile-services-javascript-backend-phonegap-get-started/mobile-data-tab.png)
+    ![](./media/mobile-services-javascript-backend-phonegap-get-started/mobile-data-tab.png)
 
-	这使您可以浏览此应用插入表中的数据。
+    这使您可以浏览此应用插入表中的数据。
 
-	![](./media/mobile-services-javascript-backend-phonegap-get-started/mobile-data-browse.png)
-	
+    ![](./media/mobile-services-javascript-backend-phonegap-get-started/mobile-data-browse.png)
+    
 ##  针对每个平台进行应用程序更新并重新生成项目
 
 1. 在“www”目录（在本例中为“todolist/www”）中对代码文件进行更改。
@@ -129,23 +129,23 @@ ms.author: ggailey777
 
 2. 在项目根目录中打开命令提示符，然后运行下列平台特定的命令之一：
 
-	+ **Windows Phone**
+    + **Windows Phone**
 
-		在 Visual Studio Developer 命令提示符下运行以下命令：
+        在 Visual Studio Developer 命令提示符下运行以下命令：
 
-    		phonegap local build wp8
+            phonegap local build wp8
 
-	+ **iOS**
+    + **iOS**
  
-		打开终端并运行以下命令：
+        打开终端并运行以下命令：
 
-    		phonegap local build ios
+            phonegap local build ios
 
-	+ **Android**
+    + **Android**
 
-		打开命令提示符或终端窗口并运行以下命令：
+        打开命令提示符或终端窗口并运行以下命令：
 
-		    phonegap local build android
+            phonegap local build android
 
 4. 根据前面部分中所述，在相应的开发环境中打开每个项目。
 

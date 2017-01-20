@@ -90,23 +90,23 @@ D 系列、Dv2 系列和 G 系列 VM 上的临时驱动器基于 SSD。如果工
 
 - **磁盘条带化**：为提高吞吐量，可以添加更多的数据磁盘，并使用磁盘条带化。若要确定数据磁盘数，你需要分析可用于数据和日志磁盘的 IOPS 数。要获取该信息，请参阅以下文章中有关每个 [VM 大小](./virtual-machines-windows-sizes.md)和磁盘大小的 IOPS 的表：[使用磁盘的高级存储](../storage/storage-premium-storage.md)。遵循以下指导原则：
 
-	- 对于 Windows 8/Windows Server 2012 或更高版本，使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739.aspx)。对于 OLTP 工作负荷，将条带大小设置为 64 KB，对于数据仓库工作负荷，将条带大小设置为 256 KB，以避免分区定位错误导致的性能影响。此外，将列数设置为物理磁盘的数量。若要配置具有 8 个以上磁盘的存储空间，必须使用 PowerShell（而不是服务器管理器 UI）来显式设置列数以匹配磁盘数。有关如何配置[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739.aspx)的详细信息，请参阅 [Windows PowerShell 中的存储空间 Cmdlet](https://technet.microsoft.com/zh-cn/library/jj851254.aspx)
+    - 对于 Windows 8/Windows Server 2012 或更高版本，使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739.aspx)。对于 OLTP 工作负荷，将条带大小设置为 64 KB，对于数据仓库工作负荷，将条带大小设置为 256 KB，以避免分区定位错误导致的性能影响。此外，将列数设置为物理磁盘的数量。若要配置具有 8 个以上磁盘的存储空间，必须使用 PowerShell（而不是服务器管理器 UI）来显式设置列数以匹配磁盘数。有关如何配置[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739.aspx)的详细信息，请参阅 [Windows PowerShell 中的存储空间 Cmdlet](https://technet.microsoft.com/zh-cn/library/jj851254.aspx)
 
-	- 对于 Windows 2008 R2 或更早版本，你可以使用动态磁盘（OS 条带化卷），条带大小始终为 64 KB。请注意，从 Windows 8/Windows Server 2012 开始不推荐使用此选项。有关信息，请参阅[虚拟磁盘服务正在过渡到 Windows 存储管理 API](https://msdn.microsoft.com/zh-cn/library/windows/desktop/hh848071.aspx) 中的支持声明。
+    - 对于 Windows 2008 R2 或更早版本，你可以使用动态磁盘（OS 条带化卷），条带大小始终为 64 KB。请注意，从 Windows 8/Windows Server 2012 开始不推荐使用此选项。有关信息，请参阅[虚拟磁盘服务正在过渡到 Windows 存储管理 API](https://msdn.microsoft.com/zh-cn/library/windows/desktop/hh848071.aspx) 中的支持声明。
 
-	- 如果工作负荷并非日志密集型且不需要专用的 IOPS，则可以只配置一个存储池。否则，请创建两个存储池，一个用于日志文件，另一个用于数据文件和 TempDB。根据负载预期确定与每个存储池相关联的磁盘数。请记住，不同的 VM 大小允许不同数量的附加数据磁盘。有关详细信息，请参阅[虚拟机的大小](./virtual-machines-windows-sizes.md)。
+    - 如果工作负荷并非日志密集型且不需要专用的 IOPS，则可以只配置一个存储池。否则，请创建两个存储池，一个用于日志文件，另一个用于数据文件和 TempDB。根据负载预期确定与每个存储池相关联的磁盘数。请记住，不同的 VM 大小允许不同数量的附加数据磁盘。有关详细信息，请参阅[虚拟机的大小](./virtual-machines-windows-sizes.md)。
 
-	- 如果使用的不是高级存储（开发/测试方案），建议添加 [VM 大小](./virtual-machines-windows-sizes.md)支持的最大数量的数据磁盘并使用磁盘条带化。
+    - 如果使用的不是高级存储（开发/测试方案），建议添加 [VM 大小](./virtual-machines-windows-sizes.md)支持的最大数量的数据磁盘并使用磁盘条带化。
 
 - **缓存策略**：对于高级存储数据磁盘，请只在托管数据文件和 TempDB 的数据磁盘上启用读取缓存。如果使用的不是高级存储，请不要在任何数据磁盘上启用任何缓存。有关配置磁盘缓存的说明，请参阅以下主题：[Set-AzureOSDisk](https://msdn.microsoft.com/zh-cn/library/azure/jj152847) 和 [Set-AzureDataDisk](https://msdn.microsoft.com/zh-cn/library/azure/jj152851.aspx)。
 
-	>[!WARNING] 请在更改 Azure VM 磁盘的缓存设置时停止 SQL Server 服务，以免出现任何数据库损坏的情况。
+    >[!WARNING] 请在更改 Azure VM 磁盘的缓存设置时停止 SQL Server 服务，以免出现任何数据库损坏的情况。
 
 - **NTFS 分配单元大小**：当格式化数据磁盘时，建议为数据和日志文件以及 TempDB 使用 64-KB 分配单元大小。
 
 - **磁盘管理最佳实践**：删除数据磁盘或更改其缓存类型时，请在更改过程中停止 SQL Server 服务。在 OS 磁盘上更改缓存设置时，Azure 会先停止 VM，在更改缓存类型后再重新启动 VM。更改数据磁盘的缓存设置时，不会停止 VM，但会在更改期间将数据磁盘从 VM 分离，完成后再重新附加该数据磁盘。
 
-	>[!WARNING] 在进行这些操作时，如果无法停止 SQL Server 服务，则会导致数据库损坏。
+    >[!WARNING] 在进行这些操作时，如果无法停止 SQL Server 服务，则会导致数据库损坏。
 
 ## <a name="io-guidance"></a> I/O 指导原则
 
@@ -124,11 +124,11 @@ D 系列、Dv2 系列和 G 系列 VM 上的临时驱动器基于 SSD。如果工
 
 - 将 SQL Server 错误日志和跟踪文件目录移到数据磁盘。在 SQL Server 配置管理器中右键单击 SQL Server 实例并选择属性，即可实现此目的。可以在“启动参数”选项卡中更改错误日志和跟踪文件设置。在“高级”选项卡中指定转储目录。以下屏幕截图显示了查找错误日志启动参数的位置。
 
-	![SQL 错误日志屏幕截图](./media/virtual-machines-windows-sql-performance/sql_server_error_log_location.png)  
+    ![SQL 错误日志屏幕截图](./media/virtual-machines-windows-sql-performance/sql_server_error_log_location.png)  
 
 - 设置默认的备份和数据库文件位置。使用本主题中的建议，并在“服务器属性”窗口中进行更改。有关说明，请参阅[查看或更改数据和日志文件的默认位置 (SQL Server Management Studio)](https://msdn.microsoft.com/zh-cn/library/dd206993.aspx)。以下屏幕截图演示了进行这些更改的位置。
 
-	![SQL 数据日志和备份文件](./media/virtual-machines-windows-sql-performance/sql_server_default_data_log_backup_locations.png)  
+    ![SQL 数据日志和备份文件](./media/virtual-machines-windows-sql-performance/sql_server_default_data_log_backup_locations.png)  
 
 - 建立锁定的页以减少 IO 和任何分页活动。有关详细信息，请参阅[启用在内存中锁定页面的选项 (Windows)](https://msdn.microsoft.com/zh-cn/library/ms190730.aspx)。
 
@@ -142,7 +142,7 @@ D 系列、Dv2 系列和 G 系列 VM 上的临时驱动器基于 SSD。如果工
 
 - **备份到 Azure 存储**：为在 Azure 虚拟机中运行的 SQL Server 执行备份时，可以使用 [SQL Server 备份到 URL](https://msdn.microsoft.com/zh-cn/library/dn435916.aspx)。此功能从 SQL Server 2012 SP1 CU2 开始提供，建议在备份到附加数据磁盘时使用。当你备份到 Azure 存储或从中还原时，请按照 [SQL Server 备份到 URL 最佳实践和故障排除，以及从 Azure 存储中存储的备份还原](https://msdn.microsoft.com/zh-cn/library/jj919149.aspx)中提供的建议操作。此外还可以使用 [Azure 虚拟机中 SQL Server 的自动备份](./virtual-machines-windows-classic-sql-automated-backup.md)自动执行这些备份。
 
-	对于 SQL Server 2012 以前版本，可以使用 [SQL Server 备份到 Azure 工具](https://www.microsoft.com/download/details.aspx?id=40740)。此工具可以通过使用多个备份条带目标帮助提高备份吞吐量。
+    对于 SQL Server 2012 以前版本，可以使用 [SQL Server 备份到 Azure 工具](https://www.microsoft.com/download/details.aspx?id=40740)。此工具可以通过使用多个备份条带目标帮助提高备份吞吐量。
 
 - **Azure 中的 SQL Server 数据文件**：[Azure 中的 SQL Server 数据文件](https://msdn.microsoft.com/zh-cn/library/dn385720.aspx)这一新功能从 SQL Server 2014 开始提供。使用 Azure 中的数据文件运行 SQL Server，与使用 Azure 数据磁盘时的性能特征相当。
 

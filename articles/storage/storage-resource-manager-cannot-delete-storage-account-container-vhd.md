@@ -57,15 +57,15 @@ ms.author: genli;dougiman
 1. 登录到 [Azure 门户预览](https://portal.azure.cn)。
 2. 在“中心”菜单上，选择“所有资源”。转到想要删除的存储帐户 >“Blob”>“VHD”。
 
-	![locateVHD1.png](./media/storage-resource-manager-cannot-delete-storage-account-container-vhd/opencontainer.png)  
+    ![locateVHD1.png](./media/storage-resource-manager-cannot-delete-storage-account-container-vhd/opencontainer.png)  
 
 3. 检查容器中每个 VHD 的属性。找到处于“已租用”状态的 VHD。然后，确定正在使用该 VHD 的 VM。通常情况下，可通过检查 VHD 的名称确定保存该 VHD 的 VM：
 
-	- OS 磁盘通常遵循以下命名规则：VMNameYYYYMMDDHHMMSS.vhd
+    - OS 磁盘通常遵循以下命名规则：VMNameYYYYMMDDHHMMSS.vhd
 
   - 数据磁盘通常遵循以下命名约定：VMName-YYYYMMDD-HHMMSS.vhd
 
-	![locatevm.png](./media/storage-resource-manager-cannot-delete-storage-account-container-vhd/locatevm.png)  
+    ![locatevm.png](./media/storage-resource-manager-cannot-delete-storage-account-container-vhd/locatevm.png)  
 
 ### 步骤 2：从 VHD 中删除租约
 

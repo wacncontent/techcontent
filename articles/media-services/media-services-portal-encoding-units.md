@@ -63,15 +63,15 @@ ms.author: juliako;milanga
 
 2. 选择“编码”页。
 
-	若要更改“保留单元类型”，请按“S1”、“S2”或“S3”。
+    若要更改“保留单元类型”，请按“S1”、“S2”或“S3”。
 
-	若要更改所选保留单元类型的保留单元数，请使用“编码”滑块。
+    若要更改所选保留单元类型的保留单元数，请使用“编码”滑块。
 
-	![“处理器”页](./media/media-services-portal-encoding-units/media-services-encoding-scale.png)
+    ![“处理器”页](./media/media-services-portal-encoding-units/media-services-encoding-scale.png)
 
 3. 按“保存”按钮保存更改。
 
-	按“保存”后，会立即分配新的保留单元。
+    按“保存”后，会立即分配新的保留单元。
  
 ##配额和限制
 

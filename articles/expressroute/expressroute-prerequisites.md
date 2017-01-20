@@ -29,7 +29,7 @@ ms.author: cherylmc
 
 - 与支持列表中的连接服务提供商建立关系，通过这些提供商便于建立连接。你必须与连接服务提供商存在现有的业务关系。你需要确保通过连接服务提供商获得的服务与 ExpressRoute 兼容。
 - 如果你要使用某家网络服务提供商，但该提供商不在上面的列表中，你仍可以创建与 Azure 的连接。
-	- 请咨询你的网络服务提供商，让你的网络提供商将你的网络扩展到连接提供商。
+    - 请咨询你的网络服务提供商，让你的网络提供商将你的网络扩展到连接提供商。
 
 ## 在你的网络与连接服务提供商之间建立物理连接
 
@@ -49,8 +49,8 @@ ms.author: cherylmc
 - 查找 ExpressRoute 连接服务提供商。请参阅 [ExpressRoute 合作伙伴和对等位置](./expressroute-locations.md)。
 - 请参阅[路由](./expressroute-routing.md)的要求。
 - 配置 ExpressRoute 连接。
-	- [创建 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)
-	- [配置路由](./expressroute-howto-routing-classic.md)
-	- [将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-classic.md)
+    - [创建 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)
+    - [配置路由](./expressroute-howto-routing-classic.md)
+    - [将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-classic.md)
  
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

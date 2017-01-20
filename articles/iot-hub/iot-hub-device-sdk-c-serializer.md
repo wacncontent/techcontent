@@ -141,26 +141,26 @@ SendAsync(iotHubClientHandle, (const void*)&(testModel->Test));
 ```
     void SendAsync(IOTHUB_CLIENT_LL_HANDLE iotHubClientHandle, const void *dataEvent)
     {
-    	unsigned char* destination;
-    	size_t destinationSize;
-    	if (SERIALIZE(&destination, &destinationSize, *(const unsigned char*)dataEvent) ==
-    	{
-    		// null terminate the string
-    		char* destinationAsString = (char*)malloc(destinationSize + 1);
-    		if (destinationAsString != NULL)
-    		{
-    			memcpy(destinationAsString, destination, destinationSize);
-    			destinationAsString[destinationSize] = '\0';
-    			IOTHUB_MESSAGE_HANDLE messageHandle = IoTHubMessage_CreateFromString(destinationAsString);
-    			if (messageHandle != NULL)
-    			{
-    				IoTHubClient_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, (void*)0);
-    				IoTHubMessage_Destroy(messageHandle);
-    			}
-    			free(destinationAsString);
-    		}
-    		free(destination);
-    	}
+        unsigned char* destination;
+        size_t destinationSize;
+        if (SERIALIZE(&destination, &destinationSize, *(const unsigned char*)dataEvent) ==
+        {
+            // null terminate the string
+            char* destinationAsString = (char*)malloc(destinationSize + 1);
+            if (destinationAsString != NULL)
+            {
+                memcpy(destinationAsString, destination, destinationSize);
+                destinationAsString[destinationSize] = '\0';
+                IOTHUB_MESSAGE_HANDLE messageHandle = IoTHubMessage_CreateFromString(destinationAsString);
+                if (messageHandle != NULL)
+                {
+                    IoTHubClient_SendEventAsync(iotHubClientHandle, messageHandle, sendCallback, (void*)0);
+                    IoTHubMessage_Destroy(messageHandle);
+                }
+                free(destinationAsString);
+            }
+            free(destination);
+        }
     }
 ```
 
@@ -171,16 +171,16 @@ SendAsync(iotHubClientHandle, (const void*)&(testModel->Test));
 ```
 EDM_DATE_TIME_OFFSET GetDateTimeOffset(time_t time)
 {
-	struct tm newTime;
-	gmtime_s(&newTime, &time);
-	EDM_DATE_TIME_OFFSET dateTimeOffset;
-	dateTimeOffset.dateTime = newTime;
-	dateTimeOffset.fractionalSecond = 0;
-	dateTimeOffset.hasFractionalSecond = 0;
-	dateTimeOffset.hasTimeZone = 0;
-	dateTimeOffset.timeZoneHour = 0;
-	dateTimeOffset.timeZoneMinute = 0;
-	return dateTimeOffset;
+    struct tm newTime;
+    gmtime_s(&newTime, &time);
+    EDM_DATE_TIME_OFFSET dateTimeOffset;
+    dateTimeOffset.dateTime = newTime;
+    dateTimeOffset.fractionalSecond = 0;
+    dateTimeOffset.hasFractionalSecond = 0;
+    dateTimeOffset.hasTimeZone = 0;
+    dateTimeOffset.timeZoneHour = 0;
+    dateTimeOffset.timeZoneMinute = 0;
+    return dateTimeOffset;
 }
 ```
 

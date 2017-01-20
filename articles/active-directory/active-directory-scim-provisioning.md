@@ -406,13 +406,13 @@ Azure Active Directory 可将两种类型的资源预配到 SCIM Web 服务。�
     }
 
     public interface Microsoft.SystemForCrossDomainIdentityManagement.IRetrievalParameters
-	{
+    {
       system.Collections.Generic.IReadOnlyCollection<string> ExcludedAttributePaths 
       { get; }
       System.Collections.Generic.IReadOnlyCollection<string> RequestedAttributePaths 
       { get; }
       string SchemaIdentifier 
-	  { get; }
+      { get; }
     }
 
     public interface Microsoft.SystemForCrossDomainIdentityManagement.IFilter
@@ -658,7 +658,7 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
 
     DELETE ~/scim/Users/54D382A4-2050-4C03-94D1-E769F1D15682 HTTP/1.1
     Authorization: Bearer ...
-	
+    
 如果使用 Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库构建了服务，则将请求转换为对服务提供者的 Delete 方法调用。该方法具有以下签名：
 
     // System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
@@ -687,7 +687,7 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
 
 ##相关文章
 - [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
-	
+    
 <!--Image references-->
 [1]: ./media/active-directory-scim-provisioning/scim-figure-1.PNG
 [2]: ./media/active-directory-scim-provisioning/scim-figure-2.PNG

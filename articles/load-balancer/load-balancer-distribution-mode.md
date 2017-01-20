@@ -52,7 +52,7 @@ ms.author: sewhee
 
 将 Azure 终结点添加到虚拟机并设置负载均衡器分发模式
 
-	Get-AzureVM -ServiceName mySvc -Name MyVM1 | Add-AzureEndpoint -Name HttpIn -Protocol TCP -PublicPort 80 -LocalPort 8080 –LoadBalancerDistribution sourceIP | Update-AzureVM
+    Get-AzureVM -ServiceName mySvc -Name MyVM1 | Add-AzureEndpoint -Name HttpIn -Protocol TCP -PublicPort 80 -LocalPort 8080 –LoadBalancerDistribution sourceIP | Update-AzureVM
 
 >[!NOTE] LoadBalancerDistribution 可以设置为 sourceIP（用于 2 元组（源 IP、目标 IP）负载均衡）、sourceIPProtocol（用于 3 元组（源 IP、目标 IP、协议）负载均衡）或 none（如果想要使用 5 元组负载均衡的默认行为）。
 
@@ -84,27 +84,27 @@ ms.author: sewhee
 
 如果终结点是负载均衡终结点集的一部分，则必须在负载均衡终结点集上设置分发模式：
 
-	Set-AzureLoadBalancedEndpoint -ServiceName MyService -LBSetName LBSet1 -Protocol TCP -LocalPort 80 -ProbeProtocol TCP -ProbePort 8080 –LoadBalancerDistribution sourceIP
+    Set-AzureLoadBalancedEndpoint -ServiceName MyService -LBSetName LBSet1 -Protocol TCP -LocalPort 80 -ProbeProtocol TCP -ProbePort 8080 –LoadBalancerDistribution sourceIP
 
 ### 用于更改分发模式的云服务配置
 
 可利用用于 .NET 2.5 的 Azure SDK（于 11 月发布）来更新云服务。云服务的终结点设置在 .csdef 中进行。若要更新云服务部署的负载均衡器分发模式，需要进行部署升级。下面是终结点设置的 .csdef 更改的示例：
 
-	<WorkerRole name="worker-role-name" vmsize="worker-role-size" enableNativeCodeExecution="[true|false]">
-  	<Endpoints>
+    <WorkerRole name="worker-role-name" vmsize="worker-role-size" enableNativeCodeExecution="[true|false]">
+      <Endpoints>
     <InputEndpoint name="input-endpoint-name" protocol="[http|https|tcp|udp]" localPort="local-port-number" port="port-number" certificate="certificate-name" loadBalancerProbe="load-balancer-probe-name" loadBalancerDistribution="sourceIP" />
-  	</Endpoints>
-	</WorkerRole>
-	<NetworkConfiguration>
-  	<VirtualNetworkSite name="VNet"/>
-  	<AddressAssignments>
+      </Endpoints>
+    </WorkerRole>
+    <NetworkConfiguration>
+      <VirtualNetworkSite name="VNet"/>
+      <AddressAssignments>
     <InstanceAddress roleName="VMRolePersisted">
       <PublicIPs>
         <PublicIP name="public-ip-name" idleTimeoutInMinutes="timeout-in-minutes"/>
       </PublicIPs>
     </InstanceAddress>
-  	</AddressAssignments>
-	</NetworkConfiguration>
+      </AddressAssignments>
+    </NetworkConfiguration>
 
 ## API 示例
 
@@ -114,7 +114,7 @@ ms.author: sewhee
 
 #### 请求示例
 
-	POST https://management.core.chinacloudapi.cn/<subscription-id>/services/hostedservices/<cloudservice-name>/deployments/<deployment-name>?comp=UpdateLbSet 
+    POST https://management.core.chinacloudapi.cn/<subscription-id>/services/hostedservices/<cloudservice-name>/deployments/<deployment-name>?comp=UpdateLbSet 
     Content-Type: application/xml
 
     <LoadBalancedEndpointList xmlns="http://schemas.microsoft.com/windowsazure" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">

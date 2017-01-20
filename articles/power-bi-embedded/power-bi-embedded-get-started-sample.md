@@ -59,8 +59,8 @@ wacn.date: 01/13/2017
 
 应该会看到如下所示的响应：
 
-	Checking import state... Publishing
-	Checking import state... Succeeded
+    Checking import state... Publishing
+    Checking import state... Succeeded
 
 > [!NOTE] 如果 PBIX 文件包含任何直接查询连接，请选择选项 7 以更新连接字符串。
 
@@ -120,7 +120,7 @@ Web 应用示例是一个示例仪表板，用于呈现**工作区**中导入的
 ### 连接字符串
 连接字符串必须采用以下格式：
 
-	Data Source=tcp:MyServer.database.chinacloudapi.cn,1433;Initial Catalog=MyDatabase
+    Data Source=tcp:MyServer.database.chinacloudapi.cn,1433;Initial Catalog=MyDatabase
 
 使用一般的服务器和数据库属性将会失败。例如：Server=tcp:MyServer.database.chinacloudapi.cn,1433;Database=MyDatabase。
 
@@ -163,55 +163,55 @@ Report.cshtml：为 **PowerBIReportFor** 设置 **Model.AccessToken** 和 Lambda
 
 **DashboardController.cs**：创建用于传递**应用令牌** 的 PowerBIClient。JSON Web 令牌 (JWT) 是基于**签名密钥**生成的，用于获取**凭据**。**凭据**用于创建 **PowerBIClient** 实例。拥有 **PowerBIClient** 实例后，可以调用 GetReports() 和 GetReportsAsync()。
 
-	CreatePowerBIClient()
+    CreatePowerBIClient()
 
-	    private IPowerBIClient CreatePowerBIClient()
-	    {
-	        var credentials = new TokenCredentials(accessKey, "AppKey");
-	        var client = new PowerBIClient(credentials)
-	        {
-	            BaseUri = new Uri(apiUrl)
-	        };
+        private IPowerBIClient CreatePowerBIClient()
+        {
+            var credentials = new TokenCredentials(accessKey, "AppKey");
+            var client = new PowerBIClient(credentials)
+            {
+                BaseUri = new Uri(apiUrl)
+            };
 
-	        return client;
-	    }
+            return client;
+        }
 
-	ActionResult Reports()
+    ActionResult Reports()
 
-	    public ActionResult Reports()
-	    {
-	        using (var client = this.CreatePowerBIClient())
-	        {
-	            var reportsResponse = client.Reports.GetReports(this.workspaceCollection, this.workspaceId);
+        public ActionResult Reports()
+        {
+            using (var client = this.CreatePowerBIClient())
+            {
+                var reportsResponse = client.Reports.GetReports(this.workspaceCollection, this.workspaceId);
 
-	            var viewModel = new ReportsViewModel
-	            {
-	                Reports = reportsResponse.Value.ToList()
-	            };
+                var viewModel = new ReportsViewModel
+                {
+                    Reports = reportsResponse.Value.ToList()
+                };
 
-	            return PartialView(viewModel);
-	        }
-	    }
+                return PartialView(viewModel);
+            }
+        }
 
-	Task<ActionResult> Report(string reportId)
+    Task<ActionResult> Report(string reportId)
 
-	    public async Task<ActionResult> Report(string reportId)
-	    {
-	        using (var client = this.CreatePowerBIClient())
-	        {
-	            var reportsResponse = await client.Reports.GetReportsAsync(this.workspaceCollection, this.workspaceId);
-	            var report = reportsResponse.Value.FirstOrDefault(r => r.Id == reportId);
-	            var embedToken = PowerBIToken.CreateReportEmbedToken(this.workspaceCollection, this.workspaceId, report.Id);
+        public async Task<ActionResult> Report(string reportId)
+        {
+            using (var client = this.CreatePowerBIClient())
+            {
+                var reportsResponse = await client.Reports.GetReportsAsync(this.workspaceCollection, this.workspaceId);
+                var report = reportsResponse.Value.FirstOrDefault(r => r.Id == reportId);
+                var embedToken = PowerBIToken.CreateReportEmbedToken(this.workspaceCollection, this.workspaceId, report.Id);
 
-	            var viewModel = new ReportViewModel
-	            {
-	                Report = report,
-	                AccessToken = embedToken.Generate(this.accessKey)
-	            };
+                var viewModel = new ReportViewModel
+                {
+                    Report = report,
+                    AccessToken = embedToken.Generate(this.accessKey)
+                };
 
-	            return View(viewModel);
-	        }
-	    }
+                return View(viewModel);
+            }
+        }
 
 ### 将报表集成到应用中
 
@@ -223,9 +223,9 @@ Report.cshtml：为 **PowerBIReportFor** 设置 **Model.AccessToken** 和 Lambda
 
 可以使用 URL 语法筛选嵌入的报表。要进行筛选，可以使用指定的筛选器将带运算符 **eq** 的 **$filter** 查询字符串参数添加到 iFrame src url。以下为筛选查询语法：
 
-	https://app.powerbi.com/reportEmbed
-	?reportId=d2a0ea38-...-9673-ee9655d54a4a&
-	$filter={tableName/fieldName}%20eq%20'{fieldValue}'
+    https://app.powerbi.com/reportEmbed
+    ?reportId=d2a0ea38-...-9673-ee9655d54a4a&
+    $filter={tableName/fieldName}%20eq%20'{fieldValue}'
 
 > [!NOTE] {tableName/fieldName} 不能包含空格或特殊字符。{fieldValue} 接受单个分类值。
 

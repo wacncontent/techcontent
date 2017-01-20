@@ -52,9 +52,9 @@ HDInsight 使用各种 Hadoop 组件。有关已获得验证和支持的组件�
 - 在群集设置期间使用 HDInsight .NET SDK 或 Azure PowerShell 中的群集自定义参数。这样，这些配置更改将在群集的整个生存期内保留，并且不受 Azure 平台在维护时定期执行的群集节点重置映像影响。有关使用群集自定义参数的详细信息，请参阅[预配 HDInsight 群集](./hdinsight-provision-clusters-v1.md)。
 - 一些本机 Java 组件（如 Mahout 和 Cascading）可以在群集上作为 JAR 文件运行。可以通过 Hadoop 作业提交机制将这些 JAR 文件分发到 Azure Blob 存储，并提交到 HDInsight 群集。有关详细信息，请参阅[以编程方式提交 Hadoop 作业](./hdinsight-submit-hadoop-jobs-programmatically.md)。
 
-	>[!NOTE]如果你在将 JAR 文件部署到 HDInsight 群集或调用 HDInsight 群集上的 JAR 文件时遇到问题，请联系 [Microsoft 技术支持](https://www.azure.cn/support/contact/)。
+    >[!NOTE]如果你在将 JAR 文件部署到 HDInsight 群集或调用 HDInsight 群集上的 JAR 文件时遇到问题，请联系 [Microsoft 技术支持](https://www.azure.cn/support/contact/)。
 
-	> Cascading 不受 HDInsight 支持，因此不符合 Microsoft 技术支持的条件。有关支持的组件的列表，请参阅 [HDInsight 提供的群集版本有哪些新功能？](./hdinsight-component-versioning-v1.md)。
+    > Cascading 不受 HDInsight 支持，因此不符合 Microsoft 技术支持的条件。有关支持的组件的列表，请参阅 [HDInsight 提供的群集版本有哪些新功能？](./hdinsight-component-versioning-v1.md)。
 
 不支持使用远程桌面连接在群集上安装自定义软件。你应该避免在头节点的驱动器上存储任何文件，因为如果你需要重新创建群集，这些文件会丢失。建议你在 Azure Blob 存储中存储文件。Blob 存储是持久性的。
 
@@ -86,7 +86,7 @@ HDInsight 群集可以有两个用户帐户。HDInsight 群集用户帐户是在
 5. 在页面底部，单击“启用远程”。
 6. 在“配置远程桌面”向导中，输入远程桌面的用户名和密码。注意，此用户名必须不同于用来创建群集的用户名（默认情况下，指使用“快速创建”选项时的“admin”）。在“到期日期”框中输入到期日期。注意，到期日期必须是将来的日期，且必须与现在最多相隔 90 天。此日期的到期时间默认为指定日期的午夜。然后，单击复选图标。
 
-	![HDI.CreateRDPUser][image-hdi-create-rpd-user]
+    ![HDI.CreateRDPUser][image-hdi-create-rpd-user]
 
 > [!NOTE]也可以使用 HDInsight .NET SDK 在群集上启用远程桌面。按以下方式使用 HDInsight 客户端对象上的 **EnableRdp** 方法：**client.EnableRdp(clustername, location, "rdpuser", "rdppassword", DateTime.Now.AddDays(6))**。同样，若要在群集上禁用远程桌面，可以使用 **client.DisableRdp(clustername, location)**。有关这些方法的详细信息，请参阅 [HDInsight .NET SDK 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn469975.aspx)。这仅适用于在 Windows 上运行的 HDInsight 群集。
 
@@ -112,7 +112,7 @@ HDInsight 群集可以有两个用户帐户。HDInsight 群集用户帐户是在
 
 3. 将证书导入 Azure 经典管理门户。在门户中，单击页面左下角的“设置”，然后单击“管理证书”。在页面底部，单击“上载”，然后按照说明上载你在前一步骤中创建的 .cer 文件。
 
-	![HDI.ClusterCreate.UploadCert][image-hdiclustercreate-uploadcert]
+    ![HDI.ClusterCreate.UploadCert][image-hdiclustercreate-uploadcert]
 
 ##授予/撤消 HTTP 服务访问权限
 
@@ -156,17 +156,17 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 7. 单击**“是”**。
 8. 从桌面上双击“Hadoop 命令行”。
 
-	![HDI.HadoopCommandLine][image-hadoopcommandline]
+    ![HDI.HadoopCommandLine][image-hadoopcommandline]
 
-	有关 Hadoop 命令的详细信息，请参阅 [Hadoop 命令参考](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/CommandsManual.html)。
+    有关 Hadoop 命令的详细信息，请参阅 [Hadoop 命令参考](http://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/CommandsManual.html)。
 
 在上面的屏幕快照中，文件夹名称嵌入了 Hadoop 版本号。版本号可以根据群集上安装的 Hadoop 组件的版本而更改。可以使用 Hadoop 环境变量来引用这些文件夹。例如：
 
-	cd %hadoop_home%
-	cd %hive_home%
-	cd %pig_home%
-	cd %sqoop_home%
-	cd %hcatalog_home%
+    cd %hadoop_home%
+    cd %hive_home%
+    cd %pig_home%
+    cd %sqoop_home%
+    cd %hcatalog_home%
 
 ##后续步骤
 在本文中，你学习了如何使用 Azure 经典管理门户创建 HDInsight 群集以及如何打开 Hadoop 命令行工具。若要了解更多信息，请参阅下列文章：

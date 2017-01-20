@@ -48,9 +48,9 @@ wacn.date: 11/11/2016
   </tr>
   <tr>
     <td><a href="./articles/service-fabric/index.md/">Service Fabric</a></td>
-	<td><a href=""></a></td>
-	<td><a href=""></a></td>
-	<td><a href=""></a></td>
+    <td><a href=""></a></td>
+    <td><a href=""></a></td>
+    <td><a href=""></a></td>
   </tr>
 </table>
 
@@ -76,8 +76,8 @@ wacn.date: 11/11/2016
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
     <td><a href="./articles/sql-database/index.md/">SQL 数据库</a></td>
-	<td><a href="./articles/redis-cache/index.md/">Redis 缓存</a></td>
-	<td><a href="./articles/storage/index.md/">存储</a></td>
+    <td><a href="./articles/redis-cache/index.md/">Redis 缓存</a></td>
+    <td><a href="./articles/storage/index.md/">存储</a></td>
     <td><a href="./articles/mysql/index.md/">MySQL Database on Azure</a></td>
   </tr>
   <tr>
@@ -93,9 +93,9 @@ wacn.date: 11/11/2016
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
     <td><a href="./articles/hdinsight/index.md/">HDInsight</a></td>
-	<td><a href="./articles/stream-analytics/index.md/">流分析</a></td>
-	<td><a href="./articles/cognitive-services/index.md/">认知服务</a></td>
-	<td><a href="./articles/event-hubs/index.md/">事件中心</a></td>
+    <td><a href="./articles/stream-analytics/index.md/">流分析</a></td>
+    <td><a href="./articles/cognitive-services/index.md/">认知服务</a></td>
+    <td><a href="./articles/event-hubs/index.md/">事件中心</a></td>
   </tr>
 </table>
 
@@ -103,17 +103,17 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-	<td><a href="./articles/iot-suite/index.md/">Azure IoT 套件</a></td>
-	<td><a href="./articles/iot-hub/index.md/">Azure IoT 中心</a></td>
-	<td><a href="./articles/event-hubs/index.md/">事件中心</a></td>
-	<td><a href="./articles/stream-analytics/index.md/">流分析</a></td>
+    <td><a href="./articles/iot-suite/index.md/">Azure IoT 套件</a></td>
+    <td><a href="./articles/iot-hub/index.md/">Azure IoT 中心</a></td>
+    <td><a href="./articles/event-hubs/index.md/">事件中心</a></td>
+    <td><a href="./articles/stream-analytics/index.md/">流分析</a></td>
   </tr>
   <tr>
 
-	<td><a href="./articles/notification-hubs/index.md/">通知中心</a></td>
-	<td><a href=""></a></td>
-	<td><a href=""></a></td>
-	<td><a href=""></a></td>
+    <td><a href="./articles/notification-hubs/index.md/">通知中心</a></td>
+    <td><a href=""></a></td>
+    <td><a href=""></a></td>
+    <td><a href=""></a></td>
   </tr>
 </table>
 
@@ -121,16 +121,16 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-	<td><a href="./articles/virtual-network/index.md/">虚拟网络</a></td>
-	<td><a href="./articles/expressroute/index.md/">ExpressRoute</a></td>
-	<td><a href="./articles/traffic-manager/index.md/">流量管理器</a></td>
+    <td><a href="./articles/virtual-network/index.md/">虚拟网络</a></td>
+    <td><a href="./articles/expressroute/index.md/">ExpressRoute</a></td>
+    <td><a href="./articles/traffic-manager/index.md/">流量管理器</a></td>
     <td><a href="./articles/vpn-gateway/index.md/">VPN 网关</a></td>
   </tr>
   <tr>
     <td><a href="./articles/application-gateway/index.md/">应用程序网关</a></td>
-	<td><a href="./articles/load-balancer/index.md/">负载均衡器</a></td>
-	<td><a href=""></a></td>
-	<td><a href=""></a></td>
+    <td><a href="./articles/load-balancer/index.md/">负载均衡器</a></td>
+    <td><a href=""></a></td>
+    <td><a href=""></a></td>
   </tr>
 </table>
 
@@ -138,10 +138,10 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-	<td><a href="./articles/media-services/index.md/">媒体服务</a></td>
-	<td><a href="./articles/cdn/index.md/">CDN</a></td>
-	<td><a href=""></a></td>
-	<td><a href=""></a></td>
+    <td><a href="./articles/media-services/index.md/">媒体服务</a></td>
+    <td><a href="./articles/cdn/index.md/">CDN</a></td>
+    <td><a href=""></a></td>
+    <td><a href=""></a></td>
   </tr>
 </table>
 
@@ -149,10 +149,10 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-	<td><a href="./articles/service-bus/index.md/">服务总线</a></td>
-	<td><a href="./articles/backup/index.md/">备份</a></td>
-	<td><a href="./articles/site-recovery/index.md/">站点恢复</a></td>
-	<td><a href=""></a></td>
+    <td><a href="./articles/service-bus/index.md/">服务总线</a></td>
+    <td><a href="./articles/backup/index.md/">备份</a></td>
+    <td><a href="./articles/site-recovery/index.md/">站点恢复</a></td>
+    <td><a href=""></a></td>
   </tr>
 </table>
 
@@ -160,10 +160,10 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-	<td><a href="./articles/active-directory/index.md/">Active Directory</a></td>
-	<td><a href="./articles/multi-factor-authentication/index.md/">多重身份验证</a></td>
-	<td><a href=""></a></td>
-	<td><a href=""></a></td>
+    <td><a href="./articles/active-directory/index.md/">Active Directory</a></td>
+    <td><a href="./articles/multi-factor-authentication/index.md/">多重身份验证</a></td>
+    <td><a href=""></a></td>
+    <td><a href=""></a></td>
   </tr>
 </table>
 
@@ -171,10 +171,10 @@ wacn.date: 11/11/2016
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;">
   <tr>
-	<td><a href="./articles/scheduler/index.md/">计划程序</a></td>
-	<td><a href="./articles/automation/index.md/">自动化</a></td>
-	<td><a href="./articles/key-vault/index.md/">密钥保管库</a></td>
-	<td><a href=""></a></td>
+    <td><a href="./articles/scheduler/index.md/">计划程序</a></td>
+    <td><a href="./articles/automation/index.md/">自动化</a></td>
+    <td><a href="./articles/key-vault/index.md/">密钥保管库</a></td>
+    <td><a href=""></a></td>
   </tr>
 </table>
 

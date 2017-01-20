@@ -40,9 +40,9 @@ ms.author: larryfr
 
 2. 在页面顶部的链接中，选择“Hive 编辑器”。此时将显示一个窗体，可以在其中输入要在 HDInsight 群集上运行的 HiveQL 语句。
 
-	![hive 编辑器](./media/hdinsight-hadoop-use-hive-query-console/queryconsole.png)
+    ![hive 编辑器](./media/hdinsight-hadoop-use-hive-query-console/queryconsole.png)
 
-	将文本 `Select * from hivesampletable` 替换为以下 HiveQL 语句：
+    将文本 `Select * from hivesampletable` 替换为以下 HiveQL 语句：
 
         set hive.execution.engine=tez;
         DROP TABLE log4jLogs;

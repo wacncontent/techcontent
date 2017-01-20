@@ -24,7 +24,7 @@ ms.author: dkshir
 [下载独立的 Service Fabric 包](./service-fabric-cluster-creation-for-windows-server.md#downloadpackage)时，一些 ClusterConfig.JSON 文件示例将下载到你的工作计算机。名称中包含 *DevCluster* 的示例可帮助你在同一台计算机上创建包含所有三个节点（类似于逻辑节点）的群集。在这些节点中，必须将一个节点标记为主节点。此群集可用于开发或测试环境，不支持用作生产群集。名称中包含 *MultiMachine* 的示例可帮助你创建生产质量群集，其中的每个节点位于不同的计算机上。这些群集的主节点数基于[可靠性级别](#reliability)。
 
 1. *ClusterConfig.Unsecure.DevCluster.JSON* 和 *ClusterConfig.Unsecure.MultiMachine.JSON* 分别说明如何创建不安全的测试群集和生产群集。
-	
+    
 2. *ClusterConfig.Windows.DevCluster.JSON* 和 *ClusterConfig.Windows.MultiMachine.JSON* 说明如何创建使用 [Windows 安全性](./service-fabric-windows-cluster-windows-security.md)保护的测试群集和生产群集。
 
 3. *ClusterConfig.X509.DevCluster.JSON* 和 *ClusterConfig.X509.MultiMachine.JSON* 说明如何创建使用[基于 X509 证书的安全性](./service-fabric-windows-cluster-x509-security.md)保护的测试群集和生产群集。
@@ -82,8 +82,8 @@ ClusterConfig.JSON 中的 **properties** 节用于配置群集，如下所示。
 ### 可靠性 
 **reliabilityLevel** 节定义可在群集的主节点上运行的系统服务副本数。此项可提高这些服务以及此群集的可靠性。可以将此变量设置为 *Bronze*、*Silver*、*Gold* 或 *Platinum*，这样就可以分别运行这些服务的 3、5、7、9 个副本。请参阅以下示例。
 
-	"reliabilityLevel": "Bronze",
-	
+    "reliabilityLevel": "Bronze",
+    
 请注意，由于一个主节点运行系统服务的一个副本，因此至少需要 3 个主节点来实现 *Bronze* 可靠性级别，至少需要 5 个主节点来实现 *Silver* 可靠性级别，至少需要 7 个主节点来实现 *Gold* 可靠性级别，至少需要 9 个主节点来实现 *Platinum* 可靠性级别。
 
 ### 诊断
@@ -99,7 +99,7 @@ ClusterConfig.JSON 中的 **properties** 节用于配置群集，如下所示。
 
 **metadata** 用于描述群集诊断，可以根据具体的情况进行设置。这些变量用于收集 ETW 跟踪日志、故障转储和性能计数器。有关 ETW 跟踪日志的详细信息，请阅读 [Tracelog](https://msdn.microsoft.com/zh-cn/library/windows/hardware/ff552994.aspx) 和 [ETW](https://msdn.microsoft.com/zh-cn/library/ms751538.aspx) 跟踪。可将包含[故障转储](https://blogs.technet.microsoft.com/askperf/2008/01/08/understanding-crash-dump-files/)和[性能计数器](https://msdn.microsoft.com/zh-cn/library/windows/desktop/aa373083.aspx)的所有日志定向到计算机上的 **connectionString** 文件夹。还可以使用 *AzureStorage* 来存储诊断信息。请参阅下面的示例代码片段。
 
-	"diagnosticsStore": {
+    "diagnosticsStore": {
         "metadata":  "Please replace the diagnostics store with an actual file share accessible from all cluster machines.",
         "dataDeletionAgeInDays": "7",
         "storeType": "AzureStorage",
@@ -114,8 +114,8 @@ ClusterConfig.JSON 中的 **properties** 节用于配置群集，如下所示。
         "metadata": "This cluster is secured using X509 certificates.",
         "ClusterCredentialType": "X509",
         "ServerCredentialType": "X509",
-		. . .
-	}
+        . . .
+    }
 
 **metadata** 用于描述安全群集，可根据具体的情况进行设置。**ClusterCredentialType** 和 **ServerCredentialType** 确定群集与节点将要实现的安全类型。可以将这两项设置为 *X509* 来实现基于证书的安全性，或者设置为 *Windows* 来实现基于 Azure Active Directory 的安全性。**security** 节的余下设置基于安全类型。若要了解如何填充 **security** 节的余下设置，请阅读 [独立群集中基于证书的安全性](./service-fabric-windows-cluster-x509-security.md)或 [独立群集中的 Windows 安全性](./service-fabric-windows-cluster-windows-security.md)。
 
@@ -131,7 +131,7 @@ ClusterConfig.JSON 中的 **properties** 节用于配置群集，如下所示。
         "serviceConnectionEndpointPort": "19003",
         "httpGatewayEndpointPort": "19080",
         "applicationPorts": {
-			"startPort": "20575",
+            "startPort": "20575",
             "endPort": "20605"
         },
         "ephemeralPorts": {

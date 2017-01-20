@@ -37,40 +37,40 @@ Azure 门户中基于角色的访问控制 (RBAC) 和 Azure 资源管理 API 可
 ### 列出所有可用的角色
 若要列举可以进行分配的 RBAC 角色，并检查其授权访问的操作，请使用：
 
-	Get-AzureRmRoleDefinition
+    Get-AzureRmRoleDefinition
 
 ![RBAC PowerShell - Get-AzureRmRoleDefinition - 屏幕截图](./media/role-based-access-control-manage-access-powershell/1-get-azure-rm-role-definition1.png)
 
 ### 列出角色的操作
 若要列举特定角色的操作，请使用：
 
-	Get-AzureRmRoleDefinition <role name>
+    Get-AzureRmRoleDefinition <role name>
 
 ![RBAC PowerShell - Get-AzureRmRoleDefinition for a specific role - 屏幕截图](./media/role-based-access-control-manage-access-powershell/1-get-azure-rm-role-definition2.png)
 
 ## 查看谁具有访问权限
 若要列举 RBAC 访问权限分配，请使用：
 
-	Get-AzureRmRoleAssignment
+    Get-AzureRmRoleAssignment
 
 ###	列举特定范围内的角色分配
 可以查看指定订阅、资源组或资源的所有访问权限分配。例如，若要查看资源组的所有活动的分配，请使用：
 
-	Get-AzureRmRoleAssignment -ResourceGroupName <resource group name>
+    Get-AzureRmRoleAssignment -ResourceGroupName <resource group name>
 
 ![RBAC PowerShell - Get-AzureRmRoleAssignment for a resource group - 屏幕截图](./media/role-based-access-control-manage-access-powershell/4-get-azure-rm-role-assignment1.png)
 
 ### 列举分配到用户的角色
 若要列举分配到指定用户的所有角色，包括分配到其所属组的角色，请使用：
 
-	Get-AzureRmRoleAssignment -SignInName <User email> -ExpandPrincipalGroups
+    Get-AzureRmRoleAssignment -SignInName <User email> -ExpandPrincipalGroups
 
 ![RBAC PowerShell - Get-AzureRmRoleAssignment for a user - 屏幕截图](./media/role-based-access-control-manage-access-powershell/4-get-azure-rm-role-assignment2.png)
 
 ### 列举经典服务管理员和共同管理员角色分配
 若要列举经典订阅管理员和共同管理员的访问权限分配，请使用：
 
-	Get-AzureRmRoleAssignment -IncludeClassicAdministrators
+    Get-AzureRmRoleAssignment -IncludeClassicAdministrators
 
 ## 授予访问权限
 ### 搜索对象 ID
@@ -80,23 +80,23 @@ Azure 门户中基于角色的访问控制 (RBAC) 和 Azure 资源管理 API 可
 
 若要获取 Azure AD 组的对象 ID，请使用：
 
-	Get-AzureRmADGroup -SearchString <group name in quotes>
+    Get-AzureRmADGroup -SearchString <group name in quotes>
 
 若要获取 Azure AD 服务主体或应用程序的对象 ID，请使用：
 
-	Get-AzureRmADServicePrincipal -SearchString <service name in quotes>
+    Get-AzureRmADServicePrincipal -SearchString <service name in quotes>
 
 ### 将角色分配给订阅范围内的应用程序
 若要授权访问订阅范围内的应用程序，请使用：
 
-	New-AzureRmRoleAssignment -ObjectId <application id> -RoleDefinitionName <role name in quotes> -Scope <subscription id>
+    New-AzureRmRoleAssignment -ObjectId <application id> -RoleDefinitionName <role name in quotes> -Scope <subscription id>
 
 ![RBAC PowerShell - New-AzureRmRoleAssignment - 屏幕截图](./media/role-based-access-control-manage-access-powershell/2-new-azure-rm-role-assignment2.png)
 
 ### 将角色分配给资源组范围内的用户
 若要授权访问资源组范围内的用户，请使用：
 
-	New-AzureRmRoleAssignment -SignInName <email of user> -RoleDefinitionName <role name in quotes> -ResourceGroupName <resource group name>
+    New-AzureRmRoleAssignment -SignInName <email of user> -RoleDefinitionName <role name in quotes> -ResourceGroupName <resource group name>
 
 ![RBAC PowerShell - New-AzureRmRoleAssignment - 屏幕截图](./media/role-based-access-control-manage-access-powershell/2-new-azure-rm-role-assignment3.png)
 

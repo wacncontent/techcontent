@@ -56,77 +56,77 @@ ms.author: anithaa
 
 2.  以下命令返回对资源组 *RG1* 中名为 *VM1-NIC1* 的网络接口应用的所有路由：
 
-		Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
+        Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
 
-	>[!TIP] 如果不知道网络接口的名称，请输入以下命令检索资源组中所有网络接口的名称。*
+    >[!TIP] 如果不知道网络接口的名称，请输入以下命令检索资源组中所有网络接口的名称。*
 
-	    Get-AzureRmNetworkInterface -ResourceGroupName RG1 | Format-Table Name
+        Get-AzureRmNetworkInterface -ResourceGroupName RG1 | Format-Table Name
 
-	以下输出类似于应用到 NIC 所连接子网的每个路由的输出：
+    以下输出类似于应用到 NIC 所连接子网的每个路由的输出：
 
-		Name :
-		State : Active
-		AddressPrefix : {10.9.0.0/16}
-		NextHopType : VNetLocal
-		NextHopIpAddress : {}
+        Name :
+        State : Active
+        AddressPrefix : {10.9.0.0/16}
+        NextHopType : VNetLocal
+        NextHopIpAddress : {}
 
-		Name :
-		State : Active
-		AddressPrefix : {0.0.0.0/16}
-		NextHopType : Internet
-		NextHopIpAddress : {}
+        Name :
+        State : Active
+        AddressPrefix : {0.0.0.0/16}
+        NextHopType : Internet
+        NextHopIpAddress : {}
 
-	请注意输出中的以下信息：
-	- **Name**：用户定义的路由，除非显式指定，否则有效路由的名称可能为空。
-	- **State**：表示有效路由的状态。可能的值为“Active”或“Invalid”。
-	- **AddressPrefixes**：以 CIDR 表示法指定有效路由的地址前缀。
-	- **nextHopType**：表示给定路由的下一跃点。可能的值为 *VirtualAppliance*、*Internet*、*VNetLocal*、*VNetPeering* 或 *Null*。如果 UDR 中的 **nextHopType** 值为 *Null*，可能表示是路由无效。例如，如果 **nextHopType** 为 *VirtualAppliance*，但网络虚拟设备 VM 不处于已预配/运行中状态。如果 **nextHopType** 为 *VPNGateway*，但给定的 VNet 中没有任何网关处于已预配/运行中状态，则路由可能失效。
-	- **NextHopIpAddress**：指定有效路由下一跃点的 IP 地址。
+    请注意输出中的以下信息：
+    - **Name**：用户定义的路由，除非显式指定，否则有效路由的名称可能为空。
+    - **State**：表示有效路由的状态。可能的值为“Active”或“Invalid”。
+    - **AddressPrefixes**：以 CIDR 表示法指定有效路由的地址前缀。
+    - **nextHopType**：表示给定路由的下一跃点。可能的值为 *VirtualAppliance*、*Internet*、*VNetLocal*、*VNetPeering* 或 *Null*。如果 UDR 中的 **nextHopType** 值为 *Null*，可能表示是路由无效。例如，如果 **nextHopType** 为 *VirtualAppliance*，但网络虚拟设备 VM 不处于已预配/运行中状态。如果 **nextHopType** 为 *VPNGateway*，但给定的 VNet 中没有任何网关处于已预配/运行中状态，则路由可能失效。
+    - **NextHopIpAddress**：指定有效路由下一跃点的 IP 地址。
     
-	以下命令在一个方便查看的表中返回路由：
+    以下命令在一个方便查看的表中返回路由：
 
-		Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1 | Format-Table
+        Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1 | Format-Table
 
-	以下输出是上述方案收到的一部分输出：
+    以下输出是上述方案收到的一部分输出：
 
-		Name State AddressPrefix NextHopType NextHopIpAddress
-		---- ----- ------------- ----------- ----------------
-		Active {10.9.0.0/16} VnetLocal {}
-		Active {0.0.0.0/0} Internet {}
-	
+        Name State AddressPrefix NextHopType NextHopIpAddress
+        ---- ----- ------------- ----------- ----------------
+        Active {10.9.0.0/16} VnetLocal {}
+        Active {0.0.0.0/0} Internet {}
+    
 3. 上一步骤的输出没有列出*从 *ChinaNorth-VNet1*（前缀 10.9.0.0/16）* 到 *ChinaNorth-VNet3* VNet（前缀 10.10.0.0/16）的路由。如下图所示，包含 *ChinaNorth-VNet3* VNet 的 VNet 对等互连链接处于 *Disconnected* 状态。
-	
-	![](./media/virtual-network-routes-troubleshoot-portal/image4.png)  
+    
+    ![](./media/virtual-network-routes-troubleshoot-portal/image4.png)  
 
-	对等互连的双向链接已断开，正因如此，VM1 无法连接到 *ChinaNorth-VNet3* VNet 中的 VM3。为 *ChinaNorth-VNet1* 和 *ChinaNorth-VNet3* VNet 再次设置双向对等互连链接。正确建立 VNet 对等互连链接后，返回的输出如下所示：
+    对等互连的双向链接已断开，正因如此，VM1 无法连接到 *ChinaNorth-VNet3* VNet 中的 VM3。为 *ChinaNorth-VNet1* 和 *ChinaNorth-VNet3* VNet 再次设置双向对等互连链接。正确建立 VNet 对等互连链接后，返回的输出如下所示：
 
-		Name State AddressPrefix NextHopType NextHopIpAddress
-		---- ----- ------------- ----------- ----------------
-		Active {10.9.0.0/16} VnetLocal {}
-		Active {10.10.0.0/16} VNetPeering {}
-		Active {0.0.0.0/0} Internet {}
-		
-	确定问题后，可以添加、删除或更改路由和路由表。键入以下命令，查看用于执行这些操作的命令：
+        Name State AddressPrefix NextHopType NextHopIpAddress
+        ---- ----- ------------- ----------- ----------------
+        Active {10.9.0.0/16} VnetLocal {}
+        Active {10.10.0.0/16} VNetPeering {}
+        Active {0.0.0.0/0} Internet {}
+        
+    确定问题后，可以添加、删除或更改路由和路由表。键入以下命令，查看用于执行这些操作的命令：
 
-		Get-Help *-AzureRmRouteConfig
+        Get-Help *-AzureRmRouteConfig
 
 ## 注意事项
 
 查看返回的路由列表时，请注意以下事项：
 
 - 路由基于 UDR、BGP 与系统路由之间的最长前缀匹配 (LPM)。如果有多个路由的 LPM 匹配情况相同，则按以下顺序根据路由源来选择路由：
-	- 用户定义的路由
-	- BGP 路由
-	- 系统（默认）路由
+    - 用户定义的路由
+    - BGP 路由
+    - 系统（默认）路由
 
-	对于有效路由，只能查看基于所有可用路由匹配 LPM 的有效路由。如果显示了如何针对给定 NIC 实际评估路由，因此可以更方便地对可能影响 VM 连接的特定路由进行故障排除。
+    对于有效路由，只能查看基于所有可用路由匹配 LPM 的有效路由。如果显示了如何针对给定 NIC 实际评估路由，因此可以更方便地对可能影响 VM 连接的特定路由进行故障排除。
 
 - 如果使用 UDR 并且要将流量发送到网络虚拟设备 (NVA)（*VirtualAppliance* 为 **nextHopType**），请确保接收流量的 NVA 已启用 IP 转发，否则数据包将被丢弃。
 - 如果启用了强制隧道，所有出站 Internet 流量将路由到本地。根据本地处理此流量的方式，可能无法使用此设置通过 RDP/SSH 从 Internet 连接到 VM。符合以下条件时，可以启用强制隧道：
-	- 使用站点到站点 VPN 时，将用户定义的路由 (UDR) 的 nextHopType 设置为 VPN 网关
-	- 通过 BGP 播发默认路由时
+    - 使用站点到站点 VPN 时，将用户定义的路由 (UDR) 的 nextHopType 设置为 VPN 网关
+    - 通过 BGP 播发默认路由时
 - 要使 VNet 对等互连流量正常工作，对等互连的 VNet 的前缀范围中必须存在 **nextHopType** 为 *VNetPeering* 的系统路由。如果没有此类路由，并且 VNet 对等互连链接看起来正常：
-	- 如果是新建立的对等互连链接，请等待几秒钟并重试。有时需要花费较长的时间才能将路由传播到子网中的所有网络接口。
-	- 网络安全组 (NSG) 规则可能会影响流量流。有关详细信息，请参阅 [Troubleshoot Network Security Groups](./virtual-network-nsg-troubleshoot-powershell.md)（排查网络安全组问题）一文。
+    - 如果是新建立的对等互连链接，请等待几秒钟并重试。有时需要花费较长的时间才能将路由传播到子网中的所有网络接口。
+    - 网络安全组 (NSG) 规则可能会影响流量流。有关详细信息，请参阅 [Troubleshoot Network Security Groups](./virtual-network-nsg-troubleshoot-powershell.md)（排查网络安全组问题）一文。
 
 <!---HONumber=Mooncake_1107_2016-->

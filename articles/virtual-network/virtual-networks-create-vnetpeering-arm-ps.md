@@ -87,32 +87,32 @@ ms.author: narayanannamalai; annahar
 
     输出显示：
 
-		Name			: LinkToVNet2
-		Id				: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/vnet101/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/LinkToVNet2
-		Etag			: W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-		ResourceGroupName	: vnet101
-		VirtualNetworkName	: vnet1
-		ProvisioningState		: Succeeded
-		RemoteVirtualNetwork	: {
-		                                     "Id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/vnet101/providers/Microsoft.Network/virtualNetworks/vnet2"
-		                                }
-		AllowVirtualNetworkAccess	: True
-		AllowForwardedTraffic            : False
-		AllowGatewayTransit              : False
-		UseRemoteGateways                : False
-		RemoteGateways                   : null
-		RemoteVirtualNetworkAddressSpace : null
+        Name			: LinkToVNet2
+        Id				: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/vnet101/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/LinkToVNet2
+        Etag			: W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+        ResourceGroupName	: vnet101
+        VirtualNetworkName	: vnet1
+        ProvisioningState		: Succeeded
+        RemoteVirtualNetwork	: {
+                                             "Id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/vnet101/providers/Microsoft.Network/virtualNetworks/vnet2"
+                                        }
+        AllowVirtualNetworkAccess	: True
+        AllowForwardedTraffic            : False
+        AllowGatewayTransit              : False
+        UseRemoteGateways                : False
+        RemoteGateways                   : null
+        RemoteVirtualNetworkAddressSpace : null
 
-	每个 VNet 对等互连有几个可配置属性：
+    每个 VNet 对等互连有几个可配置属性：
 
-	|选项|说明|默认|
-	|:-----|:----------|:------|
-	|允许虚拟网络访问|是否将对等 VNet 的地址空间包括为 Virtual\_network 标记的一部分|是|
-	|允许转发的流量|允许接受或丢弃不是源自对等 VNet 的流量|否|
-	|允许网关传输|允许对等 VNet 使用你的 VNet 网关|否|
-	|使用远程网关|使用对等方的 VNet 网关。对等 VNet 必须已配置网关并且已选中“允许网关传输”。如果你已配置了网关，则无法使用此选项|否|
+    |选项|说明|默认|
+    |:-----|:----------|:------|
+    |允许虚拟网络访问|是否将对等 VNet 的地址空间包括为 Virtual\_network 标记的一部分|是|
+    |允许转发的流量|允许接受或丢弃不是源自对等 VNet 的流量|否|
+    |允许网关传输|允许对等 VNet 使用你的 VNet 网关|否|
+    |使用远程网关|使用对等方的 VNet 网关。对等 VNet 必须已配置网关并且已选中“允许网关传输”。如果你已配置了网关，则无法使用此选项|否|
 
-	VNet 对等互连中的每个链接都有上述属性集。例如，可针对 VNet1 到 VNet2 的 VNet 对等互连链接将“允许虚拟网络访问”设置为“Ture”，而针对另一方向的 VNet 对等互连链接设置为“False”。
+    VNet 对等互连中的每个链接都有上述属性集。例如，可针对 VNet1 到 VNet2 的 VNet 对等互连链接将“允许虚拟网络访问”设置为“Ture”，而针对另一方向的 VNet 对等互连链接设置为“False”。
 
         $LinktoVNet2 = Get-AzureRmVirtualNetworkPeering -VirtualNetworkName vnet1 -ResourceGroupName vnet101 -Name LinkToVNet2
         $LinktoVNet2.AllowForwardedTraffic = $true
@@ -136,7 +136,7 @@ ms.author: narayanannamalai; annahar
         RemoteGateways		: null
         RemoteVirtualNetworkAddressSpace : null
 
-	此方案中的对等互连建立好后，应该能够启动两个 Vnet 中的任何虚拟机之间的连接。默认情况下，“允许虚拟网络访问”为“True”，且 VNet 对等互连将设置正确的 ACL 以允许 Vnet 之间的通信。仍可应用网络安全组 (NSG) 规则来阻止特定子网或虚拟机之间的连接，从而实现两个虚拟网络之间访问权限的细粒度控制。有关创建 NSG 规则的详细信息，请参阅此[文章](./virtual-networks-create-nsg-arm-ps.md)。
+    此方案中的对等互连建立好后，应该能够启动两个 Vnet 中的任何虚拟机之间的连接。默认情况下，“允许虚拟网络访问”为“True”，且 VNet 对等互连将设置正确的 ACL 以允许 Vnet 之间的通信。仍可应用网络安全组 (NSG) 规则来阻止特定子网或虚拟机之间的连接，从而实现两个虚拟网络之间访问权限的细粒度控制。有关创建 NSG 规则的详细信息，请参阅此[文章](./virtual-networks-create-nsg-arm-ps.md)。
 
 [!INCLUDE [virtual-networks-create-vnet-scenario-crosssub-include](../../includes/virtual-networks-create-vnetpeering-scenario-crosssub-include.md)]
 

@@ -52,34 +52,34 @@ ms.author: robmcm
 
         New-AzureServiceProject helloworld
 
-	![New-AzureService helloworld 命令的结果][The result of the New-AzureService helloworld command]
+    ![New-AzureService helloworld 命令的结果][The result of the New-AzureService helloworld command]
 
-	**New-AzureServiceProject** cmdlet 将生成一个基本结构用于将 Node.js 应用程序发布到云服务。该结构包含向 Azure 发布应用程序所需的配置文件。该 cmdlet 还会将工作目录更改为服务的目录。
+    **New-AzureServiceProject** cmdlet 将生成一个基本结构用于将 Node.js 应用程序发布到云服务。该结构包含向 Azure 发布应用程序所需的配置文件。该 cmdlet 还会将工作目录更改为服务的目录。
 
-	该 cmdlet 将创建以下文件：
+    该 cmdlet 将创建以下文件：
 
-	-   **ServiceConfiguration.Cloud.cscfg**、**ServiceConfiguration.Local.cscfg** 和 **ServiceDefinition.csdef**：发布应用程序所需的特定于 Azure 的文件。有关详细信息，请参阅[创建 Azure 托管服务概述]。
+    -   **ServiceConfiguration.Cloud.cscfg**、**ServiceConfiguration.Local.cscfg** 和 **ServiceDefinition.csdef**：发布应用程序所需的特定于 Azure 的文件。有关详细信息，请参阅[创建 Azure 托管服务概述]。
 
-	-   **deploymentSettings.json**：存储供 Azure PowerShell 部署 cmdlet 使用的本地设置。
+    -   **deploymentSettings.json**：存储供 Azure PowerShell 部署 cmdlet 使用的本地设置。
 
 4.  输入以下命令添加新的 Web 角色：
 
         Add-AzureNodeWebRole
 
-	![Add-AzureNodeWebRole 命令的输出][The output of the Add-AzureNodeWebRole command]
+    ![Add-AzureNodeWebRole 命令的输出][The output of the Add-AzureNodeWebRole command]
 
-	**Add-azurenodewebrole** cmdlet 将创建一个基本 Node.js 应用程序。它还会修改 **.csfg** 和 **.csdef** 文件，以添加新角色的配置条目。
+    **Add-azurenodewebrole** cmdlet 将创建一个基本 Node.js 应用程序。它还会修改 **.csfg** 和 **.csdef** 文件，以添加新角色的配置条目。
 
-	> [!NOTE] 如果不指定角色名称，将使用默认名称。可以提供一个名称作为第一个 cmdlet 参数：`Add-AzureNodeWebRole MyRole`
+    > [!NOTE] 如果不指定角色名称，将使用默认名称。可以提供一个名称作为第一个 cmdlet 参数：`Add-AzureNodeWebRole MyRole`
 
 Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（默认为 **WebRole1**）的目录中。代码如下：
 
-	var http = require('http');
-	var port = process.env.port || 1337;
-	http.createServer(function (req, res) {
-	    res.writeHead(200, { 'Content-Type': 'text/plain' });
-	    res.end('Hello World\n');
-	}).listen(port);
+    var http = require('http');
+    var port = process.env.port || 1337;
+    http.createServer(function (req, res) {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end('Hello World\n');
+    }).listen(port);
 
 此代码基本上与 nodejs.org 网站上的“Hello World”示例相同，但它使用云环境分配的端口号。
 
@@ -96,22 +96,22 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
         Get-AzurePublishSettingsFile -Environment AzureChinaCloud
 
-	此操作将使用浏览器导航到发布设置下载页。可能会提示使用 Microsoft 帐户登录。如果出现提示，请使用与 Azure 订阅关联的帐户。
+    此操作将使用浏览器导航到发布设置下载页。可能会提示使用 Microsoft 帐户登录。如果出现提示，请使用与 Azure 订阅关联的帐户。
 
-	将已下载的配置文件保存到可轻松访问的文件位置。
+    将已下载的配置文件保存到可轻松访问的文件位置。
 
 2.  运行以下 cmdlet 以导入下载的发布配置文件：
 
         Import-AzurePublishSettingsFile -Environment AzureChinaCloud [path to file]
 
-	> [!NOTE] 导入发布设置之后，请考虑删除下载的 .publishSettings 文件，因为其他人可能利用其中信息访问你的帐户。
+    > [!NOTE] 导入发布设置之后，请考虑删除下载的 .publishSettings 文件，因为其他人可能利用其中信息访问你的帐户。
 
 ### 发布应用程序
 
 若要发布，请运行以下命令：
 
-  	$ServiceName = "NodeHelloWorld" + $(Get-Date -Format ('ddhhmm'))   
-	Publish-AzureServiceProject -ServiceName $ServiceName  -Location "China East" -Launch
+      $ServiceName = "NodeHelloWorld" + $(Get-Date -Format ('ddhhmm'))   
+    Publish-AzureServiceProject -ServiceName $ServiceName  -Location "China East" -Launch
 
 - **-ServiceName** 指定部署的名称。此名称必须唯一，否则发布过程将会失败。**Get-Date** 命令附加应使名称唯一的日期/时间字符串。
 
@@ -150,21 +150,21 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
         Stop-AzureService
 
-	停止服务可能需要花费几分钟时间。服务停止后，将收到消息表明已停止服务。
+    停止服务可能需要花费几分钟时间。服务停止后，将收到消息表明已停止服务。
 
-	![Stop-AzureService 命令的状态][The status of the Stop-AzureService command]
+    ![Stop-AzureService 命令的状态][The status of the Stop-AzureService command]
 
 2.  若要删除服务，请调用以下 cmdlet：
 
         Remove-AzureService
 
-	在出现提示时，输入 **Y** 以删除服务。
+    在出现提示时，输入 **Y** 以删除服务。
 
-	删除服务可能需要花费几分钟时间。删除服务后，将收到消息表明已删除服务。
+    删除服务可能需要花费几分钟时间。删除服务后，将收到消息表明已删除服务。
 
-	![Remove-AzureService 命令的状态][The status of the Remove-AzureService command]
+    ![Remove-AzureService 命令的状态][The status of the Remove-AzureService command]
 
-	> [!NOTE] 删除服务不会删除最初发布服务时创建的存储帐户，用户仍需为使用的存储付费。如果没有任何其他对象使用存储，请删除它。
+    > [!NOTE] 删除服务不会删除最初发布服务时创建的存储帐户，用户仍需为使用的存储付费。如果没有任何其他对象使用存储，请删除它。
 
 ## 后续步骤
 

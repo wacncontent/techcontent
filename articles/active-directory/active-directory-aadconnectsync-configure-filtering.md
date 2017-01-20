@@ -201,7 +201,7 @@ Azure AD Connect 只删除其曾经认为在范围中的对象。如果 Azure AD
 6. 将“联接”规则留空，然后单击“下一步”。
 7. 单击“添加转换”，为“FlowType”选择“Constant”，选择目标属性“cloudFiltered”，然后在源文本框中键入 **False**。单击“添加”保存规则。![入站 6 转换](./media/active-directory-aadconnectsync-configure-filtering/inbound6.png)这是一种特殊情况，在此将 cloudFiltered 显式设置为 False。
 
-	我们现在必须创建全方位同步规则。
+    我们现在必须创建全方位同步规则。
 
 8. 为规则指定一个描述性名称，如 *In from AD - User Catch-all filter*。选择正确的林，选择“用户”作为“CS 对象类型”，并选择“人员”作为“MV 对象类型”。对于“链接类型”，请选择“加入”，然后在“优先顺序”中，键入当前未由其他同步规则使用的值（例如 600）。选择了高于先前同步规则的优先顺序值（较低优先顺序），但同时也预留了一些空间，以便可以在稍后想要开始同步其他部门时添加其他筛选同步规则。单击“下一步”。![入站 7 说明](./media/active-directory-aadconnectsync-configure-filtering/inbound7.png)
 9. 让“范围筛选器”保留空白，然后单击“下一步”。空白筛选器表示规则应该应用到所有对象。

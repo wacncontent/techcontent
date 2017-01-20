@@ -45,9 +45,9 @@ ms.author: sewhee
 1. 如果你从未使用过 Azure PowerShell，请参阅 [How to Install and Configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（如何安装和配置 Azure PowerShell），并始终按照说明进行操作，以登录到 Azure 并选择你的订阅。
 2. 运行 **New-AzureRmResourceGroupDeployment** cmdlet 以使用模板创建资源组。
 
-		New-AzureRmResourceGroupDeployment -Name TestRG `
-		    -TemplateFile 'c:\lb\azuredeploy.json' `
-		    -TemplateParameterFile 'c:\lb\azuredeploy.parameters.json'
+        New-AzureRmResourceGroupDeployment -Name TestRG `
+            -TemplateFile 'c:\lb\azuredeploy.json' `
+            -TemplateParameterFile 'c:\lb\azuredeploy.parameters.json'
 
 ## 使用 Azure CLI 部署模板
 
@@ -56,16 +56,16 @@ ms.author: sewhee
 1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到资源管理器模式，如下所示。
 
-		azure config mode arm
+        azure config mode arm
 
-	下面是上述命令的预期输出：
+    下面是上述命令的预期输出：
 
-		info:    New mode is arm
+        info:    New mode is arm
 
 3. 从浏览器中，导航到 **https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-2-vms-loadbalancer-lbrules/azuredeploy.parameters.json**，复制 json 文件的内容并粘贴到计算机中的一个新文件。对于此方案，将下面的值复制到名为 **c:\\lb\\azuredeploy.parameters.json** 的文件。
 4. 运行 **azure group deployment create** cmdlet 以使用你在前面下载并修改的模板和参数文件部署新的负载均衡器。在输出后显示的列表说明了所用的参数。
 
-		azure group create -n TestRG -l chinaeast -f 'c:\lb\azuredeploy.json' -e 'c:\lb\azuredeploy.parameters.json'
+        azure group create -n TestRG -l chinaeast -f 'c:\lb\azuredeploy.json' -e 'c:\lb\azuredeploy.parameters.json'
 
 ## 后续步骤
 

@@ -22,56 +22,56 @@ wacn.date: 11/30/2016
 
 1. 首先我们来模拟一个死锁，创建两张名为 Employees 和 Suppliers 的表，并插入几条数据：
 
-		CREATE TABLE Employees (
-		    EmpId INT IDENTITY primary key,
-		    EmpName VARCHAR(16),
-		    Phone VARCHAR(16)
-		)
-		GO
-		
-		INSERT INTO Employees (EmpName, Phone)
-		VALUES ('Martha', '800-555-1212'), ('Jimmy', '619-555-8080')
-		GO
-		
-		CREATE TABLE Suppliers(
-		    SupplierId INT IDENTITY primary key,
-		    SupplierName VARCHAR(64),
-		    Fax VARCHAR(16)
-		)
-		GO
-		
-		INSERT INTO Suppliers (SupplierName, Fax)
-		VALUES ('Acme', '877-555-6060'), ('Rockwell', '800-257-1234')
-		GO
+        CREATE TABLE Employees (
+            EmpId INT IDENTITY primary key,
+            EmpName VARCHAR(16),
+            Phone VARCHAR(16)
+        )
+        GO
+        
+        INSERT INTO Employees (EmpName, Phone)
+        VALUES ('Martha', '800-555-1212'), ('Jimmy', '619-555-8080')
+        GO
+        
+        CREATE TABLE Suppliers(
+            SupplierId INT IDENTITY primary key,
+            SupplierName VARCHAR(64),
+            Fax VARCHAR(16)
+        )
+        GO
+        
+        INSERT INTO Suppliers (SupplierName, Fax)
+        VALUES ('Acme', '877-555-6060'), ('Rockwell', '800-257-1234')
+        GO
 
 2. 然后在 SSMS 中开启两个空的查询窗口，把 Session 1 下面的代码放到一个查询窗口，把 Session 2 下面的代码放到另外一个查询窗口，然后按照下图的顺序执行：
 
-	![](./media/aog-sql-database-troubleshot-dead-lock/v11-1.jpg)
+    ![](./media/aog-sql-database-troubleshot-dead-lock/v11-1.jpg)
 
 3. 通过步骤 1、2 我们会收到一个 Msg 1205 报错，显示其中一个事务完成，另外一个事务被选为 Deadlock Victim.
 
-	![](./media/aog-sql-database-troubleshot-dead-lock/v11-2.jpg)
+    ![](./media/aog-sql-database-troubleshot-dead-lock/v11-2.jpg)
 
 4. 我们对 Master 数据库新建一个查询。  
-	>[!NOTE]由于 sys.event_log 有大概十分钟左右的延迟，所以请在十分钟后在执行查询。
+    >[!NOTE]由于 sys.event_log 有大概十分钟左右的延迟，所以请在十分钟后在执行查询。
 
-	![](./media/aog-sql-database-troubleshot-dead-lock/v11-3.jpg)
+    ![](./media/aog-sql-database-troubleshot-dead-lock/v11-3.jpg)
 
-	运行如下查询将得到发生在这个数据库上面的所有死锁的信息：
+    运行如下查询将得到发生在这个数据库上面的所有死锁的信息：
 
-	```sql
-	select* from sys.event_log
-	where database_name='YourDatabaseDame' 
-	and event_subtype_desc='deadlock'
-	```
+    ```sql
+    select* from sys.event_log
+    where database_name='YourDatabaseDame' 
+    and event_subtype_desc='deadlock'
+    ```
 
-	![](./media/aog-sql-database-troubleshot-dead-lock/v11-4.jpg)
+    ![](./media/aog-sql-database-troubleshot-dead-lock/v11-4.jpg)
 
-	关于某一个死锁的具体信息，可以通过点击 additional_data 列下面的链接来查看。我们找到刚才发生的死锁，点击查看详情：
+    关于某一个死锁的具体信息，可以通过点击 additional_data 列下面的链接来查看。我们找到刚才发生的死锁，点击查看详情：
 
-	![](./media/aog-sql-database-troubleshot-dead-lock/v11-5.jpg)
+    ![](./media/aog-sql-database-troubleshot-dead-lock/v11-5.jpg)
 
-	从详细的 XML 文件中，我们可以看出导致死锁发生的语句。有了这些信息，我们就可以进一步分析死锁发生的原因，进而解决这个问题或避免此问题再次发生。
+    从详细的 XML 文件中，我们可以看出导致死锁发生的语句。有了这些信息，我们就可以进一步分析死锁发生的原因，进而解决这个问题或避免此问题再次发生。
 
 ## V12：
 
@@ -79,14 +79,14 @@ wacn.date: 11/30/2016
 
 >[!NOTE]V12 的死锁信息也会有一些延迟，所以刚发生的死锁可能需要等待 10 分钟左右才能看到。
 
-	WITH CTE AS (
-	       SELECT CAST(event_data AS XML)  AS [target_data_XML] 
-	   FROM sys.fn_xe_telemetry_blob_target_read_file('dl', null, null, null)
-	)
-	SELECT target_data_XML.value('(/event/@timestamp)[1]', 'DateTime2') AS Timestamp,
-	target_data_XML.query('/event/data[@name=''xml_report'']/value/deadlock') AS deadlock_xml,
-	target_data_XML.query('/event/data[@name=''database_name'']/value').value('(/value)[1]', 'nvarchar(100)') AS db_name
-	FROM CTE 
+    WITH CTE AS (
+           SELECT CAST(event_data AS XML)  AS [target_data_XML] 
+       FROM sys.fn_xe_telemetry_blob_target_read_file('dl', null, null, null)
+    )
+    SELECT target_data_XML.value('(/event/@timestamp)[1]', 'DateTime2') AS Timestamp,
+    target_data_XML.query('/event/data[@name=''xml_report'']/value/deadlock') AS deadlock_xml,
+    target_data_XML.query('/event/data[@name=''database_name'']/value').value('(/value)[1]', 'nvarchar(100)') AS db_name
+    FROM CTE 
 
 得到的结果如下：
 

@@ -113,7 +113,7 @@ import-module "C:\\Program Files\\WindowsPowerShell\\Modules\\Azure\\XXXX\\expre
 
     # To make sure the Azure PowerShell module is available after you install
     Get-Module –ListAvailable 
-	
+    
     # To login to Azure Resource Manager
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
@@ -173,8 +173,8 @@ cmdlet 需要使用你的订阅来管理你的服务。如果你没有 Azure 订
 
 - 要获得社区中的帮助信息，请尝试以下常见论坛：
 
-	- [MSDN 上的 Azure 论坛](https://social.msdn.microsoft.com/Forums/azure/zh-CN/home?forum=windowsazurezhchs)
-	- [CSDN](http://azure.csdn.net/)
+    - [MSDN 上的 Azure 论坛](https://social.msdn.microsoft.com/Forums/azure/zh-CN/home?forum=windowsazurezhchs)
+    - [CSDN](http://azure.csdn.net/)
 
 ##了解详细信息
 

@@ -28,12 +28,12 @@ ms.author: masnider
 -	GlobalMovementThrottleThreshold – 控制一段时间内群集中移动的总数（已定义为 GlobalMovementThrottleCountingInterval，以秒为单位的值）
 -	MovementPerPartitionThrottleThreshold – 控制一段时间内针对任何服务分区区的移动总数（MovementPerPartitionThrottleCountingInterval，以秒为单位的值）
 
-	<Section Name="PlacementAndLoadBalancing">
-	     <Parameter Name="GlobalMovementThrottleThreshold" Value="1000" />
-	     <Parameter Name="GlobalMovementThrottleCountingInterval" Value="600" />
-	     <Parameter Name="MovementPerPartitionThrottleThreshold" Value="50" />
-	     <Parameter Name="MovementPerPartitionThrottleCountingInterval" Value="600" />
-	</Section>
+    <Section Name="PlacementAndLoadBalancing">
+         <Parameter Name="GlobalMovementThrottleThreshold" Value="1000" />
+         <Parameter Name="GlobalMovementThrottleCountingInterval" Value="600" />
+         <Parameter Name="MovementPerPartitionThrottleThreshold" Value="50" />
+         <Parameter Name="MovementPerPartitionThrottleCountingInterval" Value="600" />
+    </Section>
 
 请注意，在大多数情况下，我们看到客户使用这些限制的原因是由于他们已经处于资源受限的环境（例如对个别节点的网络带宽受到限制，或节点上已经置入不符合并行副本构建要求的磁盘），这意味着此类型操作不成功或运行速度很慢。在这些情况下，客户已充分了解可能需要延长群集到达稳定状态所需花费的时间量，包括了解在为其设置限制时，它们最终以较低的整体可靠性来运行。
 

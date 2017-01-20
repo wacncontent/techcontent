@@ -85,15 +85,15 @@ ms.author: larryfr
 
 -	列系列：系列名称为“cf”。存储在此系列中的列包括：
 
-	- 	事件：开始或结束
+    - 	事件：开始或结束
 
-	- 	时间：事件发生的时间（以毫秒为单位）
+    - 	时间：事件发生的时间（以毫秒为单位）
 
-	-	持续时间：开始事件和结束事件之间的时长
+    -	持续时间：开始事件和结束事件之间的时长
 
 -	版本：“cf”系列设置为每行保留 5 个版本
 
-	> [!NOTE] 可以使用版本来记录以前为特定行键存储的值。默认情况下，HBase 只返回行的最新版本的值。在这种情况下，同一行将用于所有事件（开始、结束）。每个版本的行通过时间戳值来标识。这样即可通过历史视图来查看针对特定 ID 记录的事件。
+    > [!NOTE] 可以使用版本来记录以前为特定行键存储的值。默认情况下，HBase 只返回行的最新版本的值。在这种情况下，同一行将用于所有事件（开始、结束）。每个版本的行通过时间戳值来标识。这样即可通过历史视图来查看针对特定 ID 记录的事件。
 
 ## 下载项目
 
@@ -111,21 +111,21 @@ ms.author: larryfr
 
 2. 在“解决方案资源管理器”中，右键单击“SessionInfo”项目，然后选择“属性”。
 
-	![已选择属性的菜单屏幕快照](./media/hdinsight-storm-correlation-topology/selectproperties.png)
+    ![已选择属性的菜单屏幕快照](./media/hdinsight-storm-correlation-topology/selectproperties.png)
 
 3. 选择**“设置”**，然后设置以下值：
 
-	- 	HBaseClusterURL：到 HBase 群集的 URL。例如 https://myhbasecluster.azurehdinsight.cn
+    - 	HBaseClusterURL：到 HBase 群集的 URL。例如 https://myhbasecluster.azurehdinsight.cn
 
-	- 	HBaseClusterUserName：群集的管理员/HTTP 用户帐户
+    - 	HBaseClusterUserName：群集的管理员/HTTP 用户帐户
 
-	- 	HBaseClusterPassword：管理员/HTTP 用户帐户的密码
+    - 	HBaseClusterPassword：管理员/HTTP 用户帐户的密码
 
-	- 	HBaseTableName：用于此示例的表的名称
+    - 	HBaseTableName：用于此示例的表的名称
 
-	-	HBaseTableColumnFamily：列系列名称
+    -	HBaseTableColumnFamily：列系列名称
 
-	![设置对话框的图像](./media/hdinsight-storm-correlation-topology/settings.png)
+    ![设置对话框的图像](./media/hdinsight-storm-correlation-topology/settings.png)
 
 5. 运行解决方案。出现提示时，选择可在 HBase 群集上创建表的“c”键。
 
@@ -137,39 +137,39 @@ ms.author: larryfr
 
 3.	在属性窗口中，选择**“设置”**并提供以下信息。头 5 个应该是由 **SessionInfo** 项目使用的相同值：
 
-	- 	HBaseClusterURL：到 HBase 群集的 URL。例如 https://myhbasecluster.azurehdinsight.cn
+    - 	HBaseClusterURL：到 HBase 群集的 URL。例如 https://myhbasecluster.azurehdinsight.cn
 
-	- 	HBaseClusterUserName：群集的管理员/HTTP 用户帐户
+    - 	HBaseClusterUserName：群集的管理员/HTTP 用户帐户
 
-	- 	HBaseClusterPassword：管理员/HTTP 用户帐户的密码
+    - 	HBaseClusterPassword：管理员/HTTP 用户帐户的密码
 
-	- 	HBaseTableName：用于此示例的表的名称。该名称包含的表名称应该与 SessionInfo 项目中使用的相同
+    - 	HBaseTableName：用于此示例的表的名称。该名称包含的表名称应该与 SessionInfo 项目中使用的相同
 
-	- 	HBaseTableColumnFamily：列系列名称。该名称包含的列系列名称应该与 SessionInfo 项目中使用的相同
+    - 	HBaseTableColumnFamily：列系列名称。该名称包含的列系列名称应该与 SessionInfo 项目中使用的相同
 
-	> [!IMPORTANT] 请勿更改 HBaseTableColumnNames，因为其默认值是 **SessionInfo** 用来检索数据的名称。
+    > [!IMPORTANT] 请勿更改 HBaseTableColumnNames，因为其默认值是 **SessionInfo** 用来检索数据的名称。
 
 4.  保存属性，然后生成项目。
 
 5.	在“解决方案资源管理器”中，右键单击项目，然后选择“提交到 Storm on HDInsight”。如果出现提示，请输入 Azure 订阅的凭据。
 
-	![提交到 storm 菜单项的图像](./media/hdinsight-storm-correlation-topology/submittostorm.png)
+    ![提交到 storm 菜单项的图像](./media/hdinsight-storm-correlation-topology/submittostorm.png)
 
 6.	在“提交拓扑”对话框中，选择将运行此拓扑的 Storm 群集。
 
-	> [!NOTE] 第一次提交拓扑时，可能需要几秒钟来检索 HDInsight 群集名称。
+    > [!NOTE] 第一次提交拓扑时，可能需要几秒钟来检索 HDInsight 群集名称。
 
 7.	一旦上载拓扑并将其提交到该群集，“Storm 拓扑视图”将打开并显示正在运行的拓扑。选择 **CorrelationTopology**，然后使用页面右上角的刷新按钮刷新拓扑信息。
 
-	![拓扑视图的图像](./media/hdinsight-storm-correlation-topology/topologyview.png)
+    ![拓扑视图的图像](./media/hdinsight-storm-correlation-topology/topologyview.png)
 
-	当拓扑开始生成数据时，“已发出”列中的值将递增。
+    当拓扑开始生成数据时，“已发出”列中的值将递增。
 
-	> [!NOTE] 如果“Storm 拓扑视图”未自动打开，可按以下步骤将其打开：
-	><p>
-	><p> 1. 在“解决方案资源管理器”中，展开“Azure”，然后展开“HDInsight”。
-	><p>
-	><p> 2. 右键单击在其上运行拓扑的 Storm 群集，然后选择“查看 Storm 拓扑”
+    > [!NOTE] 如果“Storm 拓扑视图”未自动打开，可按以下步骤将其打开：
+    ><p>
+    ><p> 1. 在“解决方案资源管理器”中，展开“Azure”，然后展开“HDInsight”。
+    ><p>
+    ><p> 2. 右键单击在其上运行拓扑的 Storm 群集，然后选择“查看 Storm 拓扑”
 
 ## 查询数据
 
@@ -179,15 +179,15 @@ ms.author: larryfr
 
 2. 出现提示时，选择 **s** 即可搜索开始事件。系统会提示输入开始时间和结束时间，以便定义一个时间范围 - 只返回这两个时间之间的事件。
 
-	输入开始和结束时间时使用以下格式：HH:MM 以及“am”或“pm”。例如，11:20pm。
+    输入开始和结束时间时使用以下格式：HH:MM 以及“am”或“pm”。例如，11:20pm。
 
-	由于刚刚启动拓扑，可使用部署之前的某个时间作为开始时间，而使用现在的时间作为结束时间。这应该会捕获大多数在启动时生成的开始事件。当查询处于运行状态时，可看到如下所示的条目列表：
+    由于刚刚启动拓扑，可使用部署之前的某个时间作为开始时间，而使用现在的时间作为结束时间。这应该会捕获大多数在启动时生成的开始事件。当查询处于运行状态时，可看到如下所示的条目列表：
 
-		Session e6992b3e-79be-4991-afcf-5cb47dd1c81c started at 6/5/2015 6:10:15 PM. Timestamp = 1433527820737
+        Session e6992b3e-79be-4991-afcf-5cb47dd1c81c started at 6/5/2015 6:10:15 PM. Timestamp = 1433527820737
 
 搜索结束事件与搜索开始事件在原理上是相同的。不过，结束事件是在开始事件之后 1 到 5 分钟随机生成的。因此，可能需要尝试数个时间范围才能找到结束事件。结束事件还会包含会话持续时间 - 开始事件时间与结束事件时间之差。下面是结束事件数据的一个示例：
 
-	Session fc9fa8e6-6892-4073-93b3-a587040d892e lasted 2 minutes, and ended at 6/5/2015 6:12:15 PM
+    Session fc9fa8e6-6892-4073-93b3-a587040d892e lasted 2 minutes, and ended at 6/5/2015 6:12:15 PM
 
 > [!NOTE] 虽然输入的时间值为本地时间，但从查询返回的时间将是 UTC。
 

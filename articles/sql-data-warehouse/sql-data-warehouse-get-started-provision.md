@@ -47,10 +47,10 @@ ms.author: barbkess;lodipalm;sonyama
 
     ![创建数据库](./media/sql-data-warehouse-get-started-provision/create-database.png)  
 
-	- **服务器**：建议先选择服务器。
+    - **服务器**：建议先选择服务器。
 
-	- **数据库名称**：用于引用 SQL 数据仓库的名称。对服务器而言，它必须是唯一的。
-	
+    - **数据库名称**：用于引用 SQL 数据仓库的名称。对服务器而言，它必须是唯一的。
+    
     - **性能**：建议从 400 [DWU][DWU] 开始。可以将滑块向左或向右移动以调整数据仓库的性能，也可以在创建之后增加或减少。若要了解有关 DWU 的详细信息，请参阅[缩放](./sql-data-warehouse-manage-compute-overview.md)文档或者[定价页面][SQL Data Warehouse pricing]。
 
     - **订阅**：选择此 SQL 数据仓库将会计费的[订阅]。

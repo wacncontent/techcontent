@@ -89,14 +89,14 @@ Azure AD Connect 提供了简单的过程来为直通身份验证或密码哈希
 3.	导航到“用户配置\\管理模板\\Windows 组件\\Internet Explorer\\Internet 控制面板\\安全性”页面，并选择“区域分配列表的站点”。
 ![单一登录](./media/active-directory-aadconnect-sso/sso6.png)</br>
 4.	启用策略，并在对话框中输入以下值/数据。</br>
-    	
-		Value: https://autologon.microsoftazuread-sso.com
-    	Data: 1
-    	Value: https://aadg.chinacloudapi.cn.nsatc.net 
-    	Data: 1'
+        
+        Value: https://autologon.microsoftazuread-sso.com
+        Data: 1
+        Value: https://aadg.chinacloudapi.cn.nsatc.net 
+        Data: 1'
 5.	如下图所示：
 
-	![单一登录](./media/active-directory-aadconnect-sso/sso7.png)  
+    ![单一登录](./media/active-directory-aadconnect-sso/sso7.png)  
 
 6.	请单击两次“确定”。
 
@@ -119,10 +119,10 @@ Azure AD Connect 提供了简单的过程来为直通身份验证或密码哈希
 ## 事件日志条目
 如果启用了正确的审核功能，那么用户每次使用单一登录登录时，就会在域控制器的事件日志中记录一个条目。若要查找这些事件，可以查看与计算机帐户 AzureADSSOAcc$ 关联的安全性事件 4769 的事件日志。下面的筛选器查找与此计算机帐户关联的所有安全性事件：
 
-	<QueryList>
-	  <Query Id="0" Path="Security">
-	<Select Path="Security">*[EventData[Data[@Name='ServiceName'] and (Data='AZUREADSSOACC$')]]</Select>
-	  </Query>
-	</QueryList>
+    <QueryList>
+      <Query Id="0" Path="Security">
+    <Select Path="Security">*[EventData[Data[@Name='ServiceName'] and (Data='AZUREADSSOACC$')]]</Select>
+      </Query>
+    </QueryList>
 
 <!---HONumber=Mooncake_1226_2016-->

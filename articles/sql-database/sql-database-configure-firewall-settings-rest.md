@@ -34,22 +34,22 @@ Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数�
 1. 通过 REST API 管理防火墙规则必须进行身份验证。有关详细信息，请参阅[使用 Azure Resource Manager API 进行授权的开发人员指南](../azure-resource-manager/resource-manager-api-authentication.md)。
 2. 可使用 REST API 创建、更新或删除服务器级别规则
 
-	若要创建或更新服务器级别防火墙规则，请使用以下内容执行 PUT 方法：
+    若要创建或更新服务器级别防火墙规则，请使用以下内容执行 PUT 方法：
  
-		https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Sql/servers/{server-name}/firewallRules/{rule-name}?api-version={api-version}
-	
-	请求正文
+        https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Sql/servers/{server-name}/firewallRules/{rule-name}?api-version={api-version}
+    
+    请求正文
 
-		{
+        {
          "properties": { 
             "startIpAddress": "{start-ip-address}", 
             "endIpAddress": "{end-ip-address}
             }
         } 
  
-	若要删除现有服务器级别防火墙规则，请使用以下内容执行 DELETE 方法：
-	 
-		https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Sql/servers/{server-name}/firewallRules/{rule-name}?api-version={api-version}
+    若要删除现有服务器级别防火墙规则，请使用以下内容执行 DELETE 方法：
+     
+        https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Sql/servers/{server-name}/firewallRules/{rule-name}?api-version={api-version}
 
 ##<a name="manage-firewall-rules-using-the-service-management-rest-api"></a> 使用 REST API 管理防火墙规则
 

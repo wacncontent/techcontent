@@ -40,19 +40,19 @@ ms.author: tarcher
 
 为了进行演示，可将一些代码添加到项目中，这些代码将占用大量时间，从而演示某些明显的性能问题。例如，将以下代码添加到辅助角色项目：
 
-	public class Concatenator
-	{
-	    public static string Concatenate(int number)
-	    {
-	        int count;
-	        string s = "";
-	        for (count = 0; count < number; count++)
-	        {
-	            s += "\n" + count.ToString();
-	        }
-	        return s;
-	    }
-	}
+    public class Concatenator
+    {
+        public static string Concatenate(int number)
+        {
+            int count;
+            string s = "";
+            for (count = 0; count < number; count++)
+            {
+                s += "\n" + count.ToString();
+            }
+            return s;
+        }
+    }
 
 从辅助角色的 RoleEntryPoint 派生类中的 RunAsync 方法调用此代码。（忽略有关以同步方式运行方法的警告。）
 
@@ -84,9 +84,9 @@ ms.author: tarcher
 
  还可以通过附加到 WaIISHost.exe 来附加到 Web 角色。如果应用程序中有多个辅助角色进程，则需要使用 processID 来区分它们。可以通过访问 Process 对象以编程方式查询 processID。例如，如果将此代码添加到角色中 RoleEntryPoint 派生类的 Run 方法，则可在计算模拟器 UI 中查看日志以了解要连接到的进程。
 
-	var process = System.Diagnostics.Process.GetCurrentProcess();
-	var message = String.Format("Process ID: {0}", process.Id);
-	Trace.WriteLine(message, "Information");
+    var process = System.Diagnostics.Process.GetCurrentProcess();
+    var message = String.Format("Process ID: {0}", process.Id);
+    Trace.WriteLine(message, "Information");
 
 若要查看日志，请启动计算模拟器 UI。
 
@@ -124,16 +124,16 @@ ms.author: tarcher
 
 还可以比较代码更改之前和之后的性能。停止正在运行的进程，并编辑代码以将字符串串联操作替换为使用 StringBuilder：
 
-	public static string Concatenate(int number)
-	{
-	    int count;
-	    System.Text.StringBuilder builder = new System.Text.StringBuilder("");
-	    for (count = 0; count < number; count++)
-	    {
-	         builder.Append("\n" + count.ToString());
-	    }
-	    return builder.ToString();
-	}
+    public static string Concatenate(int number)
+    {
+        int count;
+        System.Text.StringBuilder builder = new System.Text.StringBuilder("");
+        for (count = 0; count < number; count++)
+        {
+             builder.Append("\n" + count.ToString());
+        }
+        return builder.ToString();
+    }
 
 执行其他性能运行，然后比较性能。在“性能资源管理器”中，如果运行位于同一会话中，则只需选择两个报告，打开快捷菜单，然后选择“比较性能报告”。如果要与其他性能会话中的运行进行比较，请打开“分析”菜单，然后选择“比较性能报告”。在显示的对话框中指定这两个文件。
 

@@ -42,11 +42,11 @@ ms.author: jdial
 
 [虚拟网络站点元素](https://msdn.microsoft.com/zh-cn/library/azure/jj157100)
 
-	<DnsServersRef>
-	  <DnsServerRef name="ID1" />
-	  <DnsServerRef name="ID2" />
-	  <DnsServerRef name="ID3" />
-	</DnsServersRef>
+    <DnsServersRef>
+      <DnsServerRef name="ID1" />
+      <DnsServerRef name="ID2" />
+      <DnsServerRef name="ID3" />
+    </DnsServersRef>
 
 >[!NOTE] 为了指定虚拟网络站点元素的此设置，它必须先前就在 DNS 元素中进行定义。虚拟网络站点元素中的 DnsServerRef *name* 必须引用 DNS 元素中针对 DnsServer *name* 指定的名称值。
 

@@ -78,7 +78,7 @@ wacn.date: 07/26/2016
 解决此类问题的方法：
 首先通过Powershell（5986端口）连接到服务器中：
 
-	Enter-Pssession -ComputerName [VM's VIP] -port [The Port of PowerShell] -Authentication Negotiate -Credential [Username] -UseSSL -SessionOption (New-PSSessionOption -SkipCACheck -SkipCNCheck)
+    Enter-Pssession -ComputerName [VM's VIP] -port [The Port of PowerShell] -Authentication Negotiate -Credential [Username] -UseSSL -SessionOption (New-PSSessionOption -SkipCACheck -SkipCNCheck)
 
 连接成功后，使用`tasklist /svc`查看TermService的PID：
  

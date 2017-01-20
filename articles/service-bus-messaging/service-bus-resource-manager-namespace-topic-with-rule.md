@@ -49,96 +49,96 @@ wacn.date: 12/26/2016
 ### serviceBusNamespaceName
 要创建的服务总线命名空间的名称。
 
-		"serviceBusNamespaceName": {
-		"type": "string"
-		}
+        "serviceBusNamespaceName": {
+        "type": "string"
+        }
 
 ### serviceBusTopicName
 在服务总线命名空间中创建的主题的名称。
 
-		"serviceBusTopicName": {
-		"type": "string"
-		}
+        "serviceBusTopicName": {
+        "type": "string"
+        }
 
 ### serviceBusSubscriptionName
 在服务总线命名空间中创建的订阅的名称。
 
-		"serviceBusSubscriptionName": {
-		"type": "string"
-		}
+        "serviceBusSubscriptionName": {
+        "type": "string"
+        }
 ### serviceBusRuleName
 在服务总线命名空间中创建的规则（筛选器）的名称。
 
-		"serviceBusRuleName": {
-		"type": "string",
-		}
+        "serviceBusRuleName": {
+        "type": "string",
+        }
 ### serviceBusApiVersion
 模板的服务总线 API 版本。
 
-		"serviceBusApiVersion": {
-		"type": "string"
-		}
+        "serviceBusApiVersion": {
+        "type": "string"
+        }
 
 ## 要部署的资源
 创建类型为 **Messaging** 的包含主题、订阅和规则的标准服务总线命名空间。
 
-		 "resources": [{
-		        "apiVersion": "[variables('sbVersion')]",
-		        "name": "[parameters('serviceBusNamespaceName')]",
-		        "type": "Microsoft.ServiceBus/Namespaces",
-		        "location": "[variables('location')]",
-		        "sku": {
-		            "name": "Standard",
-		            "tier": "Standard"
-		        },
-		        "resources": [{
-		            "apiVersion": "[variables('sbVersion')]",
-		            "name": "[parameters('serviceBusTopicName')]",
-		            "type": "Topics",
-		            "dependsOn": [
-		                "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
-		            ],
-		            "properties": {
-		                "path": "[parameters('serviceBusTopicName')]"
-		            },
-		            "resources": [{
-		                "apiVersion": "[variables('sbVersion')]",
-		                "name": "[parameters('serviceBusSubscriptionName')]",
-		                "type": "Subscriptions",
-		                "dependsOn": [
-		                    "[parameters('serviceBusTopicName')]"
-		                ],
-		                "properties": {},
-		                "resources": [{
-		                    "apiVersion": "[variables('sbVersion')]",
-		                    "name": "[parameters('serviceBusRuleName')]",
-		                    "type": "Rules",
-		                    "dependsOn": [
-		                        "[parameters('serviceBusSubscriptionName')]"
-		                    ],
-		                    "properties": {
-		                        "filter": {
-		                            "sqlExpression": "StoreName = 'Store1'"
-		                        },
-		                        "action": {
-		                            "sqlExpression": "set FilterTag = 'true'"
-		                        }
-		                    }
-		                }]
-		            }]
-		        }]
-		    }]
+         "resources": [{
+                "apiVersion": "[variables('sbVersion')]",
+                "name": "[parameters('serviceBusNamespaceName')]",
+                "type": "Microsoft.ServiceBus/Namespaces",
+                "location": "[variables('location')]",
+                "sku": {
+                    "name": "Standard",
+                    "tier": "Standard"
+                },
+                "resources": [{
+                    "apiVersion": "[variables('sbVersion')]",
+                    "name": "[parameters('serviceBusTopicName')]",
+                    "type": "Topics",
+                    "dependsOn": [
+                        "[concat('Microsoft.ServiceBus/namespaces/', parameters('serviceBusNamespaceName'))]"
+                    ],
+                    "properties": {
+                        "path": "[parameters('serviceBusTopicName')]"
+                    },
+                    "resources": [{
+                        "apiVersion": "[variables('sbVersion')]",
+                        "name": "[parameters('serviceBusSubscriptionName')]",
+                        "type": "Subscriptions",
+                        "dependsOn": [
+                            "[parameters('serviceBusTopicName')]"
+                        ],
+                        "properties": {},
+                        "resources": [{
+                            "apiVersion": "[variables('sbVersion')]",
+                            "name": "[parameters('serviceBusRuleName')]",
+                            "type": "Rules",
+                            "dependsOn": [
+                                "[parameters('serviceBusSubscriptionName')]"
+                            ],
+                            "properties": {
+                                "filter": {
+                                    "sqlExpression": "StoreName = 'Store1'"
+                                },
+                                "action": {
+                                    "sqlExpression": "set FilterTag = 'true'"
+                                }
+                            }
+                        }]
+                    }]
+                }]
+            }]
 
 ## 运行部署的命令
 [!INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
 
 ## PowerShell
-		New-AzureResourceGroupDeployment -Name <deployment-name> -ResourceGroupName <resource-group-name> -TemplateUri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-topic-subscription-rule/azuredeploy.json>
+        New-AzureResourceGroupDeployment -Name <deployment-name> -ResourceGroupName <resource-group-name> -TemplateUri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-topic-subscription-rule/azuredeploy.json>
 
 ## Azure CLI
-		azure config mode arm
+        azure config mode arm
 
-		azure group deployment create <my-resource-group> <my-deployment-name> --template-uri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-topic-subscription-rule/azuredeploy.json>
+        azure group deployment create <my-resource-group> <my-deployment-name> --template-uri <https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-servicebus-create-topic-subscription-rule/azuredeploy.json>
 
 ## 后续步骤
 现在，你已使用 Azure Resource Manager 创建并部署了资源，请通过查看以下文章了解如何管理这些资源：

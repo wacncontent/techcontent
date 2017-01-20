@@ -23,18 +23,18 @@ ms.author: jgao
 HDInsight 允许客户部署各种群集类型，用于不同的数据分析工作负荷。目前提供的群集类型包括用于查询和分析工作负荷的 Hadoop 群集、用于 NoSQL 工作负荷的 HBase 群集，以及用于实时事件处理工作负荷的 Storm 群集。在给定的群集类型中，不同的节点有不同的角色。例如：
 
 - HDInsight 的 Hadoop 群集部署到了两个角色：
-	- 头节点（2 个节点）
-	- 数据节点（至少 1 个节点）
+    - 头节点（2 个节点）
+    - 数据节点（至少 1 个节点）
 
 - HDInsight 的 HBase 群集部署到了三个角色：
-	- 头服务器（2 个节点）
-	- 区域服务器（至少 1 个节点）
-	- 主控/Zookeeper 节点（3 个节点）
+    - 头服务器（2 个节点）
+    - 区域服务器（至少 1 个节点）
+    - 主控/Zookeeper 节点（3 个节点）
 
 - HDInsight 的 Storm 群集部署到了三个角色：
-	- Nimbus 节点（2 个节点）
-	- Supervisor 服务器（至少 1 个节点）
-	- Zookeeper 节点（3 个节点）
+    - Nimbus 节点（2 个节点）
+    - Supervisor 服务器（至少 1 个节点）
+    - Zookeeper 节点（3 个节点）
 
 Hadoop 群集的标准实现通常具有单个头节点。HDInsight 通过添加辅助头节点/头服务器/Nimbus 节点来提高管理工作负荷所需的服务可用性和可靠性，从而消除了此单点故障。这些头节点/头服务器/Nimbus 节点设计为顺畅管理辅助节点故障，不过在头节点上运行的主服务的任何停机都会导致群集停止工作。
 
@@ -63,31 +63,31 @@ Hadoop 群集的标准实现通常具有单个头节点。HDInsight 通过添加
 通过使用 Azure PowerShell 创建和预配群集的过程记录在[使用 PowerShell 管理 HDInsight](./hdinsight-administer-use-powershell.md) 中。配置超大头节点需要将 `-HeadNodeVMSize ExtraLarge` 参数添加到此代码中使用的 `New-AzureHDInsightcluster` cmdlet。
 
     # Create a new HDInsight cluster in Azure PowerShell
-	# Configured with an ExtraLarge head-node VM
+    # Configured with an ExtraLarge head-node VM
     New-AzureHDInsightCluster `
-				-Name $clusterName ` 
-				-Location $location `
-				-HeadNodeVMSize ExtraLarge `
-				-DefaultStorageAccountName "$storageAccountName.blob.core.chinacloudapi.cn" `
-				-DefaultStorageAccountKey $storageAccountKey `
-				-DefaultStorageContainerName $containerName  `
-				-ClusterSizeInNodes $clusterNodes
+                -Name $clusterName ` 
+                -Location $location `
+                -HeadNodeVMSize ExtraLarge `
+                -DefaultStorageAccountName "$storageAccountName.blob.core.chinacloudapi.cn" `
+                -DefaultStorageAccountKey $storageAccountKey `
+                -DefaultStorageContainerName $containerName  `
+                -ClusterSizeInNodes $clusterNodes
 
 对于 SDK，情况也是如此。通过使用 SDK 创建和预配群集的过程记录在[使用 HDInsight .NET SDK](./hdinsight-provision-clusters-v1.md#sdk) 中。配置超大头节点需要将 `HeadNodeSize = NodeVMSize.ExtraLarge` 参数添加到此代码中使用的 `ClusterCreateParameters()` 方法。
 
     # Create a new HDInsight cluster with the HDInsight SDK
-	# Configured with an ExtraLarge head-node VM
+    # Configured with an ExtraLarge head-node VM
     ClusterCreateParameters clusterInfo = new ClusterCreateParameters()
     {
-		Name = clustername,
-		Location = location,
-		HeadNodeSize = NodeVMSize.ExtraLarge,
-		DefaultStorageAccountName = storageaccountname,
-		DefaultStorageAccountKey = storageaccountkey,
-		DefaultStorageContainer = containername,
-		UserName = username,
-		Password = password,
-		ClusterSizeInNodes = clustersize
+        Name = clustername,
+        Location = location,
+        HeadNodeSize = NodeVMSize.ExtraLarge,
+        DefaultStorageAccountName = storageaccountname,
+        DefaultStorageAccountKey = storageaccountkey,
+        DefaultStorageContainer = containername,
+        UserName = username,
+        Password = password,
+        ClusterSizeInNodes = clustersize
     };
 
 ## 后续步骤

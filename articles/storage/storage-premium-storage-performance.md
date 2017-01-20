@@ -140,7 +140,7 @@ PerfMon 计数器适用于处理器、内存以及服务器的每个逻辑磁盘
 IO 请求是应用程序将要执行的输入/输出操作单元。识别 IO 请求的性质（随机或有序、读取或写入、小型或大型）有助于确定应用程序的性能要求。了解 IO 请求的性质很重要，这有助于在设计应用程序基础结构时作出正确决策。
 
 IO 大小是较为重要的因素之一。IO 大小是由应用程序生成的输入/输出操作请求的大小。IO 大小对性能（尤其是应用程序能够实现的 IOPS 和带宽）有很大的影响。下面的公式说明了 IOPS、IO 大小和带宽/吞吐量之间的关系。  
-	![](./media/storage-premium-storage-performance/image1.png)
+    ![](./media/storage-premium-storage-performance/image1.png)
 
 某些应用程序允许更改其 IO 大小，而某些应用程序则不允许。例如，SQL Server 会自行确定最佳 IO 大小，不允许用户对其进行更改。另一方面，Oracle 提供了一个名为 [DB\_BLOCK\_SIZE](https://docs.oracle.com/cd/B19306_01/server.102/b14211/iodesign.htm#i28815) 的参数，你可以使用该参数配置数据库的 I/O 请求大小。
 
@@ -321,13 +321,13 @@ Azure 将高级存储平台设计为可以进行大规模并行处理。因此�
 
 *最佳队列深度*  
 队列深度值过高也有其缺点。如果队列深度值过高，则应用程序会尝试实现非常高的 IOPS。除非应用程序的永久性磁盘具有足够高的预配 IOPS，否则会对应用程序延迟造成负面影响。以下公式显示了 IOPS、延迟和队列深度之间的关系。  
-	![](./media/storage-premium-storage-performance/image6.png)
+    ![](./media/storage-premium-storage-performance/image6.png)
 
 不应随意地将队列深度配置为某个很高的值，而应将其配置为最佳值，该值可以确保应用程序实现足够高的 IOPS，但又不会影响延迟。例如，如果应用程序延迟需要设置为 1 毫秒，则要实现 5,000 IOPS，所需队列深度为：QD = 5000 x 0.001 = 5。
 
 *条带化卷的队列深度*  
 条带化卷应保持足够高的队列深度，使得每个磁盘都有各自的高峰队列深度。例如，以某个应用程序为考虑对象，该应用程序所推送的队列深度为 2，条带中有 4 个磁盘。两个 IO 请求会发送到两个磁盘中，剩下两个磁盘将处于空闲状态。因此，请将队列深度配置为让所有磁盘都能够处于繁忙状态。下面的公式说明了如何确定条带化卷的队列深度。  
-	![](./media/storage-premium-storage-performance/image7.png)
+    ![](./media/storage-premium-storage-performance/image7.png)
 
 ## 限制  
 Azure 高级存储将根据所选 VM 大小和磁盘大小，预配指定数目的 IOPS 和吞吐量。一旦应用程序尝试将 IOPS 或吞吐量提升到这些限制（VM 或磁盘能够处理的量）以上，高级存储就会对其进行限制。这会以应用程序性能下降的方式体现出来。具体表现为延迟增高、吞吐量下降或 IOPS 降低。如果高级存储不对此进行限制，则应用程序可能因超过其资源能力而彻底崩溃。因此，为了避免因限制而造成的性能问题，请始终为应用程序预配足够的资源。请考虑一下我们在上面的 VM 大小和磁盘大小部分讨论过的内容。若要了解承载应用程序所需的资源，最好进行基准测试。
@@ -355,7 +355,7 @@ Iometer 使用一个测试文件，该文件存储在将要运行基准测试的
 规范、请求 IO 大小、读/写百分比、随机/顺序百分比都在 Iometer 中使用“访问规范”选项卡进行配置。为下述每个方案创建一个访问规范。创建访问规范，并使用合适的名称（例如 RandomWrites_8K、RandomReads_8K）进行“保存”。在运行测试方案时，请选择相应的规范。
 
 最大写入 IOPS 方案的访问规范示例如下所示：  
-	![](./media/storage-premium-storage-performance/image8.png)
+    ![](./media/storage-premium-storage-performance/image8.png)
 
 *最大 IOPS 测试规范*  
 若要演示最大 IOPS，请使用较小的请求大小。使用 8k 请求大小，创建随机读写的规范。
@@ -378,22 +378,22 @@ Iometer 使用一个测试文件，该文件存储在将要运行基准测试的
 
 1.  使用显示在下面的值创建两个访问规范：
 
-	| 名称 | 请求大小 | 随机百分比 | 读取百分比 |
-	|-------------------|--------------|----------|--------|
-	| RandomWrites_1MB | 1MB | 100 | 0 |
-	| RandomReads_1MB | 1MB | 100 | 100 |
+    | 名称 | 请求大小 | 随机百分比 | 读取百分比 |
+    |-------------------|--------------|----------|--------|
+    | RandomWrites_1MB | 1MB | 100 | 0 |
+    | RandomReads_1MB | 1MB | 100 | 100 |
 
 2.  运行 Iometer 测试，以便使用以下参数初始化缓存磁盘。针对目标卷使用三个工作线程，队列深度为 128。在"测试设置"选项卡上将测试的“运行时间”持续时间设置为 2 小时。
 
-	| 方案 | 目标卷 | 名称 | 持续时间 |
-	|-----------------------|---------------|-------------------|----------|
-	| 初始化缓存磁盘 | CacheReads | RandomWrites_1MB | 2 小时 |
+    | 方案 | 目标卷 | 名称 | 持续时间 |
+    |-----------------------|---------------|-------------------|----------|
+    | 初始化缓存磁盘 | CacheReads | RandomWrites_1MB | 2 小时 |
 
 3.  运行 Iometer 测试，以便使用以下参数预热缓存磁盘。针对目标卷使用三个工作线程，队列深度为 128。在"测试设置"选项卡上将测试的“运行时间”持续时间设置为 2 小时。
 
-	| 方案 | 目标卷 | 名称 | 持续时间 |
-	|--------------------|---------------|------------------|----------|
-	| 预热缓存磁盘 | CacheReads | RandomReads_1MB | 2 小时 |
+    | 方案 | 目标卷 | 名称 | 持续时间 |
+    |--------------------|---------------|------------------|----------|
+    | 预热缓存磁盘 | CacheReads | RandomReads_1MB | 2 小时 |
 
 预热缓存磁盘后，继续执行下面列出的测试方案。若要运行 Iometer 测试，请为**每个**目标卷使用至少三个工作线程。对于每个工作线程，请选择目标卷并设置队列深度，然后选择一个保存的测试规范（如下表所示），以便运行相应的测试方案。该表还显示了运行这些测试时 IOPS 和吞吐量的预期结果。所有方案都使用 8KB 的较小 IO 大小，而队列深度则较高，为 128。
 
@@ -423,32 +423,32 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
 
 针对 Ubuntu 运行以下命令：
 
-		apt-get install fio
+        apt-get install fio
 
 我们将在磁盘上使用 4 个工作线程来执行写入操作，4 个工作线程来执行读取操作。写入工作线程将推动“nocache”卷上的流量，该卷有 10 个磁盘的缓存设置为“无”。读取工作线程将推动“readcache”卷上的流量，该卷有 1 个磁盘的缓存设置为“ReadOnly”。
 
 *最大写入 IOPS*  
 使用以下规范创建作业文件，以便获得最大写入 IOPS。将其命名为“fiowrite.ini”。
 
-	[global]
-	size=30g
-	direct=1
-	iodepth=256
-	ioengine=libaio
-	bs=8k
-	
-	[writer1]
-	rw=randwrite
-	directory=/mnt/nocache
-	[writer2]
-	rw=randwrite
-	directory=/mnt/nocache
-	[writer3]
-	rw=randwrite
-	directory=/mnt/nocache
-	[writer4]
-	rw=randwrite
-	directory=/mnt/nocache
+    [global]
+    size=30g
+    direct=1
+    iodepth=256
+    ioengine=libaio
+    bs=8k
+    
+    [writer1]
+    rw=randwrite
+    directory=/mnt/nocache
+    [writer2]
+    rw=randwrite
+    directory=/mnt/nocache
+    [writer3]
+    rw=randwrite
+    directory=/mnt/nocache
+    [writer4]
+    rw=randwrite
+    directory=/mnt/nocache
 
 请注意以下重要事项，这些事项必须符合前面部分讨论的设计准则。这些规范是实现最大 IOPS 所必需的。
 
@@ -458,33 +458,33 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
 
 运行以下命令，开始进行 30 秒的 FIO 测试：
 
-	sudo fio --runtime 30 fiowrite.ini
+    sudo fio --runtime 30 fiowrite.ini
 
 进行测试时，可看到 VM 和高级磁盘传送的写入 IOPS 数。如以下示例所示，DS14 VM 传送的写入 IOPS 达到了最大限制：50,000 IOPS。  
-	![](./media/storage-premium-storage-performance/image11.png)
+    ![](./media/storage-premium-storage-performance/image11.png)
 
 *最大读取 IOPS*  
 使用以下规范创建作业文件，以便获得最大读取 IOPS。将其命名为“fioread.ini”。
 
-	[global]
-	size=30g
-	direct=1
-	iodepth=256
-	ioengine=libaio
-	bs=8k
-	
-	[reader1]
-	rw=randread
-	directory=/mnt/readcache
-	[reader2]
-	rw=randread
-	directory=/mnt/readcache
-	[reader3]
-	rw=randread
-	directory=/mnt/readcache
-	[reader4]
-	rw=randread
-	directory=/mnt/readcache
+    [global]
+    size=30g
+    direct=1
+    iodepth=256
+    ioengine=libaio
+    bs=8k
+    
+    [reader1]
+    rw=randread
+    directory=/mnt/readcache
+    [reader2]
+    rw=randread
+    directory=/mnt/readcache
+    [reader3]
+    rw=randread
+    directory=/mnt/readcache
+    [reader4]
+    rw=randread
+    directory=/mnt/readcache
 请注意以下重要事项，这些事项必须符合前面部分讨论的设计准则。这些规范是实现最大 IOPS 所必需的。
 
 * 较高的队列深度：256。
@@ -493,49 +493,49 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
 
 运行以下命令，开始进行 30 秒的 FIO 测试：
 
-	sudo fio --runtime 30 fioread.ini
+    sudo fio --runtime 30 fioread.ini
 
 进行测试时，可看到 VM 和高级磁盘传送的读取 IOPS 数。如以下示例所示，DS14 VM 传送了 64,000 个以上的读取 IOPS。这是磁盘和缓存性能相结合。  
-	![](./media/storage-premium-storage-performance/image12.png)
+    ![](./media/storage-premium-storage-performance/image12.png)
 
 *最大读取和写入 IOPS*
 使用以下规范创建作业文件，以便获得最大组合型读取和写入 IOPS。将其命名为“fioreadwrite.ini”。
-	[global]
-	size=30g
-	direct=1
-	iodepth=128
-	ioengine=libaio
-	bs=4k
+    [global]
+    size=30g
+    direct=1
+    iodepth=128
+    ioengine=libaio
+    bs=4k
 
-	[reader1]
-	rw=randread
-	directory=/mnt/readcache
-	[reader2]
-	rw=randread
-	directory=/mnt/readcache
-	[reader3]
-	rw=randread
-	directory=/mnt/readcache
-	[reader4]
-	rw=randread
-	directory=/mnt/readcache
+    [reader1]
+    rw=randread
+    directory=/mnt/readcache
+    [reader2]
+    rw=randread
+    directory=/mnt/readcache
+    [reader3]
+    rw=randread
+    directory=/mnt/readcache
+    [reader4]
+    rw=randread
+    directory=/mnt/readcache
 
-	[writer1]
-	rw=randwrite
-	directory=/mnt/nocache
-	rate_iops=12500
-	[writer2]
-	rw=randwrite
-	directory=/mnt/nocache
-	rate_iops=12500
-	[writer3]
-	rw=randwrite
-	directory=/mnt/nocache
-	rate_iops=12500
-	[writer4]
-	rw=randwrite
-	directory=/mnt/nocache
-	rate_iops=12500
+    [writer1]
+    rw=randwrite
+    directory=/mnt/nocache
+    rate_iops=12500
+    [writer2]
+    rw=randwrite
+    directory=/mnt/nocache
+    rate_iops=12500
+    [writer3]
+    rw=randwrite
+    directory=/mnt/nocache
+    rate_iops=12500
+    [writer4]
+    rw=randwrite
+    directory=/mnt/nocache
+    rate_iops=12500
 
 请注意以下重要事项，这些事项必须符合前面部分讨论的设计准则。这些规范是实现最大 IOPS 所必需的。
 
@@ -545,10 +545,10 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
 
 运行以下命令，开始进行 30 秒的 FIO 测试：
 
-	sudo fio --runtime 30 fioreadwrite.ini
+    sudo fio --runtime 30 fioreadwrite.ini
 
 进行测试时，可看到 VM 和高级磁盘传送的读取和写入 IOPS 数之和。如以下示例所示，DS14 VM 传送了 100,000 个以上的读写组合 IOPS。这是磁盘和缓存性能相结合。  
-	![](./media/storage-premium-storage-performance/image13.png)
+    ![](./media/storage-premium-storage-performance/image13.png)
 
 *最大组合吞吐量*  
 若要获得最大组合型读取和写入吞吐量，请使用较大的块大小和大的队列深度，并通过多个线程执行读取和写入操作。可以使用 64KB 的块大小，128 的队列深度。

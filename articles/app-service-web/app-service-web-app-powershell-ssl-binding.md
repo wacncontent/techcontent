@@ -48,7 +48,7 @@ ms.author: ahmedelnably
 
 我们可以使用以下命令获取已上载到特定资源组的证书列表
 
-	Get-AzureRmWebAppCertificate -ResourceGroupName myresourcegroup
+    Get-AzureRmWebAppCertificate -ResourceGroupName myresourcegroup
 
 请注意，证书位于特定位置和资源组的本地，如果配置的 Web 应用与所需的证书位于不同的位置和资源组，用户需要重新上载证书
 
@@ -66,7 +66,7 @@ ms.author: ahmedelnably
 
 请注意，如果删除的 SSL 绑定是在该位置使用该证书的最后一个绑定，则会按默认删除该证书；如果用户想要保留证书，可以使用 DeleteCertificate 选项来保留证书
 
-	Remove-AzureRmWebAppSSLBinding -ResourceGroupName myresourcegroup -WebAppName mytestapp -Name www.contoso.com -DeleteCertificate $false
+    Remove-AzureRmWebAppSSLBinding -ResourceGroupName myresourcegroup -WebAppName mytestapp -Name www.contoso.com -DeleteCertificate $false
 
 ### 参考 ###
 - [适用于 Azure Web 应用的基于 Azure Resource Manager 的 PowerShell 命令](./app-service-web-app-azure-resource-manager-powershell.md)

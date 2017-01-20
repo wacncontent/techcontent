@@ -61,7 +61,7 @@ ms.author: adrianha
 
          public static MobileServiceClient MobileService = new MobileServiceClient("https://your-service.azurewebsites.fail");
 
-	还可以通过在设备上禁用 wifi 和手机网络或使用飞行模式来演示脱机行为。
+    还可以通过在设备上禁用 wifi 和手机网络或使用飞行模式来演示脱机行为。
 
 2. 按 **F5** 生成并运行应用。请注意，在应用启动时，同步刷新将失败。
 

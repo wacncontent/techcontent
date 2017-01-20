@@ -60,15 +60,15 @@ iframe 使嵌入过程变得更容易，但是如果没有 JavaScript API，报�
 #### 基本筛选器
 基本筛选器置于列或层次结构级别，包含要包括或排除的值的列表。
 
-	const basicFilter: pbi.models.IBasicFilter = {
-	  $schema: "http://powerbi.com/product/schema#basic",
-	  target: {
-	    table: "Store",
-	    column: "Count"
-	  },
-	  operator: "In",
-	  values: [1,2,3,4]
-	}
+    const basicFilter: pbi.models.IBasicFilter = {
+      $schema: "http://powerbi.com/product/schema#basic",
+      target: {
+        table: "Store",
+        column: "Count"
+      },
+      operator: "In",
+      values: [1,2,3,4]
+    }
 
 #### 高级筛选器
 高级筛选器使用逻辑运算符 AND 或 OR，接受一个或两个条件，每个条件都有其自己的运算符和值。支持的条件有：
@@ -87,24 +87,24 @@ iframe 使嵌入过程变得更容易，但是如果没有 JavaScript API，报�
 - IsBlank
 - IsNotBlank
 
-		const advancedFilter: pbi.models.IAdvancedFilter = {
-		  $schema: "http://powerbi.com/product/schema#advanced",
-		  target: {
-		    table: "Store",
-		    column: "Name"
-		  },
-		  logicalOperator: "Or",
-		  conditions: [
-		    {
-		      operator: "Contains",
-		      value: "Wash"
-		    },
-		    {
-		      operator: "Contains",
-		      value: "Park"
-		    }
-		  ]
-		}
+        const advancedFilter: pbi.models.IAdvancedFilter = {
+          $schema: "http://powerbi.com/product/schema#advanced",
+          target: {
+            table: "Store",
+            column: "Name"
+          },
+          logicalOperator: "Or",
+          conditions: [
+            {
+              operator: "Contains",
+              value: "Wash"
+            },
+            {
+              operator: "Contains",
+              value: "Park"
+            }
+          ]
+        }
 
 [了解有关筛选的详细信息](https://github.com/Microsoft/PowerBI-JavaScript/wiki/Filters)
 

@@ -40,12 +40,12 @@ ms.author: juliako
 3. 单击该页上或者门户底部的“上传”按钮。
 4. 在“上传内容”对话框中，浏览到所需的资产文件。单击该文件，然后单击“打开”或按 **Enter**。
 
-	![UploadContentDialog][uploadcontent]
+    ![UploadContentDialog][uploadcontent]
 
 5. 在“上传内容”对话框中，单击复选按钮以接受文件和内容名称。
 6. 上传随即开始。可以从门户底部跟踪进度。
 
-	![JobStatus][status]
+    ![JobStatus][status]
 
 上传完成后，内容列表中会列出新的资产。根据约定，名称的末尾将附加“**-Source**”，以便将新内容作为编码任务的源内容进行跟踪。
 
@@ -65,8 +65,8 @@ ms.author: juliako
 
 1. 选择要编制索引的文件。
 
-	如果此文件类型支持索引，则“内容”页底部将启用“处理”按钮。
-	
+    如果此文件类型支持索引，则“内容”页底部将启用“处理”按钮。
+    
 1. 按“处理”按钮。
 2. 在“处理”对话框中，选择“Azure 媒体索引器”处理器。
 3. 然后，在“处理”对话框中，填写输入媒体文件的详细**标题**和**说明**信息。
@@ -99,14 +99,14 @@ ms.author: juliako
 
 1.  选择要编码的文件。
 
-	如果此文件类型支持编码，则“内容”页底部将启用“处理”按钮。
+    如果此文件类型支持编码，则“内容”页底部将启用“处理”按钮。
 
 2. 在“处理”对话框中，选择“媒体编码器标准版”处理器。
 3. 选择其中一个“编码配置”。
 
-	![Process2][process2]  
+    ![Process2][process2]  
 
-	[媒体编码器标准版的任务预设字符串](https://msdn.microsoft.com/zh-cn/library/mt269960)主题说明了每个预设的含义。
+    [媒体编码器标准版的任务预设字符串](https://msdn.microsoft.com/zh-cn/library/mt269960)主题说明了每个预设的含义。
 
 4. 然后，输入所需的友好输出内容名称或接受默认值。然后，单击复选按钮开始编码操作。可在门户底部跟踪进度。
 5. 按“确定”。
@@ -125,11 +125,11 @@ ms.author: juliako
 - 针对要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](./media-services-manage-origins.md#scale_streaming_endpoints)。
 - 配置“默认 aes 明文密钥服务策略”或“默认 playready 许可证服务策略”。有关详细信息，请参阅[配置内容密钥授权策略](./media-services-portal-configure-content-key-auth-policy.md)。
 
-	准备好启用加密后，请按“内容”页底部的“加密”按钮。
+    准备好启用加密后，请按“内容”页底部的“加密”按钮。
 
-	![加密][encrypt]
+    ![加密][encrypt]
 
-	启用加密后，每当播放器请求流时，媒体服务将使用指定的密钥通过 AES 或 PlayReady 加密来动态加密你的内容。为了解密流，播放器将从密钥传送服务请求密钥。为了确定用户是否有权获取密钥，服务将评估为密钥指定的授权策略。
+    启用加密后，每当播放器请求流时，媒体服务将使用指定的密钥通过 AES 或 PlayReady 加密来动态加密你的内容。为了解密流，播放器将从密钥传送服务请求密钥。为了确定用户是否有权获取密钥，服务将评估为密钥指定的授权策略。
 
 另请参阅：
 
@@ -151,19 +151,19 @@ ms.author: juliako
 
 SAS URL 采用以下格式：
 
-	{blob container name}/{asset name}/{file name}/{SAS signature}
+    {blob container name}/{asset name}/{file name}/{SAS signature}
 
 流式处理 URL 采用以下格式，可用于播放平滑流资产：
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
+    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest
 
 若要生成 HLS 流式处理 URL，请将 (format=m3u8-aapl) 附加到 URL。
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
+    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=m3u8-aapl)
 
 若要生成 MPEG DASH 流式处理 URL，请将 (format=mpd-time-csf) 追加到 URL。
 
-	{streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
+    {streaming endpoint name-media services account name}.streaming.mediaservices.chinacloudapi.cn/{locator ID}/{filename}.ism/Manifest(format=mpd-time-csf)
 
 附带到期日期的定位符。使用门户发布资产时，会创建到期日期在 100 年以后的定位符。
 
@@ -177,7 +177,7 @@ SAS URL 采用以下格式：
 
 1. 选择资源。
 2. 然后单击“发布”按钮。
-	
+    
  ![PublishedContent][publishedcontent]  
 
 ## 如何：从门户播放内容

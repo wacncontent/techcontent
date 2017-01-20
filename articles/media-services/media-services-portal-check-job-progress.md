@@ -29,9 +29,9 @@ ms.author: juliako
 1. 在 [Azure 经典管理门户](http://manage.windowsazure.cn)中，单击“媒体服务”，然后单击媒体服务帐户名。
 2. 选择“作业”页。 
 
-	在该页上，你可以看到所有作业的状态。你还可以按状态、时间或作业 ID 进行筛选。
+    在该页上，你可以看到所有作业的状态。你还可以按状态、时间或作业 ID 进行筛选。
 
-	![CheckStatus][checkstatus]
+    ![CheckStatus][checkstatus]
 
 ##后续步骤
 

@@ -61,11 +61,11 @@ ms.author: larryfr
 
 2. 要提交 MapReduce 作业，请使用以下命令：
 
-		curl -u USERNAME:PASSWORD -d user.name=USERNAME -d jar=wasbs:///example/jars/hadoop-mapreduce-examples.jar -d class=wordcount -d arg=wasbs:///example/data/gutenberg/davinci.txt -d arg=wasbs:///example/data/CurlOut https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/mapreduce/jar
+        curl -u USERNAME:PASSWORD -d user.name=USERNAME -d jar=wasbs:///example/jars/hadoop-mapreduce-examples.jar -d class=wordcount -d arg=wasbs:///example/data/gutenberg/davinci.txt -d arg=wasbs:///example/data/CurlOut https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/mapreduce/jar
 
     URI 的末尾 (/mapreduce/jar) 可告知 WebHCat，此请求从 jar 文件中的类启动 MapReduce 作业。此命令中使用的参数如下：
 
-	* **-d**：由于未使用 `-G`，请求默认为 POST 方法。`-d` 指定与请求一起发送的数据值。
+    * **-d**：由于未使用 `-G`，请求默认为 POST 方法。`-d` 指定与请求一起发送的数据值。
 
         * **user.name**：正在运行命令的用户
         * **jar**：包含要运行的类的 jar 文件所在位置
@@ -80,7 +80,7 @@ ms.author: larryfr
 
         curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/jobs/JOBID | jq .status.state
 
-	如果作业已完成，则状态是“SUCCEEDED”。
+    如果作业已完成，则状态是“SUCCEEDED”。
 
     > [!NOTE]此 Curl 请求返回具有作业相关信息的 JSON 文档；使用 jq 可以仅检索状态值。
 
@@ -88,11 +88,11 @@ ms.author: larryfr
 
 可以使用 [Azure CLI](../xplat-cli-install.md) 列出并下载这些文件。例如，要列出 **example/curl** 中的文件，请使用以下命令：
 
-	azure storage blob list <container-name> example/curl
+    azure storage blob list <container-name> example/curl
 
 要下载文件，请使用以下命令：
 
-	azure storage blob download <container-name> <blob-name> <destination-file>
+    azure storage blob download <container-name> <blob-name> <destination-file>
 
 > [!NOTE]必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。有关详细信息，请参阅[如何将数据上载到 HDInsight](./hdinsight-upload-data.md)。
 

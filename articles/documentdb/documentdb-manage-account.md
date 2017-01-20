@@ -64,7 +64,7 @@ wacn.date: 11/28/2016
 3. 在“DocumentDB 帐户”边栏选项卡中，单击“密钥”。
 4. 在“密钥”边栏选项卡上，单击“重新生成”按钮，然后单击“确定”确认要生成新密钥。
 
-	![重新生成访问密钥](./media/documentdb-manage-account/regenerate-keys.png)
+    ![重新生成访问密钥](./media/documentdb-manage-account/regenerate-keys.png)
 
 5. 当你确认新的密钥可供使用后（大约在重新生成后的 5 分钟），请更新应用程序代码中的访问密钥以引用新的主访问密钥。
 6. 重新生成辅助访问密钥。
@@ -93,7 +93,7 @@ wacn.date: 11/28/2016
 3. 在生成的确认边栏选项卡中，键入 DocumentDB 帐户名称以确认要删除该帐户。
 4. 单击“删除”按钮。
 
-	![如何在 Azure 门户预览中删除 DocumentDB 帐户](./media/documentdb-manage-account/delete-account-confirm.png)
+    ![如何在 Azure 门户预览中删除 DocumentDB 帐户](./media/documentdb-manage-account/delete-account-confirm.png)
 
 ## <a id="next"></a>后续步骤
 

@@ -38,7 +38,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 1. 导航到[模板页](https://github.com/Azure/azure-quickstart-templates/tree/master/IaaS-Story/11-MultiNIC)。
 2. 下载模板，执行一些必要的修改。
 
-	>[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+    >[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 3. 使用 PowerShell 或 CLI 部署模板。
 
@@ -226,26 +226,26 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 预期输出：
 
-	ResourceGroupName : IaaSStory-Backend
-	Location          : chinanorth
-	ProvisioningState : Succeeded
-	Tags              :
-	Permissions       :
-						Actions  NotActions
-						=======  ==========
-						*
-		Resources         :
-						Name                 Type                                 Location
-						===================  ===================================  ========
-						ASDB                 Microsoft.Compute/availabilitySets   chinanorth  
-						DB1                  Microsoft.Compute/virtualMachines    chinanorth  
-						DB2                  Microsoft.Compute/virtualMachines    chinanorth  
-						NICDB-DA-1           Microsoft.Network/networkInterfaces  chinanorth  
-						NICDB-DA-2           Microsoft.Network/networkInterfaces  chinanorth  
-						NICDB-RA-1           Microsoft.Network/networkInterfaces  chinanorth  
-						NICDB-RA-2           Microsoft.Network/networkInterfaces  chinanorth  
-						wtestvnetstorageprm  Microsoft.Storage/storageAccounts    chinanorth  
-	ResourceId        : /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/IaaSStory-Backend
+    ResourceGroupName : IaaSStory-Backend
+    Location          : chinanorth
+    ProvisioningState : Succeeded
+    Tags              :
+    Permissions       :
+                        Actions  NotActions
+                        =======  ==========
+                        *
+        Resources         :
+                        Name                 Type                                 Location
+                        ===================  ===================================  ========
+                        ASDB                 Microsoft.Compute/availabilitySets   chinanorth  
+                        DB1                  Microsoft.Compute/virtualMachines    chinanorth  
+                        DB2                  Microsoft.Compute/virtualMachines    chinanorth  
+                        NICDB-DA-1           Microsoft.Network/networkInterfaces  chinanorth  
+                        NICDB-DA-2           Microsoft.Network/networkInterfaces  chinanorth  
+                        NICDB-RA-1           Microsoft.Network/networkInterfaces  chinanorth  
+                        NICDB-RA-2           Microsoft.Network/networkInterfaces  chinanorth  
+                        wtestvnetstorageprm  Microsoft.Storage/storageAccounts    chinanorth  
+    ResourceId        : /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/IaaSStory-Backend
 
 ## 使用 Azure CLI 部署模板
 若要使用 Azure CLI 部署模板，请执行以下步骤。
@@ -257,7 +257,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
     预期的输出如下所示：
 
-		info:    New mode is arm
+        info:    New mode is arm
 
 3. 打开[参数文件](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/11-MultiNIC/azuredeploy.parameters.json)，选择其内容，然后将其保存到计算机上的文件中。对于本示例，我们将参数文件保存到 *parameters.json*。
 4. 运行 **`azure group deployment create`** cmdlet，使用上面下载并修改的模板和参数文件部署新的 VNet。输出后显示的列表阐释了所用参数。

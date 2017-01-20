@@ -24,29 +24,29 @@ wacn.date: 10/28/2016
 
 方案一：直接使用 Tags 获取注册信息
 
-		CollectionResult result = hub.getRegistrationsByTag("myTestTag111");
-		for(Registration item:result.getRegistrations())
-		{
-		    System.out.println(item.getXml());
-		}
+        CollectionResult result = hub.getRegistrationsByTag("myTestTag111");
+        for(Registration item:result.getRegistrations())
+        {
+            System.out.println(item.getXml());
+        }
 
 方案二：直接修改源码通过 ChannelID 和 UserId 两个参数获取注册信息
 
-		public void getRegistrationsByBaiduChannelIdAsync(String BaiduUserId, String BaiduChannelId, String continuationToken, final FutureCallback<CollectionResult> callback) {
-		String endpoint = "https://baidutestns.servicebus.chinacloudapi.cn/";
-		String hubPath = "baidutest";//your notificationhub name
-		String APIVERSION = "?api-version=2015-01";
-		
-		String queryUri = null;
-		try {
-		String channelQuery = URLEncoder.encode("BaiduUserId-BaiduChannelId eq '" + BaiduUserId + "-" + BaiduChannelId + "'", "UTF-8");
-		
-		queryUri = endpoint + hubPath + "/registrations" + APIVERSION
-		           + "&$filter=" + channelQuery
-		           + getQueryString(0, continuationToken);
-			} catch (UnsupportedEncodingException e) {
-				throw new RuntimeException(e);
-			}
-			retrieveRegistrationCollectionAsync(queryUri, callback);
-		}
+        public void getRegistrationsByBaiduChannelIdAsync(String BaiduUserId, String BaiduChannelId, String continuationToken, final FutureCallback<CollectionResult> callback) {
+        String endpoint = "https://baidutestns.servicebus.chinacloudapi.cn/";
+        String hubPath = "baidutest";//your notificationhub name
+        String APIVERSION = "?api-version=2015-01";
+        
+        String queryUri = null;
+        try {
+        String channelQuery = URLEncoder.encode("BaiduUserId-BaiduChannelId eq '" + BaiduUserId + "-" + BaiduChannelId + "'", "UTF-8");
+        
+        queryUri = endpoint + hubPath + "/registrations" + APIVERSION
+                   + "&$filter=" + channelQuery
+                   + getQueryString(0, continuationToken);
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
+            retrieveRegistrationCollectionAsync(queryUri, callback);
+        }
 

@@ -47,28 +47,28 @@ ms.author: dobett
 
 6. 在 Program.cs 中，将现有 **using** 语句替换为以下内容：
    
-	    using System;
-	    using System.Net.Http;
-	    using System.Net.Http.Headers;
-	    using System.Text;
-	    using Microsoft.Azure.Management.ResourceManager;
-	    using Microsoft.Azure.Management.ResourceManager.Models;
-	    using Microsoft.IdentityModel.Clients.ActiveDirectory;
-	    using Newtonsoft.Json;
-	    using Microsoft.Rest;
-	    using System.Linq;
-	    using System.Threading;
-	    using Newtonsoft.Json;
+        using System;
+        using System.Net.Http;
+        using System.Net.Http.Headers;
+        using System.Text;
+        using Microsoft.Azure.Management.ResourceManager;
+        using Microsoft.Azure.Management.ResourceManager.Models;
+        using Microsoft.IdentityModel.Clients.ActiveDirectory;
+        using Newtonsoft.Json;
+        using Microsoft.Rest;
+        using System.Linq;
+        using System.Threading;
+        using Newtonsoft.Json;
     
 7. 在 Program.cs 中，将占位符值替换为以下静态变量。在本教程前面的介绍中，你已记下 **ApplicationId**、**SubscriptionId**、**TenantId** 和 **Password**。**Resource group name** 是创建 IoT 中心时要使用的资源组名称，可以是现有的资源组或新资源组。**IoT 中心名称**是要创建的 IoT 中心的名称，例如 **MyIoTHub**（请注意，此名称必须全局唯一，因此应当包含你的姓名或姓名的首字母缩写）。**Deployment name** 是部署的名称，例如 **Deployment\_01**。
 
-	    static string applicationId = "{Your ApplicationId}";
-	    static string subscriptionId = "{Your SubscriptionId}";
-	    static string tenantId = "{Your TenantId}";
-	    static string password = "{Your application Password}";
+        static string applicationId = "{Your ApplicationId}";
+        static string subscriptionId = "{Your SubscriptionId}";
+        static string tenantId = "{Your TenantId}";
+        static string password = "{Your application Password}";
    
-	    static string rgName = "{Resource group name}";
-	    static string iotHubName = "{IoT Hub name including your initials}";
+        static string rgName = "{Resource group name}";
+        static string iotHubName = "{IoT Hub name including your initials}";
     
 [!INCLUDE [iot-hub-get-access-token](../../includes/iot-hub-get-access-token.md)]
 
@@ -78,62 +78,62 @@ ms.author: dobett
 
 1. 将以下方法添加到 Program.cs：
     
-	    static void CreateIoTHub(string token)
-	    {
+        static void CreateIoTHub(string token)
+        {
         
-	    }
+        }
     
 2. 将以下代码添加到 **CreateIoTHub** 方法，以创建 **HttpClient** 对象并在标头中指定身份验证令牌：
 
-	    HttpClient client = new HttpClient();
-	    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        HttpClient client = new HttpClient();
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
     
 3. 将以下代码添加到 **CreateIoTHub** 方法，以描述如何使用 IoT 中心来创建并生成 JSON 表示法：
 
-	    var description = new
-	    {
-	      name = iotHubName,
-	      location = "China East",
-	      sku = new
-	      {
-	        name = "S1",
-	        tier = "Standard",
-	        capacity = 1
-	      }
-	    };
+        var description = new
+        {
+          name = iotHubName,
+          location = "China East",
+          sku = new
+          {
+            name = "S1",
+            tier = "Standard",
+            capacity = 1
+          }
+        };
     
-	    var json = JsonConvert.SerializeObject(description, Formatting.Indented);
+        var json = JsonConvert.SerializeObject(description, Formatting.Indented);
     
 4. 将以下代码添加到 **CreateIoTHub** 方法，以向到 Azure 提交 REST 请求、检查响应，并检索可用于监视部署任务状态的 URL：
 
-	    var content = new StringContent(JsonConvert.SerializeObject(description), Encoding.UTF8, "application/json");
-	    var requestUri = string.Format("https://management.chinacloudapi.cn/subscriptions/{0}/resourcegroups/{1}/providers/Microsoft.devices/IotHubs/{2}?api-version=2016-02-03", subscriptionId, rgName, iotHubName);
-	    var result = client.PutAsync(requestUri, content).Result;
+        var content = new StringContent(JsonConvert.SerializeObject(description), Encoding.UTF8, "application/json");
+        var requestUri = string.Format("https://management.chinacloudapi.cn/subscriptions/{0}/resourcegroups/{1}/providers/Microsoft.devices/IotHubs/{2}?api-version=2016-02-03", subscriptionId, rgName, iotHubName);
+        var result = client.PutAsync(requestUri, content).Result;
       
-	    if (!result.IsSuccessStatusCode)
-	    {
-	      Console.WriteLine("Failed {0}", result.Content.ReadAsStringAsync().Result);
-	      return;
-	    }
+        if (!result.IsSuccessStatusCode)
+        {
+          Console.WriteLine("Failed {0}", result.Content.ReadAsStringAsync().Result);
+          return;
+        }
     
-	    var asyncStatusUri = result.Headers.GetValues("Azure-AsyncOperation").First();
+        var asyncStatusUri = result.Headers.GetValues("Azure-AsyncOperation").First();
     
 5. 将以下代码添加到 **CreateIoTHub** 方法末尾，以使用上一个步骤中检索的 **asyncStatusUri** 地址来等待部署完成：
 
-	    string body;
-	    do
-	    {
-	      Thread.Sleep(10000);
-	      HttpResponseMessage deploymentstatus = client.GetAsync(asyncStatusUri).Result;
-	      body = deploymentstatus.Content.ReadAsStringAsync().Result;
-	    } while (body == "{"Status":"Running"}");
+        string body;
+        do
+        {
+          Thread.Sleep(10000);
+          HttpResponseMessage deploymentstatus = client.GetAsync(asyncStatusUri).Result;
+          body = deploymentstatus.Content.ReadAsStringAsync().Result;
+        } while (body == "{"Status":"Running"}");
     
 6. 将以下代码添加到 **CreateIoTHub** 方法末尾，以检索创建的 IoT 中心密钥并将其输出到控制台：
 
-	    var listKeysUri = string.Format("https://management.chinacloudapi.cn/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Devices/IotHubs/{2}/IoTHubKeys/listkeys?api-version=2015-08-15-preview", subscriptionId, rgName, iotHubName);
-	    var keysresults = client.PostAsync(listKeysUri, null).Result;
+        var listKeysUri = string.Format("https://management.chinacloudapi.cn/subscriptions/{0}/resourceGroups/{1}/providers/Microsoft.Devices/IotHubs/{2}/IoTHubKeys/listkeys?api-version=2015-08-15-preview", subscriptionId, rgName, iotHubName);
+        var keysresults = client.PostAsync(listKeysUri, null).Result;
     
-	    Console.WriteLine("Keys: {0}", keysresults.Content.ReadAsStringAsync().Result);
+        Console.WriteLine("Keys: {0}", keysresults.Content.ReadAsStringAsync().Result);
     
 ## 完成并运行应用程序
 
@@ -141,8 +141,8 @@ ms.author: dobett
 
 1. 在 **Main** 方法的末尾添加以下代码：
 
-	    CreateIoTHub(token.AccessToken);
-	    Console.ReadLine();
+        CreateIoTHub(token.AccessToken);
+        Console.ReadLine();
     
 2. 单击“生成”，然后单击“生成解决方案”。更正所有错误。
 
@@ -155,7 +155,6 @@ ms.author: dobett
 
 既然你已使用 REST API 部署了一个 IoT 中心，接下来可以进一步进行探索：
 
-- 阅读 [IoT 中心资源提供程序 REST API][lnk-rest-api] 的相关功能。
 - 有关 Azure Resource Manager 功能的详细信息，请参阅 [Azure Resource Manager 概述][lnk-azure-rm-overview]。
 
 若要深入了解如何开发 IoT 中心，请参阅以下内容：
@@ -173,7 +172,7 @@ ms.author: dobett
 [lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-azure-portal]: https://portal.azure.cn/
 [lnk-powershell-install]: ../powershell-install-configure.md
-[lnk-rest-api]: https://msdn.microsoft.com/zh-cn/library/mt589014.aspx
+
 [lnk-azure-rm-overview]: ../azure-resource-manager/resource-group-overview.md
 
 [lnk-c-sdk]: ./iot-hub-device-sdk-c-intro.md

@@ -37,10 +37,10 @@ Azure 存储中的对象支持系统属性和用户定义的元数据，及其�
 以下代码示例创建容器并将它的一些属性值写入到控制台窗口：
 
     //Parse the connection string for the storage account.
-	const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
+    const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
-	
-	//Create the service client object for credentialed access to the Blob service.
+    
+    //Create the service client object for credentialed access to the Blob service.
     CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
     // Retrieve a reference to a container. 

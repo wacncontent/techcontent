@@ -27,11 +27,11 @@ ms.author: adsolank;juliako;johndeu
 
 - 下列格式的隐藏字幕文件：**SAMI**、**TTML** 和 **WebVTT**。
 
-	隐藏字幕文件包含名为 Recognizability 的标记，该标记可以根据源视频中的语音辨别度对索引作业评分。用户可以使用 Recognizability 的值筛选可用的输出文件。如果分数较低，则表示索引结果由于音频质量问题而不佳。
+    隐藏字幕文件包含名为 Recognizability 的标记，该标记可以根据源视频中的语音辨别度对索引作业评分。用户可以使用 Recognizability 的值筛选可用的输出文件。如果分数较低，则表示索引结果由于音频质量问题而不佳。
 - 关键字文件 (XML)。
 - 用于 SQL Server 的音频索引 Blob (AIB) 文件。
 
-	有关详细信息，请参阅[在 Azure 媒体索引器和 SQL Server 中使用 AIB 文件](https://azure.microsoft.com/blog/2014/11/03/using-aib-files-with-azure-media-indexer-and-sql-server/)。
+    有关详细信息，请参阅[在 Azure 媒体索引器和 SQL Server 中使用 AIB 文件](https://azure.microsoft.com/blog/2014/11/03/using-aib-files-with-azure-media-indexer-and-sql-server/)。
 
 本主题介绍如何创建索引作业，以便“为资产编制索引”以及“为多个文件编制索引”。
 
@@ -51,92 +51,92 @@ ms.author: adsolank;juliako;johndeu
 
 请注意，如果未指定配置文件，则将使用默认设置为媒体文件编制索引。
 
-	static bool RunIndexingJob(string inputMediaFilePath, string outputFolder, string configurationFile = "")
-	{
-	    // Create an asset and upload the input media file to storage.
-	    IAsset asset = CreateAssetAndUploadSingleFile(inputMediaFilePath,
-	        "My Indexing Input Asset",
-	        AssetCreationOptions.None);
+    static bool RunIndexingJob(string inputMediaFilePath, string outputFolder, string configurationFile = "")
+    {
+        // Create an asset and upload the input media file to storage.
+        IAsset asset = CreateAssetAndUploadSingleFile(inputMediaFilePath,
+            "My Indexing Input Asset",
+            AssetCreationOptions.None);
 
-	    // Declare a new job.
-	    IJob job = _context.Jobs.Create("My Indexing Job");
+        // Declare a new job.
+        IJob job = _context.Jobs.Create("My Indexing Job");
 
-	    // Get a reference to the Azure Media Indexer.
-	    string MediaProcessorName = "Azure Media Indexer";
-	    IMediaProcessor processor = GetLatestMediaProcessorByName(MediaProcessorName);
+        // Get a reference to the Azure Media Indexer.
+        string MediaProcessorName = "Azure Media Indexer";
+        IMediaProcessor processor = GetLatestMediaProcessorByName(MediaProcessorName);
 
-	    // Read configuration from file if specified.
-	    string configuration = string.IsNullOrEmpty(configurationFile) ? "" : File.ReadAllText(configurationFile);
+        // Read configuration from file if specified.
+        string configuration = string.IsNullOrEmpty(configurationFile) ? "" : File.ReadAllText(configurationFile);
 
-	    // Create a task with the encoding details, using a string preset.
-	    ITask task = job.Tasks.AddNew("My Indexing Task",
-	        processor,
-	        configuration,
-	        TaskOptions.None);
+        // Create a task with the encoding details, using a string preset.
+        ITask task = job.Tasks.AddNew("My Indexing Task",
+            processor,
+            configuration,
+            TaskOptions.None);
 
-	    // Specify the input asset to be indexed.
-	    task.InputAssets.Add(asset);
+        // Specify the input asset to be indexed.
+        task.InputAssets.Add(asset);
 
-	    // Add an output asset to contain the results of the job.
-	    task.OutputAssets.AddNew("My Indexing Output Asset", AssetCreationOptions.None);
+        // Add an output asset to contain the results of the job.
+        task.OutputAssets.AddNew("My Indexing Output Asset", AssetCreationOptions.None);
 
-	    // Use the following event handler to check job progress.  
-	    job.StateChanged += new EventHandler<JobStateChangedEventArgs>(StateChanged);
+        // Use the following event handler to check job progress.  
+        job.StateChanged += new EventHandler<JobStateChangedEventArgs>(StateChanged);
 
-	    // Launch the job.
-	    job.Submit();
+        // Launch the job.
+        job.Submit();
 
-	    // Check job execution and wait for job to finish.
-	    Task progressJobTask = job.GetExecutionProgressTask(CancellationToken.None);
-	    progressJobTask.Wait();
+        // Check job execution and wait for job to finish.
+        Task progressJobTask = job.GetExecutionProgressTask(CancellationToken.None);
+        progressJobTask.Wait();
 
-	    // If job state is Error, the event handling
-	    // method for job progress should log errors.  Here we check
-	    // for error state and exit if needed.
-	    if (job.State == JobState.Error)
-	    {
-	        Console.WriteLine("Exiting method due to job error.");
-	        return false;
-	    }
+        // If job state is Error, the event handling
+        // method for job progress should log errors.  Here we check
+        // for error state and exit if needed.
+        if (job.State == JobState.Error)
+        {
+            Console.WriteLine("Exiting method due to job error.");
+            return false;
+        }
 
-	    // Download the job outputs.
-	    DownloadAsset(task.OutputAssets.First(), outputFolder);
+        // Download the job outputs.
+        DownloadAsset(task.OutputAssets.First(), outputFolder);
 
-	    return true;
-	}
+        return true;
+    }
 
-	static IAsset CreateAssetAndUploadSingleFile(string filePath, string assetName, AssetCreationOptions options)
-	{
-	    IAsset asset = _context.Assets.Create(assetName, options);
+    static IAsset CreateAssetAndUploadSingleFile(string filePath, string assetName, AssetCreationOptions options)
+    {
+        IAsset asset = _context.Assets.Create(assetName, options);
 
-	    var assetFile = asset.AssetFiles.Create(Path.GetFileName(filePath));
-	    assetFile.Upload(filePath);
+        var assetFile = asset.AssetFiles.Create(Path.GetFileName(filePath));
+        assetFile.Upload(filePath);
 
-	    return asset;
-	}
+        return asset;
+    }
 
-	static void DownloadAsset(IAsset asset, string outputDirectory)
-	{
-	    foreach (IAssetFile file in asset.AssetFiles)
-	    {
-	        file.Download(Path.Combine(outputDirectory, file.Name));
-	    }
-	}
+    static void DownloadAsset(IAsset asset, string outputDirectory)
+    {
+        foreach (IAssetFile file in asset.AssetFiles)
+        {
+            file.Download(Path.Combine(outputDirectory, file.Name));
+        }
+    }
 
-	static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
-	{
-	    var processor = _context.MediaProcessors
-	    .Where(p => p.Name == mediaProcessorName)
-	    .ToList()
-	    .OrderBy(p => new Version(p.Version))
-	    .LastOrDefault();
+    static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
+    {
+        var processor = _context.MediaProcessors
+        .Where(p => p.Name == mediaProcessorName)
+        .ToList()
+        .OrderBy(p => new Version(p.Version))
+        .LastOrDefault();
 
-	    if (processor == null)
-	        throw new ArgumentException(string.Format("Unknown media processor",
-	                                                   mediaProcessorName));
+        if (processor == null)
+            throw new ArgumentException(string.Format("Unknown media processor",
+                                                       mediaProcessorName));
 
-	    return processor;
-	}
+        return processor;
+    }
 
 ### <a id="output_files"></a>输出文件
 
@@ -159,78 +159,78 @@ __JobResult.txt__ |输出清单，仅当为多个文件编制索引时才提供�
 
 将创建扩展名为 .lst 的清单文件，并上传到资产中。该清单文件包含所有资产文件的列表。有关详细信息，请参阅 [Azure 媒体索引器的任务预设](https://msdn.microsoft.com/zh-cn/library/dn783454.aspx)。
 
-	static bool RunBatchIndexingJob(string[] inputMediaFiles, string outputFolder)
-	{
-	    // Create an asset and upload to storage.
-	    IAsset asset = CreateAssetAndUploadMultipleFiles(inputMediaFiles,
-	        "My Indexing Input Asset - Batch Mode",
-	        AssetCreationOptions.None);
+    static bool RunBatchIndexingJob(string[] inputMediaFiles, string outputFolder)
+    {
+        // Create an asset and upload to storage.
+        IAsset asset = CreateAssetAndUploadMultipleFiles(inputMediaFiles,
+            "My Indexing Input Asset - Batch Mode",
+            AssetCreationOptions.None);
 
-	    // Create a manifest file that contains all the asset file names and upload to storage.
-	    string manifestFile = "input.lst";            
-	    File.WriteAllLines(manifestFile, asset.AssetFiles.Select(f => f.Name).ToArray());
-	    var assetFile = asset.AssetFiles.Create(Path.GetFileName(manifestFile));
-	    assetFile.Upload(manifestFile);
+        // Create a manifest file that contains all the asset file names and upload to storage.
+        string manifestFile = "input.lst";            
+        File.WriteAllLines(manifestFile, asset.AssetFiles.Select(f => f.Name).ToArray());
+        var assetFile = asset.AssetFiles.Create(Path.GetFileName(manifestFile));
+        assetFile.Upload(manifestFile);
 
-	    // Declare a new job.
-	    IJob job = _context.Jobs.Create("My Indexing Job - Batch Mode");
+        // Declare a new job.
+        IJob job = _context.Jobs.Create("My Indexing Job - Batch Mode");
 
-	    // Get a reference to the Azure Media Indexer.
-	    string MediaProcessorName = "Azure Media Indexer";
-	    IMediaProcessor processor = GetLatestMediaProcessorByName(MediaProcessorName);
+        // Get a reference to the Azure Media Indexer.
+        string MediaProcessorName = "Azure Media Indexer";
+        IMediaProcessor processor = GetLatestMediaProcessorByName(MediaProcessorName);
 
-	    // Read configuration.
-	    string configuration = File.ReadAllText("batch.config");
+        // Read configuration.
+        string configuration = File.ReadAllText("batch.config");
 
-	    // Create a task with the encoding details, using a string preset.
-	    ITask task = job.Tasks.AddNew("My Indexing Task - Batch Mode",
-	        processor,
-	        configuration,
-	        TaskOptions.None);
+        // Create a task with the encoding details, using a string preset.
+        ITask task = job.Tasks.AddNew("My Indexing Task - Batch Mode",
+            processor,
+            configuration,
+            TaskOptions.None);
 
-	    // Specify the input asset to be indexed.
-	    task.InputAssets.Add(asset);
+        // Specify the input asset to be indexed.
+        task.InputAssets.Add(asset);
 
-	    // Add an output asset to contain the results of the job.
-	    task.OutputAssets.AddNew("My Indexing Output Asset - Batch Mode", AssetCreationOptions.None);
+        // Add an output asset to contain the results of the job.
+        task.OutputAssets.AddNew("My Indexing Output Asset - Batch Mode", AssetCreationOptions.None);
 
-	    // Use the following event handler to check job progress.  
-	    job.StateChanged += new EventHandler<JobStateChangedEventArgs>(StateChanged);
+        // Use the following event handler to check job progress.  
+        job.StateChanged += new EventHandler<JobStateChangedEventArgs>(StateChanged);
 
-	    // Launch the job.
-	    job.Submit();
+        // Launch the job.
+        job.Submit();
 
-	    // Check job execution and wait for job to finish.
-	    Task progressJobTask = job.GetExecutionProgressTask(CancellationToken.None);
-	    progressJobTask.Wait();
+        // Check job execution and wait for job to finish.
+        Task progressJobTask = job.GetExecutionProgressTask(CancellationToken.None);
+        progressJobTask.Wait();
 
-	    // If job state is Error, the event handling
-	    // method for job progress should log errors.  Here we check
-	    // for error state and exit if needed.
-	    if (job.State == JobState.Error)
-	    {
-	        Console.WriteLine("Exiting method due to job error.");
-	        return false;
-	    }
+        // If job state is Error, the event handling
+        // method for job progress should log errors.  Here we check
+        // for error state and exit if needed.
+        if (job.State == JobState.Error)
+        {
+            Console.WriteLine("Exiting method due to job error.");
+            return false;
+        }
 
-	    // Download the job outputs.
-	    DownloadAsset(task.OutputAssets.First(), outputFolder);
+        // Download the job outputs.
+        DownloadAsset(task.OutputAssets.First(), outputFolder);
 
-	    return true;
-	}
+        return true;
+    }
 
-	private static IAsset CreateAssetAndUploadMultipleFiles(string[] filePaths, string assetName, AssetCreationOptions options)
-	{
-	    IAsset asset = _context.Assets.Create(assetName, options);
+    private static IAsset CreateAssetAndUploadMultipleFiles(string[] filePaths, string assetName, AssetCreationOptions options)
+    {
+        IAsset asset = _context.Assets.Create(assetName, options);
 
-	    foreach (string filePath in filePaths)
-	    {
-	        var assetFile = asset.AssetFiles.Create(Path.GetFileName(filePath));
-	        assetFile.Upload(filePath);
-	    }
+        foreach (string filePath in filePaths)
+        {
+            var assetFile = asset.AssetFiles.Create(Path.GetFileName(filePath));
+            assetFile.Upload(filePath);
+        }
 
-	    return asset;
-	}
+        return asset;
+    }
 
 ### 部分成功的作业
 

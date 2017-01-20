@@ -56,18 +56,18 @@ ms.author: juliako
 问：如何在编码过程中旋转视频。
 
 答：[Media Encoder Standard](./media-services-dotnet-encode-with-media-encoder-standard.md)支持旋转 90/180/270 度。默认行为是“自动”，即尝试在传入的 MP4/MOV 文件中检测旋转元数据并对其进行补偿。包含[此处](http://msdn.microsoft.com/zh-cn/library/azure/mt269960.aspx)定义的 json 预设之一的以下 **Sources** 元素：
-	
-	"Version": 1.0,
-	"Sources": [
-	{
-	  "Streams": [],
-	  "Filters": {
-	    "Rotation": "90"
-	  }
-	}
-	],
-	"Codecs": [
-	
-	...
+    
+    "Version": 1.0,
+    "Sources": [
+    {
+      "Streams": [],
+      "Filters": {
+        "Rotation": "90"
+      }
+    }
+    ],
+    "Codecs": [
+    
+    ...
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

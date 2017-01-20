@@ -107,8 +107,8 @@ VM 备份依赖于向底层存储发出快照命令。如果无法访问存储�
 1. 使用 NSG 阻止对存储进行网络访问<br>详细了解如何使用 IP 白名单或通过代理服务器对存储[启用网络访问](./backup-azure-vms-prepare.md#2-network-connectivity/)。
 2.  配置了 SQL Server 备份的 VM 可导致快照任务延迟<br>默认情况下，VM 备份将在 Windows VM 上发出 VSS 完整备份命令。在运行 SQL Server 且已配置 SQL Server 备份的 VM 上，这可能会造成快照执行延迟。如果由于快照问题而导致备份失败，请设置以下注册表项。
 
-		[HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\BCDRAGENT]
-		"USEVSSCOPYBACKUP"="TRUE"
+        [HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\BCDRAGENT]
+        "USEVSSCOPYBACKUP"="TRUE"
 
 3.  由于在 RDP 中关闭了 VM，VM 状态报告不正确。<br>如果在 RDP 中关闭了虚拟机，请返回门户检查是否正确反映了 VM 的状态。如果没有，请在门户中使用 VM 仪表板上的“关机”选项关闭 VM。
 4.  如果四个以上的 VM 共享同一云服务，请配置多个备份策略以将备份时间错开，避免同时启动四个以上的 VM 备份。尝试使策略之间的备份开始时间相差一个小时。

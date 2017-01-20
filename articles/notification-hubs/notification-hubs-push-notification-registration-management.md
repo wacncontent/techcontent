@@ -41,39 +41,39 @@ ms.author: wesmc
 
 安装可以包含以下属性。有关完整的安装属性列表，请参阅[使用 REST API 创建或覆盖安装](https://msdn.microsoft.com/zh-cn/library/azure/mt621153.aspx)或[安装属性](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.notificationhubs.installation_properties.aspx)。
 
-	// Example installation format to show some supported properties
-	{
-	    installationId: "",
-	    expirationTime: "",
-	    tags: [],
-	    platform: "",
-	    pushChannel: "",
-	    ………
-	    templates: {
-	        "templateName1" : {
-				body: "",
-				tags: [] },
-			"templateName2" : {
-				body: "",
-				// Headers are for Windows Store only
-				headers: {
-					"X-WNS-Type": "wns/tile" }
-				tags: [] }
-	    },
-	    secondaryTiles: {
-	        "tileId1": {
-	            pushChannel: "",
-	            tags: [],
-	            templates: {
-	                "otherTemplate": {
-	                    bodyTemplate: "",
-	                    headers: {
-	                        ... }
-	                    tags: [] }
-	            }
-	        }
-	    }
-	}
+    // Example installation format to show some supported properties
+    {
+        installationId: "",
+        expirationTime: "",
+        tags: [],
+        platform: "",
+        pushChannel: "",
+        ………
+        templates: {
+            "templateName1" : {
+                body: "",
+                tags: [] },
+            "templateName2" : {
+                body: "",
+                // Headers are for Windows Store only
+                headers: {
+                    "X-WNS-Type": "wns/tile" }
+                tags: [] }
+        },
+        secondaryTiles: {
+            "tileId1": {
+                pushChannel: "",
+                tags: [],
+                templates: {
+                    "otherTemplate": {
+                        bodyTemplate: "",
+                        headers: {
+                            ... }
+                        tags: [] }
+                }
+            }
+        }
+    }
 
 请务必注意，注册和安装默认情况下不再过期。
 
@@ -110,16 +110,16 @@ SecondaryTiles 字典使用的 TileId 与在 Windows 应用商店应用中创建
 
 你也可以使用 [JSON-Patch standard](https://tools.ietf.org/html/rfc6902) 以 PATCH 方法更新安装。
 
-	class DeviceInstallation
-	{
-	    public string installationId { get; set; }
-	    public string platform { get; set; }
-	    public string pushChannel { get; set; }
-	    public string[] tags { get; set; }
-	}
+    class DeviceInstallation
+    {
+        public string installationId { get; set; }
+        public string platform { get; set; }
+        public string pushChannel { get; set; }
+        public string[] tags { get; set; }
+    }
 
     private async Task<HttpStatusCode> CreateOrUpdateInstallationAsync(DeviceInstallation deviceInstallation,
-		 string hubName, string listenConnectionString)
+         string hubName, string listenConnectionString)
     {
         if (deviceInstallation.installationId == null)
             return HttpStatusCode.BadRequest;
@@ -133,7 +133,7 @@ SecondaryTiles 字典使用的 TileId 与在 Windows 应用商店应用中创建
         string uri = connectionSaSUtil.Endpoint + hubName + "/" + hubResource + apiVersion;
 
         //=== Generate SaS Security Token for Authorization header ===
-		// See, https://msdn.microsoft.com/zh-cn/library/azure/dn495627.aspx
+        // See, https://msdn.microsoft.com/zh-cn/library/azure/dn495627.aspx
         string SasToken = connectionSaSUtil.getSaSToken(uri, 60);
 
         using (var httpClient = new HttpClient())
@@ -170,7 +170,7 @@ SecondaryTiles 字典使用的 TileId 与在 Windows 应用商店应用中创建
     };
 
     var statusCode = await CreateOrUpdateInstallationAsync(deviceInstallation, 
-						"<HUBNAME>", "<SHARED LISTEN CONNECTION STRING>");
+                        "<HUBNAME>", "<SHARED LISTEN CONNECTION STRING>");
 
     if (statusCode != HttpStatusCode.Accepted)
     {
@@ -189,39 +189,39 @@ SecondaryTiles 字典使用的 TileId 与在 Windows 应用商店应用中创建
 
 这些方法为调用它们的设备创建或更新注册。这意味着，若要更新句柄或标记，必须覆盖整个注册。请记住，注册是暂时性的，因此，你始终应使用具有特定设备所需的当前标记的可靠存储。
 
-	// Initialize the Notification Hub
-	NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString(listenConnString, hubName);
+    // Initialize the Notification Hub
+    NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString(listenConnString, hubName);
 
-	// The Device id from the PNS
+    // The Device id from the PNS
     var pushChannel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
 
     // If you are registering from the client itself, then store this registration id in device
-	// storage. Then when the app starts, you can check if a registration id already exists or not before
-	// creating.
-	var settings = ApplicationData.Current.LocalSettings.Values;
+    // storage. Then when the app starts, you can check if a registration id already exists or not before
+    // creating.
+    var settings = ApplicationData.Current.LocalSettings.Values;
 
-	// If we have not stored a registration id in application data, store in application data.
-	if (!settings.ContainsKey("__NHRegistrationId"))
-	{
-		// make sure there are no existing registrations for this push handle (used for iOS and Android)	
-		string newRegistrationId = null;
-		var registrations = await hub.GetRegistrationsByChannelAsync(pushChannel.Uri, 100);
-		foreach (RegistrationDescription registration in registrations)
-		{
-			if (newRegistrationId == null)
-			{
-				newRegistrationId = registration.RegistrationId;
-			}
-			else
-			{
-				await hub.DeleteRegistrationAsync(registration);
-			}
-		}
+    // If we have not stored a registration id in application data, store in application data.
+    if (!settings.ContainsKey("__NHRegistrationId"))
+    {
+        // make sure there are no existing registrations for this push handle (used for iOS and Android)	
+        string newRegistrationId = null;
+        var registrations = await hub.GetRegistrationsByChannelAsync(pushChannel.Uri, 100);
+        foreach (RegistrationDescription registration in registrations)
+        {
+            if (newRegistrationId == null)
+            {
+                newRegistrationId = registration.RegistrationId;
+            }
+            else
+            {
+                await hub.DeleteRegistrationAsync(registration);
+            }
+        }
 
-		newRegistrationId = await hub.CreateRegistrationIdAsync();
+        newRegistrationId = await hub.CreateRegistrationIdAsync();
 
         settings.Add("__NHRegistrationId", newRegistrationId);
-	}
+    }
      
     string regId = (string)settings["__NHRegistrationId"];
 
@@ -229,14 +229,14 @@ SecondaryTiles 字典使用的 TileId 与在 Windows 应用商店应用中创建
     registration.RegistrationId = regId;
     registration.Tags = new HashSet<string>(YourTags);
 
-	try
-	{
-		await hub.CreateOrUpdateRegistrationAsync(registration);
-	}
-	catch (Microsoft.WindowsAzure.Messaging.RegistrationGoneException e)
-	{
-		settings.Remove("__NHRegistrationId");
-	}
+    try
+    {
+        await hub.CreateOrUpdateRegistrationAsync(registration);
+    }
+    catch (Microsoft.WindowsAzure.Messaging.RegistrationGoneException e)
+    {
+        settings.Remove("__NHRegistrationId");
+    }
 
 ## 从后端管理注册 <a name="registration-management-from-a-backend"></a>
 
@@ -252,8 +252,8 @@ SecondaryTiles 字典使用的 TileId 与在 Windows 应用商店应用中创建
 
 你也可以使用 [JSON-Patch standard](https://tools.ietf.org/html/rfc6902) 以 PATCH 方法更新安装。
  
-	// Initialize the Notification Hub
-	NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString(listenConnString, hubName);
+    // Initialize the Notification Hub
+    NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString(listenConnString, hubName);
 
     // Custom API on the backend
     public async Task<HttpResponseMessage> Put(DeviceInstallation deviceUpdate)
@@ -295,25 +295,25 @@ SecondaryTiles 字典使用的 TileId 与在 Windows 应用商店应用中创建
 
 从应用后端可以对注册执行基本 CRUDS 操作。例如：
 
-	var hub = NotificationHubClient.CreateClientFromConnectionString("{connectionString}", "hubName");
+    var hub = NotificationHubClient.CreateClientFromConnectionString("{connectionString}", "hubName");
             
-	// create a registration description object of the correct type, e.g.
-	var reg = new WindowsRegistrationDescription(channelUri, tags);
+    // create a registration description object of the correct type, e.g.
+    var reg = new WindowsRegistrationDescription(channelUri, tags);
 
-	// Create
-	await hub.CreateRegistrationAsync(reg);
+    // Create
+    await hub.CreateRegistrationAsync(reg);
 
-	// Get by id
-	var r = await hub.GetRegistrationAsync<RegistrationDescription>("id");
+    // Get by id
+    var r = await hub.GetRegistrationAsync<RegistrationDescription>("id");
 
-	// update
-	r.Tags.Add("myTag");
+    // update
+    r.Tags.Add("myTag");
 
-	// update on hub
-	await hub.UpdateRegistrationAsync(r);
+    // update on hub
+    await hub.UpdateRegistrationAsync(r);
 
-	// delete
-	await hub.DeleteRegistrationAsync(r);
+    // delete
+    await hub.DeleteRegistrationAsync(r);
 
 后端必须处理注册更新之间的并发性。服务总线为注册管理提供了乐观并发控制。在 HTTP 级别，这是通过对注册管理操作使用 ETag 来实现的。Microsoft SDK 以透明方式使用此功能，如果由于并发原因拒绝了更新，则会引发异常。应用后端负责处理这些异常并在需要时重试更新。
 

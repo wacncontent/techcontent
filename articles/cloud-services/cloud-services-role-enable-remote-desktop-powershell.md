@@ -51,12 +51,12 @@ ms.author: adegeo
 
 以下 PowerShell 示例显示如何在云服务上设置远程桌面扩展：
 
-    	$servicename = "cloudservice"
-    	$username = "RemoteDesktopUser"
-    	$securepassword = Get-Content -Path "password.txt" | ConvertTo-SecureString
-    	$expiry = $(Get-Date).AddDays(1)
-    	$credential = New-Object System.Management.Automation.PSCredential $username,$securepassword
-    	Set-AzureServiceRemoteDesktopExtension -ServiceName $servicename -Credential $credential -Expiration $expiry 
+        $servicename = "cloudservice"
+        $username = "RemoteDesktopUser"
+        $securepassword = Get-Content -Path "password.txt" | ConvertTo-SecureString
+        $expiry = $(Get-Date).AddDays(1)
+        $credential = New-Object System.Management.Automation.PSCredential $username,$securepassword
+        Set-AzureServiceRemoteDesktopExtension -ServiceName $servicename -Credential $credential -Expiration $expiry 
 
 还可以选择指定要启用远程桌面的部署槽和角色。如果未指定这些参数，该 cmdlet 将对**生产**部署槽中的所有角色启用远程桌面。
 

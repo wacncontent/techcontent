@@ -34,7 +34,7 @@ Azure 虚拟网络可扩展 Hadoop 解决方案以合并本地资源（如 SQL S
   
   * 从 Azure 虚拟机中运行的 Azure 网站或服务**调用 HDInsight 服务或作业**。
   * 在 HDInsight 和 Azure SQL 数据库，SQL Server 或在虚拟机上运行的其他数据存储解决方案之间**直接传输数据**。
-	* **组合多个 HDInsight 服务器**以构成单个解决方案。例如，通过 HDInsight Storm 服务器使用传入数据，然后将处理的数据存储到 HDInsight HBase 服务器。也可以将原始数据存储到 HDInsight Hadoop 服务器，以便将来使用 MapReduce 进行分析。
+    * **组合多个 HDInsight 服务器**以构成单个解决方案。例如，通过 HDInsight Storm 服务器使用传入数据，然后将处理的数据存储到 HDInsight HBase 服务器。也可以将原始数据存储到 HDInsight Hadoop 服务器，以便将来使用 MapReduce 进行分析。
 * 使用虚拟专用网络 (VPN) 将云资源连接到本地数据中心网络（站点到站点，或点到站点）。
   
     利用站点到站点配置，可使用硬件 VPN 或路由和远程访问服务将多个资源从数据中心连接到 Azure 虚拟网络。

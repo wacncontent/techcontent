@@ -53,7 +53,7 @@ ms.author: carlrab
 
 1. 使用 13.0.600.65 或更高版本的 SQL Server Management Studio。
 
- 	 > [!IMPORTANT] 下载[最新](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)版本的 SQL Server Management Studio。建议始终使用最新版本的 Management Studio 以与 Azure 门户的更新保持同步。
+      > [!IMPORTANT] 下载[最新](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)版本的 SQL Server Management Studio。建议始终使用最新版本的 Management Studio 以与 Azure 门户的更新保持同步。
 
 2. 打开“数据库”文件夹，展开“系统数据库”，右键单击“master”，然后单击“新建查询”。
 

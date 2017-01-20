@@ -67,12 +67,12 @@ ms.author: wesmc
         using System.Web.Http;
         using System.Web.Http.Controllers;
         using System.Web.Http.Filters;
-		using Newtonsoft.Json;
+        using Newtonsoft.Json;
         using Microsoft.WindowsAzure.Mobile.Service.Security;
         using Microsoft.WindowsAzure.Mobile.Service;
         using Microsoft.IdentityModel.Clients.ActiveDirectory;
         using System.Globalization;
-		using System.IO;
+        using System.IO;
 
 6. 在 AuthorizeAadRole.cs 中，将以下枚举类型添加到 Utilities 命名空间。在此示例中，我们只需处理 **Sales** 角色。其他各项只是你可能要使用的组的示例。
 
@@ -90,31 +90,31 @@ ms.author: wesmc
         {
             private bool isInitialized;
             private bool isHosted;
-	        private ApiServices services = null;
-	
-	        // Constants used with ADAL and the Graph REST API for AAD
-	        private const string AadInstance = "https://login.chinacloudapi.cn/{0}";
-	        private const string GraphResourceId = "https://graph.chinacloudapi.cn/";
-	        private const string APIVersion = "?api-version=2013-04-05";
-	
-	        // App settings pulled from the Mobile Service
-	        private string tenantdomain;
-	        private string clientid;
-	        private string clientkey;
-	        private Dictionary<int, string> groupIds = new Dictionary<int, string>();
-	
-	        private string token = null;
+            private ApiServices services = null;
+    
+            // Constants used with ADAL and the Graph REST API for AAD
+            private const string AadInstance = "https://login.chinacloudapi.cn/{0}";
+            private const string GraphResourceId = "https://graph.chinacloudapi.cn/";
+            private const string APIVersion = "?api-version=2013-04-05";
+    
+            // App settings pulled from the Mobile Service
+            private string tenantdomain;
+            private string clientid;
+            private string clientkey;
+            private Dictionary<int, string> groupIds = new Dictionary<int, string>();
+    
+            private string token = null;
 
             public AuthorizeAadRole(AadRoles role)
             {
                 this.Role = role;
             }
 
-	        // private class used to serialize the Graph REST API web response
-	        private class MembershipResponse
-	        {
-	            public bool value;
-	        }
+            // private class used to serialize the Graph REST API web response
+            private class MembershipResponse
+            {
+                public bool value;
+            }
 
             public AadRoles Role { get; private set; }
 
@@ -240,7 +240,7 @@ ms.author: wesmc
             services = new ApiServices(actionContext.ControllerContext.Configuration);
 
             // Check whether we are running in a mode where local host access is allowed 
-			// through without authentication.
+            // through without authentication.
             if (!this.isInitialized)
             {
                 HttpConfiguration config = actionContext.ControllerContext.Configuration;
@@ -304,7 +304,7 @@ ms.author: wesmc
 
                 actionContext.Response = actionContext.Request
                     .CreateErrorResponse(HttpStatusCode.Forbidden, 
-						"User is not logged in or not a member of the required group");
+                        "User is not logged in or not a member of the required group");
             }
         }
         }

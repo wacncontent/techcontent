@@ -33,21 +33,21 @@ Azure 媒体服务是一项服务，该服务接受基于 OData 的 HTTP 请求�
 
 - 使用 JSON 并指定在请求中使用 **__metadata** 关键字（例如，为了引用某个链接对象）时，必须将 **Accept** 标头设置为 [JSON 详细格式](http://www.odata.org/documentation/odata-version-3-0/json-verbose-format/)（参阅以下示例）。Odata 并不了解请求中的 **__metadata** 属性，除非将其设置为 verbose。
 
-		POST https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Jobs HTTP/1.1
-		Content-Type: application/json;odata=verbose
-		Accept: application/json;odata=verbose
-		DataServiceVersion: 3.0
-		MaxDataServiceVersion: 3.0
-		x-ms-version: 2.11
-		Authorization: Bearer <token> 
-		Host: media.windows.net
-		
-		{
-			"Name" : "NewTestJob", 
-			"InputMediaAssets" : 
-				[{"__metadata" : {"uri" : "https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Assets('nb%3Acid%3AUUID%3Aba5356eb-30ff-4dc6-9e5a-41e4223540e7')"}}]
-		. . . 
-		
+        POST https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Jobs HTTP/1.1
+        Content-Type: application/json;odata=verbose
+        Accept: application/json;odata=verbose
+        DataServiceVersion: 3.0
+        MaxDataServiceVersion: 3.0
+        x-ms-version: 2.11
+        Authorization: Bearer <token> 
+        Host: media.windows.net
+        
+        {
+            "Name" : "NewTestJob", 
+            "InputMediaAssets" : 
+                [{"__metadata" : {"uri" : "https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Assets('nb%3Acid%3AUUID%3Aba5356eb-30ff-4dc6-9e5a-41e4223540e7')"}}]
+        . . . 
+        
 ## 媒体服务支持的标准 HTTP 请求标头
 
 每次调用媒体服务时，都必须在请求中包括一组必需标头，并且还可以根据需要包括一组可选标头。下表列出了必需的标头：

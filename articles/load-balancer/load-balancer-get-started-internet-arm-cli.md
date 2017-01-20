@@ -63,7 +63,7 @@ ms.author: sewhee
 
 1. 使用名为 *NRPRG* 的资源组在中国东部位置创建名为 *NRPVnet* 的虚拟网络 (VNet)。
 
-	azure network vnet create NRPRG NRPVnet chinaeast -a 10.0.0.0/16
+    azure network vnet create NRPRG NRPVnet chinaeast -a 10.0.0.0/16
 
     使用 *NRPVnet* 中 10.0.0.0/24 的 CIDR 块创建名为 *NRPVnetSubnet* 的子网。
 
@@ -71,7 +71,7 @@ ms.author: sewhee
 
 2. 使用 DNS 名称 *loadbalancernrp.eastus.cloudapp.azure.com* 创建要由前端 IP 池使用的名为 *NRPPublicIP* 的公共 IP 地址。下面的命令使用静态分配类型和 4 分钟的空闲超时。
 
-	azure network public-ip create -g NRPRG -n NRPPublicIP -l chinaeast -d loadbalancernrp -a static -i 4
+    azure network public-ip create -g NRPRG -n NRPPublicIP -l chinaeast -d loadbalancernrp -a static -i 4
 
     >[!IMPORTANT] 负载均衡器将使用公共 IP 的域标签作为其 FQDN。这与经典部署不同，后者使用云服务座位负载均衡器 FQDN。该实例中，FQDN 是 *loadbalancernrp.eastus.cloudapp.azure.com* 。
 
@@ -79,7 +79,7 @@ ms.author: sewhee
 
 以下命令会在*中国东部* Azure 位置的 *NRPRG* 资源组中创建 *NRPlb* 负载均衡器。
 
-	azure network lb create NRPRG NRPlb chinaeast
+    azure network lb create NRPRG NRPlb chinaeast
 
 ## 创建前端 IP 池和后端地址池
 此示例演示如何创建前端和后端 IP 池，前者接收负载均衡器上的传入网络流量，并向后者发送经过负载均衡的网络流量。
@@ -221,7 +221,7 @@ ms.author: sewhee
 
 3. 创建名为 *web1* 的虚拟机 (VM)，并将其与名为 *lb-nic1-be* 的 NIC 相关联。名为 *web1nrp* 的存储帐户在运行以下命令之前已创建。
 
-	    azure vm create --resource-group nrprg --name web1 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic1-be --availset-name nrp-avset --storage-account-name web1nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
+        azure vm create --resource-group nrprg --name web1 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic1-be --availset-name nrp-avset --storage-account-name web1nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
 
     >[!IMPORTANT] 负载均衡器中的 VM 需要在同一可用性集中。使用 `azure availset create` 创建可用性集。
 
@@ -250,17 +250,17 @@ ms.author: sewhee
 
 4. 创建名为 *web2* 的虚拟机 (VM)，并将其与名为 *lb-nic2-be* 的 NIC 相关联。名为 *web1nrp* 的存储帐户在运行以下命令之前已创建。
 
-	    azure vm create --resource-group nrprg --name web2 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic2-be --availset-name nrp-avset --storage-account-name web2nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
+        azure vm create --resource-group nrprg --name web2 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic2-be --availset-name nrp-avset --storage-account-name web2nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
 
 ## 更新现有的负载均衡器
 可添加引用现有负载均衡器的规则。在下例中，向现有负载均衡器 **NRPlb** 添加了新的负载均衡器规则
 
-	azure network lb rule create --resource-group nrprg --lb-name nrplb --name lbrule2 --protocol tcp --frontend-port 8080 --backend-port 8051 --frontend-ip-name frontendnrppool --backend-address-pool-name NRPbackendpool
+    azure network lb rule create --resource-group nrprg --lb-name nrplb --name lbrule2 --protocol tcp --frontend-port 8080 --backend-port 8051 --frontend-ip-name frontendnrppool --backend-address-pool-name NRPbackendpool
 
 ## 删除负载均衡器
 以下命令可删除负载均衡器：
 
-	azure network lb delete --resource-group nrprg --name nrplb
+    azure network lb delete --resource-group nrprg --name nrplb
 
 ## 后续步骤
 [开始配置内部负载均衡器](./load-balancer-get-started-ilb-arm-cli.md)

@@ -45,85 +45,85 @@ Azure PowerShell 是一个模块，提供用于通过 Windows PowerShell 管理 
 4.	现在，我们将提供一个简单的脚本，演示用于访问 Azure 存储的基本 PowerShell 命令。该脚本首先会请求用户提供 Azure 帐户凭据，以将 Azure 帐户添加到本地 PowerShell 环境。然后，该脚本将设置默认 Azure 订阅，并在 Azure 中创建新的存储帐户。接下来，该脚本将在此新存储帐户中创建新容器，并将现有图像文件 (Blob) 上传到该容器。在脚本列出该容器中的所有 Blob 后，它将在本地计算机中创建新的目标目录，并下载图像文件。
 5.	在以下代码部分中，选择注释 **#begin** 和 **#end** 之间的脚本。按 CTRL+C 将其复制到剪贴板。
 
-    	#begin
-    	# Update with the name of your subscription.
-    	$SubscriptionName="YourSubscriptionName"
+        #begin
+        # Update with the name of your subscription.
+        $SubscriptionName="YourSubscriptionName"
 
-    	# Give a name to your new storage account. It must be lowercase!
-    	$StorageAccountName="yourstorageaccountname"
+        # Give a name to your new storage account. It must be lowercase!
+        $StorageAccountName="yourstorageaccountname"
 
-    	# Choose "China North" as an example.
-    	$Location = "China North"
+        # Choose "China North" as an example.
+        $Location = "China North"
 
-    	# Give a name to your new container.
-    	$ContainerName = "imagecontainer"
+        # Give a name to your new container.
+        $ContainerName = "imagecontainer"
 
-    	# Have an image file and a source directory in your local computer.
-    	$ImageToUpload = "C:\Images\HelloWorld.png"
+        # Have an image file and a source directory in your local computer.
+        $ImageToUpload = "C:\Images\HelloWorld.png"
 
-    	# A destination directory in your local computer.
-    	$DestinationFolder = "C:\DownloadImages"
+        # A destination directory in your local computer.
+        $DestinationFolder = "C:\DownloadImages"
 
-    	# Add your Azure account to the local PowerShell environment.
-    	Add-AzureAccount -Environment AzureChinaCloud
+        # Add your Azure account to the local PowerShell environment.
+        Add-AzureAccount -Environment AzureChinaCloud
 
-    	# Set a default Azure subscription.
-    	Select-AzureSubscription -SubscriptionName $SubscriptionName –Default
+        # Set a default Azure subscription.
+        Select-AzureSubscription -SubscriptionName $SubscriptionName –Default
 
-    	# Create a new storage account.
-    	New-AzureStorageAccount –StorageAccountName $StorageAccountName -Location $Location
+        # Create a new storage account.
+        New-AzureStorageAccount –StorageAccountName $StorageAccountName -Location $Location
 
-    	# Set a default storage account.
-    	Set-AzureSubscription -CurrentStorageAccountName $StorageAccountName -SubscriptionName $SubscriptionName
+        # Set a default storage account.
+        Set-AzureSubscription -CurrentStorageAccountName $StorageAccountName -SubscriptionName $SubscriptionName
 
-    	# Create a new container.
-    	New-AzureStorageContainer -Name $ContainerName -Permission Off
+        # Create a new container.
+        New-AzureStorageContainer -Name $ContainerName -Permission Off
 
-    	# Upload a blob into a container.
-    	Set-AzureStorageBlobContent -Container $ContainerName -File $ImageToUpload
+        # Upload a blob into a container.
+        Set-AzureStorageBlobContent -Container $ContainerName -File $ImageToUpload
 
-    	# List all blobs in a container.
-    	Get-AzureStorageBlob -Container $ContainerName
+        # List all blobs in a container.
+        Get-AzureStorageBlob -Container $ContainerName
 
-    	# Download blobs from the container:
-    	# Get a reference to a list of all blobs in a container.
-    	$blobs = Get-AzureStorageBlob -Container $ContainerName
+        # Download blobs from the container:
+        # Get a reference to a list of all blobs in a container.
+        $blobs = Get-AzureStorageBlob -Container $ContainerName
 
-    	# Create the destination directory.
-    	New-Item -Path $DestinationFolder -ItemType Directory -Force  
+        # Create the destination directory.
+        New-Item -Path $DestinationFolder -ItemType Directory -Force  
 
-    	# Download blobs into the local destination directory.
-    	$blobs | Get-AzureStorageBlobContent –Destination $DestinationFolder
-    	#end
+        # Download blobs into the local destination directory.
+        $blobs | Get-AzureStorageBlobContent –Destination $DestinationFolder
+        #end
 
 5.	在 **Windows PowerShell ISE** 中，按 CTRL+V 复制该脚本。单击“文件”>“保存”。在“另存为”对话窗口中，键入脚本文件的名称，例如“mystoragescript”。单击“保存”。
 
 6.	现在，需要基于配置设置更新脚本变量。必须根据自己的订阅更新 **$SubscriptionName** 变量。可以保留脚本中指定的其他变量，或根据需要更新。
 
-	- **$SubscriptionName：** 必须根据自己的订阅更新此变量。请按照以下三种方法之一查找订阅的名称：
+    - **$SubscriptionName：** 必须根据自己的订阅更新此变量。请按照以下三种方法之一查找订阅的名称：
 
-		a.在“Windows PowerShell ISE”中，单击“文件”>“新建”以创建新的脚本文件。将以下脚本复制到新脚本文件，然后单击“调试”>“运行”。以下脚本会先请求用户提供 Azure 帐户凭据以将用户的 Azure 帐户添加到本地 PowerShell 环境，然后显示已连接到本地 PowerShell 会话的所有订阅。记下在学习本教程时要使用的订阅名称：
-		
-    		Add-AzureAccount -Environment AzureChinaCloud
-       		Get-AzureSubscription | Format-Table SubscriptionName, IsDefault, IsCurrent, CurrentStorageAccountName
+        a.在“Windows PowerShell ISE”中，单击“文件”>“新建”以创建新的脚本文件。将以下脚本复制到新脚本文件，然后单击“调试”>“运行”。以下脚本会先请求用户提供 Azure 帐户凭据以将用户的 Azure 帐户添加到本地 PowerShell 环境，然后显示已连接到本地 PowerShell 会话的所有订阅。记下在学习本教程时要使用的订阅名称：
+        
+            Add-AzureAccount -Environment AzureChinaCloud
+               Get-AzureSubscription | Format-Table SubscriptionName, IsDefault, IsCurrent, CurrentStorageAccountName
 
-		b.若要在 [Azure 门户预览](https://portal.azure.cn)中找到并复制订阅名称，请在左侧“中心”菜单中单击“订阅”。复制在运行本指南中的脚本时要使用的订阅名称。
+        b.若要在 [Azure 门户预览](https://portal.azure.cn)中找到并复制订阅名称，请在左侧“中心”菜单中单击“订阅”。复制在运行本指南中的脚本时要使用的订阅名称。
 
-     		![Azure portal](./media/storage-powershell-guide-full/Subscription_Previewportal.png)
+             ![Azure portal](./media/storage-powershell-guide-full/Subscription_Previewportal.png)
 
-		c.若要在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中找到并复制订阅名称，请向下滚动并单击门户左侧的“设置”。单击“订阅”查看订阅列表。复制在运行本指南中指定的脚本时要使用的订阅名称。
+        c.若要在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中找到并复制订阅名称，请向下滚动并单击门户左侧的“设置”。单击“订阅”查看订阅列表。复制在运行本指南中指定的脚本时要使用的订阅名称。
 
-     		![Azure Classic Portal](./media/storage-powershell-guide-full/Subscription_currentportal.png)
+             ![Azure Classic Portal](./media/storage-powershell-guide-full/Subscription_currentportal.png)
 
-	- **$StorageAccountName：**使用脚本中给定的名称，或输入存储帐户的新名称。**重要提示：**在 Azure 中，存储帐户的名称必须是唯一的。它还必须为小写！
+    - **$StorageAccountName：**使用脚本中给定的名称，或输入存储帐户的新名称。**重要提示：**在 Azure 中，存储帐户的名称必须是唯一的。它还必须为小写！
 
-	- **$Location：**使用脚本中给定的“China North”，或者选择其他 Azure 位置，例如 China East 等等。
+    - **$Location：**使用脚本中给定的“China North”，或者选择其他 Azure 位置，例如 China East 等等。
 
-	- **$ContainerName：**使用脚本中给定的名称，或输入容器的新名称。
+    - **$ContainerName：**使用脚本中给定的名称，或输入容器的新名称。
 
-	- **$ImageToUpload：**输入本地计算机上图片的路径，例如："C:\Images\HelloWorld.png"。
+    - **$ImageToUpload：**输入本地计算机上图片的路径，例如："C:\Images\HelloWorld.png"。
 
-	- **$DestinationFolder：**输入用于存储从 Azure 存储下载的文件的本地目录路径，例如："C:\DownloadImages"。
+    - **$DestinationFolder：**输入用于存储从 Azure 存储下载的文件的本地目录路径，例如："C:\DownloadImages"。
 
 7.	在更新“mystoragescript.ps1”文件中的脚本变量后，请单击“文件”>“保存”。然后，单击“调试”>“运行”，或按 **F5** 运行该脚本。
 
@@ -155,24 +155,24 @@ Azure PowerShell 是一个模块，提供用于通过 Windows PowerShell 管理 
 
 3.	接下来，运行以下命令以查看本地 PowerShell 环境中的 Azure 帐户，并检查是否列出了帐户：
 
-	`Get-AzureAccount`
+    `Get-AzureAccount`
 
 4.	然后，运行以下 cmdlet 以查看已连接到本地 PowerShell 会话的所有订阅，并验证是否列出了订阅：
 
-	`Get-AzureSubscription | Format-Table SubscriptionName, IsDefault, IsCurrent, CurrentStorageAccountName`
+    `Get-AzureSubscription | Format-Table SubscriptionName, IsDefault, IsCurrent, CurrentStorageAccountName`
 
 5.	若要设置默认 Azure 订阅，请运行 Select-AzureSubscription cmdlet：
 
-	    $SubscriptionName = 'Your subscription Name'
-    	Select-AzureSubscription -SubscriptionName $SubscriptionName –Default
+        $SubscriptionName = 'Your subscription Name'
+        Select-AzureSubscription -SubscriptionName $SubscriptionName –Default
 
 6.	通过运行 Get-AzureSubscription cmdlet 检查默认订阅的名称：
 
-	`Get-AzureSubscription -Default`
+    `Get-AzureSubscription -Default`
 
 7.	若要查看所有适用于 Azure 存储的 PowerShell cmdlet，请运行：
 
-	`Get-Command -Module Azure -Noun *Storage*`
+    `Get-Command -Module Azure -Noun *Storage*`
 
 ### 如何创建新的 Azure 存储帐户
 若要使用 Azure 存储，则需要一个存储帐户。可以在将计算机配置为连接到订阅之后，创建新的 Azure 存储帐户。
@@ -183,9 +183,9 @@ Azure PowerShell 是一个模块，提供用于通过 Windows PowerShell 管理 
 
 2.	接下来，运行 New-AzureStorageAccount cmdlet 创建新的存储帐户。以下示例将在“中国北部”数据中心创建新的存储帐户。
 
-    	$location = "China North"
-	    $StorageAccountName = "yourstorageaccount"
-	    New-AzureStorageAccount –StorageAccountName $StorageAccountName -Location $location
+        $location = "China North"
+        $StorageAccountName = "yourstorageaccount"
+        New-AzureStorageAccount –StorageAccountName $StorageAccountName -Location $location
 
 > [!IMPORTANT] 存储帐户的名称在 Azure 中是唯一的，并且必须采用小写。有关命名约定和限制，请参阅[关于 Azure 存储帐户](./storage-create-storage-account.md)、[命名和引用容器、Blob 和元数据](http://msdn.microsoft.com/zh-cn/library/azure/dd135715.aspx)。
 
@@ -194,13 +194,13 @@ Azure PowerShell 是一个模块，提供用于通过 Windows PowerShell 管理 
 
 1.	若要设置订阅的默认存储帐户，可以运行 Set-AzureSubscription cmdlet。
 
-		$SubscriptionName = "Your subscription name"
-     	$StorageAccountName = "yourstorageaccount"  
-    	Set-AzureSubscription -Environment AzureChinaCloud -CurrentStorageAccountName $StorageAccountName -SubscriptionName $SubscriptionName 
+        $SubscriptionName = "Your subscription name"
+         $StorageAccountName = "yourstorageaccount"  
+        Set-AzureSubscription -Environment AzureChinaCloud -CurrentStorageAccountName $StorageAccountName -SubscriptionName $SubscriptionName 
 
 2.	接下来，运行 Get-AzureSubscription cmdlet，以检查该存储帐户是否与默认订阅帐户关联。此命令将返回当前订阅的订阅属性，包括其当前存储帐户。
 
-	    Get-AzureSubscription –Current
+        Get-AzureSubscription –Current
 
 ### 如何列出订阅中所有的 Azure 存储帐户
 每个 Azure 订阅最多可以有 100 个存储帐户。有关限制的最新信息，请参阅 [Azure 订阅和服务限制、配额与约束](../azure-subscription-service-limits.md)。
@@ -216,21 +216,21 @@ Azure 存储上下文是 PowerShell 中用于封装存储凭据的对象。运�
 
 - 运行 [Get-AzureStorageKey](http://msdn.microsoft.com/zh-cn/library/azure/dn495235.aspx) cmdlet，找出 Azure 存储帐户的主存储访问密钥。接下来，调用 [New-AzureStorageContext](http://msdn.microsoft.com/zh-cn/library/azure/dn806380.aspx) cmdlet 以创建存储上下文：
 
-    	$StorageAccountName = "yourstorageaccount"
-    	$StorageAccountKey = Get-AzureStorageKey -StorageAccountName $StorageAccountName
-    	$Ctx = New-AzureStorageContext -Environment AzureChinaCloud $StorageAccountName -StorageAccountKey $StorageAccountKey.Primary
+        $StorageAccountName = "yourstorageaccount"
+        $StorageAccountKey = Get-AzureStorageKey -StorageAccountName $StorageAccountName
+        $Ctx = New-AzureStorageContext -Environment AzureChinaCloud $StorageAccountName -StorageAccountKey $StorageAccountKey.Primary
 
 - 生成 Azure 存储容器的共享访问签名令牌，并使用它来创建存储上下文：
 
-    	$sasToken = New-AzureStorageContainerSASToken -Container abc -Permission rl
-    	$Ctx = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $StorageAccountName -SasToken $sasToken
+        $sasToken = New-AzureStorageContainerSASToken -Container abc -Permission rl
+        $Ctx = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $StorageAccountName -SasToken $sasToken
 
-	有关详细信息，请参阅 [New-AzureStorageContainerSASToken](http://msdn.microsoft.com/zh-cn/library/azure/dn806416.aspx) 和[使用共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)。
+    有关详细信息，请参阅 [New-AzureStorageContainerSASToken](http://msdn.microsoft.com/zh-cn/library/azure/dn806416.aspx) 和[使用共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)。
 
 - 在某些情况下，可能想要在创建新的存储上下文时指定服务终结点。如果已将存储帐户的自定义域名注册到 Blob 服务，或者想要使用共享访问签名来访问存储资源，则可能需要进行这种指定。在连接字符串中设置服务终结点，并使用它来创建新的存储上下文，如下所示：
 
-    	$ConnectionString = "DefaultEndpointsProtocol=http;BlobEndpoint=<blobEndpoint>;QueueEndpoint=<QueueEndpoint>;TableEndpoint=<TableEndpoint>;AccountName=<AccountName>;AccountKey=<AccountKey>"
-    	$Ctx = New-AzureStorageContext -Environment AzureChinaCloud -ConnectionString $ConnectionString
+        $ConnectionString = "DefaultEndpointsProtocol=http;BlobEndpoint=<blobEndpoint>;QueueEndpoint=<QueueEndpoint>;TableEndpoint=<TableEndpoint>;AccountName=<AccountName>;AccountKey=<AccountKey>"
+        $Ctx = New-AzureStorageContext -Environment AzureChinaCloud -ConnectionString $ConnectionString
 
 有关如何配置存储连接字符串的详细信息，请参阅[配置连接字符串](./storage-configure-connection-string.md)。
 
@@ -240,19 +240,19 @@ Azure 存储上下文是 PowerShell 中用于封装存储凭据的对象。运�
 
 Azure 存储帐户附带了两个帐户密钥。可以使用以下 cmdlet 示例来检索密钥。
 
-	Get-AzureStorageKey -StorageAccountName "yourstorageaccount"
+    Get-AzureStorageKey -StorageAccountName "yourstorageaccount"
 
 使用以下 cmdlet 检索特定密钥。有效值为 Primary 和 Secondary。
 
-	(Get-AzureStorageKey -StorageAccountName $StorageAccountName).Primary
+    (Get-AzureStorageKey -StorageAccountName $StorageAccountName).Primary
 
-	(Get-AzureStorageKey -StorageAccountName $StorageAccountName).Secondary
+    (Get-AzureStorageKey -StorageAccountName $StorageAccountName).Secondary
 
 如果想要重新生成密钥，请使用以下 cmdlet。-KeyType 的有效值为“Primary”和“Secondary”
 
-	New-AzureStorageKey -StorageAccountName $StorageAccountName -KeyType “Primary”
+    New-AzureStorageKey -StorageAccountName $StorageAccountName -KeyType “Primary”
 
-	New-AzureStorageKey -StorageAccountName $StorageAccountName -KeyType “Secondary”
+    New-AzureStorageKey -StorageAccountName $StorageAccountName -KeyType “Secondary”
 
 ##<a name="how-to-manage-azure-blobs"></a> 如何管理 Azure blob
 Azure Blob 存储是用于存储大量非结构化数据（例如文本或二进制数据）的服务，这些数据可通过 HTTP 或 HTTPS 从世界各地进行访问。本部分假设用户已熟悉了 Azure Blob 存储服务的概念。有关详细信息，请参阅[通过 .NET 开始使用 Blob 存储](./storage-dotnet-how-to-use-blobs.md)和 [Blob 服务概念](http://msdn.microsoft.com/zh-cn/library/azure/dd179376.aspx)。
@@ -679,7 +679,7 @@ Azure 环境的部署独立于 Azure，例如[中国世纪互联运营的 AzureC
 
 3.	为 AzureChinaCloud 帐户创建存储上下文：
 
-    	$Ctx = New-AzureStorageContext -StorageAccountName $AccountName -StorageAccountKey $AccountKey> -Environment AzureChinaCloud
+        $Ctx = New-AzureStorageContext -StorageAccountName $AccountName -StorageAccountKey $AccountKey> -Environment AzureChinaCloud
 
 - [在中国区服务中创建应用程序时的差异概述](https://msdn.microsoft.com/zh-cn/library/azure/dn578439.aspx)
 

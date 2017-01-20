@@ -48,44 +48,44 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
 2. 创建新的控制台应用程序项目。单击“文件”菜单并选择“新建”，然后单击“项目”。在“新建项目”对话框中，选择“Visual C#”（如果不显示“Visual C#”，则在“其他语言”下方查看），单击“控制台应用程序”模板，然后将其命名为 **QueueSample**。使用默认“位置”。单击“确定”以创建该项目。
 
 1. 使用 NuGet 包管理器将服务总线库添加到你的项目：
-	1. 在“解决方案资源管理器”中，右键单击“QueueSample”项目，然后单击“管理 NuGet 程序包”。
-	2. 在“管理 Nuget 包”对话框中，单击“浏览”选项卡，搜索“Azure 服务总线”，然后单击“安装”。<br />
+    1. 在“解决方案资源管理器”中，右键单击“QueueSample”项目，然后单击“管理 NuGet 程序包”。
+    2. 在“管理 Nuget 包”对话框中，单击“浏览”选项卡，搜索“Azure 服务总线”，然后单击“安装”。<br />
 1. 在解决方案资源管理器中，双击 Program.cs 文件以在 Visual Studio 编辑器中将其打开。将命名空间名称从其默认名称 `QueueSample` 更改为 `Microsoft.ServiceBus.Samples`。
 
-	Microsoft.ServiceBus.Samples
-	{
-	    ...
+    Microsoft.ServiceBus.Samples
+    {
+        ...
 
 2. 修改 `using` 语句，如以下代码中所示。
 
-    	using System;
-    	using System.Collections.Generic;
-    	using System.Data;
-    	using System.IO;
-    	using System.Threading;
-    	using System.Threading.Tasks;
-    	using Microsoft.ServiceBus.Messaging;
-	
+        using System;
+        using System.Collections.Generic;
+        using System.Data;
+        using System.IO;
+        using System.Threading;
+        using System.Threading.Tasks;
+        using Microsoft.ServiceBus.Messaging;
+    
 3. 创建一个名为 Data.csv 的文本文件，并将以下逗号分隔文本中的内容复制到其中。
 
-    	IssueID,IssueTitle,CustomerID,CategoryID,SupportPackage,Priority,Severity,Resolved
-    	1,Package lost,1,1,Basic,5,1,FALSE
-    	2,Package damaged,1,1,Basic,5,1,FALSE
-    	3,Product defective,1,2,Premium,5,2,FALSE
-    	4,Product damaged,2,2,Premium,5,2,FALSE
-    	5,Package lost,2,2,Basic,5,2,TRUE
-    	6,Package lost,3,2,Basic,5,2,FALSE
-    	7,Package damaged,3,7,Premium,5,3,FALSE
-    	8,Product defective,3,2,Premium,5,3,FALSE
-    	9,Product damaged,4,6,Premium,5,3,TRUE
-    	10,Package lost,4,8,Basic,5,3,FALSE
-    	11,Package damaged,5,4,Basic,5,4,FALSE
-    	12,Product defective,5,4,Basic,5,4,FALSE
-    	13,Package lost,6,8,Basic,5,4,FALSE
-    	14,Package damaged,6,7,Premium,5,5,FALSE
-    	15,Product defective,6,2,Premium,5,5,FALSE
-	
-	保存并关闭 Data.csv 文件，并记住保存位置。
+        IssueID,IssueTitle,CustomerID,CategoryID,SupportPackage,Priority,Severity,Resolved
+        1,Package lost,1,1,Basic,5,1,FALSE
+        2,Package damaged,1,1,Basic,5,1,FALSE
+        3,Product defective,1,2,Premium,5,2,FALSE
+        4,Product damaged,2,2,Premium,5,2,FALSE
+        5,Package lost,2,2,Basic,5,2,TRUE
+        6,Package lost,3,2,Basic,5,2,FALSE
+        7,Package damaged,3,7,Premium,5,3,FALSE
+        8,Product defective,3,2,Premium,5,3,FALSE
+        9,Product damaged,4,6,Premium,5,3,TRUE
+        10,Package lost,4,8,Basic,5,3,FALSE
+        11,Package damaged,5,4,Basic,5,4,FALSE
+        12,Product defective,5,4,Basic,5,4,FALSE
+        13,Package lost,6,8,Basic,5,4,FALSE
+        14,Package damaged,6,7,Premium,5,5,FALSE
+        15,Product defective,6,2,Premium,5,5,FALSE
+    
+    保存并关闭 Data.csv 文件，并记住保存位置。
 
 4. 在解决方案资源管理器中，右键单击项目的名称（此示例中为 **QueueSample**），并依次单击“添加”和“现有项”。
 
@@ -95,135 +95,135 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
 
 1. 在 `Program` 类的 `Main()` 方法前面，声明两个变量：其中之一为 **DataTable** 类型，用于包含 Data.csv 中的消息列表。另一个应为 List 对象类型，强类型化为 [BrokeredMessage](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.aspx)。后者是中转消息列表，本教程中的后续步骤将用到它。
 
-    	namespace Microsoft.ServiceBus.Samples
-    	{
-    	    publicclass Program
-    	    {
-    	
-    	        privatestatic DataTable issues;
-    	        privatestatic List<BrokeredMessage> MessageList;
-	
+        namespace Microsoft.ServiceBus.Samples
+        {
+            publicclass Program
+            {
+        
+                privatestatic DataTable issues;
+                privatestatic List<BrokeredMessage> MessageList;
+    
 2. 在 `Main()` 之外，定义 `ParseCSV()` 方法，用于解析 Data.csv 中的消息列表并将消息加载到 [DataTable](https://msdn.microsoft.com/zh-cn/library/azure/system.data.datatable.aspx) 表，如下所示。该方法将返回 **DataTable** 对象。
 
-    	static DataTable ParseCSVFile()
-    	{
-    	    DataTable tableIssues = new DataTable("Issues");
-    	    string path = @"..\..\data.csv";
-    	    try
-    	    {
-    	        using (StreamReader readFile = new StreamReader(path))
-    	        {
-    	            string line;
-    	            string[] row;
-    	
-    	            // create the columns
-    	            line = readFile.ReadLine();
-    	            foreach (string columnTitle in line.Split(','))
-    	            {
-    	                tableIssues.Columns.Add(columnTitle);
-    	            }
-    	
-    	            while ((line = readFile.ReadLine()) != null)
-    	            {
-    	                row = line.Split(',');
-    	                tableIssues.Rows.Add(row);
-    	            }
-    	        }
-    	    }
-    	    catch (Exception e)
-    	    {
-    	        Console.WriteLine("Error:" + e.ToString());
-    	    }
-    	
-    	    return tableIssues;
-    	}
-	
+        static DataTable ParseCSVFile()
+        {
+            DataTable tableIssues = new DataTable("Issues");
+            string path = @"..\..\data.csv";
+            try
+            {
+                using (StreamReader readFile = new StreamReader(path))
+                {
+                    string line;
+                    string[] row;
+        
+                    // create the columns
+                    line = readFile.ReadLine();
+                    foreach (string columnTitle in line.Split(','))
+                    {
+                        tableIssues.Columns.Add(columnTitle);
+                    }
+        
+                    while ((line = readFile.ReadLine()) != null)
+                    {
+                        row = line.Split(',');
+                        tableIssues.Rows.Add(row);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error:" + e.ToString());
+            }
+        
+            return tableIssues;
+        }
+    
 3. 在 `Main()` 方法中，添加一条用于调用 `ParseCSVFile()` 方法的语句：
 
-    	public static void Main(string[] args)
-    	{
-    	
-    	    // Populate test data
-    	    issues = ParseCSVFile();
-    	
-    	}
-	
+        public static void Main(string[] args)
+        {
+        
+            // Populate test data
+            issues = ParseCSVFile();
+        
+        }
+    
 ### 创建用于加载消息列表的方法
 
 1. 在 `Main()` 之外，定义 `GenerateMessages()` 方法，用于接收 `ParseCSVFile()` 返回的 **DataTable** 对象，并将该表加载到强类型化的中转消息列表中。该方法随后返回 **List** 对象，如下面的示例所示。
 
-    	static List<BrokeredMessage> GenerateMessages(DataTable issues)
-    	{
-    	    // Instantiate the brokered list object
-    	    List<BrokeredMessage> result = new List<BrokeredMessage>();
-    	
-    	    // Iterate through the table and create a brokered message for each row
-    	    foreach (DataRow item in issues.Rows)
-    	    {
-    	        BrokeredMessage message = new BrokeredMessage();
-    	        foreach (DataColumn property in issues.Columns)
-    	        {
-    	            message.Properties.Add(property.ColumnName, item[property]);
-    	        }
-    	        result.Add(message);
-    	    }
-    	    return result;
-    	}
-	
+        static List<BrokeredMessage> GenerateMessages(DataTable issues)
+        {
+            // Instantiate the brokered list object
+            List<BrokeredMessage> result = new List<BrokeredMessage>();
+        
+            // Iterate through the table and create a brokered message for each row
+            foreach (DataRow item in issues.Rows)
+            {
+                BrokeredMessage message = new BrokeredMessage();
+                foreach (DataColumn property in issues.Columns)
+                {
+                    message.Properties.Add(property.ColumnName, item[property]);
+                }
+                result.Add(message);
+            }
+            return result;
+        }
+    
 1. 在 `Main()` 中，在调用 `ParseCSVFile()` 后面直接添加一条语句，该语句将调用以 `ParseCSVFile()` 的返回值作为参数的 `GenerateMessages()` 方法：
 
-    	public static void Main(string[] args)
-    	{
-    	
-    	    // Populate test data
-    	    issues = ParseCSVFile();
-    	    MessageList = GenerateMessages(issues);
-    	}
-	
+        public static void Main(string[] args)
+        {
+        
+            // Populate test data
+            issues = ParseCSVFile();
+            MessageList = GenerateMessages(issues);
+        }
+    
 ### 获取用户凭据
 
 1. 首先创建三个全局字符串变量，用于保存这些值。在以前的变量声明之后直接声明这些变量，例如：
 
-    	namespace Microsoft.ServiceBus.Samples
-    	{
-    	    publicclass Program
-    	    {
-    	
-    	        private static DataTable issues;
-    	        private static List<BrokeredMessage> MessageList; 
+        namespace Microsoft.ServiceBus.Samples
+        {
+            publicclass Program
+            {
+        
+                private static DataTable issues;
+                private static List<BrokeredMessage> MessageList; 
     
-    	        // Add these variables
-    			private static string ServiceNamespace;
-    	        private static string sasKeyName = "RootManageSharedAccessKey";
-    	        private static string sasKeyValue;
-    	        …
-	
+                // Add these variables
+                private static string ServiceNamespace;
+                private static string sasKeyName = "RootManageSharedAccessKey";
+                private static string sasKeyValue;
+                …
+    
 2. 接下来，创建一个函数，用于接受并存储服务命名空间和 SAS 密钥。在 `Main()` 之外添加此方法。例如：
 
-    	static void CollectUserInput()
-    	{
-    	    // User service namespace
-    	    Console.Write("Please enter the namespace to use: ");
-    	    ServiceNamespace = Console.ReadLine();
-    	
-    	    // Issuer key
-    	    Console.Write("Enter the SAS key to use: ");
-    	    sasKeyValue = Console.ReadLine();
-    	}
-	
+        static void CollectUserInput()
+        {
+            // User service namespace
+            Console.Write("Please enter the namespace to use: ");
+            ServiceNamespace = Console.ReadLine();
+        
+            // Issuer key
+            Console.Write("Enter the SAS key to use: ");
+            sasKeyValue = Console.ReadLine();
+        }
+    
 1. 在 `Main()` 中，在调用 `GenerateMessages()` 的后面直接添加一条语句用于调用 `CollectUserInput()` 方法：
 
-    	public static void Main(string[] args)
-    	{
-    	
-    	    // Populate test data
-    	    issues = ParseCSVFile();
-    	    MessageList = GenerateMessages(issues);
-    	    
-    	    // Collect user input
-    	    CollectUserInput();
-    	}
-	
+        public static void Main(string[] args)
+        {
+        
+            // Populate test data
+            issues = ParseCSVFile();
+            MessageList = GenerateMessages(issues);
+            
+            // Collect user input
+            CollectUserInput();
+        }
+    
 ### 生成解决方案
 
 在 Visual Studio 的“生成”菜单中，单击“生成解决方案”或按 **Ctrl+Shift+B** 确认到目前为止的操作的准确性。
@@ -234,26 +234,26 @@ Azure 服务总线提供两个综合性消息传送解决方案：一是通过�
 
 1. 为清楚起见，本教程将所有队列操作置于单独的方法中。在 `Program` 类的 `Main()` 方法后面创建异步的 `Queue()` 方法。例如：
  
-    	public static void Main(string[] args)
-    	{
-    	…
-    	}
-    	static async Task Queue()
-    	{
-    	}
-	
+        public static void Main(string[] args)
+        {
+        …
+        }
+        static async Task Queue()
+        {
+        }
+    
 1. 下一步是使用 [TokenProvider](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.tokenprovider.aspx) 对象创建 SAS 凭据。此创建方法用于接受在 `CollectUserInput()` 方法中获取的 SAS 密钥名称和值。将以下代码添加到 `Queue()` 方法中：
 
-    	static async Task Queue()
-    	{
-    	    // Create management credentials
-    	    TokenProvider credentials = TokenProvider.CreateSharedAccessSignatureTokenProvider(sasKeyName,sasKeyValue);
-    	}
-	
+        static async Task Queue()
+        {
+            // Create management credentials
+            TokenProvider credentials = TokenProvider.CreateSharedAccessSignatureTokenProvider(sasKeyName,sasKeyValue);
+        }
+    
 2. 使用 URI 创建新的命名空间管理对象，此 URI 包含在上一步中获得的作为参数的命名空间名称和管理凭据。直接在上一步中添加的代码后面添加以下代码。请确保将 替换为服务命名空间的名称：
-	
-    	NamespaceManager namespaceClient = new NamespaceManager(ServiceBusEnvironment.CreateServiceUri("sb", "<yourNamespace>", string.Empty), credentials);
-	
+    
+        NamespaceManager namespaceClient = new NamespaceManager(ServiceBusEnvironment.CreateServiceUri("sb", "<yourNamespace>", string.Empty), credentials);
+    
 ### 示例
 
 此时，你的代码应如下所示：
@@ -376,27 +376,27 @@ namespace Microsoft.ServiceBus.Samples
     }
 
     myQueue = namespaceClient.CreateQueue("IssueTrackingQueue");
-	
+    
 1. 在 `Queue()` 方法中，使用新创建的服务总线 URI 作为参数创建一个消息工厂对象。在上一步中添加的管理操作后面直接添加以下代码。请确保将 `<yourNamespace>` 替换为服务命名空间的名称：
 
-	MessagingFactory factory = MessagingFactory.Create(ServiceBusEnvironment.CreateServiceUri("sb", "<yourNamespace>", string.Empty), credentials);
-	
+    MessagingFactory factory = MessagingFactory.Create(ServiceBusEnvironment.CreateServiceUri("sb", "<yourNamespace>", string.Empty), credentials);
+    
 3. 接下来，使用 [QueueClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queueclient.aspx) 类创建队列对象。在最后一步中添加的代码后直接添加以下代码：
 
-	QueueClient myQueueClient = factory.CreateQueueClient("IssueTrackingQueue");
-	
+    QueueClient myQueueClient = factory.CreateQueueClient("IssueTrackingQueue");
+    
 4. 然后添加以下代码，用于循环遍历你之前创建的中转消息列表，并将其中每条消息发送到队列。在上一步中的 `CreateQueueClient()` 声明后直接添加以下代码：
-	
-	// Send messages
-	Console.WriteLine("Now sending messages to the queue.");
-	for (int count = 0; count < 6; count++)
-	{
-	    var issue = MessageList[count];
-	    issue.Label = issue.Properties["IssueTitle"].ToString();
-	    await myQueueClient.SendAsync(issue);
-	    Console.WriteLine(string.Format("Message sent: {0}, {1}", issue.Label, issue.MessageId));
-	}
-	
+    
+    // Send messages
+    Console.WriteLine("Now sending messages to the queue.");
+    for (int count = 0; count < 6; count++)
+    {
+        var issue = MessageList[count];
+        issue.Label = issue.Properties["IssueTitle"].ToString();
+        await myQueueClient.SendAsync(issue);
+        Console.WriteLine(string.Format("Message sent: {0}, {1}", issue.Label, issue.MessageId));
+    }
+    
 ## 从队列接收消息
 
 在此步骤中，你将从上一步中创建的队列获取消息列表。
@@ -411,7 +411,7 @@ while ((message = await myQueueClient.ReceiveAsync(new TimeSpan(hours: 0, minute
     {
         Console.WriteLine(string.Format("Message received: {0}, {1}, {2}", message.SequenceNumber, message.Label, message.MessageId));
         message.Complete();
-	
+    
         Console.WriteLine("Processing message (sleeping...)");
         Thread.Sleep(1000);
     }
@@ -422,27 +422,27 @@ while ((message = await myQueueClient.ReceiveAsync(new TimeSpan(hours: 0, minute
 
 在前面的代码后面直接添加以下代码，以清除消息工厂对象和队列资源：
 
-	factory.Close();
-	myQueueClient.Close();
-	namespaceClient.DeleteQueue("IssueTrackingQueue");
-	
+    factory.Close();
+    myQueueClient.Close();
+    namespaceClient.DeleteQueue("IssueTrackingQueue");
+    
 ### 调用 Queue 方法
 
 最后一步是添加用于从 `Main()` 调用 `Queue()` 方法的代码。在 Main() 的末尾添加以下突出显示的行：
-	
-	public static void Main(string[] args)
-	{
-	    // Collect user input
-	    CollectUserInput();
-	
-	    // Populate test data
-	    issues = ParseCSVFile();
-	    MessageList = GenerateMessages(issues);
-	
-	    // Add this call
-	    Queue();
-	}
-	
+    
+    public static void Main(string[] args)
+    {
+        // Collect user input
+        CollectUserInput();
+    
+        // Populate test data
+        issues = ParseCSVFile();
+        MessageList = GenerateMessages(issues);
+    
+        // Add this call
+        Queue();
+    }
+    
 ### 示例
 
 下面的代码包含完整的 **QueueSample** 应用程序。

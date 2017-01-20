@@ -58,22 +58,22 @@ ms.author: cherylmc
 
 运行 PowerShell cmdlet 创建 ExpressRoute 线路后，很快就会看到 ExpressRoute 线路处于以下状态。
 
-	ServiceProviderProvisioningState : NotProvisioned
-	Status                           : Enabled
+    ServiceProviderProvisioningState : NotProvisioned
+    Status                           : Enabled
 
 #### 当连接服务提供商正在预配线路时
 
 将服务密钥传递给连接服务提供商并且他们已启动预配过程时，很快就会看到 ExpressRoute 线路处于以下状态。
 
-	ServiceProviderProvisioningState : Provisioning
-	Status                           : Enabled
+    ServiceProviderProvisioningState : Provisioning
+    Status                           : Enabled
 
 #### 当连接服务提供商完成预配过程时
 
 当连接服务提供商完成预配过程后，很快就会看到 ExpressRoute 线路处于以下状态。
 
-	ServiceProviderProvisioningState : Provisioned
-	Status                           : Enabled
+    ServiceProviderProvisioningState : Provisioned
+    Status                           : Enabled
 
 线路只有处于 Provisioned 和 Enabled 状态时才可供使用。如果你使用第 2 层服务提供商，则只有在线路处于此状态时才能配置路由。
 
@@ -81,8 +81,8 @@ ms.author: cherylmc
 
 如果已请求服务提供商取消预配 ExpressRoute 线路，当服务提供商完成取消预配过程后，将看到线路已设置为以下状态。
 
-	ServiceProviderProvisioningState : NotProvisioned
-	Status                           : Enabled
+    ServiceProviderProvisioningState : NotProvisioned
+    Status                           : Enabled
 
 如果需要，你可以选择重新启用线路，或运行 PowerShell cmdlet 删除线路。
 
@@ -102,8 +102,8 @@ BGP 预配状态可让你知道  Azure 边缘是否已启用 BGP 会话。必须
 
 - 配置 ExpressRoute 连接。
 
-	- [创建 ExpressRoute 线路](./expressroute-howto-circuit-arm.md)
-	- [配置路由](./expressroute-howto-routing-arm.md)
-	- [将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-arm.md)
+    - [创建 ExpressRoute 线路](./expressroute-howto-circuit-arm.md)
+    - [配置路由](./expressroute-howto-routing-arm.md)
+    - [将 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-arm.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

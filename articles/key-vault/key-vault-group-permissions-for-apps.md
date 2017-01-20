@@ -33,22 +33,22 @@ ms.author: ambapat
 
 powershell
 
-	# Connect to Azure AD 
-	Connect-AzureAD 
-	 
-	# Create Azure Active Directory Security Group 
-	$aadGroup = New-AzureADGroup -Description "Contoso App Group" -DisplayName "ContosoAppGroup" -MailEnabled 0 -MailNickName none -SecurityEnabled 1 
-	 
-	# Find and add your applications (ServicePrincipal ObjectID) as members to this group 
-	$spn = Get-AzureADServicePrincipal -SearchString "ContosoApp1" 
-	Add-AzureADGroupMember -ObjectId $aadGroup.ObjectId -RefObjectId $spn.ObjectId 
-	 
-	# You can add several members to this group, in this fashion. 
-	 
-	# Set the Key Vault ACLs 
-	Set-AzureRmKeyVaultAccessPolicy -VaultName ContosoVault -ObjectId $aadGroup.ObjectId -PermissionToKeys all -PermissionToSecrets all -PermissionToCertificates all 
-	 
-	# Of course you can adjust the permissions as required 
+    # Connect to Azure AD 
+    Connect-AzureAD 
+     
+    # Create Azure Active Directory Security Group 
+    $aadGroup = New-AzureADGroup -Description "Contoso App Group" -DisplayName "ContosoAppGroup" -MailEnabled 0 -MailNickName none -SecurityEnabled 1 
+     
+    # Find and add your applications (ServicePrincipal ObjectID) as members to this group 
+    $spn = Get-AzureADServicePrincipal -SearchString "ContosoApp1" 
+    Add-AzureADGroupMember -ObjectId $aadGroup.ObjectId -RefObjectId $spn.ObjectId 
+     
+    # You can add several members to this group, in this fashion. 
+     
+    # Set the Key Vault ACLs 
+    Set-AzureRmKeyVaultAccessPolicy -VaultName ContosoVault -ObjectId $aadGroup.ObjectId -PermissionToKeys all -PermissionToSecrets all -PermissionToCertificates all 
+     
+    # Of course you can adjust the permissions as required 
 
 如果需要为一组应用程序授予一组不同的权限，请为此类应用程序创建单独的 Azure Active Directory 安全组。
 

@@ -31,23 +31,23 @@ wacn.date: 04/11/2016
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <th align="left" scope="col">入门</th>
-		<th align="left" scope="col">新功能</th>
+        <th align="left" scope="col">新功能</th>
         <th align="left" scope="col">API 参考</th>
       </tr>
       <tr>
         <td><a href="../articles/app-service-web/web-sites-dotnet-get-started.md">Azure Web 应用和 ASP.NET 入门</a></td>
-		<td><a href="https://azure.microsoft.com/zh-cn/blog/announcing-the-azure-sdk-2-8-for-net/">Azure	 SDK for .NET 2.8.1</a></td>
+        <td><a href="https://azure.microsoft.com/zh-cn/blog/announcing-the-azure-sdk-2-8-for-net/">Azure	 SDK for .NET 2.8.1</a></td>
         <td>Blob 存储 <a href="../articles/storage/storage-dotnet-how-to-use-blobs.md">.NET</a> | <a href="http://msdn.microsoft.com/zh-cn/library/azure/dd135733.aspx">REST</a></td>
       </tr>
       <tr>
         <td><a href="../articles/dotnet-sdk.md">Azure SDK for .NET 入门</a></td>
         <td><a href="https://github.com/Azure/azure-powershell/releases">Azure PowerShell 版本</a></td>
-		<td>表存储 <a href="../articles/storage/storage-dotnet-how-to-use-tables.md">.NET</a> | <a href="http://msdn.microsoft.com/zh-cn/library/azure/dd179423.aspx">REST</a></td>
+        <td>表存储 <a href="../articles/storage/storage-dotnet-how-to-use-tables.md">.NET</a> | <a href="http://msdn.microsoft.com/zh-cn/library/azure/dd179423.aspx">REST</a></td>
       </tr>
       <tr>
         <td><a href="../articles/app-service-web/choose-web-site-cloud-service-vm.md"> Web 应用、云服务或虚拟机？</a></td>
         <td><a href="https://blogs.msdn.microsoft.com/visualstudio/2015/01/08/azure-virtual-machine-images-for-visual-studio/">适用于 Visual Studio 的 Azure VM 映像</a></td>
-		<td>服务管理 <a href="http://go.microsoft.com/fwlink/p/?linkid=327806&clcid=0x804">.NET</a> | <a href="http://msdn.microsoft.com/zh-cn/library/azure/ee460799.aspx">REST</a></td>
+        <td>服务管理 <a href="http://go.microsoft.com/fwlink/p/?linkid=327806&clcid=0x804">.NET</a> | <a href="http://msdn.microsoft.com/zh-cn/library/azure/ee460799.aspx">REST</a></td>
       </tr>
 </table>
 

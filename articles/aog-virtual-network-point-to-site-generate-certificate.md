@@ -25,23 +25,23 @@ wacn.date: 11/03/2016
 
 2.	打开 Powershell，以管理员身份运行以下命令。将 RootCertName 替换为要使用的根证书名称：
 
-		$root=New-SelfSignedCertificate -Subject "CN=RootCertName" -KeyUsage CertSign,CRLSign,DataEncipherment,DigitalSignature,KeyAgreement,KeyEncipherment -Type Custom -KeyLength 2048 -KeySpec KeyExchange -KeyExportPolicy Exportable -CertStoreLocation Cert:\CurrentUser\My\ -HashAlgorithm SHA1 -NotAfter (Get-Date).AddMonths(240)
+        $root=New-SelfSignedCertificate -Subject "CN=RootCertName" -KeyUsage CertSign,CRLSign,DataEncipherment,DigitalSignature,KeyAgreement,KeyEncipherment -Type Custom -KeyLength 2048 -KeySpec KeyExchange -KeyExportPolicy Exportable -CertStoreLocation Cert:\CurrentUser\My\ -HashAlgorithm SHA1 -NotAfter (Get-Date).AddMonths(240)
 
-	![](./media/aog-virtual-network-point-to-site-generate-certificate/self-signed-certificate.png)
+    ![](./media/aog-virtual-network-point-to-site-generate-certificate/self-signed-certificate.png)
 
 ### 获取公钥
 
 3.	在创建自签名根证书第 2 步中生成的根证书位于“证书”-`当前用户\个人\证书`中。根证书的公钥作为点到站点连接 VPN 网关配置的一部分上载到 Azure。请打开 certmgr.msc。右键单击自签名根证书，单击“所有任务”，然后单击“导出”。此操作将打开“证书导出向导”。
 
-	 ![](./media/aog-virtual-network-point-to-site-generate-certificate/task.png)
+     ![](./media/aog-virtual-network-point-to-site-generate-certificate/task.png)
 
 4.	在向导中，单击“下一步”，选择“否，不导出私钥”，然后单击“下一步”。
 
- 	 ![](./media/aog-virtual-network-point-to-site-generate-certificate/export-next.png)
+      ![](./media/aog-virtual-network-point-to-site-generate-certificate/export-next.png)
 
 5.	在“导出文件格式”页上，选择“Base-64 编码的 X.509 (.CER)”。 然后，单击“下一步”。
  
- 	![](./media/aog-virtual-network-point-to-site-generate-certificate/export-last.png)
+     ![](./media/aog-virtual-network-point-to-site-generate-certificate/export-last.png)
 
 6.	在“要导出的文件”中，单击“浏览”并选择要导出证书的位置。在“文件名”中，为证书文件命名。单击“完成”以导出证书。
 
@@ -53,11 +53,11 @@ wacn.date: 11/03/2016
 
 8.	打开 Powershell，以管理员身份运行以下命令。将 ClientCertName 替换为要使用的根证书名称：
 
-		New-SelfSignedCertificate -Subject "CN=ClientCertName" -KeyUsage CertSign,CRLSign,DataEncipherment,DigitalSignature,KeyAgreement,KeyEncipherment -Type Custom -KeyExportPolicy Exportable -KeySpec KeyExchange -Signer $root -HashAlgorithm SHA1 -NotAfter (Get-Date).AddMonths(240) -CertStoreLocation Cert:\CurrentUser\My\
+        New-SelfSignedCertificate -Subject "CN=ClientCertName" -KeyUsage CertSign,CRLSign,DataEncipherment,DigitalSignature,KeyAgreement,KeyEncipherment -Type Custom -KeyExportPolicy Exportable -KeySpec KeyExchange -Signer $root -HashAlgorithm SHA1 -NotAfter (Get-Date).AddMonths(240) -CertStoreLocation Cert:\CurrentUser\My\
 
- 	![](./media/aog-virtual-network-point-to-site-generate-certificate/client-certificate.png)
+     ![](./media/aog-virtual-network-point-to-site-generate-certificate/client-certificate.png)
 
-	其中变量$root 为创建自签名根证书小节中第 2 步创建的自签名根证书。如果第未将根证书对象传入某个对象，也可以为用根证书的绝对路径作为 -Signer 的值，如 `Cert:\CurrentUser\My\<GUID>`。
+    其中变量$root 为创建自签名根证书小节中第 2 步创建的自签名根证书。如果第未将根证书对象传入某个对象，也可以为用根证书的绝对路径作为 -Signer 的值，如 `Cert:\CurrentUser\My\<GUID>`。
 
 ### 导出并安装客户端证书
 

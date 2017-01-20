@@ -39,13 +39,13 @@ ms.author: naziml
     
 将 {} 中的所有内容替换为 Web 应用的信息，并创建包含以下 JSON 内容的 enableclientcert.json 文件：
 
-	{
-		"location": "My Web App Location",   
-		"properties": 
-		{  
-			"clientCertEnabled": true
-		}
-	}  
+    {
+        "location": "My Web App Location",   
+        "properties": 
+        {  
+            "clientCertEnabled": true
+        }
+    }  
 
 确保将“location”的值更改为 Web 应用所在的位置，例如 China North 或 China East。
 

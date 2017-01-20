@@ -5,7 +5,7 @@
    * [Microsoft](../articles/mobile-services/mobile-services-how-to-register-microsoft-authentication.md)
    * [Azure Active Directory](../articles/mobile-services/mobile-services-how-to-register-active-directory-authentication.md)。 
    
-	记下标识提供者生成的客户端标识和客户端机密值。不要分发或共享客户端机密。
+    记下标识提供者生成的客户端标识和客户端机密值。不要分发或共享客户端机密。
 
 3. 返回 [Azure 管理门户](https://manage.windowsazure.cn/)，单击“移动服务”> 你的移动服务 >“身份”> 你的标识提供者设置，然后输入你的提供者的客户端 ID 和密钥值。 
  

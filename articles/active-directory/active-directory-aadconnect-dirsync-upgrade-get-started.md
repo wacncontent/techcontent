@@ -135,8 +135,8 @@ DirSync 支持以下配置更改，并且将会升级：
 5. 选择从 DirSync 安装中导出的设置文件。
 6. 配置任何高级选项，包括：
     - Azure AD Connect 的自定义安装位置。
-	- 现有 SQL Server 实例（默认值：Azure AD Connect 将安装 SQL Server 2012 Express）。请不要使用与 DirSync 服务器相同的数据库实例。
-	- 用于连接 SQL Server 的服务帐户（如果你的 SQL Server 数据库位于远程，则此帐户必须是域服务帐户）。可以在此屏幕上看到以下选项：![输入你的 Azure AD 凭据](./media/active-directory-aadconnect-dirsync-upgrade-get-started/advancedsettings.png)
+    - 现有 SQL Server 实例（默认值：Azure AD Connect 将安装 SQL Server 2012 Express）。请不要使用与 DirSync 服务器相同的数据库实例。
+    - 用于连接 SQL Server 的服务帐户（如果你的 SQL Server 数据库位于远程，则此帐户必须是域服务帐户）。可以在此屏幕上看到以下选项：![输入你的 Azure AD 凭据](./media/active-directory-aadconnect-dirsync-upgrade-get-started/advancedsettings.png)
 7. 单击“下一步”。
 8. 在“已准备好配置”页上，保留选中“配置完成后立即开始同步过程”。服务器当前为[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode/)，更改不会导出到 Azure AD。
 9. 单击“安装”。

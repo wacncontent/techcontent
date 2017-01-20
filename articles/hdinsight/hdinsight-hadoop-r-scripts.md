@@ -45,19 +45,19 @@ R 与 Azure Blob 存储 (WASB) 兼容，这样，存储在此的数据可以在 
 1. 根据[使用自定义选项预配群集](./hdinsight-provision-clusters-v1.md#portal)中的说明，使用“自定义创建”选项开始预配群集。 
 2. 在向导的“脚本操作”页上，单击“添加脚本操作”，以提供有关脚本操作的详细信息，如下所述：
 
-	<table border='1'>
-		<tr><th>属性</th><th>值</th></tr>
-		<tr><td>名称</td>
-			<td>指定脚本操作的名称，例如 <b>Install R</b>。</td></tr>
-		<tr><td>脚本 URI</td>
-			<td>指定调用用于自定义群集的脚本的 URI，例如 <i>https://hdiconfigactions.blob.core.windows.net/rconfigactionv02/r-installer-v02.ps1</i></td></tr>
-		<tr><td>节点类型</td>
-			<td>指定运行自定义脚本的节点。可选择“所有节点”、“仅限头节点”或“仅限辅助节点”<b></b><b></b><b></b>。
-		<tr><td>参数</td>
-			<td>根据脚本的需要，请指定参数。但是，用于安装 R 的脚本不需要任何参数，因此，可以将此项保留为空。</td></tr>
-	</table>
+    <table border='1'>
+        <tr><th>属性</th><th>值</th></tr>
+        <tr><td>名称</td>
+            <td>指定脚本操作的名称，例如 <b>Install R</b>。</td></tr>
+        <tr><td>脚本 URI</td>
+            <td>指定调用用于自定义群集的脚本的 URI，例如 <i>https://hdiconfigactions.blob.core.windows.net/rconfigactionv02/r-installer-v02.ps1</i></td></tr>
+        <tr><td>节点类型</td>
+            <td>指定运行自定义脚本的节点。可选择“所有节点”、“仅限头节点”或“仅限辅助节点”<b></b><b></b><b></b>。
+        <tr><td>参数</td>
+            <td>根据脚本的需要，请指定参数。但是，用于安装 R 的脚本不需要任何参数，因此，可以将此项保留为空。</td></tr>
+    </table>
 
-	可添加多个脚本操作，以便在群集上安装多个组件。在继续前，确保已安装和配置 Azure PowerShell。
+    可添加多个脚本操作，以便在群集上安装多个组件。在继续前，确保已安装和配置 Azure PowerShell。
 
 还可以通过 Azure PowerShell 或 HDInsight .NET SDK 使用脚本在 HDInsight 上安装 R。有关这些过程的说明在本文后面提供。
 
@@ -70,22 +70,22 @@ R 与 Azure Blob 存储 (WASB) 兼容，这样，存储在此的数据可以在 
 
 3. **运行 R 脚本**：通过粘贴并选择 R 脚本，然后按 ENTER，可以从 R 控制台直接运行该脚本。下面是一个简单的示例脚本，该脚本将生成 1 到 100 的数字，然后将其乘以 2。
 
-		library(rmr2)
-		library(rhdfs)
-		ints = to.dfs(1:100)
-		calc = mapreduce(input = ints, map = function(k, v) cbind(v, 2*v))
-		from.dfs(calc)
+        library(rmr2)
+        library(rhdfs)
+        ints = to.dfs(1:100)
+        calc = mapreduce(input = ints, map = function(k, v) cbind(v, 2*v))
+        from.dfs(calc)
 
 前两行调用随 R 一起安装的 RHadoop 库。最后一行将结果打印到控制台。输出应如下所示：
 
-	[1,]  1 2
-	[2,]  2 4
-	.
-	.
-	.
-	[98,]  98 196
-	[99,]  99 198
-	[100,] 100 200
+    [1,]  1 2
+    [2,]  2 4
+    .
+    .
+    .
+    [98,]  98 196
+    [99,]  99 198
+    [100,] 100 200
 
 ## 使用 Azure PowerShell 安装 R
 

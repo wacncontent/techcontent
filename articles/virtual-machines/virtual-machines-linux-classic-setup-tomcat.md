@@ -84,13 +84,13 @@ TCP 端口 8080 是 tomcat 侦听的默认端口号。使用 Azure 终结点打�
 2.	若要将终结点添加到虚拟机，请单击**“终结点”** 框。
 ![][6]
 3.	单击**“添加”**。  
-	1.	对于**终结点**，在“终结点”中键入终结点的名称，然后在**“公用端口”**中键入 80。  
+    1.	对于**终结点**，在“终结点”中键入终结点的名称，然后在**“公用端口”**中键入 80。  
 
-		如果将其设置为 80，则无需在 URL 中包括端口号即可允许你访问 tomcat。例如，http://tomcatdemo.chinacloudapp.cn。
+        如果将其设置为 80，则无需在 URL 中包括端口号即可允许你访问 tomcat。例如，http://tomcatdemo.chinacloudapp.cn。
 
-		如果将其设置为其他值（例如 81），则需要将端口号添加到 URL 才能访问 tomcat。例如，http://tomcatdemo.chinacloudapp.cn:81/。
-	2.	在“专用端口”中键入 8080。默认情况下，tomcat 侦听 TCP 端口 8080。如果你更改了 tomcat 的默认侦听端口，则应将专用端口更新为与 tomcat 侦听端口相同。  
-	![][7]
+        如果将其设置为其他值（例如 81），则需要将端口号添加到 URL 才能访问 tomcat。例如，http://tomcatdemo.chinacloudapp.cn:81/。
+    2.	在“专用端口”中键入 8080。默认情况下，tomcat 侦听 TCP 端口 8080。如果你更改了 tomcat 的默认侦听端口，则应将专用端口更新为与 tomcat 侦听端口相同。  
+    ![][7]
 
 4.	单击**“确定”**将该终结点添加到你的虚拟机。
 
@@ -131,32 +131,32 @@ Tomcat 是用 Java 编写的。有两种类型的 Java 开发工具包 (Jdk)（O
 
 open-jdk
 
-	sudo apt-get update  
-	sudo apt-get install openjdk-7-jre  
+    sudo apt-get update  
+    sudo apt-get install openjdk-7-jre  
 
 oracle-jdk
 
 -	若要从 Oracle 网站下载 JDK，请执行以下命令：  
 
-		wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-linux-x64.tar.gz  
+        wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-linux-x64.tar.gz  
 
 -	若要创建一个包含 JDK 文件的目录，请执行以下命令：
 
-		sudo mkdir /usr/lib/jvm  
+        sudo mkdir /usr/lib/jvm  
 
 -	若要将 JDK 文件解压到 /usr/lib/jvm/ 目录，请执行以下命令：
 
-		sudo tar -zxf jdk-8u5-linux-x64.tar.gz  -C /usr/lib/jvm/  
+        sudo tar -zxf jdk-8u5-linux-x64.tar.gz  -C /usr/lib/jvm/  
 
 -	若要将 Oracle JDK 设置为默认 JVM，请执行以下命令：
 
-		sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_05/bin/java 100  
-		sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.8.0_05/bin/javac 100  
+        sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_05/bin/java 100  
+        sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.8.0_05/bin/javac 100  
 
 ####测试：
 可以使用如下命令测试是否已正确安装 Java 运行时环境：
 
-	java -version  
+    java -version  
 
 如果已安装 open-jdk，你应看到如下消息：
 ![][14]
@@ -167,7 +167,7 @@ oracle-jdk
 ###Tomcat7
 使用以下命令安装 tomcat7：
 
-	sudo apt-get install tomcat7  
+    sudo apt-get install tomcat7  
 
 如果你未使用 tomcat7，请使用此命令的相应变体。
 
@@ -181,32 +181,32 @@ oracle-jdk
 
 使用 **sudo apt-cache search tomcat7** 命令可查看所有可用的组件。以下命令是安装某些有用部件的示例。
 
-	sudo apt-get install tomcat7-admin      #admin web applications
-	sudo apt-get install tomcat7-user         #tools to create user instances  
+    sudo apt-get install tomcat7-admin      #admin web applications
+    sudo apt-get install tomcat7-user         #tools to create user instances  
 
 ##第 4 阶段：配置 Tomcat
 在此阶段中，你可以管理 tomcat。
 ###启动和停止 tomcat7
 当你安装 tomcat7 服务器时，该服务器会自动启动。你也可以使用以下命令自己启动它：
 
-	sudo /etc/init.d/tomcat7 start
+    sudo /etc/init.d/tomcat7 start
 
 若要停止 tomcat7，请执行以下命令：
 
-	sudo /etc/init.d/tomcat7 stop
+    sudo /etc/init.d/tomcat7 stop
 
 若要查看 tomcat7 的状态，请执行以下命令：
 
-	sudo /etc/init.d/tomcat7 status
+    sudo /etc/init.d/tomcat7 status
 
 若要重启 tomcat 服务，请执行以下命令：
 
-	sudo /etc/init.d/tomcat7 restart
+    sudo /etc/init.d/tomcat7 restart
 
 ###Tomcat 管理
 可以编辑 Tomcat 用户配置文件，以使用以下命令设置管理员凭据：
 
-	sudo vi  /etc/tomcat7/tomcat-users.xml   
+    sudo vi  /etc/tomcat7/tomcat-users.xml   
 
 下面是一个示例：
 ![][17]  
@@ -215,7 +215,7 @@ oracle-jdk
 
 编辑此文件之后，你应使用以下命令重启 tomcat7 服务，以确保所做的更改生效：
 
-	sudo /etc/init.d/tomcat7 restart  
+    sudo /etc/init.d/tomcat7 restart  
 
 打开浏览器，并输入 URL **http://<your tomcat server DNS name>/manager/html**。对于本文中的示例，URL 为 http://tomcatexample.chinacloudapp.cn/manager/html。
 
@@ -229,77 +229,77 @@ oracle-jdk
 -	**症状**  
 Tomcat 正在运行，但你使用浏览器看不到 Tomcat 默认页。
 -	**可能的根本原因**   
-	1.	tomcat 侦听端口与用于 tomcat 通信的虚拟机终结点的专用端口不同。  
+    1.	tomcat 侦听端口与用于 tomcat 通信的虚拟机终结点的专用端口不同。  
 
-		检查你的公用端口和专用端口终结点设置，并确保专用端口与 tomcat 侦听端口相同。有关如何为你的虚拟机配置终结点的说明，请参阅“第 1 阶段：创建映像”。
+        检查你的公用端口和专用端口终结点设置，并确保专用端口与 tomcat 侦听端口相同。有关如何为你的虚拟机配置终结点的说明，请参阅“第 1 阶段：创建映像”。
 
-		若要确定 tomcat 侦听端口，请打开 /etc/httpd/conf/httpd.conf（Red Hat 发行版）或 /etc/tomcat7/server.xml（Debian 发行版）。默认情况下，tomcat 侦听端口为 8080。下面是一个示例：
+        若要确定 tomcat 侦听端口，请打开 /etc/httpd/conf/httpd.conf（Red Hat 发行版）或 /etc/tomcat7/server.xml（Debian 发行版）。默认情况下，tomcat 侦听端口为 8080。下面是一个示例：
 
-			<Connector port="8080" protocol="HTTP/1.1"  connectionTimeout="20000"  URIEncoding="UTF-8"            redirectPort="8443" />  
+            <Connector port="8080" protocol="HTTP/1.1"  connectionTimeout="20000"  URIEncoding="UTF-8"            redirectPort="8443" />  
 
-		如果要使用 Debian 或 Ubuntu 等虚拟机并且要更改 Tomcat 侦听的默认端口（例如 8081），则还应为操作系统打开该端口。首先，打开配置文件：
+        如果要使用 Debian 或 Ubuntu 等虚拟机并且要更改 Tomcat 侦听的默认端口（例如 8081），则还应为操作系统打开该端口。首先，打开配置文件：
 
-			sudo vi /etc/default/tomcat7  
+            sudo vi /etc/default/tomcat7  
 
-		然后，取消注释最后一行并将“no”更改为“yes”。
+        然后，取消注释最后一行并将“no”更改为“yes”。
 
-			AUTHBIND=yes
+            AUTHBIND=yes
 
-	2.	防火墙已禁用 tomcat 侦听端口。
+    2.	防火墙已禁用 tomcat 侦听端口。
 
-		如果你只能在本地主机上看到 Tomcat 默认页，则问题很可能出在 Tomcat 所侦听的端口被防火墙阻止。可以使用 w3m 工具来浏览网页。以下命令安装 w3m 并浏览到 Tomcat 默认页：
+        如果你只能在本地主机上看到 Tomcat 默认页，则问题很可能出在 Tomcat 所侦听的端口被防火墙阻止。可以使用 w3m 工具来浏览网页。以下命令安装 w3m 并浏览到 Tomcat 默认页：
 
-			sudo yum  install w3m w3m-img
-			w3m http://localhost:8080  
+            sudo yum  install w3m w3m-img
+            w3m http://localhost:8080  
 
 -	**解决方案**
-	1. 如果 tomcat 侦听端口与发往虚拟机的通信的终结点专用端口不同，则需要将该专用端口更改为与 tomcat 侦听端口相同。   
+    1. 如果 tomcat 侦听端口与发往虚拟机的通信的终结点专用端口不同，则需要将该专用端口更改为与 tomcat 侦听端口相同。   
 
-	2.	如果此问题是由防火墙/iptables 导致的，请将以下行添加到 /etc/sysconfig/iptables：
+    2.	如果此问题是由防火墙/iptables 导致的，请将以下行添加到 /etc/sysconfig/iptables：
 
-			-A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
-			-A INPUT -p tcp -m tcp --dport 443 -j ACCEPT  
+            -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+            -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT  
 
-		请注意，只有 https 通信才需要第二行。
+        请注意，只有 https 通信才需要第二行。
 
-		请确保该行在全局限制访问权限的所有行上方，如下所示：
+        请确保该行在全局限制访问权限的所有行上方，如下所示：
 
-			-A INPUT -j REJECT --reject-with icmp-host-prohibited  
+            -A INPUT -j REJECT --reject-with icmp-host-prohibited  
 
-		若要重新加载 iptables，请运行以下命令：
+        若要重新加载 iptables，请运行以下命令：
 
-			service iptables restart  
+            service iptables restart  
 
-		这已在 CentOS 6.3 上进行了测试。
+        这已在 CentOS 6.3 上进行了测试。
 
 ###将项目文件上载到 /var/lib/tomcat7/webapps/ 时，权限被拒绝  
 
 -	**症状**  
 当你使用任何 SFTP 客户端（例如 FileZilla）连接到虚拟机并导航到 /var/lib/tomcat7/webapps/ 来发布站点时，你收到如下错误消息：  
 
-		status:	Listing directory /var/lib/tomcat7/webapps
-		Command:	put "C:\Users\liang\Desktop\info.jsp" "info.jsp"
-		Error:	/var/lib/tomcat7/webapps/info.jsp: open for write: permission denied
-		Error:	File transfer failed
+        status:	Listing directory /var/lib/tomcat7/webapps
+        Command:	put "C:\Users\liang\Desktop\info.jsp" "info.jsp"
+        Error:	/var/lib/tomcat7/webapps/info.jsp: open for write: permission denied
+        Error:	File transfer failed
 
 -	**可能的根本原因**
 你无权访问 /var/lib/tomcat7/webapps 文件夹。
 -	**解决方案**  
 你需要获得根帐户权限。你可以将该文件夹的所有权从 root 更改为在设置计算机时使用的用户名。下面是使用 azureuser 帐户名称的示例：  
 
-		sudo chown azureuser -R /var/lib/tomcat7/webapps
+        sudo chown azureuser -R /var/lib/tomcat7/webapps
 
-	也使用 -R 选项对目录内的所有文件应用权限。
+    也使用 -R 选项对目录内的所有文件应用权限。
 
-	请注意，此命令也适用于目录。-R 选项可更改目录内的所有文件和目录的权限。下面是一个示例：
+    请注意，此命令也适用于目录。-R 选项可更改目录内的所有文件和目录的权限。下面是一个示例：
 
-		sudo chown -R username:group directory  
+        sudo chown -R username:group directory  
 
-	此命令将更改目录内的所有文件和目录以及目录本身的所有权（用户和组）。
+    此命令将更改目录内的所有文件和目录以及目录本身的所有权（用户和组）。
 
-	以下命令只会更改文件夹目录的权限，但不会更改目录内的文件和文件夹的权限。
+    以下命令只会更改文件夹目录的权限，但不会更改目录内的文件和文件夹的权限。
 
-		sudo chown username:group directory
+        sudo chown username:group directory
 
 [1]: ./media/virtual-machines-linux-classic-setup-tomcat/virtual-machines-linux-setup-tomcat7-linux-01.png
 [2]: ./media/virtual-machines-linux-classic-setup-tomcat/virtual-machines-linux-setup-tomcat7-linux-02.png

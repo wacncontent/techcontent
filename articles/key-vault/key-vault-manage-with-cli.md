@@ -66,7 +66,7 @@ ms.author: bruceper
 
 或者
    
-	azure login -u username -e azurechinacloud
+    azure login -u username -e azurechinacloud
 
 >[!NOTE]  login 方法仅适用于组织帐户。组织帐户是指受组织管理、并在组织的 Azure Active Directory 租户中定义的用户。
 
@@ -185,7 +185,7 @@ ms.author: bruceper
 
 如果要授权同一应用程序读取保管库中的机密，请运行以下命令：
 
-	azure keyvault set-policy --vault-name 'ContosoKeyVault' --spn 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed --perms-to-secrets '["get"]'
+    azure keyvault set-policy --vault-name 'ContosoKeyVault' --spn 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed --perms-to-secrets '["get"]'
 
 ## 删除密钥保管库以及关联的密钥和机密
 

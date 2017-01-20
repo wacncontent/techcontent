@@ -27,34 +27,34 @@ Widevine 许可证请求的格式设置为 JSON 消息。
 
 请注意，你可以选择创建不包含值而只有“{}”的空消息，并创建包含所有默认值的许可证模板。
 
-	{  
-	   “payload”:“<license challenge>”,
-	   “content_id”: “<content id>” 
-	   “provider”: ”<provider>”
-	   “allowed_track_types”:“<types>”,
-	   “content_key_specs”:[  
-	      {  
-	         “track_type”:“<track type 1>”
-	      },
-	      {  
-	         “track_type”:“<track type 2>”
-	      },
-	      …
-	   ],
-	   “policy_overrides”:{  
-	      “can_play”:<can play>,
-	      “can persist”:<can persist>,
-	      “can_renew”:<can renew>,
-	      “rental_duration_seconds”:<rental duration>,
-	      “playback_duration_seconds”:<playback duration>,
-	      “license_duration_seconds”:<license duration>,
-	      “renewal_recovery_duration_seconds”:<renewal recovery duration>,
-	      “renewal_server_url”:”<renewal server url>”,
-	      “renewal_delay_seconds”:<renewal delay>,
-	      “renewal_retry_interval_seconds”:<renewal retry interval>,
-	      “renew_with_usage”:<renew with usage>
-	   }
-	}
+    {  
+       “payload”:“<license challenge>”,
+       “content_id”: “<content id>” 
+       “provider”: ”<provider>”
+       “allowed_track_types”:“<types>”,
+       “content_key_specs”:[  
+          {  
+             “track_type”:“<track type 1>”
+          },
+          {  
+             “track_type”:“<track type 2>”
+          },
+          …
+       ],
+       “policy_overrides”:{  
+          “can_play”:<can play>,
+          “can persist”:<can persist>,
+          “can_renew”:<can renew>,
+          “rental_duration_seconds”:<rental duration>,
+          “playback_duration_seconds”:<playback duration>,
+          “license_duration_seconds”:<license duration>,
+          “renewal_recovery_duration_seconds”:<renewal recovery duration>,
+          “renewal_server_url”:”<renewal server url>”,
+          “renewal_delay_seconds”:<renewal delay>,
+          “renewal_retry_interval_seconds”:<renewal retry interval>,
+          “renew_with_usage”:<renew with usage>
+       }
+    }
 
 ##JSON 消息
 
@@ -117,17 +117,17 @@ override\_provider\_client\_token | 布尔值。true 或 false |如果为 false 
 
 下面是这些类型的定义。
 
-	public class WidevineMessage
-	{
-	    public WidevineMessage();
-	
-	    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-	    public AllowedTrackTypes? allowed_track_types { get; set; }
-	    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-	    public ContentKeySpecs[] content_key_specs { get; set; }
-	    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-	    public object policy_overrides { get; set; }
-	}
+    public class WidevineMessage
+    {
+        public WidevineMessage();
+    
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public AllowedTrackTypes? allowed_track_types { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public ContentKeySpecs[] content_key_specs { get; set; }
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public object policy_overrides { get; set; }
+    }
 
     [JsonConverter(typeof(StringEnumConverter))]
     public enum AllowedTrackTypes

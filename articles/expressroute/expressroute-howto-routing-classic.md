@@ -48,80 +48,80 @@ ms.author: ganesr
 ### 创建 Azure 专用对等互连
 
 1. **为 ExpressRoute 导入 PowerShell 模块。**
-	
-	在开始使用 ExpressRoute cmdlet 之前，必须将 Azure 和 ExpressRoute 模块导入 PowerShell 会话。运行以下命令，将 Azure 和 ExpressRoute 模块导入 PowerShell 会话。
+    
+    在开始使用 ExpressRoute cmdlet 之前，必须将 Azure 和 ExpressRoute 模块导入 PowerShell 会话。运行以下命令，将 Azure 和 ExpressRoute 模块导入 PowerShell 会话。
 
-	    Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1'
-	    Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\ExpressRoute\ExpressRoute.psd1'
+        Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1'
+        Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\ExpressRoute\ExpressRoute.psd1'
 
 2. **创建 ExpressRoute 线路。**
-	
-	请按说明创建 [ExpressRoute 线路](./expressroute-howto-circuit-classic.md)，并由连接服务提供商进行预配。如果你的连接服务提供商提供第 3 层托管服务，你可以请求连接服务提供商为你启用 Azure 专用对等互连。在此情况下，你不需要遵循后续部分中所列的说明。但是，如果你的连接服务提供商不为你管理路由，请在创建线路之后遵循以下说明。
+    
+    请按说明创建 [ExpressRoute 线路](./expressroute-howto-circuit-classic.md)，并由连接服务提供商进行预配。如果你的连接服务提供商提供第 3 层托管服务，你可以请求连接服务提供商为你启用 Azure 专用对等互连。在此情况下，你不需要遵循后续部分中所列的说明。但是，如果你的连接服务提供商不为你管理路由，请在创建线路之后遵循以下说明。
 
 3. **检查 ExpressRoute 线路以确保它已预配。**
 
-	首先必须检查 ExpressRoute 线路是否已预配并已启用。请参阅以下示例。
+    首先必须检查 ExpressRoute 线路是否已预配并已启用。请参阅以下示例。
 
-		PS C:\> Get-AzureDedicatedCircuit -ServiceKey "*********************************"
+        PS C:\> Get-AzureDedicatedCircuit -ServiceKey "*********************************"
 
-		Bandwidth                        : 200
-		CircuitName                      : MyTestCircuit
-		Location                         : Beijing
-		ServiceKey                       : *********************************
-		ServiceProviderName              : Beijing Telecom Ethernet
-		ServiceProviderProvisioningState : Provisioned
-		Sku                              : Standard
-		Status                           : Enabled
+        Bandwidth                        : 200
+        CircuitName                      : MyTestCircuit
+        Location                         : Beijing
+        ServiceKey                       : *********************************
+        ServiceProviderName              : Beijing Telecom Ethernet
+        ServiceProviderProvisioningState : Provisioned
+        Sku                              : Standard
+        Status                           : Enabled
 
-	确保线路显示为已预配并已启用。否则，请与连接服务提供商合作，使线路变为所需的状态。
+    确保线路显示为已预配并已启用。否则，请与连接服务提供商合作，使线路变为所需的状态。
 
-		ServiceProviderProvisioningState : Provisioned
-		Status                           : Enabled
+        ServiceProviderProvisioningState : Provisioned
+        Status                           : Enabled
 
 4. **配置线路的 Azure 专用对等互连。**
 
-	在继续执行后续步骤之前，请确保已准备好以下各项：
+    在继续执行后续步骤之前，请确保已准备好以下各项：
 
-	- 主链路的 /30 子网。它不能是保留给虚拟网络使用的任何地址空间的一部分。
-	- 辅助链路的 /30 子网。它不能是保留给虚拟网络使用的任何地址空间的一部分。
-	- 用于建立此对等互连的有效 VLAN ID。请确保线路中没有其他对等互连使用同一个 VLAN ID。
-	- 对等互连的 AS 编号。可以使用 2 字节和 4 字节 AS 编号。可以将专用 AS 编号用于此对等互连。请务必不要使用 65515。
-	- MD5 哈希（如果选择使用）。**这是可选的**。
-	
-	可以运行以下 cmdlet 来为线路配置 Azure 专用对等互连。
+    - 主链路的 /30 子网。它不能是保留给虚拟网络使用的任何地址空间的一部分。
+    - 辅助链路的 /30 子网。它不能是保留给虚拟网络使用的任何地址空间的一部分。
+    - 用于建立此对等互连的有效 VLAN ID。请确保线路中没有其他对等互连使用同一个 VLAN ID。
+    - 对等互连的 AS 编号。可以使用 2 字节和 4 字节 AS 编号。可以将专用 AS 编号用于此对等互连。请务必不要使用 65515。
+    - MD5 哈希（如果选择使用）。**这是可选的**。
+    
+    可以运行以下 cmdlet 来为线路配置 Azure 专用对等互连。
 
-		New-AzureBGPPeering -AccessType Private -ServiceKey "*********************************" -PrimaryPeerSubnet "10.0.0.0/30" -SecondaryPeerSubnet "10.0.0.4/30" -PeerAsn 1234 -VlanId 100
+        New-AzureBGPPeering -AccessType Private -ServiceKey "*********************************" -PrimaryPeerSubnet "10.0.0.0/30" -SecondaryPeerSubnet "10.0.0.4/30" -PeerAsn 1234 -VlanId 100
 
-	如果选择使用 MD5 哈希，则可以使用以下 cmdlet。
+    如果选择使用 MD5 哈希，则可以使用以下 cmdlet。
 
-		New-AzureBGPPeering -AccessType Private -ServiceKey "*********************************" -PrimaryPeerSubnet "10.0.0.0/30" -SecondaryPeerSubnet "10.0.0.4/30" -PeerAsn 1234 -VlanId 100 -SharedKey "A1B2C3D4"
+        New-AzureBGPPeering -AccessType Private -ServiceKey "*********************************" -PrimaryPeerSubnet "10.0.0.0/30" -SecondaryPeerSubnet "10.0.0.4/30" -PeerAsn 1234 -VlanId 100 -SharedKey "A1B2C3D4"
 
-	>[!IMPORTANT]请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
+    >[!IMPORTANT]请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
 
 ### 查看 Azure 专用对等互连详细信息
 
 可以使用以下 cmdlet 来获取配置详细信息
 
-	Get-AzureBGPPeering -AccessType Private -ServiceKey "*********************************"
-	
-	AdvertisedPublicPrefixes       : 
-	AdvertisedPublicPrefixesState  : Configured
-	AzureAsn                       : 12076
-	CustomerAutonomousSystemNumber : 
-	PeerAsn                        : 1234
-	PrimaryAzurePort               : 
-	PrimaryPeerSubnet              : 10.0.0.0/30
-	RoutingRegistryName            : 
-	SecondaryAzurePort             : 
-	SecondaryPeerSubnet            : 10.0.0.4/30
-	State                          : Enabled
-	VlanId                         : 100
+    Get-AzureBGPPeering -AccessType Private -ServiceKey "*********************************"
+    
+    AdvertisedPublicPrefixes       : 
+    AdvertisedPublicPrefixesState  : Configured
+    AzureAsn                       : 12076
+    CustomerAutonomousSystemNumber : 
+    PeerAsn                        : 1234
+    PrimaryAzurePort               : 
+    PrimaryPeerSubnet              : 10.0.0.0/30
+    RoutingRegistryName            : 
+    SecondaryAzurePort             : 
+    SecondaryPeerSubnet            : 10.0.0.4/30
+    State                          : Enabled
+    VlanId                         : 100
 
 ### 更新 Azure 专用对等互连配置
 
 可以使用以下 cmdlet 来更新配置的任何部分。在以下示例中，线路的 VLAN ID 将从 100 更新为 500。
 
-	Set-AzureBGPPeering -AccessType Private -ServiceKey "*********************************" -PrimaryPeerSubnet "10.0.0.0/30" -SecondaryPeerSubnet "10.0.0.4/30" -PeerAsn 1234 -VlanId 500 -SharedKey "A1B2C3D4"
+    Set-AzureBGPPeering -AccessType Private -ServiceKey "*********************************" -PrimaryPeerSubnet "10.0.0.0/30" -SecondaryPeerSubnet "10.0.0.4/30" -PeerAsn 1234 -VlanId 500 -SharedKey "A1B2C3D4"
 
 ### 删除 Azure 专用对等互连
 
@@ -129,7 +129,7 @@ ms.author: ganesr
 
 >[!WARNING]运行此 cmdlet 之前，必须确保已从 ExpressRoute 线路取消链接所有虚拟网络。
 
-	Remove-AzureBGPPeering -AccessType Private -ServiceKey "*********************************"
+    Remove-AzureBGPPeering -AccessType Private -ServiceKey "*********************************"
 
 ## Azure 公共对等互连
 
@@ -138,80 +138,80 @@ ms.author: ganesr
 ### 创建 Azure 公共对等互连
 
 1. **为 ExpressRoute 导入 PowerShell 模块。**
-	
-	在开始使用 ExpressRoute cmdlet 之前，必须将 Azure 和 ExpressRoute 模块导入 PowerShell 会话。运行以下命令，将 Azure 和 ExpressRoute 模块导入 PowerShell 会话。
+    
+    在开始使用 ExpressRoute cmdlet 之前，必须将 Azure 和 ExpressRoute 模块导入 PowerShell 会话。运行以下命令，将 Azure 和 ExpressRoute 模块导入 PowerShell 会话。
 
-	    Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1'
-	    Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\ExpressRoute\ExpressRoute.psd1'
+        Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\Azure.psd1'
+        Import-Module 'C:\Program Files (x86)\Microsoft SDKs\Azure\PowerShell\ServiceManagement\Azure\ExpressRoute\ExpressRoute.psd1'
 
 2. **创建 ExpressRoute 线路**
-	
-	请按说明创建 [ExpressRoute 线路](./expressroute-howto-circuit-classic.md)，并由连接服务提供商进行预配。如果你的连接服务提供商提供第 3 层托管服务，你可以请求连接服务提供商为你启用 Azure 专用对等互连。在此情况下，你不需要遵循后续部分中所列的说明。但是，如果你的连接服务提供商不为你管理路由，请在创建线路之后遵循以下说明。
+    
+    请按说明创建 [ExpressRoute 线路](./expressroute-howto-circuit-classic.md)，并由连接服务提供商进行预配。如果你的连接服务提供商提供第 3 层托管服务，你可以请求连接服务提供商为你启用 Azure 专用对等互连。在此情况下，你不需要遵循后续部分中所列的说明。但是，如果你的连接服务提供商不为你管理路由，请在创建线路之后遵循以下说明。
 
 3. **检查 ExpressRoute 线路以确保它已预配**
 
-	首先必须检查 ExpressRoute 线路是否已预配并已启用。请参阅以下示例。
+    首先必须检查 ExpressRoute 线路是否已预配并已启用。请参阅以下示例。
 
-		PS C:\> Get-AzureDedicatedCircuit -ServiceKey "*********************************"
+        PS C:\> Get-AzureDedicatedCircuit -ServiceKey "*********************************"
 
-		Bandwidth                        : 200
-		CircuitName                      : MyTestCircuit
-		Location                         : Beijing
-		ServiceKey                       : *********************************
-		ServiceProviderName              : Beijing Telecom Ethernet
-		ServiceProviderProvisioningState : Provisioned
-		Sku                              : Standard
-		Status                           : Enabled
+        Bandwidth                        : 200
+        CircuitName                      : MyTestCircuit
+        Location                         : Beijing
+        ServiceKey                       : *********************************
+        ServiceProviderName              : Beijing Telecom Ethernet
+        ServiceProviderProvisioningState : Provisioned
+        Sku                              : Standard
+        Status                           : Enabled
 
-	确保线路显示为已预配并已启用。否则，请与连接服务提供商合作，使线路变为所需的状态。
+    确保线路显示为已预配并已启用。否则，请与连接服务提供商合作，使线路变为所需的状态。
 
-		ServiceProviderProvisioningState : Provisioned
-		Status                           : Enabled
+        ServiceProviderProvisioningState : Provisioned
+        Status                           : Enabled
 
 4. **配置线路的 Azure 公共对等互连**
 
-	在继续下一步之前，请确保已准备好以下信息。
+    在继续下一步之前，请确保已准备好以下信息。
 
-	- 主链路的 /30 子网。这必须是有效的公共 IPv4 前缀。
-	- 辅助链路的 /30 子网。这必须是有效的公共 IPv4 前缀。
-	- 用于建立此对等互连的有效 VLAN ID。请确保线路中没有其他对等互连使用同一个 VLAN ID。
-	- 对等互连的 AS 编号。可以使用 2 字节和 4 字节 AS 编号。
-	- MD5 哈希（如果选择使用）。**这是可选的**。
-	
-	可以运行以下 cmdlet 来为线路配置 Azure 公共对等互连
+    - 主链路的 /30 子网。这必须是有效的公共 IPv4 前缀。
+    - 辅助链路的 /30 子网。这必须是有效的公共 IPv4 前缀。
+    - 用于建立此对等互连的有效 VLAN ID。请确保线路中没有其他对等互连使用同一个 VLAN ID。
+    - 对等互连的 AS 编号。可以使用 2 字节和 4 字节 AS 编号。
+    - MD5 哈希（如果选择使用）。**这是可选的**。
+    
+    可以运行以下 cmdlet 来为线路配置 Azure 公共对等互连
 
-		New-AzureBGPPeering -AccessType Public -ServiceKey "*********************************" -PrimaryPeerSubnet "131.107.0.0/30" -SecondaryPeerSubnet "131.107.0.4/30" -PeerAsn 1234 -VlanId 200
+        New-AzureBGPPeering -AccessType Public -ServiceKey "*********************************" -PrimaryPeerSubnet "131.107.0.0/30" -SecondaryPeerSubnet "131.107.0.4/30" -PeerAsn 1234 -VlanId 200
 
-	如果选择使用 MD5 哈希，则可以使用以下 cmdlet
+    如果选择使用 MD5 哈希，则可以使用以下 cmdlet
 
-		New-AzureBGPPeering -AccessType Public -ServiceKey "*********************************" -PrimaryPeerSubnet "131.107.0.0/30" -SecondaryPeerSubnet "131.107.0.4/30" -PeerAsn 1234 -VlanId 200 -SharedKey "A1B2C3D4"
+        New-AzureBGPPeering -AccessType Public -ServiceKey "*********************************" -PrimaryPeerSubnet "131.107.0.0/30" -SecondaryPeerSubnet "131.107.0.4/30" -PeerAsn 1234 -VlanId 200 -SharedKey "A1B2C3D4"
 
-	>[!IMPORTANT]请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
+    >[!IMPORTANT]请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
 
 ### 查看 Azure 公共对等互连详细信息
 
 可以使用以下 cmdlet 来获取配置详细信息
 
-	Get-AzureBGPPeering -AccessType Public -ServiceKey "*********************************"
-	
-	AdvertisedPublicPrefixes       : 
-	AdvertisedPublicPrefixesState  : Configured
-	AzureAsn                       : 12076
-	CustomerAutonomousSystemNumber : 
-	PeerAsn                        : 1234
-	PrimaryAzurePort               : 
-	PrimaryPeerSubnet              : 131.107.0.0/30
-	RoutingRegistryName            : 
-	SecondaryAzurePort             : 
-	SecondaryPeerSubnet            : 131.107.0.4/30
-	State                          : Enabled
-	VlanId                         : 200
+    Get-AzureBGPPeering -AccessType Public -ServiceKey "*********************************"
+    
+    AdvertisedPublicPrefixes       : 
+    AdvertisedPublicPrefixesState  : Configured
+    AzureAsn                       : 12076
+    CustomerAutonomousSystemNumber : 
+    PeerAsn                        : 1234
+    PrimaryAzurePort               : 
+    PrimaryPeerSubnet              : 131.107.0.0/30
+    RoutingRegistryName            : 
+    SecondaryAzurePort             : 
+    SecondaryPeerSubnet            : 131.107.0.4/30
+    State                          : Enabled
+    VlanId                         : 200
 
 ### 更新 Azure 公共对等互连配置
 
 可以使用以下 cmdlet 来更新配置的任何部分
 
-	Set-AzureBGPPeering -AccessType Public -ServiceKey "*********************************" -PrimaryPeerSubnet "131.107.0.0/30" -SecondaryPeerSubnet "131.107.0.4/30" -PeerAsn 1234 -VlanId 600 -SharedKey "A1B2C3D4"
+    Set-AzureBGPPeering -AccessType Public -ServiceKey "*********************************" -PrimaryPeerSubnet "131.107.0.0/30" -SecondaryPeerSubnet "131.107.0.4/30" -PeerAsn 1234 -VlanId 600 -SharedKey "A1B2C3D4"
 
 在上面的示例中，线路的 VLAN ID 将从 200 更新为 600。
 
@@ -219,7 +219,7 @@ ms.author: ganesr
 
 可以运行以下 cmdlet 来删除对等互连配置
 
-	Remove-AzureBGPPeering -AccessType Public -ServiceKey "*********************************"
+    Remove-AzureBGPPeering -AccessType Public -ServiceKey "*********************************"
 
 ## 后续步骤
 

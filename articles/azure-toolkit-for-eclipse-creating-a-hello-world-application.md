@@ -47,9 +47,9 @@ ms.author: robmcm
 * 对于本教程，请在“选择 JSP 模板”对话框中选择“新建 JSP 文件(html)”，然后单击“完成”。
 * 在 Eclipse 中打开 index.jsp 文件后，添加文本以便在现有 `<body>` 元素中动态显示 **Hello World!**。更新后的 `<body>` 内容应与下图中所示类似：
 
-	    <body>
-	    <b><% out.println("Hello World!"); %></b>
-	    </body>
+        <body>
+        <b><% out.println("Hello World!"); %></b>
+        </body>
 
 * 保存 index.jsp。
 

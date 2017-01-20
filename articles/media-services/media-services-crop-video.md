@@ -41,88 +41,88 @@ MES 中的裁剪是预处理阶段，因此，编码预设​​值中的裁剪�
 
 ###JSON 预设
 
-	{
-	  "Version": 1.0,
-	  "Sources": [
-	    {
-	      "Streams": [],
-	      "Filters": {
-	        "Crop": {
-	            "X": 240,
-	            "Y": 0,
-	            "Width": 1440,
-	            "Height": 1080
-	        }
-	      },
-	      "Pad": true
-	    }
-	  ],
-	  "Codecs": [
-	    {
-	      "KeyFrameInterval": "00:00:02",
-	      "H264Layers": [
-	        {
-	          "Profile": "Auto",
-	          "Level": "auto",
-	          "Bitrate": 3400,
-	          "MaxBitrate": 3400,
-	          "BufferWindow": "00:00:05",
-	          "Width": 1440,
-	          "Height": 1080,
-	          "BFrames": 3,
-	          "ReferenceFrames": 3,
-	          "AdaptiveBFrame": true,
-	          "Type": "H264Layer",
-	          "FrameRate": "0/1"
-	        },
-	        {
-	          "Profile": "Auto",
-	          "Level": "auto",
-	          "Bitrate": 2250,
-	          "MaxBitrate": 2250,
-	          "BufferWindow": "00:00:05",
-	          "Width": 960,
-	          "Height": 720,
-	          "BFrames": 3,
-	          "ReferenceFrames": 3,
-	          "AdaptiveBFrame": true,
-	          "Type": "H264Layer",
-	          "FrameRate": "0/1"
-	        },
-	        {
-	          "Profile": "Auto",
-	          "Level": "auto",
-	          "Bitrate": 1250,
-	          "MaxBitrate": 1250,
-	          "BufferWindow": "00:00:05",
-	          "Width": 480,
-	          "Height": 360,
-	          "BFrames": 3,
-	          "ReferenceFrames": 3,
-	          "AdaptiveBFrame": true,
-	          "Type": "H264Layer",
-	          "FrameRate": "0/1"
-	        }
-	      ],
-	      "Type": "H264Video"
-	    },
-	    {
-	      "Profile": "AACLC",
-	      "Channels": 2,
-	      "SamplingRate": 48000,
-	      "Bitrate": 128,
-	      "Type": "AACAudio"
-	    }
-	  ],
-	  "Outputs": [
-	    {
-	      "FileName": "{Basename}_{Width}x{Height}_{VideoBitrate}.mp4",
-	      "Format": {
-	        "Type": "MP4Format"
-	      }
-	    }
-	  ]
-	}
+    {
+      "Version": 1.0,
+      "Sources": [
+        {
+          "Streams": [],
+          "Filters": {
+            "Crop": {
+                "X": 240,
+                "Y": 0,
+                "Width": 1440,
+                "Height": 1080
+            }
+          },
+          "Pad": true
+        }
+      ],
+      "Codecs": [
+        {
+          "KeyFrameInterval": "00:00:02",
+          "H264Layers": [
+            {
+              "Profile": "Auto",
+              "Level": "auto",
+              "Bitrate": 3400,
+              "MaxBitrate": 3400,
+              "BufferWindow": "00:00:05",
+              "Width": 1440,
+              "Height": 1080,
+              "BFrames": 3,
+              "ReferenceFrames": 3,
+              "AdaptiveBFrame": true,
+              "Type": "H264Layer",
+              "FrameRate": "0/1"
+            },
+            {
+              "Profile": "Auto",
+              "Level": "auto",
+              "Bitrate": 2250,
+              "MaxBitrate": 2250,
+              "BufferWindow": "00:00:05",
+              "Width": 960,
+              "Height": 720,
+              "BFrames": 3,
+              "ReferenceFrames": 3,
+              "AdaptiveBFrame": true,
+              "Type": "H264Layer",
+              "FrameRate": "0/1"
+            },
+            {
+              "Profile": "Auto",
+              "Level": "auto",
+              "Bitrate": 1250,
+              "MaxBitrate": 1250,
+              "BufferWindow": "00:00:05",
+              "Width": 480,
+              "Height": 360,
+              "BFrames": 3,
+              "ReferenceFrames": 3,
+              "AdaptiveBFrame": true,
+              "Type": "H264Layer",
+              "FrameRate": "0/1"
+            }
+          ],
+          "Type": "H264Video"
+        },
+        {
+          "Profile": "AACLC",
+          "Channels": 2,
+          "SamplingRate": 48000,
+          "Bitrate": 128,
+          "Type": "AACAudio"
+        }
+      ],
+      "Outputs": [
+        {
+          "FileName": "{Basename}_{Width}x{Height}_{VideoBitrate}.mp4",
+          "Format": {
+            "Type": "MP4Format"
+          }
+        }
+      ]
+    }
 
 ##裁剪的限制
 

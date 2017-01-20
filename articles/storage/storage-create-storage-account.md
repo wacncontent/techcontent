@@ -61,19 +61,19 @@ Azure 存储帐户提供唯一的命名空间来存储和访问你的 Azure 存�
 
 3. 输入你的存储帐户的名称。有关如何使用存储帐户名称在 Azure 存储空间中定位你的对象的详细信息，请参阅[存储帐户终结点](#storage-account-endpoints)。
 
-	> [!NOTE] 存储帐户名称必须为 3 到 24 个字符，并且只能包含数字和小写字母。
-	>  
-	> 存储帐户名称在 Azure 中必须是唯一的。Azure 门户预览将指出选择的存储帐户名称是否已被使用。
+    > [!NOTE] 存储帐户名称必须为 3 到 24 个字符，并且只能包含数字和小写字母。
+    >  
+    > 存储帐户名称在 Azure 中必须是唯一的。Azure 门户预览将指出选择的存储帐户名称是否已被使用。
 
 4. 指定要使用的部署模型：“Resource Manager”或“经典”。建议使用“Resource Manager”部署模型。有关详细信息，请参阅[了解 Resource Manager 部署和经典部署](../azure-resource-manager/resource-manager-deployment-model.md)。
 
-	> [!NOTE] 仅可使用 Resource Manager 部署模型来创建 Blob 存储帐户。
+    > [!NOTE] 仅可使用 Resource Manager 部署模型来创建 Blob 存储帐户。
 
 5. 选择存储帐户的类型：“常规用途”或“Blob 存储”。“常规用途”是默认值。
 
-	如果已选择“常规用途”，则指定性能层：“标准”或“高级”。默认值为“标准”。有关标准和高级存储帐户的更多详细信息，请参阅 [Azure 存储空间简介](./storage-introduction.md)和[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](./storage-premium-storage.md)。
+    如果已选择“常规用途”，则指定性能层：“标准”或“高级”。默认值为“标准”。有关标准和高级存储帐户的更多详细信息，请参阅 [Azure 存储空间简介](./storage-introduction.md)和[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](./storage-premium-storage.md)。
 
-	如果已选择“Blob 存储”，则指定访问层：“经常访问”或“不常访问”。默认值为“经常访问”。有关更多详细信息，请参阅 [Azure Blob 存储：冷层和热层](./storage-blob-storage-tiers.md)。
+    如果已选择“Blob 存储”，则指定访问层：“经常访问”或“不常访问”。默认值为“经常访问”。有关更多详细信息，请参阅 [Azure Blob 存储：冷层和热层](./storage-blob-storage-tiers.md)。
 
 6. 选择存储帐户的复制选项：“LRS”、“GRS”、“RA-GRS”。默认值为“RA-GRS”。有关 Azure 存储空间复制选项的更多详细信息，请参阅 [Azure 存储空间复制](./storage-redundancy.md)。
 

@@ -98,23 +98,23 @@ SQL 数据仓库不支持递归 CTE。递归 CTE 的迁移过程可能有点复�
 
 若要解决缺少对 @@ROWCOUNT 支持的问题，创建将检索 sys.dm\_pdw\_request\_steps 中的最后一个行计数的存储过程，然后在 DML 语句后执行 `EXEC LastRowCount`。
 
-	CREATE PROCEDURE LastRowCount AS
-	WITH LastRequest as 
-	(   SELECT TOP 1    request_id
-	    FROM            sys.dm_pdw_exec_requests
-	    WHERE           session_id = SESSION_ID()
-	    AND             resource_class IS NOT NULL
-	    ORDER BY end_time DESC
-	),
-	LastRequestRowCounts as
-	(
-	    SELECT  step_index, row_count
-	    FROM    sys.dm_pdw_request_steps
-	    WHERE   row_count >= 0
-	    AND     request_id IN (SELECT request_id from LastRequest)
-	)
-	SELECT TOP 1 row_count FROM LastRequestRowCounts ORDER BY step_index DESC
-	;
+    CREATE PROCEDURE LastRowCount AS
+    WITH LastRequest as 
+    (   SELECT TOP 1    request_id
+        FROM            sys.dm_pdw_exec_requests
+        WHERE           session_id = SESSION_ID()
+        AND             resource_class IS NOT NULL
+        ORDER BY end_time DESC
+    ),
+    LastRequestRowCounts as
+    (
+        SELECT  step_index, row_count
+        FROM    sys.dm_pdw_request_steps
+        WHERE   row_count >= 0
+        AND     request_id IN (SELECT request_id from LastRequest)
+    )
+    SELECT TOP 1 row_count FROM LastRequestRowCounts ORDER BY step_index DESC
+    ;
 
 ## 后续步骤
 有关所有支持的 T-SQL 语句的完整列表，请参阅 [Transact-SQL 主题][]。

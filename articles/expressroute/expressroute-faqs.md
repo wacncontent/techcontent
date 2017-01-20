@@ -167,8 +167,8 @@ ExpressRoute 不支持以下 Azure 服务
 1. 为 ExpressRoute 线路建立公共对等互连。
 2. 执行 DNS 查找，找到 **kms.core.chinacloudapi.cn** 的 IP 地址
 3. 然后执行以下两项操作之一，使密钥管理服务能够识别来自 Azure 的激活请求并遵循该请求。
-	- 在本地网络上，通过公共对等互连将发往 IP 地址（在步骤 2 中获得）的流量路由回到 Azure。
-	- 让 NSP 提供商通过公共对等互连将流量路由回到 Azure。
+    - 在本地网络上，通过公共对等互连将发往 IP 地址（在步骤 2 中获得）的流量路由回到 Azure。
+    - 让 NSP 提供商通过公共对等互连将流量路由回到 Azure。
 
 ### 是否可以更改 ExpressRoute 线路的带宽？
 可以。可以增加 ExpressRoute 线路的带宽，而无需将其拆解。必须跟进连接服务提供商，确保他们更新其网络中的限制以支持增加带宽。但是，无法降低 ExpressRoute 线路的带宽。降低带宽意味着要拆解，然后重新创建 ExpressRoute 线路。

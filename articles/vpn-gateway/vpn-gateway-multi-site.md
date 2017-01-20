@@ -68,7 +68,7 @@ ms.author: yushwang
 
 - 要连接到的每个本地网络站点的 IP 地址范围。需确保要连接到的每个本地网络站点的 IP 地址范围不重叠。否则，Azure 经典管理门户或 REST API 将拒绝上载的配置。
 
-	例如，如果两个本地网络站点都包含 IP 地址范围 10.2.3.0/24，并且某个包包含目标地址 10.2.3.3，则 Azure 将不知道你要将该包发送到哪个站点，因为地址范围是重叠的。为了防止路由问题，Azure 不允许你上载具有重叠范围的配置文件。
+    例如，如果两个本地网络站点都包含 IP 地址范围 10.2.3.0/24，并且某个包包含目标地址 10.2.3.3，则 Azure 将不知道你要将该包发送到哪个站点，因为地址范围是重叠的。为了防止路由问题，Azure 不允许你上载具有重叠范围的配置文件。
 
 ## 1\.创建站点到站点 VPN
 
@@ -94,64 +94,64 @@ ms.author: yushwang
 
 打开你在执行上一步时下载的网络配置文件。使用你偏好的任何 xml 编辑器。该文件的内容类似于：
 
-		<NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
-		  <VirtualNetworkConfiguration>
-		    <LocalNetworkSites>
-		      <LocalNetworkSite name="Site1">
-		        <AddressSpace>
-		          <AddressPrefix>10.0.0.0/16</AddressPrefix>
-		          <AddressPrefix>10.1.0.0/16</AddressPrefix>
-		        </AddressSpace>
-		        <VPNGatewayAddress>131.2.3.4</VPNGatewayAddress>
-		      </LocalNetworkSite>
-		      <LocalNetworkSite name="Site2">
-		        <AddressSpace>
-		          <AddressPrefix>10.2.0.0/16</AddressPrefix>
-		          <AddressPrefix>10.3.0.0/16</AddressPrefix>
-		        </AddressSpace>
-		        <VPNGatewayAddress>131.4.5.6</VPNGatewayAddress>
-		      </LocalNetworkSite>
-		    </LocalNetworkSites>
-		    <VirtualNetworkSites>
-		      <VirtualNetworkSite name="VNet1" AffinityGroup="ChinaEast">
-		        <AddressSpace>
-		          <AddressPrefix>10.20.0.0/16</AddressPrefix>
-		          <AddressPrefix>10.21.0.0/16</AddressPrefix>
-		        </AddressSpace>
-		        <Subnets>
-		          <Subnet name="FE">
-		            <AddressPrefix>10.20.0.0/24</AddressPrefix>
-		          </Subnet>
-		          <Subnet name="BE">
-		            <AddressPrefix>10.20.1.0/24</AddressPrefix>
-		          </Subnet>
-		          <Subnet name="GatewaySubnet">
-		            <AddressPrefix>10.20.2.0/29</AddressPrefix>
-		          </Subnet>
-		        </Subnets>
-		        <Gateway>
-		          <ConnectionsToLocalNetwork>
-		            <LocalNetworkSiteRef name="Site1">
-		              <Connection type="IPsec" />
-		            </LocalNetworkSiteRef>
-		          </ConnectionsToLocalNetwork>
-		        </Gateway>
-		      </VirtualNetworkSite>
-		    </VirtualNetworkSites>
-		  </VirtualNetworkConfiguration>
-		</NetworkConfiguration>
+        <NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
+          <VirtualNetworkConfiguration>
+            <LocalNetworkSites>
+              <LocalNetworkSite name="Site1">
+                <AddressSpace>
+                  <AddressPrefix>10.0.0.0/16</AddressPrefix>
+                  <AddressPrefix>10.1.0.0/16</AddressPrefix>
+                </AddressSpace>
+                <VPNGatewayAddress>131.2.3.4</VPNGatewayAddress>
+              </LocalNetworkSite>
+              <LocalNetworkSite name="Site2">
+                <AddressSpace>
+                  <AddressPrefix>10.2.0.0/16</AddressPrefix>
+                  <AddressPrefix>10.3.0.0/16</AddressPrefix>
+                </AddressSpace>
+                <VPNGatewayAddress>131.4.5.6</VPNGatewayAddress>
+              </LocalNetworkSite>
+            </LocalNetworkSites>
+            <VirtualNetworkSites>
+              <VirtualNetworkSite name="VNet1" AffinityGroup="ChinaEast">
+                <AddressSpace>
+                  <AddressPrefix>10.20.0.0/16</AddressPrefix>
+                  <AddressPrefix>10.21.0.0/16</AddressPrefix>
+                </AddressSpace>
+                <Subnets>
+                  <Subnet name="FE">
+                    <AddressPrefix>10.20.0.0/24</AddressPrefix>
+                  </Subnet>
+                  <Subnet name="BE">
+                    <AddressPrefix>10.20.1.0/24</AddressPrefix>
+                  </Subnet>
+                  <Subnet name="GatewaySubnet">
+                    <AddressPrefix>10.20.2.0/29</AddressPrefix>
+                  </Subnet>
+                </Subnets>
+                <Gateway>
+                  <ConnectionsToLocalNetwork>
+                    <LocalNetworkSiteRef name="Site1">
+                      <Connection type="IPsec" />
+                    </LocalNetworkSiteRef>
+                  </ConnectionsToLocalNetwork>
+                </Gateway>
+              </VirtualNetworkSite>
+            </VirtualNetworkSites>
+          </VirtualNetworkConfiguration>
+        </NetworkConfiguration>
 
 ## 4\.添加多个站点引用
 
 在添加或删除站点引用信息时，将会对 ConnectionsToLocalNetwork/LocalNetworkSiteRef 进行配置更改。添加新的本地站点引用会触发 Azure 来创建新隧道。在以下示例中，网络配置适用于单站点连接。更改完后，请保存该文件。
 
-		<Gateway>
+        <Gateway>
           <ConnectionsToLocalNetwork>
             <LocalNetworkSiteRef name="Site1"><Connection type="IPsec" /></LocalNetworkSiteRef>
           </ConnectionsToLocalNetwork>
         </Gateway>
 
-	To add additional site references (create a multi-site configuration), simply add additional "LocalNetworkSiteRef" lines, as shown in the example below: 
+    To add additional site references (create a multi-site configuration), simply add additional "LocalNetworkSiteRef" lines, as shown in the example below: 
 
         <Gateway>
           <ConnectionsToLocalNetwork>
@@ -170,9 +170,9 @@ ms.author: yushwang
 
 例如：
 
-	Get-AzureVNetGatewayKey -VNetName "VNet1" -LocalNetworkSiteName "Site1"
+    Get-AzureVNetGatewayKey -VNetName "VNet1" -LocalNetworkSiteName "Site1"
 
-	Get-AzureVNetGatewayKey -VNetName "VNet1" -LocalNetworkSiteName "Site2"
+    Get-AzureVNetGatewayKey -VNetName "VNet1" -LocalNetworkSiteName "Site2"
 
 如果需要，也可以使用*获取虚拟网络网关共享密钥* REST API 来获取预共享密钥。
 
@@ -180,31 +180,31 @@ ms.author: yushwang
 
 检查多站点隧道状态。下载每个隧道的密钥后，需要验证连接。使用 `Get-AzureVnetConnection` 获取虚拟网络隧道的列表，如以下示例所示。VNet1 是 VNet 的名称。
 
-	Get-AzureVnetConnection -VNetName VNET1
-		
-	ConnectivityState         : Connected
-	EgressBytesTransferred    : 661530
-	IngressBytesTransferred   : 519207
-	LastConnectionEstablished : 5/2/2014 2:51:40 PM
-	LastEventID               : 23401
-	LastEventMessage          : The connectivity state for the local network site 'Site1' changed from Not Connected to Connected.
-	LastEventTimeStamp        : 5/2/2014 2:51:40 PM
-	LocalNetworkSiteName      : Site1
-	OperationDescription      : Get-AzureVNetConnection
-	OperationId               : 7f68a8e6-51e9-9db4-88c2-16b8067fed7f
-	OperationStatus           : Succeeded
-		
-	ConnectivityState         : Connected
-	EgressBytesTransferred    : 789398
-	IngressBytesTransferred   : 143908
-	LastConnectionEstablished : 5/2/2014 3:20:40 PM
-	LastEventID               : 23401
-	LastEventMessage          : The connectivity state for the local network site 'Site2' changed from Not Connected to Connected.
-	LastEventTimeStamp        : 5/2/2014 2:51:40 PM
-	LocalNetworkSiteName      : Site2
-	OperationDescription      : Get-AzureVNetConnection
-	OperationId               : 7893b329-51e9-9db4-88c2-16b8067fed7f
-	OperationStatus           : Succeeded
+    Get-AzureVnetConnection -VNetName VNET1
+        
+    ConnectivityState         : Connected
+    EgressBytesTransferred    : 661530
+    IngressBytesTransferred   : 519207
+    LastConnectionEstablished : 5/2/2014 2:51:40 PM
+    LastEventID               : 23401
+    LastEventMessage          : The connectivity state for the local network site 'Site1' changed from Not Connected to Connected.
+    LastEventTimeStamp        : 5/2/2014 2:51:40 PM
+    LocalNetworkSiteName      : Site1
+    OperationDescription      : Get-AzureVNetConnection
+    OperationId               : 7f68a8e6-51e9-9db4-88c2-16b8067fed7f
+    OperationStatus           : Succeeded
+        
+    ConnectivityState         : Connected
+    EgressBytesTransferred    : 789398
+    IngressBytesTransferred   : 143908
+    LastConnectionEstablished : 5/2/2014 3:20:40 PM
+    LastEventID               : 23401
+    LastEventMessage          : The connectivity state for the local network site 'Site2' changed from Not Connected to Connected.
+    LastEventTimeStamp        : 5/2/2014 2:51:40 PM
+    LocalNetworkSiteName      : Site2
+    OperationDescription      : Get-AzureVNetConnection
+    OperationId               : 7893b329-51e9-9db4-88c2-16b8067fed7f
+    OperationStatus           : Succeeded
 
 ## 后续步骤
 

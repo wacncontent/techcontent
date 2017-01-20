@@ -43,7 +43,7 @@ Azure SQL 数据仓库最近推出了[具有更好的性能可预测性的高级
 3. 我们将在步骤 2 进行的备份中，在高级存储上创建一个名为“MyDW”的新数据仓库。还原完成之前，“MyDW”不会出现。
 4. 还原完成后，“MyDW”将返回到迁移之前的相同数据仓库单位和状态（“暂停”或“活动”）。
 5. 我们将删除“MyDW\_DO\_NOT\_USE\_[Timestamp]”。
-	
+    
 > [!NOTE] 这些设置不会作为迁移的一部分执行：
 > 
 >	-  需要重新启用数据库级别的审核
@@ -92,7 +92,7 @@ ALTER DATABASE CurrentDatabasename MODIFY NAME = NewDatabaseName;
 
 - 数据仓库应以 1,000 或更高的数据仓库单位运行（请参阅[缩放计算能力][scale compute power]）。
 - 执行脚本的用户应为 [mediumrc 角色][mediumrc role]或更高级角色。若要将用户添加到此角色中，请执行下列语句：
-		a. `EXEC sp_addrolemember 'xlargerc', 'MyUser'`
+        a. `EXEC sp_addrolemember 'xlargerc', 'MyUser'`
 
             -------------------------------------------------------------------------------
             -- 步骤 1：创建表来控制索引重新生成

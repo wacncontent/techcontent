@@ -40,7 +40,7 @@ ms.author: carlrab
    
 1.	在 Visual Studio 中打开“SQL Server 对象资源管理器”。使用“添加 SQL Server”连接到包含要迁移的数据库的 SQL Server 实例。在对象资源管理器中找到数据库、右键单击该数据库，然后选择“创建新项目...”
     
-	![新建项目](./media/sql-database-migrate-visualstudio-ssdt/02MigrateSSDT.png)  
+    ![新建项目](./media/sql-database-migrate-visualstudio-ssdt/02MigrateSSDT.png)  
 
 2.	将导入设置配置为“仅导入应用程序范围的对象”。取消选中导入以下项的选项：引用的登录名、权限和数据库设置。
 
@@ -56,37 +56,37 @@ ms.author: carlrab
 
 5.	右键单击项目并选择“生成”以生成项目。
     
-	![替换文字](./media/sql-database-migrate-visualstudio-ssdt/06MigrateSSDT.png)  
+    ![替换文字](./media/sql-database-migrate-visualstudio-ssdt/06MigrateSSDT.png)  
 
 6.	**错误列表**将显示每个不兼容项。在此示例中，用户名 NT AUTHORITY\\NETWORK SERVICE 不兼容。由于它不兼容，你可以将它注释掉或删除（并解决从数据库解决方案中删除此登录名和角色的影响）。
     
-	![替换文字](./media/sql-database-migrate-visualstudio-ssdt/07MigrateSSDT.png)
+    ![替换文字](./media/sql-database-migrate-visualstudio-ssdt/07MigrateSSDT.png)
     
 ##<a name="fixing-compatibility-issues-using-sql-server-data-tools-for-visual-studio"></a> 使用 SQL Server Data Tools for Visual Studio 解决兼容性问题
 
 1.	双击第一个脚本以在查询窗口中打开该脚本，注释掉该脚本，然后执行该脚本。
-	![替换文字](./media/sql-database-migrate-visualstudio-ssdt/08MigrateSSDT.png)
+    ![替换文字](./media/sql-database-migrate-visualstudio-ssdt/08MigrateSSDT.png)
 
 2.	对包含不兼容项的每个脚本重复执行此过程，直到不再存在错误。
-	![替换文字](./media/sql-database-migrate-visualstudio-ssdt/09MigrateSSDT.png)
+    ![替换文字](./media/sql-database-migrate-visualstudio-ssdt/09MigrateSSDT.png)
     
 3.	当数据库没有错误时，右键单击项目，然后选择“发布”。此时会生成并发布源数据库的副本（强烈建议使用副本，至少在开始时这样做）。
  - 在发布前，根据源 SQL Server 版本（早于 SQL Server 2014），可能需要重置项目的目标平台才能进行部署。
  - 如果迁移的是较早的 SQL Server 数据库，不要向项目中引入任何不受源 SQL Server 支持的功能，除非先将数据库迁移到较新版本的 SQL Server。
 
-    	![alt text](./media/sql-database-migrate-visualstudio-ssdt/10MigrateSSDT.png)    
+        ![alt text](./media/sql-database-migrate-visualstudio-ssdt/10MigrateSSDT.png)    
     
-    	![alt text](./media/sql-database-migrate-visualstudio-ssdt/11MigrateSSDT.png)    
-    	
+        ![alt text](./media/sql-database-migrate-visualstudio-ssdt/11MigrateSSDT.png)    
+        
 4.	在 SQL Server 对象资源管理器中，右键单击源数据库，然后单击“数据比较”。将项目与原始数据库进行比较，有助于了解向导所做的更改。选择 Azure SQL V12 版本的数据库，然后单击“完成”。
     
-	![替换文字](./media/sql-database-migrate-visualstudio-ssdt/12MigrateSSDT.png)  
+    ![替换文字](./media/sql-database-migrate-visualstudio-ssdt/12MigrateSSDT.png)  
 
-	![替换文字](./media/sql-database-migrate-visualstudio-ssdt/13MigrateSSDT.png)  
+    ![替换文字](./media/sql-database-migrate-visualstudio-ssdt/13MigrateSSDT.png)  
 
 5.	查看检测到的差异，然后单击“更新目标”，以将源数据库中的数据迁移到 Azure SQL V12 数据库。
     
-	![替换文字](./media/sql-database-migrate-visualstudio-ssdt/14MigrateSSDT.png)  
+    ![替换文字](./media/sql-database-migrate-visualstudio-ssdt/14MigrateSSDT.png)  
 
 6.	选择部署方法。请参阅[将兼容的 SQL Server 数据库迁移到 SQL 数据库。](./sql-database-cloud-migrate.md)
 

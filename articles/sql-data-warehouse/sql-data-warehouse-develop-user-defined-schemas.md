@@ -44,60 +44,60 @@ ms.author: jrj;barbkess;sonyama
 ### 示例:
 基于数据库名称实现用户定义的架构
 
-	CREATE SCHEMA [stg]; -- stg previously database name for staging database
-	GO
-	CREATE SCHEMA [edw]; -- edw previously database name for the data warehouse
-	GO
-	CREATE TABLE [stg].[customer] -- create staging tables in the stg schema
-	(       CustKey BIGINT NOT NULL
-	,       ...
-	);
-	GO
-	CREATE TABLE [edw].[customer] -- create data warehouse tables in the edw schema
-	(       CustKey BIGINT NOT NULL
-	,       ...
-	);
+    CREATE SCHEMA [stg]; -- stg previously database name for staging database
+    GO
+    CREATE SCHEMA [edw]; -- edw previously database name for the data warehouse
+    GO
+    CREATE TABLE [stg].[customer] -- create staging tables in the stg schema
+    (       CustKey BIGINT NOT NULL
+    ,       ...
+    );
+    GO
+    CREATE TABLE [edw].[customer] -- create data warehouse tables in the edw schema
+    (       CustKey BIGINT NOT NULL
+    ,       ...
+    );
 
 在表名称前面附加旧架构名称，以保留旧架构名称。使用工作负荷边界的架构。
 
-	CREATE SCHEMA [stg]; -- stg defines the staging boundary
-	GO
-	CREATE SCHEMA [edw]; -- edw defines the data warehouse boundary
-	GO
-	CREATE TABLE [stg].[dim_customer] --pre-pend the old schema name to the table and create in the staging boundary
-	(       CustKey BIGINT NOT NULL
-	,       ...
-	);
-	GO
-	CREATE TABLE [edw].[dim_customer] --pre-pend the old schema name to the table and create in the data warehouse boundary
-	(       CustKey BIGINT NOT NULL
-	,       ...
-	);
+    CREATE SCHEMA [stg]; -- stg defines the staging boundary
+    GO
+    CREATE SCHEMA [edw]; -- edw defines the data warehouse boundary
+    GO
+    CREATE TABLE [stg].[dim_customer] --pre-pend the old schema name to the table and create in the staging boundary
+    (       CustKey BIGINT NOT NULL
+    ,       ...
+    );
+    GO
+    CREATE TABLE [edw].[dim_customer] --pre-pend the old schema name to the table and create in the data warehouse boundary
+    (       CustKey BIGINT NOT NULL
+    ,       ...
+    );
 
 使用视图保留旧架构名称
 
-	CREATE SCHEMA [stg]; -- stg defines the staging boundary
-	GO
-	CREATE SCHEMA [edw]; -- stg defines the data warehouse boundary
-	GO
-	CREATE SCHEMA [dim]; -- edw defines the legacy schema name boundary
-	GO
-	CREATE TABLE [stg].[customer] -- create the base staging tables in the staging boundary
-	(       CustKey	BIGINT NOT NULL
-	,       ...
-	)
-	GO
-	CREATE TABLE [edw].[customer] -- create the base data warehouse tables in the data warehouse boundary
-	(       CustKey	BIGINT NOT NULL
-	,       ...
-	)
-	GO
-	CREATE VIEW [dim].[customer] -- create a view in the legacy schema name boundary for presentation consistency purposes only
-	AS
-	SELECT  CustKey
-	,       ...
-	FROM	[edw].customer
-	;
+    CREATE SCHEMA [stg]; -- stg defines the staging boundary
+    GO
+    CREATE SCHEMA [edw]; -- stg defines the data warehouse boundary
+    GO
+    CREATE SCHEMA [dim]; -- edw defines the legacy schema name boundary
+    GO
+    CREATE TABLE [stg].[customer] -- create the base staging tables in the staging boundary
+    (       CustKey	BIGINT NOT NULL
+    ,       ...
+    )
+    GO
+    CREATE TABLE [edw].[customer] -- create the base data warehouse tables in the data warehouse boundary
+    (       CustKey	BIGINT NOT NULL
+    ,       ...
+    )
+    GO
+    CREATE VIEW [dim].[customer] -- create a view in the legacy schema name boundary for presentation consistency purposes only
+    AS
+    SELECT  CustKey
+    ,       ...
+    FROM	[edw].customer
+    ;
 
 > [!NOTE] 如果架构策略发生任何更改，则需要检查数据库的安全模型。在许多情况下，你可以在架构级别分配权限，以简化安全模型。如果需要更高粒度的权限，可以使用数据库角色。
 

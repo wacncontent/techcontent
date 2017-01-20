@@ -78,12 +78,12 @@ ms.author: renash
   
 若要为导入的文件设置元数据，请创建包含以下内容的文本文件 `c:\WAImportExport\SampleMetadata.txt`：
   
-	<?xml version="1.0" encoding="UTF-8"?>  
-	<Metadata>  
-	    <UploadMethod>Microsoft Azure Import/Export Service</UploadMethod>  
-	    <DataSetName>SampleData</DataSetName>  
-	    <CreationDate>10/1/2013</CreationDate>  
-	</Metadata>  
+    <?xml version="1.0" encoding="UTF-8"?>  
+    <Metadata>  
+        <UploadMethod>Microsoft Azure Import/Export Service</UploadMethod>  
+        <DataSetName>SampleData</DataSetName>  
+        <CreationDate>10/1/2013</CreationDate>  
+    </Metadata>  
 
 还可为 `FavoriteMovie.ISO` Blob 设置一些属性：
   
@@ -95,12 +95,12 @@ ms.author: renash
   
 若要设置这些属性，请创建文本文件 `c:\WAImportExport\SampleProperties.txt`：
   
-	<?xml version="1.0" encoding="UTF-8"?>  
-	<Properties>  
-	    <Content-Type>application/octet-stream</Content-Type>  
-	    <Content-MD5>Q2hlY2sgSW50ZWdyaXR5IQ==</Content-MD5>  
-	    <Cache-Control>no-cache</Cache-Control>  
-	</Properties>  
+    <?xml version="1.0" encoding="UTF-8"?>  
+    <Properties>  
+        <Content-Type>application/octet-stream</Content-Type>  
+        <Content-MD5>Q2hlY2sgSW50ZWdyaXR5IQ==</Content-MD5>  
+        <Cache-Control>no-cache</Cache-Control>  
+    </Properties>  
 
 现在，便可以运行 Azure 导入/导出工具来准备两个硬盘驱动器了。请注意：
   
@@ -123,23 +123,23 @@ ms.author: renash
 对于第一个驱动器，请运行 Azure 导入/导出工具两次来复制两个源目录：
   
 ## 第一个驱动器的第一个复制会话  
-	
-	WAImportExport.exe PrepImport /j:FirstDrive.jrn /id:Video1 /logdir:c:\logs /sk:8ImTigJhIwvL9VEIQKB/zbqcXbxrIHbBjLIfOt0tyR98TxtFvUM/7T0KVNR6KRkJrh26u5I8hTxTLM2O1aDVqg== /t:x /format /encrypt /srcdir:H:\Video1 /dstdir:video/ /MetadataFile:c:\WAImportExport\SampleMetadata.txt  
+    
+    WAImportExport.exe PrepImport /j:FirstDrive.jrn /id:Video1 /logdir:c:\logs /sk:8ImTigJhIwvL9VEIQKB/zbqcXbxrIHbBjLIfOt0tyR98TxtFvUM/7T0KVNR6KRkJrh26u5I8hTxTLM2O1aDVqg== /t:x /format /encrypt /srcdir:H:\Video1 /dstdir:video/ /MetadataFile:c:\WAImportExport\SampleMetadata.txt  
 
 ## 第一个驱动器的第二个复制会话  
 
-	WAImportExport.exe PrepImport /j:FirstDrive.jrn /id:Photo /srcdir:H:\Photo /dstdir:photo/ /MetadataFile:c:\WAImportExport\SampleMetadata.txt
+    WAImportExport.exe PrepImport /j:FirstDrive.jrn /id:Photo /srcdir:H:\Photo /dstdir:photo/ /MetadataFile:c:\WAImportExport\SampleMetadata.txt
 
 对于第二个驱动器，请运行 Azure 导入/导出工具三次（针对源目录运行两次，针对独立的 Blu-Ray™ 映像文件运行一次）：
   
 ## 第一个复制会话  
-	WAImportExport.exe PrepImport /j:SecondDrive.jrn /id:Video2 /logdir:c:\logs /sk:8ImTigJhIwvL9VEIQKB/zbqcXbxrIHbBjLIfOt0tyR98TxtFvUM/7T0KVNR6KRkJrh26u5I8hTxTLM2O1aDVqg== /t:y /format /encrypt /srcdir:H:\Video2 /dstdir:video/ /MetadataFile:c:\WAImportExport\SampleMetadata.txt  
+    WAImportExport.exe PrepImport /j:SecondDrive.jrn /id:Video2 /logdir:c:\logs /sk:8ImTigJhIwvL9VEIQKB/zbqcXbxrIHbBjLIfOt0tyR98TxtFvUM/7T0KVNR6KRkJrh26u5I8hTxTLM2O1aDVqg== /t:y /format /encrypt /srcdir:H:\Video2 /dstdir:video/ /MetadataFile:c:\WAImportExport\SampleMetadata.txt  
 
 ## 第二个复制会话  
-	WAImportExport.exe PrepImport /j:SecondDrive.jrn /id:Music /srcdir:\\bigshare\john\music /dstdir:music/ /MetadataFile:c:\WAImportExport\SampleMetadata.txt  
+    WAImportExport.exe PrepImport /j:SecondDrive.jrn /id:Music /srcdir:\\bigshare\john\music /dstdir:music/ /MetadataFile:c:\WAImportExport\SampleMetadata.txt  
 
 ## 第三个复制会话  
-	WAImportExport.exe PrepImport /j:SecondDrive.jrn /id:BlueRayIso /srcfile:K:\Temp\BlueRay.ISO /dstblob:favorite/BlueRay.ISO /MetadataFile:c:\WAImportExport\SampleMetadata.txt /PropertyFile:c:\WAImportExport\SampleProperties.txt  
+    WAImportExport.exe PrepImport /j:SecondDrive.jrn /id:BlueRayIso /srcfile:K:\Temp\BlueRay.ISO /dstblob:favorite/BlueRay.ISO /MetadataFile:c:\WAImportExport\SampleMetadata.txt /PropertyFile:c:\WAImportExport\SampleProperties.txt  
 
 复制会话完成后，可断开两个驱动器与复制计算机的连接，然后将其寄送到相应的 Microsoft Azure 数据中心。在 [Azure 管理门户](https://manage.windowsazure.CN/)中创建导入作业时，将上载两个日记文件：`FirstDrive.jrn` 和 `SecondDrive.jrn`。
   

@@ -3,7 +3,7 @@
 
 1. 打开 ToDoActivity.cs 项目文件，将以下 using 语句添加到类：
 
-		using Gcm.Client;
+        using Gcm.Client;
 
 2. 在 **ToDoActivity** 类中，添加以下新代码： 
 
@@ -27,7 +27,7 @@
             }
         }
 
-	这样你就可以通过推送处理程序服务流程访问移动客户端实例。
+    这样你就可以通过推送处理程序服务流程访问移动客户端实例。
 
 4.	创建 **MobileServiceClient** 后，将以下代码添加到 **OnCreate** 方法：
 

@@ -31,7 +31,7 @@ ms.author: dastrock
 但是，如果你不想要使用单一页面应用程序中的库，而是自行发送协议消息，请遵循下面的常规步骤。
 
 > [!NOTE]
-	v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
+    v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
     
 ## 协议图
 整个隐式登录流如下所示 - 下面将详细描述每个步骤。
@@ -42,17 +42,17 @@ ms.author: dastrock
 
 若要一开始将用户登录到应用，可以发送 [OpenID Connect](./active-directory-v2-protocols-oidc.md) 授权请求，以及从 v2.0 终结点获取 `id_token`：
 
-		// Line breaks for legibility only
-		
-		https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
-		client_id=6731de76-14a6-49ae-97bc-6eba6914391e
-		&response_type=id_token+token
-		&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
-		&scope=openid%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
-		&response_mode=fragment
-		&state=12345
-		&nonce=678910
-		
+        // Line breaks for legibility only
+        
+        https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
+        client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+        &response_type=id_token+token
+        &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+        &scope=openid%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
+        &response_mode=fragment
+        &state=12345
+        &nonce=678910
+        
 > [!TIP] 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `id_token` 的 `https://localhost/myapp/`。<a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token+token&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&scope=openid%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&response_mode=fragment&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
 
 | 参数 | | 说明 |
@@ -77,13 +77,13 @@ ms.author: dastrock
 
 使用 `response_mode=fragment` 和 `response_type=id_token+token` 的成功响应如下所示（包含换行符以方便阅读）：
 
-	GET https://localhost/myapp/#
-	access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
-	&token_type=Bearer
-	&expires_in=3599
-	&scope=https%3a%2f%2fgraph.microsoft.com%2fmail.read 
-	&id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
-	&state=12345
+    GET https://localhost/myapp/#
+    access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
+    &token_type=Bearer
+    &expires_in=3599
+    &scope=https%3a%2f%2fgraph.microsoft.com%2fmail.read 
+    &id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
+    &state=12345
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -97,9 +97,9 @@ ms.author: dastrock
 #### 错误响应
 错误响应可能也发送到 `redirect_uri`，让应用可以适当地处理：
 
-	GET https://localhost/myapp/#
-	error=access_denied
-	&error_description=the+user+canceled+the+authentication
+    GET https://localhost/myapp/#
+    error=access_denied
+    &error_description=the+user+canceled+the+authentication
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -128,21 +128,21 @@ ms.author: dastrock
 
 在正常的 OpenID Connect/OAuth 流中，可以通过对 v2.0 `/token` 终结点进行请求来实现此目的。但是，v2.0 终结点不支持 CORS 请求，因此进行 AJAX 调用以获取和刷新令牌是不可能的。相反，你可以在隐藏的 iframe 中使用隐式流，以获取其他 Web API 的新令牌：
 
-	// Line breaks for legibility only
-		
-	https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
-	client_id=6731de76-14a6-49ae-97bc-6eba6914391e
-	&response_type=token
-	&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
-	&scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&response_mode=fragment
-	&state=12345&nonce=678910
-	&prompt=none
-	&domain_hint=organizations
-	&login_hint=myuser@mycompany.com
+    // Line breaks for legibility only
+        
+    https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
+    client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+    &response_type=token
+    &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+    &scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&response_mode=fragment
+    &state=12345&nonce=678910
+    &prompt=none
+    &domain_hint=organizations
+    &login_hint=myuser@mycompany.com
 
 > [!TIP] 请尝试将以下请求复制并粘贴到浏览器选项卡中！ （不要忘记使用适用于用户的正确值替换 `domain_hint` 和 `login_hint`）
 
-	https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&response_mode=fragment&state=12345&nonce=678910&prompt=none&domain_hint={{consumers-or-organizations}}&login_hint={{your-username}}
+    https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&response_mode=fragment&state=12345&nonce=678910&prompt=none&domain_hint={{consumers-or-organizations}}&login_hint={{your-username}}
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -162,13 +162,13 @@ ms.author: dastrock
 
 #### 成功的响应
 使用 `response_mode=fragment` 的成功响应如下所示：
-	
-	GET https://localhost/myapp/#
-	access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
-	&state=12345
-	&token_type=Bearer
-	&expires_in=3599
-	&scope=https%3A%2F%2Fgraph.chinacloudapi.cn%2Fdirectory.read
+    
+    GET https://localhost/myapp/#
+    access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
+    &state=12345
+    &token_type=Bearer
+    &expires_in=3599
+    &scope=https%3A%2F%2Fgraph.chinacloudapi.cn%2Fdirectory.read
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -181,9 +181,9 @@ ms.author: dastrock
 #### 错误响应
 错误响应还可能发送到 `redirect_uri`，因此应用可以适当地对其进行处理。如果是 `prompt=none`，预期的错误为：
 
-	GET https://localhost/myapp/#
-	error=user_authentication_required
-	&error_description=the+request+could+not+be+completed+silently
+    GET https://localhost/myapp/#
+    error=user_authentication_required
+    &error_description=the+request+could+not+be+completed+silently
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
@@ -208,8 +208,8 @@ When you wish to sign the user out of the  app, it is not sufficient to clear yo
 
 You can simply redirect the user to the `end_session_endpoint` listed in the OpenID Connect metadata document:
 
-	GET https://login.microsoftonline.com/common/oauth2/v2.0/logout?
-	post_logout_redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+    GET https://login.microsoftonline.com/common/oauth2/v2.0/logout?
+    post_logout_redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
 
 | Parameter | | Description |
 | ----------------------- | ------------------------------- | ------------ |

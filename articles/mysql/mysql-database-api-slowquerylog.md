@@ -107,7 +107,7 @@ Json示例文件如下：
   "sku": { "name": "MS2" },
   "properties": {
     "version": "5.5",
-	"slow_query_log": ON,
+    "slow_query_log": ON,
     "dailyBackupTimeInHour": 10,
     "provisioningState": "Succeeded"
   }

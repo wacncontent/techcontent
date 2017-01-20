@@ -33,23 +33,23 @@ ms.author: carlrab
 1. 打开命令提示符并更改包含 sqlpackage.exe 最新版本的目录。此实用程序随 [SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx) 和[用于 Visual Studio 的 SQL Server Data Tools](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx) 的最新版本提供，也可直接从 Microsoft 下载中心下载 [SqlPackage](https://www.microsoft.com/zh-cn/download/details.aspx?id=53876) 的最新版本。
 2. 使用你的环境的以下参数执行以下 SqlPackage 命令：
 
-	'sqlpackage.exe /Action:Export /ssn:< server_name > /sdn:< database_name > /tf:< target_file > /p:TableData=< schema_name.table_name > > < output_file > 2>&1'
+    'sqlpackage.exe /Action:Export /ssn:< server_name > /sdn:< database_name > /tf:< target_file > /p:TableData=< schema_name.table_name > > < output_file > 2>&1'
 
-	| 参数 | 说明 |
-	|---|---|
-	| < server_name > | 源服务器名称 |
-	| < database_name > | 源数据库名称 |
-	| < target_file > | BACPAC 文件的文件名和位置 |
-	| < schema_name.table_name > | 其数据将输出到目标文件的表 |
-	| < output_file > | 包含错误（如果有）的输出文件的文件名和位置 |
+    | 参数 | 说明 |
+    |---|---|
+    | < server_name > | 源服务器名称 |
+    | < database_name > | 源数据库名称 |
+    | < target_file > | BACPAC 文件的文件名和位置 |
+    | < schema_name.table_name > | 其数据将输出到目标文件的表 |
+    | < output_file > | 包含错误（如果有）的输出文件的文件名和位置 |
 
-	使用 /P:TableName 参数的原因是：只需测试导出到 Azure SQL 数据库 V12 的数据库兼容性，无需测试从所有表导出数据。遗憾的是，sqlpackage.exe 的导出参数不支持提取零个表。需指定至少一个表，例如一个小型表。< output\_file > 包含任何错误的报告。“> 2>&1”字符串将执行命令后生成的标准输出和标准错误传送到指定的输出文件。
+    使用 /P:TableName 参数的原因是：只需测试导出到 Azure SQL 数据库 V12 的数据库兼容性，无需测试从所有表导出数据。遗憾的是，sqlpackage.exe 的导出参数不支持提取零个表。需指定至少一个表，例如一个小型表。< output\_file > 包含任何错误的报告。“> 2>&1”字符串将执行命令后生成的标准输出和标准错误传送到指定的输出文件。
 
-	![通过“任务”菜单导出数据层应用程序](./media/sql-database-cloud-migrate/TestForCompatibilityUsingSQLPackage01.png)  
+    ![通过“任务”菜单导出数据层应用程序](./media/sql-database-cloud-migrate/TestForCompatibilityUsingSQLPackage01.png)  
 
 3. 打开输出文件并查看兼容性错误（如果有）。
 
-	![通过“任务”菜单导出数据层应用程序](./media/sql-database-cloud-migrate/TestForCompatibilityUsingSQLPackage02.png)  
+    ![通过“任务”菜单导出数据层应用程序](./media/sql-database-cloud-migrate/TestForCompatibilityUsingSQLPackage02.png)  
 
 ## 后续步骤
 

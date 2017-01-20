@@ -47,7 +47,7 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 2. 键入以下命令以创建服务总线命名空间。提供你自己的命名空间值，并指定与应用程序相同的区域。
 
-	    New-AzureSBNamespace -Name 'yourexamplenamespace' -Location 'China East' -NamespaceType 'Messaging' -CreateACSNamespace $true
+        New-AzureSBNamespace -Name 'yourexamplenamespace' -Location 'China East' -NamespaceType 'Messaging' -CreateACSNamespace $true
 
     ![创建命名空间](./media/service-bus-ruby-how-to-use-queues/showcmdcreate.png)
 
@@ -131,7 +131,7 @@ Azure 模块将读取环境变量 **AZURE\_SERVICEBUS\_NAMESPACE** 和 **AZURE\_
 以下示例演示如何使用 **receive\_queue\_message()** 接收和处理消息。该示例先通过将 **:peek\_lock** 设置为 **false** 接收并删除一条消息，然后再接收另一条消息，最后使用 **delete\_queue\_message()** 删除该消息：
 
     message = azure_service_bus_service.receive_queue_message("test-queue", 
-	  { :peek_lock => false })
+      { :peek_lock => false })
     message = azure_service_bus_service.receive_queue_message("test-queue")
     azure_service_bus_service.delete_queue_message(message)
 

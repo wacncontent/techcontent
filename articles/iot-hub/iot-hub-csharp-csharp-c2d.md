@@ -90,30 +90,30 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
 
 2. 在“解决方案资源管理器”中，右键单击该解决方案，然后单击“为解决方案管理 NuGet 包...”。
 
-	此时将打开“管理 NuGet 包”窗口。
+    此时将打开“管理 NuGet 包”窗口。
 
 3. 搜索 `Microsoft Azure Devices`、单击“安装”，并接受使用条款。
 
-	这将下载、安装 [Azure IoT - 服务 SDK NuGet 包]并添加对它的引用。
+    这将下载、安装 [Azure IoT - 服务 SDK NuGet 包]并添加对它的引用。
 
 4. 在 **Program.cs** 文件顶部添加以下 `using` 语句：
 
-		using Microsoft.Azure.Devices;
+        using Microsoft.Azure.Devices;
 
 5. 将以下字段添加到 **Program** 类。将占位符值替换为在 [Get started with IoT Hub]（IoT 中心入门）中获取的 IoT 中心连接字符串：
 
-		static ServiceClient serviceClient;
+        static ServiceClient serviceClient;
         static string connectionString = "{iot hub connection string}";
 
 6. 将以下方法添加到 **Program** 类：
 
-		private async static Task SendCloudToDeviceMessageAsync()
+        private async static Task SendCloudToDeviceMessageAsync()
         {
             var commandMessage = new Message(Encoding.ASCII.GetBytes("Cloud to device message."));
             await serviceClient.SendAsync("myFirstDevice", commandMessage);
         }
 
-	此方法会将新的云到设备消息发送到 ID 为 `myFirstDevice` 的设备。如果你对 [Get started with IoT Hub]（IoT 中心入门）中使用的参数做了修改，请相应地更改此参数。
+    此方法会将新的云到设备消息发送到 ID 为 `myFirstDevice` 的设备。如果你对 [Get started with IoT Hub]（IoT 中心入门）中使用的参数做了修改，请相应地更改此参数。
 
 7. 最后，在 **Main** 方法中添加以下行：
 

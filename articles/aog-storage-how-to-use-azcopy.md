@@ -26,7 +26,7 @@ wacn.date: 01/21/2016
 ## <a id="operation"></a>详细步骤
 1.	打开Azure Command Prompt.
  
-	![](./media/aog-storage-how-to-use-azcopy/azure-command-prompt-tool.png)
+    ![](./media/aog-storage-how-to-use-azcopy/azure-command-prompt-tool.png)
 
 2.	使用 `cd %ProgramFiles(x86)%\Microsoft SDKs\Azure\AzCopy` 定位到AzCopy的安装目录， 64-bit Window为 `%ProgramFiles(x86)%\Microsoft SDKs\Azure\`，32-bit Windows 为 `%ProgramFiles%\Microsoft SDKs\Azure\`. 
 
@@ -36,32 +36,32 @@ wacn.date: 01/21/2016
 
 #####*上传文件到 Blob storage:
 
-	AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Pattern:abc.txt 
+    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Pattern:abc.txt 
 
 #####*下载文件到文件系统:
 
-	AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /Pattern:abc.txt
+    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /Dest:C:\myfolder /SourceKey:key /Pattern:abc.txt
 
 #####*在同一个storage账号里面拷贝文件：
 
-	AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key /DestKey:key /Pattern:abc.txt 
+    AzCopy /Source:https://myaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key /DestKey:key /Pattern:abc.txt 
 
 #####*在不同的storage账号里面拷贝文件:
 
-	AzCopy /Source:https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key1 /DestKey:key2 /Pattern:abc.txt
+    AzCopy /Source:https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key1 /DestKey:key2 /Pattern:abc.txt
 
 #####*上传文件到storage下新建文件夹:
 
-	AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mynewcontainer /DestKey:key /Pattern:abc.txt
+    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mynewcontainer /DestKey:key /Pattern:abc.txt
 
 #####*递归方式上传文件夹下所有内容到storage:
 
-	AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /S
+    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /S
 
 #####*递归查找匹配的文件并上传到storage:
 
-	AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Pattern:a* /S
+    AzCopy /Source:C:\myfolder /Dest:https://myaccount.blob.core.chinacloudapi.cn/mycontainer /DestKey:key /Pattern:a* /S
 
 #####*拷贝Blob及其快照到另一个storage:
 
-	AzCopy /Source:https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key1 /DestKey:key2 /Pattern:abc.txt /Snapshot  
+    AzCopy /Source:https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 /Dest:https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /SourceKey:key1 /DestKey:key2 /Pattern:abc.txt /Snapshot  

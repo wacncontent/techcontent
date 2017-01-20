@@ -77,19 +77,19 @@ Azure 默认提供单个虚拟网络内包含的所有 VM 的 DNS 名称解析�
 有多个不同的 DNS 缓存包可用，例如 dnsmasq，下面是在最常见的发行版上安装 dnsmasq 的步骤：
 
 - **Ubuntu（使用 resolvconf）**：
-	- 安装 dnsmasq 包（“sudo apt-get install dnsmasq”）。
+    - 安装 dnsmasq 包（“sudo apt-get install dnsmasq”）。
 - **SUSE（使用 netconf）**：
-	- 安装 dnsmasq 包（“sudo zypper install dnsmasq”）
-	- 启用 dnsmasq 服务（“systemctl enable dnsmasq.service”）
-	- 启动 dnsmasq 服务（“systemctl start dnsmasq.service”）
-	- 编辑“/etc/sysconfig/network/config”，并将 NETCONFIG\_DNS\_FORWARDER="" 更改为“dnsmasq”
-	- 更新 resolv.conf（“netconfig update”），以将缓存设置为本地 DNS 解析程序
+    - 安装 dnsmasq 包（“sudo zypper install dnsmasq”）
+    - 启用 dnsmasq 服务（“systemctl enable dnsmasq.service”）
+    - 启动 dnsmasq 服务（“systemctl start dnsmasq.service”）
+    - 编辑“/etc/sysconfig/network/config”，并将 NETCONFIG\_DNS\_FORWARDER="" 更改为“dnsmasq”
+    - 更新 resolv.conf（“netconfig update”），以将缓存设置为本地 DNS 解析程序
 - **OpenLogic（使用 NetworkManager）**：
-	- 安装 dnsmasq 包（“sudo yum install dnsmasq”）
-	- 启用 dnsmasq 服务（“systemctl enable dnsmasq.service”）
-	- 启动 dnsmasq 服务（“systemctl start dnsmasq.service”）
-	- 将“prepend domain-name-servers 127.0.0.1;”添加到“/etc/dhclient-eth0.conf”
-	- 重新启动网络服务（“service network restart”），以将缓存设置为本地 DNS 解析程序
+    - 安装 dnsmasq 包（“sudo yum install dnsmasq”）
+    - 启用 dnsmasq 服务（“systemctl enable dnsmasq.service”）
+    - 启动 dnsmasq 服务（“systemctl start dnsmasq.service”）
+    - 将“prepend domain-name-servers 127.0.0.1;”添加到“/etc/dhclient-eth0.conf”
+    - 重新启动网络服务（“service network restart”），以将缓存设置为本地 DNS 解析程序
 
 > [!NOTE]：该“dnsmasq”包只是适用于 Linux 的众多 DNS 缓存中的一个。在使用之前，请检查其是否适合你的特定需求，并且确认没有安装其他缓存。
 
@@ -102,19 +102,19 @@ DNS 主要是一个 UDP 协议。因为 UDP 协议无法保证消息传递，所
 
 若要检查 Linux VM 上的当前设置，请执行“cat /etc/resolv.conf”并查看“options”行，例如：
 
-	options timeout:1 attempts:5
+    options timeout:1 attempts:5
 
 resolv.conf 文件是自动生成的，不应对其进行编辑。添加“options”行的具体步骤因发行版而异：
 
 - **Ubuntu**（使用 resolvconf）：
-	- 将“options”行添加到“/etc/resolveconf/resolv.conf.d/head”
-	- 运行“resolvconf -u”以更新
+    - 将“options”行添加到“/etc/resolveconf/resolv.conf.d/head”
+    - 运行“resolvconf -u”以更新
 - **SUSE**（使用 netconf）：
-	- 将“timeout:1 attempts:5”添加到“/etc/sysconfig/network/config”中的 NETCONFIG\_DNS\_RESOLVER\_OPTIONS="" 参数
-	- 运行“netconfig update”以更新
+    - 将“timeout:1 attempts:5”添加到“/etc/sysconfig/network/config”中的 NETCONFIG\_DNS\_RESOLVER\_OPTIONS="" 参数
+    - 运行“netconfig update”以更新
 - **OpenLogic**（使用 NetworkManager）：
-	- 将“echo "options timeout:1 attempts:5"”添加到“/etc/NetworkManager/dispatcher.d/11-dhclient”
-	- 运行“service network restart”以更新
+    - 将“echo "options timeout:1 attempts:5"”添加到“/etc/NetworkManager/dispatcher.d/11-dhclient”
+    - 运行“service network restart”以更新
 
 ## <a name="name-resolution-using-your-own-dns-server"></a> 使用你自己的 DNS 服务器进行名称解析
 在很多情况下（例如，需要在虚拟网络 (VNet) 之间进行 DNS 解析），Azure 所提供的功能可能无法满足你的名称解析需求。考虑到这种情况，Azure 提供了使用你自己的 DNS 服务器的功能。

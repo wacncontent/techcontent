@@ -40,53 +40,53 @@ Before we look at service continuity solutions, it is important to be familiar w
 Following are common scenarios and corresponding solutions.
 
 <table width="100%" border="1" cellspacing="0" cellpadding="0">
-	<tr>
-		<td>
-			<b>Scenario</b>
-		</td>
-		<td>
-			<b>Description </b>
-		</td>
-		<td>
-			<b>Corresponding solution</b>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			Recover from service interruptions caused by human error
-		</td>
-		<td>
-			An operational error by a database administrator in a production environment that causes the loss of some important data and requires rapid recovery.
-		</td>
-		<td>
-			Backup and restore -- point-in-time restore feature of MySQL can roll back to any point in time during the last seven days. For the specific steps, see <a href="./mysql-database-point-in-time-restore.md" target="_blank">MySQL on Azure backup and restore—restore the database to any point in time</a>.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			Recover from service interruptions caused by a particular upgrade
-		</td>
-		<td>
-			In a production environment, the failure of a particular upgrade causes compatibility problems that make it impossible for the service to be performed normally.
-		</td>
-		<td>
-			Create a snapshot backup of the database before you upgrade. If the upgrade encounters a problem, you can then quickly restore the entire backup to the original instance or to a new instance. For the specific steps, see <a href="./mysql-database-point-in-time-restore.md" target="_blank">Backup and restore</a>.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			Recover from a regional disaster
-		</td>
-		<td>
-			A regional disaster that causes widespread service interruptions for which you need to quickly perform offsite recovery.
-		</td>
-		<td>
-			Two recovery solutions are provided so that you can choose the most appropriate solution based on the degree of urgency. If you are in a production environment, we recommend the self-service solution.<br>
-			- Self-service solution: If a regional disaster occurs and you are unable to perform offsite recovery by using the Azure portal, you can use the PowerShell command line to restore the instance offsite.<br>
-			- Pass solution: If a serious regional disaster occurs, the MySQL service will perform off-site recovery on all affected areas.
+    <tr>
+        <td>
+            <b>Scenario</b>
+        </td>
+        <td>
+            <b>Description </b>
+        </td>
+        <td>
+            <b>Corresponding solution</b>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Recover from service interruptions caused by human error
+        </td>
+        <td>
+            An operational error by a database administrator in a production environment that causes the loss of some important data and requires rapid recovery.
+        </td>
+        <td>
+            Backup and restore -- point-in-time restore feature of MySQL can roll back to any point in time during the last seven days. For the specific steps, see <a href="./mysql-database-point-in-time-restore.md" target="_blank">MySQL on Azure backup and restore—restore the database to any point in time</a>.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Recover from service interruptions caused by a particular upgrade
+        </td>
+        <td>
+            In a production environment, the failure of a particular upgrade causes compatibility problems that make it impossible for the service to be performed normally.
+        </td>
+        <td>
+            Create a snapshot backup of the database before you upgrade. If the upgrade encounters a problem, you can then quickly restore the entire backup to the original instance or to a new instance. For the specific steps, see <a href="./mysql-database-point-in-time-restore.md" target="_blank">Backup and restore</a>.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Recover from a regional disaster
+        </td>
+        <td>
+            A regional disaster that causes widespread service interruptions for which you need to quickly perform offsite recovery.
+        </td>
+        <td>
+            Two recovery solutions are provided so that you can choose the most appropriate solution based on the degree of urgency. If you are in a production environment, we recommend the self-service solution.<br>
+            - Self-service solution: If a regional disaster occurs and you are unable to perform offsite recovery by using the Azure portal, you can use the PowerShell command line to restore the instance offsite.<br>
+            - Pass solution: If a serious regional disaster occurs, the MySQL service will perform off-site recovery on all affected areas.
 
-		</td>
-	</tr>
+        </td>
+    </tr>
 </table>
 
 ## Recover from a regional disaster ##

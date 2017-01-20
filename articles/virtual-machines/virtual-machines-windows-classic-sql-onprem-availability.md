@@ -42,21 +42,21 @@ AlwaysOn 可用性组通过添加辅助副本为数据库组提供高可用性�
 
 1. 默认情况下，将显示“将副本添加到可用性组向导”。单击**“下一步”**。如果你以前在启动此向导时在页面底部选择了“不再显示此页”选项，则不会显示此屏幕。
 
-	![SQL](./media/virtual-machines-windows-classic-sql-onprem-availability/IC742861.png)
+    ![SQL](./media/virtual-machines-windows-classic-sql-onprem-availability/IC742861.png)
 
 1. 你需要连接到所有现有辅助副本。你可以单击每个副本旁边的“连接...”，或者单击屏幕底部的“全部连接...”。身份验证之后，单击“下一步”转到下一屏幕。
 
 1. 在“指定副本”页上，顶部列出了多个选项卡：“副本”、“终结点”、“备份首选项”和“侦听器”。从“副本”选项卡，单击“添加 Azure 副本...”以启动“添加 Azure 副本向导”。
 
-	![SQL](./media/virtual-machines-windows-classic-sql-onprem-availability/IC742863.png)
+    ![SQL](./media/virtual-machines-windows-classic-sql-onprem-availability/IC742863.png)
 
 1. 如果以前已安装 Azure 管理证书，请从本地 Windows 证书存储中选择现有的 Azure 管理证书。如果以前使用过 Azure 订阅的 ID，请选择或输入该 ID。可以单击“下载”以下载并安装 Azure 管理证书，然后使用 Azure 帐户下载订阅列表。
 
-	![SQL](./media/virtual-machines-windows-classic-sql-onprem-availability/IC742864.png)
+    ![SQL](./media/virtual-machines-windows-classic-sql-onprem-availability/IC742864.png)
 
 1. 使用用于创建托管副本的 Azure 虚拟机 (VM) 的值，填充页面上的每个字段。
 
-	|设置|说明|
+    |设置|说明|
 |---|---|
 |**映像**|选择操作系统和 SQL Server 的所需组合|
 |**VM 大小**|选择最适合你的业务需求的 VM 大小|
@@ -76,7 +76,7 @@ AlwaysOn 可用性组通过添加辅助副本为数据库组提供高可用性�
 
 1. 再次显示“指定副本”页。在“副本”、“终结点”和“备份首选项”选项卡上验证新的 Azure 副本的设置。修改设置，使其符合你的业务需求。有关这些选项卡包含的参数的详细信息，请参阅“指定副本”页（新建可用性组向导/添加副本向导）。请注意，对于包含 Azure 副本的可用性组，无法使用“侦听器”选项卡创建侦听器。[](https://msdn.microsoft.com/zh-cn/library/hh213088.aspx)此外，如果侦听器在启动向导之前已经创建，你将收到一条消息，指示 Azure 不支持此功能。在**创建可用性组侦听器**部分，我们将探讨如何创建侦听器。
 
-	![SQL](./media/virtual-machines-windows-classic-sql-onprem-availability/IC742865.png)
+    ![SQL](./media/virtual-machines-windows-classic-sql-onprem-availability/IC742865.png)
 
 1. 单击**“下一步”**。
 
@@ -84,7 +84,7 @@ AlwaysOn 可用性组通过添加辅助副本为数据库组提供高可用性�
 
 1. 在“验证”页上查看结果。更正存在的问题，如有必要，请重新运行验证。单击**“下一步”**。
 
-	![SQL](./media/virtual-machines-windows-classic-sql-onprem-availability/IC742866.png)
+    ![SQL](./media/virtual-machines-windows-classic-sql-onprem-availability/IC742866.png)
 
 1. 在“摘要”页上查看设置，然后单击“完成”。
 

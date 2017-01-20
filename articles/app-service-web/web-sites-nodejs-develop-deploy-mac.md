@@ -59,23 +59,23 @@ ms.author: robmcm
 
 4. 在“Web 应用”框中输入 Web 应用的名称。
 
-	该名称在 chinacloudsites.cn 域中必须是唯一的，因为 Web 应用的 URL 将是 {name}.chinacloudsites.cn。如果你输入的名称不是唯一的，则会在文本框中显示一个红色的感叹号。
+    该名称在 chinacloudsites.cn 域中必须是唯一的，因为 Web 应用的 URL 将是 {name}.chinacloudsites.cn。如果你输入的名称不是唯一的，则会在文本框中显示一个红色的感叹号。
 
 5. 选择一个“订阅”。
 
 6. 选择“资源组”或新建一个。
 
-	有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
+    有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
 
 7. 选择“App Service 计划/位置”或新建一个。
 
-	有关应用服务计划的详细信息，请参阅 [Azure App Service 计划概述](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)
+    有关应用服务计划的详细信息，请参阅 [Azure App Service 计划概述](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)
 
 8. 单击“创建”。
    
-	![][portal-quick-create2]
+    ![][portal-quick-create2]
 
-	不久之后（通常不到一分钟），Azure 将创建出新的 Web 应用。
+    不久之后（通常不到一分钟），Azure 将创建出新的 Web 应用。
 
 1. 登录到 [Azure 经典管理门户](https://manage.windowsazure.cn)。在“Web 应用”页上，选择要为其安装连续部署的 Web 应用，然后选择“仪表板”选项卡。
 
@@ -85,9 +85,9 @@ ms.author: robmcm
 
 1. 回到 [Azure 门户预览](https://portal.azure.cn)。 在“Web 应用”边栏选项卡中，单击“设置”，然后单击“属性”。
  
-	推送到远程 Git 存储库即可发布。存储库的 URL 将在“GIT URL”下列出。本教程的后面部分需使用此 URL。
+    推送到远程 Git 存储库即可发布。存储库的 URL 将在“GIT URL”下列出。本教程的后面部分需使用此 URL。
 
-	![][git-url]
+    ![][git-url]
 
 ## 本地构建和测试应用程序
 
@@ -112,7 +112,7 @@ ms.author: robmcm
 
 4. 打开 Web 浏览器并导航到 http://localhost:1337。
 
-	显示“Hello World”的网页随即出现，如以下屏幕截图所示。
+    显示“Hello World”的网页随即出现，如以下屏幕截图所示。
 
     ![显示“Hello World”消息的浏览器。][helloworld-localhost]
 
@@ -120,46 +120,46 @@ ms.author: robmcm
 
 1. 如果你尚未安装 Git，现在请安装。
 
-	有关针对你的平台的安装说明，请参阅 [Git 下载页](http://git-scm.com/download)。
+    有关针对你的平台的安装说明，请参阅 [Git 下载页](http://git-scm.com/download)。
 
 1. 从命令行中，将目录更改为 **helloworld** 目录，然后输入以下命令来初始化本地 Git 存储库。
 
-		git init
+        git init
 
 2. 使用以下命令将文件添加到存储库中：
 
-		git add .
-		git commit -m "initial commit"
+        git add .
+        git commit -m "initial commit"
 
 3. 使用以下命令添加 Git remote，以便将更新推送到你之前创建的 Web 应用：
 
-		git remote add azure [URL for remote repository]
+        git remote add azure [URL for remote repository]
 
 4. 使用以下命令将更改推送到 Azure：
 
-		git push azure master
+        git push azure master
 
-	系统将提示你输入之前创建的密码。输出类似于以下示例。
+    系统将提示你输入之前创建的密码。输出类似于以下示例。
 
-		Counting objects: 3, done.
-		Delta compression using up to 8 threads.
-		Compressing objects: 100% (2/2), done.
-		Writing objects: 100% (3/3), 374 bytes, done.
-		Total 3 (delta 0), reused 0 (delta 0)
-		remote: New deployment received.
-		remote: Updating branch 'master'.
-		remote: Preparing deployment for commit id '5ebbe250c9'.
-		remote: Preparing files for deployment.
-		remote: Deploying Web.config to enable Node.js activation.
-		remote: Deployment successful.
-		To https://user@testsite.scm.chinacloudsites.cn/testsite.git
-		 * [new branch]      master -> master
+        Counting objects: 3, done.
+        Delta compression using up to 8 threads.
+        Compressing objects: 100% (2/2), done.
+        Writing objects: 100% (3/3), 374 bytes, done.
+        Total 3 (delta 0), reused 0 (delta 0)
+        remote: New deployment received.
+        remote: Updating branch 'master'.
+        remote: Preparing deployment for commit id '5ebbe250c9'.
+        remote: Preparing files for deployment.
+        remote: Deploying Web.config to enable Node.js activation.
+        remote: Deployment successful.
+        To https://user@testsite.scm.chinacloudsites.cn/testsite.git
+         * [new branch]      master -> master
 
 5. 若要查看你的应用，请在 Azure 门户预览的“Web 应用”部分中单击“浏览”按钮。
 
-	![“浏览”按钮](./media/web-sites-nodejs-develop-deploy-mac/browsebutton.png)
+    ![“浏览”按钮](./media/web-sites-nodejs-develop-deploy-mac/browsebutton.png)
 
-	![Azure 中的 hello world](./media/web-sites-nodejs-develop-deploy-mac/helloworldazure.png)
+    ![Azure 中的 hello world](./media/web-sites-nodejs-develop-deploy-mac/helloworldazure.png)
 
 ## 发布对应用程序所做的更改
 
@@ -169,15 +169,15 @@ ms.author: robmcm
 
 2. 从命令行中，将目录更改为 **helloworld** 目录，然后运行以下命令：
 
-		git add .
-		git commit -m "changing to hello azure"
-		git push azure master
+        git add .
+        git commit -m "changing to hello azure"
+        git push azure master
 
-	系统将再次提示你输入密码。
+    系统将再次提示你输入密码。
 
 3. 刷新你从中导航到 Web 应用 URL 的浏览器窗口。
 
-	![显示“Hello Azure”的网页][helloworld-completed]
+    ![显示“Hello Azure”的网页][helloworld-completed]
 
 ## 回滚部署
 

@@ -43,32 +43,32 @@ ms.author: gwallace
 
 **若要创建网关**，请使用 `New-AzureApplicationGateway` cmdlet，并将值替换为你自己的值。请注意，此时不会开始计收网关的费用。计费将在后面已成功启动网关时开始。
 
-	PS C:\> New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
+    PS C:\> New-AzureApplicationGateway -Name AppGwTest -VnetName testvnet1 -Subnets @("Subnet-1")
 
-	VERBOSE: 4:31:35 PM - Begin Operation: New-AzureApplicationGateway 
-	VERBOSE: 4:32:37 PM - Completed Operation: New-AzureApplicationGateway
-	Name       HTTP Status Code     Operation ID                             Error 
-	----       ----------------     ------------                             ----
-	Successful OK                   55ef0460-825d-2981-ad20-b9a8af41b399
+    VERBOSE: 4:31:35 PM - Begin Operation: New-AzureApplicationGateway 
+    VERBOSE: 4:32:37 PM - Completed Operation: New-AzureApplicationGateway
+    Name       HTTP Status Code     Operation ID                             Error 
+    ----       ----------------     ------------                             ----
+    Successful OK                   55ef0460-825d-2981-ad20-b9a8af41b399
 
 **若要验证**是否已创建网关，可以使用 `Get-AzureApplicationGateway` cmdlet。
 
 在此示例中，*Description*、*InstanceCount* 和 *GatewaySize* 是可选参数。*InstanceCount* 的默认值为 2，最大值为 10。*GatewaySize* 的默认值为 Medium。其他可用值为 Small 和 Large。*Vip* 和 *DnsName* 显示为空白，因为网关尚未启动。这些值将在网关进入运行状态后立即创建。
 
-	PS C:\> Get-AzureApplicationGateway AppGwTest
+    PS C:\> Get-AzureApplicationGateway AppGwTest
 
-	VERBOSE: 4:39:39 PM - Begin Operation:
-	Get-AzureApplicationGateway VERBOSE: 4:39:40 PM - Completed 
-	Operation: Get-AzureApplicationGateway
-	Name: AppGwTest	
-	Description: 
-	VnetName: testvnet1 
-	Subnets: {Subnet-1} 
-	InstanceCount: 2 
-	GatewaySize: Medium 
-	State: Stopped 
-	VirtualIPs: 
-	DnsName:
+    VERBOSE: 4:39:39 PM - Begin Operation:
+    Get-AzureApplicationGateway VERBOSE: 4:39:40 PM - Completed 
+    Operation: Get-AzureApplicationGateway
+    Name: AppGwTest	
+    Description: 
+    VnetName: testvnet1 
+    Subnets: {Subnet-1} 
+    InstanceCount: 2 
+    GatewaySize: Medium 
+    State: Stopped 
+    VirtualIPs: 
+    DnsName:
 
 ## <a name="configure-the-gateway"></a> 配置网关
 
@@ -96,68 +96,68 @@ ms.author: gwallace
 
  **配置 XML 示例**
 
-		<?xml version="1.0" encoding="utf-8"?>
-		<ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
-			<FrontendIPConfigurations>
-				<FrontendIPConfiguration>
-					<Name>fip1</Name> 
-					<Type>Private</Type> 
-					<StaticIPAddress>10.0.0.10</StaticIPAddress> 
-				</FrontendIPConfiguration>
-			</FrontendIPConfigurations>
-		    <FrontendPorts>
-		        <FrontendPort>
-		            <Name>FrontendPort1</Name>
-		            <Port>80</Port>
-		        </FrontendPort>
-		    </FrontendPorts>
-		    <BackendAddressPools>
-		        <BackendAddressPool>
-		            <Name>BackendPool1</Name>
-		            <IPAddresses>
-		                <IPAddress>10.0.0.1</IPAddress>
-		                <IPAddress>10.0.0.2</IPAddress>
-		            </IPAddresses>
-		        </BackendAddressPool>
-		    </BackendAddressPools>
-		    <BackendHttpSettingsList>
-		        <BackendHttpSettings>
-		            <Name>BackendSetting1</Name>
-		            <Port>80</Port>
-		            <Protocol>Http</Protocol>
-		            <CookieBasedAffinity>Enabled</CookieBasedAffinity>
-		        </BackendHttpSettings>
-		    </BackendHttpSettingsList>
-		    <HttpListeners>
-		        <HttpListener>
-		            <Name>HTTPListener1</Name>
-					<FrontendIP>fip1</FrontendIP>
-		            <FrontendPort>FrontendPort1</FrontendPort>
-		            <Protocol>Http</Protocol>
-		        </HttpListener>
-		    </HttpListeners>
-		    <HttpLoadBalancingRules>
-		        <HttpLoadBalancingRule>
-		            <Name>HttpLBRule1</Name>
-		            <Type>basic</Type>
-		            <BackendHttpSettings>BackendSetting1</BackendHttpSettings>
-		            <Listener>HTTPListener1</Listener>
-		            <BackendAddressPool>BackendPool1</BackendAddressPool>
-		        </HttpLoadBalancingRule>
-		    </HttpLoadBalancingRules>
-		</ApplicationGatewayConfiguration>
-	
+        <?xml version="1.0" encoding="utf-8"?>
+        <ApplicationGatewayConfiguration xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/windowsazure">
+            <FrontendIPConfigurations>
+                <FrontendIPConfiguration>
+                    <Name>fip1</Name> 
+                    <Type>Private</Type> 
+                    <StaticIPAddress>10.0.0.10</StaticIPAddress> 
+                </FrontendIPConfiguration>
+            </FrontendIPConfigurations>
+            <FrontendPorts>
+                <FrontendPort>
+                    <Name>FrontendPort1</Name>
+                    <Port>80</Port>
+                </FrontendPort>
+            </FrontendPorts>
+            <BackendAddressPools>
+                <BackendAddressPool>
+                    <Name>BackendPool1</Name>
+                    <IPAddresses>
+                        <IPAddress>10.0.0.1</IPAddress>
+                        <IPAddress>10.0.0.2</IPAddress>
+                    </IPAddresses>
+                </BackendAddressPool>
+            </BackendAddressPools>
+            <BackendHttpSettingsList>
+                <BackendHttpSettings>
+                    <Name>BackendSetting1</Name>
+                    <Port>80</Port>
+                    <Protocol>Http</Protocol>
+                    <CookieBasedAffinity>Enabled</CookieBasedAffinity>
+                </BackendHttpSettings>
+            </BackendHttpSettingsList>
+            <HttpListeners>
+                <HttpListener>
+                    <Name>HTTPListener1</Name>
+                    <FrontendIP>fip1</FrontendIP>
+                    <FrontendPort>FrontendPort1</FrontendPort>
+                    <Protocol>Http</Protocol>
+                </HttpListener>
+            </HttpListeners>
+            <HttpLoadBalancingRules>
+                <HttpLoadBalancingRule>
+                    <Name>HttpLBRule1</Name>
+                    <Type>basic</Type>
+                    <BackendHttpSettings>BackendSetting1</BackendHttpSettings>
+                    <Listener>HTTPListener1</Listener>
+                    <BackendAddressPool>BackendPool1</BackendAddressPool>
+                </HttpLoadBalancingRule>
+            </HttpLoadBalancingRules>
+        </ApplicationGatewayConfiguration>
+    
 ## <a name="set-the-gateway-configuration"></a> 设置网关配置
 
 接下来，你将设置应用程序网关。可以对配置对象或配置 XML 文件使用 `Set-AzureApplicationGatewayConfig` cmdlet。
 
-	PS C:\> Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile D:\config.xml
+    PS C:\> Set-AzureApplicationGatewayConfig -Name AppGwTest -ConfigFile D:\config.xml
 
-	VERBOSE: 7:54:59 PM - Begin Operation: Set-AzureApplicationGatewayConfig 
-	VERBOSE: 7:55:32 PM - Completed Operation: Set-AzureApplicationGatewayConfig
-	Name       HTTP Status Code     Operation ID                             Error 
-	----       ----------------     ------------                             ----
-	Successful OK                   9b995a09-66fe-2944-8b67-9bb04fcccb9d
+    VERBOSE: 7:54:59 PM - Begin Operation: Set-AzureApplicationGatewayConfig 
+    VERBOSE: 7:55:32 PM - Completed Operation: Set-AzureApplicationGatewayConfig
+    Name       HTTP Status Code     Operation ID                             Error 
+    ----       ----------------     ------------                             ----
+    Successful OK                   9b995a09-66fe-2944-8b67-9bb04fcccb9d
 
 ## <a name="start-the-gateway"></a> 启动网关
 
@@ -165,13 +165,13 @@ ms.author: gwallace
 
 > [!NOTE] `Start-AzureApplicationGateway` cmdlet 最多可能需要 15 到 20 分钟才能完成。
    
-	PS C:\> Start-AzureApplicationGateway AppGwTest 
+    PS C:\> Start-AzureApplicationGateway AppGwTest 
 
-	VERBOSE: 7:59:16 PM - Begin Operation: Start-AzureApplicationGateway 
-	VERBOSE: 8:05:52 PM - Completed Operation: Start-AzureApplicationGateway
-	Name       HTTP Status Code     Operation ID                             Error 
-	----       ----------------     ------------                             ----
-	Successful OK                   fc592db8-4c58-2c8e-9a1d-1c97880f0b9b
+    VERBOSE: 7:59:16 PM - Begin Operation: Start-AzureApplicationGateway 
+    VERBOSE: 8:05:52 PM - Completed Operation: Start-AzureApplicationGateway
+    Name       HTTP Status Code     Operation ID                             Error 
+    ----       ----------------     ------------                             ----
+    Successful OK                   fc592db8-4c58-2c8e-9a1d-1c97880f0b9b
 
 ## <a name="verify-the-gateway-status"></a> 验证网关状态
 
@@ -179,19 +179,19 @@ ms.author: gwallace
 
 > [!NOTE] 在此示例中，应用程序网关配置为在配置的 ILB 终结点 10.0.0.10 上接受流量。
 
-	PS C:\> Get-AzureApplicationGateway AppGwTest 
+    PS C:\> Get-AzureApplicationGateway AppGwTest 
 
-	VERBOSE: 8:09:28 PM - Begin Operation: Get-AzureApplicationGateway 
-	VERBOSE: 8:09:30 PM - Completed Operation: Get-AzureApplicationGateway
-	Name          : AppGwTest
-	Description   : 
-	VnetName      : testvnet1
-	Subnets       : {Subnet-1}
-	InstanceCount : 2
-	GatewaySize   : Medium
-	State         : Running
-	VirtualIPs    : {10.0.0.10}
-	DnsName       : appgw-b2a11563-2b3a-4172-a4aa-226ee4c23eed.chinacloudapp.cn
+    VERBOSE: 8:09:28 PM - Begin Operation: Get-AzureApplicationGateway 
+    VERBOSE: 8:09:30 PM - Completed Operation: Get-AzureApplicationGateway
+    Name          : AppGwTest
+    Description   : 
+    VnetName      : testvnet1
+    Subnets       : {Subnet-1}
+    InstanceCount : 2
+    GatewaySize   : Medium
+    State         : Running
+    VirtualIPs    : {10.0.0.10}
+    DnsName       : appgw-b2a11563-2b3a-4172-a4aa-226ee4c23eed.chinacloudapp.cn
 
 ## 后续步骤
 

@@ -35,9 +35,9 @@ ms.author: ganesr
  - 用于路由的子网可以是专用 IP 地址或公共 IP 地址。
  - 子网不得与客户保留用于 Microsoft 云的范围冲突。
  - 如果使用 /29 子网，它将拆分成两个 /30 子网。 
-	 - 第一个 /30 子网用于主链路，第二个 /30 子网用于辅助链路。
-	 - 对于每个 /30 子网，必须在路由器上使用 /30 子网的第一个 IP 地址。Microsoft 使用 /30 子网的第二个 IP 地址设置 BGP 会话。
-	 - [可用性 SLA](https://www.azure.cn/support/legal/sla/) 只有在设置两个 BGP 会话后才有效。  
+     - 第一个 /30 子网用于主链路，第二个 /30 子网用于辅助链路。
+     - 对于每个 /30 子网，必须在路由器上使用 /30 子网的第一个 IP 地址。Microsoft 使用 /30 子网的第二个 IP 地址设置 BGP 会话。
+     - [可用性 SLA](https://www.azure.cn/support/legal/sla/) 只有在设置两个 BGP 会话后才有效。  
 
 #### 专用对等互连示例
 
@@ -100,8 +100,8 @@ Azure 不遵循你设置的任何 BGP 社区值。你需要为每个对等互连
 
 - 配置 ExpressRoute 连接。
 
-	- [创建经典部署模型的 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)或[使用 Azure Resource Manager 创建和修改 ExpressRoute 线路](./expressroute-howto-circuit-arm.md)
-	- [为经典部署模型配置路由](./expressroute-howto-routing-classic.md)或[为 Resource Manager 部署模型配置路由](./expressroute-howto-routing-arm.md)
-	- [将经典 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-classic.md)或[将 Resource Manager VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-arm.md)
+    - [创建经典部署模型的 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)或[使用 Azure Resource Manager 创建和修改 ExpressRoute 线路](./expressroute-howto-circuit-arm.md)
+    - [为经典部署模型配置路由](./expressroute-howto-routing-classic.md)或[为 Resource Manager 部署模型配置路由](./expressroute-howto-routing-arm.md)
+    - [将经典 VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-classic.md)或[将 Resource Manager VNet 链接到 ExpressRoute 线路](./expressroute-howto-linkvnet-arm.md)
 
 <!---HONumber=Mooncake_1226_2016-->

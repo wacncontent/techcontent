@@ -55,21 +55,21 @@ System.FM 表示故障转移管理器 (Failover Manager) 服务，是管理群�
 
 以下示例显示 System.FM 事件，且节点正常运行时的运行状况状态为正常：
 
-	PS C:\> Get-ServiceFabricNodeHealth -NodeName Node.1
-	NodeName              : Node.1
-	AggregatedHealthState : Ok
-	HealthEvents          :
-	                        SourceId              : System.FM
-	                        Property              : State
-	                        HealthState           : Ok
-	                        SequenceNumber        : 2
-	                        SentAt                : 4/24/2015 5:27:33 PM
-	                        ReceivedAt            : 4/24/2015 5:28:50 PM
-	                        TTL                   : Infinite
-	                        Description           : Fabric node is up.
-	                        RemoveWhenExpired     : False
-	                        IsExpired             : False
-	                        Transitions           : ->Ok = 4/24/2015 5:28:50 PM
+    PS C:\> Get-ServiceFabricNodeHealth -NodeName Node.1
+    NodeName              : Node.1
+    AggregatedHealthState : Ok
+    HealthEvents          :
+                            SourceId              : System.FM
+                            Property              : State
+                            HealthState           : Ok
+                            SequenceNumber        : 2
+                            SentAt                : 4/24/2015 5:27:33 PM
+                            ReceivedAt            : 4/24/2015 5:28:50 PM
+                            TTL                   : Infinite
+                            Description           : Fabric node is up.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : ->Ok = 4/24/2015 5:28:50 PM
 
 ### 证书过期日期
 **System.FabricNode** 在节点使用的证书即将过期时报告警告。每个节点有三个证书：**Certificate\_cluster**、**Certificate\_server** 和 **Certificate\_default\_client**。如果过期时间至少超过两周，报告运行状况是正常。如果过期时间在两周内，则报告类型是警告。这些事件的 TTL 是无限的，当节点离开群集时，它们被删除。
@@ -97,24 +97,24 @@ System.FM 表示故障转移管理器 (Failover Manager) 服务，是管理群�
 
 以下示例显示 **fabric:/WordCount** 应用程序上的状态事件：
 
-	PS C:\> Get-ServiceFabricApplicationHealth fabric:/WordCount -ServicesFilter None -DeployedApplicationsFilter None
-	
-	ApplicationName                 : fabric:/WordCount
-	AggregatedHealthState           : Ok
-	ServiceHealthStates             : None
-	DeployedApplicationHealthStates : None
-	HealthEvents                    :
-	                                  SourceId              : System.CM
-	                                  Property              : State
-	                                  HealthState           : Ok
-	                                  SequenceNumber        : 82
-	                                  SentAt                : 4/24/2015 6:12:51 PM
-	                                  ReceivedAt            : 4/24/2015 6:12:51 PM
-	                                  TTL                   : Infinite
-	                                  Description           : Application has been created.
-	                                  RemoveWhenExpired     : False
-	                                  IsExpired             : False
-	                                  Transitions           : ->Ok = 4/24/2015 6:12:51 PM
+    PS C:\> Get-ServiceFabricApplicationHealth fabric:/WordCount -ServicesFilter None -DeployedApplicationsFilter None
+    
+    ApplicationName                 : fabric:/WordCount
+    AggregatedHealthState           : Ok
+    ServiceHealthStates             : None
+    DeployedApplicationHealthStates : None
+    HealthEvents                    :
+                                      SourceId              : System.CM
+                                      Property              : State
+                                      HealthState           : Ok
+                                      SequenceNumber        : 82
+                                      SentAt                : 4/24/2015 6:12:51 PM
+                                      ReceivedAt            : 4/24/2015 6:12:51 PM
+                                      TTL                   : Infinite
+                                      Description           : Application has been created.
+                                      RemoveWhenExpired     : False
+                                      IsExpired             : False
+                                      Transitions           : ->Ok = 4/24/2015 6:12:51 PM
 
 ## 服务系统运行状况报告
 **System.FM** 表示故障转移管理器服务，是管理服务信息的主管服务。
@@ -127,26 +127,26 @@ System.FM 表示故障转移管理器 (Failover Manager) 服务，是管理群�
 
 以下示例显示服务 **fabric:/WordCount/WordCountService** 上的状态事件：
 
-	PS C:\> Get-ServiceFabricServiceHealth fabric:/WordCount/WordCountService
-	
-	ServiceName           : fabric:/WordCount/WordCountService
-	AggregatedHealthState : Ok
-	PartitionHealthStates :
-	                        PartitionId           : 875a1caa-d79f-43bd-ac9d-43ee89a9891c
-	                        AggregatedHealthState : Ok
-	
-	HealthEvents          :
-	                        SourceId              : System.FM
-	                        Property              : State
-	                        HealthState           : Ok
-	                        SequenceNumber        : 3
-	                        SentAt                : 4/24/2015 6:12:51 PM
-	                        ReceivedAt            : 4/24/2015 6:13:01 PM
-	                        TTL                   : Infinite
-	                        Description           : Service has been created.
-	                        RemoveWhenExpired     : False
-	                        IsExpired             : False
-	                        Transitions           : ->Ok = 4/24/2015 6:13:01 PM
+    PS C:\> Get-ServiceFabricServiceHealth fabric:/WordCount/WordCountService
+    
+    ServiceName           : fabric:/WordCount/WordCountService
+    AggregatedHealthState : Ok
+    PartitionHealthStates :
+                            PartitionId           : 875a1caa-d79f-43bd-ac9d-43ee89a9891c
+                            AggregatedHealthState : Ok
+    
+    HealthEvents          :
+                            SourceId              : System.FM
+                            Property              : State
+                            HealthState           : Ok
+                            SequenceNumber        : 3
+                            SentAt                : 4/24/2015 6:12:51 PM
+                            ReceivedAt            : 4/24/2015 6:13:01 PM
+                            TTL                   : Infinite
+                            Description           : Service has been created.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : ->Ok = 4/24/2015 6:13:01 PM
 
 ### 未放置副本冲突
 如果 **System.PLB** 找不到放置一或多个服务副本的位置，则报告警告。当报告过期时被删除。
@@ -157,68 +157,68 @@ System.FM 表示故障转移管理器 (Failover Manager) 服务，是管理群�
 
 以下示例显示配置有 7 个目标副本的服务在含有 5 个节点的群集中发生的冲突：
 
-	PS C:\> Get-ServiceFabricServiceHealth fabric:/WordCount/WordCountService
+    PS C:\> Get-ServiceFabricServiceHealth fabric:/WordCount/WordCountService
 
-	ServiceName           : fabric:/WordCount/WordCountService
-	AggregatedHealthState : Warning
-	UnhealthyEvaluations  :
-                        	Unhealthy event: SourceId='System.PLB',
-                        	Property='ServiceReplicaUnplacedHealth_Secondary_a1f83a35-d6bf-4d39-b90d-28d15f39599b', HealthState='Warning',
-                        	ConsiderWarningAsError=false.
+    ServiceName           : fabric:/WordCount/WordCountService
+    AggregatedHealthState : Warning
+    UnhealthyEvaluations  :
+                            Unhealthy event: SourceId='System.PLB',
+                            Property='ServiceReplicaUnplacedHealth_Secondary_a1f83a35-d6bf-4d39-b90d-28d15f39599b', HealthState='Warning',
+                            ConsiderWarningAsError=false.
 
-	PartitionHealthStates :
-                        	PartitionId           : a1f83a35-d6bf-4d39-b90d-28d15f39599b
-                        	AggregatedHealthState : Warning
+    PartitionHealthStates :
+                            PartitionId           : a1f83a35-d6bf-4d39-b90d-28d15f39599b
+                            AggregatedHealthState : Warning
 
-	HealthEvents          :
-                        	SourceId              : System.FM
-                        	Property              : State
-                        	HealthState           : Ok
-                        	SequenceNumber        : 10
-                        	SentAt                : 3/22/2016 7:56:53 PM
-                        	ReceivedAt            : 3/22/2016 7:57:18 PM
-                        	TTL                   : Infinite
-                        	Description           : Service has been created.
-                        	RemoveWhenExpired     : False
-                        	IsExpired             : False
-                        	Transitions           : Error->Ok = 3/22/2016 7:57:18 PM, LastWarning = 1/1/0001 12:00:00 AM
+    HealthEvents          :
+                            SourceId              : System.FM
+                            Property              : State
+                            HealthState           : Ok
+                            SequenceNumber        : 10
+                            SentAt                : 3/22/2016 7:56:53 PM
+                            ReceivedAt            : 3/22/2016 7:57:18 PM
+                            TTL                   : Infinite
+                            Description           : Service has been created.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : Error->Ok = 3/22/2016 7:57:18 PM, LastWarning = 1/1/0001 12:00:00 AM
 
-                        	SourceId              : System.PLB
-                        	Property              : ServiceReplicaUnplacedHealth_Secondary_a1f83a35-d6bf-4d39-b90d-28d15f39599b
-                        	HealthState           : Warning
-                        	SequenceNumber        : 131032232425505477
-                        	SentAt                : 3/23/2016 4:14:02 PM
-                        	ReceivedAt            : 3/23/2016 4:14:03 PM
-                        	TTL                   : 00:01:05
-                        	Description           : The Load Balancer was unable to find a placement for one or more of the Service's Replicas:
-                        	fabric:/WordCount/WordCountService Secondary Partition a1f83a35-d6bf-4d39-b90d-28d15f39599b could not be placed, possibly,
-                        	due to the following constraints and properties:  
-                        	Placement Constraint: N/A
-                        	Depended Service: N/A
+                            SourceId              : System.PLB
+                            Property              : ServiceReplicaUnplacedHealth_Secondary_a1f83a35-d6bf-4d39-b90d-28d15f39599b
+                            HealthState           : Warning
+                            SequenceNumber        : 131032232425505477
+                            SentAt                : 3/23/2016 4:14:02 PM
+                            ReceivedAt            : 3/23/2016 4:14:03 PM
+                            TTL                   : 00:01:05
+                            Description           : The Load Balancer was unable to find a placement for one or more of the Service's Replicas:
+                            fabric:/WordCount/WordCountService Secondary Partition a1f83a35-d6bf-4d39-b90d-28d15f39599b could not be placed, possibly,
+                            due to the following constraints and properties:  
+                            Placement Constraint: N/A
+                            Depended Service: N/A
 
-                        	Constraint Elimination Sequence:
-                        	ReplicaExclusionStatic eliminated 4 possible node(s) for placement -- 1/5 node(s) remain.
-                        	ReplicaExclusionDynamic eliminated 1 possible node(s) for placement -- 0/5 node(s) remain.
+                            Constraint Elimination Sequence:
+                            ReplicaExclusionStatic eliminated 4 possible node(s) for placement -- 1/5 node(s) remain.
+                            ReplicaExclusionDynamic eliminated 1 possible node(s) for placement -- 0/5 node(s) remain.
 
-                        	Nodes Eliminated By Constraints:
+                            Nodes Eliminated By Constraints:
 
-                        	ReplicaExclusionStatic:
-                        	FaultDomain:fd:/0 NodeName:_Node_0 NodeType:NodeType0 UpgradeDomain:0 UpgradeDomain: ud:/0 Deactivation Intent/Status:
-                        	None/None
-                        	FaultDomain:fd:/1 NodeName:_Node_1 NodeType:NodeType1 UpgradeDomain:1 UpgradeDomain: ud:/1 Deactivation Intent/Status:
-                        	None/None
-                        	FaultDomain:fd:/3 NodeName:_Node_3 NodeType:NodeType3 UpgradeDomain:3 UpgradeDomain: ud:/3 Deactivation Intent/Status:
-                        	None/None
-                        	FaultDomain:fd:/4 NodeName:_Node_4 NodeType:NodeType4 UpgradeDomain:4 UpgradeDomain: ud:/4 Deactivation Intent/Status:
-                        	None/None
+                            ReplicaExclusionStatic:
+                            FaultDomain:fd:/0 NodeName:_Node_0 NodeType:NodeType0 UpgradeDomain:0 UpgradeDomain: ud:/0 Deactivation Intent/Status:
+                            None/None
+                            FaultDomain:fd:/1 NodeName:_Node_1 NodeType:NodeType1 UpgradeDomain:1 UpgradeDomain: ud:/1 Deactivation Intent/Status:
+                            None/None
+                            FaultDomain:fd:/3 NodeName:_Node_3 NodeType:NodeType3 UpgradeDomain:3 UpgradeDomain: ud:/3 Deactivation Intent/Status:
+                            None/None
+                            FaultDomain:fd:/4 NodeName:_Node_4 NodeType:NodeType4 UpgradeDomain:4 UpgradeDomain: ud:/4 Deactivation Intent/Status:
+                            None/None
 
-                        	ReplicaExclusionDynamic:
-                        	FaultDomain:fd:/2 NodeName:_Node_2 NodeType:NodeType2 UpgradeDomain:2 UpgradeDomain: ud:/2 Deactivation Intent/Status:
-                        	None/None
+                            ReplicaExclusionDynamic:
+                            FaultDomain:fd:/2 NodeName:_Node_2 NodeType:NodeType2 UpgradeDomain:2 UpgradeDomain: ud:/2 Deactivation Intent/Status:
+                            None/None
 
-                        	RemoveWhenExpired     : True
-                        	IsExpired             : False
-                        	Transitions           : Error->Warning = 3/22/2016 7:57:48 PM, LastOk = 1/1/0001 12:00:00 AM
+                            RemoveWhenExpired     : True
+                            IsExpired             : False
+                            Transitions           : Error->Warning = 3/22/2016 7:57:48 PM, LastOk = 1/1/0001 12:00:00 AM
 
 ## 分区系统运行状况报告
 **System.FM** 表示故障转移管理器服务，是管理服务分区信息的主管服务。
@@ -236,62 +236,62 @@ System.FM 表示故障转移管理器 (Failover Manager) 服务，是管理群�
 
 以下示例显示了一个运行状况良好的分区：
 
-	PS C:\> Get-ServiceFabricPartition fabric:/StatelessPiApplication/StatelessPiService | Get-ServiceFabricPartitionHealth
-	PartitionId           : 29da484c-2c08-40c5-b5d9-03774af9a9bf
-	AggregatedHealthState : Ok
-	ReplicaHealthStates   : None
-	HealthEvents          :
-                        	SourceId              : System.FM
-                        	Property              : State
-                        	HealthState           : Ok
-                        	SequenceNumber        : 38
-                        	SentAt                : 4/24/2015 6:33:10 PM
-                        	ReceivedAt            : 4/24/2015 6:33:31 PM
-                        	TTL                   : Infinite
-                        	Description           : Partition is healthy.
-                        	RemoveWhenExpired     : False
-                        	IsExpired             : False
-                        	Transitions           : ->Ok = 4/24/2015 6:33:31 PM
+    PS C:\> Get-ServiceFabricPartition fabric:/StatelessPiApplication/StatelessPiService | Get-ServiceFabricPartitionHealth
+    PartitionId           : 29da484c-2c08-40c5-b5d9-03774af9a9bf
+    AggregatedHealthState : Ok
+    ReplicaHealthStates   : None
+    HealthEvents          :
+                            SourceId              : System.FM
+                            Property              : State
+                            HealthState           : Ok
+                            SequenceNumber        : 38
+                            SentAt                : 4/24/2015 6:33:10 PM
+                            ReceivedAt            : 4/24/2015 6:33:31 PM
+                            TTL                   : Infinite
+                            Description           : Partition is healthy.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : ->Ok = 4/24/2015 6:33:31 PM
 
 以下示例显示了一个小于目标副本计数的分区的运行状况。下一步是获取显示分区配置方式的分区描述：**MinReplicaSetSize** 为 2，**TargetReplicaSetSize** 为 7。然后获得群集中的节点数：5。因此在这种情形下，不能放置两个副本。
 
-	PS C:\> Get-ServiceFabricPartition fabric:/WordCount/WordCountService | Get-ServiceFabricPartitionHealth -ReplicasFilter None
+    PS C:\> Get-ServiceFabricPartition fabric:/WordCount/WordCountService | Get-ServiceFabricPartitionHealth -ReplicasFilter None
 
-	PartitionId           : 875a1caa-d79f-43bd-ac9d-43ee89a9891c
-	AggregatedHealthState : Warning
-	UnhealthyEvaluations  :
-                        	Unhealthy event: SourceId='System.FM', Property='State', HealthState='Warning', ConsiderWarningAsError=false.
+    PartitionId           : 875a1caa-d79f-43bd-ac9d-43ee89a9891c
+    AggregatedHealthState : Warning
+    UnhealthyEvaluations  :
+                            Unhealthy event: SourceId='System.FM', Property='State', HealthState='Warning', ConsiderWarningAsError=false.
 
-	ReplicaHealthStates   : None
-	HealthEvents          :
-                        	SourceId              : System.FM
-                        	Property              : State
-                        	HealthState           : Warning
-                        	SequenceNumber        : 37
-                        	SentAt                : 4/24/2015 6:13:12 PM
-                        	ReceivedAt            : 4/24/2015 6:13:31 PM
-                        	TTL                   : Infinite
-                        	Description           : Partition is below target replica or instance count.
-                        	RemoveWhenExpired     : False
-                        	IsExpired             : False
-                        	Transitions           : Ok->Warning = 4/24/2015 6:13:31 PM
+    ReplicaHealthStates   : None
+    HealthEvents          :
+                            SourceId              : System.FM
+                            Property              : State
+                            HealthState           : Warning
+                            SequenceNumber        : 37
+                            SentAt                : 4/24/2015 6:13:12 PM
+                            ReceivedAt            : 4/24/2015 6:13:31 PM
+                            TTL                   : Infinite
+                            Description           : Partition is below target replica or instance count.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : Ok->Warning = 4/24/2015 6:13:31 PM
 
-	PS C:\> Get-ServiceFabricPartition fabric:/WordCount/WordCountService
+    PS C:\> Get-ServiceFabricPartition fabric:/WordCount/WordCountService
 
-	PartitionId            : 875a1caa-d79f-43bd-ac9d-43ee89a9891c
-	PartitionKind          : Int64Range
-	PartitionLowKey        : 1
-	PartitionHighKey       : 26
-	PartitionStatus        : Ready
-	LastQuorumLossDuration : 00:00:00
-	MinReplicaSetSize      : 2
-	TargetReplicaSetSize   : 7
-	HealthState            : Warning
-	DataLossNumber         : 130743727710830900
-	ConfigurationNumber    : 8589934592
+    PartitionId            : 875a1caa-d79f-43bd-ac9d-43ee89a9891c
+    PartitionKind          : Int64Range
+    PartitionLowKey        : 1
+    PartitionHighKey       : 26
+    PartitionStatus        : Ready
+    LastQuorumLossDuration : 00:00:00
+    MinReplicaSetSize      : 2
+    TargetReplicaSetSize   : 7
+    HealthState            : Warning
+    DataLossNumber         : 130743727710830900
+    ConfigurationNumber    : 8589934592
 
-	PS C:\> @(Get-ServiceFabricNode).Count
-	5
+    PS C:\> @(Get-ServiceFabricNode).Count
+    5
 
 ### 副本约束冲突
 如果 **System.PLB** 检测到副本约束冲突并且无法放置分区的副本，则报告警告。
@@ -310,22 +310,22 @@ System.FM 表示故障转移管理器 (Failover Manager) 服务，是管理群�
 
 以下示例显示了一个运行状况良好的副本：
 
-	PS C:\> Get-ServiceFabricPartition fabric:/WordCount/WordCountService | Get-ServiceFabricReplica | where {$_.ReplicaRole -eq "Primary"} | Get-ServiceFabricReplicaHealth
-	PartitionId           : 875a1caa-d79f-43bd-ac9d-43ee89a9891c
-	ReplicaId             : 130743727717237310
-	AggregatedHealthState : Ok
-	HealthEvents          :
-                        	SourceId              : System.RA
-                        	Property              : State
-                        	HealthState           : Ok
-                        	SequenceNumber        : 130743727718018580
-                        	SentAt                : 4/24/2015 6:12:51 PM
-                        	ReceivedAt            : 4/24/2015 6:13:02 PM
-                        	TTL                   : Infinite
-                        	Description           : Replica has been created.
-                        	RemoveWhenExpired     : False
-                        	IsExpired             : False
-                        	Transitions           : ->Ok = 4/24/2015 6:13:02 PM
+    PS C:\> Get-ServiceFabricPartition fabric:/WordCount/WordCountService | Get-ServiceFabricReplica | where {$_.ReplicaRole -eq "Primary"} | Get-ServiceFabricReplicaHealth
+    PartitionId           : 875a1caa-d79f-43bd-ac9d-43ee89a9891c
+    ReplicaId             : 130743727717237310
+    AggregatedHealthState : Ok
+    HealthEvents          :
+                            SourceId              : System.RA
+                            Property              : State
+                            HealthState           : Ok
+                            SequenceNumber        : 130743727718018580
+                            SentAt                : 4/24/2015 6:12:51 PM
+                            ReceivedAt            : 4/24/2015 6:13:02 PM
+                            TTL                   : Infinite
+                            Description           : Replica has been created.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : ->Ok = 4/24/2015 6:13:02 PM
 
 ### 副本打开状态
 此运行状况报告的描述包含调用 API 时的开始时间（协调世界时）。
@@ -345,95 +345,95 @@ System.FM 表示故障转移管理器 (Failover Manager) 服务，是管理群�
 
 以下示例显示仲裁丢失中的一个分区以及用于找出原因的调查步骤。其中一个副本的运行状况状态为警告，因此你要获取其运行状况。它显示服务操作时间超过预期，且 System.RAP 报告了事件。在收到此信息之后，下一步是查看服务代码并进行调查。对于这种情况，有状态服务的 **RunAsync** 实现会引发一个未处理的异常。副本正在循环，因此可能看不到任何处于警告状态的副本。你可以重试获取运行状况，并找出副本 ID 中的差异。在某些情况下，重试可以提供线索。
 
-	PS C:\> Get-ServiceFabricPartition fabric:/HelloWorldStatefulApplication/HelloWorldStateful | Get-ServiceFabricPartitionHealth
+    PS C:\> Get-ServiceFabricPartition fabric:/HelloWorldStatefulApplication/HelloWorldStateful | Get-ServiceFabricPartitionHealth
 
-	PartitionId           : 72a0fb3e-53ec-44f2-9983-2f272aca3e38
-	AggregatedHealthState : Error
-	UnhealthyEvaluations  :
-                        	Error event: SourceId='System.FM', Property='State'.
+    PartitionId           : 72a0fb3e-53ec-44f2-9983-2f272aca3e38
+    AggregatedHealthState : Error
+    UnhealthyEvaluations  :
+                            Error event: SourceId='System.FM', Property='State'.
 
-	ReplicaHealthStates   :
-                        	ReplicaId             : 130743748372546446
-                        	AggregatedHealthState : Ok
+    ReplicaHealthStates   :
+                            ReplicaId             : 130743748372546446
+                            AggregatedHealthState : Ok
 
-                        	ReplicaId             : 130743746168084332
-                        	AggregatedHealthState : Ok
+                            ReplicaId             : 130743746168084332
+                            AggregatedHealthState : Ok
 
-                        	ReplicaId             : 130743746195428808
-                        	AggregatedHealthState : Warning
+                            ReplicaId             : 130743746195428808
+                            AggregatedHealthState : Warning
 
-                        	ReplicaId             : 130743746195428807
-                        	AggregatedHealthState : Ok
+                            ReplicaId             : 130743746195428807
+                            AggregatedHealthState : Ok
 
-	HealthEvents          :
-                        	SourceId              : System.FM
-                        	Property              : State
-                        	HealthState           : Error
-                        	SequenceNumber        : 182
-                        	SentAt                : 4/24/2015 7:00:17 PM
-                        	ReceivedAt            : 4/24/2015 7:00:31 PM
-                        	TTL                   : Infinite
-                        	Description           : Partition is in quorum loss.
-                        	RemoveWhenExpired     : False
-                        	IsExpired             : False
-                        	Transitions           : Warning->Error = 4/24/2015 6:51:31 PM
+    HealthEvents          :
+                            SourceId              : System.FM
+                            Property              : State
+                            HealthState           : Error
+                            SequenceNumber        : 182
+                            SentAt                : 4/24/2015 7:00:17 PM
+                            ReceivedAt            : 4/24/2015 7:00:31 PM
+                            TTL                   : Infinite
+                            Description           : Partition is in quorum loss.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : Warning->Error = 4/24/2015 6:51:31 PM
 
-	PS C:\> Get-ServiceFabricPartition fabric:/HelloWorldStatefulApplication/HelloWorldStateful
+    PS C:\> Get-ServiceFabricPartition fabric:/HelloWorldStatefulApplication/HelloWorldStateful
 
-	PartitionId            : 72a0fb3e-53ec-44f2-9983-2f272aca3e38
-	PartitionKind          : Int64Range
-	PartitionLowKey        : -9223372036854775808
-	PartitionHighKey       : 9223372036854775807
-	PartitionStatus        : InQuorumLoss
-	LastQuorumLossDuration : 00:00:13
-	MinReplicaSetSize      : 2
-	TargetReplicaSetSize   : 3
-	HealthState            : Error
-	DataLossNumber         : 130743746152927699
-	ConfigurationNumber    : 227633266688
+    PartitionId            : 72a0fb3e-53ec-44f2-9983-2f272aca3e38
+    PartitionKind          : Int64Range
+    PartitionLowKey        : -9223372036854775808
+    PartitionHighKey       : 9223372036854775807
+    PartitionStatus        : InQuorumLoss
+    LastQuorumLossDuration : 00:00:13
+    MinReplicaSetSize      : 2
+    TargetReplicaSetSize   : 3
+    HealthState            : Error
+    DataLossNumber         : 130743746152927699
+    ConfigurationNumber    : 227633266688
 
-	PS C:\> Get-ServiceFabricReplica 72a0fb3e-53ec-44f2-9983-2f272aca3e38 130743746195428808
+    PS C:\> Get-ServiceFabricReplica 72a0fb3e-53ec-44f2-9983-2f272aca3e38 130743746195428808
 
-	ReplicaId           : 130743746195428808
-	ReplicaAddress      : PartitionId: 72a0fb3e-53ec-44f2-9983-2f272aca3e38, ReplicaId: 130743746195428808
-	ReplicaRole         : Primary
-	NodeName            : Node.3
-	ReplicaStatus       : Ready
-	LastInBuildDuration : 00:00:01
-	HealthState         : Warning
+    ReplicaId           : 130743746195428808
+    ReplicaAddress      : PartitionId: 72a0fb3e-53ec-44f2-9983-2f272aca3e38, ReplicaId: 130743746195428808
+    ReplicaRole         : Primary
+    NodeName            : Node.3
+    ReplicaStatus       : Ready
+    LastInBuildDuration : 00:00:01
+    HealthState         : Warning
 
-	PS C:\> Get-ServiceFabricReplicaHealth 72a0fb3e-53ec-44f2-9983-2f272aca3e38 130743746195428808
+    PS C:\> Get-ServiceFabricReplicaHealth 72a0fb3e-53ec-44f2-9983-2f272aca3e38 130743746195428808
 
-	PartitionId           : 72a0fb3e-53ec-44f2-9983-2f272aca3e38
-	ReplicaId             : 130743746195428808
-	AggregatedHealthState : Warning
-	UnhealthyEvaluations  :
-                        	Unhealthy event: SourceId='System.RAP', Property='ServiceOpenOperationDuration', HealthState='Warning', ConsiderWarningAsError=false.
+    PartitionId           : 72a0fb3e-53ec-44f2-9983-2f272aca3e38
+    ReplicaId             : 130743746195428808
+    AggregatedHealthState : Warning
+    UnhealthyEvaluations  :
+                            Unhealthy event: SourceId='System.RAP', Property='ServiceOpenOperationDuration', HealthState='Warning', ConsiderWarningAsError=false.
 
-	HealthEvents          :
-                        	SourceId              : System.RA
-                        	Property              : State
-                        	HealthState           : Ok
-                        	SequenceNumber        : 130743756170185892
-                        	SentAt                : 4/24/2015 7:00:17 PM
-                        	ReceivedAt            : 4/24/2015 7:00:33 PM
-                        	TTL                   : Infinite
-                        	Description           : Replica has been created.
-                        	RemoveWhenExpired     : False
-                        	IsExpired             : False
-                        	Transitions           : ->Ok = 4/24/2015 7:00:33 PM
+    HealthEvents          :
+                            SourceId              : System.RA
+                            Property              : State
+                            HealthState           : Ok
+                            SequenceNumber        : 130743756170185892
+                            SentAt                : 4/24/2015 7:00:17 PM
+                            ReceivedAt            : 4/24/2015 7:00:33 PM
+                            TTL                   : Infinite
+                            Description           : Replica has been created.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : ->Ok = 4/24/2015 7:00:33 PM
 
-                        	SourceId              : System.RAP
-                        	Property              : ServiceOpenOperationDuration
-                        	HealthState           : Warning
-                        	SequenceNumber        : 130743756399407044
-                        	SentAt                : 4/24/2015 7:00:39 PM
-                        	ReceivedAt            : 4/24/2015 7:00:59 PM
-                        	TTL                   : Infinite
-                        	Description           : Start Time (UTC): 2015-04-24 19:00:17.019
-                        	RemoveWhenExpired     : False
-                        	IsExpired             : False
-                        	Transitions           : ->Warning = 4/24/2015 7:00:59 PM
+                            SourceId              : System.RAP
+                            Property              : ServiceOpenOperationDuration
+                            HealthState           : Warning
+                            SequenceNumber        : 130743756399407044
+                            SentAt                : 4/24/2015 7:00:39 PM
+                            ReceivedAt            : 4/24/2015 7:00:59 PM
+                            TTL                   : Infinite
+                            Description           : Start Time (UTC): 2015-04-24 19:00:17.019
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : ->Warning = 4/24/2015 7:00:59 PM
 
 当你在调试程序中启动有故障的应用程序时，诊断事件窗口显示 RunAsync 引发的异常：
 
@@ -463,48 +463,48 @@ Visual Studio 2015 诊断事件：RunAsync 在 **fabric:/HelloWorldStatefulAppli
 
 以下示例显示了创建服务操作。该操作花的时间超过配置的持续时间。AO 重试并将工作发送到 NO。NO 在完成上一个操作时出现超时。在这种情况下，同一个副本对于 AO 和 NO 角色来说都是主副本。
 
-	PartitionId           : 00000000-0000-0000-0000-000000001000
-	ReplicaId             : 131064359253133577
-	AggregatedHealthState : Warning
-	UnhealthyEvaluations  : 
-	                        Unhealthy event: SourceId='System.NamingService', Property='Duration_AOCreateService.fabric:/MyApp/MyService', HealthState='Warning', ConsiderWarningAsError=false.
+    PartitionId           : 00000000-0000-0000-0000-000000001000
+    ReplicaId             : 131064359253133577
+    AggregatedHealthState : Warning
+    UnhealthyEvaluations  : 
+                            Unhealthy event: SourceId='System.NamingService', Property='Duration_AOCreateService.fabric:/MyApp/MyService', HealthState='Warning', ConsiderWarningAsError=false.
                         
-	HealthEvents          : 
-	                        SourceId              : System.RA
-	                        Property              : State
-	                        HealthState           : Ok
-	                        SequenceNumber        : 131064359308715535
-	                        SentAt                : 4/29/2016 8:38:50 PM
-	                        ReceivedAt            : 4/29/2016 8:39:08 PM
-	                        TTL                   : Infinite
-	                        Description           : Replica has been created.
-	                        RemoveWhenExpired     : False
-	                        IsExpired             : False
-	                        Transitions           : Error->Ok = 4/29/2016 8:39:08 PM, LastWarning = 1/1/0001 12:00:00 AM
+    HealthEvents          : 
+                            SourceId              : System.RA
+                            Property              : State
+                            HealthState           : Ok
+                            SequenceNumber        : 131064359308715535
+                            SentAt                : 4/29/2016 8:38:50 PM
+                            ReceivedAt            : 4/29/2016 8:39:08 PM
+                            TTL                   : Infinite
+                            Description           : Replica has been created.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : Error->Ok = 4/29/2016 8:39:08 PM, LastWarning = 1/1/0001 12:00:00 AM
                         
-	                        SourceId              : System.NamingService
-	                        Property              : Duration_AOCreateService.fabric:/MyApp/MyService
-	                        HealthState           : Warning
-	                        SequenceNumber        : 131064359526778775
-	                        SentAt                : 4/29/2016 8:39:12 PM
-	                        ReceivedAt            : 4/29/2016 8:39:38 PM
-	                        TTL                   : 00:05:00
-	                        Description           : The AOCreateService started at 2016-04-29 20:39:08.677 is taking longer than 30.000.
-	                        RemoveWhenExpired     : True
-	                        IsExpired             : False
-	                        Transitions           : Error->Warning = 4/29/2016 8:39:38 PM, LastOk = 1/1/0001 12:00:00 AM
+                            SourceId              : System.NamingService
+                            Property              : Duration_AOCreateService.fabric:/MyApp/MyService
+                            HealthState           : Warning
+                            SequenceNumber        : 131064359526778775
+                            SentAt                : 4/29/2016 8:39:12 PM
+                            ReceivedAt            : 4/29/2016 8:39:38 PM
+                            TTL                   : 00:05:00
+                            Description           : The AOCreateService started at 2016-04-29 20:39:08.677 is taking longer than 30.000.
+                            RemoveWhenExpired     : True
+                            IsExpired             : False
+                            Transitions           : Error->Warning = 4/29/2016 8:39:38 PM, LastOk = 1/1/0001 12:00:00 AM
                         
-	                        SourceId              : System.NamingService
-	                        Property              : Duration_NOCreateService.fabric:/MyApp/MyService
-	                        HealthState           : Warning
-	                        SequenceNumber        : 131064360657607311
-	                        SentAt                : 4/29/2016 8:41:05 PM
-	                        ReceivedAt            : 4/29/2016 8:41:08 PM
-	                        TTL                   : 00:00:15
-	                        Description           : The NOCreateService started at 2016-04-29 20:39:08.689 completed with FABRIC_E_TIMEOUT in more than 30.000.
-	                        RemoveWhenExpired     : True
-	                        IsExpired             : False
-	                        Transitions           : Error->Warning = 4/29/2016 8:39:38 PM, LastOk = 1/1/0001 12:00:00 AM
+                            SourceId              : System.NamingService
+                            Property              : Duration_NOCreateService.fabric:/MyApp/MyService
+                            HealthState           : Warning
+                            SequenceNumber        : 131064360657607311
+                            SentAt                : 4/29/2016 8:41:05 PM
+                            ReceivedAt            : 4/29/2016 8:41:08 PM
+                            TTL                   : 00:00:15
+                            Description           : The NOCreateService started at 2016-04-29 20:39:08.689 completed with FABRIC_E_TIMEOUT in more than 30.000.
+                            RemoveWhenExpired     : True
+                            IsExpired             : False
+                            Transitions           : Error->Warning = 4/29/2016 8:39:38 PM, LastOk = 1/1/0001 12:00:00 AM
 
 ## DeployedApplication 系统运行状况报告
 **System.Hosting** 是已部署实体的主管组件。
@@ -518,28 +518,28 @@ Visual Studio 2015 诊断事件：RunAsync 在 **fabric:/HelloWorldStatefulAppli
 
 以下示例显示成功激活：
 
-	PS C:\> Get-ServiceFabricDeployedApplicationHealth -NodeName Node.1 -ApplicationName fabric:/WordCount
+    PS C:\> Get-ServiceFabricDeployedApplicationHealth -NodeName Node.1 -ApplicationName fabric:/WordCount
 
-	ApplicationName                    : fabric:/WordCount
-	NodeName                           : Node.1
-	AggregatedHealthState              : Ok
-	DeployedServicePackageHealthStates :
-	                                     ServiceManifestName   : WordCountServicePkg
-	                                     NodeName              : Node.1
-	                                     AggregatedHealthState : Ok
+    ApplicationName                    : fabric:/WordCount
+    NodeName                           : Node.1
+    AggregatedHealthState              : Ok
+    DeployedServicePackageHealthStates :
+                                         ServiceManifestName   : WordCountServicePkg
+                                         NodeName              : Node.1
+                                         AggregatedHealthState : Ok
 
-	HealthEvents                       :
-	                                     SourceId              : System.Hosting
-	                                     Property              : Activation
-	                                     HealthState           : Ok
-	                                     SequenceNumber        : 130743727751144415
-	                                     SentAt                : 4/24/2015 6:12:55 PM
-	                                     ReceivedAt            : 4/24/2015 6:13:03 PM
-	                                     TTL                   : Infinite
-	                                     Description           : The application was activated successfully.
-	                                     RemoveWhenExpired     : False
-	                                     IsExpired             : False
-	                                     Transitions           : ->Ok = 4/24/2015 6:13:03 PM
+    HealthEvents                       :
+                                         SourceId              : System.Hosting
+                                         Property              : Activation
+                                         HealthState           : Ok
+                                         SequenceNumber        : 130743727751144415
+                                         SentAt                : 4/24/2015 6:12:55 PM
+                                         ReceivedAt            : 4/24/2015 6:13:03 PM
+                                         TTL                   : Infinite
+                                         Description           : The application was activated successfully.
+                                         RemoveWhenExpired     : False
+                                         IsExpired             : False
+                                         Transitions           : ->Ok = 4/24/2015 6:13:03 PM
 
 ### 下载
 如果应用程序包下载失败，**System.Hosting** 报告错误。
@@ -572,48 +572,48 @@ Visual Studio 2015 诊断事件：RunAsync 在 **fabric:/HelloWorldStatefulAppli
 
 以下示例显示了一个正常的已部署服务包：
 
-	PS C:\> Get-ServiceFabricDeployedServicePackageHealth -NodeName Node.1 -ApplicationName fabric:/WordCount -ServiceManifestName WordCountServicePkg
+    PS C:\> Get-ServiceFabricDeployedServicePackageHealth -NodeName Node.1 -ApplicationName fabric:/WordCount -ServiceManifestName WordCountServicePkg
 
-	ApplicationName       : fabric:/WordCount
-	ServiceManifestName   : WordCountServicePkg
-	NodeName              : Node.1
-	AggregatedHealthState : Ok
-	HealthEvents          :
-                        	SourceId              : System.Hosting
-                        	Property              : Activation
-                        	HealthState           : Ok
-                        	SequenceNumber        : 130743727751456915
-                        	SentAt                : 4/24/2015 6:12:55 PM
-                        	ReceivedAt            : 4/24/2015 6:13:03 PM
-                        	TTL                   : Infinite
-                        	Description           : The ServicePackage was activated successfully.
-                        	RemoveWhenExpired     : False
-                        	IsExpired             : False
-                        	Transitions           : ->Ok = 4/24/2015 6:13:03 PM
+    ApplicationName       : fabric:/WordCount
+    ServiceManifestName   : WordCountServicePkg
+    NodeName              : Node.1
+    AggregatedHealthState : Ok
+    HealthEvents          :
+                            SourceId              : System.Hosting
+                            Property              : Activation
+                            HealthState           : Ok
+                            SequenceNumber        : 130743727751456915
+                            SentAt                : 4/24/2015 6:12:55 PM
+                            ReceivedAt            : 4/24/2015 6:13:03 PM
+                            TTL                   : Infinite
+                            Description           : The ServicePackage was activated successfully.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : ->Ok = 4/24/2015 6:13:03 PM
 
-                        	SourceId              : System.Hosting
-                        	Property              : CodePackageActivation:Code:EntryPoint
-                        	HealthState           : Ok
-                        	SequenceNumber        : 130743727751613185
-                        	SentAt                : 4/24/2015 6:12:55 PM
-                        	ReceivedAt            : 4/24/2015 6:13:03 PM
-                        	TTL                   : Infinite
-                        	Description           : The CodePackage was activated successfully.
-                        	RemoveWhenExpired     : False
-                        	IsExpired             : False
-                        	Transitions           : ->Ok = 4/24/2015 6:13:03 PM
+                            SourceId              : System.Hosting
+                            Property              : CodePackageActivation:Code:EntryPoint
+                            HealthState           : Ok
+                            SequenceNumber        : 130743727751613185
+                            SentAt                : 4/24/2015 6:12:55 PM
+                            ReceivedAt            : 4/24/2015 6:13:03 PM
+                            TTL                   : Infinite
+                            Description           : The CodePackage was activated successfully.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : ->Ok = 4/24/2015 6:13:03 PM
 
-                        	SourceId              : System.Hosting
-                        	Property              : ServiceTypeRegistration:WordCountServiceType
-                        	HealthState           : Ok
-                        	SequenceNumber        : 130743727753644473
-                        	SentAt                : 4/24/2015 6:12:55 PM
-                        	ReceivedAt            : 4/24/2015 6:13:03 PM
-                        	TTL                   : Infinite
-                        	Description           : The ServiceType was registered successfully.
-                        	RemoveWhenExpired     : False
-                        	IsExpired             : False
-                        	Transitions           : ->Ok = 4/24/2015 6:13:03 PM
+                            SourceId              : System.Hosting
+                            Property              : ServiceTypeRegistration:WordCountServiceType
+                            HealthState           : Ok
+                            SequenceNumber        : 130743727753644473
+                            SentAt                : 4/24/2015 6:12:55 PM
+                            ReceivedAt            : 4/24/2015 6:13:03 PM
+                            TTL                   : Infinite
+                            Description           : The ServiceType was registered successfully.
+                            RemoveWhenExpired     : False
+                            IsExpired             : False
+                            Transitions           : ->Ok = 4/24/2015 6:13:03 PM
 
 ### 下载
 如果服务包下载失败，则 **System.Hosting** 报告错误。

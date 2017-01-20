@@ -62,15 +62,15 @@ Apache Cordova 可让你开发能够在移动设备上运行的完全成熟的 H
 每个目标平台都有不同的先决条件。
 
 - 生成并运行 Windows Tablet/PC 或 Phone 应用程序版本
-	- [Visual Studio 2013 for Windows with Update 2 或更高版本](http://www.visualstudio.com/zh-cn/downloads/download-visual-studio-vs#d-express-windows-8)（Express 或其他版本）。
+    - [Visual Studio 2013 for Windows with Update 2 或更高版本](http://www.visualstudio.com/zh-cn/downloads/download-visual-studio-vs#d-express-windows-8)（Express 或其他版本）。
 - 为 iOS 生成并运行
-	-   Xcode 5.x 或更高版本。在 http://developer.apple.com/downloads 或 [Mac 应用商店](http://itunes.apple.com/cn/app/xcode/id497799835?mt=12)上下载该软件
-	-   [ios sim](https://www.npmjs.org/package/ios-sim) - 用于通过命令行在 iOS 模拟器中启动 iOS 应用程序（可以通过终端轻松安装：`npm install -g ios-sim`）
+    -   Xcode 5.x 或更高版本。在 http://developer.apple.com/downloads 或 [Mac 应用商店](http://itunes.apple.com/cn/app/xcode/id497799835?mt=12)上下载该软件
+    -   [ios sim](https://www.npmjs.org/package/ios-sim) - 用于通过命令行在 iOS 模拟器中启动 iOS 应用程序（可以通过终端轻松安装：`npm install -g ios-sim`）
 
 - 生成并运行适用于 Android 的应用程序
-	- 安装 [Java 开发工具包 (JDK) 7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html) 或更高版本。请确保根据 JDK 安装路径（例如 C:\\Program Files\\Java\\jdk1.7.0\_75）正确设置 `JAVA_HOME`（环境变量）。
-	- 安装 [Android SDK](http://developer.android.com/sdk/installing/index.html?pkg=tools) 并将 `<android-sdk-location>\tools` 位置（例如 C:\\tools\\Android\\android-sdk\\tools）添加到 `PATH` 环境变量。
-	- 打开 Android SDK Manager（例如，通过终端：`android`）并安装
+    - 安装 [Java 开发工具包 (JDK) 7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html) 或更高版本。请确保根据 JDK 安装路径（例如 C:\\Program Files\\Java\\jdk1.7.0\_75）正确设置 `JAVA_HOME`（环境变量）。
+    - 安装 [Android SDK](http://developer.android.com/sdk/installing/index.html?pkg=tools) 并将 `<android-sdk-location>\tools` 位置（例如 C:\\tools\\Android\\android-sdk\\tools）添加到 `PATH` 环境变量。
+    - 打开 Android SDK Manager（例如，通过终端：`android`）并安装
     - *Android 5.0.1 (API 21)* 平台 SDK
     - *Android SDK Build-tools* 19.1.0 或更高版本
     - *Android 支持存储库* (Extras)
@@ -177,12 +177,12 @@ javascript
 
 javascript
 
-	app.context = new Microsoft.ADAL.AuthenticationContext(authority);
-	app.context.tokenCache.readItems().then(function (items) {
-	    if (items.length > 0) {
-	        authority = items[0].authority;
-	        app.context = new Microsoft.ADAL.AuthenticationContext(authority);
-	    }
+    app.context = new Microsoft.ADAL.AuthenticationContext(authority);
+    app.context.tokenCache.readItems().then(function (items) {
+        if (items.length > 0) {
+            authority = items[0].authority;
+            app.context = new Microsoft.ADAL.AuthenticationContext(authority);
+        }
         });
 
 该方法的第二部分将执行适当的 tokewn 请求。
@@ -205,28 +205,28 @@ javascript
 
 javascript
 
-	// Makes Api call to receive user list.
-		requestData: function (authResult, searchText) {
-			var req = new XMLHttpRequest();
-			var url = resourceUri + "/" + authResult.tenantId + "/users?api-version=" + graphApiVersion;
-			url = searchText ? url + "&$filter=mailNickname eq '" + searchText + "'" : url + "&$top=10";
+    // Makes Api call to receive user list.
+        requestData: function (authResult, searchText) {
+            var req = new XMLHttpRequest();
+            var url = resourceUri + "/" + authResult.tenantId + "/users?api-version=" + graphApiVersion;
+            url = searchText ? url + "&$filter=mailNickname eq '" + searchText + "'" : url + "&$top=10";
 
-			req.open("GET", url, true);
-			req.setRequestHeader('Authorization', 'Bearer ' + authResult.accessToken);
+            req.open("GET", url, true);
+            req.setRequestHeader('Authorization', 'Bearer ' + authResult.accessToken);
 
-			req.onload = function(e) {
-				if (e.target.status >= 200 && e.target.status < 300) {
-					app.renderData(JSON.parse(e.target.response));
-					return;
-				}
-				app.error('Data request failed: ' + e.target.response);
-			};
-			req.onerror = function(e) {
-				app.error('Data request failed: ' + e.error);
-			}
+            req.onload = function(e) {
+                if (e.target.status >= 200 && e.target.status < 300) {
+                    app.renderData(JSON.parse(e.target.response));
+                    return;
+                }
+                app.error('Data request failed: ' + e.target.response);
+            };
+            req.onerror = function(e) {
+                app.error('Data request failed: ' + e.error);
+            }
 
-			req.send();
-		},
+            req.send();
+        },
 
 起点文件提供了一个精简 UX 用于在文本框中输入用户的别名。此方法使用该值来构造查询，将该查询与访问令牌相结合，然后将其发送到 Graph 并分析结果。起点文件中已提供了一个负责可视化结果的 renderData 方法。
 

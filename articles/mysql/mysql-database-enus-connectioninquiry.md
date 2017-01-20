@@ -37,9 +37,9 @@ Here are solutions to some common causes:
 ### **Why do timeouts frequently occur when I connect to the database?**
 
 This is caused by limitations in Azure traffic manager. We recommend that you manually set the server parameter in the Azure portal or in Windows PowerShell to any value between 60 and 240 seconds (s). We suggest a value of 120 s. For instances created from October onward, we have already adjusted the default value to 120 s with a selectable range of 60 to 240 s, so you do not need to manually change the value. (This change only works on instances created from October onward)
-	
+    
 ### **Do I have too few concurrent connections for MySQL Database on Azure?**
-	
+    
 To ensure that connections are fully and effectively used, we recommend that you use connection pooling or persistent connections to connect to the database. See [How to connect efficiently to MySQL Database on Azure](./mysql-database-connection-pool.md).
 
 ### **Java Database Connectivity (JDBC) reports an IllegalArgumentException when it connects to MySQL on Azure, with an error message showing "URLDecoder: Illegal hex characters in escape (%) pattern - For input string: ...".**

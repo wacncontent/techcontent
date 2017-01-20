@@ -57,12 +57,12 @@ wacn.lang: cn
 
 - 若选择1小时，则鼠标移至曲线时将显示5分钟内的平均每秒查询数量。
 
-	![](./media/mysql-database-operation-monitoring-metrics/scale_1hr.png)
+    ![](./media/mysql-database-operation-monitoring-metrics/scale_1hr.png)
 
 - 若选择24小时，则鼠标移至曲线时将显示1小时内的平均每秒查询数量。
 
-	![](./media/mysql-database-operation-monitoring-metrics/scale_24hr.png)
+    ![](./media/mysql-database-operation-monitoring-metrics/scale_24hr.png)
 
 - 若选择7天，则鼠标移至曲线时将显示1小时内的平均每秒查询数量，但相邻两个刻度（一天）之间将有24个统计值。
 
-	![](./media/mysql-database-operation-monitoring-metrics/scale_7days.png)
+    ![](./media/mysql-database-operation-monitoring-metrics/scale_7days.png)

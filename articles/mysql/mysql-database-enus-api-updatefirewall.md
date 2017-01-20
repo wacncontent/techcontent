@@ -34,7 +34,7 @@ wacn.lang: en
   <tr>
     <td>PUT    </td>
     <td>https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.MySql/servers/{server-name}/firewalls/{firewall-rule}?api-version=2015-09-01
-	</td>
+    </td>
   </tr>
 </table>
 

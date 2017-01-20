@@ -40,8 +40,8 @@ Azure SQL 数据库在许多不同的兼容级别上以透明方式运行数十�
 
 ```
 SELECT compatibility_level
-	FROM sys.databases
-	WHERE name = '<YOUR DATABASE_NAME>’;
+    FROM sys.databases
+    WHERE name = '<YOUR DATABASE_NAME>’;
 ```
 
 在**新建**数据库更改为级别 130 之前，让我们通过一些非常基本的查询示例来查看此更改的相关信息，并了解相关人员如何从中受益。
@@ -68,17 +68,17 @@ SELECT compatibility_level
 -- Create a Premium P2 Database in Azure SQL Database
 
 CREATE DATABASE MyTestDB
-	(EDITION=’Premium’, SERVICE_OBJECTIVE=’P2′);
+    (EDITION=’Premium’, SERVICE_OBJECTIVE=’P2′);
 GO
 
 -- Create 2 tables with a column store index on
 -- the second one (only available on Premium databases)
 
 CREATE TABLE T_source
-	(Color varchar(10), c1 bigint, c2 bigint);
+    (Color varchar(10), c1 bigint, c2 bigint);
 
 CREATE TABLE T_target
-	(c1 bigint, c2 bigint);
+    (c1 bigint, c2 bigint);
 
 CREATE CLUSTERED COLUMNSTORE INDEX CCI ON T_target;
 GO
@@ -86,11 +86,11 @@ GO
 -- Insert few rows.
 
 INSERT T_source VALUES
-	(‘Blue’, RAND() * 100000, RAND() * 100000),
-	(‘Yellow’, RAND() * 100000, RAND() * 100000),
-	(‘Red’, RAND() * 100000, RAND() * 100000),
-	(‘Green’, RAND() * 100000, RAND() * 100000),
-	(‘Black’, RAND() * 100000, RAND() * 100000);
+    (‘Blue’, RAND() * 100000, RAND() * 100000),
+    (‘Yellow’, RAND() * 100000, RAND() * 100000),
+    (‘Red’, RAND() * 100000, RAND() * 100000),
+    (‘Green’, RAND() * 100000, RAND() * 100000),
+    (‘Black’, RAND() * 100000, RAND() * 100000);
 
 GO 200
 
@@ -112,28 +112,28 @@ GO 10
 SET STATISTICS XML ON;
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 120;
+    SET COMPATIBILITY_LEVEL = 120;
 GO 
 
 -- The INSERT part is in serial
 
 INSERT t_target WITH (tablock)
-	SELECT C1, COUNT(C2) * 10 * RAND()
-		FROM T_source
-		GROUP BY C1
-	OPTION (RECOMPILE);
+    SELECT C1, COUNT(C2) * 10 * RAND()
+        FROM T_source
+        GROUP BY C1
+    OPTION (RECOMPILE);
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 130
+    SET COMPATIBILITY_LEVEL = 130
 GO
 
 -- The INSERT part is in parallel
 
 INSERT t_target WITH (tablock)
-	SELECT C1, COUNT(C2) * 10 * RAND()
-		FROM T_source
-		GROUP BY C1
-	OPTION (RECOMPILE);
+    SELECT C1, COUNT(C2) * 10 * RAND()
+        FROM T_source
+        GROUP BY C1
+    OPTION (RECOMPILE);
 
 SET STATISTICS XML OFF;
 ```
@@ -154,19 +154,19 @@ SET STATISTICS XML OFF;
 SET STATISTICS XML ON;
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 120;
+    SET COMPATIBILITY_LEVEL = 120;
 GO
 
 -- The scan and aggregate are in row mode
 
 SELECT C1, COUNT (C2)
-	FROM T_target
-	GROUP BY C1
-	OPTION (MAXDOP 1, RECOMPILE);
+    FROM T_target
+    GROUP BY C1
+    OPTION (MAXDOP 1, RECOMPILE);
 GO
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 130;
+    SET COMPATIBILITY_LEVEL = 130;
 GO 
 
 – The scan and aggregate are in batch mode,
@@ -174,9 +174,9 @@ GO
 -- also now works in serial mode.
 
 SELECT C1, COUNT(C2)
-	FROM T_target
-	GROUP BY C1
-	OPTION (MAXDOP 1, RECOMPILE);
+    FROM T_target
+    GROUP BY C1
+    OPTION (MAXDOP 1, RECOMPILE);
 GO
 
 SET STATISTICS XML OFF;
@@ -198,20 +198,20 @@ SET STATISTICS XML OFF;
 SET STATISTICS XML ON;
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 120;
+    SET COMPATIBILITY_LEVEL = 120;
 GO
 
 -- The scan and aggregate are in row mode
 
 SELECT C1, COUNT(C2)
-	FROM T_target
-	GROUP BY C1
-	ORDER BY C1
-	OPTION (MAXDOP 1, RECOMPILE);
+    FROM T_target
+    GROUP BY C1
+    ORDER BY C1
+    OPTION (MAXDOP 1, RECOMPILE);
 GO
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 130;
+    SET COMPATIBILITY_LEVEL = 130;
 GO
 
 -- The scan and aggregate are in batch mode,
@@ -219,10 +219,10 @@ GO
 -- also now works in serial mode.
 
 SELECT C1, COUNT(C2)
-	FROM T_target
-	GROUP BY C1
-	ORDER BY C1
-	OPTION (MAXDOP 1, RECOMPILE);
+    FROM T_target
+    GROUP BY C1
+    ORDER BY C1
+    OPTION (MAXDOP 1, RECOMPILE);
 GO
 
 SET STATISTICS XML OFF;
@@ -250,14 +250,14 @@ SET STATISTICS XML OFF;
 -- Old CE
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 110;
+    SET COMPATIBILITY_LEVEL = 110;
 GO
 
 SET STATISTICS XML ON;
 
 SELECT [c1]
-	FROM [dbo].[T_target]
-	WHERE [c1] > 20000;
+    FROM [dbo].[T_target]
+    WHERE [c1] > 20000;
 GO
 
 SET STATISTICS XML OFF;
@@ -275,19 +275,19 @@ SET STATISTICS XML OFF;
 -- Old CE
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 130;
+    SET COMPATIBILITY_LEVEL = 130;
 GO
 
 ALTER DATABASE
-	SCOPED CONFIGURATION
-	SET LEGACY_CARDINALITY_ESTIMATION = ON;
+    SCOPED CONFIGURATION
+    SET LEGACY_CARDINALITY_ESTIMATION = ON;
 GO
 
 SET STATISTICS XML ON;
 
 SELECT [c1]
-	FROM [dbo].[T_target]
-	WHERE [c1] > 20000;
+    FROM [dbo].[T_target]
+    WHERE [c1] > 20000;
 GO
 
 SET STATISTICS XML OFF;
@@ -299,19 +299,19 @@ SET STATISTICS XML OFF;
 -- New CE
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 130;
+    SET COMPATIBILITY_LEVEL = 130;
 GO
 
 ALTER DATABASE
-	SCOPED CONFIGURATION
-	SET LEGACY_CARDINALITY_ESTIMATION = OFF;
+    SCOPED CONFIGURATION
+    SET LEGACY_CARDINALITY_ESTIMATION = OFF;
 GO
 
 SET STATISTICS XML ON;
 
 SELECT [c1]
-	FROM [dbo].[T_target]
-	WHERE [c1] > 20000;
+    FROM [dbo].[T_target]
+    WHERE [c1] > 20000;
 GO
 
 SET STATISTICS XML OFF;
@@ -329,25 +329,25 @@ SET STATISTICS XML OFF;
 -- Old CE row estimate with INNER JOIN and WHERE clause
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 130;
+    SET COMPATIBILITY_LEVEL = 130;
 GO
 
 ALTER DATABASE
-	SCOPED CONFIGURATION
-	SET LEGACY_CARDINALITY_ESTIMATION = ON;
+    SCOPED CONFIGURATION
+    SET LEGACY_CARDINALITY_ESTIMATION = ON;
 GO
 
 SET STATISTICS XML ON;
 
 SELECT T.[c2]
-	FROM
-		           [dbo].[T_source] S
-		INNER JOIN [dbo].[T_target] T  ON T.c1=S.c1
-	WHERE
-		S.[Color] = ‘Red’  AND
-		S.[c2] > 2000  AND
-		T.[c2] > 2000
-	OPTION (RECOMPILE);
+    FROM
+                   [dbo].[T_source] S
+        INNER JOIN [dbo].[T_target] T  ON T.c1=S.c1
+    WHERE
+        S.[Color] = ‘Red’  AND
+        S.[c2] > 2000  AND
+        T.[c2] > 2000
+    OPTION (RECOMPILE);
 GO
 
 SET STATISTICS XML OFF;
@@ -365,25 +365,25 @@ SET STATISTICS XML OFF;
 -- New CE row estimate with INNER JOIN and WHERE clause
 
 ALTER DATABASE MyTestDB
-	SET COMPATIBILITY_LEVEL = 130;
+    SET COMPATIBILITY_LEVEL = 130;
 GO
 
 ALTER DATABASE
-	SCOPED CONFIGURATION
-	SET LEGACY_CARDINALITY_ESTIMATION = OFF;
+    SCOPED CONFIGURATION
+    SET LEGACY_CARDINALITY_ESTIMATION = OFF;
 GO
 
 SET STATISTICS XML ON;
 
 SELECT T.[c2]
-	FROM
-		           [dbo].[T_source] S
-		INNER JOIN [dbo].[T_target] T  ON T.c1=S.c1
-	WHERE
-		S.[Color] = ‘Red’  AND
-		S.[c2] > 2000  AND
-		T.[c2] > 2000
-	OPTION (RECOMPILE);
+    FROM
+                   [dbo].[T_source] S
+        INNER JOIN [dbo].[T_target] T  ON T.c1=S.c1
+    WHERE
+        S.[Color] = ‘Red’  AND
+        S.[c2] > 2000  AND
+        T.[c2] > 2000
+    OPTION (RECOMPILE);
 GO
 
 SET STATISTICS XML OFF;

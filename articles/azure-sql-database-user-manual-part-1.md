@@ -38,101 +38,101 @@ Azure 提供数据库即服务 (Database-as-a-Service)，包括 Azure SQL 数据
 Azure SQL 数据库与传统 SQL Server 2008, 2012, 2014 虚拟机主要有以下几方面区别：  
 
 <table width="100%" border="1" cellspacing="0" cellpadding="0">
-	<tr>
-		<td>内容</td>
-		<td>SQL Server 虚拟机</td>
-		<td>Azure SQL 数据库</td>
-	</tr>
-	<tr>
-		<td><b>应用迁移</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>迁移现有应用</td>
-		<td>快速</td>
-		<td>中等</td>
-	</tr>
-	<tr>
-		<td>迁移新的应用</td>
-		<td>中等</td>
-		<td>快速</td>
-	</tr>
-	<tr>
-		<td><b>管理成本</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>管理操作系统</td>
-		<td>是</td>
-		<td>否</td>
-	</tr>
-	<tr>
-		<td>虚拟机高可用</td>
-		<td>需要手工设置</td>
-		<td>N/A</td>
-	</tr>
-	<tr>
-		<td>数据库高可用</td>
-		<td>需要手工设置(比如 SQL Server Always-On，SQL Server replication 等)</td>
-		<td>99.99% 服务级别协议</td>
-	</tr>
-	<tr>
-		<td>使用成本</td>
-		<td>中等</td>
-		<td>低</td>
-	</tr>
-	<tr>
-		<td><b>扩展(Scale)</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>向上扩展 (Scale-Up)</td>
-		<td>D14 (16Core / 112G)</td>
-		<td>P11</td>
-	</tr>
-	<tr>
-		<td>横向扩展 (Scale-Out)</td>
-		<td>需要手工设置 (比如 SQL Server Always-On，SQL Server replication 等)</td>
-		<td>需要用户自己设计 Scale-Out</td>
-	</tr>
-	<tr>
-		<td>数据库最大容量</td>
-		<td>32 TB (D14 16Core / 112G)</td>
-		<td>1 TB</td>
-	</tr>
-	<tr>
-		<td><b>管理平台</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>操作系统和虚拟机</td>
-		<td>用户完全控制</td>
-		<td>N/A</td>
-	</tr>
-	<tr>
-		<td>SQL Server 组件兼容性</td>
-		<td>对 SQL Server 产品全部支持，包括 SSIS, SSAS, SSRS</td>
-		<td>只提供数据库引擎</td>
-	</tr>
-	<tr>
-		<td><b>其他</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>服务级别</td>
-		<td>服务器，实例，数据库</td>
-		<td>数据库</td>
-	</tr>
-	<tr>
-		<td>兼容性</td>
-		<td>完全兼容</td>
-		<td>部分兼容</td>
-	</tr>
+    <tr>
+        <td>内容</td>
+        <td>SQL Server 虚拟机</td>
+        <td>Azure SQL 数据库</td>
+    </tr>
+    <tr>
+        <td><b>应用迁移</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>迁移现有应用</td>
+        <td>快速</td>
+        <td>中等</td>
+    </tr>
+    <tr>
+        <td>迁移新的应用</td>
+        <td>中等</td>
+        <td>快速</td>
+    </tr>
+    <tr>
+        <td><b>管理成本</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>管理操作系统</td>
+        <td>是</td>
+        <td>否</td>
+    </tr>
+    <tr>
+        <td>虚拟机高可用</td>
+        <td>需要手工设置</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td>数据库高可用</td>
+        <td>需要手工设置(比如 SQL Server Always-On，SQL Server replication 等)</td>
+        <td>99.99% 服务级别协议</td>
+    </tr>
+    <tr>
+        <td>使用成本</td>
+        <td>中等</td>
+        <td>低</td>
+    </tr>
+    <tr>
+        <td><b>扩展(Scale)</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>向上扩展 (Scale-Up)</td>
+        <td>D14 (16Core / 112G)</td>
+        <td>P11</td>
+    </tr>
+    <tr>
+        <td>横向扩展 (Scale-Out)</td>
+        <td>需要手工设置 (比如 SQL Server Always-On，SQL Server replication 等)</td>
+        <td>需要用户自己设计 Scale-Out</td>
+    </tr>
+    <tr>
+        <td>数据库最大容量</td>
+        <td>32 TB (D14 16Core / 112G)</td>
+        <td>1 TB</td>
+    </tr>
+    <tr>
+        <td><b>管理平台</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>操作系统和虚拟机</td>
+        <td>用户完全控制</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td>SQL Server 组件兼容性</td>
+        <td>对 SQL Server 产品全部支持，包括 SSIS, SSAS, SSRS</td>
+        <td>只提供数据库引擎</td>
+    </tr>
+    <tr>
+        <td><b>其他</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>服务级别</td>
+        <td>服务器，实例，数据库</td>
+        <td>数据库</td>
+    </tr>
+    <tr>
+        <td>兼容性</td>
+        <td>完全兼容</td>
+        <td>部分兼容</td>
+    </tr>
 </table>
 
 ####<a id="migrate-application"></a>1.2.1 应用迁移

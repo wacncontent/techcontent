@@ -109,16 +109,16 @@ Azure Active Directory 身份验证是使用 Azure Active Directory (Azure AD) �
 2. 在左侧标题中，选择“设置”。
 3. 你的订阅显示在“设置”屏幕中。如果未显示所需订阅，请单击顶部的“订阅”，下拉“按目录筛选”框，并选择包含你的订阅的目录，然后单击“应用”。
 
-	![选择订阅][4]
+    ![选择订阅][4]
 4. 在“设置”区域中，单击你的订阅，然后单击页面底部的“编辑目录”。
 
-	![AD-设置-门户][5]
+    ![AD-设置-门户][5]
 5. 在“编辑目录”框中，选择与 SQL Server 或 SQL 数据仓库相关联的 Azure Active Directory，然后单击箭头转到下一步。
 
-	![编辑-目录-选择][6]
+    ![编辑-目录-选择][6]
 6. 在“确认”目录“映射”对话框中，确认“全部协同管理员都将被删除”。
 
-	![编辑-目录-确认][7]
+    ![编辑-目录-确认][7]
 7. 单击复选标记以重新加载门户。
 
 > [!NOTE] 更改目录时，将删除所有协同管理员、Azure AD 用户和组以及目录支持的资源用户的访问权限，他们不再有权访问此订阅或其资源。只有作为服务管理员时，用户才能基于新的目录配置主体的访问权限。此更改可能需要大量时间来传播到所有资源。更改目录时还会更改 SQL 数据库和 SQL 数据仓库的 Azure AD 管理员，并且不允许任何现有 Azure AD 用户访问数据库。必须重置 Azure AD 管理员（如下所述），并且必须创建新的 Azure AD 用户。
@@ -135,17 +135,17 @@ Azure Active Directory 身份验证是使用 Azure Active Directory (Azure AD) �
 
 1. 在 [Azure 门户预览](https://portal.azure.cn/)右上角，单击相关连接以下拉包含可能 Active Directory 的列表。选择正确的 Active Directory 作为默认的 Azure AD。此步骤将与 Active Directory 关联的订阅链接到 Azure SQL Server，确保为 Azure AD 和 SQL Server 使用相同的订阅。（Azure SQL Server 托管的可能是 Azure SQL 数据库或 Azure SQL 数据仓库。）
 
-	![选择-AD][8]
+    ![选择-AD][8]
 2. 在左侧标题中，选择“SQL Server”、选择你的“SQL Server”，然后在“SQL Server”边栏选项卡顶部，单击“设置”。
 
-	![AD 设置][9]
+    ![AD 设置][9]
 3. 在“设置”边栏选项卡中，单击**“Active Directory 管理员”。
 4. 在“Active Directory 管理员”边栏选项卡中，单击“Active Directory 管理员”，然后在顶部单击“设置管理员”。
 5. 在“添加管理员”边栏选项卡中，搜索某个用户、将选择该用户或组作为管理员，然后单击“选择”。（“Active Directory 管理员”边栏选项卡将显示 Active Directory 的所有成员和组。若用户或组为灰显，则无法选择，因为不支持它们作为 Azure AD 管理员。（请参阅上述 **Azure AD 功能和限制**中受支持的管理员列表。） 基于角色的访问控制 (RBAC) 仅适用于该门户，不会传播到 SQL Server。
 6. 在“Active Directory 管理员”边栏选项卡顶部，单击“保存”。
-	![选择管理员][10]
+    ![选择管理员][10]
 
-	更改管理员的过程可能需要几分钟时间。然后，新管理员将出现在“Active Directory 管理员”框中。
+    更改管理员的过程可能需要几分钟时间。然后，新管理员将出现在“Active Directory 管理员”框中。
 
 > [!NOTE] 设置 Azure AD 管理员时，此新的管理员名称（用户或组）不能已作为 SQL Server 身份验证用户存在于虚拟 master 数据库中。如果存在，Azure AD 管理员设置将失败；将回滚其创建，并指示此管理员（名称）已存在。由于这种 SQL Server 身份验证用户不是 Azure AD 的一部分，因此使用 Azure AD 身份验证连接到服务器的任何尝试都将失败。
 
@@ -172,8 +172,8 @@ Azure Active Directory 身份验证是使用 Azure Active Directory (Azure AD) �
 
 以下脚本为名为 **Group-23** 的资源组中的 **demo\_server** 服务器预配名为 **DBA\_Group** 的 Azure AD 管理员组（对象 ID `40b79501-b343-44ed-9ce7-da4c8cc7353f`）：
 
-	Set-AzureRmSqlServerActiveDirectoryAdministrator –ResourceGroupName "Group-23"
-	–ServerName "demo_server" -DisplayName "DBA_Group"
+    Set-AzureRmSqlServerActiveDirectoryAdministrator –ResourceGroupName "Group-23"
+    –ServerName "demo_server" -DisplayName "DBA_Group"
 
 **DisplayName** 输入参数接受 Azure AD 显示名称或用户主体名称。例如，``DisplayName="John Smith"`` 和 ``DisplayName="johns@contoso.com"``。对于 Azure AD 组，只支持 Azure AD 显示名称。
 
@@ -181,18 +181,18 @@ Azure Active Directory 身份验证是使用 Azure Active Directory (Azure AD) �
 
 以下示例使用可选的 **ObjectID**：
 
-	Set-AzureRmSqlServerActiveDirectoryAdministrator –ResourceGroupName "Group-23"
-	–ServerName "demo_server" -DisplayName "DBA_Group" -ObjectId "40b79501-b343-44ed-9ce7-da4c8cc7353f"
+    Set-AzureRmSqlServerActiveDirectoryAdministrator –ResourceGroupName "Group-23"
+    –ServerName "demo_server" -DisplayName "DBA_Group" -ObjectId "40b79501-b343-44ed-9ce7-da4c8cc7353f"
 
 > [!NOTE] 在 **DisplayName** 不唯一时，需要使用 Azure AD **ObjectID**。若要检索 **ObjectID** 和 **DisplayName** 值，请使用 Azure 经典管理门户的 Active Directory 部分，并查看用户或组的属性。
 
 下面的示例返回有关针对 Azure SQL Server 的当前 Azure AD 管理员的信息：
 
-	Get-AzureRmSqlServerActiveDirectoryAdministrator –ResourceGroupName "Group-23" –ServerName "demo_server" | Format-List
+    Get-AzureRmSqlServerActiveDirectoryAdministrator –ResourceGroupName "Group-23" –ServerName "demo_server" | Format-List
 
 下面的示例删除一个 Azure AD 管理员：
 
-	Remove-AzureRmSqlServerActiveDirectoryAdministrator -ResourceGroupName "Group-23" –ServerName "demo_server"
+    Remove-AzureRmSqlServerActiveDirectoryAdministrator -ResourceGroupName "Group-23" –ServerName "demo_server"
 
 也可以使用 REST API 预配 Azure Active Directory 管理员。有关详细信息，请参阅 [Azure SQL 数据库的 Azure SQL 数据库操作的 Service Management REST API 参考和操作](https://msdn.microsoft.com/zh-cn/library/azure/dn505719.aspx)
 
@@ -225,10 +225,10 @@ Azure Active Directory 身份验证要求以包含的数据库用户的身份创
 如果你从联合域使用 Azure Active Directory 凭据登录到 Windows，则使用此方法。
 
 1. 启动 Management Studio 或 Data Tools 后，在“连接到服务器”（或“连接到数据库引擎”）对话框的“身份验证”框中，选择“Active Directory 集成身份验证”。由于系统会为连接提供你的现有凭据，因此无需密码，也无法输入密码。
-	![选择 AD 集成身份验证][11]
+    ![选择 AD 集成身份验证][11]
 
 2. 单击“选项”按钮，在“连接属性”页上的“连接到数据库”框中，键入你所要连接的用户数据库的名称。
-	![选择数据库名称][13]
+    ![选择数据库名称][13]
 
 ####<a name="connect-using-active-directory-password-authentication"></a> 使用 Active Directory 密码身份验证进行连接
 
@@ -239,31 +239,31 @@ Azure Active Directory 身份验证要求以包含的数据库用户的身份创
 1. 启动 Management Studio 或 Data Tools，然后在“连接到服务器”（或“连接到数据库引擎”）对话框的“身份验证”框中，选择“Active Directory 密码身份验证”。
 2. 在“用户名”框中，以格式 **username@domain.com** 键入你的 Azure Active Directory 用户名。这必须是来自 Azure Active Directory 的帐户或来自与 Azure Active Directory 联合的域的帐户。
 3. 在“密码”框中，为 Azure Active Directory 帐户或联合域帐户键入你的用户密码。
-	![选择 AD 密码身份验证][12]
+    ![选择 AD 密码身份验证][12]
 
 4. 单击“选项”按钮，然后在“连接属性”页上的“连接到数据库”框中，键入你所要连接用户数据库的名称。（请参阅前一选项的图。）
 
 ### 在用户数据库中创建 Azure AD 包含的数据库用户
 若要创建基于 Azure AD 的包含的数据库用户（而不是拥有数据库的服务器管理员），请以至少具有 **ALTER ANY USER** 权限的用户身份使用 Azure AD 标识连接到数据库。然后，使用以下 Transact-SQL 语法：
 
-	CREATE USER <Azure_AD_principal_name>
-	FROM EXTERNAL PROVIDER;
+    CREATE USER <Azure_AD_principal_name>
+    FROM EXTERNAL PROVIDER;
 
 *Azure\_AD\_principal\_name* 可以是 Azure AD 用户的用户主体名称，也可以是 Azure AD 组的显示名称。
 
 **示例：**
 若要创建代表 Azure AD 联合或托管域用户的包含的数据库用户：
 
-	CREATE USER [bob@contoso.com] FROM EXTERNAL PROVIDER;
-	CREATE USER [alice@fabrikam.partner.onmschina.cn] FROM EXTERNAL PROVIDER;
+    CREATE USER [bob@contoso.com] FROM EXTERNAL PROVIDER;
+    CREATE USER [alice@fabrikam.partner.onmschina.cn] FROM EXTERNAL PROVIDER;
 
 若要创建代表 Azure AD 或联合域组的包含的数据库用户，请提供安全组的显示名称：
 
-	CREATE USER [ICU Nurses] FROM EXTERNAL PROVIDER;
+    CREATE USER [ICU Nurses] FROM EXTERNAL PROVIDER;
 
 若要创建代表可使用 Azure AD 令牌连接的应用程序的包含的数据库用户：
 
-	CREATE USER [appName] FROM EXTERNAL PROVIDER;
+    CREATE USER [appName] FROM EXTERNAL PROVIDER;
 
 有关基于 Azure Active Directory 标识创建包含的数据库用户的详细信息，请参阅 [CREATE USER (Transact-SQL)](http://msdn.microsoft.com/zh-cn/library/ms173463.aspx)。
 
@@ -285,10 +285,10 @@ Azure Active Directory 身份验证支持使用 Azure AD 标识连接到数据�
 
 若要使用集成的身份验证和 Azure AD 标识连接到数据库，数据库连接字符串中的身份验证关键字必须设置为 Active Directory Integrated。下面的 C# 代码示例使用 ADO.NET。
 
-	string ConnectionString =
-	@"Data Source=n9lxnyuzhv.database.chinacloudapi.cn; Authentication=Active Directory Integrated; Initial Catalog=testdb;";
-	SqlConnection conn = new SqlConnection(ConnectionString);
-	conn.Open();
+    string ConnectionString =
+    @"Data Source=n9lxnyuzhv.database.chinacloudapi.cn; Authentication=Active Directory Integrated; Initial Catalog=testdb;";
+    SqlConnection conn = new SqlConnection(ConnectionString);
+    conn.Open();
 
 请注意，不支持使用连接字符串关键字 ``Integrated Security=True`` 连接到 Azure SQL 数据库。
 请注意，在进行 ODBC 连接时，需删除空格，将“Authentication”设置为“ActiveDirectoryIntegrated”。
@@ -296,10 +296,10 @@ Azure Active Directory 身份验证支持使用 Azure AD 标识连接到数据�
 ### 7\.2.使用 Azure AD 主体名称和密码进行连接
 若要使用集成的身份验证和 Azure AD 标识连接到数据库，必须将“Authentication”关键字设置为“Active Directory Password”。连接字符串必须包含“User ID/UID”和“Password/PWD”关键字和值。下面的 C# 代码示例使用 ADO.NET。
 
-	string ConnectionString =
-	  @"Data Source=n9lxnyuzhv.database.chinacloudapi.cn; Authentication=Active Directory Password; Initial Catalog=testdb;  UID=bob@contoso.partner.onmschina.cn; PWD=MyPassWord!";
-	SqlConnection conn = new SqlConnection(ConnectionString);
-	conn.Open();
+    string ConnectionString =
+      @"Data Source=n9lxnyuzhv.database.chinacloudapi.cn; Authentication=Active Directory Password; Initial Catalog=testdb;  UID=bob@contoso.partner.onmschina.cn; PWD=MyPassWord!";
+    SqlConnection conn = new SqlConnection(ConnectionString);
+    conn.Open();
 
 通过 [Azure AD 身份验证 GitHub 演示](https://github.com/Microsoft/sql-server-samples/tree/master/samples/features/security/azure-active-directory-auth)中提供的演示代码示例，了解有关 Azure AD 身份验证方法的详细信息。
 
@@ -313,18 +313,18 @@ Azure Active Directory 身份验证支持使用 Azure AD 标识连接到数据�
 
 示例连接字符串：
 
-	string ConnectionString =@"Data Source=n9lxnyuzhv.database.chinacloudapi.cn; Initial Catalog=testdb;"
-	SqlConnection conn = new SqlConnection(ConnectionString);
-	connection.AccessToken = "Your JWT token"
-	conn.Open();
+    string ConnectionString =@"Data Source=n9lxnyuzhv.database.chinacloudapi.cn; Initial Catalog=testdb;"
+    SqlConnection conn = new SqlConnection(ConnectionString);
+    connection.AccessToken = "Your JWT token"
+    conn.Open();
 
 有关详细信息，请参阅 [SQL Server 安全性博客](https://blogs.msdn.microsoft.com/sqlsecurity/2016/02/09/token-based-authentication-support-for-azure-sql-db-using-azure-ad-auth/)。
 
 ### 使用 sqlcmd 进行连接
 以下语句使用版本 13.1 的 sqlcmd 进行连接，该版本可从[下载中心](http://go.microsoft.com/fwlink/?LinkID=825643)下载。
 
-	sqlcmd -S Target_DB_or_DW.testsrv.database.chinacloudapi.cn  -G  
-	sqlcmd -S Target_DB_or_DW.testsrv.database.chinacloudapi.cn -U bob@contoso.com -P MyAADPassword -G -l 30
+    sqlcmd -S Target_DB_or_DW.testsrv.database.chinacloudapi.cn  -G  
+    sqlcmd -S Target_DB_or_DW.testsrv.database.chinacloudapi.cn -U bob@contoso.com -P MyAADPassword -G -l 30
 
 ## 另请参阅
 

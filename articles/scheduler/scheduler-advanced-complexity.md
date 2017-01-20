@@ -55,23 +55,23 @@ Azure 计划程序作业中的日期时间引用遵循 [ISO-8601 规范](http://
 
 若要使用 [Azure 计划程序 REST API](https://msdn.microsoft.com/zh-cn/library/mt629143) 创建简单计划，将首先[使用资源提供程序注册订阅](https://msdn.microsoft.com/zh-cn/library/azure/dn790548.aspx)（计划程序的提供程序名称是 Microsoft.Scheduler），然后[创建作业集合](https://msdn.microsoft.com/zh-cn/library/mt629159.aspx)，最后[创建作业](https://msdn.microsoft.com/zh-cn/library/mt629145.aspx)。在创建作业时，可以使用类似于以下摘录内容的 JSON 指定计划和循环：
 
-	{
-	    "startTime": "2012-08-04T00:00Z", // optional
-	     …
-	    "recurrence":                     // optional
-	    {
-	        "frequency": "week",     // can be "year" "month" "day" "week" "hour" "minute"
-	        "interval": 1,                // optional, how often to fire (default to 1)
-	        "schedule":                   // optional (advanced scheduling specifics)
-	        {
-	            "weekDays": ["monday", "wednesday", "friday"],
-	            "hours": [10, 22]                      
-	        },
-	        "count": 10,                  // optional (default to recur infinitely)
-	        "endTime": "2012-11-04",      // optional (default to recur infinitely)
-	    },
-	    …
-	}
+    {
+        "startTime": "2012-08-04T00:00Z", // optional
+         …
+        "recurrence":                     // optional
+        {
+            "frequency": "week",     // can be "year" "month" "day" "week" "hour" "minute"
+            "interval": 1,                // optional, how often to fire (default to 1)
+            "schedule":                   // optional (advanced scheduling specifics)
+            {
+                "weekDays": ["monday", "wednesday", "friday"],
+                "hours": [10, 22]                      
+            },
+            "count": 10,                  // optional (default to recur infinitely)
+            "endTime": "2012-11-04",      // optional (default to recur infinitely)
+        },
+        …
+    }
 
 ## 概述：作业架构基础知识
 

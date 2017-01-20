@@ -36,13 +36,13 @@ ms.author: srinia
 
 [New-AzureRmSqlElasticPool](https://msdn.microsoft.com/zh-cn/library/azure/mt619378.aspx) cmdlet 将创建新池。每个池的 eDTU 值、最小和最大 DTU 受服务器层值（基本、标准或高级）的约束。请参阅[弹性池和弹性数据库的 eDTU 和存储限制](./sql-database-elastic-pool.md#eDTU-and-storage-limits-for-elastic-pools-and-elastic-databases)。
 
-	New-AzureRmSqlElasticPool -ResourceGroupName "resourcegroup1" -ServerName "server1" -ElasticPoolName "elasticpool1" -Edition "Standard" -Dtu 400 -DatabaseDtuMin 10 -DatabaseDtuMax 100
+    New-AzureRmSqlElasticPool -ResourceGroupName "resourcegroup1" -ServerName "server1" -ElasticPoolName "elasticpool1" -Edition "Standard" -Dtu 400 -DatabaseDtuMin 10 -DatabaseDtuMax 100
 
 ## 在池中创建新的弹性数据库
 
 使用 [New-AzureRmSqlDatabase](https://msdn.microsoft.com/zh-cn/library/azure/mt619339.aspx) cmdlet 并将 **ElasticPoolName** 参数设置为目标池。若要将现有数据库移到池中，请参阅[将数据库移入弹性池](./sql-database-elastic-pool-manage-powershell.md#Move-a-database-into-an-elastic-pool)。
 
-	New-AzureRmSqlDatabase -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
+    New-AzureRmSqlDatabase -ResourceGroupName "resourcegroup1" -ServerName "server1" -DatabaseName "database1" -ElasticPoolName "elasticpool1"
 
 ## 创建池，并使用多个新的数据库对其进行填充 
 

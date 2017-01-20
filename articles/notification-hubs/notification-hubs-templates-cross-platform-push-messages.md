@@ -37,17 +37,17 @@ ms.author: wesmc
 
 发送推送通知的标准方法是向平台通知服务（WNS、APNS）发送要传出的每个通知的特定负载。例如，若要向 APNS 发送警报，负载将是以下格式的 Json 对象：
 
-	{"aps": {"alert" : "Hello!" }}
+    {"aps": {"alert" : "Hello!" }}
 
 若要在 Windows 应用商店应用程序中发送类似的 toast 消息，XML 负载将如下所示：
 
-	<toast>
-	  <visual>
-	    <binding template=\"ToastText01\">
-	      <text id=\"1\">Hello!</text>
-	    </binding>
-	  </visual>
-	</toast>
+    <toast>
+      <visual>
+        <binding template=\"ToastText01\">
+          <text id=\"1\">Hello!</text>
+        </binding>
+      </visual>
+    </toast>
 
 你可以为 MPNS (Windows Phone) 和 GCM (Android) 平台创建类似的负载。
 
@@ -61,17 +61,17 @@ ms.author: wesmc
 
 iOS 客户端应用注册的模板如下所示：
 
-	{"aps": {"alert": "$(message)"}}
+    {"aps": {"alert": "$(message)"}}
 
 Windows 应用商店客户端应用的相应模板为：
 
-	<toast>
-		<visual>
-			<binding template=\"ToastText01\">
-				<text id=\"1\">$(message)</text>
-			</binding>
-		</visual>
-	</toast>
+    <toast>
+        <visual>
+            <binding template=\"ToastText01\">
+                <text id=\"1\">$(message)</text>
+            </binding>
+        </visual>
+    </toast>
 
 请注意，实际消息将替换表达式 $(message)。每当通知中心向此特定注册发送消息时，此表达式将指示通知中心构建遵循此模板并用常用值替换的消息。
 
@@ -85,15 +85,15 @@ Windows 应用商店客户端应用的相应模板为：
 
 使用摄氏温度的一天天气预报模板如下所示：
 
-	<tile>
-	  <visual>
-	    <binding template="TileWideSmallImageAndText04">
-	      <image id="1" src="$(day1_image)" alt="alt text"/>
-	      <text id="1">Seattle, WA</text>
-	      <text id="2">$(day1_tempC)</text>
-	    </binding>  
-	  </visual>
-	</tile>
+    <tile>
+      <visual>
+        <binding template="TileWideSmallImageAndText04">
+          <image id="1" src="$(day1_image)" alt="alt text"/>
+          <text id="1">Seattle, WA</text>
+          <text id="2">$(day1_tempC)</text>
+        </binding>  
+      </visual>
+    </tile>
 
 发送到通知中心的消息包含以下属性：
 
@@ -133,22 +133,22 @@ Windows 应用商店客户端应用的相应模板为：
 
 例如，下面所示不是有效的 XML 模板：
 
-	<tile>
-	  <visual>
-	    <binding $(property)>
-	      <text id="1">Seattle, WA</text>
-	    </binding>  
-	  </visual>
-	</tile>
+    <tile>
+      <visual>
+        <binding $(property)>
+          <text id="1">Seattle, WA</text>
+        </binding>  
+      </visual>
+    </tile>
 
 如前所述，使用串联时，表达式必须用大括号括住。例如：
 
-	<tile>
-	  <visual>
-	    <binding template="ToastText01">
-	      <text id="1">{'Hi, ' + $(name)}</text>
-	    </binding>  
-	  </visual>
-	</tile>
+    <tile>
+      <visual>
+        <binding template="ToastText01">
+          <text id="1">{'Hi, ' + $(name)}</text>
+        </binding>  
+      </visual>
+    </tile>
 
 <!---HONumber=Mooncake_0815_2016-->

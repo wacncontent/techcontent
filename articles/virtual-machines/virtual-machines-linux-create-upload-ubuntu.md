@@ -51,60 +51,60 @@ Ubuntu 现已发布正式 Azure VHD，可从 [http://cloud-images.ubuntu.com/](h
 
 3.	替换映像中的当前存储库，以使用 Ubuntu 的 Azure 存储库。这些步骤可能会由于 Ubuntu 版本的不同而稍有差异。
 
-	编辑 /etc/apt/sources.list 之前，建议进行备份：
+    编辑 /etc/apt/sources.list 之前，建议进行备份：
 
-		# sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+        # sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
 
-	Ubuntu 12.04：
+    Ubuntu 12.04：
 
-		# sudo sed -i "s/[a-z][a-z].archive.ubuntu.com/azure.archive.ubuntu.com/g" /etc/apt/sources.list
-		# sudo apt-get update
+        # sudo sed -i "s/[a-z][a-z].archive.ubuntu.com/azure.archive.ubuntu.com/g" /etc/apt/sources.list
+        # sudo apt-get update
 
-	Ubuntu 14.04：
+    Ubuntu 14.04：
 
-		# sudo sed -i "s/[a-z][a-z].archive.ubuntu.com/azure.archive.ubuntu.com/g" /etc/apt/sources.list
-		# sudo apt-get update
+        # sudo sed -i "s/[a-z][a-z].archive.ubuntu.com/azure.archive.ubuntu.com/g" /etc/apt/sources.list
+        # sudo apt-get update
 
 4. Ubuntu Azure 映像现在遵循*硬件支持* (HWE) 内核要求。通过运行以下命令将操作系统更新为最新内核：
 
-	Ubuntu 12.04：
+    Ubuntu 12.04：
 
-		# sudo apt-get update
-		# sudo apt-get install linux-image-generic-lts-trusty linux-cloud-tools-generic-lts-trusty
-		# sudo apt-get install hv-kvp-daemon-init
-		(recommended) sudo apt-get dist-upgrade
+        # sudo apt-get update
+        # sudo apt-get install linux-image-generic-lts-trusty linux-cloud-tools-generic-lts-trusty
+        # sudo apt-get install hv-kvp-daemon-init
+        (recommended) sudo apt-get dist-upgrade
 
-		# sudo reboot
+        # sudo reboot
 
-	Ubuntu 14.04：
+    Ubuntu 14.04：
 
-		# sudo apt-get update
-		# sudo apt-get install linux-image-virtual-lts-vivid linux-lts-vivid-tools-common
-		# sudo apt-get install hv-kvp-daemon-init
-		(recommended) sudo apt-get dist-upgrade
+        # sudo apt-get update
+        # sudo apt-get install linux-image-virtual-lts-vivid linux-lts-vivid-tools-common
+        # sudo apt-get install hv-kvp-daemon-init
+        (recommended) sudo apt-get dist-upgrade
 
-		# sudo reboot
+        # sudo reboot
 
 5. 修改 Grub 的内核引导行以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开“/etc/default/grub”、找到名为“`GRUB_CMDLINE_LINUX_DEFAULT`”的变量（或根据需要添加它）并对它进行编辑以使其包含以下参数：
 
-		GRUB_CMDLINE_LINUX_DEFAULT="console=tty1 console=ttyS0,115200n8 earlyprintk=ttyS0,115200 rootdelay=300"
+        GRUB_CMDLINE_LINUX_DEFAULT="console=tty1 console=ttyS0,115200n8 earlyprintk=ttyS0,115200 rootdelay=300"
 
-	保存并关闭此文件，然后再运行“`sudo update-grub`”。这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 技术支持人员调试问题。
+    保存并关闭此文件，然后再运行“`sudo update-grub`”。这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 技术支持人员调试问题。
 
 6.	请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
 
 7.	安装 Azure Linux 代理：
 
-		# sudo apt-get update
-		# sudo apt-get install walinuxagent
+        # sudo apt-get update
+        # sudo apt-get install walinuxagent
 
-	请注意，安装 `walinuxagent` 包时将删除 `NetworkManager` 和 `NetworkManager-gnome` 包（如果已安装它们）。
+    请注意，安装 `walinuxagent` 包时将删除 `NetworkManager` 和 `NetworkManager-gnome` 包（如果已安装它们）。
 
 8.	运行以下命令可取消对虚拟机的设置并且对其进行准备以便在 Azure 上进行设置：
 
-		# sudo waagent -force -deprovision
-		# export HISTSIZE=0
-		# logout
+        # sudo waagent -force -deprovision
+        # export HISTSIZE=0
+        # logout
 
 9. 在 Hyper-V 管理器中单击**“操作”->“关闭”**。Linux VHD 现已准备好上载到 Azure。
 

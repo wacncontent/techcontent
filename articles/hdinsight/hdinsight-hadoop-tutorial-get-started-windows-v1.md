@@ -60,7 +60,7 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 1. 登录到 [Azure 经典管理门户][azure-management-portal]。
 2. 单击左下角的“新建”，然后如图所示输入值。
 
-	![在 Azure 经典管理门户中，可以使用“快速创建”来设置新的存储帐户。][image-hdi-storageaccount-quickcreate]
+    ![在 Azure 经典管理门户中，可以使用“快速创建”来设置新的存储帐户。][image-hdi-storageaccount-quickcreate]
 
 从列表中选择新存储帐户，然后单击页面底部的“管理访问密钥”。记下“主访问密钥”（或“辅助访问密钥”- 可使用任一密钥）。本教程后面的步骤中将会用到此密钥。有关详细信息，请参阅[如何创建存储帐户][azure-create-storageaccount]。
 
@@ -76,26 +76,26 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 
 2. 单击左下角的“新建”，然后如图所示输入值。
 
-	![在 HDInsight 中创建 Hadoop 群集。][image-hdi-quickcreatecluster]
+    ![在 HDInsight 中创建 Hadoop 群集。][image-hdi-quickcreatecluster]
 
 <!-- COMMENTED OUT TEXT BEGINS --
 
 4. Enter or select the following values:
 
-	<table border="1">
-	<tr><th>Name</th><th>Value</th></tr>
-	<tr><td>Cluster Name</td><td>Name of the cluster.</td></tr>
-	<tr><td>Cluster Size</td><td>Number of data nodes you want to deploy. The default value is 4. But the option to use 1 or 2 data nodes is also available from the drop-down list. Any number of cluster nodes can be specified by using the <strong>Custom Create</strong> option. Pricing details about the billing rates for various cluster sizes are available. Click the <strong>?</strong> symbol above the drop-down list and follow the link that appears.</td></tr>
-	<tr><td>Password</td><td>The password for the <i>admin</i> account. The cluster user name "admin" is specified when you are not using the <strong>Custom Create</strong> option. Note that this is NOT the Windows Administrator account for the VMs on which the clusters are provisioned. The account name can be changed by using the <strong>Custom Create</strong> wizard.</td></tr>
-	<tr><td>Storage Account</td><td>Click the drop-down list, and select the storage account that you created. <br/>
+    <table border="1">
+    <tr><th>Name</th><th>Value</th></tr>
+    <tr><td>Cluster Name</td><td>Name of the cluster.</td></tr>
+    <tr><td>Cluster Size</td><td>Number of data nodes you want to deploy. The default value is 4. But the option to use 1 or 2 data nodes is also available from the drop-down list. Any number of cluster nodes can be specified by using the <strong>Custom Create</strong> option. Pricing details about the billing rates for various cluster sizes are available. Click the <strong>?</strong> symbol above the drop-down list and follow the link that appears.</td></tr>
+    <tr><td>Password</td><td>The password for the <i>admin</i> account. The cluster user name "admin" is specified when you are not using the <strong>Custom Create</strong> option. Note that this is NOT the Windows Administrator account for the VMs on which the clusters are provisioned. The account name can be changed by using the <strong>Custom Create</strong> wizard.</td></tr>
+    <tr><td>Storage Account</td><td>Click the drop-down list, and select the storage account that you created. <br/>
 
-	When a storage account is chosen, it cannot be changed. If the storage account is removed, the cluster will no longer be available for use.
+    When a storage account is chosen, it cannot be changed. If the storage account is removed, the cluster will no longer be available for use.
 
-	The HDInsight cluster is located in the same datacenter as the storage account.
-	</td></tr>
-	</table>
+    The HDInsight cluster is located in the same datacenter as the storage account.
+    </td></tr>
+    </table>
 
-	Keep a copy of the cluster name. You will need it later in the tutorial.
+    Keep a copy of the cluster name. You will need it later in the tutorial.
 
 5. Click **Create HDInsight Cluster**. When the provisioning completes, the  status column shows **Running**.
 
@@ -126,15 +126,15 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 3. 单击要用于运行 Hive 作业的群集名称，然后单击页面底部的“查询控制台”。
 4. 这会在另一个浏览器选项卡中打开一个网页。输入 Hadoop 用户帐户和密码。默认用户名为 **admin**；密码是设置群集时输入的密码。仪表板类似于：
 
-	![HDInsight 群集仪表板中的“Hive 编辑器”选项卡。][img-hdi-dashboard]
+    ![HDInsight 群集仪表板中的“Hive 编辑器”选项卡。][img-hdi-dashboard]
 
-	页面顶部有多个选项卡。默认选项卡为“Hive 编辑器”，而其他选项卡为“作业历史记录”和“文件浏览器”。使用仪表板可以提交 Hive 查询、检查 Hadoop 作业日志，以及浏览 WASB 文件。
+    页面顶部有多个选项卡。默认选项卡为“Hive 编辑器”，而其他选项卡为“作业历史记录”和“文件浏览器”。使用仪表板可以提交 Hive 查询、检查 Hadoop 作业日志，以及浏览 WASB 文件。
 
-	> [!NOTE]请注意，网页的 URL 为 *&lt;ClusterName&gt;.azurehdinsight.cn*。因此，如果不从经典管理门户打开仪表板，也可以在 Web 浏览器中使用 URL 打开仪表板。
+    > [!NOTE]请注意，网页的 URL 为 *&lt;ClusterName&gt;.azurehdinsight.cn*。因此，如果不从经典管理门户打开仪表板，也可以在 Web 浏览器中使用 URL 打开仪表板。
 
 6. 在“Hive 编辑器”选项卡上，为“查询名称”输入 **HTC20**。查询名称为作业标题。在查询窗格中，按下图所示输入 Hive 查询：
 
-	![在 Hive 编辑器的查询窗格中输入的 Hive 查询。][img-hdi-dashboard-query-select]
+    ![在 Hive 编辑器的查询窗格中输入的 Hive 查询。][img-hdi-dashboard-query-select]
 
 4. 单击“提交”。片刻之后即可返回结果。屏幕将每隔 30 秒刷新一次。你也可以单击“刷新”来刷新屏幕。
 
@@ -152,7 +152,7 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 2. 单击你的存储帐户名称，单击容器名称（与群集名称相同），然后单击“用户”。
 3. 单击“admin”，然后单击其上次修改时间比你前面记下的作业开始时间稍晚的 GUID。复制此 GUID。在后一个部分将要用到它。
 
-   	![在“文件浏览器”选项卡中列出的 Hive 查询输出文件 GUID。][img-hdi-dashboard-query-browse-output]
+       ![在“文件浏览器”选项卡中列出的 Hive 查询输出文件 GUID。][img-hdi-dashboard-query-browse-output]
 
 ## <a name="powerquery"></a>连接到 Excel 的 Microsoft 商业智能工具
 
@@ -169,7 +169,7 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 1. 打开 Excel，然后创建一个新的工作簿。
 3. 依次单击“Power Query”菜单、“从其他源”和“从 Azure HDInsight”。
 
-	![为 Azure HDInsight 打开的 Excel PowerQuery 导入菜单。][image-hdi-gettingstarted-powerquery-importdata]
+    ![为 Azure HDInsight 打开的 Excel PowerQuery 导入菜单。][image-hdi-gettingstarted-powerquery-importdata]
 
 3. 输入与你的群集关联的 Azure Blob 存储帐户的“帐户名称”，然后单击“确定”。（这是先前在教程中创建的存储帐户，在 Azure 中国，“账户名称”必须填完整的 url，例如：https://<your account name\>.blob.core.chinacloudapi.cn/）
 4. 输入 Azure Blob 存储帐户的“帐户密钥”，然后单击“保存”。
@@ -177,7 +177,7 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 
 6. 在“名称”列中找到 **stdout**。确认对应“文件夹路径”列中的 GUID 是否与你前面记下的 GUID 匹配。若匹配，则表明输出数据与所提交的作业相对应。单击 **stdout** 列左侧的“二进制”。
 
-	![按内容列表中的 GUID 查找数据输出。][image-hdi-gettingstarted-powerquery-importdata2]
+    ![按内容列表中的 GUID 查找数据输出。][image-hdi-gettingstarted-powerquery-importdata2]
 
 9. 单击左上角的“关闭并加载”，以将 Hive 作业输出导入到 Excel。
 

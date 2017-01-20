@@ -35,11 +35,11 @@ ms.author: robinsh
 
 2. 单击“配置”，然后向下滚动到 Blob、表和队列服务的“监视”设置。
 
-	![MonitoringOptions](./media/storage-monitor-storage-account/Storage_MonitoringOptions.png)
+    ![MonitoringOptions](./media/storage-monitor-storage-account/Storage_MonitoringOptions.png)
 
 3. 在“监视”中，为每项服务设置监视级别和数据保留策略：
 
-	-  要设置监视级别，请选择以下一项：
+    -  要设置监视级别，请选择以下一项：
 
       **最低** - 收集经过汇总的有关 Blob、表和队列服务的入口/出口、可用性、延迟及成功百分比等指标。
 
@@ -67,11 +67,11 @@ ms.author: robinsh
 
 2. 要更改图表上显示的指标，请执行以下操作之一：
 
-	- 要向图表添加新指标，请单击该图表下方表中指标标题旁的彩色复选框。
+    - 要向图表添加新指标，请单击该图表下方表中指标标题旁的彩色复选框。
 
-	- 要隐藏显示在图表上的某个指标，请清除该指标标题旁的彩色复选框。
+    - 要隐藏显示在图表上的某个指标，请清除该指标标题旁的彩色复选框。
 
-		![Monitoring\_nmore](./media/storage-monitor-storage-account/storage_Monitoring_nmore.png)
+        ![Monitoring\_nmore](./media/storage-monitor-storage-account/storage_Monitoring_nmore.png)
 
 3. 默认情况下，该图表显示趋势，以便仅显示每个指标的当前值（选择图表顶部的“相对”选项）。要显示 Y 轴以便能够看到绝对值，请选择“绝对”。
 
@@ -93,33 +93,33 @@ ms.author: robinsh
 
 2. 单击“监视”。
 
-	此时将打开“监视”页。默认情况下，指标表显示可监视指标的子集。下图中显示的是为所有三项服务配置了详细监视的存储帐户的默认“监视”视图。可使用“添加指标”从所有可用指标中选择要监视的指标。
+    此时将打开“监视”页。默认情况下，指标表显示可监视指标的子集。下图中显示的是为所有三项服务配置了详细监视的存储帐户的默认“监视”视图。可使用“添加指标”从所有可用指标中选择要监视的指标。
 
-	![Monitoring\_VerboseDisplay](./media/storage-monitor-storage-account/Storage_Monitoring_VerboseDisplay.png)
+    ![Monitoring\_VerboseDisplay](./media/storage-monitor-storage-account/Storage_Monitoring_VerboseDisplay.png)
 
-	> [!NOTE] 选择指标时应考虑成本。在刷新监视视图时会产生相关的事务和数据传出费用。有关详细信息，请参阅[存储分析和计费](http://msdn.microsoft.com/zh-cn/library/azure/hh360997.aspx)。
+    > [!NOTE] 选择指标时应考虑成本。在刷新监视视图时会产生相关的事务和数据传出费用。有关详细信息，请参阅[存储分析和计费](http://msdn.microsoft.com/zh-cn/library/azure/hh360997.aspx)。
 
 3. 单击“添加指标”。
 
-	最低监视中可用的汇总指标位于列表顶部。如果选中该复选框，则指标将显示在指标列表中。
+    最低监视中可用的汇总指标位于列表顶部。如果选中该复选框，则指标将显示在指标列表中。
 
-	![AddMetricsInitialDisplay](./media/storage-monitor-storage-account/Storage_AddMetrics_InitialDisplay.png)
+    ![AddMetricsInitialDisplay](./media/storage-monitor-storage-account/Storage_AddMetrics_InitialDisplay.png)
 
 4. 将鼠标指针悬停于对话框右侧时会显示滚动条，可拖动它以将其他指标滚动到视野中。
 
-	![AddMetricsScrollbar](./media/storage-monitor-storage-account/Storage_AddMetrics_Scrollbar.png)
+    ![AddMetricsScrollbar](./media/storage-monitor-storage-account/Storage_AddMetrics_Scrollbar.png)
 
 5. 单击指标旁边的向下箭头可展开该指标范围内所含操作的列表。选择要在 [Azure 门户预览](https://portal.azure.cn)中的指标表中查看的每项操作。
 
-	下图中展开了“授权错误百分比”指标。
+    下图中展开了“授权错误百分比”指标。
 
-	![ExpandCollapse](./media/storage-monitor-storage-account/Storage_AddMetrics_ExpandCollapse.png)
+    ![ExpandCollapse](./media/storage-monitor-storage-account/Storage_AddMetrics_ExpandCollapse.png)
 
 6. 为所有服务选择指标后，单击“确定”（复选标记）以更新监视配置。所选指标将添加到指标表中。
 
 7. 要从指标表中删除某个指标，请单击以选中该指标，然后单击“删除指标”。
 
-	![DeleteMetric](./media/storage-monitor-storage-account/Storage_DeleteMetric.png)
+    ![DeleteMetric](./media/storage-monitor-storage-account/Storage_DeleteMetric.png)
 
 ## 如何：在“监视”页上自定义指标图表
 
@@ -137,13 +137,13 @@ ms.author: robinsh
 
 2. 单击“配置”，然后使用键盘上的向下箭头向下滚动到“日志记录”。
 
-	![Storagelogging](./media/storage-monitor-storage-account/Storage_LoggingOptions.png)
+    ![Storagelogging](./media/storage-monitor-storage-account/Storage_LoggingOptions.png)
 
 3. 为每项服务（Blob、表和队列）配置下列内容：
 
-	- 要记录的请求类型：“读取请求”、“写入请求”和“删除请求”。
+    - 要记录的请求类型：“读取请求”、“写入请求”和“删除请求”。
 
-	- 保留记录数据的天数。如果不需要设置保留策略，请输入零。如果不设置保留策略，则由用户自行决定是否删除日志。
+    - 保留记录数据的天数。如果不需要设置保留策略，请输入零。如果不设置保留策略，则由用户自行决定是否删除日志。
 
 4. 单击“保存”。
 

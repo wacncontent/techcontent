@@ -42,17 +42,17 @@ ms.author: jgao
 1. 登录到 [Azure 经典管理门户][azure-management-portal]。
 2. 单击左下方的“新建”，然后依次单击“数据服务”、“HDInsight”、“HBase”。
 
-	>[!NOTE]你还可以使用“自定义创建”选项。
+    >[!NOTE]你还可以使用“自定义创建”选项。
 3. 输入“群集名称”、“群集大小”、HTTP 用户密码和“存储帐户”。
 
-	![在 HDInsight 中预配 HBase 群集][img-hdinsight-hbase-cluster-quick-create]
+    ![在 HDInsight 中预配 HBase 群集][img-hdinsight-hbase-cluster-quick-create]
 
-	默认 HTTP 用户名是 admin。可通过使用“自定义创建”选项自定义该名称。
+    默认 HTTP 用户名是 admin。可通过使用“自定义创建”选项自定义该名称。
 
-	若要使用默认 HBase 设置过程，需要使用 Azure 存储帐户。请参阅[创建 Azure 存储帐户][azure-create-storageaccount]，以创建存储帐户。通过“自定义创建”选项，可使用群集预配过程创建存储帐户选项。
+    若要使用默认 HBase 设置过程，需要使用 Azure 存储帐户。请参阅[创建 Azure 存储帐户][azure-create-storageaccount]，以创建存储帐户。通过“自定义创建”选项，可使用群集预配过程创建存储帐户选项。
 
-	> [!WARNING] 为实现 HBase 服务的高可用性，必须设置包含至少**三个**节点的群集。这可以确保在一个节点发生故障时，可在其他节点上使用 HBase 数据区域。
-	><p> 如果正在学习 HBase，请始终选择 1 作为群集大小，并在每次使用后删除该群集以节省费用。
+    > [!WARNING] 为实现 HBase 服务的高可用性，必须设置包含至少**三个**节点的群集。这可以确保在一个节点发生故障时，可在其他节点上使用 HBase 数据区域。
+    ><p> 如果正在学习 HBase，请始终选择 1 作为群集大小，并在每次使用后删除该群集以节省费用。
 
 4. 单击右下方的“创建 HDInsight 群集”以创建 HBase 群集。
 
@@ -77,34 +77,34 @@ ms.author: jgao
 2. 在 RDP 会话中，单击桌面上的“Hadoop 命令行”快捷方式。
 3. 打开 HBase shell：
 
-		cd %HBASE_HOME%\bin
-		hbase shell
+        cd %HBASE_HOME%\bin
+        hbase shell
 
 4. 创建包含两个列系列的 HBase：
 
-		create 'Contacts', 'Personal', 'Office'
-		list
+        create 'Contacts', 'Personal', 'Office'
+        list
 5. 插入一些数据：
 
-		put 'Contacts', '1000', 'Personal:Name', 'John Dole'
-		put 'Contacts', '1000', 'Personal:Phone', '1-425-000-0001'
-		put 'Contacts', '1000', 'Office:Phone', '1-425-000-0002'
-		put 'Contacts', '1000', 'Office:Address', '1111 San Gabriel Dr.'
-		scan 'Contacts'
+        put 'Contacts', '1000', 'Personal:Name', 'John Dole'
+        put 'Contacts', '1000', 'Personal:Phone', '1-425-000-0001'
+        put 'Contacts', '1000', 'Office:Phone', '1-425-000-0002'
+        put 'Contacts', '1000', 'Office:Address', '1111 San Gabriel Dr.'
+        scan 'Contacts'
 
-	![hdinsight hadoop hbase shell][img-hbase-shell]
+    ![hdinsight hadoop hbase shell][img-hbase-shell]
 
 6. 获取单个行
 
-		get 'Contacts', '1000'
+        get 'Contacts', '1000'
 
-	你将看到与使用扫描命令相同的结果，因为只有一个行。
+    你将看到与使用扫描命令相同的结果，因为只有一个行。
 
-	有关 Hbase 表架构的详细信息，请参阅 [HBase 架构设计简介][hbase-schema]。有关 HBase 命令的详细信息，请参阅 [Apache HBase 参考指南][hbase-quick-start]。
+    有关 Hbase 表架构的详细信息，请参阅 [HBase 架构设计简介][hbase-schema]。有关 HBase 命令的详细信息，请参阅 [Apache HBase 参考指南][hbase-quick-start]。
 
 6. 退出 shell
 
-		exit
+        exit
 
 **在联系人 HBase 表中批量加载数据**
 
@@ -112,16 +112,16 @@ HBase 提供了多种方法用于将数据载入表中。有关详细信息，�
 
 已将示例数据文件上传到公共 Azure Blob 容器 wasbs://hbasecontacts@hditutorialdata.blob.core.windows.net/contacts.txt。该数据文件的内容为：
 
-	8396	Calvin Raji		230-555-0191	230-555-0191	5415 San Gabriel Dr.
-	16600	Karen Wu		646-555-0113	230-555-0192	9265 La Paz
-	4324	Karl Xie		508-555-0163	230-555-0193	4912 La Vuelta
-	16891	Jonn Jackson	674-555-0110	230-555-0194	40 Ellis St.
-	3273	Miguel Miller	397-555-0155	230-555-0195	6696 Anchor Drive
-	3588	Osa Agbonile	592-555-0152	230-555-0196	1873 Lion Circle
-	10272	Julia Lee		870-555-0110	230-555-0197	3148 Rose Street
-	4868	Jose Hayes		599-555-0171	230-555-0198	793 Crawford Street
-	4761	Caleb Alexander	670-555-0141	230-555-0199	4775 Kentucky Dr.
-	16443	Terry Chander	998-555-0171	230-555-0200	771 Northridge Drive
+    8396	Calvin Raji		230-555-0191	230-555-0191	5415 San Gabriel Dr.
+    16600	Karen Wu		646-555-0113	230-555-0192	9265 La Paz
+    4324	Karl Xie		508-555-0163	230-555-0193	4912 La Vuelta
+    16891	Jonn Jackson	674-555-0110	230-555-0194	40 Ellis St.
+    3273	Miguel Miller	397-555-0155	230-555-0195	6696 Anchor Drive
+    3588	Osa Agbonile	592-555-0152	230-555-0196	1873 Lion Circle
+    10272	Julia Lee		870-555-0110	230-555-0197	3148 Rose Street
+    4868	Jose Hayes		599-555-0171	230-555-0198	793 Crawford Street
+    4761	Caleb Alexander	670-555-0141	230-555-0199	4775 Kentucky Dr.
+    16443	Terry Chander	998-555-0171	230-555-0200	771 Northridge Drive
 
 如果需要，你可以创建一个文本文件并将该文件上载到你自己的存储帐户。有关说明，请参阅[在 HDInsight 中为 Hadoop 作业上载数据][hdinsight-upload-data]。
 
@@ -130,15 +130,15 @@ HBase 提供了多种方法用于将数据载入表中。有关详细信息，�
 1. 在 RDP 会话中，单击桌面上的“Hadoop 命令行”快捷方式。
 2. 更改目录：
 
-		cd %HBASE_HOME%\bin
+        cd %HBASE_HOME%\bin
 
 3. 运行以下命令，将数据文件转换成 StoreFiles 并将其存储在 Dimporttsv.bulk.output 指定的相对路径：
 
-		hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns="HBASE_ROW_KEY,Personal:Name, Personal:Phone, Office:Phone, Office:Address" -Dimporttsv.bulk.output="/example/data/storeDataFileOutput" Contacts wasbs://hbasecontacts@hditutorialdata.blob.core.windows.net/contacts.txt
+        hbase org.apache.hadoop.hbase.mapreduce.ImportTsv -Dimporttsv.columns="HBASE_ROW_KEY,Personal:Name, Personal:Phone, Office:Phone, Office:Address" -Dimporttsv.bulk.output="/example/data/storeDataFileOutput" Contacts wasbs://hbasecontacts@hditutorialdata.blob.core.windows.net/contacts.txt
 
 4. 运行以下命令，将数据从 /example/data/storeDataFileOutput 上传到该 HBase 表：
 
-		hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles /example/data/storeDataFileOutput Contacts
+        hbase org.apache.hadoop.hbase.mapreduce.LoadIncrementalHFiles /example/data/storeDataFileOutput Contacts
 
 5. 可打开 HBase Shell，并使用扫描命令来列出表内容。
 
@@ -148,7 +148,7 @@ HDInsight 中的 HBase 随附了一个 Web UI 用于监视群集。使用该 Web
 
 若要打开该 Web UI，必须通过 RDP 连接到群集，然后在桌面上单击“HMaster Info Web UI”快捷方式，或者在 Web 浏览器中使用以下 URL：
 
-	http://zookeeper[0-2]:60010/master-status
+    http://zookeeper[0-2]:60010/master-status
 在高可用性群集中，你将会找到要托管 WebUI 的当前活动 HBase 主节点的链接。
 
 ## 使用 Hive 查询 HBase 表
@@ -164,22 +164,22 @@ HDInsight 中的 HBase 随附了一个 Web UI 用于监视群集。使用该 Web
 5. 输入 Hadoop 用户帐户用户名和密码。默认用户名是 **admin**，密码是设置过程中输入的密码。此时将打开新浏览器标签。
 6. 单击该页顶部的“Hive 编辑器”。Hive 编辑器的外观如下：
 
-	![HDInsight 群集仪表板。][img-hdinsight-hbase-hive-editor]
+    ![HDInsight 群集仪表板。][img-hdinsight-hbase-hive-editor]
 
 **运行 Hive 查询**
 
 1. 在 Hive 编辑器中输入以下 HiveQL 脚本，然后单击“提交”，以创建映射到 HBase 表的 Hive 表。确保已创建本教程中前面引用的示例表，方法是在运行此语句前使用 HBase Shell。
 
-		CREATE EXTERNAL TABLE hbasecontacts(rowkey STRING, name STRING, homephone STRING, officephone STRING, officeaddress STRING)
-		STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
-		WITH SERDEPROPERTIES ('hbase.columns.mapping' = ':key,Personal:Name,Personal:Phone,Office:Phone,Office:Address')
-		TBLPROPERTIES ('hbase.table.name' = 'Contacts');
+        CREATE EXTERNAL TABLE hbasecontacts(rowkey STRING, name STRING, homephone STRING, officephone STRING, officeaddress STRING)
+        STORED BY 'org.apache.hadoop.hive.hbase.HBaseStorageHandler'
+        WITH SERDEPROPERTIES ('hbase.columns.mapping' = ':key,Personal:Name,Personal:Phone,Office:Phone,Office:Address')
+        TBLPROPERTIES ('hbase.table.name' = 'Contacts');
 
-	等到“状态”更新为“已完成”。
+    等到“状态”更新为“已完成”。
 
 2. 在 Hive 编辑器中输入以下 HiveQL 脚本，然后单击“提交”。Hive 查询会在 HBase 表中查询数据：
 
-     	SELECT count(*) FROM hbasecontacts;
+         SELECT count(*) FROM hbasecontacts;
 
 4. 若要检索 Hive 查询的结果，请在作业完成运行时，单击“作业会话”窗口中的“查看详细信息”链接。由于你将一条记录放置在 HBase 表中，因此将只有一个作业输出文件。
 
@@ -192,7 +192,7 @@ HDInsight 中的 HBase 随附了一个 Web UI 用于监视群集。使用该 Web
 6. 单击具有与运行 SELECT Hive 查询的时间匹配的“上次修改时间”的作业名称。
 4. 单击“stdout”。保存文件，并使用记事本打开该文件。此时将有一个输出文件。
 
-	![HDInsight HBase Hive 编辑器文件浏览器][img-hdinsight-hbase-file-browser]
+    ![HDInsight HBase Hive 编辑器文件浏览器][img-hdinsight-hbase-file-browser]
 
 ## 使用.NET HBase REST API 客户端库
 
@@ -202,12 +202,12 @@ HDInsight 中的 HBase 随附了一个 Web UI 用于监视群集。使用该 Web
 2. 打开 NuGet 包管理器控制台，方法是单击“工具”菜单 >“NuGet Package Manager”>“Package Manager Console”。
 3. 在控制台中运行以下 NuGet 命令：
 
-		Install-Package Microsoft.HBase.Client
+        Install-Package Microsoft.HBase.Client
 
 5. 在文件的顶部添加以下 **using** 语句：
 
-		using Microsoft.HBase.Client;
-		using org.apache.hadoop.hbase.rest.protobuf.generated;
+        using Microsoft.HBase.Client;
+        using org.apache.hadoop.hbase.rest.protobuf.generated;
 
 6. 将 **Main** 函数替换为以下内容：
 
@@ -250,25 +250,25 @@ HDInsight 中的 HBase 随附了一个 Web UI 用于监视群集。使用该 Web
             Console.WriteLine("The data with the key '" + testKey + "' is: " + Encoding.UTF8.GetString(cellSet.rows[0].values[0].data));
             // with the previous insert, it should yield: "the force is strong in this column"
 
-		    //Scan over rows in a table. Assume the table has integer keys and you want data between keys 25 and 35.
-		    Scanner scanSettings = new Scanner()
-		    {
-    		    batch = 10,
-    		    startRow = BitConverter.GetBytes(25),
-    		    endRow = BitConverter.GetBytes(35)
-		    };
+            //Scan over rows in a table. Assume the table has integer keys and you want data between keys 25 and 35.
+            Scanner scanSettings = new Scanner()
+            {
+                batch = 10,
+                startRow = BitConverter.GetBytes(25),
+                endRow = BitConverter.GetBytes(35)
+            };
 
-		    ScannerInformation scannerInfo = hbaseClient.CreateScanner(hbaseTableName, scanSettings);
-		    CellSet next = null;
+            ScannerInformation scannerInfo = hbaseClient.CreateScanner(hbaseTableName, scanSettings);
+            CellSet next = null;
             Console.WriteLine("Scan results");
 
             while ((next = hbaseClient.ScannerGetNext(scannerInfo)) != null)
-		    {
-    		    foreach (CellSet.Row row in next.rows)
-    		    {
+            {
+                foreach (CellSet.Row row in next.rows)
+                {
                     Console.WriteLine(row.key + " : " + Encoding.UTF8.GetString(row.values[0].data));
-    		    }
-		    }
+                }
+            }
 
             Console.WriteLine("Press ENTER to continue ...");
             Console.ReadLine();

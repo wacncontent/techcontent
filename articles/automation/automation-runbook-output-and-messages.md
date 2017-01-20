@@ -38,9 +38,9 @@ ms.author: magoedte;bwren
 
 可以通过使用 [Write-Output](http://technet.microsoft.com/zh-cn/library/hh849921.aspx)，或者在 Runbook 中将对象放置在其对应行中，来向输出流写入数据。
 
-	#The following lines both write an object to the output stream.
-	Write-Output -InputObject $object
-	$object
+    #The following lines both write an object to the output stream.
+    Write-Output -InputObject $object
+    $object
 
 ### 函数的输出
 
@@ -48,8 +48,8 @@ ms.author: magoedte;bwren
 
 请考虑以下示例 Runbook。
 
-	Workflow Test-Runbook
-	{
+    Workflow Test-Runbook
+    {
         Write-Verbose "Verbose outside of function" -Verbose
         Write-Output "Output outside of function"
         $functionOutput = Test-Function
@@ -64,13 +64,13 @@ ms.author: magoedte;bwren
 
 Runbook 作业的输出流将是：
 
-	Output inside of function
+    Output inside of function
     Output outside of function
 
 Runbook 作业的详细流将是：
 
-	Verbose outside of function
-	Verbose inside of function
+    Verbose outside of function
+    Verbose inside of function
 
 发布 Runbook 后，在启动它之前，还必须在Runbook 设置中打开详细日志记录，以获取详细流输出。
 
@@ -87,13 +87,13 @@ Runbook 作业的详细流将是：
 
 以下示例 Runbook 将输出一个字符串对象，并包含其输出类型的声明。如果 Runbook 输出了特定类型的数组，则你仍应该指定相对于该类型数组的类型。
 
-	Workflow Test-Runbook
-	{
-	   [OutputType([string])]
+    Workflow Test-Runbook
+    {
+       [OutputType([string])]
 
-	   $output = "This is some string output."
-	   Write-Output $output
-	}
+       $output = "This is some string output."
+       Write-Output $output
+    }
 
 ## <a id="message-streams" name="Message"></a> 消息流
 
@@ -105,11 +105,11 @@ Runbook 作业的详细流将是：
 
 使用 [Write-Warning](https://technet.microsoft.com/zh-cn/library/hh849931.aspx) 或 [Write-Error](http://technet.microsoft.com/zh-cn/library/hh849962.aspx) cmdlet 创建警告或错误消息。活动可能也会向这些流写入数据。
 
-	#The following lines create a warning message and then an error message that will suspend the runbook.
+    #The following lines create a warning message and then an error message that will suspend the runbook.
 
-	$ErrorActionPreference = "Stop"
-	Write-Warning -Message "This is a warning message."
-	Write-Error -Message "This is an error message that will stop the runbook because of the preference variable."
+    $ErrorActionPreference = "Stop"
+    Write-Warning -Message "This is a warning message."
+    Write-Error -Message "This is an error message that will stop the runbook because of the preference variable."
 
 ### <a id="verbose-streams" name="Verbose"></a> 详细流
 
@@ -119,9 +119,9 @@ Runbook 作业的详细流将是：
 
 使用 [Write-Verbose](http://technet.microsoft.com/zh-cn/library/hh849951.aspx) cmdlet 创建详细消息。
 
-	#The following line creates a verbose message.
+    #The following line creates a verbose message.
 
-	Write-Verbose -Message "This is a verbose message."
+    Write-Verbose -Message "This is a verbose message."
 
 ### <a id="debug-streams" name="Debug"></a> 调试流
 
@@ -165,16 +165,16 @@ Windows PowerShell 使用 [preference 变量](http://technet.microsoft.com/zh-cn
 
 以下示例将启动一个示例 Runbook，然后等待该 Runbook 完成。完成后，将从作业收集该 Runbook 的输出流。
 
-	$job = Start-AzureAutomationRunbook –AutomationAccountName "MyAutomationAccount" –Name "Test-Runbook" 
+    $job = Start-AzureAutomationRunbook –AutomationAccountName "MyAutomationAccount" –Name "Test-Runbook" 
 
-	$doLoop = $true
-	While ($doLoop) {
-	   $job = Get-AzureAutomationJob –AutomationAccountName "MyAutomationAccount" -Id $job.Id
-	   $status = $job.Status
-	   $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped")
-	}
-	
-	Get-AzureAutomationJobOutput –AutomationAccountName "MyAutomationAccount" -Id $job.Id –Stream Output
+    $doLoop = $true
+    While ($doLoop) {
+       $job = Get-AzureAutomationJob –AutomationAccountName "MyAutomationAccount" -Id $job.Id
+       $status = $job.Status
+       $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped")
+    }
+    
+    Get-AzureAutomationJobOutput –AutomationAccountName "MyAutomationAccount" -Id $job.Id –Stream Output
 
 ## 后续步骤
 

@@ -146,7 +146,7 @@ ms.author: renash
 ### 恢复已中断的复制会话
  如果复制会话因任何原因导致中断，可通过在仅指定日记文件的情况下运行该工具来恢复会话：
 
-	WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> /ResumeSession
+    WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> /ResumeSession
 
  只能恢复最近异常终止的复制会话。
 
@@ -155,7 +155,7 @@ ms.author: renash
 ### 中止已中断的复制会话
  如果复制会话已中断且无法恢复（例如，如果源目录被证实不可访问），则必须中止当前会话，以便可将其回滚并启动新的复制会话：
 
-	WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> /AbortSession
+    WAImportExport.exe PrepImport /j:<JournalFile> /id:<SessionId> /AbortSession
 
  如果异常终止，则只能中止最后的复制会话。请注意，无法中止驱动器的第一个复制会话。在此情况下，必须重新启动包含新日记文件的复制会话。
 

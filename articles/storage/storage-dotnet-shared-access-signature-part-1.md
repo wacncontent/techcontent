@@ -102,7 +102,7 @@ Azure 存储空间的版本 2015-04-05 引入了一种新的共享访问签名�
 ## SAS URI 的示例
 下面是服务 SAS URI 的一个示例，它提供对某一 Blob 的读写权限。该表分解了 URI 的每个部分，以便理解它是如何影响 SAS 的：
 
-	https://myaccount.blob.core.chinacloudapi.cn/sascontainer/sasblob.txt?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D
+    https://myaccount.blob.core.chinacloudapi.cn/sascontainer/sasblob.txt?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D
 
 名称|SAS 部分|说明
 ---|---|---
@@ -118,7 +118,7 @@ IP 范围|sip=168.1.5.60-168.1.5.70|将从中接受请求的 IP 地址范围。
 
 下面是在令牌中使用相同的公用参数的帐户 SAS 的一个示例。由于这些参数已在前面说明，因此不在此处对其进行说明。下表中仅说明了特定于帐户 SAS 的参数。
 
-	https://myaccount.blob.core.chinacloudapi.cn/?restype=service&comp=properties&sv=2015-04-05&ss=bf&srt=s&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=F%6GRVAZ5Cdj2Pw4tgU7IlSTkWgn7bUkkAg8P6HESXwmf%4B
+    https://myaccount.blob.core.chinacloudapi.cn/?restype=service&comp=properties&sv=2015-04-05&ss=bf&srt=s&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=F%6GRVAZ5Cdj2Pw4tgU7IlSTkWgn7bUkkAg8P6HESXwmf%4B
 
 名称|SAS 部分|说明
 ---|---|---
@@ -158,41 +158,41 @@ IP 范围|sip=168.1.5.60-168.1.5.70|将从中接受请求的 IP 地址范围。
 
 例如，此处使用 SAS URI 创建对块 blob 的引用。SAS 提供请求所需的唯一凭据。之后将块 blob 引用用于写入操作：
 
-	string sasUri = "https://storagesample.blob.core.chinacloudapi.cn/sample-container/" +
-	    "sampleBlob.txt?sv=2015-07-08&sr=b&sig=39Up9JzHkxhUIhFEjEH9594DJxe7w6cIRCg0V6lCGSo%3D" +
-	    "&se=2016-10-18T21%3A51%3A37Z&sp=rcw";
+    string sasUri = "https://storagesample.blob.core.chinacloudapi.cn/sample-container/" +
+        "sampleBlob.txt?sv=2015-07-08&sr=b&sig=39Up9JzHkxhUIhFEjEH9594DJxe7w6cIRCg0V6lCGSo%3D" +
+        "&se=2016-10-18T21%3A51%3A37Z&sp=rcw";
 
-	CloudBlockBlob blob = new CloudBlockBlob(new Uri(sasUri));
+    CloudBlockBlob blob = new CloudBlockBlob(new Uri(sasUri));
 
-	// Create operation: Upload a blob with the specified name to the container.
-	// If the blob does not exist, it will be created. If it does exist, it will be overwritten.
-	try
-	{
-	    MemoryStream msWrite = new MemoryStream(Encoding.UTF8.GetBytes(blobContent));
-	    msWrite.Position = 0;
-	    using (msWrite)
-	    {
-	        await blob.UploadFromStreamAsync(msWrite);
-	    }
+    // Create operation: Upload a blob with the specified name to the container.
+    // If the blob does not exist, it will be created. If it does exist, it will be overwritten.
+    try
+    {
+        MemoryStream msWrite = new MemoryStream(Encoding.UTF8.GetBytes(blobContent));
+        msWrite.Position = 0;
+        using (msWrite)
+        {
+            await blob.UploadFromStreamAsync(msWrite);
+        }
 
-	    Console.WriteLine("Create operation succeeded for SAS {0}", sasUri);
-	    Console.WriteLine();
-	}
-	catch (StorageException e)
-	{
-	    if (e.RequestInformation.HttpStatusCode == 403)
-	    {
-	        Console.WriteLine("Create operation failed for SAS {0}", sasUri);
-	        Console.WriteLine("Additional error information: " + e.Message);
-	        Console.WriteLine();
-	    }
-	    else
-	    {
-	        Console.WriteLine(e.Message);
-	        Console.ReadLine();
-	        throw;
-	    }
-	}
+        Console.WriteLine("Create operation succeeded for SAS {0}", sasUri);
+        Console.WriteLine();
+    }
+    catch (StorageException e)
+    {
+        if (e.RequestInformation.HttpStatusCode == 403)
+        {
+            Console.WriteLine("Create operation failed for SAS {0}", sasUri);
+            Console.WriteLine("Additional error information: " + e.Message);
+            Console.WriteLine();
+        }
+        else
+        {
+            Console.WriteLine(e.Message);
+            Console.ReadLine();
+            throw;
+        }
+    }
 
 ## 使用 SAS 的最佳做法
 当你在应用程序中使用共享访问签名时，需要知道以下两个可能的风险：
@@ -227,8 +227,8 @@ IP 范围|sip=168.1.5.60-168.1.5.70|将从中接受请求的 IP 地址范围。
     static string GetAccountSASToken()
     {
         // To create the account SAS, you need to use your shared key credentials. Modify for your account.
-	    const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
-	    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
+        const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
+        CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
 
         // Create a new access policy for the account.
         SharedAccessAccountPolicy policy = new SharedAccessAccountPolicy()

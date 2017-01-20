@@ -33,7 +33,7 @@ v2.0 终结点可让你快速地将身份验证添加桌面应用，同时支持
 
 本教程的代码[在 GitHub 上](https://github.com/AzureADQuickStarts/AppModelv2-NativeClient-DotNet)维护。若要遵照该代码，你可以[下载 .zip 格式应用骨架](https://github.com/AzureADQuickStarts/AppModelv2-NativeClient-DotNet/archive/skeleton.zip)，或克隆该骨架：
 
-	git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-NativeClient-DotNet.git
+    git clone --branch skeleton https://github.com/AzureADQuickStarts/AppModelv2-NativeClient-DotNet.git
 
 本教程末尾也提供完成的应用。
 
@@ -48,7 +48,7 @@ v2.0 终结点可让你快速地将身份验证添加桌面应用，同时支持
 
 -	首先，使用包管理器控制台将 MSAL 添加到 TodoListClient 项目。
 
-	PM> Install-Package Microsoft.Identity.Client -ProjectName TodoListClient -IncludePrerelease
+    PM> Install-Package Microsoft.Identity.Client -ProjectName TodoListClient -IncludePrerelease
 
 -	在 TodoListClient 项目中打开 `app.config`。替换 `<appSettings>` 节中的元素值，以反映在应用注册门户中输入的值。只要使用 MSAL，代码就会引用这些值。
     -	`ida:ClientId` 是从门户复制的应用的**应用程序 ID**。
@@ -63,172 +63,172 @@ MSAL 遵守的基本原理是，每当应用需要访问令牌时，只需调用
 
 C#
 
-	protected override async void OnInitialized(EventArgs e)
-	{
-		base.OnInitialized(e);
-	
-		app = new PublicClientApplication(new FileCache());
-		AuthenticationResult result = null;
-		...
-	}
+    protected override async void OnInitialized(EventArgs e)
+    {
+        base.OnInitialized(e);
+    
+        app = new PublicClientApplication(new FileCache());
+        AuthenticationResult result = null;
+        ...
+    }
 
 - 当应用程序启动时，我们希望检查并查看用户是否已登录应用。但是，我们不想在此时调用登录 UI，而是让用户单击“登录”才执行此操作。另外，在 `OnInitialized(...)` 方法中：
 
 C#
 
-	// As the app starts, we want to check to see if the user is already signed in.
-	// You can do so by trying to get a token from MSAL, using the method
-	// AcquireTokenSilent.  This forces MSAL to throw an exception if it cannot
-	// get a token for the user without showing a UI.
-	
-	try
-	{
-		result = await app.AcquireTokenSilentAsync(new string[] { clientId });
-	
-		// If we got here, a valid token is in the cache - or MSAL was able to get a new oen via refresh token.
-		// Proceed to fetch the user's tasks from the TodoListService via the GetTodoList() method.
-	
-		SignInButton.Content = "Clear Cache";
-		GetTodoList();
-	}
-	catch (MsalException ex)
-	{
-		if (ex.ErrorCode == "user_interaction_required")
-		{
-			// If user interaction is required, the app should take no action,
-			// and simply show the user the sign in button.
-		}
-		else
-		{
-			// Here, we catch all other MsalExceptions
-	
-			string message = ex.Message;
-			if (ex.InnerException != null)
-			{
-				message += "Inner Exception : " + ex.InnerException.Message;
-			}
-			MessageBox.Show(message);
-		}
-	}
+    // As the app starts, we want to check to see if the user is already signed in.
+    // You can do so by trying to get a token from MSAL, using the method
+    // AcquireTokenSilent.  This forces MSAL to throw an exception if it cannot
+    // get a token for the user without showing a UI.
+    
+    try
+    {
+        result = await app.AcquireTokenSilentAsync(new string[] { clientId });
+    
+        // If we got here, a valid token is in the cache - or MSAL was able to get a new oen via refresh token.
+        // Proceed to fetch the user's tasks from the TodoListService via the GetTodoList() method.
+    
+        SignInButton.Content = "Clear Cache";
+        GetTodoList();
+    }
+    catch (MsalException ex)
+    {
+        if (ex.ErrorCode == "user_interaction_required")
+        {
+            // If user interaction is required, the app should take no action,
+            // and simply show the user the sign in button.
+        }
+        else
+        {
+            // Here, we catch all other MsalExceptions
+    
+            string message = ex.Message;
+            if (ex.InnerException != null)
+            {
+                message += "Inner Exception : " + ex.InnerException.Message;
+            }
+            MessageBox.Show(message);
+        }
+    }
 
 - 如果用户未登录而按下“登录”按钮，我们希望调用登录 UI 并让用户输入其凭据。实现“登录”按钮处理程序：
 
 C#
 
-	private async void SignIn(object sender = null, RoutedEventArgs args = null)
-	{
-		// TODO: Sign the user out if they clicked the "Clear Cache" button
-	
-		// If the user clicked the 'Sign-In' button, force
-		// MSAL to prompt the user for credentials by using
-		// AcquireTokenAsync, a method that is guaranteed to show a prompt to the user.
-		// MSAL will get a token for the TodoListService and cache it for you.
+    private async void SignIn(object sender = null, RoutedEventArgs args = null)
+    {
+        // TODO: Sign the user out if they clicked the "Clear Cache" button
+    
+        // If the user clicked the 'Sign-In' button, force
+        // MSAL to prompt the user for credentials by using
+        // AcquireTokenAsync, a method that is guaranteed to show a prompt to the user.
+        // MSAL will get a token for the TodoListService and cache it for you.
 
-		AuthenticationResult result = null;
-		try
-		{
-			result = await app.AcquireTokenAsync(new string[] { clientId });
-			SignInButton.Content = "Clear Cache";
-			GetTodoList();
-		}
-		catch (MsalException ex)
-		{
-			// If MSAl cannot get a token, it will throw an exception.
-			// If the user canceled the login, it will result in the
-			// error code 'authentication_canceled'.
-	
-			if (ex.ErrorCode == "authentication_canceled")
-			{
-				MessageBox.Show("Sign in was canceled by the user");
-			}
-			else
-			{
-				// An unexpected error occurred.
-				string message = ex.Message;
-				if (ex.InnerException != null)
-				{
-					message += "Inner Exception : " + ex.InnerException.Message;
-				}
-	
-				MessageBox.Show(message);
-			}
-	
-			return;
-		}
-	
-	}
+        AuthenticationResult result = null;
+        try
+        {
+            result = await app.AcquireTokenAsync(new string[] { clientId });
+            SignInButton.Content = "Clear Cache";
+            GetTodoList();
+        }
+        catch (MsalException ex)
+        {
+            // If MSAl cannot get a token, it will throw an exception.
+            // If the user canceled the login, it will result in the
+            // error code 'authentication_canceled'.
+    
+            if (ex.ErrorCode == "authentication_canceled")
+            {
+                MessageBox.Show("Sign in was canceled by the user");
+            }
+            else
+            {
+                // An unexpected error occurred.
+                string message = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    message += "Inner Exception : " + ex.InnerException.Message;
+                }
+    
+                MessageBox.Show(message);
+            }
+    
+            return;
+        }
+    
+    }
 
 - 如果用户成功登录，MSAL 将为你接收和缓存令牌，让你可以放心地继续调用 `GetTodoList()` 方法。获取用户任务的剩余步骤是实现 `GetTodoList()` 方法。
 
 C#
 
-	private async void GetTodoList()
-	{
-		AuthenticationResult result = null;
-		try
-		{
-			// Here, we try to get an access token to call the TodoListService
-			// without invoking any UI prompt.  AcquireTokenSilentAsync forces
-			// MSAL to throw an exception if it cannot get a token silently.
-	
-			result = await app.AcquireTokenSilentAsync(new string[] { clientId });
+    private async void GetTodoList()
+    {
+        AuthenticationResult result = null;
+        try
+        {
+            // Here, we try to get an access token to call the TodoListService
+            // without invoking any UI prompt.  AcquireTokenSilentAsync forces
+            // MSAL to throw an exception if it cannot get a token silently.
+    
+            result = await app.AcquireTokenSilentAsync(new string[] { clientId });
 
-		}
-		catch (MsalException ex)
-		{
-			// MSAL couldn't get a token silently, so show the user a message
-			// and let them click the Sign-In button.
-	
-			if (ex.ErrorCode == "user_interaction_required")
-			{
-				MessageBox.Show("Please sign in first");
-				SignInButton.Content = "Sign In";
-			}
-			else
-			{
-				// In any other case, an unexpected error occurred.
-	
-				string message = ex.Message;
-				if (ex.InnerException != null)
-				{
-					message += "Inner Exception : " + ex.InnerException.Message;
-				}
-				MessageBox.Show(message);
-			}
-	
-			return;
-			}
-	
-			// Once the token has been returned by MSAL,
-	    // add it to the http authorization header,
-	    // before making the call to access the To Do list service.
-	
-	    httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.Token);
-	
-			...
-	...
+        }
+        catch (MsalException ex)
+        {
+            // MSAL couldn't get a token silently, so show the user a message
+            // and let them click the Sign-In button.
+    
+            if (ex.ErrorCode == "user_interaction_required")
+            {
+                MessageBox.Show("Please sign in first");
+                SignInButton.Content = "Sign In";
+            }
+            else
+            {
+                // In any other case, an unexpected error occurred.
+    
+                string message = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    message += "Inner Exception : " + ex.InnerException.Message;
+                }
+                MessageBox.Show(message);
+            }
+    
+            return;
+            }
+    
+            // Once the token has been returned by MSAL,
+        // add it to the http authorization header,
+        // before making the call to access the To Do list service.
+    
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.Token);
+    
+            ...
+    ...
 
 - 用户完成对待办事项列表的管理后，可单击“清除缓存”按钮，从应用注销。
 
 C#
 
-	private async void SignIn(object sender = null, RoutedEventArgs args = null)
-	{
-		// If the user clicked the 'clear cache' button,
-		// clear the MSAL token cache and show the user as signed out.
-		// It's also necessary to clear the cookies from the browser
-		// control so the next user has a chance to sign in.
-		
-		if (SignInButton.Content.ToString() == "Clear Cache")
-		{
-			TodoList.ItemsSource = string.Empty;
-			app.UserTokenCache.Clear(app.ClientId);
-			ClearCookies();
-			SignInButton.Content = "Sign In";
-			return;
-		}
-		
-		...
+    private async void SignIn(object sender = null, RoutedEventArgs args = null)
+    {
+        // If the user clicked the 'clear cache' button,
+        // clear the MSAL token cache and show the user as signed out.
+        // It's also necessary to clear the cookies from the browser
+        // control so the next user has a chance to sign in.
+        
+        if (SignInButton.Content.ToString() == "Clear Cache")
+        {
+            TodoList.ItemsSource = string.Empty;
+            app.UserTokenCache.Clear(app.ClientId);
+            ClearCookies();
+            SignInButton.Content = "Sign In";
+            return;
+        }
+        
+        ...
 
 ## 运行
 
@@ -238,7 +238,7 @@ C#
 
 [此处以 .zip 格式提供了](https://github.com/AzureADQuickStarts/AppModelv2-NativeClient-DotNet/archive/complete.zip)完整示例（不包括配置值），你也可以从 GitHub 克隆该示例：
 
-	git clone --branch complete https://github.com/AzureADQuickStarts/AppModelv2-NativeClient-DotNet.git
+    git clone --branch complete https://github.com/AzureADQuickStarts/AppModelv2-NativeClient-DotNet.git
 
 ## 后续步骤
 

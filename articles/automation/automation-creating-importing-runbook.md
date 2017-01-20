@@ -88,9 +88,9 @@ ms.author: magoedte;bwren
 
 可以使用 Windows PowerShell，通过 [Publish-AzureAutomationRunbook](https://msdn.microsoft.com/zh-cn/library/dn690266.aspx) cmdlet 来发布 Runbook。以下示例命令显示了如何发布示例 Runbook。
 
-	$automationAccountName = "AutomationAccount"
-	$runbookName = "Sample_TestRunbook"
-	
+    $automationAccountName = "AutomationAccount"
+    $runbookName = "Sample_TestRunbook"
+    
     Publish-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
 
 ## 后续步骤

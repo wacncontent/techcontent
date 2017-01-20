@@ -24,8 +24,8 @@ Blob 服务包含以下组件：
     
     *块 Blob*特别适用于存储短的文本或二进制文件，例如文档和媒体文件。*追加 Blob* 类似于块 Blob，因为它们是由块组成的，但针对追加操作对它们进行了优化，因此它们适用于日志记录方案。单个块 Blob 或追加 Blob 可以包含最多 50000 个块，每个块最大 4 MB，总大小稍微大于 195 GB (4 MB X 50000)。
     
-	*页 Blob* 最大可达 1 TB 大小，并且对于频繁的读/写操作更加高效。Azure 虚拟机使用页 Blob 作为 OS 和数据磁盘。
+    *页 Blob* 最大可达 1 TB 大小，并且对于频繁的读/写操作更加高效。Azure 虚拟机使用页 Blob 作为 OS 和数据磁盘。
 
-	有关命名容器和 Blob 的详细信息，请参阅[命名和引用容器、Blob 和元数据](https://msdn.microsoft.com/zh-cn/library/azure/dd135715.aspx)。
+    有关命名容器和 Blob 的详细信息，请参阅[命名和引用容器、Blob 和元数据](https://msdn.microsoft.com/zh-cn/library/azure/dd135715.aspx)。
 
 <!---HONumber=Mooncake_1226_2016-->

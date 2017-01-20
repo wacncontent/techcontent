@@ -35,7 +35,7 @@ ms.author: SilviaDoomra
 
 若要创建计数器，请调用 [ShardMapManagmentFactory 类](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.aspx)的 CreatePeformanceCategoryAndCounters 方法。只有管理员才能执行该方法：
 
-	ShardMapManagerFactory.CreatePerformanceCategoryAndCounters()  
+    ShardMapManagerFactory.CreatePerformanceCategoryAndCounters()  
 
 也可以使用[此](https://gallery.technet.microsoft.com/scriptcenter/Elastic-DB-Tools-for-Azure-17e3d283) PowerShell 脚本来执行该方法。该方法将创建以下性能计数器：
 

@@ -83,8 +83,8 @@ ms.author: larryfr
 
     * **CREATE EXTERNAL TABLE** - 在 Hive 中创建新“外部”表。外部表仅在 Hive 中存储表定义。数据将保留在原始位置。
 
-		> [!NOTE] 如果希望以外部源更新基础数据（例如自动化数据上载过程），或以其他 MapReduce 操作更新基础数据，但希望 Hive 查询始终使用最新数据时，必须使用外部表。
-		> <p>删除外部表**不会**删除数据，只会删除表定义。
+        > [!NOTE] 如果希望以外部源更新基础数据（例如自动化数据上载过程），或以其他 MapReduce 操作更新基础数据，但希望 Hive 查询始终使用最新数据时，必须使用外部表。
+        > <p>删除外部表**不会**删除数据，只会删除表定义。
 
     * **ROW FORMAT** - 告知 Hive 如何设置数据的格式。在此情况下，每个日志中的字段以空格分隔。
 
@@ -106,7 +106,7 @@ ms.author: larryfr
 
         curl -G -u USERNAME:PASSWORD -d user.name=USERNAME https://CLUSTERNAME.azurehdinsight.cn/templeton/v1/jobs/JOBID | jq .status.state
 
-	如果作业已完成，状态将是 **SUCCEEDED**。
+    如果作业已完成，状态将是 **SUCCEEDED**。
 
     > [!NOTE] 此 Curl 请求返回具有作业相关信息的 JavaScript 对象表示法 (JSON) 文档；使用 jq 可以仅检索状态值。
 
@@ -114,13 +114,13 @@ ms.author: larryfr
 
     可以使用 [Azure CLI](../xplat-cli-install.md) 列出并下载这些文件。例如，要列出 **example/curl** 中的文件，请使用以下命令：
 
-		azure storage blob list <container-name> example/curl
+        azure storage blob list <container-name> example/curl
 
-	要下载文件，请使用以下命令：
+    要下载文件，请使用以下命令：
 
-		azure storage blob download <container-name> <blob-name> <destination-file>
+        azure storage blob download <container-name> <blob-name> <destination-file>
 
-	> [!NOTE] 必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。请参阅 <a href="./hdinsight-upload-data.md" target="\_blank" 了解详细信息。
+    > [!NOTE] 必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。请参阅 <a href="./hdinsight-upload-data.md" target="\_blank" 了解详细信息。
 
 6. 使用以下语句创建名为 **errorLogs** 的新“内部”表：
 
@@ -130,7 +130,7 @@ ms.author: larryfr
 
     * **CREATE TABLE IF NOT EXISTS** - 创建表（如果该表不存在）。由于未使用 **EXTERNAL** 关键字，因此这是一个“内部”表，它存储在 Hive 数据仓库中并完全由 Hive 管理。
 
-		> [!NOTE] 与外部表不同，删除内部表会同时删除基础数据。
+        > [!NOTE] 与外部表不同，删除内部表会同时删除基础数据。
 
     * **STORED AS ORC** - 以优化行纵栏表 (ORC) 格式存储数据。这是高度优化且有效的 Hive 数据存储格式。
     * **INSERT OVERWRITE ...SELECT** - 从包含 **[ERROR]** 的 **log4jLogs** 表中选择行，然后将数据插入 **errorLogs** 表中。

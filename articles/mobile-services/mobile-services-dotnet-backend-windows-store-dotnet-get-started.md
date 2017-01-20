@@ -49,15 +49,15 @@ ms.author: glenga
 
 2.  在快速入门选项卡中，单击“选择平台”下的“Windows”，然后展开“创建新的 Windows 应用商店应用程序” 。
 
-   	此时将显示三个简单步骤，描述如何创建与移动服务连接的 Windows 应用商店应用程序。
+       此时将显示三个简单步骤，描述如何创建与移动服务连接的 Windows 应用商店应用程序。
 
-  	![移动服务快速入门步骤](./media/mobile-services-dotnet-backend-windows-store-dotnet-get-started/mobile-quickstart-steps.png)
+      ![移动服务快速入门步骤](./media/mobile-services-dotnet-backend-windows-store-dotnet-get-started/mobile-quickstart-steps.png)
 
 3. 在本地计算机或虚拟机上下载并安装 [Visual Studio 2013]（如果尚未这么做）。
 
 4.  在“下载并在本地运行应用程序和服务”下面，选择 Windows 应用商店应用程序的语言，然后单击“下载” 。
 
-  	随即将会下载一个解决方案，其中包含移动服务的项目，以及已连接到移动服务的示例_待办事项列表_应用程序的项目。将压缩的项目文件保存到本地计算机，并记下保存位置。
+      随即将会下载一个解决方案，其中包含移动服务的项目，以及已连接到移动服务的示例_待办事项列表_应用程序的项目。将压缩的项目文件保存到本地计算机，并记下保存位置。
 
 ## 针对本地移动服务测试应用程序
 
@@ -76,7 +76,7 @@ ms.author: glenga
             "https://todolist.azure-mobile.net/",
             "XXXX-APPLICATION-KEY-XXXXX");</code></pre>
 
-	<p>现在，客户端将会访问已发布到 Azure 的移动服务。</p></li>
+    <p>现在，客户端将会访问已发布到 Azure 的移动服务。</p></li>
 </ol>
 
 ## 针对 Azure 中托管的移动服务测试应用程序

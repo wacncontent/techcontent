@@ -339,11 +339,11 @@ Azure Active Directory 应用程序已创建且安装了身份验证库。现可
 
 2.	在显示“已接受”状态后按 **Enter**。
 
-	完整运行该控制台应用程序大约需要 5 分钟。在按 Enter 开始删除资源之前，你可能需要在 Azure 门户预览中花费几分钟时间来验证资源的创建。
+    完整运行该控制台应用程序大约需要 5 分钟。在按 Enter 开始删除资源之前，你可能需要在 Azure 门户预览中花费几分钟时间来验证资源的创建。
 
 3. 若要查看资源的状态，请在 Azure 门户预览中浏览到“审核日志”：
 
-	![在 Azure 门户预览中浏览审核日志](./media/virtual-machines-windows-csharp-template/crpportal.png)  
+    ![在 Azure 门户预览中浏览审核日志](./media/virtual-machines-windows-csharp-template/crpportal.png)  
 
 ## 后续步骤
 

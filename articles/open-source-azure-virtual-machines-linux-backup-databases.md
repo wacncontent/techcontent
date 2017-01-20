@@ -40,34 +40,34 @@ Mysqldump 要求对备份的表至少有查询的权限，如果--single-transac
 
 1.通常有三种使用 mysqldump 的方式—备份一组表；备份一组数据库；备份整个数据库服务器—正如下面所示：
 
-	shell> mysqldump [options] db_name [tbl_name ...]  
-	shell> mysqldump [options] --databases db_name ...  
-	shell> mysqldump [options] --all-databases  
+    shell> mysqldump [options] db_name [tbl_name ...]  
+    shell> mysqldump [options] --databases db_name ...  
+    shell> mysqldump [options] --all-databases  
 
 比如有一个数据库叫做 shop, 它下面有一个表名叫 price, 下面的命令即把 price 表备份到 /tmp/price.sql  
 
-	$mysqldump –uroot –ppassword shop price > /tmp/price.sql
+    $mysqldump –uroot –ppassword shop price > /tmp/price.sql
 
 2.**mysqldump** 非常适合‘复制’数据库：即把数据从一台数据库服务器拷贝到另一台数据库服务器（必须确保能连接到远端的数据库服务器 ）  
 
-	$mysqldump -uroot –ppassword --opt shop |mysql -uroot –ppassword --host=remote_mysqlserver -C shop  
+    $mysqldump -uroot –ppassword --opt shop |mysql -uroot –ppassword --host=remote_mysqlserver -C shop  
 
 上面的命令把本地的 shop 数据库数据拷贝到远端的 shop 数据库。当然前提是远端 MySQL 数据库服务器有一个叫做 shop 的数据库。
 
 3.对于 InnoDB 表来说，**mysqldump** 能够提供在线备份：   
 
-	$mysqldump –uroot -ppassword --all-databases --master-data --single-transaction > all_databases.sql
+    $mysqldump –uroot -ppassword --all-databases --master-data --single-transaction > all_databases.sql
 
 4.刷新binary log  
 
-	$mysqldump –uroot –ppassword --all-databases --flush-logs --master-data=2 > all_databases.sql  
+    $mysqldump –uroot –ppassword --all-databases --flush-logs --master-data=2 > all_databases.sql  
 
 --master-data 和 --single-transaction 选项能同时使用，对使用 InnoDB 引擎的表来说。  
 --flush-logs 选项会在开始备份前，刷新 MySQL 服务器的日志文件。
 
 5.恢复数据。很简单：  
 
-	$mysql –uroot –ppassword  < /tmp/price.sql
+    $mysql –uroot –ppassword  < /tmp/price.sql
 
 6.更多关于 mysqldump 的细节，可执行 mysqldump --help 或者参考 [MySQL 官网文档](https://dev.mysql.com/doc/refman/5.5/en/mysqldump.html)。 
 
@@ -87,44 +87,44 @@ Azure 有提供虚拟网络的服务，可以让不同的虚拟机处于同一�
 
 2.连接到主服务器。编辑 /etc/my.cnf, 在 [mysqld] 下添加如下内容
 
-	server-id	= 1  
-	log_bin	= /var/lib/mysql/mysql-bin.log
+    server-id	= 1  
+    log_bin	= /var/lib/mysql/mysql-bin.log
 
 3.连接到从服务器. 编辑 /etc/my.cnf, 在 [mysqld] 下添加如下内容
 
-	server-id	= 2
-	log_bin	= /var/lib/mysql/mysql-bin.log
+    server-id	= 2
+    log_bin	= /var/lib/mysql/mysql-bin.log
 
 4.去到主服务器，启动 mysql 服务
 
-	$sudo service mysqld start
+    $sudo service mysqld start
 
 5.创建用于复制的用户。请根据实际情况，使用真实的从服务器 IP 地址，用户名，密码代替下面相应部分。 
 
-	$mysql -uroot -p<password>
-	grant replication slave on *.* to 'repluser'@'slave ip' identified by 'password';  
-	flush privileges;
-	exit
+    $mysql -uroot -p<password>
+    grant replication slave on *.* to 'repluser'@'slave ip' identified by 'password';  
+    flush privileges;
+    exit
 
 6.重启 mysql 服务并查看主服务器状态
 
-	$sudo service mysqld restart
-	$mysql -uroot -p<password>
-	show master status;
+    $sudo service mysqld restart
+    $mysql -uroot -p<password>
+    show master status;
 
 ‘show master status’ 命令返回结果类似下图，其中的 ’File’ 和 ’Position’ 信息我们稍后需要用到。  
 ![show master statu][1]
  
 7.去到从服务器，启动 mysql 服务  
 
-	$sudo service mysqld start
+    $sudo service mysqld start
 
 8.注意,下面部分请根据实际情况填写。 ’mysql master ip’ 是主服务器的IP地址，‘repluser’ 和 ’password’ 是在主服务器创建的用于复制的用户名和密码，’master log bin’ 和 ’pos’ 是在主服务器上 ’show master status’ 得到的 ’File’ 和 ’Position’.  
 
-	$ mysql -uroot -p<password>  
-	change master to master_host=’mysql master ip’, master_user=’repluser’, master_password=’password’, master_log_file=’master log bin’, master_log_pos=pos;
-	start slave;
-	show slave status\G  
+    $ mysql -uroot -p<password>  
+    change master to master_host=’mysql master ip’, master_user=’repluser’, master_password=’password’, master_log_file=’master log bin’, master_log_pos=pos;
+    start slave;
+    show slave status\G  
 
 show slave status\G 用来查看主从复制状态，得到结果如下图  
 ![主从复制状态][2]
@@ -133,17 +133,17 @@ show slave status\G 用来查看主从复制状态，得到结果如下图
 
 9.我们可以在主服务器上做一些更新操作，然后去到从服务器查看数据是否同步了。去到主服务器执行如下命令  
 
-	$ mysql -uroot -p<password>
-	create database shop;
-	use shop;
-	create table people (id int(10), name varchar(20));
-	insert into people values (1, ‘alex’);  
+    $ mysql -uroot -p<password>
+    create database shop;
+    use shop;
+    create table people (id int(10), name varchar(20));
+    insert into people values (1, ‘alex’);  
 
 去到从服务器查看是否有数据库名为 shop，表名为 people.  
 
-	$ mysql -uroot -p<password>
-	use shop;
-	select * from people;  
+    $ mysql -uroot -p<password>
+    use shop;
+    select * from people;  
 
 如果结果类似下图，表明主从复制正常。  
 
@@ -155,44 +155,44 @@ show slave status\G 用来查看主从复制状态，得到结果如下图
 
 然后在主从服务器上编辑/etc/mysql/my.cnf  
 
-	$sudo sed -i 's/^bind-address/#bind-address/' /etc/mysql/my.cnf
-	$sudo sed -i 's/^#server-id/server-id/' /etc/mysql/my.cnf
-	$sudo sed -i 's/#log_bin/log_bin/' /etc/mysql/my.cnf  
+    $sudo sed -i 's/^bind-address/#bind-address/' /etc/mysql/my.cnf
+    $sudo sed -i 's/^#server-id/server-id/' /etc/mysql/my.cnf
+    $sudo sed -i 's/#log_bin/log_bin/' /etc/mysql/my.cnf  
 
 2.在从服务器上编辑 /etc/mysql/my.cnf  
 
-	server-id	= 2  
+    server-id	= 2  
 
 3.去到主服务器，启动 mysql 服务  
 
-	$sudo service mysql start  
+    $sudo service mysql start  
 
 4.创建用于复制的用户。请根据实际情况，使用真实的从服务器 IP 地址，用户名，密码代替下面相应部分  
 
-	$mysql -uroot -p<password>
-	grant replication slave on *.* to 'repluser'@'slave ip' identified by 'password';  
-	flush privileges;
-	exit  
+    $mysql -uroot -p<password>
+    grant replication slave on *.* to 'repluser'@'slave ip' identified by 'password';  
+    flush privileges;
+    exit  
 
 5.重启 mysql 服务并查看主服务器状态  
 
-	$sudo service mysql restart
-	$mysql -uroot -p<password>
-	show master status;  
+    $sudo service mysql restart
+    $mysql -uroot -p<password>
+    show master status;  
 
 ‘show master status’ 命令返回结果类似下图，其中的 ’File’ 和 ’Position’ 信息我们稍后会用到  
 ![show master status][4]
  
 6.去到从服务器，启动 mysql 服务  
 
-	$sudo service mysql start  
+    $sudo service mysql start  
 
 7.注意下面部分请根据实际情况填写。’mysql master ip’ 是主服务器的IP地址，‘repluser’ 和 ’password’ 是在主服务器创建的用于复制的用户名和密码，’master log bin’ 和 ’pos’ 是在主服务器上 ’show master status’ 得到的 ’File’ 和 ’Position’  
 
-	$ mysql -uroot -p<password>
-	change master to master_host=’mysql master ip’, master_user=’repluser’, master_password=’password’, master_log_file=’master log bin’, master_log_pos=pos;
-	start slave;
-	show slave status\G  
+    $ mysql -uroot -p<password>
+    change master to master_host=’mysql master ip’, master_user=’repluser’, master_password=’password’, master_log_file=’master log bin’, master_log_pos=pos;
+    start slave;
+    show slave status\G  
 
 show slave status\G 用来查看主从复制状态，得到结果如下图  
 ![主从复制状态][5]
@@ -201,17 +201,17 @@ show slave status\G 用来查看主从复制状态，得到结果如下图
 
 8.我们可以在主服务器上做一些更新操作，然后去到从服务器查看数据是否同步了。去到主服务器执行如下命令  
 
-	$ mysql -uroot -p<password>
-	create database shop;
-	use shop;
-	create table people (id int(10), name varchar(20));
-	insert into people values (1, ‘alex’);  
+    $ mysql -uroot -p<password>
+    create database shop;
+    use shop;
+    create table people (id int(10), name varchar(20));
+    insert into people values (1, ‘alex’);  
 
 9.去到从服务器查看是否有数据库名为 shop，表名为 people  
 
-	$ mysql -uroot -p<password>
-	use shop;
-	select * from people;  
+    $ mysql -uroot -p<password>
+    use shop;
+    select * from people;  
 
 如果结果类似下图，表明主从复制正常. 
  
@@ -223,44 +223,44 @@ show slave status\G 用来查看主从复制状态，得到结果如下图
 
 然后连接到主服务器。编辑 /etc/my.cnf, 在 [mysqld]下添加如下内容  
 
-	server-id	= 1
-	log_bin	= /var/lib/mysql/mysql-bin.log  
+    server-id	= 1
+    log_bin	= /var/lib/mysql/mysql-bin.log  
 
 2.连接到从服务器. 编辑 /etc/my.cnf, 在 [mysqld]下添加如下内容  
 
-	server-id	= 2
-	log_bin	= /var/lib/mysql/mysql-bin.log  
+    server-id	= 2
+    log_bin	= /var/lib/mysql/mysql-bin.log  
 
 3.去到主服务器，启动 mysql 服务  
 
-	$sudo service mysql start  
+    $sudo service mysql start  
 
 4.创建用于复制的用户。请根据实际情况，使用真实的从服务器 IP 地址，用户名，密码代替下面相应部分.  
  
-	$mysql -uroot -p<password>
-	grant replication slave on *.* to 'repluser'@'slave ip' identified by 'password';  
-	flush privileges;
-	exit
+    $mysql -uroot -p<password>
+    grant replication slave on *.* to 'repluser'@'slave ip' identified by 'password';  
+    flush privileges;
+    exit
 
 5.重启 mysql 服务并查看主服务器状态  
 
-	$sudo service mysql restart
-	$mysql -uroot -p<password>
-	show master status;
+    $sudo service mysql restart
+    $mysql -uroot -p<password>
+    show master status;
 
 ‘show master status’ 命令返回结果类似下图，其中的 ’File’ 和 ’Position’ 信息我们稍后需要用到  
 ![show master status][7]
  
 6.去到从服务器，启动 mysql 服务  
 
-	$sudo service mysql start  
+    $sudo service mysql start  
 
 7.注意下面部分请根据实际情况填写。’mysql master ip’ 是主服务器的IP地址，‘repluser’ 和 ’password’ 是在主服务器创建的用于复制的用户名和密码，’master log bin’ 和 ’pos’ 是在主服务器上 ’show master status’ 得到的 ’File’ 和 ’Position’  
 
-	$ mysql -uroot -p<password>
-	change master to master_host=’mysql master ip’, master_user=’repluser’, master_password=’password’, master_log_file=’master log bin’, master_log_pos=pos;
-	start slave;
-	show slave status\G
+    $ mysql -uroot -p<password>
+    change master to master_host=’mysql master ip’, master_user=’repluser’, master_password=’password’, master_log_file=’master log bin’, master_log_pos=pos;
+    start slave;
+    show slave status\G
 
 show slave status\G 用来查看主从复制状态，得到结果如下图  
 ![主从复制状态][8]
@@ -269,17 +269,17 @@ show slave status\G 用来查看主从复制状态，得到结果如下图
 
 8.我们可以在主服务器上做一些更新操作，然后去到从服务器查看数据是否同步了。去到主服务器执行如下命令  
 
-	$ mysql -uroot -p<password>
-	create database shop;
-	use shop;
-	create table people (id int(10), name varchar(20));
-	insert into people values (1, ‘alex’);  
+    $ mysql -uroot -p<password>
+    create database shop;
+    use shop;
+    create table people (id int(10), name varchar(20));
+    insert into people values (1, ‘alex’);  
 
 9.去到从服务器查看是否有数据库名为 shop，表名为 people  
 
-	$ mysql -uroot -p<password>
-	use shop;
-	select * from people;  
+    $ mysql -uroot -p<password>
+    use shop;
+    select * from people;  
 
 如果结果类似下图，表明主从复制正常.  
 
@@ -299,31 +299,31 @@ Percona XtraBackup 是开源的热备份工具—在备份的时候，不会锁�
 
 1.安装 xtrabackup, 授予权限
 
-	$sudo wget https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.3.2/binary/redhat/7/x86_64/Percona-XtraBackup-2.3.2-r306a2e0-el7-x86_64-bundle.tar
-	$sudo tar -xf Percona-XtraBackup-2.3.2-r306a2e0-el7-x86_64-bundle.tar
-	$sudo yum install perl-DBD-MySQL.x86_64
-	$sudo yum install rsync
-	$sudo rpm -ivh percona-xtrabackup-2.3.2-1.el7.x86_64.rpm
-	$sudo mysql -uroot -ppassword
-	mysql> CREATE USER 'bkpuser'@'localhost' IDENTIFIED BY 's3cret';
-	mysql> GRANT RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'bkpuser'@'localhost';
-	mysql> FLUSH PRIVILEGES;  
+    $sudo wget https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.3.2/binary/redhat/7/x86_64/Percona-XtraBackup-2.3.2-r306a2e0-el7-x86_64-bundle.tar
+    $sudo tar -xf Percona-XtraBackup-2.3.2-r306a2e0-el7-x86_64-bundle.tar
+    $sudo yum install perl-DBD-MySQL.x86_64
+    $sudo yum install rsync
+    $sudo rpm -ivh percona-xtrabackup-2.3.2-1.el7.x86_64.rpm
+    $sudo mysql -uroot -ppassword
+    mysql> CREATE USER 'bkpuser'@'localhost' IDENTIFIED BY 's3cret';
+    mysql> GRANT RELOAD, LOCK TABLES, REPLICATION CLIENT ON *.* TO 'bkpuser'@'localhost';
+    mysql> FLUSH PRIVILEGES;  
 
 2.全量备份和恢复示例
 
 2.1  全量备份  
 
-	$sudo innobackupex --defaults-file=/etc/my.cnf --user='bkpuser' --password='s3cret' /tmp/backup --no-timestamp
-	$sudo innobackupex --apply-log /tmp/backup  
+    $sudo innobackupex --defaults-file=/etc/my.cnf --user='bkpuser' --password='s3cret' /tmp/backup --no-timestamp
+    $sudo innobackupex --apply-log /tmp/backup  
 
 2.2  全量恢复  
 
-	$sudo service mysqld stop        
-	$sudo cp -r /var/lib/mysql /backup/
-	$sudo rm -rf /var/lib/mysql/*
-	$sudo innobackupex --copy-back /tmp/backup
-	$sudo chown -R mysql:mysql /var/lib/mysql
-	$sudo service mysqld restart  
+    $sudo service mysqld stop        
+    $sudo cp -r /var/lib/mysql /backup/
+    $sudo rm -rf /var/lib/mysql/*
+    $sudo innobackupex --copy-back /tmp/backup
+    $sudo chown -R mysql:mysql /var/lib/mysql
+    $sudo service mysqld restart  
 
 如果 /var/lib/mysql 非空的话，innobackupex --copy-back 命令会失败。因此我们需要先把这些文件移走。
 
@@ -331,27 +331,27 @@ Percona XtraBackup 是开源的热备份工具—在备份的时候，不会锁�
 
 3.1 增量备份  
 
-	$innobackupex --defaults-file=/etc/my.cnf --user='bkpuser' --password='s3cret' /tmp/backup --no-timestamp
-	$sudo innobackupex --defaults-file=/etc/my.cnf --user='bkpuser' --password='s3cret' --incremental /tmp/inc1 --incremental-basedir=/tmp/backup --no-timestamp
-	$sudo innobackupex --defaults-file=/etc/my.cnf --user='bkpuser' --password='s3cret' --incremental /tmp/inc2 --incremental-basedir=/tmp/inc1 --no-timestamp  
+    $innobackupex --defaults-file=/etc/my.cnf --user='bkpuser' --password='s3cret' /tmp/backup --no-timestamp
+    $sudo innobackupex --defaults-file=/etc/my.cnf --user='bkpuser' --password='s3cret' --incremental /tmp/inc1 --incremental-basedir=/tmp/backup --no-timestamp
+    $sudo innobackupex --defaults-file=/etc/my.cnf --user='bkpuser' --password='s3cret' --incremental /tmp/inc2 --incremental-basedir=/tmp/inc1 --no-timestamp  
 
 您可以继续做第三次增量备份，只是需要注意 --incremental-basedir 应该指向第二次备份的目录 /tmp/inc2  
 
-	$sudo innobackupex --defaults-file=/etc/my.cnf --user='bkpuser' --password='s3cret' --incremental /tmp/inc3 --incremental-basedir=/tmp/inc2 --no-timestamp
+    $sudo innobackupex --defaults-file=/etc/my.cnf --user='bkpuser' --password='s3cret' --incremental /tmp/inc3 --incremental-basedir=/tmp/inc2 --no-timestamp
 
 3.2  增量备份恢复  
 
-	$ sudo innobackupex --apply-log --redo-only /tmp/backup
-	$sudo innobackupex --apply-log --redo-only /tmp/backup --incremental-dir=/tmp/inc1
-	$sudo innobackupex --apply-log --redo-only /tmp/backup --incremental-dir=/tmp/inc2
-	$sudo innobackupex --apply-log  /tmp/backup --incremental-dir=/tmp/inc3
-	$sudo innobackupex --apply-log  /tmp/backup
-	$sudo service mysqld stop        
-	$sudo cp -r /var/lib/mysql /backup/
-	$sudo rm -rf /var/lib/mysql/*
-	$sudo innobackupex --copy-back /tmp/backup
-	$sudo chown -R mysql:mysql /var/lib/mysql
-	$sudo service mysqld restart
+    $ sudo innobackupex --apply-log --redo-only /tmp/backup
+    $sudo innobackupex --apply-log --redo-only /tmp/backup --incremental-dir=/tmp/inc1
+    $sudo innobackupex --apply-log --redo-only /tmp/backup --incremental-dir=/tmp/inc2
+    $sudo innobackupex --apply-log  /tmp/backup --incremental-dir=/tmp/inc3
+    $sudo innobackupex --apply-log  /tmp/backup
+    $sudo service mysqld stop        
+    $sudo cp -r /var/lib/mysql /backup/
+    $sudo rm -rf /var/lib/mysql/*
+    $sudo innobackupex --copy-back /tmp/backup
+    $sudo chown -R mysql:mysql /var/lib/mysql
+    $sudo service mysqld restart
 
 **Ubuntu Linux**: ( 以Ubuntu 14.04, 64-bit system, Xtrabackup 2.2.13, MySQL Server 5.6 为例)
 
@@ -359,8 +359,8 @@ Percona XtraBackup 是开源的热备份工具—在备份的时候，不会锁�
 
 1.安装  
 
-	$sudo wget https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.2.13/binary/debian/trusty/x86_64/percona-xtrabackup-22_2.2.13-1.trusty_amd64.deb
-	$sudo dpkg -i percona-xtrabackup-22_2.2.13-1.trusty_amd64.deb  
+    $sudo wget https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.2.13/binary/debian/trusty/x86_64/percona-xtrabackup-22_2.2.13-1.trusty_amd64.deb
+    $sudo dpkg -i percona-xtrabackup-22_2.2.13-1.trusty_amd64.deb  
 
 2.请参考上面的备份恢复过程。注意 <font color='red'>--defaults-file=/etc/mysql/my.cnf , 不是 /etc/my.cnf</font>
 

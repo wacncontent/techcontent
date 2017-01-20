@@ -56,7 +56,7 @@ Azure AD 将尝试监视联合元数据，并按照此元数据的指示更新�
 
 在 AD FS 服务器上打开 Microsoft Powershell。确保 AutoCertRollover 值设置为 TRUE
 
-	Get-Adfsproperties
+    Get-Adfsproperties
 
 ![AutoCertificateRollover](./media/active-directory-aadconnect-o365-certs/autocertrollover.png)
 
@@ -68,11 +68,11 @@ Azure AD 将尝试监视联合元数据，并按照此元数据的指示更新�
 
 >[!NOTE] 可在[此处](https://technet.microsoft.com/zh-cn/library/jj151815.aspx)下载 Azure AD PowerShell。
 
-	Connect-MsolService
+    Connect-MsolService
 
 检查 AD FS 和 Azure AD 信任属性中针对指定域配置的证书。
 
-	Get-MsolFederationProperty -DomainName <domain.name> | FL Source, TokenSigningCertificate
+    Get-MsolFederationProperty -DomainName <domain.name> | FL Source, TokenSigningCertificate
 
 ![Get-MsolFederationProperty](./media/active-directory-aadconnect-o365-certs/certsync.png)
 
@@ -130,9 +130,9 @@ https://(your_FS_name)/federationmetadata/2007-06/federationmetadata.xml
 1. 确认是否已登录到主 AD FS 服务器。
 2. 通过打开 PowerShell 命令窗口并运行以下命令，检查 AD FS 中的当前签名证书：
 
-	PS C:\>Get-ADFSCertificate -CertificateType token-signing
+    PS C:\>Get-ADFSCertificate -CertificateType token-signing
 
-	>[!NOTE] 如果你使用的是 AD FS 2.0，应该先运行 Add-Pssnapin Microsoft.Adfs.Powershell。
+    >[!NOTE] 如果你使用的是 AD FS 2.0，应该先运行 Add-Pssnapin Microsoft.Adfs.Powershell。
 
 3. 查看命令输出中是否存在任何已列出的证书。如果 AD FS 已生成新证书，你应该会在输出中看到两个证书：一个证书的 **IsPrimary** 值为 **True**，**NotAfter** 日期为 5 天内；另一个证书的 **IsPrimary** 为 **False**，**NotAfter** 大约为未来的 1 年。
 

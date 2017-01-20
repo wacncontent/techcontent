@@ -14,81 +14,81 @@
 
 6. 在上述步骤中创建的数据磁盘（例如 **F:** 盘）中创建 MongoDB 数据和日志目录。从“开始”中，选择“命令提示符”以打开命令提示符窗口。键入：
 
-		C:\> F:
-		F:> mkdir \MongoData
-		F:> mkdir \MongoLogs
+        C:\> F:
+        F:> mkdir \MongoData
+        F:> mkdir \MongoLogs
 
 7. 若要运行数据库，请运行：
 
-		F:> C:
-		C:\> mongod --dbpath F:\MongoData\ --logpath F:\MongoLogs\mongolog.log
+        F:> C:
+        C:\> mongod --dbpath F:\MongoData\ --logpath F:\MongoLogs\mongolog.log
 
-	当 mongod.exe 服务器启动和预分配日志文件时，所有日志消息都定向到 *F:\\MongoLogs\\mongolog.log* 文件。MongoDB 可能需要几分钟来预分配日志文件和开始侦听连接。当 MongoDB 实例运行时，命令提示符始终停留在此任务上。
+    当 mongod.exe 服务器启动和预分配日志文件时，所有日志消息都定向到 *F:\\MongoLogs\\mongolog.log* 文件。MongoDB 可能需要几分钟来预分配日志文件和开始侦听连接。当 MongoDB 实例运行时，命令提示符始终停留在此任务上。
 
 8. 若要启动 MongoDB 命令行管理程序，请从“开始”中打开另一个命令窗口并键入以下命令：
 
-		C:\> cd \my_mongo_dir\bin  
-		C:\my_mongo_dir\bin> mongo  
-		>db  
-		test
-		> db.foo.insert( { a : 1 } )  
-		> db.foo.find()  
-		{ _id : ..., a : 1 }  
-		> show dbs  
-		...  
-		> show collections  
-		...  
-		> help  
+        C:\> cd \my_mongo_dir\bin  
+        C:\my_mongo_dir\bin> mongo  
+        >db  
+        test
+        > db.foo.insert( { a : 1 } )  
+        > db.foo.find()  
+        { _id : ..., a : 1 }  
+        > show dbs  
+        ...  
+        > show collections  
+        ...  
+        > help  
 
-	通过 insert 创建数据库。
+    通过 insert 创建数据库。
 
 9. 或者，你可以将 mongod.exe 作为一项服务来安装：
 
-		C:\> mongod --dbpath F:\MongoData\ --logpath F:\MongoLogs\mongolog.log --logappend  --install
+        C:\> mongod --dbpath F:\MongoData\ --logpath F:\MongoLogs\mongolog.log --logappend  --install
 
-	安装了名为“MongoDB”的服务，其描述为“Mongo DB”。必须使用 `--logpath` 选项指定日志文件，因为正运行的服务不会在命令窗口中显示输出。`--logappend` 选项指定重启服务可将输出附加到现有日志文件。`--dbpath` 选项指定数据目录的位置。有关与服务相关的更多命令行选项，请参阅[与服务相关的命令行选项][MongoWindowsSvcOptions]。
+    安装了名为“MongoDB”的服务，其描述为“Mongo DB”。必须使用 `--logpath` 选项指定日志文件，因为正运行的服务不会在命令窗口中显示输出。`--logappend` 选项指定重启服务可将输出附加到现有日志文件。`--dbpath` 选项指定数据目录的位置。有关与服务相关的更多命令行选项，请参阅[与服务相关的命令行选项][MongoWindowsSvcOptions]。
 
-	若要启动该服务，请运行以下命令：
+    若要启动该服务，请运行以下命令：
 
-		C:\> net start MongoDB
+        C:\> net start MongoDB
 
 10. 现在，MongoDB 已安装且处于运行状态，需要在 Windows 防火墙中打开一个端口才能远程连接到 MongoDB。从“开始”菜单中，选择“管理工具”，然后选择“高级安全 Windows 防火墙”。
 
 11. a) 在左窗格中，选择“入站规则”。在右侧的“操作”窗格中，选择“新建规则...”。
 
-	![Windows 防火墙][Image1]  
+    ![Windows 防火墙][Image1]  
 
-	b) 在“新建入站规则向导”中，选择“端口”，然后单击“下一步”。
+    b) 在“新建入站规则向导”中，选择“端口”，然后单击“下一步”。
 
-	![Windows 防火墙][Image2]  
+    ![Windows 防火墙][Image2]  
 
-	c) 选择“TCP”，然后选择“特定本地端口”。指定端口“27017”（MongoDB 侦听的默认端口），然后单击“下一步”。
+    c) 选择“TCP”，然后选择“特定本地端口”。指定端口“27017”（MongoDB 侦听的默认端口），然后单击“下一步”。
 
-	![Windows 防火墙][Image3]  
+    ![Windows 防火墙][Image3]  
 
-	d) 选择“允许连接”，然后单击“下一步”。
+    d) 选择“允许连接”，然后单击“下一步”。
 
-	![Windows 防火墙][Image4]  
+    ![Windows 防火墙][Image4]  
 
-	e) 再次单击“下一步”。
+    e) 再次单击“下一步”。
 
-	![Windows 防火墙][Image5]  
+    ![Windows 防火墙][Image5]  
 
-	f) 指定规则名称（如“MongoPort”），单击“完成”。
+    f) 指定规则名称（如“MongoPort”），单击“完成”。
 
-	![Windows 防火墙][Image6]  
+    ![Windows 防火墙][Image6]  
 
 12. 如果你在创建虚拟机时未配置 MongoDB 的终结点，你可以现在完成此操作。你需要防火墙规则和终结点能够远程连接到 MongoDB。在经典管理门户中，依次单击“虚拟机”、你的新虚拟机的名称和“终结点”。
 
-	![终结点][Image7]  
+    ![终结点][Image7]  
 
 13. 单击页面底部的“添加”。选择“添加独立终结点”，然后单击“下一步”。
 
-	![终结点][Image8]  
+    ![终结点][Image8]  
 
 14. 添加名为“Mongo”的终结点、协议 **TCP**，并将“公用”和“专用”端口均设置为“27017”。打开此端口即可允许远程访问 MongoDB。
 
-	![终结点][Image9]  
+    ![终结点][Image9]  
 
 > [!NOTE] 端口 27017 是 MongoDB 使用的默认端口。可以在启动 mongod.exe 服务器时通过指定 `--port` 参数更改此默认端口。请确保在防火墙中提供同一个端口号以及上面说明中的“Mongo”终结点。
 

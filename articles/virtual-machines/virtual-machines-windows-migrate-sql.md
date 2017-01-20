@@ -79,26 +79,26 @@ ms.author: carlasab
 - 按照[在另一台计算机上从 SSMS 连接到 SQL Server VM 实例](./virtual-machines-windows-classic-sql-connect.md)的步骤进行操作，将 Azure VM 和 SQL Server 实例配置为支持从另一台计算机进行连接。只有使用向导进行迁移时，才支持库中的 SQL Server 2014 和 SQL Server 2016 映像。
 - 使用专用端口 11435 为 Azure 网关上的 SQL Server 云适配器服务配置一个打开的终结点。当在 Azure VM 上预配 SQL Server 2014 或 SQL Server 2016 时，将创建此端口。云适配器还创建一项 Windows 防火墙规则，以允许其传入 TCP 连接在默认端口 11435 上通过。此终结点支持向导利用云适配器服务将本地实例中的备份文件复制到 Azure VM 中。有关详细信息，请参阅[用于 SQL Server 的云适配器](https://msdn.microsoft.com/zh-cn/library/dn169301.aspx)。
 
-	![创建云适配器终结点](./media/virtual-machines-windows-migrate-sql/cloud-adapter-endpoint.png)
+    ![创建云适配器终结点](./media/virtual-machines-windows-migrate-sql/cloud-adapter-endpoint.png)
 
 ### 运行和使用“将 SQL Server 数据库部署到 Azure VM”向导
 
 1. 打开 Microsoft SQL Server Management Studio for Microsoft SQL Server 2016，并连接到包含将迁移到 Azure VM 的用户数据库的 SQL Server 实例。
 2. 右键单击要迁移的数据库，指向“任务”，然后单击“部署到 Azure VM”。
 
-	![启动向导](./media/virtual-machines-windows-migrate-sql/start-wizard.png)
+    ![启动向导](./media/virtual-machines-windows-migrate-sql/start-wizard.png)
 
 3. 在“简介”页上单击“下一步”。
 4. 在“源设置”页上，连接到包含要迁移到 Azure VM 的数据库的 SQL Server 实例。
 5. 指定备份文件的临时位置。如果连接到远程服务器，则必须指定网络驱动器。
 
-	![源设置](./media/virtual-machines-windows-migrate-sql/source-settings.png)
+    ![源设置](./media/virtual-machines-windows-migrate-sql/source-settings.png)
 
 6. 单击“下一步”。
 7. 在“Azure 登录”页上，单击“登录”以登录到你的 Azure 帐户。
 8. 选择要使用的订阅并单击“下一步”。
 
-	![Azure 登录](./media/virtual-machines-windows-migrate-sql/azure-signin.png)
+    ![Azure 登录](./media/virtual-machines-windows-migrate-sql/azure-signin.png)
 
 9. 在“部署设置”页上，可以指定新的或现有的云服务名称和虚拟机名称：
 
@@ -111,28 +111,28 @@ ms.author: carlasab
  - 指定现有的云服务名称和新的虚拟机名称，以便在现有云服务中创建新的 Az.ure 虚拟机。只能指定 SQL Server 2014 或 SQL Server 2016 库映像。
  - 指定现有的云服务名称和虚拟机名称，以便使用现有的 Azure 虚拟机。这必须是使用 SQL Server 2014 或 SQL Server 2016 库映像生成的映像。
 
-		![Deploymnent Settings](./media/virtual-machines-windows-migrate-sql/deployment-settings.png)
+        ![Deploymnent Settings](./media/virtual-machines-windows-migrate-sql/deployment-settings.png)
 
 10. 单击“设置”
   - 如果指定了现有的云服务名称和虚拟机名称，系统将提示你提供用户名和密码。
 
-		![Azure machine settings](./media/virtual-machines-windows-migrate-sql/azure-machine-settings.png)
+        ![Azure machine settings](./media/virtual-machines-windows-migrate-sql/azure-machine-settings.png)
 
-	- 如果指定了新的虚拟机名称，系统将提示你从库映像列表中选择一个映像，并提供以下信息：
-	  - 映像 - 只能选择 SQL Server 2014 或 SQL Server 2016
-		- 用户名
-		- 新密码
-		- 确认密码
-		- 位置
-		- 大小。
- 	- 此外，单击接受此新 Azure 虚拟机自行生成的证书，然后单击“确定”。
+    - 如果指定了新的虚拟机名称，系统将提示你从库映像列表中选择一个映像，并提供以下信息：
+      - 映像 - 只能选择 SQL Server 2014 或 SQL Server 2016
+        - 用户名
+        - 新密码
+        - 确认密码
+        - 位置
+        - 大小。
+     - 此外，单击接受此新 Azure 虚拟机自行生成的证书，然后单击“确定”。
 
-	![Azure 新计算机设置](./media/virtual-machines-windows-migrate-sql/azure-new-machine-settings.png)
+    ![Azure 新计算机设置](./media/virtual-machines-windows-migrate-sql/azure-new-machine-settings.png)
 
 11. 指定目标数据库名称（如果与源数据库名称不同）。如果该目标数据库已存在，系统将自动递增数据库名称，而不是覆盖现有的数据库。
 12. 单击“下一步”，然后单击“完成”。
 
-	![结果](./media/virtual-machines-windows-migrate-sql/results.png)
+    ![结果](./media/virtual-machines-windows-migrate-sql/results.png)
 
 13. 完成向导操作后，连接到你的虚拟机并确保数据库已迁移。
 14. 如果创建了新的虚拟机，请按照[在另一台计算机上从 SSMS 连接到 SQL Server VM 实例](./virtual-machines-windows-classic-sql-connect.md)的步骤进行操作，以配置 Azure 虚拟机和 SQL Server 实例。

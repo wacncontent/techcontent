@@ -87,7 +87,7 @@ Azure Redis 缓存提供的 Redis 群集与[在 Redis 中实施](http://redis.io
     有关详细信息，请参阅 [Redis 群集规范 - 已实现子集](http://redis.io/topics/cluster-spec#implemented-subset)。
 
 -	如果使用的是 [StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis/)，则必须使用 1.0.481 或更高版本。连接到该缓存时，你使用的[终结点、端口和密钥](./cache-configure.md#properties)与你连接到未启用群集功能的缓存时使用的相同。唯一的区别是，所有读取和写入都必须在数据库 0 中进行。
-	-	其他客户端可能有不同的要求。请参阅[是否所有 Redis 客户端都支持群集功能？](#do-all-redis-clients-support-clustering)
+    -	其他客户端可能有不同的要求。请参阅[是否所有 Redis 客户端都支持群集功能？](#do-all-redis-clients-support-clustering)
 -	如果应用程序使用的多个密钥操作都在单个命令中成批执行，则所有密钥都必须位于同一分片。若要完成此操作，请参阅[密钥在群集中是如何分布的？](#how-are-keys-distributed-in-a-cluster)。
 -	如果你使用的是 Redis ASP.NET 会话状态提供程序，则必须使用 2.0.1 或更高版本。请参阅[能否在 Redis ASP.NET 会话状态和输出缓存提供程序中使用群集功能？](#can-i-use-clustering-with-the-redis-aspnet-session-state-and-output-caching-providers)。
 
@@ -124,11 +124,11 @@ Azure Redis 缓存提供的 Redis 群集与[在 Redis 中实施](http://redis.io
 
 对于非 ssl，请使用以下命令。
 
-	Redis-cli.exe -h <<cachename>> -p 13000 (to connect to instance 0)
-	Redis-cli.exe -h <<cachename>> -p 13001 (to connect to instance 1)
-	Redis-cli.exe -h <<cachename>> -p 13002 (to connect to instance 2)
-	...
-	Redis-cli.exe -h <<cachename>> -p 1300N (to connect to instance N)
+    Redis-cli.exe -h <<cachename>> -p 13000 (to connect to instance 0)
+    Redis-cli.exe -h <<cachename>> -p 13001 (to connect to instance 1)
+    Redis-cli.exe -h <<cachename>> -p 13002 (to connect to instance 2)
+    ...
+    Redis-cli.exe -h <<cachename>> -p 1300N (to connect to instance N)
 
 对于 ssl，请将 `1300N` 替换为 `1500N`。
 

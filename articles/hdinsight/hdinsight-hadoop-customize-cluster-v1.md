@@ -56,21 +56,21 @@ Name | 脚本
 1. 根据[使用自定义选项预配群集](./hdinsight-provision-clusters-v1.md#portal)中的说明，使用“自定义创建”选项开始预配群集。 
 2. 在向导的“脚本操作”页上，单击“添加脚本操作”，以提供有关脚本操作的详细信息，如下所示：
 
-	![使用脚本操作自定义群集](./media/hdinsight-hadoop-customize-cluster-v1/HDI.CustomProvision.Page6.png "使用脚本操作自定义群集")
-	
-	<table border='1'>
-	<tr><th>属性</th><th>值</th></tr>
-	<tr><td>名称</td>
-		<td>指定脚本操作的名称。</td></tr>
-	<tr><td>脚本 URI</td>
-		<td>指定要调用以自定义群集的脚本的 URI。</td></tr>
-	<tr><td>节点类型</td>
-		<td>指定在其上运行自定义脚本的节点。你可以选择“所有节点”、“仅限头节点”或“仅限从节点”<b></b><b></b><b></b>。
-	<tr><td>Parameters</td>
-		<td>根据脚本的需要，指定参数。</td></tr>
-	</table>
+    ![使用脚本操作自定义群集](./media/hdinsight-hadoop-customize-cluster-v1/HDI.CustomProvision.Page6.png "使用脚本操作自定义群集")
+    
+    <table border='1'>
+    <tr><th>属性</th><th>值</th></tr>
+    <tr><td>名称</td>
+        <td>指定脚本操作的名称。</td></tr>
+    <tr><td>脚本 URI</td>
+        <td>指定要调用以自定义群集的脚本的 URI。</td></tr>
+    <tr><td>节点类型</td>
+        <td>指定在其上运行自定义脚本的节点。你可以选择“所有节点”、“仅限头节点”或“仅限从节点”<b></b><b></b><b></b>。
+    <tr><td>Parameters</td>
+        <td>根据脚本的需要，指定参数。</td></tr>
+    </table>
 
-	你可以添加多个脚本操作，以在群集上安装多个组件。
+    你可以添加多个脚本操作，以在群集上安装多个组件。
 
 3. 单击复选标记以开始设置群集。
   
@@ -81,19 +81,19 @@ Name | 脚本
 
 使用以下 Azure PowerShell 命令可以在部署 HDInsight 群集时运行单个脚本操作：
 
-	$config = New-AzureHDInsightClusterConfig –ClusterSizeInNodes 4
+    $config = New-AzureHDInsightClusterConfig –ClusterSizeInNodes 4
 
-	$config = Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName –Uri http://uri.to/scriptaction.ps1 –Parameters MyScriptActionParameter -ClusterRoleCollection HeadNode,DataNode
+    $config = Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName –Uri http://uri.to/scriptaction.ps1 –Parameters MyScriptActionParameter -ClusterRoleCollection HeadNode,DataNode
 
-	New-AzureHDInsightCluster -Config $config
+    New-AzureHDInsightCluster -Config $config
 
 使用以下 Azure PowerShell 命令可以在部署 HDInsight 群集时运行多个脚本操作：
 
-	$config = New-AzureHDInsightClusterConfig –ClusterSizeInNodes 4
+    $config = New-AzureHDInsightClusterConfig –ClusterSizeInNodes 4
 
-	$config = Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName1 –Uri http://uri.to/scriptaction1.ps1 –Parameters MyScriptAction1Parameters -ClusterRoleCollection HeadNode,DataNode | Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName2 –Uri http://uri.to/scriptaction2.ps1 -Parameters MyScriptAction2Parameters -ClusterRoleCollection HeadNode
+    $config = Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName1 –Uri http://uri.to/scriptaction1.ps1 –Parameters MyScriptAction1Parameters -ClusterRoleCollection HeadNode,DataNode | Add-AzureHDInsightScriptAction -Config $config –Name MyScriptActionName2 –Uri http://uri.to/scriptaction2.ps1 -Parameters MyScriptAction2Parameters -ClusterRoleCollection HeadNode
 
-	New-AzureHDInsightCluster -Config $config
+    New-AzureHDInsightCluster -Config $config
 
 <a name="call-scripts-using-net-sdk"></a>
 **从 HDInsight .NET SDK**
@@ -102,20 +102,20 @@ HDInsight .NET SDK 提供了 <a href="http://msdn.microsoft.com/zh-cn/library/mi
 
 1. 创建一个 Visual Studio 应用程序，然后从 Nuget 安装 SDK。在“工具”菜单中，单击“Nuget Package Manager”，然后单击“Package Manager Console”。在控制台中运行下列命令以安装程序包：
 
-		Install-Package Microsoft.WindowsAzure.Management.HDInsight
+        Install-Package Microsoft.WindowsAzure.Management.HDInsight
 
 2. 使用 SDK 创建群集。有关说明，请参阅[使用 .NET SDK 设置 HDInsight 群集](./hdinsight-provision-clusters-v1.md#sdk)。
 
 3. 使用 **ScriptAction** 类调用自定义脚本，如下所示：
 
-		var clusterInfo = new ClusterCreateParameters()
-		{
-			// Provide the cluster information, like
-			// name, Storage account, credentials,
-			// cluster size, and version		    
-			...
-			...
-		};
+        var clusterInfo = new ClusterCreateParameters()
+        {
+            // Provide the cluster information, like
+            // name, Storage account, credentials,
+            // cluster size, and version		    
+            ...
+            ...
+        };
 
 ## 支持 HDInsight 群集上使用的开放源代码软件
 Azure HDInsight 服务是一个弹性平台，可让你使用围绕着 Hadoop 形成的开放源代码技术生态系统，在云中生成大数据应用程序。Azure 为开放源代码技术提供一般级别的支持，如 <a href="https://www.azure.cn/support/faq/" target="_blank">Azure 支持常见问题 Web 应用</a>上的**支持范围**部分中所述。HDInsight 服务为如下所述的某些组件提供附加的支持级别。

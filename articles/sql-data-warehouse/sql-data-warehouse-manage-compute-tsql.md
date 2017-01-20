@@ -46,13 +46,13 @@ ms.author: barbkess;sonyama
 2. 连接到与逻辑 SQL 数据库服务器关联的 master 数据库。
 3. 从 sys.database\_service\_objectives 动态管理视图中选择。下面是一个示例：
 
-    	SELECT
-    	 db.name [Database],
-    	 ds.edition [Edition],
-    	 ds.service_objective [Service Objective]
-    	FROM
-    	 sys.database_service_objectives ds
-    	 JOIN sys.databases db ON ds.database_id = db.database_id
+        SELECT
+         db.name [Database],
+         ds.edition [Edition],
+         ds.service_objective [Service Objective]
+        FROM
+         sys.database_service_objectives ds
+         JOIN sys.databases db ON ds.database_id = db.database_id
 
 <a name="scale-dwu-bk"></a>
 <a name="scale-compute-bk"></a>
@@ -65,9 +65,9 @@ ms.author: barbkess;sonyama
 1. 连接到与逻辑 SQL 数据库服务器关联的 master 数据库。
 2. 使用 [ALTER DATABASE][ALTER DATABASE] TSQL 语句。以下示例将数据库 MySQLDW 的服务级别目标设置为 DW1000。
 
-    	ALTER DATABASE MySQLDW
-    	MODIFY (SERVICE_OBJECTIVE = 'DW1000')
-    	;
+        ALTER DATABASE MySQLDW
+        MODIFY (SERVICE_OBJECTIVE = 'DW1000')
+        ;
 
 <a name="next-steps-bk"></a>
 

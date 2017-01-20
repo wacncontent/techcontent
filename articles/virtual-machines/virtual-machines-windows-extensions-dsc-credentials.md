@@ -34,27 +34,27 @@ DSC 允许使用参数化配置，其中的凭据将传入配置并安全地存�
 
 *user\_configuration.ps1*
 
-	configuration Main
-	{
-	    param(
-	        [Parameter(Mandatory=$true)]
-	        [ValidateNotNullorEmpty()]
-	        [PSCredential]
-	        $Credential
-	    )    
-	    Node localhost {       
-	        User LocalUserAccount
-	        {
-	            Username = $Credential.UserName
-	            Password = $Credential
-	            Disabled = $false
-	            Ensure = "Present"
-	            FullName = "Local User Account"
-	            Description = "Local User Account"
-	            PasswordNeverExpires = $true
-	        } 
-	    }  
-	} 
+    configuration Main
+    {
+        param(
+            [Parameter(Mandatory=$true)]
+            [ValidateNotNullorEmpty()]
+            [PSCredential]
+            $Credential
+        )    
+        Node localhost {       
+            User LocalUserAccount
+            {
+                Username = $Credential.UserName
+                Password = $Credential
+                Disabled = $false
+                Ensure = "Present"
+                FullName = "Local User Account"
+                Description = "Local User Account"
+                PasswordNeverExpires = $true
+            } 
+        }  
+    } 
 
 必须将 *node localhost* 包含为配置的一部分。缺少该语句就无法进行以下步骤，因为扩展处理程序会专门查找 node localhost 语句。另外，必须包含 typecast *[PsCredential]*，因为此特定类型将触发扩展以加密凭据。
 
@@ -64,15 +64,15 @@ DSC 允许使用参数化配置，其中的凭据将传入配置并安全地存�
 
 设置 Azure DSC 扩展并提供凭据：
 
-	$configurationName = "Main"
-	$configurationArguments = @{ Credential = Get-Credential }
-	$configurationArchive = "user_configuration.ps1.zip"
-	$vm = Get-AzureVM "example-1"
+    $configurationName = "Main"
+    $configurationArguments = @{ Credential = Get-Credential }
+    $configurationArchive = "user_configuration.ps1.zip"
+    $vm = Get-AzureVM "example-1"
  
-	$vm = Set-AzureVMDSCExtension -VM $vm -ConfigurationArchive $configurationArchive 
-	-ConfigurationName $configurationName -ConfigurationArgument @configurationArguments
+    $vm = Set-AzureVMDSCExtension -VM $vm -ConfigurationArchive $configurationArchive 
+    -ConfigurationName $configurationName -ConfigurationArgument @configurationArguments
  
-	$vm | Update-AzureVM
+    $vm | Update-AzureVM
 
 ## 如何保护凭据
 运行此代码时会提示输入凭据。提供的凭据随即会存储在内存中。使用 `Set-AzureVmDscExtension` cmdlet 发布凭据时，凭据将通过 HTTPS 传输到 VM，Azure 将使用本地 VM 证书以加密形式将该凭据存储在该 VM 的磁盘上。然后，凭据将即时在内存中解密再重新加密，以便传递给 DSC。

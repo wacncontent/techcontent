@@ -53,16 +53,16 @@ wacn.date: 12/27/2016
 
 1. 若要指定流式处理单元数，请选择“缩放”选项卡并移动**“保留容量”**滑块。
 
-	![“缩放”页](./media/media-services-manage-origins/media-services-origin-scale.png)
+    ![“缩放”页](./media/media-services-manage-origins/media-services-origin-scale.png)
 
 4. 按“保存”按钮保存更改。
 
-	分配所有新的流式处理单位大约需要 20 分钟才能完成。
+    分配所有新的流式处理单位大约需要 20 分钟才能完成。
 
-	>[!NOTE] 当前，将流式处理单位的任何正值设置回“无”可将按需流式处理功能禁用最多 1 小时。
+    >[!NOTE] 当前，将流式处理单位的任何正值设置回“无”可将按需流式处理功能禁用最多 1 小时。
 
-	>[!NOTE] 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅 [媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
-	
+    >[!NOTE] 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅 [媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
+    
 ##<a name="configure_streaming_endpoints"></a>配置流式处理终结点
 
 当你拥有至少 1 个缩放单位时，通过流式处理终结点可以配置以下属性：

@@ -42,21 +42,21 @@ ms.author: boltean
 
 1. 在命令提示符处键入以下命令登录
 
-    	azure login -e AzureChinaCloud
-	
+        azure login -e AzureChinaCloud
+    
     使用建议的 Web 浏览器和代码进行身份验证。
 
 2. 如果你有多个 Azure 订阅，则连接到 Azure 即有权访问与凭据关联的所有 Azure 订阅。可查看这些订阅以及哪个订阅是默认订阅，只需使用以下命令
 
         azure account list 
 
-	若要设置订阅上下文，以便在其下运行其余命令，请使用：
+    若要设置订阅上下文，以便在其下运行其余命令，请使用：
 
-	    azure account set <subscription name>
+        azure account set <subscription name>
 
 3. 如果没有资源组，则可创建一个，将其命名为 **exampleResourceGroup**
 
-	    azure group create -n exampleResourceGroup -l chinaeast
+        azure group create -n exampleResourceGroup -l chinaeast
 
 > [!TIP] [Use the Azure CLI to manage Azure resources and resource groups][lnk-CLI-arm]（使用 Azure CLI 管理 Azure 资源和资源组）一文详细介绍了如何使用 Azure CLI 管理 Azure 资源。
 
@@ -66,15 +66,15 @@ ms.author: boltean
 
 ```
  azure iothub create -g <resource-group> -n <name> -l <location> -s <sku-name> -u <units>  
-	- <resourceGroup> The resource group name (case insensitive alphanumeric, underscore and hyphen, 1-64 length)
-	- <name> (The name of the IoT hub to be created. The format is case insensitive alphanumeric, underscore and hyphen, 3-50 length )
-	- <location> (The location (azure region/datacenter) where the IoT hub will be provisioned.
-	- <sku-name> (The name of the sku, one of: [F1, S1, S2, S3] etc. For the latest full list refer to the pricing page for IoT Hub.
+    - <resourceGroup> The resource group name (case insensitive alphanumeric, underscore and hyphen, 1-64 length)
+    - <name> (The name of the IoT hub to be created. The format is case insensitive alphanumeric, underscore and hyphen, 3-50 length )
+    - <location> (The location (azure region/datacenter) where the IoT hub will be provisioned.
+    - <sku-name> (The name of the sku, one of: [F1, S1, S2, S3] etc. For the latest full list refer to the pricing page for IoT Hub.
     - <units> (The number of provisioned units. Range : F1 [1-1] : S1, S2 [1-200] : S3 [1-10]. IoT Hub units are based on your total message count and the number of devices you want to connect.)
 ```
 若要查看所有可以创建的参数，可以在命令提示符处使用帮助命令
 
-    	azure iothub create -h 
+        azure iothub create -h 
 
 简单示例：
 
