@@ -1,27 +1,26 @@
-<properties
-    pageTitle="详细了解：Azure AD 密码管理 | Azure"
-    description="有关 Azure AD 密码管理的高级主题，内容包括密码写回的工作原理、密码写回安全性、密码重置门户的工作原理，以及密码重置使用的数据。"
-    services="active-directory"
-    documentationcenter=""
-    author="asteen"
-    manager="femila"
-    editor="curtand" />  
+---
+title: 详细了解：Azure AD 密码管理 | Azure
+description: 有关 Azure AD 密码管理的高级主题，内容包括密码写回的工作原理、密码写回安全性、密码重置门户的工作原理，以及密码重置使用的数据。
+services: active-directory
+documentationcenter: 
+author: asteen
+manager: femila
+editor: curtand
 
-<tags
-    ms.assetid="d3be2912-76c8-40a0-9507-b7b1a7ce2f8f"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="09/09/2016"
-    wacn.date="12/12/2016"
-    ms.author="asteen" />  
-
+ms.assetid: d3be2912-76c8-40a0-9507-b7b1a7ce2f8f
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/09/2016
+wacn.date: 12/12/2016
+ms.author: asteen
+---
 
 # 了解有关密码管理的详细信息
 
-> [AZURE.IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](/documentation/articles/active-directory-passwords-update-your-own-password/)。
+> [!IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
 
 如果你已部署密码管理，或只是想要在部署之前深入了解密码管理工作原理的技术细节，则本部分可让你大致了解该服务背后的技术概念。本部分将介绍以下内容：
 
@@ -34,7 +33,7 @@
   - [如何访问用户的密码重置数据](#how-to-access-password-reset-data-for-your-users)
 
 ## <a name="password-writeback-overview"></a>密码写回概述
-密码写回是一个 [Azure Active Directory Connect](/documentation/articles/active-directory-aadconnect/) 组件，Azure Active Directory Premium 的当前订户可以启用和使用该组件。有关详细信息，请参阅 [Azure Active Directory 版本](/documentation/articles/active-directory-editions/)。
+密码写回是一个 [Azure Active Directory Connect](./active-directory-aadconnect.md) 组件，Azure Active Directory Premium 的当前订户可以启用和使用该组件。有关详细信息，请参阅 [Azure Active Directory 版本](./active-directory-editions.md)。
 
 使用此功能，你可将云租户配置为将密码写回本地 Active Directory。有了此功能，你无需再设置和管理复杂的本地自助服务密码重置解决方案。此功能提供了一种基于云的便利方法，让你的用户能够在任何位置重置本地密码。有关密码写回的一些主要功能，请继续阅读以下内容：
 
@@ -58,7 +57,6 @@
 
   ![][001]  
 
-
 当联合或密码哈希同步用户在云中重置或更改其密码时，将发生以下情况：
 
 1. 我们检查用户具有何种类型的密码。如果我们看到密码在本地管理，则会确保写回服务启动且正在运行。如果是，我们让用户继续操作；如果不是，我们告知用户不能在此处重置其密码。
@@ -73,10 +71,9 @@
 10. 如果密码设置操作失败，我们会将错误返回给用户，让他们再试一次。操作失败的可能原因是服务已关闭、用户选择的密码不符合组织策略、我们在本地 AD 中找不到该用户等。我们对于许多这类情况都有一个特定消息，并告知用户他们可以执行哪些操作来解决问题。
 
 ### <a name="scenarios-supported-for-password-writeback"></a>密码写回支持的方案
-下表介绍同步功能的各个版本支持哪些方案。通常情况下，如果要使用密码写回，我们强烈建议安装最新版本的 [Azure AD Connect](/documentation/articles/active-directory-aadconnect/#install-azure-ad-connect/)。
+下表介绍同步功能的各个版本支持哪些方案。通常情况下，如果要使用密码写回，我们强烈建议安装最新版本的 [Azure AD Connect](./active-directory-aadconnect.md#install-azure-ad-connect/)。
 
   ![][002]  
-
 
 ### <a name="password-writeback-security-model"></a>密码写回安全模型
 密码写回是高度安全、极其可靠的服务。为确保你的信息受保护，我们启用了一个 4 层安全模型，如下所述。
@@ -92,24 +89,24 @@
 1. 用户单击“无法访问你的帐户”链接或直接转到 [https://passwordreset.microsoftonline.com](https://passwordreset.microsoftonline.com)。
 2. 用户输入用户 ID 并传递验证码。
 3. Azure AD 通过执行以下操作来验证用户是否能够使用此功能：
-   - 检查用户是否启用了此功能并分配有 Azure AD 许可证。
+    - 检查用户是否启用了此功能并分配有 Azure AD 许可证。
      - 如果用户未启用此功能或未分配有许可证，则要求用户联系其管理员重置其密码。
-   - 检查用户是否具有针对其帐户定义且符合管理员策略的正确质询数据。
+    - 检查用户是否具有针对其帐户定义且符合管理员策略的正确质询数据。
      - 如果策略仅要求一个质询，则确保用户具有针对由管理员策略启用的至少一个质询定义的适当数据。
        - 如果未配置用户，则建议用户联系其管理员重置其密码。
      - 如果策略要求两个质询，则确保用户具有针对由管理员策略启用的至少两个质询定义的适当数据。
        - 如果未配置用户，则我们建议用户联系其管理员重置其密码。
-   - 检查是否在本地管理用户密码（联合或密码哈希同步）。
+    - 检查是否在本地管理用户密码（联合或密码哈希同步）。
      - 如果已部署写回且在本地管理用户密码，则允许用户继续进行身份验证并重置其密码。
      - 如果未部署写回且在本地管理用户密码，则要求用户联系其管理员重置其密码。
 4. 如果确定用户能够成功重置其密码，则将指导用户完成重置过程。
 
-有关如何部署密码写回的详细信息，请参阅[入门：Azure AD 密码管理](/documentation/articles/active-directory-passwords-getting-started/)。
+有关如何部署密码写回的详细信息，请参阅[入门：Azure AD 密码管理](./active-directory-passwords-getting-started.md)。
 
 ### <a name="what-data-is-used-by-password-reset"></a>密码重置使用哪些数据？
 下表概述密码重置期间此数据使用的位置和方式，旨在帮助你决定哪些身份验证选项适合你的组织。此表还显示当你代表用户从未验证此数据的输入路径提供数据时的格式要求。
 
-> [AZURE.NOTE] 注册门户中不会显示办公电话，因为用户当前无法在目录中编辑此属性。
+> [!NOTE] 注册门户中不会显示办公电话，因为用户当前无法在目录中编辑此属性。
 
 <table>
           <tbody><tr>
@@ -312,21 +309,18 @@
 
 #####备用电子邮件
 
-	Connect-MsolService
-	Set-MsolUser -UserPrincipalName user@domain.com -AlternateEmailAddresses @("email@domain.com")
-
+    Connect-MsolService
+    Set-MsolUser -UserPrincipalName user@domain.com -AlternateEmailAddresses @("email@domain.com")
 
 #####移动电话
-	
-	Connect-MsolService
-	Set-MsolUser -UserPrincipalName user@domain.com -MobilePhone "+1 1234567890"
 
+    Connect-MsolService
+    Set-MsolUser -UserPrincipalName user@domain.com -MobilePhone "+1 1234567890"
 
 #####办公电话
-	
-	Connect-MsolService
-	Set-MsolUser -UserPrincipalName user@domain.com -PhoneNumber "+1 1234567890"
 
+    Connect-MsolService
+    Set-MsolUser -UserPrincipalName user@domain.com -PhoneNumber "+1 1234567890"
 
 #### 使用 PowerShell 读取密码重置数据
 可以使用 Azure AD PowerShell 读取以下字段的值。
@@ -340,46 +334,41 @@
 若要开始，首先需要[下载并安装 Azure AD PowerShell 模块](https://msdn.microsoft.com/zh-cn/library/azure/jj151815.aspx#bkmk_installmodule)。安装后，你可以遵照以下步骤配置每个字段。
 
 ##### 备用电子邮件
-	
-	Connect-MsolService
-	Get-MsolUser -UserPrincipalName user@domain.com | select AlternateEmailAddresses
 
+    Connect-MsolService
+    Get-MsolUser -UserPrincipalName user@domain.com | select AlternateEmailAddresses
 
 ##### 移动电话
-	
-	Connect-MsolService
-	Get-MsolUser -UserPrincipalName user@domain.com | select MobilePhone
 
+    Connect-MsolService
+    Get-MsolUser -UserPrincipalName user@domain.com | select MobilePhone
 
 ##### 办公电话
-	
-	Connect-MsolService
-	Get-MsolUser -UserPrincipalName user@domain.com | select PhoneNumber
 
+    Connect-MsolService
+    Get-MsolUser -UserPrincipalName user@domain.com | select PhoneNumber
 
 ##### 身份验证电话
-	
-	Connect-MsolService
-	Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select PhoneNumber
 
+    Connect-MsolService
+    Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select PhoneNumber
 
 ##### 身份验证电子邮件
-	
-	Connect-MsolService
-	Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select Email
 
+    Connect-MsolService
+    Get-MsolUser -UserPrincipalName user@domain.com | select -Expand StrongAuthenticationUserDetails | select Email
 
 ## 密码重置文档的链接
 以下是所有 Azure AD 密码重置文档页面的链接：
 
-- **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](/documentation/articles/active-directory-passwords-update-your-own-password/)。
-- [**工作原理**](/documentation/articles/active-directory-passwords-how-it-works/) - 了解六个不同的服务组件及其功能
-- [**入门**](/documentation/articles/active-directory-passwords-getting-started/) - 了解如何让用户重置及更改云密码或本地密码
-- [**自定义**](/documentation/articles/active-directory-passwords-customize/) - 了解如何根据组织的需求自定义服务的外观和行为
-- [**最佳实践**](/documentation/articles/active-directory-passwords-best-practices/) - 了解如何快速部署且有效管理组织的密码
-- [**深入分析**](/documentation/articles/active-directory-passwords-get-insights/) - 了解集成式报告功能
-- [**常见问题**](/documentation/articles/active-directory-passwords-faq/) - 获取常见问题的解答
-- [**故障排除**](/documentation/articles/active-directory-passwords-troubleshoot/) - 了解如何快速排查服务的问题
+- **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
+- [**工作原理**](./active-directory-passwords-how-it-works.md) - 了解六个不同的服务组件及其功能
+- [**入门**](./active-directory-passwords-getting-started.md) - 了解如何让用户重置及更改云密码或本地密码
+- [**自定义**](./active-directory-passwords-customize.md) - 了解如何根据组织的需求自定义服务的外观和行为
+- [**最佳实践**](./active-directory-passwords-best-practices.md) - 了解如何快速部署且有效管理组织的密码
+- [**深入分析**](./active-directory-passwords-get-insights.md) - 了解集成式报告功能
+- [**常见问题**](./active-directory-passwords-faq.md) - 获取常见问题的解答
+- [**故障排除**](./active-directory-passwords-troubleshoot.md) - 了解如何快速排查服务的问题
 
 [001]: ./media/active-directory-passwords-learn-more/001.jpg "Image_001.jpg"
 [002]: ./media/active-directory-passwords-learn-more/002.jpg "Image_002.jpg"

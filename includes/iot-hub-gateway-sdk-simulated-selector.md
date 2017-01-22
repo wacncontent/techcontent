@@ -1,6 +1,6 @@
-> [AZURE.SELECTOR]
-- [Linux](/documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/)
-- [Windows](/documentation/articles/iot-hub-windows-gateway-sdk-simulated-device/)
+> [!div class="op_single_selector"]
+- [Linux](../articles/iot-hub/iot-hub-linux-gateway-sdk-simulated-device.md)
+- [Windows](../articles/iot-hub/iot-hub-windows-gateway-sdk-simulated-device.md)
 
 本文演示了 Simulated Device Cloud Upload sample，说明了如何使用 [Azure IoT Gateway SDK][lnk-sdk]（Azure IoT 网关 SDK）从模拟设备将设备到云的遥测发送到 IoT 中心。
 
@@ -26,15 +26,14 @@
 
 ![][1]
 
-
-> [AZURE.NOTE] 模块彼此之间不直接传递消息。模块将消息发布到内部中转站，该中转站通过订阅机制将消息传递给其他模块，如下图所示。有关详细信息，请参阅[网关 SDK 入门][lnk-gw-getstarted]。
+> [!NOTE] 模块彼此之间不直接传递消息。模块将消息发布到内部中转站，该中转站通过订阅机制将消息传递给其他模块，如下图所示。有关详细信息，请参阅[网关 SDK 入门][lnk-gw-getstarted]。
 
 ### 协议引入模块
 
 数据从设备获取后，将以此模块为起点，通过网关传递到云中。在示例中，该模块执行四项任务：
 
 1.  创建模拟温度数据。
-    
+
     注意：如果你使用真实的设备，该模块会从这些物理设备读取数据。
 
 2.  将模拟温度数据置于消息内容中。
@@ -43,13 +42,13 @@
 
 4.  向链中的下一模块提供该消息。
 
-> [AZURE.NOTE] 在上图中称为“协议 X 引入”的模块在源代码中称为“模拟设备”。
+> [!NOTE] 在上图中称为“协议 X 引入”的模块在源代码中称为“模拟设备”。
 
 ### MAC &lt;-&gt; IoT 中心 ID 模块
 
 此模块以扫描方式查找的消息包括一个属性，其中包含通过协议引入模块添加的模拟设备 MAC 地址。如果找到了这种属性，该模块就会将带有 IoT 中心设备密钥的另一属性添加到消息，并将该消息提供给链中的下一模块。这就是示例将 IoT 中心设备标识与模拟设备进行关联的机制。开发人员会在模块配置过程中手动设置 MAC 地址与 IoT 中心标识之间的映射。
 
-> [AZURE.NOTE]  此示例使用 MAC 地址作为唯一的设备标识符，将其与 IoT 中心设备标识相关联。不过，你可以编写你自己的模块，让其使用其他的唯一标识符。例如，设备的唯一序列号或遥测数据中可能嵌入了唯一的设备名，你可以使用该名称来确定 IoT 中心设备标识。
+> [!NOTE]  此示例使用 MAC 地址作为唯一的设备标识符，将其与 IoT 中心设备标识相关联。不过，你可以编写你自己的模块，让其使用其他的唯一标识符。例如，设备的唯一序列号或遥测数据中可能嵌入了唯一的设备名，你可以使用该名称来确定 IoT 中心设备标识。
 
 ### IoT 中心通信模块
 
@@ -59,7 +58,6 @@
 
 ![][2]
 
-
 <!-- Images -->
 [1]: ./media/iot-hub-gateway-sdk-simulated-selector/image1.png
 [2]: ./media/iot-hub-gateway-sdk-simulated-selector/image2.png
@@ -67,5 +65,5 @@
 <!-- Links -->
 
 [lnk-sdk]: https://github.com/Azure/azure-iot-gateway-sdk
-[lnk-gw-getstarted]: /documentation/articles/iot-hub-linux-gateway-sdk-get-started/
+[lnk-gw-getstarted]: ../articles/iot-hub/iot-hub-linux-gateway-sdk-get-started.md
 <!---HONumber=Mooncake_0523_2016-->

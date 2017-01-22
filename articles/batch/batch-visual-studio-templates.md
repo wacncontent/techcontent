@@ -1,28 +1,27 @@
-<properties
-	pageTitle="Azure Batch 的 Visual Studio 模板 | Azure"
-	description="了解这些 Visual Studio 项目模板如何帮助在 Azure Batch 上实现和运行计算密集型工作负荷"
-	services="batch"
-	documentationCenter=".net"
-	authors="fayora"
-	manager="timlt"
-	editor="" />  
+---
+title: Azure Batch 的 Visual Studio 模板 | Azure
+description: 了解这些 Visual Studio 项目模板如何帮助在 Azure Batch 上实现和运行计算密集型工作负荷
+services: batch
+documentationCenter: .net
+authors: fayora
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="batch"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows"
-	ms.workload="big-compute"
-	ms.date="09/07/2016"
-	wacn.date="11/30/2016"
-	ms.author="marsma" />  
+ms.service: batch
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: big-compute
+ms.date: 09/07/2016
+wacn.date: 11/30/2016
+ms.author: marsma
+---
 
 # Azure Batch 的 Visual Studio 项目模板
 
 Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代码来帮助以最少的精力在 Batch 上实现并运行计算密集型工作负荷。本文档介绍这些模板，并提供其用法指导。
 
->[AZURE.IMPORTANT] 本文只介绍适用于这两个模板的信息，假设读者熟悉与其相关的 Batch 服务和重要概念：池、计算节点、作业和任务、作业管理器任务、环境变量和其他相关信息。可以在 [Basics of Azure Batch](/documentation/articles/batch-technical-overview/)（Azure Batch 基础知识）、[Batch feature overview for developers](/documentation/articles/batch-api-basics/)（面向开发人员的 Batch 功能概述）和 [Get started with the Azure Batch library for .NET](/documentation/articles/batch-dotnet-get-started/)（用于 .NET 的 Azure Batch 库入门）中找到更多信息。
+>[!IMPORTANT] 本文只介绍适用于这两个模板的信息，假设读者熟悉与其相关的 Batch 服务和重要概念：池、计算节点、作业和任务、作业管理器任务、环境变量和其他相关信息。可以在 [Basics of Azure Batch](./batch-technical-overview.md)（Azure Batch 基础知识）、[Batch feature overview for developers](./batch-api-basics.md)（面向开发人员的 Batch 功能概述）和 [Get started with the Azure Batch library for .NET](./batch-dotnet-get-started.md)（用于 .NET 的 Azure Batch 库入门）中找到更多信息。
 
 ## 综合概述
 
@@ -34,7 +33,7 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 
 例如，在电影渲染方案中，作业拆分器将单个电影作业转变成数百个或数千个单独处理各个帧的不同任务。相应地，任务处理器调用为了渲染每个帧所需的渲染应用程序和所有依赖进程，执行任何额外操作（例如，将渲染的帧复制到存储位置）。
 
->[AZURE.NOTE] 作业管理器和任务处理器模板彼此独立，因此可以根据计算作业要求和个人喜好，选择同时使用两者或只使用其中之一。
+>[!NOTE] 作业管理器和任务处理器模板彼此独立，因此可以根据计算作业要求和个人喜好，选择同时使用两者或只使用其中之一。
 
 如下图所示，使用这些模板的计算作业经历三个阶段：
 
@@ -45,7 +44,6 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 3. 任务处理器任务以并行方式独立运行，处理输入数据并生成输出数据。
 
 ![显示客户端代码与 Batch 服务交互的示意图][diagram01]
-
 
 ## 先决条件
 
@@ -62,7 +60,7 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 
   * 从 Visual Studio 的联机库下载模板：[Azure Batch 项目模板][vs_gallery_templates]
 
-* 如果打算使用[应用程序包](/documentation/articles/batch-application-packages/)功能将作业管理器和任务处理器部署到 Batch 计算节点，需要将存储帐户链接到 Batch 帐户。
+* 如果打算使用[应用程序包](./batch-application-packages.md)功能将作业管理器和任务处理器部署到 Batch 计算节点，需要将存储帐户链接到 Batch 帐户。
 
 ## 准备工作
 
@@ -83,7 +81,7 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 * 将一个作业拆分为多个任务。
 * 提交这些任务以在 Batch 上运行。
 
->[AZURE.NOTE] 有关作业管理器任务的详细信息，请参阅 [Batch feature overview for developers](/documentation/articles/batch-api-basics/#job-manager-task/)（面向开发人员的 Batch 功能概述）。
+>[!NOTE] 有关作业管理器任务的详细信息，请参阅 [Batch feature overview for developers](./batch-api-basics.md#job-manager-task/)（面向开发人员的 Batch 功能概述）。
 
 ### 使用模板创建作业管理器
 
@@ -119,7 +117,6 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 
 ![显示作业管理器模板解决方案的 Visual Studio 解决方案资源管理器][solution_explorer01]  
 
-
 **框架文件**
 
 * `Configuration.cs`：封装作业配置数据的加载，例如 Batch 帐户详细信息、链接的存储帐户凭据、作业和任务信息，以及作业参数。它还通过 Configuration.EnvironmentVariable 类提供 Batch 定义的环境变量（请参阅 Batch 文档中“Environment settings for tasks”（任务的环境设置））的访问权限。
@@ -150,31 +147,31 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 
 csharp
 
-	/// <summary>
-	/// Gets the tasks into which to split the job. This is where you inject
-	/// your application-specific logic for decomposing the job into tasks.
-	///
-	/// The job manager framework invokes the Split method for you; you need
-	/// only to implement it, not to call it yourself. Typically, your
-	/// implementation should return tasks lazily, for example using a C#
-	/// iterator and the "yield return" statement; this allows tasks to be added
-	/// and to start running while splitting is still in progress.
-	/// </summary>
-	/// <returns>The tasks to be added to the job. Tasks are added automatically
-	/// by the job manager framework as they are returned by this method.</returns>
-	public IEnumerable<CloudTask> Split()
-	{
-	    // Your code for the split logic goes here.
-	    int startFrame = Convert.ToInt32(\_parameters["StartFrame"]);
-	    int endFrame = Convert.ToInt32(\_parameters["EndFrame"]);
+    /// <summary>
+    /// Gets the tasks into which to split the job. This is where you inject
+    /// your application-specific logic for decomposing the job into tasks.
+    ///
+    /// The job manager framework invokes the Split method for you; you need
+    /// only to implement it, not to call it yourself. Typically, your
+    /// implementation should return tasks lazily, for example using a C#
+    /// iterator and the "yield return" statement; this allows tasks to be added
+    /// and to start running while splitting is still in progress.
+    /// </summary>
+    /// <returns>The tasks to be added to the job. Tasks are added automatically
+    /// by the job manager framework as they are returned by this method.</returns>
+    public IEnumerable<CloudTask> Split()
+    {
+        // Your code for the split logic goes here.
+        int startFrame = Convert.ToInt32(\_parameters["StartFrame"]);
+        int endFrame = Convert.ToInt32(\_parameters["EndFrame"]);
 
-	    for (int i = startFrame; i <= endFrame; i++)
-	    {
-	        yield return new CloudTask("myTask" + i, "cmd /c dir");
-	    }
-	}
+        for (int i = startFrame; i <= endFrame; i++)
+        {
+            yield return new CloudTask("myTask" + i, "cmd /c dir");
+        }
+    }
 
->[AZURE.NOTE] 在 `Split()` 方法中，批注部分是作业管理器模板代码中唯一可修改的部分，方法是添加用于将作业拆分成不同任务的逻辑。如果想要修改模板的其他部分，请确定熟悉 Batch 的工作原理，并先在几个 [Batch 代码示例][github_samples]中试试看。
+>[!NOTE] 在 `Split()` 方法中，批注部分是作业管理器模板代码中唯一可修改的部分，方法是添加用于将作业拆分成不同任务的逻辑。如果想要修改模板的其他部分，请确定熟悉 Batch 的工作原理，并先在几个 [Batch 代码示例][github_samples]中试试看。
 
 Split() 实现具有以下项的访问权限：
 
@@ -218,7 +215,7 @@ Split() 实现具有以下项的访问权限：
 
 在作业管理器任务失败的情况下，某些任务可能仍在错误发生之前就已添加到服务中。这些任务将正常运行。请参阅上面的“作业拆分器失败”，获取有关此代码路径的介绍。
 
-异常返回的所有信息已写入 stdout.txt 和 stderr.txt 文件。有关详细信息，请参阅[错误处理](/documentation/articles/batch-api-basics/#error-handling/)。
+异常返回的所有信息已写入 stdout.txt 和 stderr.txt 文件。有关详细信息，请参阅[错误处理](./batch-api-basics.md#error-handling/)。
 
 ### 客户端注意事项
 
@@ -230,10 +227,10 @@ Split() 实现具有以下项的访问权限：
 
 csharp
 
-	job.JobManagerTask.EnvironmentSettings = new [] {
-	    new EnvironmentSetting("YOUR\_BATCH\_URL", "https://account.region.batch.azure.com"),
-	    new EnvironmentSetting("YOUR\_BATCH\_KEY", "{your\_base64\_encoded\_account\_key}"),
-	};
+    job.JobManagerTask.EnvironmentSettings = new [] {
+        new EnvironmentSetting("YOUR\_BATCH\_URL", "https://account.region.batch.azure.com"),
+        new EnvironmentSetting("YOUR\_BATCH\_KEY", "{your\_base64\_encoded\_account\_key}"),
+    };
 
 **存储凭据**
 
@@ -241,11 +238,11 @@ csharp
 
 csharp
 
-	job.JobManagerTask.EnvironmentSettings = new [] {
-	    /* other environment settings */
-	    new EnvironmentSetting("LINKED\_STORAGE\_ACCOUNT", "{storageAccountName}"),
-	    new EnvironmentSetting("LINKED\_STORAGE\_KEY", "{storageAccountKey}"),
-	};
+    job.JobManagerTask.EnvironmentSettings = new [] {
+        /* other environment settings */
+        new EnvironmentSetting("LINKED\_STORAGE\_ACCOUNT", "{storageAccountName}"),
+        new EnvironmentSetting("LINKED\_STORAGE\_KEY", "{storageAccountKey}"),
+    };
 
 **作业管理器任务设置**
 
@@ -309,7 +306,6 @@ csharp
 
 ![显示任务处理器模板解决方案的 Visual Studio 解决方案资源管理器][solution_explorer02]  
 
-
 **框架文件**
 
 * `Configuration.cs`：封装作业配置数据的加载，例如 Batch 帐户详细信息、链接的存储帐户凭据、作业和任务信息，以及作业参数。它还通过 Configuration.EnvironmentVariable 类提供 Batch 定义的环境变量（请参阅 Batch 文档中“Environment settings for tasks”（任务的环境设置））的访问权限。
@@ -341,49 +337,49 @@ csharp
 
 csharp
 
-	/// <summary>
-	/// Runs the task processing logic. This is where you inject
-	/// your application-specific logic for decomposing the job into tasks.
-	///
-	/// The task processor framework invokes the Run method for you; you need
-	/// only to implement it, not to call it yourself. Typically, your
-	/// implementation will execute an external program (from resource files or
-	/// an application package), check the exit code of that program and
-	/// save output files to persistent storage.
-	/// </summary>
-	public async Task<int> Run()
+    /// <summary>
+    /// Runs the task processing logic. This is where you inject
+    /// your application-specific logic for decomposing the job into tasks.
+    ///
+    /// The task processor framework invokes the Run method for you; you need
+    /// only to implement it, not to call it yourself. Typically, your
+    /// implementation will execute an external program (from resource files or
+    /// an application package), check the exit code of that program and
+    /// save output files to persistent storage.
+    /// </summary>
+    public async Task<int> Run()
 
-	{
-	    try
-	    {
-	        //Your code for the task processor goes here.
-	        var command = $"compare {_parameters["Frame1"]} {_parameters["Frame2"]} compare.gif";
-	        using (var process = Process.Start($"cmd /c {command}"))
-	        {
-	            process.WaitForExit();
-	            var taskOutputStorage = new TaskOutputStorage(
-	            _configuration.StorageAccount,
-	            _configuration.JobId,
-	            _configuration.TaskId
-	            );
-	            await taskOutputStorage.SaveAsync(
-	            TaskOutputKind.TaskOutput,
-	            @"..\stdout.txt",
-	            @"stdout.txt"
-	            );
-	            return process.ExitCode;
-	        }
-	    }
-	    catch (Exception ex)
-	    {
-	        throw new TaskProcessorException(
-	        $"{ex.GetType().Name} exception in run task processor: {ex.Message}",
-	        ex
-	        );
-	    }
-	}
+    {
+        try
+        {
+            //Your code for the task processor goes here.
+            var command = $"compare {_parameters["Frame1"]} {_parameters["Frame2"]} compare.gif";
+            using (var process = Process.Start($"cmd /c {command}"))
+            {
+                process.WaitForExit();
+                var taskOutputStorage = new TaskOutputStorage(
+                _configuration.StorageAccount,
+                _configuration.JobId,
+                _configuration.TaskId
+                );
+                await taskOutputStorage.SaveAsync(
+                TaskOutputKind.TaskOutput,
+                @"..\stdout.txt",
+                @"stdout.txt"
+                );
+                return process.ExitCode;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new TaskProcessorException(
+            $"{ex.GetType().Name} exception in run task processor: {ex.Message}",
+            ex
+            );
+        }
+    }
 
->[AZURE.NOTE] Run() 方法中的批注部分是任务处理器模板代码中唯一可修改的部分，方法是为工作负荷中的任务添加运行逻辑。如果想要修改模板的其他部分，请先熟悉 Batch 的工作原理，方法是查看 Batch 文档并在几个 Batch 代码示例上进行尝试。
+>[!NOTE] Run() 方法中的批注部分是任务处理器模板代码中唯一可修改的部分，方法是为工作负荷中的任务添加运行逻辑。如果想要修改模板的其他部分，请先熟悉 Batch 的工作原理，方法是查看 Batch 文档并在几个 Batch 代码示例上进行尝试。
 
 Run() 方法负责启动命令行、启动一个或多个进程、等待所有进程完成、保存结果，最后返回退出代码。Run() 方法可供实现任务的处理逻辑。任务处理器框架调用 Run() 方法；用户不需要自行调用。
 
@@ -409,7 +405,7 @@ Run() 实现具有以下项的访问权限：
 | 1 | 任务处理器任务失败，程序的“预期”部分有异常。异常已转换成 `TaskProcessorException` 与诊断信息，如有可能，还提供可解决失败的建议。 |
 | 2 | 任务处理器任务失败，发生“意外的”异常。异常已记录到标准输出，但任务处理器无法添加任何额外的诊断或补救信息。 |
 
->[AZURE.NOTE] 如果调用的程序使用退出代码 1 和 2 来指出特定失败模式，则使用退出代码 1 和 2 来代表任务处理器错误将造成模棱两可的状况。可以编辑 Program.cs 文件中的异常案例，将这些任务处理器错误代码更改为可区分的退出代码。
+>[!NOTE] 如果调用的程序使用退出代码 1 和 2 来指出特定失败模式，则使用退出代码 1 和 2 来代表任务处理器错误将造成模棱两可的状况。可以编辑 Program.cs 文件中的异常案例，将这些任务处理器错误代码更改为可区分的退出代码。
 
 异常返回的所有信息已写入 stdout.txt 和 stderr.txt 文件。有关详细信息，请参阅 Batch 文档中的“Error Handling”（错误处理）。
 
@@ -421,11 +417,10 @@ Run() 实现具有以下项的访问权限：
 
 csharp
 
-	job.CommonEnvironmentSettings = new [] {
-	    new EnvironmentSetting("LINKED_STORAGE_ACCOUNT", "{storageAccountName}"),
-	    new EnvironmentSetting("LINKED_STORAGE_KEY", "{storageAccountKey}"),
-	};
-
+    job.CommonEnvironmentSettings = new [] {
+        new EnvironmentSetting("LINKED_STORAGE_ACCOUNT", "{storageAccountName}"),
+        new EnvironmentSetting("LINKED_STORAGE_KEY", "{storageAccountKey}"),
+    };
 
 然后，可以通过 `_configuration.StorageAccount` 属性在 TaskProcessor 类中使用存储帐户。
 
@@ -453,7 +448,7 @@ Batch 服务提供一个简单的机制在 [Microsoft.Azure.Batch.JobManagerTask
 
 在许多情况下，最好将每个操作的参数传递到作业管理器任务，以便控制作业拆分进程或配置作业的任务。为此，可将名为 parameters.json 的 JSON 文件上载为作业管理器任务的资源文件。然后，参数就可以在作业管理器模板的 `JobSplitter._parameters` 字段中可用。
 
->[AZURE.NOTE] 内置的参数处理程序只支持字符串到字符串的字典。如果想要以参数值的形式传递复杂 JSON 值，需要以字符串形式传递并在作业拆分器中进行分析，或者修改框架的 `Configuration.GetJobParameters` 方法。
+>[!NOTE] 内置的参数处理程序只支持字符串到字符串的字典。如果想要以参数值的形式传递复杂 JSON 值，需要以字符串形式传递并在作业拆分器中进行分析，或者修改框架的 `Configuration.GetJobParameters` 方法。
 
 ### 将参数传递给任务处理器模板
 
@@ -465,13 +460,13 @@ parameters.json 的资源文件，如果找到，则将它加载为参数字典�
 
 * 生成和上载任务特定的 parameters.json 文档作为作业拆分器执行的一部分，并在任务的资源文件集合中引用该 Blob。如果不同的任务有不同的参数，就必须这样做。以参数形式将帧索引传递到任务的 3D 渲染方案便是可能的示例。
 
->[AZURE.NOTE] 内置的参数处理程序只支持字符串到字符串的字典。如果想要以参数值的形式传递复杂 JSON 值，需要以字符串形式传递并在任务处理器中进行分析，或者修改框架的 `Configuration.GetTaskParameters` 方法。
+>[!NOTE] 内置的参数处理程序只支持字符串到字符串的字典。如果想要以参数值的形式传递复杂 JSON 值，需要以字符串形式传递并在任务处理器中进行分析，或者修改框架的 `Configuration.GetTaskParameters` 方法。
 
 ## 后续步骤
 
 ### 将作业和任务输出保存到 Azure 存储
 
-在开发 Batch 解决方案时的另一个有用工具是 [Azure Batch 文件约定][nuget_package]。在 Batch .NET 应用程序中使用此 .NET 类库（目前以预览版提供）可在 Azure 存储中轻松存储和检索任务输出。[Persist Azure Batch job and task output](/documentation/articles/batch-task-output/)（保存 Azure Batch 作业和任务输出）包含该库及其用法的完整介绍。
+在开发 Batch 解决方案时的另一个有用工具是 [Azure Batch 文件约定][nuget_package]。在 Batch .NET 应用程序中使用此 .NET 类库（目前以预览版提供）可在 Azure 存储中轻松存储和检索任务输出。[Persist Azure Batch job and task output](./batch-task-output.md)（保存 Azure Batch 作业和任务输出）包含该库及其用法的完整介绍。
 
 ### Batch 论坛
 

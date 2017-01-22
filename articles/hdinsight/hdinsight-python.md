@@ -1,22 +1,22 @@
-<properties
-	pageTitle="在 HDInsight 中将 Python 与 Hive 和 Pig 配合使用 | Azure"
-	description="了解如何在 HDInsight（Azure 上的 Hadoop 技术堆栈）中通过 Hive 和 Pig 使用 Python 用户定义的函数 (UDF)。"
-	services="hdinsight"
-	documentationCenter=""
-	authors="Blackmist"
-	manager="jhubbard"
-	editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 在 HDInsight 中将 Python 与 Hive 和 Pig 配合使用 | Azure
+description: 了解如何在 HDInsight（Azure 上的 Hadoop 技术堆栈）中通过 Hive 和 Pig 使用 Python 用户定义的函数 (UDF)。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: jhubbard
+editor: cgronlun
+tags: azure-portal
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="python"
-	ms.topic="article"
-	ms.date="09/07/2016"
-	wacn.date="01/05/2017" 
-	ms.author="larryfr"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: article
+ms.date: 09/07/2016
+wacn.date: 01/05/2017
+ms.author: larryfr
+---
 
 #在 HDInsight 中将 Python 与 Hive 和 Pig 配合使用
 
@@ -27,7 +27,7 @@ Hive 和 Pig 非常适用于在 HDInsight 中处理数据，但有时需要使�
 * HDInsight 群集（基于 Windows）
 
 * 文本编辑器
- 
+
 ##<a name="python"></a>HDInsight 上的 Python
 
 默认情况下，Python2.7 安装在 HDInsight 3.0 和更高版本的群集上。可以将 Hive 与此版本的 Python 配合使用，以进行流式处理（使用 STDOUT/STDIN 在 Hive 和 Python 之间传递数据）。
@@ -40,15 +40,15 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 
 **基于 Windows 的 HDInsight**
 
-	add file wasbs:///streaming.py;
+    add file wasbs:///streaming.py;
 
-	SELECT TRANSFORM (clientid, devicemake, devicemodel)
-	  USING 'D:\Python27\python.exe streaming.py' AS
-	  (clientid string, phoneLable string, phoneHash string)
-	FROM hivesampletable
-	ORDER BY clientid LIMIT 50;
+    SELECT TRANSFORM (clientid, devicemake, devicemodel)
+      USING 'D:\Python27\python.exe streaming.py' AS
+      (clientid string, phoneLable string, phoneHash string)
+    FROM hivesampletable
+    ORDER BY clientid LIMIT 50;
 
-> [AZURE.NOTE] 在基于 Windows 的 HDInsight 群集上，**USING** 子句必须指定 python.exe 的完整路径。该路径始终为 `D:\Python27\python.exe`。
+> [!NOTE] 在基于 Windows 的 HDInsight 群集上，**USING** 子句必须指定 python.exe 的完整路径。该路径始终为 `D:\Python27\python.exe`。
 
 本示例执行以下操作：
 
@@ -60,21 +60,21 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 
 <a name="streamingpy"></a>下面是该 HiveQL 示例使用的 **streaming.py** 文件。
 
-	#!/usr/bin/env python
+    #!/usr/bin/env python
 
-	import sys
-	import string
-	import hashlib
+    import sys
+    import string
+    import hashlib
 
-	while True:
-	  line = sys.stdin.readline()
-	  if not line:
-	    break
+    while True:
+      line = sys.stdin.readline()
+      if not line:
+        break
 
-	  line = string.strip(line, "\n ")
-	  clientid, devicemake, devicemodel = string.split(line, "\t")
-	  phone_label = devicemake + ' ' + devicemodel
-	  print "\t".join([clientid, phone_label, hashlib.md5(phone_label).hexdigest()])
+      line = string.strip(line, "\n ")
+      clientid, devicemake, devicemodel = string.split(line, "\t")
+      phone_label = devicemake + ' ' + devicemodel
+      print "\t".join([clientid, phone_label, hashlib.md5(phone_label).hexdigest()])
 
 由于使用流式处理，因此此脚本必须执行以下操作：
 
@@ -103,7 +103,7 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 * __使用 Jython__：`register '/path/to/pig_python.py' using jython as myfuncs;`
 * __使用 C Python__：`register '/path/to/pig_python.py' using streaming_python as myfuncs;`
 
-> [AZURE.IMPORTANT] 使用 Jython 时，pig\_jython 文件的路径可以是本地路径或 WASB:// 路径。但是，使用 C Python 时，必须引用用于提交 Pig 作业的节点的本地文件系统上的文件。
+> [!IMPORTANT] 使用 Jython 时，pig\_jython 文件的路径可以是本地路径或 WASB:// 路径。但是，使用 C Python 时，必须引用用于提交 Pig 作业的节点的本地文件系统上的文件。
 
 通过注册后，此示例的 Pig Latin 对于两个脚本是相同的：
 
@@ -134,17 +134,17 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
     date, time, classname, level, detail = input.split(' ', 4)
     return date, time, classname, level, detail
 
-> [AZURE.NOTE] 安装时不必要考虑“pig\_util”，脚本会自动使用该选项。
+> [!NOTE] 安装时不必要考虑“pig\_util”，脚本会自动使用该选项。
 
 还记得吗？我们前面只是将 **LINE** 输入定义为 chararray，因为输入没有一致的架构。 Python 脚本的任务是将数据转换成用于输出的一致架构。其工作方式如下所述：
 
 1. **@outputSchema** 语句定义要返回到 Pig 的数据的格式。在本例中，该格式为**数据袋**，这是一种 Pig 数据类型。该数据袋包含以下字段，所有这些字段都是 chararray（字符串）：
 
-	* date - 创建日志条目的日期
-	* time - 创建日志条目的时间
-	* classname - 为其创建该条目的类名
-	* level - 日志级别
-	* detail - 日志条目的详细信息
+    * date - 创建日志条目的日期
+    * time - 创建日志条目的时间
+    * classname - 为其创建该条目的类名
+    * level - 日志级别
+    * detail - 日志条目的详细信息
 
 2. 接下来，**def create\_structure(input)** 将定义 Pig 要将行项传递到的函数。
 
@@ -166,20 +166,20 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 
 2. 在 `hive>` 提示符下输入以下命令。
 
-		add file wasbs:///streaming.py;
-		SELECT TRANSFORM (clientid, devicemake, devicemodel)
-		  USING 'python streaming.py' AS
-		  (clientid string, phoneLabel string, phoneHash string)
-		FROM hivesampletable
-		ORDER BY clientid LIMIT 50;
+        add file wasbs:///streaming.py;
+        SELECT TRANSFORM (clientid, devicemake, devicemodel)
+          USING 'python streaming.py' AS
+          (clientid string, phoneLabel string, phoneHash string)
+        FROM hivesampletable
+        ORDER BY clientid LIMIT 50;
 
 3. 输入最后一行后，应会启动作业。最终，它将返回类似于以下内容的输出。
 
-		100041	RIM 9650	d476f3687700442549a83fac4560c51c
-		100041	RIM 9650	d476f3687700442549a83fac4560c51c
-		100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
-		100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
-		100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
+        100041	RIM 9650	d476f3687700442549a83fac4560c51c
+        100041	RIM 9650	d476f3687700442549a83fac4560c51c
+        100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
+        100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
+        100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
 
 ####Pig
 
@@ -187,19 +187,19 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 
 2. 在 `grunt>` 提示符下输入以下语句，使用 Jython 解释器运行 Python 脚本。
 
-		Register wasbs:///pig_python.py using jython as myfuncs;
-	    LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);
-	    LOG = FILTER LOGS by LINE is not null;
-	    DETAILS = foreach LOG generate myfuncs.create_structure(LINE);
-	    DUMP DETAILS;
+        Register wasbs:///pig_python.py using jython as myfuncs;
+        LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);
+        LOG = FILTER LOGS by LINE is not null;
+        DETAILS = foreach LOG generate myfuncs.create_structure(LINE);
+        DUMP DETAILS;
 
 3. 输入以下行后，应会启动作业。最终，它将返回类似于以下内容的输出。
 
-		((2012-02-03,20:11:56,SampleClass5,[TRACE],verbose detail for id 990982084))
-		((2012-02-03,20:11:56,SampleClass7,[TRACE],verbose detail for id 1560323914))
-		((2012-02-03,20:11:56,SampleClass8,[DEBUG],detail for id 2083681507))
-		((2012-02-03,20:11:56,SampleClass3,[TRACE],verbose detail for id 1718828806))
-		((2012-02-03,20:11:56,SampleClass3,[INFO],everything normal for id 530537821))
+        ((2012-02-03,20:11:56,SampleClass5,[TRACE],verbose detail for id 990982084))
+        ((2012-02-03,20:11:56,SampleClass7,[TRACE],verbose detail for id 1560323914))
+        ((2012-02-03,20:11:56,SampleClass8,[DEBUG],detail for id 2083681507))
+        ((2012-02-03,20:11:56,SampleClass3,[TRACE],verbose detail for id 1718828806))
+        ((2012-02-03,20:11:56,SampleClass3,[INFO],everything normal for id 530537821))
 
 4. 使用 `quit` 退出 Grunt Shell，然后在本地文件系统上使用以下命令编辑 pig\_python.py 文件：
 
@@ -214,10 +214,10 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 6. 使用 `pig` 命令再次启动 shell。在 `grunt>` 提示符下，使用以下命令运行带有 Jython 解释器的 Python 脚本。
 
         Register 'pig_python.py' using streaming_python as myfuncs;
-	    LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);
-	    LOG = FILTER LOGS by LINE is not null;
-	    DETAILS = foreach LOG generate myfuncs.create_structure(LINE);
-	    DUMP DETAILS;
+        LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);
+        LOG = FILTER LOGS by LINE is not null;
+        DETAILS = foreach LOG generate myfuncs.create_structure(LINE);
+        DUMP DETAILS;
 
     完成此作业后，看到的输出应该与之前使用 Jython 运行脚本后的输出相同。
 
@@ -225,90 +225,90 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 
 这些步骤使用 Azure PowerShell。如果尚未在开发计算机上安装并配置 Azure PowerShell，请在使用以下步骤之前，参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
-[AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+[!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 1. 使用 Python 示例 [streaming.py](#streamingpy) 和 pig_python.py 在开发计算机上创建文件的本地副本。
 
 2. 使用以下 PowerShell 脚本将 **streaming.py** 和 **pig\_python.py** 文件上传到服务器。在脚本的前三行中，替换 Azure HDInsight 群集的名称，以及 **streaming.py** 和 **pig\_python.py** 文件的路径。
 
-		$clusterName = YourHDIClusterName
-		$pathToStreamingFile = "C:\path\to\streaming.py"
-		$pathToJythonFile = "C:\path\to\pig_python.py"
+        $clusterName = YourHDIClusterName
+        $pathToStreamingFile = "C:\path\to\streaming.py"
+        $pathToJythonFile = "C:\path\to\pig_python.py"
 
-		$hdiStore = get-azurehdinsightcluster -name $clusterName
-		$storageAccountName = $hdiStore.DefaultStorageAccount.StorageAccountName.Split(".",2)[0]
-		$storageAccountKey = $hdiStore.defaultstorageaccount.storageaccountkey
-		$defaultContainer = $hdiStore.DefaultStorageAccount.StorageContainerName
+        $hdiStore = get-azurehdinsightcluster -name $clusterName
+        $storageAccountName = $hdiStore.DefaultStorageAccount.StorageAccountName.Split(".",2)[0]
+        $storageAccountKey = $hdiStore.defaultstorageaccount.storageaccountkey
+        $defaultContainer = $hdiStore.DefaultStorageAccount.StorageContainerName
 
-		$destContext = new-azurestoragecontext -storageaccountname $storageAccountName -storageaccountkey $storageAccountKey
-		set-azurestorageblobcontent -file $pathToStreamingFile -Container $defaultContainer -Blob "streaming.py" -context $destContext
-		set-azurestorageblobcontent -file $pathToJythonFile -Container $defaultContainer -Blob "jython.py" -context $destContext
+        $destContext = new-azurestoragecontext -storageaccountname $storageAccountName -storageaccountkey $storageAccountKey
+        set-azurestorageblobcontent -file $pathToStreamingFile -Container $defaultContainer -Blob "streaming.py" -context $destContext
+        set-azurestorageblobcontent -file $pathToJythonFile -Container $defaultContainer -Blob "jython.py" -context $destContext
 
-	此脚本将检索 HDInsight 群集的信息，然后提取默认存储帐户的名称和密钥，并将文件上传到容器的根目录。
+    此脚本将检索 HDInsight 群集的信息，然后提取默认存储帐户的名称和密钥，并将文件上传到容器的根目录。
 
-	> [AZURE.NOTE] [在 HDInsight 中上传 Hadoop 作业的数据](/documentation/articles/hdinsight-upload-data/)文档中介绍了上传脚本的其他方法。
+    > [!NOTE] [在 HDInsight 中上传 Hadoop 作业的数据](./hdinsight-upload-data.md)文档中介绍了上传脚本的其他方法。
 
 上传文件后，使用以下 PowerShell 脚本启动作业。完成作业时，会将输出写入到 PowerShell 控制台。
 
 ####Hive
 
     # Replace 'YourHDIClusterName' with the name of your cluster
-	$clusterName = YourHDIClusterName
+    $clusterName = YourHDIClusterName
     # If using a Windows-based HDInsight cluster, change the USING statement to:
     # "USING 'D:\Python27\python.exe streaming.py' AS " +
-	$HiveQuery = "add file wasbs:///streaming.py;" +
-	             "SELECT TRANSFORM (clientid, devicemake, devicemodel) " +
-	               "USING 'python streaming.py' AS " +
-	               "(clientid string, phoneLabel string, phoneHash string) " +
-	             "FROM hivesampletable " +
-	             "ORDER BY clientid LIMIT 50;"
+    $HiveQuery = "add file wasbs:///streaming.py;" +
+                 "SELECT TRANSFORM (clientid, devicemake, devicemodel) " +
+                   "USING 'python streaming.py' AS " +
+                   "(clientid string, phoneLabel string, phoneHash string) " +
+                 "FROM hivesampletable " +
+                 "ORDER BY clientid LIMIT 50;"
 
-	$jobDefinition = New-AzureHDInsightHiveJobDefinition -Query $HiveQuery -StatusFolder '/hivepython'
+    $jobDefinition = New-AzureHDInsightHiveJobDefinition -Query $HiveQuery -StatusFolder '/hivepython'
 
-	$job = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $jobDefinition
-	Write-Host "Wait for the Hive job to complete ..." -ForegroundColor Green
-	Wait-AzureHDInsightJob -Job $job
+    $job = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $jobDefinition
+    Write-Host "Wait for the Hive job to complete ..." -ForegroundColor Green
+    Wait-AzureHDInsightJob -Job $job
     # Uncomment the following to see stderr output
     # Get-AzureHDInsightJobOutput -StandardError -JobId $job.JobId -Cluster $clusterName
-	Write-Host "Display the standard output ..." -ForegroundColor Green
-	Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $job.JobId -StandardOutput
+    Write-Host "Display the standard output ..." -ForegroundColor Green
+    Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $job.JobId -StandardOutput
 
 **Hive** 作业的输出应该如下所示：
 
-	100041	RIM 9650	d476f3687700442549a83fac4560c51c
-	100041	RIM 9650	d476f3687700442549a83fac4560c51c
-	100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
-	100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
-	100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
+    100041	RIM 9650	d476f3687700442549a83fac4560c51c
+    100041	RIM 9650	d476f3687700442549a83fac4560c51c
+    100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
+    100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
+    100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
 
 ####Pig (Jython)
-> [AZURE.NOTE] 使用 PowerShell 远程提交作业时，无法使用 C Python 作为解释器。
+> [!NOTE] 使用 PowerShell 远程提交作业时，无法使用 C Python 作为解释器。
 
-	# Replace 'YourHDIClusterName' with the name of your cluster
-	$clusterName = YourHDIClusterName
-	$PigQuery = "Register wasbs:///jython.py using jython as myfuncs;" +
-	            "LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);" +
-	            "LOG = FILTER LOGS by LINE is not null;" +
-	            "DETAILS = foreach LOG generate myfuncs.create_structure(LINE);" +
-	            "DUMP DETAILS;"
+    # Replace 'YourHDIClusterName' with the name of your cluster
+    $clusterName = YourHDIClusterName
+    $PigQuery = "Register wasbs:///jython.py using jython as myfuncs;" +
+                "LOGS = LOAD 'wasbs:///example/data/sample.log' as (LINE:chararray);" +
+                "LOG = FILTER LOGS by LINE is not null;" +
+                "DETAILS = foreach LOG generate myfuncs.create_structure(LINE);" +
+                "DUMP DETAILS;"
 
-	$jobDefinition = New-AzureHDInsightPigJobDefinition -Query $PigQuery -StatusFolder '/pigpython'
+    $jobDefinition = New-AzureHDInsightPigJobDefinition -Query $PigQuery -StatusFolder '/pigpython'
 
-	$job = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $jobDefinition
-	Write-Host "Wait for the Pig job to complete ..." -ForegroundColor Green
-	Wait-AzureHDInsightJob -Job $job
+    $job = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $jobDefinition
+    Write-Host "Wait for the Pig job to complete ..." -ForegroundColor Green
+    Wait-AzureHDInsightJob -Job $job
     # Uncomment the following to see stderr output
     # Get-AzureHDInsightJobOutput -StandardError -JobId $job.JobId -Cluster $clusterName
-	Write-Host "Display the standard output ..." -ForegroundColor Green
-	Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $job.JobId -StandardOutput
+    Write-Host "Display the standard output ..." -ForegroundColor Green
+    Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $job.JobId -StandardOutput
 
 **Pig** 作业的输出应该如下所示：
 
-	((2012-02-03,20:11:56,SampleClass5,[TRACE],verbose detail for id 990982084))
-	((2012-02-03,20:11:56,SampleClass7,[TRACE],verbose detail for id 1560323914))
-	((2012-02-03,20:11:56,SampleClass8,[DEBUG],detail for id 2083681507))
-	((2012-02-03,20:11:56,SampleClass3,[TRACE],verbose detail for id 1718828806))
-	((2012-02-03,20:11:56,SampleClass3,[INFO],everything normal for id 530537821))
+    ((2012-02-03,20:11:56,SampleClass5,[TRACE],verbose detail for id 990982084))
+    ((2012-02-03,20:11:56,SampleClass7,[TRACE],verbose detail for id 1560323914))
+    ((2012-02-03,20:11:56,SampleClass8,[DEBUG],detail for id 2083681507))
+    ((2012-02-03,20:11:56,SampleClass3,[TRACE],verbose detail for id 1718828806))
+    ((2012-02-03,20:11:56,SampleClass3,[INFO],everything normal for id 530537821))
 
 ##<a name="troubleshooting"></a>故障排除
 
@@ -317,7 +317,7 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 运行 hive 作业时，可能遇到如下错误：
 
     Caused by: org.apache.hadoop.hive.ql.metadata.HiveException: [Error 20001]: An error occurred while reading or writing to your custom script. It may have crashed with an error.
-    
+
 此问题可能是由 streaming.py 文件中的行尾结束符号导致的。许多 Windows 编辑器默认为使用 CRLF 作为行尾结束符号，但 Linux 应用程序通常应使用 LF。
 
 如果所用编辑器无法创建 LF 行尾结束符号，或者不确定要使用什么行尾结束符号，在将文件上传到 HDInsight 之前，请使用以下 PowerShell 语句删除 CR 字符：
@@ -330,7 +330,7 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 
 用于运行示例的两个示例 PowerShell 脚本都包含一个带注释的行，该行将显示作业的错误输出。如果你未看到作业的预期输出，请取消注释以下行，并查看错误信息中是否指明了问题。
 
-	# Get-AzureHDInsightJobOutput -StandardError -JobId $job.JobId -Cluster $clusterName
+    # Get-AzureHDInsightJobOutput -StandardError -JobId $job.JobId -Cluster $clusterName
 
 错误信息 (STDERR) 和作业的结果 (STDOUT) 还会记录到群集默认 Blob 容器中的以下位置。
 
@@ -345,10 +345,10 @@ Pig|/PigPython/stderr<p>/PigPython/stdout
 
 若要了解使用 Pig、Hive 的其他方式以及如何使用 MapReduce，请参阅以下内容。
 
-* [将 Hive 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-hive/)
+* [将 Hive 与 HDInsight 配合使用](./hdinsight-use-hive.md)
 
-* [将 Pig 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Pig 与 HDInsight 配合使用](./hdinsight-use-pig.md)
 
-* [将 MapReduce 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将 MapReduce 与 HDInsight 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

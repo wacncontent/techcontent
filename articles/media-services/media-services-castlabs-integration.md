@@ -1,28 +1,26 @@
-<properties 
-	pageTitle="使用 castLabs 将 Widevine 许可证传送到 Azure 媒体服务" 
-	description="本文介绍如何使用 Azure 媒体服务 (AMS) 传送 AMS 通过 PlayReady 和 Widevine DRM 动态加密的流。PlayReady 许可证来自媒体服务 PlayReady 许可证服务器，而 Widevine 许可证则由 castLabs 许可证服务器传送。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Mingfeiy" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 castLabs 将 Widevine 许可证传送到 Azure 媒体服务
+description: 本文介绍如何使用 Azure 媒体服务 (AMS) 传送 AMS 通过 PlayReady 和 Widevine DRM 动态加密的流。PlayReady 许可证来自媒体服务 PlayReady 许可证服务器，而 Widevine 许可证则由 castLabs 许可证服务器传送。
+services: media-services
+documentationCenter: 
+authors: Mingfeiy
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/26/2016" 
-	wacn.date="12/16/2016"  
-	ms.author="Mingfeiy;willzhan;Juliako"/>  
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/16/2016
+ms.author: Mingfeiy;willzhan;Juliako
+---
 
 #使用 castLabs 将 Widevine 许可证传送到 Azure 媒体服务
 
-> [AZURE.SELECTOR]
-- [castLabs](/documentation/articles/media-services-castlabs-integration/)
+> [!div class="op_single_selector"]
+- [castLabs](./media-services-castlabs-integration.md)
 
 ##概述
 
@@ -74,44 +72,42 @@ jti|有关此令牌的唯一标识符（每个令牌只能在 castLabs 系统中
 
 [示例解决方案](https://github.com/AzureMediaServicesSamples/CastlabsIntegration)由两个项目组成：
 
--	可用于对 PlayReady 和 Widevine 的已引入资产设置 DRM 限制的控制台应用程序。
--	分发令牌的 Web 应用程序，可将其视为 STS 的非常简化的版本。
-
+- 可用于对 PlayReady 和 Widevine 的已引入资产设置 DRM 限制的控制台应用程序。
+- 分发令牌的 Web 应用程序，可将其视为 STS 的非常简化的版本。
 
 若要使用控制台应用程序，请执行以下操作：
 
-1.	更改 app.config 以设置 AMS 凭据、castLabs 凭据、STS 配置和共享密钥。
-2.	将资产上传到 AMS。
-3.	从上传的资源中获取 UUID 并更改 Program.cs 文件中的第 32 行：
+1. 更改 app.config 以设置 AMS 凭据、castLabs 凭据、STS 配置和共享密钥。
+2. 将资产上传到 AMS。
+3. 从上传的资源中获取 UUID 并更改 Program.cs 文件中的第 32 行：
 
-		 var objIAsset = _context.Assets.Where(x => x.Id == "nb:cid:UUID:dac53a5d-1500-80bd-b864-f1e4b62594cf").FirstOrDefault();
+         var objIAsset = _context.Assets.Where(x => x.Id == "nb:cid:UUID:dac53a5d-1500-80bd-b864-f1e4b62594cf").FirstOrDefault();
 
-4.	使用 AssetId 来命名 castLabs 系统中的资源（Program.cs 文件中的第 44 行）。
+4. 使用 AssetId 来命名 castLabs 系统中的资源（Program.cs 文件中的第 44 行）。
 
-	必须为 **castLabs** 设置 AssetId；它必须是唯一的字母数字字符串。
+    必须为 **castLabs** 设置 AssetId；它必须是唯一的字母数字字符串。
 
-5.	运行该程序。
-
+5. 运行该程序。
 
 若要使用 Web 应用程序 (STS)，请执行以下操作：
 
-1.	更改 web.config 以设置 castlabs 商家 ID、STS 配置和共享密钥。
-2.	部署到 Azure 网站。
-3.	导航到该网站。
+1. 更改 web.config 以设置 castlabs 商家 ID、STS 配置和共享密钥。
+2. 部署到 Azure 网站。
+3. 导航到该网站。
 
 ##播放视频
 
 若要播放使用通用加密（PlayReady 和/或 Widevine）加密的视频，可以使用 [Azure Media Player](http://amsplayer.azurewebsites.net/azuremediaplayer.html)。运行控制台应用程序时，将回显内容密钥 ID 和清单 URL。
 
-1.	打开新选项卡并启动 STS：http://[yourStsName].chinacloudsites.cn/api/token/assetid/[yourCastLabsAssetId]/contentkeyid/[thecontentkeyid]。
-2.	转到 [Azure Media Player](http://amsplayer.azurewebsites.net/azuremediaplayer.html)。
-3.	粘贴流式处理 URL。
-4.	单击“高级选项”复选框。
-5.	在“保护”下拉列表中选择 PlayReady 和/或 Widevine。
-6.	将从 STS 获取的令牌粘贴到“令牌”文本框中。
-	
-	castLab 许可证服务器不需要在令牌前面加“Bearer=”前缀。因此，请在提交令牌之前删除该前缀。
-7.	更新播放器。
-8.	视频应正在播放。
+1. 打开新选项卡并启动 STS：http://[yourStsName].chinacloudsites.cn/api/token/assetid/[yourCastLabsAssetId]/contentkeyid/[thecontentkeyid]。
+2. 转到 [Azure Media Player](http://amsplayer.azurewebsites.net/azuremediaplayer.html)。
+3. 粘贴流式处理 URL。
+4. 单击“高级选项”复选框。
+5. 在“保护”下拉列表中选择 PlayReady 和/或 Widevine。
+6. 将从 STS 获取的令牌粘贴到“令牌”文本框中。
+
+    castLab 许可证服务器不需要在令牌前面加“Bearer=”前缀。因此，请在提交令牌之前删除该前缀。
+7. 更新播放器。
+8. 视频应正在播放。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

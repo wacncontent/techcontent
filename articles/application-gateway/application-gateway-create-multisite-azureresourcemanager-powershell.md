@@ -1,27 +1,27 @@
-<properties
-    pageTitle="创建托管多个站点的应用程序网关 | Azure"
-    description="此页说明了如何创建和配置 Azure 应用程序网关，以便在同一网关托管多个 Web 应用程序。"
-    documentationcenter="na"
-    services="application-gateway"
-    author="amsriva"
-    manager="rossort"
-    editor="amsriva" />  
+---
+title: 创建托管多个站点的应用程序网关 | Azure
+description: 此页说明了如何创建和配置 Azure 应用程序网关，以便在同一网关托管多个 Web 应用程序。
+documentationcenter: na
+services: application-gateway
+author: amsriva
+manager: rossort
+editor: amsriva
 
-<tags
-    ms.assetid="b107d647-c9be-499f-8b55-809c4310c783"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/12/2016"
-    wacn.date="01/03/2017"
-    ms.author="amsriva" />
+ms.assetid: b107d647-c9be-499f-8b55-809c4310c783
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/12/2016
+wacn.date: 01/03/2017
+ms.author: amsriva
+---
 
 # 创建托管多个 Web 应用程序的应用程序网关
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/application-gateway-create-multisite-portal/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-create-multisite-azureresourcemanager-powershell/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./application-gateway-create-multisite-portal.md)
+- [Azure Resource Manager PowerShell](./application-gateway-create-multisite-azureresourcemanager-powershell.md)
 
 托管多个站点可以让你在同一应用程序网关上部署多个 Web 应用程序。系统会通过传入 HTTP 请求中存在的主机标头来确定接收流量的侦听器。然后，侦听器会根据网关规则定义中的配置将流量定向到适当的后端池。在启用了 SSL 的 Web 应用程序中，应用程序网关将根据服务器名称指示 (SNI) 扩展来选择 Web 流量的适当侦听器。通常会通过托管多个站点将不同 Web 域的请求负载均衡到不同的后端服务器池。同样还可以将同一根域的多个子域托管到同一应用程序网关。
 
@@ -30,7 +30,6 @@
 在以下示例中，应用程序网关使用两个后端服务器池来为 contoso.com 和 fabrikam.com 提供流量：contoso 服务器池和 fabrikam 服务器池。可以使用类似的设置来托管 app.contoso.com 和 blog.contoso.com 这样的子域。
 
 ![imageURLroute](./media/application-gateway-create-multisite-azureresourcemanager-powershell/multisite.png)  
-
 
 ## 准备阶段
 
@@ -56,7 +55,7 @@
 
 ## 创建 Resource Manager 的资源组
 
-确保使用最新版本的 Azure PowerShell。[将 Windows PowerShell 与 Resource Manager 配合使用](/documentation/articles/powershell-azure-resource-manager/)中提供详细信息。
+确保使用最新版本的 Azure PowerShell。[将 Windows PowerShell 与 Resource Manager 配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)中提供详细信息。
 
 ### 步骤 1
 
@@ -92,8 +91,8 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
 在上面的示例中，我们创建了名为“appgw-RG”的资源组，位置为“中国北部”。
 
-> [AZURE.NOTE]
-如果你需要为应用程序网关配置自定义探测，请参阅 [Create an application gateway with custom probes by using PowerShell](/documentation/articles/application-gateway-create-probe-ps/)（使用 PowerShell 创建带自定义探测的应用程序网关）。有关详细信息，请参阅[自定义探测和运行状况监视](/documentation/articles/application-gateway-probe-overview/)。
+> [!NOTE]
+如果你需要为应用程序网关配置自定义探测，请参阅 [Create an application gateway with custom probes by using PowerShell](./application-gateway-create-probe-ps.md)（使用 PowerShell 创建带自定义探测的应用程序网关）。有关详细信息，请参阅[自定义探测和运行状况监视](./application-gateway-probe-overview.md)。
 
 ## 创建虚拟网络和子网
 
@@ -203,7 +202,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
     $appgw = New-AzureRmApplicationGateway -Name appgwtest -ResourceGroupName appgw-RG -Location "China North" -BackendAddressPools $pool1,$pool2 -BackendHttpSettingsCollection $poolSetting01, $poolSetting02 -FrontendIpConfigurations $fipconfig01 -GatewayIpConfigurations $gipconfig -FrontendPorts $fp01 -HttpListeners $listener01, $listener02 -RequestRoutingRules $rule01, $rule02 -Sku $sku -SslCertificates $cert01, $cert02
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 应用程序网关预配是运行时间较长的操作，可能需要一段时间才能完成。
 > 
 > 
@@ -238,6 +237,6 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
 ## 后续步骤
 
-通过[应用程序网关 - Web 应用程序防火墙](/documentation/articles/application-gateway-webapplicationfirewall-overview/)了解如何保护网站
+通过[应用程序网关 - Web 应用程序防火墙](./application-gateway-webapplicationfirewall-overview.md)了解如何保护网站
 
 <!---HONumber=Mooncake_1226_2016-->

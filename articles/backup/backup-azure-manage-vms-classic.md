@@ -1,30 +1,28 @@
 
-<properties
-	pageTitle="管理和监视 Azure 虚拟机备份 | Azure"
-	description="了解如何管理和监视 Azure 虚拟机备份"
-	services="backup"
-	documentationCenter=""
-	authors="trinadhk"
-	manager="shreeshd"
-	editor=""/>  
+---
+title: 管理和监视 Azure 虚拟机备份 | Azure
+description: 了解如何管理和监视 Azure 虚拟机备份
+services: backup
+documentationCenter: 
+authors: trinadhk
+manager: shreeshd
+editor: 
 
-
-<tags
-	ms.service="backup"
-	ms.workload="storage-backup-recovery"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/31/2016"
-	ms.author="trinadhk; jimpark; markgal;"
-   	wacn.date="01/19/2017"/>  
-
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/31/2016
+ms.author: trinadhk; jimpark; markgal;
+wacn.date: 01/19/2017
+---
 
 # 管理和监视 Azure 虚拟机备份
 
 本文针对在 Azure 中受保护的经典模型虚拟机介绍了几种常见的管理和监视任务。
 
->[AZURE.NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](/documentation/articles/resource-manager-deployment-model/)。有关使用经典部署模型 VM 的详细信息，请参阅[进行备份 Azure 虚拟机所需的环境准备](/documentation/articles/backup-azure-vms-prepare/)。
+>[!NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。有关使用经典部署模型 VM 的详细信息，请参阅[进行备份 Azure 虚拟机所需的环境准备](./backup-azure-vms-prepare.md)。
 
 ## 管理受保护的虚拟机
 
@@ -51,7 +49,7 @@
 ## 虚拟机的按需备份
 为虚拟机配置保护后，可以对它执行按需备份。如果虚拟机的初始备份已挂起，则按需备份将在 Azure 备份保管库中创建虚拟机的完整副本。如果已完成第一个备份，按需备份只会将以前备份的更改发送到 Azure 备份保管库，即始终进行增量备份。
 
->[AZURE.NOTE] 按需备份的保留期范围设置为保留期值，该值在备份策略中根据 VM 针对“每日”保留期来指定。
+>[!NOTE] 按需备份的保留期范围设置为保留期值，该值在备份策略中根据 VM 针对“每日”保留期来指定。
 
 若要执行虚拟机的按需备份，请执行以下操作：
 
@@ -67,7 +65,7 @@
 
     ![创建备份作业](./media/backup-azure-manage-vms/creating-job.png)
 
-    >[AZURE.NOTE] 若要查看与虚拟机关联的策略，请向下钻取到“受保护的项”页中的虚拟机，然后转到“备份策略”选项卡。
+    >[!NOTE] 若要查看与虚拟机关联的策略，请向下钻取到“受保护的项”页中的虚拟机，然后转到“备份策略”选项卡。
 
 3. 创建作业后，可以单击 Toast 栏中的“查看作业”按钮，以在“作业”页中查看相应的作业。
 
@@ -81,7 +79,7 @@
 - 保留 Azure 备份保管库中与虚拟机关联的备份数据
 - 删除与虚拟机关联的备份数据
 
-如果你已选择保留与虚拟机关联的备份数据，则可使用该备份数据来还原虚拟机。有关此类虚拟机的定价详细信息，请单击[此处](/pricing/details/backup/)。
+如果你已选择保留与虚拟机关联的备份数据，则可使用该备份数据来还原虚拟机。有关此类虚拟机的定价详细信息，请单击[此处](https://www.azure.cn/pricing/details/backup/)。
 
 若要停止保护虚拟机，请执行以下操作：
 
@@ -93,11 +91,9 @@
 
     ![停止保护](./media/backup-azure-manage-vms/stop-protection.png)  
 
-
 3. 默认情况下，Azure 备份不会删除与虚拟机关联的备份数据。
 
     ![确认停止保护](./media/backup-azure-manage-vms/confirm-stop-protection.png)  
-
 
     如果你要删除备份数据，请选中该复选框。
 
@@ -113,7 +109,6 @@
 
     ![已停止保护](./media/backup-azure-manage-vms/protection-stopped-status.png)  
 
-
     如果已选择“删除关联的备份数据”选项，则虚拟机不会出现在“受保护的项”页中。
 
 ## 重新保护虚拟机
@@ -123,8 +118,7 @@
 
   ![重新保护 VM](./media/backup-azure-manage-vms/reprotected-status.png)  
 
-
->[AZURE.NOTE] 重新保护虚拟机时，你可以选择一个不同的策略，而不是最初用于保护虚拟机的策略。
+>[!NOTE] 重新保护虚拟机时，你可以选择一个不同的策略，而不是最初用于保护虚拟机的策略。
 
 ## 取消注册虚拟机
 
@@ -173,7 +167,7 @@
 
 ![仪表板](./media/backup-azure-manage-vms/dashboard-protectedvms.png)
 
->[AZURE.NOTE] 仪表板中的值每 24 小时刷新一次。
+>[!NOTE] 仪表板中的值每 24 小时刷新一次。
 
 ## 审核操作
 可以通过 Azure 备份来查看客户触发的备份操作的“操作日志”，因此可以轻松地确切了解针对备份保管库执行了哪些管理操作。通过操作日志，可以针对备份操作进行很好的事后总结和审核。
@@ -215,8 +209,8 @@
 
 若要定义自定义通知以便在备份失败时发出警报，可使用如下所示的示例命令：
 
-	PS C:\> $actionEmail = New-AzureRmAlertRuleEmail -CustomEmail contoso@microsoft.com
-	PS C:\> Add-AzureRmLogAlertRule -Name backupFailedAlert -Location "China East" -ResourceGroup RecoveryServices-DP2RCXUGWS3MLJF4LKPI3A3OMJ2DI4SRJK6HIJH22HFIHZVVELRQ-East-US -OperationName Microsoft.Backup/backupVault/Backup -Status Failed -TargetResourceId /subscriptions/86eeac34-eth9a-4de3-84db-7a27d121967e/resourceGroups/RecoveryServices-DP2RCXUGWS3MLJF4LKPI3A3OMJ2DI4SRJK6HIJH22HFIHZVVELRQ-East-US/providers/microsoft.backupbvtd2/BackupVault/trinadhVault -Actions $actionEmail
+    PS C:\> $actionEmail = New-AzureRmAlertRuleEmail -CustomEmail contoso@microsoft.com
+    PS C:\> Add-AzureRmLogAlertRule -Name backupFailedAlert -Location "China East" -ResourceGroup RecoveryServices-DP2RCXUGWS3MLJF4LKPI3A3OMJ2DI4SRJK6HIJH22HFIHZVVELRQ-East-US -OperationName Microsoft.Backup/backupVault/Backup -Status Failed -TargetResourceId /subscriptions/86eeac34-eth9a-4de3-84db-7a27d121967e/resourceGroups/RecoveryServices-DP2RCXUGWS3MLJF4LKPI3A3OMJ2DI4SRJK6HIJH22HFIHZVVELRQ-East-US/providers/microsoft.backupbvtd2/BackupVault/trinadhVault -Actions $actionEmail
 
 **ResourceId**：你可以从“操作日志”弹出窗口中获取此项，如以上部分所述。操作的详细信息弹出窗口中的 ResourceUri 是要针对此 cmdlet 提交的 ResourceId。
 
@@ -241,6 +235,6 @@
 
 ## 后续步骤
 
-- [还原 Azure VM](/documentation/articles/backup-azure-restore-vms/)
+- [还原 Azure VM](./backup-azure-restore-vms.md)
 
 <!---HONumber=Mooncake_1017_2016-->

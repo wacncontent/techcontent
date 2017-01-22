@@ -1,22 +1,21 @@
-<properties 
- pageTitle="计划程序的概念、术语和实体 | Azure"
- description="Azure 计划程序的概念、术语和实体层次结构，包括作业和作业集合。显示了一个计划作业的综合示例。"
- services="scheduler"
- documentationCenter=".NET"
- authors="krisragh"
- manager="dwrede"
- editor=""/>  
+---
+title: 计划程序的概念、术语和实体 | Azure
+description: Azure 计划程序的概念、术语和实体层次结构，包括作业和作业集合。显示了一个计划作业的综合示例。
+services: scheduler
+documentationCenter: .NET
+authors: krisragh
+manager: dwrede
+editor: 
 
-<tags
- ms.service="scheduler"
- ms.workload="infrastructure-services"
- ms.tgt_pltfrm="na"
- ms.devlang="dotnet"
- ms.topic="get-started-article"
- ms.date="08/18/2016"
- wacn.date="01/03/2017"
- ms.author="krisragh"/>  
-
+ms.service: scheduler
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: get-started-article
+ms.date: 08/18/2016
+wacn.date: 01/03/2017
+ms.author: krisragh
+---
 
 # 计划程序的概念、术语和实体层次结构
 
@@ -60,55 +59,55 @@
 
 以下代码提供了一个计划作业的综合示例。后面的部分中将提供详细信息。
 
-	{
-		"startTime": "2012-08-04T00:00Z",               // optional
-		"action":
-		{
-			"type": "http",
-			"retryPolicy": { "retryType":"none" },
-			"request":
-			{
-				"uri": "http://contoso.com/foo",        // required
-				"method": "PUT",                        // required
-				"body": "Posting from a timer",         // optional
-				"headers":                              // optional
+    {
+        "startTime": "2012-08-04T00:00Z",               // optional
+        "action":
+        {
+            "type": "http",
+            "retryPolicy": { "retryType":"none" },
+            "request":
+            {
+                "uri": "http://contoso.com/foo",        // required
+                "method": "PUT",                        // required
+                "body": "Posting from a timer",         // optional
+                "headers":                              // optional
 
-				{
-					"Content-Type": "application/json"
-				},
-			},
-		   "errorAction":
-		   {
-			   "type": "http",
-			   "request":
-			   {
-				   "uri": "http://contoso.com/notifyError",
-				   "method": "POST",
-			   },
-		   },
-		},
-		"recurrence":                                   // optional
-		{
-			"frequency": "week",                        // can be "year" "month" "day" "week" "minute"
-			"interval": 1,                              // optional, how often to fire (default to 1)
-			"schedule":                                 // optional (advanced scheduling specifics)
-			{
-				"weekDays": ["monday", "wednesday", "friday"],
-				"hours": [10, 22]
-			},
-			"count": 10,                                 // optional (default to recur infinitely)
-			"endTime": "2012-11-04",                     // optional (default to recur infinitely)
-		},
-		"state": "disabled",                           // enabled or disabled
-		"status":                                       // controlled by Scheduler service
-		{
-			"lastExecutionTime": "2007-03-01T13:00:00Z",
-			"nextExecutionTime": "2007-03-01T14:00:00Z ",
-			"executionCount": 3,
-											    "failureCount": 0,
-												"faultedCount": 0
-		},
-	}
+                {
+                    "Content-Type": "application/json"
+                },
+            },
+           "errorAction":
+           {
+               "type": "http",
+               "request":
+               {
+                   "uri": "http://contoso.com/notifyError",
+                   "method": "POST",
+               },
+           },
+        },
+        "recurrence":                                   // optional
+        {
+            "frequency": "week",                        // can be "year" "month" "day" "week" "minute"
+            "interval": 1,                              // optional, how often to fire (default to 1)
+            "schedule":                                 // optional (advanced scheduling specifics)
+            {
+                "weekDays": ["monday", "wednesday", "friday"],
+                "hours": [10, 22]
+            },
+            "count": 10,                                 // optional (default to recur infinitely)
+            "endTime": "2012-11-04",                     // optional (default to recur infinitely)
+        },
+        "state": "disabled",                           // enabled or disabled
+        "status":                                       // controlled by Scheduler service
+        {
+            "lastExecutionTime": "2007-03-01T13:00:00Z",
+            "nextExecutionTime": "2007-03-01T14:00:00Z ",
+            "executionCount": 3,
+                                                "failureCount": 0,
+                                                "faultedCount": 0
+        },
+    }
 
 如上面的示例计划作业中所示，一个作业定义具有若干部分：
 
@@ -136,17 +135,17 @@
 
 上例中的操作是一个 HTTP 操作。下面是存储队列操作的示例：
 
-	{
-			"type": "storageQueue",
-			"queueMessage":
-			{
-				"storageAccount": "myStorageAccount",  // required
-				"queueName": "myqueue",                // required
-				"sasToken": "TOKEN",                   // required
-				"message":                             // required
-					"My message body",
-			},
-	}
+    {
+            "type": "storageQueue",
+            "queueMessage":
+            {
+                "storageAccount": "myStorageAccount",  // required
+                "queueName": "myqueue",                // required
+                "sasToken": "TOKEN",                   // required
+                "message":                             // required
+                    "My message body",
+            },
+    }
 
 下面是服务总线主题操作的示例。
 
@@ -169,7 +168,6 @@
   }
 
 下面是服务总线队列操作的示例：
-
 
   "action": {
     "serviceBusQueueMessage": {
@@ -211,8 +209,7 @@
 
 作业的状态是以下四个值之一：enabled、disabled、completed 或 faulted。你可以 PUT 或 PATCH 作业以便将它们更新到已启用或已禁用状态。如果某一作业已完成或已出错，则该作业是不能更新的最终状态（尽管该作业仍可以是 DELETED）。如下所示是状态属性的示例：
 
-
-    	"state": "disabled", // enabled, disabled, completed, or faulted
+        "state": "disabled", // enabled, disabled, completed, or faulted
 60 天后删除完成的作业和出错的作业。
 
 ## status
@@ -231,23 +228,22 @@
 
 ## 另请参阅
 
- [计划程序是什么？](/documentation/articles/scheduler-intro/)
+ [计划程序是什么？](./scheduler-intro.md)
 
- [开始在管理门户中使用计划程序](/documentation/articles/scheduler-get-started-portal/)
+ [开始在管理门户中使用计划程序](./scheduler-get-started-portal.md)
 
- [Azure 计划程序中的计划和计费](/documentation/articles/scheduler-plans-billing/)
+ [Azure 计划程序中的计划和计费](./scheduler-plans-billing.md)
 
- [如何使用 Azure 计划程序生成复杂的计划和高级循环](/documentation/articles/scheduler-advanced-complexity/)
+ [如何使用 Azure 计划程序生成复杂的计划和高级循环](./scheduler-advanced-complexity.md)
 
  [Azure 计划程序 REST API 参考](https://msdn.microsoft.com/zh-cn/library/mt629143)
 
- [Azure 计划程序 PowerShell cmdlet 参考](/documentation/articles/scheduler-powershell-reference/)
+ [Azure 计划程序 PowerShell cmdlet 参考](./scheduler-powershell-reference.md)
 
- [Azure 计划程序的高可用性和可靠性](/documentation/articles/scheduler-high-availability-reliability/)
+ [Azure 计划程序的高可用性和可靠性](./scheduler-high-availability-reliability.md)
 
- [Azure 计划程序的限制、默认值和错误代码](/documentation/articles/scheduler-limits-defaults-errors/)
+ [Azure 计划程序的限制、默认值和错误代码](./scheduler-limits-defaults-errors.md)
 
- [Azure 计划程序出站身份验证](/documentation/articles/scheduler-outbound-authentication/)
- 
+ [Azure 计划程序出站身份验证](./scheduler-outbound-authentication.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

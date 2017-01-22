@@ -1,37 +1,38 @@
-<properties
-    pageTitle="在经典部署模型中使用 PowerShell 创建内部负载均衡器 | Azure"
-    description="了解如何在经典部署模型中使用 PowerShell 创建内部负载均衡器"
-    services="load-balancer"
-    documentationcenter="na"
-    author="kumudd"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management" />
-<tags
-    ms.assetid="3be93168-3787-45a5-a194-9124fe386493"
-    ms.service="load-balancer"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/09/2016"
-    wacn.date="01/13/2017"
-    ms.author="kumud" />
+---
+title: 在经典部署模型中使用 PowerShell 创建内部负载均衡器 | Azure
+description: 了解如何在经典部署模型中使用 PowerShell 创建内部负载均衡器
+services: load-balancer
+documentationcenter: na
+author: kumudd
+manager: timlt
+editor: 
+tags: azure-service-management
+
+ms.assetid: 3be93168-3787-45a5-a194-9124fe386493
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/09/2016
+wacn.date: 01/13/2017
+ms.author: kumud
+---
 
 # 开始使用 PowerShell 创建内部负载均衡器（经典）
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/load-balancer-get-started-ilb-classic-ps/)
-- [Azure CLI](/documentation/articles/load-balancer-get-started-ilb-classic-cli/)
-- [云服务](/documentation/articles/load-balancer-get-started-ilb-classic-cloud/)
+> [!div class="op_single_selector"]
+- [PowerShell](./load-balancer-get-started-ilb-classic-ps.md)
+- [Azure CLI](./load-balancer-get-started-ilb-classic-cli.md)
+- [云服务](./load-balancer-get-started-ilb-classic-cloud.md)
 
-[AZURE.INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
+[!INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
 
-> [AZURE.IMPORTANT]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](/documentation/articles/load-balancer-get-started-ilb-arm-ps/)。
+> [!IMPORTANT]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](./load-balancer-get-started-ilb-arm-ps.md)。
 
-[AZURE.INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
+[!INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
 
-[AZURE.INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
+[!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
 ## 为虚拟机创建内部负载均衡器集
 
@@ -84,7 +85,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 通过显示 Get-AzureInternalLoadBalancer 命令，请记下 IP 地址，并对服务器或 DNS 记录进行必要的更改，以确保将流量发送到 VIP。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Azure Platform 对各种管理方案使用一个公开可路由的静态 IPv4 地址。该 IP 地址为 168.63.129.16。此 IP 地址不应被任何防火墙阻止，因为这会导致意外行为。对于 Azure 内部负载均衡，此 IP 地址用于监视负载均衡器中的探测器，以确定负载均衡集中虚拟机的运行状况状态。如果网络安全组用于将流量限制到内部负载均衡集中的 Azure 虚拟机或应用于虚拟网络子网，请确保添加网络安全规则以允许来自 168.63.129.16 的流量。
 
 ## 内部负载均衡的示例
@@ -161,9 +162,9 @@ Azure Platform 对各种管理方案使用一个公开可路由的静态 IPv4 �
 
 ## 后续步骤
 
-[使用源 IP 关联配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[使用源 IP 关联配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
-[为负载均衡器配置空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)
+[为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: update meta properties & wording update & update link references & update code-->

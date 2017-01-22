@@ -1,22 +1,21 @@
-<properties
-   pageTitle="如何构建可使任何 Azure Active Directory 用户登录的应用程序 | Azure"
-   description="有关如何构建一个可使用户从任何 Azure Active Directory 租户登录的应用程序（也称为多租户应用程序）的分步说明。"
-   services="active-directory"
-   documentationCenter=""
-   authors="skwan"
-   manager="mbaldwin"
-   editor=""/>  
+---
+title: 如何构建可使任何 Azure Active Directory 用户登录的应用程序 | Azure
+description: 有关如何构建一个可使用户从任何 Azure Active Directory 租户登录的应用程序（也称为多租户应用程序）的分步说明。
+services: active-directory
+documentationCenter: 
+authors: skwan
+manager: mbaldwin
+editor: 
 
-
-<tags
-   ms.service="active-directory"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="identity"
-   ms.date="10/11/2016"
-   wacn.date="11/21/2016"
-   ms.author="skwan;bryanla"/>
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 10/11/2016
+wacn.date: 11/21/2016
+ms.author: skwan;bryanla
+---
 
 # 如何使用多租户应用程序模式将任何 Azure Active Directory (AD) 用户登录
 如果你向许多组织提供软件即服务应用程序，可以将应用程序配置为可接受来自任何 Azure AD 租户的登录。在 Azure AD 中，这称为使应用程序成为多租户应用程序。任何 Azure AD 租户中的用户在同意配合你的应用程序使用其帐户之后，便可登录到你的应用程序。
@@ -25,15 +24,14 @@
 
 [![登录按钮][AAD-Sign-In]][AAD-App-Branding]
 
-
 本文假设你已熟悉如何为 Azure AD 构建单租户应用程序。如果你不熟悉，请返回[开发人员指南主页][AAD-Dev-Guide]，然后尝试学习其中一篇快速入门！
 
 将应用程序转换成 Azure AD 多租户应用包括四个简单的步骤：
 
-1.	将应用程序注册更新为多租户
-2.	将代码更新为向 /common 终结点发送请求
-3.	将代码更新为处理多个颁发者值
-4.	了解用户和管理员的同意意向并进行适当的代码更改
+1. 将应用程序注册更新为多租户
+2. 将代码更新为向 /common 终结点发送请求
+3. 将代码更新为处理多个颁发者值
+4. 了解用户和管理员的同意意向并进行适当的代码更改
 
 让我们详细了解每个步骤。你也可以直接跳转到[此多租户示例列表][AAD-Samples-MT]。
 
@@ -66,7 +64,7 @@ Azure AD 中的 Web 应用/API 注册默认为单租户。可以将注册转换�
 ## 将代码更新为处理多个颁发者值
 Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
-> [AZURE.NOTE] 尽管本机客户端应用程序从 Azure AD 请求并接收令牌，但它们这样做是为了将令牌发送到 API 来进行验证。本机应用程序不会验证令牌，并且必须将它们视为不透明。
+> [!NOTE] 尽管本机客户端应用程序从 Azure AD 请求并接收令牌，但它们这样做是为了将令牌发送到 API 来进行验证。本机应用程序不会验证令牌，并且必须将它们视为不透明。
 
 让我们看看应用程序如何验证它从 Azure AD 接收的令牌。单租户应用程序通常采用类似于下面的终结点值：
 
@@ -123,7 +121,7 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 租户管理员可以禁用普通用户同意应用程序的能力。如果禁用此功能，则始终需要管理员同意，才能在租户中设置应用程序。如果想要在禁用普通用户同意的情况下测试应用程序，可以在 [Azure 经典管理门户][AZURE-classic-portal]的 Azure AD 租户配置部分中找到配置开关。
 
-> [AZURE.NOTE] 某些应用程序想要提供一种体验，让普通用户能够一开始即表示同意，然后应用程序可让管理员参与操作并请求需要管理员同意的权限。目前在 Azure AD 中还没有任何办法可以使用单个应用程序注册来实现此目的。即将推出的 Azure AD v2 终结点可允许应用程序在运行时（而不是在注册时）请求权限，这样会使这种方案成为可能。有关详细信息，请参阅 [Azure AD App Model v2 Developer Guide][AAD-V2-Dev-Guide]（Azure AD 应用模型 v2 开发人员指南）。
+> [!NOTE] 某些应用程序想要提供一种体验，让普通用户能够一开始即表示同意，然后应用程序可让管理员参与操作并请求需要管理员同意的权限。目前在 Azure AD 中还没有任何办法可以使用单个应用程序注册来实现此目的。即将推出的 Azure AD v2 终结点可允许应用程序在运行时（而不是在注册时）请求权限，这样会使这种方案成为可能。有关详细信息，请参阅 [Azure AD App Model v2 Developer Guide][AAD-V2-Dev-Guide]（Azure AD 应用模型 v2 开发人员指南）。
 
 ### 同意和多层应用程序
 应用程序可能有多个层，每一层由其自身在 Azure AD 中的注册来表示。例如，一个调用 Web API 的本机应用程序，或者一个调用 Web API 的 Web 应用程序。在这两种情况下，客户端（本机应用或 Web 应用）将请求调用资源 (Web API) 的权限。要让客户端成功获得客户同意添加到其租户中，请求权限的所有资源必须都已在于客户的租户中。如果不符合此条件，Azuer AD 将返回错误，指出必须先添加资源。
@@ -171,17 +169,17 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 <!--Reference style links IN USE -->
 [AAD-Access-Panel]: https://myapps.microsoft.com
-[AAD-App-Branding]: /documentation/articles/active-directory-branding-guidelines/
-[AAD-App-Manifest]: /documentation/articles/active-directory-application-manifest/
-[AAD-App-SP-Objects]: /documentation/articles/active-directory-application-objects/
-[AAD-Auth-Scenarios]: /documentation/articles/active-directory-authentication-scenarios/
-[AAD-Consent-Overview]: /documentation/articles/active-directory-integrating-applications/
-[AAD-Dev-Guide]: /documentation/articles/active-directory-developers-guide/
-[AAD-Graph-Overview]: /documentation/articles/active-directory-graph-api/
+[AAD-App-Branding]: ./active-directory-branding-guidelines.md
+[AAD-App-Manifest]: ./active-directory-application-manifest.md
+[AAD-App-SP-Objects]: ./active-directory-application-objects.md
+[AAD-Auth-Scenarios]: ./active-directory-authentication-scenarios.md
+[AAD-Consent-Overview]: ./active-directory-integrating-applications.md
+[AAD-Dev-Guide]: ./active-directory-developers-guide.md
+[AAD-Graph-Overview]: ./active-directory-graph-api.md
 [AAD-Graph-Perm-Scopes]: https://msdn.microsoft.com/zh-cn/library/azure/ad/graph/howto/azure-ad-graph-api-permission-scopes
-[AAD-Integrating-Apps]: /documentation/articles/active-directory-integrating-applications/
+[AAD-Integrating-Apps]: ./active-directory-integrating-applications.md
 [AAD-Samples-MT]: https://azure.microsoft.com/documentation/samples/?service=active-directory&term=multitenant
-[AAD-Why-To-Integrate]: /documentation/articles/active-directory-how-to-integrate/
+[AAD-Why-To-Integrate]: ./active-directory-how-to-integrate.md
 [AZURE-classic-portal]: https://manage.windowsazure.cn
 [MSFT-Graph-AAD]: https://graph.microsoft.io/zh-cn/docs/authorization/permission_scopes
 
@@ -193,19 +191,19 @@ Web 应用程序和 Web API 接收并验证来自 Azure AD 的令牌。
 
 <!--Reference style links -->
 
-[AAD-App-Manifest]: /documentation/articles/active-directory-application-manifest/
-[AAD-App-SP-Objects]: /documentation/articles/active-directory-application-objects/
-[AAD-Auth-Scenarios]: /documentation/articles/active-directory-authentication-scenarios/
-[AAD-Integrating-Apps]: /documentation/articles/active-directory-integrating-applications/
-[AAD-Dev-Guide]: /documentation/articles/active-directory-developers-guide/
+[AAD-App-Manifest]: ./active-directory-application-manifest.md
+[AAD-App-SP-Objects]: ./active-directory-application-objects.md
+[AAD-Auth-Scenarios]: ./active-directory-authentication-scenarios.md
+[AAD-Integrating-Apps]: ./active-directory-integrating-applications.md
+[AAD-Dev-Guide]: ./active-directory-developers-guide.md
 [AAD-Graph-Perm-Scopes]: https://msdn.microsoft.com/zh-cn/library/azure/ad/graph/howto/azure-ad-graph-api-permission-scopes
 [AAD-Graph-App-Entity]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#application-entity
 [AAD-Graph-Sp-Entity]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#serviceprincipal-entity
 [AAD-Graph-User-Entity]: https://msdn.microsoft.com/Library/Azure/Ad/Graph/api/entity-and-complex-type-reference#user-entity
-[AAD-How-To-Integrate]: /documentation/articles/active-directory-how-to-integrate/
-[AAD-Security-Token-Claims]:/documentation/articles/active-directory-authentication-scenarios/#claims-in-azure-ad-security-tokens/
-[AAD-Tokens-Claims]: /documentation/articles/active-directory-token-and-claims/
-[AAD-V2-Dev-Guide]: /documentation/articles/active-directory-appmodel-v2-overview/
+[AAD-How-To-Integrate]: ./active-directory-how-to-integrate.md
+[AAD-Security-Token-Claims]:./active-directory-authentication-scenarios.md#claims-in-azure-ad-security-tokens/
+[AAD-Tokens-Claims]: ./active-directory-token-and-claims.md
+[AAD-V2-Dev-Guide]: ./active-directory-appmodel-v2-overview.md
 [AZURE-classic-portal]: https://manage.windowsazure.cn
 [Duyshant-Role-Blog]: http://www.dushyantgill.com/blog/2014/12/10/roles-based-access-control-in-cloud-applications-using-azure-ad/
 [JWT]: https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32

@@ -1,22 +1,22 @@
-<properties 
-	pageTitle="支持的浏览器和设备" 
-	description="支持的浏览器和设备" 
-	services="" 
-	documentationCenter="" 
-	authors="flanakin" 
-	writer="flanakin" 
-	manager="lwelicki" 
-	editor=""/>
+---
+title: 支持的浏览器和设备
+description: 支持的浏览器和设备
+services: 
+documentationCenter: 
+authors: flanakin
+writer: flanakin
+manager: lwelicki
+editor: 
 
-<tags
-	ms.service="multiple"
-	ms.workload="multiple"
-	ms.tgt_pltfrm="ibiza"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/23/2015"
-	wacn.date="05/13/2016"
-	ms.author="micflan"/>
+ms.service: multiple
+ms.workload: multiple
+ms.tgt_pltfrm: ibiza
+ms.devlang: na
+ms.topic: article
+ms.date: 07/23/2015
+wacn.date: 05/13/2016
+ms.author: micflan
+---
 
 #支持的浏览器和设备
 Azure 门户预览可在所有最新的台式机和平板电脑与浏览器上运行。

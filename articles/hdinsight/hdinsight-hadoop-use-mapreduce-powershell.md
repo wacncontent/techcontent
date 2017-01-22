@@ -1,30 +1,29 @@
-<properties
-    pageTitle="将 MapReduce 和 PowerShell 与 Hadoop 配合使用 | Azure"
-    description="了解如何使用 PowerShell 在 HDInsight 的 Hadoop 上远程运行 MapReduce 作业。"
-    services="hdinsight"
-    documentationcenter=""
-    author="Blackmist"
-    manager="jhubbard"
-    editor="cgronlun"
-    tags="azure-portal" />  
+---
+title: 将 MapReduce 和 PowerShell 与 Hadoop 配合使用 | Azure
+description: 了解如何使用 PowerShell 在 HDInsight 的 Hadoop 上远程运行 MapReduce 作业。
+services: hdinsight
+documentationcenter: 
+author: Blackmist
+manager: jhubbard
+editor: cgronlun
+tags: azure-portal
 
-<tags
-    ms.assetid="21b56d32-1785-4d44-8ae8-94467c12cfba"
-    ms.service="hdinsight"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="big-data"
-    ms.date="11/15/2016"
-    wacn.date="12/12/2016"
-    ms.author="larryfr" />  
-
+ms.assetid: 21b56d32-1785-4d44-8ae8-94467c12cfba
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 11/15/2016
+wacn.date: 12/12/2016
+ms.author: larryfr
+---
 
 # 通过 PowerShell 使用 HDInsight 上的 Hadoop 运行 MapReduce 作业
 
-[AZURE.INCLUDE [mapreduce-selector](../../includes/hdinsight-selector-use-mapreduce.md)]
+[!INCLUDE [mapreduce-selector](../../includes/hdinsight-selector-use-mapreduce.md)]
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本文档提供了一个示例，演示了使用 Azure PowerShell 在 HDInsight 的 Hadoop 群集中运行 MapReduce 作业。
 
@@ -34,8 +33,8 @@
 
 * **Azure HDInsight（HDInsight 上的 Hadoop）群集（基于 Windows）**
 * **配备 Azure PowerShell 的工作站**。
-  
-[AZURE.INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
+
+[!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 ## <a id="powershell"></a>使用 Azure PowerShell 运行 MapReduce 作业
 
@@ -45,7 +44,7 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 MapRed
 
 * **Import-AzurePublishSettingsFile**：对 Azure 订阅进行 Azure PowerShell 身份验证
 
-[AZURE.INCLUDE [automation-azurechinacloud-environment-parameter](../../includes/automation-azurechinacloud-environment-parameter.md)]
+[!INCLUDE [automation-azurechinacloud-environment-parameter](../../includes/automation-azurechinacloud-environment-parameter.md)]
 
 * **New-AzureHDInsightMapReduceJobDefinition**：使用指定的 MapReduce 信息创建新的*作业定义*
 
@@ -92,13 +91,13 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 MapRed
         Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $wordCountJob.JobId -StandardOutput
 
 2. 打开一个新的 **Azure PowerShell** 命令提示符。将目录更改为 **mapreducejob.ps1** 文件所在位置，然后使用以下命令来运行脚本：
-   
+
         .\mapreducejob.ps1
-   
+
     运行脚本时，系统将提示对 Azure 订阅进行身份验证。还会要求你提供 HDInsight 群集的 HTTPS/Admin 帐户名称和密码。
 
 3. 作业完成后，应显示如下输出：
-    
+
         Cluster         : CLUSTERNAME
         ExitCode        : 0
         Name            : wordcount
@@ -108,10 +107,10 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 MapRed
         StatusDirectory : f1ed2028-afe8-402f-a24b-13cc17858097
         SubmissionTime  : 12/5/2014 8:34:09 PM
         JobId           : job_1415949758166_0071
-    
+
     此输出指示作业已成功完成。
 
-    > [AZURE.NOTE] 如果 **ExitCode** 的值不是 0，请参阅[故障排除](#troubleshooting)。
+    > [!NOTE] 如果 **ExitCode** 的值不是 0，请参阅[故障排除](#troubleshooting)。
 
 ##查看输出
 
@@ -152,12 +151,11 @@ MapReduce 作业已将操作结果存储到 Azure Blob 存储（位于指定为�
         #Use the -blob switch to filter only blobs contained in example/data/WordCountOutput
         Get-AzureStorageBlob -Container $storageContainer -Blob example/data/WordCountOutput/* -Context $context | Get-AzureStorageBlobContent -Context $context
 
-> [AZURE.NOTE] 此示例会将下载的文件存储到你从中运行脚本的目录中的 **example/data/WordCountOutput** 文件夹。
-
+> [!NOTE] 此示例会将下载的文件存储到你从中运行脚本的目录中的 **example/data/WordCountOutput** 文件夹。
 
 在文本编辑器中打开 **output.txt** 文件，以查看作业生成的单词和计数。
 
-> [AZURE.NOTE]
+> [!NOTE]
 MapReduce 作业的输出文件是固定不变的。因此，如果重新运行此示例，需要更改输出文件的名称。
 
 ## <a id="troubleshooting"></a>故障排除
@@ -178,11 +176,11 @@ Azure PowerShell 提供了一种简单方法，可让你在 HDInsight 群集上�
 
 有关 HDInsight 中的 MapReduce 作业的一般信息：
 
-* [在 HDInsight Hadoop 上使用 MapReduce](/documentation/articles/hdinsight-use-mapreduce/)
+* [在 HDInsight Hadoop 上使用 MapReduce](./hdinsight-use-mapreduce.md)
 
 有关 HDInsight 上 Hadoop 的其他使用方法的信息：
 
-* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-hive/)
-* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-hive.md)
+* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-pig.md)
 
 <!---HONumber=Mooncake_1205_2016-->

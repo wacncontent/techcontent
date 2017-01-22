@@ -1,24 +1,22 @@
-<properties
- pageTitle="远程监视解决方案中的设备信息元数据 | Azure"
- description="介绍 Azure IoT 预配置解决方案远程监视及其体系结构。"
- services=""
- suite="iot-suite"
- documentationCenter=""
- authors="dominicbetts"
- manager="timlt"
- editor=""/>
+---
+title: 远程监视解决方案中的设备信息元数据 | Azure
+description: 介绍 Azure IoT 预配置解决方案远程监视及其体系结构。
+services: 
+suite: iot-suite
+documentationCenter: 
+authors: dominicbetts
+manager: timlt
+editor: 
 
-<tags
- ms.service="iot-suite"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="12/15/2016"
- wacn.date="01/03/2017"
- ms.author="dobett"/>
-
-
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 12/15/2016
+wacn.date: 01/03/2017
+ms.author: dobett
+---
 
 # 远程监视预配置解决方案中的设备信息元数据
 
@@ -31,7 +29,7 @@ Azure IoT 套件远程监视预配置解决方案演示了管理设备元数据�
 
 远程监视预配置解决方案使用 [Azure IoT 中心][lnk-iot-hub]，使设备能够将数据发送到云。IoT 中心包含一个[设备标识注册表][lnk-identity-registry]用于控制对 IoT 中心的访问。IoT 中心设备标识注册表与用于存储设备信息元数据的远程监视方案特定*设备注册表*不同。远程监视解决方案使用 [DocumentDB][lnk-docdb] 数据库来实现其用于存储设备信息元数据的设备注册表。[Microsoft Azure IoT 参考体系结构][lnk-ref-arch]描述了典型 IoT 解决方案中设备注册表的角色。
 
-> [AZURE.NOTE] 远程监视预配置解决方案可使设备标识注册表与设备注册表保持同步。这两个注册表使用相同的设备 ID 来唯一标识连接到 IoT 中心的每个设备。
+> [!NOTE] 远程监视预配置解决方案可使设备标识注册表与设备注册表保持同步。这两个注册表使用相同的设备 ID 来唯一标识连接到 IoT 中心的每个设备。
 
 [IoT 中心设备管理][lnk-dm-preview]向 IoT 中心添加了一些功能，这些功能类似于本文介绍的设备信息管理功能。目前，远程监视解决方案仅使用 IoT 中心内的正式版 (GA) 功能。
 
@@ -39,24 +37,22 @@ Azure IoT 套件远程监视预配置解决方案演示了管理设备元数据�
 
 存储在设备注册表 DocumentDB 数据库中的设备信息元数据 JSON 文档具有以下结构：
 
-
-		{
-		  "DeviceProperties": {
-		    "DeviceID": "deviceid1",
-		    "HubEnabledState": null,
-		    "CreatedTime": "2016-04-25T23:54:01.313802Z",
-		    "DeviceState": "normal",
-		    "UpdatedTime": null
-		    },
-		  "SystemProperties": {
-		    "ICCID": null
-		  },
-		  "Commands": [],
-		  "CommandHistory": [],
-		  "IsSimulatedDevice": false,
-		  "id": "fe81a81c-bcbc-4970-81f4-7f12f2d8bda8"
-		}
-
+        {
+          "DeviceProperties": {
+            "DeviceID": "deviceid1",
+            "HubEnabledState": null,
+            "CreatedTime": "2016-04-25T23:54:01.313802Z",
+            "DeviceState": "normal",
+            "UpdatedTime": null
+            },
+          "SystemProperties": {
+            "ICCID": null
+          },
+          "Commands": [],
+          "CommandHistory": [],
+          "IsSimulatedDevice": false,
+          "id": "fe81a81c-bcbc-4970-81f4-7f12f2d8bda8"
+        }
 
 - **DeviceProperties**：设备本身写入这些属性，并且设备是此数据的管理机构。其他示例设备属性包括制造商、型号和序号。
 - **DeviceID**：唯一的设备 ID。此值在 IoT 中心设备标识注册表中相同。
@@ -70,7 +66,7 @@ Azure IoT 套件远程监视预配置解决方案演示了管理设备元数据�
 - **IsSimulatedDevice**：将设备标识为模拟设备的标志。
 - **id**：此设备文档的唯一 DocumentDB 标识符。
 
-> [AZURE.NOTE] 设备信息还可能包含元数据，用于描述设备发送给 IoT 中心的遥测数据。远程监视解决方案使用此遥测元数据来自定义仪表板显示[动态遥测数据][lnk-dynamic-telemetry]的方式。
+> [!NOTE] 设备信息还可能包含元数据，用于描述设备发送给 IoT 中心的遥测数据。远程监视解决方案使用此遥测元数据来自定义仪表板显示[动态遥测数据][lnk-dynamic-telemetry]的方式。
 
 ## 生命周期
 
@@ -88,17 +84,15 @@ Azure IoT 套件远程监视预配置解决方案演示了管理设备元数据�
 
 ![编辑设备][img-device-edit]  
 
-
 可以使用解决方案门户从解决方案中删除设备。当你删除设备时，解决方案将从解决方案设备注册表中删除设备信息元数据，并删除 IoT 中心设备标识注册表中的设备条目。必须禁用设备才可删除它。
 
 ![删除设备][img-device-remove]  
-
 
 ## 设备信息消息处理
 
 设备发出的设备信息消息不同于遥测消息。设备信息消息包括设备属性、设备可响应的命令和任何命令历史记录等信息。IoT 中心本身不知道设备信息消息中包含的元数据，它以处理任何设备到云消息的相同方式处理消息。在远程监视解决方案中，[Azure 流分析][lnk-stream-analytics] (ASA) 作业读取来自 IoT 中心的消息。**DeviceInfo** 流分析作业筛选包含 **"ObjectType": "DeviceInfo"** 的消息，并将这些消息转发到 Web 作业中运行的 **EventProcessorHost** 主机实例。**EventProcessorHost** 实例中的逻辑使用设备 ID 来查找特定设备的 DocumentDB 记录并更新记录。设备注册表记录现在包含设备属性、命令和命令历史记录等信息。
 
-> [AZURE.NOTE] 设备信息消息是标准的设备到云消息。解决方案使用 ASA 查询来区分设备信息消息与遥测消息。
+> [!NOTE] 设备信息消息是标准的设备到云消息。解决方案使用 ASA 查询来区分设备信息消息与遥测消息。
 
 ## 示例设备信息记录
 
@@ -108,160 +102,154 @@ Azure IoT 套件远程监视预配置解决方案演示了管理设备元数据�
 
 以下示例显示了模拟设备的 JSON 设备信息记录。此记录已设置 **UpdatedTime** 的值，表示设备已向 IoT 中心发送 **DeviceInfo** 消息。该记录包含一些通用设备属性、定义模拟设备支持的六个命令，并将 **IsSimulatedDevice** 标志设置为 **1**。
 
-
-		{
-		  "DeviceProperties": {
-		    "DeviceID": "SampleDevice001_455",
-		    "HubEnabledState": true,
-		    "CreatedTime": "2016-01-26T19:02:01.4550695Z",
-		    "DeviceState": "normal",
-		    "UpdatedTime": "2016-06-01T15:28:41.8105157Z",
-		    "Manufacturer": "Contoso Inc.",
-		    "ModelNumber": "MD-369",
-		    "SerialNumber": "SER9009",
-		    "FirmwareVersion": "1.39",
-		    "Platform": "Plat-34",
-		    "Processor": "i3-2191",
-		    "InstalledRAM": "3 MB",
-		    "Latitude": 47.583582,
-		    "Longitude": -122.130622
-		  },
-		  "Commands": [
-		    {
-		      "Name": "PingDevice",
-		      "Parameters": null
-		    },
-		    {
-		      "Name": "StartTelemetry",
-		      "Parameters": null
-		    },
-		    {
-		      "Name": "StopTelemetry",
-		      "Parameters": null
-		    },
-		    {
-		      "Name": "ChangeSetPointTemp",
-		      "Parameters": [
-		        {
-		          "Name": "SetPointTemp",
-		          "Type": "double"
-		        }
-		      ]
-		    },
-		    {
-		      "Name": "DiagnosticTelemetry",
-		      "Parameters": [
-		        {
-		          "Name": "Active",
-		          "Type": "boolean"
-		        }
-		      ]
-		    },
-		    {
-		      "Name": "ChangeDeviceState",
-		      "Parameters": [
-		        {
-		          "Name": "DeviceState",
-		          "Type": "string"
-		        }
-		      ]
-		    }
-		  ],
-		  "CommandHistory": [],
-		  "IsSimulatedDevice": 1,
-		  "Version": "1.0",
-		  "ObjectType": "DeviceInfo",
-		  "IoTHub": {
-		    "MessageId": null,
-		    "CorrelationId": null,
-		    "ConnectionDeviceId": "SampleDevice001_455",
-		    "ConnectionDeviceGenerationId": "635894317219942540",
-		    "EnqueuedTime": "0001-01-01T00:00:00",
-		    "StreamId": null
-		  },
-		  "SystemProperties": {
-		    "ICCID": null
-		  },
-		  "id": "7101c002-085f-4954-b9aa-7466980a2aaf"
-		}
-
+        {
+          "DeviceProperties": {
+            "DeviceID": "SampleDevice001_455",
+            "HubEnabledState": true,
+            "CreatedTime": "2016-01-26T19:02:01.4550695Z",
+            "DeviceState": "normal",
+            "UpdatedTime": "2016-06-01T15:28:41.8105157Z",
+            "Manufacturer": "Contoso Inc.",
+            "ModelNumber": "MD-369",
+            "SerialNumber": "SER9009",
+            "FirmwareVersion": "1.39",
+            "Platform": "Plat-34",
+            "Processor": "i3-2191",
+            "InstalledRAM": "3 MB",
+            "Latitude": 47.583582,
+            "Longitude": -122.130622
+          },
+          "Commands": [
+            {
+              "Name": "PingDevice",
+              "Parameters": null
+            },
+            {
+              "Name": "StartTelemetry",
+              "Parameters": null
+            },
+            {
+              "Name": "StopTelemetry",
+              "Parameters": null
+            },
+            {
+              "Name": "ChangeSetPointTemp",
+              "Parameters": [
+                {
+                  "Name": "SetPointTemp",
+                  "Type": "double"
+                }
+              ]
+            },
+            {
+              "Name": "DiagnosticTelemetry",
+              "Parameters": [
+                {
+                  "Name": "Active",
+                  "Type": "boolean"
+                }
+              ]
+            },
+            {
+              "Name": "ChangeDeviceState",
+              "Parameters": [
+                {
+                  "Name": "DeviceState",
+                  "Type": "string"
+                }
+              ]
+            }
+          ],
+          "CommandHistory": [],
+          "IsSimulatedDevice": 1,
+          "Version": "1.0",
+          "ObjectType": "DeviceInfo",
+          "IoTHub": {
+            "MessageId": null,
+            "CorrelationId": null,
+            "ConnectionDeviceId": "SampleDevice001_455",
+            "ConnectionDeviceGenerationId": "635894317219942540",
+            "EnqueuedTime": "0001-01-01T00:00:00",
+            "StreamId": null
+          },
+          "SystemProperties": {
+            "ICCID": null
+          },
+          "id": "7101c002-085f-4954-b9aa-7466980a2aaf"
+        }
 
 ### 自定义设备
 
 以下示例显示了自定义设备的 JSON 设备信息记录，并将 **IsSimulatedDevice** 标志设置为 **0**。你可以看到，此自定义设备支持两个命令，并且解决方案门户已向设备发送 **SetTemperature** 命令：
 
-
-		{
-		  "DeviceProperties": {
-		    "DeviceID": "mydevice01",
-		    "HubEnabledState": true,
-		    "CreatedTime": "2016-03-28T21:05:06.6061104Z",
-		    "DeviceState": "normal",
-		    "UpdatedTime": "2016-06-07T22:05:34.2802549Z"
-		  },
-		  "SystemProperties": {
-		    "ICCID": null
-		  },
-		  "Commands": [
-		    {
-		      "Name": "SetHumidity",
-		      "Parameters": [
-		        {
-		          "Name": "humidity",
-		          "Type": "int"
-		        }
-		      ]
-		    },
-		    {
-		      "Name": "SetTemperature",
-		      "Parameters": [
-		        {
-		          "Name": "temperature",
-		          "Type": "int"
-		        }
-		      ]
-		    }
-		  ],
-		  "CommandHistory": [
-		    {
-		      "Name": "SetTemperature",
-		      "MessageId": "2a0cec61-5eca-4de7-92dc-9c0bc4211c46",
-		      "CreatedTime": "2016-06-07T21:05:18.140796Z",
-		      "Parameters": {
-		        "temperature": 20
-		      },
-		      "UpdatedTime": "2016-06-07T21:05:18.716076Z",
-		      "Result": "Expired"
-		    }
-		  ],
-		  "IsSimulatedDevice": 0,
-		  "id": "6184ae0f-2d94-4fbd-91cd-4b193aecc9d1",
-		  "ObjectType": "DeviceInfo",
-		  "Version": "1.0",
-		  "IoTHub": {
-		    "MessageId": null,
-		    "CorrelationId": null,
-		    "ConnectionDeviceId": "SampleCustom",
-		    "ConnectionDeviceGenerationId": "635947959068246845",
-		    "EnqueuedTime": "0001-01-01T00:00:00",
-		    "StreamId": null
-		  }
-		}
-
+        {
+          "DeviceProperties": {
+            "DeviceID": "mydevice01",
+            "HubEnabledState": true,
+            "CreatedTime": "2016-03-28T21:05:06.6061104Z",
+            "DeviceState": "normal",
+            "UpdatedTime": "2016-06-07T22:05:34.2802549Z"
+          },
+          "SystemProperties": {
+            "ICCID": null
+          },
+          "Commands": [
+            {
+              "Name": "SetHumidity",
+              "Parameters": [
+                {
+                  "Name": "humidity",
+                  "Type": "int"
+                }
+              ]
+            },
+            {
+              "Name": "SetTemperature",
+              "Parameters": [
+                {
+                  "Name": "temperature",
+                  "Type": "int"
+                }
+              ]
+            }
+          ],
+          "CommandHistory": [
+            {
+              "Name": "SetTemperature",
+              "MessageId": "2a0cec61-5eca-4de7-92dc-9c0bc4211c46",
+              "CreatedTime": "2016-06-07T21:05:18.140796Z",
+              "Parameters": {
+                "temperature": 20
+              },
+              "UpdatedTime": "2016-06-07T21:05:18.716076Z",
+              "Result": "Expired"
+            }
+          ],
+          "IsSimulatedDevice": 0,
+          "id": "6184ae0f-2d94-4fbd-91cd-4b193aecc9d1",
+          "ObjectType": "DeviceInfo",
+          "Version": "1.0",
+          "IoTHub": {
+            "MessageId": null,
+            "CorrelationId": null,
+            "ConnectionDeviceId": "SampleCustom",
+            "ConnectionDeviceGenerationId": "635947959068246845",
+            "EnqueuedTime": "0001-01-01T00:00:00",
+            "StreamId": null
+          }
+        }
 
 以下示例显示设备为了更新设备信息元数据而发送的 JSON **DeviceInfo** 消息：
 
-
-		{ "ObjectType":"DeviceInfo",
-		  "Version":"1.0",
-		  "IsSimulatedDevice":false,
-		  "DeviceProperties": { "DeviceID":"mydevice01", "HubEnabledState":true },
-		  "Commands": [
-		    {"Name":"SetHumidity", "Parameters":[{"Name":"humidity","Type":"double"}]},
-		    {"Name":"SetTemperature", "Parameters":[{"Name":"temperature","Type":"double"}]}
-		  ]
-		}
-
+        { "ObjectType":"DeviceInfo",
+          "Version":"1.0",
+          "IsSimulatedDevice":false,
+          "DeviceProperties": { "DeviceID":"mydevice01", "HubEnabledState":true },
+          "Commands": [
+            {"Name":"SetHumidity", "Parameters":[{"Name":"humidity","Type":"double"}]},
+            {"Name":"SetTemperature", "Parameters":[{"Name":"temperature","Type":"double"}]}
+          ]
+        }
 
 ## 后续步骤
 
@@ -270,21 +258,19 @@ Azure IoT 套件远程监视预配置解决方案演示了管理设备元数据�
 - [有关 IoT 套件的常见问题][lnk-faq]
 - [从头开始保障 IoT 安全][lnk-security-groundup]
 
-
-
 <!-- Images and links -->
 [img-device-list]: ./media/iot-suite-remote-monitoring-device-info/image1.png
 [img-device-edit]: ./media/iot-suite-remote-monitoring-device-info/image2.png
 [img-device-remove]: ./media/iot-suite-remote-monitoring-device-info/image3.png
 
-[lnk-iot-hub]: /documentation/services/iot-hub/
-[lnk-identity-registry]: /documentation/articles/iot-hub-devguide-identity-registry/
-[lnk-docdb]: /documentation/services/documentdb/
+[lnk-iot-hub]: ../iot-hub/index.md
+[lnk-identity-registry]: ../iot-hub/iot-hub-devguide-identity-registry.md
+[lnk-docdb]: ../documentdb/index.md
 [lnk-ref-arch]: http://download.microsoft.com/download/A/4/D/A4DAD253-BC21-41D3-B9D9-87D2AE6F0719/Microsoft_Azure_IoT_Reference_Architecture.pdf
-[lnk-stream-analytics]: /documentation/services/stream-analytics/
-[lnk-dm-preview]: /documentation/articles/iot-hub-device-management-overview/
-[lnk-dynamic-telemetry]: /documentation/articles/iot-suite-dynamic-telemetry/
-[lnk-faq]: /documentation/articles/iot-suite-faq/
-[lnk-security-groundup]: /documentation/articles/securing-iot-ground-up/
+[lnk-stream-analytics]: ../stream-analytics/index.md
+[lnk-dm-preview]: ../iot-hub/iot-hub-device-management-overview.md
+[lnk-dynamic-telemetry]: ./iot-suite-dynamic-telemetry.md
+[lnk-faq]: ./iot-suite-faq.md
+[lnk-security-groundup]: ./securing-iot-ground-up.md
 
 <!---HONumber=Mooncake_1226_2016-->

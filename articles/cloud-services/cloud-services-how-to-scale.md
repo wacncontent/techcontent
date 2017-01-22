@@ -1,42 +1,37 @@
-<properties
-	pageTitle="在门户中的自动缩放云服务 | Azure"
-	description="（经典）了解如何使用经典门户在 Azure 中为云服务 Web 角色或辅助角色配置自动缩放规则。"
-	services="cloud-services"
-	documentationCenter=""
-	authors="Thraka"
-	manager="timlt"
-	editor=""/>  
+---
+title: 在门户中的自动缩放云服务 | Azure
+description: （经典）了解如何使用经典门户在 Azure 中为云服务 Web 角色或辅助角色配置自动缩放规则。
+services: cloud-services
+documentationCenter: 
+authors: Thraka
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="cloud-services"
-	ms.workload="tbd"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/06/2016"
-	wacn.date="12/12/2016"
-	ms.author="adegeo"/>  
-
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/06/2016
+wacn.date: 12/12/2016
+ms.author: adegeo
+---
 
 # 如何自动缩放云服务
 
-
 在 Azure 经典管理门户的“缩放”页中，你可以手动缩放 Web 角色或辅助角色，或者根据 CPU 负载或消息队列启用自动缩放。
 
->[AZURE.NOTE] 本文着重于云服务 Web 和辅助角色。如果直接创建虚拟机（经典），该虚拟机将托管在云服务中。其中有些信息适用于这些类型的虚拟机。缩放虚拟机的可用性集其实只是根据配置的缩放规则将其关闭或打开。有关虚拟机和可用性集的详细信息，请参阅 [Manage the Availability of Virtual Machines](/documentation/articles/virtual-machines-windows-classic-configure-availability/)（管理虚拟机的可用性）
+>[!NOTE] 本文着重于云服务 Web 和辅助角色。如果直接创建虚拟机（经典），该虚拟机将托管在云服务中。其中有些信息适用于这些类型的虚拟机。缩放虚拟机的可用性集其实只是根据配置的缩放规则将其关闭或打开。有关虚拟机和可用性集的详细信息，请参阅 [Manage the Availability of Virtual Machines](../virtual-machines/virtual-machines-windows-classic-configure-availability.md)（管理虚拟机的可用性）
 
 在配置应用程序的缩放之前，应考虑以下信息：
 
-- 缩放受内核使用情况影响。角色实例越大，使用的内核越多。只能在订阅的内核限制内缩放应用程序。例如，如果订阅的上限是二十个内核，并且通过两个中等规模的云服务（一共四个内核）运行某个应用程序，则对于订阅中的其他云服务部署，只能扩展十六个内核。有关大小的详细信息，请参阅 [Cloud Service Sizes](/documentation/articles/cloud-services-sizes-specs/)（云服务的大小）。
+- 缩放受内核使用情况影响。角色实例越大，使用的内核越多。只能在订阅的内核限制内缩放应用程序。例如，如果订阅的上限是二十个内核，并且通过两个中等规模的云服务（一共四个内核）运行某个应用程序，则对于订阅中的其他云服务部署，只能扩展十六个内核。有关大小的详细信息，请参阅 [Cloud Service Sizes](./cloud-services-sizes-specs.md)（云服务的大小）。
 
-- 必须先创建队列并使其与角色关联，然后才能基于消息阈值缩放应用程序。有关详细信息，请参阅[如何使用队列存储服务](/documentation/articles/storage-dotnet-how-to-use-queues/)。
+- 必须先创建队列并使其与角色关联，然后才能基于消息阈值缩放应用程序。有关详细信息，请参阅[如何使用队列存储服务](../storage/storage-dotnet-how-to-use-queues.md)。
 
-- 可缩放链接到云服务的资源。有关链接资源的更多信息，请参见[如何：将资源链接到云服务](/documentation/articles/cloud-services-how-to-manage/#how-to-link-a-resource-to-a-cloud-service)。
+- 可缩放链接到云服务的资源。有关链接资源的更多信息，请参见[如何：将资源链接到云服务](./cloud-services-how-to-manage.md#how-to-link-a-resource-to-a-cloud-service)。
 
-- 若要使应用程序具有高可用性，应确保为其部署两个或更多角色实例。有关详细信息，请参阅[服务级别协议](/support/legal/sla)。
-
-
+- 若要使应用程序具有高可用性，应确保为其部署两个或更多角色实例。有关详细信息，请参阅[服务级别协议](https://www.azure.cn/support/legal/sla)。
 
 ## 计划缩放
 
@@ -55,16 +50,13 @@
 
 ![基于计划的云服务自动缩放][scale_schedules]  
 
-
-
-
 ## 手动缩放
 
 在“缩放”页上，可手动增加或减少云服务中正在运行的实例数。此设置针对已创建的每个计划进行，或者在尚未创建计划时随时进行。
 
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn)中单击“云服务”，然后单击云服务名称，打开仪表板。
 
-    > [AZURE.TIP] 如果未看到你的云服务，可能需要从“生产”更改为“过渡”，或者进行相反的切换。
+    > [!TIP] 如果未看到你的云服务，可能需要从“生产”更改为“过渡”，或者进行相反的切换。
 
 2. 单击“缩放”。
 
@@ -76,12 +68,11 @@
 
     ![手动缩放云服务角色][manual_scale]
 
-    如果需要更多实例，可能需要更改[云服务虚拟机大小](/documentation/articles/cloud-services-sizes-specs/)。
+    如果需要更多实例，可能需要更改[云服务虚拟机大小](./cloud-services-sizes-specs.md)。
 
 6. 单击“保存”。将根据选择添加或删除角色实例。
 
->[AZURE.TIP] 看到 ![][tip_icon] 时，将鼠标移到其上可获取特定设置功能的相关帮助。
-
+>[!TIP] 看到 ![][tip_icon] 时，将鼠标移到其上可获取特定设置功能的相关帮助。
 
 ## 自动缩放 - CPU
 
@@ -89,7 +80,7 @@
 
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn)中单击“云服务”，然后单击云服务名称，打开仪表板。
 
-    > [AZURE.TIP] 如果未看到你的云服务，可能需要从“生产”更改为“过渡”，或者进行相反的切换。
+    > [!TIP] 如果未看到你的云服务，可能需要从“生产”更改为“过渡”，或者进行相反的切换。
 
 2. 单击“缩放”。
 
@@ -101,12 +92,7 @@
 
 ![按 CPU 负载缩放云服务角色][cpu_scale]  
 
-
->[AZURE.TIP] 看到 ![][tip_icon] 时，将鼠标移到其上可获取特定设置功能的相关帮助。
-
-
-
-
+>[!TIP] 看到 ![][tip_icon] 时，将鼠标移到其上可获取特定设置功能的相关帮助。
 
 ## 自动缩放 - 队列
 
@@ -114,7 +100,7 @@
 
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn)中单击“云服务”，然后单击云服务名称，打开仪表板。
 
-    > [AZURE.TIP] 如果未看到你的云服务，可能需要从“生产”更改为“过渡”，或者进行相反的切换。
+    > [!TIP] 如果未看到你的云服务，可能需要从“生产”更改为“过渡”，或者进行相反的切换。
 
 2. 单击“缩放”。
 
@@ -124,9 +110,7 @@
 
 ![按消息队列缩放云服务角色][queue_scale]  
 
-
->[AZURE.TIP] 看到 ![][tip_icon] 时，将鼠标移到其上可获取特定设置功能的相关帮助。
-
+>[!TIP] 看到 ![][tip_icon] 时，将鼠标移到其上可获取特定设置功能的相关帮助。
 
 ## 缩放链接的资源
 
@@ -134,16 +118,15 @@
 
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn)中单击“云服务”，然后单击云服务名称，打开仪表板。
 
-    > [AZURE.TIP] 如果未看到你的云服务，可能需要从“生产”更改为“过渡”，或者进行相反的切换。
+    > [!TIP] 如果未看到你的云服务，可能需要从“生产”更改为“过渡”，或者进行相反的切换。
 
 2. 单击“缩放”。
 
 3. 找到“链接的资源”部分，然后单击“管理此数据库的规模”。
 
-    > [AZURE.NOTE] 如果未看到“链接的资源”部分，则可能表示没有任何链接的资源。
+    > [!NOTE] 如果未看到“链接的资源”部分，则可能表示没有任何链接的资源。
 
 ![][linked_resource]
-
 
 [manual_scale]: ./media/cloud-services-how-to-scale/manual-scale.png
 [queue_scale]: ./media/cloud-services-how-to-scale/queue-scale.png

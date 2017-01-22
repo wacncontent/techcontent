@@ -1,38 +1,33 @@
-<properties 
-	pageTitle="使用 SSMS 管理 SQL 数据库 | Azure" 
-	description="了解如何使用 SQL Server Management Studio 管理 SQL 数据库服务器和数据库。" 
-	services="sql-database" 
-	documentationCenter=".net" 
-	authors="stevestein" 
-	manager="jhubbard" 
-	editor="tysonn"/>  
+---
+title: 使用 SSMS 管理 SQL 数据库 | Azure
+description: 了解如何使用 SQL Server Management Studio 管理 SQL 数据库服务器和数据库。
+services: sql-database
+documentationCenter: .net
+authors: stevestein
+manager: jhubbard
+editor: tysonn
 
-
-<tags 
-	ms.service="sql-database" 
-	ms.workload="data-management" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/29/2016" 
-	wacn.date="10/31/2016" 
-	ms.author="sstein"/>  
-
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/29/2016
+wacn.date: 10/31/2016
+ms.author: sstein
+---
 
 # 使用 SQL Server Management Studio 管理 Azure SQL 数据库 
 
+> [!div class="op_single_selector"]
+- [SSMS](./sql-database-manage-azure-ssms.md)
+- [PowerShell](./sql-database-manage-powershell.md)
 
-> [AZURE.SELECTOR]
-- [SSMS](/documentation/articles/sql-database-manage-azure-ssms/)
-- [PowerShell](/documentation/articles/sql-database-manage-powershell/)
-
-你可以使用 SQL Server Management Studio (SSMS) 来管理 Azure SQL 数据库服务器与数据库。本主题逐步讲解如何使用 SSMS 完成常见任务。在开始之前，应事先在 Azure SQL 数据库中创建服务器和数据库。有关详细信息，请参阅[创建第一个 Azure SQL 数据库](/documentation/articles/sql-database-get-started/)和如何[使用 SSMS 连接并查询](/documentation/articles/sql-database-connect-query-ssms/)。
+你可以使用 SQL Server Management Studio (SSMS) 来管理 Azure SQL 数据库服务器与数据库。本主题逐步讲解如何使用 SSMS 完成常见任务。在开始之前，应事先在 Azure SQL 数据库中创建服务器和数据库。有关详细信息，请参阅[创建第一个 Azure SQL 数据库](./sql-database-get-started.md)和如何[使用 SSMS 连接并查询](./sql-database-connect-query-ssms.md)。
 
 建议你每当使用 Azure SQL 数据库时，都使用最新版本的 SSMS。
 
-> [AZURE.IMPORTANT] 由于 SSMS 不断改进以便配合 Azure 和 SQL 数据库的最新更新，因此请始终使用 SSMS 的最新版本。若要获取最新版本，请参阅 [下载 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
-
-
+> [!IMPORTANT] 由于 SSMS 不断改进以便配合 Azure 和 SQL 数据库的最新更新，因此请始终使用 SSMS 的最新版本。若要获取最新版本，请参阅 [下载 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ## 创建和管理 Azure SQL 数据库
 
@@ -64,12 +59,11 @@
 
 -   在 SQL 数据库中，不支持将 **USE** 语句用于在数据库之间切换。您需要改为建立直接到目标数据库的连接。
 
->[AZURE.NOTE] 创建或修改数据库的许多 Transact-SQL 语句必须在其自己的批处理中运行，无法与其他 Transact-SQL 语句分组在一起。有关详细信息，请参阅上面特定于语句的信息。
+>[!NOTE] 创建或修改数据库的许多 Transact-SQL 语句必须在其自己的批处理中运行，无法与其他 Transact-SQL 语句分组在一起。有关详细信息，请参阅上面特定于语句的信息。
 
 ## 创建并管理登录名
 
-**master** 数据库包含登录名以及哪些登录名有权创建数据库或其他登录名。通过使用你在设置服务器时创建的服务器级别主体登录名连接到 **master** 数据库来管理登录名。可以使用 **CREATE LOGIN**、**ALTER LOGIN** 或 **DROP LOGIN** 语句对将管理整个服务器上的登录的 master 数据库执行查询。有关详细信息，请参阅[在 SQL 数据库中管理数据库和登录名](/documentation/articles/sql-database-manage-logins/)。
-
+**master** 数据库包含登录名以及哪些登录名有权创建数据库或其他登录名。通过使用你在设置服务器时创建的服务器级别主体登录名连接到 **master** 数据库来管理登录名。可以使用 **CREATE LOGIN**、**ALTER LOGIN** 或 **DROP LOGIN** 语句对将管理整个服务器上的登录的 master 数据库执行查询。有关详细信息，请参阅[在 SQL 数据库中管理数据库和登录名](./sql-database-manage-logins.md)。
 
 -   使用 **CREATE LOGIN** 语句可以创建服务器级别的登录名。有关详细信息，请参阅 [CREATE LOGIN（SQL 数据库）](https://msdn.microsoft.com/zh-cn/library/ms189751.aspx)。以下语句创建名为 **login1** 的登录名。将 **password1** 替换为你选择的密码。
 
@@ -109,7 +103,7 @@
 
 ## 使用动态管理视图监视 SQL 数据库
 
-SQL 数据库支持多个您可用于监视单个数据库的动态管理视图。下面是您可通过这些视图检索的监视器数据类型的一些示例。有关完整的详细信息和更多用法示例，请参阅[使用动态管理视图监视 SQL 数据库](/documentation/articles/sql-database-monitoring-with-dmvs/)。
+SQL 数据库支持多个您可用于监视单个数据库的动态管理视图。下面是您可通过这些视图检索的监视器数据类型的一些示例。有关完整的详细信息和更多用法示例，请参阅[使用动态管理视图监视 SQL 数据库](./sql-database-monitoring-with-dmvs.md)。
 
 -   查询动态管理视图需要 **VIEW DATABASE STATE** 权限。若要向特定数据库用户授予 **VIEW DATABASE STATE** 权限，请连接到该数据库并对其执行以下语句：
 
@@ -149,7 +143,5 @@ SQL 数据库支持多个您可用于监视单个数据库的动态管理视图�
              CROSS APPLY sys.dm_exec_sql_text(QS.sql_handle) as ST) as query_stats
         GROUP BY query_stats.query_hash
         ORDER BY 2 DESC;
- 
- 
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

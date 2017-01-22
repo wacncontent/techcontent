@@ -1,26 +1,25 @@
-<properties
-	pageTitle="在 Azure Active Directory 中添加来自其他目录或合作伙伴公司的用户 | Azure"
-	description="介绍如何在 Azure Active Directory 中添加用户或更改用户信息，包括外部用户和来宾用户。"
-	services="active-directory"
-	documentationCenter=""
-	authors="curtand"
-	manager="femila"
-	editor=""/>  
+---
+title: 在 Azure Active Directory 中添加来自其他目录或合作伙伴公司的用户 | Azure
+description: 介绍如何在 Azure Active Directory 中添加用户或更改用户信息，包括外部用户和来宾用户。
+services: active-directory
+documentationCenter: 
+authors: curtand
+manager: femila
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="get-started-article"
-	ms.date="09/22/2016"
-	wacn.date="12/16/2016"
-	ms.author="curtand"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 09/22/2016
+wacn.date: 12/16/2016
+ms.author: curtand
+---
 
 # 在 Azure Active Directory 中添加来自其他目录或合作伙伴公司的用户
 
-本文介绍了如何从 Azure Active Directory 中的其他目录添加用户或添加合作伙伴公司中的用户。有关添加你组织中的新用户和添加具有 Microsoft 帐户的用户的信息，请参阅[将新用户添加到 Azure Active Directory](/documentation/articles/active-directory-create-users/)。默认情况下，添加的用户没有管理员权限，但你随时可以向他们分配角色。
+本文介绍了如何从 Azure Active Directory 中的其他目录添加用户或添加合作伙伴公司中的用户。有关添加你组织中的新用户和添加具有 Microsoft 帐户的用户的信息，请参阅[将新用户添加到 Azure Active Directory](./active-directory-create-users.md)。默认情况下，添加的用户没有管理员权限，但你随时可以向他们分配角色。
 
 ## 添加用户
 
@@ -32,13 +31,13 @@
 
 4. 在“告诉我们有关此用户的信息”页上的“用户类型”下，选择下列其中一项：
 
-	- **另一个 Azure AD 目录中的用户** - 将源自另一个 Azure AD 目录的用户帐户添加到你的目录。仅当你也是另一目录的成员时，才可以选择该目录中的用户。
+    - **另一个 Azure AD 目录中的用户** - 将源自另一个 Azure AD 目录的用户帐户添加到你的目录。仅当你也是另一目录的成员时，才可以选择该目录中的用户。
 
-6. 在用户的“配置文件”页上，提供名字和姓氏、用户友好名称，并从“角色”列表中选择用户角色。有关用户和管理员角色的详细信息，请参阅[在 Azure AD 中分配管理员角色](/documentation/articles/active-directory-assign-admin-roles/)。指定是否要为用户**启用多重身份验证**。
+6. 在用户的“配置文件”页上，提供名字和姓氏、用户友好名称，并从“角色”列表中选择用户角色。有关用户和管理员角色的详细信息，请参阅[在 Azure AD 中分配管理员角色](./active-directory-assign-admin-roles.md)。指定是否要为用户**启用多重身份验证**。
 
 7. 在“获取临时密码”页上，选择“创建”。
 
-> [AZURE.IMPORTANT] 如果你所在的组织使用多个域，在添加用户帐户时你应知道以下问题：
+> [!IMPORTANT] 如果你所在的组织使用多个域，在添加用户帐户时你应知道以下问题：
 >
 > - 若要跨域添加具有相同用户主体名称 (UPN) 的用户帐户，例如，你可以**先**添加 geoffgrisso@contoso.partner.onmschina.cn，**再**添加 geoffgrisso@contoso.com。
 > - **不要**在添加 geoffgrisso@contoso.partner.onmschina.cn 之前添加 geoffgrisso@contoso.com。此顺序非常重要，事后想要撤消操作将很麻烦。
@@ -57,7 +56,7 @@
 
 这两个帐户之间的唯一联系是用户始终针对主目录或使用它们的 Microsoft 帐户进行身份验证。这就是为什么你看不到重置密码或为外部用户启用多重身份验证选项的原因。目前，主目录的身份验证或 Microsoft 帐户策略是用户登录时唯一需要进行评估的策略。
 
-> [AZURE.NOTE]
+> [!NOTE]
 你仍然可以禁用目录中的外部用户，这将阻止其对目录访问。
 
 如果在用户的主目录中删除了用户或取消 Microsoft 帐户，外部用户仍然存在于你的目录中。但是，目录中的用户无法访问资源，因为他们无法使用主目录或 Microsoft 帐户进行身份验证。
@@ -77,11 +76,10 @@
 - Office 门户不支持向外部用户提供许可
 - 对于 Azure AD PowerShell，外部用户会登录其主目录，无法管理他们在其中是外部用户的目录
 
-
 ## 后续步骤
 
-- [向 Azure Active Directory 添加新用户](/documentation/articles/active-directory-create-users/)
-- [管理 Azure AD](/documentation/articles/active-directory-administer/)
-- [在 Azure AD 中管理密码](/documentation/articles/active-directory-manage-passwords/)
+- [向 Azure Active Directory 添加新用户](./active-directory-create-users.md)
+- [管理 Azure AD](./active-directory-administer.md)
+- [在 Azure AD 中管理密码](./active-directory-manage-passwords.md)
 
 <!---HONumber=Mooncake_1024_2016-->

@@ -1,29 +1,27 @@
-<properties 
-	pageTitle="使用 REST API 连接到媒体服务帐户 | Azure" 
-	description="本主题演示如何使用 REST API 连接到媒体服务。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="Juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 REST API 连接到媒体服务帐户 | Azure
+description: 本主题演示如何使用 REST API 连接到媒体服务。
+services: media-services
+documentationCenter: 
+authors: Juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="09/26/2016"  
-	wacn.date="12/26/2016"  
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/26/2016
+ms.author: juliako
+---
 
 # 使用媒体服务 REST API 连接到媒体服务帐户
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/media-services-dotnet-connect-programmatically/)
-- [REST](/documentation/articles/media-services-rest-connect-programmatically/)
+> [!div class="op_single_selector"]
+- [.NET](./media-services-dotnet-connect-programmatically.md)
+- [REST](./media-services-rest-connect-programmatically.md)
 
 本主题介绍如何在使用媒体服务 REST API 编程时获取与 Azure 媒体服务的编程连接。
 
@@ -34,7 +32,7 @@
 1. 获取访问令牌
 2. 连接到媒体服务 URI
 
-	>[AZURE.NOTE]上海 DC URI：https://wamsshaclus001rest-hs.chinacloudapp.cn/API/ ； 北京 DC URI： https://wamsbjbclus001rest-hs.chinacloudapp.cn/API/
+    >[!NOTE]上海 DC URI：https://wamsshaclus001rest-hs.chinacloudapp.cn/API/ ； 北京 DC URI： https://wamsbjbclus001rest-hs.chinacloudapp.cn/API/
 
 3. 将后续 API 调用发布到相应的 URL。
 
@@ -46,51 +44,47 @@
 
 **标头**：
 
-	POST https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn/v2/OAuth2-13 HTTP/1.1
-	Content-Type: application/x-www-form-urlencoded
-	Host: wamsprodglobal001acs.accesscontrol.chinacloudapi.cn
-	Content-Length: 120
-	Expect: 100-continue
-	Connection: Keep-Alive
-	Accept: application/json
+    POST https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn/v2/OAuth2-13 HTTP/1.1
+    Content-Type: application/x-www-form-urlencoded
+    Host: wamsprodglobal001acs.accesscontrol.chinacloudapi.cn
+    Content-Length: 120
+    Expect: 100-continue
+    Connection: Keep-Alive
+    Accept: application/json
 
-	
 **正文**：
 
 需要在此请求的正文中提供 client\_id 和 client\_secret 值；client\_id 和 client\_secret 分别对应于 AccountName 和 AccountKey 值。在你设置帐户时，媒体服务将向你提供这些值。
 
 请注意，当你的媒体服务帐户的 AccountKey 用作访问令牌请求中的 client\_secret 值时，必须对其进行 URL 编码（请参阅[百分号编码](http://tools.ietf.org/html/rfc3986#section-2.1)）。
 
-	grant_type=client_credentials&client_id=ams_account_name&client_secret=URL_encoded_ams_account_key&scope=urn%3aWindowsAzureMediaServices
-
+    grant_type=client_credentials&client_id=ams_account_name&client_secret=URL_encoded_ams_account_key&scope=urn%3aWindowsAzureMediaServices
 
 例如：
 
-	grant_type=client_credentials&client_id=amstestaccount001&client_secret=wUNbKhNj07oqjqU3Ah9R9f4kqTJ9avPpfe6Pk3YZ7ng%3d&scope=urn%3aWindowsAzureMediaServices
-
+    grant_type=client_credentials&client_id=amstestaccount001&client_secret=wUNbKhNj07oqjqU3Ah9R9f4kqTJ9avPpfe6Pk3YZ7ng%3d&scope=urn%3aWindowsAzureMediaServices
 
 以下示例显示了在响应正文中包含访问令牌的 HTTP 响应。
 
-	HTTP/1.1 200 OK
-	Cache-Control: no-cache, no-store
-	Pragma: no-cache
-	Content-Type: application/json; charset=utf-8
-	Expires: -1
-	request-id: a65150f5-2784-4a01-a4b7-33456187ad83
-	X-Content-Type-Options: nosniff
-	Strict-Transport-Security: max-age=31536000; includeSubDomains
-	Date: Thu, 15 Jan 2015 08:07:20 GMT
-	Content-Length: 670
-	
-	{  
-	   "token_type":"http://schemas.xmlsoap.org/ws/2009/11/swt-token-profile-1.0",
-	   "access_token":"http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=z7f19258-2233-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421330840&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=uf69n82KlqZmkJDNxhJkOxpyIpA2HDyeGUTtSnq1vlE%3d",
-	   "expires_in":"21600",
-	   "scope":"urn:WindowsAzureMediaServices"
-	}
-	
+    HTTP/1.1 200 OK
+    Cache-Control: no-cache, no-store
+    Pragma: no-cache
+    Content-Type: application/json; charset=utf-8
+    Expires: -1
+    request-id: a65150f5-2784-4a01-a4b7-33456187ad83
+    X-Content-Type-Options: nosniff
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Date: Thu, 15 Jan 2015 08:07:20 GMT
+    Content-Length: 670
 
->[AZURE.NOTE]
+    {  
+       "token_type":"http://schemas.xmlsoap.org/ws/2009/11/swt-token-profile-1.0",
+       "access_token":"http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=z7f19258-2233-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421330840&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=uf69n82KlqZmkJDNxhJkOxpyIpA2HDyeGUTtSnq1vlE%3d",
+       "expires_in":"21600",
+       "scope":"urn:WindowsAzureMediaServices"
+    }
+
+>[!NOTE]
 建议在外部存储中缓存“access\_token”和“expires\_in”值。以后可以从存储中检索令牌数据，并在媒体服务 REST API 调用中重新使用。这对于令牌可以在多个进程或多台计算机之间安全共享的方案尤其有用。
 
 确保监视访问令牌的“expires\_in”值，并在必要时使用新令牌更新你的 REST API 调用。
@@ -102,33 +96,28 @@
 以下示例演示了对上海 DC 媒体服务 URI 发出的 HTTP 请求 (https://wamsshaclus001rest-hs.chinacloudapp.cn/API/)。     
 
 **HTTP 请求**：
-			
-	GET https://wamsshaclus001rest-hs.chinacloudapp.cn/API/ HTTP/1.1
-	Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=z7f19258-2233-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421500579&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=ElVWXOnMVggFQl%2ft9vhdcv1qH1n%2fE8l3hRef4zPmrzg%3d
-	x-ms-version: 2.11
-	Accept: application/json
-	Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
+    GET https://wamsshaclus001rest-hs.chinacloudapp.cn/API/ HTTP/1.1
+    Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=z7f19258-2233-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421500579&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=ElVWXOnMVggFQl%2ft9vhdcv1qH1n%2fE8l3hRef4zPmrzg%3d
+    x-ms-version: 2.11
+    Accept: application/json
+    Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
 **HTTP 响应**：
-	
-	HTTP/1.1 200 OK
-	Cache-Control: no-cache
-	Content-Length: 1250
-	Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
-	Server: Microsoft-IIS/8.5
-	request-id: 5f52ea9d-177e-48fe-9709-24953d19f84a
-	x-ms-request-id: 5f52ea9d-177e-48fe-9709-24953d19f84a
-	X-Content-Type-Options: nosniff
-	DataServiceVersion: 3.0;
-	X-Powered-By: ASP.NET
-	Strict-Transport-Security: max-age=31536000; includeSubDomains
-	Date: Sat, 17 Jan 2015 07:44:52 GMT
-	
-	{"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata","value":[{"name":"AccessPolicies","url":"AccessPolicies"},{"name":"Locators","url":"Locators"},{"name":"ContentKeys","url":"ContentKeys"},{"name":"ContentKeyAuthorizationPolicyOptions","url":"ContentKeyAuthorizationPolicyOptions"},{"name":"ContentKeyAuthorizationPolicies","url":"ContentKeyAuthorizationPolicies"},{"name":"Files","url":"Files"},{"name":"Assets","url":"Assets"},{"name":"AssetDeliveryPolicies","url":"AssetDeliveryPolicies"},{"name":"IngestManifestFiles","url":"IngestManifestFiles"},{"name":"IngestManifestAssets","url":"IngestManifestAssets"},{"name":"IngestManifests","url":"IngestManifests"},{"name":"StorageAccounts","url":"StorageAccounts"},{"name":"Tasks","url":"Tasks"},{"name":"NotificationEndPoints","url":"NotificationEndPoints"},{"name":"Jobs","url":"Jobs"},{"name":"TaskTemplates","url":"TaskTemplates"},{"name":"JobTemplates","url":"JobTemplates"},{"name":"MediaProcessors","url":"MediaProcessors"},{"name":"EncodingReservedUnitTypes","url":"EncodingReservedUnitTypes"},{"name":"Operations","url":"Operations"},{"name":"StreamingEndpoints","url":"StreamingEndpoints"},{"name":"Channels","url":"Channels"},{"name":"Programs","url":"Programs"}]}
-	 
 
+    HTTP/1.1 200 OK
+    Cache-Control: no-cache
+    Content-Length: 1250
+    Content-Type: application/json;odata=minimalmetadata;streaming=true;charset=utf-8
+    Server: Microsoft-IIS/8.5
+    request-id: 5f52ea9d-177e-48fe-9709-24953d19f84a
+    x-ms-request-id: 5f52ea9d-177e-48fe-9709-24953d19f84a
+    X-Content-Type-Options: nosniff
+    DataServiceVersion: 3.0;
+    X-Powered-By: ASP.NET
+    Strict-Transport-Security: max-age=31536000; includeSubDomains
+    Date: Sat, 17 Jan 2015 07:44:52 GMT
 
-
+    {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata","value":[{"name":"AccessPolicies","url":"AccessPolicies"},{"name":"Locators","url":"Locators"},{"name":"ContentKeys","url":"ContentKeys"},{"name":"ContentKeyAuthorizationPolicyOptions","url":"ContentKeyAuthorizationPolicyOptions"},{"name":"ContentKeyAuthorizationPolicies","url":"ContentKeyAuthorizationPolicies"},{"name":"Files","url":"Files"},{"name":"Assets","url":"Assets"},{"name":"AssetDeliveryPolicies","url":"AssetDeliveryPolicies"},{"name":"IngestManifestFiles","url":"IngestManifestFiles"},{"name":"IngestManifestAssets","url":"IngestManifestAssets"},{"name":"IngestManifests","url":"IngestManifests"},{"name":"StorageAccounts","url":"StorageAccounts"},{"name":"Tasks","url":"Tasks"},{"name":"NotificationEndPoints","url":"NotificationEndPoints"},{"name":"Jobs","url":"Jobs"},{"name":"TaskTemplates","url":"TaskTemplates"},{"name":"JobTemplates","url":"JobTemplates"},{"name":"MediaProcessors","url":"MediaProcessors"},{"name":"EncodingReservedUnitTypes","url":"EncodingReservedUnitTypes"},{"name":"Operations","url":"Operations"},{"name":"StreamingEndpoints","url":"StreamingEndpoints"},{"name":"Channels","url":"Channels"},{"name":"Programs","url":"Programs"}]}
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

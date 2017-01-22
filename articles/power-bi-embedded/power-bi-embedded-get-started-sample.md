@@ -1,22 +1,22 @@
-<properties
-   pageTitle="示例入门"
-   description="Power BI Embedded，使用 SDK 将交互式 Power BI 报表添加到商业智能应用程序"
-   services="power-bi-embedded"
-   documentationCenter=""
-   authors="mgblythe"
-   manager="NA"
-   editor=""
-   tags=""/>
-<tags
-   ms.service="power-bi-embedded"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="powerbi"
-   ms.date="07/14/2016"
-   ms.author="mblythe"
-   wacn.date="01/13/2017"/>  
+---
+title: 示例入门
+description: Power BI Embedded，使用 SDK 将交互式 Power BI 报表添加到商业智能应用程序
+services: power-bi-embedded
+documentationCenter: 
+authors: mgblythe
+manager: NA
+editor: 
+tags: 
 
+ms.service: power-bi-embedded
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: powerbi
+ms.date: 07/14/2016
+ms.author: mblythe
+wacn.date: 01/13/2017
+---
 
 # Power BI Embedded 示例入门
 
@@ -24,12 +24,10 @@
 
 在继续之前，可能需要保存以下资源。在将 Power BI 报表集成到示例应用和自己的应用中时，这些资源都可以提供帮助。
 
- -	[Power BI Embedded API 参考](https://msdn.microsoft.com/zh-cn/library/mt711493.aspx)
- -	[Power BI Embedded .NET SDK](https://www.nuget.org/profiles/powerbi)（通过 NuGet 提供）
+ - [Power BI Embedded API 参考](https://msdn.microsoft.com/zh-cn/library/mt711493.aspx)
+ - [Power BI Embedded .NET SDK](https://www.nuget.org/profiles/powerbi)（通过 NuGet 提供）
 
-
-
-> [AZURE.NOTE] 需要先在 Azure 订阅中创建至少一个**工作区集合**才能配置和运行 Power BI Embedded 入门示例。若要了解如何在 Azure 门户预览中创建**工作区集合**，请参阅 [Power BI Embedded 入门](/documentation/articles/power-bi-embedded-get-started/)。
+> [!NOTE] 需要先在 Azure 订阅中创建至少一个**工作区集合**才能配置和运行 Power BI Embedded 入门示例。若要了解如何在 Azure 门户预览中创建**工作区集合**，请参阅 [Power BI Embedded 入门](./power-bi-embedded-get-started.md)。
 
 ## 配置示例应用
 
@@ -47,16 +45,13 @@
 
     ![](./media/powerbi-embedded-get-started-sample/console-option-5.png)  
 
-
-6. 输入**工作区集合**名称和**访问密钥**。可以通过 **Azure 门户预览**获取这些信息。若要了解有关如何获取**访问密钥**的信息，请参阅“Power BI Embedded 入门”中的[查看 Power BI API 访问密钥](/documentation/articles/power-bi-embedded-get-started-sample/#view-access-keys/)。
+6. 输入**工作区集合**名称和**访问密钥**。可以通过 **Azure 门户预览**获取这些信息。若要了解有关如何获取**访问密钥**的信息，请参阅“Power BI Embedded 入门”中的[查看 Power BI API 访问密钥](./power-bi-embedded-get-started-sample.md#view-access-keys/)。
 
     ![](./media/powerbi-embedded-get-started-sample/azure-portal.png)  
-
 
 7. 复制并保存新创建的**工作区 ID** 以便在本文后面部分使用。创建**工作区 ID** 之后，可以在 **Azure 门户预览**中找到该数据。
 
     ![](./media/powerbi-embedded-get-started-sample/workspace-id.png)  
-
 
 8. 若要将 PBIX 文件导入到**工作区**，请选择选项 6“将 PBIX 文件导入到现有工作区”。如果没有现有的 PBIX 文件，则可以下载 [Retail Analysis Sample PBIX](http://go.microsoft.com/fwlink/?LinkID=780547)（零售分析示例 PBIX）。
 
@@ -64,12 +59,10 @@
 
 应该会看到如下所示的响应：
 
+    Checking import state... Publishing
+    Checking import state... Succeeded
 
-	Checking import state... Publishing
-	Checking import state... Succeeded
-
-
-> [AZURE.NOTE] 如果 PBIX 文件包含任何直接查询连接，请选择选项 7 以更新连接字符串。
+> [!NOTE] 如果 PBIX 文件包含任何直接查询连接，请选择选项 7 以更新连接字符串。
 
 此时，**工作区**中已导入了一个 Power BI PBIX 报表。接下来将演示如何运行 **Power BI Embedded** 入门示例 Web 应用。
 
@@ -94,19 +87,16 @@ Web 应用示例是一个示例仪表板，用于呈现**工作区**中导入的
 
 ![](./media/powerbi-embedded-get-started-sample/power-bi-embedded-sample-left-nav.png)  
 
-
 单击某个报表后，**EmbedSample** Web 应用程序应类似于以下内容：
 
 ![](./media/powerbi-embedded-get-started-sample/sample-web-app.png)  
-
-
 
 ## 探索示例代码
 **Power BI Embedded** 示例是一个 Web 应用示例仪表板，演示了如何将 **Power BI** 报表集成到应用中。它采用模型-视图-控制器 (MVC) 设计模式来演示最佳做法。本节重点介绍了可以在 **PowerBI Embedded** Web 应用解决方案中浏览的示例代码。模型-视图-控制器 (MVC) 模式根据用户输入的三个单独的类（模型、视图和控件）对域、演示文稿和操作分开进行建模。若要了解关于 MVC 的详细信息，请参阅 [Learn About ASP.NET](http://www.asp.net/mvc)（了解 ASP.NET）。
 
 **Power BI Embedded** 示例代码分隔方式如下所示。每个部分在 PowerBI embedded.sln 解决方案中都包括了文件名称，以便轻松查找示例中的代码。
 
-> [AZURE.NOTE] 本节总结了演示如何编写代码的示例代码。若要查看完整的示例，请加载 Visual Studio 中的 PowerBI embedded.sln 解决方案。
+> [!NOTE] 本节总结了演示如何编写代码的示例代码。若要查看完整的示例，请加载 Visual Studio 中的 PowerBI embedded.sln 解决方案。
 
 ### 模型
 此示例具有 **ReportsViewModel** 和 **ReportViewModel**。
@@ -130,9 +120,7 @@ Web 应用示例是一个示例仪表板，用于呈现**工作区**中导入的
 ### 连接字符串
 连接字符串必须采用以下格式：
 
-
-	Data Source=tcp:MyServer.database.chinacloudapi.cn,1433;Initial Catalog=MyDatabase
-
+    Data Source=tcp:MyServer.database.chinacloudapi.cn,1433;Initial Catalog=MyDatabase
 
 使用一般的服务器和数据库属性将会失败。例如：Server=tcp:MyServer.database.chinacloudapi.cn,1433;Database=MyDatabase。
 
@@ -175,56 +163,55 @@ Report.cshtml：为 **PowerBIReportFor** 设置 **Model.AccessToken** 和 Lambda
 
 **DashboardController.cs**：创建用于传递**应用令牌** 的 PowerBIClient。JSON Web 令牌 (JWT) 是基于**签名密钥**生成的，用于获取**凭据**。**凭据**用于创建 **PowerBIClient** 实例。拥有 **PowerBIClient** 实例后，可以调用 GetReports() 和 GetReportsAsync()。
 
-	CreatePowerBIClient()
+    CreatePowerBIClient()
 
-	    private IPowerBIClient CreatePowerBIClient()
-	    {
-	        var credentials = new TokenCredentials(accessKey, "AppKey");
-	        var client = new PowerBIClient(credentials)
-	        {
-	            BaseUri = new Uri(apiUrl)
-	        };
+        private IPowerBIClient CreatePowerBIClient()
+        {
+            var credentials = new TokenCredentials(accessKey, "AppKey");
+            var client = new PowerBIClient(credentials)
+            {
+                BaseUri = new Uri(apiUrl)
+            };
 
-	        return client;
-	    }
+            return client;
+        }
 
-	ActionResult Reports()
+    ActionResult Reports()
 
-	    public ActionResult Reports()
-	    {
-	        using (var client = this.CreatePowerBIClient())
-	        {
-	            var reportsResponse = client.Reports.GetReports(this.workspaceCollection, this.workspaceId);
+        public ActionResult Reports()
+        {
+            using (var client = this.CreatePowerBIClient())
+            {
+                var reportsResponse = client.Reports.GetReports(this.workspaceCollection, this.workspaceId);
 
-	            var viewModel = new ReportsViewModel
-	            {
-	                Reports = reportsResponse.Value.ToList()
-	            };
+                var viewModel = new ReportsViewModel
+                {
+                    Reports = reportsResponse.Value.ToList()
+                };
 
-	            return PartialView(viewModel);
-	        }
-	    }
+                return PartialView(viewModel);
+            }
+        }
 
+    Task<ActionResult> Report(string reportId)
 
-	Task<ActionResult> Report(string reportId)
+        public async Task<ActionResult> Report(string reportId)
+        {
+            using (var client = this.CreatePowerBIClient())
+            {
+                var reportsResponse = await client.Reports.GetReportsAsync(this.workspaceCollection, this.workspaceId);
+                var report = reportsResponse.Value.FirstOrDefault(r => r.Id == reportId);
+                var embedToken = PowerBIToken.CreateReportEmbedToken(this.workspaceCollection, this.workspaceId, report.Id);
 
-	    public async Task<ActionResult> Report(string reportId)
-	    {
-	        using (var client = this.CreatePowerBIClient())
-	        {
-	            var reportsResponse = await client.Reports.GetReportsAsync(this.workspaceCollection, this.workspaceId);
-	            var report = reportsResponse.Value.FirstOrDefault(r => r.Id == reportId);
-	            var embedToken = PowerBIToken.CreateReportEmbedToken(this.workspaceCollection, this.workspaceId, report.Id);
+                var viewModel = new ReportViewModel
+                {
+                    Report = report,
+                    AccessToken = embedToken.Generate(this.accessKey)
+                };
 
-	            var viewModel = new ReportViewModel
-	            {
-	                Report = report,
-	                AccessToken = embedToken.Generate(this.accessKey)
-	            };
-
-	            return View(viewModel);
-	        }
-	    }
+                return View(viewModel);
+            }
+        }
 
 ### 将报表集成到应用中
 
@@ -232,25 +219,20 @@ Report.cshtml：为 **PowerBIReportFor** 设置 **Model.AccessToken** 和 Lambda
 
 ![](./media/powerbi-embedded-get-started-sample/power-bi-embedded-iframe-code.png)  
 
-
-
 ## 筛选应用程序中嵌入的报表
 
 可以使用 URL 语法筛选嵌入的报表。要进行筛选，可以使用指定的筛选器将带运算符 **eq** 的 **$filter** 查询字符串参数添加到 iFrame src url。以下为筛选查询语法：
 
+    https://app.powerbi.com/reportEmbed
+    ?reportId=d2a0ea38-...-9673-ee9655d54a4a&
+    $filter={tableName/fieldName}%20eq%20'{fieldValue}'
 
-	https://app.powerbi.com/reportEmbed
-	?reportId=d2a0ea38-...-9673-ee9655d54a4a&
-	$filter={tableName/fieldName}%20eq%20'{fieldValue}'
-
-
-> [AZURE.NOTE] {tableName/fieldName} 不能包含空格或特殊字符。{fieldValue} 接受单个分类值。
-
+> [!NOTE] {tableName/fieldName} 不能包含空格或特殊字符。{fieldValue} 接受单个分类值。
 
 ## 另请参阅
 
-- [常见 Power BI Embedded 方案](/documentation/articles/power-bi-embedded-scenarios/)
-- [在 Power BI Embedded 中进行身份验证和授权](/documentation/articles/power-bi-embedded-app-token-flow/)
+- [常见 Power BI Embedded 方案](./power-bi-embedded-scenarios.md)
+- [在 Power BI Embedded 中进行身份验证和授权](./power-bi-embedded-app-token-flow.md)
 
 <!---HONumber=Mooncake_1010_2016-->
 

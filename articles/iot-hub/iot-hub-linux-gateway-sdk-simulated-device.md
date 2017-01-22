@@ -1,27 +1,25 @@
-<properties
-	pageTitle="使用网关 SDK 模拟设备 | Azure"
-	description="使用 Linux 的 Azure IoT 中心网关 SDK 演练，说明如何使用 Azure IoT 中心网关 SDK 从模拟设备发送遥测数据。"
-	services="iot-hub"
-	documentationCenter=""
-	authors="chipalost"
-	manager="timlt"
-	editor=""/>
+---
+title: 使用网关 SDK 模拟设备 | Azure
+description: 使用 Linux 的 Azure IoT 中心网关 SDK 演练，说明如何使用 Azure IoT 中心网关 SDK 从模拟设备发送遥测数据。
+services: iot-hub
+documentationCenter: 
+authors: chipalost
+manager: timlt
+editor: 
 
-<tags
-     ms.service="iot-hub"
-     ms.devlang="cpp"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="08/29/2016"
-     wacn.date="01/17/2017"
-     ms.author="andbuc"/>  
-
-
+ms.service: iot-hub
+ms.devlang: cpp
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/29/2016
+wacn.date: 01/17/2017
+ms.author: andbuc
+---
 
 # Azure IoT 网关 SDK - 使用 Linux 通过模拟设备发送设备到云消息
 
-[AZURE.INCLUDE [iot-hub-gateway-sdk-simulated-selector](../../includes/iot-hub-gateway-sdk-simulated-selector.md)]
+[!INCLUDE [iot-hub-gateway-sdk-simulated-selector](../../includes/iot-hub-gateway-sdk-simulated-selector.md)]
 
 ## 生成并运行示例
 
@@ -37,7 +35,7 @@
 2. 浏览到本地 **azure-iot-gateway-sdk** 存储库副本中的根文件夹。
 3. 运行 **tools/build.sh** 脚本。此脚本使用 **cmake** 实用工具在本地 **azure-iot-gateway-sdk** 存储库副本的根文件夹中创建一个名为 **build** 的文件夹，并生成一个生成文件。然后，该脚本将生成解决方案并运行测试。
 
-> [AZURE.NOTE]  每次运行 **build.sh** 脚本时，都会删除本地 **azure-iot-gateway-sdk** 存储库副本的根文件夹中的 **build** 文件夹并重新生成。
+> [!NOTE]  每次运行 **build.sh** 脚本时，都会删除本地 **azure-iot-gateway-sdk** 存储库副本的根文件夹中的 **build** 文件夹并重新生成。
 
 运行示例：
 
@@ -152,7 +150,7 @@
 
 1. 在 shell 中，浏览到本地 **azure-iot-gateway-sdk** 存储库副本中的根文件夹。
 2. 运行以下命令：
-   
+
     ```
     ./build/samples/simulated_device_cloud_upload/simulated_device_cloud_upload_sample ./samples/simulated_device_cloud_upload/src/simulated_device_cloud_upload_lin.json
     ```
@@ -171,13 +169,13 @@
 <!-- Links -->
 
 [lnk-setupdevbox]: https://github.com/Azure/azure-iot-gateway-sdk/blob/master/doc/devbox_setup.md
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-explorer-tools]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/manage_iot_hub.md
 [lnk-gateway-sdk]: https://github.com/Azure/azure-iot-gateway-sdk/
 
-[lnk-physical-device]: /documentation/articles/iot-hub-gateway-sdk-physical-device/
+[lnk-physical-device]: ./iot-hub-gateway-sdk-physical-device.md
 
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-create-hub]: /documentation/articles/iot-hub-create-through-portal/
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-create-hub]: ./iot-hub-create-through-portal.md
 
 <!---HONumber=Mooncake_Quality_Review_0117_2017-->

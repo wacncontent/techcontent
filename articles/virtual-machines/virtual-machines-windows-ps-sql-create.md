@@ -1,21 +1,22 @@
-<properties
-    pageTitle="在 Azure PowerShell 中创建 SQL Server 虚拟机 (Resource Manager) | Azure"
-    description="提供用于创建具有 SQL Server 虚拟机库映像的 Azure VM 的步骤和 PowerShell 脚本。"
-	services="virtual-machines-windows"
-    documentationCenter="na"
-    authors="rothja"
-    manager="jhubbard"
-    editor=""
-    tags="azure-resource-manager" />
-<tags
-    ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="10/25/2016"
-	wacn.date="01/05/2017"
-	ms.author="jroth"/>
+---
+title: 在 Azure PowerShell 中创建 SQL Server 虚拟机 (Resource Manager) | Azure
+description: 提供用于创建具有 SQL Server 虚拟机库映像的 Azure VM 的步骤和 PowerShell 脚本。
+services: virtual-machines-windows
+documentationCenter: na
+authors: rothja
+manager: jhubbard
+editor: 
+tags: azure-resource-manager
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 10/25/2016
+wacn.date: 01/05/2017
+ms.author: jroth
+---
 
 # 使用 Azure PowerShell 预配 SQL Server 虚拟机 (Resource Manager)
 
@@ -23,13 +24,13 @@
 
 本教程演示如何使用 Azure PowerShell cmdlet 通过 **Azure Resource Manager** 部署模型创建单个 Azure 虚拟机。在本教程中，我们将从 SQL 库中的映像使用单个磁盘驱动器创建单个虚拟机。我们将为虚拟机要使用的存储、网络和计算资源创建新的提供程序。如果拥有上述任何资源的提供程序，则可以改用现有的提供程序。
 
-如果需要本主题的经典版本，请参阅[使用 Azure PowerShell 预配 SQL Server 虚拟机（经典）](/documentation/articles/virtual-machines-windows-classic-ps-sql-create/)。
+如果需要本主题的经典版本，请参阅[使用 Azure PowerShell 预配 SQL Server 虚拟机（经典）](./virtual-machines-windows-classic-ps-sql-create.md)。
 
 ## 先决条件
 
 在本教程中，你需要：
 
-- 在开始之前，你需要有 Azure 帐户和订阅。如果没有，请注册[试用版](/pricing/1rmb-trial/)。
+- 在开始之前，你需要有 Azure 帐户和订阅。如果没有，请注册[试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 - [Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)，最低版本 1.0.0 或以上（本教程使用 1.0.4 版编写）。
     - 若要检索你的版本，请键入 **Get-Module Azure -ListAvailable**。
 
@@ -37,15 +38,15 @@
 
 打开 Windows PowerShell，并通过运行以下 cmdlet 访问 Azure 帐户。随后将出现一个用于输入凭据的登录屏幕。使用登录 Azure 门户预览时所用的相同电子邮件和密码。
 
-	Add-AzureRmAccount -EnvironmentName AzureChinaCloud
+    Add-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 成功登录后，你会在屏幕上看到一些信息，其中包括用于登录的订阅 ID。除非更改为其他订阅，否则本教程中的资源都将在该订阅中创建。如果你有多个订阅 ID，请运行以下 cmdlet 以返回所有订阅 ID 的列表：
 
-	Get-AzureRmSubscription
+    Get-AzureRmSubscription
 
 若要更改为另一个订阅 ID，请结合所需的订阅 ID 运行以下 cmdlet。
 
-	Select-AzureRmSubscription -SubscriptionId xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+    Select-AzureRmSubscription -SubscriptionId xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 ## 定义映像变量
 
@@ -56,14 +57,14 @@
 
 根据需要修改并执行以下 cmdlet，以初始化这些变量。
 
-	$Location = "ChinaEast"
+    $Location = "ChinaEast"
     $ResourceGroupName = "sqlvm1"
 
 ### 存储属性
 
 使用以下变量来定义存储帐户和虚拟机要使用的存储类型。
 
-根据需要修改并执行以下 cmdlet，以初始化这些变量。请注意，在本示例中，我们将使用建议用于生产工作负荷的[高级存储](/documentation/articles/storage-premium-storage/)。有关本指导和其他建议的详细信息，请参阅 [Azure 虚拟机中 SQL Server 的性能最佳实践](/documentation/articles/virtual-machines-windows-sql-performance/)。
+根据需要修改并执行以下 cmdlet，以初始化这些变量。请注意，在本示例中，我们将使用建议用于生产工作负荷的[高级存储](../storage/storage-premium-storage.md)。有关本指导和其他建议的详细信息，请参阅 [Azure 虚拟机中 SQL Server 的性能最佳实践](./virtual-machines-windows-sql-performance.md)。
 
     $StorageName = $ResourceGroupName + "storage"
     $StorageType = "Premium_LRS"
@@ -140,7 +141,7 @@
 
 我们将首先创建虚拟网络的子网配置。在本教程中，我们将使用 [New-AzureRmVirtualNetworkSubnetConfig](https://msdn.microsoft.com/zh-cn/library/mt619412.aspx) cmdlet 创建默认子网。我们将使用前面初始化的变量所定义的子网名称和地址前缀来创建虚拟网络子网配置。
 
->[AZURE.NOTE] 你可以使用此 cmdlet 来定义虚拟网络子网配置的其他属性，但这已超出本教程的范围。
+>[!NOTE] 你可以使用此 cmdlet 来定义虚拟网络子网配置的其他属性，但这已超出本教程的范围。
 
 执行以下 cmdlet，以创建虚拟子网配置。
 
@@ -158,7 +159,7 @@
 
 我们现已定义虚拟网络，接下来需要配置 IP 地址才能连接到虚拟机。在本教程中，我们将使用动态 IP 地址来创建公共 IP 地址，以支持 Internet 连接。我们将使用 [New-AzureRmPublicIpAddress](https://msdn.microsoft.com/zh-cn/library/mt603620.aspx) cmdlet，以前面初始化的变量所定义的名称、位置、分配方法和 DNS 域名标签，在前面创建的资源组中创建公共 IP 地址。
 
->[AZURE.NOTE] 你可以使用此 cmdlet 来定义公共 IP 地址的其他属性，但这已超出本初步教程的范围。你也可以创建专用地址或具有静态地址的地址，但这也超出了本教程的范围。
+>[!NOTE] 你可以使用此 cmdlet 来定义公共 IP 地址的其他属性，但这已超出本初步教程的范围。你也可以创建专用地址或具有静态地址的地址，但这也超出了本教程的范围。
 
 执行以下 cmdlet，以创建公共 IP 地址。
 
@@ -194,7 +195,7 @@
 
 ### 设置虚拟机的操作系统属性
 
-现在，我们已准备好设置虚拟机的操作系统属性。我们将使用 [Set-AzureRmVMOperatingSystem](https://msdn.microsoft.com/zh-cn/library/mt603843.aspx) cmdlet 将操作系统的类型设置为 Windows，要求安装[虚拟机代理](/documentation/articles/virtual-machines-windows-classic-agents-and-extensions/)，并指定该 cmdlet 允许使用前面初始化的变量自动更新和设置虚拟机名称、计算机名称和凭据。
+现在，我们已准备好设置虚拟机的操作系统属性。我们将使用 [Set-AzureRmVMOperatingSystem](https://msdn.microsoft.com/zh-cn/library/mt603843.aspx) cmdlet 将操作系统的类型设置为 Windows，要求安装[虚拟机代理](./virtual-machines-windows-classic-agents-and-extensions.md)，并指定该 cmdlet 允许使用前面初始化的变量自动更新和设置虚拟机名称、计算机名称和凭据。
 
 执行以下 cmdlet，以设置虚拟机的操作系统属性。
 
@@ -247,7 +248,6 @@
 ## 示例脚本
 
 以下脚本包含本教程的完整 PowerShell 脚本。该脚本假设你已将 Azure 订阅设置为配合使用 **Add-AzureRmAccount** 和 **Select-AzureRmSubscription** 命令。
-
 
     # Variables
     ## Global
@@ -305,6 +305,6 @@
     New-AzureRmVM -ResourceGroupName $ResourceGroupName -Location $Location -VM $VirtualMachine
 
 ## 后续步骤
-创建虚拟机后，你就可以使用 RDP 和设置连接来连接虚拟机了。有关详细信息，请参阅[连接到 Azure 上的 SQL Server 虚拟机 (Resource Manager)](/documentation/articles/virtual-machines-windows-sql-connect/)。
+创建虚拟机后，你就可以使用 RDP 和设置连接来连接虚拟机了。有关详细信息，请参阅[连接到 Azure 上的 SQL Server 虚拟机 (Resource Manager)](./virtual-machines-windows-sql-connect.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

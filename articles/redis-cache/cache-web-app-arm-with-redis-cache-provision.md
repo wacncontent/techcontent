@@ -1,27 +1,27 @@
-<properties 
-	pageTitle="使用 Redis 缓存预配 Web 应用" 
-	description="使用 Azure 资源管理器模板部署包含 Redis 缓存的 Web 应用。" 
-	services="app-service" 
-	documentationCenter="" 
-	authors="steved0x" 
-	manager="erickson-doug" 
-	editor=""/>
+---
+title: 使用 Redis 缓存预配 Web 应用
+description: 使用 Azure 资源管理器模板部署包含 Redis 缓存的 Web 应用。
+services: app-service
+documentationCenter: 
+authors: steved0x
+manager: erickson-doug
+editor: 
 
-<tags 
-	ms.service="app-service" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="10/25/2016" 
-	wacn.date="01/09/2017" 
-	ms.author="sdanie"/>
+ms.service: app-service
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/25/2016
+wacn.date: 01/09/2017
+ms.author: sdanie
+---
 
 # 使用模板创建 Web 应用和 Redis 缓存
 
 在本主题中，你将学习如何创建用于部署 Azure Web 应用和 Redis 缓存的 Azure 资源管理器模板。你将了解如何定义要部署的资源以及如何定义执行部署时指定的参数。可将此模板用于自己的部署，或自定义此模板以满足要求。
 
-有关创建模板的详细信息，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。
+有关创建模板的详细信息，请参阅[创作 Azure 资源管理器模板](../azure-resource-manager/resource-group-authoring-templates.md)。
 
 有关完整的模板，请参阅[包含 Redis 缓存的 Web 应用模板](https://github.com/Azure/azure-quickstart-templates/blob/master/201-web-app-with-redis-cache/azuredeploy.json)。
 
@@ -34,13 +34,13 @@
 
 ## 要指定的参数
 
-[AZURE.INCLUDE [app-service-web-deploy-web-parameters](../../includes/app-service-web-deploy-web-parameters.md)]
+[!INCLUDE [app-service-web-deploy-web-parameters](../../includes/app-service-web-deploy-web-parameters.md)]
 
-[AZURE.INCLUDE [cache-deploy-parameters](../../includes/cache-deploy-parameters.md)]
+[!INCLUDE [cache-deploy-parameters](../../includes/cache-deploy-parameters.md)]
 
 ## 名称变量
 
-此模板使用变量来构造资源的名称。它使用 [uniqueString](/documentation/articles/resource-group-template-functions/#uniquestring) 函数来构造基于资源组 ID 的值。
+此模板使用变量来构造资源的名称。它使用 [uniqueString](../azure-resource-manager/resource-group-template-functions.md#uniquestring) 函数来构造基于资源组 ID 的值。
 
     "variables": {
       "hostingPlanName": "[concat('hostingplan', uniqueString(resourceGroup().id))]",
@@ -48,10 +48,9 @@
       "cacheName": "[concat('cache', uniqueString(resourceGroup().id))]"
     },
 
-
 ## 要部署的资源
 
-[AZURE.INCLUDE [app-service-web-deploy-web-host](../../includes/app-service-web-deploy-web-host.md)]
+[!INCLUDE [app-service-web-deploy-web-host](../../includes/app-service-web-deploy-web-host.md)]
 
 ### Redis Cache
 
@@ -77,13 +76,12 @@
       }
     }
 
-
 ### Web 应用
 
 使用 **webSiteName** 变量中指定的名称创建 Web 应用。
 
 请注意，在 Web 应用中配置的应用设置属性使其可与 Redis 缓存配合工作。此应用设置是根据部署期间提供了值动态创建的。
-        
+
     {
       "apiVersion": "2015-08-01",
       "name": "[variables('webSiteName')]",
@@ -119,7 +117,7 @@
 
 ## 运行部署的命令
 
-[AZURE.INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
+[!INCLUDE [app-service-deploy-commands](../../includes/app-service-deploy-commands.md)]
 
 ### PowerShell
 

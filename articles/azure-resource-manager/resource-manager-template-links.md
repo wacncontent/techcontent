@@ -1,23 +1,22 @@
-<properties
-    pageTitle="用于链接资源的 Resource Manager 模板 | Azure"
-    description="介绍用于通过模板在相关资源之间部署链接的资源管理器架构。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="" />  
+---
+title: 用于链接资源的 Resource Manager 模板 | Azure
+description: 介绍用于通过模板在相关资源之间部署链接的资源管理器架构。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: 
 
-<tags
-    ms.assetid="48a13b1a-3208-4f91-ba85-bda2a0e22605"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="04/05/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: 48a13b1a-3208-4f91-ba85-bda2a0e22605
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 04/05/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 资源链接模板架构
 在两个资源之间创建链接。该链接将应用于称为源资源的资源。链接中的第二个资源称为目标资源。
@@ -36,8 +35,6 @@
             "notes": string
         }
     }
-
-
 
 ## 值
 下表描述了需要在架构中设置的值。
@@ -121,6 +118,6 @@
     }
 
 ## 后续步骤
-* 有关模板结构的信息，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。
+* 有关模板结构的信息，请参阅[创作 Azure 资源管理器模板](./resource-group-authoring-templates.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

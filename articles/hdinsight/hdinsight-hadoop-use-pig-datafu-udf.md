@@ -1,21 +1,21 @@
-<properties
-pageTitle="在 HDInsight 上将 DataFu 与 pig 配合使用"
-description="DataFu 是适用于 Hadoop 的库的集合。了解如何在 HDInsight 群集上将 DataFu 与 pig 配合使用。"
-services="hdinsight"
-documentationCenter=""
-authors="Blackmist"
-manager="paulettm"
-editor="cgronlun"/>
+---
+title: 在 HDInsight 上将 DataFu 与 pig 配合使用
+description: DataFu 是适用于 Hadoop 的库的集合。了解如何在 HDInsight 群集上将 DataFu 与 pig 配合使用。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
 
-<tags
-ms.service="hdinsight"
-ms.devlang="na"
-ms.topic="article"
-ms.tgt_pltfrm="na"
-ms.workload="big-data"
-ms.date="11/08/2016"
-wacn.date="12/30/2016"
-ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 11/08/2016
+wacn.date: 12/30/2016
+ms.author: larryfr
+---
 
 #在 HDInsight 上将 DataFu 与 pig 配合使用
 
@@ -27,16 +27,16 @@ DataFu 是适用于 Hadoop 的开放源代码库的集合。在本文档中，�
 
 * Azure HDInsight 群集（基于 Windows）
 
-* 基本熟悉[在 HDInsight 上使用 Pig](/documentation/articles/hdinsight-use-pig/)
+* 基本熟悉[在 HDInsight 上使用 Pig](./hdinsight-use-pig.md)
 
 ##将 DataFu 与 Pig 配合使用
 
-本部分中的步骤假定你熟悉在 HDInsight 上使用 Pig，并仅提供 Pig Latin 语句，而不是如何在群集上使用它们的步骤。有关将 Pig 与 HDInsight 配合使用的详细信息，请参阅[将 Pig 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-pig/)。
+本部分中的步骤假定你熟悉在 HDInsight 上使用 Pig，并仅提供 Pig Latin 语句，而不是如何在群集上使用它们的步骤。有关将 Pig 与 HDInsight 配合使用的详细信息，请参阅[将 Pig 与 HDInsight 配合使用](./hdinsight-use-pig.md)。
 
 通常，你将为 DataFu 函数定义别名。例如：
 
     DEFINE SHA datafu.pig.hash.SHA();
-    
+
 这将为 SHA 哈希函数定义名为 `SHA` 的别名。然后，你可以在 Pig Latin 脚本中使用此别名生成输入数据的哈希值。例如，以下代码将输入数据中的名称替换为哈希值：
 
     raw = LOAD '/data/raw/' USING PigStorage(',') AS  
@@ -59,7 +59,7 @@ DataFu 是适用于 Hadoop 的开放源代码库的集合。在本文档中，�
     Eva Makay,8,9,2
     Shi Liao,4,6,0
     Tjasa Zemljaric,0,2,5
-    
+
 它会生成以下输出：
 
     (c1a743b0f34d349cfc2ce00ef98369bdc3dba1565fec92b4159a9cd5de186347,5,9,1)
@@ -79,6 +79,6 @@ DataFu 是适用于 Hadoop 的开放源代码库的集合。在本文档中，�
 
 * [Apache DataFu Pig 指南](http://datafu.incubator.apache.org/docs/datafu/guide.html)。
 
-* [将 Pig 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Pig 与 HDInsight 配合使用](./hdinsight-use-pig.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

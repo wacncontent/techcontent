@@ -1,23 +1,21 @@
-<properties
-   pageTitle="资源平衡器群集描述 | Azure"
-   description="通过在群集资源管理器中指定容错域、升级域、节点属性和节点容量来描述 Service Fabric 群集。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="masnider"
-   manager="timlt"
-   editor=""/>  
+---
+title: 资源平衡器群集描述 | Azure
+description: 通过在群集资源管理器中指定容错域、升级域、节点属性和节点容量来描述 Service Fabric 群集。
+services: service-fabric
+documentationCenter: .net
+authors: masnider
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="Service-Fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="08/19/2016"
-   wacn.date="01/17/2017"
-   ms.author="masnider"/>  
-
+ms.service: Service-Fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 08/19/2016
+wacn.date: 01/17/2017
+ms.author: masnider
+---
 
 # 描述 Service Fabric 群集
 Service Fabric 群集资源管理器提供多种机制用于描述群集。在运行时，群集资源管理器使用此信息来确保群集中运行的服务的高可用性，同时确保适当使用群集中的资源。
@@ -36,7 +34,6 @@ Service Fabric 群集资源管理器提供多种机制用于描述群集。在�
 如果已设置自己的群集，则需要考虑故障的所有不同区域，以确保容错域已正确设置，使 Service Fabric 知道可以安全放置服务的位置。所谓的“安全”实际上是指智能 – 我们不想要将服务放置在造成服务停机的容错域中（例如上面所列的任何组件发生故障）。在 Azure 环境中，我们利用环境提供的容错域信息来自动正确配置群集中的节点。在下图（图 7）中，我们为所有实体着色以便使容错域成为简单的示例，并列出生成的所有不同容错域。此示例列出了数据中心 (DC)、机架 (R) 和刀片服务器 (B)。可以想象，如果每个刀片服务器包含多个虚拟机，则容错域层次结构中可能有另一个层。
 
 ![通过故障域组织的节点][Image1]  
-
 
  在运行时，Service Fabric 群集资源管理器会考虑群集中的容错域，并尝试分散指定服务的副本，以便将它们全都放在不同的容错域中。在任何一个容错域（位于层次结构中的任何一个级别）发生故障时，此过程有助于确保该服务的可用性不遭到破坏。
 
@@ -70,7 +67,7 @@ Service Fabric 群集资源管理器提供多种机制用于描述群集。在�
 最常见的模型（我们用于托管 Azure Service Fabric 群集的模型）是 FD/UD 矩阵，其中 FD 和 UD 构成一个表，节点沿着对角线开始放置。最后的结构是稀疏还是紧凑取决于相比于 FD 和 UD 数目的节点总数（换而言之，对于明显较大的群集，几乎所有项目最终看起来就像是密集矩阵模式，如“图 10”的右下角选项所示）。
 
 ## 容错域与升级域约束及最终行为
-群集资源管理器将要在容错域与升级域之间保持服务的均衡视为约束。可以在[此文](/documentation/articles/service-fabric-cluster-resource-manager-management-integration/)中详细了解约束。容错域和升级域约束的定义如下：“针对给定服务分区，两个域之间的副本数目差异应该永远不*大于一*”。 这实际上意味着，对于给定的服务而言，特定的移动或排列方式在群集中可能无效，因为这样做会违反容错域和升级域的约束。
+群集资源管理器将要在容错域与升级域之间保持服务的均衡视为约束。可以在[此文](./service-fabric-cluster-resource-manager-management-integration.md)中详细了解约束。容错域和升级域约束的定义如下：“针对给定服务分区，两个域之间的副本数目差异应该永远不*大于一*”。 这实际上意味着，对于给定的服务而言，特定的移动或排列方式在群集中可能无效，因为这样做会违反容错域和升级域的约束。
 
 让我们看一个示例。假设有一个 6 节点群集，其中配置了 5 个容错域和 5 个升级域。
 
@@ -85,7 +82,6 @@ Service Fabric 群集资源管理器提供多种机制用于描述群集。在�
 假设要创建一个 TargetReplicaSetSize 为 5 的服务。副本驻留在 N1-N5 上。事实上，N6 永远不被使用。为什么？ 看看当前的布局以及选择 N6 时所发生情况之间的差异，然后考虑 FD 和 UD 约束的定义之间的关系。
 
 下面是获得的布局，以及每个容错域和升级域的副本总数。
-
 
 | |FD0 |FD1 |FD2 |FD3 |FD4 |UDTotal|
 |-------|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
@@ -129,37 +125,35 @@ Service Fabric 群集资源管理器提供多种机制用于描述群集。在�
 
 ClusterManifest.xml
 
+      <Infrastructure>
+        <!-- IsScaleMin indicates that this cluster runs on one-box /one single server -->
+        <WindowsServer IsScaleMin="true">
+          <NodeList>
+            <Node NodeName="Node01" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType01" FaultDomain="fd:/DC01/Rack01" UpgradeDomain="UpgradeDomain1" IsSeedNode="true" />
+            <Node NodeName="Node02" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType02" FaultDomain="fd:/DC01/Rack02" UpgradeDomain="UpgradeDomain2" IsSeedNode="true" />
+            <Node NodeName="Node03" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType03" FaultDomain="fd:/DC01/Rack03" UpgradeDomain="UpgradeDomain3" IsSeedNode="true" />
+            <Node NodeName="Node04" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType04" FaultDomain="fd:/DC02/Rack01" UpgradeDomain="UpgradeDomain1" IsSeedNode="true" />
+            <Node NodeName="Node05" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType05" FaultDomain="fd:/DC02/Rack02" UpgradeDomain="UpgradeDomain2" IsSeedNode="true" />
+            <Node NodeName="Node06" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType06" FaultDomain="fd:/DC02/Rack03" UpgradeDomain="UpgradeDomain3" IsSeedNode="true" />
+            <Node NodeName="Node07" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType07" FaultDomain="fd:/DC03/Rack01" UpgradeDomain="UpgradeDomain1" IsSeedNode="true" />
+            <Node NodeName="Node08" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType08" FaultDomain="fd:/DC03/Rack02" UpgradeDomain="UpgradeDomain2" IsSeedNode="true" />
+            <Node NodeName="Node09" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType09" FaultDomain="fd:/DC03/Rack03" UpgradeDomain="UpgradeDomain3" IsSeedNode="true" />
+          </NodeList>
+        </WindowsServer>
+      </Infrastructure>
 
-	  <Infrastructure>
-	    <!-- IsScaleMin indicates that this cluster runs on one-box /one single server -->
-	    <WindowsServer IsScaleMin="true">
-	      <NodeList>
-	        <Node NodeName="Node01" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType01" FaultDomain="fd:/DC01/Rack01" UpgradeDomain="UpgradeDomain1" IsSeedNode="true" />
-	        <Node NodeName="Node02" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType02" FaultDomain="fd:/DC01/Rack02" UpgradeDomain="UpgradeDomain2" IsSeedNode="true" />
-	        <Node NodeName="Node03" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType03" FaultDomain="fd:/DC01/Rack03" UpgradeDomain="UpgradeDomain3" IsSeedNode="true" />
-	        <Node NodeName="Node04" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType04" FaultDomain="fd:/DC02/Rack01" UpgradeDomain="UpgradeDomain1" IsSeedNode="true" />
-	        <Node NodeName="Node05" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType05" FaultDomain="fd:/DC02/Rack02" UpgradeDomain="UpgradeDomain2" IsSeedNode="true" />
-	        <Node NodeName="Node06" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType06" FaultDomain="fd:/DC02/Rack03" UpgradeDomain="UpgradeDomain3" IsSeedNode="true" />
-	        <Node NodeName="Node07" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType07" FaultDomain="fd:/DC03/Rack01" UpgradeDomain="UpgradeDomain1" IsSeedNode="true" />
-	        <Node NodeName="Node08" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType08" FaultDomain="fd:/DC03/Rack02" UpgradeDomain="UpgradeDomain2" IsSeedNode="true" />
-	        <Node NodeName="Node09" IPAddressOrFQDN="localhost" NodeTypeRef="NodeType09" FaultDomain="fd:/DC03/Rack03" UpgradeDomain="UpgradeDomain3" IsSeedNode="true" />
-	      </NodeList>
-	    </WindowsServer>
-	  </Infrastructure>
-
-> [AZURE.NOTE] 在 Azure 部署中，由 Azure 分配容错域和升级域。因此，Azure 基础结构选项中节点和角色的定义不包含容错域或升级域信息。
+> [!NOTE] 在 Azure 部署中，由 Azure 分配容错域和升级域。因此，Azure 基础结构选项中节点和角色的定义不包含容错域或升级域信息。
 
 ##<a name="placement-constraints-and-node-properties"></a> 放置约束和节点属性
 有时（事实上是大多数情况下），需要确保只在群集中的特定节点或一组特定节点上运行某些工作负荷。例如，某些工作负荷可能需要 GPU 或 SSD，而有些则不用。一个有说服力的示例就是几乎在每个 n 层体系结构中，特定计算机充当应用程序的前端/接口服务端（因此通常在 Internet 上公开），而不同的集（通常包含不同的硬件资源）处理计算或存储层的工作（因此通常不会在 Internet 上公开）。Service Fabric 甚至预期到，在微服务领域中有特定的工作负荷需要在特定硬件配置上运行，例如：
 
 - 现有的 n 层应用程序已“提升并迁移”到 Service Fabric 环境
 - 出于性能、缩放或安全性隔离原因，某个工作负荷需要在特定硬件上运行
--	出于策略或资源消耗原因，某个工作负荷需要与其他工作负荷隔离
+- 出于策略或资源消耗原因，某个工作负荷需要与其他工作负荷隔离
 
 为了支持这种配置，Service Fabric 提供所谓“放置约束”的第一类概念。放置约束可用于指示应在何处运行特定服务。约束集可由用户扩展，表示人员可以使用自定义属性来标记节点，然后针对这些节点做出选择。
 
 ![群集布局中的不同工作负荷][Image5]  
-
 
 节点上的不同键/值标记称为节点放置*属性*（或简称为节点属性），而服务中的语句称为放置*约束*。节点属性中指定的值可以是字符串、布尔值或带符号的长型值。约束可以是针对群集中的不同节点属性运行的任何布尔值语句。这些布尔值语句（字符串）中的有效选择器为：
 
@@ -183,16 +177,13 @@ ClusterManifest.xml
   - "NodeColor != green"
   - "((OneProperty < 100) || ((AnotherProperty == false) && (OneProperty >= 100)))"
 
-
 只有整个语句求值为“True”的节点才能放置服务。未定义属性的节点不匹配包含该属性的任何放置约束。
 
 Service Fabric 还定义了一些默认属性，无需用户进行定义，系统即会自动使用这些属性。截至本文发布时，在每个节点上定义的默认属性是 NodeType 和 NodeName。因此举例而言，可以将放置约束编写为 "(NodeType == NodeType03)"。通常我们发现 NodeType 是最常用的属性之一，因为它通常与计算机的类型之间存在 1:1 的对应关系，而这又相当于与传统 n 层应用程序体系结构的工作负荷类型发生 1:1 的对应关系。
 
 ![放置约束和节点属性][Image6]  
 
-
 假设为给定节点类型定义了以下节点属性：ClusterManifest.xml
-
 
     <NodeType Name="NodeType01">
       <PlacementProperties>
@@ -202,25 +193,20 @@ Service Fabric 还定义了一些默认属性，无需用户进行定义，系�
       </PlacementProperties>
     </NodeType>
 
-
 你可以针对服务创建服务放置约束，如下所示：
 
 C#
 
-
-	FabricClient fabricClient = new FabricClient();
-	StatefulServiceDescription serviceDescription = new StatefulServiceDescription();
-	serviceDescription.PlacementConstraints = "(HasSSD == true && SomeProperty >= 4)";
-	// add other required servicedescription fields
-	//...
-	await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
-
+    FabricClient fabricClient = new FabricClient();
+    StatefulServiceDescription serviceDescription = new StatefulServiceDescription();
+    serviceDescription.PlacementConstraints = "(HasSSD == true && SomeProperty >= 4)";
+    // add other required servicedescription fields
+    //...
+    await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
 
 Powershell：
 
-
-	New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceType -Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementConstraint "HasSSD == true && SomeProperty >= 4"
-
+    New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceType -Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton -PlacementConstraint "HasSSD == true && SomeProperty >= 4"
 
 如果你确定 NodeType01 的所有节点都有效，则也可以只选择该节点类型，使用如上图所示的放置约束。
 
@@ -228,17 +214,13 @@ Powershell：
 
 C#：
 
-
-	StatefulServiceUpdateDescription updateDescription = new StatefulServiceUpdateDescription();
-	updateDescription.PlacementConstraints = "NodeType == NodeType01";
-	await fabricClient.ServiceManager.UpdateServiceAsync(new Uri("fabric:/app/service"), updateDescription);
-
+    StatefulServiceUpdateDescription updateDescription = new StatefulServiceUpdateDescription();
+    updateDescription.PlacementConstraints = "NodeType == NodeType01";
+    await fabricClient.ServiceManager.UpdateServiceAsync(new Uri("fabric:/app/service"), updateDescription);
 
 Powershell：
 
-
-	Update-ServiceFabricService -Stateful -ServiceName $serviceName -PlacementConstraints "NodeType == NodeType01"
-
+    Update-ServiceFabricService -Stateful -ServiceName $serviceName -PlacementConstraints "NodeType == NodeType01"
 
 放置约束（以及即将讨论的许多其他协调器控制）是针对每个不同的命名服务实例指定的。更新始终会取代（覆盖）以前指定的值。
 
@@ -255,30 +237,24 @@ Service Fabric 使用“指标”表示资源。指标是你想要向 Service Fa
 
 C#：
 
-
-	StatefulServiceDescription serviceDescription = new StatefulServiceDescription();
-	ServiceLoadMetricDescription metric = new ServiceLoadMetricDescription();
-	metric.Name = "MemoryInMb";
-	metric.PrimaryDefaultLoad = 64;
-	metric.SecondaryDefaultLoad = 64;
-	metric.Weight = ServiceLoadMetricWeight.High;
-	serviceDescription.Metrics.Add(metric);
-	await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
-
+    StatefulServiceDescription serviceDescription = new StatefulServiceDescription();
+    ServiceLoadMetricDescription metric = new ServiceLoadMetricDescription();
+    metric.Name = "MemoryInMb";
+    metric.PrimaryDefaultLoad = 64;
+    metric.SecondaryDefaultLoad = 64;
+    metric.Weight = ServiceLoadMetricWeight.High;
+    serviceDescription.Metrics.Add(metric);
+    await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
 
 Powershell：
 
-
-	New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton –Metric @("Memory,High,64,64”)
-
+    New-ServiceFabricService -ApplicationName $applicationName -ServiceName $serviceName -ServiceTypeName $serviceTypeName –Stateful -MinReplicaSetSize 2 -TargetReplicaSetSize 3 -PartitionSchemeSingleton –Metric @("Memory,High,64,64”)
 
 ![群集节点和容量][Image7]  
-
 
 你可以在群集清单中看到这些内容：
 
 ClusterManifest.xml
-
 
     <NodeType Name="NodeType02">
       <Capacities>
@@ -286,7 +262,6 @@ ClusterManifest.xml
         <Capacity Name="Disk" Value="10000"/>
       </Capacities>
     </NodeType>
-
 
 此外，服务的负载也会动态变化。假设副本的负载从 64 更改为 1024，但是当时正在运行该副本的节点上只剩下 512（个单位的“MemoryInMb”度量）。因此，当前放置副本或实例的位置可能失效，因为该节点上所有副本和实例的合并使用量超出了该节点的容量。稍后将更详细讨论负载可以动态更改的方案，但是只要还有容量，就能够以相同方式处理 - 群集资源管理器将自动启动，并通过将低于容量的节点上的一个或多个副本或实例移到其他节点，来恢复该节点。执行此操作时，群集资源管理器会尝试将所有移动的成本降到最低（稍后再回头讨论“成本”的概念）。
 
@@ -304,7 +279,6 @@ ClusterManifest.xml
 
 ClusterManifest.xml
 
-
         <Section Name="NodeBufferPercentage">
             <Parameter Name="DiskSpace" Value="0.10" />
             <Parameter Name="Memory" Value="0.15" />
@@ -313,37 +287,35 @@ ClusterManifest.xml
 
 创建新服务会在群集耗尽缓冲容量时失败，确保群集保留足够的备用额外负荷，使升级和失败不会造成节点实际超过容量。群集资源管理器通过 PowerShell 和查询 API 公开许多此类信息，以便查看缓冲容量设置、总容量及每个群集中使用的每个指标的当前消耗量。下面提供了该输出的示例：
 
-
-	PS C:\Users\user> Get-ServiceFabricClusterLoadInformation
-	LastBalancingStartTimeUtc : 9/1/2015 12:54:59 AM
-	LastBalancingEndTimeUtc   : 9/1/2015 12:54:59 AM
-	LoadMetricInformation     :
-	                            LoadMetricName        : Metric1
-	                            IsBalancedBefore      : False
-	                            IsBalancedAfter       : False
-	                            DeviationBefore       : 0.192450089729875
-	                            DeviationAfter        : 0.192450089729875
-	                            BalancingThreshold    : 1
-	                            Action                : NoActionNeeded
-	                            ActivityThreshold     : 0
-	                            ClusterCapacity       : 189
-	                            ClusterLoad           : 45
-	                            ClusterRemainingCapacity : 144
-	                            NodeBufferPercentage  : 10
-	                            ClusterBufferedCapacity : 170
-	                            ClusterRemainingBufferedCapacity : 125
-	                            ClusterCapacityViolation : False
-	                            MinNodeLoadValue      : 0
-	                            MinNodeLoadNodeId     : 3ea71e8e01f4b0999b121abcbf27d74d
-	                            MaxNodeLoadValue      : 15
-	                            MaxNodeLoadNodeId     : 2cc648b6770be1bc9824fa995d5b68b1
-
+    PS C:\Users\user> Get-ServiceFabricClusterLoadInformation
+    LastBalancingStartTimeUtc : 9/1/2015 12:54:59 AM
+    LastBalancingEndTimeUtc   : 9/1/2015 12:54:59 AM
+    LoadMetricInformation     :
+                                LoadMetricName        : Metric1
+                                IsBalancedBefore      : False
+                                IsBalancedAfter       : False
+                                DeviationBefore       : 0.192450089729875
+                                DeviationAfter        : 0.192450089729875
+                                BalancingThreshold    : 1
+                                Action                : NoActionNeeded
+                                ActivityThreshold     : 0
+                                ClusterCapacity       : 189
+                                ClusterLoad           : 45
+                                ClusterRemainingCapacity : 144
+                                NodeBufferPercentage  : 10
+                                ClusterBufferedCapacity : 170
+                                ClusterRemainingBufferedCapacity : 125
+                                ClusterCapacityViolation : False
+                                MinNodeLoadValue      : 0
+                                MinNodeLoadNodeId     : 3ea71e8e01f4b0999b121abcbf27d74d
+                                MaxNodeLoadValue      : 15
+                                MaxNodeLoadNodeId     : 2cc648b6770be1bc9824fa995d5b68b1
 
 ## 后续步骤
-- 有关群集资源管理器中的体系结构和信息流的信息，请查看[此文](/documentation/articles/service-fabric-cluster-resource-manager-architecture/)
-- 定义重整指标是合并（而不是分散）节点上负载的一种方式。若要了解如何配置重整，请参阅[此文](/documentation/articles/service-fabric-cluster-resource-manager-defragmentation-metrics/)
-- 参阅 [Service Fabric 群集资源管理器简介](/documentation/articles/service-fabric-cluster-resource-manager-introduction/)，帮助自己入门
-- 若要了解群集资源管理器如何管理和均衡群集中的负载，请查看有关[均衡负载](/documentation/articles/service-fabric-cluster-resource-manager-balancing/)的文章
+- 有关群集资源管理器中的体系结构和信息流的信息，请查看[此文](./service-fabric-cluster-resource-manager-architecture.md)
+- 定义重整指标是合并（而不是分散）节点上负载的一种方式。若要了解如何配置重整，请参阅[此文](./service-fabric-cluster-resource-manager-defragmentation-metrics.md)
+- 参阅 [Service Fabric 群集资源管理器简介](./service-fabric-cluster-resource-manager-introduction.md)，帮助自己入门
+- 若要了解群集资源管理器如何管理和均衡群集中的负载，请查看有关[均衡负载](./service-fabric-cluster-resource-manager-balancing.md)的文章
 
 [Image1]: ./media/service-fabric-cluster-resource-manager-cluster-description/cluster-fault-domains.png
 [Image2]: ./media/service-fabric-cluster-resource-manager-cluster-description/cluster-uneven-fault-domain-layout.png

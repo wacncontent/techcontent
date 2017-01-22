@@ -1,34 +1,32 @@
-<properties
-    pageTitle="对在经典部署中删除 Azure 存储帐户、容器或 VHD 进行故障排除 | Azure"
-    description="对在经典部署中删除 Azure 存储帐户、容器或 VHD 进行故障排除"
-    services="storage"
-    documentationcenter=""
-    author="genlin"
-    manager="felixwu"
-    editor="tysonn"
-    tags="storage" />  
+---
+title: 对在经典部署中删除 Azure 存储帐户、容器或 VHD 进行故障排除 | Azure
+description: 对在经典部署中删除 Azure 存储帐户、容器或 VHD 进行故障排除
+services: storage
+documentationcenter: 
+author: genlin
+manager: felixwu
+editor: tysonn
+tags: storage
 
-<tags
-    ms.assetid="0f7a8243-d8dc-432a-9d37-1272a0cb3a5c"
-    ms.service="storage"
-    ms.workload="na"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/21/2016"
-    wacn.date="12/29/2016"
-    ms.author="genli" />  
-
+ms.assetid: 0f7a8243-d8dc-432a-9d37-1272a0cb3a5c
+ms.service: storage
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/21/2016
+wacn.date: 12/29/2016
+ms.author: genli
+---
 
 # 对在经典部署中删除 Azure 存储帐户、容器或 VHD 进行故障排除
-[AZURE.INCLUDE [storage-selector-cannot-delete-storage-account-container-vhd](../../includes/storage-selector-cannot-delete-storage-account-container-vhd.md)]
+[!INCLUDE [storage-selector-cannot-delete-storage-account-container-vhd](../../includes/storage-selector-cannot-delete-storage-account-container-vhd.md)]
 
 当用户尝试在 [Azure 门户预览](https://portal.azure.cn/)或 [Azure 经典管理门户](https://manage.windowsazure.cn/)中删除 Azure 存储帐户、容器或 VHD 时，可能会收到错误。这些问题可能由以下情况造成：
 
 * 当用户删除 VM 时，磁盘和 VHD 未自动删除。这可能是存储帐户删除失败的原因。我们不会删除磁盘，以便你可以使用该磁盘装入另一个 VM。
 * 磁盘或者与磁盘关联的 Blob 上仍有租约。
 * 仍有一个 VM 映像使用 Blob、容器或存储帐户。
-
 
 ## 症状
 以下部分列出了试图删除 Azure 存储帐户、容器或 VHD 时可能收到的常见错误。
@@ -110,9 +108,7 @@ Blob ‘BlobName.vhd’ 已用作虚拟机磁盘 ‘VirtualMachineDiskName’，
     5. 转到“虚拟机”>“磁盘”，等到该磁盘消失。磁盘可能需要几分钟才能消失，并且可能需要刷新页面。
     6. 如果磁盘未消失，请等到“附加到”字段变为空白。这表示已从 VM 分离磁盘。然后，选择该磁盘，在页面底部选择“删除”以删除该磁盘。
 
-
-   > [AZURE.NOTE]如果磁盘附加到 VM，则无法将其删除。以异步方式从已删除 VM 分离磁盘。删除 VM 后可能需要几分钟来清除此字段。
-
+    > [!NOTE]如果磁盘附加到 VM，则无法将其删除。以异步方式从已删除 VM 分离磁盘。删除 VM 后可能需要几分钟来清除此字段。
 
 ### 步骤 2：删除任何阻止删除存储帐户或容器的 VM 映像
 1. 切换到 [Azure 经典管理门户](https://manage.windowsazure.CN/)。
@@ -120,8 +116,7 @@ Blob ‘BlobName.vhd’ 已用作虚拟机磁盘 ‘VirtualMachineDiskName’，
 
     之后，再次尝试删除存储帐户、容器或 VHD。
 
-> [AZURE.WARNING]请在删除帐户之前务必备份你想要保存的任何内容。无法恢复已删除的存储帐户，也无法检索删除之前该存储帐户包含的任何内容。对于帐户中的任务资源也是如此：一旦删除 VHD、Blob、表、队列或文件，它将永久删除。确保该资源未使用。
-
+> [!WARNING]请在删除帐户之前务必备份你想要保存的任何内容。无法恢复已删除的存储帐户，也无法检索删除之前该存储帐户包含的任何内容。对于帐户中的任务资源也是如此：一旦删除 VHD、Blob、表、队列或文件，它将永久删除。确保该资源未使用。
 
 ## 有关已停止（已解除分配）的状态
 在经典部署模型中创建且已保留的虚拟机将在 [Azure 门户预览](https://portal.azure.cn/)或 [Azure 经典管理门户](https://manage.windowsazure.cn/)中具有“已停止（已解除分配）”的状态。
@@ -137,7 +132,7 @@ Blob ‘BlobName.vhd’ 已用作虚拟机磁盘 ‘VirtualMachineDiskName’，
 已停止（已解除分配）的状态将释放计算机资源，如 CPU、内存和网络。但是，磁盘将仍然保留，以便在需要时用户可以快速重新创建 VM。这些磁盘都创建在基于 Azure 存储支持的 VHD 之上。存储帐户具有这些 VHD，并且磁盘在这些 VHD 上有租约。
 
 ## 后续步骤
-- [删除存储帐户](/documentation/articles/storage-create-storage-account/#delete-a-storage-account)
+- [删除存储帐户](./storage-create-storage-account.md#delete-a-storage-account)
 - [如何在 Azure（PowerShell）中中断 Blob 存储的锁定租约](https://gallery.technet.microsoft.com/scriptcenter/How-to-break-the-locked-c2cd6492)
 
 <!---HONumber=Mooncake_1226_2016-->

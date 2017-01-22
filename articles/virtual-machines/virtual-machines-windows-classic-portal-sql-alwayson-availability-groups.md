@@ -1,31 +1,32 @@
-<properties 
-	pageTitle="在 Azure VM 中配置 AlwaysOn 可用性组 - 经典"
-	description="在 Azure 虚拟机中创建 AlwaysOn 可用性组。本教程主要使用用户界面和工具而不是脚本。"
-	services="virtual-machines-windows"
-	documentationCenter="na"
-	authors="MikeRayMSFT"
-	manager="jhubbard"
-	editor="" />
-<tags
-	ms.service="virtual-machines-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="vm-windows-sql-server"
-	ms.workload="infrastructure-services"
-	ms.date="09/22/2016"
-	wacn.date="11/21/2016"
-	ms.author="mikeray" />
+---
+title: 在 Azure VM 中配置 AlwaysOn 可用性组 - 经典
+description: 在 Azure 虚拟机中创建 AlwaysOn 可用性组。本教程主要使用用户界面和工具而不是脚本。
+services: virtual-machines-windows
+documentationCenter: na
+authors: MikeRayMSFT
+manager: jhubbard
+editor: 
+
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows-sql-server
+ms.workload: infrastructure-services
+ms.date: 09/22/2016
+wacn.date: 11/21/2016
+ms.author: mikeray
+---
 
 # 在 Azure 中配置 AlwaysOn 可用性组 - 经典
 
-> [AZURE.SELECTOR]
-- [Resource Manager: 手动](/documentation/articles/virtual-machines-windows-portal-sql-alwayson-availability-groups-manual/)
-- [经典: UI](/documentation/articles/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/)
-- [经典: PowerShell](/documentation/articles/virtual-machines-windows-classic-ps-sql-alwayson-availability-groups/)
+> [!div class="op_single_selector"]
+- [Resource Manager: 手动](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)
+- [经典: UI](./virtual-machines-windows-classic-portal-sql-alwayson-availability-groups.md)
+- [经典: PowerShell](./virtual-machines-windows-classic-ps-sql-alwayson-availability-groups.md)
 
 <br/>
 
-> [AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
+> [!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
 本端到端教程介绍如何使用 Azure 虚拟机上运行的 SQL Server AlwaysOn 实施可用性组。
 
@@ -55,7 +56,7 @@
 
 - 你已经深入了解 AlwaysOn 可用性组。有关详细信息，请参阅 [AlwaysOn 可用性组 (SQL Server)](https://msdn.microsoft.com/zh-cn/library/hh510230.aspx)。
 
->[AZURE.NOTE]如果你想将 AlwaysOn 可用性组与 SharePoint 结合使用，另请参阅[为 SharePoint 2013 配置 SQL Server 2012 AlwaysOn 可用性组](https://technet.microsoft.com/zh-cn/library/jj715261.aspx)。
+>[!NOTE]如果你想将 AlwaysOn 可用性组与 SharePoint 结合使用，另请参阅[为 SharePoint 2013 配置 SQL Server 2012 AlwaysOn 可用性组](https://technet.microsoft.com/zh-cn/library/jj715261.aspx)。
 
 ## 创建虚拟网络和域控制器服务器
 
@@ -63,15 +64,15 @@
 
 1. 单击该页左下角的“新建”按钮，如下所示。
 
-	![在经典管理门户中单击“新建”](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665511.gif)
+    ![在经典管理门户中单击“新建”](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665511.gif)
 
 1. 依次单击“网络服务”、“虚拟网络”、“自定义创建”，如下所示。
 
-	![创建虚拟网络](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665512.gif)
+    ![创建虚拟网络](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665512.gif)
 
 1. 在“创建虚拟网络”对话框中，通过逐页完成以下设置创建新的虚拟网络。
 
-	|Page|设置|
+    |Page|设置|
 |---|---|
 |虚拟网络详细信息|**名称 = ContosoNET**<br/>**区域 = 中国北部**|
 |DNS 服务器和 VPN 连接|无|
@@ -79,11 +80,11 @@
 
 1. 接下来，你将创建用作域控制器 (DC) 的 VM。再次单击“新建”，然后依次单击“计算”、“虚拟机”、“从库中”，如下所示。
 
-	![创建 VM](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784621.png)
+    ![创建 VM](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784621.png)
 
 1. 在“创建虚拟机”对话框中，逐页完成以下设置来配置新 VM。
 
-	|Page|设置|
+    |Page|设置|
 |---|---|
 |选择虚拟机操作系统|Windows Server 2012 R2 Datacenter|
 |虚拟机配置|**版本发布日期** =（最新）<br/>**虚拟机名称** = ContosoDC<br/>**层** = 基本<br/>**大小** = A2（双核）<br/>**新用户名** = AzureAdmin<br/>**新密码** = Contoso!000<br/>**确认密码** = Contoso!000|
@@ -100,7 +101,7 @@
 
 1. 在经典管理门户中，选择 **ContosoDC** 计算机。在“仪表板”选项卡上，单击“连接”以打开用于远程桌面访问 RDP 文件。
 
-	![连接到虚拟机](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784622.png)
+    ![连接到虚拟机](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784622.png)
 
 1. 使用已配置的管理员帐户 (**\\AzureAdmin**) 和密码 (**Contoso!000**) 登录。
 
@@ -108,15 +109,15 @@
 
 1. 单击仪表板上的“添加角色和功能”链接。
 
-	![服务器资源管理器中的“添加角色”](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784623.png)
+    ![服务器资源管理器中的“添加角色”](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784623.png)
 
 1. 选择“下一步”，直到你到达“服务器角色”部分。
 
 1. 选择“Active Directory 域服务”和“DNS 服务器”角色。出现提示时，添加这些角色所需的任何其他功能。
 
-	>[AZURE.NOTE]你将收到无静态 IP 地址的验证警告。如果你要测试配置，请单击“继续”。对于生产方案，请[使用 PowerShell 设置域控制器计算机的静态 IP 地址](/documentation/articles/virtual-networks-reserved-private-ip/)。
+    >[!NOTE]你将收到无静态 IP 地址的验证警告。如果你要测试配置，请单击“继续”。对于生产方案，请[使用 PowerShell 设置域控制器计算机的静态 IP 地址](../virtual-network/virtual-networks-reserved-private-ip.md)。
 
-	![添加角色对话框](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784624.png)
+    ![添加角色对话框](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784624.png)
 
 1. 单击“下一步”，直到你到达“确认”部分。选中“必要时自动重新启动目标服务器”复选框。
 
@@ -128,13 +129,13 @@
 
 1. 单击黄色警告栏上的“更多”链接。
 
-	![DNS 服务器 VM 上的 AD DS 对话框](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784625.png)
+    ![DNS 服务器 VM 上的 AD DS 对话框](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784625.png)
 
 1. 在“所有服务器任务详细信息”对话框的“操作”栏中，单击“将此服务器提升为域控制器”。
 
 1. 在“Active Directory 域服务配置向导”中，使用以下值：
 
-	|Page|设置|
+    |Page|设置|
 |---|---|
 |部署配置|**添加新林** = 选定<br/>**根域名** = corp.contoso.com|
 |域控制器选项|**密码** = Contoso!000<br/>**确认密码** = Contoso!000|
@@ -151,13 +152,13 @@
 
 1. 在“服务器管理器”中，选择“工具”，然后单击“Active Directory 管理中心”。
 
-	![Active Directory 管理中心](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784626.png)
+    ![Active Directory 管理中心](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784626.png)
 
 1. 在“Active Directory 管理中心”的左窗格中，选择“corp (本地)”。
 
 1. 在右侧的“任务”窗格中，选择“新建”，然后单击“用户”。使用以下设置：
 
-	|设置|值|
+    |设置|值|
 |---|---|
 |**名字**|安装|
 |**用户 SamAccountName**|安装|
@@ -172,7 +173,7 @@
 
 1. 在“Active Directory 管理中心”的左窗格中，选择“corp (本地)”。然后，在右侧的“任务”窗格中，单击“属性”。
 
-	![CORP 用户属性](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784627.png)
+    ![CORP 用户属性](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784627.png)
 
 1. 选择“扩展”，然后单击“安全性”选项卡上的“高级”按钮。
 
@@ -182,7 +183,7 @@
 
 1. 选择“读取全部属性”和“创建计算机对象”权限。
 
-	![CORP 用户权限](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784628.png)
+    ![CORP 用户权限](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784628.png)
 
 1. 单击“确定”，然后再次单击“确定”。关闭 corp 属性窗口。
 
@@ -203,7 +204,7 @@
 
 1. 首先，更改首选 DNS 服务器地址。通过在列表中选择 VM 并单击“连接”按钮，先将每个 VM 的远程桌面 (RDP) 文件下载到本地目录。若要选择 VM，请在该行中除第一个单元外的任意位置单击，如下所示。
 
-	![下载 RDP 文件](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC664953.jpg)
+    ![下载 RDP 文件](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC664953.jpg)
 
 1. 下载 RDP 文件启动下载的 RDP 文件，并使用已配置的管理员帐户 (**BUILTIN\\AzureAdmin**) 和密码 (**Contoso!000**) 登录到 VM 中。
 
@@ -213,7 +214,7 @@
 
 1. 在“网络连接”窗口中，选择网络图标。
 
-	![更改 VM 的首选 DNS 服务器](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784629.png)
+    ![更改 VM 的首选 DNS 服务器](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784629.png)
 
 1. 在命令栏中，单击“更改此连接的设置”（根据你的窗口大小，你可能需要单击双右箭头才能看到此命令）。
 
@@ -223,7 +224,7 @@
 
 1. 地址 **10.10.2.4** 是分配到 Azure 虚拟网络中 10.10.2.0/24 子网中的 VM 的地址，而该 VM 是 **ContosoDC**。若要验证 **ContosoDC** 的 IP 地址，请在命令提示符中使用 **nslookup contosodc**，如下所示。
 
-	![使用 NSLOOKUP 查找 DC 的 IP 地址](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC664954.jpg)
+    ![使用 NSLOOKUP 查找 DC 的 IP 地址](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC664954.jpg)
 
 1. 单击“确定”，然后“关闭”以提交更改。你现在能够将该 VM 加入到 **corp.contoso.com** 中。
 
@@ -245,7 +246,7 @@
 
 1. 在“服务器管理器”中，选择“工具”，然后单击“计算机管理”。
 
-	![计算机管理](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784630.png)
+    ![计算机管理](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784630.png)
 
 1. 在“计算机管理”窗口中，展开“本地用户和组”，然后选择“组”。
 
@@ -265,7 +266,7 @@
 
 1. 选择“故障转移群集”。出现提示时，请添加任何其他相关功能。
 
-	![向 VM 添加故障转移群集功能](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784631.png)
+    ![向 VM 添加故障转移群集功能](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784631.png)
 
 1. 单击“下一步”，然后单击“确认”页上的“安装”。
 
@@ -309,11 +310,11 @@
 
 1. 在左窗格中，右键单击“故障转移群集管理器”，然后单击“创建群集”，如下所示。
 
-	![创建群集](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784632.png)
+    ![创建群集](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784632.png)
 
 1. 在“创建群集向导”中，逐页完成以下设置来创建一个单节点群集：
 
-	|Page|设置|
+    |Page|设置|
 |---|---|
 |开始之前|使用默认值|
 |选择服务器|在“输入服务器名称”中键入 **ContosoSQL1**，然后单击“添加”|
@@ -321,7 +322,7 @@
 |用于管理群集的访问点|在“群集名称”中键入 **Cluster1**|
 |确认|除非你使用的是存储空间，否则请使用默认值。请参阅此表后面的备注。|
 
-	>[AZURE.WARNING]如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“确认”页上的“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
+    >[!WARNING]如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“确认”页上的“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
 
 1. 在左窗格中，展开“故障转移群集管理器”，然后单击“Cluster1.corp.contoso.com”。
 
@@ -329,7 +330,7 @@
 
 1. 右键单击失败的**“IP 地址”**资源，然后单击**“属性”**。
 
-	![群集属性](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784633.png)
+    ![群集属性](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784633.png)
 
 1. 选择“静态 IP 地址”，然后在“地址”文本框中指定 **10.10.2.101**。然后，单击“确定”。
 
@@ -337,7 +338,7 @@
 
 1. 最后，你需要向该群集添加剩余节点。在浏览器树中，右键单击“Cluster1.corp.contoso.com”，然后单击“添加节点”，如下所示。
 
-	![向群集添加节点](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784634.png)
+    ![向群集添加节点](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784634.png)
 
 1. 在“添加节点向导”中，单击“下一步”。然后，在“选择服务器”页上，向列表中添加“ContosoSQL2”和“ContosoWSFCNode”，方法是在“输入服务器名称”中键入服务器名称，然后单击“添加”。完成后，单击“下一步”。
 
@@ -345,7 +346,7 @@
 
 1. 在“确认”页中，单击“下一步”以添加节点。
 
-	>[AZURE.WARNING]如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
+    >[!WARNING]如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
 
 1. 向群集添加节点后，单击“完成”。“故障转移群集管理器”现在应显示你的群集具有三个节点，并将这些节点在“节点”容器中列出。
 
@@ -380,12 +381,12 @@
 1. 右键单击“NT AUTHORITY\\System”登录名，然后单击“属性”。
 
 1. 在“安全对象”页上，针对本地服务器，选择“授予”以授予以下权限，然后单击“确定”。
-	
-	- 更改任何可用性组
-	
-	- 连接 SQL
-	
-	- 查看服务器状态
+
+    - 更改任何可用性组
+
+    - 连接 SQL
+
+    - 查看服务器状态
 
 1. 接下来，将 **CORP\\Install** 作为 **sysadmin** 角色添加到默认 SQL Server 实例。在“对象资源管理器”中，右键单击“登录名”，然后单击“新建登录名”。
 
@@ -413,7 +414,7 @@
 
 1. 单击“AlwaysOn 高可用性组”选项卡，选择“启用 AlwaysOn 可用性组”（如下所示），然后单击“应用”。在弹出对话框中，单击“确定”，但不要关闭属性窗口。在更改服务帐户后，将重新启动 SQL Server 服务。
 
-	![启用 AlwaysOn 可用性组](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665520.gif)
+    ![启用 AlwaysOn 可用性组](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665520.gif)
 
 1. 接下来，更改 SQL Server 服务帐户。单击“登录”选项卡，在“帐户名”中键入 **CORP\\SQLSvc1**（对于 **ContosoSQL1**）或 **CORP\\SQLSvc2**（对于 **ContosoSQL2**），填入并确认密码，然后单击“确定”。
 
@@ -443,11 +444,11 @@
 
 1. 右键单击新目录，指向“共享”，然后单击“特定用户”，如下所示。
 
-	![创建备份文件夹](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665521.gif)
+    ![创建备份文件夹](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665521.gif)
 
 1. 创建备份文件夹添加“CORP\\SQLSvc1”并授予其“读/写”权限，添加“CORP\\SQLSvc2”并授予其“读取”权限（如下所示），然后单击“共享”。文件共享过程完成后，请单击“完成”。
 
-	![授予对备份文件夹的权限](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665522.gif)
+    ![授予对备份文件夹的权限](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665522.gif)
 
 1. 接下来，你需要创建数据库。从“开始”菜单启动 **SQL Server Management Studio**，然后单击“连接”连接到默认 SQL Server 实例。
 
@@ -487,59 +488,59 @@
 
 1. 返回到 **ContosoSQL1** 的远程桌面会话。在 SSMS 中的“对象资源管理器”中，右键单击“AlwaysOn 高可用性”，然后单击“新建可用性组向导”，如下所示。
 
-	![启动新建可用性组向导](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665523.gif)
+    ![启动新建可用性组向导](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665523.gif)
 
 1. 在“简介”页上，单击“下一步”。在“指定可用性组名称”页上，在“可用性组名称”中键入 **AG1**，然后再次单击“下一步”。
 
-	![新建可用性组向导，指定可用性组名称](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665524.gif)
+    ![新建可用性组向导，指定可用性组名称](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665524.gif)
 
 1. 在“选择数据库”页上，选择“MyDB1”，然后单击“下一步”。这些数据库满足可用性组的先决条件，因为你针对预定主副本进行了至少一个完整备份。
 
-	![新建可用性组向导，选择数据库](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665525.gif)
+    ![新建可用性组向导，选择数据库](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665525.gif)
 
 1. 在“指定副本”页上，单击“添加副本”。
 
-	![新建可用性组向导，指定副本](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665526.gif)
+    ![新建可用性组向导，指定副本](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665526.gif)
 
 1. 此时会弹出“连接到服务器”对话框。在“服务器名称”中键入 **ContosoSQL2**，然后单击“连接”。
 
-	![新建可用性组向导，连接到服务器](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665527.gif)
+    ![新建可用性组向导，连接到服务器](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665527.gif)
 
 1. 返回到“指定副本”页，此时应看到“可用的副本”中列出了 **ContosoSQL2**。配置这些副本，如下所示。完成后，单击“下一步”。
 
-	![新建可用性组向导，指定副本（完整）](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665528.gif)
+    ![新建可用性组向导，指定副本（完整）](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665528.gif)
 
 1. 在“选择初始数据同步”页上，选择“仅联接”，然后单击“下一步”。在对 **ContosoSQL1** 进行完整备份和事务备份并在 **ContosoSQL2** 上还原这些备份时，你已手动执行了数据同步。你也可以选择不对数据库执行备份和还原操作，并选择“完整”以便让“新建可用性组向导”为你执行数据同步。不过，对于某些企业中存在的超大型数据库，不建议这样做。
 
-	![新建可用性组向导，选择初始数据同步](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665529.gif)
+    ![新建可用性组向导，选择初始数据同步](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665529.gif)
 
-1. 在“验证”页中，单击“下一步”。此页应与以下页类似。因为你尚未配置可用性组侦听器，会出现一个侦听器配置警告。你可以忽略此警告，因为本教程不会配置侦听器。若要在完成本教程后配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](/documentation/articles/virtual-machines-windows-classic-ps-sql-int-listener/)。
+1. 在“验证”页中，单击“下一步”。此页应与以下页类似。因为你尚未配置可用性组侦听器，会出现一个侦听器配置警告。你可以忽略此警告，因为本教程不会配置侦听器。若要在完成本教程后配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](./virtual-machines-windows-classic-ps-sql-int-listener.md)。
 
-	![新建可用性组向导，验证](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665530.gif)
+    ![新建可用性组向导，验证](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665530.gif)
 
 1. 在“摘要”页上，单击“完成”，然后等待向导配置完新的可用性组。在“进度”页上，可单击“更多详细信息”以查看详细进度。向导运行完成后，检查“结果”页以验证是否已成功创建可用性组（如下所示），然后单击“关闭”退出向导。
 
-	![新建可用性组向导，结果](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665531.gif)
+    ![新建可用性组向导，结果](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665531.gif)
 
 1. 在“对象资源管理器”中，展开“AlwaysOn 高可用性”，然后展开“可用性组”。此时，你应在此容器中看到新的可用性组。右键单击“AG1 (主)”，然后单击“显示仪表板”。
 
-	![显示可用性组仪表板](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665532.gif)
+    ![显示可用性组仪表板](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665532.gif)
 
 1. **AlwaysOn 仪表板**应如下所示。你可以查看副本、每个副本的故障转移模式以及同步状态。
 
-	![可用性组仪表板](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665533.gif)
+    ![可用性组仪表板](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665533.gif)
 
 1. 返回到“服务器管理器”，选择“工具”，然后启动“故障转移群集管理器”。
 
 1. 展开 **Cluster1.corp.contoso.com**，然后展开“服务和应用程序”。选择“角色”，并注意已创建“AG1”可用性组角色。请注意，AG1 没有数据库客户端可按其连接到可用性组的 IP 地址，因为你未配置侦听器。你可以直接连接到主节点进行读写操作，直接连接到辅助节点进行只读查询。
 
-	![故障转移群集管理器中的可用性组](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665534.gif)
+    ![故障转移群集管理器中的可用性组](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665534.gif)
 
->[AZURE.WARNING]请勿尝试从故障转移群集管理器对可用性组进行故障转移。所有故障转移操作都应在 SSMS 中的 **AlwaysOn 仪表板**内进行。有关详细信息，请参阅[将 WSFC 故障转移群集管理器用于可用性组的限制](https://msdn.microsoft.com/zh-cn/library/ff929171.aspx)。
+>[!WARNING]请勿尝试从故障转移群集管理器对可用性组进行故障转移。所有故障转移操作都应在 SSMS 中的 **AlwaysOn 仪表板**内进行。有关详细信息，请参阅[将 WSFC 故障转移群集管理器用于可用性组的限制](https://msdn.microsoft.com/zh-cn/library/ff929171.aspx)。
 
 ## 后续步骤
-现在，你已通过在 Azure 中创建可用性组，成功实施了 SQL Server AlwaysOn。若要为此可用性组配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](/documentation/articles/virtual-machines-windows-classic-ps-sql-int-listener/)。
+现在，你已通过在 Azure 中创建可用性组，成功实施了 SQL Server AlwaysOn。若要为此可用性组配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](./virtual-machines-windows-classic-ps-sql-int-listener.md)。
 
-有关在 Azure 中使用 SQL Server 的其他信息，请参阅 [Azure 虚拟机上的 SQL Server](/documentation/articles/virtual-machines-windows-sql-server-iaas-overview/)。
+有关在 Azure 中使用 SQL Server 的其他信息，请参阅 [Azure 虚拟机上的 SQL Server](./virtual-machines-windows-sql-server-iaas-overview.md)。
 
 <!---HONumber=70-->

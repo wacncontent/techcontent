@@ -1,31 +1,28 @@
-<properties
-	pageTitle="标识同步和重复属性复原 | Azure"
-	description="介绍如何借助一种新的行为，在目录同步期间使用 Azure AD Connect 处理具有 UPN 或 ProxyAddress 冲突的对象。"
-	services="active-directory"
-	documentationCenter=""
-	authors="markusvi"
-	manager="femila"
-	editor=""/>  
+---
+title: 标识同步和重复属性复原 | Azure
+description: 介绍如何借助一种新的行为，在目录同步期间使用 Azure AD Connect 处理具有 UPN 或 ProxyAddress 冲突的对象。
+services: active-directory
+documentationCenter: 
+authors: markusvi
+manager: femila
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/29/2016"
-	ms.author="markusvi"
-	wacn.date="01/09/2017"/>
-
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/29/2016
+ms.author: markusvi
+wacn.date: 01/09/2017
+---
 
 # 标识同步和重复属性复原
 重复属性复原是 Azure Active Directory 的一项功能，可在运行 Microsoft 的同步工具之一时，用于消除 **UserPrincipalName** 和 **ProxyAddress** 冲突所造成的不便。
 
 在给定 Azure Active Directory 租户的所有“用户”、“组”或“联系人”对象中，这两个属性通常必须是唯一的。
 
-> [AZURE.NOTE] 只有用户可以拥有 UPN。
+> [!NOTE] 只有用户可以拥有 UPN。
 
 此功能实现的新行为是同步管道的云部分，因此，此功能不区分客户端，而是与任何 Microsoft 同步产品（包括 Azure AD Connect、DirSync 和 MIM + 连接器）相关。本文档中使用的概括术语“同步客户端”用于表示上述任一产品。
 
@@ -51,17 +48,13 @@ Azure Active Directory 并不是完全无法预配或更新具有重复属性的
 
 `Get-MsolDirSyncFeatures -Feature DuplicateUPNResiliency`  
 
-
 `Get-MsolDirSyncFeatures -Feature DuplicateProxyAddressResiliency`  
-
 
 若要在为租户启用此功能之前以前摄方式启用此功能，可以下载最新版 Azure Active Directory PowerShell 模块，然后运行以下命令：
 
 `Set-MsolDirSyncFeature -Feature DuplicateUPNResiliency -Enable $true`  
 
-
 `Set-MsolDirSyncFeature -Feature DuplicateProxyAddressResiliency -Enable $true`  
-
 
 ## 识别具有 DirSyncProvisioningErrors 的对象
 目前有两种方法可识别因为重复属性冲突而发生错误的对象：Azure Active Directory PowerShell 和 Office 365 管理门户。我们已计划将来扩展到其他基于门户的报告。
@@ -88,7 +81,6 @@ Azure Active Directory 并不是完全无法预配或更新具有重复属性的
 
 6. [以有限的数量或全部](#in-a-limited-quantity-or-all)
 
-
 #### 查看全部 <a name="see-all"></a>
 连接后，若要查看租户中属性预配错误的常规列表，请运行：
 
@@ -96,7 +88,6 @@ Azure Active Directory 并不是完全无法预配或更新具有重复属性的
 
 随后将生成如下所示的结果：
 ![Get-MsolDirSyncProvisioningError](./media/active-directory-aadconnectsyncservice-duplicate-attribute-resiliency/1.png "Get-MsolDirSyncProvisioningError")
-
 
 #### 按属性类型 <a name="by-property-type"></a>
 若要按属性类型查看错误，请添加带有 **UserPrincipalName** 或 **ProxyAddresses** 参数的 **-PropertyName** 标志：
@@ -112,12 +103,10 @@ Azure Active Directory 并不是完全无法预配或更新具有重复属性的
 
 `Get-MsolDirSyncProvisioningError -ErrorCategory PropertyConflict -PropertyValue User@domain.com -PropertyName UserPrincipalName`
 
-
 #### 使用字符串搜索 <a name="using-a-string-search"></a>
 若要进行广泛的字符串搜索，请使用 **-SearchString** 标志。此标志可以独立于上述所有标志使用，但 **-ErrorCategory PropertyConflict** 除外（此标志始终是必需的）：
 
 `Get-MsolDirSyncProvisioningError -ErrorCategory PropertyConflict -SearchString User`  
-
 
 #### 以有限的数量或全部 <a name="in-a-limited-quantity-or-all"></a>
 1. **MaxResults <Int>** 可用于将查询限制为特定数目的值。
@@ -130,12 +119,9 @@ Azure Active Directory 并不是完全无法预配或更新具有重复属性的
 
 可以在 Office 365 管理中心查看目录同步错误。Office 365 门户中的报告只显示存在这些错误的 **User** 对象。它不显示 **Groups** 和 **Contacts**之间的冲突信息。
 
-
 ![活动用户](./media/active-directory-aadconnectsyncservice-duplicate-attribute-resiliency/1234.png "活动用户")  
 
-
 有关如何在 Office 365 管理中心查看目录同步错误的说明，请参阅 [Identify directory synchronization errors in Office 365](https://support.office.com/zh-cn/article/Identify-directory-synchronization-errors-in-Office-365-b4fc07a5-97ea-4ca6-9692-108acab74067)（识别 Office 365 中的目录同步错误）。
-
 
 ### 标识同步错误报告
 使用此新行为处理具有重复属性冲突的对象时，通知将包含在标准标识同步错误报告电子邮件中，而该电子邮件将发送给租户的技术通知联系人。但是，此行为有一项重大变化。在过去，有关重复属性冲突的信息包含在每个后续错误报告中，直到解决冲突为止。使用此新行为，给定冲突的错误通知只出现一次 - 在冲突属性被隔离时。
@@ -177,8 +163,6 @@ ProxyAddress 冲突的电子邮件通知示例如下所示：
 
     d.**用户 B** 的错误消息应指出 **User A** 已有用作 UPN 的 **User@contoso.com**，但却显示 **User B** 自己的 displayName。
 
-
-
 **标识同步错误报告**：
 
 *解决此问题的步骤*链接不正确：
@@ -186,12 +170,11 @@ ProxyAddress 冲突的电子邮件通知示例如下所示：
 
 该链接应指向 [https://aka.ms/duplicateattributeresiliency](https://aka.ms/duplicateattributeresiliency)。
 
-
 ## 另请参阅
 
-- [Azure AD Connect 同步](/documentation/articles/active-directory-aadconnectsync-whatis/)
+- [Azure AD Connect 同步](./active-directory-aadconnectsync-whatis.md)
 
-- [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
+- [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)
 
 - [Identify directory synchronization errors in Office 365（识别 Office 365 中的目录同步错误）](https://support.office.com/zh-cn/article/Identify-directory-synchronization-errors-in-Office-365-b4fc07a5-97ea-4ca6-9692-108acab74067)
 

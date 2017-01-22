@@ -1,37 +1,35 @@
-<properties
-    pageTitle="使用 Transact-SQL 为 Azure SQL 数据库配置异地复制 | Azure"
-    description="使用 Transact-SQL 为 Azure SQL 数据库配置异地复制"
-    services="sql-database"
-    documentationCenter=""
-    authors="CarlRabeler"
-    manager="jhubbard"
-    editor=""/>  
+---
+title: 使用 Transact-SQL 为 Azure SQL 数据库配置异地复制 | Azure
+description: 使用 Transact-SQL 为 Azure SQL 数据库配置异地复制
+services: sql-database
+documentationCenter: 
+authors: CarlRabeler
+manager: jhubbard
+editor: 
 
-
-<tags
-    ms.service="sql-database"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="10/13/2016"
-    wacn.date="12/26/2016"
-    ms.author="carlrab"/>  
-
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 10/13/2016
+wacn.date: 12/26/2016
+ms.author: carlrab
+---
 
 # 使用 Transact-SQL 为 Azure SQL 数据库配置异地复制
 
-> [AZURE.SELECTOR]
-- [概述](/documentation/articles/sql-database-geo-replication-overview/)
-- [Azure 门户预览](/documentation/articles/sql-database-geo-replication-portal/)
-- [PowerShell](/documentation/articles/sql-database-geo-replication-powershell/)
-- [T-SQL](/documentation/articles/sql-database-geo-replication-transact-sql/)
+> [!div class="op_single_selector"]
+- [概述](./sql-database-geo-replication-overview.md)
+- [Azure 门户预览](./sql-database-geo-replication-portal.md)
+- [PowerShell](./sql-database-geo-replication-powershell.md)
+- [T-SQL](./sql-database-geo-replication-transact-sql.md)
 
 本文说明如何使用 Transact-SQL 为 Azure SQL 数据库配置活动异地复制。
 
-若要使用 Transact-SQL 启动故障转移，请参阅[使用 Transact-SQL 为 Azure SQL 数据库启动计划内或计划外故障转移](/documentation/articles/sql-database-geo-replication-failover-transact-sql/)。
+若要使用 Transact-SQL 启动故障转移，请参阅[使用 Transact-SQL 为 Azure SQL 数据库启动计划内或计划外故障转移](./sql-database-geo-replication-failover-transact-sql.md)。
 
->[AZURE.NOTE] 活动异地复制（可读辅助数据库）现在可供所有服务层中的所有数据库使用。非可读辅助数据库类型将于 2017 年 4 月停用，现有的非可读数据库将自动升级到可读辅助数据库。
+>[!NOTE] 活动异地复制（可读辅助数据库）现在可供所有服务层中的所有数据库使用。非可读辅助数据库类型将于 2017 年 4 月停用，现有的非可读数据库将自动升级到可读辅助数据库。
 
 若要使用 Transact-SQL 配置活动异地复制，需提供：
 
@@ -41,15 +39,13 @@
 - 主数据库上 DBManager 的登录名，拥有要异地复制的本地数据库的 db\_ownership 权限，并且是要配置异地复制的伙伴服务器上的 DBManager。
 - SQL Server Management Studio (SSMS)
 
-> [AZURE.IMPORTANT] 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
-
+> [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ## 添加辅助数据库
 
-可以使用 **ALTER DATABASE** 语句在伙伴服务器上创建异地复制的辅助数据库。在包含要复制的数据库服务器的 master 数据库上执行此语句。异地复制数据库（“主数据库”）具备与要复制的数据库相同的名称，并且默认与主数据库具有相同的服务级别。辅助数据库可以是可读或不可读的，并且可以是单一数据库或弹性数据库。有关详细信息，请参阅 [ALTER DATABASE (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/mt574871.aspx) 和[服务层](/documentation/articles/sql-database-service-tiers/)。创建辅助数据库并设定种子之后，数据将开始以异步方式从主数据库复制。以下步骤说明如何使用 Management Studio 配置异地复制。提供使用单一数据库或弹性数据库创建不可读和可读辅助数据库的步骤。
+可以使用 **ALTER DATABASE** 语句在伙伴服务器上创建异地复制的辅助数据库。在包含要复制的数据库服务器的 master 数据库上执行此语句。异地复制数据库（“主数据库”）具备与要复制的数据库相同的名称，并且默认与主数据库具有相同的服务级别。辅助数据库可以是可读或不可读的，并且可以是单一数据库或弹性数据库。有关详细信息，请参阅 [ALTER DATABASE (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/mt574871.aspx) 和[服务层](./sql-database-service-tiers.md)。创建辅助数据库并设定种子之后，数据将开始以异步方式从主数据库复制。以下步骤说明如何使用 Management Studio 配置异地复制。提供使用单一数据库或弹性数据库创建不可读和可读辅助数据库的步骤。
 
-> [AZURE.NOTE] 如果指定的伙伴服务器上的数据库的名称与主数据库相同，该命令会失败。
-
+> [!NOTE] 如果指定的伙伴服务器上的数据库的名称与主数据库相同，该命令会失败。
 
 ### 添加不可读的辅助数据库（单一数据库）
 
@@ -57,8 +53,7 @@
 
 1. 使用 13.0.600.65 或更高版本的 SQL Server Management Studio。
 
- 	 > [AZURE.IMPORTANT] 下载[最新](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)版本的 SQL Server Management Studio。建议始终使用最新版本的 Management Studio 以与 Azure 门户的更新保持同步。
-
+      > [!IMPORTANT] 下载[最新](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)版本的 SQL Server Management Studio。建议始终使用最新版本的 Management Studio 以与 Azure 门户的更新保持同步。
 
 2. 打开“数据库”文件夹，展开“系统数据库”，右键单击“master”，然后单击“新建查询”。
 
@@ -68,7 +63,6 @@
            ADD SECONDARY ON SERVER <MySecondaryServer1> WITH (ALLOW_CONNECTIONS = NO);
 
 4. 单击“执行”运行查询。
-
 
 ### 添加可读的辅助数据库（单一数据库）
 可以使用以下步骤将可读辅助数据库创建为单一数据库。
@@ -83,8 +77,6 @@
            ADD SECONDARY ON SERVER <MySecondaryServer2> WITH (ALLOW_CONNECTIONS = ALL);
 
 4. 单击“执行”运行查询。
-
-
 
 ### 添加不可读的辅助数据库（弹性数据库）
 
@@ -102,8 +94,6 @@
 
 4. 单击“执行”运行查询。
 
-
-
 ### 添加可读的辅助数据库（弹性数据库）
 可以使用以下步骤将可读的辅助数据库创建为弹性数据库。
 
@@ -119,11 +109,9 @@
 
 4. 单击“执行”运行查询。
 
-
-
 ## 删除辅助数据库
 
-可以使用 **ALTER DATABASE** 语句永久终止辅助数据库与其主数据库之间的复制关系。此语句将在主数据库所在的 master 数据库上运行。终止关系后，辅助数据库将成为常规读写数据库。如果与辅助数据库的连接断开，命令将会成功，但辅助数据库必须等到连接恢复后才变为可读写。有关详细信息，请参阅 [ALTER DATABASE (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/mt574871.aspx) 和[服务层](/documentation/articles/sql-database-service-tiers/)。
+可以使用 **ALTER DATABASE** 语句永久终止辅助数据库与其主数据库之间的复制关系。此语句将在主数据库所在的 master 数据库上运行。终止关系后，辅助数据库将成为常规读写数据库。如果与辅助数据库的连接断开，命令将会成功，但辅助数据库必须等到连接恢复后才变为可读写。有关详细信息，请参阅 [ALTER DATABASE (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/mt574871.aspx) 和[服务层](./sql-database-service-tiers.md)。
 
 使用以下步骤从异地复制合作关系中删除异地复制的辅助数据库。
 
@@ -170,11 +158,10 @@
 
 非可读辅助数据库类型将于 2017 年 4 月停用，现有的非可读数据库将自动升级到可读辅助数据库。如果目前使用的是不可读辅助数据库，但想要将其升级为可读辅助数据库，可以针对每个辅助数据库执行下列简单步骤。
 
-> [AZURE.IMPORTANT] 并没有自助升级方法能够将不可读辅助数据库就地升级为可读辅助数据库。如果删除唯一的辅助数据库，主数据库将会维持未受保护的状态，直到新的辅助数据库完全同步为止。如果应用程序 SLA 要求主数据库始终受到保护，应该考虑在其他服务器中创建并行辅助数据库，然后再应用上述升级步骤。请注意，每个主数据库最多可以有 4 个辅助数据库。
-
+> [!IMPORTANT] 并没有自助升级方法能够将不可读辅助数据库就地升级为可读辅助数据库。如果删除唯一的辅助数据库，主数据库将会维持未受保护的状态，直到新的辅助数据库完全同步为止。如果应用程序 SLA 要求主数据库始终受到保护，应该考虑在其他服务器中创建并行辅助数据库，然后再应用上述升级步骤。请注意，每个主数据库最多可以有 4 个辅助数据库。
 
 1. 首先，连接到辅助服务器，然后删除不可读辅助数据库：
-        
+
         DROP DATABASE <MyNonReadableSecondaryDB>;
 
 2. 现在，连接到主服务器，然后添加新的可读辅助数据库
@@ -182,12 +169,9 @@
         ALTER DATABASE <MyDB>
             ADD SECONDARY ON SERVER <MySecondaryServer> WITH (ALLOW_CONNECTIONS = ALL);
 
-
-
-
 ## 后续步骤
 
-- 若要深入了解活动异地复制，请参阅[活动异地复制](/documentation/articles/sql-database-geo-replication-overview/)
-- 有关业务连续性的概述和应用场景，请参阅[业务连续性概述](/documentation/articles/sql-database-business-continuity/)
+- 若要深入了解活动异地复制，请参阅[活动异地复制](./sql-database-geo-replication-overview.md)
+- 有关业务连续性的概述和应用场景，请参阅[业务连续性概述](./sql-database-business-continuity.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

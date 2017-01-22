@@ -1,24 +1,23 @@
-<properties
- pageTitle="IoT 安全最佳实践 | Azure"
- description="保护 IoT 基础结构的安全最佳实践"
- services="iot-hub"
- documentationCenter=""
- authors="YuriDio"
- manager="timlt"
- editor=""/>
+---
+title: IoT 安全最佳实践 | Azure
+description: 保护 IoT 基础结构的安全最佳实践
+services: iot-hub
+documentationCenter: 
+authors: YuriDio
+manager: timlt
+editor: 
 
-<tags
- ms.service="iot-hub"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="10/17/2016"
- wacn.date="11/07/2016"
- ms.author="yurid"/>
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/17/2016
+wacn.date: 11/07/2016
+ms.author: yurid
+---
 
- 
-[AZURE.INCLUDE [iot-security-best-practices](../../includes/iot-security-best-practices.md)]
+[!INCLUDE [iot-security-best-practices](../../includes/iot-security-best-practices.md)]
 
 ## 后续步骤
 
@@ -32,9 +31,9 @@
 - [使用网关 SDK 模拟设备][lnk-gateway]
 - [使用 Azure 门户管理 IoT 中心][lnk-portal]
 
-[lnk-security-architecture]: /documentation/articles/iot-hub-security-architecture/
-[lnk-security-deployment]: /documentation/articles/iot-hub-security-deployment/
+[lnk-security-architecture]: ./iot-hub-security-architecture.md
+[lnk-security-deployment]: ./iot-hub-security-deployment.md
 
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
-[lnk-portal]: /documentation/articles/iot-hub-manage-through-portal/
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
+[lnk-portal]: ./iot-hub-manage-through-portal.md
 <!---HONumber=Mooncake_0523_2016-->

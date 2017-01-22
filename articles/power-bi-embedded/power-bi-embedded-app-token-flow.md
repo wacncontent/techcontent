@@ -1,23 +1,22 @@
-<properties
-   pageTitle="通过 Power BI Embedded 进行身份验证和授权"
-   description="通过 Power BI Embedded 进行身份验证和授权"
-   services="power-bi-embedded"
-   documentationCenter=""
-   authors="mgblythe"
-   manager="NA"
-   editor=""
-   tags=""/>
+---
+title: 通过 Power BI Embedded 进行身份验证和授权
+description: 通过 Power BI Embedded 进行身份验证和授权
+services: power-bi-embedded
+documentationCenter: 
+authors: mgblythe
+manager: NA
+editor: 
+tags: 
 
-<tags
-   ms.service="power-bi-embedded"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="powerbi"
-   ms.date="07/26/2016"
-   ms.author="mblythe"
-   wacn.date="01/13/2017"/>  
-
+ms.service: power-bi-embedded
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: powerbi
+ms.date: 07/26/2016
+ms.author: mblythe
+wacn.date: 01/13/2017
+---
 
 # 通过 Power BI Embedded 进行身份验证和授权
 
@@ -55,13 +54,9 @@ Power BI Embedded 服务使用**密钥**和**应用令牌**进行身份验证和
 
 ![](./media/power-bi-embedded-app-token-flow/power-bi-embedded-app-token-flow-sample-coded.png)  
 
-
-
 当解码后，它将如下所示：
 
 ![](./media/power-bi-embedded-app-token-flow/power-bi-embedded-app-token-flow-sample-decoded.png)  
-
-
 
 ## 下面是流的工作原理
 
@@ -69,40 +64,33 @@ Power BI Embedded 服务使用**密钥**和**应用令牌**进行身份验证和
 
     ![](./media/powerbi-embedded-get-started-sample/azure-portal.png)  
 
-
 2. 令牌将发布声明，并且有过期时间。
 
     ![](./media/powerbi-embedded-get-started-sample/power-bi-embedded-token-2.png)  
-
 
 3. 令牌使用 API 访问密钥获得签名。
 
     ![](./media/powerbi-embedded-get-started-sample\power-bi-embedded-token-3.png)  
 
-
 4. 用户请求查看报表。
 
     ![](./media/powerbi-embedded-get-started-sample/power-bi-embedded-token-4.png)  
 
-
-5.	使用 API 访问密钥验证令牌。
+5. 使用 API 访问密钥验证令牌。
 
     ![](./media/powerbi-embedded-get-started-sample/power-bi-embedded-token-5.png)  
 
-
-6.	Power BI Embedded 向用户发送报表。
+6. Power BI Embedded 向用户发送报表。
 
     ![](./media/powerbi-embedded-get-started-sample/power-bi-embedded-token-6.png)  
-
 
 **Power BI Embedded** 向用户发送报表后，用户可以在自定义应用中查看报表。例如，如果导入了 [Analyzing Sales Data PBIX sample](http://download.microsoft.com/download/1/4/E/14EDED28-6C58-4055-A65C-23B4DA81C4DE/Analyzing_Sales_Data.pbix)（分析销售数据 PBIX 示例），该示例 Web 应用将如下所示：
 
 ![](./media/powerbi-embedded-get-started-sample/sample-web-app.png)  
 
-
 ## 另请参阅
-- [Power BI Embedded 示例入门](/documentation/articles/power-bi-embedded-get-started-sample/)
-- [常见 Power BI Embedded 方案](/documentation/articles/power-bi-embedded-scenarios/)
-- [Power BI Embedded 入门](/documentation/articles/power-bi-embedded-get-started/)
+- [Power BI Embedded 示例入门](./power-bi-embedded-get-started-sample.md)
+- [常见 Power BI Embedded 方案](./power-bi-embedded-scenarios.md)
+- [Power BI Embedded 入门](./power-bi-embedded-get-started.md)
 
 <!---HONumber=Mooncake_1010_2016-->

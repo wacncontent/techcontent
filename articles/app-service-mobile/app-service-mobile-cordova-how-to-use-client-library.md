@@ -1,26 +1,25 @@
-<properties
-	pageTitle="如何使用适用于 Azure 移动应用的 Apache Cordova 插件"
-	description="如何使用适用于 Azure 移动应用的 Apache Cordova 插件"
-	services="app-service\mobile"
-	documentationCenter="javascript"
-	authors="adrianhall"
-	manager="erikre"
-	editor=""/>  
+---
+title: 如何使用适用于 Azure 移动应用的 Apache Cordova 插件
+description: 如何使用适用于 Azure 移动应用的 Apache Cordova 插件
+services: app-service\mobile
+documentationCenter: javascript
+authors: adrianhall
+manager: erikre
+editor: 
 
-
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-html"
-	ms.devlang="javascript"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="11/21/2016"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-html
+ms.devlang: javascript
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: adrianha
+---
 
 # 如何使用适用于 Azure 移动应用的 Apache Cordova 客户端库
 
-[AZURE.INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
+[!INCLUDE [app-service-mobile-selector-client-library](../../includes/app-service-mobile-selector-client-library.md)]
 
 本指南介绍如何使用最新的[适用于 Azure 移动应用的 Apache Cordova 插件]执行常见任务。对于 Azure 移动应用的新手，请先完成 [Azure Mobile Apps Quick Start]（Azure 移动应用快速入门），创建后端、创建表并下载预先生成的 Apache Cordova 项目。本指南侧重于客户端 Apache Cordova 插件。
 
@@ -42,7 +41,7 @@
 
 有关创建[第一个 Apache Cordova 应用]的详细信息，请参阅相关文档。
 
-[AZURE.INCLUDE [app-service-mobile-html-js-library.md](../../includes/app-service-mobile-html-js-library.md)]
+[!INCLUDE [app-service-mobile-html-js-library.md](../../includes/app-service-mobile-html-js-library.md)]
 
 ## <a name="auth"></a>如何：对用户进行身份验证
 
@@ -55,7 +54,7 @@ Azure 应用服务支持使用各种外部标识提供者（包括 Microsoft 帐
 
 支持两种身份验证流：服务器流和客户端流。服务器流依赖于提供者的 Web 身份验证界面，因此可提供最简便的身份验证体验。客户端流依赖于提供者和设备特定的 SDK，因此允许与设备特定的功能（例如单一登录）进行更深入的集成。
 
-[AZURE.INCLUDE [app-service-mobile-html-js-auth-library.md](../../includes/app-service-mobile-html-js-auth-library.md)]
+[!INCLUDE [app-service-mobile-html-js-auth-library.md](../../includes/app-service-mobile-html-js-auth-library.md)]
 
 ### <a name="configure-external-redirect-urls"></a>如何为外部重定向 URL 配置移动应用服务。
 
@@ -143,9 +142,9 @@ pushHandler.on('error', function (error) {
 <!-- URLs. -->
 
 [Azure 门户预览]: https://portal.azure.cn
-[Azure Mobile Apps Quick Start]: /documentation/articles/app-service-mobile-cordova-get-started/
-[Get started with authentication]: /documentation/articles/app-service-mobile-cordova-get-started-users/
-[Add authentication to your app]: /documentation/articles/app-service-mobile-cordova-get-started-users/
+[Azure Mobile Apps Quick Start]: ./app-service-mobile-cordova-get-started.md
+[Get started with authentication]: ./app-service-mobile-cordova-get-started-users.md
+[Add authentication to your app]: ./app-service-mobile-cordova-get-started-users.md
 
 [适用于 Azure 移动应用的 Apache Cordova 插件]: https://www.npmjs.com/package/cordova-plugin-ms-azure-mobile-apps
 [第一个 Apache Cordova 应用]: http://cordova.apache.org/#getstarted

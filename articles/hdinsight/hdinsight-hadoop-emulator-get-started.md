@@ -1,23 +1,23 @@
-<properties
-	pageTitle="使用 Hadoop 沙盒了解 Hadoop | Azure"
-	description="若要了解如何使用 Hadoop 生态系统，可以在 Azure 虚拟机上设置 Hortonworks 提供的 Hadoop 沙盒。"
-	keywords="hadoop emulator,hadoop 沙盒"
-	editor="cgronlun"
-	manager="jhubbard"
-	services="hdinsight"
-	authors="nitinme"
-	documentationCenter=""
-	tags="azure-portal"/>
+---
+title: 使用 Hadoop 沙盒了解 Hadoop | Azure
+description: 若要了解如何使用 Hadoop 生态系统，可以在 Azure 虚拟机上设置 Hortonworks 提供的 Hadoop 沙盒。
+keywords: hadoop emulator,hadoop 沙盒
+editor: cgronlun
+manager: jhubbard
+services: hdinsight
+authors: nitinme
+documentationCenter: 
+tags: azure-portal
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/24/2016"
-	wacn.date="12/12/2016"
-	ms.author="nitinme"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/24/2016
+wacn.date: 12/12/2016
+ms.author: nitinme
+---
 
 # 在虚拟机上使用 Hadoop 沙盒，开始了解 Hadoop 生态系统
 
@@ -27,7 +27,7 @@
 
 * [Oracle VirtualBox](https://www.virtualbox.org/)
 
-熟悉 Hadoop 之后，便可以开始在 Azure 中使用 Hadoop 创建 HDInsight 群集。有关如何入门的详细信息，请参阅 [HDInsight 上的 Hadoop 入门](/documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/)。
+熟悉 Hadoop 之后，便可以开始在 Azure 中使用 Hadoop 创建 HDInsight 群集。有关如何入门的详细信息，请参阅 [HDInsight 上的 Hadoop 入门](./hdinsight-hadoop-tutorial-get-started-windows-v1.md)。
 
 ## 下载并安装虚拟机
 
@@ -51,14 +51,14 @@
 
 1. 在“Hortonworks 沙盒”页的“开始”步骤中，选择“查看高级选项”。使用此页上的信息通过 SSH 登录到沙盒。使用提供的名称和密码。
 
-    > [AZURE.NOTE] 如果未安装 SSH 客户端，可以使用虚拟机在 \_\_http://localhost:4200/__ 上提供的基于 Web 的 SSH。
+    > [!NOTE] 如果未安装 SSH 客户端，可以使用虚拟机在 \_\_http://localhost:4200/__ 上提供的基于 Web 的 SSH。
 
     首次使用 SSH 建立连接时，系统会提示更改 root 帐户的密码。输入新密码，将来使用 SSH 登录时要用到它。
 
 2. 登录后，请输入以下命令：
 
         ambari-admin-password-reset
-    
+
     出现提示时，请提供 Ambari 管理员帐户的密码。访问 Ambari Web UI 时要用到此密码。
 
 ## 使用 hive 命令

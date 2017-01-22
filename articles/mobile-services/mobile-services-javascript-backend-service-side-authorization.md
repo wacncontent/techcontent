@@ -1,27 +1,27 @@
-<properties
-	pageTitle="在 JavaScript 后端移动服务中对用户进行服务端授权 | Microsoft Azure"
-	description="了解如何在 Azure 移动服务的 JavaScript 后端对用户授权。"
-	services="mobile-services"
-	documentationCenter=""
-	authors="krisragh"
-	manager="dwrede"
-	editor=""/>
+---
+title: 在 JavaScript 后端移动服务中对用户进行服务端授权 | Microsoft Azure
+description: 了解如何在 Azure 移动服务的 JavaScript 后端对用户授权。
+services: mobile-services
+documentationCenter: 
+authors: krisragh
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.topic="article"
-	ms.devlang="javascript"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="krisragh"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.topic: article
+ms.devlang: javascript
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: krisragh
+---
 
 #  移动服务中的用户服务端授权
 
-> [AZURE.SELECTOR]
-- [.NET 后端](/documentation/articles/mobile-services-dotnet-backend-service-side-authorization/)
-- [JavaScript 后端](/documentation/articles/mobile-services-javascript-backend-service-side-authorization/) 
+> [!div class="op_single_selector"]
+- [.NET 后端](./mobile-services-dotnet-backend-service-side-authorization.md)
+- [JavaScript 后端](./mobile-services-javascript-backend-service-side-authorization.md) 
 
 本主题说明如何使用服务器端脚本为用户授权。在本教程中，你将在 Azure 移动服务中注册脚本，根据用户 ID 筛选查询，然后只授予用户对其自己数据的访问权限。根据用户 ID 筛选用户的查询结果是最基本的授权形式。根据具体的方案，你可能还需要创建“用户”或“角色”表，以跟踪更详细的用户授权信息，例如，给定的用户有权访问哪些终结点。
 
@@ -38,9 +38,9 @@
           request.execute();
         }
 
-	在插入之前，此脚本会在项中添加已经过身份验证的用户的用户 ID。
+    在插入之前，此脚本会在项中添加已经过身份验证的用户的用户 ID。
 
-    >[AZURE.NOTE] 请确保已启用“[动态架构](https://msdn.microsoft.com/zh-cn/library/azure/jj193175.aspx)”。否则，不会自动添加 userId 列。默认情况下，已经为新的移动服务启用了此设置。
+    >[!NOTE] 请确保已启用“[动态架构](https://msdn.microsoft.com/zh-cn/library/azure/jj193175.aspx)”。否则，不会自动添加 userId 列。默认情况下，已经为新的移动服务启用了此设置。
 
 3. 同样，请将现有的 **Read** 操作替换为以下函数。此脚本将会筛选返回的 TodoItem 对象，使用户只会收到他们自己的插入项。
 
@@ -55,7 +55,6 @@
 
 2. 如果你有其他登录帐户，可以通过关闭、再删除、然后重新运行应用程序，来验证用户是否只能看到他们自己的数据。显示登录凭据对话框时，请输入一个不同的登录名，然后检查在前一登录名下输入的项是否未显示。
 
-
 <!-- Anchors. -->
 
 [Register server scripts]: #register-scripts
@@ -65,13 +64,11 @@
 
 <!-- URLs. -->
 
-
 [Windows Push Notifications & Live Connect]: http://go.microsoft.com/fwlink/p/?LinkID=257677
-[Mobile Services server script reference]: /documentation/articles/mobile-services-how-to-use-server-scripts/
+[Mobile Services server script reference]: ./mobile-services-how-to-use-server-scripts.md
 [My Apps dashboard]: http://go.microsoft.com/fwlink/p/?LinkId=262039
-[向现有移动服务应用添加身份验证]: /documentation/articles/mobile-services-ios-get-started-users/
+[向现有移动服务应用添加身份验证]: ./mobile-services-ios-get-started-users.md
 
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
- 
 
 <!---HONumber=Mooncake_0118_2016-->

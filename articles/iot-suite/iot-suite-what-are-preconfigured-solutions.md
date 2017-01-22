@@ -1,23 +1,22 @@
-<properties
- pageTitle="Azure IoT 预配置解决方案 | Azure"
- description="Azure IoT 预配置解决方案及其体系结构描述，以及指向其他资源的链接。"
- services=""
- suite="iot-suite"
- documentationCenter=""
- authors="dominicbetts"
- manager="timlt"
- editor=""/>
+---
+title: Azure IoT 预配置解决方案 | Azure
+description: Azure IoT 预配置解决方案及其体系结构描述，以及指向其他资源的链接。
+services: 
+suite: iot-suite
+documentationCenter: 
+authors: dominicbetts
+manager: timlt
+editor: 
 
-<tags
- ms.service="iot-suite"
- ms.devlang="na"
- ms.topic="get-started-article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="11/16/2016"
- wacn.date="12/05/2016"
- ms.author="dobett"/>  
-
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/16/2016
+wacn.date: 12/05/2016
+ms.author: dobett
+---
 
 # Azure IoT 套件预配置解决方案是什么？
 
@@ -30,7 +29,7 @@ Azure IoT 套件预配置解决方案是你可以使用订阅部署到 Azure 的
 
 除了在 Azure 中部署和运行解决方案，你还可以下载完整的源代码，然后自定义并扩展解决方案以满足特定的 IoT 要求。
 
-> [AZURE.NOTE] 要部署其中一个预配置的解决方案，请访问 [Azure IoT 套件][lnk-azureiotsuite]。[IoT 预配置解决方案入门][lnk-getstarted-preconfigured]这篇文章介绍了有关如何部署并运行其中一个解决方案的详细信息。
+> [!NOTE] 要部署其中一个预配置的解决方案，请访问 [Azure IoT 套件][lnk-azureiotsuite]。[IoT 预配置解决方案入门][lnk-getstarted-preconfigured]这篇文章介绍了有关如何部署并运行其中一个解决方案的详细信息。
 
 下表显示了如何将解决方案映射到特定的 IoT 功能：
 
@@ -79,7 +78,6 @@ IoT 中心通过服务端遥测数据读取终结点使收到的遥测数据可�
 
 此预配置的解决方案使用三种 [Azure 流分析][lnk-asa] (ASA) 作业筛选设备的遥测数据流：
 
-
 - *DeviceInfo 作业* - 将数据输出到事件中心，该中心将第一次连接设备或者设备响应**更改设备状态**命令时发送的特定于设备注册的消息路由到解决方案设备注册表（一种 DocumentDB 数据库）。
 - *遥测数据作业* - 将所有原始遥测数据发送到 Azure blob 存储进行冷存储，并计算在解决方案仪表板中显示的遥测汇总数据。
 - *规则作业* -筛选超出了任何规则阈值的遥测数据流，并将数据输出到事件中心。当规则触发时，解决方案门户仪表板视图在警报历史记录表中将该事件作为新行显示，并根据解决方案门户中的规则和操作视图上定义的设置触发操作。
@@ -122,14 +120,14 @@ IoT 中心通过服务端遥测数据读取终结点使收到的遥测数据可�
 
 [img-remote-monitoring-arch]: ./media/iot-suite-what-are-preconfigured-solutions/remote-monitoring-arch1.png
 [img-dashboard]: ./media/iot-suite-what-are-preconfigured-solutions/dashboard.png
-[lnk-what-is-azure-iot]: /documentation/articles/iot-suite-what-is-azure-iot/
-[lnk-asa]: /documentation/services/stream-analytics/
-[lnk-event-processor]: /documentation/articles/event-hubs-programming-guide/#event-processor-host
-[lnk-web-job]: /documentation/articles/web-sites-create-web-jobs/
-[lnk-identity-registry]: /documentation/articles/iot-hub-devguide-identity-registry/
+[lnk-what-is-azure-iot]: ./iot-suite-what-is-azure-iot.md
+[lnk-asa]: ../stream-analytics/index.md
+[lnk-event-processor]: ../event-hubs/event-hubs-programming-guide.md#event-processor-host
+[lnk-web-job]: ../app-service-web/web-sites-create-web-jobs.md
+[lnk-identity-registry]: ../iot-hub/iot-hub-devguide-identity-registry.md
 [lnk-predictive-maintenance]: /documentation/articles/iot-suite-predictive-overview/
 [lnk-azureiotsuite]: https://www.azureiotsuite.cn/
 [lnk-refarch]: http://download.microsoft.com/download/A/4/D/A4DAD253-BC21-41D3-B9D9-87D2AE6F0719/Microsoft_Azure_IoT_Reference_Architecture.pdf
-[lnk-getstarted-preconfigured]: /documentation/articles/iot-suite-getstarted-preconfigured-solutions/
+[lnk-getstarted-preconfigured]: ./iot-suite-getstarted-preconfigured-solutions.md
 
 <!---HONumber=Mooncake_0815_2016-->

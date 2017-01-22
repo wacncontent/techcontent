@@ -1,20 +1,21 @@
-<properties 
-   pageTitle="包含双层应用程序的混合连接 | Azure"
-   description="了解如何部署虚拟设备和 UDR 以便在 Azure 中创建多层应用程序环境"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="christb"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="05/05/2016"
-   wacn.date="12/26/2016"
-   ms.author="jdial" />
+---
+title: 包含双层应用程序的混合连接 | Azure
+description: 了解如何部署虚拟设备和 UDR 以便在 Azure 中创建多层应用程序环境
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: christb
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 05/05/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 虚拟设备方案
 
@@ -45,28 +46,27 @@
 - **IP 转发**。默认情况下，仅当数据包目标 IP 地址与 NIC IP 地址匹配时，Azure 网络引擎才将数据包转发到虚拟网络接口卡 (NIC)。因此，如果 UDR 定义必须将数据包发送到给定的虚拟设备，则 Azure 网络引擎会丢弃该数据包。为了确保将数据包传送到数据包实际目标以外的 VM（在本例中为虚拟设备），需要为虚拟设备启用 IP 转发。
 - **网络安全组 (NSG)**。以下示例未使用 NSG，但可在此解决方案中使用适用于子网和/或 NIC 的 NSG，进一步筛选传入和传出相应子网和 NIC 的流量。
 
-
 ![IPv6 连接](./media/virtual-network-scenario-udr-gw-nva/figure01.png)
 
 此示例中，有一个订阅包含以下项：
 
 - 2 个资源组（示意图中未显示）。 
-	- **ONPREMRG**。包含模拟本地网络所需的所有资源。
-	- **AZURERG**。包含 Azure 虚拟网络环境所需的所有资源。 
+    - **ONPREMRG**。包含模拟本地网络所需的所有资源。
+    - **AZURERG**。包含 Azure 虚拟网络环境所需的所有资源。 
 - 名为 **onpremvnet** 的 VNet，用于模拟按如下所示分段的本地数据中心。
-	- **onpremsn1**。包含运行 Ubuntu 的虚拟机 (VM) 的子网，用于模拟本地服务器。
-	- **onpremsn2**。包含运行 Ubuntu 的 VM 的子网，用于模拟管理员使用的本地计算机。
+    - **onpremsn1**。包含运行 Ubuntu 的虚拟机 (VM) 的子网，用于模拟本地服务器。
+    - **onpremsn2**。包含运行 Ubuntu 的 VM 的子网，用于模拟管理员使用的本地计算机。
 - **onpremvnet** 上有一个名为 **OPFW** 的防火墙虚拟设备，用于与 **azurevnet** 保持隧道连接。
 - 按如下所示分段的名为 **azurevnet** 的 VNet。
-	- **azsn1**。专门用于外部防火墙的外部防火墙子网。所有 Internet 流量将通过此子网传入。此子网仅包含链接到外部防火墙的 NIC。
-	- **azsn2**。前端子网，托管作为 Web 服务器运行的、将从 Internet 访问的 VM。
-	- **azsn3**。后端子网，托管运行前端应用程序服务器的、将由前端 Web 服务器访问的 VM。
-	- **azsn4**。管理子网，专门用于提供对所有防火墙虚拟设备的管理访问权限。此子网仅包含解决方案中使用的每个防火墙虚拟设备的 NIC。
-	- **GatewaySubnet**。ExpressRoute 和 VPN 网关在 Azure VNet 与其他网络之间提供连接所需的 Azure 混合连接子网。 
+    - **azsn1**。专门用于外部防火墙的外部防火墙子网。所有 Internet 流量将通过此子网传入。此子网仅包含链接到外部防火墙的 NIC。
+    - **azsn2**。前端子网，托管作为 Web 服务器运行的、将从 Internet 访问的 VM。
+    - **azsn3**。后端子网，托管运行前端应用程序服务器的、将由前端 Web 服务器访问的 VM。
+    - **azsn4**。管理子网，专门用于提供对所有防火墙虚拟设备的管理访问权限。此子网仅包含解决方案中使用的每个防火墙虚拟设备的 NIC。
+    - **GatewaySubnet**。ExpressRoute 和 VPN 网关在 Azure VNet 与其他网络之间提供连接所需的 Azure 混合连接子网。 
 - **azurevnet** 网络中有 3 个防火墙虚拟设备。 
-	- **AZF1**。在 Azure 中使用公共 IP 地址资源向公共 Internet 公开的外部防火墙。需要确保从应用商店或者直接从设备供应商处获取的模板，用于预配 3-NIC 虚拟设备。
-	- **AZF2**。用于控制 **azsn2** 与 **azsn3** 之间流量的内部防火墙。它也是 3-NIC 虚拟设备。
-	- **AZF3**。管理员可从本地数据中心访问的管理防火墙，它已连接到用于管理所有防火墙设备的管理子网。可以在应用商店中查找 2-NIC 虚拟设备模板，或者直接向设备供应商请求提供此类模板。
+    - **AZF1**。在 Azure 中使用公共 IP 地址资源向公共 Internet 公开的外部防火墙。需要确保从应用商店或者直接从设备供应商处获取的模板，用于预配 3-NIC 虚拟设备。
+    - **AZF2**。用于控制 **azsn2** 与 **azsn3** 之间流量的内部防火墙。它也是 3-NIC 虚拟设备。
+    - **AZF3**。管理员可从本地数据中心访问的管理防火墙，它已连接到用于管理所有防火墙设备的管理子网。可以在应用商店中查找 2-NIC 虚拟设备模板，或者直接向设备供应商请求提供此类模板。
 
 ## 用户定义的路由 (UDR)
 
@@ -116,7 +116,7 @@ Azure 中的每个子网可以链接到用于定义该子网中发起的流量�
 
 此虚拟设备 VM 必须能够接收不以其自身为目标的传入流量。若要允许 VM 接收发送到其他目标的流量，必须为该 VM 启用 IP 转发。这是 Azure 设置，不是来宾操作系统中的设置。虚拟设备仍需要运行某种类型的应用程序，以便处理和正确路由传入流量。
 
-有关 IP 转发的详细信息，请访问[用户定义的路由和 IP 转发的定义](/documentation/articles/virtual-networks-udr-overview/#ip-forwarding)。
+有关 IP 转发的详细信息，请访问[用户定义的路由和 IP 转发的定义](./virtual-networks-udr-overview.md#ip-forwarding)。
 
 例如，假设在 Azure VNet 中使用了以下设置：
 
@@ -143,7 +143,7 @@ OPFW 代表包含以下规则的本地设备：
 
 - **路由**：发往 10.0.0.0/16 (**azurevnet**) 的所有流量必须通过隧道 **ONPREMAZURE** 发送。
 - **策略**：允许 **port2** 与 **ONPREMAZURE** 之间的所有双向流量。
- 
+
 ### AZF1
 
 AZF1 代表包含以下规则的 Azure 虚拟设备：
@@ -173,10 +173,10 @@ AZF2 代表包含以下规则的 Azure 虚拟设备：
 
 若要部署此方案，请遵循以下概要步骤。
 
-1.	登录到 Azure 订阅。
-2.	若要部署 VNet 来模拟本地网络，请预配属于 **ONPREMRG** 的资源。
-3.	预配属于 **AZURERG** 的资源。
-4.	预配从 **onpremvnet** 到 **azurevnet** 的隧道。
-5.	预配所有资源后，登录到 **onpremvm2** 并 ping 10.0.3.101，以测试 **onpremsn2** 与 **azsn3** 之间的连接。
+1. 登录到 Azure 订阅。
+2. 若要部署 VNet 来模拟本地网络，请预配属于 **ONPREMRG** 的资源。
+3. 预配属于 **AZURERG** 的资源。
+4. 预配从 **onpremvnet** 到 **azurevnet** 的隧道。
+5. 预配所有资源后，登录到 **onpremvm2** 并 ping 10.0.3.101，以测试 **onpremsn2** 与 **azsn3** 之间的连接。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

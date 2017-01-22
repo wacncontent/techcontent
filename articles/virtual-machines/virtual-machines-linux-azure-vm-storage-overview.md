@@ -1,23 +1,21 @@
-<properties
-  pageTitle="Azure 和 Linux VM 存储 | Azure"
-  description="介绍 Linux 虚拟机上的 Azure 标准和高级存储。"
-  services="virtual-machines-linux"
-  documentationCenter="virtual-machines-linux"
-  authors="vlivech"
-  manager="timlt"
-  editor=""/>  
+---
+title: Azure 和 Linux VM 存储 | Azure
+description: 介绍 Linux 虚拟机上的 Azure 标准和高级存储。
+services: virtual-machines-linux
+documentationCenter: virtual-machines-linux
+authors: vlivech
+manager: timlt
+editor: 
 
-
-<tags
-  ms.service="virtual-machines-linux"
-  ms.devlang="NA"
-  ms.topic="article"
-  ms.tgt_pltfrm="vm-linux"
-  ms.workload="infrastructure"
-  ms.date="10/04/2016"
-  wacn.date="11/21/2016"
-  ms.author="v-livech"/>  
-
+ms.service: virtual-machines-linux
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
+ms.date: 10/04/2016
+wacn.date: 11/21/2016
+ms.author: v-livech
+---
 
 # Azure 和 Linux VM 存储
 
@@ -28,7 +26,6 @@ Azure 存储空间是依赖于持续性、可用性和可缩放性来满足客�
 可在标准存储磁盘或高级存储磁盘基础上构建 Azure VM。使用门户选择 VM 时，必须在“基本信息”屏幕上使用一个下拉列表来切换标准和高级磁盘。以下屏幕截图突出显示了该切换菜单。切换到 SSD 时，只显示支持高级存储的 VM，所有这些 VM 由 SSD 驱动器提供支持。切换到 HDD 时，将显示支持标准存储的 VM（这些 VM 由机械磁盘驱动器提供支持），以及由 SSD 提供支持的高级存储 VM。
 
   ![screen1](./media/virtual-machines-linux-azure-vm-storage-overview/screen1.png)  
-
 
 从 `azure-cli` 创建 VM 时，可以在通过 `-z` 或 `--vm-size` cli 标志选择 VM 大小时选择标准或高级存储。
 
@@ -74,7 +71,7 @@ Azure 高级存储为运行 I/O 密集型工作负荷的虚拟机提供高性能
 
 - 高级本地冗余存储：高级存储帐户仅支持使用本地冗余存储 (LRS) 作为复制选项，并在单个区域中保留三个数据副本。
 
-- [高级存储](/documentation/articles/storage-premium-storage/)
+- [高级存储](../storage/storage-premium-storage.md)
 
 ## 支持高级存储的 VM
 
@@ -93,14 +90,13 @@ Azure 高级存储为运行 I/O 密集型工作负荷的虚拟机提供高性能
 | Centos | 6\.5、6.6、6.7、7.0、7.1 | 3\.10.0-229.1.2.el7+ |
 | RHEL | 6\.8+、7.2+ | |
 
-
 ## 文件存储
 
 Azure 文件存储使用标准 SMB 协议在云中提供文件共享。使用 Azure 文件，你可以将依赖于文件服务器的企业应用程序迁移到 Azure。在 Azure 中运行的应用程序可以轻松地从运行 Linux 的 Azure 虚拟机装载文件共享。并且使用最新版本的文件存储，你还可以从支持 SMB 3.0 的本地应用程序装载文件共享。由于文件共享是 SMB 共享，因此还可以通过标准的文件系统 API 来访问它们。
 
 文件存储基于与 Blob、表和队列存储相同的技术构建，因此文件存储能够提供 Azure 存储平台内置的现有可用性、持续性、可伸缩性和异地冗余。有关存文件存储性能目标和限制的详细信息，请参阅“Azure 存储的可缩放性和性能目标”。
 
-- [如何通过 Linux 使用 Azure 文件存储](/documentation/articles/storage-how-to-use-files-linux/)
+- [如何通过 Linux 使用 Azure 文件存储](../storage/storage-how-to-use-files-linux.md)
 
 ## 热存储
 
@@ -117,7 +113,6 @@ Azure 冷存储层为存储不常访问且长期留存的数据进行了优化�
 | 使用费 | 存储成本较高 | 存储成本较低 |
 | | 访问权限较低 | 访问权限较高 |
 | | 事务成本 | 事务成本 |
-
 
 ## 冗余
 
@@ -148,7 +143,7 @@ Azure 冷存储层为存储不常访问且长期留存的数据进行了优化�
 
 若要深入了解 Azure 存储冗余，请参阅：
 
-- [Azure 存储空间复制](/documentation/articles/storage-redundancy/)
+- [Azure 存储空间复制](../storage/storage-redundancy.md)
 
 ## 可伸缩性
 
@@ -166,7 +161,7 @@ Azure 存储空间可以大规模伸缩，因此你可以存储和处理数百 T
 
 我们保证至少在 99.9%（对于“冷”访问层来说为 99%）的时间里成功地处理请求以便将数据写入本地冗余存储 (LRS)、区域冗余存储 (ZRS) 和异地冗余存储 (GRS) 帐户，以及读取访问异地冗余存储 (RA-GRS) 帐户。
 
-- [Azure 存储 SLA](/support/sla/storage/)
+- [Azure 存储 SLA](https://www.azure.cn/support/sla/storage/)
 
 ## “安全”
 
@@ -188,16 +183,16 @@ Azure 存储空间提供配套的安全性功能，这些功能相辅相成，�
 
 我们将讨论存储服务加密 (SSE) 以及如何对存储帐户启用它，从而使你的块 Blob、页 Blob 以及追加 Blob 在写入到 Azure 存储空间时自动进行加密。此外，将了解如何使用 Azure 磁盘加密，并探究磁盘加密、SSE 与客户端加密之间的基本差异和用例。我们将简要探讨美国政府针对计算机实施的FIPS 合规性。
 
-- [Azure 存储空间安全指南](/documentation/articles/storage-security-guide/)
+- [Azure 存储空间安全指南](../storage/storage-security-guide.md)
 
 ## 成本节省
 
-- [存储成本](/pricing/details/storage/)
+- [存储成本](https://www.azure.cn/pricing/details/storage/)
 
-- [存储成本计算器](/pricing/calculator/)
+- [存储成本计算器](https://www.azure.cn/pricing/calculator/)
 
 ## 存储限制
 
-- [存储服务限制](/documentation/articles/azure-subscription-service-limits/#storage-limits)
+- [存储服务限制](../azure-subscription-service-limits.md#storage-limits)
 
 <!---HONumber=Mooncake_1114_2016-->

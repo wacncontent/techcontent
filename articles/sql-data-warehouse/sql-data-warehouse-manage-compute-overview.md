@@ -1,32 +1,30 @@
-<properties
-   pageTitle="管理 Azure SQL 数据仓库中的计算能力（概述）| Azure"
-   description="Azure SQL 数据仓库中的性能横向扩展功能。通过调整 DWU 数目进行横向扩展，或者通过暂停和恢复计算资源来节省成本。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="barbkess"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 管理 Azure SQL 数据仓库中的计算能力（概述）| Azure
+description: Azure SQL 数据仓库中的性能横向扩展功能。通过调整 DWU 数目进行横向扩展，或者通过暂停和恢复计算资源来节省成本。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: barbkess
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/12/2016"
-   ms.author="barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/12/2016
+ms.author: barbkess;sonyama
+---
 
 # 管理 Azure SQL 数据仓库中的计算能力（概述）
 
-> [AZURE.SELECTOR]
-- [概述](/documentation/articles/sql-data-warehouse-manage-compute-overview/)
-- [门户](/documentation/articles/sql-data-warehouse-manage-compute-portal/)
-- [PowerShell](/documentation/articles/sql-data-warehouse-manage-compute-powershell/)
-- [REST](/documentation/articles/sql-data-warehouse-manage-compute-rest-api/)
-- [TSQL](/documentation/articles/sql-data-warehouse-manage-compute-tsql/)
+> [!div class="op_single_selector"]
+- [概述](./sql-data-warehouse-manage-compute-overview.md)
+- [门户](./sql-data-warehouse-manage-compute-portal.md)
+- [PowerShell](./sql-data-warehouse-manage-compute-powershell.md)
+- [REST](./sql-data-warehouse-manage-compute-rest-api.md)
+- [TSQL](./sql-data-warehouse-manage-compute-tsql.md)
 
 SQL 数据仓库的体系结构对存储和计算功能进行了分隔，允许每项功能单独进行缩放。因此，你可以在扩大性能范围的同时节省成本，只需根据需要支付相关性能费用。
 
@@ -46,7 +44,7 @@ SQL 数据仓库的体系结构对存储和计算功能进行了分隔，允许�
 ### 如何进行性能缩放？
 
 若要对计算能力进行弹性增减，只需对数据库的[数据仓库单位 (DWU)][data warehouse units (DWUs)] 设置进行更改即可。随着添加更多的 DWU，性能将呈线性增加。在较高的 DWU 级别，若要显著改善性能，需添加 100 以上的 DWU。为了方便你选择有意义的 DWU 增长数，我们提供了会给出最佳结果的 DWU 级别。
- 
+
 若要调整 DWU，可以使用以下任何单个方法。
 
 * [通过 Azure 门户缩放计算能力][Scale compute power with Azure portal]
@@ -79,7 +77,7 @@ SQL 数据仓库的性能以线性方式缩放，在几秒内就能从某个计�
 
 ## 暂停计算
 
-[AZURE.INCLUDE [SQL Data Warehouse pause description（SQL 数据仓库暂停说明）](../../includes/sql-data-warehouse-pause-description.md)]
+[!INCLUDE [SQL Data Warehouse pause description（SQL 数据仓库暂停说明）](../../includes/sql-data-warehouse-pause-description.md)]
 
 若要暂停数据库，请使用下列任意方法之一。
 
@@ -91,7 +89,7 @@ SQL 数据仓库的性能以线性方式缩放，在几秒内就能从某个计�
 
 ## 恢复计算
 
-[AZURE.INCLUDE [SQL Data Warehouse resume description（SQL 数据仓库恢复说明）](../../includes/sql-data-warehouse-resume-description.md)]
+[!INCLUDE [SQL Data Warehouse resume description（SQL 数据仓库恢复说明）](../../includes/sql-data-warehouse-resume-description.md)]
 
 若要恢复数据库，请使用下列任意方法之一。
 
@@ -118,33 +116,33 @@ SQL 数据仓库的性能以线性方式缩放，在几秒内就能从某个计�
 <!--Image reference-->
 
 <!--Article references-->
-[data warehouse units (DWUs)]: /documentation/articles/sql-data-warehouse-overview-what-is/#data-warehouse-units
+[data warehouse units (DWUs)]: ./sql-data-warehouse-overview-what-is.md#data-warehouse-units
 
-[Scale compute power with Azure portal]: /documentation/articles/sql-data-warehouse-manage-compute-portal/#scale-compute-bk
-[Scale compute power with PowerShell]: /documentation/articles/sql-data-warehouse-manage-compute-powershell/#scale-compute-bk
-[Scale compute power with REST APIs]: /documentation/articles/sql-data-warehouse-manage-compute-rest-api/#scale-compute-bk
-[Scale compute power with TSQL]: /documentation/articles/sql-data-warehouse-manage-compute-tsql/#scale-compute-bk
+[Scale compute power with Azure portal]: ./sql-data-warehouse-manage-compute-portal.md#scale-compute-bk
+[Scale compute power with PowerShell]: ./sql-data-warehouse-manage-compute-powershell.md#scale-compute-bk
+[Scale compute power with REST APIs]: ./sql-data-warehouse-manage-compute-rest-api.md#scale-compute-bk
+[Scale compute power with TSQL]: ./sql-data-warehouse-manage-compute-tsql.md#scale-compute-bk
 
-[capacity limits]: /documentation/articles/sql-data-warehouse-service-capacity-limits/
+[capacity limits]: ./sql-data-warehouse-service-capacity-limits.md
 
-[Pause compute with Azure portal]: /documentation/articles/sql-data-warehouse-manage-compute-portal/#pause-compute-bk
-[Pause compute with PowerShell]: /documentation/articles/sql-data-warehouse-manage-compute-powershell/#pause-compute-bk
-[Pause compute with REST APIs]: /documentation/articles/sql-data-warehouse-manage-compute-rest-api/#pause-compute-bk
+[Pause compute with Azure portal]: ./sql-data-warehouse-manage-compute-portal.md#pause-compute-bk
+[Pause compute with PowerShell]: ./sql-data-warehouse-manage-compute-powershell.md#pause-compute-bk
+[Pause compute with REST APIs]: ./sql-data-warehouse-manage-compute-rest-api.md#pause-compute-bk
 
-[通过 Azure 门户恢复计算]: /documentation/articles/sql-data-warehouse-manage-compute-portal/#resume-compute-bk
-[通过 PowerShell 恢复计算]: /documentation/articles/sql-data-warehouse-manage-compute-powershell/#resume-compute-bk
-[通过 REST API 恢复计算]: /documentation/articles/sql-data-warehouse-manage-compute-rest-api/#resume-compute-bk
+[通过 Azure 门户恢复计算]: ./sql-data-warehouse-manage-compute-portal.md#resume-compute-bk
+[通过 PowerShell 恢复计算]: ./sql-data-warehouse-manage-compute-powershell.md#resume-compute-bk
+[通过 REST API 恢复计算]: ./sql-data-warehouse-manage-compute-rest-api.md#resume-compute-bk
 
-[Workload and concurrency managment]: /documentation/articles/sql-data-warehouse-develop-concurrency/
-[Table design overview]: /documentation/articles/sql-data-warehouse-tables-overview/
-[Table distribution]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[Table indexing]: /documentation/articles/sql-data-warehouse-tables-index/
-[Table partitioning]: /documentation/articles/sql-data-warehouse-tables-partition/
-[Table statistics]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[Best practices]: /documentation/articles/sql-data-warehouse-best-practices/
-[development overview]: /documentation/articles/sql-data-warehouse-overview-develop/
+[Workload and concurrency managment]: ./sql-data-warehouse-develop-concurrency.md
+[Table design overview]: ./sql-data-warehouse-tables-overview.md
+[Table distribution]: ./sql-data-warehouse-tables-distribute.md
+[Table indexing]: ./sql-data-warehouse-tables-index.md
+[Table partitioning]: ./sql-data-warehouse-tables-partition.md
+[Table statistics]: ./sql-data-warehouse-tables-statistics.md
+[Best practices]: ./sql-data-warehouse-best-practices.md
+[development overview]: ./sql-data-warehouse-overview-develop.md
 
-[SQL DB Contributor]: /documentation/articles/role-based-access-built-in-roles/#sql-db-contributor
+[SQL DB Contributor]: ../active-directory/role-based-access-built-in-roles.md#sql-db-contributor
 
 <!--MSDN references-->
 [ALTER DATABASE]: https://msdn.microsoft.com/zh-cn/library/mt204042.aspx

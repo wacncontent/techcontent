@@ -1,21 +1,21 @@
-<properties
-	pageTitle="在 Azure Active Directory 中为预先集成的应用自定义 SAML 令牌中颁发的声明 | Azure"
-	description="了解如何在 Azure Active Directory 中为预先集成的应用自定义 SAML 令牌中颁发的声明"
-	services="active-directory"
-	documentationCenter=""
-	authors="asmalser-msft"
-	manager="stevenpo"
-	editor=""/>
+---
+title: 在 Azure Active Directory 中为预先集成的应用自定义 SAML 令牌中颁发的声明 | Azure
+description: 了解如何在 Azure Active Directory 中为预先集成的应用自定义 SAML 令牌中颁发的声明
+services: active-directory
+documentationCenter: 
+authors: asmalser-msft
+manager: stevenpo
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="02/26/2016"
-	wacn.date="06/27/2016"
-	ms.author="asmalser"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 02/26/2016
+wacn.date: 06/27/2016
+ms.author: asmalser
+---
 
 #在 Azure Active Directory 中为预先集成的应用自定义 SAML 令牌中颁发的声明
 
@@ -57,13 +57,13 @@ Azure Active Directory 目前支持 Azure AD 应用库中数千个预先集成�
 
 如果指定的用户没有针对选定属性存储的值，则不会在令牌中颁发该声明。
 
-**注意：**仅当在使用 [Azure AD Connect 工具](/documentation/articles/active-directory-aadconnect/)从本地 Active Directory 同步用户数据时，才支持 **user.onpremisesecurityidentifier** 和 **user.onpremisesamaccountname**。
+**注意：**仅当在使用 [Azure AD Connect 工具](./active-directory-aadconnect.md)从本地 Active Directory 同步用户数据时，才支持 **user.onpremisesecurityidentifier** 和 **user.onpremisesamaccountname**。
 
 ## 相关文章
 
-- [有关 Azure Active Directory 中应用程序管理的文章索引](/documentation/articles/active-directory-apps-index/)
-- [排查基于 SAML 的单一登录问题](/documentation/articles/active-directory-saml-debugging/)
-	
+- [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
+- [排查基于 SAML 的单一登录问题](./active-directory-saml-debugging.md)
+
 <!--Image references-->
 [1]: ./media/active-directory-saml-claims-customization/claimscustomization1.png
 [2]: ./media/active-directory-saml-claims-customization/claimscustomization2.png

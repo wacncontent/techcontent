@@ -1,34 +1,33 @@
-<properties
-    pageTitle="使用 URL 路由规则创建应用程序网关 | Azure"
-    description="本页提供有关使用 URL 路由规则创建、配置 Azure 应用程序网关的说明"
-    documentationcenter="na"
-    services="application-gateway"
-    author="georgewallace"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: 使用 URL 路由规则创建应用程序网关 | Azure
+description: 本页提供有关使用 URL 路由规则创建、配置 Azure 应用程序网关的说明
+documentationcenter: na
+services: application-gateway
+author: georgewallace
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="d141cfbb-320a-4fc9-9125-10001c6fa4cf"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/15/2016"
-    wacn.date="01/03/2017"
-    ms.author="gwallace" />  
-
+ms.assetid: d141cfbb-320a-4fc9-9125-10001c6fa4cf
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/15/2016
+wacn.date: 01/03/2017
+ms.author: gwallace
+---
 
 # 使用基于路径的路由创建应用程序网关
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/application-gateway-create-url-route-portal/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-create-url-route-arm-ps/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./application-gateway-create-url-route-portal.md)
+- [Azure Resource Manager PowerShell](./application-gateway-create-url-route-arm-ps.md)
 
 借助基于 URL 路径的路由，可根据 Http 请求的 URL 路径来关联路由。它将检查是否有路由连接到针对应用程序网关中的 URL 列表配置的后端池，并将网络流量发送到定义的后端池。基于 URL 的路由的常见用法是将不同内容类型的请求负载均衡到不同的后端服务器池。
 
 基于 URL 的路由将新的规则类型引入应用程序网关。应用程序网关有两种规则类型：基本和 PathBasedRouting。基本规则类型针对后端池提供轮循机制服务，而 PathBasedRouting 除了轮循机制分发以外，还在选择后端池时考虑请求 URL 的路径模式。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 PathPattern：要匹配的路径模式列表。每个模式必须以 / 开头，“*”只允许放在末尾处。有效示例包括 /xyz、/xyz* 或 /xyz/*。发送到路径匹配器的字符串不会在第一个“?”或“#”之后包含任何文本，不允许使用这些字符。
 
 ## 方案
@@ -38,7 +37,6 @@ PathPattern：要匹配的路径模式列表。每个模式必须以 / 开头，
 对 http://contoso.com/image* 的请求会路由到图像服务器池 (pool1)，对 http://contoso.com/video* 的请求会路由到视频服务器池 (pool2)。如果没有匹配的路径模式，则选择默认服务器池 (pool1)。
 
 ![url 路由](./media/application-gateway-create-url-route-arm-ps/figure1.png)  
-
 
 ## 准备阶段
 
@@ -69,7 +67,7 @@ PathPattern：要匹配的路径模式列表。每个模式必须以 / 开头，
 
 ## 创建 Resource Manager 的资源组
 
-确保使用最新版本的 Azure PowerShell。[将 Windows PowerShell 与 Resource Manager 配合使用](/documentation/articles/powershell-azure-resource-manager/)中提供了详细信息。
+确保使用最新版本的 Azure PowerShell。[将 Windows PowerShell 与 Resource Manager 配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)中提供了详细信息。
 
 ### 步骤 1
 
@@ -105,8 +103,8 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 在上面的示例中，我们在位置“中国北部”创建了名为“appgw-RG”的资源组。
 
-> [AZURE.NOTE]
-如果需要为应用程序网关配置自定义探测，请参阅[使用 PowerShell 创建带自定义探测的应用程序网关](/documentation/articles/application-gateway-create-probe-ps/)。有关详细信息，请查看[自定义探测和运行状况监视](/documentation/articles/application-gateway-probe-overview/)。
+> [!NOTE]
+如果需要为应用程序网关配置自定义探测，请参阅[使用 PowerShell 创建带自定义探测的应用程序网关](./application-gateway-create-probe-ps.md)。有关详细信息，请查看[自定义探测和运行状况监视](./application-gateway-probe-overview.md)。
 > 
 > 
 
@@ -248,6 +246,6 @@ Azure Resource Manager 要求所有资源组指定一个位置。此位置将用
 
 ## 后续步骤
 
-如果要了解安全套接字层 (SSL) 卸载，请参阅[配置应用程序网关以进行 SSL 卸载](/documentation/articles/application-gateway-ssl-arm/)。
+如果要了解安全套接字层 (SSL) 卸载，请参阅[配置应用程序网关以进行 SSL 卸载](./application-gateway-ssl-arm.md)。
 
 <!---HONumber=Mooncake_1226_2016-->

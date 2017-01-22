@@ -1,23 +1,22 @@
-<properties
-    pageTitle="Media Encoder Standard 架构 | Azure"
-    description="本主题概述 Media Encoder Standard 架构。"
-    author="Juliako"
-    manager="erikre"
-    editor=""
-    services="media-services"
-    documentationcenter="" />  
+---
+title: Media Encoder Standard 架构 | Azure
+description: 本主题概述 Media Encoder Standard 架构。
+author: Juliako
+manager: erikre
+editor: 
+services: media-services
+documentationcenter: 
 
-<tags
-    ms.assetid="4c060062-8ef2-41d9-834e-e81e8eafcf2e"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/20/2016"
-    wacn.date="12/12/2016"
-    ms.author="juliako" />  
-
+ms.assetid: 4c060062-8ef2-41d9-834e-e81e8eafcf2e
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/20/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 # Media Encoder Standard 架构
 本主题介绍 [Media Encoder Standard 预设](https://msdn.microsoft.com/zh-cn/library/azure/mt269960.aspx)以其为基础的 XML 架构的一些元素和类型。本主题介绍元素及其有效值。将在以后发布完整架构。
@@ -28,8 +27,8 @@
 ### 元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| **编码** |[编码](/documentation/articles/media-services-mes-schema/#Encoding) |根元素，指示要编码的输入源。 |
-| **Outputs** |[Outputs](/documentation/articles/media-services-mes-schema/#Output) |所需输出文件的集合。 |
+| **编码** |[编码](./media-services-mes-schema.md#Encoding) |根元素，指示要编码的输入源。 |
+| **Outputs** |[Outputs](./media-services-mes-schema.md#Output) |所需输出文件的集合。 |
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -42,11 +41,11 @@
 ### 元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| **H264Video** |[H264Video](/documentation/articles/media-services-mes-schema/#H264Video) |视频的 H.264 编码的设置。 |
-| **AACAudio** |[AACAudio](/documentation/articles/media-services-mes-schema/#AACAudio) |音频的 AAC 编码的设置。 |
-| **BmpImage** |[BmpImage](/documentation/articles/media-services-mes-schema/#BmpImage) |Bmp 图像的设置。 |
-| **PngImage** |[PngImage](/documentation/articles/media-services-mes-schema/#PngImage) |Png 图像的设置。 |
-| **JpgImage** |[JpgImage](/documentation/articles/media-services-mes-schema/#JpgImage) |Jpg 图像的设置。 |
+| **H264Video** |[H264Video](./media-services-mes-schema.md#H264Video) |视频的 H.264 编码的设置。 |
+| **AACAudio** |[AACAudio](./media-services-mes-schema.md#AACAudio) |音频的 AAC 编码的设置。 |
+| **BmpImage** |[BmpImage](./media-services-mes-schema.md#BmpImage) |Bmp 图像的设置。 |
+| **PngImage** |[PngImage](./media-services-mes-schema.md#PngImage) |Png 图像的设置。 |
+| **JpgImage** |[JpgImage](./media-services-mes-schema.md#JpgImage) |Jpg 图像的设置。 |
 
 ## <a name="H264Video"></a> H264Video
 ### 元素
@@ -57,17 +56,16 @@
 | <p>**SceneChangeDetection**</p><p> minOccurs="0"</p><p> **default="false"**</p> |**xs:boolean** |如果设置为 true，编码器尝试检测视频中的场景更改并插入 IDR 帧。 |
 | <p>**Complexity**</p><p> minOccurs="0"</p><p> **default="Balanced"**</p> |**xs:string** |<p>控制编码速度和视频质量的平衡。可以是以下值之一： **Speed**、**Balanced** 或 **Quality**</p><p> 默认值：**Balanced**</p> |
 | <p>**SyncMode**</p><p> minOccurs="0"</p> | |将在未来版本中公开功能。 |
-| <p>**H264Layers**</p><p> minOccurs="0"</p> |[H264Layers](/documentation/articles/media-services-mes-schema/#H264Layers) |输出视频层的集合。 |
+| <p>**H264Layers**</p><p> minOccurs="0"</p> |[H264Layers](./media-services-mes-schema.md#H264Layers) |输出视频层的集合。 |
 
 ## <a name="H264Layers"></a> H264Layers
 ### 元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**H264Layer**</p><p> minOccurs="0" maxOccurs="unbounded"</p> |[H264Layer](/documentation/articles/media-services-mes-schema/#H264Layer) |H264 层的集合。 |
+| <p>**H264Layer**</p><p> minOccurs="0" maxOccurs="unbounded"</p> |[H264Layer](./media-services-mes-schema.md#H264Layer) |H264 层的集合。 |
 
 ## <a name="H264Layer"></a> H264Layer
-> [AZURE.NOTE]视频限制基于 [H264 级别](https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC#Levels)表中描述的值。
-
+> [!NOTE]视频限制基于 [H264 级别](https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC#Levels)表中描述的值。
 
 ### 元素
 | 名称 | 类型 | 说明 |
@@ -104,7 +102,7 @@
 ### 组
 | 引用 | 说明 |
 | --- | --- |
-| <p>[AudioGroup](/documentation/articles/media-services-mes-schema/#AudioGroup)</p><p> minOccurs="0"</p> |请参阅 [AudioGroup](/documentation/articles/media-services-mes-schema/#AudioGroup) 的说明，了解可为每个配置文件设置的通道、采样率和比特率的恰当数量。 |
+| <p>[AudioGroup](./media-services-mes-schema.md#AudioGroup)</p><p> minOccurs="0"</p> |请参阅 [AudioGroup](./media-services-mes-schema.md#AudioGroup) 的说明，了解可为每个配置文件设置的通道、采样率和比特率的恰当数量。 |
 
 ## <a name="AudioGroup"></a> AudioGroup
 有关每个配置文件的有效值的详细信息，请参阅随后的“音频编解码器详细信息”表。
@@ -122,7 +120,6 @@
 **AACLC**|<p>1:</p><p> - 11025 : 8 &lt;= bitrate &lt; 16</p><p> - 12000 : 8 &lt;= bitrate &lt; 16</p><p> - 16000 : 8 &lt;= bitrate &lt;32</p><p>- 22050 : 24 &lt;= bitrate &lt; 32</p><p> - 24000 : 24 &lt;= bitrate &lt; 32</p><p> - 32000 : 32 &lt;= bitrate &lt;= 192</p><p> - 44100 : 56 &lt;= bitrate &lt;= 288</p><p> - 48000 : 56 &lt;= bitrate &lt;= 288</p><p> - 88200 : 128 &lt;= bitrate &lt;= 288</p><p> - 96000 : 128 &lt;= bitrate &lt;= 288</p><p> 2:</p><p> - 11025 : 16 &lt;= bitrate &lt; 24</p><p> - 12000 : 16 &lt;= bitrate &lt; 24</p><p> - 16000 : 16 &lt;= bitrate &lt; 40</p><p> - 22050 : 32 &lt;= bitrate &lt; 40</p><p> - 24000 : 32 &lt;= bitrate &lt; 40</p><p> - 32000 : 40 &lt;= bitrate &lt;= 384</p><p> - 44100 : 96 &lt;= bitrate &lt;= 576</p><p> - 48000 : 96 &lt;= bitrate &lt;= 576</p><p> - 88200 : 256 &lt;= bitrate &lt;= 576</p><p> - 96000 : 256 &lt;= bitrate &lt;= 576</p><p> 5/6:</p><p> - 32000 : 160 &lt;= bitrate &lt;= 896</p><p> - 44100 : 240 &lt;= bitrate &lt;= 1024</p><p> - 48000 : 240 &lt;= bitrate &lt;= 1024</p><p> - 88200 : 640 &lt;= bitrate &lt;= 1024</p><p> - 96000 : 640 &lt;= bitrate &lt;= 1024</p><p> 8:</p><p> - 32000 : 224 &lt;= bitrate &lt;= 1024</p><p> - 44100 : 384 &lt;= bitrate &lt;= 1024</p><p> - 48000 : 384 &lt;= bitrate &lt;= 1024</p><p> - 88200 : 896 &lt;= bitrate &lt;= 1024</p><p> - 96000 : 896 &lt;= bitrate &lt;= 1024</p>
 **HEAACV1**|<p>1:</p><p> - 22050 : bitrate = 8</p><p> - 24000 : 8 &lt;= bitrate &lt;= 10</p><p> - 32000 : 12 &lt;= bitrate &lt;= 64</p><p> - 44100 : 20 &lt;= bitrate &lt;= 64</p><p> - 48000 : 20 &lt;= bitrate &lt;= 64</p><p> - 88200 : bitrate = 64</p><p> 2:</p><p> - 32000 : 16 &lt;= bitrate &lt;= 128</p><p> - 44100 : 16 &lt;= bitrate &lt;= 128</p><p> - 48000 : 16 &lt;= bitrate &lt;= 128</p><p> - 88200 : 96 &lt;= bitrate &lt;= 128</p><p> - 96000 : 96 &lt;= bitrate &lt;= 128</p><p> 5/6:</p><p> - 32000 : 64 &lt;= bitrate &lt;= 320</p><p> - 44100 : 64 &lt;= bitrate &lt;= 320</p><p> - 48000 : 64 &lt;= bitrate &lt;= 320</p><p> - 88200 : 256 &lt;= bitrate &lt;= 320</p><p> - 96000 : 256 &lt;= bitrate &lt;= 320</p><p> 8:</p><p> - 32000 : 96 &lt;= bitrate &lt;= 448</p><p> - 44100 : 96 &lt;= bitrate &lt;= 448</p><p> - 48000 : 96 &lt;= bitrate &lt;= 448</p><p> - 88200 : 384 &lt;= bitrate &lt;= 448</p><p> - 96000 : 384 &lt;= bitrate &lt;= 448 </p>
 **HEAACV2**|<p>2:</p><p> - 22050 : 8 &lt;= bitrate &lt;= 10</p><p> - 24000 : 8 &lt;= bitrate &lt;= 10</p><p> - 32000 : 12 &lt;= bitrate &lt;= 64</p><p> - 44100 : 20 &lt;= bitrate &lt;= 64</p><p> - 48000 : 20 &lt;= bitrate &lt;= 64</p><p> - 88200 : 64 &lt;= bitrate &lt;= 64</p> 
-  
 
 ## <a name="Clip"></a> 剪辑
 ### 属性
@@ -156,7 +153,7 @@
 | **启动** |**xs:string** | |
 | **步骤** |**xs:string** | |
 | **范围** |**xs:string** | |
-| **PreserveResolutionAfterRotation** |**xs:boolean** |有关详细说明，请参阅以下部分：[PreserveResolutionAfterRotation](/documentation/articles/media-services-mes-schema/#PreserveResolutionAfterRotation) |
+| **PreserveResolutionAfterRotation** |**xs:boolean** |有关详细说明，请参阅以下部分：[PreserveResolutionAfterRotation](./media-services-mes-schema.md#PreserveResolutionAfterRotation) |
 
 ### <a name="PreserveResolutionAfterRotation"></a> PreserveResolutionAfterRotation
 建议将 PreserveResolutionAfterRotation 标志与以百分比表示的分辨率值（Width=“100%”，Height =“100%”）结合使用。
@@ -165,16 +162,13 @@
 
 ![MESRoation1](./media/media-services-shemas/media-services-mes-roation1.png)  
 
-
 但是，这意味着如果捕获到输入视频有旋转（例如竖放的智能手机或平板电脑），则默认情况下，MES 会将编码分辨率设置（宽度、高度）应用到输入视频，然后针对旋转进行校正。有关示例，请参阅下图。预设使用 Width = “100%”、Height = “100%”，MES 将其解释为要求输出为 1280 像素宽和 720 像素高。旋转视频后，将缩小图片以适应窗口大小，导致左右黑边。
 
 ![MESRoation2](./media/media-services-shemas/media-services-mes-roation2.png)  
 
-
 如果不需要以上行为，可使用 PreserveResolutionAfterRotation 标志并将其设置为“true”（默认为“false”）。因此，如果预设为 Width = “100%”，Height = “100%” 且 PreserveResolutionAfterRotation 设置为“true”，则宽 1280 像素、高 720 像素且具有 90 度旋转的输入视频将生成宽 720 像素、高 1280 像素的未旋转输出。请参见下图。
 
 ![MESRoation3](./media/media-services-shemas/media-services-mes-roation3.png)  
-
 
 ## <a name="FormatGroup"></a> FormatGroup（组）
 ### 元素
@@ -225,37 +219,37 @@
 ### 元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**PngLayer**</p><p> minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[PngLayer](/documentation/articles/media-services-mes-schema/#PngLayer) | |
+| <p>**PngLayer**</p><p> minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[PngLayer](./media-services-mes-schema.md#PngLayer) | |
 
 ## <a name="BmpLayers"></a> BmpLayers
 ### 元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**BmpLayer**</p><p> minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[BmpLayer](/documentation/articles/media-services-mes-schema/#BmpLayer) | |
+| <p>**BmpLayer**</p><p> minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[BmpLayer](./media-services-mes-schema.md#BmpLayer) | |
 
 ## <a name="JpgLayers"></a> JpgLayers
 ### 元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**JpgLayer**</p><p> minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[JpgLayer](/documentation/articles/media-services-mes-schema/#JpgLayer) | |
+| <p>**JpgLayer**</p><p> minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[JpgLayer](./media-services-mes-schema.md#JpgLayer) | |
 
 ## <a name="BmpImage"></a> BmpImage（从视频继承的复杂类型）
 ### 元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**PngLayers**</p><p> minOccurs="0"</p> |[PngLayers](/documentation/articles/media-services-mes-schema/#PngLayers) |Png 层 |
+| <p>**PngLayers**</p><p> minOccurs="0"</p> |[PngLayers](./media-services-mes-schema.md#PngLayers) |Png 层 |
 
 ## <a name="JpgImage"></a> JpgImage（从视频继承的复杂类型）
 ### 元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**PngLayers**</p><p> minOccurs="0"</p> |[PngLayers](/documentation/articles/media-services-mes-schema/#PngLayers) |Png 层 |
+| <p>**PngLayers**</p><p> minOccurs="0"</p> |[PngLayers](./media-services-mes-schema.md#PngLayers) |Png 层 |
 
 ## <a name="PngImage"></a> PngImage（从视频继承的复杂类型）
 ### 元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**PngLayers**</p><p> minOccurs="0"</p> |[PngLayers](/documentation/articles/media-services-mes-schema/#PngLayers) |Png 层 |
+| <p>**PngLayers**</p><p> minOccurs="0"</p> |[PngLayers](./media-services-mes-schema.md#PngLayers) |Png 层 |
 
 ## 示例
 有关基于此架构生成的 XML 预设的示例，请参阅 [MES (Media Encoder Standard) 的任务预设](https://msdn.microsoft.com/zh-cn/library/azure/mt269960.aspx)。

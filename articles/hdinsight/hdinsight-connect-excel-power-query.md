@@ -1,27 +1,26 @@
-<properties
-	pageTitle="使用 Power Query 将 Excel 连接到 Hadoop | Azure"
-	description="了解如何利用商业智能组件和使用 Power Query for Excel 访问 HDInsight 上的 Hadoop 中存储的数据。"
-	services="hdinsight"
-	documentationCenter=""
-	tags="azure-portal"
-	authors="mumian"
-	manager="paulettm"
-	editor="cgronlun"/>
+---
+title: 使用 Power Query 将 Excel 连接到 Hadoop | Azure
+description: 了解如何利用商业智能组件和使用 Power Query for Excel 访问 HDInsight 上的 Hadoop 中存储的数据。
+services: hdinsight
+documentationCenter: 
+tags: azure-portal
+authors: mumian
+manager: paulettm
+editor: cgronlun
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/19/2016"
-	wacn.date="12/30/2016"
-	ms.author="jgao"/>
-
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/19/2016
+wacn.date: 12/30/2016
+ms.author: jgao
+---
 
 #使用 Power Query 将 Excel 连接到 Hadoop
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 Microsoft 大数据解决方案的一个关键功能是，将 Microsoft 商业智能 (BI) 组件与 Azure HDInsight 中的 Hadoop 群集相集成。此集成的一个主要示例是能够使用 Microsoft Power Query for Excel 外接程序将 Excel 连接到包含与 Hadoop 群集关联的数据的 Azure 存储帐户。本文将逐步说明如何设置和使用 Power Query 来查询与 HDInsight 管理的 Hadoop 群集关联的数据。
 
@@ -32,7 +31,6 @@ Microsoft 大数据解决方案的一个关键功能是，将 Microsoft 商业�
 - **HDInsight 群集**。若要配置 HDInsight 群集，请参阅 [Azure HDInsight 入门][hdinsight-get-started]。
 - 运行 Windows 7、Windows Server 2008 R2 或更高版本操作系统的**工作站**。
 - **Office 2013 Professional Plus、Office 365 ProPlus、Excel 2013 Standalone 或 Office 2010 Professional Plus**。
-
 
 ## <a id="InstallPowerQuery"></a> 安装 Power Query
 
@@ -52,11 +50,11 @@ Microsoft 大数据解决方案的一个关键功能是，将 Microsoft 商业�
 
 3. 依次单击“Power Query”菜单、“来自 Azure”和“来自 Azure HDInsight”。
 
-	![HDI.PowerQuery.SelectHdiSource][image-hdi-powerquery-hdi-source]
+    ![HDI.PowerQuery.SelectHdiSource][image-hdi-powerquery-hdi-source]
 
-	**注意：**如果未显示“Power Query”菜单，请转到“文件”>“选项”>“外接程序”，从页面底部的下拉“管理器”框中选择“COM 外接程序”。选择“转到...”按钮，并且确认已选中 Power Query for Excel 外接程序所对应的框。
+    **注意：**如果未显示“Power Query”菜单，请转到“文件”>“选项”>“外接程序”，从页面底部的下拉“管理器”框中选择“COM 外接程序”。选择“转到...”按钮，并且确认已选中 Power Query for Excel 外接程序所对应的框。
 
-	**注意：**Power Query 还允许你通过单击“从其他源”从 HDFS 中导入数据。
+    **注意：**Power Query 还允许你通过单击“从其他源”从 HDFS 中导入数据。
 
 3. 对于“帐户名称”，请输入与你的群集相关联的 Azure Blob 存储帐户的名称，然后单击“确定”。（对于 Azure 中国区，**帐户名称**必须是一个完整的 URL，如: https://<你的帐户名称>.blob.core.chinacloudapi.cn/），这可以是默认存储帐户或链接存储帐户。
 
@@ -66,11 +64,11 @@ Microsoft 大数据解决方案的一个关键功能是，将 Microsoft 商业�
 
 6. 在“名称”列中找到 **HiveSampleData.txt**（文件夹路径是 **../hive/warehouse/hivesampletable/**），然后单击 HiveSampleData.txt 左侧的“二进制”。HiveSampleData.txt 随所有群集提供。（可选）可使用自己的文件。
 
-	![HDI.PowerQuery.ImportData][image-hdi-powerquery-importdata]
+    ![HDI.PowerQuery.ImportData][image-hdi-powerquery-importdata]
 
 7. 可根据需要重命名列名称。准备就绪后，单击“关闭并加载”。数据已加载到工作簿：
 
-	![HDI.PowerQuery.ImportedTable][image-hdi-powerquery-imported-table]
+    ![HDI.PowerQuery.ImportedTable][image-hdi-powerquery-imported-table]
 
 ## <a id="NextSteps"></a>后续步骤
 
@@ -79,9 +77,9 @@ Microsoft 大数据解决方案的一个关键功能是，将 Microsoft 商业�
 * [使用 Microsoft Hive ODBC Driver 将 Excel 连接到 HDInsight][hdinsight-ODBC]
 * [将数据上传到 HDInsight][hdinsight-upload-data]
 
-[hdinsight-ODBC]: /documentation/articles/hdinsight-connect-excel-hive-ODBC-driver/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
+[hdinsight-ODBC]: ./hdinsight-connect-excel-hive-ODBC-driver.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
 
 [image-hdi-powerquery-hdi-source]: ./media/hdinsight-connect-excel-power-query/HDI.PowerQuery.SelectHdiSource.png
 [image-hdi-powerquery-importdata]: ./media/hdinsight-connect-excel-power-query/HDI.PowerQuery.ImportData.png

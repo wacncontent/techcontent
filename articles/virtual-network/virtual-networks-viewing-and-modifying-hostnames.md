@@ -1,20 +1,21 @@
-<properties 
-   pageTitle="查看和修改主机名 | Azure"
-   description="如何查看和更改 Azure 虚拟机、Web 角色和辅助角色的主机名以进行名称解析"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="joaoma"
-   manager="carmonm"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="04/27/2016"
-   wacn.date="12/26/2016"
-   ms.author="jdial" />
+---
+title: 查看和修改主机名 | Azure
+description: 如何查看和更改 Azure 虚拟机、Web 角色和辅助角色的主机名以进行名称解析
+services: virtual-network
+documentationCenter: na
+authors: joaoma
+manager: carmonm
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 04/27/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 查看和修改主机名
 
@@ -56,7 +57,7 @@
 
 1. 为每个 **RoleInstance** 元素查找 **HostName** 元素。
 
->[AZURE.WARNING] 还可通过以下方式从 REST 调用响应，查看云服务的内部域后缀：查看 **InternalDnsSuffix** 元素；通过在远程桌面会话 (Windows) 中的命令提示符下运行 ipconfig /all；通过从 SSH 终端 (Linux) 运行 cat /etc/resolv.conf。
+>[!WARNING] 还可通过以下方式从 REST 调用响应，查看云服务的内部域后缀：查看 **InternalDnsSuffix** 元素；通过在远程桌面会话 (Windows) 中的命令提示符下运行 ipconfig /all；通过从 SSH 终端 (Linux) 运行 cat /etc/resolv.conf。
 
 ## 修改主机名
 
@@ -64,12 +65,12 @@
 
 ## 后续步骤
 
-[名称解析 (DNS)](/documentation/articles/virtual-networks-name-resolution-for-vms-and-role-instances)
+[名称解析 (DNS)](./virtual-networks-name-resolution-for-vms-and-role-instances.md)
 
 [Azure 服务配置架构 (.cscfg)](https://msdn.microsoft.com/zh-cn/library/azure/ee758710.aspx)
 
 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100)
 
-[使用网络配置文件指定 DNS 设置](/documentation/articles/virtual-networks-specifying-a-dns-settings-in-a-virtual-network-configuration-file)
+[使用网络配置文件指定 DNS 设置](./virtual-networks-specifying-a-dns-settings-in-a-virtual-network-configuration-file.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

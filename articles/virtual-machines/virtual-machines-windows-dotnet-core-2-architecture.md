@@ -1,24 +1,23 @@
-<properties
-    pageTitle="使用 Azure Resource Manager 模板部署计算资源 | Azure"
-    description="Azure 虚拟机 DotNet Core 教程"
-    services="virtual-machines-windows"
-    documentationcenter="virtual-machines"
-    author="neilpeterson"
-    manager="timlt"
-    editor="tysonn"
-    tags="azure-resource-manager" />  
+---
+title: 使用 Azure Resource Manager 模板部署计算资源 | Azure
+description: Azure 虚拟机 DotNet Core 教程
+services: virtual-machines-windows
+documentationcenter: virtual-machines
+author: neilpeterson
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="b026fe81-1bc1-4899-ac32-886091671498"
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="infrastructure-services"
-    ms.date="11/21/2016"
-    wacn.date="12/20/2016"
-    ms.author="nepeters" />  
-
+ms.assetid: b026fe81-1bc1-4899-ac32-886091671498
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 11/21/2016
+wacn.date: 12/20/2016
+ms.author: nepeters
+---
 
 # 使用 Azure Resource Manager 模板的应用程序体系结构
 开发 Azure Resource Manager 部署时，需要将计算要求映射到 Azure 资源和服务。如果应用程序由多个 http 终结点、一个数据库和一个数据缓存服务组成，则需要合理化托管其中每个组件的 Azure 资源。例如，示例音乐应用商店应用程序包含一个托管在虚拟机上的 Web 应用程序，以及一个托管在 Azure SQL 数据库中的 SQL 数据库。
@@ -32,7 +31,7 @@
 
 单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [虚拟机 JSON](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-windows/azuredeploy.json#L285)。
 
->[AZURE.NOTE] 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE] 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”，将“database.windows.net”替换为“database.chinacloudapi.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
     {
       {
@@ -62,7 +61,6 @@
 部署后，可以在 Azure 门户预览中查看虚拟机属性。
 
 ![虚拟机](./media/virtual-machines-windows-dotnet-core/vm-win.png)  
-
 
 ## 存储帐户
 存储帐户有许多存储选项和功能。在 Azure 虚拟机的上下文中，存储帐户保存虚拟机的虚拟硬盘和其他任何数据磁盘。音乐应用商店示例包含一个存储帐户，其中保存了部署中每个虚拟机的虚拟硬盘。
@@ -99,13 +97,11 @@
 
 ![存储帐户](./media/virtual-machines-windows-dotnet-core/storacct-win.png)  
 
-
 单击进入存储帐户 Blob 容器，即可查看使用模板部署的每个虚拟机的虚拟硬盘文件。
 
 ![虚拟硬盘](./media/virtual-machines-windows-dotnet-core/vhd-win.png)  
 
-
-有关 Azure 存储的信息，请参阅 [Azure 存储文档](/documentation/services/storage/)。
+有关 Azure 存储的信息，请参阅 [Azure 存储文档](../storage/index.md)。
 
 ## 虚拟网络
 如果虚拟机需要内部网络功能（例如与其他虚拟机和 Azure 资源通信的功能），则需要配置 Azure 虚拟网络。创建虚拟网络不意味着能够从 Internet 访问虚拟机。公共连接需要一个公共 IP 地址，本系列教程的后续文章会详细说明。
@@ -146,7 +142,6 @@
 在 Azure 门户预览中，虚拟网络如下图所示。请注意，使用模板部署的所有虚拟机都已附加到虚拟网络。
 
 ![虚拟网络](./media/virtual-machines-windows-dotnet-core/vnet-win.png)  
-
 
 ## 网络接口
  网络接口将虚拟机连接到虚拟网络，更具体地说，是连接到虚拟网络中定义的子网。
@@ -212,8 +207,7 @@
 
 ![网络接口](./media/virtual-machines-windows-dotnet-core/nic-win.png)  
 
-
-有关 Azure 虚拟网络的详细信息，请参阅 [Azure 虚拟网络文档](/documentation/services/networking/)。
+有关 Azure 虚拟网络的详细信息，请参阅 [Azure 虚拟网络文档](../virtual-network/index.md)。
 
 ## Azure SQL 数据库
 除了部署托管音乐应用商店网站的虚拟机以外，还需要部署一个 Azure SQL 数据库来托管音乐应用商店数据库。利用 Azure SQL 数据库的好处在于不需要构建另一组虚拟机，可将缩放性和可用性内置在服务中。
@@ -256,12 +250,11 @@ Azure 门户预览中显示的 SQL Server 和 MusicStore 数据库视图。
 
 ![SQL Server](./media/virtual-machines-windows-dotnet-core/sql-win.png)  
 
-
-有关部署 Azure SQL 数据库的详细信息，请参阅 [Azure SQL 数据库文档](/documentation/services/sql-databases/)。
+有关部署 Azure SQL 数据库的详细信息，请参阅 [Azure SQL 数据库文档](../sql-database/index.md)。
 
 ## 后续步骤
 <hr>
 
-[步骤 2 - Azure Resource Manager 模板中的访问权限和安全性](/documentation/articles/virtual-machines-windows-dotnet-core-3-access-security/)
+[步骤 2 - Azure Resource Manager 模板中的访问权限和安全性](./virtual-machines-windows-dotnet-core-3-access-security.md)
 
 <!---HONumber=Mooncake_1212_2016-->

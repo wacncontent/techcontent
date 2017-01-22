@@ -1,33 +1,32 @@
-<properties
-   pageTitle="常见问题"
-   description="Power BI Embedded 常见问题解答"
-   services="power-bi-embedded"
-   documentationCenter=""
-   authors="mgblythe"
-   manager="NA"
-   editor=""
-   tags=""/>
+---
+title: 常见问题
+description: Power BI Embedded 常见问题解答
+services: power-bi-embedded
+documentationCenter: 
+authors: mgblythe
+manager: NA
+editor: 
+tags: 
 
-<tags
-   ms.service="power-bi-embedded"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="powerbi"
-   ms.date="07/05/2016"
-   ms.author="mblythe"
-   wacn.date="01/13/2017"/>  
-
+ms.service: power-bi-embedded
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: powerbi
+ms.date: 07/05/2016
+ms.author: mblythe
+wacn.date: 01/13/2017
+---
 
 # Power BI Embedded 常见问题解答
 
 ## 有关 Power BI Embedded 的最新公告是什么？
 
-Power BI Embedded 服务现已公开发布了标准 GA SLA。若要了解有关此版本的详细信息，请参[新增功能](/documentation/articles/power-bi-embedded-whats-new/)。
+Power BI Embedded 服务现已公开发布了标准 GA SLA。若要了解有关此版本的详细信息，请参[新增功能](./power-bi-embedded-whats-new.md)。
 
 ## Power BI Embedded 是什么？
 
-Power BI Embedded 现已公开发布。Power BI Embedded 是一项 Azure 服务，应用程序开发人员可以通过该服务将令人惊叹的完整交互式报表和可视化元素嵌入到面向客户的应用中，使客户无需花费时间和费用从头开始生成其自己的控件。现在，全球 9 个数据中心内都提供了包含 SLA 的 Power BI Embedded。此服务中还提供了增强的功能，例如，支持通过 Power BI Embedded 中的行级安全性 (RLS) 提供数据安全性以用于高级筛选。Power BI Embedded 定价模型也进行了简化和更新。若要了解详细信息，请参阅 [Power BI Embedded](/home/features/power-bi-embedded/)。
+Power BI Embedded 现已公开发布。Power BI Embedded 是一项 Azure 服务，应用程序开发人员可以通过该服务将令人惊叹的完整交互式报表和可视化元素嵌入到面向客户的应用中，使客户无需花费时间和费用从头开始生成其自己的控件。现在，全球 9 个数据中心内都提供了包含 SLA 的 Power BI Embedded。此服务中还提供了增强的功能，例如，支持通过 Power BI Embedded 中的行级安全性 (RLS) 提供数据安全性以用于高级筛选。Power BI Embedded 定价模型也进行了简化和更新。若要了解详细信息，请参阅 [Power BI Embedded](https://www.azure.cn/home/features/power-bi-embedded/)。
 
 ## 谁想要使用 Power BI Embedded，为什么？
 
@@ -55,15 +54,15 @@ Power BI Embedded 仅用于为供第三方使用而提供的应用程序。如�
 
 ## 对于该服务，可用的 SLA 是什么？
 
-Power BI Embedded 具有 Azure 标准 SLA。有关详细信息，请参阅[服务级别协议](/support/legal/sla/)。
+Power BI Embedded 具有 Azure 标准 SLA。有关详细信息，请参阅[服务级别协议](https://www.azure.cn/support/legal/sla/)。
 
 ## 此服务是如何定价的？
 
-有关定价信息，请参阅 [Power BI Embedded 定价](/pricing/details/power-bi-embedded/)。
+有关定价信息，请参阅 [Power BI Embedded 定价](https://www.azure.cn/pricing/details/power-bi-embedded/)。
 
 ## 什么是呈现以及它是如何计费的？
 
->[AZURE.NOTE] Power BI Embedded 在预览阶段提供了按呈现的折扣定价，但根据用户反馈，以后将停止使用这种定价方式，而采用按会话定价。从按呈现定价转换为按会话定价将从 2016 年 9 月 1 日起生效。
+>[!NOTE] Power BI Embedded 在预览阶段提供了按呈现的折扣定价，但根据用户反馈，以后将停止使用这种定价方式，而采用按会话定价。从按呈现定价转换为按会话定价将从 2016 年 9 月 1 日起生效。
 
 呈现是显示给最终用户的可视元素，结果是产生对服务的查询。例如，如果一个用户查看包含 4 个视觉对象的报表，它将会产生 4 个呈现。如果用户刷新报表并且向服务发送更多的查询，它将会产生另外 4 个呈现。服务所有者将控制最终用户可以推动结果为付费呈现的新查询的程度，以限制成本风险并最小化静态数据方案中的成本。
 
@@ -89,23 +88,23 @@ Azure 门户预览将提供关于针对订阅已执行的呈现/报表会话数�
 
 ## 应用程序的最终用户是否需要 Power BI 许可证？
 
-否。应用程序的最终用户无需单独购买 Power BI 订阅便可访问应用内数据可视化元素。在 Power BI Embedded 模型中，将通过 Azure 消耗计量器针对服务向应用程序提供商计费。请参阅[定价和许可页](/pricing/details/power-bi-embedded/)。
+否。应用程序的最终用户无需单独购买 Power BI 订阅便可访问应用内数据可视化元素。在 Power BI Embedded 模型中，将通过 Azure 消耗计量器针对服务向应用程序提供商计费。请参阅[定价和许可页](https://www.azure.cn/pricing/details/power-bi-embedded/)。
 
 ## 如何对 Power BI Embedded 的用户身进行身份验证？
 
 Power BI Embedded 服务使用“应用令牌”进行身份验证和授权，而不是使用显式的最终用户身份验证。在应用令牌模型中，应用程序管理最终用户的身份验证和授权。然后，若有必要，应用将创建
 
-并发送应用令牌，以指示服务来呈现所请求的报表。此设计不要求应用使用 Azure AD 进行用户身份验证和授权，但仍然可以这样做。可以[在此处](/documentation/articles/power-bi-embedded-app-token-flow/)了解应用令牌的详细信息。Power BI Embedded 中还引入了行级安全性 (RLS) 功能以用于高级安全性筛选方案。
+并发送应用令牌，以指示服务来呈现所请求的报表。此设计不要求应用使用 Azure AD 进行用户身份验证和授权，但仍然可以这样做。可以[在此处](./power-bi-embedded-app-token-flow.md)了解应用令牌的详细信息。Power BI Embedded 中还引入了行级安全性 (RLS) 功能以用于高级安全性筛选方案。
 
 ## Power BI Embedded 当前支持哪些数据源？
 
-将支持通过直接查询对使用基本凭据的云数据源进行访问。这意味着目前支持的源有 Azure SQL DB 和 Azure SQL DW 等。在未来几个月中将添加对其他数据源和访问类型的支持。将在 Power BI 开发人员论坛 ([https://dev.powerbi.com](https://dev.powerbi.com/)) 上公布受支持的新数据源。
+将支持通过直接查询对使用基本凭据的云数据源进行访问。这意味着目前支持的源有 Azure SQL DB 和 Azure SQL DW 等。在未来几个月中将添加对其他数据源和访问类型的支持。将在 Power BI 开发人员论坛 ([https://dev.powerbi.com/](https://dev.powerbi.com/)) 上公布受支持的新数据源。
 
 ## Power BI Embedded 的租户模型如何工作？
 
 在 Power BI Embedded 模型中，明确要求 Azure AD 租户中必须存在客户。可以为客户选择是否需要 Azure AD。这样，应用程序的体系结构和基础结构就可以用来确定 Power BI Embedded 要求的租户模型。
 
-开发人员/员工操作或创建应用程序时将需要具有 AAD 用户帐户才能通过 Azure 门户预览管理 Azure 订阅和工作区集合。开发人员可以使用编程 API 导入报表、修改连接字符串、获取嵌入式 URL、改用应用令牌进行身份验证，因此无需使用 AAD。有关如何使用 API 和 Azure 门户预览的详细信息，请参阅 Azure.com 中的 [Power BI Embedded documentation](/documentation/services/power-bi-embedded/)（Power BI Embedded 文档）页。
+开发人员/员工操作或创建应用程序时将需要具有 AAD 用户帐户才能通过 Azure 门户预览管理 Azure 订阅和工作区集合。开发人员可以使用编程 API 导入报表、修改连接字符串、获取嵌入式 URL、改用应用令牌进行身份验证，因此无需使用 AAD。有关如何使用 API 和 Azure 门户预览的详细信息，请参阅 Azure.com 中的 [Power BI Embedded documentation](./index.md)（Power BI Embedded 文档）页。
 
 ## 可以从何处了解详细信息？
 
@@ -113,11 +112,11 @@ Power BI Embedded 服务使用“应用令牌”进行身份验证和授权，�
 
 ## 如何开始？
 
-可以立即开始体验免费版！ 如果拥有 Azure 订阅，现在就可以直接从 Azure 门户预览预配 Power BI Embedded。也可以创建自己的 [Azure 帐户](/pricing/1rmb-trial/)。一旦 Power BI Embedded 服务预配完毕，就可以直接轻松使用 Power BI REST API，或使用 [GitHub](https://www.nuget.org/profiles/powerbi) 上提供的开发人员 SDK。关于如何使用开发人员 SDK 提供的示例。
+可以立即开始体验免费版！ 如果拥有 Azure 订阅，现在就可以直接从 Azure 门户预览预配 Power BI Embedded。也可以创建自己的 [Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)。一旦 Power BI Embedded 服务预配完毕，就可以直接轻松使用 Power BI REST API，或使用 [GitHub](https://www.nuget.org/profiles/powerbi) 上提供的开发人员 SDK。关于如何使用开发人员 SDK 提供的示例。
 
 ## 另请参阅
 
-- [Power BI Embedded 是什么](/documentation/articles/power-bi-embedded-what-is-power-bi-embedded/)
-- [Power BI Embedded 入门](/documentation/articles/power-bi-embedded-get-started/)
+- [Power BI Embedded 是什么](./power-bi-embedded-what-is-power-bi-embedded.md)
+- [Power BI Embedded 入门](./power-bi-embedded-get-started.md)
 
 <!---HONumber=Mooncake_1010_2016-->

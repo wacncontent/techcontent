@@ -1,18 +1,16 @@
-<properties
-	pageTitle="如何安排作业"
-	description="本教程演示如何安排作业"
-	services="iot-hub"
-	documentationcenter=".net"
-	author="uanjperez"
-	manager="timlt"
-	editor=""/>  
+---
+title: 如何安排作业
+description: 本教程演示如何安排作业
+services: iot-hub
+documentationcenter: .net
+author: uanjperez
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="iot-hub"
-	ms.date="09/30/2016"
-	wacn.date="12/19/2016"/>  
-
+ms.service: iot-hub
+ms.date: 09/30/2016
+wacn.date: 12/19/2016
+---
 
 # 教程：计划和广播作业
 
@@ -46,43 +44,43 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
 * Node.js 版本 0.12.x 或更高版本，<br/>[准备开发环境][lnk-dev-setup]介绍了如何在 Windows 或 Linux 上安装本教程所用的 Node.js。
 * 有效的 Azure 帐户。（如果没有帐户，只需花费几分钟就能创建一个[帐户][lnk-free-trial]。）
 
-[AZURE.INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
+[!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
 
-[AZURE.INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
+[!INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
 
 ## 创建模拟设备应用程序
 在此部分中，会创建一个 Node.js 控制台应用，它响应云调用的直接方法，这会触发模拟设备重新启动，并使用设备孪生报告属性使设备孪生查询可以识别设备以及它们上次重新启动的时间。
 
 1. 新建名为 **simDevice** 的空文件夹。在 **simDevice** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **simDevice** 文件夹的命令提示符处，运行下述命令以安装 **azure-iot-device** 设备 SDK 包和 **azure-iot-device-mqtt** 包：
-   
+
     ```
     npm install azure-iot-device azure-iot-device-mqtt --save
     ```
 3. 在 **simDevice** 文件夹中，利用文本编辑器创建新的 **simDevice.js** 文件。
 4. 在 **simDevice.js** 文件的开头添加以下“require”语句：
-   
+
     ```
     'use strict';
-   
+
     var Client = require('azure-iot-device').Client;
     var Protocol = require('azure-iot-device-mqtt').Mqtt;
     ```
 5. 添加 **connectionString** 变量，并用其创建设备客户端。
-   
+
     ```
     var connectionString = 'HostName={youriothostname};DeviceId={yourdeviceid};SharedAccessKey={yourdevicekey}';
     var client = Client.fromConnectionString(connectionString, Protocol);
     ```
 6. 添加以下函数以处理 **lockDoor** 方法。
-   
+
     ```
     var onLockDoor = function(request, response) {
-   
+
         // Respond the cloud app for the direct method
         response.send(200, function(err) {
             if (!err) {
@@ -91,12 +89,12 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
                 console.log('Response to method \'' + request.methodName + '\' sent successfully.');
             }
         });
-   
+
         console.log('Locking Door!');
     };
     ```
 7. 添加以下代码以注册 **lockDoor** 方法的处理程序。
-   
+
     ```
     client.open(function(err) {
         if (err) {
@@ -109,7 +107,7 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
     ```
 8. 保存并关闭 **simDevice.js** 文件。
 
-> [AZURE.NOTE]
+> [!NOTE]
 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 > 
 > 
@@ -118,26 +116,26 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
 在此部分中，会创建一个 Node.js 控制台应用，它使用直接方法对设备启动远程 **lockDoor** 并更新设备孪生的属性。
 
 1. 新建名为 **scheduleJobService** 的空文件夹。在 **scheduleJobService** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **scheduleJobService** 文件夹的命令提示符处，运行下述命令以安装 **azure-iothub** 设备 SDK 包和 **azure-iot-device-mqtt** 包：
-   
+
     ```
     npm install azure-iothub uuid --save
     ```
 3. 在 **scheduleJobService** 文件夹中，利用文本编辑器创建新的 **scheduleJobService.js** 文件。
 4. 在 **dmpatterns\_gscheduleJobServiceetstarted\_service.js** 文件开头添加以下“require”语句：
-   
+
     ```
     'use strict';
-   
+
     var uuid = require('uuid');
     var JobClient = require('azure-iothub').JobClient;
     ```
 5. 添加以下变量声明并替换占位符值：
-   
+
     ```
     var connectionString = '{iothubconnectionstring}';
     var deviceArray = ['myDeviceId'];
@@ -146,7 +144,7 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
     var jobClient = JobClient.fromConnectionString(connectionString);
     ```
 6. 添加用于监视作业执行的以下函数：
-   
+
     ```
     function monitorJob (jobId, callback) {
         var jobMonitorInterval = setInterval(function() {
@@ -165,14 +163,14 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
     }
     ```
 7. 添加以下代码以安排调用设备方法的作业：
-   
+
     ```
     var methodParams = {
         methodName: 'lockDoor',
         payload: null,
         timeoutInSeconds: 45
     };
-   
+
     var methodJobId = uuid.v4();
     console.log('scheduling Device Method job with id: ' + methodJobId);
     jobClient.scheduleDeviceMethod(methodJobId,
@@ -195,7 +193,7 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
     });
     ```
 8. 添加以下代码以安排更新设备孪生的作业：
-   
+
     ```
     var twinPatch = {
         etag: '*',
@@ -204,9 +202,9 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
             floor: 3
         }
     };
-   
+
     var twinJobId = uuid.v4();
-   
+
     console.log('scheduling Twin Update job with id: ' + twinJobId);
     jobClient.scheduleTwinUpdate(twinJobId,
                                 deviceArray,
@@ -233,12 +231,12 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
 现在，你已准备就绪，可以运行应用程序了。
 
 1. 在 **simDevice** 文件夹的命令提示符处，运行以下命令以开始侦听重新启动直接方法。
-   
+
     ```
     node simDevice.js
     ```
 2. 在 **scheduleJobService** 文件夹的命令提示符处，运行以下命令以触发远程重新启动并查询设备孪生以查找上次重新启动时间。
-   
+
     ```
     node scheduleJobService.js
     ```
@@ -253,14 +251,14 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
 
 若要继续完成 IoT 中心的入门内容，请参阅 [IoT 网关 SDK 入门][lnk-gateway-SDK]。
 
-[lnk-get-started-twin]: /documentation/articles/iot-hub-node-node-twin-getstarted/
-[lnk-twin-props]: /documentation/articles/iot-hub-node-node-twin-how-to-configure/
-[lnk-c2d-methods]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-dev-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-fwupdate]: /documentation/articles/iot-hub-node-node-firmware-update/
-[lnk-gateway-SDK]: /documentation/articles/iot-hub-linux-gateway-sdk-get-started/
+[lnk-get-started-twin]: ./iot-hub-node-node-twin-getstarted.md
+[lnk-twin-props]: ./iot-hub-node-node-twin-how-to-configure.md
+[lnk-c2d-methods]: ./iot-hub-node-node-direct-methods.md
+[lnk-dev-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-fwupdate]: ./iot-hub-node-node-firmware-update.md
+[lnk-gateway-SDK]: ./iot-hub-linux-gateway-sdk-get-started.md
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/node-devbox-setup.md
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-transient-faults]: https://msdn.microsoft.com/zh-cn/library/hh680901(v=pandp.50).aspx
 
 <!---HONumber=Mooncake_1212_2016-->

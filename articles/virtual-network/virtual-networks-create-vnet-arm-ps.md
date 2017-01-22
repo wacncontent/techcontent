@@ -1,41 +1,40 @@
-<properties
-    pageTitle="使用 PowerShell 创建虚拟网络 | Azure"
-    description="了解如何使用 PowerShell 创建虚拟网络 | Resource Manager。"
-    services="virtual-network"
-    documentationcenter=""
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 PowerShell 创建虚拟网络 | Azure
+description: 了解如何使用 PowerShell 创建虚拟网络 | Resource Manager。
+services: virtual-network
+documentationcenter: 
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="a31f4f12-54ee-4339-b968-1a8097ca77d3"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="03/15/2016"
-    wacn.date="01/05/2017"
-    ms.author="jdial" />  
-
+ms.assetid: a31f4f12-54ee-4339-b968-1a8097ca77d3
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/15/2016
+wacn.date: 01/05/2017
+ms.author: jdial
+---
 
 # 使用 PowerShell 创建虚拟网络
 
-[AZURE.INCLUDE [virtual-networks-create-vnet-intro](../../includes/virtual-networks-create-vnet-intro-include.md)]
+[!INCLUDE [virtual-networks-create-vnet-intro](../../includes/virtual-networks-create-vnet-intro-include.md)]
 
-Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建议通过 Resource Manager 部署模型创建资源。若要深入了解这两个模型之间的差异，请阅读[了解 Azure 部署模型](/documentation/articles/resource-manager-deployment-model/)一文。
- 
+Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建议通过 Resource Manager 部署模型创建资源。若要深入了解这两个模型之间的差异，请阅读[了解 Azure 部署模型](../azure-resource-manager/resource-manager-deployment-model.md)一文。
+
 本文介绍如何使用 PowerShell 通过 Resource Manager 部署模型创建 VNet。还可以使用其他工具通过 Resource Manager 创建 VNet，或通过从以下列表中选择不同的选项使用经典部署模型创建 VNet：
-> [AZURE.SELECTOR]
-- [门户](/documentation/articles/virtual-networks-create-vnet-arm-pportal/)
-- [PowerShell](/documentation/articles/virtual-networks-create-vnet-arm-ps/)
-- [CLI](/documentation/articles/virtual-networks-create-vnet-arm-cli/)
-- [门户（经典）](/documentation/articles/virtual-networks-create-vnet-classic-pportal/)
-- [PowerShell（经典）](/documentation/articles/virtual-networks-create-vnet-classic-netcfg-ps/)
-- [CLI（经典）](/documentation/articles/virtual-networks-create-vnet-classic-cli/)
+> [!div class="op_single_selector"]
+- [门户](./virtual-networks-create-vnet-arm-pportal.md)
+- [PowerShell](./virtual-networks-create-vnet-arm-ps.md)
+- [CLI](./virtual-networks-create-vnet-arm-cli.md)
+- [门户（经典）](./virtual-networks-create-vnet-classic-pportal.md)
+- [PowerShell（经典）](./virtual-networks-create-vnet-classic-netcfg-ps.md)
+- [CLI（经典）](./virtual-networks-create-vnet-classic-cli.md)
 
-[AZURE.INCLUDE [virtual-networks-create-vnet-scenario-include](../../includes/virtual-networks-create-vnet-scenario-include.md)]
+[!INCLUDE [virtual-networks-create-vnet-scenario-include](../../includes/virtual-networks-create-vnet-scenario-include.md)]
 
 ## 创建虚拟网络
 
@@ -43,7 +42,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 1. 请按[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 一文中的步骤安装和配置 Azure PowerShell。
 
-2. 如有必要，创建一个新的资源组，如下所示。对于此方案，创建一个名为 *TestRG* 的资源组。有关资源组的详细信息，请访问 [Azure 资源管理器概述](/documentation/articles/resource-group-overview/)。
+2. 如有必要，创建一个新的资源组，如下所示。对于此方案，创建一个名为 *TestRG* 的资源组。有关资源组的详细信息，请访问 [Azure 资源管理器概述](../azure-resource-manager/resource-group-overview.md)。
 
         New-AzureRmResourceGroup -Name TestRG -Location chinaeast
 
@@ -80,9 +79,9 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
         $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
 
-   > [AZURE.TIP]
-   可通过运行 `$vnet = New-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet -AddressPrefix 192.168.0.0/16 -Location chinaeast` 合并步骤 3 和步骤 4。
-   > 
+    > [!TIP]
+    可通过运行 `$vnet = New-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet -AddressPrefix 192.168.0.0/16 -Location chinaeast` 合并步骤 3 和步骤 4。
+    > 
 
 5. 将子网添加到新的 VNet 变量中：
 
@@ -90,7 +89,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         -VirtualNetwork $vnet -AddressPrefix 192.168.1.0/24
 
     预期输出：
-   
+
         Name                  : TestVNet
         ResourceGroupName     : TestRG
         Location              : chinaeast
@@ -122,7 +121,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 
     预期输出：
-   
+
         Name                  : TestVNet
         ResourceGroupName     : TestRG
         Location              : chinaeast
@@ -162,8 +161,8 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
 了解如何连接：
 
-- 通过阅读[创建 Windows VM](/documentation/articles/virtual-machines-windows-ps-create/)一文，将虚拟机 (VM) 连接到虚拟网络。可选择将 VM 连接到现有 VNet 和子网，而不按文章中的步骤创建 VNet 和子网。
-- 通过阅读[连接 VNet](/documentation/articles/vpn-gateway-vnet-vnet-rm-ps/) 一文将虚拟网络连接到其他虚拟网络。
-- 使用站点到站点虚拟专用网络 (VPN) 或 ExpressRoute 线路将虚拟网络连接到本地网络。通过阅读[使用站点到站点 VPN 将 VNet 连接到本地网络](/documentation/articles/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/)和[将 VNet 链接到 ExpressRoute 线路](/documentation/articles/expressroute-howto-linkvnet-arm/)文章，了解操作方法。
+- 通过阅读[创建 Windows VM](../virtual-machines/virtual-machines-windows-ps-create.md)一文，将虚拟机 (VM) 连接到虚拟网络。可选择将 VM 连接到现有 VNet 和子网，而不按文章中的步骤创建 VNet 和子网。
+- 通过阅读[连接 VNet](../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md) 一文将虚拟网络连接到其他虚拟网络。
+- 使用站点到站点虚拟专用网络 (VPN) 或 ExpressRoute 线路将虚拟网络连接到本地网络。通过阅读[使用站点到站点 VPN 将 VNet 连接到本地网络](../vpn-gateway/vpn-gateway-howto-multi-site-to-site-resource-manager-portal.md)和[将 VNet 链接到 ExpressRoute 线路](../expressroute/expressroute-howto-linkvnet-arm.md)文章，了解操作方法。
 
 <!---HONumber=Mooncake_1219_2016-->

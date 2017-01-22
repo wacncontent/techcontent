@@ -10,7 +10,7 @@
 7. 在设备或仿真程序上启动应用后，在“输入新文本”中键入有意义的文本，例如“完成教程”，然后单击“添加”按钮。这会将一个 POST 请求发送到之前部署的 Azure 后端。后端会将请求中的数据插入 SQL 数据库的 TodoItem 表中，并将新存储项的相关信息返回到移动应用。移动应用会在列表中显示此数据。
 
     ![](./media/app-service-mobile-cordova-quickstart/quickstart-startup.png)
-    
+
 8. 为计划支持的每个设备平台重复执行前面三个步骤。
 
 [Azure 门户预览]: https://portal.azure.cn/

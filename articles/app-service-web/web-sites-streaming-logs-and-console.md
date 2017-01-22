@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="流式传输日志和控制台" 
-	description="流式传输日志和控制台概述" 
-	authors="btardif" 
-	manager="wpickett" 
-	editor="" 
-	services="app-service\web" 
-	documentationCenter=""/>  
+---
+title: 流式传输日志和控制台
+description: 流式传输日志和控制台概述
+authors: btardif
+manager: wpickett
+editor: 
+services: app-service\web
+documentationCenter: 
 
-
-<tags 
-	ms.service="app-service-web" 
-	ms.workload="web" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="multiple" 
-	ms.topic="article" 
-	ms.date="10/12/2016" 
-	wacn.date="11/07/2016" 
-	ms.author="byvinyal"/>  
-
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 10/12/2016
+wacn.date: 11/07/2016
+ms.author: byvinyal
+---
 
 # 流式传输日志和控制台
 
@@ -57,13 +55,13 @@ console.log("My trace statement").
 
 ### 如何启用和查看流式传输日志
 ![][BrowseSitesScreenshot]诊断基于每个应用启用。首先浏览到想要在其中启用此功能的站点。
-  
+
 ![][DiagnosticsLogs]
 从设置菜单中，向下滚动到“监视”部分，单击“(1) 诊断日志”。然后 **(2) 启用**“应用程序日志记录(文件系统)”或“应用程序日志记录(Blob)”，“级别”选项可供更改要捕获的跟踪的严重性级别。如果只是尝试熟悉该功能，请将级别设置为“详细”，以确保收集所有跟踪语句。
 
 单击边栏选项卡顶部的“保存”，然后就可以开始查看日志了。
 
->[AZURE.NOTE] **严重性级别**越高，日志消耗的资源就越多，但生成的跟踪也越多。确保将**严重性级别**配置为适用于生产或高流量站点的正确详细级别。
+>[!NOTE] **严重性级别**越高，日志消耗的资源就越多，但生成的跟踪也越多。确保将**严重性级别**配置为适用于生产或高流量站点的正确详细级别。
 
 ![][StreamingLogsScreenshot]
 若要从 Azure 门户预览中查看**流式传输日志**，请单击同样位于设置菜单的“监视”部分中的“(1) 日志流”。如果应用主动写入跟踪语句，则会以近乎实时的方式在 **(2) 流式传输日志 UI** 中看到它们。

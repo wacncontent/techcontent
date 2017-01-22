@@ -13,67 +13,67 @@
 
 采用 Json 格式的负载均衡器模板的示例：
 
-	{
-	  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-	  "contentVersion": "1.0.0.0",
-	  "parameters": {
-	    "dnsNameforLBIP": {
-	      "type": "string",
-	      "metadata": {
-	        "description": "Unique DNS name"
-	      }
-	    },
-	    "location": {
-	      "type": "string",
-	      "allowedValues": [
-	        "China East",
-	        "China North"
-	      ],
-	      "metadata": {
-	        "description": "Location to deploy"
-	      }
-	    },
-	    "addressPrefix": {
-	      "type": "string",
-	      "defaultValue": "10.0.0.0/16",
-	      "metadata": {
-	        "description": "Address Prefix"
-	      }
-	    },
-	    "subnetPrefix": {
-	      "type": "string",
-	      "defaultValue": "10.0.0.0/24",
-	      "metadata": {
-	        "description": "Subnet Prefix"
-	      }
-	    },
-	    "publicIPAddressType": {
-	      "type": "string",
-	      "defaultValue": "Dynamic",
-	      "allowedValues": [
-	        "Dynamic",
-	        "Static"
-	      ],
-	      "metadata": {
-	        "description": "Public IP type"
-	      }
-	    }
-	  },
-	  "variables": {
-	    "virtualNetworkName": "virtualNetwork1",
-	    "publicIPAddressName": "publicIp1",
-	    "subnetName": "subnet1",
-	    "loadBalancerName": "loadBalancer1",
-	    "nicName": "networkInterface1",
-	    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
-	    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
-	    "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]",
-	    "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('loadBalancerName'))]",
-	    "nicId": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]",
-	    "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/loadBalancerFrontEnd')]",
-	    "backEndIPConfigID": "[concat(variables('nicId'),'/ipConfigurations/ipconfig1')]"
-	  },
-	  "resources": [
+    {
+      "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "dnsNameforLBIP": {
+          "type": "string",
+          "metadata": {
+            "description": "Unique DNS name"
+          }
+        },
+        "location": {
+          "type": "string",
+          "allowedValues": [
+            "China East",
+            "China North"
+          ],
+          "metadata": {
+            "description": "Location to deploy"
+          }
+        },
+        "addressPrefix": {
+          "type": "string",
+          "defaultValue": "10.0.0.0/16",
+          "metadata": {
+            "description": "Address Prefix"
+          }
+        },
+        "subnetPrefix": {
+          "type": "string",
+          "defaultValue": "10.0.0.0/24",
+          "metadata": {
+            "description": "Subnet Prefix"
+          }
+        },
+        "publicIPAddressType": {
+          "type": "string",
+          "defaultValue": "Dynamic",
+          "allowedValues": [
+            "Dynamic",
+            "Static"
+          ],
+          "metadata": {
+            "description": "Public IP type"
+          }
+        }
+      },
+      "variables": {
+        "virtualNetworkName": "virtualNetwork1",
+        "publicIPAddressName": "publicIp1",
+        "subnetName": "subnet1",
+        "loadBalancerName": "loadBalancer1",
+        "nicName": "networkInterface1",
+        "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
+        "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+        "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]",
+        "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('loadBalancerName'))]",
+        "nicId": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]",
+        "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/loadBalancerFrontEnd')]",
+        "backEndIPConfigID": "[concat(variables('nicId'),'/ipConfigurations/ipconfig1')]"
+      },
+      "resources": [
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/publicIPAddresses",
@@ -180,8 +180,8 @@
         ]
       }
     }
-	  ]
-	}
+      ]
+    }
 
 ### 其他资源
 

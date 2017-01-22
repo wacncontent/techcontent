@@ -1,15 +1,19 @@
 
-<properties 
-	pageTitle="Kudu 管理和诊断 azure web 应用" 
-	description="Kudu 管理和诊断 azure web 应用。" 
-	services="app-service-web" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="app-service-web-aog" ms.date="" wacn.date="08/31/2016"/>
-# Kudu 管理和诊断 azure web 应用
+---
+title: Kudu 管理和诊断 azure web 应用
+description: Kudu 管理和诊断 azure web 应用。
+services: app-service-web
+documentationCenter: 
+authors: 
+manager: 
+editor: 
 
+ms.service: app-service-web-aog
+ms.date: 
+wacn.date: 08/31/2016
+---
+
+# Kudu 管理和诊断 azure web 应用
 
 [Azure Kudu](https://github.com/projectkudu/kudu/wiki/Process-Threads-list-and-minidump-gcdump-diagsession)是 GitHub 上的一个开源项目，Kudu 站点 (也称为网站控制管理 SCM) 提供了一系列的在线工具，可以帮助用户查看 web 应用的设置，诊断 web 应用，以及安装 web 应用扩展。本文包含以下内容：
 
@@ -38,7 +42,7 @@
 
 * 用户可以通过文件管理器查看网站文件，修改，删除和下载文件，并支持拖拽方式上传文件。
 
-	![Debug Console](./media/aog-web-app-diagnostics-kudu/debug-console.png)
+    ![Debug Console](./media/aog-web-app-diagnostics-kudu/debug-console.png)
 * 提供远程终端Power Shell和 cmd窗口，用户可以远程在web应用实例上执行命令。
 
 ## <a id="scenario"></a>场景举例
@@ -47,15 +51,15 @@
 
 1. 下载 ProcDump 并上传到 /site/Dianostices/Procdump 位置。
 
-	![](./media/aog-web-app-diagnostics-kudu/sence-1.png)
+    ![](./media/aog-web-app-diagnostics-kudu/sence-1.png)
 
 2. 进入 Process explore 页面，获取网站工作进程 w3wp.exe 的进程 ID
 
-	![](./media/aog-web-app-diagnostics-kudu/sence-2.png)
+    ![](./media/aog-web-app-diagnostics-kudu/sence-2.png)
 
 3. 进入 /site/Dianostices/Procdump 文件夹，运行 procdump -ma -accepteula pid (pid 为具体的进程 ID)
 
-	![](./media/aog-web-app-diagnostics-kudu/sence-3.png)
+    ![](./media/aog-web-app-diagnostics-kudu/sence-3.png)
 
 4. 下载生成的 dump 文件，用 windows 调试工具如 windbg 进行后续分析。
 
@@ -73,29 +77,28 @@ Tools选项卡下面提供了一些其他在线工具：
 
 * Diagnostic Dump：
 
-	单击此按钮可以下载 web 应用的重要日志文件。
+    单击此按钮可以下载 web 应用的重要日志文件。
 * Log stream：
-   
-	输出实时日志到页面, 此功能也可以通过 curl 命令行 启动。
 
+    输出实时日志到页面, 此功能也可以通过 curl 命令行 启动。
 
-		curl -u {username} https://{sitename}.scm.chinacloudsites.cn/logstream
+        curl -u {username} https://{sitename}.scm.chinacloudsites.cn/logstream
 
-	页面打印如下格式的日志信息：
+    页面打印如下格式的日志信息：
 
-	![](./media/aog-web-app-diagnostics-kudu/log-stream.png)
+    ![](./media/aog-web-app-diagnostics-kudu/log-stream.png)
 
-	>[AZURE.NOTE]如果通过 Kudu 站点启动 Log stream，由于浏览器会缓存响应数据，用户需要等到日志填满缓冲区后，才可以看到实时日志输出到页面。 Log stream 会持续 12 小时开启应用程序文件日志 (错误模式) ,用户可以在 Azure portal 上手动关闭。
-    
+    >[!NOTE]如果通过 Kudu 站点启动 Log stream，由于浏览器会缓存响应数据，用户需要等到日志填满缓冲区后，才可以看到实时日志输出到页面。 Log stream 会持续 12 小时开启应用程序文件日志 (错误模式) ,用户可以在 Azure portal 上手动关闭。
+
 * WebJobs dashboard： 
 
-	进入 WebJobs dashboard 页面后，单击 WebJobs 的 NAME 链接，可以显示 web Job 历史运行情况。
-	
-	![](./media/aog-web-app-diagnostics-kudu/webjobs-deshboard.png)
+    进入 WebJobs dashboard 页面后，单击 WebJobs 的 NAME 链接，可以显示 web Job 历史运行情况。
+
+    ![](./media/aog-web-app-diagnostics-kudu/webjobs-deshboard.png)
 
 * Download deployment script：
-  
-	如果 web 应用是通过 Git 部署，用户点击此按钮可以下载部署脚本。
+
+    如果 web 应用是通过 Git 部署，用户点击此按钮可以下载部署脚本。
 
 ## <a id="ext"></a>Web 应用扩展
 

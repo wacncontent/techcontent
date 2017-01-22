@@ -1,34 +1,34 @@
-<properties
-    pageTitle="使用 SMB 在 Linux VM 上装载 Azure 文件存储 | Azure"
-    description="如何使用 SMB 在 Linux VM 上装载 Azure 文件存储。"
-    services="virtual-machines-linux"
-    documentationcenter="virtual-machines-linux"
-    author="vlivech"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid=""
-    ms.service="virtual-machines-linux"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-linux"
-    ms.workload="infrastructure"
-    ms.date="12/07/2016"
-    wacn.date="01/13/2017"
-    ms.author="v-livech" />  
+---
+title: 使用 SMB 在 Linux VM 上装载 Azure 文件存储 | Azure
+description: 如何使用 SMB 在 Linux VM 上装载 Azure 文件存储。
+services: virtual-machines-linux
+documentationcenter: virtual-machines-linux
+author: vlivech
+manager: timlt
+editor: 
 
+ms.assetid: 
+ms.service: virtual-machines-linux
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
+ms.date: 12/07/2016
+wacn.date: 01/13/2017
+ms.author: v-livech
+---
 
 # 使用 SMB 在 Linux VM 上装载 Azure 文件存储
 
 本文说明如何使用 SMB 装载利用 Linux VM 上的 Azure 文件存储服务。Azure 文件存储使用标准 SMB 协议在云中提供文件共享。要求包括：
 
-- [一个 Azure 帐户](/pricing/1rmb-trial/)
+- [一个 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)
 
-- [SSH 公钥和私钥文件](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)
+- [SSH 公钥和私钥文件](./virtual-machines-linux-mac-create-ssh-keys.md)
 
 ## 快速命令
 
-如果需要快速完成任务，以下部分详细介绍所需的命令。本文档的余下部分（[从此处开始](/documentation/articles/virtual-machines-linux-mount-azure-file-storage-on-linux-using-smb/#detailed-walkthrough)）提供了每个步骤的更详细信息和上下文。
+如果需要快速完成任务，以下部分详细介绍所需的命令。本文档的余下部分（[从此处开始](./virtual-machines-linux-mount-azure-file-storage-on-linux-using-smb.md#detailed-walkthrough)）提供了每个步骤的更详细信息和上下文。
 
 先决条件：资源组、VNet、将 SSH 入站的 NSG、子网、Azure 存储帐户、Azure 存储帐户密钥、Azure 文件存储共享和 Linux VM。将任何示例替换为你自己的设置。
 
@@ -94,8 +94,8 @@ Azure 文件存储使用标准 SMB 协议在云中提供文件共享。并且使
 
 ## 后续步骤
 
-- [在创建期间使用 cloud-init 自定义 Linux VM](/documentation/articles/virtual-machines-linux-using-cloud-init/)
-- [将磁盘添加到 Linux VM](/documentation/articles/virtual-machines-linux-add-disk/)
-- [使用 Azure CLI 加密 Linux VM 上的磁盘](/documentation/articles/virtual-machines-linux-encrypt-disks/)
+- [在创建期间使用 cloud-init 自定义 Linux VM](./virtual-machines-linux-using-cloud-init.md)
+- [将磁盘添加到 Linux VM](./virtual-machines-linux-add-disk.md)
+- [使用 Azure CLI 加密 Linux VM 上的磁盘](./virtual-machines-linux-encrypt-disks.md)
 
 <!---HONumber=Mooncake_0109_2017-->

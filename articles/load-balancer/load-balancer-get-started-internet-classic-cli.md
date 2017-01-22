@@ -1,42 +1,42 @@
-<properties
-    pageTitle="开始使用 Azure CLI 在经典部署模型中创建面向 Internet 的负载均衡器 | Azure"
-    description="了解如何使用 Azure CLI 在经典部署模型中创建面向 Internet 的负载均衡器"
-    services="load-balancer"
-    documentationcenter="na"
-    author="kumudd"
-    manager="timlt"
-    tags="azure-service-management" />
-<tags
-    ms.assetid="e433a824-4a8a-44d2-8765-a74f52d4e584"
-    ms.service="load-balancer"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/09/2016"
-    wacn.date="01/13/2017"
-    ms.author="kumud" />  
+---
+title: 开始使用 Azure CLI 在经典部署模型中创建面向 Internet 的负载均衡器 | Azure
+description: 了解如何使用 Azure CLI 在经典部署模型中创建面向 Internet 的负载均衡器
+services: load-balancer
+documentationcenter: na
+author: kumudd
+manager: timlt
+tags: azure-service-management
 
+ms.assetid: e433a824-4a8a-44d2-8765-a74f52d4e584
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/09/2016
+wacn.date: 01/13/2017
+ms.author: kumud
+---
 
 # 开始在 Azure CLI 中创建面向 Internet 的负载均衡器（经典）
-> [AZURE.SELECTOR]
-- [Azure 经典管理门户](/documentation/articles/load-balancer-get-started-internet-classic-portal/)
-- [PowerShell](/documentation/articles/load-balancer-get-started-internet-classic-ps/)
-- [Azure CLI](/documentation/articles/load-balancer-get-started-internet-classic-cli/)
-- [Azure 云服务](/documentation/articles/load-balancer-get-started-internet-classic-cloud/)
+> [!div class="op_single_selector"]
+- [Azure 经典管理门户](./load-balancer-get-started-internet-classic-portal.md)
+- [PowerShell](./load-balancer-get-started-internet-classic-ps.md)
+- [Azure CLI](./load-balancer-get-started-internet-classic-cli.md)
+- [Azure 云服务](./load-balancer-get-started-internet-classic-cloud.md)
 
-[AZURE.INCLUDE [load-balancer-get-started-internet-intro-include.md](../../includes/load-balancer-get-started-internet-intro-include.md)]
+[!INCLUDE [load-balancer-get-started-internet-intro-include.md](../../includes/load-balancer-get-started-internet-intro-include.md)]
 
-> [AZURE.IMPORTANT]
-在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源前，请确保了解[部署模型和工具](/documentation/articles/azure-classic-rm/)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍经典部署模型。你还可以[了解如何使用 Azure Resource Manager 创建面向 Internet 的负载均衡器](/documentation/articles/load-balancer-get-started-internet-arm-ps/)。
+> [!IMPORTANT]
+在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Azure Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源前，请确保了解[部署模型和工具](../azure-classic-rm.md)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文介绍经典部署模型。你还可以[了解如何使用 Azure Resource Manager 创建面向 Internet 的负载均衡器](./load-balancer-get-started-internet-arm-ps.md)。
 
-[AZURE.INCLUDE [load-balancer-get-started-internet-scenario-include.md](../../includes/load-balancer-get-started-internet-scenario-include.md)]
+[!INCLUDE [load-balancer-get-started-internet-scenario-include.md](../../includes/load-balancer-get-started-internet-scenario-include.md)]
 
 ## 使用 CLI 逐步创建面向 Internet 的负载均衡器
 
 本指南演示如何基于上述方案创建 Internet 负载均衡器。
 
-1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
+1. 如果你从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **azure config mode** 命令以切换到经典模式，如下所示。
 
         azure config mode asm
@@ -126,16 +126,16 @@
 
     azure vm endpoint delete web1 tcp-80-80
 
-> [AZURE.NOTE]
+> [!NOTE]
 你可以使用命令 `azure vm endpoint --help` 浏览管理终结点的更多选项
 
 ## 后续步骤
 
-[开始配置内部负载均衡器](/documentation/articles/load-balancer-get-started-ilb-arm-ps/)
+[开始配置内部负载均衡器](./load-balancer-get-started-ilb-arm-ps.md)
 
-[配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
-[为负载均衡器配置空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)
+[为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: update meta properties & wording update & update link references & update code-->

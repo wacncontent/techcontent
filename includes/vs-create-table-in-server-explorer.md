@@ -7,9 +7,6 @@
 3. 选择“表”节点并从上下文菜单中选择“创建表”。
 4. 输入表的名称，然后选择“确定”。   
 
-
-
-
 [Image1]: ./media/vs-storage-getting-started-tables-include/vs-storage-create-tables-in-Server-Explorer.png
 
 <!---HONumber=79-->

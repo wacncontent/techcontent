@@ -1,6 +1,6 @@
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/storage-client-side-encryption/)
-- [Java](/documentation/articles/storage-client-side-encryption-java/)
-- [Python](/documentation/articles/storage-client-side-encryption-python/)
+> [!div class="op_single_selector"]
+- [.NET](../articles/storage/storage-client-side-encryption.md)
+- [Java](../articles/storage/storage-client-side-encryption-java.md)
+- [Python](../articles/storage/storage-client-side-encryption-python.md)
 
 <!---HONumber=Mooncake_0829_2016-->

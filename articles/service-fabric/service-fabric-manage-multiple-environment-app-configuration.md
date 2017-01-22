@@ -1,25 +1,26 @@
-<properties
-    pageTitle="在 Service Fabric 中管理多个环境 | Azure"
-    description="Service Fabric 应用程序可以在规模为一台计算机到数千台计算机的群集上运行。在某些情况下，你需要以不同的方式针对各种环境配置你的应用程序。本文介绍如何为每个环境定义不同的应用程序参数。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="seanmck"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="f406eac9-7271-4c37-a0d3-0a2957b60537"
-    ms.service="service-fabric"
-    ms.devlang="dotNet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="11/01/2016"
-    wacn.date="12/26/2016"
-    ms.author="seanmck" />
+---
+title: 在 Service Fabric 中管理多个环境 | Azure
+description: Service Fabric 应用程序可以在规模为一台计算机到数千台计算机的群集上运行。在某些情况下，你需要以不同的方式针对各种环境配置你的应用程序。本文介绍如何为每个环境定义不同的应用程序参数。
+services: service-fabric
+documentationcenter: .net
+author: seanmck
+manager: timlt
+editor: 
+
+ms.assetid: f406eac9-7271-4c37-a0d3-0a2957b60537
+ms.service: service-fabric
+ms.devlang: dotNet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 11/01/2016
+wacn.date: 12/26/2016
+ms.author: seanmck
+---
 
 # 管理多个环境的应用程序参数
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 你可以在任何位置，使用任意数量的计算机（从一台到数千台）来创建 Service Fabric 群集。尽管无需针对各种环境进行修改即可运行应用程序二进制文件，但你通常会根据所要部署的计算机数目，以不同的方式配置应用程序。
 
@@ -59,15 +60,13 @@ Service Fabric 应用程序由服务实例的集合组成。尽管你可以先�
 
 DefaultValue 属性指定当给定的环境缺少更具体的参数时所要使用的值。
 
->[AZURE.NOTE] 并非所有的服务实例参数都适用于每个环境配置。在上述示例中，已针对服务的所有实例显式定义服务分区方案的 LowKey 和 HighKey 值，因为分区范围与数据域而不是与环境相关。
-
+>[!NOTE] 并非所有的服务实例参数都适用于每个环境配置。在上述示例中，已针对服务的所有实例显式定义服务分区方案的 LowKey 和 HighKey 值，因为分区范围与数据域而不是与环境相关。
 
 ### 每个环境的服务配置设置
 
-服务可以使用 [Service Fabric 应用程序模型](/documentation/articles/service-fabric-application-model/)加入配置包，其中包含可在运行时读取的自定义键值对。也可以通过在应用程序清单中指定 `ConfigOverride`，按环境区分这些设置的值。
+服务可以使用 [Service Fabric 应用程序模型](./service-fabric-application-model.md)加入配置包，其中包含可在运行时读取的自定义键值对。也可以通过在应用程序清单中指定 `ConfigOverride`，按环境区分这些设置的值。
 
 假设`Stateful1`服务的 Config\\Settings.xml 文件中存在以下设置：
-
 
     <Section Name="MyConfigSection">
       <Parameter Name="MaxQueueSize" Value="25" />
@@ -87,8 +86,7 @@ DefaultValue 属性指定当给定的环境缺少更具体的参数时所要使�
 
 然后可根据上面所示，按环境配置此参数。为此，可以在应用程序清单的 parameters 节中声明该参数，并在应用程序参数文件中指定特定于环境的值。
 
->[AZURE.NOTE] 对于服务配置设置，可在三个位置设置键的值：服务配置包、应用程序清单和应用程序参数文件。Service Fabric 始终先从应用程序参数文件（如果已指定）进行选择，再从应用程序清单选择，最后从配置包选择。
-
+>[!NOTE] 对于服务配置设置，可在三个位置设置键的值：服务配置包、应用程序清单和应用程序参数文件。Service Fabric 始终先从应用程序参数文件（如果已指定）进行选择，再从应用程序清单选择，最后从配置包选择。
 
 ### 应用程序参数文件
 
@@ -108,7 +106,6 @@ Service Fabric 应用程序项目可以包含一个或多个应用程序参数�
 
 ![解决方案资源管理器中的应用程序参数文件][app-parameters-solution-explorer]  
 
-
 若要创建新的参数文件，只需复制并粘贴现有参数文件并为它指定新名称。
 
 ## 在部署期间识别特定于环境的参数
@@ -125,13 +122,11 @@ Service Fabric 应用程序项目可以包含一个或多个应用程序参数�
 
 应用程序项目模板中包含的 `Deploy-FabricApplication.ps1` PowerShell 脚本可接受发布配置文件作为参数，而 PublishProfile 包含对应用程序参数文件的引用。
 
-  
     ./Deploy-FabricApplication -ApplicationPackagePath <app_package_path> -PublishProfileFile <publishprofile_path>
-  
 
 ## 后续步骤
 
-若要深入了解本主题中所述的某些核心概念，请参阅 [Service Fabric 技术概述](/documentation/articles/service-fabric-technical-overview/)。有关 Visual Studio 中其他可用应用管理功能的信息，请参阅[在 Visual Studio 中管理 Service Fabric 应用程序](/documentation/articles/service-fabric-manage-application-in-visual-studio/)。
+若要深入了解本主题中所述的某些核心概念，请参阅 [Service Fabric 技术概述](./service-fabric-technical-overview.md)。有关 Visual Studio 中其他可用应用管理功能的信息，请参阅[在 Visual Studio 中管理 Service Fabric 应用程序](./service-fabric-manage-application-in-visual-studio.md)。
 
 <!-- Image references -->
 

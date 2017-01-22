@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="通过使用 Visual Studio 连接服务添加移动服务后开始使用 Javascript 移动应用 | Microsoft Azure" 
-	description="如何在 Visual Studio 中的 JavaScript 项目内开始使用 Azure 移动服务" 
-	services="mobile-services" 
-	documentationCenter="" 
-	authors="mlhoop" 
-	manager="douge" 
-	editor=""/>
+---
+title: 通过使用 Visual Studio 连接服务添加移动服务后开始使用 Javascript 移动应用 | Microsoft Azure
+description: 如何在 Visual Studio 中的 JavaScript 项目内开始使用 Azure 移动服务
+services: mobile-services
+documentationCenter: 
+authors: mlhoop
+manager: douge
+editor: 
 
-<tags 
-	ms.service="mobile-services" 
-	ms.workload="mobile" 
-	ms.tgt_pltfrm="vs-getting-started" 
-	ms.devlang="JavaScript" 
-	ms.topic="article" 
-	ms.date="07/21/2016" 
-	wacn.date="09/26/2016" 
-	ms.author="mlearned"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: JavaScript
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: mlearned
+---
 
 # 通过使用 Visual Studio 连接服务添加 Azure 移动服务后开始使用 Javascript 移动应用
 
@@ -29,7 +29,7 @@
 
 客户端对象已添加到您的项目。其名称是移动服务的名称，后面附加“Client”。以下代码将获取对表（包含 TodoItem 数据）的引用，您可以将该引用用于后续操作以便读取和更新数据表。
 
-	var todoTable = yourMobileServiceClient.getTable('TodoItem');
+    var todoTable = yourMobileServiceClient.getTable('TodoItem');
 
 ##添加条目 
 
@@ -81,12 +81,10 @@
 
 删除数据表中的行。对返回的 [Promise](https://msdn.microsoft.com/zh-cn/library/dn802826.aspx) 对象调用 done 方法以获取插入对象的副本并处理任何错误。
 
-	todoTable.del(todoItem).done(function (item) {
-	    todoItems.splice(todoItems.indexOf(item), 1);
+    todoTable.del(todoItem).done(function (item) {
+        todoItems.splice(todoItems.indexOf(item), 1);
     }
 
-
-
-[详细了解移动服务](/documentation/services/mobile-services/)
+[详细了解移动服务](./index.md)
 
 <!---HONumber=Mooncake_0215_2016-->

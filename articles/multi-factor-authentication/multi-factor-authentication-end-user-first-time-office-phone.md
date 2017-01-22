@@ -1,16 +1,16 @@
-<properties 
-	pageTitle="在 Azure MFA 中使用办公电话作为联系方法" 
-	description="本页说明用户如何使用办公电话作为 Azure MFA 的主要联系方法。" 
-	services="multi-factor-authentication" 
-	documentationCenter="" 
-	authors="billmath" 
-	manager="stevenp" 
-	editor="curtland"/>
+---
+title: 在 Azure MFA 中使用办公电话作为联系方法
+description: 本页说明用户如何使用办公电话作为 Azure MFA 的主要联系方法。
+services: multi-factor-authentication
+documentationCenter: 
+authors: billmath
+manager: stevenp
+editor: curtland
 
-<tags 
-	ms.service="multi-factor-authentication" 
-	ms.date="08/04/2016" 
-	wacn.date="09/12/2016"/>
+ms.service: multi-factor-authentication
+ms.date: 08/04/2016
+wacn.date: 09/12/2016
+---
 
 # 在 Azure 多重身份验证中使用办公电话作为联系方法
 
@@ -23,7 +23,6 @@
 
 <center>![Setup](./media/multi-factor-authentication-end-user-first-time-office-phone/office.png)</center>
 
-
 <li>通过下拉列表指定你的国家/地区，然后输入你的手机号码。</li>
 <li>选择想要使用的手机通信模式 - 短信或呼叫。</li>
 <li>单击“下一步”。</li>
@@ -35,9 +34,6 @@
 <li>将复制到剪贴板的密码粘贴到非浏览器应用程序。有关在每个应用程序（例如 Outlook 和 Lync）上执行的步骤，请参阅“如何将电子邮件中的密码更改为应用密码”和“如何将应用程序中的密码更改为应用密码”。</li>
 <li>单击“Done”（完成）。</li>
 
-
-
 <center>![Setup](./media/multi-factor-authentication-end-user-first-time-office-phone/app.png)</center>
- 
 
 <!---HONumber=Mooncake_0905_2016-->

@@ -3,52 +3,52 @@
 
 5. 将以下 using 语句添加到 **ToDoBroadcastReceiver** 类：
 
-		using Gcm.Client;
-		using Microsoft.WindowsAzure.MobileServices;
-		using Newtonsoft.Json.Linq;
+        using Gcm.Client;
+        using Microsoft.WindowsAzure.MobileServices;
+        using Newtonsoft.Json.Linq;
 
 6. 在 **using** 语句和 **namespace** 声明之间添加以下权限请求：
 
-		[assembly: Permission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
-		[assembly: UsesPermission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
-		[assembly: UsesPermission(Name = "com.google.android.c2dm.permission.RECEIVE")]
+        [assembly: Permission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
+        [assembly: UsesPermission(Name = "@PACKAGE_NAME@.permission.C2D_MESSAGE")]
+        [assembly: UsesPermission(Name = "com.google.android.c2dm.permission.RECEIVE")]
 
-		//GET_ACCOUNTS is only needed for android versions 4.0.3 and below
-		[assembly: UsesPermission(Name = "android.permission.GET_ACCOUNTS")]
-		[assembly: UsesPermission(Name = "android.permission.INTERNET")]
-		[assembly: UsesPermission(Name = "android.permission.WAKE_LOCK")]
+        //GET_ACCOUNTS is only needed for android versions 4.0.3 and below
+        [assembly: UsesPermission(Name = "android.permission.GET_ACCOUNTS")]
+        [assembly: UsesPermission(Name = "android.permission.INTERNET")]
+        [assembly: UsesPermission(Name = "android.permission.WAKE_LOCK")]
 
 7. 将现有的 **ToDoBroadcastReceiver** 类定义替换为以下代码：
- 
-	    [BroadcastReceiver(Permission = Gcm.Client.Constants.PERMISSION_GCM_INTENTS)]
-	    [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_MESSAGE }, 
-	        Categories = new string[] { "@PACKAGE_NAME@" })]
-	    [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_REGISTRATION_CALLBACK }, 
-	        Categories = new string[] { "@PACKAGE_NAME@" })]
-	    [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_LIBRARY_RETRY }, 
+
+        [BroadcastReceiver(Permission = Gcm.Client.Constants.PERMISSION_GCM_INTENTS)]
+        [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_MESSAGE }, 
+            Categories = new string[] { "@PACKAGE_NAME@" })]
+        [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_REGISTRATION_CALLBACK }, 
+            Categories = new string[] { "@PACKAGE_NAME@" })]
+        [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_LIBRARY_RETRY }, 
         Categories = new string[] { "@PACKAGE_NAME@" })]
         public class ToDoBroadcastReceiver : GcmBroadcastReceiverBase<PushHandlerService>
         {
-	        // Set the Google app ID.
-	        public static string[] senderIDs = new string[] { "<PROJECT_NUMBER>" };
+            // Set the Google app ID.
+            public static string[] senderIDs = new string[] { "<PROJECT_NUMBER>" };
         }
 
-	在上述代码中，你必须将 _`<PROJECT_NUMBER>`_ 替换为你在 Google 开发人员门户中设置应用程序时 Google 分配的项目编号。
+    在上述代码中，你必须将 _`<PROJECT_NUMBER>`_ 替换为你在 Google 开发人员门户中设置应用程序时 Google 分配的项目编号。
 
 8. 在 ToDoBroadcastReceiver.cs 项目文件中，添加定义 **PushHandlerService** 类的以下代码：
- 
-		// The ServiceAttribute must be applied to the class.
-    	[Service] 
-    	public class PushHandlerService : GcmServiceBase
-    	{
-        	public static string RegistrationID { get; private set; }
- 
-        	public PushHandlerService() : base(ToDoBroadcastReceiver.senderIDs) { }
-    	}
 
-	请注意，此类派生自 **GcmServiceBase**，“服务”属性必须应用于此类。
+        // The ServiceAttribute must be applied to the class.
+        [Service] 
+        public class PushHandlerService : GcmServiceBase
+        {
+            public static string RegistrationID { get; private set; }
 
-	>[AZURE.NOTE]**GcmServiceBase** 类实现 **OnRegistered()**、**OnUnRegistered()**、**OnMessage()** 和 **OnError()** 方法。必须在 **PushHandlerService** 类中重写这些方法。
+            public PushHandlerService() : base(ToDoBroadcastReceiver.senderIDs) { }
+        }
+
+    请注意，此类派生自 **GcmServiceBase**，“服务”属性必须应用于此类。
+
+    >[!NOTE]**GcmServiceBase** 类实现 **OnRegistered()**、**OnUnRegistered()**、**OnMessage()** 和 **OnError()** 方法。必须在 **PushHandlerService** 类中重写这些方法。
 
 5. 将以下代码添加到 **PushHandlerService** 类，以便重写 **OnRegistered **事件处理程序。
 
@@ -78,7 +78,7 @@
 
                     // Register the template with Notification Hubs.
                     async () => await push.RegisterAsync(registrationId, templates));
-                
+
                 System.Diagnostics.Debug.WriteLine(
                     string.Format("Push Installation Id", push.InstallationId.ToString()));
             }
@@ -89,7 +89,7 @@
             }
         }
 
-	此方法使用返回的 GCM 注册 ID 向 Azure 注册以获取推送通知。仅能在创建注册后向其添加标记。有关详细信息，请参阅[如何：将标记添加到设备安装以启用“推送到标记”](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#how-to-add-tags-to-a-device-installation-to-enable-push-to-tags)。
+    此方法使用返回的 GCM 注册 ID 向 Azure 注册以获取推送通知。仅能在创建注册后向其添加标记。有关详细信息，请参阅[如何：将标记添加到设备安装以启用“推送到标记”](../articles/app-service-mobile/app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#how-to-add-tags-to-a-device-installation-to-enable-push-to-tags)。
 
 10. 在 **PushHandlerService** 中使用以下代码重写 **OnMessage** 方法：
 
@@ -109,8 +109,8 @@
 
                 // Create a new intent to show the notification in the UI. 
                 PendingIntent contentIntent = 
-					PendingIntent.GetActivity(context, 0, 
-					new Intent(this, typeof(ToDoActivity)), 0);	          
+                    PendingIntent.GetActivity(context, 0, 
+                    new Intent(this, typeof(ToDoActivity)), 0);	          
 
                 // Create the notification using the builder.
                 var builder = new Notification.Builder(context);

@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Resource Manager 模板函数 | Azure"
-    description="介绍在 Azure 资源管理器模板中检索值、处理字符串和数字以及检索部署信息时所用的函数。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="0644abe1-abaa-443d-820d-1966d7d26bfd"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/22/2016"
-    wacn.date="01/06/2017"
-    ms.author="tomfitz" />
+---
+title: Resource Manager 模板函数 | Azure
+description: 介绍在 Azure 资源管理器模板中检索值、处理字符串和数字以及检索部署信息时所用的函数。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
+
+ms.assetid: 0644abe1-abaa-443d-820d-1966d7d26bfd
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/22/2016
+wacn.date: 01/06/2017
+ms.author: tomfitz
+---
 
 # Azure 资源管理器模板函数
 本主题介绍可以在 Azure Resource Manager 模板中使用的所有函数。
@@ -35,7 +36,6 @@
 
 ### <a id="add"></a> add
 `add(operand1, operand2)`  
-
 
 返回提供的两个整数的总和。
 
@@ -71,14 +71,13 @@
 ### <a id="copyindex"></a> copyIndex
 `copyIndex(offset)`  
 
-
 返回迭代循环的索引。
 
 | 参数 | 必选 | 类型 | 说明 |
 |:--- |:--- |:--- |:--- |
 | offset |否 |Integer |要添加到的从零开始的迭代值的数字。 |
 
-此函数始终用于 **copy** 对象。如果没有提供任何值作为**偏移量**，则返回当前迭代值。迭代值从零开始。有关如何使用 **copyIndex** 的完整说明，请参阅 [Create multiple instances of resources in Azure Resource Manager](/documentation/articles/resource-group-create-multiple/)（在 Azure Resource Manager 中创建多个资源实例）。
+此函数始终用于 **copy** 对象。如果没有提供任何值作为**偏移量**，则返回当前迭代值。迭代值从零开始。有关如何使用 **copyIndex** 的完整说明，请参阅 [Create multiple instances of resources in Azure Resource Manager](./resource-group-create-multiple.md)（在 Azure Resource Manager 中创建多个资源实例）。
 
 以下示例显示名称中包含 copy 循环和索引值。
 
@@ -94,10 +93,8 @@
       }
     ]
 
-
 ### <a id="div"></a> div
 `div(operand1, operand2)`  
-
 
 返回提供的两个整数在整除后的商。
 
@@ -133,7 +130,6 @@
 ### <a id="int"></a> int
 `int(valueToConvert)`  
 
-
 将指定的值转换为整数。
 
 | 参数 | 必选 | 类型 | 说明 |
@@ -149,10 +145,8 @@
         "intValue": "[int(parameters('appId'))]"
     }
 
-
 ### <a id="mod"></a> mod
 `mod(operand1, operand2)`  
-
 
 返回使用提供的两个整数整除后的余数。
 
@@ -188,7 +182,6 @@
 ### <a id="mul"></a> mul
 `mul(operand1, operand2)`  
 
-
 返回提供的两个整数的积。
 
 | 参数 | 必选 | 类型 | 说明 |
@@ -222,7 +215,6 @@
 
 ### <a id="sub"></a> sub
 `sub(operand1, operand2)`  
-
 
 返回提供的两个整数在相减后的结果。
 
@@ -277,7 +269,6 @@
 ### <a id="base64"></a> base64
 `base64 (inputString)`  
 
-
 返回输入字符串的 base64 表示形式。
 
 | 参数 | 必选 | 类型 | 说明 |
@@ -293,7 +284,6 @@
 
 ### <a id="concat"></a> concat - string
 `concat (string1, string2, string3, ...)`  
-
 
 组合多个字符串值并返回串联的字符串。
 
@@ -313,10 +303,8 @@
         }
     }
 
-
 ### <a id="lengthstring"></a> length - string
 `length(string)`  
-
 
 返回字符串中的字符数。
 
@@ -335,10 +323,8 @@
         "nameLength": "[length(parameters('appName'))]"
     }
 
-
 ### <a id="padleft"></a> padLeft
 `padLeft(valueToPad, totalLength, paddingCharacter)`  
-
 
 通过向左侧添加字符直至到达指定的总长度返回右对齐的字符串。
 
@@ -360,7 +346,6 @@
 ### <a id="replace"></a> replace
 `replace(originalString, oldCharacter, newCharacter)`  
 
-
 如果在所有实例中特定字符串中的一个字符已被替换为另一个字符时，则返回新的字符串。
 
 | 参数 | 必选 | 类型 | 说明 |
@@ -380,7 +365,6 @@
 
 ### <a id="skipstring"></a> skip - string
 `skip(originalValue, numberToSkip)`  
-
 
 返回一个字符串，其中包含字符串中指定数字后面的所有字符。
 
@@ -416,13 +400,10 @@
       }
     }
 
-
 ### <a id="split"></a> split
 `split(inputString, delimiterString)`  
 
-
 `split(inputString, delimiterArray)`  
-
 
 返回包含输入字符串的子字符串的字符串数组，其中的子字符串使用指定的分隔符进行分隔。
 
@@ -456,7 +437,6 @@
 
 ### <a id="string"></a> string
 `string(valueToConvert)`  
-
 
 将指定的值转换为字符串。
 
@@ -492,7 +472,6 @@
 ### <a id="substring"></a> substring
 `substring(stringToParse, startIndex, length)`  
 
-
 返回从指定的字符位置开始且包含指定数量的字符的子字符串。
 
 | 参数 | 必选 | 类型 | 说明 |
@@ -512,7 +491,6 @@
 
 ### <a id="takestring"></a> take - string
 `take(originalValue, numberToTake)`  
-
 
 返回一个字符串，其中包含从字符串开头算起的指定数目的字符。
 
@@ -551,7 +529,6 @@
 ### <a id="tolower"></a> toLower
 `toLower(stringToChange)`  
 
-
 将指定的字符串转换为小写。
 
 | 参数 | 必选 | 类型 | 说明 |
@@ -569,7 +546,6 @@
 
 ### <a id="toupper"></a> toUpper
 `toUpper(stringToChange)`  
-
 
 将指定的字符串转换为大写。
 
@@ -589,7 +565,6 @@
 ### <a id="trim"></a> trim
 `trim (stringToTrim)`  
 
-
 从指定的字符串中删除所有前导和尾随空白字符。
 
 | 参数 | 必选 | 类型 | 说明 |
@@ -607,7 +582,6 @@
 
 ### <a id="uniquestring"></a> uniqueString
 `uniqueString (baseString, ...)`  
-
 
 根据作为参数提供的值创建确定性哈希字符串。
 
@@ -643,11 +617,8 @@
         "type": "Microsoft.Storage/storageAccounts", 
         ...
 
-
-
 ### <a id="uri"></a> uri
 `uri (baseUri, relativeUri)`  
-
 
 通过组合 baseUri 和 relativeUri 字符串来创建绝对 URI。
 
@@ -675,7 +646,6 @@
 ### <a id="concatarray"></a> concat - array
 `concat (array1, array2, array3, ...)`  
 
-
 组合多个数组并返回串联的数组。
 
 | 参数 | 必选 | 类型 | 说明 |
@@ -699,10 +669,8 @@
          "combinedarray": "[concat(parameters('firstarray'), parameters('secondarray'))]
      }
 
-
 ### <a id="length"></a> length - array
 `length(array)`  
-
 
 返回数组中的元素数。
 
@@ -717,13 +685,12 @@
         "count": "[length(parameters('siteNames'))]"
     }
 
-有关在数组中使用此函数的详细信息，请参阅[在 Azure 资源管理器中创建多个资源实例](/documentation/articles/resource-group-create-multiple/)。
+有关在数组中使用此函数的详细信息，请参阅[在 Azure 资源管理器中创建多个资源实例](./resource-group-create-multiple.md)。
 
 有关对字符串值使用 length 的示例，请参阅 [length - 字符串](#lengthstring)。
 
 ### <a id="skip"></a> skip - array
 `skip(originalValue, numberToSkip)`  
-
 
 返回一个数组，其中包含数组中指定数字后面的所有元素。
 
@@ -762,7 +729,6 @@
 
 ### <a id="take"></a> take - array
 `take(originalValue, numberToTake)`  
-
 
 返回一个数组，其中包含从数组开头算起的指定数目的元素。
 
@@ -810,7 +776,6 @@
 
 ### <a id="deployment"></a> deployment
 `deployment()`  
-
 
 返回有关当前部署操作的信息。
 
@@ -867,7 +832,6 @@
 ### <a id="parameters"></a> parameters
 `parameters (parameterName)`  
 
-
 返回一个参数值。指定的参数名称必须已在模板的 parameters 节中定义。
 
 | 参数 | 必选 | 类型 | 说明 |
@@ -892,7 +856,6 @@
 
 ### <a id="variables"></a> variables
 `variables (variableName)`  
-
 
 返回变量的值。指定的变量名称必须已在模板的 variables 节中定义。
 
@@ -928,9 +891,7 @@
 ### <a id="list" name="listkeys"></a> listKeys and list{Value}
 `listKeys (resourceName or resourceIdentifier, apiVersion)`  
 
-
 `list{Value} (resourceName or resourceIdentifier, apiVersion)`  
-
 
 返回支持 list 操作的任何资源类型的值。最常见的用法是 **listKeys**。
 
@@ -978,7 +939,6 @@ ListKeys 返回的对象采用以下格式：
 ### <a id="providers"></a> providers
 `providers (providerNamespace, [resourceType])`  
 
-
 返回有关资源提供程序及其支持的资源类型的信息。如果未提供资源类型，该函数将返回资源提供程序支持的所有类型。
 
 | 参数 | 必选 | 类型 | 说明 |
@@ -1005,7 +965,6 @@ ListKeys 返回的对象采用以下格式：
 
 ### <a id="reference"></a> reference
 `reference (resourceName or resourceIdentifier, [apiVersion])`  
-
 
 返回表示另一个资源的运行时状态的对象。
 
@@ -1059,7 +1018,6 @@ ListKeys 返回的对象采用以下格式：
 ### <a id="resourcegroup"></a> resourceGroup
 `resourceGroup()`  
 
-
 返回表示当前资源组的对象。
 
 返回的对象采用以下格式：
@@ -1089,7 +1047,6 @@ ListKeys 返回的对象采用以下格式：
 
 ### <a id="resourceid"></a> resourceId
 `resourceId ([subscriptionId], [resourceGroupName], resourceType, resourceName1, [resourceName2]...)`  
-
 
 返回资源的唯一标识符。
 
@@ -1156,7 +1113,6 @@ ListKeys 返回的对象采用以下格式：
 ### <a id="subscription"></a> subscription
 `subscription()`  
 
-
 将使用以下格式返回有关订阅的详细信息：
 
     {
@@ -1174,11 +1130,10 @@ ListKeys 返回的对象采用以下格式：
       } 
     } 
 
-
 ## 后续步骤
-* 有关 Azure 资源管理器模板中对各部分的说明，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)
-* 若要合并多个模板，请参阅[将已链接的模板与 Azure 资源管理器配合使用](/documentation/articles/resource-group-linked-templates/)
-* 若要在创建资源类型时迭代指定的次数，请参阅[在 Azure 资源管理器中创建多个资源实例](/documentation/articles/resource-group-create-multiple/)
-* 若要查看如何部署已创建的模板，请参阅[使用 Azure 资源管理器模板部署应用程序](/documentation/articles/resource-group-template-deploy/)
+* 有关 Azure 资源管理器模板中对各部分的说明，请参阅[创作 Azure 资源管理器模板](./resource-group-authoring-templates.md)
+* 若要合并多个模板，请参阅[将已链接的模板与 Azure 资源管理器配合使用](./resource-group-linked-templates.md)
+* 若要在创建资源类型时迭代指定的次数，请参阅[在 Azure 资源管理器中创建多个资源实例](./resource-group-create-multiple.md)
+* 若要查看如何部署已创建的模板，请参阅[使用 Azure 资源管理器模板部署应用程序](./resource-group-template-deploy.md)
 
 <!---HONumber=Mooncake_0103_2017-->

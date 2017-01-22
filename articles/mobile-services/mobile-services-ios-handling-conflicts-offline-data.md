@@ -1,31 +1,29 @@
-<properties 
-	pageTitle="使用移动服务中的脱机数据处理冲突 (iOS) | 移动开发人员中心" 
-	description="了解在 iOS 应用程序中同步脱机数据时如何使用 Azure 移动服务处理冲突" 
-	documentationCenter="ios" 
-	authors="krisragh" 
-	manager="erikre"
-	editor="" 
-	services="mobile-services"/>
+---
+title: 使用移动服务中的脱机数据处理冲突 (iOS) | 移动开发人员中心
+description: 了解在 iOS 应用程序中同步脱机数据时如何使用 Azure 移动服务处理冲突
+documentationCenter: ios
+authors: krisragh
+manager: erikre
+editor: 
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="krisragh;donnam"/>
-
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: krisragh;donnam
+---
 
 #  使用移动服务中的脱机数据处理冲突
 
-[AZURE.INCLUDE [mobile-services-selector-offline-conflicts](../../includes/mobile-services-selector-offline-conflicts.md)]
+[!INCLUDE [mobile-services-selector-offline-conflicts](../../includes/mobile-services-selector-offline-conflicts.md)]
 
 本主题演示在使用 Azure 移动服务的脱机功能时如何同步数据和处理冲突。本教程基于[脱机数据入门]教程编写。
 
->[AZURE.NOTE]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="/pricing/1rmb-trial/?WT.mc_id=AE564AB28" target="_blank">Azure 试用</a>。
-
+>[!NOTE]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 <a href="https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=AE564AB28" target="_blank">Azure 试用</a>。
 
 ## 下载 iOS 项目
 
@@ -119,7 +117,6 @@
 [Add Conflict Handler to Todo List View Controller]: #add-conflict-handling
 [Test the App]: #test-app
 
-
 [add-todo-item-view-controller-3]: ./media/mobile-services-ios-handling-conflicts-offline-data/add-todo-item-view-controller-3.png
 [add-todo-item-view-controller-4]: ./media/mobile-services-ios-handling-conflicts-offline-data/add-todo-item-view-controller-4.png
 [add-todo-item-view-controller-5]: ./media/mobile-services-ios-handling-conflicts-offline-data/add-todo-item-view-controller-5.png
@@ -129,7 +126,6 @@
 [conflict-handling-problem-1]: ./media/mobile-services-ios-handling-conflicts-offline-data/conflict-handling-problem-1.png
 [conflict-ui]: ./media/mobile-services-ios-handling-conflicts-offline-data/conflict-ui.png
 
-
 [Segmented Controls]: https://developer.apple.com/zh-cn/library/ios/documentation/UserExperience/Conceptual/UIKitUICatalog/UISegmentedControl.html
 [Core Data Model Editor Help]: https://developer.apple.com/zh-cn/library/mac/recipes/xcode_help-core_data_modeling_tool/Articles/about_cd_modeling_tool.html
 [Creating an Outlet Connection]: https://developer.apple.com/zh-cn/library/mac/recipes/xcode_help-interface_builder/articles-connections_bindings/CreatingOutlet.html
@@ -138,10 +134,9 @@
 [Adding a Scene to a Storyboard]: https://developer.apple.com/zh-cn/library/ios/recipes/xcode_help-IB_storyboard/chapters/StoryboardScene.html
 [Core Data]: https://developer.apple.com/zh-cn/library/ios/documentation/Cocoa/Conceptual/CoreData/cdProgrammingGuide.html
 [Download the preview SDK here]: http://aka.ms/Gc6fex
-[How to use the Mobile Services client library for iOS]: /documentation/articles/mobile-services-ios-how-to-use-client-library/
+[How to use the Mobile Services client library for iOS]: ./mobile-services-ios-how-to-use-client-library.md
 [Getting Started Offline iOS Sample]: https://github.com/Azure/mobile-services-samples/tree/master/TodoOffline/iOS/blog20140611
-[脱机数据入门]: /documentation/articles/mobile-services-ios-get-started-offline-data/
-[Get started with Mobile Services]: /documentation/articles/mobile-services-ios-get-started/
- 
+[脱机数据入门]: ./mobile-services-ios-get-started-offline-data.md
+[Get started with Mobile Services]: ./mobile-services-ios-get-started.md
 
 <!---HONumber=Mooncake_0118_2016-->

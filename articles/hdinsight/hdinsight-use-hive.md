@@ -1,28 +1,27 @@
-<properties
-	pageTitle="了解什么是 Hive 以及如何使用 HiveQL | Azure"
-	description="了解 Apache Hive 以及如何将它与 HDInsight 中的 Hadoop 配合使用。选择如何运行 Hive 作业，以及如何使用 HiveQL 分析示例 Apache log4j 文件。"
-	keywords="hiveql,什么是 hive"
-	services="hdinsight"
-	documentationCenter=""
-	authors="Blackmist"
-	manager="jhubbard"
-	editor="cgronlun"
-	tags="azure-portal"/>  
+---
+title: 了解什么是 Hive 以及如何使用 HiveQL | Azure
+description: 了解 Apache Hive 以及如何将它与 HDInsight 中的 Hadoop 配合使用。选择如何运行 Hive 作业，以及如何使用 HiveQL 分析示例 Apache log4j 文件。
+keywords: hiveql,什么是 hive
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: jhubbard
+editor: cgronlun
+tags: azure-portal
 
-<tags
-	ms.service="hdinsight"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="big-data"
-	ms.date="09/19/2016"
-	wacn.date="01/05/2017"
-	ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 09/19/2016
+wacn.date: 01/05/2017
+ms.author: larryfr
+---
 
 # 将 Hive 和 HiveQL 与 HDInsight 中的 Hadoop 配合使用以分析示例 Apache log4j 文件
 
-[AZURE.INCLUDE [hive-selector](../../includes/hdinsight-selector-use-hive.md)]
-
+[!INCLUDE [hive-selector](../../includes/hdinsight-selector-use-hive.md)]
 
 本教程介绍了如何在 HDInsight 上使用 Hadoop 中的 Apache Hive，以及选择如何运行 Hive 作业。此外，还将介绍 HiveQL 以及如何分析一个示例 Apache log4j 文件。
 
@@ -37,11 +36,11 @@ Hive 知道如何处理结构化和半结构化数据，例如字段以特定字
 
 还可以通过**用户定义的函数 (UDF)** 扩展 Hive。通过 UDF 可实现 HiveQL 中不容易建模的功能或逻辑。有关将 UDF 与 Hive 配合使用的示例，请参阅：
 
-* [将 Java 用户定义的函数与 Hive 配合使用](/documentation/articles/hdinsight-hadoop-hive-java-udf/)
+* [将 Java 用户定义的函数与 Hive 配合使用](./hdinsight-hadoop-hive-java-udf.md)
 
-* [在 HDInsight 中将 Python 与 Hive 和 Pig 配合使用](/documentation/articles/hdinsight-python/)
+* [在 HDInsight 中将 Python 与 Hive 和 Pig 配合使用](./hdinsight-python.md)
 
-* [在 HDInsight 中将 C# 与 Hive 和 Pig 配合使用](/documentation/articles/hdinsight-hadoop-hive-pig-udf-dotnet-csharp/)
+* [在 HDInsight 中将 C# 与 Hive 和 Pig 配合使用](./hdinsight-hadoop-hive-pig-udf-dotnet-csharp.md)
 
 * [如何将自定义 Hive UDF 添加到 HDInsight](http://blogs.msdn.com/b/bigdatasupport/archive/2014/01/14/how-to-add-custom-hive-udfs-to-hdinsight.aspx)
 
@@ -59,31 +58,30 @@ Hive 知道如何处理结构化和半结构化数据，例如字段以特定字
 
 有关详细信息，请参阅 [HDInsight：Hive 内部表和外部表简介][cindygross-hive-tables]。
 
-
 ##<a id="data"></a>关于示例数据（一个 Apache log4j 文件）
 
 本示例使用 *log4j* 示例文件，该文件存储在 Blob 存储容器的 **/example/data/sample.log** 中。该文件中的每个日志都由一行字段组成，其中包含一个用于显示类型和严重性的 `[LOG LEVEL]` 字段，例如：
 
-	2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
+    2012-02-03 20:26:41 SampleClass3 [ERROR] verbose detail for id 1527353937
 
 在前面的示例中，日志级别为 ERROR。
 
-> [AZURE.NOTE] 也可以使用 [Apache Log4j](http://zh.wikipedia.org/wiki/Log4j) 日志记录工具生成 log4j 文件，然后将该文件上传到 Blob 容器。请参阅[将数据上传到 HDInsight](/documentation/articles/hdinsight-upload-data/) 以了解相关说明。有关如何将 Azure Blob 存储与 HDInsight 配合使用的详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用](/documentation/articles/hdinsight-hadoop-use-blob-storage/)。
+> [!NOTE] 也可以使用 [Apache Log4j](http://zh.wikipedia.org/wiki/Log4j) 日志记录工具生成 log4j 文件，然后将该文件上传到 Blob 容器。请参阅[将数据上传到 HDInsight](./hdinsight-upload-data.md) 以了解相关说明。有关如何将 Azure Blob 存储与 HDInsight 配合使用的详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用](./hdinsight-hadoop-use-blob-storage.md)。
 
 示例数据存储在 Azure Blob 存储中，HDInsight 将其用作默认文件系统。HDInsight 可以使用 **wasb** 前缀来访问存储在 Blob 中的文件。例如，若要访问 sample.log 文件，可使用以下语法：
 
-	wasbs:///example/data/sample.log
+    wasbs:///example/data/sample.log
 
 Azure Blob 存储是 HDInsight 的默认存储，因此也可以使用 HiveQL 中的 **/example/data/sample.log** 访问该文件。
 
-> [AZURE.NOTE] 语法 **wasbs:///** 用于访问存储在 HDInsight 群集的默认存储容器中的文件。如果你在预配群集时指定了其他存储帐户，并且想要访问存储在这些帐户中的文件，可以通过指定容器名称和存储帐户地址来访问数据，例如： **wasbs://mycontainer@mystorage.blob.core.chinacloudapi.cn/example/data/sample.log**。
+> [!NOTE] 语法 **wasbs:///** 用于访问存储在 HDInsight 群集的默认存储容器中的文件。如果你在预配群集时指定了其他存储帐户，并且想要访问存储在这些帐户中的文件，可以通过指定容器名称和存储帐户地址来访问数据，例如： **wasbs://mycontainer@mystorage.blob.core.chinacloudapi.cn/example/data/sample.log**。
 
 ##<a id="job"></a>示例作业：将列投影到分隔数据
 
 以下 HiveQL 语句将列投影到 **wasbs:///example/data** 目录中存储的分隔数据：
 
     set hive.execution.engine=tez;
-	DROP TABLE log4jLogs;
+    DROP TABLE log4jLogs;
     CREATE EXTERNAL TABLE log4jLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
     ROW FORMAT DELIMITED FIELDS TERMINATED BY ' '
     STORED AS TEXTFILE LOCATION 'wasbs:///example/data/';
@@ -100,15 +98,15 @@ Azure Blob 存储是 HDInsight 的默认存储，因此也可以使用 HiveQL �
 * **SELECT**：选择 **t4** 列表包含值 **[ERROR]** 的所有行的计数。这应会返回值 **3**，因为有三个行包含此值。
 * **INPUT\_\_FILE\_\_NAME LIKE '%.log'** - 告知 Hive 我们应只返回以 .log 结尾的文件中的数据。此项将搜索限定于包含数据的 sample.log 文件，并阻止搜索返回与所定义架构不匹配的其他示例数据文件中的数据。
 
-> [AZURE.NOTE] 如果想要通过外部源（例如自动化数据上传过程）或其他 MapReduce 操作更新基础数据，并且始终希望 Hive 查询使用最新数据，则应该使用外部表。<p>删除外部表**不会**删除数据，只会删除表定义。
+> [!NOTE] 如果想要通过外部源（例如自动化数据上传过程）或其他 MapReduce 操作更新基础数据，并且始终希望 Hive 查询使用最新数据，则应该使用外部表。<p>删除外部表**不会**删除数据，只会删除表定义。
 
 创建外部表后，以下语句可用于创建**内部**表。
 
     set hive.execution.engine=tez;
-	CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
-	STORED AS ORC;
-	INSERT OVERWRITE TABLE errorLogs
-	SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]';
+    CREATE TABLE IF NOT EXISTS errorLogs (t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string)
+    STORED AS ORC;
+    INSERT OVERWRITE TABLE errorLogs
+    SELECT t1, t2, t3, t4, t5, t6, t7 FROM log4jLogs WHERE t4 = '[ERROR]';
 
 这些语句可执行以下操作：
 
@@ -116,19 +114,19 @@ Azure Blob 存储是 HDInsight 的默认存储，因此也可以使用 HiveQL �
 * **STORED AS ORC**：以优化行纵栏表 (ORC) 格式存储数据。这是高度优化且有效的 Hive 数据存储格式。
 * **INSERT OVERWRITE ...SELECT**：从包含 **[ERROR]** 的 **log4jLogs** 表中选择行，然后将数据插入 **errorLogs** 表中。
 
-> [AZURE.NOTE] 与外部表不同，删除内部表会同时删除基础数据。
+> [!NOTE] 与外部表不同，删除内部表会同时删除基础数据。
 
 ##<a id="usetez"></a>使用 Apache Tez 提高性能
 
 [Apache Tez](http://tez.apache.org) 是让数据密集型应用程序（例如 Hive）能够大规模高效运行的框架。在最新版的 HDInsight 中，Hive 支持在 Tez 上运行。
 
-> [AZURE.NOTE] 对于基于 Windows 的 HDInsight 群集来说，Tez 目前默认处于关闭状态，因此必须启用。为了使用 Tez，必须为 Hive 查询设置以下值：<p>```set hive.execution.engine=tez;``` <p>将此值置于查询的开头可以按每个查询提交它。也可以在创建群集时通过设置配置值，将此值设置为在群集上默认打开。可以在[预配 HDInsight 群集](/documentation/articles/hdinsight-provision-clusters-v1/)中找到详细信息。
+> [!NOTE] 对于基于 Windows 的 HDInsight 群集来说，Tez 目前默认处于关闭状态，因此必须启用。为了使用 Tez，必须为 Hive 查询设置以下值：<p>```set hive.execution.engine=tez;``` <p>将此值置于查询的开头可以按每个查询提交它。也可以在创建群集时通过设置配置值，将此值设置为在群集上默认打开。可以在[预配 HDInsight 群集](./hdinsight-provision-clusters-v1.md)中找到详细信息。
 
 [Tez 上的 Hive 设计文档](https://cwiki.apache.org/confluence/display/Hive/Hive+on+Tez)包含有关实现选项和优化配置的详细信息。
 
 为了帮助使用 Tez 调试运行的作业，HDInsight 提供了以下 Web UI，用于查看 Tez 作业的详细信息：
 
-* [在基于 Windows 的 HDInsight 上使用 Tez UI](/documentation/articles/hdinsight-debug-tez-ui/)
+* [在基于 Windows 的 HDInsight 上使用 Tez UI](./hdinsight-debug-tez-ui.md)
 
 ##<a id="run"></a>选择如何运行 HiveQL 作业
 
@@ -136,65 +134,60 @@ HDInsight 可以使用各种方法运行 HiveQL 作业。使用下表来确定�
 
 | **使用此方法**，如果想要... | ...**交互式** shell | ...**批处理** | ...使用此**群集操作系统** | ...从此**客户端操作系统** |
 |:--------------------------------------------------------------------------------|:---------------------------:|:-----------------------:|:------------------------------------------|:-----------------------------------------|
-| [Curl](/documentation/articles/hdinsight-hadoop-use-hive-curl/) | &nbsp; | ✔ | Windows | Windows |
-| [查询控制台](/documentation/articles/hdinsight-hadoop-use-hive-query-console/) | &nbsp; | ✔ | Windows | 任何（基于浏览器） |
-| [用于 Visual Studio 的 HDInsight 工具](/documentation/articles/hdinsight-hadoop-use-hive-visual-studio/) | &nbsp; | ✔ | Windows | Windows |
-| [Windows PowerShell](/documentation/articles/hdinsight-hadoop-use-hive-powershell/) | &nbsp; | ✔ | Windows | Windows |
-| [远程桌面](/documentation/articles/hdinsight-hadoop-use-hive-remote-desktop/) | ✔ | ✔ | Windows | Windows |
+| [Curl](./hdinsight-hadoop-use-hive-curl.md) | &nbsp; | ✔ | Windows | Windows |
+| [查询控制台](./hdinsight-hadoop-use-hive-query-console.md) | &nbsp; | ✔ | Windows | 任何（基于浏览器） |
+| [用于 Visual Studio 的 HDInsight 工具](./hdinsight-hadoop-use-hive-visual-studio.md) | &nbsp; | ✔ | Windows | Windows |
+| [Windows PowerShell](./hdinsight-hadoop-use-hive-powershell.md) | &nbsp; | ✔ | Windows | Windows |
+| [远程桌面](./hdinsight-hadoop-use-hive-remote-desktop.md) | ✔ | ✔ | Windows | Windows |
 
 ## 使用本地 SQL Server Integration Services 在 Azure HDInsight 上运行 Hive 作业
 
 也可以使用 SQL Server Integration Services (SSIS) 运行 Hive 作业。Azure Feature Pack for SSIS 提供以下组件，用于 HDInsight 上的 Hive 作业。
 
-
 - [Azure HDInsight Hive 任务][hivetask]
 - [Azure 订阅连接管理器][connectionmanager]
 
-
 在[此处][ssispack]了解有关 Azure Feature Pack for SSIS 的详细信息。
-
 
 ##<a id="nextsteps"></a>后续步骤
 
 现在，你已了解什么是 Hive，以及如何将它与 HDInsight 中的 Hadoop 配合使用，请使用以下链接来学习 Azure HDInsight 的其他用法。
 
-
 - [将数据上传到 HDInsight][hdinsight-upload-data]
 - [将 Pig 与 HDInsight 配合使用][hdinsight-use-pig]
-- [将 Sqoop 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-sqoop/)
-- [将 Oozie 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-oozie/)
+- [将 Sqoop 与 HDInsight 配合使用](./hdinsight-use-sqoop.md)
+- [将 Oozie 与 HDInsight 配合使用](./hdinsight-use-oozie.md)
 - [将 MapReduce 作业与 HDInsight 配合使用][hdinsight-use-mapreduce]
 
 [check]: ./media/hdinsight-use-hive/hdi.checkmark.png
 
-[1]: /documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/
+[1]: ./hdinsight-hadoop-visual-studio-tools-get-started.md
 [hdinsight-sdk-documentation]: http://msdn.microsoft.com/zh-cn/library/dn479185.aspx
 
-[azure-purchase-options]: /pricing/overview/
-[azure-member-offers]: /pricing/member-offers/
-[azure-trial]: /pricing/1rmb-trial/
+[azure-purchase-options]: https://www.azure.cn/pricing/overview/
+[azure-member-offers]: https://www.azure.cn/pricing/member-offers/
+[azure-trial]: https://www.azure.cn/pricing/1rmb-trial/
 
 [apache-tez]: http://tez.apache.org
 [apache-hive]: http://hive.apache.org/
 [apache-log4j]: http://zh.wikipedia.org/wiki/Log4j
 [hive-on-tez-wiki]: https://cwiki.apache.org/confluence/display/Hive/Hive+on+Tez
-[import-to-excel]: /documentation/articles/hdinsight-connect-excel-power-query/
+[import-to-excel]: ./hdinsight-connect-excel-power-query.md
 [hivetask]: http://msdn.microsoft.com/zh-cn/library/mt146771(v=sql.120).aspx
 [connectionmanager]: http://msdn.microsoft.com/zh-cn/library/mt146773(v=sql.120).aspx
 [ssispack]: http://msdn.microsoft.com/zh-cn/library/mt146770(v=sql.120).aspx
 
-[hdinsight-use-pig]: /documentation/articles/hdinsight-use-pig/
-[hdinsight-use-oozie]: /documentation/articles/hdinsight-use-oozie/
-[hdinsight-analyze-flight-data]: /documentation/articles/hdinsight-analyze-flight-delay-data/
-[hdinsight-use-mapreduce]: /documentation/articles/hdinsight-use-mapreduce/
+[hdinsight-use-pig]: ./hdinsight-use-pig.md
+[hdinsight-use-oozie]: ./hdinsight-use-oozie.md
+[hdinsight-analyze-flight-data]: ./hdinsight-analyze-flight-delay-data.md
+[hdinsight-use-mapreduce]: ./hdinsight-use-mapreduce.md
 
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
 
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
-[hdinsight-submit-jobs]: /documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-submit-jobs]: ./hdinsight-submit-hadoop-jobs-programmatically.md
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
 
 [Powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 [powershell-here-strings]: http://technet.microsoft.com/zh-cn/library/ee692792.aspx
@@ -202,7 +195,6 @@ HDInsight 可以使用各种方法运行 HiveQL 作业。使用下表来确定�
 [image-hdi-hive-powershell]: ./media/hdinsight-use-hive/HDI.HIVE.PowerShell.png
 [img-hdi-hive-powershell-output]: ./media/hdinsight-use-hive/HDI.Hive.PowerShell.Output.png
 [image-hdi-hive-architecture]: ./media/hdinsight-use-hive/HDI.Hive.Architecture.png
-
 
 [cindygross-hive-tables]: http://blogs.msdn.com/b/cindygross/archive/2013/02/06/hdinsight-hive-internal-and-external-tables-intro.aspx
 

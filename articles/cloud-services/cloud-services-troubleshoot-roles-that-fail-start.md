@@ -1,27 +1,28 @@
-<properties
-   pageTitle="对无法启动的角色进行故障排除 | Azure"
-   description="以下是云服务角色无法启动的一些常见原因。此外还提供了这些问题的解决方案。"
-   services="cloud-services"
-   documentationCenter=""
-   authors="simonxjx"
-   manager="felixwu"
-   editor=""
-   tags="top-support-issue"/>
-<tags
-   ms.service="cloud-services"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="tbd"
-   ms.date="11/14/2016"
-   wacn.date="01/03/2017"
-   ms.author="v-six" />
+---
+title: 对无法启动的角色进行故障排除 | Azure
+description: 以下是云服务角色无法启动的一些常见原因。此外还提供了这些问题的解决方案。
+services: cloud-services
+documentationCenter: 
+authors: simonxjx
+manager: felixwu
+editor: 
+tags: top-support-issue
+
+ms.service: cloud-services
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: tbd
+ms.date: 11/14/2016
+wacn.date: 01/03/2017
+ms.author: v-six
+---
 
 # 对无法启动的云服务角色进行故障排除
 
 以下是一些与无法启动的 Azure 云服务角色相关的常见问题和解决方案。
 
-[AZURE.INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
+[!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
 ## 缺少 DLL 或依赖项
 
@@ -52,8 +53,7 @@ DLL 或程序集缺失的症状可能为：
 
 3. 在 web.config 文件中，找到 system.web 部分并添加以下行：
 
-		<customErrors mode="Off" />
-
+        <customErrors mode="Off" />
 
 4. 保存文件。
 
@@ -158,8 +158,6 @@ DLL 或程序集缺失的症状可能为：
 确认所有错误均已更正后，可以在不选中“为 .NET 4 角色启用 IntelliTrace”复选框的情况下部署服务。
 
 ## 后续步骤
-
-
 
 若要了解如何使用 Azure PaaS 计算机诊断数据对云服务角色问题进行故障排除，请参阅 [Kevin Williamson 博客系列](http://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.aspx)。
 

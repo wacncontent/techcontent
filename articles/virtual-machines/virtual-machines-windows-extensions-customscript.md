@@ -1,28 +1,26 @@
-<properties
-   pageTitle="将 Windows VM 上的自定义脚本与模板配合使用 | Azure"
-   description="通过将自定义脚本扩展与 Resource Manager 模板配合使用，自动完成 Windows VM 配置任务"
-   services="virtual-machines-windows"
-   documentationCenter=""
-   authors="kundanap"
-   manager="timlt"
-   editor=""
-   tags="azure-resource-manager"/>  
+---
+title: 将 Windows VM 上的自定义脚本与模板配合使用 | Azure
+description: 通过将自定义脚本扩展与 Resource Manager 模板配合使用，自动完成 Windows VM 配置任务
+services: virtual-machines-windows
+documentationCenter: 
+authors: kundanap
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-   ms.service="virtual-machines-windows"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-windows"
-   ms.workload="infrastructure-services"
-   ms.date="03/29/2016"
-   wacn.date="10/24/2016"
-   ms.author="kundanap"/>  
-
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure-services
+ms.date: 03/29/2016
+wacn.date: 10/24/2016
+ms.author: kundanap
+---
 
 # 使用 Azure Resource Manager 模板的 Windows VM 自定义脚本扩展
 
-[AZURE.INCLUDE [virtual-machines-common-extensions-customscript](../../includes/virtual-machines-common-extensions-customscript.md)]
+[!INCLUDE [virtual-machines-common-extensions-customscript](../../includes/virtual-machines-common-extensions-customscript.md)]
 
 ## Windows VM 模板示例
 
@@ -72,7 +70,7 @@
         "storageAccountKey": "yourStorageAccountKey"
         }
         }
-若要了解最新版自定义脚本扩展的架构，请参阅 [Azure Windows VM extension configuration samples](/documentation/articles/virtual-machines-windows-extensions-configuration-samples/)（Azure Windows VM 扩展配置示例）。
+若要了解最新版自定义脚本扩展的架构，请参阅 [Azure Windows VM extension configuration samples](./virtual-machines-windows-extensions-configuration-samples.md)（Azure Windows VM 扩展配置示例）。
 
 有关使用自定义脚本扩展的 VM 上的应用程序配置的示例，请参阅 [Custom Script extension on a Windows VM](https://github.com/Azure/azure-quickstart-templates/blob/b1908e74259da56a92800cace97350af1f1fc32b/201-list-storage-keys-windows-vm/azuredeploy.json/)（Windows VM 上的自定义脚本扩展）。
 

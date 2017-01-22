@@ -1,23 +1,21 @@
-<properties 
-   pageTitle="适用于 Azure 来宾 OS 的更新列表 | Azure" 
-   description="适用于来宾 OS 版本的更新列表" 
-   services="cloud-services" 
-   documentationCenter="na" 
-   authors="raiye" 
-   manager="timlt" 
-   editor=""/>  
+---
+title: 适用于 Azure 来宾 OS 的更新列表 | Azure
+description: 适用于来宾 OS 版本的更新列表
+services: cloud-services
+documentationCenter: na
+authors: raiye
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="cloud-services"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="tbd" 
-   ms.date="12/01/2016"
-   ms.author="raiye"
-   wacn.date="01/03/2017"/>  
-
+ms.service: cloud-services
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: tbd
+ms.date: 12/01/2016
+ms.author: raiye
+wacn.date: 01/03/2017
+---
 
 # Azure 来宾 OS 
 
@@ -336,7 +334,7 @@
 | MS15-029 |[3035126] |Windows 照片解码器组件中的漏洞可能导致信息泄露 |4\.18、3.25、2.37 |不适用 |
 | MS15-030 |[3039976] |远程桌面协议中的漏洞可能导致拒绝服务 |4\.18、3.25、2.37 |不适用 |
 
-> [AZURE.NOTE] 公告 MS15-031 可能显示为已卸载。但是，它不适用于此来宾 OS 版本。
+> [!NOTE] 公告 MS15-031 可能显示为已卸载。但是，它不适用于此来宾 OS 版本。
 
 ## 2 月来宾 OS
 | 公告 ID | 上层知识库文章 | 漏洞描述 | 来宾 OS | 首次引入日期 |
@@ -472,7 +470,6 @@
 [3156418]: http://support.microsoft.com/zh-cn/kb/3156418
 [3153731]: http://support.microsoft.com/zh-cn/kb/3153731
 
-
 [3155533]: http://support.microsoft.com/zh-cn/kb/3155533
 [3156764]: http://support.microsoft.com/zh-cn/kb/3156764
 [3156754]: http://support.microsoft.com/zh-cn/kb/3156754
@@ -489,7 +486,6 @@
 [3123245]: http://support.microsoft.com/zh-cn/kb/3123245
 [禁用 RC4]: https://blogs.msdn.microsoft.com/azuresecurity/2016/04/12/azure-cipher-suite-change-removes-rc4-support/
 
-
 [3148531]: http://support.microsoft.com/zh-cn/kb/3148531
 [3148522]: http://support.microsoft.com/zh-cn/kb/3148522
 [3148541]: http://support.microsoft.com/zh-cn/kb/3148541
@@ -497,7 +493,6 @@
 [3143118]: http://support.microsoft.com/zh-cn/kb/3143118
 [3148527]: http://support.microsoft.com/zh-cn/kb/3148527
 [3148528]: http://support.microsoft.com/zh-cn/kb/3148528
-
 
 [3142015]: http://support.microsoft.com/zh-cn/kb/3142015
 [3143148]: http://support.microsoft.com/zh-cn/kb/3143148
@@ -576,7 +571,6 @@
 [3060716]: http://support.microsoft.com/zh-cn/kb/3060716
 [3076949]: http://support.microsoft.com/zh-cn/kb/3076949
 [3086251]: http://support.microsoft.com/zh-cn/kb/3086251
-
 
 [3076321]: http://support.microsoft.com/zh-cn/kb/3076321
 [3072604]: http://support.microsoft.com/zh-cn/kb/3072604
@@ -668,10 +662,7 @@
 [3062577]: http://support.microsoft.com/zh-cn/kb/3062577
 [3063858]: http://support.microsoft.com/zh-cn/kb/3063858
 
-
-
 [archive]: https://msdn.microsoft.com/zh-cn/library/azure/dn391773.aspx
-[family-explain]: /documentation/articles/cloud-services-guestos-update-matrix/#guest-os-family-version-and-release-explanation
- 
+[family-explain]: ./cloud-services-guestos-update-matrix.md#guest-os-family-version-and-release-explanation
 
 <!---HONumber=Mooncake_1226_2016-->

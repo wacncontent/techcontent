@@ -1,23 +1,22 @@
-<properties
-    pageTitle="为 Azure 导入/导出服务创建导出作业 | Azure"
-    description="了解如何为 Azure 导入/导出服务创建导出作业"
-    author="renashahmsft"
-    manager="aungoo"
-    editor="tysonn"
-    services="storage"
-    documentationcenter="" />  
+---
+title: 为 Azure 导入/导出服务创建导出作业 | Azure
+description: 了解如何为 Azure 导入/导出服务创建导出作业
+author: renashahmsft
+manager: aungoo
+editor: tysonn
+services: storage
+documentationcenter: 
 
-<tags
-    ms.assetid="613d480b-a8ef-4b28-8f54-54174d59b3f4"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/16/2016"
-    wacn.date="12/29/2016"
-    ms.author="renash" />  
-
+ms.assetid: 613d480b-a8ef-4b28-8f54-54174d59b3f4
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/16/2016
+wacn.date: 12/29/2016
+ms.author: renash
+---
 
 # 创建导出作业
 使用 REST API 为 Azure 导入/导出服务创建导出作业的过程包括以下步骤：
@@ -34,7 +33,7 @@
 
 -   接收从 21 世纪互联 寄回的驱动器。
 
- 有关导入/导出服务的概述以及演示如何使用 [Azure 门户预览](https://portal.azure.cn/)创建和管理导入和导出作业的教程，请参阅 [使用 Azure 导入/导出服务将数据传输到 Blob 存储](/documentation/articles/storage-import-export-service/)。
+ 有关导入/导出服务的概述以及演示如何使用 [Azure 门户预览](https://portal.azure.cn/)创建和管理导入和导出作业的教程，请参阅 [使用 Azure 导入/导出服务将数据传输到 Blob 存储](./storage-import-export-service.md)。
 
 ## 选择要导出的 Blob
  若要创建导出作业，需提供要从存储帐户导出的 Blob 的列表。可通过多种方法选择要导出的 Blob：
@@ -78,11 +77,11 @@
 -   要导出的 Blob（或 Blob 前缀）的列表。
 
 ## 寄送驱动器
- 接下来，根据已选择导出的 Blob 和驱动器大小，使用 Azure 导入/导出工具确定需要寄送的驱动器数目。有关详细信息，请参阅 [Azure 导入/导出工具参考](/documentation/articles/storage-import-export-tool-how-to-v1/)。
+ 接下来，根据已选择导出的 Blob 和驱动器大小，使用 Azure 导入/导出工具确定需要寄送的驱动器数目。有关详细信息，请参阅 [Azure 导入/导出工具参考](./storage-import-export-tool-how-to-v1.md)。
 
  将驱动器打包到一个包裹中，然后将其寄送到在上一步骤中获取的地址。记下包裹的跟踪号供下一步使用。
 
-> [AZURE.NOTE]必须通过支持的、可提供包裹跟踪号的承运人寄送驱动器。
+> [!NOTE]必须通过支持的、可提供包裹跟踪号的承运人寄送驱动器。
 
 ## 使用包裹信息更新导出作业
  获取跟踪号后，请调用[更新作业属性](https://docs.microsoft.com/zh-CN/rest/api/storageimportexport/jobs#Jobs_Update)操作更新作业的承运人名称和跟踪号。可以选择性地指定驱动器数量、回邮地址和寄送日期。
@@ -91,6 +90,6 @@
  处理导出作业后，驱动器将连同加密的数据一起回邮给你。可以通过调用[获取作业](https://docs.microsoft.com/zh-CN/rest/api/storageimportexport/jobs#Jobs_Get)操作检索每个驱动器的 BitLocker 密钥。然后，可以使用该密钥解锁驱动器。每个驱动器上的驱动器清单文件包含驱动器上的文件列表以及每个文件的原始 Blob 地址。
 
 ## 另请参阅
- [使用导入/导出服务 REST API](/documentation/articles/storage-import-export-using-the-rest-api/)
+ [使用导入/导出服务 REST API](./storage-import-export-using-the-rest-api.md)
 
 <!---HONumber=Mooncake_1226_2016-->

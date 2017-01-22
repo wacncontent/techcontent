@@ -1,21 +1,21 @@
-<properties
-    pageTitle="将公共数据提取到 Azure 事件中心 | Azure"
-    description="从 Web 示例进行事件中心导入的概述"
-    services="event-hubs"
-    documentationCenter="na"
-    authors="spyrossak"
-    manager="timlt"
-    editor=""/>
+---
+title: 将公共数据提取到 Azure 事件中心 | Azure
+description: 从 Web 示例进行事件中心导入的概述
+services: event-hubs
+documentationCenter: na
+authors: spyrossak
+manager: timlt
+editor: 
 
-<tags 
-    ms.service="event-hubs"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="08/25/2016"
-    wacn.date="10/10/2016"
-    ms.author="spyros;sethm" />
+ms.service: event-hubs
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/25/2016
+wacn.date: 10/10/2016
+ms.author: spyros;sethm
+---
 
 # 将公共数据拉取到 Azure 事件中心中
 

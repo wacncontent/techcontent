@@ -1,7 +1,6 @@
 <!-- need to be verified -->
 
-
-如果尚未这样做，则你可以获取 [Azure 订阅试用版](/pricing/1rmb-trial/)和[连接到你的 Azure 帐户](/documentation/articles/xplat-cli-connect/)的 [Azure CLI](/documentation/articles/xplat-cli-install/)。请确保 Azure CLI 处于 Resource Manager 模式下，如下所示：
+如果尚未这样做，则你可以获取 [Azure 订阅试用版](https://www.azure.cn/pricing/1rmb-trial/)和[连接到你的 Azure 帐户](../articles/xplat-cli-connect.md)的 [Azure CLI](../articles/xplat-cli-install.md)。请确保 Azure CLI 处于 Resource Manager 模式下，如下所示：
 
     azure config mode arm
 

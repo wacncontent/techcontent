@@ -1,33 +1,33 @@
-<properties
-    pageTitle="使用门户创建应用程序网关 | Azure"
-    description="了解如何使用门户创建应用程序网关"
-    services="application-gateway"
-    documentationcenter="na"
-    author="georgewallace"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用门户创建应用程序网关 | Azure
+description: 了解如何使用门户创建应用程序网关
+services: application-gateway
+documentationcenter: na
+author: georgewallace
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="54dffe95-d802-4f86-9e2e-293f49bd1e06"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/12/2016"
-    wacn.date="01/03/2017"
-    ms.author="gwallace" />
+ms.assetid: 54dffe95-d802-4f86-9e2e-293f49bd1e06
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/12/2016
+wacn.date: 01/03/2017
+ms.author: gwallace
+---
 
 # 使用门户创建应用程序网关
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/application-gateway-create-gateway-portal/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-create-gateway-arm/)
-- [Azure 经典 PowerShell](/documentation/articles/application-gateway-create-gateway/)
-- [Azure Resource Manager 模板](/documentation/articles/application-gateway-create-gateway-arm-template/)
-- [Azure CLI](/documentation/articles/application-gateway-create-gateway-cli/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./application-gateway-create-gateway-portal.md)
+- [Azure Resource Manager PowerShell](./application-gateway-create-gateway-arm.md)
+- [Azure 经典 PowerShell](./application-gateway-create-gateway.md)
+- [Azure Resource Manager 模板](./application-gateway-create-gateway-arm-template.md)
+- [Azure CLI](./application-gateway-create-gateway-cli.md)
 
-Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之间提供故障转移和性能路由 HTTP 请求，而不管它们是在云中还是本地。应用程序网关提供许多应用程序传送控制器 (ADC) 功能，包括 HTTP 负载均衡、基于 cookie 的会话相关性、安全套接字层 (SSL) 卸载、自定义运行状况探测、多站点支持，以及许多其他功能。若要查找支持的功能的完整列表，请参阅[应用程序网关概述](/documentation/articles/application-gateway-introduction/)
+Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之间提供故障转移和性能路由 HTTP 请求，而不管它们是在云中还是本地。应用程序网关提供许多应用程序传送控制器 (ADC) 功能，包括 HTTP 负载均衡、基于 cookie 的会话相关性、安全套接字层 (SSL) 卸载、自定义运行状况探测、多站点支持，以及许多其他功能。若要查找支持的功能的完整列表，请参阅[应用程序网关概述](./application-gateway-introduction.md)
 
 ## <a name="scenario"></a>方案
 
@@ -42,8 +42,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 ![方案示例][scenario]  
 
-
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 针对应用程序网关进行的其他配置（包括自定义运行状况探测、后端池地址以及其他规则）是在对应用程序网关配置以后配置的，不是在初始部署期间配置的。
 > 
 > 
@@ -60,7 +59,6 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![创建应用程序网关][1]  
 
-
 ### 步骤 2
 
 下一步，填写有关应用程序网关的基本信息。完成后，单击“确定”
@@ -76,8 +74,7 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![显示基本设置的边栏选项卡][2]  
 
-
-> [AZURE.NOTE]
+> [!NOTE]
 进行测试时，可以选择 1 作为实例计数。必须知道的是，2 以下的实例计数不受 SLA 支持，因此不建议使用。小型网关用于开发/测试，不用于生产。
 > 
 > 
@@ -98,13 +95,11 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![选择虚拟网络边栏选项卡][4]  
 
-
 ### 步骤 5
 
 在“创建虚拟网络”边栏选项卡中填写网络信息，如前面的[方案](#scenario)说明中所述。
 
 ![使用输入的信息创建虚拟网络边栏选项卡][5]  
-
 
 ### 步骤 6
 
@@ -121,7 +116,6 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 接下来为公共 IP 地址提供一个友好名称，然后单击“确定”
 
 ![创建公共 IP 地址边栏选项卡][7]  
-
 
 ### 步骤 9
 
@@ -147,7 +141,6 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![应用程序网关资源视图][10]  
 
-
 这些步骤会创建基本的应用程序网关，提供侦听器、后端池、后端 http 设置以及规则的默认设置。预配成功后，即可根据部署修改这些设置。
 
 ## 将服务器添加到后端池
@@ -160,13 +153,11 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 ![应用程序网关后端池][11]  
 
-
 ### 步骤 2
 
 在文本框中添加 IP 地址或 FQDN 值，然后单击“保存”
 
 ![向应用程序网关后端池添加值][12]  
-
 
 此操作会将值保存到后端池。更新应用程序网关后，进入应用程序网关的流量将路由到在此步骤中添加的后端地址。
 
@@ -174,11 +165,11 @@ Azure 应用程序网关需要自己的子网。在创建虚拟网络时，请�
 
 此方案创建默认应用程序网关。后续步骤是通过修改设置以及调整网关中的规则，配置应用程序网关。通过访问以下文章，可找到这些步骤：
 
-访问[创建自定义运行状况探测](/documentation/articles/application-gateway-create-probe-portal/)，了解如何创建自定义运行状况探测
+访问[创建自定义运行状况探测](./application-gateway-create-probe-portal.md)，了解如何创建自定义运行状况探测
 
-访问[配置 SSL 卸载](/documentation/articles/application-gateway-ssl-portal/)，了解如何配置 SSL 卸载并从 Web 服务器中剥离开销较高的 SSL 解密
+访问[配置 SSL 卸载](./application-gateway-ssl-portal.md)，了解如何配置 SSL 卸载并从 Web 服务器中剥离开销较高的 SSL 解密
 
-了解如何使用应用程序网关的 [Web 应用程序防火墙](/documentation/articles/application-gateway-webapplicationfirewall-overview/)功能保护应用程序。
+了解如何使用应用程序网关的 [Web 应用程序防火墙](./application-gateway-webapplicationfirewall-overview.md)功能保护应用程序。
 
 <!--Image references-->
 

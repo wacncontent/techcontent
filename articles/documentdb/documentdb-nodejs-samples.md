@@ -1,31 +1,29 @@
-<properties
-	pageTitle="DocumentDB 的 NoSQL Node.js 示例 | Azure"
-	description="在 github 上找到 NoSQL Node.js 示例用于执行 DocumentDB 中的常见任务，包括 NoSQL 数据库中 JSON 文档的 CRUD 操作。"
-	keywords="Node.js 示例"
-	services="documentdb"
-	authors="moderakh"
-	manager="jhubbard"
-	editor="monicar"
-	documentationCenter="nodejs"/>  
+---
+title: DocumentDB 的 NoSQL Node.js 示例 | Azure
+description: 在 github 上找到 NoSQL Node.js 示例用于执行 DocumentDB 中的常见任务，包括 NoSQL 数据库中 JSON 文档的 CRUD 操作。
+keywords: Node.js 示例
+services: documentdb
+authors: moderakh
+manager: jhubbard
+editor: monicar
+documentationCenter: nodejs
 
-
-<tags
-	ms.service="documentdb"
-	ms.workload="data-services"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/03/2016"
-	ms.author="moderakh"
-	wacn.date="01/19/2017"/>
-
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/03/2016
+ms.author: moderakh
+wacn.date: 01/19/2017
+---
 
 # DocumentDB Node.js 示例
 
-> [AZURE.SELECTOR]
-- [.NET 示例](/documentation/articles/documentdb-dotnet-samples/)
-- [Node.js 示例](/documentation/articles/documentdb-nodejs-samples/)
-- [Python 示例](/documentation/articles/documentdb-python-samples/)
+> [!div class="op_single_selector"]
+- [.NET 示例](./documentdb-dotnet-samples.md)
+- [Node.js 示例](./documentdb-nodejs-samples.md)
+- [Python 示例](./documentdb-python-samples.md)
 - [Azure 代码示例库](https://azure.microsoft.com/documentation/samples/?service=documentdb)
 
 对 Azure DocumentDB 资源执行 CRUD 操作和其他常见操作的示例解决方案包含在 [azure-documentdb-nodejs](https://github.com/Azure/azure-documentdb-node/tree/master/samples) GitHub 存储库中。本文将提供：
@@ -36,11 +34,10 @@
 **先决条件**
 
 1. 你需要一个 Azure 帐户以使用这些 Node.js 示例：
-    - 可以[注册一个 Azure 帐户](/pricing/1rmb-trial/)：获取用于试用付费版 Azure 服务的信用额度。
-2. 还需要 [Node.js SDK](/documentation/articles/documentdb-sdk-node/)。
+    - 可以[注册一个 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)：获取用于试用付费版 Azure 服务的信用额度。
+2. 还需要 [Node.js SDK](./documentdb-sdk-node.md)。
 
-    > [AZURE.NOTE] 每个示例都是独立的，自行对自身进行设置并在完成后自行进行清理。因此，这些示例对 [DocumentClient.createCollection](http://azure.github.io/azure-documentdb-node/DocumentClient.html#createCollection) 发出多个调用。每次执行完此操作，均会按照正在创建的集合的性能层，向你的订阅收取使用 1 小时的费用。
-
+    > [!NOTE] 每个示例都是独立的，自行对自身进行设置并在完成后自行进行清理。因此，这些示例对 [DocumentClient.createCollection](http://azure.github.io/azure-documentdb-node/DocumentClient.html#createCollection) 发出多个调用。每次执行完此操作，均会按照正在创建的集合的性能层，向你的订阅收取使用 1 小时的费用。
 
 ## <a name="database-examples"></a>数据库示例
 
@@ -53,7 +50,6 @@
 [按 ID 读取数据库](https://github.com/Azure/azure-documentdb-node/blob/ef53e5f6707a5dc45920fb6ad54d9c7e008a6c18/samples/DocumentDB.Samples.DatabaseManagement/app.js#L89-L99) | [DocumentClient.readDatabase](http://azure.github.io/azure-documentdb-node/DocumentClient.html#readDatabase)
 [列出帐户的数据库](https://github.com/Azure/azure-documentdb-node/blob/ef53e5f6707a5dc45920fb6ad54d9c7e008a6c18/samples/DocumentDB.Samples.DatabaseManagement/app.js#L111-L119) | [DocumentClient.readDatabases](http://azure.github.io/azure-documentdb-node/DocumentClient.html#readDatabase)
 [删除数据库](https://github.com/Azure/azure-documentdb-node/blob/ef53e5f6707a5dc45920fb6ad54d9c7e008a6c18/samples/DocumentDB.Samples.DatabaseManagement/app.js#L133-L144) | [DocumentClient.deleteDatabase](http://azure.github.io/azure-documentdb-node/DocumentClient.html#deleteDatabase)
-
 
 ## <a name="collection-examples"></a>集合示例
 
@@ -68,7 +64,6 @@
 [获取集合的性能层](https://github.com/Azure/azure-documentdb-node/blob/ef53e5f6707a5dc45920fb6ad54d9c7e008a6c18/samples/DocumentDB.Samples.CollectionManagement/app.js#L158-L186) | [DocumentQueryable.queryOffers](http://azure.github.io/azure-documentdb-node/DocumentClient.html#queryOffers)
 [更改集合的性能层](https://github.com/Azure/azure-documentdb-node/blob/ef53e5f6707a5dc45920fb6ad54d9c7e008a6c18/samples/DocumentDB.Samples.CollectionManagement/app.js#L188-L202) | [DocumentClient.replaceOffer](http://azure.github.io/azure-documentdb-node/DocumentClient.html#replaceOffer)
 [删除集合](https://github.com/Azure/azure-documentdb-node/blob/ef53e5f6707a5dc45920fb6ad54d9c7e008a6c18/samples/DocumentDB.Samples.CollectionManagement/app.js#L204-L215) | [DocumentClient.deleteCollection](http://azure.github.io/azure-documentdb-node/DocumentClient.html#deleteCollection)
-
 
 ## <a name="document-examples"></a>文档示例
 
@@ -101,7 +96,7 @@
 [在字符串路径上创建范围索引](https://github.com/Azure/azure-documentdb-node/blob/ef53e5f6707a5dc45920fb6ad54d9c7e008a6c18/samples/DocumentDB.Samples.IndexManagement/app.js#L349-L425) | [DocumentClient.queryDocument](http://azure.github.io/azure-documentdb-node/DocumentClient.html#queryDocument)
 [使用默认 indexPolicy 创建集合，然后联机进行更新](https://github.com/Azure/azure-documentdb-node/blob/ef53e5f6707a5dc45920fb6ad54d9c7e008a6c18/samples/DocumentDB.Samples.IndexManagement/app.js#L519-L614) | [DocumentClient.createCollection](http://azure.github.io/azure-documentdb-node/DocumentClient.html#createCollection)<br>[DocumentClient.replaceCollection#replaceCollection](http://azure.github.io/azure-documentdb-node/DocumentClient.html)
 
-有关索引的详细信息，请参阅 [DocumentDB 索引策略](/documentation/articles/documentdb-indexing-policies/)。
+有关索引的详细信息，请参阅 [DocumentDB 索引策略](./documentdb-indexing-policies.md)。
 
 ## 服务器端编程示例 <a name="server-side-programming-examples"></a>
 
@@ -112,7 +107,7 @@
 [创建存储过程](https://github.com/Azure/azure-documentdb-node/blob/ef53e5f6707a5dc45920fb6ad54d9c7e008a6c18/samples/DocumentDB.Samples.ServerSideScripts/app.js#L44-L71) | [DocumentClient.createStoredProcedure](http://azure.github.io/azure-documentdb-node/DocumentClient.html#createStoredProcedure)
 [执行存储过程](https://github.com/Azure/azure-documentdb-node/blob/ef53e5f6707a5dc45920fb6ad54d9c7e008a6c18/samples/DocumentDB.Samples.ServerSideScripts/app.js#L73-L90) | [DocumentClient.executeStoredProcedure](http://azure.github.io/azure-documentdb-node/DocumentClient.html#executeStoredProcedure)
 
-有关服务器端编程的详细信息，请参阅 [DocumentDB 服务器端编程：存储过程、数据库触发器和 UDF](/documentation/articles/documentdb-programming/)。
+有关服务器端编程的详细信息，请参阅 [DocumentDB 服务器端编程：存储过程、数据库触发器和 UDF](./documentdb-programming.md)。
 
 ## 分区示例
 
@@ -122,6 +117,6 @@
 --- | ---
 [使用 HashPartitionResolver](https://github.com/Azure/azure-documentdb-node/blob/ce0fc3c4e70b0279091a1e03620a668d93a14fc2/samples/Partitioning/app.js#L53-L103) | [HashPartitionResolver](http://azure.github.io/azure-documentdb-node/HashPartitionResolver.html)
 
-有关在 DocumentDB 中对数据进行分区的详细信息，请参阅[对 DocumentDB 中的数据进行分区和扩展](/documentation/articles/documentdb-partition-data/)。
+有关在 DocumentDB 中对数据进行分区的详细信息，请参阅[对 DocumentDB 中的数据进行分区和扩展](./documentdb-partition-data.md)。
 
 <!---HONumber=Mooncake_1121_2016-->

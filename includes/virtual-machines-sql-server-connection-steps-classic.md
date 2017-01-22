@@ -8,8 +8,7 @@
 
 2. 在“虚拟机”边栏选项卡中，复制虚拟机的“DNS 名称”。
 
-	![DNS 名称](./media/virtual-machines-sql-server-connection-steps/sql-vm-dns-name.png)
-
+    ![DNS 名称](./media/virtual-machines-sql-server-connection-steps/sql-vm-dns-name.png)
 
 ### <a name="connect-to-the-database-engine-from-another-computer"></a> 从其他计算机连接到数据库引擎
 
@@ -17,11 +16,11 @@
 
 2. 在“连接到服务器”或“连接到数据库引擎”对话框的“服务器名称”框中，按“DNSName,portnumber”的格式输入虚拟机的 DNS 名称（在前一任务中确定）和公共终结点端口号，例如“mysqlvm.chinacloudapp.cn,57500”。
 
-	![使用 SSMS 进行连接](./media/virtual-machines-sql-server-connection-steps/33Connect-SSMS.png)
+    ![使用 SSMS 进行连接](./media/virtual-machines-sql-server-connection-steps/33Connect-SSMS.png)
 
-	如果你不记得之前创建的公共终结点端口号，可以在“虚拟机”边栏选项卡的“终结点”区域找到。
+    如果你不记得之前创建的公共终结点端口号，可以在“虚拟机”边栏选项卡的“终结点”区域找到。
 
-	![公用端口](./media/virtual-machines-sql-server-connection-steps/sql-vm-port-number.png)
+    ![公用端口](./media/virtual-machines-sql-server-connection-steps/sql-vm-port-number.png)
 
 3. 在“身份验证”框中，选择“SQL Server 身份验证”。
 

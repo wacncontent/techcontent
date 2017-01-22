@@ -1,24 +1,23 @@
-<properties
-  pageTitle="Azure IoT 套件和 Azure Active Directory | Azure"
-  description="介绍 Azure IoT 套件如何使用 Azure Active Directory 管理权限。"
-  services=""
-  suite="iot-suite"
-  documentationCenter=""
-  authors="aguilaaj"
-  manager="timlt"
-  editor=""/>  
+---
+title: Azure IoT 套件和 Azure Active Directory | Azure
+description: 介绍 Azure IoT 套件如何使用 Azure Active Directory 管理权限。
+services: 
+suite: iot-suite
+documentationCenter: 
+authors: aguilaaj
+manager: timlt
+editor: 
 
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/24/2016
+wacn.date: 12/05/2016
+ms.author: araguila
+---
 
-<tags
-  ms.service="iot-suite"
-  ms.devlang="na"
-  ms.topic="article"
-  ms.tgt_pltfrm="na"
-  ms.workload="na"
-  ms.date="10/24/2016"
-  wacn.date="12/05/2016"
-  ms.author="araguila"/>
-  
 # azureiotsuite.cn 站点权限
 
 ## 登录时发生的情况
@@ -118,14 +117,13 @@ Azure 管理员角色可控制将 Azure 订阅映射到 AD 租户的能力。
 
 4. 出现提示时，将 **tenantid** 设置为新创建的租户，而不是以前的租户。
 
-
 ### 为何会出现以下错误？ “你的帐户没有创建解决方案的正确权限。请咨询帐户管理员或使用其他帐户进行尝试。”
 
 看看下图：
 
 ![][img-flowchart]  
 
-> [AZURE.NOTE] 如果在验证你是 AAD 租户的全局管理员和订阅的协同管理员后，继续看到此错误，请让你的帐户管理员删除该用户，并按以下顺序重新分配必要的权限：将用户添加为全局管理员，然后将用户添加为 Azure 订阅的协同管理员。如果问题仍然存在，请[在线申请支持][lnk-help-support]。
+> [!NOTE] 如果在验证你是 AAD 租户的全局管理员和订阅的协同管理员后，继续看到此错误，请让你的帐户管理员删除该用户，并按以下顺序重新分配必要的权限：将用户添加为全局管理员，然后将用户添加为 Azure 订阅的协同管理员。如果问题仍然存在，请[在线申请支持][lnk-help-support]。
 **为何在我具有 Azure 订阅时会出现以下错误？** *创建预配置解决方案需要 Azure 订阅。只需几分钟即可创建一个免费帐户。*
 
 如果你确定具有 Azure 订阅，请验证订阅的租户映射，并确保在下拉列表中选择正确租户。如果验证了所需租户是正确的，请按照上图并验证订阅和此 AAD 租户的映射。
@@ -139,13 +137,13 @@ Azure 管理员角色可控制将 Azure 订阅映射到 AD 租户的能力。
 [lnk-azureiotsuite]: https://www.azureiotsuite.cn/
 [lnk-rm-github-repo]: https://github.com/Azure/azure-iot-remote-monitoring
 [lnk-pm-github-repo]: https://github.com/Azure/azure-iot-predictive-maintenance
-[lnk-aad-admin]: /documentation/articles/active-directory-assign-admin-roles/
+[lnk-aad-admin]: ../active-directory/active-directory-assign-admin-roles.md
 [lnk-classic-portal]: https://manage.windowsazure.cn/
-[lnk-create-edit-users]: /documentation/articles/active-directory-create-users/
-[lnk-assign-app-roles]: /documentation/articles/active-directory-application-manifest/
-[lnk-service-admins]: /support/changing-service-admin-and-co-admin/
+[lnk-create-edit-users]: ../active-directory/active-directory-create-users.md
+[lnk-assign-app-roles]: ../active-directory/active-directory-application-manifest.md
+[lnk-service-admins]: https://www.azure.cn/support/changing-service-admin-and-co-admin/
 [lnk-resource-cs]: https://github.com/Azure/azure-iot-remote-monitoring/blob/master/DeviceAdministration/Web/Security/RolePermissions.cs
 [lnk-help-support]: https://www.azure.cn/support/support-ticket-form/?l=zh-cn
-[lnk-customize]: /documentation/articles/iot-suite-guidance-on-customizing-preconfigured-solutions/
+[lnk-customize]: ./iot-suite-guidance-on-customizing-preconfigured-solutions.md
 
 <!---HONumber=Mooncake_0815_2016-->

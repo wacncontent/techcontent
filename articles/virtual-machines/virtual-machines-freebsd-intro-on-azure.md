@@ -1,23 +1,23 @@
-<properties
-    pageTitle="Azure FreeBSD 简介 | Azure"
-    description="了解如何在 Azure 上使用 FreeBSD 虚拟机。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="KylieLiang"
-    manager="timlt"
-    editor=""
-    tags="azure-service-management" />
-<tags
-    ms.assetid="32b87a5f-d024-4da0-8bf0-77e233d1422b"
-    ms.service="virtual-machines-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-linux"
-    ms.workload="infrastructure-services"
-    ms.date="08/27/2016"
-    wacn.date="01/13/2017"
-    ms.author="kyliel" />  
+---
+title: Azure FreeBSD 简介 | Azure
+description: 了解如何在 Azure 上使用 FreeBSD 虚拟机。
+services: virtual-machines-linux
+documentationcenter: 
+author: KylieLiang
+manager: timlt
+editor: 
+tags: azure-service-management
 
+ms.assetid: 32b87a5f-d024-4da0-8bf0-77e233d1422b
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure-services
+ms.date: 08/27/2016
+wacn.date: 01/13/2017
+ms.author: kyliel
+---
 
 # Azure FreeBSD 简介
 本主题概述如何在 Azure 中运行 FreeBSD 虚拟机。
@@ -82,7 +82,7 @@ Azure 虚拟机代理负责 FreeBSD 虚拟机 和 Azure 结构控制器之间的
 
 ## 后续步骤
 * 转到 [Azure 应用商店](https://portal.azure.cn/#create/Microsoft.FreeBSD103-ARM)创建 FreeBSD 虚拟机。
-* 若要将自己的 FreeBSD 上载到 Azure，请参阅[创建 FreeBSD VHD 并将其上载到 Azure](/documentation/articles/virtual-machines-linux-classic-freebsd-create-upload-vhd/)。
+* 若要将自己的 FreeBSD 上载到 Azure，请参阅[创建 FreeBSD VHD 并将其上载到 Azure](./virtual-machines-linux-classic-freebsd-create-upload-vhd.md)。
 
 <!---HONumber=Mooncake_0109_2017-->
 

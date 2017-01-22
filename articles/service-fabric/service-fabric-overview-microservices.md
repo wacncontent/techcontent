@@ -1,23 +1,21 @@
-<properties
-   pageTitle="了解微服务 | Azure"
-   description="概述为何使用微服务方法构建云应用程序对于开发现代应用程序非常重要，以及 Azure Service Fabric 如何提供一个平台用于实现此目的"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="msfussell"
-   manager="timlt"
-   editor=""/>  
+---
+title: 了解微服务 | Azure
+description: 概述为何使用微服务方法构建云应用程序对于开发现代应用程序非常重要，以及 Azure Service Fabric 如何提供一个平台用于实现此目的
+services: service-fabric
+documentationCenter: .net
+authors: msfussell
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/20/2016"
-   wacn.date="01/03/2017"
-   ms.author="mfussell"/>
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/20/2016
+wacn.date: 01/03/2017
+ms.author: mfussell
+---
 
 # 为什么通过微服务的方法构建应用程序？
 作为软件开发人员，我们已知道思考如何将应用程序因数分解成组件部分。这是对象导向、软件抽象和组件化的中心模式。现在，这种因数分解往往以共享库和技术层之间的类与接口呈现。通常采用一种分层方法，有后端存储、中间层业务逻辑和前端 UI。过去几年来的变化是身为开发人员的我们，开始为业务驱动的云构建分布式应用程序。
@@ -41,9 +39,7 @@
 
 微服务的缺点包括需要管理越来越多的独立实体、处理更复杂的部署和版本控制。微服务之间的网络流量以及相应的网络延迟不断增加。经过大量的讨论之后，粒度服务是性能瓶颈的解决良方。如果没有工具帮助查看这些依赖性，很难“看到”整个系统。标准就是让微服务方法奏效的关键、在通信方式上达成共识，以及只在乎需要从服务获得什么，而不是僵化的约定。必须在设计的初期定义这些约定，因为之后服务将各自独立更新。在设计微服务方法时出现的另一个描述是“精细 SOA”。
 
-
 ***简而言之，微服务设计方法是分离的服务联合，各自独立更改，并达成一致的通信标准。***
-
 
 随着越来越多云应用的生成，人们发现这种将整体应用分解成独立、方案焦点式服务的做法，在长期上是较好的方法。
 
@@ -58,7 +54,6 @@
 3. 微服务应用程序将单个功能分隔成单个较小的服务。
 
 4. 这种方法可通过独立部署每个服务而扩展，跨服务器/VM/容器创建这些服务的实例。
-
 
 使用微服务方法进行设计并非所有项目的灵丹妙药，但确实更符合前面所述的业务目标。如果知道以后没有机会根据需要将代码修改为微服务设计，也许可以接受从使用单一式方法开始。较常见的情况是一开始设计单一式应用，可以从需要更高缩放性或灵活性的功能领域开始，分阶段缓慢地将此框架分解。
 
@@ -79,7 +74,6 @@
 一言以蔽之：
 
 微服务应用程序是由独立控制版本和可缩放的、以客户为中心的服务组成，这些服务通过标准协议和定义完善的接口彼此通信。
-
 
 我们在上一部分已介绍了前两点，接下来进一步澄清其他各要点。
 
@@ -102,7 +96,6 @@
 在单一式方法中，应用程序通常使用单一数据库。优点是这是单一位置，很容易部署。每个组件可以通过单个表来存储其状态。困难之处在于团队必须严格区分状态。无可避免地就想将新的列添加到现有客户表、在表之间执行联接，并且对存储层形成依赖性。发生这种情况后，你无法缩放各个组件。在微服务方法中，每个服务都管理并存储自己的状态。每个服务将负责同时缩放代码和状态，以满足服务的需求。缺点在于，当需要对应用程序的数据创建视图或查询时，必须跨不同的状态存储进行查询。为了解决此问题，通常由一个独立的微服务构建一个跨许多微服务的视图。如果需要对数据执行多个即席查询，每个微服务应该考虑将其数据写入数据仓库服务以供脱机分析。
 
 版本控制特定于部署的微服务版本，以便能够部署和并行运行多个不同的版本。当较新版的微服务在升级期间失败，因而需要回滚到旧版时，版本控制可以解决这种情况。版本控制的另一种情况是执行 A/B 式测试，其中不同的用户将体验到不同版本的服务。例如，在更广泛推出新功能之前，通常先对一组特定的客户升级微服务以测试新功能。在微服务的生命周期管理之后，便可以在微服务之间的通信。
-
 
 ### 通过定义完善的接口和协议来与其他微服务交互
 
@@ -134,7 +127,7 @@ Service Fabric 提供两个广泛的领域，帮助你使用微服务方法来�
 
 - 一个提供系统服务的平台，这些系统服务负责部署、升级、检测和重新启动失败的服务、发现服务位置、管理状态以及监视运行状况。这些系统服务实际上具备上述微服务的许多特性。
 
--  编程 API 或框架，帮助您将应用程序构建成微服务：[Reliable Actors 和 Reliable Services](/documentation/articles/service-fabric-choose-framework/)。当然，你可以使用所选的任何代码来构建微服务。但使用这些 API 不仅可让作业变得更简单，也能更深入地与平台集成。例如，你可以获取运行状况和诊断信息，或利用内置的高可用性。
+-  编程 API 或框架，帮助您将应用程序构建成微服务：[Reliable Actors 和 Reliable Services](./service-fabric-choose-framework.md)。当然，你可以使用所选的任何代码来构建微服务。但使用这些 API 不仅可让作业变得更简单，也能更深入地与平台集成。例如，你可以获取运行状况和诊断信息，或利用内置的高可用性。
 
 ***Service Fabric 不限制构建服务的方式，你可以使用任何技术。不过，它提供可让您更轻松地构建微服务的内置编程 API。***
 
@@ -147,9 +140,8 @@ Service Fabric 的目标是将使用微服务方法构建应用程序时的复�
 ## 后续步骤
 
 * 更多相关信息：
-    * [Service Fabric 术语概述](/documentation/articles/service-fabric-technical-overview/)
+    * [Service Fabric 术语概述](./service-fabric-technical-overview.md)
     * [微服务：由云支持的应用程序变革](https://azure.microsoft.com/zh-CN/blog/microservices-an-application-revolution-powered-by-the-cloud/)
-
 
 [Image1]: ./media/service-fabric-overview-microservices/monolithic-vs-micro.png
 [Image2]: ./media/service-fabric-overview-microservices/statemonolithic-vs-micro.png

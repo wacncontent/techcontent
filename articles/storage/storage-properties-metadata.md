@@ -1,21 +1,22 @@
-<properties
-    pageTitle="在 Azure 存储中设置和检索对象的属性及元数据 | Azure"
-    description="在 Azure 存储中存储对象的自定义元数据，并设置和检索系统属性。"
-    services="storage"
-    documentationcenter=""
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="036f9006-273e-400b-844b-3329045e9e1f"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 在 Azure 存储中设置和检索对象的属性及元数据 | Azure
+description: 在 Azure 存储中存储对象的自定义元数据，并设置和检索系统属性。
+services: storage
+documentationcenter: 
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: 036f9006-273e-400b-844b-3329045e9e1f
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 设置和检索属性与元数据
 ## 概述
@@ -26,7 +27,7 @@ Azure 存储中的对象支持系统属性和用户定义的元数据，及其�
 
 检索资源的属性和元数据值的过程分为两步。必须先调用 **FetchAttributes** 方法以显式获取这些值，才能读取它们。
 
-> [AZURE.IMPORTANT] 不会填充存储资源的属性和元数据值，除非调用 **FetchAttributes** 方法之一。
+> [!IMPORTANT] 不会填充存储资源的属性和元数据值，除非调用 **FetchAttributes** 方法之一。
 
 ## 设置和检索属性
 若要检索属性值，请对 Blob 或容器调用 **FetchAttributes** 方法以填充属性，然后读取值。
@@ -36,10 +37,10 @@ Azure 存储中的对象支持系统属性和用户定义的元数据，及其�
 以下代码示例创建容器并将它的一些属性值写入到控制台窗口：
 
     //Parse the connection string for the storage account.
-	const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
+    const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
-	
-	//Create the service client object for credentialed access to the Blob service.
+
+    //Create the service client object for credentialed access to the Blob service.
     CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
     // Retrieve a reference to a container. 
@@ -58,8 +59,8 @@ Azure 存储中的对象支持系统属性和用户定义的元数据，及其�
 ## 设置和检索元数据
 可将元数据指定为 Blob 或容器资源上的一个或多个名称/值对。若要设置元数据，请将名称/值对添加到资源上的 **Metadata** 集合，然后调用 **SetMetadata** 方法以将值保存到服务。
 
-> [AZURE.NOTE] 元数据的名称必须符合 C# 标识符命名约定。
- 
+> [!NOTE] 元数据的名称必须符合 C# 标识符命名约定。
+
 以下代码示例在容器上设置元数据。一个值是使用集合的 **Add** 方法设置的。另一个值是使用隐式键/值语法设置的。这两种方法都有效。
 
     public static void AddContainerMetadata(CloudBlobContainer container)

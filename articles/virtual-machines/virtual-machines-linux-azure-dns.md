@@ -1,22 +1,21 @@
-<properties 
-   pageTitle="Azure 中 Linux VM 的 DNS 名称解析选项"
-   description="适用于 Azure IaaS 中 Linux VM 的名称解析方案，包括提供的 DNS 服务、混合外部 DNS 和自带 DNS 服务器。"
-   services="virtual-machines"
-   documentationCenter="na"
-   authors="RicksterCDN"
-   manager="timlt"
-   editor="tysonn" />  
+---
+title: Azure 中 Linux VM 的 DNS 名称解析选项
+description: 适用于 Azure IaaS 中 Linux VM 的名称解析方案，包括提供的 DNS 服务、混合外部 DNS 和自带 DNS 服务器。
+services: virtual-machines
+documentationCenter: na
+authors: RicksterCDN
+manager: timlt
+editor: tysonn
 
-<tags 
-   ms.service="virtual-machines-linux"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/19/2016"
-   wacn.date="12/30/2016"
-   ms.author="rclaus" />  
-
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/19/2016
+wacn.date: 12/30/2016
+ms.author: rclaus
+---
 
 # Azure 中 Linux VM 的 DNS 名称解析选项
 
@@ -68,7 +67,6 @@ Azure 默认提供单个虚拟网络内包含的所有 VM 的 DNS 名称解析�
 
 - DNS 查询流量按照 VM 进行限制。这不应影响大部分应用程序。如果遵循请求限制，请确保启用客户端缓存。有关详细信息，请参阅[充分利用 Azure 提供的名称解析](#Getting-the-most-from-Azure-provided-name-resolution)。
 
-
 ### <a name="Getting-the-most-from-Azure-provided-name-resolution"></a> 充分利用 Azure 提供的名称解析
 **客户端缓存：**
 
@@ -79,21 +77,21 @@ Azure 默认提供单个虚拟网络内包含的所有 VM 的 DNS 名称解析�
 有多个不同的 DNS 缓存包可用，例如 dnsmasq，下面是在最常见的发行版上安装 dnsmasq 的步骤：
 
 - **Ubuntu（使用 resolvconf）**：
-	- 安装 dnsmasq 包（“sudo apt-get install dnsmasq”）。
+    - 安装 dnsmasq 包（“sudo apt-get install dnsmasq”）。
 - **SUSE（使用 netconf）**：
-	- 安装 dnsmasq 包（“sudo zypper install dnsmasq”）
-	- 启用 dnsmasq 服务（“systemctl enable dnsmasq.service”）
-	- 启动 dnsmasq 服务（“systemctl start dnsmasq.service”）
-	- 编辑“/etc/sysconfig/network/config”，并将 NETCONFIG\_DNS\_FORWARDER="" 更改为“dnsmasq”
-	- 更新 resolv.conf（“netconfig update”），以将缓存设置为本地 DNS 解析程序
+    - 安装 dnsmasq 包（“sudo zypper install dnsmasq”）
+    - 启用 dnsmasq 服务（“systemctl enable dnsmasq.service”）
+    - 启动 dnsmasq 服务（“systemctl start dnsmasq.service”）
+    - 编辑“/etc/sysconfig/network/config”，并将 NETCONFIG\_DNS\_FORWARDER="" 更改为“dnsmasq”
+    - 更新 resolv.conf（“netconfig update”），以将缓存设置为本地 DNS 解析程序
 - **OpenLogic（使用 NetworkManager）**：
-	- 安装 dnsmasq 包（“sudo yum install dnsmasq”）
-	- 启用 dnsmasq 服务（“systemctl enable dnsmasq.service”）
-	- 启动 dnsmasq 服务（“systemctl start dnsmasq.service”）
-	- 将“prepend domain-name-servers 127.0.0.1;”添加到“/etc/dhclient-eth0.conf”
-	- 重新启动网络服务（“service network restart”），以将缓存设置为本地 DNS 解析程序
+    - 安装 dnsmasq 包（“sudo yum install dnsmasq”）
+    - 启用 dnsmasq 服务（“systemctl enable dnsmasq.service”）
+    - 启动 dnsmasq 服务（“systemctl start dnsmasq.service”）
+    - 将“prepend domain-name-servers 127.0.0.1;”添加到“/etc/dhclient-eth0.conf”
+    - 重新启动网络服务（“service network restart”），以将缓存设置为本地 DNS 解析程序
 
-> [AZURE.NOTE]：该“dnsmasq”包只是适用于 Linux 的众多 DNS 缓存中的一个。在使用之前，请检查其是否适合你的特定需求，并且确认没有安装其他缓存。
+> [!NOTE]：该“dnsmasq”包只是适用于 Linux 的众多 DNS 缓存中的一个。在使用之前，请检查其是否适合你的特定需求，并且确认没有安装其他缓存。
 
 **客户端重试：**
 
@@ -104,19 +102,19 @@ DNS 主要是一个 UDP 协议。因为 UDP 协议无法保证消息传递，所
 
 若要检查 Linux VM 上的当前设置，请执行“cat /etc/resolv.conf”并查看“options”行，例如：
 
-	options timeout:1 attempts:5
+    options timeout:1 attempts:5
 
 resolv.conf 文件是自动生成的，不应对其进行编辑。添加“options”行的具体步骤因发行版而异：
 
 - **Ubuntu**（使用 resolvconf）：
-	- 将“options”行添加到“/etc/resolveconf/resolv.conf.d/head”
-	- 运行“resolvconf -u”以更新
+    - 将“options”行添加到“/etc/resolveconf/resolv.conf.d/head”
+    - 运行“resolvconf -u”以更新
 - **SUSE**（使用 netconf）：
-	- 将“timeout:1 attempts:5”添加到“/etc/sysconfig/network/config”中的 NETCONFIG\_DNS\_RESOLVER\_OPTIONS="" 参数
-	- 运行“netconfig update”以更新
+    - 将“timeout:1 attempts:5”添加到“/etc/sysconfig/network/config”中的 NETCONFIG\_DNS\_RESOLVER\_OPTIONS="" 参数
+    - 运行“netconfig update”以更新
 - **OpenLogic**（使用 NetworkManager）：
-	- 将“echo "options timeout:1 attempts:5"”添加到“/etc/NetworkManager/dispatcher.d/11-dhclient”
-	- 运行“service network restart”以更新
+    - 将“echo "options timeout:1 attempts:5"”添加到“/etc/NetworkManager/dispatcher.d/11-dhclient”
+    - 运行“service network restart”以更新
 
 ## <a name="name-resolution-using-your-own-dns-server"></a> 使用你自己的 DNS 服务器进行名称解析
 在很多情况下（例如，需要在虚拟网络 (VNet) 之间进行 DNS 解析），Azure 所提供的功能可能无法满足你的名称解析需求。考虑到这种情况，Azure 提供了使用你自己的 DNS 服务器的功能。
@@ -127,19 +125,17 @@ DNS 转发还可用于在 VNet 之间进行 DNS 解析，可以通过本地计�
 
 ![VNet 间 DNS](./media/virtual-machines-linux-azure-dns/inter-vnet-dns.png)  
 
-
 使用 Azure 提供的名称解析时，会通过 DHCP 为每个 VM 提供内部 DNS 后缀。使用你自己的名称解析解决方案时，不会向 VM 提供该后缀，因为该后缀会干扰其他 DNS 体系结构。若要通过 FQDN 来引用计算机，或者要在你的 VM 上配置后缀，则可通过 PowerShell 或 API 来确定该后缀：
 
 -  对于 Azure 资源管理托管的 VNet，可通过[网络接口卡](https://msdn.microsoft.com/zh-cn/library/azure/mt163668.aspx)资源获取后缀；或者，可以运行命令 `azure network public-ip show <resource group> <pip name>` 来显示公共 IP 的详细信息，包括 NIC 的 FQDN。
 
-
 如果将查询转发到 Azure 无法满足你的需求，则需提供你自己的 DNS 解决方案。你的 DNS 解决方案需要：
 
--  提供合适的主机名解析方式（例如，通过 [DDNS](/documentation/articles/virtual-networks-name-resolution-ddns/) 进行解析）。请注意，如果使用 DDNS，则可能需要禁用 DNS 记录清理，因为 Azure 的 DHCP 租约时间很长，进行清理可能会导致 DNS 记录过早删除。
+-  提供合适的主机名解析方式（例如，通过 [DDNS](../virtual-network/virtual-networks-name-resolution-ddns.md) 进行解析）。请注意，如果使用 DDNS，则可能需要禁用 DNS 记录清理，因为 Azure 的 DHCP 租约时间很长，进行清理可能会导致 DNS 记录过早删除。
 -  提供适当的递归式解析来解析外部域名。
 -  可以从其所服务的客户端进行访问（在端口 53 上启用 TCP 和 UDP），并可访问 Internet。
 -  禁止从 Internet 进行访问，以减少外部代理带来的威胁。
 
-> [AZURE.NOTE] 为了获得最佳性能，在将 Azure VM 用作 DNS 服务器时，应禁用 IPv6，并且[实例层级公共 IP](/documentation/articles/virtual-networks-instance-level-public-ip/) 应分配给每个 DNS 服务器 VM。
+> [!NOTE] 为了获得最佳性能，在将 Azure VM 用作 DNS 服务器时，应禁用 IPv6，并且[实例层级公共 IP](../virtual-network/virtual-networks-instance-level-public-ip.md) 应分配给每个 DNS 服务器 VM。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

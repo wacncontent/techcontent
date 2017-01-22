@@ -1,10 +1,9 @@
 
 # 使用 SQL Server Management Studio 管理 Azure SQL 数据库 
 
-你可以使用 SQL Server Management Studio (SSMS) 来管理 Azure SQL 数据库逻辑服务器与数据库。本主题将指导你使用 SSMS 完成常见任务。在开始之前，你应该已在 Azure SQL 数据库中创建了逻辑服务器和数据库。若要开始，请先阅读[创建你的第一个 Azure SQL 数据库](/documentation/articles/sql-database-get-started/)，然后返回此处。
+你可以使用 SQL Server Management Studio (SSMS) 来管理 Azure SQL 数据库逻辑服务器与数据库。本主题将指导你使用 SSMS 完成常见任务。在开始之前，你应该已在 Azure SQL 数据库中创建了逻辑服务器和数据库。若要开始，请先阅读[创建你的第一个 Azure SQL 数据库](../articles/sql-database/sql-database-get-started.md)，然后返回此处。
 
 建议你每当使用 Azure SQL 数据库时，都使用最新版本的 SSMS。请访问[下载 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx) 以获取最新版本的 SSMS。
-
 
 ## 连接到 SQL 数据库逻辑服务器
 
@@ -16,7 +15,7 @@
 
 3.  在“SQL 数据库”主页上，单击页面顶部的“服务器”以列出与你的订阅关联的所有服务器。查找要连接到的服务器的名称，然后将它复制到剪贴板上。
 
-	接下来，将您的 SQL 数据库 防火墙配置为允许从您的本地计算机连接。通过将您的本地计算机 IP 地址添加到防火墙例外列表中来执行此操作。
+    接下来，将您的 SQL 数据库 防火墙配置为允许从您的本地计算机连接。通过将您的本地计算机 IP 地址添加到防火墙例外列表中来执行此操作。
 
 1.  在“SQL 数据库”主页上，单击“服务器”，然后单击要连接到的服务器。
 
@@ -26,13 +25,13 @@
 
 4.  在“配置”页中，“允许的 IP 地址”包括三个框，你可以在其中指定规则名称和作为开始和结束值的 IP 地址范围。对于规则名称，您可以输入您的计算机的名称。对于开始和结束范围，将您的计算机的 IP 地址粘贴到两个框中，然后单击显示的复选框。
 
-	规则名称必须是唯一的。如果这是您的开发计算机，则您可以将 IP 地址输入到 IP 范围开始框和 IP 范围结束框中。否则，您可能需要输入一组范围更广泛的 IP 地址来容纳来自您组织中的其他计算机的连接。
- 
+    规则名称必须是唯一的。如果这是您的开发计算机，则您可以将 IP 地址输入到 IP 范围开始框和 IP 范围结束框中。否则，您可能需要输入一组范围更广泛的 IP 地址来容纳来自您组织中的其他计算机的连接。
+
 5. 单击页面底部的“保存”。
 
     **注意：**在防火墙设置的更改生效之前，可能最多有五分钟的延迟。
 
-	您现在已准备好使用 Management Studio 连接到 SQL 数据库。
+    您现在已准备好使用 Management Studio 连接到 SQL 数据库。
 
 1.  在任务栏上，单击“开始”、指向“所有程序”、指向“Microsoft SQL Server 2014”，然后单击“SQL Server Management Studio”。
 
@@ -78,12 +77,11 @@
 
 -   在 SQL 数据库中，不支持将 **USE** 语句用于在数据库之间切换。您需要改为建立直接到目标数据库的连接。
 
->[AZURE.NOTE]创建或修改数据库的许多 Transact-SQL 语句必须在其自己的批处理中运行，无法与其他 Transact-SQL 语句分组在一起。有关详细信息，请参阅上面列出的链接中提供的特定于语句的信息。
+>[!NOTE]创建或修改数据库的许多 Transact-SQL 语句必须在其自己的批处理中运行，无法与其他 Transact-SQL 语句分组在一起。有关详细信息，请参阅上面列出的链接中提供的特定于语句的信息。
 
 <h2><a id="Step4" name="Step4"> </a>步骤4：创建并管理登录名</h2>
 
 **master** 数据库跟踪登录名以及哪些登录名有权创建数据库或其他登录名。通过使用你在设置服务器时创建的服务器级别主体登录名连接到 **master** 数据库来管理登录名。你可以使用 **CREATE LOGIN**、**ALTER LOGIN** 或 **DROP LOGIN** 语句对将管理整个服务器上的登录的 master 数据库执行查询。有关详细信息，请参阅[在 SQL 数据库中管理数据库和登录名](http://msdn.microsoft.com/zh-cn/library/azure/ee336235.aspx)。
-
 
 -   使用 **CREATE LOGIN** 语句可创建新的服务器级别登录名。有关详细信息，请参阅 [CREATE LOGIN（SQL 数据库）](https://msdn.microsoft.com/zh-cn/library/ms189751.aspx)。以下语句将创建一个名为 **login1** 的新登录名。将 **password1** 替换为你选择的密码。
 

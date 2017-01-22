@@ -1,22 +1,22 @@
-<properties
-   pageTitle="缓存指南 | Azure"
-   description="有关配置缓存以提高性能和可缩放性的指南。"
-   services=""
-   documentationCenter="na"
-   authors="dragon119"
-   manager="masimms"
-   editor=""
-   tags=""/>
+---
+title: 缓存指南 | Azure
+description: 有关配置缓存以提高性能和可缩放性的指南。
+services: 
+documentationCenter: na
+authors: dragon119
+manager: masimms
+editor: 
+tags: 
 
-<tags
-   ms.service="best-practice"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="07/14/2016"
-   wacn.date="08/01/2016"
-   ms.author="masashin"/>
+ms.service: best-practice
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 07/14/2016
+wacn.date: 08/01/2016
+ms.author: masashin
+---
 
 # 缓存指南
 
@@ -109,7 +109,7 @@
 
 过期的缓存数据将从缓存中删除，应用程序必须从原始数据存储中检索数据（它可以将新提取的信息放回缓存）。在配置缓存时，你可以设置默认的过期策略。在许多缓存服务中，当以编程方式将单个对象存储在缓存中时，还可以规定这些对象的过期时间。某些缓存可让你将过期时间指定为绝对值，或者，如果并未在指定的时间内访问，则从缓存中删除项的滑动值。此设置将重写任何缓存范围的过期策略，但只适用于指定的对象。
 
-> [AZURE.NOTE] 请慎重考虑缓存的过期时段及其包含的对象。如果设置的时段太短，则对象很快就会过期，因此就减少了使用缓存带来的优势。如果设置的时段太长，则会面临数据过时的风险。
+> [!NOTE] 请慎重考虑缓存的过期时段及其包含的对象。如果设置的时段太短，则对象很快就会过期，因此就减少了使用缓存带来的优势。如果设置的时段太长，则会面临数据过时的风险。
 
 此外，如果允许数据长时间驻留，则缓存有可能会填满。在此情况下，将新项添加到缓存的任何请求可能会导致某些项被强行删除，这个过程称为逐出。缓存服务通常根据最近最少使用 (LRU) 的原则逐出数据，但你通常可以重写此策略，并防止项被逐出。但是，如果采用这种方法，则会面临缓存超过可用内存。应用程序尝试将项添加到缓存时将会失败并发生异常。
 
@@ -199,12 +199,11 @@ Azure Redis 缓存是高性能缓存解决方案，提供可用性、可缩放�
 
  Azure Redis 缓存与客户端应用程序使用的多种 API 兼容。如果现有应用程序已使用运行本地的 Azure Redis 缓存，Azure Redis 缓存可在云中提供缓存的快速迁移路径。
 
-> [AZURE.NOTE] Azure 还提供托管缓存服务。此服务基于 Azure Service Fabric 缓存引擎。使用它可以创建可由松散耦合应用程序共享的分布式缓存。缓存托管在 Azure 数据中心内运行的高性能服务器上。但是，不再建议使用此选项，提供此选项只是为了支持构建为使用此选项的现有应用程序。针对所有新的开发，请改用 Azure Redis 缓存。
+> [!NOTE] Azure 还提供托管缓存服务。此服务基于 Azure Service Fabric 缓存引擎。使用它可以创建可由松散耦合应用程序共享的分布式缓存。缓存托管在 Azure 数据中心内运行的高性能服务器上。但是，不再建议使用此选项，提供此选项只是为了支持构建为使用此选项的现有应用程序。针对所有新的开发，请改用 Azure Redis 缓存。
 >
 > 此外，Azure 支持角色中缓存。此功能可让你创建云服务专用的缓存。缓存由 Web 角色或辅助角色的实例托管，只能由以同一云服务部署单位的一部分来操作的角色进行访问。（部署单位是作为云服务部署到特定区域的角色实例集合。） 缓存已组建群集，托管缓存的同一部署单位中的所有角色实例将成为同一缓存群集的一部分。但是，不再建议使用此选项，提供此选项只是为了支持构建为使用此选项的现有应用程序。针对所有新的开发，请改用 Azure Redis 缓存。
 >
-> Azure 托管缓存服务和 Azure 角色中缓存目前已预定于 2016 年 11 月 16 日停用。建议你迁移到 Azure Redis 缓存，以便为这次停用做好准备。有关详细信息，请访问 Microsoft 网站上的[我应使用哪种 Azure Redis 缓存产品和大小？](/documentation/articles/cache-faq/#what-redis-cache-offering-and-size-should-i-use)。
-
+> Azure 托管缓存服务和 Azure 角色中缓存目前已预定于 2016 年 11 月 16 日停用。建议你迁移到 Azure Redis 缓存，以便为这次停用做好准备。有关详细信息，请访问 Microsoft 网站上的[我应使用哪种 Azure Redis 缓存产品和大小？](./redis-cache/cache-faq.md#what-redis-cache-offering-and-size-should-i-use)。
 
 ### Redis 的功能
 
@@ -216,7 +215,7 @@ Redis 支持读取和写入操作。在 Redis 中，写入操作将定期存储�
 
  所有写入都是异步的，不会阻止客户端读取和写入数据。当 Redis 开始运行时，将从快照或日志文件中读取数据，并使用它来构建内存中缓存。有关详细信息，请参阅 Redis 网站上的 [Redis persistence](http://redis.io/topics/persistence)（Redis 持久性）。
 
-> [AZURE.NOTE] Redis 不保证所有写入在发生灾难性故障时都会得到保存，但在最糟的情况下，你只会丢失几秒钟的数据。请记住，缓存并不适合用作权威数据源，应用程序负责使用缓存来确保成功将关键数据保存到适当的数据存储。有关详细信息，请参阅[缓存端模式](http://msdn.microsoft.com/zh-cn/library/dn589799.aspx)。
+> [!NOTE] Redis 不保证所有写入在发生灾难性故障时都会得到保存，但在最糟的情况下，你只会丢失几秒钟的数据。请记住，缓存并不适合用作权威数据源，应用程序负责使用缓存来确保成功将关键数据保存到适当的数据存储。有关详细信息，请参阅[缓存端模式](http://msdn.microsoft.com/zh-cn/library/dn589799.aspx)。
 
 #### Redis 数据类型
 
@@ -262,7 +261,7 @@ Redis 不直接支持任何形式的数据加密，因此所有编码必须由�
 
 有关详细信息，请访问 Redis 网站上的 [Redis security](http://redis.io/topics/security)（Redis 安全性）页。
 
-> [AZURE.NOTE] Azure Redis 缓存通过连接的客户端提供自身的安全层。底层 Redis 服务器不向公共网络公开。
+> [!NOTE] Azure Redis 缓存通过连接的客户端提供自身的安全层。底层 Redis 服务器不向公共网络公开。
 
 ### 使用 Azure Redis 缓存
 
@@ -288,11 +287,11 @@ Azure 经典管理门户包含便利的图形画面，可让你监视缓存的�
 - 针对多个读取者和单个写入者的同一会话状态数据支持受控的并发访问权限，以及
 - 可以使用压缩来节省内存，并提高网络性能。
 
-有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 会话状态提供程序](/documentation/articles/cache-aspnet-session-state-provider/)页。
+有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 会话状态提供程序](./redis-cache/cache-aspnet-session-state-provider.md)页。
 
-> [AZURE.NOTE] 对在 Azure 环境外部运行的 ASP.NET 应用程序，请不要使用 Azure Redis 缓存的会话状态提供程序。从 Azure 外部访问缓存的延迟会抵消缓存数据带来的性能优势。
+> [!NOTE] 对在 Azure 环境外部运行的 ASP.NET 应用程序，请不要使用 Azure Redis 缓存的会话状态提供程序。从 Azure 外部访问缓存的延迟会抵消缓存数据带来的性能优势。
 
-同样地，Azure Redis 缓存的输出缓存提供程序可让你保存 ASP.NET Web 应用程序生成的 HTTP 响应。配合 Azure Redis 缓存使用输出缓存提供程序可以针对呈现复杂 HTML 输出的应用程序改善响应时间；生成类似响应的应用程序实例可以使用缓存中的共享输出段，而不用重新生成此 HTML 输出。有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 输出缓存提供程序](/documentation/articles/cache-aspnet-output-cache-provider/)页。
+同样地，Azure Redis 缓存的输出缓存提供程序可让你保存 ASP.NET Web 应用程序生成的 HTTP 响应。配合 Azure Redis 缓存使用输出缓存提供程序可以针对呈现复杂 HTML 输出的应用程序改善响应时间；生成类似响应的应用程序实例可以使用缓存中的共享输出段，而不用重新生成此 HTML 输出。有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 输出缓存提供程序](./redis-cache/cache-aspnet-output-cache-provider.md)页。
 
 ### Azure Redis 缓存
 
@@ -323,11 +322,11 @@ Azure 门户预览包含便利的图形画面，可让你监视缓存的性能�
 - 针对多个读取者和单个写入者的同一会话状态数据支持受控的并发访问权限。
 - 使用压缩来节省内存，并提高网络性能。
 
-有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 会话状态提供程序](/documentation/articles/cache-aspnet-session-state-provider/)页。
+有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 会话状态提供程序](./redis-cache/cache-aspnet-session-state-provider.md)页。
 
-> [AZURE.NOTE] 不要针对在 Azure 环境外部运行的 ASP.NET 应用程序使用 Azure Redis 缓存的会话状态提供程序。从 Azure 外部访问缓存的延迟会抵消缓存数据带来的性能优势。
+> [!NOTE] 不要针对在 Azure 环境外部运行的 ASP.NET 应用程序使用 Azure Redis 缓存的会话状态提供程序。从 Azure 外部访问缓存的延迟会抵消缓存数据带来的性能优势。
 
-同样地，Azure Redis 缓存的输出缓存提供程序可让你保存 ASP.NET Web 应用程序生成的 HTTP 响应。配合 Azure Redis 缓存使用输出缓存提供程序可以针对呈现复杂 HTML 输出的应用程序改善响应时间。生成类似响应的应用程序实例可以使用缓存中的共享输出段，而不用重新生成此 HTML 输出。有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 输出缓存提供程序](/documentation/articles/cache-aspnet-output-cache-provider/)页。
+同样地，Azure Redis 缓存的输出缓存提供程序可让你保存 ASP.NET Web 应用程序生成的 HTTP 响应。配合 Azure Redis 缓存使用输出缓存提供程序可以针对呈现复杂 HTML 输出的应用程序改善响应时间。生成类似响应的应用程序实例可以使用缓存中的共享输出段，而不用重新生成此 HTML 输出。有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 输出缓存提供程序](./redis-cache/cache-aspnet-output-cache-provider.md)页。
 
 ## 构建自定义 Redis 缓存
 
@@ -376,7 +375,6 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
 
 如果找不到该项，则使用 `GetItemFromDataSourceAsync` 方法（这是一个本地方法，它不是 StackExchange 库的一部分）从底层数据源提取该项。然后，使用 `StringSetAsync` 方法将该项添加到缓存，便于下次更快检索。
 
-
     // Connect to the Azure Redis cache
     ConfigurationOptions config = new ConfigurationOptions();
     config.EndPoints.Add("<your DNS name>.redis.cache.chinacloudapi.cn");
@@ -388,7 +386,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
     {
         // Attempt to retrieve the item from the Redis cache
         string itemValue = await cache.StringGetAsync(itemKey);
-    
+
         // If the value returned is null, the item was not found in the cache
         // So retrieve the item from the data source and add it to the cache
         if (itemValue == null)
@@ -396,16 +394,14 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
             itemValue = await GetItemFromDataSourceAsync(itemKey);
             await cache.StringSetAsync(itemKey, itemValue);
         }
-    
+
         // Return the item
         return itemValue;
     }
 
-
 `StringGet` 和 `StringSet` 方法不是只能检索或存储字符串值。它们可以采用任何序列化为字节数组的项。如果需要保存 .NET 对象，可以将它序列化为字节流，然后使用 `StringSet` 方法将它写入缓存。
 
 同样地，你可以使用 `StringGet` 方法从缓存中读取对象，并将其反序列化为 .NET 对象。以下代码演示了 IDatabase 接口的一组扩展方法（Redis 连接的 `GetDatabase` 方法返回 `IDatabase` 对象），使用这些方法的某些示例代码可以在缓存中读取和写入 `BlogPost` 对象：
-
 
     public static class RedisCacheExtensions
     {
@@ -413,21 +409,21 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
         {
             return Deserialize<T>(await cache.StringGetAsync(key));
         }
-    
+
         public static async Task<object> GetAsync(this IDatabase cache, string key)
         {
             return Deserialize<object>(await cache.StringGetAsync(key));
         }
-    
+
         public static async Task SetAsync(this IDatabase cache, string key, object value)
         {
             await cache.StringSetAsync(key, Serialize(value));
         }
-    
+
         static byte[] Serialize(object o)
         {
             byte[] objectDataAsStream = null;
-    
+
             if (o != null)
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -437,14 +433,14 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
                     objectDataAsStream = memoryStream.ToArray();
                 }
             }
-    
+
             return objectDataAsStream;
         }
-    
+
         static T Deserialize<T>(byte[] stream)
         {
             T result = default(T);
-    
+
             if (stream != null)
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -453,21 +449,19 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
                     result = (T)binaryFormatter.Deserialize(memoryStream);
                 }
             }
-    
+
             return result;
         }
     }
 
-
 以下代码演示了 `RetrieveBlogPost` 的方法，该方法使用这些扩展方法，遵循缓存端模式在缓存中读取和写入可序列化的 `BlogPost` 对象：
-
 
     // The BlogPost type
     [Serializable]
     private class BlogPost
     {
         private HashSet<string> tags = new HashSet<string>();
-    
+
         public BlogPost(int id, string title, int score, IEnumerable<string> tags)
         {
             this.Id = id;
@@ -475,7 +469,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
             this.Score = score;
             this.tags = new HashSet<string>(tags);
         }
-    
+
         public int Id { get; set; }
         public string Title { get; set; }
         public int Score { get; set; }
@@ -490,15 +484,13 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
             blogPost = await GetBlogPostFromDataSourceAsync(blogPostKey);
             await cache.SetAsync(blogPostKey, blogPost);
         }
-    
+
         return blogPost;
     }
-
 
 如果客户端应用程序发送了多个异步请求，Redis 将支持命令管道。Redis 可以使用同一连接来多路复用请求，而不是按照严格的顺序来接收和响应命令。
 
 此方法可以更有效地使用网络来帮助降低延迟。以下代码段演示了并行检索两个客户的详细信息的示例。该代码将提交两个请求，再执行其他某种处理（未显示），然后等待接收结果。缓存对象的 `Wait` 方法类似于 .NET Framework `Task.Wait` 方法：
-
 
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
@@ -509,8 +501,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
     var customer1 = cache.Wait(task1);
     var customer2 = cache.Wait(task2);
 
-
-Microsoft 网站上的 [Azure Redis Cache documentation](/documentation/services/redis-cache/)（Azure Redis 缓存文档）页提供了有关如何编写可以使用 Azure Redis 缓存的客户端应用程序的详细信息。StackExchange.Redis 网站上的 [Basic usage page](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Basics.md)（基本用法）页提供了更多信息。
+Microsoft 网站上的 [Azure Redis Cache documentation](./redis-cache/index.md)（Azure Redis 缓存文档）页提供了有关如何编写可以使用 Azure Redis 缓存的客户端应用程序的详细信息。StackExchange.Redis 网站上的 [Basic usage page](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Basics.md)（基本用法）页提供了更多信息。
 
 同一网站上的 [Pipelines and multiplexers](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/PipelinesMultiplexers.md)（管道与多路复用器）页提供了有关使用 Redis 和 StackExchange 库执行异步操作和管道传输的详细信息。本文的下一部分“使用 Redis 缓存”提供了一些更高级技巧的示例，你可以对 Redis 缓存中保存的数据运用这些技巧。
 
@@ -532,7 +523,6 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
 
 - `INCR`、`INCRBY`、`DECR` 和 `DECRBY`，用于对整数数字数据值执行原子递增和递减操作。StackExchange 库提供了 `IDatabase.StringIncrementAsync` 和 `IDatabase.StringDecrementAsync` 方法的重载版本，用于执行这些操作并返回存储在缓存中的结果值。以下代码段演示了如何使用这些方法：
 
-
         ConnectionMultiplexer redisHostConnection = ...;
         IDatabase cache = redisHostConnection.GetDatabase();
         ...
@@ -541,23 +531,19 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
         long oldValue = await cache.StringIncrementAsync("data:counter");
         // Increment by 1 (the default)
         // oldValue should be 100
-        
+
         long newValue = await cache.StringDecrementAsync("data:counter", 50);
         // Decrement by 50
         // newValue should be 50
 
-
 - `GETSET` 用于检索与键关联的值，并将其更改为新值。StackExchange 库通过 `IDatabase.StringGetSetAsync` 方法使此操作可供使用。以下代码段演示了此方法的示例。此代码从前一示例返回与键 "data:counter" 关联的当前值。然后将此键的值重置为零，这些都是同一操作的一部分：
-
 
         ConnectionMultiplexer redisHostConnection = ...;
         IDatabase cache = redisHostConnection.GetDatabase();
         ...
         string oldValue = await cache.StringGetSetAsync("data:counter", 0);
 
-
 - `MGET` 和 `MSET` 可以作为单个操作返回或更改一组字符串值。`IDatabase.StringGetAsync` 和 `IDatabase.StringSetAsync` 已重载以支持此功能，如以下示例中所示：
-
 
         ConnectionMultiplexer redisHostConnection = ...;
         IDatabase cache = redisHostConnection.GetDatabase();
@@ -570,7 +556,7 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
                 new KeyValuePair<RedisKey, RedisValue>("data:key99", "value2"),
                 new KeyValuePair<RedisKey, RedisValue>("data:key322", "value3")
             };
-    
+
         // Store the list of key-value pairs in the cache
         cache.StringSet(keysAndValues.ToArray());
         ...
@@ -580,7 +566,6 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
         values = cache.StringGet(keys);
         // values should contain { "value1", "value2", "value3" }
 
-
 你也可以将多个操作合并成单个 Redis 事务，如本文前面的“Redis 事务和批处理”部分中所述。StackExchange 库通过 `ITransaction` 接口提供事务支持。
 
 使用 `IDatabase.CreateTransaction` 方法创建 `ITransaction` 对象。使用 `ITransaction` 对象提供的方法调用对事务的命令。
@@ -588,7 +573,6 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
 `ITransaction` 接口可用于访问 `IDatabase` 接口所访问的类似一组方法，不过，所有方法是异步的。这意味着，这些方法仅在调用 `ITransaction.Execute` 方法时执行。`ITransaction.Execute` 方法返回的值指示事务创建是成功 (true) 还是失败 (false)。
 
 以下代码段显示的示例将在执行同一事务期间递增和递减两个计数器：
-
 
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
@@ -601,7 +585,6 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
     Console.WriteLine("Result of increment: {0}", tx1.Result);
     Console.WriteLine("Result of decrement: {0}", tx2.Result);
 
-
 请记住，Redis 事务不同于关系数据库中的事务。`Execute` 方法只是将构成运行事务的所有命令排入队列，如果其中任何一个命令格式不当，则事务停止。如果已成功将所有命令排入队列，将以异步方式运行每个命令。
 
 如果任何命令失败，其他命令仍将继续处理。如果需要验证命令是否已成功完成，必须使用相应任务的 **Result** 属性来提取命令的结果，如上述示例中所示。读取 **Result** 属性将会阻塞调用线程，直到任务完成。
@@ -611,7 +594,6 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
 执行批处理操作时，可以使用 StackExchange 库的 `IBatch` 接口。此接口可用于访问 `IDatabase` 接口所访问的类似一组方法，不过，所有方法是异步的。
 
 可以使用 `IDatabase.CreateBatch` 方法来创建 `IBatch` 对象，然后使用 `IBatch.Execute` 方法来运行批处理，如以下示例所示。这段代码仅设置字符串值，递增和递减前面示例中使用的相同计数器，然后显示结果：
-
 
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
@@ -624,13 +606,11 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
     Console.WriteLine("{0}", t1.Result);
     Console.WriteLine("{0}", t2.Result);
 
-
 必须知道，这不同于事务，如果因为格式不当而导致批中的命令失败，其他命令仍可运行。`IBatch.Execute` 方法不返回成功或失败的任何指示。
 
 ### 执行即发即弃缓存操作
 
 Redis 通过使用命令标志来支持即发即弃操作。在此情况下，客户端仅启动操作，但不关注结果，且并不会等待命令完成。以下示例演示了如何以即发即弃操作的形式执行 INCR 命令：
-
 
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
@@ -639,13 +619,11 @@ Redis 通过使用命令标志来支持即发即弃操作。在此情况下，�
     ...
     cache.StringIncrement("data:key1", flags: CommandFlags.FireAndForget);
 
-
 ### 指定密钥自动过期
 
 在 Redis 缓存中存储项时，可以指定超时，超时过后，将自动从缓存中删除该项。你还可以在密钥过期之前，使用 `TTL` 命令来查询剩余时间。StackExchange 应用程序可通过 `IDatabase.KeyTimeToLive` 方法使用此命令。
 
 以下代码段演示了如何将密钥过期时间设置为 20 秒，并查询密钥剩余生存期：
-
 
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
@@ -657,9 +635,7 @@ Redis 通过使用命令标志来支持即发即弃操作。在此情况下，�
     // If the key has already expired, the KeyTimeToLive function returns a null
     TimeSpan? expiry = cache.KeyTimeToLive("data:key1");
 
-
 还可以使用 StackExchange 库中作为 `KeyExpireAsync` 方法提供的 EXPIRE 命令将过期时间设置为特定的日期和时间：
-
 
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
@@ -669,7 +645,6 @@ Redis 通过使用命令标志来支持即发即弃操作。在此情况下，�
     await cache.KeyExpireAsync("data:key1",
         new DateTime(2015, 1, 1, 0, 0, 0, DateTimeKind.Utc));
     ...
-
 
 > 提示：可以使用 DEL 命令手动从缓存中删除项，该命令在 StackExchange 库中作为 `IDatabase.KeyDeleteAsync` 方法提供。
 
@@ -682,7 +657,6 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
 以下代码段演示了如何使用集来快速存储和检索相关项的集合。此代码使用本文前面的“实施 Redis 缓存客户端应用程序”部分中所述的 `BlogPost` 类型。
 
 `BlogPost` 对象包含四个字段：ID、标题、排名分数和标记集合。以下第一个代码段演示了用于填充 `BlogPost` 对象的 C# 列表的示例数据：
-
 
     List<string[]> tags = new List<string[]>()
     {
@@ -697,7 +671,7 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
         new string[] { "azure","database","big data","git","csharp" },
         new string[] { "azure" }
     };
-    
+
     List<BlogPost> posts = new List<BlogPost>();
     int blogKey = 0;
     int blogPostId = 0;
@@ -715,9 +689,7 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
                                       // in the tags list
     }
 
-
 可以在 Redis 缓存中针对每个 `BlogPost` 对象将标记存储为集，并将每个集与 `BlogPost` ID关联。这样，应用程序便可以快速查找属于特定博客文章的所有标记。若要启用反向搜索并查找所有共享特定标记的博客文章，可以创建另一个集，用于保存引用键中标记 ID 的博客文章：
-
 
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
@@ -730,7 +702,7 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
         // Add tags to the blog post in Redis
         await cache.SetAddAsync(
             redisKey, post.Tags.Select(s => (RedisValue)s).ToArray());
-    
+
         // Now do the inverse so we can figure how which blog posts have a given tag
         foreach (var tag in post.Tags)
         {
@@ -739,9 +711,7 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
         }
     }
 
-
 这些结构可让你以非常有效的方式执行许多常见查询。例如，你可以按如下所示查找并显示博客文章 1 的所有标记：
-
 
     // Show the tags for blog post #1
     foreach (var value in await cache.SetMembersAsync("blog:posts:1:tags"))
@@ -749,9 +719,7 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
         Console.WriteLine(value);
     }
 
-
 你可以通过执行交集操作，查找博客文章 1 和博客文章 2 公用的所有标记，如下所示：
-
 
     // Show the tags in common for blog posts #1 and #2
     foreach (var value in await cache.SetCombineAsync(SetOperation.Intersect, new RedisKey[]
@@ -760,16 +728,13 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
         Console.WriteLine(value);
     }
 
-
 你可以查找包含特定标记的所有博客文章：
-
 
     // Show the ids of the blog posts that have the tag "iot".
     foreach (var value in await cache.SetMembersAsync("tag:iot:blog:posts"))
     {
         Console.WriteLine(value);
     }
-
 
 ### 查找最近访问的项
 
@@ -779,7 +744,6 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
 
 以下代码段演示了如何使用 StackExchange 库来执行这些操作。此代码使用前面示例中的 `BlogPost` 类型。当用户阅读博客文章时，`IDatabase.ListLeftPushAsync` 方法将博客文章的标题推送到与 Redis 缓存中键 "blog:recent\_posts" 关联的列表。
 
-
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
     ...
@@ -788,11 +752,9 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
     await cache.ListLeftPushAsync(
         redisKey, blogPost.Title); // Push the blog post onto the list
 
-
 随着阅读的博客文章越来越多，其标题将推送到同一列表。列表已根据其添加顺序进行排序。最近阅读的博客文章朝向列表左端。（如果同一博客文章阅读了一次以上，则它在列表中有多个条目。）
 
 可以使用 `IDatabase.ListRange` 方法显示最近阅读的文章的标题。此方法采用包含列表、起点和终点的键。以下代码将从列表的最左端检索 10 篇博客文章的标题（项为 0 到 9）：
-
 
     // Show latest ten posts
     foreach (string postTitle in await cache.ListRangeAsync(redisKey, 0, 9))
@@ -800,21 +762,17 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
         Console.WriteLine(postTitle);
     }
 
-
 请注意，`ListRangeAsync` 方法不会从列表中删除项。为此，你可以使用 `IDatabase.ListLeftPopAsync` 和 `IDatabase.ListRightPopAsync` 方法。
 
 若要防止列表无限增长，可以通过修剪列表来定期删除项。以下代码段演示了如何只保留列表中位于最左端的 5 个项并删除其他所有项：
 
-
     await cache.ListTrimAsync(redisKey, 0, 5);
-
 
 ### 实施排行榜
 
 默认情况下，集中的项不以任何特定顺序保存。你可以使用 ZADD 命令（StackExchange 库中的 `IDatabase.SortedSetAdd` 方法）来创建排序集合。系统使用一个名为 score（作为命令的参数提供）的数字值来为项排序。
 
 以下代码段将博客文章的标题添加到排序列表。在示例中，每篇博客文章还有包含博客文章排名的评分字段。
-
 
     ConnectionMultiplexer redisHostConnection = ...;
     IDatabase cache = redisHostConnection.GetDatabase();
@@ -823,20 +781,16 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
     BlogPost blogPost = ...; // Reference to a blog post that has just been rated
     await cache.SortedSetAddAsync(redisKey, blogPost.Title, blogpost.Score);
 
-
 可以使用 `IDatabase.SortedSetRangeByRankWithScores` 方法以评分递增顺序来检索博客文章标题和评分：
-
 
     foreach (var post in await cache.SortedSetRangeByRankWithScoresAsync(redisKey))
     {
         Console.WriteLine(post);
     }
 
-
-> [AZURE.NOTE] StackExchange 库还提供了 `IDatabase.SortedSetRangeByRankAsync` 方法，用于以评分顺序返回数据，但不返回评分。
+> [!NOTE] StackExchange 库还提供了 `IDatabase.SortedSetRangeByRankAsync` 方法，用于以评分顺序返回数据，但不返回评分。
 
 你也可以使用评分递减顺序来检索项，并通过将额外参数提供给 `IDatabase.SortedSetRangeByRankWithScoresAsync` 方法来限制返回项的数目。以下示例演示了排名前 10 位博客文章的标题和评分：
-
 
     foreach (var post in await cache.SortedSetRangeByRankWithScoresAsync(
                                    redisKey, 0, 9, Order.Descending))
@@ -844,9 +798,7 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
         Console.WriteLine(post);
     }
 
-
 以下示例使用了 `IDatabase.SortedSetRangeByScoreWithScoresAsync` 方法，该方法可用于限制返回给那些处于给定评分范围内的项：
-
 
     // Blog posts with scores between 5000 and 100000
     foreach (var post in await cache.SortedSetRangeByScoreWithScoresAsync(
@@ -854,7 +806,6 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
     {
         Console.WriteLine(post);
     }
-
 
 ### 使用通道进行消息传送
 
@@ -864,7 +815,6 @@ Redis 提供 SUBSCRIBE 命令来让客户端应用程序订阅通道。此命令
 
 使用 Redis 服务器连接的 `GetSubscriber` 方法创建 `ISubscription` 对象。然后使用此对象的 `SubscribeAsync` 方法来侦听通道上的消息。以下代码示例演示了如何订阅名为“messages:blogPosts”的通道：
 
-
     ConnectionMultiplexer redisHostConnection = ...;
     ISubscriber subscriber = redisHostConnection.GetSubscriber();
     ...
@@ -872,7 +822,6 @@ Redis 提供 SUBSCRIBE 命令来让客户端应用程序订阅通道。此命令
     {
         Console.WriteLine("Title is: {0}", message);
     });
-
 
 `Subscribe` 方法的第一个参数为通道的名称。此名称遵循缓存中键使用的相同约定。该名称可以包含任何二进制数据，但建议最好使用相对较短且有意义的字符串，以帮助确保良好的性能和易维护性。
 
@@ -882,13 +831,11 @@ Redis 提供 SUBSCRIBE 命令来让客户端应用程序订阅通道。此命令
 
 若要发布到通道，应用程序可以使用 Redis PUBLISH 命令。StackExchange 库提供了 `IServer.PublishAsync` 方法来执行此操作。以下代码段演示了如何将消息发布到“messages:blogPosts”通道：
 
-
     ConnectionMultiplexer redisHostConnection = ...;
     ISubscriber subscriber = redisHostConnection.GetSubscriber();
     ...
     BlogPost blogpost = ...;
     subscriber.PublishAsync("messages:blogPosts", blogPost.Title);
-
 
 关于发布/订阅机制，应该了解几个要点：
 
@@ -900,7 +847,6 @@ Redis 提供 SUBSCRIBE 命令来让客户端应用程序订阅通道。此命令
       redisHostConnection.PreserveAsyncOrder = false;
       ISubscriber subscriber = redisHostConnection.GetSubscriber();
 
-
 ## 相关模式和指南
 
 在应用程序中实施缓存时，以下模式也可能与你的方案相关：
@@ -911,8 +857,8 @@ Redis 提供 SUBSCRIBE 命令来让客户端应用程序订阅通道。此命令
 ## 详细信息
 
 - Microsoft 网站上的 [MemoryCache class](http://msdn.microsoft.com/zh-cn/library/system.runtime.caching.memorycache.aspx)（MemoryCache 类）页
-- Microsoft 网站上的 [Azure Redis Cache documentation](/documentation/services/redis-cache/)（Azure Redis 缓存文档）页
-- Microsoft 网站上的 [Azure Redis 缓存常见问题](/documentation/articles/cache-faq/)页
+- Microsoft 网站上的 [Azure Redis Cache documentation](./redis-cache/index.md)（Azure Redis 缓存文档）页
+- Microsoft 网站上的 [Azure Redis 缓存常见问题](./redis-cache/cache-faq.md)页
 - Microsoft 网站上的 [Configuration model](http://msdn.microsoft.com/zh-cn/library/windowsazure/hh914149.aspx)（配置模型）页
 - Microsoft 网站上的 [Task-based Asynchronous Pattern](http://msdn.microsoft.com/zh-cn/library/hh873175.aspx)（基于任务的异步模式）页
 - StackExchange.Redis GitHub 存储库上的 [Pipelines and multiplexers](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/PipelinesMultiplexers.md)（管道和多路复用器）页
@@ -925,8 +871,8 @@ Redis 提供 SUBSCRIBE 命令来让客户端应用程序订阅通道。此命令
 - Redis 网站上的 [Redis security](http://redis.io/topics/security)（Redis 安全性）页
 - Azure 博客上的 [Lap around Azure Redis Cache](https://azure.microsoft.com/blog/2014/06/04/lap-around-azure-redis-cache-preview/)（浏览 Azure Redis 缓存）页
 - Microsoft 网站上的 [Running Redis on a CentOS Linux VM in Azure](http://blogs.msdn.com/b/tconte/archive/2012/06/08/running-redis-on-a-centos-linux-vm-in-windows-azure.aspx)（在 Azure 中的 CentOS Linux VM 上运行 Redis）页
-- Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 会话状态提供程序](/documentation/articles/cache-aspnet-session-state-provider/)页
-- Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 输出缓存提供程序](/documentation/articles/cache-aspnet-output-cache-provider/)页
+- Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 会话状态提供程序](./redis-cache/cache-aspnet-session-state-provider.md)页
+- Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 输出缓存提供程序](./redis-cache/cache-aspnet-output-cache-provider.md)页
 - Redis 网站上的 [An Introduction to Redis data types and abstractions](http://redis.io/topics/data-types-intro)（Redis 数据类型和抽象简介）页
 - StackExchange.Redis 网站上的 [Basic usage](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Basics.md)（基本用法）页
 - StackExchange.Redis 存储库上的 [Transactions in Redis](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Transactions.md)（Redis 中的事务）页

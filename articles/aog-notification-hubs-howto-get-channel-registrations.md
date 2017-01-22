@@ -1,20 +1,21 @@
-<properties
-	pageTitle="如何根据通道信息获取通知中心中的注册信息"
-	description="如何根据通道信息获取通知中心中的注册信息。"
-	services="notification-hubs"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 如何根据通道信息获取通知中心中的注册信息
+description: 如何根据通道信息获取通知中心中的注册信息。
+services: notification-hubs
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="notification-hubs-aog"
-	ms.date="12/05/2016"
-	wacn.date="12/05/2016"/>
+ms.service: notification-hubs-aog
+ms.date: 12/05/2016
+wacn.date: 12/05/2016
+---
+
 # 如何根据通道信息获取通知中心中的注册信息 #
 
-在中国市场，对于安卓系统的手机，不一定内置支持 GCM，但是支持百度推送服务。因此，为了更好的服务客户，由世纪互联运营的 Microsoft Azure 的通知中心也添加了对百度推送服务的支持，并推出了相应的 Java SDK 来给开发者使用。相关文档和示例可以参阅[这篇入门文章](/documentation/articles/notification-hubs-baidu-china-android-notifications-get-started/)。
+在中国市场，对于安卓系统的手机，不一定内置支持 GCM，但是支持百度推送服务。因此，为了更好的服务客户，由世纪互联运营的 Microsoft Azure 的通知中心也添加了对百度推送服务的支持，并推出了相应的 Java SDK 来给开发者使用。相关文档和示例可以参阅[这篇入门文章](./notification-hubs/notification-hubs-baidu-china-android-notifications-get-started.md)。
 
 Azure 的通知中心提供的是跨平台设备的支持，以及超大吞吐量和可伸缩性，它本身不会直接推送消息给手机端，而是通过具体推送服务的通道发送到手机客户端，比如中国安卓手机上的百度推送服务，苹果手机上的 APNS 等等，所以需要客户端提供具体推送服务的通道信息。那么这个客户端提供消息推送通道信息给 Azure 的通知中心的过程就叫注册 （Registration）。一个注册一般包括注册 ID，通道信息，标签等等信息。
 

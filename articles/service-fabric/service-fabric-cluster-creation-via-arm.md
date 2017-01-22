@@ -1,29 +1,27 @@
-<properties
-   pageTitle="使用 Azure Resource Manager 创建安全 Service Fabric 群集 | Azure"
-   description="本文介绍如何在 Azure 中设置一个使用 Azure Resource Manager、Azure 密钥保管库和 Azure Active Directory (AAD) 进行客户端身份验证的安全 Service Fabric 群集。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="chackdan"
-   manager="timlt"
-   editor="vturecek"/>  
+---
+title: 使用 Azure Resource Manager 创建安全 Service Fabric 群集 | Azure
+description: 本文介绍如何在 Azure 中设置一个使用 Azure Resource Manager、Azure 密钥保管库和 Azure Active Directory (AAD) 进行客户端身份验证的安全 Service Fabric 群集。
+services: service-fabric
+documentationCenter: .net
+authors: chackdan
+manager: timlt
+editor: vturecek
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/25/2016"
-   wacn.date="01/04/2017"
-   ms.author="vturecek"/>  
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/25/2016
+wacn.date: 01/04/2017
+ms.author: vturecek
+---
 
 # 使用 Azure Resource Manager 在 Azure 中创建 Service Fabric 群集
 
-> [AZURE.SELECTOR]
-- [Azure 资源管理器](/documentation/articles/service-fabric-cluster-creation-via-arm/)
-- [Azure 门户](/documentation/articles/service-fabric-cluster-creation-via-portal/)
+> [!div class="op_single_selector"]
+- [Azure 资源管理器](./service-fabric-cluster-creation-via-arm.md)
+- [Azure 门户](./service-fabric-cluster-creation-via-portal.md)
 
 本指南逐步介绍如何使用 Azure Resource Manager 在 Azure 中设置安全的 Azure Service Fabric 群集，其中包括以下步骤：
 
@@ -38,16 +36,12 @@
 
 登录到 Azure 帐户：
 
-
-	Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 选择订阅：
 
-
-	Get-AzureRmSubscription
-	Set-AzureRmContext -SubscriptionId <guid>
-
+    Get-AzureRmSubscription
+    Set-AzureRmContext -SubscriptionId <guid>
 
 ## 设置密钥保管库
 
@@ -59,64 +53,52 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
 
 ![证书安装][cluster-security-cert-installation]  
 
-
 ### 创建资源组。
 
 第一个步骤是专门针对密钥保管库创建资源组。建议将密钥保管库放入其自身的资源组。这样，便可以删除计算与存储资源组（例如包含 Service Fabric 群集的资源组），而不会丢失密钥和机密。包含密钥保管库的资源组必须与正在使用它的群集位于同一区域。
 
+        New-AzureRmResourceGroup -Name mycluster-keyvault -Location 'China East'
+        WARNING: The output object type of this cmdlet is going to be modified in a future release.
 
-
-		New-AzureRmResourceGroup -Name mycluster-keyvault -Location 'China East'
-		WARNING: The output object type of this cmdlet is going to be modified in a future release.
-	
-		ResourceGroupName : mycluster-keyvault
-		Location          : chinaeast
-		ProvisioningState : Succeeded
-		Tags              :
-		ResourceId        : /subscriptions/<guid>/resourceGroups/mycluster-keyvault
-
-
+        ResourceGroupName : mycluster-keyvault
+        Location          : chinaeast
+        ProvisioningState : Succeeded
+        Tags              :
+        ResourceId        : /subscriptions/<guid>/resourceGroups/mycluster-keyvault
 
 ### 创建密钥保管库 
 
 在新资源组中创建密钥保管库。**必须针对部署启用**密钥保管库，使 Service Fabric 资源提供程序能够从中获取证书并将其安装在群集节点上：
 
+        New-AzureRmKeyVault -VaultName 'myvault' -ResourceGroupName 'mycluster-keyvault' -Location 'China East' -EnabledForDeployment
 
+        Vault Name                       : myvault
+        Resource Group Name              : mycluster-keyvault
+        Location                         : China East
+        Resource ID                      : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
+        Vault URI                        : https://myvault.vault.chinacloudapi.cn
+        Tenant ID                        : <guid>
+        SKU                              : Standard
+        Enabled For Deployment?          : False
+        Enabled For Template Deployment? : False
+        Enabled For Disk Encryption?     : False
+        Access Policies                  :
+                                           Tenant ID                :    <guid>
+                                           Object ID                :    <guid>
+                                           Application ID           :
+                                           Display Name             :    
+                                           Permissions to Keys      :    get, create, delete, list, update, import, backup, restore
+                                           Permissions to Secrets   :    all
 
-		New-AzureRmKeyVault -VaultName 'myvault' -ResourceGroupName 'mycluster-keyvault' -Location 'China East' -EnabledForDeployment
-	
-	
-		Vault Name                       : myvault
-		Resource Group Name              : mycluster-keyvault
-		Location                         : China East
-		Resource ID                      : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
-		Vault URI                        : https://myvault.vault.chinacloudapi.cn
-		Tenant ID                        : <guid>
-		SKU                              : Standard
-		Enabled For Deployment?          : False
-		Enabled For Template Deployment? : False
-		Enabled For Disk Encryption?     : False
-		Access Policies                  :
-		                                   Tenant ID                :    <guid>
-		                                   Object ID                :    <guid>
-		                                   Application ID           :
-		                                   Display Name             :    
-		                                   Permissions to Keys      :    get, create, delete, list, update, import, backup, restore
-		                                   Permissions to Secrets   :    all
-	
-	
-		Tags                             :
-
+        Tags                             :
 
 如果有现有的密钥保管库，可以使用 Azure CLI 针对部署启用该保管库：
 
-
-	> azure login -e AzureChinaCloud
-	> azure account set "your account"
-	> azure config mode arm 
-	> azure keyvault list
-	> azure keyvault set-policy --vault-name "your vault name" --enabled-for-deployment true
-
+    > azure login -e AzureChinaCloud
+    > azure account set "your account"
+    > azure config mode arm 
+    > azure keyvault list
+    > azure keyvault set-policy --vault-name "your vault name" --enabled-for-deployment true
 
 <a id="add-certificate-to-key-vault"></a>
 ## 将证书添加到密钥保管库
@@ -126,7 +108,7 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
 ### 群集和服务器证书（必需） 
 
 需要使用此证书来保护群集以及防止未经授权访问群集。此证书通过多种方式保护群集：
- 
+
  - **群集身份验证：**在群集联合的情况下对节点间的通信进行身份验证。只有可以使用此证书自我证明身份的节点才能加入群集。
  - **服务器身份验证：**在管理客户端上对群集管理终结点进行身份验证，使管理客户端知道它正在与真正的群集通信。此证书还通过 HTTPS 为 HTTPS 管理 API 和 Service Fabric Explorer 提供 SSL。
 
@@ -152,39 +134,32 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
   1. 将存储库的整个内容下载到本地目录。
   2. 在 PowerShell 窗口中导入该模块：
 
+          PS C:\Users\vturecek> Import-Module "C:\users\vturecek\Documents\ServiceFabricRPHelpers\ServiceFabricRPHelpers.psm1"
 
-  		PS C:\Users\vturecek> Import-Module "C:\users\vturecek\Documents\ServiceFabricRPHelpers\ServiceFabricRPHelpers.psm1"
-
-     
 此 PowerShell 模块中的 `Invoke-AddCertToKeyVault` 命令自动将证书私钥的格式设置为 JSON 字符串，并将它上载到密钥保管库。使用该字符串可将群集证书与任何其他应用程序证书添加到密钥保管库。针对要在群集中安装的其他任何证书重复此步骤。
 
+     Invoke-AddCertToKeyVault -SubscriptionId <guid> -ResourceGroupName mycluster-keyvault -Location "China East" -VaultName myvault -CertificateName mycert -Password "<password>" -UseExistingCertificate -ExistingPfxFilePath "C:\path\to\mycertkey.pfx"
 
-	 Invoke-AddCertToKeyVault -SubscriptionId <guid> -ResourceGroupName mycluster-keyvault -Location "China East" -VaultName myvault -CertificateName mycert -Password "<password>" -UseExistingCertificate -ExistingPfxFilePath "C:\path\to\mycertkey.pfx"
-	
-		Switching context to SubscriptionId <guid>
-		Ensuring ResourceGroup mycluster-keyvault in China East
-		WARNING: The output object type of this cmdlet is going to be modified in a future release.
-		Using existing valut myvault in China East
-		Reading pfx file from C:\path\to\key.pfx
-		Writing secret to myvault in vault myvault
-	
-	
-	Name  : CertificateThumbprint
-	Value : <value>
+        Switching context to SubscriptionId <guid>
+        Ensuring ResourceGroup mycluster-keyvault in China East
+        WARNING: The output object type of this cmdlet is going to be modified in a future release.
+        Using existing valut myvault in China East
+        Reading pfx file from C:\path\to\key.pfx
+        Writing secret to myvault in vault myvault
 
-	Name  : SourceVault
-	Value : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
+    Name  : CertificateThumbprint
+    Value : <value>
 
-	Name  : CertificateURL
-	Value : https://myvault.vault.chinacloudapi.cn:443/secrets/mycert/4d087088df974e869f1c0978cb100e47
+    Name  : SourceVault
+    Value : /subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault
 
-
-
+    Name  : CertificateURL
+    Value : https://myvault.vault.chinacloudapi.cn:443/secrets/mycert/4d087088df974e869f1c0978cb100e47
 
 前面的字符串是配置 Service Fabric 群集 Resource Manager 模板时所要满足的所有密钥保管库先决条件。该模板可安装用于节点身份验证、管理终结点安全性与身份验证以及使用 X.509 证书的其他任何应用程序安全功能的证书。此时，应已在 Azure 中设置以下各项：
 
  - 密钥保管库资源组
-   - 密钥保管库
+    - 密钥保管库
      - 群集服务器身份验证证书
      - 应用程序证书
 
@@ -196,7 +171,7 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 为了简化涉及到配置 AAD 与 Service Fabric 群集的一些步骤，我们创建了一组 Windows PowerShell 脚本。
 
->[AZURE.NOTE] 必须在创建群集*之前*执行这些步骤；因此，在脚本需要群集名称和终结点的情况下，这些应该是计划的值，而不是所创建的值。
+>[!NOTE] 必须在创建群集*之前*执行这些步骤；因此，在脚本需要群集名称和终结点的情况下，这些应该是计划的值，而不是所创建的值。
 
 1. [将脚本下载][sf-aad-ps-script-download]到计算机。
 
@@ -206,9 +181,7 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 4. 运行 `SetupApplications.ps1` 并提供 TenantId、ClusterName 和 WebApplicationReplyUrl 作为参数。例如：
 
-
-    	.\SetupApplications.ps1 -TenantId '690ec069-8200-4068-9d01-5aaf188e557a' -ClusterName 'mycluster' -WebApplicationReplyUrl 'https://mycluster.chinaeast.chinacloudapp.cn:19080/Explorer/index.html'
-
+        .\SetupApplications.ps1 -TenantId '690ec069-8200-4068-9d01-5aaf188e557a' -ClusterName 'mycluster' -WebApplicationReplyUrl 'https://mycluster.chinaeast.chinacloudapp.cn:19080/Explorer/index.html'
 
     可以通过在 Azure 经典门户中查看租户的 URL 来查找 **TenantId**。该 URL 中嵌入的 GUID 就是 TenantId。例如：
 
@@ -220,7 +193,6 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
     https://&lt;cluster_domain&gt;:19080/Explorer  
 
-
     系统将提示登录到具有 AAD 租户管理权限的帐户。完成此操作后，脚本将继续创建 Web 和本机应用程序来代表 Service Fabric 群集。在 [Azure 经典门户][azure-classic-portal]中查看租户的应用程序时，应会看到两个新条目：
 
     - *ClusterName*\_Cluster
@@ -228,13 +200,11 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
     该脚本将列显在下一部分创建群集时 Azure Resource Manager 模板所需的 Json，因此请不要关闭 PowerShell 窗口。
 
-
-	"azureActiveDirectory": {
-	  "tenantId":"<guid>",
-	  "clusterApplication":"<guid>",
-	  "clientApplication":"<guid>"
-	},
-
+    "azureActiveDirectory": {
+      "tenantId":"<guid>",
+      "clusterApplication":"<guid>",
+      "clientApplication":"<guid>"
+    },
 
 ## 创建 Service Fabric 群集 Resource Manager 模板
 
@@ -254,37 +224,35 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 必须在 VMSS 资源 (Microsoft.Compute/virtualMachineScaleSets) 的 osProfile 节中配置应在群集中安装的每个证书。这样就会指示资源提供程序在 VM 上安装证书。这包括群集证书，以及打算用于应用程序的任何应用程序安全证书：
 
-
-	{
-	  "apiVersion": "2016-03-30",
-	  "type": "Microsoft.Compute/virtualMachineScaleSets",
-	  ...
-	  "properties": {
-	    ...
-	    "osProfile": {
-	      ...
-	      "secrets": [
-	        {
-	          "sourceVault": {
-	            "id": "[parameters('sourceVaultValue')]"
-	          },
-	          "vaultCertificates": [
-	            {
-	              "certificateStore": "[parameters('clusterCertificateStorevalue')]",
-	              "certificateUrl": "[parameters('clusterCertificateUrlValue')]"
-	            },
-	            {
-	              "certificateStore": "[parameters('applicationCertificateStorevalue')",
-	              "certificateUrl": "[parameters('applicationCertificateUrlValue')]"
-	            },
-	            ...
-	          ]
-	        }
-	      ]
-	    }
-	  }
-	}
-
+    {
+      "apiVersion": "2016-03-30",
+      "type": "Microsoft.Compute/virtualMachineScaleSets",
+      ...
+      "properties": {
+        ...
+        "osProfile": {
+          ...
+          "secrets": [
+            {
+              "sourceVault": {
+                "id": "[parameters('sourceVaultValue')]"
+              },
+              "vaultCertificates": [
+                {
+                  "certificateStore": "[parameters('clusterCertificateStorevalue')]",
+                  "certificateUrl": "[parameters('clusterCertificateUrlValue')]"
+                },
+                {
+                  "certificateStore": "[parameters('applicationCertificateStorevalue')",
+                  "certificateUrl": "[parameters('applicationCertificateUrlValue')]"
+                },
+                ...
+              ]
+            }
+          ]
+        }
+      }
+    }
 
 #### 配置 Service Fabric 群集证书
 
@@ -292,124 +260,117 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 ##### VMSS 资源：
 
-
-	{
-	  "apiVersion": "2016-03-30",
-	  "type": "Microsoft.Compute/virtualMachineScaleSets",
-	  ...
-	  "properties": {
-	    ...
-	    "virtualMachineProfile": {
-	      "extensionProfile": {
-	        "extensions": [
-	          {
-	            "name": "[concat('ServiceFabricNodeVmExt','_vmNodeType0Name')]",
-	            "properties": {
-	              ...
-	              "settings": {
-	                ...
-	                "certificate": {
-	                  "thumbprint": "[parameters('clusterCertificateThumbprint')]",
-	                  "x509StoreName": "[parameters('clusterCertificateStoreValue')]"
-	                },
-	                ...
-	              }
-	            }
-	          }
-	        ]
-	      }
-	    }
-	  }
-	}
-
+    {
+      "apiVersion": "2016-03-30",
+      "type": "Microsoft.Compute/virtualMachineScaleSets",
+      ...
+      "properties": {
+        ...
+        "virtualMachineProfile": {
+          "extensionProfile": {
+            "extensions": [
+              {
+                "name": "[concat('ServiceFabricNodeVmExt','_vmNodeType0Name')]",
+                "properties": {
+                  ...
+                  "settings": {
+                    ...
+                    "certificate": {
+                      "thumbprint": "[parameters('clusterCertificateThumbprint')]",
+                      "x509StoreName": "[parameters('clusterCertificateStoreValue')]"
+                    },
+                    ...
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
 
 ##### Service Fabric 资源：
 
-
-	{
-	  "apiVersion": "2016-03-01",
-	  "type": "Microsoft.ServiceFabric/clusters",
-	  "name": "[parameters('clusterName')]",
-	  "location": "[parameters('clusterLocation')]",
-	  "dependsOn": [
-	    "[concat('Microsoft.Storage/storageAccounts/', variables('supportLogStorageAccountName'))]"
-	  ],
-	  "properties": {
-	    "certificate": {
-	      "thumbprint": "[parameters('clusterCertificateThumbprint')]",
-	      "x509StoreName": "[parameters('clusterCertificateStoreValue')]"
-	    },
-	    ...
-	  }
-	}
-
+    {
+      "apiVersion": "2016-03-01",
+      "type": "Microsoft.ServiceFabric/clusters",
+      "name": "[parameters('clusterName')]",
+      "location": "[parameters('clusterLocation')]",
+      "dependsOn": [
+        "[concat('Microsoft.Storage/storageAccounts/', variables('supportLogStorageAccountName'))]"
+      ],
+      "properties": {
+        "certificate": {
+          "thumbprint": "[parameters('clusterCertificateThumbprint')]",
+          "x509StoreName": "[parameters('clusterCertificateStoreValue')]"
+        },
+        ...
+      }
+    }
 
 ### 插入 AAD 配置
 
 可将前面创建的 AAD 配置直接插入 Resource Manager 模板，不过建议最好先将参数值提取到 parameters 文件，以便可以重复使用 Resource Manager 模板文件，避免输入特定于部署的值。
 
-
-	{
-	  "apiVersion": "2016-03-01",
-	  "type": "Microsoft.ServiceFabric/clusters",
-	  "name": "[parameters('clusterName')]",
-	  ...
-	  "properties": {
-	    "certificate": {
-	      "thumbprint": "[parameters('clusterCertificateThumbprint')]",
-	      "x509StoreName": "[parameters('clusterCertificateStorevalue')]"
-	    },
-	    ...
-	    "azureActiveDirectory": {
-	      "tenantId": "[parameters('aadTenantId')]",
-	      "clusterApplication": "[parameters('aadClusterApplicationId')]",
-	      "clientApplication": "[parameters('aadClientApplicationId')]"
-	    },
-	    ...
-	  }
-	}
-
+    {
+      "apiVersion": "2016-03-01",
+      "type": "Microsoft.ServiceFabric/clusters",
+      "name": "[parameters('clusterName')]",
+      ...
+      "properties": {
+        "certificate": {
+          "thumbprint": "[parameters('clusterCertificateThumbprint')]",
+          "x509StoreName": "[parameters('clusterCertificateStorevalue')]"
+        },
+        ...
+        "azureActiveDirectory": {
+          "tenantId": "[parameters('aadTenantId')]",
+          "clusterApplication": "[parameters('aadClusterApplicationId')]",
+          "clientApplication": "[parameters('aadClientApplicationId')]"
+        },
+        ...
+      }
+    }
 
 ### <a name="configure-arm"></a>配置 Resource Manager 模板参数
 
 最后，使用密钥保管库和 AAD PowerShell 命令的输出值填充参数文件：
 
-
-	{
-	    "$schema": "http://schema.management.chinacloudapi.cn/schemas/2015-01-01/deploymentParameters.json#",
-	    "contentVersion": "1.0.0.0",
-	    "parameters": { 
-	        ...
-	        "clusterCertificateStoreValue": {
-	            "value": "My"
-	        },
-	        "clusterCertificateThumbprint": {
-	            "value": "<thumbprint>"
-	        },
-	        "clusterCertificateUrlValue": {
-	            "value": "https://myvault.vault.chinalcoudapi.cn:443/secrets/myclustercert/4d087088df974e869f1c0978cb100e47"
-	        },
-	        "applicationCertificateStorevalue": {
-	            "value": "My"
-	        },
-	        "applicationCertificateUrlValue": {
-	            "value": "https://myvault.vault.chinacloudapi.cn:443/secrets/myapplicationcert/2e035058ae274f869c4d0348ca100f08"
-	        },
-	        "sourceVaultvalue": {
-	            "value": "/subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault"
-	        },
-	        "aadTenantId": {
-	            "value": "<guid>"
-	        },
-	        "aadClusterApplicationId": {
-	            "value": "<guid>"
-	        },
-	        "aadClientApplicationId": {
-	            "value": "<guid>"
-	        },
-	        ...
-	    }
-	}
+    {
+        "$schema": "http://schema.management.chinacloudapi.cn/schemas/2015-01-01/deploymentParameters.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": { 
+            ...
+            "clusterCertificateStoreValue": {
+                "value": "My"
+            },
+            "clusterCertificateThumbprint": {
+                "value": "<thumbprint>"
+            },
+            "clusterCertificateUrlValue": {
+                "value": "https://myvault.vault.chinalcoudapi.cn:443/secrets/myclustercert/4d087088df974e869f1c0978cb100e47"
+            },
+            "applicationCertificateStorevalue": {
+                "value": "My"
+            },
+            "applicationCertificateUrlValue": {
+                "value": "https://myvault.vault.chinacloudapi.cn:443/secrets/myapplicationcert/2e035058ae274f869c4d0348ca100f08"
+            },
+            "sourceVaultvalue": {
+                "value": "/subscriptions/<guid>/resourceGroups/mycluster-keyvault/providers/Microsoft.KeyVault/vaults/myvault"
+            },
+            "aadTenantId": {
+                "value": "<guid>"
+            },
+            "aadClusterApplicationId": {
+                "value": "<guid>"
+            },
+            "aadClientApplicationId": {
+                "value": "<guid>"
+            },
+            ...
+        }
+    }
 
 此时，应已准备好以下各项：
 
@@ -429,7 +390,6 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 ![Resource Manager 依赖关系图][cluster-security-arm-dependency-map]  
 
-
 ## 创建群集
 
 现在可以使用 [ARM 部署][resource-group-template-deploy]来创建群集。
@@ -438,17 +398,13 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 运行以下 PowerShell 命令，使用 parameters 文件测试 Resource Manager 模板：
 
-
-	Test-AzureRmResourceGroupDeployment -ResourceGroupName "myresourcegroup" -TemplateFile .\azuredeploy.json -TemplateParameterFile .\azuredeploy.parameters.json
-
+    Test-AzureRmResourceGroupDeployment -ResourceGroupName "myresourcegroup" -TemplateFile .\azuredeploy.json -TemplateParameterFile .\azuredeploy.parameters.json
 
 #### 部署
 
 如果 Resource Manager 模板通过测试，请运行以下 PowerShell 命令，使用 parameters 文件来部署 Resource Manager 模板：
 
-
-	New-AzureRmResourceGroupDeployment -ResourceGroupName "myresourcegroup" -TemplateFile .\azuredeploy.json -TemplateParameterFile .\azuredeploy.parameters.json
-
+    New-AzureRmResourceGroupDeployment -ResourceGroupName "myresourcegroup" -TemplateFile .\azuredeploy.json -TemplateParameterFile .\azuredeploy.parameters.json
 
 ## 将用户分配到角色
 
@@ -461,18 +417,15 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
     ![将用户分配到角色按钮][assign-users-to-roles-button]  
 
-
 5. 选择要分配给用户的角色。
 
     ![将用户分配到角色][assign-users-to-roles-dialog]  
 
-
->[AZURE.NOTE] 有关 Service Fabric 中角色的详细信息，请参阅 [Role-based access control for Service Fabric clients](/documentation/articles/service-fabric-cluster-security-roles/)（适用于 Service Fabric 客户端的基于角色的访问控制）。
-
+>[!NOTE] 有关 Service Fabric 中角色的详细信息，请参阅 [Role-based access control for Service Fabric clients](./service-fabric-cluster-security-roles.md)（适用于 Service Fabric 客户端的基于角色的访问控制）。
 
 ## 后续步骤
 
-此时，已创建一个使用 Azure Active Directory 进行管理身份验证的安全群集。接下来，请[连接到该群集](/documentation/articles/service-fabric-connect-to-secure-cluster/)，了解如何[管理应用程序机密](/documentation/articles/service-fabric-application-secret-management/)。
+此时，已创建一个使用 Azure Active Directory 进行管理身份验证的安全群集。接下来，请[连接到该群集](./service-fabric-connect-to-secure-cluster.md)，了解如何[管理应用程序机密](./service-fabric-application-secret-management.md)。
 
 ## 排查用于客户端身份验证的 Azure Active Directory 的设置问题
 
@@ -485,7 +438,6 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 在 Service Fabric Explorer 的 AAD 登录页上成功登录后，浏览器返回主页，但出现提示选择证书的对话框。
 
 ![SFX - 选择证书对话框][sfx-select-certificate-dialog]  
-
 
 #### 原因
 
@@ -513,7 +465,6 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 ![SFX - 回复地址不匹配][sfx-reply-address-not-match]  
 
-
 #### 原因
 
 代表 Service Fabric Explorer 的群集 (Web) 应用程序尝试针对 AAD 进行身份验证，在执行请求的过程中提供了重定向返回 URL。但是，该 URL 并未列在 AAD 应用程序的“回复 URL”列表中。
@@ -523,7 +474,6 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 将 Service Fabric Explorer 的 URL 添加到群集 (Web) 应用程序“配置”选项卡中的“回复 URL”，或替换列表中的某个项。然后保存。
 
 ![Web 应用程序回复 URL][web-application-reply-url]  
-
 
 ### 是否可将同一个 AAD 租户用于多个群集？
 
@@ -539,20 +489,20 @@ FabricClient 和 FabricGateway 执行相互身份验证。使用 AAD 身份验�
 
 <!-- Links -->
 
-[azure-powershell]: /documentation/articles/powershell-install-configure/
-[key-vault-get-started]: /documentation/articles/key-vault-get-started/
+[azure-powershell]: ../powershell-install-configure.md
+[key-vault-get-started]: ../key-vault/key-vault-get-started.md
 [aad-graph-api-docs]: https://msdn.microsoft.com/zh-cn/library/azure/ad/graph/api/api-catalog
 [azure-classic-portal]: https://manage.windowsazure.cn
 [service-fabric-rp-helpers]: https://github.com/ChackDan/Service-Fabric/tree/master/Scripts/ServiceFabricRPHelpers
-[service-fabric-cluster-security]: /documentation/articles/service-fabric-cluster-security/
-[active-directory-howto-tenant]: /documentation/articles/active-directory-howto-tenant/
-[service-fabric-visualizing-your-cluster]: /documentation/articles/service-fabric-visualizing-your-cluster/
-[service-fabric-manage-application-in-visual-studio]: /documentation/articles/service-fabric-manage-application-in-visual-studio/
+[service-fabric-cluster-security]: ./service-fabric-cluster-security.md
+[active-directory-howto-tenant]: ../active-directory/active-directory-howto-tenant.md
+[service-fabric-visualizing-your-cluster]: ./service-fabric-visualizing-your-cluster.md
+[service-fabric-manage-application-in-visual-studio]: ./service-fabric-manage-application-in-visual-studio.md
 [sf-aad-ps-script-download]: http://servicefabricsdkstorage.blob.core.windows.net/publicrelease/MicrosoftAzureServiceFabric-AADHelpers.zip
 [azure-quickstart-templates]: https://github.com/Azure/azure-quickstart-templates
 [service-fabric-secure-cluster-5-node-1-nodetype-wad]: https://github.com/Azure/azure-quickstart-templates/tree/master/service-fabric-secure-cluster-5-node-1-nodetype
-[resource-group-template-deploy]: /documentation/articles/resource-group-template-deploy/
-[x509-certificates-and-service-fabric]: /documentation/articles/service-fabric-cluster-security/#x509-certificates-and-service-fabric
+[resource-group-template-deploy]: ../azure-resource-manager/resource-group-template-deploy.md
+[x509-certificates-and-service-fabric]: ./service-fabric-cluster-security.md#x509-certificates-and-service-fabric
 
 <!-- Images -->
 

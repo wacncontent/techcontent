@@ -6,32 +6,31 @@
 * 打开 **QSTodoListViewController.m** 并添加以下代码：
 
 ```
-		- (void) saveAuthInfo {
-				[SSKeychain setPassword:self.todoService.client.currentUser.mobileServiceAuthenticationToken forService:@"AzureMobileServiceTutorial" account:self.todoService.client.currentUser.userId]
-		}
+        - (void) saveAuthInfo {
+                [SSKeychain setPassword:self.todoService.client.currentUser.mobileServiceAuthenticationToken forService:@"AzureMobileServiceTutorial" account:self.todoService.client.currentUser.userId]
+        }
 
+        - (void)loadAuthInfo {
+                NSString *userid = [[SSKeychain accountsForService:@"AzureMobileServiceTutorial"][0] valueForKey:@"acct"];
+            if (userid) {
+                NSLog(@"userid: %@", userid);
+                self.todoService.client.currentUser = [[MSUser alloc] initWithUserId:userid];
+                 self.todoService.client.currentUser.mobileServiceAuthenticationToken = [SSKeychain passwordForService:@"AzureMobileServiceTutorial" account:userid];
 
-		- (void)loadAuthInfo {
-				NSString *userid = [[SSKeychain accountsForService:@"AzureMobileServiceTutorial"][0] valueForKey:@"acct"];
-		    if (userid) {
-		        NSLog(@"userid: %@", userid);
-		        self.todoService.client.currentUser = [[MSUser alloc] initWithUserId:userid];
-		         self.todoService.client.currentUser.mobileServiceAuthenticationToken = [SSKeychain passwordForService:@"AzureMobileServiceTutorial" account:userid];
-
-		    }
-		}
+            }
+        }
 ```
 
 * 在 `loginAndGetData` 中，修改 `loginWithProvider:controller:animated:completion:` 的 completion 块。就在 `[self refresh]` 的前面添加以下行来存储用户 ID 和标记属性：
 
 ```
-				[self saveAuthInfo];
+                [self saveAuthInfo];
 ```
 
 * 在该应用程序启动时加载用户 ID 和令牌。在 **QSTodoListViewController.m** 中的 `viewDidLoad` 中，就在 `self.todoService` 初始化后添加此项。
 
 ```
-				[self loadAuthInfo];
+                [self loadAuthInfo];
 ```
 
 <!---HONumber=74-->

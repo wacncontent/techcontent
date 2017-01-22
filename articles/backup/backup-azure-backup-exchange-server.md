@@ -1,24 +1,21 @@
-<properties
-	pageTitle="使用 System Center 2012 R2 DPM 将 Exchange Server 备份到 Azure 备份 | Azure"
-	description="了解如何使用 System Center 2012 R2 DPM 将 Exchange Server 备份到 Azure 备份"
-	services="backup"
-	documentationCenter=""
-	authors="MaanasSaran"
-	manager="NKolli1"
-	editor=""/>  
+---
+title: 使用 System Center 2012 R2 DPM 将 Exchange Server 备份到 Azure 备份 | Azure
+description: 了解如何使用 System Center 2012 R2 DPM 将 Exchange Server 备份到 Azure 备份
+services: backup
+documentationCenter: 
+authors: MaanasSaran
+manager: NKolli1
+editor: 
 
-
-<tags
-	ms.service="backup"
-	ms.workload="storage-backup-recovery"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/15/2016"
-	ms.author="anuragm;jimpark;delhan;trinadhk;markgal"
-   	wacn.date="01/19/2017"/>  
-
-
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/15/2016
+ms.author: anuragm;jimpark;delhan;trinadhk;markgal
+wacn.date: 01/19/2017
+---
 
 # 使用 System Center 2012 R2 DPM 将 Exchange Server 备份到 Azure 备份
 本文说明如何配置 System Center 2012 R2 Data Protection Manager (DPM) 服务器，以将 Microsoft Exchange Server 备份到 Azure 备份。
@@ -26,7 +23,7 @@
 ## 更新
 若要在 Azure 备份中成功注册 DPM 服务器，必须安装 System Center 2012 R2 DPM 的最新更新汇总和 Azure 备份代理的最新版本。从 [Microsoft 目录](http://catalog.update.microsoft.com/v7/site/Search.aspx?q=System%20Center%202012%20R2%20Data%20protection%20manager)获取最新的更新汇总。
 
->[AZURE.NOTE] 对于本文中的示例，将会安装 Azure 备份代理 2.0.8719.0 版，并在 System Center 2012 R2 DPM 上安装更新汇总 6。
+>[!NOTE] 对于本文中的示例，将会安装 Azure 备份代理 2.0.8719.0 版，并在 System Center 2012 R2 DPM 上安装更新汇总 6。
 
 ## 先决条件
 在继续下一步之前，请确保符合使用 Azure 备份保护工作负荷的所有先决条件。这些先决条件包括：
@@ -54,7 +51,7 @@
 
 4. 选择想要保护的 Exchange Server 数据库，然后单击“下一步”。
 
-    >[AZURE.NOTE] 如果要保护 Exchange 2013，请检查 [Exchange 2013 先决条件](https://technet.microsoft.com/zh-cn/library/dn751029.aspx)。
+    >[!NOTE] 如果要保护 Exchange 2013，请检查 [Exchange 2013 先决条件](https://technet.microsoft.com/zh-cn/library/dn751029.aspx)。
 
     下例中选择了Exchange 2010 数据库。
 
@@ -73,14 +70,14 @@
 
     选择此选项后，将在 DPM 服务器上运行备份一致性检查，以免由于在 Exchange Server 上运行 **eseutil** 命令而产生的 I/O 流量。
 
-    >[AZURE.NOTE] 若要使用此选项，必须将 Ese.dll 和 Eseutil.exe 文件复制到 DPM 服务器上的 C:\Program Files\Microsoft System Center 2012 R2\DPM\DPM\bin 目录。否则会触发以下错误：  
+    >[!NOTE] 若要使用此选项，必须将 Ese.dll 和 Eseutil.exe 文件复制到 DPM 服务器上的 C:\Program Files\Microsoft System Center 2012 R2\DPM\DPM\bin 目录。否则会触发以下错误：  
     ![eseutil 错误](./media/backup-azure-backup-exchange-server/eseutil-error.png)
 
 8. 单击“下一步”。
 
 9. 选择“复制备份”的数据库，然后单击“下一步”。
 
-    >[AZURE.NOTE] 如果未针对数据库的至少一个 DAG 副本选择“完全备份”，则不会截断日志。
+    >[!NOTE] 如果未针对数据库的至少一个 DAG 副本选择“完全备份”，则不会截断日志。
 
 10. 配置“短期备份”的目标，然后单击“下一步”。
 
@@ -98,7 +95,7 @@
 
     ![指定联机备份计划](./media/backup-azure-backup-exchange-server/specify-online-backup-schedule.png)
 
-    >[AZURE.NOTE] 请注意，在线恢复点基于快速完全恢复点。因此，必须将在线恢复点安排在针对快速完全恢复点指定的时间之后。
+    >[!NOTE] 请注意，在线恢复点基于快速完全恢复点。因此，必须将在线恢复点安排在针对快速完全恢复点指定的时间之后。
 
 16. 配置“Azure 备份”的保留策略，然后单击“下一步”。
 
@@ -134,6 +131,6 @@
 
 ## 后续步骤
 
-- [Azure 备份常见问题](/documentation/articles/backup-azure-backup-faq/)
+- [Azure 备份常见问题](./backup-azure-backup-faq.md)
 
 <!---HONumber=Mooncake_1017_2016-->

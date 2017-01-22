@@ -1,22 +1,23 @@
-<properties
-    pageTitle="多租户 SaaS 应用程序与 Azure SQL 数据库的设计模式 | Azure"
-    description="本文讨论云环境中运行的多租户数据库应用程序需要考虑的要求和常见数据体系结构模式，以及与这些模式相关的各种权衡取舍。此外，还说明了 Azure SQL 数据库及其弹性池与弹性工具如何在不造成损害的情况下满足这些要求。"
-    keywords=""
-    services="sql-database"
-    documentationcenter=""
-    author="CarlRabeler"
-    manager="jhubbard"
-    editor="" />
-<tags
-    ms.assetid="1dd20c6b-ddbb-40ef-ad34-609d398d008a"
-    ms.service="sql-database"
-    ms.devlang="NA"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="sqldb-design"
-    ms.date="11/08/2016"
-    wacn.date="12/26/2016"
-ms.author="carlrab" />
+---
+title: 多租户 SaaS 应用程序与 Azure SQL 数据库的设计模式 | Azure
+description: 本文讨论云环境中运行的多租户数据库应用程序需要考虑的要求和常见数据体系结构模式，以及与这些模式相关的各种权衡取舍。此外，还说明了 Azure SQL 数据库及其弹性池与弹性工具如何在不造成损害的情况下满足这些要求。
+keywords: 
+services: sql-database
+documentationcenter: 
+author: CarlRabeler
+manager: jhubbard
+editor: 
+
+ms.assetid: 1dd20c6b-ddbb-40ef-ad34-609d398d008a
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: sqldb-design
+ms.date: 11/08/2016
+wacn.date: 12/26/2016
+ms.author: carlrab
+---
 
 # 多租户 SaaS 应用程序与 Azure SQL 数据库的设计模式
 可以在本文中了解云环境中运行的多租户软件即服务 (SaaS) 数据库应用程序的要求和通用数据体系结构模式。其中还说明了需要考虑的因素，以及不同设计模式的权衡取舍。借助 Azure SQL 数据库中的弹性池和弹性工具，可以在不影响其他目标的情况下达到特定的要求。
@@ -60,15 +61,14 @@ ms.author="carlrab" />
 ## 多租户数据模型
 放置租户数据的常见设计实践都遵循图 1 中所示的三种不同模型。
 
-
   ![多租户应用程序数据模型](./media/sql-database-design-patterns-multi-tenancy-saas-applications/sql-database-multi-tenant-data-models.png)
     图 1：多租户数据模型的常见设计实践
 
--	**租户各有数据库**。每个租户都有自己的数据库。租户特定的所有数据局限在该租户的数据库内，与其他租户及其数据隔离。
--	**共享分片数据库**。多个租户共享多个数据库中的一个。使用分区策略（例如哈希、范围或列表分区），可将一组不同的租户分配到每个数据库。这种数据分布策略通常称为分片。
--	**共享单一数据库**。单一数据库有时很大，包含按租户 ID 列区分的所有租户的数据。
+- **租户各有数据库**。每个租户都有自己的数据库。租户特定的所有数据局限在该租户的数据库内，与其他租户及其数据隔离。
+- **共享分片数据库**。多个租户共享多个数据库中的一个。使用分区策略（例如哈希、范围或列表分区），可将一组不同的租户分配到每个数据库。这种数据分布策略通常称为分片。
+- **共享单一数据库**。单一数据库有时很大，包含按租户 ID 列区分的所有租户的数据。
 
-> [AZURE.NOTE] 应用程序开发人员可以选择将不同的租户放在不同的数据库架构中，然后使用架构名称来区分不同的租户。此方法通常需要使用动态 SQL，并且无法有效使用计划缓存，因此不建议采用。本文的余下部分侧重于此多租户应用程序类别的共享表方法。
+> [!NOTE] 应用程序开发人员可以选择将不同的租户放在不同的数据库架构中，然后使用架构名称来区分不同的租户。此方法通常需要使用动态 SQL，并且无法有效使用计划缓存，因此不建议采用。本文的余下部分侧重于此多租户应用程序类别的共享表方法。
 
 ## 流行的多租户数据模型
 请务必根据前面列出的应用程序设计利弊，评估不同类型的多租户数据模型。这些因素有助于描绘上述三种最常见多租户数据模型及其数据库用法的特征（如图 2 所示）。
@@ -108,11 +108,11 @@ SQL 数据库中的弹性池结合租户隔离与租户数据库之间的资源�
 
 | 应用程序要求 | SQL 数据库功能 |
 | --- | --- |
-| 租户隔离与资源共享 | [弹性池](/documentation/articles/sql-database-elastic-pool/)：分配 SQL 数据库资源池，使多个数据库可共享这些资源。此外，单个数据库可以按需要从池提取资源，以应对租户工作负荷变化而造成的容量需求剧增。弹性池本身可根据需要扩展或收缩。弹性池还支持在池级别轻松管理、监视和故障排除。 |
-| 跨数据库简化 DevOps | [弹性池](/documentation/articles/sql-database-elastic-pool/)：如前所述。|
-| [弹性查询](/documentation/articles/sql-database-elastic-query-horizontal-partitioning/)：跨数据库查询，进行报告或跨租户分析。| |
-| [弹性事务](/documentation/articles/sql-database-elastic-transactions-overview/)：以原子隔离的方式处理多个数据库的更改。当应用程序在多个数据库操作之间需要保证“全有或全无”时，就需要弹性事务功能。 | |
-| [弹性数据库客户端库](/documentation/articles/sql-database-elastic-database-client-library/)：管理数据分布，将租户映射到数据库。 | |
+| 租户隔离与资源共享 | [弹性池](./sql-database-elastic-pool.md)：分配 SQL 数据库资源池，使多个数据库可共享这些资源。此外，单个数据库可以按需要从池提取资源，以应对租户工作负荷变化而造成的容量需求剧增。弹性池本身可根据需要扩展或收缩。弹性池还支持在池级别轻松管理、监视和故障排除。 |
+| 跨数据库简化 DevOps | [弹性池](./sql-database-elastic-pool.md)：如前所述。|
+| [弹性查询](./sql-database-elastic-query-horizontal-partitioning.md)：跨数据库查询，进行报告或跨租户分析。| |
+| [弹性事务](./sql-database-elastic-transactions-overview.md)：以原子隔离的方式处理多个数据库的更改。当应用程序在多个数据库操作之间需要保证“全有或全无”时，就需要弹性事务功能。 | |
+| [弹性数据库客户端库](./sql-database-elastic-database-client-library.md)：管理数据分布，将租户映射到数据库。 | |
 
 ## 共享模型
 如前所述，对于大多数 SaaS 提供程序，“共享模型”方法可能造成租户隔离问题，以及应用程序开发和维护的复杂性。然而，对于直接向消费者提供服务的多租户应用程序，租户隔离要求的优先性可能低于降低成本。它们也许能够以高密度将租户打包在一个或多个数据库中来降低成本。使用单一数据库或多个分片数据库的共享数据库模型可以提高资源共享的效率，降低总体成本。Azure SQL 数据库提供的一些功能可帮助客户在数据层中大规模构建隔离，改善安全和管理。
@@ -121,10 +121,10 @@ SQL 数据库中的弹性池结合租户隔离与租户数据库之间的资源�
 | --- | --- |
 | 安全隔离功能 | [行级别安全性](https://msdn.microsoft.com/zh-cn/library/dn765131.aspx) |
 | [数据库架构](https://msdn.microsoft.com/zh-cn/library/dd207005.aspx) | |
-| 跨数据库简化 DevOps | [弹性查询](/documentation/articles/sql-database-elastic-query-horizontal-partitioning/) |
-| [弹性事务](/documentation/articles/sql-database-elastic-transactions-overview/) | |
-| [弹性数据库客户端库](/documentation/articles/sql-database-elastic-database-client-library/) | |
-| [弹性数据库拆分/合并](/documentation/articles/sql-database-elastic-scale-overview-split-and-merge/) | |
+| 跨数据库简化 DevOps | [弹性查询](./sql-database-elastic-query-horizontal-partitioning.md) |
+| [弹性事务](./sql-database-elastic-transactions-overview.md) | |
+| [弹性数据库客户端库](./sql-database-elastic-database-client-library.md) | |
+| [弹性数据库拆分/合并](./sql-database-elastic-scale-overview-split-and-merge.md) | |
 
 ## 摘要
 对于大多数 SaaS 多租户应用程序，租户隔离要求非常重要。提供隔离的最佳选项严重依赖于“租户各有数据库”方法。其他两种方法需要在复杂的应用程序层投入心力，并需要有熟练的开发人员来提供隔离，因而大幅增加成本与风险。如果在服务开发初期不重视隔离要求，在前两个模型中进行改造会付出更大的代价。“租户各有数据库”模型的缺点在于，因为共享和维护不足以及管理大量数据库，导致云资源成本增加。SaaS 应用程序开发人员经常挣扎于这些取舍之中。
@@ -134,30 +134,22 @@ SQL 数据库中的弹性池结合租户隔离与租户数据库之间的资源�
 如果多租户应用程序提供程序没有租户隔离要求，还能够以高密度将租户打包在数据库中，则共享数据模型可能会提高资源共享的效率，降低总体成本。Azure SQL 数据库弹性数据库工具、分片库和安全功能可帮助 SaaS 提供商构建和管理多租户应用程序。
 
 ## 后续步骤
-有关演示客户端库的示例应用，请参阅 [弹性数据库工具入门](/documentation/articles/sql-database-elastic-scale-get-started/)。
+有关演示客户端库的示例应用，请参阅 [弹性数据库工具入门](./sql-database-elastic-scale-get-started.md)。
 
 使用一个示例应用创建 [SaaS 的弹性池自定义仪表板](https://github.com/Microsoft/sql-server-samples/tree/master/samples/manage/azure-sql-db-elastic-pools-custom-dashboard)。该示例使用弹性池构建符合成本效益、可缩放的数据库解决方案。
 
-使用 Azure SQL 数据库工具来[迁移要扩展的现有数据库](/documentation/articles/sql-database-elastic-convert-to-use-elastic-tools/)。
+使用 Azure SQL 数据库工具来[迁移要扩展的现有数据库](./sql-database-elastic-convert-to-use-elastic-tools.md)。
 
-查看教程，了解如何[创建弹性池](/documentation/articles/sql-database-elastic-pool-create-portal/)。
+查看教程，了解如何[创建弹性池](./sql-database-elastic-pool-create-portal.md)。
 
-了解如何[监视和管理弹性池](/documentation/articles/sql-database-elastic-pool-manage-portal/)。
+了解如何[监视和管理弹性池](./sql-database-elastic-pool-manage-portal.md)。
 
 ## 其他资源
 
-- [什么是 Azure 弹性池？](/documentation/articles/sql-database-elastic-pool/)
-- [Scaling out with Azure SQL Database（使用 Azure SQL 数据库进行扩展）](/documentation/articles/sql-database-elastic-scale-introduction/)
-- [具有弹性数据库工具和行级安全性的多租户应用程序](/documentation/articles/sql-database-elastic-tools-multi-tenant-row-level-security/)
+- [什么是 Azure 弹性池？](./sql-database-elastic-pool.md)
+- [Scaling out with Azure SQL Database（使用 Azure SQL 数据库进行扩展）](./sql-database-elastic-scale-introduction.md)
+- [具有弹性数据库工具和行级安全性的多租户应用程序](./sql-database-elastic-tools-multi-tenant-row-level-security.md)
 
-- [解决方案快速入门](/documentation/articles/sql-database-solution-quick-starts/)
-
-
-
-
-
-
-
-	
+- [解决方案快速入门](./sql-database-solution-quick-starts.md)
 
 <!---HONumber=Mooncake_1212_2016-->

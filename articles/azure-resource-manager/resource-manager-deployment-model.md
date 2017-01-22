@@ -1,29 +1,29 @@
-<properties
-    pageTitle="Resource Manager 和经典部署 | Azure"
-    description="介绍资源管理器部署模型与经典（或服务管理）部署模型之间的差异。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: Resource Manager 和经典部署 | Azure
+description: 介绍资源管理器部署模型与经典（或服务管理）部署模型之间的差异。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="7ae0ffa3-c8da-4151-bdcc-8f4f69290fb4"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/01/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />
+ms.assetid: 7ae0ffa3-c8da-4151-bdcc-8f4f69290fb4
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/01/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # Azure Resource Manager 与经典部署：了解部署模型和资源状态
 本主题介绍 Azure Resource Manager 部署模型和经典部署模型、资源的状态，以及使用不同模型来部署资源的原因。Resource Manager 部署模型和经典部署模型代表两种不同的 Azure 解决方案部署和管理方式。可以通过两种不同的 API 集使用这两种模型，已部署的资源可能包含重大差异。这两个模型不是完全兼容的。本主题介绍这些差异。
 
 为了简化资源部署和管理，Microsoft 建议对所有新资源使用 Resource Manager。Microsoft 建议在可能情况下，通过 Resource Manager 重新部署现有资源。
 
-如果不熟悉 Resource Manager，可能需要先查看 [Azure Resource Manager 概述](/documentation/articles/resource-group-overview/)中定义的术语。
+如果不熟悉 Resource Manager，可能需要先查看 [Azure Resource Manager 概述](./resource-group-overview.md)中定义的术语。
 
 ## 部署模型的历史
 Azure 最初只提供经典部署模型。在此模型中，每个资源彼此独立；无法将相关的资源组合在一起。因此，必须手动跟踪构成解决方案或应用程序的资源 ，并记得以协调的方式管理。部署解决方案有两种方式：通过经典管理门户单独创建每个资源；或创建一个脚本，以正确的顺序部署所有资源。若要删除解决方案，必须逐个删除每个资源。无法轻松应用和更新相关资源的访问控制策略。最后，无法将标记应用到资源，因此无法使用有助于监视资源和管理计费的术语来标记资源。
@@ -46,7 +46,7 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 2. 服务支持 Resource Manager，但提供两个类型 - 一个用于 Resource Manager 部署，一个用于经典部署。此方案只适用于虚拟机、存储帐户和虚拟网络。
 3. 服务不支持 Resource Manager。
 
-若要查明服务是否支持 Resource Manager，请参阅[支持 Resource Manager 的提供程序](/documentation/articles/resource-manager-supported-services/)。
+若要查明服务是否支持 Resource Manager，请参阅[支持 Resource Manager 的提供程序](./resource-manager-supported-services.md)。
 
 如果要使用的服务不支持 Resource Manager，则必须继续使用经典部署。
 
@@ -78,24 +78,23 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 为了更好地理解这两个模型，请看看 Resource Manager 类型的特征：
 
 * 通过 [Azure 门户预览](https://portal.azure.cn/)创建。
-  
+
      ![Azure 门户预览](./media/resource-manager-deployment-model/portal.png)
-  
+
      对于计算、存储和网络资源，你可以选择使用资源管理器或经典部署。选择“Resource Manager”。
-  
+
      ![Resource Manager 部署](./media/resource-manager-deployment-model/select-resource-manager.png)
 * 使用 Azure PowerShell cmdlet 的 Resource Manager 版本创建。这些命令采用 *Verb-AzureRmNoun* 格式。
-  
+
         New-AzureRmResourceGroupDeployment
 * 通过用于 REST 操作的 [Azure Resource Manager REST API](https://docs.microsoft.com/rest/api/resources/) 创建。
 * 通过在 **arm** 模式下运行的 Azure CLI 命令创建。
-  
+
         azure config mode arm
         azure group deployment create 
 * 资源类型的名称中不包括 **(经典)**。下图显示类型为“存储帐户”。
-  
-    ![Web 应用](./media/resource-manager-deployment-model/resource-manager-type.png)  
 
+    ![Web 应用](./media/resource-manager-deployment-model/resource-manager-type.png)  
 
 ## <a name="classic-deployment-characteristics"></a> 经典部署的特性
 您也可能知道经典部署模型就是服务管理模型。
@@ -103,24 +102,23 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 在经典部署模型中创建的资源具有以下共同特性：
 
 * 通过[经典管理门户](https://manage.windowsazure.cn)创建。
-  
+
      ![经典管理门户](./media/resource-manager-deployment-model/classic-portal.png)
-  
+
      或者，通过 Azure 门户预览创建，然后指定“经典”部署（适用于“计算”、“存储”和“网络”资源）。
-  
+
      ![经典部署](./media/resource-manager-deployment-model/select-classic.png)
 * 通过 Azure PowerShell cmdlet 的服务管理版本创建。这些命令名称采用 *Verb-AzureNoun* 格式。
-  
+
         New-AzureVM 
 * 通过用于 REST 操作的[服务管理 REST API](https://msdn.microsoft.com/zh-cn/library/azure/ee460799.aspx) 创建。
 * 通过在 **asm** 模式下运行的 Azure CLI 命令创建。
-  
+
         azure config mode asm
         azure vm create 
 * 资源类型的名称中包括 **(经典)**。下图显示类型为“存储帐户(经典)”。
-  
-    ![经典类型](./media/resource-manager-deployment-model/classic-type.png)  
 
+    ![经典类型](./media/resource-manager-deployment-model/classic-type.png)  
 
 用户可以使用 Azure 门户预览来管理通过经典部署创建的资源。
 
@@ -128,7 +126,6 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 下图显示通过 Resource Manager 部署的计算、网络和存储资源。
 
 ![Resource Manager 体系结构](./media/resource-manager-deployment-model/arm_arch3.png)  
-
 
 请注意资源之间的以下关系：
 
@@ -142,7 +139,6 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 以下是经典部署的组件及其关系：
 
 ![经典体系结构](./media/resource-manager-deployment-model/arm_arch1.png)  
-
 
 托管虚拟机的经典解决方案包括：
 
@@ -159,7 +155,7 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 | 存储帐户 |虚拟机需要一个存储帐户，存储操作系统、临时文件和附加数据磁盘的 VHD。 |虚拟机需要一个存储帐户，在 Blob 存储中存储其磁盘。 |
 | 可用性集 |通过在虚拟机上配置相同的“AvailabilitySetName”来指出平台的可用性。容错域的最大数量为 2。 |可用性集是 Microsoft.Compute 提供程序提供的一个资源。要求高可用性的虚拟机必须包含在可用性集中。现在，容错域的最大数量为 3。 |
 | 地缘组 |创建虚拟网络需要地缘组。但是，随着区域虚拟网络的引入，便不再需要地缘组了。 |为了简单起见，地缘组概念不再存在于通过 Azure 资源管理器提供的 API 中。 |
-| 负载均衡 |云服务的创建为部署的虚拟机提供了一个隐式负载均衡器。 |负载均衡器是 Microsoft.Network 提供程序提供的一个资源。需要负载均衡的虚拟机的主网络接口应该引用负载均衡器。负载均衡器既可以是内部的，也可以是外部的。负载均衡器实例引用后端 IP 地址池，包括虚拟机的 NIC（可选），并引用负载均衡器的公共或专用 IP 地址（可选）。[了解详细信息。](/documentation/articles/resource-groups-networking/) |
+| 负载均衡 |云服务的创建为部署的虚拟机提供了一个隐式负载均衡器。 |负载均衡器是 Microsoft.Network 提供程序提供的一个资源。需要负载均衡的虚拟机的主网络接口应该引用负载均衡器。负载均衡器既可以是内部的，也可以是外部的。负载均衡器实例引用后端 IP 地址池，包括虚拟机的 NIC（可选），并引用负载均衡器的公共或专用 IP 地址（可选）。[了解详细信息。](../virtual-network/resource-groups-networking.md) |
 | 虚拟 IP 地址 |虚拟机添加到云服务后，云服务获得默认 VIP（虚拟 IP 地址）。虚拟 IP 地址是与隐式负载均衡器相关联的地址。 |公共 IP 地址是 Microsoft.Network 提供程序提供的一个资源。公共 IP 地址既可以是静态（保留）的，也可以是动态的。可以将动态公共 IP 分配到一个负载均衡器。可以使用安全组保护公共 IP。 |
 | 保留 IP 地址 |可以在 Azure 中保留一个 IP 地址并将其与一个云服务关联在一起，以确保该 IP 地址具有粘性。 |可以在“静态”模式下创建公共 IP 地址，并且该地址提供与“保留 IP 地址”相同的功能。目前，静态公共 IP 只能分配到一个负载均衡器。 |
 | 每个 VM 一个公共 IP 地址 (PIP) |公共 IP 地址也可以直接关联到 VM。 |公共 IP 地址是 Microsoft.Network 提供程序提供的一个资源。公共 IP 地址既可以是静态（保留）的，也可以是动态的。但是，目前只有动态公共 IP 可分配到网络接口，使每个 VM 获得一个公共 IP。 |
@@ -167,15 +163,15 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 | DNS 名称 |云服务会获取一个隐式的全局唯一 DNS 名称。例如：`mycoffeeshop.chinacloudapp.cn`。 |DNS 名称是可在一个公共 IP 地址资源上指定的可选参数。FQDN 采用的格式为 `<domainlabel>.<region>.chinacloudapp.cn`。 |
 | 网络接口 |作为虚拟机的网络配置定义的主网络接口和辅助网络接口及其属性。 |网络接口是 Microsoft.Network 提供程序提供的一个资源。网络接口的生命周期与虚拟机无关。它引用虚拟机的指定 IP 地址（必需）、虚拟机的虚拟网络的子网（必需）和网络安全组（可选）。 |
 
-若要了解如何从不同部署模型连接虚拟网络，请参阅[在门户中从不同部署模型连接虚拟网络](/documentation/articles/vpn-gateway-connect-different-deployment-models-portal/)。
+若要了解如何从不同部署模型连接虚拟网络，请参阅[在门户中从不同部署模型连接虚拟网络](../vpn-gateway/vpn-gateway-connect-different-deployment-models-portal.md)。
 
 ## 从经典部署迁移到 Resource Manager 部署
 如果已准备好将资源从经典部署迁移到 Resource Manager 部署，请参阅：
 
-1. [平台支持的从经典部署模型迁移到 Azure Resource Manager 的技术深入探讨](/documentation/articles/virtual-machines-windows-migration-classic-resource-manager-deep-dive/)
-2. [平台支持从经典部署模型迁移到 Azure Resource Manager 的 IaaS 资源](/documentation/articles/virtual-machines-windows-migration-classic-resource-manager/)
-3. [使用 Azure PowerShell 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager](/documentation/articles/virtual-machines-windows-ps-migration-classic-resource-manager/)
-4. [使用 Azure CLI 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager 部署模型](/documentation/articles/virtual-machines-linux-cli-migration-classic-resource-manager/)
+1. [平台支持的从经典部署模型迁移到 Azure Resource Manager 的技术深入探讨](../virtual-machines/virtual-machines-windows-migration-classic-resource-manager-deep-dive.md)
+2. [平台支持从经典部署模型迁移到 Azure Resource Manager 的 IaaS 资源](../virtual-machines/virtual-machines-windows-migration-classic-resource-manager.md)
+3. [使用 Azure PowerShell 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager](../virtual-machines/virtual-machines-windows-ps-migration-classic-resource-manager.md)
+4. [使用 Azure CLI 将 IaaS 资源从经典部署模型迁移到 Azure Resource Manager 部署模型](../virtual-machines/virtual-machines-linux-cli-migration-classic-resource-manager.md)
 
 ## 常见问题
 **能否使用 Azure Resource Manager 创建一个虚拟机，将其部署在使用经典部署创建的虚拟网络中？**
@@ -188,7 +184,7 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 
 **对订阅的配额有何影响？**
 
-通过 Azure Resource Manager 创建的虚拟机、虚拟网络和存储帐户的配额与其他配额是分开的。每个订阅将获取配额以使用新的 API 创建资源。你可以在[此处](/documentation/articles/azure-subscription-service-limits/)了解有关额外配额的详细信息。
+通过 Azure Resource Manager 创建的虚拟机、虚拟网络和存储帐户的配额与其他配额是分开的。每个订阅将获取配额以使用新的 API 创建资源。你可以在[此处](../azure-subscription-service-limits.md)了解有关额外配额的详细信息。
 
 **可以通过 Resource Manager API 继续使用自动化脚本来预配虚拟机、虚拟网络、存储帐户吗？**
 
@@ -199,7 +195,7 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 可以在 [Azure Resource Manager QuickStart Templates](https://github.com/Azure/azure-quickstart-templates/)（Azure Resource Manager 快速启动模板）中找到一系列广泛的初学者模板。
 
 ## 后续步骤
-* 若要演练如何创建用于定义虚拟机、存储帐户和虚拟网络的模板，请参阅 [Resource Manager 模板演练](/documentation/articles/resource-manager-template-walkthrough/)。
-* 若要查看用于部署模板的命令，请参阅[使用 Azure 资源管理器模板部署应用程序](/documentation/articles/resource-group-template-deploy/)。
+* 若要演练如何创建用于定义虚拟机、存储帐户和虚拟网络的模板，请参阅 [Resource Manager 模板演练](./resource-manager-template-walkthrough.md)。
+* 若要查看用于部署模板的命令，请参阅[使用 Azure 资源管理器模板部署应用程序](./resource-group-template-deploy.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

@@ -1,29 +1,26 @@
-<properties 
-	pageTitle="使用 Azure 应用服务 Web 应用配置 Python" 
-	description="本教程介绍在 Azure 应用服务 Web 应用中创作和配置符合基本 Web 服务器网关接口 (WSGI) 的 Python 应用程序的选项。" 
-	services="app-service" 
-	documentationCenter="python" 
-	tags="python"
-	authors="huguesv" 
-	manager="wpickett" 
-	editor=""/>
+---
+title: 使用 Azure 应用服务 Web 应用配置 Python
+description: 本教程介绍在 Azure 应用服务 Web 应用中创作和配置符合基本 Web 服务器网关接口 (WSGI) 的 Python 应用程序的选项。
+services: app-service
+documentationCenter: python
+tags: python
+authors: huguesv
+manager: wpickett
+editor: 
 
-<tags 
-	ms.service="app-service" 
-	ms.workload="na" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="python" 
-	ms.topic="article" 
-	ms.date="02/26/2016" 
-	wacn.date="01/05/2017" 
-	ms.author="huvalo"/>
-
-
-
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: python
+ms.topic: article
+ms.date: 02/26/2016
+wacn.date: 01/05/2017
+ms.author: huvalo
+---
 
 # 使用 Azure 应用服务 Web 应用配置 Python
 
-本教程介绍在 [Azure 应用服务 Web 应用](/documentation/services/web-sites/)中创作和配置符合基本 Web 服务器网关接口 (WSGI) 的 Python 应用程序的选项。
+本教程介绍在 [Azure 应用服务 Web 应用](./index.md)中创作和配置符合基本 Web 服务器网关接口 (WSGI) 的 Python 应用程序的选项。
 
 其中讲解了 Git 部署的一些功能，如使用 requirements.txt 安装虚拟环境和包。
 
@@ -31,10 +28,9 @@
 
 如果你正在 Azure 应用服务中开发第一个 Web 应用，或者不熟悉 Git，我们建议你参考以下教程之一，其中包括用于从 Windows 或 Mac 使用 Git 部署从库构建工作应用程序的分步说明：
 
-- [使用 Bottle 创建 Web 应用](/documentation/articles/web-sites-python-create-deploy-bottle-app/)
-- [使用 Django 创建 Web 应用](/documentation/articles/web-sites-python-create-deploy-django-app/)
-- [使用 Flask 创建 Web 应用](/documentation/articles/web-sites-python-create-deploy-flask-app/)
-
+- [使用 Bottle 创建 Web 应用](./web-sites-python-create-deploy-bottle-app.md)
+- [使用 Django 创建 Web 应用](./web-sites-python-create-deploy-django-app.md)
+- [使用 Flask 创建 Web 应用](./web-sites-python-create-deploy-flask-app.md)
 
 ##<a name="website-creation-on-portal"></a>在 Azure 门户预览中创建 Web 应用
 
@@ -44,10 +40,9 @@
 
 ##<a name="git-publishing"></a>Git 发布
 
-按照[从本地 Git 部署到 Azure 应用服务](/documentation/articles/app-service-deploy-local-git/)的说明为新创建的 Web 应用配置 Git 发布。本教程使用 Git 来创建、管理 Python Web 应用以及将其发布到 Azure 应用服务。
+按照[从本地 Git 部署到 Azure 应用服务](./app-service-deploy-local-git.md)的说明为新创建的 Web 应用配置 Git 发布。本教程使用 Git 来创建、管理 Python Web 应用以及将其发布到 Azure 应用服务。
 
 在设置 Git 发布之后，将创建 Git 存储库并使其与你的 Web 应用相关联。随即会显示该存储库的 URL，之后其可用于将数据从本地开发环境推送到云。若要通过 Git 发布应用程序，请确保还安装了 Git 客户端，并按照提供的说明将 Web 应用内容推送到 Azure 应用服务。
-
 
 ##<a name="application-overview"></a>应用程序概述
 
@@ -58,7 +53,6 @@
     runtime.txt
     web.config
     ptvs_virtualenv_proxy.py
-
 
 ##<a name="wsgi-handler"></a>WSGI 处理程序
 
@@ -81,7 +75,6 @@ WSGI 是 [PEP 3333](http://www.python.org/dev/peps/pep-3333/) 所述的 Python �
 
 可以使用 `python app.py` 在本地运行此应用程序，然后在 Web 浏览器中浏览到 `http://localhost:5555`。
 
-
 ## 虚拟环境
 
 尽管上述示例应用程序不需要任何外部包，但你的应用程序很可能需要一些外部包。
@@ -92,7 +85,6 @@ WSGI 是 [PEP 3333](http://www.python.org/dev/peps/pep-3333/) 所述的 Python �
 
 你可能需要创建虚拟环境用于开发，但不将其包括在 Git 存储库中。
 
-
 ## 包管理
 
 Requirements.txt 中列出的包将使用 pip 自动安装到虚拟环境中。每次部署时都会发生这种情况，但如果已安装包，则 pip 将跳过安装。
@@ -101,15 +93,13 @@ Requirements.txt 中列出的包将使用 pip 自动安装到虚拟环境中。�
 
     azure==0.8.4
 
-
 ## Python 版本
 
-[AZURE.INCLUDE [web-sites-python-customizing-runtime](../../includes/web-sites-python-customizing-runtime.md)]
+[!INCLUDE [web-sites-python-customizing-runtime](../../includes/web-sites-python-customizing-runtime.md)]
 
 示例 `runtime.txt`：
 
     python-2.7
-
 
 ## Web.config
 
@@ -168,7 +158,6 @@ Python 2.7 的示例 `web.config`：
       </system.webServer>
     </configuration>
 
-
 Python 3.4 的示例 `web.config`：
 
     <?xml version="1.0"?>
@@ -216,7 +205,6 @@ Python 3.4 的示例 `web.config`：
       </system.webServer>
     </configuration>
 
-
 静态文件将由 Web 服务器直接处理，无需通过 Python 代码，从而提高性能。
 
 在上述示例中，磁盘上静态文件的位置应与 URL 中的位置匹配。也就是说，`http://pythonapp.chinacloudsites.cn/static/site.css` 的请求将为磁盘上 `\static\site.css` 处的文件服务。
@@ -224,7 +212,6 @@ Python 3.4 的示例 `web.config`：
 `WSGI_ALT_VIRTUALENV_HANDLER` 是指定 WSGI 处理程序的位置。在上述示例中，该位置为 `app.wsgi_app`，因为处理程序是根文件夹中 `app.py` 中的一个名为 `wsgi_app` 的函数。
 
 可以自定义 `PYTHONPATH`，但是，如果通过在 requirements.txt 中指定将所有依赖项全部安装到虚拟环境中，则不需要更改。
-
 
 ## 虚拟环境代理
 
@@ -291,10 +278,10 @@ Python 3.4 的示例 `web.config`：
     def get_wsgi_handler(handler_name):
         if not handler_name:
             raise Exception('WSGI_ALT_VIRTUALENV_HANDLER env var must be set')
-    
+
         if not isinstance(handler_name, str):
             handler_name = to_str(handler_name)
-    
+
         module_name, _, callable_name = handler_name.rpartition('.')
         should_call = callable_name.endswith('()')
         callable_name = callable_name[:-2] if should_call else callable_name
@@ -318,10 +305,10 @@ Python 3.4 的示例 `web.config`：
                 name_list.insert(0, (callable_name, should_call))
                 handler = None
                 last_tb = ': ' + traceback.format_exc()
-    
+
         if handler is None:
             raise ValueError('"%s" could not be imported%s' % (handler_name, last_tb))
-    
+
         return handler
 
     activate_this = os.getenv('WSGI_ALT_VIRTUALENV_ACTIVATE_THIS')
@@ -342,9 +329,9 @@ Python 3.4 的示例 `web.config`：
         import site
         sys.executable = activate_this
         old_sys_path, sys.path = sys.path, []
-    
+
         site.main()
-    
+
         sys.path.insert(0, '')
         for item in old_sys_path:
             if item not in sys.path:
@@ -355,26 +342,23 @@ Python 3.4 的示例 `web.config`：
         log('Got handler: %r\n' % handler)
         return handler
 
-
 ## 自定义 Git 部署
 
-[AZURE.INCLUDE [web-sites-python-customizing-runtime](../../includes/web-sites-python-customizing-deployment.md)]
-
+[!INCLUDE [web-sites-python-customizing-runtime](../../includes/web-sites-python-customizing-deployment.md)]
 
 ## 故障排除 - 软件包安装
 
-[AZURE.INCLUDE [web-sites-python-troubleshooting-package-installation](../../includes/web-sites-python-troubleshooting-package-installation.md)]
-
+[!INCLUDE [web-sites-python-troubleshooting-package-installation](../../includes/web-sites-python-troubleshooting-package-installation.md)]
 
 ## 故障排除 - 虚拟环境
 
-[AZURE.INCLUDE [web-sites-python-troubleshooting-virtual-environment](../../includes/web-sites-python-troubleshooting-virtual-environment.md)]
+[!INCLUDE [web-sites-python-troubleshooting-virtual-environment](../../includes/web-sites-python-troubleshooting-virtual-environment.md)]
 
 ## 后续步骤
 
 有关详细信息，请参阅 [Python 开发人员中心](/develop/python/)。
 
 ## 更改内容
-* 有关从网站更改为应用服务的指南，请参阅 [Azure 应用服务及其对现有 Azure 服务的影响](/documentation/articles/app-service-changes-existing-services/)
+* 有关从网站更改为应用服务的指南，请参阅 [Azure 应用服务及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->
