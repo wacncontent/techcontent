@@ -208,7 +208,7 @@ autoscaleSettings 资源使用诊断扩展中的信息，以决定是增加规�
 
         Get-AzureRmResource -name vmsstest1 -ResourceGroupName vmsstestrg1 -ResourceType Microsoft.Compute/virtualMachineScaleSets -ApiVersion 2015-06-15
         Get-Autoscalesetting -ResourceGroup rainvmss -DetailedOutput
-        
+
 - 就像连接任何其他虚拟机一样连接到 jumpbox 虚拟机，然后可以远程访问规模集中的虚拟机，以监视单个进程。
 
 ## 后续步骤

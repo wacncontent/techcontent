@@ -14,7 +14,7 @@ wacn.date: 10/28/2016
 
 # 使用 docker-machine 管理 Azure 容器虚拟机 #
 
-安装 docker-machine 请参见该链接（[https://docs.docker.com/machine/install-machine](https://docs.docker.com/machine/install-machine "https://docs.docker.com/machine/install-machine")）本例中，先安装了 git bash 工具，再通过 git bash 安装 docker-machine. 
+安装 docker-machine 请参见该链接（[https://docs.docker.com/machine/install-machine "https://docs.docker.com/machine/install-machine"](https://docs.docker.com/machine/install-machine "https://docs.docker.com/machine/install-machine")）本例中，先安装了 git bash 工具，再通过 git bash 安装 docker-machine. 
 
 第一次运行 docker-machine，会在当前用户的用户目录里（一般为 C:\Users\<user>\）生成 . =docker 的文件夹。该文件夹下的内容主要有：
 
@@ -30,11 +30,11 @@ Docker-machine 使用不同的驱动，能与不同的平台进行通信，进�
 
 Azure 驱动版本随着 Docker-machine 的版本一同更新。参见下面链接查看最新的 docker-machine 的版本，修复的往期的 bug，以及支持的新功能等。
 
-[https://github.com/docker/machine/releases ](https://github.com/docker/machine/releases  "https://github.com/docker/machine/releases ")
+[https://github.com/docker/machine/releases  "https://github.com/docker/machine/releases "](https://github.com/docker/machine/releases  "https://github.com/docker/machine/releases ")
 
  根据 docker-machine 版本的不同，参数可能不同。参见下面链接查看最新的Azure驱动支持的参数选项及其默认值。
 
-[https://docs.docker.com/machine/drivers/azure/](https://docs.docker.com/machine/drivers/azure/ "https://docs.docker.com/machine/drivers/azure/") 
+[https://docs.docker.com/machine/drivers/azure/ "https://docs.docker.com/machine/drivers/azure/"](https://docs.docker.com/machine/drivers/azure/ "https://docs.docker.com/machine/drivers/azure/") 
 除了必须指定订阅号，其他必须参数都包含了默认值；您也可以根据需求自定义各参数值。下面是一个示例（使用 docker-machine 0.8.2 ）：
 
     docker-machine.exe create --driver azure \

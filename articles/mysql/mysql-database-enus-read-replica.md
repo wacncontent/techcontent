@@ -40,8 +40,8 @@ Notes:
 5. In order to ensure that data remains consistent between the master and subordinate instances, subordinate instances are read-only instances. All MySQL links on subordinate instances are read-only links. You cannot create, modify, or delete databases or database accounts on the subordinate instance. You can perform these operations on the master instance, and the system will automatically synchronize them to the subordinate instances.
 
 ## Create read-only (subordinate) instances
-1.	Select an existing instance, and then click **Replicate**.
-2.	Click **Add slave instance** at the bottom, and enter the name of the subordinate server. Confirm that you understand the effect on the charges, and then click **Submit**.
+1. Select an existing instance, and then click **Replicate**.
+2. Click **Add slave instance** at the bottom, and enter the name of the subordinate server. Confirm that you understand the effect on the charges, and then click **Submit**.
 ![Add slave instances][1]
 
 Note: **MySQL Database on Azure** performs a backup of the master instance during the process of creating subordinate instances. To prevent a failure during backup, make sure that no queries or changes that take a long time are running on the master instance.
@@ -60,19 +60,19 @@ Select a subordinate instance and click **Replicate**. This page shows the repli
 A Java sample program for read/write separation at the application end is shown below:
 
     package test1;
-    
+
     import java.sql.Connection;
     import java.sql.ResultSet;
     import java.sql.Statement;
     import java.util.Properties;
-    
+
     import com.mysql.jdbc.Driver;
     import com.mysql.jdbc.ReplicationDriver;;
-    
+
     public class ConnectionDemo {
-    
+
       public static void main(String[] args) throws Exception {
-        
+
         ReplicationDriver driver = new ReplicationDriver();
         String url = "jdbc:mysql:replication://address=(protocol=tcp)(type=master)(host=masterhost)(port=3306)(user=masteruser),address=(protocol=tcp)(type=slave)(host=slavehost)(port=3306)(user=slaveuser)/yourdb";
         Properties props = new Properties();    
@@ -84,10 +84,10 @@ A Java sample program for read/write separation at the application end is shown 
             conn.setAutoCommit(false);
             conn.createStatement().executeUpdate("update t1 set id = id+1;");
             conn.commit();    
-    
+
             // Set up connection to subordinate;
             conn.setReadOnly(true);
-            
+
             // Now, do a query from a subordinate
             try (Statement statement = conn.createStatement())
             {
@@ -151,19 +151,19 @@ A PHP sample program for read/write separation at the application end is shown b
               break;
           }
         }
-        
+
         if (!($mysqli = new mysqli("myapp", "<your username>", "<your password>", "<your db>")) || mysqli_connect_errno())
         {
           die(sprintf("Failed to connect: [%d] %s\n", mysqli_connect_errno(), mysqli_connect_error()));
         }
         $query = "INSERT INTO user(name, num) VALUES ('test', 1)";
         is_select($query);
-        
+
         if (!($res = $mysqli->query($query)))
         {
           printf("Failed to insert: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
         }
-        
+
         $query = "SELECT * FROM user";
         is_select($query);
         if (!($res = $mysqli->query($query)))
@@ -180,7 +180,7 @@ A PHP sample program for read/write separation at the application end is shown b
           printf("<br>\n");
           $res->close();
         }
-        
+
         $query = "/*" . MYSQLND_MS_LAST_USED_SWITCH . "*/SELECT * FROM user limit 1";
         is_select($query);
         if (!($res = $mysqli->query($query)))
@@ -199,8 +199,8 @@ A PHP sample program for read/write separation at the application end is shown b
 
 ## Upgrade subordinate instances
 You can upgrade a subordinate instance to an online read/write instance. After you upgrade the instance, changes on the master instance will no longer be replicated to this instance. You can perform read/write operations on this instance.
-1.	Select the subordinate instance that you need to upgrade, and click **Replicate**.
-2.	Click **Upgrade** at the bottom of the page, and then click **Confirm**.
+1. Select the subordinate instance that you need to upgrade, and click **Replicate**.
+2. Click **Upgrade** at the bottom of the page, and then click **Confirm**.
 ![Upgrade subordinate instances][4]
 
 ## Master-subordinate replication FAQs

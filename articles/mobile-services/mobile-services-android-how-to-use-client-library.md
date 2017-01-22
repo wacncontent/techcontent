@@ -20,7 +20,7 @@ ms.author: ricksal
 # 如何使用适用于移动服务的 Android 客户端库
 
 [!INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
- 
+
 本指南说明如何使用适用于 Azure 移动服务的 Android 客户端执行常见任务。所述的任务包括：查询数据；插入、更新和删除数据；对用户进行身份验证；处理错误；自定义客户端。
 
 如果你移动服务的新手，应该先完成[移动服务入门]教程。成功完成该教程可确保你会安装 Android Studio；该软件可帮助你配置帐户并创建第一个移动服务，安装支持 Android 2.2 或更高版本的移动服务 SDK，但我们建议你针对 Android 4.2 或更高版本进行生成。
@@ -44,7 +44,7 @@ ms.author: ricksal
         private String text;
         private Boolean complete;
     }
-    
+
 启用动态架构后，Azure 移动服务将基于 insert 或 update 请求中的对象自动生成新列。有关详细信息，请参阅[动态架构](https://msdn.microsoft.com/zh-cn/library/azure/jj193175.aspx)。
 
 ##<a name="create-client"></a>如何创建移动服务客户端
@@ -79,7 +79,7 @@ ms.author: ricksal
         MobileServiceTable<ToDoItem> mToDoTable = mClient.getTable("ToDoItemBackup", ToDoItem.class);
 
 ## <a name="api"></a>API 结构
- 
+
 从 2.0 版客户端库开始，移动服务表操作将在所有异步作业（例如涉及查询的方法）和操作（例如插入、更新和删除）中使用 [Future](http://developer.android.com/reference/java/util/concurrent/Future.html) 和 [AsyncTask](http://developer.android.com/reference/android/os/AsyncTask.html) 对象。这就可以更方便地（在后台线程上）执行多个操作，而无需处理多个嵌套回调。
 
 ## <a name="querying"></a>如何从移动服务查询数据
@@ -227,12 +227,12 @@ ms.author: ricksal
         ToDoItem mToDoItem = new ToDoItem();
         mToDoItem.text = "Test Program";
         mToDoItem.complete = false;
-        
+
  接着执行以下代码：
 
         // Insert the new item
         new AsyncTask<Void, Void, Void>() {
-    
+
             @Override
             protected Void doInBackground(Void... params) {
                 try {
@@ -299,9 +299,9 @@ ms.author: ricksal
         if (mClient == null) {
             return;
                 } 
-    
+
         new AsyncTask<Void, Void, Void>() {
-    
+
             @Override
             protected Void doInBackground(Void... params) {
                 try {
@@ -442,7 +442,7 @@ ms.author: ricksal
         item.addProperty("complete", false);
 
 下一步是插入对象。传递给 **insert** 方法的回调函数是 **TableJsonOperationCallback** 类的实例。注意，*insert* 方法的参数如何成为 JsonObject。
-         
+
         // Insert the new item
         new AsyncTask<Void, Void, Void>() {
 
@@ -469,7 +469,7 @@ ms.author: ricksal
     mToDoTable.delete(item);
 
 还可以使用某个实例的 ID 来直接删除该实例：
-        
+
     mToDoTable.delete(ID);
 
 ### <a name="json_get"></a>如何返回非类型化表中的所有行
@@ -525,7 +525,7 @@ ms.author: ricksal
 数据源和屏幕布局通过适配器绑定在一起，在此代码中，该适配器是 *ArrayAdapter&lt;ToDoItem&gt;* 类的扩展。
 
 ### <a name="layout"></a>如何定义布局
- 
+
 布局由多个 XML 代码段定义。以某个现有布局为例，我们假设以下代码表示了要在其中填充服务器数据的 **ListView**。
 
         <ListView
@@ -534,7 +534,7 @@ ms.author: ricksal
             android:layout_height="wrap_content"
             tools:listitem="@layout/row_list_to_do" >
         </ListView>
-    
+
 在上面的代码中，*listitem* 属性指定列表中单个行的布局 ID。以下代码指定了一个复选框及其关联的文本。这些元素将会针对列表中的每个项实例化一次。如果使用更复杂的布局，则会在屏幕中指定更多的字段。以下代码摘自 *row\_list\_to\_do.xml* 文件。
 
         <?xml version="1.0" encoding="utf-8"?>
@@ -548,9 +548,9 @@ ms.author: ricksal
                 android:layout_height="wrap_content"
                 android:text="@string/checkbox_text" />
         </LinearLayout>
-        
+
 ### <a name="adapter"></a>如何定义适配器
-    
+
 由于此处视图的数据源是一个 *ToDoItem* 数组，因此我们需要基于 *ArrayAdapter&lt;ToDoItem&gt;* 类子类化适配器。此子类将使用 *row_list_to_do* 布局为每个 *ToDoItem* 生成一个视图。
 
 在代码中，我们可以定义以下类作为 *ArrayAdapter&lt;E&gt;* 类的扩展：
@@ -661,9 +661,9 @@ ms.author: ricksal
         import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
 
 2. 在活动类的 **onCreate** 方法中，在创建 `MobileServiceClient` 对象的代码后面添加以下代码行：我们假设对 `MobileServiceClient` 对象的引用为 *mClient*。
-    
+
             // Login using the Google provider.
-        
+
         ListenableFuture<MobileServiceUser> mLogin = mClient.login(MobileServiceAuthenticationProvider.Google);
 
         Futures.addCallback(mLogin, new FutureCallback<MobileServiceUser>() {
@@ -703,7 +703,7 @@ ms.author: ricksal
         {
                 // Login using the Google provider.    
                 ListenableFuture<MobileServiceUser> mLogin = mClient.login(MobileServiceAuthenticationProvider.Google);
-        
+
                 Futures.addCallback(mLogin, new FutureCallback<MobileServiceUser>() {
                         @Override
                     public void onFailure(Throwable exc) {
@@ -762,7 +762,7 @@ ms.author: ricksal
                     NextServiceFilterCallback next) {
 
             runOnUiThread(new Runnable() {
-        
+
             @Override
                 public void run() {
                     request.addHeader("My-Header", "Value");	                }
@@ -807,7 +807,7 @@ ms.author: ricksal
 
     @com.google.gson.annotations.SerializedName("complete")
     private boolean mComplete;
- 
+
     @com.google.gson.annotations.SerializedName("duration")
     private String mDuration;
 
@@ -836,7 +836,7 @@ ms.author: ricksal
                 }
             })
             .setPrettyPrinting());
-    
+
 必须在对移动服务客户端对象执行任何方法调用之前执行此代码。
 
 ### <a name="complex"></a>如何将对象或数组属性存储到表中 

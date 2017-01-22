@@ -110,7 +110,7 @@ ms.author: cephalin
     根据提示，在浏览器中继续使用具有 Azure 订阅的 Microsoft 帐户登录。
 
 3. 设置应用服务的部署用户。稍后会使用这些凭据部署代码。
-   
+
         az appservice web deployment user set --user-name <username> --password <password>
 
 3. 创建具有名称的[资源组](../azure-resource-manager/resource-group-overview.md)。对于本 PHP 教程，不需要实际知道它是什么。
@@ -142,7 +142,7 @@ ms.author: cephalin
 6. 将 JSON 中的 URL 作为本地存储库的 Git remote 添加（为简单起见，调用 `azure`）。
 
         git remote add azure https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git
-   
+
 7. 向 `azure` Git remote 部署示例代码。出现提示时，使用前面配置的部署凭据。
 
         git push azure master
@@ -159,7 +159,7 @@ ms.author: cephalin
 如果 Sails.js 应用在应用服务中由于某种原因而失败，请查找 stderr 日志，以帮助进行故障排除。有关详细信息，请参阅[从 iisnode 获取 stdout 和 stderr 日志](./app-service-web-nodejs-get-started.md#get-stdout-and-stderr-logs-from-iisnode)。如果应用成功启动，stdout 日志应显示熟悉的消息：
 
                    .-..-.
-    
+
        Sails              <|    .-..-.
        v0.12.11            |\
                           /|.\

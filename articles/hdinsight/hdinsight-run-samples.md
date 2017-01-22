@@ -41,7 +41,7 @@ Web 上有许多介绍 Hadoop 相关技术（例如基于 Java 的 MapReduce 编
 
 - [在 HDInsight 中使用 Hive](./hdinsight-use-hive.md)
 - [在 HDInsight 中使用 Pig](./hdinsight-use-pig.md)
- 
+
 **先决条件**：
 
 - **一个 Azure 订阅**。请参阅[获取 Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
@@ -57,7 +57,7 @@ Web 上有许多介绍 Hadoop 相关技术（例如基于 Java 的 MapReduce 编
 可以在[附录 A](#apendix-a---the-word-count-MapReduce-program-in-java) 中找到源代码。
 
 有关开发 Java MapReduce 程序的过程，请参阅[开发适用于 HDInsight 中的 Hadoop 的 Java MapReduce 程序](./hdinsight-develop-deploy-java-mapreduce.md)
- 
+
 **提交字数统计 MapReduce 作业**
 
 1. 打开 **Windows PowerShell ISE**。有关说明，请参阅[安装和配置 Azure PowerShell][powershell-install-configure]。
@@ -65,33 +65,33 @@ Web 上有许多介绍 Hadoop 相关技术（例如基于 Java 的 MapReduce 编
 
         $subscriptionName = "<Azure Subscription Name>"
         $clusterName = "<HDInsight cluster name>"             # HDInsight cluster name
-        
+
         Select-AzureSubscription $subscriptionName
-        
+
         # Define the MapReduce job
         $mrJobDefinition = New-AzureHDInsightMapReduceJobDefinition `
                                     -JarFile "wasbs:///example/jars/hadoop-mapreduce-examples.jar" `
                                     -ClassName "wordcount" `
                                     -Arguments "wasbs:///example/data/gutenberg/davinci.txt", "wasbs:///example/data/WordCountOutput1"
-        
+
         # Submit the job and wait for job completion
         $cred = Get-Credential -Message "Enter the HDInsight cluster HTTP user credential:" 
         $mrJob = Start-AzureHDInsightJob `
                             -Cluster $clusterName `
                             -Credential $cred `
                             -JobDefinition $mrJobDefinition 
-        
+
         Wait-AzureHDInsightJob `
             -Cluster $clusterName `
             -Credential $cred `
             -JobId $mrJob.JobId 
-        
+
         # Get the job output
         $cluster = Get-AzureHDInsightCluster -Name $clusterName
         $defaultStorageAccount = $cluster.DefaultStorageAccount -replace '.blob.core.chinacloudapi.cn'
         $defaultStorageAccountKey = Get-AzureStorageKey -StorageAccountName $defaultStorageAccount |  %{ $_.Primary }
         $defaultStorageContainer = $cluster.DefaultStorageContainer
-        
+
         Get-AzureHDInsightJobOutput `
             -Cluster $clusterName `
             -Credential $cred `
@@ -101,7 +101,7 @@ Web 上有许多介绍 Hadoop 相关技术（例如基于 Java 的 MapReduce 编
         # Download the job output to the workstation
         $storageContext = New-AzureStorageContext -StorageAccountName $defaultStorageAccount -StorageAccountKey $defaultStorageAccountKey 
         Get-AzureStorageBlobContent -Container $defaultStorageContainer -Blob example/data/WordCountOutput/part-r-00000 -Context $storageContext -Force
-        
+
         # Display the output file
         cat ./example/data/WordCountOutput/part-r-00000 | findstr "there"
 
@@ -137,9 +137,9 @@ Hadoop 向 MapReduce 提供了一个流式处理 API，利用它，你可以采�
                                     -OutputPath "/example/data/StreamingOutput/wc.txt"
 
     输出文件应该是：
-    
+
         example/data/StreamingOutput/wc.txt/part-00000		
-                                
+
 ## <a name="hdinsight-sample-pi-estimator"></a> PI 估计器
 
 pi 估计器使用统计学方法（拟蒙特卡罗法）来估算 pi 值。单位平方形内部随机放置的点也落入该平方形内嵌的圆圈内，其概率等于圆圈面积 pi/4。可以从 4R 的值来估算 pi 的值，其中 R 是落入圆圈内的点数与平方形内总点数的比率。所使用的取样点越多，估算值越准确。
@@ -181,12 +181,12 @@ pi 估计器使用统计学方法（拟蒙特卡罗法）来估算 pi 值。单�
                                 -JarFile "/example/jars/hadoop-mapreduce-examples.jar" `
                                 -ClassName "teragen" `
                                 -Arguments "-Dmapred.map.tasks=50", "100000000", "/example/data/10GB-sort-input"
-    
+
     $terasort = New-AzureHDInsightMapReduceJobDefinition `
                                 -JarFile "/example/jars/hadoop-mapreduce-examples.jar" `
                                 -ClassName "terasort" `
                                 -Arguments "-Dmapred.map.tasks=50", "-Dmapred.reduce.tasks=25", "/example/data/10GB-sort-input", "/example/data/10GB-sort-output"
-    
+
     $teravalidate = New-AzureHDInsightMapReduceJobDefinition `
                                 -JarFile "/example/jars/hadoop-mapreduce-examples.jar" `
                                 -ClassName "teravalidate" `
@@ -670,7 +670,7 @@ wc.cs 文件中的化简器代码使用 [StreamReader][streamreader] 对象从 c
      System.exit(ToolRunner.run(null, new PiEstimator(), argv));
      }
      }
-     
+
 ## 附录 D - 10gb graysort 源代码
 
 这一部分提供了 TeraSort MapReduce 程序的代码以供检查。

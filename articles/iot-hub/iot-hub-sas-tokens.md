@@ -74,19 +74,19 @@ IoT 中心还允许设备使用 X.509 证书向 IoT 中心进行身份验证。I
         // console.log("signature:" + token);
         return token;
     };
- 
+
  为方便比较，下面提供了等效的 Python 代码：
- 
+
     from base64 import b64encode, b64decode
     from hashlib import sha256
     from hmac import HMAC
     from urllib import urlencode
-    
+
     def generate_sas_token(uri, key, policy_name='device', expiry=3600):
         ttl = time() + expiry
         sign_key = "%s\n%d" % (uri, int(ttl))
         signature = b64encode(HMAC(b64decode(key), sign_key, sha256).digest())
-     
+
         return 'SharedAccessSignature ' + urlencode({
             'sr' :  uri,
             'sig': signature,

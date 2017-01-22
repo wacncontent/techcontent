@@ -211,7 +211,7 @@ ms.author: wesmc
         Log.e("[your package name]", "Fail onRegister: " + e.getMessage(), e);
             }
 
-6.	将以下代码添加到 `OnUnregistered` 方法中：
+6. 将以下代码添加到 `OnUnregistered` 方法中：
 
             try {
                 getNotificationHub(getApplicationContext()).unregister();
@@ -264,7 +264,7 @@ ms.author: wesmc
     static void Main(string[] args)
     {
         NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString("[conn string]", "[hub name]");
-    
+
         hub.SendAdmNativeNotificationAsync("{"data":{"msg" : "Hello from .NET!"}}").Wait();
     }
 

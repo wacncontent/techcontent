@@ -51,7 +51,7 @@ wacn.date: 12/13/2016
     Add-AzureRmExpressRouteCircuitAuthorization -ExpressRouteCircuit $circuit -Name "MyAuthorization"
     Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $circuit
     $auth1=Get-AzureRmExpressRouteCircuitAuthorization -ExpressRouteCircuit $circuit -Name MyAuthorization 
- 
+
 **获取授权ID**
 
 `$ID=(Get-AzureRmExpressRouteCircuit -Name "21VDemoSH" -ResourceGroupName "CraneER").id`
@@ -61,7 +61,7 @@ wacn.date: 12/13/2016
 **登录到另外一个订阅 WATSTEST02**
 
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
- 
+
 **兑现授权**
 
     $gw=Get-AzureRmVirtualNetworkGateway -Name CraneARMERtestGW -ResourceGroupName craneARMERtest 

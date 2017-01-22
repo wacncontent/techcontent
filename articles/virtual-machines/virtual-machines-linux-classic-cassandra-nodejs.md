@@ -106,7 +106,7 @@ Cassandra 的上述数据中心感知型复制和一致性模型可以很方便�
 | 一致性级别（读取） | LOCAL\_QUORUM ((RF/2) +1) = 2 公式结果向下舍入 | 读取请求仅从一个区域满足；在将响应发送回客户端之前，读取 2 个节点。 |
 | 复制策略 | NetworkTopologyStrategy 请参阅 Cassandra 文档中的[数据复制](http://www.datastax.com/documentation/cassandra/2.0/cassandra/architecture/architectureDataDistributeReplication_c.html)以了解更多信息 | 了解部署拓扑，并将副本置于节点上，以便确保最终不会让所有副本位于同一机架上 |
 | Snitch | GossipingPropertyFileSnitch 请参阅 Cassandra 文档中的 [Snitch](http://www.datastax.com/documentation/cassandra/2.0/cassandra/architecture/architectureSnitchesAbout_c.html) 以获取更多信息 | NetworkTopologyStrategy 使用 snitch 这个概念来了解拓扑。在将每个节点映射到数据中心和机架时，使用 GossipingPropertyFileSnitch 可以更好地进行控制。然后，该群集使用 gossip 来传播此信息。相对于 PropertyFileSnitch，此方法在进行动态 IP 设置时要简单得多 | 
- 
+
 ##软件配置
 在部署过程中使用以下软件版本：
 
@@ -178,10 +178,10 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
     JRE_TARBALL="server-jre-8u5-linux-x64.tar.gz"
     CASS_TARBALL="apache-cassandra-2.0.8-bin.tar.gz"
     SVC_USER="localadmin"
-    
+
     RESET_ERROR=1
     MKDIR_ERROR=2
-    
+
     reset_installation ()
     {
        rm -rf $CASS_INSTALL_DIR 2> /dev/null
@@ -196,13 +196,13 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
           echo "make_dir: invalid directory name"
           exit $MKDIR_ERROR
        fi
-       
+
        if [ -d "$1" ]
        then
           echo "make_dir: directory already exists"
           exit $MKDIR_ERROR
        fi
-    
+
        mkdir $1 2>/dev/null
        if [ $? != 0 ]
        then
@@ -210,7 +210,7 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
           exit $MKDIR_ERROR
        fi
     }
-    
+
     unzip()
     {
        if [ $# == 2 ]
@@ -219,26 +219,26 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
        else
           echo "archive error"
        fi
-       
+
     }
-    
+
     if [ -n "$1" ]
     then
        SVC_USER=$1
     fi
-    
+
     reset_installation 
     make_dir $CASS_INSTALL_DIR
     make_dir $JRE_INSTALL_DIR
     make_dir $CASS_DATA_DIR
     make_dir $CASS_LOG_DIR
-    
+
     #unzip JRE and Cassandra 
     unzip $HOME/downloads/$JRE_TARBALL $JRE_INSTALL_DIR
     unzip $HOME/downloads/$CASS_TARBALL $CASS_INSTALL_DIR
-    
+
     #Change the ownership to the service credentials
-    
+
     chown -R $SVC_USER:$GROUP $CASS_DATA_DIR
     chown -R $SVC_USER:$GROUP $CASS_LOG_DIR
     echo "edit /etc/profile to add JRE to the PATH"
@@ -340,43 +340,43 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
 创建以上 VM 列表需要完成以下过程：
 
 1.  在特定区域创建空的云服务
-2.	从以前捕获的映像创建 VM，然后将其附加到以前创建的虚拟网络；对所有 VM 重复此过程
-3.	将内部负载均衡器添加到云服务，然后将其附加到“数据”子网
-4.	对于以前创建的每个 VM，可以通过一个已连接到以前创建的内部负载均衡器的负载均衡集添加进行 Thrift 通信的负载均衡终结点
+2. 从以前捕获的映像创建 VM，然后将其附加到以前创建的虚拟网络；对所有 VM 重复此过程
+3. 将内部负载均衡器添加到云服务，然后将其附加到“数据”子网
+4. 对于以前创建的每个 VM，可以通过一个已连接到以前创建的内部负载均衡器的负载均衡集添加进行 Thrift 通信的负载均衡终结点
 
 以上过程可以通过 Azure 经典管理门户来执行；使用 Windows 计算机（如果无法访问 Windows 计算机，则可使用 Azure 上的 VM）；使用以下 PowerShell 脚本自动预配所有 8 个 VM。
 
 **列表 1：适用于预配虚拟机的 PowerShell 脚本**
-        
+
         #Tested with Azure Powershell - November 2014	
         #This powershell script deployes a number of VMs from an existing image inside an Azure region
         #Import your Azure subscription into the current Powershell session before proceeding
         #The process: 1. create Azure Storage account, 2. create virtual network, 3.create the VM template, 2. crate a list of VMs from the template
-        
+
         #fundamental variables - change these to reflect your subscription
         $country="china"; $region="north"; $vnetName = "your_vnet_name";$storageAccount="your_storage_account"
         $numVMs=8;$prefix = "hk-cass";$ilbIP="your_ilb_ip"
         $subscriptionName = "Azure_subscription_name"; 
         $vmSize="ExtraSmall"; $imageName="your_linux_image_name"
         $ilbName="ThriftInternalLB"; $thriftEndPoint="ThriftEndPoint"
-        
+
         #generated variables
         $serviceName = "$prefix-svc-$country-$region"; $azureRegion = "$country $region"
-        
+
         $vmNames = @()
         for ($i=0; $i -lt $numVMs; $i++)
         {
            $vmNames+=("$prefix-vm"+($i+1) + "$country-$region" );
         }
-        
+
         #select an Azure subscription already imported into Powershell session
         Select-AzureSubscription -SubscriptionName $subscriptionName -Current
         Set-AzureSubscription -Environment AzureChinaCloud -SubscriptionName $subscriptionName -CurrentStorageAccountName $storageAccount
-        
+
         #create an empty cloud service
         New-AzureService -ServiceName $serviceName -Label "hkcass$region" -Location $azureRegion
         Write-Host "Created $serviceName"
-        
+
         $VMList= @()   # stores the list of azure vm configuration objects
         #create the list of VMs
         foreach($vmName in $vmNames)
@@ -385,9 +385,9 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
            Add-AzureProvisioningConfig -Linux -LinuxUser "localadmin" -Password "Local123" |
            Set-AzureSubnet "data"
         }
-        
+
         New-AzureVM -ServiceName $serviceName -VNetName $vnetName -VMs $VMList
-        
+
         #Create internal load balancer
         Add-AzureInternalLoadBalancer -ServiceName $serviceName -InternalLoadBalancerName $ilbName -SubnetName "data" -StaticVNetIPAddress "$ilbIP"
         Write-Host "Created $ilbName"
@@ -397,7 +397,7 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
             Get-AzureVM -ServiceName $serviceName -Name $vmName |
                 Add-AzureEndpoint -Name $thriftEndPoint -LBSetName "ThriftLBSet" -Protocol tcp -LocalPort 9160 -PublicPort 9160 -ProbePort 9160 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 -InternalLoadBalancerName $ilbName | 
                 Update-AzureVM 
-        
+
             Write-Host "created $vmName"     
         }
 
@@ -406,17 +406,17 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
 登录到 VM 并执行以下操作：
 
 * 编辑 $CASS\_HOME/conf/cassandra-rackdc.properties 以指定数据中心和机架属性：
-      
+
         dc =CHINAEAST, rack =rack1
 
 * 编辑 cassandra.yaml，将种子节点配置如下：
-     
+
         Seeds: "10.1.2.4,10.1.2.6,10.1.2.8,10.1.2.10"
 
 **步骤 4：启动 VM 并测试群集**
 
 登录到其中一个节点（例如 hk-c1-china-north），然后运行以下命令以查看群集的状态：
-       
+
         nodetool -h 10.1.2.4 -p 7199 status 
 
 对于 8 节点群集，你所看到的显示内容将如下所示：
@@ -437,16 +437,16 @@ Azure 在进行配置时需要用 PEM 或 DER 编码的 X509 公钥。按照如�
 使用以下步骤测试群集：
 
 1.    使用 Powershell 命令 Get-AzureInternalLoadbalancer cmdlet 获取内部负载均衡器的 IP 地址（例如 10.1.2.101）。该命令的语法如下所示：Get-AzureLoadbalancer -ServiceName "hk-c-svc-china-north" [显示内部负载均衡器及其 IP 地址的详细信息]
-2.	使用 Putty 或 ssh 登录到 Web 场 VM（例如 hk-w1-china-north）
-3.	执行 $CASS\_HOME/bin/cqlsh 10.1.2.101 9160 
-4.	使用以下 CQL 命令验证群集是否正常工作：
+2. 使用 Putty 或 ssh 登录到 Web 场 VM（例如 hk-w1-china-north）
+3. 执行 $CASS\_HOME/bin/cqlsh 10.1.2.101 9160 
+4. 使用以下 CQL 命令验证群集是否正常工作：
 
         CREATE KEYSPACE customers_ks WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 3 };	
         USE customers_ks;
         CREATE TABLE Customers(customer_id int PRIMARY KEY, firstname text, lastname text);
         INSERT INTO Customers(customer_id, firstname, lastname) VALUES(1, 'John', 'Doe');
         INSERT INTO Customers(customer_id, firstname, lastname) VALUES (2, 'Jane', 'Doe');
-        
+
         SELECT * FROM Customers;
 
 你应该看到如下所示的显示内容：
@@ -560,7 +560,7 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
 
 ###步骤 2：登录到 hk-w1-china-north 以后，在北部地区执行以下命令
 1.    执行 $CASS\_HOME/bin/cqlsh 10.1.2.101 9160 
-2.	执行以下 CQL 命令：
+2. 执行以下 CQL 命令：
 
         CREATE KEYSPACE customers_ks
         WITH REPLICATION = { 'class' : 'NetworkToplogyStrategy', 'CHINANORTH' : 3, 'CHINAEAST' : 3};
@@ -579,7 +579,7 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
 
 ###步骤 3：登录到 hk-w1-china-east 以后，在东部地区执行以下命令：
 1.    执行 $CASS\_HOME/bin/cqlsh 10.2.2.101 9160 
-2.	执行以下 CQL 命令：
+2. 执行以下 CQL 命令：
 
         USE customers_ks;
         CREATE TABLE Customers(customer_id int PRIMARY KEY, firstname text, lastname text);
@@ -611,7 +611,7 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
         var hostList = ['internal_loadbalancer_ip:9160'];
         var ksConOptions = { hosts: hostList,
                              keyspace: ksName, use_bigints: false };
-        
+
         function createKeyspace(callback){
            var cql = 'CREATE KEYSPACE ' + ksName + ' WITH strategy_class=SimpleStrategy AND strategy_options:replication_factor=1';
            var sysConOptions = { hosts: hostList,  
@@ -629,7 +629,7 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
            });
            con.shutdown();
         } 
-        
+
         function createColumnFamily(ksConOptions, callback){
           var params = ['customers_cf','custid','varint','custname',
                         'text','custaddress','text'];
@@ -647,16 +647,16 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
           });
           con.shutdown();
         } 
-        
+
         //populate Data
         function populateCustomerData() {
            var params = ['John','Infinity Dr, TX', 1];
            updateCustomer(ksConOptions,params);
-        
+
            params = ['Tom','Fermat Ln, WA', 2];
            updateCustomer(ksConOptions,params);
         }
-        
+
         //update will also insert the record if none exists
         function updateCustomer(ksConOptions,params)
         {
@@ -668,7 +668,7 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
           });
           con.shutdown();
         }
-        
+
         //read the two rows inserted above
         function readCustomer(ksConOptions)
         {
@@ -683,7 +683,7 @@ Azure 虚拟网络中的本地网络是一个代理地址空间，该空间映�
             });
            con.shutdown();
         }
-        
+
         //exectue the code
         createKeyspace(createColumnFamily);
         readCustomer(ksConOptions)

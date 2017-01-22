@@ -242,7 +242,7 @@ ms.author: robmcm
 3. 浏览到 **http://[site name].chinacloudsites.cn/index.php** 以查看应用及可能做出的任何更改：
 
     ![Azure PHP 网站][running-app]
-    
+
 ## <a name="composer"></a> 使用编辑器扩展启用编辑器自动化
 
 默认情况下，如果 PHP 项目中有 composer.json，则应用服务中的 git 部署过程与其不相关。`git push` 期间可以通过启用编辑器扩展启用 composer.json 处理。
@@ -254,13 +254,13 @@ ms.author: robmcm
 2. 单击“添加”，然后单击“编辑器”。
 
     ![添加编辑器扩展插件][composer-extension-add]
-    
+
 3. 单击“确定”接受法律条款。再次单击“确定”以添加该扩展。
 
     **已安装扩展**边栏选项卡将不会显示编辑器扩展。
 
     ![查看编辑器扩展插件][composer-extension-view]
-    
+
 4. 现在，如上一节所示，执行 `git add`、`git commit` 和 `git push`。现在将看到编辑器正在安装在 composer.json 中定义的依赖项。
 
     ![编辑器扩展插件成功][composer-extension-success]

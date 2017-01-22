@@ -39,7 +39,7 @@ ms.author: adegeo
 
 ## 替代体系结构：网站和 Web 作业
 
-本教程演示如何在 Azure 云服务中运行前端和后端。一种替代方法是在 [Azure 网站](../app-service-web/index.md/)中运行前端，并为后端使用 [Web 作业](../app-service-web/websites-webjobs-resources.md)功能（目前以预览版提供）。有关如何使用 Web 作业的教程，请参阅 [Azure WebJobs SDK 入门](../app-service-web/websites-dotnet-webjobs-sdk-get-started.md)。有关如何选择最适合你方案的服务信息，请参阅 [Azure 网站、云服务和虚拟机的比较](../app-service-web/choose-web-site-cloud-service-vm.md)。
+本教程演示如何在 Azure 云服务中运行前端和后端。一种替代方法是在 [Azure 网站](../app-service-web/index.md)中运行前端，并为后端使用 [Web 作业](../app-service-web/websites-webjobs-resources.md)功能（目前以预览版提供）。有关如何使用 Web 作业的教程，请参阅 [Azure WebJobs SDK 入门](../app-service-web/websites-dotnet-webjobs-sdk-get-started.md)。有关如何选择最适合你方案的服务信息，请参阅 [Azure 网站、云服务和虚拟机的比较](../app-service-web/choose-web-site-cloud-service-vm.md)。
 
 ## 学习内容
 
@@ -318,7 +318,7 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
 ###  将项目部署到 Azure
 
-1.	在“解决方案资源管理器”中，右键单击“ContosoAdsCloudService”云项目并选择“发布”。
+1. 在“解决方案资源管理器”中，右键单击“ContosoAdsCloudService”云项目并选择“发布”。
 
     ![发布菜单](./media/cloud-services-dotnet-get-started/pubmenu.png)
 
@@ -336,7 +336,7 @@ Web 角色项目和辅助角色项目的 azure 存储帐户连接字符串存储
 
     ![摘要步骤](./media/cloud-services-dotnet-get-started/pubsummary.png)
 
-   “Azure 活动日志”窗口将在 Visual Studio 中打开。
+    “Azure 活动日志”窗口将在 Visual Studio 中打开。
 
 5. 单击右箭头图标以展开部署详细信息。
 
@@ -812,6 +812,6 @@ Contoso 广告应用程序有意保持入门教程的简单性。例如，它没
 
 * [Azure 云服务的第 1 部分：简介](http://justazure.com/microsoft-azure-cloud-services-part-1-introduction)
 * [如何管理云服务](./cloud-services-how-to-manage.md)
-* [Azure 存储空间](../storage/index.md/)
+* [Azure 存储空间](../storage/index.md)
 
 <!---HONumber=Mooncake_1226_2016-->

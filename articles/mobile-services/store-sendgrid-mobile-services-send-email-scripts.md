@@ -48,7 +48,7 @@ SendGrid 是一项[基于云的电子邮件服务]，该服务提供了可靠的
     ![][1]
 
 3. 在 **todoitem** 中，单击“脚本”选项卡，然后选择“插入”。
-   
+
     ![][2]
 
     将显示当 **TodoItem** 表中发生插入时所调用的函数。
@@ -56,7 +56,7 @@ SendGrid 是一项[基于云的电子邮件服务]，该服务提供了可靠的
 4. 将 insert 函数替换为以下代码：
 
         var SendGrid = require('sendgrid').SendGrid;
-        
+
         function insert(item, user, request) {    
             request.execute({
                 success: function() {
@@ -69,7 +69,7 @@ SendGrid 是一项[基于云的电子邮件服务]，该服务提供了可靠的
 
             function sendEmail(item) {
                 var sendgrid = new SendGrid('**username**', '**password**');       
-                
+
                 sendgrid.send({
                     to: '**email-address**',
                     from: '**from-address**',

@@ -84,7 +84,7 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
         namespace MyStatefulService.Interfaces
         {
             using Microsoft.ServiceFabric.Services.Remoting;
-    
+
             public interface ICounter: IService
             {
                 Task<long> GetCountAsync();
@@ -102,9 +102,9 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 2. 找到继承自 `StatefulService` 的类（例如 `MyStatefulService`），然后扩展它以实现 `ICounter` 接口。
 
         using MyStatefulService.Interfaces;
-    
+
         ...
-    
+
         public class MyStatefulService : StatefulService, ICounter
         {        
               // ...
@@ -116,7 +116,7 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
         {
           var myDictionary =
             await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
-    
+
             using (var tx = this.StateManager.CreateTransaction())
             {          
                 var result = await myDictionary.TryGetValueAsync(tx, "Counter");
@@ -133,9 +133,9 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 在本例中，我们将替换现有的 `CreateServiceReplicaListeners` 方法，并提供 `ServiceRemotingListener` 的实例，该实例通过 `ServiceProxy` 来创建可从客户端调用的 RPC 终结点。
 
     using Microsoft.ServiceFabric.Services.Remoting.Runtime;
-    
+
     ...
-    
+
     protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
     {
         return new List<ServiceReplicaListener>()
@@ -166,16 +166,16 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
         using MyStatefulService.Interfaces;
         using Microsoft.ServiceFabric.Services.Remoting.Client;
-    
+
         ...
-    
+
         public async Task<IEnumerable<string>> Get()
         {
             ICounter counter =
                     ServiceProxy.Create<ICounter>(new Uri("fabric:/MyApplication/MyStatefulService"), new ServicePartitionKey(0));
-    
+
             long count = await counter.GetCountAsync();
-    
+
             return new string[] { count.ToString() };
         }
 

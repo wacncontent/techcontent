@@ -47,13 +47,13 @@ ms.author: singhkay
 可使用此 PowerShell 脚本创建自签名证书
 
     $certificateName = "somename"
-    
+
     $thumbprint = (New-SelfSignedCertificate -DnsName "$certificateName" -CertStoreLocation Cert:\CurrentUser\My -KeySpec KeyExchange).Thumbprint
-    
+
     $cert = (Get-ChildItem -Path cert:\CurrentUser\My\$thumbprint)
-    
+
     $password = Read-Host -Prompt "Please enter the certificate password." -AsSecureString
-    
+
     Export-PfxCertificate -Cert $cert -FilePath ".\$certificateName.pfx" -Password $password
 
 ## 步骤 3：将自签名证书上载到密钥保管库
@@ -63,7 +63,7 @@ ms.author: singhkay
     $fileName = "<Path to the .pfx file>"
     $fileContentBytes = Get-Content $fileName -Encoding Byte
     $fileContentEncoded = [System.Convert]::ToBase64String($fileContentBytes)
-    
+
     $jsonObject = @"
     {
       "data": "$filecontentencoded",
@@ -71,10 +71,10 @@ ms.author: singhkay
       "password": "<password>"
     }
     "@
-    
+
     $jsonObjectBytes = [System.Text.Encoding]::UTF8.GetBytes($jsonObject)
     $jsonEncoded = [System.Convert]::ToBase64String($jsonObjectBytes)
-    
+
     $secret = ConvertTo-SecureString -String $jsonEncoded -AsPlainText -Force
     Set-AzureKeyVaultSecret -VaultName "<vault name>" -Name "<secret name>" -SecretValue $secret
 

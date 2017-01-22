@@ -63,7 +63,7 @@ ms.author: raynew
     - *.backup.windowsazure.cn
     - *.blob.core.chinacloudapi.cn
     - *.store.core.chinacloudapi.cn
-    
+
 - 若要使用自定义代理，请在安装提供程序之前设置代理服务器。在设置提供程序期间，你需要指定代理服务器地址和端口，以及用于访问的凭据。请注意，不支持基于 HTTPS 的代理。
 
 此图显示了站点恢复用来完成业务流程和复制的不同通信通道和端口

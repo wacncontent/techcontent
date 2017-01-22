@@ -37,10 +37,10 @@ wacn.lang: cn
 - [后续步骤](#nextstep)
 
 ##<a id="step1"></a>步骤一：登陆Azure管理门户，创建MySQL服务器
-1.	登陆到Azure 管理门户, 在右侧导航条选中MySQL 数据库 on Azure。 
-2.	单击页面底部的“新建”，单击“新建”后，屏幕上将会出现一个显示可创建内容的列表。
-3.	单击“MySQL 数据库 on Azure”, 点击快速创建
- 
+1. 登陆到Azure 管理门户, 在右侧导航条选中MySQL 数据库 on Azure。 
+2. 单击页面底部的“新建”，单击“新建”后，屏幕上将会出现一个显示可创建内容的列表。
+3. 单击“MySQL 数据库 on Azure”, 点击快速创建
+
 ![创建MySQL服务器](./media/mysql-database-get-started/create-mysql-server.png)
 
 >[!NOTE]**您的用户名称是以“服务器名称%用户名”组成，当您连接数据库时请注意填写用户名全称。**

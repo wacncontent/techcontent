@@ -11,7 +11,7 @@
 
     ![附加空磁盘](./media/howto-attach-disk-window-linux/AttachEmptyDisk.png)
 
-3.	将显示“附加空磁盘”对话框。
+3. 将显示“附加空磁盘”对话框。
 
     ![附加新的空磁盘](./media/howto-attach-disk-window-linux/AttachEmptyDetail.png)
 
@@ -23,10 +23,10 @@
 
     - 单击复选标记以完成。
 
-4.	创建并附加数据磁盘后，它列出在虚拟机的仪表板中。
+4. 创建并附加数据磁盘后，它列出在虚拟机的仪表板中。
 
     ![已成功附加了空数据磁盘](./media/howto-attach-disk-window-linux/AttachEmptySuccess.png)
-    
+
 > [!NOTE]在添加新数据磁盘后，你需要登录到虚拟机并初始化磁盘，然后虚拟机才能使用磁盘来存储数据。
 
 ## <a id="attachexisting"></a>如何：附加现有磁盘
@@ -47,7 +47,7 @@
 
 4. 单击复选标记以将数据磁盘附加到虚拟机。
 
-5.	附加数据磁盘后，它列出在虚拟机的仪表板中。
+5. 附加数据磁盘后，它列出在虚拟机的仪表板中。
 
     ![已成功附加了数据磁盘](./media/howto-attach-disk-window-linux/AttachExistingSuccess.png)
 

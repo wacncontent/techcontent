@@ -51,7 +51,7 @@ ms.author: iainfou
 
 * 如果使用组织的 Intranet，请确保计算机可以访问代理服务器，并可以向其发送 HTTPS 流量。
 * 如果使用本地存储的 RDP 文件，请尝试使用门户生成的 RDP 文件。此步骤可确保使用虚拟机或云服务的正确 DNS 名称和 VM 的终结点端口。以下是门户生成的 RDP 文件示例：
-  
+
         full address:s:tailspin-azdatatier.chinacloudapp.cn:55919
         prompt for credentials:i:1
 

@@ -48,7 +48,7 @@ ms.author: anithaa
         Get-AzureRmEffectiveNetworkSecurityGroup -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
 
     >[!TIP] 如果不知道 NIC 的名称，请输入以下命令检索资源组中所有 NIC 的名称：
-    
+
     >`Get-AzureRmNetworkInterface -ResourceGroupName RG1 | Format-Table Name`  
 
     以下文本是针对 *VM1-NIC1* NIC 返回的有效规则输出示例：
@@ -99,7 +99,7 @@ ms.author: anithaa
                                   "Direction": "Inbound"
                                   },…
                          ]
-        
+
         NetworkSecurityGroup   : {
                                    "Id": 
                                  "/subscriptions/[Subscription ID]/resourceGroups/RG1/providers/Microsoft.Network/networkSecurityGroups/Subnet1-NSG"
@@ -158,7 +158,7 @@ ms.author: anithaa
     - **ExpandedAddressPrefix** 扩展 NSG 默认标记的地址前缀。标记代表多个地址前缀。对 VM 与特定地址前缀的连接进行故障排除时，扩展标记很有用。例如，如果有 VNET 对等互连，VIRTUAL\_NETWORK 标记将在上述输出中扩展，显示对等互连的 VNet 前缀。
 
         >[!NOTE] 仅当 NSG 与子网和/或 NIC 关联时，该命令才显示有效规则。一个 VM 可能有多个应用了不同 NSG 的 NIC。故障排除时，请针对每个 NIC 运行该命令。
-        
+
 3. 为了方便筛选大量 NSG 规则，请输入以下命令进一步进行故障排除：
 
         $NSGs = Get-AzureRmEffectiveNetworkSecurityGroup -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
@@ -177,7 +177,7 @@ ms.author: anithaa
     可以使用以下命令输出中的信息删除 NSG 中的规则：
 
         Get-Help *-AzureRmNetworkSecurityRuleConfig
-        
+
 ## 注意事项
 
 排查连接问题时，请注意以下几点：

@@ -39,36 +39,36 @@ wacn.date: 12/19/2016
 在本部分，用户需创建一个 Node.js 控制台应用，用于响应通过后端调用的方法。
 
 1. 新建名为 **simulateddevice** 的空文件夹。在 **simulateddevice** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **simulateddevice** 文件夹的命令提示符处，运行下述命令以安装 **azure-iot-device** 和 **azure-iot-device-mqtt** 包：
-   
+
     ```
         npm install azure-iot-device azure-iot-device-mqtt --save
     ```
 3. 在 **simulateddevice** 文件夹中，利用文本编辑器创建新的 **SimulatedDevice.js** 文件。
 4. 在 **SimulatedDevice.js** 文件的开头添加以下 `require` 语句：
-   
+
     ```
     'use strict';
-   
+
     var Mqtt = require('azure-iot-device-mqtt').Mqtt;
     var DeviceClient = require('azure-iot-device').Client;
     ```
 5. 添加 **connectionString** 变量，并用其创建设备客户端。将 **{device connection string}** 替换为在“创建设备标识”部分创建的连接字符串：
-   
+
     ```
     var connectionString = '{device connection string}';
     var client = DeviceClient.fromConnectionString(connectionString, Mqtt);
     ```
 6. 添加以下函数，实现设备上的直接方法：
-   
+
     ```
     function onWriteLine(request, response) {
         console.log(request.payload);
-   
+
         response.send(200, 'Input was written to log.', function(err) {
             if(err) {
                 console.error('An error ocurred when sending a method response:\n' + err.toString());
@@ -79,7 +79,7 @@ wacn.date: 12/19/2016
     }
     ```
 7. 打开与 IoT 中心的连接并初始化方法侦听器：
-   
+
     ```
     client.open(function(err) {
         if (err) {
@@ -101,24 +101,24 @@ wacn.date: 12/19/2016
 在此部分，用户需创建一个 .NET 控制台应用，以便调用模拟设备上的方法，然后显示响应。
 
 1. 在 Visual Studio 中，使用“控制台应用程序”项目模板将 Visual C# Windows 经典桌面项目添加到当前解决方案。确保 .NET Framework 版本为 4.5.1 或更高。将项目命名为 **CallMethodOnDevice**。
-   
+
     ![新的 Visual C# Windows 经典桌面项目][10]  
 
 2. 在“解决方案资源管理器”中，右键单击“CallMethodOnDevice”项目，然后单击“管理 NuGet 包”。
 3. 在“Nuget 包管理器”窗口中，选择“浏览”，搜索 **microsoft.azure.devices**，选择“安装”以安装 **Microsoft.Azure.Devices** 包，然后接受使用条款。此过程将下载、安装 [Microsoft Azure IoT Service SDK][lnk-nuget-service-sdk]（Microsoft Azure IoT 服务 SDK）NuGet 包及其依赖项并添加对它的引用。
-   
+
     ![“NuGet 包管理器”窗口][11]  
 
 4. 在 **Program.cs** 文件顶部添加以下 `using` 语句：
-   
+
         using System.Threading.Tasks;
         using Microsoft.Azure.Devices;
 5. 将以下字段添加到 **Program** 类。将占位符值替换为在上一部分中为 IoT 中心创建的连接字符串。
-   
+
         static ServiceClient serviceClient;
         static string connectionString = "{iot hub connection string}";
 6. 将以下方法添加到 **Program** 类：
-   
+
         private static async Task InvokeMethod()
         {
             var methodInvocation = new CloudToDeviceMethod("writeLine") { ResponseTimeout = TimeSpan.FromSeconds(30) };
@@ -129,10 +129,10 @@ wacn.date: 12/19/2016
             Console.WriteLine("Response status: {0}, payload:", response.Status);
             Console.WriteLine(response.GetPayloadAsJson());
         }
-   
+
     此方法在 `myDeviceId` 设备上调用名为 `writeLine` 的直接方法，然后将设备提供的响应写入到控制台。请注意如何才能为要响应的设备指定一个超时值。
 7. 最后，在 **Main** 方法中添加以下行：
-   
+
         serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
         InvokeMethod().Wait();
         Console.WriteLine("Press Enter to exit.");
@@ -142,19 +142,19 @@ wacn.date: 12/19/2016
 现在，你已准备就绪，可以运行应用程序了。
 
 1. 在 **simulateddevice** 文件夹的命令提示符处运行以下命令，开始侦听向从 IoT 中心发出的方法调用：
-   
+
     ```
     node SimulatedDevice.js
     ```
-   
+
     ![][7]  
 
 2. 设备已连接，正在等待方法调用，此时可运行 .NET **CallMethodOnDevice** 应用，调用模拟设备上的方法。此时会看到写入控制台的设备响应。
-   
+
     ![][8]  
 
 3. 此时会看到设备通过输出消息对方法进行响应，而调用该方法的应用程序则会显示来自设备的响应：
-   
+
     ![][9]  
 
 ## 后续步骤

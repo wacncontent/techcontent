@@ -48,7 +48,7 @@ ms.author: chackdan
 “对当前群集版本 [版本号] 的支持将在 [日期] 结束”。群集运行最新版本后，该警告将会消失。
 
 #### 群集升级工作流。
- 
+
 看到群集运行状况警告后，需要执行以下操作：
 
 1. 从对群集配置文件中列为节点的所有计算机拥有管理员访问权限的任何计算机连接到该群集。运行此脚本的计算机不必要是群集的一部分
@@ -80,7 +80,7 @@ ms.author: chackdan
         ###### Here is a filled out example
 
         Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion 5.3.301.9590 -Monitored -FailureAction Rollback
-    
+
     可以在 Service Fabric Explorer 中或者通过运行以下 PowerShell 命令来监视升级进度
 
     Get-ServiceFabricClusterUpgrade
@@ -104,7 +104,7 @@ ms.author: chackdan
     Start-ServiceFabricClusterUpgrade [-Config] [-ClusterConfigVersion] -FailureAction Rollback -Monitored 
 
 #### 群集升级工作流。
- 
+
 1. 通过 [Create service fabric cluster for windows server](./service-fabric-cluster-creation-for-windows-server.md)（创建适用于 Windows Server 的 Service Fabric 群集）下载最新的包版本
 
 1. 从对群集配置文件中列为节点的所有计算机拥有管理员访问权限的任何计算机连接到该群集。运行此脚本的计算机不必要是群集的一部分
@@ -142,7 +142,7 @@ ms.author: chackdan
 
         ###### Here is a filled out example
         Start-ServiceFabricClusterUpgrade -Code -CodePackageVersion 5.3.301.9590 -Monitored -FailureAction Rollback
-        
+
 可以在 Service Fabric Explorer 中或者通过运行以下 PowerShell 命令来监视升级进度
 
         Get-ServiceFabricClusterUpgrade

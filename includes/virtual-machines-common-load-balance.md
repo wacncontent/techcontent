@@ -25,10 +25,10 @@
 
 以下是基本过程：
 
-1.	Internet 客户端查询与 Web 服务相对应的域名。
-2.	DNS 将该名称查询请求转发到流量管理器。
-3.	流量管理器在轮循机制列表中选择下一个云服务并将 DNS 名称发送回来。Internet 客户端的 DNS 服务器将该名称解析为 IP 地址，然后将其发送到 Internet 客户端。
-4.	Internet 客户端通过流量管理器与所选的云服务相连接。
+1. Internet 客户端查询与 Web 服务相对应的域名。
+2. DNS 将该名称查询请求转发到流量管理器。
+3. 流量管理器在轮循机制列表中选择下一个云服务并将 DNS 名称发送回来。Internet 客户端的 DNS 服务器将该名称解析为 IP 地址，然后将其发送到 Internet 客户端。
+4. Internet 客户端通过流量管理器与所选的云服务相连接。
 
 有关详细信息，请参阅[流量管理器](../articles/traffic-manager/traffic-manager-overview.md)。
 

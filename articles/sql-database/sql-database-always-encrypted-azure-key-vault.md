@@ -79,14 +79,14 @@ Always Encrypted 是 Azure SQL 数据库和 SQL Server 中一项新的数据加�
     $resourceGroupName = '<resource group name>'
     $location = '<datacenter location>'
     $vaultName = 'AeKeyVault'
-    
+
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
     $subscriptionId = (Get-AzureRmSubscription -SubscriptionName $subscriptionName).SubscriptionId
     Set-AzureRmContext -SubscriptionId $subscriptionId
 
     New-AzureRmResourceGroup –Name $resourceGroupName –Location $location
     New-AzureRmKeyVault -VaultName $vaultName -ResourceGroupName $resourceGroupName -Location $location
-    
+
     Set-AzureRmKeyVaultAccessPolicy -VaultName $vaultName -ResourceGroupName $resourceGroupName -PermissionsToKeys create,get,wrapKey,unwrapKey,sign,verify,list -UserPrincipalName $userPrincipalName
     Set-AzureRmKeyVaultAccessPolicy  -VaultName $vaultName  -ResourceGroupName $resourceGroupName -ServicePrincipalName $clientId -PermissionsToKeys get,wrapKey,unwrapKey,sign,verify,list
 
@@ -188,7 +188,7 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 3. 通过单击“工具”>“NuGet 包管理器”>“包管理器控制台”来安装以下 NuGet 包。
 
 在包管理器控制台中运行以下 2 行代码：
-    
+
     Install-Package Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider
     Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
 
@@ -260,7 +260,7 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
     using System.Data.SqlClient;
     using Microsoft.IdentityModel.Clients.ActiveDirectory;
     using Microsoft.SqlServer.Management.AlwaysEncrypted.AzureKeyVaultProvider;
-    
+
     namespace AlwaysEncryptedConsoleAKVApp
     {
     class Program
@@ -589,7 +589,7 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 
 可以看到，已加密的列不包含任何纯文本数据。
 
-   ![新建控制台应用程序](./media/sql-database-always-encrypted-azure-key-vault/ssms-encrypted.png)
+    ![新建控制台应用程序](./media/sql-database-always-encrypted-azure-key-vault/ssms-encrypted.png)
 
 若要使用 SSMS 来访问纯文本数据，可将 **Column Encryption Setting=enabled** 参数添加到连接中。
 

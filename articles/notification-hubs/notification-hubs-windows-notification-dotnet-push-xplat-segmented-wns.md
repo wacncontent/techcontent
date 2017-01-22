@@ -107,7 +107,7 @@ ms.author: wesmc
         }
 
     此类使用本地存储区存储此设备必须接收的新闻类别。请注意，我们没有调用 *RegisterNativeAsync* 方法，而是调用了 *RegisterTemplateAsync*，以使用模板注册来注册类别。
-    
+
     我们还提供模板的名称（“simpleWNSTemplateExample”），因为我们可能要注册多个模板（例如一个用于 toast 通知，一个用于磁贴），需要命名它们以便可以更新或删除它们。
 
     请注意，如果一个设备使用同一标签注册多个模板，针对该标签的传入消息将导致多个通知发送到设备（每个通知对应一个模板）。当同一逻辑消息必须导致多个可视通知时，此行为很有用，例如在 Windows 应用商店应用程序显示徽章和 toast。
@@ -163,7 +163,7 @@ ms.author: wesmc
         //var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
         //var hub = new NotificationHub("your hub name", "your listen connection string");
         //var result = await hub.RegisterNativeAsync(channel.Uri);
-    
+
         var result = await notifications.SubscribeToCategories();
 
     这确保每次应用程序启动时，它从本地存储区检索类别并请求注册这些类别。**InitNotificationsAsync** 方法是在学习[通知中心入门][get-started]教程过程中创建的。

@@ -19,7 +19,7 @@ ms.author: wesmc
 
 # 如何通过 Java 使用通知中心
 [!INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
-        
+
 本主题将向你介绍完全受支持的全新官方 Azure 通知中心 Java SDK 的主要功能。 
 这是一个开源项目，你可以在 [Java SDK] 查看完整的 SDK 代码。
 
@@ -51,30 +51,30 @@ SDK 当前支持：
 ### 通知中心 CRUD
 
 **创建命名空间管理器：**
-    
+
     NamespaceManager namespaceManager = new NamespaceManager("connection string")
 
 **创建通知中心：**
-    
+
     NotificationHubDescription hub = new NotificationHubDescription("hubname");
     hub.setWindowsCredential(new WindowsCredential("sid","key"));
     hub = namespaceManager.createNotificationHub(hub);
-    
+
  或者
 
     hub = new NotificationHub("connection string", "hubname");
 
 **获取通知中心：**
-    
+
     hub = namespaceManager.getNotificationHub("hubname");
 
 **更新通知中心：**
-    
+
     hub.setMpnsCredential(new MpnsCredential("mpnscert", "mpnskey"));
     hub = namespaceManager.updateNotificationHub(hub);
 
 **删除通知中心：**
-    
+
     namespaceManager.deleteNotificationHub("hubname");
 
 ### 注册 CRUD
@@ -113,29 +113,29 @@ SDK 当前支持：
     hub.upsertRegistration(reg);
 
 **更新注册：**
-    
+
     hub.updateRegistration(reg);
 
 **删除注册：**
-    
+
     hub.deleteRegistration(regid);
 
 **查询注册：**
 
 * 	**获取单个注册：**
-    
+
         hub.getRegistration(regid);
-    
+
 * 	**获取中心的所有注册：**
-    
+
         hub.getRegistrations();
-    
+
 * 	**获取具有标记的注册：**
-    
+
         hub.getRegistrationsByTag("myTag");
-    
+
 * 	**按渠道获取注册：**
-    
+
         hub.getRegistrationsByChannel("devicetoken");
 
 所有集合查询都支持 $top 和继续标记。
@@ -305,5 +305,5 @@ CreateOrUpdate、Patch 和 Delete 最终与 Get 一致。你请求的操作会�
 [发送通知到经身份验证的用户]: ../mobile-services/mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users.md
 [发送跨平台通知到经身份验证的用户]: ../mobile-services/mobile-services-javascript-backend-windows-store-dotnet-push-notifications-app-users.md
 [Maven]: http://maven.apache.org/
- 
+
 <!---HONumber=Mooncake_0808_2016-->

@@ -23,7 +23,7 @@ ms.author: rclaus
 一种比较常见的情况是，在 Azure 中的 Linux 虚拟机上使用软件 RAID 将多个附加的数据磁盘显示为单个 RAID 设备。通常，与仅使用单个磁盘相比，使用此方法不但可改进性能，而且还可提高吞吐量。
 
 [!INCLUDE [了解部署模型](../../includes/learn-about-deployment-models-both-include.md)]
- 
+
 ## 附加数据磁盘
 配置 RAID 设备通常需要两个或多个空数据磁盘。本文不详细介绍如何将数据磁盘附加到 Linux 虚拟机。请参阅 Azure 文章[附加磁盘](./virtual-machines-linux-classic-attach-disk.md)，以详细了解如何在 Azure 上为 Linux 虚拟机附加空数据磁盘。
 

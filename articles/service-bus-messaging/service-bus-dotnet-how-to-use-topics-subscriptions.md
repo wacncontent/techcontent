@@ -114,7 +114,7 @@ wacn.date: 01/04/2017
         {
             namespaceManager.CreateTopic("TestTopic");
         }
-        
+
         [CreateTopic](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.createtopic.aspx) 方法存在一些重载，允许用户设置主题的属性，例如，设置要应用于发送到主题的消息的默认生存时间 (TTL) 值。使用 [TopicDescription](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.topicdescription.aspx) 类应用这些设置。以下示例演示如何创建名为 **TestTopic**、最大大小为 5 GB、默认消息 TTL 为 1 分钟的主题。
 
         // Configure Topic Settings.

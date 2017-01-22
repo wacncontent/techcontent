@@ -5,5 +5,5 @@
  ![Azure Web 应用][0]
 
 [0]: ./media/create-azure-account/freetrialonwindowsazurehomepage.png
- 
+
 <!--HONumber=41-->

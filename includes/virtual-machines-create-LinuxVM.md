@@ -11,7 +11,7 @@
         azure vm image list | grep "Linux"
 
     在 Windows 的命令行窗口，使用“find”代替“grep”。
-   
+
 4. 使用 `azure vm create`通过上一列表中的 Linux 映像创建 VM。此步骤将创建云服务和存储帐户。你还可通过 `-c` 选项将此 VM 连接到现有云服务。使用 `-e` 选项创建 SSH 终结点以登录到 Linux 虚拟机。以下示例使用位于 `China North` 的 `Ubuntu-14_04_3-LTS` 映像创建名为 `myVM` 的 VM，并添加用户名 `ops`：
 
         azure vm create myVM \

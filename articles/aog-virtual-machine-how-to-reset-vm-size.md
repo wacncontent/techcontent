@@ -18,7 +18,7 @@ wacn.date: 12/18/2015
 
 - [常见问题](#faq)
 - [详细步骤](#detail)
- 
+
 ## <a id="faq"></a>常见问题
 
 - 调整虚拟机尺寸计费怎么算的？
@@ -32,12 +32,12 @@ wacn.date: 12/18/2015
 ## <a id="detail"></a>详细步骤
 
 1. 虚拟机-(本例)VNET-BJMOSES-01
- 
+
     ![](./media/aog-virtual-machine-how-to-reset-vm-size/choose-vm.png)
- 
+
 2. 配置-虚拟机大小
 
     ![](./media/aog-virtual-machine-how-to-reset-vm-size/reset-vm-size.png)
 
 **请注意**：在调整虚拟机的尺寸后，虚拟机需要重新启动！
- 
+

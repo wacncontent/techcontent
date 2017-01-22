@@ -84,7 +84,7 @@ V12 不支持 Web 和企业服务定价层。
 ### V12 的门户
 Azure 有三个门户，每个门户针对 SQL 数据库 V12 提供不同的功能。
 
-- [http://portal.azure.cn/](https://portal.azure.cn)<br/>此 Azure 门户预览是新门户，仍处于预览状态。此门户尚未完全正式发布 (GA)。此门户：
+- [https://portal.azure.cn](https://portal.azure.cn)<br/>此 Azure 门户预览是新门户，仍处于预览状态。此门户尚未完全正式发布 (GA)。此门户：
  - 可以管理 V12 服务器和数据库。
  - 可以将 V11 数据库升级到 V12。
 

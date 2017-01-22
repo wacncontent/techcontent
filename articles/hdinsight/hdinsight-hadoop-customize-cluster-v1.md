@@ -57,7 +57,7 @@ Name | 脚本
 2. 在向导的“脚本操作”页上，单击“添加脚本操作”，以提供有关脚本操作的详细信息，如下所示：
 
     ![使用脚本操作自定义群集](./media/hdinsight-hadoop-customize-cluster-v1/HDI.CustomProvision.Page6.png "使用脚本操作自定义群集")
-    
+
     <table border='1'>
     <tr><th>属性</th><th>值</th></tr>
     <tr><td>名称</td>
@@ -73,7 +73,7 @@ Name | 脚本
     你可以添加多个脚本操作，以在群集上安装多个组件。
 
 3. 单击复选标记以开始设置群集。
-  
+
 <a name="call-scripts-using-azure-powershell" id="call_scripts_using_azure_powershell"></a>
 **从 Azure PowerShell cmdlet**
 
@@ -152,5 +152,5 @@ HDInsight 服务提供多种方式来使用自定义组件。不论在群集上�
 [hdinsight-provision-cluster]: ./hdinsight-provision-clusters-v1.md
 [powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 [img-hdi-cluster-states]: ./media/hdinsight-hadoop-customize-cluster-v1/HDI-Cluster-state.png "群集设置过程中的阶段"
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

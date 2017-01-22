@@ -76,11 +76,11 @@ Power BI Embedded 服务使用**密钥**和**应用令牌**进行身份验证和
 
     ![](./media/powerbi-embedded-get-started-sample/power-bi-embedded-token-4.png)  
 
-5.	使用 API 访问密钥验证令牌。
+5. 使用 API 访问密钥验证令牌。
 
     ![](./media/powerbi-embedded-get-started-sample/power-bi-embedded-token-5.png)  
 
-6.	Power BI Embedded 向用户发送报表。
+6. Power BI Embedded 向用户发送报表。
 
     ![](./media/powerbi-embedded-get-started-sample/power-bi-embedded-token-6.png)  
 

@@ -31,8 +31,8 @@ Azure 队列存储是一项可存储大量消息的服务，用户可以通过�
 **注意：**在 ASP.NET 5 中执行调用 Azure 存储的一些 API 是异步的。有关详细信息，请参阅[使用 Async 和 Await 进行异步编程](http://msdn.microsoft.com/zh-cn/library/hh191443.aspx)。下面的代码假定正在使用异步编程方法。
 
 - 有关以编程方式操作队列的详细信息，请参阅[通过 .NET 开始使用 Azure 队列存储](./storage-dotnet-how-to-use-queues.md)。
-- 有关 Azure 存储空间的常规信息，请参阅[存储空间文档](./index.md/)。
-- 有关 Azure 云服务的常规信息，请参阅[云服务文档](../cloud-services/index.md/)。
+- 有关 Azure 存储空间的常规信息，请参阅[存储空间文档](./index.md)。
+- 有关 Azure 云服务的常规信息，请参阅[云服务文档](../cloud-services/index.md)。
 - 有关对 ASP.NET 应用程序进行编程的详细信息，请参阅 [ASP.NET](http://www.asp.net)。
 
 ##使用代码访问队列
@@ -94,7 +94,7 @@ Azure 队列存储是一项可存储大量消息的服务，用户可以通过�
 
 你的代码分两步从队列中删除消息（取消对消息的排队）。
 1. 调用 **GetMessageAsync**，以获得队列中的下一条消息。从 **GetMessageAsync** 返回的消息将变为对从此队列读取消息的任何其他代码不可见。默认情况下，此消息将持续 30 秒不可见。
-2.	若要完成从队列中删除消息的操作，请调用 **DeleteMessageAsync**。
+2. 若要完成从队列中删除消息的操作，请调用 **DeleteMessageAsync**。
 
 此删除消息的两步过程可确保，如果你的代码因硬件或软件故障而无法处理消息，则你的代码的其他实例可以获取相同消息并重试。以下代码将在处理消息后立即调用 **DeleteMessageAsync**。
 

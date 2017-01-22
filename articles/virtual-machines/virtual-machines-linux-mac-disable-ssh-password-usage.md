@@ -59,13 +59,13 @@ SSHD 是在 Linux VM 上运行的 SSH 服务器。SSH 是从 MacBook 或 Linux �
 
     # Change PasswordAuthentication to this:
     PasswordAuthentication no
-    
+
     # Change PubkeyAuthentication to this:
     PubkeyAuthentication yes
-    
+
     # Change PermitRootLogin to this:
     PermitRootLogin no
-    
+
     # Change ChallengeResponseAuthentication to this:
     ChallengeResponseAuthentication no
 
@@ -97,7 +97,7 @@ SSHD 是在 Linux VM 上运行的 SSH 服务器。SSH 是从 MacBook 或 Linux �
     # Change PubkeyAuthentication to this:
     PubkeyAuthentication yes
 #### 禁用 Root 登录
-    
+
     # Change PermitRootLogin to this:
     PermitRootLogin no
 

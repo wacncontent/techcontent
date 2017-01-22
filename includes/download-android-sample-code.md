@@ -11,5 +11,5 @@
      ![](./media/mobile-services-android-get-started/android-studio-import-project.png)
 
     现在，你可以使用该项目。
- 
+
 <!---HONumber=71-->

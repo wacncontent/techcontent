@@ -91,7 +91,7 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 
     $vm = Get-AzureVM -ServiceName "MyVM" -Name "MyVM"
     New-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name "MyComplexVariable" -Encrypted $false -Value $vm
-    
+
     $vmValue = (Get-AzureAutomationVariable -AutomationAccountName "MyAutomationAccount" -Name "MyComplexVariable").Value
     $vmName = $vmValue.Name
     $vmIpAddress = $vmValue.IpAddress
@@ -109,9 +109,9 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
     $NumberOfIterations = Get-AutomationVariable -Name 'NumberOfIterations'
     $NumberOfRunnings = Get-AutomationVariable -Name 'NumberOfRunnings'
     $SampleMessage = Get-AutomationVariable -Name 'SampleMessage'
-    
+
     Write-Output "Runbook has been run $NumberOfRunnings times."
-    
+
     for ($i = 1; $i -le $NumberOfIterations; $i++) {
        Write-Output "$i`: $SampleMessage"
     }

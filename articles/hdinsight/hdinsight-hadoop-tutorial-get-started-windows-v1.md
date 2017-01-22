@@ -30,7 +30,7 @@ ms.author: nitinme
 
 假设你拥有大型非结构化数据集，并想对其运行 Hive 查询以提取一些有意义的信息。这正是我们在本教程中将要实现的目标。下面说明了如何实现此目标：
 
-   ![Hadoop 教程：创建帐户；预配 Hadoop 群集；提交 Hive 查询；在 Excel 中分析数据。][image-hdi-getstarted-flow]
+    ![Hadoop 教程：创建帐户；预配 Hadoop 群集；提交 Hive 查询；在 Excel 中分析数据。][image-hdi-getstarted-flow]
 
 Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HDInsight 开发者预览版*），与 Azure HDInsight 的通用版本结合使用。Emulator 针对开发人员方案，仅支持单节点部署。有关如何使用 HDInsight Emulator 的信息，请参阅 [HDInsight Emulator 入门][hdinsight-emulator]。
 
@@ -243,5 +243,5 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 
 [image-hdi-gettingstarted-powerquery-importdata]: ./media/hdinsight-hadoop-tutorial-get-started-windows-v1/HDI.GettingStarted.PowerQuery.ImportData.png
 [image-hdi-gettingstarted-powerquery-importdata2]: ./media/hdinsight-hadoop-tutorial-get-started-windows-v1/HDI.GettingStarted.PowerQuery.ImportData2.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

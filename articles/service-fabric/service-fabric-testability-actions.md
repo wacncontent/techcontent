@@ -73,7 +73,7 @@ Restart-ServiceFabricNode -NodeName Node1 -CompletionMode DoNotVerify
 
     $connection = "localhost:19000"
     $nodeName = "Node1"
-    
+
     Connect-ServiceFabricCluster $connection
     Restart-ServiceFabricNode -NodeName $nodeName -CompletionMode DoNotVerify
 
@@ -116,7 +116,7 @@ Restart-ServiceFabricNode -NodeName Node1 -CompletionMode DoNotVerify
     using System.Fabric;
     using System.Threading;
     using System.Numerics;
-    
+
     class Test
     {
         public static int Main(string[] args)
@@ -125,13 +125,13 @@ Restart-ServiceFabricNode -NodeName Node1 -CompletionMode DoNotVerify
             Uri serviceName = new Uri("fabric:/samples/PersistentToDoListApp/PersistentToDoListService");
             string nodeName = "N0040";
             BigInteger nodeInstanceId = 130743013389060139;
-    
+
             Console.WriteLine("Starting RestartNode test");
             try
             {
                 //Restart the node by using ReplicaSelector
                 RestartNodeAsync(clusterConnection, serviceName).Wait();
-    
+
                 //Another way to restart node is by using nodeName and nodeInstanceId
                 RestartNodeAsync(clusterConnection, nodeName, nodeInstanceId).Wait();
             }
@@ -147,21 +147,21 @@ Restart-ServiceFabricNode -NodeName Node1 -CompletionMode DoNotVerify
                 }
                 return -1;
             }
-    
+
             Console.WriteLine("RestartNode completed.");
             return 0;
         }
-    
+
         static async Task RestartNodeAsync(string clusterConnection, Uri serviceName)
         {
             PartitionSelector randomPartitionSelector = PartitionSelector.RandomOf(serviceName);
             ReplicaSelector primaryofReplicaSelector = ReplicaSelector.PrimaryOf(randomPartitionSelector);
-    
+
             // Create FabricClient with connection and security information here
             FabricClient fabricclient = new FabricClient(clusterConnection);
             await fabricclient.FaultManager.RestartNodeAsync(primaryofReplicaSelector, CompletionMode.Verify);
         }
-    
+
         static async Task RestartNodeAsync(string clusterConnection, string nodeName, BigInteger nodeInstanceId)
         {
             // Create FabricClient with connection and security information here
@@ -181,16 +181,16 @@ PartitionSelector 是在可测试性中运用的一个帮助程序，用于选�
     Guid partitionIdGuid = new Guid("8fb7ebcc-56ee-4862-9cc0-7c6421e68829");
     string partitionName = "Partition1";
     Int64 partitionKeyUniformInt64 = 1;
-    
+
     // Select a random partition
     PartitionSelector randomPartitionSelector = PartitionSelector.RandomOf(serviceName);
-    
+
     // Select a partition based on ID
     PartitionSelector partitionSelectorById = PartitionSelector.PartitionIdOf(serviceName, partitionIdGuid);
-    
+
     // Select a partition based on name
     PartitionSelector namedPartitionSelector = PartitionSelector.PartitionKeyOf(serviceName, partitionName);
-    
+
     // Select a partition based on partition key
     PartitionSelector uniformIntPartitionSelector = PartitionSelector.PartitionKeyOf(serviceName, partitionKeyUniformInt64);
 
@@ -202,16 +202,16 @@ ReplicaSelector 是在可测试性中运用的一个帮助程序，用于帮助�
     Guid partitionIdGuid = new Guid("8fb7ebcc-56ee-4862-9cc0-7c6421e68829");
     PartitionSelector partitionSelector = PartitionSelector.PartitionIdOf(serviceName, partitionIdGuid);
     long replicaId = 130559876481875498;
-    
+
     // Select a random replica
     ReplicaSelector randomReplicaSelector = ReplicaSelector.RandomOf(partitionSelector);
-    
+
     // Select the primary replica
     ReplicaSelector primaryReplicaSelector = ReplicaSelector.PrimaryOf(partitionSelector);
-    
+
     // Select the replica by ID
     ReplicaSelector replicaByIdSelector = ReplicaSelector.ReplicaIdOf(partitionSelector, replicaId);
-    
+
     // Select a random secondary replica
     ReplicaSelector secondaryReplicaSelector = ReplicaSelector.RandomSecondaryOf(partitionSelector);
 
@@ -219,7 +219,7 @@ ReplicaSelector 是在可测试性中运用的一个帮助程序，用于帮助�
 
 - [可测试性方案](./service-fabric-testability-scenarios.md)
 - 如何测试你的服务
-   - [在服务工作负荷期间模拟故障](./service-fabric-testability-workload-tests.md)
-   - [服务到服务通信失败](./service-fabric-testability-scenarios-service-communication.md)
- 
+    - [在服务工作负荷期间模拟故障](./service-fabric-testability-workload-tests.md)
+    - [服务到服务通信失败](./service-fabric-testability-scenarios-service-communication.md)
+
 <!---HONumber=Mooncake_1121_2016-->

@@ -106,7 +106,7 @@ Name | 脚本
     $CONFIGACTIONMODULE = "C:\apps\dist\HDInsightUtilities.psm1";
     $webclient = New-Object System.Net.WebClient;
     $webclient.DownloadFile($CONFIGACTIONURI, $CONFIGACTIONMODULE);
-    
+
     # (TIP) Import config action helper method module to make writing config action easy.
     if (Test-Path ($CONFIGACTIONMODULE))
     { 
@@ -196,7 +196,7 @@ Name | 脚本
 要将多个参数传递给 Add-AzureHDInsightScriptAction cmdlet，需要将字符串值的格式设置为包含脚本的所有参数。例如：
 
     "-CertifcateUri wasbs:///abc.pfx -CertificatePassword 123456 -InstallFolderName MyFolder"
- 
+
 或
 
     $parameters = '-Parameters "{0};{1};{2}"' -f $CertificateName,$certUriWithSasToken,$CertificatePassword

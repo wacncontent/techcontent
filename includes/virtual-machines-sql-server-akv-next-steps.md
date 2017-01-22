@@ -13,7 +13,7 @@
 
 ### 透明数据加密 (TDE)
 1. 创建数据库引擎将用于 TDE 的 SQL Server 登录名，然后向其添加凭据。
-    
+
         USE master;
         -- Create a SQL Server login associated with the asymmetric key 
         -- for the Database engine to use when it loads a database 
@@ -21,23 +21,23 @@
         CREATE LOGIN TDE_Login 
         FROM ASYMMETRIC KEY CONTOSO_KEY;
         GO
-        
+
         -- Alter the TDE Login to add the credential for use by the 
         -- Database Engine to access the key vault
         ALTER LOGIN TDE_Login 
         ADD CREDENTIAL Azure_EKM_TDE_cred;
         GO
-    
+
 2. 创建将用于 TDE 的数据库加密密钥。
-    
+
         USE ContosoDatabase;
         GO
-        
+
         CREATE DATABASE ENCRYPTION KEY 
         WITH ALGORITHM = AES_128 
         ENCRYPTION BY SERVER ASYMMETRIC KEY CONTOSO_KEY;
         GO
-        
+
         -- Alter the database to enable transparent data encryption.
         ALTER DATABASE ContosoDatabase 
         SET ENCRYPTION ON;
@@ -45,22 +45,22 @@
 
 ### 加密备份
 1. 创建数据库引擎将用于加密备份的 SQL Server 登录名，然后向其添加凭据。
-    
+
         USE master;
         -- Create a SQL Server login associated with the asymmetric key 
         -- for the Database engine to use when it is encrypting the backup.
         CREATE LOGIN Backup_Login 
         FROM ASYMMETRIC KEY CONTOSO_KEY;
         GO 
-        
+
         -- Alter the Encrypted Backup Login to add the credential for use by 
         -- the Database Engine to access the key vault
         ALTER LOGIN Backup_Login 
         ADD CREDENTIAL Azure_EKM_Backup_cred ;
         GO
-    
+
 2. 备份数据库，同时使用密钥保管库中存储的非对称密钥指定加密。
-    
+
         USE master;
         BACKUP DATABASE [DATABASE_TO_BACKUP]
         TO DISK = N'[PATH TO BACKUP FILE]' 
@@ -74,19 +74,19 @@
     CREATE SYMMETRIC KEY DATA_ENCRYPTION_KEY
     WITH ALGORITHM=AES_256
     ENCRYPTION BY ASYMMETRIC KEY CONTOSO_KEY;
-    
+
     DECLARE @DATA VARBINARY(MAX);
-    
+
     --Open the symmetric key for use in this session
     OPEN SYMMETRIC KEY DATA_ENCRYPTION_KEY 
     DECRYPTION BY ASYMMETRIC KEY CONTOSO_KEY;
-    
+
     --Encrypt syntax
     SELECT @DATA = ENCRYPTBYKEY(KEY_GUID('DATA_ENCRYPTION_KEY'), CONVERT(VARBINARY,'Plain text data to encrypt'));
-    
+
     -- Decrypt syntax
     SELECT CONVERT(VARCHAR, DECRYPTBYKEY(@DATA));
-    
+
     --Close the symmetric key
     CLOSE SYMMETRIC KEY DATA_ENCRYPTION_KEY;
 

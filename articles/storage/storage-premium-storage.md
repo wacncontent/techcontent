@@ -381,7 +381,7 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。如果创�
 
 本部分说明如何使用 Azure 门户预览创建高级存储帐户。
 
-1.	登录到 [Azure 门户预览](https://portal.azure.cn)。如果尚未有订阅，请查看[试用](https://www.azure.cn/pricing/1rmb-trial/)优惠产品。
+1. 登录到 [Azure 门户预览](https://portal.azure.cn)。如果尚未有订阅，请查看[试用](https://www.azure.cn/pricing/1rmb-trial/)优惠产品。
 
 2. 在“中心”菜单上，选择“新建”->“数据 + 存储”->“存储帐户”。
 

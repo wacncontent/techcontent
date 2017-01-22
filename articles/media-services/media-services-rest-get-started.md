@@ -33,7 +33,7 @@ ms.author: juliako
 单击图像查看其完整大小。
 
 <a href="./media/media-services-rest-get-started/media-services-overview-object-model.png" target="_blank"><img src="./media/media-services-rest-get-started/media-services-overview-object-model-small.png"></a>
- 
+
 ## 先决条件
 以下是开始使用媒体服务和 REST API 进行开发所要满足的先决条件。
 
@@ -55,7 +55,7 @@ ms.author: juliako
 ## <a id="create_ams"></a>使用门户创建媒体服务帐户
 
 1. 在 [Azure 经典管理门户][]中，依次单击“新建”、“媒体服务”和“快速创建”。
-   
+
     ![媒体服务快速创建](./media/media-services-rest-get-started/wams-QuickCreate.png)
 
 2. 在“名称”中，输入新帐户的名称。媒体服务帐户名称由小写字母或数字构成（不含空格），长度为 3 - 24 个字符。
@@ -71,7 +71,7 @@ ms.author: juliako
     可以在窗口底部的消息区域中监视过程的状态。
 
     成功创建帐户后，状态将更改为“活动”。
-    
+
     在页面底部，将出现“管理密钥”按钮。当你单击此按钮时，将会显示一个对话框，其中包含媒体服务帐户名以及主密钥和辅助密钥。你需要有帐户名和主密钥信息，才能以编程方式访问媒体服务帐户。
 
     ![“媒体服务”页](./media/media-services-rest-get-started/wams-mediaservices-page.png)
@@ -129,14 +129,14 @@ ms.author: juliako
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Thu, 15 Jan 2015 08:07:20 GMT
     Content-Length: 670
-    
+
     {  
        "token_type":"http://schemas.xmlsoap.org/ws/2009/11/swt-token-profile-1.0",
        "access_token":"http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=z7f09258-2233-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421330840&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=uf69n82KlqZmkJDNxhJkOxpyIpA2HDyeGUTtSnq1vlE%3d",
        "expires_in":"21600",
        "scope":"urn:WindowsAzureMediaServices"
     }
-    
+
 >[!NOTE]建议在外部存储中缓存“access_token”和“expires_in”值。以后可以从存储中检索令牌数据，并在媒体服务 REST API 调用中重新使用。这对于令牌可以在多个进程或多台计算机之间安全共享的方案尤其有用。
 
 确保监视访问令牌的“expires_in”值，并在必要时使用新令牌更新你的 REST API 调用。
@@ -153,7 +153,7 @@ ms.author: juliako
 以下示例演示了对上海 DC 媒体服务 URI 发出的 HTTP 请求 (https://wamsshaclus001rest-hs.chinacloudapp.cn/API/)。 
 
 **HTTP 请求**：
-            
+
     GET https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ HTTP/1.1
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=z7f09258-2233-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421500579&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=ElVWXOnMVggFQl%2ft9vhdcv1qH1n%2fE8l3hRef4zPmrzg%3d
     x-ms-version: 2.11
@@ -161,7 +161,7 @@ ms.author: juliako
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
 **HTTP 响应**：
-    
+
     HTTP/1.1 200 OK
     Cache-Control: no-cache
     Content-Length: 1250
@@ -174,9 +174,9 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Sat, 17 Jan 2015 07:44:52 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata","value":[{"name":"AccessPolicies","url":"AccessPolicies"},{"name":"Locators","url":"Locators"},{"name":"ContentKeys","url":"ContentKeys"},{"name":"ContentKeyAuthorizationPolicyOptions","url":"ContentKeyAuthorizationPolicyOptions"},{"name":"ContentKeyAuthorizationPolicies","url":"ContentKeyAuthorizationPolicies"},{"name":"Files","url":"Files"},{"name":"Assets","url":"Assets"},{"name":"AssetDeliveryPolicies","url":"AssetDeliveryPolicies"},{"name":"IngestManifestFiles","url":"IngestManifestFiles"},{"name":"IngestManifestAssets","url":"IngestManifestAssets"},{"name":"IngestManifests","url":"IngestManifests"},{"name":"StorageAccounts","url":"StorageAccounts"},{"name":"Tasks","url":"Tasks"},{"name":"NotificationEndPoints","url":"NotificationEndPoints"},{"name":"Jobs","url":"Jobs"},{"name":"TaskTemplates","url":"TaskTemplates"},{"name":"JobTemplates","url":"JobTemplates"},{"name":"MediaProcessors","url":"MediaProcessors"},{"name":"EncodingReservedUnitTypes","url":"EncodingReservedUnitTypes"},{"name":"Operations","url":"Operations"},{"name":"StreamingEndpoints","url":"StreamingEndpoints"},{"name":"Channels","url":"Channels"},{"name":"Programs","url":"Programs"}]}
-     
+
 >[!NOTE] 从现在起，本教程使用新 URI。
 
 ## <a id="upload"></a>使用 REST API 创建新资产并上传视频文件
@@ -210,13 +210,13 @@ ms.author: juliako
     x-ms-client-request-id: c59de965-bc89-4295-9a57-75d897e5221e
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 45
-    
+
     {"Name":"BigBuckBunny.mp4", "Options":"0"}
-    
+
 **HTTP 响应**
 
 如果成功，将返回以下响应：
-    
+
     HTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 452
@@ -231,7 +231,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Sun, 18 Jan 2015 22:06:40 GMT
-        
+
     {  
        "odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#Assets/@Element",
        "Id":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
@@ -244,7 +244,7 @@ ms.author: juliako
        "Uri":"https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
        "StorageAccountName":"storagetestaccount001"
     }
-    
+
 ### 创建 AssetFile
 
 [AssetFile](https://docs.microsoft.com/zh-cn/rest/api/media/operations/assetfile) 实体表示 blob 容器中存储的视频或音频文件。一个资产文件始终与一个资产关联，而一个资产则可能包含一个或多个 AssetFiles。如果资产文件对象未与 Blob 容器中的数字文件关联，则媒体服务编码器任务将失败。
@@ -263,7 +263,7 @@ ms.author: juliako
     x-ms-version: 2.11
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 164
-    
+
     {  
        "IsEncrypted":"false",
        "IsPrimary":"false",
@@ -287,7 +287,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 19 Jan 2015 00:34:07 GMT
-    
+
     {  
        "odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#Files/@Element",
        "Id":"nb:cid:UUID:f13a0137-0a62-9d4c-b3b9-ca944b5142c5",
@@ -311,7 +311,7 @@ ms.author: juliako
 将任何文件上传到 blob 存储之前，请设置用于对资产执行写入操作的访问策略权限。为此，请向 AccessPolicy 实体集发送一个 HTTP POST 请求。请在执行创建操作时定义 DurationInMinutes 值，否则会在响应中收到 500 内部服务器错误消息。有关 AccessPolicies 的详细信息，请参阅 [AccessPolicy](https://docs.microsoft.com/zh-cn/rest/api/media/operations/accesspolicy)。
 
 以下示例说明了如何创建 AccessPolicy：
-        
+
 **HTTP 请求**
 
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/AccessPolicies HTTP/1.1
@@ -324,13 +324,13 @@ ms.author: juliako
     x-ms-version: 2.11
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 74
-    
+
     {"Name":"NewUploadPolicy", "DurationInMinutes":"440", "Permissions":"2"} 
 
 **HTTP 响应**
 
     If successful, the following response is returned:
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 312
@@ -372,9 +372,9 @@ SAS URL 采用以下格式：
 有关 SAS 定位符的详细信息，请参阅[此博客](http://southworks.com/blog/2015/05/27/reusing-azure-media-services-locators-to-avoid-facing-the-5-shared-access-policy-limitation/)。
 
 以下示例说明了如何创建 SAS URL 定位符，如请求正文中的 Type 属性定义（“1”表示 SAS 定位符，“2”表示按需来源定位符）。返回的 **Path** 属性包含上传文件时必须使用的 URL。
-    
+
 **HTTP 请求**
-    
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Locators HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 1.0;NetFx
@@ -385,7 +385,7 @@ SAS URL 采用以下格式：
     x-ms-version: 2.11
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 178
-    
+
     {  
        "AccessPolicyId":"nb:pid:UUID:be0ac48d-af7d-4877-9d60-1805d68bffae",
        "AssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
@@ -396,7 +396,7 @@ SAS URL 采用以下格式：
 **HTTP 响应**
 
 如果成功，将返回以下响应：
-        
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 949
@@ -410,7 +410,7 @@ SAS URL 采用以下格式：
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 19 Jan 2015 03:01:29 GMT
-    
+
     {  
        "odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#Locators/@Element",
        "Id":"nb:lid:UUID:af57bdd8-6751-4e84-b403-f3c140444b54",
@@ -426,7 +426,7 @@ SAS URL 采用以下格式：
     }
 
 ### 将文件上传到 Blob 存储容器
-    
+
 设置 AccessPolicy 和定位符后，即可使用 Azure 存储 REST API 将具体的文件上传到 Azure BLOB 存储容器。也可以按页或块 BLOB 来上传。
 
 >[!NOTE] 必须将要上传的文件的文件名添加到在上一节收到的定位符 **Path** 值中。例如，https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . .
@@ -436,7 +436,7 @@ SAS URL 采用以下格式：
 ### 更新 AssetFile 
 
 上传文件后，请更新 FileAsset 大小（和其他）信息。例如：
-    
+
     MERGE https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Files('nb%3Acid%3AUUID%3Af13a0137-0a62-9d4c-b3b9-ca944b5142c5') HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 1.0;NetFx
@@ -446,7 +446,7 @@ SAS URL 采用以下格式：
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=z7f09258-2233-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421662918&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=utmoXXbm9Q7j4tW1yJuMVA3egRiQy5FPygwadkmPeaY%3d
     x-ms-version: 2.11
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
     {  
        "ContentFileSize":"1186540",
        "Id":"nb:cid:UUID:f13a0137-0a62-9d4c-b3b9-ca944b5142c5",
@@ -514,7 +514,7 @@ SAS URL 采用以下格式：
 >[!NOTE] 有关定价详细信息，请参阅 [媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
 
 若要更改串流保留单元数，请执行以下操作：
-    
+
 ### 获取要更新的流式处理终结点
 
 例如，我们获取帐户中的第一个流式处理终结点（最多可以同时有 2 个流式处理终结点处于运行状态。）
@@ -531,14 +531,14 @@ SAS URL 采用以下格式：
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
 **HTTP 响应**
-    
+
 如果成功，将返回以下响应：
-    
+
     HTTP/1.1 200 OK
     . . . 
-    
+
 ### 缩放流式处理终结点
- 
+
 **HTTP 请求**：
 
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/StreamingEndpoints('nb:oid:UUID:cd57670d-cc1c-0f86-16d8-3ad478bf9486')/Scale HTTP/1.1
@@ -550,7 +550,7 @@ SAS URL 采用以下格式：
     x-ms-version: 2.11
     x-ms-client-request-id: 39f96c93-a4b1-43ce-b97e-b2aaa44ee2dd
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
     {"scaleUnits":1}
 
 **HTTP 响应**
@@ -573,9 +573,9 @@ SAS URL 采用以下格式：
 分配所有新的单位大约需要 20 分钟才能完成。若要检查操作状态，请使用 **Operations** 方法并指定操作的 ID。在 **Scale** 请求的响应中会返回该操作 ID。
 
     operation-id: nb:opid:UUID:1853bcbf-b71f-4ed5-a4c7-a581d4f45ae7
- 
+
 **HTTP 请求**：
-    
+
     GET https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Operations('nb:opid:UUID:1853bcbf-b71f-4ed5-a4c7-a581d4f45ae7') HTTP/1.1
     MaxDataServiceVersion: 3.0;NetFx
     Accept: application/json;odata=verbose
@@ -583,9 +583,9 @@ SAS URL 采用以下格式：
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=z7f09258-2233-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421466122&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=TiKGEOTporft4pFGU24sSZRZk5GRAWszFXldl5NXAhY%3d
     x-ms-version: 2.11
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
 **HTTP 响应**
-    
+
     HTTP/1.1 200 OK
     Cache-Control: no-cache
     Content-Length: 515
@@ -598,7 +598,7 @@ SAS URL 采用以下格式：
     DataServiceVersion: 1.0;
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Fri, 16 Jan 2015 22:57:39 GMT
-    
+
     {  
        "d":{  
           "__metadata":{  
@@ -643,7 +643,7 @@ SAS URL 采用以下格式：
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=f7f09258-6753-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421675491&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=9hUudHYnATpi5hN3cvTfgw%2bL4N3tL0fdsRnQnm6ZYIU%3d
     x-ms-version: 2.11
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
 **HTTP 响应**
 
     HTTP/1.1 200 OK
@@ -658,7 +658,7 @@ SAS URL 采用以下格式：
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 19 Jan 2015 07:54:09 GMT
-    
+
     {  
        "odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#MediaProcessors",
        "value":[  
@@ -680,7 +680,7 @@ SAS URL 采用以下格式：
 以下示例说明了如何使用一个任务集来创建和发布一个作业，从而以特定分辨率和质量来编码某个视频。以下文档部分包含媒体编码器标准版处理器支持的所有[任务预设](http://msdn.microsoft.com/zh-cn/library/mt269960)的列表。
 
 **HTTP 请求**
-    
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Jobs HTTP/1.1
     DataServiceVersion: 1.0;NetFx
     MaxDataServiceVersion: 3.0;NetFx
@@ -691,7 +691,7 @@ SAS URL 采用以下格式：
     x-ms-version: 2.11
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 482
-    
+
     {  
        "Name":"NewTestJob",
        "InputMediaAssets":[  
@@ -728,7 +728,7 @@ SAS URL 采用以下格式：
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 19 Jan 2015 08:04:35 GMT
-        
+
     {  
        "d":{  
           "__metadata":{  
@@ -766,7 +766,7 @@ SAS URL 采用以下格式：
                 "type":"Collection(Microsoft.Cloud.Media.Vod.Rest.Data.Models.JobNotificationSubscription)"
              },
              "results":[  
-    
+
              ]
           }
        }
@@ -787,7 +787,7 @@ SAS URL 采用以下格式：
 - 可以使用 assetName 属性来命名 OutputMediaAssets。如果此属性不存在，则 OutputMediaAsset 的名称将为 <outputAsset> 元素的任意内部文本值，并以作业名称值或作业 ID 值（在没有定义名称属性的情况下）为后缀。例如，如果将 assetName 的值设置为“Sample”，则会将 OutputMediaAsset 名称属性设置为“Sample”。但是，如果未设置 assetName 的值，但已将作业名称设置为“NewJob”，则 OutputMediaAsset 名称为“JobOutputAsset(value)\_NewJob”。
 
     以下示例说明了如何设置 assetName 属性：
-    
+
         "<?xml version="1.0" encoding="utf-8"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetName="CustomOutputAssetName">JobOutputAsset(0)</outputAsset></taskBody>"
 
 - 若要启用任务链，必须满足以下条件：
@@ -828,7 +828,7 @@ SAS URL 采用以下格式：
     X-AspNet-Version: 4.0.30319
     X-Powered-By: ASP.NET
     Date: Sun, 13 May 2012 05:16:53 GMT
-    
+
     {"d":{"State":2}}
 
 ### 取消作业
@@ -867,7 +867,7 @@ SAS URL 采用以下格式：
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=z7f09258-2233-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421675491&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=9hUudHYnATpi5hN3cvTfgw%2bL4N3tL0fdsRnQnm6ZYIU%3d
     x-ms-version: 2.11
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
 **HTTP 响应**
 
     HTTP/1.1 200 OK
@@ -882,7 +882,7 @@ SAS URL 采用以下格式：
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 19 Jan 2015 08:28:13 GMT
-        
+
     {  
        "odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#Assets",
        "value":[  
@@ -944,7 +944,7 @@ MPEG DASH 的流 URL 采用以下格式：
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 74
     Expect: 100-continue
-    
+
     {"Name": "DownloadPolicy", "DurationInMinutes" : "300", "Permissions" : 1}
 
 如果成功，将返回描述已创建的 AccessPolicy 实体的 201 成功代码。然后，需要使用 AccessPolicy ID 以及包含需传送文件的资产（如某个输出资产）的资产 ID 来创建定位符实体。
@@ -966,7 +966,7 @@ MPEG DASH 的流 URL 采用以下格式：
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 182
     Expect: 100-continue
-    
+
     {"AccessPolicyId": "nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8", "AssetId" : "nb:cid:UUID:71d2dd33-efdf-ec43-8ea1-136a110bd42c", "StartTime" : "2014-05-17T16:45:53", "Type":1}
 
 如果成功，将返回以下响应：
@@ -983,7 +983,7 @@ MPEG DASH 的流 URL 采用以下格式：
     X-AspNet-Version: 4.0.30319
     X-Powered-By: ASP.NET
     Date: Mon, 14 May 2012 21:41:32 GMT
-        
+
     {  
        "d":{  
           "__metadata":{  
@@ -1025,21 +1025,21 @@ MPEG DASH 的流 URL 采用以下格式：
 有关使用 Azure 存储 blob 的详细信息，请参阅 [Blob 服务 REST API](http://msdn.microsoft.com/zh-cn/library/azure/dd135733.aspx)。
 
 由于之前已经执行了编码作业（编码成自适应 MP4 集），因此可以渐进式下载多个 MP4 文件。例如：
-    
+
     https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_3400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_2250kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1500kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1000kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_56kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
 ### 创建用于流式处理内容的流式处理 URL
@@ -1056,7 +1056,7 @@ MPEG DASH 的流 URL 采用以下格式：
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 182
     Expect: 100-continue
-    
+
     {"AccessPolicyId": "nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8", "AssetId" : "nb:cid:UUID:eb5540a2-116e-4d36-b084-7e9958f7f3c3", "StartTime" : "2014-05-17T16:45:53",, "Type":2}
 
 如果成功，将返回以下响应：
@@ -1073,7 +1073,7 @@ MPEG DASH 的流 URL 采用以下格式：
     X-AspNet-Version: 4.0.30319
     X-Powered-By: ASP.NET
     Date: Mon, 14 May 2012 21:41:39 GMT
-        
+
     {  
        "d":{  
           "__metadata":{  

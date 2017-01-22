@@ -138,7 +138,7 @@ wacn.date: 12/15/2016
 
     Azure Cache Worker Role 功能会在 2016 年 11 月 30 日下线。 
 
-    如果用户想使用 Cache 缓存服务，请使用 [Azure Redis 缓存](./redis-cache/index.md/)。
+    如果用户想使用 Cache 缓存服务，请使用 [Azure Redis 缓存](./redis-cache/index.md)。
 
 5. 然后可以根据需求，选择相应的 ASP.NET 模板。这里选择 Web Forms，如下图：  
 
@@ -840,7 +840,7 @@ Azure 关闭 Role Instance 时，会触发 Stopping 事件，并调用 Role 的 
 
 这个概念非常重要，下面举一个例子供大家参考和理解。  
 
-1.	假设开发一个会员系统，通过 Azure 云服务的 Web Role 部署到 Azure 平台； 
+1. 假设开发一个会员系统，通过 Azure 云服务的 Web Role 部署到 Azure 平台； 
 2. Web Role 通过 CSPKG 和 CSCFG 部署到 Azure 云服务；  
 3. 第一次部署的时间为 2016 年 1 月 1 日，Web Role 的 ASP.NET 项目，一共包含 3 个文件夹；  
 4. 项目部署完毕后，Internet 用户开始使用这个会员系统，用户把头像、照片上传到云端虚拟机的本地磁盘，ASP.NET 项目变为 5 个文件夹。请注意，新增加的 2 个文件夹，并没有包含在 CSPKG 文件里；  
@@ -851,7 +851,7 @@ Azure 关闭 Role Instance 时，会触发 Stopping 事件，并调用 Role 的 
 
 ###<a id="azure-cloud-service-summary"></a>2.14 总结
 
-1.	Azure 云服务是非持久化虚拟机，应用系统运行期间产生的增量文件，请保存到 Azure 存储账号中；  
+1. Azure 云服务是非持久化虚拟机，应用系统运行期间产生的增量文件，请保存到 Azure 存储账号中；  
 2. Azure 云服务，可以同时包含 Web Role 和 Worker Role，或者只包含两者中的一种；  
 3. Web Role 响应前端用户请求；  
 4. Worker Role 在后端做任务处理；  
@@ -878,7 +878,7 @@ Azure 云服务是 Azure 的一个 PAAS 平台，同样支持多种不同的语�
 
 本文简单介绍如何使用 Azure 提供的 Java Eclipse 插件，快速在 Azure 云服务中部署 Java Web 应用。正式使用此功能前，希望用户能了解以下限制，更好的设计云端体系架构：  
 
-1.	目前 Azure 云服务底层的虚拟机是 Windows 2008/2012，如果一些跑在 Linux 上的应用需要迁移到 Azure 云服务，并且依赖于一些 Linux 的系统调用，那么需要进行代码修改；  
+1. 目前 Azure 云服务底层的虚拟机是 Windows 2008/2012，如果一些跑在 Linux 上的应用需要迁移到 Azure 云服务，并且依赖于一些 Linux 的系统调用，那么需要进行代码修改；  
 2. Java 应用在云服务目前只能是 workrole，没有 .Net 中 Web Role 和 work role 的定义和机制，但对于各项诸如队列，存储，数据库等云服务的使用并不受限，可通过开发实现。
 
 首先需安装 JDK，Eclipse，用户应有 Azure 账号，这些基础部分不再赘述。关于 Azure 账号申请，请登录官方网页或者联系 IT 相关管理人员（如果公司已购买 Azure 服务） 
@@ -921,7 +921,7 @@ Azure 云服务是 Azure 的一个 PAAS 平台，同样支持多种不同的语�
 接上文
 
 9. 发布前，需要对订阅做一些设置，因为默认情况下，Azure 的 service end 指向的是国际版 Azure 的站点。如果要将服务发布在 Azure 的中国站点，需要对其进行简单的设置：在 Eclipse 中，打开偏好设置（preference），找到 Azure，在 service endpoint 页面中，选择 ”windowsazure.cn（China)，选择确定：  
-    
+
      ![service end][86]
 
 10. 回到项目，选择 myazuredeploy 并单击右键，选择 Azure，properties,第一项是选择是否配置远程访问，因为云服务底层实际上是 Windows Server，所以本处实际是配置 RDP 访问，可以在 Azure portal 直接配置，本例选择不配置；  
@@ -987,7 +987,7 @@ Azure 云服务是 Azure 的一个 PAAS 平台，同样支持多种不同的语�
 ###<a id="azure-cloud-service-enhanced-content-register-third-party"></a>4.3 注册第三方组件
 
 在做 Web 应用部署的时候，经常会遇到需要额外安装的第三方软件，比如安装 Office 和 FTP Server。而 Azure 云服务无法安装软件： 
- 
+
 ####4.3.1 使用 Startup 注册 COM 组件
 Azure 提供了 role start up 功能，方便我们在云平台注册 COM 组件。
 
@@ -1002,7 +1002,7 @@ Azure Project 会根据 Web 服务器的操作系统的版本来注册不同版�
 4. 将 64 位版本的 LegacyCOM.dll 复制"amd64"文件夹下，将 32 位版本的 dll 复制到"x86"文件夹下。
 
 5. 将这两个 dll 包含在 VS 项目里(include in project)，并且将属性中的"Copy to Output Directory"设置成"Copy always"。
-    
+
     ![Copy Always][100]
 
 6. 在 Web Application 工程下新建文件，文件夹设置成 Register.cmd。
@@ -1045,7 +1045,7 @@ Azure Project 会根据 Web 服务器的操作系统的版本来注册不同版�
     ![Copy Always][103]
 
 12. 在 aspx 页面里，用户在 textbox 输入 name 的值，然后按"Greet me!"，dll 会调用自动返回一串字符串并且显示在页面上。
-    
+
     ![Copy Always][104]
 
 通过 Startup 功能，用户还可以通过系统命令修改系统配置，或者通过 PowerShell 执行更加复杂的操作(比如使用 InstallUtil 注册 Windows Service)。另外和通过远程桌面手动修改系统配置不同，Startup 功能会在系统迁移、故障恢复的时候自动执行，因此可以作为持久化的操作。
@@ -1099,7 +1099,7 @@ Azure Project 会根据 Web 服务器的操作系统的版本来注册不同版�
 6. 修改 ServiceDefinition.csdef，修改 Startup 节点，让 Cloud Service 项目启动的时候，执行changetimezone.cmd 命令。如下图：
 
     ![Copy Always][106]
-    
+
 7. 最后我们在 aspx 页面中，输出当前的系统时间：
 
         Label1.Text = DateTime.Now.ToString();
@@ -1197,7 +1197,7 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 ![Copy Always][118]
 
 上图中，点击 Add，增加新的存储账号信息：
-    
+
 在弹出窗口中，输入以下信息:
 
 ![Copy Always][119]
@@ -1219,7 +1219,7 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 点击上图中的 Upload 就可以上传一个文件或者文件夹。
 
 注意：文件夹默认是递归复制的，也就是把文件夹下的多级目录都上传到 Azure Storage 中。
-    
+
 上传完毕后，点击右侧列表中的文件。右键属性。如下图：
 
 ![Copy Always][121]
@@ -1316,7 +1316,7 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
 
         Get-AzurePublishSettingsFile -Environment AzureChinaCloud
 
-    如果不想运行 Azure PoweShell 的话，请在浏览器中输入地址：[http://go.microsoft.com/fwlink/?LinkID=301776](http://go.microsoft.com/fwlink/?LinkID=301776 "http://go.microsoft.com/fwlink/?LinkID=301776")，在登陆框中，输入你的OrgID和密码。
+    如果不想运行 Azure PoweShell 的话，请在浏览器中输入地址：[http://go.microsoft.com/fwlink/?LinkID=301776 "http://go.microsoft.com/fwlink/?LinkID=301776"](http://go.microsoft.com/fwlink/?LinkID=301776 "http://go.microsoft.com/fwlink/?LinkID=301776")，在登陆框中，输入你的OrgID和密码。
 
 2. 将 publishsettings 下载到本地磁盘，然后执行上传 publishsettings 命令；
 
@@ -1366,7 +1366,7 @@ BlobBrowser 是 GUI 图形界面的工具，背后其实是利用 AzCopy 命令�
     创建第 3 台虚拟机(Nginx03，内网 IP 是 10.0.0.6)的命令如下：
 
             New-AzureVMConfig -Name 'Nginx03' -InstanceSize 'Large' -ImageName $image.ImageName  -AvailabilitySetName 'NginxAvbSet' ` | Add-AzureProvisioningConfig -Linux -LinuxUser 'adminuser' -Password 'MyVM@6789' -TimeZone 'China Standard Time' | Set-AzureSubnet -SubnetNames 'Nginx-subnet' | Set-AzureStaticVNetIP -IPAddress '10.0.0.6' | New-AzureVM -ServiceName 'MyNginx' -VNetName 'MyVNet' 
- 
+
 8. 以上介绍的是创建 Linux 虚拟机，接下来介绍一下如何使用 PowerShell，创建 Windows 虚拟机。从上面的步骤 6开始，通过模糊查询，查询到 Windows Server 2012虚拟机；
 
         $imageList = Get-AzureVMImage `
@@ -1452,7 +1452,7 @@ Web Role 已经加入了 Web-Subnet 子网。
 2. 在 Default.aspx 里添加一个如下内容：
 
         <asp:TextBox ID="txbInput" runat="server"></asp:TextBox>
-       
+
         <asp:Button ID="btnOK" runat="server" Text="确认" onclick="btnOK_Click" />
 
 3. 在 Default.aspx.cs 添加如下代码：

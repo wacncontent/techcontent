@@ -30,11 +30,11 @@ ms.author: marsma
 
 - [安装和配置 Azure PowerShell](../powershell-install-configure.md)
 - 运行可连接到订阅的 **Login-AzureRmAccount** cmdlet（Azure资源管理器模块随附 Azure 批处理 cmdlet）：
-  
+
     `Login-AzureRmAccount -EnvironmentName AzureChinaCloud`  
 
 - **注册批处理提供程序命名空间**。此操作**每个订阅仅需执行一次**。
-  
+
     `Register-AzureRMResourceProvider -ProviderNamespace Microsoft.Batch`  
 
 ## 管理批处理帐户和密钥

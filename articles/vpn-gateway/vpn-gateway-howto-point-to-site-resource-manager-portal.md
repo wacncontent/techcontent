@@ -122,27 +122,27 @@ Azure 使用证书对点到站点 VPN 的 VPN 客户端进行身份验证。从�
 
 ## <a name="addresspool"></a>第 4 部分 - 添加客户端地址池
 1. 创建虚拟网络网关后，导航到虚拟网络网关边栏选项卡的“设置”部分。在“设置”部分中，单击“点到站点配置”，打开“配置”边栏选项卡。
-   
+
     ![点到站点边栏选项卡](./media/vpn-gateway-howto-point-to-site-resource-manager-portal/configuration.png "点到站点边栏选项卡")  
 
 2. **地址池**是连接的客户端将从中接收 IP 地址的 IP 地址池。添加地址池，然后单击“保存”。
-   
+
     ![客户端地址池](./media/vpn-gateway-howto-point-to-site-resource-manager-portal/addresspool.png "客户端地址池")  
 
 ## <a name="uploadfile"></a>第 5 部分 - 上载根证书 .cer 文件
 创建网关后，可以将受信任根证书的 .cer 文件上载到 Azure。最多可以上载 20 个根证书的文件。不要将根证书的私钥上载到 Azure。上载 .Cer 文件后，Azure 将使用它来对连接到虚拟网络的客户端进行身份验证。
 
 1. 导航到“点到站点配置”边栏选项卡。将在此边栏选项卡的“根证书”部分添加 .cer 文件。
-   
+
     ![点到站点边栏选项卡](./media/vpn-gateway-howto-point-to-site-resource-manager-portal/rootcert.png "点到站点边栏选项卡")  
 
 2. 请确保将根证书导出为 Base-64 编码的 X.509 (.cer) 文件。需要以这种格式导出根证书，以便可以使用文本编辑器打开该证书。
 3. 使用记事本等文本编辑器中打开该证书。只复制以下部分：
-   
+
     ![证书数据](./media/vpn-gateway-howto-point-to-site-resource-manager-portal/copycert.png "证书数据")  
 
 4. 将证书数据粘贴到门户的“公共证书数据”部分。在“名称”空间中输入证书的名称，然后单击“保存”。最多可以添加 20 个受信任的根证书。
-   
+
     ![证书上载](./media/vpn-gateway-howto-point-to-site-resource-manager-portal/uploadcert.png "证书上载")  
 
 ## <a name="clientconfig"></a>第 6 部分 - 下载并安装 VPN 客户端配置程序包
@@ -151,13 +151,13 @@ Azure 使用证书对点到站点 VPN 的 VPN 客户端进行身份验证。从�
 VPN 客户端包中包含用于配置 Windows 内置 VPN 客户端软件的信息。配置特定于要连接到的 VPN。该程序包不安装额外的软件。有关详细信息，请参阅 [VPN Gateway FAQ](./vpn-gateway-vpn-faq.md#point-to-site-connections)（VPN 网关常见问题）。
 
 1. 在“点到站点配置”边栏选项卡上，单击“下载 VPN 客户端”，打开“下载 VPN 客户端”边栏选项卡。
-   
+
     ![VPN 客户端下载](./media/vpn-gateway-howto-point-to-site-resource-manager-portal/downloadclient.png "VPN 客户端下载")  
 
 2. 为客户端选择正确的程序包，然后单击“下载”。对于 64 位客户端，选择“AMD64”。对于 32 位客户端，选择“x86”。
 3. 在客户端计算机上安装该包。如果显示 SmartScreen 弹出窗口，请单击“更多信息”，然后单击“仍要运行”以安装该包。
 4. 在客户端计算机上，导航到“网络设置”，然后单击“VPN”。此时将会列出连接。其中显示了要连接到的虚拟网络的名称，如以下示例所示：
-   
+
     ![VPN 客户端](./media/vpn-gateway-howto-point-to-site-resource-manager-portal/vpn.png "VPN 客户端")  
 
 ## <a name="installclientcert"></a>第 7 部分 - 安装客户端证书
@@ -169,17 +169,17 @@ VPN 客户端包中包含用于配置 Windows 内置 VPN 客户端软件的信�
 ## <a name="connect"></a>第 8 部分 - 连接到 Azure
 1. 若要连接到 VNet，请在客户端计算机上导航到 VPN 连接，找到创建的 VPN 连接。其名称与虚拟网络的名称相同。单击“连接”。可能会出现与使用证书相关的弹出消息。如果出现此消息，请单击“继续”以使用提升的权限。
 2. 在“连接”状态页上，单击“连接”开始连接。如果你看到“选择证书”屏幕，请确保所显示的客户端证书就是你要用来连接的证书。如果不是，请使用下拉箭头选择正确的证书，然后单击“确定”。
-   
+
     ![VPN 客户端 2](./media/vpn-gateway-howto-point-to-site-rm-ps/clientconnect.png "VPN 客户端连接")  
 
 3. 现在应已建立连接。
-   
+
     ![VPN 客户端 3](./media/vpn-gateway-howto-point-to-site-rm-ps/connected.png "VPN 客户端连接 2")  
 
 ## <a name="verify"></a>第 9 部分 - 验证连接
 1. 若要验证你的 VPN 连接是否处于活动状态，请打开提升的命令提示符，然后运行 *ipconfig/all*。
 2. 查看结果。请注意，你收到的 IP 地址是在配置中指定的点到站点 VPN 客户端地址池中的地址之一。结果应大致如下所示：
-   
+
         PPP adapter VNet1:
             Connection-specific DNS Suffix .:
             Description.....................: VNet1
@@ -204,6 +204,6 @@ VPN 客户端包中包含用于配置 Windows 内置 VPN 客户端软件的信�
 可以在“点到站点配置”边栏选项卡上管理已吊销客户端证书的列表。此边栏选项卡用于[上载受信任的根证书](#uploadfile)。
 
 ## 后续步骤
-连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md/)。
+连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

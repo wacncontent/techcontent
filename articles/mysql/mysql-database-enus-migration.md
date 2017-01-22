@@ -57,7 +57,7 @@ If your system can accept a relatively long period of downtime (for example, 1-2
 9\.1 Connect to the newly created MySQL server on your client using mysql.exe (note: if you are not importing the data from a VM on Azure, you need to add the client to the IP safe list):
 
     mysql -h<server address> -P<port number> –u<user name> -p<password>
- 
+
 9\.2 Import the data from the SQL command line:
 
     source <backup file name>; 
@@ -80,7 +80,7 @@ Database import and export is relatively simple, but involves a relatively long 
 ![Migrate][1]
 
 4\. Close the old application or make the application run in read-only mode (if it supports read-only mode).
-    
+
 5\. Stop the database synchronization replication. Click **Disable**, and then save on the page below.
 ![Migrate][2]
 

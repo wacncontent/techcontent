@@ -58,7 +58,7 @@ csharp
             targetDedicated: 4
             virtualMachineSize: "large",
             cloudServiceConfiguration: new CloudServiceConfiguration(osFamily: "4"));
-    
+
     pool.MaxTasksPerComputeNode = 4;
     pool.TaskSchedulingPolicy = new TaskSchedulingPolicy(ComputeNodeFillType.Pack);
     pool.Commit();

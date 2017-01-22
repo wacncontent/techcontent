@@ -29,7 +29,7 @@ ms.author: danlep
 * **npm 包**：运行 npm（JavaScript 的包管理器）将最新的 Azure CLI 包安装到 Linux 分发版或操作系统上。计算机上需要有 node.js 和 npm。
 * **安装程序**：下载安装程序，在 Mac 或 Windows 上轻松地执行安装。
 * **Docker 容器**：在已经准备好运行的 Docker 容器中开始使用的最新 CLI。计算机上需要有 Docker 主机。
-    
+
 有关更多选项和背景信息，请参阅 [GitHub](https://github.com/azure/azure-xplat-cli) 上的项目存储库。
 
 安装 Azure CLI 之后，[将它连接到 Azure 订阅](./xplat-cli-connect.md)，从命令行接口（Bash、终端、命令提示符等）运行 **azure** 命令来使用 Azure 资源。

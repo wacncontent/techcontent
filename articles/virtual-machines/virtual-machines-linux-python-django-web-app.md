@@ -56,7 +56,7 @@ ms.author: huvalo
 Ubuntu Linux VM 已预安装了 Python 2.7，但它没有安装 Apache 或 Django。按照以下步骤可连接到你的 VM 并安装 Apache 和 Django。
 
 1.  启动新的**终端**窗口。
-    
+
 1.  输入以下命令来连接到 Azure VM。如果未创建 FQDN，可使用 Azure 经典管理门户的虚拟机摘要中显示的公共 IP 地址进行连接。
 
         $ ssh yourusername@yourVmUrl
@@ -73,7 +73,7 @@ Ubuntu Linux VM 已预安装了 Python 2.7，但它没有安装 Apache 或 Djang
 ## 创建新的 Django 应用程序
 
 1.  打开你在上一节中使用的**终端**窗口，通过 ssh 进入你的 VM。
-    
+
 1.  输入以下命令来创建新的 Django 项目：
 
         $ cd /var/www
@@ -85,7 +85,7 @@ Ubuntu Linux VM 已预安装了 Python 2.7，但它没有安装 Apache 或 Djang
     -   **helloworld/helloworld/urls.py** 包含每个 url 及其视图之间的映射代码。
 
 1.  在 **/var/www/helloworld/helloworld** 目录中创建一个名为 **views.py** 的新文件。这会包含呈现“hello world”页面的视图。启动编辑器并输入以下代码：
-        
+
         from django.http import HttpResponse
         def home(request):
             html = "<html><body>Hello World!</body></html>"

@@ -15,11 +15,11 @@
     - URL 编码的 **SendRule** 键（你在创建事件中心时已经记下了此键）。可以在[此处](http://www.w3schools.com/tags/ref_urlencode.asp)对它进行 URL 编码。
 
             # servicebus.properties - sample JNDI configuration
-    
+
             # Register a ConnectionFactory in JNDI using the form:
             # connectionfactory.[jndi_name] = [ConnectionURL]
             connectionfactory.SBCF = amqps://SendRule:{Send Rule key}@{namespace name}.servicebus.chinacloudapi.cn/?sync-publish=false
-    
+
             # Register some queues in JNDI using the form
             # queue.[jndi_name] = [physical_name]
             # topic.[jndi_name] = [physical_name]
@@ -32,7 +32,7 @@
         import java.io.InputStreamReader;
         import java.io.UnsupportedEncodingException;
         import java.util.Hashtable;
-        
+
         import javax.jms.BytesMessage;
         import javax.jms.Connection;
         import javax.jms.ConnectionFactory;
@@ -54,31 +54,31 @@
                     "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory");
             env.put(Context.PROVIDER_URL, "servicebus.properties");
             Context context = new InitialContext(env);
-    
+
             ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCF");
-    
+
             Destination queue = (Destination) context.lookup("EventHub");
-    
+
             // Create Connection
             Connection connection = cf.createConnection();
-    
+
             // Create sender-side Session and MessageProducer
             Session sendSession = connection.createSession(false,
                     Session.AUTO_ACKNOWLEDGE);
             MessageProducer sender = sendSession.createProducer(queue);
-    
+
             System.out.println("Press Ctrl-C to stop the sender process");
             System.out.println("Press Enter to start now");
             BufferedReader commandLine = new java.io.BufferedReader(
                     new InputStreamReader(System.in));
             commandLine.readLine();
-    
+
             while (true) {
                 sendBytesMessage(sendSession, sender);
                 Thread.sleep(200);
             }
         }
-        
+
         private static void sendBytesMessage(Session sendSession, MessageProducer sender) throws JMSException, UnsupportedEncodingException {
             BytesMessage message = sendSession.createBytesMessage();
             message.writeBytes("Test AMQP message from JMS".getBytes("UTF-8"));

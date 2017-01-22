@@ -16,7 +16,7 @@
 如果你以云中的存储帐户为目标，请从 Azure 门户预览复制存储帐户的主访问密钥。有关详细信息，请参阅[查看和复制存储访问密钥](../articles/storage/storage-create-storage-account.md#view-and-copy-storage-access-keys)。
 
 > [!NOTE] 您可以指向存储模拟器以避免引发与 Azure 存储空间有关的任何费用。但是，如果您确实选择指向云中的 Azure 存储帐户，则执行此教程的费用将会忽略不计。
-    
+
 ### 使用 .NET 配置来配置连接字符串
 
 如果应用程序在台式计算机或移动设备、Azure 虚拟机或 Azure Web 应用中运行，请使用 .NET 配置保存连接字符串（例如，保存在应用程序的 `web.config` 或 `app.config` 文件中）。使用 `<appSettings>` 元素存储连接字符串，如下所示。将 `account-name` 替换为您的存储帐户名称，将 `account-key` 替换为您的存储帐户密钥：

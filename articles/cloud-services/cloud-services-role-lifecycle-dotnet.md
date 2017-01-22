@@ -30,7 +30,7 @@ ms.author: adegeo
 -   [OnStart](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.onstart.aspx) 和 [OnStop](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.onstop.aspx) 方法返回布尔值，因此可以从这些方法返回 **false**。
 
      如果代码返回 **false**，则该角色进程会突然终止，而不会运行可能拥有的任何关闭序列。一般来说，应该避免从 **OnStart** 方法返回 **false**。
-     
+
 -   **RoleEntryPoint** 方法重载中未捕获的任何异常都被视为未处理的异常。
 
      如果某个生命周期方法中发生异常，Azure 将引发 [UnhandledException](https://msdn.microsoft.com/zh-cn/library/system.appdomain.unhandledexception.aspx) 事件，然后进程会终止。角色脱机后，Azure 会将它重新启动。如果出现未处理的异常，则不会引发 [Stopping](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleenvironment.stopping.aspx) 事件，并且不会调用 **OnStop** 方法。
@@ -46,16 +46,16 @@ Azure 使角色实例联机时，会调用 **OnStart** 方法。OnStart 代码�
 如果 **OnStart** 返回 **true**，则该实例已成功初始化，并且 Azure 已调用 **RoleEntryPoint.Run** 方法。如果 **OnStart** 返回 **false**，则角色将立即终止，而不执行任何计划中的关闭序列。
 
 下面的代码示例演示如何重写 **OnStart** 方法。当角色实例启动并设置将日志记录数据传输到存储帐户时，此方法将配置并启动诊断监视器：
-    
+
     public override bool OnStart()
     {
         var config = DiagnosticMonitor.GetDefaultInitialConfiguration();
-    
+
         config.DiagnosticInfrastructureLogs.ScheduledTransferLogLevelFilter = LogLevel.Error;
         config.DiagnosticInfrastructureLogs.ScheduledTransferPeriod = TimeSpan.FromMinutes(5);
-    
+
         DiagnosticMonitor.Start("DiagnosticsConnectionString", config);
-    
+
         return true;
     }
 

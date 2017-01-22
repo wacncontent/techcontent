@@ -29,8 +29,8 @@ ms.author: sdanie
 
 ![管理](./media/cache-administration/redis-cache-administration.png)  
 
--	[重新启动](#reboot)
--	[计划更新](#schedule-updates)
+- [重新启动](#reboot)
+- [计划更新](#schedule-updates)
 
 ## <a name="reboot"></a>重新启动
 
@@ -46,20 +46,20 @@ ms.author: sdanie
 
 对客户端应用程序的影响因用户重新启动的节点而有所不同。
 
--	**主** - 重新启动主节点时，Azure Redis 缓存将故障转移到副本节点，并将其提升为主节点。在此故障转移期间，可能会有一个较短的时间间隔无法连接到缓存。
--	**从属** - 重新启动从属节点时，通常不会影响缓存客户端。
--	**主和从属** - 同时重新启动这两个缓存节点时，缓存中的所有数据将丢失，并且无法连接到缓存，直到主节点重新联机。如果已配置[数据持久性](./cache-how-to-premium-persistence.md)，则在缓存重新联机时，将还原最新备份。请注意，在最新备份后进行的所有缓存写入将丢失。
--	**已启用群集的高级缓存的节点** - 重新启动已启用群集的高级缓存的节点时，其行为与重新启动非群集缓存节点时相同。
+- **主** - 重新启动主节点时，Azure Redis 缓存将故障转移到副本节点，并将其提升为主节点。在此故障转移期间，可能会有一个较短的时间间隔无法连接到缓存。
+- **从属** - 重新启动从属节点时，通常不会影响缓存客户端。
+- **主和从属** - 同时重新启动这两个缓存节点时，缓存中的所有数据将丢失，并且无法连接到缓存，直到主节点重新联机。如果已配置[数据持久性](./cache-how-to-premium-persistence.md)，则在缓存重新联机时，将还原最新备份。请注意，在最新备份后进行的所有缓存写入将丢失。
+- **已启用群集的高级缓存的节点** - 重新启动已启用群集的高级缓存的节点时，其行为与重新启动非群集缓存节点时相同。
 
 >[!IMPORTANT] 重新启动仅适用于高级层缓存。
 
 ## <a name="reboot-faq"></a>重新启动常见问题
 
--	[测试我的应用程序时，应重新启动哪个节点？](#which-node-should-i-reboot-to-test-my-application)
--	[能否通过重新启动缓存来清除客户端连接？](#can-i-reboot-the-cache-to-clear-client-connections)
--	[如果我执行重新启动，是否会丢失缓存中的数据？](#will-i-lose-data-from-my-cache-if-i-do-a-reboot)
--	[能否使用 PowerShell、CLI 或其他管理工具重新启动缓存？](#can-i-reboot-my-cache-using-powershell-cli-or-other-management-tools)
--	[哪些定价层可以使用重新启动功能？](#what-pricing-tiers-can-use-the-reboot-functionality)
+- [测试我的应用程序时，应重新启动哪个节点？](#which-node-should-i-reboot-to-test-my-application)
+- [能否通过重新启动缓存来清除客户端连接？](#can-i-reboot-the-cache-to-clear-client-connections)
+- [如果我执行重新启动，是否会丢失缓存中的数据？](#will-i-lose-data-from-my-cache-if-i-do-a-reboot)
+- [能否使用 PowerShell、CLI 或其他管理工具重新启动缓存？](#can-i-reboot-my-cache-using-powershell-cli-or-other-management-tools)
+- [哪些定价层可以使用重新启动功能？](#what-pricing-tiers-can-use-the-reboot-functionality)
 
 ### <a name="which-node-should-i-reboot-to-test-my-application"></a>测试我的应用程序时，应重新启动哪个节点？
 
@@ -97,10 +97,10 @@ ms.author: sdanie
 
 ## <a name="schedule-updates-faq"></a>计划更新常见问题
 
--	[如果我不使用计划更新功能，何时进行更新？](#when-do-updates-occur-if-i-dont-use-the-schedule-updates-feature)
--	[在计划的维护时段进行哪种类型的更新？](#what-type-of-updates-are-made-during-the-scheduled-maintenance-window)
--	有关详细信息，请参阅[能否使用 PowerShell、CLI 或其他管理工具管理计划的更新？](#can-i-managed-scheduled-updates-using-powershell-cli-or-other-management-tools)
--	[哪些定价层可以使用计划更新功能？](#what-pricing-tiers-can-use-the-schedule-updates-functionality)
+- [如果我不使用计划更新功能，何时进行更新？](#when-do-updates-occur-if-i-dont-use-the-schedule-updates-feature)
+- [在计划的维护时段进行哪种类型的更新？](#what-type-of-updates-are-made-during-the-scheduled-maintenance-window)
+- 有关详细信息，请参阅[能否使用 PowerShell、CLI 或其他管理工具管理计划的更新？](#can-i-managed-scheduled-updates-using-powershell-cli-or-other-management-tools)
+- [哪些定价层可以使用计划更新功能？](#what-pricing-tiers-can-use-the-schedule-updates-functionality)
 
 ### <a name="when-do-updates-occur-if-i-dont-use-the-schedule-updates-feature"></a>如果不使用计划更新功能，何时会进行更新？
 
@@ -114,10 +114,10 @@ ms.author: sdanie
 
 可以使用以下 PowerShell cmdlet 管理计划的更新。
 
--	[Get-AzureRmRedisCachePatchSchedule](https://msdn.microsoft.com/zh-cn/library/azure/mt763835.aspx)
--	[New-AzureRmRedisCachePatchSchedule](https://msdn.microsoft.com/zh-cn/library/azure/mt763834.aspx)
--	[New-AzureRmRedisCacheScheduleEntry](https://msdn.microsoft.com/zh-cn/library/azure/mt763833.aspx)
--	[Remove-AzureRmRedisCachePatchSchedule](https://msdn.microsoft.com/zh-cn/library/azure/mt763837.aspx)
+- [Get-AzureRmRedisCachePatchSchedule](https://msdn.microsoft.com/zh-cn/library/azure/mt763835.aspx)
+- [New-AzureRmRedisCachePatchSchedule](https://msdn.microsoft.com/zh-cn/library/azure/mt763834.aspx)
+- [New-AzureRmRedisCacheScheduleEntry](https://msdn.microsoft.com/zh-cn/library/azure/mt763833.aspx)
+- [Remove-AzureRmRedisCachePatchSchedule](https://msdn.microsoft.com/zh-cn/library/azure/mt763837.aspx)
 
 ### <a name="what-pricing-tiers-can-use-the-schedule-updates-functionality"></a>哪些定价层可以使用计划更新功能？
 
@@ -125,6 +125,6 @@ ms.author: sdanie
 
 ## 后续步骤
 
--	了解更多 [Azure Redis 缓存高级层](./cache-premium-tier-intro.md)功能。
+- 了解更多 [Azure Redis 缓存高级层](./cache-premium-tier-intro.md)功能。
 
 <!---HONumber=Mooncake_1114_2016-->

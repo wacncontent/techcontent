@@ -99,5 +99,5 @@ Azure 应用程序网关会通过探测机制去了解后端服务器的健康�
 >注意：请使用最新版本的 Azure PowerShell 来进行配置，如果使用的 PowerShell 版本较老可能会导致该操作不成功。
 
 对于使用 ARM 模式创建的应用程序网关，我们可以直接在 Portal 直接进行配置。如下图所示，点击探测，然后添加探测规则并进行配置即可。
- 
+
 ![Portal-ARMAppGw](./media/aog-web-apps-bind-host-name-gateway-unusable/Portal-ARMAppGw.png)

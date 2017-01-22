@@ -72,7 +72,7 @@ csharp
         WaitForSuccess = true
     };
     myCloudPool.StartTask = startTask;
-    
+
     // Commit the fully configured pool to the Batch service to actually create
     // the pool and its compute nodes.
     await myCloudPool.CommitAsync();
@@ -102,7 +102,7 @@ csharp
     // subtasks execute the CoordinationCommandLine.
     CloudTask myMultiInstanceTask = new CloudTask(id: "mymultiinstancetask",
         commandline: "cmd /c mpiexec.exe -wdir %AZ_BATCH_TASK_SHARED_DIR% MyMPIApplication.exe");
-    
+
     // Configure the task's MultiInstanceSettings. The CoordinationCommandLine will be executed by
     // the primary and all subtasks.
     myMultiInstanceTask.MultiInstanceSettings =
@@ -198,28 +198,28 @@ csharp
     // Obtain the job and the multi-instance task from the Batch service
     CloudJob boundJob = batchClient.JobOperations.GetJob("mybatchjob");
     CloudTask myMultiInstanceTask = boundJob.GetTask("mymultiinstancetask");
-    
+
     // Now obtain the list of subtasks for the task
     IPagedEnumerable<SubtaskInformation> subtasks = myMultiInstanceTask.ListSubtasks();
-    
+
     // Asynchronously iterate over the subtasks and print their stdout and stderr
     // output if the subtask has completed
     await subtasks.ForEachAsync(async (subtask) =>
     {
         Console.WriteLine("subtask: {0}", subtask.Id);
         Console.WriteLine("exit code: {0}", subtask.ExitCode);
-    
+
         if (subtask.State == TaskState.Completed)
         {
             ComputeNode node =
                 await batchClient.PoolOperations.GetComputeNodeAsync(subtask.ComputeNodeInformation.PoolId,
                                                                      subtask.ComputeNodeInformation.ComputeNodeId);
-    
+
             NodeFile stdOutFile = await node.GetNodeFileAsync(subtask.ComputeNodeInformation.TaskRootDirectory + "\\" + Constants.StandardOutFileName);
             NodeFile stdErrFile = await node.GetNodeFileAsync(subtask.ComputeNodeInformation.TaskRootDirectory + "\\" + Constants.StandardErrorFileName);
             stdOut = await stdOutFile.ReadAsStringAsync();
             stdErr = await stdErrFile.ReadAsStringAsync();
-    
+
             Console.WriteLine("node: {0}:", node.Id);
             Console.WriteLine("stdout.txt: {0}", stdOut);
             Console.WriteLine("stderr.txt: {0}", stdErr);

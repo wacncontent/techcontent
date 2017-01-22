@@ -151,5 +151,5 @@ Azure 表存储服务使用户可以存储大量结构化数据。该服务是�
 ## 后续步骤
 
 本文章提供了代码示例，演示如何处理用于操作 Azure 表的常见方案。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 文档资源](../app-service-web/websites-webjobs-resources.md)。
- 
+
 <!---HONumber=Mooncake_0103_2017-->

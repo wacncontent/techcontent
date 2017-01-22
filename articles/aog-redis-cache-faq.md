@@ -26,8 +26,8 @@ wacn.date: 08/31/2016
 
 **监控该问题**
 
-1.	监控机器的内存使用情况，避免超过可用内存。
-2.	监控 Page Faults/Sec 的性能计数器。大多数情况下，甚至正常的操作，系统都会出现 page faults，因此通过监控 Page Faults/Sec 的性能计数器能有效的观察到峰值异常情况的发生。
+1. 监控机器的内存使用情况，避免超过可用内存。
+2. 监控 Page Faults/Sec 的性能计数器。大多数情况下，甚至正常的操作，系统都会出现 page faults，因此通过监控 Page Faults/Sec 的性能计数器能有效的观察到峰值异常情况的发生。
 
 **解决方法：** 
 可以升级虚拟机到更高的型号从而获取到更多内存，或者改善内存使用模式从而减少内存消耗。
@@ -45,8 +45,8 @@ wacn.date: 08/31/2016
 
 通过上面的例子，可以看到几个比较有趣的问题：
 
-1.	在 IOCP 和 WORKER 部分，注意到 busy 的值要比 Min 的值大，这就表明了您的 ThreadPool 需要做一些调整了。
-2.	对于 in: 64221，表明从 kernel socket 层有 64211 bytes 的数据被接收到，但是还没有被应用 (e.g. StackExchange.Redis) 做读取处理。这说明了您的应用做数据的读取速度跟不上网络上数据的传输速度。
+1. 在 IOCP 和 WORKER 部分，注意到 busy 的值要比 Min 的值大，这就表明了您的 ThreadPool 需要做一些调整了。
+2. 对于 in: 64221，表明从 kernel socket 层有 64211 bytes 的数据被接收到，但是还没有被应用 (e.g. StackExchange.Redis) 做读取处理。这说明了您的应用做数据的读取速度跟不上网络上数据的传输速度。
 
 **解决方法：**配置您的 [ThreadPool](https://gist.github.com/JonCole/e65411214030f0d823cb) 以确保 ThreadPool 可以在网络流量突发的情况下快速增加。
 
@@ -85,9 +85,9 @@ wacn.date: 08/31/2016
 
 **解决方法：**
 
-1.	使用 redis 时推荐用大量的小数据，而不是少量的大数据，因此我们建议客户将大数据分割成小数据使用，更多的一些关于为什么要使用小数据的资料可以参考[链接](https://groups.google.com/forum/#!searchin/redis-db/size/redis-db/n7aa2A4DZDs/3OeEPHSQBAAJ)。
-2.	通过提高虚拟机型号 (client 端和 redis server 端)来增加带宽容量，这样可以减少在传输大数据时候的传送时间。需要注意的一点是，只增加 client 端或者 server 端一端的带宽是不够的，因此客户需要评估自己的带宽使用量，然后保证与客户的虚拟机带宽容量匹配。
-3.	增加对象 ConnectionMultiplexer 的数量和轮询请求数量。如果选择这样做，客户需要注意到的是确保不要为每个 request 都创建一个新的 ConnectionMultiplexer，因为这样会大大的消耗机器性能。
+1. 使用 redis 时推荐用大量的小数据，而不是少量的大数据，因此我们建议客户将大数据分割成小数据使用，更多的一些关于为什么要使用小数据的资料可以参考[链接](https://groups.google.com/forum/#!searchin/redis-db/size/redis-db/n7aa2A4DZDs/3OeEPHSQBAAJ)。
+2. 通过提高虚拟机型号 (client 端和 redis server 端)来增加带宽容量，这样可以减少在传输大数据时候的传送时间。需要注意的一点是，只增加 client 端或者 server 端一端的带宽是不够的，因此客户需要评估自己的带宽使用量，然后保证与客户的虚拟机带宽容量匹配。
+3. 增加对象 ConnectionMultiplexer 的数量和轮询请求数量。如果选择这样做，客户需要注意到的是确保不要为每个 request 都创建一个新的 ConnectionMultiplexer，因为这样会大大的消耗机器性能。
 
 ## Server 端常见问题
 
@@ -97,18 +97,18 @@ wacn.date: 08/31/2016
 
 **问题描述：**Server 端的内存压力会导致各种性能问题，同时会引起 server 端处理请求缓慢。当内存压力达到一定的程度，系统会不得不将本应该在物理内存处理的数据转移到虚拟内存中去处理，这会导致非常明显的系统运行缓慢。导致系统压力的原因主要有以下几种：
 
-1.	Cache 已经被用户用完。
-2.	Redis 里存在大内存碎片，这种情况往往是由于客户存储了大的数据对象导致的问题 (Redis 的最优使用是存放小的数据对象，详细信息可以参考[文档](https://groups.google.com/forum/))
+1. Cache 已经被用户用完。
+2. Redis 里存在大内存碎片，这种情况往往是由于客户存储了大的数据对象导致的问题 (Redis 的最优使用是存放小的数据对象，详细信息可以参考[文档](https://groups.google.com/forum/))
 
 **监控该问题：**redis 对外公开两个数据可以帮助客户鉴别该问题。一个数据是 used_memory，另外一个是 used_memory_rss。通过 azure portal 或者通过 [redis info](http://redis.io/commands/info) 命令行，可以获得该数据。
 
 **解决方法：**客户可以做几种改变从而有效的保持内存使用健康。
 
-1.	[配置内存使用规则](./redis-cache/cache-configure.md#maxmemory-policy-and-maxmemory-reserved)以及设置 key 的过期时间。需要注意的一点是如果客户 redis 中存在碎片，可能这样做效果不是很明显。
-2.	[配置最大存储保留值](./redis-cache/cache-configure.md#maxmemory-policy-and-maxmemory-reserved)从而使得有足够大的空间来放存储碎片。
-3.	将大的 cache 对象分割成一个个对应的小的 cache 对象。
-4.	升级 redis 到更大的 cache。
-    
+1. [配置内存使用规则](./redis-cache/cache-configure.md#maxmemory-policy-and-maxmemory-reserved)以及设置 key 的过期时间。需要注意的一点是如果客户 redis 中存在碎片，可能这样做效果不是很明显。
+2. [配置最大存储保留值](./redis-cache/cache-configure.md#maxmemory-policy-and-maxmemory-reserved)从而使得有足够大的空间来放存储碎片。
+3. 将大的 cache 对象分割成一个个对应的小的 cache 对象。
+4. 升级 redis 到更大的 cache。
+
 ### 高 cpu/server 负载大
 
 **问题描述：**高 cpu 使用率意味着，即使在 redis server 端可以很快的发送响应请求的条件下，server 端也没办法及时的处理从 redis client 端发送过来的响应请求。  

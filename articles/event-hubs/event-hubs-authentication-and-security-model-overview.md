@@ -106,5 +106,5 @@ ms.author: sethm;clemensv
 [事件中心概述]: ./event-hubs-overview.md
 [使用事件中心的完整示例应用程序]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-286fd097
 [队列消息解决方案]: ../service-bus-messaging/service-bus-dotnet-multi-tier-app-using-service-bus-queues.md
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

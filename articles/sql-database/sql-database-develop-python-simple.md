@@ -47,7 +47,7 @@ ms.author: meetb
     sudo apt-get --assume-yes install freetds-dev freetds-bin
     sudo apt-get --assume-yes install python-dev python-pip
     sudo pip install pymssql=2.1.1
-    
+
 ### **Windows**
 
 从[**此处**](http://www.lfd.uci.edu/~gohlke/pythonlibs/#pymssql)安装 pymssql。
@@ -55,7 +55,7 @@ ms.author: meetb
 确保选择正确的 whl 文件。例如：如果在 64 位计算机上使用 Python 2.7，请选择：pymssql-2.1.1-cp27-none-win\_amd64.whl。下载 .whl 文件后，请将它放入 C:/Python27 文件夹。
 
 现在，请从命令行使用 pip 安装 pymssql 驱动程序。使用 cd 命令切换到 C:/Python27 并运行以下命令
-    
+
     pip install pymssql-2.1.1-cp27-none-win_amd64.whl
 
 可在[此处](http://stackoverflow.com/questions/4750806/how-to-install-pip-on-windows)找到有关使用 pip 的说明
@@ -63,7 +63,7 @@ ms.author: meetb
 ## 步骤 3：运行示例代码
 
 创建名为 **sql\_sample.py** 的文件并在其中粘贴以下代码。可以从命令行中使用以下命令运行此操作：
-    
+
     python sql_sample.py
 
 ### 连接到 SQL 数据库
@@ -108,7 +108,7 @@ ms.author: meetb
 * 回滚事务以撤消插入
 
 在 sql\_sample.py 中粘贴以下代码。
-    
+
     import pymssql
     conn = pymssql.connect(server='yourserver.database.chinacloudapi.cn', user='yourusername@yourserver', password='yourpassword', database='AdventureWorks')
     cursor = conn.cursor()

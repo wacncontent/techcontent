@@ -36,7 +36,7 @@ MP4（.mp4、.m4a、.m4v）/ISMV（.isma、.ismv）|是
 Matroska/WebM (.mkv) |是 
 WAVE/WAV (.wav) |是 
 QuickTime (.mov) |是
- 
+
 ###输入容器中的音频格式 
 
 Media Encoder Standard 支持在输入容器中带有以下音频格式：

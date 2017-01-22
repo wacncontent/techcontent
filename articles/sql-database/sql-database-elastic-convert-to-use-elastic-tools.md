@@ -64,7 +64,7 @@ ms.author: ddove
 2. 每个数据库多个租户（两种类型）：
     1. 列表映射
     2. 范围映射
- 
+
 对于单租户模型，创建“列表映射”分片映射。单租户模型将每个租户分配给一个数据库。这是适用于 SaaS 开发人员的有效模型，因为它可以简化管理。
 
 ![列表映射][1]
@@ -86,7 +86,7 @@ ms.author: ddove
     $ShardMap = New-ListShardMap -KeyType $([int]) 
     -ListShardMapName 'ListShardMap' 
     -ShardMapManager $ShardMapManager 
- 
+
 ### 选项 2：为范围映射创建分片映射
 请注意：若要使用此映射模式，租户 ID 值需要为连续范围，并且可接受范围中存在间距，方法是只需在创建数据库时跳过范围即可。
 
@@ -102,13 +102,13 @@ ms.author: ddove
 
 ## 步骤 3：准备各个分片
 将每个分片（数据库）添加到分片映射管理器。此操作将准备用于存储映射信息的各个数据库。对每个分片执行此方法。
-     
+
     Add-Shard 
     -ShardMap $ShardMap 
     -SqlServerName '<shard_server_name>' 
     -SqlDatabaseName '<shard_database_name>'
     # The $ShardMap is the shard map created in step 2.
- 
+
 ## 步骤 4：添加映射
 添加映射的操作取决于所创建的分片映射种类。如果创建的是列表映射，则添加列表映射。如果创建的是范围映射，则添加范围映射。
 
@@ -164,5 +164,5 @@ GitHub 上也提供了这些工具：[Azure/elastic-db-tools](https://github.com
 [1]: ./media/sql-database-elastic-convert-to-use-elastic-tools/listmapping.png
 [2]: ./media/sql-database-elastic-convert-to-use-elastic-tools/rangemapping.png
 [3]: ./media/sql-database-elastic-convert-to-use-elastic-tools/multipleonsingledb.png
- 
+
 <!---HONumber=Mooncake_1212_2016-->

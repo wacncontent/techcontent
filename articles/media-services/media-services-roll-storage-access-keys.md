@@ -30,7 +30,7 @@ ms.author: milangada;cenkdin;juliako
 ## 步骤 1：重新生成辅助存储访问密钥
 
 首先，请重新生成辅助存储密钥。默认情况下，媒体服务不使用辅助密钥。有关如何轮转存储密钥的信息，请参阅[如何：查看、复制和重新生成存储访问密钥](../storage/storage-create-storage-account.md#view-copy-and-regenerate-storage-access-keys)。
-  
+
 ##<a id="step2"></a>步骤 2：将媒体服务更新为使用新的辅助存储密钥
 
 将媒体服务更新为使用辅助存储访问密钥。可以使用以下两种方法之一，将重新生成的存储密钥同步到媒体服务。
@@ -40,11 +40,11 @@ ms.author: milangada;cenkdin;juliako
 - 使用媒体服务管理 REST API。
 
 以下代码示例演示了如何构造 https://endpoint/*subscriptionId*/services/mediaservices/Accounts/*accountName*/StorageAccounts/*storageAccountName*/Key 请求，以便将指定的存储密钥与媒体服务同步。在本例中，使用辅助存储密钥值。有关详细信息，请参阅[如何：使用媒体服务管理 REST API](https://docs.microsoft.com/zh-cn/rest/api/media/management/how-to-use-media-services-management-rest-api)。
- 
+
         public void UpdateMediaServicesWithStorageAccountKey(string mediaServicesAccount, string storageAccountName, string storageAccountKey)
         {
             var clientCert = GetCertificate(CertThumbprint);
-        
+
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format("{0}/{1}/services/mediaservices/Accounts/{2}/StorageAccounts/{3}/Key",
                 Endpoint, SubscriptionId, mediaServicesAccount, storageAccountName));
             request.Method = "PUT";
@@ -52,7 +52,7 @@ ms.author: milangada;cenkdin;juliako
             request.Headers.Add("x-ms-version", "2011-10-01");
             request.Headers.Add("Accept-Encoding: gzip, deflate");
             request.ClientCertificates.Add(clientCert);
-        
+
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
                 streamWriter.Write("\"");
@@ -60,7 +60,7 @@ ms.author: milangada;cenkdin;juliako
                 streamWriter.Write("\"");
                 streamWriter.Flush();
             }
-        
+
             using (var response = (HttpWebResponse)request.GetResponse())
             {
                 string jsonResponse;
@@ -86,9 +86,9 @@ ms.author: milangada;cenkdin;juliako
 请注意，更新（或重新创建）SAS 定位符时，URL 始终会变化。
 
 >[!NOTE] 若要确保保留 OnDemand 定位符的现有 URL，需删除现有定位符并新建具相同 ID 的定位符。
- 
+
 以下 .NET 示例演示如何重新创建具相同 ID 的定位符。
-    
+
     private static ILocator RecreateLocator(CloudMediaContext context, ILocator locator)
     {
         // Save properties of existing locator.
@@ -98,17 +98,17 @@ ms.author: milangada;cenkdin;juliako
         var startDate = locator.StartTime;
         var locatorType = locator.Type;
         var locatorName = locator.Name;
-    
+
         // Delete old locator.
         locator.Delete();
-    
+
         if (locator.ExpirationDateTime <= DateTime.UtcNow)
         {
             throw new Exception(String.Format(
                 "Cannot recreate locator Id={0} because its locator expiration time is in the past",
                 locator.Id));
         }
-    
+
         // Create new locator using saved properties.
         var newLocator = context.Locators.CreateLocator(
             locatorId,
@@ -117,7 +117,7 @@ ms.author: milangada;cenkdin;juliako
             accessPolicy,
             startDate,
             locatorName);
-    
+
         return newLocator;
     }
 
@@ -126,7 +126,7 @@ ms.author: milangada;cenkdin;juliako
 重新生成主存储访问密钥。有关如何轮转存储密钥的信息，请参阅[如何：查看、复制和重新生成存储访问密钥](../storage/storage-create-storage-account.md#view-copy-and-regenerate-storage-access-keys)。
 
 ##步骤 6：将媒体服务更新为使用新的主存储密钥
-    
+
 使用[步骤 2](./media-services-roll-storage-access-keys.md#step2) 中所述过程，不过此次将新的主存储访问密钥与媒体服务帐户同步。
 
 >[!NOTE]在对媒体服务执行任何操作（例如创建新定位符）之前等待 30 分钟，以防对挂起的作业产生任何影响。

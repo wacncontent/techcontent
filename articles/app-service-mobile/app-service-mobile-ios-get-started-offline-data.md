@@ -40,33 +40,33 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
     若要获取对同步表的引用，请对 `MSClient` 使用 `syncTableWithName` 方法。若要删除脱机同步功能，请改用 `tableWithName`。
 
 2. 表操作之前，必须初始化本地存储区。下面是相关的代码。
-    
+
     **Objective-C**：
-    
+
     在 `QSTodoService.init` 方法中：
-    
+
             MSCoreDataStore *store = [[MSCoreDataStore alloc] initWithManagedObjectContext:context];
             self.client.syncContext = [[MSSyncContext alloc] initWithDelegate:nil dataSource:store callback:nil];
-    
+
     **Swift**：
-    
+
     在 `ToDoTableViewController.viewDidLoad` 方法中：
-    
+
             let client = MSClient(applicationURLString: "http:// ...") // URI of the Mobile App
             let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
             self.store = MSCoreDataStore(managedObjectContext: managedObjectContext)
             client.syncContext = MSSyncContext(delegate: nil, dataSource: self.store, callback: nil)
-    
+
     随后将使用移动应用 SDK 中提供的接口 `MSCoreDataStore` 创建本地存储。可以改为通过实现 `MSSyncContextDataSource` 协议提供不同的本地存储。
-    
+
     此外，`MSSyncContext` 的第一个参数用于指定冲突处理程序。由于已传递 `nil`，因此将获取默认冲突处理程序，但该处理程序在发生任何冲突时会失败。
-    
+
 3. 现在，让我们执行实际的同步操作，从远程后端获取数据。
 
     **Objective-C**：
-    
+
     `syncData` 首先推送新更改，然后调用 `pullData` 从远程后端获取数据。接下来，`pullData` 方法获取符合查询的新数据：
-    
+
             -(void)syncData:(QSCompletionBlock)completion
             {
                 // push all changes in the sync context, then pull new data
@@ -75,39 +75,39 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
                     [self pullData:completion];
                 }];
             }
-    
+
             -(void)pullData:(QSCompletionBlock)completion
             {
                 MSQuery *query = [self.syncTable query];
-    
+
                 // Pulls data from the remote server into the local table.
                 // We're pulling all items and filtering in the view
                 // query ID is used for incremental sync
                 [self.syncTable pullWithQuery:query queryId:@"allTodoItems" completion:^(NSError *error) {
                     [self logErrorIfNotNil:error];
-    
+
                     // Let the caller know that we have finished
                     if (completion != nil) {
                         dispatch_async(dispatch_get_main_queue(), completion);
                     }
                 }];
             }
-        
+
       **Swift**：
-        
+
         func onRefresh(sender: UIRefreshControl!) {
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-            
+
             self.table!.pullWithQuery(self.table?.query(), queryId: "AllRecords") {
                 (error) -> Void in
-                
+
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                
+
                 if error != nil {
                     // A real application would handle various errors like network conditions,
                     // server conflicts, etc via the MSSyncContextDelegate
                     print("Error: (error!.description)")
-                    
+
                     // We will just discard our changes and keep the servers copy for simplicity
                     if let opErrors = error!.userInfo[MSErrorPushResultKey] as? Array<MSTableOperationError> {
                         for opError in opErrors {
@@ -125,13 +125,13 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
                 self.refreshControl?.endRefreshing()
             }
         } 
-    
+
     在 Objective-C 版本中的 `syncData` 内，先对同步上下文调用 `pushWithCompletion`。此方法是 `MSSyncContext` 的成员（而不是异步表本身），因为它会将更改推送到所有表。只有已在本地以某种方式修改（通过 CUD 操作来完成）的记录才会发送到服务器。然后调用 `pullData` 帮助器，该帮助器调用 `MSSyncTable.pullWithQuery` 检索远程数据并将其存储在本地数据库中。
-    
+
     在 Swift 版本中，不会调用 `pushWithCompletion`。这是因为推送操作并非绝对必要。如果同步上下文中正在进行推送操作的表存在任何挂起的更改，则提取始终会先发出推送。但是，如果有多个同步表，则最好是显式调用推送，确保所有内容在相关表中保持一致。
-    
+
     在 Objective-C 和 Swift 版本中，使用 `pullWithQuery` 方法可以指定查询，筛选想要检索的记录。在此示例中，查询只会检索远程 `TodoItem` 表中的所有记录。
-    
+
     `pullWithQuery` 的第二个参数是用于 *增量同步* 的查询 ID。增量同步只会使用记录的 `UpdatedAt` 时间戳（在本地存储中称为 `updatedAt`）检索自上次同步以来修改的记录。 查询 ID 应对于你的应用程序中的每个逻辑查询都是唯一的描述性字符串。若选择不要增量同步，请传递 `nil` 作为查询 ID。请注意，这可能会降低效率，因为它会检索每个提取操作的所有记录。
 
 5. 在修改或添加数据、用户执行刷新手势和启动时，Objective-C 应用将会同步。当用户执行刷新手势和启动时，Swift 应用将会同步。
@@ -236,9 +236,9 @@ Azure 移动应用的脱机数据同步功能可让最终用户在无法访问�
 1. 将 **QSTodoService.m** 中的移动应用 URL 更改为无效 URL，然后再次运行该应用：
 
     **Objective C**：在 QSTodoService.m 中：
-    
+
             self.client = [MSClient clientWithApplicationURLString:@"https://sitename.chinacloudsites.cn.fail"];
-    
+
     **Swift**：在 ToDoTableViewController.swift 中：
 
         let client = MSClient(applicationURLString: "https://sitename.chinacloudsites.cn.fail")

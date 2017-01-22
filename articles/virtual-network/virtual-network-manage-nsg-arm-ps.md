@@ -200,7 +200,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Set-AzureRmNetworkSecurityGroup -NetworkSecurityGroup $nsg
 
     预期输出仅显示安全规则：
-   
+
         Name                 : NSG-FrontEnd
         ...
         SecurityRules        : [
@@ -255,7 +255,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Set-AzureRmNetworkSecurityGroup -NetworkSecurityGroup $nsg
 
     预期输出仅显示安全规则：
-   
+
         Name                 : NSG-FrontEnd
         ...
         SecurityRules        : [
@@ -298,7 +298,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Set-AzureRmNetworkSecurityGroup -NetworkSecurityGroup $nsg
 
     预期输出仅显示安全规则，请注意，不再列出 **https-rule**：
-   
+
         Name                 : NSG-FrontEnd
         ...
         SecurityRules        : [
@@ -335,7 +335,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Set-AzureRmNetworkInterface -NetworkInterface $nic
 
     预期输出仅显示 **NetworkSecurityGroup** 属性：
-   
+
         NetworkSecurityGroup : {
                                  "SecurityRules": [],
                                  "DefaultSecurityRules": [],
@@ -364,7 +364,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Set-AzureRmNetworkInterface -NetworkInterface $nic
 
     预期输出仅显示 **NetworkSecurityGroup** 属性：
-   
+
         NetworkSecurityGroup : null
 
 ### <a name="Dissociate-an-NSG-from-a-subnet"></a>取消 NSG 与子网之间的关联
@@ -387,7 +387,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 
     预期输出仅显示 **FrontEnd** 子网的属性。请注意，**NetworkSecurityGroup** 没有属性：
-   
+
             ...
             Subnets           : [
                                   {
@@ -432,7 +432,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 
     预期输出仅显示 **FrontEnd** 子网的 **NetworkSecurityGroup** 属性：
-   
+
         ...
         "NetworkSecurityGroup": {
                                   "SecurityRules": [],
@@ -453,9 +453,9 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
         Remove-AzureRmNetworkSecurityGroup -ResourceGroupName RG-NSG -Name NSG-FrontEnd -Force
 
-   > [!NOTE]
-   `-Force` 参数可确保无需确认删除。
-   > 
+    > [!NOTE]
+    `-Force` 参数可确保无需确认删除。
+    > 
 
 ## 后续步骤
 * 为 NSG [启用日志记录](./virtual-network-nsg-manage-log.md)。

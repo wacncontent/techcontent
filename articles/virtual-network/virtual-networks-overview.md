@@ -44,7 +44,7 @@ Azure 虚拟网络 (VNet) 是你自己的网络在云中的表示形式。它是
 * **名称解析**。Azure 为部署在 VNet 中的 IaaS VM 和 PaaS 角色实例提供内部名称解析。你还可以部署自己的 DNS 服务器，并将 VNet 配置为使用这些服务器。
 * **安全性**。进出虚拟机的流量以及 VNet 中的 PaaS 角色实例都可使用网络安全组进行控制。
 * **连接**。可以使用网关或 VNet 对等互连使 VNet 相互连接。VNet 可以通过站点到站点 VPN 网络或 Azure ExpressRoute 连接到本地数据中心。若要了解有关站点到站点 VPN 连接的详细信息，请访问[关于 VPN 网关](../vpn-gateway/vpn-gateway-about-vpngateways.md#site-to-site-and-multi-site)。若要了解有关 ExpressRoute 的详细信息，请访问 [ExpressRoute 技术概述](../expressroute/expressroute-introduction.md)。若要了解有关 VNet 对等互连的详细信息，请访问 [VNet 对等互连](./virtual-network-peering-overview.md)。
-  
+
   > [!NOTE]
   请确保在将任何 IaaS VM 或 PaaS 角色实例部署到 Azure 环境之前创建 VNet。基于 ARM 的 VM 需要 VNet，如果你未指定现有 VNet，Azure 将创建其 CIDR 地址块可能会与本地网络冲突的默认 VNet。使你无法将 VNet 连接到本地网络。
   >
@@ -53,7 +53,7 @@ Azure 虚拟网络 (VNet) 是你自己的网络在云中的表示形式。它是
 子网是 VNet 中的一系列 IP 地址，可以将 VNet 划分成多个子网，以方便进行组织和提高安全性。部署到 VNet 的子网（不管是相同的子网还是不同的子网）中的 VM 和 PaaS 角色实例可以互相通信，不需任何额外的配置。你还可以为子网配置路由表和 NSG。
 
 ## IP 地址
-有两种类型的 IP 地址分配给 Azure 中的资源： *公共* 和 *专用* 。使用公共 IP 地址可以让 Azure 资源与 Internet 以及其他面向公众的 Azure 服务（例如 [Azure Redis 缓存](https://www.azure.cn/home/features/redis-cache/)、[Azure 事件中心](../event-hubs/index.md/)）通信。专用 IP 地址允许在虚拟网络的资源之间通信，以及与那些通过 VPN 连接的资源通信，不需使用可通过 Internet 路由的 IP 地址。
+有两种类型的 IP 地址分配给 Azure 中的资源： *公共* 和 *专用* 。使用公共 IP 地址可以让 Azure 资源与 Internet 以及其他面向公众的 Azure 服务（例如 [Azure Redis 缓存](https://www.azure.cn/home/features/redis-cache/)、[Azure 事件中心](../event-hubs/index.md)）通信。专用 IP 地址允许在虚拟网络的资源之间通信，以及与那些通过 VPN 连接的资源通信，不需使用可通过 Internet 路由的 IP 地址。
 
 若要详细了解 Azure 中的 IP 地址，请访问[虚拟网络中的 IP 地址](./virtual-network-ip-addresses-overview-arm.md)
 

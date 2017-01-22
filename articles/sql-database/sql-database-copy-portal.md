@@ -36,9 +36,9 @@ ms.tgt_pltfrm: NA
 
 打开要复制的数据库对应的 SQL 数据库页：
 
-1.	转到 [Azure 门户预览](https://portal.azure.cn)。
-2.	单击“更多服务”>“SQL 数据库”，然后单击所需的数据库。
-3.	在 SQL 数据库页上，单击“复制”：
+1. 转到 [Azure 门户预览](https://portal.azure.cn)。
+2. 单击“更多服务”>“SQL 数据库”，然后单击所需的数据库。
+3. 在 SQL 数据库页上，单击“复制”：
 
     ![SQL 数据库](./media/sql-database-copy-portal/sql-database-copy.png)  
 
@@ -54,7 +54,7 @@ ms.tgt_pltfrm: NA
 - 开始复制后，单击门户通知了解详细信息。
 
     ![通知][3]
- 
+
     ![监视][4]
 
 ## 验证数据库位于服务器上
@@ -78,7 +78,7 @@ ms.tgt_pltfrm: NA
 - [使用 SQL Server Management Studio 连接到 SQL 数据库并执行示例 T-SQL 查询](./sql-database-connect-query-ssms.md)
 - [将数据库导出到 BACPAC](./sql-database-export.md)
 - [业务连续性概述](./sql-database-business-continuity.md)
-- [SQL 数据库文档](./index.md/)
+- [SQL 数据库文档](./index.md)
 
 <!--Image references-->
 

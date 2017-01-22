@@ -125,20 +125,20 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
     xml
 
         <bool name="oidc_oauth2only">true</bool>
-    
+
 2. 配置从注册门户收到的客户端 ID。
 
     xml
 
         <string name="oidc_clientId">86172f9d-a1ae-4348-aafa-7b3e5d1b36f5</string>
         <string name="oidc_clientSecret"></string>
-    
+
 3. 使用下面的文本配置重定向 URI。
 
     xml
 
         <string name="oidc_redirectUrl">https://login.microsoftonline.com/common/oauth2/nativeclient</string>
-    
+
 4. 配置访问图形 API 所需的范围。
 
     xml
@@ -148,7 +148,7 @@ v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
             <item>https://graph.microsoft.com/User.Read</item>
             <item>offline_access</item>
         </string-array>
-    
+
 `oidc_scopes` 中的 `User.Read` 值允许读取已登录用户的基本配置文件。
 你可以在 [Microsoft Graph 权限范围](https://graph.microsoft.io/docs/authorization/permission_scopes)中了解有关所有可用范围的详细信息。
 
@@ -167,7 +167,7 @@ xml
         <string name="op_userInfoEndpoint">https://www.example.com/oauth2/userinfo</string>
         <string name="op_revocationEndpoint">https://www.example.com/oauth2/revoketoken</string>
     </resources>
-    
+
 如果你使用 OAuth2 作为你的协议，应始终不更改这些终结点。
 
 > [!NOTE]
@@ -181,7 +181,7 @@ Java
 
        //TODO: set your protected resource url
         private static final String protectedResUrl = "https://graph.microsoft.com/v1.0/me/";
-    
+
 此处简单的图形 API 调用将返回我们的信息。
 
 这些是你需要执行的所有更改。运行 `oidlib-sample` 应用程序，然后单击“登录”。

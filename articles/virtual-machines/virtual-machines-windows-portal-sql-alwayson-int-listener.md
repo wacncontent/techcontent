@@ -30,7 +30,7 @@ ms.author: MikeRayMSFT
 相关主题包括：
 
  - [在 Azure VM (GUI) 中配置 AlwaysOn 可用性组](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)   
- 
+
  - [使用 Azure Resource Manager 和 PowerShell 配置 VNet 到 VNet 连接](../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md)
 
 ## 步骤
@@ -203,9 +203,9 @@ Azure 将创建探测。Azure 使用探测来测试哪个 SQL Server 具有可�
         $ClusterNetworkName = "<MyClusterNetworkName>" # the cluster network name (Use Get-ClusterNetwork on Windows Server 2012 of higher to find the name)
         $IPResourceName = "<IPResourceName>" # the IP Address resource name
         $ILBIP = "<X.X.X.X>" # the IP Address of the Internal Load Balancer (ILB). This is the static IP address for the load balancer you configured in the Azure portal.
-    
+
         Import-Module FailoverClusters
-    
+
         Get-ClusterResource $IPResourceName | Set-ClusterParameter -Multiple @{"Address"="$ILBIP";"ProbePort"="59999";"SubnetMask"="255.255.255.255";"Network"="$ClusterNetworkName";"EnableDhcp"=0}
 
 - 更新变量并运行 PowerShell 脚本，以配置新侦听器的 IP 地址和端口。
@@ -257,5 +257,5 @@ SQLCMD 连接将自动连接到托管主副本的 SQL Server 实例。
 - 每个云服务只支持一个内部可用性组侦听器，因为该侦听器将配置给负载均衡器，并且只有一个内部负载均衡器。但是，可以创建多个外部侦听器。 
 
 - 使用内部负载均衡器只能从同一个虚拟网络中访问侦听器。
- 
+
 <!---HONumber=Mooncake_0613_2016-->

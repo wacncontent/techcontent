@@ -65,7 +65,7 @@ ms.author: cynthn
             -Path <C:\local\Filepath\Filename.json>
 
     可以从 JSON 文件模板获取映像的 URL。转到“资源”>“storageProfile”>“osDisk”>“映像”>“URI”部分即可查找映像的完整路径。映像的 URL 如下所示：`https://<storageAccountName>.blob.core.chinacloudapi.cn/system/Microsoft.Compute/Images/<imagesContainer>/<templatePrefix-osDisk>.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.vhd`。
-   
+
     也可以在门户中验证 URI。映像将复制到存储帐户中名为 **system** 的容器。
 
 ## 后续步骤

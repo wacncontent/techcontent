@@ -55,11 +55,11 @@ ms.author: cherylmc
 你可能会出于以下原因而连接虚拟网络：
 
 * **跨区域地域冗余和地域存在**
-  
+
   * 你可以使用安全连接设置自己的异地复制或同步，而无需借助于面向 Internet 的终结点。
   * 使用 Azure 流量管理器和负载均衡器，可以设置支持跨多个 Azure 区域实现异地冗余的高可用性工作负荷。一个重要的示例就是对分布在多个 Azure 区域中的可用性组设置 SQL Always On。
 * **具有隔离或管理边界的区域多层应用程序**
-  
+
   * 在同一区域中，由于存在隔离或管理要求，可以设置具有多个虚拟网络的多层应用程序，这些虚拟网络相互连接在一起。
 
 有关 VNet 到 VNet 连接的详细信息，请参阅本文末尾的 [VNet 到 VNet 常见问题解答](#faq)。
@@ -152,24 +152,24 @@ ms.author: cherylmc
 TestVNet1 和 TestVNet4 的虚拟网络网关都已完成后，便可以创建虚拟网络网关连接。在本部分中，将创建一个从 VNet1 到 VNet4 的连接。
 
 1. 在“所有资源”中，导航到 VNet 的虚拟网络网关。例如，“TestVNet1GW”。单击“TestVNet1GW”，打开虚拟网络网关边栏选项卡。
-   
+
     ![“连接”边栏选项卡](./media/vpn-gateway-howto-vnet-vnet-resource-manager-portal/settings_connection.png "“连接”边栏选项卡")  
 
 2. 单击“+添加”，打开“添加连接”边栏选项卡。
 3. 在“添加连接”边栏选项卡上的“名称”字段中，键入连接的名称。例如，**TestVNet1toTestVNet4**。
-   
+
     ![连接名称](./media/vpn-gateway-howto-vnet-vnet-resource-manager-portal/v1tov4.png "连接名称")  
 
 4. 对于“连接类型”，从下拉列表中选择“VNet 到 VNet”。
 5. 将自动填充“第一个虚拟网络网关”字段值，因为正在从指定的虚拟网络网关创建此连接。
 6. “第二个虚拟网络网关”字段是要创建与其的连接的 VNet 的虚拟网络网关。单击“选择其他虚拟网络网关”可打开“选择虚拟网络网关”边栏选项卡。
-   
+
     ![添加连接](./media/vpn-gateway-howto-vnet-vnet-resource-manager-portal/add_connection.png "添加连接")  
 
 7. 查看此边栏选项卡上列出的虚拟网络网关。请注意，只会列出你的订阅中的虚拟网络网关。如果要连接到不在你的订阅中的虚拟网络网关，请参阅 [PowerShell](./vpn-gateway-vnet-vnet-rm-ps.md) 一文。
 8. 单击要连接到的虚拟网络网关。
 9. 在“共享密钥”字段中，键入连接的共享密钥。可以自己生成或创建此密钥。在站点到站点连接中，你使用的密钥应与本地设备和虚拟网络网关连接的密钥完全相同。此处的概念类似，不同的是不是连接到 VPN 设备，而是要连接到另一个虚拟网络网关。
-   
+
     ![共享密钥](./media/vpn-gateway-howto-vnet-vnet-resource-manager-portal/sharedkey.png "共享密钥")  
 
 10. 单击边栏选项卡底部的“确定”以保存更改。
@@ -197,6 +197,6 @@ TestVNet1 和 TestVNet4 的虚拟网络网关都已完成后，便可以创建�
 [!INCLUDE [vpn-gateway-vnet-vnet-faq](../../includes/vpn-gateway-vnet-vnet-faq-include.md)]
 
 ## 后续步骤
-连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机文档](../virtual-machines/index.md/)。
+连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机文档](../virtual-machines/index.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

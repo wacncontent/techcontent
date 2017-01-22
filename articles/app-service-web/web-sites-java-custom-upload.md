@@ -38,14 +38,14 @@ ms.author: robmcm
 ## web.config httpPlatform 配置
 
 以下信息介绍 web.config 的 **httpPlatform** 格式。
-                                 
+
 **arguments**（默认值=""）。**processPath** 设置中指定的可执行文件或脚本的参数。
 
 示例（所示示例包含 **processPath**）：
 
     processPath="%HOME%\site\wwwroot\bin\tomcat\bin\catalina.bat"
     arguments="start"
-    
+
     processPath="%JAVA_HOME\bin\java.exe"
     arguments="-Djava.net.preferIPv4Stack=true -Djetty.port=%HTTP\_PLATFORM_PORT% -Djetty.base=";%HOME%\site\wwwroot\bin\jetty-distribution-9.1.0.v20131115"; -jar ";%HOME%\site\wwwroot\bin\jetty-distribution-9.1.0.v20131115\start.jar";"
 
@@ -58,19 +58,19 @@ ms.author: robmcm
     processPath="%HOME%\site\wwwroot\bin\tomcat\bin\startup.bat"
 
     processPath="%HOME%\site\wwwroot\bin\tomcat\bin\catalina.bat"
-                                                                                       
+
 **rapidFailsPerMinute**（默认值=10） 允许 **processPath** 中指定的进程每分钟崩溃的次数。如果超出此限制，则 **HttpPlatformHandler** 将在每分钟达到此限制后的剩余时间内停止启动该进程。
-                                    
+
 **requestTimeout**（默认值="00:02:00"） **HttpPlatformHandler** 等待侦听 `%HTTP_PLATFORM_PORT%` 的进程响应的持续时间。
 
 **startupRetryCount**（默认值=10） **HttpPlatformHandler** 尝试启动 **processPath** 中指定的进程的次数。有关详细信息，请参阅 **startupTimeLimit**。
 
 **startupTimeLimit**（默认值=10 秒） **HttpPlatformHandler** 等待可执行文件/脚本启动侦听端口的进程的持续时间。如果超出此时间限制，**HttpPlatformHandler** 将终止进程，然后尝试重新启动 **startupRetryCount** 次。
-                                                                                      
+
 **stdoutLogEnabled**（默认值="true"） 如果为 true，**processPath** 设置中指定进程的 **stdout** 和 **stderr** 将重定向到 **stdoutLogFile** 中的指定文件（参阅 **stdoutLogFile** 部分）。
-                                    
+
 **stdoutLogFile**（默认值="d:\\home\\LogFiles\\httpPlatformStdout.log"） 记录 **processPath** 中指定进程的 **stdout** 和 **stderr** 的绝对文件路径。
-                                    
+
 > [!NOTE] `%HTTP_PLATFORM_PORT%` 是一个特殊占位符，需要指定为 **arguments** 或 **httpPlatform** **environmentVariables** 列表的一部分。会将其替换为 **HttpPlatformHandler** 内部生成的端口，以便 **processPath** 指定的进程可以侦听此端口。
 
 ## 部署
@@ -104,12 +104,12 @@ ms.author: robmcm
 
 对于 Tomcat，需要更改少量配置。需要编辑 Server.xml 并进行如下设置：
 
--	Shutdown 端口 = -1
--	HTTP 连接器端口 = ${port.http}
--	HTTP 连接器地址 = "127.0.0.1"
--	注释掉 HTTPS 和 AJP 连接器
--	也可以在 catalina.properties 文件中设置 IPv4 设置，并在其中添加 `java.net.preferIPv4Stack=true`。
-    
+- Shutdown 端口 = -1
+- HTTP 连接器端口 = ${port.http}
+- HTTP 连接器地址 = "127.0.0.1"
+- 注释掉 HTTPS 和 AJP 连接器
+- 也可以在 catalina.properties 文件中设置 IPv4 设置，并在其中添加 `java.net.preferIPv4Stack=true`。
+
 应用服务 Web 应用上不支持调用 Direct3d。若要禁用这些调用，添加以下 Java 选项使应用程序进行以下调用：`-Dsun.java2d.d3d=false`
 
 ### Jetty
@@ -140,7 +140,7 @@ ms.author: robmcm
 1. 在 Web 应用的站点根目录（即 **d:\\home\\site\\wwwroot**）中创建 **webapps** 目录（如果尚不存在），并将 Hudson.war 放在 **d:\\home\\site\\wwwroot\\webapps** 中。
 2. 下载 Apache Maven 3.0.5（与 Hudson 兼容），并将其放在 **d:\\home\\site\\wwwroot** 中。
 3. 在 **d:\\home\\site\\wwwroot** 中创建 web.config，并粘贴以下内容：
-    
+
         <?xml version="1.0" encoding="UTF-8"?>
         <configuration>
           <system.webServer>
@@ -166,7 +166,7 @@ ms.author: robmcm
 4. Hudson 自行配置后，将显示以下屏幕：
 
     ![Hudson](./media/web-sites-java-custom-upload/hudson1.png)  
-    
+
 5. 访问 Hudson 配置页：单击“管理 Hudson”，然后单击“配置系统”。
 6. 如下所示配置 JDK：
 
@@ -229,7 +229,7 @@ ms.author: robmcm
 有关 Liferay 的详细信息，请参阅 [http://www.liferay.com](http://www.liferay.com)。
 
 [!INCLUDE [app-service-web-whats-changed](../../includes/app-service-web-whats-changed.md)]
- 
+
 <!-- External Links -->
 [Azure 应用服务]: ./app-service-changes-existing-services.md
 

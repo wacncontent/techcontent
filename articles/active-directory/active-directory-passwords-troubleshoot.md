@@ -1,5 +1,5 @@
 ---
-title: 故障排除：Azure AD 密码管理 | Microsoft Azure
+title: 故障排除：Azure AD 密码管理 | Azure
 description: 针对 Azure AD 密码管理的常见故障排除步骤，包括重置、更改、写回、注册，以及寻求帮助时要提供的信息。
 services: active-directory
 documentationCenter: 
@@ -13,7 +13,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 08/12/2016
-wacn.date: 01/06/2017
+wacn.date: 01/19/2017
 ms.author: asteen
 ---
 
@@ -42,9 +42,9 @@ ms.author: asteen
  - **页面** – 你看到错误时所在的页面（包括 URL）。
  - **日期/时间/时区** – 你看到错误时的精确日期和时间（包括时区）。
  - **支持代码** – 用户看到错误时所生成的支持代码（若要找到支持代码，请再现错误，然后单击屏幕底部的“支持代码”链接，将生成的 GUID 发送给支持工程师）。 
-   - 如果所在页面的底部没有支持代码，请按 F12，搜索 SID 和 CID，然后将这两个结果发送给支持工程师。
+    - 如果所在页面的底部没有支持代码，请按 F12，搜索 SID 和 CID，然后将这两个结果发送给支持工程师。
 
-    ![][001]
+    ![][001]  
 
  - **用户 ID** – 看到错误的用户的 ID 是什么（例如 user@contoso.com）？
  - **有关用户的信息** – 用户是否已联合、密码哈希是否已同步、是否只在云中？ 用户是否已获 AAD Premium 或 AAD Basic 授权？
@@ -219,7 +219,7 @@ ms.author: asteen
             <td>
               <p>用户看到了内容如下的错误：</p>
               <p>
-                
+
               </p>
               <p>处理请求时出错 </p>
               <p>尝试重置密码时。</p>
@@ -260,7 +260,7 @@ ms.author: asteen
               <p>未针对密码重置启用帐户</p>
               <p>很抱歉，你的管理员尚未将你的帐户设置为可使用此服务。</p>
               <p>
-                
+
               </p>
               <p>如果你愿意，我们可以联系你所在组织的管理员为你重置密码。</p>
             </td>
@@ -287,7 +287,7 @@ ms.author: asteen
               <p>未针对密码重置启用帐户</p>
               <p>很抱歉，你的管理员尚未将你的帐户设置为可使用此服务。</p>
               <p>
-                
+
               </p>
               <p>如果你愿意，我们可以联系你所在组织的管理员为你重置密码。</p>
             </td>
@@ -303,7 +303,7 @@ ms.author: asteen
               <p>未针对密码重置启用帐户</p>
               <p>很抱歉，你的管理员尚未将你的帐户设置为可使用此服务。</p>
               <p>
-                
+
               </p>
               <p>如果你愿意，我们可以联系你所在组织的管理员为你重置密码。</p>
             </td>
@@ -365,7 +365,7 @@ ms.author: asteen
             <td>
               <p>用户看到了内容如下的错误：</p>
               <p>
-                
+
               </p>
               <p>请使用其他选项。</p>
               <p>你在过去 1 小时内尝试验证你的帐户的次数太多。出于安全原因，你将需要等待 24 小时，然后才能再次尝试。</p>
@@ -391,7 +391,7 @@ ms.author: asteen
             <td>
               <p>当尝试验证要用作身份验证方法的电话号码时，用户看到了内容如下的错误：</p>
               <p>
-                
+
               </p>
               <p>指定了错误的电话号码。</p>
             </td>
@@ -407,7 +407,7 @@ ms.author: asteen
             <td>
               <p>用户看到了内容如下的错误：</p>
               <p>
-                
+
               </p>
               <p>处理请求时出错 </p>
               <p>尝试重置密码时。</p>
@@ -447,7 +447,7 @@ ms.author: asteen
             <td>
               <p>密码重置服务在本地未启动，并且在 Azure AD Connect 计算机的应用程序事件日志中出现错误 6800。</p>
               <p>
-                
+
               </p>
               <p>在登记后，联合的或密码哈希同步的用户无法重置其密码。</p>
             </td>
@@ -477,7 +477,7 @@ ms.author: asteen
             <td>
               <p>在 Azure AD Connect 安装过程的最后一步，你看到了一个错误，它指出无法配置密码写回。</p>
               <p>
-                
+
               </p>
               <p>Azure AD Connect 应用程序事件日志包含错误 32009，其文本为“获取身份验证令牌时出错”。</p>
             </td>
@@ -501,17 +501,17 @@ ms.author: asteen
             <td>
               <p>Azure AD Connect 计算机事件日志包含由 PasswordResetService 引发的错误 32002。</p>
               <p>
-                
+
               </p>
               <p>错误如下：“连接到服务总线时出错，令牌提供程序无法提供安全令牌...”</p>
               <p>
-                
+
               </p>
             </td>
             <td>
               <p>发生此错误的根本原因是在你的本地环境中运行的密码重置服务无法连接到云中的服务总线终结点。此错误通常是由于防火墙规则阻止了到特定端口或 web 地址的出站连接导致的。</p>
               <p>
-                
+
               </p>
               <p>请确保你的防火墙允许以下各项的出站连接：</p>
               <ul>
@@ -523,7 +523,7 @@ ms.author: asteen
                                         出站连接 &lt;br>&lt;br></li>
               </ul>
               <p>
-                
+
               </p>
               <p>在更新这些规则后，重新启动 AAD Sync 计算机，密码写回应当会再次开始工作。</p>
             </td>
@@ -538,7 +538,7 @@ ms.author: asteen
             <td>
               <p>在某些极少见的情况下，当 Azure AD Connect 已重新启动时，密码写回服务可能无法重新启动。在这些情况下，首先，请检查是否已在本地启用了密码写回。这可以通过使用 Azure AD Connect 向导或 powershell 来完成（请参阅上面的“操作说明”部分）。如果此功能已启用，请尝试再次通过 UI 或 PowerShell 启用或禁用此功能。有关如何执行此操作的详细信息，请参阅<a href="./active-directory-passwords-getting-started.md#enable-users-to-reset-or-change-their-ad-passwords">如何启用/禁用密码写回</a>中的“步骤 2：在 Directory Sync 计算机上启用密码写回并配置防火墙规则”。</p>
               <p>
-                
+
               </p>
               <p>如果这不起作用，请尝试完全卸载并重新安装 Azure AD Connect。</p>
             </td>
@@ -550,14 +550,14 @@ ms.author: asteen
             <td>
               <p>尝试重置其密码的联合用户或密码哈希同步的用户在提交密码后看到了一个错误，该错误指示存在服务问题。</p>
               <p>
-                
+
               </p>
               <p>除此之外，在密码重置期间，你可能会在你的本地事件日志中看到有关管理代理被拒绝访问的消息。</p>
             </td>
             <td>
               <p>如果在你的事件日志中看到这些错误，请确认 AD MA 帐户（在配置时在向导中指定的帐户）具有进行密码写回所需的权限。</p>
               <p>
-                
+
               </p>
               <p>请注意，在授予此权限后，权限可能需要最多 1 小时来通过 DC 上的 sdprop 后台任务进行渗透。</p>
               <p>要使密码重置工作，需要将此权限标记在为其重置密码的用户对象的安全描述符上。在此权限显示在用户对象上之前，密码重置将一直因为访问被拒绝而失败。</p>
@@ -593,7 +593,7 @@ ms.author: asteen
             <td>
               <p>Active Directory 中的特权用户是使用 AdminSDHolder 进行保护的。有关详细信息，请参阅 <a href="https://technet.microsoft.com/magazine/2009.09.sdadminholder.aspx">http://technet.microsoft.com/magazine/2009.09.sdadminholder.aspx</a>。</p>
               <p>
-                
+
               </p>
               <p>这意味着将定期检查这些对象上的安全描述符是否与 AdminSDHolder 中指定的安全描述符匹配，如果它们不同，将对前者进行重置。因此，执行密码写回所需的其他权限不会渗透到这类用户。这可能会导致不会为这类用户执行密码写回。因此，我们不支持为这些组内的用户管理密码，因为这会破坏 AD 安全模型。</p>
             </td>
@@ -605,14 +605,14 @@ ms.author: asteen
             <td>
               <p>尝试重置其密码的联合用户或密码哈希同步的用户在提交密码后看到了一个错误，该错误指示存在服务问题。</p>
               <p>
-                
+
               </p>
               <p>除此之外，在密码重置期间，你可能会在 Azure AD Connect 服务的事件日志中看到一个表示“找不到对象”错误的错误。</p>
             </td>
             <td>
               <p>此错误通常表示同步引擎无法找到 AAD 连接器空间中的用户对象或者无法找到链接的 MV 或 AD 连接器空间对象。</p>
               <p>
-                
+
               </p>
               <p>若要解决此问题，请确保用户确实已通过当前的 Azure AD Connect 实例从本地同步到了 AAD，并检查连接器空间和 MV 中的对象的状态。通过“Microsoft.InfromADUserAccountEnabled.xxx”规则确认 AD CS 对象是 MV 对象的连接器。</p>
             </td>
@@ -624,14 +624,14 @@ ms.author: asteen
             <td>
               <p>尝试重置其密码的联合用户或密码哈希同步的用户在提交密码后看到了一个错误，该错误指示存在服务问题。</p>
               <p>
-                
+
               </p>
               <p>除此之外，在密码重置期间，你可能会在 Azure AD Connect 服务的事件日志中看到一个表示“找到多个匹配项”错误的错误。</p>
             </td>
             <td>
               <p>这表示同步引擎通过“Microsoft.InfromADUserAccountEnabled.xxx”检测到 MV 对象连接到了多个 AD CS 对象。这意味着用户在多个林具有已启用的帐户。</p>
               <p>
-                
+
               </p>
               <p>当前，密码写回不支持此方案。</p>
             </td>
@@ -1446,10 +1446,10 @@ ms.author: asteen
 ### <a name="restart-the-azure-AD-sync-service"></a>重新启动 Azure AD Sync 服务
 重新启动 Azure AD Sync 服务可以帮助解决连接问题或该服务出现的其他暂时性问题。
 
- 1.	以管理员身份单击运行 **Azure AD Connect** 的服务器上的“开始”。
- 2.	在搜索框中键入“services.msc”，然后按 **Enter**。
- 3.	找到 **Microsoft Azure AD Connect** 条目。
- 4.	右键单击该服务条目，单击“重新启动”，并等待操作完成。
+ 1. 以管理员身份单击运行 **Azure AD Connect** 的服务器上的“开始”。
+ 2. 在搜索框中键入“services.msc”，然后按 **Enter**。
+ 3. 找到 **Microsoft Azure AD Connect** 条目。
+ 4. 右键单击该服务条目，单击“重新启动”，并等待操作完成。
 
     ![][002]
 
@@ -1458,19 +1458,19 @@ ms.author: asteen
 ### <a name="disable-and-re-enable-the-password-writeback-feature"></a>禁用再重新启用密码写回功能
 禁用再重新启用密码写回功能可以帮助解决连接问题。
 
- 1.	以管理员身份打开 **Azure AD Connect 配置向导**。
- 2.	在“连接到 Azure AD”对话框中，输入你的 **Azure AD 全局管理员凭据**。
- 3.	在“连接到 AD DS”对话框中，输入你的 **AD 域服务管理员凭据**。
- 4.	在“唯一标识你的用户”对话框中，单击“下一步”按钮。
- 5.	在“可选功能”对话框中，取消选中“密码写回”复选框。
+ 1. 以管理员身份打开 **Azure AD Connect 配置向导**。
+ 2. 在“连接到 Azure AD”对话框中，输入你的 **Azure AD 全局管理员凭据**。
+ 3. 在“连接到 AD DS”对话框中，输入你的 **AD 域服务管理员凭据**。
+ 4. 在“唯一标识你的用户”对话框中，单击“下一步”按钮。
+ 5. 在“可选功能”对话框中，取消选中“密码写回”复选框。
 
     ![][003]
 
- 6.	单击“下一步”完成剩余的对话框页，而不更改任何内容，直到转到“准备好配置”页。
- 7.	确保配置页上的“密码写回”选项显示为禁用，然后单击绿色的“配置”按钮提交所做的更改。
- 8.	在“已完成”对话框中，取消选择“立即同步”选项，然后单击“完成”关闭向导。
- 9.	重新打开 **Azure AD Connect 配置向导**。
- 10.	**重复步骤 2-8**，但确保选中“可选功能”屏幕上的“密码写回”选项以重新启用该服务。
+ 6. 单击“下一步”完成剩余的对话框页，而不更改任何内容，直到转到“准备好配置”页。
+ 7. 确保配置页上的“密码写回”选项显示为禁用，然后单击绿色的“配置”按钮提交所做的更改。
+ 8. 在“已完成”对话框中，取消选择“立即同步”选项，然后单击“完成”关闭向导。
+ 9. 重新打开 **Azure AD Connect 配置向导**。
+ 10. **重复步骤 2-8**，但确保选中“可选功能”屏幕上的“密码写回”选项以重新启用该服务。
 
     ![][004]
 
@@ -1481,9 +1481,9 @@ ms.author: asteen
 ### <a name="install-the-latest-azure-ad-connect-release"></a>安装最新版本的 Azure AD Connect
 重新安装 Azure AD Connect 包可以解决所有可能会影响你在本地 AD 环境中连接到我们的云服务或管理你的密码的配置问题。我们建议你仅在尝试了上述前两个步骤后再执行此步骤。
 
- 1.	可从[此处](./active-directory-aadconnect.md)下载最新版本的 Azure AD Connect。
- 2.	由于你已安装 Azure AD Connect，只需执行就地升级将 Azure AD Connect 安装更新到最新版本。
- 3.	执行下载的程序包，然后按照屏幕说明进行操作来更新 Azure AD Connect 计算机。无需执行其他手动步骤，除非你自定义了现成的规则，在这种情况下，你应该**先备份这些规则，然后再继续进行升级，并在完成后手动重新部署这些规则**。
+ 1. 可从[此处](./active-directory-aadconnect.md)下载最新版本的 Azure AD Connect。
+ 2. 由于你已安装 Azure AD Connect，只需执行就地升级将 Azure AD Connect 安装更新到最新版本。
+ 3. 执行下载的程序包，然后按照屏幕说明进行操作来更新 Azure AD Connect 计算机。无需执行其他手动步骤，除非你自定义了现成的规则，在这种情况下，你应该**先备份这些规则，然后再继续进行升级，并在完成后手动重新部署这些规则**。
 
 这些步骤将重新建立与云服务的连接，并且可解决可能遇到的任何中断。
 
@@ -1512,4 +1512,4 @@ ms.author: asteen
 [003]: ./media/active-directory-passwords-troubleshoot/003.jpg "Image_003.jpg"
 [004]: ./media/active-directory-passwords-troubleshoot/004.jpg "Image_004.jpg"
 
-<!---HONumber=Mooncake_0815_2016-->
+<!---HONumber=Mooncake_0829_2016-->

@@ -40,7 +40,7 @@ ms.author: glenga
 4. 在 [Azure 经典管理门户]中，单击“存储”，单击存储帐户，然后单击“管理密钥”。
 
 5. 记下“存储帐户名称”和“访问密钥”。
- 
+
 6. 在移动服务中，单击“配置”选项卡，向下滚动到“连接字符串”并输入新的连接字符串（其“名称”为 `StorageConnectionString`，其“值”为存储帐户连接字符串且格式如下）。
 
         DefaultEndpointsProtocol=https;AccountName=<ACCOUNT_NAME>;AccountKey=<ACCESS_KEY>;
@@ -121,7 +121,7 @@ ms.author: glenga
 ## <a name="test-application"></a>测试应用程序
 
 1. （可选）重新发布移动服务 .NET 后端项目。 
-    
+
     你也可以先在本地测试移动服务，然后将 .NET 后端项目发布到 Azure。无论是在本地还是在 Azure 中测试，移动服务都使用 Azure 表存储。
 
 2. 运行已连接到移动服务的快速入门客户端应用。
@@ -129,7 +129,7 @@ ms.author: glenga
     请注意，你看不见以前使用快速入门教程添加的项。这是因为表存储目前是空的。
 
 3. 添加新项以生成数据库更改。
- 
+
     应用和移动服务的行为应如同以往，不过，数据现在将存储在非关系存储而不是 SQL 数据库中。
 
 ##后续步骤
@@ -150,5 +150,5 @@ ms.author: glenga
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
 [What is the Table Service]: ../storage/storage-dotnet-how-to-use-tables.md#what-is
 [MongoLab Add-on Page]: /gallery/store/mongolab/mongolab
- 
+
 <!---HONumber=Mooncake_0118_2016-->

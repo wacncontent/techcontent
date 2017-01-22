@@ -42,7 +42,7 @@ Azure 使用 xml 文件定义可用于订阅的所有 VNet。可以下载此文�
         OperationDescription OperationId                          OperationStatus
         -------------------- -----------                          ---------------
         Set-AzureVNetConfig  49579cb9-3f49-07c3-ada2-7abd0e28c4e4 Succeeded 
-    
+
 11. 从 Azure PowerShell 控制台中，通过运行以下命令使用 **Get-AzureVnetSite** cmdlet 验证是否已添加新网络。
 
         Get-AzureVNetSite -VNetName TestVNet

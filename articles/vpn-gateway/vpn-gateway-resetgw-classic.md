@@ -52,7 +52,7 @@ ms.author: cherylmc
 ## 使用经典部署模型重置 VPN 网关
 
 用于重置 Azure VPN 网关的 PowerShell cmdlet 为 `Reset-AzureVNetGateway`。以下示例重置名为“ContosoVNet”的虚拟网络的 Azure VPN 网关。
- 
+
     Reset-AzureVNetGateway -VnetName "ContosoVNet" 
 
 结果：
@@ -65,7 +65,7 @@ ms.author: cherylmc
     StatusCode     : OK
 
 ## 后续步骤
-    
+
 有关详细信息，请参阅 [PowerShell Service Management cmdlet reference](https://msdn.microsoft.com/zh-cn/library/azure/mt617104.aspx)（PowerShell 服务管理 cmdlet 参考）和 [PowerShell Resource Manager cmdlet reference](http://go.microsoft.com/fwlink/?LinkId=828732)（PowerShell Resource Manager cmdlet 参考）。
 
 <!---HONumber=Mooncake_Quality_Review_0117_2017-->

@@ -57,16 +57,16 @@ ms.author: cherylmc
 - 每个虚拟网络子网具有内置的系统路由表。系统路由表具有以下三组路由：
 
     - **本地 VNet 路由：**直接路由到同一个虚拟网络中的目标虚拟机
-    
+
     - **本地路由：**路由到 Azure VPN 网关
-    
+
     - **默认路由：**直接路由到 Internet。如果要将数据包发送到不包含在前面两个路由中的专用 IP 地址，数据包将被删除。
 
 -  此过程使用用户定义路由 (UDR) 来创建路由表以添加默认路由，然后将路由表关联到 VNet 子网，在这些子网启用强制隧道。
 
 - 强制隧道必须关联到具有基于路由的 VPN 网关的 VNet。您需要在连接到虚拟网络的跨界本地站点中，设置一个“默认站点”。
 
-- ExpressRoute 强制隧道不是通过此机制配置的，而是通过 ExpressRoute BGP 对等会话播发默认路由来启用的。有关详细信息，请参阅 [ExpressRoute 文档](../expressroute/index.md/)。
+- ExpressRoute 强制隧道不是通过此机制配置的，而是通过 ExpressRoute BGP 对等会话播发默认路由来启用的。有关详细信息，请参阅 [ExpressRoute 文档](../expressroute/index.md)。
 
 ## 配置概述
 
@@ -95,7 +95,7 @@ ms.author: cherylmc
 2. 指定要使用的订阅。
 
         Select-AzureRmSubscription -SubscriptionName "Replace_with_your_subscription_name"
-        
+
 3. 创建资源组。
 
         New-AzureRmResourceGroup -Name "ForcedTunneling" -Location "China North"
@@ -114,7 +114,7 @@ ms.author: cherylmc
         $lng2 = New-AzureRmLocalNetworkGateway -Name "Branch1" -ResourceGroupName "ForcedTunneling" -Location "China North" -GatewayIpAddress "111.111.111.112" -AddressPrefix "192.168.2.0/24"
         $lng3 = New-AzureRmLocalNetworkGateway -Name "Branch2" -ResourceGroupName "ForcedTunneling" -Location "China North" -GatewayIpAddress "111.111.111.113" -AddressPrefix "192.168.3.0/24"
         $lng4 = New-AzureRmLocalNetworkGateway -Name "Branch3" -ResourceGroupName "ForcedTunneling" -Location "China North" -GatewayIpAddress "111.111.111.114" -AddressPrefix "192.168.4.0/24"
-        
+
 6. 创建路由表和路由规则。
 
         New-AzureRmRouteTable -Name "MyRouteTable" -ResourceGroupName "ForcedTunneling" -Location "China North"
@@ -150,5 +150,5 @@ ms.author: cherylmc
         New-AzureRmVirtualNetworkGatewayConnection -Name "Connection4" -ResourceGroupName "ForcedTunneling" -Location "China North" -VirtualNetworkGateway1 $gateway -LocalNetworkGateway2 $lng4 -ConnectionType IPsec -SharedKey "preSharedKey"
 
         Get-AzureRmVirtualNetworkGatewayConnection -Name "Connection1" -ResourceGroupName "ForcedTunneling"
-        
+
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

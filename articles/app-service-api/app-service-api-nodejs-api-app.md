@@ -27,7 +27,7 @@ ms.author: rachelap
 
 ## 先决条件
 
-1. Azure 帐户（[在此处建立免费帐户](https://www.azure.cn/pricing/1rmb-trial/)）
+1. Azure 帐户（[在此处建立使用帐户](https://www.azure.cn/pricing/1rmb-trial/)）
 1. 已安装 [Node.js](http://nodejs.org)（本示例假设使用 Node.js 4.2.2 版）
 2. 已安装 [Git](https://git-scm.com/)
 1. [GitHub](https://github.com/) 帐户
@@ -64,7 +64,7 @@ ms.author: rachelap
         yo swaggerize
 
     ![Swaggerize 命令行](./media/app-service-api-nodejs-api-app/swaggerize-command-line.png)
-    
+
     **注意**：如果在此步骤中遇到错误，下一步骤将解释如何进行修复。
 
     Swaggerize 将创建应用程序文件夹、创建处理程序和配置文件的基架，并生成 **package.json** 文件。快速视图引擎用于生成 Swagger 帮助页。
@@ -76,19 +76,19 @@ ms.author: rachelap
 1. 导航到包含基架代码的文件夹（在本例中为 *ContactList* 子文件夹）。
 
 1. 运行 `npm install`。
-    
+
         npm install
-        
+
 2. 安装 **jsonpath** NPM 模块。
 
         npm install --save jsonpath
-        
+
     ![Jsonpath 安装](./media/app-service-api-nodejs-api-app/jsonpath-install.png)
 
 1. 安装 **swaggerize-ui** NPM 模块。
 
         npm install --save swaggerize-ui
-        
+
     ![Swaggerize UI 安装](./media/app-service-api-nodejs-api-app/swaggerize-ui-install.png)
 
 ### 自定义基架代码
@@ -100,9 +100,9 @@ ms.author: rachelap
     此代码使用 **lib/contactRepository.js** 提供的 **lib/contacts.json** 文件中存储的 JSON 数据。新 contacts.js 代码将响应 HTTP 请求，获取所有联系人并将其以 JSON 有效负载的形式返回。
 
         'use strict';
-        
+
         var repository = require('../lib/contactRepository');
-        
+
         module.exports = {
             get: function contacts_get(req, res) {
                 res.json(repository.all())
@@ -114,7 +114,7 @@ ms.author: rachelap
         'use strict';
 
         var repository = require('../../lib/contactRepository');
-        
+
         module.exports = {
             get: function contacts_get(req, res) {
                 res.json(repository.get(req.params['id']));
@@ -280,7 +280,7 @@ ms.author: rachelap
     完成部署后，“部署”页面将显示已在 API 应用中成功部署代码更改。
 
 ## 使用 Azure 中运行的 API 测试
- 
+
 3. 复制“API 应用”边栏选项卡的“概要”部分中的“URL”。
 
     ![部署已完成](./media/app-service-api-nodejs-api-app/deployment-completed.png)

@@ -65,7 +65,7 @@ ms.author: femila
 
 将 Azure 虚拟机连回本地企业网络需要 Azure 虚拟网络，其中包括可无缝连接 Azure 虚拟机和本地虚拟机的站点到站点或站点到点虚拟专用网络 (VPN) 组件。此 VPN 组件还可使本地域成员计算机可访问在 Azure 虚拟机上独占托管其域控制器的 Windows Server Active Directory 域。但是，如果 VPN 失败，则依赖于 Windows Server Active Directory 的身份验证和其他操作也将失败，注意到这一点很重要。虽然用户也许能够使用现有缓存的凭据进行登录，但其票证尚未发出或已过时的所有对等或客户端对服务器身份验证尝试都将失败。
 
-请参阅[虚拟网络](../virtual-network/index.md/)，观看演示视频并获得分步教程的列表，包括在 Azure 门户预览中[配置站点到站点 VPN](../vpn-gateway/vpn-gateway-site-to-site-create.md)。
+请参阅[虚拟网络](../virtual-network/index.md)，观看演示视频并获得分步教程的列表，包括在 Azure 门户预览中[配置站点到站点 VPN](../vpn-gateway/vpn-gateway-site-to-site-create.md)。
 
 > [!NOTE] 也可以在未与本地网络连接的 Azure 虚拟网络上部署 Windows Server Active Directory。但是，本主题中的准则假设使用 Azure 虚拟网络，因为它提供对 Windows Server 至关重要的 IP 寻址功能。
 

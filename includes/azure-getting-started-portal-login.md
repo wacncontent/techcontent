@@ -28,6 +28,6 @@ articles/sql-database/sql-database-get-started-tutorial.md
 
 1. 登录页出现时，请提供订阅的凭据
 
-   ![登录](./media/azure-getting-started-portal-login/login.png)
-   
+    ![登录](./media/azure-getting-started-portal-login/login.png)
+
 <!---HONumber=Mooncake_0425_2016-->

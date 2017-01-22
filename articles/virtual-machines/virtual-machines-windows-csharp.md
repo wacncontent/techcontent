@@ -113,7 +113,7 @@ ms.author: davidmu
         var vmName = "virtual machine name";  
         var adminName = "administrator account name";
         var adminPassword = "administrator account password";
-        
+
     将所有变量值替换为要使用的名称和标识符。可以通过运行 Get-AzureRmSubscription 查找订阅标识符。
 
 2. 若要创建资源组并注册提供程序，请将以下方法添加到 Program 类：
@@ -126,7 +126,7 @@ ms.author: davidmu
         {
           var resourceManagementClient = new ResourceManagementClient(new Uri("https://management.chinacloudapi.cn/"), credential)
             { SubscriptionId = subscriptionId };
-            
+
           Console.WriteLine("Registering the providers...");
           var rpResult = resourceManagementClient.Providers.Register("Microsoft.Storage");
           Console.WriteLine(rpResult.RegistrationState);
@@ -134,7 +134,7 @@ ms.author: davidmu
           Console.WriteLine(rpResult.RegistrationState);
           rpResult = resourceManagementClient.Providers.Register("Microsoft.Compute");
           Console.WriteLine(rpResult.RegistrationState);
-          
+
           Console.WriteLine("Creating the resource group...");
           var resourceGroup = new ResourceGroup { Location = location };
           return await resourceManagementClient.ResourceGroups.CreateOrUpdateAsync(groupName, resourceGroup);
@@ -245,17 +245,17 @@ ms.author: davidmu
           Console.WriteLine("Creating the virtual network...");
           var networkManagementClient = new NetworkManagementClient(credential)
             { SubscriptionId = subscriptionId };
-          
+
           var subnet = new Subnet
           {
             Name = subnetName,
             AddressPrefix = "10.0.0.0/24"
           };
-          
+
           var address = new AddressSpace {
             AddressPrefixes = new List<string> { "10.0.0.0/16" }
           };
-          
+
           return await networkManagementClient.VirtualNetworks.CreateOrUpdateAsync(
             groupName,
             vnetName,
@@ -267,7 +267,7 @@ ms.author: davidmu
             }
           );
         }
-        
+
 2. 若要调用之前添加的方法，请将以下代码添加到 Program 类的 Main 方法：
 
         var vnResult = CreateVirtualNetworkAsync(
@@ -279,7 +279,7 @@ ms.author: davidmu
           subnetName);
         Console.WriteLine(vnResult.Result.ProvisioningState);  
         Console.ReadLine();
-        
+
 ### 创建网络接口
 
 虚拟机需要网络接口才能在虚拟网络上进行通信。
@@ -478,7 +478,7 @@ ms.author: davidmu
 
 由于你需要为 Azure 中使用的资源付费，因此，删除不再需要的资源总是一种良好的做法。只需删除资源组即可删除虚拟机和所有支持资源。
 
-1.	若要删除资源组，请将此方法添加到 Program 类：
+1. 若要删除资源组，请将此方法添加到 Program 类：
 
         public static async void DeleteResourceGroupAsync(
           TokenCredentials credential,
@@ -491,7 +491,7 @@ ms.author: davidmu
           await resourceManagementClient.ResourceGroups.DeleteAsync(groupName);
         }
 
-2.	若要调用之前添加的方法，请将此代码添加到 Main 方法：
+2. 若要调用之前添加的方法，请将此代码添加到 Main 方法：
 
         DeleteResourceGroupAsync(
           credential,

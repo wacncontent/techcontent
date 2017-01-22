@@ -55,16 +55,16 @@ wacn.date: 10/11/2016
  6. 执行: `# fdisk -l`
  7. 确认虚拟机 A 的系统磁盘作为新的磁盘设备附加在虚拟机 B 上.假定虚拟机A的系统磁盘为 /dev/sdc, root 文件系统为 /dev/sdc1
  8. 执行以下步骤, 进行备份文件系统信息:  
- 
+
          # fdisk -l /dev/sdc > /var/tmp/fdisk_before.log  
          # dumpe2fs /dev/sdc1 > /var/tmp/dumpe2fs_before.log  
          # tune2fs -l /dev/sdc1 > /var/tmp/tune2fs_before.log  
          # e2fsck -n /dev/sdc1 > /var/tmp/e2fsck._beforelog  
 
  9. 执行以下命令, 进行文件系统修复:  
- 
+
          # fsck -yM /dev/sdc1
- 
+
 **解决方案之常规文件系统损坏**  
 **A = 文件系统故障所在的虚拟机**  
 **B = 临时虚拟机**
@@ -77,7 +77,7 @@ wacn.date: 10/11/2016
  6. 执行: `# fdisk -l`
  7. 确认虚拟机 A 的系统磁盘作为新的磁盘设备附加在虚拟机 B 上.假定虚拟机 A 的系统磁盘为 /dev/sdc, root 文件系统为 /dev/sdc1
  8. 执行如下命令,将虚拟机A的系统磁盘挂载到临时虚拟机上: 
- 
+
          # mkdir /mnt/temp_fs  
          # mount /dev/sdc1 /mnt/temp_fs  
          # cp /mnt/temp_fs/etc/fstab /mnt/temp_fs/etc/fstab.org  
@@ -89,7 +89,7 @@ wacn.date: 10/11/2016
  10. 在 Azure 经典管理门户上基于虚拟机 A 的系统磁盘, 重建虚拟机 A.
  11. 以管理员身份登录虚拟机 A.
  12. 执行以下命令, 进行文件系统修复:  
- 
+
           # fsck -yM <file system>;
 
  13. 文件系统修复完毕以后, 恢复 /etc/fstab 被注释的对应条目, 重启虚拟机.

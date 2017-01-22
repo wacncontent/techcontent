@@ -60,7 +60,7 @@ wacn.date: 06/08/2016
     Get-AzureDisk | Where-Object {($_.DiskName -eq 'pstest-pstest-0-201601270217390866')} | Format-Table -auto "DiskName","DiskSizeInGB","AttachedTo"	
 
 ![](./media/aog-virtual-machines-attach-vhd/resize-disk.PNG)	
-    
+
 **注意：**
 
 - 请在数据磁盘大小限制范围内修改数据磁盘大小，最大 1TB。

@@ -175,9 +175,9 @@ ms.author: srinia
 
 在高级别中，脚本执行以下操作：
 
-*	枚举给定的 Azure 订阅（或指定的服务器列表）中的所有服务器。
-*	为每个服务器运行后台作业。该作业在固定的时间间隔内循环运行，并收集服务器中所有池的遥测数据。然后将所收集的数据加载到指定的遥测数据库中。
-*	枚举每个池中的数据库列表，以收集数据库资源使用情况数据。然后将所收集的数据加载到遥测数据库中。
+* 枚举给定的 Azure 订阅（或指定的服务器列表）中的所有服务器。
+* 为每个服务器运行后台作业。该作业在固定的时间间隔内循环运行，并收集服务器中所有池的遥测数据。然后将所收集的数据加载到指定的遥测数据库中。
+* 枚举每个池中的数据库列表，以收集数据库资源使用情况数据。然后将所收集的数据加载到遥测数据库中。
 
 可以对遥测数据库中收集的指标值进行分析，以监视弹性池及其中的数据库的运行状况。该脚本还在遥测数据库中安装预定义的表值函数 (TVF)，以帮助聚合指定时间范围内的指标值。例如，TVF 的结果可用来显示“指定时间范围内具有最大 eDTU 使用量的前 N 个弹性池”。 或者，使用诸如 Excel 或 Power BI 这样的分析工具对收集的数据进行查询和分析。
 
@@ -189,22 +189,22 @@ ms.author: srinia
     $resourceGroupName = '<resource group name>'             # Resource Group
     $serverName = <server name>                              # server name
     $poolName = <elastic pool name>                          # pool name
-        
+
     # Login to Azure account and select the subscription.
     Login-AzureRmAccount -EnvironmentName AzrueChinaCloud
     Set-AzureRmContext -SubscriptionId $subscriptionId
-    
+
     # Get resource usage metrics for an elastic pool for the specified time interval.
     $startTime = '4/27/2016 00:00:00'  # start time in UTC
     $endTime = '4/27/2016 01:00:00'    # end time in UTC
-    
+
     # Construct the pool resource ID and retrive pool metrics at 5 minute granularity.
     $poolResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/elasticPools/' + $poolName
     $poolMetrics = (Get-AzureRmMetric -ResourceId $poolResourceId -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime $startTime -EndTime $endTime) 
-    
+
     # Get the list of databases in this pool.
     $dbList = Get-AzureRmSqlElasticPoolDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -ElasticPoolName $poolName
-    
+
     # Get resource usage metrics for a database in an elastic database for the specified time interval.
     $dbMetrics = @()
     foreach ($db in $dbList)
@@ -212,7 +212,7 @@ ms.author: srinia
         $dbResourceId = '/subscriptions/' + $subscriptionId + '/resourceGroups/' + $resourceGroupName + '/providers/Microsoft.Sql/servers/' + $serverName + '/databases/' + $db.DatabaseName
         $dbMetrics = $dbMetrics + (Get-AzureRmMetric -ResourceId $dbResourceId -TimeGrain ([TimeSpan]::FromMinutes(5)) -StartTime $startTime -EndTime $endTime)
     }
-    
+
     #Optionally you can format the metrics and output as .csv file using the following script block.
     $command = {
     param($metricList, $outputFile)
@@ -230,14 +230,14 @@ ms.author: srinia
           $table = $table += $sx
       }
     }
-    
+
     # Output the metrics into a .csv file.
     write-output $table | Export-csv -Path $outputFile -Append -NoTypeInformation
     }
-    
+
     # Format and output pool metrics
     Invoke-Command -ScriptBlock $command -ArgumentList $poolMetrics,c:\temp\poolmetrics.csv
-    
+
     # Format and output database metrics
     Invoke-Command -ScriptBlock $command -ArgumentList $dbMetrics,c:\temp\dbmetrics.csv
 

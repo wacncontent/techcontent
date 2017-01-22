@@ -150,7 +150,7 @@ ms.author: andbuc
 
 1. 在 shell 中，浏览到本地 **azure-iot-gateway-sdk** 存储库副本中的根文件夹。
 2. 运行以下命令：
-   
+
     ```
     ./build/samples/simulated_device_cloud_upload/simulated_device_cloud_upload_sample ./samples/simulated_device_cloud_upload/src/simulated_device_cloud_upload_lin.json
     ```

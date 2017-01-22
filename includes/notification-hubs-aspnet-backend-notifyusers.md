@@ -16,7 +16,7 @@
 
 1. 启动 Visual Studio 或 Visual Studio Express。单击“服务器资源管理器”并登录到你的 Azure 帐户。Visual Studio 需要你登录才能在你的帐户中创建 Web 应用资源。
 2. 在 Visual Studio 中，依次单击“文件”、“新建”和“项目”，依次展开“模板”和“Visual C#”，然后依次单击“Web”和“ASP.NET Web 应用程序”，键入名称 **AppBackend**，然后单击“确定”。 
-    
+
     ![][B1]
 
 3. 在“新建 ASP.NET 项目”对话框中，单击“Web API”，然后单击“确定”。
@@ -58,7 +58,7 @@
             HttpRequestMessage request, CancellationToken cancellationToken)
             {
                 var authorizationHeader = request.Headers.GetValues("Authorization").First();
-    
+
                 if (authorizationHeader != null && authorizationHeader
                     .StartsWith("Basic ", StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -68,7 +68,7 @@
                         .GetString(Convert.FromBase64String(authorizationUserAndPwdBase64));
                     string user = authorizationUserAndPwd.Split(':')[0];
                     string password = authorizationUserAndPwd.Split(':')[1];
-    
+
                     if (verifyUserAndPwd(user, password))
                     {
                         // Attach the new principal object to the current HttpContext object
@@ -80,16 +80,16 @@
                     else return Unauthorized();
                 }
                 else return Unauthorized();
-    
+
                 return base.SendAsync(request, cancellationToken);
             }
-    
+
             private bool verifyUserAndPwd(string user, string password)
             {
                 // This is not a real authentication scheme.
                 return user == password;
             }
-    
+
             private Task<HttpResponseMessage> Unauthorized()
             {
                 var response = new HttpResponseMessage(HttpStatusCode.Forbidden);
@@ -132,7 +132,7 @@
         public class Notifications
         {
             public static Notifications Instance = new Notifications();
-        
+
             public NotificationHubClient Hub { get; set; }
 
             private Notifications() {
@@ -176,7 +176,7 @@
         public async Task<string> Post(string handle = null)
         {
             string newRegistrationId = null;
-            
+
             // make sure there are no existing registrations for this push handle (used for iOS and Android)
             if (handle != null)
             {

@@ -49,7 +49,7 @@ ms.author: davidmu
 借助 Azure Resource Manager 模板，你可以使用资源和关联部署参数的 JSON 描述来统一部署和管理 Azure 资源。
 
 1. 在常用的编辑器中，创建文件 C:\\VMSSTemplate.json 并添加初始 JSON 结构，以支持模板。
-   
+
         {
           "$schema":"http://schema.management.azure.com/schemas/2014-04-01-preview/VM.json",
           "contentVersion": "1.0.0.0",
@@ -61,21 +61,21 @@ ms.author: davidmu
           ]
         }
 2. 参数并不总是必需的，但在部署模板时，它们提供了输入值的一种方法。将这些参数添加到已添加到模板中的参数父元素下。
-   
+
         "vmName": { "type": "string" },
         "vmSSName": { "type": "string" },
         "instanceCount": { "type": "string" },
         "adminUsername": { "type": "string" },
         "adminPassword": { "type": "securestring" },
         "resourcePrefix": { "type": "string" }
-   
-   * 用于访问规模集中虚拟机的单独虚拟机的名称。
-   * 存储模板的存储帐户名称。
-   * 最初在规模集中创建的虚拟机数量。
-   * 虚拟机上的管理员帐户的名称和密码。
-   * 为支持规模集而创建的资源的名称前缀。
+
+    * 用于访问规模集中虚拟机的单独虚拟机的名称。
+    * 存储模板的存储帐户名称。
+    * 最初在规模集中创建的虚拟机数量。
+    * 虚拟机上的管理员帐户的名称和密码。
+    * 为支持规模集而创建的资源的名称前缀。
 3. 可以在模板中使用变量指定可能经常发生变化的值或需要通过组合参数值创建的值。将这些变量添加到已添加到模板中的变量父元素下。
-   
+
         "dnsName1": "[concat(parameters('resourcePrefix'),'dn1')]",
         "dnsName2": "[concat(parameters('resourcePrefix'),'dn2')]",
         "publicIP1": "[concat(parameters('resourcePrefix'),'ip1')]",
@@ -93,14 +93,14 @@ ms.author: davidmu
         "wadcfgxstart": "[concat(variables('wadlogs'),variables('wadperfcounter'),'<Metrics resourceId="')]",
         "wadmetricsresourceid": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',resourceGroup().name ,'/providers/','Microsoft.Compute/virtualMachineScaleSets/',parameters('vmssName'))]",
         "wadcfgxend": "[concat('"><MetricAggregation scheduledTransferPeriod="PT1H"/><MetricAggregation scheduledTransferPeriod="PT1M"/></Metrics></DiagnosticMonitorConfiguration></WadCfg>')]"
-   
-   * 网络接口所用的 DNS 名称。
+
+    * 网络接口所用的 DNS 名称。
      * 虚拟网络和子网的 IP 地址名称和前缀。
      * 虚拟网络、负载均衡器和网络接口的名称和标识符。
      * 与规模集中虚拟机关联的帐户的存储帐户名称。
      * 已安装在虚拟机上的诊断扩展的设置。有关诊断扩展的详细信息，请参阅[使用 Azure Resource Manager 模板创建具有监视和诊断功能的 Windows 虚拟机](../virtual-machines/virtual-machines-windows-extensions-diagnostics-template.md)。
 4. 将存储帐户资源添加到已添加到模板中的资源父元素下。此模板使用一个循环来创建所建议的五个存储帐户，其中将存储操作系统磁盘和诊断数据。这组帐户可在一个规模集中最多支持 100 个虚拟机，这是当前的最大值。每个存储帐户通过将变量中定义的字母指示符与模板的参数中提供的前缀相组合来命名。
-   
+
         {
           "type": "Microsoft.Storage/storageAccounts",
           "name": "[concat(parameters('resourcePrefix'), variables('storageAccountSuffix')[copyIndex()])]",
@@ -113,7 +113,7 @@ ms.author: davidmu
           "properties": { "accountType": "Standard_LRS" }
         },
 5. 添加虚拟网络资源。有关详细信息，请参阅[网络资源提供程序](../virtual-network/resource-groups-networking.md)。
-   
+
         {
           "apiVersion": "2015-06-15",
           "type": "Microsoft.Network/virtualNetworks",
@@ -130,7 +130,7 @@ ms.author: davidmu
           }
         },
 6. 添加负载均衡器和网络接口所使用的公共 IP 地址资源。
-   
+
         {
           "apiVersion": "2016-03-30",
           "type": "Microsoft.Network/publicIPAddresses",
@@ -156,7 +156,7 @@ ms.author: davidmu
           }
         },
 7. 添加规模集使用的负载均衡器资源。有关详细信息，请参阅 [Azure Resource Manager 对负载均衡器的支持](../load-balancer/load-balancer-arm.md)。
-   
+
         {
           "apiVersion": "2015-06-15",
           "name": "[variables('loadBalancerName')]",
@@ -194,7 +194,7 @@ ms.author: davidmu
           }
         },
 8. 添加单独虚拟机使用的网络接口资源。由于规模集中的虚拟机不可通过公共 IP 地址访问，因此将在同一虚拟网络中创建单独的虚拟机，以便远程访问虚拟机。
-   
+
         {
           "apiVersion": "2016-03-30",
           "type": "Microsoft.Network/networkInterfaces",
@@ -222,7 +222,7 @@ ms.author: davidmu
           }
         },
 9. 在规模集所在的同一网络中添加单独的虚拟机。
-   
+
         {
           "apiVersion": "2016-03-30",
           "type": "Microsoft.Compute/virtualMachines",
@@ -265,7 +265,7 @@ ms.author: davidmu
           }
         },
 10. 添加虚拟机规模集资源，并指定将在规模集中所有虚拟机上安装的诊断扩展。此资源的许多设置都与虚拟机资源相似。主要区别在于指定规模集中虚拟机数量的容量元素和指定虚拟机更新方式的 upgradePolicy。在所有存储帐户都根据 dependsOn 元素的指定创建之前，不会创建规模集。
-    
+
          {
            "type": "Microsoft.Compute/virtualMachineScaleSets",
            "apiVersion": "2016-03-30",
@@ -367,7 +367,7 @@ ms.author: davidmu
            }
          },
 11. 添加 autoscaleSettings 资源以定义规模集如何根据规模集中虚拟机上的处理器使用情况进行调整。
-    
+
          {
            "type": "Microsoft.Insights/autoscaleSettings",
            "apiVersion": "2015-04-01",
@@ -413,9 +413,9 @@ ms.author: davidmu
              "targetResourceUri": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/', resourceGroup().name,'/providers/Microsoft.Compute/virtualMachineScaleSets/',parameters('vmSSName'))]"
            }
          }
-    
+
     对于本教程，这些值很重要：
-    
+
     * **metricName** - 此值与在 wadperfcounter 变量中定义的性能计数器相同。使用该变量，诊断扩展可收集 **Processor(\_Total)\\% Processor Time** 计数器。
     * **metricResourceUri** - 此值是虚拟机规模集的资源标识符。
     * **timeGrain** - 此值是收集的指标的粒度。在此模板中，它设置为 1 分钟。
@@ -434,22 +434,22 @@ ms.author: davidmu
 只要知道在步骤 1 中创建的存储帐户名称和主密钥，就可以上传模板。
 
 1. 在 Azure PowerShell 窗口中，设置变量以指定在步骤 1 中创建的存储帐户的名称。
-   
+
          $storageAccountName = "vmstestsa"
 2. 设置用于指定存储帐户的主密钥的变量。
-   
+
          $storageAccountKey = "<primary-account-key>"
-   
+
     在 Azure 门户预览中查看存储帐户资源时，可单击密钥图标以获取密钥。
 3. 创建用于使用存储帐户验证操作的存储帐户上下文对象。
-   
+
          $ctx = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
 4. 创建用于存储模板的容器。
-   
+
          $containerName = "templates"
          New-AzureStorageContainer -Name $containerName -Context $ctx  -Permission Blob
 5. 将模板文件上载到新容器。
-   
+
          $blobName = "VMSSTemplate.json"
          $fileName = "C:\" + $BlobName
          Set-AzureStorageBlobContent -File $fileName -Container $containerName -Blob  $blobName -Context $ctx
@@ -480,11 +480,11 @@ ms.author: davidmu
 
 * Azure 门户预览 - 当前使用门户可获取有限数量的信息。
 * Azure PowerShell - 使用此命令可获取一些信息：
-  
+
         Get-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name"
-  
+
     或
-  
+
         Get-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceView
 * 就像连接到任何其他计算机一样连接到单独的虚拟机，然后可以远程访问规模集中的虚拟机以监视单个进程。
 

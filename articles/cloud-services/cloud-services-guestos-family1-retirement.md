@@ -39,9 +39,9 @@ ms.author: raiye
 
         foreach($subscription in Get-AzureSubscription) {
             Select-AzureSubscription -SubscriptionName $subscription.SubscriptionName 
-            
+
             $deployments=get-azureService | get-azureDeployment -ErrorAction Ignore | where {$_.SdkVersion -NE ""} 
-        
+
             $deployments | ft @{Name="SubscriptionName";Expression={$subscription.SubscriptionName}}, ServiceName, SdkVersion, Slot, @{Name="osFamily";Expression={(select-xml -content $_.configuration -xpath "/ns:ServiceConfiguration/@osFamily" -namespace $namespace).node.value }}, osVersion, Status, URL
         }
 

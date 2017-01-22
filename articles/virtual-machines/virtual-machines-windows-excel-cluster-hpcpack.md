@@ -106,18 +106,18 @@ HPC Pack IaaS 部署脚本提供了另一种通用的方法来部署 HPC Pack �
 
         # add the HPC Pack powershell cmdlets
             Add-PSSnapin Microsoft.HPC
-    
+
         # set the Azure storage connection string for the cluster
             Set-HpcClusterProperty -AzureStorageConnectionString 'DefaultEndpointsProtocol=https;AccountName=<yourstorageaccountname>;AccountKey=<yourstorageaccountkey>'
-    
+
             # remove the compute node role for head node to make sure the Excel workbook won't run on head node
             Get-HpcNode -GroupName HeadNodes | Set-HpcNodeState -State offline | Set-HpcNode -Role BrokerNode
-    
+
         # total number of nodes in the deployment including the head node and compute nodes, which should match the number specified in the XML configuration file
             $TotalNumOfNodes = 19
-    
+
             $ErrorActionPreference = 'SilentlyContinue'
-    
+
         # bring nodes online when they are deployed until all nodes are online
             while ($true)
             {
@@ -143,7 +143,7 @@ HPC Pack IaaS 部署脚本提供了另一种通用的方法来部署 HPC Pack �
     .\\New-HpcIaaSCluster.ps1 -ConfigFile E:\\HPCDemoConfig.xml -AdminUserName MyAdminName
 
 HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出并下载群集证书，然后将其保存到客户端计算机上当前用户的 Documents 文件夹中。此脚本将生成类似于下面的消息。在下面的步骤中，需在相应的证书存储中导入证书。
-    
+
     You have enabled REST API or web portal on HPC Pack head node. Please import the following certificate in the Trusted Root Certification Authorities certificate store on the computer where you are submitting job or accessing the HPC web portal:
     C:\Users\hpcuser\Documents\HPCWebComponent_HPCExcelHN004_20150707162011.cer
 
@@ -158,7 +158,7 @@ HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出�
 安装在 VM 映像上的 Office Professional Plus 2013 是使用通用批量许可密钥 (GVLK) 的批量版。可以通过密钥管理服务 (KMS)/基于 Active Directory 的激活 (AD-BA) 或多次激活密钥 (MAK) 进行激活。
 
     * 若要使用 KMS/AD-BA，请使用现有的 KMS 服务器，或使用 Microsoft Office 2013 批量许可包设置新服务器。（如果你想在头节点上设置服务器。）然后，通过 Internet 或电话激活 KMS 主机密钥。然后运行 clusrun `ospp.vbs` 以设置 KMS 服务器和端口，并激活所有 Excel 计算节点上的 Office。 
-    
+
     * 若要使用 MAK，请先运行 clusrun `ospp.vbs` 以输入密钥，然后通过 Internet 或电话激活所有 Excel 计算节点。 
 
 >[!NOTE]Office Professional Plus 2013 的零售产品密钥不适用于此 VM 映像。如果拥有不属此 Office Professional Plus 2013 批量版的 Office 或 Excel 版本的有效密钥和安装媒体，则也可以使用这些版本。请首先卸载此批量版，然后安装所拥有的版本。可捕获重新安装的 Excel 计算节点作为自定义 VM 映像，以便在大规模部署中使用。
@@ -179,39 +179,39 @@ HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出�
                 <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/>
             </startup>
         </configuration>
-    
-4.	设置客户端，以便将作业提交到 HPC Pack 群集。一个选项是下载完整的 [HPC Pack 2012 R2 Update 3 安装](http://www.microsoft.com/download/details.aspx?id=49922)，然后安装 HPC Pack 客户端。也可为计算机下载并安装 [HPC Pack 2012 R2 Update 3 客户端实用工具](https://www.microsoft.com/download/details.aspx?id=49923)和相应的 Visual C++ 2010 可再发行组件（[x64](http://www.microsoft.com/download/details.aspx?id=14632)、[x86](https://www.microsoft.com/download/details.aspx?id=5555)）。
 
-5.	此示例使用名为 ConvertiblePricing\_Complete.xlsb 的示例 Excel 工作簿。可以在[此处](https://www.microsoft.com/download/details.aspx?id=2939)下载。
+4. 设置客户端，以便将作业提交到 HPC Pack 群集。一个选项是下载完整的 [HPC Pack 2012 R2 Update 3 安装](http://www.microsoft.com/download/details.aspx?id=49922)，然后安装 HPC Pack 客户端。也可为计算机下载并安装 [HPC Pack 2012 R2 Update 3 客户端实用工具](https://www.microsoft.com/download/details.aspx?id=49923)和相应的 Visual C++ 2010 可再发行组件（[x64](http://www.microsoft.com/download/details.aspx?id=14632)、[x86](https://www.microsoft.com/download/details.aspx?id=5555)）。
 
-6.	将 Excel 工作簿复制到工作文件夹，例如 D:\\Excel\\Run。
+5. 此示例使用名为 ConvertiblePricing\_Complete.xlsb 的示例 Excel 工作簿。可以在[此处](https://www.microsoft.com/download/details.aspx?id=2939)下载。
 
-7.	打开 Excel 工作簿。在“开发”功能区上，单击“COM 外接程序”并确认 HPC Pack Excel COM 外接程序已成功加载。
+6. 将 Excel 工作簿复制到工作文件夹，例如 D:\\Excel\\Run。
+
+7. 打开 Excel 工作簿。在“开发”功能区上，单击“COM 外接程序”并确认 HPC Pack Excel COM 外接程序已成功加载。
 
     ![HPC Pack 的 Excel 外接程序][addin]
 
-8.	通过更改注释行编辑 Excel 中的 VBA 宏 HPCControlMacros，如下面的脚本中所示。替换为环境中的相应值。
+8. 通过更改注释行编辑 Excel 中的 VBA 宏 HPCControlMacros，如下面的脚本中所示。替换为环境中的相应值。
 
     ![HPC Pack 的 Excel 宏][macro]
 
         'Private Const HPC_ClusterScheduler = "HEADNODE_NAME"
             Private Const HPC_ClusterScheduler = "hpc01.chinaeast.chinacloudapp.cn"
-    
+
         'Private Const HPC_NetworkShare = "\\PATH\TO\SHARE\DIRECTORY"
         Private Const HPC_DependFiles = "D:\Excel\Upload\ConvertiblePricing_Complete.xlsb=ConvertiblePricing_Complete.xlsb"
-    
+
         'HPCExcelClient.Initialize ActiveWorkbook
         HPCExcelClient.Initialize ActiveWorkbook, HPC_DependFiles
-    
+
         'HPCWorkbookPath = HPC_NetworkShare & Application.PathSeparator & ActiveWorkbook.name
         HPCWorkbookPath = "ConvertiblePricing_Complete.xlsb"
-    
+
         'HPCExcelClient.OpenSession headNode:=HPC_ClusterScheduler, remoteWorkbookPath:=HPCWorkbookPath
         HPCExcelClient.OpenSession headNode:=HPC_ClusterScheduler, remoteWorkbookPath:=HPCWorkbookPath, UserName:="hpc\azureuser", Password:="<YourPassword>"
 
-9.	将 Excel 工作簿复制到某个上载目录，例如 D:\\Excel\\Upload。此目录在 VBA 宏的 HPC\_DependsFiles 常量中指定。
+9. 将 Excel 工作簿复制到某个上载目录，例如 D:\\Excel\\Upload。此目录在 VBA 宏的 HPC\_DependsFiles 常量中指定。
 
-10.	若要在 Azure 中的群集上运行该工作簿，请单击工作表上的“群集”按钮。
+10. 若要在 Azure 中的群集上运行该工作簿，请单击工作表上的“群集”按钮。
 
 ### 运行 Excel UDF
 
@@ -221,15 +221,15 @@ HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出�
 
 成功部署群集后，继续使用以下步骤来运行示例内置 Excel UDF。对于自定义 Excel UDF，请参阅这些[资源](http://social.technet.microsoft.com/wiki/contents/articles/1198.windows-hpc-and-microsoft-excel-resources-for-building-cluster-ready-workbooks.aspx)来构建 XLL 并将它们部署在 IaaS 群集上。
 
-1.	打开一个新的 Excel 工作簿。在“开发”功能区上，单击“外接程序”。然后，在对话框中单击“浏览”，导航到 %CCP\_HOME%Bin\\XLL32 文件夹，并选择示例 ClusterUDF32.xll。如果 ClusterUDF32 未存在于客户端计算机上，请从头节点上的 %CCP\_HOME%Bin\\XLL32 文件夹进行复制。
+1. 打开一个新的 Excel 工作簿。在“开发”功能区上，单击“外接程序”。然后，在对话框中单击“浏览”，导航到 %CCP\_HOME%Bin\\XLL32 文件夹，并选择示例 ClusterUDF32.xll。如果 ClusterUDF32 未存在于客户端计算机上，请从头节点上的 %CCP\_HOME%Bin\\XLL32 文件夹进行复制。
 
     ![选择 UDF][udf]
 
-2.	单击“文件”>“选项”>“高级”。在“公式”下，选中“允许用户定义的 XLL 函数运行计算群集”。然后，单击“选项”，在“群集头节点名称”中输入完整的群集名称 。（如前所述，此输入框限制为 34 个字符，因此较长的群集名称可能容纳不下。可以在此处使用计算机范围的变量作为群集的长名称。）
+2. 单击“文件”>“选项”>“高级”。在“公式”下，选中“允许用户定义的 XLL 函数运行计算群集”。然后，单击“选项”，在“群集头节点名称”中输入完整的群集名称 。（如前所述，此输入框限制为 34 个字符，因此较长的群集名称可能容纳不下。可以在此处使用计算机范围的变量作为群集的长名称。）
 
     ![配置 UDF][options]
 
-3.	若要在群集上运行 UDF 计算，请单击值为 XllGetComputerNameC() 的单元格，然后按 Enter。该函数只检索运行 UDF 的计算节点的名称。第一次运行时，凭据对话框将提示你输入用于连接到 IaaS 群集的用户名和密码。
+3. 若要在群集上运行 UDF 计算，请单击值为 XllGetComputerNameC() 的单元格，然后按 Enter。该函数只检索运行 UDF 的计算节点的名称。第一次运行时，凭据对话框将提示你输入用于连接到 IaaS 群集的用户名和密码。
 
     ![运行 UDF][run]
 

@@ -33,7 +33,7 @@ Azure PowerShell 0.9.8：
 
         # Select the Azure subscription you want to use to create the resource group if you have more than one subscription on your account.
         Select-AzureSubscription -SubscriptionName <subscription name>
- 
+
         # If Stream Analytics has not been registered to the subscription, remove remark symbol below (#) to run the Register-AzureProvider cmdlet to register the provider namespace.
         #Register-AzureProvider -Force -ProviderNamespace 'Microsoft.StreamAnalytics'
 
@@ -50,10 +50,10 @@ Azure PowerShell 1.0：
 
         # If Stream Analytics has not been registered to the subscription, remove remark symbol below (#) to run the Register-AzureProvider cmdlet to register the provider namespace.
         #Register-AzureRmResourceProvider -Force -ProviderNamespace 'Microsoft.StreamAnalytics'
-        
+
         # Create an Azure resource group
         New-AzureRMResourceGroup -Name <YOUR RESOURCE GROUP NAME> -Location <LOCATION>
-        
+
 > [!NOTE] 以编程方式创建的流分析作业默认情况下并不启用监视功能。你可以在 Azure 经典管理门户中手动启用监视功能，只需导航到作业的“监视”页，然后单击“启用”按钮即可；你也可以通过编程方式来执行此操作，只需遵循 [Azure 流分析 - 以编程方式监视流分析作业](./stream-analytics-monitor-jobs.md)中的步骤即可。
 
 ## 适用于流分析的 Azure PowerShell cmdlet
@@ -184,7 +184,7 @@ Azure PowerShell 1.0：
 
 ### New-AzureStreamAnalyticsInput | New-AzureRMStreamAnalyticsInput
 在流分析作业中创建新的输入，或者更新现有的指定输入。
-  
+
 输入的名称可以在 .json 文件中指定，也可以在命令行中指定。如果在两处同时指定，则命令行的名称必须与文件中的名称相同。
 
 如果你所指定的输入已存在，而且你并未指定 –Force 参数，则该 cmdlet 会询问你是否替换现有输入。
@@ -301,7 +301,7 @@ Azure PowerShell 1.0：
 
 ### New-AzureStreamAnalyticsTransformation | New-AzureRMStreamAnalyticsTransformation
 在流分析作业中创建新的转换，或者更新现有转换。
-  
+
 转换的名称可以在 .json 文件中指定，也可以在命令行中指定。如果在两处同时指定，则命令行的名称必须与文件中的名称相同。
 
 如果你所指定的转换已存在，而且你并未指定 –Force 参数，则该 cmdlet 会询问你是否替换现有转换。
@@ -449,7 +449,7 @@ Azure PowerShell 1.0：
 - [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
- 
+
 [msdn-switch-azuremode]: http://msdn.microsoft.com/zh-cn/library/dn722470.aspx
 [powershell-install]: ../powershell-install-configure.md
 [msdn-rest-api-create-stream-analytics-job]: https://msdn.microsoft.com/zh-cn/library/dn834994.aspx
@@ -463,5 +463,5 @@ Azure PowerShell 1.0：
 [stream.analytics.scale.jobs]: ./stream-analytics-scale-jobs.md
 [stream.analytics.query.language.reference]: http://go.microsoft.com/fwlink/?LinkID=513299
 [stream.analytics.rest.api.reference]: https://msdn.microsoft.com/zh-cn/library/dn835031.aspx
- 
+
 <!---HONumber=Mooncake_1107_2016-->

@@ -21,7 +21,7 @@ ms.author: jgao
 # 在 HDInsight Hadoop 群集上安装并使用 R
 
 了解如何使用 R 通过脚本操作来自定义基于 Windows 的 HDInsight 群集，以及如何在 HDInsight 群集上使用 R。HDInsight 的[高级级别](https://www.azure.cn/pricing/details/hdinsight/)产品/服务包括 HDInsight 群集中的 R Server。
- 
+
 你可以使用*脚本操作*，在 Azure HDInsight 的任何一种群集（Hadoop、Storm、HBase）上安装 R。用于在 HDInsight 群集上安装 R 的示例脚本可通过 [https://hdiconfigactions.blob.core.windows.net/rconfigactionv02/r-installer-v02.ps1](https://hdiconfigactions.blob.core.windows.net/rconfigactionv02/r-installer-v02.ps1) 上的只读 Azure 存储 Blob 获得。
 
 **相关文章**

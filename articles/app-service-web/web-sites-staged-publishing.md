@@ -39,7 +39,7 @@ ms.author: cephalin
 
 1. 在 [Azure 门户预览](https://portal.azure.cn/)中，打开应用的[资源边栏选项卡](../azure-resource-manager/resource-group-portal.md#manage-resources)。
 2. 选择“部署槽”选项，然后单击“添加槽”。
-   
+
     ![添加新部署槽][QGAddNewDeploymentSlot]  
 
     > [!NOTE]
@@ -47,15 +47,15 @@ ms.author: cephalin
     > 
     > 
 3. 在“添加槽”边栏选项卡中，为槽提供一个名称，并选择是否要从其他现有部署槽中克隆应用配置。单击复选标记以继续。
-   
+
     ![配置源][ConfigurationSource1]
-   
+
     第一次添加槽时，只有两种选择：从生产中的默认槽克隆配置或者完全不进行克隆。创建多个插槽后，可以从生产槽以外的槽克隆配置：
-   
+
     ![配置源][MultipleConfigurationSources]  
 
 4. 在应用的资源边栏选项卡中，单击“部署槽”，然后单击部署槽打开该槽的资源边栏选项卡，它包含一组度量值和配置（类似任何其他应用）。槽的名称将出现在边栏选项卡顶部，提醒你正在查看部署槽。
-   
+
     ![部署槽标题][StagingTitle]  
 
 5. 单击此槽边栏选项卡中的应用 URL。请注意，部署槽有其自己的主机名，同时它也是动态应用。若要限制对部署槽的公共访问权限，请参阅 [App Service Web 应用 – 阻止对非生产部署槽的 Web 访问](http://ruslany.net/2014/04/azure-web-sites-block-web-access-to-non-production-deployment-slots/)。
@@ -95,7 +95,7 @@ ms.author: cephalin
 > 
 
 1. 若要交换部署槽，请在应用命令栏或部署槽命令栏中，单击“交换”按钮。
-   
+
     ![“交换”按钮][SwapButtonBar]  
 
 2. 确保正确设置交换源和交换目标。交换目标通常是生产槽。单击“确定”完成操作。操作完成后，即已交换部署槽。
@@ -131,13 +131,13 @@ ms.author: cephalin
 为槽配置自动交换很容易。请遵循以下步骤操作：
 
 1. 在“部署槽”中，选择非生产槽，然后在该槽的资源边栏选项卡中选择“应用程序设置”。
-   
+
     ![][Autoswap1]  
 
 2. 针对“自动交换”选择“打开”，在“自动交换槽”中选择所需的目标槽，然后在命令栏中单击“保存”。确保槽的配置与针对目标槽的配置完全相同。
-   
+
     操作完成后，“通知”选项卡将闪烁绿色的“成功”字样。
-   
+
     ![][Autoswap2]  
 
     > [!NOTE]

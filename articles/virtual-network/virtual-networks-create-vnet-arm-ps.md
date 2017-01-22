@@ -24,7 +24,7 @@ ms.author: jdial
 [!INCLUDE [virtual-networks-create-vnet-intro](../../includes/virtual-networks-create-vnet-intro-include.md)]
 
 Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建议通过 Resource Manager 部署模型创建资源。若要深入了解这两个模型之间的差异，请阅读[了解 Azure 部署模型](../azure-resource-manager/resource-manager-deployment-model.md)一文。
- 
+
 本文介绍如何使用 PowerShell 通过 Resource Manager 部署模型创建 VNet。还可以使用其他工具通过 Resource Manager 创建 VNet，或通过从以下列表中选择不同的选项使用经典部署模型创建 VNet：
 > [!div class="op_single_selector"]
 - [门户](./virtual-networks-create-vnet-arm-pportal.md)
@@ -79,9 +79,9 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
         $vnet = Get-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
 
-   > [!TIP]
-   可通过运行 `$vnet = New-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet -AddressPrefix 192.168.0.0/16 -Location chinaeast` 合并步骤 3 和步骤 4。
-   > 
+    > [!TIP]
+    可通过运行 `$vnet = New-AzureRmVirtualNetwork -ResourceGroupName TestRG -Name TestVNet -AddressPrefix 192.168.0.0/16 -Location chinaeast` 合并步骤 3 和步骤 4。
+    > 
 
 5. 将子网添加到新的 VNet 变量中：
 
@@ -89,7 +89,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         -VirtualNetwork $vnet -AddressPrefix 192.168.1.0/24
 
     预期输出：
-   
+
         Name                  : TestVNet
         ResourceGroupName     : TestRG
         Location              : chinaeast
@@ -121,7 +121,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 
     预期输出：
-   
+
         Name                  : TestVNet
         ResourceGroupName     : TestRG
         Location              : chinaeast

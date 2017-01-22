@@ -59,7 +59,7 @@ HDS
 - 如果未设置资产传送策略，则无法在存储加密的资产上创建流式处理定位符。如果资产未经过存储加密，则即使未设置资产传送策略，系统也将允许顺利创建定位符和流式处理资产。
 - 可将多个资产传送策略关联到单个资产，但只能指定一种方法来处理给定的 AssetDeliveryProtocol。也就是说，如果尝试链接两个指定 AssetDeliveryProtocol.SmoothStreaming 协议的传送策略，则会导致出错，因为当客户端发出平滑流式处理请求时，系统不知道要应用哪个策略。
 - 如果资产包含现有流式处理定位符，则不能将新策略链接到该资产、取消现有策略与资产的链接，或者更新与该资产关联的传送策略。必须先删除流式处理定位符，调整策略，再重新创建流式处理定位符。重新创建流式处理定位符时，可以使用同一个 locatorId，但应确保该操作不会导致客户端出现问题，因为内容可能已被来源或下游 CDN 缓存。
- 
+
 >[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
 >
 >访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
@@ -74,7 +74,7 @@ HDS
 有关创建 AssetDeliveryPolicy 时可以指定哪些值的信息，请参阅[定义 AssetDeliveryPolicy 时使用的类型](#types)部分。
 
 请求：
-      
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/AssetDeliveryPolicies HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 1.0;NetFx
@@ -85,14 +85,14 @@ HDS
     x-ms-version: 2.11
     x-ms-client-request-id: 4651882c-d7ad-4d5e-86ab-f07f47dcb41e
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
     {"Name":"Clear Policy",
     "AssetDeliveryProtocol":7,
     "AssetDeliveryPolicyType":2,
     "AssetDeliveryConfiguration":null}
 
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 363
@@ -107,7 +107,7 @@ HDS
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Sun, 08 Feb 2015 06:21:27 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#AssetDeliveryPolicies/@Element",
     "Id":"nb:adpid:UUID:92b0f6ba-3c9f-49b6-a5fa-2a8703b04ecd",
     "Name":"Clear Policy",
@@ -116,7 +116,7 @@ HDS
     "AssetDeliveryConfiguration":null,
     "Created":"2015-02-08T06:21:27.6908329Z",
     "LastModified":"2015-02-08T06:21:27.6908329Z"}
-    
+
 ###<a id="link_asset_with_asset_delivery_policy"></a>将资产与资产传送策略相链接
 
 以下 HTTP 请求将指定的资产链接到资产传送策略。
@@ -133,7 +133,7 @@ HDS
     x-ms-version: 2.11
     x-ms-client-request-id: 56d2763f-6e72-419d-ba3c-685f6db97e81
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
     {"uri":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/AssetDeliveryPolicies('nb%3Aadpid%3AUUID%3A92b0f6ba-3c9f-49b6-a5fa-2a8703b04ecd')"}
 
 响应：
@@ -153,7 +153,7 @@ HDS
 指定要在 HTTP 请求正文中获取的 URL 类型。如果要使用 PlayReady 保护内容，请将 keyDeliveryType 设为 1 以请求媒体服务 PlayReady 许可证获取 URL：{"keyDeliveryType":1}。如果要使用信封加密来保护内容，请将 keyDeliveryType 指定为 2 以请求密钥获取 URL：{"keyDeliveryType":2}。
 
 请求：
-    
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeys('nb:kid:UUID:dc88f996-2859-4cf7-a279-c52a9d6b2f04')/GetKeyDeliveryUrl HTTP/1.1
     Content-Type: application/json
     MaxDataServiceVersion: 3.0;NetFx
@@ -164,11 +164,11 @@ HDS
     x-ms-client-request-id: 569d4b7c-a446-4edc-b77c-9fb686083dd8
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 21
-    
+
     {"keyDeliveryType":2}
 
 响应：
-    
+
     HTTP/1.1 200 OK
     Cache-Control: no-cache
     Content-Length: 198
@@ -181,7 +181,7 @@ HDS
     DataServiceVersion: 3.0;
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Sun, 08 Feb 2015 21:42:30 GMT
-    
+
     {"odata.metadata":"wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#Edm.String","value":"https://amsaccount1.keydelivery.mediaservices.chinacloudapi.cn/?KID=dc88f996-2859-4cf7-a279-c52a9d6b2f04"}
 
 ###创建资产传送策略
@@ -203,11 +203,11 @@ HDS
     x-ms-version: 2.11
     x-ms-client-request-id: fff319f6-71dd-4f6c-af27-b675c0066fa7
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
     {"Name":"AssetDeliveryPolicy","AssetDeliveryProtocol":4,"AssetDeliveryPolicyType":3,"AssetDeliveryConfiguration":"[{"Key":2,"Value":"https:\\/\\/amsaccount1.keydelivery.mediaservices.chinacloudapi.cn\\/"}]"}
 
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 460
@@ -221,7 +221,7 @@ HDS
     DataServiceVersion: 3.0;
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 09 Feb 2015 05:24:38 GMT
-    
+
     {"odata.metadata":"wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#AssetDeliveryPolicies/@Element","Id":"nb:adpid:UUID:ec9b994e-672c-4a5b-8490-a464eeb7964b","Name":"AssetDeliveryPolicy","AssetDeliveryProtocol":4,"AssetDeliveryPolicyType":3,"AssetDeliveryConfiguration":"[{"Key":2,"Value":"https:\\/\\/amsaccount1.keydelivery.mediaservices.chinacloudapi.cn\\/"}]","Created":"2015-02-09T05:24:38.9167436Z","LastModified":"2015-02-09T05:24:38.9167436Z"}
 
 ###将资产与资产传送策略相链接
@@ -257,17 +257,17 @@ HDS
     x-ms-version: 2.11
     x-ms-client-request-id: fff319f6-71dd-4f6c-af27-b675c0066fa7
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
     {"Name":"AssetDeliveryPolicy","AssetDeliveryProtocol":1,"AssetDeliveryPolicyType":4,"AssetDeliveryConfiguration":"[{"Key":2,"Value":"https:\\/\\/amsaccount1.keydelivery.mediaservices.chinacloudapi.cn\/PlayReady\/"}]"}
 
 若要使用 Widevine DRM 保护你的内容，请更新 AssetDeliveryConfiguration 值以使用 WidevineLicenseAcquisitionUrl（其值为 7），并指定许可证交付服务的 URL。可通过以下 AMS 合作伙伴来帮助交付 Widevine 许可证：[EZDRM](http://ezdrm.com/)、[castLabs](http://castlabs.com/company/partners/azure/)
 
 例如：
- 
+
     {"Name":"AssetDeliveryPolicy","AssetDeliveryProtocol":2,"AssetDeliveryPolicyType":4,"AssetDeliveryConfiguration":"[{"Key":7,"Value":"https:\\/\\/example.net\/WidevineLicenseAcquisition\/"}]"}
 
 >[!NOTE]使用 Widevine 加密时，只能使用 DASH 传送。请确保在资产传送协议中指定 DASH (2)。
-  
+
 ###将资产与资产传送策略相链接
 
 请参阅[将资产与资产传送策略相链接](#link_asset_with_asset_delivery_policy)
@@ -403,7 +403,7 @@ HDS
         /// Base key url that will have KID=<Guid> appended for Envelope.
         /// </summary>
         EnvelopeBaseKeyAcquisitionUrl,
-        
+
         /// <summary>
         /// The initialization vector to use for envelope encryption in Base64 format.
         /// </summary>

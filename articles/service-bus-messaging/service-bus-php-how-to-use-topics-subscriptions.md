@@ -68,7 +68,7 @@ wacn.date: 01/09/2017
         require_once 'vendor\autoload.php';
 
             use WindowsAzure\Common\ServicesBuilder;
-    
+
             $connectionString = "Endpoint=[yourEndpoint];SharedSecretIssuer=[Default Issuer];SharedSecretValue=[Default Key]";
 
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
@@ -84,10 +84,10 @@ wacn.date: 01/09/2017
         use WindowsAzure\Common\ServicesBuilder;
         use WindowsAzure\Common\ServiceException;
         use WindowsAzure\ServiceBus\Models\TopicInfo;
-    
+
         // Create Service Bus REST proxy.
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
-    
+
         try	{		
             // Create topic.
             $topicInfo = new TopicInfo("mytopic");
@@ -120,7 +120,7 @@ wacn.date: 01/09/2017
 
         // Create Service Bus REST proxy.
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
-    
+
         try	{
             // Create subscription.
             $subscriptionInfo = new SubscriptionInfo("mysubscription");
@@ -179,12 +179,12 @@ wacn.date: 01/09/2017
 
         // Create Service Bus REST proxy.
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
-        
+
         try	{
             // Create message.
             $message = new BrokeredMessage();
             $message->setBody("my message");
-    
+
             // Send message.
             $serviceBusRestProxy->sendTopicMessage("mytopic", $message);
         }
@@ -203,10 +203,10 @@ wacn.date: 01/09/2017
             // Create message.
             $message = new BrokeredMessage();
             $message->setBody("my message ".$i);
-            
+
             // Set custom property.
             $message->setProperty("MessageNumber", $i);
-            
+
             // Send message.
             $serviceBusRestProxy->sendTopicMessage("mytopic", $message);
         }
@@ -231,22 +231,22 @@ wacn.date: 01/09/2017
 
         // Create Service Bus REST proxy.
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
-        
+
         try	{
             // Set receive mode to PeekLock (default is ReceiveAndDelete)
             $options = new ReceiveMessageOptions();
             $options->setPeekLock();
-    
+
             // Get message.
             $message = $serviceBusRestProxy->receiveSubscriptionMessage("mytopic", "mysubscription", $options);
 
             echo "Body: ".$message->getBody()."<br />";
             echo "MessageID: ".$message->getMessageId()."<br />";
-        
+
             /*---------------------------
                 Process message here.
             ----------------------------*/
-        
+
             // Delete message. Not necessary if peek lock is not set.
             echo "Deleting message...<br />";
             $serviceBusRestProxy->deleteMessage($message);
@@ -282,7 +282,7 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
 
         // Create Service Bus REST proxy.
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
-    
+
         try	{		
             // Delete topic.
             $serviceBusRestProxy->deleteTopic("mytopic");

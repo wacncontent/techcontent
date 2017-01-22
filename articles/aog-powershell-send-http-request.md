@@ -33,7 +33,7 @@ PowerShell 是一款非常实用的命令行界面和脚本编辑工具，同时
     + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
         + CategoryInfo          : CloseError: (:) [Get-AzureVM], HttpRequestException  
         + FullyQualifiedErrorId : Microsoft.WindowsAzure.Commands.ServiceManagement.IaaS.GetAzureVMCommand
-    
+
     Get-OSVersions : The remote server returned an unexpected response: (407) Proxy Authenti cation Required. 
     At line:1 char:15 + get-osversions &lt;&lt;&lt;&lt; -subscriptionId * -certificate (get-item cert:\CurrentUser
     \MY*****) + CategoryInfo : CloseError: (:) [Get-OSVersions], ProtocolException + FullyQualifiedErrorId :
@@ -77,7 +77,7 @@ PowerShell 是一款非常实用的命令行界面和脚本编辑工具，同时
     <br>
 
  通过该 trace 可以发现是由于 Proxy 认证失败导致 PowerShell 无法发送 http 请求。这是由于 PowerShell 工具无法获取到 Proxy 的认证信息，从而连接失败。对于需要认证信息的代理，PowerShell 是不支持的，需要我们做一些特殊的配置，让 PowerShell 能够成功获取到该认证信息。
- 
+
 ##解决方法：
 通常的 Http 请求都是通过获取在浏览器 IE 中设置代理配置信息完成请求，但是如果您的代理环境是会提示您输入用户名密码的环境，这样简单的在 IE 中做配置是无法使得 PowerShell 成功发送 http 请求的。
 
@@ -88,7 +88,7 @@ PowerShell 是一款非常实用的命令行界面和脚本编辑工具，同时
 1. 创建一个 assembly，主要用来声明代理的认证信息。  
 例如： SomeAssembly.dll（可以通过 Visual Studio 创建 project 以及 class，通过 build 该 project 获得该.dll 文件）  
 Class 示例：
-  
+
         namespace SomeNameSpace
         {
             public class MyProxy : IWebProxy
@@ -99,12 +99,12 @@ Class 示例：
                     //or get { return new NetworkCredential("user", " password"," domain"); }
                     set { }
                 }
-        
+
                 public Uri GetProxy(Uri destination)
                 {
                     return new Uri("http://your.proxy:8080");
                }
-        
+
                 public bool IsBypassed(Uri host)
                 {
                     return false;

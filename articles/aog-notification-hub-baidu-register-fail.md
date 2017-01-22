@@ -36,11 +36,11 @@ wacn.date: 10/28/2016
         String endpoint = "https://baidutestns.servicebus.chinacloudapi.cn/";
         String hubPath = "baidutest";//your notificationhub name
         String APIVERSION = "?api-version=2015-01";
-        
+
         String queryUri = null;
         try {
         String channelQuery = URLEncoder.encode("BaiduUserId-BaiduChannelId eq '" + BaiduUserId + "-" + BaiduChannelId + "'", "UTF-8");
-        
+
         queryUri = endpoint + hubPath + "/registrations" + APIVERSION
                    + "&$filter=" + channelQuery
                    + getQueryString(0, continuationToken);

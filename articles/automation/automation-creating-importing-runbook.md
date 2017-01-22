@@ -90,7 +90,7 @@ ms.author: magoedte;bwren
 
     $automationAccountName = "AutomationAccount"
     $runbookName = "Sample_TestRunbook"
-    
+
     Publish-AzureAutomationRunbook -AutomationAccountName $automationAccountName -Name $runbookName
 
 ## 后续步骤

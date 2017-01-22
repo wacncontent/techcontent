@@ -65,10 +65,10 @@ ARP 表示例：
         # Required Variables
         $RG = "<Your Resource Group Name Here>"
         $Name = "<Your ExpressRoute Circuit Name Here>"
-        
+
         # ARP table for Azure private peering - Primary path
         Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePrivatePeering -DevicePath Primary
-        
+
         # ARP table for Azure private peering - Secodary path
         Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePrivatePeering -DevicePath Secondary 
 
@@ -85,10 +85,10 @@ ARP 表示例：
         # Required Variables
         $RG = "<Your Resource Group Name Here>"
         $Name = "<Your ExpressRoute Circuit Name Here>"
-        
+
         # ARP table for Azure public peering - Primary path
         Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePublicPeering -DevicePath Primary
-        
+
         # ARP table for Azure public peering - Secodary path
         Get-AzureRmExpressRouteCircuitARPTable -ResourceGroupName $RG -ExpressRouteCircuitName $Name -PeeringType AzurePublicPeering -DevicePath Secondary 
 

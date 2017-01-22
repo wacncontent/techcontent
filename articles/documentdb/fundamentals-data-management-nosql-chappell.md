@@ -25,7 +25,7 @@ ms.author: mimig
 
 - [NoSQL 与 SQL](./documentdb-nosql-vs-sql.md) 一文。本文讨论 NoSQL 与 SQL 之间的区别，并为你提供来自 Microsoft 的 NoSQL 和 SQL 产品简介。
 - 由 David Chappell 撰写的 [Understanding NoSQL on Azure](http://go.microsoft.com/fwlink/p/?LinkId=330292)（了解 Azure 上的 NoSQL）白皮书。本白皮书提供了以下内容：
-  
+
   - 区分由应用程序读取和写入的操作数据与用于提供商业智能 (BI) 的分析数据，以帮助确定符合你需求的技术。
   - 关系技术的简要概述。
   - 每种 Azure NoSQL 技术的简介：DocumentDB、表存储、HBase 和 HDInsight。

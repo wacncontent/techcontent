@@ -222,7 +222,7 @@ SecondaryTiles 字典使用的 TileId 与在 Windows 应用商店应用中创建
 
         settings.Add("__NHRegistrationId", newRegistrationId);
     }
-     
+
     string regId = (string)settings["__NHRegistrationId"];
 
     RegistrationDescription registration = new WindowsRegistrationDescription(pushChannel.Uri);
@@ -251,7 +251,7 @@ SecondaryTiles 字典使用的 TileId 与在 Windows 应用商店应用中创建
 客户端设备仍会像前面一样获取其 PNS 句柄及相关的安装属性，然后在可以执行注册和授权标记等的后端上调用自定义 API。后端可以利用[适用于后端操作的通知中心 SDK](https://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/)。
 
 你也可以使用 [JSON-Patch standard](https://tools.ietf.org/html/rfc6902) 以 PATCH 方法更新安装。
- 
+
     // Initialize the Notification Hub
     NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString(listenConnString, hubName);
 
@@ -296,7 +296,7 @@ SecondaryTiles 字典使用的 TileId 与在 Windows 应用商店应用中创建
 从应用后端可以对注册执行基本 CRUDS 操作。例如：
 
     var hub = NotificationHubClient.CreateClientFromConnectionString("{connectionString}", "hubName");
-            
+
     // create a registration description object of the correct type, e.g.
     var reg = new WindowsRegistrationDescription(channelUri, tags);
 

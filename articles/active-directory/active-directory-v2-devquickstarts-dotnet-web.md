@@ -25,7 +25,7 @@ ms.author: dastrock
     v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
  此处，我们将构建一个可以使用 OWIN 来将用户登录、显示有关用户的某些信息以及将用户从应用中注销的 Web 应用。
- 
+
  ## 下载。
  本教程的代码[在 GitHub 上](https://github.com/AzureADQuickStarts/AppModelv2-WebApp-OpenIdConnect-DotNet)维护。若要遵照该代码，你可以[下载 .zip 格式应用骨架](https://github.com/AzureADQuickStarts/AppModelv2-WebApp-OpenIdConnect-DotNet/archive/skeleton.zip)，或克隆该骨架：
 
@@ -43,23 +43,23 @@ ms.author: dastrock
 ## 安装并配置 OWIN 身份验证
 在这里，我们要将 OWIN 中间件配置为使用 OpenID Connect 身份验证协议。OWIN 将用于发出登录和注销请求、管理用户的会话、获取有关用户的信息，等等。
 
--	首先，打开位于项目根目录中的 `web.config` 文件，并在 `<appSettings>` 节中输入应用程序的配置值。
-    -	`ida:ClientId` 是在注册门户中为应用分配的**应用程序 ID**。
-    -	`ida:RedirectUri` 是在门户中输入的**重定向 URI**。
+- 首先，打开位于项目根目录中的 `web.config` 文件，并在 `<appSettings>` 节中输入应用程序的配置值。
+    - `ida:ClientId` 是在注册门户中为应用分配的**应用程序 ID**。
+    - `ida:RedirectUri` 是在门户中输入的**重定向 URI**。
 
--	接下来，使用包管理器控制台将 OWIN 中间件 NuGet 包添加到项目。
+- 接下来，使用包管理器控制台将 OWIN 中间件 NuGet 包添加到项目。
 
     PM> Install-Package Microsoft.Owin.Security.OpenIdConnect
     PM> Install-Package Microsoft.Owin.Security.Cookies
     PM> Install-Package Microsoft.Owin.Host.SystemWeb
 
--	将称为 `Startup.cs` 的 OWIN 启动类添加到项目。右键单击项目，选择“添加”-->“新建项”，然后搜索“OWIN”。当你的应用程序启动时，该 OWIN 中间件将调用 `Configuration(...)` 方法。
--	将类声明更改为 `public partial class Startup` - 我们已在另一个文件中实现了此类的一部分。在 `Configuration(...)` 方法中，调用 ConfigureAuth(...) 以设置 Web 应用的身份验证。
+- 将称为 `Startup.cs` 的 OWIN 启动类添加到项目。右键单击项目，选择“添加”-->“新建项”，然后搜索“OWIN”。当你的应用程序启动时，该 OWIN 中间件将调用 `Configuration(...)` 方法。
+- 将类声明更改为 `public partial class Startup` - 我们已在另一个文件中实现了此类的一部分。在 `Configuration(...)` 方法中，调用 ConfigureAuth(...) 以设置 Web 应用的身份验证。
 
 C#
 
     [assembly: OwinStartup(typeof(Startup))]
-    
+
     namespace TodoList_WebApp
     {
         public partial class Startup
@@ -71,23 +71,23 @@ C#
         }
     }
 
--	打开文件 `App_Start\Startup.Auth.cs` 并实现 `ConfigureAuth(...)` 方法。在 `OpenIdConnectAuthenticationOptions` 中提供的参数将充当应用程序与 Azure AD 通信时使用的坐标。你还需要设置 Cookie 身份验证 - OpenID Connect 中间件将在幕后使用 Cookie。
+- 打开文件 `App_Start\Startup.Auth.cs` 并实现 `ConfigureAuth(...)` 方法。在 `OpenIdConnectAuthenticationOptions` 中提供的参数将充当应用程序与 Azure AD 通信时使用的坐标。你还需要设置 Cookie 身份验证 - OpenID Connect 中间件将在幕后使用 Cookie。
 
 C#
 
     public void ConfigureAuth(IAppBuilder app)
     {
         app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
-    
+
         app.UseCookieAuthentication(new CookieAuthenticationOptions());
-    
+
         app.UseOpenIdConnectAuthentication(
             new OpenIdConnectAuthenticationOptions
             {
                 // The `Authority` represents the v2.0 endpoint - https://login.microsoftonline.com/common/v2.0 
                 // The `Scope` describes the permissions that your app will need.  See https://azure.cn/documentation/articles/active-directory-v2-scopes/
                 // In a real application you could use issuer validation for additional checks, like making sure the user's organization has signed up for your app, for instance.
-    
+
                 ClientId = clientId,
                 Authority = String.Format(CultureInfo.InvariantCulture, aadInstance, "common", "/v2.0 "),
                 RedirectUri = redirectUri,
@@ -117,7 +117,7 @@ C#
     {
       ...
 
--	还可以使用 OWIN 直接从代码内部发出身份验证请求。打开 `Controllers\AccountController.cs`。在 SignIn() 和 SignOut() 操作中，分别发出 OpenID Connect 质询和注销请求。
+- 还可以使用 OWIN 直接从代码内部发出身份验证请求。打开 `Controllers\AccountController.cs`。在 SignIn() 和 SignOut() 操作中，分别发出 OpenID Connect 质询和注销请求。
 
 C#
 
@@ -129,7 +129,7 @@ C#
             HttpContext.GetOwinContext().Authentication.Challenge(new AuthenticationProperties { RedirectUri = "/" }, OpenIdConnectAuthenticationDefaults.AuthenticationType);
         }
     }
-        
+
     // BUGBUG: Ending a session with the v2.0 endpoint is not yet supported.  Here, we just end the session with the web app.  
     public void SignOut()
     {
@@ -138,7 +138,7 @@ C#
         Response.Redirect("/");
     }
 
--	现在，请打开 `Views\Shared\_LoginPartial.cshtml`。你将在其中向用户显示应用程序的登录和注销链接，用户名将在视图中列显。
+- 现在，请打开 `Views\Shared\_LoginPartial.cshtml`。你将在其中向用户显示应用程序的登录和注销链接，用户名将在视图中列显。
 
 HTML
 
@@ -147,9 +147,9 @@ HTML
         <text>
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-text">
-    
+
                     @*The 'preferred_username' claim can be used for showing the user's primary way of identifying themselves.*@
-    
+
                     Hello, @(System.Security.Claims.ClaimsPrincipal.Current.FindFirst("preferred_username").Value)!
                 </li>
                 <li>
@@ -171,22 +171,22 @@ HTML
 - 打开 `Controllers\HomeController.cs` 文件。可以通过 `ClaimsPrincipal.Current` 安全主体对象访问控制器中的用户声明。
 
 C#
-    
+
     [Authorize]
     public ActionResult About()
     {
         ViewBag.Name = ClaimsPrincipal.Current.FindFirst("name").Value;
-    
+
         // The object ID claim will only be emitted for work or school accounts at this time.
         Claim oid = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier");
         ViewBag.ObjectId = oid == null ? string.Empty : oid.Value;
-    
+
         // The 'preferred_username' claim can be used for showing the user's primary way of identifying themselves
         ViewBag.Username = ClaimsPrincipal.Current.FindFirst("preferred_username").Value;
-    
+
         // The subject or nameidentifier claim can be used to uniquely identify the user
         ViewBag.Subject = ClaimsPrincipal.Current.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
-    
+
         return View();
     }
 

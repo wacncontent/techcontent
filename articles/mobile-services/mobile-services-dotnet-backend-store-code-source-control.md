@@ -68,11 +68,11 @@ ms.author: glenga
 2. 删除所有 NuGet 包文件夹，只保留 packages.config 文件。
 
     移动服务将基于 packages.confign 文件自动还原 NuGet 包。你还可以定义一个 .gitignore 文件，以防止添加包目录。
- 
+
 3. 在 Git 命令提示符下，键入以下命令以开始跟踪新脚本文件：
 
         $ git add .
-    
+
 4. 键入以下命令以提交更改：
 
         $ git commit -m "adding the .NET backend service project"
@@ -80,7 +80,7 @@ ms.author: glenga
 5. 键入以下命令以将更改上载到远程存储库，并提供你的凭据：
 
         $ git push origin master
-    
+
     你应会看到一系列命令，它们指示已将项目部署到移动服务、已添加包，并且已重新启动服务。
 
 6. 浏览到 .NET 后端移动服务的 URL，你应会看到：

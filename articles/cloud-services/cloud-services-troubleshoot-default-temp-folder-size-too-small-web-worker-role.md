@@ -40,7 +40,7 @@ ms.author: v-six
 
     using System;
     using Microsoft.WindowsAzure.ServiceRuntime;
-    
+
     namespace WorkerRole1
     {
         public class WorkerRole : RoleEntryPoint
@@ -55,14 +55,14 @@ ms.author: v-six
                 //                  cleanOnRoleRecycle="false"
                 //                  sizeInMB="1024" />
                 // </LocalResources>
-    
+
                 string customTempLocalResourcePath =
                 RoleEnvironment.GetLocalResource("CustomTempLocalStore").RootPath;
                 Environment.SetEnvironmentVariable("TMP", customTempLocalResourcePath);
                 Environment.SetEnvironmentVariable("TEMP", customTempLocalResourcePath);
-    
+
                 // The rest of your startup code goes here…
-    
+
                 return base.OnStart();
             }
         }

@@ -265,7 +265,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         azure group create -n IaaSStory-Backend -l chinanorth --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/11-MultiNIC/azuredeploy.json -e parameters.json
 
     预期输出：
-   
+
         info:    Executing command group create
         + Getting resource group IaaSStory-Backend
         + Creating resource group IaaSStory-Backend

@@ -53,15 +53,15 @@ Azure Service Fabric 的 Visual Studio 工具提供发布到本地或远程群�
     每个参数都有默认值。可选参数 DefaultServiceTypeHealthPolicy 采用哈希表输入。下面是 DefaultServiceTypeHealthPolicy 的哈希表输入格式示例：
 
         @{ ConsiderWarningAsError = "false"; MaxPercentUnhealthyDeployedApplications = 0; MaxPercentUnhealthyServices = 0; MaxPercentUnhealthyPartitionsPerService = 0; MaxPercentUnhealthyReplicasPerPartition = 0 }
-        
+
     ServiceTypeHealthPolicyMap 是另一个接受哈希表输入（格式如下）的可选参数：
 
         @ {"ServiceTypeName" : "MaxPercentUnhealthyPartitionsPerService,MaxPercentUnhealthyReplicasPerPartition,MaxPercentUnhealthyServices"}
-        
+
     下面是一个真实示例：
 
         @{ "ServiceTypeName01" = "5,10,5"; "ServiceTypeName02" = "5,5,5" }
-    
+
 3. 如果选择 UnmonitoredManual 升级模式，则必须手动启动 PowerShell 控制台才能继续并完成升级过程。若要了解手动升级的工作方式，请参阅 [Service Fabric应用程序升级：高级主题](./service-fabric-application-upgrade-advanced.md)。
 
 ## 使用 PowerShell 升级应用程序

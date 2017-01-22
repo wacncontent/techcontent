@@ -54,7 +54,7 @@ ms.author: ddove
 
     if (!sm.TryGetShard(new ShardLocation(shardServer, "sample_shard_2"),out shard2)) 
     { 
-    
+
         shard2 = sm.CreateShard(new ShardLocation(shardServer, "sample_shard_2"));  
     } 
 
@@ -73,5 +73,5 @@ ms.author: ddove
 **重要说明**：仅当你确定所更新映射的范围为空时，才使用此方法。上述方法不会检查数据中移动的范围，因此最好在代码中包含检查操作。如果要移动的范围中存在行，则实际的数据分布将与更新后的分片映射不匹配。在这种情况下，请改用[拆分/合并工具](./sql-database-elastic-scale-overview-split-and-merge.md)来执行操作。
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
- 
+
 <!---HONumber=Mooncake_1212_2016-->

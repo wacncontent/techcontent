@@ -37,10 +37,10 @@ This course will help you to understand how to use the Azure portal to quickly c
 - [Subsequent steps](#nextstep)
 
 ##<a id="step1"></a>Step 1: Sign in to the Azure portal and create a MySQL server
-1.	Sign in to the Azure portal, and then select MySQL Database on Azure in the navigation bar on the right. 
-2.	Click “Create” at the bottom of the page. A list of content that can be created will then be displayed.
-3.	Click “MySQL Database on Azure,” and then click on “Quick Create.”
- 
+1. Sign in to the Azure portal, and then select MySQL Database on Azure in the navigation bar on the right. 
+2. Click “Create” at the bottom of the page. A list of content that can be created will then be displayed.
+3. Click “MySQL Database on Azure,” and then click on “Quick Create.”
+
 ![Creating MySQL servers](./media/mysql-database-get-started/create-mysql-server-en.png)
 
 >[!NOTE]**Your username is composed of “server name%username”. Ensure that you fill in the complete username when you connect to the database. **

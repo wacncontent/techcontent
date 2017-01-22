@@ -15,7 +15,7 @@ ms.devlang: rest-api
 ms.topic: article
 ms.date: 09/23/2016
 ms.author: b-hoedid
-wacn.date: 11/28/2016
+wacn.date: 01/19/2017
 ---
 
 # 使用逻辑应用针对新增或已更改的 DocumentDB 资源发送通知
@@ -61,11 +61,11 @@ IT 部门表示他们可以轻松提供此通知。他们还表示可以将文�
 
 3. 将此值 POST 到 API 应用，这会进行 DocumentDB 查询。此值用于查询中。
 
-SQL
+    SQL
 
-    SELECT * FROM Patients p WHERE (p._ts >= @unixTimeStamp)
-    
-> [!NOTE] \_ts 表示所有 DocumentDB 资源的时间戳元数据。
+        SELECT * FROM Patients p WHERE (p._ts >= @unixTimeStamp)
+
+    > [!NOTE] The _ts represents the TimeStamp metadata for all DocumentDB resources.
 
 4. 如果找到文档，则会将响应正文发送到 Azure Blob 存储。
 
@@ -107,7 +107,7 @@ SQL
 让我们在代码视图中看一下完整的逻辑应用。
 
 JSON
-   
+
        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2015-08-01-preview/workflowdefinition.json#",
     "actions": {
         "Conversion": {
@@ -240,7 +240,7 @@ JSON
             },
             "type": "Manual"
         }
-    
+
 如果你不熟悉代码中各节所代表的含义，可以查看[逻辑应用工作流定义语言](http://aka.ms/logicappsdocs)文档。
 
 此工作流使用 [HTTP Webhook 触发器](https://sendgrid.com/blog/whats-webhook/)。如果查看上述代码，你会看到以下示例所示的参数。
@@ -728,7 +728,7 @@ JSON
 在此操作中，你会发送电子邮件通知。将使用 [SendGrid](https://sendgrid.com/marketing/sendgrid-services?cvosrc=PPC.Bing.sendgrib&cvo_cid=SendGrid%20-%20US%20-%20Brand%20-%20&mc=Paid%20Search&mcd=BingAds&keyword=sendgrib&network=o&matchtype=e&mobile=&content=&search=1&utm_source=bing&utm_medium=cpc&utm_term=%5Bsendgrib%5D&utm_content=%21acq%21v2%2134335083397-8303227637-1649139544&utm_campaign=SendGrid+-+US+-+Brand+-+%28English%29)。
 
 其代码是使用逻辑应用的模板以及 [101-logic-app-sendgrid Github 存储库](https://github.com/Azure/azure-quickstart-templates/tree/master/101-logic-app-sendgrid)中的 SendGrid 生成的。
- 
+
 HTTP 操作是一个 POST。
 
 授权参数位于触发器属性中
@@ -809,7 +809,7 @@ JSON
 ![结果](./media/documentdb-change-notification/logic-app-run.png)  
 
 ## 度量值
-你可以在门户预览中为主要逻辑应用配置监视。这样，你就可以查看“运行延迟”和其他事件，如下图所示。
+你可以在门户中为主要逻辑应用配置监视。这样，你就可以查看“运行延迟”和其他事件，如下图所示。
 
 ![](./media/documentdb-change-notification/metrics.png)  
 
@@ -1039,7 +1039,7 @@ C#
 若要开始操作，你需要一个 Azure AD 令牌。此令牌可能很难得到。我之前想找到一种简单的方法，Azure 逻辑应用程序管理员 Jeff Hollan 建议在 PowerShell 中使用 [armclient](http://blog.davidebbo.com/2015/01/azure-resource-manager-client.html)。你可以按照所提供的指示进行安装。
 
 你想要使用的操作为“登录”和“调用 ARM API”。
- 
+
 登录：使用相同的凭据登录 Azure 门户预览。
 
 “调用 ARM API”操作将生成你的 CallBackURL。
@@ -1096,4 +1096,4 @@ EmailTo | 将会收到电子邮件通知的电子邮件地址
 ## 后续步骤
 下载并使用 [Github](https://github.com/HEDIDIN/DocDbNotifications) 上提供的逻辑应用代码。竭诚邀请你在该应用程序基础上进行构建，并将更改提交到存储库。
 
-<!---HONumber=Mooncake_0627_2016-->
+<!---HONumber=Mooncake_1121_2016-->

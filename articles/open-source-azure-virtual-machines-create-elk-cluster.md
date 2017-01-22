@@ -29,11 +29,11 @@ ELK 是 [Elasticsearch](https://www.elastic.co/products/elasticsearch)、[Logsta
         New-AzureRmResourceGroup -Name <YOUR-RESOURCE-GROUP-NAME> -Location "China East"
 
 - 如果你选择 Azure CLI 方式搭建 ELK，那么请[安装 Azure CLI](./xplat-cli-install.md)。然后请确保你是处于[资源管理器模式](./azure-resource-manager/resource-manager-deployment-model.md)下，可通过运行以下命令来验证：
-        
+
         azure config mode arm
 
     现在，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](./xplat-cli-connect.md)： 
- 
+
         azure login -e AzureChinaCloud -u <your account>
 
     然后你需要创建一个 Azure 资源组( Resource Group )，创建 Azure 虚拟机和搭建 ELK 都在该资源组中进行，运行以下命令创建位于中国东部( 也可改成中国北部"China North" )的 Azure 资源组：  
@@ -108,7 +108,7 @@ PowerShell脚本运行注意事项
     >[!NOTE]你可以通过指定可选参数 "-DeploymentDebugLogLevel All -Verbose" 来输出更多的部署日志，这可能有助于你诊断在部署过程中发生的错误。如果 PowerShell 返回这个参数不存在，请更新 Azure Powershell 到最新版本。   
 
     *或者*
-   
+
     在安装好 Azure CLI 的机器上，运行如下命令
 
         TemplateUri="https://mirrors.blob.core.chinacloudapi.cn/elkcentos/azuredeploy.json" 

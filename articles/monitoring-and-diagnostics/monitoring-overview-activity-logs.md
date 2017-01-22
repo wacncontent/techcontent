@@ -55,12 +55,12 @@ ms.author: johnkem
     ![门户预览中的“导出”按钮](./media/monitoring-overview-activity-logs/activity-logs-portal-export.png)  
 
 3. 在显示的边栏选项卡中，可以选择：
-   
-   * 想要导出其事件的区域
-   * 想要将事件保存到的存储帐户
-   * 想要在存储中保留这些事件的天数。设置为 0 天可以永久保留日志。
-   * 想要在其中创建用于流式处理这些事件的事件中心的服务总线命名空间。
-     
+
+    * 想要导出其事件的区域
+    * 想要将事件保存到的存储帐户
+    * 想要在存储中保留这些事件的天数。设置为 0 天可以永久保留日志。
+    * 想要在其中创建用于流式处理这些事件的事件中心的服务总线命名空间。
+
      ![“导出活动日志”边栏选项卡](./media/monitoring-overview-activity-logs/activity-logs-portal-export-blade.png)  
 
 4. 单击“保存”保存这些设置。这些设置会即时应用到订阅。

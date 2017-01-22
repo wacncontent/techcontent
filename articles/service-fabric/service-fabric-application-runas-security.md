@@ -94,7 +94,7 @@ Azure Service Fabric 能够保护群集中以不同用户帐户运行的应用�
     setx -m TestVariable "MyValue"
     echo System TestVariable set to > out.txt
     echo %TestVariable% >> out.txt
-    
+
     REM To delete this system variable us
     REM REG delete "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v TestVariable /f
 
@@ -139,7 +139,7 @@ MySetup.bat 可启动 PowerShell 文件。
     [Environment]::GetEnvironmentVariable("TestVariable","Machine") > out.txt
 
 **注意：**默认情况下，批处理文件运行时会在名为 **work** 的应用程序文件夹中查找文件。此示例中，当 MySetup.bat 运行时，我们想在相同的文件夹（即应用程序的 **code package** 文件夹）中查找 MySetup.ps1。若要更改此文件夹，请如下所示设置工作文件夹。
-    
+
     <SetupEntryPoint>
         <ExeHost>
         <Program>MySetup.bat</Program>

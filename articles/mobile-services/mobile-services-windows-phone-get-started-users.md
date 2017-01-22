@@ -73,5 +73,5 @@ ms.author: glenga
 [Submit an app page]: http://go.microsoft.com/fwlink/p/?LinkID=266582
 [将移动服务添加到现有应用程序]: ./mobile-services-windows-phone-get-started-data.md
 [Authorize users with scripts]: /documentation/articles/mobile-services-windows-phone-authorize-users-in-scripts/
- 
+
 <!---HONumber=Mooncake_0118_2016-->

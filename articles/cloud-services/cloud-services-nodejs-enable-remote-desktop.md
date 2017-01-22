@@ -107,8 +107,8 @@ ms.author: robmcm
 [5]: ./media/cloud-services-nodejs-enable-remote-desktop/remote-desktop-12.png
 [6]: ./media/cloud-services-nodejs-enable-remote-desktop/remote-desktop-13.png
 [7]: ./media/cloud-services-nodejs-enable-remote-desktop/remote-desktop-14.png
-  
+
 [远程访问 Azure 中的角色实例]: http://msdn.microsoft.com/zh-cn/library/windowsazure/hh124107.aspx
 [将远程桌面与 Azure 角色一起使用]: http://msdn.microsoft.com/zh-cn/library/windowsazure/gg443832.aspx
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

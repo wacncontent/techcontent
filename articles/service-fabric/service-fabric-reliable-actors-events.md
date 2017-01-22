@@ -34,7 +34,7 @@ ms.author: amanbha
     public interface IGameActor : IActor, IActorEventPublisher<IGameEvents>
     {
         Task UpdateGameStatus(GameStatus status);
-    
+
         Task<string> GetGameScore();
     }
 
@@ -52,7 +52,7 @@ ms.author: amanbha
 
     var proxy = ActorProxy.Create<IGameActor>(
                         new ActorId(Guid.Parse(arg)), ApplicationName);
-    
+
     await proxy.SubscribeAsync<IGameEvents>(new GameEventsHandler());
 
 如果发生故障转移，执行组件可能会故障转移到不同的进程或节点。执行组件代理管理活动的订阅，并自动重新订阅它们。可以通过 `ActorProxyEventExtensions.SubscribeAsync<TEvent>` API 控制重新订阅的间隔。若要取消订阅，请使用 `ActorProxyEventExtensions.UnsubscribeAsync<TEvent>` API。

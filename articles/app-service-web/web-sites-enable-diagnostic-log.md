@@ -268,5 +268,5 @@ Azure Web 应用生成的日志不支持 **s-computername**、**s-ip** 或 **cs-
 ## 更改内容
 * 有关从网站更改为应用服务的指南，请参阅 [Azure App Service 及其对现有 Azure 服务的影响](./app-service-changes-existing-services.md)
 * 有关从旧门户更改为新门户的指导，请参阅：[有关在 Azure 门户预览中导航的参考](./app-service-web-app-azure-portal.md)
- 
+
 <!---HONumber=Mooncake_1128_2016-->

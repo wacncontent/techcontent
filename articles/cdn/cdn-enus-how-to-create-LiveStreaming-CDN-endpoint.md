@@ -39,7 +39,7 @@ The Azure CDN sets default cache rules (see below) for Live Streaming Accelerati
 
  1. TS files are cached for 2 minutes.
  2. M3U8 files are cached for 2 seconds. 
-      
+
 ###**Create streaming media acceleration domain names**
 
 1. In the navigation pane of the Azure Management Portal, click “CDN.”
@@ -47,7 +47,7 @@ The Azure CDN sets default cache rules (see below) for Live Streaming Accelerati
 3. Select “Streaming Media Acceleration” from the “Acceleration Type” drop-down list.
 4. In the “Origin Domain Type” drop-down list, select cloud service, storage account, web app, media services, or a customized origin domain.
 5. In the “Origin Domain” drop-down list, select one option from the list of available media services for use in creating the CDN endpoint. 
- 
+
     ![026](./media/cdn-doc/ls-en-001.png)
 
     If the selected “Origin Domain Type” is “Customized Origin Domain,” input your own origin domain address under “Origin Domain.” You can enter one or multiple origin domain IP addresses (separate multiple addresses with semicolons, e.g. “126.1.1.1;172.1.1.1”), or an origin domain name such as “origin.livestreaming.com.”
@@ -60,13 +60,13 @@ The Azure CDN sets default cache rules (see below) for Live Streaming Accelerati
     If the origin domain type is media services, the corresponding return to source host header is:
 
     ![028](./media/cdn-doc/ls-en-003.png)
-    
+
     If the origin domain type is a custom origin domain, the corresponding return to source host header is:
 
     ![029](./media/cdn-doc/ls-en-004.png)
-    
+
 8. In “ICP Number,” enter the corresponding ICP record number for the custom domain that you entered (e.g., Jing ICP Bei XXXXXXXX Hao-X).
-     
+
     ![030](./media/cdn-doc/ls-en-005.png)
 
 9. Click “Create” to create the new endpoint.

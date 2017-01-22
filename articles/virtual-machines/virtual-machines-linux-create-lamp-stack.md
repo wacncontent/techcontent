@@ -107,7 +107,7 @@ ms.author: jluk
 在安装之前，需要下载并更新包列表。
 
     user@ubuntu$ sudo apt-get update
-    
+
 ##### 单个包
 使用 apt-get：
 

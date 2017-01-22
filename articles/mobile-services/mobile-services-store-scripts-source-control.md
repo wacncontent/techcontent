@@ -76,13 +76,13 @@ ms.author: glenga
             request.execute();
             console.log(JSON.stringify(item, null, 4));
         }
-    
+
     此代码只是将插入的项写入日志。如果此文件已包含代码，则你只需在此文件中添加一些有效的 JavaScript 代码（例如，对 `console.log()` 的调用），然后保存更改。
 
 3. 在 Git 命令提示符下，键入以下命令以开始跟踪新脚本文件：
 
         $ git add .
-    
+
 4. 键入以下命令以提交更改：
 
         $ git commit -m "updated the insert script"
@@ -90,7 +90,7 @@ ms.author: glenga
 5. 键入以下命令以将更改上载到远程存储库：
 
         $ git push origin master
-    
+
     您应该会看到一系列命令，指出已将提交的内容部署到移动服务。
 
 6. 返回 [Azure 经典管理门户]，单击“数据”选项卡，单击“TodoItem”表，单击“脚本”，然后选择“插入”操作。可以看到，显示的插入操作脚本与您刚刚上载到存储库的 JavaScript 代码相同。
@@ -123,7 +123,7 @@ ms.author: glenga
         $ git add .
         $ git commit -m "added node-uuid module"
         $ git push origin master
-        
+
     这样就会添加新的文件，提交您的更改，并将新的 node-uuid 模块以及对 todoitem.insert.js 脚本所做的更改推送到您的移动服务。
 
 ##  <a name="next-steps"></a>后续步骤

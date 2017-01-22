@@ -33,17 +33,17 @@ ms.author: cephalin
 
 此问题通常是应用程序级别的问题造成的，例如：
 
--	请求耗费过长的时间
--	应用程序的内存/CPU 使用率过高
--	应用程序因异常而崩溃
+- 请求耗费过长的时间
+- 应用程序的内存/CPU 使用率过高
+- 应用程序因异常而崩溃
 
 ## 解决“502 错误的网关”和“503 服务不可用”错误的故障排除步骤
 
 故障排除可划分为三种不同的任务，依次为：
 
-1.	[观察和监视应用程序行为](#observe)
-2.	[收集数据](#collect)
-3.	[缓解问题](#mitigate)
+1. [观察和监视应用程序行为](#observe)
+2. [收集数据](#collect)
+3. [缓解问题](#mitigate)
 
 [应用服务 Web 应用](https://www.azure.cn/home/features/app-service/web-apps/)为每个步骤提供了多种选项。
 
@@ -59,18 +59,18 @@ ms.author: cephalin
 
 你可能想要在 Web 应用中监视的一些指标包括
 
--	平均内存工作集
--	平均响应时间
--	CPU 时间
--	内存工作集
--	请求
+- 平均内存工作集
+- 平均响应时间
+- CPU 时间
+- 内存工作集
+- 请求
 
 ![监视 Web 应用以解决 HTTP 错误“502 错误的网关”和“503 服务不可用”](./media/app-service-web-troubleshoot-HTTP-502-503/1-monitor-metrics.png)  
 
 有关详细信息，请参阅：
 
--	[在 Azure App Service 中监视 Web Apps](./web-sites-monitor.md)
--	[接收警报通知](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)
+- [在 Azure App Service 中监视 Web Apps](./web-sites-monitor.md)
+- [接收警报通知](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)
 
 ### <a name="collect"></a> 2.收集数据
 
@@ -80,9 +80,9 @@ ms.author: cephalin
 
 Azure App Service 支持门户具有三个不同的选项卡，用于支持常见故障排除方案的三个步骤：
 
-1.	观察当前行为
-2.	通过收集诊断信息和运行内置分析器进行分析
-3.	缓解
+1. 观察当前行为
+2. 通过收集诊断信息和运行内置分析器进行分析
+3. 缓解
 
 如果目前正在发生问题，请单击“分析”>“诊断”>“立即诊断”创建诊断会话，该会话将收集 HTTP 日志、事件查看器日志、内存转储、PHP 错误日志和 PHP 进程报告。
 
@@ -100,10 +100,10 @@ Web Apps 随附可用于调试、浏览和上载文件的调试控制台，以�
 
 Kudu 提供的一些信息和功能包括：
 
--	应用程序的环境设置
--	日志流
--	诊断转储
--	调试控制台，你可以在其中运行 Powershell cmdlet 和基本 DOS 命令。
+- 应用程序的环境设置
+- 日志流
+- 诊断转储
+- 调试控制台，你可以在其中运行 Powershell cmdlet 和基本 DOS 命令。
 
 Kudu 的另一项有用功能是，如果应用程序引发第一次异常，你可以使用 Kudu 和 SysInternals 工具 Procdump 创建内存转储。这些内存转储是进程的快照，通常可以帮助你排查较复杂的 Web 应用问题。
 

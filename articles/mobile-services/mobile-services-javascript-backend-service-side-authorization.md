@@ -70,5 +70,5 @@ ms.author: krisragh
 [向现有移动服务应用添加身份验证]: ./mobile-services-ios-get-started-users.md
 
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
- 
+
 <!---HONumber=Mooncake_0118_2016-->

@@ -75,37 +75,37 @@ IoT 中心客户端库使用一个模型来指定设备发送到 IoT 中心的�
 
         // Define the Model
         BEGIN_NAMESPACE(Contoso);
-    
+
         DECLARE_STRUCT(SystemProperties,
         ascii_char_ptr, DeviceID,
         _Bool, Enabled
         );
-    
+
         DECLARE_STRUCT(DeviceProperties,
         ascii_char_ptr, DeviceID,
         _Bool, HubEnabledState
         );
-    
+
         DECLARE_MODEL(Thermostat,
-    
+
         /* Event data (temperature, external temperature and humidity) */
         WITH_DATA(int, Temperature),
         WITH_DATA(int, ExternalTemperature),
         WITH_DATA(int, Humidity),
         WITH_DATA(ascii_char_ptr, DeviceId),
-    
+
         /* Device Info - This is command metadata + some extra fields */
         WITH_DATA(ascii_char_ptr, ObjectType),
         WITH_DATA(_Bool, IsSimulatedDevice),
         WITH_DATA(ascii_char_ptr, Version),
         WITH_DATA(DeviceProperties, DeviceProperties),
         WITH_DATA(ascii_char_ptr_no_quotes, Commands),
-    
+
         /* Commands implemented by the device */
         WITH_ACTION(SetTemperature, int, temperature),
         WITH_ACTION(SetHumidity, int, humidity)
         );
-    
+
         END_NAMESPACE(Contoso);
 
 ## 实现设备的行为
@@ -120,7 +120,7 @@ IoT 中心客户端库使用一个模型来指定设备发送到 IoT 中心的�
           thermostat->Temperature = temperature;
           return EXECUTE_COMMAND_SUCCESS;
         }
-    
+
         EXECUTE_COMMAND_RESULT SetHumidity(Thermostat* thermostat, int humidity)
         {
           (void)printf("Received humidity %d\r\n", humidity);
@@ -147,7 +147,7 @@ IoT 中心客户端库使用一个模型来指定设备发送到 IoT 中心的�
             {
               printf("IoTHubClient accepted the message for delivery\r\n");
             }
-    
+
             IoTHubMessage_Destroy(messageHandle);
           }
           free((void*)buffer);
@@ -201,7 +201,7 @@ IoT 中心客户端库使用一个模型来指定设备发送到 IoT 中心的�
           {
             IOTHUB_CLIENT_CONFIG config;
             IOTHUB_CLIENT_HANDLE iotHubClientHandle;
-    
+
             config.deviceId = deviceId;
             config.deviceKey = deviceKey;
             config.iotHubName = hubName;
@@ -224,14 +224,14 @@ IoT 中心客户端库使用一个模型来指定设备发送到 IoT 中心的�
               else
               {
                 STRING_HANDLE commandsMetadata;
-    
+
                 if (IoTHubClient_SetMessageCallback(iotHubClientHandle, IoTHubMessage, thermostat) != IOTHUB_CLIENT_OK)
                 {
                   printf("unable to IoTHubClient_SetMessageCallback\r\n");
                 }
                 else
                 {
-    
+
                   /* send the device info upon startup so that the cloud app knows
                   what commands are available and the fact that the device is up */
                   thermostat->ObjectType = "DeviceInfo";
@@ -239,7 +239,7 @@ IoT 中心客户端库使用一个模型来指定设备发送到 IoT 中心的�
                   thermostat->Version = "1.0";
                   thermostat->DeviceProperties.HubEnabledState = true;
                   thermostat->DeviceProperties.DeviceID = (char*)deviceId;
-    
+
                   commandsMetadata = STRING_new();
                   if (commandsMetadata == NULL)
                   {
@@ -257,7 +257,7 @@ IoT 中心客户端库使用一个模型来指定设备发送到 IoT 中心的�
                       unsigned char* buffer;
                       size_t bufferSize;
                       thermostat->Commands = (char*)STRING_c_str(commandsMetadata);
-    
+
                       /* Here is the actual send of the Device Info */
                       if (SERIALIZE(&buffer, &bufferSize, thermostat->ObjectType, thermostat->Version, thermostat->IsSimulatedDevice, thermostat->DeviceProperties, thermostat->Commands) != IOT_AGENT_OK)
                       {
@@ -267,24 +267,24 @@ IoT 中心客户端库使用一个模型来指定设备发送到 IoT 中心的�
                       {
                         sendMessage(iotHubClientHandle, buffer, bufferSize);
                       }
-    
+
                     }
-    
+
                     STRING_delete(commandsMetadata);
                   }
-    
+
                   thermostat->Temperature = 50;
                   thermostat->ExternalTemperature = 55;
                   thermostat->Humidity = 50;
                   thermostat->DeviceId = (char*)deviceId;
-    
+
                   while (1)
                   {
                     unsigned char*buffer;
                     size_t bufferSize;
-    
+
                     (void)printf("Sending sensor value Temperature = %d, Humidity = %d\r\n", thermostat->Temperature, thermostat->Humidity);
-    
+
                     if (SERIALIZE(&buffer, &bufferSize, thermostat->DeviceId, thermostat->Temperature, thermostat->Humidity, thermostat->ExternalTemperature) != IOT_AGENT_OK)
                     {
                       (void)printf("Failed sending sensor value\r\n");
@@ -293,11 +293,11 @@ IoT 中心客户端库使用一个模型来指定设备发送到 IoT 中心的�
                     {
                       sendMessage(iotHubClientHandle, buffer, bufferSize);
                     }
-    
+
                     ThreadAPI_Sleep(1000);
                   }
                 }
-    
+
                 DESTROY_MODEL_INSTANCE(thermostat);
               }
               IoTHubClient_Destroy(iotHubClientHandle);

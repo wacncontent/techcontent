@@ -210,7 +210,7 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
 
 -   请参阅[队列、主题和订阅](./service-bus-queues-topics-subscriptions.md)。
 -   [SqlFilter](http://msdn.microsoft.com/zh-cn/library/windowsazure/microsoft.servicebus.messaging.sqlfilter.aspx) 的 API 参考。
--	访问 GitHub 上的 [Azure SDK for Ruby](https://github.com/WindowsAzure/azure-sdk-for-ruby) 存储库
+- 访问 GitHub 上的 [Azure SDK for Ruby](https://github.com/WindowsAzure/azure-sdk-for-ruby) 存储库
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

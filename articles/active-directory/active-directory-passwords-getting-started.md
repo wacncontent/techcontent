@@ -48,7 +48,7 @@ wacn.date: 01/03/2017
 ### <a name="prerequisites"></a>先决条件
 你必须先完成以下先决条件才能启用和使用自助密码重置：
 
-- 创建 AAD 租户。有关详细信息，请参阅 [Azure AD 入门](./index.md/)。
+- 创建 AAD 租户。有关详细信息，请参阅 [Azure AD 入门](./index.md)。
 - 获取 Azure 订阅。有关详细信息，请参阅[什么是 Azure AD 租户？](./active-directory-administer.md#what-is-an-azure-ad-tenant/)
 - 将你的 AAD 租户与 Azure 订阅相关联。有关详细信息，请参阅 [Azure 订阅与 Azure AD 的关联方式](https://msdn.microsoft.com/zh-cn/library/azure/dn629581.aspx)。
 - 升级到 Azure AD Premium、Basic 或使用 O365 付费许可证。有关详细信息，请参阅 [Azure Active Directory 版本](https://www.azure.cn/pricing/details/identity/)。
@@ -61,8 +61,8 @@ wacn.date: 01/03/2017
 ### <a name="step-1-configure-password-reset-policy"></a>步骤 1：配置密码重置策略
 若要配置用户密码重置策略，请完成以下步骤：
 
-1.	打开选择的浏览器并转到 [Azure 经典管理门户](https://manage.windowsazure.cn)。
-2.	在 [Azure 经典管理门户](https://manage.windowsazure.cn)的左侧导航栏上，找到 **Active Directory 扩展**。
+1. 打开选择的浏览器并转到 [Azure 经典管理门户](https://manage.windowsazure.cn)。
+2. 在 [Azure 经典管理门户](https://manage.windowsazure.cn)的左侧导航栏上，找到 **Active Directory 扩展**。
 
     ![Azure AD 中的密码管理][001]  
 
@@ -70,21 +70,21 @@ wacn.date: 01/03/2017
 
     ![][002]  
 
-4.	单击“配置”选项卡。
+4. 单击“配置”选项卡。
 
     ![][003]  
 
-5.	在“配置”选项卡上，向下滚动到“用户密码重置策略”部分。你将在此为给定目录配置用户密码重置策略的各个方面。
+5. 在“配置”选项卡上，向下滚动到“用户密码重置策略”部分。你将在此为给定目录配置用户密码重置策略的各个方面。
 
     >[!NOTE] 此**策略仅适用于你组织中的最终用户，而不是管理员**。出于安全原因，Microsoft 控制了管理员的密码重置策略。如果你不查看本部分，请确保你已注册 Azure Active Directory Premium 和 Basic，并为要配置此功能的管理员帐户**分配了许可证**。
 
     ![][004]  
 
-6.	若要配置用户密码重置策略，请将“可进行密码重置的用户”开关滑动到“是”设置。这将显示更多控件，通过这些控件你可以配置此功能如何在你目录中工作。根据需要随意自定义密码重置。如果你想详细了解每个密码重置策略控件的作用，请参阅[自定义：Azure AD 密码管理](./active-directory-passwords-customize.md)。
+6. 若要配置用户密码重置策略，请将“可进行密码重置的用户”开关滑动到“是”设置。这将显示更多控件，通过这些控件你可以配置此功能如何在你目录中工作。根据需要随意自定义密码重置。如果你想详细了解每个密码重置策略控件的作用，请参阅[自定义：Azure AD 密码管理](./active-directory-passwords-customize.md)。
 
     ![][005]  
 
-7.	根据租户需求配置用户密码重置策略后，请单击屏幕底部的“保存”按钮。
+7. 根据租户需求配置用户密码重置策略后，请单击屏幕底部的“保存”按钮。
 
     >[!NOTE] 建议使用两个质询用户密码重置策略，以便你能够了解该功能如何在最复杂的情况下工作。
 
@@ -93,28 +93,28 @@ wacn.date: 01/03/2017
 ### <a name="step-2-add-contact-data-for-your-test-user"></a>步骤 2：为测试用户添加联系人数据
 关于如何为你所在组织中的用户指定用于密码重置的数据，你有几种选择。
 
--	在 [Azure 经典管理门户](https://manage.windowsazure.cn)或 [Office 365 管理门户](https://portal.partner.microsoftonline.cn)中编辑用户
--	使用 AAD Connect 将用户属性从本地 Active Directory 域同步到 Azure AD
--	使用 Windows PowerShell 编辑用户属性
--	通过将用户引导至位于 [http://aka.ms/ssprsetup](http://aka.ms/ssprsetup) 的注册门户，使用户能够注册其自己的数据
--	要求用户在登录到位于 [http://myapps.microsoft.com](http://myapps.microsoft.com) 的访问面板时注册以进行密码重置，方法是将“登录到访问面板时要求用户注册”SSPR 配置选项设置为“是”。
+- 在 [Azure 经典管理门户](https://manage.windowsazure.cn)或 [Office 365 管理门户](https://portal.partner.microsoftonline.cn)中编辑用户
+- 使用 AAD Connect 将用户属性从本地 Active Directory 域同步到 Azure AD
+- 使用 Windows PowerShell 编辑用户属性
+- 通过将用户引导至位于 [http://aka.ms/ssprsetup](http://aka.ms/ssprsetup) 的注册门户，使用户能够注册其自己的数据
+- 要求用户在登录到位于 [http://myapps.microsoft.com](http://myapps.microsoft.com) 的访问面板时注册以进行密码重置，方法是将“登录到访问面板时要求用户注册”SSPR 配置选项设置为“是”。
 
 如果你想要详细了解密码重置使用哪些数据，以及此数据的任何格式要求，请参阅[密码重置使用哪些数据？](./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset/)
 
 #### 通过用户注册门户添加用户联系人数据
-1.	为使用密码重置注册门户，你必须为你所在组织的用户提供指向此页面的链接 ([http://aka.ms/ssprsetup](http://aka.ms/ssprsetup))，或者启用要求用户自动注册的选项。一旦他们单击此链接，将要求他们使用组织帐户登录。这样做之后，他们将看到以下页面：
+1. 为使用密码重置注册门户，你必须为你所在组织的用户提供指向此页面的链接 ([http://aka.ms/ssprsetup](http://aka.ms/ssprsetup))，或者启用要求用户自动注册的选项。一旦他们单击此链接，将要求他们使用组织帐户登录。这样做之后，他们将看到以下页面：
 
     ![][007]  
 
-2.	在此，用户可提供并验证其移动电话、备用电子邮件地址或安全提问。这是验证移动电话的界面。
+2. 在此，用户可提供并验证其移动电话、备用电子邮件地址或安全提问。这是验证移动电话的界面。
 
     ![][008]
 
-3.	用户指定此信息后，页面将更新以指示此信息是否有效（下面已将信息模糊处理）。单击“完成”或“取消”按钮后，用户将回到访问面板。
+3. 用户指定此信息后，页面将更新以指示此信息是否有效（下面已将信息模糊处理）。单击“完成”或“取消”按钮后，用户将回到访问面板。
 
     ![][009]  
 
-4.	一旦用户验证这两条信息后，将用其提供的数据更新其个人资料。本例中，已手动指定**办公电话号码**，因此用户可将其用作重置密码的联系方式。
+4. 一旦用户验证这两条信息后，将用其提供的数据更新其个人资料。本例中，已手动指定**办公电话号码**，因此用户可将其用作重置密码的联系方式。
 
     ![][010]  
 
@@ -122,43 +122,43 @@ wacn.date: 01/03/2017
 由于你已配置用户重置策略并为用户指定了联系人详细信息，此用户将可以进行自助密码重置。
 
 #### 执行自助密码重置
-1.	如果你转到诸如 [**portal.partner.microsoftonline.cn**](http://portal.partner.microsoftonline.cn) 的站点，你将看到如下登录屏幕。单击“无法访问你的帐户?”链接以测试密码重置 UI。
+1. 如果你转到诸如 [**portal.partner.microsoftonline.cn**](http://portal.partner.microsoftonline.cn) 的站点，你将看到如下登录屏幕。单击“无法访问你的帐户?”链接以测试密码重置 UI。
 
     ![][011]  
 
-2.	单击“无法访问你的帐户?”后，你将转到一个新的页面，此页面将会要求你提供希望为其重置密码的**用户 ID**。在此处输入你的测试**用户 ID**，输入验证码，然后单击“下一步”。
+2. 单击“无法访问你的帐户?”后，你将转到一个新的页面，此页面将会要求你提供希望为其重置密码的**用户 ID**。在此处输入你的测试**用户 ID**，输入验证码，然后单击“下一步”。
 
     ![][012]  
 
-3.	由于在此案例中用户已指定**办公电话**、**移动电话**和**备用电子邮件**，你将看到他（她）可以将所有这三个选项用于通过第一次质询。
+3. 由于在此案例中用户已指定**办公电话**、**移动电话**和**备用电子邮件**，你将看到他（她）可以将所有这三个选项用于通过第一次质询。
 
     ![][013]  
 
-4.	在这种情况下，请选择首先**拨打****办公电话**。请注意，选择基于电话的方式时，将要求用户先**验证其电话号码**，然后才能重置密码。这是为了防止恶意个人向你组织中的用户拨打垃圾电话。
+4. 在这种情况下，请选择首先**拨打****办公电话**。请注意，选择基于电话的方式时，将要求用户先**验证其电话号码**，然后才能重置密码。这是为了防止恶意个人向你组织中的用户拨打垃圾电话。
 
     ![][014]
 
-5.	一旦用户确认其电话号码后，单击呼叫会导致出现旋转图标并且其电话响起铃声。用户拿起电话后，将播放一条消息，指示**用户应按“#”**确认其帐户。按下此键将自动验证此用户是否通过第一次质询，并将使 UI 前进到第二个验证步骤。
+5. 一旦用户确认其电话号码后，单击呼叫会导致出现旋转图标并且其电话响起铃声。用户拿起电话后，将播放一条消息，指示**用户应按“#”**确认其帐户。按下此键将自动验证此用户是否通过第一次质询，并将使 UI 前进到第二个验证步骤。
 
     ![][015]  
 
-6.	通过第一次质询后，UI 自动更新，将此质询从用户的选择列表中删除。在这种情况下，由于你首先使用的**是办公电话**，因此只有**移动电话**和**备用电子邮件**是可用作第二个验证步骤的质询的有效选项。单击“向我的备用电子邮件发送电子邮件”选项。完成该操作后，按“电子邮件”将向存档的备用电子邮件发送电子邮件。
+6. 通过第一次质询后，UI 自动更新，将此质询从用户的选择列表中删除。在这种情况下，由于你首先使用的**是办公电话**，因此只有**移动电话**和**备用电子邮件**是可用作第二个验证步骤的质询的有效选项。单击“向我的备用电子邮件发送电子邮件”选项。完成该操作后，按“电子邮件”将向存档的备用电子邮件发送电子邮件。
 
     ![][016]  
 
-7.	下面是用户将看到的电子邮件的示例 — 请注意租户品牌：
+7. 下面是用户将看到的电子邮件的示例 — 请注意租户品牌：
 
     ![][017]  
 
-8.	电子邮件送达后，页面将更新，你将能够在如下所示的输入框中输入电子邮件中找到的验证码。输入适当的代码后，“下一步”按钮亮起，你将能够通过第二个验证步骤。
+8. 电子邮件送达后，页面将更新，你将能够在如下所示的输入框中输入电子邮件中找到的验证码。输入适当的代码后，“下一步”按钮亮起，你将能够通过第二个验证步骤。
 
     ![][018]  
 
-9.	满足组织策略的要求后，你可以选择一个新密码。验证密码是否符合 AAD“强”密码要求（参阅 [Azure AD 中的密码策略](https://msdn.microsoft.com/zh-cn/library/azure/jj943764.aspx)），显示强度验证器以指示用户输入的密码是否符合该策略。
+9. 满足组织策略的要求后，你可以选择一个新密码。验证密码是否符合 AAD“强”密码要求（参阅 [Azure AD 中的密码策略](https://msdn.microsoft.com/zh-cn/library/azure/jj943764.aspx)），显示强度验证器以指示用户输入的密码是否符合该策略。
 
     ![][019]  
 
-10.	提供符合组织策略的匹配密码后，你的密码将会重置，你可以立即用新密码登录。
+10. 提供符合组织策略的匹配密码后，你的密码将会重置，你可以立即用新密码登录。
 
     ![][020]  
 
@@ -198,11 +198,11 @@ wacn.date: 01/03/2017
 Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure AD Sync 工具中提供了密码写回功能。Azure AD Connect 发行版或版本号为 **1.0.0485.0222** 或更高的 Azure AD Sync 工具中提供了支持自动帐户解锁的密码写回功能。如果你运行的是较旧版本，请在继续操作之前至少升级到此版本。[单击此处下载最新版本的 Azure AD Connect](./active-directory-aadconnect.md#install-azure-ad-connect/)。
 
 #### 查看 Azure AD Sync 的版本
-1.	导航到 **%ProgramFiles%\\Azure Active Directory Sync**。
-2.	找到 **ConfigWizard.exe** 可执行文件。
-3.	右键单击该可执行文件，然后从上下文菜单中选择“属性”选项。
-4.	单击“详细信息”选项卡。
-5.	找到“文件版本”字段。
+1. 导航到 **%ProgramFiles%\\Azure Active Directory Sync**。
+2. 找到 **ConfigWizard.exe** 可执行文件。
+3. 右键单击该可执行文件，然后从上下文菜单中选择“属性”选项。
+4. 单击“详细信息”选项卡。
+5. 找到“文件版本”字段。
 
     ![][021]  
 
@@ -214,22 +214,22 @@ Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure A
 现在你已下载 Azure AD Connect 工具，为启用密码写回做好了准备。可通过两种方式之一启用密码写回。可以在 Azure AD Connect 设置向导的可选功能屏幕中启用密码写回，也可以通过 Windows PowerShell 启用。
 
 #### 在 Azure AD Connect 设置向导中启用密码写回
-1.	在你的**目录同步计算机**上，打开 **Azure AD Connect** 配置向导。
-2.	单击各个步骤，直到出现**可选功能**配置屏幕。
-3.	选中“密码写回”选项。
+1. 在你的**目录同步计算机**上，打开 **Azure AD Connect** 配置向导。
+2. 单击各个步骤，直到出现**可选功能**配置屏幕。
+3. 选中“密码写回”选项。
 
     ![][022]  
 
-4.	完成向导，最后一页将汇总更改并包括密码写回配置更改。
+4. 完成向导，最后一页将汇总更改并包括密码写回配置更改。
 
 > [!NOTE] 你随时可以禁用密码写回，方法是重新运行此向导并取消选择该功能，或者在 [Azure 经典管理门户](https://manage.windowsazure.cn)中目录的“配置”选项卡的“用户密码重置策略”部分中，将“密码写回到本地目录”设置设为“否”。有关自定义密码重置体验的详细信息，请查看[自定义：Azure AD 密码管理](./active-directory-passwords-customize.md)。
 
 #### 使用 Windows PowerShell 启用密码写回
-1.	在你的**目录同步计算机**上，打开一个新的**权限提升的 Windows PowerShell 窗口**。
-2.	如果尚未加载该模块，请键入 `import-module ADSync` 命令以将 Azure AD Connect cmdlet 载入当前会话。
-3.	通过运行 `Get-ADSyncConnector` cmdlet 并将结果存储在 `$aadConnectorName` 中，以获取系统中 Azure AD 连接器的列表，例如 `$connectors = ADSyncConnector|where-object {$\_.name -like "*AAD"}`
-4.	运行以下 cmdlet 获得当前连接器的当前写回状态：`Get-ADSyncAADPasswordResetConfiguration -Connector $aadConnectorName.name`
-5.	运行以下 cmdlet 启用密码写回：`Set-ADSyncAADPasswordResetConfiguration -Connector $aadConnectorName.name -Enable $true`
+1. 在你的**目录同步计算机**上，打开一个新的**权限提升的 Windows PowerShell 窗口**。
+2. 如果尚未加载该模块，请键入 `import-module ADSync` 命令以将 Azure AD Connect cmdlet 载入当前会话。
+3. 通过运行 `Get-ADSyncConnector` cmdlet 并将结果存储在 `$aadConnectorName` 中，以获取系统中 Azure AD 连接器的列表，例如 `$connectors = ADSyncConnector|where-object {$\_.name -like "*AAD"}`
+4. 运行以下 cmdlet 获得当前连接器的当前写回状态：`Get-ADSyncAADPasswordResetConfiguration -Connector $aadConnectorName.name`
+5. 运行以下 cmdlet 启用密码写回：`Set-ADSyncAADPasswordResetConfiguration -Connector $aadConnectorName.name -Enable $true`
 
 > [!NOTE] 如果系统提示你输入凭据，请确保你为 AzureADCredential 指定的管理员帐户是**云管理员帐户（在 Azure AD 中创建）**，而不是联合帐户（在本地 AD 中创建并同步到 Azure AD 中）。
 > [!NOTE] 可以通过 PowerShell 禁用密码写回，方法是重复上面的相同的步骤，不同的是在步骤中传递 `$false`，或者在 [Azure 经典管理门户](https://manage.windowsazure.cn)的目录的“配置”选项卡的“用户密码重置策略”部分中，将“密码写回到本地目录”设置设为“否”。
@@ -244,10 +244,10 @@ Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure A
 ### <a name="step-3-configure-your-firewall"></a>步骤 3：配置防火墙
 在 Azure AD Connect 工具中启用密码写回之后，需确保服务可连接到云。
 
-1.	安装完成后，如果要阻止环境中的未知出站连接，还需要向防火墙添加以下规则。确保进行这些更改后重新启动你的 AAD Connect 计算机：
-   - 允许通过端口 443 的出站连接 TCP
-   - 允许到 https://ssprsbprodncu-sb.accesscontrol.chinacloudapi.cn/ 的出站连接
-   - 当使用代理或遇到一般连接问题时，允许通过端口 9350-9354 和端口 5671 TCP 的出站连接
+1. 安装完成后，如果要阻止环境中的未知出站连接，还需要向防火墙添加以下规则。确保进行这些更改后重新启动你的 AAD Connect 计算机：
+    - 允许通过端口 443 的出站连接 TCP
+    - 允许到 https://ssprsbprodncu-sb.accesscontrol.chinacloudapi.cn/ 的出站连接
+    - 当使用代理或遇到一般连接问题时，允许通过端口 9350-9354 和端口 5671 TCP 的出站连接
 
 ### <a name="overview-of-password-management-reports"></a>步骤 4：设置适当的 Active Directory 权限
 对于包含密码将要重置的用户的每个林，如果 X 是（初始配置期间）在配置向导中为该林指定的帐户，则必须为 X 授予对 `lockoutTime` 的“重置密码”、“更改密码”和“写入权限”，对 `pwdLastSet` 的“写入权限”，以及对该林中每个域的根对象的扩展权限。应当将权限标记为“由所有用户对象继承”。
@@ -264,40 +264,40 @@ Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure A
 
 #### <a name="step-4-set-up-the-appropriate-active-directory-permissions"></a>设置正确的权限以执行写回
 
-1.	使用具有适当域管理权限的帐户打开“Active Directory 用户和计算机”。
-2.	在“视图菜单”选项中，确保打开“高级功能”。
-3.	在左面板中，右键单击表示根级域的对象。
-4.	单击“安全性”选项卡。
-5.	然后单击“高级”。
+1. 使用具有适当域管理权限的帐户打开“Active Directory 用户和计算机”。
+2. 在“视图菜单”选项中，确保打开“高级功能”。
+3. 在左面板中，右键单击表示根级域的对象。
+4. 单击“安全性”选项卡。
+5. 然后单击“高级”。
 
     ![][024]
 
-6.	在“权限”选项卡上，单击“添加”。
+6. 在“权限”选项卡上，单击“添加”。
 
     ![][025]
 
-7.	选择要对其授予权限的帐户（该帐户与为此林设置同步时指定的帐户相同）。
-8.	在顶部的下拉列表中，选择“下级用户对象”。
-9.	在出现的“权限条目”中，选中针对 `lockoutTime` 的“重置密码”、“更改密码”和“写入权限”框，以及针对 `pwdLastSet` 的“写入权限”框。
+7. 选择要对其授予权限的帐户（该帐户与为此林设置同步时指定的帐户相同）。
+8. 在顶部的下拉列表中，选择“下级用户对象”。
+9. 在出现的“权限条目”中，选中针对 `lockoutTime` 的“重置密码”、“更改密码”和“写入权限”框，以及针对 `pwdLastSet` 的“写入权限”框。
 
     ![][026] ![][027] ![][028]
 
-10.	然后，单击所有打开对话框中的“应用/确定”。
+10. 然后，单击所有打开对话框中的“应用/确定”。
 
 ### <a name="step-5-reset-your-ad-password-as-a-user"></a>步骤 5：以用户身份重置 AD 密码
 现在密码写回功能已启用，你可以通过重置其帐户已同步到云租户的用户的密码，测试该功能是否能够正常工作。
 
 #### 验证密码写回是否正常工作
-1.	导航到 [http://passwordreset.microsoftonline.com](https://passwordreset.microsoftonline.com) 或转到任何组织 ID 登录屏幕并单击“无法访问你的帐户?”链接。
+1. 导航到 [https://passwordreset.microsoftonline.com](https://passwordreset.microsoftonline.com) 或转到任何组织 ID 登录屏幕并单击“无法访问你的帐户?”链接。
 
     ![][029]  
 
-2.	你现在应该看到一个新页面，它请求提供你要为其重置密码的用户 ID。输入测试用户 ID，并继续执行密码重置流程。
-3.	重置密码后，你将看到与此类似的屏幕。这意味着你已成功重置了本地和/或云目录中的密码。
+2. 你现在应该看到一个新页面，它请求提供你要为其重置密码的用户 ID。输入测试用户 ID，并继续执行密码重置流程。
+3. 重置密码后，你将看到与此类似的屏幕。这意味着你已成功重置了本地和/或云目录中的密码。
 
     ![][030]  
 
-4.	若要验证操作是否成功或要诊断任何错误，请转到**目录同步计算机**，打开“事件查看器”，导航到**应用程序事件日志**，并从测试用户的源 **PasswordResetService** 查找事件 **31002 - PasswordResetSuccess**。
+4. 若要验证操作是否成功或要诊断任何错误，请转到**目录同步计算机**，打开“事件查看器”，导航到**应用程序事件日志**，并从测试用户的源 **PasswordResetService** 查找事件 **31002 - PasswordResetSuccess**。
 
     ![][031]  
 

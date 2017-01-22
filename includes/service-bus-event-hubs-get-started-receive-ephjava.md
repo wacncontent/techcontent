@@ -27,14 +27,14 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
             <artifactId>azure-eventhubs</artifactId>
             <version>0.7.2</version>
         </dependency>
- 
+
 对于不同类型的生成环境，你可以从 [Maven 中央存储库](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-eventhubs%22)或 [GitHub 上的版本分发点](https://github.com/Azure/azure-event-hubs/releases)显式获取最新发布的 JAR 文件。
 
 1. 对于下面的示例，请首先在你最喜欢的 Java 开发环境中为控制台/shell 应用程序创建一个新的 Maven 项目。该类将称为 ```ErrorNotificationHandler```。
 
         import java.util.function.Consumer;
         import com.microsoft.azure.eventprocessorhost.ExceptionReceivedEventArgs;
-    
+
         public class ErrorNotificationHandler implements Consumer<ExceptionReceivedEventArgs>
         {
             @Override
@@ -50,29 +50,29 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
         import com.microsoft.azure.eventprocessorhost.CloseReason;
         import com.microsoft.azure.eventprocessorhost.IEventProcessor;
         import com.microsoft.azure.eventprocessorhost.PartitionContext;
-    
+
         public class EventProcessor implements IEventProcessor
         {
             private int checkpointBatchingCount = 0;
-    
+
             @Override
             public void onOpen(PartitionContext context) throws Exception
             {
                 System.out.println("SAMPLE: Partition " + context.getPartitionId() + " is opening");
             }
-    
+
             @Override
             public void onClose(PartitionContext context, CloseReason reason) throws Exception
             {
                 System.out.println("SAMPLE: Partition " + context.getPartitionId() + " is closing for reason " + reason.toString());
             }
-            
+
             @Override
             public void onError(PartitionContext context, Throwable error)
             {
                 System.out.println("SAMPLE: Partition " + context.getPartitionId() + " onError: " + error.toString());
             }
-    
+
             @Override
             public void onEvents(PartitionContext context, Iterable<EventData> messages) throws Exception
             {
@@ -83,7 +83,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
                     System.out.println("SAMPLE (" + context.getPartitionId() + "," + data.getSystemProperties().getOffset() + "," +
                             data.getSystemProperties().getSequenceNumber() + "): " + new String(data.getBody(), "UTF8"));
                     messageCount++;
-                    
+
                     this.checkpointBatchingCount++;
                     if ((checkpointBatchingCount % 5) == 0)
                     {
@@ -101,7 +101,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
         import com.microsoft.azure.eventprocessorhost.*;
         import com.microsoft.azure.servicebus.ConnectionStringBuilder;
         import com.microsoft.azure.eventhubs.EventData;
-    
+
         public class EventProcessorSample
         {
             public static void main(String args[])
@@ -111,15 +111,15 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
                 final String eventHubName = "----EventHubName-----";
                 final String sasKeyName = "-----SharedAccessSignatureKeyName-----";
                 final String sasKey = "---SharedAccessSignatureKey----";
-    
+
                 final String storageAccountName = "---StorageAccountName----";
                 final String storageAccountKey = "---StorageAccountKey----";
                 final String storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=" + storageAccountName + ";AccountKey=" + storageAccountKey;
-                
+
                 ConnectionStringBuilder eventHubConnectionString = new ConnectionStringBuilder(namespaceName, eventHubName, sasKeyName, sasKey);
-                
+
                 EventProcessorHost host = new EventProcessorHost(eventHubName, consumerGroupName, eventHubConnectionString.toString(), storageConnectionString);
-                
+
                 System.out.println("Registering host named " + host.getHostName());
                 EventProcessorOptions options = new EventProcessorOptions();
                 options.setExceptionNotification(new ErrorNotificationHandler());
@@ -140,13 +140,13 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
                         System.out.println(e.toString());
                     }
                 }
-    
+
                 System.out.println("Press enter to stop");
                 try
                 {
                     System.in.read();
                     host.unregisterEventProcessor();
-                    
+
                     System.out.println("Calling forceExecutorShutdown");
                     EventProcessorHost.forceExecutorShutdown(120);
                 }
@@ -155,7 +155,7 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
                     System.out.println(e.toString());
                     e.printStackTrace();
                 }
-                
+
                 System.out.println("End of sample");
             }
         }
@@ -164,10 +164,10 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
 
         final String namespaceName = "----ServiceBusNamespaceName-----";
         final String eventHubName = "----EventHubName-----";
-    
+
         final String sasKeyName = "-----SharedAccessSignatureKeyName-----";
         final String sasKey = "---SharedAccessSignatureKey----";
-    
+
         final String storageAccountName = "---StorageAccountName----"
         final String storageAccountKey = "---StorageAccountKey----";
 

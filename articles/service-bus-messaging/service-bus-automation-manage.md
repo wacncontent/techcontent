@@ -39,5 +39,5 @@ Azure 自动化提供了具有高可靠性和高可用性的工作流执行引�
 
 * 请参阅 Azure 自动化[入门教程](../automation/automation-intro.md)
 * 了解如何[使用 PowerShell 管理服务总线](./service-bus-powershell-how-to-provision.md)
- 
+
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

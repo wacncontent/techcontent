@@ -6,7 +6,7 @@
 2. 运行 **azure network vnet create** 命令以创建 VNet 和子网，如下所示。在输出后显示的列表说明了所用的参数。
 
             azure network vnet create --vnet TestVNet -e 192.168.0.0 -i 16 -n FrontEnd -p 192.168.1.0 -r 24 -l "China North"
-    
+
     预期输出：
 
             info:    Executing command network vnet create
@@ -26,7 +26,7 @@
 3. 运行 **azure network vnet subnet create** 命令以创建子网，如下所示。在输出后显示的列表说明了所用的参数。
 
             azure network vnet subnet create -t TestVNet -n BackEnd -a 192.168.2.0/24
-    
+
     下面是上述命令的预期输出：
 
             info:    Executing command network vnet subnet create

@@ -169,13 +169,13 @@ URL 地址为：
 其中 ‘yourcloudservice’ 是您的云服务地址，在创建虚拟机时由您定义的。也可以输入 **http://虚拟机公网IP/info.php** 访问。访问结果类似下图:
 
 ![](./media/open-source-azure-virtual-machines-lamp-website-kickstart/visit.png)
- 
+
 此图表明 PHP 已经正常安装，APACHE 软件能与 PHP 正常工作。
 
 网址 http://yourcloudservice.chinacloudapp.cn/mysql.php 用来检测 MySQL 是否正常安装，PHP 能否正常操作数据库，对数据库的读写是否正常。结果类似下图:  
 
 ![](./media/open-source-azure-virtual-machines-lamp-website-kickstart/visit2.png)
- 
+
 此图表明数据库读写操作均正常。从输出中我们可以看到创建了数据库名为 testdb, 创建了表名为 test01,插入了一条数据，值为 jack. 这个jack 就是在执行命令 **bash install_single_lamp.sh mySqlPassword insertValue** 时的 insertValue, 这里 insertValue 被 jack 代替。如果刷新浏览器，会再次插入 jack 的值到 test01 表。
 
 如果测试完毕想要删除这些测试数据库和表，只需在 LINUX 虚拟机上执行以下命令:  

@@ -144,13 +144,13 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 在 PowerShell 控制台或 PowerShell ISE 中，运行上述脚本。
 2. 几分钟后，应显示以下输出：
-   
+
         ResourceGroupName : IaaSStory
         Location          : chinanorth
         ProvisioningState : Succeeded
         Tags              : 
         ResourceId        : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory
-   
+
         AddressSpace      : Microsoft.Azure.Commands.Network.Models.PSAddressSpace
         DhcpOptions       : Microsoft.Azure.Commands.Network.Models.PSDhcpOptions
         Subnets           : {FrontEnd}
@@ -175,7 +175,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Name              : WTestVNet
         Etag              : W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         Id                : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory/providers/Microsoft.Network/virtualNetworks/WTestVNet
-   
+
         AddressSpace      : Microsoft.Azure.Commands.Network.Models.PSAddressSpace
         DhcpOptions       : Microsoft.Azure.Commands.Network.Models.PSDhcpOptions
         Subnets           : {FrontEnd}
@@ -206,7 +206,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Name              : WTestVNet
         Etag              : [Id]
         Id                : /subscriptions/[Subscription Id]/resourceGroups/IaaSStory/providers/Microsoft.Network/virtualNetworks/WTestVNet
-   
+
         TrackingOperationId : [Id]
         RequestId           : [Id]
         Status              : Succeeded

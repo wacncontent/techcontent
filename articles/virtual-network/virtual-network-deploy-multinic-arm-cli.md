@@ -90,9 +90,9 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
                 --name $backendSubnetName|grep Id)"
         subnetId=${subnetId#*/}
 
-   > [!TIP]
-   上面的第一个命令使用 [grep](http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_04_02.html) 和[字符串操作](http://tldp.org/LDP/abs/html/string-manipulation.html)（更具体地说，是子字符串删除）。
-   >
+    > [!TIP]
+    上面的第一个命令使用 [grep](http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_04_02.html) 和[字符串操作](http://tldp.org/LDP/abs/html/string-manipulation.html)（更具体地说，是子字符串删除）。
+    >
 
 4. 检索 `NSG-RemoteAccess` NSG 的 ID。你需要执行此操作，因为要关联到此 NSG 的 NIC 位于不同的资源组中。
 
@@ -189,7 +189,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 既已根据需要下载并更改脚本，可运行该脚本以创建具有多个 NIC 的后端数据库 VM。
 
 1. 保存该脚本并从 **Bash** 终端运行它。最初的输出将如下所示。
-   
+
         info:    Executing command group create
         info:    Getting resource group IaaSStory-Backend
         info:    Creating resource group IaaSStory-Backend
@@ -256,7 +256,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         info:    Looking up the NIC "NICDB1-RA"
         info:    Creating VM "DB1"
 2. 几分钟后，执行将结束，其余输出如下所示。
-   
+
         info:    vm create command OK
         info:    Executing command vm disk attach-new
         info:    Looking up the VM "DB1"

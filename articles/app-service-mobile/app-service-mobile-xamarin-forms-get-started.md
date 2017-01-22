@@ -36,7 +36,7 @@ ms.author: adrianha
 * Visual Studio with Xamarin。有关说明，请参阅[设置和安装 Visual Studio 和 Xamarin](https://msdn.microsoft.com/zh-cn/library/mt613162.aspx)。
 
 * 安装了 Xcode v7.0 版或更高版本以及 Xamarin Studio Community 的 Mac。请参阅[设置和安装 Visual Studio 和 Xamarin](https://msdn.microsoft.com/zh-cn/library/mt613162.aspx) 和 [Mac 用户的设置、安装和验证](https://msdn.microsoft.com/zh-cn/library/mt488770.aspx) (MSDN)。
- 
+
 >[!NOTE] 如果要在注册 Azure 帐户之前就开始使用 Azure 应用服务，请转到[试用应用服务](https://tryappservice.azure.com/?appServiceName=mobile)，即可在应用服务中立即创建一个生存期较短的入门级移动应用。你不需要使用信用卡，也不需要做出承诺。
 
 ## 创建新的 Azure 移动应用后端

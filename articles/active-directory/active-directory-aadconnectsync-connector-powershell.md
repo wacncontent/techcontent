@@ -297,7 +297,7 @@ NewPassword | 字符串 | 填充脚本应该设置的对象新密码。
 - HKEY\_USERS\\[SynchronizationServiceServiceAccountSID]\\Environment
 
 若要确定同步服务服务帐户的安全标识符 (SID)，请运行以下 PowerShell 命令：
-    
+
     $account = New-Object System.Security.Principal.NTAccount "<domain><username>"
     $account.Translate([System.Security.Principal.SecurityIdentifier]).Value
 
@@ -311,7 +311,7 @@ NewPassword | 字符串 | 填充脚本应该设置的对象新密码。
 
 ## 故障排除
 
--	有关如何启用记录来排查连接器问题的信息，请参阅[如何启用连接器的 ETW 跟踪](http://go.microsoft.com/fwlink/?LinkId=335731)。
+- 有关如何启用记录来排查连接器问题的信息，请参阅[如何启用连接器的 ETW 跟踪](http://go.microsoft.com/fwlink/?LinkId=335731)。
 
 <!--Reference style links - using these makes the source content way more readable than using inline links-->
 [cpp]: https://msdn.microsoft.com/zh-cn/library/windows/desktop/microsoft.metadirectoryservices.configparameterpage.aspx

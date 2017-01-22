@@ -138,8 +138,8 @@ VNet 对等互连中的每个链接都具有上述这组属性。从门户中，
 
 ## 删除 VNet 对等互连
 
-1.	从浏览器导航到 http://portal.azure.cn， 如有必要，请使用 Azure 帐户登录。
-2.	转到“虚拟网络”边栏选项卡，单击“对等互连”，单击要删除的链接，单击“删除”按钮。
+1. 从浏览器导航到 http://portal.azure.cn， 如有必要，请使用 Azure 帐户登录。
+2. 转到“虚拟网络”边栏选项卡，单击“对等互连”，单击要删除的链接，单击“删除”按钮。
 
     ![删除1](./media/virtual-networks-create-vnetpeering-arm-portal/figure15.png)
 

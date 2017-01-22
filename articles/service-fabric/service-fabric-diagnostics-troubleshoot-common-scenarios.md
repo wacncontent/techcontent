@@ -35,7 +35,7 @@ ms.author: mattrow
 此错误通常是因为缺少程序集依赖项导致的。请检查 Visual Studio 中的 CopyLocal 属性，或节点的全局程序集缓存。
 
 **System.Runtime.InteropServices.COMException** at System.Fabric.Interop.NativeRuntime+IFabricRuntime.RegisterStatefulServiceFactory(IntPtr, IFabricStatefulServiceFactory)
- 
+
  这表明注册的服务类型名称与服务清单不匹配。
 
 可将 [Azure 诊断](./service-fabric-diagnostics-how-to-setup-wad.md)配置为自动上载所有节点的应用程序事件日志。

@@ -79,7 +79,7 @@ ms.author: sewhee
 
 [什么是流量管理器](./traffic-manager-overview.md)
 
-[云服务](../cloud-services/index.md/)
+[云服务](../cloud-services/index.md)
 
 [Azure Web 应用](../app-service-web/index.md)
 

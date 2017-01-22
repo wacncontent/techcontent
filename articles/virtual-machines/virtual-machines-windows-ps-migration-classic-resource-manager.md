@@ -119,7 +119,7 @@ ms.author: cynthn
 准备迁移云服务中的虚拟机。可以从两个选项中进行选择。
 
 * **选项 1.将 VM 迁移到平台所创建的虚拟网络上**
-  
+
     首先，使用以下命令验证用户是否可以迁移云服务：
 
         $validate = Move-AzureService -Validate -ServiceName $serviceName `
@@ -132,7 +132,7 @@ ms.author: cynthn
             -DeploymentName $deploymentName -CreateNewVirtualNetwork
 
 * **选项 2.迁移到 Resource Manager 部署模型中的现有虚拟网络**
-  
+
     此示例将资源组名称设置为 **myResourceGroup**，将虚拟网络名称设置为 **myVirtualNetwork**，将子网名称设置为 **mySubNet**。使用自己的资源名称替换示例名称。
 
         $existingVnetRGName = "myResourceGroup"

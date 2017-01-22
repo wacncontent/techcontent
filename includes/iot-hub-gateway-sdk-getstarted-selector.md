@@ -49,8 +49,8 @@
 
 Hello World 示例体现了上一部分所述概念。Hello World 示例所实现的网关具有一个管道，该管道包含两个模块：
 
--	*hello world* 模块每 5 秒创建一条消息，并将该消息传递给 logger 模块。
--	*Logger* 模块将接收的消息写入文件。
+- *hello world* 模块每 5 秒创建一条消息，并将该消息传递给 logger 模块。
+- *Logger* 模块将接收的消息写入文件。
 
 ![使用 Azure IoT 网关 SDK 构建的 Hello World 示例的体系结构][4]  
 

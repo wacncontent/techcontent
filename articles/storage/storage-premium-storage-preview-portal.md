@@ -66,7 +66,7 @@ Azure 使用存储帐户作为操作系统和数据磁盘的容器。换句话�
 - 确保 VM 上有足够的带宽来驱动磁盘通信。例如，STANDARD_DS1 VM 为高级存储磁盘通信提供每秒 32 MB 的专用带宽。这意味着，附加到此 VM 的 P10 高级存储磁盘最高只能达到每秒 32 MB，而不能像 P10 磁盘那样最高达到每秒 100 MB。同样，STANDARD_DS13 VM 可跨所有磁盘最高达到每秒 256 MB。目前，DS 系列上的最大 VM 是 STANDARD_DS14，它可以跨所有磁盘最高提供每秒 512 MB。
 
     请注意，这些限制只适用于磁盘流量，而不包括缓存命中和网络流量。VM 网络通信可以使用单独的带宽，这不同于高级存储磁盘的专用带宽。
-    
+
     有关 DS 系列 VM 的最大 IOPS 与吞吐量（带宽）的最新信息，请参阅 [Azure 的虚拟机和云服务大小](../virtual-machines/virtual-machines-windows-sizes.md)。若要了解高级存储磁盘及其 IOPS 和吞吐量限制，请参阅本文的[使用高级存储时的可伸缩性和性能目标](#scalability-and-performance-targets-when-using-premium-storage)部分中的表格。
 
 > [!NOTE]缓存命中数不受到磁盘配置 IOPS/吞吐量的限制。也就是说，当你在 DS 系列 VM 上使用具有 ReadOnly 缓存设置的数据磁盘时，缓存提供的读取数不受高级存储磁盘限制的约束。因此，如果工作负荷以读取为主，可以从磁盘获得极高的吞吐量。请注意，缓存根据 VM 大小受到 VM 级别不同的 IOPS / 吞吐量的限制。DS 系列 VM 大约有 4000 IOPS，缓存与本地 SSD IO 是每个核心 33 MB/秒。
@@ -361,7 +361,7 @@ Azure 会将磁盘大小映射（向上舍入）至表中指定的最接近高�
 
 [Azure 的虚拟机和云服务大小](../virtual-machines/virtual-machines-windows-sizes.md)
 
-[存储服务文档](./index.md/)
+[存储服务文档](./index.md)
 
 [Image1]: ./media/storage-premium-storage-preview-portal/Azure_pricing_tier.png
 

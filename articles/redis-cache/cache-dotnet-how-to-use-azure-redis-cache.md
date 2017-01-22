@@ -32,9 +32,9 @@ ms.author: sdanie
 
 Azure Redis 缓存提供以下层：
 
--	**基本** - 单个节点。多种大小，最大 53 GB。
--	**标准** - 双节点主/副本配置。多种大小，最大 53 GB。99.9% SLA。
--	**高级** - 双节点主/副本配置，最多有 10 个分片。从 6 GB 到 530 GB 的多种大小（有关详细信息，请与我们联系）。标准层的所有功能加上其他功能，包括支持 [Redis 群集](./cache-how-to-premium-clustering.md)、[Redis 持久性](./cache-how-to-premium-persistence.md)和 [Azure 虚拟网络](./cache-how-to-premium-vnet.md)。99.9% SLA。
+- **基本** - 单个节点。多种大小，最大 53 GB。
+- **标准** - 双节点主/副本配置。多种大小，最大 53 GB。99.9% SLA。
+- **高级** - 双节点主/副本配置，最多有 10 个分片。从 6 GB 到 530 GB 的多种大小（有关详细信息，请与我们联系）。标准层的所有功能加上其他功能，包括支持 [Redis 群集](./cache-how-to-premium-clustering.md)、[Redis 持久性](./cache-how-to-premium-persistence.md)和 [Azure 虚拟网络](./cache-how-to-premium-vnet.md)。99.9% SLA。
 
 每个级别在功能和定价方面存在差异。有关定价信息，请参阅[缓存定价详细信息][]。
 
@@ -44,8 +44,8 @@ Azure Redis 缓存提供以下层：
 
 Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置和配置缓存。接下来，配置缓存客户端，以便它们可以访问缓存。在配置了缓存客户端后，就可以开始使用它们。
 
--	[创建缓存][]
--	[配置缓存客户端][]
+- [创建缓存][]
+- [配置缓存客户端][]
 
 ## <a name="create-cache" id="create-a-cache"></a>创建缓存
 
@@ -63,7 +63,7 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
 本节中的步骤介绍如何使用缓存执行常见任务。
 
--	[连接到缓存][]
+- [连接到缓存][]
 -   [添加和从缓存检索对象][]
 -   [处理缓存中的 .NET 对象](#work-with-net-objects-in-the-cache)
 
@@ -93,7 +93,7 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
     {
         return ConnectionMultiplexer.Connect("contoso5.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
     });
-    
+
     public static ConnectionMultiplexer Connection
     {
         get
@@ -160,7 +160,7 @@ Azure Redis 缓存可以缓存 .NET 对象以及基元数据类型，但在缓�
     {
         public int Id { get; set; }
         public string Name { get; set; }
-    
+
         public Employee(int EmployeeId, string Name)
         {
             this.Id = EmployeeId;
@@ -178,15 +178,15 @@ Azure Redis 缓存可以缓存 .NET 对象以及基元数据类型，但在缓�
 
 现在，你已学习了基础知识，接下来请打开以下链接了解有关 Azure Redis 缓存的详细信息。
 
--	了解 Azure Redis 缓存的 ASP.NET 提供程序。
-    -	[Azure Redis 会话状态提供程序](./cache-aspnet-session-state-provider.md)
-    -	[Azure Redis 缓存 ASP.NET 输出缓存提供程序](./cache-aspnet-output-cache-provider.md)
--	查看 [StackExchange.Redis 缓存客户端文档][]。
-    -	可以从许多 Redis 客户端和开发语言访问 azure Redis 缓存。有关详细信息，请参阅 [http://redis.io/clients][]。
--	Azure Redis 缓存还可与第三方服务和工具搭配使用，如 Redsmin 和 Redis Desktop Manager。
-    -	有关 Redsmin 的详细信息，请参阅[如何检索 Azure Redis 连接字符串并将其用于 Redsmin][]。
-    -	使用 [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager) 通过 GUI 访问和检查 Azure Redis 缓存中的数据。
--	请参阅 [redis][] 文档并阅读 [redis 数据类型][]和 [Redis 数据类型的十五分钟介绍][]。
+- 了解 Azure Redis 缓存的 ASP.NET 提供程序。
+    - [Azure Redis 会话状态提供程序](./cache-aspnet-session-state-provider.md)
+    - [Azure Redis 缓存 ASP.NET 输出缓存提供程序](./cache-aspnet-output-cache-provider.md)
+- 查看 [StackExchange.Redis 缓存客户端文档][]。
+    - 可以从许多 Redis 客户端和开发语言访问 azure Redis 缓存。有关详细信息，请参阅 [http://redis.io/clients][]。
+- Azure Redis 缓存还可与第三方服务和工具搭配使用，如 Redsmin 和 Redis Desktop Manager。
+    - 有关 Redsmin 的详细信息，请参阅[如何检索 Azure Redis 连接字符串并将其用于 Redsmin][]。
+    - 使用 [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager) 通过 GUI 访问和检查 Azure Redis 缓存中的数据。
+- 请参阅 [redis][] 文档并阅读 [redis 数据类型][]和 [Redis 数据类型的十五分钟介绍][]。
 
 <!-- INTRA-TOPIC LINKS -->
 [后续步骤]: #next-steps
@@ -225,7 +225,7 @@ Azure Redis 缓存可以缓存 .NET 对象以及基元数据类型，但在缓�
 <!-- LINKS -->
 
 [http://redis.io/clients]: http://redis.io/clients
-[Develop in other languages for Azure Redis Cache]: ./index.md/
+[Develop in other languages for Azure Redis Cache]: ./index.md
 [如何检索 Azure Redis 连接字符串并将其用于 Redsmin]: https://redsmin.uservoice.com/knowledgebase/articles/485711-how-to-connect-redsmin-to-azure-redis-cache
 [Azure Redis Session State Provider]: ./cache-aspnet-session-state-provider.md
 [How to: Configure a Cache Client Programmatically]: http://msdn.microsoft.com/zh-cn/library/azure/gg618003.aspx
@@ -250,8 +250,8 @@ Azure Redis 缓存可以缓存 .NET 对象以及基元数据类型，但在缓�
 [缓存定价详细信息]: https://www.azure.cn/pricing/details/redis-cache/
 [Azure Management Portal]: https://manage.windowsazure.cn/
 
-[Overview of Azure Redis Cache]: ./index.md/
-[Azure Redis Cache]: ./index.md/
+[Overview of Azure Redis Cache]: ./index.md
+[Azure Redis Cache]: ./index.md
 
 [Migrate to Azure Redis Cache]: http://go.microsoft.com/fwlink/?LinkId=317347
 [Azure Redis Cache Samples]: http://go.microsoft.com/fwlink/?LinkId=320840

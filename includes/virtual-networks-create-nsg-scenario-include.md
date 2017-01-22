@@ -14,5 +14,5 @@
     - **web-rule**。此规则将拒绝从 *BackEnd* 子网传输的所有 Internet 绑定流量。
 
 将这些规则组合起来可创建一个与 DMZ 类似的方案，其中后端子网只能接收来自前端子网的 SQL 通信的传入流量且不能访问 Internet，而前端子网可以与 Internet 通信并只接收传入 HTTP 请求。
- 
+
 <!---HONumber=76-->

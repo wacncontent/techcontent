@@ -36,7 +36,7 @@ DataFu 是适用于 Hadoop 的开放源代码库的集合。在本文档中，�
 通常，你将为 DataFu 函数定义别名。例如：
 
     DEFINE SHA datafu.pig.hash.SHA();
-    
+
 这将为 SHA 哈希函数定义名为 `SHA` 的别名。然后，你可以在 Pig Latin 脚本中使用此别名生成输入数据的哈希值。例如，以下代码将输入数据中的名称替换为哈希值：
 
     raw = LOAD '/data/raw/' USING PigStorage(',') AS  
@@ -59,7 +59,7 @@ DataFu 是适用于 Hadoop 的开放源代码库的集合。在本文档中，�
     Eva Makay,8,9,2
     Shi Liao,4,6,0
     Tjasa Zemljaric,0,2,5
-    
+
 它会生成以下输出：
 
     (c1a743b0f34d349cfc2ce00ef98369bdc3dba1565fec92b4159a9cd5de186347,5,9,1)

@@ -45,7 +45,7 @@ wacn.date: 11/22/2016
 + 支持 iOS 8（或更高版本）的设备
 + [Apple 开发人员计划](https://developer.apple.com/programs/)成员身份。
 
-   > [!NOTE] 由于推送通知的配置要求，你必须在物理 iOS 的设备（iPhone 或 iPad）而不是在 iOS 模拟器上部署和测试推送通知。
+    > [!NOTE] 由于推送通知的配置要求，你必须在物理 iOS 的设备（iPhone 或 iPad）而不是在 iOS 模拟器上部署和测试推送通知。
 
 完成本教程是学习有关 iOS 应用的所有其他通知中心教程的先决条件。
 
@@ -95,17 +95,17 @@ wacn.date: 11/22/2016
 
         #ifndef HubInfo_h
         #define HubInfo_h
-        
+
             #define HUBNAME @"<Enter the name of your hub>"
             #define HUBLISTENACCESS @"<Enter your DefaultListenSharedAccess connection string"
-        
+
         #endif /* HubInfo_h */
 
 6. 打开 `AppDelegate.h` 文件并添加以下导入指令：
 
          #import <WindowsAzureMessaging/WindowsAzureMessaging.h> 
          #import "HubInfo.h"
-        
+
 7. 根据 iOS 版本，在 `AppDelegate.m file` 的 `didFinishLaunchingWithOptions` 方法中添加以下代码。此代码将向 APNs 注册设备句柄：
 
     对于 iOS 8：

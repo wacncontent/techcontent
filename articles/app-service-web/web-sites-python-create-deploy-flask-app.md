@@ -95,7 +95,7 @@ ms.author: huvalo
     \requirements.txt
 
 此应用程序所需的外部软件包。部署脚本将对在此文件中列出的包进行 pip 安装。
- 
+
     \web.2.7.config
     \web.3.4.config
 
@@ -364,7 +364,7 @@ Visual Studio 不会显示部署的进度。
 ## 后续步骤
 
 请遵循下面链接以了解有关 Flask 和 Python Tools for Visual Studio 的更多信息：
- 
+
 - [Flask 文档]
 - [Python Tools for Visual Studio 文档]
 
@@ -393,5 +393,5 @@ Visual Studio 不会显示部署的进度。
 [Visual Studio]: http://www.visualstudio.com/
 [Python Tools for Visual Studio 文档]: http://aka.ms/ptvsdocs
 [Flask 文档]: http://flask.pocoo.org/
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

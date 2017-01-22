@@ -154,7 +154,7 @@ ms.author: jdial;annahar
     >
 
     **将公共 IP 地址资源关联到新 IP 配置**
-    
+
     每次在新 IP 配置中添加公共 IP 地址时，还必须添加专用 IP 地址，因为所有 IP 配置都必须具有专用 IP 地址。可添加现有公共 IP 地址资源，也可创建新的公共 IP 地址资源。若要新建，请输入以下命令：
 
         $myPublicIp3   = New-AzureRmPublicIpAddress -Name "myPublicIp3" -ResourceGroupName $myResourceGroup `

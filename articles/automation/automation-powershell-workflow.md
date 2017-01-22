@@ -123,7 +123,7 @@ InlineScript 使用如下所示的语法。
     Workflow Stop-MyService
     {
         $ServiceName = "MyService"
-    
+
         $Output = InlineScript {
             $Service = Get-Service -Name $Using:ServiceName
             $Service.Stop()
@@ -194,7 +194,7 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
             $Copy-Item -Path $File -Destination \\NetworkPath
             Write-Output "$File copied."
         }
-        
+
         Write-Output "All files copied."
     }
 
@@ -226,7 +226,7 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
             Write-Output "$File copied."
             Checkpoint-Workflow
         }
-        
+
         Write-Output "All files copied."
     }
 
@@ -244,7 +244,7 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
        foreach ($VmName in $VmsToCreate)
          {
           # Do work first to create the VM (code not shown)
-        
+
           # Now add the VM
           New-AzureRmVm -VM $Vm -Location "ChinaNorth" -ResourceGroupName "ResourceGroup01"
 

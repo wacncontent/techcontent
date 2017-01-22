@@ -63,14 +63,14 @@ ms.author: genemi
 
 - sys.dm\_xe**\_database**\_session\_targets
 - sys.dm\_xe\_session\_targets
- 
+
         GO
         ----  Transact-SQL.
         ---- Step set 1.
-        
+
         SET NOCOUNT ON;
         GO
-        
+
         IF EXISTS
             (SELECT * FROM sys.objects
                 WHERE type = 'U' and name = 'tabEmployee')
@@ -78,7 +78,7 @@ ms.author: genemi
             DROP TABLE tabEmployee;
         END
         GO
-        
+
         CREATE TABLE tabEmployee
         (
             EmployeeGuid         uniqueIdentifier   not null  default newid()  primary key,
@@ -87,13 +87,13 @@ ms.author: genemi
             EmployeeDescr        nvarchar(256)          null
         );
         GO
-        
+
         INSERT INTO tabEmployee ( EmployeeDescr )
             VALUES ( 'Jane Doe' );
         GO
-        
+
         ---- Step set 2.
-        
+
         IF EXISTS
             (SELECT * from sys.database_event_sessions
                 WHERE name = 'eventsession_gm_azuresqldb51')
@@ -102,7 +102,7 @@ ms.author: genemi
                 ON DATABASE;
         END
         GO
-        
+
         CREATE
             EVENT SESSION eventsession_gm_azuresqldb51
             ON DATABASE
@@ -118,29 +118,29 @@ ms.author: genemi
                         max_memory = 500   -- Units of KB.
                     );
         GO
-        
+
         ---- Step set 3.
-        
+
         ALTER EVENT SESSION eventsession_gm_azuresqldb51
             ON DATABASE
             STATE = START;
         GO
-        
+
         ---- Step set 4.
-        
+
         SELECT 'BEFORE_Updates', EmployeeKudosCount, * FROM tabEmployee;
-        
+
         UPDATE tabEmployee
             SET EmployeeKudosCount = EmployeeKudosCount + 102;
-        
+
         UPDATE tabEmployee
             SET EmployeeKudosCount = EmployeeKudosCount + 1015;
-        
+
         SELECT 'AFTER__Updates', EmployeeKudosCount, * FROM tabEmployee;
         GO
-        
+
         ---- Step set 5.
-        
+
         SELECT
                 se.name  AS [session-name],
                 ev.event_name,
@@ -153,13 +153,13 @@ ms.author: genemi
                            sys.dm_xe_database_session_event_actions  AS ac
                 INNER JOIN sys.dm_xe_database_session_events         AS ev  ON ev.event_name = ac.event_name
                 AND CAST(ev.event_session_address AS BINARY(8)) = CAST(ac.event_session_address AS BINARY(8))
-        
+
                 INNER JOIN sys.dm_xe_database_session_object_columns AS oc
                 ON CAST(oc.event_session_address AS BINARY(8)) = CAST(ac.event_session_address AS BINARY(8))
-        
+
                 INNER JOIN sys.dm_xe_database_session_targets        AS st
                 ON CAST(st.event_session_address AS BINARY(8)) = CAST(ac.event_session_address AS BINARY(8))
-        
+
                 INNER JOIN sys.dm_xe_database_sessions               AS se
                 ON CAST(ac.event_session_address AS BINARY(8)) = CAST(se.address AS BINARY(8))
             WHERE
@@ -175,27 +175,27 @@ ms.author: genemi
                 st.target_name,
                 se.session_source;
         GO
-        
+
         ---- Step set 6.
-        
+
         ALTER EVENT SESSION eventsession_gm_azuresqldb51
             ON DATABASE
             STATE = STOP;
         GO
-        
+
         ---- Step set 7.
-        
+
         ALTER EVENT SESSION eventsession_gm_azuresqldb51
             ON DATABASE
             DROP TARGET package0.ring_buffer;
         GO
-        
+
         ---- Step set 8.
-        
+
         DROP EVENT SESSION eventsession_gm_azuresqldb51
             ON DATABASE;
         GO
-        
+
         DROP TABLE tabEmployee;
         GO
 
@@ -210,7 +210,7 @@ ms.author: genemi
 然后，在结果窗格中，我们单击了 **target\_data\_XML** 列标题下的单元格。这个单击动作在 ssms.exe 中按结果单元格内容显示的顺序，以 XML 格式创建了另一个文件选项卡。
 
 输出显示在以下块中。结果看起来很长，但其实只是两个 **<event\>** 元素。
-    
+
     <RingBufferTarget truncated="0" processingTime="0" totalEventsProcessed="2" eventCount="2" droppedCount="0" memoryUsed="1728">
       <event name="sql_statement_starting" package="sqlserver" timestamp="2015-09-22T15:29:31.317Z">
         <data name="state">
@@ -239,15 +239,15 @@ ms.author: genemi
           <type name="unicode_string" package="package0" />
           <value>
     ---- Step set 4.
-    
+
     SELECT 'BEFORE_Updates', EmployeeKudosCount, * FROM tabEmployee;
-    
+
     UPDATE tabEmployee
         SET EmployeeKudosCount = EmployeeKudosCount + 102;
-    
+
     UPDATE tabEmployee
         SET EmployeeKudosCount = EmployeeKudosCount + 1015;
-    
+
     SELECT 'AFTER__Updates', EmployeeKudosCount, * FROM tabEmployee;
     </value>
         </action>
@@ -279,15 +279,15 @@ ms.author: genemi
           <type name="unicode_string" package="package0" />
           <value>
     ---- Step set 4.
-    
+
     SELECT 'BEFORE_Updates', EmployeeKudosCount, * FROM tabEmployee;
-    
+
     UPDATE tabEmployee
         SET EmployeeKudosCount = EmployeeKudosCount + 102;
-    
+
     UPDATE tabEmployee
         SET EmployeeKudosCount = EmployeeKudosCount + 1015;
-    
+
     SELECT 'AFTER__Updates', EmployeeKudosCount, * FROM tabEmployee;
     </value>
         </action>

@@ -33,17 +33,17 @@ ms.author: adegeo
 
 1. 登录到 [Azure 经典管理门户](http://manage.windowsazure.cn)。
 2. 单击经典管理门户左侧的“设置”（可能需要向下滚动）。 
-    
+
     ![设置](./media/azure-api-management-certs/settings.png)
 
 3. 单击“管理证书”选项卡。
 
     ![设置](./media/azure-api-management-certs/certificates-tab.png)
-    
+
 4. 单击“上载”按钮。
 
     ![设置](./media/azure-api-management-certs/upload.png)
-    
+
 5. 填写对话框信息并单击完成“复选标记”。
 
     ![设置](./media/azure-api-management-certs/upload-dialog.png)

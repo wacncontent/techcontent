@@ -13,7 +13,7 @@ wacn.date: 04/05/2016
 ---
 
 # Azure Resource Manager SDK for Java
-   
+
 Azure Resource Manager (ARM) 预览版 SDK 适用于多种语言和平台。每种语言中实现可通过其生态系统包管理器和 GitHub 来使用。
 
 其中每个 SDK 中的代码是从 [Azure RESTful API 规范](https://github.com/azure/azure-rest-api-specs)生成的。这些规范是开源代码，基于 Swagger v2 规范。SDK 代码是通过名为 [AutoRest](https://github.com/azure/autorest) 的开源项目生成的。AutoRest 将这些 RESTful API 规范转换成采用多种语言的客户端库。如果你想要改进 SDK 中生成的代码的任何方面，你可以使用开放的、免费提供的、基于广泛采用 API 规范格式的整个工具集。
@@ -82,7 +82,7 @@ SDK 包含多个主包的帮助器类。帮助器类实现于 auzre-mgmt-utility
 
     public static Configuration createConfiguration() throws Exception {
        String baseUri = System.getenv("arm.url");
-    
+
        return ManagementConfiguration.configure(
              null,
              baseUri != null ? new URI(baseUri) : null,
@@ -105,22 +105,22 @@ SDK 包含多个主包的帮助器类。帮助器类实现于 auzre-mgmt-utility
             StorageManagementClient storageManagementClient = StorageManagementService.create(config);
             ComputeManagementClient computeManagementClient = ComputeManagementService.create(config);
             NetworkResourceProviderClient networkResourceProviderClient = NetworkResourceProviderService.create(config);
-    
+
             String resourceGroupName = "javasampleresourcegroup";
             String region = "EastAsia";
-    
+
             ResourceContext context = new ResourceContext(
                     region, resourceGroupName, System.getenv(ManagementConfiguration.SUBSCRIPTION_ID), false);
-    
+
             System.out.println("Start create vm...");
-    
+
             try {
                 VirtualMachine vm = ComputeHelper.createVM(
                         resourceManagementClient, computeManagementClient, networkResourceProviderClient, 
                         storageManagementClient,
                         context, vnName, vmAdminUser, vmAdminPassword)
                   .getVirtualMachine();
-    
+
                 System.out.println(vm.getName() + " is created");
             } catch (Exception ex) {
                 System.out.println(ex.toString());
@@ -136,7 +136,7 @@ ResouceHelper 类旨在简化使用 Java SDK 部署 ARM 模板的过程。
             resourceGroupLocation, resourceGroupName,
             System.getenv(ManagementConfiguration.SUBSCRIPTION_ID), false);
     ComputeHelper.createOrUpdateResourceGroup(resourceManagementClient, resourceContext);
-    
+
     // create the template deployment
     DeploymentExtended deployment = ResourceHelper.createTemplateDeploymentFromURI(
             resourceManagementClient,
@@ -155,13 +155,13 @@ ResouceHelper 类旨在简化使用 Java SDK 部署 ARM 模板的过程。
     ResourceManagementClient resourceManagementClient = ResourceManagementService.create(config);
     ComputeManagementClient computeManagementClient = ComputeManagementService.create(config);
     NetworkResourceProviderClient networkResourceProviderClient = NetworkResourceProviderService.create(config);
-    
+
     // list all resource groups     
     ArrayList<ResourceGroupExtended> resourceGroups = resourceManagementClient.getResourceGroupsOperations().list(null).getResourceGroups();
     for (ResourceGroupExtended resourcesGroup : resourceGroups) {
        String rgName = resourcesGroup.getName();
        System.out.println("Resource Group: " + rgName);
-       
+
        // list all virtual machines
        ArrayList<VirtualMachine> vms = computeManagementClient.getVirtualMachinesOperations().list(rgName).getVirtualMachines();
        for (VirtualMachine vm : vms) {
@@ -174,7 +174,7 @@ ResouceHelper 类旨在简化使用 Java SDK 部署 ARM 模板的过程。
              System.out.println("        NIC: " + nic.getName());
              System.out.println("        Is primary: " + nic.isPrimary());
              ArrayList<NetworkInterfaceIpConfiguration> ips = nic.getIpConfigurations();
-    
+
              // find public ip address
              for (NetworkInterfaceIpConfiguration ipConfiguration : ips) {
                    System.out.println("        Private IP address: " + ipConfiguration.getPrivateIpAddress());

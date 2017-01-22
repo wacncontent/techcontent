@@ -43,7 +43,7 @@ ms.author: glenga
 这两个初始值设定项会从数据库中，删除移动服务所用架构中的所有表、视图、函数和过程。
 
 + **ClearDatabaseSchemaIfModelChanges** <br/>仅当 Code First 检测到数据模型更改时，才删除架构对象。从 [Azure 经典管理门户]下载的 .NET 后端项目中的默认初始值设定项继承自这个基类。
- 
+
 + **ClearDatabaseSchemaAlways**：<br/>每次访问数据模型都会删除架构对象。使用此基类可以重置数据库，而无需进行数据模型更改。
 
 在本地计算机上运行时，可以使用其他 Code First 数据模型初始值设定项。但是，由于用户没有删除数据库的权限，因此尝试删除数据库的初始值设定项在 Azure 中会失败，这是件好事。
@@ -63,7 +63,7 @@ Code First 迁移使用快照方法来生成代码，执行这些代码会对数
 以下步骤将启用迁移，并应用项目、本地数据库和 Azure 中的数据模型更改。
 
 1. 在 Visual Studio 的解决方案资源管理器中，右键单击移动服务项目，然后单击“设为启动项目”。
- 
+
 2. 在“工具”菜单中，展开“NuGet Package Manager”，然后单击“Package Manager Console”。
 
     此时会显示 Package Manager Console，你可以使用它来管理 Code First 迁移。
@@ -86,7 +86,7 @@ Code First 迁移使用快照方法来生成代码，执行这些代码会对数
         using todolistService.Migrations;
 
     在上述代码中，必须将 _todolistService_ 字符串替换为项目的命名空间，对于下载的快速入门项目，该命名空间为 <em>mobile&#95;service&#95;name</em>Service。
- 
+
 6. 在这同一个代码文件中，注释掉对 **Database.SetInitializer** 方法的调用，并在该调用的后面添加以下代码：
 
         var migrator = new DbMigrator(new Configuration());
@@ -95,13 +95,13 @@ Code First 迁移使用快照方法来生成代码，执行这些代码会对数
     这样就会禁用用于删除然后重新创建数据库的默认 Code First 数据库初始值设定项，并将其替换为应用最新迁移的显式请求。此时，除非为数据创建了迁移，否则，在访问数据时，进行任何数据模型更改都会导致 InvalidOperationException。另外，你的服务必须使用 Code First 迁移将数据模型更改迁移到数据库。
 
 7.  按 F5 在本地计算机上启动移动服务项目。
- 
+
     此时，数据库已与数据模型同步。如果你提供了种子数据，可以通过依次单击“试用”、“GET 表/todoitem”、“试用此项”和“发送”来验证该数据。有关详细信息，请参阅[在迁移中设定数据种子]。
 
 8.   现在，对数据模型进行更改（例如，向 TodoItem 类型添加一个新的 UserId 属性），重新生成项目，然后在 Package Manager 中运行以下命令：
 
         PM> Add-Migration NewUserId
-                                                               
+
     这将创建一个名为 *NewUserId* 的新迁移。迁移文件夹中添加了一个用于实施此更改的新代码文件
 
 9.  再次按 F5 以在本地计算机上重新启动移动服务项目。
@@ -146,7 +146,7 @@ Code First 迁移使用快照方法来生成代码，执行这些代码会对数
 ###设定表中新列的种子
 
 以下代码只设定 UserId 列的种子：
-             
+
         context.TodoItems.AddOrUpdate(
             t => t.UserId,
                 new TodoItem { UserId = 1 },

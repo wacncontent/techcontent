@@ -74,7 +74,7 @@ LRS 的成本最低，与其他选项相比，存储的持久性最小。如果�
 | ---------------   |----------------
 |中国北部 |中国东部
 |中国东部 |中国北部 
- 
+
 ##<a id="read-access-geo-redundant-storage"></a> 读取访问异地冗余存储
 
 除了在 GRS 所提供的两个区域之间进行复制外，读取访问异地冗余存储 (RA-GRS) 还提供对辅助位置中的数据的只读访问权限，从而在最大程度上提高存储帐户的可用性。
@@ -92,5 +92,5 @@ LRS 的成本最低，与其他选项相比，存储的持久性最小。如果�
 - [Azure 存储可伸缩性和性能目标](./storage-scalability-targets.md)
 - [Azure 存储冗余选项和读取访问异地冗余存储](http://blogs.msdn.com/b/windowsazurestorage/archive/2013/12/11/introducing-read-access-geo-replicated-storage-ra-grs-for-windows-azure-storage.aspx)  
 - [SOSP 论文 - Azure 存储空间：具有高度一致性的高可用云存储服务](http://blogs.msdn.com/b/windowsazurestorage/archive/2011/11/20/windows-azure-storage-a-highly-available-cloud-storage-service-with-strong-consistency.aspx)
- 
+
 <!---HONumber=Mooncake_0103_2017-->

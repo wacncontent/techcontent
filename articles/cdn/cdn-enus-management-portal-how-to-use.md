@@ -86,7 +86,7 @@ Clicking “Domain Management” in the left navigation pane displays a list vie
 #### **Modify Configurations**
 
 You can modify Original domain and host header here.
- 
+
 ![][4]
 
 #### **Cache rule configuration**

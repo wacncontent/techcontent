@@ -70,13 +70,13 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
     // Retrieve the storage account from the connection string.
     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
         CloudConfigurationManager.GetSetting("StorageConnectionString"));
-    
+
     // Create the table client.
     CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
     // Retrieve a reference to the table.
     CloudTable table = tableClient.GetTableReference("people");
-        
+
     // Create the table if it doesn't exist.
     table.CreateIfNotExists();
 
@@ -433,7 +433,7 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
 
   [下载并安装 Azure SDK for.NET]: /develop/net/
   [在 Visual Studio 中创建 Azure 项目]: http://msdn.microsoft.com/zh-cn/library/azure/ee405487.aspx
-  
+
   [Blob5]: ./media/storage-dotnet-how-to-use-table-storage/blob5.png
   [Blob6]: ./media/storage-dotnet-how-to-use-table-storage/blob6.png
   [Blob7]: ./media/storage-dotnet-how-to-use-table-storage/blob7.png

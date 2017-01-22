@@ -48,7 +48,7 @@ ms.author: sstein
     $serverPassword = "password" 
     $securePassword = ConvertTo-SecureString –String $serverPassword –AsPlainText -Force
     $creds = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $serverAdmin, $securePassword
-    
+
     $sqlServer = New-AzureRmSqlServer -ServerName $sqlServerName `
      -SqlAdministratorCredentials $creds -Location $sqlServerLocation `
      -ResourceGroupName $resourceGroupName -ServerVersion $sqlServerVersion

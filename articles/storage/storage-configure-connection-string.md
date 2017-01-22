@@ -50,7 +50,7 @@ ms.author: marsma
     DefaultEndpointsProtocol=[http|https];AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.chinacloudapi.cn
 
 例如，你的连接字符串将类似于以下示例连接字符串：
- 
+
     DefaultEndpointsProtocol=https;
     AccountName=storagesample;
     AccountKey=<account-key>;

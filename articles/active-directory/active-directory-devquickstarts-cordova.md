@@ -28,9 +28,9 @@ Apache Cordova 可让你开发能够在移动设备上运行的完全成熟的 H
 
 在本教程中，我们将使用适用于 Active Directory 身份验证库 (ADAL) 的 Apache Cordova 插件来改进一个具有以下功能的简单应用程序：
 
--	只需编写几行代码，就能对 AD 用户进行身份验证并获取用于调用 Azure AD Graph API 的令牌。
--	然后，使用该令牌调用 Graph API 以查询目录并显示结果
--	利用 ADAL 令牌缓存来最大程度地减少向用户显示身份验证提示。
+- 只需编写几行代码，就能对 AD 用户进行身份验证并获取用于调用 Azure AD Graph API 的令牌。
+- 然后，使用该令牌调用 Graph API 以查询目录并显示结果
+- 利用 ADAL 令牌缓存来最大程度地减少向用户显示身份验证提示。
 
 为此，你需要：
 
@@ -83,18 +83,18 @@ Apache Cordova 可让你开发能够在移动设备上运行的完全成熟的 H
 
 Azure AD 只会向已知的应用程序颁发令牌。在从应用程序使用 Azure AD 之前，你需要在租户中为该应用程序创建一个条目。在租户中注册新的应用程序：
 
--	登录到 [Azure 管理门户](https://manage.windowsazure.cn)
--	在左侧的导航栏中单击“Active Directory”
--	选择你要在其中注册应用程序的租户。
--	单击“应用程序”选项卡，然后在底部抽屉中单击“添加”。
--	按提示操作，并创建新的**本机客户端应用程序**（尽管 Cordova 应用以 HTML 为基础，我们仍在此创建本机客户端应用程序，因此必须选择`Native Client Application`选项，否则应用程序无法运行）。
-    -	应用程序的“名称”向最终用户描述你的应用程序
-    -	“重定向 URI”是用于向应用返回令牌的 URI。输入 `http://MyDirectorySearcherApp`。
+- 登录到 [Azure 管理门户](https://manage.windowsazure.cn)
+- 在左侧的导航栏中单击“Active Directory”
+- 选择你要在其中注册应用程序的租户。
+- 单击“应用程序”选项卡，然后在底部抽屉中单击“添加”。
+- 按提示操作，并创建新的**本机客户端应用程序**（尽管 Cordova 应用以 HTML 为基础，我们仍在此创建本机客户端应用程序，因此必须选择`Native Client Application`选项，否则应用程序无法运行）。
+    - 应用程序的“名称”向最终用户描述你的应用程序
+    - “重定向 URI”是用于向应用返回令牌的 URI。输入 `http://MyDirectorySearcherApp`。
 
 完成注册后，AAD 将为应用程序分配唯一的客户端标识符。在学习后面的部分时，你需要用到此值：可以在新建应用的“配置”选项卡中找到此值。
 
 若要运行 `DirSearchClient Sample`，请向新建应用授予查询 _Azure AD 图形 API_ 的权限：
--	在“配置”选项卡中，找到“针对其他应用程序的权限”部分。对于“Azure Active Directory”应用程序，在“委托的权限”下添加“以已登录用户的身份访问目录”权限。这样，你的应用程序便可以在 Graph API 中查询用户。
+- 在“配置”选项卡中，找到“针对其他应用程序的权限”部分。对于“Azure Active Directory”应用程序，在“委托的权限”下添加“以已登录用户的身份访问目录”权限。这样，你的应用程序便可以在 Graph API 中查询用户。
 
 ## *2.克隆教程所需的示例应用存储库*
 
@@ -236,43 +236,43 @@ javascript
 
 ####Windows 10：
 
-   平板电脑/电脑：`cordova run windows --archs=x64 -- --appx=uap`
+    平板电脑/电脑：`cordova run windows --archs=x64 -- --appx=uap`
 
-   移动版（需要连接到电脑的 Windows10 移动版设备）：`cordova run windows --archs=arm -- --appx=uap --phone`
+    移动版（需要连接到电脑的 Windows10 移动版设备）：`cordova run windows --archs=arm -- --appx=uap --phone`
 
-   __注意__：在首次运行期间，系统可能会要求你登录以获得开发人员许可证。有关详细信息，请参阅[开发人员许可证](https://msdn.microsoft.com/zh-cn/library/windows/apps/hh974578.aspx)。
+    __注意__：在首次运行期间，系统可能会要求你登录以获得开发人员许可证。有关详细信息，请参阅[开发人员许可证](https://msdn.microsoft.com/zh-cn/library/windows/apps/hh974578.aspx)。
 
 ####Windows 8.1 平板电脑/电脑：
 
-   `cordova run windows`
+    `cordova run windows`
 
-   __注意__：在首次运行期间，系统可能会要求你登录以获得开发人员许可证。有关详细信息，请参阅[开发人员许可证](https://msdn.microsoft.com/zh-cn/library/windows/apps/hh974578.aspx)。
+    __注意__：在首次运行期间，系统可能会要求你登录以获得开发人员许可证。有关详细信息，请参阅[开发人员许可证](https://msdn.microsoft.com/zh-cn/library/windows/apps/hh974578.aspx)。
 
 ####Windows Phone 8.1：
 
-   在连接的设备上运行：`cordova run windows --device -- --phone`
+    在连接的设备上运行：`cordova run windows --device -- --phone`
 
-   在默认的模拟器上运行：`cordova emulate windows -- --phone`
+    在默认的模拟器上运行：`cordova emulate windows -- --phone`
 
-   使用 `cordova run windows --list -- --phone` 可查看所有可用目标，使用 `cordova run windows --target=<target_name> -- --phone` 可在特定的设备或模拟器上运行应用程序（例如 `cordova run windows --target="Emulator 8.1 720P 4.7 inch" -- --phone`）。
+    使用 `cordova run windows --list -- --phone` 可查看所有可用目标，使用 `cordova run windows --target=<target_name> -- --phone` 可在特定的设备或模拟器上运行应用程序（例如 `cordova run windows --target="Emulator 8.1 720P 4.7 inch" -- --phone`）。
 
 ####Android：
 
-   在连接的设备上运行：`cordova run android --device`
+    在连接的设备上运行：`cordova run android --device`
 
-   在默认的模拟器上运行：`cordova emulate android`
+    在默认的模拟器上运行：`cordova emulate android`
 
-   __注意__：请确保根据“先决条件”部分中所示，使用 *AVD Manager* 创建模拟器实例。
+    __注意__：请确保根据“先决条件”部分中所示，使用 *AVD Manager* 创建模拟器实例。
 
-   使用 `cordova run android --list` 可查看所有可用目标，使用 `cordova run android --target=<target_name>` 可在特定的设备或模拟器上运行应用程序（例如 `cordova run android --target="Nexus4_emulator"`）。
+    使用 `cordova run android --list` 可查看所有可用目标，使用 `cordova run android --target=<target_name>` 可在特定的设备或模拟器上运行应用程序（例如 `cordova run android --target="Nexus4_emulator"`）。
 
 ####iOS：
 
-   在连接的设备上运行：`cordova run ios --device`
+    在连接的设备上运行：`cordova run ios --device`
 
-   在默认的模拟器上运行：`cordova emulate ios`
+    在默认的模拟器上运行：`cordova emulate ios`
 
-   __注意__：请确保安装 `ios-sim` 包以在模拟器上运行。有关详细信息，请参阅“先决条件”部分。
+    __注意__：请确保安装 `ios-sim` 包以在模拟器上运行。有关详细信息，请参阅“先决条件”部分。
 
     Use `cordova run ios --list` to see all available targets and `cordova run ios --target=<target_name>` to run application on specific device or emulator (for example,  `cordova run android --target="iPhone-6"`).
 

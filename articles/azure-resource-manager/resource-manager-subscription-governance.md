@@ -64,15 +64,15 @@ Azure 自 2008 年推出以来不断快速发展。这种发展要求 Microsoft 
 Azure 注册的三种常见模式为：
 
 * **功能**模式
-  
+
     ![功能](./media/resource-manager-subscription-governance/functional.png)  
 
 * **业务单位**模式
-  
+
     ![业务](./media/resource-manager-subscription-governance/business.png)  
 
 * **地理**模式
-  
+
     ![地理](./media/resource-manager-subscription-governance/geographic.png)  
 
 可以在订阅级别应用基架，将企业的监管要求扩展到订阅中。

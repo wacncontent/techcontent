@@ -174,7 +174,7 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
     {
         ReceiveMessageOptions opts = ReceiveMessageOptions.DEFAULT;
         opts.setReceiveMode(ReceiveMode.PEEK_LOCK);
-    
+
         while(true)  { 
              ReceiveQueueMessageResult resultQM = 
                      service.receiveQueueMessage("TestQueue", opts);

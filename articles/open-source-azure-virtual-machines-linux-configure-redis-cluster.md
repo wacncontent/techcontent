@@ -31,7 +31,7 @@ Redis 内置了复制，LUA 脚本，LRU 驱动时间，事务和不同级别的
 
 本文档介绍如何在 Azure Linux 虚拟机上安装配置免费的 Redis 集群。
 
-Azure 有提供收费的 Redis 服务，请参考 [Azure Redis tutorial](./redis-cache/index.md/) 获取详细信息。
+Azure 有提供收费的 Redis 服务，请参考 [Azure Redis tutorial](./redis-cache/index.md) 获取详细信息。
 
 ## <a name="install"></a>安装 Redis
 
@@ -46,20 +46,20 @@ Azure 有提供收费的 Redis 服务，请参考 [Azure Redis tutorial](./redis
 
     Redhat base Linux: ( 以 CentOS 7.0, 64-bit system, Redis 3.0.7 为例)  
     安装 wget 和 gcc
-    
+
         $sudo yum install wget -y
         $sudo yum install gcc -y
-    
+
     Ubuntu Linux: (以 Ubuntu 14.04, 64-bit system, Redis 3.0.7 为例)  
     安装 gcc 和 make
-    
+
         $sudo apt-get update 
         $sudo apt-get install gcc -y
         $sudo apt-get install make -y
-    
+
     SUSE Linux: (以 SLES 12, 64-bit system, Redis 3.0.7 为例)  
     安装 gcc
-    
+
         $sudo zypper install gcc -y
 
 2. 安装和启动 Redis. (下面2-5 步骤对于 RHEL, Ubuntu 和 SUSE 来讲都是一样的. 以 CentOS 7.0, 64-bit system, Redis 3.0.7 为例)
@@ -70,7 +70,7 @@ Azure 有提供收费的 Redis 服务，请参考 [Azure Redis tutorial](./redis
         $sudo ln -s redis-3.0.7 redis
         $cd redis
         $sudo make
-        
+
         $sudo cp redis.conf /etc/
         $sudo sed -i 's/daemonize no/daemonize yes/' /etc/redis.conf
         $cd src
@@ -142,7 +142,7 @@ Redis 复制很简单易用，它通过配置允许 slave Redis Servers 是 Mast
         "world"
         127.0.0.1:6379>
 
-5.	去到 Ubuntu 和 SLES虚拟机，进行验证。执行下面命令
+5. 去到 Ubuntu 和 SLES虚拟机，进行验证。执行下面命令
 
         $sudo /usr/local/redis/src/redis-cli 
         127.0.0.1:6379> get hello
@@ -194,22 +194,22 @@ Redis 集群的优势
 3. 安装 ruby, rubygems, redis gem
 
     Redhat base Linux: ( 以 CentOS 7.0, 64-bit system 为例)
-    
+
         $sudo yum install ruby -y
         $sudo yum install rubygems
         $sudo gem install redis
-    
+
     Ubuntu Linux: (以Ubuntu 14.04, 64-bit system 为例)
-    
+
         $sudo apt-get install ruby -y
         $sudo gem install redis
-    
+
     SUSE Linux: (以 SLES 12, 64-bit system 为例)
-    
+
         $sudo gem install redis
-    
+
 4. 在 CentOS 虚拟上执行4-7步骤
-    
+
         $sudo mkdir /usr/local/redis-cluster
         $sudo mkdir /usr/local/redis-cluster/7000
         $ sudo mkdir /usr/local/redis-cluster/7001
@@ -245,7 +245,7 @@ Redis 集群的优势
         $cd ../7002
         $sudo ./redis-server ./redis.conf
 
-8.	在 Ubuntu 虚拟机执行8-11步骤
+8. 在 Ubuntu 虚拟机执行8-11步骤
 
         $sudo mkdir /usr/local/redis-cluster
         $sudo mkdir /usr/local/redis-cluster/7003
@@ -256,7 +256,7 @@ Redis 集群的优势
         $sudo cp /usr/local/redis/src/redis-server /usr/local/redis-cluster/7005/
         $sudo cp /etc/redis.conf /usr/local/redis-cluster/7003/
 
-9.	编辑 /usr/local/redis-cluster/7003/redis.conf, 使得各参数的值和下面的一致
+9. 编辑 /usr/local/redis-cluster/7003/redis.conf, 使得各参数的值和下面的一致
 
         $sudo vi /usr/local/redis-cluster/7003/redis.conf
         port 7003
@@ -266,14 +266,14 @@ Redis 集群的优势
         cluster-node-timeout 5000
         appendonly yes
 
-10.	复制 /usr/local/redis-cluster/7003/redis.conf 到7004 和7005 目录, 修改端口信息
+10. 复制 /usr/local/redis-cluster/7003/redis.conf 到7004 和7005 目录, 修改端口信息
 
         $sudo cp /usr/local/redis-cluster/7003/redis.conf /usr/local/redis-cluster/7004/
         $sudo cp /usr/local/redis-cluster/7003/redis.conf /usr/local/redis-cluster/7005/
         $sudo sed -i 's/port 7003/port 7004/' /usr/local/redis-cluster/7004/redis.conf 
         $sudo sed -i 's/port 7003/port 7005/' /usr/local/redis-cluster/7005/redis.conf
 
-11.	启动各节点
+11. 启动各节点
 
         $cd /usr/local/redis-cluster/7003
         $sudo ./redis-server ./redis.conf
@@ -282,19 +282,19 @@ Redis 集群的优势
         $cd ../7005
         $sudo ./redis-server ./redis.conf
 
-12.	创建集群。在 CentOS 虚拟机上执行
+12. 创建集群。在 CentOS 虚拟机上执行
 
         $ sudo /usr/local/redis/src/redis-trib.rb create --replicas 1 104.40.91.31:7000 104.40.91.31:7001         104.40.91.31:7002 104.40.94.121:7003 104.40.94.121:7004 104.40.94.121:7005
 
     如果看到下面的信息，输入‘yes’即可
-     
+
     ![创建集群成功](./media/open-source-azure-virtual-machines-linux-configure-redis-cluster/1.png)
-    
+
     之后如果看到下面的信息，表明集群设置成功。
-    
+
     ![创建集群成功](./media/open-source-azure-virtual-machines-linux-configure-redis-cluster/2.png)
 
-13.	验证。去到 CentOS 虚拟机, 执行下面命令
+13. 验证。去到 CentOS 虚拟机, 执行下面命令
 
         $cd /usr/local/redis/src
         $sudo ./redis-cli -c -p 7000
@@ -320,7 +320,7 @@ Redis 集群的优势
         104.40.94.121:7003>
 
     去到 Ubuntu 虚拟机，执行下面命令
-    
+
         $cd /usr/local/redis/src
         $sudo ./redis-cli -p 7003
         127.0.0.1:7003> get name
@@ -334,14 +334,14 @@ Redis 集群的优势
         127.0.0.1:7003>
 
     我们获取不到键 ‘foo’ 和 ‘hello’的值， 因为它们不在 Ubuntu:7003 节点上。我们要到 CentOS:7001 节点上查看键 ‘foo’ 的值。
-    
+
         $cd /usr/local/redis/src 
         $sudo ./redis-cli -p 7001
         127.0.0.1:7001> get foo
         "bar"
-    
+
     或者我们可以在 Ubuntu 虚拟机执行下面命令检查各个键的值。
-        
+
         $cd /usr/local/redis/src
         $sudo ./redis-cli -c -p 7003
         127.0.0.1:7003> get foo

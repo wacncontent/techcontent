@@ -101,7 +101,7 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 Hive �
         .\hivejob.ps1
 
     脚本运行时，系统将提示你输入你的群集的 HTTPS/Admin 帐户凭据。还可能会提示你登录到 Azure 订阅。
-    
+
 7. 在作业完成时，它应返回如下信息：
 
         Display the standard output...

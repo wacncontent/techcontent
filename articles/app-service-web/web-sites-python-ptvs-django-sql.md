@@ -176,6 +176,6 @@ ms.author: huguesv
 [Web 项目]: http://go.microsoft.com/fwlink/?LinkId=624027
 [云服务项目]: http://go.microsoft.com/fwlink/?LinkId=624028
 [Django 文档]: https://www.djangoproject.com/
-[SQL 数据库]: ../sql-database/index.md/
+[SQL 数据库]: ../sql-database/index.md
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

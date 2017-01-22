@@ -79,7 +79,7 @@ wacn.date: 01/09/2017
 
     > [!IMPORTANT] 选取要选择用于部署应用程序的*相同区域*。这将为你提供最佳性能。
 
-6.	将对话框中的其他字段保留为其默认值，然后单击“确定”复选标记。系统将创建并启用命名空间。您可能需要等待几分钟，因为系统将为您的帐户配置资源。
+6. 将对话框中的其他字段保留为其默认值，然后单击“确定”复选标记。系统将创建并启用命名空间。您可能需要等待几分钟，因为系统将为您的帐户配置资源。
 
 你创建的命名空间将显示在门户中，不过需要花费一段时间来激活。请等到状态变为“活动”后再继续。
 
@@ -244,7 +244,7 @@ wacn.date: 01/09/2017
              </endpointBehaviors>
           </behaviors>
         </system.serviceModel>
-    
+
 14. 仍在 App.config 中，将 **&lt;appSettings&gt;** 元素中的连接字符串值替换为之前从门户获取的连接字符串。
 
         <appSettings>
@@ -252,7 +252,7 @@ wacn.date: 01/09/2017
            <add key="Microsoft.ServiceBus.ConnectionString"
                value="Endpoint=sb://yourNamespace.servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yourKey"/>
         </appSettings>
-    
+
 14. 按 **Ctrl+Shift+B** 或从“生成”菜单中单击“生成解决方案”生成应用程序，并验证到目前为止操作的准确性。
 
 ## 创建 ASP.NET 应用程序
@@ -340,13 +340,13 @@ wacn.date: 01/09/2017
 7.  在解决方案资源管理器中，展开 Views\\Home 文件夹，然后双击“Index.cshtml”以在 Visual Studio 编辑器中将其打开。将文件的全部内容替换为以下代码。
 
         @model IEnumerable<ProductsWeb.Models.Product>
-    
+
         @{
                  ViewBag.Title = "Index";
         }
-    
+
         <h2>Prod Inventory</h2>
-    
+
         <table>
                   <tr>
                       <th>
@@ -357,7 +357,7 @@ wacn.date: 01/09/2017
                           @Html.DisplayNameFor(model => model.Quantity)
                       </th>
                   </tr>
-    
+
         @foreach (var item in Model) {
                   <tr>
                       <td>
@@ -368,9 +368,9 @@ wacn.date: 01/09/2017
                       </td>
                   </tr>
         }
-    
+
         </table>
-    
+
 9.  若要验证到目前为止操作的准确性，可以按 **Ctrl+Shift+B** 生成项目。
 
 ### 在本地运行应用
@@ -473,7 +473,7 @@ wacn.date: 01/09/2017
 复制已部署 Web 应用的 URL，因为你在下一个步骤中需要用到该 URL。你也可以从 Visual Studio 的“Azure App Service 活动”窗口中获取此 URL：
 
 ![][9] 
-   
+
 > [!NOTE] 在部署后自动启动 **ProductsPortal** Web 项目时，你可能会在浏览器窗口中看到错误消息。这在意料之中，因为 **ProductsServer** 应用程序尚未运行。
 
 ### 将 ProductsPortal 设置为 Web 应用
@@ -517,7 +517,7 @@ wacn.date: 01/09/2017
   [1]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/App2.png
   [获取工具和 SDK]: http://go.microsoft.com/fwlink/?LinkId=271920
   [NuGet]: http://nuget.org
-  
+
   [Azure 经典管理门户]: http://manage.windowsazure.cn
   [5]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/sb-queues-03.png
   [6]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/sb-queues-04.png
@@ -537,7 +537,7 @@ wacn.date: 01/09/2017
   [25]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hy-web-13.png
   [26]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hy-web-14.png
   [27]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hy-web-8.png
-  
+
   [36]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/App2.png
   [37]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hy-service1.png
   [38]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hy-service2.png
@@ -546,7 +546,7 @@ wacn.date: 01/09/2017
   [45]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/hy-web-45.png
   [46]: ./media/service-bus-dotnet-hybrid-app-using-service-bus-relay/service-bus-policies.png
 
-  [sbwacom]: ../service-bus/index.md/
+  [sbwacom]: ../service-bus/index.md
   [sbwacomqhowto]: ./service-bus-dotnet-get-started-with-queues.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

@@ -20,7 +20,7 @@ ms.author: nitinme
 # 在 HDInsight Hadoop 群集上安装 Giraph 并使用 Giraph 处理大型图形
 
 了解如何使用 Giraph 通过脚本操作来自定义基于 Windows 的 HDInsight 群集，以及如何使用 Giraph 来处理大型关系图。
- 
+
 可以使用*脚本操作*，在 Azure HDInsight 的任何一种群集（Hadoop、Storm、HBase）上安装 Giraph。用于在 HDInsight 群集上安装 Giraph 的示例脚本可通过 [https://hdiconfigactions.blob.core.windows.net/giraphconfigactionv01/giraph-installer-v01.ps1](https://hdiconfigactions.blob.core.windows.net/giraphconfigactionv01/giraph-installer-v01.ps1) 上的只读 Azure 存储 Blob 获得。示例脚本仅适用于 HDInsight 群集版本 3.1。有关 HDInsight 群集版本的详细信息，请参阅 [HDInsight 群集版本](./hdinsight-component-versioning-v1.md)。
 
 **相关文章** 
@@ -38,7 +38,7 @@ ms.author: nitinme
 - 根据当前的关系识别潜在的朋友。
 - 识别网络中两台计算机之间的最短路由。
 - 计算网页的排名。
-   
+
 <a name="install"></a>
 
 ## 使用经典管理门户安装 Giraph
@@ -47,7 +47,7 @@ ms.author: nitinme
 2. 在向导的“脚本操作”页上，单击“添加脚本操作”，以提供有关脚本操作的详细信息，如下所示：
 
     ![使用脚本操作自定义群集](./media/hdinsight-hadoop-giraph-install-v1/hdi-script-action-giraph.png "使用脚本操作自定义群集")
-    
+
     <table border='1'>
         <tr><th>属性</th><th>值</th></tr>
         <tr><td>Name</td>
@@ -59,7 +59,7 @@ ms.author: nitinme
         <tr><td>Parameters</td>
             <td>根据脚本的需要，请指定参数。用于安装 Giraph 的脚本不需要任何参数，因此可以将此字段留空。</td></tr>
     </table>
-    
+
     可添加多个脚本操作，以便在群集上安装多个组件。添加脚本后，单击复选标记即可开始创建群集。
 
 也可以使用 Azure PowerShell 或 HDInsight .NET SDK 在 HDInsight 上使用脚本安装 Giraph。本主题后面将提供有关这些过程的说明。
@@ -102,7 +102,7 @@ ms.author: nitinme
           -JarFile $jarFile
           -ClassName "org.apache.giraph.GiraphRunner"
           -Arguments $jobArguments
-        
+
         # Run the job, write output to the Azure PowerShell window
         $job = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $jobDefinition
         Write-Host "Wait for the job to complete ..." -ForegroundColor Green
@@ -122,7 +122,7 @@ ms.author: nitinme
 
         # Select the current subscription
         Select-AzureSubscription $subscriptionName
-        
+
         # Create the Storage account context object
         $storageAccountKey = Get-AzureStorageKey $storageAccountName | %{ $_.Primary }
         $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
@@ -146,7 +146,7 @@ ms.author: nitinme
         3	1.0
 
     SimpleShortestPathComputation 示例硬编码为从对象 ID 1 开始查找与其他对象间的最短路径。因此，输出应显示为 `destination_id distance`，其中 distance 为对象 ID 1 与目标 ID 的边缘之间的行程值（或权重）。
-    
+
     在可视化此数据的情况下，可以通过行经 ID 1 与所有其他对象之间的最短路径来验证结果。请注意，ID 1 和 ID 4 之间的最短路径为 5。这是从 <span style="color:orange">ID 1 到 ID 3</span>，然后再从 <span style="color:red">ID 3 到 ID 4</span> 的总距离。
 
     ![对象绘制为圆形，并绘制对象之间的最短路径](./media/hdinsight-hadoop-giraph-install-v1/giraph-graph-out.png)

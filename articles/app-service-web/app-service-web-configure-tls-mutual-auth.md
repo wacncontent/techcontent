@@ -36,7 +36,7 @@ ms.author: naziml
 >[!NOTE] 使用 `ARMClient.exe login [environment name]` 登录时，`[environment name]` 应为 `MOONCAKE`。换而言之，用于登录 Azure 中国区的命令为 `ARMClient.exe login MOONCAKE`。
 
     ARMClient PUT subscriptions/{Subscription Id}/resourcegroups/{Resource Group Name}/providers/Microsoft.Web/sites/{Website Name}?api-version=2015-04-01 @enableclientcert.json -verbose
-    
+
 将 {} 中的所有内容替换为 Web 应用的信息，并创建包含以下 JSON 内容的 enableclientcert.json 文件：
 
     {
@@ -132,10 +132,10 @@ Azure Web Apps 平台不会针对发送到应用程序的客户端证书进行�
                 //
 
                 if (certificate == null || !String.IsNullOrEmpty(errorString)) return false;
-                
+
                 // 1. Check time validity of certificate
                 if (DateTime.Compare(DateTime.Now, certificate.NotBefore) < 0 || DateTime.Compare(DateTime.Now, certificate.NotAfter) > 0) return false;
-                
+
                 // 2. Check subject name of certificate
                 bool foundSubject = false;
                 string[] certSubjectData = certificate.Subject.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);

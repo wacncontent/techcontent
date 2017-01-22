@@ -107,7 +107,7 @@ ms.author: elioda
 在上述示例中，后端和设备应用使用 `telemetryConfig` 所需和报告属性来同步此设备的遥测配置。例如：
 
 1. 应用后端使用所需配置值设置所需属性。下面是包含所需属性的文档的一部分：
-   
+
         ...
         "desired": {
             "telemetryConfig": {
@@ -117,7 +117,7 @@ ms.author: elioda
         },
         ...
 2. 连接后或者首次重新连接时，设备应用会立即收到更改通知。然后，设备应用报告更新的配置（或使用 `status` 属性报告错误状态）。下面是报告属性的一部分：
-   
+
         ...
         "reported": {
             "telemetryConfig": {
@@ -138,7 +138,7 @@ ms.author: elioda
 
 1. **按 id 检索设备孪生**。此操作返回设备孪生的文档内容，包括标记、所需属性、报告属性和系统属性。
 2. **部分更新设备孪生**。后端可以使用此操作部分更新设备孪生的标记或所需属性。部分更新以 JSON 文档的形式表示，可添加或更新所述的任何属性。将删除设置为 `null` 的属性。例如，以下代码将创建值为 `{"newProperty": "newValue"}` 的新所需属性，将现有值 `existingProperty` 覆盖为 `"otherNewValue"`，并完全删除 `otherOldProperty`。其他现有的所需属性或标记未发生任何更改：
-   
+
         {
             "properties": {
                 "desired": {

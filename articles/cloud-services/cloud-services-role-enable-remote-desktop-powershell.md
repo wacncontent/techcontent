@@ -42,7 +42,7 @@ ms.author: adegeo
 还可以创建安全密码文件，这样就不需要每次都键入密码。此外，安全密码文件比纯文本文件安全。使用以下 PowerShell 创建安全密码文件：
 
         ConvertTo-SecureString -String "Password123" -AsPlainText -Force | ConvertFrom-SecureString | Set-Content "password.txt"
- 
+
 >[!IMPORTANT] 设置密码时，请确保满足[复杂性要求](https://technet.microsoft.com/zh-cn/library/cc786468.aspx)。
 
 若要从安全密码文件创建凭据对象，必须读取文件内容并使用 [ConvertTo-SecureString](https://technet.microsoft.com/zh-cn/library/hh849818.aspx) 将其转换回安全字符串。

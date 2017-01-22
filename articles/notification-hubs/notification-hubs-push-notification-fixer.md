@@ -14,7 +14,7 @@ ms.devlang: multiple
 ms.topic: article
 ms.date: 10/03/2016
 ms.author: wesmc
-wacn.date: 11/22/2016
+wacn.date: 01/19/2017
 ---
 
 #Azure 通知中心 - 诊断指南
@@ -35,32 +35,32 @@ wacn.date: 11/22/2016
 Azure 通知中心需要在开发人员的应用程序的环境中对自身进行身份验证，以成功将通知发送到各自的 PNS。这种情况是可能的，方法是开发人员在各自的平台（Google、Apple、Windows 等）中创建开发人员帐户，然后注册可在其中获取凭据（需要在通知中心配置部分下的门户中进行配置）的应用程序。如果没有通过任何通知，第一步应该是确保在通知中心中配置正确的凭据，并且要与在平台专用开发人员帐户下创建的应用程序相匹配。你会发现[入门教程]非常有用，以便一步一步完成此过程。下面是一些常见的错误配置：
 
 1. **常规**
- 
+
     a) 确保你的通知中心名称（不含错字）相同：
 
     - 其中你从客户端进行注册，
     - 其中从后端发送通知，
     - 其中你已配置 PNS 凭据并且
     - 你已在客户端和后端配置它的 SAS 凭据。
-        
+
     b) 确保你使用的是客户端和应用程序后端上的正确 SAS 配置字符串。一般说来，你必须在客户端上使用**DefaultListenSharedAccessSignature** 并在应用程序后端（它可赋予你向 NH 发送通知的权限）上使用 **DefaultFullSharedAccessSignature**
 
 2. **Apple 推送通知服务 (APNS) 配置**
- 
+
     你必须维护两个不同的中心 - 一个用于生产目的，另一个用于测试目的。这意味着将你要在沙箱环境中使用的证书上载到一个中心，并将你要在生产中使用的证书上载到另一个中心。请勿尝试将不同类型的证书上载到相同的中心，因为它可能造成通知完全失败。如果你发现自己无意中将不同类型的证书上载到相同的中心，我们建议删除该中心并重新开始。由于某种原因，如果你无法删除中心，则最起码必须从该中心中删除所有现有注册。
 
 3. **Google Cloud Messaging (GCM) 配置**
 
     a) 确保你在云项目下启用“Google Cloud Messaging for Android”。
-    
+
     ![][2]
-    
+
     b) 确保在创建“服务器密钥”的同时获取 NH 将用于在 GCM 中进行身份验证的凭据。
-    
+
     ![][3]
-    
+
     c) 确保你已在客户端上配置“项目 ID”，其中该客户端是你可以从仪表板中获取的完全数字实体：
-    
+
     ![][1]
 
 ##应用程序问题
@@ -118,7 +118,7 @@ Azure 通知中心需要在开发人员的应用程序的环境中对自身进�
     你可以在中心中查看和管理所有注册，其中该中心已经针对平台、本机或模板注册、所有标记、PNS 标识符、注册 ID 以及过期日期进行很好地分类。你可以动态编辑注册；假如你要编辑所有标记，这非常有用。
 
     ![][8]
- 
+
     > [!NOTE] 编辑注册的 Visual Studio 功能应该只能在开发/测试有限的注册时使用。如果需要批量修复注册，可以考虑使用[导入/导出注册](https://msdn.microsoft.com/zh-cn/library/dn790624.aspx)中所述的导出/导入注册功能
 
 2. **服务总线资源管理器**
@@ -140,7 +140,7 @@ Azure 通知中心需要在开发人员的应用程序的环境中对自身进�
     ![][10]
 
     你可以在此处阅读有关 Visual Studio 通知中心 Azure 资源管理器功能的更多信息
-    
+
     - [VS 服务器资源管理器概述]
     - [VS 服务器资源管理器博客文章 - 1]
     - [VS 服务器资源管理器博客文章 - 2]
@@ -155,22 +155,22 @@ Azure 通知中心需要在开发人员的应用程序的环境中对自身进�
     https://mynamespace.servicebus.chinacloudapi.cn/mynotificationhub/messages?api-version=2013-10&test
 
 *示例 (.NET SDK)* 
- 
+
 假设你正在使用 .NET SDK 发送本机 toast 通知：
 
     NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString(connString, hubName);
     var result = await hub.SendWindowsNativeNotificationAsync(toast);
     Console.WriteLine(result.State);
- 
+
 `result.State` 将只在执行结束时陈述 `Enqueued`，而不深入分析你的推送发生了什么情况。 
 现在，你可以使用 `EnableTestSend` 布尔值属性，同时初始化 `NotificationHubClient`，并获取有关发送通知时遇到的 PNS 错误的详细状态。此处发送调用需要更多时间进行返回，因为它只在 NH 已将通知传递到 PNS 之后返回以确定结果。
- 
+
     bool enableTestSend = true;
     NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString(connString, hubName, enableTestSend);
-    
+
     var outcome = await hub.SendWindowsNativeNotificationAsync(toast);
     Console.WriteLine(outcome.State);
-    
+
     foreach (RegistrationResult result in outcome.Results)
     {
         Console.WriteLine(result.ApplicationPlatform + "\n" + result.RegistrationId + "\n" + result.Outcome);
@@ -182,9 +182,9 @@ Azure 通知中心需要在开发人员的应用程序的环境中对自身进�
     windows
     7619785862101227384-7840974832647865618-3
     The Token obtained from the Token Provider is wrong
- 
+
 此消息表示在通知中心配置的凭据无效，或在中心注册方面存在问题，推荐的方案是删除此注册并让客户端重新创建注册，然后发送消息。
- 
+
 > [!NOTE] 请注意，此属性的使用已经受到极大限制，而且你只能在有限的注册集中的开发/测试环境中使用此属性。我们仅向 10 台设备发送调试通知。此外，我们每分钟向 10 台设备发送有限的处理调试。
 
 ###查看遥测 
@@ -192,17 +192,17 @@ Azure 通知中心需要在开发人员的应用程序的环境中对自身进�
 1. **使用 Azure 经典管理门户**
 
     通过该门户可以获取有关通知中心上所有活动的快速概述。
-    
+
     a) 从“仪表板”选项卡上，你可以查看注册、通知以及每个平台的错误的汇总视图。
-    
+
     ![][5]
-    
+
     b) 从“监视器”选项卡中，你还可以添加其他很多平台专用指标，以便针对在NH 尝试发送通知给 PNS 时返回的所有 PNS 特有错误进行深入查看。
-    
+
     ![][6]
-    
+
     c) 首先，你应该查看**传入消息**、**注册操作**、**成功通知**，然后转到每个平台选项卡以查看 PNS 特有错误。
-    
+
     d) 如果你在身份验证设置中错误配置了通知中心，那么你将看到 PNS 身份验证错误。这表示要检查 PNS 凭据。
 
 2) **以编程方式访问**
@@ -227,7 +227,7 @@ Azure 通知中心需要在开发人员的应用程序的环境中对自身进�
 [8]: ./media/notification-hubs-diagnosing/VSRegistrations.png
 [9]: ./media/notification-hubs-diagnosing/VSServerExplorer.png
 [10]: ./media/notification-hubs-diagnosing/VSTestNotification.png
- 
+
 <!-- LINKS -->
 
 [通知中心概述]: ./notification-hubs-push-notification-overview.md

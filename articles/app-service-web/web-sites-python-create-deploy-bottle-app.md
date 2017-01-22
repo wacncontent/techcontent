@@ -59,7 +59,7 @@ ms.author: huvalo
 4. 在搜索结果中，选择“Bottle”，然后单击“创建”。
 5. 配置新的 Bottle 应用，如为其创建新的应用服务计划和新的资源组。然后单击“创建”。
 6. 按照[从本地 Git 部署到 Azure App Service](./app-service-deploy-local-git.md) 的说明为新创建的 Web 应用配置 Git 发布。
- 
+
 ## 应用程序概述
 
 ### Git 存储库内容
@@ -93,7 +93,7 @@ ms.author: huvalo
     \requirements.txt
 
 此应用程序所需的外部软件包。部署脚本将对在此文件中列出的包进行 pip 安装。
- 
+
     \web.2.7.config
     \web.3.4.config
 
@@ -362,7 +362,7 @@ Visual Studio 不会显示部署的进度。
 ## 后续步骤
 
 请查看下面链接以了解有关 Bottle 和 Python Tools for Visual Studio 的更多信息：
- 
+
 - [Bottle 文档]
 - [Python Tools for Visual Studio 文档]
 
@@ -389,5 +389,5 @@ Visual Studio 不会显示部署的进度。
 [Visual Studio]: http://www.visualstudio.com/
 [Python Tools for Visual Studio 文档]: http://aka.ms/ptvsdocs
 [Bottle 文档]: http://bottlepy.org/docs/dev/index.html
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

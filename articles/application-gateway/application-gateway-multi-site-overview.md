@@ -114,7 +114,7 @@ ms.author: amsriva
 
     }
     ]
-    
+
 ## 后续步骤 
 
 了解多站点托管以后，请转到[创建使用多站点托管的应用程序网关](./application-gateway-create-multisite-azureresourcemanager-powershell.md)，以便创建能够支持多个 Web 应用程序的应用程序网关。

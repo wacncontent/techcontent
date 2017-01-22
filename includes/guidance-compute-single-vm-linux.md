@@ -144,7 +144,7 @@ RBAC 不限制已登录到 VM 的用户可以执行的操作。这些权限由�
 1. 右键单击下面的按钮，然后选择“在新选项卡中打开链接”或“在新窗口中打开链接”。
     [![部署到 Azure](./media/guidance-compute-single-vm-linux/deploybutton.png)](https://portal.azure.cn/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmspnp%2Freference-architectures%2Fmaster%2Fguidance-compute-single-vm%2Fazuredeploy.json)
 2. 链接在 Azure 门户预览中打开后，必须输入某些设置的值：
-   
+
     * 参数文件中已定义了“资源组”名称，因此选择“新建”并在文本框中输入 `ra-single-vm-rg`。
     * 从“位置”下拉框中选择区域。
     * 请勿编辑“模板根 URI”或“参数根 URI”文本框。

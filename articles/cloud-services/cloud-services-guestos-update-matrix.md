@@ -252,5 +252,5 @@ Azure 不断地发布更新。来宾 OS 只不过是此类更新的其中一种�
 [patches]: ./cloud-services-guestos-msrc-releases.md
 [retirepolicy]: ./cloud-services-guestos-retirement-policy.md
 [fam1retire]: ./cloud-services-guestos-family1-retirement.md
- 
+
 <!---HONumber=Mooncake_1226_2016-->

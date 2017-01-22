@@ -20,7 +20,7 @@ ms.author: nitinme
 # 在 HDInsight Hadoop 群集上安装和使用 Solr
 
 了解如何使用 Solr 通过脚本操作来自定义基于 Windows 的 HDInsight 群集，以及如何使用 R 来搜索数据。
- 
+
 你可以使用*脚本操作*，在 Azure HDInsight 的任何一种群集（Hadoop、Storm、HBase）上安装 Solr。用于在 HDInsight 群集上安装 Solr 的示例脚本可通过 [https://hdiconfigactions.blob.core.windows.net/solrconfigactionv01/solr-installer-v01.ps1](https://hdiconfigactions.blob.core.windows.net/solrconfigactionv01/solr-installer-v01.ps1) 上的只读 Azure 存储 Blob 获得。
 
 示例脚本仅适用于 HDInsight 群集版本 3.1。有关 HDInsight 群集版本的详细信息，请参阅 [HDInsight 群集版本](./hdinsight-component-versioning-v1.md)。
@@ -48,7 +48,7 @@ ms.author: nitinme
 2. 在向导的“脚本操作”页上，单击“添加脚本操作”，以提供有关脚本操作的详细信息，如下所示：
 
     ![使用脚本操作自定义群集](./media/hdinsight-hadoop-solr-install-v1/hdi-script-action-solr.png "使用脚本操作自定义群集")
-    
+
     <table border='1'>
         <tr><th>属性</th><th>值</th></tr>
         <tr><td>Name</td>
@@ -73,7 +73,7 @@ ms.author: nitinme
 1. **使用远程桌面协议 (RDP) 远程连接到安装有 Solr 的 HDInsight 群集**。在 Azure 经典管理门户中，对创建的安装有 Solr 的群集启用远程桌面，然后远程连接到该群集。有关说明，请参阅<a href="./hdinsight-administer-use-management-portal-v1.md#rdp" target="_blank">使用 RDP 连接到 HDInsight 群集</a>。
 
 2. **通过上载数据文件为 Solr 编制索引**。在为 Solr 编制索引时，应将可能需要搜索的文档放在其中。要为 Solr 编制索引，请使用 RDP 远程连接到群集，导航到桌面，打开 Hadoop 命令行，然后导航到 **C:\\apps\\dist\\solr-4.7.2\\example\\exampledocs**。运行以下命令：
-    
+
         java -jar post.jar solr.xml monitor.xml
 
     控制台上会显示以下输出：
@@ -91,7 +91,7 @@ ms.author: nitinme
     2. 在 **wt** 文本框中，选择输出格式。默认值为 **json**。单击“执行查询”。
 
         ![使用脚本操作自定义群集](./media/hdinsight-hadoop-solr-install-v1/hdi-solr-dashboard-query.png "在 Solr 仪表板上运行查询")
-    
+
     输出返回两个用于为 Solr 编制索引的文档。输出如下所示：
 
             "response": {
@@ -145,7 +145,7 @@ ms.author: nitinme
                   }
                 ]
               }
-   
+
 4. **建议：将索引数据从 Solr 备份到与 HDInsight 群集关联的 Azure Blob 存储**。最好将索引数据从 Solr 群集节点备份到 Azure Blob 存储上。执行以下步骤来完成此操作：
 
     1. 在 RDP 会话中，打开 Internet Explorer，然后指向以下 URL：
@@ -164,7 +164,7 @@ ms.author: nitinme
             </response>
 
     2. 在远程会话中，导航到 {SOLR\_HOME}{Collection}\\data。对于通过示例脚本创建的群集，该目录应该是 **C:\\apps\\dist\\solr-4.7.2\\example\\solr\\collection1\\data**。在此位置，你应该会看到使用类似于 **snapshot.*timestamp*** 的名称创建的快照文件夹。
-    
+
     3. 压缩快照文件夹，并将其上载到 Azure Blob 存储。从 Hadoop 命令行，通过使用以下命令导航到快照文件夹所在的位置：
 
               hadoop fs -CopyFromLocal snapshot._timestamp_.zip /example/data
@@ -189,7 +189,7 @@ ms.author: nitinme
         $location = "<MicrosoftDataCenter>"				# Location of the HDInsight cluster. It must be in the same data center as the Storage account.
         $clusterNodes = <ClusterSizeInNumbers>			# Number of nodes in the HDInsight cluster
         $version = "<HDInsightClusterVersion>"          # For example, "3.1"
-    
+
 2. 指定配置值，例如群集中的节点，以及要使用的默认存储。
 
         # Specify the configuration options
@@ -198,7 +198,7 @@ ms.author: nitinme
         $config.DefaultStorageAccount.StorageAccountName="$storageAccountName.blob.core.chinacloudapi.cn"
         $config.DefaultStorageAccount.StorageAccountKey=$storageAccountKey
         $config.DefaultStorageAccount.StorageContainerName=$containerName
-    
+
 3. 使用 **Add-AzureHDInsightScriptAction** cmdlet 将脚本操作添加到群集配置中。稍后，在创建群集时，将执行脚本操作。
 
         # Add the script action to the cluster configuration
@@ -227,9 +227,9 @@ ms.author: nitinme
     <td style="border-color: #c6c6c6; border-width: 2px; border-style: solid; border-collapse: collapse; padding-left:5px;">脚本所需的参数。本主题中使用的示例脚本不需要任何参数，因此，在上述代码段中看不到此参数。
     </td></tr>
     </table>
-    
+
 4. 最后，开始设置安装有 Solr 的自定义群集。
-    
+
         # Start provisioning a cluster with Solr installed
         New-AzureHDInsightCluster -Config $config -Name $clusterName -Location $location -Version $version 
 
@@ -260,7 +260,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 应用程序使�
 2. 在“文件”菜单中，单击“新建”，然后单击“项目”。
 
 3. 在“新建项目”中，键入或选择以下值：
-    
+
     <table style="border-color: #c6c6c6; border-width: 2px; border-style: solid; border-collapse: collapse;">
     <tr>
     <th style="border-color: #c6c6c6; border-width: 2px; border-style: solid; border-collapse: collapse; width:90px; padding-left:5px; padding-right:5px;">属性</th>
@@ -294,9 +294,9 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 应用程序使�
         using Microsoft.WindowsAzure.Management.HDInsight;
         using Microsoft.WindowsAzure.Management.HDInsight.ClusterProvisioning;
         using Microsoft.WindowsAzure.Management.HDInsight.Framework.Logging;
-    
+
 9. 在 Main() 函数中，复制并粘贴以下代码，然后提供变量值：
-        
+
         var clusterName = args[0];
 
         // Provide values for the variables
@@ -318,7 +318,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 应用程序使�
         HDInsightCertificateCredential creds = new HDInsightCertificateCredential(new Guid(subscriptionId), cert);
         var client = HDInsightClient.Connect(creds);
         client.IgnoreSslErrors = true;
-        
+
         // Provide the cluster information
         var clusterInfo = new ClusterCreateParameters()
         {

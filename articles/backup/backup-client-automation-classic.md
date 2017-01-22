@@ -13,8 +13,8 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 09/01/2016
-wacn.date: 10/26/2016
 ms.author: saurabhsensharma;markgal;jimpark;nkolli;trinadhk
+wacn.date: 01/19/2017
 ---
 
 # 使用 PowerShell 部署和管理 Windows Server/Windows 客户端的 Azure 备份
@@ -99,7 +99,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 
     PS C:\> $cred = $credspath + $credsfilename
     PS C:\> Start-OBRegistration -VaultCredentials $cred -Confirm:$false
-    
+
     CertThumbprint      : 7a2ef2caa2e74b6ed1222a5e89288ddad438df2
     SubscriptionID      : ef4ab577-c2c0-43e4-af80-af49f485f3d1
     ServiceResourceName : test-vault
@@ -118,7 +118,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 
     PS C:\> Set-OBMachineSetting -NoProxy
     Server properties updated successfully.
-    
+
     PS C:\> Set-OBMachineSetting -NoThrottle
     Server properties updated successfully.
 
@@ -165,23 +165,23 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 必须使用 cmdlet [Set-OBRetentionPolicy](https://technet.microsoft.com/zh-cn/library/hh770405) 将保留策略与主要策略相关联：
 
     PS C:\> Set-OBRetentionPolicy -Policy $newpolicy -RetentionPolicy $retentionpolicy
-    
+
     BackupSchedule  : 4:00 PM
                       Saturday, Sunday,
                       Every 1 week(s)
     DsList          :
     PolicyName      :
     RetentionPolicy : Retention Days : 7
-    
+
                       WeeklyLTRSchedule :
                       Weekly schedule is not set
-    
+
                       MonthlyLTRSchedule :
                       Monthly schedule is not set
-    
+
                       YearlyLTRSchedule :
                       Yearly schedule is not set
-    
+
     State           : New
     PolicyState     : Valid
 
@@ -197,11 +197,11 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 在以下示例中，我们要备份卷 C: 和 D:，并排除 Windows 文件夹和任何临时文件夹中的操作系统二进制文件。为此，我们将使用 [New-OBFileSpec](https://technet.microsoft.com/zh-cn/library/hh770408) cmdlet 创建两个文件规范 - 一个用于包含，一个用于排除。创建文件规范后，使用 [Add-OBFileSpec](https://technet.microsoft.com/zh-cn/library/hh770424) cmdlet 将它们与策略相关联。
 
     PS C:\> $inclusions = New-OBFileSpec -FileSpec @("C:\", "D:\")
-    
+
     PS C:\> $exclusions = New-OBFileSpec -FileSpec @("C:\windows", "C:\temp") -Exclude
-    
+
     PS C:\> Add-OBFileSpec -Policy $newpolicy -FileSpec $inclusions
-    
+
     BackupSchedule  : 4:00 PM
                       Saturday, Sunday,
                       Every 1 week(s)
@@ -212,7 +212,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
                       FileSpec:C:\
                       IsExclude:False
                       IsRecursive:True
-    
+
                       , DataSource
                       DatasourceId:0
                       Name:D:\
@@ -220,25 +220,25 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
                       FileSpec:D:\
                       IsExclude:False
                       IsRecursive:True
-    
+
                       }
     PolicyName      :
     RetentionPolicy : Retention Days : 7
-    
+
                       WeeklyLTRSchedule :
                       Weekly schedule is not set
-    
+
                       MonthlyLTRSchedule :
                       Monthly schedule is not set
-    
+
                       YearlyLTRSchedule :
                       Yearly schedule is not set
-    
+
     State           : New
     PolicyState     : Valid
-    
+
     PS C:\> Add-OBFileSpec -Policy $newpolicy -FileSpec $exclusions
-    
+
     BackupSchedule  : 4:00 PM
                       Saturday, Sunday,
                       Every 1 week(s)
@@ -257,7 +257,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
                       FileSpec:C:\temp
                       IsExclude:True
                       IsRecursive:True
-    
+
                       , DataSource
                       DatasourceId:0
                       Name:D:\
@@ -265,20 +265,20 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
                       FileSpec:D:\
                       IsExclude:False
                       IsRecursive:True
-    
+
                       }
     PolicyName      :
     RetentionPolicy : Retention Days : 7
-    
+
                       WeeklyLTRSchedule :
                       Weekly schedule is not set
-    
+
                       MonthlyLTRSchedule :
                       Monthly schedule is not set
-    
+
                       YearlyLTRSchedule :
                       Yearly schedule is not set
-    
+
     State           : New
     PolicyState     : Valid
 
@@ -300,17 +300,17 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
              FileSpec:C:\
              IsExclude:False
              IsRecursive:True,
-    
+
              FileSpec
              FileSpec:C:\windows
              IsExclude:True
              IsRecursive:True,
-    
+
              FileSpec
              FileSpec:C:\temp
              IsExclude:True
              IsRecursive:True,
-    
+
              DataSource
              DatasourceId:4508156005178868542
              Name:D:\
@@ -323,10 +323,10 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     RetentionPolicy : Retention Days : 7
                   WeeklyLTRSchedule :
                   Weekly schedule is not set
-    
+
                   MonthlyLTRSchedule :
                   Monthly schedule is not set
-    
+
                   YearlyLTRSchedule :
                   Yearly schedule is not set
     State : Existing PolicyState : Valid
@@ -338,31 +338,31 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     ScheduleRunDays : {Saturday, Sunday}
     ScheduleRunTimes : {16:00:00}
     State : Existing
-    
+
     PS C:> Get-OBPolicy | Get-OBRetentionPolicy
     RetentionDays : 7
     RetentionPolicyName : ca3574ec-8331-46fd-a605-c01743a5265e
     State : Existing
-    
+
     PS C:> Get-OBPolicy | Get-OBFileSpec
     FileName : *
     FilePath : \?\Volume{b835d359-a1dd-11e2-be72-2016d8d89f0f}\
     FileSpec : D:\
     IsExclude : False
     IsRecursive : True
-    
+
     FileName : *
     FilePath : \?\Volume{cdd41007-a22f-11e2-be6c-806e6f6e6963}\
     FileSpec : C:\
     IsExclude : False
     IsRecursive : True
-    
+
     FileName : *
     FilePath : \?\Volume{cdd41007-a22f-11e2-be6c-806e6f6e6963}\windows
     FileSpec : C:\windows
     IsExclude : True
     IsRecursive : True
-    
+
     FileName : *
     FilePath : \?\Volume{cdd41007-a22f-11e2-be6c-806e6f6e6963}\temp
     FileSpec : C:\temp
@@ -398,7 +398,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     FriendlyName : C:\
     RecoverySourceName : C:\
     ServerName : myserver.microsoft.com
-    
+
     FriendlyName : D:\
     RecoverySourceName : D:\
     ServerName : myserver.microsoft.com
@@ -417,7 +417,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     ServerName : myserver.microsoft.com
     ItemSize :
     ItemLastModifiedTime :
-    
+
     IsDir : False
     ItemNameFriendly : D:\
     ItemNameGuid : \?\Volume{b835d359-a1dd-11e2-be72-2016d8d89f0f}\
@@ -448,7 +448,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     ServerName : myserver.microsoft.com
     ItemSize :
     ItemLastModifiedTime : 15-Jun-15 8:49:29 AM
-    
+
     PS C:> $filesFolders = Get-OBRecoverableItem $filesFolders[0]
     PS C:> $filesFolders
     IsDir : False
@@ -461,7 +461,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     ServerName : myserver.microsoft.com
     ItemSize : 228313
     ItemLastModifiedTime : 21-Jun-14 6:45:09 AM
-    
+
     IsDir : False
     ItemNameFriendly : D:\MyData\finances.xls
     ItemNameGuid : \?\Volume{b835d359-a1dd-11e2-be72-2016d8d89f0f}\MyData\finances.xls
@@ -511,7 +511,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 默认情况下，WinRM 服务已配置为手动启动。你必须将启动类型设置为“自动”，并且应该启动该服务。若要确认 WinRM 服务正在运行，“状态”属性的值应该是“正在运行”。
 
     PS C:\> Get-Service WinRM
-    
+
     Status   Name               DisplayName
     ------   ----               -----------
     Running  winrm              Windows Remote Management (WS-Manag...
@@ -522,7 +522,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     WinRM is already set up to receive requests on this computer.
     WinRM has been updated for remote management.
     WinRM firewall exception enabled.
-    
+
     PS C:\> Set-ExecutionPolicy unrestricted -force
 
 现在可以远程管理计算机 - 从代理的安装开始。例如，以下脚本会将代理复制到远程计算机并安装代理。
@@ -531,7 +531,7 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     PS C:\> $agent = "\\REMOTESERVER01\c$\Windows\Temp\MARSAgentInstaller.exe"
     PS C:\> $args = "/q"
     PS C:\> Copy-Item "C:\Downloads\MARSAgentInstaller.exe" -Destination $dloc - force
-    
+
     PS C:\> $s = New-PSSession -ComputerName REMOTESERVER01
     PS C:\> Invoke-Command -Session $s -Script { param($d, $a) Start-Process -FilePath $d $a -Wait } -ArgumentList $agent $args
 

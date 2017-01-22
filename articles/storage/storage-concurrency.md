@@ -53,15 +53,15 @@ Azure 存储服务支持所有三个策略，尽管它具有独特的功能，�
     // Etag is already populated as UploadText should cause a PUT Blob call 
     // to storage blob service which returns the etag in response.
     string orignalETag = blockBlob.Properties.ETag;
-     
+
     // This code simulates an update by a third party.
     string helloText = "Blob updated by a third party.";
-     
+
     // No etag, provided so orignal blob is overwritten (thus generating a new etag)
     blockBlob.UploadText(helloText);
     Console.WriteLine("Blob updated. Updated ETag = {0}", 
     blockBlob.Properties.ETag);
-     
+
     // Now try to update the blob using the orignal ETag provided when the blob was created
     try
     {
@@ -131,13 +131,13 @@ Azure 存储服务支持所有三个策略，尽管它具有独特的功能，�
     // Acquire lease for 15 seconds
     string lease = blockBlob.AcquireLease(TimeSpan.FromSeconds(15), null);
     Console.WriteLine("Blob lease acquired. Lease = {0}", lease);
-     
+
     // Update blob using lease. This operation will succeed
     const string helloText = "Blob updated";
     var accessCondition = AccessCondition.GenerateLeaseCondition(lease);
     blockBlob.UploadText(helloText, accessCondition: accessCondition);
     Console.WriteLine("Blob updated using an exclusive lease");
-     
+
     //Simulate third party update to blob without lease
     try
     {

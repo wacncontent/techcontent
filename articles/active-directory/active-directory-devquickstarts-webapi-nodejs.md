@@ -73,7 +73,7 @@ wacn.date: 01/03/2017
 
 若要成功使用本示例，你必须正确安装 MongoDB。我们将使用 MongoDB 来使 REST API 持久保留在服务器实例之间。
 
-从 [http://mongodb.org](http://www.mongodb.org) 安装 MongoDB。
+从 [http://www.mongodb.org](http://www.mongodb.org) 安装 MongoDB。
 
 > [!NOTE] 本演练假定为 MongoDB 使用默认的安装与服务器终结点，在编写本文时，该终结点为：mongodb://localhost
 
@@ -102,7 +102,7 @@ wacn.date: 01/03/2017
 在安装 Restify 时，你可能会看到类似于下面的内容：
 
 Shell
-        
+
     clang: error: no such file or directory: 'HD/azuread/node_modules/restify/node_modules/dtrace-provider/libusdt'
     make: *** [Release/DTraceProviderBindings.node] Error 1
     gyp ERR! build error
@@ -355,7 +355,7 @@ COMPLETED - 任务是否已完成。一个***布尔值***
 在偏好的编辑器中打开 `server.js` 文件，并在配置条目下面添加以下信息：
 
 Javascript
-        
+
     // Connect to MongoDB
     global.db = mongoose.connect(serverURI);
     var Schema = mongoose.Schema;
@@ -598,7 +598,7 @@ Javascript
 Restify（和 Express）允许你对 REST API 执行大量的深度自定义，但同样，我们在本演练中将使用最基本的设置。
 
 Javascript
-        
+
     /**
      * Our Server
      */
@@ -639,7 +639,7 @@ Javascript
 ## 16\.将路由添加到服务器（目前不包括身份验证）
 
 Javascript
-        
+
     /// Now the real handlers. Here we just CRUD
     /**
     /*
@@ -732,7 +732,7 @@ Shell
 响应应为：
 
 Shell
-        
+
     HTTP/1.1 201 Created
     Connection: close
     Access-Control-Allow-Origin: *
@@ -765,7 +765,7 @@ Shell
 首先，需指出要使用 Passport。在其他服务器配置之后紧接着执行此操作：
 
 Javascript
-        
+
     // Let's start using Passport.js
 
     server.use(passport.initialize()); // Starts passport
@@ -887,7 +887,7 @@ Javascript
     $ node server.js
 
 Shell
-        
+
     HTTP/1.1 401 Unauthorized
     Connection: close
     WWW-Authenticate: Bearer realm="Users"

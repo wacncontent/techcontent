@@ -46,7 +46,7 @@ ms.author: jdial
 3. 运行 **azure network public-ip create** 以为该 VM 创建公共 IP。输出后显示的列表阐释了所用参数。
 
         azure network public-ip create -g TestRG -n TestPIP -l centralus
-    
+
     预期输出：
 
         info:    Executing command network public-ip create
@@ -181,7 +181,7 @@ ms.author: jdial
 
 ## 如何从 VM 中删除静态专用 IP 地址
 无法在用于 Resource Manager 的 Azure CLI 中删除 NIC 的静态专用 IP 地址。必须创建使用动态 IP 的新 NIC，从 VM 删除以前的 NIC，然后将新 NIC 添加到 VM。若要更改上述命令使用的 VM 的 NIC，请执行以下步骤。
-    
+
 1. 运行 **azure network nic create** 命令以使用动态 IP 分配创建新 NIC。请注意，这次不需要指定 IP 地址。
 
         azure network nic create -g TestRG -n TestNIC2 -l centralus -m TestVNet -k FrontEnd

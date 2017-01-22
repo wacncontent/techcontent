@@ -38,12 +38,12 @@ var table = client.getTable(tableName);
  * @param {Object} results[] the individual results
  */
 function success(results) {
-   var numItemsRead = results.length;
+    var numItemsRead = results.length;
 
-   for (var i = 0 ; i < results.length ; i++) {
+    for (var i = 0 ; i < results.length ; i++) {
        var row = results[i];
        // Each row is an object - the properties are the columns
-   }
+    }
 }
 
 function failure(error) {

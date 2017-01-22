@@ -54,27 +54,27 @@
 ### <a name="nodejs"></a>Node.js 后端项目
 
 1. 如果尚未执行此操作，请[下载快速启动项目](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#download-quickstart)或使用 [Azure 门户中的在线编辑器](../articles/app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#online-editor)。
- 
+
 1. 将 todoitem.js 文件中的现有代码替换为以下内容：
 
         var azureMobileApps = require('azure-mobile-apps'),
         promises = require('azure-mobile-apps/src/utilities/promises'),
         logger = require('azure-mobile-apps/src/logger');
-        
+
         var table = azureMobileApps.table();
-        
+
         table.insert(function (context) {
         // For more information about the Notification Hubs JavaScript SDK, 
         // see http://aka.ms/nodejshubs
         logger.info('Running TodoItem.insert');
-        
+
         // Define the GCM payload.
         var payload = {
             "data": {
                 "message": context.item.text
             }
         };   
-        
+
         // Execute the insert.  The insert returns the results as a Promise,
         // Do the push as a post-execute action within the promise flow.
         return context.execute()
@@ -97,7 +97,7 @@
                 logger.error('Error while running context.execute: ', error);
             });
         });
-        
+
         module.exports = table;  
 
     插入新的 todo 项时，会发送包含 item.text 的 GCM 通知。

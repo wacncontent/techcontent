@@ -37,7 +37,7 @@ ms.author: wesmc
     $hub = new NotificationHub("connection string", "hubname");	
 
 发送 iOS 本机通知：
-    
+
     $notification = new Notification("apple", '{"aps":{"alert": "Hello!"}}');
     $hub->sendNotification($notification, null);
 
@@ -56,24 +56,24 @@ ms.author: wesmc
 
     class NotificationHub {
         const API_VERSION = "?api-version=2013-10";
-    
+
         private $endpoint;
         private $hubPath;
         private $sasKeyName;
         private $sasKeyValue;
-    
+
         function __construct($connectionString, $hubPath) {
             $this->hubPath = $hubPath;
-    
+
             $this->parseConnectionString($connectionString);
         }
-    
+
         private function parseConnectionString($connectionString) {
             $parts = explode(";", $connectionString);
             if (sizeof($parts) != 3) {
                 throw new Exception("Error parsing connection string: " . $connectionString);
             }
-    
+
             foreach ($parts as $part) {
                 if (strpos($part, "Endpoint") === 0) {
                     $this->endpoint = "https" . substr($part, 11);
@@ -112,17 +112,17 @@ ms.author: wesmc
     class Notification {
         public $format;
         public $payload;
-    
+
         # array with keynames for headers
         # Note: Some headers are mandatory: Windows: X-WNS-Type, WindowsPhone: X-NotificationType
         # Note: For Apple you can set Expiry with header: ServiceBusNotification-ApnsExpiry in W3C DTF, YYYY-MM-DDThh:mmTZD (for example, 1997-07-16T19:20+01:00).
         public $headers;
-    
+
         function __construct($format, $payload) {
             if (!in_array($format, ["template", "apple", "windows", "gcm", "windowsphone"])) {
                 throw new Exception('Invalid format: ' . $format);
             }
-    
+
             $this->format = $format;
             $this->payload = $payload;
         }
@@ -167,7 +167,7 @@ ms.author: wesmc
         if (is_array($notification->headers)) {
             $headers = array_merge($headers, $notification->headers);
         }
-        
+
         curl_setopt_array($ch, array(
             CURLOPT_POST => TRUE,
             CURLOPT_RETURNTRANSFER => TRUE,
@@ -251,5 +251,5 @@ ms.author: wesmc
 
 [PHP REST 包装器示例]: https://github.com/Azure/azure-notificationhubs-samples/tree/master/notificationhubs-rest-php
 [入门教程]: ./notification-hubs-ios-apple-push-notification-apns-get-started.md
- 
+
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

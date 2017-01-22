@@ -15,7 +15,7 @@ ms.topic: article
 ms.tgt_pltfrm: vm-windows
 ms.workload: big-compute
 ms.date: 10/19/2016
-wacn.date: 12/12/2016
+wacn.date: 01/19/2017
 ms.author: marsma
 ---
 
@@ -97,15 +97,15 @@ csharp
     Console.WriteLine("Total number of Batch accounts under subscription id {0}:  {1}",
         creds.SubscriptionId,
         accounts.Count);
-    
+
     // Get a count of all accounts within the target region
     string region = "chinanorth";
     int accountsInRegion = accounts.Count(o => o.Location == region);
-    
+
     // Get the account quota for the specified region
     SubscriptionQuotasGetResponse quotaResponse = await batchManagementClient.Subscriptions.GetSubscriptionQuotasAsync(region);
     Console.WriteLine("Account quota for {0} region: {1}", region, quotaResponse.AccountQuota);
-    
+
     // Determine how many accounts can be created in the target region
     Console.WriteLine("Accounts in {0}: {1}", region, accountsInRegion);
     Console.WriteLine("You can create {0} accounts in the {1} region.", quotaResponse.AccountQuota - accountsInRegion, region);
@@ -121,7 +121,7 @@ csharp
     BatchAccountGetResponse getResponse =
         await batchManagementClient.Account.GetAsync("MyResourceGroup", "mybatchaccount");
     AccountResource account = getResponse.Resource;
-    
+
     // Now print the compute resource quotas for the account
     Console.WriteLine("Core quota: {0}", account.Properties.CoreQuota);
     Console.WriteLine("Pool quota: {0}", account.Properties.PoolQuota);
@@ -163,14 +163,14 @@ Azure 本身使用 Azure AD 来对其客户、服务管理员和组织用户进�
 4. 使用凭据创建 [ResourceManagementClient][resman_client]。
 5. 使用 [ResourceManagementClient][resman_client] 创建资源组。
 6. 使用 [BatchManagementClient][net_mgmt_client] 执行多个批处理帐户操作：
-   - 在新资源组中创建批处理帐户。
-   - 从 Batch 服务获取新建的帐户。
-   - 输出新帐户的帐户密钥。
-   - 重新生成帐户的新主密钥。
-   - 输出帐户的配额信息。
-   - 输出订阅的配额信息。
-   - 输出订阅中的所有帐户。
-   - 删除新建的帐户。
+    - 在新资源组中创建批处理帐户。
+    - 从 Batch 服务获取新建的帐户。
+    - 输出新帐户的帐户密钥。
+    - 重新生成帐户的新主密钥。
+    - 输出帐户的配额信息。
+    - 输出订阅的配额信息。
+    - 输出订阅中的所有帐户。
+    - 删除新建的帐户。
 7. 删除该资源组。
 
 删除新建的 Batch 帐户和资源组之前，可以在 [Azure 门户预览][azure_portal]中检查这两项：

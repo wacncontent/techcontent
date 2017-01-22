@@ -316,7 +316,7 @@ SCP 应用程序可使用 `State` 对象在 ZooKeeper 中保留某些信息，�
 SCPRuntime 提供以下两种方法。
 
     public static void Initialize();
-    
+
     public static void LaunchPlugin(newSCPPlugin createDelegate);  
 
 `Initialize()` 用于初始化 SCP 运行时环境。在此方法中，C# 进程会连接到 Java 端，并会获取配置参数和拓扑上下文。
@@ -352,14 +352,14 @@ SCPRuntime 提供以下两种方法。
             return new Generator(ctx);
             }
         }
-    
+
         class HelloWorld
         {
             static void Main(string[] args)
             {
             /* Setting the environment variable here can change the log file name */
             System.Environment.SetEnvironmentVariable("microsoft.scp.logPrefix", "HelloWorld");
-    
+
             SCPRuntime.Initialize();
             SCPRuntime.LaunchPlugin(new newSCPPlugin(Generator.Get));
             }
@@ -504,9 +504,9 @@ SCP 组件包括 Java 端和 C# 端。若要与本机 Java Spout/Bolt 交互，�
 ![Java 组件示意图，发送到 SCP 组件，发送到 Java 组件](./media/hdinsight-storm-scp-programming-guide/java-compent-sending-to-scp-component-sending-to-java-component.png)
 
 1.  **Java 端的序列化和 C# 端的反序列化**
-    
+
     最初，默认情况下是在 Java 端进行序列化并在 C# 端进行反序列化。可以在规范文件中指定 Java 端的序列化方法：
-    
+
         (scp-bolt
             {
                 "plugin.name" "HybridTopology.exe"
@@ -514,27 +514,27 @@ SCP 组件包括 Java 端和 C# 端。若要与本机 Java Spout/Bolt 交互，�
                 "output.schema" {}
                 "customized.java.serializer" ["microsoft.scp.storm.multilang.CustomizedInteropJSONSerializer"]
             })
-    
+
     应在 C# 用户代码中指定 C# 端的反序列化方法：
-    
+
         Dictionary<string, List<Type>> inputSchema = new Dictionary<string, List<Type>>();
         inputSchema.Add("default", new List<Type>() { typeof(Person) });
         this.ctx.DeclareComponentSchema(new ComponentStreamSchema(inputSchema, null));
         this.ctx.DeclareCustomizedDeserializer(new CustomizedInteropJSONDeserializer());	        
-    
+
     如果数据类型不是太复杂，这种默认实现方法应该能够应对大多数情况。对于某些情况，由于用户数据类型太复杂，或者由于我们的默认实现方法不符合用户要求，用户可能会进行自定义实施。
 
     Java 端的序列化接口如下定义：
-    
+
         public interface ICustomizedInteropJavaSerializer {
             public void prepare(String[] args);
             public List<ByteBuffer> serialize(List<Object> objectList);
         }
-    
+
     C# 端的反序列化接口如下定义：
-    
+
     公共接口 ICustomizedInteropCSharpDeserializer
-    
+
         public interface ICustomizedInteropCSharpDeserializer
         {
             List<Object> Deserialize(List<byte[]> dataList, List<Type> targetTypes);
@@ -543,11 +543,11 @@ SCP 组件包括 Java 端和 C# 端。若要与本机 Java Spout/Bolt 交互，�
 2.  **C# 端的序列化和 Java 端的反序列化**
 
     应在 C# 用户代码中指定 C# 端的序列化方法：
-    
+
         this.ctx.DeclareCustomizedSerializer(new CustomizedInteropJSONSerializer()); 
-    
+
     应在规范文件中指定 Java 端的反序列化方法：
-    
+
         (scp-spout
           {
             "plugin.name" "HybridTopology.exe"
@@ -555,18 +555,18 @@ SCP 组件包括 Java 端和 C# 端。若要与本机 Java Spout/Bolt 交互，�
             "output.schema" {"default" ["person"]}
             "customized.java.deserializer" ["microsoft.scp.storm.multilang.CustomizedInteropJSONDeserializer" "microsoft.scp.example.HybridTopology.Person"]
           })
-    
+
     其中，“microsoft.scp.storm.multilang.CustomizedInteropJSONDeserializer”是反序列化程序的名称，“microsoft.scp.example.HybridTopology.Person”是数据要反序列化成的目标类。
-    
+
     用户也可以外挂其自己的 C# 序列化程序和 Java 反序列化程序的实现。这是 C# 序列化程序的接口：
-    
+
         public interface ICustomizedInteropCSharpSerializer
         {
             List<byte[]> Serialize(List<object> dataList);
         }
-    
+
     这是 Java 反序列化程序的接口：
-    
+
         public interface ICustomizedInteropJavaDeserializer {
             public void prepare(String[] targetClassNames);
             public List<Object> Deserialize(List<ByteBuffer> dataList);
@@ -660,7 +660,7 @@ SCP 组件包括 Java 端和 C# 端。若要与本机 Java Spout/Bolt 交互，�
     {
         /* judge whether it is a replayed transaction? */
         bool replay = (this.txAttempt.TxId <= lastCommittedTxId);
- 
+
         if (!replay)
         {
             /* If it is not replayed, update the toalCount and lastCommittedTxId vaule */

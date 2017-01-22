@@ -488,7 +488,7 @@ DocumentDB 能够跨不同的 Azure 区域[在全球分发数据][distribute-glo
 
 若要详细了解 DocumentDB，请浏览以下资源：
 
--	[DocumentDB 资源模型和概念](./documentdb-resources.md)
+- [DocumentDB 资源模型和概念](./documentdb-resources.md)
 
 有关可用的其他模板，请参阅 [Azure 快速启动模板](https://azure.microsoft.com/documentation/templates/)。
 

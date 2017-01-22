@@ -46,32 +46,32 @@ wacn.date: 12/19/2016
   - 使用设备孪生报告的属性，允许通过设备孪生查询标识设备及其上次完成固件更新的时间
 
 1. 新建名为 **manageddevice** 的空文件夹。在 **manageddevice** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **manageddevice** 文件夹的命令提示符处，运行下述命令以安装 **azure-iot-device** 设备 SDK 包和 **azure-iot-device-mqtt** 包：
-   
+
     ```
     npm install azure-iot-device azure-iot-device-mqtt --save
     ```
 3. 在 **manageddevice** 文件夹中，利用文本编辑器创建新的 **dmpatterns\_fwupdate\_device.js** 文件。
 4. 在 **dmpatterns\_fwupdate\_device.js** 文件开头添加以下“require”语句：
-   
+
     ```
     'use strict';
-   
+
     var Client = require('azure-iot-device').Client;
     var Protocol = require('azure-iot-device-mqtt').Mqtt;
     ```
 5. 添加 **connectionString** 变量，并用其创建设备客户端。
-   
+
     ```
     var connectionString = 'HostName={youriothostname};DeviceId=myDeviceId;SharedAccessKey={yourdevicekey}';
     var client = Client.fromConnectionString(connectionString, Protocol);
     ```
 6. 添加用于更新设备孪生报告属性的以下函数
-   
+
     ```
     var reportFWUpdateThroughTwin = function(twin, firmwareUpdateValue) {
       var patch = {
@@ -79,7 +79,7 @@ wacn.date: 12/19/2016
             firmwareUpdate : firmwareUpdateValue
           }
       };
-   
+
       twin.properties.reported.update(patch, function(err) {
         if (err) throw err;
         console.log('twin state reported')
@@ -87,33 +87,33 @@ wacn.date: 12/19/2016
     };
     ```
 7. 添加以下函数，模拟固件映像的下载和应用。
-   
+
     ```
     var simulateDownloadImage = function(imageUrl, callback) {
       var error = null;
       var image = "[fake image data]";
-   
+
       console.log("Downloading image from " + imageUrl);
-   
+
       callback(error, image);
     }
-   
+
     var simulateApplyImage = function(imageData, callback) {
       var error = null;
-   
+
       if (!imageData) {
         error = {message: 'Apply image failed because of missing image data.'};
       }
-   
+
       callback(error);
     }
     ```
 8. 添加以下函数，通过设备孪生报告属性将固件更新状态更新为正在等待下载。通常，设备会收到有关可用更新的通知，并且管理员定义的策略会使设备开始下载和应用更新。这是用于启用该策略的逻辑运行的位置。为简单起见，我们会延迟 4 秒，然后继续下载固件映像。
-   
+
     ```
     var waitToDownload = function(twin, fwPackageUriVal, callback) {
       var now = new Date();
-   
+
       reportFWUpdateThroughTwin(twin, {
         fwPackageUri: fwPackageUriVal,
         status: 'waiting',
@@ -124,19 +124,19 @@ wacn.date: 12/19/2016
     };
     ```
 9. 添加以下函数，通过设备孪生报告属性将固件更新状态更新为正在下载固件映像。它会追踪模拟固件下载，最后更新固件更新状态以告知下载成功或失败。
-   
+
     ```
     var downloadImage = function(twin, fwPackageUriVal, callback) {
       var now = new Date();   
-   
+
       reportFWUpdateThroughTwin(twin, {
         status: 'downloading',
       });
-   
+
       setTimeout(function() {
         // Simulate download
         simulateDownloadImage(fwPackageUriVal, function(err, image) {
-   
+
           if (err)
           {
             reportFWUpdateThroughTwin(twin, {
@@ -152,27 +152,27 @@ wacn.date: 12/19/2016
               status: 'downloadComplete',
               downloadCompleteTime: now.toISOString(),
             });
-   
+
             setTimeout(function() { callback(image); }, 4000);   
           }
         });
-   
+
       }, 4000);
     }
     ```
 10. 添加以下函数，通过设备孪生报告属性将固件更新状态更新为正在应用固件映像。它会追踪模拟固件映像的应用，最后更新固件更新状态以告知应用成功或失败。
-    
+
     ```
     var applyImage = function(twin, imageData, callback) {
       var now = new Date();   
-    
+
       reportFWUpdateThroughTwin(twin, {
         status: 'applying',
         startedApplyingImage : now.toISOString()
       });
-    
+
       setTimeout(function() {
-    
+
         // Simulate apply firmware image
         simulateApplyImage(imageData, function(err) {
           if (err) {
@@ -188,20 +188,20 @@ wacn.date: 12/19/2016
               status: 'applyComplete',
               lastFirmwareUpdate: now.toISOString()
             });    
-    
+
           }
         });
-    
+
         setTimeout(callback, 4000);
-    
+
       }, 4000);
     }
     ```
 11. 添加处理 firmwareUpdate 方法并启动多阶段固件更新过程的以下函数。
-    
+
     ```
     var onFirmwareUpdate = function(request, response) {
-    
+
       // Respond the cloud app for the direct method
       response.send(200, 'FirmwareUpdate started', function(err) {
         if (!err) {
@@ -210,30 +210,30 @@ wacn.date: 12/19/2016
           console.log('Response to method \'' + request.methodName + '\' sent successfully.');
         }
       });
-    
+
       // Get the parameter from the body of the method request
       var fwPackageUri = JSON.parse(request.payload).fwPackageUri;
-    
+
       // Obtain the device twin
       client.getTwin(function(err, twin) {
         if (err) {
           console.error('Could not get device twin.');
         } else {
           console.log('Device twin acquired.');
-    
+
           // Start the multi-stage firmware update
           waitToDownload(twin, fwPackageUri, function() {
             downloadImage(twin, fwPackageUri, function(imageData) {
               applyImage(twin, imageData, function() {});    
             });  
           });
-    
+
         }
       });
     }
     ```
 12. 最后，添加作为设备连接到 IoT 中心的以下代码。
-    
+
     ```
     client.open(function(err) {
       if (err) {
@@ -241,7 +241,7 @@ wacn.date: 12/19/2016
       }  else {
         console.log('Client connected to IoT Hub.  Waiting for firmwareUpdate direct method.');
       }
-    
+
       client.onDeviceMethod('firmwareUpdate', onFirmwareUpdate(request, response));
     });
     ```
@@ -255,26 +255,26 @@ wacn.date: 12/19/2016
 在此部分中，会创建一个 Node.js 控制台应用，它使用直接方法在设备上启动远程固件更新，并使用设备孪生查询定期获取该设备上活动固件更新的状态。
 
 1. 新建名为 **triggerfwupdateondevice** 的空文件夹。在 **triggerfwupdateondevice** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **triggerfwupdateondevice** 文件夹的命令提示符处，运行下述命令以安装 **azure-iothub** 设备 SDK 包和 **azure-iot-device-mqtt** 包：
-   
+
     ```
     npm install azure-iot-hub --save
     ```
 3. 在 **triggerfwupdateondevice** 文件夹中，利用文本编辑器创建新的 **dmpatterns\_getstarted\_service.js** 文件。
 4. 在 **dmpatterns\_getstarted\_service.js** 文件开头添加以下“require”语句：
-   
+
     ```
     'use strict';
-   
+
     var Registry = require('azure-iothub').Registry;
     var Client = require('azure-iothub').Client;
     ```
 5. 添加以下变量声明并替换占位符值：
-   
+
     ```
     var connectionString = '{device_connectionstring}';
     var registry = Registry.fromConnectionString(connectionString);
@@ -282,7 +282,7 @@ wacn.date: 12/19/2016
     var deviceToUpdate = 'myDeviceId';
     ```
 6. 添加以下函数以查找并显示 firmwareUpdate 报告属性的值。
-   
+
     ```
     var queryTwinFWUpdateReported = function() {
         registry.getTwin(deviceToUpdate, function(err, twin){
@@ -295,22 +295,22 @@ wacn.date: 12/19/2016
     };
     ```
 7. 添加以下函数以调用 firmwareUpdate 方法来重新启动目标设备：
-   
+
     ```
     var startFirmwareUpdateDevice = function() {
       var params = {
           fwPackageUri: 'https://secureurl'
       };
-   
+
       var methodName = "firmwareUpdate";
       var payloadData =  JSON.stringify(params);
-   
+
       var methodParams = {
         methodName: methodName,
         payload: payloadData,
         timeoutInSeconds: 30
       };
-   
+
       client.invokeDeviceMethod(deviceToUpdate, methodParams, function(err, result) {
         if (err) {
           console.error('Could not start the firmware update on the device: ' + err.message)
@@ -319,7 +319,7 @@ wacn.date: 12/19/2016
     };
     ```
 8. 最后，向代码添加以下函数以启动固件更新序列并开始定期显示设备孪生报告属性：
-   
+
     ```
     startFirmwareUpdateDevice();
     setInterval(queryTwinFWUpdateReported, 500);
@@ -330,12 +330,12 @@ wacn.date: 12/19/2016
 现在，已准备就绪，可以运行应用。
 
 1. 在 **manageddevice** 文件夹的命令提示符处，运行以下命令以开始侦听重新启动直接方法。
-   
+
     ```
     node dmpatterns_fwupdate_device.js
     ```
 2. 在 **triggerfwupdateondevice** 文件夹的命令提示符处，运行以下命令以触发远程重新启动并查询设备孪生以查找上次重新启动时间。
-   
+
     ```
     node dmpatterns_fwupdate_service.js
     ```

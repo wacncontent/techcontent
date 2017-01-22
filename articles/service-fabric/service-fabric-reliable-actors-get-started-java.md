@@ -33,11 +33,11 @@ ms.author: vturecek
 若要开始使用 Reliable Actors，只需了解几个基本概念：
 
  * **执行组件服务**。可以在 Service Fabric 基础结构中部署的 Reliable Services 中封装了 Reliable Actors。执行组件服务在命名的服务实例中激活。
- 
+
  * **执行组件注册**。与 Reliable Services 一样，Reliable Actor 服务也需要注册到 Service Fabric 运行时。此外，需要将执行组件类型注册到执行组件运行时。
- 
+
  * **执行组件接口**。执行组件接口用于定义执行组件的强类型公共接口。在 Reliable Actor 模型术语中，执行组件接口用于定义执行组件可以理解并处理的消息类型。其他执行组件或客户端应用程序使用此执行组件接口将消息“发送”到（异步方式）此执行组件。Reliable Actors 可实现多个接口。
- 
+
  * **ActorProxy 类**。客户端应用程序使用 ActorProxy 类调用通过执行组件接口公开的方法。ActorProxy 类提供两个重要功能：
     * 名称解析：能够在群集中找到执行组件（查找托管它的群集节点）。
     * 故障处理：例如，在需要将执行组件重新定位到群集中另一个节点的故障之后，它可以重试方法调用和重新解析执行组件的位置。
@@ -146,14 +146,14 @@ ms.author: vturecek
 `HelloWorldActor/src/reliableactor/HelloWorldActorHost`：
 
     public class HelloWorldActorHost {
-    
+
         public static void main(String[] args) throws Exception {
-        
+
             try {
                 ActorRuntime.registerActorAsync(HelloWorldActorImpl.class, (context, actorType) -> new ActorServiceImpl(context, actorType, ()-> new HelloWorldActorImpl()), Duration.ofSeconds(10));
 
                 Thread.sleep(Long.MAX_VALUE);
-            
+
             } catch (Exception e) {
                 e.printStackTrace();
                 throw e;

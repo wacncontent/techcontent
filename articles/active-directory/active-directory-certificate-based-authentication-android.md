@@ -110,22 +110,22 @@ ms.author: markvi
 ### 为 Azure AD 租户配置基于证书的身份验证
 1. 使用管理员特权启动 Windows PowerShell。
 2. 安装 Azure AD 模块。需要安装 [2\.0.0.33 ](https://www.powershellgallery.com/packages/AzureAD/2.0.0.33) 或更高版本。
-   
+
         Install-Module -Name AzureADPreview -RequiredVersion 2.0.0.33 
 3. 连接到目标租户：
-   
+
         Connect-AzureAD 
 
 ### 添加新证书颁发机构
 1. 设置证书颁发机构的各种属性，并将其添加到 Azure Active Directory：
-   
+
         $cert=Get-Content -Encoding byte "[LOCATION OF THE CER FILE]" 
         $new_ca=New-Object -TypeName Microsoft.Open.AzureAD.Model.CertificateAuthorityInformation 
         $new_ca.AuthorityType=0 
         $new_ca.TrustedCertificate=$cert 
         New-AzureADTrustedCertificateAuthority -CertificateAuthorityInformation $new_ca 
 2. 获取证书颁发机构：
-   
+
         Get-AzureADTrustedCertificateAuthority 
 
 ### 检索证书颁发机构列表
@@ -135,21 +135,21 @@ ms.author: markvi
 
 ### 删除证书颁发机构
 1. 检索证书颁发机构：
-   
+
          $c=Get-AzureADTrustedCertificateAuthority
 2. 删除证书颁发机构的证书：
-   
+
         Remove-AzureADTrustedCertificateAuthority -CertificateAuthorityInformation $c[2] 
 
 ### 修改证书颁发机构
 1. 检索证书颁发机构：
-   
+
          $c=Get-AzureADTrustedCertificateAuthority
 2. 修改证书颁发机构上的属性：
-   
+
         $c[0].AuthorityType=1 
 3. 设置**证书颁发机构**：
-   
+
         Set-AzureADTrustedCertificateAuthority -CertificateAuthorityInformation $c[0] 
 
 ## 测试 Office 移动应用程序
@@ -186,15 +186,15 @@ ms.author: markvi
 以下步骤概述了通过设置 **StsRefreshTokenValidFrom** 字段更新授权令牌并使其失效的过程。
 
 1. 使用管理员凭据连接到 MSOL 服务：
-   
+
         $msolcred = get-credential 
         connect-msolservice -credential $msolcred 
 2. 检索用户的当前 StsRefreshTokensValidFrom 值：
-   
+
          $user = Get-MsolUser -UserPrincipalName test@yourdomain.com` 
          $user.StsRefreshTokensValidFrom
 3. 将用户的新 StsRefreshTokensValidFrom 值配置为等于当前时间戳：
-   
+
          Set-MsolUser -UserPrincipalName test@yourdomain.com -StsRefreshTokensValidFrom ("03/05/2016")
 
 所设日期必须属于将来。如果日期不属于将来，则不会设置 **StsRefreshTokensValidFrom** 属性。如果日期属于将来，**StsRefreshTokensValidFrom** 会设置为当前时间（而不是由 Set-MsolUser 命令指示的日期）。

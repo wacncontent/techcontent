@@ -24,8 +24,8 @@ wacn.date: 01/13/2017
 
 在继续之前，可能需要保存以下资源。在将 Power BI 报表集成到示例应用和自己的应用中时，这些资源都可以提供帮助。
 
- -	[Power BI Embedded API 参考](https://msdn.microsoft.com/zh-cn/library/mt711493.aspx)
- -	[Power BI Embedded .NET SDK](https://www.nuget.org/profiles/powerbi)（通过 NuGet 提供）
+ - [Power BI Embedded API 参考](https://msdn.microsoft.com/zh-cn/library/mt711493.aspx)
+ - [Power BI Embedded .NET SDK](https://www.nuget.org/profiles/powerbi)（通过 NuGet 提供）
 
 > [!NOTE] 需要先在 Azure 订阅中创建至少一个**工作区集合**才能配置和运行 Power BI Embedded 入门示例。若要了解如何在 Azure 门户预览中创建**工作区集合**，请参阅 [Power BI Embedded 入门](./power-bi-embedded-get-started.md)。
 

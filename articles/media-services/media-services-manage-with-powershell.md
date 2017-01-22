@@ -33,7 +33,7 @@ ms.author: juliako
 ## 版本
 
 **ApiVersion**：“2015-10-01”
-               
+
 ## New-AzureRmMediaService
 
 创建媒体服务。

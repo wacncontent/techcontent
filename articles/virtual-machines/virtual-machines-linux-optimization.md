@@ -70,7 +70,7 @@ ms.author: rclaus
     -/+ buffers/cache:     162548    3362608
     Swap:       524284          0     524284
     admin@mylinuxvm:~$
- 
+
 ## 高级存储的 I/O 调度算法
 
 随着 2.6.18 Linux 内核的推出，默认 I/O 调度算法已从 Deadline 更改为 CFQ（完全公平的队列算法）。对于随机访问 I/O 模式，CFQ 与 Deadline 之间的性能差异可忽略不计。对于磁盘 I/O 模式以循序为主的基于 SSD 的磁盘，切换回到 NOOP 或 Deadline 算法可以实现更好的 I/O 性能。

@@ -167,16 +167,16 @@ Azure App Service 是适合该情况的强大解决方案，原因是其可免�
 
 若要开始使用为应用程序选择的选项，请参阅以下资源：
 
-* [Azure App Service](../app-service/index.md/)
-* [Azure 云服务](../cloud-services/index.md/)
-* [Azure 虚拟机](../virtual-machines/index.md/)
-* [Service Fabric](../service-fabric/index.md/)
+* [Azure App Service](../app-service/index.md)
+* [Azure 云服务](../cloud-services/index.md)
+* [Azure 虚拟机](../virtual-machines/index.md)
+* [Service Fabric](../service-fabric/index.md)
 
 <!-- URL List -->
 
 [Azure App Service]: https://www.azure.cn/home/features/app-service/
-[云服务]: ../cloud-services/index.md/
-[虚拟机]: ../virtual-machines/index.md/
+[云服务]: ../cloud-services/index.md
+[虚拟机]: ../virtual-machines/index.md
 [Service Fabric]: https://www.azure.cn/home/features/service-fabric
 [ClearDB]: http://www.cleardb.com/
 [WebJobs]: ./websites-webjobs-resources.md
@@ -185,9 +185,9 @@ Azure App Service 是适合该情况的强大解决方案，原因是其可免�
 [nodejs]: /develop/nodejs/
 [PHP]: /develop/php/
 [Python]: /develop/python/
-[servicebus]: ../service-bus/index.md/
-[sqldatabase]: ../sql-database/index.md/
-[存储空间]: ../storage/index.md/
+[servicebus]: ../service-bus/index.md
+[sqldatabase]: ../sql-database/index.md
+[存储空间]: ../storage/index.md
 
 <!-- IMG List -->
 

@@ -119,5 +119,5 @@ Azure 提供了内置诊断来调试托管在 [Azure 应用服务](./app-service
 [Using Node.js Modules with Azure Applications]: ../nodejs-use-node-modules-azure-apps.md
 [在 Azure 应用程序中指定 Node.js 版本]: ../nodejs-specify-node-version-azure-apps.md
 [restart-button]: ./media/web-sites-nodejs-debug/restartbutton.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

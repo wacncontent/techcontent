@@ -46,7 +46,7 @@ ms.author: sonyama;barbkess
 
 <!--Azure.com references-->
  [Query with Visual Studio]: ./sql-data-warehouse-query-visual-studio.md
- 
+
 <!--MSDN references-->
 [ADO.NET]: https://msdn.microsoft.com/zh-cn/library/e80y5yhx(v=vs.110).aspx
 [ODBC]: https://msdn.microsoft.com/zh-cn/library/jj730314.aspx

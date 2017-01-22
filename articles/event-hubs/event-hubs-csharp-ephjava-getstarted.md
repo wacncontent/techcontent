@@ -43,11 +43,11 @@ ms.author: jotaub;sethm
 
 现在，你已准备就绪，可以运行应用程序了。
 
-1.	运行 **Receiver** 项目。
+1. 运行 **Receiver** 项目。
 
     ![][21]
 
-2.	运行 **Sender** 项目。
+2. 运行 **Sender** 项目。
 
     ![][22]
 

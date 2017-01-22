@@ -45,14 +45,14 @@ ms.author: cherylmc
 你可能会出于以下原因而连接虚拟网络：
 
 * **跨区域地域冗余和地域存在**
-  
+
   * 你可以使用安全连接设置自己的异地复制或同步，而无需借助于面向 Internet 的终结点。
   * 使用 Azure Load Balancer 和 Microsoft 或第三方群集技术，你可以设置支持跨多个 Azure 区域实现地域冗余的高可用性工作负荷。一个重要的示例就是对分布在多个 Azure 区域中的可用性组设置 SQL Always On。
 * **具有强大隔离边界的区域多层应用程序**
-  
+
   * 在同一区域中，可以设置具有多个 VNet 的多层应用程序，这些虚拟网络相互连接在一起，但同时又能保持强大的隔离性，而且还能进行安全的层间通信。
 * **在 Azure 中跨订阅进行组织间通信**
-  
+
   * 如果你有多个 Azure 订阅，可以在虚拟网络之间安全地将不同订阅中的工作负荷连接起来。
   * 对于企业或服务提供商而言，可以在 Azure 中使用安全 VPN 技术启用跨组织通信。
 
@@ -154,7 +154,7 @@ ms.author: cherylmc
 2. 在“名称”列中，单击你的虚拟网络的名称。本示例使用“VNet1”。
 3. 在“仪表板”页上，请注意此 VNet 尚未配置网关。当你完成配置网关的步骤时，你将会看到此状态更改。
 4. 在页面底部，单击“创建网关”和“动态路由”。系统提示你确认要创建网关时，单击“是”。
-   
+
       ![网关类型](./media/virtual-networks-configure-vnet-to-vnet-connection/IC717026.png)  
 
 5. 正在创建网关时，请注意页面上的网关图形将更改为黄色，并显示“正在创建网关”。创建网关通常需要大约 30 分钟时间。
@@ -169,10 +169,10 @@ ms.author: cherylmc
 完成前面的所有步骤后，请设置 IPsec/IKE 预共享密钥并创建连接。这一组步骤使用 PowerShell，不能在门户中配置。有关安装 Azure PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。请确保下载最新版本的服务管理 (SM) cmdlet。
 
 1. 打开 Windows PowerShell，然后登录。
-   
+
         Add-AzureAccount -Environment AzureChinaCloud
 2. 选择 VNet 所在的订阅。
-   
+
         Get-AzureSubscription | Sort SubscriptionName | Select SubscriptionName
         Select-AzureSubscription -SubscriptionName "<Subscription Name>"
 3. 创建连接。在示例中，可以看到共享密钥完全相同。共享的密钥必须始终匹配。
@@ -186,12 +186,12 @@ ms.author: cherylmc
         Set-AzureVNetGatewayKey -VNetName VNet2 -LocalNetworkSiteName VNet1Local -SharedKey A1b2C3D4
 
 4. 等待连接初始化。初始化网关后，网关将如下图所示。
-   
+
     ![网关状态 - 已连接](./media/virtual-networks-configure-vnet-to-vnet-connection/IC736059.jpg)  
 
 [!INCLUDE [vpn-gateway-no-nsg-include](../../includes/vpn-gateway-no-nsg-include.md)]
 
 ## 后续步骤
-你可以将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机文档](../virtual-machines/index.md/)。
+你可以将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机文档](../virtual-machines/index.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

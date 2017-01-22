@@ -151,7 +151,7 @@ ms.author: glenga
 4. 单击“数据”选项卡，然后单击“浏览”。
 
        ![][9]
-  
+
        可以看到，**TodoItem** 表现在包含了数据以及移动服务生成的 ID 值，并且已在该表中自动添加了列，以匹配应用程序中的 TodoItem 类。
 
 本教程到此结束。
@@ -165,10 +165,10 @@ ms.author: glenga
 
 * [向应用程序添加推送通知](./mobile-services-javascript-backend-windows-phone-get-started-push.md)
   <br/>了解如何使用移动服务将非常基本的推送通知发送到应用程序。
- 
+
 * [移动服务 C# 操作方法概念性参考 ](./mobile-services-dotnet-how-to-use-client-library.md)
   <br/>了解有关如何将移动服务与 .NET 一起使用的详细信息。
- 
+
 <!-- Anchors. -->
 [Download the Windows Phone 8 app project]: #download-app
 [Create the mobile service]: #create-service
@@ -190,5 +190,5 @@ ms.author: glenga
 [Mobile Services SDK]: http://go.microsoft.com/fwlink/p/?LinkID=268375
 [Developer Code Samples site]: http://go.microsoft.com/fwlink/p/?LinkId=271146
 [开发人员代码示例站点]: http://go.microsoft.com/fwlink/p/?LinkId=271146
- 
+
 <!---HONumber=Mooncake_0118_2016-->

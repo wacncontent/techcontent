@@ -42,11 +42,11 @@ For the specific settings, see the [JDBC Connection Pool official introduction d
                 // If an object fails to validate, it will be dropped from the pool. 
                 // NOTE - for a true value to have any effect, the validationQuery or validatorClassName parameter must be set to a non-null string. 
               p.setTestOnBorrow(true); 
-                
+
                 // The SQL query that will be used to validate connections from this pool before returning them to the caller.
                 // If specified, this query does not have to return any data, it just can't throw a SQLException.
               p.setValidationQuery("SELECT 1");
-                
+
                 // The timeout in seconds before a connection validation queries fail. 
                 // This works by calling java.sql.Statement.setQueryTimeout(seconds) on the statement that executes the validationQuery. 
                 // The pool itself doesn't timeout the query, it is still up to the JDBC driver to enforce query timeouts. 

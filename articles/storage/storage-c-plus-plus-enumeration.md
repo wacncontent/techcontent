@@ -54,8 +54,8 @@ ms.author: dineshm
 
 分段列表操作的响应包括：
 
--	<i>_segment</i>，其中包含针对列表 API 进行单个调用时返回的结果集。 
--	*continuation_token*，它将被传递给下一个调用，以获取下一页结果。当没有后续结果可以返回时，continuation_token为null。
+- <i>_segment</i>，其中包含针对列表 API 进行单个调用时返回的结果集。 
+- *continuation_token*，它将被传递给下一个调用，以获取下一页结果。当没有后续结果可以返回时，continuation_token为null。
 
 例如，进行典型调用以列出容器中的所有 blob 时，该调用的代码段可能如下所示。我们的[示例](https://github.com/Azure/azure-storage-cpp/blob/master/Microsoft.WindowsAzure.Storage/samples/BlobsGettingStarted/Application.cpp)中提供了该代码：
 
@@ -166,19 +166,19 @@ SDK 中的此类贪婪列表 API 在 C#、Java 或 JavaScript Node.js 环境中�
 ## 结论
 在本文中，我们针对用于 C++ 的存储客户端库中的各种对象，对列表 API 的不同重载进行了讨论。总结：
 
--	在出现多个线程的情况下，强烈建议使用异步 API。
--	大多数情况下，建议使用分段的列表。
--	在库中提供懒惰列表是将其作为封装器，适合在同步方案中使用。
--	不建议使用贪婪列表，因此已将其从库中删除。
+- 在出现多个线程的情况下，强烈建议使用异步 API。
+- 大多数情况下，建议使用分段的列表。
+- 在库中提供懒惰列表是将其作为封装器，适合在同步方案中使用。
+- 不建议使用贪婪列表，因此已将其从库中删除。
 
 ## 后续步骤
 有关 Azure 存储以及用于 C++ 的客户端库的详细信息，请参阅以下资源。
 
--	[如何通过 C++ 使用 Blob 存储](./storage-c-plus-plus-how-to-use-blobs.md)
--	[如何通过 C++ 使用表存储](./storage-c-plus-plus-how-to-use-tables.md)
--	[如何通过 C++ 使用队列存储](./storage-c-plus-plus-how-to-use-queues.md)
--	[适用于 C++ 的 Azure 存储客户端库 API 文档。](http://azure.github.io/azure-storage-cpp/)
--	[Azure 存储团队博客](http://blogs.msdn.com/b/windowsazurestorage/)
--	[Azure 存档文档](./index.md/)
+- [如何通过 C++ 使用 Blob 存储](./storage-c-plus-plus-how-to-use-blobs.md)
+- [如何通过 C++ 使用表存储](./storage-c-plus-plus-how-to-use-tables.md)
+- [如何通过 C++ 使用队列存储](./storage-c-plus-plus-how-to-use-queues.md)
+- [适用于 C++ 的 Azure 存储客户端库 API 文档。](http://azure.github.io/azure-storage-cpp/)
+- [Azure 存储团队博客](http://blogs.msdn.com/b/windowsazurestorage/)
+- [Azure 存档文档](./index.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

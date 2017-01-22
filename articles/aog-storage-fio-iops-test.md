@@ -14,7 +14,7 @@ wacn.date: 11/03/2016
 ---
 
 # 使用 fio 工具对 Azure 存储进行 IOPS 测试
- 
+
 fio 是用来测试磁盘 IOPS 的工具，具有安装简单，测试方法灵活、方便的特点。 
 本例，我将使用 fio 对 Azure 高级存储磁盘进行 IOPS 测试。
 
@@ -24,10 +24,10 @@ fio 是用来测试磁盘 IOPS 的工具，具有安装简单，测试方法灵�
     CentOS release 6.5 (Final)
     [root@DS13IOTEST ~]# uname -a
     Linux DS13IOTEST 2.6.32-431.29.2.el6.x86_64 #1 SMP Tue Sep 9 21:36:05 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
-     
+
     [root@DS13IOTEST ~]# fio --version
     fio-2.1.10
-     
+
     [root@DS13IOTEST ~]# modinfo hv_vmbus
     filename:       /lib/modules/2.6.32-431.29.2.el6.x86_64/weak-updates/microsoft-hyper-v/hv_vmbus.ko
     version:        4.1.2
@@ -37,7 +37,7 @@ fio 是用来测试磁盘 IOPS 的工具，具有安装简单，测试方法灵�
     alias:          acpi*:VMBUS:*
     depends:
     vermagic:       2.6.32-431.el6.x86_64 SMP mod_unload modversions
-     
+
     [root@DS13IOTEST ~]# df -T
     Filesystem     Type   1K-blocks    Used  Available Use% Mounted on
     /dev/sda1      ext4    30962684 2745376   26644496  10% /
@@ -45,7 +45,7 @@ fio 是用来测试磁盘 IOPS 的工具，具有安装简单，测试方法灵�
     /dev/sdb1      ext4   115596768  192120  109532680   1% /mnt/resource
     /dev/sdc1      ext4   528444416  202520  501398488   1% /datadrive512G
     /dev/sdd1      ext4  1055860904  204056 1002022244   1% /datadrive1023G
- 
+
 **测试脚本下载：**[https://azuresupport.blob.core.windows.net/linux/fio.sh.tar.gz](https://azuresupport.blob.core.windows.net/linux/fio.sh.tar.gz)
 
 根据 Azure 高级存储磁盘的说明，当前 Azure 共有三种高级存储：P10, P20, P30。 这三者是怎么区分的呢？ 实际上，Azure 根据磁盘的大小来划分该磁盘所属的性能类型。
@@ -61,7 +61,7 @@ fio 是用来测试磁盘 IOPS 的工具，具有安装简单，测试方法灵�
 P20 测试:
 
     [root@DS13IOTEST ~]# ./fio.sh /datadrive512G >p20_fio_report  
-     
+
     [root@DS13IOTEST ~]# cat p20_fio_report | grep -i iops
       write: io=282164KB, bw=9385.8KB/s, iops=2346, runt= 30063msec
       write: io=281960KB, bw=9382.1KB/s, iops=2345, runt= 30053msec
@@ -72,11 +72,11 @@ P20 测试:
       write: io=141248KB, bw=4694.3KB/s, iops=1173, runt= 30091msec
       read : io=141200KB, bw=4692.2KB/s, iops=1173, runt= 30093msec
       write: io=141248KB, bw=4693.8KB/s, iops=1173, runt= 30093msec
- 
+
 p30 测试：  
 
     [root@DS13IOTEST ~]# ./fio.sh /datadrive1023G >p30_fio_report 
-     
+
     [root@DS13IOTEST ~]# cat p30_fio_report | grep -i iops
       write: io=524288KB, bw=20405KB/s, iops=5101, runt= 25694msec
       write: io=524288KB, bw=20399KB/s, iops=5099, runt= 25702msec
@@ -87,13 +87,13 @@ p30 测试：
       write: io=261744KB, bw=10192KB/s, iops=2547, runt= 25682msec
       read : io=262544KB, bw=10224KB/s, iops=2556, runt= 25678msec
       write: io=261744KB, bw=10193KB/s, iops=2548, runt= 25678msec
- 
+
 新增两块盘 sde(512G）,sdf（1023G) 做 raid 0 测试：
- 
+
     [root@DS13IOTEST ~]# yum -y install mdadm
     [root@DS13IOTEST ~]#  mdadm --create /dev/md512 --level 0 --raid-devices 2 /dev/sdc1 /dev/sde1
     [root@DS13IOTEST ~]#  mdadm --create /dev/md1023 --level 0 --raid-devices 2 /dev/sdd1 /dev/sdf1
-     
+
     [root@DS13IOTEST /]# mount -O barrier=0 /dev/md512 /raid0_datadrive512G
     [root@DS13IOTEST ~]# ./fio.sh /raid0_datadrive512G > raid0_p20_fio_report
     [root@DS13IOTEST ~]# cat raid0_p20_fio_report | grep -i iops
@@ -106,7 +106,7 @@ p30 测试：
       write: io=261744KB, bw=9320.8KB/s, iops=2330, runt= 28082msec
       read : io=262544KB, bw=9349.9KB/s, iops=2337, runt= 28080msec
       write: io=261744KB, bw=9321.4KB/s, iops=2330, runt= 28080msec
-     
+
     [root@DS13IOTEST /]# mount -O barrier=0 /dev/md1023 /raid0_datadrive1023G  
     [root@DS13IOTEST ~]# ./fio.sh /raid0_datadrive1023G > raid0_p30_fio_report  
     [root@DS13IOTEST ~]# cat raid0_p30_fio_report | grep -i iops
@@ -120,6 +120,6 @@ p30 测试：
       read : io=262544KB, bw=20368KB/s, iops=5092, runt= 12890msec
       write: io=261744KB, bw=20306KB/s, iops=5076, runt= 12890msec
     [root@DS13IOTEST ~]#
- 
+
 综上，我们可以得出以下结论：p20, p30 的高级存储 iops 测试符合磁盘的 iops 性能预期。
 

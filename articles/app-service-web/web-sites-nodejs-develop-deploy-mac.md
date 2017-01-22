@@ -72,7 +72,7 @@ ms.author: robmcm
     有关应用服务计划的详细信息，请参阅 [Azure App Service 计划概述](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)
 
 8. 单击“创建”。
-   
+
     ![][portal-quick-create2]
 
     不久之后（通常不到一分钟），Azure 将创建出新的 Web 应用。
@@ -84,7 +84,7 @@ ms.author: robmcm
 3. 选择“从源控件设置部署”。在“设置部署”对话框中，选择“本地 Git 存储库”选项，然后单击“确定”。随后将创建在 Azure 中运行的、与应用关联的 Git 存储库。每次将代码提交到 Git 存储库的 *master* 分支时，代码就会发布到实时运行的 API 应用实例。
 
 1. 回到 [Azure 门户预览](https://portal.azure.cn)。 在“Web 应用”边栏选项卡中，单击“设置”，然后单击“属性”。
- 
+
     推送到远程 Git 存储库即可发布。存储库的 URL 将在“GIT URL”下列出。本教程的后面部分需使用此 URL。
 
     ![][git-url]

@@ -43,20 +43,20 @@ ms.author: magoedte;bwren
 
 你可以直接将代码键入 Runbook 中，或者通过“库”控件选择 cmdlet、Runbook 和资产，并使用任何相关的参数将它们添加到 Runbook。在本演练中，我们将直接键入 Runbook。
 
-1.	我们的 Runbook 目前是空的，只有必需的 *workflow* 关键字、Runbook 名称以及括住整个工作流的大括号。
+1. 我们的 Runbook 目前是空的，只有必需的 *workflow* 关键字、Runbook 名称以及括住整个工作流的大括号。
 
         Workflow MyFirstRunbook-Workflow
         {
         }
 
-2.	在大括号之间键入 *Write-Output "Hello World"*。
+2. 在大括号之间键入 *Write-Output "Hello World"*。
 
         Workflow MyFirstRunbook-Workflow
         {
           Write-Output "Hello World"
         }
 
-3.	通过单击“保存”来保存 Runbook。
+3. 通过单击“保存”来保存 Runbook。
 
 ## 步骤 3 - 测试 Runbook
 
@@ -109,7 +109,7 @@ ms.author: magoedte;bwren
 
 在 Runbook 对 Azure 订阅进行身份验证后，我们可以管理资源。我们将添加一个命令用于启动虚拟机。你可以在你的 Azure 订阅中选取任何虚拟机，现在我们会将该名称硬编码到 cmdlet 中。
 
-1.	在 *Add-AzureRmAccount* 后面键入 *Start-AzureRmVM -Name 'VMName' -ResourceGroupName 'NameofResourceGroup'*（提供要启动的虚拟机的名称和资源组名称）。
+1. 在 *Add-AzureRmAccount* 后面键入 *Start-AzureRmVM -Name 'VMName' -ResourceGroupName 'NameofResourceGroup'*（提供要启动的虚拟机的名称和资源组名称）。
 
         workflow MyFirstRunbook-Workflow
         {
@@ -125,7 +125,7 @@ ms.author: magoedte;bwren
 
 我们的 Runbook 目前会启动我们在 Runbook 中硬编码的虚拟机，但如果可以在启动 Runbook 时指定虚拟机，它会更有用。我们现在将输入参数添加到 Runbook，以提供该功能。
 
-1.	将 *VMName* 和 *ResourceGroupName* 的参数添加到 Runbook，并将这些变量与 **Start-AzureRmVM** cmdlet 配合使用，如以下示例所示。
+1. 将 *VMName* 和 *ResourceGroupName* 的参数添加到 Runbook，并将这些变量与 **Start-AzureRmVM** cmdlet 配合使用，如以下示例所示。
 
         workflow MyFirstRunbook-Workflow
         {
@@ -138,11 +138,11 @@ ms.author: magoedte;bwren
          Start-AzureRmVM -Name $VMName -ResourceGroupName $ResourceGroupName
         }
 
-2.	保存 Runbook 并打开“测试”窗格。请注意，现在可以为将在测试中使用的两个输入变量提供值。
-3.	关闭“测试”窗格。
-4.	单击“发布”以发布 Runbook 的新版本。
-5.	停止在上一步中启动的虚拟机。
-6.	单击“启动”以启动 Runbook。键入要启动的虚拟机的 **VMName** 和 **ResourceGroupName**。
-7.	一旦 Runbook 完成后，检查已启动的虚拟机。
+2. 保存 Runbook 并打开“测试”窗格。请注意，现在可以为将在测试中使用的两个输入变量提供值。
+3. 关闭“测试”窗格。
+4. 单击“发布”以发布 Runbook 的新版本。
+5. 停止在上一步中启动的虚拟机。
+6. 单击“启动”以启动 Runbook。键入要启动的虚拟机的 **VMName** 和 **ResourceGroupName**。
+7. 一旦 Runbook 完成后，检查已启动的虚拟机。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

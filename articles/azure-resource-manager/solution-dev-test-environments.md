@@ -50,7 +50,7 @@ Azure 资源管理器模板定义应用程序使用的所有 Azure 资源。你�
 4. 使用鼠标选择此文件的内容，然后将内容以“TestApp1-Template.json”文件名保存到计算机。
 5. 检查模板的内容，并注意以下事项：
     * **Resources** 部分：此部分定义此模板创建的 Azure 资源的类型。在其他资源类型中，此模板将创建 [Azure Web 应用](../app-service-web/app-service-web-overview.md)和 [Azure SQL 数据库](../sql-database/sql-database-technical-overview.md)资源。如果偏好在虚拟机中运行和管理 Web 与 SQL 服务器，可以使用"[iis-2vm-sql-1vm](https://github.com/Azure/azure-quickstart-templates/tree/master/iis-2vm-sql-1vm)"或"[lamp-app](https://github.com/Azure/azure-quickstart-templates/tree/master/lamp-app)"模板；但本文中的说明基于 [201-web-app-sql-database](https://github.com/Azure/azure-quickstart-templates/tree/3f24f7b7e1e377538d1d548eaa6eab2851a21810/201-web-app-sql-database) 模板。
-   * **Parameters** 部分：此部分定义可用于配置每个资源的参数。在模板中指定的一些参数带有“defaultValue”属性，而其他一些参数则没有该属性。使用模板部署 Azure 资源时，必须将值提供给模板中所有未指定 defaultValue 属性的参数。如果未向带有 defaultValue 属性的参数提供值，则会使用模板中为 defaultValue 参数指定的值。
+    * **Parameters** 部分：此部分定义可用于配置每个资源的参数。在模板中指定的一些参数带有“defaultValue”属性，而其他一些参数则没有该属性。使用模板部署 Azure 资源时，必须将值提供给模板中所有未指定 defaultValue 属性的参数。如果未向带有 defaultValue 属性的参数提供值，则会使用模板中为 defaultValue 参数指定的值。
 
 模板定义所创建的 Azure 资源，以及可用来配置每个资源的参数。你可以阅读[设计 Azure 资源管理器模板的最佳实践](./best-practices-resource-manager-design-templates.md)一文，以进一步了解模板及如何设计自己的模板。
 
@@ -60,12 +60,12 @@ Azure 资源管理器模板定义应用程序使用的所有 Azure 资源。你�
 1. 查看 201-web-app-sql-database 文件夹中 [azuredeploy.parameters.json](https://github.com/Azure/azure-quickstart-templates/tree/3f24f7b7e1e377538d1d548eaa6eab2851a21810/201-web-app-sql-database/azuredeploy.parameters.json) 文件的内容。这是在前一部分中保存的模板文件的参数文件。
 2. 在视图模式中，单击[“原始”](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/3f24f7b7e1e377538d1d548eaa6eab2851a21810/201-web-app-sql-database/azuredeploy.parameters.json)按钮。
 3. 使用鼠标选择此文件的内容，然后使用以下名称将其保存在计算机上的三个不同文件中：
-   
+
     * TestApp1-Parameters-Development.json
     * TestApp1-Parameters-Test.json
     * TestApp1-Parameters-Pre-Production.json
 4. 使用任何文本或 JSON 编辑器来编辑步骤 3 中创建的开发环境参数文件，并将列在文件中参数值右侧的值替换为列在以下**参数**右侧的 *值* ：
-   
+
     * **siteName**： *TestApp1DevApp*
     * **hostingPlanName**： *TestApp1DevPlan*
     * **siteLocation**： *China East*
@@ -75,7 +75,7 @@ Azure 资源管理器模板定义应用程序使用的所有 Azure 资源。你�
     * **administratorLoginPassword**： *替换为你的密码*
     * **databaseName**： *testapp1devdb*
 5. 使用任何文本或 JSON 编辑器来编辑步骤 3 中创建的测试环境参数文件，并将列在文件中参数值右侧的值替换为列在以下**参数**右侧的*值*：
-   
+
     * **siteName**： *TestApp1TestApp*
     * **hostingPlanName**： *TestApp1TestPlan*
     * **siteLocation**： *China East*
@@ -85,7 +85,7 @@ Azure 资源管理器模板定义应用程序使用的所有 Azure 资源。你�
     * **administratorLoginPassword**： *替换为你的密码*
     * **databaseName**： *testapp1testdb*
 6. 使用任何文本或 JSON 编辑器，编辑在步骤 3 中创建的预生产参数文件。将文件的整个内容替换为以下内容：
-   
+
         {
           "$schema" : "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
           "contentVersion" : "1.0.0.0",

@@ -31,7 +31,7 @@ Azure 存储帐户提供唯一的命名空间来存储和访问你的 Azure 存�
 
 [!INCLUDE [storage-account-billing-include](../../includes/storage-account-billing-include.md)]
 
-> [!NOTE] 当你创建 Azure 虚拟机时，如果在部署位置中还没有存储帐户，则会在该位置自动创建一个存储帐户。因此，没有必要按照下面的步骤来创建虚拟机磁盘的存储帐户。存储帐户名称将基于虚拟机名称。请参阅 [Azure 虚拟机文档](../virtual-machines/index.md/)以了解更多详细信息。
+> [!NOTE] 当你创建 Azure 虚拟机时，如果在部署位置中还没有存储帐户，则会在该位置自动创建一个存储帐户。因此，没有必要按照下面的步骤来创建虚拟机磁盘的存储帐户。存储帐户名称将基于虚拟机名称。请参阅 [Azure 虚拟机文档](../virtual-machines/index.md)以了解更多详细信息。
 
 ##<a name="storage-account-endpoints"></a> 存储帐户终结点
 
@@ -146,7 +146,7 @@ Azure 存储帐户提供唯一的命名空间来存储和访问你的 Azure 存�
 4. 选择你的数据磁盘，然后单击“删除磁盘”。
 5. 若要删除磁盘映像，请导航到“映像”选项卡，然后删除存储在帐户中的任何映像。
 
-有关详细信息，请参阅 [Azure 虚拟机文档](../virtual-machines/index.md/)。
+有关详细信息，请参阅 [Azure 虚拟机文档](../virtual-machines/index.md)。
 
 ## 后续步骤
 

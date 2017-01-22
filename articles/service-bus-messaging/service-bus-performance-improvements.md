@@ -46,7 +46,7 @@ AMQP 和 SBMP 都很高效，因为只要存在消息工厂，就可以保持与
 
             BrokeredMessage m1 = new BrokeredMessage(body);
             BrokeredMessage m2 = new BrokeredMessage(body);
-    
+
             Task send1 = queueClient.SendAsync(m1).ContinueWith((t) => 
               {
                 Console.WriteLine("Sent message #1");
@@ -59,13 +59,13 @@ AMQP 和 SBMP 都很高效，因为只要存在消息工厂，就可以保持与
             Console.WriteLine("All messages sent");
 
     这是异步接收操作的示例：
-    
+
             Task receive1 = queueClient.ReceiveAsync().ContinueWith(ProcessReceivedMessage);
             Task receive2 = queueClient.ReceiveAsync().ContinueWith(ProcessReceivedMessage);
-    
+
             Task.WaitAll(receive1, receive2);
             Console.WriteLine("All messages received");
-    
+
             async void ProcessReceivedMessage(Task<BrokeredMessage> t)
             {
               BrokeredMessage m = t.Result;
@@ -289,5 +289,5 @@ Express 实体可实现高吞吐量同时减少延迟的情况。使用快速实
   [ForcePersistence]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.forcepersistence.aspx
   [EnablePartitioning]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.queuedescription.enablepartitioning.aspx
   [分区消息实体]: ./service-bus-partitioning.md
-  
+
 <!---HONumber=Mooncake_1219_2016-->

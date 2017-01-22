@@ -61,11 +61,11 @@ ms.author: robb
 1. 在边栏选项卡顶部的“...”菜单中，单击“添加磁贴”：
 
     ![添加菜单](./media/insights-how-to-customize-monitoring/Insights_AddMenu.png)
-    
+
 2. 然后可以从屏幕右侧的“库”中选择图表：
 
     ![库](./media/insights-how-to-customize-monitoring/Insights_Gallery.png)
-    
+
 3. 如果看不到所需指标，则始终可以添加一个预设指标，然后“编辑”图表以显示所需指标。 
 
 ## 监视使用配额
@@ -74,7 +74,7 @@ ms.author: robb
 
 还可以在具有配额的资源的边栏选项卡上查看使用配额：
 
-   ![使用情况](./media/insights-how-to-customize-monitoring/Insights_UsageChart.png)
+    ![使用情况](./media/insights-how-to-customize-monitoring/Insights_UsageChart.png)
 
 与指标一样，可以使用 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn931963.aspx) 或 [.NET SDK](https://www.nuget.org/packages/Microsoft.Azure.Insights/) 以编程方式访问完整使用配额集。
 

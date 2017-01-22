@@ -27,7 +27,7 @@ Hive 和 Pig 非常适用于在 HDInsight 中处理数据，但有时需要使�
 * HDInsight 群集（基于 Windows）
 
 * 文本编辑器
- 
+
 ##<a name="python"></a>HDInsight 上的 Python
 
 默认情况下，Python2.7 安装在 HDInsight 3.0 和更高版本的群集上。可以将 Hive 与此版本的 Python 配合使用，以进行流式处理（使用 STDOUT/STDIN 在 Hive 和 Python 之间传递数据）。
@@ -317,7 +317,7 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 运行 hive 作业时，可能遇到如下错误：
 
     Caused by: org.apache.hadoop.hive.ql.metadata.HiveException: [Error 20001]: An error occurred while reading or writing to your custom script. It may have crashed with an error.
-    
+
 此问题可能是由 streaming.py 文件中的行尾结束符号导致的。许多 Windows 编辑器默认为使用 CRLF 作为行尾结束符号，但 Linux 应用程序通常应使用 LF。
 
 如果所用编辑器无法创建 LF 行尾结束符号，或者不确定要使用什么行尾结束符号，在将文件上传到 HDInsight 之前，请使用以下 PowerShell 语句删除 CR 字符：

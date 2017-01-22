@@ -319,7 +319,7 @@ WHERE 子句（**`WHERE <filter_condition>`**）是可选的。它指定由源�
 下表显示了 DocumentDB SQL 中任意两个 JSON 类型之间等式比较的结果。
 
 <table style = "width:300px">
-   <tbody>
+    <tbody>
       <tr>
          <td valign="top">
             <strong>Op</strong>
@@ -528,7 +528,7 @@ WHERE 子句（**`WHERE <filter_condition>`**）是可选的。它指定由源�
             <strong>OK</strong>
          </td>
       </tr>
-   </tbody>
+    </tbody>
 </table>
 
 对于其他比较运算符（如 >、>=、!=、< 和 <=），以下规则适用：
@@ -1666,20 +1666,20 @@ DocumentDB 查询提供程序执行从 LINQ 查询到 DocumentDB SQL 查询的�
 
 - 常量值 — 包含计算查询时基元数据类型的常量值。
 - 属性/数组索引表达式 — 这些表达式引用对象或数组元素的属性。
-  
+
      family.Id; 
      family.children[0].familyName; 
      family.children[0].grade; 
      family.children[n].grade; //n 是一个整数变量
 - 算术表达式 - 这些表达式包含数值和布尔值上的常用算术表达式。有关完整列表，请参阅 SQL 规范。
-  
+
      2 * family.children[0].grade; x + y;
 - 字符串比较表达式 - 这些表达式包含字符串值与某些常量字符串值的比较。
-  
+
      mother.familyName == "Smith"; 
      child.givenName == s; //s 是一个字符串变量
 - 对象/数组创建表达式 - 这些表达式返回复合值类型或匿名类型的对象，或此类对象组成的数组。可以嵌套这些值。
-  
+
      new Parent { familyName = "Smith", givenName = "Joe" }; 
      new { first = 1, second = 2 }; //具有 2 个字段的匿名类型 
      new int { 3, child.grade, 5 };
@@ -2139,7 +2139,7 @@ DocumentDB 使用存储过程和触发器，为对集合直接执行基于 JavaS
 2. [DocumentDB SQL specification（DocumentDB SQL 规范）](http://go.microsoft.com/fwlink/p/?LinkID=510612)
 3. [DocumentDB .NET samples（DocumentDB .NET 示例）](https://github.com/Azure/azure-documentdb-net)
 4. [DocumentDB Consistency Levels（DocumentDB 一致性级别）][consistency-levels]
-5. ANSI SQL 2011 [http://www.iso.org/iso/iso\_catalogue/catalogue\_tc/catalogue\_detail.htm?csnumber=53681](http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=53681)
+5. ANSI SQL 2011 [http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=53681](http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=53681)
 6. JSON [http://json.org/](http://json.org/)
 7. Javascript 规范 [http://www.ecma-international.org/publications/standards/Ecma-262.htm](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
 8. LINQ [http://msdn.microsoft.com/zh-cn/library/bb308959.aspx](http://msdn.microsoft.com/zh-cn/library/bb308959.aspx)

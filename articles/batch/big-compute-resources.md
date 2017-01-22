@@ -29,7 +29,7 @@ ms.author: danlep
 ## Azure Batch
 [Batch](https://www.azure.cn/home/features/batch/) 是一种平台服务，可让你轻松地在 Linux 和 Windows 应用程序中启用云功能并运行作业，而无需设置和管理群集与作业计划程序。使用 SDK 可将不同语言的客户端应用与 Azure 批处理集成，将数据迁移到 Azure，以及生成作业运行管道。
 
-- [文档](./index.md/)
+- [文档](./index.md)
 - [.NET](https://msdn.microsoft.com/zh-cn/library/azure/mt348682.aspx)、Python、[Node.js](http://azure.github.io/azure-sdk-for-node/azure-batch/latest/)、[Java](http://azure.github.io/azure-sdk-for-java/) 和 [REST](https://msdn.microsoft.com/zh-cn/library/azure/dn820158.aspx) API 参考
 - [Batch 管理 .NET 库](https://msdn.microsoft.com/zh-cn/library/mt463120.aspx)参考
 - 教程：[用于 .NET 的 Azure Batch 库入门](./batch-dotnet-get-started.md)和 [Batch Python 客户端入门](./batch-python-tutorial.md)
@@ -71,12 +71,12 @@ Azure 提供了一[系列 VM 大小](../virtual-machines/virtual-machines-window
 
 ## 相关的 Azure 服务
 
-- [HDInsight](../hdinsight/index.md/)
-- [虚拟机](../virtual-machines/index.md/)
-- [虚拟机规模集](../virtual-machine-scale-sets/index.md/)
-- [云服务](../cloud-services/index.md/)
-- [App Service](../app-service/index.md/)
-- [媒体服务](../media-services/index.md/)
+- [HDInsight](../hdinsight/index.md)
+- [虚拟机](../virtual-machines/index.md)
+- [虚拟机规模集](../virtual-machine-scale-sets/index.md)
+- [云服务](../cloud-services/index.md)
+- [App Service](../app-service/index.md)
+- [媒体服务](../media-services/index.md)
 
 ## 行业解决方案
 - [银行和资本市场](https://finance.azure.com/)

@@ -18,11 +18,11 @@ wacn.date: 09/30/2016
 - [Azure IaaS 用户手册 - 第三部分](./azure-Iaas-user-manual-part3.md)
 
 ##<a name="section_3"></a> 1.	Azure IaaS 相关技术
-1.	**Azure 底层是否由 System Center 和Hyper-V 构成?**
+1. **Azure 底层是否由 System Center 和Hyper-V 构成?**
 
     Azure 虽然支持 Hyper-V 的 VHD 直接上传至 Azure 云端进行管理，但是 Azure 底层技术是微软自主研发的独有技术。如果客户想构建属于自己的私有云平台，可以使用 Azure Stack，采用微软的 System Center + Windows Server 产品，构建自己的私有云平台。
 
-2.	**是否可以在 Azure 虚拟机中再创建虚拟机？**
+2. **是否可以在 Azure 虚拟机中再创建虚拟机？**
 
     Azure 数据中心由成千上万台 RACK 组成，每个 RACK 都安装了 Windows Server 2012 的操作系统，称为 Host OS，即物理服务器的操作系统。
 
@@ -32,7 +32,7 @@ wacn.date: 09/30/2016
 
     Azure 的最终用户只能接触到 Guest OS，而无法接触到 Host OS，因此用户无法在 Guest OS 中再创建虚拟机。
 
-3.	**如果 Azure 所在的服务器宕机了，Azure 虚拟机怎么恢复？**
+3. **如果 Azure 所在的服务器宕机了，Azure 虚拟机怎么恢复？**
 
     在传统 IDC 机房托管中，如果物理服务器发生了宕机，那所有的虚拟机都会宕机，需要人工或者监控软件来进行重新部署。
 
@@ -46,7 +46,7 @@ wacn.date: 09/30/2016
 
     在单台 Guest OS的 情况下，当 Guest OS 宕机时，重新部署并启动 Guest OS 需要花费一定的时间，会引起客户应用的短暂离线，所以 Azure 没有单个实例的 服务级别协议。
 
-4.	**Azure 有没有单个实例的服务级别协议?**
+4. **Azure 有没有单个实例的服务级别协议?**
 
     Azure 没有单个实例的服务级别协议。例如，客户有一个应用部署在传统 IDC 机房中，一台 AD Server，一台 Web Server，一台 SQL Server。
 
@@ -54,16 +54,16 @@ wacn.date: 09/30/2016
 
     Azure 虚拟机承诺的 99.95% 的服务级别协议是需要 2 台或者 2 台以上的 Azure 虚拟机同时运行，且所有的虚拟机都需要在同一个可用性集中。对于上面实例，用户如果想在 Azure 中实现 99.95% 的服务级别协议，需要同时部署：
 
-    -	两台 AD Server，放在同一个可用性集 A 中。
-    -	两台虚拟机部署 Web 应用程序，且 Web 应用程序所在的虚拟机需要放在另外一个可用性集 B 中。
-    -	两台虚拟机部署 SQL Server，采用 SQL Server 2012 Enterprise 提供的 Always-On 功能，实现 High Availability。且 SQL Server 所在的虚拟机需要在另外一个可用性集 C 中。
+    - 两台 AD Server，放在同一个可用性集 A 中。
+    - 两台虚拟机部署 Web 应用程序，且 Web 应用程序所在的虚拟机需要放在另外一个可用性集 B 中。
+    - 两台虚拟机部署 SQL Server，采用 SQL Server 2012 Enterprise 提供的 Always-On 功能，实现 High Availability。且 SQL Server 所在的虚拟机需要在另外一个可用性集 C 中。
 
-6.	**什么是可用性集?**
+6. **什么是可用性集?**
 
     这里有两个非常重要的概念：故障域 (Fault Domain) 和更新域 (Update Domain)。可以参考[此博客](https://blogs.technet.microsoft.com/yungchou/2013/05/14/window-azure-fault-domain-and-upgrade-domain-explained-explained-reprised/)了解详情。
 
     ![availablity_set](./media/azure-Iaas-user-manual-part1/availablity_set.png)
- 
+
     关于故障域，就如同书房有一个插线板，插线板上接了笔记本电脑、手机充电器、电视机等电器。如果这个插线板断电，那这个插线板上的所有电器都会断电。这个插线板和它上面的电器组成了一个故障域。
 
     Azure 数据中心基础设施由很多 RACK 组成，每一个 RACK 都被称为故障域。当 RACK 出现硬件故障时，在 RACK 上的服务，例如 Azure 的计算服务、存储服务等都会发生问题。
@@ -78,14 +78,14 @@ wacn.date: 09/30/2016
     - (2) Azure Fabric Controller 监控这 2 台 Azure 虚拟机。首先更新 Update Domain 0 中的虚拟机软件。更新完毕后再更新 Update Domain 1 中的虚拟机软件，一直到所有的 Azure 虚拟机中的 Web 应用程序更新完毕，这样保证在同一时刻至少有 1 台 Azure 虚拟机能够响应客户端的请求。
 
     以下是故障域 (Fault Domain) 和更新域 (Update Domain) 的截图：
- 
+
     ![availablity_set2](./media/azure-Iaas-user-manual-part1/availablity_set2.png)
 
     以下是虚拟机可用性集的截图：
-    
+
     ![availability_set3](./media/azure-Iaas-user-manual-part1/availability_set3.png)
 
-7.	**Azure 如何保证 CPU、内存、硬盘的性能?**
+7. **Azure 如何保证 CPU、内存、硬盘的性能?**
 
     传统的 Hyper-V 技术，其CPU 是共享的。比如您的 ThinkPad T430S 是 4Core/8GB，安装了 Windows Server 2012 R2 操作系统，并且使用 Hyper-V 虚拟出 3 台虚拟机。那该笔记本的物理操作系统 + 3 台虚拟机操作系统本质上都是共享 4Core CPU 的。
 
@@ -142,10 +142,10 @@ Azure 带宽虽然是共享带宽，但却随着负载均衡服务器数量的�
 ###<a name="section_4_2"></a> 2.2 Azure 虚拟网络 (Azure Virtual Network)
 Azure 虚拟网络，其主要作用有以下几点：
 
-1.	**将多台 Azure 虚拟机整合在统一网段或者子网里**
+1. **将多台 Azure 虚拟机整合在统一网段或者子网里**
 
     Azure 虚拟机有两个 IP 地址：Public IP (VIP，其实是负载均衡器的 IP 地址，近似认为是公网 IP) 和 Private IP。
-    
+
     Public IP 是公网 IP，Azure China 的公网 IP 段请参考[此处](http://www.microsoft.com/en-us/download/details.aspx?id=42064)。
 
     Private IP 是内网 IP，Azure 数据中心的基础架构非常强大，通过 Private IP 可以实现数据中心内网的快速通信。
@@ -154,7 +154,7 @@ Azure 虚拟网络，其主要作用有以下几点：
 
     一般企业级的应用，都会有多台服务器来实现复杂的业务逻辑。比如一般 B/S 应用需要 Web Server，SQL Server 等。通过 Azure 虚拟机实现 Web Server 与 SQL Server，并且放在同一个虚拟网络里，就可以实现多台 Azure 虚拟机通过 Private IP 来互相通信。
 
-2.	**固定内网 IP 地址 (Private IP)**
+2. **固定内网 IP 地址 (Private IP)**
 
     在某些情况下，需要对 Azure 虚拟机固定内网 IP 地址，比如 AD 服务器，比如 Windows Server Cluster 集群，都需要依赖固定内网 IP 地址。这时候也需要使用 Azure 虚拟网络。
 
@@ -170,13 +170,13 @@ Azure 存储服务是云端的文件存储服务，简单理解是用户可以�
 
 Azure 存储服务本身提供 99.9% 的服务级别协议，它提供三种高冗余方式:
 
-1.	**本地数据中心的三重冗余 (Local Redundant Storage, LRS)。**客户可以选择将存储服务在同一个数据中心做三重冗余，比如在上海的数据中心。任意一个保存在上海存储服务的文件，都有一个主文件和二个子副本。
+1. **本地数据中心的三重冗余 (Local Redundant Storage, LRS)。**客户可以选择将存储服务在同一个数据中心做三重冗余，比如在上海的数据中心。任意一个保存在上海存储服务的文件，都有一个主文件和二个子副本。
 
     比如客户上传了 10 GB 文件，其实 Azure 存储服务在同一个数据中心保存了 30GB 文件。但是 Azure 只会收取用户实际上传的 10GB 费用。
 
     对于 LRS 来说，事务在同一个数据中心的三重冗余同步执行。
 
-2.	**跨数据中心的三重冗余 (Geo Redundant Storage, GRS)。**Azure 在所有地区数据中心的建设都是成对的，比如北京数据中心和上海数据中心。这是因为 Auzre 充分考虑了异地冗余的能力。在北京和上海数据中心之间会有专线连接，这个专线是内网数据中心之前数据同步专用的。
+2. **跨数据中心的三重冗余 (Geo Redundant Storage, GRS)。**Azure 在所有地区数据中心的建设都是成对的，比如北京数据中心和上海数据中心。这是因为 Auzre 充分考虑了异地冗余的能力。在北京和上海数据中心之间会有专线连接，这个专线是内网数据中心之前数据同步专用的。
 
     比如用户在上海数据中心 (主要位置) 创建了存储账号，并且开启了跨数据中心同步，则上海数据中心是主节点，北京数据中心是备份节点。当用户往上海数据中心上传 10GB 文件，该文件不仅在上海数据中心做了三重冗余，在北京的数据中心 (辅助位置) 同样做了三重冗余，文件一共做了六重冗余。即使上海数据中心因为地震、战争、洪水完全被摧毁，用户的数据还是安全的保存在北京的数据中心，真正做到了万无一失。
 
@@ -200,7 +200,7 @@ Azure 存储服务本身提供 99.9% 的服务级别协议，它提供三种高�
     </tbody>
     </table>
 
-3.	**读取访问地域冗余 (Read Access – Geo Redundant Storage, RA-GRS)**
+3. **读取访问地域冗余 (Read Access – Geo Redundant Storage, RA-GRS)**
 
     如果用户在上海数据中心 (主要位置) 创建了存储账号，并且开启了 RA-GRS，事务就会异步的复制到北京的数据中心。RA-GRS 提供了对复制到北京数据中心 (辅助位置) 的 "只读" 访问权，实现对存储账户的更高读取可用性。
 
@@ -225,13 +225,13 @@ Blob 就是保存大型二进制对象，比如用来存储文件、图片、文
 
 Blob 分为两种类型：
 
-1.	Block Blob （块 Blob）。这种类型适合存储二进制文件，支持断点续传，可以最大以 4M 为一个区块单位，单一文件最大可以存储 200GB，且区块不会连续存储，可能会在不同的存储服务器分块存放。为了适应文件的上传和下载而专门进行了优化。
+1. Block Blob （块 Blob）。这种类型适合存储二进制文件，支持断点续传，可以最大以 4M 为一个区块单位，单一文件最大可以存储 200GB，且区块不会连续存储，可能会在不同的存储服务器分块存放。为了适应文件的上传和下载而专门进行了优化。
 
     Block Blob 可以通过 2 种方式创建。不超过 64MB 的 Block Blobs 可以通过调用 PutBlob 操作进行上传。大于 64M 的 Block Blobs 必须分块上传，且每块的大小不能超过 4MB。
 
     Block Blob 可以近似理解为网盘。
 
-2.	Page Blob （页 Blob)。这类存储优化了随机访问。它会在存储区中划分一个连续的区域供应用程序存放数据，可以用来存放 VHD，单一文件最大可以存储1TB。
+2. Page Blob （页 Blob)。这类存储优化了随机访问。它会在存储区中划分一个连续的区域供应用程序存放数据，可以用来存放 VHD，单一文件最大可以存储1TB。
 
 Blob 服务由 Blob 本身以及其收纳容器 (Container) 构成，容器可以视为一般本机上的文件夹。
 
@@ -261,17 +261,17 @@ blobname 表示要访问的资源名称，可以认为是一个 mp3 文件，或
 
 Container 的命名规则:
 
-1.	containername 只能是一级目录，无法在 containername 下再设置下一级别 containername；
-2.	必须以英文或数字开头，且名称内只能有英文、数字及 dash(-)；
-3.	不能以 dash(-) 开头或结尾，dash(-) 不能连续出现；
-4.	所有英文的字符必须是小写；
-5.	长度为 3-63 之间。
+1. containername 只能是一级目录，无法在 containername 下再设置下一级别 containername；
+2. 必须以英文或数字开头，且名称内只能有英文、数字及 dash(-)；
+3. 不能以 dash(-) 开头或结尾，dash(-) 不能连续出现；
+4. 所有英文的字符必须是小写；
+5. 长度为 3-63 之间。
 
 Blob 的命名规则：
 
-1.	除了 url 的保留字符以外，其他的字符组合都可以使用；
-2.	长度为 1-1024 个字符；
-3.	尽量避免以 dot(.) 或者是 forward slash(/) 结尾。否则会造成 Blob Service 误判。
+1. 除了 url 的保留字符以外，其他的字符组合都可以使用；
+2. 长度为 1-1024 个字符；
+3. 尽量避免以 dot(.) 或者是 forward slash(/) 结尾。否则会造成 Blob Service 误判。
 
 #####<a name="section_4_3_2_2"></a> 2.3.2.2 队列
 队列是一种先到先得的服务 (First-Come, First-Serve)，或者称为 FIFO (先入先出)的存储服务。队列可以是字符串或者最长 64KB 的二进制数据。
@@ -319,13 +319,13 @@ Azure 虚拟机在创建过程中，需要用户选择操作系统版本。创�
 
 Azure 官方支持的操作系统为：
 
-1.	Windows : Server 2008 R2, Server 2012, Server 2012 R2
-2.	SQL Server：SQL Server 2008 R2, SQL Server 2012 SP1, SQL Server 2014 RTM  (Web, Standard, Enterprise)
+1. Windows : Server 2008 R2, Server 2012, Server 2012 R2
+2. SQL Server：SQL Server 2008 R2, SQL Server 2012 SP1, SQL Server 2014 RTM  (Web, Standard, Enterprise)
 3.      Linux : 
 
-   (1).	Ubuntu (12.04 LTS, 12.10, 13.10, 14.04 LTS),
-   (2).	CentOS (6.5, 6.6, 7.0, 7.1), 
-   (3).	SUSE (OpenSUSE 13.3, 13.2 SUSE Linux Enterprise Server 11 SP3, Server 12)
+    (1).	Ubuntu (12.04 LTS, 12.10, 13.10, 14.04 LTS),
+    (2).	CentOS (6.5, 6.6, 7.0, 7.1), 
+    (3).	SUSE (OpenSUSE 13.3, 13.2 SUSE Linux Enterprise Server 11 SP3, Server 12)
 
 其他非 Azure 提供的虚拟机模板，比如 RedHat 或者红旗 Linux。客户可以自己在本地使用 Hyper-V 进行创建，然后上传至 Azure 云端，但是如果该虚拟机出现问题，则无法获得官方支持。
 
@@ -414,11 +414,11 @@ D 系列虚拟机的类型如下：
 
 相比 A 系列的 Azure 虚拟机，D 系列的优势在于：
 
-1.	**单台 VM 的 CPU Core 更多**
+1. **单台 VM 的 CPU Core 更多**
 
     相比 A 系列单台 VM 最大 8Core/56GB RAM 的配置，D 系列虚拟机单台最大的配置为 16Core/112GB RAM
 
-2.	**D 系列的 CPU 性能比 A 系列提升约 60%**
+2. **D 系列的 CPU 性能比 A 系列提升约 60%**
 
     Azure A 系列的虚拟机，Intel E5 的 CPU 是经过调试的，性能是人为降低的。
 
@@ -428,13 +428,13 @@ D 系列虚拟机的类型如下：
 
     D 系列虚拟机，是 100% 体现 Intel E5 的处理能力，CPU 性能比 A 系列提升 60%。
 
-3.	**新增本地临时 SSD 存储**
+3. **新增本地临时 SSD 存储**
 
     注意是临时存储，这个存储在 Windows 里显示为 D 盘，在 Linux 系统里是 /dev/sdb1
 
     优点: IOPS 高；<br/>缺点：非持久化存储，文件会有丢失的风险，不能保留重要的文件。
 
-4.	**更大的本地临时磁盘**
+4. **更大的本地临时磁盘**
 
     如上面表格所示，本地的临时磁盘最大为 800G。
 
@@ -502,9 +502,9 @@ D 系列虚拟机的类型如下：
 
 基本类型的虚拟机有以下特点：
 
-1.	减少了部分功能：新的基本类型的虚拟机不包含负载均衡和自动扩展功能；
-2.	比较适合不需要上述功能的单实例的应用程序，比如：开发用虚拟机、测试服务器等等；
-3.	价格比标准类型的虚拟机便宜。
+1. 减少了部分功能：新的基本类型的虚拟机不包含负载均衡和自动扩展功能；
+2. 比较适合不需要上述功能的单实例的应用程序，比如：开发用虚拟机、测试服务器等等；
+3. 价格比标准类型的虚拟机便宜。
 
 如果用户需要使用多台虚拟机，设置负载均衡器，请使用标准类型的虚拟机。
 
@@ -539,9 +539,9 @@ D 系列虚拟机的类型如下：
 
 例如某客户使用的 A2 虚拟机 (2Core/3.5GB)，可以挂载 4 块磁盘 (按上面的表格，每块磁盘最大 1TB，总计 4TB)。则收取的存储总费用有以下几点:
 
-1.	虚拟机操作系统的文件，对于 Windows 平台，C 盘系统盘容量 127GB，操作系统实际使用 30GB。只收取实际使用的 30GB 存储。这部分费用是必须支付的，因为虚拟机必须有操作系统文件才可以运行。
-2.	挂载的 4 块磁盘，每块磁盘最大容量为 1TB，总计为 4TB。假设客户只使用 4TB 其中的 500GB。则只收取客户实际使用的 500GB存储。
-3.	每月总的存储费用 = C 盘实际使用的存储的费用 (10GB)+ 挂载磁盘的实际存储费用 (500G)，即 510GB * 每 GB/月费用
+1. 虚拟机操作系统的文件，对于 Windows 平台，C 盘系统盘容量 127GB，操作系统实际使用 30GB。只收取实际使用的 30GB 存储。这部分费用是必须支付的，因为虚拟机必须有操作系统文件才可以运行。
+2. 挂载的 4 块磁盘，每块磁盘最大容量为 1TB，总计为 4TB。假设客户只使用 4TB 其中的 500GB。则只收取客户实际使用的 500GB存储。
+3. 每月总的存储费用 = C 盘实际使用的存储的费用 (10GB)+ 挂载磁盘的实际存储费用 (500G)，即 510GB * 每 GB/月费用
 
 #####<a name="section_4_5_2_2"></a> 2.5.2.2 高级存储
 对于 DS 系列的虚拟机来说，使用的是高级存储。
@@ -549,12 +549,12 @@ D 系列虚拟机的类型如下：
 ####<a name="section_4_5_3"></a> 2.5.3 虚拟机成本
 虚拟机按分钟计费，计费的单价为每小时。从单价来说，价格如下：
 
-1.	Linux 操作系统最便宜
-2.	Windows Server 操作系统比 Linux 操作系统要贵一些
+1. Linux 操作系统最便宜
+2. Windows Server 操作系统比 Linux 操作系统要贵一些
 
     在同样操作系统情况下，虚拟机计算能力越强，其小时价格越贵。比如虚拟机类型为 A7 一定比 A1 贵。（具体的单价请联系 Azure 销售代表或参考 Azure [官方文档]）(/pricing/overview)。
 
-3.	预装了 SQL Server 数据库的 Windows Server 虚拟机最贵 (因为需要 Windows Server License + SQL Server License)，Azure 把一次性购买 SQL Server License 的费用平摊到 Azure 计算的小时费用。
+3. 预装了 SQL Server 数据库的 Windows Server 虚拟机最贵 (因为需要 Windows Server License + SQL Server License)，Azure 把一次性购买 SQL Server License 的费用平摊到 Azure 计算的小时费用。
 
     * a)	根据 SQL Server 数据库的不同版本，价格依次递增 (Web版, 标准版, 企业版)，企业版价格最贵。
     * b)	预装了 SQL Server 2012 数据库的 Windows Server 虚拟机价格因素由以下几方面构成：
@@ -574,8 +574,8 @@ D 系列虚拟机的类型如下：
 ####<a name="section_4_5_4"></a> 2.5.4 流量成本
 数据流量包括上行/入站流量 (从客户端到 Azure 公有云) 和下行/出站流量 (从 Azure 公有云到客户端) 。对于数据流量，针对每个客户的付费情况，是不同的。
 
-1.	对于企业级用户 (OSPA)，Azure 每个月提供 20TB 的免费入站数据流量 (所有订阅一共 20TB)。而对于入站数据流量的使用量超过 20TB 的部分，以及使用的所有出站数据流量，收取的费用仅仅是 0.67RMB/GB，上行和下行的费率一样。
-2.	对于在线直付客户 (OSSA)，Azure 每个月提供 1TB 的免费入站数据流量。而对于入站数据流量的使用量超过 1TB 的部分，以及使用的所有出站数据流量，收取的费用仅仅是 0.67RMB/GB，上行和下行的费率一样。
+1. 对于企业级用户 (OSPA)，Azure 每个月提供 20TB 的免费入站数据流量 (所有订阅一共 20TB)。而对于入站数据流量的使用量超过 20TB 的部分，以及使用的所有出站数据流量，收取的费用仅仅是 0.67RMB/GB，上行和下行的费率一样。
+2. 对于在线直付客户 (OSSA)，Azure 每个月提供 1TB 的免费入站数据流量。而对于入站数据流量的使用量超过 1TB 的部分，以及使用的所有出站数据流量，收取的费用仅仅是 0.67RMB/GB，上行和下行的费率一样。
 
 ####<a name="section_4_5_5"></a> 2.5.5 存储事务
 读、写云端存储是需要收费的，比如虚拟机本地的 C 盘，外挂的 E 盘，F 盘，是需要支付存储事务的费用的。针对每个客户，我们每个月提供 100 亿次免费的存储事务。超过 100 亿次的部分，每 10 万个存储事务为 2.2 元。存储事务包括对存储区的读操作和写操作。这部分的费用非常小，可以忽略不计。

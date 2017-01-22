@@ -26,7 +26,7 @@ ms.author: tdykstra
 本指南提供了 C# 代码示例，用于演示如何使用 [WebJobs SDK](./websites-dotnet-webjobs-sdk.md) 版本 1.x 读取和写入 Azure 存储表。
 
 本指南假设你了解[如何使用指向存储帐户的连接字符串在 Visual Studio 中创建 WebJob 项目](./websites-dotnet-webjobs-sdk-get-started.md)或创建[多个存储帐户](https://github.com/Azure/azure-webjobs-sdk/blob/master/test/Microsoft.Azure.WebJobs.Host.EndToEndTests/MultipleStorageAccountsEndToEndTests.cs)。
-        
+
 一些代码段显示了[手动调用](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#manual)（即：不是使用触发器属性之一调用）的函数中使用的 `Table` 属性。
 
 ## <a id="ingress"></a>如何向表中添加实体
@@ -85,7 +85,7 @@ ms.author: tdykstra
 若要读取表，请将 `Table` 属性和 `IQueryable<T>` 参数一起使用，其中类型 `T` 派生自 `TableEntity` 或 实现 `ITableEntity`。
 
 下面的代码示例读取并记录 `Ingress` 表中所有行：
- 
+
         public static void ReadTable(
             [Table("Ingress")] IQueryable<Person> tableBinding,
             TextWriter logger)
@@ -128,7 +128,7 @@ ms.author: tdykstra
 你还可以将 `Table` 属性和 `CloudTable` 对象一起使用，以便能够更灵活地处理表。
 
 下面的代码示例使用 `CloudTable` 对象将单个实体添加到 *Ingress* 表中。
- 
+
         public static void UseStorageAPI(
             [Table("Ingress")] CloudTable tableBinding,
             TextWriter logger)
@@ -163,5 +163,5 @@ ms.author: tdykstra
 ## <a id="nextsteps"></a>后续步骤
 
 本指南提供的代码示例演示了如何处理常见方案以操作 Azure 表。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 推荐资源](./websites-webjobs-resources.md)。
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

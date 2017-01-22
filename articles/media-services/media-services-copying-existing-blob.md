@@ -41,7 +41,7 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
 1. 使用 Nuget 添加对媒体服务相关 DLL 的引用。在 Visual Studio 主菜单中，选择“工具”->“库程序包管理器”->“程序包管理器控制台”。在控制台窗口中，键入 Install-Package windowsazure.mediaservices，然后按 Enter。
 1. 添加此项目所需的其他引用：System.Configuration。
 1. 将默认添加到 Programs.cs 文件中的 using 语句替换为以下语句：
-        
+
         using System;
         using System.Linq;
         using System.Configuration;
@@ -82,7 +82,7 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
 
 1. 由于在本示例中我们要复制平滑流文件，因此示例演示了如何将 .ism 文件设置为主文件。例如，如果我们复制了一个 .mp4 文件，则该 mp4 文件将设置为主文件。
 1. 为与此资产关联的 OnDemandOrigin 定位符创建平滑流 URL。
-            
+
         class Program
         {
             // Read values from the App.config file. 
@@ -92,7 +92,7 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
             static string _storageAccountKey = ConfigurationManager.AppSettings["MediaServicesStorageAccountKey"];
             static string _externalStorageAccountName = ConfigurationManager.AppSettings["ExternalStorageAccountName"];
             static string _externalStorageAccountKey = ConfigurationManager.AppSettings["ExternalStorageAccountKey"];
-        
+
             private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
 
             // Azure China uses a different API server and a different ACS Base Address from the Global.
@@ -104,10 +104,10 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
 
             private static MediaServicesCredentials _cachedCredentials = null;
             private static CloudMediaContext _context = null;
-        
+
             private static CloudStorageAccount _sourceStorageAccount = null;
             private static CloudStorageAccount _destinationStorageAccount = null;
-        
+
             static void Main(string[] args)
             {
                 _cachedCredentials = new MediaServicesCredentials(
@@ -121,7 +121,7 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
 
                 // Use the cached credentials to create CloudMediaContext.
                 _context = new CloudMediaContext(_apiServer, _cachedCredentials);
-        
+
                 // In this example the storage account from which we copy blobs is not 
                 // associated with the Media Services account into which we copy blobs.
                 // But the same code will work for coping blobs from a storage account that is 
@@ -132,29 +132,29 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
                 StorageCredentials externalStorageCredentials =
                     new StorageCredentials(_externalStorageAccountName, _externalStorageAccountKey);
                 _sourceStorageAccount = new CloudStorageAccount(externalStorageCredentials, _chinaEndpointSuffix, true);
-        
+
                 //Get a reference to the storage account that is associated with a Media Services account. 
                 StorageCredentials mediaServicesStorageCredentials =
                     new StorageCredentials(_storageAccountName, _storageAccountKey);
                 _destinationStorageAccount = new CloudStorageAccount(mediaServicesStorageCredentials, _chinaEndpointSuffix, false);
-        
+
                 // Upload Smooth Streaming files into a storage account.
                 string localMediaDir = @"C:\supportFiles\streamingfiles";
                 CloudBlobContainer blobContainer =
                     UploadContentToStorageAccount(localMediaDir);
-        
+
                 // Create a new asset and copy the smooth streaming files into 
                 // the container that is associated with the asset.
                 IAsset asset = CreateAssetFromExistingBlobs(blobContainer);
-        
+
                 // Get the streaming URL for the smooth streaming files 
                 // that were copied into the asset.   
                 string urlForClientStreaming = CreateStreamingLocator(asset);
                 Console.WriteLine("Smooth Streaming URL: " + urlForClientStreaming);
-        
+
                 Console.ReadLine();
             }
-        
+
             /// <summary>
             /// Uploads content from a local directory into the specified storage account.
             /// In this example the storage account is not associated with the Media Services account.
@@ -165,21 +165,21 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
             {
                 CloudBlobClient externalCloudBlobClient = _sourceStorageAccount.CreateCloudBlobClient();
                 CloudBlobContainer externalMediaBlobContainer = externalCloudBlobClient.GetContainerReference("streamingfiles");
-        
+
                 externalMediaBlobContainer.CreateIfNotExists();
-        
+
                 // Upload files to the blob container.  
                 DirectoryInfo uploadDirectory = new DirectoryInfo(localPath);
                 foreach (var file in uploadDirectory.EnumerateFiles())
                 {
                     CloudBlockBlob blob = externalMediaBlobContainer.GetBlockBlobReference(file.Name);
-        
+
                     blob.UploadFromFile(file.FullName, FileMode.Open);
                 }
-        
+
                 return externalMediaBlobContainer;
             }
-        
+
             /// <summary>
             /// Creates a new asset and copies blobs from the specifed storage account.
             /// </summary>
@@ -189,17 +189,17 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
             {
                 // Create a new asset. 
                     IAsset asset = _context.Assets.Create("NewAsset_" + Guid.NewGuid(), AssetCreationOptions.None);
-        
+
                 IAccessPolicy writePolicy = _context.AccessPolicies.Create("writePolicy", TimeSpan.FromHours(24), AccessPermissions.Write);
                 ILocator destinationLocator = _context.Locators.CreateLocator(LocatorType.Sas, asset, writePolicy);
-        
+
                 CloudBlobClient destBlobStorage = _destinationStorageAccount.CreateCloudBlobClient();
-        
+
                 // Get the asset container URI and Blob copy from mediaContainer to assetContainer. 
                 string destinationContainerName = (new Uri(destinationLocator.Path)).Segments[1];
-        
+
                 CloudBlobContainer assetContainer = destBlobStorage.GetContainerReference(destinationContainerName);
-        
+
                 if (assetContainer.CreateIfNotExists())
                 {
                     assetContainer.SetPermissions(new BlobContainerPermissions
@@ -207,7 +207,7 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
                         PublicAccess = BlobContainerPublicAccessType.Blob
                     });
                 }
-        
+
                 var blobList = mediaBlobContainer.ListBlobs();
                 foreach (var sourceBlob in blobList)
                 {
@@ -216,20 +216,20 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
                     assetFile.ContentFileSize = (sourceBlob as ICloudBlob).Properties.Length;
                     assetFile.Update();
                 }
-        
+
                     asset.Update();
-    
+
                     destinationLocator.Delete();
                     writePolicy.Delete();
-    
+
                     // Since we copied a set of Smooth Streaming files, 
                     // set the .ism file to be the primary file. 
                     // If we, for example, copied an .mp4, then the mp4 would be the primary file. 
                     SetISMFileAsPrimary(asset);
-    
+
                     return asset;
                 }
-    
+
                 /// <summary>
                 /// Creates the OnDemandOrigin locator in order to get the streaming URL.
                 /// </summary>
@@ -239,20 +239,20 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
                 {
                     var ismAssetFile = asset.AssetFiles.ToList().
                         Where(f => f.Name.EndsWith(".ism", StringComparison.OrdinalIgnoreCase)).First();
-    
+
                     // Create a 30-day readonly access policy. 
                     IAccessPolicy policy = _context.AccessPolicies.Create("Streaming policy",
                         TimeSpan.FromDays(30),
                         AccessPermissions.Read);
-    
+
                     // Create a locator to the streaming content on an origin. 
                     ILocator originLocator = _context.Locators.CreateLocator(LocatorType.OnDemandOrigin, asset,
                         policy,
                         DateTime.UtcNow.AddMinutes(-5));
-    
+
                     return originLocator.Path + ismAssetFile.Name + "/manifest";
                 }
-    
+
                 /// <summary>
                 /// Copies the specified blob into the specified container.
                 /// </summary>
@@ -265,22 +265,22 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
                         Permissions = SharedAccessBlobPermissions.Read,
                         SharedAccessExpiryTime = DateTime.UtcNow.AddHours(24)
                     });
-    
+
                     ICloudBlob destinationBlob = destinationContainer.GetBlockBlobReference(sourceBlob.Name);
-    
+
                     if (destinationBlob.Exists())
                     {
                         Console.WriteLine(string.Format("Destination blob '{0}' already exists. Skipping.", destinationBlob.Uri));
                     }
                     else
                     {
-    
+
                         // Display the size of the source blob.
                         Console.WriteLine(sourceBlob.Properties.Length);
-    
+
                         Console.WriteLine(string.Format("Copy blob '{0}' to '{1}'", sourceBlob.Uri, destinationBlob.Uri));
                         destinationBlob.StartCopyFromBlob(new Uri(sourceBlob.Uri.AbsoluteUri + signature));
-    
+
                         while (true)
                         {
                             // The StartCopyFromBlob is an async operation, 
@@ -294,24 +294,24 @@ Blob 可以存在于与媒体服务帐户关联的存储帐户中，也可以存
                             //It's still not completed. So wait for some time.
                             System.Threading.Thread.Sleep(1000);
                         }
-    
+
                         // Display the size of the destination blob.
                         Console.WriteLine(destinationBlob.Properties.Length);
-    
+
                     }
                 }
-    
+
                 /// <summary>
                 /// Sets a file with the .ism extension as a primary file.
                 /// </summary>
                 /// <param name="asset">The asset that contains the smooth streaming files.</param>
                 static private void SetISMFileAsPrimary(IAsset asset)
                 {
-    
+
                     //If you expect the asset to contain the .ism asset file, set the .ism file as the primary file.
                     var ismAssetFiles = asset.AssetFiles.ToList().
                         Where(f => f.Name.EndsWith(".ism", StringComparison.OrdinalIgnoreCase)).ToArray();
-    
+
                     // The following code assigns the first .ism file as the primary file in the asset.
                     // An asset should have one .ism file.  
                     ismAssetFiles.First().IsPrimary = true;

@@ -25,35 +25,35 @@ wacn.date: 12/19/2016
 
 ## 添加 Node.js 函数
 1. 通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
-   
+
         cd Lesson4
         code .
 
 2. 打开 `app.js` 文件，然后在末尾添加以下函数：
-   
+
         function turnOnLED() {
           wpi.digitalWrite(CONFIG_PIN, 1);
         }
-       
+
         function turnOffLED() {
           wpi.digitalWrite(CONFIG_PIN, 0);
         }
-   
+
     ![增加了函数的 App.js 文件](./media/iot-hub-raspberry-pi-lessons/lesson4/updated_app_js.png)  
 
 3. 在 `receiveMessageCallback` 函数的 switch-case 块的默认条件之前添加以下条件：
-   
+
         case 'on':
           turnOnLED();
           break;
         case 'off':
           turnOffLED();
           break;
-   
+
     现在已将示例应用程序配置为通过消息响应更多指令。“on”指令打开 LED，“off”指令关闭 LED。
-    
+
 4. 打开 gulpfile.js 文件，然后在函数 `sendMessage` 之前添加新函数：
-   
+
         var buildCustomMessage = function (messageId) {
           if ((messageId & 1) && (messageId < MAX_MESSAGE_COUNT)) {
             return new Message(JSON.stringify({ command: 'on', messageId: messageId }));
@@ -63,11 +63,11 @@ wacn.date: 12/19/2016
             return new Message(JSON.stringify({ command: 'stop', messageId: messageId }));
           }
         }
-   
+
     ![增加了函数的 Gulpfile.js 文件](./media/iot-hub-raspberry-pi-lessons/lesson4/updated_gulpfile.png)  
 
 5. 在 `sendMessage` 函数中，将 `var message = buildMessage(sentMessageCount);` 行替换为新行，如以下代码片段所示：
-   
+
         var message = buildCustomMessage(sentMessageCount);
 
 6. 保存所有更改。

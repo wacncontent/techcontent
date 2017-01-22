@@ -83,7 +83,7 @@ ms.author: cephalin
 ## 更多资源 ##
 
 -   [为 Azure App Service 中的 Web 应用设置过渡环境](./web-sites-staged-publishing.md)
--	[通过可预测的方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)
+- [通过可预测的方式在 Azure 中部署复杂应用程序](./app-service-deploy-complex-application-predictably.md)
 -   [使用 Azure App Service 进行敏捷软件开发](./app-service-agile-software-development.md)
--	[对 Web 应用有效使用 DevOps 环境](./app-service-web-staged-publishing-realworld-scenarios.md)
+- [对 Web 应用有效使用 DevOps 环境](./app-service-web-staged-publishing-realworld-scenarios.md)
 <!---HONumber=Mooncake_0328_2016-->

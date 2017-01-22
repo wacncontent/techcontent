@@ -13,8 +13,8 @@ ms.tgt_pltfrm: android
 ms.devlang: java
 ms.topic: article
 ms.date: 09/16/2016
-wacn.date: 10/25/2016
 ms.author: brandwe
+wacn.date: 01/19/2017
 ---
 
 # 如何使用 ADAL 在 Android 上启用跨应用 SSO
@@ -123,7 +123,7 @@ Microsoft 提供了为来自不同供应商的应用程序之间过渡凭据允�
                   |   Storage   |
                   |             |
                   +-------------+
-    
+
 了解这些背景信息后，你应该可以更好地理解 SSO 并使用 Microsoft 标识平台和 SDK 在应用程序中实现它。
 
 ## 使用 ADAL 启用跨应用 SSO
@@ -178,7 +178,7 @@ App3 重定向 URI：`msauth://com.example.userapp2/Pt85PxIyvbLkbKUtBI%2SitkW%2F
                           |  App 3 Redirect URI               |
                           |                                   |
                           +-----------------------------------+
-    
+
 *请注意，下面介绍了这些重定向 URI 的格式。你可以使用任何重定向 URI，除非你想要支持中转站，在这种情况下，它们必须如上所示*
 
 #### 步骤 2：在 Android 中配置共享存储

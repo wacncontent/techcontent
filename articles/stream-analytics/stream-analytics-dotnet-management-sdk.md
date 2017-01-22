@@ -45,7 +45,7 @@ Azure 流分析是一种完全托管的服务，可以在云中通过流式数�
         # Create an Azure resource group
         New-AzureResourceGroup -Name <YOUR RESOURCE GROUP NAME> -Location <LOCATION>
 
--	设置要使用的输入源和输出目标。有关进一步的说明，请参阅[添加输入](./stream-analytics-add-inputs.md)以设置示例输入，参阅[添加输出](./stream-analytics-add-outputs.md)以设置示例输出。
+- 设置要使用的输入源和输出目标。有关进一步的说明，请参阅[添加输入](./stream-analytics-add-inputs.md)以设置示例输入，参阅[添加输出](./stream-analytics-add-outputs.md)以设置示例输出。
 
 ## 设置项目
 
@@ -84,7 +84,7 @@ Azure 流分析是一种完全托管的服务，可以在云中通过流式数�
         using Microsoft.Azure.Management.StreamAnalytics.Models;
         using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
-6.	添加一个身份验证帮助器方法：
+6. 添加一个身份验证帮助器方法：
 
         public static string GetAuthorizationHeader()
         {
@@ -337,7 +337,7 @@ Azure 流分析是一种完全托管的服务，可以在云中通过流式数�
 
 <!--Link references-->
 
-[azure.blob.storage]: ../storage/index.md/
+[azure.blob.storage]: ../storage/index.md
 [azure.blob.storage.use]: ../storage/storage-dotnet-how-to-use-blobs.md
 
 [azure.event.hubs]: https://www.azure.cn/home/features/event-hubs/

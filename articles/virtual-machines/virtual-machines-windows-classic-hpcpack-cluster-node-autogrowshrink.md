@@ -103,7 +103,7 @@ ms.author: danlep
   从 HPC Pack 2012 R2 Update 3 开始支持此参数。
   >
 * **ExcludeNodeGroups** - 指定的节点组中的节点不会自动扩展和收缩。
-  
+
   > [!NOTE]
   从 HPC Pack 2016 开始支持此参数。
   >

@@ -84,7 +84,7 @@ ms.author: donnam
 
             private async Task CreateTable()
             {
-            
+
             await InitLocalStoreAsync();
 
             // Get the Mobile Service Table instance to use

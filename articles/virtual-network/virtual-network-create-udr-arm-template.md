@@ -124,7 +124,7 @@ ms.author: jdial
             -TemplateParameterUri https://raw.githubusercontent.com/telmosampaio/azure-templates/master/IaaS-NSG-UDR/azuredeploy.parameters.json
 
     预期输出：
-   
+
         ResourceGroupName : TestRG
         Location          : chinanorth
         ProvisioningState : Succeeded
@@ -133,7 +133,7 @@ ms.author: jdial
                             Actions  NotActions
                             =======  ==========
                             *                  
-   
+
         Resources         : 
                             Name                Type                                     Location
                             ==================  =======================================  ========
@@ -201,7 +201,7 @@ ms.author: jdial
         azure group create -n TestRG -l chinanorth --template-uri 'https://raw.githubusercontent.com/telmosampaio/azure-templates/master/IaaS-NSG-UDR/azuredeploy.json' -e 'c:\udr\azuredeploy.parameters.json'
 
     预期输出：
-   
+
         info:    Executing command group create
         info:    Getting resource group TestRG
         info:    Updating resource group TestRG

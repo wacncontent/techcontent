@@ -157,18 +157,18 @@ VM 必须完全关闭才能干净迁移。在迁移完成之前将会存在停�
 3. 使用以下命令从“Source”将 VHD 文件复制到“Destination”。
 
     AzCopy /Source: <source> /SourceKey: <source-account-key> /Dest: <destination> /DestKey: <dest-account-key> /BlobType:page /Pattern: <file-name>
-    
+
     示例：
 
     AzCopy /Source:https://sourceaccount.blob.core.chinacloudapi.cn/mycontainer1 /SourceKey:key1 /Dest:https://destaccount.blob.core.chinacloudapi.cn/mycontainer2 /DestKey:key2 /Pattern:abc.vhd
-    
+
     下面是 AzCopy 命令中使用的参数的说明：
 
-   * **/Source: *&lt;source&gt;***： 包含 VHD 的文件夹或存储容器 URL 的位置。
-   * **/SourceKey: *&lt;source-account-key&gt;***：源存储帐户的存储帐户密钥。
-   * **/Dest: *&lt;destination&gt;***：要将 VHD 复制到的存储容器 URL。
-   * **/DestKey: *&lt;dest-account-key&gt;***：目标存储帐户的存储帐户密钥。
-   * **/Pattern: *&lt;file-name&gt;***：指定要复制的 VHD 文件名。
+    * **/Source: *&lt;source&gt;***： 包含 VHD 的文件夹或存储容器 URL 的位置。
+    * **/SourceKey: *&lt;source-account-key&gt;***：源存储帐户的存储帐户密钥。
+    * **/Dest: *&lt;destination&gt;***：要将 VHD 复制到的存储容器 URL。
+    * **/DestKey: *&lt;dest-account-key&gt;***：目标存储帐户的存储帐户密钥。
+    * **/Pattern: *&lt;file-name&gt;***：指定要复制的 VHD 文件名。
 
 有关使用 AzCopy 工具的详细信息，请参阅[使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)。
 
@@ -244,12 +244,12 @@ VM 必须完全关闭才能干净迁移。在迁移完成之前将会存在停�
 
     下面是 AzCopy 命令中使用的参数的说明：
 
-   * **/Source: *&lt;source&gt;***：包含 VHD 的文件夹或存储容器 URL 的位置。
-   * **/SourceKey: *&lt;source-account-key&gt;***：源存储帐户的存储帐户密钥。
-   * **/Dest: *&lt;destination&gt;***：要将 VHD 复制到的存储容器 URL。
-   * **/DestKey: *&lt;dest-account-key&gt;***：目标存储帐户的存储帐户密钥。
-   * **/BlobType: page**：指定目标是页 Blob。
-   * **/Pattern: *&lt;file-name&gt;***：指定要复制的 VHD 文件名。
+    * **/Source: *&lt;source&gt;***：包含 VHD 的文件夹或存储容器 URL 的位置。
+    * **/SourceKey: *&lt;source-account-key&gt;***：源存储帐户的存储帐户密钥。
+    * **/Dest: *&lt;destination&gt;***：要将 VHD 复制到的存储容器 URL。
+    * **/DestKey: *&lt;dest-account-key&gt;***：目标存储帐户的存储帐户密钥。
+    * **/BlobType: page**：指定目标是页 Blob。
+    * **/Pattern: *&lt;file-name&gt;***：指定要复制的 VHD 文件名。
 
 有关使用 AzCopy 工具的详细信息，请参阅[使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)。
 
@@ -690,8 +690,8 @@ VM 必须完全关闭才能干净迁移。在迁移完成之前将会存在停�
 
 另请参阅以下资源，深入了解 Azure 存储和 Azure 虚拟机：
 
-- [Azure 存储](./index.md/)
-- [Azure 虚拟机](../virtual-machines/index.md/)
+- [Azure 存储](./index.md)
+- [Azure 虚拟机](../virtual-machines/index.md)
 - [高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](./storage-premium-storage.md)
 
 [1]: ./media/storage-migration-to-premium-storage/migration-to-premium-storage-1.png

@@ -35,7 +35,7 @@ ms.author: cynthn
 ## 环境设置
 
 [免费帐户](https://www.azure.cn/pricing/1rmb-trial/)
- 
+
 [安装 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)
 
 [安装 Azure CLI](../xplat-cli-install.md)
@@ -77,7 +77,7 @@ ms.author: cynthn
 [使用 Azure PowerShell 管理虚拟机](./virtual-machines-windows-classic-manage-psh.md)
 
 [将经典 VNet 连接到新 VNet](../vpn-gateway/vpn-gateway-connect-different-deployment-models-portal.md)
-    
+
 [关于虚拟机代理和扩展](./virtual-machines-windows-classic-agents-and-extensions.md)
 
 [管理虚拟机扩展](./virtual-machines-windows-classic-manage-extensions.md)
@@ -93,7 +93,7 @@ ms.author: cynthn
 [如何为 Windows VM 重置密码或远程桌面服务](./virtual-machines-windows-reset-rdp.md)
 
 [关于虚拟机扩展和功能](./virtual-machines-windows-extensions-features.md)
-    
+
 [如何在 Windows VM 上安装和配置 Trend Micro Deep Security 即服务](./virtual-machines-windows-classic-install-trend.md)
 
 [如何在经典部署模型中为虚拟机配置可用性集](./virtual-machines-windows-classic-configure-availability.md)
@@ -103,7 +103,7 @@ ms.author: cynthn
 ## 存储
 
 [关于 Azure 虚拟机的磁盘和 VHD](./virtual-machines-windows-about-disks-vhds.md)
-    
+
 [如何将数据磁盘附加到经典 Windows 虚拟机](./virtual-machines-windows-classic-attach-disk.md)
 
 [如何从经典 Windows 虚拟机中分离数据磁盘](./virtual-machines-windows-classic-detach-disk.md)
@@ -115,7 +115,7 @@ ms.author: cynthn
 [虚拟网络概述](../virtual-network/virtual-networks-overview.md)
 
 [将使用经典部署模型创建虚拟机连接到虚拟网络或云服务](./virtual-machines-windows-classic-connect-vms.md)
-    
+
 [使用 Azure PowerShell 管理 NSG](../virtual-network/virtual-networks-create-nsg-classic-ps.md)
 
 [创建负载均衡器](../load-balancer/load-balancer-get-started-internet-classic-portal.md)
@@ -129,7 +129,7 @@ ms.author: cynthn
 [如何在虚拟机上运行 Java 中的计算密集型任务](./virtual-machines-windows-classic-java-run-compute-intensive-task.md)
 
 [Windows Server VM 上的 Django Hello World Web 应用程序](./virtual-machines-windows-classic-python-django-web-app.md)
-        
+
 ## 工作负荷
 
 [HPC Pack](./virtual-machines-windows-hpcpack-cluster-options.md)

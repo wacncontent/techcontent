@@ -185,7 +185,7 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
     using System.Threading.Tasks;
     using System.Data;
     using System.Data.SqlClient;
-    
+
     namespace AlwaysEncryptedConsoleApp
     {
     class Program
@@ -456,7 +456,7 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 
 可以看到，已加密的列不包含任何纯文本数据。
 
-   ![新建控制台应用程序](./media/sql-database-always-encrypted/ssms-encrypted.png)
+    ![新建控制台应用程序](./media/sql-database-always-encrypted/ssms-encrypted.png)
 
 若要使用 SSMS 来访问纯文本数据，可将 **Column Encryption Setting=enabled** 参数添加到连接中。
 

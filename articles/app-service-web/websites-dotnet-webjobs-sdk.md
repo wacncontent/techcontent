@@ -30,7 +30,7 @@ ms.author: tdykstra
 WebJobs SDK 包括以下组件：
 
 * **NuGet 程序包**。添加到 Visual Studio 控制台应用程序项目的 NuGet 包可提供一个框架，代码可通过使用 WebJobs SDK 属性修饰方法使用此框架。
-  
+
 * **仪表板**。Azure 应用服务中包含 WebJobs SDK 的一部分，它可针对使用 NuGet 程序包的程序提供丰富的监视和诊断功能。无需编写代码即可使用这些监视和诊断功能。
 
 ## <a id="scenarios"></a>方案
@@ -177,5 +177,5 @@ WebJobs SDK 的触发器和绑定器功能可大幅简化编写代码。处理�
 有关 WebJobs SDK 的详细信息，请参阅[Azure WebJobs 推荐资源](./websites-webjobs-resources.md)。
 
 有关 WebJobs SDK 的最新增强功能的信息，请参阅[发行说明](https://github.com/Azure/azure-webjobs-sdk/wiki/Release-Notes)。
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

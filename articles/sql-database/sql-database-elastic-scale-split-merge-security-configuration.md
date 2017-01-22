@@ -33,7 +33,7 @@ ms.author: torsteng
 可从公共证书颁发机构 (CA) 或 [Windows 证书服务](http://msdn.microsoft.com/zh-cn/library/windows/desktop/aa376539.aspx)中获取证书。这些方法是获取证书的首选方法。
 
 如果这些选项不可用，你可以生成**自签名证书**。
- 
+
 ## 用于生成证书的工具
 
 * [makecert.exe](http://msdn.microsoft.com/zh-cn/library/bfsktky3.aspx)
@@ -465,7 +465,7 @@ ms.author: torsteng
 6.     单击“浏览”。
 7.     选择所需的存储。
 8.     单击“完成”。
-       
+
     * 如果已选中“受信任的根证书颁发机构”存储，请单击“是”。
 9.     在所有对话框窗口上单击“确定”。
 
@@ -482,7 +482,7 @@ ms.author: torsteng
 7. 完成操作后，从列表中的新条目复制证书指纹。
 
 ## 其他安全注意事项
- 
+
 使用 HTTPS 终结点时，本文档中介绍的 SSL 设置将对服务及其客户端之间的通信进行加密。这一点很重要，因为该通信中包含了数据库访问凭据以及其他可能的敏感信息。但是，请注意，该服务会将内部状态（包括凭据）保存在其内部表中，该表位于你在 Azure 订阅中为元数据存储提供的 Azure SQL 数据库中。在服务配置文件（.CSCFG 文件）中，该数据库已定义为以下设置的一部分：
 
     <Setting name="ElasticScaleMetadata" value="Server=…" />

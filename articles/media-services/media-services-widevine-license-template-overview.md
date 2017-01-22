@@ -120,7 +120,7 @@ override\_provider\_client\_token | 布尔值。true 或 false |如果为 false 
     public class WidevineMessage
     {
         public WidevineMessage();
-    
+
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public AllowedTrackTypes? allowed_track_types { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]

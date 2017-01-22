@@ -1287,7 +1287,7 @@ ms.author: danlep
 <br>
 
     network public-ip list [options] <resource-group> 
-    
+
 列出资源组中的所有公共 IP 资源。
 
     azure network public-ip list -g myresourcegroup
@@ -1665,7 +1665,7 @@ ms.author: danlep
 **使用默认资源创建 VM**
 
     vm quick-create [options] <resource-group> <name> <location> <os-type> <image-urn> <admin-username> <admin-password>
-    
+
 >[!TIP]从 CLI 版本 0.10 开始，你可以为某些常用的应用商店映像提供“UbuntuLTS”或“Win2012R2Datacenter”之类的简短别名作为 `image-urn`。针对选项运行 `azure help vm quick-create`。另外，从版本 0.10 开始，`azure vm quick-create` 默认使用高级存储，前提是所选区域提供该存储。
 
 **列出帐户中的虚拟机**

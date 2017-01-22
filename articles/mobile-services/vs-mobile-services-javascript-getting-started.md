@@ -85,6 +85,6 @@ ms.author: mlearned
         todoItems.splice(todoItems.indexOf(item), 1);
     }
 
-[详细了解移动服务](./index.md/)
+[详细了解移动服务](./index.md)
 
 <!---HONumber=Mooncake_0215_2016-->

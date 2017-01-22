@@ -14,7 +14,7 @@ wacn.date: 01/29/2016
 
 # Azure 安全和审核日志管理
 
-Azure 使客户能够在其订阅中执行从 Azure 服务架构 (IaaS) 和平台即服务 (PaaS) 角色到中央存储的安全事件生成和收集。然后，客户就可以使用 [HDInsight](./hdinsight/index.md/) 来聚合和分析所收集的事件。此外，这些收集的事件可以导出到本地安全信息和事件管理 (SIEM) 系统以便进行持续监视。
+Azure 使客户能够在其订阅中执行从 Azure 服务架构 (IaaS) 和平台即服务 (PaaS) 角色到中央存储的安全事件生成和收集。然后，客户就可以使用 [HDInsight](./hdinsight/index.md) 来聚合和分析所收集的事件。此外，这些收集的事件可以导出到本地安全信息和事件管理 (SIEM) 系统以便进行持续监视。
 
 Azure 安全日志记录、分析和监视生命周期包括：
 
@@ -88,7 +88,7 @@ ConfigureIISLogging:cmd 的内容
 ##	使用 Windows 事件转发进行的安全事件数据收集
 对于已加入域的 Azure 虚拟机，可以使用组策略设置配置 WEF（与配置本地已加入域的计算机的方法相同）。有关详细信息，请参阅[混合云](http://www.microsoft.com/server-cloud/solutions/hybrid-cloud.aspx)。
 
-组织可以使用此方法购买 IaaS 订阅，通过使用 [ExpressRoute](./expressroute/index.md/) 或站点到站点 VPN 将其连接到公司网络，然后将已在 Azure 中的虚拟机加入到企业域。之后，您可以从已加入域的计算机配置 WEF。
+组织可以使用此方法购买 IaaS 订阅，通过使用 [ExpressRoute](./expressroute/index.md) 或站点到站点 VPN 将其连接到公司网络，然后将已在 Azure 中的虚拟机加入到企业域。之后，您可以从已加入域的计算机配置 WEF。
 
 事件转发拆分为两个部分：源和收集器。源是在其中生成安全日志的计算机。收集器是收集并合并事件日志的集中式服务器。IT 管理员可以订阅事件，以便他们可以接收和存储从远程计算机（事件源）转发的事件。有关详细信息，请参阅[配置计算机以转发和收集事件](http://technet.microsoft.com/zh-cn/library/cc748890.aspx)。
 
@@ -158,14 +158,14 @@ Azure PowerShell SDK 提供用于配置 Azure 虚拟机上的 Azure 诊断的 cm
   - 按 F4 打开“属性”
   - 依次单击“架构”和“添加”，选择要下载的架构文件 (WadConfigSchema.XSD)，然后单击“确定”
 
-3.	在“视图”菜单中，单击“错误列表”查看是否存在任何验证错误。
+3. 在“视图”菜单中，单击“错误列表”查看是否存在任何验证错误。
 
 ##### <a name="step4"></a> 步骤 4：配置 Azure 诊断
  使用以下步骤启用 Azure 诊断并启动数据收集：
 
- 1.	若要打开 Azure PowerShell，键入 **Add-AzureAccount**，然后按 ENTER。
- 2.	使用您的 Azure 帐户进行登录。
- 3.	运行以下 PowerShell 脚本。请确保更新 storage\_name、key、config\_path、service\_name 和 vm\_name。
+ 1. 若要打开 Azure PowerShell，键入 **Add-AzureAccount**，然后按 ENTER。
+ 2. 使用您的 Azure 帐户进行登录。
+ 3. 运行以下 PowerShell 脚本。请确保更新 storage\_name、key、config\_path、service\_name 和 vm\_name。
 
  ```PowerShell
 $storage_name ="<Storage Name>"
@@ -184,9 +184,9 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
  若要生成这些事件，请执行以下操作：
 
-1.	打开到您虚拟机的 RDP 会话。
-2.	输入不正确的凭据以生成一些失败的登录事件（事件 ID 4625）。
-3.	尝试几次失败登录后，输入正确的凭据以生成成功登录事件（事件 ID 4624）。
+1. 打开到您虚拟机的 RDP 会话。
+2. 输入不正确的凭据以生成一些失败的登录事件（事件 ID 4625）。
+3. 尝试几次失败登录后，输入正确的凭据以生成成功登录事件（事件 ID 4624）。
 
 ##### 步骤 6：查看数据
 完成前面的步骤约五分钟后，数据应根据 XML 文件中的配置开始流向客户存储帐户。有许多工具可用于从 Azure 存储空间查看数据。有关详细信息，请参阅：
@@ -196,12 +196,12 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 若要查看数据，请执行以下操作：
 
-1.	在 Visual Studio（2013、2012 和 2010 SP1）中，单击“视图”，然后单击“服务器资源管理器”。
-2.	导航到您的存储帐户。
-3.	单击“表”，然后双击相应的表来查看从虚拟机中收集的安全日志。
+1. 在 Visual Studio（2013、2012 和 2010 SP1）中，单击“视图”，然后单击“服务器资源管理器”。
+2. 导航到您的存储帐户。
+3. 单击“表”，然后双击相应的表来查看从虚拟机中收集的安全日志。
 ![][2]
 
-4.	右键单击名为 WADWindowsEventLogsTable 的表，然后单击“查看数据”以打开表视图，如下所示：
+4. 右键单击名为 WADWindowsEventLogsTable 的表，然后单击“查看数据”以打开表视图，如下所示：
 
 ![][3]
 
@@ -280,23 +280,23 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 我们现在将使用 Azure 诊断来从 Azure 云服务浏览相同的两个日志收集方案，如前面的虚拟机 (IaaS) 部分所示：
 
-1.	设置云服务中的安全日志管道的新实例。
-2.	使用云服务中的新配置更新现有的日志收集管道。
+1. 设置云服务中的安全日志管道的新实例。
+2. 使用云服务中的新配置更新现有的日志收集管道。
 
 本部分中的分步演练包括：
 
-1.	构建云服务。
-2.	使用 Azure 诊断配置用于安全日志收集的云服务。
-3.	说明云服务上安全事件的生成和收集：
+1. 构建云服务。
+2. 使用 Azure 诊断配置用于安全日志收集的云服务。
+3. 说明云服务上安全事件的生成和收集：
 
     - 向具有提升权限的本地组添加一个管理员
     - 创建新进程
-4.	更新云服务中的现有日志收集管道：
+4. 更新云服务中的现有日志收集管道：
 
     - 使用 Auditpol 启用主机防火墙事件的审核（作为网络安全事件的一个示例）
     - 配置要收集的防火墙审核数据，并在客户存储帐户中显示所收集的事件
-5.	显示 Windows 安全事件分发和峰值检测。
-6.	配置 IIS 日志收集并验证数据。
+5. 显示 Windows 安全事件分发和峰值检测。
+6. 配置 IIS 日志收集并验证数据。
 
 所有事件和日志将收集到 Azure 中的客户存储帐户中。客户可以查看这些事件并将其导出到本地 SIEM 系统。可以使用 HDInsight 对这些事件进行聚合和分析。
 
@@ -305,16 +305,16 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 #### 步骤 1：创建云服务（Web 角色）和部署
 
-1.	在开发计算机上启动 Visual Studio 2013。
-2.	创建一个新的云服务项目（我们的示例中使用的是 ContosoWebRole）。
-3.	选择 **ASP.NET** Web 角色。
-4.	选择 **MVC** 项目。
-5.	在解决方案资源管理器中，单击“角色”，然后双击“Web 角色” (WebRole1) 以打开“属性”窗口。
-6.	在“配置”选项卡上，清除“启用诊断”复选框以禁用 Visual Studio 2013 随附的 Azure 诊断版本。 ![][8]
+1. 在开发计算机上启动 Visual Studio 2013。
+2. 创建一个新的云服务项目（我们的示例中使用的是 ContosoWebRole）。
+3. 选择 **ASP.NET** Web 角色。
+4. 选择 **MVC** 项目。
+5. 在解决方案资源管理器中，单击“角色”，然后双击“Web 角色” (WebRole1) 以打开“属性”窗口。
+6. 在“配置”选项卡上，清除“启用诊断”复选框以禁用 Visual Studio 2013 随附的 Azure 诊断版本。 ![][8]
 
-7.	生成你的解决方案，以确认不会出错。
-8.	打开 WebRole1/Controllers/HomeController.cs 文件。
-9.	添加以下方法来使示例应用程序将 HTTP 状态代码 500 记录为示例 IIS 日志事件（这将在稍后的 IIS 示例中使用）：
+7. 生成你的解决方案，以确认不会出错。
+8. 打开 WebRole1/Controllers/HomeController.cs 文件。
+9. 添加以下方法来使示例应用程序将 HTTP 状态代码 500 记录为示例 IIS 日志事件（这将在稍后的 IIS 示例中使用）：
 
     ```
     public ActionResult StatusCode500()
@@ -323,7 +323,7 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
         }
     ```
 
-10.	 右键单击云服务项目的名称，然后单击“发布”。
+10.  右键单击云服务项目的名称，然后单击“发布”。
 
 #### 步骤 2：准备配置文件
 我们现在将准备 Azure 诊断配置文件以添加可以帮助检测以下情况下的事件：
@@ -363,13 +363,13 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 #### 步骤 5：生成事件
 若要生成事件，请执行以下操作：
 
-1.	若要启动到云服务实例的远程桌面会话，请在 Visual Studio 中打开服务器资源管理器，右键单击该角色实例，然后单击“使用远程桌面连接”。
-2.	打开提升的命令提示符并运行以下命令以创建虚拟机上的本地管理员帐户：
+1. 若要启动到云服务实例的远程桌面会话，请在 Visual Studio 中打开服务器资源管理器，右键单击该角色实例，然后单击“使用远程桌面连接”。
+2. 打开提升的命令提示符并运行以下命令以创建虚拟机上的本地管理员帐户：
 
     net user contosoadmin <enterpassword> /add
     net localgroup administrators contosoadmin /add
 
-3.	打开“事件查看器”，打开“安全”通道，并注意是否已创建事件 4732，如下所示：
+3. 打开“事件查看器”，打开“安全”通道，并注意是否已创建事件 4732，如下所示：
 
 ![][9]
 
@@ -432,8 +432,8 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 #### 步骤 4：启用防火墙事件
 
-1.	打开到您的云服务实例的远程桌面会话。
-2.	打开提升的命令提示符并运行以下命令：
+1. 打开到您的云服务实例的远程桌面会话。
+2. 打开提升的命令提示符并运行以下命令：
 
     ```
     auditpol.exe /set /category:"Policy Change" /subcategory:"MPSSVC rule-level Policy Change" /success:enable /failure:enable
@@ -441,11 +441,11 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 #### 步骤 5：生成事件
 
-1.	打开“Windows 防火墙”，然后单击“入站规则”。
-2.	单击“添加新规则”，然后单击“端口”。
-3.	在“本地端口”字段中，键入 **5000**，然后单击“下一步”三次。
-4.	在“名称”字段中键入 **Test5000**，然后单击“完成”。
-5.	打开“事件查看器”，打开“安全”通道，并注意是否已创建事件 ID 4946，如下所示：
+1. 打开“Windows 防火墙”，然后单击“入站规则”。
+2. 单击“添加新规则”，然后单击“端口”。
+3. 在“本地端口”字段中，键入 **5000**，然后单击“下一步”三次。
+4. 在“名称”字段中键入 **Test5000**，然后单击“完成”。
+5. 打开“事件查看器”，打开“安全”通道，并注意是否已创建事件 ID 4946，如下所示：
 
 ![][13]
 
@@ -502,21 +502,21 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 #### 步骤 3：生成 IIS 日志
 
-1.	打开 Web 浏览器并导航到云服务 Web 角色（例如，http://contosowebrole.chinacloudapp.cn/)）。
-2.	导航到“关于”和“联系人”页面以创建部分日志事件。
-3.	导航到生成状态代码 500 的页面（例如，http://contosowebrole.chinacloudapp.cn/Home/StatusCode500 ）。您应该会看到一个错误，如下所示。请记住，我们在标题为“设置云服务名上日志收集管道的新实例”部分的步骤 1 中为 **StatusCode500** 添加了代码。
+1. 打开 Web 浏览器并导航到云服务 Web 角色（例如，http://contosowebrole.chinacloudapp.cn/)）。
+2. 导航到“关于”和“联系人”页面以创建部分日志事件。
+3. 导航到生成状态代码 500 的页面（例如，http://contosowebrole.chinacloudapp.cn/Home/StatusCode500 ）。您应该会看到一个错误，如下所示。请记住，我们在标题为“设置云服务名上日志收集管道的新实例”部分的步骤 1 中为 **StatusCode500** 添加了代码。
 ![][16]
-4.	打开到您的云服务实例的远程桌面会话。
-5.	打开 IIS 管理器。
-6.	默认情况下，启用 IIS 日志记录并将其设置为每小时生成包含 W3C 格式中的所有字段的文件。单击“浏览”，至少会显示一个日志文件，如下所示：
+4. 打开到您的云服务实例的远程桌面会话。
+5. 打开 IIS 管理器。
+6. 默认情况下，启用 IIS 日志记录并将其设置为每小时生成包含 W3C 格式中的所有字段的文件。单击“浏览”，至少会显示一个日志文件，如下所示：
 ![][17]
 
-7.	等待大约五分钟以便 Azure 诊断代理将日志文件推送到 blob 容器。若要验证此数据，请打开“服务器资源管理器”>“存储”>“存储帐户”>“Blob”。如此处所示，创建了 blob **iislogs**：
+7. 等待大约五分钟以便 Azure 诊断代理将日志文件推送到 blob 容器。若要验证此数据，请打开“服务器资源管理器”>“存储”>“存储帐户”>“Blob”。如此处所示，创建了 blob **iislogs**：
 ![][18]
 
-8.	右键单击并选中“查看 Blob 容器”以显示存储在 blob 中的 IIS 日志文件：
+8. 右键单击并选中“查看 Blob 容器”以显示存储在 blob 中的 IIS 日志文件：
 ![][19]
-9.	在 IIS 事件都位于客户的存储帐户后，利用 HDInsight 分析的应用程序可以用于执行事件聚合。下面的折线图是显示 HTTP 状态代码 500 的事件聚合任务的一个示例：
+9. 在 IIS 事件都位于客户的存储帐户后，利用 HDInsight 分析的应用程序可以用于执行事件聚合。下面的折线图是显示 HTTP 状态代码 500 的事件聚合任务的一个示例：
 ![][20]
 
 ## 安全日志收集的建议

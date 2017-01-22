@@ -45,9 +45,9 @@ ms.author: sethm
 
 现在，你已准备就绪，可以运行应用程序了。
 
-1.	从 Eclipse 中运行 **LogTopology** 类，然后等待它为所有分区启动接收方。
+1. 从 Eclipse 中运行 **LogTopology** 类，然后等待它为所有分区启动接收方。
 
-2.	运行 **Sender** 项目，在控制台窗口中按 **Enter**，然后会看到事件出现在接收方窗口中。
+2. 运行 **Sender** 项目，在控制台窗口中按 **Enter**，然后会看到事件出现在接收方窗口中。
 
        ![][22]
 
@@ -72,5 +72,5 @@ ms.author: sethm
 [HDInsight Storm 概述]: ../hdinsight/hdinsight-storm-overview.md
 [用 Storm 和 HDInsight 分析传感器数据]: ../hdinsight/hdinsight-storm-sensor-data-analysis.md
 [使用 SCP.NET 和 C# 在 Storm 和 HDInsight 上开发流式数据处理应用程序]: /documentation/articles/hdinsight-hadoop-storm-scpdotnet-csharp-develop-streaming-data-processing-application/
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

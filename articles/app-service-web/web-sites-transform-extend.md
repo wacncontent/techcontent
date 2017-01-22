@@ -178,5 +178,5 @@ Web 应用扩展位于：
 <!-- IMAGES -->
 [TransformSitePHPUI]: ./media/web-sites-transform-extend/TransformSitePHPUI.png
 [TransformSiteSolEx]: ./media/web-sites-transform-extend/TransformSiteSolEx.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

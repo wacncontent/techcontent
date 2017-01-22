@@ -19,21 +19,21 @@ wacn.date: 11/23/2016
 当使用 Web 应用连接 Service Bus 服务发送消息时发生证书错误，错误发生期间，用本地程序运行相同的代码则不会出现错误。
 
 ###示例代码：
- 
+
     string connectionString = "servicebus connection string";
-    
+
     var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
-    
+
     if (!namespaceManager.TopicExists("TestTopic"))
     {
         namespaceManager.CreateTopic("TestTopic");
     }
-    
+
     TopicClient client = TopicClient.CreateFromConnectionString(connectionString, "TestTopic");
-    
+
     BrokeredMessage testMessage = new BrokeredMessage("test message");
     testMessage.MessageId = "message id";
-    
+
     client.Send(testMessage);
 
 ###错误消息:
@@ -58,7 +58,7 @@ wacn.date: 11/23/2016
 如果代码中不对 **<font color=blue>ConnectivityMode</font>** 做预先设置，service bus 客户端( web 应用)默认使用了 **AutoDetect 模式** 连接 service bus 服务。 **AutoDetect 会优先使用 TCP 连接模式**。由于 TCP 连接模式也是加密的，所以客户端需要首先验证 service bus 服务器证书 CN = servicebus.chinacloudapi.cn 的有效性，证书链信息在 SSL 协议的 server hello 消息中返回。
 
 如果证书链中的某些中间证书没有安装在 web 应用实例上，web 应用需要发起额外的请求到 CA 服务器上下载中间证书并安装。
- 
+
 ###Fiddler 日志示例:
 
 ![Fiddler-log](./media/aog-service-bus-troubleshoot-certificate-error/Fiddler-log.png "Fiddler-log")

@@ -98,7 +98,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
         using Microsoft.Azure.Management.HDInsight.Job;
         using Microsoft.Azure.Management.HDInsight.Job.Models;
         using Hyak.Common;
-        
+
         namespace HDInsightSubmitPigJobsDotNet
         {
             class Program
@@ -109,7 +109,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                     var ExistingClusterUri = ExistingClusterName + ".azurehdinsight.cn";
                     var ExistingClusterUsername = "<HDInsightClusterHttpUsername>";
                     var ExistingClusterPassword = "<HDInsightClusterHttpUserPassword>";
-        
+
                     // The Pig Latin statements to run
                     string queryString = "LOGS = LOAD 'wasbs:///example/data/sample.log';" +
                         "LEVELS = foreach LOGS generate REGEX_EXTRACT($0, '(TRACE|DEBUG|INFO|WARN|ERROR|FATAL)', 1)  as LOGLEVEL;" +
@@ -118,17 +118,17 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                         "FREQUENCIES = foreach GROUPEDLEVELS generate group as LOGLEVEL, COUNT(FILTEREDLEVELS.LOGLEVEL) as COUNT;" +
                         "RESULT = order FREQUENCIES by COUNT desc;" +
                         "DUMP RESULT;";
-        
+
                     HDInsightJobManagementClient _hdiJobManagementClient;
                     var clusterCredentials = new BasicAuthenticationCloudCredentials { Username = ExistingClusterUsername, Password = ExistingClusterPassword };
                     _hdiJobManagementClient = new HDInsightJobManagementClient(ExistingClusterUri, clusterCredentials);
-        
+
                     // Define the Pig job
                     var parameters = new PigJobSubmissionParameters()
                     {
                         Query = queryString,
                     };
-        
+
                     System.Console.WriteLine("Submitting the Pig job to the cluster...");
                     var response = _hdiJobManagementClient.JobManagement.SubmitPigJob(parameters);
                     System.Console.WriteLine("Validating that the response is as expected...");

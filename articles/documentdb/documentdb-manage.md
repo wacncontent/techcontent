@@ -43,7 +43,7 @@ Azure DocumentDB 是一个全面托管的，面向可扩展文档的针对 JSON 
 DocumentDB 自动将集合分区到一个或多个物理服务器。创建集合时，你可以指定预配吞吐量（根据每秒的请求单位数）和分区键属性。DocumentDB 会使用此属性的值在分区和路由请求（例如查询）之间分配文档。分区键值还可作为存储过程和触发器的事务边界。每个集合都有该集合特定的保留吞吐量，且不会与相同帐户中的其他集合共享。因此，你可以在存储和吞吐量方面扩大你的应用程序。
 
 可以通过 [Azure 门户预览](./documentdb-create-collection.md)或任意一个 [DocumentDB SDK](./documentdb-sdk-dotnet.md) 创建集合。
- 
+
 ## 请求单位数和数据库操作
 
 创建集合时，可以根据每秒的[请求单位 (RU) 数](./documentdb-request-units.md)保留吞吐量。与考虑和管理硬件资源不同的是，可以考虑将**请求单位**作为所需资源的单个措施，以执行各种数据库操作和服务应用程序请求。不管集合中存储的项数有多少，或者同时运行的并发请求数有多少，读取 1 KB 的文档都要使用 1 个 RU。所有针对 DocumentDB 的请求，包括复杂的操作如 SQL 查询，都有一个可预测的 RU 值，该值可在开发时确定。如果你知道用于支持你的应用程序的文档的大小以及每个操作（读取、写入和查询）的频率，那么你可以设置恰到好处的吞吐量来满足应用程序需求，并且随着性能需求的变化增大和减小数据库的规模。
@@ -132,5 +132,5 @@ DocumentDB 支持创建单个分区和已分区的集合。DocumentDB 中的每�
 若要继续学习 DocumentDB 的工作原理，请参阅 [Partitioning and scaling in Azure DocumentDB](./documentdb-partition-data.md)（Azure DocumentDB 中的分区和缩放）。
 
 有关在 Azure 门户预览中监视性能级别的说明，请参阅[监视 DocumentDB 帐户](./documentdb-monitor-accounts.md)。有关选择集合的性能级别的详细信息，请参阅 [DocumentDB 中的性能级别](./documentdb-performance-levels.md)。
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

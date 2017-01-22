@@ -133,7 +133,7 @@ DocumentDB 权限资源与 DocumentDB 用户关联。每个用户可能包含零
         ResourceLink = documentCollection.SelfLink,
         Id = "readperm"
     };
-    
+
     docPermission = await client.CreatePermissionAsync(UriFactory.CreateUserUri("db", "user"), docPermission);
     Console.WriteLine(docPermission.Id + " has token of: " + docPermission.Token);
 
@@ -157,7 +157,7 @@ DocumentDB 权限资源与 DocumentDB 用户关联。每个用户可能包含零
 > [!TIP] 资源令牌的有效时间跨度默认为 1 小时。但是，令牌生存期可以显式指定为最多 5 个小时。
 
 ## 后续步骤
-- 若要了解有关 DocumentDB 的详细信息，请单击[此处](./index.md/)。
+- 若要了解有关 DocumentDB 的详细信息，请单击[此处](./index.md)。
 - 若要了解有关管理主密钥和只读密钥的信息，请单击[此处](./documentdb-manage-account.md)。
 - 若要了解如何构造 DocumentDB 授权令牌，请单击[此处](https://msdn.microsoft.com/zh-cn/library/azure/dn783368.aspx)
 

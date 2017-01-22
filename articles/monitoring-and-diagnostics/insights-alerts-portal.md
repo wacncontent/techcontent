@@ -46,7 +46,7 @@ ms.author: robb
 - [PowerShell](./insights-alerts-powershell.md)
 - [命令行界面 (CLI)](./insights-alerts-command-line-interface.md)
 - [Azure Insights REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn931945.aspx)
- 
+
 ## 使用 Azure 门户预览创建指标的警报规则
 
 1. 在[门户预览](https://portal.azure.cn/)中，找到希望监视的资源并选择该资源。

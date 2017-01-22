@@ -709,7 +709,7 @@ HiveQL 脚本将执行以下操作：
         {
             Add-AzureAccount -Environment AzureChinaCloud
         }
-   
+
         #EndRegion
 
         #region - Create and validate Azure SQL database server

@@ -34,7 +34,7 @@
                 android:onClick="completeItem"
                 android:text="@string/complete_button_text" />
         </LinearLayout>
-    
+
 4. 打开 res\values\string.xml 文件并添加以下代码行：
 
         <string name="complete_button_text">Complete All</string>
@@ -42,15 +42,15 @@
 5. 在 Package Explorer 的  *src* 文件夹中，右键单击项目名称 (`com.example.{your projects name}`)，然后依次选择**新建**、**类**。在对话框的类名称字段中，输入 **MarkAllResult**、选择"确定"，然后使用以下代码替代生成的类定义：
 
         import com.google.gson.annotations.SerializedName;
-        
+
         public class MarkAllResult {
             @SerializedName("count")
             public int mCount;
-            
+
             public int getCount() {
                 return mCount;
             }
-        
+
             public void setCount(int count) {
                     this.mCount = count;
             }
@@ -73,15 +73,15 @@
 8. 在 **ToDoActivity.java** 文件中，添加以下方法：
 
         public void completeItem(View view) {
-        
+
             ListenableFuture<MarkAllResult> result = mClient.invokeApi( "completeAll2", MarkAllResult.class ); 
-            
+
             Futures.addCallback(result, new FutureCallback<MarkAllResult>() {
                 @Override
                 public void onFailure(Throwable exc) {
                     createAndShowDialog((Exception) exc, "Error");
                 }
-                
+
                 @Override
                 public void onSuccess(MarkAllResult result) {
                     createAndShowDialog(result.getCount() + " item(s) marked as complete.", "Completed Items");
@@ -89,7 +89,7 @@
                 }
             });
         }
-    
+
     此方法可处理新按钮的 **Click** 事件。**invokeApi** 方法在客户端上调用，该客户端向新的自定义 API 发送 POST 请求。与任何错误相同，自定义 API 返回的结果也显示在消息对话框中。
 
 ## 测试应用

@@ -100,7 +100,7 @@ ms.author: nepeters
 
 ![虚拟硬盘](./media/virtual-machines-linux-dotnet-core/vhd.png)  
 
-有关 Azure 存储的信息，请参阅 [Azure 存储文档](../storage/index.md/)。
+有关 Azure 存储的信息，请参阅 [Azure 存储文档](../storage/index.md)。
 
 ## 虚拟网络
 
@@ -146,7 +146,7 @@ ms.author: nepeters
 ## 网络接口
 
  网络接口将虚拟机连接到虚拟网络，更具体地说，是连接到虚拟网络中定义的子网。
- 
+
  单击以下链接可查看 Resource Manager 模板中的 JSON 示例 – [网络接口](https://github.com/Microsoft/dotnet-core-sample-templates/blob/master/dotnet-core-music-linux/azuredeploy.json#L166)。
 
     {
@@ -208,7 +208,7 @@ ms.author: nepeters
 
 ![网络接口](./media/virtual-machines-linux-dotnet-core/nic.png)  
 
-有关 Azure 虚拟网络的详细信息，请参阅 [Azure 虚拟网络文档](../virtual-network/index.md/)。
+有关 Azure 虚拟网络的详细信息，请参阅 [Azure 虚拟网络文档](../virtual-network/index.md)。
 
 ## Azure SQL 数据库
 
@@ -253,7 +253,7 @@ Azure 门户预览中显示的 SQL Server 和 MusicStore 数据库视图。
 
 ![SQL Server](./media/virtual-machines-linux-dotnet-core/sql.png)  
 
-有关部署 Azure SQL 数据库的详细信息，请参阅 [Azure SQL 数据库文档](../sql-database/index.md/)。
+有关部署 Azure SQL 数据库的详细信息，请参阅 [Azure SQL 数据库文档](../sql-database/index.md)。
 
 ## 后续步骤
 

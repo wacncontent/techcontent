@@ -21,7 +21,7 @@
     ![dns 标签](./media/virtual-machines-sql-server-connection-steps/rm-dns-label.png)
 
 ### <a name="connect-to-the-database-engine-from-another-computer"></a> 从其他计算机连接到数据库引擎
- 
+
 1. 在连接到 Internet 的计算机上，打开 SQL Server Management Studio (SSMS)。
 
 2. 在“连接到服务器”或“连接到数据库引擎”对话框的“服务器名称”框中，输入虚拟机的完整 DNS 名称（已在以前的任务中确定）。****

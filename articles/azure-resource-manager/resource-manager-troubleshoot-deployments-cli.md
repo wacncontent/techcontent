@@ -38,12 +38,12 @@ ms.author: tomfitz
 若要查看部署相关的错误，请使用以下步骤：
 
 1. 若要查看审计日志，请运行 **azure group log show** 命令。可以包含 **--last-deployment** 选项以只获取最近部署的日志。
-   
+
         azure group log show ExampleGroup --last-deployment
 2. **azure group log show** 命令返回很多信息。进行故障排除，你通常希望专注于失败的操作。以下脚本使用 **--json** 选项和 [jq](https://stedolan.github.io/jq/) JSON 实用工具，在日志中搜索部署失败。
-   
+
         azure group log show ExampleGroup --json | jq '.[] | select(.status.value == "Failed")'
-   
+
         {
         "claims": {
           "aud": "https://management.core.chinacloudapi.cn/",
@@ -79,19 +79,19 @@ ms.author: tomfitz
             "54001","MessageTemplate":"Website with given name {0} already exists.","Parameters":["mysite"],"InnerErrors":null}}],"Innererror":null}"
         },
         ...
-   
+
     你可以看到 **properties** 在 json 中包含有关失败操作的信息。
-   
+
     可以使用 **--verbose** 和 **-vv** 选项，在日志中查看更多信息。使用 **--verbose** 选项显示操作在 `stdout` 上进行的步骤。要查看完整的请求历史记录，请使用 **-vv** 选项。这些消息经常提供有关任何失败原因的重要线索。
 3. 若要专注于失败条目的状态消息，请使用以下命令：
-   
+
         azure group log show ExampleGroup --json | jq -r ".[] | select(.status.value == "Failed") | .properties.statusMessage"
 
 ## 使用部署操作进行故障排除
 1. 使用 **azure group deployment show** 命令获取部署的总体状态。在下面的示例中，部署已失败。
-   
+
         azure group deployment show --resource-group ExampleGroup --name ExampleDeployment
-   
+
         info:    Executing command group deployment show
         + Getting deployments
         data:    DeploymentName     : ExampleDeployment
@@ -108,7 +108,7 @@ ms.author: tomfitz
         data:    workerSize       String  0
         info:    group deployment show command OK
 2. 若要查看部署失败操作的消息，请使用：
-   
+
         azure group deployment operation list --resource-group ExampleGroup --name ExampleDeployment --json  | jq ".[] | select(.properties.provisioningState == "Failed") | .properties.statusMessage.Message"
 
 ## 后续步骤

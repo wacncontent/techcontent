@@ -96,7 +96,7 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
     度量值表中最多可显示 50 个度量值。
 
     > [!TIP] 在详细监视中，度量值列表可以包含几十个度量值。要显示滚动条，请将鼠标指针悬停于对话框右侧。若要筛选列表，请单击搜索图标，并在搜索框中输入文本，如下所示。
- 
+
     ![添加度量值搜索](./media/cloud-services-how-to-monitor/CloudServices_AddMetrics_Search.png)  
 
 3. 在选择度量值后，请单击“确定”（复选标记）。
@@ -114,8 +114,8 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
 以下步骤假设已打开“详细”监视级别，并已配置好应用程序，可收集和传输自定义性能计数器。
 
 若要在门户中显示自定义性能计数器，需要更新 wad-control-container 中的配置：
- 
-1.	在诊断存储帐户中打开 wad-control-container Blob。可以使用 Visual Studio 或任何其他存储资源管理器执行此操作。
+
+1. 在诊断存储帐户中打开 wad-control-container Blob。可以使用 Visual Studio 或任何其他存储资源管理器执行此操作。
 
     ![Visual Studio 服务器资源管理器](./media/cloud-services-how-to-monitor/CloudServices_Monitor_VisualStudioBlobExplorer.png)  
 
@@ -187,5 +187,5 @@ Azure 经典管理门户中的监视显示信息是高度可配置的。可在�
     WAD8b7c4233802442b494d0cc9eb9d8dd9fPT1HRTable (hourly aggregations for the role)
 
     WAD8b7c4233802442b494d0cc9eb9d8dd9fPT1HRITable (hourly aggregations for role instances)
- 
+
 <!---HONumber=Mooncake_1226_2016-->

@@ -216,8 +216,8 @@ Azure Redis 缓存提供如下功能：将诊断数据存储在存储帐户中�
 
 “Redis 缓存”边栏选项卡显示以下类别的度量值。
 
--	[监视图表](#monitoring-charts)
--	[图表使用情况](#usage-charts)
+- [监视图表](#monitoring-charts)
+- [图表使用情况](#usage-charts)
 
 ### <a name="monitoring-charts"></a>监视图表
 
@@ -256,7 +256,7 @@ Azure Redis 缓存提供如下功能：将诊断数据存储在存储帐户中�
 | CPU 使用率 | CPU |
 
 有关本部分中的查看度量值和自定义单个图表的信息，请参阅以下[如何查看度量值和自定义度量值图表](#how-to-view-metrics-and-customize-charts)部分。
-  
+
 <!-- IMAGES -->
 
 [redis-cache-enable-diagnostics]: ./media/cache-how-to-monitor/redis-cache-enable-diagnostics.png

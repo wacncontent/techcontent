@@ -38,7 +38,7 @@ ms.author: glenga
         using Microsoft.Phone.Notification;
 
 3. 将以下代码添加到 App.xaml.cs：
-    
+
         public static HttpNotificationChannel CurrentChannel { get; private set; }
 
         private void AcquirePushChannel()
@@ -73,7 +73,7 @@ ms.author: glenga
     这可以确保每次加载页时都会请求注册。在应用程序中，你可能只需要定期执行此注册以确保注册是最新的。
 
 5. 按 **F5** 键以运行应用。将显示包含注册密钥的弹出式对话框。
-  
+
 5. 在解决方案资源管理器中，展开“属性”，打开 WMAppManifest.xml 文件，单击“功能”选项卡并确保选中 **ID\_\_\_CAP\_\_\_PUSH\_NOTIFICATION** 功能。
 
        ![在 VS 中启用通知](./media/mobile-services-javascript-backend-windows-phone-get-started-push/mobile-app-enable-push-wp8.png)
@@ -94,7 +94,7 @@ ms.author: glenga
             '<wp:Notification xmlns:wp="WPNotification"><wp:Toast>' +
             '<wp:Text1>New Item</wp:Text1><wp:Text2>' + item.text + 
             '</wp:Text2></wp:Toast></wp:Notification>';
-        
+
         request.execute({
             success: function() {
                 // If the insert succeeds, send a notification.
@@ -134,7 +134,7 @@ ms.author: glenga
 
     ![收到的 Toast 通知](./media/mobile-services-javascript-backend-windows-phone-get-started-push/mobile-quickstart-push5-wp8.png)
 
-   >[!NOTE]如果你仍未退出应用程序，则不会收到该通知。若要在应用程序处于活动状态时接收 toast 通知，你必须处理 [ShellToastNotificationReceived](http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/microsoft.phone.notification.httpnotificationchannel.shelltoastnotificationreceived.aspx) 事件。
+    >[!NOTE]如果你仍未退出应用程序，则不会收到该通知。若要在应用程序处于活动状态时接收 toast 通知，你必须处理 [ShellToastNotificationReceived](http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/microsoft.phone.notification.httpnotificationchannel.shelltoastnotificationreceived.aspx) 事件。
 
 ##  <a name="next-steps"></a>后续步骤
 

@@ -35,7 +35,7 @@ Azure 队列存储是一项存储大量非结构化数据的服务，用户可�
 以下步骤演示了如何以编程方式创建队列。在 ASP.NET MVC 应用中，该代码会置于控制器中。
 
 1. 添加以下 *using* 指令：
-   
+
         using Microsoft.Azure;
         using Microsoft.WindowsAzure.Storage;
         using Microsoft.WindowsAzure.Storage.Queue;
@@ -62,7 +62,7 @@ Azure 队列存储是一项存储大量非结构化数据的服务，用户可�
 以下步骤演示了如何以编程方式向队列添加消息。在 ASP.NET MVC 应用中，该代码会置于控制器中。
 
 1. 添加以下 *using* 指令：
-   
+
         using Microsoft.Azure;
         using Microsoft.WindowsAzure.Storage;
         using Microsoft.WindowsAzure.Storage.Queue;
@@ -93,7 +93,7 @@ Azure 队列存储是一项存储大量非结构化数据的服务，用户可�
 以下步骤演示了如何以编程方式查看排队的消息（读取第一条消息，不删除它）。在 ASP.NET MVC 应用中，该代码会置于控制器中。
 
 1. 添加以下 *using* 指令：
-   
+
         using Microsoft.Azure;
         using Microsoft.WindowsAzure.Storage;
         using Microsoft.WindowsAzure.Storage.Queue;
@@ -125,7 +125,7 @@ Azure 队列存储是一项存储大量非结构化数据的服务，用户可�
 以下步骤演示了如何以编程方式读取排队的消息，然后将其删除。在 ASP.NET MVC 应用中，该代码会置于控制器中。
 
 1. 添加以下 *using* 指令：
-   
+
         using Microsoft.Azure;
         using Microsoft.WindowsAzure.Storage;
         using Microsoft.WindowsAzure.Storage.Queue;
@@ -157,7 +157,7 @@ Azure 队列存储是一项存储大量非结构化数据的服务，用户可�
 以下步骤演示了如何以编程方式获取队列长度（消息数）。在 ASP.NET MVC 应用中，该代码会置于控制器中。
 
 1. 添加以下 *using* 指令：
-   
+
         using Microsoft.Azure;
         using Microsoft.WindowsAzure.Storage;
         using Microsoft.WindowsAzure.Storage.Queue;
@@ -180,14 +180,14 @@ Azure 队列存储是一项存储大量非结构化数据的服务，用户可�
         queue.FetchAttributes();
 
 6. 访问 **CloudQueue.ApproximateMessageCount** 属性以获取队列的长度。
- 
+
         int? nMessages = queue.ApproximateMessageCount;
 
 ## 删除队列
 以下步骤演示了如何以编程方式删除队列。
 
 1. 添加以下 *using* 指令：
-   
+
         using Microsoft.Azure;
         using Microsoft.WindowsAzure.Storage;
         using Microsoft.WindowsAzure.Storage.Queue;

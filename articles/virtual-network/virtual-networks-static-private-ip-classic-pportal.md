@@ -65,7 +65,7 @@ ms.author: jdial
 
 ## 如何从 VM 中删除静态专用 IP 地址
 若要从上面创建的 VM 中删除静态专用 IP 地址，请按照以下步骤操作。
-    
+
 1. 从上示“IP 地址”边栏选项卡中“IP 地址分配”右侧，依次单击“动态”、“保存”和“是”。
 
     ![在 Azure 门户预览中创建 VM](./media/virtual-networks-static-ip-classic-pportal/figure07.png)

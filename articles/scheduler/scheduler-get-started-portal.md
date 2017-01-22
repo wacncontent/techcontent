@@ -81,7 +81,7 @@ ms.author: deli
 
 这些只读属性描述计划程序作业的管理元数据。
 
-   ![][job-properties]
+    ![][job-properties]
 
 ### 操作设置
 
@@ -95,7 +95,7 @@ ms.author: deli
 
 对于服务总线操作类型，可以更改命名空间、主题/队列路径、身份验证设置、传输类型、消息属性和消息正文。
 
-   ![][job-action-settings]
+    ![][job-action-settings]
 
 ### 计划
 
@@ -105,7 +105,7 @@ ms.author: deli
 
 可以更改开始日期与时间、重复计划以及结束日期与时间（如果该作业是重复进行的。）
 
-   ![][job-schedule]
+    ![][job-schedule]
 
 ### 历史记录
 
@@ -123,11 +123,11 @@ ms.author: deli
 
 6.  执行结束时间
 
-   ![][job-history]  
+    ![][job-history]  
 
 可单击运行以查看**历史记录详情**，包括每次执行的整个响应情况。此对话框还允许你将响应复制到剪贴板。
 
-   ![][job-history-details]
+    ![][job-history-details]
 
 ### 用户
 

@@ -63,7 +63,7 @@ ms.author: juliako
 >[!NOTE] 如果在 2015 年 3 月之前使用 Azure 门户创建定位符，这些定位符设置为两年后过期。
 
 若要更新定位符的过期日期，请使用 [REST](https://docs.microsoft.com/zh-cn/rest/api/media/operations/locator#a-nameupdatealocatora-update-a-locator) 或 [.NET] (https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.ilocator.update(v=azure.10).aspx) API。请注意，当你更新 SAS 定位符的过期日期时，URL 会发生变化。
- 
+
 定位符不用于管理按用户的访问控制。通过数字版权管理 (DRM) 解决方案，可以为不同的用户提供不同的访问权限。有关详细信息，请参阅[保护媒体](http://msdn.microsoft.com/zh-cn/library/azure/dn282272.aspx)。
 
 创建定位符时，可能会由于 Azure 存储中所需存储和传播进程的影响，出现 30 秒的延迟。
@@ -93,7 +93,7 @@ ms.author: juliako
 ###Apple HTTP 实时流 (HLS) V3 格式
 
 {流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest(format=m3u8-aapl-v3)
-    
+
     http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3)
 
 ###Apple HTTP 实时流 (HLS) 格式，带“仅音频”筛选器
@@ -178,6 +178,6 @@ ms.author: juliako
 ##相关主题
 
 [轮转存储密钥后更新媒体服务定位符](./media-services-roll-storage-access-keys.md)
- 
+
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: remove HDS related content-->

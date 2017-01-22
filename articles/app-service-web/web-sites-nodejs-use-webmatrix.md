@@ -24,7 +24,7 @@ ms.author: robmcm
 本教程演示如何使用 WebMatrix 开发 Node.js 应用程序并将其部署到 [Azure 应用服务](./app-service-changes-existing-services.md)中的 Web 应用。WebMatrix 是 Microsoft 提供的一个免费的 Web 开发工具，此工具包含开发 Web 应用所需的一切功能。WebMatrix 提供了一些便于使用 Node.js 的功能，包括代码完成、预构建模板以及对 Jade、LESS 和 CoffeeScript 的编辑器支持。了解有关 [WebMatrix](https://www.microsoft.com/web/webmatrix/next/) 的更多信息。
 
 完成本指南之后，你将拥有一个在 Azure 应用服务中运行的 Node.js Web 应用。
- 
+
 以下是已完成应用程序的屏幕快照：
 
 ![Azure Node Web 应用][webmatrix-node-completed]
@@ -56,7 +56,7 @@ ms.author: robmcm
 3. 如果已登录到 Azure 中，则现在可以选择为本地站点创建应用服务 Web 应用。选择一个唯一名称，然后选择要在其中创建应用服务 Web 应用的数据中心：
 
     ![在 Azure 中创建 Web 应用][nodesitefromtemplateazure]
-    
+
 4. 在 WebMatrix 完成生成本地站点和创建应用服务 Web 应用后，将显示 WebMatrix IDE。
 
     ![WebMatrix IDE][webmatrix-ide]
@@ -121,5 +121,5 @@ ms.author: robmcm
 [signin]: ./media/web-sites-nodejs-use-webmatrix/webmatrix-sign-in.png
 [sitefromtemplate]: ./media/web-sites-nodejs-use-webmatrix/webmatrix-site-from-template.png
 [nodesitefromtemplateazure]: ./media/web-sites-nodejs-use-webmatrix/webmatrix-node-site-azure.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

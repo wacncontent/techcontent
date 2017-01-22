@@ -143,5 +143,5 @@ SQL 数据库支持多个您可用于监视单个数据库的动态管理视图�
              CROSS APPLY sys.dm_exec_sql_text(QS.sql_handle) as ST) as query_stats
         GROUP BY query_stats.query_hash
         ORDER BY 2 DESC;
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

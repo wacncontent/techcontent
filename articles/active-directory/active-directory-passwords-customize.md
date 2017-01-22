@@ -13,7 +13,7 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 08/03/2016
-wacn.date: 01/06/2017
+wacn.date: 01/19/2017
 ms.author: asteen
 ---
 
@@ -97,7 +97,7 @@ ms.author: asteen
               <td>
                 <p>确定访问密码重置页面的用户是否能看到 Microsoft 徽标或你自己的自定义徽标。此配置项还会将你的品牌添加到访问面板和登录页中。</p>
                 <p>
-                  
+
                 </p>
                 <p>如需了解有关租户品牌和自定义功能的详细信息，请参阅<a href="https://technet.microsoft.com/zh-cn/library/dn532270.aspx">向“登录”和“访问面板”页添加公司品牌</a>。</p>
               </td>
@@ -132,7 +132,7 @@ ms.author: asteen
 ## 密码管理行为 <a name="password-management-behavior"></a>
 下表说明了每个控件对注册密码重置并重置密码的用户体验有何影响。可以在 [Azure 经典管理门户](https://manage.windowsazure.cn)中目录的“配置”选项卡的“用户密码重置策略”部分下配置这些选项。
 
-> [!NOTE]你所使用的管理员帐户必须分配了 AAD Premium 许可证才能看到这些策略控件。<br><br>这些策略控件仅适用于重置密码的最终用户，而不是管理员。**Microsoft 为管理员指定了默认的备用电子邮件和/或移动电话策略，这些策略无法更改。**
+> [!NOTE] 你所使用的管理员帐户必须分配了 AAD Premium 许可证才能看到这些策略控件。<br><br>这些策略控件仅适用于重置密码的最终用户，而不是管理员。**Microsoft 为管理员指定了默认的备用电子邮件和/或移动电话策略，这些策略无法更改。**
 
 <table>
             <tbody><tr>
@@ -225,7 +225,7 @@ ms.author: asteen
               <td>
                 <p>确定允许哪些最终用户组使用密码重置。</p>
                 <p>
-                  
+
                 </p>
                 <p>（仅当“限制对密码重置的访问”设置为“是”时可见）<strong></strong><strong></strong>。</p>
               </td>
@@ -264,16 +264,16 @@ ms.author: asteen
               <td>
                 <p>确定允许用户用于重置其密码的质询。</p>
                 <p>
-                  
+
                 </p>
                 <p>（仅当“可进行密码重置的用户”设置为“是”时可见）<strong></strong><strong></strong>。</p>
               </td>
               <td>
                 <p>
-                  
+
                 </p>
                 <p>
-                  
+
                 </p>
                 <p>
                   <strong>注意：</strong>
@@ -330,7 +330,7 @@ ms.author: asteen
               <td>
                 <p>确定为重置他或她的密码用户必须通过的可用身份验证方法数量的下限。</p>
                 <p>
-                  
+
                 </p>
                 <p>（仅当“可进行密码重置的用户”设置为“是”时可见）<strong></strong><strong></strong>。</p>
               </td>
@@ -400,7 +400,7 @@ ms.author: asteen
               <td>
                 <p>确定用户在重置密码时必须回答的问题数量下限。</p>
                 <p>
-                  
+
                 </p>
                 <p>（仅当启用了“安全问题”复选框时可见）<strong></strong>。</p>
               </td>
@@ -434,7 +434,7 @@ ms.author: asteen
               <td>
                 <p>定义用户在注册密码重置以及重置他们的密码时可以选择的预先编写的安全问题。</p>
                 <p>
-                  
+
                 </p>
                 <p>（仅当启用了“安全问题”复选框时可见）<strong></strong>。</p>
               </td>
@@ -485,7 +485,7 @@ ms.author: asteen
               <td>
                 <p>定义用户在注册密码重置以及重置他们的密码时可以选择的安全问题。</p>
                 <p>
-                  
+
                 </p>
                 <p>（仅当启用了“安全问题”复选框时可见）<strong></strong>。</p>
               </td>
@@ -535,7 +535,7 @@ ms.author: asteen
                   <p>要求用户登录时注册？</p>
                 </div>
                 <p>
-                  
+
                 </p>
               </td>
               <td>
@@ -544,20 +544,20 @@ ms.author: asteen
                 <p>此功能适用于使用工作或学校帐户的任何登录页面。此类页面包括所有 Office 365、Azure 经典管理门户、访问面板和任何使用 Azure AD 登录的联合或自定义开发应用程序。
                 </p>
                 <p>
-                  
+
                 </p>
                 <p>强制注册只适用于启用了密码重置的用户，因此，如果你已使用“限制访问密码重置”功能并将密码重置的范围限定为一组特定的用户，则只有该组中的用户需要在登录时注册密码重置。</p>
                 <p>
-                  
+
                 </p>
                 <p>（仅当“可进行密码重置的用户”设置为“是”时可见）<strong></strong><strong></strong>。</p>
               </td>
               <td>
                 <p>
-                  
+
                 </p>
                 <p>
-                  
+
                 </p>
                 <p>
                   <strong>注意：</strong>
@@ -588,16 +588,16 @@ ms.author: asteen
               <td>
                 <p>启用“要求用户注册”时，此设置将确定用户必须再次确认其数据前可经过的时间段<strong></strong>。</p>
                 <p>
-                  
+
                 </p>
                 <p>（仅当“登录到访问面板时要求用户注册”设置为“是”时可见）<strong></strong><strong></strong>。</p>
               </td>
               <td>
                 <p>
-                  
+
                 </p>
                 <p>
-                  
+
                 </p>
                 <p>
                   <strong>注意：</strong>
@@ -624,7 +624,7 @@ ms.author: asteen
               <td>
                 <p>控制发生错误时或用户对指向自定义 URL 或电子邮件地址的操作等待太长时间时是否在密码重置门户上显示“联系你的管理员”链接（显示在左边）。</p>
                 <p>
-                  
+
                 </p>
                 <p>（仅当“可进行密码重置的用户”设置为“是”时可见）<strong></strong><strong></strong>。</p>
               </td>
@@ -670,7 +670,7 @@ ms.author: asteen
               <td>
                 <p>控制“联系你的管理员”链接所指向的电子邮件地址或 URL<strong></strong>。</p>
                 <p>
-                  
+
                 </p>
                 <p>（仅当“自定义“联系你的管理员”链接”设置为“是”时可见）<strong></strong><strong></strong>。</p>
               </td>
@@ -704,13 +704,13 @@ ms.author: asteen
               <td>
                 <p>控制是否为此目录启用密码写回功能，如果启用写回，该项将指示本地写回服务的状态。</p>
                 <p>
-                  
+
                 </p>
                 <p>如果你想要暂时禁用服务而不重新配置 Azure AD Connect，此设置将很有用。</p>
               </td>
               <td>
                 <p>
-                  
+
                 </p>
                 <p>
                   <strong>注意：</strong>
@@ -750,11 +750,11 @@ ms.author: asteen
                 </div>
               </td>
               <td>
-              
+
               <p>指定是否应为浏览密码重置门户的用户提供选项，让他们在不重置密码的情况下解锁本地 Active Directory 帐户。默认情况下，Azure AD 在执行密码重置时始终会解锁帐户，此设置可让你区分这两项操作。</p>
-              
+
               <p>如果设置为“是”，将提供用户重置其密码以解锁帐户的选项，或者在不重置密码的情况下解锁的选项。</p>
-              
+
               <p>如果设置为“否”，用户只能同时执行密码重置和帐户解锁的操作。</p>
 
               </td>
@@ -765,7 +765,7 @@ ms.author: asteen
                 <ul>
                   <li class="unordered">
                                                 若要使用此功能，必须安装 2015 年 8 月或更高版本的 Azure AD Connect（v.1.0.8667.0 或更高版本）。<br><br><a href="http://www.microsoft.com/download/details.aspx?id=47594">单击此处下载最新版本的 Azure AD Connect。</a></li>
-                        
+
                   <li class="unordered">
                     <strong>注意：</strong>若要测试此功能，需要启用密码写回，并使用源自本地（例如联合或密码同步的用户）的帐户，并且有一个已锁定的帐户。非本地并且没有锁定帐户的用户将看不到解锁其帐户的选项。</li>
                 </ul>
@@ -874,4 +874,4 @@ ms.author: asteen
 
 [001]: ./media/active-directory-passwords-customize/001.jpg "Image_001.jpg"
 
-<!---HONumber=Mooncake_0815_2016-->
+<!---HONumber=Mooncake_0829_2016-->

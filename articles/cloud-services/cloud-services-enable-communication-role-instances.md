@@ -117,7 +117,7 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
         using Microsoft.WindowsAzure.Diagnostics;
         using Microsoft.WindowsAzure.ServiceRuntime;
         using Microsoft.WindowsAzure.StorageClient;
-        
+
         namespace WorkerRole1
         {
           public class WorkerRole : RoleEntryPoint
@@ -129,30 +129,30 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
                 // Initialize method-wide variables
                 var epName = "Endpoint1";
                 var roleInstance = RoleEnvironment.CurrentRoleInstance;
-                
+
                 // Identify direct communication port
                 var myPublicEp = roleInstance.InstanceEndpoints[epName].PublicIPEndpoint;
                 Trace.TraceInformation("IP:{0}, Port:{1}", myPublicEp.Address, myPublicEp.Port);
-        
+
                 // Identify public endpoint
                 var myInternalEp = roleInstance.InstanceEndpoints[epName].IPEndpoint;
-                        
+
                 // Create socket listener
                 var listener = new Socket(
                   myInternalEp.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                        
+
                 // Bind socket listener to internal endpoint and listen
                 listener.Bind(myInternalEp);
                 listener.Listen(10);
                 Trace.TraceInformation("Listening on IP:{0},Port: {1}",
                   myInternalEp.Address, myInternalEp.Port);
-        
+
                 while (true)
                 {
                   // Block the thread and wait for a client request
                   Socket handler = listener.Accept();
                   Trace.TraceInformation("Client request received.");
-        
+
                   // Define body of socket handler
                   var handlerThread = new Thread(
                     new ParameterizedThreadStart(h =>
@@ -160,13 +160,13 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
                       var socket = h as Socket;
                       Trace.TraceInformation("Local:{0} Remote{1}",
                         socket.LocalEndPoint, socket.RemoteEndPoint);
-        
+
                       // Shut down and close socket
                       socket.Shutdown(SocketShutdown.Both);
                       socket.Close();
                     }
                   ));
-        
+
                   // Start socket handler on new thread
                   handlerThread.Start(handler);
                 }
@@ -176,12 +176,12 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
                 Trace.TraceError("Caught exception in run. Details: {0}", e);
               }
             }
-        
+
             public override bool OnStart()
             {
               // Set the maximum number of concurrent connections 
               ServicePointManager.DefaultConnectionLimit = 12;
-        
+
               // For information on handling configuration changes
               // see the MSDN topic at http://go.microsoft.com/fwlink/?LinkId=166357.
               return base.OnStart();

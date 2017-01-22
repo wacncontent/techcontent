@@ -60,7 +60,7 @@
   [2]: ./media/howto-service-bus-topics/sb-queues-04.png
   [3]: ./media/howto-service-bus-topics/sb-queues-09.png
   [4]: ./media/howto-service-bus-topics/sb-queues-06.png
-  
+
   [6]: ./media/howto-service-bus-topics/getting-started-multi-tier-27.png
 
 <!---HONumber=82-->

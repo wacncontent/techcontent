@@ -44,7 +44,7 @@ wacn.date: 01/05/2017
 ## 权限
 
 注册应用时，执行应用注册的用户（即开发人员）定义应用需要访问的权限和资源。（资源本身以其他应用的形式定义。） 例如，生成邮件阅读器应用的人员会表明，其应用需要“Office 365 Exchange Online”资源中的“以登录用户身份访问邮箱”权限：
-    
+
 ![](./media/active-directory-apps-permissions-consent/apps6.png)  
 
 为了让一个应用（客户端）向另一应用（资源）请求特定权限，资源应用的开发人员会定义存在的权限。在我们的示例中，“Office 365 Exchange Online”资源应用的所有者 Microsoft 已定义名为“以登录用户身份访问邮箱”的权限。
@@ -102,7 +102,7 @@ wacn.date: 01/05/2017
 可通过查找 Exchange（资源）的 ServicePrincipal 对象来查看该权限，该权限在注册 Office 365 时已添加。可将 ServicePrincipal 对象视为租户中应用的“实例”，其用于记录不同的选项和配置。可使用 PowerShell 中的 `Get-AzureADServicePrincipal` 进行查看。
 
     PS C:\> Get-AzureADServicePrincipal -ObjectId 383f7b97-6754-4d3d-9474-3908ebcba1c6 | fl *
-    
+
     DeletionTimeStamp         : 
     ObjectId                  : 383f7b97-6754-4d3d-9474-3908ebcba1c6
     ObjectType                : ServicePrincipal
@@ -140,7 +140,7 @@ wacn.date: 01/05/2017
 用户单击“接受”时，会启动同意。首先，会在租户中创建“FabrikamMail for Office 365”的 ServicePrincipal 对象。ServicePrincipal 类似如下所示内容：
 
     PS C:\> Get-AzureADServicePrincipal -SearchString "FabrikamMail for Office 365" | fl *
-    
+
     DeletionTimeStamp         : 
     ObjectId                  : a8b16333-851d-42e8-acd2-eac155849b37
     ObjectType                : ServicePrincipal
@@ -164,7 +164,7 @@ wacn.date: 01/05/2017
     Tags                      : {WindowsAzureActiveDirectoryIntegratedApp}
 
 同意应用会在以下对象之间创建 Oauth2PermissionGrant 链接：
-  
+
 - 用户对象
 - 客户端应用 ServicePrincipalName (SPN)
 - 资源应用 ServicePrincipalName (SPN)
@@ -173,7 +173,7 @@ wacn.date: 01/05/2017
 对于 FabrikamMail，其类似如下所示内容：
 
     PS C:\> Get-AzureADUserOAuth2PermissionGrant -ObjectId ddiggle@aadpremiumlab.partner.onmschina.cn | fl *
-    
+
     ClientId    : a8b16333-851d-42e8-acd2-eac155849b37
     ConsentType : Principal
     ExpiryTime  : 05/15/2017 07:02:39 AM

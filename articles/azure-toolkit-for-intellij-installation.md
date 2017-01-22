@@ -29,48 +29,48 @@ ms.author: robmcm
 ## 从“设置”对话框安装 Azure Toolkit for IntelliJ 的步骤
 1. 启动 IntelliJ IDEA。
 2. IntelliJ IDEA 打开后，单击“文件”，然后单击“设置”。
-   
+
     ![打开 IntelliJ IDEA 的“设置”对话框][01a]
 3. 在“设置”对话框中，单击“插件”，然后单击“浏览存储库”。
-   
+
     ![IntelliJ IDEA 的“设置”对话框][02a]
 4. 在“浏览存储库”对话框的搜索框中键入“Azure”。突出显示“Azure Toolkit for IntelliJ”，然后单击“安装”。
-   
+
     ![搜索 Azure Toolkit for IntelliJ][03]
-   
+
     IntelliJ IDEA 将在一个对话框中显示安装进度。
-   
+
     ![安装进度][04]
 5. 安装完成后，单击“重新启动 IntelliJ IDEA”。
-   
+
     ![重新启动 IntelliJ IDEA][05]
 6. 单击“确定”以关闭“设置”对话框。
-   
+
     ![关闭 IntelliJ IDEA 的“设置”对话框][06]
 7. 当系统提示是重新启动 IntelliJ IDEA 还是推迟时，请单击“重新启动”。
-   
+
     ![重新启动 IntelliJ IDEA][07]
 
 ## 从开始屏幕安装 Azure Toolkit for IntelliJ 的步骤
 1. 启动 IntelliJ IDEA。
 2. IntelliJ IDEA 开始屏幕出现后，单击“配置”，然后单击“插件”。
-   
+
     ![安装 IntelliJ IDEA 插件][01b]
 3. 在“插件”对话框中，单击“浏览存储库”。
-   
+
     ![浏览 IntelliJ IDEA 插件存储库][02b]
 4. 在“浏览存储库”对话框的搜索框中键入“Azure”。突出显示“Azure Toolkit for IntelliJ”，然后单击“安装”。
-   
+
     ![搜索 Azure Toolkit for IntelliJ][03]
-   
+
     IntelliJ IDEA 将在一个对话框中显示安装进度。
-   
+
     ![安装进度][04]
 5. 安装完成后，单击“重新启动 IntelliJ IDEA”。
-   
+
     ![重新启动 IntelliJ IDEA][05]
 6. 当系统提示是重新启动 IntelliJ IDEA 还是推迟时，请单击“重新启动”。
-   
+
     ![重新启动 IntelliJ IDEA][07]
 
 ## 另请参阅

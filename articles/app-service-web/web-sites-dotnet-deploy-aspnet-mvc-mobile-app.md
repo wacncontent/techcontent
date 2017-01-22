@@ -47,7 +47,7 @@ ms.author: cephalin;riande
 还需要安装移动浏览器模拟器。以下版本均可：
 
 * [Internet Explorer 11 F12 开发人员工具][EmulatorIE11]中的浏览器模拟器（所有移动浏览器屏幕截图都使用此工具）。它为 Windows Phone 8、Windows Phone 7 和 Apple iPad 提供用户代理字符串预设。
--	Google Chrome DevTools 中的浏览器模拟器。它包含众多 Android 设备以及 Apple iPhone、Apple iPad 和 Amazon Kindle Fire 的预设。它还会模拟触控事件。
+- Google Chrome DevTools 中的浏览器模拟器。它包含众多 Android 设备以及 Apple iPhone、Apple iPad 和 Amazon Kindle Fire 的预设。它还会模拟触控事件。
 * [Opera Mobile Emulator][EmulatorOpera]
 
 本主题附带提供包含 C# 源代码的 Visual Studio 项目：
@@ -62,41 +62,41 @@ ms.author: cephalin;riande
 4. 右键单击 ZIP 文件，选择“全部提取”来解压缩该文件。
 5. 在 Visual Studio 中，打开 *C#\\Mvc5Mobile.sln* 文件。
 6. 在“解决方案资源管理器”中，右键单击该项目并单击“发布”。
-   
+
     ![][DeployClickPublish]  
 
 7. 在“发布 Web”中单击“Azure 应用服务”。
-   
+
     ![][DeployClickWebSites]  
 
 8. 如果尚未登录到 Azure，请单击“添加帐户”。
-   
+
     ![][DeploySignIn]  
 
 9. 按照提示操作以登录到你的 Azure 帐户。
 10. “应用服务”对话框现在会显示用户已登录。单击“新建”。
-    
+
     ![][DeployNewWebsite]  
 
 11. 在“Web 应用名称”字段中，指定唯一的应用名称前缀。完全限定的 Web 应用名称为 *&lt;前缀>*.chinacloudsites.cn。另外，可在“资源组”中选择或指定新的资源组名称。然后，单击“新建”创建新的应用服务计划。
-    
+
     ![][DeploySiteSettings]  
 
 12. 配置新的应用服务计划，然后单击“确定”。
-    
+
     ![](./media/web-sites-dotnet-deploy-aspnet-mvc-mobile-app/deploy-to-azure-website-7a.png)  
 
 13. 回到“创建应用服务”对话框，单击“创建”。
-    
+
     ![](./media/web-sites-dotnet-deploy-aspnet-mvc-mobile-app/deploy-to-azure-website-7b.png)  
 
 14. 创建 Azure 资源以后，“发布 Web”对话框中将填充新应用的设置。单击“发布”。
-    
+
     ![][DeployPublishSite]
-    
+
     在 Visual Studio 完成将初学者项目发布到 Azure Web 应用后，将打开桌面浏览器并显示实时 Web 应用。
 15. 启动移动浏览器模拟器，将会议应用程序 (*<前缀>*.chinacloudsites.cn) URL 复制到模拟器，然后单击右上角的按钮并选择“按标签浏览”。如果使用 Internet Explorer 11 作为默认浏览器，则只需依次键入 `F12` 和 `Ctrl+8`，然后将浏览器配置文件更改为“Windows Phone”。下图显示纵向模式下的 *AllTags* 视图（选择“按标签浏览”后显示）。
-    
+
     ![][AllTags]  
 
 > [!TIP]

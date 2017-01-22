@@ -27,9 +27,9 @@ wacn.date: 01/09/2017
 
 对于需要访问受保护资源的 Windows 应用商店桌面应用程序，Azure AD 提供 Active Directory 身份验证库 (ADAL)。在本质上，ADAL 的唯一用途就是方便应用程序获取访问令牌。为了演示操作的简单性，下面我们要生成一个“目录搜索器”Windows 应用商店应用程序，该应用程序可以：
 
--	使用 [OAuth 2.0 身份验证协议](./active-directory-protocols-oauth-code.md)获取调用 Azure AD Graph API 的访问令牌。
--	在目录中搜索具有给定 UPN 的用户。
--	将用户注销。
+- 使用 [OAuth 2.0 身份验证协议](./active-directory-protocols-oauth-code.md)获取调用 Azure AD Graph API 的访问令牌。
+- 在目录中搜索具有给定 UPN 的用户。
+- 将用户注销。
 
 若要生成完整的工作应用程序，你需要：
 
@@ -42,26 +42,26 @@ wacn.date: 01/09/2017
 ## *1.注册目录搜索器应用程序*
 若要让应用程序获取令牌，首先需要在 Azure AD 租户中注册该应用程序，并授予它访问 Azure AD Graph API 的权限：
 
--	登录到 [Azure 管理门户](https://manage.windowsazure.cn)
--	在左侧的导航栏中单击“Active Directory”
--	选择要在其中注册应用程序的租户。
--	单击“应用程序”选项卡，然后在底部抽屉中单击“添加”。
--	根据提示创建一个新的“本机客户端应用程序”。
-    -	应用程序的“名称”向最终用户描述你的应用程序
-    -	“重定向 URI”是 Azure AD 要用来返回令牌响应的方案与字符串组合。暂时输入一个占位符值，例如 `http://DirectorySearcher`。稍后我们将会替换此值。
--	完成注册后，AAD 将为应用程序分配唯一的客户端标识符。在后面的部分中将会用到此值，因此，请从“配置”选项卡复制此值。
+- 登录到 [Azure 管理门户](https://manage.windowsazure.cn)
+- 在左侧的导航栏中单击“Active Directory”
+- 选择要在其中注册应用程序的租户。
+- 单击“应用程序”选项卡，然后在底部抽屉中单击“添加”。
+- 根据提示创建一个新的“本机客户端应用程序”。
+    - 应用程序的“名称”向最终用户描述你的应用程序
+    - “重定向 URI”是 Azure AD 要用来返回令牌响应的方案与字符串组合。暂时输入一个占位符值，例如 `http://DirectorySearcher`。稍后我们将会替换此值。
+- 完成注册后，AAD 将为应用程序分配唯一的客户端标识符。在后面的部分中将会用到此值，因此，请从“配置”选项卡复制此值。
 - 另外，请在“配置”选项卡中，找到“针对其他应用程序的权限”部分。对于“Azure Active Directory”应用程序，在“委托的权限”下添加“以已登录用户的身份访问目录”权限。这样，你的应用程序便可以在 Graph API 中查询用户。
 
 ## *2.安装并配置 ADAL*
 将应用程序注册到 Azure AD 后，可以安装 ADAL 并编写标识相关的代码。为了使 ADAL 能够与 Azure AD 通信，需要为 ADAL 提供一些有关应用程序的注册信息。
--	首先，使用 Package Manager Console 将 ADAL 添加到 DirectorySearcher 项目。
+- 首先，使用 Package Manager Console 将 ADAL 添加到 DirectorySearcher 项目。
 
     PM> Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
 
--	在 DirectorySearcher 项目中，打开 `MainPage.xaml.cs`。替换 `Config Values` 区域中的值，以反映你在 Azure 门户预览中输入的值。只要使用 ADAL，你的代码就会引用这些值。
-    -	`tenant` 是 Azure AD 租户的域，例如 contoso.partner.onmschina.cn
-    -	`clientId` 是从门户复制的应用程序 clientId。
--	你现在需要发现 Windows 应用商店应用的回叫 URI。在 `MainPage` 方法中的此行上设置一个断点：
+- 在 DirectorySearcher 项目中，打开 `MainPage.xaml.cs`。替换 `Config Values` 区域中的值，以反映你在 Azure 门户预览中输入的值。只要使用 ADAL，你的代码就会引用这些值。
+    - `tenant` 是 Azure AD 租户的域，例如 contoso.partner.onmschina.cn
+    - `clientId` 是从门户复制的应用程序 clientId。
+- 你现在需要发现 Windows 应用商店应用的回叫 URI。在 `MainPage` 方法中的此行上设置一个断点：
 
     redirectURI = Windows.Security.Authentication.Web.WebAuthenticationBroker.GetCurrentApplicationCallbackUri();
 
@@ -75,17 +75,17 @@ wacn.date: 01/09/2017
 ## *3.使用 ADAL 从 Azure AD 获取令牌*
 ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只需调用 `authContext.AcquireToken(…)`，然后 ADAL 就会负责其余的工作。
 
--	第一步是初始化应用程序的 `AuthenticationContext`（ADAL 的主类）。你将在此处传递 ADAL 与 Azure AD 通信时所需的坐标，并告诉 ADAL 如何缓存令牌。
+- 第一步是初始化应用程序的 `AuthenticationContext`（ADAL 的主类）。你将在此处传递 ADAL 与 Azure AD 通信时所需的坐标，并告诉 ADAL 如何缓存令牌。
 
 C#
-        
+
     public MainPage()
     {
         ...
 
         authContext = new AuthenticationContext(authority);
     }
-        
+
 - 现在查找 `Search(...)` 方法，当用户在应用的 UI 中单击“搜索”按钮时，将调用该方法。此方法将向 Azure AD Graph API 发出 GET 请求，以查询其 UPN 以给定搜索词开头的用户。但是，若要查询 Graph API，你需要在请求的 `Authorization` 标头中包含 access\_token - 这是 ADAL 传入的位置。
 
 C#
@@ -114,7 +114,7 @@ C#
 - 现在，你可以使用刚刚获得的 access\_token。同时，在 `Search(...)` 方法中，将令牌附加到 Authorization 标头的 Graph API GET 请求中：
 
 C#
-        
+
     // Add the access token to the Authorization Header of the call to the Graph API, and call the Graph API.
     httpClient.DefaultRequestHeaders.Authorization = new HttpCredentialsHeaderValue("Bearer", result.AccessToken);
 

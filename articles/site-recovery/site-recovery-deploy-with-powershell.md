@@ -105,33 +105,33 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 
 在保管库中生成一个注册密钥。在下载 Azure Site Recovery 提供程序并将其安装到 VMM 服务器上后，你将使用此密钥在保管库中注册 VMM 服务器。
 
-1.	获取保管库设置文件并设置上下文：
-    
+1. 获取保管库设置文件并设置上下文：
+
         $VaultName = "<testvault123>"
         $VaultGeo  = "<China North>"
         $OutputPathForSettingsFile = "<c:>"
-    
+
         $VaultSetingsFile = Get-AzureSiteRecoveryVaultSettingsFile -Location $VaultGeo -Name $VaultName -Path $OutputPathForSettingsFile;
-    
-2.	通过运行以下命令设置保管库上下文：
-    
+
+2. 通过运行以下命令设置保管库上下文：
+
         $VaultSettingFilePath = $vaultSetingsFile.FilePath 
         $VaultContext = Import-AzureSiteRecoveryVaultSettingsFile -Path $VaultSettingFilePath -ErrorAction Stop
 
 ## 步骤 4：安装 Azure Site Recovery 提供者
 
-1.	在 VMM 计算机上，通过运行以下命令创建一个目录：
-    
+1. 在 VMM 计算机上，通过运行以下命令创建一个目录：
+
         pushd C:\ASR\
-    
+
 2. 通过运行以下命令，使用下载的提供者提取文件
-    
+
         AzureSiteRecoveryProvider.exe /x:. /q
-    
+
 3. 使用以下命令安装提供者：
-    
+
         .\SetupDr.exe /i
-        
+
         $installationRegPath = "hklm:\software\Microsoft\Microsoft System Center Virtual Machine Manager Server\DRAdapter"
         do
         {
@@ -141,25 +141,25 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
                                         $isNotInstalled = $false;
                         }
         }While($isNotInstalled)
-        
+
         等待安装完成。
-    
+
 4. 使用以下命令在保管库中注册服务器：
-    
+
         $BinPath = $env:SystemDrive+"\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin"
         pushd $BinPath
         $encryptionFilePath = "C:\temp"
         .\DRConfigurator.exe /r /Credentials $VaultSettingFilePath /vmmfriendlyname $env:COMPUTERNAME /dataencryptionenabled $encryptionFilePath /startvmmservice
-    
+
 ## 步骤 5：创建 Azure 存储帐户
 
 如果你没有 Azure 存储帐户，请运行以下命令来创建启用异地复制的帐户：
 
     $StorageAccountName = "teststorageacc1"
     $StorageAccountGeo  = "China North"
-    
+
     New-AzureStorageAccount -StorageAccountName $StorageAccountName -Label $StorageAccountName -Location $StorageAccountGeo;
-    
+
 请注意，存储帐户必须位于 Azure Site Recovery 服务所在的同一区域，并与同一订阅相关联。
 
 ## 步骤 6：安装 Azure 恢复服务代理
@@ -172,22 +172,22 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 
 ## 步骤 7：配置云保护设置
 
-1.	通过运行以下命令在 Azure 中创建云保护配置文件：
-    
+1. 通过运行以下命令在 Azure 中创建云保护配置文件：
+
         $ReplicationFrequencyInSeconds = "300";
         $ProfileResult = New-AzureSiteRecoveryProtectionProfileObject -ReplicationProvider 	HyperVReplica -RecoveryAzureSubscription $AzureSubscriptionName `
         -RecoveryAzureStorageAccount $StorageAccountName -ReplicationFrequencyInSeconds 	$ReplicationFrequencyInSeconds;
-        
-2.	通过运行以下命令获取保护容器：
-    
+
+2. 通过运行以下命令获取保护容器：
+
         $PrimaryCloud = "testcloud"
         $protectionContainer = Get-AzureSiteRecoveryProtectionContainer -Name $PrimaryCloud;	
-    
-3.	开始将保护容器与云相关联：
-    
+
+3. 开始将保护容器与云相关联：
+
         $associationJob = Start-AzureSiteRecoveryProtectionProfileAssociationJob -	ProtectionProfile $profileResult -PrimaryProtectionContainer $protectionContainer;		
-    
-4.	在作业完成后，运行以下命令：
+
+4. 在作业完成后，运行以下命令：
 
             $job = Get-AzureSiteRecoveryJob -Id $associationJob.JobId;
             if($job -eq $null -or $job.StateDescription -ne "Completed")
@@ -205,13 +205,13 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
         {
             $isJobLeftForProcessing = $true;
         }
-        
+
         if($isJobLeftForProcessing)
         {
             Start-Sleep -Seconds 60
         }
         }While($isJobLeftForProcessing)
-        
+
 若要检查作业是否完成，请遵循[监视活动](#monitor)中的步骤。
 
 ## 步骤 8：配置网络映射
@@ -247,18 +247,18 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 
 若要启用保护，必须为虚拟机设置操作系统和操作系统磁盘属性。当你使用虚拟机模板在 VMM 中创建虚拟机时，可以设置属性。也可以在虚拟机属性的“常规”和“硬件配置”选项卡中为现有虚拟机设置这些属性。如果未在 VMM 中设置这些属性，可以在 Azure Site Recovery 门户中配置它们。
 
-1.	若要启用保护，请运行以下命令以获取保护容器：
-        
+1. 若要启用保护，请运行以下命令以获取保护容器：
+
         $ProtectionContainer = Get-AzureSiteRecoveryProtectionContainer -Name $CloudName
-    
+
 2. 通过运行以下命令获取保护实体 (VM)：
-    
+
         $protectionEntity = Get-AzureSiteRecoveryProtectionEntity -Name $VMName -ProtectionContainer $protectionContainer
-        
+
 3. 通过运行以下命令为 VM 启用 DR：
 
         $jobResult = Set-AzureSiteRecoveryProtectionEntity -ProtectionEntity $protectionEntity 	-Protection Enable -Force
-    
+
 ## 测试你的部署
 
 若要测试你的部署，可针对一台虚拟机运行测试故障转移，或者创建一个包括多个虚拟机的恢复计划并针对该计划运行测试故障转移。测试故障转移在隔离的网络中模拟你的故障转移和恢复机制。请注意：
@@ -274,7 +274,7 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
 2. 更改 RecoveryPlan 节点 ID、Name、PrimaryServerId 和 SecondaryServerId。
 3. 更改 ProtectionEntity 节点 PrimaryProtectionEntityId（来自 VMM 的 vmid）。
 4. 可以通过添加更多 ProtectionEntity 节点来添加更多 VM。
-    
+
         <#
         <?xml version="1.0" encoding="utf-16"?>
         <RecoveryPlan Id="d0323b26-5be2-471b-addc-0a8742796610" Name="rp-test" 	PrimaryServerId="9350a530-d5af-435b-9f2b-b941b5d9fcd5" 	SecondaryServerId="21a9403c-6ec1-44f2-b744-b4e50b792387" Description="" 	Version="V2014_07">
@@ -301,25 +301,25 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
           </ActionGroupSequence>
         </RecoveryPlan>
         #>
-    
+
 4. 在模板中填充数据：
-    
+
         $TemplatePath = "C:\RPTemplatePath.xml";
-    
+
 5. 创建 RecoveryPlan：
 
         $RPCreationJob = New-AzureSiteRecoveryRecoveryPlan -File $TemplatePath -WaitForCompletion;
-    
+
 ### 运行测试故障转移
 
-1.	通过运行以下命令获取 RecoveryPlan 对象：
+1. 通过运行以下命令获取 RecoveryPlan 对象：
 
         $RPObject = Get-AzureSiteRecoveryRecoveryPlan -Name $RPName;
 
-2.	通过运行以下命令来启动测试故障转移：
-    
+2. 通过运行以下命令来启动测试故障转移：
+
         $jobIDResult = Start-AzureSiteRecoveryTestFailoverJob -RecoveryPlan $RPObject -Direction PrimaryToRecovery;
-    
+
 ## <a name="monitor"></a>监视活动
 
 使用以下命令来监视活动。请注意，必须在执行不同的作业之前等待处理完成。
@@ -332,7 +332,7 @@ Azure Site Recovery 可在许多部署方案中安排虚拟机的复制、故障
             {
                 $isJobLeftForProcessing = $true;
             }
-    
+
         if($isJobLeftForProcessing)
             {
                 Start-Sleep -Seconds 60

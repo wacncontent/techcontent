@@ -55,7 +55,7 @@ ms.author: juliako;anilmur
 - **正在删除**。正在删除通道。此暂时性状态下不会发生计费。此状态下不允许进行更新或流式传输。
 
 下表显示通道状态如何映射到计费模式。
- 
+
 通道状态|门户 UI 指示器|是否计费？
 ---|---|---
 正在启动|正在启动|否（暂时状态）
@@ -87,7 +87,7 @@ ms.author: juliako;anilmur
 >[!NOTE] 目前，实时事件的最大建议持续时间为 8 小时。如果需要长时间运行某个通道，请通过 Azure.cn 联系 amslived。请注意，实时编码会影响计费，应记住，将实时编码通道保持为“正在运行”状态会产生费用。建议在实时流式处理事件完成之后立即停止正在运行的通道，以避免产生额外的小时费用。
 
 1. 将视频摄像机连接到计算机。启动并配置可以通过以下协议之一输出**单**比特率流的本地实时编码器：RTMP、平滑流式处理或 RTP (MPEG-TS)。
-    
+
     此步骤也可以在创建通道后执行。
 
 1. 创建并启动通道。
@@ -138,19 +138,19 @@ ms.author: juliako;anilmur
 - 音频流的聚合平均比特率应小于 1 Mbps
 - 以下是支持的编解码器：
     - MPEG-2/H.262 Video
-        
+
         - Main Profile (4:2:0)
         - High Profile (4:2:0, 4:2:2)
         - 422 Profile (4:2:0, 4:2:2)
 
     - MPEG-4 AVC/H.264 Video
-    
+
         - Baseline、Main、High Profile（8 位 4:2:0）
         - High 10 Profile（10 位 4:2:0）
         - High 422 Profile（10 位 4:2:2）
 
     - MPEG-2 AAC-LC Audio
-    
+
         - Mono、Stereo、Surround (5.1, 7.1)
         - MPEG-2 样式 ADTS 打包
 
@@ -159,7 +159,7 @@ ms.author: juliako;anilmur
         - Mono、Stereo、Surround (5.1, 7.1)
 
     - MPEG Audio（层 II 和层 III）
-            
+
         - Mono、Stereo
 
 - 推荐的广播编码器包括：
@@ -336,7 +336,7 @@ ms.author: juliako;anilmur
 ###显示静态图像
 
 可选。指示实时编码器在商业广告期间切换到[默认静态](./media-services-manage-live-encoder-enabled-channels.md#default_slate)图像并隐藏传入视频源。插入静态图像期间音频也会静音。默认值为 **false**。
- 
+
 所用图像将是在创建通道时通过默认静态图像资源 ID 属性指定的图像。将对静态图像进行拉伸以适合显示图像大小。
 
 ##插入静态图像
@@ -401,7 +401,7 @@ ms.author: juliako;anilmur
 - **正在删除**。正在删除通道。此状态下不允许进行更新或流式传输。
 
 下表显示通道状态如何映射到计费模式。
- 
+
 通道状态|门户 UI 指示器|是否计费？
 ---|---|---
 正在启动|正在启动|否（暂时状态）

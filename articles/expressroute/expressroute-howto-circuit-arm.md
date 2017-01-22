@@ -82,7 +82,7 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
         New-AzureRmExpressRouteCircuit -Name "ExpressRouteARMCircuit" -ResourceGroupName "ExpressRouteResourceGroup" -Location "China North" -SkuTier Standard -SkuFamily MeteredData -ServiceProviderName "Beijing Telecom Ethernet" -PeeringLocation "Beijing" -BandwidthInMbps 200
 
 请确保指定合适的 SKU 层级和 SKU 系列。
- 
+
 - SKU 层决定是否启用 ExpressRoute 标准版或 ExpressRoute 高级版外接程序。可以指定 *Standard* 以获取标准 SKU，或指定 *Premium* 以获取高级版外接程序。
 
 - SKU 系列确定计费类型。可以指定 *Metereddata* 以获取数据流量套餐，指定 *Unlimiteddata* 以获取无限制流量套餐。注意，可以将计费类型从 *Metereddata* 更改为 *Unlimiteddata*，但不能将类型从 *Unlimiteddata* 更改为 *Metereddata*。
@@ -128,7 +128,7 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
         Get-AzureRmExpressRouteCircuit
 
 响应将如以下示例中所示：
-    
+
         Name                             : ExpressRouteARMCircuit
         ResourceGroupName                : ExpressRouteResourceGroup
         Location                         : China North
@@ -160,9 +160,9 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
 *ServiceProviderProvisioningState* 提供有关服务提供商端当前预配状态的信息。“状态”提供 Microsoft 端的状态。有关线路预配状态的详细信息，请参阅[工作流](./expressroute-workflows.md#expressroute-circuit-provisioning-states)这篇文章。
 
 当你创建新的 ExpressRoute 线路时，线路将是以下状态：
-    
+
         ServiceProviderProvisioningState : NotProvisioned
-        
+
         CircuitProvisioningState         : Enabled
 
 当连接提供商正在为你启用线路时，线路将转为以下状态。
@@ -182,7 +182,7 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
         Get-AzureRmExpressRouteCircuit -Name "ExpressRouteARMCircuit" -ResourceGroupName "ExpressRouteResourceGroup"
 
 响应将如以下示例中所示：
-    
+
         Name                             : ExpressRouteARMCircuit
         ResourceGroupName                : ExpressRouteResourceGroup
         Location                         : China North
@@ -300,7 +300,7 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
     $ckt.sku.Name = "Premium_MeteredData"
 
         Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $ckt
-    
+
 你的线路现已启用 ExpressRoute 高级版外接程序功能。请注意，该命令成功运行后，我们就会立即对高级版外接程序功能收费。
 
 ### 禁用 ExpressRoute 高级版外接程序
@@ -333,9 +333,9 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
 确定所需的大小后，可以使用以下命令调整线路的大小。
 
     $ckt = Get-AzureRmExpressRouteCircuit -Name "ExpressRouteARMCircuit" -ResourceGroupName "ExpressRouteResourceGroup"
-    
+
     $ckt.ServiceProviderProperties.BandwidthInMbps = 1000
-    
+
     Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $ckt
 
 将在 Azure 端调整线路的大小。然后，你必须联系连接提供商，让他们在那一边根据此更改更新配置。在你发出此通知后，Azure 将开始向你计收更新后的带宽选项费用。
@@ -345,10 +345,10 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
 通过使用下面的 PowerShell 代码片段，你可以更改 ExpressRoute 线路的 SKU：
 
     $ckt = Get-AzureRmExpressRouteCircuit -Name "ExpressRouteARMCircuit" -ResourceGroupName "ExpressRouteResourceGroup"
-    
+
     $ckt.Sku.Family = "UnlimitedData"
     $ckt.sku.Name = "Premium_UnlimitedData"
-    
+
     Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $ckt
 
 ### 控制对经典环境和 Resource Manager 环境的访问  

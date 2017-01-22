@@ -55,7 +55,7 @@ Web API 应用程序本身不会更改。它与你可能已在过去编写的 We
 
     using System.Collections.Generic;
     using System.Web.Http;
-    
+
     namespace WebService.Controllers
     {
         public class ValuesController : ApiController
@@ -255,7 +255,7 @@ ICommunicationListener 接口提供了三个方法来为服务管理通信侦听
             this.eventSource = eventSource;
             this.appRoot = appRoot;
         }
-   
+
         ...
 
 ## 实现 OpenAsync
@@ -315,7 +315,7 @@ ICommunicationListener 接口提供了三个方法来为服务管理通信侦听
         {
             throw new InvalidOperationException();
         }
-    
+
         ...
 
 请注意，此处使用了“http://+”。这是为了确保 Web 服务器侦听所有可用的地址，包括 localhost、FQDN 和计算机 IP。
@@ -358,7 +358,7 @@ OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器�
     public Task CloseAsync(CancellationToken cancellationToken)
     {
         this.eventSource.Message("Closing web server on endpoint {0}", this.endpointName);
-            
+
         this.StopWebServer();
 
         return Task.FromResult(true);
@@ -367,7 +367,7 @@ OpenAsync 实现是为何以 ICommunicationListener 形式实现 Web 服务器�
     public void Abort()
     {
         this.eventSource.Message("Aborting web server on endpoint {0}", this.endpointName);
-    
+
         this.StopWebServer();
     }
 

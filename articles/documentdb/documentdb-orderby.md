@@ -72,25 +72,25 @@ DocumentDB 支持每个查询使用单个数值、字符串或布尔值属性进
 
 ### 针对所有属性的 Order By 的索引
 下面显示如何针对集合中 JSON 文档内出现的所有数字或字符串属性使用“所有范围”索引为 Order By 创建集合。此处我们将字符串值默认索引类型改写为范围，并且采用最大精度 (-1)。
-                   
+
     DocumentCollection books = new DocumentCollection();
     books.Id = "books";
     books.IndexingPolicy = new IndexingPolicy(new RangeIndex(DataType.String) { Precision = -1 });
-    
+
     await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), books);  
 
 >[!NOTE] 请注意，Order By 只能返回使用 RangeIndex 作为索引的数据类型（字符串和数字）的结果。例如，如果你的默认索引策略仅有数字的 RangeIndex，那么针对含字符串值的路径使用 Order By 将不返回任何文档。
 
 ### 针对单个属性的 Order By 的索引
 下面显示如何只是针对标题属性（为字符串）使用索引为 Order By 创建集合。这里有两个路径，一个用于具有范围索引的标题属性 ("/Title/?")，另一个用于具有默认索引方案（即字符串哈希和数字范围）的其他每个属性。
-    
+
     booksCollection.IndexingPolicy.IncludedPaths.Add(
         new IncludedPath { 
             Path = "/Title/?", 
             Indexes = new Collection<Index> { 
                 new RangeIndex(DataType.String) { Precision = -1 } } 
             });
-    
+
     await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), booksCollection);  
 
 ## 示例 <a name="samples"></a>
@@ -115,7 +115,7 @@ DocumentDB 支持每个查询使用单个数值、字符串或布尔值属性进
 当以最大精度 (-1) 使用范围作为索引时，可以指定 Order By 仅针对属性（数值或字符串）。
 
 你不能执行以下操作：
- 
+
 - 通过内部字符串属性使用 Order By，如 ID、\_rid 以及 \_self（即将推出）。
 - 通过派生自文档内联接结果的属性使用 Order By（即将推出）。
 - 使用多个属性进行 Order By（即将推出）。
@@ -137,5 +137,5 @@ DocumentDB 支持每个查询使用单个数值、字符串或布尔值属性进
 - [DocumentDB 索引策略参考](./documentdb-indexing-policies.md)
 - [DocumentDB SQL 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn782250.aspx)
 - [DocumentDB Order By 示例](https://github.com/Azure/azure-documentdb-dotnet/tree/master/samples/code-samples/Queries)
- 
+
 <!---HONumber=Mooncake_1121_2016-->

@@ -60,14 +60,14 @@ IoT 中心允许设备在端口 8883 上使用 [MQTT v3.1.1][lnk-mqtt-org] 协�
 - “密码”字段使用 SAS 令牌。对于 HTTP 和 AMQP 协议，SAS 令牌的格式是相同的：<br/>`SharedAccessSignature sig={signature-string}&se={expiry}&sr={URL-encoded-resourceURI}`。
 
     有关如何生成 SAS 令牌的详细信息，请参阅[使用 IoT 中心安全令牌][lnk-sas-tokens]的设备部分。
-    
+
     测试时也可以使用设备资源管理器工具来快速生成可以复制并粘贴到自己的代码中的 SAS 令牌。
-    
+
     1. 转到设备资源管理器中的“管理”选项卡。
     2. 单击“SAS 令牌”（右上角）。
     3. 在 **SASTokenForm** 上，从“DeviceID”下拉列表中选择你的设备。设置 **TTL**。
     4. 单击“生成”创建令牌。
-    
+
     所生成的 SAS 令牌具有以下结构：
     `HostName={your hub name}.azure-devices.cn;DeviceId=javadevice;SharedAccessSignature=SharedAccessSignature sr={your hub name}.azure-devices.cn%2fdevices%2fMyDevice01&sig=vSgHBMUG.....Ntg%3d&se=1456481802`。
 

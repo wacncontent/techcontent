@@ -41,7 +41,7 @@ ms.author: lodipalm;barbkess;sonyama
 2. 运行此 cmdlet 以登录到 Azure Resource Manager 中。
 
         Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-    
+
 3. 选择要用于当前会话的订阅。
 
         Get-AzureRmSubscription	-SubscriptionName "MySubscription" | Select-AzureRmSubscription

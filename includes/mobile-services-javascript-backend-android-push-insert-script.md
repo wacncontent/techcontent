@@ -1,8 +1,8 @@
 ﻿
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，单击“数据”选项卡，然后单击“TodoItem”表。 
- 
+
 2. 在 **todoitem** 中，单击“脚本”选项卡，然后选择“插入”。
-   
+
        将显示当 **TodoItem** 表中发生插入时所调用的函数。
 
 3. 将 insert 函数替换为以下代码，然后单击“保存”：

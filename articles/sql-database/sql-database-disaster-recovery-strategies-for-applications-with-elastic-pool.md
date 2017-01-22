@@ -47,7 +47,7 @@ ms.author: sashan
 ![图 2](./media/sql-database-disaster-recovery-strategies-for-applications-with-elastic-pool/diagram-2.png)
 
 如果中断是暂时的，Azure 可能会在 DR 区域中先恢复主要区域，然后再完成所有还原。在这种情况下，应安排将应用程序移回主要区域。此过程将采用下图所示的步骤。
- 
+
 - 取消所有未完成的异地还原请求。   
 - 将管理数据库故障转移到主要区域 (5)。注意：区域恢复后，旧的主数据库便已自动成为辅助数据库。现在将再次切换角色。 
 - 更改应用程序的连接字符串，使其重新指向主要区域。现在将在主要区域中创建所有新帐户和租户数据库。某些现有客户的数据将暂时不可用。   
@@ -88,7 +88,7 @@ ms.author: sashan
 此时，应用程序便已在 DR 区域中恢复为联机状态。所有付费客户均可访问其数据，而试用客户则将在访问数据时遇到延迟。
 
 在 DR 区域中还原了应用程序*之后*，如果 Azure 恢复了主要区域，则可以决定在该区域继续运行应用程序或故障回复到主要区域。如果在故障转移过程完成*之前*恢复了主要区域，则应考虑立即进行故障回复。此故障回复将采用下图所示的步骤：
- 
+
 ![图 6](./media/sql-database-disaster-recovery-strategies-for-applications-with-elastic-pool/diagram-6.png)
 
 - 取消所有未完成的异地还原请求。   
@@ -133,7 +133,7 @@ ms.author: sashan
 此时，应用程序便已在区域 B 中恢复为联机状态。所有付费客户均可访问其数据，而试用客户则将在访问数据时遇到延迟。
 
 恢复区域 A 时，需要决定想要为试用客户使用区域 B 还是进行故障回复以在区域 A 中使用试用客户池。其中一个条件就是自恢复以来修改的试用租户数据库的百分比。无论做何决定，均需重新平衡两个池之间的付费租户。下图说明了试用租户数据库故障回复到区域 A 的过程。
- 
+
 ![图 6](./media/sql-database-disaster-recovery-strategies-for-applications-with-elastic-pool/diagram-9.png)
 
 - 取消所有未完成的异地还原请求以试用 DR 池。   

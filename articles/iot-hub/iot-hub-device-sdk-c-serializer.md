@@ -579,13 +579,13 @@ WITH_DATA(int, MyData)
 
 **nArithmetic** 参数主要与宏语言的内部工作有关，而与应用程序没有太大的关系。该参数可以控制你在模型中（包括 **DECLARE\_STRUCT** 宏）指定的成员总数。如果你开始看到这样的编译器错误，应该尝试增大 **nArithmetic** 的值：
 
-   ![](./media/iot-hub-device-sdk-c-serializer/03-nArithmeticCompilerErrors.PNG)
+    ![](./media/iot-hub-device-sdk-c-serializer/03-nArithmeticCompilerErrors.PNG)
 
 如果想要更改这些参数，请修改 macro\_utils.tt 文件中的值，重新编译 macro\_utils\_h\_generator.sln 解决方案，然后运行编译后的程序。执行此操作后，将生成新的 macro\_utils.h 文件并将其放在 .\\common\\inc 目录中。
 
 若要使用新版 macro\_utils.h，请从解决方案中删除**序列化程序** NuGet 包，然后在它的位置添加**序列化程序** Visual Studio 项目。这样，便可以让代码针对序列化程序库的源代码进行编译。这包括更新的 macro\_utils.h。如果你要对 **simplesample\_amqp** 执行此操作，请先从解决方案中删除序列化程序库的 NuGet 包：
 
-   ![](./media/iot-hub-device-sdk-c-serializer/04-serializer-github-package.PNG)
+    ![](./media/iot-hub-device-sdk-c-serializer/04-serializer-github-package.PNG)
 
 然后将此项目添加到 Visual Studio 解决方案：
 
@@ -593,7 +593,7 @@ WITH_DATA(int, MyData)
 
 完成后，解决方案应该如下所示：
 
-   ![](./media/iot-hub-device-sdk-c-serializer/05-serializer-project.PNG)
+    ![](./media/iot-hub-device-sdk-c-serializer/05-serializer-project.PNG)
 
 现在当你编译解决方案时，更新的 macro\_utils.h 就会包含在二进制文件中。
 

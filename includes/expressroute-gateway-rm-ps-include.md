@@ -1,7 +1,7 @@
 此任务的步骤使用基于以下值的 VNet。此列表中也概述了其他设置和名称。尽管我们确实基于此列表中的值添加变量，但是我们在任何步骤中不会直接使用此列表。你可以复制列表作为参考，并将列表中的值替换为自己的值。
 
 配置参考列表：
-    
+
 - 虚拟网络名称（VNetName） = “TestVNet”
 - 虚拟网络地址空间 = 192.168.0.0/16
 - 资源组（RG） = “TestRG”
@@ -25,7 +25,7 @@
         Select-AzureRmSubscription -SubscriptionName "Name of subscription"
 
 2. 声明此示例的变量。本示例将在以下例子中使用这些变量。请务必编辑此例子，以反映想要使用的设置。
-        
+
         $RG = "TestRG"
         $Location = "China East"
         $GWName = "GW"
@@ -38,7 +38,7 @@
         $vnet = Get-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $RG
 
 4. 将网关子网添加到虚拟网络中。网关子网必须命名为“GatewaySubnet”。想要创建 /27 或更大（/26、/25 等）的网关。
-            
+
         Add-AzureRmVirtualNetworkSubnetConfig -Name GatewaySubnet -VirtualNetwork $vnet -AddressPrefix 192.168.200.0/26
 
 5. 设置配置。

@@ -542,5 +542,5 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 ##后续步骤
 
 本文章提供了代码示例，演示如何处理用于操作 Azure 队列的常见方案。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 文档资源](../app-service-web/websites-webjobs-resources.md)。
- 
+
 <!---HONumber=Mooncake_0103_2017-->

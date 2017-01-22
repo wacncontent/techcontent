@@ -97,5 +97,5 @@ ms.author: glenga
 [Visual Studio 2013 Express for Windows]: http://go.microsoft.com/fwlink/?LinkId=257546
 [Mobile Services SDK]: http://go.microsoft.com/fwlink/?LinkId=257545
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
- 
+
 <!---HONumber=Mooncake_0118_2016-->

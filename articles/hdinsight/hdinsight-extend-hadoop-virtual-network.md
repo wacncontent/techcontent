@@ -24,36 +24,36 @@ Azure 虚拟网络可扩展 Hadoop 解决方案以合并本地资源（如 SQL S
 [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell-and-cli.md)]
 
 ## <a id="whatis"></a>Azure 虚拟网络是什么？
-[Azure 虚拟网络](../virtual-network/index.md/)可创建包含解决方案所需资源的安全持久网络。通过虚拟网络可以：
+[Azure 虚拟网络](../virtual-network/index.md)可创建包含解决方案所需资源的安全持久网络。通过虚拟网络可以：
 
 * 在专用网络（仅限云）中将云资源连接在一起。
-  
+
     ![仅限云配置示意图](./media/hdinsight-extend-hadoop-virtual-network/cloud-only.png)
-  
+
     使用虚拟网络链接 Azure 服务与 HDInsight 可实现以下方案：
-  
+
   * 从 Azure 虚拟机中运行的 Azure 网站或服务**调用 HDInsight 服务或作业**。
   * 在 HDInsight 和 Azure SQL 数据库，SQL Server 或在虚拟机上运行的其他数据存储解决方案之间**直接传输数据**。
     * **组合多个 HDInsight 服务器**以构成单个解决方案。例如，通过 HDInsight Storm 服务器使用传入数据，然后将处理的数据存储到 HDInsight HBase 服务器。也可以将原始数据存储到 HDInsight Hadoop 服务器，以便将来使用 MapReduce 进行分析。
 * 使用虚拟专用网络 (VPN) 将云资源连接到本地数据中心网络（站点到站点，或点到站点）。
-  
+
     利用站点到站点配置，可使用硬件 VPN 或路由和远程访问服务将多个资源从数据中心连接到 Azure 虚拟网络。
-  
+
     ![站点到站点配置示意图](./media/hdinsight-extend-hadoop-virtual-network/site-to-site.png)
-  
+
     利用点到站点配置，可使用软件 VPN 将特定资源连接到 Azure 虚拟网络。
-  
+
     ![点到站点配置示意图](./media/hdinsight-extend-hadoop-virtual-network/point-to-site.png)
-  
+
     使用虚拟网络链接云和数据中心，可使类似方案实现仅限云的配置。但是，如果不希望仅限于使用云中的资源，还可以使用数据中心内的资源。
-  
+
   * 在 HDInsight 与数据中心之间**直接传输数据**。例如，使用 Sqoop 在 SQL Server 往返传输数据，或读取业务线 (LOB) 应用程序生成的数据。
   * 从 LOB 应用程序**调用 HDInsight 服务或作业**。例如，使用 HBase Java API 存储和检索 HDInsight HBase 群集的数据。
 
 有关虚拟网络特性、优势和功能的详细信息，请参阅 [Azure 虚拟网络概述](../virtual-network/virtual-networks-overview.md)。
 
 > [!NOTE]
-在预配 HDInsight 群集前，必须创建 Azure 虚拟网络。有关详细信息，请参阅[虚拟网络配置任务](../virtual-network/index.md/)。
+在预配 HDInsight 群集前，必须创建 Azure 虚拟网络。有关详细信息，请参阅[虚拟网络配置任务](../virtual-network/index.md)。
 > 
 > 
 

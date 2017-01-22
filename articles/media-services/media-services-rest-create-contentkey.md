@@ -36,14 +36,14 @@ ms.author: juliako
 1. 随机生成一个 16 字节 AES 密钥（用于常规和信封加密）或 32 字节 AES 密钥（用于存储加密）。
 
     它将成为资产的内容密钥，这意味着该资产的所有关联文件在解密过程中需要使用同一内容密钥。
-2.	调用 [GetProtectionKeyId](https://docs.microsoft.com/zh-cn/rest/api/media/operations/rest-api-functions#a-namegetprotectionkeyida-getprotectionkeyid) 和 [GetProtectionKey](https://docs.microsoft.com/zh-cn/rest/api/media/operations/rest-api-functions#a-namegetprotectionkeya-getprotectionkey) 方法来获取加密内容密钥所必须使用的正确的 X.509 证书。
-3.	使用 X.509 证书的公钥来加密内容密钥。
+2. 调用 [GetProtectionKeyId](https://docs.microsoft.com/zh-cn/rest/api/media/operations/rest-api-functions#a-namegetprotectionkeyida-getprotectionkeyid) 和 [GetProtectionKey](https://docs.microsoft.com/zh-cn/rest/api/media/operations/rest-api-functions#a-namegetprotectionkeya-getprotectionkey) 方法来获取加密内容密钥所必须使用的正确的 X.509 证书。
+3. 使用 X.509 证书的公钥来加密内容密钥。
 
     媒体服务 .NET SDK 在加密时使用 RSA 和 OAEP。可在 [EncryptSymmetricKeyData 函数](https://github.com/Azure/azure-sdk-for-media-services/blob/dev/src/net/Client/Common/Common.FileEncryption/EncryptionUtils.cs)中查看示例。
-4.	创建使用密钥标识符和内容密钥计算得出的校验和值（基于 PlayReady AES 密钥校验和算法）。有关详细信息，请参阅位于[此处](http://www.microsoft.com/playready/documents/)的 PlayReady 标头对象文档的“PlayReady AES 密钥校验和算法”部分。
+4. 创建使用密钥标识符和内容密钥计算得出的校验和值（基于 PlayReady AES 密钥校验和算法）。有关详细信息，请参阅位于[此处](http://www.microsoft.com/playready/documents/)的 PlayReady 标头对象文档的“PlayReady AES 密钥校验和算法”部分。
 
     下面的 .NET 示例将使用密钥标识符的 GUID 部分和明文内容密钥计算校验和。
-    
+
         public static string CalculateChecksum(byte[] contentKey, Guid keyId)
         {
             byte[] array = null;
@@ -73,11 +73,11 @@ ms.author: juliako
 >请根据[使用 REST API 连接到媒体服务](./media-services-rest-connect-programmatically.md)中所述对媒体服务 URI 执行后续调用。
 
 ##检索 ProtectionKeyId 
- 
+
 以下示例演示了如何检索加密内容密钥时必须使用的证书的证书指纹 ProtectionKeyId。执行此步骤以确保计算机上已具备适当的证书。
 
 请求：
-    
+
     GET https://wamsshaclus001rest-hs.chinacloudapp.cn/api/GetProtectionKeyId?contentKeyType=0 HTTP/1.1
     MaxDataServiceVersion: 3.0;NetFx
     Accept: application/json
@@ -86,9 +86,9 @@ ms.author: juliako
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=juliakoams1&urn%3aSubscriptionId=zbbef702-2233-477b-9f16-bc4d3aa97387&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1423034908&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=7eSLe1GHnxgilr3F2FPCGxdL2%2bwy%2f39XhMPGY9IizfU%3d
     x-ms-version: 2.11
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
 响应：
-    
+
     HTTP/1.1 200 OK
     Cache-Control: no-cache
     Content-Length: 139
@@ -101,7 +101,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Wed, 04 Feb 2015 02:42:52 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#Edm.String","value":"7D9BB04D9D0A4A24800CADBFEF232689E048F69C"}
 
 ##检索 ProtectionKeyId 的 ProtectionKey
@@ -109,7 +109,7 @@ ms.author: juliako
 以下示例演示如何使用在上一步中收到的 ProtectionKeyId 来检索 X.509 证书。
 
 请求：
-        
+
     GET https://wamsshaclus001rest-hs.chinacloudapp.cn/api/GetProtectionKey?ProtectionKeyId='7D9BB04D9D0A4A24800CADBFEF232689E048F69C' HTTP/1.1
     MaxDataServiceVersion: 3.0;NetFx
     Accept: application/json
@@ -119,9 +119,9 @@ ms.author: juliako
     x-ms-version: 2.11
     x-ms-client-request-id: 78d1247a-58d7-40e5-96cc-70ff0dfa7382
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
 响应：
-    
+
     HTTP/1.1 200 OK
     Cache-Control: no-cache
     Content-Length: 1227
@@ -135,7 +135,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Thu, 05 Feb 2015 07:52:30 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#Edm.String",
     "value":"MIIDSTCCAjGgAwIBAgIQqf92wku/HLJGCbMAU8GEnDANBgkqhkiG9w0BAQQFADAuMSwwKgYDVQQDEyN3YW1zYmx1cmVnMDAxZW5jcnlwdGFsbHNlY3JldHMtY2VydDAeFw0xMjA1MjkwNzAwMDBaFw0zMjA1MjkwNzAwMDBaMC4xLDAqBgNVBAMTI3dhbXNibHVyZWcwMDFlbmNyeXB0YWxsc2VjcmV0cy1jZXJ0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzR0SEbXefvUjb9wCUfkEiKtGQ5Gc328qFPrhMjSo+YHe0AVviZ9YaxPPb0m1AaaRV4dqWpST2+JtDhLOmGpWmmA60tbATJDdmRzKi2eYAyhhE76MgJgL3myCQLP42jDusWXWSMabui3/tMDQs+zfi1sJ4Ch/lm5EvksYsu6o8sCv29VRwxfDLJPBy2NlbV4GbWz5Qxp2tAmHoROnfaRhwp6WIbquk69tEtu2U50CpPN2goLAqx2PpXAqA+prxCZYGTHqfmFJEKtZHhizVBTFPGS3ncfnQC9QIEwFbPw6E5PO5yNaB68radWsp5uvDg33G1i8IT39GstMW6zaaG7cNQIDAQABo2MwYTBfBgNVHQEEWDBWgBCOGT2hPhsvQioZimw8M+jOoTAwLjEsMCoGA1UEAxMjd2Ftc2JsdXJlZzAwMWVuY3J5cHRhbGxzZWNyZXRzLWNlcnSCEKn/dsJLvxyyRgmzAFPBhJwwDQYJKoZIhvcNAQEEBQADggEBABcrQPma2ekNS3Wc5wGXL/aHyQaQRwFGymnUJ+VR8jVUZaC/U/f6lR98eTlwycjVwRL7D15BfClGEHw66QdHejaViJCjbEIJJ3p2c9fzBKhjLhzB3VVNiLIaH6RSI1bMPd2eddSCqhDIn3VBN605GcYXMzhYp+YA6g9+YMNeS1b+LxX3fqixMQIxSHOLFZ1G/H2xfNawv0VikH3djNui3EKT1w/8aRkUv/AAV0b3rYkP/jA1I0CPn0XFk7STYoiJ3gJoKq9EMXhit+Iwfz0sMkfhWG12/XO+TAWqsK1ZxEjuC9OzrY7pFnNxs4Mu4S8iinehduSpY+9mDd3dHynNwT4="}
 
@@ -193,7 +193,7 @@ ms.author: juliako
     }
 
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 777
@@ -207,7 +207,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Wed, 04 Feb 2015 02:37:46 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#ContentKeys/@Element",
     "Id":"nb:kid:UUID:9c8ea9c6-52bd-4232-8a43-8e43d8564a99","Created":"2015-02-04T02:37:46.9684379Z",
     "LastModified":"2015-02-04T02:37:46.9684379Z",
@@ -221,9 +221,9 @@ ms.author: juliako
 ##将 ContentKey 与资产关联
 
 创建 ContentKey 后，使用 $links 操作将其与资产关联，如以下示例所示：
-    
+
 请求：
-    
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Assets('nb%3Acid%3AUUID%3Afbd7ce05-1087-401b-aaae-29f16383c801')/$links/ContentKeys HTTP/1.1
     DataServiceVersion: 1.0;NetFx
     MaxDataServiceVersion: 3.0;NetFx

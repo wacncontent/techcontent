@@ -55,7 +55,7 @@ ms.author: juliako
             select a;
         // Reference the asset as an IAsset.
         IAsset asset = assetInstance.FirstOrDefault();
-    
+
         return asset;
     }
 
@@ -73,7 +73,7 @@ ms.author: juliako
             select j;
         // Return the job reference as an Ijob. 
         IJob job = jobInstance.FirstOrDefault();
-    
+
         return job;
     }
 
@@ -90,10 +90,10 @@ ms.author: juliako
             + "Please wait..."
             + Environment.NewLine;
         Console.Write(waitMessage);
-    
+
         // Create a Stringbuilder to store the list that we build. 
         StringBuilder builder = new StringBuilder();
-    
+
         foreach (IAsset asset in _context.Assets)
         {
             // Display the collection of assets.
@@ -103,7 +103,7 @@ ms.author: juliako
             builder.AppendLine("Name: " + asset.Name);
             builder.AppendLine("==============");
             builder.AppendLine("******ASSET FILES******");
-    
+
             // Display the files associated with each asset. 
             foreach (IAssetFile fileItem in asset.AssetFiles)
             {
@@ -112,7 +112,7 @@ ms.author: juliako
                 builder.AppendLine("==============");
             }
         }
-    
+
         // Display output in console.
         Console.Write(builder.ToString());
     }
@@ -135,10 +135,10 @@ ms.author: juliako
             + "Please wait..."
             + Environment.NewLine;
         Console.Write(waitMessage);
-    
+
         // Create a Stringbuilder to store the list that we build. 
         StringBuilder builder = new StringBuilder();
-    
+
         foreach (IJob job in _context.Jobs)
         {
             // Display the collection of jobs on the server.
@@ -149,7 +149,7 @@ ms.author: juliako
             builder.AppendLine("State: " + job.State);
             builder.AppendLine("Order: " + job.Priority);
             builder.AppendLine("==============");
-    
+
             // For each job, display the associated tasks (a job  
             // has one or more tasks). 
             builder.AppendLine("******TASKS*******");
@@ -165,12 +165,12 @@ ms.author: juliako
                 }
                 builder.AppendLine("==============");
             }
-    
+
             // For each job, display the list of input media assets.
             builder.AppendLine("******JOB INPUT MEDIA ASSETS*******");
             foreach (IAsset inputAsset in job.InputMediaAssets)
             {
-    
+
                 if (inputAsset != null)
                 {
                     builder.AppendLine("Input Asset Id: " + inputAsset.Id);
@@ -178,7 +178,7 @@ ms.author: juliako
                     builder.AppendLine("==============");
                 }
             }
-    
+
             // For each job, display the list of output media assets.
             builder.AppendLine("******JOB OUTPUT MEDIA ASSETS*******");
             foreach (IAsset theAsset in job.OutputMediaAssets)
@@ -190,9 +190,9 @@ ms.author: juliako
                     builder.AppendLine("==============");
                 }
             }
-    
+
         }
-    
+
         // Display output in console.
         Console.Write(builder.ToString());
     }
@@ -212,7 +212,7 @@ ms.author: juliako
             Console.WriteLine("ID:  " + policy.Id);
             Console.WriteLine("Permissions: " + policy.Permissions);
             Console.WriteLine("==============");
-    
+
         }
     }
 
@@ -245,18 +245,18 @@ ms.author: juliako
 ##<a name="enumerating-through-large-collections-of-entities"></a> 枚举大型实体集合
 
 查询实体时，一次返回的实体数限制为 1000 个，因为公共 REST v2 将查询结果数限制为 1000 个。枚举大型实体集合时，需要使用 Skip 和 Take。
-    
+
 以下函数将循环访问所提供的媒体服务帐户中的所有作业。媒体服务将在作业集合中返回 1000 个作业。该函数使用 Skip 和 Take 来确保枚举所有作业（如果你帐户中的作业超过 1000 个）。
-    
+
     static void ProcessJobs()
     {
         try
         {
-    
+
             int skipSize = 0;
             int batchSize = 1000;
             int currentBatch = 0;
-    
+
             while (true)
             {
                 // Loop through all Jobs (1000 at a time) in the Media Services account
@@ -266,7 +266,7 @@ ms.author: juliako
                     currentBatch++;
                     Console.WriteLine("Processing Job Id:" + job.Id);
                 }
-    
+
                 if (currentBatch == batchSize)
                 {
                     skipSize += batchSize;
@@ -291,11 +291,11 @@ ms.author: juliako
     {
         // delete the asset
         asset.Delete();
-    
+
         // Verify asset deletion
         if (GetAsset(asset.Id) == null)
             Console.WriteLine("Deleted the Asset");
-    
+
     }
 
 ##<a id="Delete-a-job"></a>删除作业
@@ -305,12 +305,12 @@ ms.author: juliako
     static void DeleteJob(string jobId)
     {
         bool jobDeleted = false;
-    
+
         while (!jobDeleted)
         {
             // Get an updated job reference.  
             IJob job = GetJob(jobId);
-    
+
             // Check and handle various possible job states. You can 
             // only delete a job whose state is Finished, Error, or Canceled.   
             // You can cancel jobs that are Queued, Scheduled, or Processing,  
@@ -343,7 +343,7 @@ ms.author: juliako
                 default:
                     break;
             }
-    
+
         }
     }
 
@@ -360,9 +360,9 @@ ms.author: juliako
                 where p.Id == existingPolicyId
                 select p;
         IAccessPolicy policy = policyInstance.FirstOrDefault();
-    
+
         policy.Delete();
-    
+
     }
-    
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

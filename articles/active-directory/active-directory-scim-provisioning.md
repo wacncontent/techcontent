@@ -53,28 +53,28 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
 * 接受根据 SCIM 协议第 2.1 部分使用 OAuth 持有者令牌进行授权。
 
 你应该咨询应用程序提供者，或参阅应用程序提供者文档中的说明，以了解是否符合这些要求。
- 
+
 ###入门
 
 支持上述 SCIM 配置文件的应用程序可以使用 Azure AD 应用程序库中的“自定义”应用功能连接到 Azure Active Directory。连接后，Azure AD 将每隔 5 分钟运行同步过程，此过程将为分配的用户和组查询应用程序的 SCIM 终结点，并根据分配详细信息创建或修改这些用户和组。
 
 **连接到支持 SCIM 的应用程序：**
 
-1.	在 Web 浏览器中，从 https://manage.windowsazure.cn 启动 Azure 经典门户。
-2.	浏览到“Active Directory”>“目录”>“[你的目录]”>“应用程序”，然后选择“添加”>“从库中添加应用程序”。
-3.	选择左侧的“自定义”选项卡，输入应用程序的名称，然后单击复选标记图标以创建应用对象。
+1. 在 Web 浏览器中，从 https://manage.windowsazure.cn 启动 Azure 经典门户。
+2. 浏览到“Active Directory”>“目录”>“[你的目录]”>“应用程序”，然后选择“添加”>“从库中添加应用程序”。
+3. 选择左侧的“自定义”选项卡，输入应用程序的名称，然后单击复选标记图标以创建应用对象。
 
 ![][2]
 
-4.	在出现的屏幕中，选择第二个“配置帐户预配”按钮。
-5.	在“预配终结点 URL”字段中，输入应用程序的 SCIM 终结点的 URL。
-6.	如果 SCIM 终结点需要来自非 Azure AD 颁发者的 OAuth 持有者令牌，那么便将所需的 OAuth 持有者令牌复制到“身份验证令牌(可选)”字段。如果此字段留空，则 Azure AD 将在每个请求中包含从 Azure AD 颁发的 OAuth 持有者令牌。使用 Azure AD 作为标识提供者的应用可以验证 Azure AD 颁发的此令牌。
-7.	单击“下一步”，然后单击“开始测试”按钮，使 Azure Active Directory 尝试连接到 SCIM 终结点。如果尝试失败，将显示诊断信息。  
-8.	如果尝试连接到应用程序成功，请在余下的屏幕中单击“下一步”，然后单击“完成”以退出对话框。
-9.	在出现的屏幕中，选择第三个“分配帐户”按钮。在出现的“用户和组”部分中，分配你要预配到应用程序的用户或组。
-10.	分配用户和组后，单击屏幕顶部附近的“配置”选项卡。
-11.	在“帐户预配”下，确认“状态”设置为“打开”。 
-12.	在“工具”下，单击“重新开始帐户预配”以开始预配过程。
+4. 在出现的屏幕中，选择第二个“配置帐户预配”按钮。
+5. 在“预配终结点 URL”字段中，输入应用程序的 SCIM 终结点的 URL。
+6. 如果 SCIM 终结点需要来自非 Azure AD 颁发者的 OAuth 持有者令牌，那么便将所需的 OAuth 持有者令牌复制到“身份验证令牌(可选)”字段。如果此字段留空，则 Azure AD 将在每个请求中包含从 Azure AD 颁发的 OAuth 持有者令牌。使用 Azure AD 作为标识提供者的应用可以验证 Azure AD 颁发的此令牌。
+7. 单击“下一步”，然后单击“开始测试”按钮，使 Azure Active Directory 尝试连接到 SCIM 终结点。如果尝试失败，将显示诊断信息。  
+8. 如果尝试连接到应用程序成功，请在余下的屏幕中单击“下一步”，然后单击“完成”以退出对话框。
+9. 在出现的屏幕中，选择第三个“分配帐户”按钮。在出现的“用户和组”部分中，分配你要预配到应用程序的用户或组。
+10. 分配用户和组后，单击屏幕顶部附近的“配置”选项卡。
+11. 在“帐户预配”下，确认“状态”设置为“打开”。 
+12. 在“工具”下，单击“重新开始帐户预配”以开始预配过程。
 
 请注意，预配过程可能需要 5-10 分钟才能开始将请求发送到 SCIM 终结点。应用程序的“仪表板”选项卡上提供了连接尝试的摘要，可以从目录的“报告”选项卡下载预配活动报告和任何预配错误。
 
@@ -84,10 +84,10 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
 
 工作方式如下：
 
-1.	Azure AD 提供名为 [Microsoft.SystemForCrossDomainIdentityManagement](https://www.nuget.org/packages/Microsoft.SystemForCrossDomainIdentityManagement/) 的公共语言基础结构库。系统集成商和开发商可以使用此库来创建与部署能够将 Azure AD 连接到任何应用程序的标识存储的、基于 SCIM 的 Web 服务终结点。
-2.	将在 Web 服务中实现映射，以将标准化用户架构映射到用户架构和应用程序所需的协议。
-3.	终结点 URL 在 Azure AD 中注册为应用程序库中自定义应用程序的一部分。
-4.	用户和组在 Azure AD 中分配到此应用程序。分配后，它们将被放入队列，以同步到目标应用程序。处理队列的同步过程每隔 5 分钟运行一次。
+1. Azure AD 提供名为 [Microsoft.SystemForCrossDomainIdentityManagement](https://www.nuget.org/packages/Microsoft.SystemForCrossDomainIdentityManagement/) 的公共语言基础结构库。系统集成商和开发商可以使用此库来创建与部署能够将 Azure AD 连接到任何应用程序的标识存储的、基于 SCIM 的 Web 服务终结点。
+2. 将在 Web 服务中实现映射，以将标准化用户架构映射到用户架构和应用程序所需的协议。
+3. 终结点 URL 在 Azure AD 中注册为应用程序库中自定义应用程序的一部分。
+4. 用户和组在 Azure AD 中分配到此应用程序。分配后，它们将被放入队列，以同步到目标应用程序。处理队列的同步过程每隔 5 分钟运行一次。
 
 ###代码示例
 
@@ -98,7 +98,7 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
 * Visual Studio 2013 或更高版本
 * [Azure SDK for .NET](/downloads/)
 * 支持将 ASP.NET Framework 4.5 用作 SCIM 终结点的 Windows 计算机。必须能够从云访问此计算机
-* [具有 Azure AD Premium 试用版或许可版的 Azure 订阅](./index.md/)
+* [具有 Azure AD Premium 试用版或许可版的 Azure 订阅](./index.md)
 * Amazon AWS 示例需要 [AWS Toolkit for Visual Studio](http://docs.aws.amazon.com/AWSToolkitVS/latest/UserGuide/tkv_setup.html) 中的库。请参阅示例随附的自述文件以获取其他详细信息
 
 ###入门
@@ -107,41 +107,41 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
 
 **创建示例 SCIM 终结点：**
 
-1.	从 [https://github.com/Azure/AzureAD-BYOA-Provisioning-Samples/tree/master](https://github.com/Azure/AzureAD-BYOA-Provisioning-Samples/tree/master) 下载代码示例包
-2.	将包解压缩，并将它放在 Windows 计算机上的某个位置，例如 C:\\AzureAD-BYOA-Provisioning-Samples。
-3.	在此文件夹中，使用 Visual Studio 启动 FileProvisioningAgent 解决方案。
-4.	选择“工具”>“库程序包管理器”>“程序包管理器控制台”并执行以下命令，使 FileProvisioningAgent 项目解析解决方案引用：
+1. 从 [https://github.com/Azure/AzureAD-BYOA-Provisioning-Samples/tree/master](https://github.com/Azure/AzureAD-BYOA-Provisioning-Samples/tree/master) 下载代码示例包
+2. 将包解压缩，并将它放在 Windows 计算机上的某个位置，例如 C:\\AzureAD-BYOA-Provisioning-Samples。
+3. 在此文件夹中，使用 Visual Studio 启动 FileProvisioningAgent 解决方案。
+4. 选择“工具”>“库程序包管理器”>“程序包管理器控制台”并执行以下命令，使 FileProvisioningAgent 项目解析解决方案引用：
 
     Install-Package Microsoft.SystemForCrossDomainIdentityManagement
     Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
     Install-Package Microsoft.Owin.Diagnostics
     Install-Package Microsoft.Owin.Host.SystemWeb
 
-5.	构建 FileProvisioningAgent 项目。
-6.	在 Windows 中启动命令提示符应用程序（以管理员身分），并使用 **cd** 命令将目录切换到 **\\AzureAD-BYOA-Provisioning-Samples\\ProvisioningAgent\\bin\\Debug** 文件夹。
-7.	运行以下命令，并将 <ip-address> 替换为 Windows 计算机的 IP 或域名。
+5. 构建 FileProvisioningAgent 项目。
+6. 在 Windows 中启动命令提示符应用程序（以管理员身分），并使用 **cd** 命令将目录切换到 **\\AzureAD-BYOA-Provisioning-Samples\\ProvisioningAgent\\bin\\Debug** 文件夹。
+7. 运行以下命令，并将 <ip-address> 替换为 Windows 计算机的 IP 或域名。
 
     FileAgnt.exe http://<ip-address>:9000 TargetFile.csv
 
-8.	在 Windows 中，于“Windows 设置”>“网络和 Internet 设置”下面，选择“Windows 防火墙”>“高级设置”，然后创建允许对端口 9000 进行入站访问的“入站规则”。
-9.	如果 Windows 计算机位于路由器后面，则你需要将路由器配置为在面向 Internet 的端口 9000 与 Windows 计算机上的端口 9000 之间执行网络访问转换。为了使 Azure AD 能够在云中访问此终结点，必须执行此操作。
+8. 在 Windows 中，于“Windows 设置”>“网络和 Internet 设置”下面，选择“Windows 防火墙”>“高级设置”，然后创建允许对端口 9000 进行入站访问的“入站规则”。
+9. 如果 Windows 计算机位于路由器后面，则你需要将路由器配置为在面向 Internet 的端口 9000 与 Windows 计算机上的端口 9000 之间执行网络访问转换。为了使 Azure AD 能够在云中访问此终结点，必须执行此操作。
 
 **在 Azure AD 中注册示例 SCIM 终结点：**
 
-1.	在 Web 浏览器中，从 https://manage.windowsazure.cn 启动 Azure 经典管理门户。
-2.	浏览到“Active Directory”>“目录”>“[你的目录]”>“应用程序”，然后选择“添加”>“从库中添加应用程序”。
-3.	选择左侧的“自定义”选项卡，输入类似于“SCIM 测试应用”的名称，然后单击复选标记图标以创建应用对象。请注意，创建的应用程序对象代表要预配和实现登一登入的目标应用程序，而不只是 SCIM 终结点。
+1. 在 Web 浏览器中，从 https://manage.windowsazure.cn 启动 Azure 经典管理门户。
+2. 浏览到“Active Directory”>“目录”>“[你的目录]”>“应用程序”，然后选择“添加”>“从库中添加应用程序”。
+3. 选择左侧的“自定义”选项卡，输入类似于“SCIM 测试应用”的名称，然后单击复选标记图标以创建应用对象。请注意，创建的应用程序对象代表要预配和实现登一登入的目标应用程序，而不只是 SCIM 终结点。
 
 ![][2]
 
-4.	在出现的屏幕中，选择第二个“配置帐户预配”按钮。
-5.	在对话框中，输入面向 Internet 的 URL 和 SCIM 终结点的端口。这类似于 http://testmachine.contoso.com:9000 或 http://<ip-address>:9000/，其中 <ip-address> 是面向 Internet 的 IP 地址。  
-6.	单击“下一步”，然后单击“开始测试”按钮，使 Azure Active Directory 尝试连接到 SCIM 终结点。如果尝试失败，将显示诊断信息。  
-7.	如果尝试连接到 Web 服务成功，请在余下的屏幕中单击“下一步”，然后单击“完成”以退出对话框。
-8.	在出现的屏幕中，选择第三个“分配帐户”按钮。在出现的“用户和组”部分中，分配你要预配到应用程序的用户或组。
-9.	分配用户和组后，单击屏幕顶部附近的“配置”选项卡。
-10.	在“帐户预配”下，确认“状态”设置为“打开”。 
-11.	在“工具”下，单击“重新开始帐户预配”以开始预配过程。
+4. 在出现的屏幕中，选择第二个“配置帐户预配”按钮。
+5. 在对话框中，输入面向 Internet 的 URL 和 SCIM 终结点的端口。这类似于 http://testmachine.contoso.com:9000 或 http://<ip-address>:9000/，其中 <ip-address> 是面向 Internet 的 IP 地址。  
+6. 单击“下一步”，然后单击“开始测试”按钮，使 Azure Active Directory 尝试连接到 SCIM 终结点。如果尝试失败，将显示诊断信息。  
+7. 如果尝试连接到 Web 服务成功，请在余下的屏幕中单击“下一步”，然后单击“完成”以退出对话框。
+8. 在出现的屏幕中，选择第三个“分配帐户”按钮。在出现的“用户和组”部分中，分配你要预配到应用程序的用户或组。
+9. 分配用户和组后，单击屏幕顶部附近的“配置”选项卡。
+10. 在“帐户预配”下，确认“状态”设置为“打开”。 
+11. 在“工具”下，单击“重新开始帐户预配”以开始预配过程。
 
 请注意，预配过程可能需要 5-10 分钟才能开始将请求发送到 SCIM 终结点。应用程序的“仪表板”选项卡上提供了连接尝试的摘要，可以从目录的“报告”选项卡下载预配活动报告和任何预配错误。
 
@@ -167,7 +167,7 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
     // Microsoft.SystemForCrossDomainIdentityManagement.IProvider and 
     // Microsoft.SystemForCrossDomainIdentityManagement.Service are all defined in 
     // Microsoft.SystemForCrossDomainIdentityManagement.Service.dll.  
-    
+
     Microsoft.SystemForCrossDomainIdentityManagement.IMonitor monitor = 
       new DevelopersMonitor();
     Microsoft.SystemForCrossDomainIdentityManagement.IProvider provider = 
@@ -245,7 +245,7 @@ Azure Active Directory 可配置为将已分配的用户和组预配到实现[�
 可以使用网络 shell 实用程序将服务器身份验证证书绑定到 Windows 主机上的某个端口，例如：
 
     netsh http add sslcert ipport=0.0.0.0:443 certhash=0000000000003ed9cd0c315bbb6dc1c08da5e6 appid={00112233-4455-6677-8899-AABBCCDDEEFF}  
- 
+
 此处，为 certhash 参数提供的值为证书指纹，为 appid 参数提供的值为任意全局唯一标识符。
 
 若要将服务托管在 Internet 信息服务中，开发人员需构建一个通用语言基础结构代码库程序集，并在该程序集的默认命名空间中使用名为 Startup 的类。以下是这种类的示例：
@@ -426,7 +426,7 @@ Azure Active Directory 可将两种类型的资源预配到 SCIM Web 服务。�
         string ComparisonValue 
           { get; }
     }
-    
+
     public enum Microsoft.SystemForCrossDomainIdentityManagement.ComparisonOperator
     {
         Equals
@@ -499,7 +499,7 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
          Microsoft.SystemForCrossDomainIdentityManagement.IResourceRetrievalParameters 
            parameters, 
            string correlationIdentifier);
-    
+
     public interface 
       Microsoft.SystemForCrossDomainIdentityManagement.IResourceRetrievalParameters:   
         IRetrievalParameters
@@ -607,7 +607,7 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
     public Microsoft.SystemForCrossDomainIdentityManagement.OperationName 
       Name
       { get; set; }
-    
+
     public Microsoft.SystemForCrossDomainIdentityManagement.IPath 
       Path
       { get; set; }
@@ -638,7 +638,7 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
     {
       public string Reference
       { get; set; }
-      
+
       public string Value
       { get; set; }
     }
@@ -658,7 +658,7 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
 
     DELETE ~/scim/Users/54D382A4-2050-4C03-94D1-E769F1D15682 HTTP/1.1
     Authorization: Bearer ...
-    
+
 如果使用 Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库构建了服务，则将请求转换为对服务提供者的 Delete 方法调用。该方法具有以下签名：
 
     // System.Threading.Tasks.Tasks is defined in mscorlib.dll.  
@@ -668,7 +668,7 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
       Microsoft.SystemForCrossDomainIdentityManagement.IResourceIdentifier  
         resourceIdentifier, 
       string correlationIdentifier);
- 
+
 在上述取消预配用户的请求示例中，作为 resourceIdentifier 参数值提供的对象将具有以下属性值：
 
 * ResourceIdentifier.Identifier: "54D382A4-2050-4C03-94D1-E769F1D15682"
@@ -687,7 +687,7 @@ Microsoft 提供的、用于实现 SCIM 服务的通用语言基础结构库将�
 
 ##相关文章
 - [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
-    
+
 <!--Image references-->
 [1]: ./media/active-directory-scim-provisioning/scim-figure-1.PNG
 [2]: ./media/active-directory-scim-provisioning/scim-figure-2.PNG

@@ -92,7 +92,7 @@ VPN 类型 = 基于路由 <br>
 1. 在屏幕的左下角，单击“新建”>“网络服务”>“虚拟网络”>“添加本地网络”。
 
 2. 在“指定本地网络详细信息”窗口中，键入想要连接到的 RM VNet 的名称。在“VPN 设备 IP 地址 (可选)”框中，键入任何有效的公共 IP 地址。这只是一个临时占位符。您可以稍后更改此 IP 地址。单击窗口右下角的箭头按钮。
- 
+
 3. 在“指定地址空间”页的“起始 IP”文本框中，键入想要连接到的 Resource Manager VNet 的网络前缀和 CIDR 块。此设置用于指定要路由到 RM VNet 的地址空间。
 
 ### 第 2 节 - 将本地网络关联到 VNet
@@ -181,14 +181,14 @@ VPN 类型 = 基于路由 <br>
         -LocalNetworkSiteName RMVNetLocal -SharedKey abc123
 
 4. 运行以下命令创建 VPN 连接：
-    
+
     **设置变量**
 
         $vnet01gateway = Get-AzureRMLocalNetworkGateway -Name ClassicVNetLocal -ResourceGroupName RG1
         $vnet02gateway = Get-AzureRmVirtualNetworkGateway -Name RMGateway -ResourceGroupName RG1
 
     **创建连接**<br>请注意，`-ConnectionType` 为 IPsec，而不是 Vnet2Vnet。在此示例中，`-Name` 是想要调用连接的名称。下面的示例创建了名为 *rm-to-classic-connection* 的连接。
-        
+
         New-AzureRmVirtualNetworkGatewayConnection -Name rm-to-classic-connection -ResourceGroupName RG1 `
         -Location "China East" -VirtualNetworkGateway1 `
         $vnet02gateway -LocalNetworkGateway2 `

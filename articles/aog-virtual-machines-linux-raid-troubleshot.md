@@ -22,13 +22,13 @@ wacn.date: 08/31/2016
 
 >[!NOTE] 以下范例均在 CentOS 平台运行,其他版本 Linux 略有差异, 请注意区别。
 
-1.	在 Azure 平台的 Linux 虚拟机上添加至少 2 块空磁盘。
-2.	以管理员身份登录 Linux 虚机并切换至 root 用户。
-3.	安装 mdadm 工具。
+1. 在 Azure 平台的 Linux 虚拟机上添加至少 2 块空磁盘。
+2. 以管理员身份登录 Linux 虚机并切换至 root 用户。
+3. 安装 mdadm 工具。
 
         # yum install mdadm
 
-4.	查看磁盘及分区。
+4. 查看磁盘及分区。
 
         # fdisk  -l |grep -i "Disk /dev/"
         Disk /dev/sdb: 145.0 GB, 144955146240 bytes
@@ -36,18 +36,18 @@ wacn.date: 08/31/2016
         Disk /dev/sdc: 1073 MB, 1073741824 bytes
         Disk /dev/sdd: 1073 MB, 1073741824 bytes
 
-5.	创建 RAID。
+5. 创建 RAID。
 
         # mdadm --create /dev/md0 --level 0 --raid-devices 2 /dev/sdc /dev/sdd
         mdadm: Defaulting to version 1.2 metadata
         mdadm: array /dev/md0 started.
 
-6.	基于 RAID, 创建文件系统。
+6. 基于 RAID, 创建文件系统。
 
         # mkfs.ext4 /dev/md0
 
-7.	添加新文件系统到 /etc/fstab。
-    
+7. 添加新文件系统到 /etc/fstab。
+
         # mkdir /data
         # blkid  |grep -i md0
         /dev/md0: UUID="21424152-440e-42f5-b8fc-07ded5a0bea4" TYPE="ext4"
@@ -58,11 +58,11 @@ wacn.date: 08/31/2016
 
 ## 常见问题及解决
 
-1.	**问题**:是否可以把临时盘(默认 /dev/sdb) 加入 RAID 中?
-    
+1. **问题**:是否可以把临时盘(默认 /dev/sdb) 加入 RAID 中?
+
     **答**:不可以, 因为临时盘每次重启都会清空数据。
 
-2.	**问题**:系统默认会启用 RAID 的每周自检,如何调整执行时间或者关闭自检?
+2. **问题**:系统默认会启用 RAID 的每周自检,如何调整执行时间或者关闭自检?
 
     **答**:编辑定时任务脚本 /etc/cron.d/raid-check, 修改执行时间。默认如下:
 

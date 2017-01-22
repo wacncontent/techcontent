@@ -116,26 +116,26 @@ wacn.date: 12/13/2016
 
 1.Azure 经典管理门户
 
-   通过添加域来触发接管。如果域已经存在一个目录，则你可以选择执行外部接管。
+    通过添加域来触发接管。如果域已经存在一个目录，则你可以选择执行外部接管。
 
-   使用你的凭据登录到 Azure 经典管理门户。导航到现有目录，然后选择“添加域”。
+    使用你的凭据登录到 Azure 经典管理门户。导航到现有目录，然后选择“添加域”。
 
 2.Office 365
 
-   在 Office 365 中，可以使用“管理域”[](https://support.office.com/article/Navigate-to-the-Office-365-Manage-domains-page-026af1f2-0e6d-4f2d-9b33-fd147420fac2/)页上的选项来处理域和 DNS 记录。请参阅[在 Office 365 中验证域](https://support.office.com/article/Verify-your-domain-in-Office-365-6383f56d-3d09-4dcb-9b41-b5f5a5efd611/)。
+    在 Office 365 中，可以使用“管理域”[](https://support.office.com/article/Navigate-to-the-Office-365-Manage-domains-page-026af1f2-0e6d-4f2d-9b33-fd147420fac2/)页上的选项来处理域和 DNS 记录。请参阅[在 Office 365 中验证域](https://support.office.com/article/Verify-your-domain-in-Office-365-6383f56d-3d09-4dcb-9b41-b5f5a5efd611/)。
 
 3.Windows PowerShell
 
-   需要执行以下步骤以使用 Windows PowerShell 执行验证。
+    需要执行以下步骤以使用 Windows PowerShell 执行验证。
 
-   | 步骤 | 要使用的 Cmdlet | 
-   | ---- | ---- | 
-   | 创建凭据对象 |Get-Credential | 
-   | 连接到 Azure AD |Connect-MsolService | 
-   | 获取域列表 |Get-MsolDomain | 
-   | 创建质询 |Get-MsolDomainVerificationDns | 
-   | 创建 DNS 记录 |在 DNS 服务器上执行此操作 | 
-   | 验证质询 |Confirm-MsolEmailVerifiedDomain |
+    | 步骤 | 要使用的 Cmdlet | 
+    | ---- | ---- | 
+    | 创建凭据对象 |Get-Credential | 
+    | 连接到 Azure AD |Connect-MsolService | 
+    | 获取域列表 |Get-MsolDomain | 
+    | 创建质询 |Get-MsolDomainVerificationDns | 
+    | 创建 DNS 记录 |在 DNS 服务器上执行此操作 | 
+    | 验证质询 |Confirm-MsolEmailVerifiedDomain |
 
 例如：
 

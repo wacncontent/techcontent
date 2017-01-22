@@ -664,5 +664,5 @@ wacn.date: 01/03/2017
 
 [archive]: https://msdn.microsoft.com/zh-cn/library/azure/dn391773.aspx
 [family-explain]: ./cloud-services-guestos-update-matrix.md#guest-os-family-version-and-release-explanation
- 
+
 <!---HONumber=Mooncake_1226_2016-->

@@ -31,7 +31,7 @@ ms.author: iainfou
 请确保符合以下先决条件：
 
 * **在 Resource Manager 部署模型中创建的 Azure VM** - 如果尚未创建 Linux VM，可以使用[门户](./virtual-machines-linux-quick-create-portal.md)、[Azure CLI](./virtual-machines-linux-quick-create-cli.md) 或 [Resource Manager 模板](./virtual-machines-linux-cli-deploy-templates.md)。
-  
+
     根据需要配置 VM。例如，[添加数据磁盘](./virtual-machines-linux-add-disk.md)、应用更新，并安装应用程序。
 * **Azure CLI** - 在本地计算机上安装 [Azure CLI](../xplat-cli-install.md)。
 
@@ -43,9 +43,9 @@ ms.author: iainfou
 
         sudo waagent -deprovision+user
 
-   > [!NOTE]
-   仅在要捕获为映像的 VM 上运行此命令。不保证映像中的所有敏感信息被清除，或者映像适合用于分发。
- 
+    > [!NOTE]
+    仅在要捕获为映像的 VM 上运行此命令。不保证映像中的所有敏感信息被清除，或者映像适合用于分发。
+
 3. 键入 **y** 继续。添加 **-force** 参数即可免除此确认步骤。
 4. 完成该命令后，键入 **exit**。此步骤将关闭 SSH 客户端。
 
@@ -69,8 +69,8 @@ ms.author: iainfou
 
         azure vm capture -g myResourceGroup -n myVM -p myVHDNamePrefix -t myTemplate.json
 
-   > [!IMPORTANT]
-   默认情况下，映像 VHD 文件在原始 VM 所用的相同存储帐户中创建。使用*同一个存储帐户*来存储从映像创建的所有新 VM 的 VHD。
+    > [!IMPORTANT]
+    默认情况下，映像 VHD 文件在原始 VM 所用的相同存储帐户中创建。使用*同一个存储帐户*来存储从映像创建的所有新 VM 的 VHD。
 
 6. 若要查找捕获的映像的位置，请在文本编辑器中打开 JSON 模板。在 **storageProfile** 中，查找**系统**容器中**映像**的 **uri**。例如，OS 磁盘映像的 URI 类似于 `https://xxxxxxxxxxxxxx.blob.core.chinacloudapi.cn/system/Microsoft.Compute/Images/vhds/MyVHDNamePrefix-osDisk.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.vhd`
 

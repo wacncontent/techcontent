@@ -104,7 +104,7 @@ ms.author: juliako
         }  
       ]  
     }  
-    
+
 ## <a id="encoding_with_dotnet"></a>使用媒体服务 .NET SDK 进行编码
 
 以下代码示例使用媒体服务 .NET SDK 执行下列任务：
@@ -112,7 +112,7 @@ ms.author: juliako
 - 创建编码作业。
 - 获取对 Media Encoder Standard 编码器的引用。
 - 加载前面部分中创建的自定义 JSON 预设。
-  
+
         // Load the JSON from the local file.
         string configuration = File.ReadAllText(fileName);  
 
@@ -121,7 +121,7 @@ ms.author: juliako
 - 创建将包含所编码资产的输出资产。
 - 添加事件处理程序以检查作业进度。
 - 提交作业。
-   
+
         using System;
         using System.Collections.Generic;
         using System.Configuration;
@@ -138,7 +138,7 @@ ms.author: juliako
         using Microsoft.WindowsAzure.MediaServices.Client.DynamicEncryption;
         using System.Web;
         using System.Globalization;
-  
+
         namespace CustomizeMESPresests
         {
             class Program
@@ -149,22 +149,22 @@ ms.author: juliako
                 private static readonly string _mediaServicesAccountKey =
                     ConfigurationManager.AppSettings["MediaServicesAccountKey"];
         private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
-            
+
         // Azure China uses a different API server and a different ACS Base Address from the Global.
         private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
         private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
-            
+
                 // Field for service context.
                 private static CloudMediaContext _context = null;
                 private static MediaServicesCredentials _cachedCredentials = null;
         private static Uri _apiServer = null;
-  
+
                 private static readonly string _mediaFiles =
                     Path.GetFullPath(@"../..\Media");
-  
+
                 private static readonly string _singleMP4File =
                     Path.Combine(_mediaFiles, @"BigBuckBunny.mp4");
-  
+
                 static void Main(string[] args)
                 {
             // Create and cache the Media Services credentials in a static class variable.
@@ -182,13 +182,13 @@ ms.author: juliako
 
                     // Get an uploaded asset.
                     var asset = _context.Assets.FirstOrDefault();
-  
+
                     // Encode and generate the output using custom presets.
                     EncodeToAdaptiveBitrateMP4Set(asset);
-  
+
                     Console.ReadLine();
                 }
-  
+
                 static public IAsset EncodeToAdaptiveBitrateMP4Set(IAsset asset)
                 {
                     // Declare a new job.

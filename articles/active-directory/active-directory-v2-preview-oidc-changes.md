@@ -149,7 +149,7 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
     &response_mode=form_post
     &response_type=id_token
     &scope=openid profile email offline_access https://outlook.office.com/mail.read
-    
+
 应用可以立即开始发送 `email` 和 `profile` 范围，v2.0 终结点会接受这两个范围，并根据需要开始向用户请求权限。不过，对 `openid` 范围解释的更改几周后才会生效。
 
 > [!IMPORTANT] **你的工作：如果应用需要用户的相关信息，则添加 `profile` 和 `email` 范围。** 请注意，默认情况下，ADAL 将在请求中同时包含这些权限。
@@ -170,11 +170,11 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 ## 你该怎么办？
 目前，你可以开始进行上述所有更改。你应该立即：
 
-1.	**删除 `x5t` 标头参数上的所有依赖项。**
-2.	**妥善处理令牌响应中从 `profile_info` 到 `id_token` 的转换。**
+1. **删除 `x5t` 标头参数上的所有依赖项。**
+2. **妥善处理令牌响应中从 `profile_info` 到 `id_token` 的转换。**
 3.  **删除 `id_token_expires_in` 响应参数上的所有依赖项。**
-3.	**如果应用需要基本用户信息，则向应用添加 `profile` 和 `email` 范围。**
-4.	**接受令牌中包含或不含尾部斜杠的颁发者值。**
+3. **如果应用需要基本用户信息，则向应用添加 `profile` 和 `email` 范围。**
+4. **接受令牌中包含或不含尾部斜杠的颁发者值。**
 
 我们的 [v2.0 协议文档](./active-directory-v2-protocols.md)已为反映这些更改而更新，因此可以将它作为参考，帮助更新代码。
 

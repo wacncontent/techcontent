@@ -50,11 +50,11 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 2. 请打开 Azure PowerShell 并运行以下命令。请记住要使用自己的凭据替换 *ACCOUNT\_NAME* 和 *ACCOUNT\_KEY = =* 。将 *CONTAINER\_NAME* 替换为选择的名称。
 
         $context = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName "ACCOUNT_NAME" -StorageAccountKey "ACCOUNT_KEY=="
-        
+
         New-AzureStorageContainer CONTAINER_NAME -Permission Off -Context $context
-        
+
         $now = Get-Date 
-        
+
         New-AzureStorageContainerSASToken -Name CONTAINER_NAME -Permission rwdl -ExpiryTime $now.AddDays(1.0) -Context $context -FullUri
 
 得到的新容器的共享访问签名 URI 应如下所示：
@@ -84,15 +84,15 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 
 1. 单击“开始”按钮或按 **Windows** 键。开始键入 `Azure Storage Emulator`并在其启动存储模拟器命令行工具时将其选中。
 2. 在命令提示符窗口中，键入以下命令，其中 `<SQLServerInstance>` 是 SQL Server 实例的名称。若要使用 LocalDb，请指定 `(localdb)\v11.0` 作为 SQL Server 实例。
-   
+
         AzureStorageEmulator init /server <SQLServerInstance> 
-   
+
     也可以使用以下命令，该命令指示模拟器使用默认 SQL Server 实例：
-   
+
         AzureStorageEmulator init /server .\\ 
-   
+
     或者，可以使用以下命令将数据库重新初始化为默认的 LocalDB 实例：
-   
+
         AzureStorageEmulator init /forceCreate 
 
 有关这些命令的详细信息，请参阅[存储模拟器命令行工具参考](#storage-emulator-command-line-tool-reference)。
@@ -149,7 +149,7 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 | **状态** | 打印存储模拟器的状态。 | `AzureStorageEmulator status` | |
 | **清除** | 清除命令行上指定的所有服务中的数据。 | `AzureStorageEmulator clear [blob] [table] [queue] [all]` |  <p>*blob*：清除 Blob 数据。</p><p>*queue*：清除队列数据。</p><p>*table*：清除表数据。</p><p>*all*：清除所有服务中的所有数据。</p> |                                          
 | **Init** | 执行一次性初始化以设置模拟器。 | `AzureStorageEmulator.exe init [-server serverName] [-sqlinstance instanceName] [-forcecreate] [-inprocess]` | <p>*-server serverName\\instanceName*：指定托管 SQL 实例的服务器。</p><p>*-sqlinstance instanceName*：指定要在默认服务器实例中使用的 SQL 实例的名称。</p><p>*-forcecreate*：强制创建 SQL 数据库，即使该数据库已经存在。</p><p>*-inprocess*：在当前进程而不是生成新的进程中执行初始化。您必须使用提升的权限启动当前进程以执行初始化。</p> |
-                                                                                                                  
+
 ##<a id="differences-between-the-storage-emulator-and-azure-storage"></a> 存储模拟器与 Azure 存储之间的差异
 
 由于存储模拟器是在本地的 SQL 实例中运行的模拟环境，模拟器与云中的 Azure 存储帐户之间存在一些功能差异：

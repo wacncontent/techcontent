@@ -219,7 +219,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此设置用作�
 
 如需负载均衡选项的其他常规信息，请参阅：
 
-* [Azure Load Balancer](../load-balancer/index.md/)
-* [Azure 流量管理器](../traffic-manager/index.md/)
+* [Azure Load Balancer](../load-balancer/index.md)
+* [Azure 流量管理器](../traffic-manager/index.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

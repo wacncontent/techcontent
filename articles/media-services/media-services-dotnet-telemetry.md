@@ -45,7 +45,7 @@ ms.author: juliako
                       "https://" + _mediaServicesStorageAccountName + ".table.core.chinacloudapi.cn/");
 
 - 为要监视的服务创建监视配置设置。最多允许一个监视配置设置。
-  
+
         IMonitoringConfiguration monitoringConfiguration = _context.MonitoringConfigurations.Create(notificationEndPoint.Id,
             new List<ComponentMonitoringSetting>()
             {
@@ -56,11 +56,11 @@ ms.author: juliako
 ## 使用遥测信息
 
 有关使用遥测信息的信息，请参阅[此主题](./media-services-telemetry-overview.md)。
- 
+
 ## 示例  
-    
+
 本部分所示的示例假设 App.config 文件中包含以下部分。
-    
+
     <appSettings>
       <add key="MediaServicesAccountName" value="ams_acct_name" />
       <add key="MediaServicesAccountKey" value="ams_acct_key" />
@@ -76,7 +76,7 @@ ms.author: juliako
     using System.Configuration;
     using System.Linq;
     using Microsoft.WindowsAzure.MediaServices.Client;
-    
+
     namespace AMSMetrics
     {
         class Program
@@ -91,21 +91,21 @@ ms.author: juliako
                 ConfigurationManager.AppSettings["StorageAccountName"];
             private static readonly string _mediaServicesStorageAccountKey =
                 ConfigurationManager.AppSettings["StorageAccountKey"];
-            
+
         private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
-        
+
         // Azure China uses a different API server and a different ACS Base Address from the Global.
         private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
         private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
-    
+
             // Field for service context.
             private static CloudMediaContext _context = null;
             private static MediaServicesCredentials _cachedCredentials = null;
         private static Uri _apiServer = null;
-        
+
             private static IStreamingEndpoint _streamingEndpoint = null;
             private static IChannel _channel = null;
-    
+
             static void Main(string[] args)
             {
                 // Create and cache the Media Services credentials in a static class variable.
@@ -120,13 +120,13 @@ ms.author: juliako
 
                     // Used the chached credentials to create CloudMediaContext.
                     _context = new CloudMediaContext(_apiServer, _cachedCredentials);
-    
+
                 _streamingEndpoint = _context.StreamingEndpoints.FirstOrDefault();
                 _channel = _context.Channels.FirstOrDefault();
-    
+
                 var monitoringConfigurations = _context.MonitoringConfigurations;
                 IMonitoringConfiguration monitoringConfiguration = null;
-    
+
                 // No more than one monitoring configuration settings is allowed.
                 if (monitoringConfigurations.ToArray().Length != 0)
                 {
@@ -137,34 +137,34 @@ ms.author: juliako
                     INotificationEndPoint notificationEndPoint =
                                   _context.NotificationEndPoints.Create("monitoring",
                                   NotificationEndPointType.AzureTable, GetTableEndPoint());
-    
+
                     monitoringConfiguration = _context.MonitoringConfigurations.Create(notificationEndPoint.Id,
                         new List<ComponentMonitoringSetting>()
                         {
                             new ComponentMonitoringSetting(MonitoringComponent.Channel, MonitoringLevel.Normal),
                             new ComponentMonitoringSetting(MonitoringComponent.StreamingEndpoint, MonitoringLevel.Normal)
-    
+
                         });
                 }
-    
+
                 //Print metrics for a Streaming Endpoint.
                 PrintStreamingEndpointMetrics();
-    
+
                 Console.ReadLine();
             }
-    
+
             private static string GetTableEndPoint()
             {
                 return "https://" + _mediaServicesStorageAccountName + ".table.core.chinacloudapi.cn/";
             }
-    
+
             private static void PrintStreamingEndpointMetrics()
             {
                 Console.WriteLine(string.Format("Telemetry for streaming endpoint '{0}'", _streamingEndpoint.Name));
-    
+
                 var end = DateTime.UtcNow;
                 var start = DateTime.UtcNow.AddHours(-5);
-    
+
                 // Get some streaming endpoint metrics.
                 var res = _context.StreamingEndPointRequestLogs.GetStreamingEndPointMetrics(
                         GetTableEndPoint(),
@@ -173,9 +173,9 @@ ms.author: juliako
                         _streamingEndpoint.Id,
                         start,
                         end);
-    
+
                 Console.Title = "Streaming endpoint metrics:";
-    
+
                 foreach (var log in res)
                 {
                     Console.WriteLine("AccountId: {0}", log.AccountId);
@@ -192,10 +192,10 @@ ms.author: juliako
                     Console.WriteLine("StreamingEndpointId: {0}", log.StreamingEndpointId);
                     Console.WriteLine();
                 }
-    
+
                 Console.WriteLine();
             }
-    
+
             private static void PrintChannelMetrics()
             {
                 if (_channel == null)
@@ -203,12 +203,12 @@ ms.author: juliako
                     Console.WriteLine("There are no channels in this AMS account");
                     return;
                 }
-    
+
                 Console.WriteLine(string.Format("Telemetry for channel '{0}'", _channel.Name));
-    
+
                 var end = DateTime.UtcNow;
                 var start = DateTime.UtcNow.AddHours(-5);
-    
+
                 // Get some channel metrics.
                 var channelMetrics = _context.ChannelMetrics.GetChannelMetrics(
                     GetTableEndPoint(),
@@ -217,10 +217,10 @@ ms.author: juliako
                    _channel.Id,
                     start,
                     end);
-    
+
                 // Print the channel metrics.
                 Console.WriteLine("Channel metrics:");
-    
+
                 foreach (var channelHeartbeat in channelMetrics.OrderBy(x => x.ObservedTime))
                 {
                     Console.WriteLine(
@@ -229,7 +229,7 @@ ms.author: juliako
                         channelHeartbeat.LastTimestamp,
                         channelHeartbeat.IncomingBitrate);
                 }
-    
+
                 Console.WriteLine();
             }
         }

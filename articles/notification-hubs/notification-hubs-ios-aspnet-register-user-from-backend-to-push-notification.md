@@ -111,7 +111,7 @@ ms.author: wesmc
 
     > [!NOTE] 此时，此方法中不应有任何其他代码。如果你已调用在完成[通知中心入门](./notification-hubs-ios-apple-push-notification-apns-get-started.md)教程的学习时添加的 **registerNativeWithDeviceToken** 方法，必须注释掉或删除该调用。
 
-10.	在 PushToUserAppDelegate.m 文件中，添加以下处理程序方法：
+10. 在 PushToUserAppDelegate.m 文件中，添加以下处理程序方法：
 
         - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
             NSLog(@"%@", userInfo);

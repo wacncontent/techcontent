@@ -469,8 +469,8 @@ wacn.date: 01/04/2017
   [36]: ./media/service-bus-dotnet-multi-tier-app-using-service-bus-queues/service-bus-policies.png
 
   [sbmsdn]: http://msdn.microsoft.com/zh-cn/library/azure/ee732537.aspx  
-  [sbwacom]: ../service-bus/index.md/  
+  [sbwacom]: ../service-bus/index.md  
   [sbwacomqhowto]: ./service-bus-dotnet-get-started-with-queues.md  
   [mutitierstorage]: https://code.msdn.microsoft.com/Windows-Azure-Multi-Tier-eadceb36
-  
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

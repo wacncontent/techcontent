@@ -112,7 +112,7 @@ Azure SQL 数据仓库尚不支持自动创建或自动更新统计信息。为�
 
 ### 适用于小文件的简单示例
 以下是用于创建文件的一行简单 Powershell 脚本。
- 
+
     Get-Content <input_file_name> -Encoding Unicode | Set-Content <output_file_name> -Encoding utf8
 
 但是，尽管将数据重新编码的方法非常简单，但绝非最有效的做法。以下 IO 流式处理示例要快得多，并可达到相同的效果。

@@ -290,7 +290,7 @@ Azure Blob 存储支持块 Blob 和页 Blob。大多数情况下，推荐使用�
 ## 写入追加 Blob
 
 追加 Blob 是一个新类型的 Blob，由用于 .NET 的 Azure 存储服务客户端库 5.x 版引入。追加 Blob 针对追加操作（例如日志记录）进行了优化。类似于块 Blob，追加 Blob 由块组成，但是在将新的块添加到追加 Blob 时，始终追加到该 Blob 的末尾。不能更新或删除追加 Blob 中现有的块。追加 Blob 的块 ID 不公开，因为它们是用于一个块存储(block blob)。
- 
+
 追加 Blob 中的每个块可以有不同的大小，最大为 4 MB，并且追加 Blob 最多可包含 50000 个块。因此，追加 Blob 的最大容量稍微大于 195 GB（4 MB X 50000 块）。
 
 下面的示例创建一个新的追加 Blob 并向其追加某些数据，模拟一个简单的日志记录操作。
@@ -374,5 +374,5 @@ Azure 存储空间支持在客户端和服务器上加密 Blob 数据：
   [配置连接字符串]: http://msdn.microsoft.com/zh-cn/library/azure/ee758697.aspx
   [.NET 客户端库引用]: https://msdn.microsoft.com/zh-cn/library/mt347887.aspx
   [REST API 参考]: http://msdn.microsoft.com/zh-cn/library/azure/dd179355
- 
+
 <!---HONumber=Mooncake_0103_2017-->

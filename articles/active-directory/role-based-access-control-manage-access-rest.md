@@ -81,7 +81,7 @@ ms.author: kgremban
           ],
           "nextLink": null
         }
-        
+
 ## 获取有关角色分配的信息
 
 获取有关角色分配标识符指定的单个角色分配的信息。
@@ -161,7 +161,7 @@ ms.author: kgremban
             "principalId": "5ac84765-1c8c-4994-94b2-629461bd191b"
           }
         }
-        
+
 | 元素名称 | 必选 | 类型 | 说明 |
 |------------------|----------|--------|-------------|
 | roleDefinitionId | 是 | String | 将被分配的角色的标识符。标识符的格式为：`{scope}/providers/Microsoft.Authorization/roleDefinitions/{role-definition-id-guid}` |
@@ -185,7 +185,7 @@ ms.author: kgremban
           "type": "Microsoft.Authorization/roleAssignments",
           "name": "2e9e86c8-0e91-4958-b21f-20f51f27bab2"
         }
-        
+
 ## 删除角色分配
 
 删除指定范围的角色分配。
@@ -471,7 +471,7 @@ ms.author: kgremban
 ### 响应
 
 状态代码：201
-        
+
         {
           "properties": {
             "roleName": "Virtual Machine Operator",
@@ -561,7 +561,7 @@ ms.author: kgremban
             ]
           }
         }
-        
+
 | 元素名称 | 必选 | 类型 | 说明 |
 |--------------|----------|------|-------------|
 | 名称 | 是 | String | 要更新的自定义角色的 GUID 标识符。 |
@@ -673,5 +673,5 @@ ms.author: kgremban
           "type": "Microsoft.Authorization/roleDefinitions",
           "name": "0bd62a70-e1b8-4e0b-a7c2-75cab365c95b"
         }
-        
+
 <!---HONumber=Mooncake_0627_2016-->

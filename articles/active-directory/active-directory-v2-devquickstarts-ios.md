@@ -62,19 +62,19 @@ CocoaPods 是 Xcode 项目的依赖关系管理器。它会自动管理上述安
 1. 将以下内容添加到 podfile：
 
         platform :ios, '8.0'
-    
+
         target 'QuickStart' do
-    
+
         pod 'NXOAuth2Client'
-    
+
         end
-        
+
 2. 使用 CocoaPods 加载 podfile。这会创建你要加载的新 Xcode 工作区。
 
         $ pod install
         ...
         $ open QuickStart.xcworkspace
-        
+
 ## 浏览项目结构
 
 在主干中为项目设置以下结构：
@@ -87,9 +87,9 @@ CocoaPods 是 Xcode 项目的依赖关系管理器。它会自动管理上述安
 
 ## 设置库中的 settings.plst 文件
 
--	在快速入门项目中，打开 `settings.plist` 文件。替换节中的元素值，以反映你在 Azure 门户中使用的值。每当使用 Active Directory 身份验证库时，你的代码就会参考这些值。
-    -	`clientId` 是从门户复制的应用程序的客户端 ID。
-    -	`redirectUri` 是门户提供的重定向 URL。
+- 在快速入门项目中，打开 `settings.plist` 文件。替换节中的元素值，以反映你在 Azure 门户中使用的值。每当使用 Active Directory 身份验证库时，你的代码就会参考这些值。
+    - `clientId` 是从门户复制的应用程序的客户端 ID。
+    - `redirectUri` 是门户提供的重定向 URL。
 
 ## 在 LoginViewController 中设置 NXOAuth2Client 库
 
@@ -111,7 +111,7 @@ objc
     bool loginFlow = FALSE;
     bool isRequestBusy;
     NSURL *authcode;
-    
+
 让我们看看关于代码的详细信息。
 
 第一个字符串用于 `scopes`。`User.ReadBasic.All` 值可让你读取目录中所有用户的基本个人资料。
@@ -131,7 +131,7 @@ objc
 添加以下代码：
 
 objc
-    
+
     - (void)viewDidLoad {
         [super viewDidLoad];
         self.loginView.delegate = self;
@@ -141,7 +141,7 @@ objc
                                                              diskCapacity:20 * 1024 * 1024
                                                                  diskPath:nil];
         [NSURLCache setSharedURLCache:URLCache];
-    
+
     }
 
 ### 创建用于登录的 Web 视图
@@ -149,18 +149,18 @@ objc
 Web 视图可提示用户提供短信等附加因素（如果已配置）或向用户返回错误消息。你将在此处设置 Web 视图，然后编写代码，以从标识服务处理将会在 Web 视图中发生的回叫。
 
 objc
-    
+
     -(void)requestOAuth2Access {
         //to sign in to Microsoft APIs using OAuth2, we must show an embedded browser (UIWebView)
         [[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"myGraphService"
                                        withPreparedAuthorizationURLHandler:^(NSURL *preparedURL) {
                                            //navigate to the URL returned by NXOAuth2Client
-    
+
                                            NSURLRequest *r = [NSURLRequest requestWithURL:preparedURL];
                                            [self.loginView loadRequest:r];
                                        }];
     }
-    
+
 ### 重写 Web 视图方法以处理身份验证
 
 如先前所述，当用户需要登录时，若要告诉 Web 视图发生了什么情况，你可以粘贴以下代码。
@@ -168,30 +168,30 @@ objc
 objc
 
     - (void)resolveUsingUIWebView:(NSURL *)URL {
-    
+
         // We get the auth token from a redirect so we need to handle that in the webview.
-    
+
         if (![NSThread isMainThread]) {
             [self performSelectorOnMainThread:@selector(resolveUsingUIWebView:) withObject:URL waitUntilDone:YES];
             return;
         }
-    
+
         NSURLRequest *hostnameURLRequest = [NSURLRequest requestWithURL:URL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:10.0f];
         isRequestBusy = YES;
         [self.loginView loadRequest:hostnameURLRequest];
-    
+
         NSLog(@"resolveUsingUIWebView ready (status: UNKNOWN, URL: %@)", self.loginView.request.URL);
     }
-    
+
     - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    
+
         NSLog(@"webView:shouldStartLoadWithRequest: %@ (%li)", request.URL, (long)navigationType);
-    
+
         // The webview is where all the communication happens. Slightly complicated.
-    
+
         myLoadedUrl = [webView.request mainDocumentURL];
         NSLog(@"***Loaded url: %@", myLoadedUrl);
-    
+
         //if the UIWebView is showing our authorization URL or consent URL, show the UIWebView control
         if ([request.URL.absoluteString rangeOfString:authURL options:NSCaseInsensitiveSearch].location != NSNotFound) {
             self.loginView.hidden = NO;
@@ -210,9 +210,9 @@ objc
             //continue the OAuth2 flow
            // [[NXOAuth2AccountStore sharedStore] handleRedirectURL:request.URL];
         }
-    
+
         return YES;
-    
+
     }
 
 ### 编写代码以处理 OAuth2 请求的结果
@@ -222,9 +222,9 @@ objc
 objc
 
     - (void)handleOAuth2AccessResult:(NSString *)accessResult {
-    
+
         AppData* data = [AppData getInstance];
-    
+
         //parse the response for success or failure
          if (accessResult)
         //if success, complete the OAuth2 flow by handling the redirect URL and obtaining a token
@@ -243,9 +243,9 @@ objc
 objc
 
         - (void)setupOAuth2AccountStore {
-    
+
             AppData* data = [AppData getInstance];
-    
+
         [[NXOAuth2AccountStore sharedStore] setClientID:data.clientId
                                                  secret:data.secret
                                                   scope:[NSSet setWithObject:scopes]
@@ -254,7 +254,7 @@ objc
                                             redirectURL:[NSURL URLWithString:data.redirectUriString]
                                           keyChainGroup: keychain
                                          forAccountType:@"myGraphService"];
-    
+
         [[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreAccountsDidChangeNotification
                                                           object:[NXOAuth2AccountStore sharedStore]
                                                            queue:nil
@@ -264,7 +264,7 @@ objc
                                                               //we can now request protected data
                                                               NSLog(@"Success!! We have an access token.");
                                                               dispatch_async(dispatch_get_main_queue(),^ {
-    
+
                                                                   MasterViewController* masterViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"masterView"];
                                                                   [self.navigationController pushViewController:masterViewController animated:YES];
                                                               });
@@ -272,7 +272,7 @@ objc
                                                               //account removed, we lost access
                                                           }
                                                       }];
-    
+
         [[NSNotificationCenter defaultCenter] addObserverForName:NXOAuth2AccountStoreDidFailToRequestAccessNotification
                                                           object:[NXOAuth2AccountStore sharedStore]
                                                            queue:nil
@@ -296,17 +296,17 @@ objc
 如果用户未登录，应用程序就没什么作用，因此，检查缓存中是否已有令牌是明智之举。如果没有，则重定向到登录视图以让用户登录。如果你还记得，在视图加载时执行操作的最佳方式，就是使用 Apple 提供的 `viewDidLoad()` 方法。
 
 objc
-    
+
     - (void)viewDidLoad {
         [super viewDidLoad];
-    
+
         NXOAuth2AccountStore *store = [NXOAuth2AccountStore sharedStore];
         NSArray *accounts = [store accountsWithAccountType:@"myGraphService"];
-    
+
             if (accounts.count == 0) {
-    
+
             dispatch_async(dispatch_get_main_queue(),^ {
-    
+
                 LoginViewController* userSelectController = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginUserView"];
                 [self.navigationController pushViewController:userSelectController animated:YES];
             });
@@ -319,31 +319,31 @@ objc
 objc
 
     #pragma mark - Table View
-    
+
     - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
         return 1;
     }
-    
+
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+
             return [upnArray count];
     }
-    
+
     - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TaskPrototypeCell" forIndexPath:indexPath];
-    
+
         if ( cell == nil ) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TaskPrototypeCell"];
         }
-    
+
         User *user = nil;
          user = [upnArray objectAtIndex:indexPath.row];
-    
+
         // Configure the cell
         cell.textLabel.text = user.name;
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
+
         return cell;
     }
 
@@ -352,31 +352,31 @@ objc
 当用户在框中键入搜索内容时，你需要将该内容塞入图形 API。你将在以下代码中生成的 `GraphAPICaller` 类会将查找功能从演示当中分离出来。现在，让我们编写会将任何搜索字符送入图形 API 的代码。我们的做法是提供称为 `lookupInGraph` 的方法，其采用我们想要搜索的字符串。
 
 objc
-    
+
         -(void)lookupInGraph:(NSString *)searchText {
         if (searchText.length > 0) {
-    
+
         };
-    
+
             [GraphAPICaller searchUserList:searchText completionBlock:^(NSMutableArray* returnedUpns, NSError* error) {
                 if (returnedUpns) {
-    
+
                     upnArray = returnedUpns;
-    
+
                 }
                 else
                 {
                     UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:[[NSString alloc]initWithFormat:@"Error : %@", error.localizedDescription] delegate:nil cancelButtonTitle:@"Retry" otherButtonTitles:@"Cancel", nil];
-    
+
                     [alertView setDelegate:self];
-    
+
                     dispatch_async(dispatch_get_main_queue(),^ {
                         [alertView show];
                     });
                 }
-    
+
             }];
-    
+
     }
 
 ## 编写帮助程序类以访问图形 API
@@ -390,10 +390,10 @@ objc
 objc
 
     @interface GraphAPICaller : NSObject<NSURLConnectionDataDelegate>
-    
+
     +(void) searchUserList:(NSString*)searchString
            completionBlock:(void (^) (NSMutableArray*, NSError* error))completionBlock;
-    
+
     @end
 
 如你所见，指定的方法会获取字符串并返回 completionBlock。此 completionBlock（如你所猜测）提供的对象会在用户搜索时实时填充数据，以此更新表。
@@ -411,14 +411,14 @@ objc
         {
             [self readApplicationSettings];
         }
-    
+
         AppData* data = [AppData getInstance];
-    
+
         NSString *graphURL = [NSString stringWithFormat:@"%@%@/users", data.graphApiUrlString, data.apiversion];
-    
+
         NXOAuth2AccountStore *store = [NXOAuth2AccountStore sharedStore];
         NSDictionary* params = [self convertParamsToDictionary:searchString];
-    
+
         NSArray *accounts = [store accountsWithAccountType:@"myGraphService"];
         [NXOAuth2Request performMethod:@"GET"
                             onResource:[NSURL URLWithString:graphURL]
@@ -433,38 +433,38 @@ objc
                                NSError *error;
                                NSDictionary *dataReturned = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
                                NSLog(@"Graph Response was: %@", dataReturned);
-    
+
                                // We can grab the top most JSON node to get our graph data.
                                NSArray *graphDataArray = [dataReturned objectForKey:@"value"];
-    
+
                                // Don't be thrown off by the key name being "value". It really is the name of the
                                // first node. :-)
-    
+
                                //each object is a key value pair
                                NSDictionary *keyValuePairs;
                                NSMutableArray* Users = [[NSMutableArray alloc]init];
-    
+
                                for(int i =0; i < graphDataArray.count; i++)
                                {
                                    keyValuePairs = [graphDataArray objectAtIndex:i];
-    
+
                                    User *s = [[User alloc]init];
                                    s.upn = [keyValuePairs valueForKey:@"userPrincipalName"];
                                    s.name =[keyValuePairs valueForKey:@"displayName"];
                                    s.mail =[keyValuePairs valueForKey:@"mail"];
                                    s.businessPhones =[keyValuePairs valueForKey:@"businessPhones"];
                                    s.mobilePhones =[keyValuePairs valueForKey:@"mobilePhone"];
-    
+
                                    [Users addObject:s];
                                }
-    
+
                                completionBlock(Users, nil);
                            }
                            else
                            {
                                completionBlock(nil, error);
                            }
-    
+
                        }];
     }
 
@@ -491,11 +491,11 @@ objc
         +(NSDictionary*) convertParamsToDictionary:(NSString*)searchString
     {
         NSMutableDictionary* dictionary = [[NSMutableDictionary alloc]init];
-    
+
             NSString *query = [NSString stringWithFormat:@"startswith(givenName, '%@')", searchString];
-    
+
                [dictionary setValue:query forKey:@"$filter"];
-    
+
         return dictionary;
     }
 
@@ -524,28 +524,28 @@ objc
 最后，来看看你要如何将数据返回到 MasterViewController。数据会以序列化方式返回，而且该数据必须反序列化并加载到 MainViewController 可使用的对象中。出于此目的，主干具有的 `User.m/h` 文件可以创建 User 对象。你会使用图形中的信息填充该 User 对象。
 
 objc
-    
+
     // We can grab the top most JSON node to get our graph data.
     NSArray *graphDataArray = [dataReturned objectForKey:@"value"];
-    
+
     // Don't be thrown off by the key name being "value". It really is the name of the
     // first node. :-)
-    
+
     //each object is a key value pair
     NSDictionary *keyValuePairs;
     NSMutableArray* Users = [[NSMutableArray alloc]init];
-    
+
     for(int i =0; i < graphDataArray.count; i++)
     {
         keyValuePairs = [graphDataArray objectAtIndex:i];
-    
+
         User *s = [[User alloc]init];
         s.upn = [keyValuePairs valueForKey:@"userPrincipalName"];
         s.name =[keyValuePairs valueForKey:@"displayName"];
         s.mail =[keyValuePairs valueForKey:@"mail"];
         s.businessPhones =[keyValuePairs valueForKey:@"businessPhones"];
         s.mobilePhones =[keyValuePairs valueForKey:@"mobilePhone"];
-    
+
         [Users addObject:s];
 
 ## 运行示例

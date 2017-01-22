@@ -20,7 +20,7 @@ ms.author: glenga
 # 将移动服务添加到现有应用程序
 
 [!INCLUDE [mobile-services-selector-get-started-data](../../includes/mobile-services-selector-get-started-data.md)]
- 
+
 ##概述
 
 本主题说明如何使用 Azure 移动服务作为 Windows 应用商店应用程序的后端数据源。在本教程中，你将要为某个应用程序（该应用程序在内存中存储数据）下载一个 Visual Studio 2013 项目，创建一个新的移动服务，将该移动服务与该应用程序相集成，并查看运行该应用程序时对数据所做的更改。
@@ -50,7 +50,7 @@ ms.author: glenga
         todolistClient = new Microsoft.WindowsAzure.MobileServices.MobileServiceClient(
             "https://todolist.azure-mobile.net/",
             "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-        
+
 &nbsp;&nbsp;此代码通过使用 [MobileServiceClient](http://go.microsoft.com/fwlink/p/?LinkId=302030) 类的一个实例提供对应用中新移动服务的访问权限。客户端是通过提供新移动服务的 URI 和应用程序密钥来创建的。此静态字段可用于你的应用程序中的所有页面。
 
 &nbsp;&nbsp;8.右键单击 Windows Phone 应用程序项目，单击“添加”，单击“连接的服务...”，选择刚刚创建的移动服务，然后单击“确定”。将在共享的 App.xaml.cs 文件中添加相同的代码，但这一次会在 Windows Phone 应用程序条件编译块中添加。
@@ -80,7 +80,7 @@ ms.author: glenga
 ##查看 SQL 数据库中存储的数据
 
 [!INCLUDE [mobile-services-dotnet-backend-view-sql-data](../../includes/mobile-services-dotnet-backend-view-sql-data.md)]
- 
+
 本教程到此结束。
 
 ##后续步骤
@@ -92,7 +92,7 @@ ms.author: glenga
 
 * [移动服务 C# 操作方法概念性参考 ](./mobile-services-dotnet-how-to-use-client-library.md)
   <br/>了解有关如何将移动服务与 .NET 一起使用的详细信息。
-  
+
 <!-- Images. -->
 
 <!-- URLs. -->
@@ -108,5 +108,5 @@ ms.author: glenga
 [Developer Code Samples site]: http://go.microsoft.com/fwlink/p/?LinkID=510826
 [Mobile Services .NET How-to Conceptual Reference]: /documentation/articles/mobile-services-windows-dotnet-how-to-use-client-library/
 [MobileServiceClient class]: http://go.microsoft.com/fwlink/p/?LinkId=302030
- 
+
 <!---HONumber=Mooncake_0118_2016-->

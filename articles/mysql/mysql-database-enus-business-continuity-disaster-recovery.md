@@ -94,7 +94,7 @@ Following are common scenarios and corresponding solutions.
 MySQL on Azure now provides offsite recovery features to help you maintain service continuity when regional disasters occur. Examples of a regional disaster might be the loss of power or a fire in a large area of computer rooms, an earthquake, or other unanticipated events.
 
 ### There are currently two solution types for disaster recovery: ###
- 
+
 * When regional outage, MySQL PaaS team will analyze the root cause of the outage, if the outage duration will be longer than RPO, MySQL PaaS level failover will be implemented (in a shorter time than the RPO). If it is not possible to perform a quick restore, MySQL on Azure will perform an offsite database restore on all affected instances. The point in time to be restored will be the closest possible restore point to the time at which the fault occurred.
 
 * Self-service disaster recovery: If you are using a production environment with higher requirements in terms of recovery times, you can use the PowerShell command line to manually restore the affected instances offsite when a disaster occurs.

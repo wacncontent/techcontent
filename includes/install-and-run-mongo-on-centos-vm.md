@@ -48,11 +48,11 @@
     通过 insert 创建数据库。
 
 7. 在安装 MongoDB 后，您必须配置终结点才能远程访问 MongoDB。在“经典管理门户”中，依次单击“虚拟机”、你的新虚拟机的名称和“终结点”。
-    
+
     ![终结点][Image7]
 
 8. 单击页面底部的“添加终结点”。
-    
+
     ![终结点][Image8]
 
 9. 添加一个具有下列设置的终结点：
@@ -61,7 +61,7 @@
  - **协议**：TCP
  - **公用端口**：27017
  - **专用端口**：27017
- 
+
  这将允许对 MongoDB 进行远程访问。
 
 [QuickStartUnix]: http://www.mongodb.org/display/DOCS/Quickstart+Unix

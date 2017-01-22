@@ -123,7 +123,7 @@ Blob 存储可用于结构化和非结构化数据。Blob 存储容器将数据�
     $containerName="<BlobContainerToBeCreated>" # The Blob container name that you will create
 
     # Connect to your Azure account and selec the current subscription
-    
+
     Add-AzureAccount -Environment AzureChinaCloud
 
     Select-AzureSubscription $subscriptionName #only required if you have multiple subscriptions
@@ -203,7 +203,7 @@ URI 方案提供了使用 *wasb:* 前缀的未加密访问和使用 *wasbs* 的 
     $storageAccountName = "<AzureStorageAccountName>"   # The storage account used for the default file system specified at provision.
     $containerName = "<BlobStorageContainerName>"  # The default file system container has the same name as the cluster.
     $blob = "example/data/sample.log" # The name of the blob to be downloaded.
-    
+
     # Use Import-AzurePublishSettingsFile if you haven't connected to your Azure subscription
 
     # Use these two commands if you have multiple subscriptions
@@ -213,10 +213,10 @@ URI 方案提供了使用 *wasb:* 前缀的未加密访问和使用 *wasbs* 的 
     Write-Host "Create a context object ... " -ForegroundColor Green
     $storageAccountKey = Get-AzureStorageKey $storageAccountName | %{ $_.Primary }
     $storageContext = New-AzureStorageContext -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey  
-    
+
     Write-Host "Download the blob ..." -ForegroundColor Green
     Get-AzureStorageBlobContent -Container $ContainerName -Blob $blob -Context $storageContext -Force
-    
+
     Write-Host "List the downloaded file ..." -ForegroundColor Green
     cat "./$blob"
 

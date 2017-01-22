@@ -98,7 +98,7 @@ SELECT * FROM DeviceDataStream Partition By PartitionId WHERE  ObjectType = 'Dev
 此作业将其输出发送到事件中心做进一步处理。
 
 **作业 2：规则**会针对每个设备的阈值评估传入温度和湿度遥测值。阈值在解决方案仪表板上的规则编辑器中设置。每个设备/值对按照时间戳存储在 Blob 中，流分析将读入该对作为**参考数据**。该作业会针对设备的设置阈值比较任何非空值。如果超过“>”条件，该作业将输出**警报**事件，表示已超过阈值，并且提供设备、值和时间戳值。此作业使用以下查询定义来识别应触发警报的遥测消息：
-    
+
     WITH AlarmsData AS 
     (
     SELECT
@@ -112,9 +112,9 @@ SELECT * FROM DeviceDataStream Partition By PartitionId WHERE  ObjectType = 'Dev
     JOIN DeviceRulesBlob Ref ON Stream.IoTHub.ConnectionDeviceId = Ref.DeviceID
     WHERE
          Ref.Temperature IS NOT null AND Stream.Temperature > Ref.Temperature
-    
+
     UNION ALL
-    
+
     SELECT
          Stream.IoTHub.ConnectionDeviceId AS DeviceId,
          'Humidity' as ReadingType,
@@ -127,11 +127,11 @@ SELECT * FROM DeviceDataStream Partition By PartitionId WHERE  ObjectType = 'Dev
     WHERE
          Ref.Humidity IS NOT null AND Stream.Humidity > Ref.Humidity
     )
-    
+
     SELECT *
     INTO DeviceRulesMonitoring
     FROM AlarmsData
-    
+
     SELECT *
     INTO DeviceRulesHub
     FROM AlarmsData
@@ -149,7 +149,7 @@ SELECT * FROM DeviceDataStream Partition By PartitionId WHERE  ObjectType = 'Dev
         WHERE
             [ObjectType] IS NULL -- Filter out device info and command responses
     ) 
-    
+
     SELECT
         IoTHub.ConnectionDeviceId AS DeviceId,
         Temperature,
@@ -163,7 +163,7 @@ SELECT * FROM DeviceDataStream Partition By PartitionId WHERE  ObjectType = 'Dev
         [Telemetry]
     FROM
         [StreamData]
-    
+
     SELECT
         IoTHub.ConnectionDeviceId AS DeviceId,
         AVG (Humidity) AS [AverageHumidity], 
@@ -227,8 +227,8 @@ Web 应用程序中的此页面使用 PowerBI javascript 控件（请参阅 [Pow
 
 [lnk-preconfigured-solutions]: ./iot-suite-what-are-preconfigured-solutions.md
 [lnk-customize]: ./iot-suite-guidance-on-customizing-preconfigured-solutions.md
-[lnk-iothub]: ../iot-hub/index.md/
-[lnk-asa]: ../stream-analytics/index.md/
+[lnk-iothub]: ../iot-hub/index.md
+[lnk-asa]: ../stream-analytics/index.md
 [lnk-webjobs]: ../app-service-web/websites-webjobs-resources.md
 [lnk-connect-rm]: ./iot-suite-connecting-devices.md
 [lnk-permissions]: ./iot-suite-permissions.md

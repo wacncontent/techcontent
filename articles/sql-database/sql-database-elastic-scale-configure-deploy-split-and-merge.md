@@ -59,7 +59,7 @@ ms.author: ddove
 4.    同时在 ElasticScaleMetadata 设置的 **SplitMergeWeb** 和 **SplitMergeWorker** 角色部分中，在 cscfg 文件内输入此连接字符串。
 
 5.    对于 **SplitMergeWorker** 角色，在 **WorkerRoleSynchronizationStorageAccountConnectionString** 设置中输入有效的连接字符串用于连接到 Azure 存储。
-        
+
 ### 配置安全性
 
 有关配置服务安全性的详细说明，请参阅[拆分/合并安全性配置](./sql-database-elastic-scale-split-merge-security-configuration.md)。
@@ -334,5 +334,5 @@ ms.author: ddove
 [3]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/staging.png
 [4]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/upload.png
 [5]: ./media/sql-database-elastic-scale-configure-deploy-split-and-merge/storage.png
- 
+
 <!---HONumber=Mooncake_1212_2016-->

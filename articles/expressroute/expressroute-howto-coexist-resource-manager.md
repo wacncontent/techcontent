@@ -66,7 +66,7 @@ ms.author: charleywen
 若要配置能够共存的连接，有两组不同的过程可供选择。你选择的配置过程将取决于你有要连接到的现有虚拟网络，还是要创建新的虚拟网络。
 
 - 我没有 VNet，需要创建一个。
-    
+
     如果你还没有虚拟网络，此过程将指导你使用 Resource Manager 部署模型创建新的虚拟网络，然后创建新的 ExpressRoute 和站点到站点 VPN 连接。若要配置，请按照本文中[创建新的虚拟网络和并存连接](#new)部分中的步骤操作。
 
 - 我已有一个 Resource Manager 部署模型 VNet。
@@ -78,11 +78,11 @@ ms.author: charleywen
 ## <a name="new"></a>创建新的虚拟网络和并存连接
 
 本过程将指导你创建 VNet，以及创建将共存的站点到站点连接和 ExpressRoute 连接。
-    
+
 1. 你需要安装 Azure PowerShell cmdlet 的最新版本。有关安装 PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。请注意，针对此配置使用的 cmdlet 可能与你熟悉的 cmdlet 稍有不同。请务必使用说明内容中指定的 cmdlet。
 
 2. 登录你的帐户并设置环境。
-    
+
         login-AzureRmAccount -Environment $(Get-AzureRmEnvironment -Name AzureChinaCloud)
         Select-AzureRmSubscription -SubscriptionName 'yoursubscription'
         $location = "China East"
@@ -91,7 +91,7 @@ ms.author: charleywen
 3. 创建包括网关子网的虚拟网络。有关虚拟网络配置的详细信息，请参阅 [Azure 虚拟网络配置](../virtual-network/virtual-networks-create-vnet-arm-ps.md)。
 
     >[!IMPORTANT] 网关子网必须是 /27 或更短的前缀（例如 /26 或 /25）。
-    
+
     创建新的 VNet。
 
         $vnet = New-AzureRmVirtualNetwork -Name "CoexVnet" -ResourceGroupName $resgrp.ResourceGroupName -Location $location -AddressPrefix "10.200.0.0/16" 
@@ -167,7 +167,7 @@ ms.author: charleywen
         Remove-AzureRmVirtualNetworkGateway -Name <yourgatewayname> -ResourceGroupName <yourresourcegroup>
 
 3. 删除网关子网。
-        
+
         $vnet = Get-AzureRmVirtualNetwork -Name <yourvnetname> -ResourceGroupName <yourresourcegroup> 
         Remove-AzureRmVirtualNetworkSubnetConfig -Name GatewaySubnet -VirtualNetwork $vnet
 

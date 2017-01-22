@@ -181,7 +181,7 @@ ms.author: yushwang
 检查多站点隧道状态。下载每个隧道的密钥后，需要验证连接。使用 `Get-AzureVnetConnection` 获取虚拟网络隧道的列表，如以下示例所示。VNet1 是 VNet 的名称。
 
     Get-AzureVnetConnection -VNetName VNET1
-        
+
     ConnectivityState         : Connected
     EgressBytesTransferred    : 661530
     IngressBytesTransferred   : 519207
@@ -193,7 +193,7 @@ ms.author: yushwang
     OperationDescription      : Get-AzureVNetConnection
     OperationId               : 7f68a8e6-51e9-9db4-88c2-16b8067fed7f
     OperationStatus           : Succeeded
-        
+
     ConnectivityState         : Connected
     EgressBytesTransferred    : 789398
     IngressBytesTransferred   : 143908

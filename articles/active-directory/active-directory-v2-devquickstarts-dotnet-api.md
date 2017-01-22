@@ -49,7 +49,7 @@ Azure Active Directory 的 v2.0 终结点可让你使用 [OAuth 2.0](./active-di
 注册应用后，需要将应用设置为与 v2.0 终结点通信，以验证传入的请求和令牌。
 
 - 若要开始，请打开解决方案，然后使用 Package Manager Console 将 OWIN 中间件 NuGet 包添加到 TodoListService 项目。
-    
+
     PM> Install-Package Microsoft.Owin.Security.OAuth -ProjectName TodoListService
     PM> Install-Package Microsoft.Owin.Security.Jwt -ProjectName TodoListService
     PM> Install-Package Microsoft.Owin.Host.SystemWeb -ProjectName TodoListService
@@ -60,7 +60,7 @@ Azure Active Directory 的 v2.0 终结点可让你使用 [OAuth 2.0](./active-di
 - 将类声明更改为 `public partial class Startup` - 我们已在另一个文件中实现了此类的一部分。在 `Configuration(…)` 方法中，调用 ConfgureAuth(...) 以设置 Web 应用的身份验证。
 
 C#
-    
+
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)
@@ -81,25 +81,25 @@ C#
                     // are represented using the same Application Id - we use
                     // the Application Id to represent the audience, or the
                     // intended recipient of tokens.
-    
+
                     ValidAudience = clientId,
-    
+
                     // In a real applicaiton, you might use issuer validation to
                     // verify that the user's organization (if applicable) has
                     // signed up for the app.  Here, we'll just turn it off.
-    
+
                     ValidateIssuer = false,
             };
-    
+
             // Set up the OWIN pipeline to use OAuth 2.0 Bearer authentication.
             // The options provided here tell the middleware about the type of tokens
             // that will be recieved, which are JWTs for the v2.0 endpoint.
-    
+
             // NOTE: The usual WindowsAzureActiveDirectoryBearerAuthenticaitonMiddleware uses a
             // metadata endpoint which is not supported by the v2.0 endpoint.  Instead, this
             // OpenIdConenctCachingSecurityTokenProvider can be used to fetch & use the OpenIdConnect
             // metadata document.
-    
+
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions
             {
                     AccessTokenFormat = new Microsoft.Owin.Security.Jwt.JwtFormat(tvps, new OpenIdConnectCachingSecurityTokenProvider("https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration")),
@@ -117,28 +117,28 @@ C#
 - 如果已授权的调用方成功调用了某个 `TodoListController` API，该操作可能需要访问有关调用方的信息。OWIN 通过 `ClaimsPrincpal` 对象提供对持有者令牌中的声明的访问。
 
 C#
-    
+
     public IEnumerable<TodoItem> Get()
     {
         // You can use the ClaimsPrincipal to access information about the
         // user making the call.  In this case, we use the 'sub' or
         // NameIdentifier claim to serve as a key for the tasks in the data store.
-    
+
         Claim subject = ClaimsPrincipal.Current.FindFirst(ClaimTypes.NameIdentifier);
-    
+
         return from todo in todoBag
                where todo.Owner == subject.Value
                select todo;
     }
 
--	最后，打开位于 TodoListService 项目根目录中的 `web.config` 文件，并在 `<appSettings>` 节中输入你的配置值。
-  -	`ida:Audience` 是你在门户中为应用输入的**应用程序 ID**。
+- 最后，打开位于 TodoListService 项目根目录中的 `web.config` 文件，并在 `<appSettings>` 节中输入你的配置值。
+  - `ida:Audience` 是你在门户中为应用输入的**应用程序 ID**。
 
 ## 配置客户端应用
 需要先配置待办事项列表客户端，使它能够从 v2.0 终结点获取令牌并可调用服务，然后，你才能看到待办事项服务的运行情况。
 
 - 在 TodoListClient 项目中打开 `App.config`，然后在 `<appSettings>` 节中输入你的配置值。
-  -	从门户复制的 `ida:ClientId` 应用程序 ID。
+  - 从门户复制的 `ida:ClientId` 应用程序 ID。
 
 最后，清理、生成并运行每个项目！ 现在，你已构建了一个可从个人 Microsoft 帐户及公司或学校帐户接受令牌的 .NET MVC Web API。请登录到 TodoListClient，然后调用该 Web API 以将任务添加到用户的待办事项列表。
 

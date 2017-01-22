@@ -45,7 +45,7 @@ ms.author: dobett
 使用 [Azure Resource Manager](../azure-resource-manager/resource-group-overview.md) 能够将解决方案中的资源作为组进行处理。可以通过一个协调操作为解决方案部署、更新或删除资源。
 
 ## Azure 服务总线
-[服务总线](../service-bus/index.md/)提供使用企业消息传送的云端通信和有助于将本地解决方案与云端连接的中继通信。某些 IoT 中心教程使用服务总线[队列](../service-bus-messaging/service-bus-messaging-overview.md)。
+[服务总线](../service-bus/index.md)提供使用企业消息传送的云端通信和有助于将本地解决方案与云端连接的中继通信。某些 IoT 中心教程使用服务总线[队列](../service-bus-messaging/service-bus-messaging-overview.md)。
 
 ## Azure 存储空间
 [Azure 存储](../storage/storage-introduction.md)是云存储解决方案。它包含可用于存储非结构化的对象数据的 Blob 存储服务。某些 IoT 中心教程使用 blob 存储。

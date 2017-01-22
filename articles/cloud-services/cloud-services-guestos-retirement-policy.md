@@ -77,8 +77,8 @@ Microsoft 将继续推出合并了最新 MSRC 更新的新来宾 OS 版本，直
 
 **如果 Web 应用程序需要与 OS 深入集成，该怎么办？**
 
-如果 Web 应用程序体系结构需要更深入依赖基本操作系统，请使用平台支持的功能（例如[启动任务](./cloud-services-startup-tasks.md)）或将来可能存在的其他扩展性机制。此外，还可以使用 [Azure 虚拟机](../virtual-machines/index.md/)（IaaS – 基础结构即服务），可以在其中负责维护基本操作系统。
- 
+如果 Web 应用程序体系结构需要更深入依赖基本操作系统，请使用平台支持的功能（例如[启动任务](./cloud-services-startup-tasks.md)）或将来可能存在的其他扩展性机制。此外，还可以使用 [Azure 虚拟机](../virtual-machines/index.md)（IaaS – 基础结构即服务），可以在其中负责维护基本操作系统。
+
 ## 后续步骤
 查看最新的[来宾 OS 版本](./cloud-services-guestos-update-matrix.md)。
 

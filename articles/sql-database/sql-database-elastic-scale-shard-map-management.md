@@ -34,7 +34,7 @@ ms.author: ddove
 2. 每个数据库多个租户（两种类型）：
     3. 列表映射
     4. 范围映射
- 
+
 对于单租户模型，创建“列表映射”分片映射。单租户模型将每个租户分配给一个数据库。这是适用于 SaaS 开发人员的有效模型，因为它可以简化管理。
 
 ![列表映射][1]
@@ -46,7 +46,7 @@ ms.author: ddove
 或者你可以使用“列表映射”实现多租户数据库模型，以将多个租户分配给单一数据库。例如，DB1 用于存储租户 ID 1 和 5 的相关信息，而 DB2 用于存储租户 7 和租户 10 的数据。
 
 ![单一数据库上的多个租户][3]
- 
+
 ### 支持的分片键的 .Net 类型
 
 弹性收缩支持将以下 .Net Framework 类型用作分片键：
@@ -72,7 +72,7 @@ ms.author: ddove
 | 4 | Database\_C |
 | 6 | Database\_B |
 | ... | ... |
- 
+
 ### 范围分片映射 
 在**范围分片映射**中，键范围由 **[Low Value, High Value)** 对描述，其中 *Low Value* 是范围中的最小键，而 *High Value* 是第一个大于范围的值。
 
@@ -132,7 +132,7 @@ ms.author: ddove
         // The connectionString contains server name, database name, and admin credentials 
         // for privileges on both the GSM and the shards themselves.
     } 
- 
+
 作为替代方法，你可以使用 Powershell 创建新的分片映射管理器。[此处](https://gallery.technet.microsoft.com/scriptcenter/Azure-SQL-DB-Elastic-731883db)提供了一个示例。
 
 ##<a name="get-a-rangeshardmap-or-listshardmap"></a> 获取 RangeShardMap 或 ListShardMap
@@ -175,7 +175,7 @@ ms.author: ddove
 用于填充或更改 **ShardMapManager** 数据的方法不会更改存储在分片本身中的用户数据。例如，诸如 **CreateShard**、**DeleteShard**、**UpdateMapping** 等的方法仅影响分片映射元数据。不会删除、添加或更改分片中所包含的用户数据。但是，这些方法旨在与你执行的单独操作结合使用，以创建或删除实际数据库，或者将行从一个分片移动到另一个分片，以使分片环境恢复均衡。（弹性数据库工具附带的**拆分/合并**工具将使用这些 API 并安排在分片之间移动实际数据。） 请参阅[使用弹性数据库拆分/合并工具进行缩放](./sql-database-elastic-scale-overview-split-and-merge.md)。
 
 ## 填充分片映射示例
- 
+
 下面显示了用于填充特定分片映射的操作的示例序列。此代码将执行下列步骤：
 
 1. 将在分片映射管理器中创建新的分片映射。
@@ -280,7 +280,7 @@ ms.author: ddove
                         + rm.Value.High.ToString()+ ")  ==>" +rm.Shard.Location); 
             } 
         } 
- 
+
 作为替代方法，可使用 PowerShell 脚本达到相同的结果。[此处](https://gallery.technet.microsoft.com/scriptcenter/Azure-SQL-DB-Elastic-731883db)提供了某些 PowerShell 示例。
 
 填充完分片映射后，即可创建或改编数据访问应用程序，以便使用这些映射。在需要更改**映射布局**之前，无需重新填充或操作映射。
@@ -300,11 +300,11 @@ ms.author: ddove
 这些方法作为构建基块一同工作，以便在分片的数据库环境中修改数据的总体分发情况。
 
 * 若要添加或删除分片：请使用 [Shardmap 类](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.aspx)的 **[CreateShard](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.createshard.aspx)** 和 **[DeleteShard](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.deleteshard.aspx)**。
-    
+
     若要执行这些操作，表示目标分片的服务器和数据库必须已经存在。这些方法不会对数据库本身产生任何影响，仅对分片映射上的元数据产生影响。
 
 * 若要创建或删除映射到分片的点或范围：请使用 [RangeShardMapping 类](https://msdn.microsoft.com/zh-cn/library/azure/dn807318.aspx)的 **[CreateRangeMapping](https://msdn.microsoft.com/zh-cn/library/azure/dn841993.aspx)** 和 **[DeleteMapping](https://msdn.microsoft.com/zh-cn/library/azure/dn824200.aspx)**，以及 [ListShardMap](https://msdn.microsoft.com/zh-cn/library/azure/dn842123.aspx) 的 **[CreatePointMapping](https://msdn.microsoft.com/zh-cn/library/azure/dn807218.aspx)**。
-    
+
     许多不同的点或范围可映射到相同的分片。这些方法仅影响元数据，而不会影响已显示在分片中的任何数据。如果为了与 **DeleteMapping** 操作保持一致而需要将数据从数据库中删除，你将需要单独执行这些操作，但需要结合使用这些方法。
 
 * 若要将现有范围拆分为两个，或将相邻范围合并为一个：请使用 **[SplitMapping](https://msdn.microsoft.com/zh-cn/library/azure/dn824205.aspx)** 和 **[MergeMappings](https://msdn.microsoft.com/zh-cn/library/azure/dn824201.aspx)**。
@@ -332,7 +332,7 @@ ms.author: ddove
 但是，在需要移动数据的情况下，需要拆分/合并工具并结合使用必要的分片映射更新，才能安排在分片之间移动数据。有关使用拆分/合并工具的详细信息，请参阅[拆分/合并概述](./sql-database-elastic-scale-overview-split-and-merge.md)
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
- 
+
 <!--Image references-->
 [1]: ./media/sql-database-elastic-scale-shard-map-management/listmapping.png
 [2]: ./media/sql-database-elastic-scale-shard-map-management/rangemapping.png

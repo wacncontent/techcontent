@@ -1,6 +1,6 @@
 ﻿
 1. 打开共享项目文件 MainPage.cs 并将以下代码段添加到 MainPage 类：
-    
+
         // Define a member variable for storing the signed-in user. 
         private MobileServiceUser user;
 
@@ -24,7 +24,7 @@
                 {
                     message = "You must log in. Login Required";
                 }
-                        
+
                 var dialog = new MessageDialog(message);
                 dialog.Commands.Add(new UICommand("OK"));
                 await dialog.ShowAsync();
@@ -50,7 +50,7 @@
             this.ButtonLogin.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             await RefreshTodoItems();
         }
-        
+
 5. 在 Windows Store 应用项目中，打开 MainPage.xaml 项目文件，然后就在定义“保存”按钮的元素之前添加以下 **Button** 元素：
 
         <Button Name="ButtonLogin" Click="ButtonLogin_Click" 
@@ -64,7 +64,7 @@
 7. 打开共享的 App.xaml.cs 项目文件并添加以下 using 语句（如果还没有此语句）：
 
         using Microsoft.WindowsAzure.MobileServices;  
- 
+
 8. 在 App.xaml.cs 项目文件中，添加以下代码：
 
         protected override void OnActivated(IActivatedEventArgs args)

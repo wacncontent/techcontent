@@ -37,7 +37,7 @@ ms.author: mimig
 6. 返回到“设置”边栏选项卡中，“定价层”已更改为“标准”，“吞吐量(RU/s)”框显示默认值 400。单击“确定”保存更改。
 
     > [!NOTE] 可以在 400 和 10,000 [请求单位](./documentdb-request-units.md)/秒 (RU/s) 之间设置吞吐量。页面底部的“定价摘要”将自动更新以提供月成本估计值。
-    
+
     ![显示在何处更改吞吐量值的“设置”边栏选项卡屏幕截图](./media/documentdb-supercharge-your-account/documentdb-change-performance-set-thoughput.png)  
 
 8. 返回到“数据库”边栏选项卡，可以核实该集合增加的吞吐量。

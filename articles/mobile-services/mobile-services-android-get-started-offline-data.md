@@ -46,9 +46,9 @@ ms.author: ricksal
 2. 将下列 **import** 语句添加到 *ToDoActivity.java*：
 
         import java.util.Map;
-        
+
         import android.widget.Toast;
-        
+
         import com.microsoft.windowsazure.mobileservices.table.query.Query; 
         import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncContext; 
         import com.microsoft.windowsazure.mobileservices.table.sync.MobileServiceSyncTable; 
@@ -106,7 +106,7 @@ ms.author: ricksal
         public void syncAsync(){
             if (isNetworkAvailable()) {
                 new AsyncTask<Void, Void, Void>() {
-    
+
                     @Override
                     protected Void doInBackground(Void... params) {
                         try {
@@ -172,8 +172,8 @@ One thing which is important to point out: if there are pending changes in the l
 
 3. 查看 Azure *TodoItem* 表的内容。验证新项是否“未”同步到服务器：
 
-   - 对于 JavaScript 后端，请转到 Azure 经典管理门户，然后单击“数据”选项卡查看 `TodoItem` 表的内容。
-   - 对于 .NET 后端，请使用 SQL 工具（如 *SQL Server Management Studio*）或 REST 客户端（如 *Fiddler* 或 *Poistman*）查看表内容。
+    - 对于 JavaScript 后端，请转到 Azure 经典管理门户，然后单击“数据”选项卡查看 `TodoItem` 表的内容。
+    - 对于 .NET 后端，请使用 SQL 工具（如 *SQL Server Management Studio*）或 REST 客户端（如 *Fiddler* 或 *Poistman*）查看表内容。
 
 4. 在设备或模拟器中打开 WiFi。接下来，按“刷新”按钮。
 

@@ -34,13 +34,13 @@ ms.author: iainfou
 
 此**“从库中”**选项会打开帮助你设置虚拟机的向导。该向导的最后一页用于安装 VM 代理和 Trend Micro 安全扩展插件。有关常规说明，请参阅 [Create a virtual machine running Windows in the Azure Classic Management Portal](./virtual-machines-windows-classic-tutorial.md)（在 Azure 经典管理门户中创建运行 Windows 的虚拟机）。进入向导的最后一页时，请执行以下操作：
 
-1.	在“VM 代理”下，选中“安装 VM 代理”。
+1. 在“VM 代理”下，选中“安装 VM 代理”。
 
-2.	在“安全扩展插件”下，选中“Trend Micro Deep Security Agent”。
+2. 在“安全扩展插件”下，选中“Trend Micro Deep Security Agent”。
 
     ![安装 VM 代理和 Deep Security Agent](./media/virtual-machines-windows-classic-install-trend/InstallVMAgentandTrend.png)  
 
-3.	单击复选标记可创建虚拟机。
+3. 单击复选标记可创建虚拟机。
 
 ## 在现有 VM 上安装 Deep Security Agent
 

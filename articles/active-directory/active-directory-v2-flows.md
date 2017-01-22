@@ -42,7 +42,7 @@ v2.0 终结点支持各种现代应用体系结构的身份验证，所有这些
 
     // Partial raw id_token
     eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImtyaU1QZG1Cd...
-    
+
     // Partial content of a decoded id_token
     {
         "name": "John Smith",

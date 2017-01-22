@@ -61,7 +61,7 @@ ms.author: davidmu
             "subnetRef": "[concat(variables('vnetID'),'/subnets/mysn1')]"  
           },
         }
-        
+
 4. 接下来将在模板中定义[资源](../azure-resource-manager/resource-group-authoring-templates.md#resources)，例如虚拟机、虚拟网络和存储帐户。在 variables 节的后面添加 resources 节：
 
         {
@@ -168,9 +168,9 @@ ms.author: davidmu
               }
             } ]
           }
-          
+
     >[!NOTE] 本文创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅[使用 Windows PowerShell 和 Azure CLI 浏览和选择 Azure 虚拟机映像](./virtual-machines-linux-cli-ps-findimage.md)。
-            
+
 2. 将模板文件保存为 *VirtualMachineTemplate.json*。
 
 ## 步骤 2：创建参数文件
@@ -207,14 +207,14 @@ ms.author: davidmu
 2. 使用列表中的位置（例如**中国北部**）替换 **$locName** 的值。创建变量。
 
         $locName = "location name"
-        
+
 3. 使用新资源组的名称替换 **$rgName** 的值。创建变量和资源组。
 
         $rgName = "resource group name"
         New-AzureRmResourceGroup -Name $rgName -Location $locName
-        
+
     用户应看到与此示例类似的内容：
-    
+
         ResourceGroupName : myrg1
         Location          : chinaeast
         ProvisioningState : Succeeded

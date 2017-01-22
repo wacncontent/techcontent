@@ -44,7 +44,7 @@ ms.author: adegeo
 2. 所有启动任务均根据其 **taskType** 属性执行。
     - **simple** 任务以同步方式执行（一次一个任务）。
     - **background** 和 **foreground** 任务与启动任务并行，以异步方式启动。
-       
+
     > [!WARNING] 在启动过程中的启动任务阶段，IIS 可能未完全配置，因此角色特定的数据可能不可用。需要角色特定的数据的启动任务应使用 [Microsoft.WindowsAzure.ServiceRuntime.RoleEntryPoint.OnStart](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.onstart.aspx)。
 
 3. 将启动角色主机进程并在 IIS 中创建站点。
@@ -129,16 +129,16 @@ ms.author: adegeo
         <Startup>
             <Task commandLine="Startup.cmd" executionContext="limited" taskType="simple">
                 <Environment>
-            
+
                     <!-- Create the environment variable that informs the startup task whether it is running
                         in the Compute Emulator or in the cloud. "%ComputeEmulatorRunning%"=="true" when
                         running in the Compute Emulator, "%ComputeEmulatorRunning%"=="false" when running
                         in the cloud. -->
-            
+
                     <Variable name="ComputeEmulatorRunning">
                         <RoleInstanceValue xpath="/RoleEnvironment/Deployment/@emulated" />
                     </Variable>
-            
+
                 </Environment>
             </Task>
         </Startup>

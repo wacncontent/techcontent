@@ -66,7 +66,7 @@ ms.author: sstein
     using Microsoft.Azure.Management.Sql.Models;
     using Microsoft.IdentityModel.Clients.ActiveDirectory;
     using System;
-    
+
     namespace SqlDbConsoleApp
     {
     class Program
@@ -209,36 +209,36 @@ ms.author: sstein
 
     # Sign in to Azure.
     Add-AzureRmAccount -EnvironmentName AzureChinaCloud
-    
+
     # If you have multiple subscriptions, uncomment and set to the subscription you want to work with.
     #$subscriptionId = "{xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx}"
     #Set-AzureRmContext -SubscriptionId $subscriptionId
-    
+
     # Provide these values for your new AAD app.
     # $appName is the display name for your app, must be unique in your directory.
     # $uri does not need to be a real uri.
     # $secret is a password you create.
-    
+
     $appName = "{app-name}"
     $uri = "http://{app-name}"
     $secret = "{app-password}"
-    
+
     # Create a AAD app
     $azureAdApplication = New-AzureRmADApplication -DisplayName $appName -HomePage $Uri -IdentifierUris $Uri -Password $secret
-    
+
     # Create a Service Principal for the app
     $svcprincipal = New-AzureRmADServicePrincipal -ApplicationId $azureAdApplication.ApplicationId
-    
+
     # To avoid a PrincipalNotFound error, I pause here for 15 seconds.
     Start-Sleep -s 15
-    
+
     # If you still get a PrincipalNotFound error, then rerun the following until successful. 
     $roleassignment = New-AzureRmRoleAssignment -RoleDefinitionName Contributor -ServicePrincipalName $azureAdApplication.ApplicationId.Guid
-    
+
     # Output the values we need for our C# application to successfully authenticate
-    
+
     Write-Output "Copy these values into the C# sample app"
-    
+
     Write-Output "_subscriptionId:" (Get-AzureRmContext).Subscription.SubscriptionId
     Write-Output "_tenantId:" (Get-AzureRmContext).Tenant.TenantId
     Write-Output "_applicationId:" $azureAdApplication.ApplicationId.Guid
@@ -251,7 +251,7 @@ ms.author: sstein
 
 ## 其他资源
 
-- [SQL 数据库](./index.md/)
+- [SQL 数据库](./index.md)
 - [数据库类](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.management.sql.models.database.aspx)
 
 <!--Image references-->

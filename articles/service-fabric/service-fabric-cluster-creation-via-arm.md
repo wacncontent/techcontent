@@ -59,7 +59,7 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
 
         New-AzureRmResourceGroup -Name mycluster-keyvault -Location 'China East'
         WARNING: The output object type of this cmdlet is going to be modified in a future release.
-    
+
         ResourceGroupName : mycluster-keyvault
         Location          : chinaeast
         ProvisioningState : Succeeded
@@ -71,7 +71,7 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
 在新资源组中创建密钥保管库。**必须针对部署启用**密钥保管库，使 Service Fabric 资源提供程序能够从中获取证书并将其安装在群集节点上：
 
         New-AzureRmKeyVault -VaultName 'myvault' -ResourceGroupName 'mycluster-keyvault' -Location 'China East' -EnabledForDeployment
-    
+
         Vault Name                       : myvault
         Resource Group Name              : mycluster-keyvault
         Location                         : China East
@@ -89,7 +89,7 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
                                            Display Name             :    
                                            Permissions to Keys      :    get, create, delete, list, update, import, backup, restore
                                            Permissions to Secrets   :    all
-    
+
         Tags                             :
 
 如果有现有的密钥保管库，可以使用 Azure CLI 针对部署启用该保管库：
@@ -108,7 +108,7 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
 ### 群集和服务器证书（必需） 
 
 需要使用此证书来保护群集以及防止未经授权访问群集。此证书通过多种方式保护群集：
- 
+
  - **群集身份验证：**在群集联合的情况下对节点间的通信进行身份验证。只有可以使用此证书自我证明身份的节点才能加入群集。
  - **服务器身份验证：**在管理客户端上对群集管理终结点进行身份验证，使管理客户端知道它正在与真正的群集通信。此证书还通过 HTTPS 为 HTTPS 管理 API 和 Service Fabric Explorer 提供 SSL。
 
@@ -139,14 +139,14 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
 此 PowerShell 模块中的 `Invoke-AddCertToKeyVault` 命令自动将证书私钥的格式设置为 JSON 字符串，并将它上载到密钥保管库。使用该字符串可将群集证书与任何其他应用程序证书添加到密钥保管库。针对要在群集中安装的其他任何证书重复此步骤。
 
      Invoke-AddCertToKeyVault -SubscriptionId <guid> -ResourceGroupName mycluster-keyvault -Location "China East" -VaultName myvault -CertificateName mycert -Password "<password>" -UseExistingCertificate -ExistingPfxFilePath "C:\path\to\mycertkey.pfx"
-    
+
         Switching context to SubscriptionId <guid>
         Ensuring ResourceGroup mycluster-keyvault in China East
         WARNING: The output object type of this cmdlet is going to be modified in a future release.
         Using existing valut myvault in China East
         Reading pfx file from C:\path\to\key.pfx
         Writing secret to myvault in vault myvault
-    
+
     Name  : CertificateThumbprint
     Value : <value>
 
@@ -159,7 +159,7 @@ Service Fabric 使用 X.509 证书保护群集，提供应用程序安全功能�
 前面的字符串是配置 Service Fabric 群集 Resource Manager 模板时所要满足的所有密钥保管库先决条件。该模板可安装用于节点身份验证、管理终结点安全性与身份验证以及使用 X.509 证书的其他任何应用程序安全功能的证书。此时，应已在 Azure 中设置以下各项：
 
  - 密钥保管库资源组
-   - 密钥保管库
+    - 密钥保管库
      - 群集服务器身份验证证书
      - 应用程序证书
 

@@ -40,7 +40,7 @@ MySQL Database on Azure为您提供多达20多种监控指标，支持您实时�
 
 ## － 数据高度可靠和安全
 MySQL Database on Azure基于Azure的地域冗余存储来提供数据的高可靠性，在同一个区域中自动同步复制3个本地副本，同时在超过一千公里外的区域通过异步的方式复制3个异地副本，保证数据的高度可靠。同时，MySQL on Azure提供完善的备份恢复方案。MySQL Database on Azure还提供防火墙功能，可将您的客户端公网IP地址（也可以是IP地址段）加入到白名单中；此外，支持通过SSL链接访问数据库。关于SSL的配置，请参考：[使用SSL安全访问MySQL Database on Azure](./mysql-database-ssl-connection.md)。具体而言，在备份还原方面我们为您提供 **完全备份**、**增量备份** 以及 **数据库还原** 功能：
-    
+
 - **完全备份**：MySQL Database on Azure每天在您指定的时间自动完全备份您的MySQL数据库并可保留30天；此外您也可以自己做即时的手动完全备份。备份所占用的存储都是完全免费的，您无需为此支付任何额外费用！
 - **增量备份**：MySQL Database on Azure会自动备份过去七天的数据库增量部分，以实现基于任意时间点的回滚。
 - **数据库还原**：您可以将数据库还原到过去七天中的任意时间点、也可以还原到一个完全备份。除了还原到当前的数据库实例，MySQL Database on Azure也支持您恢复到新实例。

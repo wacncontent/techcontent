@@ -30,7 +30,7 @@ ms.author: davidmu
 - 使用 [Azure PowerShell](../azure-resource-manager/resource-group-template-deploy.md)、[Azure CLI](../azure-resource-manager/resource-group-template-deploy-cli.md) 或 [Azure 门户预览](../azure-resource-manager/resource-group-template-deploy-portal.md)创建资源组。
 
 完成这些步骤大约需要 30 分钟。
-    
+
 ## 步骤 1：创建 Visual Studio 项目、模板文件和参数文件
 
 ### 创建模板文件
@@ -186,7 +186,7 @@ ms.author: davidmu
               }
             } ]
           }
-      
+
 9. 保存创建的模板文件。
 
 ### 创建参数文件
@@ -237,7 +237,7 @@ Azure Active Directory 应用程序已创建且安装了身份验证库。现可
         using Microsoft.Rest;
         using System.IO;
 
-2.	将以下方法添加到 Program 类，以获取创建凭据所需的令牌：
+2. 将以下方法添加到 Program 类，以获取创建凭据所需的令牌：
 
         private static async Task<AuthenticationResult> GetAccessTokenAsync()
         {
@@ -312,7 +312,7 @@ Azure Active Directory 应用程序已创建且安装了身份验证库。现可
 
 由于你需要为 Azure 中使用的资源付费，因此，删除不再需要的资源总是一种良好的做法。你不需要从资源组中分别删除每个资源，删除资源组就会自动删除其所有资源。
 
-1.	若要删除资源组，请将此方法添加到 Program 类：
+1. 若要删除资源组，请将此方法添加到 Program 类：
 
         public static async void DeleteResourceGroupAsync(
           TokenCredentials credential,
@@ -325,7 +325,7 @@ Azure Active Directory 应用程序已创建且安装了身份验证库。现可
           await resourceManagementClient.ResourceGroups.DeleteAsync(groupName);
         }
 
-2.	若要调用刚添加的方法，请将以下代码添加到 Main 方法：
+2. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
 
         DeleteResourceGroupAsync(
           credential,
@@ -335,9 +335,9 @@ Azure Active Directory 应用程序已创建且安装了身份验证库。现可
 
 ##步骤 6：运行控制台应用程序
 
-1.	若要运行控制台应用程序，请在 Visual Studio 中单击“启动”，然后使用订阅所用的相同凭证登录到 Azure AD。
+1. 若要运行控制台应用程序，请在 Visual Studio 中单击“启动”，然后使用订阅所用的相同凭证登录到 Azure AD。
 
-2.	在显示“已接受”状态后按 **Enter**。
+2. 在显示“已接受”状态后按 **Enter**。
 
     完整运行该控制台应用程序大约需要 5 分钟。在按 Enter 开始删除资源之前，你可能需要在 Azure 门户预览中花费几分钟时间来验证资源的创建。
 

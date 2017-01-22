@@ -37,7 +37,7 @@ Azure CLI 提供了一组开源且跨平台的命令，这些命令可以用于 
 
 1. 按照[安装 Azure CLI](../xplat-cli-install.md) 中概述的说明，下载和安装 Azure CLI。
 2. 安装了 Azure CLI 之后，你将可以从命令行界面（Bash、终端、命令提示符）使用 azure 命令访问 Azure CLI 命令。输入 `azure` 命令，可看到以下输出。
-   
+
     ![Azure 命令输出][Image1]  
 
 3. 在命令行界面中，输入 `azure storage` 即可列出所有 Azure 存储服务命令，并初步了解 Azure CLI 提供的功能。你可以输入带 **-h** 参数的命令名称（例如，`azure storage share create -h`），了解命令语法的详细信息。
@@ -70,12 +70,12 @@ Azure CLI 提供了一组开源且跨平台的命令，这些命令可以用于 
 
 5. 在本地计算机中，打开首选的文本编辑器（例如 vim）。在文本编辑器中输入上述脚本。
 6. 现在，你需要基于配置设置更新脚本变量。
-   
-   * **<storage\_account\_name>**：使用脚本中给定的名称，或输入存储帐户的新名称。**重要提示**：在 Azure 中，存储帐户的名称必须是唯一的。它还必须为小写！
-   * **<storage\_account\_key>**：存储帐户的访问密钥。
-   * **<container\_name>**：使用脚本中给定的名称，或输入容器的新名称。
-   * **<image\_to\_upload>**：输入本地计算机上图片的路径，例如：“~/images/HelloWorld.png”。
-   * **<destination\_folder>**：输入用于存储从 Azure 存储下载的文件的本地目录路径，例如：“~/downloadImages”。
+
+    * **<storage\_account\_name>**：使用脚本中给定的名称，或输入存储帐户的新名称。**重要提示**：在 Azure 中，存储帐户的名称必须是唯一的。它还必须为小写！
+    * **<storage\_account\_key>**：存储帐户的访问密钥。
+    * **<container\_name>**：使用脚本中给定的名称，或输入容器的新名称。
+    * **<image\_to\_upload>**：输入本地计算机上图片的路径，例如：“~/images/HelloWorld.png”。
+    * **<destination\_folder>**：输入用于存储从 Azure 存储下载的文件的本地目录路径，例如：“~/downloadImages”。
 7. 在 vim 中更新完必需的变量以后，按组合键“Esc, : , wq!”保存脚本。
 8. 若要运行此脚本，在 bash 控制台中输入脚本文件名即可。运行此脚本后，应会创建包含已下载图像文件的本地目标文件夹。以下屏幕截图显示了示例输出：
 
@@ -191,7 +191,7 @@ Azure 文件共享是 Azure 中的 SMB 文件共享。所有目录和文件都�
 ## 后续步骤
 下面是一些相关的文章和资源，可以让你更多地了解 Azure 存储服务。
 
-- [Azure 存储空间文档](./index.md/)
+- [Azure 存储空间文档](./index.md)
 - [Azure 存储 REST API 引用](https://msdn.microsoft.com/zh-cn/library/azure/dd179355.aspx)
 
 [Image1]: ./media/storage-azure-cli/azure_command.png

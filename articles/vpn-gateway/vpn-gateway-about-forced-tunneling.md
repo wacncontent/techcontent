@@ -47,9 +47,9 @@ ms.author: cherylmc
 -  每个虚拟网络子网具有内置的系统路由表。系统路由表具有以下三组路由：
 
     - **本地 VNet 路由：**直接路由到同一个虚拟网络中的目标虚拟机
-    
+
     - **本地路由：**路由到 Azure VPN 网关
-    
+
     - **默认路由：**直接路由到 Internet。如果要将数据包发送到不包含在前面两个路由中的专用 IP 地址，数据包将被删除。
 
 -  在发布的用户定义路由中，你可以创建路由表来添加默认路由，然后将路由表关联到虚拟网络子网，在这些子网启用强制隧道。
@@ -57,8 +57,8 @@ ms.author: cherylmc
 - 您需要在连接到虚拟网络的跨界本地站点中，设置一个“默认站点”。
 
 - 强制隧道必须关联到具有动态路由 VPN 网关的 VNet，不能是静态网关。
- 
-- ExpressRoute 强制隧道不是通过此机制配置的，而是通过 ExpressRoute BGP 对等会话播发默认路由来启用的。有关详细信息，请参阅 [ExpressRoute 文档](../expressroute/index.md/)。
+
+- ExpressRoute 强制隧道不是通过此机制配置的，而是通过 ExpressRoute BGP 对等会话播发默认路由来启用的。有关详细信息，请参阅 [ExpressRoute 文档](../expressroute/index.md)。
 
 ## 配置概述
 
@@ -129,7 +129,7 @@ ms.author: cherylmc
 2. 将默认路由添加到路由表中。
 
     下面的示例将默认路由添加到在步骤 1 中创建的路由表。请注意，唯一支持的路由是“0.0.0.0/0”到“VPN 网关”下一跃点的目标前缀。
- 
+
         Set-AzureRoute -RouteTable "MyRouteTable" -RouteName "DefaultRoute" -AddressPrefix "0.0.0.0/0" -NextHopType VPNGateway
 
 3. 将路由表关联到子网。
@@ -166,7 +166,7 @@ ms.author: cherylmc
     Remove-AzureSubnetRouteTable -VirtualNetworkName <virtualNetworkName> -SubnetName <subnetName>
 
 ### 列出与子网关联的路由表
-    
+
     Get-AzureSubnetRouteTable -VirtualNetworkName <virtualNetworkName> -SubnetName <subnetName>
 
 ### 从 VNet VPN 网关中删除默认站点

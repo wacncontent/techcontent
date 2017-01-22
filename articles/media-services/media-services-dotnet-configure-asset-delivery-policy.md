@@ -60,7 +60,7 @@ MPEG DASH
 ##清除资产传送策略 
 
 以下 **ConfigureClearAssetDeliveryPolicy** 方法会指定不应用动态加密，而是使用以下任一协议传送流：MPEG DASH、HLS 和平滑流式处理协议。你可能需要对存储加密资产应用此策略。
-  
+
 有关创建 AssetDeliveryPolicy 时可以指定哪些值的信息，请参阅[定义 AssetDeliveryPolicy 时使用的类型](#types)部分。
 
     static public void ConfigureClearAssetDeliveryPolicy(IAsset asset)
@@ -109,7 +109,7 @@ Azure 媒体服务还允许你添加 Widevine 加密。以下示例演示将 Pla
     {
         // Get the PlayReady license service URL.
         Uri acquisitionUrl = key.GetKeyDeliveryUrl(ContentKeyDeliveryType.PlayReadyLicense);
-        
+
         // GetKeyDeliveryUrl for Widevine attaches the KID to the URL.
         // For example: https://amsaccount1.keydelivery.mediaservices.chinacloudapi.cn/Widevine/?KID=268a6dcb-18c8-4648-8c95-f46429e4927c.  
         // The WidevineBaseLicenseAcquisitionUrl (used below) also tells Dynamaic Encryption 
@@ -151,7 +151,7 @@ Azure 媒体服务还允许你添加 Widevine 加密。以下示例演示将 Pla
 
     private static void CreateAssetDeliveryPolicy(IAsset asset, IContentKey key)
     {
-        
+
         //  Get the Key Delivery Base Url by removing the Query parameter.  The Dynamic Encryption service will
         //  automatically add the correct key identifier to the url when it generates the Envelope encrypted content
         //  manifest.  Omitting the IV will also cause the Dynamice Encryption service to generate a deterministic
@@ -307,7 +307,7 @@ Azure 媒体服务还允许你添加 Widevine 加密。以下示例演示将 Pla
         /// Base key url that will have KID=<Guid> appended for Envelope.
         /// </summary>
         EnvelopeBaseKeyAcquisitionUrl,
-        
+
         /// <summary>
         /// The initialization vector to use for envelope encryption in Base64 format.
         /// </summary>

@@ -83,48 +83,48 @@ ms.author: andbuc
 BLE 模块通过 BlueZ 堆栈与蓝牙硬件通信。需要 BlueZ 5.37 版才能让模块正常运行。这些说明可确保安装 BlueZ 的正确版本。
 
 1. 停止运行当前蓝牙守护程序：
-   
+
     ```
     sudo systemctl stop bluetooth
     ```
 2. 安装 BlueZ 依赖项。
-   
+
     ```
     sudo apt-get update
     sudo apt-get install bluetooth bluez-tools build-essential autoconf glib2.0 libglib2.0-dev libdbus-1-dev libudev-dev libical-dev libreadline-dev
     ```
 3. 从 bluez.org 下载 BlueZ 源代码。
-   
+
     ```
     wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.37.tar.xz
     ```
 4. 解压缩源代码。
-   
+
     ```
     tar -xvf bluez-5.37.tar.xz
     ```
 5. 将目录更改为新创建的文件夹。
-   
+
     ```
     cd bluez-5.37
     ```
 6. 配置要生成的 BlueZ 代码。
-   
+
     ```
     ./configure --disable-udev --disable-systemd --enable-experimental
     ```
 7. 生成 BlueZ。
-   
+
     ```
     make
     ```
 8. 完成生成后安装 BlueZ。
-   
+
     ```
     sudo make install
     ```
 9. 更改蓝牙的 systemd 服务配置，使其指向文件 `/lib/systemd/system/bluetooth.service` 中的新蓝牙守护程序。使用以下文本替换“'ExecStart”行：
-    
+
     ```
     ExecStart=/usr/local/libexec/bluetooth/bluetoothd -E
     ```
@@ -133,53 +133,53 @@ BLE 模块通过 BlueZ 堆栈与蓝牙硬件通信。需要 BlueZ 5.37 版才能
 运行示例前，需要确认 Raspberry Pi 3 可以连接到 SensorTag 设备。
 
 1. 确保安装 `rfkill` 实用程序。
-   
+
     ```
     sudo apt-get install rfkill
     ```
 2. 打开 Raspberry Pi 3 上的蓝牙，确认版本号为 **5.37**。
-   
+
     ```
     sudo rfkill unblock bluetooth
     bluetoothctl --version
     ```
 3. 启动蓝牙服务并执行 **bluetoothctl** 命令，进入交互式蓝牙外壳。
-   
+
     ```
     sudo systemctl start bluetooth
     bluetoothctl
     ```
 4. 输入“启动”命令，打开蓝牙控制器。你应看到如下输出：
-   
+
     ```
     [NEW] Controller 98:4F:EE:04:1F:DF C3 raspberrypi [default]
     ```
 
 4. 在交互式蓝牙程序中时，输入“打开扫描”命令以扫描蓝牙命令。你应看到如下输出：
-    
+
     ```
     Discovery started
     [CHG] Controller 98:4F:EE:04:1F:DF Discovering: yes
     ```
 6. 通过按小按钮（绿色 LED 应闪烁）使 SensorTag 设备可检测到。Raspberry Pi 3 应发现 SensorTag 设备：
-   
+
     ```
     [NEW] Device A0:E6:F8:B5:F6:00 CC2650 SensorTag
     [CHG] Device A0:E6:F8:B5:F6:00 TxPower: 0
     [CHG] Device A0:E6:F8:B5:F6:00 RSSI: -43
     ```
-    
+
     在此示例中，可看到 SensorTag 设备的 MAC 地址为 **A0:E6:F8:B5:F6:00**。
 
 6. 输入“关闭扫描”命令来关闭扫描。
-    
+
     ```
     [CHG] Controller 98:4F:EE:04:1F:DF Discovering: no
     Discovery stopped
     ```
 
 7. 输入 **connect <MAC address>**，利用 MAC 地址连接到 SensorTag 设备。请注意，下面的示例输出已节略：
-    
+
     ```
     Attempting to connect to A0:E6:F8:B5:F6:00
     [CHG] Device A0:E6:F8:B5:F6:00 Connected: yes
@@ -196,10 +196,10 @@ BLE 模块通过 BlueZ 堆栈与蓝牙硬件通信。需要 BlueZ 5.37 版才能
     [CHG] Device A0:E6:F8:B5:F6:00 Alias: SensorTag 2.0
     [CHG] Device A0:E6:F8:B5:F6:00 Modalias: bluetooth:v000Dp0000d0110
     ```
-   
+
     > 请注意，可使用 **list-attributes** 命令重新列出设备的 GATT 特征。
 9. 现可使用“disconnect”断开与设备的连接，然后使用“quit”命令退出蓝牙程序：
-   
+
     ```
     Attempting to disconnect from A0:E6:F8:B5:F6:00
     Successful disconnected
@@ -429,7 +429,7 @@ BLE 设备的示例配置假定使用 Texas Instruments SensorTag 设备。任�
 BLE 模块还支持从 Azure IoT 中心将指令发送到设备。可使用 Azure IoT 中心设备资源管理器或 IoT 中心资源管理器将传递 BLE 网关模块的 JSON 消息发送到 BLE 设备。如果使用 Texas Instruments SensorTag 设备，则可以从 IoT 中心发送命令，打开红色 LED、绿色 LED 或蜂鸣器。为此，请首先按顺序发送以下两个 JSON 消息。然后，可以发送任何命令，打开指示灯或蜂鸣器。
 
 - 重置所有 LED 和蜂鸣器（将它们关闭）
-  
+
     ```json
     {
       "type": "write_once",

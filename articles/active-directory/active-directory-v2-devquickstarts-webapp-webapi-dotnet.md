@@ -66,9 +66,9 @@ C#
     public void ConfigureAuth(IAppBuilder app)
     {
         app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
-    
+
         app.UseCookieAuthentication(new CookieAuthenticationOptions());
-    
+
         app.UseOpenIdConnectAuthentication(
             new OpenIdConnectAuthenticationOptions
             {
@@ -132,7 +132,7 @@ C#
 现在可以实际使用在步骤 3 中获取的 access\_token。打开 Web 应用的 `Controllers\TodoListController.cs` 文件，此文件可向待办事项列表 API 发出所有 CRUD 请求。
 
 - 此处可再次使用 MSAL，从 MSAL 缓存检索 access\_tokens。首先，将 MSAL 的 `using` 语句添加到此文件。
-  
+
     `using Microsoft.Identity.Client;`  
 
 - 在 `Index` 操作中，使用 MSAL 的 `AcquireTokenSilentAsync` 方法获取可用于读取待办事项列表服务数据的 access\_token：
@@ -144,7 +144,7 @@ C#
     string tenantID = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/tenantid").Value;
     string authority = String.Format(CultureInfo.InvariantCulture, Startup.aadInstance, tenantID, string.Empty);
     ClientCredential credential = new ClientCredential(Startup.clientId, Startup.clientSecret);
-    
+
     // Here you ask for a token using the web app's clientId as the scope, since the web app and service share the same clientId.
     app = new ConfidentialClientApplication(Startup.clientId, redirectUri, credential, new NaiveSessionCache(userObjectID, this.HttpContext)){};
     result = await app.AcquireTokenSilentAsync(new string[] { Startup.clientId });

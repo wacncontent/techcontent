@@ -54,7 +54,7 @@ ms.author: davidmu
         using Microsoft.Azure.Management.Compute;
         using Microsoft.Azure.Management.Compute.Models;
         using Microsoft.Rest;
-        
+
 2. 将变量添加到 Program 类的 Main 方法，指定资源组名称、虚拟机名称和订阅标识符：
 
         var groupName = "resource group name";
@@ -62,7 +62,7 @@ ms.author: davidmu
         var subscriptionId = "subsciption id";
 
     可以通过运行 Get-AzureRmSubscription 查找订阅标识符。
-    
+
 3. 若要获取创建凭据所需的令牌，请将以下方法添加到 Program 类：
 
         private static async Task<AuthenticationResult> GetAccessTokenAsync()
@@ -76,9 +76,9 @@ ms.author: davidmu
           }
           return token;
         }
-    
+
     将 {client-id} 替换为 Azure Active Directory 应用程序的标识符，将 {client-secret} 替换为 AD 应用程序的访问密钥，并将 {tenant-id} 替换为你的订阅的租户标识符。可以通过运行 Get-AzureRmSubscription 找到租户 ID。可使用 Azure 门户预览找到访问密钥。
-    
+
 4. 若要创建凭据，请将以下代码添加到 Program.cs 中的 Main 方法：
 
         var token = GetAccessTokenAsync();
@@ -172,7 +172,7 @@ ms.author: davidmu
             Console.WriteLine("  level: " + istat.Level);
             Console.WriteLine("  displayStatus: " + istat.DisplayStatus);
           }
-          
+
         }
 
 2. 若要调用刚添加的方法，请将以下代码添加到 Main 方法：
@@ -184,13 +184,13 @@ ms.author: davidmu
           subscriptionId);
         Console.WriteLine("\nPress enter to continue...");
         Console.ReadLine();
-    
+
 3. 保存 Program.cs 文件。
 
 4. 在 Visual Studio 中单击“启动”，然后使用订阅所用的相同用户名和密码登录到 Azure AD。
 
     运行此方法时，应会显示与下例类似的内容：
-    
+
         Getting information about the virtual machine...
         hardwareProfile
           vmSize: Standard_A0

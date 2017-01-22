@@ -87,7 +87,7 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 [ResolveMappingDifferences 方法](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.recovery.recoverymanager.resolvemappingdifferences.aspx)可选择其中一个分片映射（本地或全局）做为真实源，并调解两个分片映射（GSM 和 LSM）上的映射。
 
     ResolveMappingDifferences (RecoveryToken, MappingDifferenceResolution.KeepShardMapping);
-   
+
 * *RecoveryToken* 参数枚举特定分片的 GSM 与 LSM 之间映射的差异。
 
 * [MappingDifferenceResolution 枚举](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.recovery.mappingdifferenceresolution.aspx)指示用于解决分片映射之间差异的方法。
@@ -136,13 +136,13 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
      if (s.Location.Server == Configuration.PrimaryServer) 
          { 
           ShardLocation slNew = new ShardLocation(Configuration.SecondaryServer, s.Location.Database); 
-        
+
           rm.DetachShard(s.Location); 
-        
+
           rm.AttachShard(slNew); 
-        
+
           var gs = rm.DetectMappingDifferences(slNew); 
-    
+
           foreach (RecoveryToken g in gs) 
             { 
                rm.ResolveMappingDifferences(g, MappingDifferenceResolution.KeepShardMapping); 
@@ -155,5 +155,5 @@ GSM 和 LSM 可能会因为以下原因而出现不同步的情况：
 <!--Image references-->
 
 [1]: ./media/sql-database-elastic-database-recovery-manager/recovery-manager.png
- 
+
 <!---HONumber=Mooncake_1212_2016-->

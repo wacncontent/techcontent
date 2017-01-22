@@ -193,9 +193,9 @@ ms.author: kyliel
 4. 键入：
     `Import-AzurePublishSettingsFile -Environment AzureChinaCloud <PathToFile>`，其中 `<PathToFile>` 是 .publishsettings 文件的完整路径。
 
-   有关详细信息，请参阅 [Azure cmdlet 入门](http://msdn.microsoft.com/zh-cn/library/azure/jj554332.aspx)。
+    有关详细信息，请参阅 [Azure cmdlet 入门](http://msdn.microsoft.com/zh-cn/library/azure/jj554332.aspx)。
 
-   有关安装和配置 PowerShell 的详细信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
+    有关安装和配置 PowerShell 的详细信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
 ## 步骤 4：上载 .vhd 文件
 

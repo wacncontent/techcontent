@@ -91,15 +91,15 @@ ms.author: ricksal
 + 通过 [Azure 经典管理门户]。在给定表的“脚本”选项卡中访问表操作的脚本。下面显示了已注册到 `TodoItem` 表的插入脚本的默认代码。你可以使用自己的自定义业务逻辑重写此代码。
 
     ![1][1]
-    
+
 + 使用源代码管理。启用源代码管理后，只需在 git 存储库中的 .\\service\\table 子文件夹内创建一个名为 <em>`<table>`</em>.<em>`<operation>`</em>.js 的文件，其中，<em>`<table>`</em> 是表的名称，<em>`<operation>`</em> 是要注册的表操作。有关详细信息，请参阅[源代码管理和共享代码][Source control, shared code, and helper functions]。
 
 + 使用 Azure 命令行工具中的命令提示符。有关详细信息，请参阅[使用命令行工具]。
 
 表操作脚本必须至少调用 [request 对象]的下列函数之一，以确保客户端收到响应。
- 
+
 + **execute 函数**：已按请求完成操作，并已返回标准响应。
- 
+
 + **respond 函数**：已返回自定义响应。
 
 > [!IMPORTANT]如果在脚本的某个代码路径中 **execute** 和 **respond** 均未调用，则该操作可能不返回响应。
@@ -119,7 +119,7 @@ ms.author: ricksal
             'this was added by a script and will be saved to the database'; 
         request.execute(); 
     } 
- 
+
     function update(item, user, request) { 
         item.scriptComment = 
             'this was added by a script and will be saved to the database'; 
@@ -131,7 +131,7 @@ ms.author: ricksal
         query.where({ userid: user.userId}); 
         request.execute(); 
     }
- 
+
 >[!NOTE]在删除脚本中，更改所提供的 userId 变量不会影响所删除的记录。
 
 有关更多示例，请参阅[读取和写入数据]、[修改请求]和[验证数据]。
@@ -172,7 +172,7 @@ ms.author: ricksal
 如果为 **execute** 函数提供了 **success** 处理程序，则还必须在 **success** 处理程序中调用 **respond** 函数，使运行时知道脚本已完成，并且可写入响应。如果在调用 **respond** 时未传递任何参数，则移动服务将生成默认响应。
 
 >[!NOTE]只有在先调用 **execute** 函数之后，才能调用不带参数的 **respond** 来调用默认响应。
- 
+
 ### <a name="override-error"></a>如何：重写默认错误处理
 
 如果与数据库的连接断开、对象无效或者查询不正确，**execute** 函数可能会失败。默认情况下，当发生错误时，服务器脚本会记录错误，并将错误结果写入到响应中。由于移动服务提供了默认的错误处理，因此你不需要处理服务中可能会发生的错误。
@@ -187,7 +187,7 @@ ms.author: ricksal
         } 
       }); 
     }
- 
+
 提供 error 处理程序后，调用 **respond** 时，移动服务会向客户端返回错误结果。
 
 如果需要，你也可以同时提供 **success** 和 **error** 处理程序。
@@ -299,7 +299,7 @@ ms.author: ricksal
 ## <a name="custom-api"></a>自定义 API
 
 本部分介绍如何创建和使用自定义 API 终结点，具体包括以下小节：
-    
+
 + [自定义 API 概述](#custom-api-overview)
 + [如何：定义自定义 API]
 + [如何：实现 HTTP 方法]
@@ -330,7 +330,7 @@ ms.author: ricksal
 + 通过 [Azure 经典管理门户]。可以在“API”选项卡中创建和修改自定义 API 脚本。服务器脚本代码位于给定自定义 API 的“脚本”选项卡中。下面显示了向 `CompleteAll` 自定义 API 终结点发出的 POST 请求调用的脚本。 
 
     ![2][2]
-    
+
 + 使用源代码管理。如果已启用源代码管理，只需在 git 存储库的 .\\service\\api 子文件夹中创建一个名为 <em>`<custom_api>`</em>.js 的文件，其中 <em>`<custom_api>`</em> 是要注册的自定义 API 的名称。此脚本文件包含自定义 API 公开的每个 HTTP 方法的 _exported_ 函数。权限在随附的 .json 文件中定义。有关详细信息，请参阅[源代码管理和共享代码][Source control, shared code, and helper functions]。
 
 + 使用 Azure 命令行工具中的命令提示符。有关详细信息，请参阅[使用命令行工具]。
@@ -378,7 +378,7 @@ ms.author: ricksal
                     });
                 }
             });
-        
+
         };
 
 可以通过向以下终结点发出 HTTP POST 请求来调用此自定义 API 函数：
@@ -407,12 +407,12 @@ ms.author: ricksal
             api.get('add', add);
             api.get('sub', subtract);
         }
-        
+
         function add(req, res) {
             var result = parseInt(req.query.a) + parseInt(req.query.b);
             res.send(200, { result: result });
         }
-        
+
         function subtract(req, res) {
             var result = parseInt(req.query.a) - parseInt(req.query.b);
             res.send(200, { result: result });
@@ -514,27 +514,27 @@ HTTP GET 请求可按如下所示调用上述自定义 API 示例中的两个路
             request.execute();
         }
     }
-    
+
     function handleUnapprovedItem(item, user, request) {
         // Do something with the supplied item, user, or request objects.
     }
- 
+
 在脚本中，Helper 函数必须在主函数之后声明。必须声明脚本中的所有变量。未声明的变量会导致出错。
 
 Helper 函数也可以只定义一次，然后在服务器脚本之间共享。若要在脚本之间共享某个函数，必须导出该函数，并且脚本文件必须在 `.\service\shared` 目录中存在。以下模板演示了如何在文件 `.\services\shared\helpers.js` 中导出共享函数：
 
         exports.handleUnapprovedItem = function (tables, user, callback) {
-            
+
             // Do something with the supplied tables or user objects and 
             // return a value to the callback function.
         };
- 
+
 然后，你可以在表操作脚本中使用类似于下面的函数：
 
         function insert(item, user, request) {
             var helper = require('../shared/helper');
             helper.handleUnapprovedItem(tables, user, function(result) {
-                    
+
                     // Do something based on the result.
                     request.execute();
                 }
@@ -552,11 +552,11 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 以下自定义 API 示例使用提供的 [service 对象]来检索某个应用程序设置值。
 
         exports.get = function(request, response) {
-        
+
             // Get the MY_CUSTOM_SETTING value from app settings.
             var customSetting = 
                 request.service.config.appSettings.my_custom_setting;
-                
+
             // Do something and then send a response.
 
         }
@@ -649,11 +649,11 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 
     function insert(item, user, request) {
         var permissionsTable = tables.getTable('permissions');
-    
+
         permissionsTable
             .where({ userId: user.userId, permission: 'submit order'})
             .read({ success: checkPermissions });
-            
+
         function checkPermissions(results) {
             if(results.length > 0) {
                 // Permission record was found. Continue normal execution.
@@ -669,7 +669,7 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 
     function update(item, user, request) {
         request.execute({ success: insertAuditEntry });
-        
+
         function insertAuditEntry() {
             var auditTable = tables.getTable('audit');
             var audit = {
@@ -700,10 +700,10 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
         var batchSize = 10; 
         var totalCount = 0;
         var errorCount = 0; 
-        
+
         function insertItems() {        
             var batchCompletedCount = 0;  
-        
+
             var insertComplete = function() { 
                 batchCompletedCount++; 
                 totalCount++; 
@@ -718,13 +718,13 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
                     } 
                 } 
             }; 
-        
+
             var errorHandler = function(err) { 
                 errorCount++; 
                 console.warn("Ignoring insert failure as part of batch.", err); 
                 insertComplete(); 
             };
-        
+
             for(var i = 0; i < batchSize; i++) { 
                 var item = { text: "This is item number: " + totalCount + i }; 
                 todoTable.insert(item, { 
@@ -733,7 +733,7 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
                 }); 
             } 
         } 
-        
+
         insertItems(); 
 
 ### <a name="JSON-types"></a>如何：将 JSON 类型映射到数据库类型
@@ -829,7 +829,7 @@ Stream|不支持
             error: function(err) {
                 console.log("error is: " + err);
         });
-    
+
 该脚本将联接两个表，并将结果写入日志。最终的对象可能类似于：
 
         { text: 'Take out the trash', complete: false, description: 'Critical'}

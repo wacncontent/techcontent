@@ -57,7 +57,7 @@ ms.author: riande
 1. 在“新建项目”对话框中，展开“C#”并在“已安装的模板”下选择“Web”，然后选择“ASP.NET Web 应用程序”。将该应用程序命名为 **ContactManager**，然后单击“确定”。
 
     ![“新建项目”对话框](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/GS13newprojdb.png)
- 
+
     **注意：**请确保输入“ContactManager”。你稍后将复制的代码块假定项目名称为 ContactManager。
 
 1. 在“新建 ASP.NET 项目”对话框中，选择“MVC”模板。确认已将“身份验证”设置为“单个用户帐户”，并且已选中“在云中托管”和“应用服务”。
@@ -117,9 +117,9 @@ ms.author: riande
 1. 将 *Layout.cshtml* 文件中的 ActionLink 替换为以下代码。
 
     @Html.ActionLink("CM Demo", "Index", "Contacts", new { area = "" }, new { @class = "navbar-brand" })
-                   
+
     确保将第三个参数从“Home”更改为“Contacts”。上面的标记会在每个页面上创建一个“Contacts”链接，以转到 Contacts 控制器的 Index 方法。将页眉和页脚中的应用程序名称从“My ASP.NET Application”和“Application name”更改为“Contact Manager”和“CM Demo”。
- 
+
 ### 在本地运行应用程序
 
 1. 按 Ctrl+F5 运行应用程序。
@@ -135,7 +135,7 @@ ms.author: riande
 1. 在 Visual Studio 中，在“解决方案资源管理器”中右键单击该项目，从上下文菜单中选择“发布”。
 
     ![项目上下文菜单中的“发布”](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/GS13publish.png)
-    
+
     “发布 Web”向导将打开。
 
 1. 在“发布 Web”对话框中，单击“发布”。
@@ -157,7 +157,7 @@ ms.author: riande
     SSL URL 将为 https://localhost:44300/，除非你之前已创建 SSL Web 应用。
 
     ![启用 SSL][rxSSL]
- 
+
 1. 在“解决方案资源管理器”中，右键单击“Contact Manager”项目，然后单击“属性”。
 
 1. 单击“Web”选项卡。
@@ -165,7 +165,7 @@ ms.author: riande
 1. 将“项目 URL”更改为使用“SSL URL”，并保存页面 (Ctrl+S)。
 
     ![启用 SSL](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrr1.png)
- 
+
 1. 验证 Internet Explorer 是否为 Visual Studio 所启动的浏览器，如下图所示：
 
     ![默认浏览器](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/ss12.PNG)
@@ -231,13 +231,13 @@ ms.author: riande
 ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新和删除 (CRUD) 操作的代码。
 
 1. 生成项目 **(Ctrl+Shift+B)**。（在使用基架机制前必须生成项目。）
- 
+
 1. 在“解决方案资源管理器”中，右键单击 Controllers 文件夹，单击“添加”，然后单击“控制器”。
 
     ![Controllers 文件夹上下文菜单中的“添加控制器”][addcode001]
 
 5. 在“添加基架”对话框中，选择“带视图的 MVC 5 控制器，使用 EF”，然后单击“添加”。
-    
+
     ![添加基架 dlg](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rr6.png)
 
 1. 在“模型类”下拉框中，选择“Contact (ContactManager.Models)”。（参阅下图。）
@@ -474,7 +474,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
             filters.Add(new System.Web.Mvc.AuthorizeAttribute());
             filters.Add(new RequireHttpsAttribute());
         }
-        
+
     此代码将在应用程序中添加 [Authorize](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.authorizeattribute.aspx) 筛选器和 [RequireHttps](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.requirehttpsattribute.aspx) 筛选器。[Authorize](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.authorizeattribute.aspx) 筛选器将阻止匿名用户访问应用程序的任何方法。你将使用 [AllowAnonymous](http://blogs.msdn.com/b/rickandy/archive/2012/03/23/securing-your-asp-net-mvc-4-app-and-the-new-allowanonymous-attribute.aspx) 属性选择取消几个方法中的授权要求，因此匿名用户可以登录并查看主页。[RequireHttps](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.requirehttpsattribute.aspx) 要求对 Web 应用的所有访问都必须通过 HTTPS。
 
     或者，向每个控制器中添加 [Authorize](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.authorizeattribute.aspx) 和 [RequireHttps](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.requirehttpsattribute.aspx) 属性，但最安全的做法是将这些属性应用于整个应用程序。通过全局添加这两个属性，你添加的每个新控制器和操作方法都将自动受到保护，你将无需记住应用它们。有关详细信息，请参阅[保护 ASP.NET MVC 应用和新的 AllowAnonymous 属性](http://blogs.msdn.com/b/rickandy/archive/2012/03/23/securing-your-asp-net-mvc-4-app-and-the-new-allowanonymous-attribute.aspx)。
@@ -532,7 +532,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
             }
             return View(contact);
         }
-        
+
 1. 按 Ctrl+F5 运行应用程序。
 
 1. 如果你仍然从上一个会话登录，请点击“注销”链接。
@@ -565,7 +565,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 1. 单击“发布 Web”对话框左侧的“设置”选项卡。
 
 2. 在 **ApplicationDbContext** 下，选择在你创建项目时创建的数据库。
-   
+
 1. 在“ContactManagerContext”下，选择“执行 Code First 迁移”。
 
     ![设置](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrc2.png)
@@ -601,7 +601,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 5. 在“解决方案资源管理器”中，右键单击该项目并选择“发布”。
 
        ![项目上下文菜单中的“发布”](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/GS13publish.png)
-    
+
 4. 单击“开始预览”按钮。只会部署需要更新的文件。
 
 5. 从 Visual Studio 或门户启动 Web 应用。“Web 应用停止时无法发布”。
@@ -625,7 +625,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 1. 单击“CM 演示”链接以导航到“Cm”控制器。或者，也可以将 *Cm* 附加到 URL。
 
     ![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrr4.png)
- 
+
 1. 单击“编辑”链接。
 
     你将被重定向到登录页。
@@ -643,15 +643,15 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 1. 在“服务器资源管理器”中，导航到“Azure > SQL 数据库 > {你的数据库}”
 
 2. 右键单击数据库，然后选择“在 SQL Server 对象资源管理器中打开”。
- 
+
     ![在 SSOX 中打开](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrr12.png)
- 
+
 3. 如果以前没有连接到此数据库，可能将提示你添加一个防火墙规则，以启用对当前 IP 地址的访问。将预先填充 IP 地址。只需单击“添加防火墙规则”即可启用访问。
 
     ![添加防火墙规则](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/addfirewallrule.png)
 
 3. 使用创建数据库服务器时指定的用户名和密码登录到数据库。
- 
+
 1. 右键单击“AspNetUsers”表，然后选择“查看数据”。
 
     ![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rrr8.png)  
@@ -659,7 +659,7 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 1. 记下你注册要成为 **canEdit** 角色的 Google 帐户中的 ID，并记下 *user1@contoso.com* 的 ID。这些 ID 应该是具有 **canEdit** 角色的唯一用户。（你将在下一步中对此进行验证。）
 
     ![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/s2.png)
- 
+
 2. 在“SQL Server 对象资源管理器”中，右键单击“AspNetUserRoles”，然后选择“查看数据”。
 
     ![CM 页](./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database/rs1.png)  
@@ -751,5 +751,5 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 [Next steps]: #nextsteps
 
 [ImportPublishSettings]: ./media/web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database-vs2013/ImportPublishSettings.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

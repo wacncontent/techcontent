@@ -179,5 +179,5 @@ Visual Studio 探查器不支持在模拟器中测试 Azure 二进制文件，�
 [15]: ./media/cloud-services-performance-testing-visual-studio-profiler/ProfilingLocally013.png
 [16]: ./media/cloud-services-performance-testing-visual-studio-profiler/ProfilingLocally012.png
 [17]: ./media/cloud-services-performance-testing-visual-studio-profiler/ProfilingLocally08.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

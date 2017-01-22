@@ -31,7 +31,7 @@ ms.author: juliako
 - 创建用于监视的通知终结点。
 
     若要创建通知终结点，将 EndPointType 设置为 AzureTable (2) 并将 endPontAddress 设置为存储表（例如 https://telemetryvalidationstore.table.core.chinacloudapi.cn/）。
-  
+
 - 获取监视配置
 
     为要监视的服务创建监视配置设置。最多允许一个监视配置设置。
@@ -63,7 +63,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Wed, 02 Dec 2015 05:10:40 GMT
-    
+
     {"d":{"results":[{"__metadata":{"id":"https://wamsbjbclus001rest-hs.chinacloudapp.cn/api/StorageAccounts('telemetryvalidationstore')","uri":"https://wamsbjbclus001rest-hs.chinacloudapp.cn/api/StorageAccounts('telemetryvalidationstore')","type":"Microsoft.Cloud.Media.Vod.Rest.Data.Models.StorageAccount"},"Name":"telemetryvalidationstore","IsDefault":true,"BytesUsed":null}]}}
 
 ## 获取通知终结点
@@ -77,7 +77,7 @@ ms.author: juliako
     Accept: application/json; odata=verbose
     Authorization: (redacted)
     Host: wamsbjbclus001rest-hs.chinacloudapp.cn
-    
+
 ###响应
     HTTP/1.1 200 OK
     Cache-Control: no-cache
@@ -92,9 +92,9 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Wed, 02 Dec 2015 05:10:40 GMT
-    
+
     {"d":{"results":[]}}
- 
+
 ## 创建用于监视的通知终结点
 
 ###请求
@@ -108,7 +108,7 @@ ms.author: juliako
     Content-Type: application/json; charset=utf-8
     Host: wamsbjbclus001rest-hs.chinacloudapp.cn
     Content-Length: 115
-    
+
     {"Name":"monitoring","EndPointAddress":"https://telemetryvalidationstore.table.core.chinacloudapi.cn/","EndPointType":2}
 
 >[!NOTE]请务必将“https://telemetryvalidationstore.table.core.chinacloudapi.cn”值更改为存储帐户。
@@ -129,9 +129,9 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Wed, 02 Dec 2015 05:10:42 GMT
-    
+
     {"d":{"__metadata":{"id":"https://wamsbjbclus001rest-hs.chinacloudapp.cn/api/NotificationEndPoints('nb%3Anepid%3AUUID%3A76bb4faf-ea29-4815-840a-9a8e20102fc4')","uri":"https://wamsbjbclus001rest-hs.chinacloudapp.cn/api/NotificationEndPoints('nb%3Anepid%3AUUID%3A76bb4faf-ea29-4815-840a-9a8e20102fc4')","type":"Microsoft.Cloud.Media.Vod.Rest.Data.Models.NotificationEndPoint"},"Id":"nb:nepid:UUID:76bb4faf-ea29-4815-840a-9a8e20102fc4","Name":"monitoring","Created":"\/Date(1449033042667)\/","EndPointAddress":"https://telemetryvalidationstore.table.core.chinacloudapi.cn/","EndPointType":2}}
- 
+
 ## 获取监视配置
 
 ### 请求
@@ -145,7 +145,7 @@ ms.author: juliako
     Host: wamsbjbclus001rest-hs.chinacloudapp.cn
 
 ###响应
-    
+
     HTTP/1.1 200 OK
     Cache-Control: no-cache
     Content-Length: 20
@@ -159,7 +159,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Wed, 02 Dec 2015 05:10:42 GMT
-    
+
     {"d":{"results":[]}}
 
 ## 添加监视配置
@@ -175,7 +175,7 @@ ms.author: juliako
     Content-Type: application/json; charset=utf-8
     Host: wamsbjbclus001rest-hs.chinacloudapp.cn
     Content-Length: 133
-    
+
     {"NotificationEndPointId":"nb:nepid:UUID:76bb4faf-ea29-4815-840a-9a8e20102fc4","Settings":[{"Component":"Channel","Level":"Normal"}]}
 
 ### 响应
@@ -194,7 +194,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Wed, 02 Dec 2015 05:10:43 GMT
-    
+
     {"d":{"__metadata":{"id":"https://wamsbjbclus001rest-hs.chinacloudapp.cn/api/MonitoringConfigurations('nb%3Amcid%3AUUID%3A1a8931ae-799f-45fd-8aeb-9641740295c2')","uri":"https://wamsbjbclus001rest-hs.chinacloudapp.cn/api/MonitoringConfigurations('nb%3Amcid%3AUUID%3A1a8931ae-799f-45fd-8aeb-9641740295c2')","type":"Microsoft.Cloud.Media.Vod.Rest.Data.Models.MonitoringConfiguration"},"Id":"nb:mcid:UUID:1a8931ae-799f-45fd-8aeb-9641740295c2","NotificationEndPointId":"nb:nepid:UUID:76bb4faf-ea29-4815-840a-9a8e20102fc4","Created":"2015-12-02T05:10:43.7680396Z","LastModified":"2015-12-02T05:10:43.7680396Z","Settings":{"__metadata":{"type":"Collection(Microsoft.Cloud.Media.Vod.Rest.Data.Models.ComponentMonitoringSettings)"},"results":[{"Component":"Channel","Level":"Normal"},{"Component":"StreamingEndpoint","Level":"Disabled"}]}}}
 
 ## 使用遥测信息

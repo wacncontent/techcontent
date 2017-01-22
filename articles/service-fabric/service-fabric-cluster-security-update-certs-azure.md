@@ -128,7 +128,7 @@ ms.author: chackdan
 
 >[!NOTE]
 如果将 Mode 设置为 Complete，可能会无意中删除不在模板中的资源。因此请不要在此方案中使用该模式。
-   
+
     New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName <Resource Group that your cluster is currently deployed to> -TemplateFile <PathToTemplate>
 
 下面是已填充数据的同一个 Powershell 命令示例。

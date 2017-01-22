@@ -31,7 +31,7 @@
          parameters:emailHeader
          headers:nil
          completion:completion ];
-        
+
 如果你需要返回数据，可以使用类似于下面的代码：
 
     [self.client invokeAPI:apiName
@@ -46,10 +46,10 @@
                if(error) { 
                    NSLog(@"ERROR %@", error);
                } else {
-                   
+
         // do something with the result
                }
-               
+
            }];
 
 <!---HONumber=74-->

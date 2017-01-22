@@ -39,7 +39,7 @@ Azure 存储中的对象支持系统属性和用户定义的元数据，及其�
     //Parse the connection string for the storage account.
     const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
     CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
-    
+
     //Create the service client object for credentialed access to the Blob service.
     CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
 
@@ -60,7 +60,7 @@ Azure 存储中的对象支持系统属性和用户定义的元数据，及其�
 可将元数据指定为 Blob 或容器资源上的一个或多个名称/值对。若要设置元数据，请将名称/值对添加到资源上的 **Metadata** 集合，然后调用 **SetMetadata** 方法以将值保存到服务。
 
 > [!NOTE] 元数据的名称必须符合 C# 标识符命名约定。
- 
+
 以下代码示例在容器上设置元数据。一个值是使用集合的 **Add** 方法设置的。另一个值是使用隐式键/值语法设置的。这两种方法都有效。
 
     public static void AddContainerMetadata(CloudBlobContainer container)

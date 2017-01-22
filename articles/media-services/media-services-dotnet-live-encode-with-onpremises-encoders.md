@@ -56,7 +56,7 @@ ms.author: cenkdin;juliako
 - 关闭资源
 
 有关如何配置实时编码器的信息，请参阅 [Azure 媒体服务 RTMP 支持和实时编码器](https://azure.microsoft.com/blog/2014/09/18/azure-media-services-rtmp-support-and-live-encoders/)。
-    
+
         using System;
         using System.Collections.Generic;
         using System.Configuration;
@@ -68,7 +68,7 @@ ms.author: cenkdin;juliako
         using System.Threading.Tasks;
         using Microsoft.WindowsAzure.MediaServices.Client;
         using Newtonsoft.Json.Linq;
-        
+
         namespace AMSLiveTest
         {
             class Program
@@ -77,7 +77,7 @@ ms.author: cenkdin;juliako
                 private const string ChannelName = "channel001";
                 private const string AssetlName = "asset001";
                 private const string ProgramlName = "program001";
-        
+
                 private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
 
                 // Azure China uses a different API server and a different ACS Base Address from the Global.
@@ -89,12 +89,12 @@ ms.author: cenkdin;juliako
                     ConfigurationManager.AppSettings["MediaServicesAccountName"];
                 private static readonly string _mediaServicesAccountKey =
                     ConfigurationManager.AppSettings["MediaServicesAccountKey"];
-        
+
                 // Field for service context.
                 private static CloudMediaContext _context = null;
                 private static MediaServicesCredentials _cachedCredentials = null;
                 private static Uri _apiServer = null;
-        
+
                 static void Main(string[] args)
                 {
                     // Create and cache the Media Services credentials in a static class variable.
@@ -109,29 +109,29 @@ ms.author: cenkdin;juliako
 
                     // Used the cached credentials to create CloudMediaContext.
                     _context = new CloudMediaContext(_apiServer, _cachedCredentials);
-        
+
                     IChannel channel = CreateAndStartChannel();
-        
+
                     // Set the Live Encoder to point to the channel's input endpoint:
                     string ingestUrl = channel.Input.Endpoints.FirstOrDefault().Url.ToString();
-        
+
                     // Use the previewEndpoint to preview and verify 
                     // that the input from the encoder is actually reaching the Channel. 
                     string previewEndpoint = channel.Preview.Endpoints.FirstOrDefault().Url.ToString();
-        
+
                     IProgram program = CreateAndStartProgram(channel);
                     ILocator locator = CreateLocatorForAsset(program.Asset, program.ArchiveWindowLength);
                     IStreamingEndpoint streamingEndpoint = CreateAndStartStreamingEndpoint();
                     GetLocatorsInAllStreamingEndpoints(program.Asset);
-        
+
                     // Once you are done streaming, clean up your resources.
                     Cleanup(streamingEndpoint, channel);
                 }
-        
+
                 public static IChannel CreateAndStartChannel()
                 {
                 //If you want to change the Smooth fragments to HLS segment ratio, you would set the ChannelCreationOptions’s Output property.
-    
+
                     IChannel channel = _context.Channels.Create(
                         new ChannelCreationOptions
                         {
@@ -139,14 +139,14 @@ ms.author: cenkdin;juliako
                             Input = CreateChannelInput(),
                             Preview = CreateChannelPreview()
                         });
-        
+
                     //Starting and stopping Channels can take some time to execute. To determine the state of operations after calling Start or Stop, query the IChannel.State .
-    
+
                     channel.Start();
-        
+
                     return channel;
                 }
-        
+
                 private static ChannelInput CreateChannelInput()
                 {
                     return new ChannelInput
@@ -168,7 +168,7 @@ ms.author: cenkdin;juliako
                         }
                     };
                 }
-        
+
                 private static ChannelPreview CreateChannelPreview()
                 {
                     return new ChannelPreview
@@ -189,7 +189,7 @@ ms.author: cenkdin;juliako
                         }
                     };
                 }
-        
+
                 public static void UpdateCrossSiteAccessPoliciesForChannel(IChannel channel)
                 {
                     var clientPolicy =
@@ -206,31 +206,31 @@ ms.author: cenkdin;juliako
                             </policy>
                         </cross-domain-access>
                     </access-policy>";
-        
+
                     var xdomainPolicy =
                         @"<?xml version=""1.0"" ?>
                     <cross-domain-policy>
                         <allow-access-from domain=""*"" />
                     </cross-domain-policy>";
-        
+
                     channel.CrossSiteAccessPolicies.ClientAccessPolicy = clientPolicy;
                     channel.CrossSiteAccessPolicies.CrossDomainPolicy = xdomainPolicy;
-        
+
                     channel.Update();
                 }
-        
+
                 public static IProgram CreateAndStartProgram(IChannel channel)
                 {
                     IAsset asset = _context.Assets.Create(AssetlName, AssetCreationOptions.None);
-        
+
                     // Create a Program on the Channel. You can have multiple Programs that overlap or are sequential;
                     // however each Program must have a unique name within your Media Services account.
                     IProgram program = channel.Programs.Create(ProgramlName, TimeSpan.FromHours(3), asset.Id);
                     program.Start();
-        
+
                     return program;
                 }
-        
+
                 public static ILocator CreateLocatorForAsset(IAsset asset, TimeSpan ArchiveWindowLength)
                 {
                     // You cannot create a streaming locator using an AccessPolicy that includes write or delete permissions.            
@@ -246,10 +246,10 @@ ms.author: cenkdin;juliako
                                 AccessPermissions.Read
                             )
                         );
-        
+
                     return locator;
                 }
-        
+
                 public static IStreamingEndpoint CreateAndStartStreamingEndpoint()
                 {
                     var options = new StreamingEndpointCreationOptions
@@ -259,13 +259,13 @@ ms.author: cenkdin;juliako
                         AccessControl = GetAccessControl(),
                         CacheControl = GetCacheControl()
                     };
-        
+
                     IStreamingEndpoint streamingEndpoint = _context.StreamingEndpoints.Create(options);
                     streamingEndpoint.Start();
-        
+
                     return streamingEndpoint;
                 }
-        
+
                 private static StreamingEndpointAccessControl GetAccessControl()
                 {
                     return new StreamingEndpointAccessControl
@@ -279,7 +279,7 @@ ms.author: cenkdin;juliako
                                 SubnetPrefixLength = 0
                             }
                         },
-        
+
                         AkamaiSignatureHeaderAuthenticationKeyList = new List<AkamaiSignatureHeaderAuthenticationKey>
                         {
                             new AkamaiSignatureHeaderAuthenticationKey
@@ -291,7 +291,7 @@ ms.author: cenkdin;juliako
                         }
                     };
                 }
-        
+
                 private static byte[] GenerateRandomBytes(int length)
                 {
                     var bytes = new byte[length];
@@ -299,10 +299,10 @@ ms.author: cenkdin;juliako
                     {
                         rng.GetBytes(bytes);
                     }
-        
+
                     return bytes;
                 }
-        
+
                 private static StreamingEndpointCacheControl GetCacheControl()
                 {
                     return new StreamingEndpointCacheControl
@@ -310,7 +310,7 @@ ms.author: cenkdin;juliako
                         MaxAge = TimeSpan.FromSeconds(1000)
                     };
                 }
-        
+
                 public static void UpdateCrossSiteAccessPoliciesForStreamingEndpoint(IStreamingEndpoint streamingEndpoint)
                 {
                     var clientPolicy =
@@ -327,19 +327,19 @@ ms.author: cenkdin;juliako
                             </policy>
                         </cross-domain-access>
                     </access-policy>";
-        
+
                     var xdomainPolicy =
                         @"<?xml version=""1.0"" ?>
                     <cross-domain-policy>
                         <allow-access-from domain=""*"" />
                     </cross-domain-policy>";
-        
+
                     streamingEndpoint.CrossSiteAccessPolicies.ClientAccessPolicy = clientPolicy;
                     streamingEndpoint.CrossSiteAccessPolicies.CrossDomainPolicy = xdomainPolicy;
-        
+
                     streamingEndpoint.Update();
                 }
-        
+
                 public static void GetLocatorsInAllStreamingEndpoints(IAsset asset)
                 {
                     var locators = asset.Locators.Where(l => l.Type == LocatorType.OnDemandOrigin);
@@ -356,9 +356,9 @@ ms.author: cenkdin;juliako
                                             l.ContentAccessComponent,
                                                 ismFile.Name)))
                                 .ToArray();
-        
+
                 }
-        
+
                 public static void Cleanup(IStreamingEndpoint streamingEndpoint,
                                             IChannel channel)
                 {
@@ -367,28 +367,28 @@ ms.author: cenkdin;juliako
                         streamingEndpoint.Stop();
                         streamingEndpoint.Delete();
                     }
-        
+
                     IAsset asset;
                     if (channel != null)
                     {
-        
+
                         foreach (var program in channel.Programs)
                         {
                             asset = _context.Assets.Where(se => se.Id == program.AssetId)
                                                     .FirstOrDefault();
-        
+
                             program.Stop();
                             program.Delete();
-        
+
                             if (asset != null)
                             {
                                 foreach (var l in asset.Locators)
                                     l.Delete();
-        
+
                                 asset.Delete();
                             }
                         }
-        
+
                         channel.Stop();
                         channel.Delete();
                     }

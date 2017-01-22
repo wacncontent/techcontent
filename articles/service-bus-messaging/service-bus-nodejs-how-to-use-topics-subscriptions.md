@@ -50,7 +50,7 @@ wacn.date: 01/04/2017
     ├── wns@0.5.3
     ├── xml2js@0.2.7 (sax@0.5.2)
     └── request@2.21.0 (json-stringify-safe@4.0.0, forever-agent@0.5.0, aws-sign@0.3.0, tunnel-agent@0.3.0, oauth-sign@0.3.0, qs@0.6.5, cookie-jar@0.3.0, node-uuid@1.4.0, http-signature@0.9.11, form-data@0.0.8, hawk@0.13.1)
-    
+
 3.  可以手动运行 **ls** 命令来验证是否创建了 **node\_modules** 文件夹。在该文件夹中，找到 **azure** 程序包，其中包含访问服务总线主题所需的库。
 
 ### 导入模块
@@ -304,5 +304,5 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
   [创建 Node.js 应用程序并将其部署到 Azure 网站]: ../app-service-web/web-sites-nodejs-develop-deploy-mac.md
   [使用存储构建 Node.js 云服务]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
   [使用存储构建 Node.js Web 应用程序]: ../storage/storage-nodejs-use-table-storage-cloud-service-app.md
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

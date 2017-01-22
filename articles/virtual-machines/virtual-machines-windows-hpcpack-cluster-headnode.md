@@ -43,7 +43,7 @@ ms.author: danlep
 1. 如果你打算为头节点 VM 创建 VNet，请参阅[使用 Azure 经典管理门户创建虚拟网络（经典）](../virtual-network/virtual-networks-create-vnet-classic-portal.md)。
 
     **注意事项**
-    
+
     * 你可以接受虚拟网络地址空间和子网的默认配置。
 
 2. 如果你需要在单独的 VM 上创建新的 Active Directory 林，请参阅[在 Azure 虚拟网络中安装新的 Active Directory 林](../active-directory/active-directory-new-forest-virtual-machine.md)。
@@ -51,7 +51,7 @@ ms.author: danlep
     **注意事项**
 
     * 对于许多测试部署，可以在 Azure 中创建单个域控制器。为了确保 Active Directory 域的高可用性，可以部署一个额外的备份域控制器。
-    
+
     * 对于简单的概念验证部署，可以忽略此步骤，稍后将头节点 VM 提升为域控制器。
 
 3. 在 Azure 经典管理门户中，通过从 Azure 库中选择 HPC Pack 2012 R2 映像，创建一台经典 VM。（请参阅[此处](./virtual-machines-windows-classic-tutorial.md)的经典管理门户步骤。）
@@ -63,7 +63,7 @@ ms.author: danlep
     * 如果你想在一个 VNet 中部署头节点，请确保在 VM 配置中指定该 VNet。
 
     * 我们建议你为 VM 创建一个新的云服务。
-       
+
 4. 在创建 VM且 VM 运行后，将 VM 加入现有的域林中，或在 VM 上创建一个新域林。
 
     **注意事项**
@@ -79,7 +79,7 @@ ms.author: danlep
     b.对于默认头节点配置，以管理员身份启动 Windows PowerShell 并键入以下命令：
 
         & $env:CCP_HOME\bin\HPCHNPrepare.ps1 –DBServerInstance ".\ComputeCluster"
-        
+
     HPC Pack 服务启动可能需要几分钟时间。
 
     对于其他头节点配置选项，请键入 `get-help HPCHNPrepare.ps1`。

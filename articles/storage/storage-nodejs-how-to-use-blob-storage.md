@@ -37,7 +37,7 @@ ms.author: marsma
 ### 使用 Node 包管理器 (NPM) 可获取包
 1. 使用 **PowerShell** (Windows)、**Terminal** (Mac) 或 **Bash** (Unix) 等命令行接口导航到在其中创建了示例应用程序的文件夹。
 2. 在命令窗口中键入 **npm install azure-storage**。该命令的输出类似于以下代码示例。
-   
+
   azure-storage@0.5.0 node_modules\azure-storage
   +-- extend@1.2.1
   +-- xmlbuilder@0.4.3
@@ -370,5 +370,5 @@ ACL 是使用一组访问策略实施的，每个策略都有一个关联的 ID�
 [使用 Windows PowerShell 生成 Node.js 应用程序并将其部署到 Azure 云服务]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
 [Azure Storage Team Blog]: http://blogs.msdn.com/b/windowsazurestorage/
 [Azure Storage SDK for Node API Reference]: http://azure.github.io/azure-storage-node/
- 
+
 <!---HONumber=Mooncake_0103_2017-->

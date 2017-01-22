@@ -68,10 +68,10 @@ DSC 允许使用参数化配置，其中的凭据将传入配置并安全地存�
     $configurationArguments = @{ Credential = Get-Credential }
     $configurationArchive = "user_configuration.ps1.zip"
     $vm = Get-AzureVM "example-1"
- 
+
     $vm = Set-AzureVMDSCExtension -VM $vm -ConfigurationArchive $configurationArchive 
     -ConfigurationName $configurationName -ConfigurationArgument @configurationArguments
- 
+
     $vm | Update-AzureVM
 
 ## 如何保护凭据

@@ -33,15 +33,15 @@ ms.author: micurd
 
 ## CocoaPod
 1. 如果尚未在计算机上[安装 CocoaPods](https://guides.cocoapods.org/using/getting-started.html#toc_3)，请打开终端窗口并运行以下命令，以实现此操作
-   
+
     sudo gem install cocoapods
 
 2. 接下来，在项目目录（包含 .xcodeproj 文件的目录）中创建名为 _Podfile_ 的文件（无扩展名）。将以下命令添加到 _Podfile_ 并保存。
-   
+
     pod 'AZSClient'
 
 3. 在终端窗口中，导航到项目目录并运行以下命令
-   
+
     pod install
 
 4. 如果已在 Xcode 中打开 .xcodeproj，请将其关闭。在项目目录中打开新建的项目文件（扩展名为 .xcworkspace）。从现在开始将使用此文件。

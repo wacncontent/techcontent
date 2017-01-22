@@ -75,7 +75,7 @@ user-ratings.txt 中包含的数据具有 `userID`、`movieID`、`userRating` �
 
     # The HDInsight cluster name.
     $clusterName = "the cluster name"
-    
+
     #Get HTTPS/Admin credentials for submitting the job later
     $creds = Get-Credential
     #Get the cluster info so we can get the storage, etc.
@@ -85,12 +85,12 @@ user-ratings.txt 中包含的数据具有 `userID`、`movieID`、`userRating` �
     $storageAccountKey=Get-AzureStorageKey `
         -StorageAccountName $storageAccountName `
         | %{ $_.Primary }
-            
+
     #Create a storage content and upload the file
     $context = New-AzureStorageContext `
         -StorageAccountName $storageAccountName `
         -StorageAccountKey $storageAccountKey
-            
+
     # NOTE: The version number in the file path
     # may change in future versions of HDInsight.
     $jarFile =  "file:///C:/apps/dist/mahout-0.9.0.2.2.9.1-8/examples/target/mahout-examples-0.9.0.2.2.9.1-8-job.jar"
@@ -135,7 +135,7 @@ user-ratings.txt 中包含的数据具有 `userID`、`movieID`、`userRating` �
             -Container $container `
             -Destination output.txt `
             -Context $context
-            
+
     # Write out any error information
     Write-Host "STDERR"
     Get-AzureHDInsightJobOutput `
@@ -182,7 +182,7 @@ Mahout 作业不会将输出返回到 STDOUT。而是会将其作为 __part-r-00
     -Container $container `
     -Destination user-ratings.txt `
     -Context $context
-    
+
 下载文件后，使用以下 PowerShell 脚本显示包含影片名称的推荐：
 
     <#
@@ -328,12 +328,12 @@ Mahout 提供的分类方法之一是生成[随机林][forest]。这是一个多
         $storageAccountKey=Get-AzureStorageKey `
             -StorageAccountName $storageAccountName `
             | %{ $_.Primary }
-        
+
         #Create a storage content and upload the file
         $context = New-AzureStorageContext `
             -StorageAccountName $storageAccountName `
             -StorageAccountKey $storageAccountKey
-            
+
         Set-AzureStorageBlobContent `
             -File $fileToUpload `
             -Blob $blobPath `
@@ -423,12 +423,12 @@ Mahout 安装在 HDInsight 3.1 群集上，可使用以下步骤将其手动安�
         $storageAccountKey=Get-AzureStorageKey `
             -StorageAccountName $storageAccountName `
             | %{ $_.Primary }
-        
+
         #Create a storage content and upload the file
         $context = New-AzureStorageContext `
             -StorageAccountName $storageAccountName `
             -StorageAccountKey $storageAccountKey
-            
+
         Set-AzureStorageBlobContent `
             -File $fileToUpload `
             -Blob "example/jars/mahout-core-0.9-job.jar" `

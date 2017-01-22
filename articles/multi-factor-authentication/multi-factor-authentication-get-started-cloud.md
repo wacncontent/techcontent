@@ -31,7 +31,7 @@ ms.author: kgremban
 2. 创建 Azure 多重身份验证提供程序并将其分配到目录，或者将许可证分配给用户。
 
 > [!NOTE]  许可证将提供给拥有 Azure MFA、Azure AD Premium 或企业移动性套件 (EMS) 的用户。Azure AD Premium 和 EMS 中包含 MFA。如果你有足够的许可证，则不需要创建 Auth 提供程序。
-        
+
 ## 为用户启用多重身份验证
 若要为某个用户启用多重身份验证，只需将该用户的状态从已禁用更改为已启用。有关用户状态的详细信息，请参阅 [User States in Azure 多重身份验证](./multi-factor-authentication-get-started-user-states.md)（Azure 多重身份验证中的用户状态）。
 
@@ -66,7 +66,7 @@ ms.author: kgremban
 - 已禁用
 
 > [!IMPORTANT]  请注意，如果直接从“禁用”状态进入“强制”状态，非新式验证客户端将停止工作，因为用户未经历 MFA 注册并获取[应用密码](./multi-factor-authentication-whats-next.md#app-passwords/)。如果使用非新式验证客户端并且需要应用密码，建议从“已禁用”状态更改为“已启用”状态。这样，用户便可以注册并获取其应用密码。
-        
+
         $st = New-Object -TypeName Microsoft.Online.Administration.StrongAuthenticationRequirement
         $st.RelyingParty = "*"
         $st.State = “Enabled”
@@ -74,7 +74,7 @@ ms.author: kgremban
         Set-MsolUser -UserPrincipalName bsimon@contoso.com -StrongAuthenticationRequirements $sta
 
 使用 PowerShell 是批量启用用户的选项。Azure 门户预览中目前未提供批量启用功能，需要单独选择每个用户。如果用户数量众多，则这项任务就很繁琐。使用上述代码创建 PowerShell 脚本可以循环访问用户列表并启用这些用户。下面是一个示例：
-    
+
     $users = "bsimon@contoso.com","jsmith@contoso.com","ljacobson@contoso.com"
     foreach ($user in $users)
     {

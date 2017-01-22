@@ -42,7 +42,7 @@ ms.author: tomfitz
 ## 使用 REST API 进行部署
 1. 设置[常见参数和标头](https://docs.microsoft.com/rest/api/index)，包括身份验证令牌。
 2. 如果目前没有资源组，请创建资源组。提供订阅 ID、新资源组的名称，以及解决方案所需的位置。有关详细信息，请参阅[创建资源组](https://docs.microsoft.com/rest/api/resources/resourcegroups#ResourceGroups_CreateOrUpdate)。
-   
+
         PUT https://management.chinacloudapi.cn/subscriptions/<YourSubscriptionId>/resourcegroups/<YourResourceGroupName>?api-version=2015-01-01
           <common headers>
           {
@@ -53,7 +53,7 @@ ms.author: tomfitz
           }
 3. 在执行部署前，通过运行[验证模板部署](https://docs.microsoft.com/rest/api/resources/deployments#Deployments_Validate)操作来验证部署。测试部署时，请提供与执行部署时所提供的完全相同的参数（如下一步中所示）。
 4. 创建部署。提供订阅 ID、资源组的名称、部署的名称以及模板的链接。有关模板文件的信息，请参阅[参数文件](#parameter-file)。有关使用 REST API 创建资源组的详细信息，请参阅[创建模板部署](https://docs.microsoft.com/rest/api/resources/deployments#Deployments_CreateOrUpdate)。请注意，“mode”设置为“Incremental”。若要运行完整部署，请将 **mode** 设置为 **Complete**。使用完整模式时要小心，因为可能会无意中删除不在模板中的资源。
-   
+
         PUT https://management.chinacloudapi.cn/subscriptions/<YourSubscriptionId>/resourcegroups/<YourResourceGroupName>/providers/Microsoft.Resources/deployments/<YourDeploymentName>?api-version=2015-01-01
           <common headers>
           {
@@ -69,16 +69,16 @@ ms.author: tomfitz
               }
             }
           }
-   
+
       如果想要记录响应内容或/和请求内容，请在请求中包括 **debugSetting**。
-   
+
         "debugSetting": {
           "detailLevel": "requestContent, responseContent"
         }
-   
+
       可以将存储帐户设置为使用共享访问签名 (SAS) 令牌。有关详细信息，请参阅 [Delegating Access with a Shared Access Signature](https://docs.microsoft.com/rest/api/storageservices/fileservices/delegating-access-with-a-shared-access-signature)（使用共享访问签名委托访问权限）。
 5. 获取模板部署的状态。有关详细信息，请参阅[获取有关模板部署的信息](https://docs.microsoft.com/rest/api/resources/deployments#Deployments_Get)。
-   
+
           GET https://management.chinacloudapi.cn/subscriptions/<YourSubscriptionId>/resourcegroups/<YourResourceGroupName>/providers/Microsoft.Resources/deployments/<YourDeploymentName>?api-version=2015-01-01
            <common headers>
 

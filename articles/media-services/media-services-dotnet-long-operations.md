@@ -50,7 +50,7 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
             ConfigurationManager.AppSettings["MediaServicesAccountName"];
         private static readonly string _mediaServicesAccountKey =
             ConfigurationManager.AppSettings["MediaServicesAccountKey"];
-    
+
         private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
 
         // Azure China uses a different API server and a different ACS Base Address from the Global.
@@ -61,17 +61,17 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
         private static CloudMediaContext _context = null;
         private static MediaServicesCredentials _cachedCredentials = null;
         private static Uri _apiServer = null;
-    
+
         public ChannelOperations()
         {
                 _cachedCredentials = new MediaServicesCredentials(_mediaServicesAccountName,
                     _mediaServicesAccountKey, _defaultScope, _chinaAcsBaseAddressUrl);
-    
+
                 // Create the API server Uri
                 _apiServer = new Uri(_chinaApiServerUrl);
 
                 _context = new CloudMediaContext(_apiServer, _cachedCredentials);    }
-    
+
         /// <summary>  
         /// Initiates the creation of a new channel.  
         /// </summary>  
@@ -90,10 +90,10 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
                     Preview = CreateChannelPreview(),
                     Output = CreateChannelOutput()
                 });
-    
+
             return operation.Id;
         }
-    
+
         /// <summary> 
         /// Checks if the operation has been completed. 
         /// If the operation succeeded, the created channel Id is returned in the out parameter.
@@ -107,9 +107,9 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
         {
             IOperation operation = _context.Operations.GetOperation(operationId);
             bool completed = false;
-    
+
             channelId = null;
-    
+
             switch (operation.State)
             {
                 case OperationState.Failed:
@@ -127,7 +127,7 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
             }
             return completed;
         }
-    
+
         private static ChannelInput CreateChannelInput()
         {
             return new ChannelInput
@@ -147,7 +147,7 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
                 }
             };
         }
-    
+
         private static ChannelPreview CreateChannelPreview()
         {
             return new ChannelPreview
@@ -166,7 +166,7 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
                 }
             };
         }
-    
+
         private static ChannelOutput CreateChannelOutput()
         {
             return new ChannelOutput
@@ -180,17 +180,17 @@ Azure 媒体服务提供了相应的 API 来请求媒体服务启动操作（例
 
     ChannelOperations channelOperations = new ChannelOperations();
     string opId = channelOperations.StartChannelCreation("MyChannel001");
-    
+
     string channelId = null;
     bool isCompleted = false;
-    
+
     while (isCompleted == false)
     {
         System.Threading.Thread.Sleep(TimeSpan.FromSeconds(30));
         isCompleted = channelOperations.IsCompleted(opId, out channelId);
     }
-    
+
     // If we got here, we should have the newly created channel id.
     Console.WriteLine(channelId);
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

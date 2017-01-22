@@ -33,14 +33,14 @@
 2. 更新新应用的以下三个字段，然后单击“Continue”（继续）：
 
     * **Name（名称）**：在“App ID Description”（应用 ID 说明）部分的“Name”（名称）字段中为应用键入一个描述性名称。
-    
+
     * **Bundle Identifier（捆绑标识符）**：在“Explicit App ID”（显式应用 ID）部分下，使用[应用分发指南](https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/ConfiguringYourApp/ConfiguringYourApp.html#//apple_ref/doc/uid/TP40012582-CH28-SW8)中所述的 `<Organization Identifier>.<Product Name>` 格式输入“Bundle Identifier”（捆绑标识符）。此标识符必须与应用的 XCode 或 Xamarin 项目中使用的标识符匹配。
-     
+
     * **Push Notifications（推送通知）**：在“App Services”（应用程序服务）部分中选中“Push Notifications”（推送通知）选项。
 
     ![](./media/notification-hubs-xamarin-enable-apple-push-notifications/notification-hubs-new-appid-info.png)
 
-3.	在“Confirm your App ID”（确认你的应用 ID）屏幕上检查设置，确认后，请单击“Submit”（提交）
+3. 在“Confirm your App ID”（确认你的应用 ID）屏幕上检查设置，确认后，请单击“Submit”（提交）
 
 4. 	提交新应用 ID 后，你将会看到“Registration complete”（注册已完成）屏幕。单击“Done”（完成）。
 

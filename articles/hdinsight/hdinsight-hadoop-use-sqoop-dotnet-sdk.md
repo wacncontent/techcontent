@@ -40,7 +40,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 2. 在 Visual Studio 包管理器控制台中，运行以下 Nuget 命令以导入包。
 
         Install-Package Microsoft.Azure.Management.HDInsight.Job -Pre
-        
+
 3. 在 Program.cs 文件中使用以下代码：
 
         using System.Collections.Generic;
@@ -103,7 +103,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                 }
             }
         }
-        
+
 4. 按 **F5** 运行程序。
 
 ##后续步骤

@@ -18,7 +18,7 @@
         [assembly: UsesPermission(Name = "android.permission.WAKE_LOCK")]
 
 7. 将现有的 **ToDoBroadcastReceiver** 类定义替换为以下代码：
- 
+
         [BroadcastReceiver(Permission = Gcm.Client.Constants.PERMISSION_GCM_INTENTS)]
         [IntentFilter(new string[] { Gcm.Client.Constants.INTENT_FROM_GCM_MESSAGE }, 
             Categories = new string[] { "@PACKAGE_NAME@" })]
@@ -35,13 +35,13 @@
     在上述代码中，你必须将 _`<PROJECT_NUMBER>`_ 替换为你在 Google 开发人员门户中设置应用程序时 Google 分配的项目编号。 
 
 8. 在 ToDoBroadcastReceiver.cs 项目文件中，添加定义 **PushHandlerService** 类的以下代码：
- 
+
         // The ServiceAttribute must be applied to the class.
         [Service] 
         public class PushHandlerService : GcmServiceBase
         {
             public static string RegistrationID { get; private set; }
- 
+
             public PushHandlerService() : base(ToDoBroadcastReceiver.senderIDs) { }
         }
 
@@ -54,7 +54,7 @@
         protected override void OnRegistered(Context context, string registrationId)
         {
             System.Diagnostics.Debug.WriteLine("The device has been registered with GCM.", "Success!");
-            
+
             // Get the MobileServiceClient from the current activity instance.
             MobileServiceClient client = ToDoActivity.CurrentActivity.CurrentClient;           
             var push = client.GetPush();

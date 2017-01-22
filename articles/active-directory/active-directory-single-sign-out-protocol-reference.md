@@ -13,8 +13,8 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 10/03/2016
-wacn.date: 11/08/2016
 ms.author: priyamo
+wacn.date: 01/19/2017
 ---
 
 # 单一注销 SAML 协议

@@ -244,7 +244,7 @@ Service Fabric 反向代理在群集的所有节点上运行。它会代表客�
         }
 
     对于“2016-09-01”或以后的 apiVersion，证书由参数名称 ***reverseProxyCertificate*** 标识
-    
+
         {
             "apiVersion": "2016-09-01",
             "type": "Microsoft.ServiceFabric/clusters",

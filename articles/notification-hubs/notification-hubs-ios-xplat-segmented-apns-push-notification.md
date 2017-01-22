@@ -13,7 +13,7 @@ ms.tgt_pltfrm: mobile-ios
 ms.devlang: objective-c
 ms.topic: article
 ms.date: 06/29/2016
-wacn.date: 08/23/2016
+wacn.date: 01/19/2017
 ms.author: wesmc
 ---
 
@@ -120,9 +120,9 @@ ms.author: wesmc
         #import "Notifications.h"
 
         @property (nonatomic) Notifications* notifications;
-    
+
 8. 在 AppDelegate.m 的 **didFinishLaunchingWithOptions** 方法中，于方法开头添加代码来初始化 notifications 实例：
- 
+
     在 hubinfo.h 中定义的 `HUBNAME` 和 `HUBLISTENACCESS` 内，`<hub name>` 和 `<connection string with listen access>` 占位符应已替换为你的通知中心的名称和你之前获取的 *DefaultListenSharedAccessSignature* 的连接字符串。
 
         self.notifications = [[Notifications alloc] initWithConnectionString:HUBLISTENACCESS HubName:HUBNAME];
@@ -147,7 +147,7 @@ ms.author: wesmc
 
     请注意，此时 **didRegisterForRemoteNotificationsWithDeviceToken** 方法中应没有其他代码。
 
-10.	完成[通知中心入门][get-started]教程时，以下方法应已经出现在 AppDelegate.m 中。否则，请添加这些方法。
+10. 完成[通知中心入门][get-started]教程时，以下方法应已经出现在 AppDelegate.m 中。否则，请添加这些方法。
 
         -(void)MessageBox:(NSString *)title message:(NSString *)messageText
         {
@@ -167,7 +167,7 @@ ms.author: wesmc
 11. 在 ViewController.m 中，添加 AppDelegate.h 的导入语句，并将以下代码复制到 XCode 生成的 **subscribe** 方法中。此代码将更新通知注册，以使用用户在用户界面中选择的新类别标记。
 
         #import "Notifications.h"
-        
+
         NSMutableArray* categories = [[NSMutableArray alloc] init];
 
         if (self.WorldSwitch.isOn) [categories addObject:@"World"];
@@ -208,7 +208,7 @@ ms.author: wesmc
 
 ##（可选）发送带标记的通知
 
-如果你无权访问 Visual Studio，可以跳到下一部分，并从应用内部发送通知。你还可以在 [Azure 经典门户]中使用通知中心的调试选项卡发送适当的模板通知。
+如果你无权访问 Visual Studio，可以跳到下一部分，并从应用内部发送通知。你还可以在 [Azure 经典管理门户]中使用通知中心的调试选项卡发送适当的模板通知。
 
 [!INCLUDE [notification-hubs-send-categories-template](../../includes/notification-hubs-send-categories-template.md)]
 
@@ -322,12 +322,12 @@ ms.author: wesmc
 [3]: ./media/notification-hubs-ios-xplat-segmented-apns-push-notification/notification-hub-breakingnews-ios2.png
 
 <!-- URLs. -->
-[How To: Service Bus Notification Hubs (iOS Apps)]: http://msdn.microsoft.com/library/jj927168.aspx
+[How To: Service Bus Notification Hubs (iOS Apps)]: http://msdn.microsoft.com/zh-cn/library/jj927168.aspx
 [使用通知中心广播本地化的突发新闻]: ./notification-hubs-ios-xplat-localized-apns-push-notification.md
 [Notify users with Notification Hubs]: ./notification-hubs-aspnet-backend-ios-apple-apns-notification.md
-[Notification Hubs Guidance]: http://msdn.microsoft.com/library/dn530749.aspx
-[Notification Hubs How-To for iOS]: http://msdn.microsoft.com/library/jj927168.aspx
+[Notification Hubs Guidance]: http://msdn.microsoft.com/zh-cn/library/dn530749.aspx
+[Notification Hubs How-To for iOS]: http://msdn.microsoft.com/zh-cn/library/jj927168.aspx
 [get-started]: ./notification-hubs-ios-apple-push-notification-apns-get-started.md
-[Azure 经典门户]: https://manage.windowsazure.cn
+[Azure 经典管理门户]: https://manage.windowsazure.cn
 
 <!---HONumber=Mooncake_0808_2016-->

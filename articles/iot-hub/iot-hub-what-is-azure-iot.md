@@ -41,7 +41,7 @@ Azure IoT 中心是一项 Azure 服务，可在一个应用程序后端和数百
 [lnk-getstarted]: ./iot-hub-csharp-csharp-getstarted.md
 [lnk-device-sdks]: https://github.com/Azure/azure-iot-sdks/blob/master/readme.md
 [lnk-iot-hub]: ./iot-hub-what-is-iot-hub.md
-[lnk-iot-suite]: ../iot-suite/index.md/
+[lnk-iot-suite]: ../iot-suite/index.md
 [lnk-iotdev]: /develop/iot/
 [lnk-device-management]: ./iot-hub-device-management-overview.md
 

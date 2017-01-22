@@ -13,7 +13,7 @@
 <h2><a id="Overview"></a>什么是适用于 Mac 和 Linux 的 Azure 命令行工具</h2>
 
 适用于 Mac 和 Linux 的 Azure 命令行工具是一组用于部署和管理 Azure 服务的命令行工具。
- 
+
 支持的任务包括：
 
 * 导入发布设置。

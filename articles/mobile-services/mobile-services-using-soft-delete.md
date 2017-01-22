@@ -77,23 +77,23 @@ ms.author: wesmc
     public class SampleJob : ScheduledJob
     {
         private MobileService1Context context;
-     
+
         protected override void Initialize(ScheduledJobDescriptor scheduledJobDescriptor, 
             CancellationToken cancellationToken)
         {
             base.Initialize(scheduledJobDescriptor, cancellationToken);
             context = new MobileService1Context();
         }
-     
+
         public override Task ExecuteAsync()
         {
             Services.Log.Info("Purging old records");
             var monthAgo = DateTimeOffset.UtcNow.AddDays(-30);
-     
+
             var toDelete = context.TodoItems.Where(x => x.Deleted == true && x.UpdatedAt <= monthAgo).ToArray();
             context.TodoItems.RemoveRange(toDelete);
             context.SaveChanges();
-     
+
             return Task.FromResult(true);
         }
     }
@@ -103,12 +103,12 @@ ms.author: wesmc
 你可以借助 JavaScript 后端移动服务，使用表脚本来添加关于软删除的逻辑。
 
 若要检测“取消删除”的请求，请使用更新表脚本中的“取消删除”属性：
-    
+
     function update(item, user, request) {
         if (request.undelete) { /* any undelete specific code */; }
     }
 若要在脚本中包含查询结果内的已删除记录，请将“includeDeleted”参数设置为 true：
-    
+
     tables.getTable('softdelete_scenarios').read({
         includeDeleted: true,
         success: function (results) {

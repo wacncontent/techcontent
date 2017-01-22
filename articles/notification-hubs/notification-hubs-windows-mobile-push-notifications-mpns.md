@@ -103,7 +103,7 @@ wacn.date: 11/22/2016
         });
 
     >[!NOTE] 值 **MyPushChannel** 是用于查找 [HttpNotificationChannel](https://msdn.microsoft.com/zh-cn/library/windows/apps/microsoft.phone.notification.httpnotificationchannel.aspx) 集合中现有通道的索引。如果不存在，则使用该名称创建新条目。
-    
+
     确保插入你的中心名称以及在前一部分中获取的名为 **DefaultListenSharedAccessSignature** 的连接字符串。
     此代码从 MPNS 检索应用的通道 URI，然后将该通道 URI 注册到你的通知中心。它还保证每次启动应用程序时都在通知中心注册通道 URI。
 
@@ -121,7 +121,7 @@ wacn.date: 11/22/2016
 
 8. 关闭应用。
 
-   >[!NOTE] 若要接收 toast 推送通知，则应用程序不得在前台运行。
+    >[!NOTE] 若要接收 toast 推送通知，则应用程序不得在前台运行。
 
 ##从后端发送推送通知
 

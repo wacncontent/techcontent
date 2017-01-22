@@ -83,10 +83,10 @@ Azure PowerShell 是一个脚本编写环境，可用于在 Azure 中控制和�
 
         $Namespace = "MyServiceBusNS"
         $Location = "China East"
-        
+
         # Query to see if the namespace currently exists
         $CurrentNamespace = Get-AzureSBNamespace -Name $Namespace
-        
+
         # Check if the namespace already exists or needs to be created
         if ($CurrentNamespace)
         {
@@ -124,7 +124,7 @@ Azure PowerShell 是一个脚本编写环境，可用于在 Azure 中控制和�
         $MessageRetentionInDays = 7
         $UserMetadata = $null
         $ConsumerGroupName = "MyConsumerGroup"
-            
+
         # Check to see if the Event Hub already exists
         if ($NamespaceManager.EventHubExists($Path))
         {
@@ -141,7 +141,7 @@ Azure PowerShell 是一个脚本编写环境，可用于在 Azure 中控制和�
             $NamespaceManager.CreateEventHubIfNotExists($EventHubDescription);
             Write-Output "The [$Path] event hub in the [$Namespace] namespace has been successfully created."
         }
-            
+
         # Create the consumer group if it doesn't exist
         Write-Output "Creating the consumer group [$ConsumerGroupName] for the [$Path] event hub..."
         $ConsumerGroupDescription = New-Object -TypeName Microsoft.ServiceBus.Messaging.ConsumerGroupDescription -ArgumentList $Path, $ConsumerGroupName

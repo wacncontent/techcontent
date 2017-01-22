@@ -205,7 +205,7 @@ Azure App Service 为大规模的关键任务 [WordPress][wordpress] 站点提�
 [trafficmanager]: ../traffic-manager/traffic-manager-overview.md
 [backup]: ./web-sites-backup.md
 [restore]: ./web-sites-restore.md
-[rediscache]: ../redis-cache/index.md/
+[rediscache]: ../redis-cache/index.md
 [managedcache]: http://msdn.microsoft.com/zh-cn/library/azure/dn386122.aspx
 [websitescale]: ./web-sites-scale.md
 [managedcachescale]: http://msdn.microsoft.com/zh-cn/library/azure/dn386113.aspx

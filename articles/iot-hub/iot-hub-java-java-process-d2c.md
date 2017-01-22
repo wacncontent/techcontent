@@ -67,7 +67,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 1. 使用文本编辑器打开 simulated-device\\src\\main\\java\\com\\mycompany\\app\\App.java 文件。本文件包含用于 [IoT 中心入门]教程中创建的 **simulated-device** 应用的代码。
 2. 向 **App** 类添加以下嵌套类：
-   
+
     ```
     private static class InteractiveMessageSender implements Runnable {
       public void run() {
@@ -78,11 +78,11 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
             msg.setMessageId(java.util.UUID.randomUUID().toString());
             msg.setProperty("messageType", "interactive");
             System.out.println("Sending interactive message: " + msgStr);
-   
+
             Object lockobj = new Object();
             EventCallback callback = new EventCallback();
             client.sendEventAsync(msg, callback, lockobj);
-   
+
             synchronized (lockobj) {
               lockobj.wait();
             }
@@ -94,17 +94,17 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
       }
     }
     ```
-   
+
     此类类似于 **simulated-device** 项目中的 **MessageSender** 类。唯一的区别在于现在设置 **MessageId** 系统属性和 **messageType** 自定义属性。代码将向 **MessageId** 属性分配全局唯一标识符 (UUID)。服务总线可使用此标识符来删除收到的重复消息。本示例使用 **messageType** 属性来区分交互式消息和数据点消息。应用程序将在消息属性而不是在消息正文中传递此信息，因此事件处理器不需要反序列化消息来执行消息路由。
 
     > [!NOTE] 有必要在设备代码中创建用于删除重复交互式消息的 **MessageId**。间歇性网络通信或其他故障可能会导致多次重复传输来自该设备的相同消息。还可将 UUID 换用为语义消息 ID，如相关消息数据字段的哈希。
 
 3. 修改 **main** 方法，按以下代码片段中所示发送交互式消息和数据点消息：
-   
+
     ````
     MessageSender sender = new MessageSender();
     InteractiveMessageSender interactiveSender = new InteractiveMessageSender();
-   
+
     ExecutorService executor = Executors.newFixedThreadPool(2);
     executor.execute(sender);
     executor.execute(interactiveSender);
@@ -145,10 +145,10 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 你还需要服务总线队列来可靠处理交互式消息。可在 1 小时的重复数据删除时间范围内，以编程方式创建队列，如[如何使用服务总线队列][Service Bus queue]中所述。还可按以下步骤使用 [Azure 经典管理门户][lnk-classic-portal]：
 
 1. 单击左下角的“新建”。然后单击“应用程序服务”>“服务总线”>“队列”>“自定义创建”。输入名称 **d2ctutorial**，选择区域，再使用现有命名空间或新建一个。记下命名空间名称，本教程稍后需要使用。在下一页中，选择“启用重复检测”，再将“重复检测历史记录期限”设为 1 小时。然后单击右下角的复选标记保存你的队列配置。
-   
+
     ![在 Azure 门户中创建队列][30]
 2. 在服务总线队列列表中单击“d2ctutorial”，然后单击“配置”。创建分别名为 **send** 和 **listen** 的共享访问策略，前者带“发送”权限，后者带“侦听”权限。记下这两个策略的**主键**，本教程稍后需要使用。完成后，单击底部的“保存”。
-   
+
     ![在 Azure 门户中配置队列][31]
 
 ### 创建事件处理器
@@ -157,13 +157,13 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 首先是添加名为 **process-d2c-messages** 的 Maven 项目，它会接收与 IoT 中心事件中心兼容的终结点发出的设备到云消息，并将这些消息路由到其他后端服务。
 
 1. 在 [IoT 中心入门]教程中创建的 iot-java-get-started 文件夹中，在命令提示符处使用以下命令创建名为 **process-d2c-messages** 的 Maven 项目。请注意，这是一条很长的命令：
-   
+
     ```
     mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=process-d2c-messages -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
     ```
 2. 在命令提示符处，导航到新的 process-d2c-messages 文件夹。
 3. 使用文本编辑器打开 process-d2c-messages 文件夹中的 pom.xml 文件，并向 **dependencies** 节点添加以下依赖项。借助这些依赖项，可使用应用程序中的 azure-eventhubs、azure-eventhubs-eph 和 azure-servicebus 包与 IoT 中心和服务总线队列进行交互：
-   
+
     ```
     <dependency>
       <groupId>com.microsoft.azure</groupId>
@@ -186,13 +186,13 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 接下来是向项目添加 **ErrorNotificationHandler** 类。
 
 1. 使用文本编辑器创建 process-d2c-messages\\src\\main\\java\\com\\mycompany\\app\\ErrorNotificationHandler.java 文件。向文件添加以下代码，以显示来自 **EventProcesssorHost** 实例的错误消息：
-   
+
     ```
     package com.mycompany.app;
-   
+
     import java.util.function.Consumer;
     import com.microsoft.azure.eventprocessorhost.ExceptionReceivedEventArgs;
-   
+
     public class ErrorNotificationHandler implements
         Consumer<ExceptionReceivedEventArgs> {
       @Override
@@ -217,10 +217,10 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 1. 使用文本编辑器创建 process-d2c-messages\\src\\main\\java\\com\\mycompany\\app\\EventProcessor.java 文件。
 2. 向 EventProcessor.java 文件添加以下导入和类定义。**EventProcessor** 实现可定义事件中心客户端行为的 **IEventProcessor** 接口：
-   
+
     ```
     package com.mycompany.app;
-   
+
     import java.io.ByteArrayInputStream;
     import java.io.ByteArrayOutputStream;
     import java.io.IOException;
@@ -231,27 +231,27 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     import java.util.ArrayList;
     import java.util.Base64;
     import java.util.concurrent.ExecutionException;
-   
+
     import com.microsoft.azure.eventhubs.EventData;
     import com.microsoft.azure.eventprocessorhost.*;
     import com.microsoft.azure.storage.*;
     import com.microsoft.azure.storage.blob.*;
     import com.microsoft.windowsazure.services.servicebus.*;
     import com.microsoft.windowsazure.services.servicebus.models.BrokeredMessage;
-   
+
     public class EventProcessor implements IEventProcessor {
-   
+
     }
     ```
 3. 向 **EventProcessor** 类添加以下方式以使用 **IEventProcessor** 接口：
-   
+
     ```
     @Override
     public void onOpen(PartitionContext context) throws Exception {
       System.out.println("EventProcessorHost: Partition "
           + context.getPartitionId() + " is opening");
     }
-   
+
     @Override
     public void onClose(PartitionContext context, CloseReason reason)
         throws Exception {
@@ -259,35 +259,35 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
           + context.getPartitionId() + " is closing for reason "
           + reason.toString());
     }
-   
+
     @Override
     public void onError(PartitionContext context, Throwable error) {
       System.out.println("EventProcessorHost: Partition "
           + context.getPartitionId() + " onError: " + error.toString());
     }
-   
+
     @Override
     public void onEvents(PartitionContext context, Iterable<EventData> messages)
         throws Exception {
     }
     ```
 4. 向 **EventProcessor** 类添加以下类级变量：
-   
+
     ```
     public static CloudBlobContainer blobContainer;
     public static ServiceBusContract serviceBusContract;
-   
+
     // Use a smaller MAX_BLOCK_SIZE value to test.
     final private int MAX_BLOCK_SIZE = 4 * 1024 * 1024;
     final private Duration MAX_CHECKPOINT_TIME = Duration.ofHours(1);
-   
+
     private ByteArrayOutputStream toAppend = new ByteArrayOutputStream(
         MAX_BLOCK_SIZE);
     private Instant start = Instant.now();
     private EventData latestEventData;
     ```
 5. 向 **EventProcessor** 类添加带以下签名的 **AppendAndCheckPoint** 方法：
-   
+
     ```
     private void AppendAndCheckPoint(PartitionContext context)
       throws URISyntaxException, StorageException, IOException,
@@ -295,7 +295,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     }
     ```
 6. 向 **AppendAndCheckPoint** 方法添加以下代码，用以检索分区中的当前消息偏移量和序列号：
-   
+
     ```
     String currentOffset = latestEventData.getSystemProperties().getOffset();
     Long currentSequence = latestEventData.getSystemProperties().getSequenceNumber();
@@ -305,7 +305,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
             context.getPartitionId(), currentOffset, currentSequence);
     ```
 7. 在 **AppendAndCheckPoint** 方法中，使用当前偏移值以创建下一个要存到 blob 的块的 **BlockEntry** 实例：
-   
+
     ```
     Long blockId = Long.parseLong(currentOffset);
     String blockIdString = String.format("startSeq:%1$025d", blockId);
@@ -314,17 +314,17 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     BlockEntry block = new BlockEntry(encodedBlockId);
     ```
 8. 在 **AppendAndCheckPoint** 方法中，将最新消息集上传到块 blob 并检索当前的块列表：
-   
+
     ```
     String blobName = String.format("iothubd2c_%s", context.getPartitionId());
     CloudBlockBlob currentBlob = blobContainer.getBlockBlobReference(blobName);
-   
+
     currentBlob.uploadBlock(block.getId(),
         new ByteArrayInputStream(toAppend.toByteArray()), toAppend.size());
     ArrayList<BlockEntry> blockList = currentBlob.downloadBlockList();
     ```
 9. 在 **AppendAndCheckPoint** 方法中，在新 blob 中创建初始块或附加块到现有 blob：
-   
+
     ```
     if (currentBlob.exists()) {
       // Check if we should append new block or overwrite existing block
@@ -344,10 +344,10 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     currentBlob.commitBlockList(blockList);
     ```
 10. 最后在 **AppendAndCheckPoint** 方法中，在分区上创建检查点，并准备好保存下一个消息块：
-    
+
     ```
     context.checkpoint(latestEventData);
-    
+
     // Reset everything after the checkpoint.
     toAppend.reset();
     start = Instant.now();
@@ -355,7 +355,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
         context.getPartitionId());
     ```
 11. 在 **onEvents** 方法中，添加以下代码以接收来自 IoT 中心终结点的消息并将交互式消息转发给服务总线队列。然后，在块占用完或达到超时时调用 **AppendAndCheckPoint** 方法：
-    
+
     ```
     if (messages != null) {
       for (EventData eventData : messages) {
@@ -381,7 +381,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     }
     ```
 12. 最后在 **onEvents** 方法中，如果在 IoT 中心未发送任何消息时达到超时，则添加“else if”子句来调用 **AppendAndCheckPoint**：
-    
+
     ```
     else if ((toAppend.size() > 0)
         && Duration.between(start, Instant.now())
@@ -395,7 +395,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 1. 使用文本编辑器打开 process-d2c-messages\\src\\main\\java\\com\\mycompany\\app\\App.java 文件。
 2. 在该文件中添加以下 **import** 语句：
-   
+
     ```
     import com.microsoft.azure.eventprocessorhost.*;
     import com.microsoft.azure.servicebus.ConnectionStringBuilder;
@@ -405,18 +405,18 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     import com.microsoft.windowsazure.Configuration;
     import com.microsoft.windowsazure.services.servicebus.ServiceBusConfiguration;
     import com.microsoft.windowsazure.services.servicebus.ServiceBusService;
-   
+
     import java.net.URISyntaxException;
     import java.security.InvalidKeyException;
     import java.util.concurrent.*;
     ```
 3. 向 **App** 类添加类级变量。将 **{yourstorageaccountconnectionstring}** 替换为之前在[预配 Azure 存储帐户和服务总线队列](#provision-an-azure-storage-account-and-a-service-bus-queue)部分中记下的 Azure 存储帐户连接字符串：
-   
+
     ```
     private final static String storageConnectionString = "{yourstorageaccountconnectionstring}";
     ```
 4. 向 **App** 类添加类级变量，并将 **{yourservicebusnamespace}** 替换为服务总线命名空间，将 **{yourservicebussendkey}** 替换为队列的 **send** 键。先前在[预配 Azure 存储帐户和服务总线队列](#provision-an-azure-storage-account-and-a-service-bus-queue)部分中记下了命名空间和 **listen** 键：
-   
+
     ```
     private final static String serviceBusNamespace = "{yourservicebusnamespace}";
     private final static String serviceBusSasKeyName = "send";
@@ -424,7 +424,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     private final static String serviceBusRootUri = ".servicebus.chinacloudapi.cn";
     ```
 5. 将以下类级变量添加到 **App** 类。将 **{youreventhubcompatibleendpoint}** 替换为与事件中心兼容的终结点值。该终结点值类似于 **ihs....namespace**，因此要删除 **sb://** 前缀和 **.servicebus.chinacloudapi.cn/** 后缀。将 **{youreventhubcompatiblename}** 替换为事件中心兼容的名称。将 **{youriothubkey}** 替换为 **iothubowner** 键。在 Java 版 Azure IoT 中心*教程的[创建 IoT 中心][lnk-create-an-iot-hub] section in the *部分中记下了这些值：
-   
+
     ```
     private final static String consumerGroupName = "$Default";
     private final static String namespaceName = "{youreventhubcompatibleendpoint}";
@@ -433,14 +433,14 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     private final static String sasKey = "{youriothubkey}";
     ```
 6. 如下修改 **main** 方法的签名：
-   
+
     ```
     public static void main(String args[]) throws InvalidKeyException,
       URISyntaxException, StorageException {
     }
     ```
 7. 向 **main** 方法添加以下代码，获取到存储消息的 blob 容器的引用：
-   
+
     ```
     System.out.println("Process D2C messages using EventProcessorHost");
     CloudStorageAccount account = CloudStorageAccount
@@ -451,7 +451,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     EventProcessor.blobContainer.createIfNotExists();
     ```
 8. 向 **main** 方法添加以下代码，获取到服务总线服务的引用：
-   
+
     ```
     Configuration config = ServiceBusConfiguration
         .configureWithSASAuthentication(serviceBusNamespace,
@@ -459,7 +459,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     EventProcessor.serviceBusContract = ServiceBusService.create(config);
     ```
 9. 在 **main** 方法中，配置并创建 **EventProcessorHost** 实例。**setInvokeProcessorAfterReceiveTimeout** 选项确保即使没有要处理的消息，**EventProcessorHost** 实例也调用 **IEventProcessor** 接口中的 **onEvents** 方法。之后在达到超时时，该方法会始终调用 **AppendAndCheckPoint** 方法。
-   
+
     ```
     ConnectionStringBuilder eventHubConnectionString = new ConnectionStringBuilder(
         namespaceName, eventHubName, sasKeyName, sasKey);
@@ -471,7 +471,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     options.setInvokeProcessorAfterReceiveTimeout(true);
     ```
 10. 在 **main** 方法中，向 **EventProcessorHost** 实例注册 **IEventProcessor** 实现：
-    
+
     ```
     try {
       System.out.println("Registering host named " + host.getHostName());
@@ -488,25 +488,25 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     }
     ```
 11. 最后，向 **main** 方法添加逻辑以关闭 **EventProcessorHost** 实例：
-    
+
     ```
     System.out.println("Press enter to stop");
     try {
       System.in.read();
       host.unregisterEventProcessor();
-    
+
       System.out.println("Calling forceExecutorShutdown");
       EventProcessorHost.forceExecutorShutdown(120);
     } catch (Exception e) {
       System.out.println(e.toString());
       e.printStackTrace();
     }
-    
+
     System.out.println("End of sample");
     ```
 12. 保存并关闭 process-d2c-messages\\src\\main\\java\\com\\mycompany\\app\\App.java 文件夹。
 13. 若要使用 Maven 生成 **process-d2c-messages** 应用程序，请在 process-d2c-messages 文件夹的命令提示符处执行以下命令：
-    
+
     ```
     mvn clean package -DskipTests
     ```
@@ -517,13 +517,13 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 首先是添加名为 **process-interactive-messages** 的 Maven 项目，它会接收服务总线队列上 **EventProcessor** 实例发出的消息。
 
 1. 在 [IoT 中心入门]教程中创建的 iot-java-get-started 文件夹中，在命令提示符处使用以下命令创建名为 **process-interactive-messages** 的 Maven 项目。请注意，这是一条很长的命令：
-   
+
     ```
     mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=process-interactive-messages -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
     ```
 2. 在命令提示符处，导航到新的 process-interactive-messages 文件夹。
 3. 使用文本编辑器打开 process-interactive-messages 文件夹中的 pom.xml 文件，并向 **dependencies** 节点添加以下依赖项。借助该依赖项，可使用应用程序中的 azure-servicebus 包与服务总线队列进行交互：
-   
+
     ```
     <dependency>
       <groupId>com.microsoft.azure</groupId>
@@ -537,19 +537,19 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 1. 使用文本编辑器打开 process-interactive-messages\\src\\main\\java\\com\\mycompany\\app\\App.java 文件。
 2. 向文件添加以下 `import` 语句：
-   
+
     ```
     import java.io.IOException;
     import java.util.concurrent.ExecutorService;
     import java.util.concurrent.Executors;
-   
+
     import com.microsoft.windowsazure.Configuration;
     import com.microsoft.windowsazure.exception.ServiceException;
     import com.microsoft.windowsazure.services.servicebus.*;
     import com.microsoft.windowsazure.services.servicebus.models.*;
     ```
 3. 向 **App** 类添加以下类级变量，并将 **{yourservicebusnamespace}** 替换为服务总线命名空间，将 **{yourservicebuslistenkey}** 替换为队列的 **listen** 键。先前在[预配 Azure 存储帐户和服务总线队列](#provision-an-azure-storage-account-and-a-service-bus-queue)部分中记下了命名空间和 **listen** 键：
-   
+
     ```
     private final static String serviceBusNamespace = "{yourservicebusnamespace}";
     private final static String serviceBusSasKeyName = "listen";
@@ -559,7 +559,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     private static ServiceBusContract service = null;
     ```
 4. 向 **App** 类添加以下嵌套类以接收队列中的消息：
-   
+
     ```
     private static class MessageReceiver implements Runnable {
       public void run() {
@@ -597,33 +597,33 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     }
     ```
 5. 如下修改 **main** 方法的签名：
-   
+
     ```
     public static void main(String args[]) throws ServiceException, IOException {
     }
     ```
 6. 在 **main** 方法中，添加以下代码，开始侦听新消息：
-   
+
     ```
     System.out.println("Process interactive messages");
-   
+
     Configuration config = ServiceBusConfiguration
         .configureWithSASAuthentication(serviceBusNamespace,
             serviceBusSasKeyName, serviceBusSASKey, serviceBusRootUri);
     service = ServiceBusService.create(config);
-   
+
     MessageReceiver receiver = new MessageReceiver();
-   
+
     ExecutorService executor = Executors.newFixedThreadPool(2);
     executor.execute(receiver);
-   
+
     System.out.println("Press ENTER to exit.");
     System.in.read();
     executor.shutdownNow();
     ```
 7. 保存并关闭 process-interactive-messages\\src\\main\\java\\com\\mycompany\\app\\App.java 文件夹。
 8. 若要使用 Maven 生成 **process-interactive-messages** 应用程序，请在 process-interactive-messages 文件夹的命令提示符处执行以下命令：
-   
+
     ```
     mvn clean package -DskipTests
     ```
@@ -632,26 +632,26 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 现在即可运行 3 个应用程序。
 
 1. 若要运行 **process-interactive-messages** 应用程序，请在命令提示符或外壳处导航到 process-interactive-messages 文件夹并执行以下命令：
-   
-   ```
-   mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
-   ```
-   
-   ![运行 process-interactive-messages][processinteractive]
+
+    ```
+    mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
+    ```
+
+    ![运行 process-interactive-messages][processinteractive]
 2. 若要运行 **process-d2c-messages** 应用程序，请在命令提示符或外壳处导航到 process-d2c-messages 文件夹并执行以下命令：
-   
-   ```
-   mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
-   ```
-   
-   ![运行 process-d2c-messages][processd2c]
+
+    ```
+    mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
+    ```
+
+    ![运行 process-d2c-messages][processd2c]
 3. 若要运行 **simulated-device** 应用程序，请在命令提示符或外壳处导航到 simulated-device 文件夹并执行以下命令：
-   
-   ```
-   mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
-   ```
-   
-   ![运行 simulated-device][simulateddevice]  
+
+    ```
+    mvn exec:java -Dexec.mainClass="com.mycompany.app.App"
+    ```
+
+    ![运行 simulated-device][simulateddevice]  
 
 > [!NOTE] 若要查看 blob 文件中的更新，需要将 **StoreEventProcessor** 类中的 **MAX\_BLOCK\_SIZE** 常量降为较小值，例如 **1024**。此更改很有用，原因是模拟设备发出的数据需要一些时间才能达到块大小限制。块大小更小时，可更快查看正创建和更新的 blob。但是，使用较大的块可以提高应用程序的可缩放性。
 
@@ -677,21 +677,21 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 [Azure Blob 存储]: ../storage/storage-dotnet-how-to-use-blobs.md
 [Azure 数据工厂]: /documentation/services/data-factory/
-[HDInsight (Hadoop)]: ../hdinsight/index.md/
+[HDInsight (Hadoop)]: ../hdinsight/index.md
 [Service Bus queue]: ../service-bus-messaging/service-bus-dotnet-get-started-with-queues.md
 [服务总线队列]: ../service-bus-messaging/service-bus-dotnet-get-started-with-queues.md
 
 [Azure IoT 中心开发人员指南 - 设备到云]: ./iot-hub-devguide-messaging.md
 
-[Azure 存储]: ../storage/index.md/
-[Azure 服务总线]: ../service-bus/index.md/
+[Azure 存储]: ../storage/index.md
+[Azure 服务总线]: ../service-bus/index.md
 
 [IoT 中心开发人员指南]: ./iot-hub-devguide.md
 [IoT 中心入门]: ./iot-hub-java-java-getstarted.md
 [Azure IoT 开发人员中心]: /develop/iot
-[lnk-service-fabric]: ../service-fabric/index.md/
-[lnk-stream-analytics]: ../stream-analytics/index.md/
-[lnk-event-hubs]: ../event-hubs/index.md/
+[lnk-service-fabric]: ../service-fabric/index.md
+[lnk-stream-analytics]: ../stream-analytics/index.md
+[lnk-event-hubs]: ../event-hubs/index.md
 [Transient Fault Handling]: https://msdn.microsoft.com/zh-cn/library/hh675232.aspx
 
 <!-- Links -->
@@ -705,7 +705,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 [lnk-classic-portal]: https://manage.windowsazure.cn
 [lnk-c2d]: ./iot-hub-java-java-process-d2c.md
-[lnk-suite]: ../iot-suite/index.md/
+[lnk-suite]: ../iot-suite/index.md
 
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/java-devbox-setup.md
 [lnk-create-an-iot-hub]: ./iot-hub-java-java-getstarted.md

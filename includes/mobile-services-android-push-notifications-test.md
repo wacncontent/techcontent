@@ -23,5 +23,5 @@
 2. 从屏幕顶部向下轻扫，打开设备的通知中心以查看通知。
 
     ![在通知中心内查看通知](./media/mobile-services-android-push-notifications-test/notification-area-received.png)
-    
+
 <!---HONumber=71-->

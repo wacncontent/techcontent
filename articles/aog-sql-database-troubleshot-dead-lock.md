@@ -28,18 +28,18 @@ wacn.date: 11/30/2016
             Phone VARCHAR(16)
         )
         GO
-        
+
         INSERT INTO Employees (EmpName, Phone)
         VALUES ('Martha', '800-555-1212'), ('Jimmy', '619-555-8080')
         GO
-        
+
         CREATE TABLE Suppliers(
             SupplierId INT IDENTITY primary key,
             SupplierName VARCHAR(64),
             Fax VARCHAR(16)
         )
         GO
-        
+
         INSERT INTO Suppliers (SupplierName, Fax)
         VALUES ('Acme', '877-555-6060'), ('Rockwell', '800-257-1234')
         GO

@@ -82,7 +82,7 @@ ms.author: anithaa
     - **AddressPrefixes**：以 CIDR 表示法指定有效路由的地址前缀。
     - **nextHopType**：表示给定路由的下一跃点。可能的值为 *VirtualAppliance*、*Internet*、*VNetLocal*、*VNetPeering* 或 *Null*。如果 UDR 中的 **nextHopType** 值为 *Null*，可能表示是路由无效。例如，如果 **nextHopType** 为 *VirtualAppliance*，但网络虚拟设备 VM 不处于已预配/运行中状态。如果 **nextHopType** 为 *VPNGateway*，但给定的 VNet 中没有任何网关处于已预配/运行中状态，则路由可能失效。
     - **NextHopIpAddress**：指定有效路由下一跃点的 IP 地址。
-    
+
     以下命令在一个方便查看的表中返回路由：
 
         Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1 | Format-Table
@@ -93,9 +93,9 @@ ms.author: anithaa
         ---- ----- ------------- ----------- ----------------
         Active {10.9.0.0/16} VnetLocal {}
         Active {0.0.0.0/0} Internet {}
-    
+
 3. 上一步骤的输出没有列出*从 *ChinaNorth-VNet1*（前缀 10.9.0.0/16）* 到 *ChinaNorth-VNet3* VNet（前缀 10.10.0.0/16）的路由。如下图所示，包含 *ChinaNorth-VNet3* VNet 的 VNet 对等互连链接处于 *Disconnected* 状态。
-    
+
     ![](./media/virtual-network-routes-troubleshoot-portal/image4.png)  
 
     对等互连的双向链接已断开，正因如此，VM1 无法连接到 *ChinaNorth-VNet3* VNet 中的 VM3。为 *ChinaNorth-VNet1* 和 *ChinaNorth-VNet3* VNet 再次设置双向对等互连链接。正确建立 VNet 对等互连链接后，返回的输出如下所示：
@@ -105,7 +105,7 @@ ms.author: anithaa
         Active {10.9.0.0/16} VnetLocal {}
         Active {10.10.0.0/16} VNetPeering {}
         Active {0.0.0.0/0} Internet {}
-        
+
     确定问题后，可以添加、删除或更改路由和路由表。键入以下命令，查看用于执行这些操作的命令：
 
         Get-Help *-AzureRmRouteConfig

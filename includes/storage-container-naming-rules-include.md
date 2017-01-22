@@ -2,7 +2,7 @@ Azure 存储中的每个 Blob 必须驻留在一个容器中。该容器构成 B
 
     https://storagesample.blob.core.chinacloudapi.cn/mycontainer/blob1.txt
     https://storagesample.blob.core.chinacloudapi.cn/mycontainer/photos/myphoto.jpg
- 
+
 容器名称必须是有效的 DNS 名称，并符合以下命名规则：
 
 1. 容器名称必须以字母或数字开头，并且只能包含字母、数字和短划线 (-) 字符。

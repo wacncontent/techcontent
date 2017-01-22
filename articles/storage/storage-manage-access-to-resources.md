@@ -46,7 +46,7 @@ ms.author: marsma
 2. 从列表中选择容器名称。单击名称会公开所选容器中的 Blob
 3. 从工具栏选择“访问策略”。
 4. 在“访问类型”字段中，选择所需的权限级别，如下面的屏幕截图中所示。
-   
+
     ![编辑容器元数据对话框](./media/storage-manage-access-to-resources/storage-manage-access-to-resources-0.png)  
 
 ### 使用 .NET 通过编程方式设置容器权限

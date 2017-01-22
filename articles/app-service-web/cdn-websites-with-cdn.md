@@ -40,8 +40,8 @@ ms.author: cephalin
 
 本教程需要满足以下前提条件：
 
--	有效的 [Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)
--	带有[用于 .NET 的 Azure SDK](http://go.microsoft.com/fwlink/p/?linkid=323510&clcid=0x409) 的 Visual Studio 2015如果使用 Visual Studio，步骤可能有所不同。
+- 有效的 [Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)
+- 带有[用于 .NET 的 Azure SDK](http://go.microsoft.com/fwlink/p/?linkid=323510&clcid=0x409) 的 Visual Studio 2015如果使用 Visual Studio，步骤可能有所不同。
 
 > [!NOTE] 完成本教程需要有一个 Azure 帐户：
 > + 可以[注册一个 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/) — 获取可用来试用付费版 Azure 服务的信用额度，用完信用额度后，仍可以保留帐户和使用免费的 Azure 服务（如 Web 应用）。
@@ -113,17 +113,17 @@ ms.author: cephalin
 
 你可以直接通过 CDN 终结点，采用类似方式访问 **http://*&lt;serviceName>*.chinacloudapp.cn/** 中提供的任何可公开访问的 URL。例如：
 
--	/Script 路径中的 .js 文件
--	/Content 路径中的任何内容文件
--	任何控制器/操作
--	任何带查询字符串的 URL（如果在 CDN 终结点启用了查询字符串功能）
--	整个 Azure Web 应用（如果所有内容都是公共的）
+- /Script 路径中的 .js 文件
+- /Content 路径中的任何内容文件
+- 任何控制器/操作
+- 任何带查询字符串的 URL（如果在 CDN 终结点启用了查询字符串功能）
+- 整个 Azure Web 应用（如果所有内容都是公共的）
 
 请注意，通过 Azure CDN 提供整个 Azure Web 应用可能并不适合所有情况（或者说，可能并不是通用的作法）。部分注意事项如下：
 
--	此方法要求你的整个站点都是公共的，因为 Azure CDN 不能提供任何私有内容。
--	如果 CDN 终结点因某种原因而脱机（不管是因为计划的维护，还是因为用户错误），则整个 Web 应用都会脱机，除非可以将客户重定向到源 URL **http://*&lt;sitename>*.chinacloudsites.cn/**。
--	即使使用自定义的缓存-控制设置（参见[在Azure Web 应用中配置静态文件的缓存选项](#configure-caching-options-for-static-files-in-your-azure-web-app)），CDN 终结点也不会改善活动度极强的动态内容的性能。请注意，如果尝试从如上所示的 CDN 终结点加载主页，则第一次操作时至少需要 5 秒钟才能加载默认主页，该主页非常简单。想象一下，如果此页包含每分钟必须更新的动态内容，则客户端体验会是一种什么样的情景？从 CDN 终结点提供动态内容要求缓存过期时间短，这会造成在 CDN 终结点处频繁出现缓存未命中的情况。这会损害 Azure Web 应用的性能，与 CDN 的初衷背道而驰。
+- 此方法要求你的整个站点都是公共的，因为 Azure CDN 不能提供任何私有内容。
+- 如果 CDN 终结点因某种原因而脱机（不管是因为计划的维护，还是因为用户错误），则整个 Web 应用都会脱机，除非可以将客户重定向到源 URL **http://*&lt;sitename>*.chinacloudsites.cn/**。
+- 即使使用自定义的缓存-控制设置（参见[在Azure Web 应用中配置静态文件的缓存选项](#configure-caching-options-for-static-files-in-your-azure-web-app)），CDN 终结点也不会改善活动度极强的动态内容的性能。请注意，如果尝试从如上所示的 CDN 终结点加载主页，则第一次操作时至少需要 5 秒钟才能加载默认主页，该主页非常简单。想象一下，如果此页包含每分钟必须更新的动态内容，则客户端体验会是一种什么样的情景？从 CDN 终结点提供动态内容要求缓存过期时间短，这会造成在 CDN 终结点处频繁出现缓存未命中的情况。这会损害 Azure Web 应用的性能，与 CDN 的初衷背道而驰。
 
 替代方法是在 Azure Web 应用中按每次的具体情况来判断哪些内容可以由 Azure CDN 提供。就这点来说，我们已向你介绍了如何通过 CDN 终结点访问各个内容文件。我会在[通过 Azure CDN 的控制器操作提供内容](#serve-content-from-controller-actions-through-azure-cdn)中向你演示如何处理通过 CDN 终结点进行的特定控制器操作。
 
@@ -275,7 +275,7 @@ ms.author: cephalin
 4. 打开这个新的 *Views\\MemeGenerator\\Index.cshtml*，将其中的内容替换为下面这个简单的 HTML，以便提交夸张元素：
 
         <h2>Meme Generator</h2>
-        
+
         <form action="" method="post">
             <input type="text" name="top" placeholder="Enter top text here" />
             <br />
@@ -331,11 +331,11 @@ ms.author: cephalin
 
 脚本和 CSS 样式表很少变化，尤其适合 Azure CDN 缓存。若要将绑定和缩减集成到 Azure CDN，最便捷的方式是通过 Azure CDN 提供整个 Web 应用。不过，出于[将 Azure CDN 终结点与 Azure Web 应用集成，通过 Azure CDN 在网页中提供静态内容](#deploy-a-web-app-to-azure-with-an-integrated-cdn-endpoint)中描述的原因，你可能不倾向于选择此方法，因此我会向你演示如何在实现既定目标的同时，保留所需的有关 ASP.NET 绑定和缩减的开发人员体验，例如：
 
--	理想的调试模式体验
--	简化的部署
--	即时更新客户端，进行脚本/CSS 版本升级
--	在 CDN 终结点故障时适用的回退机制
--	最大程度减少代码修改
+- 理想的调试模式体验
+- 简化的部署
+- 即时更新客户端，进行脚本/CSS 版本升级
+- 在 CDN 终结点故障时适用的回退机制
+- 最大程度减少代码修改
 
 在[将 Azure CDN 终结点与 Azure Web 应用集成，通过 Azure CDN 在网页中提供静态内容](#deploy-a-web-app-to-azure-with-an-integrated-cdn-endpoint)部分创建的 ASP.NET 项目中，打开 *App\_Start\\BundleConfig.cs*，然后查看 `bundles.Add()` 方法调用情况。
 
@@ -363,7 +363,7 @@ ms.author: cephalin
 按照以下步骤操作，将 ASP.NET 绑定和缩减功能集成到 CDN 终结点。
 
 1. 回到 *App\_Start\\BundleConfig.cs*，修改 `bundles.Add()` 方法以使用其他[捆绑包构造函数](http://msdn.microsoft.com/zh-cn/library/jj646464.aspx)来指定 CDN 地址。为此，请使用以下代码替换 `RegisterBundles` 方法定义：
-    
+
         public static void RegisterBundles(BundleCollection bundles)
         {
           bundles.UseCdn = true;
@@ -402,20 +402,20 @@ ms.author: cephalin
         new ScriptBundle("~/bundles/jquery", string.Format(cdnUrl, "http://<yourCDNName>.azureedge.net/bundles/jquery?<W.X.Y.Z>"))
 
     进行本地调试时，此构造函数会指示 ASP.NET 绑定和缩减功能呈现各个脚本文件，但会使用指定的 CDN 地址来访问相关脚本。不过，请注意这个仔细编写的 CDN URL 存在两个重要的特征：
-    
+
     - 此 CDN URL 的源是 `http://<yourSiteName>.chinacloudsites.cn/bundles/jquery?<W.X.Y.Z>`，这实际上是 Web 应用程序中脚本捆绑包的虚拟目录。
     - 由于你使用的是 CDN 构造函数，因此捆绑包的 CDN 脚本标记不再包含在呈现的 URL 中自动生成的版本字符串。每次对脚本捆绑包进行修改而造成 Azure CDN 中出现缓存未命中的情况时，你都必须手动生成唯一的脚本字符串。同时，这个唯一的版本字符串在部署过程中必须保持不变，以便在捆绑包部署完以后，最大程度地提高 Azure CDN 中的缓存命中率。
 
 3. 查询字符串 `<W.X.Y.Z>` 的功能是从 ASP.NET 项目中的 *Properties\\AssemblyInfo.cs* 进行拉取。你可以建立一个部署工作流，这样当你每次将相关内容发布到 Azure 时，程序集版本就会递增一次。你也可以使用通配符“*”直接修改项目中的 *Properties\\AssemblyInfo.cs*，以便每次进行构建时让版本字符串自动递增。例如，如下所示更改 `AssemblyVersion`：
-    
+
         [assembly: AssemblyVersion("1.0.0.*")]
-    
+
     在这里，可以使用任何其他的策略来简化部署过程中唯一字符串的生成。
 
 3. 重新发布 ASP.NET 应用程序并访问主页。
- 
+
 4. 查看页面的 HTML 代码。每次重新发布对 Azure Web 应用的更改时，都可以看到所呈现的 CDN URL，其中包含唯一版本字符串。例如：
-    
+
         ...
         <link href="http://az673227.azureedge.net/Content/css?1.0.0.25449" rel="stylesheet"/>
         <script src="http://az673227.azureedge.net/bundles/modernizer?1.0.0.25449"></script>
@@ -427,7 +427,7 @@ ms.author: cephalin
 5. 在 Visual Studio 中，键入 `F5` 即可调试 ASP.NET 应用程序。
 
 6. 查看页面的 HTML 代码。你仍然会看到每个脚本文件独立呈现，因此，在 Visual Studio 中的调试体验是一致的。
-    
+
         ...
         <link href="/Content/bootstrap.css" rel="stylesheet"/>
         <link href="/Content/site.css" rel="stylesheet"/>
@@ -445,7 +445,7 @@ ms.author: cephalin
 [捆绑包](http://msdn.microsoft.com/zh-cn/library/system.web.optimization.bundle.aspx)类包含一个名为 [CdnFallbackExpression](http://msdn.microsoft.com/zh-cn/library/system.web.optimization.bundle.cdnfallbackexpression.aspx) 的属性，该属性可以让你配置回退机制以应对 CDN 故障情况。若要使用此属性，请执行以下步骤：
 
 1. 在 ASP.NET 项目中打开 *App\_Start\\BundleConfig.cs*（你已在其中将 CDN URL 添加到了每个[捆绑包构造函数](http://msdn.microsoft.com/zh-cn/library/jj646464.aspx)），然后将 `CdnFallbackExpression` 代码添加到所示的四个位置，以便将回退机制添加到默认捆绑包中。
-    
+
         public static void RegisterBundles(BundleCollection bundles)
         {
           var version = System.Reflection.Assembly.GetAssembly(typeof(BundleConfig))
@@ -479,14 +479,14 @@ ms.author: cephalin
         }
 
     当 `CdnFallbackExpression` 不为 null 时，会将脚本注入 HTML 中以测试捆绑包是否已成功加载，而如果没有成功加载，则会直接从源 Web 服务器访问捆绑包。需要将此属性设置成一个 JavaScript 表达式，以便测试相应的 CDN 捆绑包是否已正确加载。根据内容的不同，测试每个捆绑包所需的表达式也会有所不同。对于上面的默认捆绑包：
-    
+
     - `window.jquery` 在 jquery-{version}.js 中定义
     - `$.validator` 在 jquery.validate.js 中定义
     - `window.Modernizr` 在 modernizer-{version}.js 中定义
     - `$.fn.modal` 在 bootstrap.js 中定义
-    
+
     你可能已注意到，我并没有为 `~/Cointent/css` 捆绑包设置 CdnFallbackExpression。这是因为，目前 [System.Web.Optimization 中的 Bug](https://aspnetoptimization.codeplex.com/workitem/104) 会针对回退 CSS 注入 `<script>` 标记而非预期的 `<link>` 标记。
-    
+
     不过，你可以使用一个不错的[样式捆绑包回退](https://github.com/EmberConsultingGroup/StyleBundleFallback)，是由 [Ember Consulting Group](https://github.com/EmberConsultingGroup) 提供的。
 
 2. 若要将此解决方法用于 CSS，可在 ASP.NET 项目的 *App\_Start* 文件夹中创建一个名为 *StyleBundleExtensions.cs* 的 .cs 新文件，然后将其内容替换为 [GitHub 提供的代码](https://github.com/EmberConsultingGroup/StyleBundleFallback/blob/master/Website/App_Start/StyleBundleExtensions.cs)。
@@ -526,13 +526,13 @@ ms.author: cephalin
                         }
                         return true;
                     }())||document.write('<script src="/Content/css"><\/script>');</script>
-        
+
         <script src="http://az673227.azureedge.net/bundles/modernizer?1.0.0.25474"></script>
              <script>(window.Modernizr)||document.write('<script src="/bundles/modernizr"><\/script>');</script>
             ... 
         <script src="http://az673227.azureedge.net/bundles/jquery?1.0.0.25474"></script>
             <script>(window.jquery)||document.write('<script src="/bundles/jquery"><\/script>');</script>
-        
+
         <script src="http://az673227.azureedge.net/bundles/bootstrap?1.0.0.25474"></script>
              <script>($.fn.modal)||document.write('<script src="/bundles/bootstrap"><\/script>');</script>
             ...

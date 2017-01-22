@@ -85,7 +85,7 @@ ms.author: adegeo
 | ----- | ------- |
 | XPath | xpath="/RoleEnvironment/CurrentInstance/ConfigurationSettings/ConfigurationSetting[@name='Setting1']/@value" |
 | 代码 | var setting = RoleEnvironment.GetConfigurationSettingValue("Setting1"); |
- 
+
 ## 本地存储路径
 
 检索实例的本地存储路径。

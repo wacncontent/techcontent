@@ -55,7 +55,7 @@ ms.author: tomfitz
         azure login -e AzureChinaCloud
 
 2. 创建 AD 应用程序时有两个选项。既可以一步创建 AD 应用程序和服务主体，也可以单独创建。如果不需要为应用指定主页和标识符 URI，则可一步创建。如果需要为 Web 应用设置这些值，请单独创建。此步骤介绍两个选项。
-   
+
     * 若要一步创建 AD 应用程序和服务主体，请提供应用名称和密码，如以下命令中所示：
 
             azure ad sp create -n exampleapp -p {your-password}
@@ -69,11 +69,11 @@ ms.author: tomfitz
          azure ad sp create -a {AppId}
 
     如果帐户在 Active Directory 上不具有[所需的权限](#required-permissions)，将看到指示“Authentication\_Unauthorized”或“上下文中找不到订阅”的错误消息。
-     
+
     对于这两个选项，都会返回新的服务主体。授权时需要使用**对象 ID**。登录时需要提供随**服务主体名称**列出的 GUID。此 GUID 与 AppId 的值一样。在示例应用程序中，此值称为 **客户端 ID**。
 
          info:    Executing command ad sp create
-     
+
          Creating application exampleapp
            / Creating service principal for application 7132aca4-1bdb-4238-ad81-996ff91d8db+
            data:    Object Id:               ff863613-e5e2-4a6b-af07-fff6f2de3f4e
@@ -165,7 +165,7 @@ ms.author: tomfitz
         azure login -e AzureChinaCloud
 
 5. 创建 AD 应用程序时有两个选项。既可以一步创建 AD 应用程序和服务主体，也可以单独创建。如果不需要为应用指定主页和标识符 URI，则可一步创建。如果需要为 Web 应用设置这些值，请单独创建。此步骤介绍两个选项。
-   
+
     * 若要一步创建 AD 应用程序和服务主体，请提供应用名称和证书数据，如以下命令中所示：
 
             azure ad sp create -n exampleapp --cert-value {certificate data}
@@ -179,11 +179,11 @@ ms.author: tomfitz
          azure ad sp create -a {AppId}
 
     如果帐户在 Active Directory 上不具有[所需的权限](#required-permissions)，将看到指示“Authentication\_Unauthorized”或“上下文中找不到订阅”的错误消息。
-     
+
     对于这两个选项，都会返回新的服务主体。授权时需要使用对象 ID。登录时需要提供随**服务主体名称**列出的 GUID。此 GUID 与 AppId 的值一样。在示例应用程序中，此值称为 **客户端 ID**。
 
          info:    Executing command ad sp create
-     
+
          Creating service principal for application 4fd39843-c338-417d-b549-a545f584a74+
            data:    Object Id:        7dbc8265-51ed-4038-8e13-31948c7f4ce7
            data:    Display Name:     exampleapp

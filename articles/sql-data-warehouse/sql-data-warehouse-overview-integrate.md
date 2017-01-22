@@ -29,7 +29,7 @@ Azure 流分析是复杂、完全托管的基础结构，用于处理和使用�
 
 + **作业输出**：将流分析作业的输出直接发送到 SQL 数据仓库。
 
-有关详细信息，请参阅[与 Azure 流分析集成](./sql-data-warehouse-integrate-azure-stream-analytics.md)或 [Azure 流分析文档](../stream-analytics/index.md/)。
+有关详细信息，请参阅[与 Azure 流分析集成](./sql-data-warehouse-integrate-azure-stream-analytics.md)或 [Azure 流分析文档](../stream-analytics/index.md)。
 
 <!--Image references-->
 

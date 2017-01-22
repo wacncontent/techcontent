@@ -33,23 +33,23 @@ ms.author: juliako
 本主题说明如何创建 OnDemand 流式处理定位符，以发布资产及生成平滑流式处理、MPEG DASH 和 HLS 流式处理 URL。此外，还将演示如何生成渐进式下载 URL。
 
 [以下](#types)部分显示了其值将在 REST 调用中使用的枚举类型。
-  
+
 ##创建 OnDemand 流式处理定位符
 
 若要创建 OnDemand 流式处理定位符并获取 URL，需执行以下操作：
 
-   1. 如果内容已加密，请定义访问策略。
-   2. 创建 OnDemand 流式处理定位符。
-   3. 若计划进行流式处理，请获取资产中的流式处理清单文件 (.ism)。
-           
+    1. 如果内容已加密，请定义访问策略。
+    2. 创建 OnDemand 流式处理定位符。
+    3. 若计划进行流式处理，请获取资产中的流式处理清单文件 (.ism)。
+
     若计划进行渐进式下载，请获取资产中的 MP4 文件名。
-   4. 生成清单文件或 MP4 文件的 URL。
-   5. 请注意，不能使用包含写入或删除权限的 AccessPolicy 创建流式处理定位符。
+    4. 生成清单文件或 MP4 文件的 URL。
+    5. 请注意，不能使用包含写入或删除权限的 AccessPolicy 创建流式处理定位符。
 
 ###创建访问策略
 
 请求：
-        
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/AccessPolicies HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 1.0;NetFx
@@ -61,11 +61,11 @@ ms.author: juliako
     x-ms-client-request-id: 6bcfd511-a561-448d-a022-a319a89ecffa
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 68
-    
+
     {"Name":"access policy","DurationInMinutes":43200.0,"Permissions":1}
-    
+
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 311
@@ -80,7 +80,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Wed, 18 Feb 2015 06:52:09 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#AccessPolicies/@Element","Id":"nb:pid:UUID:69c80d98-7830-407f-a9af-e25f4b0d3e5f","Created":"2015-02-18T06:52:09.8862191Z","LastModified":"2015-02-18T06:52:09.8862191Z","Name":"access policy","DurationInMinutes":43200.0,"Permissions":1}
 
 ###创建 OnDemand 流式处理定位符
@@ -88,7 +88,7 @@ ms.author: juliako
 创建指定资产和资产策略的定位符。
 
 请求：
-    
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Locators HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 1.0;NetFx
@@ -100,11 +100,11 @@ ms.author: juliako
     x-ms-client-request-id: ac159492-9a0c-40c3-aacc-551b1b4c5f62
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 181
-    
+
     {"AccessPolicyId":"nb:pid:UUID:1480030d-c481-430a-9687-535c6a5cb272","AssetId":"nb:cid:UUID:cc1e445d-1500-80bd-538e-f1e4b71b465e","StartTime":"2015-02-18T06:34:47.267872Z","Type":2}
 
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 637
@@ -119,7 +119,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Wed, 18 Feb 2015 06:58:37 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#Locators/@Element","Id":"nb:lid:UUID:be245661-2bbd-4fc6-b14f-9cf9a1492e5e","ExpirationDateTime":"2015-03-20T06:34:47.267872+00:00","Type":2,"Path":"http://amstest1.streaming.mediaservices.chinacloudapi.cn/be245661-2bbd-4fc6-b14f-9cf9a1492e5e/","BaseUri":"http://amstest1.streaming.mediaservices.chinacloudapi.cn","ContentAccessComponent":"be245661-2bbd-4fc6-b14f-9cf9a1492e5e","AccessPolicyId":"nb:pid:UUID:1480030d-c481-430a-9687-535c6a5cb272","AssetId":"nb:cid:UUID:cc1e445d-1500-80bd-538e-f1e4b71b465e","StartTime":"2015-02-18T06:34:47.267872+00:00","Name":null}
 
 ###生成流式处理 URL

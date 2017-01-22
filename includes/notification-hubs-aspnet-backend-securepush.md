@@ -9,15 +9,15 @@
             public string Payload { get; set; }
             public bool Read { get; set; }
         }
-    
+
         public class Notifications
         {
             public static Notifications Instance = new Notifications();
-            
+
             private List<Notification> notifications = new List<Notification>();
-    
+
             public NotificationHubClient Hub { get; set; }
-    
+
             private Notifications() {
                 Hub = NotificationHubClient.CreateClientFromConnectionString("{conn string with full access}", 	"{hub name}");
             }

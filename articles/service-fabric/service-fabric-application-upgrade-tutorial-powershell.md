@@ -47,13 +47,13 @@ ms.author: subramar
 完成更改后，清单应该如下所示（突出显示的部分即为所做的更改）：
 
     <ServiceManifestName="VisualObjects.ActorService" Version="2.0" xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    
+
     <CodePackageName="Code" Version="2.0">
 
 现在，*ApplicationManifest.xml* 文件（位于 **VisualObjects** 解决方案下的 **VisualObjects** 项目下）已更新为 **VisualObjects.ActorService** 项目的 2.0 版。此外，应用程序版本已从 1.0.0.0 更新为 2.0.0.0。*ApplicationManifest.xml* 应类似于以下代码片段：
 
     <ApplicationManifestxmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="VisualObjects" ApplicationTypeVersion="2.0.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
-    
+
      <ServiceManifestRefServiceManifestName="VisualObjects.ActorService" ServiceManifestVersion="2.0" />
 
 现在请生成项目，方法是选择 **ActorService** 项目，然后单击右键并选择 Visual Studio 中的“生成”选项。如果选择“全部重新生成”，应该更新所有项目的版本，因为代码已更改。接下来，将更新的应用程序打包，方法是右键单击“VisualObjectsApplication”，选择 Service Fabric 菜单，然后选择“打包”。此操作将创建可部署的应用程序包。更新的应用程序已准备就绪，可供部署。

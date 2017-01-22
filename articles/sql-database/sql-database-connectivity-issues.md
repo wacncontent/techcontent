@@ -251,7 +251,7 @@ ADO.NET 4.6.1：
  - （将示例值更改为你的 IP 地址。）
 
 在 Windows 上，[PortQry.exe](http://www.microsoft.com/en-us/download/details.aspx?id=17148) 实用程序可能很有用。以下是在 Azure SQL 数据库服务器上查询端口情况，以及在便携式计算机上运行的的示例执行：
- 
+
     [C:\Users\johndoe\]
     >> portqry.exe -n johndoesvr9.database.chinacloudapi.cn -p tcp -e 1433
 

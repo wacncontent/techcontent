@@ -69,7 +69,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 以下脚本是针对 Python 3.5 编写的。若要使用 2.x 版 Python，请针对两个启动任务以及运行时任务将 **PYTHON2** 变量文件设置为 **on**：`<Variable name="PYTHON2" value="<mark>on</mark>" />`。
 
     <Startup>
-    
+
       <Task executionContext="elevated" taskType="simple" commandLine="bin\ps.cmd PrepPython.ps1">
         <Environment>
           <Variable name="EMULATED">
@@ -78,7 +78,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
           <Variable name="PYTHON2" value="off" />
         </Environment>
       </Task>
-    
+
       <Task executionContext="elevated" taskType="simple" commandLine="bin\ps.cmd PipInstaller.ps1">
         <Environment>
           <Variable name="EMULATED">
@@ -87,7 +87,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
             <Variable name="PYTHON2" value="off" />
         </Environment>
       </Task>
-    
+
     </Startup>
 
 需将 **PYTHON2** 和 **PYPATH** 变量添加到辅助角色启动任务。仅当 **PYTHON2** 变量设置为 **on** 时，才使用 **PYPATH** 变量。
@@ -150,7 +150,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
         </Imports>
       </WorkerRole>
     </ServiceDefinition>
-    
+
 接下来，在角色的 **./bin** 文件夹中创建 **PrepPython.ps1** 和 **PipInstaller.ps1** 文件。
 
 #### PrepPython.ps1
@@ -160,7 +160,7 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
     $is_emulated = $env:EMULATED -eq "true"
     $is_python2 = $env:PYTHON2 -eq "on"
     $nl = [Environment]::NewLine
-    
+
     if (-not $is_emulated){
     Write-Output "Checking if python is installed...$nl"
         if ($is_python2) {
@@ -169,28 +169,28 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
         else {
             py -V | Out-Null
         }
-    
+
         if (-not $?) {
-    
+
             $url = "https://www.python.org/ftp/python/3.5.2/python-3.5.2-amd64.exe"
             $outFile = "${env:TEMP}\python-3.5.2-amd64.exe"
-    
+
             if ($is_python2) {
                 $url = "https://www.python.org/ftp/python/2.7.12/python-2.7.12.amd64.msi"
                 $outFile = "${env:TEMP}\python-2.7.12.amd64.msi"
             }
-            
+
         Write-Output "Not found, downloading $url to $outFile$nl"
             Invoke-WebRequest $url -OutFile $outFile
         Write-Output "Installing$nl"
-    
+
             if ($is_python2) {
                 Start-Process msiexec.exe -ArgumentList "/q", "/i", "$outFile", "ALLUSERS=1" -Wait
             }
             else {
                 Start-Process "$outFile" -ArgumentList "/quiet", "InstallAllUsers=1" -Wait
             }
-    
+
         Write-Output "Done$nl"
         }
         else {
@@ -205,26 +205,26 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
     $is_emulated = $env:EMULATED -eq "true"
     $is_python2 = $env:PYTHON2 -eq "on"
     $nl = [Environment]::NewLine
-    
+
     if (-not $is_emulated){
     Write-Output "Checking if requirements.txt exists$nl"
         if (Test-Path ..\requirements.txt) {
         Write-Output "Found. Processing pip$nl"
-    
+
             if ($is_python2) {
                 & "${env:SystemDrive}\Python27\python.exe" -m pip install -r ..\requirements.txt
             }
             else {
                 py -m pip install -r ..\requirements.txt
             }
-    
+
         Write-Output "Done$nl"
         }
         else {
         Write-Output "Not found$nl"
         }
     }
-    
+
 #### 修改 LaunchWorker.ps1
 
 >[!NOTE] 对于**辅助角色**项目，需要 **LauncherWorker.ps1** 文件才能执行启动文件。在 **web 角色**项目中，启动文件在项目属性中定义。
@@ -236,11 +236,11 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
     $is_emulated = $env:EMULATED -eq "true"
     $is_python2 = $env:PYTHON2 -eq "on"
     $nl = [Environment]::NewLine
-    
+
     if (-not $is_emulated)
     {
     Write-Output "Running worker.py$nl"
-    
+
         if ($is_python2) {
             cd..
             iex "$env:PYPATH\python.exe worker.py"
@@ -253,9 +253,9 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
     else
     {
     Write-Output "Running (EMULATED) worker.py$nl"
-    
+
         # Customize to your local dev environment
-    
+
         if ($is_python2) {
             cd..
             iex "$env:PYPATH\python.exe worker.py"
@@ -271,9 +271,9 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 Visual Studio 模板应在 **./bin** 文件夹中创建了一个 **ps.cmd** 文件。此 shell 脚本调用上述 PowerShell 包装脚本，并根据所调用 PowerShell 包装的名称提供日志记录。如果未创建此文件，请注意，下面是该文件应该包含的内容。
 
     @echo off
-    
+
     cd /D %~dp0
-    
+
     if not exist "%DiagnosticStore%\LogFiles" mkdir "%DiagnosticStore%\LogFiles"
     %SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Unrestricted -File %* >> "%DiagnosticStore%\LogFiles\%~n1.txt" 2>> "%DiagnosticStore%\LogFiles\%~n1.err.txt"
 

@@ -22,7 +22,7 @@ ms.author: trinadhk; jimpark; markgal;
 
 本文提供了用于将经典部署 Azure 虚拟机 (VM) 备份到备份保管库的过程。需要先执行几个任务，然后才能备份 Azure 虚拟机。如果你尚未这样做，请完成[先决条件](./backup-azure-vms-prepare.md)部分，在环境中做好 VM 备份的准备。
 
-有关其他信息，请参阅[在 Azure 中规划 VM 备份基础结构](./backup-azure-vms-introduction.md)和 [Azure 虚拟机](../virtual-machines/index.md/)。
+有关其他信息，请参阅[在 Azure 中规划 VM 备份基础结构](./backup-azure-vms-introduction.md)和 [Azure 虚拟机](../virtual-machines/index.md)。
 
 >[!NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。备份保管库只能保护经典部署 VM。无法使用备份保管库保护使用资源管理器部署的 VM。
 
@@ -38,7 +38,7 @@ ms.author: trinadhk; jimpark; markgal;
 1. 登录到[经典管理门户](http://manage.windowsazure.cn/)
 
 2. 在 Azure 服务列表中，单击“恢复服务”打开备份和站点恢复保管库的列表。
-    
+
     ![打开保管库列表](./media/backup-azure-vms/choose-vault-list.png)
 
 3. 从备份保管库列表中，选择要备份 VM 的保管库。
@@ -58,7 +58,7 @@ ms.author: trinadhk; jimpark; markgal;
     ![选择工作负荷](./media/backup-azure-vms/discovery-select-workload.png)  
 
 6. 单击页面底部的“发现”。
-    
+
     ![发现按钮](./media/backup-azure-vms/discover-button-only.png)
 
     发现过程可能会需要几分钟，将以表格显示虚拟机。屏幕底部有一个通知，让你知道系统正在运行发现过程。
@@ -81,7 +81,7 @@ ms.author: trinadhk; jimpark; markgal;
     ![选择工作负荷](./media/backup-azure-vms/discovery-select-workload.png)  
 
 3. 单击页面底部的“注册”。
-    
+
     ![注册按钮](./media/backup-azure-vms/register-button-only.png)
 
 4. 在“注册项”快捷菜单中，选择你要注册的虚拟机。如果存在两个或两个以上的同名虚拟机，请使用云服务来区别它们。

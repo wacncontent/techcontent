@@ -17,11 +17,11 @@
 1. 在 Visual Studio 中，打开 Windows 应用程序项目的 Package.appxmanifest 文件，并在“功能”选项卡中启用“网络摄像机”和“麦克风”功能。
 
        ![](./media/mobile-services-windows-universal-dotnet-upload-to-blob-storage/mobile-app-manifest-camera.png)
- 
+
        这样可以确保你的应用能够使用连接到计算机的相机。应用第一次运行时，将请求用户允许对相机进行访问。
 
 2. 对 Windows Phone 应用程序项目重复上述步骤。
- 
+
 3. 在 Windows 应用程序项目中，打开 MainPage.xaml 文件，并将第一个 **QuickStartTask** 元素之后紧邻的 **StackPanel** 元素替换为以下代码：
 
         <StackPanel Orientation="Horizontal" Margin="72,0,0,0">
@@ -96,18 +96,18 @@
 
         [JsonProperty(PropertyName = "containerName")]
         public string ContainerName { get; set; }
-        
+
         [JsonProperty(PropertyName = "resourceName")]
         public string ResourceName { get; set; }
-        
+
         [JsonProperty(PropertyName = "sasQueryString")]
         public string SasQueryString { get; set; }
-        
+
         [JsonProperty(PropertyName = "imageUri")]
         public string ImageUri { get; set; } 
 
 3. 打开共享的 MainPage.xaml.cs 项目文件并添加以下 **using** 语句：
-    
+
         using Windows.Media.Capture;
         using Windows.Media.MediaProperties;
         using Windows.Storage;
@@ -214,7 +214,7 @@
       这段代码显示用于捕获图像的 UI，并将图像保存到存储文件中。
 
 6. 将现有的 `InsertTodoItem` 方法替换为以下代码：
- 
+
         private async Task InsertTodoItem(TodoItem todoItem)
         {
             string errorString = string.Empty;
@@ -267,7 +267,7 @@
     这段代码可向移动服务发送插入新 TodoItem 的请求。响应包含 SAS，然后可将其用于将图像从本地存储上载到 Azure Blob 存储。已上载的图像的 URL 用于数据绑定。
 
 最后一个步骤是测试应用程序的两个版本并验证从两个设备上载是否成功。
-        
+
 ## <a name="test"></a>测试在你的应用程序中上载图像
 
 1. 在 Visual Studio 中，请确保 Windows 项目被设置为默认项目，然后按 F5 键运行应用程序。

@@ -31,13 +31,13 @@ Azure Service Fabric 中的可测试性方案可让开发人员不用再担心�
   + MovePrimary：用于模拟 Service Fabric 负载均衡器触发的副本移动操作的正常故障。
 
     // Add a reference to System.Fabric.Testability.dll and System.Fabric.dll.
-    
+
     using System;
     using System.Fabric;
     using System.Fabric.Testability.Scenario;
     using System.Threading;
     using System.Threading.Tasks;
-    
+
     class Test
     {
         public static int Main(string[] args)
@@ -46,7 +46,7 @@ Azure Service Fabric 中的可测试性方案可让开发人员不用再担心�
             string clusterConnection = "localhost:19000";
             Uri applicationName = new Uri("fabric:/samples/PersistentToDoListApp");
             Uri serviceName = new Uri("fabric:/samples/PersistentToDoListApp/PersistentToDoListService");
-    
+
             Console.WriteLine("Starting Workload Test...");
             try
             {
@@ -64,11 +64,11 @@ Azure Service Fabric 中的可测试性方案可让开发人员不用再担心�
                 }
                 return -1;
             }
-    
+
             Console.WriteLine("Workload Test completed successfully.");
             return 0;
         }
-    
+
         public enum ServiceWorkloads
         {
             A,
@@ -76,7 +76,7 @@ Azure Service Fabric 中的可测试性方案可让开发人员不用再担心�
             C,
             D
         }
-    
+
         public enum ServiceFabricFaults
         {
             RestartNode,
@@ -84,40 +84,40 @@ Azure Service Fabric 中的可测试性方案可让开发人员不用再担心�
             RemoveReplica,
             MovePrimary,
         }
-    
+
         public static async Task RunTestAsync(string clusterConnection, Uri applicationName, Uri serviceName)
         {
             // Create FabricClient with connection and security information here.
             FabricClient fabricClient = new FabricClient(clusterConnection);
             // Maximum time to wait for a service to stabilize.
             TimeSpan maxServiceStabilizationTime = TimeSpan.FromSeconds(120);
-    
+
             // How many loops of faults you want to execute.
             uint testLoopCount = 20;
             Random random = new Random();
-    
+
             for (var i = 0; i < testLoopCount; ++i)
             {
                 var workload = SelectRandomValue<ServiceWorkloads>(random);
                 // Start the workload.
                 var workloadTask = RunWorkloadAsync(workload);
-    
+
                 // While the task is running, induce faults into the service. They can be ungraceful faults like
                 // RestartNode and RestartDeployedCodePackage or graceful faults like RemoveReplica or MovePrimary.
                 var fault = SelectRandomValue<ServiceFabricFaults>(random);
-    
+
                 // Create a replica selector, which will select a primary replica from the given service to test.
                 var replicaSelector = ReplicaSelector.PrimaryOf(PartitionSelector.RandomOf(serviceName));
                 // Run the selected random fault.
                 await RunFaultAsync(applicationName, fault, replicaSelector, fabricClient);
                 // Validate the health and stability of the service.
                 await fabricClient.ServiceManager.ValidateServiceAsync(serviceName, maxServiceStabilizationTime);
-    
+
                 // Wait for the workload to finish successfully.
                 await workloadTask;
             }
         }
-    
+
         private static async Task RunFaultAsync(Uri applicationName, ServiceFabricFaults fault, ReplicaSelector selector, FabricClient client)
         {
             switch (fault)
@@ -136,7 +136,7 @@ Azure Service Fabric 中的可测试性方案可让开发人员不用再担心�
                     break;
             }
         }
-    
+
         private static Task RunWorkloadAsync(ServiceWorkloads workload)
         {
             throw new NotImplementedException();
@@ -145,7 +145,7 @@ Azure Service Fabric 中的可测试性方案可让开发人员不用再担心�
             // fault the primary service. Hence, you will need to reconnect to complete or check
             // the status of the workload.
         }
-    
+
         private static T SelectRandomValue<T>(Random random)
         {
             Array values = Enum.GetValues(typeof(T));

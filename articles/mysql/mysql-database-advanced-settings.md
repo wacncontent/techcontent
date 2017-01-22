@@ -36,7 +36,7 @@ MySQL 数据库 on Azure支持您对服务器部分参数进行自定义设置�
     </td>
   <th align="left"><strong>范围</strong>
     </td>
-  
+
   <tr>
     <td>Event_scheduler</td>
     <td>OFF</td>
@@ -82,7 +82,7 @@ MySQL 数据库 on Azure支持您对服务器部分参数进行自定义设置�
     <td>1048576</td>
     <td>[1024- 16777216]</td>
   </tr>
-   <tr>
+    <tr>
     <td>server-id</td>
     <td>Random Value</td>
     <td>[1000 - 4294967295]</td>
@@ -102,7 +102,7 @@ MySQL 数据库 on Azure支持您对服务器部分参数进行自定义设置�
     | PAD_CHAR_TO_FULL_LENGTH | PIPES_AS_CONCAT
     | REAL_AS_FLOAT | STRICT_ALL_TABLES
     | STRICT_TRANS_TABLES
-    
+
 <a href="http://dev.mysql.com/doc/refman/5.5/en/sql-mode.html">http://dev.mysql.com/doc/refman/5.5/en/sql-mode.html</a></td>
   </tr>
   <tr>
@@ -115,7 +115,7 @@ MySQL 数据库 on Azure支持您对服务器部分参数进行自定义设置�
     <td>System</td>
     <td>System, [-12:00 to +12:00] </td>
   </tr>
-   <tr>
+    <tr>
     <td >character_set_server</td>
     <td>默认为DB创建时的设置</td>
     <td>utf8|utf16|utf32|utf8mb4|ujis|ucs2|tis620|swe7|sjis|macroman|macce|latin1|latin2|latin5|latin7|koi8r|koi8u|keybcs2|hp8|hebrew|greek|geostd8|gbk|gb2312|euckr|eucjpms|dec8|cp850|cp852|cp866|cp932|cp1250|cp1251|cp1256|cp1257|binary|big5|ascii|armscii8</td>

@@ -73,7 +73,7 @@ ms.author: adegeo
         </WebRole>
 
     **Certificates** 节定义了我们的证书的名称、其位置及其所在存储的名称。
-    
+
     权限（`permisionLevel` 属性）可以设置为以下值之一：
 
     | 权限值 | 说明 |
@@ -141,7 +141,7 @@ ms.author: adegeo
 5. 单击“上载”按钮。
 
     ![上载](./media/cloud-services-configure-ssl-certificate/upload-button.png)
-    
+
 6. 指定“文件”和“密码”，然后单击“完成”（复选标记）。
 
 ## 步骤 4：使用 HTTPS 连接到角色实例

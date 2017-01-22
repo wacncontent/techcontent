@@ -32,7 +32,7 @@ wacn.date: 02/01/2016
     #servicename 为虚拟机对应的云服务的名称
     #name 为虚拟机的名称
     Get-AzureVM -Servicename 'pstest' -Name 'pstest'| Get-AzureEndpoint
-    
+
 ![](./media/aog-virtual-machines-ps-add-endpoint/get-endpoint-info.PNG)
 
 从上面信息可以看到目前虚拟机上拥有两个终结点：PowerShell 和 Remote Desktop。现在通过 PowerShell 增加终结点。

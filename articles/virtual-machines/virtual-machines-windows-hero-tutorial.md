@@ -71,9 +71,9 @@ ms.author: cynthn
 
 ## <a name="log-on-to-the-virtual-machine"></a> 连接到虚拟机并登录
 
-1.	在中心菜单中，单击“虚拟机”。
+1. 在中心菜单中，单击“虚拟机”。
 
-2.	从列表中选择虚拟机。
+2. 从列表中选择虚拟机。
 
 3. 在虚拟机边栏选项卡上，单击“连接”。随后将创建并下载远程桌面协议文件（.rdp 文件），该文件类似于用于连接计算机的快捷方式。你可以将此文件保存到桌面以便于访问。**打开**此文件以连接到 VM。
 
@@ -87,7 +87,7 @@ ms.author: cynthn
 
     ![显示如何输入 VM 名称、用户名和密码的屏幕截图](./media/virtual-machines-windows-hero-tutorial/credentials.png)  
 
-6.	此时将出现警告，指出无法验证证书。这是一般警报。单击“是”以验证虚拟机的 ID 并完成登录。
+6. 此时将出现警告，指出无法验证证书。这是一般警报。单击“是”以验证虚拟机的 ID 并完成登录。
 
     ![显示有关验证 VM 标识的消息的屏幕截图](./media/virtual-machines-windows-hero-tutorial/cert-warning.png)  
 

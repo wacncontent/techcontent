@@ -46,12 +46,12 @@ v2.0 终结点可让你快速地将身份验证添加桌面应用，同时支持
 ## 安装并配置 MSAL
 现在有了已向 Microsoft 注册的应用，可以安装 MSAL 并编写与标识相关的代码。为了使 MSAL 能够与 v2.0 终结点通信，需要提供一些与应用注册相关的信息。
 
--	首先，使用包管理器控制台将 MSAL 添加到 TodoListClient 项目。
+- 首先，使用包管理器控制台将 MSAL 添加到 TodoListClient 项目。
 
     PM> Install-Package Microsoft.Identity.Client -ProjectName TodoListClient -IncludePrerelease
 
--	在 TodoListClient 项目中打开 `app.config`。替换 `<appSettings>` 节中的元素值，以反映在应用注册门户中输入的值。只要使用 MSAL，代码就会引用这些值。
-    -	`ida:ClientId` 是从门户复制的应用的**应用程序 ID**。
+- 在 TodoListClient 项目中打开 `app.config`。替换 `<appSettings>` 节中的元素值，以反映在应用注册门户中输入的值。只要使用 MSAL，代码就会引用这些值。
+    - `ida:ClientId` 是从门户复制的应用的**应用程序 ID**。
 
 - 在 TodoList-Service 项目中，打开项目根目录中的 `web.config`。
     - 将 `ida:Audience` 值替换为来自门户的相同**应用程序 ID**。
@@ -59,14 +59,14 @@ v2.0 终结点可让你快速地将身份验证添加桌面应用，同时支持
 ## 使用 MSAL 获取令牌
 MSAL 遵守的基本原理是，每当应用需要访问令牌时，只需调用 `app.AcquireToken(...)`，MSAL 就会负责其余的工作。
 
--	在 `TodoListClient` 项目中，打开 `MainWindow.xaml.cs` 并找到 `OnInitialized(...)` 方法。第一步是初始化应用的 `PublicClientApplication`（MSAL 表示本机应用程序的主类）。将在此处向 MSAL 传递其与 Azure AD 通信时所需的坐标，并告诉 ADAL 如何缓存令牌。
+- 在 `TodoListClient` 项目中，打开 `MainWindow.xaml.cs` 并找到 `OnInitialized(...)` 方法。第一步是初始化应用的 `PublicClientApplication`（MSAL 表示本机应用程序的主类）。将在此处向 MSAL 传递其与 Azure AD 通信时所需的坐标，并告诉 ADAL 如何缓存令牌。
 
 C#
 
     protected override async void OnInitialized(EventArgs e)
     {
         base.OnInitialized(e);
-    
+
         app = new PublicClientApplication(new FileCache());
         AuthenticationResult result = null;
         ...
@@ -80,14 +80,14 @@ C#
     // You can do so by trying to get a token from MSAL, using the method
     // AcquireTokenSilent.  This forces MSAL to throw an exception if it cannot
     // get a token for the user without showing a UI.
-    
+
     try
     {
         result = await app.AcquireTokenSilentAsync(new string[] { clientId });
-    
+
         // If we got here, a valid token is in the cache - or MSAL was able to get a new oen via refresh token.
         // Proceed to fetch the user's tasks from the TodoListService via the GetTodoList() method.
-    
+
         SignInButton.Content = "Clear Cache";
         GetTodoList();
     }
@@ -101,7 +101,7 @@ C#
         else
         {
             // Here, we catch all other MsalExceptions
-    
+
             string message = ex.Message;
             if (ex.InnerException != null)
             {
@@ -118,7 +118,7 @@ C#
     private async void SignIn(object sender = null, RoutedEventArgs args = null)
     {
         // TODO: Sign the user out if they clicked the "Clear Cache" button
-    
+
         // If the user clicked the 'Sign-In' button, force
         // MSAL to prompt the user for credentials by using
         // AcquireTokenAsync, a method that is guaranteed to show a prompt to the user.
@@ -136,7 +136,7 @@ C#
             // If MSAl cannot get a token, it will throw an exception.
             // If the user canceled the login, it will result in the
             // error code 'authentication_canceled'.
-    
+
             if (ex.ErrorCode == "authentication_canceled")
             {
                 MessageBox.Show("Sign in was canceled by the user");
@@ -149,13 +149,13 @@ C#
                 {
                     message += "Inner Exception : " + ex.InnerException.Message;
                 }
-    
+
                 MessageBox.Show(message);
             }
-    
+
             return;
         }
-    
+
     }
 
 - 如果用户成功登录，MSAL 将为你接收和缓存令牌，让你可以放心地继续调用 `GetTodoList()` 方法。获取用户任务的剩余步骤是实现 `GetTodoList()` 方法。
@@ -170,7 +170,7 @@ C#
             // Here, we try to get an access token to call the TodoListService
             // without invoking any UI prompt.  AcquireTokenSilentAsync forces
             // MSAL to throw an exception if it cannot get a token silently.
-    
+
             result = await app.AcquireTokenSilentAsync(new string[] { clientId });
 
         }
@@ -178,7 +178,7 @@ C#
         {
             // MSAL couldn't get a token silently, so show the user a message
             // and let them click the Sign-In button.
-    
+
             if (ex.ErrorCode == "user_interaction_required")
             {
                 MessageBox.Show("Please sign in first");
@@ -187,7 +187,7 @@ C#
             else
             {
                 // In any other case, an unexpected error occurred.
-    
+
                 string message = ex.Message;
                 if (ex.InnerException != null)
                 {
@@ -195,16 +195,16 @@ C#
                 }
                 MessageBox.Show(message);
             }
-    
+
             return;
             }
-    
+
             // Once the token has been returned by MSAL,
         // add it to the http authorization header,
         // before making the call to access the To Do list service.
-    
+
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.Token);
-    
+
             ...
     ...
 
@@ -218,7 +218,7 @@ C#
         // clear the MSAL token cache and show the user as signed out.
         // It's also necessary to clear the cookies from the browser
         // control so the next user has a chance to sign in.
-        
+
         if (SignInButton.Content.ToString() == "Clear Cache")
         {
             TodoList.ItemsSource = string.Empty;
@@ -227,7 +227,7 @@ C#
             SignInButton.Content = "Sign In";
             return;
         }
-        
+
         ...
 
 ## 运行

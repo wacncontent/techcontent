@@ -35,14 +35,14 @@ ms.author: adrianha
 1. 在 Visual Studio 中，右键单击解决方案 >“管理解决方案的 NuGet 程序包…”，然后在解决方案的所有项目中搜索并安装 **Microsoft.Azure.Mobile.Client.SQLiteStore** NuGet 包。
 
 2. 在解决方案资源管理器中，从名称中包含 **Portable** 的项目（该项目是可移植类库项目）中打开 TodoItemManager.cs 文件，然后取消注释以下预处理器指令：
-   
+
         #define OFFLINE_SYNC_ENABLED
 3. （可选）若要支持 Windows 设备，请安装以下 SQLite 运行时包之一：
-   
-   * **Windows 8.1 运行时：**安装 [SQLite for Windows 8.1][3]。
-   * **Windows Phone 8.1：**安装 [SQLite for Windows Phone 8.1][4]。
-   * **通用 Windows 平台** 安装[适用于通用 Windows 平台的 SQLite][5]。
-     
+
+    * **Windows 8.1 运行时：**安装 [SQLite for Windows 8.1][3]。
+    * **Windows Phone 8.1：**安装 [SQLite for Windows Phone 8.1][4]。
+    * **通用 Windows 平台** 安装[适用于通用 Windows 平台的 SQLite][5]。
+
      虽然该快速入门不包含通用 Windows 项目，但是 Xamarin Forms 支持通用 Windows 平台。
 4. （可选）在每个 Windows 应用项目中，右键单击“引用”>“添加引用...”，展开“Windows”文件夹>“扩展”。启用与 **Visual C++ 2013 Runtime for Windows** SDK 配套的 **SQLite for Windows** SDK。每个 Windows 平台的 SQLite SDK 名称略有不同。
 
@@ -109,7 +109,7 @@ ms.author: adrianha
                 }
             }
         }
-  
+
     此示例使用默认同步处理程序的简单错误处理。实际的应用程序使用自定义的 **IMobileServiceSyncHandler** 实现处理各种错误，如网络状况和服务器冲突。
 
 ##脱机同步注意事项

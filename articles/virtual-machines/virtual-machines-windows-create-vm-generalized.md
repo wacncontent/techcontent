@@ -47,14 +47,14 @@ VHD 使用的 URI 采用以下格式：https://**mystorageaccount**.blob.core.ch
         $rgName = "myResourceGroup"
         $subnetName = "mySubNet"
         $singleSubnet = New-AzureRmVirtualNetworkSubnetConfig -Name $subnetName -AddressPrefix 10.0.0.0/24
- 
+
 2. 创建虚拟网络。以下示例在**中国北部**位置创建具有 **10.0.0.0/16** 地址前缀的、名为 **myVnet** 的虚拟网络。
 
         $location = "China North"
         $vnetName = "myVnet"
         $vnet = New-AzureRmVirtualNetwork -Name $vnetName -ResourceGroupName $rgName -Location $location `
             -AddressPrefix 10.0.0.0/16 -Subnet $singleSubnet
-       
+
 ## 创建公共 IP 地址和网络接口
 
 若要与虚拟网络中的虚拟机通信，需要一个[公共 IP 地址](../virtual-network/virtual-network-ip-addresses-overview-arm.md)和网络接口。
@@ -102,32 +102,32 @@ VHD 使用的 URI 采用以下格式：https://**mystorageaccount**.blob.core.ch
     # Enter a new user name and password to use as the local administrator account 
     # for remotely accessing the VM.
     $cred = Get-Credential
-    
+
     # Name of the storage account where the VHD is located. This example sets the 
     # storage account name as "myStorageAccount"
     $storageAccName = "myStorageAccount"
-    
+
     # Name of the virtual machine. This example sets the VM name as "myVM".
     $vmName = "myVM"
-    
+
     # Size of the virtual machine. This example creates "Standard_D2_v2" sized VM. 
     # See the VM sizes documentation for more information: 
     # /documentation/articles/virtual-machines-windows-sizes/
     $vmSize = "Standard_D2_v2"
-    
+
     # Computer name for the VM. This examples sets the computer name as "myComputer".
     $computerName = "myComputer"
-    
+
     # Name of the disk that holds the OS. This example sets the 
     # OS disk name as "myOsDisk"
     $osDiskName = "myOsDisk"
-    
+
     # Assign a SKU name. This example sets the SKU name as "Standard_LRS"
     # Valid values for -SkuName are: Standard_LRS - locally redundant storage, Standard_ZRS - zone redundant
     # storage, Standard_GRS - geo redundant storage, Standard_RAGRS - read access geo redundant storage,
     # Premium_LRS - premium locally redundant storage. 
     $skuName = "Standard_LRS"
-    
+
     # Get the storage account where the uploaded image is stored
     $storageAcc = Get-AzureRmStorageAccount -ResourceGroupName $rgName -AccountName $storageAccName
 

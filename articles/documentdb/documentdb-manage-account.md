@@ -99,7 +99,7 @@ wacn.date: 11/28/2016
 
 了解如何[开始使用 DocumentDB 帐户](./documentdb-get-started-quickstart.md)。
 
-若要了解更多有关 DocumentDB 的信息，请参阅 [azure.cn](./index.md/) 上的 Azure DocumentDB 文档。
+若要了解更多有关 DocumentDB 的信息，请参阅 [azure.cn](./index.md) 上的 Azure DocumentDB 文档。
 
 <!--Image references-->
 [1]: ./media/documentdb-manage-account/documentdb_add_region-1.png

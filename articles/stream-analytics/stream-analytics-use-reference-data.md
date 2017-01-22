@@ -86,8 +86,8 @@ ms.author: jeffstok
 ## 有关刷新引用数据的提示 ##
 
 1. 覆盖引用数据 blob 不会导致流分析重新加载 blob，并且在某些情况下，它可能会导致作业失败。更改引用数据的建议方法是使用作业输入中定义的相同容器和路径模式添加新的 blob，并且使用的日期/时间**大于**序列中最后一个 blob 指定的日期/时间。
-2.	引用数据 blob 并不按 blob 的“上次修改”时间排序，而是按 blob 名称中使用 {date} 和 {time} 替换项指定的日期和时间排序。
-3.	有时，作业必须按时返回，因此不能变更或删除引用数据 blob。
+2. 引用数据 blob 并不按 blob 的“上次修改”时间排序，而是按 blob 名称中使用 {date} 和 {time} 替换项指定的日期和时间排序。
+3. 有时，作业必须按时返回，因此不能变更或删除引用数据 blob。
 
 ## 获取帮助
 如需进一步的帮助，请尝试我们的 [Azure 流分析论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=AzureStreamAnalytics)。

@@ -15,7 +15,7 @@ wacn.date: 03/17/2016
 # Azure SDK for .NET 2.8、2.8.1 和 2.8.2
 
 ##概述
- 
+
 本文包含 Azure SDK for .NET 2.8、2.8.1 和 2.8.2 版本的发行说明（包括已知问题和重大更改）。
 
 有关此版本中的新功能和更新的完整列表，请参阅 [Azure SDK 2.8 for Visual Studio 2013 和 Azure SDK 2.8 for Visual Studio 2015](https://azure.microsoft.com/zh-cn/blog/announcing-the-azure-sdk-2-8-for-net/) 通知。
@@ -27,7 +27,7 @@ wacn.date: 03/17/2016
 [Azure SDK for .NET 2.8 for Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkId=699285)
 
 [Azure SDK for .NET 2.8 for Visual Studio 2013](http://go.microsoft.com/fwlink/?LinkId=699287)
- 
+
 ### .NET 4.5.2 支持 
 
 ####已知问题
@@ -73,7 +73,7 @@ Azure 资源组项目提供的 PowerShell 脚本在此版本中已更新，可�
 ## Azure SDK for .NET 2.8.1
 
 ### Visual Studio 2013 和 Visual Studio 2015 的已知问题
- 
+
 1. 以槽为目标的触发 Web 作业发布将显示错误，并且不会设置计划，但会将 Web 作业推送到 Azure。需要计划作业的客户可以使用 Azure 经典管理门户来设置 Web 作业的计划。 
 2. Python 客户可能会遇到调试器问题。服务团队正在针对此问题推出修复程序，但如果客户受到影响，请通过论坛、通知博客或发行说明意见部分告知 Microsoft。 
 3. 某些区域（如印度南部）的客户会遇到 Azure Web 应用预配错误。这与经典管理门户中的情况一致，遇到此问题的客户可以使用 Azure 经典管理门户来请求这些地理区域的发布访问权限。使用 Azure 经典管理门户请求这些区域的访问权限后，预配应能正常进行。

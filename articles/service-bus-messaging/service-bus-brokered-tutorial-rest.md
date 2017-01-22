@@ -72,65 +72,65 @@ wacn.date: 01/09/2017
         using System.Security.Cryptography;
         using System.Text;
         using System.Xml;
-    
+
 4. 如有需要，将该程序的命名空间从 Visual Studio 默认值重命名为 `Microsoft.ServiceBus.Samples`。
 
 5. 在 `Program` 类中，添加以下全局变量：
-    
+
         static string serviceNamespace;
         static string baseAddress;
         static string token;
         const string sbHostName = "servicebus.chinacloudapi.cn";
-    
+
 6. 在 `Main()` 中，粘贴以下代码：
 
         Console.Write("Enter your service namespace: ");
         serviceNamespace = Console.ReadLine();
-    
+
         Console.Write("Enter your SAS key: ");
         string SASKey = Console.ReadLine();
-    
+
         baseAddress = "https://" + serviceNamespace + "." + sbHostName + "/";
         try
         {
             token = GetSASToken("RootManageSharedAccessKey", SASKey);
-    
+
             string queueName = "Queue" + Guid.NewGuid().ToString();
-    
+
             // Create and put a message in the queue
             CreateQueue(queueName, token);
             SendMessage(queueName, "msg1");
             string msg = ReceiveAndDeleteMessage(queueName);
-    
+
             string topicName = "Topic" + Guid.NewGuid().ToString();
             string subscriptionName = "Subscription" + Guid.NewGuid().ToString();
             CreateTopic(topicName);
             CreateSubscription(topicName, subscriptionName);
             SendMessage(topicName, "msg2");
-    
+
             Console.WriteLine(ReceiveAndDeleteMessage(topicName + "/Subscriptions/" + subscriptionName));
-    
+
             // Get an Atom feed with all the queues in the namespace
             Console.WriteLine(GetResources("$Resources/Queues"));
-    
+
             // Get an Atom feed with all the topics in the namespace
             Console.WriteLine(GetResources("$Resources/Topics"));
-    
+
             // Get an Atom feed with all the subscriptions for the topic we just created
             Console.WriteLine(GetResources(topicName + "/Subscriptions"));
-    
+
             // Get an Atom feed with all the rules for the topic and subscription we just created
             Console.WriteLine(GetResources(topicName + "/Subscriptions/" + subscriptionName + "/Rules"));
-    
+
             // Delete the queue we created
             DeleteResource(queueName);
-    
+
             // Delete the topic we created
             DeleteResource(topicName);
-    
+
             // Get an Atom feed with all the topics in the namespace, it shouldn't have the one we created now
             Console.WriteLine(GetResources("$Resources/Topics"));
-    
+
             // Get an Atom feed with all the queues in the namespace, it shouldn't have the one we created now
             Console.WriteLine(GetResources("$Resources/Queues"));
         }
@@ -148,10 +148,10 @@ wacn.date: 01/09/2017
                 }
             }
         }
-    
+
         Console.WriteLine("\nPress ENTER to exit.");
         Console.ReadLine();
-    
+
 ## 创建管理凭据
 
 下一步是编写一个方法，用于处理上一步中输入的命名空间和 SAS 密钥，并返回一个 SAS 令牌。此示例创建了一个有效期为一小时的 SAS 令牌。
@@ -214,15 +214,15 @@ wacn.date: 01/09/2017
             Console.WriteLine("\nSending message {0} - to address {1}", body, fullAddress);
             WebClient webClient = new WebClient();
             webClient.Headers[HttpRequestHeader.Authorization] = token;
-    
+
             webClient.UploadData(fullAddress, "POST", Encoding.UTF8.GetBytes(body));
         }
-    
+
 2. 标准中转消息属性位于 `BrokerProperties` HTTP 标头中。中转站属性必须以 JSON 格式序列化。若要指定 30 秒的 **TimeToLive** 值并向消息添加消息标签“M1”，请在前面的示例所示的 `webClient.UploadData()` 调用之前添加以下代码：
 
         // Add brokered message properties "TimeToLive" and "Label"
         webClient.Headers.Add("BrokerProperties", "{ "TimeToLive":30, "Label":"M1"}");
-    
+
     请注意，已添加并将继续添加中转消息属性。因此，发送请求必须指定支持属于请求一部分的所有中转消息属性的 API 版本。如果指定的 API 版本不支持中转消息属性，则忽略该属性。
 
 3. 自定义消息属性被定义为一组键值对。每个自定义属性都存储在其自身的 TPPT 标头中。若要添加自定义属性“Priority”和“Customer”，请在前面的示例所示的 `webClient.UploadData()` 调用之前直接添加以下代码：
@@ -230,7 +230,7 @@ wacn.date: 01/09/2017
         // Add custom properties "Priority" and "Customer".
         webClient.Headers.Add("Priority", "High");
         webClient.Headers.Add("Customer", "12345");
-    
+
 ## 从队列接收并删除消息
 
 下一步是添加使用 REST 样式的 HTTP DELETE 命令从队列接收并删除消息的方法。

@@ -82,7 +82,7 @@ ms.author: cynthn
     # Set the URI for the VHD that you want to use. In this example, the VHD file named "myOsDisk.vhd" is kept
     # in a storage account named "myStorageAccount" in a container named "myContainer".
     $osDiskUri = "https://myStorageAccount.blob.core.chinacloudapi.cn/myContainer/myOsDisk.vhd"
-    
+
     # Set the VM name and size. This example sets the VM name to "myVM" and the VM size to "Standard_A2".
     $vmName = "myVM"
     $vmConfig = New-AzureRmVMConfig -VMName $vmName -VMSize "Standard_A2"
@@ -119,7 +119,7 @@ ms.author: cynthn
                             True         OK OK   
 
 ## 验证是否已创建 VM 
- 
+
 应会在 [Azure 门户预览](https://portal.azure.cn)的“浏览”>“虚拟机”下看到新建的 VM，也可以使用以下 PowerShell 命令查看该 VM：
 
     $vmList = Get-AzureRmVM -ResourceGroupName $rgName

@@ -36,7 +36,7 @@ ms.author: MikeRayMSFT
 相关主题包括：
 
  - [在 Azure VM (GUI) 中配置 AlwaysOn 可用性组](./virtual-machines-windows-portal-sql-alwayson-availability-groups-manual.md)
- 
+
  - [使用 Azure Resource Manager 和 PowerShell 配置 VNet 到 VNet 连接](../vpn-gateway/vpn-gateway-vnet-vnet-rm-ps.md)
 
 [!INCLUDE [启动 PowerShell 会话](../../includes/sql-vm-powershell.md)]
@@ -188,7 +188,7 @@ ms.author: MikeRayMSFT
         [int]$ProbePort = <nnnnn>
 
         Import-Module FailoverClusters
-        
+
         Get-ClusterResource $IPResourceName | Set-ClusterParameter -Multiple @{"Address"="$ILBIP";"ProbePort"=$ProbePort;"SubnetMask"="255.255.255.255";"Network"="$ClusterNetworkName";"EnableDhcp"=0}
 
 - 更新变量并运行 PowerShell 脚本，以配置新侦听器的 IP 地址和端口。
@@ -232,7 +232,7 @@ ms.author: MikeRayMSFT
         sqlmd -S <listenerName> -E
 
     如果侦听器使用的端口不是默认端口 (1433)，请在连接字符串中指定该端口。例如，以下 sqlcmd 命令连接到位于端口 1435 的侦听器：
-    
+
         sqlcmd -S <listenerName>,1435 -E
 
 SQLCMD 连接将自动连接到托管主副本的 SQL Server 实例。

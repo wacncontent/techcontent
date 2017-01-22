@@ -33,7 +33,7 @@ ms.author: larryfr
 
 * **Azure HDInsight（HDInsight 上的 Hadoop）群集（基于 Windows）**
 * **配备 Azure PowerShell 的工作站**。
-  
+
 [!INCLUDE [upgrade-powershell](../../includes/hdinsight-use-latest-powershell.md)]
 
 ## <a id="powershell"></a>使用 Azure PowerShell 运行 MapReduce 作业
@@ -91,13 +91,13 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 MapRed
         Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $wordCountJob.JobId -StandardOutput
 
 2. 打开一个新的 **Azure PowerShell** 命令提示符。将目录更改为 **mapreducejob.ps1** 文件所在位置，然后使用以下命令来运行脚本：
-   
+
         .\mapreducejob.ps1
-   
+
     运行脚本时，系统将提示对 Azure 订阅进行身份验证。还会要求你提供 HDInsight 群集的 HTTPS/Admin 帐户名称和密码。
 
 3. 作业完成后，应显示如下输出：
-    
+
         Cluster         : CLUSTERNAME
         ExitCode        : 0
         Name            : wordcount
@@ -107,7 +107,7 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 MapRed
         StatusDirectory : f1ed2028-afe8-402f-a24b-13cc17858097
         SubmissionTime  : 12/5/2014 8:34:09 PM
         JobId           : job_1415949758166_0071
-    
+
     此输出指示作业已成功完成。
 
     > [!NOTE] 如果 **ExitCode** 的值不是 0，请参阅[故障排除](#troubleshooting)。

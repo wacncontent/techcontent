@@ -221,6 +221,6 @@ ms.author: gwallace
 
 如需负载均衡选项的其他常规信息，请参阅：
 
-- [Azure 流量管理器](../traffic-manager/index.md/)
+- [Azure 流量管理器](../traffic-manager/index.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

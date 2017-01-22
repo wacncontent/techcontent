@@ -65,17 +65,17 @@ NuGet 程序包会下载并添加所需的程序集引用，并将以下部分�
 
 使用来自 Azure 门户预览中的缓存边栏选项卡的值配置属性，并根据需要配置其他值。有关访问缓存属性的说明，请参阅[配置 Redis 缓存设置](./cache-configure.md#configure-redis-cache-settings)。
 
--	**host** - 指定缓存终结点。
--	**port** - 使用非 SSL 端口或 SSL 端口，具体取决于 SSL 设置。
--	**accessKey** - 使用缓存的主密钥或辅助密钥。
--	**ssl** - 如果要使用 SSL 保护缓存/客户端通信，则为 true；否则为 false。请务必指定正确的端口。
-    -	默认情况下，将为新缓存禁用非 SSL 端口。为此设置指定 true 可使用 SSL 端口。有关启用非 SSL 端口的详细信息，请参阅[配置缓存](./cache-configure.md)主题中的[访问端口](./cache-configure.md#access-ports)部分。
--	**throwOnError** - 如果你想要在失败时引发异常，则为 true；如果你想要操作以静默方式失败，则为 false。可以通过检查静态 Microsoft.Web.Redis.RedisSessionStateProvider.LastException 属性来检查失败。默认值为 true。
--	**retryTimeoutInMilliseconds** - 将在此时间间隔内重试失败的操作，以毫秒为单位指定。首次重试在 20 毫秒后进行，然后重试每隔一秒进行，直到 retryTimeoutInMilliseconds 间隔到期。在此时间间隔过后，将立即重试操作最后一次。如果操作仍失败，则会将异常返回给调用方，具体取决于 throwOnError 设置。默认值为 0，这意味着不重试。
--	**databaseId** - 指定要用于缓存输出数据的数据库。如果未指定，则使用默认值 0。
--	**applicationName** - 密钥存储在 redis 中作为 `{<Application Name>_<Session ID>}_Data`。这使多个应用程序可以共享同一密钥。此参数是可选的，如果未提供它，则使用默认值。
--	**connectionTimeoutInMilliseconds** - 此设置允许你覆盖 StackExchange.Redis 客户端中的 connectTimeout 设置。如果未指定，则使用默认 connectTimeout 设置 5000。有关详细信息，请参阅 [StackExchange.Redis 配置模型](http://go.microsoft.com/fwlink/?LinkId=398705)。
--	**operationTimeoutInMilliseconds** - 此设置允许你覆盖 StackExchange.Redis 客户端中的 syncTimeout 设置。如果未指定，则使用默认 syncTimeout 设置 1000。有关详细信息，请参阅 [StackExchange.Redis 配置模型](http://go.microsoft.com/fwlink/?LinkId=398705)。
+- **host** - 指定缓存终结点。
+- **port** - 使用非 SSL 端口或 SSL 端口，具体取决于 SSL 设置。
+- **accessKey** - 使用缓存的主密钥或辅助密钥。
+- **ssl** - 如果要使用 SSL 保护缓存/客户端通信，则为 true；否则为 false。请务必指定正确的端口。
+    - 默认情况下，将为新缓存禁用非 SSL 端口。为此设置指定 true 可使用 SSL 端口。有关启用非 SSL 端口的详细信息，请参阅[配置缓存](./cache-configure.md)主题中的[访问端口](./cache-configure.md#access-ports)部分。
+- **throwOnError** - 如果你想要在失败时引发异常，则为 true；如果你想要操作以静默方式失败，则为 false。可以通过检查静态 Microsoft.Web.Redis.RedisSessionStateProvider.LastException 属性来检查失败。默认值为 true。
+- **retryTimeoutInMilliseconds** - 将在此时间间隔内重试失败的操作，以毫秒为单位指定。首次重试在 20 毫秒后进行，然后重试每隔一秒进行，直到 retryTimeoutInMilliseconds 间隔到期。在此时间间隔过后，将立即重试操作最后一次。如果操作仍失败，则会将异常返回给调用方，具体取决于 throwOnError 设置。默认值为 0，这意味着不重试。
+- **databaseId** - 指定要用于缓存输出数据的数据库。如果未指定，则使用默认值 0。
+- **applicationName** - 密钥存储在 redis 中作为 `{<Application Name>_<Session ID>}_Data`。这使多个应用程序可以共享同一密钥。此参数是可选的，如果未提供它，则使用默认值。
+- **connectionTimeoutInMilliseconds** - 此设置允许你覆盖 StackExchange.Redis 客户端中的 connectTimeout 设置。如果未指定，则使用默认 connectTimeout 设置 5000。有关详细信息，请参阅 [StackExchange.Redis 配置模型](http://go.microsoft.com/fwlink/?LinkId=398705)。
+- **operationTimeoutInMilliseconds** - 此设置允许你覆盖 StackExchange.Redis 客户端中的 syncTimeout 设置。如果未指定，则使用默认 syncTimeout 设置 1000。有关详细信息，请参阅 [StackExchange.Redis 配置模型](http://go.microsoft.com/fwlink/?LinkId=398705)。
 
 有关这些属性的详细信息，请参阅[宣布推出适用于 Redis 的 ASP.NET 会话状态提供程序](http://blogs.msdn.com/b/webdev/archive/2014/05/12/announcing-asp-net-session-state-provider-for-redis-preview-release.aspx)中的原始博客文章公告。
 

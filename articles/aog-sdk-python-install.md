@@ -48,4 +48,4 @@ azure-sdk-for-python 已经发布了较多的版本，而[官网](./python-how-t
 2. 源码安装
 
  ![install-source](./media/aog-sdk-python-install/install-source.png)
- 
+

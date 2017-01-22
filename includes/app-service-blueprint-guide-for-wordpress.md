@@ -2,7 +2,7 @@
 * [WordPress 是什么？](https://wordpress.org/)
 * [如何设置企业级 WordPress Web 应用](../articles/app-service-web/web-sites-php-enterprise-wordpress.md)
 * [深入了解如何管理群集](https://github.com/fanjeffrey/axiom.articles/tree/master/pxc)
-  
+
 ## WordPress 应用程序故障排除
 * [如何排除你的 WordPress 应用故障](https://sunithamk.wordpress.com/2014/09/04/wordpress-troubleshooting-techniques-on-azure-websites/)
 * [使用各种自动修复规则来自动解决实时事件](http://microsoftazurewebsitescheatsheet.info/#auto-heal)

@@ -42,7 +42,7 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
 有关存储帐户容量和性能目标的详细信息，请参阅 [Azure 存储可伸缩性和性能目标](./storage-scalability-targets.md)。
 
-> [!NOTE] 当你创建 Azure 虚拟机时，如果在部署位置中还没有存储帐户，则会在该位置自动创建一个存储帐户。因此，没有必要按照下面的步骤来创建虚拟机磁盘的存储帐户。存储帐户名称将基于虚拟机名称。请参阅 [Azure 虚拟机文档](../virtual-machines/index.md/)以了解更多详细信息。
+> [!NOTE] 当你创建 Azure 虚拟机时，如果在部署位置中还没有存储帐户，则会在该位置自动创建一个存储帐户。因此，没有必要按照下面的步骤来创建虚拟机磁盘的存储帐户。存储帐户名称将基于虚拟机名称。请参阅 [Azure 虚拟机文档](../virtual-machines/index.md)以了解更多详细信息。
 
 ##<a id="create-a-storage-account"></a> 创建存储帐户
 
@@ -166,7 +166,7 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
 ## 后续步骤
 
-- 若要了解有关 Azure 存储的详细信息，请参阅 [Azure 存储文档](./index.md/)。
+- 若要了解有关 Azure 存储的详细信息，请参阅 [Azure 存储文档](./index.md)。
 - 访问 [Azure 存储团队博客](http://blogs.msdn.com/b/windowsazurestorage/)。
 - [使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)
 

@@ -20,7 +20,7 @@ ms.author: huvalo
 
 # 使用 Azure 应用服务 Web 应用配置 Python
 
-本教程介绍在 [Azure 应用服务 Web 应用](./index.md/)中创作和配置符合基本 Web 服务器网关接口 (WSGI) 的 Python 应用程序的选项。
+本教程介绍在 [Azure 应用服务 Web 应用](./index.md)中创作和配置符合基本 Web 服务器网关接口 (WSGI) 的 Python 应用程序的选项。
 
 其中讲解了 Git 部署的一些功能，如使用 requirements.txt 安装虚拟环境和包。
 
@@ -278,10 +278,10 @@ Python 3.4 的示例 `web.config`：
     def get_wsgi_handler(handler_name):
         if not handler_name:
             raise Exception('WSGI_ALT_VIRTUALENV_HANDLER env var must be set')
-    
+
         if not isinstance(handler_name, str):
             handler_name = to_str(handler_name)
-    
+
         module_name, _, callable_name = handler_name.rpartition('.')
         should_call = callable_name.endswith('()')
         callable_name = callable_name[:-2] if should_call else callable_name
@@ -305,10 +305,10 @@ Python 3.4 的示例 `web.config`：
                 name_list.insert(0, (callable_name, should_call))
                 handler = None
                 last_tb = ': ' + traceback.format_exc()
-    
+
         if handler is None:
             raise ValueError('"%s" could not be imported%s' % (handler_name, last_tb))
-    
+
         return handler
 
     activate_this = os.getenv('WSGI_ALT_VIRTUALENV_ACTIVATE_THIS')
@@ -329,9 +329,9 @@ Python 3.4 的示例 `web.config`：
         import site
         sys.executable = activate_this
         old_sys_path, sys.path = sys.path, []
-    
+
         site.main()
-    
+
         sys.path.insert(0, '')
         for item in old_sys_path:
             if item not in sys.path:

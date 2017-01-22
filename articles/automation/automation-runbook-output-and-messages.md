@@ -80,10 +80,10 @@ Runbook 作业的详细流将是：
 
 以下是示例输出类型列表：
 
--	System.String
--	System.Int32
--	System.Collections.Hashtable
--	Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
+- System.String
+- System.Int32
+- System.Collections.Hashtable
+- Microsoft.Azure.Commands.Compute.Models.PSVirtualMachine
 
 以下示例 Runbook 将输出一个字符串对象，并包含其输出类型的声明。如果 Runbook 输出了特定类型的数组，则你仍应该指定相对于该类型数组的类型。
 
@@ -173,7 +173,7 @@ Windows PowerShell 使用 [preference 变量](http://technet.microsoft.com/zh-cn
        $status = $job.Status
        $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped")
     }
-    
+
     Get-AzureAutomationJobOutput –AutomationAccountName "MyAutomationAccount" -Id $job.Id –Stream Output
 
 ## 后续步骤

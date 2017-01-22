@@ -58,7 +58,7 @@ ms.tgt_pltfrm: NA
     -- Execute on the master database of the target server (server2)
     -- Start copying from Server1 to Server2
     CREATE DATABASE Database1_copy AS COPY OF server1.Database1;
-    
+
 ## 监视复制操作的进度
 
 通过查询 sys.databases 和 sys.dm\_database\_copies 视图来监视复制过程。在复制过程中，新数据库的 sys.databases 视图的 state\_desc 列将设置为 COPYING。
@@ -87,6 +87,6 @@ ms.tgt_pltfrm: NA
 - [使用 SQL Server Management Studio 连接到 SQL 数据库并执行示例 T-SQL 查询](./sql-database-connect-query-ssms.md)
 - [将数据库导出到 BACPAC](./sql-database-export-powershell.md)
 - [业务连续性概述](./sql-database-business-continuity.md)
-- [SQL 数据库文档](./index.md/)
+- [SQL 数据库文档](./index.md)
 
 <!---HONumber=Mooncake_1024_2016-->

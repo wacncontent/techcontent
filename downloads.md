@@ -96,7 +96,7 @@ wacn.date: 11/25/2016
       <!--li><a href="http://nuget.org/packages/WindowsAzure.MobileServices/">Windows 应用商店 C# 安装</a></li-->
       <!--li><a href="http://nuget.org/packages/WindowsAzure.MobileServices.WinJS/">Windows 应用商店 JS 安装</a></li-->
       <li><a href="http://nuget.org/packages/WindowsAzure.MobileServices/">Windows Phone 8 安装</a></li>
-      <li><a href="./articles/mobile-services/index.md/">文档</a></li>
+      <li><a href="./articles/mobile-services/index.md">文档</a></li>
     </ul>
   </div>
   <div>

@@ -141,7 +141,7 @@ ms.author: suchiagicha
             ProtectionLevel = ProtectionLevel.EncryptAndSign
         };
         x509Credentials.RemoteCommonNames.Add("ServiceFabric-Test-Cert");
-    
+
         FabricTransportSettings transportSettings = new FabricTransportSettings
         {
             SecurityCredentials = x509Credentials,

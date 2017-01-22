@@ -29,7 +29,7 @@ ms.author: ashwink
 Webhook 可以使用以下任一方法进行身份验证：
 
 1. **基于令牌的授权** - 保存的 webhook URI 具有令牌 ID，例如 `https://mysamplealert/webcallback?tokenid=sometokenid&someparameter=somevalue`
-2.	**基本授权** - 保存的 webhook URI 具有用户名和密码，例如 `https://userid:password@mysamplealert/webcallback?someparamater=somevalue&foo=bar`
+2. **基本授权** - 保存的 webhook URI 具有用户名和密码，例如 `https://userid:password@mysamplealert/webcallback?someparamater=somevalue&foo=bar`
 
 ## 负载架构
 POST 操作对于所有基于活动日志的警报包含以下 JSON 有效负载和架构。此架构类似于基于度量值的警报使用的架构。

@@ -64,7 +64,7 @@ ms.author: adegeo
           <Task commandLine="Startup.cmd" executionContext="limited" taskType="simple" />
         </Startup>
       </WebRole>
-    
+
       <WorkerRole name="WorkerRole1">
         <ConfigurationSettings>
           <Setting name="DiagnosticsConnectionString" />
@@ -110,7 +110,7 @@ ms.author: adegeo
 云服务设置配置由 **ServiceConfiguration.cscfg** 文件中的值确定。指定要为此文件中每个角色部署的实例数。在服务定义文件中定义的配置设置值将添加到服务配置文件。与云服务相关联的所有管理证书的指纹也将添加到该文件。[Azure 服务配置架构（.cscfg 文件）](https://msdn.microsoft.com/zh-cn/library/azure/ee758710.aspx)为服务配置文件提供允许的格式。
 
 服务配置文件不与应用程序一起打包，而是作为单独的文件上传到 Azure 并用于配置云服务。无需重新部署云服务即可上传新的服务配置文件。云服务正在运行时可以更改云服务的配置值。以下示例显示了可为 Web 角色和辅助角色定义的配置设置：
- 
+
     <?xml version="1.0"?>
     <ServiceConfiguration serviceName="MyServiceName" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration">
       <Role name="WebRole1">
@@ -118,7 +118,7 @@ ms.author: adegeo
         <ConfigurationSettings>
           <Setting name="SettingName" value="SettingValue" />
         </ConfigurationSettings>
-    
+
         <Certificates>
           <Certificate name="CertificateName" thumbprint="CertThumbprint" thumbprintAlgorithm="sha1" />
           <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption"

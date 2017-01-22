@@ -83,7 +83,7 @@ ms.author: ganesr
 
         $circuit = Get-AzureRmExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "MyRG"
     $auth1 = Get-AzureRmExpressRouteCircuitAuthorization -ExpressRouteCircuit $circuit -Name "MyAuthorization1"
-        
+
 对此操作的响应将包含授权密钥和状态：
 
         Name                   : MyAuthorization1
@@ -99,7 +99,7 @@ ms.author: ganesr
 
     $circuit = Get-AzureRmExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "MyRG"
     $authorizations = Get-AzureRmExpressRouteCircuitAuthorization -ExpressRouteCircuit $circuit
-    
+
 **添加授权**
 
 线路所有者可以使用以下 cmdlet 添加授权：
@@ -107,7 +107,7 @@ ms.author: ganesr
     $circuit = Get-AzureRmExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "MyRG"
     Add-AzureRmExpressRouteCircuitAuthorization -ExpressRouteCircuit $circuit -Name "MyAuthorization2"
     Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $circuit
-    
+
     $circuit = Get-AzureRmExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "MyRG"
     $authorizations = Get-AzureRmExpressRouteCircuitAuthorization -ExpressRouteCircuit $circuit
 

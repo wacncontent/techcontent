@@ -124,7 +124,7 @@ csharp
     Job JobPrepReleaseSampleJob not found, creating...
     Submitting tasks and awaiting completion...
     All tasks completed.
-    
+
     Contents of shared\job_prep_and_release.txt on tvm-2434664350_1-20160623t173951z:
     -------------------------------------------
     tvm-2434664350_1-20160623t173951z tasks:
@@ -132,7 +132,7 @@ csharp
       task004
       task005
       task006
-    
+
     Contents of shared\job_prep_and_release.txt on tvm-2434664350_2-20160623t173951z:
     -------------------------------------------
     tvm-2434664350_2-20160623t173951z tasks:
@@ -140,23 +140,23 @@ csharp
       task002
       task003
       task007
-    
+
     Waiting for job JobPrepReleaseSampleJob to reach state Completed
     ...
-    
+
     tvm-2434664350_1-20160623t173951z:
       Prep task exit code:    0
       Release task exit code: 0
-    
+
     tvm-2434664350_2-20160623t173951z:
       Prep task exit code:    0
       Release task exit code: 0
-    
+
     Delete job? [yes] no
     yes
     Delete pool? [yes] no
     yes
-    
+
     Sample complete, hit ENTER to exit...
 
 >[!NOTE] 由于新池中各个节点的创建和启动时间并不一样（某些节点比其他节点更早做好任务准备），你可能看到不同的输出。具体而言，因为任务快速完成，池的某个节点可能执行作业的所有任务。如果发生这种情况，你会发现未执行任何任务的节点没有作业准备和作业释放任务存在。

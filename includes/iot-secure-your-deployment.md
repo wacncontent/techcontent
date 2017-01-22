@@ -110,10 +110,10 @@ Azure IoT 中心引入的数据可供多种服务（例如 Azure 流分析和 Az
 [lnk-use-x509]: ../articles/iot-hub/iot-hub-devguide-security.md
 [lnk-tls12]: https://tools.ietf.org/html/rfc5246
 [lnk-service-tokens]: ../articles/iot-hub/iot-hub-devguide-security.md#use-security-tokens-from-service-components
-[lnk-docdb]: ../articles/documentdb/index.md/
-[lnk-asa]: ../articles/stream-analytics/index.md/
-[lnk-appservices]: ../articles/app-service/index.md/
-[lnk-logicapps]: ../articles/app-service/index.md/logic/
-[lnk-blob]: ../articles/storage/index.md/
+[lnk-docdb]: ../articles/documentdb/index.md
+[lnk-asa]: ../articles/stream-analytics/index.md
+[lnk-appservices]: ../articles/app-service/index.md
+[lnk-logicapps]: ../articles/app-service/index.mdlogic/
+[lnk-blob]: ../articles/storage/index.md
 
 <!---HONumber=Mooncake_1226_2016-->

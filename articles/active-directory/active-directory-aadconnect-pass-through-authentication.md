@@ -92,17 +92,17 @@ Azure AD 直通身份验证为这些客户提供了一个简单的解决方案�
 
 ### 步骤 1：在未注册的情况下安装连接器
 
-1.	下载最新的[连接器](https://go.microsoft.com/fwlink/?linkid=837580)。
-2.	以管理员身份打开命令提示符。
-3.	运行以下命令，其中 /q 表示静默安装 — 此安装不会提示你接受最终用户许可协议。
+1. 下载最新的[连接器](https://go.microsoft.com/fwlink/?linkid=837580)。
+2. 以管理员身份打开命令提示符。
+3. 运行以下命令，其中 /q 表示静默安装 — 此安装不会提示你接受最终用户许可协议。
 
         AADApplicationProxyConnectorInstaller.exe REGISTERCONNECTOR="false" /q
 
 ### 步骤 2：向 Azure AD 注册连接器以进行直通身份验证
 
-1.	以管理员身份打开 PowerShell 窗口
-2.	导航到“C:\\Program Files\\Microsoft AAD App Proxy Connector”，然后运行以下脚本：\\RegisterConnector.ps1 -modulePath "C:\\Program Files\\Microsoft AAD App Proxy Connector\\Modules" -moduleName "AppProxyPSModule" -Feature PassthroughAuthentication
-3.	出现提示时，输入 Azure AD 租户管理员帐户的凭据。
+1. 以管理员身份打开 PowerShell 窗口
+2. 导航到“C:\\Program Files\\Microsoft AAD App Proxy Connector”，然后运行以下脚本：\\RegisterConnector.ps1 -modulePath "C:\\Program Files\\Microsoft AAD App Proxy Connector\\Modules" -moduleName "AppProxyPSModule" -Feature PassthroughAuthentication
+3. 出现提示时，输入 Azure AD 租户管理员帐户的凭据。
 
 ## 直通身份验证故障排除
 对直通身份验证进行故障排除时，可能存在一些不同类别的问题。根据问题的类型，可能需要在不同位置查找问题的原因。

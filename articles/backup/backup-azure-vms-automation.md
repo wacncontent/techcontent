@@ -46,7 +46,7 @@ ms.author: markgal; trinadhk
 2. 键入以下命令查找可用的 Azure 备份 PowerShell cmdlet：
 
         PS C:\> Get-Command *azurermrecoveryservices*
-    
+
         CommandType     Name                                               Version    Source
         -----------     ----                                               -------    ------
         Cmdlet          Backup-AzureRmRecoveryServicesBackupItem           1.4.0      AzureRM.RecoveryServices.Backup
@@ -98,11 +98,11 @@ ms.author: markgal; trinadhk
         PS C:\> New-AzureRmResourceGroup -Name "test-rg" -Location "China North"
 
 3. 使用 **[New-AzureRmRecoveryServicesVault](https://msdn.microsoft.com/zh-cn/library/mt643910.aspx)** cmdlet 创建新的保管库。确保为保管库指定的位置与用于资源组的位置是相同的。
-   
+
         PS C:\> New-AzureRmRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "China North"
 
 4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md#locally-redundant-storage/) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage/)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
-   
+
         PS C:\> $vault1 = Get-AzureRmRecoveryServicesVault -Name "testVault"
         PS C:\> Set-AzureRmRecoveryServicesBackupProperties  -Vault $vault1 -BackupStorageRedundancy GeoRedundant
 
@@ -292,9 +292,9 @@ ms.author: markgal; trinadhk
     PS C:\> $vm = New-AzureRmVMConfig -VMSize $obj.HardwareProfile.VirtualMachineSize -VMName "testrestore"
 
 4. 附加 OS 磁盘和数据磁盘。
-   
+
       对于非加密型 VM，
-        
+
         PS C:\> Set-AzureRmVMOSDisk -VM $vm -Name "osdisk" -VhdUri $obj.StorageProfile.OSDisk.VirtualHardDisk.Uri -CreateOption "Attach"
         PS C:\> $vm.StorageProfile.OsDisk.OsType = $obj.StorageProfile.OSDisk.OperatingSystemType foreach($dd in $obj.StorageProfile.DataDisks)
         {
@@ -302,7 +302,7 @@ ms.author: markgal; trinadhk
         }
 
       对于加密型 VM，需在附加磁盘前指定[密钥保管库信息](https://msdn.microsoft.com/zh-cn/library/dn868052.aspx)。
-      
+
         PS C:\> Set-AzureRmVMOSDisk -VM $vm -Name "osdisk" -VhdUri $obj.StorageProfile.OSDisk.VirtualHardDisk.Uri -DiskEncryptionKeyUrl "https://ContosoKeyVault.vault.chinacloudapi.cn:443/secrets/ContosoSecret007" -DiskEncryptionKeyVaultId "/subscriptions/abcdedf007-4xyz-1a2b-0000-12a2b345675c/resourceGroups/ContosoRG108/providers/Microsoft.KeyVault/vaults/ContosoKeyVault" -KeyEncryptionKeyUrl "https://ContosoKeyVault.vault.chinacloudapi.cn:443/keys/ContosoKey007" -KeyEncryptionKeyVaultId "subscriptions/abcdedf007-4xyz-1a2b-0000-12a2b345675c/resourceGroups/ContosoRG108/providers/Microsoft.KeyVault/vaults/ContosoKeyVault" -CreateOption "Attach" -Windows
         PS C:\> $vm.StorageProfile.OsDisk.OsType = $obj.StorageProfile.OSDisk.OperatingSystemType foreach($dd in $obj.StorageProfile.DataDisks)
         {

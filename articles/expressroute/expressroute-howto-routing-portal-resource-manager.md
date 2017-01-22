@@ -61,9 +61,9 @@ ms.author: cherylmc
     - MD5 哈希（如果选择使用）。**这是可选的**。
 
 3. 选择 Azure 专用对等行，如下所示。
-    
+
     ![](./media/expressroute-howto-routing-portal-resource-manager/rprivate1.png)
-    
+
 4. 配置专用对等互连。下图显示了一个配置示例。
 
     ![](./media/expressroute-howto-routing-portal-resource-manager/rprivate2.png)
@@ -71,7 +71,7 @@ ms.author: cherylmc
 5. 指定所有参数后，请保存配置。成功接受配置后，你将看到类似于下面示例的内容。
 
     ![](./media/expressroute-howto-routing-portal-resource-manager/rprivate3.png)
-    
+
 ### 查看 Azure 专用对等互连详细信息
 
 可以通过选择对等互连查看 Azure 专用对等互连的属性。
@@ -110,9 +110,9 @@ ms.author: cherylmc
     - MD5 哈希（如果选择使用）。**这是可选的**。
 
 3. 选择 Azure 公共对等互连行，如下所示。
-    
+
     ![](./media/expressroute-howto-routing-portal-resource-manager/rpublic1.png)
-    
+
 4. 配置公共对等互连。下图显示了一个配置示例。
 
     ![](./media/expressroute-howto-routing-portal-resource-manager/rpublic2.png)
@@ -120,7 +120,7 @@ ms.author: cherylmc
 5. 指定所有参数后，请保存配置。成功接受配置后，你将看到类似于下面示例的内容。
 
     ![](./media/expressroute-howto-routing-portal-resource-manager/rpublic3.png)
-    
+
 ### 查看 Azure 公共对等互连详细信息
 
 可以通过选择对等互连查看 Azure 公共对等互连的属性。

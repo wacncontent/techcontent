@@ -35,7 +35,7 @@ ms.author: krisragh
 
     // Get the ID of the logged-in user.
     var userId = user.userId; 
-    
+
             function insert(item, user, request) {
                 request.execute();
                 setTimeout(function() {

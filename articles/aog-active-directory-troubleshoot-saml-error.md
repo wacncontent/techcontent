@@ -52,21 +52,21 @@ wacn.date: 11/10/2016
 
 对应到具体的场景中：
 
-1.	第一次访问 SP，然后新开窗口访问同一个 SP<br>
+1. 第一次访问 SP，然后新开窗口访问同一个 SP<br>
     •	第一次访问 SP 成功后会设置所有 cookie<br>
     •	没有关闭浏览器，所以所有 cookie 都还保留 <br>
     •	访问 SP 时带上来自 SP 的 cookie “SESSIONID”，所以不需要到 IP 端认证就能成功访问
-2.	第一次访问 SP，然后新开窗口访问另一个对应同一 IP 的 SP<br>
+2. 第一次访问 SP，然后新开窗口访问另一个对应同一 IP 的 SP<br>
     •	第一次访问 SP 成功后会设置所有 cookie<br>
     •	没有关闭浏览器，所以所有 cookie 都还保留 <br>
     •	访问新 SP 时，会被导向 IP，从而带上来自 IP 的 cookie “ESTSAUTHPERSISTENT，ESTSAUTH，buid，SignInStateCookie”<br>
     •	IP 不需要用户再次登录，而根据 cookie 里的验证信息直接返回 SAML 响应<br>
-3.	第一次访问 SP，关闭浏览器，重新再访问同一个 SP<br>
+3. 第一次访问 SP，关闭浏览器，重新再访问同一个 SP<br>
     •	第一次访问 SP 成功后会设置所有 cookie<br>
     •	关闭了浏览器，会话型的 cookie 会丢失，而持久型会保留<br>
     •	新开浏览器访问 SP 时，会被导向 IP，只带上这些来自 IP 的持久型 cookie “ESTSAUTHPERSISTENT，buid”<br>
     •	IP 要求用户重新登录，返回新的 SAML 响应，并设置新的 cookie<br>
-4.	第一次访问 SP，退出登录，然后新开窗口访问同一个 SP<br>
+4. 第一次访问 SP，退出登录，然后新开窗口访问同一个 SP<br>
     •	第一次访问 SP 成功后会设置所有 cookie<br>
     •	退出登录会清空 IP 服务端记录<br>
     •	没有关闭浏览器，所以所有 cookie 都还保留<br>

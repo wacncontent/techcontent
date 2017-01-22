@@ -49,7 +49,7 @@ Azure Active Directory 的 v2.0 终结点可让你使用 [OAuth 2.0](./active-di
 
 若要成功使用本示例，你必须正确安装 MongoDB。我们将使用 MongoDB 来使 REST API 持久保留在服务器实例之间。
 
-    Install MongoDB from [http://mongodb.org](http://www.mongodb.org).
+    Install MongoDB from [http://www.mongodb.org](http://www.mongodb.org).
 
 > [!NOTE] 本演练假定为 MongoDB 使用默认的安装与服务器终结点，在编写本文时，该终结点为：mongodb://localhost
 
@@ -93,7 +93,7 @@ Shell
     gyp ERR! node-gyp -v v0.10.0
     gyp ERR! not ok
     npm WARN optional dep failed, continuing dtrace-provider@0.2.8
-    
+
 Restify 提供强大的机制来使用 DTrace 跟踪 REST 调用。但是，许多操作系统不提供 DTrace。你可以安全地忽略这些错误。
 
 此命令的输出看上去应如下所示：
@@ -239,7 +239,7 @@ Javascript
 在偏好的编辑器中创建 `config.js` 文件，然后添加以下信息：
 
 Javascript
-    
+
     // Don't commit this file to your public repos. This config is for first-run
     exports.creds = {
     mongoose_auth_local: 'mongodb://localhost/tasklist', // Your mongo auth uri goes here
@@ -526,7 +526,7 @@ Javascript
     this.name = 'TaskNotFoundError';
     }
     util.inherits(TaskNotFoundError, restify.RestError);
-    
+
 ## 步骤 14：创建服务器！
 
 我们已经定义了数据库和路由，最后一件事就是添加用于管理调用的服务器实例。
@@ -697,7 +697,7 @@ Shell
 Javascript
 
     // Let's start using Passport.js
-    
+
     server.use(passport.initialize()); // Starts passport
     server.use(passport.session()); // Provides session support
 

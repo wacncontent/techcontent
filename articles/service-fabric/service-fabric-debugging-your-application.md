@@ -47,7 +47,7 @@ ms.author: vturecek;mikhegn
 6. 诊断事件可以在自动生成的 **ServiceEventSource.cs** 文件中查看并从应用程序代码中进行调用。
 
         ServiceEventSource.Current.ServiceMessage(this, "My ServiceMessage with a parameter {0}", result.Value.ToString());
-    
+
 7. “诊断事件”窗口支持筛选、暂停和检查实时事件。筛选是对事件消息及其内容进行的简单字符串搜索。
 
     ![实时筛选、暂停和恢复或检查事件][diagnosticeventsactions]
@@ -123,7 +123,7 @@ ms.author: vturecek;mikhegn
     ![查看流跟踪][viewingstreamingtraces]
 
 3. 完成从群集流式传输跟踪后，可以通过在“Cloud Explorer”中右键单击群集并选择“禁用流式跟踪”，来禁用远程流跟踪
-   
+
     ![禁用远程流跟踪][disablestreamingtraces]  
 
 ## 后续步骤

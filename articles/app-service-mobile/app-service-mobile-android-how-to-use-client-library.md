@@ -108,7 +108,7 @@ Azure 移动应用的 Android SDK 支持 API 级别 19 到 24（KitKat 到 Nouga
     public Integer getPriority() {
     return mPriority;
     }
-    
+
     /**
     * Sets the item priority
     *

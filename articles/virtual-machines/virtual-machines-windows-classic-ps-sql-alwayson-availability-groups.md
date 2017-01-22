@@ -61,7 +61,7 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
         Import-AzurePublishSettingsFile -Environment AzureChinaCloud <publishsettingsfilepath> 
 
     **Get-AzurePublishgSettingsFile** 命令自动生成管理证书，Azure 将其下载到你的计算机。浏览器将自动打开，提示输入 Azure 订阅的 Microsoft 帐户凭据。所下载的 **.publishsettings** 文件包含管理 Azure 订阅所需的一切信息。将该文件保存到本地目录后，使用 **Import-AzurePublishSettingsFile -Environment AzureChinaCloud** 命令将其导入。
-    
+
     >[!NOTE]publishsettings 文件中含有你的凭据（未编码），这些凭据用于管理你的 Azure 订阅和服务。确保此文件安全的最佳做法是，将其暂时存储在您的源目录的外部（例如存储在 Libraries\\Documents 文件夹中），然后在完成导入后将其删除。恶意用户获得 publishsettings 文件的访问权限后，可编辑、创建和删除你的 Azure 服务。
 
 1. 定义将用于创建云 IT 基础结构的一系列变量。
@@ -85,13 +85,13 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
         $workingDir = "c:\scripts"
 
     请注意以下几点，以确保后面的命令可以成功执行：
-    
+
     - 变量 **$storageAccountName** 和 **$dcServiceName** 分别用于标识 Internet 上的云存储帐户和云服务器，因此必须唯一。
-    
+
     - 为变量 **$affinityGroupName** 和 **$virtualNetworkName** 指定的名称（在稍后将使用的虚拟网络配置文档中配置）。
-    
+
     - **$sqlImageName** 指定包含 SQL Server 2012 Service Pack 1 Enterprise Edition 的 VM 映像的更新名称。
-    
+
     - 为简单起见，在整个教程中使用同一密码 **Contoso!000**。
 
 1. 创建地缘组
@@ -159,26 +159,26 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
                     -VNetName $virtualNetworkName
 
     这一系列的管接命令执行以下操作：
-    
+
     - **New-AzureVMConfig** 创建 VM 配置。
-    
+
     - **Add-AzureProvisioningConfig** 提供独立 Windows 服务器的配置参数。
-    
+
     - **Add-AzureDataDisk** 添加将用于保存 Active Directory 数据的数据磁盘，缓存选项设置为 None。
-    
+
     - **New-AzureVM** 创建新的云服务，并在新的云服务中创建新的 Azure VM。
 
 1. 请等待新 VM 预配完毕，然后将远程桌面文件下载到工作目录中。由于新 Azure VM 的预配要用很长时间，while 循环会持续轮询新 VM，直到其使用就绪。
 
         $VMStatus = Get-AzureVM -ServiceName $dcServiceName -Name $dcServerName
-        
+
         While ($VMStatus.InstanceStatus -ne "ReadyRole")
         {
             write-host "Waiting for " $VMStatus.Name "... Current Status = " $VMStatus.InstanceStatus
             Start-Sleep -Seconds 15
             $VMStatus = Get-AzureVM -ServiceName $dcServiceName -Name $dcServerName
         }
-        
+
         Get-AzureRemoteDesktopFile `
             -ServiceName $dcServiceName `
             -Name $dcServerName `
@@ -301,13 +301,13 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
                         -DnsSettings $dnsSettings
 
     注意与上述命令相关的以下几点：
-    
+
     - **New-AzureVMConfig** 创建具有所需可用性集名称的 VM 配置。后续 VM 将以该可用性集名称创建，因此会加入同一可用性集中。
-    
+
     - **Add-AzureProvisioningConfig** 将 VM 加入创建的 Active Directory 域中。
-    
+
     - **Set-AzureSubnet** 将 VM 放入 Back 子网。
-    
+
     - **New-AzureVM** 创建新的云服务，并在新的云服务中创建新的 Azure VM。**DnsSettings** 参数指定新云服务中的服务器的 DNS 服务器具有 IP 地址 **10.10.0.4**，这是 DC 服务器的 IP 地址。需要该参数来启用云服务中的新 VM 才能成功加入 Active Directory 域。如果没有该参数，预配 VM 后必须在 VM 中手动设置 IPv4 设置才能将 DC 服务器作为主 DNS 服务器，然后 VM 才能加入 Active Directory 域。
 
 1. 运行以下管接命令来创建名为 **ContosoSQL1** 和 **ContosoSQL2** 的 SQL Server VM。
@@ -339,7 +339,7 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
                         -LocalPort 1433 | 
                         New-AzureVM `
                             -ServiceName $sqlServiceName
-        
+
         # Create ContosoSQL2...
         New-AzureVMConfig `
             -Name $sql2ServerName `
@@ -371,13 +371,13 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
     注意与上述命令相关的以下几点：
 
     - **New-AzureVMConfig** 使用与 DC 服务器相同的可用性集名称，并使用虚拟机库中的 SQL Server 2012 Service Pack 1 Enterprise Edition 映像。它还将操作系统磁盘设置为只读缓存（无写缓存）。建议将这些数据库文件迁移到一个附加到 VM 的独立数据磁盘中，并将其配置为无读或写缓存。不过，次优建议是移除操作系统磁盘上的写缓存，因为无法移除操作系统磁盘上的读缓存。
-    
+
     - **Add-AzureProvisioningConfig** 将 VM 加入创建的 Active Directory 域中。
-    
+
     - **Set-AzureSubnet** 将 VM 放入 Back 子网。
-    
+
     - **Add-AzureEndpoint** 添加访问端点，以便客户端应用程序能够在 Internet 上访问这些 SQL Server 服务实例。为 ContosoSQL1 和 ContosoSQL2 提供了不同端口。
-    
+
     - **New-AzureVM** 在与 ContosoQuorum 相同的云服务中创建新的 SQL Server VM。如果这些 VM 需要在同一可用性集中，则必须将它们放置在同一云服务中。
 
 1. 请等待每个 VM 预配完毕，然后将其远程桌面文件下载到工作目录中。for 循环会循环访问三个新 VM，并为每个 VM 执行上级大括号内的命令。
@@ -385,7 +385,7 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
         Foreach ($VM in $VMs = Get-AzureVM -ServiceName $sqlServiceName)
         {
             write-host "Waiting for " $VM.Name "..."
-        
+
             # Loop until the VM status is "ReadyRole"
             While ($VM.InstanceStatus -ne "ReadyRole")
             {
@@ -393,9 +393,9 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
                 Start-Sleep -Seconds 15
                 $VM = Get-AzureVM -ServiceName $VM.ServiceName -Name $VM.InstanceName
             }
-        
+
             write-host "  Current Status = " $VM.InstanceStatus
-        
+
             # Download remote desktop file
             Get-AzureRemoteDesktopFile -ServiceName $VM.ServiceName -Name $VM.InstanceName -LocalPath "$workingDir$($VM.InstanceName).rdp"
         }
@@ -415,9 +415,9 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
 - （仅限 ContosoSQL1 和 ContosoSQL2）需要添加 NT **AUTHORITY\\System** 作为具有以下权限的登录名：
 
     - 更改任何可用性组
-    
+
     - 连接 SQL
-    
+
     - 查看服务器状态
 
 - （仅限 ContosoSQL1 和 ContosoSQL2）在 SQL Server VM 上已启用了 **TCP** 协议。但是，仍需打开防火墙以便远程访问 SQL Server。
@@ -588,7 +588,7 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
         Set-SqlHadrEndpoint `
             -InputObject $endpoint `
             -State "Started"
-        
+
         Invoke-SqlCmd -Query "CREATE LOGIN [$acct2] FROM WINDOWS" -ServerInstance $server1
         Invoke-SqlCmd -Query "GRANT CONNECT ON ENDPOINT::[MyMirroringEndpoint] TO [$acct2]" -ServerInstance $server1
         Invoke-SqlCmd -Query "CREATE LOGIN [$acct1] FROM WINDOWS" -ServerInstance $server2

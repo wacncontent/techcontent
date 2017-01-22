@@ -103,7 +103,7 @@ ms.author: sethm;shvija
                                 "[parameters('eventHubName')]"
                              ],
                              "properties":{  
-        
+
                              }
                           }
                        ]
@@ -123,7 +123,7 @@ ms.author: sethm;shvija
 ## Azure CLI
 
         azure config mode arm
-        
+
         azure group deployment create \<my-resource-group\> \<my-deployment-name\> --template-uri https://raw.githubusercontent.com/azure/azure-quickstart-templates/master/201-event-hubs-create-event-hub-and-consumer-group/azuredeploy.json
 
 [创作 Azure Resource Manager 模板]: ../azure-resource-manager/resource-group-authoring-templates.md

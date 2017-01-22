@@ -72,7 +72,7 @@ ms.author: tomfitz
         $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org/exampleapp" -IdentifierUris "https://www.contoso.org/exampleapp" -Password "{Your_Password}"
 
     对于单租户应用程序，不会验证 URI。
-   
+
     如果帐户在 Active Directory 上不具有[所需的权限](#required-permissions)，将看到指示“Authentication_Unauthorized”或“上下文中找不到订阅”的错误消息。
 
 3. 检查新的应用程序对象。
@@ -111,7 +111,7 @@ ms.author: tomfitz
         $creds = Get-Credential
 
 2. 系统会提示你输入凭据。对于用户名，请使用你在创建应用程序时所用的 **ApplicationId**。对于密码，请使用你在创建帐户时指定的密码。
-   
+
      ![输入凭据](./media/resource-group-authenticate-service-principal/arm-get-credential.png)  
 
 3. 以服务主体方式登录时，需提供 AD 应用所在目录的租户 ID。租户是 Active Directory 的实例。如果只有一个订阅，可以使用：
@@ -194,7 +194,7 @@ ms.author: tomfitz
         Add-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 3. 通过提供显示名称、用于描述应用程序的 URI、用于标识应用程序的 URI，以及应用程序标识的密码来创建新的 Active Directory 应用程序。
-   
+
      如果有 Azure PowerShell 2.0（2016 年 8 月或之后发布），请使用以下 cmdlet：
 
         $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org" -IdentifierUris "https://www.contoso.org/example" -CertValue $keyValue -EndDate $cert.NotAfter -StartDate $cert.NotBefore      
@@ -204,9 +204,9 @@ ms.author: tomfitz
         $app = New-AzureRmADApplication -DisplayName "exampleapp" -HomePage "https://www.contoso.org" -IdentifierUris "https://www.contoso.org/example" -KeyValue $keyValue -KeyType AsymmetricX509Cert  -EndDate $cert.NotAfter -StartDate $cert.NotBefore
 
     对于单租户应用程序，不会验证 URI。
-   
+
     如果帐户在 Active Directory 上不具有[所需的权限](#required-permissions)，将看到指示“Authentication\_Unauthorized”或“上下文中找不到订阅”的错误消息。
-   
+
     检查新的应用程序对象。
 
         $app

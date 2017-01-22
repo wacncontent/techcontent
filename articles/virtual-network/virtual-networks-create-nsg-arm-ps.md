@@ -58,7 +58,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         $nsg
 
     输出仅显示安全规则：
-   
+
         SecurityRules        : [
                                  {
                                    "Name": "rdp-rule",
@@ -98,7 +98,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         -AddressPrefix 192.168.1.0/24 -NetworkSecurityGroup $nsg
 
     输出只显示 *FrontEnd* 子网设置，注意 **NetworkSecurityGroup** 属性值：
-   
+
                     Subnets           : [
                                           {
                                             "Name": "FrontEnd",
@@ -119,7 +119,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
                                             "RouteTable": null,
                                             "ProvisioningState": "Succeeded"
                                           }
-   
+
     > [!WARNING]
     上述命令的输出显示虚拟网络配置对象的内容，该对象仅存在于运行 PowerShell 的计算机上。若要将这些设置保存到 Azure，需要运行 `Set-AzureRmVirtualNetwork` cmdlet。
     > 
@@ -129,7 +129,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 
     输出仅显示 NSG 部分：
-   
+
         "NetworkSecurityGroup": {
           "Id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/networkSecurityGroups/NSG-FrontEnd"
         }
@@ -165,7 +165,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         -AddressPrefix 192.168.2.0/24 -NetworkSecurityGroup $nsg
 
     输出只显示 *BackEnd* 子网设置，注意 **NetworkSecurityGroup** 属性值：
-   
+
         Subnets           : [
                       {
                         "Name": "BackEnd",

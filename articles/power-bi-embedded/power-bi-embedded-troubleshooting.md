@@ -28,8 +28,8 @@ wacn.date: 01/13/2017
 
 若要了解有关 SQL Server 连接字符串的详细信息，请参阅以下文章：
 
--	[SQL Server Connection Strings（SQL Server 连接字符串）](https://msdn.microsoft.com/zh-cn/library/jj653752.aspx)
--	[SqlConnection.ConnectionString](https://msdn.microsoft.com/zh-cn/library/system.data.sqlclient.sqlconnection.connectionstring.aspx)
+- [SQL Server Connection Strings（SQL Server 连接字符串）](https://msdn.microsoft.com/zh-cn/library/jj653752.aspx)
+- [SqlConnection.ConnectionString](https://msdn.microsoft.com/zh-cn/library/system.data.sqlclient.sqlconnection.connectionstring.aspx)
 
 ## 设置凭据 <a name="credentials"/>
 如果你具有用于开发或过渡环境的凭据（例如用户名和密码），建议更新此凭据，以匹配生产解决方案。

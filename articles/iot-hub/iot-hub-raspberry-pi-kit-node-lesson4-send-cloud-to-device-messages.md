@@ -31,21 +31,21 @@ wacn.date: 12/26/2016
 
 ## 将示例应用程序连接到 IoT 中心
 1. 确保位于存储库文件夹 `iot-hub-node-raspberrypi-getting-started` 中。通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
-   
+
         cd Lesson4
         code .
-   
+
     请注意 `app` 子文件夹中的 `app.js` 文件。`app.js` 文件是关键的源文件，其中包含的代码用于监视 IoT 中心发出的传入消息。`blinkLED` 函数可使 LED 闪烁。
-   
+
     ![示例应用程序中的存储库结构](./media/iot-hub-raspberry-pi-lessons/lesson4/repo_structure.png)  
 
 2. 使用以下命令初始化配置文件：
-   
+
         npm install
         gulp init
-   
+
     如果用户已在此计算机上完成[创建 Azure 函数应用和存储帐户](./iot-hub-raspberry-pi-kit-node-lesson3-deploy-resource-manager-template.md)中的步骤，继承了所有配置，则可跳到用于部署并运行示例应用程序的任务。如果用户在另一计算机上完成了[创建 Azure 函数应用和存储帐户](./iot-hub-raspberry-pi-kit-node-lesson3-deploy-resource-manager-template.md)中的步骤，则需替换 `config-raspberrypi.json` 文件中的占位符。`config-raspberrypi.json` 文件位于主文件夹的子文件夹中。
-   
+
     ![config-raspberrypi.json 文件的内容](./media/iot-hub-raspberry-pi-lessons/lesson4/config_raspberrypi.png)  
 
 * 将 **[设备主机名或 IP 地址]** 替换为通过运行 `devdisco list --eth` 命令获取的 Pi 的 IP 地址或主机名。

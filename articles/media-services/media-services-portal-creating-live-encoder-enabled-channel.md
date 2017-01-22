@@ -35,7 +35,7 @@ ms.author: juliako
 >[!NOTE] 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的频道，请通过 Azure.cn 联系 amslived。
 
 1. 将视频摄像机连接到计算机。启动并配置可以通过以下协议之一输出单比特率流的本地实时编码器：RTMP、平滑流式处理或 RTP (MPEG-TS)。有关详细信息，请参阅 [Azure 媒体服务 RTMP 支持和实时编码器](https://azure.microsoft.com/zh-cn/blog/azure-media-services-rtmp-support-and-live-encoders/)。
-    
+
     此步骤也可以在创建频道后执行。
 
 1. 创建并启动频道。
@@ -101,9 +101,9 @@ ms.author: juliako
 
 ##<a id="create-a-channel"></a>创建频道
 
-1.	在 [Azure 经典管理门户](http://manage.windowsazure.cn/)中，单击“媒体服务”，然后单击媒体服务帐户名。
-2.	选择“频道”页。
-3.	选择“添加+”以添加新频道。
+1. 在 [Azure 经典管理门户](http://manage.windowsazure.cn/)中，单击“媒体服务”，然后单击媒体服务帐户名。
+2. 选择“频道”页。
+3. 选择“添加+”以添加新频道。
 
 选择**“标准”**编码类型。此类型指定要创建能够进行实时编码的频道。这意味着传入单比特率流将发送到频道，并使用指定的实时编码器设置编码为多比特率流。有关详细信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
 
@@ -184,11 +184,11 @@ ms.author: juliako
 1. 在**“频道”**页上，按**“添加”**以添加新节目。
 
     指定：节目名称、资产名称、存档时段和加密选项。
-    
+
     ![createprogram](./media/media-services-portal-creating-live-encoder-enabled-channel/media-services-create-program.png)
-    
+
     如果保留选中**“立即发布此节目”**，将会创建节目的发布 URL。
-    
+
     在准备好流式传输节目时，可以按**“开始”**。
 
     启动节目后，你可以按“播放”开始播放内容。
@@ -240,7 +240,7 @@ ms.author: juliako
 - 停止从编码器推送流。
 - 停止通道。停止通道后，将不会产生任何费用。需要重新启动它时，它将采用相同的引入 URL，因此无需重新配置编码器。
 - 除非想要继续以点播流形式提供实时事件的存档，否则可以停止流式处理终结点。如果通道处于停止状态，则不会产生任何费用。
-  
+
 ##注意事项
 
 - 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的频道，请通过 Azure.cn 联系 amslived。

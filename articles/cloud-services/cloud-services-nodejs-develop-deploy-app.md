@@ -177,7 +177,7 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 [Azure Powershell]: ../powershell-install-configure.md
 [将 PowerShell 连接]: ../powershell-install-configure.md#Connect
 [nodejs.org]: http://nodejs.org/
-[创建 Azure 托管服务概述]: ./index.md/
+[创建 Azure 托管服务概述]: ./index.md
 [Node.js 开发人员中心]: /develop/nodejs/
 
 <!-- IMG List -->

@@ -37,7 +37,7 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 授权代码流始于客户端将用户定向到的 `/authorize` 终结点。在这项请求中，客户端指示必须向用户获取的权限：
 
     // Line breaks for legibility only
-    
+
     https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
     client_id=6731de76-14a6-49ae-97bc-6eba6914391e
     &response_type=code
@@ -108,11 +108,11 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 你已获取 authorization\_code 并获得用户授权，现在可以将 `POST` 请求发送到 `/token` 终结点，兑换 `code` 以获取所需资源的 `access_token`：
 
     // Line breaks for legibility only
-    
+
     POST /{tenant}/oauth2/v2.0/token HTTP/1.1
     Host: https://login.microsoftonline.com
     Content-Type: application/x-www-form-urlencoded
-    
+
     client_id=6731de76-14a6-49ae-97bc-6eba6914391e
     &scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
     &code=OAAABAAAAiL9Kn2Z27UubvWFPbm0gLWQJVzCTE9UkP3pSx1aXxUjq3n8b2JRLk4OxVXr...
@@ -167,7 +167,7 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
       "trace_id": "255d1aef-8c98-452f-ac51-23d051240864",
       "correlation_id": "fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7"
     }
-    
+
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
 | error | 用于分类发生的错误类型与响应错误的错误码字符串。 |
@@ -199,16 +199,16 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
     GET /v1.0/me/messages
     Host: https://graph.microsoft.com
     Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...
-    
+
 ## 刷新访问令牌
 Access\_token 生存期很短，必须在其过期后刷新，才能继续访问资源。为此，你可以向 `/token` 终结点提交另一个 `POST` 请求，但这次要提供 `refresh_token` 而不是 `code`：
 
     // Line breaks for legibility only
-    
+
     POST /{tenant}/oauth2/v2.0/token HTTP/1.1
     Host: https://login.microsoftonline.com
     Content-Type: application/x-www-form-urlencoded
-    
+
     client_id=6731de76-14a6-49ae-97bc-6eba6914391e
     &scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
     &refresh_token=OAAABAAAAiL9Kn2Z27UubvWFPbm0gLWQJVzCTE9UkP3pSx1aXxUjq...
@@ -251,7 +251,7 @@ Access\_token 生存期很短，必须在其过期后刷新，才能继续访问
 | id\_token | 无符号 JSON Web 令牌 (JWT)。应用程序可以 base64Url 解码此令牌的段，以请求已登录用户的相关信息。应用程序可以缓存并显示值，但不应依赖于这些值来获取任何授权或安全边界。有关 id\_token 的详细信息，请参阅 [v2.0 终结点令牌参考](./active-directory-v2-tokens.md)。 |
 
 #### 错误响应
-    
+
     {
       "error": "invalid_scope",
       "error_description": "AADSTS70011: The provided value for the input parameter 'scope' is not valid. The scope https://foo.microsoft.com/mail.read is not valid.\r\nTrace ID: 255d1aef-8c98-452f-ac51-23d051240864\r\nCorrelation ID: fb3d2015-bc17-4bb9-bb85-30c5cf1aaaa7\r\nTimestamp: 2016-01-09 02:02:12Z",

@@ -47,25 +47,25 @@ Contoso 是一家工业自动化公司，该公司已将其制造流程完全自
 
 ## 创建流分析作业
 1. 在 [Azure 门户预览](http://portal.azure.cn)中，单击加号，再在右侧的文本窗口中键入**流分析**。然后在结果列表中选择“流分析作业”。
-   
+
     ![创建新的流分析作业](./media/stream-analytics-get-started-with-iot-devices/stream-analytics-get-started-with-iot-devices-02.png)  
 
 2. 输入唯一作业名并验证订阅是否与作业对应。然后新建资源组或选择订阅中的现有资源组。
 3. 接着选择作业位置。为了加快处理速度并降低数据传输成本，建议选择与资源组和预期存储帐户相同的位置。
-   
+
     ![新建流分析作业详细信息](./media/stream-analytics-get-started-with-iot-devices/stream-analytics-get-started-with-iot-devices-03.png)  
 
        > [!NOTE]
        > 只应为每个区域创建此存储帐户一次。跨该区域中创建的所有流分析作业共享此存储。
        > 
        > 
-       
+
 4. 勾选框以将作业放在仪表板上，然后单击“创建”。
-   
+
     ![正在创建作业](./media/stream-analytics-get-started-with-iot-devices/stream-analytics-get-started-with-iot-devices-03a.png)  
 
 5. 浏览器窗口右上方应会显示“部署已启动...”。其很快就会变为如下所示的已完成窗口。
-   
+
     ![正在创建作业](./media/stream-analytics-get-started-with-iot-devices/stream-analytics-get-started-with-iot-devices-03b.png)  
 
 ### 创建 Azure 流分析查询
@@ -81,19 +81,19 @@ Contoso 是一家工业自动化公司，该公司已将其制造流程完全自
 查询的最简单形式是传递查询，该查询会将所有输入数据存档到其指定的输出。将 [GitHub](https://aka.ms/azure-stream-analytics-get-started-iot) 中的示例数据文件下载到计算机中的某个位置。
 
 1. 从 PassThrough.txt 文件粘贴查询。
-   
+
     ![测试输入流](./media/stream-analytics-get-started-with-iot-devices/stream-analytics-get-started-with-iot-devices-06.png)  
 
 2. 单击输入旁边的三个点，然后选择“上传文件中的示例数据”框。
-   
+
     ![测试输入流](./media/stream-analytics-get-started-with-iot-devices/stream-analytics-get-started-with-iot-devices-06a.png)  
 
 3. 会在右侧打开一个窗格，请在此处选择下载位置中的 HelloWorldASA InputStream.json 数据文件，然后在窗格底部单击“确定”。
-   
+
     ![测试输入流](./media/stream-analytics-get-started-with-iot-devices/stream-analytics-get-started-with-iot-devices-06b.png)  
 
 4. 然后在窗口左上方单击“测试”齿轮，接着根据示例数据集处理测试查询。处理完成后，查询下方会打开一个结果窗口。
-   
+
     ![测试结果](./media/stream-analytics-get-started-with-iot-devices/stream-analytics-get-started-with-iot-devices-07.png)  
 
 ### 查询：根据条件筛选数据

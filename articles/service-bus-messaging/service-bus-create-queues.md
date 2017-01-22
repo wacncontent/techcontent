@@ -72,7 +72,7 @@ wacn.date: 01/04/2017
                         "test-blog", string.Empty);
         string name = "RootManageSharedAccessKey";
         string key = "abcdefghijklmopqrstuvwxyz";
- 
+
         TokenProvider tokenProvider = 
             TokenProvider.CreateSharedAccessSignatureTokenProvider(name, key);
         NamespaceManager namespaceManager = 
@@ -129,7 +129,7 @@ wacn.date: 01/04/2017
 
         QueueClient queueClient = factory.CreateQueueClient("DataCollectionQueue");
         queueClient.Send(bm);
-            
+
         BrokeredMessage message = queueClient.Receive();
 
         try

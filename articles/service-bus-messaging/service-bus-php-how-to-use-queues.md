@@ -87,10 +87,10 @@ wacn.date: 01/04/2017
 
         // Create Service Bus REST proxy.
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
-    
+
         try	{
             $queueInfo = new QueueInfo("myqueue");
-        
+
             // Create queue.
             $serviceBusRestProxy->createQueue($queueInfo);
         }
@@ -117,12 +117,12 @@ wacn.date: 01/04/2017
 
         // Create Service Bus REST proxy.
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
-        
+
         try	{
             // Create message.
             $message = new BrokeredMessage();
             $message->setBody("my message");
-    
+
             // Send message.
             $serviceBusRestProxy->sendQueueMessage("myqueue", $message);
         }
@@ -157,21 +157,21 @@ wacn.date: 01/04/2017
 
         // Create Service Bus REST proxy.
         $serviceBusRestProxy = ServicesBuilder::getInstance()->createServiceBusService($connectionString);
-        
+
         try	{
             // Set the receive mode to PeekLock (default is ReceiveAndDelete).
             $options = new ReceiveMessageOptions();
             $options->setPeekLock();
-        
+
             // Receive message.
             $message = $serviceBusRestProxy->receiveQueueMessage("myqueue", $options);
             echo "Body: ".$message->getBody()."<br />";
             echo "MessageID: ".$message->getMessageId()."<br />";
-        
+
             /*---------------------------
                 Process message here.
             ----------------------------*/
-        
+
             // Delete message. Not necessary if peek lock is not set.
             echo "Message deleted.<br />";
             $serviceBusRestProxy->deleteMessage($message);

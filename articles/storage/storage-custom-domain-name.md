@@ -54,7 +54,7 @@ Blob|**默认 URL**：http://mystorageaccount.blob.core.chinacloudapi.cn/myconta
 7. 创建一个新的 CNAME 记录，并且提供子域别名，例如 **www** 或 **photos**。然后以 **mystorageaccount.blob.core.chinacloudapi.cn** 格式（其中，**mystorageaccount** 是你的存储帐户的名称）提供主机名，这是你的 Blob 服务终结点。在“管理自定义域”对话框的文本中为你提供了要使用的主机名。
 8. 在创建该 CNAME 记录后，返回到“管理自定义域”对话框，并且在“自定义域名”字段中输入你的自定义域（包括子域）的名称。例如，如果你的域是 **contoso.com** 并且你的子域是 **www**，则输入 **www.contoso.com**；如果你的子域是 **photos**，则输入 **photos.contoso.com**。请注意，子域是必需的。
 9. 单击“注册”按钮以注册你的自定义域。
-   
+
 如果注册成功，你将看到消息**你的自定义域处于活动状态**。用户现在可以查看你的自定义域上的 Blob 数据，只要用户具有适当的权限。
 
 ##<a name="register-a-custom-domain-for-your-storage-account-using-the-intermediary-asverify-subdomain"></a> 使用中间 asverify 子域为你的存储帐户注册自定义域
@@ -79,7 +79,7 @@ Blob|**默认 URL**：http://mystorageaccount.blob.core.chinacloudapi.cn/myconta
 
 8.  在创建该 CNAME 记录后，返回到“管理自定义域”对话框，并且在“自定义域名”字段中输入你的自定义域的名称。例如，如果你的域是 **contoso.com** 并且你的子域是 **www**，则输入 **www.contoso.com**；如果你的子域是 **photos**，则输入 **photos.contoso.com**。请注意，子域是必需的。
 
-9.	单击“高级：使用 'asverify' 子域预先注册自定义域”复选框。
+9. 单击“高级：使用 'asverify' 子域预先注册自定义域”复选框。
 
 10. 单击“注册”按钮以预先注册你的自定义域。
 

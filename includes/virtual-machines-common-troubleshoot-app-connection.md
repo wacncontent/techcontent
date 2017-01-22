@@ -31,15 +31,15 @@
 
 ![对无法启动应用程序进行故障排除](./media/virtual-machines-common-troubleshoot-app-connection/tshoot_app_access1.png)  
 
-1.	在 Azure 虚拟机上运行的应用程序。
+1. 在 Azure 虚拟机上运行的应用程序。
     - 应用程序本身是否正常运行？
-2.	Azure 虚拟机。
+2. Azure 虚拟机。
     - VM 本身是否正常运行并响应请求？
-3.	Azure 网络终结点。
+3. Azure 网络终结点。
     - 用于经典部署模型中虚拟机的云服务终结点。
     - 用于 Resource Manager 部署模型中虚拟机的网络安全组和入站 NAT 规则。
     - 流量是否可以通过预期的端口从用户流向 VM/应用程序？
-4.	Internet 边缘设备。
+4. Internet 边缘设备。
     - 是否有防火墙规则阻止流量正常流动？
 
 对于通过站点到站点 VPN 或 ExpressRoute 连接访问应用程序的客户端计算机，可能会导致问题的主要区域是应用程序和 Azure 虚拟机。若要确定问题根源并进行更正，请执行以下步骤。

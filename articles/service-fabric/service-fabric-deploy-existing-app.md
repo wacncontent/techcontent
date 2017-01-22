@@ -36,7 +36,7 @@ ms.author: msfussell;mikhegn
 
 * **应用程序清单**
 应用程序清单用于描述应用程序。它列出自身的构成服务，以及用于定义应如何部署一个或多个服务的其他参数（如实例数）。
-  
+
   在 Service Fabric 中，一个应用程序是一个部署和升级单位。应用程序可以作为一个单元升级，其中的潜在失败（潜在回滚）由系统管理。Service Fabric 保证升级过程成功，一旦升级失败，它不会使应用程序保持未知或不稳定状态。
 * **服务清单**
 服务清单描述服务的组件。其中包含服务的名称和类型、其代码以及配置等数据。服务清单还包含一些可以用于在部署之后配置服务的其他参数。
@@ -74,10 +74,10 @@ Visual Studio 提供 Service Fabric 服务模板来帮助你将来宾可执行�
 1. 选择“文件”>“新建项目”，然后创建一个 Service Fabric 应用程序。
 2. 为服务模板选择“来宾可执行文件”。
 3. 单击“浏览”选择包含所需可执行文件的文件夹，然后填充余下的参数来创建服务。
-   * 代码包行为。可以设置为将文件夹中的所有内容复制到 Visual Studio 项目，如果可执行文件不会更改，则这种设置会很有用。如果预期可执行文件会更改，并且希望能够动态选择新版本，则可以改为选择文件夹的链接。请注意，在 Visual Studio 中创建应用程序项目时，可以使用链接的文件夹。这将会从项目内部链接到源位置，从而能够在来宾可执行文件的源目标中对它进行更新。这些更新会在生成时成为应用程序包的一部分。
-   * *Program* 指定为了启动服务而应该运行的可执行文件。
-   * *Arguments* 指定应传递给可执行文件的参数。它可以是带有实参的形参的列表。
-   * *WorkingFolder* 指定要启动的进程的工作目录。可以指定三个值：
+    * 代码包行为。可以设置为将文件夹中的所有内容复制到 Visual Studio 项目，如果可执行文件不会更改，则这种设置会很有用。如果预期可执行文件会更改，并且希望能够动态选择新版本，则可以改为选择文件夹的链接。请注意，在 Visual Studio 中创建应用程序项目时，可以使用链接的文件夹。这将会从项目内部链接到源位置，从而能够在来宾可执行文件的源目标中对它进行更新。这些更新会在生成时成为应用程序包的一部分。
+    * *Program* 指定为了启动服务而应该运行的可执行文件。
+    * *Arguments* 指定应传递给可执行文件的参数。它可以是带有实参的形参的列表。
+    * *WorkingFolder* 指定要启动的进程的工作目录。可以指定三个值：
      * `CodeBase` 指定工作目录将设置为应用程序包中的 code 目录（前面文件结构中所示的 `Code` 目录）。
      * `CodePackage` 指定工作目录将设置为应用程序包中的根目录（前面文件结构中所示的 `GuestService1Pkg`）。
      * `Work` 指定将文件放置在名为 work 的子目录中。
@@ -252,17 +252,17 @@ WorkingFolder 用于设置正确的工作目录，以便应用程序或初始化
 最后一步是部署应用程序。以下 PowerShell 脚本演示如何将应用程序部署到本地开发群集并启动新的 Service Fabric 服务。
 
     Connect-ServiceFabricCluster localhost:19000
-    
+
     Write-Host 'Copying application package...'
     Copy-ServiceFabricApplicationPackage -ApplicationPackagePath 'C:\Dev\MultipleApplications' -ImageStoreConnectionString 'file:C:\SfDevCluster\Data\ImageStoreShare' -ApplicationPackagePathInImageStore 'nodeapp'
-    
+
     Write-Host 'Registering application type...'
     Register-ServiceFabricApplicationType -ApplicationPathInImageStore 'nodeapp'
-    
+
     New-ServiceFabricApplication -ApplicationName 'fabric:/nodeapp' -ApplicationTypeName 'NodeAppType' -ApplicationTypeVersion 1.0
-    
+
     New-ServiceFabricService -ApplicationName 'fabric:/nodeapp' -ServiceName 'fabric:/nodeapp/nodeappservice' -ServiceTypeName 'NodeApp' -Stateless -PartitionSchemeSingleton -InstanceCount 1
-    
+
 Service Fabric 服务可以采用各种“配置”进行部署。 例如，可以将其作为单个或多个实例部署，或者可以将其以这样一种方式部署：在 Service Fabric 群集的每个节点上都有一个服务实例。
 
 `New-ServiceFabricService` cmdlet 的 `InstanceCount` 参数用于指定应在 Service Fabric 群集中启动的服务实例的数量。可以根据要部署的应用程序类型设置 `InstanceCount` 值。最常见的两种方案是：

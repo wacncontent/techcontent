@@ -16,7 +16,7 @@
         public static final String TOKENPREF = "tkn";	
 
 3. 在 ToDoActivity.java 文件中，为 `cacheUserToken` 方法添加以下定义。
- 
+
         private void cacheUserToken(MobileServiceUser user)
         {
             SharedPreferences prefs = getSharedPreferences(SHAREDPREFFILE, Context.MODE_PRIVATE);
@@ -25,7 +25,7 @@
             editor.putString(TOKENPREF, user.getAuthenticationToken());
             editor.commit();
         }	
-  
+
     此方法将用户 ID 和令牌存储在标记为私有的首选项文件中。这应保护对缓存的访问，以便在设备上的其他应用没有令牌的访问权，因为将应用程序的首选项进行沙箱处理。但是，如果有人获取了设备的访问权，则它们可能会通过其他方式获得对令牌缓存的访问权。 
 
     >[!NOTE]如果对您数据的令牌访问被认为非常敏感，并且有人可能会获得对设备的访问权，则可以使用加密进一步保护令牌。但是，完全安全的解决方案超出了本教程的范围并且取决于您的安全要求。
@@ -41,11 +41,11 @@
             String token = prefs.getString(TOKENPREF, "undefined"); 
             if (token == "undefined")
                 return false;
-                
+
             MobileServiceUser user = new MobileServiceUser(userId);
             user.setAuthenticationToken(token);
             client.setCurrentUser(user);
-                
+
             return true;
         }
 
@@ -62,7 +62,7 @@
             {
                 // Login using the Google provider.    
                 ListenableFuture<MobileServiceUser> mLogin = mClient.login(MobileServiceAuthenticationProvider.Google);
-        
+
                 Futures.addCallback(mLogin, new FutureCallback<MobileServiceUser>() {
                     @Override
                     public void onFailure(Throwable exc) {

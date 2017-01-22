@@ -66,13 +66,13 @@ ms.author: juliako;cenkdin;anilmur
 本教程中使用以下输出设置。本部分的其余内容介绍更详细的配置步骤。
 
 **视频**：
- 
+
 - 编解码器：H.264
 - 配置文件：High（等级 4.0）
 - 比特率：5000 kbps
 - 关键帧：2 秒（60 秒）
 - 帧速率：30
- 
+
 **音频**：
 
 - 编码解码器：AAC (LC)
@@ -83,11 +83,11 @@ ms.author: juliako;cenkdin;anilmur
 
 1. 在所使用的计算机上打开 Telestream Wirecast 应用程序，然后针对 RTMP 流式处理进行设置。
 2. 导航到“输出”选项卡并选择“输出设置…”，以便对输出进行配置。
-    
+
     确保将“输出目标”设置为“RTMP 服务器”。
 3. 单击“确定”。
 4. 在设置页上，将“目标”字段设置为“Azure 媒体服务”。
- 
+
     编码配置文件已预先选择为 **Azure H.264 720p 16:9 (1280x720)**。若要自定义这些设置，请选择下拉菜单右侧的齿轮图标，然后选择“新建预设”。
 
     ![wirecast](./media/media-services-wirecast-live-encoder/media-services-wirecast3.png)
@@ -97,7 +97,7 @@ ms.author: juliako;cenkdin;anilmur
     为预设命名，并查看是否存在下列建议的设置：
 
     **视频**
-    
+
     - 编码器：MainConcept H.264
     - 每秒帧数：30
     - 平均比特率：5000 千位/秒（可根据网络限制进行调整）
@@ -108,7 +108,7 @@ ms.author: juliako;cenkdin;anilmur
 
     - 目标比特率：192 千位/秒
     - 采样速率：44.100 kHz
-     
+
     ![wirecast](./media/media-services-wirecast-live-encoder/media-services-wirecast4.png)
 
 6. 按“保存”。
@@ -118,11 +118,11 @@ ms.author: juliako;cenkdin;anilmur
     请确保选择新的配置文件。
 
 7. 获取频道的输入 URL，以便将其分配给 Wirecast 的“RTMP 终结点”。
-    
+
     导航回 AMSE 工具，查看频道完成状态。状态从“正在启动”变为“正在运行”后，即可获取输入 URL。
-      
+
     频道正在运行时，右键单击频道名称，向下导航，将鼠标悬停在“将输入 URL 复制到剪贴板”上方，然后选择“主要输入 URL”。
-    
+
     ![wirecast](./media/media-services-wirecast-live-encoder/media-services-wirecast6.png)
 
 8. 在 Wirecast 的“输出设置”窗口中，将此信息粘贴到输出部分的“地址”字段，然后指定一个流名称。
@@ -139,7 +139,7 @@ ms.author: juliako;cenkdin;anilmur
 >另外，请确保不要让频道在没有一个输入/贡献源的情况下处于就绪状态的时间超出 15 分钟。
 
 ##测试播放
-  
+
 1. 导航回 AMSE 工具，然后右键单击要测试的频道。在菜单中，将鼠标悬停在“播放预览”上方，然后选择“使用 Azure Media Player”。
 
     ![wirecast](./media/media-services-wirecast-live-encoder/media-services-wirecast8.png)
@@ -157,16 +157,16 @@ ms.author: juliako;cenkdin;anilmur
 2. 为节目命名，然后根据需要调整“存档时段长度”（默认为 4 小时）。你还可以指定存储位置，也可以将其保留为默认值。
 3. 选中“立即启动节目”框。
 4. 单击“创建节目”。
-  
+
     注意：创建节目需要的时间比创建频道需要的时间少。
- 
+
 5. 节目运行后，可通过下述方式来确认其是否能够播放：右键单击该节目，导航到“播放节目”，然后选择“使用 Azure Media Player”。
 6. 确认以后，再次右键单击该节目，然后选择“将输出 URL 复制到剪贴板”（也可通过菜单从“节目信息和设置”选项检索此信息）。
 
 现在可以将流嵌入到播放器中，也可将其分发给受众进行实时观看。
 
 ## 故障排除
- 
+
 请参阅[故障排除](./media-services-troubleshooting-live-streaming.md)主题以获取相关指导。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

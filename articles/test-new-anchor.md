@@ -20,7 +20,7 @@ V.0625.1
 - [Configure VPN connectivity](./hdinsight/hdinsight-hbase-geo-replication-configure-VNets.md)
 - [Configure DNS](./hdinsight/hdinsight-hbase-geo-replication-configure-DNS.md)
 - [portal](http://www.azure.cn)
- 
+
 ##test direct reference of md file
 
 > [!TIP] Subscribe to the [Guest OS Update RSS Feed][rss] to receive the most timely notification on all Guest OS changes. Changes mentioned on that feed will be integrated into this page approximately every week.
@@ -81,13 +81,13 @@ The following example shows how to create an asset.
     x-ms-client-request-id: c59de965-bc89-4295-9a57-75d897e5221e
     Host: wamsbayclus001rest-hs.cloudapp.net
     Content-Length: 45
-    
+
     {"Name":"BigBuckBunny.mp4", "Options":"0"}
-    
+
 **HTTP Response**
 
 If successful, the following is returned:
-    
+
     HTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 452
@@ -102,7 +102,7 @@ If successful, the following is returned:
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Sun, 18 Jan 2015 22:06:40 GMT
-        
+
     {  
        "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Assets/@Element",
        "Id":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
@@ -115,7 +115,7 @@ If successful, the following is returned:
        "Uri":"https://storagetestaccount001.blob.core.windows.net/asset-9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
        "StorageAccountName":"storagetestaccount001"
     }
-    
+
 ### Create an AssetFile
 
 The [AssetFile](https://msdn.microsoft.com/zh-CN/library/azure/hh974275.aspx) entity represents a video or audio file that is stored in a blob container. An asset file is always associated with an asset, and an asset may contain one or many AssetFiles. The Media Services Encoder task fails if an asset file object is not associated with a digital file in a blob container.
@@ -134,7 +134,7 @@ After you upload your digital media file into a blob container, you will use the
     x-ms-version: 2.8
     Host: wamsbayclus001rest-hs.cloudapp.net
     Content-Length: 164
-    
+
     {  
        "IsEncrypted":"false",
        "IsPrimary":"false",
@@ -158,7 +158,7 @@ After you upload your digital media file into a blob container, you will use the
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 19 Jan 2015 00:34:07 GMT
-    
+
     {  
        "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Files/@Element",
        "Id":"nb:cid:UUID:f13a0137-0a62-9d4c-b3b9-ca944b5142c5",
@@ -182,7 +182,7 @@ After you upload your digital media file into a blob container, you will use the
 Before uploading any files into blob storage, set the access policy rights for writing to an asset. To do that, POST an HTTP request to the AccessPolicies entity set. Define a DurationInMinutes value upon creation or you will receive a 500 Internal Server error message back in response. For more information on AccessPolicies, see [AccessPolicy](https://msdn.microsoft.com/zh-CN/library/azure/hh974297.aspx).
 
 The following example shows how to create an AccessPolicy:
-        
+
 **HTTP Request**
 
     POST https://wamsbayclus001rest-hs.cloudapp.net/api/AccessPolicies HTTP/1.1
@@ -195,13 +195,13 @@ The following example shows how to create an AccessPolicy:
     x-ms-version: 2.8
     Host: wamsbayclus001rest-hs.cloudapp.net
     Content-Length: 74
-    
+
     {"Name":"NewUploadPolicy", "DurationInMinutes":"440", "Permissions":"2"} 
 
 **HTTP Request**
 
     If successful, the following response is returned:
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 312
@@ -241,9 +241,9 @@ Some considerations apply:
 - There may be a 30-40 second delay after a Locator is created to when it is available for use. This issue applies to both SAS URL and Origin Locators.
 
 The following example shows how to create a SAS URL Locator, as defined by the Type property in the request body ("1" for a SAS locator and "2" for an On-Demand origin locator). The **Path** property returned contains the URL that you must use to upload your file.
-    
+
 **HTTP Request**
-    
+
     POST https://wamsbayclus001rest-hs.cloudapp.net/api/Locators HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 1.0;NetFx
@@ -254,7 +254,7 @@ The following example shows how to create a SAS URL Locator, as defined by the T
     x-ms-version: 2.8
     Host: wamsbayclus001rest-hs.cloudapp.net
     Content-Length: 178
-    
+
     {  
        "AccessPolicyId":"nb:pid:UUID:be0ac48d-af7d-4877-9d60-1805d68bffae",
        "AssetId":"nb:cid:UUID:9bc8ff20-24fb-4fdb-9d7c-b04c7ee573a1",
@@ -265,7 +265,7 @@ The following example shows how to create a SAS URL Locator, as defined by the T
 **HTTP Response**
 
 If successful, the following response is returned:
-        
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 949
@@ -279,7 +279,7 @@ If successful, the following response is returned:
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 19 Jan 2015 03:01:29 GMT
-    
+
     {  
        "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Locators/@Element",
        "Id":"nb:lid:UUID:af57bdd8-6751-4e84-b403-f3c140444b54",
@@ -295,7 +295,7 @@ If successful, the following response is returned:
     }
 
 ### Upload a file into a blob storage container
-    
+
 Once you have the AccessPolicy and Locator set, the actual file is uploaded to an Azure Blob Storage container using the Azure Storage REST APIs. You can either upload in page or block blobs. 
 
 >[!NOTE] You must add the file name for the file you want to upload to the Locator **Path** value received in the previous section. For example, https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . . 
@@ -305,7 +305,7 @@ For more information on working with Azure storage blobs, see [Blob Service REST
 ### Update the AssetFile 
 
 Now that you've uploaded your file, update the FileAsset size (and other) information. For example:
-    
+
     MERGE https://wamsbayclus001rest-hs.cloudapp.net/api/Files('nb%3Acid%3AUUID%3Af13a0137-0a62-9d4c-b3b9-ca944b5142c5') HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 1.0;NetFx
@@ -315,7 +315,7 @@ Now that you've uploaded your file, update the FileAsset size (and other) inform
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=f7f09258-6753-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421662918&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=utmoXXbm9Q7j4tW1yJuMVA3egRiQy5FPygwadkmPeaY%3d
     x-ms-version: 2.8
     Host: wamsbayclus001rest-hs.cloudapp.net
-    
+
     {  
        "ContentFileSize":"1186540",
        "Id":"nb:cid:UUID:f13a0137-0a62-9d4c-b3b9-ca944b5142c5",
@@ -385,7 +385,7 @@ Note that in addition to being able to use the dynamic packaging capabilities, O
 >[!NOTE] For information about pricing details, see [Media Services Pricing Details](http://go.microsoft.com/fwlink/?LinkId=275107).
 
 To change the number of on-demand streaming reserved units, do the following:
-    
+
 ### Get the streaming endpoint you want to update
 
 For example, let's get the first streaming endpoint in your account (you can have up to 2 streaming endpoints in running state at the same time.)
@@ -402,14 +402,14 @@ For example, let's get the first streaming endpoint in your account (you can hav
     Host: wamsbayclus001rest-hs.cloudapp.net
 
 **HTTP Response**
-    
+
 If successful, the following is returned:
-    
+
     HTTP/1.1 200 OK
     . . . 
-    
+
 ### Scale the streaming endpoint
- 
+
 **HTTP Request**:
 
     POST https://wamsbayclus001rest-hs.cloudapp.net/api/StreamingEndpoints('nb:oid:UUID:cd57670d-cc1c-0f86-16d8-3ad478bf9486')/Scale HTTP/1.1
@@ -421,7 +421,7 @@ If successful, the following is returned:
     x-ms-version: 2.8
     x-ms-client-request-id: 39f96c93-a4b1-43ce-b97e-b2aaa44ee2dd
     Host: wamsbayclus001rest-hs.cloudapp.net
-    
+
     {"scaleUnits":1}
 
 **HTTP Response**
@@ -444,9 +444,9 @@ If successful, the following is returned:
 The allocation of any new units of on-demand streaming takes around 20 minutes to complete. To check the status of the operation use the **Operations** method and specify the Id of the operation. The operation Id was returned in the response to the **Scale** request.
 
     operation-id: nb:opid:UUID:1853bcbf-b71f-4ed5-a4c7-a581d4f45ae7
- 
+
 **HTTP Request**:
-    
+
     GET https://wamsbayclus001rest-hs.cloudapp.net/api/Operations('nb:opid:UUID:1853bcbf-b71f-4ed5-a4c7-a581d4f45ae7') HTTP/1.1
     MaxDataServiceVersion: 3.0;NetFx
     Accept: application/json;odata=verbose
@@ -454,9 +454,9 @@ The allocation of any new units of on-demand streaming takes around 20 minutes t
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=f7f09258-6753-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421466122&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=TiKGEOTporft4pFGU24sSZRZk5GRAWszFXldl5NXAhY%3d
     x-ms-version: 2.8
     Host: wamsbayclus001rest-hs.cloudapp.net
-    
+
 **HTTP Response**
-    
+
     HTTP/1.1 200 OK
     Cache-Control: no-cache
     Content-Length: 515
@@ -469,7 +469,7 @@ The allocation of any new units of on-demand streaming takes around 20 minutes t
     DataServiceVersion: 1.0;
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Fri, 16 Jan 2015 22:57:39 GMT
-    
+
     {  
        "d":{  
           "__metadata":{  
@@ -514,7 +514,7 @@ The following code requests the encoder's id.
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=f7f09258-6753-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421675491&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=9hUudHYnATpi5hN3cvTfgw%2bL4N3tL0fdsRnQnm6ZYIU%3d
     x-ms-version: 2.8
     Host: wamsbayclus001rest-hs.cloudapp.net
-    
+
 **HTTP Response**
 
     HTTP/1.1 200 OK
@@ -529,7 +529,7 @@ The following code requests the encoder's id.
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 19 Jan 2015 07:54:09 GMT
-    
+
     {  
        "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#MediaProcessors",
        "value":[  
@@ -551,7 +551,7 @@ Each Job can have one or more Tasks depending on the type of processing that you
 The following example shows you how to create and post a Job with one Task set to encode a video at a specific resolution and quality. The following documentation section contains the list of all the [task presets](https://msdn.microsoft.com/zh-CN/library/azure/dn619392.aspx) supported by the Azure Media Processor.  
 
 **HTTP Request**
-    
+
     POST https://wamsbayclus001rest-hs.cloudapp.net/api/Jobs HTTP/1.1
     DataServiceVersion: 1.0;NetFx
     MaxDataServiceVersion: 3.0;NetFx
@@ -562,7 +562,7 @@ The following example shows you how to create and post a Job with one Task set t
     x-ms-version: 2.8
     Host: wamsbayclus001rest-hs.cloudapp.net
     Content-Length: 482
-    
+
     {  
        "Name":"NewTestJob",
        "InputMediaAssets":[  
@@ -599,7 +599,7 @@ If successful, the following response is returned:
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 19 Jan 2015 08:04:35 GMT
-        
+
     {  
        "d":{  
           "__metadata":{  
@@ -637,7 +637,7 @@ If successful, the following response is returned:
                 "type":"Collection(Microsoft.Cloud.Media.Vod.Rest.Data.Models.JobNotificationSubscription)"
              },
              "results":[  
-    
+
              ]
           }
        }
@@ -658,7 +658,7 @@ There are a few important things to note in any Job request:
 - OutputMediaAssets can be named using the assetName attribute. If this attribute is not present, then the name of the OutputMediaAsset will be whatever the inner text value of the <outputAsset> element is with a suffix of either the Job Name value, or the Job Id value (in the case where the Name property isn't defined). For example, if you set a value for assetName to "Sample", then the OutputMediaAsset Name property would be set to "Sample". However, if you did not set a value for assetName, but did set the job name to "NewJob", then the OutputMediaAsset Name would be "JobOutputAsset(value)_NewJob". 
 
     The following example shows how to set the assetName attribute:
-    
+
         "<?xml version=\"1.0\" encoding=\"utf-8\"?><taskBody><inputAsset>JobInputAsset(0)</inputAsset><outputAsset assetName=\"CustomOutputAssetName\">JobOutputAsset(0)</outputAsset></taskBody>"
 
 - To enable task chaining:
@@ -699,7 +699,7 @@ If successful, the following response is returned:
     X-AspNet-Version: 4.0.30319
     X-Powered-By: ASP.NET
     Date: Sun, 13 May 2012 05:16:53 GMT
-    
+
     {"d":{"State":2}}
 
 ### Cancel a job
@@ -738,7 +738,7 @@ In the next section we are going to configure the delivery policy for the job's 
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=amstestaccount001&urn%3aSubscriptionId=f7f09258-6753-4ca2-b1ae-193798e2c9d8&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1421675491&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.windows.net%2f&HMACSHA256=9hUudHYnATpi5hN3cvTfgw%2bL4N3tL0fdsRnQnm6ZYIU%3d
     x-ms-version: 2.8
     Host: wamsbayclus001rest-hs.cloudapp.net
-    
+
 **HTTP Response**
 
     HTTP/1.1 200 OK
@@ -753,7 +753,7 @@ In the next section we are going to configure the delivery policy for the job's 
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Mon, 19 Jan 2015 08:28:13 GMT
-        
+
     {  
        "odata.metadata":"https://wamsbayclus001rest-hs.cloudapp.net/api/$metadata#Assets",
        "value":[  
@@ -794,7 +794,7 @@ MPEG DASH
 ### Create AssetDeliveryPolicies
 
 **HTTP Request**
-        
+
     POST https://wamsbayclus001rest-hs.cloudapp.net/api/AssetDeliveryPolicies HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 1.0;NetFx
@@ -805,11 +805,11 @@ MPEG DASH
     x-ms-version: 2.8
     Host: wamsbayclus001rest-hs.cloudapp.net
     Content-Length: 83
-    
+
     {"Name":"Clear Policy", "AssetDeliveryPolicyType":"2","AssetDeliveryProtocol":"7"} 
 
 **HTTP Response**
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 361
@@ -834,7 +834,7 @@ MPEG DASH
        "Created":"2015-01-19T09:13:18.911615Z",
        "LastModified":"2015-01-19T09:13:18.911615Z"
     }
-    
+
 ### Link the asset delivery policy with an asset
 
 The following HTTP request associates the specified delivery policy with the specified asset.  
@@ -851,7 +851,7 @@ The following HTTP request associates the specified delivery policy with the spe
     x-ms-version: 2.8
     Host: wamsbayclus001rest-hs.cloudapp.net
     Content-Length: 140
-    
+
     { "uri":"https://wamsbayclus001rest-hs.cloudapp.net/api/AssetDeliveryPolicies('nb%3Aadpid%3AUUID%3Aef97ae36-b898-4b8a-b427-7819ee726276')" }
 
 **HTTP Response**
@@ -903,7 +903,7 @@ The following example shows how to specify the AccessPolicy for read permissions
     Host: wamsbayclus001rest-hs.net
     Content-Length: 74
     Expect: 100-continue
-    
+
     {"Name": "DownloadPolicy", "DurationInMinutes" : "300", "Permissions" : 1}
 
 If successful, a 201 success code is returned describing the AccessPolicy entity that you created. You will then use the AccessPolicy Id along with the Asset Id of the asset that contains the file you want to deliver(such as an output asset) to create the Locator entity.
@@ -925,7 +925,7 @@ The following code shows how to get a URL that can be used to download a media f
     Host: wamsbayclus001rest-hs.net
     Content-Length: 182
     Expect: 100-continue
-    
+
     {"AccessPolicyId": "nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8", "AssetId" : "nb:cid:UUID:71d2dd33-efdf-ec43-8ea1-136a110bd42c", "StartTime" : "2014-05-17T16:45:53", "Type":1}
 
 If successful, the following response is returned:
@@ -942,7 +942,7 @@ If successful, the following response is returned:
     X-AspNet-Version: 4.0.30319
     X-Powered-By: ASP.NET
     Date: Mon, 14 May 2012 21:41:32 GMT
-        
+
     {  
        "d":{  
           "__metadata":{  
@@ -984,21 +984,21 @@ Once you have the AccessPolicy and Locator set, you can download files using the
 For more information on working with Azure storage blobs, see [Blob Service REST API](https://msdn.microsoft.com/zh-CN/library/azure/dd135733.aspx).
 
 As a result of the encoding job that you performed earlier (encoding into Adaptive MP4 set), you have multiple MP4 files that you can progressively download. For example:    
-    
+
     https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_3400kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_2250kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1500kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_H264_1000kbps_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_96kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
-    
+
     https://storagetestaccount001.blob.core.windows.net/asset-38058602-a4b8-4b33-b9f0-6880dc1490ea/BigBuckBunny_AAC_und_ch2_56kbps.mp4?sv=2012-02-12&sr=c&si=166d5154-b801-410b-a226-ee2f8eac1929&sig=P2iNZJAvAWpp%2Bj9yV6TQjoz5DIIaj7ve8ARynmEM6Xk%3D&se=2015-02-14T01:13:05Z
 
 ###Creating an on-demand origin URL for streaming content
@@ -1015,7 +1015,7 @@ The following code shows how to create an origin URL Locator:
     Host: wamsbayclus001rest-hs
     Content-Length: 182
     Expect: 100-continue
-    
+
     {"AccessPolicyId": "nb:pid:UUID:38c71dd0-44c5-4c5f-8418-08bb6fbf7bf8", "AssetId" : "nb:cid:UUID:eb5540a2-116e-4d36-b084-7e9958f7f3c3", "StartTime" : "2014-05-17T16:45:53",, "Type":2}
 
 If successful, the following response is returned:
@@ -1032,7 +1032,7 @@ If successful, the following response is returned:
     X-AspNet-Version: 4.0.30319
     X-Powered-By: ASP.NET
     Date: Mon, 14 May 2012 21:41:39 GMT
-        
+
     {  
        "d":{  
           "__metadata":{  
@@ -1078,9 +1078,9 @@ Once you have SAS URLs, you can progressively download your MP4 files by pasting
 
 To test adaptive streaming URLs use the following players:
 
-To test smooth streaming, use [http://amsplayer.azurewebsites.net/](http://amsplayer.azurewebsites.net), or [http://smf.cloudapp.net/healthmonitor](http://smf.cloudapp.net/healthmonitor).
+To test smooth streaming, use [http://amsplayer.azurewebsites.net](http://amsplayer.azurewebsites.net), or [http://smf.cloudapp.net/healthmonitor](http://smf.cloudapp.net/healthmonitor).
 
-To test MPEG DASH, use [http://dashif.org](http://dashif.org/reference/players/javascript).
+To test MPEG DASH, use [http://dashif.org/reference/players/javascript](http://dashif.org/reference/players/javascript).
 
 To test HLS, use iOS or Safari devices, or [3ivx-hls-player](http://apps.microsoft.com/windows/zh-CN/app/3ivx-hls-player/f79ce7d0-2993-4658-bc4e-83dc182a0614). 
 

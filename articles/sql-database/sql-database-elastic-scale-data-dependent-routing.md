@@ -90,7 +90,7 @@ ms.author: torsteng
 ## 与暂时性故障处理集成 
 
 在云中开发数据访问应用程序的最佳实践是，确保暂时性故障由应用引起，并且确保在引发错误之前重试几次这些操作。[暂时性故障处理](https://msdn.microsoft.com/zh-cn/library/dn440719(v=pandp.60).aspx) 中讨论了云应用程序的暂时性故障处理。
- 
+
 暂时性故障处理在本质上可以与依赖于数据的路由模式共存。关键需求是重试整个数据访问请求，包括已获取依赖于数据的路由连接的 **using** 块。可按照如下方式重写上面的示例（请注意突出显示的更改）。
 
 ### 示例 - 依赖于数据的路由与暂时性故障处理 
@@ -130,5 +130,5 @@ int newPersonId = 4321;
 若要分离分片或重新附加分片，请参阅[使用 RecoveryManager 类解决分片映射问题](./sql-database-elastic-database-recovery-manager.md)
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

@@ -35,19 +35,19 @@ wacn.lang: en
 + [There are issues with logging in to the website since I started using the CDN](#step8)
 + [Cache refresh failure](#step9)
 + [Why is CDN traffic used up when I haven’t Cnamed to the Azure CDN?](#step10)
- 
+
 ## **Why can’t cache my origin URL?**<a id="step1"></a>
 
 The inability to cache a URL is usually due to one of the following reasons:
 
 1. The response header for the origin URL includes the following information:
-   - Set-Cookie (and the Allow ignore Cookie option has not been checked in the Configure Cache Rules in Azure CDN management portal). Note: When Set-Cookie is used for user login and identification, the Allow Ignore Cookie option cannot be checked; otherwise, it could cause cache issues.
-   - Cache-Control: no-store/no-cache/private (and the Allow ignore Cache-Control option has not been checked in the Configure Cache Rules).
-   - The Expires time is a time in the past; Expires sets the point in time when the cache expires, so if it is a time in the past, it will make it impossible to cache.
-   - The value of Max-age is very small; Max-age sets the length of the caching time in seconds, so if the value is too small, for example less than two digits, it will expire very quickly and make it impossible to cache.
+    - Set-Cookie (and the Allow ignore Cookie option has not been checked in the Configure Cache Rules in Azure CDN management portal). Note: When Set-Cookie is used for user login and identification, the Allow Ignore Cookie option cannot be checked; otherwise, it could cause cache issues.
+    - Cache-Control: no-store/no-cache/private (and the Allow ignore Cache-Control option has not been checked in the Configure Cache Rules).
+    - The Expires time is a time in the past; Expires sets the point in time when the cache expires, so if it is a time in the past, it will make it impossible to cache.
+    - The value of Max-age is very small; Max-age sets the length of the caching time in seconds, so if the value is too small, for example less than two digits, it will expire very quickly and make it impossible to cache.
 
 2. The cache rules are not configured or are configured with errors such that the URL cannot hit any caching rules; for example, if the user accidentally enters the rule “[Any Character] (.gif|.jpg|.bmp) (.gif|.jpg|.bmp)”, then it will be impossible to hit the rule even for images, because the file extension is duplicated.
-   
+
 3. No users have so far accessed the URL, as some nodes will only cache the content after it has been accessed.
 
 ## **Why are custom domain resolved to origin?**<a id="step2"></a>
@@ -67,37 +67,37 @@ In general, return to origin traffic is less than or equal to CDN traffic, but i
 The cache hit rate is low. The cache hit rate can be affected by several factors:
 
 - Cache configuration issues.
-     
+
 - The HTTP header causes inability to cache.
-     
+
 - The CDN custom domain has just been added, so the number of cached files is still small.
-     
+
 - The type of the origin has limited contents that can be cached.
-     
+
 - Website visit numbers are low and the expiration time is short, so the number of cached files is small.
 - 
 ## **The return to origin rate is relatively high**<a id="step6"></a>
 
 1. Cache rule configuration issues
-    
+
 2. The amount of resources that can be cached is small
-    
+
 3. The cache time is short
 
 ## **Websites will not open since I started using the CDN**<a id="step7"></a> 
 
 Possible reasons:
- 
+
 1. Origin site issue.
-     
+
 2. The origin has a firewall that is preventing the CDN nodes from accessing origin.
-    
+
 3. The nodes are blocking the client IP.
-     
+
 4. If you have added a new domain or the domain name status has changed, you may need to wait for a while for them to take effect across all CDN edge nodes to, typically around 60 minutes.
-     
+
 5. CDN edge nodes failures
-    
+
 ## **There are issues with logging in to the website since I started using the CDN**<a id="step8"></a>
 
 It is highly likely that resources that shouldn’t be cached have been set up in the cache rules, in which case, you need to set the user back-end login folder to not cache (e.g. /user or /admin); if it is a website with no login or user session, then please enable Allow ignore cookie in Configure Caching Rules on Azure CDN management portal.

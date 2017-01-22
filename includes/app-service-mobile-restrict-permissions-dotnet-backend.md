@@ -2,7 +2,7 @@
 默认情况下，可匿名调用移动应用后端中的 API。接下来，需限制为仅可访问已验证的客户端。
 
 + **Node.js 后端（通过门户）**：
-    
+
     在移动应用的“设置”中，单击“简易表”并选择相应表。单击“更改权限”，为所有权限选择“仅已验证的访问”，然后单击“保存”。
 
 + **.NET 后端 (C#)**：
@@ -13,7 +13,7 @@
         public class TodoItemController : TableController<TodoItem>
 
 + **Node.js 后端（通过 Node.js 代码）**：
-    
+
     若要访问表时需验证身份，请向 Node.js 服务器脚本添加以下行：
 
         table.access = 'authenticated';

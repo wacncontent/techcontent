@@ -43,11 +43,11 @@ Azure CLI 提供适用于 Azure 的多平台命令行体验。可以直接通过
 若要安装最新 Azure CLI，请执行以下步骤：
 
 1. 在终端窗口运行以下命令。安装 Azure CLI 可能需要五分钟。
-   
+
         pip install azure-cli-core==0.1.0b7 azure-cli-vm==0.1.0b7 azure-cli-storage==0.1.0b7 azure-cli-role==0.1.0b7 azure-cli-resource==0.1.0b7 azure-cli-profile==0.1.0b7 azure-cli-network==0.1.0b7 azure-cli-iot==0.1.0b7 azure-cli-feedback==0.1.0b7 azure-cli-configure==0.1.0b7 azure-cli-component==0.1.0b7 azure-cli==0.1.0b7
 
 2. 运行以下命令，对安装进行验证：
-   
+
         az iot -h
 
 如果安装成功，则会看到以下输出。

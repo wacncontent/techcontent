@@ -42,9 +42,9 @@ Azure 将映像存储在**“我的映像”**下。上传的任何映像都会�
 
 1. 在 [Azure 经典管理门户](http://manage.windowsazure.cn)中**连接**到虚拟机。有关说明，请参阅[如何登录到运行 Windows Server 的虚拟机][]。
 
-2.	以管理员身份打开“命令提示符”窗口。
+2. 以管理员身份打开“命令提示符”窗口。
 
-3.	将目录更改为 `%windir%\system32\sysprep`，然后运行 sysprep.exe。
+3. 将目录更改为 `%windir%\system32\sysprep`，然后运行 sysprep.exe。
 
 4. 	此时会显示**“系统准备工具”**对话框。请执行以下操作：
 
@@ -56,21 +56,21 @@ Azure 将映像存储在**“我的映像”**下。上传的任何映像都会�
 
     ![运行 Sysprep](./media/virtual-machines-windows-classic-capture-image/SysprepGeneral.png)
 
-7.	sysprep 命令将关闭虚拟机，这会在 Azure 经典管理门户中将虚拟机的状态更改为“已停止”。
+7. sysprep 命令将关闭虚拟机，这会在 Azure 经典管理门户中将虚拟机的状态更改为“已停止”。
 
-8.	在 Azure 经典管理门户中，单击“虚拟机”，然后选择要捕获的虚拟机。
+8. 在 Azure 经典管理门户中，单击“虚拟机”，然后选择要捕获的虚拟机。
 
-9.	在命令栏中，单击**“捕获”**。
+9. 在命令栏中，单击**“捕获”**。
 
     ![捕获虚拟机](./media/virtual-machines-windows-classic-capture-image/CaptureVM.png)  
 
     此时将显示**“捕获虚拟机”**对话框。
 
-10.	在**“映像名称”**中，键入新映像的名称。
+10. 在**“映像名称”**中，键入新映像的名称。
 
-11.	在将 Windows Server 映像添加到自定义映像集之前，必须先按前面步骤中的说明通过运行 Sysprep 使该映像通用化。单击**“我已经在虚拟机上运行了 Sysprep”**以指明你已完成此操作。
+11. 在将 Windows Server 映像添加到自定义映像集之前，必须先按前面步骤中的说明通过运行 Sysprep 使该映像通用化。单击**“我已经在虚拟机上运行了 Sysprep”**以指明你已完成此操作。
 
-12.	单击复选标记以捕获映像。新映像现在将显示在**“映像”**下。
+12. 单击复选标记以捕获映像。新映像现在将显示在**“映像”**下。
 
      ![成功捕获映像](./media/virtual-machines-windows-classic-capture-image/VMCapturedImageAvailable.png)
 

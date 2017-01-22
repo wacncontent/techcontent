@@ -82,11 +82,11 @@ csharp
     CloudJob job = batchClient.JobOperations.CreateJob(
         "myJob",
         new PoolInformation { PoolId = "myPool" });
-    
+
     // Create reference to the linked Azure Storage account
     CloudStorageAccount linkedStorageAccount =
         new CloudStorageAccount(myCredentials, true);
-    
+
     // Create the blob storage container for the outputs
     await job.PrepareOutputStorageAsync(linkedStorageAccount);
 
@@ -101,12 +101,12 @@ csharp
     CloudStorageAccount linkedStorageAccount = new CloudStorageAccount(myCredentials);
     string jobId = Environment.GetEnvironmentVariable("AZ_BATCH_JOB_ID");
     string taskId = Environment.GetEnvironmentVariable("AZ_BATCH_TASK_ID");
-    
+
     TaskOutputStorage taskOutputStorage = new TaskOutputStorage(
         linkedStorageAccount, jobId, taskId);
-    
+
     /* Code to process data and produce output file(s) */
-    
+
     await taskOutputStorage.SaveAsync(TaskOutputKind.TaskOutput, "frame_full_res.jpg");
     await taskOutputStorage.SaveAsync(TaskOutputKind.TaskPreview, "frame_low_res.jpg");
 
@@ -124,7 +124,7 @@ csharp
 
     CloudJob job = await batchClient.JobOperations.GetJobAsync(jobId);
     JobOutputStorage jobOutputStorage = job.OutputStorage(linkedStorageAccount);
-    
+
     await jobOutputStorage.SaveAsync(JobOutputKind.JobOutput, "mymovie.mp4");
     await jobOutputStorage.SaveAsync(JobOutputKind.JobPreview, "mymovie_preview.mp4");
 
@@ -180,7 +180,7 @@ csharp
                 TaskOutputKind.TaskOutput))
         {
             Console.WriteLine($"output file: {output.FilePath}");
-    
+
             output.DownloadToFileAsync(
                 $"{jobId}-{output.FilePath}",
                 System.IO.FileMode.Create).Wait();

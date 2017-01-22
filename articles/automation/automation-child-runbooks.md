@@ -52,14 +52,14 @@ ms.author: magoedte;bwren
 
     $params = @{"VMName"="MyVM";"RepeatCount"=2;"Restart"=$true}
     $job = Start-AzureAutomationRunbook –AutomationAccountName "MyAutomationAccount" –Name "Test-ChildRunbook" –Parameters $params
-    
+
     $doLoop = $true
     While ($doLoop) {
        $job = Get-AzureAutomationJob –AutomationAccountName "MyAutomationAccount" -Id $job.Id
        $status = $job.Status
        $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped") 
     }
-    
+
     Get-AzureAutomationJobOutput –AutomationAccountName "MyAutomationAccount" -Id $job.Id –Stream Output
 
 [Start-ChildRunbook](http://gallery.technet.microsoft.com/scriptcenter/Start-Azure-Automation-1ac858a9) 是 TechNet 库中提供的一个帮助器 Runbook，用于从 cmdlet 启动 Runbook。使用该 Runbook，你可以选择等待子 Runbook 完成，然后检索其输出。除了可在你自己的 Azure 自动化环境中使用此 Runbook 以外，还可以使用此 Runbook 作为参考来处理 Runbook 和使用 cmdlet 执行作业。该帮助器 Runbook 本身必须以内嵌方式调用，因为它要求使用一个哈希表参数来接受子 Runbook 的参数值。

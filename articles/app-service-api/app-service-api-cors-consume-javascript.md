@@ -84,7 +84,7 @@ ms.author: rachelap
 
             $http.defaults.useXDomain = true;
             delete $http.defaults.headers.common['X-Requested-With']; 
-        
+
             return {
                 getItems : function(){
                     return $http.get(apiEndpoint + '/api/TodoList');
@@ -219,7 +219,7 @@ ms.author: rachelap
 ## 应用服务 CORS 与 Web API CORS
 
 在 Web API 项目中，可以安装 [Microsoft.AspNet.WebApi.Cors](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Cors/) NuGet 包，以便在代码中指定 API 接受来自哪些域的 JavaScript 调用。
- 
+
 Web API CORS 支持比应用服务 CORS 支持更有弹性。例如，在代码中可为不同操作方法指定不同的接受来源，但对于应用服务 CORS，只能为所有 API 应用的方法指定一组接受的来源。
 
 > [!NOTE] 请不要尝试在一个 API 应用中同时使用 Web API CORS 和应用服务 CORS。否则，会优先使用应用服务 CORS，而 Web API CORS 不起作用。例如，如果在应用服务中启用一个来源域，同时在 Web API 代码中启用所有来源域，则 Azure API 应用仅接受来自 Azure 中指定的域的调用。
@@ -237,13 +237,13 @@ Web API CORS 支持比应用服务 CORS 支持更有弹性。例如，在代码�
             public static void Register(HttpConfiguration config)
             {
                 // Web API configuration and services
-                
+
                 // The following line enables you to control CORS by using Web API code
                 config.EnableCors();
-    
+
                 // Web API routes
                 config.MapHttpAttributeRoutes();
-    
+
                 config.Routes.MapHttpRoute(
                     name: "DefaultApi",
                     routeTemplate: "api/{controller}/{id}",
@@ -259,13 +259,13 @@ Web API CORS 支持比应用服务 CORS 支持更有弹性。例如，在代码�
             [HttpOperationExceptionFilterAttribute]
             [EnableCors(origins:"https://todolistangular0121.chinacloudsites.cn", headers:"accept,content-type,origin,x-my-header", methods: "get,post")]
             public class ToDoListController : ApiController
- 
+
 ## 将 Azure API 管理与 API 应用配合使用
 
 如果将 Azure API 管理与 API 应用配合使用，请在 API 管理而不是 API 应用中配置 CORS。有关详细信息，请参阅以下资源：
 
 * [API Management cross domain policies](https://msdn.microsoft.com/zh-cn/library/azure/dn894084.aspx#CORS)（API 管理跨域策略）
- 
+
 ## 故障排除
 
 如果在学习本教程的过程中遇到问题，请参考下面列出的一些故障排除思路。

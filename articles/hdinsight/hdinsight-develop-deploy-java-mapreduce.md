@@ -113,7 +113,7 @@ wacn.date: 01/05/2017
 2. 将以下程序复制并粘贴到记事本中。
 
         package org.apache.hadoop.examples;
-        
+
         import java.io.IOException;
         import java.util.StringTokenizer;
         import org.apache.hadoop.conf.Configuration;
@@ -128,13 +128,13 @@ wacn.date: 01/05/2017
         import org.apache.hadoop.util.GenericOptionsParser;
 
         public class WordCount {
-        
+
           public static class TokenizerMapper 
                extends Mapper<Object, Text, Text, IntWritable>{
-            
+
             private final static IntWritable one = new IntWritable(1);
             private Text word = new Text();
-              
+
             public void map(Object key, Text value, Context context
                             ) throws IOException, InterruptedException {
               StringTokenizer itr = new StringTokenizer(value.toString());
@@ -144,11 +144,11 @@ wacn.date: 01/05/2017
               }
             }
           }
-          
+
           public static class IntSumReducer 
                extends Reducer<Text,IntWritable,Text,IntWritable> {
             private IntWritable result = new IntWritable();
-        
+
             public void reduce(Text key, Iterable<IntWritable> values, 
                                Context context
                                ) throws IOException, InterruptedException {
@@ -160,7 +160,7 @@ wacn.date: 01/05/2017
               context.write(key, result);
             }
           }
-        
+
           public static void main(String[] args) throws Exception {
             Configuration conf = new Configuration();
             String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
@@ -182,7 +182,7 @@ wacn.date: 01/05/2017
         }
 
     请注意，包名为 **org.apache.hadoop.examples**，类名为 **WordCount**。提交 MapReduce 作业时，将使用这些名称。
-    
+
 3. 保存文件。
 
 **生成并打包应用程序**
@@ -316,10 +316,10 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
 
         # Select an Azure subscription
         Select-AzureSubscription $subscriptionName
-        
+
         # Create a Storage account
         New-AzureStorageAccount -StorageAccountName $storageAccountName_Data -location $location
-                
+
         # Create a Blob storage container
         $storageAccountKey = Get-AzureStorageKey $storageAccountName_Data | %{ $_.Primary }
         $destContext = New-AzureStorageContext -Environment AzureChinaCloud –StorageAccountName $storageAccountName_Data –StorageAccountKey $storageAccountKey  
@@ -351,7 +351,7 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
         # Get a list of the .txt files
         $filesAll = Get-ChildItem $localFolder
         $filesTxt = $filesAll | where {$_.Extension -eq ".txt"}
-        
+
 4. 运行以下命令以创建存储上下文对象：
 
         # Create a storage context object
@@ -363,12 +363,12 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
 
         # Copy the files from the local workstation to the Blob container        
         foreach ($file in $filesTxt){
-         
+
             $fileName = "$localFolder\$file"
             $blobName = "$destFolder/$file"
-        
+
             write-host "Copying $fileName to $blobName"
-        
+
             Set-AzureStorageBlobContent -File $fileName -Container $containerName_Data -Blob $blobName -Context $destContext
         }
 
@@ -420,7 +420,7 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
 在此部分中，你将创建一个用于执行以下任务的 Azure PowerShell 脚本：
 
 1. 设置 HDInsight 群集
-    
+
     1. 创建将用作默认 HDInsight 群集文件系统的存储帐户
     2. 创建 Blob 存储容器 
     3. 创建 HDInsight 群集
@@ -442,7 +442,7 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
 
 1. 打开记事本。
 2. 复制并粘贴以下代码：
-        
+
         # The Storage account and the HDInsight cluster variables
         $subscriptionName = "<AzureSubscriptionName>"
         $stringPrefix = "<StringForPrefix>"
@@ -451,9 +451,9 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
 
         $storageAccountName_Data = "<TheDataStorageAccountName>"
         $containerName_Data = "<TheDataBlobStorageContainerName>"
-        
+
         $clusterName = $stringPrefix + "hdicluster"
-        
+
         $storageAccountName_Default = $stringPrefix + "hdistore"
         $containerName_Default =  $stringPrefix + "hdicluster"
 
@@ -463,62 +463,62 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
         $mrInput = "wasbs://$containerName_Data@$storageAccountName_Data.blob.core.chinacloudapi.cn/WordCount/Input/"
         $mrOutput = "wasbs://$containerName_Data@$storageAccountName_Data.blob.core.chinacloudapi.cn/WordCount/Output/"
         $mrStatusOutput = "wasbs://$containerName_Data@$storageAccountName_Data.blob.core.chinacloudapi.cn/WordCount/MRStatusOutput/"
-        
+
         # Create a PSCredential object. The username and password are hardcoded here.  You can change them if you want.
         $password = ConvertTo-SecureString "Pass@word1" -AsPlainText -Force
         $creds = New-Object System.Management.Automation.PSCredential ("Admin", $password) 
-        
+
         Select-AzureSubscription $subscriptionName
-        
+
         #=============================
         # Create a Storage account used as the default file system
         Write-Host "Create a storage account" -ForegroundColor Green
         New-AzureStorageAccount -StorageAccountName $storageAccountName_Default -location $location
-        
+
         #=============================
         # Create a Blob storage container used as the default file system
         Write-Host "Create a Blob storage container" -ForegroundColor Green
         $storageAccountKey_Default = Get-AzureStorageKey $storageAccountName_Default | %{ $_.Primary }
         $destContext = New-AzureStorageContext -Environment AzureChinaCloud –StorageAccountName $storageAccountName_Default –StorageAccountKey $storageAccountKey_Default
-        
+
         New-AzureStorageContainer -Name $containerName_Default -Context $destContext
-        
+
         #=============================
         # Create an HDInsight cluster
         Write-Host "Create an HDInsight cluster" -ForegroundColor Green
         $storageAccountKey_Data = Get-AzureStorageKey $storageAccountName_Data | %{ $_.Primary }
-        
+
         $config = New-AzureHDInsightClusterConfig -ClusterSizeInNodes $clusterNodes |
             Set-AzureHDInsightDefaultStorage -StorageAccountName "$storageAccountName_Default.blob.core.chinacloudapi.cn" -StorageAccountKey $storageAccountKey_Default -StorageContainerName $containerName_Default |
             Add-AzureHDInsightStorage -StorageAccountName "$storageAccountName_Data.blob.core.chinacloudapi.cn" -StorageAccountKey $storageAccountKey_Data
-        
+
         New-AzureHDInsightCluster -Name $clusterName -Location $location -Credential $creds -Config $config
-        
+
         #=============================
         # Create a MapReduce job definition
         Write-Host "Create a MapReduce job definition" -ForegroundColor Green
         $mrJobDef = New-AzureHDInsightMapReduceJobDefinition -JobName mrWordCountJob  -JarFile $jarFile -ClassName $className -Arguments $mrInput, $mrOutput -StatusFolder /WordCountStatus
-        
+
         #=============================
         # Run the MapReduce job
         Write-Host "Run the MapReduce job" -ForegroundColor Green
         $mrJob = Start-AzureHDInsightJob -Cluster $clusterName -JobDefinition $mrJobDef 
         Wait-AzureHDInsightJob -Job $mrJob -WaitTimeoutInSeconds 3600 
-        
+
         Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $mrJob.JobId -StandardError 
         Get-AzureHDInsightJobOutput -Cluster $clusterName -JobId $mrJob.JobId -StandardOutput
-                
+
         #=============================
         # Delete the HDInsight cluster
         Write-Host "Delete the HDInsight cluster" -ForegroundColor Green
         Remove-AzureHDInsightCluster -Name $clusterName  
-        
+
         # Delete the default file system Storage account
         Write-Host "Delete the storage account" -ForegroundColor Green
         Remove-AzureStorageAccount -StorageAccountName $storageAccountName_Default
 
 3. 设置此脚本中的前六个变量。**$stringPrefix** 变量用于对 HDInsight 群集名称、存储帐户名称和 Blob 存储容器名称的指定字符串加上前缀。因为这些项目的名称必须为 3 到 24 个字符，请确保你指定的字符串和此脚本使用的名称，合计不超过名称的字符数限制。**$stringPrefix** 必须全部为小写。
- 
+
     **$storageAccountName_Data** 和 **$containerName_Data** 变量是用于存储数据文件和应用程序的存储帐户和容器。**$location** 变量必须与数据存储帐户位置匹配。
 
 4. 复查其余变量。
@@ -543,9 +543,9 @@ Azure HDInsight 将 Azure Blob 存储用于数据存储。设置 HDInsight 群�
         $storageAccountName_Data = "<TheDataStorageAccountName>"
         $containerName_Data = "<TheDataBlobStorageContainerName>"
         $blobName = "WordCount/Output/part-r-00000"
-    
+
 3. 运行以下命令以创建 Azure 存储上下文对象：
-        
+
         Select-AzureSubscription $subscriptionName
         $storageAccountKey = Get-AzureStorageKey $storageAccountName_Data | %{ $_.Primary }
         $storageContext = New-AzureStorageContext -Environment AzureChinaCloud –StorageAccountName $storageAccountName_Data –StorageAccountKey $storageAccountKey  

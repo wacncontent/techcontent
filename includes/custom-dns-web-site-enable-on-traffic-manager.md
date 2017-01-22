@@ -13,7 +13,7 @@
     ![](./media/custom-dns-web-site/dncmntask-cname-6.png)
 
 1. 在“自定义域”边栏选项卡上，单击“添加主机名”。
-    
+
 1. 使用“主机名”文本框输入要与此 Web 应用相关联的流量管理器域名。
 
     ![](./media/custom-dns-web-site/dncmntask-cname-8.png)

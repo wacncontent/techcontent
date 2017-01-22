@@ -322,7 +322,7 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
     ~$ azure vm shutdown my-vm
     info:   Executing command vm shutdown
     info:   vm shutdown command OK  
-    
+
 **vm capture &lt;vm-name> &lt;target-image-name>**
 
 此命令捕获 Azure 虚拟机映像。
@@ -501,7 +501,7 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 当使用 azure vm disk detach 命令分离数据磁盘时，请使用 &lt;lun&gt; 参数指明要分离的磁盘。
 
-> [AZURE>NOTE] 请注意，应始终按相反的顺序分离数据磁盘，即，从已分配的编号最高的 LUN 开始。Linux SCSI 层不支持在仍附加有编号较高的 LUN 时分离编号较低的 LUN。例如，不应在仍附加有 LUN 1 的情况下分离 LUN 0。
+> [!NOTE] 请注意，应始终按相反的顺序分离数据磁盘，即，从已分配的编号最高的 LUN 开始。Linux SCSI 层不支持在仍附加有编号较高的 LUN 时分离编号较低的 LUN。例如，不应在仍附加有 LUN 1 的情况下分离 LUN 0。
 
 **vm disk show [options] &lt;name>**
 

@@ -109,7 +109,7 @@ Azure 提供了安全机制来帮助管理员管理 Azure 云服务和虚拟机�
 - 在 RD 网关上预配 [Azure 管理证书](http://msdn.microsoft.com/zh-cn/library/azure/gg551722.aspx)，使它成为可以访问 Azure 经典管理门户的唯一主机。
 - 将 RD 网关加入管理员工作站所在的同一个[管理域](http://technet.microsoft.com/zh-cn/library/bb727085.aspx)。当你在具有对 Azure AD 的单向信任的域中使用站点到站点 IPsec VPN 或 ExpressRoute 时，或者要联合本地 AD DS 实例与 Azure AD 之间的凭据时，就必须这样做。
 - 配置[客户端连接授权策略](http://technet.microsoft.com/zh-cn/library/cc753324.aspx)，让 RD 网关验证客户端计算机名称是否有效（已加入域）并可以访问 Azure 经典管理门户。
-- 针对 [Azure VPN](../vpn-gateway/index.md/) 使用 IPsec 以进一步防止管理流量遭到窃听和令牌失窃，或考虑使用通过 [Azure ExpressRoute](https://azure.microsoft.com/documentation/services/expressroute/) 建立隔离的 Internet 链路。
+- 针对 [Azure VPN](../vpn-gateway/index.md) 使用 IPsec 以进一步防止管理流量遭到窃听和令牌失窃，或考虑使用通过 [Azure ExpressRoute](https://azure.microsoft.com/documentation/services/expressroute/) 建立隔离的 Internet 链路。
 - 针对通过 RD 网关登录的管理员启用多重身份验证或智能卡身份验证。
 - 在 Azure 中配置源 [IP 地址限制](http://azure.microsoft.com/blog/2013/08/27/confirming-dynamic-ip-address-restrictions-in-windows-azure-web-sites/)或[网络安全组](../virtual-network/virtual-networks-nsg.md)以将允许的管理终结点数目降到最低。
 

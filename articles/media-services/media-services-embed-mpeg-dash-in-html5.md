@@ -85,7 +85,7 @@ Dash.js 是用 JavaScript 编写的开源 MPEG-DASH 视频播放器。其目标�
     <body onload="setupVideo()">
 
 最后，使用 CSS 设置 video 元素的大小。在自适应流式处理环境中，这一点尤其重要，因为当播放适应不断变化的网络条件时，所播放的视频的大小可能会更改。在此简单演示中，直接通过将以下 CSS 添加到页面的 head 部分来强制将 video 元素设为可用浏览器窗口的 80%：
-    
+
     <style>
     video {
       width: 80%;

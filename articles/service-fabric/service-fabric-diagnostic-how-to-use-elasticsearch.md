@@ -19,7 +19,7 @@ ms.author: karolz@microsoft.com
 
 # 将 Elasticsearch 用作 Service Fabric 应用程序跟踪存储
 ## 介绍
-本文介绍 [Azure Service Fabric](./index.md/) 应用程序如何使用 **Elasticsearch** 和 **Kibana** 来存储、索引和搜索应用程序跟踪。[Elasticsearch](https://www.elastic.co/guide/index.html) 是开源的、分布式和可缩放的实时搜索和分析引擎，很适合执行此任务。它可以安装在 Azure 中运行的 Windows 和 Linux 虚拟机上。Elasticsearch 可以非常高效地处理使用**Windows 事件跟踪 (ETW)** 之类的技术所生成的*结构化*跟踪。
+本文介绍 [Azure Service Fabric](./index.md) 应用程序如何使用 **Elasticsearch** 和 **Kibana** 来存储、索引和搜索应用程序跟踪。[Elasticsearch](https://www.elastic.co/guide/index.html) 是开源的、分布式和可缩放的实时搜索和分析引擎，很适合执行此任务。它可以安装在 Azure 中运行的 Windows 和 Linux 虚拟机上。Elasticsearch 可以非常高效地处理使用**Windows 事件跟踪 (ETW)** 之类的技术所生成的*结构化*跟踪。
 
 Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也是 Service Fabric 应用程序获取其诊断信息的建议方法。使用相同的机制可让运行时提供和应用程序提供的跟踪之间相互关联，使故障排除更轻松。Visual Studio 中的 Service Fabric 项目模板包含日志记录 API（基于 .NET **EventSource** 类），该 API 默认情况下会发出 ETW 跟踪。有关使用 ETW 的 Service Fabric 应用程序跟踪的一般概述，请参阅[在本地计算机开发安装过程中监视和诊断服务](./service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)。
 
@@ -51,7 +51,7 @@ Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也
 
         $ENV:PATH += ";<Git installation folder>\usr\bin"
         $ENV:OPENSSL_CONF = "<Git installation folder>\usr\ssl\openssl.cnf"
-        
+
     用你计算机上的 Git 位置替换 `<Git installation folder>`；默认值为 **"C:\\Program Files\\Git"**。请注意第一个路径开头的分号字符。
 
 4. 确保你已登录到 Azure（通过 [`Add-AzureRmAccount`](https://msdn.microsoft.com/zh-cn/library/mt619267.aspx) cmdlet），并且已选择应该用来创建弹性搜索群集的订阅。可以使用 `Get-AzureRmContext` 和 `Get-AzureRmSubscription` cmdlet 来验证是否选择了正确的订阅。
@@ -178,11 +178,11 @@ Microsoft.Diagnostic.Listeners 库是 PartyCluster 示例 Service Fabric 应用�
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.ServiceFabric.Services.Runtime;
-    
+
     // **** Add the following directives
     using Microsoft.Diagnostics.EventListeners;
     using Microsoft.Diagnostics.EventListeners.Fabric;
-    
+
     namespace Stateless1
     {
         internal static class Program
@@ -201,20 +201,20 @@ Microsoft.Diagnostic.Listeners 库是 PartyCluster 示例 Service Fabric 应用�
                     {
                         esListener = new ElasticSearchListener(configProvider);
                     }
-    
+
                     // The ServiceManifest.XML file defines one or more service type names.
                     // Registering a service maps a service type name to a .NET type.
                     // When Service Fabric creates an instance of this service type,
                     // an instance of the class is created in this host process.
-    
+
                     ServiceRuntime.RegisterServiceAsync("Stateless1Type", 
                         context => new Stateless1(context)).GetAwaiter().GetResult();
-    
+
                     ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(Stateless1).Name);
-    
+
                     // Prevents this host process from terminating so services keep running.
                     Thread.Sleep(Timeout.Infinite);
-    
+
                     // **** Ensure that the ElasticSearchListner instance is not garbage-collected prematurely
                     GC.KeepAlive(esListener);
                 }

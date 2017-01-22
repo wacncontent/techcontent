@@ -60,14 +60,14 @@ Bootstrap 的使用方式有 2 种：
 
     # hive-site.xml configuration
     $hiveConfigValues = @{ "hive.metastore.client.socket.timeout"="90" }
-    
+
     $config = New-AzureHDInsightClusterConfig `
         | Set-AzureHDInsightDefaultStorage `
             -StorageAccountName "$defaultStorageAccountName.blob.core.chinacloudapi.cn" `
             -StorageAccountKey $defaultStorageAccountKey `
         | Add-AzureHDInsightConfigValues `
             -Hive $hiveConfigValues 
-    
+
     New-AzureHDInsightCluster `
         -Name $clusterName `
         -Location $location `
@@ -176,7 +176,7 @@ Bootstrap 的使用方式有 2 种：
     # Create a configuration object
     ####################################
     $hiveConfigValues = @{ "hive.metastore.client.socket.timeout"="90" }
-        
+
     $config = New-AzureHDInsightClusterConfig `
         | Set-AzureHDInsightDefaultStorage `
             -StorageAccountName "$defaultStorageAccountName.blob.core.chinacloudapi.cn" `

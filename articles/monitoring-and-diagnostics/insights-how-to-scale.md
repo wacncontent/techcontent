@@ -34,7 +34,7 @@ ms.author: robb
 2. 点击 “应用服务计划”中的“扩大（应用服务计划）”磁贴来设置手动缩放实例计数。
 
     ![“缩放”分页](./media/insights-how-to-scale/Insights_ScaleBladeDayZero.png)
-    
+
 4. 可以使用滑块手动调整“实例”数。
 5. 单击“保存”命令，几乎可以立即缩放到该实例数。
 

@@ -570,13 +570,13 @@ Azure 存储服务分析现在支持用于文件存储的指标。使用指标�
     仅通过 REST API 或客户端库支持 SAS。通过 SMB 协议装载文件共享时，不能使用 SAS 委派对其内容的访问权限。
 
 2. **Azure 文件共享是在 Internet 上公开可见，还是只能通过 Azure 对其进行访问？**
- 
+
     只要端口 445（TCP 出站）处于打开状态且客户端支持 SMB 3.0 协议（*例如*，Windows 8 或 Windows Server 2012），文件共享就可通过 Internet 使用。
 
 3. **Azure 虚拟机与文件共享之间的网络流量是否算作对订阅计费的外部带宽？**
 
     如果文件共享和虚拟机位于不同的区域，则它们之间的流量将作为外部带宽收费。
- 
+
 4. **如果是虚拟机和同一区域中的文件共享之间的网络流量，是免费吗？**
 
     是的。如果流量在同一区域，是免费的。
@@ -588,7 +588,7 @@ Azure 存储服务分析现在支持用于文件存储的指标。使用指标�
 6. **故障转移群集的“文件共享见证”是 Azure 文件存储的使用案例之一吗？**
 
     目前，不支持此功能。
- 
+
 7. **当前仅通过 LRS 或 GRS 复制文件存储，对吗？**
 
     我们计划支持 RA-GRS，但尚没有共享时间表。
@@ -622,7 +622,7 @@ Azure 存储服务分析现在支持用于文件存储的指标。使用指标�
     IBM 已发布相关文档来指导 IBM MQ 客户通过其服务配置 Azure 文件存储。有关详细信息，请查阅 [How to setup IBM MQ Multi instance queue manager with Azure File Service（如何通过 Azure 文件服务来设置 IBM MQ 多实例队列管理器）](https://github.com/ibm-messaging/mq-azure/wiki/How-to-setup-IBM-MQ-Multi-instance-queue-manager-with-Microsoft-Azure-File-Service)。
 
 15. **如何排除 Azure 文件存储错误？**
-    
+
     有关端到端故障排除指南你可以参考 [Azure 文件故障排除文章](./storage-troubleshoot-file-connection-problems.md)。
 
 ## 后续步骤

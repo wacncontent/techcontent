@@ -55,35 +55,35 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
   - 使用设备孪生报告的属性，允许通过设备孪生查询标识设备及其上次重启的时间
 
 1. 新建名为 **manageddevice** 的空文件夹。在 **manageddevice** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **manageddevice** 文件夹的命令提示符处，运行下述命令以安装 **azure-iot-device** 设备 SDK 包和 **azure-iot-device-mqtt** 包：
-   
+
     ```
     npm install azure-iot-device azure-iot-device-mqtt --save
     ```
 3. 在 **manageddevice** 文件夹中，利用文本编辑器创建新的 **dmpatterns\_getstarted\_device.js** 文件。
 4. 在 **dmpatterns\_getstarted\_device.js** 文件开头添加以下“require”语句：
-   
+
     ```
     'use strict';
-   
+
     var Client = require('azure-iot-device').Client;
     var Protocol = require('azure-iot-device-mqtt').Mqtt;
     ```
 5. 添加 **connectionString** 变量，并用其创建设备客户端。将连接字符串替换为设备连接字符串。
-   
+
     ```
     var connectionString = 'HostName={youriothostname};DeviceId=myDeviceId;SharedAccessKey={yourdevicekey}';
     var client = Client.fromConnectionString(connectionString, Protocol);
     ```
 6. 添加以下函数，实现设备上的直接方法
-   
+
     ```
     var onReboot = function(request, response) {
-   
+
         // Respond the cloud app for the direct method
         response.send(200, 'Reboot started', function(err) {
             if (!err) {
@@ -92,7 +92,7 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
                 console.log('Response to method \'' + request.methodName + '\' sent successfully.');
             }
         });
-   
+
         // Report the reboot before the physical restart
         var date = new Date();
         var patch = {
@@ -102,7 +102,7 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
                 }
             }
         };
-   
+
         // Get device Twin
         client.getTwin(function(err, twin) {
             if (err) {
@@ -115,13 +115,13 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
                 });  
             }
         });
-   
+
         // Add your device's reboot API for physical restart.
         console.log('Rebooting!');
     };
     ```
 7. 打开与 IoT 中心的连接并启动直接方法侦听器：
-   
+
     ```
     client.open(function(err) {
         if (err) {
@@ -133,33 +133,33 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
     });
     ```
 8. 保存并关闭 **dmpatterns\_getstarted\_device.js** 文件。
-   
-   [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+
+    [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 使用直接方法在设备上触发远程重新启动
 在此部分中，会创建一个 Node.js 控制台应用，它使用直接方法在设备上启动远程重新启动，并使用设备孪生查询找到该设备上次重新启动时间。
 
 1. 新建名为 **triggerrebootondevice** 的空文件夹。在 **triggerrebootondevice** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **triggerrebootondevice** 文件夹的命令提示符处，运行下述命令以安装 **azure-iothub** 设备 SDK 包和 **azure-iot-device-mqtt** 包：
-   
+
     ```
     npm install azure-iothub --save
     ```
 3. 在 **triggerrebootondevice** 文件夹中，使用文本编辑器创建新的 **dmpatterns\_getstarted\_service.js** 文件。
 4. 在 **dmpatterns\_getstarted\_service.js** 文件开头添加以下“require”语句：
-   
+
     ```
     'use strict';
-   
+
     var Registry = require('azure-iothub').Registry;
     var Client = require('azure-iothub').Client;
     ```
 5. 添加以下变量声明并替换占位符值：
-   
+
     ```
     var connectionString = '{iothubconnectionstring}';
     var registry = Registry.fromConnectionString(connectionString);
@@ -167,18 +167,18 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
     var deviceToReboot = 'myDeviceId';
     ```
 6. 添加以下函数以调用设备方法来重新启动目标设备：
-   
+
     ```
     var startRebootDevice = function(twin) {
-   
+
         var methodName = "reboot";
-   
+
         var methodParams = {
             methodName: methodName,
             payload: null,
             timeoutInSeconds: 30
         };
-   
+
         client.invokeDeviceMethod(deviceToReboot, methodParams, function(err, result) {
             if (err) { 
                 console.error("Direct method error: "+err.message);
@@ -189,12 +189,12 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
     };
     ```
 7. 添加以下函数以查询设备并获取上次重新启动时间：
-   
+
     ```
     var queryTwinLastReboot = function() {
-   
+
         registry.getTwin(deviceToReboot, function(err, twin){
-   
+
             if (twin.properties.reported.iothubDM != null)
             {
                 if (err) {
@@ -209,7 +209,7 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
     };
     ```
 8. 添加以下代码以调用函数，将触发重新启动直接方法并查询上次重新启动时间：
-   
+
     ```
     startRebootDevice();
     setInterval(queryTwinLastReboot, 2000);
@@ -220,12 +220,12 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
 现在，已准备就绪，可以运行应用。
 
 1. 在 **manageddevice** 文件夹的命令提示符处，运行以下命令以开始侦听重新启动直接方法。
-   
+
     ```
     node dmpatterns_getstarted_device.js
     ```
 2. 在 **triggerrebootondevice** 文件夹的命令提示符处，运行以下命令以触发远程重新启动并查询设备孪生以查找上次重新启动时间。
-   
+
     ```
     node dmpatterns_getstarted_service.js
     ```

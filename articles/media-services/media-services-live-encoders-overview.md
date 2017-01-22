@@ -24,7 +24,7 @@ ms.author: juliako
 ##Elemental Live
 
 有关如何配置 [Elemental Live](http://www.elementaltechnologies.com/products/elemental-live) 编码器以将单比特率实时流发送到 AMS 通道的信息，请参阅[配置 Elemental Live](./media-services-configure-elemental-live-encoder.md)。
- 
+
 ##Flash 媒体实时编码器
 
 有关如何配置 [Flash 媒体实时编码器](http://www.adobe.com/products/flash-media-encoder.html) (FMLE) 以将单比特率实时流发送到 AMS 通道的信息，请参阅[配置 FMLE](./media-services-configure-fmle-live-encoder.md)。

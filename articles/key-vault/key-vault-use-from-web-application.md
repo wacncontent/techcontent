@@ -73,7 +73,7 @@ ms.author: adhurwit
     //add these using statements
     using Microsoft.IdentityModel.Clients.ActiveDirectory;
     using System.Web.Configuration;
-    
+
     //this is an optional property to hold the secret after it is retrieved
     public static string EncryptSecret { get; set; }
 
@@ -84,10 +84,10 @@ ms.author: adhurwit
         ClientCredential clientCred = new ClientCredential(WebConfigurationManager.AppSettings["ClientId"],
                     WebConfigurationManager.AppSettings["ClientSecret"]);
         AuthenticationResult result = await authContext.AcquireTokenAsync(resource, clientCred);
-        
+
         if (result == null)
             throw new InvalidOperationException("Failed to obtain the JWT token");
-        
+
         return result.AccessToken;
     }
 
@@ -104,7 +104,7 @@ ms.author: adhurwit
     var kv = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(Utils.GetToken));
 
     var sec = kv.GetSecretAsync(WebConfigurationManager.AppSettings["SecretUri"]).Result.Value;
-    
+
     //I put a variable in a Utils class to hold the secret for general  application use. 
     Utils.EncryptSecret = sec;
 
@@ -128,22 +128,22 @@ ms.author: adhurwit
 **将证书与 Azure AD 应用程序相关联** 既然你拥有一个证书，你需要将其与 Azure AD 应用程序相关联。但当前 Azure 经典管理门户不支持此操作。你需要改用 Powershell。以下是你需要运行的命令：
 
     $x509 = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-    
+
     PS C:\> $x509.Import("C:\data\KVWebApp.cer")
-    
+
     PS C:\> $credValue = [System.Convert]::ToBase64String($x509.GetRawCertData())
-    
+
     PS C:\> $now = [System.DateTime]::Now
-    
+
     # this is where the end date from the cert above is used
     PS C:\> $yearfromnow = [System.DateTime]::Parse("2016-07-31") 
-    
+
     PS C:\> $adapp = New-AzureRmADApplication -DisplayName "KVWebApp" -HomePage "http://kvwebapp" -IdentifierUris "http://kvwebapp" -KeyValue $credValue -KeyType "AsymmetricX509Cert" -KeyUsage "Verify" -StartDate $now -EndDate $yearfromnow
-    
+
     PS C:\> $sp = New-AzureRmADServicePrincipal -ApplicationId $adapp.ApplicationId
-    
+
     PS C:\> Set-AzureRmKeyVaultAccessPolicy -VaultName 'contosokv' -ServicePrincipalName $sp.ServicePrincipalName -PermissionsToKeys all -ResourceGroupName 'contosorg'
-    
+
     # get the thumbprint to use in your app settings
     PS C:\>$x509.Thumbprint
 
@@ -217,5 +217,5 @@ ms.author: adhurwit
 <!--Image references-->
 [1]: ./media/key-vault-use-from-web-application/PortalAppSettings.png
 [2]: ./media/key-vault-use-from-web-application/PortalAddCertificate.png
- 
+
 <!---HONumber=Mooncake_0307_2016-->

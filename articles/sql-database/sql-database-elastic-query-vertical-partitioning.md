@@ -44,7 +44,7 @@ ms.author: torsteng
     CREATE DATABASE SCOPED CREDENTIAL <credential_name>  WITH IDENTITY = '<username>',  
     SECRET = '<password>'
     [;]
- 
+
 **注意**：请确保“<username>”中不包括任何“@servername”后缀。
 
 ## 创建外部数据源
@@ -73,7 +73,7 @@ ms.author: torsteng
         DATABASE_NAME='ReferenceData', 
         CREDENTIAL= SqlUser 
     ); 
- 
+
 检索当前外部数据源的列表：
 
     select * from sys.external_data_sources; 
@@ -86,7 +86,7 @@ ms.author: torsteng
     ( { <column_definition> } [ ,...n ])     
     { WITH ( <rdbms_external_table_options> ) } 
     )[;] 
-    
+
     <rdbms_external_table_options> ::= 
       DATA_SOURCE = <External_Data_Source>, 
       [ SCHEMA_NAME = N'nonescaped_schema_name',] 
@@ -175,7 +175,7 @@ sp\_execute\_remote 使用调用参数中提供的外部数据源，以在远程
 可以使用常规的 SQL Server 连接字符串将 BI 和数据集成工具连接到 SQL 数据库服务器（已启用弹性查询并已定义了外部表）上的数据库。请确保支持将 SQL Server 用作工具的数据源。然后可以引用弹性查询数据库及其外部表，就如同引用使用工具连接的任何其他 SQL Server 数据库一样。
 
 ## 最佳实践 
- 
+
 * 请确保已在 SQL 数据库防火墙配置中启用了对 Azure 服务的访问，以授予弹性查询终结点数据库访问远程数据库的权限。另请确保可使用外部数据源定义中提供的凭据成功登录到远程数据库，并有权访问远程表。
 
 * 弹性查询最适合大部分计算可以在远程数据库上完成的查询。使用可以在远程数据库或联接上求值的选择性筛选器谓词（可以完全在远程数据库上执行），通常可以获得最佳查询性能。其他查询模式可能需要从远程数据库加载大量数据，并且可能无法很好地执行。

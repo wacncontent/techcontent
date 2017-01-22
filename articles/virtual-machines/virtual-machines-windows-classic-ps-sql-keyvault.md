@@ -65,7 +65,7 @@ SQL Server 加密功能多种多样，包括[透明数据加密 (TDE)](https://m
         $credName = "mycred1"
         $vmName = "myvmname"
         $serviceName = "mycloudservicename"
-2.	然后使用以下脚本来配置和启用 AKV 集成。
+2. 然后使用以下脚本来配置和启用 AKV 集成。
 
         $secureakv =  $spSecret | ConvertTo-SecureString -AsPlainText -Force
         $akvs = New-AzureVMSqlServerKeyVaultCredentialConfig -Enable -CredentialName $credname -AzureKeyVaultUrl $akvURL -ServicePrincipalName $spName -ServicePrincipalSecret $secureakv

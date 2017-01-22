@@ -47,7 +47,7 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 - 单击“应用程序”选项卡，然后在底部抽屉中单击“添加”。
 - 根据提示创建一个新的 **Web 应用程序和/或 WebAPI**。
     - 应用程序的**名称**向最终用户描述你的应用程序
-    -	“登录 URL”是应用程序的基本 URL。框架的默认值为 http://localhost:3000/auth/openid/return``。
+    - “登录 URL”是应用程序的基本 URL。框架的默认值为 http://localhost:3000/auth/openid/return``。
     - “应用程序 ID URI”是应用程序的唯一标识符。约定是使用 `https://<tenant-domain>/<app-name>`，例如 `https://contoso.partner.onmschina.cn/my-first-aad-app`
 - 完成注册后，AAD 将为应用程序分配唯一的客户端标识符。在后面的部分中将会用到此值，因此，请从“配置”选项卡复制此值。
 
@@ -73,9 +73,9 @@ git clone --branch skeleton https://github.com/AzureADQuickStarts/WebApp-OpenIDC
 ## 3\.将应用设置为使用 passport-node-js 策略
 在这里，我们要将 Express 中间件配置为使用 OpenID Connect 身份验证协议。Passport 将用于发出登录和注销请求、管理用户的会话、获取有关用户的信息，等等。
 
--	首先，打开位于项目根目录中的 `config.js` 文件，并在 `exports.creds` 节中输入应用的配置值。
-    -	`clientID:` 是在注册门户中为应用分配的**应用程序 ID**。
-    -	`returnURL` 是在门户中输入的**重定向 URI**。
+- 首先，打开位于项目根目录中的 `config.js` 文件，并在 `exports.creds` 节中输入应用的配置值。
+    - `clientID:` 是在注册门户中为应用分配的**应用程序 ID**。
+    - `returnURL` 是在门户中输入的**重定向 URI**。
     - `clientSecret` 是在门户中生成的密码。
 
 - 接下来，打开项目根目录中的 `app.js` 文件，并添加以下调用以调用 `passport-azure-ad` 随附的 `OIDCStrategy` 策略
@@ -236,7 +236,7 @@ JavaScript
         log.info('We received a return from AzureAD.');
         res.redirect('/');
       });
-  
+
 ## 4\.使用 Passport 向 Azure AD 发出登录和注销请求
 
 现在，应用已正确配置为使用 OpenID Connect 身份验证协议与 v2.0 终结点通信。`passport-azure-ad` 会代你处理有关创建身份验证消息、验证 Azure AD 提供的令牌以及保留用户会话的繁琐细节。你要做的一切就是提供某种方式让用户登录和注销，以及收集有关已登录用户的其他信息。
@@ -267,8 +267,8 @@ JavaScript
       res.redirect('/');
     });
 
--	我们详细探讨一下：
-    -	`/` 路由将重定向到 index.ejs 视图，并在请求中传递用户（如果存在）
+- 我们详细探讨一下：
+    - `/` 路由将重定向到 index.ejs 视图，并在请求中传递用户（如果存在）
     - `/account` 路由首先***确保我们已经过身份验证***（下面我们将会实现），然后在请求中传递用户，以便我们可以获取有关该用户的其他信息。
     - `/login` 路由将从 `passport-azuread` 调用 azuread-openidconnect 验证器，如果该操作不成功，则将用户重定向回到 /login
     - `/logout` 只是调用 logout.ejs（和路由），以便清除 Cookie 并将用户返回到 index.ejs
@@ -355,7 +355,7 @@ Javascript
     <p></p>
     <a href="/logout">Log Out</a>
     <% } %>
-        
+
 - 最后，可以通过添加布局，使视图变得美观。在根目录下创建 '/views/layout.ejs' 视图
 
 HTML

@@ -47,11 +47,11 @@ ms.author: jotaub;sethm
 
 现在，你已准备就绪，可以运行应用程序了。
 
-1.	从 Visual Studio 中运行 **Receiver** 项目，然后等待它为所有分区启动接收方。
+1. 从 Visual Studio 中运行 **Receiver** 项目，然后等待它为所有分区启动接收方。
 
     ![][21]
 
-2.	运行 **Sender** 项目。
+2. 运行 **Sender** 项目。
 
     ![][22]
 
@@ -76,5 +76,5 @@ ms.author: jotaub;sethm
 [事件中心概述]: ./event-hubs-overview.md
 [使用事件中心的完整示例应用程序]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-286fd097
 [使用事件中心扩大事件处理]: https://code.msdn.microsoft.com/Service-Bus-Event-Hub-45f43fc3
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

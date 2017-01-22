@@ -112,7 +112,7 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
         ApplicationsFilter = applicationsFilter,
         NodesFilter = nodesFilter,
     };
-    
+
     ClusterHealth clusterHealth = await fabricClient.HealthManager.GetClusterHealthAsync(queryDescription);
 
 ### PowerShell
@@ -219,14 +219,14 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
         HealthPolicy = new ClusterHealthPolicy() {  ConsiderWarningAsError = true },
         EventsFilter = new HealthEventsFilter() { HealthStateFilterValue = HealthStateFilter.Warning },
     };
-    
+
     NodeHealth nodeHealth = await fabricClient.HealthManager.GetNodeHealthAsync(queryDescription);
 
 ### PowerShell
 用于获取节点运行状况的 cmdlet 为 [Get-ServiceFabricNodeHealth](https://msdn.microsoft.com/zh-cn/library/mt125937.aspx)。首先使用 [Connect-ServiceFabricCluster](https://msdn.microsoft.com/zh-cn/library/mt125938.aspx) cmdlet 连接到群集。以下 cmdlet 使用默认运行状况策略获取节点运行状况：
 
     PS C:\> Get-ServiceFabricNodeHealth _Node_1
-    
+
     NodeName              : _Node_1
     AggregatedHealthState : Ok
     HealthEvents          :
@@ -245,7 +245,7 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
 以下 cmdlet 获取群集中所有节点的运行状况：
 
     PS C:\> Get-ServiceFabricNode | Get-ServiceFabricNodeHealth | select NodeName, AggregatedHealthState | ft -AutoSize
-    
+
     NodeName AggregatedHealthState
     -------- ---------------------
     _Node_2                     Ok
@@ -288,7 +288,7 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
         DefaultServiceTypeHealthPolicy = serviceTypePolicy,
         MaxPercentUnhealthyDeployedApplications = 0,
     };
-    
+
     var queryDescription = new ApplicationHealthQueryDescription(applicationName)
     {
         HealthPolicy = policy,
@@ -296,7 +296,7 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
         ServicesFilter = new ServiceHealthStatesFilter() { HealthStateFilterValue = warningAndErrors },
         DeployedApplicationsFilter = new DeployedApplicationHealthStatesFilter() { HealthStateFilterValue = warningAndErrors },
     };
-    
+
     ApplicationHealth applicationHealth = await fabricClient.HealthManager.GetApplicationHealthAsync(queryDescription);
 
 ### PowerShell
@@ -419,7 +419,7 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
         EventsFilter = new HealthEventsFilter() { HealthStateFilterValue = HealthStateFilter.All },
         PartitionsFilter = new PartitionHealthStatesFilter() { HealthStateFilterValue = HealthStateFilter.Error },
     };
-    
+
     ServiceHealth serviceHealth = await fabricClient.HealthManager.GetServiceHealthAsync(queryDescription);
 
 ### PowerShell
@@ -570,7 +570,7 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
 以下 cmdlet 获取服务所有分区的主副本的运行状况：
 
     PS C:\> Get-ServiceFabricPartition fabric:/WordCount/WordCountService | Get-ServiceFabricReplica | where {$_.ReplicaRole -eq "Primary"} | Get-ServiceFabricReplicaHealth
-    
+
     PartitionId           : a1f83a35-d6bf-4d39-b90d-28d15f39599b
     ReplicaId             : 131031502143040223
     AggregatedHealthState : Ok
@@ -661,7 +661,7 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
 以下 cmdlet 获取部署在 **_Node_2** 上的 **fabric:/WordCount** 应用程序的 **WordCountServicePkg** 服务包的运行状况。此实体的 **System.Hosting** 报告包含成功的服务包和入口点激活以及成功的服务类型注册。
 
     PS C:\> Get-ServiceFabricDeployedApplication -ApplicationName fabric:/WordCount -NodeName _Node_2 | Get-ServiceFabricDeployedServicePackageHealth -ServiceManifestName WordCountServicePkg
-    
+
     ApplicationName       : fabric:/WordCount
     ServiceManifestName   : WordCountServicePkg
     NodeName              : _Node_2
@@ -678,7 +678,7 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
                             RemoveWhenExpired     : False
                             IsExpired             : False
                             Transitions           : Error->Ok = 3/22/2016 7:57:12 PM, LastWarning = 1/1/0001 12:00:00 AM
-    
+
                             SourceId              : System.Hosting
                             Property              : CodePackageActivation:Code:EntryPoint
                             HealthState           : Ok
@@ -690,7 +690,7 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
                             RemoveWhenExpired     : False
                             IsExpired             : False
                             Transitions           : Error->Ok = 3/22/2016 7:57:12 PM, LastWarning = 1/1/0001 12:00:00 AM
-    
+
                             SourceId              : System.Hosting
                             Property              : ServiceTypeRegistration:WordCountServiceType
                             HealthState           : Ok
@@ -757,27 +757,27 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
             // Return applications only if they are in error
             HealthStateFilter = HealthStateFilter.Error
         });
-    
+
     // Return all replicas
     var wordCountServiceReplicaFilter = new ReplicaHealthStateFilter()
         {
             HealthStateFilter = HealthStateFilter.All
         };
-    
+
     // Return all replicas and all partitions
     var wordCountServicePartitionFilter = new PartitionHealthStateFilter()
         {
             HealthStateFilter = HealthStateFilter.All
         };
     wordCountServicePartitionFilter.ReplicaFilters.Add(wordCountServiceReplicaFilter);
-    
+
     // For specific service, return all partitions and all replicas
     var wordCountServiceFilter = new ServiceHealthStateFilter()
     {
         ServiceNameFilter = new Uri("fabric:/WordCount/WordCountService"),
     };
     wordCountServiceFilter.PartitionFilters.Add(wordCountServicePartitionFilter);
-    
+
     // Application filter: for specific application, return no services except the ones of interest
     var wordCountApplicationFilter = new ApplicationHealthStateFilter()
         {
@@ -785,9 +785,9 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
             ApplicationNameFilter = new Uri("fabric:/WordCount"),
         };
     wordCountApplicationFilter.ServiceFilters.Add(wordCountServiceFilter);
-    
+
     queryDescription.ApplicationFilters.Add(wordCountApplicationFilter);
-    
+
     var result = await fabricClient.HealthManager.GetClusterHealthChunkAsync(queryDescription);
 
 ### PowerShell
@@ -994,7 +994,7 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
 以下 cmdlet 获取运行状况状态为警告的服务：
 
     PS C:\> Get-ServiceFabricApplication | Get-ServiceFabricService | where {$_.HealthState -eq "Warning"}
-    
+
     ServiceName            : fabric:/WordCount/WordCountService
     ServiceKind            : Stateful
     ServiceTypeName        : WordCountServiceType

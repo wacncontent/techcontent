@@ -19,7 +19,7 @@ ms.author: dendeli
 ---
 
 # 使用 Azure 通知中心和必应空间数据发送地域隔离的推送通知
- 
+
  > [!NOTE] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A0E0E5C02/)。
 
 在本教程中，你将学习如何从通用 Windows 平台应用程序，使用 Azure 通知中心和必应空间数据来传送基于位置的推送通知。
@@ -40,13 +40,13 @@ ms.author: dendeli
 完成创建项目之后，你应该可以控制应用本身。现在让我们完成地域隔离基础结构所需的各项设置。由于我们要使用必应服务来完成此操作，可以使用公共 REST API 终结点来查询特定的位置框架：
 
     http://spatial.virtualearth.net/REST/v1/data/
-    
+
 需要指定以下参数才能让终结点正常工作：
 
 * **数据源 ID** 和**数据源名称** – 在必应地图 API 中，数据源包含各种分门别类的元数据，例如营业地点和营业时间。你可以在此了解其相关信息。 
 * **实体名称** – 要用作通知参照点的实体。 
 * **必应地图 API 密钥** – 这是前面创建必应开发人员中心帐户时获取的密钥。
- 
+
 接下来，让我们深入了解上述各个元素的设置。
 
 ##设置数据源
@@ -64,7 +64,7 @@ ms.author: dendeli
     Bing Spatial Data Services, 1.0, TestBoundaries
     EntityID(Edm.String,primaryKey)|Name(Edm.String)|Longitude(Edm.Double)|Latitude(Edm.Double)|Boundary(Edm.Geography)
     1|SanFranciscoPier|||POLYGON ((-122.389825 37.776598,-122.389438 37.773087,-122.381885 37.771849,-122.382186 37.777022,-122.389825 37.776598))
-    
+
 上述代码中显示了以下实体：
 
 ![](./media/notification-hubs-geofence/bing-maps-geofence.png)
@@ -377,6 +377,6 @@ ms.author: dendeli
 
 上面所示的解决方案描述了一种方案，其中可能有各种不同的目标平台，因此我们并未限制只有系统特定的功能才能使用地域隔离。也就是说，通用 Windows 平台可以提供现成的[地域隔离区检测](https://msdn.microsoft.com/windows/uwp/maps-and-location/set-up-a-geofence)功能。
 
-有关通知中心功能的详细信息，请访问我们的[文档门户](./index.md/)。
+有关通知中心功能的详细信息，请访问我们的[文档门户](./index.md)。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

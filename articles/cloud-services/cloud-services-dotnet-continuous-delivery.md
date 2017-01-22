@@ -33,7 +33,7 @@ ms.author: tarcher
 
 1.  在生成服务器上，安装包含 MSBuild 的 [.NET Framework 4.5.2][]。
 2.  安装最新的 [Azure Authoring Tools for .NET](/develop/net/)。
-3.	安装 [Azure Libraries for .NET](http://go.microsoft.com/fwlink/?LinkId=623519)。
+3. 安装 [Azure Libraries for .NET](http://go.microsoft.com/fwlink/?LinkId=623519)。
 4.  将 Microsoft.WebApplication.targets 文件从 Visual Studio 安装复制到生成服务器。
 
     在已安装 Visual Studio 的计算机上，此文件位于目录 C:\\Program Files(x86)\\MSBuild\\Microsoft\\VisualStudio\\v14.0\\WebApplications 中。应将该文件复制到生成服务器上的同一目录中。
@@ -88,7 +88,7 @@ ms.author: tarcher
 
 2.  选择“触发器”选项卡，然后为希望生成包的时间指定所需条件。例如，指定“持续集成”可在进行源代码管理签入时生成包。
 
-3.	选择“源设置”选项卡，确保项目文件夹已列在“源代码管理文件夹”列中，并且状态为“活动”。
+3. 选择“源设置”选项卡，确保项目文件夹已列在“源代码管理文件夹”列中，并且状态为“活动”。
 
 4.  选择“生成默认值”选项卡，并在生成控制器下确认生成服务器的名称。此外，选择“将生成输出复制到以下放置文件夹”选项并指定所需的放置位置。
 
@@ -188,7 +188,7 @@ ms.author: tarcher
 
 2.  选择“进程”选项卡。
 
-3.	按照[这些说明](http://msdn.microsoft.com/zh-cn/library/dd647551.aspx)添加生成过程模板的活动项目，下载默认模板，将其添加到项目并将其签入。为生成过程模板指定新名称，如 AzureBuildProcessTemplate。
+3. 按照[这些说明](http://msdn.microsoft.com/zh-cn/library/dd647551.aspx)添加生成过程模板的活动项目，下载默认模板，将其添加到项目并将其签入。为生成过程模板指定新名称，如 AzureBuildProcessTemplate。
 
 3.  返回到“进程”选项卡，然后使用“显示详细信息”显示可用生成过程模板的列表。选择“新建...”按钮，然后导航到你刚刚添加并签入的项目。找到刚刚创建的模板，然后选择“确定”。
 
@@ -363,7 +363,7 @@ ms.author: tarcher
             $selectedsubscription = "default",
             $subscriptionDataFile = ""
          )
-    
+
     function Publish()
     {
         $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot -ErrorVariable a -ErrorAction silentlycontinue
@@ -390,7 +390,7 @@ ms.author: tarcher
                             Write-Output "$(Get-Date -f $timeStampFormat) - Deployment exists in $servicename.  Deleting deployment."
                             DeleteDeployment
                             CreateNewDeployment
-    
+
                         }
                     } # switch ($enableDeploymentUpgrade)
                 }
@@ -404,67 +404,67 @@ ms.author: tarcher
                 CreateNewDeployment
         }
     }
-    
+
     function CreateNewDeployment()
     {
         write-progress -id 3 -activity "Creating New Deployment" -Status "In progress"
         Write-Output "$(Get-Date -f $timeStampFormat) - Creating New Deployment: In progress"
-    
+
         $opstat = New-AzureDeployment -Slot $slot -Package $packageLocation -Configuration $cloudConfigLocation -label $deploymentLabel -ServiceName $serviceName
-    
+
         $completeDeployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
         $completeDeploymentID = $completeDeployment.deploymentid
-    
+
         write-progress -id 3 -activity "Creating New Deployment" -completed -Status "Complete"
         Write-Output "$(Get-Date -f $timeStampFormat) - Creating New Deployment: Complete, Deployment ID: $completeDeploymentID"
-    
+
         StartInstances
     }
-    
+
     function UpgradeDeployment()
     {
         write-progress -id 3 -activity "Upgrading Deployment" -Status "In progress"
         Write-Output "$(Get-Date -f $timeStampFormat) - Upgrading Deployment: In progress"
-    
+
         # perform Update-Deployment
         $setdeployment = Set-AzureDeployment -Upgrade -Slot $slot -Package $packageLocation -Configuration $cloudConfigLocation -label $deploymentLabel -ServiceName $serviceName -Force
-    
+
         $completeDeployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
         $completeDeploymentID = $completeDeployment.deploymentid
-    
+
         write-progress -id 3 -activity "Upgrading Deployment" -completed -Status "Complete"
         Write-Output "$(Get-Date -f $timeStampFormat) - Upgrading Deployment: Complete, Deployment ID: $completeDeploymentID"
     }
-    
+
     function DeleteDeployment()
     {
-    
+
         write-progress -id 2 -activity "Deleting Deployment" -Status "In progress"
         Write-Output "$(Get-Date -f $timeStampFormat) - Deleting Deployment: In progress"
-    
+
         #WARNING - always deletes with force
         $removeDeployment = Remove-AzureDeployment -Slot $slot -ServiceName $serviceName -Force
-    
+
         write-progress -id 2 -activity "Deleting Deployment: Complete" -completed -Status $removeDeployment
         Write-Output "$(Get-Date -f $timeStampFormat) - Deleting Deployment: Complete"
-    
+
     }
-    
+
     function StartInstances()
     {
         write-progress -id 4 -activity "Starting Instances" -status "In progress"
         Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instances: In progress"
-    
+
         $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
         $runstatus = $deployment.Status
-    
+
         if ($runstatus -ne 'Running')
         {
             $run = Set-AzureDeployment -Slot $slot -ServiceName $serviceName -Status Running
         }
         $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
         $oldStatusStr = @("") * $deployment.RoleInstanceList.Count
-    
+
         while (-not(AllInstancesRunning($deployment.RoleInstanceList)))
         {
             $i = 1
@@ -472,44 +472,44 @@ ms.author: tarcher
             {
                 $instanceName = $roleInstance.InstanceName
                 $instanceStatus = $roleInstance.InstanceStatus
-    
+
                 if ($oldStatusStr[$i - 1] -ne $roleInstance.InstanceStatus)
                 {
                     $oldStatusStr[$i - 1] = $roleInstance.InstanceStatus
                     Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instance '$instanceName': $instanceStatus"
                 }
-    
+
                 write-progress -id (4 + $i) -activity "Starting Instance '$instanceName'" -status "$instanceStatus"
                 $i = $i + 1
             }
-    
+
             sleep -Seconds 1
-    
+
             $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
         }
-    
+
         $i = 1
         foreach ($roleInstance in $deployment.RoleInstanceList)
         {
             $instanceName = $roleInstance.InstanceName
             $instanceStatus = $roleInstance.InstanceStatus
-    
+
             if ($oldStatusStr[$i - 1] -ne $roleInstance.InstanceStatus)
             {
                 $oldStatusStr[$i - 1] = $roleInstance.InstanceStatus
                 Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instance '$instanceName': $instanceStatus"
             }
-    
+
             $i = $i + 1
         }
-    
+
         $deployment = Get-AzureDeployment -ServiceName $serviceName -Slot $slot
         $opstat = $deployment.Status
-    
+
         write-progress -id 4 -activity "Starting Instances" -completed -status $opstat
         Write-Output "$(Get-Date -f $timeStampFormat) - Starting Instances: $opstat"
     }
-    
+
     function AllInstancesRunning($roleInstanceList)
     {
         foreach ($roleInstance in $roleInstanceList)
@@ -519,34 +519,34 @@ ms.author: tarcher
                 return $false
             }
         }
-    
+
         return $true
     }
-    
+
     #configure powershell with Azure 1.7 modules
     Import-Module Azure
-    
+
     #configure powershell with publishsettings for your subscription
     $pubsettings = $subscriptionDataFile
     Import-AzurePublishSettingsFile $pubsettings
     Set-AzureSubscription -CurrentStorageAccountName $storageAccountName -SubscriptionName $selectedsubscription
     Select-AzureSubscription $selectedsubscription
-    
+
     #set remaining environment variables for Azure cmdlets
     $subscription = Get-AzureSubscription $selectedsubscription
     $subscriptionname = $subscription.subscriptionname
     $subscriptionid = $subscription.subscriptionid
     $slot = $environment
-    
+
     #main driver - publish & write progress to activity log
     Write-Output "$(Get-Date -f $timeStampFormat) - Azure Cloud Service deploy script started."
     Write-Output "$(Get-Date -f $timeStampFormat) - Preparing deployment of $deploymentLabel for $subscriptionname with Subscription ID $subscriptionid."
-    
+
     Publish
-    
+
     $deployment = Get-AzureDeployment -slot $slot -serviceName $servicename
     $deploymentUrl = $deployment.Url
-    
+
     Write-Output "$(Get-Date -f $timeStampFormat) - Created Cloud Service with URL $deploymentUrl."
     Write-Output "$(Get-Date -f $timeStampFormat) - Azure Cloud Service deploy script finished."
 

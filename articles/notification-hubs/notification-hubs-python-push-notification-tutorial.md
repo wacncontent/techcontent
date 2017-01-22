@@ -13,14 +13,14 @@ ms.tgt_pltfrm: python
 ms.devlang: php
 ms.topic: article
 ms.date: 06/29/2016
-wacn.date: 11/15/2016
+wacn.date: 01/19/2017
 ms.author: wesmc
 ---
 
 # 如何通过 Python 使用通知中心
 [!INCLUDE [notification-hubs-backend-how-to-selector](../../includes/notification-hubs-backend-how-to-selector.md)]
-        
-如 MSDN 主题[通知中心 REST API](http://msdn.microsoft.com/library/dn223264.aspx) 中所述，你可以使用通知中心 REST 接口从 Java/PHP/Python/Ruby 后端访问所有通知中心功能。
+
+如 MSDN 主题[通知中心 REST API](http://msdn.microsoft.com/zh-cn/library/dn223264.aspx) 中所述，你可以使用通知中心 REST 接口从 Java/PHP/Python/Ruby 后端访问所有通知中心功能。
 
 > [!NOTE] 这是在 Python 中实现通知发送的示例引用实现，不是官方支持的通知中心 Python SDK。
 
@@ -37,7 +37,7 @@ ms.author: wesmc
 > [!NOTE] 该示例仅限于发送通知，并不执行任何注册管理操作。
 
 ## 客户端接口
-主要的客户端接口可提供 [.NET 通知中心 SDK](http://msdn.microsoft.com/library/jj933431.aspx) 中提供的相同方法。这将允许你直接翻译当前该网站上提供的所有教程和示例，这些内容均来自 Internet 上的社区。
+主要的客户端接口可提供 [.NET 通知中心 SDK](http://msdn.microsoft.com/zh-cn/library/jj933431.aspx) 中提供的相同方法。这将允许你直接翻译当前该网站上提供的所有教程和示例，这些内容均来自 Internet 上的社区。
 
 你可以在 [Python REST 包装器示例]中找到提供的所有代码。
 
@@ -45,16 +45,16 @@ ms.author: wesmc
 
     isDebug = True
     hub = NotificationHub("myConnectionString", "myNotificationHubName", isDebug)
-    
+
 发送 Windows toast 通知：
-    
+
     wns_payload = """<toast><visual><binding template=\"ToastText01\"><text id=\"1\">Hello world!</text></binding></visual></toast>"""
     hub.send_windows_notification(wns_payload)
-    
+
 ## 实现
 如果你尚未实现，请按照我们的[入门教程]学至最后一节，其中你必须实现后端。
 
-有关实现完整 REST 包装器的所有详细信息，请访问 [MSDN](http://msdn.microsoft.com/library/dn530746.aspx)。在本部分中，我们将向你介绍访问通知中心 REST 终结点所需的主要步骤的 Python 实现：
+有关实现完整 REST 包装器的所有详细信息，请访问 [MSDN](http://msdn.microsoft.com/zh-cn/library/dn530746.aspx)。在本部分中，我们将向你介绍访问通知中心 REST 终结点所需的主要步骤的 Python 实现：
 
 1. 解析连接字符串
 2. 生成授权令牌
@@ -67,16 +67,16 @@ ms.author: wesmc
     class NotificationHub:
         API_VERSION = "?api-version=2013-10"
         DEBUG_SEND = "&test"
-    
+
         def __init__(self, connection_string=None, hub_name=None, debug=0):
             self.HubName = hub_name
             self.Debug = debug
-    
+
             # Parse connection string
             parts = connection_string.split(';')
             if len(parts) != 3:
                 raise Exception("Invalid ConnectionString.")
-    
+
             for part in parts:
                 if part.startswith('Endpoint'):
                     self.Endpoint = 'https' + part[11:]
@@ -86,7 +86,7 @@ ms.author: wesmc
                     self.SasKeyValue = part[16:]
 
 ### 创建安全令牌
-有关安全令牌创建的详细信息，请访问[此处](http://msdn.microsoft.com/library/dn495627.aspx)。
+有关安全令牌创建的详细信息，请访问[此处](http://msdn.microsoft.com/zh-cn/library/dn495627.aspx)。
 以下方法必须添加到 **NotificationHub** 类，以便根据当前请求的 URI 和提取自连接字符串的凭据创建令牌。
 
     @staticmethod
@@ -126,10 +126,10 @@ ms.author: wesmc
                 raise Exception(
                     "Invalid Notification format. " +
                     "Must be one of the following - 'template', 'apple', 'gcm', 'windows', 'windowsphone', 'adm', 'baidu'")
-    
+
             self.format = notification_format
             self.payload = payload
-    
+
             # array with keynames for headers
             # Note: Some headers are mandatory: Windows: X-WNS-Type, WindowsPhone: X-NotificationType
             # Note: For Apple you can set Expiry with header: ServiceBusNotification-ApnsExpiry
@@ -138,7 +138,7 @@ ms.author: wesmc
 
 此类是一个容器，其中包含本机通知正文或一组模板通知上的属性，以及一组包含格式（本机平台或模板）和平台特定属性（如 Apple 过期属性和 WNS 标头）的标头。
 
-请参阅[通知中心 REST API 文档](http://msdn.microsoft.com/library/dn495827.aspx)和具体的通知平台格式以了解所有可用选项。
+请参阅[通知中心 REST API 文档](http://msdn.microsoft.com/zh-cn/library/dn495827.aspx)和具体的通知平台格式以了解所有可用选项。
 
 现在有了此类后，我们便可在 **NotificationHub** 类中编写发送通知方法了。
 
@@ -252,7 +252,7 @@ ms.author: wesmc
 
 ### 使用调试属性启用详细的日志记录
 在初始化通知中心时启用调试属性将写出关于 HTTP 请求和响应转储的详细日志记录信息，以及详细的通知消息发送结果。
-我们最近添加了这个称为[通知中心 TestSend 属性](http://msdn.microsoft.com/library/microsoft.servicebus.notifications.notificationhubclient.enabletestsend.aspx)的属性，它将返回有关通知发送结果的详细信息。
+我们最近添加了这个称为[通知中心 TestSend 属性](http://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.notifications.notificationhubclient.enabletestsend.aspx)的属性，它将返回有关通知发送结果的详细信息。
 若要使用它 - 请使用以下方法进行初始化：
 
     hub = NotificationHub("myConnectionString", "myNotificationHubName", isDebug)
@@ -328,7 +328,7 @@ ms.author: wesmc
 你将看到如详细的通知中心结果，例如
 
 - 当消息成功发送到推送通知服务时。 
-    
+
         <Outcome>The Notification was successfully sent to the Push Notification System</Outcome>
 
 - 如果没有为任何推送通知找到目标，你可能会看到以下响应（这表明可能没有找到传递通知的注册，因为这些注册具有一些不匹配的标记）
@@ -354,7 +354,7 @@ ms.author: wesmc
 ### 发送通知指定多个标记
 
 请注意发送多个标记时 Tags HTTP 标头的变化方式。
-    
+
     tags = {'sports', 'politics'}
     hub.send_windows_notification(wns_payload, tags)
 
@@ -368,9 +368,9 @@ ms.author: wesmc
 
         var template =
                         @"<toast><visual><binding template=""ToastText01""><text id=""1"">$(greeting_en)</text></binding></visual></toast>";
-            
+
 **服务器端 - 正在发送的负载**
-        
+
         template_payload = {'greeting_en': 'Hello', 'greeting_fr': 'Salut'}
         hub.send_template_notification(template_payload)
 
@@ -395,5 +395,5 @@ ms.author: wesmc
 [3]: ./media/notification-hubs-python-backend-how-to/SendWithOneTag.png
 [4]: ./media/notification-hubs-python-backend-how-to/SendWithMultipleTags.png
 [5]: ./media/notification-hubs-python-backend-how-to/TemplatedNotification.png
- 
+
 <!---HONumber=Mooncake_0808_2016-->

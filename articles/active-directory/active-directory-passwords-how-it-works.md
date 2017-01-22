@@ -119,5 +119,5 @@ Azure Active Directory 中的密码管理包含如下所述的几个逻辑组件
 [005]: ./media/active-directory-passwords-how-it-works/005.jpg "Image_005.jpg"
 [006]: ./media/active-directory-passwords-how-it-works/006.jpg "Image_006.jpg"
 [007]: ./media/active-directory-passwords-how-it-works/007.jpg "Image_007.jpg"
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

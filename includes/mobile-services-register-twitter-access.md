@@ -3,7 +3,7 @@
 新的 Twitter v1.1 API 要求您的应用在访问资源之前进行身份验证。首先，您需要获取使用 OAuth 2.0 来请求访问权限所需的凭据。然后，您要将凭据安全存储在移动服务的应用设置中。
 
 1. 如果您尚未注册您的应用，请完成主题<a href="/zh-cn/documentation/articles/mobile-services-how-to-register-twitter-authentication/" target="_blank">注册应用以便在移动服务中进行 Twitter 登录</a>中的步骤。 
-  
+
       Twitter 生成让您访问 Twitter v1.1 API 所需的凭据。您可从 Twitter 开发人员 Web 应用获取这些凭据。
 
 2. 导航到 <a href="http://go.microsoft.com/fwlink/p/?LinkId=268300" target="_blank">Twitter 开发人员</a> Web 应用，使用你的 Twitter 帐户凭据登录，然后选择你的 Twitter 应用。

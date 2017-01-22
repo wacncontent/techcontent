@@ -22,7 +22,7 @@ Azure SDK 2.0 版和更高版本包括 SAS 身份验证支持。有关服务总�
 
 服务总线中的 SAS 身份验证涉及配置具有服务总线资源相关权限的加密密钥。客户端通过提供 SAS 令牌，声明访问服务总线资源。此令牌包括正在访问的 URI 资源，以及一个由配置密钥签名的到期时间。
 
-你可以在服务总线[中继](./service-bus-fundamentals-hybrid-solutions.md#relays)、[队列](./service-bus-fundamentals-hybrid-solutions.md#queues)、[主题](./service-bus-fundamentals-hybrid-solutions.md#topics)和[事件中心](../event-hubs/index.md/)上配置共享访问签名授权规则。
+你可以在服务总线[中继](./service-bus-fundamentals-hybrid-solutions.md#relays)、[队列](./service-bus-fundamentals-hybrid-solutions.md#queues)、[主题](./service-bus-fundamentals-hybrid-solutions.md#topics)和[事件中心](../event-hubs/index.md)上配置共享访问签名授权规则。
 
 SAS 身份验证使用以下元素：
 

@@ -30,7 +30,7 @@ ms.author: douglasl
 **权限**。对数据库或表启用延伸数据库需要有 db\_owner 权限。对某个表启用延伸数据库还要求对该表拥有 ALTER 权限。
 
  >   [!NOTE] 若要在以后禁用 Stretch Database，请记住，针对表或数据库禁用 Stretch Database 不会删除远程对象。若要删除远程表或远程数据库，必须使用 Azure 管理门户。远程对象在手动删除之前，会持续产生 Azure 费用。
- 
+
 ## <a name="EnableWizardTable"></a>使用向导来对表启用 Stretch Database
 **启动向导**
 

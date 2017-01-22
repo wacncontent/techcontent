@@ -63,7 +63,7 @@ ms.author: ranjithr;wadeh
 * flushResponse
 
     IIS 的默认行为是在刷新之前或直到响应结束时（以较早出现者为准），缓冲最多 4MB 的响应数据。iisnode 会提供配置设置来替代此行为：若要在 iisnode 从 node.exe 收到响应实体主体片段时立刻刷新该片段，需在 web.config 中将 iisnode/@flushResponse 属性设置为“true”：
-    
+
     ```
     <configuration>    
         <system.webServer>    
@@ -76,7 +76,7 @@ ms.author: ranjithr;wadeh
     支持刷新每个响应实体主体片段会增加性能开销，而降低约 5% 的系统吞吐量（从 v0.1.13 起），因此，最好让此设置的范围仅限于需要响应流式处理的终结点（例如，在 web.config 中使用 <location> 元素）
 
     除此之外，对于流式处理应用程序，还需要将 iisnode 处理程序的 responseBufferLimit 设置为 0。
-    
+
     ```
     <handlers>    
         <add name="iisnode" path="app.js" verb="*" modules="iisnode" responseBufferLimit="0"/>    
@@ -108,7 +108,7 @@ ms.author: ranjithr;wadeh
 * devErrorsEnabled
 
     默认值为 false。如果设置为 true，iisnode 会在浏览器上显示 HTTP 状态代码和 Win32 错误代码。在调试特定类型的问题时，win32 代码很有用。
-    
+
 * debuggingEnabled（请勿在实际生产站点上启用）
 
     此设置控制调试功能。Iisnode 与节点检查器集成。通过启用此设置，可启用节点应用程序的调试功能。启用此设置后，iisnode 会在对节点应用程序发出第一个调试请求时，在“debuggerVirtualDir”目录中布置所需的节点检查器文件。你可以将请求发送到 http://yoursite/server.js/debug，以加载节点检查器。你可以使用“debuggerPathSegment”设置来控制调试 URL 段。默认情况下，debuggerPathSegment =“debug”。你可以将其设置为 GUID 之类的值，这样，其他人就更难发现。
@@ -269,7 +269,7 @@ http.createServer(function (req, res) {
 | 503 | 1001 | 无法将请求分派至 node.exe，因为应用程序正在回收。应用程序回收之后，应该会正常处理请求。 |
 | 503 | 1002 | 检查 win32 错误代码的实际原因 — 无法将请求分派至 node.exe。 |
 | 503 | 1003 | 命名管道太忙 — 检查节点是否正耗用大量 CPU                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                            
+
 NODE.exe 内有名为 NODE\_PENDING\_PIPE\_INSTANCES 的设置。默认情况下，此值在 Azure Webapps 外部为 4。这表示 node.exe 在命名管道上一次只能接受 4 个请求。在 Azure Webapps 上，此值设置为 5000，应足以满足 Azure Webapps 上运行的大多数节点应用程序。你不应该在 Azure Webapps 上看到 503.1003，因为我们 NODE\_PENDING\_PIPE\_INSTANCES 的值较高。|
 
 ## 更多资源

@@ -33,7 +33,7 @@ ms.author: cynthn
 ## <a id="initializeinWS"></a>如何：在 Windows Server 中初始化新的数据磁盘
 1. 连接到虚拟机。有关说明，请参阅 [How to connect and log on to an Azure virtual machine running Windows](./virtual-machines-windows-connect-logon.md)（如何连接并登录到运行 Windows 的 Azure 虚拟机）。
 2. 在登录虚拟机后，打开“服务器管理器”。在左窗格中，选择“文件和存储服务”。
-   
+
     ![打开服务器管理器](./media/virtual-machines-windows-classic-attach-disk/fileandstorageservices.png)
 3. 展开菜单并选择“磁盘”。
 4. “磁盘”部分会列出磁盘。在大多数情况下，会有磁盘 0、磁盘 1 和磁盘 2。磁盘 0 是操作系统磁盘，磁盘 1 是临时磁盘，磁盘 2 是刚附加到 VM 的数据磁盘。新的数据磁盘会将分区列为“未知”。右键单击磁盘，然后选择“初始化”。

@@ -35,9 +35,9 @@ Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数�
 2. 可使用 REST API 创建、更新或删除服务器级别规则
 
     若要创建或更新服务器级别防火墙规则，请使用以下内容执行 PUT 方法：
- 
+
         https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Sql/servers/{server-name}/firewallRules/{rule-name}?api-version={api-version}
-    
+
     请求正文
 
         {
@@ -46,9 +46,9 @@ Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数�
             "endIpAddress": "{end-ip-address}
             }
         } 
- 
+
     若要删除现有服务器级别防火墙规则，请使用以下内容执行 DELETE 方法：
-     
+
         https://management.chinacloudapi.cn/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/Microsoft.Sql/servers/{server-name}/firewallRules/{rule-name}?api-version={api-version}
 
 ##<a name="manage-firewall-rules-using-the-service-management-rest-api"></a> 使用 REST API 管理防火墙规则
@@ -57,7 +57,7 @@ Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数�
 * [删除防火墙规则](https://msdn.microsoft.com/zh-cn/library/azure/mt445502.aspx)
 * [获取防火墙规则](https://msdn.microsoft.com/zh-cn/library/azure/mt445503.aspx)
 * [列出所有防火墙规则](https://msdn.microsoft.com/zh-cn/library/azure/mt604478.aspx)
- 
+
 ## 后续步骤
 
 有关如何使用 Transact-SQL 创建服务器级别和数据库级别防火墙规则的指导文章，请参阅[使用 T-SQL 配置 Azure SQL 数据库服务器级别和数据库级别防火墙规则](./sql-database-configure-firewall-settings-tsql.md)。

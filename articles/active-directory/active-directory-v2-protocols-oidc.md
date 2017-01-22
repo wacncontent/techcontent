@@ -55,9 +55,9 @@ OpenID Connect 描述了元数据文档，该文档包含了应用执行登录�
             "private_key_jwt"
         ],
         "jwks_uri": "https:\/\/login.microsoftonline.com\/common\/discovery\/v2.0\/keys",
-  
+
         ...
-  
+
     }
 
 通常，使用此元数据文档来配置 OpenID Connect 库或 SDK；该库使用元数据来完成其工作。但是，如果不使用预生成的 OpenID Connect 库，则可以按照本文剩余部分的步骤来使用 v2.0 终结点执行 Web 应用中的登录。
@@ -70,7 +70,7 @@ OpenID Connect 描述了元数据文档，该文档包含了应用执行登录�
 - 该请求必须包含 `nonce` 参数
 
         // 换行符仅用于增强可读性
-        
+
         GET https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
         client_id=6731de76-14a6-49ae-97bc-6eba6914391e
         &response_type=id_token
@@ -79,7 +79,7 @@ OpenID Connect 描述了元数据文档，该文档包含了应用执行登录�
         &scope=openid
         &state=12345
         &nonce=678910
-    
+
 > [!TIP] 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `id_token` 的 `https://localhost/myapp/`。请注意，此请求会使用 `response_mode=query`（仅用于教程）。建议使用 `response_mode=form_post`。
     <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&scope=openid&response_mode=query&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
 
@@ -106,9 +106,9 @@ OpenID Connect 描述了元数据文档，该文档包含了应用执行登录�
     POST /myapp/ HTTP/1.1
     Host: localhost
     Content-Type: application/x-www-form-urlencoded
-    
+
     id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik1uQ19WWmNB...&state=12345
-    
+
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
 | id\_token | 应用程序请求的 id\_token。可以使用 id\_token 验证用户的标识，并以用户身份开始会话。有关 id\_token 及其内容的更多详细信息，请参阅 [v2.0 终结点令牌参考](./active-directory-v2-tokens.md)。 |
@@ -120,9 +120,9 @@ OpenID Connect 描述了元数据文档，该文档包含了应用执行登录�
     POST /myapp/ HTTP/1.1
     Host: localhost
     Content-Type: application/x-www-form-urlencoded
-    
+
     error=access_denied&error_description=the+user+canceled+the+authentication
-    
+
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- |
 | error | 用于分类发生的错误类型与响应错误的错误码字符串。 |

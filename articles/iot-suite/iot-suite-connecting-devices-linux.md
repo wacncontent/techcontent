@@ -325,7 +325,7 @@ IoT 中心序列化程序客户端库使用一个模型来指定设备发送到 
       }
     }
     ```
-    
+
     下面提供了一个在启动时发送到 IoT 中心的示例 **DeviceInfo** 消息以供参考：
 
     ```
@@ -344,15 +344,15 @@ IoT 中心序列化程序客户端库使用一个模型来指定设备发送到 
       ]
     }
     ```
-    
+
     下面提供了一个发送到 IoT 中心的示例 **Telemetry** 消息以供参考：
 
     ```
     {"DeviceId":"mydevice01", "Temperature":50, "Humidity":50, "ExternalTemperature":55}
     ```
-    
+
     下面提供了一个从 IoT 中心接收的示例**命令**以供参考：
-    
+
     ```
     {
       "Name":"SetHumidity",

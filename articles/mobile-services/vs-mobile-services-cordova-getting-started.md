@@ -42,7 +42,7 @@ var todoTable = mobileServiceClient.getTable('TodoItem');
         this.text = text;
         this.complete = false;
     }
-    
+
     var items = new Array();
     var insertTodoItem = function (todoItem) {
         todoTable.insert(todoItem).done(function (item) {

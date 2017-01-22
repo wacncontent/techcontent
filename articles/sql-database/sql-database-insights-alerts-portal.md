@@ -45,11 +45,11 @@ ms.author: carlrab
 ## 使用 Azure 门户预览创建指标的警报规则
 1. 在[门户](https://portal.azure.cn/)中，找到希望监视的资源并选择该资源。
 2. 在“监视”部分下选择“警报”或“警报规则”。对于不同的资源，文本和图标可能稍有不同。
-   
+
     ![监视](./media/insights-alerts-portal/AlertRulesButton.png)  
 
 3. 选择“添加警报”命令并填写各个字段。
-   
+
     ![添加警报](./media/insights-alerts-portal/AddAlertOnlyParamsPage.png)  
 
 4. 为警报规则**命名**，并选择一个**描述**，描述也将显示在通知电子邮件中。

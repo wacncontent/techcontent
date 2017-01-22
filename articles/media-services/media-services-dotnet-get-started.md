@@ -24,7 +24,7 @@ ms.author: juliako
 
 >[!NOTE]
 若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
- 
+
 ## 概述
 本教程将引导你完成使用用于 .NET 的 Azure 媒体服务 (AMS) SDK 实施视频点播 (VoD) 内容传送应用程序的步骤。
 
@@ -56,7 +56,7 @@ ms.author: juliako
 以下是完成本教程所需具备的条件。
 
 - 若要完成本教程，你需要一个 Azure 帐户。
-    
+
     如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。获取可用来尝试付费版 Azure 服务的信用额度。即使在信用额度用完后，也可保留帐户并使用免费的 Azure 服务和功能，例如 Azure App Service 中的 Web 应用功能。
 - 操作系统：Windows 8 或更高版本、Windows 2008 R2、Windows 7。
 - .NET Framework 4.0 或更高版本
@@ -139,7 +139,7 @@ ms.author: juliako
             <add key="MediaServicesAccountName" value="Media-Services-Account-Name" />
             <add key="MediaServicesAccountKey" value="Media-Services-Account-Key" />
           </appSettings>
-          
+
         </configuration>
 
 5. 使用以下代码覆盖位于 Program.cs 文件开头的现有 **using** 语句。
@@ -153,7 +153,7 @@ ms.author: juliako
         using System.Threading;
         using System.IO;
         using Microsoft.WindowsAzure.MediaServices.Client;
-        
+
 6. 创建新的文件夹（文件夹可位于本地驱动器上任意位置），然后复制要编码和流式传输或渐进式下载的 .mp4 文件。在此示例中，我们使用了“C:\\VideoFiles”路径。
 
 ## 连接到媒体服务帐户
@@ -277,27 +277,27 @@ ms.author: juliako
 以下代码演示如何提交编码作业。该作业所包含的一项任务会指定要使用 **Media Encoder Standard** 将夹层文件转码成一组自适应比特率 MP4。代码会提交作业，并等待作业完成。
 
 编码作业完成后，即可发布资产，然后流式传输或渐进式下载 MP4 文件。
- 
+
 将以下方法添加到 Program 类。
 
     static public IAsset EncodeToAdaptiveBitrateMP4s(IAsset asset, AssetCreationOptions options)
     {
-    
+
         // Prepare a job with a single task to transcode the specified asset
         // into a multi-bitrate asset.
-    
+
         IJob job = _context.Jobs.CreateWithSingleTask(
             "Media Encoder Standard",
             "H264 Multiple Bitrate 720p",
             asset,
             "Adaptive Bitrate MP4",
             options);
-    
+
         Console.WriteLine("Submitting transcoding job...");
-    
+
         // Submit the job and wait until it is completed.
         job.Submit();
-    
+
         job = job.StartExecutionProgressTask(
             j =>
             {
@@ -305,11 +305,11 @@ ms.author: juliako
                 Console.WriteLine("Job progress: {0:0.##}%", j.GetOverallProgress());
             },
             CancellationToken.None).Result;
-    
+
         Console.WriteLine("Transcoding job finished.");
-    
+
         IAsset outputAsset = job.OutputMediaAssets[0];
-    
+
         return outputAsset;
     }
 

@@ -29,9 +29,9 @@ wacn.date: 01/09/2017
 
 对于需要访问受保护资源的 .NET 本机客户端，Azure AD 提供 Active Directory 身份验证库 (ADAL)。在本质上，ADAL 的唯一用途就是方便应用程序获取访问令牌。为了演示操作的简单性，下面我们要生成一个“目录搜索器”Windows Phone 8.1 应用程序，该应用程序可以：
 
--	使用 [OAuth 2.0 身份验证协议](./active-directory-protocols-oauth-code.md)获取调用 Azure AD Graph API 的访问令牌。
--	在目录中搜索具有给定 UPN 的用户。
--	将用户注销。
+- 使用 [OAuth 2.0 身份验证协议](./active-directory-protocols-oauth-code.md)获取调用 Azure AD Graph API 的访问令牌。
+- 在目录中搜索具有给定 UPN 的用户。
+- 将用户注销。
 
 若要生成完整的工作应用程序，你需要：
 
@@ -44,26 +44,26 @@ wacn.date: 01/09/2017
 ## *1.注册目录搜索器应用程序*
 若要让应用程序获取令牌，首先需要在 Azure AD 租户中注册该应用程序，并授予它访问 Azure AD Graph API 的权限：
 
--	登录到 [Azure 管理门户](https://manage.windowsazure.cn)
--	在左侧的导航栏中单击“Active Directory”
--	选择要在其中注册应用程序的租户。
--	单击“应用程序”选项卡，然后在底部抽屉中单击“添加”。
--	根据提示创建一个新的“本机客户端应用程序”。
-    -	应用程序的“名称”向最终用户描述你的应用程序
-    -	“重定向 URI”是 Azure AD 要用来返回令牌响应的方案与字符串组合。暂时输入一个占位符值，例如 `http://DirectorySearcher`。稍后我们将会替换此值。
--	完成注册后，AAD 将为应用程序分配唯一的客户端标识符。在后面的部分中将会用到此值，因此，请从“配置”选项卡复制此值。
+- 登录到 [Azure 管理门户](https://manage.windowsazure.cn)
+- 在左侧的导航栏中单击“Active Directory”
+- 选择要在其中注册应用程序的租户。
+- 单击“应用程序”选项卡，然后在底部抽屉中单击“添加”。
+- 根据提示创建一个新的“本机客户端应用程序”。
+    - 应用程序的“名称”向最终用户描述你的应用程序
+    - “重定向 URI”是 Azure AD 要用来返回令牌响应的方案与字符串组合。暂时输入一个占位符值，例如 `http://DirectorySearcher`。稍后我们将会替换此值。
+- 完成注册后，AAD 将为应用程序分配唯一的客户端标识符。在后面的部分中将会用到此值，因此，请从“配置”选项卡复制此值。
 - 另外，请在“配置”选项卡中，找到“针对其他应用程序的权限”部分。对于“Azure Active Directory”应用程序，在“委托的权限”下添加“访问组织的目录”权限。这样，你的应用程序便可以在 Graph API 中查询用户。
 
 ## *2.安装并配置 ADAL*
 将应用程序注册到 Azure AD 后，可以安装 ADAL 并编写标识相关的代码。为了使 ADAL 能够与 Azure AD 通信，需要为 ADAL 提供一些有关应用程序的注册信息。
--	首先，使用 Package Manager Console 将 ADAL 添加到 DirectorySearcher 项目。
+- 首先，使用 Package Manager Console 将 ADAL 添加到 DirectorySearcher 项目。
 
     PM> Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
 
--	在 DirectorySearcher 项目中，打开 `MainPage.xaml.cs`。替换 `Config Values` 区域中的值，以反映你在 Azure 门户预览中输入的值。只要使用 ADAL，你的代码就会引用这些值。
-    -	`tenant` 是 Azure AD 租户的域，例如 contoso.partner.onmschina.cn
-    -	`clientId` 是从门户复制的应用程序 clientId。
--	你现在需要发现 Windows Phone 应用程序的回调 URI。在 `MainPage` 方法中的此行上设置一个断点：
+- 在 DirectorySearcher 项目中，打开 `MainPage.xaml.cs`。替换 `Config Values` 区域中的值，以反映你在 Azure 门户预览中输入的值。只要使用 ADAL，你的代码就会引用这些值。
+    - `tenant` 是 Azure AD 租户的域，例如 contoso.partner.onmschina.cn
+    - `clientId` 是从门户复制的应用程序 clientId。
+- 你现在需要发现 Windows Phone 应用程序的回调 URI。在 `MainPage` 方法中的此行上设置一个断点：
 
     redirectURI = Windows.Security.Authentication.Web.WebAuthenticationBroker.GetCurrentApplicationCallbackUri();
 
@@ -76,14 +76,14 @@ wacn.date: 01/09/2017
 ## *3.使用 ADAL 从 Azure AD 获取令牌*
 ADAL 遵守的基本原理是，每当应用程序需要访问令牌时，它只需调用 `authContext.AcquireToken(…)`，然后 ADAL 就会负责其余的工作。
 
--	第一步是初始化应用程序的 `AuthenticationContext`（ADAL 的主类）。你将在此处传递 ADAL 与 Azure AD 通信时所需的坐标，并告诉 ADAL 如何缓存令牌。
+- 第一步是初始化应用程序的 `AuthenticationContext`（ADAL 的主类）。你将在此处传递 ADAL 与 Azure AD 通信时所需的坐标，并告诉 ADAL 如何缓存令牌。
 
 C#
 
         public MainPage()
         {
             ...
-        
+
             // ADAL for Windows Phone 8.1 builds AuthenticationContext instances through a factory
             authContext = AuthenticationContext.CreateAsync(authority).GetResults();
         }
@@ -91,11 +91,11 @@ C#
 - 现在查找 `Search(...)` 方法，当用户在应用程序的 UI 中单击“搜索”按钮时，将调用该方法。此方法将向 Azure AD Graph API 发出 GET 请求，以查询其 UPN 以给定搜索词开头的用户。但是，若要查询 Graph API，你需要在请求的 `Authorization` 标头中包含 access\_token - 这是 ADAL 传入的位置。
 
 C#
-        
+
         private async void Search(object sender, RoutedEventArgs e)
         {
             ...
-        
+
             // Try to get a token without triggering any user prompt.
             // ADAL will check whether the requested token is in ADAL's token cache or can otherwise be obtained without user interaction.
             AuthenticationResult result = await authContext.AcquireTokenSilentAsync(graphResourceId, clientId);
@@ -115,7 +115,7 @@ C#
 - 如果需要交互式身份验证，ADAL 将使用 Windows Phone 的 Web 身份验证代理 (WAB) 和[延续模型](http://www.cloudidentity.com/blog/2014/06/16/adal-for-windows-phone-8-1-deep-dive/)来显示 Azure AD 登录页。当用户登录时，应用程序需要向 ADAL 传递 WAB 交互的结果。这只要实现 `ContinueWebAuthentication` 接口即可：
 
 C#
-        
+
         // This method is automatically invoked when the application
         // is reactivated after an authentication interaction through WebAuthenticationBroker.
         public async void ContinueWebAuthentication(WebAuthenticationBrokerContinuationEventArgs args)
@@ -128,7 +128,7 @@ C#
 - 现在，可以使用 ADAL 返回给应用程序的 `AuthenticationResult`。在 `QueryGraph(...)` 回调中，在 Authorization 标头内将你获取的 access\_token 附加到 GET 请求：
 
 C#
-        
+
         private async void QueryGraph(AuthenticationResult result)
         {
             if (result.Status != AuthenticationStatus.Success)
@@ -136,29 +136,29 @@ C#
                 MessageDialog dialog = new MessageDialog(string.Format("If the error continues, please contact your administrator.\n\nError: {0}\n\nError Description:\n\n{1}", result.Error, result.ErrorDescription), "Sorry, an error occurred while signing you in.");
                 await dialog.ShowAsync();
             }
-        
+
             // Add the access token to the Authorization Header of the call to the Graph API, and call the Graph API.
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.AccessToken);
-        
+
             ...
         }
 
 - 你还可以使用 `AuthenticationResult` 对象在应用程序中显示有关用户的信息。在 `QueryGraph(...)` 方法中，使用该结果在页上显示用户的 ID：
 
 C#
-        
+
         // Update the Page UI to represent the signed in user
         ActiveUser.Text = result.UserInfo.DisplayableId;
 
 - 最后，还可以使用 ADAL 将用户从应用程序中注销。当用户单击“注销”按钮时，我们希望确保 `AcquireTokenSilentAsync(...)` 的后续调用失败。使用 ADAL 时，只需清除令牌缓存即可：
 
 C#
-        
+
         private void SignOut()
         {
             // Clear session state from the token cache.
             authContext.TokenCache.Clear();
-        
+
             ...
         }
 
@@ -171,5 +171,5 @@ C#
 [使用 Azure AD 保护 .NET Web API >>](./active-directory-devquickstarts-webapi-dotnet.md)
 
 [!INCLUDE [active-directory-devquickstarts-additional-resources](../../includes/active-directory-devquickstarts-additional-resources.md)]
- 
+
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

@@ -72,7 +72,7 @@ ms.author: juliako;milanga
 3. 按“保存”按钮保存更改。
 
     按“保存”后，会立即分配新的保留单元。
- 
+
 ##配额和限制
 
 有关配额和限制以及如何在线申请支持创建工单的信息，请参阅[配额和限制](./media-services-quotas-and-limitations.md)。

@@ -65,7 +65,7 @@ ms.author: dastrock
 准备向公司管理员请求权限时，可以将用户重定向到 v2.0 **管理员许可终结点**。
 
     // Line breaks for legibility only
-    
+
     GET https://login.microsoftonline.com/{tenant}/adminconsent?
     client_id=6731de76-14a6-49ae-97bc-6eba6914391e
     &state=12345
@@ -113,7 +113,7 @@ ms.author: dastrock
     POST /common/oauth2/v2.0/token HTTP/1.1
     Host: login.microsoftonline.com
     Content-Type: application/x-www-form-urlencoded
-    
+
     client_id=535fb089-9ff3-47b6-9bfb-4f1264799865&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=qWgdYAmab0YSkuL1qKv5bPX&grant_type=client_credentials
 
     curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d 'client_id=535fb089-9ff3-47b6-9bfb-4f1264799865&scope=https%3A%2F%2Fgraph.microsoft.com%2F.default&client_secret=qWgdYAmab0YSkuL1qKv5bPX&grant_type=client_credentials' 'https://login.microsoftonline.com/common/oauth2/v2.0/token'

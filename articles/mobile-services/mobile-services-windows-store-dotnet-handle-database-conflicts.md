@@ -204,7 +204,7 @@ ms.author: wesmc
 5. 将包文件夹“todolist\_1.0.0.0\_AnyCPU\_Debug\_Test”复制到第二台计算机。在该计算机上，打开包文件夹并右键单击 **Add-AppDevPackage.ps1** PowerShell 脚本，然后单击“使用 PowerShell 运行”，如下所示。按照提示操作以安装应用程序。
 
     ![][12]
-  
+
 6. 通过单击“调试”->“启动调试”在 Visual Studio 中运行应用的第 1 个实例。在第二台计算机的“开始”屏幕上，单击向下箭头以查看“按名称排列的应用程序”。然后单击 **todolist** 应用以运行应用的第 2 个实例。
 
     应用实例 1	
@@ -214,7 +214,7 @@ ms.author: wesmc
     ![][2]
 
 7. 在应用实例 1 中，将最后一个项目的文本更新为“Test Write 1”，然后单击另一个文本框，以使 `LostFocus` 事件处理程序更新数据库。下面的屏幕快照显示了一个示例。
-    
+
     应用实例 1	
     ![][3]
 
@@ -314,7 +314,7 @@ ms.author: wesmc
 
     应用实例 2	
     ![][18]
- 
+
 <!-- Images. -->
 [0]: ./media/mobile-services-windows-store-dotnet-handle-database-conflicts/Mobile-oc-store-create-app-package1.png
 [1]: ./media/mobile-services-windows-store-dotnet-handle-database-conflicts/Mobile-oc-store-create-app-package2.png

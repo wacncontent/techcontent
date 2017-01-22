@@ -101,7 +101,7 @@ ms.author: nepeters
 
 ![虚拟硬盘](./media/virtual-machines-windows-dotnet-core/vhd-win.png)  
 
-有关 Azure 存储的信息，请参阅 [Azure 存储文档](../storage/index.md/)。
+有关 Azure 存储的信息，请参阅 [Azure 存储文档](../storage/index.md)。
 
 ## 虚拟网络
 如果虚拟机需要内部网络功能（例如与其他虚拟机和 Azure 资源通信的功能），则需要配置 Azure 虚拟网络。创建虚拟网络不意味着能够从 Internet 访问虚拟机。公共连接需要一个公共 IP 地址，本系列教程的后续文章会详细说明。
@@ -207,7 +207,7 @@ ms.author: nepeters
 
 ![网络接口](./media/virtual-machines-windows-dotnet-core/nic-win.png)  
 
-有关 Azure 虚拟网络的详细信息，请参阅 [Azure 虚拟网络文档](../virtual-network/index.md/)。
+有关 Azure 虚拟网络的详细信息，请参阅 [Azure 虚拟网络文档](../virtual-network/index.md)。
 
 ## Azure SQL 数据库
 除了部署托管音乐应用商店网站的虚拟机以外，还需要部署一个 Azure SQL 数据库来托管音乐应用商店数据库。利用 Azure SQL 数据库的好处在于不需要构建另一组虚拟机，可将缩放性和可用性内置在服务中。
@@ -250,7 +250,7 @@ Azure 门户预览中显示的 SQL Server 和 MusicStore 数据库视图。
 
 ![SQL Server](./media/virtual-machines-windows-dotnet-core/sql-win.png)  
 
-有关部署 Azure SQL 数据库的详细信息，请参阅 [Azure SQL 数据库文档](../sql-database/index.md/)。
+有关部署 Azure SQL 数据库的详细信息，请参阅 [Azure SQL 数据库文档](../sql-database/index.md)。
 
 ## 后续步骤
 <hr>

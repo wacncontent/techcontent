@@ -166,17 +166,17 @@ ms.author: tomfitz
 若要将经典资源移动到新订阅，必须使用特定于经典资源的 REST 操作。执行以下步骤，将经典资源移动到新订阅。
 
 1. 检查源订阅是否可以参与跨订阅移动。使用以下操作：
-   
+
          POST https://management.chinacloudapi.cn/subscriptions/{sourceSubscriptionId}/providers/Microsoft.ClassicCompute/validateSubscriptionMoveAvailability?api-version=2016-04-01
-   
+
      在请求正文中包括：
-   
+
          {
            "role": "source"
          }
-   
+
      验证操作的响应格式如下：
-   
+
          {
            "status": "{status}",
            "reasons": [
@@ -185,22 +185,22 @@ ms.author: tomfitz
            ]
          }
 2. 检查目标订阅是否可以参与跨订阅移动。使用以下操作：
-   
+
          POST https://management.chinacloudapi.cn/subscriptions/{destinationSubscriptionId}/providers/Microsoft.ClassicCompute/validateSubscriptionMoveAvailability?api-version=2016-04-01
-   
+
      在请求正文中包括：
-   
+
          {
            "role": "target"
          }
-   
+
      响应的格式与源订阅验证的响应格式相同。
 3. 如果两个订阅都通过了验证，可使用以下操作将所有经典资源从一个订阅移动到另一个订阅：
-   
+
          POST https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Microsoft.ClassicCompute/moveSubscriptionResources?api-version=2016-04-01
-   
+
     在请求正文中包括：
-   
+
          {
            "target": "/subscriptions/{target-subscription-id}"
          }

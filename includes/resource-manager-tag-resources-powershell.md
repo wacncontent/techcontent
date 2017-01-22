@@ -15,7 +15,7 @@
     Version
     -------
     3.0.1
-    
+
 如果模块版本为 3.0.1 或更高，将拥有处理标记的最新 cmdlet。使用 PowerShell 库、PowerShellGet 或 Web 平台安装程序安装或升级 Azure PowerShell 时，此版本的 Azure 资源模块会自动安装。如果版本低于 3.0.1，可以继续使用该版本，但你可以考虑更新到最新版本。最新版本包含可让你更加轻松地处理标记的更改。本主题对这两种方法都进行了说明。
 
 ### 更新脚本以获取最新版本的更改 
@@ -87,7 +87,7 @@
 若要获取具有特定标记和值的所有资源，请使用 **Find-AzureRmResource** cmdlet。
 
     (Find-AzureRmResource -TagName Dept -TagValue Finance).Name
-    
+
 若要向当前没有标记的资源组添加标记，请使用 **Set-AzureRmResourceGroup** 命令并指定一个标记对象。
 
     Set-AzureRmResourceGroup -Name test-group -Tag @{ Dept="IT"; Environment="Test" }
@@ -102,7 +102,7 @@
                     =======       =====
                     Dept          IT
                     Environment   Test
-                    
+
 可以使用 **Set-AzureRmResource** 命令向当前没有标记的资源添加标记。
 
     Set-AzureRmResource -Tag @{ Dept="IT"; Environment="Test" } -ResourceId /subscriptions/{guid}/resourceGroups/test-group/providers/Microsoft.Web/sites/examplemobileapp
@@ -120,7 +120,7 @@
 若要使用 PowerShell 获取订阅中所有标记的列表，请使用 **Get-AzureRmTag** cmdlet。
 
     Get-AzureRmTag
-    
+
 将返回标记名称以及带有此标记的资源和资源组计数
 
     Name                      Count
@@ -150,7 +150,7 @@
                     ===========  ==========
                     Dept         Finance
                     Environment  Production
-                    
+
 若要检索资源元数据，请使用以下示例。资源元数据不会直接显示标记。
 
     Get-AzureRmResource -ResourceName tfsqlserver -ResourceGroupName testrg1
@@ -170,18 +170,18 @@
 可以通过检索 **Tags** 属性来查看实际标记。
 
     (Get-AzureRmResource -ResourceName tfsqlserver -ResourceGroupName tag-demo-group).Tags | %{ $_.Name + ": " + $_.Value }
-   
+
 该操作返回格式化结果：
-    
+
     Dept: Finance
     Environment: Production
-    
+
 建议检索具有特定标记和值的所有资源或资源组，而不是查看特定资源组或资源的标记。若要获取具有特定标记的资源组，请结合 **-Tag** 参数使用 **Find-AzureRmResourceGroup** cmdlet。
 
 若要检索带有标记值的资源组，请使用以下格式。
 
     Find-AzureRmResourceGroup -Tag @{ Name="Dept"; Value="Finance" } | %{ $_.Name }
-    
+
 若要获取具有特定标记和值的所有资源，请使用 Find-AzureRmResource cmdlet。
 
     Find-AzureRmResource -TagName Dept -TagValue Finance | %{ $_.ResourceName }
@@ -189,7 +189,7 @@
 若要向当前没有标记的资源组添加标记，只需使用 Set-AzureRmResourceGroup 命令并指定一个标记对象。
 
     Set-AzureRmResourceGroup -Name test-group -Tag @( @{ Name="Dept"; Value="IT" }, @{ Name="Environment"; Value="Test"} )
-    
+
 该操作返回带有新的标记值的资源组。
 
     ResourceGroupName : test-group
@@ -218,7 +218,7 @@
 若要使用 PowerShell 获取订阅中所有标记的列表，请使用 **Get-AzureRmTag** cmdlet。
 
     Get-AzureRmTag
-    
+
 将返回标记名称以及带有此标记的资源和资源组计数
 
     Name                      Count

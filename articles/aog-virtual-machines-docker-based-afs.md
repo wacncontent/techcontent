@@ -27,7 +27,7 @@ Docker Volume Plugin for Azure File Storage 是 Microsoft 提供的容器共享�
 根据 Ubuntu 系统版本不同，配置方式稍有区别。Ubuntu14 及以下版本使用 upstart 模式；Ubuntu15 及以上版本使用 systemd 模式。
 
 ## Upstart 模式下的配置
-    
+
     #wget -O azurefile-dockervolumedriver.conf https://raw.githubusercontent.com/Azure/azurefile-dockervolumedriver/master/contrib/init/upstart/azurefile-dockervolumedriver.conf
     #wget -O azurefile-dockervolumedriver.default https://raw.githubusercontent.com/Azure/azurefile-dockervolumedriver/master/contrib/init/upstart/azurefile-dockervolumedriver.default
 
@@ -36,7 +36,7 @@ Docker Volume Plugin for Azure File Storage 是 Microsoft 提供的容器共享�
 ###编辑 AFS 配置文件
 
 取消 AZURE_STORAGE_BASE 的注释，并将 core.windows.net 替换成中国区的环境 core.chinacloudapi.cn；将 youraccount 和 yourkey 替换成对应的存储账号和密钥。
-    
+
     # Configuration file for Azure File Service Docker Volume Driver.  
     #  
     # Required keys:  
@@ -49,12 +49,12 @@ Docker Volume Plugin for Azure File Storage 是 Microsoft 提供的容器共享�
     # Additional arguments to executable:  
     # AF_OPTS=--debug  
     AZURE_STORAGE_BASE= **core.chinacloudapi.cn**  
-    
+
     AF_ACCOUNT_NAME= **youraccount**   
     AF_ACCOUNT_KEY= **yourkey**  
     #mv azurefile-dockervolumedriver.conf /etc/init/	  
     #mv azurefile-dockervolumedriver.default /etc/default/azurefile-dockervolumedriver  
-    
+
 ###安装插件
 
 访问 [https://github.com/Azure/azurefile-dockervolumedriver/releases](https://github.com/Azure/azurefile-dockervolumedriver/releases)，选择您要使用的版本并下载到本地。建议使用最新版的插件。
@@ -67,14 +67,14 @@ Docker Volume Plugin for Azure File Storage 是 Microsoft 提供的容器共享�
     # initctl reload-configuration  
     # initctl start azurefile-dockervolumedriver  
     # initctl status azurefile-dockervolumedriver  
- 
+
 ##<font color=darkblue>Systemd 模式下的配置</font>
 
 ###下载配置文件
     #wget -O azurefile-dockervolumedriver.default https://raw.githubusercontent.com/Azure/azurefile-dockervolumedriver/master/contrib/init/systemd/azurefile-dockervolumedriver.default
-    
+
     #wget -O azurefile-dockervolumedriver.service https://raw.githubusercontent.com/Azure/azurefile-dockervolumedriver/master/contrib/init/systemd/azurefile-dockervolumedriver.service
- 
+
 其中 azurefile-dockervolumedriver.default 是 AFS 账号配置文件，您需要按照下面步骤修改存储链接后缀，并添加存储账号和密钥；azurefile-dockervolumedriver.service 是服务启动配置文件。
 
 ###编辑 AFS 配置文件
@@ -85,15 +85,15 @@ Docker Volume Plugin for Azure File Storage 是 Microsoft 提供的容器共享�
     #  
     # AF_OPTS=--debug  
     AZURE_STORAGE_BASE=**core.chinacloudapi.cn**
-    
+
     AZURE_STORAGE_ACCOUNT=**youraccount**  
     AZURE_STORAGE_ACCOUNT_KEY=**yourkey**  
 
     # 将文件移动到正确的目录下面。
-    
+
     # mv azurefile-dockervolumedriver.default /etc/default/azurefile-dockervolumedriver  
     # mv azurefile-dockervolumedriver.conf /etc/systemd/system/  
- 
+
 ###安装插件
 访问 [https://github.com/Azure/azurefile-dockervolumedriver/releases](https://github.com/Azure/azurefile-dockervolumedriver/releases)，选择您要使用的版本并下载到本地。建议使用最新版的插件。
 
@@ -101,7 +101,7 @@ Docker Volume Plugin for Azure File Storage 是 Microsoft 提供的容器共享�
     # chmod +x /usr/bin/azurefile-dockervolumedriver  
     # 使用 ls -al 或者 file 命令查看文件是否下载成功，且处于可执行状态。  
     # file /usr/bin/azurefile-dockervolumedriver
- 
+
 ###加载服务
 重新加载守护进程，使其识别到新添加的 azurefile-dockervolumedriver 服务。设置服务开机自启动，并启动服务。
 
@@ -122,7 +122,7 @@ Docker Volume Plugin for Azure File Storage 是 Microsoft 提供的容器共享�
       CPU: 8ms  
     CGroup: /system.slice/azurefile-dockervolumedriver.service  
            └─38866 /usr/bin/azurefile-dockervolumedriver  
-           
+
 ##<font color=darkblue>创建和使用 Docker volume</font>
 下面命令会在 docker 虚拟机上创建一个名为 myvol 的卷；同时，在您的 AFS 中，会创建一个名为 myvol 的文件服务。
 

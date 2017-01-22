@@ -38,9 +38,9 @@ ms.author: lemai
 
 错误注入和分析服务使用异步模型，即通过一个 API（在本文档中称为“启动”API）来启动命令，然后使用“GetProgress”API 来查看此命令的进度，直到此命令达到终止状态，或者你取消了此命令。若要启动命令，请调用相应 API 的“启动”API。当错误注入和分析服务接受请求后，将回到此 API。但是，它不会指示命令运行进度，甚至不会指示命令是否已启动。若要查看命令进度，可调用与此前调用的“启动”API 对应的“GetProgress”API。“GetProgress”API 将返回一个对象，在其“状态”属性中指示命令的当前状态。除非遇到以下条件，否则命令会无限期运行下去：
 
-1.	命令已成功完成。如果你在这种情况下对其调用“GetProgress”，则进度对象的“状态”将为“已完成”。
-2.	命令遇到致命错误。如果你在这种情况下对其调用“GetProgress”，则进度对象的“状态”将为“出错”
-3.	可通过 [CancelTestCommandAsync][cancel] API 或 [Stop-ServiceFabricTestCommand][cancelps] PowerShell cmdlet 取消该命令。如果你在这种情况下对其调用“GetProgress”，则进度对象的“状态”将为“已取消”或“已强制取消”，具体取决于该 API 的参数。如需更多详细信息，请参阅 [CancelTestCommandAsync][cancel] 的文档。
+1. 命令已成功完成。如果你在这种情况下对其调用“GetProgress”，则进度对象的“状态”将为“已完成”。
+2. 命令遇到致命错误。如果你在这种情况下对其调用“GetProgress”，则进度对象的“状态”将为“出错”
+3. 可通过 [CancelTestCommandAsync][cancel] API 或 [Stop-ServiceFabricTestCommand][cancelps] PowerShell cmdlet 取消该命令。如果你在这种情况下对其调用“GetProgress”，则进度对象的“状态”将为“已取消”或“已强制取消”，具体取决于该 API 的参数。如需更多详细信息，请参阅 [CancelTestCommandAsync][cancel] 的文档。
 
 ## 运行命令的详细信息
 

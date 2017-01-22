@@ -49,20 +49,20 @@ wacn.date: 06/08/2016
 
     #PowerShell的方式创建storage操作的上下文
     $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
-    
+
     #创建一个新的容器
     $container = New-AzureStorageContainer -Context $storageContext -Name $containerName
     $cbc = $container.CloudBlobContainer
-    
+
     #为容器创建临时SAS (临时SAS和具有存储访问策略的SAS请阅读下面的参考文档)
     $sasToken = New-AzureStorageContainerSASToken -container $containerName -permission rwl -Context $storageContext
     write-host $sasToken
 
     $sasTokenNoWrite = New-AzureStorageContainerSASToken -container $containerName -permission rl -Context $storageContext
-    
+
     #为blob创建SAS 令牌
     New-AzureStorageBlobSASToken -Container 'sastest' -Blob 'test.txt' -Context $storageContext -Permission rw		
-    
+
 参考文档： [临时SAS和具有存储访问策略的SAS](./storage/storage-dotnet-shared-access-signature-part-1.md)
 
 PowerShell指令：[New-AzureStorageContainerSASToken](https://msdn.microsoft.com/zh-cn/library/azure/dn584416.aspx)、
@@ -82,7 +82,7 @@ PowerShell指令：[New-AzureStorageContainerSASToken](https://msdn.microsoft.co
     Set-AzureStorageBlobContent -Container 'sastest' -File $ImageToUpload -Context $storageContextClient
 
     #如果知道Blob的SAS令牌的话，我们就可以知道完整的Blob的url，并可以执行相应权限的操作。		
-    
+
 结果：
 
 ![](./media/aog-storage-how-to-create-sas-for-blob/use-sas-token-create-blob.PNG)
@@ -103,7 +103,7 @@ PowerShell指令：[New-AzureStorageContainerSASToken](https://msdn.microsoft.co
 
     #PowerShell的方式创建storage操作的上下文
     $storageContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageAccountKey
-    
+
     #创建一个新的容器
     $container = New-AzureStorageContainer -Context $storageContext -Name $containerNameWithPolicy
     $cbc = $container.CloudBlobContainer
@@ -116,14 +116,14 @@ PowerShell指令：[New-AzureStorageContainerSASToken](https://msdn.microsoft.co
     $policy.Permissions = "Read,Write,List,Delete"
     $permissions.SharedAccessPolicies.Add($policyName, $policy)
     $cbc.SetPermissions($permissions);
-    
+
     #获取SAS令牌
     $sas = $cbc.GetSharedAccessSignature($policy, $policyName)
     Write-Host 'Shared Access Signature= '$($sas.Substring(1))''
 
     #为blob创建访问策略为policy1的SAS令牌
     New-AzureStorageBlobSASToken -Container 'sastestwithpolicy' -Policy 'policy1' -Blob 'test.txt' -Context $storageContext
-    
+
     #如何删除存储访问策略
     Remove-AzureStorageContainerStoredAccessPolicy -Container "sastestwithpolicy" -context $storageContext -Policy 'policy1'
 
@@ -187,7 +187,7 @@ PowerShell指令：[New-AzureStorageContainerSASToken](https://msdn.microsoft.co
             byte[] SignatureBytes = System.Text.Encoding.UTF8.GetBytes(StringToSign);
             System.Security.Cryptography.HMACSHA256 SHA256 = new System.Security.Cryptography.HMACSHA256(Convert.FromBase64String(accountKey));
             string sig = Convert.ToBase64String(SHA256.ComputeHash(SignatureBytes));
-            
+
             string sasURL = string.Format("http://{0}.blob.core.chinacloudapi.cn/sastestwithpolicy/test.txt?sv={1}&sr={2}&sig={3}&st={4}&se={5}&sp={6}&rscd={7}&rsct={8}",
                 HttpUtility.UrlEncode(accountName),
                 HttpUtility.UrlEncode(signedversion),
@@ -215,7 +215,7 @@ PowerShell指令：[New-AzureStorageContainerSASToken](https://msdn.microsoft.co
             string signedpermissions = "";
             string signedstart = "";
             string signedexpiry = "";
-            
+
             string canonicalizedresource = "/blob/"+accountName+"/sastestwithpolicy/test.txt";
             string signedIP = "";
             string signedProtocol = "";

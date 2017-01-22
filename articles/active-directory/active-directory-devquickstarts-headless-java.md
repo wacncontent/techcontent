@@ -55,7 +55,7 @@ ms.author: brandwe
 ## 2\.使用 Maven 将应用设置为使用 ADAL4J 库和必备组件
 在这里，我们要将 ADAL4J 配置为使用 OpenID Connect 身份验证协议。ADAL4J 将用于发出登录和注销请求、管理用户的会话、获取有关用户的信息，等等。
 
--	在项目的根目录中，打开/创建 `pom.xml`，找到 `// TODO: provide dependencies for Maven` 并替换为以下代码：
+- 在项目的根目录中，打开/创建 `pom.xml`，找到 `// TODO: provide dependencies for Maven` 并替换为以下代码：
 
 Java
 
@@ -71,7 +71,7 @@ Java
             <properties>
                 <spring.version>3.0.5.RELEASE</spring.version>
             </properties>
-        
+
             <dependencies>
                 <dependency>
                     <groupId>com.microsoft.azure</groupId>
@@ -170,9 +170,9 @@ Java
         </plugin>
                 </plugins>
             </build>
-        
+
         </project>
-        
+
 ## 3\.创建 java PublicClient 文件
 
 如上所述，我们将使用图形 API 来获取有关已登录的用户的数据。为了顺利进行，我们应该创建一个表示**目录对象**的文件以及一个表示**用户**的单独文件，如此便可以使用 Java 的 OO 模式。
@@ -186,26 +186,26 @@ Java
     import java.util.concurrent.ExecutorService;
     import java.util.concurrent.Executors;
     import java.util.concurrent.Future;
-    
+
     import javax.naming.ServiceUnavailableException;
-    
+
     import com.microsoft.aad.adal4j.AuthenticationContext;
     import com.microsoft.aad.adal4j.AuthenticationResult;
-    
+
     public class PublicClient {
-    
+
         private final static String AUTHORITY = "https://login.microsoftonline.com/common/";
         private final static String CLIENT_ID = "2a4da06c-ff07-410d-af8a-542a512f5092";
-    
+
         public static void main(String args[]) throws Exception {
-    
+
             try (BufferedReader br = new BufferedReader(new InputStreamReader(
                     System.in))) {
                 System.out.print("Enter username: ");
                 String username = br.readLine();
                 System.out.print("Enter password: ");
                 String password = br.readLine();
-    
+
                 AuthenticationResult result = getAccessTokenFromUserCredentials(
                         username, password);
                 System.out.println("Access Token - " + result.getAccessToken());
@@ -213,7 +213,7 @@ Java
                 System.out.println("ID Token - " + result.getIdToken());
             }
         }
-    
+
         private static AuthenticationResult getAccessTokenFromUserCredentials(
                 String username, String password) throws Exception {
             AuthenticationContext context = null;
@@ -229,7 +229,7 @@ Java
             } finally {
                 service.shutdown();
             }
-    
+
             if (result == null) {
                 throw new ServiceUnavailableException(
                         "authentication result was null");

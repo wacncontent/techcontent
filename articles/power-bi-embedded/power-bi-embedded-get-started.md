@@ -29,27 +29,27 @@ wacn.date: 01/13/2017
 ## 创建工作区集合
 **工作区集合**是顶层的 Azure 资源，是要嵌入到应用程序中的内容的容器。可采用两种方式创建**工作区集合**：
 
-   -	使用 Azure 门户预览手动创建
-   -	使用 Azure资源管理器(ARM) API 以编程方式创建
+    - 使用 Azure 门户预览手动创建
+    - 使用 Azure资源管理器(ARM) API 以编程方式创建
 
 接下来将完成使用 Azure 门户预览构建**工作区集合**的步骤。
 
-   1.	打开并登录到 **Azure 门户预览**：[http://portal.azure.cn](http://portal.azure.cn)。
+    1. 打开并登录到 **Azure 门户预览**：[http://portal.azure.cn](http://portal.azure.cn)。
 
-   2.	在顶部面板上单击“+ 新建”。
+    2. 在顶部面板上单击“+ 新建”。
 
        ![](./media/power-bi-embedded-get-started/create-workspace-1.png)  
 
-   3.	在“数据 + 分析”下单击“Power BI Embedded”。
-   4.	在“创建”边栏选项卡上输入所需的信息。有关**定价**信息，请参阅 [Power BI Embedded 定价](http://go.microsoft.com/fwlink/?LinkID=760527)。
+    3. 在“数据 + 分析”下单击“Power BI Embedded”。
+    4. 在“创建”边栏选项卡上输入所需的信息。有关**定价**信息，请参阅 [Power BI Embedded 定价](http://go.microsoft.com/fwlink/?LinkID=760527)。
 
        ![](./media/power-bi-embedded-get-started/create-workspace-2.png)  
 
-   5. 单击“创建”。
+    5. 单击“创建”。
 
 **工作区集合**将花费一些时间进行预配。完成后将转到“工作区集合”边栏选项卡。
 
-   ![](./media/power-bi-embedded-get-started/create-workspace-3.png)  
+    ![](./media/power-bi-embedded-get-started/create-workspace-3.png)  
 
 “创建”边栏选项卡包含调用创建工作区并向其部署内容的 API 所需的信息。
 
@@ -57,11 +57,11 @@ wacn.date: 01/13/2017
 
 调用 Power BI REST API 所需的最重要信息之一是**访问密钥**。这些访问密钥用于生成对 API 请求进行身份验证的**应用令牌**。要查看**访问密钥**，请单击“设置”边栏选项卡上的“访问密钥”。若要了解关于**应用令牌**的详细信息，请参阅[通过 Power BI Embedded 进行身份验证和授权](./power-bi-embedded-app-token-flow.md)。
 
-   ![](./media/power-bi-embedded-get-started/access-keys.png)  
+    ![](./media/power-bi-embedded-get-started/access-keys.png)  
 
 可以看到有两个密钥。
 
-   ![](./media/power-bi-embedded-get-started/access-keys-2.png)  
+    ![](./media/power-bi-embedded-get-started/access-keys-2.png)  
 
 复制这两个密钥并将它们安全存储在应用程序中。像对待密码一样对待这些密钥很重要，因为它们可以提供**工作区集合**中所有内容的访问权限。
 
@@ -90,12 +90,12 @@ wacn.date: 01/13/2017
 ## 后续步骤
 在前面的步骤中已创建了工作区集合以及第一个报表和数据集。现在是时候了解如何为 **Power BI Embedded** 编写代码了。为了帮助用户入门，已创建了一个示例 Web 应用程序：[示例入门](./power-bi-embedded-get-started-sample.md)。此示例介绍了如何执行以下操作：
 
-  -	预配内容
+  - 预配内容
       - 创建工作区
       - 导入 PBIX 文件
       - 更新连接字符串并设置数据集的凭据。
 
-  -	安全地嵌入报表
+  - 安全地嵌入报表
 
 ## 另请参阅
 - [示例入门](./power-bi-embedded-get-started-sample.md)

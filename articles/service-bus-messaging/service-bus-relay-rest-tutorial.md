@@ -58,7 +58,7 @@ wacn.date: 01/09/2017
           using System.ServiceModel.Channels;
           using System.ServiceModel.Web;
           using System.IO;
-    
+
     [System.ServiceModel](https://msdn.microsoft.com/zh-cn/library/system.servicemodel.aspx) 是让你以通过编程方式访问 WCF 基本功能的命名空间。服务总线使用 WCF 的许多对象和属性来定义服务约定。你将在大多数服务总线中继应用程序中使用此命名空间。同样，[System.ServiceModel.Channels](https://msdn.microsoft.com/zh-cn/library/system.servicemodel.channels.aspx) 可帮助定义通道，通道是用来与服务总线和客户端 Web 浏览器通信的对象。最后，[System.ServiceModel.Web](https://msdn.microsoft.com/zh-cn/library/system.servicemodel.web.aspx) 包含的类型可用于创建基于 Web 的应用程序。
 
 7. 将 `ImageListener` 命名空间重命名为 **Microsoft.ServiceBus.Samples**。
@@ -66,14 +66,14 @@ wacn.date: 01/09/2017
         namespace Microsoft.ServiceBus.Samples
         {
             ...
-    
+
 8. 在命名空间声明的左大括号后面，紧接着定义一个名为 **IImageContract** 的新接口，然后将 **ServiceContractAttribute** 属性应用于该接口，其值为 `http://samples.microsoft.com/ServiceModel/Relay/`。该命名空间值不同于你在整个代码范围内使用的命名空间。该命名空间值将用作此约定的唯一标识符，并应有版本控制信息。有关详细信息，请参阅[服务版本控制](http://go.microsoft.com/fwlink/?LinkID=180498)。显式指定命名空间可防止将默认的命名空间值添加到约定名称中。
 
         [ServiceContract(Name = "ImageContract", Namespace = "http://samples.microsoft.com/ServiceModel/Relay/RESTTutorial1")]
         public interface IImageContract
         {
         }
-    
+
 9. 在 `IImageContract` 接口中，为 `IImageContract` 约定在接口中公开的单个操作声明一个方法，然后将 `OperationContractAttribute` 属性应用到你希望将其作为公共服务总线约定的一部分进行公开的方法中。
 
         public interface IImageContract
@@ -81,7 +81,7 @@ wacn.date: 01/09/2017
             [OperationContract]
             Stream GetImage();
         }
-    
+
 10. 在 **OperationContract** 属性中，添加 **WebGet** 值。
 
         public interface IImageContract
@@ -89,13 +89,13 @@ wacn.date: 01/09/2017
             [OperationContract, WebGet]
             Stream GetImage();
         }
-    
+
     这样做可以让服务总线将 HTTP GET 请求路由到 `GetImage`，并将 `GetImage` 的返回值转换为 HTTP GETRESPONSE 答复。稍后在本教程中，你将使用 Web 浏览器访问此方法，并将在浏览器中显示图像。
 
 11. 直接在 `IImageContract` 定义的后面，声明从 `IImageContract` 和 `IClientChannel` 接口继承的通道。
 
         public interface IImageChannel : IImageContract, IClientChannel { }
-    
+
     通道是服务和客户端用来互相传递信息的 WCF 对象。稍后，你将在主机应用程序中创建通道。然后服务总线将使用该通道将浏览器的 HTTP GET 请求传递到你的 **GetImage** 实现。服务总线还使用该通道获取 **GetImage** 返回值并将其转换为客户端浏览器的 HTTP GETRESPONSE。
 
 12. 在“生成”菜单中，单击“生成解决方案”以确认工作的准确性。
@@ -112,19 +112,19 @@ wacn.date: 01/09/2017
         using System.ServiceModel.Channels;
         using System.ServiceModel.Web;
         using System.IO;
-    
+
         namespace Microsoft.ServiceBus.Samples
         {
-    
+
             [ServiceContract(Name = "IImageContract", Namespace = "http://samples.microsoft.com/ServiceModel/Relay/")]
             public interface IImageContract
             {
                 [OperationContract, WebGet]
                 Stream GetImage();
             }
-    
+
             public interface IImageChannel : IImageContract, IClientChannel { }
-    
+
             class Program
             {
                 static void Main(string[] args)
@@ -146,7 +146,7 @@ wacn.date: 01/09/2017
         class ImageService : IImageContract
         {
         }
-    
+
     与其他接口实现类似，你可以在另一个文件中实现定义。但是，在本教程中，实现所在的文件与接口定义和 `Main()` 方法所在的文件相同。
 
 2. 将 [ServiceBehaviorAttribute](https://msdn.microsoft.com/zh-cn/library/system.servicemodel.servicebehaviorattribute.aspx) 属性应用到 **IImageService** 类，以指示该类是 WCF 协定的实现。
@@ -155,13 +155,13 @@ wacn.date: 01/09/2017
         class ImageService : IImageContract
         {
         }
-    
+
     如前所述，此命名空间不是传统的命名空间，而是用于标识约定的 WCF 体系结构的一部分。有关详细信息，请参阅 WCF 文档中的[数据约定名称](https://msdn.microsoft.com/zh-cn/library/ms731045.aspx)主题。
 
 3. 将一幅 .jpg 图像添加到项目中。
 
     这是服务在接收浏览器中显示的图片。右键单击你的项目并单击“添加”。然后单击“现有项”。使用“添加现有项”对话框浏览到相应的 .jpg，然后单击“添加”。
-    
+
     添加文件时，请确保在“文件名:”旁的下拉列表中选择“所有文件(*.*)”。本教程的余下部分假定图像的名称为“image.jpg”。如果你的 .jpg 文件名不是这样，则必须重命名图像，或更改代码进行弥补。
 
 4. 为了确保正在运行的服务可以找到该图像文件，请在“解决方案资源管理器”中右键单击该图像文件，然后单击“属性”。在“属性”窗格中，将“复制到输出目录”设置为“如果较新则复制”。
@@ -172,34 +172,34 @@ wacn.date: 01/09/2017
         using System.Drawing.Imaging;
         using Microsoft.ServiceBus;
         using Microsoft.ServiceBus.Web;
-    
+
 6. 在 **ImageService** 类中定义以下构造函数，以便加载位图并准备将该位图发送到客户端浏览器。
 
         class ImageService : IImageContract
         {
             const string imageFileName = "image.jpg";
-  
+
             Image bitmap;
-  
+
             public ImageService()
             {
                 this.bitmap = Image.FromFile(imageFileName);
             }
         }
-    
+
 7. 直接在上一代码后面，在 **ImageService** 类中添加以下 **GetImage** 方法，以返回包含该映像的 HTTP 消息。
 
         public Stream GetImage()
         {
             MemoryStream stream = new MemoryStream();
             this.bitmap.Save(stream, ImageFormat.Jpeg);
-  
+
             stream.Position = 0;
             WebOperationContext.Current.OutgoingResponse.ContentType = "image/jpeg";
-  
+
             return stream;
         }
-    
+
     此实现使用 **MemoryStream** 检索映像并准备将其流式传输到浏览器。它将流位置设置为从零开始，将流内容声明为 jpeg，然后流式传输信息。
 
 8. 在“生成”菜单中，单击“生成解决方案”。
@@ -220,7 +220,7 @@ wacn.date: 01/09/2017
                 </binding>
             </webHttpRelayBinding>
         </bindings>
-    
+
     此步骤定义了一个服务总线 [WebHttpRelayBinding](https://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.webhttprelaybinding.aspx) 绑定，其中的 **relayClientAuthenticationType** 为 **None**。此设置表明使用此绑定的终结点将不需要客户端凭据。
 
 5. 在 `<bindings>` 元素后面添加 `<services>` 元素。与绑定类似，可以在单个配置文件中定义多个服务。但是，在本教程中，你只要定义一个服务。
@@ -237,11 +237,11 @@ wacn.date: 01/09/2017
                         address="" />
             </service>
         </services>
-    
+
     此步骤将配置一个服务，该服务使用前面定义的默认 **webHttpRelayBinding**。此外，它还使用下一步骤中定义的默认 **sbTokenProvider**。
 
 6. 在 `<services>` 元素的后面，使用以下内容创建 `<behaviors>` 元素，并将 “SAS\_KEY” 替换为你在步骤 1 中从 [Azure 管理门户][]中获取的*共享访问签名* (SAS) 密钥。
-  
+
         <behaviors>
             <endpointBehaviors>
                 <behavior name="sbTokenProvider">
@@ -258,7 +258,7 @@ wacn.date: 01/09/2017
                     </behavior>
                 </serviceBehaviors>
         </behaviors>
-    
+
 5. 仍在 App.config 文件中，在 `<appSettings>` 元素中，将整个连接字符串替换为以前从门户获取的连接字符串。
 
         <appSettings>
@@ -266,7 +266,7 @@ wacn.date: 01/09/2017
            <add key="Microsoft.ServiceBus.ConnectionString"
                value="Endpoint=sb://yourNamespace.servicebus.chinacloudapi.cn/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=yourKey"/>
         </appSettings>
-    
+
 6. 在“生成”菜单中，单击“生成解决方案”以生成整个解决方案。
 
 ### 示例
@@ -288,7 +288,7 @@ wacn.date: 01/09/2017
 
         namespace Microsoft.ServiceBus.Samples
         {
-    
+
             [ServiceContract(Name = "ImageContract", Namespace = "http://samples.microsoft.com/ServiceModel/Relay/")]
             public interface IImageContract
             {
@@ -432,19 +432,19 @@ wacn.date: 01/09/2017
 1. 在 `Main()` 函数声明中，创建一个变量以存储服务总线项目的服务命名空间。请确保将 `yourNamespace` 替换为以前创建的服务命名空间的名称。
 
         string serviceNamespace = "yourNamespace";
-    
+
     服务总线使用服务命名空间的名称来创建唯一 URI。
 
 2. 为基于服务命名空间的服务的基本地址创建 `Uri` 实例。
 
         Uri address = ServiceBusEnvironment.CreateServiceUri("https", serviceNamespace, "Image");
-    
+
 ### 创建并配置 Web 服务主机
 
 - 使用之前在本部分中创建的 URI 地址创建 Web 服务主机。
 
         WebServiceHost host = new WebServiceHost(typeof(ImageService), address);
-    
+
     该服务主机是可实例化主机应用程序的 WCF 对象。本示例会将要创建的主机类型 (**ImageService**)，以及要公开主机应用程序的地址传递给它。
 
 ### 运行 Web 服务主机
@@ -452,7 +452,7 @@ wacn.date: 01/09/2017
 1. 打开服务。
 
         host.Open();
-    
+
     服务现在正在运行。
 
 2. 显示表明服务正在运行以及如何停止服务的消息。
@@ -462,11 +462,11 @@ wacn.date: 01/09/2017
         Console.WriteLine();
         Console.WriteLine("Press [Enter] to exit");
         Console.ReadLine();
-    
+
 3. 完成后，关闭服务主机。
 
         host.Close();
-    
+
 ## 示例
 
 以下示例包括本教程中前面步骤中使用的服务约定和实现，并将服务托管在控制台应用程序中。将以下代码编译到名为 ImageListener.exe 的可执行文件中。
@@ -486,7 +486,7 @@ wacn.date: 01/09/2017
 
         namespace Microsoft.ServiceBus.Samples
         {
-    
+
             [ServiceContract(Name = "ImageContract", Namespace = "http://samples.microsoft.com/ServiceModel/Relay/")]
             public interface IImageContract
             {

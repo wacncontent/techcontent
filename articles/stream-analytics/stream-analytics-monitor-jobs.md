@@ -32,14 +32,14 @@ ms.author: jeffstok
 
 ## 设置项目
 
-1.	创建 Visual Studio C# .Net 控制台应用程序。
-2.	在程序包管理器控制台中运行以下命令以安装 NuGet 包。第一个是 Azure 流分析管理 .NET SDK。第二个是 Azure Insights SDK，用于启用监视功能。最后一个是用于进行身份验证的 Azure Active Directory 客户端。
+1. 创建 Visual Studio C# .Net 控制台应用程序。
+2. 在程序包管理器控制台中运行以下命令以安装 NuGet 包。第一个是 Azure 流分析管理 .NET SDK。第二个是 Azure Insights SDK，用于启用监视功能。最后一个是用于进行身份验证的 Azure Active Directory 客户端。
 
         Install-Package Microsoft.Azure.Management.StreamAnalytics
         Install-Package Microsoft.Azure.Insights -Pre
         Install-Package Microsoft.IdentityModel.Clients.ActiveDirectory
-    
-3.	将下面的 appSettings 部分添加到 App.config 文件。
+
+3. 将下面的 appSettings 部分添加到 App.config 文件。
 
         <appSettings>
             <!--CSM Prod related values-->
@@ -54,12 +54,12 @@ ms.author: jeffstok
             <add key="SubscriptionId" value="YOUR AZURE SUBSCRIPTION ID" />
             <add key="ActiveDirectoryTenantId" value="YOUR TENANT ID" />
         </appSettings>
-    
+
     将 *SubscriptionId* 和 *ActiveDirectoryTenantId* 的值替换为 Azure 订阅和租户 ID。你可以通过运行以下 PowerShell cmdlet 来获取这些值：
 
         Get-AzureAccount
-    
-4.	将以下 using 语句添加到项目中的源文件 (Program.cs)。
+
+4. 将以下 using 语句添加到项目中的源文件 (Program.cs)。
 
             using System;
             using System.Configuration;
@@ -70,8 +70,8 @@ ms.author: jeffstok
             using Microsoft.Azure.Management.StreamAnalytics;
             using Microsoft.Azure.Management.StreamAnalytics.Models;
             using Microsoft.IdentityModel.Clients.ActiveDirectory;
-    
-5.	添加一个身份验证帮助器方法。
+
+5. 添加一个身份验证帮助器方法。
 
             public static string GetAuthorizationHeader()
                 {
@@ -170,5 +170,5 @@ ms.author: jeffstok
 - [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
- 
+
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

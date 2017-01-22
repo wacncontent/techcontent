@@ -28,11 +28,11 @@ Azure 媒体服务支持多种常用的流式处理格式，如平滑流、HTTP 
 **Azure 经典管理门户**提供了可用于测试视频的内容播放器。
 
 单击所需的视频（确保它已[发布](./media-services-manage-content.md#publish)），然后单击门户底部的“播放”按钮。
- 
+
 请注意以下事项：
 
 - **媒体服务内容播放器**从默认的流式处理终结点播放。如果要从非默认流式处理终结点播放，请使用其他播放器。例如 [Azure 媒体播放器](http://amsplayer.azurewebsites.net/azuremediaplayer.html)。
- 
+
 ![AMSPlayer][AMSPlayer]
 
 ###Azure 媒体播放器

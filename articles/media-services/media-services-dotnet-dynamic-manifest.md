@@ -43,25 +43,25 @@ ms.author: juliako;cenkdin
 ##创建/更新/读取/删除全局筛选器
 
 下面的代码演示如何使用 .NET 创建、更新、读取和删除资产筛选器。
-    
+
     string filterName = "GlobalFilter_" + Guid.NewGuid().ToString();
-                
+
     List<FilterTrackSelectStatement> filterTrackSelectStatements = new List<FilterTrackSelectStatement>();
-    
+
     FilterTrackSelectStatement filterTrackSelectStatement = new FilterTrackSelectStatement();
     filterTrackSelectStatement.PropertyConditions = new List<IFilterTrackPropertyCondition>();
     filterTrackSelectStatement.PropertyConditions.Add(new FilterTrackNameCondition("Track Name", FilterTrackCompareOperator.NotEqual));
     filterTrackSelectStatement.PropertyConditions.Add(new FilterTrackBitrateRangeCondition(new FilterTrackBitrateRange(0, 1), FilterTrackCompareOperator.NotEqual));
     filterTrackSelectStatement.PropertyConditions.Add(new FilterTrackTypeCondition(FilterTrackType.Audio, FilterTrackCompareOperator.NotEqual));
     filterTrackSelectStatements.Add(filterTrackSelectStatement);
-    
+
     // Create
     IStreamingFilter filter = _context.Filters.Create(filterName, new PresentationTimeRange(), filterTrackSelectStatements);
-    
+
     // Update
     filter.PresentationTimeRange = new PresentationTimeRange(timescale: 500);
     filter.Update();
-    
+
     // Read
     var filterUpdated = _context.Filters.FirstOrDefault();
     Console.WriteLine(filterUpdated.Name);
@@ -75,28 +75,28 @@ ms.author: juliako;cenkdin
 
     string assetName = "AssetFilter_" + Guid.NewGuid().ToString();
     var asset = _context.Assets.Create(assetName, AssetCreationOptions.None);
-    
+
     string filterName = "AssetFilter_" + Guid.NewGuid().ToString();
-    
+
     // Create
     IStreamingAssetFilter filter = asset.AssetFilters.Create(filterName,
                                         new PresentationTimeRange(), 
                                         new List<FilterTrackSelectStatement>());
-    
+
     // Update
     filter.PresentationTimeRange = 
             new PresentationTimeRange(start: 6000000000, end: 72000000000);
-    
+
     filter.Update();
-    
+
     // Read
     asset = _context.Assets.Where(c => c.Id == asset.Id).FirstOrDefault();
     var filterUpdated = asset.AssetFilters.FirstOrDefault();
     Console.WriteLine(filterUpdated.Name);
-    
+
     // Delete
     filterUpdated.Delete();
-    
+
 ##生成使用筛选器的流式处理 URL
 
 有关如何发布和传送资产的信息，请参阅[将内容传送到客户概述](./media-services-deliver-content-overview.md)。
@@ -126,5 +126,5 @@ ms.author: juliako;cenkdin
 ##另请参阅 
 
 [动态清单概述](./media-services-dynamic-manifest-overview.md)
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

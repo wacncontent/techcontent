@@ -22,7 +22,7 @@ wacn.date: 11/03/2016
 ###现象：
 
 问题发生时，网页会显示如下错误信息：
-    
+
     502 - Web server received an invalid response while acting as a gateway or proxy server.
     There is a problem with the page you are looking for, and it cannot be displayed. When the Web server (while acting as a gateway or proxy) contacted the upstream content server, it received an invalid response from the content server.
 
@@ -41,7 +41,7 @@ wacn.date: 11/03/2016
         Get-AzureApplicationGatewayConfig -Name <application gateway name> -Exporttofile "<path to file>"
 
 2. 打开导出的文件并找到 BackendHttpSettingsList 部分，修改 RequestTimeout 的值。该值的单位为秒，可以配置为 1 到 86400，可以根据实际的情况进行修改。
-    
+
         <BackendHttpSettingsList>
             <BackendHttpSettings>
                 <Name>BackendSetting1</Name>

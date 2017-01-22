@@ -11,10 +11,10 @@
         import com.microsoft.windowsazure.mobileservices.authentication.MobileServiceUser;
 
 2. 将以下方法添加到 **ToDoActivity** 类： 
-    
+
         private void authenticate() {
         // Login using the Google provider.
-        
+
             ListenableFuture<MobileServiceUser> mLogin = mClient.login(MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
 
             Futures.addCallback(mLogin, new FutureCallback<MobileServiceUser>() {
@@ -45,17 +45,17 @@
 4. 将 **onCreate** 方法中 `authenticate();` 后面的剩余代码移到新的 **createTable** 方法，如下所示：
 
         private void createTable() {
-    
+
             // Get the Mobile Service Table instance to use
             mToDoTable = mClient.getTable(ToDoItem.class);
-    
+
             mTextNewToDo = (EditText) findViewById(R.id.textNewToDo);
-    
+
             // Create an adapter to bind the items with the view
             mAdapter = new ToDoItemAdapter(this, R.layout.row_list_to_do);
             ListView listViewToDo = (ListView) findViewById(R.id.listViewToDo);
             listViewToDo.setAdapter(mAdapter);
-    
+
             // Load the items from the Mobile Service
             refreshItemsFromTable();
         }

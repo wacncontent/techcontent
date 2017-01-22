@@ -23,7 +23,7 @@ wacn.date: 10/28/2016
 
 **解决方法：**安装 Wosign 根证书到 JDK 的证书库，详细步骤如下：
 
-1. 从 [http://www.wosign.com/Root/index.htm#](http://www.wosign.com/Root/index.htm# "http://www.wosign.com/Root/index.htm#") 站点 下载 WoSign 根证书（Certification Authority of WoSign），将 .crt 文件后缀改为 .cer
+1. 从 [http://www.wosign.com/Root/index.htm# "http://www.wosign.com/Root/index.htm#"](http://www.wosign.com/Root/index.htm# "http://www.wosign.com/Root/index.htm#") 站点 下载 WoSign 根证书（Certification Authority of WoSign），将 .crt 文件后缀改为 .cer
 2. 执行以下命令导入
 
         keytool -keystore "C:\Program Files\Java\jdk1.8.0_71\jre\lib\security\cacerts" -importcert -alias WoSign -file WS_CA1_NEW.cer

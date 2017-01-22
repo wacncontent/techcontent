@@ -29,14 +29,14 @@ ms.author: lodipalm;barbkess;sonyama
         user=mydwuser
         password=Mydwpassw0rd
         database=mydwdatabase
-    
+
 4. 从 Windows 命令提示符运行编辑过的 aw\_create.bat。确保你所在的目录是保存了所编辑 aw\_create.bat 版本的位置。此脚本将...
-   
-   * 删除所有 Adventure Works 表或所有已在你数据库中的视图
-   * 创建 Adventure Works 表和视图
-   * 使用 bcp 加载每个 Adventure Works 表
-   * 验证每个 Adventure Works 表的行计数
-   * 收集每个 Adventure Works 表的所有列中的统计信息
+
+    * 删除所有 Adventure Works 表或所有已在你数据库中的视图
+    * 创建 Adventure Works 表和视图
+    * 使用 bcp 加载每个 Adventure Works 表
+    * 验证每个 Adventure Works 表的行计数
+    * 收集每个 Adventure Works 表的所有列中的统计信息
 
 ## 查询示例数据
 将一些示例数据载入 SQL 数据仓库后，你可以快速运行几个查询。若要运行查询，请使用 Visual Studio 和 SSDT 连接到 Azure SQL DW 中新建的 Adventure Works 数据库，如[使用 Visual Studio 进行查询][query with Visual Studio]文档中所述。

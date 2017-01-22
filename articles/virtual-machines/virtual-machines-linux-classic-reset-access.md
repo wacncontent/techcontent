@@ -52,7 +52,7 @@ ms.author: cynthn
 
 ## <a name="pwresetcli"></a>重置密码
 1. 使用以下代码行在本地计算机上创建名为 PrivateConf.json 的文件。将 **myUserName** 和 **myP@ssW0rd** 替换为自己的用户名和密码，并设置自己的过期日期。
- 
+
         {
         "username":"myUserName",
         "password":"myP@ssW0rd",
@@ -72,7 +72,7 @@ ms.author: cynthn
         }
 
 2. 运行以下命令（请将 **myVM** 替换为自己的虚拟机名称）。
-   
+
         azure vm extension set myVM VMAccessForLinux Microsoft.OSTCExtensions 1.* --private-config-path PrivateConf.json
 
 ## <a name="resetbothcli"></a>重置密码和 SSH 密钥

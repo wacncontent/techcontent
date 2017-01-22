@@ -46,7 +46,7 @@
         class SimpleEventProcessor : IEventProcessor
         {
             Stopwatch checkpointStopWatch;
-    
+
             async Task IEventProcessor.CloseAsync(PartitionContext context, CloseReason reason)
             {
                 Console.WriteLine("Processor Shutting Down. Partition '{0}', Reason: '{1}'.", context.Lease.PartitionId, reason);
@@ -55,7 +55,7 @@
                     await context.CheckpointAsync();
                 }
             }
-    
+
             Task IEventProcessor.OpenAsync(PartitionContext context)
             {
                 Console.WriteLine("SimpleEventProcessor initialized.  Partition: '{0}', Offset: '{1}'", context.Lease.PartitionId, context.Lease.Offset);
@@ -63,17 +63,17 @@
                 this.checkpointStopWatch.Start();
                 return Task.FromResult<object>(null);
             }
-    
+
             async Task IEventProcessor.ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
             {
                 foreach (EventData eventData in messages)
                 {
                     string data = Encoding.UTF8.GetString(eventData.GetBytes());
-    
+
                     Console.WriteLine(string.Format("Message received.  Partition: '{0}', Data: '{1}'",
                         context.Lease.PartitionId, data));
                 }
-    
+
                 //Call checkpoint every 5 minutes, so that worker can resume processing from 5 minutes back if it restarts.
                 if (this.checkpointStopWatch.Elapsed > TimeSpan.FromMinutes(5))
                 {
@@ -98,14 +98,14 @@
           string storageAccountName = "{storage account name}";
           string storageAccountKey = "{storage account key}";
           string storageConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", storageAccountName, storageAccountKey);
-    
+
           string eventProcessorHostName = Guid.NewGuid().ToString();
           EventProcessorHost eventProcessorHost = new EventProcessorHost(eventProcessorHostName, eventHubName, EventHubConsumerGroup.DefaultGroupName, eventHubConnectionString, storageConnectionString);
           Console.WriteLine("Registering EventProcessor...");
           var options = new EventProcessorOptions();
           options.ExceptionReceived += (sender, e) => { Console.WriteLine(e.Exception); };
           eventProcessorHost.RegisterEventProcessorAsync<SimpleEventProcessor>(options).Wait();
-    
+
           Console.WriteLine("Receiving. Press enter key to stop worker.");
           Console.ReadLine();
           eventProcessorHost.UnregisterEventProcessorAsync().Wait();

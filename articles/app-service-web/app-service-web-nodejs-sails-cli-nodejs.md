@@ -70,7 +70,7 @@ ms.author: cephalin
     根据提示，在浏览器中继续使用具有 Azure 订阅的 Microsoft 帐户登录。
 
 3. 设置应用服务的部署用户。稍后使用凭据部署代码。
-   
+
         azure site deployment user set --username <username> --pass <password>
 
 3. 请确保你仍处于 Sails.js 项目的根目录中。在 Azure 中使用下一个命令创建具有唯一应用名称的应用服务应用资源。Web 应用的 URL 为 http://&lt;appname>.chinacloudsites.cn。
@@ -139,7 +139,7 @@ ms.author: cephalin
 如果 Sails.js 应用在应用服务中由于某种原因而失败，请查找 stderr 日志，以帮助进行故障排除。有关详细信息，请参阅[从 iisnode 获取 stdout 和 stderr 日志](./app-service-web-nodejs-get-started.md#get-stdout-and-stderr-logs-from-iisnode)。如果应用成功启动，stdout 日志应显示你熟悉的消息：
 
                    .-..-.
-    
+
        Sails              <|    .-..-.
        v0.12.11            |\
                           /|.\

@@ -13,7 +13,7 @@ ms.tgt_pltfrm: mobile-windows-phone
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 06/29/2016
-wacn.date: 08/23/2016
+wacn.date: 01/19/2017
 ms.author: wesmc
 ---
 
@@ -127,7 +127,7 @@ ms.author: wesmc
             {
                 await RegisterTemplate(channel.ChannelUri);
             }
-            
+
             return await registrationTask.Task;
         }
 
@@ -209,9 +209,9 @@ ms.author: wesmc
           if (TechnologyCheckBox.IsChecked == true) categories.Add("Technology");
           if (ScienceCheckBox.IsChecked == true) categories.Add("Science");
           if (SportsCheckBox.IsChecked == true) categories.Add("Sports");
-    
+
           var result = await ((App)Application.Current).notifications.StoreCategoriesAndSubscribe(categories);
-    
+
           MessageBox.Show("Subscribed to: " + string.Join(",", categories) + " on registration id : " +
              result.RegistrationId);
         }

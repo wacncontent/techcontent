@@ -22,7 +22,7 @@ ms.author: juliako
 > [!div class="op_single_selector"]
 - [.NET](./media-services-get-media-processor.md)
 - [REST](./media-services-rest-get-media-processor.md)
- 
+
 ##概述
 
 媒体服务中，媒体处理器是完成特定处理任务（例如，对媒体内容进行编码、格式转换、加密或解密）的组件。通常，创建任务以便对媒体内容进行编码、加密或格式转换时，就需要创建一个媒体处理器。
@@ -48,10 +48,10 @@ Azure 媒体加密器|已过时|
     {
         var processor = _context.MediaProcessors.Where(p => p.Name == mediaProcessorName).
         ToList().OrderBy(p => new Version(p.Version)).LastOrDefault();
-        
+
         if (processor == null)
         throw new ArgumentException(string.Format("Unknown media processor", mediaProcessorName));
-        
+
         return processor;
     }
 

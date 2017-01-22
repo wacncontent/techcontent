@@ -89,11 +89,11 @@ ms.author: davidmu
         AutoUpgradeMinorVersion                 : True
         Settings                                : {"xmlCfg":"...","storageAccount":"astore"}
     ProvisioningState                           : Succeeded
-    
+
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要获取其相关信息的虚拟机的实例标识符，然后运行该命令：
 
     Get-AzureRmVmssVM -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
-        
+
 它会返回与此示例类似的内容：
 
     Id                            : /subscriptions/{sub-id}/resourceGroups/myrg1/providers/Microsoft.Compute/
@@ -142,7 +142,7 @@ ms.author: davidmu
       AutoUpgradeMinorVersion     : True
       Settings                    : {"xmlCfg":"...","storageAccount":"astore"}
       ProvisioningState           : Succeeded
-        
+
 ## 启动规模集中的虚拟机
 
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要启动的虚拟机的标识符，然后运行该命令：
@@ -166,7 +166,7 @@ ms.author: davidmu
     ]
 
 不使用 -InstanceId 参数即可启动规模集中的所有虚拟机。
-    
+
 ## 停止规模集中的虚拟机
 
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要停止的虚拟机的标识符，然后运行该命令：
@@ -188,15 +188,15 @@ ms.author: davidmu
         "displayStatus": "VM deallocated"
       }
     ]
-    
+
 若要停止但不解除分配虚拟机，请使用 -StayProvisioned 参数。不使用 -InstanceId 参数即可停止规模集中的所有虚拟机。
-    
+
 ## 重启规模集中的虚拟机
 
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要重启的虚拟机的标识符，然后运行该命令：
 
     Restart-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
-    
+
 不使用 -InstanceId 参数即可重启规模集中的所有虚拟机。
 
 ## 从规模集中删除虚拟机

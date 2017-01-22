@@ -32,11 +32,11 @@ wacn.date: 11/03/2016
         tcpdump -i eth0 -w server.cap
 
 - 对于 Windows 的机器，可以使用 Wireshark 进行抓包，Wireshark 可以从[这个网站](https://www.wireshark.org/#download)进行下载。
-    
+
 2.完成抓包后，使用 Wireshark 打开抓包文件并在 filter 框内输入 http.x_forwarded_for 并点击回车。
 
 ![](./media/aog-web-app-get-user-ip/filter.png)
- 
+
 3.展开检索之后的任意一条记录，查看 X-Forwarded-For 字段可以拿到访问者的源 IP。在下面示例中，我们可以得知访问者的源 IP 为 16.22.255.29，而使用的源端口为 61532。
 
     Frame 35: 727 bytes on wire (5816 bits), 727 bytes captured (5816 bits)

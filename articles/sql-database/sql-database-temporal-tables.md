@@ -87,11 +87,11 @@ ms.author: carlrab
         , ValidTo datetime2 (0)  GENERATED ALWAYS AS ROW END HIDDEN   
             constraint DF_ValidTo DEFAULT '9999.12.31 23:59:59.99'
         , PERIOD FOR SYSTEM_TIME (ValidFrom, ValidTo); 
-    
+
     ALTER TABLE WebsiteUserInfo  
     SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.WebsiteUserInfoHistory));
     GO
-    
+
     CREATE CLUSTERED COLUMNSTORE INDEX IX_WebsiteUserInfoHistory
     ON dbo.WebsiteUserInfoHistory
     WITH (DROP_EXISTING = ON); 
@@ -125,7 +125,7 @@ ms.author: carlrab
 
     DECLARE @twoDaysAgo datetime2 = DATEADD(DAY, -2, SYSUTCDATETIME());
     DECLARE @aDayAgo datetime2 = DATEADD(DAY, -1, SYSUTCDATETIME());
-    
+
     SELECT UserID, SUM (PagesVisited) as TotalVisitedPages, AVG (PagesVisited) as AverageVisitedPages,
     MAX (PagesVisited) AS MaxVisitedPages, MIN (PagesVisited) AS MinVisitedPages,
     STDEV (PagesVisited) as StDevViistedPages

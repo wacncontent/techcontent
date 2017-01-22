@@ -94,7 +94,7 @@ wacn.date: 12/15/2015
         azure ad group member list  
         azure ad sp list  
         azure ad sp show  
-    
+
 - 你要分配哪些角色：可以使用以下 cmdlet 查看支持的角色定义。
 
     `azure role list`
@@ -122,7 +122,7 @@ wacn.date: 12/15/2015
 ## <a id="verify"></a>验证权限 ##
 
 检查你的帐户具有一些角色分配后，你可以通过运行以下命令实际查看这些角色分配授予你的权限：
-    
+
         PS C:\> azure group list
         PS C:\> azure resource list
 

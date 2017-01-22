@@ -55,7 +55,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 3. 将该文件保存到计算机上的本地文件夹中。
 4. 如果熟悉 Azure Resource Manager 模板，则跳到步骤 7。
 5. 打开保存的文件，并查看 **parameters** 下第 5 行中的内容。Azure Resource Manager 模板参数提供了在部署过程中可以填充的值的占位符。
-   
+
     | 参数 | 说明 |
     | --- | --- |
     | **位置** |将创建应用程序网关的 Azure 区域 |
@@ -77,7 +77,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
     * **name**。资源的名称。请注意 `[parameters('applicationGatewayName')]` 的使用，这意味着该名称是在部署过程中由用户或参数文件作为输入提供的。
     * **properties**。资源的属性列表。此模板在应用程序网关创建过程中，使用虚拟网络与公共 IP 地址。
 
-7. 导航回到 [https://github.com/Azure/azure-quickstart-templates/blob/master/101-application-gateway-create/](https://github.com/Azure/azure-quickstart-templates/blob/master/101-application-gateway-create)。
+7. 导航回到 [https://github.com/Azure/azure-quickstart-templates/blob/master/101-application-gateway-create](https://github.com/Azure/azure-quickstart-templates/blob/master/101-application-gateway-create)。
 8. 单击 **azuredeploy-paremeters.json**，然后单击 **RAW**。
 9. 将该文件保存到计算机上的本地文件夹中。
 10. 打开保存的文件并编辑参数的值。使用以下值部署本方案中所述的应用程序网关。
@@ -219,7 +219,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 如需大体上更详细地了解负载均衡选项，请访问：
 
-* [Azure Load Balancer](../load-balancer/index.md/)
-* [Azure 流量管理器](../traffic-manager/index.md/)
+* [Azure Load Balancer](../load-balancer/index.md)
+* [Azure 流量管理器](../traffic-manager/index.md)
 
 <!---HONumber=Mooncake_1226_2016-->

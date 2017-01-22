@@ -52,35 +52,35 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
 在此部分中，会创建一个 Node.js 控制台应用，它响应云调用的直接方法，这会触发模拟设备重新启动，并使用设备孪生报告属性使设备孪生查询可以识别设备以及它们上次重新启动的时间。
 
 1. 新建名为 **simDevice** 的空文件夹。在 **simDevice** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **simDevice** 文件夹的命令提示符处，运行下述命令以安装 **azure-iot-device** 设备 SDK 包和 **azure-iot-device-mqtt** 包：
-   
+
     ```
     npm install azure-iot-device azure-iot-device-mqtt --save
     ```
 3. 在 **simDevice** 文件夹中，利用文本编辑器创建新的 **simDevice.js** 文件。
 4. 在 **simDevice.js** 文件的开头添加以下“require”语句：
-   
+
     ```
     'use strict';
-   
+
     var Client = require('azure-iot-device').Client;
     var Protocol = require('azure-iot-device-mqtt').Mqtt;
     ```
 5. 添加 **connectionString** 变量，并用其创建设备客户端。
-   
+
     ```
     var connectionString = 'HostName={youriothostname};DeviceId={yourdeviceid};SharedAccessKey={yourdevicekey}';
     var client = Client.fromConnectionString(connectionString, Protocol);
     ```
 6. 添加以下函数以处理 **lockDoor** 方法。
-   
+
     ```
     var onLockDoor = function(request, response) {
-   
+
         // Respond the cloud app for the direct method
         response.send(200, function(err) {
             if (!err) {
@@ -89,12 +89,12 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
                 console.log('Response to method \'' + request.methodName + '\' sent successfully.');
             }
         });
-   
+
         console.log('Locking Door!');
     };
     ```
 7. 添加以下代码以注册 **lockDoor** 方法的处理程序。
-   
+
     ```
     client.open(function(err) {
         if (err) {
@@ -116,26 +116,26 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
 在此部分中，会创建一个 Node.js 控制台应用，它使用直接方法对设备启动远程 **lockDoor** 并更新设备孪生的属性。
 
 1. 新建名为 **scheduleJobService** 的空文件夹。在 **scheduleJobService** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **scheduleJobService** 文件夹的命令提示符处，运行下述命令以安装 **azure-iothub** 设备 SDK 包和 **azure-iot-device-mqtt** 包：
-   
+
     ```
     npm install azure-iothub uuid --save
     ```
 3. 在 **scheduleJobService** 文件夹中，利用文本编辑器创建新的 **scheduleJobService.js** 文件。
 4. 在 **dmpatterns\_gscheduleJobServiceetstarted\_service.js** 文件开头添加以下“require”语句：
-   
+
     ```
     'use strict';
-   
+
     var uuid = require('uuid');
     var JobClient = require('azure-iothub').JobClient;
     ```
 5. 添加以下变量声明并替换占位符值：
-   
+
     ```
     var connectionString = '{iothubconnectionstring}';
     var deviceArray = ['myDeviceId'];
@@ -144,7 +144,7 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
     var jobClient = JobClient.fromConnectionString(connectionString);
     ```
 6. 添加用于监视作业执行的以下函数：
-   
+
     ```
     function monitorJob (jobId, callback) {
         var jobMonitorInterval = setInterval(function() {
@@ -163,14 +163,14 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
     }
     ```
 7. 添加以下代码以安排调用设备方法的作业：
-   
+
     ```
     var methodParams = {
         methodName: 'lockDoor',
         payload: null,
         timeoutInSeconds: 45
     };
-   
+
     var methodJobId = uuid.v4();
     console.log('scheduling Device Method job with id: ' + methodJobId);
     jobClient.scheduleDeviceMethod(methodJobId,
@@ -193,7 +193,7 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
     });
     ```
 8. 添加以下代码以安排更新设备孪生的作业：
-   
+
     ```
     var twinPatch = {
         etag: '*',
@@ -202,9 +202,9 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
             floor: 3
         }
     };
-   
+
     var twinJobId = uuid.v4();
-   
+
     console.log('scheduling Twin Update job with id: ' + twinJobId);
     jobClient.scheduleTwinUpdate(twinJobId,
                                 deviceArray,
@@ -231,12 +231,12 @@ Azure IoT 中心是一个完全托管的服务，使应用程序后端可以创�
 现在，你已准备就绪，可以运行应用程序了。
 
 1. 在 **simDevice** 文件夹的命令提示符处，运行以下命令以开始侦听重新启动直接方法。
-   
+
     ```
     node simDevice.js
     ```
 2. 在 **scheduleJobService** 文件夹的命令提示符处，运行以下命令以触发远程重新启动并查询设备孪生以查找上次重新启动时间。
-   
+
     ```
     node scheduleJobService.js
     ```

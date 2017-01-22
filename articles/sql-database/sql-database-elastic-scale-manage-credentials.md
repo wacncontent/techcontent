@@ -27,7 +27,7 @@ ms.author: ddove
 * **连接凭据**：用于连接到分片。
 
 另请参阅[管理 Azure SQL 数据库的数据库和登录名](./sql-database-manage-logins.md)。
- 
+
 ## 关于管理凭据
 
 使用管理凭据可以针对操作分片映射的应用程序创建 [**ShardMapManager**](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanager.aspx) 对象。（有关示例，请参阅[使用弹性数据库工具添加分片](./sql-database-elastic-scale-add-a-shard.md)和[数据相关的路由](./sql-database-elastic-scale-data-dependent-routing.md)）弹性缩放客户端库的用户创建 SQL 用户和 SQL 登录名，并确保在全局分片映射数据库以及所有分片数据库上授予每个用户读/写权限。对分片映射执行更改时，可使用这些凭据维护全局分片映射和本地分片映射。例如，使用管理凭据创建分片映射管理器对象（使用 [**GetSqlShardMapManager**](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmapmanagerfactory.getsqlshardmapmanager.aspx)）：
@@ -45,7 +45,7 @@ ms.author: ddove
 请不要使用“用户名@服务器”格式的值 - 使用“用户名”格式的值即可。这是因为凭据必须同时适用于分片映射管理器数据库和各个分片，而它们可能位于不同的服务器上。
 
 ## 访问凭据
-  
+
 在不用于管理分片映射的应用程序中创建分片映射管理器时，请使用在全局分片映射上具有只读权限的凭据。在这些凭据下从全局分片映射检索的信息可用于[数据相关的路由](./sql-database-elastic-scale-data-dependent-routing.md)，并且用于在客户端上填充分片映射缓存。通过与如上所示的 **GetSqlShardMapManager** 相同的调用模式提供凭据：
 
     // Obtain shard map manager. 
@@ -59,7 +59,7 @@ ms.author: ddove
 ## 连接凭据 
 
 当使用 [**OpenConnectionForKey**](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.sqldatabase.elasticscale.shardmanagement.shardmap.openconnectionforkey.aspx) 方法访问与某个分片键相关联的分片时，还需使用其他凭据。这些凭据需要提供对驻留在该分片上的本地分片映射表的只读访问权限。若要对分片上数据相关的路由执行连接验证，则需要此凭据。此代码片段允许在使用数据相关路由的上下文中进行数据访问：
- 
+
     using (SqlConnection conn = rangeMap.OpenConnectionForKey<int>( 
     targetWarehouse, smmUserConnectionString, ConnectionOptions.Validate)) 
 
@@ -75,5 +75,5 @@ ms.author: ddove
 [保护 SQL 数据库](./sql-database-security.md)
 
 [!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
- 
+
 <!---HONumber=Mooncake_1212_2016-->

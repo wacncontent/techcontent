@@ -9,12 +9,12 @@
 在本节中，您将定义 ServiceFilter，它将检测 HTTP 状态码 401 响应，并触发令牌和令牌缓存的刷新。此外，在身份验证期间，此 ServiceFilter 将阻止其他出站请求，以便这些请求可以使用刷新的令牌。
 
 1. 打开 ToDoActivity.java 文件并添加以下 import 语句：
- 
+
         import java.util.concurrent.atomic.AtomicBoolean;
         import java.util.concurrent.ExecutionException;
 
         import com.microsoft.windowsazure.mobileservices.MobileServiceException;
- 
+
 2. 将以下成员添加到  `ToDoActivity` 类。 
 
         public boolean bAuthenticating = false;
@@ -48,10 +48,10 @@
             }
             if (bAuthenticating == true)
                 return true;
-            
+
             return detected;
         }
-        
+
 4. 在 ToDoActivity.java 文件中，将以下方法添加到 ToDoActivity 类。此方法将实际触发等待，然后在身份验证完成时更新出站请求中的令牌。 
 
         /**
@@ -87,9 +87,9 @@
          *            Indicates whether to force a token refresh. 
          */
         private void authenticate(boolean bRefreshCache) {
-            
+
             bAuthenticating = true;
-            
+
             if (bRefreshCache || !loadUserTokenCache(mClient))
             {
                 // New login using the provider and update the token cache.
@@ -98,7 +98,7 @@
                             @Override
                             public void onCompleted(MobileServiceUser user,
                                     Exception exception, ServiceFilterResponse response) {
-    
+
                                 synchronized(mAuthenticationLock)
                                 {
                                     if (exception == null) {
@@ -137,9 +137,9 @@
          * that request.   
          */
         private class RefreshTokenCacheFilter implements ServiceFilter {
-         
+
             AtomicBoolean mAtomicAuthenticatingFlag = new AtomicBoolean();                     
-            
+
             @Override
             public ListenableFuture<ServiceFilterResponse> handleRequest(
                     final ServiceFilterRequest request, 
@@ -151,7 +151,7 @@
                 // a result of HTTP status code 401. 
                 // If authentication was detected, add the token to the request.
                 waitAndUpdateRequestToken(request);
-     
+
                 // Send the request down the filter chain
                 // retrying up to 5 times on 401 response codes.
                 ListenableFuture<ServiceFilterResponse> future = null;
@@ -188,7 +188,7 @@
                                         }
                                     });
                                 }
-    
+
                                 // Wait for authentication to complete then update the token in the request. 
                                 waitAndUpdateRequestToken(request);
                                 mAtomicAuthenticatingFlag.set(false);                                                  
@@ -203,7 +203,7 @@
     该服务过滤器将检查每个响应以查找 HTTP 状态码 401“未授权”。如果遇到 401，将在 UI 线程上设置用于获取新令牌的新登录请求。其他调用将被阻止，直到完成该登录，或 5 次尝试都已失败。如果获得新令牌，则将使用新令牌重试触发 401 的请求，将使用新令牌重试任何被阻止的调用。
 
 7. 在 ToDoActivity.java 文件中，在 ToDoActivity 类中，为新 `ProgressFilter` 类添加此代码：
-        
+
         /**
         * The ProgressFilter class renders a progress bar on the screen during the time the App is waiting for the response of a previous request.
         * the filter shows the progress bar on the beginning of the request, and hides it when the response arrived.
@@ -247,7 +247,7 @@
                 return resultFuture;
             }
         }
-        
+
     此筛选器将在请求开始时显示进度条，在响应传达时隐藏进度条。
 
 8. 在 ToDoActivity.java 文件中，更新 `onCreate` 方法，如下所示：
@@ -255,13 +255,13 @@
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            
+
             setContentView(R.layout.activity_to_do);
             mProgressBar = (ProgressBar) findViewById(R.id.loadingProgressBar);
-        
+
             // Initialize the progress bar
             mProgressBar.setVisibility(ProgressBar.GONE);
-        
+
             try {
                 // Create the Mobile Service Client instance, using the provided
                 // Mobile Service URL and key
@@ -270,10 +270,10 @@
                         "<YOUR MOBILE SERVICE KEY>", this)
                            .withFilter(new ProgressFilter())
                            .withFilter(new RefreshTokenCacheFilter());
-            
+
                 // Authenticate passing false to load the current token cache if available.
                 authenticate(false);
-                    
+
             } catch (MalformedURLException e) {
                 createAndShowDialog(new Exception("Error creating the Mobile Service. " +
                     "Verify the URL"), "Error");

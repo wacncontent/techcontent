@@ -53,7 +53,7 @@ ms.author: sethm
 客户端用来与事件中心交互的主类是 [Microsoft.ServiceBus.Messaging.EventHubClient](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.eventhubclient.aspx) 类。此类提供发送者和接收者功能。可以使用 [Create](https://msdn.microsoft.com/zh-cn/library/microsoft.servicebus.messaging.eventhubclient.create.aspx) 方法实例化此类，如以下示例中所示。
 
         var client = EventHubClient.Create(description.Path);
-    
+
 此方法使用 App.config 文件的 `appSettings` 节中的服务总线连接信息。有关用于存储服务总线连接信息的 `appSettings` XML 示例，请参阅 [Microsoft.ServiceBus.Messaging.EventHubClient.Create(System.String)](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.eventhubclient.create.aspx) 方法的文档。
 
 另一个选项是从连接字符串创建客户端。在使用 Azure 辅助角色，此选项非常合适，因为你可以在辅助角色的配置属性中存储字符串。例如：

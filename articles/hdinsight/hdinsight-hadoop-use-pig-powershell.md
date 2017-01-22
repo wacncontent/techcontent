@@ -92,7 +92,7 @@ Azure PowerShell 提供 *cmdlet*，可在 HDInsight 上远程运行 Pig 作业�
 2. 打开一个新 Windows PowerShell 命令提示符。将目录更改为 **pigjob.ps1** 文件所在的位置，然后使用以下命令运行脚本：
 
         .\pigjob.ps1
-        
+
     首先会提示登录 Azure 订阅。然后，将要求输入 HDInsight 群集的 HTTPs/Admin 帐户名称和密码。
 
 7. 作业完成时，应返回如下信息：

@@ -196,25 +196,25 @@ Azure 诊断代理会在启动后一分钟刷新 .wadcfg 文件中的性能计�
         if (!PerformanceCounterCategory.Exists("MyCustomCounterCategory"))
         {
            CounterCreationDataCollection counterCollection = new CounterCreationDataCollection();
-    
+
            // add a counter tracking user button1 clicks
            CounterCreationData operationTotal1 = new CounterCreationData();
            operationTotal1.CounterName = "MyButton1Counter";
            operationTotal1.CounterHelp = "My Custom Counter for Button1";
            operationTotal1.CounterType = PerformanceCounterType.NumberOfItems32;
            counterCollection.Add(operationTotal1);
-    
+
            PerformanceCounterCategory.Create(
              "MyCustomCounterCategory",
              "My Custom Counter Category",
              PerformanceCounterCategoryType.SingleInstance, counterCollection);
-    
+
            Trace.WriteLine("Custom counter category created.");
         }
         else{
            Trace.WriteLine("Custom counter category already exists.");
         }
-    
+
         return base.OnStart();
         }
 

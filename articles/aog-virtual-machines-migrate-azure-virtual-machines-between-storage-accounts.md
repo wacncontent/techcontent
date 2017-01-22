@@ -51,25 +51,25 @@ Azure 存储服务提供了将 Blob 从一个存储账户移动到另一个的�
 >注意：在位于不同区域的存储账户之间复制 blob 时，根据该 blob 的大小会出现花费一个小时或更长的时间的情况。执行该操作最便捷的方式是通过 Azure PowerShell： 
 
     Select-AzureSubscription "kenazsubscription" 
-    
+
     # VHD blob to copy #
     $blobName = "KenazTestService-TestVM1-2014-8-26-15-1-55-658-0.vhd" 
-    
+
     # Source Storage Account Information #
     $sourceStorageAccountName = "kenazsa"
     $sourceKey = "MySourceStorageAccountKey"
     $sourceContext = New-AzureStorageContext –StorageAccountName $sourceStorageAccountName -StorageAccountKey $sourceKey  
     $sourceContainer = "vhds"
-    
+
     # Destination Storage Account Information #
     $destinationStorageAccountName = "kenazdestinationsa"
     $destinationKey = "MyDestinationStorageAccountKey"
     $destinationContext = New-AzureStorageContext –StorageAccountName $destinationStorageAccountName -StorageAccountKey $destinationKey  
-    
+
     # Create the destination container #
     $destinationContainerName = "destinationvhds"
     New-AzureStorageContainer -Name $destinationContainerName -Context $destinationContext 
-    
+
     # Copy the blob # 
     $blobCopy = Start-AzureStorageBlobCopy -DestContainer $destinationContainerName `
                             -DestContext $destinationContext `

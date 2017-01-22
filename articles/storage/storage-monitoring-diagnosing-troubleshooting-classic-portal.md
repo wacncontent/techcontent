@@ -767,16 +767,16 @@ Wireshark 是一种网络协议分析器，可用于查看各种网络协议的�
 
 以下过程演示，对于从安装 Wireshark 的本地计算机到 Azure 存储帐户中的表服务的流量，如何捕获其详细数据包信息。
 
-1.	在本地计算机上启动 Wireshark。
-2.	在“启动”部分中，选择本地网络接口或连接到 Internet 的接口。
-3.	单击“捕获选项”。
-4.	将一个筛选器添加到“捕获筛选器”文本框中。例如，**host contosoemaildist.table.core.chinacloudapi.cn** 会将 Wireshark 配置为只捕获发送到 **contosoemaildist** 存储帐户中的表服务终结点或从该终结点发送的数据包。有关捕获筛选器的完整列表，请参阅 <a href="http://wiki.wireshark.org/CaptureFilters" target="_blank">http://wiki.wireshark.org/CaptureFilters</a>。
+1. 在本地计算机上启动 Wireshark。
+2. 在“启动”部分中，选择本地网络接口或连接到 Internet 的接口。
+3. 单击“捕获选项”。
+4. 将一个筛选器添加到“捕获筛选器”文本框中。例如，**host contosoemaildist.table.core.chinacloudapi.cn** 会将 Wireshark 配置为只捕获发送到 **contosoemaildist** 存储帐户中的表服务终结点或从该终结点发送的数据包。有关捕获筛选器的完整列表，请参阅 <a href="http://wiki.wireshark.org/CaptureFilters" target="_blank">http://wiki.wireshark.org/CaptureFilters</a>。
 
     ![][6]  
 
-5.	单击“启动”。现在，当你在本地计算机上使用客户端应用程序时，Wireshark 将捕获发送到表服务终结点或从该终结点发送的所有数据包。
-6.	完成后，在主菜单上，依次单击“捕获”和“停止”。
-7.	若要将捕获的数据保存到 Wireshark 捕获文件中，请在主菜单上依次单击“文件”和“保存”。
+5. 单击“启动”。现在，当你在本地计算机上使用客户端应用程序时，Wireshark 将捕获发送到表服务终结点或从该终结点发送的所有数据包。
+6. 完成后，在主菜单上，依次单击“捕获”和“停止”。
+7. 若要将捕获的数据保存到 Wireshark 捕获文件中，请在主菜单上依次单击“文件”和“保存”。
 
 WireShark 将在 **packetlist** 窗口中突出显示存在的任何错误。你还可以使用“专家信息”窗口（依次单击“分析”、“专家信息”）查看错误和警告的摘要。
 

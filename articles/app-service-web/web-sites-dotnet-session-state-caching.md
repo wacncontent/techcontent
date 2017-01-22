@@ -31,7 +31,7 @@ ms.author: riande
 安装 NuGet `RedisSessionStateProvider` 包。从包管理器控制台（“工具”>“NuGet 包管理器”>“包管理器控制台”）使用以下命令进行安装：
 
   `PM> Install-Package Microsoft.Web.RedisSessionStateProvider`
-  
+
 要从“工具”>“NuGet 包管理器”>“管理解决方案的 NuGet 包”进行安装，请搜索 `RedisSessionStateProvider`。
 
 有关详细信息，请参阅 [NuGet RedisSessionStateProvider 页](http://www.nuget.org/packages/Microsoft.Web.RedisSessionStateProvider/)。

@@ -26,7 +26,7 @@ ms.author: iainfou
 
 - [Create a Windows Server VM using the Azure portal Preview](./virtual-machines-windows-hero-tutorial.md)（使用 Azure 门户预览创建 Windows Server VM）或 [Create a Windows Server VM using Azure PowerShell](./virtual-machines-windows-ps-create.md)（使用 Azure PowerShell 创建 Windows Server VM）
 - [Attach a data disk to a Windows Server VM using the Azure portal Preview](./virtual-machines-windows-attach-disk-portal.md)（使用 Azure 门户预览将数据磁盘附加到 Windows Server VM）或 [Attach a data disk to a Windows Server VM using Azure PowerShell](https://msdn.microsoft.com/zh-cn/library/mt603673.aspx)（使用 Azure PowerShell 将数据磁盘附加到 Windows Server VM）
-    
+
 使用远程桌面[登录到 Windows Server VM](./virtual-machines-windows-connect-logon.md)，开始安装和配置 MongoDB。
 
 ## 安装 MongoDB

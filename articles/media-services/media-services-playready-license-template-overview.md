@@ -35,7 +35,7 @@ Azure 媒体服务现在提供可用于传送 Microsoft PlayReady 许可证的�
 若要使用媒体服务配置 PlayReady 许可证，必须配置媒体服务 PlayReady 许可证模板。该模板在 XML 中定义。
 
 下面的示例演示了配置基本的流式处理许可证最简单的（也是最常见的）模板。借助此许可证，客户端可以播放受 PlayReady 保护的内容。
-    
+
     <?xml version="1.0" encoding="utf-8"?>
     <PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" 
                                       xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1">
@@ -78,7 +78,7 @@ XML 符合 PlayReady 许可证模板 XML 架构部分中定义的 PlayReady 许�
 有关 Silverlight 支持的保护级别的示例，请参阅：[Silverlight 支持的输出保护](https://msdn.microsoft.com/zh-cn/library/cc838192(v=VS.95).aspx#Silverlight_Support_for_Output_Protection)。
 
 ##<a id="schema"></a>PlayReady 许可证模板 XML 架构
-    
+
     <?xml version="1.0" encoding="utf-8"?>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1" xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />

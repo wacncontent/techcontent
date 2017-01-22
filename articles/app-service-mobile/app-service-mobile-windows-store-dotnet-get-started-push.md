@@ -35,7 +35,7 @@ ms.author: adrianha
 1. 在 Visual Studio 解决方案资源管理器中，右键单击 UWP 应用项目，单击“应用商店”>“将应用与应用商店关联...”。
 
     ![将应用与 Windows 应用商店关联](./media/app-service-mobile-windows-store-dotnet-get-started-push/notification-hub-associate-uwp-app.png)
-    
+
 2. 在向导中，单击“下一步”、使用 Microsoft 帐户登录，再在“保留新应用名称”处输入应用的名称，然后单击“保留”。
 
 3. 成功创建应用注册后，选择新应用名称，再依次单击“下一步”和“关联”。这会将所需的 Windows 应用商店注册信息添加到应用程序清单中。

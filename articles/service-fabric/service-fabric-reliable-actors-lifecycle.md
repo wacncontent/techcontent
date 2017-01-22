@@ -98,10 +98,10 @@ ms.author: amanbha
 [执行组件服务](./service-fabric-reliable-actors-platform.md)提供了一个函数，用于从远程调用方删除执行组件：
 
     ActorId actorToDelete = new ActorId(id);
-    
+
     IActorService myActorServiceProxy = ActorServiceProxy.Create(
         new Uri("fabric:/MyApp/MyService"), actorToDelete);
-                
+
     await myActorServiceProxy.DeleteActorAsync(actorToDelete, cancellationToken)
 
 删除一个执行组件将出现以下结果，具体取决于当前执行组件是否处于活动状态：

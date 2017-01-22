@@ -25,7 +25,7 @@ ms.author: juliako;mikhegn
 ##用于 .NET 的 Azure SDK 2.9.6 版本摘要
 
 发布日期：2016 年 11 月 16 日
- 
+
 在此版本中未引入对 Azure SDK 2.9 的任何重大更改。将此 SDK 用于现有的云服务项目时，也不需要任何升级过程。
 
 ### Visual Studio 2017 候选发布
@@ -37,7 +37,7 @@ ms.author: juliako;mikhegn
 - 已更改该行为，以仅存储部分连接字符串，并将密钥替换为云服务诊断存储连接字符串的令牌。实际的存储密钥现在存储在用户配置文件文件夹中，因此可以控制其访问权限。Visual Studio 将在本地调试和发布过程中从用户配置文件文件夹中读取存储密钥。
 - 为响应上述更改，Visual Studio Online 团队已增强 Azure 云服务部署任务模板，以便用户在连接集成和部署中发布到 Azure 时可以指定用于设置诊断扩展的存储密钥。
 - 我们已实现存储 Azure 诊断 (WAD) 的安全连接字符串和词汇切分，以帮助用户跨环境解决配置问题。
- 
+
 ### Windows Server 2016 虚拟机
 
 - Visual Studio 现在支持将云服务部署到 OS 系列 5 (Windows Server 2016) 虚拟机。对于现有的云服务，可以更改设置以针对新的 OS 系列。创建新的云服务时，如果选择使用 .net 4.6 或更高版本创建服务，则服务将默认使用 OS 系列 5。有关详细信息，可以查看[来宾 OS 系列支持表](../cloud-services/cloud-services-guestos-update-matrix.md)。
@@ -71,7 +71,7 @@ ms.author: juliako;mikhegn
 此更新包含下列工具：
 
 * 用于 Visual Studio 的 **Azure Data Lake 工具**现在已合并到用于 .NET 的 Azure SDK 发行版中。当你安装 Azure SDK 时，便会自动安装此工具。
-  
+
     此工具会经常更新，请转到[此处](http://aka.ms/datalaketool)获取更新。
 - 现在使用**服务器资源管理器**可以查看所有 U-SQL 元数据实体和创建一些 U-SQL 元数据实体。
 

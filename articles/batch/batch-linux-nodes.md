@@ -67,32 +67,32 @@ python
     import azure.batch.batch_service_client as batch
     import azure.batch.batch_auth as batchauth
     import azure.batch.models as batchmodels
-    
+
     # Specify Batch account credentials
     account = "<batch-account-name>"
     key = "<batch-account-key>"
     batch_url = "<batch-account-url>"
-    
+
     # Pool settings
     pool_id = "LinuxNodesSamplePoolPython"
     vm_size = "STANDARD_A1"
     node_count = 1
-    
+
     # Initialize the Batch client
     creds = batchauth.SharedKeyCredentials(account, key)
     config = batch.BatchServiceClientConfiguration(creds, base_url = batch_url)
     client = batch.BatchServiceClient(config)
-    
+
     # Create the unbound pool
     new_pool = batchmodels.PoolAddParameter(id = pool_id, vm_size = vm_size)
     new_pool.target_dedicated = node_count
-    
+
     # Configure the start task for the pool
     start_task = batchmodels.StartTask()
     start_task.run_elevated = True
     start_task.command_line = "printenv AZ_BATCH_NODE_STARTUP_DIR"
     new_pool.start_task = start_task
-    
+
     # Create an ImageReference which specifies the Marketplace
     # virtual machine image to install on the nodes.
     ir = batchmodels.ImageReference(
@@ -100,17 +100,17 @@ python
         offer = "UbuntuServer",
         sku = "14.04.2-LTS",
         version = "latest")
-    
+
     # Create the VirtualMachineConfiguration, specifying
     # the VM image reference and the Batch node agent to
     # be installed on the node.
     vmc = batchmodels.VirtualMachineConfiguration(
         image_reference = ir,
         node_agent_sku_id = "batch.node.ubuntu 14.04")
-    
+
     # Assign the virtual machine configuration to the pool
     new_pool.virtual_machine_configuration = vmc
-    
+
     # Create pool in the Batch service
     client.pool.add(new_pool)
 
@@ -120,13 +120,13 @@ python
 
     # Get the list of node agents from the Batch service
     nodeagents = client.account.list\_node\_agent\_skus()
-    
+
     # Obtain the desired node agent
     ubuntu1404agent = next(agent for agent in nodeagents if "ubuntu 14.04" in agent.id)
-    
+
     # Pick the first image reference from the list of verified references
     ir = ubuntu1404agent.verified_image_references[0]
-    
+
     # Create the VirtualMachineConfiguration, specifying the VM image
     # reference and the Batch node agent to be installed on the node.
     vmc = batchmodels.VirtualMachineConfiguration(
@@ -145,37 +145,37 @@ csharp
     const string poolId = "LinuxNodesSamplePoolDotNet";
     const string vmSize = "STANDARD\_A1";
     const int nodeCount = 1;
-    
+
     // Obtain a collection of all available node agent SKUs.
     // This allows us to select from a list of supported
     // VM image/node agent combinations.
     List<NodeAgentSku> nodeAgentSkus =
         batchClient.PoolOperations.ListNodeAgentSkus().ToList();
-    
+
     // Define a delegate specifying properties of the VM image
     // that we wish to use.
     Func<ImageReference, bool> isUbuntu1404 = imageRef =>
         imageRef.Publisher == "Canonical" &&
         imageRef.Offer == "UbuntuServer" &&
         imageRef.SkuId.Contains("14.04");
-    
+
     // Obtain the first node agent SKU in the collection that matches
     // Ubuntu Server 14.04. Note that there are one or more image
     // references associated with this node agent SKU.
     NodeAgentSku ubuntuAgentSku = nodeAgentSkus.First(sku =>
         sku.VerifiedImageReferences.Any(isUbuntu1404));
-    
+
     // Select an ImageReference from those available for node agent.
     ImageReference imageReference =
         ubuntuAgentSku.VerifiedImageReferences.First(isUbuntu1404);
-    
+
     // Create the VirtualMachineConfiguration for use when actually
     // creating the pool
     VirtualMachineConfiguration virtualMachineConfiguration =
         new VirtualMachineConfiguration(
             imageReference: imageReference,
             nodeAgentSkuId: ubuntuAgentSku.Id);
-    
+
     // Create the unbound pool object using the VirtualMachineConfiguration
     // created above
     CloudPool pool = batchClient.PoolOperations.CreatePool(
@@ -183,7 +183,7 @@ csharp
         virtualMachineSize: vmSize,
         virtualMachineConfiguration: virtualMachineConfiguration,
         targetDedicated: nodeCount);
-    
+
     // Commit the pool to the Batch service
     pool.Commit();
 
@@ -242,16 +242,16 @@ python
     import azure.batch.batch_service_client as batch
     import azure.batch.batch_auth as batchauth
     import azure.batch.models as batchmodels
-    
+
     # Specify your own account credentials
     batch_account_name = ''
     batch_account_key = ''
     batch_account_url = ''
-    
+
     # Specify the ID of an existing pool containing Linux nodes
     # currently in the 'idle' state
     pool_id = ''
-    
+
     # Specify the username and prompt for a password
     username = 'linuxuser'
     password = getpass.getpass()

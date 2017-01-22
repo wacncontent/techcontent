@@ -68,7 +68,7 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 
 1. 打开 **Microsoft Excel**。
 2. 在“Power Query”菜单中，依次单击“来自 Azure”和“来自 Azure 表存储”。
- 
+
     ![HDInsight Hadoop Excel PowerQuery 打开 Azure 表存储](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-using-excel-power-query-open.png)
 3. 输入存储帐户名称。对于 Azure 中国区，该名称必须是 FQDN。
 4. 输入存储帐户密钥。将显示一系列表：
@@ -82,7 +82,7 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 8. 选择“TraceLevel”、“角色”和“ComponentName”列，然后单击功能区中的“分组依据”控件。
 9. 单击“分组依据”对话框中的“确定”
 10. 单击“应用并关闭”。
- 
+
 现在，可以根据需要使用 Excel 筛选和排序。显然，可能要包括其他列（如“消息”列），以便在出现问题时对其进行深入分析，但选择上述列并对其分组后，已经可以基本了解 Hadoop 服务的情况。setuplog 和 hadoopinstalllog 表也是如此。
 
 #### 使用 Visual Studio
@@ -95,11 +95,11 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 4. 依次展开“存储帐户”、群集的默认存储帐户和“表”。
 5. 双击“hadoopservicelog”。
 6. 添加筛选器。例如：
-    
+
         TraceLevel eq 'ERROR'
 
     ![HDInsight Hadoop 日志选择列](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-visual-studio-filter.png)
- 
+
 ##写入 Azure Blob 存储的日志
 
 通过[写入 Azure 表的日志](#log-written-to-azure-tables)，可在一定程度上了解 HDInsight 群集中发生的事件。但是，这些表不提供任务级日志，这些日志在问题发生时可以用于进一步分析问题。为了更进一步详细了解发生的问题，可以对 HDInsight 群集进行配置，将通过 Templeton 提交的任何作业的任务日志写入 Blob 存储帐户。实际上，这是指通过 Azure PowerShell cmdlet 或 .NET 作业提交 API 提交的作业，而不是指通过 RDP 提交或通过命令行访问群集时提交的作业。
@@ -107,7 +107,7 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 要查看日志，请参阅[在基于 Windows 的 HDInsight 上访问 YARN 应用程序日志](./hdinsight-hadoop-access-yarn-app-logs.md)。
 
 有关应用程序日志的详细信息，请参阅[简化 YARN 中的用户日志管理和访问](http://hortonworks.com/blog/simplifying-user-logs-management-and-access-in-yarn/)。
- 
+
 ## 查看群集运行状况和作业日志
 
 ###访问 Hadoop UI

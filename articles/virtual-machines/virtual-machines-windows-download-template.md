@@ -30,7 +30,7 @@ ms.author: cynthn
 5. 选择“自动化脚本”。
 6. 选择“下载”，将 .zip 文件保存到本地计算机。
 7. 打开该 .zip 文件，将文件解压缩到某个文件夹。该 .zip 文件包含：
-    
+
     - deploy.ps1
     - deploy.sh
     - deployer.rb
@@ -39,7 +39,7 @@ ms.author: cynthn
     - template.json
 
 template.json 文件是模板。
-    
+
 ## 使用 PowerShell 下载模板
 
 也可以使用 [Export-AzureRMResourceGroup](https://msdn.microsoft.com/zh-cn/library/mt715427.aspx) cmdlet 下载 .json 模板文件。可以使用 `-path` 参数提供 .json 文件的文件名和路径。本示例演示如何将名为 **myResourceGroup** 的资源组的模板下载到本地计算机上的 **C:\\users\\public\\downloads** 文件夹。

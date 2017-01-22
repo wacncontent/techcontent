@@ -67,19 +67,19 @@ MySQL Database on Azure支持用户使用复制功能为MySQL实例创建从属�
 下面是应用端读写分离的Java样例程序：
 
     package test1;
-    
+
     import java.sql.Connection;
     import java.sql.ResultSet;
     import java.sql.Statement;
     import java.util.Properties;
-    
+
     import com.mysql.jdbc.Driver;
     import com.mysql.jdbc.ReplicationDriver;;
-    
+
     public class ConnectionDemo {
-    
+
       public static void main(String[] args) throws Exception {
-        
+
         ReplicationDriver driver = new ReplicationDriver();
         String url = "jdbc:mysql:replication://address=(protocol=tcp)(type=master)(host=masterhost)(port=3306)(user=masteruser),address=(protocol=tcp)(type=slave)(host=slavehost)(port=3306)(user=slaveuser)/yourdb";
         Properties props = new Properties();    
@@ -91,10 +91,10 @@ MySQL Database on Azure支持用户使用复制功能为MySQL实例创建从属�
             conn.setAutoCommit(false);
             conn.createStatement().executeUpdate("update t1 set id = id+1;");
             conn.commit();    
-    
+
             // Set up connection to slave;
             conn.setReadOnly(true);
-            
+
             // Now, do a query from a slave
             try (Statement statement = conn.createStatement())
             {
@@ -161,19 +161,19 @@ MySQL Database on Azure支持用户使用复制功能为MySQL实例创建从属�
               break;
           }
         }
-        
+
         if (!($mysqli = new mysqli("myapp", "<your username>", "<your password>", "<your db>")) || mysqli_connect_errno())
         {
           die(sprintf("Failed to connect: [%d] %s\n", mysqli_connect_errno(), mysqli_connect_error()));
         }
         $query = "INSERT INTO user(name, num) VALUES ('test', 1)";
         is_select($query);
-        
+
         if (!($res = $mysqli->query($query)))
         {
           printf("Failed to insert: [%d] %s<br>\n", $mysqli->errno, $mysqli->error);
         }
-        
+
         $query = "SELECT * FROM user";
         is_select($query);
         if (!($res = $mysqli->query($query)))
@@ -190,7 +190,7 @@ MySQL Database on Azure支持用户使用复制功能为MySQL实例创建从属�
           printf("<br>\n");
           $res->close();
         }
-        
+
         $query = "/*" . MYSQLND_MS_LAST_USED_SWITCH . "*/SELECT * FROM user limit 1";
         is_select($query);
         if (!($res = $mysqli->query($query)))

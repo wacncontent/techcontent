@@ -425,7 +425,7 @@ Azure SDK for Python 可包装 [Azure 服务管理 API][svc-mgmt-rest-api]，后
 [svc-mgmt-rest-api]: http://msdn.microsoft.com/zh-cn/library/windowsazure/ee460799.aspx
 
 [download-SDK-Python]: ../python-how-to-install.md
-[云服务]: ./index.md/
+[云服务]: ./index.md
 [service package]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj155995.aspx
 [Azure PowerShell cmdlets]: ../powershell-install-configure.md
 [cspack commandline tool]: http://msdn.microsoft.com/zh-cn/library/windowsazure/gg432988.aspx

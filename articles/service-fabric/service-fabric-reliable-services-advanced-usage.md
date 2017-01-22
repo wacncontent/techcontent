@@ -25,7 +25,7 @@ Azure Service Fabric 可简化可靠的无状态服务和有状态服务的编�
 
  - `RunAsync` 是服务代码的常规用途入口点。
  - `CreateServiceReplicaListeners` 和 `CreateServiceInstanceListeners` 用于针对客户端请求打开通信侦听器。
- 
+
 对于大部分服务而言，这两个入口点已足够。在少数情况下，需要更好地控制服务的生命周期，这时可以使用其他生命周期事件。
 
 ## 无状态服务实例生命周期

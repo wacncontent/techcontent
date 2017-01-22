@@ -42,7 +42,7 @@ ms.author: ricksal
     ![为 AAD 应用命名](./media/mobile-services-how-to-register-active-directory-authentication/mobile-services-add-app-wizard-1-waad-auth.png)
 
 5. 在“登录 URL”框中，粘贴你从移动服务中复制的应用 ID 值。在“应用程序 ID URI”框中输入相同的唯一值，然后单击以继续。
- 
+
     ![设置 AAD 应用属性](./media/mobile-services-how-to-register-active-directory-authentication/mobile-services-add-app-wizard-2-waad-auth.png)
 
 6. 添加应用程序后，单击“配置”选项卡并复制应用的“客户端 ID”。
@@ -50,7 +50,7 @@ ms.author: ricksal
     >[!NOTE]对于 .Net 后端移动服务，还必须将“单一登录”下的“回复 URL”值编辑为移动服务的 URL 后接路径“signin-aad”。例如 `https://todolist.azure-mobile.cn/signin-aad`
 
 7. 返回到移动服务的“身份”选项卡，然后粘贴复制的 Azure Active Directory 标识提供者“客户端 ID”值。
- 
+
     ![](./media/mobile-services-how-to-register-active-directory-authentication/mobile-services-clientid-pasted-waad-auth.png)
 
 8.  在“允许的租户数”列表中，键入已注册该应用程序的目录的域（例如 `contoso.onmicrosoft.com`），然后单击“保存”。

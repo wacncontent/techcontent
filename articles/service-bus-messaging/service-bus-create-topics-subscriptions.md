@@ -56,10 +56,10 @@ Azure 服务总线支持一组基于云的、面向消息的中间件技术，�
         Uri uri = ServiceBusEnvironment.CreateServiceUri("sb", "test-blog", string.Empty);
         string name = "RootManageSharedAccessKey";
         string key = "abcdefghijklmopqrstuvwxyz";
-     
+
         TokenProvider tokenProvider = TokenProvider.CreateSharedAccessSignatureTokenProvider(name, key);
         NamespaceManager namespaceManager = new NamespaceManager(uri, tokenProvider);
- 
+
         namespaceManager.CreateTopic("DataCollectionTopic");
 ```
 

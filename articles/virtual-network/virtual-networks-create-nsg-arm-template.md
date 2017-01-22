@@ -110,7 +110,7 @@ ms.author: jdial
                             Actions  NotActions
                             =======  ==========
                             *                  
-   
+
         Resources         :
                             Name                Type                                     Location
                             ==================  =======================================  ========
@@ -133,7 +133,7 @@ ms.author: jdial
                             TestVNet            Microsoft.Network/virtualNetworks        chinanorth  
                             testvnetstorageprm  Microsoft.Storage/storageAccounts        chinanorth  
                             testvnetstoragestd  Microsoft.Storage/storageAccounts        chinanorth  
-   
+
         ResourceId        : /subscriptions/[Subscription Id]/resourceGroups/TestRG
 
 ## 使用 Azure CLI 部署 ARM 模板
@@ -153,7 +153,7 @@ ms.author: jdial
         azure group create -n TestRG -l chinanorth -f 'https://raw.githubusercontent.com/telmosampaio/azure-templates/master/201-IaaS-WebFrontEnd-SQLBackEnd/azuredeploy.json' -e 'https://raw.githubusercontent.com/telmosampaio/azure-templates/master/201-IaaS-WebFrontEnd-SQLBackEnd/azuredeploy.parameters.json'
 
     预期输出：
-   
+
         info:    Executing command group create
         info:    Getting resource group TestRG
         info:    Creating resource group TestRG
@@ -168,10 +168,10 @@ ms.author: jdial
         data:    Tags: null
         data:    
         info:    group create command OK
-   
-   * **-n（或 --name）**。要创建的资源组的名称。
-   * **-l（或 --location）**。要在其中创建资源组的 Azure 区域。
-   * **-f（或 --template-file）**。ARM 模板文件的路径。
-   * **-e（或 --parameters-file）**。ARM 参数文件的路径。
+
+    * **-n（或 --name）**。要创建的资源组的名称。
+    * **-l（或 --location）**。要在其中创建资源组的 Azure 区域。
+    * **-f（或 --template-file）**。ARM 模板文件的路径。
+    * **-e（或 --parameters-file）**。ARM 参数文件的路径。
 
 <!---HONumber=Mooncake_1219_2016-->

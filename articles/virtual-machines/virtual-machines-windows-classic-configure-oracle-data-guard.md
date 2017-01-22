@@ -261,9 +261,9 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
     # ---------------------------------------------------------------------------------------------
 
 前面的语句块包含三个重要设置项：
--	**LOG\_ARCHIVE\_CONFIG...：**使用此语句定义唯一的数据库 ID。
--	**LOG\_ARCHIVE\_DEST\_1...：**使用此语句定义本地存档文件夹位置。建议根据数据库存档需要创建一个新目录，并显式使用此语句指定本地存档位置，而不要使用 Oracle 的默认文件夹 %ORACLE\_HOME%\\database\\archive。
--	**LOG\_ARCHIVE\_DEST\_2 ....LGWR ASYNC...：**定义一个异步日志写入器进程 (LGWR)，收集重做事务数据并将其传输到备用目标。此处的 DB\_UNIQUE\_NAME 指定目标备用服务器上的数据库的唯一名称。
+- **LOG\_ARCHIVE\_CONFIG...：**使用此语句定义唯一的数据库 ID。
+- **LOG\_ARCHIVE\_DEST\_1...：**使用此语句定义本地存档文件夹位置。建议根据数据库存档需要创建一个新目录，并显式使用此语句指定本地存档位置，而不要使用 Oracle 的默认文件夹 %ORACLE\_HOME%\\database\\archive。
+- **LOG\_ARCHIVE\_DEST\_2 ....LGWR ASYNC...：**定义一个异步日志写入器进程 (LGWR)，收集重做事务数据并将其传输到备用目标。此处的 DB\_UNIQUE\_NAME 指定目标备用服务器上的数据库的唯一名称。
 
 新参数文件准备就绪后，需要根据它创建 spfile。
 
@@ -359,8 +359,8 @@ Oracle 数据防护支持对 Oracle 数据库实施数据保护和灾难恢复�
 
 前面的语句块包含两个重要设置项：
 
--	***.LOG\_ARCHIVE\_DEST\_1：**需要在 Machine2 中手动创建 c:\\OracleDatabase\\TEST\_STBY\\archives 文件夹。
--	***.LOG\_ARCHIVE\_DEST\_2：**此为可选步骤。设置此项的目的是，当主计算机处于维护模式并且备用计算机成为主数据库时，可能需要用到此项设置。
+- ***.LOG\_ARCHIVE\_DEST\_1：**需要在 Machine2 中手动创建 c:\\OracleDatabase\\TEST\_STBY\\archives 文件夹。
+- ***.LOG\_ARCHIVE\_DEST\_2：**此为可选步骤。设置此项的目的是，当主计算机处于维护模式并且备用计算机成为主数据库时，可能需要用到此项设置。
 
 然后，需要启动备用实例。在备用数据库服务器上的 Windows 命令提示符下输入以下命令，通过创建 Windows 服务来创建 Oracle 实例：
 

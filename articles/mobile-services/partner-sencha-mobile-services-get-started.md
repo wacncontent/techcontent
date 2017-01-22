@@ -119,7 +119,7 @@ ms.author: glenga
                 "touch-azure"
             ]
         }
-    
+
 2. 使用 **sencha cmd** 重新生成你的应用程序以提取和安装该程序包：
 
         $ sencha app build
@@ -135,7 +135,7 @@ ms.author: glenga
 由于已下载了 Azure 扩展并将其安装在您的应用程序目录下，下一步则要告知您的应用程序查找源文件的位置以及需要这些文件的位置：
 
 1. 使用源代码的位置配置 Sencha 加载程序：
- 
+
         Ext.Loader.setConfig({
                     enabled : true,
                paths   : {
@@ -688,7 +688,7 @@ Sencha Touch 存储可用于存储用作 Touch 组件的源的数据记录（模
 ## 其他资源
 
   * [下载 Sencha Touch](http://pages.sencha.com/touch-for-azure.html)
- 
+
 ## 摘要
 
 此处所述的示例在 Sencha Touch Extension for Azure 包中提供，并作为“基本数据”示例位于示例目录中。还提供了几个其他示例，它们演示了此扩展的其他功能以及详细的注释和说明。

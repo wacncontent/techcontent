@@ -34,7 +34,7 @@ ms.author: tdykstra
             JobHost host = new JobHost();
             host.RunAndBlock();
         }
-        
+
 本指南涉及以下主题：
 
 -   [如何在接收队列消息时触发函数](#trigger)
@@ -76,7 +76,7 @@ ms.author: tdykstra
 ### 字符串队列消息
 
 在下述示例中，队列中包含一个字符串消息，因此已将 `QueueTrigger` 应用到包含队列消息内容的 `logMessage` 字符串参数。该函数[向仪表板写入一条日志消息](#logs)。
- 
+
         public static void ProcessQueueMessage([QueueTrigger("logqueue")] string logMessage, TextWriter logger)
         {
             logger.WriteLine(logMessage);
@@ -221,7 +221,7 @@ SDK 实现了随机指数退让算法，以降低空闲队列轮询对存储交�
     }
 
 **注意**：仪表板可能会错误显示已关闭函数的状态和输出。
- 
+
 有关详细信息，请参阅 [Web 作业正常关闭](http://blog.amitapple.com/post/2014/05/webjobs-graceful-shutdown/#.VCt1GXl0wpR)。
 
 ## <a id="createqueue"></a>如何在处理队列消息时创建队列消息
@@ -238,11 +238,11 @@ SDK 实现了随机指数退让算法，以降低空闲队列轮询对存储交�
         {
             outputQueueMessage = queueMessage;
         }
-  
+
 ### POCO[（普通旧 CLR 对象](http://en.wikipedia.org/wiki/Plain_Old_CLR_Object)）队列消息
 
 若要创建包含 POCO（而不是字符串）的队列消息，请将 POCO 类型作为输出参数传递给 `Queue` 属性构造函数。
- 
+
         public static void CreateQueueMessage(
             [QueueTrigger("inputqueue")] BlobInformation blobInfoInput,
             [Queue("outputqueue")] out BlobInformation blobInfoOutput )
@@ -334,7 +334,7 @@ SDK 会自动将对象序列化为 JSON。即使对象为 null，也始终会创
 对于在队列消息中存储为 JSON 的 POCO，可以使用占位符命名 `Queue` 属性的 `blobPath` 参数中的对象属性。还可以将[队列元数据属性名称](#queuemetadata)用作占位符。
 
 下述示例将 Blob 复制到具有不同扩展名的新 Blob。队列消息是包含 `BlobName` 和 `BlobNameWithoutExtension` 属性的 `BlobInformation` 对象。属性名称用作 `Blob` 属性的 blob 路径中的占位符。
- 
+
         public static void CopyBlobPOCO(
             [QueueTrigger("copyblobqueue")] BlobInformation blobInfo,
             [Blob("textblobs/{BlobName}", FileAccess.Read)] Stream blobInput,
@@ -352,7 +352,7 @@ SDK 使用 [Newtonsoft.Json NuGet 包](http://www.nuget.org/packages/Newtonsoft.
 如果在将 blob 绑定到对象之前，需要在函数中执行某项操作，则可以在函数主体中使用属性，[如前面的 Queue 属性所示](#ibinder)。
 
 ### <a id="blobattributetypes"></a>Blob 属性适用的类型
- 
+
 `Blob` 属性适用以下类型：
 
 * `Stream`（读取或写入，通过使用 FileAccess 构造函数参数指定）
@@ -386,7 +386,7 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
         {
             blobInput.CopyTo(blobOutput, 4096);
         }
-        
+
         public static void ProcessPoisonMessage(
             [QueueTrigger("copyblobqueue-poison")] string blobName, TextWriter logger)
         {
@@ -433,13 +433,13 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
         {
             var _storageConn = ConfigurationManager
                 .ConnectionStrings["MyStorageConnection"].ConnectionString;
-        
+
             var _dashboardConn = ConfigurationManager
                 .ConnectionStrings["MyDashboardConnection"].ConnectionString;
-        
+
             var _serviceBusConn = ConfigurationManager
                 .ConnectionStrings["MyServiceBusConnection"].ConnectionString;
-        
+
             JobHostConfiguration config = new JobHostConfiguration();
             config.StorageConnectionString = _storageConn;
             config.DashboardConnectionString = _dashboardConn;
@@ -500,7 +500,7 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
             JobHost host = new JobHost(config);
             host.RunAndBlock();
         }
- 
+
 **注意：**每次调用函数，都会解析队列名称、表名称和 blob 名称，但 blob 容器名称只会在应用程序启动时进行解析。在作业运行时，无法更改 blob 容器名称。
 
 ## <a id="manual"></a>如何手动触发函数
@@ -514,7 +514,7 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
                 JobHost host = new JobHost();
                 host.Call(typeof(Program).GetMethod("CreateQueueMessage"), new { value = "Hello world!" });
             }
-        
+
             [NoAutomaticTrigger]
             public static void CreateQueueMessage(
                 TextWriter logger, 
@@ -568,7 +568,7 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 ![函数调用页中的日志](./media/websites-dotnet-webjobs-sdk-storage-queues-how-to/dashboardlogs.png)
 
 在 WebJobs SDK 仪表板中，当转到 Web 作业（而非函数调用）页面并单击“切换输出”时，将会看到最近的 100 行控制台输出。
- 
+
 ![单击“切换输出”](./media/websites-dotnet-webjobs-sdk-storage-queues-how-to/dashboardapplogs.png)
 
 在连续 Web 作业中，应用程序日志显示在 Web 应用文件系统的 /data/jobs/continuous/*{webjobname}*/job\_log.txt 中。
@@ -612,5 +612,5 @@ WebJobs SDK 还包括 [Timeout](http://github.com/Azure/azure-webjobs-sdk-sample
 ## <a id="nextsteps"></a>后续步骤
 
 本指南提供的代码示例演示了如何处理使用 Azure 队列的常见方案。若要详细了解如何使用 Azure WebJobs 和 WebJobs SDK，请参阅[有关 Azure WebJobs 的推荐资源](./websites-webjobs-resources.md)。
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

@@ -85,11 +85,11 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 4. 选择“配置”，然后使用以下信息创建两个新的访问策略。
 
-   | 名称 | 权限 | 
-   | --- | --- | 
-   | 写入者 | 发送 | 
-   | 读者 | 侦听 |
-   
+    | 名称 | 权限 | 
+    | --- | --- | 
+    | 写入者 | 发送 | 
+    | 读者 | 侦听 |
+
     After You create the permissions, select the **Save** icon at the bottom of the page. This creates the shared access policies that will be used to send (writer) and listen (reader) to this Event Hub.
 
     ![policies](./media/hdinsight-storm-develop-csharp-event-hub-topology/policy.png)
@@ -249,7 +249,7 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
         using Newtonsoft.Json.Linq;
 
     这样可以更轻松地使用 JSON 数据。
-    
+
     > [!NOTE] 应该已经安装 JSON.NET 包，因为它是用于 C# Storm 拓扑的 SCP.NET 框架所必需的。
 
 3. 找到以下代码：
@@ -499,15 +499,15 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 ## 部署拓扑
 
 1. 在“解决方案资源管理器”中，右键单击“EventHubReader”项目，然后选择“提交到 Storm on HDInsight”。
-   
+
     ![提交到 Storm](./media/hdinsight-storm-develop-csharp-event-hub-topology/submittostorm.png)
 
 2. 在“提交拓扑”屏幕上，选择“Storm 群集”。展开“其他配置”，选择“Java 文件路径”，选择“...”，然后选择前面下载的 jar 文件所在的目录。最后，单击“提交”。
-   
+
     ![提交对话框的图像](./media/hdinsight-storm-develop-csharp-event-hub-topology/submit.png)  
 
 3. 提交拓扑后，将会出现“Storm 拓扑查看器”。选择左窗格中的 **EventHubReader** 拓扑，以查看该拓扑的统计信息。目前，不会发生任何情况，因为尚未将任何事件写入事件中心。
-   
+
     ![示例存储视图](./media/hdinsight-storm-develop-csharp-event-hub-topology/topologyviewer.png)
 
 4. 在“解决方案资源管理器”中，右键单击“EventHubReader”项目，然后选择“提交到 Storm on HDInsight”。

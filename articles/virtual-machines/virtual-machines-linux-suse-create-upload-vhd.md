@@ -60,13 +60,13 @@ SUSE 还为用户构建自己的 VHD 提供了替代方法，在 VMDepot 发布�
         # sudo zypper install WALinuxAgent
 
 6. 在 chkconfig 中检查 waagent 是否设置为“on”，如果不是，请启用它以便自动启动：
-               
+
         # sudo chkconfig waagent on
 
 7. 检查 waagent 服务是否正在运行，如果没有，请启动它：
 
         # sudo service waagent start
-                
+
 8. 在 grub 配置中修改内核引导行，使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开“/boot/grub/menu.lst”，并确保默认内核包含以下参数：
 
         console=ttyS0 earlyprintk=ttyS0 rootdelay=300
@@ -76,17 +76,17 @@ SUSE 还为用户构建自己的 VHD 提供了替代方法，在 VMDepot 发布�
 9. 确认 /boot/grub/menu.lst 和 /etc/fstab 是否都使用其 UUID (by-uuid) 而不是磁盘 ID (by-id) 引用磁盘。
 
     获取磁盘 UUID
-    
+
         # ls /dev/disk/by-uuid/
 
     如果使用了 /dev/disk/by-id/，请使用正确的 by-uuid 值更新 /boot/grub/menu.lst 和 /etc/fstab
 
     更改之前
-    
+
         root=/dev/disk/by-id/SCSI-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxx-part1
 
     更改之后
-    
+
         root=/dev/disk/by-uuid/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 10. 修改 udev 规则，以避免产生针对以太网接口的静态规则。在 Azure 或 Hyper-V 中克隆虚拟机时，这些规则可能会引发问题：
@@ -94,18 +94,18 @@ SUSE 还为用户构建自己的 VHD 提供了替代方法，在 VMDepot 发布�
         # sudo ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
         # sudo rm -f /etc/udev/rules.d/70-persistent-net.rules
 
-11.	建议编辑文件“/etc/sysconfig/network/dhcp”，并将 `DHCLIENT_SET_HOSTNAME` 参数更改为以下值：
+11. 建议编辑文件“/etc/sysconfig/network/dhcp”，并将 `DHCLIENT_SET_HOSTNAME` 参数更改为以下值：
 
         DHCLIENT_SET_HOSTNAME="no"
 
-12.	在“/etc/sudoers”中，注释掉或删除以下行（如果存在）：
+12. 在“/etc/sudoers”中，注释掉或删除以下行（如果存在）：
 
         Defaults targetpw   # ask for the password of the target user i.e. root
         ALL    ALL=(ALL) ALL   # WARNING! Only use this together with 'Defaults targetpw'!
 
-13.	请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
+13. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
 
-14.	不要在 OS 磁盘上创建交换空间。
+14. 不要在 OS 磁盘上创建交换空间。
 
     Azure Linux 代理可以使用在 Azure 上预配后附加到虚拟机的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是*临时*磁盘，并可能在取消预配虚拟机时被清空。在安装 Azure Linux 代理（请参见前一步骤）后，相应地在 /etc/waagent.conf 中修改以下参数：
 
@@ -115,7 +115,7 @@ SUSE 还为用户构建自己的 VHD 提供了替代方法，在 VMDepot 发布�
         ResourceDisk.EnableSwap=y
         ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
 
-15.	运行以下命令可取消预配虚拟机，并做好准备以便在 Azure 上进行预配：
+15. 运行以下命令可取消预配虚拟机，并做好准备以便在 Azure 上进行预配：
 
         # sudo waagent -force -deprovision
         # export HISTSIZE=0
@@ -157,11 +157,11 @@ SUSE 还为用户构建自己的 VHD 提供了替代方法，在 VMDepot 发布�
 
         # sudo zypper update
 
-5.	安装 Azure Linux 代理。
+5. 安装 Azure Linux 代理。
 
         # sudo zypper install WALinuxAgent
 
-6.	在 grub 配置中修改内核引导行，使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开“/boot/grub/menu.lst”，并确保默认内核包含以下参数：
+6. 在 grub 配置中修改内核引导行，使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开“/boot/grub/menu.lst”，并确保默认内核包含以下参数：
 
         console=ttyS0 earlyprintk=ttyS0 rootdelay=300
 
@@ -169,18 +169,18 @@ SUSE 还为用户构建自己的 VHD 提供了替代方法，在 VMDepot 发布�
 
         libata.atapi_enabled=0 reserve=0x1f0,0x8
 
-7.	建议编辑文件“/etc/sysconfig/network/dhcp”，并将 `DHCLIENT_SET_HOSTNAME` 参数更改为以下值：
+7. 建议编辑文件“/etc/sysconfig/network/dhcp”，并将 `DHCLIENT_SET_HOSTNAME` 参数更改为以下值：
 
         DHCLIENT_SET_HOSTNAME="no"
 
-8.	**重要提示：**在“/etc/sudoers”中，注释掉或删除以下行（如果存在）：
+8. **重要提示：**在“/etc/sudoers”中，注释掉或删除以下行（如果存在）：
 
         Defaults targetpw   # ask for the password of the target user i.e. root
         ALL    ALL=(ALL) ALL   # WARNING! Only use this together with 'Defaults targetpw'!
 
-9.	请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
+9. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
 
-10.	不要在 OS 磁盘上创建交换空间。
+10. 不要在 OS 磁盘上创建交换空间。
 
     Azure Linux 代理可以使用在 Azure 上预配后附加到虚拟机的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是*临时*磁盘，并可能在取消预配虚拟机时被清空。在安装 Azure Linux 代理（请参见前一步骤）后，相应地在 /etc/waagent.conf 中修改以下参数：
 
@@ -190,7 +190,7 @@ SUSE 还为用户构建自己的 VHD 提供了替代方法，在 VMDepot 发布�
         ResourceDisk.EnableSwap=y
         ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
 
-11.	运行以下命令可取消预配虚拟机，并做好准备以便在 Azure 上进行预配：
+11. 运行以下命令可取消预配虚拟机，并做好准备以便在 Azure 上进行预配：
 
         # sudo waagent -force -deprovision
         # export HISTSIZE=0

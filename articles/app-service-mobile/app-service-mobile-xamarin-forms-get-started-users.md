@@ -45,7 +45,7 @@ ms.author: adrianha
 为应用支持的每个平台实现 **IAuthenticate** 接口。
 
 1. 在 Visual Studio 或 Xamarin Studio 中，从名称中包含 **Portable** 的项目（该项目是可移植类库项目）中打开 App.cs，然后添加以下 `using` 语句：
-   
+
         using System.Threading.Tasks;
 2. 在 App.cs 中，在 `App` 类定义前添加以下 `IAuthenticate` 接口定义。
 
@@ -80,7 +80,7 @@ ms.author: adrianha
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-    
+
             // Refresh items only when authenticated.
             if (authenticated == true)
             {
@@ -125,7 +125,7 @@ ms.author: adrianha
         public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsApplicationActivity, IAuthenticate
 
 5. 通过添加 **MobileServiceUser** 字段和 **IAuthenticate** 接口所需的 **Authenticate** 方法，更新 **MainActivity** 类，如下所示：
-   
+
         // Define a authenticated user.
         private MobileServiceUser user;
 
@@ -177,14 +177,14 @@ ms.author: adrianha
 1. 在 Visual Studio 或 Xamarin Studio 中，右键单击 **iOS** 项目，然后单击“设为启动项目”。
 2. 按 F5 在调试器中启动项目，然后验证启动该应用后，是否会引发状态代码为 401（“未授权”）的未处理异常。之所以会生成 401 响应，是因为对后端的访问仅限于授权用户。
 3. 打开 iOS 项目中的 AppDelegate.cs，并添加以下 `using` 语句：
-   
+
         using Microsoft.WindowsAzure.MobileServices;
         using System.Threading.Tasks;
 4. 更新 **AppDelegate** 类，以实现 **IAuthenticate** 接口，如下所示：
-   
+
         public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate, IAuthenticate
 5. 通过添加 **MobileServiceUser** 字段和 **IAuthenticate** 接口所需的 **Authenticate** 方法，更新 **AppDelegate** 类，如下所示：
-   
+
         // Define a authenticated user.
         private MobileServiceUser user;
 
@@ -224,7 +224,7 @@ ms.author: adrianha
 6. 在 **FinishedLaunching** 方法中调用 `LoadApplication()` 之前添加以下代码行：
 
         App.Init(this);
-   
+
     该代码可确保验证器在应用加载前进行初始化。
 7. 重新生成应用，运行它，然后使用所选的身份验证提供者登录，并验证是否能够以经过身份验证的用户身份访问数据。
 
@@ -243,10 +243,10 @@ ms.author: adrianha
     将 `<your_Portable_Class_Library_namespace>` 替换为可移植类库的命名空间。
 
 4. 更新 **MainPage** 类，以实现 **IAuthenticate** 接口，如下所示：
-   
+
         public sealed partial class MainPage : IAuthenticate
 5. 通过添加 **MobileServiceUser** 字段和 **IAuthenticate** 接口所需的 **Authenticate** 方法，更新 **MainPage** 类，如下所示：
-   
+
         // Define a authenticated user.
         private MobileServiceUser user;
 
@@ -268,7 +268,7 @@ ms.author: adrianha
                         message = string.Format("You are now signed-in as {0}.", user.UserId);
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -287,22 +287,22 @@ ms.author: adrianha
 
         // Initialize the authenticator before loading the app.
         <your_Portable_Class_Library_namespace>.App.Init(this);
-   
+
     将 `<your_Portable_Class_Library_namespace>` 替换为可移植类库的命名空间。
-   
+
     若要修改 WinApp 项目，请跳到步骤 8。下一步仅适用于 WinPhone81 项目，其中需要完成登录回调。
 2. （可选）在 **WinPhone81** 应用项目中，打开 App.xaml.cs 并添加以下 `using` 语句：
-   
+
         using Microsoft.WindowsAzure.MobileServices;
         using <your_Portable_Class_Library_namespace>;
-   
+
     将 `<your_Portable_Class_Library_namespace>` 替换为可移植类库的命名空间。
 3. 若要使用 **WinPhone81** 或 **WinApp**，请将以下 **OnActivated** 方法重写添加到 **App** 类：
-   
+
        protected override void OnActivated(IActivatedEventArgs args)
        {
            base.OnActivated(args);
-   
+
            // We just need to handle activation that occurs after web authentication.
            if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)
            {
@@ -311,8 +311,8 @@ ms.author: adrianha
                client.LoginComplete(args as WebAuthenticationBrokerContinuationEventArgs);
            }
        }
-   
-   如果该方法重写已存在，则只需添加前述代码片段中的条件代码。通用 Windows 项目不需此代码。
+
+    如果该方法重写已存在，则只需添加前述代码片段中的条件代码。通用 Windows 项目不需此代码。
 4. 重新生成应用，运行它，然后使用所选的身份验证提供者登录，并验证是否能够以经过身份验证的用户身份访问数据。
 
 ##后续步骤

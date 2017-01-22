@@ -54,29 +54,29 @@ ms.author: cephalin
 
 ## 在你的开发计算机上创建一个 PHP (Laravel) 应用
 1. 打开新的 Windows 命令提示符、PowerShell 窗口、Linux shell 或 OS X 终端。运行以下命令以验证是否在你的计算机上正确安装了所需工具。
-   
+
         php --version
         composer --version
         az --version
         git --version
-   
+
     如果尚未安装这些工具，请参阅[先决条件](#Prerequisites)中的下载链接。
 
 2. 安装 Laravel，如下：
-   
+
         composer global require "laravel/installer"
 
 3. 使用 `CD` 命令切换到工作目录并创建新的 Laravel 应用程序，如下：
-   
+
         cd <working_directory>
         laravel new <app_name>
 4. 使用 `CD` 命令切换到新创建的 `<app_name>` 目录并测试该应用程序，如下：
-   
+
         cd <app_name>
         php artisan serve
-   
+
     现在可以在浏览器中导航到 http://localhost:8000， 并查看 Laravel 初始屏幕。
-   
+
     ![在将应用部署到 Azure 之前在本地测试你的 PHP (Laravel) 应用](./media/app-service-web-php-get-started/laravel-splash-screen.png)  
 
 1. 初始化 Git 存储库并提交所有代码：
@@ -96,13 +96,13 @@ ms.author: cephalin
 借助 Azure CLI，可以使用单行命令在 Azure App Service 中创建 Web 应用并针对 Git 部署对其进行设置。让我们执行此操作。
 
 1. 如下所示登录 Azure ：
-   
+
         az login
-   
+
     按照帮助消息的提示继续此登录过程。
-   
+
 3. 设置应用服务的部署用户。稍后会使用这些凭据部署代码。
-   
+
         az appservice web deployment user set --user-name <username> --password <password>
 
 3. 创建新的[资源组](../azure-resource-manager/resource-group-overview.md)。对于本 PHP 教程，不需要实际知道它是什么。
@@ -132,7 +132,7 @@ ms.author: cephalin
 6. 将 JSON 中的 URL 作为本地存储库的 Git remote 添加（为简单起见，调用 `azure`）。
 
         git remote add azure https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git
-   
+
 ## <a name="configure"></a>配置 Azure Web 应用
 若要在 Azure 中使用 Laravel 应用，你需要注意以下几件事。你将对你选择的 PHP 框架做此类似的练习。
 
@@ -144,22 +144,22 @@ ms.author: cephalin
 让我们按顺序配置这些任务。
 
 1. 设置 Laravel 应用需要的 PHP 版本。
-   
+
         az appservice web config update --php-version 7.0 --name <app_name> --resource-group my-php-app-group
-   
+
     你完成了 PHP 版本的设置！
 
 2. 为 Azure Web 应用生成新的 `APP_KEY`，并针对 Azure Web 应用将其设置为一个应用程序设置。
-   
+
         php artisan key:generate --show
         az appservice web config appsettings update --settings APP_KEY="<output_of_php_artisan_key:generate_--show>" --name <app_name> --resource-group my-php-app-group
 
 3. 此外，启用 Laravel 调试功能以解决任何含义模糊的错误消息 `Whoops, looks like something went wrong.` 页面。
-   
+
         az appservice web config appsettings update --settings APP_DEBUG=true --name <app_name> --resource-group my-php-app-group
-   
+
     你已完成环境变量的设置！
-   
+
     > [!NOTE]
     请稍等，让我们停下来解释一下此处 Laravel 和 Azure 进行了哪些操作。Laravel 使用根目录中的 `.env` 文件向应用提供环境变量，可以在该文件中找到行 `APP_DEBUG=true`（以及 `APP_KEY=...`）。通过代码 `'debug' => env('APP_DEBUG', false),` 可在 `config/app.php` 中访问该变量。其中 [env()](https://laravel.com/docs/5.3/helpers#method-env) 是使用底层的 PHP [getenv()](http://php.net/manual/en/function.getenv.php) 函数的 Laravel helper 方法。
     > 
@@ -170,56 +170,56 @@ ms.author: cephalin
     > 
 4. 最后两个任务（设置虚拟目录和启用 Composer）需要使用 [Azure 门户预览](https://portal.azure.cn)，因此请使用 Azure 帐户登录该[门户](https://portal.azure.cn)。
 5. 在左侧菜单中，单击“应用程序服务”>“<app\_name>”>“扩展”。
-   
+
     ![在 Azure 中为 PHP (Laravel) 应用启用 Composer](./media/app-service-web-php-get-started/configure-composer-tools.png)  
 
 6. 单击“添加”，添加扩展。
 7. 在“选择扩展”[边栏选项卡](../azure-resource-manager/resource-group-portal.md#manage-resources)中选择“Composer”（ *边栏选项卡* ：水平打开的门户页）。
 8. 在“接受法律条款”[边栏选项卡](../azure-resource-manager/resource-group-portal.md#manage-resources)中单击“确定”。
 9. 在“添加扩展”[边栏选项卡](../azure-resource-manager/resource-group-portal.md#manage-resources)中单击“确定”。
-   
+
     Azure 完成添加扩展后，应看到角落里弹出的友好消息，以及在“扩展”[边栏选项卡](../azure-resource-manager/resource-group-portal.md#manage-resources)中列出的“Composer”。
-   
+
     ![在 Azure 中为 PHP (Laravel) 应用启用 Composer 后的“扩展”边栏选项卡](./media/app-service-web-php-get-started/configure-composer-end.png)  
 
     你已启用 Composer！
 10. 返回 Web 应用的[“资源”](../azure-resource-manager/resource-group-portal.md#manage-resources)边栏选项卡，单击“应用程序设置”。
-    
+
      ![访问“设置”边栏选项卡以在 Azure 中设置 PHP (Laravel) 应用的虚拟目录](./media/app-service-web-php-get-started/configure-virtual-dir-settings.png)  
 
      在“应用程序设置”[边栏选项卡](../azure-resource-manager/resource-group-portal.md#manage-resources)中，请注意前面设置的 PHP 版本：
-    
+
      ![Azure 中“设置”边栏选项卡中的 PHP (Laravel) 应用的 PHP 版本](./media/app-service-web-php-get-started/configure-virtual-dir-settings-a-cli2.png)  
 
      和你添加的应用程序设置：
-    
+
      ![Azure 中“设置”边栏选项卡中的 PHP (Laravel) 应用的应用程序设置](./media/app-service-web-php-get-started/configure-virtual-dir-settings-b.png)  
 
 11. 滚动到[边栏选项卡](../azure-resource-manager/resource-group-portal.md#manage-resources)的底部，将根虚拟目录更改为指向 **site\\wwwroot\\public**（而不是 **site\\wwwroot**）。
-    
+
      ![在 Azure 中设置 PHP (Laravel) 应用的虚拟目录](./media/app-service-web-php-get-started/configure-virtual-dir-public.png)  
 
 12. 单击[边栏选项卡](../azure-resource-manager/resource-group-portal.md#manage-resources)顶部的“保存”。
-    
+
      你已完成虚拟目录的设置！
 
 ## 使用 Git 部署 Web 应用（并设置环境变量）
 你可以开始部署你的代码了。你将返回到命令提示符或终端来执行该操作。
 
 1. 如同会针对任何 Git 存储库执行的操作一样，将代码推送到 Azure Web 应用：
-   
+
         git push azure master 
-   
+
     出现提示时，使用前面创建的凭据。
 
 2. 通过运行以下命令在浏览器中查看它的运行：
-   
+
         az appservice web browse --name <app_name> --resource-group my-php-app-group
-   
+
     浏览器应显示 Laravel 初始屏幕。
-   
+
     ![将 Web 应用部署到 Azure 后的 Laravel 初始屏幕](./media/app-service-web-php-get-started/laravel-azure-splash-screen.png)
-   
+
     祝贺你，你已经在 Azure 中运行 Laravel Web 应用了！
 
 ## 排查常见错误

@@ -38,12 +38,12 @@ Azure Site Recovery Capacity Planner 工具可帮助用户确定通过 Azure Sit
     - 如果要复制物理服务器，则需要手动进行估算。
 
 ## 运行快速规划器
-1.	下载并打开 [Azure Site Recovery 容量规划器](http://aka.ms/asr-capacity-planner-excel)工具。需要运行宏，因此在系统提示你启用编辑功能和启用内容时，请选择执行相应的操作。
-2.	在“选择规划器类型”中，从列表框选择“快速规划器”。
+1. 下载并打开 [Azure Site Recovery 容量规划器](http://aka.ms/asr-capacity-planner-excel)工具。需要运行宏，因此在系统提示你启用编辑功能和启用内容时，请选择执行相应的操作。
+2. 在“选择规划器类型”中，从列表框选择“快速规划器”。
 
     ![入门](./media/site-recovery-capacity-planner/getting-started.png)  
 
-3.	在“容量规划器”工作表中输入所需信息。你必须填写以下屏幕快照中标有红圈的所有字段。
+3. 在“容量规划器”工作表中输入所需信息。你必须填写以下屏幕快照中标有红圈的所有字段。
 
     - 在“选择你的方案”中，选择“Hyper-V 到 Azure”。
     - 在“平均每日数据更改率(%)”中输入你使用 [Hyper-V 容量规划工具](./site-recovery-capacity-planning-for-hyper-v-replication.md)。
@@ -53,7 +53,7 @@ Azure Site Recovery Capacity Planner 工具可帮助用户确定通过 Azure Sit
 
     ![输入](./media/site-recovery-capacity-planner/inputs.png)  
 
-2.	输入源环境的值以后，显示的输出将包括：
+2. 输入源环境的值以后，显示的输出将包括：
 
     - **增量复制所需的带宽**(MB/秒)。根据每日数据更改率的平均值计算增量复制的网络带宽。
     - **初始复制所需的带宽**(MB/秒)。根据你输入的初始复制值计算初始复制的网络带宽。
@@ -66,17 +66,17 @@ Azure Site Recovery Capacity Planner 工具可帮助用户确定通过 Azure Sit
     - **所需配置服务器数**显示需要多少个配置服务器才能完成该部署。
     - **所需其他进程服务器数**显示除了默认在配置服务器上运行的进程服务器外，是否还需要其他进程服务器。
     - **100% 源的其他存储**显示源位置是否需要其他存储。
-            
+
     ![输出](./media/site-recovery-capacity-planner/output.png)
- 
+
 ## 运行详细规划器
 
-1.	下载并打开 [Azure Site Recovery 容量规划器](https://aka.ms/asr-capacity-planner-excel)工具。需要运行宏，因此在系统提示你启用编辑功能和启用内容时，请选择执行相应的操作。
-2.	在“选择规划器类型”中，从列表框选择“详细规划器”。
+1. 下载并打开 [Azure Site Recovery 容量规划器](https://aka.ms/asr-capacity-planner-excel)工具。需要运行宏，因此在系统提示你启用编辑功能和启用内容时，请选择执行相应的操作。
+2. 在“选择规划器类型”中，从列表框选择“详细规划器”。
 
     ![入门](./media/site-recovery-capacity-planner/getting-started-2.png)
 
-3.	在“工作负荷限定”工作表中输入所需的信息。必须填写所有标记的字段。
+3. 在“工作负荷限定”工作表中输入所需的信息。必须填写所有标记的字段。
 
     - 在“处理器内核数”中指定源服务器上的内核总数。
     - 在“内存分配(MB)”中指定源服务器的 RAM 大小。
@@ -89,7 +89,7 @@ Azure Site Recovery Capacity Planner 工具可帮助用户确定通过 Azure Sit
 
     ![工作负荷限定](./media/site-recovery-capacity-planner/workload-qualification.png)
 
-4.	如果你单击“计算 IaaS VM”，则会执行以下操作：
+4. 如果你单击“计算 IaaS VM”，则会执行以下操作：
 
     - 验证必需的输入。
     - 计算 IOPS，并为每个可以复制到 Azure 的 VM 提供最佳 Azure VM 大小匹配项的建议。如果系统检测不到合适的 Azure VM 大小，则会发出错误消息。例如，如果附加的磁盘数为 65，则会发出错误消息，因为 Azure VM 的最大大小为 64。
@@ -107,7 +107,7 @@ AA 到 AE 列为输出，提供的是每个 VM 的信息。
 ![工作负荷限定](./media/site-recovery-capacity-planner/workload-qualification-3.png)
 
 - 在示例输出中，请注意以下问题：
-    
+
     - 第一列是用于 VM、磁盘和改动的验证列。
     - 5 个 VM 需要 2 个标准存储帐户和 1 个高级存储帐户。
     -  VM3 不符合受保护资格，因为一个或多个磁盘大于 1 TB。
@@ -121,8 +121,8 @@ AA 到 AE 列为输出，提供的是每个 VM 的信息。
 
 ### 在容量规划器中提交数据
 
-1.	当你打开“容量规划器”工作表时，该表会根据你所指定的设置进行填充。“工作负荷”一词会出现在“基础输入源”单元格中，用来表示输入是“工作负荷限定”工作表。
-2.	如果想要进行更改，则需修改“工作负荷限定”工作表，然后再次单击“将数据提交到规划器工具”。
+1. 当你打开“容量规划器”工作表时，该表会根据你所指定的设置进行填充。“工作负荷”一词会出现在“基础输入源”单元格中，用来表示输入是“工作负荷限定”工作表。
+2. 如果想要进行更改，则需修改“工作负荷限定”工作表，然后再次单击“将数据提交到规划器工具”。
 
     ![容量规划器](./media/site-recovery-capacity-planner/capacity-planner.png)
 

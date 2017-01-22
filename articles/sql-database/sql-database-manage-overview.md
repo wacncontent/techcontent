@@ -41,9 +41,9 @@ SQL Server Management Studio (SSMS) 和 SQL Server Data Tools (SSDT) 是在计�
 
 * 使用[拆分-合并工具](./sql-database-elastic-scale-overview-split-and-merge.md)将多租户模型数据库移至单租户模型
 * 使用[弹性扩展客户端库](./sql-database-elastic-database-client-library.md)管理单租户模型或多租户模型中的数据库。
- 
+
 ## 其他资源
-* [Azure 自动化](../automation/index.md/)
-* [Azure 计划程序](../scheduler/index.md/)
+* [Azure 自动化](../automation/index.md)
+* [Azure 计划程序](../scheduler/index.md)
 
 <!---HONumber=Mooncake_1212_2016-->

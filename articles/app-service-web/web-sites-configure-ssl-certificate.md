@@ -310,7 +310,7 @@ ms.author: cephalin
 4. 在命令提示符中，通过 `CD` 转到工作目录并运行以下命令：
 
         certreq -new mycert.txt mycert.crt
-    
+
     新的自签名证书现已安装在证书存储中。
 
 7. 若要导出证书存储中的证书，请按 `Win`+`R` 并运行 **certmgr.msc** 以启动证书管理器。选择“个人”>“证书”。“颁发给”列应会显示一个条目，内附自定义域名和“颁发者”列中生成证书时所用的 CA。
@@ -407,7 +407,7 @@ ms.author: cephalin
     ![插入 SSL 绑定的图像](./media/web-sites-configure-ssl-certificate/sslbindings.png)
 
     • 基于 IP 的 SSL 通过将服务器的专用公共 IP 地址映射到域名，将证书与域名相关联。这要求与你的服务相关联的每个域名（contoso.com、fabricam.com 等）都具有专用 IP 地址。这是将 SSL 证书与某一 Web 服务器相关联的传统方法。• 基于 SNI 的 SSL 是对 SSL 和**[传输层安全性](http://zh.wikipedia.org/wiki/Transport_Layer_Security)** (TLS) 的扩展，它允许多个域共享相同的 IP 地址，并且对于每个域都有单独的安全证书。当前常用的大多数浏览器（包括 Internet Explorer、Chrome、Firefox 和 Opera）都支持 SNI，但是，较旧的浏览器可能不支持 SNI。有关 SNI 的详细信息，请参阅 Wikipedia 上的文章 **[Server Name Indication](http://en.wikipedia.org/wiki/Server_Name_Indication)**（服务器名称指示）。
-     
+
 9. 单击“添加绑定”保存更改并启用 SSL。
 
 ## 步骤 3。更改域名映射（仅限基于 IP 的 SSL）
@@ -419,7 +419,7 @@ ms.author: cephalin
 - [使用 A 记录将自定义域映射](./web-sites-custom-domain-name.md#a)到 Azure 应用，且刚添加 **基于 IP 的 SSL** 绑定。此应用场景下，需按以下步骤重新映射现有的 A 记录以指向专用 IP 地址：
 
     1. 配置基于 IP 的 SSL 绑定后，将会向你的应用分配专用 IP 地址。可以在“自定义域”页面中应用设置的下面（紧靠在“主机名”部分的上方）找到此 IP 地址。此 IP 地址作为“外部 IP 地址”列出
-    
+
         ![虚拟 IP 地址](./media/web-sites-configure-ssl-certificate/virtual-ip-address.png)
 
     2. [将自定义域名的 A 记录重新映射到新的 IP 地址](./web-sites-custom-domain-name.md#a)。

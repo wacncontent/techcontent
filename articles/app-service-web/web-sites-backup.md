@@ -43,7 +43,7 @@ ms.author: cephalin
 ## <a name="manualbackup" id="create-a-manual-backup"></a>创建手动备份
 
 2. 在 [Azure 门户预览](https://portal.azure.cn)中，导航到应用的边栏选项卡，选择“设置”，然后选择“备份”。将显示“备份”边栏选项卡。
-    
+
     ![“备份”页面][ChooseBackupsPage]
 
     >[!NOTE] 若显示以下消息，请单击该消息升级应用服务计划，然后才能继续备份。有关详细信息，请参阅[增加 Azure 中的应用](./web-sites-scale.md)。![选择存储帐户](./media/web-sites-backup/01UpgradePlan.png)
@@ -51,11 +51,11 @@ ms.author: cephalin
 3. 在“备份”边栏选项卡中，单击“存储: 未配置”来配置存储帐户。
 
     ![选择存储帐户][ChooseStorageAccount]
-    
+
 4. 选择“存储帐户”和“容器”来选择备份目标。该存储帐户必须与要备份的应用属于同一订阅。也可在各自的边栏选项卡中新建存储帐户或容器。完成后，单击“选择”。
-    
+
     ![选择存储帐户](./media/web-sites-backup/02ChooseStorageAccount1.png)
-    
+
 5. 在仍处于打开状态的“配置备份设置”边栏选项卡中，单击“数据库设置”，选择备份要包含的数据库（SQL 数据库或 MySQL），然后单击“确定”。
 
     ![选择存储帐户](./media/web-sites-backup/03ConfigureDatabase.png)
@@ -65,9 +65,9 @@ ms.author: cephalin
 6. 在“配置备份设置”边栏选项卡上，单击“保存”。
 
 7. 在“备份”边栏选项卡的命令栏中，单击“立即备份”。
-    
+
     ![BackUpNow 按钮][BackUpNow]
-    
+
     备份过程中将显示进度消息。
 
 配置用于备份的存储帐户和容器后，可随时进行手动备份。
@@ -77,15 +77,15 @@ ms.author: cephalin
 1. 在“备份”边栏选项卡上，单击“计划: 未配置”。
 
     ![选择存储帐户](./media/web-sites-backup/05ScheduleBackup.png)
-    
+
 1. 在“备份计划设置”边栏选项卡上，将“计划备份”设为“开”，然后根据需要配置备份计划，并单击“确定”。
-    
+
     ![启用自动化的备份][SetAutomatedBackupOn]
-    
+
 4. 在仍处于打开状态的“配置备份设置”边栏选项卡上单击“存储设置”，然后通过选择“存储帐户”和“容器”来选择备份目标。该存储帐户必须与要备份的应用属于同一订阅。也可在各自的边栏选项卡中新建存储帐户或容器。完成后，单击“选择”。
-    
+
     ![选择存储帐户](./media/web-sites-backup/02ChooseStorageAccount1.png)
-    
+
 5. 在“配置备份设置”边栏选项卡中，单击“数据库设置”，选择备份要包含的数据库（SQL 数据库或 MySQL），然后单击“确定”。
 
     ![选择存储帐户](./media/web-sites-backup/03ConfigureDatabase.png)
@@ -98,9 +98,9 @@ ms.author: cephalin
 
 有时你不想备份应用中的所有内容。以下是一些示例：
 
--	你[设置每周备份](./web-sites-backup.md#configure-automated-backups)应用，其中包含永远不会更改的静态内容，例如旧的博客文章或图映像。
--	应用的内容超过 10GB（这是一次可以备份的最大数量）。
--	你不想备份日志文件。
+- 你[设置每周备份](./web-sites-backup.md#configure-automated-backups)应用，其中包含永远不会更改的静态内容，例如旧的博客文章或图映像。
+- 应用的内容超过 10GB（这是一次可以备份的最大数量）。
+- 你不想备份日志文件。
 
 使用部分备份可以精确选择想要备份的文件。
 
@@ -111,7 +111,7 @@ ms.author: cephalin
 假设你的应用中包含永远不会更改的历年的日志文件和静态映像。你已有包括旧映像的应用的完整备份。现在你想要每天备份应用，但不想为永远不会更改的存储日志文件或静态映像文件支付费用。
 
 ![日志文件夹][LogsFolder] ![映像文件夹][ImagesFolder]
-    
+
 以下步骤展示了如何从备份中排除这些文件。
 
 1. 转到 `http://{yourapp}.scm.chinacloudsites.cn/DebugConsole` 并确定想要从备份中排除的文件夹。在此示例中，你想要排除该用户界面中所示的以下文件和文件夹：
@@ -167,5 +167,5 @@ ms.author: cephalin
 [ImagesFolder]: ./media/web-sites-backup/11Images.png
 [LogsFolder]: ./media/web-sites-backup/12Logs.png
 [GhostUpgradeWarning]: ./media/web-sites-backup/13GhostUpgradeWarning.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

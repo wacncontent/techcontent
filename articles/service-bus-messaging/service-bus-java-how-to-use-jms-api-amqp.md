@@ -48,11 +48,11 @@ wacn.date: 01/09/2017
 JMS 使用 Java 命名和目录接口 (JNDI) 创建逻辑名称和物理名称之间的分隔。将使用 JNDI 解析以下两种类型的 JMS 对象：ConnectionFactory 和 Destination。JNDI 使用一个提供程序模型，你可以在其中插入不同目录服务来处理名称解析任务。Apache Qpid JMS AMQP 1.0 库附带一个使用以下格式的属性文件配置的、基于属性文件的简单 JNDI 提供程序。
 
         # servicebus.properties - sample JNDI configuration
-        
+
         # Register a ConnectionFactory in JNDI using the form:
         # connectionfactory.[jndi_name] = [ConnectionURL]
     connectionfactory.SBCF = amqps://[SASPolicyName]:[SASPolicyKey]@[namespace].servicebus.chinacloudapi.cn
-        
+
         # Register some queues in JNDI using the form
         # queue.[jndi_name] = [physical_name]
         # topic.[jndi_name] = [physical_name]
@@ -79,7 +79,7 @@ JMS 使用 Java 命名和目录接口 (JNDI) 创建逻辑名称和物理名称�
 - **[SASPolicyName]**：队列共享访问签名策略名称。
 - **[SASPolicyKey]**：队列共享访问签名策略密钥。
 
-> [!NOTE] 必须手动为密码进行 URL 编码。在 [http://www.w3schools.com/tags/ref\_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp) 上提供了一个有用的 URL 编码实用工具。
+> [!NOTE] 必须手动为密码进行 URL 编码。在 [http://www.w3schools.com/tags/ref_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp) 上提供了一个有用的 URL 编码实用工具。
 
 #### 配置目标
 
@@ -110,13 +110,13 @@ JNDI 环境是通过将配置信息的哈希表传入到 javax.naming.InitialCon
         env.put(Context.INITIAL_CONTEXT_FACTORY, "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
         env.put(Context.PROVIDER_URL, "servicebus.properties"); 
         InitialContext context = new InitialContext(env);
- 
+
 ### 使用 Service Bus 队列的简单 JMS 应用程序
 
 以下示例程序将 JMS TextMessages 发送到 JNDI 逻辑名称为 QUEUE 的 Service Bus 队列，然后接收返回的消息。
 
         // SimpleSenderReceiver.java
-    
+
         import javax.jms.*;
         import javax.naming.Context;
         import javax.naming.InitialContext;
@@ -124,7 +124,7 @@ JNDI 环境是通过将配置信息的哈希表传入到 javax.naming.InitialCon
         import java.io.InputStreamReader;
         import java.util.Hashtable;
         import java.util.Random;
-    
+
         public class SimpleSenderReceiver implements MessageListener {
             private static boolean runReceiver = true;
             private Connection connection;
@@ -133,7 +133,7 @@ JNDI 环境是通过将配置信息的哈希表传入到 javax.naming.InitialCon
             private MessageProducer sender;
             private MessageConsumer receiver;
             private static Random randomGenerator = new Random();
-    
+
             public SimpleSenderReceiver() throws Exception {
                 // Configure JNDI environment
                 Hashtable<String, String> env = new Hashtable<String, String>();
@@ -141,18 +141,18 @@ JNDI 环境是通过将配置信息的哈希表传入到 javax.naming.InitialCon
                         "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory");
                 env.put(Context.PROVIDER_URL, "servicebus.properties");
                 Context context = new InitialContext(env);
-    
+
                 // Lookup ConnectionFactory and Queue
                 ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCF");
                 Destination queue = (Destination) context.lookup("QUEUE");
-    
+
                 // Create Connection
                 connection = cf.createConnection();
-    
+
                 // Create sender-side Session and MessageProducer
                 sendSession = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
                 sender = sendSession.createProducer(queue);
-    
+
                 if (runReceiver) {
                     // Create receiver-side Session, MessageConsumer,and MessageListener
                     receiveSession = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
@@ -161,18 +161,18 @@ JNDI 环境是通过将配置信息的哈希表传入到 javax.naming.InitialCon
                     connection.start();
                 }
             }
-    
+
             public static void main(String[] args) {
                 try {
-    
+
                     if ((args.length > 0) && args[0].equalsIgnoreCase("sendonly")) {
                         runReceiver = false;
                     }
-    
+
                     SimpleSenderReceiver simpleSenderReceiver = new SimpleSenderReceiver();
                     System.out.println("Press [enter] to send a message. Type 'exit' + [enter] to quit.");
                     BufferedReader commandLine = new java.io.BufferedReader(new InputStreamReader(System.in));
-    
+
                     while (true) {
                         String s = commandLine.readLine();
                         if (s.equalsIgnoreCase("exit")) {
@@ -186,7 +186,7 @@ JNDI 环境是通过将配置信息的哈希表传入到 javax.naming.InitialCon
                     e.printStackTrace();
                 }
             }
-    
+
             private void sendMessage() throws JMSException {
                 TextMessage message = sendSession.createTextMessage();
                 message.setText("Test AMQP message from JMS");
@@ -195,11 +195,11 @@ JNDI 环境是通过将配置信息的哈希表传入到 javax.naming.InitialCon
                 sender.send(message);
                 System.out.println("Sent message with JMSMessageID = " + message.getJMSMessageID());
             }
-    
+
             public void close() throws JMSException {
                 connection.close();
             }
-    
+
             public void onMessage(Message message) {
                 try {
                     System.out.println("Received message with JMSMessageID = " + message.getJMSMessageID());
@@ -216,13 +216,13 @@ JNDI 环境是通过将配置信息的哈希表传入到 javax.naming.InitialCon
 
         > java SimpleSenderReceiver
         Press [enter] to send a message. Type 'exit' + [enter] to quit.
-    
+
         Sent message with JMSMessageID = ID:2867600614942270318
         Received message with JMSMessageID = ID:2867600614942270318
-    
+
         Sent message with JMSMessageID = ID:7578408152750301483
         Received message with JMSMessageID = ID:7578408152750301483
-    
+
         Sent message with JMSMessageID = ID:956102171969368961
         Received message with JMSMessageID = ID:956102171969368961
         exit

@@ -44,7 +44,7 @@ Azure SQL 数据库为 Azure 和其他基于 Internet 的应用程序提供关�
 
 来自 Internet 和 Azure 的连接尝试必须首先通过防火墙，然后才能访问你的 Azure SQL Server 或 SQL 数据库，如下图中所示。
 
-   ![描述防火墙配置的示意图。][1]
+    ![描述防火墙配置的示意图。][1]
 
 ## 从 Internet 连接
 

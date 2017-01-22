@@ -42,7 +42,7 @@ HDInsight 群集按小时收费，因此在不再需要使用群集时，就应�
 在提示符处，使用以下命令删除群集：
 
     azure hdinsight cluster delete CLUSTERNAME
-    
+
 将 __CLUSTERNAME__ 替换为 HDInsight 群集的名称。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -66,19 +66,19 @@ ms.author: rashimg
 
     DROP TABLE IF EXISTS StudentsRaw;
     CREATE EXTERNAL TABLE StudentsRaw (textcol string) STORED AS TEXTFILE LOCATION "wasbs://processjson@hditutorialdata.blob.core.windows.net/";
-    
+
     DROP TABLE IF EXISTS StudentsOneLine;
     CREATE EXTERNAL TABLE StudentsOneLine
     (
       json_body string
     )
     STORED AS TEXTFILE LOCATION '/json/students';
-    
+
     INSERT OVERWRITE TABLE StudentsOneLine
     SELECT CONCAT_WS(' ',COLLECT_LIST(textcol)) AS singlelineJSON 
           FROM (SELECT INPUT__FILE__NAME,BLOCK__OFFSET__INSIDE__FILE, textcol FROM StudentsRaw DISTRIBUTE BY INPUT__FILE__NAME SORT BY BLOCK__OFFSET__INSIDE__FILE) x
           GROUP BY INPUT__FILE__NAME;
-    
+
     SELECT * FROM StudentsOneLine
 
 原始 JSON 文件位于 **wasbs://processjson@hditutorialdata.blob.core.windows.net/**。 *StudentsRaw* Hive 表指向原始未平展的 JSON 文档。
@@ -169,7 +169,7 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 4：转到将此包下载到的文件夹，然后键入“mvn package”。这将创建必要的 jar 文件，然后可以将其复制到群集。
 
 5：转到根文件夹下存放所下载包的目标文件夹。将 json-serde-1.1.9.9-Hive13-jar-with-dependencies.jar 文件上载到群集的头节点。通常，将该文件放置在 hive bin 文件夹下：C:\\apps\\dist\\hive-0.13.0.2.1.11.0-2316\\bin 或类似文件夹。
- 
+
 6：在 hive 提示符下，键入“add jar /path/to/json-serde-1.1.9.9-Hive13-jar-with-dependencies.jar”。在此示例中，由于 jar 在 C:\\apps\\dist\\hive-0.13.x\\bin 文件夹中，因此可以直接添加名称如下的 jar：
 
     add jar json-serde-1.1.9.9-Hive13-jar-with-dependencies.jar;
@@ -214,7 +214,7 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
     SELECT SUM(scores)
     FROM json_table jt
       lateral view explode(jt.StudentClassCollection.Score) collection as scores;
-       
+
 以上查询使用 [lateral view explode](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+LateralView) UDF 展开分数数组，以便可以求和。
 
 以下是 Hive 控制台的输出。
@@ -222,7 +222,7 @@ SerDe 是用于分析嵌套 JSON 文档的最佳选择，不但可定义 JSON �
 ![SerDe 查询 2][image-hdi-hivejson-serde_query2]  
 
 查找指定学生在哪些科目取得 80 以上的分数 SELECT jt.StudentClassCollection.ClassId FROM json\_table jt lateral view explode(jt.StudentClassCollection.Score) collection as score where score > 80;
-      
+
 上述查询返回一个 Hive 数组，与 get\_json\_object 不同，后者返回一个字符串。
 
 ![SerDe 查询 3][image-hdi-hivejson-serde_query3]  

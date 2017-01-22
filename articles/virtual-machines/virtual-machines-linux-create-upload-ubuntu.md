@@ -49,7 +49,7 @@ Ubuntu 现已发布正式 Azure VHD，可从 [http://cloud-images.ubuntu.com/](h
 
 2. 单击**“连接”**以打开虚拟机窗口。
 
-3.	替换映像中的当前存储库，以使用 Ubuntu 的 Azure 存储库。这些步骤可能会由于 Ubuntu 版本的不同而稍有差异。
+3. 替换映像中的当前存储库，以使用 Ubuntu 的 Azure 存储库。这些步骤可能会由于 Ubuntu 版本的不同而稍有差异。
 
     编辑 /etc/apt/sources.list 之前，建议进行备份：
 
@@ -91,16 +91,16 @@ Ubuntu 现已发布正式 Azure VHD，可从 [http://cloud-images.ubuntu.com/](h
 
     保存并关闭此文件，然后再运行“`sudo update-grub`”。这还将确保所有控制台消息都发送到第一个串行端口，从而可以协助 Azure 技术支持人员调试问题。
 
-6.	请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
+6. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
 
-7.	安装 Azure Linux 代理：
+7. 安装 Azure Linux 代理：
 
         # sudo apt-get update
         # sudo apt-get install walinuxagent
 
     请注意，安装 `walinuxagent` 包时将删除 `NetworkManager` 和 `NetworkManager-gnome` 包（如果已安装它们）。
 
-8.	运行以下命令可取消对虚拟机的设置并且对其进行准备以便在 Azure 上进行设置：
+8. 运行以下命令可取消对虚拟机的设置并且对其进行准备以便在 Azure 上进行设置：
 
         # sudo waagent -force -deprovision
         # export HISTSIZE=0

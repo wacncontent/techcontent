@@ -73,7 +73,7 @@ ms.author: gwallace
 ## <a name="configure-the-gateway"></a> 配置网关
 
 应用程序网关配置由多个值组成。这些值可将绑定在一起以构造配置。
- 
+
 有效值为：
 
 - **后端服务器池：**后端服务器的 IP 地址列表。列出的 IP 地址应属于 VNet 子网，或者是公共 IP/VIP。 
@@ -146,7 +146,7 @@ ms.author: gwallace
                 </HttpLoadBalancingRule>
             </HttpLoadBalancingRules>
         </ApplicationGatewayConfiguration>
-    
+
 ## <a name="set-the-gateway-configuration"></a> 设置网关配置
 
 接下来，你将设置应用程序网关。可以对配置对象或配置 XML 文件使用 `Set-AzureApplicationGatewayConfig` cmdlet。
@@ -164,7 +164,7 @@ ms.author: gwallace
 配置网关后，使用 `Start-AzureApplicationGateway` cmdlet 来启动网关。成功启动网关后，将开始计收应用程序网关的费用。
 
 > [!NOTE] `Start-AzureApplicationGateway` cmdlet 最多可能需要 15 到 20 分钟才能完成。
-   
+
     PS C:\> Start-AzureApplicationGateway AppGwTest 
 
     VERBOSE: 7:59:16 PM - Begin Operation: Start-AzureApplicationGateway 
@@ -197,7 +197,7 @@ ms.author: gwallace
 
 如需负载均衡选项的其他常规信息，请参阅：
 
-- [Azure 负载均衡器](../load-balancer/index.md/)
-- [Azure 流量管理器](../traffic-manager/index.md/)
+- [Azure 负载均衡器](../load-balancer/index.md)
+- [Azure 流量管理器](../traffic-manager/index.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

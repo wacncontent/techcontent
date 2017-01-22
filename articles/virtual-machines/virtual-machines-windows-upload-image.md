@@ -76,7 +76,7 @@ ms.author: cynthn
 2. 使用 [New-AzureRmStorageAccount](https://msdn.microsoft.com/zh-cn/library/mt607148.aspx) cmdlet 在此资源组中创建名称为 **mystorageaccount** 存储帐户：
 
         New-AzureRmStorageAccount -ResourceGroupName myResourceGroup -Name mystorageaccount -Location "China North" -SkuName "Standard_LRS" -Kind "Storage"
-            
+
     -SkuName 的有效值为：
 
     - **Standard\_LRS** - 本地冗余存储。

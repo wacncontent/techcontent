@@ -35,9 +35,9 @@ Apple 推送通知服务 (APNS) 使用证书对推送通知进行身份验证。
 2. 更新新应用的以下三个字段，然后单击“Continue”（继续）：
 
     * **Name（名称）**：在“App ID Description”（应用 ID 说明）部分的“Name”（名称）字段中为应用键入一个描述性名称。
-    
+
     * **Bundle Identifier（捆绑标识符）**：在“Explicit App ID”（显式应用 ID）部分下，使用[应用分发指南](https://developer.apple.com/library/mac/documentation/IDEs/Conceptual/AppDistributionGuide/ConfiguringYourApp/ConfiguringYourApp.html#//apple_ref/doc/uid/TP40012582-CH28-SW8)中所述的 `<Organization Identifier>.<Product Name>` 格式输入“Bundle Identifier”（捆绑标识符）。使用的“Organization Identifier”（组织标识符）和“Product Name”（产品名称）必须与你在创建 XCode 项目时要使用的组织标识符与产品名称匹配。在下面的屏幕截图中， *NotificationHubs* 用作组织标识符， *GetStarted* 用作产品名称。如果确保这些信息与你要在 XCode 项目中使用的值匹配，则就可以在 XCode 中使用正确的发布配置文件。
-    
+
     * **Push Notifications（推送通知）**：在“App Services”（应用服务）部分中选中“Push Notifications”（推送通知）选项。
 
     ![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-new-appid-info.png)

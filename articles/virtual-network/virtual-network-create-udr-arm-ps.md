@@ -70,7 +70,7 @@ ms.author: jdial
         Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 
     预期输出：
-   
+
         Name              : TestVNet
         ResourceGroupName : TestRG
         Location          : chinanorth
@@ -81,7 +81,7 @@ ms.author: jdial
                             Name         Value
                             ===========  =====
                             displayName  VNet 
-   
+
         AddressSpace      : {
                               "AddressPrefixes": [
                                 "192.168.0.0/16"
@@ -142,7 +142,7 @@ ms.author: jdial
         Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 
     预期输出：
-   
+
         Name              : TestVNet
         ResourceGroupName : TestRG
         Location          : chinanorth
@@ -153,7 +153,7 @@ ms.author: jdial
                             Name         Value
                             ===========  =====
                             displayName  VNet 
-   
+
         AddressSpace      : {
                               "AddressPrefixes": [
                                 "192.168.0.0/16"
@@ -199,9 +199,9 @@ ms.author: jdial
 
         $nicfw1.EnableIPForwarding = 1
         Set-AzureRmNetworkInterface -NetworkInterface $nicfw1
-   
+
     预期输出：
-   
+
         Name                 : NICFW1
         ResourceGroupName    : TestRG
         Location             : chinanorth
@@ -212,7 +212,7 @@ ms.author: jdial
                                Name         Value                  
                                ===========  =======================
                                displayName  NetworkInterfaces - DMZ
-   
+
         VirtualMachine       : {
                                  "Id": "/subscriptions/[Subscription Id]/resourceGroups/TestRG/providers/Microsoft.Compute/virtualMachines/FW1"
                                }

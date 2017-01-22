@@ -273,5 +273,5 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
   [OData]: http://nuget.org/packages/Microsoft.Data.OData/5.0.2
   [Edm]: http://nuget.org/packages/Microsoft.Data.Edm/5.0.2
   [Spatial]: http://nuget.org/packages/System.Spatial/5.0.2
- 
+
 <!---HONumber=Mooncake_0103_2017-->

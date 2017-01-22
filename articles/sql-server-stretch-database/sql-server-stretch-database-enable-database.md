@@ -74,7 +74,7 @@ ms.author: douglasl
 
         USE <database>
         GO
-    
+
         CREATE MASTER KEY ENCRYPTION BY PASSWORD ='<password>'
 
     有关数据库主密钥的详细信息，请参阅 [CREATE MASTER KEY (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/ms174382.aspx) 和[创建数据库主密钥](https://msdn.microsoft.com/zh-cn/library/aa337551.aspx)。

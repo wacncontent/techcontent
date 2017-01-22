@@ -228,5 +228,5 @@ Blob 回执存储在 AzureWebJobsStorage 连接字符串指定的 Azure 存储�
 ## <a id="nextsteps"></a>后续步骤
 
 本文提供了代码示例，演示如何处理用于操作 Azure blob 的常见方案。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 文档资源](../app-service-web/websites-webjobs-resources.md)。
- 
+
 <!---HONumber=Mooncake_0103_2017-->

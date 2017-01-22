@@ -244,7 +244,7 @@ Refer to the definitions in the following JSON file for modifications to other p
 ```
 Set-AzureResource -ResourceType "Microsoft.MySql/servers " -ResourceName testPSH -ApiVersion 2015-09-01 -ResourceGroupName resourcegroupChinaEast -SkuObject @{name="MS4"} -UsePatchSemantics
 ```
-    
+
 ## <a id="delete"></a>5. Remove operations
 Use the **Remove** command to delete MySQL servers, databases, users, backups, and firewall rules.
 ### 5\.1 Delete servers

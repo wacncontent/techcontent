@@ -143,7 +143,7 @@ OPFW 代表包含以下规则的本地设备：
 
 - **路由**：发往 10.0.0.0/16 (**azurevnet**) 的所有流量必须通过隧道 **ONPREMAZURE** 发送。
 - **策略**：允许 **port2** 与 **ONPREMAZURE** 之间的所有双向流量。
- 
+
 ### AZF1
 
 AZF1 代表包含以下规则的 Azure 虚拟设备：
@@ -173,10 +173,10 @@ AZF2 代表包含以下规则的 Azure 虚拟设备：
 
 若要部署此方案，请遵循以下概要步骤。
 
-1.	登录到 Azure 订阅。
-2.	若要部署 VNet 来模拟本地网络，请预配属于 **ONPREMRG** 的资源。
-3.	预配属于 **AZURERG** 的资源。
-4.	预配从 **onpremvnet** 到 **azurevnet** 的隧道。
-5.	预配所有资源后，登录到 **onpremvm2** 并 ping 10.0.3.101，以测试 **onpremsn2** 与 **azsn3** 之间的连接。
+1. 登录到 Azure 订阅。
+2. 若要部署 VNet 来模拟本地网络，请预配属于 **ONPREMRG** 的资源。
+3. 预配属于 **AZURERG** 的资源。
+4. 预配从 **onpremvnet** 到 **azurevnet** 的隧道。
+5. 预配所有资源后，登录到 **onpremvm2** 并 ping 10.0.3.101，以测试 **onpremsn2** 与 **azsn3** 之间的连接。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

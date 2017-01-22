@@ -24,7 +24,7 @@ ms.author: dkshir
 [下载独立的 Service Fabric 包](./service-fabric-cluster-creation-for-windows-server.md#downloadpackage)时，一些 ClusterConfig.JSON 文件示例将下载到你的工作计算机。名称中包含 *DevCluster* 的示例可帮助你在同一台计算机上创建包含所有三个节点（类似于逻辑节点）的群集。在这些节点中，必须将一个节点标记为主节点。此群集可用于开发或测试环境，不支持用作生产群集。名称中包含 *MultiMachine* 的示例可帮助你创建生产质量群集，其中的每个节点位于不同的计算机上。这些群集的主节点数基于[可靠性级别](#reliability)。
 
 1. *ClusterConfig.Unsecure.DevCluster.JSON* 和 *ClusterConfig.Unsecure.MultiMachine.JSON* 分别说明如何创建不安全的测试群集和生产群集。
-    
+
 2. *ClusterConfig.Windows.DevCluster.JSON* 和 *ClusterConfig.Windows.MultiMachine.JSON* 说明如何创建使用 [Windows 安全性](./service-fabric-windows-cluster-windows-security.md)保护的测试群集和生产群集。
 
 3. *ClusterConfig.X509.DevCluster.JSON* 和 *ClusterConfig.X509.MultiMachine.JSON* 说明如何创建使用[基于 X509 证书的安全性](./service-fabric-windows-cluster-x509-security.md)保护的测试群集和生产群集。
@@ -83,7 +83,7 @@ ClusterConfig.JSON 中的 **properties** 节用于配置群集，如下所示。
 **reliabilityLevel** 节定义可在群集的主节点上运行的系统服务副本数。此项可提高这些服务以及此群集的可靠性。可以将此变量设置为 *Bronze*、*Silver*、*Gold* 或 *Platinum*，这样就可以分别运行这些服务的 3、5、7、9 个副本。请参阅以下示例。
 
     "reliabilityLevel": "Bronze",
-    
+
 请注意，由于一个主节点运行系统服务的一个副本，因此至少需要 3 个主节点来实现 *Bronze* 可靠性级别，至少需要 5 个主节点来实现 *Silver* 可靠性级别，至少需要 7 个主节点来实现 *Gold* 可靠性级别，至少需要 9 个主节点来实现 *Platinum* 可靠性级别。
 
 ### 诊断

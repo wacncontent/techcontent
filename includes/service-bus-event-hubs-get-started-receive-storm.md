@@ -57,20 +57,20 @@
 9. 在 **src** 文件夹中，创建一个名为 **Config.properties** 的文件，并复制以下内容，从而替换以下值：
 
         eventhubspout.username = ReceiveRule
-        
+
         eventhubspout.password = {receive rule key}
-        
+
         eventhubspout.namespace = ioteventhub-ns
-        
+
         eventhubspout.entitypath = {event hub name}
-        
+
         eventhubspout.partitions.count = 16
-        
+
         # if not provided, will use storm's zookeeper settings
         # zookeeper.connectionstring=localhost:2181
-        
+
         eventhubspout.checkpoint.interval = 10
-        
+
         eventhub.receiver.credits = 10
 
     **eventhub.receiver.credits** 的值决定在被发布到 Storm 管道之前先进行批处理的事件的数量。为了简单起见，本示例将此值设置为 10。在生产中，通常应将它设置为较高的值，例如 1024。
@@ -85,31 +85,31 @@
         import backtype.storm.topology.OutputFieldsDeclarer;
         import backtype.storm.topology.base.BaseRichBolt;
         import backtype.storm.tuple.Tuple;
-        
+
         public class LoggerBolt extends BaseRichBolt {
             private OutputCollector collector;
             private static final Logger logger = LoggerFactory
                       .getLogger(LoggerBolt.class);
-        
+
             @Override
             public void execute(Tuple tuple) {				
                 String value = tuple.getString(0);
                 logger.info("Tuple value: " + value);
-                
+
                 collector.ack(tuple);
             }
-        
+
             @Override
             public void prepare(Map map, TopologyContext context, OutputCollector collector) {
                 this.collector = collector;
                 this.count = 0;
             }
-        
+
             @Override
             public void declareOutputFields(OutputFieldsDeclarer declarer) {
                 // no output fields
             }
-        
+
         }
 
     此 Storm 螺栓记录接收到的事件的内容。在存储服务中，它可以轻松扩展为存储元组。[HDInsight 传感器分析教程]同样使用这种方法将数据存储到 HBase 中。
@@ -126,11 +126,11 @@
         import com.microsoft.eventhubs.samples.EventCount;
         import com.microsoft.eventhubs.spout.EventHubSpout;
         import com.microsoft.eventhubs.spout.EventHubSpoutConfig;
-        
+
         public class LogTopology {
             protected EventHubSpoutConfig spoutConfig;
             protected int numWorkers;
-        
+
             protected void readEHConfig(String[] args) throws Exception {
                 Properties properties = new Properties();
                 if (args.length > 1) {
@@ -139,7 +139,7 @@
                     properties.load(EventCount.class.getClassLoader()
                             .getResourceAsStream("Config.properties"));
                 }
-        
+
                 String username = properties.getProperty("eventhubspout.username");
                 String password = properties.getProperty("eventhubspout.password");
                 String namespaceName = properties
@@ -159,26 +159,26 @@
                 System.out.println("  checkpoint interval: "
                         + checkpointIntervalInSeconds);
                 System.out.println("  receiver credits: " + receiverCredits);
-        
+
                 spoutConfig = new EventHubSpoutConfig(username, password,
                         namespaceName, entityPath, partitionCount, zkEndpointAddress,
                         checkpointIntervalInSeconds, receiverCredits);
-        
+
                 // set the number of workers to be the same as partition number.
                 // the idea is to have a spout and a logger bolt co-exist in one
                 // worker to avoid shuffling messages across workers in storm cluster.
                 numWorkers = spoutConfig.getPartitionCount();
-        
+
                 if (args.length > 0) {
                     // set topology name so that sample Trident topology can use it as
                     // stream name.
                     spoutConfig.setTopologyName(args[0]);
                 }
             }
-        
+
             protected StormTopology buildTopology() {
                 TopologyBuilder topologyBuilder = new TopologyBuilder();
-        
+
                 EventHubSpout eventHubSpout = new EventHubSpout(spoutConfig);
                 topologyBuilder.setSpout("EventHubsSpout", eventHubSpout,
                         spoutConfig.getPartitionCount()).setNumTasks(
@@ -190,14 +190,14 @@
                         .setNumTasks(spoutConfig.getPartitionCount());
                 return topologyBuilder.createTopology();
             }
-        
+
             protected void runScenario(String[] args) throws Exception {
                 boolean runLocal = true;
                 readEHConfig(args);
                 StormTopology topology = buildTopology();
                 Config config = new Config();
                 config.setDebug(false);
-        
+
                 if (runLocal) {
                     config.setMaxTaskParallelism(2);
                     LocalCluster localCluster = new LocalCluster();
@@ -209,7 +209,7 @@
                     StormSubmitter.submitTopology(args[0], config, topology);
                 }
             }
-        
+
             public static void main(String[] args) throws Exception {
                 LogTopology topology = new LogTopology();
                 topology.runScenario(args);

@@ -30,9 +30,9 @@ Apache Tomcat（或简称 Tomcat，以前也称为 Jakarta Tomcat）是由 Apach
 
 你将学习以下内容：
 
--	如何在 Azure 中创建虚拟机。
--	如何准备用于 tomcat7 的虚拟机。
--	如何安装 tomcat7。
+- 如何在 Azure 中创建虚拟机。
+- 如何准备用于 tomcat7 的虚拟机。
+- 如何安装 tomcat7。
 
 假定读者已拥有 Azure 订阅。如果没有，你可以在 [http://azure.cn](http://azure.cn) 中注册 1rmb 试用版。
 
@@ -52,14 +52,14 @@ SSH 是面向系统管理员的重要工具。但是，基于人工确定的密�
 
 按照下列步骤进行操作可生成 SSH 身份验证密钥。
 
-1.	从以下位置下载并安装 puttygen：[http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)
-2.	运行 PUTTYGEN.EXE。
-3.	单击**“生成”**以生成密钥。在此过程中，可以通过将鼠标放在窗口中的空白区域上来增加随机性。  
+1. 从以下位置下载并安装 puttygen：[http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)
+2. 运行 PUTTYGEN.EXE。
+3. 单击**“生成”**以生成密钥。在此过程中，可以通过将鼠标放在窗口中的空白区域上来增加随机性。  
 ![][1]
-4.	在生成过程结束后，Puttygen.exe 将显示生成的密钥。例如：  
+4. 在生成过程结束后，Puttygen.exe 将显示生成的密钥。例如：  
 ![][2]
-5.	在**“密钥”**中选择并复制公钥，然后将它保存在一个名为 publicKey.pem 的文件中。不要单击**“保存公钥”**，因为保存的公钥的文件格式不同于我们所需的公钥。
-6.	单击**“保存私钥”**，并将其保存到名为 privateKey.ppk 的文件中。
+5. 在**“密钥”**中选择并复制公钥，然后将它保存在一个名为 publicKey.pem 的文件中。不要单击**“保存公钥”**，因为保存的公钥的文件格式不同于我们所需的公钥。
+6. 单击**“保存私钥”**，并将其保存到名为 privateKey.ppk 的文件中。
 
 ###步骤 2：在 Azure 经典管理门户中创建映像。
 在 [Azure 经典管理门户](https://manage.windowsazure.cn)中，单击任务栏中的**“新建”**以创建映像，并根据你的需要选择 Linux 映像。以下示例使用 Ubuntu 14.04 映像。
@@ -79,20 +79,20 @@ Azure 中的终结点由协议（TCP 或 UDP）以及公用和专用端口组成
 
 TCP 端口 8080 是 tomcat 侦听的默认端口号。使用 Azure 终结点打开此端口将允许你和其他 Internet 客户端访问 tomcat 页。
 
-1.	在 Azure 经典管理门户中，单击**“虚拟机”**，然后单击你创建的虚拟机。  
+1. 在 Azure 经典管理门户中，单击**“虚拟机”**，然后单击你创建的虚拟机。  
 ![][5]
-2.	若要将终结点添加到虚拟机，请单击**“终结点”** 框。
+2. 若要将终结点添加到虚拟机，请单击**“终结点”** 框。
 ![][6]
-3.	单击**“添加”**。  
-    1.	对于**终结点**，在“终结点”中键入终结点的名称，然后在**“公用端口”**中键入 80。  
+3. 单击**“添加”**。  
+    1. 对于**终结点**，在“终结点”中键入终结点的名称，然后在**“公用端口”**中键入 80。  
 
         如果将其设置为 80，则无需在 URL 中包括端口号即可允许你访问 tomcat。例如，http://tomcatdemo.chinacloudapp.cn。
 
         如果将其设置为其他值（例如 81），则需要将端口号添加到 URL 才能访问 tomcat。例如，http://tomcatdemo.chinacloudapp.cn:81/。
-    2.	在“专用端口”中键入 8080。默认情况下，tomcat 侦听 TCP 端口 8080。如果你更改了 tomcat 的默认侦听端口，则应将专用端口更新为与 tomcat 侦听端口相同。  
+    2. 在“专用端口”中键入 8080。默认情况下，tomcat 侦听 TCP 端口 8080。如果你更改了 tomcat 的默认侦听端口，则应将专用端口更新为与 tomcat 侦听端口相同。  
     ![][7]
 
-4.	单击**“确定”**将该终结点添加到你的虚拟机。
+4. 单击**“确定”**将该终结点添加到你的虚拟机。
 
 ###步骤 2：连接到你创建的映像
 你可以选择用于连接到虚拟机的任何 SSH 工具。在此示例中，我们使用 Putty。
@@ -136,19 +136,19 @@ open-jdk
 
 oracle-jdk
 
--	若要从 Oracle 网站下载 JDK，请执行以下命令：  
+- 若要从 Oracle 网站下载 JDK，请执行以下命令：  
 
         wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u5-b13/jdk-8u5-linux-x64.tar.gz  
 
--	若要创建一个包含 JDK 文件的目录，请执行以下命令：
+- 若要创建一个包含 JDK 文件的目录，请执行以下命令：
 
         sudo mkdir /usr/lib/jvm  
 
--	若要将 JDK 文件解压到 /usr/lib/jvm/ 目录，请执行以下命令：
+- 若要将 JDK 文件解压到 /usr/lib/jvm/ 目录，请执行以下命令：
 
         sudo tar -zxf jdk-8u5-linux-x64.tar.gz  -C /usr/lib/jvm/  
 
--	若要将 Oracle JDK 设置为默认 JVM，请执行以下命令：
+- 若要将 Oracle JDK 设置为默认 JVM，请执行以下命令：
 
         sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk1.8.0_05/bin/java 100  
         sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.8.0_05/bin/javac 100  
@@ -226,10 +226,10 @@ oracle-jdk
 
 ###无法通过 Internet 使用 Tomcat 和 Moodle 访问虚拟机
 
--	**症状**  
+- **症状**  
 Tomcat 正在运行，但你使用浏览器看不到 Tomcat 默认页。
--	**可能的根本原因**   
-    1.	tomcat 侦听端口与用于 tomcat 通信的虚拟机终结点的专用端口不同。  
+- **可能的根本原因**   
+    1. tomcat 侦听端口与用于 tomcat 通信的虚拟机终结点的专用端口不同。  
 
         检查你的公用端口和专用端口终结点设置，并确保专用端口与 tomcat 侦听端口相同。有关如何为你的虚拟机配置终结点的说明，请参阅“第 1 阶段：创建映像”。
 
@@ -245,17 +245,17 @@ Tomcat 正在运行，但你使用浏览器看不到 Tomcat 默认页。
 
             AUTHBIND=yes
 
-    2.	防火墙已禁用 tomcat 侦听端口。
+    2. 防火墙已禁用 tomcat 侦听端口。
 
         如果你只能在本地主机上看到 Tomcat 默认页，则问题很可能出在 Tomcat 所侦听的端口被防火墙阻止。可以使用 w3m 工具来浏览网页。以下命令安装 w3m 并浏览到 Tomcat 默认页：
 
             sudo yum  install w3m w3m-img
             w3m http://localhost:8080  
 
--	**解决方案**
+- **解决方案**
     1. 如果 tomcat 侦听端口与发往虚拟机的通信的终结点专用端口不同，则需要将该专用端口更改为与 tomcat 侦听端口相同。   
 
-    2.	如果此问题是由防火墙/iptables 导致的，请将以下行添加到 /etc/sysconfig/iptables：
+    2. 如果此问题是由防火墙/iptables 导致的，请将以下行添加到 /etc/sysconfig/iptables：
 
             -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
             -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT  
@@ -274,7 +274,7 @@ Tomcat 正在运行，但你使用浏览器看不到 Tomcat 默认页。
 
 ###将项目文件上载到 /var/lib/tomcat7/webapps/ 时，权限被拒绝  
 
--	**症状**  
+- **症状**  
 当你使用任何 SFTP 客户端（例如 FileZilla）连接到虚拟机并导航到 /var/lib/tomcat7/webapps/ 来发布站点时，你收到如下错误消息：  
 
         status:	Listing directory /var/lib/tomcat7/webapps
@@ -282,9 +282,9 @@ Tomcat 正在运行，但你使用浏览器看不到 Tomcat 默认页。
         Error:	/var/lib/tomcat7/webapps/info.jsp: open for write: permission denied
         Error:	File transfer failed
 
--	**可能的根本原因**
+- **可能的根本原因**
 你无权访问 /var/lib/tomcat7/webapps 文件夹。
--	**解决方案**  
+- **解决方案**  
 你需要获得根帐户权限。你可以将该文件夹的所有权从 root 更改为在设置计算机时使用的用户名。下面是使用 azureuser 帐户名称的示例：  
 
         sudo chown azureuser -R /var/lib/tomcat7/webapps

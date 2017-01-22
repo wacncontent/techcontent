@@ -78,22 +78,22 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 为了更好地理解这两个模型，请看看 Resource Manager 类型的特征：
 
 * 通过 [Azure 门户预览](https://portal.azure.cn/)创建。
-  
+
      ![Azure 门户预览](./media/resource-manager-deployment-model/portal.png)
-  
+
      对于计算、存储和网络资源，你可以选择使用资源管理器或经典部署。选择“Resource Manager”。
-  
+
      ![Resource Manager 部署](./media/resource-manager-deployment-model/select-resource-manager.png)
 * 使用 Azure PowerShell cmdlet 的 Resource Manager 版本创建。这些命令采用 *Verb-AzureRmNoun* 格式。
-  
+
         New-AzureRmResourceGroupDeployment
 * 通过用于 REST 操作的 [Azure Resource Manager REST API](https://docs.microsoft.com/rest/api/resources/) 创建。
 * 通过在 **arm** 模式下运行的 Azure CLI 命令创建。
-  
+
         azure config mode arm
         azure group deployment create 
 * 资源类型的名称中不包括 **(经典)**。下图显示类型为“存储帐户”。
-  
+
     ![Web 应用](./media/resource-manager-deployment-model/resource-manager-type.png)  
 
 ## <a name="classic-deployment-characteristics"></a> 经典部署的特性
@@ -102,22 +102,22 @@ Azure 在 2014 年引入了 Resource Manager，增加了资源组这一概念。
 在经典部署模型中创建的资源具有以下共同特性：
 
 * 通过[经典管理门户](https://manage.windowsazure.cn)创建。
-  
+
      ![经典管理门户](./media/resource-manager-deployment-model/classic-portal.png)
-  
+
      或者，通过 Azure 门户预览创建，然后指定“经典”部署（适用于“计算”、“存储”和“网络”资源）。
-  
+
      ![经典部署](./media/resource-manager-deployment-model/select-classic.png)
 * 通过 Azure PowerShell cmdlet 的服务管理版本创建。这些命令名称采用 *Verb-AzureNoun* 格式。
-  
+
         New-AzureVM 
 * 通过用于 REST 操作的[服务管理 REST API](https://msdn.microsoft.com/zh-cn/library/azure/ee460799.aspx) 创建。
 * 通过在 **asm** 模式下运行的 Azure CLI 命令创建。
-  
+
         azure config mode asm
         azure vm create 
 * 资源类型的名称中包括 **(经典)**。下图显示类型为“存储帐户(经典)”。
-  
+
     ![经典类型](./media/resource-manager-deployment-model/classic-type.png)  
 
 用户可以使用 Azure 门户预览来管理通过经典部署创建的资源。

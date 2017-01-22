@@ -89,17 +89,17 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
                 $choice = Read-Host
                 return;       
              }
-    
+
             $error.Clear()    
             "This script will remove the old Azure Site Recovery Provider related properties. Do you want to continue (Y/N) ?"
             $choice =  Read-Host
-        
+
             if (!($choice -eq 'Y' -or $choice -eq 'y'))
             {
             "Stopping cleanup."
             return;
             }
-        
+
             $serviceName = "dra"
             $service = Get-Service -Name $serviceName
             if ($service.Status -eq "Running")
@@ -107,12 +107,12 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
                 "Stopping the Azure Site Recovery service..."
                 net stop $serviceName
             }
-        
+
             $asrHivePath = "HKLM:\SOFTWARE\Microsoft\Azure Site Recovery"
             $registrationPath = $asrHivePath + '\Registration'
             $proxySettingsPath = $asrHivePath + '\ProxySettings'
             $draIdvalue = 'DraID'
-        
+
             if (Test-Path $asrHivePath)
             {
                 if (Test-Path $registrationPath)
@@ -120,13 +120,13 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
                     "Removing registration related registry keys."	
                     Remove-Item -Recurse -Path $registrationPath
                 }
-    
+
                 if (Test-Path $proxySettingsPath)
             {
                     "Removing proxy settings"
                     Remove-Item -Recurse -Path $proxySettingsPath
                 }
-    
+
                 $regNode = Get-ItemProperty -Path $asrHivePath
                 if($regNode.DraID -ne $null)
                 {            
@@ -135,7 +135,7 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
                 }
                 "Registry keys removed."
             }
-    
+
             # First retrive all the certificates to be deleted
             $ASRcerts = Get-ChildItem -Path cert:\localmachine\my | where-object {$_.friendlyname.startswith('ASR_SRSAUTH_CERT_KEY_CONTAINER') -or $_.friendlyname.startswith('ASR_HYPER_V_HOST_CERT_KEY_CONTAINER')}
             # Open a cert store object
@@ -212,8 +212,8 @@ Azure Site Recovery 服务有助于实现业务连续性和灾难恢复 (BCDR) �
 1. 在“受保护的项”>“复制的项”中，右键单击计算机 >“删除”。
 2. 在“删除计算机”中，可以选择以下选项：
 
-   - **禁用对计算机的保护(推荐)**。使用此选项可停止复制计算机。将自动清理 Site Recovery 设置。
-   - **停止管理计算机**。如果选择此选项，将仅从保管库删除计算机。不会影响虚拟机的本地保护设置。若要删除计算机上的设置并从 Azure 订阅中删除虚拟机，需手动清理设置。如果你选择删除虚拟机及其硬盘，将从目标位置删除它们。
+    - **禁用对计算机的保护(推荐)**。使用此选项可停止复制计算机。将自动清理 Site Recovery 设置。
+    - **停止管理计算机**。如果选择此选项，将仅从保管库删除计算机。不会影响虚拟机的本地保护设置。若要删除计算机上的设置并从 Azure 订阅中删除虚拟机，需手动清理设置。如果你选择删除虚拟机及其硬盘，将从目标位置删除它们。
 3. 若已选择“停止管理计算机”，请在源 Hyper-V 主机服务器上运行此脚本，删除虚拟机的复制。将 SQLVM1 替换为你的虚拟机名称。
 
         $vmName = "SQLVM1"

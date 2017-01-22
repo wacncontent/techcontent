@@ -61,7 +61,7 @@ ms.author: annemill
     using (SqlConnection connection = new SqlConnection(CloudConfigurationManager.GetSetting("Sql.ConnectionString")))
     {
         conn.Open();
-    
+
         foreach(string commandString in dbOperations)
         {
             SqlCommand cmd = new SqlCommand(commandString, conn);
@@ -75,13 +75,13 @@ ms.author: annemill
     {
         conn.Open();
         SqlTransaction transaction = conn.BeginTransaction();
-    
+
         foreach (string commandString in dbOperations)
         {
             SqlCommand cmd = new SqlCommand(commandString, conn, transaction);
             cmd.ExecuteNonQuery();
         }
-    
+
         transaction.Commit();
     }
 
@@ -123,13 +123,13 @@ ms.author: annemill
     CREATE TYPE MyTableType AS TABLE 
     ( mytext TEXT,
       num INT );
- 
+
 在代码中，你将创建一个与表类型具有相同名称和类型的 **DataTable**。在文本查询或存储过程调用的参数中传递此 **DataTable**。以下示例显示了这个方法：
 
     using (SqlConnection connection = new SqlConnection(CloudConfigurationManager.GetSetting("Sql.ConnectionString")))
     {
         connection.Open();
-    
+
         DataTable table = new DataTable();
         // Add columns and rows. The following is a simple example.
         table.Columns.Add("mytext", typeof(string));
@@ -138,11 +138,11 @@ ms.author: annemill
         {
             table.Rows.Add(DateTime.Now.ToString(), DateTime.Now.Millisecond);
         }
-    
+
         SqlCommand cmd = new SqlCommand(
             "INSERT INTO MyTable(mytext, num) SELECT mytext, num FROM @TestTvp",
             connection);
-                    
+
         cmd.Parameters.Add(
             new SqlParameter()
             {
@@ -151,7 +151,7 @@ ms.author: annemill
                 TypeName = "MyTableType",
                 Value = table,
             });
-    
+
         cmd.ExecuteNonQuery();
     }
 
@@ -197,7 +197,7 @@ SQL 批量复制是将大量数据插入目标数据库的另一方法。.NET �
     using (SqlConnection connection = new SqlConnection(CloudConfigurationManager.GetSetting("Sql.ConnectionString")))
     {
         connection.Open();
-    
+
         using (SqlBulkCopy bulkCopy = new SqlBulkCopy(connection))
         {
             bulkCopy.DestinationTableName = "MyTable";
@@ -231,21 +231,21 @@ SQL 批量复制是将大量数据插入目标数据库的另一方法。.NET �
     using (SqlConnection connection = new SqlConnection(CloudConfigurationManager.GetSetting("Sql.ConnectionString")))
     {
         connection.Open();
-    
+
         string insertCommand = "INSERT INTO [MyTable] ( mytext, num ) " +
             "VALUES (@p1, @p2), (@p3, @p4), (@p5, @p6), (@p7, @p8), (@p9, @p10)";
-    
+
         SqlCommand cmd = new SqlCommand(insertCommand, connection);
-    
+
         for (int i = 1; i <= 10; i += 2)
         {
             cmd.Parameters.Add(new SqlParameter("@p" + i.ToString(), "test"));
             cmd.Parameters.Add(new SqlParameter("@p" + (i+1).ToString(), i));
         }
-    
+
         cmd.ExecuteNonQuery();
     }
- 
+
 此示例用于演示基本概念。一个更现实的方案是对所需的实体执行循环，以同时构造查询字符串和命令参数。最多可使用 2100 个查询参数，因此这限制了可以此方式处理的总行数。
 
 以下即席测试结果显示此类插入语句的性能（毫秒）。
@@ -360,7 +360,7 @@ NavHistoryDataMonitor 类负责将用户导航数据缓冲到数据库。它包�
     {
         var observableData =
             Observable.FromEventPattern<NavHistoryDataEventArgs>(this, "OnAdded");
-    
+
         observableData.Buffer(TimeSpan.FromSeconds(20), 1000).Subscribe(Handler);           
     }
 
@@ -371,25 +371,25 @@ NavHistoryDataMonitor 类负责将用户导航数据缓冲到数据库。它包�
         public NavHistoryDataEventArgs(NavHistoryData data) { Data = data; }
         public NavHistoryData Data { get; set; }
     }
-    
+
     public class NavHistoryDataMonitor
     {
         public event EventHandler<NavHistoryDataEventArgs> OnAdded;
-    
+
         public NavHistoryDataMonitor()
         {
             var observableData =
                 Observable.FromEventPattern<NavHistoryDataEventArgs>(this, "OnAdded");
-    
+
             observableData.Buffer(TimeSpan.FromSeconds(20), 1000).Subscribe(Handler);           
         }
-    
+
         public void RecordUserNavigationEntry(NavHistoryData data)
         {    
             if (OnAdded != null)
                 OnAdded(this, new NavHistoryDataEventArgs(data));
         }
-    
+
         protected void Handler(IList<EventPattern<NavHistoryDataEventArgs>> items)
         {
             DataTable navHistoryBatch = new DataTable("NavigationHistoryBatch");
@@ -401,14 +401,14 @@ NavHistoryDataMonitor 类负责将用户导航数据缓冲到数据库。它包�
                 NavHistoryData data = item.EventArgs.Data;
                 navHistoryBatch.Rows.Add(data.UserId, data.URL, data.AccessTime);
             }
-    
+
             using (SqlConnection connection = new SqlConnection(CloudConfigurationManager.GetSetting("Sql.ConnectionString")))
             {
                 connection.Open();
-    
+
                 SqlCommand cmd = new SqlCommand("sp_RecordUserNavigation", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
-    
+
                 cmd.Parameters.Add(
                     new SqlParameter()
                     {
@@ -417,7 +417,7 @@ NavHistoryDataMonitor 类负责将用户导航数据缓冲到数据库。它包�
                         TypeName = "NavigationHistoryTableType",
                         Value = navHistoryBatch,
                     });
-    
+
                 cmd.ExecuteNonQuery();
             }
         }
@@ -461,7 +461,7 @@ OrderID 表中的 PurchaseOrderDetail 列必须引用 PurchaseOrder 表的订单
       CustomerID INT,
       Status NVARCHAR(50) );
     GO
-    
+
     CREATE TYPE PurchaseOrderDetailTableType AS TABLE 
     ( OrderID INT,
       ProductID INT,
@@ -476,7 +476,7 @@ OrderID 表中的 PurchaseOrderDetail 列必须引用 PurchaseOrder 表的订单
     @details as PurchaseOrderDetailTableType READONLY )
     AS
     SET NOCOUNT ON;
-    
+
     -- Table that connects the order identifiers in the @orders
     -- table with the actual order identifiers in the PurchaseOrder table
     DECLARE @IdentityLink AS TABLE ( 
@@ -484,13 +484,13 @@ OrderID 表中的 PurchaseOrderDetail 列必须引用 PurchaseOrder 表的订单
     ActualKey int, 
     RowNumber int identity(1,1)
     );
-     
+
           -- Add new orders to the PurchaseOrder table, storing the actual
     -- order identifiers in the @IdentityLink table   
     INSERT INTO PurchaseOrder ([OrderDate], [CustomerID], [Status])
     OUTPUT inserted.OrderID INTO @IdentityLink (ActualKey)
     SELECT [OrderDate], [CustomerID], [Status] FROM @orders ORDER BY OrderID;
-    
+
     -- Match the passed-in order identifiers with the actual identifiers
     -- and complete the @IdentityLink table for use with inserting the details
     WITH OrderedRows As (
@@ -499,7 +499,7 @@ OrderID 表中的 PurchaseOrderDetail 列必须引用 PurchaseOrder 表的订单
     )
     UPDATE @IdentityLink SET SubmittedKey = M.OrderID
     FROM @IdentityLink L JOIN OrderedRows M ON L.RowNumber = M.RowNumber;
-    
+
     -- Insert the order details into the PurchaseOrderDetail table, 
           -- using the actual order identifiers of the master table, PurchaseOrder
     INSERT INTO PurchaseOrderDetail (
@@ -518,20 +518,20 @@ OrderID 表中的 PurchaseOrderDetail 列必须引用 PurchaseOrder 表的订单
 
     declare @orders as PurchaseOrderTableType
     declare @details as PurchaseOrderDetailTableType
-    
+
     INSERT @orders 
     ([OrderID], [OrderDate], [CustomerID], [Status])
     VALUES(1, '1/1/2013', 1125, 'Complete'),
     (2, '1/13/2013', 348, 'Processing'),
     (3, '1/12/2013', 2504, 'Shipped')
-    
+
     INSERT @details
     ([OrderID], [ProductID], [UnitPrice], [OrderQty])
     VALUES(1, 10, $11.50, 1),
     (1, 12, $1.58, 1),
     (2, 23, $2.57, 2),
     (3, 4, $10.00, 1)
-    
+
     exec sp_InsertOrdersBatch @orders, @details
 
 此解决方案允许每个批使用从 1 开始的一组 OrderID 值。这些临时 OrderID 值描述批中的关系，但是在执行插入操作时确定实际 OrderID 值。你可以重复运行前一示例中的相同语句，在数据库中生成唯一订单。为此，请考虑在使用此批处理方法时添加防止重复订单的更多代码或数据库逻辑。
@@ -550,7 +550,7 @@ OrderID 表中的 PurchaseOrderDetail 列必须引用 PurchaseOrder 表的订单
     [SocialSecurityNumber] [nvarchar](50) NOT NULL,
      CONSTRAINT [PrimaryKey_Employee] PRIMARY KEY CLUSTERED 
     ([EmployeeID] ASC ))
- 
+
 在此示例中，你可以使用 SocialSecurityNumber 是唯一的这个事实来执行多个员工的 MERGE。首先，创建用户定义的表类型：
 
     CREATE TYPE EmployeeTableType AS TABLE 

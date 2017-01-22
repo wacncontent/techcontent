@@ -72,7 +72,7 @@ ms.author: rachelap
     ![“Azure Web 应用”窗口](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-configtab.png)  
 
     本教程将介绍如何使用日志记录和跟踪下拉列表。其中，还将用到远程调试，但会通过不同方式启用该调试。
-   
+
     有关该窗口中“应用程序设置”和“连接字符串”框的信息，请参阅 [Azure Web 应用：应用程序字符串和连接字符串的工作原理](http://blogs.msdn.com/b/windowsazure/archive/2013/07/17/windows-azure-web-sites-how-application-strings-and-connection-strings-work.aspx)。
 
     如果要执行的 Web 应用管理任务无法在此窗口进行，请单击“在管理门户中打开”，以便在浏览器窗口中打开 Azure 门户预览。
@@ -271,7 +271,7 @@ ms.author: rachelap
 * **Web 服务器日志**<br/>Web 服务器为每一个对 Web 应用的 HTTP 请求创建一个日志条目。
 * **详细的错误消息日志**<br/>Web 服务器为失败的 HTTP 请求（导致状态代码 400 或更大数字的请求）创建带有一些额外信息的 HTML 页面。
 * **失败请求跟踪日志**<br/>Web 服务器为失败的 HTTP 请求创建带有详细跟踪信息的 XML 文件。Web 服务器还可提供 XSL 文件以格式化浏览器中的 XML。
-  
+
 日志记录会影响 Web 应用性能，因此 Azure 允许提供根据需要启用或禁用各种类型的日志。对于应用程序日志，可以指定只写入特定严重级别以上的日志。创建新的 Web 应用时，默认为禁用所有日志记录功能。
 
 日志将写入 Web 应用文件系统中 *LogFiles* 文件夹内的文件，并可通过 FTP 访问。Web 服务器日志和应用程序日志也可写入 Azure 存储帐户。可在存储帐户中为日志留出大于文件系统预留量的空间。使用文件系统时，最多可存储 100 兆字节的日志。（文件系统日志仅适合短期保留。达到限制后，Azure 将删除旧日志文件以便为新日志腾出空间。）
@@ -298,7 +298,7 @@ ms.author: rachelap
             Trace.WriteLine("Leaving Index method");
             return View();
         }
-        
+
         public ActionResult About()
         {
             Trace.WriteLine("Entering About method");
@@ -307,7 +307,7 @@ ms.author: rachelap
             Trace.WriteLine("Leaving About method");
             return View();
         }
-        
+
         public ActionResult Contact()
         {
             Trace.WriteLine("Entering Contact method");
@@ -318,7 +318,7 @@ ms.author: rachelap
         }		
 
 2. 将 `using System.Diagnostics;` 语句添加到文件顶部。
-                
+
 ### 本地查看跟踪输出
 
 3. 按 F5 以调试模式运行应用程序。
@@ -399,7 +399,7 @@ ms.author: rachelap
 4. 在“服务器资源管理器”中，右键单击 Web 应用，然后如之前所做单击“查看设置”。
 
 5. 将“应用程序日志记录(文件系统)”更改为“详细”，然后单击“保存”。
- 
+
     ![将跟踪级别设置为详细](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-applogverbose.png)  
 
 6. 现在，在显示“联系人”页面的浏览器窗口中，单击“主页”，然后依次单击“关于”和“联系人”。
@@ -437,7 +437,7 @@ Web 服务器日志将记录 Web 应用上所有的 HTTP 活动。若要在“�
     ![启用 Web 服务器日志记录](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-webserverloggingon.png)
 
 2. 在“输出”窗口中，单击“指定要监视的 Azure 日志”按钮。
-    
+
     ![指定要监视的 Azure 日志。](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-specifylogs.png)  
 
 3. 在“Azure 日志记录选项”对话框中，选择“Web 服务器日志”，然后单击“确定”。
@@ -582,7 +582,7 @@ Web 服务器日志将记录 Web 应用上所有的 HTTP 活动。若要在“�
 8. 单击“查看所有应用程序日志”。
 
     跟踪日志表将显示在 Azure 存储表查看器中。
-   
+
     （如果收到“序列未包含任何元素”错误，请打开“服务器资源管理器”，展开 Azure 节点下你的存储帐户节点，然后右键单击“表”并单击“刷新”。）
 
     ![表视图中的存储日志](./media/web-sites-dotnet-troubleshoot-visual-studio/tws-tracelogtableview.png)  
@@ -722,5 +722,5 @@ Microsoft TechNet 网站包含的[使用失败请求跟踪](http://www.iis.net/l
 
 [GetStarted]: ./web-sites-dotnet-get-started.md
 [GetStartedWJ]: ./websites-dotnet-webjobs-sdk.md
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

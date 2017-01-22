@@ -36,8 +36,8 @@ You can also instantly perform a manual full backup. You can generate a total of
 Here's the instant manual backup process:
 
 1. Sign in to the [Azure Management Portal](http://manage.windowsazure.cn/), and click on **MYSQL DATABASE ON AZURE** in the services list in the left pane.
-2.	In the server list, click the database server that you want to back up to open the server interface, then click **Backup**.
-3.	Click on **Instant backup**, and confirm the operation.
+2. In the server list, click the database server that you want to back up to open the server interface, then click **Backup**.
+3. Click on **Instant backup**, and confirm the operation.
 
 ## **Incremental backups**
 
@@ -63,24 +63,24 @@ You can access the new server instance using the original server instance accoun
 
 With **MySQL Database on Azure**, you can restore a full backup to a new instance. The specific procedure for this is as follows:
 
-1.	Sign in to the [Azure Management Portal](http://manage.windowsazure.cn/), and click **MYSQL DATABASE ON AZURE** in the services list in the left pane.
-2.	In the server list, click the database server that you want to restore to open the server interface, and then click **BACKUPS**.
-3.	Select the full backup that you want to restore, and click the **RESTORE** button.
+1. Sign in to the [Azure Management Portal](http://manage.windowsazure.cn/), and click **MYSQL DATABASE ON AZURE** in the services list in the left pane.
+2. In the server list, click the database server that you want to restore to open the server interface, and then click **BACKUPS**.
+3. Select the full backup that you want to restore, and click the **RESTORE** button.
 ![Restore a full backup to a new instance][3]
-4.	In the dialogue box that opens, the **RESTORE TYPE** is set to **Rollback to a full backup** by default, the **SELECTED BACKUP** is automatically set to the full backup that you selected, and **RESTORE TO** is set to **New Server** by default. Enter the name and version of the new server instance, and then click the **Finish** button.
+4. In the dialogue box that opens, the **RESTORE TYPE** is set to **Rollback to a full backup** by default, the **SELECTED BACKUP** is automatically set to the full backup that you selected, and **RESTORE TO** is set to **New Server** by default. Enter the name and version of the new server instance, and then click the **Finish** button.
 ![Restore a full backup to a new instance][4]
-5.	Go back to the server list to confirm that the server was successfully created and that the status is **Running**. This process is generally completed within two minutes. You can access the new server instance by using the original server instance account. However, you will need to change the server name prefix in the account to the new server name.
+5. Go back to the server list to confirm that the server was successfully created and that the status is **Running**. This process is generally completed within two minutes. You can access the new server instance by using the original server instance account. However, you will need to change the server name prefix in the account to the new server name.
 
 ## **Restore a full backup to the original instance**
 
 With **MySQL Database on Azure**, you can restore a full backup to the original instance. The specific procedure for this is as follows:
 
-1.	Sign in to the [Azure Management Portal](http://manage.windowsazure.cn/), and click **MYSQL DATABASE ON AZURE** in the services list in the left pane.
-2.	In the server list, click the database server that you want to restore to open the server interface, then click **BACKUPS**.
-3.	Select the full backup that you want to restore, and click the **RESTORE** button.
-4.	Select **Current Service** from the **RESTORE TO** options in the dialogue box that pops up. At the same time, you must confirm that **I understand it will take a few minutes to restore the server, during which the database server could not be accessed. ** Click the **Finish** button.
+1. Sign in to the [Azure Management Portal](http://manage.windowsazure.cn/), and click **MYSQL DATABASE ON AZURE** in the services list in the left pane.
+2. In the server list, click the database server that you want to restore to open the server interface, then click **BACKUPS**.
+3. Select the full backup that you want to restore, and click the **RESTORE** button.
+4. Select **Current Service** from the **RESTORE TO** options in the dialogue box that pops up. At the same time, you must confirm that **I understand it will take a few minutes to restore the server, during which the database server could not be accessed. ** Click the **Finish** button.
 ![Restore a full backup to the original instance][5]
-5.	Go back to the server list to confirm that the status of the server is **Running**. This indicates that the server was successfully restored.
+5. Go back to the server list to confirm that the status of the server is **Running**. This indicates that the server was successfully restored.
 
 <!--Image references-->
 

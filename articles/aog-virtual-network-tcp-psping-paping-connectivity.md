@@ -32,11 +32,11 @@ PsPing [下载地址](https://technet.microsoft.com/zh-cn/sysinternals/jj729731.
 打开命令行提示符窗口，进入到 psping.exe 所在的目录，就可以运行 PsPing 了。如前文所述，PsPing 支持的测试方法有很多，这里我们主要介绍针对 TCP 端口的连通性测试。最简单的测试方法就是直接在 psping.exe 命令后面加上要测试的主机名和端口，然后执行。这里以从 Azure 内部测试 www.azure.cn 的 TCP-80 端口为例，命令为`psping.exe www.azure.cn:80`。
 
     C:\Tools>psping www.azure.cn:80
-    
+
     PsPing v2.10 - PsPing - ping, latency, bandwidth measurement utility
     Copyright (C) 2012-2016 Mark Russinovich
     Sysinternals - www.sysinternals.com
-    
+
     TCP connect to 116.211.251.197:80:
     5 iterations (warmup 1) ping test:
     Connecting to 116.211.251.197:80 (warmup): from 10.91.1.4:51413: 34.69ms
@@ -44,7 +44,7 @@ PsPing [下载地址](https://technet.microsoft.com/zh-cn/sysinternals/jj729731.
     Connecting to 116.211.251.197:80: from 10.91.1.4:51415: 30.56ms
     Connecting to 116.211.251.197:80: from 10.91.1.4:51416: 49.02ms
     Connecting to 116.211.251.197:80: from 10.91.1.4:51417: 43.84ms
-    
+
     TCP connect statistics for 116.211.251.197:80:
       Sent = 4, Received = 4, Lost = 0 (0% loss),
       Minimum = 29.11ms, Maximum = 49.02ms, Average = 38.13ms
@@ -66,11 +66,11 @@ PsPing [下载地址](https://technet.microsoft.com/zh-cn/sysinternals/jj729731.
 我们还是以测试 `www.azure.cn` 为例，测试 500 次连接的命令为 `psping.exe -n 500 www.azure.cn:80`
 
     C:\Tools>psping -n 500 www.azure.cn:80
-    
+
     PsPing v2.10 - PsPing - ping, latency, bandwidth measurement utility
     Copyright (C) 2012-2016 Mark Russinovich
     Sysinternals - www.sysinternals.com
-    
+
 TCP connect to 175.25.168.95:80:
     501 iterations (warmup 1) ping test:
     Connecting to 175.25.168.95:80 (warmup): from 10.91.1.4:51531: 2.28ms
@@ -81,7 +81,7 @@ TCP connect to 175.25.168.95:80:
     Connecting to 175.25.168.95:80: from 10.91.1.4:52030: 2.69ms
     Connecting to 175.25.168.95:80: from 10.91.1.4:52031: 2.69ms
     Connecting to 175.25.168.95:80: from 10.91.1.4:52032: 2.39ms
-    
+
     TCP connect statistics for 175.25.168.95:80:
       Sent = 500, Received = 500, Lost = 0 (0% loss),
       Minimum = 1.49ms, Maximum = 4.72ms, Average = 2.35ms
@@ -110,24 +110,24 @@ PaPing 的使用方法与 PsPing 非常相似，甚至更简单，功能更单�
 默认 PaPing 的结果会根据 Shell 的色彩配置输出不同颜色。如果您将结果通过“>”输出到文件，建议使用 `--nocolor` 参数。这样输出的文件中就不会包含色彩相关的字符，更方便后期处理。
 
 同样以测试 500 次对 `www.azure.cn` 的 80 端口的 TCP 连接为例，跳转到 PaPing 所在的路径后，执行 `./paping -p 80 -c 500 www.azure.cn`。
-    
+
     [kyle@centos7 ~]$ ./paping -p 80 -c 500 www.azure.cn
     paping v1.5.5 - Copyright (c) 2011 Mike Lovell
-    
+
     Connecting to 1stcncloud.dtwscachev290.ourwebcdn.com [112.17.28.203] on TCP 80:
-    
+
     Connected to 112.17.28.203: time=8.26ms protocol=TCP port=80
     Connected to 112.17.28.203: time=7.48ms protocol=TCP port=80
     Connected to 112.17.28.203: time=9.62ms protocol=TCP port=80
     Connected to 112.17.28.203: time=8.54ms protocol=TCP port=80
     ....................
-    
+
     Connected to 112.17.28.203: time=9.59ms protocol=TCP port=80
     Connected to 112.17.28.203: time=11.79ms protocol=TCP port=80
     Connected to 112.17.28.203: time=8.14ms protocol=TCP port=80
     Connected to 112.17.28.203: time=10.94ms protocol=TCP port=80
     Connected to 112.17.28.203: time=22.35ms protocol=TCP port=80
-    
+
     Connection statistics:
         Attempted = 500, Connected = 500, Failed = 0 (0.00%)
     Approximate connection times:

@@ -42,11 +42,11 @@ Socket.IO 在 node.js 服务器和客户端之间提供实时通信。本教程�
     ![Azure PowerShell 图标][powershell-menu]
 
 2. 创建一个名为 **c:\\node** 的目录。
- 
+
         PS C:\> md node
 
 3. 将目录更改为 **c:\\node** 目录
- 
+
         PS C:\> cd node
 
 4. 输入以下命令以创建一个名为 **chatapp** 的新解决方案和一个名为 **WorkerRole1** 的辅助角色：
@@ -163,9 +163,9 @@ Socket.IO 在 node.js 服务器和客户端之间提供实时通信。本教程�
 
   [chat example]: https://github.com/LearnBoost/socket.io/tree/master/examples/chat
   [chat-example-view]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-22.png
-  
+
   [chat-contents]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-5.png
   [The-output-of-the-npm-install-command]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-7.png
   [The output of the Publish-AzureService command]: ./media/cloud-services-nodejs-chat-app-socketio/socketio-9.png
-  
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

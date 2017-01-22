@@ -34,29 +34,29 @@ ms.author: tomfitz
 若要查看部署操作，请使用以下步骤 ：
 
 1. 对于部署中涉及的资源组，请注意最后一个部署的状态。你可以选择此状态以获取更多详细信息。
-   
+
     ![部署状态](./media/resource-manager-troubleshoot-deployments-portal/deployment-status.png)  
 
 2. 你将看到最近的部署历史记录。选择失败的部署。
-   
+
     ![部署状态](./media/resource-manager-troubleshoot-deployments-portal/select-deployment.png)  
 
 3. 选择“失败”。单击此处查看详细信息**以查看部署失败的原因的说明。在下图中，DNS 记录不是唯一的。
-   
+
     ![查看失败的部署](./media/resource-manager-troubleshoot-deployments-portal/view-error.png)  
 
     此错误消息应足够让你可以开始进行故障排除。但是，如果你需要有关完成了哪些任务的更多详细信息，可以查看操作，如下面的步骤所示。
 4. 可以在“部署”边栏选项卡中查看所有部署操作。选择任何操作，以查看更多详细信息。
-   
+
     ![查看操作](./media/resource-manager-troubleshoot-deployments-portal/view-operations.png)  
 
     在此示例中，你会看到已成功创建存储帐户、虚拟网络和可用性集。公共 IP 地址失败，未尝试其他资源。
 5. 可以通过选择“事件”查看部署的事件。
-   
+
     ![查看事件](./media/resource-manager-troubleshoot-deployments-portal/view-events.png)  
 
 6. 查看部署的所有事件，并选择任何事件以了解更多详细信息。
-   
+
     ![查看事件](./media/resource-manager-troubleshoot-deployments-portal/see-all-events.png)  
 
 ## 使用审核日志进行故障排除
@@ -65,35 +65,35 @@ ms.author: tomfitz
 若要查看部署相关的错误，请使用以下步骤：
 
 1. 通过选择“审核日志”查看资源组的审核日志。
-   
+
     ![选择审核日志](./media/resource-manager-troubleshoot-deployments-portal/select-audit-logs.png)  
 
 2. 在“审核日志”边栏选项卡中，将会显示订阅中所有资源组的最新操作摘要。其中包括表示操作的时间与状态的图形，以及操作的列表。
-   
+
     ![显示操作](./media/resource-manager-troubleshoot-deployments-portal/audit-summary.png)  
 
 3. 你可以筛选审核日志的视图，以便重点关注特定的条件。选择“审核日志”边栏选项卡顶部的“筛选”。
-   
+
     ![筛选日志](./media/resource-manager-troubleshoot-deployments-portal/filter-logs.png)  
 
 4. 从“筛选”边栏选项卡中选择条件，将审核日志的视图限制为要查看的操作。例如，你可以筛选操作，以便只显示资源组的错误。
-   
+
     ![设置筛选选项](./media/resource-manager-troubleshoot-deployments-portal/set-filter.png)  
 
 5. 你可以设置时间跨度以进一步筛选操作。下图将视图筛选为包含特定的 20 分钟时间跨度的信息。
-   
+
     ![设置时间](./media/resource-manager-troubleshoot-deployments-portal/select-time.png)  
 
 6. 你可以在列表中选择任意操作。选择包含你要调查的错误的操作。
-   
+
     ![选择操作](./media/resource-manager-troubleshoot-deployments-portal/select-operation.png)  
 
 7. 你将看到该操作的所有事件。请注意摘要中的**相关 ID**。此 ID 用于跟踪相关的事件。与技术支持人员合作排查问题时，此 ID 非常有用。你可以选择任一事件，以查看有关该事件的详细信息。
-   
+
     ![选择事件](./media/resource-manager-troubleshoot-deployments-portal/select-event.png)  
 
 8. 你将看到有关事件的详细信息。请特别注意“属性”，其中提供了有关错误的信息。
-   
+
     ![显示审核日志详细信息](./media/resource-manager-troubleshoot-deployments-portal/audit-details.png)  
 
 下次你查看审核日志时，应用于审核日志的筛选器将会保留，因此可能需要更改这些值才能扩展操作视图。

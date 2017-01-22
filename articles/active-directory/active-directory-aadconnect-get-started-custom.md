@@ -140,8 +140,8 @@ wacn.date: 01/06/2017
 ### 启用单一登录 (SSO)
 配置单一登录以将其用于密码同步或直通身份验证是一个简单的过程，只需为要同步到 Azure AD 的每个林完成一次即可。配置过程包括以下两个步骤：
 
-1.	在本地 Active Directory 中创建必需的计算机帐户。
-2.	配置客户端计算机的 Intranet 区域来支持单一登录。
+1. 在本地 Active Directory 中创建必需的计算机帐户。
+2. 配置客户端计算机的 Intranet 区域来支持单一登录。
 
 #### 在 Active Directory 中创建计算机帐户
 对于已通过 AAD Connect 工具添加的每个林，需要提供域管理员凭据，以便可以在每个林中创建计算机帐户。该凭据仅用于创建帐户，并不存储或用于任何其他操作。只需在 AAD Connect 向导的“启用单一登录”页面上添加此凭据，如下所示：
@@ -154,20 +154,20 @@ wacn.date: 01/06/2017
 #### 配置客户端计算机的 Intranet 区域
 若要确保客户端在 Intranet 区域中自动登录，需要确保要访问的 URL 是 Intranet 区域的一部分。这样可以确保加入域的桌面计算机在连接到公司网络时自动向其发送 Kerberos 票证。在安装了组策略管理工具的计算机上执行以下操作。
 
-1.	打开组策略管理工具
-2.	编辑将应用于所有用户的组策略。例如，默认域策略。
-3.	导航到“当前用户\\管理模板\\Windows 组件\\Internet Explorer\\Internet 控制面板\\安全性”页面，并选择“区域分配列表的站点”，如下图所示。
-4.	启用策略，并在对话框中输入以下两项。
-   
+1. 打开组策略管理工具
+2. 编辑将应用于所有用户的组策略。例如，默认域策略。
+3. 导航到“当前用户\\管理模板\\Windows 组件\\Internet Explorer\\Internet 控制面板\\安全性”页面，并选择“区域分配列表的站点”，如下图所示。
+4. 启用策略，并在对话框中输入以下两项。
+
         Value: https://autologon.microsoftazuread-sso.com
         Data: 1
         Value: https://aadg.chinacloudapi.cn.nsatc.net 
         Data: 1
 
-5.	结果如下图所示：
+5. 结果如下图所示：
 ![Intranet 区域](./media/active-directory-aadconnect-get-started-custom/sitezone.png)
 
-6.	单击两次“确定”。
+6. 单击两次“确定”。
 
 ### Azure AD 应用程序和属性筛选 <a name="azure-ad-app-and-attribute-filtering"></a>
 如果想要限制同步到 Azure AD 的属性，请通过选择正在使用的服务来启动。如果在此页面上进行配置更改，必须通过重新运行安装向导来明确选择新的服务。

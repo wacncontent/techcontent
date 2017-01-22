@@ -32,7 +32,7 @@ ms.author: glenga
 >[!NOTE]Windows Phone 8、Windows Phone 8.1 Silverlight 和非 Windows 应用程序可以跳过本部分。
 
 1. 如果尚未注册应用，请导航到 [Windows 开发人员中心](https://dev.windows.com/dashboard/Application/New)，使用你的 Microsoft 帐户登录，键入应用的名称，然后单击“保留应用名称”。
- 
+
 3. 在 Visual Studio 中打开你的 Windows 应用项目，然后在“解决方案资源管理器”中，右键单击 Windows 应用商店应用项目，并单击“应用商店”>“将应用与应用商店关联...”。
 
       ![](./media/mobile-services-how-to-register-microsoft-authentication/mobile-services-store-association.png)
@@ -44,7 +44,7 @@ ms.author: glenga
 6. 回到新应用的“Windows 开发人员中心”页，单击“服务”>“推送通知”。
 
 7. 在“推送通知”页中，在“Windows 推送通知服务(WNS)和 Microsoft Azure 移动服务”下面单击“Live Services 站点”。
- 
+
     此时将显示应用的 Microsoft 帐户应用设置页。
 
 8. 记下“程序包 SID”值。可以将此 SID 保存在 Azure 门户以便为你的 Windows 应用启用单一登录和推送通知。
@@ -69,7 +69,7 @@ ms.author: glenga
     ![Microsoft 帐户 API 设置](./media/mobile-services-how-to-register-microsoft-authentication/mobile-services-win8-app-push-auth-2.png)
 
 4. 单击“应用程序设置”，并记下“客户端 ID”、“客户端机密”和“包 SID”的值。
-    
+
        ![Microsoft 帐户应用程序设置](./media/mobile-services-how-to-register-microsoft-authentication/mobile-services-win8-app-push-auth.png)
 
     > [!NOTE]客户端密钥是一个非常重要的安全凭据。请勿与任何人分享客户端密钥或将密钥随应用程序分发。只有 Windows 应用商店应用程序注册才能看到“包 SID”字段。
@@ -77,7 +77,7 @@ ms.author: glenga
 4. 在 [Azure 经典管理门户]中，单击移动服务的“标识”选项卡，输入从标识提供者获取的客户端 ID、客户端机密和包 SID，然后单击“保存”。
 
     >[!NOTE]对于 Windows Phone 8、Windows Phone 应用商店 8.1 Silverlight 或非 Windows 应用程序，不需提供包 SID 值。
-    
+
 现在，你的移动服务和应用程序都已配置为使用 Microsoft 帐户。
 
 <!-- Anchors. -->

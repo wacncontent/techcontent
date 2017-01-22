@@ -46,7 +46,7 @@
                 // Log the result.
                 Services.Log.Info(string.Format("{0} items set to 'complete'.", 
                     result.count.ToString()));
-                
+
                 return result;
             }
         }

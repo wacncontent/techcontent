@@ -30,7 +30,7 @@ ms.author: chackdan
 若要获取构成群集的 VM 规模集的列表，请运行以下 cmdlet：
 
     Get-AzureRmResource -ResourceGroupName <RGname> -ResourceType Microsoft.Compute/VirtualMachineScaleSets
-    
+
     Get-AzureRmVmss -ResourceGroupName <RGname> -VMScaleSetName <VM Scale Set name>
 
 ## 为节点类型/VM 规模集设置自动缩放规则

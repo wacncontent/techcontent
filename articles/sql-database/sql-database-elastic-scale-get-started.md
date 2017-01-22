@@ -46,7 +46,7 @@ ms.author: ddove
 6. 在示例项目的解决方案中打开 **app.config** 文件，然后按照该文件中的说明添加 Azure SQL 数据库服务器名称和登录信息（用户名和密码）。
 7. 构建并运行应用程序。出现提示时，请允许 Visual Studio 还原该解决方案的 NuGet 包。这会从 NuGet 下载最新版本的弹性数据库客户端库。
 8. 尝试使用不同的选项，以了解有关客户端库功能的详细信息。请注意应用程序在控制台输出中执行的步骤，并随意浏览后台代码。
-   
+
     ![进度][4]
 
 祝贺 - 你已成功使用弹性数据库池在 Azure SQL 数据库上生成并运行了第一个分片应用程序。通过将 Visual Studio 或 SQL Server Management Studio 连接到 Azure DB 服务器，快速查看该示例创建的分片。你会看到该示例创建的新示例分片数据库和分片映射管理器数据库。
@@ -100,5 +100,5 @@ ms.author: ddove
 [2]: ./media/sql-database-elastic-scale-get-started/click-online.png
 [3]: ./media/sql-database-elastic-scale-get-started/click-CSharp.png
 [4]: ./media/sql-database-elastic-scale-get-started/output2.png
- 
+
 <!---HONumber=Mooncake_1212_2016-->

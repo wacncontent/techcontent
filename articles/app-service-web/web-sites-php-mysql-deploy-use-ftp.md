@@ -22,12 +22,12 @@ ms.author: robmcm
 [!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本教程演示如何创建 PHP-MySQL Web 应用以及如何使用 FTP 部署该应用。本教程假定你已在计算机上安装 [PHP][install-php]、[MySQL][install-mysql]、Web 服务器和 FTP 客户端。本教程中的说明适用于任何操作系统，包括 Windows、Mac 和 Linux。完成本指南之后，你将拥有一个在 Azure 中运行的 PHP/MySQL Web 应用。
- 
+
 你将学习以下内容：
 
 * 如何使用 Azure 门户预览创建 Web 应用和 MySQL 数据库。由于 Web 应用已默认启用 PHP，因此运行 PHP 代码没有任何特殊要求。
 * 如何使用 FTP 将应用程序发布到 Azure。
- 
+
 通过按照本教程中的说明进行操作，你将在 PHP 中构建简单的注册 Web 应用。将在 Web 应用中托管应用程序。以下是已完成应用程序的屏幕快照：
 
 ![Azure PHP 网站][running-app]
@@ -214,7 +214,7 @@ ms.author: robmcm
 2. 在数据库摘要中，选择“设置”>“属性”。
 
     ![选择属性][select-properties]
-    
+
 2. 记下 `Database`、`Host`、`User Id` 和 `Password` 的值。
 
     ![记下属性][note-properties]
@@ -230,7 +230,7 @@ ms.author: robmcm
         <publishProfile publishMethod="FTP" publishUrl="ftp://[mysite].chinacloudsites.cn/site/wwwroot" ftpPassiveMode="True" userName="[username]" userPWD="[password]" destinationAppUrl="http://[name].chinacloudsites.cn" 
             ...
         </publishProfile>
-    
+
 记下 `publishUrl`、`userName` 和 `userPWD` 属性。
 
 ##发布应用
@@ -256,7 +256,7 @@ ms.author: robmcm
 连接后，你可以根据需要上载和下载文件。确保将文件上载到根目录 `/site/wwwroot`。
 
 上载 `index.php` 和 `createtable.php` 之后，浏览到 **http://[site name].chinacloudsites.cn/createtable.php**，创建用于应用程序的 MySQL 表，然后浏览到 **http://[site name].chinacloudsites.cn/index.php**，开始使用应用程序。
- 
+
 ## 后续步骤
 
 有关详细信息，请参阅 [PHP 开发中心](/develop/php/)。
@@ -284,5 +284,5 @@ ms.author: robmcm
 [connection-string-info]: ./media/web-sites-php-web-site-mysql-deploy-use-ftp/connection_string_info.png
 [management-portal]: https://portal.azure.cn
 [download-publish-profile]: ./media/web-sites-php-mysql-deploy-use-ftp/download_publish_profile_3.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

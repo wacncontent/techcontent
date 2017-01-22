@@ -59,7 +59,7 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
         using System.IO;
 
 4. 将以下方法添加到 **Program** 类：
-         
+
         private static async void SendToBlobAsync()
         {
             string fileName = "image.jpg";
@@ -107,9 +107,9 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
 
         static ServiceClient serviceClient;
         static string connectionString = "{iot hub connection string}";
-        
+
 5. 将以下方法添加到 **Program** 类：
-   
+
         private async static Task ReceiveFileUploadNotificationAsync()
         {
             var notificationReceiver = serviceClient.GetFileNotificationReceiver();
@@ -169,7 +169,7 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
 
 [Azure 门户预览]: https://portal.azure.cn/
 
-[Hadoop]: ../hdinsight/index.md/
+[Hadoop]: ../hdinsight/index.md
 
 [Send Cloud-to-Device messages with IoT Hub]: ./iot-hub-csharp-csharp-c2d.md
 [Process Device-to-Cloud messages]: ./iot-hub-csharp-csharp-process-d2c.md

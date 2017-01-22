@@ -38,10 +38,10 @@ ms.author: josephd
 
 设置此混合云测试环境需要完成以下四个主要阶段：
 
-1.	配置 TestLab 虚拟网络。
-2.	创建跨界虚拟网络。
-3.	创建 VNet 到 VNet 的 VPN 连接。
-4.	配置 DC2。
+1. 配置 TestLab 虚拟网络。
+2. 创建跨界虚拟网络。
+3. 创建 VNet 到 VNet 的 VPN 连接。
+4. 配置 DC2。
 
 >[!NOTE] Azure 中的虚拟机和虚拟网关在运行时会持续产生货币成本。此成本是针对 MSDN 或付费订阅进行计费的。在实施时，Azure VPN 网关将由两台 Azure 虚拟机组成。为了将费用降到最低，请创建测试环境，并尽可能快地执行所需的测试和演示。
 
@@ -97,7 +97,7 @@ ms.author: josephd
 这是你当前的配置。
 
 ![](./media/virtual-machines-windows-ps-hybrid-cloud-test-env-sim/virtual-machines-windows-ps-hybrid-cloud-test-env-sim-ph1.png)
- 
+
 ## 阶段 2：创建 TestVNET 虚拟网络
 
 首先，创建 TestVNET 虚拟网络，并通过网络安全组对其进行保护。
@@ -125,7 +125,7 @@ ms.author: josephd
 这是你当前的配置。
 
 ![](./media/virtual-machines-windows-ps-hybrid-cloud-test-env-sim/virtual-machines-windows-ps-hybrid-cloud-test-env-sim-ph2.png)
- 
+
 ##阶段 3：创建 VNet 到 VNet 连接
 
 首先，从网络或安全管理员处获取随机加密型强 32 字符预共享密钥。或者，使用[创建 IPsec 预共享密钥的随机字符串](http://social.technet.microsoft.com/wiki/contents/articles/32330.create-a-random-string-for-an-ipsec-preshared-key.aspx)中的信息获取预共享密钥。
@@ -143,7 +143,7 @@ ms.author: josephd
 这是你当前的配置。
 
 ![](./media/virtual-machines-windows-ps-hybrid-cloud-test-env-sim/virtual-machines-windows-ps-hybrid-cloud-test-env-sim-ph3.png)
- 
+
 ## 阶段 4：配置 DC2
 
 首先，请为 DC2 创建虚拟机。在本地计算机的 Azure PowerShell 命令提示符处运行这些命令。
@@ -177,16 +177,16 @@ ms.author: josephd
 
 接下来，在 DC2 上添加额外的数据磁盘作为驱动器盘符为 F: 的新卷。
 
-1.	在服务器管理器的左窗格中，单击**“文件和存储服务”**，然后单击**“磁盘”**。
-2.	在内容窗格的“磁盘”组中，单击“磁盘 2”（其“分区”设置为“未知”）。
-3.	单击**“任务”**，然后单击**“新建卷”**。
-4.	在新建卷向导的“开始之前”页上，单击**“下一步”**。
-5.	在“选择服务器和磁盘”页上，单击“磁盘 2”，然后单击“下一步”。出现提示时，单击“确定”。
-6.	在“指定卷的大小”页上，单击**“下一步”**。
-7.	在“分配到驱动器号或文件夹”页上，单击**“下一步”**。
-8.	在“选择文件系统设置”页上，单击**“下一步”**。
-9.	在“确认选择”页上，单击**“创建”**。
-10.	完成后，单击**“关闭”**。
+1. 在服务器管理器的左窗格中，单击**“文件和存储服务”**，然后单击**“磁盘”**。
+2. 在内容窗格的“磁盘”组中，单击“磁盘 2”（其“分区”设置为“未知”）。
+3. 单击**“任务”**，然后单击**“新建卷”**。
+4. 在新建卷向导的“开始之前”页上，单击**“下一步”**。
+5. 在“选择服务器和磁盘”页上，单击“磁盘 2”，然后单击“下一步”。出现提示时，单击“确定”。
+6. 在“指定卷的大小”页上，单击**“下一步”**。
+7. 在“分配到驱动器号或文件夹”页上，单击**“下一步”**。
+8. 在“选择文件系统设置”页上，单击**“下一步”**。
+9. 在“确认选择”页上，单击**“创建”**。
+10. 完成后，单击**“关闭”**。
 
 接下来，将 DC2 配置为 corp.contoso.com 域的副本域控制器。在 DC2 上的 Windows PowerShell 命令提示符下运行这些命令。
 
@@ -197,15 +197,15 @@ ms.author: josephd
 
 由于 TestVNET 虚拟网络有自己的 DNS 服务器 (DC2)，因此必须将 TestVNET 虚拟网络配置为使用此 DNS 服务器。
 
-1.	在 Azure 门户预览的左窗格中，单击虚拟网络图标，然后单击“TestVNET”。
-2.	在“设置”选项卡中，单击“DNS 服务器”。
-3.	在“主 DNS 服务器”中，键入 **192.168.0.4** 替换 10.0.0.4。
-4.	单击“保存”。
+1. 在 Azure 门户预览的左窗格中，单击虚拟网络图标，然后单击“TestVNET”。
+2. 在“设置”选项卡中，单击“DNS 服务器”。
+3. 在“主 DNS 服务器”中，键入 **192.168.0.4** 替换 10.0.0.4。
+4. 单击“保存”。
 
 这是你当前的配置。
 
 ![](./media/virtual-machines-windows-ps-hybrid-cloud-test-env-sim/virtual-machines-windows-ps-hybrid-cloud-test-env-sim-ph4.png)
- 
+
 现在，你的模拟混合云环境已准备好进行测试。
 
 ## 后续步骤

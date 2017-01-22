@@ -110,7 +110,7 @@ Service Fabric 将管理此业务流程，以便保持服务的高度可用和�
 
             CompletableFuture<?> completableFuture = new CompletableFuture<>();
             ExecutorService service = Executors.newFixedThreadPool(1);
-        
+
             Future<?> userTask = service.submit(() -> {
                 while (!Thread.currentThread().isInterrupted()) {
                     try
@@ -125,7 +125,7 @@ Service Fabric 将管理此业务流程，以便保持服务的高度可用和�
                     }
                 }
              });
- 
+
             completableFuture.handle((r, ex) -> {
                 if (ex instanceof CancellationException) {
                     userTask.cancel(true);
@@ -133,7 +133,7 @@ Service Fabric 将管理此业务流程，以便保持服务的高度可用和�
                 }
                 return null;
             });
- 
+
             return completableFuture;
        }
 

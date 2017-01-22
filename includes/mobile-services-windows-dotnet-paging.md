@@ -29,7 +29,7 @@
        请注意，`Take(3)` 方法已转换成查询 URI 中的查询选项 `$top=3`。
 
 7. 使用以下代码，再一次更新 **RefreshTodoItems** 方法：
-            
+
         private async void RefreshTodoItems()
         {
             // Define a filtered query that skips the first 3 items and 

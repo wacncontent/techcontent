@@ -135,7 +135,7 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 
 ## 事件中心
 
-[事件中心](https://www.azure.cn/home/features/event-hubs/)是一种事件处理服务，用于向 Azure 提供大规模的事件与遥测数据入口，并且具有较低的延迟和较高的可靠性。在应用程序检测、用户体验或工作流处理以及[物联网 (IoT)](../iot-hub/index.md/) 方案中，将此服务与其他下游服务结合使用可以带来极好的效果。
+[事件中心](https://www.azure.cn/home/features/event-hubs/)是一种事件处理服务，用于向 Azure 提供大规模的事件与遥测数据入口，并且具有较低的延迟和较高的可靠性。在应用程序检测、用户体验或工作流处理以及[物联网 (IoT)](../iot-hub/index.md) 方案中，将此服务与其他下游服务结合使用可以带来极好的效果。
 
 事件中心是消息流式处理构造，尽管它们看上去类似于队列和主题，但其特征却迥然不同。例如，事件中心不提供消息 TTL、死信、事务或确认，因为这些是传统中转消息传送功能，而是流处理功能。事件中心可提供其他与流相关的功能（例如分区、保留顺序和流重播）。
 
@@ -146,7 +146,7 @@ Microsoft Azure 服务总线支持一组基于云的、面向消息的中间件�
 - [服务总线消息传送概述](./service-bus-messaging-overview.md)
 - [服务总线中转消息传送 .NET 教程](./service-bus-brokered-tutorial-dotnet.md)
 - [服务总线中转消息传送 REST 教程](./service-bus-brokered-tutorial-rest.md)
-- [事件中心文档](../event-hubs/index.md/)
+- [事件中心文档](../event-hubs/index.md)
 - [事件中心开发人员指南](../event-hubs/event-hubs-programming-guide.md)
 - [主题筛选器示例](https://github.com/Azure-Samples/azure-servicebus-messaging-samples/tree/master/TopicFilters)
 - [中转消息传送：高级筛选器](http://code.msdn.microsoft.com/Brokered-Messaging-6b0d2749)

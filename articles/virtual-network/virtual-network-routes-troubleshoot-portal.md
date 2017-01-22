@@ -74,9 +74,9 @@ ms.author: anithaa
     - **State**：表示有效路由的状态。可能的值为 *Active* 或 *Invalid*。
     - **AddressPrefixes**：以 CIDR 表示法指定有效路由的地址前缀。
     - **nextHopType**：表示给定路由的下一跃点。可能的值为 *VirtualAppliance*、*Internet*、*VNetLocal*、*VNetPeering* 或 *Null*。如果 UDR 中的 **nextHopType** 值为 *Null*，可能表示是路由无效。例如，如果 **nextHopType** 为 *VirtualAppliance*，但网络虚拟设备 VM 不处于已预配/运行中状态。如果 **nextHopType** 为 *VPNGateway*，但给定的 VNet 中没有任何网关处于已预配/运行中状态，则路由可能失效。
-    
+
 7. 上一步骤的图片中没有列出从 *ChinaNorth-VNet1*（前缀 10.9.0.0/16）到 *ChinaNorth-VNET3* VNet（前缀 10.10.0.0/16）的路由。在下图中，对等互连链接处于 *Disconnected* 状态：
-    
+
     ![](./media/virtual-network-routes-troubleshoot-portal/image4.png)  
 
     对等互连的双向链接已断开，正因如此，VM1 无法连接到 *ChinaNorth-VNet3* VNet 中的 VM3。
@@ -95,7 +95,7 @@ ms.author: anithaa
 2. 单击“更多服务”，然后单击“网络接口”。
 3. 在列表中搜索 NIC 的名称，或者从显示的列表中选择 NIC。本示例选择了 **VM1-NIC1**。
 4. 在“网络接口”边栏选项卡中选择“有效路由”，如下图所示：
-   
+
        ![](./media/virtual-network-routes-troubleshoot-portal/image6.png)  
 
     “范围”默认设置为选定的网络接口。

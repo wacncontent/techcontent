@@ -54,10 +54,10 @@ ms.author: mikewasson
             https://<storage-account-name>.blob.core.chinacloudapi.cn/ 
         azure vm start -g <resource-group> <vm-name>
 
-   > [!WARNING] 解除分配 VM 也会释放分配给该 VM 的所有动态 IP 地址。OS 和数据磁盘不受影响。
+    > [!WARNING] 解除分配 VM 也会释放分配给该 VM 的所有动态 IP 地址。OS 和数据磁盘不受影响。
 
 <!-- links -->
-   
+
 [azure-cli]: ../xplat-cli-install.md
 [boot-diagnostics]: https://azure.microsoft.com/blog/boot-diagnostics-for-virtual-machines-v2/
 [vm-sizes]: ./virtual-machines-linux-sizes.md

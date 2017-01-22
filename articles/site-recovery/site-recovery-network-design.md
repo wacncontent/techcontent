@@ -74,7 +74,7 @@ ASR 让故障转移变为可能，第一步是将指定的虚拟机从主要数�
 在故障转移之前
 
 下图显示故障转移之后的网络和子网。
-    
+
 ![在故障转移之后](./media/site-recovery-network-design/network-design3.png)
 
 在故障转移之后

@@ -49,7 +49,7 @@ ms.author: glenga
 
 5. （可选）打开 Web 浏览器的脚本调试程序，并重新加载页。检查是否发生了访问被拒绝错误。
 
-   接下来，你需要更新应用程序，以允许在从移动服务请求资源之前进行身份验证。
+    接下来，你需要更新应用程序，以允许在从移动服务请求资源之前进行身份验证。
 
 ## <a name="add-authentication"></a>向应用程序添加身份验证
 
@@ -69,7 +69,7 @@ ms.author: glenga
     这样，你便可以从该页登录到移动服务。
 
 2. 在 page.js 文件中，找到位于文件最底部的、调用 refreshTodoItems 函数的代码行，并将它替换为以下代码：
-    
+
         function refreshAuthDisplay() {
             var isLoggedIn = client.currentUser !== null;
             $("#logged-in").toggle(isLoggedIn);
@@ -137,5 +137,5 @@ ms.author: glenga
 [使用脚本为用户授权]: ./mobile-services-javascript-backend-service-side-authorization.md
 
 [移动服务 HTML/JavaScript 操作方法概念性参考]: ./mobile-services-html-how-to-use-client-library.md
- 
+
 <!---HONumber=Mooncake_0118_2016-->

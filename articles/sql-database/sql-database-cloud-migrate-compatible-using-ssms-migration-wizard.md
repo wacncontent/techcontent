@@ -40,7 +40,7 @@ SQL Server Management Studio 中的“将数据库部署到 Azure 数据库”�
 
     ![通过“任务”菜单部署到 Azure](./media/sql-database-cloud-migrate/MigrateUsingDeploymentWizard01.png)  
 
-4.	在部署向导中，单击“下一步”，然后单击“连接”以配置与 SQL 数据库服务器的连接。
+4. 在部署向导中，单击“下一步”，然后单击“连接”以配置与 SQL 数据库服务器的连接。
 
     ![通过“任务”菜单部署到 Azure](./media/sql-database-cloud-migrate/MigrateUsingDeploymentWizard002.png)  
 
@@ -48,7 +48,7 @@ SQL Server Management Studio 中的“将数据库部署到 Azure 数据库”�
 
     ![通过“任务”菜单部署到 Azure](./media/sql-database-cloud-migrate/MigrateUsingDeploymentWizard00.png)  
 
-5.	为 [BACPAC](https://msdn.microsoft.com/zh-cn/library/ee210546.aspx#Anchor_4) 文件提供以下内容，该文件是此向导在迁移过程中创建的：
+5. 为 [BACPAC](https://msdn.microsoft.com/zh-cn/library/ee210546.aspx#Anchor_4) 文件提供以下内容，该文件是此向导在迁移过程中创建的：
 
  - **新数据库名称**
  - **Azure SQL 数据库的版本**（[服务层](./sql-database-service-tiers.md)）
@@ -58,10 +58,10 @@ SQL Server Management Studio 中的“将数据库部署到 Azure 数据库”�
 
     ![导出设置](./media/sql-database-cloud-migrate/MigrateUsingDeploymentWizard02.png)  
 
-6.	完成该向导。根据数据库的大小和复杂度，部署可能需要花费几分钟到几小时。如果此向导检测到兼容性问题，错误将显示到屏幕上，并且迁移将不会继续。有关如何修复数据库兼容性问题的指导，请转到[修复数据库兼容性问题](./sql-database-cloud-migrate-fix-compatibility-issues.md)。
+6. 完成该向导。根据数据库的大小和复杂度，部署可能需要花费几分钟到几小时。如果此向导检测到兼容性问题，错误将显示到屏幕上，并且迁移将不会继续。有关如何修复数据库兼容性问题的指导，请转到[修复数据库兼容性问题](./sql-database-cloud-migrate-fix-compatibility-issues.md)。
 
-7.	使用对象资源管理器连接到 Azure SQL 数据库服务器中的已迁移数据库。
-8.	使用 Azure 门户，查看数据库及其属性。
+7. 使用对象资源管理器连接到 Azure SQL 数据库服务器中的已迁移数据库。
+8. 使用 Azure 门户，查看数据库及其属性。
 
 ## 后续步骤
 

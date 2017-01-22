@@ -231,5 +231,5 @@ PS D:\temp>
 <!--Link references--In actual articles, you only need a single period before the slash-->
 [10]: ./service-fabric-application-model.md
 [11]: ./service-fabric-application-upgrade.md
- 
+
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

@@ -425,7 +425,7 @@ ms.author: goraco
 [vpn-gateway-vpn-faq]: ../vpn-gateway/vpn-gateway-vpn-faq.md
 [xplat-cli]: ../xplat-cli-install.md
 [xplat-cli-azure-resource-manager]: ../azure-resource-manager/xplat-cli-azure-resource-manager.md
- 
+
 公司可以使用 Azure 在最短的时间内获取计算、存储和网络资源，而无需经历冗长的采购周期。Azure 虚拟机可让公司将典型的应用程序（例如，基于 SAP NetWeaver 的应用程序，包括 ABAP、Java 和 ABAP+Java 堆栈）部署到 Azure 中，并提高其可靠性和可用性，且不需要在本地提供其他资源。Azure 虚拟机还支持跨场地连接，使公司能够主动地将 Azure 虚拟机集成到其本地域、私有云和 SAP 系统布局中。
 
 本文档详述使用新方法配合新的 Azure Resource Manager 部署模型，在 Azure 中部署高可用性 SAP 系统所要执行的全部步骤。本指南逐步讲解以下主要步骤：
@@ -454,7 +454,7 @@ ms.author: goraco
 在开始之前，请确保满足以下章节中所述的先决条件，并已检查“资源”一章所列的所有资源。
 
 将 Azure Resource Manager 模板用于 3 层 SAP NetWeaver：   
-[https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image](https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image/)
+[https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image/](https://github.com/Azure/azure-quickstart-templates/tree/master/sap-3-tier-marketplace-image/)
 
 下面提供了 SAP Azure Resource Manager 模板的概述：   
 [https://blogs.msdn.microsoft.com/saponsqlserver/2016/05/16/azure-quickstart-templates-for-sap/](https://blogs.msdn.microsoft.com/saponsqlserver/2016/05/16/azure-quickstart-templates-for-sap/)
@@ -505,7 +505,7 @@ ms.author: goraco
 Microsoft WSFC 是 Windows 上高可用性 SAP ASCS/SCS 安装和 DBMS 的技术基础。
 
 故障转移群集是由 1+n 个独立服务器（节点）构成的组，这些服务器配合工作以提高应用程序和服务的可用性。当发生节点故障时，WSFC 必须确定可发生多少错误而仍然能让群集保持正常状态，以便提供定义的应用程序和/或服务。可使用不同的仲裁模式来实现此目的。
- 
+
 ### <a name="1a3c5408-b168-46d6-99f5-4219ad1b1ff2"></a>仲裁模式
 
 在 WSFC 中，可以使用四种不同的仲裁模式：
@@ -678,7 +678,7 @@ _**图 9：**指定 SAP HA Azure Resource Manager 参数_
     - DBMS 群集 VM：`<SAPSystemSID>-avset-db`
 - **Azure 内部负载均衡器 (ILB)** 以及 ASCS/SCS 实例的所有端口和 IP 地址  
   `<SAPSystemSID>-lb-ascs`
--	**Azure 内部负载均衡器 (ILB)** 以及 SQL Server DBMS 的所有端口和 IP 地址
+- **Azure 内部负载均衡器 (ILB)** 以及 SQL Server DBMS 的所有端口和 IP 地址
   `<SAPSystemSID>-lb-db`
 - **网络安全组**：`<SAPSystemSID>-nsg-ascs-0`  
 具有对 `<SAPSystemSID>-ascs-0` VM 开放的外部 RDP 端口
@@ -724,7 +724,7 @@ SAP Azure Resource Manager 模板将自动创建 Azure VNET 和子网。
 ### <a name="47d5300a-a830-41d4-83dd-1a0d1ffdbe6a"></a>Azure 虚拟网络
 
 在本例中，Azure VNET 的地址空间是 10.0.0.0/16。有一个名为 _**Subnet**_、地址范围为 10.0.0.0/24 的子网。所有 VM 和 ILB 都部署在此 VNET 中。
-  
+
 > [!NOTE] 请不要对来宾内部的网络设置（例如 IP 地址、DNS 服务器、子网等）进行任何更改。所有网络设置都通过 Azure 完成，通过 DHCP 服务传播。
 
 ### <a name="b22d7b3b-4343-40ff-a319-097e13f62f9e"></a>DNS IP 地址
@@ -735,7 +735,7 @@ SAP Azure Resource Manager 模板将自动创建 Azure VNET 和子网。
 - **[企业网络连接（跨界）][planning-guide-2.2]**：请添加本地 DNS 服务器的 IP 地址。  
   本地 DNS 服务器可以扩展到在 Azure 中运行的 VM。在此情况下，可以添加这些配置为运行 DNS 服务的 Azure VM 的 IP 地址。
 
--	**[仅限云部署][planning-guide-2.1]**：请在同一 VNET 中部署用作 DNS 服务器的附加 VM。添加这些配置为运行 DNS 服务的 Azure VM 的 IP 地址。
+- **[仅限云部署][planning-guide-2.1]**：请在同一 VNET 中部署用作 DNS 服务器的附加 VM。添加这些配置为运行 DNS 服务的 Azure VM 的 IP 地址。
 
 ![图 10：配置 Azure VNET 的 DNS 服务器][sap-ha-guide-figure-3001]  
 
@@ -758,7 +758,7 @@ _**图 10：**配置 Azure VNET 的 DNS 服务器_
 | SAP ASCS/SCS 第 1 个群集虚拟主机名（用于群集管理） | pr1-ascs-vir | 10\.0.0.42                 
 | SAP ASCS/SCS **INSTANCE** 虚拟主机名 | pr1-ascs-sap | `10.0.0.43`              
 | SAP DBMS 第 2 个群集虚拟主机名（用于群集管理） | pr1-dbms-vir | 10\.0.0.32                 
- 
+
 用于管理群集本身的虚拟主机名 _**pr1-ascs-vir**_ 和 _**pr1-dbms-vir**_ 以及关联的 IP 地址是在创建群集时创建的，如[收集群集配置中的群集节点][sap-ha-guide-8.12.1]一章中所述。
 
 群集 SAP ASCS/SCS 实例和群集 DBMS 实例使用的其他两个虚拟主机名 _**pr1-ascs-sap**_ 和 _**pr1-dbms-sap**_ 以及关联的 IP 地址可在 DNS 服务器上手动创建，如[创建群集 SAP ASCS/SCS 的虚拟主机名][sap-ha-guide-9.1.1]一章中所述。
@@ -1102,7 +1102,7 @@ _**图 38：**通过“添加角色和功能向导”安装 .Net Framework 3.5 �
 在安装 SIOS 软件之前，必须先创建域用户 _**DataKeeperSvc**_。
 
 > [!NOTE] 请将此 _**DataKeeperSvc**_ 用户同时添加到两个群集节点上的“本地管理员”组中。
-  
+
 在两个群集节点上安装 SIOS 软件
 
 ![SIOS 安装程序][sap-ha-guide-figure-3030]  

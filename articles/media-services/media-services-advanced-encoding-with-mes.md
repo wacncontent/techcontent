@@ -42,15 +42,15 @@ ms.author: juliako
 生成缩略图时，不需始终以像素为单位指定输出宽度和高度。你可以以百分比的方式在 \[1%, …, 100%\] 范围内对其进行指定。
 
 ###JSON 预设 
-    
+
     "Width": "100%",
     "Height": "100%"
 
 ###XML 预设
-    
+
     <Width>100%</Width>
     <Height>100%</Height>
-    
+
 ##<a id="thumbnails"></a>生成缩略图
 
 本部分说明如何自定义生成缩略图的预设。下面定义的预设包含有关如何将文件编码的信息，以及生成缩略图时所需的信息。可使用[此部分](./media-services-mes-presets-overview.md)所述的任何 MES 预设，并添加生成缩略图的代码。
@@ -83,7 +83,7 @@ ms.author: juliako
               "AdaptiveBFrame": true,
               "Type": "H264Layer",
               "FrameRate": "0/1"
-       
+
             }
           ],
           "Type": "H264Video"
@@ -247,9 +247,9 @@ ms.author: juliako
     - 时间戳（如果以 HH:MM:SS... 格式表示），例如，"Start" : "00:01:00"
 
     你可以随意混搭使用表示法。
-    
+
     此外，Start 还支持特殊的宏 {Best}，它会尝试判断第一个“有意义”的内容帧。注意：（Start 设置为 {Best} 时，将忽略 Step 与 Range）
-    
+
     - 默认值：Start:{Best}
 - 需要显式提供每个图像格式的输出格式：Jpg/Png/BmpFormat。MES 会将 JpgVideo（如果已指定）与 JpgFormat 进行匹配，依此类推。OutputFormat 引入了新的图像编解码器特定宏 {Index}，需要为图像输出格式提供该宏一次（且只需一次）。
 
@@ -257,9 +257,9 @@ ms.author: juliako
 本部分说明如何修改编码器预设，以裁剪或修剪其输入为所谓的夹层文件或按需文件的输入视频。也可以使用编码器来剪切或剪裁从实时流捕获或存档的资产 – [此博客](https://azure.microsoft.com/blog/sub-clipping-and-live-archive-extraction-with-media-encoder-standard/)提供了详细信息。
 
 若要裁剪视频，可以使用[此部分](./media-services-mes-presets-overview.md)所述的任何 MES 预设，并修改 **Sources** 元素（如下所示）。StartTime 的值需与输入视频的绝对时间戳匹配。例如，如果输入视频第一帧的时间戳为 12:00:10.000，则 StartTime 应大于或等于 12:00:10.000。在以下示例中，假设输入视频的起始时间戳为零。**Sources** 应位于预设的开始处。
- 
+
 ###<a id="json"></a>JSON 预设
-    
+
     {
       "Version": 1.0,
       "Sources": [
@@ -379,7 +379,7 @@ ms.author: juliako
     } 
 
 ###XML 预设
-    
+
 若要修剪视频，可以使用[此处](./media-services-mes-presets-overview.md)所述的任何 MES 预设并修改 **Sources** 元素（如下所示）。
 
     <?xml version="1.0" encoding="utf-16"?>
@@ -508,7 +508,7 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
     static public IAsset UploadMediaFilesFromFolder(string folderPath)
     {
         IAsset asset = _context.Assets.CreateFromFolder(folderPath, AssetCreationOptions.None);
-    
+
         foreach (var af in asset.AssetFiles)
         {
             // The following code assumes 
@@ -517,10 +517,10 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
                 af.IsPrimary = true;
             else
                 af.IsPrimary = false;
-    
+
             af.Update();
         }
-    
+
         return asset;
     }
 
@@ -564,7 +564,7 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 >源视频文件和覆盖层图像文件必须位于相同的资产中，而且视频文件需要设置为此资产中的主文件。
 
 ###JSON 预设
-    
+
     {
       "Version": 1.0,
       "Sources": [
@@ -641,7 +641,7 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
     }
 
 ###XML 预设
-    
+
     <?xml version="1.0" encoding="utf-16"?>
     <Preset xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.0" xmlns="http://www.windowsazure.com/media/encoding/Preset/2014/03">
       <Sources>
@@ -736,7 +736,7 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 你可以关闭自动取消隔行扫描，但不建议这样做。
 
 ###JSON 预设
-    
+
     "Sources": [
     {
      "Filters": {
@@ -748,7 +748,7 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
     ]
 
 ###XML 预设
-    
+
     <Sources>
     <Source>
       <Filters>
@@ -831,22 +831,22 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 
     IAsset asset1 = _context.Assets.Where(asset => asset.Id == "nb:cid:UUID:606db602-efd7-4436-97b4-c0b867ba195b").FirstOrDefault();
     IAsset asset2 = _context.Assets.Where(asset => asset.Id == "nb:cid:UUID:a7e2b90f-0565-4a94-87fe-0a9fa07b9c7e").FirstOrDefault();
-    
+
     // Declare a new job.
     IJob job = _context.Jobs.Create("Media Encoder Standard Job for Concatenating Videos");
     // Get a media processor reference, and pass to it the name of the 
     // processor to use for the specific task.
     IMediaProcessor processor = GetLatestMediaProcessorByName("Media Encoder Standard");
-    
+
     // Load the XML (or JSON) from the local file.
     string configuration = File.ReadAllText(@"c:\supportFiles\preset.json");
-    
+
     // Create a task
     ITask task = job.Tasks.AddNew("Media Encoder Standard encoding task",
         processor,
         configuration,
         TaskOptions.None);
-    
+
     // Specify the input videos to be concatenated (in order).
     task.InputAssets.Add(asset1);
     task.InputAssets.Add(asset2);
@@ -855,7 +855,7 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
     // means the output asset is not encrypted. 
     task.OutputAssets.AddNew("Output asset",
         AssetCreationOptions.None);
-    
+
     job.StateChanged += new EventHandler<JobStateChangedEventArgs>(JobStateChanged);
     job.Submit();
     job.GetExecutionProgressTask(CancellationToken.None).Wait();
@@ -967,7 +967,7 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
     }
 
 #### XML 预设
-    
+
     <KeyFrameInterval>00:00:02</KeyFrameInterval>
     <StretchMode>AutoSize</StretchMode>
     <Condition>InsertBlackIfNoVideo</Condition>

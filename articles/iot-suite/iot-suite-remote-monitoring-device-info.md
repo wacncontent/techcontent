@@ -263,11 +263,11 @@ Azure IoT 套件远程监视预配置解决方案演示了管理设备元数据�
 [img-device-edit]: ./media/iot-suite-remote-monitoring-device-info/image2.png
 [img-device-remove]: ./media/iot-suite-remote-monitoring-device-info/image3.png
 
-[lnk-iot-hub]: ../iot-hub/index.md/
+[lnk-iot-hub]: ../iot-hub/index.md
 [lnk-identity-registry]: ../iot-hub/iot-hub-devguide-identity-registry.md
-[lnk-docdb]: ../documentdb/index.md/
+[lnk-docdb]: ../documentdb/index.md
 [lnk-ref-arch]: http://download.microsoft.com/download/A/4/D/A4DAD253-BC21-41D3-B9D9-87D2AE6F0719/Microsoft_Azure_IoT_Reference_Architecture.pdf
-[lnk-stream-analytics]: ../stream-analytics/index.md/
+[lnk-stream-analytics]: ../stream-analytics/index.md
 [lnk-dm-preview]: ../iot-hub/iot-hub-device-management-overview.md
 [lnk-dynamic-telemetry]: ./iot-suite-dynamic-telemetry.md
 [lnk-faq]: ./iot-suite-faq.md

@@ -15,12 +15,12 @@
            compile 'com.google.android.gms:play-services-base:6.5.87'
 
 5. 在 *defaultConfig* 下面，将 *minSdkVersion* 更改为 9。
- 
+
 6. 在工具栏中，单击“将项目与 Gradle 文件同步”图标。
 
 7. 打开 **AndroidManifest.xml** 并将此标记添加到 *application* 标记中。
 
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
- 
+
 <!---HONumber=71-->

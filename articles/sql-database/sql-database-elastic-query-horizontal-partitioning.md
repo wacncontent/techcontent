@@ -50,7 +50,7 @@ ms.author: torsteng
     CREATE DATABASE SCOPED CREDENTIAL <credential_name>  WITH IDENTITY = '<username>',  
     SECRET = '<password>'
     [;]
- 
+
 **注意**：请确保“<username>”中不包括任何“@servername”后缀。
 
 ## 1\.2 创建外部数据源
@@ -77,7 +77,7 @@ ms.author: torsteng
         CREDENTIAL= SMMUser, 
         SHARD_MAP_NAME='ShardMap' 
     );
- 
+
 检索当前外部数据源的列表：
 
     select * from sys.external_data_sources; 
@@ -85,14 +85,14 @@ ms.author: torsteng
 外部数据源引用分片映射。然后，弹性查询使用外部数据源和基础分片映射枚举数据层中参与的数据库。在弹性查询处理过程中，可使用相同的凭据读取分片映射并访问上分片的数据。
 
 ## 1\.3 创建外部表 
- 
+
 语法：
 
     CREATE EXTERNAL TABLE [ database_name . [ schema_name ] . | schema_name. ] table_name  
         ( { <column_definition> } [ ,...n ])     
         { WITH ( <sharded_external_table_options> ) }
     ) [;]  
-    
+
     <sharded_external_table_options> ::= 
       DATA_SOURCE = <External_Data_Source>,       
       [ SCHEMA_NAME = N'nonescaped_schema_name',] 
@@ -113,7 +113,7 @@ ms.author: torsteng
          [ol_quantity] smallint NOT NULL, 
          [ol_dist_info] char(24) NOT NULL 
     ) 
-    
+
     WITH 
     ( 
         DATA_SOURCE = MyExtSrc, 
@@ -168,7 +168,7 @@ DISTRIBUTION 子句指定用于此表的数据分布。查询处理器利用 DIS
     on o_id = ol_o_id and o_w_id = ol_w_id 
     where w_id > 100 and w_id < 200 
     group by w_id, o_c_id 
- 
+
 ## 远程 T-SQL 执行的存储过程：sp\_execute\_remote
 
 弹性查询还引入了一个存储过程，该存储过程提供对分片的直接访问。该存储过程名为 [sp\_execute \_remote](https://msdn.microsoft.com/zh-cn/library/mt703714)，可用于执行远程存储过程或远程数据库上的 T-SQL 代码。它采用了以下参数：

@@ -63,7 +63,7 @@ Azure 移动应用客户端和服务器 SDK 支持对结构化数据（包含对
         using Microsoft.Azure.Mobile.Server.Files.Controllers;
 
 4. 将基类更改为 `StorageController`：
-    
+
         public class TodoItemStorageController : StorageController<TodoItem>
 
 5. 将以下方法添加到类：
@@ -107,17 +107,17 @@ Azure 移动应用客户端和服务器 SDK 支持对结构化数据（包含对
 - StorageToken
 
     + HTTP POST：创建存储令牌
-    
+
         `/tables/TodoItem/{id}/MobileServiceFiles`
-    
+
 - MobileServiceFiles
 
     + HTTP GET：检索与记录关联的文件列表
-    
+
         `/tables/TodoItem/{id}/MobileServiceFiles`
 
     + HTTP DELETE：删除文件资源标识符中指定的文件
-    
+
         `/tables/TodoItem/{id}/MobileServiceFiles/{fileid}`
 
 ###<a name="client-communication"></a>客户端和服务器通信
@@ -384,7 +384,7 @@ Azure 移动客户端 SDK 不实际存储任何文件数据：客户端 SDK 调�
         }
 
 2. 编辑 **App.cs**。将 `MainPage` 的初始化替换为以下代码：
-    
+
         MainPage = new NavigationPage(new TodoList());
 
 3. 在 **App.cs** 中，添加以下属性：

@@ -30,7 +30,7 @@ ms.author: vturecek
 两者的差别在于，云服务项目结合应用程序部署与 VM 部署，因此其中包含 VM 配置设置，而 Service Fabric 应用程序项目只定义将要部署到 Service Fabric 群集中一组现有 VM 的应用程序。Service Fabric 群集本身只可通过 ARM 模板或 Azure 门户部署一次，但可在群集中部署多个 Service Fabric 应用程序。
 
 ![Service Fabric 与云服务项目的比较][3]
- 
+
 ## 辅助角色到无状态服务 
 
 从概念上讲，辅助角色代表无状态的工作负荷，这意味着工作负荷的每个实例都是相同的，随时可将请求路由到任何实例。每个实例不需要记住前一个请求。工作负荷的运行状态由外部状态存储（例如 Azure 表存储或 Azure Document DB）管理。在 Service Fabric 中，此类工作负荷以无状态服务来表示。将辅助角色迁移到 Service Fabric 的最简单方法是将辅助角色代码转换成无状态服务。
@@ -179,7 +179,7 @@ Service Fabric 为侦听客户端请求的服务提供可选的通信设置入�
 在服务中的三个包类型（代码、配置和数据）中，每个类型都会提供可在包更新、添加或删除时通知服务实例的事件。一个服务可以包含每种类型的多个包。例如，一个服务可以有多个配置包，其中每个包可单独设置版本并且可升级。
 
 通过这些事件可以使用服务包中的更改，而无需重新启动服务实例。
- 
+
     this.Context.CodePackageActivationContext.ConfigurationPackageModifiedEvent +=
                         this.CodePackageActivationContext_ConfigurationPackageModifiedEvent;
 
@@ -235,7 +235,7 @@ Service Fabric 中的启动入口点是在 ServiceManifest.xml 中针对每个�
  - [Service Fabric Reliable Services 入门](./service-fabric-reliable-services-quick-start.md)
 
  - [云服务与 Service Fabric 之间差异的概念指南](./service-fabric-cloud-services-migration-differences.md)
- 
+
 <!--Image references-->
 
 [3]: ./media/service-fabric-cloud-services-migration-worker-role-stateless-service/service-fabric-cloud-service-projects.png

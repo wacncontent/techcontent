@@ -128,7 +128,7 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
                 option  httplog
                 log     global
                 default_backend httppool 
-               
+
         backend httppool                    
                balance roundrobin
                 server  10.8.0.4 10.8.0.4:80  weight 5 check inter 2000 rise 2 fall 3
@@ -163,7 +163,7 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
         $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
 
-6. 访问 [http://HAProxy IP/haproxy-admin](#), 输入用户名和密码，即上面定义的 admin/adminpass
+6. 访问 [#](#), 输入用户名和密码，即上面定义的 admin/adminpass
 
     ![](./media/open-source-azure-virtual-machines-linux-install-and-configure-haproxy/configure3.png)
 
@@ -188,8 +188,8 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
         $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
 
-    再次在浏览器里输入 [http://HAProxy 的公网地址:80](#) 并不断的刷新，发现访问的都是固定的一台 web server。
- 
+    再次在浏览器里输入 [#](#) 并不断的刷新，发现访问的都是固定的一台 web server。
+
 2. 通过 roundrobin+cookie 的方式来解决 sesion 会话的问题
 
     修改 /usr/local/haproxy/haproxy.cfg 中 backend httppool 的部分，修改后内容如下
@@ -204,7 +204,7 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
         $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
 
-    再次在浏览器里输入 [http://HAProxy 的公网地址:80](#), 按 F12 ，选择“网络” -- > 点击绿色的开始按钮，然后刷新
+    再次在浏览器里输入 [#](#), 按 F12 ，选择“网络” -- > 点击绿色的开始按钮，然后刷新
 
     ![](./media/open-source-azure-virtual-machines-linux-install-and-configure-haproxy/binding.png)
 
@@ -214,7 +214,7 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
     ![](./media/open-source-azure-virtual-machines-linux-install-and-configure-haproxy/binding3.png)
 
-    不断的刷新浏览器，访问的都是固定的同一台 web server。清除浏览器缓存，cookie 等，重新打开浏览器，输入 [http://HAProxy 的公网地址:80](#), 按 F12 查看 cookie 信息。 发现不管怎么刷新，访问的都是同一台 web server。
+    不断的刷新浏览器，访问的都是固定的同一台 web server。清除浏览器缓存，cookie 等，重新打开浏览器，输入 [#](#), 按 F12 查看 cookie 信息。 发现不管怎么刷新，访问的都是同一台 web server。
 
 3. 通过 uri 的方式来将访问同一个 url 的请求，代理给同一台主机
 
@@ -229,7 +229,7 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 
         $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
 
-    再次在浏览器里输入 [http://HAProxy 的公网地址:80](#), 不断的刷新浏览器，访问的都是固定的同一台 web server。
+    再次在浏览器里输入 [#](#), 不断的刷新浏览器，访问的都是固定的同一台 web server。
 
 ##<a name="configure-haproxy-to-use-ssl"></a> 配置 HAProxy 使用 SSL
 
@@ -270,7 +270,7 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
 3. 修改 /usr/local/haproxy/haproxy.cfg 的内容。修改 frontend 部分即可。修改后内容如下
 
         frontend http-in
-                             
+
                 bind *:80
                 bind *:443 ssl crt /etc/ssl/haproxycert/haproxycert.pem
                 redirect scheme https if !{ ssl_fc }
@@ -288,7 +288,7 @@ HAProxy 可以看作是提供高可用，负载均衡，反向代理等功能的
         $sudo /usr/local/haproxy/sbin/haproxy -f /usr/local/haproxy/haproxy.cfg -st `cat /usr/local/haproxy/haproxy.pid`
 
 4. 在HAProxy VM打开443端口。参考[创建终结点](./virtual-machines/virtual-machines-linux-classic-setup-endpoints.md)
-5. 在浏览器里输入 [https://HAProxy 域名](#), 会出现如下图。
+5. 在浏览器里输入 [#](#), 会出现如下图。
 
     ![](./media/open-source-azure-virtual-machines-linux-install-and-configure-haproxy/ssl2.png)
 

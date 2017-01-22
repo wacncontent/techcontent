@@ -60,9 +60,9 @@ ms.author: jdial
         Location : China North
         Label    : Front end subnet NSG
         Rules    : 
-                   
+
                       Type: Inbound
-                   
+
                    Name                 Priority  Action   Source Address  Source Port   Destination      Destination    Protocol
                                                            Prefix          Range         Address Prefix   Port Range             
                    ----                 --------  ------   --------------- ------------- ---------------- -------------- --------
@@ -71,9 +71,9 @@ ms.author: jdial
                    ALLOW AZURE LOAD     65001     Allow    AZURE_LOADBALAN *             *                *              *       
                    BALANCER INBOUND                        CER                                                                   
                    DENY ALL INBOUND     65500     Deny     *               *             *                *              *       
-                   
+
                       Type: Outbound
-                   
+
                    Name                 Priority  Action   Source Address  Source Port   Destination      Destination    Protocol
                                                            Prefix          Range         Address Prefix   Port Range             
                    ----                 --------  ------   --------------- ------------- ---------------- -------------- --------
@@ -91,14 +91,14 @@ ms.author: jdial
             -DestinationAddressPrefix '*' -DestinationPortRange '80' 
 
     预期输出：
-        
+
         Name     : NSG-FrontEnd
         Location : China North
         Label    : Front end subnet NSG
         Rules    : 
-                   
+
                       Type: Inbound
-                   
+
                    Name                 Priority  Action   Source Address  Source Port   Destination      Destination    Protocol
                                                            Prefix          Range         Address Prefix   Port Range             
                    ----                 --------  ------   --------------- ------------- ---------------- -------------- --------
@@ -108,9 +108,9 @@ ms.author: jdial
                    ALLOW AZURE LOAD     65001     Allow    AZURE_LOADBALAN *             *                *              *       
                    BALANCER INBOUND                        CER                                                                   
                    DENY ALL INBOUND     65500     Deny     *               *             *                *              *       
-                   
+
                       Type: Outbound
-                   
+
                    Name                 Priority  Action   Source Address  Source Port   Destination      Destination    Protocol
                                                            Prefix          Range         Address Prefix   Port Range             
                    ----                 --------  ------   --------------- ------------- ---------------- -------------- --------
@@ -145,9 +145,9 @@ ms.author: jdial
         Location : China North
         Label    : Back end subnet NSG
         Rules    : 
-                   
+
                       Type: Inbound
-                   
+
                    Name                 Priority  Action   Source Address  Source Port   Destination      Destination    Protocol
                                                            Prefix          Range         Address Prefix   Port Range             
                    ----                 --------  ------   --------------- ------------- ---------------- -------------- --------
@@ -156,9 +156,9 @@ ms.author: jdial
                    ALLOW AZURE LOAD     65001     Allow    AZURE_LOADBALAN *             *                *              *       
                    BALANCER INBOUND                        CER                                                                   
                    DENY ALL INBOUND     65500     Deny     *               *             *                *              *       
-                   
+
                       Type: Outbound
-                   
+
                    Name                 Priority  Action   Source Address  Source Port   Destination      Destination    Protocol
                                                            Prefix          Range         Address Prefix   Port Range             
                    ----                 --------  ------   --------------- ------------- ---------------- -------------- --------
@@ -181,9 +181,9 @@ ms.author: jdial
         Location : China North
         Label    : Back end subnet NSG
         Rules    : 
-                   
+
                       Type: Inbound
-                   
+
                    Name                 Priority  Action   Source Address  Source Port   Destination      Destination    Protocol
                                                            Prefix          Range         Address Prefix   Port Range             
                    ----                 --------  ------   --------------- ------------- ---------------- -------------- --------
@@ -192,9 +192,9 @@ ms.author: jdial
                    ALLOW AZURE LOAD     65001     Allow    AZURE_LOADBALAN *             *                *              *       
                    BALANCER INBOUND                        CER                                                                   
                    DENY ALL INBOUND     65500     Deny     *               *             *                *              *       
-                   
+
                       Type: Outbound
-                   
+
                    Name                 Priority  Action   Source Address  Source Port   Destination      Destination    Protocol
                                                            Prefix          Range         Address Prefix   Port Range             
                    ----                 --------  ------   --------------- ------------- ---------------- -------------- --------

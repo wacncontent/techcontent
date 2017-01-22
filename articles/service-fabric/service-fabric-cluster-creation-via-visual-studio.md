@@ -61,7 +61,7 @@ Visual Studio Service Fabric Resource Manager 模板将创建一个受证书保�
 1. 一个模板变量，用于定义端口的 TCP 端口值：
 
         "loadBalancedAppPort1": "80"
-    
+
 2. 一个*探测*，用于定义 Azure 负载均衡器在故障转移到另一个节点之前，尝试使用特定 Service Fabric 节点的频率和时间长短。探测是负载均衡器资源的一部分。下面是第一个默认应用程序端口的探测定义：
 
         {

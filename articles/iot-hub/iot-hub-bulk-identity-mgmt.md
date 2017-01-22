@@ -60,16 +60,16 @@ ms.author: dobett
 
 ## 导出设备
 
-使用 **ExportDevicesAsync** 方法将整个 IoT 中心设备注册表导出到使用[共享访问签名](https://msdn.microsoft.com/zh-cn/library/ee395415.aspx)的 [Azure 存储](../storage/index.md/) Blob 容器。
+使用 **ExportDevicesAsync** 方法将整个 IoT 中心设备注册表导出到使用[共享访问签名](https://msdn.microsoft.com/zh-cn/library/ee395415.aspx)的 [Azure 存储](../storage/index.md) Blob 容器。
 
 此方法可让你在所控制的 Blob 容器中创建可靠的设备信息备份。
 
 **ExportDevicesAsync** 方法需要两个参数：
 
 *  包含 Blob 容器 URI 的*字符串*。此 URI 必须包含可授予容器写入权限的 SAS 令牌。作业在此容器中创建用于存储序列化导出设备数据的块 Blob。SAS 令牌必须包含这些权限：
-    
+
         SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Delete
-    
+
 *  指示你是否要在导出数据中排除身份验证密钥的*布尔值*。如果为 **false**，则身份验证密钥将包含在导出输出中；否则像为 **null** 时一样导出密钥。
 
 下面的 C# 代码段演示了如何启动在导出数据中包含设备身份验证密钥的导出作业，然后对完成情况进行轮询：
@@ -128,14 +128,14 @@ ms.author: dobett
 
 **ImportDevicesAsync** 方法有两个参数：
 
-*  一个*字符串*，其中包含作为作业的*输入*的 [Azure 存储](../storage/index.md/) Blob 容器的 URI。此 URI 必须包含可授予容器读取权限的 SAS 令牌。此容器必须包含名为 **devices.txt** 的 Blob，而此 Blob 中包含要导入到设备标识注册表的序列化设备数据。导入数据必须包含使用 **ExportImportDevice** 作业所创建的相同 JSON 格式的设备信息。SAS 令牌必须包含这些权限：
+*  一个*字符串*，其中包含作为作业的*输入*的 [Azure 存储](../storage/index.md) Blob 容器的 URI。此 URI 必须包含可授予容器读取权限的 SAS 令牌。此容器必须包含名为 **devices.txt** 的 Blob，而此 Blob 中包含要导入到设备标识注册表的序列化设备数据。导入数据必须包含使用 **ExportImportDevice** 作业所创建的相同 JSON 格式的设备信息。SAS 令牌必须包含这些权限：
 
         SharedAccessBlobPermissions.Read
-    
-*  一个*字符串*，其中包含作为作业的*输出*的 [Azure 存储](../storage/index.md/) Blob 容器的 URI。作业在此容器中创建块 Blob，用于存储已完成的导入**作业**中的任何错误信息。SAS 令牌必须包含这些权限：
-    
+
+*  一个*字符串*，其中包含作为作业的*输出*的 [Azure 存储](../storage/index.md) Blob 容器的 URI。作业在此容器中创建块 Blob，用于存储已完成的导入**作业**中的任何错误信息。SAS 令牌必须包含这些权限：
+
         SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Delete
-    
+
 > [!NOTE]  这两个参数可以指向同一 Blob 容器。参数不同只会让你更容易掌控数据，因为输出容器需要其他权限。
 
 以下 C# 代码段演示如何启动导入作业：

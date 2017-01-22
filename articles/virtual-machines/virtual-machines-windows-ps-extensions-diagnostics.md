@@ -34,7 +34,7 @@ ms.author: saurabh
     $vm_resourcegroup = "myvmresourcegroup"
     $vm_name = "myvm"
     $diagnosticsconfig_path = "DiagnosticsPubConfig.xml"
-    
+
     Set-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name -DiagnosticsConfigurationPath $diagnosticsconfig_path 
 
 *$diagnosticsconfig\_path* 是一个路径，指向内含 XML 格式诊断配置的文件，如以下[示例](#sample-diagnostics-configuration)所示。
@@ -52,14 +52,14 @@ ms.author: saurabh
     Get-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name
 
 该 cmdlet 返回的 *PublicSettings* 包含 base64 编码格式的 XML 配置。若要读取该 XML，需对其解码。
-    
+
     $publicsettings = (Get-AzureRmVMDiagnosticsExtension -ResourceGroupName $vm_resourcegroup -VMName $vm_name).PublicSettings
     $encodedconfig = (ConvertFrom-Json -InputObject $publicsettings).xmlCfg
     $xmlconfig = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($encodedconfig))
     Write-Host $xmlconfig
- 
+
 可以使用 [Remove-AzureRMVmDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/mt603782.aspx) cmdlet 从 VM 中删除该诊断扩展。
-  
+
 ## 使用经典部署模型在虚拟机上启用 Azure 诊断扩展
 
 可以使用 [Set-AzureVMDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/mt589189.aspx) cmdlet 在通过经典部署模型创建的虚拟机上启用 Azure 诊断扩展。下面的示例演示了在启用 Azure 诊断扩展的情况下，如何通过经典部署模型创建新的虚拟机。
@@ -84,14 +84,14 @@ ms.author: saurabh
 - **Metrics** 元素的 *resourceID* 属性需要使用虚拟机的资源 ID 进行更新。 
     - 资源 ID 可以使用以下模式构造：“/subscriptions/{*VM 订阅的订阅 ID*}/resourceGroups/{*VM 的资源组名称*}/providers/Microsoft.Compute/virtualMachines/{*VM 名称*}”。 
     - 例如，如果在其中运行 VM 的订阅的订阅 ID 为 **11111111-1111-1111-1111-111111111111**，资源组的资源组名称为 **MyResourceGroup**，VM 名称为 **MyWindowsVM**，则 *resourceID* 的值为：
-     
+
         ```
         <Metrics resourceId="/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyWindowsVM" >
         ```
     - 有关如何根据性能计数器和度量值配置生成度量值的详细信息，请参阅[存储中的 WAD 度量值表](./virtual-machines-windows-extensions-diagnostics-template.md#wadmetrics-tables-in-storage)
 
 - 需要使用诊断存储帐户的名称对 **StorageAccount** 元素进行更新。
- 
+
     ```
     <?xml version="1.0" encoding="utf-8"?>
     <PublicConfig xmlns="http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration">

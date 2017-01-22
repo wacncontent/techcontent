@@ -27,12 +27,12 @@ Latest Freshness check:  2015-09-04 , GeneMi.
             <startup> 
                 <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
             </startup>
-        
+
             <connectionStrings>
                 <clear />
                 <add name="ConnectionString4NoUserIDNoPassword"
                 providerName="System.Data.ProviderName"
-        
+
                 connectionString=
                 "Server=tcp:{your_serverName_here}.database.chinacloudapi.cn,1433;
                 Database={your_databaseName_here};

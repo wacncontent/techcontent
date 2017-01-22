@@ -29,7 +29,7 @@ Service Fabric 目前在 Linux 上以受限预览版提供，可让你在 Linux 
 
 >[!NOTE] Linux 尚不支持 Reliable 集合。
 
-Linux 上的 Service Fabric 在概念上等同于 Windows 上的 Service Fabric（OS 细节和编程语言支持除外）。因此，我们的大部分[现有文档](./index.md/)都能帮助你熟悉该技术。
+Linux 上的 Service Fabric 在概念上等同于 Windows 上的 Service Fabric（OS 细节和编程语言支持除外）。因此，我们的大部分[现有文档](./index.md)都能帮助你熟悉该技术。
 
 ## 后续步骤
 

@@ -60,9 +60,9 @@ Azure 媒体加密器|已过时|
     Authorization: Bearer <token>
     x-ms-version: 2.11
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
 响应：
-        
+
     {  
        "odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#MediaProcessors",
        "value":[  

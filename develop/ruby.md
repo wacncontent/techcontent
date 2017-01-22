@@ -27,13 +27,13 @@ wacn.date: 11/17/2016
 - [在 Linux 虚拟机上托管 Web 应用](../articles/virtual-machines/virtual-machines-linux-classic-ruby-rails-web-app.md)
 - [使用命令行部署](../articles/xplat-cli-install.md)
 - [全部显示](/develop/ruby/compute)
-  
+
 ###数据服务
 - [在 Blob 中存储数据](../articles/storage/storage-ruby-how-to-use-blob-storage.md)
 - [在表中存储数据](../articles/storage/storage-ruby-how-to-use-table-storage.md)
 <!--- [管理和分析数据](/documentation/articles/fundamentals-data-management-business-analytics/)-->
 - [全部显示](/develop/ruby/data)
-  
+
 ###应用服务
 - [应用程序之间的消息](../articles/service-bus-messaging/service-bus-ruby-how-to-use-queues.md)
 - [使用 Service Bus 开发应用程序](../articles/service-bus-messaging/service-bus-ruby-how-to-use-topics-subscriptions.md)

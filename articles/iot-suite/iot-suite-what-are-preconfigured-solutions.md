@@ -121,7 +121,7 @@ IoT 中心通过服务端遥测数据读取终结点使收到的遥测数据可�
 [img-remote-monitoring-arch]: ./media/iot-suite-what-are-preconfigured-solutions/remote-monitoring-arch1.png
 [img-dashboard]: ./media/iot-suite-what-are-preconfigured-solutions/dashboard.png
 [lnk-what-is-azure-iot]: ./iot-suite-what-is-azure-iot.md
-[lnk-asa]: ../stream-analytics/index.md/
+[lnk-asa]: ../stream-analytics/index.md
 [lnk-event-processor]: ../event-hubs/event-hubs-programming-guide.md#event-processor-host
 [lnk-web-job]: ../app-service-web/web-sites-create-web-jobs.md
 [lnk-identity-registry]: ../iot-hub/iot-hub-devguide-identity-registry.md

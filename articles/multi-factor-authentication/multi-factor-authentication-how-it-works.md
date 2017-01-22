@@ -37,45 +37,45 @@ Azure 多重身份验证可帮助保护对数据和应用程序的访问，同�
 ##可用于多重身份验证的方法
 当用户登录时，系统会将额外的身份验证发送给该用户。以下是可用于这种二次身份验证的方法列表。
 <table class="table table-bordered table-striped table-condensed">
-   <tr>
+    <tr>
       <th>验证方法</th>
       <th>说明</th>
-    
-   </tr>
-   <tr>
+
+    </tr>
+    <tr>
       <td>电话呼叫</td>
       <td>向用户的智能手机拨打电话，要求他们按 # 号来验证其登录。这样就会完成验证过程。此选项可配置，并可以更改为你指定的代码</td>
-      
-   </tr>
-   <tr>
+
+    </tr>
+    <tr>
       <td>短信</td>
       <td>将包含 6 位数代码的短信发送到用户的智能手机。输入此代码即可完成验证过程</td>
-   </tr>
-   <tr>
+    </tr>
+    <tr>
       <td>移动应用通知</td>
       <td>将验证请求发送到用户的智能手机，要求他们通过在移动应用中选择“验证”来完成验证。如果你将应用通知选作主要验证方法，则会发生这种情况。如果用户在未登录时收到通知，他们可以选择将通知举报为欺诈</td>
-   </tr>
-   <tr>
+    </tr>
+    <tr>
       <td>移动应用的验证码</td>
       <td>将验证码发送到用户智能手机中运行的移动应用。如果将验证码选作主要验证方法，则会发生这种情况</td>
-   </tr>
+    </tr>
 </table>
 
 ##可用的多重身份验证版本
 Azure 多重身份验证有两个不同的版本。下表较详细地描述了每个版本。
 
 <table class="table table-bordered table-striped table-condensed">
-   <tr>
+    <tr>
       <th>版本 </th>
       <th>说明</th>
-    
-   </tr>
-   <tr>
+
+    </tr>
+    <tr>
       <td>适用于 Office 365 的多重身份验证</td>
       <td>此版本专门与 Office 365 应用程序配合使用，可以从 Office 365 门户进行管理。因此，管理员现在可以借助多重身份验证来保护其 Office 365 资源。Office 365 订阅随附了此版本</td>
-      
-   </tr>
-   <tr>
+
+    </tr>
+    <tr>
       <td>面向 Azure 管理员的多重身份验证</td>
       <td>适用于 Office 365 的多重身份验证功能的相同子集将免费提供给所有 Azure 管理员使用。Azure 订阅的每个管理员帐户现在可以通过启用这项核心多重身份验证功能来获得更多的保护。因此，如果某个管理员想要访问 Azure 门户以创建 VM 和网站以及管理存储、移动服务或任何其他 Azure 服务，则可在其管理员帐户中添加多因素身份验证</td>
          </tr>
@@ -84,13 +84,13 @@ Azure 多重身份验证有两个不同的版本。下表较详细地描述了�
 下表提供了 Azure 多重身份验证各版本中可用的功能列表。
 
 <table class="table table-bordered table-striped table-condensed">
-   <tr>
+    <tr>
       <th>功能</th>
       <th>适用于 Office 365 的多重身份验证（随附在 Office 365 SKU 中）</th>
       <th>面向 Azure 管理员的多重身份验证（随附在 Azure 中）</th>   
       <th> Azure 多重身份验证（随附在 Azure AD Premium 和企业移动套件中）</th>
-   </tr>
-   <tr>
+    </tr>
+    <tr>
       <td>管理员可以使用 MFA 保护帐户</td>
       <td>*</td>
       <td>*（仅适用于 Azure 管理员帐户）</td>
@@ -101,7 +101,7 @@ Azure 多重身份验证有两个不同的版本。下表较详细地描述了�
       <td>*</td>
       <td>*</td>
       <td>*</td>
-   </tr>
+    </tr>
   <tr>
       <td>将电话呼叫用作第二个因素</td>
       <td>*</td>

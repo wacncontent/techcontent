@@ -386,7 +386,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
     {
         // Attempt to retrieve the item from the Redis cache
         string itemValue = await cache.StringGetAsync(itemKey);
-    
+
         // If the value returned is null, the item was not found in the cache
         // So retrieve the item from the data source and add it to the cache
         if (itemValue == null)
@@ -394,7 +394,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
             itemValue = await GetItemFromDataSourceAsync(itemKey);
             await cache.StringSetAsync(itemKey, itemValue);
         }
-    
+
         // Return the item
         return itemValue;
     }
@@ -409,21 +409,21 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
         {
             return Deserialize<T>(await cache.StringGetAsync(key));
         }
-    
+
         public static async Task<object> GetAsync(this IDatabase cache, string key)
         {
             return Deserialize<object>(await cache.StringGetAsync(key));
         }
-    
+
         public static async Task SetAsync(this IDatabase cache, string key, object value)
         {
             await cache.StringSetAsync(key, Serialize(value));
         }
-    
+
         static byte[] Serialize(object o)
         {
             byte[] objectDataAsStream = null;
-    
+
             if (o != null)
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -433,14 +433,14 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
                     objectDataAsStream = memoryStream.ToArray();
                 }
             }
-    
+
             return objectDataAsStream;
         }
-    
+
         static T Deserialize<T>(byte[] stream)
         {
             T result = default(T);
-    
+
             if (stream != null)
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -449,7 +449,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
                     result = (T)binaryFormatter.Deserialize(memoryStream);
                 }
             }
-    
+
             return result;
         }
     }
@@ -461,7 +461,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
     private class BlogPost
     {
         private HashSet<string> tags = new HashSet<string>();
-    
+
         public BlogPost(int id, string title, int score, IEnumerable<string> tags)
         {
             this.Id = id;
@@ -469,7 +469,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
             this.Score = score;
             this.tags = new HashSet<string>(tags);
         }
-    
+
         public int Id { get; set; }
         public string Title { get; set; }
         public int Score { get; set; }
@@ -484,7 +484,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
             blogPost = await GetBlogPostFromDataSourceAsync(blogPostKey);
             await cache.SetAsync(blogPostKey, blogPost);
         }
-    
+
         return blogPost;
     }
 
@@ -501,7 +501,7 @@ Redis 支持以多种编程语言编写的客户端应用程序。如果要使�
     var customer1 = cache.Wait(task1);
     var customer2 = cache.Wait(task2);
 
-Microsoft 网站上的 [Azure Redis Cache documentation](./redis-cache/index.md/)（Azure Redis 缓存文档）页提供了有关如何编写可以使用 Azure Redis 缓存的客户端应用程序的详细信息。StackExchange.Redis 网站上的 [Basic usage page](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Basics.md)（基本用法）页提供了更多信息。
+Microsoft 网站上的 [Azure Redis Cache documentation](./redis-cache/index.md)（Azure Redis 缓存文档）页提供了有关如何编写可以使用 Azure Redis 缓存的客户端应用程序的详细信息。StackExchange.Redis 网站上的 [Basic usage page](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Basics.md)（基本用法）页提供了更多信息。
 
 同一网站上的 [Pipelines and multiplexers](https://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/PipelinesMultiplexers.md)（管道与多路复用器）页提供了有关使用 Redis 和 StackExchange 库执行异步操作和管道传输的详细信息。本文的下一部分“使用 Redis 缓存”提供了一些更高级技巧的示例，你可以对 Redis 缓存中保存的数据运用这些技巧。
 
@@ -531,7 +531,7 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
         long oldValue = await cache.StringIncrementAsync("data:counter");
         // Increment by 1 (the default)
         // oldValue should be 100
-        
+
         long newValue = await cache.StringDecrementAsync("data:counter", 50);
         // Decrement by 50
         // newValue should be 50
@@ -556,7 +556,7 @@ Redis 支持对字符串值执行一系列原子性“获取和设置”操作�
                 new KeyValuePair<RedisKey, RedisValue>("data:key99", "value2"),
                 new KeyValuePair<RedisKey, RedisValue>("data:key322", "value3")
             };
-    
+
         // Store the list of key-value pairs in the cache
         cache.StringSet(keysAndValues.ToArray());
         ...
@@ -671,7 +671,7 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
         new string[] { "azure","database","big data","git","csharp" },
         new string[] { "azure" }
     };
-    
+
     List<BlogPost> posts = new List<BlogPost>();
     int blogKey = 0;
     int blogPostId = 0;
@@ -702,7 +702,7 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
         // Add tags to the blog post in Redis
         await cache.SetAddAsync(
             redisKey, post.Tags.Select(s => (RedisValue)s).ToArray());
-    
+
         // Now do the inverse so we can figure how which blog posts have a given tag
         foreach (var tag in post.Tags)
         {
@@ -857,7 +857,7 @@ Redis 提供 SUBSCRIBE 命令来让客户端应用程序订阅通道。此命令
 ## 详细信息
 
 - Microsoft 网站上的 [MemoryCache class](http://msdn.microsoft.com/zh-cn/library/system.runtime.caching.memorycache.aspx)（MemoryCache 类）页
-- Microsoft 网站上的 [Azure Redis Cache documentation](./redis-cache/index.md/)（Azure Redis 缓存文档）页
+- Microsoft 网站上的 [Azure Redis Cache documentation](./redis-cache/index.md)（Azure Redis 缓存文档）页
 - Microsoft 网站上的 [Azure Redis 缓存常见问题](./redis-cache/cache-faq.md)页
 - Microsoft 网站上的 [Configuration model](http://msdn.microsoft.com/zh-cn/library/windowsazure/hh914149.aspx)（配置模型）页
 - Microsoft 网站上的 [Task-based Asynchronous Pattern](http://msdn.microsoft.com/zh-cn/library/hh873175.aspx)（基于任务的异步模式）页

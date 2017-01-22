@@ -66,7 +66,7 @@ ms.author: johnkem
         azure insights logprofile add --name my_log_profile --storageId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Storage/storageAccounts/my_storage --serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinaeast/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey --locations chinaeast,chinanorth --retentionInDays 90 –categories Write,Delete,Action
 
 服务总线规则 ID 是以下格式的字符串：`{service bus resource ID}/authorizationrules/{key name}`。
- 
+
 ## 如何使用事件中心的日志数据？
 [此处提供活动日志的架构](./monitoring-overview-activity-logs.md)。每个事件都采用 JSON blob（称为“记录”）数组的形式。
 

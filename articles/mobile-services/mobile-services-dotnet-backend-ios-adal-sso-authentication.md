@@ -106,7 +106,7 @@ ms.author: mahender
 2. 您将收到登录 Azure Active Directory 的提示。  
 3. 该应用程序将进行身份验证并返回 Todo 项目。
 
-   ![](./media/mobile-services-dotnet-backend-ios-adal-sso-authentication/mobile-services-app-run.png)
+    ![](./media/mobile-services-dotnet-backend-ios-adal-sso-authentication/mobile-services-app-run.png)
 
 <!-- URLs. -->
 [移动服务入门]: ./mobile-services-dotnet-backend-ios-get-started.md

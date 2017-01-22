@@ -7,7 +7,7 @@
 3. 如有必要，请运行 **New-AzureRMResourceGroup** cmdlet 来创建新资源组。以下命令在*中国北部* Azure 区域创建一个名为 *TestRG* 的资源组。有关资源组的详细信息，请访问 [Azure 资源管理器概述](../articles/azure-resource-manager/resource-group-overview.md)。
 
         New-AzureRMResourceGroup -Name TestRG -Location centralus
-        
+
     下面是上述命令的预期输出：
 
         ResourceGroupName : TestRG
@@ -24,9 +24,9 @@
 
         New-AzureRMResourceGroupDeployment -Name TestVNetDeployment -ResourceGroupName TestRG `
             -TemplateFile C:\ARM\azuredeploy.json -TemplateParameterFile C:\ARM\azuredeploy-parameters.json
-            
+
     下面是上述命令的预期输出：
-        
+
         DeploymentName    : TestVNetDeployment
         ResourceGroupName : TestRG
         ProvisioningState : Succeeded
@@ -43,15 +43,15 @@
                             subnet1Name      String                     FrontEnd
                             subnet2Prefix    String                     192.168.2.0/24
                             subnet2Name      String                     BackEnd
-        
+
         Outputs           :
 
 5. 运行 **Get-AzureRMVirtualNetwork** cmdlet 以查看新 VNet 的属性，如下所示。
 
         Get-AzureRMVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
-        
+
     下面是上述命令的预期输出：
-        
+
         Name              : TestVNet
         ResourceGroupName : TestRG
         Location          : centralus

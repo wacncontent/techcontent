@@ -45,7 +45,7 @@ ms.author: vturecek
  - 证书必须包含私钥。
  - 必须为密钥交换创建证书，并且该证书可导出到个人信息交换 (.pfx) 文件。
  - 证书密钥用途必须包括数据加密 (10)，不应包括服务器身份验证或客户端身份验证。
- 
+
  例如，使用 PowerShell 创建自签名证书时，`KeyUsage` 标志必须设置为 `DataEncipherment`：
 
     New-SelfSignedCertificate -Type DocumentEncryptionCert -KeyUsage DataEncipherment -Subject mydataenciphermentcert -Provider 'Microsoft Enhanced Cryptographic Provider v1.0'

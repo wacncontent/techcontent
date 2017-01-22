@@ -394,8 +394,8 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 如需负载均衡选项的其他常规信息，请参阅：
 
-* [Azure Load Balancer](../load-balancer/index.md/)
-* [Azure 流量管理器](../traffic-manager/index.md/)
+* [Azure Load Balancer](../load-balancer/index.md)
+* [Azure 流量管理器](../traffic-manager/index.md)
 
 [scenario]: ./media/application-gateway-create-gateway/scenario.png
 

@@ -29,13 +29,13 @@ ms.author: subramar
 ## 调试 Service Fabric Java 应用程序
 
 对于 Java 应用程序，可以使用[多个日志记录框架](http://en.wikipedia.org/wiki/Java_logging_framework)。由于 `java.util.logging` 是 JRE 的默认选项，因此也适用于 [github 中的代码示例](http://github.com/Azure-Samples/service-fabric-java-getting-started)。以下内容说明如何配置 `java.util.logging` 框架。
- 
+
 使用 java.util.logging 可将应用程序日志重定向到内存、输出流、控制台文件或套接字。对于其中的每个选项，框架中已提供默认处理程序。可以创建 `app.properties` 文件来配置应用程序的文件处理程序，将所有日志重定向到本地文件。
 
 以下代码片段包含一个示例配置：
 
     handlers = java.util.logging.FileHandler
- 
+
     java.util.logging.FileHandler.level = ALL
     java.util.logging.FileHandler.formatter = java.util.logging.SimpleFormatter
     java.util.logging.FileHandler.limit = 1024000
@@ -47,7 +47,7 @@ ms.author: subramar
     java -Djava.library.path=$LD_LIBRARY_PATH -Djava.util.logging.config.file=<path to app.properties> -jar <service name>.jar
 
 此设置会导致在 `/tmp/servicefabric/logs/` 中以轮替方式收集日志。使用 **%u** 和 **%g** 可以创建更多文件，文件名为 mysfapp0.log、mysfapp1.log，依此类推。默认情况下，如果未显式配置处理程序，将会注册控制台处理程序。可以在 /var/log/syslog 下查看 syslog 中的日志。
- 
+
 有关详细信息，请参阅 [github 中的代码示例](http://github.com/Azure-Samples/service-fabric-java-getting-started)。
 
 ## 调试 Service Fabric C# 应用程序
@@ -73,7 +73,7 @@ ms.author: subramar
                     this.Message(finalMessage);
                 }
             }
-        
+
             // TBD: Need to add method for sample event.
 
     }

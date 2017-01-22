@@ -48,7 +48,7 @@ ms.author: jdial
         -Label "Route table for front end subnet"
 
     输出：
-   
+
         Name         Location   Label                          
         ----         --------   -----                          
         UDR-FrontEnd China North    Route table for front end subnet
@@ -60,7 +60,7 @@ ms.author: jdial
         -NextHopIpAddress 192.168.0.4
 
     输出：
-   
+
         Name     : UDR-FrontEnd
         Location : China North
         Label    : Route table for frontend subnet
@@ -106,7 +106,7 @@ ms.author: jdial
         | Get-AzureIPForwarding
 
     输出：
-   
+
         Disabled
 2. 运行以下命令，为 *FW1* VM 启用 IP 转发：
 

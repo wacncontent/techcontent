@@ -55,7 +55,7 @@ ms.author: dobett
         using Microsoft.Azure.Management.ResourceManager.Models;
         using Microsoft.IdentityModel.Clients.ActiveDirectory;
         using Microsoft.Rest;
-    
+
 7. 在 Program.cs 中，将占位符值替换为以下静态变量。在本教程前面的介绍中，你已记下 **ApplicationId**、**SubscriptionId**、**TenantId** 和 **Password**。**Your storage account name** 是要在其中存储模板文件的 Azure 存储帐户的名称。**Resource group name** 是创建 IoT 中心时要使用的资源组名称，可以是现有的资源组或新资源组。**Deployment name** 是部署的名称，例如 **Deployment\_01**。
 
         static string applicationId = "{Your ApplicationId}";
@@ -65,7 +65,7 @@ ms.author: dobett
         static string storageAddress = "https://{Your storage account name}.blob.core.chinacloudapi.cn";
         static string rgName = "{Resource group name}";
         static string deploymentName = "{Deployment name}";
-    
+
 [!INCLUDE [iot-hub-get-access-token](../../includes/iot-hub-get-access-token.md)]
 
 ## 提交模板以创建 IoT 中心
@@ -107,7 +107,7 @@ ms.author: dobett
             }
           }
         }
-    
+
 3. 在解决方案资源管理器中右键单击你的项目，单击“添加”，然后单击“新建项”。将名为 **parameters.json** 的新 JSON 文件添加到项目。
 
 4. 将 **parameters.json** 的内容替换为以下参数信息，以便设置新 IoT 中心的名称，例如 **{你的姓名首字母缩写}mynewiothub**（请注意，此名称必须全局唯一，因此应当包含你的姓名或姓名的首字母缩写）：
@@ -119,21 +119,21 @@ ms.author: dobett
             "hubName": { "value": "mynewiothub" }
           }
         }
-    
+
 5. 在“服务器资源管理器”中，连接到你的 Azure 订阅，并在存储帐户中创建名为 **templates** 的新容器。在“属性”面板中，将 **templates** 容器的“公共读取访问权限”权限设置为“Blob”。
 
 6. 在“服务器资源管理器”中，右键单击“templates”容器，然后单击“查看 Blob 容器”。单击“上载 Blob”按钮，选择“parameters.json”和“templates.json”这两个文件，然后单击“打开”，将 JSON 文件上载到 **templates** 容器。包含 JSON 数据的 Blob 的 URL 如下：
 
         https://{Your storage account name}.blob.core.chinacloudapi.cn/templates/parameters.json
         https://{Your storage account name}.chinacloudapi.cn/templates/template.json
-    
+
 7. 将以下方法添加到 Program.cs：
-   
+
         static void CreateIoTHub(ResourceManagementClient client)
         {
-   
+
         }
-    
+
 5. 将以下代码添加到 **CreateIoTHub** 方法，以将模板和参数文件提交给 Azure Resource Manager：
 
         var createResponse = client.Deployments.CreateOrUpdate(
@@ -154,18 +154,18 @@ ms.author: dobett
                 }
               }
             });
-    
+
 6. 将以下代码添加到 **CreateIoTHub** 方法，以显示新 IoT 中心的状态和密钥：
 
         string state = createResponse.Properties.ProvisioningState;
         Console.WriteLine("Deployment state: {0}", state);
-   
+
         if (state != "Succeeded")
         {
           Console.WriteLine("Failed to create iothub");
         }
         Console.WriteLine(createResponse.Properties.Outputs);
-    
+
 ## 完成并运行应用程序
 现在，可以调用 **CreateIoTHub** 方法来完成应用程序，然后生成并运行该应用程序。
 
@@ -173,7 +173,7 @@ ms.author: dobett
 
         CreateIoTHub(client);
         Console.ReadLine();
-    
+
 2. 单击“生成”，然后单击“生成解决方案”。更正所有错误。
 
 3. 单击“调试”，然后单击“开始调试”以运行应用程序。运行部署可能需要几分钟时间。

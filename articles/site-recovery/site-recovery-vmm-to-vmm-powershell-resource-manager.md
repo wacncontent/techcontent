@@ -78,13 +78,13 @@ ms.author: sutalasi
 ## 步骤 1：设置订阅 
 
 1. 从 Azure powershell 登录到你的 Azure 帐户：使用以下 cmdlet
- 
+
         $UserName = "<user@live.com>"
         $Password = "<password>"
         $SecurePassword = ConvertTo-SecureString -AsPlainText $Password -Force
         $Cred = New-Object System.Management.Automation.PSCredential -ArgumentList $UserName, $SecurePassword
         Login-AzureRmAccount -EnvironmentName AzureChinaCloud #-Credential $Cred 
-    
+
 2. 获取你的订阅的列表。其中还会列出每个订阅的 subscriptionID。记下你希望在其中创建恢复服务保管库的订阅的订阅 ID
 
         Get-AzureRmSubscription 
@@ -115,17 +115,17 @@ ms.author: sutalasi
 
 ## 步骤 4：安装 Azure Site Recovery 提供者
 
-1.	在 VMM 计算机上，通过运行以下命令创建一个目录：
-    
+1. 在 VMM 计算机上，通过运行以下命令创建一个目录：
+
         New-Item c:\ASR -type directory
-        
-2.	通过运行以下命令，使用下载的提供者提取文件
-    
+
+2. 通过运行以下命令，使用下载的提供者提取文件
+
         pushd C:\ASR\
         .\AzureSiteRecoveryProvider.exe /x:. /q
 
-3.	使用以下命令安装提供者：
-    
+3. 使用以下命令安装提供者：
+
         .\SetupDr.exe /i
         $installationRegPath = "hklm:\software\Microsoft\Microsoft System Center Virtual Machine Manager Server\DRAdapter"
         do
@@ -138,16 +138,16 @@ ms.author: sutalasi
         }While($isNotInstalled)
 
     等待安装完成。
-    
-4.	使用以下命令在保管库中注册服务器：
-    
+
+4. 使用以下命令在保管库中注册服务器：
+
         $BinPath = $env:SystemDrive+"\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin"
         pushd $BinPath
         $encryptionFilePath = "C:\temp".\DRConfigurator.exe /r /Credentials $VaultSettingFilePath /vmmfriendlyname $env:COMPUTERNAME /dataencryptionenabled $encryptionFilePath /startvmmservice
 
 ## 步骤 5：创建和关联复制策略
 
-1.	通过运行以下命令创建 Hyper-V 2012 R2 复制策略：
+1. 通过运行以下命令创建 Hyper-V 2012 R2 复制策略：
 
         $ReplicationFrequencyInSeconds = "300";    	#options are 30,300,900
         $PolicyName = “replicapolicy”
@@ -162,24 +162,24 @@ ms.author: sutalasi
 
     > [!NOTE] VMM 云包含的 Hyper-V 主机可能运行不同版本的 Windows Server（如 Hyper-V 先决条件中所示），但复制策略是特定于 OS 版本的。如果不同的主机运行在不同的操作系统版本上，则请为每类 OS 版本创建不同的复制策略。例如，如果你有 5 个主机运行在 Windows Servers 2012 上，3 个主机运行在 Windows Server 2012 R2 上，则请创建两种复制策略 – 一种策略用于一种类型的操作系统版本。
 
-2.	通过运行以下命令获取主保护容器（主 VMM 云）和恢复保护容器（恢复 VMM 云）：
-    
+2. 通过运行以下命令获取主保护容器（主 VMM 云）和恢复保护容器（恢复 VMM 云）：
+
         $PrimaryCloud = "testprimarycloud"
         $primaryprotectionContainer = Get-AzureRmSiteRecoveryProtectionContainer -friendlyName $PrimaryCloud;  
 
         $RecoveryCloud = "testrecoverycloud"
         $recoveryprotectionContainer = Get-AzureRmSiteRecoveryProtectionContainer -friendlyName $RecoveryCloud;  
-  
-3.	使用该策略的友好名称检索在步骤 1 中创建的策略
+
+3. 使用该策略的友好名称检索在步骤 1 中创建的策略
 
         $policy = Get-AzureRmSiteRecoveryPolicy -FriendlyName $policyname
 
-4.	开始将保护容器（VMM 云）与复制策略相关联：
+4. 开始将保护容器（VMM 云）与复制策略相关联：
 
         $associationJob  = Start-AzureRmSiteRecoveryPolicyAssociationJob -Policy     $Policy -PrimaryProtectionContainer $primaryprotectionContainer -RecoveryProtectionContainer $recoveryprotectionContainer
 
-5.	等待策略关联作业完成。你可以使用以下 PowerShell 代码段来查看作业是否已完成。
-   
+5. 等待策略关联作业完成。你可以使用以下 PowerShell 代码段来查看作业是否已完成。
+
         $job = Get-AzureRmSiteRecoveryJob -Job $associationJob
            if($job -eq $null -or $job.StateDescription -ne "Completed")
             {
@@ -216,12 +216,12 @@ ms.author: sutalasi
 
 ## 步骤 6：配置存储映射
 1. 以下命令在 $storageclassifications 变量中获取存储分类的列表。
-   
+
         $storageclassifications = Get-AzureRmSiteRecoveryStorageClassification
 2. 以下命令在 $SourceClassificaion 变量中获取源分类，在 $TargetClassification 变量中获取目标分类。
-   
+
         $SourceClassificaion = $storageclassifications[0]
-   
+
         $TargetClassification = $storageclassifications[1]
 
     > [!NOTE] 源和目标分类可以是数组中的任何元素。请参考以下命令的输出，了解 $storageclassifications 数组中源和目标分类的索引。
@@ -229,20 +229,20 @@ ms.author: sutalasi
     > Get-AzureRmSiteRecoveryStorageClassification | Select-Object -Property FriendlyName, Id | Format-Table
 
 1. 以下 cmdlet 在源分类与目标分类之间创建映射。
-   
+
         New-AzureRmSiteRecoveryStorageClassificationMapping -PrimaryStorageClassification $SourceClassificaion -RecoveryStorageClassification $TargetClassification
 
 ## 步骤 7：为虚拟机启用保护
 在正确配置服务器、云和网络后，可以在云中为虚拟机启用保护。
 
   1. 若要启用保护，请运行以下命令以获取保护容器：
-    
+
             $PrimaryProtectionContainer = Get-AzureRmSiteRecoveryProtectionContainer -friendlyName $PrimaryCloudName
-    
+
   2. 通过运行以下命令获取保护实体 (VM)：
-    
+
              $protectionEntity = Get-AzureRmSiteRecoveryProtectionEntity -friendlyName $VMName -ProtectionContainer $PrimaryProtectionContainer
-        
+
   3. 通过运行以下命令为 VM 启用复制：
 
             $jobResult = Set-AzureRmSiteRecoveryProtectionEntity -ProtectionEntity $protectionentity -Protection Enable -Policy $policy
@@ -257,19 +257,19 @@ ms.author: sutalasi
 
 ### 运行测试故障转移
 
-1.	运行以下 cmdlet 所获取的 VM 网络是需要将 VM 通过测试性故障转移方式转移到其中的网络。
+1. 运行以下 cmdlet 所获取的 VM 网络是需要将 VM 通过测试性故障转移方式转移到其中的网络。
 
         $Servers = Get-AzureRmSiteRecoveryServer
         $RecoveryNetworks = Get-AzureRmSiteRecoveryNetwork -Server $Servers[1]
 
-2.	执行以下操作，对 VM 进行测试性故障转移：
-    
+2. 执行以下操作，对 VM 进行测试性故障转移：
+
         $protectionEntity = Get-AzureRmSiteRecoveryProtectionEntity -FriendlyName $VMName -ProtectionContainer $PrimaryprotectionContainer
 
         $jobIDResult =  Start-AzureRmSiteRecoveryTestFailoverJob -Direction PrimaryToRecovery -ProtectionEntity $protectionEntity -VMNetwork $RecoveryNetworks[1] 
 
-2.	执行以下操作，对恢复计划进行测试性故障转移：
-    
+2. 执行以下操作，对恢复计划进行测试性故障转移：
+
         $recoveryplanname = "test-recovery-plan"
 
         $recoveryplan = Get-AzureRmSiteRecoveryRecoveryPlan -FriendlyName $recoveryplanname
@@ -279,13 +279,13 @@ ms.author: sutalasi
 ### 运行计划的故障转移
 
 1. 执行以下操作，对 VM 进行计划内故障转移：
-    
+
         $protectionEntity = Get-AzureRmSiteRecoveryProtectionEntity -Name $VMName -ProtectionContainer $PrimaryprotectionContainer
 
         $jobIDResult =  Start-AzureRmSiteRecoveryPlannedFailoverJob -Direction PrimaryToRecovery -ProtectionEntity $protectionEntity
 
 2. 执行以下操作，对恢复计划进行计划内故障转移：
-    
+
         $recoveryplanname = "test-recovery-plan"
 
         $recoveryplan = Get-AzureRmSiteRecoveryRecoveryPlan -FriendlyName $recoveryplanname
@@ -295,19 +295,19 @@ ms.author: sutalasi
 ### 运行非计划的故障转移
 
 1. 执行以下操作，对 VM 进行计划外故障转移：
-        
+
         $protectionEntity = Get-AzureRmSiteRecoveryProtectionEntity -Name $VMName -ProtectionContainer $PrimaryprotectionContainer
 
         $jobIDResult =  Start-AzureRmSiteRecoveryUnPlannedFailoverJob -Direction PrimaryToRecovery -ProtectionEntity $protectionEntity 
 
 2\. 执行以下操作，对恢复计划进行计划外故障转移：
-        
+
         $recoveryplanname = "test-recovery-plan"
 
         $recoveryplan = Get-AzureRmSiteRecoveryRecoveryPlan -FriendlyName $recoveryplanname
 
         $jobIDResult =  Start-AzureRmSiteRecoveryUnPlannedFailoverJob -Direction PrimaryToRecovery -ProtectionEntity $protectionEntity 
-    
+
 ## <a name="monitor"></a>监视活动
 
 使用以下命令来监视活动。请注意，必须在执行不同的作业之前等待处理完成。

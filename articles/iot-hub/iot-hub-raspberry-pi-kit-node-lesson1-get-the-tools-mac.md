@@ -42,14 +42,14 @@ wacn.date: 12/19/2016
 若要安装 Git 和 Node.js，请按以下步骤使用 [Homebrew](http://brew.sh) 包管理实用程序：
 
 1. 安装 Homebrew。若已安装 Homebrew，请转到步骤 2。
-   
-   1. 按 `Cmd + Space` 并输入 `Terminal` 即可打开终端。
-   2. 运行以下命令：
+
+    1. 按 `Cmd + Space` 并输入 `Terminal` 即可打开终端。
+    2. 运行以下命令：
 
             /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 2. 运行以下命令，安装 Git 和 Node.js：
-   
+
         brew install node git
 
 ## 安装其他 Node.js 开发工具

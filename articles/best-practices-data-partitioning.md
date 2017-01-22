@@ -528,7 +528,7 @@ Redis 网站上的 [Partitioning: how to split data among multiple Redis instanc
 - Microsoft 网站上的 [Running Redis on a CentOS Linux VM in Azure]（在 Azure 中的 CentOS Linux VM 上运行 Redis）页逐步讲解了一个示例，演示如何构建和配置作为 Azure VM 运行的 Redis 节点。
 - Redis 网站上的 [Data types]（数据类型）页介绍了可在 Redis 和 Azure Redis 缓存中使用的数据类型。
 
-[Azure Redis Cache]: ./redis-cache/index.md/
+[Azure Redis Cache]: ./redis-cache/index.md
 [Azure Storage Scalability and Performance Targets]: ./storage/storage-scalability-targets.md
 [Azure 存储空间表设计指南]: ./storage/storage-table-design-guide.md
 [Building a Polyglot Solution]: https://msdn.microsoft.com/zh-cn/library/dn313279.aspx

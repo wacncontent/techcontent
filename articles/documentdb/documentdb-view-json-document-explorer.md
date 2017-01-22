@@ -29,7 +29,7 @@ ms.author: kirillg
 1. 在 Azure 门户预览的跳转栏中，单击“DocumentDB (NoSQL)”。如果“DocumentDB (NoSQL)”不可见，则单击“更多服务”，再单击“DocumentDB (NoSQL)”。
 
 2. 在资源菜单中，单击“文档资源管理器”。
- 
+
     ![文档资源管理器命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/documentexplorercommand.png)  
 
     在“文档资源管理器”边栏选项卡上，将根据在其中启动文档资源管理器的上下文对“数据库”和“集合”下拉列表进行预填充。

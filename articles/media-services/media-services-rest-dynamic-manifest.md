@@ -92,7 +92,7 @@ ms.author: juliako;cenkdin
     }
 
 ####HTTP 响应
-    
+
     HTTP/1.1 201 Created 
 
 ###创建局部 AssetFilter
@@ -157,7 +157,7 @@ ms.author: juliako;cenkdin
 若要列出筛选器，请使用以下 HTTP 请求：
 
 ####HTTP 请求
-     
+
     GET https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Filters HTTP/1.1 
     DataServiceVersion:3.0 
     MaxDataServiceVersion: 3.0 
@@ -166,7 +166,7 @@ ms.author: juliako;cenkdin
     Authorization: Bearer <token value> 
     x-ms-version: 2.11 
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
-    
+
 ### 获取与资产关联的 **AssetFilter**。
 
 ####HTTP 请求
@@ -195,17 +195,17 @@ ms.author: juliako;cenkdin
     x-ms-client-request-id: 00000000
 
 ##更新筛选器
- 
+
 使用 PATCH、PUT 或 MERGE 更新筛选器，使其具有新的属性值。有关这些操作的详细信息，请参阅 [PATCH、PUT、MERGE](http://msdn.microsoft.com/zh-cn/library/dd541276.aspx)。
- 
+
 如果更新筛选器，则流式处理终结点需要最多 2 分钟来刷新规则。如果内容是通过使用此筛选器提供的（并已在代理和 CDN 缓存中缓存），则更新此筛选器可能导致播放器故障。建议在更新筛选器之后清除缓存。如果此选项不可用，请考虑使用其他筛选器。
- 
+
 ###更新全局筛选器
 
 若要更新全局筛选器，请使用以下 HTTP 请求：
 
 ####HTTP 请求
- 
+
 请求标头：
 
     MERGE https://wamsshaclus001rest-hs.chinacloudapp.cn/API/Filters('filterName') HTTP/1.1 
@@ -219,9 +219,9 @@ ms.author: juliako;cenkdin
     x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
     Host: wamsshaclus001rest-hs.chinacloudapp.cn 
     Content-Length: 384
-    
+
 请求正文：
-    
+
     { 
        "Tracks":[   
           {   
@@ -260,9 +260,9 @@ ms.author: juliako;cenkdin
     x-ms-version: 2.11 
     x-ms-client-request-id: 00000000-0000-0000-0000-000000000000 
     Host: wamsshaclus001rest-hs.chinacloudapp.cn 
-    
+
 请求正文：
-    
+
     { 
        "Tracks":[   
           {   
@@ -288,7 +288,7 @@ ms.author: juliako;cenkdin
 ###删除全局筛选器
 
 若要删除全局筛选器，请使用以下 HTTP 请求：
-    
+
 ####HTTP 请求
 
     DELETE https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Filters('GlobalFilter') HTTP/1.1 
@@ -344,5 +344,5 @@ ms.author: juliako;cenkdin
 ##另请参阅 
 
 [动态清单概述](./media-services-dynamic-manifest-overview.md)
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

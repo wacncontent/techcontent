@@ -72,14 +72,14 @@ DocumentDB 通过*保留*资源提供了快速且可预测的性能，以满足�
 该工具易于使用：
 
 1. 上载一个或多个有代表性的 JSON 文档。
-   
+
     ![将文档上载到请求单位计算器][2]
 2. 若要预估数据存储需求，请输入你预期要存储的文档总数。
 3. 输入所需的文档创建、读取、更新和删除操作数目（以秒为单位）。若要预估文档更新操作的请求单位费用，请上载上述步骤 1 中包含典型字段更新的示例文档的副本。例如，如果文档更新通常会修改名为 lastLogin 和 userVisits 的两个属性，则只要复制示例文档、更新这两个属性的值，并上载复制的文档。
-   
+
     ![在请求单位计算器中输入吞吐量要求][3]
 4. 单击“计算”，然后查看结果。
-   
+
     ![请求单位计算器结果][4]
 
 >[!NOTE]如果你有多种文档类型，它们的索引属性大小和数目截然不同，则将每种*类型*的典型文档的示例上载到该工具，然后计算结果。
@@ -205,7 +205,7 @@ DocumentDB 通过*保留*资源提供了快速且可预测的性能，以满足�
 - [对 DocumentDB 中的数据进行建模](./documentdb-modeling-data.md)
 - [DocumentDB 性能级别](./documentdb-partition-data.md)
 
-若要了解有关 DocumentDB 的详细信息，请参阅 Azure DocumentDB [文档](./index.md/)。
+若要了解有关 DocumentDB 的详细信息，请参阅 Azure DocumentDB [文档](./index.md)。
 
 若要开始使用 DocumentDB 进行规模和性能测试，请参阅[使用 Azure DocumentDB 进行性能和规模测试](./documentdb-performance-testing.md)。
 

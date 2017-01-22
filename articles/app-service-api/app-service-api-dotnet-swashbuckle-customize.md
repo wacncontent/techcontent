@@ -28,7 +28,7 @@ ms.author: rachelap
 
 * Swashbuckle 针对控制器方法的重载生成重复操作标识符
 * Swashbuckle 假设方法的唯一有效响应是 HTTP 200 (OK)
- 
+
 ## 自定义操作标识符生成
 
 Swashbuckle 通过连接控制器名称与方法名称来生成 Swagger 操作标识符。当一个方法有多个重载时，这种模式会产生问题：Swashbuckle 生成重复的操作 ID，这是无效的 Swagger JSON。
@@ -55,7 +55,7 @@ Swashbuckle 通过连接控制器名称与方法名称来生成 Swagger 操作�
 
         using Swashbuckle.Swagger;
         using System.Web.Http.Description;
-        
+
         namespace ContactsList
         {
             public class MultipleOperationsWithSameVerbFilter : IOperationFilter
@@ -86,11 +86,11 @@ Swashbuckle 通过连接控制器名称与方法名称来生成 Swagger 操作�
     Swashbuckle NuGet 包放入的 *SwaggerConfig.cs* 文件包含许多已注释掉的扩展点示例。此处未显示其他注释。
 
     进行此项更改后，将使用 `IOperationFilter` 实现并生成唯一的操作 ID。
- 
+
     ![](./media/app-service-api-dotnet-swashbuckle-customize/uniqueids.png)
 
 <a id="multiple-response-codes" name="multiple-response-codes"></a>
-    
+
 ## 允许 200 以外的响应代码
 
 默认情况下，Swashbuckle 假设 Web API 方法的 *唯一* 合法响应是 HTTP 200 (OK)。在某些情况下，可能需要在不导致客户端引发异常的情况下返回其他响应代码。例如，以下 Web API 代码演示了想要客户端接受 200 或 404 作为有效响应的方案。
@@ -150,9 +150,9 @@ Swashbuckle 提供两种方法自定义它生成的预期 HTTP 响应代码列�
         public HttpResponseMessage Get(int id)
         {
             var contacts = GetContacts();
-        
+
             var requestedContact = contacts.FirstOrDefault(x => x.Id == id);
-        
+
             if (requestedContact == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -176,11 +176,11 @@ Swashbuckle 提供两种方法自定义它生成的预期 HTTP 响应代码列�
     * 在 *SwaggerConfig.cs* 文件中向下滚动，直到看到以下屏幕截图所示的已注释掉的代码行。
 
         ![](./media/app-service-api-dotnet-swashbuckle-customize/xml-comments-commented-out.png)
-    
+
     * 取消注释该行可在 Swagger 生成期间中启用 XML 注释处理。
-    
+
         ![](./media/app-service-api-dotnet-swashbuckle-customize/xml-comments-uncommented.png)
-    
+
 1. 若要生成 XML 文档文件，请进入项目的属性，然后启用 XML 文档文件，如以下屏幕截图所示。
 
     ![](./media/app-service-api-dotnet-swashbuckle-customize/enable-xml-documentation-file.png)
@@ -241,7 +241,7 @@ Swashbuckle 提供两种方法自定义它生成的预期 HTTP 响应代码列�
 2. 为属性的命名空间添加 `using` 语句：
 
         using Swashbuckle.Swagger.Annotations;
-        
+
 1. 浏览到项目的 */swagger/docs/v1* URL，Swagger JSON 中会显示各种 HTTP 响应代码。
 
     ![](./media/app-service-api-dotnet-swashbuckle-customize/multiple-responses-post-attributes.png)
@@ -251,5 +251,5 @@ Swashbuckle 提供两种方法自定义它生成的预期 HTTP 响应代码列�
 ## 后续步骤
 
 本文说明了如何自定义 Swashbuckle 生成操作 ID 和有效响应代码。有关详细信息，请参阅 [GitHub 上的 Swashbuckle](https://github.com/domaindrivendev/Swashbuckle)。
- 
+
 <!---HONumber=Mooncake_0919_2016-->

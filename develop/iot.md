@@ -24,5 +24,5 @@ wacn.date:
 
 ## Azure IoT 教程和文档
 
-- [物联网](../articles/iot-hub/index.md/)    了解我们的全新 IoT 服务 Azure IoT 中心，连接物联网。
+- [物联网](../articles/iot-hub/index.md)    了解我们的全新 IoT 服务 Azure IoT 中心，连接物联网。
 - [示例库](https://azure.microsoft.com/zh-cn/documentation/samples/?service=iot-hub)    发现将设备、传感器和云服务结合在一起的端到端示例。

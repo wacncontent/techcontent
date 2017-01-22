@@ -265,7 +265,7 @@ Azure Web 应用可提供多个 SKU，用于确定站点可用的资源。包括
 
 <!-- URL List -->
 
-[Azure Redis 缓存]: ../redis-cache/index.md/
+[Azure Redis 缓存]: ../redis-cache/index.md
 [应用服务 Web 应用]: ./app-service-changes-existing-services.md
 [Web Apps 定价页]: ../azure-subscription-service-limits.md
 [Build a Node.js Chat Application with Socket.IO on an Azure Cloud Service]: ../cloud-services/cloud-services-nodejs-chat-app-socketio.md

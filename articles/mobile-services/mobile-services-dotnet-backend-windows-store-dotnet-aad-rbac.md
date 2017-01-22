@@ -35,7 +35,7 @@ ms.author: wesmc
 
 * 在 Windows 8.1 上运行的 Visual Studio 2013。
 * 使用 Azure Active Directory 身份验证提供程序完成[向应用程序添加身份验证]教程。
- 
+
 ##为集成的应用程序生成密钥
 
 在学习[向应用程序添加身份验证]教程的过程中，你在完成[注册以使用 Azure Active Directory 登录名]步骤时为集成的应用程序创建了注册。在本部分中，你将生成在使用该集成应用程序客户端 ID 读取目录信息时所用的密钥。
@@ -91,18 +91,18 @@ ms.author: wesmc
             private bool isInitialized;
             private bool isHosted;
             private ApiServices services = null;
-    
+
             // Constants used with ADAL and the Graph REST API for AAD
             private const string AadInstance = "https://login.chinacloudapi.cn/{0}";
             private const string GraphResourceId = "https://graph.chinacloudapi.cn/";
             private const string APIVersion = "?api-version=2013-04-05";
-    
+
             // App settings pulled from the Mobile Service
             private string tenantdomain;
             private string clientid;
             private string clientkey;
             private Dictionary<int, string> groupIds = new Dictionary<int, string>();
-    
+
             private string token = null;
 
             public AuthorizeAadRole(AadRoles role)
@@ -146,7 +146,7 @@ ms.author: wesmc
         private void InitGroupIds()
         {
             string groupId;
-            
+
             if (services == null)
                 return;
 

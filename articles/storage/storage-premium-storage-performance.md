@@ -436,7 +436,7 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
     iodepth=256
     ioengine=libaio
     bs=8k
-    
+
     [writer1]
     rw=randwrite
     directory=/mnt/nocache
@@ -472,7 +472,7 @@ FIO 是一种常用工具，可以在 Linux VM 上对存储进行基准测试。
     iodepth=256
     ioengine=libaio
     bs=8k
-    
+
     [reader1]
     rw=randread
     directory=/mnt/readcache

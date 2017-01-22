@@ -223,7 +223,7 @@ ms.author: rclaus
         UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,discard   1   2
 
 * 此处，还可以从命令行手动运行 `fstrim` 命令，或将其添加到 crontab 以定期运行：
-  
+
     **Ubuntu**
 
         sudo apt-get install util-linux

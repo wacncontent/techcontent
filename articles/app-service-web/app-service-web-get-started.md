@@ -46,21 +46,21 @@ ms.author: cephalin
 让我们将 Web 应用部署到 Azure App Service。
 
 1. 打开新的 Windows 命令提示符、PowerShell 窗口、Linux shell 或 OS X 终端。运行 `git --version` 和 `azure --version`，验证计算机上是否已安装 Git 和 Azure CLI。
-   
+
     ![在 Azure 中测试第一个 Web 应用的 CLI 工具安装](./media/app-service-web-get-started/1-test-tools-2.0.png)
-   
+
     如果尚未安装这些工具，请参阅[先决条件](#Prerequisites)中的下载链接。
 
 2. 如下所示登录 Azure ：
-   
+
         az login
-   
+
     按照帮助消息的提示继续此登录过程。
-   
+
     ![登录到 Azure 以创建第一个 Web 应用](./media/app-service-web-get-started/3-azure-login-2.0.png)  
 
 3. 设置应用服务的部署用户。稍后会使用这些凭据部署代码。
-   
+
         az appservice web deployment user set --user-name <username> --password <password>
 
 3. 创建新的[资源组](../azure-resource-manager/resource-group-overview.md)。对于第一个应用服务教程，不需要实际知道它是什么。
@@ -78,12 +78,12 @@ ms.author: cephalin
         az appservice web create --name <app_name> --resource-group my-first-app-group --plan my-free-appservice-plan
 
 4. 接下来，获取想要部署的示例代码。切换到工作目录 (`CD`) 并克隆示例应用，如下所示：
-   
+
         cd <working_directory>
         git clone <github_sample_url>
-   
+
     对于 *&lt;github\_sample\_url>*，请使用以下 URL 中的一个，具体视所需的框架而定：
-   
+
     * HTML+CSS+JS：[https://github.com/Azure-Samples/app-service-web-html-get-started.git](https://github.com/Azure-Samples/app-service-web-html-get-started.git)
     * ASP.NET：[https://github.com/Azure-Samples/app-service-web-dotnet-get-started.git](https://github.com/Azure-Samples/app-service-web-dotnet-get-started.git)
     * PHP (CodeIgniter)：[https://github.com/Azure-Samples/app-service-web-php-get-started.git](https://github.com/Azure-Samples/app-service-web-php-get-started.git)
@@ -94,7 +94,7 @@ ms.author: cephalin
     ![在 Azure 中克隆第一个 Web 应用的应用示例代码](./media/app-service-web-get-started/2-clone-sample.png)  
 
 5. 更改为示例应用的存储库。例如：
-   
+
         cd app-service-web-html-get-started
 
 5. 使用以下命令配置应用服务 Web 应用的本地 Git 部署：
@@ -110,11 +110,11 @@ ms.author: cephalin
 6. 将 JSON 中的 URL 作为本地存储库的 Git remote 添加（为简单起见，调用 `azure`）。
 
         git remote add azure https://<deployment_user>@<app_name>.scm.chinacloudsites.cn/<app_name>.git
-   
+
 7. 向 `azure` Git remote 部署示例代码。出现提示时，使用前面配置的部署凭据。
-   
+
         git push azure master
-   
+
     ![在 Azure 中将代码推送到第一个 Web 应用](./media/app-service-web-get-started/5-push-code.png)  
 
     如果使用了某种语言框架，看到的输出会不同。`git push` 不仅将代码放在 Azure 中，也在部署引擎中触发部署任务。如果项目（存储库）根目录中存在 package.json (Node.js) 或 requirements.txt (Python) 文件，或者 ASP.NET 项目中存在 packages.config 文件，部署脚本会还原所需的包。另外，还可以[启用编辑器扩展](./web-sites-php-mysql-deploy-use-git.md#composer)，以在 PHP 应用中自动处理 composer.json 文件。

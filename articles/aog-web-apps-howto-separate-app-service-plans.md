@@ -31,7 +31,7 @@ wacn.date: 12/13/2016
 ### 方法二 ###
 
 通过 PowerShell 命令将已有的 Web 应用迁移到新的应用服务计划：
- 
+
 1. 运行以下命令登录中国版 Azure；
 
         Login-AzureRmAccount -EnvironmentName "AzureChinaCloud"
@@ -43,9 +43,9 @@ wacn.date: 12/13/2016
         New-AzureRmAppServicePlan -Location ChinaEast -Name <YourAppServicePlanName> -ResourceGroupName <YourResouceGroupName> -Tier Free
 
     >注: Location 参数可以选择 ChinaEast 或者 ChinaNorth。
-    
+
     命令运行成功后返回以下结果，请将 Id 字段对应信息复制出来以备后续使用。
-    
+
     ![powershell-app-service-plan-id](./media/aog-web-apps-howto-separate-app-service-plans/powershell-app-service-plan-id.png)
 
 3. 运行以下命令将网站迁移到新的应用服务计划中;

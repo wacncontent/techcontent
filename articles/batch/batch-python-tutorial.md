@@ -76,7 +76,7 @@ Batch Python 教程代码示例由两个 Python 脚本和若干数据文件组�
 ![Batch 示例工作流][8]
 
 [**步骤 1.**](#step-1-create-storage-containers) 在 Azure Blob 存储中创建**容器**。<br/>
- 
+
 [**步骤 2.**](#step-2-upload-task-script-and-data-files) 将任务脚本和输入文件上载到容器。<br/> 
 
 [**步骤 3.**](#step-3-create-batch-pool) 创建 Batch **池**。<br/>
@@ -108,12 +108,12 @@ python
     # Update the Batch and Storage account credential strings below with the values 
     # unique to your accounts.These are used when constructing connection strings 
     # for the Batch and Storage client objects.
-    
+
     # Batch account credentials
     batch_account_name = "";
     batch_account_key  = "";
     batch_account_url  = "";
-    
+
     # Storage account credentials
     storage_account_name = "";
     storage_account_key  = "";
@@ -149,7 +149,7 @@ python
      blob_client = azureblob.BlockBlobService(
          account_name=_STORAGE_ACCOUNT_NAME,
          account_key=_STORAGE_ACCOUNT_KEY)
-    
+
      # Use the blob client to create the containers in Azure Storage if they
      # don't yet exist.
      app_container_name = 'application'
@@ -174,19 +174,19 @@ python
      # Paths to the task script. This script will be executed by the tasks that
      # run on the compute nodes.
      application_file_paths = [os.path.realpath('python_tutorial_task.py')]
-    
+
      # The collection of data files that are to be processed by the tasks.
      input_file_paths = [os.path.realpath('./data/taskdata1.txt'),
                          os.path.realpath('./data/taskdata2.txt'),
                          os.path.realpath('./data/taskdata3.txt')]
-    
+
      # Upload the application script to Azure Storage. This is the script that
      # will process the data files, and is executed by each of the tasks on the
      # compute nodes.
      application_files = [
          upload_file_to_container(blob_client, app_container_name, file_path)
          for file_path in application_file_paths]
-    
+
      # Upload the data files. This is the data that will be processed by each of
      # the tasks executed on the compute nodes in the pool.
      input_files = [
@@ -198,7 +198,7 @@ python
     def upload_file_to_container(block_blob_client, container_name, file_path):
         """
         Uploads a local file to an Azure Blob storage container.
-    
+
         :param block_blob_client: A blob service client.
         :type block_blob_client: `azure.storage.blob.BlockBlobService`
         :param str container_name: The name of the Azure Blob storage container.
@@ -208,24 +208,24 @@ python
         tasks.
         """
         blob_name = os.path.basename(file_path)
-    
+
         print('Uploading file {} to container [{}]...'.format(file_path,
                                                               container_name))
-    
+
         block_blob_client.create_blob_from_path(container_name,
                                                 blob_name,
                                                 file_path)
-    
+
         sas_token = block_blob_client.generate_blob_shared_access_signature(
             container_name,
             blob_name,
             permission=azureblob.BlobPermissions.READ,
             expiry=datetime.datetime.utcnow() + datetime.timedelta(hours=2))
-    
+
         sas_url = block_blob_client.make_blob_url(container_name,
                                                   blob_name,
                                                   sas_token=sas_token)
-    
+
         return batchmodels.ResourceFile(file_path=blob_name,
                                         blob_source=sas_url)
 
@@ -264,7 +264,7 @@ python
      # service in addition to Storage.
      credentials = batchauth.SharedKeyCredentials(_BATCH_ACCOUNT_NAME,
                                                   _BATCH_ACCOUNT_KEY)
-    
+
      batch_client = batch.BatchServiceClient(
          credentials,
          base_url=_BATCH_ACCOUNT_URL)
@@ -289,12 +289,12 @@ python
         nodes, e.g. '15' or '14.04'.
         """
         print('Creating pool [{}]...'.format(pool_id))
-    
+
         # Create a new pool of Linux compute nodes using an Azure Virtual Machines
         # Marketplace image. For more information about creating pools of Linux
         # nodes, see:
         # https://www.azure.cn/documentation/articles/batch-linux-nodes/
-    
+
         # Specify the commands for the pool's start task. The start task is run
         # on each node as it joins the pool, and when it's rebooted or re-imaged.
         # We use the start task to prep the node for running our task script.
@@ -307,12 +307,12 @@ python
             'apt-get update',
             'apt-get -y install python-pip',
             'pip install azure-storage']
-    
+
         # Get the virtual machine configuration for the desired distro and version.
         # For more information about the virtual machine configuration, see:
         # https://www.azure.cn/documentation/articles/batch-linux-nodes/
         vm_config = get_vm_config_for_distro(batch_service_client, distro, version)
-    
+
         new_pool = batch.models.PoolAddParameter(
             id=pool_id,
             virtual_machine_configuration=vm_config,
@@ -324,7 +324,7 @@ python
                 wait_for_success=True,
                 resource_files=resource_files),
             )
-    
+
         try:
             batch_service_client.pool.add(new_pool)
         except batchmodels.batch_error.BatchErrorException as err:
@@ -365,18 +365,18 @@ python
     def create_job(batch_service_client, job_id, pool_id):
         """
         Creates a job with the specified ID, associated with the specified pool.
-    
+
         :param batch_service_client: A Batch service client.
         :type batch_service_client: `azure.batch.BatchServiceClient`
         :param str job_id: The ID for the job.
         :param str pool_id: The ID for the pool.
         """
         print('Creating job [{}]...'.format(job_id))
-    
+
         job = batch.models.JobAddParameter(
             job_id,
             batch.models.PoolInformation(pool_id=pool_id))
-    
+
         try:
             batch_service_client.job.add(job)
         except batchmodels.batch_error.BatchErrorException as err:
@@ -400,7 +400,7 @@ python
                   output_container_name, output_container_sas_token):
         """
         Adds a task for each input file in the collection to the specified job.
-    
+
         :param batch_service_client: A Batch service client.
         :type batch_service_client: `azure.batch.BatchServiceClient`
         :param str job_id: The ID of the job to which to add the tasks.
@@ -411,13 +411,13 @@ python
         :param output_container_sas_token: A SAS token granting write access to
         the specified Azure Blob storage container.
         """
-    
+
         print('Adding {} tasks to job [{}]...'.format(len(input_files), job_id))
-    
+
         tasks = list()
-    
+
         for input_file in input_files:
-    
+
             command = ['python $AZ_BATCH_NODE_SHARED_DIR/python_tutorial_task.py '
                        '--filepath {} --numwords {} --storageaccount {} '
                        '--storagecontainer {} --sastoken "{}"'.format(
@@ -426,14 +426,14 @@ python
                         _STORAGE_ACCOUNT_NAME,
                         output_container_name,
                         output_container_sas_token)]
-    
+
             tasks.append(batch.models.TaskAddParameter(
                     'topNtask{}'.format(input_files.index(input_file)),
                     wrap_commands_in_shell('linux', command),
                     resource_files=[input_file]
                     )
             )
-    
+
         batch_service_client.task.add_collection(job_id, tasks)
 
 > [!IMPORTANT] 在访问环境变量（例如 `$AZ_BATCH_NODE_SHARED_DIR`）或执行节点的 `PATH` 中找不到的应用程序时，任务命令行必须显式调用 shell，例如，包含 `/bin/sh -c MyTaskApplication $MY_ENV_VAR`。如果任务在节点的 `PATH` 中执行应用程序，而且不引用任何环境变量，则就不必要满足此要求。
@@ -453,7 +453,7 @@ python
 python
 
     # NOTE: Taken from python\_tutorial\_task.py
-    
+
     # Create the blob client using the container's SAS token.
     # This allows us to create a client that provides write
     # access only to the container.
@@ -474,7 +474,7 @@ python
     def wait_for_tasks_to_complete(batch_service_client, job_id, timeout):
         """
         Returns when all tasks in the specified job reach the Completed state.
-    
+
         :param batch_service_client: A Batch service client.
         :type batch_service_client: `azure.batch.BatchServiceClient`
         :param str job_id: The id of the job whose tasks should be to monitored.
@@ -483,15 +483,15 @@ python
         period, an exception will be raised.
         """
         timeout_expiration = datetime.datetime.now() + timeout
-    
+
         print("Monitoring all tasks for 'Completed' state, timeout in {}..."
               .format(timeout), end='')
-    
+
         while datetime.datetime.now() < timeout_expiration:
             print('.', end='')
             sys.stdout.flush()
             tasks = batch_service_client.task.list(job_id)
-    
+
             incomplete_tasks = [task for task in tasks if
                                 task.state != batchmodels.TaskState.completed]
             if not incomplete_tasks:
@@ -499,7 +499,7 @@ python
                 return True
             else:
                 time.sleep(1)
-    
+
         print()
         raise RuntimeError("ERROR: Tasks did not reach 'Completed' state within "
                            "timeout period of " + str(timeout))
@@ -516,7 +516,7 @@ python
                                       container_name, directory_path):
         """
         Downloads all blobs from the specified Azure Blob storage container.
-    
+
         :param block_blob_client: A blob service client.
         :type block_blob_client: `azure.storage.blob.BlockBlobService`
         :param container_name: The Azure Blob storage container from which to
@@ -525,21 +525,21 @@ python
         """
         print('Downloading all files from container [{}]...'.format(
             container_name))
-    
+
         container_blobs = block_blob_client.list_blobs(container_name)
-    
+
         for blob in container_blobs.items:
             destination_file_path = os.path.join(directory_path, blob.name)
-    
+
             block_blob_client.get_blob_to_path(container_name,
                                                blob.name,
                                                destination_file_path)
-    
+
             print('  Downloaded blob [{}] from container [{}] to {}'.format(
                 blob.name,
                 container_name,
                 destination_file_path))
-    
+
         print('  Download complete!')
 
 > [!NOTE] 在 *python\_tutorial\_client.py* 中调用 `download_blobs_from_container` 可指定应将文件下载到主目录。可以随意修改此输出位置。
@@ -561,11 +561,11 @@ python
 BatchServiceClient 的 [JobOperations][py_job] 和 [PoolOperations][py_pool] 都有对应的删除方法（在确认删除时调用）：
 
 python
-    
+
     # Clean up Batch resources (if the user so chooses).
     if query_yes_no('Delete job?') == 'yes':
         batch_client.job.delete(_JOB_ID)
-    
+
     if query_yes_no('Delete pool?') == 'yes':
         batch_client.pool.delete(_POOL_ID)
 
@@ -594,10 +594,10 @@ python
       Downloaded blob [taskdata3_OUTPUT.txt] from container [output] to /home/user/taskdata3_OUTPUT.txt
       Download complete!
     Deleting containers...
-    
+
     Sample end: 2016-05-20 22:53:12
     Elapsed time: 0:06:02
-    
+
     Delete job? [Y/n]
     Delete pool? [Y/n]
 

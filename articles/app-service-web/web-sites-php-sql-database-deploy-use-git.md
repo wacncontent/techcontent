@@ -28,7 +28,7 @@ ms.author: robmcm
 
 * 如何使用 [Azure 门户预览](https://portal.azure.cn/)创建 Azure Web 应用和 SQL 数据库。由于在应用服务 Web 应用中已默认启用 PHP，因此运行 PHP 代码没有任何特殊要求。
 * 如何使用 Git 将应用程序发布和重新发布到 Azure。
- 
+
 通过按照本教程中的说明进行操作，你将在 PHP 中构建简单的注册 Web 应用程序。该应用程序将在 Azure 网站中托管。以下是已完成应用程序的屏幕快照：
 
 ![Azure PHP 网站](./media/web-sites-php-sql-database-deploy-use-git/running_app_3.png)
@@ -42,7 +42,7 @@ ms.author: robmcm
 1. 登录到 [Azure 门户预览](https://portal.azure.cn/)。
 
 2. 单击仪表板左上方的“新建”图标打开 Azure 应用商店，接着单击应用商店旁的“全选”，然后选择“Web + 移动”。
-    
+
 3. 在应用商店中，选择“Web + 移动”。
 
 4. 单击“Web 应用”图标。
@@ -50,7 +50,7 @@ ms.author: robmcm
 5. 阅读完 Web 应用的说明后，选择“创建”。
 
 6. 单击每个部分（“资源组”、“Web 应用”、和“订阅”），然后为必填字段输入或选择值：
-    
+
     - 输入选择的 URL 名称
     - 选择离你最近的区域
 
@@ -81,7 +81,7 @@ ms.author: robmcm
 2. 在 SQL 数据库的边栏选项卡中，单击“设置”>“属性”，然后单击“显示数据库连接字符串”。
 
     ![查看数据库属性](./media/web-sites-php-sql-database-deploy-use-git/view-database-properties.png)
-    
+
 3. 从结果对话框的“PHP”部分，记下 `Server`、`SQL Database` 和 `User Name` 的值。稍后将 PHP Web 应用发布到 Azure 应用服务时，将使用这些值。
 
 ##本地构建和测试应用程序
@@ -286,5 +286,5 @@ ms.author: robmcm
 [install-Drivers]: http://www.microsoft.com/download/details.aspx?id=20098
 [install-git]: http://git-scm.com/
 [pdo-sqlsrv]: http://php.net/pdo_sqlsrv
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

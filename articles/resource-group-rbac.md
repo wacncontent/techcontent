@@ -58,7 +58,7 @@ wacn.date: 01/21/2016
 若要查看订阅的所有可用角色，请运行 **Get-AzureRmRoleDefinition** 命令。
 
     PS C:\> Get-AzureRmRoleDefinition
-    
+
     Name             : API Management Service Contributor
     Id               : /subscriptions/{subscription-id}/providers/Microsoft.Authorization/roleDefinitions/{guid}
     IsCustom         : False
@@ -83,7 +83,7 @@ wacn.date: 01/21/2016
 1. 在运行 **Get-AzureRmRoleDefinition** 命令时提供角色名称，以查看相应的“读者”角色定义。检查允许的操作是否为你想要分配的操作。
 
         PS C:\> Get-AzureRmRoleDefinition Reader
-   
+
         Name             : Reader
         Id               : /subscriptions/{subscription-id}/providers/Microsoft.Authorization/roleDefinitions/{guid}
         IsCustom         : False
@@ -147,7 +147,7 @@ wacn.date: 01/21/2016
 3. 切换到 Azure 资源管理器模块。你将收到新模式确认。
 
         azure config mode arm
-        
+
         info:     New mode is arm
 
 ### 查看可用角色
@@ -159,7 +159,7 @@ wacn.date: 01/21/2016
 1. 获取“读取者”角色的角色定义。检查允许的操作是否为你想要分配的操作。
 
         azure role show Reader
-        
+
         info:    Executing command role show
         + Getting role definitions
         data:    Name    Actions  NotActions
@@ -170,7 +170,7 @@ wacn.date: 01/21/2016
 2. 通过根据名称搜索组，获取所需的安全组及其 objectId。以下示例显示了 ExampleAuditorGroup。
 
         azure ad group show --search ExampleAuditorGroup
-        
+
         info:    Executing command ad group show
         + Getting group list
         data:    Display Name:      ExampleAuditorGroup
@@ -183,7 +183,7 @@ wacn.date: 01/21/2016
 3. 为安全组创建角色分配。
 
         azure role assignment create --objectId {group-object-id} -o Reader -c /subscriptions/{subscriptionId}/
-        
+
         info:    Executing command role assignment create
         + Getting role definition id
         + Creating role assignment
@@ -218,7 +218,7 @@ wacn.date: 01/21/2016
 
 ## 如何使用 REST API
 若要通过 Azure 资源管理器 REST API 管理基于角色的访问控制，必须在发送请求时设置常见标头和参数（包括身份验证令牌）。有关信息，请参阅[常见参数和标头](https://msdn.microsoft.com/zh-cn/library/azure/dn906885.aspx)。
-   
+
 若要发现支持的 api 版本，请运行：
 
       GET https://management.chinacloudapi.cn/providers/Microsoft.Authorization?api-version=2015-01-01

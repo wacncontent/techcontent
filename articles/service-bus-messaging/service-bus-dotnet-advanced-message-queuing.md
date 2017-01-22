@@ -68,12 +68,12 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
 以下示例向 Service Bus 队列发送消息以及从中接收消息。
 
         // SimpleSenderReceiver.cs
-    
+
         using System;
         using System.Configuration;
         using System.Threading;
         using Microsoft.ServiceBus.Messaging;
-    
+
         namespace SimpleSenderReceiver
         {
             class SimpleSenderReceiver
@@ -86,23 +86,23 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
                 private MessageReceiver receiver;
                 private MessageListener messageListener;
                 private Thread listenerThread;
-    
+
                 static void Main(string[] args)
                 {
                     try
                     {
                         if ((args.Length > 0) && args[0].ToLower().Equals("sendonly"))
                             runReceiver = false;
-                    
+
                         string ConnectionStringKey = "Microsoft.ServiceBus.ConnectionString";
                         string entityNameKey = "EntityName";
                         entityName = ConfigurationManager.AppSettings[entityNameKey];
                         connectionString = ConfigurationManager.AppSettings[ConnectionStringKey];
                         SimpleSenderReceiver simpleSenderReceiver = new SimpleSenderReceiver();
-    
+
                         Console.WriteLine("Press [enter] to send a message. " +
                             "Type 'exit' + [enter] to quit.");
-    
+
                         while (true)
                         {
                             string s = Console.ReadLine();
@@ -120,12 +120,12 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
                         Console.WriteLine("Caught exception: " + e.Message);
                     }
                 }
-    
+
                 public SimpleSenderReceiver()
                 {
                     factory = MessagingFactory.CreateFromConnectionString(connectionString);
                     sender = factory.CreateMessageSender(entityName);
-    
+
                     if (runReceiver)
                     {
                         receiver = factory.CreateMessageReceiver(entityName);
@@ -134,14 +134,14 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
                         listenerThread.Start();
                     }
                 }
-    
+
                 public void Close()
                 {
                     messageListener.RequestStop();
                     listenerThread.Join();
                     factory.Close();
                 }
-    
+
                 private void SendMessage()
                 {
                     BrokeredMessage message = new BrokeredMessage("Test AMQP message from .NET");
@@ -151,7 +151,7 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
                 }
 
             }
-    
+
             public class MessageListener
             {
                 private MessageReceiver messageReceiver;
@@ -159,7 +159,7 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
                 {
                     messageReceiver = receiver;
                 }
-    
+
                 public void Listen()
                 {
                     while (!_shouldStop)
@@ -182,12 +182,12 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
                         }
                     }
                 }
-    
+
                 public void RequestStop()
                 {
                     _shouldStop = true;
                 }
-    
+
                 private volatile bool _shouldStop;
             }
         }
@@ -198,13 +198,13 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
 
         > SimpleSenderReceiver.exe
         Press [enter] to send a message. Type 'exit' + [enter] to quit.
-    
+
         Sent message with MessageID = fb7f5d3733704e4ba4bd55f759d9d7cf
         Received message with MessageID = fb7f5d3733704e4ba4bd55f759d9d7cf
-    
+
         Sent message with MessageID = d00e2e088f06416da7956b58310f7a06
         Received message with MessageID = d00e2e088f06416da7956b58310f7a06
-    
+
         Received message with MessageID = f27f79ec124548c196fd0db8544bca49
         Sent message with MessageID = f27f79ec124548c196fd0db8544bca49
         exit
@@ -301,7 +301,7 @@ AMQP 1.0 支持在 Service Bus SDK 2.1 版或更高版本中提供。可从以�
 * [Azure Service Bus 中的 AMQP 1.0 支持](./service-bus-amqp-overview.md)
 * [如何将 Java 消息服务 (JMS) API 用于服务总线 和 AMQP 1.0](./service-bus-java-how-to-use-jms-api-amqp.md)
 * [如何使用 Service Bus 队列](./service-bus-dotnet-how-to-use-queues.md)
- 
+
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

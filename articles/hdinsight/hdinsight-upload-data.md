@@ -82,10 +82,10 @@ Azure CLI 是一个跨平台工具，可用于管理 Azure 服务。使用以下
         azure storage container list -a <storage-account-name> -k <primary-key>
 6. 使用以下命令可将文件上传和下载到 Blob：
 
-   * 上传文件：
+    * 上传文件：
 
            azure storage blob upload -a <storage-account-name> -k <primary-key> <source-file> <container-name> <blob-name>
-   * 下载文件：
+    * 下载文件：
 
            azure storage blob download -a <storage-account-name> -k <primary-key> <container-name> <blob-name> <destination-file>
 

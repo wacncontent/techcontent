@@ -92,7 +92,7 @@ ms.author: vturecek
     do
     {
         PagedResult<ActorInformation> page = await actorServiceProxy.GetActorsAsync(continuationToken, cancellationToken);
-                
+
         activeActors.AddRange(page.Items.Where(x => x.IsActive));
 
         continuationToken = page.ContinuationToken;
@@ -106,7 +106,7 @@ ms.author: vturecek
 
     IActorService myActorServiceProxy = ActorServiceProxy.Create(
         new Uri("fabric:/MyApp/MyService"), actorToDelete);
-            
+
     await myActorServiceProxy.DeleteActorAsync(actorToDelete, cancellationToken)
 
 有关删除执行组件及其状态的详细信息，请参阅[执行组件生命周期文档](./service-fabric-reliable-actors-lifecycle.md)。
@@ -151,7 +151,7 @@ ms.author: vturecek
         {
             return this.BackupAsync(new BackupDescription(PerformBackupAsync));
         }
-    
+
         private async Task<bool> PerformBackupAsync(BackupInfo backupInfo, CancellationToken cancellationToken)
         {
             try

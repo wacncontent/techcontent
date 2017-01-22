@@ -81,37 +81,37 @@ ms.author: dobett
 此示例使用[序列化程序][lnk-serializer]库定义一个模型，该模型指定设备可以发送到 IoT 中心以及从 IoT 中心接收的消息。在此示例中，**Contoso** 命名空间定义一个 **Thermostat** 模型，该模型指定 **Temperature**、**ExternalTemperature** 和 **Humidity** 遥测数据以及元数据（如设备 ID、设备属性和设备响应的命令）：
 
     BEGIN_NAMESPACE(Contoso);
-    
+
     DECLARE_STRUCT(SystemProperties,
         ascii_char_ptr, DeviceID,
         _Bool, Enabled
     );
-    
+
     DECLARE_STRUCT(DeviceProperties,
     ascii_char_ptr, DeviceID,
     _Bool, HubEnabledState
     );
-    
+
     DECLARE_MODEL(Thermostat,
-    
+
         /* Event data (temperature, external temperature and humidity) */
         WITH_DATA(int, Temperature),
         WITH_DATA(int, ExternalTemperature),
         WITH_DATA(int, Humidity),
         WITH_DATA(ascii_char_ptr, DeviceId),
-    
+
         /* Device Info - This is command metadata + some extra fields */
         WITH_DATA(ascii_char_ptr, ObjectType),
         WITH_DATA(_Bool, IsSimulatedDevice),
         WITH_DATA(ascii_char_ptr, Version),
         WITH_DATA(DeviceProperties, DeviceProperties),
         WITH_DATA(ascii_char_ptr_no_quotes, Commands),
-    
+
         /* Commands implemented by the device */
         WITH_ACTION(SetTemperature, int, temperature),
         WITH_ACTION(SetHumidity, int, humidity)
     );
-    
+
     END_NAMESPACE(Contoso);
 
 与模型定义相关的是设备响应的 **SetTemperature** 和 **SetHumidity** 命令的定义：
@@ -122,7 +122,7 @@ ms.author: dobett
         thermostat->Temperature = temperature;
         return EXECUTE_COMMAND_SUCCESS;
     }
-    
+
     EXECUTE_COMMAND_RESULT SetHumidity(Thermostat* thermostat, int humidity)
     {
         (void)printf("Received humidity %d\r\n", humidity);

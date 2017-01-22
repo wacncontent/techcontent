@@ -53,11 +53,11 @@ Azure Active Directory (Azure AD) 负责处理 Resource Manager 的身份验证�
         AuthenticationContext authContext = new AuthenticationContext
             ("https://login.windows.net/" /* Azure AD URI */
                 + $"{tenantId}" /* Tenant ID */);
-    
+
         var credential = new ClientCredential(clientId, clientSecret);
-    
+
         AuthenticationResult token = authContext.AcquireToken("https://management.chinacloudapi.cn/", credential);
-    
+
         Console.WriteLine($"Token: {token.AccessToken}");
         return token;
     }
@@ -76,10 +76,10 @@ Azure Active Directory (Azure AD) 负责处理 Resource Manager 的身份验证�
         AuthenticationContext authContext = new AuthenticationContext
             ("https://login.chinacloudapi.cn/" /* Azure AD URI */
             + $"{tenantId}" /* Tenant ID or Azure AD domain */);
-    
+
         X509Certificate2 cert = null;
         X509Store store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-    
+
         try
         {
             store.Open(OpenFlags.ReadOnly);
@@ -91,11 +91,11 @@ Azure Active Directory (Azure AD) 负责处理 Resource Manager 的身份验证�
         {
             store.Close();
         }
-    
+
         var certCredential = new ClientAssertionCertificate(clientId, cert);
-    
+
         var token = await authContext.AcquireTokenAsync("https://management.chinacloudapi.cn/", certCredential);
-    
+
         Console.WriteLine($"Token: {token.AccessToken}");
         return token;
     }
@@ -109,24 +109,24 @@ Azure Active Directory (Azure AD) 负责处理 Resource Manager 的身份验证�
     {
         Console.WriteLine("Querying for subscriptions");
         const string apiVersion = "2015-01-01";
-    
+
         var client = new HttpClient();
         client.BaseAddress = new Uri("https://management.chinacloudapi.cn/");
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-    
+
         var response = await client.GetAsync($"subscriptions?api-version={apiVersion}");
-    
+
         var jsonResponse = response.Content.AsString();
-    
+
         var subscriptionIds = new List<string>();
         dynamic json = JsonConvert.DeserializeObject(jsonResponse);
-    
+
         for (int i = 0; i < json.value.Count; i++)
         {
             subscriptionIds.Add(json.value[i].subscriptionId.Value);
         }
-    
+
         Console.WriteLine($"Found {subscriptionIds.Count} subscription(s)");
         return subscriptionIds;
     }
@@ -150,7 +150,7 @@ Azure 中的所有操作都围绕着资源组进行，因此，让我们创建�
     private static async Task<ResourceGroup> CreateResourceGroupAsync(TokenCredentials credentials, string subscriptionId, string resourceGroup, string location)
     {
         Console.WriteLine($"Creating Resource Group {resourceGroup}");
-        var resourceClient = new ResourceManagementClient(credentials) { SubscriptionId = subscriptionId };
+        var resourceClient = new ResourceManagementClient(new Uri("https://management.chinacloudapi.cn/"), credential) { SubscriptionId = subscriptionId };
         return await resourceClient.ResourceGroups.CreateOrUpdateAsync(resourceGroup,
             new ResourceGroup
             {
@@ -218,7 +218,7 @@ Azure 中的所有操作都围绕着资源组进行，因此，让我们创建�
                 DnsSettings = new PublicIPAddressDnsSettings { DomainNameLabel = pipDnsName },
                 PublicIPAllocationMethod = "Dynamic" // This sample doesn't support static IP addresses but can be extended to do so
             });
-    
+
         return createPipTask;
     }
 
@@ -236,7 +236,7 @@ Azure 中的所有操作都围绕着资源组进行，因此，让我们创建�
                 AddressSpace = new AddressSpace(new[] { vNetAddressPrefix }),
                 Subnets = subnets
             });
-    
+
         return createVNetTask;
     }
 
@@ -261,7 +261,7 @@ NIC 是将 VM 与所在虚拟网络连接到一起的设备。一个 VM 可以�
                     }
                 }
             });
-    
+
         return createNicTask;
     }
 
@@ -302,7 +302,7 @@ NIC 是将 VM 与所在虚拟网络连接到一起的设备。一个 VM 可以�
                         StorageUri = $"http://{storageAccountName}.blob.core.chinacloudapi.cn"
                     })
             });
-    
+
         return vm;
     }
 
@@ -314,7 +314,7 @@ NIC 是将 VM 与所在虚拟网络连接到一起的设备。一个 VM 可以�
     private static async Task<DeploymentExtended> CreateTemplatedDeployment(TokenCredentials credentials, string subscriptionId, string resourceGroup, string templateUri, string parametersUri)
     {
         var resourceClient = new ResourceManagementClient(credentials) { SubscriptionId = subscriptionId };
-    
+
         return await resourceClient.Deployments.BeginCreateOrUpdateAsync(resourceGroup, "mytemplateddeployment", new Deployment(
             new DeploymentProperties()
             {
@@ -322,7 +322,7 @@ NIC 是将 VM 与所在虚拟网络连接到一起的设备。一个 VM 可以�
                 TemplateLink = new TemplateLink(templateUri),
                 ParametersLink = new ParametersLink(parametersUri)
             }));
-    
+
     }
 
 <!---HONumber=Mooncake_0808_2016-->

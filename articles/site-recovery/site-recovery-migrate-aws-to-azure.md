@@ -62,7 +62,7 @@ ms.author: raynew
     向组添加计算机之后，系统将启用保护，并且依据保护组设置运行初始复制。
 
 9. [运行非计划的故障转移](./site-recovery-failover.md#run-an-unplanned-failover)。初始复制完成后，可以为每个 VM 运行从 AWS 到 Azure 的非计划故障转移。（可选）你可以创建一个恢复计划并运行非计划的故障转移，从 AWS 向 Azure 迁移多个虚拟机。[详细了解](./site-recovery-create-recovery-plans.md)恢复计划。
-        
+
 ## 后续步骤
 
 若要详细了解其他复制方案，请参阅[什么是 Azure Site Recovery？](./site-recovery-overview.md)

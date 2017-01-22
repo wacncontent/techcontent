@@ -44,31 +44,31 @@ ms.author: cephalin
 让我们将 Web 应用部署到 Azure App Service。
 
 1. 打开新的 Windows 命令提示符、PowerShell 窗口、Linux shell 或 OS X 终端。运行 `git --version` 和 `azure --version`，验证计算机上是否已安装 Git 和 Azure CLI。
-   
+
     ![在 Azure 中测试第一个 Web 应用的 CLI 工具安装](./media/app-service-web-get-started/1-test-tools.png)
-   
+
     如果尚未安装这些工具，请参阅[先决条件](#Prerequisites)中的下载链接。
 2. 如下所示登录 Azure ：
-   
+
         azure login -e AzureChinaCloud
-   
+
     按照帮助消息的提示继续此登录过程。
-   
+
     ![登录到 Azure 以创建第一个 Web 应用](./media/app-service-web-get-started/3-azure-login.png)  
 
 3. 将 Azure CLI 更改为 ASM 模式，然后设置应用服务的部署用户。稍后使用凭据部署代码。
-   
+
         azure config mode asm
         azure site deployment user set --username <username> --pass <password>
 
 4. 切换到工作目录 (`CD`) 并克隆示例应用，如下所示：
-   
+
         git clone <github_sample_url>
-   
+
     ![在 Azure 中克隆第一个 Web 应用的应用示例代码](./media/app-service-web-get-started/2-clone-sample.png)  
 
     对于 *&lt;github\_sample\_url>* ，请使用以下 URL 中的一个，具体视所需的框架而定：
-   
+
     * HTML+CSS+JS：[https://github.com/Azure-Samples/app-service-web-html-get-started.git](https://github.com/Azure-Samples/app-service-web-html-get-started.git)
     * ASP.NET：[https://github.com/Azure-Samples/app-service-web-dotnet-get-started.git](https://github.com/Azure-Samples/app-service-web-dotnet-get-started.git)
     * PHP (CodeIgniter)：[https://github.com/Azure-Samples/app-service-web-php-get-started.git](https://github.com/Azure-Samples/app-service-web-php-get-started.git)
@@ -77,21 +77,21 @@ ms.author: cephalin
     * Python (Django)：[https://github.com/Azure-Samples/app-service-web-python-get-started.git](https://github.com/Azure-Samples/app-service-web-python-get-started.git)
 
 5. 更改为示例应用的存储库。例如：
-   
+
         cd app-service-web-html-get-started
 
 6. 在 Azure 中创建具有唯一应用名称及之前配置的部署用户的应用服务应用资源。出现提示时，指定所需的区域数目。
-   
+
         azure site create <app_name> --git --gitusername <username>
-   
+
     ![在 Azure 中创建第一个 Web 应用的 Azure 资源](./media/app-service-web-get-started/4-create-site.png)  
 
     现在已在 Azure 中创建应用。而且当前的目录也已进行 Git 初始化并作为 Git 远程连接到新的 App Service 应用。可以浏览到应用的 URL (http://&lt;app_name>.chinacloudsites.cn) 查看优雅的默认 HTML 页面，不过现在要做的是真正获取自己的代码。
 
 7. 像使用 Git 推送任何代码一样，将示例代码部署到 Azure 应用。出现提示时，使用之前配置的密码。
-   
+
         git push azure master
-   
+
     ![在 Azure 中将代码推送到第一个 Web 应用](./media/app-service-web-get-started/5-push-code.png)  
 
     如果使用了某种语言框架，看到的输出会不同。`git push` 不仅将代码放在 Azure 中，也在部署引擎中触发部署任务。如果项目（存储库）根目录中存在 package.json (Node.js) 或 requirements.txt (Python) 文件，或者 ASP.NET 项目中存在 packages.config 文件，部署脚本会还原所需的包。另外，还可以[启用编辑器扩展](./web-sites-php-mysql-deploy-use-git.md#composer)，以在 PHP 应用中自动处理 composer.json 文件。

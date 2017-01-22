@@ -43,7 +43,7 @@ ms.author: glenga
     +  **在 Windows 上**：IIS Express。可通过 [Microsoft Web 平台安装程序]安装 IIS Express。   
     +  **在 MacOS X 上**：Python，该服务器事先应已安装。
     +  **在 Linux 上**：Python。必须安装[最新版本的 Python]。 
-    
+
     你可以使用任何 Web 服务器来托管应用程序，但是这些 Web 服务器必须受下载的脚本支持。
 
 + 支持 HTML5 的 Web 浏览器。

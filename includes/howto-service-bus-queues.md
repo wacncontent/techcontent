@@ -23,7 +23,7 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 2.  在管理门户的左侧导航窗格中，单击“Service Bus”。
 
 3.  在管理门户的下方窗格中，单击“创建”。
-    
+
     ![](./media/howto-service-bus-queues/sb-queues-03.png)
 
 4.  在“添加新命名空间”对话框中，输入命名空间名称。系统会立即检查该名称是否可用。
@@ -61,7 +61,7 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 4.  在“访问连接信息”窗格中，找到包含 SAS 密钥和密钥名称的连接字符串。
 
     ![](./media/howto-service-bus-queues/multi-web-45.png)
-    
+
 5.  记下该密钥或将其复制到剪贴板。
 
   [Azure 经典管理门户]: http://manage.windowsazure.cn

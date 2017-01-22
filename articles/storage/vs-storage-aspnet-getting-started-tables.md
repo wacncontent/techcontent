@@ -55,7 +55,7 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
         CloudTable table = tableClient.GetTableReference(<table-name>);
 
 5. 如果表不存在，则调用 **CloudTable.CreateIfNotExists** 方法来创建表。
-   
+
         table.CreateIfNotExists();
 
 ## 向表中添加条目
@@ -91,9 +91,9 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
                 this.PartitionKey = lastName;
                 this.RowKey = firstName;
             }
-    
+
             public CustomerEntity() { }
-    
+
             public string Email { get; set; }
         }
 
@@ -145,9 +145,9 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
                 this.PartitionKey = lastName;
                 this.RowKey = firstName;
             }
-    
+
             public CustomerEntity() { }
-    
+
             public string Email { get; set; }
         }
 
@@ -155,7 +155,7 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
 
         CustomerEntity customer1 = new CustomerEntity("Smith", "Jeff");
         customer1.Email = "Jeff@contoso.com";
-    
+
         CustomerEntity customer2 = new CustomerEntity("Smith", "Ben");
         customer2.Email = "Ben@contoso.com";
 
@@ -169,7 +169,7 @@ Azure 表存储使用户可以存储大量结构化数据。该服务是一个 N
         batchOperation.Insert(customer2);
 
 9. 通过调用 **CloudTable.ExecuteBatch** 方法执行批量插入操作。**CloudTable.ExecuteBatch** 方法返回 **TableResult** 对象的列表。可以通过检查列表中每个 **TableResult** 对象的 **TableResult.HttpStatusCode** 属性验证批量插入操作的结果。状态代码为 2xx 指示客户端请求的操作已成功处理。例如，成功插入新的实体会生成 HTTP 状态代码 204，这意味着操作已成功处理，服务器没有返回任何内容。
-    
+
         IList<TableResult> results = table.ExecuteBatch(batchOperation);
 
         // Inspect the HttpStatusCode property of each TableResult object

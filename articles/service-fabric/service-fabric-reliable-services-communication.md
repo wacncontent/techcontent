@@ -111,11 +111,11 @@ Reliable Services API 为服务通信使用一个简单的接口。若要打开�
                     CultureInfo.InvariantCulture,
                     "http://+:{0}/",
                     port);
-                        
+
         this.publishAddress = this.listeningAddress.Replace("+", FabricRuntime.GetNodeContext().IPAddressOrFQDN);
-            
+
         this.webApp = WebApp.Start(this.listeningAddress, appBuilder => this.startup.Invoke(appBuilder));
-    
+
         // the string returned here will be published in the Naming Service.
         return Task.FromResult(this.publishAddress);
     }
@@ -139,7 +139,7 @@ Reliable Services API 提供以下库来编写与服务通信的客户端。
     ServicePartitionResolver resolver = new  ServicePartitionResolver("mycluster.chinacloudapp.cn:19000", "mycluster.chinacloudapp.cn:19001");
 
 或者，可为 `ServicePartitionResolver` 指定一个函数来创建 `FabricClient`，以便在内部使用：
- 
+
     public delegate FabricClient CreateFabricClientDelegate();
 
 `FabricClient` 是用于与 Service Fabric 群集通信，以便在群集上实现各种管理操作的对象。想要更好地控制 `ServicePartitionResolver` 与群集交互的方式时，这非常有用。`FabricClient` 会在内部执行缓存，但创建成本通常很高，因此一定要尽可能重复使用 `FabricClient` 实例。
@@ -202,7 +202,7 @@ Reliable Services API 提供以下库来编写与服务通信的客户端。
   - **非暂时性**异常是需要重新解析服务终结点地址的异常。这类异常包括指出无法访问服务终结点（表示服务已移至其他节点）的异常。
 
 `TryHandleException` 针对给定异常做出决定。如果它**不知道**要对异常做出哪些决定，则应返回 **false**。如果它**知道**要做出哪些决定，则应该相应地设置结果并返回 **true**。
- 
+
     class MyExceptionHandler : IExceptionHandler
     {
         public bool TryHandleException(ExceptionInformation exceptionInformation, OperationRetrySettings retrySettings, out ExceptionHandlingResult result)

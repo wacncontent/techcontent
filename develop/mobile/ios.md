@@ -46,13 +46,13 @@ wacn.date: 11/02/2015
 
 ###数据
 
-查看服务：[移动服务](../../articles/mobile-services/index.md/) | [存储](../../articles/storage/index.md/)
+查看服务：[移动服务](../../articles/mobile-services/index.md) | [存储](../../articles/storage/index.md)
 
 ###同步
 
 - [使用移动服务同步脱机数据](../../articles/mobile-services/mobile-services-ios-get-started-offline-data.md)
 
-查看服务：[移动服务](../../articles/mobile-services/index.md/)
+查看服务：[移动服务](../../articles/mobile-services/index.md)
 
 ###推送
 
@@ -60,7 +60,7 @@ wacn.date: 11/02/2015
 - [使用通知中心广播通知](../../articles/notification-hubs/notification-hubs-ios-xplat-segmented-apns-push-notification.md)
 - [向已验证的用户发送通知](../../articles/mobile-services/mobile-services-javascript-backend-ios-push-notifications-app-users.md)
 
-查看服务： [通知中心](../../articles/notification-hubs/index.md/)
+查看服务： [通知中心](../../articles/notification-hubs/index.md)
 
 ##资源
 

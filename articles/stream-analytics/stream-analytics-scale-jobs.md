@@ -42,13 +42,13 @@ ms.author: jeffstok
 易并行作业是我们在 Azure 流分析中具有的最具可扩展性的方案。它将查询的一个实例的输入的一个分区连接到输出的一个分区。实现此并行需要以下几个条件：
 
 1.  如果查询逻辑取决于同一个查询实例正在处理的相同密钥，则必须确保事件转到你的输入的同一个分区。对于事件中心，这意味着事件数据需要具有 **PartitionKey** 集或者你可以使用已分区的发件人。对于 Blob，这意味着这些事件被发送到相同的分区文件夹。如果你的查询逻辑不需要由同一个查询实例处理相同密钥，则可以忽略此要求。此示例是一个简单的选择/项目/筛选查询。
-2.	一旦数据按它在输入端上需要的样式进行布局，则我们需要确保你的查询已进行分区。这要求你在所有步骤中使用 **Partition By**。允许采用多个步骤，但它们都必须由相同的密钥进行分区。另一个需要注意的问题是，目前，需要将分区键设置为“PartitionId”才能够进行完全并行作业。
-3.	当前仅事件中心和 Blob 支持已分区的输出。对于事件中心输出，你需要将“PartitionKey”字段配置为“PartitionId”。对于 Blob，你不必执行任何操作。
-4.	另外还要注意，输入分区数必须等于的输出分区数。Blob 输出当前不支持分区，但这也没关系，因为它将继承上游查询的分区方案。将允许完全并行作业的分区值的示例：
-    1.	8 个事件中心输入分区和 8 个事件中心输出分区
-    2.	8 个事件中心输入分区和 Blob 输出
-    3.	8 个 Blob 输入分区和 Blob 输出
-    4.	8 个 Blob 输入分区和 8 个事件中心输出分区
+2. 一旦数据按它在输入端上需要的样式进行布局，则我们需要确保你的查询已进行分区。这要求你在所有步骤中使用 **Partition By**。允许采用多个步骤，但它们都必须由相同的密钥进行分区。另一个需要注意的问题是，目前，需要将分区键设置为“PartitionId”才能够进行完全并行作业。
+3. 当前仅事件中心和 Blob 支持已分区的输出。对于事件中心输出，你需要将“PartitionKey”字段配置为“PartitionId”。对于 Blob，你不必执行任何操作。
+4. 另外还要注意，输入分区数必须等于的输出分区数。Blob 输出当前不支持分区，但这也没关系，因为它将继承上游查询的分区方案。将允许完全并行作业的分区值的示例：
+    1. 8 个事件中心输入分区和 8 个事件中心输出分区
+    2. 8 个事件中心输入分区和 Blob 输出
+    3. 8 个 Blob 输入分区和 Blob 输出
+    4. 8 个 Blob 输入分区和 8 个事件中心输出分区
 
 以下是一些易并行的示例方案。
 
@@ -84,7 +84,7 @@ ms.author: jeffstok
     FROM Input1 Partition By PartitionId
     GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
     )
-    
+
     SELECT SUM(Count) AS Count, TollBoothId
     FROM Step1 Partition By PartitionId
     GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
@@ -113,11 +113,11 @@ PowerBI 输出当前不支持分区。
     FROM Input1 Partition By PartitionId
     GROUP BY TumblingWindow(minute, 3), TollBoothId, PartitionId
     )
-    
+
     SELECT SUM(Count) AS Count, TollBoothId
     FROM Step1 Partition By TollBoothId
     GROUP BY TumblingWindow(minute, 3), TollBoothId
-    
+
 正如所见，第二步使用 **TollBoothId** 作为分区键。这与第一步不相同，因此将要求我们执行随机选择。
 
 这些是流分析作业的一些示例和反例，流分析作业能够实现易并行拓扑并有可能达到最大规模。对于不适合这些配置文件中的任何一个的作业，以后将会推出更新，其中会详细说明如何最大化缩放某些其他规范的流分析方案。
@@ -342,5 +342,5 @@ PowerBI 输出当前不支持分区。
 [stream.analytics.get.started]: ./stream-analytics-get-started.md
 [stream.analytics.query.language.reference]: http://go.microsoft.com/fwlink/?LinkID=513299
 [stream.analytics.rest.api.reference]: http://go.microsoft.com/fwlink/?LinkId=517301
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

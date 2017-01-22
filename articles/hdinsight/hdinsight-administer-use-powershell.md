@@ -39,16 +39,16 @@ Azure PowerShell 是一个功能强大的脚本编写环境，可用于在 Azure
 若要检查所安装的 PowerShell 版本，请执行以下操作：
 
     Get-Module *azure*
-    
+
 若要卸载旧版本，请运行控制面板中的“程序和功能”。
 
 有两个主要选项用于安装 Azure PowerShell。
 
 - [PowerShell 库](https://www.powershellgallery.com/)。在已提升权限的 PowerShell ISE 或已提升权限的 Windows PowerShell 控制台中运行以下命令：
-        
+
         # Install the Azure Service Management module from PowerShell Gallery
         Install-Module Azure
-        
+
         # Import Azure Service Management module
         Import-Module Azure
 
@@ -77,7 +77,7 @@ HDInsight 群集要求在 Azure 存储帐户中创建 Blob 容器：
 **创建 Azure 存储帐户**
 
     New-AzureStorageAccount -StorageAccountName <Azure Storage Account Name> -Location "<Azure Location>" -Type <AccountType> # account type example: Standard_LRS for zero redundancy storage
-    
+
 [!INCLUDE [数据中心列表](../../includes/hdinsight-pricing-data-centers-clusters.md)]
 
 如果已有存储帐户但是不知道帐户名称和帐户密钥，可以使用以下命令来检索该信息：
@@ -189,7 +189,7 @@ Azure PowerShell 无法在 HDInsight 创建过程中创建 Blob 容器。可使�
 若要使用 Azure PowerShell 更改 Hadoop 群集大小，请从客户端计算机运行以下命令：
 
     Set-AzureHDInsightClusterSize -Cluster <Cluster Name> -ClusterSizeInNodes <NewSize>
-    
+
 ## <a name="grant/revoke-access"></a> 授予/撤消访问权限
 
 HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样式的终结点）：
@@ -215,7 +215,7 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
     # Credential option 2
     #$credential = Get-Credential -Message "Enter the HTTP username and password:" -UserName "admin"
-    
+
     Grant-AzureHDInsightHttpServicesAccess -Name $clusterName -HttpCredential $credential
 
 >[!NOTE] 授予/撤消访问权限时，将重设群集用户的用户名和密码。
@@ -231,7 +231,7 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 以下 Powershell 脚本演示如何获取群集的默认存储帐户名称和默认存储帐户密钥。
 
     $clusterName = "<HDInsight Cluster Name>"
-    
+
     $cluster = Get-AzureHDInsightCluster -Name $clusterName
     $defaultStorageAccountName = ($cluster.DefaultStorageAccount).Replace(".blob.core.chinacloudapi.cn", "")
     $defaultBlobContainerName = $cluster.DefaultStorageContainer

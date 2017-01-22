@@ -90,7 +90,7 @@ VNet 名称 = RMVNet <br>
         Get-AzureVNetConfig -ExportToFile C:\AzureNet\NetworkConfig.xml
 
 3. 打开下载的 .xml 文件进行编辑。有关网络配置文件的示例，请参阅[网络配置架构](https://msdn.microsoft.com/zh-cn/library/jj157100.aspx)。
- 
+
 ### 第 2 部分 — 验证网关子网
 
 在 **VirtualNetworkSites** 元素中，向 VNet 添加一个网关子网（如果尚未创建）。在使用网络配置文件时，网关子网必须命名为“GatewaySubnet”，否则 Azure 无法识别并将其用作网关子网。
@@ -98,7 +98,7 @@ VNet 名称 = RMVNet <br>
 [!INCLUDE [vpn-gateway-no-nsg-include](../../includes/vpn-gateway-no-nsg-include.md)]
 
 **示例：**
-    
+
     <VirtualNetworkSites>
       <VirtualNetworkSite name="ClassicVNet" Location="China North">
         <AddressSpace>
@@ -114,7 +114,7 @@ VNet 名称 = RMVNet <br>
         </Subnets>
       </VirtualNetworkSite>
     </VirtualNetworkSites>
-       
+
 ### 第 3 部分 — 添加本地网络站点
 
 所添加的本地网络站点表示要连接到的 RM VNet。您可能需要向文件添加 **LocalNetworkSites** 元素（如果尚不存在）。此时，在配置中，VPNGatewayAddress 可以是任何有效的公共 IP 地址，因为我们尚未针对 Resource Manager VNet 创建网关。一旦创建网关，便会将此占位符 IP 地址替换为已分配给 RM 网关的正确公共 IP 地址。
@@ -182,7 +182,7 @@ VNet 名称 = RMVNet <br>
     - `-Name` 是要分配来指代本地网络网关的名称。<br>
     - `-AddressPrefix` 是经典 VNet 的地址空间。<br>
     - `-GatewayIpAddress` 是经典 VNet 网关的公共 IP 地址。请务必更改下面的示例以反映正确的 IP 地址。
-    
+
             New-AzureRmLocalNetworkGateway -Name ClassicVNetLocal `
             -Location "China North" -AddressPrefix "10.0.0.0/24" `
             -GatewayIpAddress "n.n.n.n" -ResourceGroupName RG1
@@ -207,7 +207,7 @@ VNet 名称 = RMVNet <br>
         $gwipconfig = New-AzureRmVirtualNetworkGatewayIpConfig `
         -Name gwipconfig -SubnetId $subnet.id `
         -PublicIpAddressId $ipaddress.id
-    
+
 7. 运行以下命令**创建 Resource Manager 虚拟网络网关**。`-VpnType` 必须是 *RouteBased* 。可能需要 45 分钟或更长的时间才能完成此过程。
 
         New-AzureRmVirtualNetworkGateway -Name RMGateway -ResourceGroupName RG1 `
@@ -245,7 +245,7 @@ VNet 名称 = RMVNet <br>
 ## <a name="connect"></a>第 4 节：在网关之间创建连接
 
 在网关之间创建连接需要用到 PowerShell。您可能需要添加 Azure 帐户才能使用经典 PowerShell cmdlet。若要执行此操作，可以使用以下 cmdlet：
-        
+
     Add-AzureAccount -Environment AzureChinaCloud
 
 1. 通过运行以下命令**设置共享密钥**。在本例中，`-VNetName` 是经典 VNet 的名称，`-LocalNetworkSiteName` 是在经典管理门户中配置本地网络时为其指定的名称。`-SharedKey` 是您可以生成并指定的值。此处指定的值必须与下一步中创建连接时指定的值相同。本示例的返回结果应显示“状态: 成功”。
@@ -261,7 +261,7 @@ VNet 名称 = RMVNet <br>
         $vnet02gateway = Get-AzureRmVirtualNetworkGateway -Name RMGateway -ResourceGroupName RG1
 
     **创建连接**<br> 请注意，`-ConnectionType` 为 IPsec，而不是 Vnet2Vnet。
-        
+
         New-AzureRmVirtualNetworkGatewayConnection -Name RM-Classic -ResourceGroupName RG1 `
         -Location "China East" -VirtualNetworkGateway1 `
         $vnet02gateway -LocalNetworkGateway2 `

@@ -47,10 +47,10 @@ Azure PowerShell 是一个脚本编写环境，可用于控制和自动执行 Az
             $packagesFolder = (Split-Path $scriptPath -Parent) + "\packages"
             $assembly = Get-ChildItem $packagesFolder -Include "Microsoft.ServiceBus.dll" -Recurse
             Add-Type -Path $assembly.FullName
-        
+
             Write-Output "The [Microsoft.ServiceBus.dll] assembly has been successfully added to the script."
         }
-        
+
         catch [System.Exception]
         {
             Write-Error("Could not add the Microsoft.ServiceBus.dll assembly to the script. Make sure you build the solution before running the provisioning script.")
@@ -76,7 +76,7 @@ Azure PowerShell 是一个脚本编写环境，可用于控制和自动执行 Az
 
         $Namespace = "MyServiceBusNS"
         $Location = "China East"
-        
+
         # Query to see if the namespace currently exists
         $CurrentNamespace = Get-AzureSBNamespace -Name $Namespace
 
@@ -119,7 +119,7 @@ Azure PowerShell 是一个脚本编写环境，可用于控制和自动执行 Az
         $MessageRetentionInDays = 7
         $UserMetadata = $null
         $ConsumerGroupName = "MyConsumerGroup"
-    
+
         # Check if the Event Hub already exists
         if ($NamespaceManager.EventHubExists($Path))
         {
@@ -136,7 +136,7 @@ Azure PowerShell 是一个脚本编写环境，可用于控制和自动执行 Az
             $NamespaceManager.CreateEventHubIfNotExists($EventHubDescription);
             Write-Output "The [$Path] event hub in the [$Namespace] namespace has been successfully created."
         }
-    
+
         # Create the consumer group if it doesn't exist
         Write-Output "Creating the consumer group [$ConsumerGroupName] for the [$Path] event hub..."
         $ConsumerGroupDescription = New-Object -TypeName Microsoft.ServiceBus.Messaging.ConsumerGroupDescription -ArgumentList $Path, $ConsumerGroupName

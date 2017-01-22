@@ -28,8 +28,8 @@ Azure 备份的脱机种子设定与 [Azure 导入/导出服务](../storage/stor
 
 [Azure 备份 2016 年 8 月更新版（和更高版本）](http://go.microsoft.com/fwlink/?LinkID=229525)包含名为 AzureOfflineBackupDiskPrep 的 *Azure 磁盘准备工具* ：
 
-   - 可帮助使用 Azure 导入/导出工具为驱动器做好运行 Azure 导入的准备。
-   - 可在 [Azure 经典管理门户](https://manage.windowsazure.cn)上自动创建 Azure 导入/导出服务的 Azure 导入作业，而不是像旧版 Azure 备份一样通过手动方式创建相同的作业。
+    - 可帮助使用 Azure 导入/导出工具为驱动器做好运行 Azure 导入的准备。
+    - 可在 [Azure 经典管理门户](https://manage.windowsazure.cn)上自动创建 Azure 导入/导出服务的 Azure 导入作业，而不是像旧版 Azure 备份一样通过手动方式创建相同的作业。
 
 将备份数据上载到 Azure 之后，Azure 备份将备份数据复制到备份保管库，并计划增量备份。
 
@@ -87,7 +87,7 @@ Azure 备份的脱机种子设定与 [Azure 导入/导出服务](../storage/stor
 ### 使用 Azure 磁盘准备工具准备 SATA 驱动器并创建 Azure 导入作业
 Azure 磁盘准备工具可在恢复服务代理（2016 年 8 月更新版和更高版本）的安装目录中获取，其路径如下。
 
-   *\Microsoft* *Azure* *Recovery* *Services* *Agent\Utils\*
+    *\Microsoft* *Azure* *Recovery* *Services* *Agent\Utils\*
 
 1. 转到该目录，将 **AzureOfflineBackupDiskPrep** 目录复制到装载了要准备的驱动器的副本计算机上。确保满足以下与副本计算机相关的要求：
 
@@ -112,24 +112,24 @@ Azure 磁盘准备工具可在恢复服务代理（2016 年 8 月更新版和更
 
 运行该命令时，该工具将请求选择需要准备的驱动器对应的 Azure 导入作业。如果只有一个与提供的暂存位置关联的导入作业，将显示如下所示的屏幕。
 
-   ![Azure 磁盘准备工具输入](./media/backup-azure-backup-import-export/azureDiskPreparationToolDriveInput.png) <br/>
+    ![Azure 磁盘准备工具输入](./media/backup-azure-backup-import-export/azureDiskPreparationToolDriveInput.png) <br/>
 3. 输入想要准备传输到 Azure 的已装载磁盘的驱动器号（不要包含尾部的冒号）。出现提示时，请确认格式化驱动器。
 
 工具随后便开始使用备份数据准备磁盘。可能需要工具的提示附加其他磁盘，以免提供的磁盘没有足够空间来容纳备份数据。<br/>
 
 在工具成功执行结束时，所提供的一个或多个磁盘便已准备好可以寄送到 Azure。此外，Azure 经典管理门户上创建以在创建**启动脱机备份**工作流期间提供的名称来命名的导入作业。最后，工具上还显示磁盘所要寄送到的 Azure 数据中心的寄送地址，以及用于找到 Azure 经典管理门户上的导入作业的链接。
 
-   ![Azure 磁盘准备已完成](./media/backup-azure-backup-import-export/azureDiskPreparationToolSuccess.png)
+    ![Azure 磁盘准备已完成](./media/backup-azure-backup-import-export/azureDiskPreparationToolSuccess.png)
 4. 将磁盘寄送到工具提供的地址，保留跟踪号码供日后参考。<br/>
 5. 转到此工具显示的链接时，可以看到在**启动脱机备份**工作流中指定的 Azure 存储帐户。可以在存储帐户的“导入/导出”选项卡中看到新建的导入作业。
 
-   ![创建导入作业](./media/backup-azure-backup-import-export/ImportJobCreated.png)
+    ![创建导入作业](./media/backup-azure-backup-import-export/ImportJobCreated.png)
 6. 单击页面底部的“寄送信息”更新联系人详细信息，如以下屏幕所示。当导入作业完成时，Microsoft 使用此信息寄回磁盘。
 
-   ![联系信息](./media/backup-azure-backup-import-export/contactInfoAddition.PNG)
+    ![联系信息](./media/backup-azure-backup-import-export/contactInfoAddition.PNG)
 7. 在下一个屏幕中输入寄送详细信息。提供寄送到 Azure 数据中心的磁盘的对应“快递承运人”和“跟踪号”详细信息。
 
-   ![寄送信息](./media/backup-azure-backup-import-export/shippingInfoAddition.PNG)
+    ![寄送信息](./media/backup-azure-backup-import-export/shippingInfoAddition.PNG)
 
 ### 完成工作流
 导入作业完成后，存储帐户中的初始备份数据可供使用。然后，恢复服务代理将此帐户中的数据内容复制到备份保管库或恢复服务保管库（根据何者较合适）。在下一个计划备份时间，Azure 备份代理针对初始的备份副本来执行增量备份。

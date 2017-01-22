@@ -42,7 +42,7 @@ ms.author: anhoh
 3. 在 App.config 文件中，将 EndpointUri 和 PrimaryKey 值替换为从 [Azure 门户预览](https://portal.azure.cn/)检索到的值（方法是导航到“DocumentDB (NoSQL)”边栏选项卡，单击“帐户名”，然后单击资源菜单上的“密钥”）。
     ![要在 App.config 中替换的 EndpointUri 和 PrimaryKey 值的屏幕截图](./media/documentdb-get-started-quickstart/nosql-tutorial-documentdb-keys.png)
 4. 生成项目。控制台窗口会显示所创建、查询的新资源，然后将其清除。
-    
+
     ![控制台输出的屏幕截图](./media/documentdb-get-started-quickstart/nosql-tutorial-documentdb-console-output.png)  
 
 ## <a id="tutorial"></a>教程
@@ -597,9 +597,9 @@ DocumentDB 支持删除 JSON 文档。
 
 - 需要更复杂的 ASP.NET MVC NoSQL 教程？ 请参阅 [Build a web application with ASP.NET MVC using DocumentDB](./documentdb-dotnet-application.md)（使用 DocumentDB 构建具有 ASP.NET MVC 的 Web 应用程序）。
 - 想要使用 DocumentDB 执行规模和性能测试？ 请参阅 [Performance and Scale Testing with Azure DocumentDB](./documentdb-performance-testing.md)（使用 Azure DocumentDB 进行性能和规模测试）
--	了解如何[监视 DocumentDB 帐户](./documentdb-monitor-accounts.md)。
--	在 [Query Playground](https://www.documentdb.com/sql/demo) 中对示例数据集运行查询。
--	在 [DocumentDB 文档页](./index.md/)的“Develop”（开发）部分中了解有关编程模型的详细信息。
+- 了解如何[监视 DocumentDB 帐户](./documentdb-monitor-accounts.md)。
+- 在 [Query Playground](https://www.documentdb.com/sql/demo) 中对示例数据集运行查询。
+- 在 [DocumentDB 文档页](./index.md)的“Develop”（开发）部分中了解有关编程模型的详细信息。
 
 [documentdb-create-account]: ./documentdb-create-account.md
 [documentdb-manage]: ./documentdb-manage.md

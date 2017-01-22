@@ -37,31 +37,31 @@ ms.author: trinadhk; jimpark; markgal;
 
 1. 打开 **Azure 备份**管理单元。
 2. 单击“恢复数据”以启动工作流。
-   
+
     ![恢复数据](./media/backup-azure-restore-windows-server/recover.png)
 3. 选择“此服务器(*你的计算机名称*)”选项，以便在同一台计算机上还原已备份的文件。
-   
+
     ![同一台计算机](./media/backup-azure-restore-windows-server/samemachine.png)
 4. 选择“浏览文件”或“搜索文件”。
-   
+
     若要还原已知路径的一个或多个文件，请保留默认选项。如果你不确定文件夹的结构，但想要搜索文件，请选择“搜索文件”选项。对于本部分，我们将使用默认选项继续操作。
-   
+
     ![浏览文件](./media/backup-azure-restore-windows-server/browseandsearch.png)
 5. 选择要从中还原文件的卷。
-   
+
     可以从任意时间点还原。日历控件中以“粗体”显示的日期指明了还原点的可用性。选择日期后，根据你的备份计划（和备份操作的成功与否），可以从“时间”下拉列表中选择一个时间点。
-   
+
     ![卷和日期](./media/backup-azure-restore-windows-server/volanddate.png)
 6. 选择要恢复的项。可以选择多个要还原的文件夹/文件。
-   
+
     ![选择文件](./media/backup-azure-restore-windows-server/selectfiles.png)
 7. 指定恢复参数。
-   
+
     ![恢复选项](./media/backup-azure-restore-windows-server/recoveroptions.png)
-   
-   - 可选择还原到原始位置（将覆盖其中的文件/文件夹），或者同一台计算机中的另一位置。
-   - 如果要还原的文件/文件夹在目标位置存在，可创建副本（同一文件的两个版本）、覆盖目标位置的文件，或者跳过目标中存在文件的恢复。
-   - 强烈建议保留要恢复的文件相关 ACL 的还原默认选项。
+
+    - 可选择还原到原始位置（将覆盖其中的文件/文件夹），或者同一台计算机中的另一位置。
+    - 如果要还原的文件/文件夹在目标位置存在，可创建副本（同一文件的两个版本）、覆盖目标位置的文件，或者跳过目标中存在文件的恢复。
+    - 强烈建议保留要恢复的文件相关 ACL 的还原默认选项。
 8. 提供这些输入后，单击“下一步”。将文件还原到此计算机的恢复工作流将会开始。
 
 ## 恢复到备用计算机 <a name="recover-to-an-alternate-machine"></a>
@@ -78,26 +78,26 @@ ms.author: trinadhk; jimpark; markgal;
 1. 在“目标计算机”中打开“Azure 备份”管理单元。
 2. 确保“目标计算机”和“源计算机”已还原到同一个恢复服务保管库。
 3. 单击“恢复数据”以启动工作流。
-   
+
     ![恢复数据](./media/backup-azure-restore-windows-server/recover.png)
 4. 选择“另一台服务器”
-   
+
     ![另一台服务器](./media/backup-azure-restore-windows-server/anotherserver.png)
 5. 提供对应于“示例保管库”的保管库凭据文件。如果保管库凭据文件无效（或已过期），请在 Azure 门户预览中从“示例保管库”下载新的保管库凭据文件。提供保管库凭据文件后，系统将根据保管库凭据文件显示恢复服务保管库。
 6. 从显示的计算机列表中选择“源计算机”。
-   
+
     ![计算机列表](./media/backup-azure-restore-windows-server/machinelist.png)
 7. 选择“搜索文件”或“浏览文件”选项。对于本部分，我们将使用“搜索文件”选项。
-   
+
     ![搜索](./media/backup-azure-restore-windows-server/search.png)
 8. 在下一屏幕中选择卷和日期。搜索要还原的文件夹/文件的名称。
-   
+
     ![搜索项](./media/backup-azure-restore-windows-server/searchitems.png)
 9. 选择这些文件需要还原到的位置。
-   
+
     ![还原位置](./media/backup-azure-restore-windows-server/restorelocation.png)
 10. 提供在将“源计算机”注册到示例保管库期间所用的加密通行短语。
-    
+
     ![加密](./media/backup-azure-restore-windows-server/encryption.png)
 11. 提供输入后，单击“恢复”，随即将会触发在提供的目标中还原备份文件的操作。
 

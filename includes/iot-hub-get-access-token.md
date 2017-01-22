@@ -10,7 +10,7 @@ Azure Active Directory 必须使用 Azure Resource Manager 来验证所有针对
     var credential = new ClientCredential(applicationId, password);
     AuthenticationResult token = authContext.AcquireTokenAsync
       ("https://management.core.chinacloudapi.cn/", credential).Result;
-    
+
     if (token == null)
     {
       Console.WriteLine("Failed to obtain the token");

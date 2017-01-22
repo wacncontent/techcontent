@@ -21,7 +21,7 @@ ms.author: cephalin
 
 # 排查 Azure App Service 中 Web 应用性能缓慢的问题
 
-本文将帮助你排查 [Azure App Service](./index.md/) 中 Web 应用性能缓慢的问题。
+本文将帮助你排查 [Azure App Service](./index.md) 中 Web 应用性能缓慢的问题。
 
 如果你对本文中的任何观点存在疑问，可以联系 [MSDN Azure 和 CSDN Azure](https://www.azure.cn/support/forums/) 上的 Azure 专家。或者，你也可以提出 Azure 支持事件。请转到 [Azure 支持站点](https://www.azure.cn/support/contact/)并单击“获取支持”。
 
@@ -33,17 +33,17 @@ ms.author: cephalin
 
 此问题通常是应用程序级别的问题造成的，例如：
 
--	请求耗费过长的时间
--	应用程序的内存/CPU 使用率过高
--	应用程序因异常而崩溃
+- 请求耗费过长的时间
+- 应用程序的内存/CPU 使用率过高
+- 应用程序因异常而崩溃
 
 ## 疑难解答步骤
 
 故障排除可划分为三种不同的任务，依次为：
 
-1.	[观察和监视应用程序行为](#observe)
-2.	[收集数据](#collect)
-3.	[缓解问题](#mitigate)
+1. [观察和监视应用程序行为](#observe)
+2. [收集数据](#collect)
+3. [缓解问题](#mitigate)
 
 [应用服务 Web 应用](https://www.azure.cn/home/features/app-service/web-apps/)为每个步骤提供了多种选项。
 
@@ -59,18 +59,18 @@ ms.author: cephalin
 
 你可能想要在 Web 应用中监视的一些指标包括
 
--	平均内存工作集
--	平均响应时间
--	CPU 时间
--	内存工作集
--	请求
+- 平均内存工作集
+- 平均响应时间
+- CPU 时间
+- 内存工作集
+- 请求
 
 ![监视 Web 应用性能](./media/app-service-web-troubleshoot-performance-degradation/1-monitor-metrics.png)  
 
 有关详细信息，请参阅：
 
--	[在 Azure App Service 中监视 Web Apps](./web-sites-monitor.md)
--	[接收警报通知](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)
+- [在 Azure App Service 中监视 Web Apps](./web-sites-monitor.md)
+- [接收警报通知](../monitoring-and-diagnostics/insights-receive-alert-notifications.md)
 
 #### 监视 Web 终结点状态
 
@@ -96,9 +96,9 @@ Web 应用环境为 Web 服务器和 Web 应用中的日志记录信息提供了
 
 你可以启用或禁用以下种类的日志：
 
--	**详细错误日志记录** - 指示故障的 HTTP 状态代码（状态代码 400 或更大数字）的详细错误消息。其中可能包含有助于确定服务器返回错误代码的原因的信息。
--	**失败请求跟踪** - 有关失败请求的详细信息，包括对用于处理请求的 IIS 组件和每个组件所用的时间的跟踪。在尝试提高 Web 应用性能或查找导致特定 HTTP 错误的问题时，此信息很有用。
--	**Web 服务器日志记录** - 使用 W3C 扩展日志文件格式的 HTTP 事务信息。这在确定总体 Web 应用指标（如处理的请求数量或来自特定 IP 地址的请求数）时非常有用。
+- **详细错误日志记录** - 指示故障的 HTTP 状态代码（状态代码 400 或更大数字）的详细错误消息。其中可能包含有助于确定服务器返回错误代码的原因的信息。
+- **失败请求跟踪** - 有关失败请求的详细信息，包括对用于处理请求的 IIS 组件和每个组件所用的时间的跟踪。在尝试提高 Web 应用性能或查找导致特定 HTTP 错误的问题时，此信息很有用。
+- **Web 服务器日志记录** - 使用 W3C 扩展日志文件格式的 HTTP 事务信息。这在确定总体 Web 应用指标（如处理的请求数量或来自特定 IP 地址的请求数）时非常有用。
 
 ##### 应用程序诊断
 
@@ -118,9 +118,9 @@ Web 应用环境为 Web 服务器和 Web 应用中的日志记录信息提供了
 
 Azure App Service 支持门户具有三个不同的选项卡，用于支持常见故障排除方案的三个步骤：
 
-1.	观察当前行为
-2.	通过收集诊断信息和运行内置分析器进行分析
-3.	缓解
+1. 观察当前行为
+2. 通过收集诊断信息和运行内置分析器进行分析
+3. 缓解
 
 如果目前正在发生问题，请单击“分析”>“诊断”>“立即诊断”创建诊断会话，该会话将收集 HTTP 日志、事件查看器日志、内存转储、PHP 错误日志和 PHP 进程报告。
 
@@ -138,10 +138,10 @@ Web Apps 随附可用于调试、浏览和上载文件的调试控制台，以�
 
 Kudu 提供的一些信息和功能包括：
 
--	应用程序的环境设置
--	日志流
--	诊断转储
--	调试控制台，你可以在其中运行 Powershell cmdlet 和基本 DOS 命令。
+- 应用程序的环境设置
+- 日志流
+- 诊断转储
+- 调试控制台，你可以在其中运行 Powershell cmdlet 和基本 DOS 命令。
 
 Kudu 的另一项有用功能是，如果应用程序引发第一次异常，你可以使用 Kudu 和 SysInternals 工具 Procdump 创建内存转储。这些内存转储是进程的快照，通常可以帮助你排查较复杂的 Web 应用问题。
 

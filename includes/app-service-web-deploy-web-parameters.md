@@ -16,7 +16,7 @@
 ### hostingPlanName
 
 用于托管网站的 App Service 计划的名称。
-    
+
     "hostingPlanName":{
       "type":"string"
     }
@@ -58,7 +58,7 @@
       ],
       "defaultValue":"0"
     }
-    
+
 模板将定义此参数允许的值（0、1 或 2），如果未指定任何值，则分配默认值 (0)。这些值分别对应于 small、medium 和 large。
 
 <!---HONumber=Mooncake_0118_2016-->

@@ -30,6 +30,6 @@ wacn.date: 12/05/2016
 
 所以可以通过下载证书的方式解决该问题，具体操作方法如下：
 
-1.	下载证书保存到本地，下载地址：[https://curl.haxx.se/ca/cacert.pem](https://curl.haxx.se/ca/cacert.pem)
-2.	配置 php.ini 文件：`curl.cainfo =<filepath>/cacert.pem`
-3.	重启 Apache 服务器，问题即可解决。
+1. 下载证书保存到本地，下载地址：[https://curl.haxx.se/ca/cacert.pem](https://curl.haxx.se/ca/cacert.pem)
+2. 配置 php.ini 文件：`curl.cainfo =<filepath>/cacert.pem`
+3. 重启 Apache 服务器，问题即可解决。

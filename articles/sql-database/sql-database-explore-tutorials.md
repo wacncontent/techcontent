@@ -108,7 +108,7 @@ ms.author: carlrab
 | [使用 Python 连接到 SQL 数据库](./sql-database-develop-python-simple.md) | 本教程介绍如何使用 Python 连接到 Azure SQL 数据库。 |
 | [使用 Ruby 连接到 SQL 数据库](./sql-database-develop-ruby-simple.md) | 本教程介绍如何使用 Ruby 连接到 Azure SQL 数据库。 |
 ||||
- 
+
 ## 数据库访问
 
 以下教程介绍如何[创建和管理登录名和用户](./sql-database-manage-logins.md)。

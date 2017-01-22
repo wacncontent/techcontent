@@ -34,13 +34,13 @@ ms.author: jgao
 
 **从入门库运行示例**
 
-1.	登录 [Azure 经典管理门户][azure.portal]。
-2.	单击左侧菜单中的“HDInsight”。你会看到现有 HDInsight 群集的列表，包括 Hadoop、Storm 和 HBase 群集。
-3.	单击要在其中运行示例的群集。
-4.	单击该页底部的“查询控制台”。
-5.	输入群集的 Hadoop 用户名和密码。
-6.	单击该页顶部的**入门库**。
-7.	单击其中一个示例。每个示例都提供了运行它的详细步骤。下图显示了 Twitter 趋势分析示例：
+1. 登录 [Azure 经典管理门户][azure.portal]。
+2. 单击左侧菜单中的“HDInsight”。你会看到现有 HDInsight 群集的列表，包括 Hadoop、Storm 和 HBase 群集。
+3. 单击要在其中运行示例的群集。
+4. 单击该页底部的“查询控制台”。
+5. 输入群集的 Hadoop 用户名和密码。
+6. 单击该页顶部的**入门库**。
+7. 单击其中一个示例。每个示例都提供了运行它的详细步骤。下图显示了 Twitter 趋势分析示例：
 
     ![HDInsight Twitter 趋势分析示例][hdinsight.twitter.sample]
 

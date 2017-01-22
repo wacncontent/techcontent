@@ -57,7 +57,7 @@ ms.author: rachelap
 5. 选择一个或多个**身份验证提供程序**。
 
     下图显示要求所有调用方必须经过 Azure AD 身份验证的选项。
- 
+
     ![Azure 门户预览中的“身份验证/授权”边栏选项卡](./media/app-service-api-dotnet-user-principal-auth/authblade.png)
 
     选择身份验证提供程序后，门户将显示该提供程序的配置边栏选项卡。
@@ -85,7 +85,7 @@ ms.author: rachelap
 1. 确保满足[第一篇教程](./app-service-api-dotnet-get-started.md)中所列的所有先决条件。除了所列的先决条件以外，这些身份验证教程还假设读者在 Visual Studio 和 Azure 门户预览中用过应用服务 Web 应用和 API 应用。
 
 2. 在[待办事项列表示例存储库自述文件](https://github.com/azure-samples/app-service-api-dotnet-todo-list/blob/master/readme.md)中单击“部署到 Azure”按钮，部署 API 应用和 Web 应用。记下创建的 Azure 资源组，因为稍后可以用它来查找 Web 应用和 API 应用名称。
- 
+
 3. 下载或克隆[待办事项示例存储库](https://github.com/Azure-Samples/app-service-api-dotnet-todo-list)，获取要在 Visual Studio 中本地使用的代码。
 
 ## <a id="azureauth"></a>在应用服务和 Azure AD 中设置身份验证
@@ -97,7 +97,7 @@ ms.author: rachelap
 * 配置 Azure AD 应用程序，使其在登录后将持有者令牌发送到 AngularJS 前端。
 
 如果遵循教程指导时遇到问题，请参阅教程末尾的[故障排除](#troubleshooting)部分。
- 
+
 ### 为中间层 API 应用配置身份验证
 
 1. 在 [Azure 门户预览](https://portal.azure.cn/)中，导航到要为 ToDoListAPI 项目创建的 API 应用的“设置”边栏选项卡，找到“功能”部分，然后单击“身份验证/授权”。
@@ -127,7 +127,7 @@ ms.author: rachelap
     ![Azure 门户预览中的 Azure AD 设置](./media/app-service-api-dotnet-user-principal-auth/aadsettings2.png)
 
     Azure 将自动在 Azure AD 租户中创建使用指定名称的 Azure AD 应用程序。默认情况下，Azure AD 应用程序的名称与 API 应用相同。如果需要，也可以输入不同的名称。
- 
+
 7. 单击**“确定”**。
 
 7. 在“身份验证/授权”边栏选项卡中，单击“保存”。

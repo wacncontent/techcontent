@@ -18,13 +18,13 @@ ms.author: danlep
 ---
 
 # 使用 Azure Active Directory 管理 Azure 中的 HPC Pack 群集
-[Microsoft HPC Pack 2016](https://technet.microsoft.com/zh-cn/library/cc514029) 支持在 Azure 中部署 HPC Pack 群集的管理员将其与 [Azure Active Directory](../active-directory/index.md/) (Azure AD) 集成。
+[Microsoft HPC Pack 2016](https://technet.microsoft.com/zh-cn/library/cc514029) 支持在 Azure 中部署 HPC Pack 群集的管理员将其与 [Azure Active Directory](../active-directory/index.md) (Azure AD) 集成。
 
 请按照本文中的步骤执行以下高级别任务：
 * 手动将 HPC Pack 群集与 Azure AD 租户集成
 * 在 Azure 的 HPC Pack 群集中管理和计划作业
 
-将 HPC Pack 群集解决方案与 Azure AD 集成时按照标准步骤集成其他应用程序和服务。本文假定你熟悉 Azure AD 中的基本用户管理。有关详细信息和背景资料，请参阅 [Azure Active Directory 文档](../active-directory/index.md/)以及以下部分。
+将 HPC Pack 群集解决方案与 Azure AD 集成时按照标准步骤集成其他应用程序和服务。本文假定你熟悉 Azure AD 中的基本用户管理。有关详细信息和背景资料，请参阅 [Azure Active Directory 文档](../active-directory/index.md)以及以下部分。
 
 ## 集成的好处
 
@@ -143,7 +143,7 @@ HPC Pack 群集与 Azure AD 集成可帮助用户实现以下目标：
 > [!NOTE]
 首次尝试连接到 Azure 中的 HPC Pack 群集时，将显示弹出窗口。输入用于登录的 Azure AD 凭据。然后缓存令牌。除非身份验证更改或已清除缓存令牌，否则以后连接 Azure 中的群集时将使用缓存令牌。
 >
-  
+
 例如，完成前面的步骤后，可以从本地客户端查询作业，如下所示：
 
     Get-HpcJob -State All -Scheduler https://<Azure load balancer DNS name> -Owner <Azure AD account>

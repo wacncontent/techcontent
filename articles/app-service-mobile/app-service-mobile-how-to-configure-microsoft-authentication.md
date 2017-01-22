@@ -36,7 +36,7 @@ ms.author: mahender
 5. 在“平台”下，单击“添加平台”，然后选择“Web”。
 
 6. 在“重定向 URI”下，提供应用程序的终结点，然后单击“保存”。
- 
+
     >[!NOTE] 重定向 URI 是应用程序 URL 加上路径 _/.auth/login/microsoftaccount/callback_。例如，`https://contoso.chinacloudsites.cn/.auth/login/microsoftaccount/callback`。
     >请务必使用 HTTPS 方案。
 

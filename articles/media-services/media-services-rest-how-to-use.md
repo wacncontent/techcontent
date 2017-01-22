@@ -41,13 +41,13 @@ Azure 媒体服务是一项服务，该服务接受基于 OData 的 HTTP 请求�
         x-ms-version: 2.11
         Authorization: Bearer <token> 
         Host: media.windows.net
-        
+
         {
             "Name" : "NewTestJob", 
             "InputMediaAssets" : 
                 [{"__metadata" : {"uri" : "https://wamsshaclus001rest-hs.chinacloudapp.cn/api/Assets('nb%3Acid%3AUUID%3Aba5356eb-30ff-4dc6-9e5a-41e4223540e7')"}}]
         . . . 
-        
+
 ## 媒体服务支持的标准 HTTP 请求标头
 
 每次调用媒体服务时，都必须在请求中包括一组必需标头，并且还可以根据需要包括一组可选标头。下表列出了必需的标头：

@@ -54,11 +54,11 @@ ms.author: jgao
     示例中使用的命令：
 
         CREATE TABLE Company (COMPANY_ID INTEGER PRIMARY KEY, NAME VARCHAR(225));
-        
+
         !tables
-        
+
         UPSERT INTO Company VALUES(1, 'Microsoft');
-        
+
         SELECT * FROM Company;
 
 有关详细信息，请参阅 [SQLLine 手册](http://sqlline.sourceforge.net/#manual)和 [Phoenix 语法](http://phoenix.apache.org/language/index.html)。
@@ -147,7 +147,7 @@ Phoenix 驱动程序 jar 文件位于 HBase 群集上。根据具体的版本，
     ![HBase Phoenix SQuirrel][img-squirrel-sql]
 4. 切换回到“对象”选项卡。
 5. 展开别名，然后展开“表”。应会看到下面列出新表。
- 
+
 ## 后续步骤
 在本文中，你已了解如何在 HDInsight 中使用 Apache Phoenix。若要了解详细信息，请参阅
 

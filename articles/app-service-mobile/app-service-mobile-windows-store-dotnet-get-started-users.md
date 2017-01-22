@@ -40,7 +40,7 @@ ms.author: adrianha
 ##<a name="add-authentication"></a>向应用程序添加身份验证
 
 1. 在 UWP 应用项目文件 MainPage.cs 中，将以下代码片段添加到 MainPage 类：
-    
+
         // Define a member variable for storing the signed-in user. 
         private MobileServiceUser user;
 
@@ -90,7 +90,7 @@ ms.author: adrianha
                 await RefreshTodoItems();
             }
         }
-        
+
 5. 打开 MainPage.xaml 项目文件，找到定义“保存”按钮的元素，将其替换为以下代码：
 
         <Button Name="ButtonSave" Visibility="Collapsed" Margin="0,8,8,0" 

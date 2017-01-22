@@ -28,27 +28,27 @@ wacn.lang: cn
 MySQL Database on Azure支持从服务器模式和标准的MySQL数据复制。你可以用这个功能把数据库数据从运行在自己本地或者其他地方的MySQL服务器自动同步到运行在MySQL Database on Azure上的从服务器。
 
 ##配置步骤
-1.	确认主MySQL服务器上的系统变量lower_case_table_names 为1。 如果不是必须设置为1。这是因为MySQL数据复制要求主从服务器端该参数的值必须一致,而在MySQL On Azure上，该参数为1。 
+1. 确认主MySQL服务器上的系统变量lower_case_table_names 为1。 如果不是必须设置为1。这是因为MySQL数据复制要求主从服务器端该参数的值必须一致,而在MySQL On Azure上，该参数为1。 
 mysql> SET GLOBAL lower_case_table_names = 1;
-2.	将主服务器设为只读模式
+2. 将主服务器设为只读模式
 mysql> FLUSH TABLES WITH READ LOCK;
 mysql> SET GLOBAL read_only = ON;
-3.	在主服务器端运行sql 命令 “show master status” 从而获取当前的二进制日志文件名和偏移。 返回结果应该类似于
+3. 在主服务器端运行sql 命令 “show master status” 从而获取当前的二进制日志文件名和偏移。 返回结果应该类似于
 ![返回结果](./media/mysql-database-data-replication/packet.png)
 
-4.	把主服务器上的所有用户的数据库导出,比如你可以用mysqldump工具。
+4. 把主服务器上的所有用户的数据库导出,比如你可以用mysqldump工具。
 mysqldump --databases <数据库名>  --single-transaction --order-by-primary -r <备份文件名> --routines -h<服务器地址>  -P<端口号> –u<用户名>  -p<密码>
 注意：mysql服务器内置的库包括mysql库和test库不需要导出。
-5.	数据库导出完成后将主MySQL服务器重新设为可读写模式
+5. 数据库导出完成后将主MySQL服务器重新设为可读写模式
 mysql> SET GLOBAL read_only = OFF;
 mysql> UNLOCK TABLES;  
-6.	在主MySQL服务器上建一个用于数据复制的账号并设置权限。
+6. 在主MySQL服务器上建一个用于数据复制的账号并设置权限。
 CREATE USER '<your user>'@'%' IDENTIFIED BY '<your password\>';
 GRANT REPLICATION SLAVE ON \*.\* TO '<your user\>'@'%';
-7.	登录Azure管理门户，在MySQL　Database on Azure上创建一个新的MySQL服务器。
-8.	在新创建的MySQL服务器上逐个创建主服务器上的所有用户的数据库。
-9.	在新创建的MySQL服务器上创建需要的用户账号。这是因为用户账号信息不会被复制。
-10.	把从主服务器上的导出的用户数据库的数据导入到新创建的MySql服务器中。如果数据文件很大建议先把数据文件上传到Azure上的虚拟机然后从虚拟机导入到MySql服务器中。虚拟机应该和新创建的MySQL服务器在同一个数据中心。具体步骤如下。
+7. 登录Azure管理门户，在MySQL　Database on Azure上创建一个新的MySQL服务器。
+8. 在新创建的MySQL服务器上逐个创建主服务器上的所有用户的数据库。
+9. 在新创建的MySQL服务器上创建需要的用户账号。这是因为用户账号信息不会被复制。
+10. 把从主服务器上的导出的用户数据库的数据导入到新创建的MySql服务器中。如果数据文件很大建议先把数据文件上传到Azure上的虚拟机然后从虚拟机导入到MySql服务器中。虚拟机应该和新创建的MySQL服务器在同一个数据中心。具体步骤如下。
 
     1)	上传mysql.exe工具到虚拟机。
 
@@ -62,7 +62,7 @@ source <备份文件名>;
 
     5)	重复执行 3) -> 6)，直到将所有用户数据库中的数据导入到MySQL服务器中。
 
-11.	将新创建的MySQL服务器设置为从服务器
+11. 将新创建的MySQL服务器设置为从服务器
 
     1)	选定新创建的MySQL服务器,点击“复制”页。
 
@@ -77,7 +77,7 @@ source <备份文件名>;
 
 ![配置过程](./media/mysql-database-data-replication/replicationsetting.png)
 
-12.	配置成功后,底部的复制状态应该为复制中。
+12. 配置成功后,底部的复制状态应该为复制中。
 ![配置过程](./media/mysql-database-data-replication/replicationstatus.png)
 
 >[!NOTE] ** 注意:
@@ -107,11 +107,11 @@ source <备份文件名>;
 
 一旦出现数据复制错误,请按照下列步骤解决:
 
-1.	通过Azure管理门户,将该MySQL的复制角色更改为禁止。从而使该MySQL进入可读写模式。
+1. 通过Azure管理门户,将该MySQL的复制角色更改为禁止。从而使该MySQL进入可读写模式。
 
-2.	根据复制错误字段,分析错误原因，解决错误。 例如设置max_allowed_packet,使它和主服务器一致,在从服务器上更改导致复制失败的记录。
+2. 根据复制错误字段,分析错误原因，解决错误。 例如设置max_allowed_packet,使它和主服务器一致,在从服务器上更改导致复制失败的记录。
 
-3.	通过Azure管理门户，重新将该MySQL的复制角色更改为从服务器。
+3. 通过Azure管理门户，重新将该MySQL的复制角色更改为从服务器。
 
     1)	主服务器二进制日志文件名和偏移是之前复制执行到的主服务器二进制日志文件名和偏移。如果之前不存在二进制日志文件名或者偏移量输入错误,不建议更改。
 

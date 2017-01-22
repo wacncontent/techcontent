@@ -42,13 +42,13 @@ wacn.date: 01/09/2017
 
         # required dependencies 
         yum install gcc cmake libuuid-devel
-        
+
         # dependencies needed for ssl support
         yum install openssl-devel
-        
+
         # dependencies needed for bindings
         yum install swig python-devel ruby-devel php-devel java-1.6.0-openjdk
-        
+
         # dependencies needed for python docs
         yum install epydoc
 
@@ -62,11 +62,11 @@ wacn.date: 01/09/2017
     HTTP request sent, awaiting response... 200 OK
     Length: 868226 (848K) [application/x-gzip]
     Saving to: ‘qpid-proton-0.9.tar.gz’
-    
+
     qpid-proton-0.9.tar.gz                               
-    
+
     100%[====================================================================================================================>] 847.88K   102KB/s    in 8.4s    
-    
+
     2016-04-17 14:45:12 (101 KB/s) - ‘qpid-proton-0.9.tar.gz’ saved [868226/868226]
     ```
 
@@ -77,17 +77,17 @@ wacn.date: 01/09/2017
 1.  使用从自述文件中获取的以下步骤生成并安装代码：
 
         From the directory where you found this README file:	
-        
+
         mkdir build cd build
-                
+
         # Set the install prefix. You may need to adjust depending on your		
         # system.		
         cmake -DCMAKE\_INSTALL\_PREFIX=/usr ..
-                
+
         # Omit the docs target if you do not wish to build or install		
         # documentation.		
         make all docs
-                
+
         # Note that this step will require root privileges.		
         make install
 

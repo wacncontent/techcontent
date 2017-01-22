@@ -137,7 +137,7 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
 在本部分中，你将修改 **SendCloudToDevice** 应用以请求反馈，并接收来自 IoT 中心的反馈。
 
 1. 在 Visual Studio 中的 **SendCloudToDevice** 项目内，将以下方法添加到 **Program** 类。
-   
+
         private async static void ReceiveFeedbackAsync()
         {
             var feedbackReceiver = serviceClient.GetFeedbackReceiver();
@@ -196,6 +196,6 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
 [Get started with IoT Hub]: ./iot-hub-csharp-csharp-getstarted.md
 [Azure IoT Developer Center]: /develop/iot/
 [lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
-[Azure IoT 套件]: ../iot-suite/index.md/
+[Azure IoT 套件]: ../iot-suite/index.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

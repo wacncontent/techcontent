@@ -29,11 +29,11 @@ wacn.date: 08/10/2016
         New-AzureRmResourceGroup -Name "YOUR-RESOURCE-GROUP-NAME" -Location "China East"
 
 - 如果你选择 Azure CLI 方式搭建 MongoDB，那么请[安装 Azure CLI](./xplat-cli-install.md)。然后请确保你是处于[资源管理器模式](./azure-resource-manager/resource-manager-deployment-model.md)下，可通过运行以下命令来验证：
-        
+
         azure config mode arm
 
 现在，通过运行以下命令并遵循提示进行 Azure 帐户的交互式登录体验，来使用[工作或学校 ID 登录](./xplat-cli-connect.md)： 
- 
+
         azure login -e AzureChinaCloud -u <your account>
 
 然后你需要创建一个 Azure 资源组( Resource Group )，创建 Azure 虚拟机和搭建 MongoDB 都在该资源组中进行，运行以下命令创建 Azure 资源组：  
@@ -65,7 +65,7 @@ PowerShell脚本运行注意事项
         Deploy MongoDB on VM mongodb11 (CentOS 6.5) in China North successfully.
         To connect using the mongo shell:
         % mongo mongodbserver.chinanorth.cloudapp.chinacloudapi.cn:27017/test
-  
+
 **Azure CLI 方式**   
 你需要在安装好 Azure CLI 的机器上，运行如下命令下载 azuredeploy.parameters.json 参数配置文件：  
 
@@ -79,9 +79,9 @@ PowerShell脚本运行注意事项
 
         $TemplateUri="http://msmirrors.blob.core.chinacloudapi.cn/mongodb/mongodb-single-node/azuredeploy.json"
         azure group deployment create rg1 DeployMongoDB --template-uri $TemplateUri –e azuredeploy.parameters.json
- 
+
 按照上述任意一种方式创建完 MongoDB 后，即可使用如下命令连接 MongoDB:  
-  
+
         mongo mongodbserver.chinanorth.cloudapp.chinacloudapi.cn:27017/test 
 
 你也可以直接登录 MongoDB 服务器进行其它操作，更多操作请参考 [MongoDB 官方帮助文档](https://docs.mongodb.com/manual/mongo/)。  
@@ -97,7 +97,7 @@ PowerShell脚本运行注意事项
 你需要下载 PowerShell 脚本 [mongodb-replica-set-deploy.ps1](http://mirrors.blob.core.chinacloudapi.cn/mongodb/mongodb-replica-set-deploy.ps1)，按照以下示例运行 mongodb-replica-set-deploy.ps1 脚本，即可在资源组 rg1 中生成多台 CentOS 虚拟机，接着会在该虚机上搭建具备主从复制节点的 MongoDB。    
 
         PS C:\mongodb>.\mongodb-replica-set-deploy.ps1 -ResourceGroupName rg1 -CentosVersion 7.2 -AdminUsername azureuser -AdminPassword “YOUR-PASSWORD” -MongoUsername mongoadmin -MongoPassword “YOUR-PASSWORD” -DNSNamePrefix mongoreplicaset
-    
+
 创建过程大概需要10分钟，运行成功后会出现如下提示：   
 
     Deploy MongoDB Replica Set successfully.
@@ -107,7 +107,7 @@ PowerShell脚本运行注意事项
     % mongo mongoreplicasetsecondary0.chinanorth.cloudapp.chinacloudapi.cn:27017
     To connect secondary node1 using the mongo shell:
     % mongo mongoreplicasetsecondary1.chinanorth.cloudapp.chinacloudapi.cn:27017
-  
+
 **Azure CLI 方式** 
 
 你需要在安装好 Azure CLI 的机器上，运行如下命令下载 azuredeploy.parameters.json 参数配置文件：  
@@ -122,11 +122,11 @@ PowerShell脚本运行注意事项
 
         $TemplateUri="http://msmirrors.blob.core.chinacloudapi.cn/mongodb/mongodb-replica-set-centos/azuredeploy.json"
         azure group deployment create rg1 DeployMongoDB --template-uri $TemplateUri -e azuredeploy.parameters.json
- 
+
 按照上述任意一种方式创建完 MongoDB 后，即可使用如下命令连接 MongoDB 主服务器: 
- 
+
         mongo mongodbserver.chinanorth.cloudapp.chinacloudapi.cn:27017/test 
-  
+
 你也可以直接登录 MongoDB 服务器查看状态，运行如下命令：  
 
         $ mongo -u mongoadmin -p “YOUR-PASSWORD” admin --eval 'rs.status()'
@@ -193,7 +193,7 @@ PowerShell脚本运行注意事项
         ],
         "ok" : 1
         }
-  
+
 ###3.	在 Azure 虚拟机上搭建 MongoDB 分片集群  
 默认情况下，以下脚本将创建11台 CentOS 虚机，包含：2台 router 服务器, 3台 config 服务器，2个分片，每个分片带有1个 Priamry 节点和2个 Secondary 节点，总计11个节点，架构如下图所示：  
 
@@ -204,19 +204,19 @@ PowerShell脚本运行注意事项
 你需要下载PowerShell脚本 [mongodb-sharding-deploy.ps1](http://mirrors.blob.core.chinacloudapi.cn/mongodb/mongodb-sharding-deploy.ps1)，按照以下示例运行 mongodb-sharding-deploy.ps1 脚本，即可在资源组rg1中生成多台 CentOS 虚拟机，接着会在该虚机上搭建具备主从复制节点及分片集群的 MongoDB，创建过程大概需要1小时15分钟。  
 
         PS C:\mongodb>.\mongodb-sharding-deploy.ps1 -ResourceGroupName rg1 -CentosVersion 7.2 -AdminUsername azureuser -AdminPassword “YOUR-PASSWORD” -MongoUsername mongoadmin -MongoPassword “YOUR-PASSWORD” -DNSNamePrefix mongoshard
-  
+
 **Azure CLI 方式**  
 
 你需要在安装好 Azure CLI 的机器上，运行如下命令下载 azuredeploy.parameters.json 参数配置文件：  
 
         wget http://msmirrors.blob.core.chinacloudapi.cn/mongodb/mongodb-sharding-centos/azuredeploy.parameters.json -O azuredeploy.parameters.json
-  
+
 接着修改 azuredeploy.parameters.json 参数配置文件:   
 
         vi azuredeploy.parameters.json   
 
 然后运行如下命令即可在资源组 rg1 中生成多台 CentOS 虚拟机，接着会在该虚机上搭建具备主从复制节点及分片集群的 MongoDB，创建过程大概需要1 小时15分钟。   
-    
+
         $TemplateUri="http://msmirrors.blob.core.chinacloudapi.cn/mongodb/mongodb-sharding-centos/azuredeploy.json"
         azure group deployment create rg1 DeployMongoDB --template-uri $TemplateUri -e azuredeploy.parameters.json
 

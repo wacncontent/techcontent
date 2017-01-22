@@ -36,7 +36,7 @@ MySQL Database on Azure supports custom settings for some parameters. The follow
     </td>
   <th align="left"><strong>Range</strong>
     </td>
-  
+
   <tr>
     <td>Event_scheduler</td>
     <td>OFF</td>
@@ -82,7 +82,7 @@ MySQL Database on Azure supports custom settings for some parameters. The follow
     <td>1048576</td>
     <td>[1024- 16777216]</td>
   </tr>
-   <tr>
+    <tr>
     <td>server-id</td>
     <td>Random Value</td>
     <td>[1000 – 4294967295]</td>
@@ -102,7 +102,7 @@ MySQL Database on Azure supports custom settings for some parameters. The follow
     | PAD_CHAR_TO_FULL_LENGTH | PIPES_AS_CONCAT
     | REAL_AS_FLOAT | STRICT_ALL_TABLES
     | STRICT_TRANS_TABLES
-    
+
 <a href="http://dev.mysql.com/doc/refman/5.5/en/sql-mode.html">http://dev.mysql.com/doc/refman/5.5/en/sql-mode.html</a></td>
   </tr>
   <tr>

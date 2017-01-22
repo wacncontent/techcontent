@@ -191,7 +191,7 @@ ms.author: rachelap
 
         @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JaxRSServerCodegen", date = "2015-11-24T21:54:11.648Z")
         public class ContactsApiServiceImpl extends ContactsApiService {
-  
+
             private ArrayList<Contact> loadContacts()
             {
                 ArrayList<Contact> list = new ArrayList<Contact>();
@@ -200,20 +200,20 @@ ms.author: rachelap
                 list.add(new Contact(3, "Lora Riggs", "lora@contoso.com"));
                 return list;
             }
-  
+
             @Override
             public Response contactsGet(SecurityContext securityContext)
             throws NotFoundException {
                 ArrayList<Contact> list = loadContacts();
                 return Response.ok().entity(list).build();
                 }
-  
+
             @Override
             public Response contactsGetById(Integer id, SecurityContext securityContext)
             throws NotFoundException {
                 ArrayList<Contact> list = loadContacts();
                 Contact ret = null;
-            
+
                 for(int i=0; i<list.size(); i++)
                 {
                     if(list.get(i).getId() == id)

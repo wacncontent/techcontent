@@ -106,7 +106,7 @@ ms.author: billmath
 **用于创建示例数据库的 SQL 脚本**
 
 SQL
-    
+
     ---Creating the Database---------
     Create Database GSQLDEMO
     Go
@@ -125,7 +125,7 @@ SQL
         [MemberID] [int] NOT NULL,
         [Group_ID] [int] NOT NULL
     ) ON [PRIMARY]
-    
+
     GO
     /****** Object:  Table [dbo].[GROUPS]   ******/
     SET ANSI_NULLS ON
@@ -143,7 +143,7 @@ SQL
         [GroupID] ASC
     )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
     ) ON [PRIMARY]
-    
+
     GO
     /****** Object:  Table [dbo].[USERPHONE]   ******/
     SET ANSI_NULLS ON
@@ -156,7 +156,7 @@ SQL
         [USER_ID] [int] NULL,
         [Phone] [varchar](20) NULL
     ) ON [PRIMARY]
-    
+
     GO
     SET ANSI_PADDING OFF
     GO
@@ -179,7 +179,7 @@ SQL
         [USERID] ASC
     )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
     ) ON [PRIMARY]
-    
+
     GO
     ALTER TABLE [dbo].[GroupMembers]  WITH CHECK ADD  CONSTRAINT [FK_GroupMembers_GROUPS] FOREIGN KEY([Group_ID])
     REFERENCES [dbo].[GROUPS] ([GroupID])

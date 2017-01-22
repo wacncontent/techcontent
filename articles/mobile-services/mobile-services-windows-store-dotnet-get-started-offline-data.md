@@ -228,7 +228,7 @@ ms.author: donnam
 6. 再次按“刷新”按钮，这将导致调用 `SyncAsync`。`SyncAsync` 同时调用推送和拉取，但在本例中，我们可能已删除了对 `PushAsync` 的调用。这是因为“拉取时始终先执行推送操作”。这是为了确保本地存储中的所有表以及关系都保持一致。
 
     ![][10]
-  
+
 ##摘要
 
 [!INCLUDE [mobile-services-offline-summary-csharp](../../includes/mobile-services-offline-summary-csharp.md)]

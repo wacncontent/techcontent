@@ -51,17 +51,17 @@ wacn.date: 12/19/2016
 
 1. 下载 Raspbian。
 
-   1. [下载](https://www.raspberrypi.org/downloads/raspbian/) Raspbian Jessie with Pixel 的 .zip 文件。
-   2. 将 Raspbian 映像解压缩到计算机的某个文件夹中。
+    1. [下载](https://www.raspberrypi.org/downloads/raspbian/) Raspbian Jessie with Pixel 的 .zip 文件。
+    2. 将 Raspbian 映像解压缩到计算机的某个文件夹中。
 
 2. 将 Raspbian 安装到 microSD 卡。
 
-   1. [下载](https://www.etcher.io)并安装 Etcher SD 卡刻录机实用程序。
-   2. 运行 Etcher 并选择已在步骤 1 中解压缩的 Raspbian 映像。
-   3. 选择 microSD 卡驱动器。请注意，Etcher 可能已选择正确的驱动器。
-   4. 单击“闪存”将 Raspbian 安装到 microSD 卡。
-   5. 安装完成后，从计算机中取出 microSD 卡。可以安全地直接取出 microSD 卡，因为 Etcher 会在完成后自动弹出或卸载 microSD 卡。
-   6. 将 microSD 卡插入 Pi。
+    1. [下载](https://www.etcher.io)并安装 Etcher SD 卡刻录机实用程序。
+    2. 运行 Etcher 并选择已在步骤 1 中解压缩的 Raspbian 映像。
+    3. 选择 microSD 卡驱动器。请注意，Etcher 可能已选择正确的驱动器。
+    4. 单击“闪存”将 Raspbian 安装到 microSD 卡。
+    5. 安装完成后，从计算机中取出 microSD 卡。可以安全地直接取出 microSD 卡，因为 Etcher 会在完成后自动弹出或卸载 microSD 卡。
+    6. 将 microSD 卡插入 Pi。
 
 ![插入 SD 卡](./media/iot-hub-raspberry-pi-lessons/lesson1/insert_sdcard.jpg)  
 

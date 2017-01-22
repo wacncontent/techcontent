@@ -37,24 +37,24 @@ ms.author: lakshmir;barbkess;sonyama
 
 1. 登录到 [Azure 门户预览][]
 2. 在屏幕左侧选择“浏览”，然后选择“SQL Sever”
-    
+
     ![](./media/sql-data-warehouse-restore-database-portal/01-browse-for-sql-server.png)
-    
+
 3. 导航到你的服务器并选择它
-    
+
     ![](./media/sql-data-warehouse-restore-database-portal/01-select-server.png)
 
 4. 查找要从中还原的 SQL 数据仓库，然后选择它
-    
+
     ![](./media/sql-data-warehouse-restore-database-portal/01-select-active-dw.png)
 5. 在数据仓库边栏选项卡顶部，单击“还原”
-    
+
     ![](./media/sql-data-warehouse-restore-database-portal/01-select-restore-from-active.png)
 
 6. 指定新的“数据库名称”
 7. 选择最新“还原点”
     1. 请确保选择最新还原点。由于还原点以 UTC 进行显示，因为有时显示的默认选项不是最新还原点。
-    
+
     ![](./media/sql-data-warehouse-restore-database-portal/01-restore-blade-from-active.png)
 
 8. 单击**“确定”**
@@ -68,26 +68,26 @@ ms.author: lakshmir;barbkess;sonyama
 
 1. 登录到 [Azure 门户预览][]
 2. 在屏幕左侧选择“浏览”，然后选择“SQL Sever”
-    
+
     ![](./media/sql-data-warehouse-restore-database-portal/01-browse-for-sql-server.png)
 
 3. 导航到你的服务器并选择它
-    
+
     ![](./media/sql-data-warehouse-restore-database-portal/02-select-server.png)
 
 4. 向下滚动到服务器边栏选项卡上的“操作”部分
 5. 单击“已删除的数据库”磁贴
-    
+
     ![](./media/sql-data-warehouse-restore-database-portal/02-select-deleted-dws.png)
 
 6. 选择要还原的已删除数据库
-    
+
     ![](./media/sql-data-warehouse-restore-database-portal/02-select-deleted-dw.png)
 
 7. 指定新的“数据库名称”
-    
+
     ![](./media/sql-data-warehouse-restore-database-portal/02-restore-blade-from-deleted.png)
-    
+
 8. 单击**“确定”**
 9. 数据库还原过程随即将会开始，你可以使用“通知”监视还原进度
 

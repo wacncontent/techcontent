@@ -82,36 +82,36 @@ SQL 数据库在 Azure SQL 数据库服务器中创建。运行 **New-AzureRmSql
     # CREATE A RESOURCE GROUP
     $resourceGroupName = "{group-name}"
     $rglocation = "{Azure-region}"
-    
+
     New-AzureRmResourceGroup -Name $resourceGroupName -Location $rglocation
-    
+
     # CREATE A SERVER
     $serverName = "{server-name}"
     $serverVersion = "12.0"
     $serverLocation = "{Azure-region}"
-    
+
     $serverAdmin = "{server-admin}"
     $serverPassword = "{server-password}" 
     $securePassword = ConvertTo-SecureString –String $serverPassword –AsPlainText -Force
     $serverCreds = New-Object –TypeName System.Management.Automation.PSCredential –ArgumentList $serverAdmin, $securePassword
-    
+
     $sqlDbServer = New-AzureRmSqlServer -ResourceGroupName $resourceGroupName -ServerName $serverName -Location $serverLocation -ServerVersion $serverVersion -SqlAdministratorCredentials $serverCreds
-    
+
     # CREATE A SERVER FIREWALL RULE
     $ip = (Test-Connection -ComputerName $env:COMPUTERNAME -Count 1 -Verbose).IPV4Address.IPAddressToString
     $firewallRuleName = '{rule-name}'
     $firewallStartIp = $ip
     $firewallEndIp = $ip
-    
+
     $fireWallRule = New-AzureRmSqlServerFirewallRule -ResourceGroupName $resourceGroupName -ServerName $serverName -FirewallRuleName $firewallRuleName -StartIpAddress $firewallStartIp -EndIpAddress $firewallEndIp
-    
+
     # CREATE A SQL DATABASE
     $databaseName = "{database-name}"
     $databaseEdition = "{Standard}"
     $databaseSlo = "{S0}"
-    
+
     $sqlDatabase = New-AzureRmSqlDatabase -ResourceGroupName $resourceGroupName -ServerName $serverName -DatabaseName $databaseName -Edition $databaseEdition -RequestedServiceObjectiveName $databaseSlo
-    
+
     # REMOVE ALL RESOURCES THE SCRIPT JUST CREATED
     #Remove-AzureRmResourceGroup -Name $resourceGroupName
 
@@ -123,6 +123,6 @@ SQL 数据库在 Azure SQL 数据库服务器中创建。运行 **New-AzureRmSql
 
 ## 其他资源
 
-- [Azure SQL 数据库](./index.md/)
+- [Azure SQL 数据库](./index.md)
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

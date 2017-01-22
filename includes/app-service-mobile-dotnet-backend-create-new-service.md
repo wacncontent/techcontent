@@ -5,7 +5,7 @@
     ![突出显示移动应用快速启动的 Azure 门户](./media/app-service-mobile-dotnet-backend-create-new-service/search-mobile-apps-quickstart.png)
 
 3. 对于“资源组”，选择现有资源组，或创建新组（使用与应用相同的名称。）
- 
+
 4. 单击“创建”。稍等几分钟，等服务部署成功后再继续。
 
 <!-- URLs. -->

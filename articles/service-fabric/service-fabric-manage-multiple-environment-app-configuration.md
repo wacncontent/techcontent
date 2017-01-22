@@ -123,7 +123,7 @@ Service Fabric 应用程序项目可以包含一个或多个应用程序参数�
 应用程序项目模板中包含的 `Deploy-FabricApplication.ps1` PowerShell 脚本可接受发布配置文件作为参数，而 PublishProfile 包含对应用程序参数文件的引用。
 
     ./Deploy-FabricApplication -ApplicationPackagePath <app_package_path> -PublishProfileFile <publishprofile_path>
-  
+
 ## 后续步骤
 
 若要深入了解本主题中所述的某些核心概念，请参阅 [Service Fabric 技术概述](./service-fabric-technical-overview.md)。有关 Visual Studio 中其他可用应用管理功能的信息，请参阅[在 Visual Studio 中管理 Service Fabric 应用程序](./service-fabric-manage-application-in-visual-studio.md)。

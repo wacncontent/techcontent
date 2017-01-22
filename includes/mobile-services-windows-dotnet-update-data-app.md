@@ -8,14 +8,14 @@
         public class TodoItem
         {
             public string Id { get; set; }
-    
+
             [Newtonsoft.Json.JsonProperty(PropertyName = "text")]  
             public string Text { get; set; }
-    
+
             [Newtonsoft.Json.JsonProperty(PropertyName = "complete")]  
             public bool Complete { get; set; }
         }
-    
+
     **JsonPropertyAttribute** 用于定义客户端类型中的属性名称与基础数据表中的列名之间的映射。
 
     >[!NOTE]在通用 Windows 应用项目中，在共享的 DataModel 文件夹中的单独代码文件内定义了 TodoItem 类。
@@ -25,7 +25,7 @@
         private MobileServiceCollection<TodoItem, TodoItem> items;
         private IMobileServiceTable<TodoItem> todoTable = 
             App.<yourClient>.GetTable<TodoItem>();
-          
+
     此代码将创建一个移动服务感知型绑定集合 (items) 和数据库表 (todoTable) 的代理类。 
 
 4. 在 **InsertTodoItem** 方法中，删除设置 **TodoItem.Id** 属性的代码行，为该方法添加 **async** 修饰符，然后取消注释以下代码行：

@@ -41,7 +41,7 @@ Azure 流分析作业可以连接到一个或多个数据输出，这些数据�
     ![Azure 门户预览选择数据移动类型](./media/stream-analytics-add-outputs/6-stream-analytics-add-outputs.png)  
 
 3. 在“输出别名”框中为该输出提供一个友好的名称。此名称以后会用于你的作业查询以引用该输出。
-    
+
     填充所需连接属性的其余部分以连接到你的输出。这些字段根据输出类型而变化，在此处进行了详细定义。
 
     ![添加数据输出属性](./media/stream-analytics-add-outputs/3-stream-analytics-add-outputs.png)  

@@ -58,9 +58,9 @@ Azure 为 CSP 提供管理 Azure 客户订阅所需的 API，允许通过编程�
 ![替换文字](./media/expressroute-for-cloud-solution-providers/connect-to-model.png)
 
 如何选择这两种模式取决于你客户的需求，以及你目前提供 Azure 服务的具体需要。有关这些模型的详细信息以及关联的基于角色的访问控制、网络和标识设计模式在以下链接中有详尽介绍：
--	**基于角色的访问控制 (RBAC)** – RBAC 基于 Azure Active Directory。有关 Azure RBAC 的详细信息，请单击[此处](../active-directory/role-based-access-control-configure.md)。
--	**网络** – 介绍有关 Azure 中网络的各种主题。
--	**Azure Active Directory (AAD)** – AAD 提供针对 Azure 和第三方 SaaS 应用程序的标识管理。有关 Azure AD 的详细信息，请单击[此处](../active-directory/index.md/)。  
+- **基于角色的访问控制 (RBAC)** – RBAC 基于 Azure Active Directory。有关 Azure RBAC 的详细信息，请单击[此处](../active-directory/role-based-access-control-configure.md)。
+- **网络** – 介绍有关 Azure 中网络的各种主题。
+- **Azure Active Directory (AAD)** – AAD 提供针对 Azure 和第三方 SaaS 应用程序的标识管理。有关 Azure AD 的详细信息，请单击[此处](../active-directory/index.md)。  
 
 ## 网络速度
 ExpressRoute 支持的网络速度其范围为 50 Mb/秒到 10Gb/秒。因此，客户可以根据其具体环境购买所需的网络带宽。
@@ -109,12 +109,12 @@ ExpressRoute 通过 Azure 虚拟网络网关连接到 Azure 网络。网络网�
 ## “安全”
 根据所用的模型（Connect-To 或 Connect-Through），你的客户可在其 vNet 中定义安全策略，或者向 CSP 提供针对其 vNet 进行定义时的安全策略要求。可以定义以下安全标准：
 
-1.	**客户隔离** - Azure 平台将客户 ID 和 vNet 信息存储在安全的数据库中，以便将每个客户的流量封装在 GRE 隧道中，从而实现客户隔离。
-2.	**网络安全组 (NSG)** 规则用于在 Azure 的 vNet 中定义允许进出子网的流量。默认情况下，NSG 包含的“阻止”规则将阻止从 Internet 到 vNet 的流量，包含的“允许”规则将允许 vNet 内部的流量。
-3.	**强制隧道** - 此选项可将源自 Azure 的面向 Internet 的流量通过 ExpressRoute 连接重定向到本地数据中心。
+1. **客户隔离** - Azure 平台将客户 ID 和 vNet 信息存储在安全的数据库中，以便将每个客户的流量封装在 GRE 隧道中，从而实现客户隔离。
+2. **网络安全组 (NSG)** 规则用于在 Azure 的 vNet 中定义允许进出子网的流量。默认情况下，NSG 包含的“阻止”规则将阻止从 Internet 到 vNet 的流量，包含的“允许”规则将允许 vNet 内部的流量。
+3. **强制隧道** - 此选项可将源自 Azure 的面向 Internet 的流量通过 ExpressRoute 连接重定向到本地数据中心。
 有关强制隧道的详细信息，请单击[此处](./expressroute-routing.md#advertising-default-routes)。
 
-4.	**加密** - 虽然 ExpressRoute 线路是特定客户专用的，但也存在网络提供商被攻破的可能，这会让入侵者可以查看数据包流量。为了解决这种可能存在的问题，可以让客户或 CSP 加密连接中的流量，即为本地资源和 Azure 资源之间的所有流量定义 IPSec 隧道模式策略（请参阅图 5 上方针对客户 1 的可选“隧道”模式 IPSec：ExpressRoute 安全性）。第二个选项是在 ExpressRoute 线路的每个终结点处使用防火墙设备。这需要在两端安装其他的第三方防火墙 VM/设备，以便加密 ExpressRoute 线路上的流量。
+4. **加密** - 虽然 ExpressRoute 线路是特定客户专用的，但也存在网络提供商被攻破的可能，这会让入侵者可以查看数据包流量。为了解决这种可能存在的问题，可以让客户或 CSP 加密连接中的流量，即为本地资源和 Azure 资源之间的所有流量定义 IPSec 隧道模式策略（请参阅图 5 上方针对客户 1 的可选“隧道”模式 IPSec：ExpressRoute 安全性）。第二个选项是在 ExpressRoute 线路的每个终结点处使用防火墙设备。这需要在两端安装其他的第三方防火墙 VM/设备，以便加密 ExpressRoute 线路上的流量。
 
 ![替换文字](./media/expressroute-for-cloud-solution-providers/expressroute-security.png)
 

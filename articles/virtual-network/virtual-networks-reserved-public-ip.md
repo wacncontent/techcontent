@@ -42,15 +42,15 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 ## 常见问题
 1. 可以将保留 IP 用于所有 Azure 服务吗？
-   * 保留 IP 只能用于通过 VIP 公开的 VM 和云服务实例角色。
+    * 保留 IP 只能用于通过 VIP 公开的 VM 和云服务实例角色。
 2. 我可以有多少个保留 IP？
-   * 请参阅 [Azure 限制](../azure-subscription-service-limits.md#networking-limits)一文。
+    * 请参阅 [Azure 限制](../azure-subscription-service-limits.md#networking-limits)一文。
 3. 保留 IP 是否收费？
-   * 请参阅[保留 IP 地址定价详细信息](https://www.azure.cn/pricing/details/reserved-ip-addresses/)以获取定价信息。
+    * 请参阅[保留 IP 地址定价详细信息](https://www.azure.cn/pricing/details/reserved-ip-addresses/)以获取定价信息。
 4. 如何保留某个 IP 地址？
-   * 可使用 PowerShell、[Azure 管理 REST API ](https://msdn.microsoft.com/zh-cn/library/azure/dn722420.aspx) 或 [Azure 门户预览](https://portal.azure.cn)在特定区域中保留 IP 地址。此保留 IP 地址与你的订阅相关联。
+    * 可使用 PowerShell、[Azure 管理 REST API ](https://msdn.microsoft.com/zh-cn/library/azure/dn722420.aspx) 或 [Azure 门户预览](https://portal.azure.cn)在特定区域中保留 IP 地址。此保留 IP 地址与你的订阅相关联。
 5. 我可以将保留 IP 用于基于地缘组的 VNet 吗？
-   * 仅区域 VNet 支持保留 IP。与地缘组关联的 VNet 不支持保留 IP。有关如何将 VNet 与区域或地缘组关联的详细信息，请参阅[关于区域 VNet 和地缘组](./virtual-networks-migrate-to-regional-vnet.md)。
+    * 仅区域 VNet 支持保留 IP。与地缘组关联的 VNet 不支持保留 IP。有关如何将 VNet 与区域或地缘组关联的详细信息，请参阅[关于区域 VNet 和地缘组](./virtual-networks-migrate-to-regional-vnet.md)。
 
 ## 管理保留 VIP
 

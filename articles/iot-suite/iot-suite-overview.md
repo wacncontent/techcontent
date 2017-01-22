@@ -56,10 +56,10 @@ IoT 套件包含预配置解决方案，可让你快速地开始使用，并浏�
 现在，你已概要了解 IoT 套件可以执行哪些操作以及其主要组件是什么，接下来你可以详细了解 IoT 套件中的预配置解决方案，请参阅[什么是 Azure IoT 预配置解决方案？][lnk-what-are-preconfig]
 
 [lnk-sdks]: ../iot-hub/iot-hub-sdks-summary.md
-[lnk-iot-hub]: ../iot-hub/index.md/
-[lnk-asa]: ../stream-analytics/index.md/
-[lnk-azure-storage]: ../storage/index.md/
-[lnk-document-db]: ../documentdb/index.md/
+[lnk-iot-hub]: ../iot-hub/index.md
+[lnk-asa]: ../stream-analytics/index.md
+[lnk-azure-storage]: ../storage/index.md
+[lnk-document-db]: ../documentdb/index.md
 [lnk-power-bi]: https://powerbi.microsoft.com/
 [iot-suite-what-is-azure-iot]: ./iot-suite-what-is-azure-iot.md
 [lnk-what-are-preconfig]: ./iot-suite-what-are-preconfigured-solutions.md

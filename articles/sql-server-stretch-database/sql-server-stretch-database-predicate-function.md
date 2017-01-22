@@ -80,12 +80,12 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE @column1 < CONVERT(datetime, '1/1/2016', 101)
         GO
-    
+
         ALTER TABLE stretch_table_name SET ( REMOTE_DATA_ARCHIVE = ON (
             FILTER_PREDICATE = dbo.fn_stretchpredicate(date),
             MIGRATION_STATE = OUTBOUND
         ) )
-    
+
 -   向函数参数应用 IS NULL 或 IS NOT NULL 运算符。
 
 -   使用 IN 运算符将函数参数与常量值列表进行比较。
@@ -99,12 +99,12 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE @column1 IN (N'Completed', N'Returned', N'Cancelled')
         GO
-    
+
         ALTER TABLE table1 SET ( REMOTE_DATA_ARCHIVE = ON (
             FILTER_PREDICATE = dbo.fn_stretchpredicate(shipment_status),
             MIGRATION_STATE = OUTBOUND
         ) )
-    
+
 ### 比较运算符
 支持以下比较运算符。
 
@@ -173,7 +173,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
 
         ALTER TABLE <table name>  
              SET ( REMOTE_DATA_ARCHIVE ( MIGRATION_STATE = INBOUND ) ) ;   
-      
+
 2. 等待迁移完成。你可以在 SQL Server Management Studio 的 **Stretch Database 监视器**中查看状态，也可以查询 **sys.dm\_db\_rda\_migration\_status** 视图。有关详细信息，请参阅[数据迁移的监视和故障排除](./sql-server-stretch-database-monitor.md) 或 [sys.dm\_db\_rda\_migration\_status](https://msdn.microsoft.com/zh-cn/library/dn935017.aspx)。
 
 3. 创建要应用于表的筛选器函数。
@@ -187,7 +187,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
                     MIGRATION_STATE = OUTBOUND  
                 )  
             );   
-      
+
 ## 按日期筛选行
 下面的示例将迁移 **date** 列包含的值早于 2016 年 1 月 1 日的行。
 
@@ -258,7 +258,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
             RETURN SELECT 1 AS is_eligible
                    WHERE @systemEndTime < CONVERT(datetime2,'2016-01-02T00:00:00', 101)
             GO
-    
+
             /*(2) Set the new function as the filter predicate */
             ALTER TABLE <table name>
             SET
@@ -282,12 +282,12 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
           WHERE @column1 < N'20150101' AND @column2 IN (N'Completed', N'Returned', N'Cancelled')
         GO
-    
+
         ALTER TABLE table1 SET ( REMOTE_DATA_ARCHIVE = ON (
             FILTER_PREDICATE = dbo.fn_stretchpredicate(date, shipment_status),
             MIGRATION_STATE = OUTBOUND
         ) )
-    
+
 -   以下示例使用了多个条件，并使用 CONVERT 执行确定性转换。
 
         CREATE FUNCTION dbo.fn_stretchpredicate_example1(@column1 datetime, @column2 int, @column3 nvarchar)
@@ -297,7 +297,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
             WHERE @column1 < CONVERT(datetime, '1/1/2015', 101)AND (@column2 < -100 OR @column2 > 100 OR @column2 IS NULL)AND @column3 IN (N'Completed', N'Returned', N'Cancelled')
         GO
-    
+
 -   以下示例使用数学运算符和函数。
 
         CREATE FUNCTION dbo.fn_stretchpredicate_example2(@column1 float)
@@ -307,7 +307,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE @column1 < SQRT(400) + 10
         GO
-    
+
 -   以下示例使用 BETWEEN 和 NOT BETWEEN 运算符。这种用法是有效的，因为在将 BETWEEN 和 NOT BETWEEN 运算符替换为等效的 AND 和 OR 表达式后，生成的谓词符合本文所述的规则。
 
         CREATE FUNCTION dbo.fn_stretchpredicate_example3(@column1 int, @column2 int)
@@ -318,7 +318,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
                 WHERE @column1 BETWEEN 0 AND 100
                     AND (@column2 NOT BETWEEN 200 AND 300 OR @column1 = 50)
         GO
-    
+
     在将 BETWEEN 和 NOT BETWEEN 运算符替换为等效的 AND 和 OR 表达式后，上面的函数等效于下面的函数。
 
         CREATE FUNCTION dbo.fn_stretchpredicate_example4(@column1 int, @column2 int)
@@ -328,7 +328,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE @column1 >= 0 AND @column1 <= 100AND (@column2 < 200 OR @column2 > 300 OR @column1 = 50)
         GO
-    
+
 ## 无效的筛选器函数的示例
 
 -   以下函数无效，因为它包含不确定性转换。
@@ -340,7 +340,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE @column1 < CONVERT(datetime, '1/1/2016')
         GO
-    
+
 -   以下函数无效，因为它包含不确定性函数调用。
 
         CREATE FUNCTION dbo.fn_example6(@column1 datetime)
@@ -350,7 +350,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE @column1 < DATEADD(day, -60, GETDATE())
         GO
-    
+
 -   以下函数无效，因为它包含子查询。
 
         CREATE FUNCTION dbo.fn_example7(@column1 int)
@@ -360,7 +360,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE @column1 IN (SELECT SupplierID FROM Supplier WHERE Status = 'Defunct'))
         GO
-    
+
 -   以下函数无效，因为使用代数运算符或内置函数的表达式在你定义函数时必须求值为常量。不能在代数表达式或函数调用中包含列引用。
 
         CREATE FUNCTION dbo.fn_example8(@column1 int)
@@ -370,7 +370,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE @column1 % 2 =  0
         GO
-    
+
         CREATE FUNCTION dbo.fn_example9(@column1 int)
         RETURNS TABLE
         WITH SCHEMABINDING
@@ -378,7 +378,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE SQRT(@column1) = 30
         GO
-    
+
 -   以下函数无效，因为在将 BETWEEN 运算符替换为等效的 AND 表达式后，该函数将违反本文所述的规则。
 
         CREATE FUNCTION dbo.fn_example10(@column1 int, @column2 int)
@@ -388,7 +388,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE (@column1 BETWEEN 1 AND 200 OR @column1 = 300) AND @column2 > 1000
         GO
-    
+
     在将 BETWEEN 运算符替换为等效的 AND 表达式后，上面的函数等效于下面的函数。此函数无效，因为基元条件只能使用 OR 逻辑运算符。
 
         CREATE FUNCTION dbo.fn_example11(@column1 int, @column2 int)
@@ -398,7 +398,7 @@ Stretch Database 筛选器谓词所需的内联表值函数类似于以下示例
         RETURN	SELECT 1 AS is_eligible
                 WHERE (@column1 >= 1 AND @column1 <= 200 OR @column1 = 300) AND @column2 > 1000
         GO
-    
+
 ## Stretch Database 如何应用筛选器函数
 Stretch Database 使用 CROSS APPLY 运算符对表应用筛选器函数并确定符合条件的行。例如：
 

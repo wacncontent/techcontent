@@ -51,7 +51,7 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
     _cachedCredentials = new MediaServicesCredentials(
                     _mediaServicesAccountName,
                     _mediaServicesAccountKey);
-    
+
     _context = new CloudMediaContext(_cachedCredentials);
 
 ## 重复使用访问控制服务令牌
@@ -76,7 +76,7 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
         {
             _cachedCredentials = new MediaServicesCredentials(_mediaServicesAccountName, _mediaServicesAccountKey);
         }
-        
+
         CloudMediaContext context = new CloudMediaContext(_cachedCredentials);
 
 - 你也可以缓存 AccessToken 字符串和 TokenExpiration 值。这些值以后可以与缓存的令牌数据一起用于新建 MediaServicesCredentials 对象。这对于令牌可以在多个进程或多台计算机之间安全共享的方案尤其有用。
@@ -84,62 +84,62 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
     以下代码片段调用了未在此示例中定义的 SaveTokenDataToExternalStorage、GetTokenDataFromExternalStorage 和 UpdateTokenDataInExternalStorageIfNeeded 方法。你可以定义这些方法以在外部存储中存储、检索和更新令牌数据。
 
         CloudMediaContext context1 = new CloudMediaContext(_mediaServicesAccountName, _mediaServicesAccountKey);
-        
+
         // Get token values from the context.
         var accessToken = context1.Credentials.AccessToken;
         var tokenExpiration = context1.Credentials.TokenExpiration;
-        
+
         // Save token values for later use. 
         // The SaveTokenDataToExternalStorage method should check 
         // whether the TokenExpiration value is valid before saving the token data. 
         // If it is not valid, call MediaServicesCredentials’s RefreshToken before caching.
         SaveTokenDataToExternalStorage(accessToken, tokenExpiration);
-        
+
     使用保存的令牌值可创建 MediaServicesCredentials。
 
         var accessToken = "";
         var tokenExpiration = DateTime.UtcNow;
-        
+
         // Retrieve saved token values.
         GetTokenDataFromExternalStorage(out accessToken, out tokenExpiration);
-        
+
         // Create a new MediaServicesCredentials object using saved token values.
         MediaServicesCredentials credentials = new MediaServicesCredentials(_mediaServicesAccountName, _mediaServicesAccountKey)
         {
             AccessToken = accessToken,
             TokenExpiration = tokenExpiration
         };
-        
+
         CloudMediaContext context2 = new CloudMediaContext(credentials);
 
     在令牌已由媒体服务 SDK 更新的情况下，更新令牌副本。
-    
+
         if(tokenExpiration != context2.Credentials.TokenExpiration)
         {
             UpdateTokenDataInExternalStorageIfNeeded(accessToken, context2.Credentials.TokenExpiration);
         }
-        
+
 - 如果你具有多个媒体服务帐户（例如，用于负载共享目的或地域分布，则可以使用 System.Collections.Concurrent.ConcurrentDictionary 集合（ConcurrentDictionary 集合表示可由多个线程同时访问的密钥/值对的线程安全集合）缓存 MediaServicesCredentials 对象。然后可以使用 GetOrAdd 方法获得缓存凭据。
 
         // Declare a static class variable of the ConcurrentDictionary type in which the Media Services credentials will be cached.  
         private static readonly ConcurrentDictionary<string, MediaServicesCredentials> mediaServicesCredentialsCache = 
             new ConcurrentDictionary<string, MediaServicesCredentials>();
-        
+
         // Cache (or get already cached) Media Services credentials. Use these credentials to create a new CloudMediaContext object.
         static public CloudMediaContext CreateMediaServicesContext(string accountName, string accountKey)
         {
             CloudMediaContext cloudMediaContext;
             MediaServicesCredentials mediaServicesCredentials;
-        
+
             mediaServicesCredentials = mediaServicesCredentialsCache.GetOrAdd(
                 accountName,
                 valueFactory => new MediaServicesCredentials(accountName, accountKey));
-        
+
             cloudMediaContext = new CloudMediaContext(mediaServicesCredentials);
-        
+
             return cloudMediaContext;
         }
-        
+
 ## 连接到中国北部地区的媒体服务帐户
 
 如果你的帐户位于中国北部地区，请使用以下构造函数：
@@ -169,7 +169,7 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
     </configuration>
 
 若要从配置中检索连接值，你可以使用 **ConfigurationManager** 类，然后将相关值分配给代码中的字段：
-    
+
     private static readonly string _accountName = ConfigurationManager.AppSettings["MediaServicesAccountName"];
     private static readonly string _accountKey = ConfigurationManager.AppSettings["MediaServicesAccountKey"];
 

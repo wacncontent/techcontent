@@ -91,7 +91,7 @@ The Azure CDN HTTPS acceleration service is only available to paid Azure users.
     There are two methods of receiving the email:
 
     1) **Default method**: Once the certificate issuer receives the request, the domain name  ownership confirmation email will be sent by default to the email address associated with the acceleration domain name (see the screenshot above for details) as soon as possible. If you choose to obtain the confirmation email by this method, you can go directly to the next step by clicking on the “Confirm” button.
-        
+
     2) **DNS TXT method**: If you are unable to sign in to the email account above to complete confirmation of the domain name ownership, you can complete the confirmation process **by creating a DNS TXT record** as shown in the image below. This method may take a little longer to complete.
 
     ![][7]
@@ -105,7 +105,7 @@ The Azure CDN HTTPS acceleration service is only available to paid Azure users.
     ![][9]
 
 6. The user can complete the domain name ownership verification process by accessing the email.
-    
+
     Once the Azure CDN back end confirms which method of receiving the confirmation email you have chosen, you will see the following interface:
 
     ![][11]
@@ -140,7 +140,7 @@ The SSL certificate type used is a SAN multi-domain name certificate (SAN/UCC SS
 Subject Alternative Name (SAN) certificates are also known as Unified Communication Certificates (UCC). SAN SSL certificates allow you to add multiple “domain names” or “server” names that need protection within the same certificate. This feature provides a huge amount of flexibility, as it lets you create an SSL certificate that is not only easy to use and install, but also more secure than wildcard SSL certificates, and perfectly suited to your server security requirements.
 
 Certificate issuers: <https://www.digicert.com/>
-    
+
 The Azure CDN will apply for, install, and maintain the SSL certificate on your behalf.
 
 ### Information about charges

@@ -54,7 +54,7 @@ Azure 媒体服务是一项以 OData v3 为基础的基于 REST 的服务。因�
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 74
     Expect: 100-continue
-    
+
     {"Name": "DownloadPolicy", "DurationInMinutes" : "300", "Permissions" : 1}
 
 ##查询实体
@@ -145,7 +145,7 @@ Azure 媒体服务是一项以 OData v3 为基础的基于 REST 的服务。因�
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 21
     Expect: 100-continue
-    
+
     {"Name" : "NewName" }
 
 ##删除实体

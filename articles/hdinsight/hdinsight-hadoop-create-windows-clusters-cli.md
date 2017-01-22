@@ -47,7 +47,7 @@ ms.author: jgao
 要获取帮助，请使用 **-h** 开关。例如：
 
     azure hdinsight cluster create -h
-    
+
 ##创建群集
 
 必须先获取 Azure Blob 存储帐户，然后才能创建 HDInsight 群集。要创建 HDInsight 群集，必须指定以下信息：
@@ -59,15 +59,15 @@ ms.author: jgao
 - **默认存储帐户**：HDInsight 使用 Azure Blob 存储容器作为默认文件系统。需要先拥有 Azure 存储帐户，然后才能创建 HDInsight 群集。
 
     要创建新 Azure 存储帐户：
-    
+
         azure storage account create "<Azure Storage Account Name>" -l "<Azure Location>" --type LRS
 
     > [!NOTE] 存储帐户必须与 HDInsight 共置于同一数据中心。存储帐户类型不能为 ZRS，因为 ZRS 不支持表。
 
     有关使用 Azure 经典管理门户创建 Azure 存储帐户的信息，请参阅 [创建、管理或删除存储帐户][azure-create-storageaccount]。
-    
+
     如果已拥有存储帐户但不知道帐户名称和帐户密钥，可使用以下命令检索相关信息：
-    
+
         -- Lists Storage accounts
         azure storage account list
         -- Shows a Storage account

@@ -57,19 +57,19 @@ ms.author: tomfitz
         azure account set <YourSubscriptionNameOrId>
 
 4. 部署模板时，必须指定将包含已部署资源的资源组。如果有要部署到的现有资源组，可以跳过此步骤，然后使用该资源组。
-   
+
      若要创建资源组，请提供资源组的名称和位置。提供资源组的位置是因为资源组存储与资源有关的元数据。出于合规性原因，你可能会想要指定该元数据的存储位置。一般情况下，建议指定大部分资源将驻留的位置。使用相同位置可简化模板。
 
         azure group create -n ExampleResourceGroup -l "China East"
 
     A summary of the new resource group is returned.
-   
+
 5. 在执行部署之前先运行 **azure group template validate** 命令验证部署。测试部署时，请提供与执行部署时所提供的完全相同的参数（如下一步中所示）。
 
         azure group template validate -f <PathToTemplate> -p "{"ParameterName":{"value":"ParameterValue"}}" -g ExampleResourceGroup
 
 6. 若要将资源部署到资源组，请运行 **azure group deployment create** 命令并提供所需的参数。参数包括部署的名称、资源组的名称、模板的路径或 URL，以及方案所需的任何其他参数。如果未指定 **mode** 参数，则使用默认值 **Incremental**。若要运行完整部署，请将 **mode** 设置为 **Complete**。使用完整模式时要小心，因为可能会无意中删除不在模板中的资源。
-   
+
      若要部署本地模板，请使用 **template-file** 参数：
 
         azure group deployment create --resource-group examplegroup --template-file "c:\MyTemplates\example.json"
@@ -147,7 +147,7 @@ ms.author: tomfitz
 ## <a name="parameters"></a> 参数
 
 可以使用以下选项提供参数值：
-   
+
 - 使用内联参数。每个参数采用以下格式：`"ParameterName": { "value": "ParameterValue" }`。以下示例显示带转义符的参数。
 
         azure group deployment create -f <PathToTemplate> -p "{"ParameterName":{"value":"ParameterValue"}}" -g ExampleResourceGroup -n ExampleDeployment

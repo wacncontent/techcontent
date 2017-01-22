@@ -35,7 +35,7 @@ ms.author: juliako
         Console.WriteLine("Job state changed event:");
         Console.WriteLine("  Previous state: " + e.PreviousState);
         Console.WriteLine("  Current state: " + e.CurrentState);
-    
+
         switch (e.CurrentState)
         {
             case JobState.Finished:
@@ -64,12 +64,12 @@ ms.author: juliako
                 break;
         }
     }
-    
+
     private static void LogJobStop(string jobId)
     {
         StringBuilder builder = new StringBuilder();
         IJob job = GetJob(jobId);
-    
+
         builder.AppendLine("\nThe job stopped due to cancellation or an error.");
         builder.AppendLine("***************************");
         builder.AppendLine("Job ID: " + job.Id);
@@ -99,7 +99,7 @@ ms.author: juliako
         WriteToFile(outputFile, builder.ToString());
         Console.Write(builder.ToString());
     }
-    
+
     private static string JobIdAsFileName(string jobID)
     {
         return jobID.Replace(":", "_");

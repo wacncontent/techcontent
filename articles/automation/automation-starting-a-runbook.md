@@ -36,11 +36,11 @@ ms.author: magoedte;bwren
 
 ## <a name="starting-a-runbook-with-the-azure-portal"></a> 使用 Azure 经典管理门户启动 Runbook
 
-1.	在 Azure 经典管理门户中，选择“自动化”，然后单击自动化帐户的名称。
-2.	选择“Runbook”选项卡。
-3.	选择一个 Runbook，然后单击“启动”。
-4.	如果 Runbook 包含参数，则系统会提示你在文本框中提供每个参数的值。请参阅下面的 [Runbook 参数](#Runbook-parameters)，以获取有关参数的更多详细信息。
-5.	选择“启动 Runbook”消息旁边的“查看作业”，或选择 Runbook 的“作业”选项卡以查看 Runbook 作业的状态。
+1. 在 Azure 经典管理门户中，选择“自动化”，然后单击自动化帐户的名称。
+2. 选择“Runbook”选项卡。
+3. 选择一个 Runbook，然后单击“启动”。
+4. 如果 Runbook 包含参数，则系统会提示你在文本框中提供每个参数的值。请参阅下面的 [Runbook 参数](#Runbook-parameters)，以获取有关参数的更多详细信息。
+5. 选择“启动 Runbook”消息旁边的“查看作业”，或选择 Runbook 的“作业”选项卡以查看 Runbook 作业的状态。
 
 ## <a name="starting-a-runbook-with-windows-powershell"></a> 使用 Windows PowerShell 启动 Runbook
 
@@ -61,7 +61,7 @@ Start-AzureAutomationRunbook 将返回一个作业对象，启动 Runbook 后，
        $status = $job.Status
        $doLoop = (($status -ne "Completed") -and ($status -ne "Failed") -and ($status -ne "Suspended") -and ($status -ne "Stopped"))
     }
-    
+
     Get-AzureAutomationJobOutput -AutomationAccountName $AutomationAcct -Id $job.Id -Stream Output
 
 如果 Runbook 需要参数，则你必须以[哈希表](http://technet.microsoft.com/zh-cn/library/hh847780.aspx)的形式提供参数，其中，哈希表的密钥与参数名称匹配，值为参数值。以下示例演示如何启动包含两个名称分别为 FirstName 和 LastName 的字符串参数、一个名为 RepeatCount 的整数和一个名为 Show 的布尔参数的 Runbook。有关参数的其他信息，请参阅下面的 [Runbook 参数](#Runbook-parameters)。
@@ -160,6 +160,6 @@ Azure 自动化 Web 服务将为使用特定数据类型的参数提供特殊功
 
 ## 后续步骤
 
--	若要详细了解如何创建模块化 Runbook，以供其他 Runbook 用于特定或常用函数，请参阅[子 Runbook](./automation-child-runbooks.md)。
+- 若要详细了解如何创建模块化 Runbook，以供其他 Runbook 用于特定或常用函数，请参阅[子 Runbook](./automation-child-runbooks.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

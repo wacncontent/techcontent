@@ -44,7 +44,7 @@ Azure 中的 VM 使用不同类型的磁盘 - 操作系统磁盘、本地临时�
         I/O size (minimum/optimal): 512 bytes / 512 bytes
         Disk label type: dos
         Disk identifier: 0x5a1d2a1a
-    
+
             Device Boot      Start         End      Blocks   Id  System
         /dev/sdc1            2048  2145386495  1072692224   83  Linux
 
@@ -59,11 +59,11 @@ Azure 中的 VM 使用不同类型的磁盘 - 操作系统磁盘、本地临时�
         /dev/sdc1: UUID="33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e" TYPE="ext4"
 
 5. 删除与要分离的磁盘的所有分区的设备路径或 UUID 关联的 **/etc/fstab** 文件中的条目。此示例的条目可能是：
- 
+
         UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults   1   2
 
     或
- 
+
         /dev/sdc1   /datadrive   ext4   defaults   1   2
 
 ## 分离磁盘
@@ -81,7 +81,7 @@ Azure 中的 VM 使用不同类型的磁盘 - 操作系统磁盘、本地临时�
 输出类似于以下示例，显示数据磁盘已分离：
 
         info:    Executing command vm disk list
-   
+
         * Fetching disk images
         * Getting virtual machines
         * Getting VM disks

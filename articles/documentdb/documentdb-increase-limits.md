@@ -2,37 +2,28 @@
 title: 请求增加 DocumentDB 帐户配额 | Azure
 description: 了解如何请求对 DocumentDB 数据库配额（如文档存储空间和每个集合的吞吐量）的调整。
 services: documentdb
-authors: AndrewHoh
+author: AndrewHoh
 manager: jhubbard
 editor: monicar
-documentationCenter: 
+documentationcenter: 
 
+ms.assetid: 68f7dc8d-534f-4301-a42c-bcd1bb1b77fe
 ms.service: documentdb
 ms.workload: data-services
 ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
-ms.date: 08/25/2016
-wacn.date: 10/18/2016
+ms.date: 12/13/2016
+wacn.date: 01/16/2017
 ms.author: anhoh
 ---
 
-# 请求提高 DocumentDB 帐户限制
+# 请求增加 DocumentDB 帐户配额
+[Azure DocumentDB](https://www.azure.cn/home/features/documentdb/) 是全局缩放数据库，可对吞吐量和存储进行缩放，以满足应用程序的所有需求。如果对 DocumentDB 提供的规模有任何问题，请发送电子邮件到 askdocdb@microsoft.com。
 
-[Azure DocumentDB](https://www.azure.cn/home/features/documentdb/) 有一组默认配额，可以通过联系 Azure 支持加以调整。本文介绍了如何请求增加配额。
+本文介绍如何通过 Azure 支持请求增加配额。
 
-阅读本文之后，你将能够回答以下问题：
-
--	可联系 Azure 支持部门来调整哪些 DocumentDB 数据库配额？
--	我如何请求对 DocumentDB 帐户配额进行调整？
-
-##<a id="Quotas"></a> DocumentDB 帐户配额
-
-下表描述了 DocumentDB 配额。可联系 Azure 支持部门调整带星号 (*) 的配额：
-
-[!INCLUDE [azure-documentdb-limits](../../includes/azure-documentdb-limits.md)]
-
-##<a id="RequestQuotaIncrease"></a> 请求配额调整
+## <a id="RequestQuotaIncrease"></a> 请求配额调整
 以下步骤演示了如何请求配额调整。
 
 1. 在 [Azure 门户预览](https://portal.azure.cn)中，依次单击“更多服务”、“帮助 + 支持”。
@@ -57,7 +48,7 @@ ms.author: anhoh
 
 ![支持请求边栏选项卡的屏幕截图](./media/documentdb-increase-limits/supportrequest4.png)  
 
-##<a name="NextSteps"></a>后续步骤
-- 若要了解有关 DocumentDB 的详细信息，请单击[此处](./index.md/)。
+## <a name="NextSteps"></a>后续步骤
+- 若要了解有关 DocumentDB 的详细信息，请单击[此处](./index.md)。
 
-<!---HONumber=Mooncake_1010_2016-->
+<!---HONumber=Mooncake_0109_2017-->

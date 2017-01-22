@@ -35,7 +35,7 @@ ms.tgt_pltfrm: NA
 ## 脚本详细信息
 
 可以从本机计算机或云上的 VM 运行该脚本。从本地计算机运行时，由于脚本需要从目标数据库下载数据，因此可能会产生数据输出费用。下面根据目标数据库的数目和运行脚本的持续时间显示了数据量的估算值。有关 Azure 数据传输费用，请参阅[数据传输定价详细信息](https://www.azure.cn/pricing/details/data-transfer/)。
-       
+
  -     每小时 1 个数据库 = 38 KB
  -     每天 1 个数据库 = 900 KB
  -     每周 1 个数据库 = 6 MB
@@ -54,7 +54,7 @@ ms.tgt_pltfrm: NA
 该脚本要求提供用于连接目标服务器（弹性数据库池候选项）的凭据与完整服务器名称 <*dbname*>**.database.chinacloudapi.cn**。该脚本不支持一次分析多个服务器。
 
 提交初始参数集的值之后，系统会提示用户使用 Azure 帐户登录。这是用于登录目标服务器而不是输出数据库服务器的帐户。
-    
+
 如果在运行脚本时遇到以下警告，可以忽略：
 
 - 警告: Switch-AzureMode cmdlet 已过时。
@@ -74,12 +74,12 @@ ms.tgt_pltfrm: NA
     [Parameter(Mandatory=$true)][string]$outputDBpassword,
     [Parameter(Mandatory=$true)][int]$duration_minutes # How long to run. Recommend to run for the period of time when your typical workload is running. At least 10 mins.
     )
-    
+
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
-    
+
     $server = Get-AzureRmSqlServer -ServerName $servername.Split('.')[0] -ResourceGroupName $ResourceGroupName
-    
+
     # Check version/upgrade status of the server
     $upgradestatus = Get-AzureRmSqlServerUpgrade -ServerName $servername.Split('.')[0] -ResourceGroupName $ResourceGroupName
     $version = ""
@@ -91,18 +91,18 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
     {
     $version = $server.ServerVersion
     }
-    
+
     # For Elastic database pool candidates, we exclude master, and any databases that are already in a pool. You may add more databases to the excluded list below as needed
     $ListOfDBs = Get-AzureRmSqlDatabase -ServerName $servername.Split('.')[0] -ResourceGroupName $ResourceGroupName | Where-Object {$_.DatabaseName -notin ("master") -and $_.CurrentServiceLevelObjectiveName -notin ("ElasticPool") -and $_.CurrentServiceObjectiveName -notin ("ElasticPool")}
-    
+
     $outputConnectionString = "Data Source=$outputServerName;Integrated Security=false;Initial Catalog=$outputdatabaseName;User Id=$outputDBUsername;Password=$outputDBpassword"
     $destinationTableName = "resource_stats_output"
-    
+
     # Create a table in output database for metrics collection
     $sql = "
     IF  NOT EXISTS (SELECT * FROM sys.objects 
     WHERE object_id = OBJECT_ID(N'$($destinationTableName)') AND type in (N'U'))
-    
+
     BEGIN
     Create Table $($destinationTableName) (database_name varchar(128), slo varchar(20), end_time datetime, avg_cpu float, avg_io float, avg_log float, db_size float);
     Create Clustered Index ci_endtime ON $($destinationTableName) (end_time);
@@ -110,13 +110,13 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
     TRUNCATE TABLE $($destinationTableName);
     "
     Invoke-Sqlcmd -ServerInstance $outputServerName -Database $outputdatabaseName -Username $outputDBUsername -Password $outputDBpassword -Query $sql -ConnectionTimeout 120 -QueryTimeout 120 
-    
+
     # waittime (minutes) is interval between data collection queries in the loop below.
     $Waittime = 10
     $end_Time = [DateTime]::UtcNow
     $start_time = $end_time.AddMinutes(-$Waittime)
     $finish_time = $end_Time.AddMinutes($duration_minutes)
-    
+
     While ($end_time -lt $finish_time)
     {
     Write-Host "Collecting metrics..." 
@@ -170,16 +170,16 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
     WHERE end_time > '$($start_time)' and end_time <= '$($end_time)';
     " 
     }
-    
+
     $result = Invoke-Sqlcmd -ServerInstance $servername -Database $db.DatabaseName -Username $username -Password $serverPassword -Query $sql -ConnectionTimeout 240 -QueryTimeout 3600 
     #bulk copy the metrics to output database
     $bulkCopy = new-object ("Data.SqlClient.SqlBulkCopy") $outputConnectionString 
     $bulkCopy.BulkCopyTimeout = 600
     $bulkCopy.DestinationTableName = "$destinationTableName";
     $bulkCopy.WriteToServer($result);
-    
+
     }
-    
+
     $start_time = $start_time.AddMinutes($Waittime)
     $end_time = $end_time.AddMinutes($Waittime)
     Write-Host $start_time
@@ -189,7 +189,7 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
        }
     until (([DateTime]::UtcNow) -ge $end_time)
     }
-    
+
     Write-Host "Analyzing the collected metrics...."
     # Analysis query that does aggregation of the resource metrics to calculate pool size.
     $sql1 = 'Declare @DTU_Perf_99 as float, @DTU_Storage as float;
@@ -198,7 +198,7 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
     SELECT end_time, SUM(db_size) AS avg_group_Storage, SUM(avg_cpu) AS avg_group_cpu, SUM(avg_io) AS avg_group_io,SUM(avg_log) AS avg_group_log
     FROM resource_stats_output 
     WHERE slo LIKE '
-    
+
     $sql2 = '
     GROUP BY end_time
     )
@@ -214,7 +214,7 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
     , top1_percent AS (
     SELECT TOP 1 PERCENT avg_group_Storage, avg_group_dtu FROM group_dtu ORDER BY [avg_group_DTU] DESC
     )
-    
+
     -- Max and 99th percentile DTU for the given list of databases if converted into an elastic pool. Storage is increased by factor of 1.25 to accommodate for future growth. Currently storage limit of the pool is determined by the amount of DTUs based on 1GB/DTU.
     --SELECT MAX(avg_group_Storage)*1.25/1024.0 AS Group_Storage_DTU, MAX(avg_group_dtu) AS Group_Performance_DTU, MIN(avg_group_dtu) AS Group_Performance_DTU_99th_percentile FROM top1_percent;
     SELECT @DTU_Storage = MAX(avg_group_Storage)*1.25/1024.0, @DTU_Perf_99 = MIN(avg_group_dtu) FROM top1_percent;
@@ -222,7 +222,7 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
     SELECT ''Total number of DTUs dominated by storage: '' + convert(varchar(100), @DTU_Storage)
     ELSE 
     SELECT ''Total number of DTUs dominated by resource consumption: '' + convert(varchar(100), @DTU_Perf_99)'
-    
+
     #check if there are any web/biz edition dbs in the collected metrics
     $checkslo = "SELECT TOP 1 slo FROM resource_stats_output WHERE slo LIKE 'shared%'"
     $output = Invoke-Sqlcmd -ServerInstance $outputServerName -Database $outputdatabaseName -Username $outputDBUsername -Password $outputDBpassword -Query $checkslo -QueryTimeout 3600 | select -expand slo
@@ -233,7 +233,7 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
     $data = Invoke-Sqlcmd -ServerInstance $outputServerName -Database $outputdatabaseName -Username $outputDBUsername -Password $outputDBpassword -Query $sql -QueryTimeout 3600
     $data | %{'{0}' -f $_[0]}
     }
-    
+
     #check if there are any basic edition dbs in the collected metrics
     $checkslo = "SELECT TOP 1 slo FROM resource_stats_output WHERE slo LIKE 'Basic%'"
     $output = Invoke-Sqlcmd -ServerInstance $outputServerName -Database $outputdatabaseName -Username $outputDBUsername -Password $outputDBpassword -Query $checkslo -QueryTimeout 3600 | select -expand slo
@@ -244,7 +244,7 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
     $data = Invoke-Sqlcmd -ServerInstance $outputServerName -Database $outputdatabaseName -Username $outputDBUsername -Password $outputDBpassword -Query $sql -QueryTimeout 3600
     $data | %{'{0}' -f $_[0]} 
     }
-    
+
     #check if there are any standard edition dbs in the collected metrics
     $checkslo = "SELECT TOP 1 slo FROM resource_stats_output WHERE slo LIKE 'S%' AND slo NOT LIKE 'Shared%'"
     $output = Invoke-Sqlcmd -ServerInstance $outputServerName -Database $outputdatabaseName -Username $outputDBUsername -Password $outputDBpassword -Query $checkslo -QueryTimeout 3600 | select -expand slo
@@ -255,7 +255,7 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
     $data = Invoke-Sqlcmd -ServerInstance $outputServerName -Database $outputdatabaseName -Username $outputDBUsername -Password $outputDBpassword -Query $sql -QueryTimeout 3600
     $data | %{'{0}' -f $_[0]}
     }
-    
+
     #check if there are any premium edition dbs in the collected metrics
     $checkslo = "SELECT TOP 1 slo FROM resource_stats_output WHERE slo LIKE 'P%'"
     $output = Invoke-Sqlcmd -ServerInstance $outputServerName -Database $outputdatabaseName -Username $outputDBUsername -Password $outputDBpassword -Query $checkslo -QueryTimeout 3600 | select -expand slo
@@ -266,5 +266,5 @@ Set-AzureRmContext -SubscriptionName $AzureSubscriptionName
     $data = Invoke-Sqlcmd -ServerInstance $outputServerName -Database $outputdatabaseName -Username $outputDBUsername -Password $outputDBpassword -Query $sql -QueryTimeout 3600
     $data | %{'{0}' -f $_[0]}
     }
-        
+
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

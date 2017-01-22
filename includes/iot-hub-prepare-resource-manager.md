@@ -24,7 +24,7 @@
     ```
     New-AzureRmADApplication -DisplayName {Display name} -HomePage {Home page URL} -IdentifierUris {Application identifier} -Password {Password}
     ```
-    
+
 4. 请记下创建的应用程序的 **ApplicationId**。稍后你将需要此项。
 
 5. 使用以下命令（将 **{MyApplicationId}** 替换为上一步骤中的 **ApplicationId**）创建新的服务主体：
@@ -32,13 +32,13 @@
     ```
     New-AzureRmADServicePrincipal -ApplicationId {MyApplicationId}
     ```
-    
+
 6. 使用以下命令（将 **{MyApplicationId}** 替换为 **ApplicationId**）设置角色分配。
 
     ```
     New-AzureRmRoleAssignment -RoleDefinitionName Owner -ServicePrincipalName {MyApplicationId}
     ```
-    
+
 现在，你已创建可从自定义 C# 应用程序进行身份验证的 Azure AD 应用程序。在本教程的后续内容中，你需要用到以下值：
 
 - TenantId

@@ -64,7 +64,7 @@ ms.author: cherylmc
 **查看所有线路**
 
 在左侧菜单中选择“所有资源”即可查看创建的所有线路。
-    
+
 ![查看线路](./media/expressroute-howto-circuit-portal-resource-manager/listresource.png)
 
 **查看属性**

@@ -48,7 +48,7 @@ ms.author: cynthn
 
     ![打开“命令提示符”窗口](./media/virtual-machines-windows-classic-createupload-vhd/sysprep_commandprompt.png)  
 
-3.	此时会显示**“系统准备工具”**对话框。
+3. 此时会显示**“系统准备工具”**对话框。
 
     ![启动 Sysprep](./media/virtual-machines-windows-classic-createupload-vhd/sysprepgeneral.png)
 
@@ -71,11 +71,11 @@ ms.author: cynthn
         Select-AzureSubscription -SubscriptionName <SubscriptionName> 
 
 2. 新建存储帐户。存储帐户的名称应该唯一且包含 3-24 个字符。名称可以是字母和数字的任意组合。还需要指定一个位置，例如“中国东部”。
-        
+
         New-AzureStorageAccount -StorageAccountName <StorageAccountName> -Location <Location>
 
 3. 将新存储帐户设置为默认值。
-        
+
         Set-AzureSubscription -CurrentStorageAccountName <StorageAccountName> -SubscriptionName <SubscriptionName>
 
 4. 创建新容器。

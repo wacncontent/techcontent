@@ -59,29 +59,29 @@ SQL 数据库在虚拟 master 数据库中提供了两个受限管理角色，�
 ### 数据库创建者
 管理帐户可以创建新数据库。若要创建其他可以创建数据库的帐户，必须在 master 中创建一个用户，然后将该用户添加到特殊的 **dbmanager** 数据库角色。该用户可以是包含的数据库用户，也可以是虚拟 master 数据库中基于 SQL Server 登录名的用户。
 
-1.	使用管理员帐户连接到虚拟 master 数据库。
-2.	可选步骤：使用 [CREATE LOGIN](https://msdn.microsoft.com/zh-cn/library/ms189751.aspx) 语句创建 SQL Server 身份验证登录名。示例语句：
+1. 使用管理员帐户连接到虚拟 master 数据库。
+2. 可选步骤：使用 [CREATE LOGIN](https://msdn.microsoft.com/zh-cn/library/ms189751.aspx) 语句创建 SQL Server 身份验证登录名。示例语句：
 
          CREATE LOGIN Mary WITH PASSWORD = '<strong_password>';
-     
+
      > [!NOTE] 创建登录名或包含数据库用户时必须使用强密码。有关详细信息，请参阅[强密码](https://msdn.microsoft.com/zh-cn/library/ms161962.aspx)。
 
     为了提高性能，会暂时在数据库级别缓存登录名（服务器级主体）。若要刷新身份验证缓存，请参阅 [DBCC FLUSHAUTHCACHE](https://msdn.microsoft.com/zh-cn/library/mt627793.aspx)。
 
-3.	在虚拟 master 数据库中，使用 [CREATE USER](https://msdn.microsoft.com/zh-cn/library/ms173463.aspx) 语句创建用户。该用户可以是 Azure Active Directory 身份验证包含数据库用户（如果你已针对 Azure AD 身份验证配置了环境），可以是 SQL Server 身份验证包含数据库用户，也可以是基于 SQL Server 身份验证登录名（在前一步骤中创建）的 SQL Server 身份验证用户。 示例语句：
+3. 在虚拟 master 数据库中，使用 [CREATE USER](https://msdn.microsoft.com/zh-cn/library/ms173463.aspx) 语句创建用户。该用户可以是 Azure Active Directory 身份验证包含数据库用户（如果你已针对 Azure AD 身份验证配置了环境），可以是 SQL Server 身份验证包含数据库用户，也可以是基于 SQL Server 身份验证登录名（在前一步骤中创建）的 SQL Server 身份验证用户。 示例语句：
 
          CREATE USER [mike@contoso.com] FROM EXTERNAL PROVIDER;
          CREATE USER Tran WITH PASSWORD = '<strong_password>';
          CREATE USER Mary FROM LOGIN Mary; 
-     
-4.	使用 [ALTER ROLE](https://msdn.microsoft.com/zh-cn/library/ms189775.aspx) 语句将新用户添加到 **dbmanager** 数据库角色。示例语句：
+
+4. 使用 [ALTER ROLE](https://msdn.microsoft.com/zh-cn/library/ms189775.aspx) 语句将新用户添加到 **dbmanager** 数据库角色。示例语句：
 
          ALTER ROLE dbmanager ADD MEMBER Mary; 
          ALTER ROLE dbmanager ADD MEMBER [mike@contoso.com];
 
      > [!NOTE] dbmanager 是虚拟 master 数据库中的数据库角色，因此只能向该 dbmanager 角色添加用户。不能向数据库级角色添加服务器级登录名。
 
-5.	必要时，可将服务器级防火墙配置为允许新用户进行连接。
+5. 必要时，可将服务器级防火墙配置为允许新用户进行连接。
 
 现在，用户可以连接到虚拟 master 数据库，并且可以创建新数据库。创建数据库的帐户成为该数据库的所有者。
 
@@ -114,7 +114,7 @@ SQL 数据库在虚拟 master 数据库中提供了两个受限管理角色，�
 
 对数据库级防火墙进行适当配置以后，数据库用户即可使用 SQL Server Management Studio 或 SQL Server Data Tools 这样的客户端工具进行连接。仅最新工具提供所有的特性和功能。下图显示了典型的非管理员访问路径。
 ![非管理员访问路径](./media/sql-database-manage-logins/2sql-db-nonadmin-access.png)
- 
+
 ## 组和角色
 有效的访问管理需要将权限分配到组和角色，而不是分配到单个用户。例如，使用 Azure Active Directory 身份验证时，需执行以下操作：
 

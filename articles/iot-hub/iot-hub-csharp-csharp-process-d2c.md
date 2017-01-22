@@ -79,7 +79,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
             Task.Delay(10000).Wait();
           }
         }
-    
+
     此方法类似于 **SimulatedDevice** 项目中的 **SendDeviceToCloudMessagesAsync** 方法。唯一的区别在于现在设置 **MessageId** 系统属性和 **messageType** 用户属性。
     代码将向 **MessageId** 属性分配全局唯一标识符 (GUID)。服务总线可使用此标识符来删除收到的重复消息。本示例使用 **messageType** 属性来区分交互式消息和数据点消息。应用程序将在消息属性而不是在消息正文中传递此信息，因此事件处理器不需要反序列化消息来执行消息路由。
 
@@ -152,7 +152,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
         using Microsoft.ServiceBus.Messaging;
         using Microsoft.WindowsAzure.Storage;
         using Microsoft.WindowsAzure.Storage.Blob;
-    
+
 7. 用以下代码替换该类的正文：
 
         class StoreEventProcessor : IEventProcessor
@@ -286,7 +286,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
             Console.ResetColor();
           }
         }
-    
+
     **EventProcessorHost** 类调用此类以处理从 IoT 中心收到的设备到云消息。此类中的代码实现逻辑，以在 Blob 容器中可靠地存储消息，并将交互式消息转送到服务总线队列。
 
     **OpenAsync** 方法初始化 **currentBlockInitOffset** 变量，此变量可跟踪此事件处理器读取的第一个消息的当前偏移。请记住，每个处理器负责单个分区。
@@ -300,7 +300,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 8. 在 **Program** 类的顶部添加以下 **using** 语句：
 
         using Microsoft.ServiceBus.Messaging;
-    
+
 9. 如下所示修改 **Program** 类中的 **Main** 方法。将 **{iot hub connection string}** 替换为 [IoT 中心入门]教程中提供的 **iothubowner** 连接字符串。将存储连接字符串替换为在本部分开始时记录的连接字符串。将带“发送”权限的服务总线连接字符串替换为在本部分开始时记录的 **d2ctutorial** 队列：
 
         static void Main(string[] args)
@@ -319,7 +319,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
           Console.ReadLine();
           eventProcessorHost.UnregisterEventProcessorAsync().Wait();
         }
-    
+
     > [!NOTE] 为简单起见，本教程使用 [EventProcessorHost] 类的单个实例。有关详细信息，请参阅 [Event Hubs Programming Guide]（事件中心编程指南）。
 
 ## 接收交互式消息
@@ -335,7 +335,7 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
         using System.IO;
         using Microsoft.ServiceBus.Messaging;
-    
+
 5. 最后，在 **Main** 方法中添加以下行。将连接字符串替换为 **d2ctutorial** 队列的“侦听”权限：
 
         Console.WriteLine("Process D2C Interactive Messages app\n");
@@ -368,14 +368,14 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
         Console.WriteLine("Receiving interactive messages from SB queue...");
         Console.WriteLine("Press any key to exit.");
         Console.ReadLine();
-    
+
 ## 运行应用程序
 
 现在，你已准备就绪，可以运行应用程序了。
 
-1.	在 Visual Studio 的解决方案资源管理器中，右键单击你的解决方案并选择“设置启动项目”。选择“多个启动项目”，然后选择“启动”以启动 **ProcessDeviceToCloudMessages**、**SimulatedDevice** 和 **ProcessD2CInteractiveMessages** 项目。
+1. 在 Visual Studio 的解决方案资源管理器中，右键单击你的解决方案并选择“设置启动项目”。选择“多个启动项目”，然后选择“启动”以启动 **ProcessDeviceToCloudMessages**、**SimulatedDevice** 和 **ProcessD2CInteractiveMessages** 项目。
 
-2.	按 **F5** 启动 3 个控制台应用程序。**ProcessD2CInteractiveMessages** 应用程序应处理 **SimulatedDevice** 应用程序发出的每条交互式消息。
+2. 按 **F5** 启动 3 个控制台应用程序。**ProcessD2CInteractiveMessages** 应用程序应处理 **SimulatedDevice** 应用程序发出的每条交互式消息。
 
     ![3 个控制台应用程序][50]  
 
@@ -403,21 +403,21 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 [Azure Blob 存储]: ../storage/storage-dotnet-how-to-use-blobs.md
 
-[HDInsight (Hadoop)]: ../hdinsight/index.md/
+[HDInsight (Hadoop)]: ../hdinsight/index.md
 [Service Bus Queue]: ../service-bus-messaging/service-bus-dotnet-get-started-with-queues.md
 [服务总线队列]: ../service-bus-messaging/service-bus-dotnet-get-started-with-queues.md
 
 [Azure IoT 中心开发人员指南 - 设备到云]: ./iot-hub-devguide-messaging.md
 
-[Azure 存储]: ../storage/index.md/
-[Azure 服务总线]: ../service-bus/index.md/
+[Azure 存储]: ../storage/index.md
+[Azure 服务总线]: ../service-bus/index.md
 
 [IoT 中心开发人员指南]: ./iot-hub-devguide.md
 [IoT 中心入门]: ./iot-hub-csharp-csharp-getstarted.md
 [Azure IoT 开发人员中心]: /develop/iot
-[lnk-service-fabric]: ../service-fabric/index.md/
-[lnk-stream-analytics]: ../stream-analytics/index.md/
-[lnk-event-hubs]: ../event-hubs/index.md/
+[lnk-service-fabric]: ../service-fabric/index.md
+[lnk-stream-analytics]: ../stream-analytics/index.md
+[lnk-event-hubs]: ../event-hubs/index.md
 [Transient Fault Handling]: https://msdn.microsoft.com/zh-cn/library/hh675232.aspx
 
 <!-- Links -->
@@ -434,6 +434,6 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 [lnk-classic-portal]: https://manage.windowsazure.cn
 [lnk-c2d]: ./iot-hub-csharp-csharp-process-d2c.md
-[lnk-suite]: ../iot-suite/index.md/
+[lnk-suite]: ../iot-suite/index.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

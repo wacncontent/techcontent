@@ -53,7 +53,7 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
     info:    Setting subscription "Visual Studio Ultimate with MSDN" as default
     +
     info:    login command OK
-    
+
 >[!NOTE]  使用交互式登录时，会使用 Azure Active Directory 进行身份验证和授权。如果使用 Microsoft 帐户标识，登录过程会访问 Azure Active Directory 的默认域。（如果注册的是免费 Azure 帐户，Azure Active Directory 已为该帐户自动创建了默认域。）
 
 ## 方案 2：使用用户名和密码登录 Azure <a name="use-the-log-in-method"></a>
@@ -61,12 +61,12 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 想要使用不需要多重身份验证的工作或学校帐户时，使用包含用户名 (`-u`) 参数的 `azure login` 命令进行身份验证。系统会在命令行中提示输入密码（也可以选择将密码作为 `azure login` 命令的其他参数传递）。以下示例将传递组织帐户的用户名：
 
     azure login -e AzureChinaCloud -u myUserName@contoso.partner.onmschina.cn
-    
+
 然后，系统会提示输入密码：
 
     info:    Executing command login
     Password: *********
-    
+
 随后完成登录过程。
 
     info:    Added subscription Visual Studio Ultimate with MSDN

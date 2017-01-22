@@ -178,7 +178,7 @@ SQL Server（任何版本） | Enterprise 或 Standard | 故障转移群集实�
 
 对于不由 VMM 服务器或配置服务器管理的环境，可以使用 Azure 自动化 Runbook 来配置 SQL 可用性组的脚本化故障转移。以下是配置步骤：
 
-1.	为脚本创建本地文件，以故障转移可用性组。此示例脚本将在 Azure 副本上指定可用性组的路径，并将其故障转移到该副本实例。此脚本将通过使用自定义脚本扩展传递，以便在 SQL Server 副本虚拟机上运行。
+1. 为脚本创建本地文件，以故障转移可用性组。此示例脚本将在 Azure 副本上指定可用性组的路径，并将其故障转移到该副本实例。此脚本将通过使用自定义脚本扩展传递，以便在 SQL Server 副本虚拟机上运行。
 
         Param(
         [string]$SQLAvailabilityGroupPath
@@ -186,12 +186,12 @@ SQL Server（任何版本） | Enterprise 或 Standard | 故障转移群集实�
         import-module sqlps
         Switch-SqlAvailabilityGroup -Path $SQLAvailabilityGroupPath -AllowDataLoss -force
 
-2.	将脚本上载到 Azure 存储帐户中的 Blob。使用以下示例：
+2. 将脚本上载到 Azure 存储帐户中的 Blob。使用以下示例：
 
         $context = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName "Account" -StorageAccountKey "Key"
         Set-AzureStorageBlobContent -Blob "AGFailover.ps1" -Container "script-container" -File "ScriptLocalFilePath" -context $context
 
-3.	创建 Azure 自动化 Runbook，以便在 Azure 中调用 SQL Server 副本虚拟机上的脚本。使用此示例脚本来实现此目的。[详细了解](./site-recovery-runbook-automation.md)如何在恢复计划中使用自动化 Runbook。
+3. 创建 Azure 自动化 Runbook，以便在 Azure 中调用 SQL Server 副本虚拟机上的脚本。使用此示例脚本来实现此目的。[详细了解](./site-recovery-runbook-automation.md)如何在恢复计划中使用自动化 Runbook。
 
 1. 创建应用程序的恢复计划时，请添加可调用自动化 Runbook 的“pre-Group 1 boot”脚本步骤以故障转移可用性组。
 
@@ -209,24 +209,24 @@ SQL Server（任何版本） | Enterprise 或 Standard | 故障转移群集实�
             )
 
             $Cred = Get-AutomationPSCredential -name 'AzureCredential'
-    
+
             #Connect to Azure
             $AzureAccount = Add-AzureAccount -Environment AzureChinaCloud -Credential $Cred
             $AzureSubscriptionName = Get-AutomationVariable –Name ‘AzureSubscriptionName’
             Select-AzureSubscription -SubscriptionName $AzureSubscriptionName
-    
+
             InLineScript
             {
              #Update the script with name of your storage account, key and blob name
              $context = New-AzureStorageContext -StorageAccountName "Account" -StorageAccountKey "Key";
              $sasuri = New-AzureStorageBlobSASToken -Container "script-container"- Blob "AGFailover.ps1" -Permission r -FullUri -Context $context;
-     
+
              Write-output "failovertype " + $Using:RecoveryPlanContext.FailoverType;
-               
+
              if ($Using:RecoveryPlanContext.FailoverType -eq "Test")
                    {
                         Write-output "tfo"
-                    
+
                         Write-Output "Creating ILB"
                         Add-AzureInternalLoadBalancer -InternalLoadBalancerName SQLAGILB -SubnetName Subnet-1 -ServiceName SQLAzureVM-Test -StaticVNetIPAddress #IP
                         Write-Output "ILB Created"
@@ -236,14 +236,14 @@ SQL Server（任何版本） | Enterprise 或 Standard | 故障转移群集实�
                         Get-AzureVM -ServiceName "SQLAzureVM-Test" -Name "SQLAzureVM-Test"| Add-AzureEndpoint -Name sqlag -LBSetName sqlagset -Protocol tcp -LocalPort 1433 -PublicPort 1433 -ProbePort 59999 -ProbeProtocol tcp -ProbeIntervalInSeconds 10 -InternalLoadBalancerName SQLAGILB | Update-AzureVM
 
                         Write-Output "Added Endpoint"
-        
+
                         $VM = Get-AzureVM -Name "SQLAzureVM-Test" -ServiceName "SQLAzureVM-Test" 
-                       
+
                         Write-Output "UnInstalling custom script extension"
                         Set-AzureVMCustomScriptExtension -Uninstall -ReferenceName CustomScriptExtension -VM $VM |Update-AzureVM 
                         Write-Output "Installing custom script extension"
                         Set-AzureVMExtension -ExtensionName CustomScriptExtension -VM $vm -Publisher Microsoft.Compute -Version 1.*| Update-AzureVM   
-                    
+
                         Write-output "Starting AG Failover"
                         Set-AzureVMCustomScriptExtension -VM $VM -FileUri $sasuri -Run "AGFailover.ps1" -Argument "-Path sqlserver:\sql\sqlazureVM\default\availabilitygroups\testag"  | Update-AzureVM
                         Write-output "Completed AG Failover"
@@ -254,23 +254,23 @@ SQL Server（任何版本） | Enterprise 或 Standard | 故障转移群集实�
                    #Get the SQL Azure Replica VM.
                    #Update the script to use the name of your VM and Cloud Service
                    $VM = Get-AzureVM -Name "SQLAzureVM" -ServiceName "SQLAzureReplica";     
-       
+
                    Write-Output "Installing custom script extension"
                    #Install the Custom Script Extension on teh SQL Replica VM
                     Set-AzureVMExtension -ExtensionName CustomScriptExtension -VM $VM -Publisher Microsoft.Compute -Version 1.*| Update-AzureVM;
-                    
+
                    Write-output "Starting AG Failover";
                    #Execute the SQL Failover script
                    #Pass the SQL AG path as the argument.
-       
+
                    $AGArgs="-SQLAvailabilityGroupPath sqlserver:\sql\sqlazureVM\default\availabilitygroups\testag";
-       
+
                    Set-AzureVMCustomScriptExtension -VM $VM -FileUri $sasuri -Run "AGFailover.ps1" -Argument $AGArgs | Update-AzureVM;
-       
+
                    Write-output "Completed AG Failover";
 
                    }
-        
+
             }
         }
 
@@ -315,8 +315,8 @@ SQL Server（任何版本） | Enterprise 或 Standard | 故障转移群集实�
 
 1. 在本地站点中配置其他独立 SQL Server 实例。
 2. 将此实例配置为需要保护的数据库的镜像。在高安全模式下配置镜像。
-3.	根据环境（[Hyper-V](./site-recovery-hyper-v-site-to-azure.md)）在本地站点上配置 Site Recovery。
-4.	使用 Site Recovery 复制将新的 SQL Server 实例复制到 Azure。该实例是高安全性镜像副本，因此会将它与主群集同步，但会使用站点恢复复制将它复制到 Azure。
+3. 根据环境（[Hyper-V](./site-recovery-hyper-v-site-to-azure.md)）在本地站点上配置 Site Recovery。
+4. 使用 Site Recovery 复制将新的 SQL Server 实例复制到 Azure。该实例是高安全性镜像副本，因此会将它与主群集同步，但会使用站点恢复复制将它复制到 Azure。
 
 下图演示了此设置。
 

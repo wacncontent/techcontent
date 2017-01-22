@@ -37,8 +37,8 @@ ms.author: dineshm
 
 若要安装适用于 C++ 的 Azure 存储客户端库，可使用以下方法：
 
--	**Linux：**按照[适用于 C++ 的 Azure 存储空间客户端库自述文件](https://github.com/Azure/azure-storage-cpp/blob/master/README.md)页中提供的说明操作。
--	**Windows：**在 Visual Studio 主菜单中，单击“工具”->“NuGet 程序包管理器”->“程序包管理器控制台”。在 [NuGet 程序包管理器控制台](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)窗口中输入以下命令，然后按 **ENTER**。
+- **Linux：**按照[适用于 C++ 的 Azure 存储空间客户端库自述文件](https://github.com/Azure/azure-storage-cpp/blob/master/README.md)页中提供的说明操作。
+- **Windows：**在 Visual Studio 主菜单中，单击“工具”->“NuGet 程序包管理器”->“程序包管理器控制台”。在 [NuGet 程序包管理器控制台](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)窗口中输入以下命令，然后按 **ENTER**。
 
         Install-Package wastorage
 
@@ -232,10 +232,10 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 ## 后续步骤
 已了解队列存储的基本知识，可通过以下链接了解有关 Azure 存储的详细信息。
 
--	[如何通过 C++ 使用 Blob 存储](./storage-c-plus-plus-how-to-use-blobs.md)
--	[如何通过 C++ 使用表存储](./storage-c-plus-plus-how-to-use-tables.md)
--	[使用 C++ 列出 Azure 存储资源](./storage-c-plus-plus-enumeration.md)
--	[适用于 C++ 的存储空间客户端库参考](http://azure.github.io/azure-storage-cpp)
--	[Azure 存储文档](./index.md/)
+- [如何通过 C++ 使用 Blob 存储](./storage-c-plus-plus-how-to-use-blobs.md)
+- [如何通过 C++ 使用表存储](./storage-c-plus-plus-how-to-use-tables.md)
+- [使用 C++ 列出 Azure 存储资源](./storage-c-plus-plus-enumeration.md)
+- [适用于 C++ 的存储空间客户端库参考](http://azure.github.io/azure-storage-cpp)
+- [Azure 存储文档](./index.md)
 
 <!---HONumber=Mooncake_1128_2016-->

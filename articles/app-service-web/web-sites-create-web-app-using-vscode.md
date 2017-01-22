@@ -117,11 +117,11 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
     > [!NOTE] 如果 Omnisharp 服务器当前未运行，则会启动。重新输入上述命令。
 
     接下来，选择以下命令以运行你的 Web 应用：
-        
+
         dnx web - (SampleWebApp)
 
     命令窗口会显示该应用程序已启动。如果命令窗口未显示此消息，请检查 VS Code 左下角以找出项目中的错误。
-    
+
     > [!NOTE] 从**命令控制板**发出命令需要在命令行的开头输入 **>** 字符。你可以在 *project.json* 文件中查看与 **web** 命令相关的详细信息。
     > 如果该命令未出现或不可用，则可能需要安装 C# 扩展。运行 `>Extensions: Install Extension` 和 `ext install c#` 以安装 C# 扩展。
 
@@ -233,7 +233,7 @@ Git 是分布式版本控制系统，可用于部署 Azure App Service Web 应�
 * 打开浏览器并输入 Web 应用的名称，如下所示。
 
         http://SampleWebAppDemo.chinacloudsites.cn
- 
+
 * 在 Azure 门户预览中，找到 Web 应用的 Web 应用边栏选项卡，然后单击“浏览”以在默认游览器中
 * 查看应用。
 

@@ -26,11 +26,11 @@ wacn.date: 11/28/2016
 
 在完成此 Power BI 教程后，你将能够回答以下问题：
 
--	我可以如何使用 Power BI Desktop 生成包含 DocumentDB 的数据的报表？
--	如何在 Power BI Desktop 中连接到 DocumentDB 帐户？
--	如何在 Power BI Desktop 中从集合检索数据？
--	如何在 Power BI Desktop 中转换嵌套的 JSON 数据？
--	如何在 PowerBI.com 中发布和共享我的报表？
+- 我可以如何使用 Power BI Desktop 生成包含 DocumentDB 的数据的报表？
+- 如何在 Power BI Desktop 中连接到 DocumentDB 帐户？
+- 如何在 Power BI Desktop 中从集合检索数据？
+- 如何在 Power BI Desktop 中转换嵌套的 JSON 数据？
+- 如何在 PowerBI.com 中发布和共享我的报表？
 
 ## 先决条件
 
@@ -205,11 +205,11 @@ wacn.date: 11/28/2016
 
 将报表从 Power BI Desktop 发布到 PowerBI.com 时，会在 PowerBI.com 租户中生成一份**报表**和一个**数据集**。例如，将名为 **PowerBITutorial** 的报表发布到 PowerBI.com 后，将在 PowerBI.com 的“报表”和“数据集”部分中看到 PowerBITutorial。
 
-   ![PowerBI.com 中新报表和数据集的屏幕截图](./media/documentdb-powerbi-visualize/documentdb-powerbi-reports-datasets.png)  
+    ![PowerBI.com 中新报表和数据集的屏幕截图](./media/documentdb-powerbi-visualize/documentdb-powerbi-reports-datasets.png)  
 
 若要创建可共享的仪表板，请单击 PowerBI.com 报表上的“固定活动页面”按钮。
 
-   ![PowerBI.com 中新报表和数据集的屏幕截图](./media/documentdb-powerbi-visualize/azure-documentdb-power-bi-pin-live-tile.png)  
+    ![PowerBI.com 中新报表和数据集的屏幕截图](./media/documentdb-powerbi-visualize/azure-documentdb-power-bi-pin-live-tile.png)  
 
 然后，根据 [Pin a tile from a report](https://powerbi.microsoft.com/documentation/powerbi-service-pin-a-tile-to-a-dashboard-from-a-report/#pin-a-tile-from-a-report)（从报表固定磁贴）中的说明创建新仪表板。
 
@@ -238,11 +238,11 @@ wacn.date: 11/28/2016
 4. 输入该数据集的密钥连接到 DocumentDB 帐户，然后单击“登录”。
 
 5. 展开“计划刷新”，并设置数据集的刷新计划。
-  
+
 6. 单击“应用”即可完成计划刷新的设置。
 
 ## 后续步骤
 - 有关 Power BI 的详细信息，请参阅 [Get started with Power BI](https://powerbi.microsoft.com/documentation/powerbi-service-get-started/)（Power BI 入门）。
-- 有关 DocumentDB 的详细信息，请参阅 [DocumentDB 文档登录页](./index.md/)。
+- 有关 DocumentDB 的详细信息，请参阅 [DocumentDB 文档登录页](./index.md)。
 
 <!---HONumber=Mooncake_1121_2016-->

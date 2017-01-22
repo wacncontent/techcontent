@@ -135,7 +135,7 @@ wacn.date: 06/14/2016
 
     ![22](./media/open-source-azure-virtual-machines-configure-availability-set/22.png)
 
-12. 再度访问[http://newtest1.chinacloudapp.cn](http://newtest1.chinacloudapp.cn/) 还是能够访问。
+12. 再度访问[http://newtest1.chinacloudapp.cn/](http://newtest1.chinacloudapp.cn/) 还是能够访问。
 
     ![23](./media/open-source-azure-virtual-machines-configure-availability-set/23.png)
 

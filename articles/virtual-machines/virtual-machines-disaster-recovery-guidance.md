@@ -55,7 +55,7 @@ Azure 已在平台中内置多种功能，用于支持高度可用的应用程�
 ## 后续步骤
 若要了解如何备份 VM，请参阅[备份 Azure 虚拟机](../backup/backup-azure-vms.md)。
 
-若要了解如何使用 Azure Site Recovery 来安排和自动保护 Hyper-V VM 上运行的物理（和虚拟）Windows 和 Linux 计算机，请参阅 [Azure Site Recovery](../site-recovery/index.md/)。
+若要了解如何使用 Azure Site Recovery 来安排和自动保护 Hyper-V VM 上运行的物理（和虚拟）Windows 和 Linux 计算机，请参阅 [Azure Site Recovery](../site-recovery/index.md)。
 
 如果指示不清楚，或者如果希望 Azure.cn 代你执行操作，请联系[客户支持](https://www.azure.cn/support/support-azure/)。
 

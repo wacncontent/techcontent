@@ -40,7 +40,7 @@ ms.author: robb
     * 事件的“相关 ID”— 这是此操作集的唯一标识符。
 
 5. 从这里可以转到详细信息边栏选项卡，以查看该事件的具体细节。
-   
+
     ![资源组](./media/insights-debugging-with-events/Insights_EventDetails.png)
 
     对于“失败”事件，此页通常会显示“子状态”和“属性”部分，其中包含了可用于调试的详细信息。
@@ -70,7 +70,7 @@ ms.author: robb
 2. 在资源的边栏选项卡上，向下滚动，直到找到“事件”磁贴。  
 
     ![“事件”磁贴](./media/insights-debugging-with-events/Insights_EventsTile.png)
-    
+
 3. 单击该磁贴以查看仅筛选到所选资源的事件。可以使用“筛选器”命令更改时间范围或应用更多特定筛选器。
 
 ## 后续步骤

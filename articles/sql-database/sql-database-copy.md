@@ -49,6 +49,6 @@ ms.tgt_pltfrm: NA
 - [使用 SQL Server Management Studio 连接到 SQL 数据库并执行示例 T-SQL 查询](./sql-database-connect-query-ssms.md)
 - [将数据库导出到 BACPAC](./sql-database-export.md)
 - [业务连续性概述](./sql-database-business-continuity.md)
-- [SQL 数据库文档](./index.md/)
+- [SQL 数据库文档](./index.md)
 
 <!---HONumber=Mooncake_1212_2016-->

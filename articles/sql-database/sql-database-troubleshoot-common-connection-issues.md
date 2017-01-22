@@ -61,10 +61,10 @@ ms.author: daleche
 
 ### 解决永久性连接问题的步骤
 
-1.	设置[防火墙规则](./sql-database-configure-firewall-settings-powershell.md)以允许客户端 IP 地址。
-2.	在客户端与 Internet 之间的所有防火墙上，确保为出站连接打开端口 1433。请参阅[配置 Windows 防火墙以允许 SQL Server 访问](https://msdn.microsoft.com/zh-cn/library/cc646023.aspx)，以获取更多指导。
-3.	验证连接字符串和其他连接设置。请参阅[连接问题主题](./sql-database-connectivity-issues.md#connections-to-azure-sql-database)中的“连接字符串”部分。
-4.	在仪表板中检查服务运行状况。如果认为存在区域性的中断，请参阅[从中断恢复](./sql-database-disaster-recovery.md)，以了解恢复到新区域的步骤。
+1. 设置[防火墙规则](./sql-database-configure-firewall-settings-powershell.md)以允许客户端 IP 地址。
+2. 在客户端与 Internet 之间的所有防火墙上，确保为出站连接打开端口 1433。请参阅[配置 Windows 防火墙以允许 SQL Server 访问](https://msdn.microsoft.com/zh-cn/library/cc646023.aspx)，以获取更多指导。
+3. 验证连接字符串和其他连接设置。请参阅[连接问题主题](./sql-database-connectivity-issues.md#connections-to-azure-sql-database)中的“连接字符串”部分。
+4. 在仪表板中检查服务运行状况。如果认为存在区域性的中断，请参阅[从中断恢复](./sql-database-disaster-recovery.md)，以了解恢复到新区域的步骤。
 
 ##<a id="all-topics-for-azure-sql-database-connection-problems"></a> 有关 Azure SQL 数据库连接问题的所有主题
 

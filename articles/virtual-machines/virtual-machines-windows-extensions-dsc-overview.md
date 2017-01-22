@@ -85,7 +85,7 @@ Azure DSC 扩展使用 Azure VM 代理框架来传送、启用和报告 Azure VM
 门户需要输入。**配置模块或脚本**：此字段必填。需要一个包含配置脚本的 .ps1 文件，或者需要一个 .zip 文件，其中的 .ps1 配置脚本位于根目录，所有依赖资源位于模块文件夹。可以使用 Azure PowerShell SDK 随附的 `Publish-AzureVMDscConfiguration -ConfigurationArchivePath` cmdlet 来创建该文件。系统会将 .zip 文件上载到受 SAS 令牌保护的用户 Blob 存储。
 
 **配置数据 PSD1 文件**：此字段选填。如果配置要求 .psd1 中有配置数据文件，请使用此字段来进行选择，然后将它上载到受 SAS 令牌保护的用户 Blob 存储。
- 
+
 **配置的模块限定名称**：.ps1 文件可以包含多个配置函数。请输入配置 .ps1 脚本的名称，后面再加上 '' 和配置函数的名称。例如，如果 .ps1 脚本的名称为“configuration.ps1”，而配置为“IisInstall”，则可输入：`configuration.ps1\IisInstall`
 
 **配置参数**：如果配置函数采用参数，请使用 `argumentName1=value1,argumentName2=value2` 格式在此处输入。请注意，此格式与通过 PowerShell cmdlet 或 Resource Manager 模板接受配置参数的方式不同。
@@ -107,22 +107,22 @@ Azure DSC 扩展将检索并在 Azure VM 上启用 DSC 配置文档。下面是�
     }
 
 以下步骤将 IisInstall.ps1 脚本放在指定的 VM 上，执行配置，然后报告状态。
- 
+
     #Azure PowerShell cmdlets are required
     Import-Module Azure
-    
+
     #Use an existing Azure Virtual Machine, 'DscDemo1'
     $demoVM = Get-AzureVM DscDemo1
-    
+
     #Publish the configuration script into user storage.
     Publish-AzureVMDscConfiguration -ConfigurationPath ".\IisInstall.ps1" -StorageContext $storageContext -Verbose -Force
-    
+
     #Set the VM to run the DSC configuration
     Set-AzureVMDscExtension -VM $demoVM -ConfigurationArchive "demo.ps1.zip" -StorageContext $storageContext -ConfigurationName "runScript" -Verbose
-    
+
     #Update the configuration of an Azure Virtual Machine
     $demoVM | Update-AzureVM -Verbose
-    
+
     #check on status
     Get-AzureVMDscExtensionStatus -VM $demovm -Verbose
 

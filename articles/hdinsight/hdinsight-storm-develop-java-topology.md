@@ -46,7 +46,7 @@ Storm 0.10.0 或更高版本中提供了 Flux 框架。HDInsight 3.3 随附了 S
 * **JAVA\_HOME** - 应指向已安装 Java 运行时环境 (JRE) 的目录。例如，在 Windows 中，其值类似于 `c:\Program Files (x86)\Java\jre1.7`
 
 * **PATH** - 应该包含以下路径：
-  
+
   * **JAVA\_HOME**（或等效路径）
 
   * **JAVA\_HOME\\bin**（或等效路径）
@@ -538,7 +538,7 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
 1. 将 **WordCountTopology.java** 文件移出项目。以前，此文件定义拓扑，但现在我们不会将它用于 Flux。
 
 2. 在 **resources** 目录中，创建名为 **topology.yaml** 的新文件。在此文件中使用以下内容。
-    
+
         # topology definition
 
         # name to be used when submitting. This is what shows up...
@@ -592,9 +592,9 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
     请花费片刻时间通读并了解每个节的作用，以及它与 **WordCountTopology.java** 文件中基于 Java 的定义存在怎样的关联。
 
 3. 对 **pom.xml** 文件进行以下更改。
-   
-   * 在 `<dependencies>` 节中添加以下新依赖关系：
-     
+
+    * 在 `<dependencies>` 节中添加以下新依赖关系：
+
             <!-- Add a dependency on the Flux framework -->
             <dependency>
                 <groupId>org.apache.storm</groupId>
@@ -602,8 +602,8 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
                 <version>${storm.version}</version>
             </dependency>
 
-   * 将以下插件添加到 `<plugins>` 节。此插件处理项目包（jar 文件）的创建，并在创建包时应用一些特定于 Flux 的转换。
-     
+    * 将以下插件添加到 `<plugins>` 节。此插件处理项目包（jar 文件）的创建，并在创建包时应用一些特定于 Flux 的转换。
+
             <!-- build an uber jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -641,35 +641,35 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
                 </executions>
             </plugin>
 
-   * 在 **exec-maven-plugin** `<configuration>` 节中，将 `<mainClass>` 的值更改为 `org.apache.storm.flux.Flux`。这样，在开发环境本地运行拓扑时，Flux 便可以处理这种运行。
+    * 在 **exec-maven-plugin** `<configuration>` 节中，将 `<mainClass>` 的值更改为 `org.apache.storm.flux.Flux`。这样，在开发环境本地运行拓扑时，Flux 便可以处理这种运行。
 
-   * 将以下内容添加到 `<resources>` 节中的 `<includes>`。这样就加入了用于将拓扑定义为项目一部分的 YAML 文件。
-     
+    * 将以下内容添加到 `<resources>` 节中的 `<includes>`。这样就加入了用于将拓扑定义为项目一部分的 YAML 文件。
+
             <include>topology.yaml</include>
 
 ## 在本地测试 Flux 拓扑
 
 1. 使用以下命令通过 Maven 编译并执行 Flux 拓扑。
-   
+
         mvn compile exec:java -Dexec.args="--local -R /topology.yaml"
-   
+
     如果使用的是 PowerShell，请使用以下命令：
-   
+
         mvn compile exec:java "-Dexec.args=--local -R /topology.yaml"
-   
+
     运行该命令时，拓扑会显示启动信息。然后开始显示与下面类似的行，因为句子是从 Spout 发出，然后由 Bolt 处理的。
-   
+
         17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 56 for word snow
         17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 56 for word white
         17:33:27 [Thread-12-count] INFO  com.microsoft.example.WordCount - Emitting a count of 112 for word seven
         17:33:27 [Thread-16-count] INFO  com.microsoft.example.WordCount - Emitting a count of 195 for word the
         17:33:27 [Thread-30-count] INFO  com.microsoft.example.WordCount - Emitting a count of 113 for word and
         17:33:27 [Thread-30-count] INFO  com.microsoft.example.WordCount - Emitting a count of 57 for word dwarfs
-   
+
     记录的信息批之间存在 10 秒延迟，因为在创建 WordCount 组件时，`topology.yaml` 文件会传递 `10` 值。这会将计时周期元组的延迟间隔设置为 10 秒。
 
 2. 从项目创建 `topology.yaml` 文件的副本。为其指定类似于 `newtopology.yaml` 的名称。在该文件中，找到以下节，将 `10` 的值更改为 `5`。这会将发出单词计数批的间隔时间从 10 秒更改为 5 秒。
-   
+
          - id: "counter-bolt"
            className: "com.microsoft.example.WordCount"
            constructorArgs:
@@ -677,11 +677,11 @@ YAML 文件定义要用于拓扑的组件、如何在组件之间流送数据，
            parallelism: 1
 
 3. 若要运行拓扑，请使用以下命令：
-   
+
         mvn exec:java -Dexec.args="--local /path/to/newtopology.yaml"
-   
+
     将 `/path/to/newtopology.yaml` 更改为前一步骤中创建的 newtopology.yaml 文件的路径。此命令将使用 newtopology.yaml 作为拓扑定义。由于没有包含 `compile` 参数，Maven 将重复使用前面步骤中生成的项目的版本。
-   
+
     启动拓扑后，应会发现发出批的间隔时间已发生更改，反映 newtopology.yaml 中的值。因此可以看到，无需重新编译拓扑即可通过 YAML 文件更改配置。
 
 Flux 还提供其他一些功能（不过本文没有介绍），例如，根据运行时传递的参数替换 YAML 文件中的变量，或者通过环境变量替换变量。有关 Flux 框架的上述功能和其他功能的详细信息，请参阅 [Flux (https://storm.apache.org/releases/0.10.0/flux.html)](https://storm.apache.org/releases/0.10.0/flux.html)。

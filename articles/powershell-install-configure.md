@@ -32,11 +32,11 @@ Azure PowerShell 是一组模块，提供用于通过 Windows PowerShell 管理 
 Azure PowerShell 使用语义版本控制，这意味着如果版本 A > 版本 B，则版本 A 具有最新的 API。这还意味着主要版本的更改表示一个或多个 cmdlet 中有重大更改。例如，版本 1.7.0 是用于解决 Azure PowerShell 1.x 版本中重大更改问题的修补程序。
 
 有关 Azure PowerShell 中语义版本控制实践的详细信息，请参阅语义版本控制规范：http://semver.org
- 
+
 若要获取最新的 API，应使用版本 2.x。但是，如果针对版本 1.x 编写了脚本，而且不希望吸收 2.x [发行说明](https://github.com/Azure/azure-powershell/blob/dev/documentation/release-notes/migration-guide.2.0.0.md)中所述的版本 2.x 重大更改，则应安装 1.7.0。
 
 如果已安装配置文件模块的最新版本，并随后加载依赖于它的某个模块的早期版本，则会导致版本不匹配。解决此问题的最简单方法是从最新的 .msi 安装。.msi 会自动清理模块的较旧版本。
- 
+
 ###并行安装模块版本
 
 版本 2.1.0（以及 AzureStack 版本 1.2.6）是第一个设计为并行安装和使用的模块版本。Azure PowerShell 使用二进制模块，因此，必须打开新的 PowerShell 窗口并使用 **Import-Module** 来导入 AzureRM cmdlet 的特定版本：
@@ -113,7 +113,7 @@ import-module "C:\\Program Files\\WindowsPowerShell\\Modules\\Azure\\XXXX\\expre
 
     # To make sure the Azure PowerShell module is available after you install
     Get-Module –ListAvailable 
-    
+
     # To login to Azure Resource Manager
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 

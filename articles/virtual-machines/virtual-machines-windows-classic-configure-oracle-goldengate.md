@@ -32,7 +32,7 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 
 - 你已从 [Oracle 下载](http://www.oracle.com/us/downloads/index.html)网站下载了 Oracle GoldenGate 软件。你已选择产品包“Oracle Fusion Middleware – Data Integration”。然后，你已选择适用于 Oracle 11g 数据库的 Oracle GoldenGate on Oracle v11.2.1 Media Pack for Microsoft Windows x64（64 位）。接下来，请下载 Oracle GoldenGate V11.2.1.0.3 for Oracle 11g 64bit on Windows 2008（64 位）。
 
-- 你已使用 Windows Server 上的 Oracle 企业版映像中提供的平台在 Azure 中创建了两个虚拟机 (VM)。有关信息，请参阅 [Azure 虚拟机](./index.md/)。确保这些虚拟机位于[相同的云服务](./virtual-machines-windows-load-balance.md)和相同的[虚拟网络](../virtual-network/index.md/)中，以确保它们可以通过持久性专用 IP 地址相互访问。
+- 你已使用 Windows Server 上的 Oracle 企业版映像中提供的平台在 Azure 中创建了两个虚拟机 (VM)。有关信息，请参阅 [Azure 虚拟机](./index.md)。确保这些虚拟机位于[相同的云服务](./virtual-machines-windows-load-balance.md)和相同的[虚拟网络](../virtual-network/index.md)中，以确保它们可以通过持久性专用 IP 地址相互访问。
 
 - 已在 Azure 经典管理门户中将站点 A 的虚拟机名称设置为“MachineGG1”，将站点 B 的虚拟机名称设置为“MachineGG2”。
 
@@ -45,7 +45,7 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 1. 在站点 A 和站点 B 上安装数据库  
 
     1. 执行初始数据加载
-    
+
 2. 准备站点 A 和站点 B 以进行数据库复制
 
 3. 创建所有必要的对象以支持 DDL 复制
@@ -147,7 +147,7 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 为了演示 Oracle GoldenGate 复制过程，本教程演示了如何使用以下命令在站点 A 和站点 B 上创建一个表。
 
 首先，请打开 SQL*Plus 命令窗口，然后运行以下命令，以在站点 A 和站点 B 数据库中创建一个库存表：
-    
+
     create table scott.inventory
     (prod_id number,
     prod_category varchar2(20),
@@ -181,7 +181,7 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 本部分说明如何准备站点 A 和站点 B 以进行数据库复制。必须在两个站点上执行本部分所述的所有步骤：站点 A 和站点 B。
 
 首先，通过 Azure 经典管理门户与站点 A 和站点 B 建立远程桌面连接。使用 SQL*Plus 命令窗口将数据库切换到 archivelog 模式：
-    
+
     sql>shutdown immediate 
     sql>startup mount 
     sql>alter database archivelog; 
@@ -206,7 +206,7 @@ Oracle GoldenGate 包含以下主要组件：Extract、Data Pump、Replicat、Tr
 打开 Windows 命令提示符并导航到 Oracle GoldenGate 文件夹，例如 C:\\OracleGG。在站点 A 和站点 B 上以数据库管理员特权启动 SQL*Plus 命令提示符，例如，使用 **SYSDBA**。
 
 然后，运行以下脚本：
-    
+
     SQL> @marker_setup.sql  
     Enter GoldenGate schema name: ggate
     SQL> @ddl_setup.sql  
@@ -319,7 +319,7 @@ Oracle GoldenGate Manager 执行许多功能，例如，启动其他 GoldenGate 
     Successfully logged into database.
 
 然后，将检查点表添加到数据库，其中 ggate 是所有者：
-    
+
     GGSCI (MachineGG2) 2> ADD CHECKPOINTTABLE ggate.checkpointtable
     Successfully created checkpoint table ggate.checkpointtable.
 
@@ -336,7 +336,7 @@ Oracle GoldenGate Manager 执行许多功能，例如，启动其他 GoldenGate 
 
 ###在站点 B 上添加 REPLICAT
 本部分介绍如何在站点 B 上添加 REPLICAT 进程“REP2”。
- 
+
 在站点 B 上使用 ADD REPLICAT 命令创建 Replicat 组：
 
     GGSCI (MachineGG2) 37> add replicat rep2 exttrail C:\OracleGG\dirdatab, checkpointtable ggate.checkpointtable
@@ -437,7 +437,7 @@ Oracle GoldenGate Manager 执行许多功能，例如，启动其他 GoldenGate 
     GGSCI (MachineGG1) 13> info trandata scott.inventory
     Logging of supplemental redo log data is enabled for table SCOTT.INVENTORY.
     Columns supplementally logged for table SCOTT.INVENTORY: PROD_ID, PROD_CATEGORY, QTY_IN_STOCK, LAST_DML.
-        
+
 与 MachineGG2 建立远程桌面连接，打开 Oracle GoldenGate 命令解释器，然后运行：
 
     GGSCI (MachineGG2) 18> dblogin userid ggate password ggate
@@ -494,7 +494,7 @@ Oracle GoldenGate Manager 执行许多功能，例如，启动其他 GoldenGate 
 
     GGSCI (MachineGG1) 16> info all
     Program     Status      Group       Lag at Chkpt  Time Since Chkpt
-    
+
     MANAGER     RUNNING
     EXTRACT     RUNNING     DPUMP1      00:00:00      00:46:33
     EXTRACT     RUNNING     EXT1        00:00:00      00:00:04
@@ -517,7 +517,7 @@ Oracle GoldenGate Manager 执行许多功能，例如，启动其他 GoldenGate 
 
     GGSCI (ActiveGG2orcldb) 6> info all
     Program     Status      Group       Lag at Chkpt  Time Since Chkpt
-    
+
     MANAGER     RUNNING
     EXTRACT     RUNNING     DPUMP2      00:00:00      136:13:33
     EXTRACT     RUNNING     EXT2        00:00:00      00:00:04
@@ -555,29 +555,29 @@ Oracle GoldenGate Manager 执行许多功能，例如，启动其他 GoldenGate 
 ##6.验证双向复制过程
 
 若要验证 Oracle GoldenGate 配置，请在站点 A 上的数据库中插入一行。与站点 A 建立远程桌面连接。打开 SQL*Plus 命令窗口并运行：SQL> select name from v$database;
-    
+
     NAME
     ———
     TESTGG
-    
+
     SQL> insert into inventory values  (100,’TV’,100,sysdate);
-    
+
     1 row created.
-    
+
     SQL> commit;
-    
+
     Commit complete.
 
 然后，检查该行是否已复制到站点 B。为此，请与站点 B 建立远程桌面连接。打开 SQL Plus 窗口并运行：
 
     SQL> select name from v$database;
-    
+
     NAME
     ———
     TESTGG
-    
+
     SQL> select * from inventory;
-    
+
     PROD_ID PROD_CATEGORY QTY_IN_STOCK LAST_DML
     ———- ——————– ———— ———
     100 TV 100 22-MAR-13
@@ -586,15 +586,15 @@ Oracle GoldenGate Manager 执行许多功能，例如，启动其他 GoldenGate 
 
     SQL> insert into inventory  values  (101,’DVD’,10,sysdate);
     1 row created.
-    
+
     SQL> commit;
-    
+
     Commit complete.
 
 与站点 A 建立远程桌面连接，然后检查是否已发生复制：
 
     SQL> select * from inventory;
-    
+
     PROD_ID PROD_CATEGORY QTY_IN_STOCK LAST_DML
     ———- ——————– ———— ———
     100 TV 100 22-MAR-13

@@ -57,19 +57,19 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 2. 证书认证
 
     使用购买的证书或者自定义证书，将包含公钥的 cer 文件上传到 Azure 的经典管理门户中：
-    
+
     ![](./media/aog-azure-java-manage-vm/management-cert1.jpg)
-    
+
     ![](./media/aog-azure-java-manage-vm/management-cert2.jpg)
 
     上传完成后，在本地使用带有公钥和私钥的证书连接 Azure 服务。
-    
+
     **示例代码**
-    
+
         Configuration config = Configuration.configure(new URI("https://management.core.chinacloudapi.cn"), <sub Id>;, <cert location>;, <cert password>;);  
         ComputeManagementClient computeManagementClient = ComputeManagementService.create(config);  
         VirtualMachineOperations vmop = computeManagementClient.getVirtualMachinesOperations();
-    
+
 ## <a id="createVM"></a>在云服务中创建 VM
 
 我们创建 VM 的时候，可以将 VM 创建到新建的云服务中或者已存在的云服务中。下面的示例代码中，是把 VM 创建到已经存在的云服务中，云服务的名称通过变量 *hostedServiceName* 指定。如果需要创建新的云服务，只需要在方法 *createVMDeployment* 中把 *createHostedService* 前面的注释打开。
@@ -77,7 +77,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 **示例代码**
 
     public class CreateVM {
- 
+
         protected static Configuration config;
         protected static ComputeManagementClient computeManagementClient;
         private static HostedServiceOperations hostedServicesOperations; 
@@ -91,14 +91,14 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
         private static String hostedServiceLabel = testVMPrefix + "HostedServiceLabel1";
         private static String hostedServiceDescription = testVMPrefix +"HostedServiceDescription1";        
         private static String deploymentLabel = testVMPrefix + "deployLabel1";
- 
+
         static{
              // TODO Auto-generated method stub
              try {
                    //这个地方设置相关的证书，简单来说就是Client拿到访问订阅的权限。上面设置的storageAccountName请务必保证在这个订阅下面
                    // credentials.publishsettings：通过访问http://manage.windowsazure.cn/index/publishsettings下载订阅配置文件
                    //0012e7c8-f7d7-4691-90f0-63b06f0a305b:订阅ID
-                    
+
                    config = PublishSettingsLoader.createManagementConfiguration("E:\\AzureTestProject\\JavaWorkspace\\StorageTest001\\src\\azure\\project\\credentials.publishsettings", 
                                "0012e7c8-f7d7-4691-90f0-63b06f0a305b");
                    computeManagementClient = ComputeManagementService.create(config);
@@ -112,12 +112,12 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                    e.printStackTrace();
              }
         }
-        
+
         private static void createVMDeployment(){
            try {
                //如果尚未创建云服务，请取消createHostedService()注释，通过代码创建
                //createHostedService();
-               
+
                ArrayList<Role> rolelist = createRoleList(); 
                VirtualMachineCreateDeploymentParameters deploymentParameters = new VirtualMachineCreateDeploymentParameters();
                deploymentParameters.setDeploymentSlot(DeploymentSlot.Staging);
@@ -125,18 +125,18 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                deploymentParameters.setLabel(deploymentLabel);        
                deploymentParameters.setRoles(rolelist);
                OperationResponse operationResponse = computeManagementClient.getVirtualMachinesOperations().createDeployment(hostedServiceName, deploymentParameters);
-               
+
              } catch (Exception e) {
                    // TODO: handle exception
                    System.out.println(e.getMessage());
                    e.printStackTrace();
-     
+
              }
-     
+
         }
-        
+
         private static void createHostedService() {
-             
+
              try {
                 //hosted service required for vm deployment
                 HostedServiceCreateParameters createParameters = new HostedServiceCreateParameters(); 
@@ -148,16 +148,16 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                 //required
                 createParameters.setLocation(vmLocation);
                 OperationResponse hostedServiceOperationResponse = hostedServicesOperations.create(createParameters);
-     
+
                 System.out.println("hostedservice created: " + hostedServiceName);
              } catch (Exception e) {
                    // TODO: handle exception
                    System.out.println(e.getMessage());
                    e.printStackTrace();
              }
-     
+
         }
-        
+
         private static ArrayList<Role> createRoleList() {
            try {
                int random = (int)(Math.random()* 100);
@@ -170,7 +170,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                URI mediaLinkUriValue =  new URI("http://"+ storageAccountName + ".blob.core.chinacloudapi.cn/"+storageContainer+ "/" + testVMPrefix + random +".vhd");
                String osVHarddiskName =testVMPrefix + "oshdname"+ random;
                String operatingSystemName ="Windows";
-     
+
                //required
                ArrayList<ConfigurationSet> configurationSetList = new ArrayList<ConfigurationSet>();
                ConfigurationSet configurationSet = new ConfigurationSet();
@@ -184,7 +184,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                configurationSet.setEnableAutomaticUpdates(false);
                configurationSet.setHostName(hostedServiceName + ".cloudapp.net");
                configurationSetList.add(configurationSet); 
-               
+
                String sourceImageName = getOSSourceImage();
                OSVirtualHardDisk oSVirtualHardDisk = new OSVirtualHardDisk();
                //required
@@ -195,7 +195,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                oSVirtualHardDisk.setMediaLink(mediaLinkUriValue);
                //required
                oSVirtualHardDisk.setSourceImageName(sourceImageName);
-     
+
                //required        
                role.setRoleName(roleName);
                //required
@@ -213,9 +213,9 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                    e.printStackTrace();
                    return null;
              }
-     
+
         }
-     
+
         private static VirtualMachineCreateParameters createVirtualMachineCreateParameter(String roleName, ArrayList<ConfigurationSet> configlist, OSVirtualHardDisk oSVirtualHardDisk, String availabilitySetNameValue) {
             VirtualMachineCreateParameters createParameters = new VirtualMachineCreateParameters();
             //required       
@@ -227,7 +227,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
             createParameters.setAvailabilitySetName(availabilitySetNameValue);        
             return createParameters;
         }
-     
+
         private static ArrayList<ConfigurationSet> createConfigList(String computerName,
             String adminuserPassword, String adminUserName) {
             ArrayList<ConfigurationSet> configlist = new ArrayList<ConfigurationSet>();
@@ -243,14 +243,14 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
             configlist.add(configset);
             return configlist;
         }
-        
+
         private static String getOSSourceImage() throws Exception {
             String sourceImageName = null;
             VirtualMachineOSImageListResponse virtualMachineImageListResponse = computeManagementClient.getVirtualMachineOSImagesOperations().list();
             ArrayList<VirtualMachineOSImageListResponse.VirtualMachineOSImage> virtualMachineOSImagelist = virtualMachineImageListResponse.getImages();
-     
+
             for (VirtualMachineOSImageListResponse.VirtualMachineOSImage virtualMachineImage : virtualMachineOSImagelist) {
-            
+
              // 注意：示例中使用逻辑如下，由于Win-GA已经过期，导致找不到镜像，会导致后续创建部署失败。具体创建哪些基于哪些镜像的VM，您可以输出virtualMachineImage.getName()值来看着使用
             // if ((virtualMachineImage.getName().contains("Win-GA")) && (virtualMachineImage.getName().contains("JDK")))        
                 if (virtualMachineImage.getName().contains("Windows-Server-2012-Essentials-20141204-zhcn") ) {
@@ -258,10 +258,10 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                     break;
                 }
             }
-     
+
             return sourceImageName;
         }
-        
+
         private static OSVirtualHardDisk createOSVirtualHardDisk(String osVHarddiskName, String operatingSystemName, URI mediaLinkValue, String sourceImageName)
         {
             OSVirtualHardDisk oSVirtualHardDisk = new OSVirtualHardDisk(); 
@@ -275,9 +275,9 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
             oSVirtualHardDisk.setSourceImageName(sourceImageName);
             return oSVirtualHardDisk;
         }
-        
+
         public static void main(String[] args) throws Exception {
-     
+
             int random = (int)(Math.random()* 100); 
             String roleName = testVMPrefix + "vm2";
             String computerName = testVMPrefix + "vm2";
@@ -286,20 +286,20 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
             URI mediaLinkUriValue =  new URI("http://"+ storageAccountName + ".blob.core.chinacloudapi.cn/"+storageContainer+ "/" + testVMPrefix +random + ".vhd");
             String osVHarddiskName =testVMPrefix + "oshdname" + random;
             String operatingSystemName ="Windows";
-     
+
             //required
             ArrayList<ConfigurationSet> configlist = createConfigList(computerName, adminuserPassword, adminUserName);
-     
+
             //required
             String sourceImageName = getOSSourceImage();
             OSVirtualHardDisk oSVirtualHardDisk = createOSVirtualHardDisk(osVHarddiskName, operatingSystemName, mediaLinkUriValue, sourceImageName);
             VirtualMachineCreateParameters createParameters = createVirtualMachineCreateParameter(roleName, configlist, oSVirtualHardDisk, null);
-            
+
             //Act
             OperationResponse operationResponse = computeManagementClient.getVirtualMachinesOperations().create(hostedServiceName, deploymentName, createParameters);
-     
+
             System.out.println(operationResponse.getStatusCode());
-     
+
         }
     }
 
@@ -330,7 +330,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
         protected static String testVMPrefix = "georgeteam";      //VM前缀名称
         protected static String vmLocation = "China North";       //VM Location
         private static String hostedServiceName="georges02";      //我们这这里直接使用已创建好的云服务
-        
+
         static{
              try {
                    config = PublishSettingsLoader.createManagementConfiguration("E:\\AzureTestProject\\JavaWorkspace\\StorageTest001\\src\\azure\\project\\credentials.publishsettings", 
@@ -342,21 +342,21 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                    e.printStackTrace();
              }
         }
-        
+
         private static String getSourceImage() throws Exception {
             String sourceImageName = null;
             VirtualMachineVMImageListResponse virtualMachineImageListResponse = computeManagementClient.getVirtualMachineVMImagesOperations().list();
             ArrayList<VirtualMachineVMImageListResponse.VirtualMachineVMImage> virtualMachineOSImagelist = virtualMachineImageListResponse.getVMImages();
-       
+
             for (VirtualMachineVMImageListResponse.VirtualMachineVMImage virtualMachineImage : virtualMachineOSImagelist) {
                 System.out.println(virtualMachineImage.getName());          
                 sourceImageName = virtualMachineImage.getName();
                 break;
             }
-     
+
             return sourceImageName;
         };
-        
+
         private static ArrayList<ConfigurationSet> createConfigList(String computerName,
                 String adminuserPassword, String adminUserName) {
                 ArrayList<ConfigurationSet> configlist = new ArrayList<ConfigurationSet>();
@@ -372,7 +372,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                 configlist.add(configset);
                 return configlist;
             }
-        
+
         private static VirtualMachineCreateParameters createVirtualMachineCreateParameter(String roleName, ArrayList<ConfigurationSet> configlist, String vMImageNameValue, String availabilitySetNameValue) throws 
                     URISyntaxException {
             VirtualMachineCreateParameters createParameters = new VirtualMachineCreateParameters();   
@@ -380,14 +380,14 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
             createParameters.setRoleSize(VirtualMachineRoleSize.MEDIUM);
             createParameters.setProvisionGuestAgent(true);
             createParameters.setConfigurationSets(configlist);              //Sysprep处理后的映像需要设置ConfigurationSet
-            
+
             //createParameters.setOSVirtualHardDisk(oSVirtualHardDisk);     //基于系统映像创建的方式
             createParameters.setVMImageName(vMImageNameValue);              //基于自定映像响创建的方式
             return createParameters;
         }
-        
+
         public static void main(String[] args)  {
-     
+
                 try {
                         String roleName = testVMPrefix + "vm4";
                         String deploymentName = testVMPrefix + "deploy1";      //deploymentName必须存在，由于我们之前已经创建了这个部署，因此这个类里面直接使用该部署
@@ -399,7 +399,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                         VirtualMachineCreateParameters createParameters = createVirtualMachineCreateParameter(roleName,configlist, sourceImageName, null);
                         OperationResponse operationResponse = computeManagementClient.getVirtualMachinesOperations().create(hostedServiceName, deploymentName, createParameters);             
                         System.out.println(operationResponse.getStatusCode());
-                        
+
                 } catch (Exception e) {
                       e.printStackTrace();
                 }	 
@@ -409,13 +409,13 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 **使用未经过 Sysprep 处理后的映像来创建 VM 的示例代码：**
 
     public class CreateCaptureImageWithNoSysprep {
-      
+
         protected static Configuration config;
         protected static ComputeManagementClient computeManagementClient;
         protected static String testVMPrefix = "georgeteam";      //VM前缀名称
         protected static String vmLocation = "China North";       //VM Location
         private static String hostedServiceName="georges02";      //我们这这里直接使用已创建好的云服务
-     
+
         static{
              try {
                    config = PublishSettingsLoader.createManagementConfiguration("E:\\AzureTestProject\\JavaWorkspace\\StorageTest001\\src\\azure\\project\\credentials.publishsettings", 
@@ -427,21 +427,21 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                    e.printStackTrace();
              }
         }
-        
+
         private static String getSourceImage() throws Exception {
             String sourceImageName = null;
             VirtualMachineVMImageListResponse virtualMachineImageListResponse = computeManagementClient.getVirtualMachineVMImagesOperations().list();
             ArrayList<VirtualMachineVMImageListResponse.VirtualMachineVMImage> virtualMachineOSImagelist = virtualMachineImageListResponse.getVMImages();
-       
+
             for (VirtualMachineVMImageListResponse.VirtualMachineVMImage virtualMachineImage : virtualMachineOSImagelist) {
                 System.out.println(virtualMachineImage.getName());          
                 sourceImageName = virtualMachineImage.getName();
                 break;
             }
-     
+
             return sourceImageName;
         };
-            
+
         private static VirtualMachineCreateParameters createVirtualMachineCreateParameter(String roleName, String vMImageNameValue, String availabilitySetNameValue) throws URISyntaxException {
             VirtualMachineCreateParameters createParameters = new VirtualMachineCreateParameters();   
             createParameters.setRoleName(roleName);
@@ -450,10 +450,10 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
             //createParameters.setConfigurationSets(configlist);            //未经Sysprep处理的映像，不需要设置ConfigurationSet
             //createParameters.setOSVirtualHardDisk(oSVirtualHardDisk);     //基于系统映像创建的方式
             createParameters.setVMImageName(vMImageNameValue);              //基于自定义映像创建的方式
-     
+
             return createParameters;
         }
-        
+
        public static void main(String[] args)  {
                 try {
                         String roleName = testVMPrefix + "vm3";
@@ -462,7 +462,7 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
                         VirtualMachineCreateParameters createParameters = createVirtualMachineCreateParameter(roleName, sourceImageName, null);
                         OperationResponse operationResponse = computeManagementClient.getVirtualMachinesOperations().create(hostedServiceName, deploymentName, createParameters);             
                         System.out.println(operationResponse.getStatusCode());
-                        
+
                 } catch (Exception e) {
                       e.printStackTrace();
                 }
@@ -502,19 +502,19 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
 ## <a id="attachanddelete"></a>附加磁盘和删除磁盘
 
 1. 附加磁盘
-    
+
     附加磁盘的时候，如果你附加现有的磁盘，首先确保你附加的磁盘没有被其他 VM 引用。附加现有磁盘只能通过更新 VM 来附加，请参考以下代码：
-       
+
         VirtualMachineGetResponse virtualMachinesGetResponse = computeManagementClient.getVirtualMachinesOperations().get("kevinvm", "kevinvm", "kevinvm");
-        
+
         VirtualMachineUpdateParameters updateParameters = new VirtualMachineUpdateParameters();
         updateParameters.setRoleName(virtualMachinesGetResponse.getRoleName());
         updateParameters.setConfigurationSets(virtualMachinesGetResponse.getConfigurationSets());
-        
+
         //this is required parameters for update
         OSVirtualHardDisk osVirtualHardDisk = virtualMachinesGetResponse.getOSVirtualHardDisk();
         updateParameters.setOSVirtualHardDisk(osVirtualHardDisk);
-        
+
         ArrayList<DataVirtualHardDisk> dataDisks = new ArrayList<DataVirtualHardDisk>();
         VirtualMachineDiskGetResponse response = computeManagementClient.getVirtualMachineDisksOperations().getDisk("kevinvm-kevinvm-1-201605090139510196");
         DataVirtualHardDisk dataVirtualHardDisk = new DataVirtualHardDisk();
@@ -523,16 +523,16 @@ Azure SDK 提供多种认证方式，以下主要提供两种认证方式，publ
         dataVirtualHardDisk.setLabel(response.getLabel());
         dataDisks.add(dataVirtualHardDisk);
         updateParameters.setDataVirtualHardDisks(dataDisks);
-        
+
         //update
         OperationResponse updateoperationResponse = computeManagementClient.getVirtualMachinesOperations().update("kevinvm", "kevinvm", "kevinvm", updateParameters);
 
 2. 分离磁盘
-  
+
     deleteDataDisk 删除磁盘是可以作为分离磁盘来用的， 这个方法的最后一个参数，deleteDataDisk 如果设置为 false，就是从当前 VM 中删除磁盘，但保留其 VHD 文件。请参考下面的代码：
-    
+
         computeManagementClient.getVirtualMachineDisksOperations().deleteDataDisk 
-        
+
 ## <a id="resource"></a>相关参考资料
 - [Azure Java SDK API](http://azure.github.io/azure-sdk-for-java/)
 - [Azure Management Libraries for Java](https://github.com/Azure/azure-sdk-for-java/tree/0.9)

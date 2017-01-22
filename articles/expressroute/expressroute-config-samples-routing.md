@@ -48,7 +48,7 @@ ms.author: cherylmc
     interface GigabitEthernet<Interface_Number>.<Number>
      encapsulation dot1Q <s-tag> seconddot1Q <c-tag>
      ip address <IPv4_Address><Subnet_Mask>
-    
+
 ### 2\.设置 eBGP 会话
 
 必须针对每个对等互连设置与 Azure 的 BGP 会话。以下示例可让你设置与 Azure 的 BGP 会话。如果对子接口使用的 IPv4 地址是 a.b.c.d，则 BGP 邻居 (Azure) 的 IP 地址将是 a.b.c.d+1。BGP 邻居的 IPv4 地址的最后一个八位字节将始终是偶数。

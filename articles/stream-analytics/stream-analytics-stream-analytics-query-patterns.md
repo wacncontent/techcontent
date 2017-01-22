@@ -387,18 +387,18 @@ Azure 流分析中的查询采用类似 SQL 的查询语言来表述，该语言
 **说明**：查找给定事件的持续时间。例如，给定 Web 点击流可以确定在某功能上所花费的时间。
 
 **输入**：
-  
+
 | 用户 | 功能 | 事件 | 时间 |
 | --- | --- | --- | --- |
 | user@location.com | RightMenu | 开始 | 2015-01-01T00:00:01.0000000Z |
 | user@location.com | RightMenu | 结束 | 2015-01-01T00:00:08.0000000Z |
-  
+
 **输出**：
-  
+
 | 用户 | 功能 | 持续时间 |
 | --- | --- | --- |
 | user@location.com | RightMenu | 7 |
-  
+
 **解决方案**
 
         SELECT
@@ -503,5 +503,5 @@ Azure 流分析中的查询采用类似 SQL 的查询语言来表述，该语言
 - [缩放 Azure 流分析作业](./stream-analytics-scale-jobs.md)
 - [Azure 流分析查询语言参考](https://msdn.microsoft.com/zh-cn/library/azure/dn834998.aspx)
 - [Azure 流分析管理 REST API 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn835031.aspx)
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

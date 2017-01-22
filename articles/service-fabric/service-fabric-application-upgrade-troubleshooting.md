@@ -221,5 +221,5 @@ Service Fabric 将所有百分比转换为实际实体（如副本、分区和�
 参考[高级主题](./service-fabric-application-upgrade-advanced.md)，了解如何在升级应用程序时使用高级功能。
 
 参考 [Troubleshooting Application Upgrades](./service-fabric-application-upgrade-troubleshooting.md)（对应用程序升级进行故障排除）中的步骤来解决应用程序升级时的常见问题。
- 
+
 <!---HONumber=Mooncake_1219_2016-->

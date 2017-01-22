@@ -63,17 +63,17 @@ Azure IoT 中心是一项完全托管的服务，允许后端应用创建和跟�
     ![“NuGet 包管理器”窗口][img-servicenuget]  
 
 4. 在 **Program.cs** 文件顶部添加以下 `using` 语句：
-   
+
         using Microsoft.Azure.Devices;
-        
+
 5. 将以下字段添加到 **Program** 类。将多个占位符替换为在上一部分为 IoT 中心创建的连接字符串。
-   
+
         static string connString = "{iot hub connection string}";
         static ServiceClient client;
         static JobClient jobClient;
-        
+
 6. 将以下方法添加到 **Program** 类：
-   
+
         public static async Task MonitorJob(string jobId)
         {
             JobResponse result;
@@ -84,7 +84,7 @@ Azure IoT 中心是一项完全托管的服务，允许后端应用创建和跟�
                 Thread.Sleep(2000);
             } while ((result.Status != JobStatus.Completed) && (result.Status != JobStatus.Failed));
         }
-                
+
 7. 将以下方法添加到 **Program** 类：
 
         public static async Task StartMethodJob(string jobId)
@@ -117,9 +117,9 @@ Azure IoT 中心是一项完全托管的服务，允许后端应用创建和跟�
 
             Console.WriteLine("Started Twin Update Job");
         }
- 
+
 9. 最后，在 **Main** 方法中添加以下行：
-   
+
         jobClient = JobClient.CreateFromConnectionString(connString);
 
         string methodJobId = Guid.NewGuid().ToString();
@@ -135,42 +135,42 @@ Azure IoT 中心是一项完全托管的服务，允许后端应用创建和跟�
         MonitorJob(twinUpdateJobId).Wait();
         Console.WriteLine("Press ENTER to exit.");
         Console.ReadLine();
-                   
+
 10. 生成解决方案。
 
 ## 创建模拟设备应用程序
 在此部分中，会创建一个 Node.js 控制台应用，它响应云调用的直接方法，这会触发模拟设备重新启动，并使用设备孪生报告属性使设备孪生查询可以识别设备以及它们上次重新启动的时间。
 
 1. 新建名为 **simDevice** 的空文件夹。在 **simDevice** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **simDevice** 文件夹的命令提示符处，运行下述命令以安装 **azure-iot-device** 设备 SDK 包和 **azure-iot-device-mqtt** 包：
-   
+
     ```
     npm install azure-iot-device azure-iot-device-mqtt --save
     ```
 3. 在 **simDevice** 文件夹中，利用文本编辑器创建新的 **simDevice.js** 文件。
 4. 在 **simDevice.js** 文件的开头添加以下“require”语句：
-   
+
     ```
     'use strict';
-   
+
     var Client = require('azure-iot-device').Client;
     var Protocol = require('azure-iot-device-mqtt').Mqtt;
     ```
 5. 添加 **connectionString** 变量，并用其创建设备客户端。
-   
+
     ```
     var connectionString = 'HostName={youriothostname};DeviceId={yourdeviceid};SharedAccessKey={yourdevicekey}';
     var client = Client.fromConnectionString(connectionString, Protocol);
     ```
 6. 添加以下函数以处理 **lockDoor** 方法。
-   
+
     ```
     var onLockDoor = function(request, response) {
-   
+
         // Respond the cloud app for the direct method
         response.send(200, function(err) {
             if (!err) {
@@ -179,12 +179,12 @@ Azure IoT 中心是一项完全托管的服务，允许后端应用创建和跟�
                 console.log('Response to method \'' + request.methodName + '\' sent successfully.');
             }
         });
-   
+
         console.log('Locking Door!');
     };
     ```
 7. 添加以下代码以注册 **lockDoor** 方法的处理程序。
-   
+
     ```
     client.open(function(err) {
         if (err) {
@@ -206,7 +206,7 @@ Azure IoT 中心是一项完全托管的服务，允许后端应用创建和跟�
 现在，已准备就绪，可以运行应用。
 
 1. 在 **simDevice** 文件夹的命令提示符处，运行以下命令以开始侦听重新启动直接方法。
-   
+
     ```
     node simDevice.js
     ```

@@ -76,7 +76,7 @@ Azure 自动化中的每个 Runbook 都有两个版本：草稿版和已发布�
     $automationAccountName = "MyAutomationAccount"
     $runbookName = "Sample-TestRunbook"
     $scriptPath = "c:\runbooks\Sample-TestRunbook.ps1"
-    
+
     $runbookDefinition = Get-AzureAutomationRunbookDefinition -AutomationAccountName $automationAccountName -Name $runbookName -Slot Draft
     $runbookContent = $runbookDefinition.Content
 

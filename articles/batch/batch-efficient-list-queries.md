@@ -83,7 +83,7 @@ expand 字符串用于减少获取特定信息所需的 API 调用数。使用 e
 - filter、select 和 expand 字符串中属性名称的显示方式应与其在[批处理 REST][api_rest] API 中的显示方式相同，即使用户使用[批处理 .NET][api_net] 或其他某个批处理 SDK。
 - 所有属性名称均区分大小写，但属性值不区分大小写。
 - 日期/时间字符串可以采用两种格式中的一种，并且必须在前面加上 `DateTime`。
-  
+
   - W3C-DTF 格式示例：`creationTime gt DateTime'2011-05-08T08:49:37Z'`
   - RFC 1123 格式示例：`creationTime gt DateTime'Sun, 08 May 2011 08:49:37 GMT'`
 - 布尔值字符串为 `true` 或 `false`。

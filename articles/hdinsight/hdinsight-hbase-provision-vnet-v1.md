@@ -186,9 +186,9 @@ DNS 服务器是可选的，但在某些情况下又是必需的。[在两个 Az
 
 ##通过使用 HBase Java RPC API 连接到虚拟网络中设置的 HBase 群集
 
-1.	将基础结构即服务 (IaaS) 虚拟机设置到相同的 Azure 虚拟网络和子网中。因此，虚拟机和 HBase 群集使用相同的内部 DNS 服务器来解析主机名。为此，你必须选择“从库中”选项，然后选择虚拟网络而不是数据中心。有关说明，请参阅[创建运行 Windows Server 的虚拟机](../virtual-machines/virtual-machines-windows-classic-tutorial.md)。具有小型虚拟机的标准 Windows Server 2012 映像已足够。
+1. 将基础结构即服务 (IaaS) 虚拟机设置到相同的 Azure 虚拟网络和子网中。因此，虚拟机和 HBase 群集使用相同的内部 DNS 服务器来解析主机名。为此，你必须选择“从库中”选项，然后选择虚拟网络而不是数据中心。有关说明，请参阅[创建运行 Windows Server 的虚拟机](../virtual-machines/virtual-machines-windows-classic-tutorial.md)。具有小型虚拟机的标准 Windows Server 2012 映像已足够。
 
-2.	使用 Java 应用程序远程连接到 HBase 时，必须使用完全限定域名 (FQDN)。若要确定这一点，你必须获取 HBase 群集的连接特定的 DNS 后缀。为此，请使用 Curl 查询 Ambari，或使用远程桌面来连接到群集。
+2. 使用 Java 应用程序远程连接到 HBase 时，必须使用完全限定域名 (FQDN)。若要确定这一点，你必须获取 HBase 群集的连接特定的 DNS 后缀。为此，请使用 Curl 查询 Ambari，或使用远程桌面来连接到群集。
 
     * **Curl** - 使用以下命令：
 
@@ -304,7 +304,7 @@ DNS 服务器是可选的，但在某些情况下又是必需的。[在两个 Az
     > <p>![hdinsight.hbase.dns.surffix][img-dns-surffix]
 
 <!--
-3.	Change the primary DNS suffix configuration of the virtual machine. This enables the virtual machine to automatically resolve the host name of the HBase cluster without explicit specification of the suffix. For example, the *workernode0* host name will be correctly resolved to workernode0 of the HBase cluster.
+3. Change the primary DNS suffix configuration of the virtual machine. This enables the virtual machine to automatically resolve the host name of the HBase cluster without explicit specification of the suffix. For example, the *workernode0* host name will be correctly resolved to workernode0 of the HBase cluster.
 
     To make the configuration change:
 
@@ -382,7 +382,7 @@ DNS 服务器是可选的，但在某些情况下又是必需的。[在两个 Az
 [3]: http://technet.microsoft.com/zh-cn/library/hh847889.aspx
 
 [hbase-get-started]: ./hdinsight-hbase-tutorial-get-started-v1.md
-[vnet-overview]: ../virtual-network/index.md/
+[vnet-overview]: ../virtual-network/index.md
 [vm-create]: ../virtual-machines/virtual-machines-windows-classic-tutorial.md
 [azure-portal]: https://manage.windowsazure.cn
 [azure-create-storageaccount]: ../storage/storage-create-storage-account.md

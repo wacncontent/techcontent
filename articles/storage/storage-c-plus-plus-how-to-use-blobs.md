@@ -40,8 +40,8 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 
 若要安装适用于 C++ 的 Azure 存储客户端库，可使用以下方法：
 
--	**Linux：**按照[适用于 C++ 的 Azure 存储空间客户端库自述文件](https://github.com/Azure/azure-storage-cpp/blob/master/README.md)页中提供的说明操作。
--	**Windows：**在 Visual Studio 主菜单中，单击“工具”->“NuGet 程序包管理器”->“程序包管理器控制台”。在 [NuGet 程序包管理器控制台](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)窗口中输入以下命令，然后按 **ENTER**。
+- **Linux：**按照[适用于 C++ 的 Azure 存储空间客户端库自述文件](https://github.com/Azure/azure-storage-cpp/blob/master/README.md)页中提供的说明操作。
+- **Windows：**在 Visual Studio 主菜单中，单击“工具”->“NuGet 程序包管理器”->“程序包管理器控制台”。在 [NuGet 程序包管理器控制台](http://docs.nuget.org/docs/start-here/using-the-package-manager-console)窗口中输入以下命令，然后按 **ENTER**。
 
         Install-Package wastorage
 
@@ -236,11 +236,11 @@ Azure Blob 存储支持块 Blob 和页 Blob。大多数情况下，推荐使用�
 ## 后续步骤
 既然你已了解 blob 存储的基础知识，请按照下面的链接了解有关 Azure 存储的详细信息。
 
--	[如何通过 C++ 使用队列存储](./storage-c-plus-plus-how-to-use-queues.md)
--	[如何通过 C++ 使用表存储](./storage-c-plus-plus-how-to-use-tables.md)
--	[使用 C++ 列出 Azure 存储资源](./storage-c-plus-plus-enumeration.md)
--	[适用于 C++ 的存储空间客户端库参考](http://azure.github.io/azure-storage-cpp)
--	[Azure 存档文档](./index.md/)
+- [如何通过 C++ 使用队列存储](./storage-c-plus-plus-how-to-use-queues.md)
+- [如何通过 C++ 使用表存储](./storage-c-plus-plus-how-to-use-tables.md)
+- [使用 C++ 列出 Azure 存储资源](./storage-c-plus-plus-enumeration.md)
+- [适用于 C++ 的存储空间客户端库参考](http://azure.github.io/azure-storage-cpp)
+- [Azure 存档文档](./index.md)
 - [使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)
 
 <!---HONumber=Mooncake_1128_2016-->

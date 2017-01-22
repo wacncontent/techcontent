@@ -64,7 +64,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
     Get-AzureVM -Name FTPInstance -ServiceName FTPService
 
 预期输出：
- 
+
     DeploymentName              : FTPService
     Name                        : FTPInstance
     Label                       : 

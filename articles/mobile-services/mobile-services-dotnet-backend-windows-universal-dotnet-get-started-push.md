@@ -34,7 +34,7 @@ ms.author: glenga
 [!INCLUDE [mobile-services-create-new-push-vs2013](../../includes/mobile-services-create-new-push-vs2013.md)]
 
 &nbsp;&nbsp;6.浏览到 `\Services\MobileServices\your_service_name` 项目文件夹，打开生成的 push.register.cs 代码文件，并检查 **UploadChannel** 方法是否将设备的通道 URL 注册到通知中心。
- 
+
 &nbsp;&nbsp;7.打开共享的 App.xaml.cs 代码文件，可以看到已在 **OnLaunched** 事件处理程序中添加了对新的 **UploadChannel** 方法的调用。这可确保每次启动应用程序时都尝试注册设备。
 
 &nbsp;&nbsp;8.重复执行前面的步骤为 Windows Phone 应用商店应用项目添加推送通知，然后在共享的 App.xaml.cs 文件中，删除对 **UploadChannel** 和剩余 `#if...#endif` 条件包装的额外调用。现在，这两个项目可以共用对 **UploadChannel** 的单一调用。

@@ -102,10 +102,10 @@ ms.author: ningk
 ##调整磁盘 I/O 计划算法
 Linux 实现了四种类型的 I/O 计划算法：
 
--	NOOP 算法（无操作）
--	截止时间算法（截止时间）
--	完全公平队列算法 (CFQ)
--	预算期算法（预测）  
+- NOOP 算法（无操作）
+- 截止时间算法（截止时间）
+- 完全公平队列算法 (CFQ)
+- 预算期算法（预测）  
 
 在不同的情况下，你可以选择使用不同的 I/O 计划程序来优化性能。在完全随机的访问环境中，CFQ 算法和截止时间算法对性能的影响区别不大。为保持稳定性，一般建议将 MySQL 数据库环境设置为截止时间算法。如果有大量的顺序 I/O，CFQ 可能会降低磁盘 I/O 性能。
 
@@ -206,20 +206,20 @@ MySQL 是高并发数据库。对于 Linux，默认的并发句柄数量是 1024
 
 主要 I/O 优化规则包括：
 
--	增加缓存大小。
--	减少 I/O 响应时间。  
+- 增加缓存大小。
+- 减少 I/O 响应时间。  
 
 若要优化 MySQL 服务器设置，可以更新 my.cnf 文件，它是服务器和客户端计算机的默认配置文件。
 
 以下配置项是影响 MySQL 性能的主要因素：
 
--	**innodb\_buffer\_pool\_size**：缓冲池包含缓冲数据和索引。此值通常设置为物理内存的 70%。
--	**innodb\_log\_file\_size**：这是重做日志大小。重做日志用于确保写入操作快速、可靠并且可在出现故障后恢复。此值设置为 512MB，这将为记录写入操作提供大量空间。
--	**max\_connections**：应用程序有时候不会正确关闭连接。值越大，服务器就有越多时间回收空闲的连接。最大连接数为 10000，但建议的最大值为 5000。
--	**Innodb\_file\_per\_table**：此设置允许或禁止 InnoDB 将表存储在单独的文件中。启用该选项将确保可以有效地应用多项高级管理操作。从性能角度来看，它可以提高表空间传输的速度和优化碎片管理性能。因此，此选项的推荐设置是“打开”。</br> 从 MySQL 5.6 开始，默认设置为“打开”。因此，无需执行任何操作。对于早于 5.6 的其他版本，默认设置为“关闭”。必须启用此选项，并在加载数据之前应用此选项，因为只有新创建的表才会受影响。
--	**innodb\_flush\_log\_at\_trx\_commit**：默认值为 1，范围设置为 0~2。默认值是最适合独立 MySQL DB 的选项。设置 2 支持最大程度的数据完整性，适用于 MySQL 群集中的主节点。设置 0 允许数据丢失，这可能会影响可靠性，但在某些情况下能提供更好的性能，适用于 MySQL 群集中的从属节点。
--	**Innodb\_log\_buffer\_size**：借助日志缓冲区，即使在事务提交之前未将日志刷新到磁盘，事务也可以运行。但是，如果有大型的二进制对象或文本字段，将很快地耗尽缓存，并触发频繁的磁盘 I/O。如果 Innodb\_log\_waits 状态变量不为 0，最好增加缓冲区大小。
--	**query\_cache\_size**：最好是从一开始就禁用。将 query\_cache\_size 设置为 0（现在是 MySQL 5.6 中的默认设置）并使用其他方法来提高查询速度。  
+- **innodb\_buffer\_pool\_size**：缓冲池包含缓冲数据和索引。此值通常设置为物理内存的 70%。
+- **innodb\_log\_file\_size**：这是重做日志大小。重做日志用于确保写入操作快速、可靠并且可在出现故障后恢复。此值设置为 512MB，这将为记录写入操作提供大量空间。
+- **max\_connections**：应用程序有时候不会正确关闭连接。值越大，服务器就有越多时间回收空闲的连接。最大连接数为 10000，但建议的最大值为 5000。
+- **Innodb\_file\_per\_table**：此设置允许或禁止 InnoDB 将表存储在单独的文件中。启用该选项将确保可以有效地应用多项高级管理操作。从性能角度来看，它可以提高表空间传输的速度和优化碎片管理性能。因此，此选项的推荐设置是“打开”。</br> 从 MySQL 5.6 开始，默认设置为“打开”。因此，无需执行任何操作。对于早于 5.6 的其他版本，默认设置为“关闭”。必须启用此选项，并在加载数据之前应用此选项，因为只有新创建的表才会受影响。
+- **innodb\_flush\_log\_at\_trx\_commit**：默认值为 1，范围设置为 0~2。默认值是最适合独立 MySQL DB 的选项。设置 2 支持最大程度的数据完整性，适用于 MySQL 群集中的主节点。设置 0 允许数据丢失，这可能会影响可靠性，但在某些情况下能提供更好的性能，适用于 MySQL 群集中的从属节点。
+- **Innodb\_log\_buffer\_size**：借助日志缓冲区，即使在事务提交之前未将日志刷新到磁盘，事务也可以运行。但是，如果有大型的二进制对象或文本字段，将很快地耗尽缓存，并触发频繁的磁盘 I/O。如果 Innodb\_log\_waits 状态变量不为 0，最好增加缓冲区大小。
+- **query\_cache\_size**：最好是从一开始就禁用。将 query\_cache\_size 设置为 0（现在是 MySQL 5.6 中的默认设置）并使用其他方法来提高查询速度。  
 
 有关优化后的性能比较，请参阅[附录 D](#AppendixD)。
 
@@ -317,7 +317,7 @@ MySQL 慢查询日志有助于识别 MySQL 的慢查询。在启用 MySQL 慢查
 
 [http://dev.mysql.com/doc/refman/5.6/en/innodb-configuration.html](http://dev.mysql.com/doc/refman/5.6/en/innodb-configuration.html)
 
-[http://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar\_innodb\_flush\_method](http://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_flush_method)
+[http://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_flush_method](http://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_flush_method)
 
 **测试环境**
 

@@ -26,7 +26,7 @@ ms.author: juliako
 
 * 指定了不受支持的 API 版本。有关最新版本的信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 * 未指定媒体服务的 API 版本。有关如何指定 API 版本的信息，请参阅[使用媒体服务 REST API 连接到媒体服务](./media-services-rest-connect-programmatically.md)。
-  
+
   > [!NOTE]如果使用 .NET 或 Java SDK 连接到媒体服务，则无论何时尝试并执行针对媒体服务的操作，都会指定 API 版本。
 
 * 指定了未定义的属性。错误消息中提供属性名称。仅可指定身份是给定实体的成员的那些属性。有关实体及其属性的列表，请参阅 [Azure 媒体服务 REST API 参考](https://docs.microsoft.com/zh-cn/rest/api/media/mediaservice)。
@@ -53,7 +53,7 @@ ms.author: juliako
 * 媒体服务帐户已被禁用且请求类型不是 HTTP GET。服务操作也会返回 403 响应。
 * 身份验证令牌不包含用户的凭据信息：AccountName 和/或 SubscriptionId。有关 Azure 管理门户中媒体服务帐户的此类信息，可在媒体服务 UI 扩展中找到。
 * 无法访问资源。
-  
+
   * 尝试使用不可用于媒体服务帐户的 MediaProcessor。
   * 尝试更新媒体服务定义的 JobTemplate。
   * 尝试覆盖某些其他媒体服务帐户的定位符。

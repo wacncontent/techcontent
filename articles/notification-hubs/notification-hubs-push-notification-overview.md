@@ -127,7 +127,7 @@ Mobile Apps 开发人员可以借助以下工作流来利用通知中心：
 - **Mobile Apps 客户端 SDK。** 这些多平台 SDK 提供简单的 API 用于注册，然后自动与链接到移动应用的通知中心联系。开发人员不需要深入了解通知中心凭据和使用其他服务。
     + SDK 将使用 Mobile Apps 的已经过身份验证的用户 ID 来自动标记给定设备，以实现推送到用户的方案。
     + SDK 自动使用 Mobile Apps 安装 ID 作为 GUID 来注册到通知中心，省去了开发人员维护多个服务 GUID 的麻烦。
-    
+
 - **安装模型。** Mobile Apps 使用通知中心的最新推送模型来呈现 JSON 安装中所有与设备关联的推送属性，该模型与推送通知密切合作且易于使用。
 
 - **灵活性。** 即使是就地集成的，开发人员也始终可以选择直接使用通知中心。
@@ -152,7 +152,7 @@ Mobile Apps 开发人员可以借助以下工作流来利用通知中心：
   [0]: ./media/notification-hubs-overview/registration-diagram.png
   [1]: ./media/notification-hubs-overview/notification-hub-diagram.png
   [客户如何使用通知中心]: https://www.azure.cn/home/features/notification-hubs/
-  [通知中心教程和指南]: ./index.md/
+  [通知中心教程和指南]: ./index.md
   [iOS]: ./notification-hubs-ios-apple-push-notification-apns-get-started.md
   [Windows Universal]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
   [Windows Phone]: ./notification-hubs-windows-mobile-push-notifications-mpns.md

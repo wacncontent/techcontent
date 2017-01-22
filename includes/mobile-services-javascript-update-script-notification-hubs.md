@@ -11,7 +11,7 @@
         var payload = '<?xml version="1.0" encoding="utf-8"?><toast><visual>' +    
             '<binding template="ToastText01">  <text id="1">' +
             item.text + '</text></binding></visual></toast>';
-        
+
         request.execute({
             success: function() {
                 // If the insert succeeds, send a notification.

@@ -26,7 +26,7 @@ ms.author: tdykstra
 本指南提供 C# 代码示例，用于演示如何在创建或更新 Azure Blob 后触发进程。这些代码示例使用 [WebJobs SDK](./websites-dotnet-webjobs-sdk.md) 版本 1.x。
 
 有关演示如何创建 Blob 的代码示例，请参阅[如何通过 WebJobs SDK 使用 Azure 队列存储](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md)。
-        
+
 本指南假设你了解[如何使用指向存储帐户的连接字符串在 Visual Studio 中创建 WebJob 项目](./websites-dotnet-webjobs-sdk-get-started.md)或创建[多个存储帐户](https://github.com/Azure/azure-webjobs-sdk/blob/master/test/Microsoft.Azure.WebJobs.Host.EndToEndTests/MultipleStorageAccountsEndToEndTests.cs)。
 
 ## <a id="trigger"></a> 如何在创建或更新 Blob 后触发函数
@@ -105,7 +105,7 @@ ms.author: tdykstra
 ## <a id="string"></a> 通过绑定到字符串获取文本 Blob 内容
 
 如果需要文本 Blob，可将 `BlobTrigger` 应用到 `string` 参数。以下代码示例将文本 Blob 绑定到名为 `logMessage` 的 `string` 参数。函数使用该参数将 Blob 的内容写入 WebJobs SDK 仪表板。
- 
+
         public static void WriteLog([BlobTrigger("input/{name}")] string logMessage,
             string name, 
             TextWriter logger)
@@ -175,7 +175,7 @@ ms.author: tdykstra
             throw new Exception("Exception for testing poison blob handling");
             output = input.ReadToEnd();
         }
-        
+
         public static void LogPoisonBlob(
         [QueueTrigger("webjobs-blobtrigger-poison")] PoisonBlobMessage message,
             TextWriter logger)
@@ -239,5 +239,5 @@ Blob 回执存储在 AzureWebJobsStorage 连接字符串指定的 Azure 存储�
 ## <a id="nextsteps"></a>后续步骤
 
 本指南提供的代码示例演示了如何处理常见方案以操作 Azure Blob。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 推荐资源](./websites-webjobs-resources.md)。
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

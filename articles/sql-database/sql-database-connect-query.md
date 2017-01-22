@@ -87,7 +87,7 @@ ms.author: stevestein
                 <startup>
                     <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5" />
                 </startup>
-        
+
                 <connectionStrings>
                     <clear />
                     <add name="ConnectionString4NoUserIDNoPassword"
@@ -120,7 +120,7 @@ ms.author: stevestein
             using D = System.Data;            // System.Data.dll
             using C = System.Data.SqlClient;  // System.Data.dll
             using T = System.Text;
-            
+
             namespace ConnectAndQuery_Example
             {
                 class Program
@@ -129,7 +129,7 @@ ms.author: stevestein
                     {
                         string connectionString4NoUserIDNoPassword,
                             password, userName, SQLConnectionString;
-            
+
                         // Get most of the connection string from ConnectAndQuery_Example.exe.config
                         // file, in the same directory where ConnectAndQuery_Example.exe resides.
                         connectionString4NoUserIDNoPassword = Program.GetConnectionStringFromExeConfig
@@ -139,17 +139,17 @@ ms.author: stevestein
                         userName = Console.ReadLine();
                         // Get the password from keyboard input.
                         password = Program.GatherPasswordFromConsole();
-            
+
                         SQLConnectionString = "Password=" + password + ';' +
                             "User ID=" + userName + ";" + connectionString4NoUserIDNoPassword;
-            
+
                         // Create an SqlConnection from the provided connection string.
                         using (C.SqlConnection connection = new C.SqlConnection(SQLConnectionString))
                         {
                             // Formulate the command.
                             C.SqlCommand command = new C.SqlCommand();
                             command.Connection = connection;
-            
+
                             // Specify the query to be executed.
                             command.CommandType = D.CommandType.Text;
                             command.CommandText = @"
@@ -158,7 +158,7 @@ ms.author: stevestein
                                 ";
                             // Open a connection to database.
                             connection.Open();
-            
+
                             // Read data returned for the query.
                             C.SqlDataReader reader = command.ExecuteReader();
                             while (reader.Read())
@@ -171,12 +171,12 @@ ms.author: stevestein
                         Console.ReadKey(true);
                     }
                     //----------------------------------------------------------------------------------
-            
+
                     static string GetConnectionStringFromExeConfig(string connectionStringNameInConfig)
                     {
                         G.ConnectionStringSettings connectionStringSettings =
                             G.ConfigurationManager.ConnectionStrings[connectionStringNameInConfig];
-            
+
                         if (connectionStringSettings == null)
                         {
                             throw new ApplicationException(String.Format
@@ -185,7 +185,7 @@ ms.author: stevestein
                         }
                             return connectionStringSettings.ConnectionString;
                     }
-            
+
                     static string GatherPasswordFromConsole()
                     {
                         T.StringBuilder passwordBuilder = new T.StringBuilder(32);

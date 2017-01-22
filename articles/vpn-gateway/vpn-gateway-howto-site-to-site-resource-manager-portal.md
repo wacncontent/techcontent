@@ -120,7 +120,7 @@ ms.author: cherylmc
 [!INCLUDE [vpn-gateway-verify-connection-rm](../../includes/vpn-gateway-verify-connection-rm-include.md)]
 
 ## 后续步骤
-*  连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md/)。
+*  连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md)。
 *  有关 BGP 的信息，请参阅 [BGP 概述](./vpn-gateway-bgp-overview.md)和[如何配置 BGP](./vpn-gateway-bgp-resource-manager-ps.md)。
 
 <!---HONumber=Mooncake_1226_2016-->

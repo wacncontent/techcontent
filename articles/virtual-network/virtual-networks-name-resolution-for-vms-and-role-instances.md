@@ -137,7 +137,7 @@ DNS 转发还可用于在 VNet 之间进行 DNS 解析，可以通过本地计�
 使用 Azure 提供的名称解析时，会通过 DHCP 为每个 VM 提供内部 DNS 后缀（*.internal.chinacloudapp.cn）。这使主机名解析成 internal.chinacloudapp.cn 区间内的主机记录。使用你自己的名称解析解决方案时，不会向 VM 提供该 IDNS 后缀，因为该后缀会干扰其他 DNS 体系结构（如 domain-joined 案例）。
 
 如果需要，可通过 PowerShell 或 API 来确定该后缀：
- 
+
 -  在经典部署模型中，该后缀可通过 [Get Deployment API](https://msdn.microsoft.com/zh-cn/library/azure/ee460804.aspx) 调用或 [Get-AzureVM -Debug](https://msdn.microsoft.com/zh-cn/library/azure/dn495236.aspx) cmdlet 来获取。
 
 如果你不想将查询转发到 Azure，则需提供你自己的 DNS 解决方案。你的 DNS 解决方案需满足以下条件：
@@ -160,7 +160,7 @@ DNS 转发还可用于在 VNet 之间进行 DNS 解析，可以通过本地计�
 > [!NOTE] 如果更改已部署的虚拟网络/虚拟机的 DNS 设置，则需重新启动每个受影响的 VM，所做的更改才会生效。
 
 ## 后续步骤
- 
+
 经典部署模型：
 
 - [Azure 服务配置架构](https://msdn.microsoft.com/zh-cn/library/azure/ee758710)

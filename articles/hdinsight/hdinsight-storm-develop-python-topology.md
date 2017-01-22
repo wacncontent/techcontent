@@ -135,11 +135,11 @@ __要构建 Uberjar 并部署到 HDInsight__，请使用以下步骤：
         lein uberjar
 
     这会在 `target\uberjar+uberjar` 目录中创建一个名为 `wordcount-1.0-SNAPSHOT.jar` 的新文件。
-    
+
 2. 使用以下方法之一将拓扑部署到 HDInsight 群集并运行该拓扑：
-    
+
     * __基于 Windows 的 HDInsight__
-    
+
         1. 在浏览器中转到 HTTPS://CLUSTERNAME.azurehdinsight.cn/，以连接到 Storm 仪表板。将 CLUSTERNAME 替换为 HDInsight 群集名称，并在出现提示时输入管理员名称和密码。
 
         2. 使用窗体执行以下操作：

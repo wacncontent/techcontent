@@ -90,5 +90,5 @@ Service Fabric 应用程序可以通过预配一个完整且独立的应用程�
 了解如何使用[数据序列化](./service-fabric-application-upgrade-data-serialization.md)，使应用程序在升级后保持兼容。
 
 参考 [Troubleshooting Application Upgrades](./service-fabric-application-upgrade-troubleshooting.md)（对应用程序升级进行故障排除）中的步骤来解决应用程序升级时的常见问题。
- 
+
 <!---HONumber=Mooncake_1219_2016-->

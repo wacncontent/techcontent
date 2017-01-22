@@ -13,14 +13,14 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 09/12/2016
-wacn.date: 11/25/2016
 ms.author: billmath
+wacn.date: 01/19/2017
 ---
 
 # Azure AD 联合身份验证兼容性列表
 Azure Active Directory 为 Office 365 和其他 Microsoft Online 服务提供单一登录与增强的应用程序访问安全性，以便在不使用任何非 Microsoft 解决方案的情况下实施混合部署和仅限云的部署。与大多数 Microsoft Online 服务一样，Office 365 可与 Azure Active Directory 集成，以利用目录服务、身份验证和授权。Azure Active Directory 还为数千种 SaaS 应用程序与本地 Web 应用程序提供单一登录。有关支持的 SaaS 应用程序，请参阅 Azure Active Directory 应用程序库。
 
-对于投资了非 Microsoft 联合解决方案的组织，本主题包含有关通过以下"Azure Active Directory 联合兼容性列表"中所列的非 Microsoft 标识提供者，为使用 Microsoft 联机服务的 Windows Server Active Directory 用户配置单一登录的指导。
+对于投资了非 Microsoft 联合解决方案的组织，本主题包含有关通过以下“Azure Active Directory 联合兼容性列表”中所列的非 Microsoft 标识提供者，为使用 Microsoft 联机服务的 Windows Server Active Directory 用户配置单一登录的指导。
 
 ![](./media/active-directory-aadconnect-federation-compatibility/oxford2.jpg)   
 [Oxford Computer Group](http://oxfordcomputergroup.com) 作为代表 Microsoft 的第三方，利用非 Microsoft 标识提供者针对 Azure Active Directory 的一组常见用例测试了这些单一登录体验。
@@ -68,7 +68,7 @@ Azure Active Directory 可以通过与本地 Active-Directory 联合，或者在
 | 多重格式电子邮件客户端（如 Outlook 和 ActiveSync） | 支持 |无|
 |使用 ADAL 的现代应用程序，例如 Office 2016| 支持|无|
 
-有关将 Azure Active Directory 与 AD FS 配合使用的详细信息，请参阅 [Active Directory 联合身份验证服务 (ADFS)](./active-directory-aadconnect-get-started-custom.md)
+有关将 Azure Active Directory 与 AD FS 配合使用的详细信息，请参阅 [Active Directory 联合身份验证服务 (ADFS)](./active-directory-aadconnect-get-started-custom.md#configuring-federation-with-ad-fs/)
 
 有关将 Azure Active Directory 与密码同步配合使用的详细信息，请参阅 [Azure AD Connect](./active-directory-aadconnect.md)。
 
@@ -200,7 +200,7 @@ Okta 实施广泛使用的 WS 联合标识标准以提供单一登录和属性�
 | 多重格式电子邮件客户端（如 Outlook 和 ActiveSync） | 支持 |无|
 
 有关 Okta 的详细信息，请参阅 [Okta。](https://www.okta.com)
- 
+
 ## OneLogin 
 2014 年 5 月测试的 OneLogin 实施广泛使用的 WS 联合/WS 信任标识标准，以提供单一登录和属性交换框架。
 

@@ -71,7 +71,7 @@ ms.author: cakarst;barbkess;sonyama
     ![单击“Blob”](./media/sql-data-warehouse-get-started-load-with-polybase/click-blobs.png)  
 
 4. 保存你的 Blob 服务终结点供稍后使用。
-   
+
     ![Blob 服务终结点](./media/sql-data-warehouse-get-started-load-with-polybase/blob-service.png)  
 
 ### C.查找你的 Azure 存储密钥
@@ -81,7 +81,7 @@ ms.author: cakarst;barbkess;sonyama
 2. 单击你要使用的存储帐户。
 3. 选择“所有设置”>“访问密钥”。
 4. 单击复制框，将你的访问密钥之一复制到剪贴板。
-   
+
     ![复制 Azure 存储密钥](./media/sql-data-warehouse-get-started-load-with-polybase/access-key.png)  
 
 ### D.将示例文件复制到 Azure Blob 存储

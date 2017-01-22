@@ -20,13 +20,13 @@
 1. 如果你尚未登录 [Azure 门户预览](https://portal.azure.cn)，请先登录。
 
 2. 在中心菜单中，单击“+ 新建”，然后单击“虚拟机”。
-    
+
     ![Alt 图像文本](./media/virtual-machines-common-classic-configure-availability/ChooseVMImage.png)
 
 3. 选择要使用的应用商店虚拟机映像。可以选择创建 Linux 或 Windows 虚拟机。
 
 4. 对于所选的虚拟机，确认部署模型已设置为“经典”，然后单击“创建”
-    
+
     ![Alt 图像文本](./media/virtual-machines-common-classic-configure-availability/ChooseClassicModel.png)
 
 5. 输入虚拟机名称、用户名和密码（适用于 Windows 虚拟机）或 SSH 公钥（适用于 Linux 虚拟机）。
@@ -34,7 +34,7 @@
 6. 选择 VM 大小，然后单击“选择”以继续。
 
 7. 选择“可选配置 > 可用性集”，并选择要将虚拟机添加到的可用性集。
-    
+
     ![Alt 图像文本](./media/virtual-machines-common-classic-configure-availability/ChooseAvailabilitySet.png)
 
 8. 查看配置设置。完成后，单击“创建”。
@@ -50,17 +50,17 @@
 1. 如果你尚未登录 [Azure 门户预览](https://portal.azure.cn)，请先登录。
 
 2. 在“中心”菜单中，单击“虚拟机(经典)”。
-    
+
     ![Alt 图像文本](./media/virtual-machines-common-classic-configure-availability/ChooseClassicVM.png)
 
 3. 从虚拟机列表中，选择想要添加到集中的虚拟机的名称。
 
 4. 从虚拟机**设置**中选择“可用性集”。
-    
+
     ![Alt 图像文本](./media/virtual-machines-common-classic-configure-availability/AvailabilitySetSettings.png)
 
 5. 选择要将虚拟机添加到的可用性集。虚拟机必须与可用性集属于同一云服务。
-    
+
     ![Alt 图像文本](./media/virtual-machines-common-classic-configure-availability/AvailabilitySetPicker.png)
 
 6. 单击“保存”。

@@ -39,7 +39,7 @@ ms.author: robinsh
     - **存储日志记录**可以在服务器端日志中记录发送到 Azure 存储服务的每个请求。日志用于跟踪每个请求的详细数据，包括执行的操作、操作的状态和延迟信息。有关存储分析写入日志的请求和响应数据的详细信息，请参阅[存储分析日志格式](http://msdn.microsoft.com/zh-cn/library/azure/hh343259.aspx)。
 
 - **Azure 门户预览**。可在 [Azure 门户预览](https://portal.azure.cn)中配置存储帐户的指标和日志记录。还可以查看显示应用程序在各时间段执行情况的图表和图形，以及配置警报，以便在应用程序的特定指标不同于预期时接收通知。
-    
+
     请参阅[在 Azure 门户预览中监视存储帐户](./storage-monitor-storage-account.md)，了解如何在 Azure 门户预览中的配置监视功能。
 
 - **AzCopy**。Azure 存储的服务器日志存储为 Blob，因此可以使用 AzCopy 将日志 Blob 复制到本地目录，以使用 Microsoft Message Analyzer 进行分析。有关 AzCopy 的详细信息，请参阅[使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)。
@@ -107,16 +107,16 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 1. 使用 [Add-AzureAccount](http://msdn.microsoft.com/zh-cn/library/azure/dn722528.aspx) cmdlet 将 Azure 用户帐户添加到 PowerShell 窗口中：
 
         Add-AzureAccount -Environment AzureChinaCloud
-    
+
 2. 在“登录 Azure”窗口中，键入与帐户关联的电子邮件地址和密码。Azure 将对凭据信息进行身份验证和保存，然后关闭该窗口。
 3. 通过在 PowerShell 窗口中执行以下命令，将默认存储帐户设置为用于本教程的存储帐户：
 
         $SubscriptionName = 'Your subscription name'
         $StorageAccountName = 'yourstorageaccount' 
         Set-AzureSubscription -Environment AzureChinaCloud -CurrentStorageAccountName $StorageAccountName -SubscriptionName $SubscriptionName 
-        
+
 4. 为 Blob 服务启用存储日志记录：
- 
+
         Set-AzureStorageServiceLoggingProperty -ServiceType Blob -LoggingOperations Read,Write,Delete -PassThru -RetentionDays 7 -Version 1.0 
 
 5. 为 Blob 服务启用存储指标，确保将 **-MetricsType** 设置为 `Minute`：
@@ -150,7 +150,7 @@ Azure 存储操作可能返回 HTTP 状态代码大于 299 作为其正常功能
 4. 选择 **Microsoft-Pef-WebProxy** ETW 提供程序右侧的“配置”链接。
 5. 在“高级设置”对话框中，单击“提供程序”选项卡。
 6. 在“主机名筛选器”字段中，指定存储终结点，以空格分隔。例如，可按如下所示指定终结点；将 `storagesample` 更改为存储帐户名称：
-    
+
         storagesample.blob.core.chinacloudapi.cn storagesample.queue.core.chinacloudapi.cn storagesample.table.core.chinacloudapi.cn 
 
 7. 退出对话框，然后单击“重新启动”，在启用主机名筛选器的情况下开始收集跟踪，以便仅在跟踪中包含 Azure 存储网络通信。
@@ -354,5 +354,5 @@ Message Analyzer 将查找并选择搜索条件匹配客户端请求 ID 的第�
 - [在 Azure 门户预览中监视存储帐户](./storage-monitor-storage-account.md)
 - [使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)
 - [Microsoft Message Analyzer 操作指南](http://technet.microsoft.com/zh-cn/library/jj649776.aspx)
- 
+
 <!---HONumber=Mooncake_0103_2017-->

@@ -39,7 +39,7 @@ ms.author: glenga
             {
                 [Key]
                 public int CustomerId { get; set; }
-                
+
                 public string Name { get; set; }
 
                 public virtual ICollection<Order> Orders { get; set; }
@@ -48,7 +48,7 @@ ms.author: glenga
         }
 
 3. 在 **Models** 文件夹中创建 **Order.cs** 文件，并使用以下实现：
-    
+
         using System.ComponentModel.DataAnnotations;
 
         namespace ShoppingService.Models
@@ -65,7 +65,7 @@ ms.author: glenga
                 public bool Completed { get; set; }
 
                 public int CustomerId { get; set; }
-              
+
                 public virtual Customer Customer { get; set; }
 
             }
@@ -144,7 +144,7 @@ ms.author: glenga
     **Customer** 关系属性已替换为 **Customer** 名称，以及可用来为客户端上的关系手动建模的 **MobileCustomerId** 属性。现在你可以忽略 **CustomerId** 属性，以后才会使用此属性。
 
 3. 你可能会发现，在 **EntityData** 基类上添加系统属性后，DTO 的属性数目比模型类型还多。显然，需要一个位置来存储这些属性，因此我们将在原始数据库中额外添加一些列。虽然这样会更改数据库，但并不会中断现有的应用程序，因为这些更改只是附加的（将新的列添加到架构）。为此，请将以下语句添加到 **Customer.cs** 和 **Order.cs** 的顶部：
-    
+
         using System.ComponentModel.DataAnnotations.Schema;
         using Microsoft.WindowsAzure.Mobile.Service.Tables;
         using System;
@@ -173,7 +173,7 @@ ms.author: glenga
         public byte[] Version { get; set; }
 
 5. 刚刚添加的系统属性具有某些会在数据库操作期间明确发生的内置行为（例如，自动更新创建/更新时间）。若要启用这些行为，我们需要更改 **ExistingContext.cs**。在该文件的顶部，添加以下代码：
-    
+
         using System.Data.Entity.ModelConfiguration.Conventions;
         using Microsoft.WindowsAzure.Mobile.Service.Tables;
         using System.Linq;
@@ -317,7 +317,7 @@ AutoMapper 此时会将对象互相映射。将匹配所有具有相应名称的
                 {
                     return (T)(object)GetKey(mobileCustomerId, this.context.Customers, this.Request);
                 }
-                
+
                 public override SingleResult<MobileCustomer> Lookup(string mobileCustomerId)
                 {
                     int customerId = GetKey<int>(mobileCustomerId);
@@ -604,7 +604,7 @@ AutoMapper 此时会将对象互相映射。将匹配所有具有相应名称的
             public DateTimeOffset? UpdatedAt { get; set; }
 
             public bool Deleted { get; set; }
-            
+
             [Version]
             public string Version { get; set; }
 

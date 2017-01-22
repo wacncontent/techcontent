@@ -42,10 +42,10 @@ ms.author: krisragh
 
         // Get the logged in user
         var currentUser = User as ServiceUser;
-    
+
         // Set the user ID on the item
         item.UserId = currentUser.Id;
-    
+
     此代码会将已经过身份验证的用户的用户 ID 添加到项中，然后将此 ID 插入 TodoItem 表。
 
 4. 找到 **GetAllTodoItems** 方法，并将现有的 **return** 语句替换为以下代码行：

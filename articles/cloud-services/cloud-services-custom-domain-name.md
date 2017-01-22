@@ -59,14 +59,14 @@ A 记录将域（例如 **contoso.com** 或 **www.contoso.com**）*或通配符�
 
 1. 使用下列方法之一找到分配给你的云服务的 **.chinacloudapp.cn** 域名。
 
-   * 登录到 [Azure 经典管理门户]，依次选择云服务、“仪表板”，然后在“速览”部分中查找“站点 URL”条目。
-    
+    * 登录到 [Azure 经典管理门户]，依次选择云服务、“仪表板”，然后在“速览”部分中查找“站点 URL”条目。
+
        ![显示站点 URL 的速览部分][csurl]
-    
+
        **或者**
-    
-   * 安装并配置 [Azure Powershell](../powershell-install-configure.md)，然后使用以下命令：
-        
+
+    * 安装并配置 [Azure Powershell](../powershell-install-configure.md)，然后使用以下命令：
+
         Get-AzureDeployment -ServiceName yourservicename | Select Url
 
      保存任一方法返回的 URL 中所使用的域名，因为创建 CNAME 记录时需要它。
@@ -95,19 +95,19 @@ A 记录将域（例如 **contoso.com** 或 **www.contoso.com**）*或通配符�
 若要创建 A 记录，必须首先找到云服务的虚拟 IP 地址。然后，使用注册机构所提供的工具在 DNS 表中为的自定义域名添加新条目。每个注册机构指定 A 记录的方法类似但略有不同，但概念是相同的。
 
 1. 使用以下方法之一来获取云服务的 IP 地址。
-    
-   * 登录到 [Azure 经典管理门户]，依次选择云服务、“仪表板”，然后在“速览”部分中查找“公共虚拟 IP (VIP)地址”条目。
-    
+
+    * 登录到 [Azure 经典管理门户]，依次选择云服务、“仪表板”，然后在“速览”部分中查找“公共虚拟 IP (VIP)地址”条目。
+
        ![显示 VIP 的速览部分][vip]
-    
+
        **或者**
-    
-   * 安装并配置 [Azure Powershell](../powershell-install-configure.md)，然后使用以下命令：
-    
+
+    * 安装并配置 [Azure Powershell](../powershell-install-configure.md)，然后使用以下命令：
+
         get-azurevm -servicename yourservicename | get-azureendpoint -VM {$_.VM} | select Vip
-    
+
     如果有多个终结点与云服务相关联，将收到包含 IP 地址的多个行，但所有行都显示相同地址。
-    
+
     保存该 IP 地址，因为创建 A 记录时需要它。
 
 1.  登录到 DNS 注册机构的网站，并转到用于管理 DNS 的页面。查找标为**域名**、**DNS** 或**名称服务器管理**的站点的链接或区域。
@@ -148,5 +148,5 @@ Azure 中的 IP 地址默认为动态 IP 地址。可能需要使用[保留 IP �
 [Validate Custom Domain dialog box]: http://i.msdn.microsoft.com/dynimg/IC544437.jpg
 [vip]: ./media/cloud-services-custom-domain-name/csvip.png
 [csurl]: ./media/cloud-services-custom-domain-name/csurl.png
- 
+
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

@@ -173,8 +173,8 @@ PolyBase 还支持名为“递归文件夹遍历”的功能。你可以使用�
 
 <!--Other Web references-->
 [Azure 数据工厂]: /documentation/services/data-factory/
-[ExpressRoute]: ../expressroute/index.md/
-[ExpressRoute 文档]: ../expressroute/index.md/
+[ExpressRoute]: ../expressroute/index.md
+[ExpressRoute 文档]: ../expressroute/index.md
 
 [生产版]: http://aka.ms/downloadazcopy/
 [预览版]: http://aka.ms/downloadazcopypr/

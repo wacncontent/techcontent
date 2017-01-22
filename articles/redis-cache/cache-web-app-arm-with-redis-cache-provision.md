@@ -81,7 +81,7 @@ ms.author: sdanie
 使用 **webSiteName** 变量中指定的名称创建 Web 应用。
 
 请注意，在 Web 应用中配置的应用设置属性使其可与 Redis 缓存配合工作。此应用设置是根据部署期间提供了值动态创建的。
-        
+
     {
       "apiVersion": "2015-08-01",
       "name": "[variables('webSiteName')]",

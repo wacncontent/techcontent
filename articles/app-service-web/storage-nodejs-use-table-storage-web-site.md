@@ -609,7 +609,7 @@ ms.author: robmcm
 [Azure Portal Preview]: https://portal.azure.cn
 
 [Create and deploy a Node.js application to an Azure Web Site]: ./web-sites-nodejs-develop-deploy-mac.md
- 
+
 <!-- Image References -->
 
 [node-table-finished]: ./media/storage-nodejs-use-table-storage-web-site/table_todo_empty.png

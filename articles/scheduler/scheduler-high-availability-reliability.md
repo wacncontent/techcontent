@@ -62,25 +62,25 @@ Azure 计划程序允许你配置重试策略。默认情况下，如果某个�
 若要了解如何配置备用终结点，请参阅 [errorAction](./scheduler-concepts-terms.md#action-and-erroraction)。
 
 ## 另请参阅
- 
+
  [计划程序是什么？](./scheduler-intro.md)
- 
+
  [计划程序的概念、术语和实体层次结构](./scheduler-concepts-terms.md)
- 
+
  [开始在管理门户中使用计划程序](./scheduler-get-started-portal.md)
- 
+
  [Azure 计划程序中的计划和计费](./scheduler-plans-billing.md)
- 
+
  [如何使用 Azure 计划程序生成复杂的计划和高级重复执行](./scheduler-advanced-complexity.md)
- 
+
  [Azure 计划程序 REST API 参考](https://msdn.microsoft.com/zh-cn/library/mt629143)
- 
+
  [计划程序 PowerShell Cmdlet 参考](./scheduler-powershell-reference.md)
- 
+
  [计划程序的限制、默认值和错误代码](./scheduler-limits-defaults-errors.md)
- 
+
  [计划程序出站身份验证](./scheduler-outbound-authentication.md)
- 
+
 [1]: ./media/scheduler-high-availability-reliability/scheduler-high-availability-reliability-image1.png
 
 [2]: ./media/scheduler-high-availability-reliability/scheduler-high-availability-reliability-image2.png

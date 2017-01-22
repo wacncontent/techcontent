@@ -10,14 +10,14 @@
         using System.Collections.Generic;
         using Microsoft.Azure.NotificationHubs;
         using Microsoft.Azure.Mobile.Server.Config;
-    
+
 2. 在 **PostTodoItem** 方法中，在调用 **InsertAsync** 后添加如下代码：
 
         // Get the settings for the server project.
         HttpConfiguration config = this.Configuration;
         MobileAppSettingsDictionary settings = 
             this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
-        
+
         // Get the Notification Hubs credentials for the Mobile App.
         string notificationHubName = settings.NotificationHubName;
         string notificationHubConnection = settings
@@ -60,17 +60,17 @@
         var azureMobileApps = require('azure-mobile-apps'),
         promises = require('azure-mobile-apps/src/utilities/promises'),
         logger = require('azure-mobile-apps/src/logger');
-    
+
         var table = azureMobileApps.table();
-        
+
         table.insert(function (context) {
         // For more information about the Notification Hubs JavaScript SDK, 
         // see http://aka.ms/nodejshubs
         logger.info('Running TodoItem.insert');
-        
+
         // Define the template payload.
         var payload = '{"messageParam": "' + context.item.text + '" }';  
-        
+
         // Execute the insert.  The insert returns the results as a Promise,
         // Do the push as a post-execute action within the promise flow.
         return context.execute()

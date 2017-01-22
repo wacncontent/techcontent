@@ -104,7 +104,7 @@ ms.author: adrianha
 2. 单击“+新建”>“Web + 移动”>“移动应用”，然后提供移动应用后端名称。
 
 3. 对于“资源组”，请选择现有资源组，或创建新组（使用与应用相同的名称。）
- 
+
     可以选择其他应用服务计划或创建新的计划。有关应用服务计划以及如何在不同定价层和所需位置中创建新计划的详细信息，请参阅 [Azure App Service plans in-depth overview](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)（Azure 应用服务计划深入概述）。
 
 4. 对于“应用服务计划”，请选择默认计划（位于[标准层](https://www.azure.cn/pricing/details/app-service/)）。还可以选择不同的计划，或[创建一个新计划](../app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md#create-an-app-service-plan)。应用服务计划的设置将确定与应用关联的[位置、功能、成本和计算资源](https://www.azure.cn/pricing/details/app-service/)。
@@ -165,7 +165,7 @@ Azure 移动应用允许在服务中配置 Azure Active Directory 和 Microsoft 
 [Create a Mobile App]: ./app-service-mobile-xamarin-ios-get-started.md
 [Add push notifications to your mobile app]: ./app-service-mobile-xamarin-ios-get-started-push.md
 [Add authentication to your mobile app]: ./app-service-mobile-xamarin-ios-get-started-users.md
-[Azure Scheduler]: ../scheduler/index.md/
+[Azure Scheduler]: ../scheduler/index.md
 [Web Job]: ../app-service-web/websites-webjobs-resources.md
 [How to use the .NET server SDK]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
 [Migrate from Mobile Services to an App Service Mobile App]: ./app-service-mobile-migrating-from-mobile-services.md

@@ -134,7 +134,7 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 
 ### 门户
 从订阅边栏选项卡选择“资源提供程序”即可轻松查看支持的资源提供程序列表。若要向资源提供程序注册订阅，请选择“注册”链接。
-   
+
 ![列出资源提供程序](./media/resource-manager-supported-services/view-resource-providers.png)  
 
 ### REST API
@@ -192,15 +192,15 @@ Azure Active Directory 可以使用 Resource Manager 为订阅启用基于角色
 执行以下步骤即可查看某种资源类型支持的区域：
 
 1. 选择“更多服务”>“资源浏览器”。
-   
+
     ![资源浏览器](./media/resource-manager-supported-services/select-resource-explorer.png)  
 
 2. 打开“提供程序”节点。
-   
+
     ![选择提供程序](./media/resource-manager-supported-services/select-providers.png)  
 
 3. 选择资源提供程序，然后查看支持的区域和 API 版本。
-   
+
     ![查看提供程序](./media/resource-manager-supported-services/view-provider.png)  
 
 ### REST API

@@ -50,5 +50,5 @@ Azure Service Fabric 服务可以是有状态服务，也可以是无状态服�
 - [Service Fabric 服务分区](./service-fabric-concepts-partitioning.md)
 
 - [定义和管理状态](./service-fabric-concepts-state.md)
- 
+
 <!---HONumber=Mooncake_0822_2016-->

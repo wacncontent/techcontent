@@ -49,11 +49,11 @@ wacn.date: 12/19/2016
 若要打开示例代码，请执行以下步骤：
 
 1. 通过运行以下命令克隆 GitHub 中的示例存储库：
-   
+
         git clone https://github.com/Azure-Samples/iot-hub-node-raspberrypi-getting-started.git
 
 2. 通过运行以下命令在 Visual Studio Code 中打开示例应用程序：
-   
+
         cd iot-hub-node-raspberrypi-getting-started
         cd Lesson1
         code .
@@ -71,21 +71,21 @@ wacn.date: 12/19/2016
 若要配置设备连接，请执行以下步骤：
 
 1. 运行以下命令，生成设备配置文件：
-   
+
         gulp init
-   
+
     配置文件 `config-raspberrypi.json` 包含用来登录到 Pi 的用户凭据。为了避免用户凭据泄漏，配置文件在计算机主文件夹的 `.iot-hub-getting-started` 子文件夹中生成。
-    
+
 2. 运行以下命令，在 Visual Studio Code 中打开设备配置文件：
-   
+
         # For Windows command prompt
         code %USERPROFILE%\.iot-hub-getting-started\config-raspberrypi.json
-       
+
         # For macOS or Ubuntu
         code ~/.iot-hub-getting-started/config-raspberrypi.json
-    
+
 3. 将占位符 `[device hostname or IP address]` 替换为此前在“获取 Pi 的 IP 地址和主机名”中获得的 IP 地址或主机名。
-   
+
     ![Config.json](./media/iot-hub-raspberry-pi-lessons/lesson1/vscode-config-mac.png)  
 
 祝贺你！ 你已成功创建 Pi 的第一个示例应用程序。

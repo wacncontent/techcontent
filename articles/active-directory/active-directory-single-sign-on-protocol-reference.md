@@ -13,8 +13,8 @@ ms.tgt_pltfrm: na
 ms.devlang: na
 ms.topic: article
 ms.date: 10/03/2016
-wacn.date: 11/08/2016
 ms.author: priyamo
+wacn.date: 01/19/2017
 ---
 
 # 单一登录 SAML 协议
@@ -28,7 +28,7 @@ ms.author: priyamo
 ## AuthnRequest
 
 为了请求用户身份验证，云服务将 `AuthnRequest` 元素发送到 Azure AD。下面显示了一个示例 SAML 2.0 `AuthnRequest`：
-    
+
     <samlp:AuthnRequest
     xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
     ID="id6c1c178c166d486687be4aaf5e482730"
@@ -151,7 +151,7 @@ Azure AD 将 `Issuer` 元素设置为 `https://login.microsoftonline.com/<Tenant
 例如，具有 Issuer 元素的示例响应看起来类似于这样：
 
     <Issuer xmlns="urn:oasis:names:tc:SAML:2.0:assertion"> https://login.microsoftonline.com/82869000-6ad1-48f0-8171-272ed18796e9/</Issuer>
-    
+
 ### 状态
 
 `Status` 元素传递登录的成功或失败状态。它包含 `StatusCode` 元素，此元素包含用于表示请求状态的一个代码或一组嵌套代码。它还包含 `StatusMessage` 元素，此元素包含登录过程中生成的自定义错误消息。
@@ -226,7 +226,7 @@ Azure AD 为断言签名以响应成功登录。`Signature` 元素包含数字�
     <AudienceRestriction>
             <Audience>https://www.contoso.com</Audience>
     </AudienceRestriction>
-    
+
 与 `Issuer` 值一样，`Audience` 值必须与表示 Azure AD 中云服务的服务主体名称之一完全匹配。但是，如果 `Issuer` 元素值不是 URI 值，响应中的 `Audience` 值是带有 `spn:` 前缀的 `Issuer` 值。
 
 #### AttributeStatement
@@ -242,7 +242,7 @@ Azure AD 为断言签名以响应成功登录。`Signature` 元素包含数字�
           </Attribute>
           ...
     </AttributeStatement>
-        
+
 - **Name 声明**：`Name` 属性值 (`http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name`) 是经过身份验证的用户的用户主体名称，例如 `testuser@managedtenant.com`。
 - **ObjectIdentifier 声明**：`ObjectIdentifier` 属性值 (`http://schemas.microsoft.com/identity/claims/objectidentifier`) 是表示 Azure AD 中已经过身份验证用户的目录对象的 `ObjectId`。`ObjectId` 是已经过身份验证的不可变、全局唯一且可重复使用的安全标识符。
 
@@ -252,7 +252,7 @@ Azure AD 为断言签名以响应成功登录。`Signature` 元素包含数字�
 
 - `AuthnInstant` 属性指定在 Azure AD 上对用户进行身份验证的时间。
 - `AuthnContext` 元素指定用于对用户进行身份验证的身份验证上下文。
-    
+
     <AuthnStatement AuthnInstant="2013-03-18T07:33:56.000Z" SessionIndex="_bf9c623d-cc20-407a-9a59-c2d0aee84d12">
           <AuthnContext>
             <AuthnContextClassRef> urn:oasis:names:tc:SAML:2.0:ac:classes:Password</AuthnContextClassRef>

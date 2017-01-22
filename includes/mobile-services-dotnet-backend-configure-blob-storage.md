@@ -16,7 +16,7 @@
 TodoItem 类定义数据对象，并且您需要将相同属性添加到此类，正如您在客户端上的操作一样。
 
 1. 在 Visual Studio 2013 中，打开您的移动服务项目，展开 DataObjects 文件夹，然后打开 TodoItem.cs 项目文件。
-    
+
 2. 将以下新属性添加到 **TodoItem** 类：
 
         public string containerName { get; set; }
@@ -37,7 +37,7 @@ TodoItem 类定义数据对象，并且您需要将相同属性添加到此类�
 1. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，单击“存储”，单击存储帐户，然后单击“管理密钥”。
 
 2. 记下“存储帐户名称”和“访问密钥”。
- 
+
 3. 在你的移动服务中，单击“配置”选项卡、向下滚动到“应用设置”、输入你从存储帐户获取的下述每个项的“名称”和“值”对，然后单击“保存”。
 
     + `STORAGE_ACCOUNT_NAME`
@@ -59,7 +59,7 @@ TodoItem 类定义数据对象，并且您需要将相同属性添加到此类�
         using System;
         using Microsoft.WindowsAzure.Storage.Auth;
         using Microsoft.WindowsAzure.Storage.Blob;
-  
+
 8.  将现有 **PostTodoItem** 方法替换为以下代码：
 
         public async Task<IHttpActionResult> PostTodoItem(TodoItem item)
@@ -123,7 +123,7 @@ TodoItem 类定义数据对象，并且您需要将相同属性添加到此类�
     >[!NOTE]这段代码为单个 BLOB 创建 SAS。如果需要使用同一个 SAS 将多个 Blob 上载到容器，你可以使用空 Blob 资源名称来调用 <a href="http://go.microsoft.com/fwlink/?LinkId=390455" target="_blank">generateSharedAccessSignature 方法</a>，如下所示：<pre><code>blobService.generateSharedAccessSignature(containerName, '', sharedAccessPolicy);</code></pre>
 
 接下来，您将更新快速启动应用，通过使用在发生插入时生成的 SAS，添加图像上载功能。
- 
+
 <!-- Anchors. -->
 
 <!-- Images. -->

@@ -1174,15 +1174,15 @@ Apache Mahout 是 Apache Hadoop 的机器学习库。Mahout 包含用于处理�
 
 ## 2014 年 8 月 24 日发行说明
 * 我们正在添加以下 WebHCat 配置 (HIVE-7155)，该配置可将 Templeton 控制器作业的默认内存限制设置为 1 GB：（以前的默认值是 512 MB。）
-  
+
      templeton.mapper.memory.mb (=1024)
-  
+
   * 这项更改解决了某些 Hive 查询由于内存限制较低而遇到的以下错误：“容器即将超出物理内存限制”。
   * 要恢复到旧默认值，你可以在创建群集时使用以下命令通过 Azure PowerShell 将此配置值设置为 512：
-    
+
       Add-AzureRmHDInsightConfigValues -Core @{"templeton.mapper.memory.mb"="512";}
 * zookeeper 角色的主机名已更改为 *zookeeper*。这会影响群集内部的名称解析，但不会影响外部 REST API。如果你的组件使用了 *zookeepernode* 主机名，则需更新这些组件，让其使用新名称。三个 zookeeper 节点的新名称为：
-  
+
   * zookeeper0
   * zookeeper1
   * zookeeper2

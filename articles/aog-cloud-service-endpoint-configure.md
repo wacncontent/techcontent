@@ -138,7 +138,7 @@ Azure 页面上会显示正在进行更新，大约半分钟后更新完成。
 PowerShell 连接 Azure 后，使用 Get-AzureVM 命令列出所有虚拟机，然后将需要设置终结点的虚拟机赋给变量 $vm。
 
     PS C:\> Get-AzureVM
-    
+
     ServiceName     Name            Status   
     -----------     ----            ------   
     endpoint-test1  endpoint-test1  ReadyRole
@@ -175,13 +175,13 @@ Get-AzureEndpoint 命令的详细说明请参考[这篇文章（英文）](https
 ### <a id="powershelladd"></a>添加终结点
 
 首先用 Get-AzureVM 将需要添加终结点的虚拟机赋给变量 $vm。
-    
+
     PS C:\> $vm = Get-AzureVM -ServiceName endpoint-test4 -Name endpoint-test4
 
 然后用 $vm | Get-AzureEndpoint 查看此虚拟机已配置的终结点。
 
     PS C:\> $vm | Get-AzureEndpoint
-    
+
     LBSetName                : 
     LocalPort                : 22
     Name                     : SSH
@@ -238,7 +238,7 @@ Get-AzureEndpoint 命令的详细说明请参考[这篇文章（英文）](https
 最后使用 Update-AzureVM 命令将终结点更新到 Azure 中。
 
     PS C:\> $vm | Update-AzureVM
-    
+
     OperationDescription OperationId                          OperationStatus
     -------------------- -----------                          ---------------
     Update-AzureVM       5ceaxxxx-xxxx-xxxx-xxxx-xxxxxxxxc132 Succeeded   
@@ -254,7 +254,7 @@ Add-AzureEndpoint 命令的参数和使用方法还有很多，例如前文提�
 编辑终结点主要使用 Set-AzureEndpoint 命令。下面的例子中，通过该命令，将前一步创建的 FTP 终结点的公共端口和私有端口都修改为 10021。编辑完成后使用 Update-AzureVM 命令将终结点更新到 Azure 中。
 
     PS C:\> $vm | Set-AzureEndpoint -Name FTP -PublicPort 10021 -LocalPort 10021
-    
+
     DeploymentName                    : endpoint-test4
     Name                              : endpoint-test4
     Label                             : 
@@ -287,19 +287,19 @@ Add-AzureEndpoint 命令的参数和使用方法还有很多，例如前文提�
     OperationStatus                   : OK
 
     PS C:\> $vm | Update-AzureVM
-    
+
     OperationDescription OperationId                          OperationStatus
     -------------------- -----------                          ---------------
     Update-AzureVM       8d72xxxx-xxxx-xxxx-xxxx-xxxxxxxx8c3b Succeeded 
 
-Set-AzureEndpoint命令的详细说明请参考（英文）：[https://msdn.microsoft.com/zh-cn/library/azure/dn495219.aspx](https://msdn.microsoft.com/en-us/library/azure/dn495219.aspx)  
+Set-AzureEndpoint命令的详细说明请参考（英文）：[https://msdn.microsoft.com/en-us/library/azure/dn495219.aspx](https://msdn.microsoft.com/en-us/library/azure/dn495219.aspx)  
 
 ### <a id="powershelldelete"></a>删除终结点
 
 删除终结点主要使用 Remove-AzureEndpoint 命令。其参数只需要终结点的名字即可。下面的例子删除了之前创建的终结点 FTP。删除完成后使用 Update-AzureVM 命令将终结点更新到 Azure 中。
 
     PS C:\> $vm | Remove-AzureEndpoint -Name FTP
-    
+
     DeploymentName                    : endpoint-test4
     Name                              : endpoint-test4
     Label                             : 
@@ -330,9 +330,9 @@ Set-AzureEndpoint命令的详细说明请参考（英文）：[https://msdn.micr
     OperationDescription              : Get-AzureVM
     OperationId                       : 812a9ebeb64f47628502f63c7axxxxxx
     OperationStatus                   : OK
-    
+
     PS C:\> $vm | Update-AzureVM
-    
+
     OperationDescription OperationId                          OperationStatus
     -------------------- -----------                          ---------------
     Update-AzureVM       250f xxxx-xxxx-xxxx-xxxx-xxxxxxxx2bb2 Succeeded      

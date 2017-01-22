@@ -19,7 +19,7 @@ ms.author: sethm
 
 # 使用事件中心流式处理热路径中的 Azure 诊断数据
 
-Azure 诊断提供了灵活的方法用于收集来自云服务虚拟机 (VM) 的指标和日志，并将结果传输到 Azure 存储空间。从 2016 年 3 月 (SDK 2.9) 这一时间范围开始，可以将诊断接收为完全自定义的数据源，并使用 [Azure 事件中心](./index.md/)在数秒内传输热路径数据。
+Azure 诊断提供了灵活的方法用于收集来自云服务虚拟机 (VM) 的指标和日志，并将结果传输到 Azure 存储空间。从 2016 年 3 月 (SDK 2.9) 这一时间范围开始，可以将诊断接收为完全自定义的数据源，并使用 [Azure 事件中心](./index.md)在数秒内传输热路径数据。
 
 支持的数据类型包括：
 
@@ -48,7 +48,7 @@ Azure 诊断提供了灵活的方法用于收集来自云服务虚拟机 (VM) �
 
 ## 将 Azure 诊断连接到事件中心接收器
 默认情况下，Azure 诊断始终将日志和指标接收到 Azure 存储帐户。应用程序可能会额外接收到事件中心，方法是将 **Sinks** 节添加到 .wadcfgx 文件的 **PublicConfig** 节中的 **WadCfg** 元素。在 Visual Studio 中，.wadcfgx 文件存储在“云服务项目”>“角色”>“(RoleName)”>“diagnostics.wadcfgx”文件中。
-  
+
       <SinksConfig>
         <Sink name="HotPath">
           <EventHub Url="https://diags-mycompany-ns.servicebus.chinacloudapi.cn/diageventhub" SharedAccessKeyName="SendRule" />
@@ -146,13 +146,13 @@ Visual Studio 提供最简单的路径供你部署应用程序和事件中心接
     using System.Text;
     using System.Threading.Tasks;
     using Microsoft.ServiceBus.Messaging;
-    
+
     namespace EventHubListener
     {
         class SimpleEventProcessor : IEventProcessor
         {
             Stopwatch checkpointStopWatch;
-    
+
             async Task IEventProcessor.CloseAsync(PartitionContext context, CloseReason reason)
             {
                 Console.WriteLine("Processor Shutting Down. Partition '{0}', Reason: '{1}'.", context.Lease.PartitionId, reason);
@@ -161,7 +161,7 @@ Visual Studio 提供最简单的路径供你部署应用程序和事件中心接
                     await context.CheckpointAsync();
                 }
             }
-    
+
             Task IEventProcessor.OpenAsync(PartitionContext context)
             {
                 Console.WriteLine("SimpleEventProcessor initialized.  Partition: '{0}', Offset: '{1}'", context.Lease.PartitionId, context.Lease.Offset);
@@ -169,22 +169,22 @@ Visual Studio 提供最简单的路径供你部署应用程序和事件中心接
                 this.checkpointStopWatch.Start();
                 return Task.FromResult<object>(null);
             }
-    
+
             async Task IEventProcessor.ProcessEventsAsync(PartitionContext context, IEnumerable<EventData> messages)
             {
                 foreach (EventData eventData in messages)
                 {
                     string data = Encoding.UTF8.GetString(eventData.GetBytes());
-    
+
                     Console.WriteLine(string.Format("Message received.  Partition: '{0}', Data: '{1}'",
                         context.Lease.PartitionId, data));
-    
+
                     foreach (var x in eventData.Properties)
                     {
                         Console.WriteLine(string.Format("    {0} = {1}", x.Key, x.Value));
                     }
                 }
-    
+
                 //Call checkpoint every 5 minutes, so that worker can resume processing from 5 minutes back if it restarts.
                 if (this.checkpointStopWatch.Elapsed > TimeSpan.FromMinutes(5))
                 {
@@ -193,7 +193,7 @@ Visual Studio 提供最简单的路径供你部署应用程序和事件中心接
                 }
             }
         }
-    
+
         class Program
         {
             static void Main(string[] args)
@@ -203,14 +203,14 @@ Visual Studio 提供最简单的路径供你部署应用程序和事件中心接
                 string storageAccountName = "<Storage Account Name>";
                 string storageAccountKey = "<Storage Account Key>”;
                 string storageConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1};EndpointSuffix=core.chinacloudapi.cn", storageAccountName, storageAccountKey);
-    
+
                 string eventProcessorHostName = Guid.NewGuid().ToString();
                 EventProcessorHost eventProcessorHost = new EventProcessorHost(eventProcessorHostName, eventHubName, EventHubConsumerGroup.DefaultGroupName, eventHubConnectionString, storageConnectionString);
                 Console.WriteLine("Registering EventProcessor...");
                 var options = new EventProcessorOptions();
                 options.ExceptionReceived += (sender, e) => { Console.WriteLine(e.Exception); };
                 eventProcessorHost.RegisterEventProcessorAsync<SimpleEventProcessor>(options).Wait();
-    
+
                 Console.WriteLine("Receiving. Press enter key to stop worker.");
                 Console.ReadLine();
                 eventProcessorHost.UnregisterEventProcessorAsync().Wait();
@@ -233,7 +233,7 @@ Visual Studio 提供最简单的路径供你部署应用程序和事件中心接
     请尝试查看 Azure 存储表，其中包含日志和 Azure 诊断本身的错误：**WADDiagnosticInfrastructureLogsTable**。一个选项是使用 [Azure 存储资源管理器](http://www.storageexplorer.com)等工具连接到此存储帐户，查看此表，然后添加过去 24 小时的时间戳查询。你可以使用此工具导出 .csv 文件，并在 Microsoft Excel 之类的应用程序中打开它。Excel 能轻松地搜索电话卡字符串（如 **EventHubs**），以便查看系统报告了哪些错误。
 
 ## 后续步骤
-•	[了解有关事件中心的详细信息](./index.md/)
+•	[了解有关事件中心的详细信息](./index.md)
 
 ## 附录：完整的 Azure 诊断配置文件 (.wadcfgx) 示例
     <?xml version="1.0" encoding="utf-8"?>

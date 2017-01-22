@@ -20,11 +20,11 @@
 4. 单击 **GET 表 /todoitem** 链接。
 
     ![](./media/mobile-services-dotnet-backend-test-local-service-api-documentation/service-api-documentation-page.png)
-       
+
     这将显示 API 的 GET 响应页面。
 
 5. 单击“尝试”，然后单击“发送”。
- 
+
     ![](./media/mobile-services-dotnet-backend-test-local-service-api-documentation/service-try-this-out-get-todoitems.png)
 
     这将 GET 请求发送到本地移动服务以返回 TodoItem 表中的所有行。因为初始程序对表设置种子值，所以在响应消息正文中返回两个 TodoItem 对象。有关初始程序的更多信息，请参阅[如何对 .NET 后端移动服务进行数据模型更改](../articles/mobile-services/mobile-services-dotnet-backend-how-to-use-code-first-migrations.md)。

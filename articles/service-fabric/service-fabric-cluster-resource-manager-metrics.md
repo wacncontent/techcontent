@@ -36,10 +36,10 @@ ms.author: masnider
 ![包含默认指标的群集布局][Image1]
 
 在此示例中，我们看到：
--	有状态服务的主要副本并未堆积在单个节点上
--	同一分区的副本不在同一节点上
--	群集中主要副本与辅助副本的总数合理分布
--	每个节点上的服务对象（无状态与有状态）总数平均分配
+- 有状态服务的主要副本并未堆积在单个节点上
+- 同一分区的副本不在同一节点上
+- 群集中主要副本与辅助副本的总数合理分布
+- 每个节点上的服务对象（无状态与有状态）总数平均分配
 
 非常好！
 
@@ -64,30 +64,30 @@ ms.author: masnider
     memoryMetric.PrimaryDefaultLoad = 20;
     memoryMetric.SecondaryDefaultLoad = 5;
     memoryMetric.Weight = ServiceLoadMetricWeight.High;
-    
+
     StatefulServiceLoadMetricDescription primaryCountMetric = new StatefulServiceLoadMetricDescription();
     primaryCountMetric.Name = "PrimaryCount";
     primaryCountMetric.PrimaryDefaultLoad = 1;
     primaryCountMetric.SecondaryDefaultLoad = 0;
     primaryCountMetric.Weight = ServiceLoadMetricWeight.Medium;
-    
+
     StatefulServiceLoadMetricDescription replicaCountMetric = new StatefulServiceLoadMetricDescription();
     replicaCountMetric.Name = "ReplicaCount";
     replicaCountMetric.PrimaryDefaultLoad = 1;
     replicaCountMetric.SecondaryDefaultLoad = 1;
     replicaCountMetric.Weight = ServiceLoadMetricWeight.Low;
-    
+
     StatefulServiceLoadMetricDescription totalCountMetric = new StatefulServiceLoadMetricDescription();
     totalCountMetric.Name = "Count";
     totalCountMetric.PrimaryDefaultLoad = 1;
     totalCountMetric.SecondaryDefaultLoad = 1;
     totalCountMetric.Weight = ServiceLoadMetricWeight.Low;
-    
+
     serviceDescription.Metrics.Add(memoryMetric);
     serviceDescription.Metrics.Add(primaryCountMetric);
     serviceDescription.Metrics.Add(replicaCountMetric);
     serviceDescription.Metrics.Add(totalCountMetric);
-    
+
     await fabricClient.ServiceManager.CreateServiceAsync(serviceDescription);
 
 Powershell：
@@ -98,13 +98,13 @@ Powershell：
 
 我们已演示如何定义自己的指标，接下来我们讨论指标具有的各种属性。我们已向你展示过这些属性，现在让我们来讨论它们的实际含义！ 目前，一个指标可有四个不同的属性：
 
--	指标名称：这是指标的名称。从资源管理器的立场来看，这是群集中指标的唯一标识符。
+- 指标名称：这是指标的名称。从资源管理器的立场来看，这是群集中指标的唯一标识符。
 - 默认负载：默认负载根据服务是无状态还是有状态服务以不同的方式表示。
   - 对于无状态服务，每个指标都只有名为“默认负载”的单个属性
   - 对于有状态服务，可以定义
-    -	PrimaryDefaultLoad：此服务将为此指标（充当主要指标）使用的默认负载量
-    -	SecondaryDefaultLoad：此服务将为此指标（充当辅助指标）使用的默认负载量
--	权重：这是指标对于此服务的重要程度（相对于配置的其他指标）。
+    - PrimaryDefaultLoad：此服务将为此指标（充当主要指标）使用的默认负载量
+    - SecondaryDefaultLoad：此服务将为此指标（充当辅助指标）使用的默认负载量
+- 权重：这是指标对于此服务的重要程度（相对于配置的其他指标）。
 
 ## 加载
 负载是特定节点上某个服务实例或副本使用多少特定指标的一般概念。
@@ -144,15 +144,15 @@ Powershell：
 
 有几个问题值得注意：
 
--	由于副本或实例在报告自己的负载前使用服务的默认负载，我们知道有状态服务的分区 1 内的副本尚未自行报告负载
--	分区内的辅助副本可以有自己的负载
--	整体指标看起来很不错，节点上最大和最小负载之间的差异（对于内存 – 我们说过最在意的自定义指标）比率只有 1.75（具有最多内存负载的节点是 N3，最少是 N2，28/16 = 1.75）– 相当平衡！
+- 由于副本或实例在报告自己的负载前使用服务的默认负载，我们知道有状态服务的分区 1 内的副本尚未自行报告负载
+- 分区内的辅助副本可以有自己的负载
+- 整体指标看起来很不错，节点上最大和最小负载之间的差异（对于内存 – 我们说过最在意的自定义指标）比率只有 1.75（具有最多内存负载的节点是 N3，最少是 N2，28/16 = 1.75）– 相当平衡！
 
 仍需解释的一些事项
 
--	何者确定 1.75 的比率是否合理？ 我们如何知道这是否够好，或者还需要再做些什么？
--	何时发生平衡？
--	内存的权重“很高”是什么意思？
+- 何者确定 1.75 的比率是否合理？ 我们如何知道这是否够好，或者还需要再做些什么？
+- 何时发生平衡？
+- 内存的权重“很高”是什么意思？
 
 ## 指标权重
 指标权重允许两个不同的服务报告同一指标，但不能以不同方式看待平衡该指标的重要性。例如，请考虑内存中分析引擎和持续性数据库；两者可能都很在意“内存”指标，但内存中服务可能不太在意“磁盘”指标 – 它可能少量使用，但并非服务性能的关键所在，因此甚至可能不会报告该指标。能够跨越不同的服务来跟踪同一指标真的很棒，因为此功能可让群集资源管理器跟踪群集中的实际消耗量，确保节点不超过容量，此外还可带来其他优势。

@@ -61,10 +61,10 @@ Azure Redis 缓存是一种分布式托管缓存，可通过提供对数据的�
 
 你可以根据需要通过高级层重新启动缓存的一个或多个节点。这可以测试应用程序在故障时的还原能力。你可以重新启动下列节点。
 
--	缓存的主节点
--	缓存的从节点
--	缓存的主节点和从节点
--	使用高级缓存来执行群集功能时，可以针对缓存中的各个分片重新启动主节点和/或从节点
+- 缓存的主节点
+- 缓存的从节点
+- 缓存的主节点和从节点
+- 使用高级缓存来执行群集功能时，可以针对缓存中的各个分片重新启动主节点和/或从节点
 
 有关详细信息，请参阅[重新启动](./cache-administration.md#reboot)和[重新启动常见问题](./cache-administration.md#reboot-faq)。
 
@@ -84,10 +84,10 @@ Azure Redis 缓存是一种分布式托管缓存，可通过提供对数据的�
 
 创建缓存并探索高级层的新功能。
 
--	[如何为高级 Azure Redis 缓存配置暂留](./cache-how-to-premium-persistence.md)
--	[如何为高级 Azure Redis 缓存配置虚拟网络支持](./cache-how-to-premium-vnet.md)
--	[如何为高级 Azure Redis 缓存配置群集功能](./cache-how-to-premium-clustering.md)
--	[如何在 Azure Redis 缓存中导入和导出数据](./cache-how-to-import-export-data.md)
--	[如何管理 Azure Redis 缓存](./cache-administration.md)
+- [如何为高级 Azure Redis 缓存配置暂留](./cache-how-to-premium-persistence.md)
+- [如何为高级 Azure Redis 缓存配置虚拟网络支持](./cache-how-to-premium-vnet.md)
+- [如何为高级 Azure Redis 缓存配置群集功能](./cache-how-to-premium-clustering.md)
+- [如何在 Azure Redis 缓存中导入和导出数据](./cache-how-to-import-export-data.md)
+- [如何管理 Azure Redis 缓存](./cache-administration.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

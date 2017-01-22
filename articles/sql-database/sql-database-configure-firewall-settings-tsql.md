@@ -46,9 +46,9 @@ Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数�
             @start_ip_address = '192.168.1.1', @end_ip_address = '192.168.1.10'
 
     若要删除服务器级别防火墙规则，请执行 sp\_delete\_firewall\_rule 存储过程。以下示例删除名为 ContosoFirewallRule 的规则。
- 
+
         EXECUTE sp_delete_firewall_rule @name = N'ContosoFirewallRule'
- 
+
  有关这些存储过程的详细信息，请参阅 [sp\_set\_firewall\_rule](https://msdn.microsoft.com/zh-cn/library/dn270017.aspx) 和 [sp\_delete\_firewall\_rule](https://msdn.microsoft.com/zh-cn/library/dn270024.aspx)。
 
 ##<a name="database-level-firewall-rules"></a> 数据库级别防火墙规则
@@ -59,12 +59,12 @@ Azure SQL 数据库使用防火墙规则，以便允许连接到服务器和数�
 2. 连接到要为其创建数据库级别防火墙规则的数据库。
 
     若要创建新的或更新现有的数据库级别防火墙规则，请执行 `sp_set_database_firewall_rule` 存储过程。以下示例创建名为 ContosoFirewallRule 的新防火墙规则。
- 
+
         EXEC sp_set_database_firewall_rule @name = N'ContosoFirewallRule', 
             @start_ip_address = '192.168.1.11', @end_ip_address = '192.168.1.11'
- 
+
     若要删除现有的数据库级别防火墙规则，请执行 `sp_delete_database_firewall_rule` 存储过程。以下示例删除名为 ContosoFirewallRule 的规则。
- 
+
         EXEC sp_delete_database_firewall_rule @name = N'ContosoFirewallRule'
 
 有关这些存储过程的详细信息，请参阅 [sp\_set\_database\_firewall\_rule](https://msdn.microsoft.com/zh-cn/library/dn270010.aspx) 和 [sp\_delete\_database\_firewall\_rule](https://msdn.microsoft.com/zh-cn/library/dn270030.aspx)。

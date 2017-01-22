@@ -29,7 +29,7 @@ ms.author: milanga;juliako;
     >[!NOTE]此服务并不执行面部识别。面部离帧或被挡住太久的人员，将在回来时赋予新的 ID。
 
 - **情绪检测**
-    
+
     情绪检测是面部检测媒体处理器的可选组件，它根据检测到的面部返回多个情绪属性的分析，包括快乐、悲伤、恐惧、愤怒等等。
 
 **Azure 媒体面部检测器** MP 目前以预览版提供。
@@ -135,7 +135,7 @@ facesDetected|位于 JSON 结果的末尾，汇总在生成视频期间算法所
 
 ### 任务配置（预设）
 在使用 **Azure 媒体面部检测器**创建任务时，必须指定配置预设。以下配置预设指定基于情绪检测创建 JSON。
-     
+
     {
       "version": "1.0",
       "options": {
@@ -165,7 +165,7 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
 ###JSON 输出
 
 聚合情绪的 JSON 输出（已截断）：
- 
+
     {
      "version": 1,
      "timescale": 30000,
@@ -328,12 +328,12 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
 
 1. 创建资产并将媒体文件上传到资产。
 2. 使用基于包含以下 json 预设值的配置文件的面部检测任务创建一个作业。
-   
+
         {
             "version": "1.0"
         }
 3. 下载输出 JSON 文件。
-   
+
         using System;
         using System.Configuration;
         using System.IO;
@@ -341,7 +341,7 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
         using Microsoft.WindowsAzure.MediaServices.Client;
         using System.Threading;
         using System.Threading.Tasks;
-        
+
         namespace FaceDetection
         {
             class Program
@@ -351,7 +351,7 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
                     ConfigurationManager.AppSettings["MediaServicesAccountName"];
                 private static readonly string _mediaServicesAccountKey =
                     ConfigurationManager.AppSettings["MediaServicesAccountKey"];
-                
+
             private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
 
             // Azure China uses a different API server and a different ACS Base Address from the Global.
@@ -362,10 +362,10 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
                 private static CloudMediaContext _context = null;
                 private static MediaServicesCredentials _cachedCredentials = null;
             private static Uri _apiServer = null;
-        
+
                 static void Main(string[] args)
                 {
-        
+
                     // Create and cache the Media Services credentials in a static class variable.
                    _cachedCredentials = new MediaServicesCredentials(
                                 _mediaServicesAccountName,
@@ -377,56 +377,56 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
                 _apiServer = new Uri(_chinaApiServerUrl);
                     // Used the cached credentials to create CloudMediaContext.
                     _context = new CloudMediaContext(_apiServer, _cachedCredentials);
-        
+
                     // Run the FaceDetection job.
                     var asset = RunFaceDetectionJob(@"C:\supportFiles\FaceDetection\BigBuckBunny.mp4",
                                                 @"C:\supportFiles\FaceDetection\config.json");
-        
+
                     // Download the job output asset.
                     DownloadAsset(asset, @"C:\supportFiles\FaceDetection\Output");
                 }
-        
+
                 static IAsset RunFaceDetectionJob(string inputMediaFilePath, string configurationFile)
                 {
                     // Create an asset and upload the input media file to storage.
                     IAsset asset = CreateAssetAndUploadSingleFile(inputMediaFilePath,
                         "My Face Detection Input Asset",
                         AssetCreationOptions.None);
-        
+
                     // Declare a new job.
                     IJob job = _context.Jobs.Create("My Face Detection Job");
-        
+
                     // Get a reference to Azure Media Face Detector.
                     string MediaProcessorName = "Azure Media Face Detector";
-        
+
                     var processor = GetLatestMediaProcessorByName(MediaProcessorName);
-        
+
                     // Read configuration from the specified file.
                     string configuration = File.ReadAllText(configurationFile);
-        
+
                     // Create a task with the encoding details, using a string preset.
                     ITask task = job.Tasks.AddNew("My Face Detection Task",
                         processor,
                         configuration,
                         TaskOptions.None);
-        
+
                     // Specify the input asset.
                     task.InputAssets.Add(asset);
-        
+
                     // Add an output asset to contain the results of the job.
                     task.OutputAssets.AddNew("My Face Detectoion Output Asset", AssetCreationOptions.None);
-        
+
                     // Use the following event handler to check job progress.  
                     job.StateChanged += new EventHandler<JobStateChangedEventArgs>(StateChanged);
-        
+
                     // Launch the job.
                     job.Submit();
-        
+
                     // Check job execution and wait for job to finish.
                     Task progressJobTask = job.GetExecutionProgressTask(CancellationToken.None);
-        
+
                     progressJobTask.Wait();
-        
+
                     // If job state is Error, the event handling
                     // method for job progress should log errors.  Here we check
                     // for error state and exit if needed.
@@ -438,20 +438,20 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
                                                         error.Message));
                         return null;
                     }
-        
+
                     return job.OutputMediaAssets[0];
                 }
-        
+
                 static IAsset CreateAssetAndUploadSingleFile(string filePath, string assetName, AssetCreationOptions options)
                 {
                     IAsset asset = _context.Assets.Create(assetName, options);
-        
+
                     var assetFile = asset.AssetFiles.Create(Path.GetFileName(filePath));
                     assetFile.Upload(filePath);
-        
+
                     return asset;
                 }
-        
+
                 static void DownloadAsset(IAsset asset, string outputDirectory)
                 {
                     foreach (IAssetFile file in asset.AssetFiles)
@@ -459,7 +459,7 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
                         file.Download(Path.Combine(outputDirectory, file.Name));
                     }
                 }
-        
+
                 static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
                 {
                     var processor = _context.MediaProcessors
@@ -467,20 +467,20 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
                         .ToList()
                         .OrderBy(p => new Version(p.Version))
                         .LastOrDefault();
-        
+
                     if (processor == null)
                         throw new ArgumentException(string.Format("Unknown media processor",
                                                                    mediaProcessorName));
-        
+
                     return processor;
                 }
-        
+
                 static private void StateChanged(object sender, JobStateChangedEventArgs e)
                 {
                     Console.WriteLine("Job state changed event:");
                     Console.WriteLine("  Previous state: " + e.PreviousState);
                     Console.WriteLine("  Current state: " + e.CurrentState);
-        
+
                     switch (e.CurrentState)
                     {
                         case JobState.Finished:
@@ -505,7 +505,7 @@ AggregateEmotionIntervalMs|在已选择 AggregateEmotion 模式时使用。指�
                             break;
                     }
                 }
-        
+
             }
         }
 

@@ -227,7 +227,7 @@ ms.author: narayanannamalai; annahar
 
 ## 删除 VNet 对等互连
 
-1.	为了删除 VNet 对等互连，需要运行以下 cmdlet：
+1. 为了删除 VNet 对等互连，需要运行以下 cmdlet：
 
         Remove-AzureRmVirtualNetworkPeering  
 

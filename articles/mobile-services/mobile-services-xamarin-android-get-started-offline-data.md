@@ -44,7 +44,7 @@ ms.author: donnam
 
 * Windows 上的 Visual Studio with Xamarin，或 Mac OS X 上的 Xamarin Studio。[设置和安装 Visual Studio 和 Xamarin](https://msdn.microsoft.com/zh-cn/library/mt613162.aspx) 中提供了完整的安装说明。
 * 完成 [Get started with Mobile Services（移动服务入门）]教程。
- 
+
 ## <a name="review-offline"></a>查看移动服务同步代码
 
 Azure 移动服务脱机同步允许最终用户在无法访问网络时与本地数据库交互。若要在你的应用程序中使用这些功能，请将 `MobileServiceClient.SyncContext` 初始化到本地存储。然后，通过 `IMobileServiceSyncTable` 接口引用你的表。 
@@ -98,7 +98,7 @@ Azure 移动服务脱机同步允许最终用户在无法访问网络时与本�
     >[!NOTE]若要从设备本地存储区中删除已在移动设备数据库中删除的记录，应启用[软删除]。否则，你的应用程序应定期调用 `IMobileServiceSyncTable.PurgeAsync()` 以清除本地存储。
 
     请注意，推送和请求操作可能会发生 `MobileServicePushFailedException`。
-    
+
     下一篇教程[使用移动服务脱机支持处理冲突]说明了如何处理这些同步相关的异常。
 
 5. 在 `ToDoActivity` 类中，`SyncAsync()` 方法之后修改数据的操作，将调用 `AddItem()` 和 `CheckItem()`。它也称为从 `OnRefreshItemsSelected()`，以便用户获取最新数据，只要它们推送“刷新”按钮。该应用程序还执行同步启动，因为 `ToDoActivity.OnCreate()` 调用 `OnRefreshItemsSelected()`。

@@ -94,5 +94,5 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
 [Python Azure 包]: https://pypi.python.org/pypi/azure
 [队列、主题和订阅]: ./service-bus-queues-topics-subscriptions.md
 [服务总线配额]: ./service-bus-quotas.md
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

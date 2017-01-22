@@ -29,14 +29,14 @@ ms.author: cynthn
 下面是建议你在将 IaaS 资源从经典部署模型迁移到 Resource Manager 部署模型时遵循的一些最佳实践：
 
 - 请参阅[不受支持的配置或功能的列表](./virtual-machines-windows-migration-classic-resource-manager.md)。如果虚拟机使用不受支持的配置或功能，建议你等到我们宣布支持该功能/配置时再进行迁移。或者，可以删除该功能或移出该配置，以利迁移进行（如果这样做符合要求）。
--	如果你通过自动化脚本来部署目前的基础结构和应用程序，则可尝试使用这些脚本进行迁移，以便创建类似的测试性设置。也可以使用 Azure 门户设置示例环境。
+- 如果你通过自动化脚本来部署目前的基础结构和应用程序，则可尝试使用这些脚本进行迁移，以便创建类似的测试性设置。也可以使用 Azure 门户设置示例环境。
 
 ## 步骤 2：设置订阅并注册提供程序
 
 对于迁移方案，需要针对经典部署模型和 Resource Manager 部署模型设置环境。[安装 Azure CLI](../xplat-cli-install.md) 并[选择订阅](../xplat-cli-connect.md)。
 
 登录到帐户。
-    
+
     azure login -e AzureChinaCloud
 
 使用以下命令选择 Azure 订阅。
@@ -111,7 +111,7 @@ ms.author: cynthn
 使用以下命令获取订阅中的所有虚拟网络。
 
     azure network vnet list
-    
+
 输出将如下所示：
 
 ![命令行屏幕截图，其中整个虚拟网络名称已突出显示。](./media/virtual-machines-linux-cli-migration-classic-resource-manager/vnet.png)

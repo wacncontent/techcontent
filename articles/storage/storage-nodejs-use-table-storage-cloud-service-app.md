@@ -263,7 +263,7 @@ ms.author: marsma
         app.get('/', taskList.showTasks.bind(taskList));
         app.post('/addtask', taskList.addTask.bind(taskList));
         app.post('/completetask', taskList.completeTask.bind(taskList));
-    
+
 4. 保存 **app.js** 文件。
 
 ### 修改索引视图
@@ -277,7 +277,7 @@ ms.author: marsma
         block content
           h1= title
           br
-        
+
           form(action="/completetask", method="post")
             table.table.table-striped.table-bordered
               tr
@@ -397,5 +397,5 @@ Azure 将按使用的服务器小时数对 Web 角色实例计费。你的应用
   [使用 Express 构建 Node.js Web 应用程序]: ../cloud-services/cloud-services-nodejs-develop-deploy-express-app.md
   [在 Azure 中存储和访问数据]: http://msdn.microsoft.com/zh-cn/library/azure/gg433040.aspx
   [Node.js Web 应用程序]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
- 
+
 <!---HONumber=Mooncake_0103_2017-->

@@ -214,7 +214,7 @@ IoT 中心向后端服务公开终结点，以便让后端服务读取中心收�
 
 1. 在 IoT 中心边栏选项卡中单击“消息传送”。
 2. 在“设备到云的设置”部分中，可以看到以下值：“事件中心兼容的终结点”、“事件中心兼容的名称”和“分区”。
-   
+
     ![设备到云的设置][img-eventhubcompatible]
 
 > [!NOTE] 如果 SDK 需要“主机名”或“命名空间”值，请从“事件中心兼容的终结点”中删除方案。例如，如果与事件中心兼容的终结点为 **sb://iothub-ns-myiothub-1234.servicebus.chinacloudapi.cn/**，则**主机名**为 **iothub-ns-myiothub-1234.servicebus.chinacloudapi.cn**，**命名空间**为 **iothub-ns-myiothub-1234**。
@@ -352,10 +352,10 @@ IoT 中心实现 MQTT v3.1.1 协议，但具有以下限制和特定行为：
 [lnk-azure-protocol-gateway]: ./iot-hub-protocol-gateway.md
 [lnk-amqp]: http://docs.oasis-open.org/amqp/core/v1.0/os/amqp-core-complete-v1.0-os.pdf
 [lnk-mqtt]: http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/mqtt-v3.1.1.pdf
-[lnk-event-hubs]: ../event-hubs/index.md/
+[lnk-event-hubs]: ../event-hubs/index.md
 [lnk-event-hubs-consuming-events]: ../event-hubs/event-hubs-programming-guide.md#event-consumers
 [lnk-management-portal]: https://portal.azure.cn
-[lnk-servicebus]: ../service-bus/index.md/
+[lnk-servicebus]: ../service-bus/index.md
 [lnk-eventhub-partitions]: ../event-hubs/event-hubs-overview.md#partitions
 [lnk-portal]: ./iot-hub-create-through-portal.md
 

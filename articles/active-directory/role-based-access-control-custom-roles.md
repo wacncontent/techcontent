@@ -41,7 +41,7 @@ ms.author: kgremban
             "Microsoft.Support/*"
         ],
         "NotActions": [
-        
+
         ],
         "AssignableScopes": [
             "/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e",
@@ -53,21 +53,21 @@ ms.author: kgremban
 ## 操作
 自定义角色的 **Actions** 属性指定该角色向其授予访问权限的 Azure 操作。它是操作字符串的集合，可标识 Azure 资源提供程序的安全对象操作。包含通配符 (*) 的操作字符串可以授权访问与该操作字符串相匹配的所有操作。例如：
 
--	`*/read` 向所有 Azure 资源提供程序的所有资源类型的读取操作授予访问权限。
--	`Microsoft.Network/*/read` 向 Azure 的 Microsoft.Network 资源提供程序中的所有资源类型的读取操作授予访问权限。
--	`Microsoft.Compute/virtualMachines/*` 向虚拟机及其子资源类型的所有操作授予访问权限。
--	`Microsoft.Web/sites/restart/Action` 授予重新启动网站的访问权限。
+- `*/read` 向所有 Azure 资源提供程序的所有资源类型的读取操作授予访问权限。
+- `Microsoft.Network/*/read` 向 Azure 的 Microsoft.Network 资源提供程序中的所有资源类型的读取操作授予访问权限。
+- `Microsoft.Compute/virtualMachines/*` 向虚拟机及其子资源类型的所有操作授予访问权限。
+- `Microsoft.Web/sites/restart/Action` 授予重新启动网站的访问权限。
 
 使用 `Get-AzureRmProviderOperation`（在 PowerShell 中）或 `azure provider operations show`（在 Azure CLI 中）列出 Azure 资源提供程序的操作。还可以使用这些命令来验证操作字符串是否有效，并展开通配符操作字符串。
 
     Get-AzureRMProviderOperation Microsoft.Compute/virtualMachines/*/action | FT Operation, OperationName
-    
+
     Get-AzureRMProviderOperation Microsoft.Network/*
 
 ![PowerShell 屏幕截图 - Get-AzureRMProviderOperation Microsoft.Compute/virtualMachines/*/action | FT Operation, OperationName](./media/role-based-access-control-configure/1-get-azurermprovideroperation-1.png)  
 
     azure provider operations show "Microsoft.Compute/virtualMachines/*/action" --js on | jq '.[] | .operation'
-    
+
     azure provider operations show "Microsoft.Network/*"
 
 ![Azure CLI 屏幕截图 - Azure 提供程序操作显示“Microsoft.Compute/virtualMachines/*/action”](./media/role-based-access-control-configure/1-azure-provider-operations-show.png)  
@@ -82,8 +82,8 @@ ms.author: kgremban
 
 有效的可分配范围的示例包括：
 
--	“/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e”、“/subscriptions/e91d47c4-76f3-4271-a796-21b4ecfe3624”- 可让角色在两个订阅中进行分配。
--	“/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e”- 可让角色在单个订阅中进行分配。
+- “/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e”、“/subscriptions/e91d47c4-76f3-4271-a796-21b4ecfe3624”- 可让角色在两个订阅中进行分配。
+- “/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e”- 可让角色在单个订阅中进行分配。
 -  “/subscriptions/c276fc76-9cd4-44c9-99a7-4fd71546436e/resourceGroups/Network”- 可让角色只在网络资源组中进行分配。
 
 > [!NOTE] 必须使用至少一个订阅、资源组或资源 ID。

@@ -102,13 +102,13 @@ ms.author: dobett
                 }
               }
             }
-    
+
 2. 将模板文件保存在你的本地计算机上。本示例假设将它保存在名为 **c:\\templates** 的文件夹中。
 
 3. 运行以下命令部署新的 IoT 中心，并传递 IoT 中心的名称作为参数。在本实例中，IoT 中心名称是 **abcmyiothub**（请注意，此名称必须全局唯一，因此应包含你的姓名或姓名的首字母缩写）：
 
         New-AzureRmResourceGroupDeployment -ResourceGroupName MyIoTRG1 -TemplateFile C:\templates\template.json -hubName abcmyiothub
-    
+
 4. 输出将显示你创建的 IoT 中心的密钥。
 5. 若要验证应用程序中是否添加了新 IoT 中心，可以访问[门户预览][lnk-azure-portal]并查看资源列表，或使用 **Get-AzureRmResource** PowerShell cmdlet。
 

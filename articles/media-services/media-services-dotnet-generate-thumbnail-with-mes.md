@@ -38,7 +38,7 @@ ms.author: juliako
 - 创建将包含所编码资产的输出资产。
 - 添加事件处理程序以检查作业进度。
 - 提交作业。
-    
+
         using System;
         using System.Collections.Generic;
         using System.Configuration;
@@ -55,7 +55,7 @@ ms.author: juliako
         using Microsoft.WindowsAzure.MediaServices.Client.DynamicEncryption;
         using System.Web;
         using System.Globalization;
-        
+
         namespace EncodeAndGenerateThumbnails
         {
             class Program
@@ -71,18 +71,18 @@ ms.author: juliako
                         // Azure China uses a different API server and a different ACS Base Address from the Global.
                         private static readonly String _chinaApiServerUrl = "https://wamsshaclus001rest-hs.chinacloudapp.cn/API/";
                         private static readonly String _chinaAcsBaseAddressUrl = "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn";
-        
+
                 // Field for service context.
                 private static CloudMediaContext _context = null;
                 private static MediaServicesCredentials _cachedCredentials = null;
                         private static Uri _apiServer = null;
-        
+
                 private static readonly string _mediaFiles =
                     Path.GetFullPath(@"../..\Media");
-        
+
                 private static readonly string _singleMP4File =
                     Path.Combine(_mediaFiles, @"BigBuckBunny.mp4");
-        
+
                 static void Main(string[] args)
                 {
                     // Create and cache the Media Services credentials in a static class variable.
@@ -97,16 +97,16 @@ ms.author: juliako
 
                 // Used the chached credentials to create CloudMediaContext.
                 _context = new CloudMediaContext(_apiServer, _cachedCredentials);
-        
+
                     // Get an uploaded asset.
                     var asset = _context.Assets.FirstOrDefault();
-        
+
                     // Encode and generate the thumbnails.
                     EncodeToAdaptiveBitrateMP4Set(asset);
-        
+
                     Console.ReadLine();
                 }
-        
+
                 static public IAsset EncodeToAdaptiveBitrateMP4Set(IAsset asset)
                 {
                     // Declare a new job.
@@ -114,16 +114,16 @@ ms.author: juliako
                     // Get a media processor reference, and pass to it the name of the 
                     // processor to use for the specific task.
                     IMediaProcessor processor = GetLatestMediaProcessorByName("Media Encoder Standard");
-                
+
                     // Load the XML (or JSON) from the local file.
                     string configuration = File.ReadAllText("ThumbnailPreset_JSON.json");
-                
+
                     // Create a task
                     ITask task = job.Tasks.AddNew("Media Encoder Standard encoding task",
                         processor,
                         configuration,
                         TaskOptions.None);
-                
+
                     // Specify the input asset to be encoded.
                     task.InputAssets.Add(asset);
                     // Add an output asset to contain the results of the job. 
@@ -131,14 +131,14 @@ ms.author: juliako
                     // means the output asset is not encrypted. 
                     task.OutputAssets.AddNew("Output asset",
                         AssetCreationOptions.None);
-                
+
                     job.StateChanged += new EventHandler<JobStateChangedEventArgs>(JobStateChanged);
                     job.Submit();
                     job.GetExecutionProgressTask(CancellationToken.None).Wait();
-                
+
                     return job.OutputMediaAssets[0];
                 }
-        
+
                 private static void JobStateChanged(object sender, JobStateChangedEventArgs e)
                 {
                     Console.WriteLine("Job state changed event:");
@@ -158,28 +158,28 @@ ms.author: juliako
                             break;
                         case JobState.Canceled:
                         case JobState.Error:
-        
+
                             // Cast sender as a job.
                             IJob job = (IJob)sender;
-        
+
                             // Display or log error details as needed.
                             break;
                         default:
                             break;
                     }
                 }
-        
+
                 private static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
                 {
                     var processor = _context.MediaProcessors.Where(p => p.Name == mediaProcessorName).
                     ToList().OrderBy(p => new Version(p.Version)).LastOrDefault();
-        
+
                     if (processor == null)
                         throw new ArgumentException(string.Format("Unknown media processor", mediaProcessorName));
-        
+
                     return processor;
                 }
-        
+
             }
         }
 
@@ -207,7 +207,7 @@ ms.author: juliako
               "AdaptiveBFrame": true,
               "Type": "H264Layer",
               "FrameRate": "0/1"
-       
+
             }
           ],
           "Type": "H264Video"
@@ -288,7 +288,7 @@ ms.author: juliako
 ##<a id="xml"></a>缩略图 XML 预设
 
 有关架构的信息，请参阅[此](https://msdn.microsoft.com/zh-cn/library/mt269962.aspx)主题。
-    
+
     <?xml version="1.0" encoding="utf-16"?>
     <Preset xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="1.0" xmlns="http://www.windowsazure.com/media/encoding/Preset/2014/03">
       <Encoding>
@@ -373,9 +373,9 @@ ms.author: juliako
     - 时间戳（如果以 HH:MM:SS... 格式表示）。例如"Start" : "00:01:00"
 
     你可以随意混搭使用表示法。
-    
+
     此外，Start 还支持特殊的宏 {Best}，它会尝试判断第一个“有意义”的内容帧。注意：（Start 设置为 {Best} 时，将忽略 Step 与 Range）
-    
+
     - 默认值：Start:{Best}
 - 需要显式提供每个图像格式的输出格式：Jpg/Png/BmpFormat。MES 会将 JpgVideo（如果已提供）与 JpgFormat 进行匹配，依此类推。OutputFormat 引入了新的图像编解码器特定 Macro: {Index}，需要为图像输出格式提供该宏一次（且只需一次）。
 

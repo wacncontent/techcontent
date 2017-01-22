@@ -37,9 +37,9 @@ ms.author: cephalin
 
 1. 在应用的边栏选项卡（刚打开）中，单击“设置”>“身份验证/授权”。  
     ![身份验证 - 设置边栏选项卡](./media/app-service-web-get-started/aad-login-settings.png)
-    
+
 2. 单击“打开”以打开身份验证。  
-    
+
 4. 在“身份验证提供程序”中，单击“Azure Active Directory”。  
     ![身份验证 - 选择 Azure AD](./media/app-service-web-get-started/aad-login-config.png)
 
@@ -87,17 +87,17 @@ App Service 针对某些常见的身份验证要求提供周全的解决方案�
     ![向上缩放 - 选择定价层](./media/app-service-web-get-started/scale-up-select.png)
 
     现已完成向上缩放。
-    
+
     >[!IMPORTANT] 这一层将消耗你的试用额度。如果你使用即用即付帐户，将从你的帐户中扣费。
-    
+
 3. 接下来，配置自动缩放。在应用的边栏选项卡中，单击“设置”>“向外缩放(App Service 计划)”。  
     ![向外缩放 - 设置边栏选项卡](./media/app-service-web-get-started/scale-out-settings.png)
 
 4. 将“缩放依据”更改为“CPU 百分比”。下拉列表下面的滑块会相应地更新。然后，定义介于 **1** 与 **2** 之间的“实例”范围，以及介于 **40** 与 **80** 之间的“目标范围”。为此，可以在框中键入值或移动滑块。  
     ![向外缩放 - 配置自动缩放](./media/app-service-web-get-started/scale-out-configure.png)
-    
+
     根据此配置，当 CPU 使用率高于 80% 时，应用将自动向外缩放；当 CPU 使用率低于 40% 时则缩小。
-    
+
 5. 单击菜单栏中的“保存”。
 
 祝贺你，你的应用已在自动缩放。
@@ -124,7 +124,7 @@ App Service 针对某些常见的身份验证要求提供周全的解决方案�
 
 3. 将“名称”指定为 `CPU Maxed`、将“度量值”指定为“CPU 百分比”，将“阈值”指定为 `90`，选择“电子邮件所有者、参与者和阅读者”，然后单击“确定”。  
     ![警报 - 配置警报](./media/app-service-web-get-started/alert-configure.png)
-    
+
     当 Azure 完成警报创建时，你会在“警报”边栏选项卡中看到该警报。  
     ![警报 - 完成的视图](./media/app-service-web-get-started/alert-done.png)
 

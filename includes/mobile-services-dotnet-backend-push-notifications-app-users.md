@@ -5,7 +5,7 @@
 
         options.PushAuthorization = 
             Microsoft.WindowsAzure.Mobile.Service.Security.AuthorizationLevel.User;
- 
+
     这会强制用户在注册推送通知之前进行身份验证。
 
 3. 右键单击该项目，单击“添加”，然后单击“类...”。
@@ -22,7 +22,7 @@
         using Microsoft.WindowsAzure.Mobile.Service.Security; 
 
 6. 将现有的 **PushRegistrationHandler** 类替换为以下代码：
- 
+
         public class PushRegistrationHandler : INotificationHandler
         {
             public Task Register(ApiServices services, HttpRequestContext context,
@@ -68,7 +68,7 @@
             }
             return true;
         }
-    
+
         public Task Unregister(ApiServices services, HttpRequestContext context, 
             string deviceId)
         {
@@ -83,12 +83,12 @@
 
         // Get the logged-in user.
         var currentUser = this.User as ServiceUser;
-        
+
         // Use a tag to only send the notification to the logged-in user.
         var result = await Services.Push.SendAsync(message, currentUser.Id);
 
 8. 重新发布移动服务项目。
 
 现在，服务将使用该用户 ID 标记向已登录用户创建的所有注册发送推送通知（包括插入项的文本）。
- 
+
 <!---HONumber=74-->

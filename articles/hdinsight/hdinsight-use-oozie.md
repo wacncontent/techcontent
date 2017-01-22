@@ -151,7 +151,7 @@ RunHiveScript 有几个变量。在从工作站使用 Azure PowerShell 提交 Oo
 有关 Oozie 工作流和使用工作流操作的详细信息，请参阅 [Apache Oozie 4.0 文档][apache-oozie-400]（适用于 HDInsight 3.0 版）或 [Apache Oozie 3.3.2 文档][apache-oozie-332]（适用于 HDInsight 2.1 版）。
 
 2. 使用 ANSI (ASCII) 编码将文件另存为 **C:\\Tutorials\\UseOozie\\workflow.xml**。（如果你的文本编辑器不提供此选项，则使用记事本。）
-    
+
 ##部署 Oozie 项目并准备教程
 
 你将运行 Windows PowerShell 脚本来执行以下操作：
@@ -207,46 +207,46 @@ HDInsight 使用 Azure 存储空间中的 Blob 来存储数据。有关详细信
     > [!NOTE]如果你有多个 Azure 订阅，而默认订阅不是你想使用的，则请使用 <strong>Select-AzureSubscription</strong> cmdlet 来选择正确的订阅。
 
 3. 将以下脚本复制到脚本窗格，然后设置前六个变量：
-            
+
         # WASB variables
         $storageAccountName = "<StorageAccountName>"
         $containerName = "<BlobStorageContainerName>"
-        
+
         # SQL database variables
         $sqlDatabaseServer = "<SQLDatabaseServerName>"  
         $sqlDatabaseLogin = "<SQLDatabaseLoginName>"
         $sqlDatabaseLoginPassword = "SQLDatabaseLoginPassword>"
         $sqlDatabaseName = "<SQLDatabaseName>"  
         $sqlDatabaseTableName = "log4jLogsCount"
-        
+
         # Oozie files for the tutorial	
         $workflowDefinition = "C:\Tutorials\UseOozie\workflow.xml"
         $hiveQLScript = "C:\Tutorials\UseOozie\useooziewf.hql"
-        
+
         # WASB folder for storing the Oozie tutorial files.
         $destFolder = "tutorials/useoozie"  # Do NOT use the long path here
 
     有关这些变量的详细说明，请参阅本教程中的[先决条件](#prerequisites)部分。
 
 3. 在脚本窗格中将以下内容追加到脚本：
-        
+
         # Create a storage context object
         $storageaccountkey = get-azurestoragekey $storageAccountName | %{$_.Primary}
         $destContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageaccountkey
-        
+
         function uploadOozieFiles()
         {		
             Write-Host "Copy workflow definition and HiveQL script file ..." -ForegroundColor Green
             Set-AzureStorageBlobContent -File $workflowDefinition -Container $containerName -Blob "$destFolder/workflow.xml" -Context $destContext
             Set-AzureStorageBlobContent -File $hiveQLScript -Container $containerName -Blob "$destFolder/useooziewf.hql" -Context $destContext
         }
-                
+
         function prepareHiveDataFile()
         {
             Write-Host "Make a copy of the sample.log file ... " -ForegroundColor Green
             Start-CopyAzureStorageBlob -SrcContainer $containerName -SrcBlob "example/data/sample.log" -Context $destContext -DestContainer $containerName -destBlob "$destFolder/data/sample.log" -DestContext $destContext
         }
-                
+
         function prepareSQLDatabase()
         {
             # SQL query string for creating log4jLogsCount table
@@ -258,7 +258,7 @@ HDInsight 使用 Azure 存储空间中的 Blob 来存储数据。有关详细信
                 [Level] ASC
                 )
                 )"
-                
+
             #Create the log4jLogsCount table
             Write-Host "Create Log4jLogsCount table ..." -ForegroundColor Green
             $conn = New-Object System.Data.SqlClient.SqlConnection
@@ -268,16 +268,16 @@ HDInsight 使用 Azure 存储空间中的 Blob 来存储数据。有关详细信
             $cmd.connection = $conn
             $cmd.commandtext = $cmdCreateLog4jCountTable
             $cmd.executenonquery()
-                
+
             $conn.close()
         }
-                
+
         # upload workflow.xml, coordinator.xml, and ooziewf.hql
         uploadOozieFiles;
-                
+
         # make a copy of example/data/sample.log to example/data/log4j/sample.log
         prepareHiveDataFile;
-        
+
         # create log4jlogsCount table on SQL database
         prepareSQLDatabase;
 
@@ -299,28 +299,28 @@ Azure PowerShell 目前不提供任何用于定义 Oozie 作业的 cmdlet。你�
         $clusterName = "<HDInsightClusterName>"
         $clusterUsername = "<HDInsightClusterUsername>"
         $clusterPassword = "<HDInsightClusterUserPassword>"
-        
+
         #Azure Blob storage variables
         $storageAccountName = "<StorageAccountName>"
         $storageContainerName = "<BlobContainerName>"
         $storageUri="wasbs://$storageContainerName@$storageAccountName.blob.core.chinacloudapi.cn"
-        
+
         #Azure SQL database variables
         $sqlDatabaseServer = "<SQLDatabaseServerName>"
         $sqlDatabaseLogin = "<SQLDatabaseLoginName>"
         $sqlDatabaseLoginPassword = "<SQLDatabaseloginPassword>"
         $sqlDatabaseName = "<SQLDatabaseName>"  
-        
+
         #Oozie WF variables
         $oozieWFPath="$storageUri/tutorials/useoozie"  # The default name is workflow.xml. And you don't need to specify the file name.
         $waitTimeBetweenOozieJobStatusCheck=10
-        
+
         #Hive action variables
         $hiveScript = "$storageUri/tutorials/useoozie/useooziewf.hql"
         $hiveTableName = "log4jlogs"
         $hiveDataFolder = "$storageUri/tutorials/useoozie/data"
         $hiveOutputFolder = "$storageUri/tutorials/useoozie/output"
-        
+
         #Sqoop action variables
         $sqlDatabaseConnectionString = "jdbc:sqlserver://$sqlDatabaseServer.database.chinacloudapi.cn;user=$sqlDatabaseLogin@$sqlDatabaseServer;password=$sqlDatabaseLoginPassword;database=$sqlDatabaseName"
         $sqlDatabaseTableName = "log4jLogsCount"
@@ -331,85 +331,85 @@ Azure PowerShell 目前不提供任何用于定义 Oozie 作业的 cmdlet。你�
     有关这些变量的详细说明，请参阅本教程中的[先决条件](#prerequisites)部分。
 
 3. 将以下内容追加到脚本。此脚本定义 Oozie 负载。
-        
+
         #OoziePayload used for Oozie web service submission
         $OoziePayload =  @"
         <?xml version="1.0" encoding="UTF-8"?>
         <configuration>
-        
+
            <property>
                <name>nameNode</name>
                <value>$storageUrI</value>
            </property>
-        
+
            <property>
                <name>jobTracker</name>
                <value>jobtrackerhost:9010</value>
            </property>
-        
+
            <property>
                <name>queueName</name>
                <value>default</value>
            </property>
-        
+
            <property>
                <name>oozie.use.system.libpath</name>
                <value>true</value>
            </property>
-        
+
            <property>
                <name>hiveScript</name>
                <value>$hiveScript</value>
            </property>
-        
+
            <property>
                <name>hiveTableName</name>
                <value>$hiveTableName</value>
            </property>
-        
+
            <property>
                <name>hiveDataFolder</name>
                <value>$hiveDataFolder</value>
            </property>
-        
+
            <property>
                <name>hiveOutputFolder</name>
                <value>$hiveOutputFolder</value>
            </property>
-        
+
            <property>
                <name>sqlDatabaseConnectionString</name>
                <value>";$sqlDatabaseConnectionString";</value>
            </property>
-        
+
            <property>
                <name>sqlDatabaseTableName</name>
                <value>$SQLDatabaseTableName</value>
            </property>
-        
+
            <property>
                <name>user.name</name>
                <value>$clusterUsername</value>
            </property>
-        
+
            <property>
                <name>oozie.wf.application.path</name>
                <value>$oozieWFPath</value>
            </property>
-        
+
         </configuration>
         "@
-        
+
 4. 将以下内容追加到脚本。此脚本检查 Oozie Web 服务状态。
-            
+
         Write-Host "Checking Oozie server status..." -ForegroundColor Green
         $clusterUriStatus = "https://$clusterName.azurehdinsight.cn:443/oozie/v2/admin/status"
         $response = Invoke-RestMethod -Method Get -Uri $clusterUriStatus -Credential $creds -OutVariable $OozieServerStatus 
-        
+
         $jsonResponse = ConvertFrom-Json (ConvertTo-Json -InputObject $response)
         $oozieServerSatus = $jsonResponse[0].("systemMode")
         Write-Host "Oozie server status is $oozieServerSatus..."
-    
+
 5. 将以下内容追加到脚本。这部分创建并启动一项 Oozie 作业：
 
         # create Oozie job
@@ -417,28 +417,28 @@ Azure PowerShell 目前不提供任何用于定义 Oozie 作业的 cmdlet。你�
         Write-Host "`n--------`n$OoziePayload`n--------"
         $clusterUriCreateJob = "https://$clusterName.azurehdinsight.cn:443/oozie/v2/jobs"
         $response = Invoke-RestMethod -Method Post -Uri $clusterUriCreateJob -Credential $creds -Body $OoziePayload -ContentType "application/xml" -OutVariable $OozieJobName #-debug
-    
+
         $jsonResponse = ConvertFrom-Json (ConvertTo-Json -InputObject $response)
         $oozieJobId = $jsonResponse[0].("id")
         Write-Host "Oozie job id is $oozieJobId..."
-    
+
         # start Oozie job
         Write-Host "Starting the Oozie job $oozieJobId..." -ForegroundColor Green
         $clusterUriStartJob = "https://$clusterName.azurehdinsight.cn:443/oozie/v2/job/" + $oozieJobId + "?action=start"
         $response = Invoke-RestMethod -Method Put -Uri $clusterUriStartJob -Credential $creds | Format-Table -HideTableHeaders #-debug
-        
+
 6. 将以下内容追加到脚本。此脚本检查 Oozie 作业状态。
 
         # get job status
         Write-Host "Sleeping for $waitTimeBetweenOozieJobStatusCheck seconds until the job metadata is populated in the Oozie metastore..." -ForegroundColor Green
         Start-Sleep -Seconds $waitTimeBetweenOozieJobStatusCheck
-    
+
         Write-Host "Getting job status and waiting for the job to complete..." -ForegroundColor Green
         $clusterUriGetJobStatus = "https://$clusterName.azurehdinsight.cn:443/oozie/v2/job/" + $oozieJobId + "?show=info"
         $response = Invoke-RestMethod -Method Get -Uri $clusterUriGetJobStatus -Credential $creds 
         $jsonResponse = ConvertFrom-Json (ConvertTo-Json -InputObject $response)
         $JobStatus = $jsonResponse[0].("status")
-    
+
         while($JobStatus -notmatch "SUCCEEDED|KILLED")
         {
             Write-Host "$(Get-Date -format 'G'): $oozieJobId is in $JobStatus state...waiting $waitTimeBetweenOozieJobStatusCheck seconds for the job to complete..."
@@ -447,7 +447,7 @@ Azure PowerShell 目前不提供任何用于定义 Oozie 作业的 cmdlet。你�
             $jsonResponse = ConvertFrom-Json (ConvertTo-Json -InputObject $response)
             $JobStatus = $jsonResponse[0].("status")
         }
-    
+
         Write-Host "$(Get-Date -format 'G'): $oozieJobId is in $JobStatus state!" -ForegroundColor Green
 
 7. 如果你的 HDinsight 群集是 2.1 版的，请将“https://$clusterName.azurehdinsight.cn:443/oozie/v2/”替换为“https://$clusterName.azurehdinsight.cn:443/oozie/v1/”。HDInsight 群集版本 2.1 不支持 Web 服务的版本 2。
@@ -473,19 +473,19 @@ Azure PowerShell 目前不提供任何用于定义 Oozie 作业的 cmdlet。你�
 
     $storageAccountName = "<AzureStorageAccountName>"
     $containerName = "<ContainerName>"
-    
+
     #SQL database variables
     $sqlDatabaseServer = "<SQLDatabaseServerName>"
     $sqlDatabaseLogin = "<SQLDatabaseLoginName>"
     $sqlDatabaseLoginPassword = "<SQLDatabaseLoginPassword>"
     $sqlDatabaseName = "<SQLDatabaseName>"
     $sqlDatabaseTableName = "log4jLogsCount"
-    
+
     Write-host "Delete the Hive script output file ..." -ForegroundColor Green
     $storageaccountkey = get-azurestoragekey $storageAccountName | %{$_.Primary}
     $destContext = New-AzureStorageContext -Environment AzureChinaCloud -StorageAccountName $storageAccountName -StorageAccountKey $storageaccountkey
     Remove-AzureStorageBlob -Context $destContext -Blob "tutorials/useoozie/output/000000_0" -Container $containerName
-    
+
     Write-host "Delete all the records from the log4jLogsCount table ..." -ForegroundColor Green
     $conn = New-Object System.Data.SqlClient.SqlConnection
     $conn.ConnectionString = "Data Source=$sqlDatabaseServer.database.chinacloudapi.cn;Initial Catalog=$sqlDatabaseName;User ID=$sqlDatabaseLogin;Password=$sqlDatabaseLoginPassword;Encrypt=true;Trusted_Connection=false;"
@@ -494,7 +494,7 @@ Azure PowerShell 目前不提供任何用于定义 Oozie 作业的 cmdlet。你�
     $cmd.connection = $conn
     $cmd.commandtext = "delete from $sqlDatabaseTableName"
     $cmd.executenonquery()
-    
+
     $conn.close()
 
 ##后续步骤

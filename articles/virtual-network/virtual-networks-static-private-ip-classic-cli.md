@@ -42,7 +42,7 @@ ms.author: jdial
         info:    Creating cloud service
         data:    Cloud service name TestService
         info:    service create command OK
-    
+
 2. 运行 **azure create vm** 命令以创建 VM。请注意静态专用 IP 地址的值。输出后显示的列表阐释了所用参数。
 
         azure vm create -l centralus -n DNS01 -w TestVNet -S "192.168.1.101" TestService bd507d3a70934695bc2128e3e5a255ba__RightImage-Windows-2012R2-x64-v14.2 adminuser AdminP@ssw0rd
@@ -85,7 +85,7 @@ ms.author: jdial
 
 ## 如何从 VM 中删除静态专用 IP 地址
 若要删除使用上述脚本添加到 VM 的静态专用 IP 地址，请运行以下 Azure CLI 命令：
-    
+
     azure vm static-ip remove DNS01
 
 预期输出：

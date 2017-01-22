@@ -52,7 +52,7 @@ ms.author: ganesr;cherylmc
 
         Get-AzureSubscription
 4. 选择要使用的订阅。
-    
+
         Select-AzureSubscription -SubscriptionName "mysubscriptionname"
 
 ## 创建和预配 ExpressRoute 线路
@@ -157,7 +157,7 @@ PowerShell cmdlet `Get-AzureDedicatedCircuitServiceProvider` 将返回此信息�
 ExpressRoute 线路处于以下状态时，你才能使用它：
 
         ServiceProviderProvisioningState : Provisioned
-        
+
         Status                           : Enabled
 
 ### 6\.定期检查线路密钥的状态
@@ -176,7 +176,7 @@ ExpressRoute 线路处于以下状态时，你才能使用它：
         Status                           : Enabled
 
 ### 7\.创建路由配置
-    
+
 有关分步说明，请参阅 [ExpressRoute circuit routing configuration (create and modify circuit peerings)](./expressroute-howto-routing-classic.md)（ExpressRoute 线路路由配置（创建和修改线路对等互连））一文。
 
 >[!IMPORTANT] 这些说明只适用于由提供第 2 层连接服务的服务提供商创建的线路。如果你的服务提供商提供第 3 层托管服务（通常是 IP VPN，如 MPLS），则连接服务提供商将为你配置和管理路由。
@@ -288,7 +288,7 @@ ExpressRoute 线路处于以下状态时，你才能使用它：
 >[!IMPORTANT] 但是，你无法在不中断的情况下降低 ExpressRoute 线路的带宽。带宽降级需要取消对 ExpressRoute 线路的预配，然后重新预配新的 ExpressRoute 线路。
 确定所需的大小后，即可使用以下命令调整线路的大小：
         PS C:\> Set-AzureDedicatedCircuitProperties -ServiceKey ********************************* -Bandwidth 1000
-        
+
         Bandwidth                        : 1000
         CircuitName                      : TestCircuit
         Location                         : Beijing 
@@ -309,7 +309,7 @@ ExpressRoute 线路处于以下状态时，你才能使用它：
     + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         + CategoryInfo          : CloseError: (:) [Set-AzureDedicatedCircuitProperties], CloudException
         + FullyQualifiedErrorId : Microsoft.WindowsAzure.Commands.ExpressRoute.SetAzureDedicatedCircuitPropertiesCommand
-    
+
 ## 取消预配和删除 ExpressRoute 线路
 
 注意以下事项：

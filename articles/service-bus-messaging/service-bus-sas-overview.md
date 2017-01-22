@@ -70,7 +70,7 @@ wacn.date: 01/04/2017
             return 'SharedAccessSignature sr=' + encoded + '&sig=' +  
                 encodeURIComponent(hash) + '&se=' + ttl + '&skn=' + saName; 
         }
- 
+
 ### Java
 
         private static String GetSASToken(String resourceUri, String keyName, String key)
@@ -149,14 +149,14 @@ wacn.date: 01/04/2017
         }
 
 ## 使用共享访问签名（在 HTTP 级别）
- 
+
 在了解如何为服务总线中的任何实体创建共享访问签名后，便可以执行 HTTP POST 了：
 
         POST https://<yournamespace>.servicebus.chinacloudapi.cn/<yourentity>/messages
         Content-Type: application/json
         Authorization: SharedAccessSignature sr=https%3A%2F%2F<yournamespace>.servicebus.chinacloudapi.cn%2F<yourentity>&sig=<yoursignature from code above>&se=1438205742&skn=KeyName
         ContentType: application/atom+xml;type=entry;charset=utf-8
- 
+
 请记住，这适用于所有情况。你可以为队列、主题、订阅、事件中心或中继创建 SAS。如果对事件中心使用按发布者标识，只需附加 `/publishers/< publisherid>`。
 
 如果你为发送方或客户端提供 SAS 令牌，它们不会直接获取密钥，并且他们无法逆向改编哈希来获取它。因此，你可以控制它们有权访问的项，以及可访问的时间长短。要记住的一个重点是，如果你更改策略中的主密钥，基于该密钥创建的所有共享访问签名都将失效。

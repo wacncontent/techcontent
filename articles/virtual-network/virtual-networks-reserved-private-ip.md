@@ -80,7 +80,7 @@ ms.author: jdial
 
 ## 如何从 VM 中删除静态内部 IP
 若要删除在上述脚本中添加到 VM 中的静态内部 IP，请运行以下 PowerShell 命令：
-    
+
     Get-AzureVM -ServiceName TestService -Name TestVM `
     | Remove-AzureStaticVNetIP `
     | Update-AzureVM

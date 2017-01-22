@@ -34,13 +34,13 @@ ms.author: andbuc
 ## 如何运行示例
 
 1. **build.sh** 脚本在本地 **azure-iot-gateway-sdk** 存储库副本的 **build** 文件夹中生成输出。该文件夹中包含本示例中使用的两个模块。
-   
+
     生成脚本将 **liblogger.so** 放在 **build/modules/logger/** 文件夹中，将 **libhello\_world.so** 放在 **build/modules/hello\_world/** 文件夹中。按如下 JSON 设置文件所示，将这些路径用于 **module path** 值。
 2. hello\_world\_sample 进程采用 JSON 配置文件路径作为命令行中的参数。已在 **azure-iot-gateway-sdk/samples/hello\_world/src/hello\_world\_win.json** 中将示例 JSON 文件作为存储库的一部分提供，并复制在下方。除非修改生成脚本，将模块或示例可执行文件放在非默认位置，否则它会按原样运行。
 
     > [!NOTE]
-   模块路径相对于当前工作目录（hello\_world\_sample 可执行文件的启动位置），而不相对于可执行文件所在的目录。示例 JSON 配置文件默认将“log.txt”写入当前工作目录。
-   
+    模块路径相对于当前工作目录（hello\_world\_sample 可执行文件的启动位置），而不相对于可执行文件所在的目录。示例 JSON 配置文件默认将“log.txt”写入当前工作目录。
+
         {
             "modules" :
             [
@@ -76,10 +76,10 @@ ms.author: andbuc
 
 3. 浏览到 **azure-iot-gateway-sdk** 文件夹。
 4. 运行以下命令：
-   
-   ```
-   ./build/samples/hello_world/hello_world_sample ./samples/hello_world/src/hello_world_lin.json
-   ``` 
+
+    ```
+    ./build/samples/hello_world/hello_world_sample ./samples/hello_world/src/hello_world_lin.json
+    ``` 
 
 [!INCLUDE [iot-hub-gateway-sdk-getstarted-code](../../includes/iot-hub-gateway-sdk-getstarted-code.md)]
 

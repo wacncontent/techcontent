@@ -97,9 +97,9 @@
         }.execute();
 
        这会将项更新发送到移动服务，并从适配器中删除已选中的项。
-    
+
 15. 取消注释 **addItem** 方法的以下行：
-    
+
         // Insert the new item
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -119,7 +119,7 @@
                 return null;
             }
         }.execute();
-        
+
       此代码将创建一个新项目并将其插入到远程移动服务的表中。
 
 16. 取消注释 **refreshItemsFromTable** 方法的以下行：
@@ -148,7 +148,7 @@
         }.execute();
 
     这将查询移动服务，并返回未标记为“完成”的所有项。这些项目将添加到用于绑定的适配器。
-        
+
 <!-- URLs. -->
 [Mobile Services Android SDK]: http://aka.ms/Iajk6q
 

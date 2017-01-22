@@ -229,11 +229,11 @@ ms.author: dobett
 
 现在，你已准备就绪，可以运行应用程序了。
 
-1.	在 Visual Studio 的“解决方案资源管理器”中右键单击你的解决方案，然后单击“设置启动项目”。选择“多个启动项目”，然后针对“ReadDeviceToCloudMessages”和“SimulatedDevice”项目选择“启动”作为“操作”。
+1. 在 Visual Studio 的“解决方案资源管理器”中右键单击你的解决方案，然后单击“设置启动项目”。选择“多个启动项目”，然后针对“ReadDeviceToCloudMessages”和“SimulatedDevice”项目选择“启动”作为“操作”。
 
        ![启动项目属性][41]
 
-2.	按 **F5** 启动这两个应用，使其运行。来自 **SimulatedDevice** 应用的控制台输出会显示模拟设备发送给 IoT 中心的消息。来自 **ReadDeviceToCloudMessages** 应用的控制台输出则会显示 IoT 中心接收的消息。
+2. 按 **F5** 启动这两个应用，使其运行。来自 **SimulatedDevice** 应用的控制台输出会显示模拟设备发送给 IoT 中心的消息。来自 **ReadDeviceToCloudMessages** 应用的控制台输出则会显示 IoT 中心接收的消息。
 
        ![来自应用的控制台输出][42]
 

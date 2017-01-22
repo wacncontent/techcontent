@@ -38,7 +38,7 @@ ms.author: kgremban
   对于旧版 PhoneFactor 客户，如果有疑问或需要重置密码方面的帮助，请使用[密码重置](mailto:phonefactorsupport@microsoft.com)链接建立支持案例。
 
 - [Azure 多重身份验证服务器 (PhoneFactor) 支持](https://support.microsoft.com/zh-cn/oas/default.aspx?prid=14947)
-  
+
   使用此链接可联系 Microsoft 支持专业人员。他们会询问一些问题来帮助确定支持选项，这些选项可能包括电子邮件、在线提交或电话支持。
 
 **问：Azure 多重身份验证服务器如何处理用户数据？**

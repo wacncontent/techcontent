@@ -67,31 +67,31 @@ SQL 数据库的许多新功能仅在使用 [Azure Resource Manager 部署模型
     $SubscriptionId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     Add-AzureRmAccount -EnvironmentName AzureChinaCloud
     Set-AzureRmContext -SubscriptionId $SubscriptionId
-    
+
     # SQL database source (the existing database to copy)
     # ---------------------------------------------------
     $sourceDbName = "db1"
     $sourceDbServerName = "server1"
     $sourceDbResourceGroupName = "rg1"
-    
+
     # SQL database copy (the new db to be created)
     # --------------------------------------------
     $copyDbName = "db1_copy"
     $copyDbServerName = "server2"
     $copyDbResourceGroupName = "rg2"
-    
+
     # Copy a database to the same server
     # ----------------------------------
     New-AzureRmSqlDatabaseCopy -ResourceGroupName $sourceDbResourceGroupName -ServerName $sourceDbServerName -DatabaseName $sourceDbName -CopyDatabaseName $copyDbName
-    
+
     # Copy a database to a different server
     # -------------------------------------
     New-AzureRmSqlDatabaseCopy -ResourceGroupName $sourceDbResourceGroupName -ServerName $sourceDbServerName -DatabaseName $sourceDbName -CopyResourceGroupName $copyDbResourceGroupName -CopyServerName $copyDbServerName -CopyDatabaseName $copyDbName
-    
+
     # Copy a database into an elastic database pool
     # ---------------------------------------------
     $poolName = "pool1"
-    
+
     New-AzureRmSqlDatabaseCopy -ResourceGroupName $sourceDbResourceGroupName -ServerName $sourceDbServerName -DatabaseName $sourceDbName -CopyResourceGroupName $copyDbResourceGroupName -CopyServerName $copyDbServerName -ElasticPoolName $poolName -CopyDatabaseName $copyDbName
 
 ## 后续步骤
@@ -108,6 +108,6 @@ SQL 数据库的许多新功能仅在使用 [Azure Resource Manager 部署模型
 - [使用 SQL Server Management Studio 连接到 SQL 数据库并执行示例 T-SQL 查询](./sql-database-connect-query-ssms.md)
 - [将数据库导出到 BACPAC](./sql-database-export-powershell.md)
 - [业务连续性概述](./sql-database-business-continuity.md)
-- [SQL 数据库文档](./index.md/)
+- [SQL 数据库文档](./index.md)
 
 <!---HONumber=Mooncake_1010_2016-->

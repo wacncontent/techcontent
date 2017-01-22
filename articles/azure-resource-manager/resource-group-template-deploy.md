@@ -64,13 +64,13 @@ ms.author: tomfitz
         Set-AzureRmContext -SubscriptionID <YourSubscriptionId>
 
 3. 部署模板时，必须指定将包含已部署资源的资源组。如果有要部署到的现有资源组，可以跳过此步骤，然后使用该资源组。
-   
+
     若要创建资源组，请提供资源组的名称和位置。提供资源组的位置是因为资源组存储与资源有关的元数据。出于合规性原因，你可能会想要指定该元数据的存储位置。一般情况下，建议指定大部分资源将驻留的位置。使用相同位置可简化模板。
 
         New-AzureRmResourceGroup -Name ExampleResourceGroup -Location "China East"
-   
+
     将返回新资源组的摘要。
-   
+
             ResourceGroupName : ExampleResourceGroup
             Location          : chinaeast
             ProvisioningState : Succeeded
@@ -86,7 +86,7 @@ ms.author: tomfitz
         Test-AzureRmResourceGroupDeployment -ResourceGroupName ExampleResourceGroup -TemplateFile <PathToTemplate>
 
 5. 若要将资源部署到资源组，请运行 **New-AzureRmResourceGroupDeployment** 命令并提供所需的参数。参数包括部署的名称、资源组的名称、模板的路径或 URL，以及方案所需的任何其他参数。如果未指定 **Mode** 参数，将使用 **Incremental** 的默认值。若要运行完整部署，请将 **Mode** 设置为 **Complete**。使用完整模式时要小心，因为可能会无意中删除不在模板中的资源。
-   
+
     若要部署本地模板，请使用 **TemplateFile** 参数：
 
         New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup -TemplateFile c:\MyTemplates\example.json
@@ -167,7 +167,7 @@ ms.author: tomfitz
 ## <a name="parameters"></a> 参数
 
 可以使用以下选项提供参数值：
-   
+
 - 内联参数。在 cmdlet 中包括各个参数名称（例如，**-myParameterName**。）
 
         New-AzureRmResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup -TemplateFile <PathToTemplate> -myParameterName "parameterValue"

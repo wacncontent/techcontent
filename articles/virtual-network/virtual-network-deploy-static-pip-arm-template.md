@@ -109,7 +109,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         New-AzureRmResourceGroup -Name PIPTEST -Location chinanorth
 
     预期输出：
-   
+
         ResourceGroupName : PIPTEST
         Location          : chinanorth
         ProvisioningState : Succeeded
@@ -123,7 +123,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
             -TemplateParameterUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/03-Static-public-IP/azuredeploy.parameters.json
 
     预期输出：
-   
+
         DeploymentName    : DeployVM
         ResourceGroupName : PIPTEST
         ProvisioningState : Succeeded
@@ -133,7 +133,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
                             Uri            : https://raw.githubusercontent.com/Azure/azure-quickstart-templates/mas
                             ter/IaaS-Story/03-Static-public-IP/azuredeploy.json
                             ContentVersion : 1.0.0.0
-   
+
         Parameters        :
                             Name                      Type                       Value     
                             ========================  =========================  ==========
@@ -146,7 +146,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
                             osType                    String                     Windows   
                             adminUsername             String                     adminUser
                             adminPassword             SecureString                         
-   
+
         Outputs           :
 
 ## 使用 Azure CLI 部署模板

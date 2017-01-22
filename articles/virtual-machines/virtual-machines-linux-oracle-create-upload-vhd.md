@@ -60,12 +60,12 @@ ms.author: szark
 
     **注意：**如果尚未安装此包，则该命令将失败，并显示一条错误消息。这是正常情况。
 
-4.	在包含以下文本的 `/etc/sysconfig/` 目录中创建一个名为 **network** 的文件：
+4. 在包含以下文本的 `/etc/sysconfig/` 目录中创建一个名为 **network** 的文件：
 
         NETWORKING=yes
         HOSTNAME=localhost.localdomain
 
-5.	在包含以下文本的 `/etc/sysconfig/network-scripts/` 目录中创建一个名为 **ifcfg-eth0** 的文件：
+5. 在包含以下文本的 `/etc/sysconfig/network-scripts/` 目录中创建一个名为 **ifcfg-eth0** 的文件：
 
         DEVICE=eth0
         ONBOOT=yes
@@ -75,7 +75,7 @@ ms.author: szark
         PEERDNS=yes
         IPV6INIT=no
 
-6.	修改 udev 规则，以避免产生以太网接口的静态规则。在 Azure 或 Hyper-V 中克隆虚拟机时，这些规则会引发问题：
+6. 修改 udev 规则，以避免产生以太网接口的静态规则。在 Azure 或 Hyper-V 中克隆虚拟机时，这些规则会引发问题：
 
         # sudo ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
         # sudo rm -f /etc/udev/rules.d/70-persistent-net.rules
@@ -88,7 +88,7 @@ ms.author: szark
 
         # sudo yum install python-pyasn1
 
-9.	在 grub 配置中修改内核引导行，以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开“/boot/grub/menu.lst”，并确保默认内核包含以下参数：
+9. 在 grub 配置中修改内核引导行，以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开“/boot/grub/menu.lst”，并确保默认内核包含以下参数：
 
         console=ttyS0 earlyprintk=ttyS0 rootdelay=300 numa=off
 
@@ -102,7 +102,7 @@ ms.author: szark
 
     根据需要可以配置 `crashkernel` 选项，但请注意此参数会使虚拟机中的可用内存量减少 128MB 或更多，这在较小的虚拟机上可能会出现问题。
 
-10.	请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
+10. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
 
 11. 通过运行以下命令来安装 Azure Linux 代理。最新版本是 2.0.15。
 
@@ -110,7 +110,7 @@ ms.author: szark
 
     请注意，如果没有如步骤 2 中所述删除 NetworkManager 包和 NetworkManager-gnome 包，则安装 WALinuxAgent 包将删除它们。
 
-12.	不要在 OS 磁盘上创建交换空间。
+12. 不要在 OS 磁盘上创建交换空间。
 
     Azure Linux 代理可使用在 Azure 上设置后附加到虚拟机的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是临时磁盘，并可能在取消设置虚拟机时被清空。在安装 Azure Linux 代理（请参见前一步骤）后，相应地在 /etc/waagent.conf 中修改以下参数：
 
@@ -120,7 +120,7 @@ ms.author: szark
         ResourceDisk.EnableSwap=y
         ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
 
-13.	运行以下命令可取消对虚拟机的设置并且对其进行准备以便在 Azure 上进行设置：
+13. 运行以下命令可取消对虚拟机的设置并且对其进行准备以便在 Azure 上进行设置：
 
         # sudo waagent -force -deprovision
         # export HISTSIZE=0
@@ -147,12 +147,12 @@ ms.author: szark
 
 2. 单击**“连接”**以打开该虚拟机的控制台窗口。
 
-3.	在包含以下文本的 `/etc/sysconfig/` 目录中创建一个名为 **network** 的文件：
+3. 在包含以下文本的 `/etc/sysconfig/` 目录中创建一个名为 **network** 的文件：
 
         NETWORKING=yes
         HOSTNAME=localhost.localdomain
 
-4.	在包含以下文本的 `/etc/sysconfig/network-scripts/` 目录中创建一个名为 **ifcfg-eth0** 的文件：
+4. 在包含以下文本的 `/etc/sysconfig/network-scripts/` 目录中创建一个名为 **ifcfg-eth0** 的文件：
 
         DEVICE=eth0
         ONBOOT=yes
@@ -162,7 +162,7 @@ ms.author: szark
         PEERDNS=yes
         IPV6INIT=no
 
-5.	修改 udev 规则，以避免产生以太网接口的静态规则。在 Azure 或 Hyper-V 中克隆虚拟机时，这些规则会引发问题：
+5. 修改 udev 规则，以避免产生以太网接口的静态规则。在 Azure 或 Hyper-V 中克隆虚拟机时，这些规则会引发问题：
 
         # sudo ln -s /dev/null /etc/udev/rules.d/75-persistent-net-generator.rules
 
@@ -174,12 +174,12 @@ ms.author: szark
 
         # sudo yum install python-pyasn1
 
-8.	运行以下命令以清除当前 yum 元数据并安装所有更新：
+8. 运行以下命令以清除当前 yum 元数据并安装所有更新：
 
         # sudo yum clean all
         # sudo yum -y update
 
-9.	在 grub 配置中修改内核引导行，以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开“/etc/default/grub”并编辑 `GRUB_CMDLINE_LINUX` 参数，例如：
+9. 在 grub 配置中修改内核引导行，以使其包含 Azure 的其他内核参数。为此，请在文本编辑器中打开“/etc/default/grub”并编辑 `GRUB_CMDLINE_LINUX` 参数，例如：
 
         GRUB_CMDLINE_LINUX="rootdelay=300 console=ttyS0 earlyprintk=ttyS0 net.ifnames=0"
 
@@ -195,14 +195,14 @@ ms.author: szark
 
         # sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
-11.	请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
+11. 请确保已安装 SSH 服务器且已将其配置为在引导时启动。这通常是默认设置。
 
 12. 通过运行以下命令来安装 Azure Linux 代理：
 
         # sudo yum install WALinuxAgent
         # sudo systemctl enable waagent
 
-13.	不要在 OS 磁盘上创建交换空间。
+13. 不要在 OS 磁盘上创建交换空间。
 
     Azure Linux 代理可使用在 Azure 上设置后附加到虚拟机的本地资源磁盘自动配置交换空间。请注意，本地资源磁盘是临时磁盘，并可能在取消设置虚拟机时被清空。在安装 Azure Linux 代理（请参见前一步骤）后，相应地在 /etc/waagent.conf 中修改以下参数：
 
@@ -212,7 +212,7 @@ ms.author: szark
         ResourceDisk.EnableSwap=y
         ResourceDisk.SwapSizeMB=2048    ## NOTE: set this to whatever you need it to be.
 
-14.	运行以下命令可取消对虚拟机的设置并且对其进行准备以便在 Azure 上进行设置：
+14. 运行以下命令可取消对虚拟机的设置并且对其进行准备以便在 Azure 上进行设置：
 
         # sudo waagent -force -deprovision
         # export HISTSIZE=0

@@ -13,7 +13,7 @@ ms.tgt_pltfrm: mobile-windows
 ms.devlang: dotnet
 ms.topic: article
 ms.date: 06/29/2016
-wacn.date: 07/12/2016
+wacn.date: 01/19/2017
 ms.author: wesmc
 ---
 
@@ -47,7 +47,7 @@ ms.author: wesmc
 ###好处：
 
 1. 接收方（通过通知中心的移动应用/服务）和发送方（后端系统）之间的这种解耦使得只需要最小的更改即可集成其他后端系统。
-2. 这还使得采用多个移动应用的方案能够从一个或多个后端系统接收事件。  
+2. 这还使得采用多个移动应用的方案能够从一个或多个后端系统接收事件。
 
 ## 示例：
 
@@ -130,15 +130,15 @@ ms.author: wesmc
     a.此项目使用 *WindowsAzure.ServiceBus* 和 *Microsoft.Web.WebJobs.Publish* Nuget 包，并基于[服务总线 Pub/Sub 编程]构建。
 
     b.这是另一个 C# 控制台应用，我们将它作为 [Azure WebJob] 运行，因为它必须连续运行以侦听来自 LoB/后端系统的消息。它将是移动后端的一部分。
-    
+
             static void Main(string[] args)
             {
                 string connectionString =
                          CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
-    
+
                 // Create the subscription which will receive messages
                 CreateSubscription(connectionString);
-    
+
                 // Receive message
                 ReceiveMessageAndSendNotification(connectionString);
             }
@@ -150,7 +150,7 @@ ms.author: wesmc
                 // Create the subscription if it does not exist already
                 var namespaceManager =
                     NamespaceManager.CreateFromConnectionString(connectionString);
-    
+
                 if (!namespaceManager.SubscriptionExists(sampleTopic, sampleSubscription))
                 {
                     namespaceManager.CreateSubscription(sampleTopic, sampleSubscription);
@@ -166,19 +166,19 @@ ms.author: wesmc
                         ("Microsoft.NotificationHub.ConnectionString");
                 hub = NotificationHubClient.CreateClientFromConnectionString
                         (hubConnectionString, "enterprisepushservicehub");
-    
+
                 SubscriptionClient Client =
                     SubscriptionClient.CreateFromConnectionString
                             (connectionString, sampleTopic, sampleSubscription);
-    
+
                 Client.Receive();
-    
+
                 // Continuously process messages received from the subscription
                 while (true)
                 {
                     BrokeredMessage message = Client.Receive();
                     var toastMessage = @"<toast><visual><binding template=""ToastText01""><text id=""1"">{messagepayload}</text></binding></visual></toast>";
-    
+
                     if (message != null)
                     {
                         try
@@ -187,10 +187,10 @@ ms.author: wesmc
                             Console.WriteLine(message.SequenceNumber);
                             string messageBody = message.GetBody<string>();
                             Console.WriteLine("Body: " + messageBody + "\n");
-    
+
                             toastMessage = toastMessage.Replace("{messagepayload}", messageBody);
                             SendNotificationAsync(toastMessage);
-    
+
                             // Remove message from subscription
                             message.Complete();
                         }
@@ -215,7 +215,7 @@ ms.author: wesmc
 
     ![][3]
 
-    g.将该作业配置为“连续运行”，以便在你登录到 [Azure 经典门户]时，应看到如下内容：
+    g.将该作业配置为“连续运行”，以便在你登录到 [Azure 经典管理门户]时，应看到如下内容：
 
     ![][4]
 
@@ -230,10 +230,10 @@ ms.author: wesmc
             private async void InitNotificationsAsync()
             {
                 var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
-    
+
                 var hub = new NotificationHub("[HubName]", "[DefaultListenSharedAccessSignature]");
                 var result = await hub.RegisterNativeAsync(channel.Uri);
-    
+
                 // Displays the registration ID so you know it was successful
                 if (result.RegistrationId != null)
                 {
@@ -251,7 +251,7 @@ ms.author: wesmc
 
     ![][5]
 
-4. 消息最初发送到正被 WebJob 中的服务总线订阅监视的服务总线主题。收到消息后，将创建通知并将其发送到移动应用。当你转到 [Azure 经典门户]中 Web 作业的“日志”链接时，可以仔细查看 Web 作业日志来确认处理：
+4. 消息最初发送到正被 WebJob 中的服务总线订阅监视的服务总线主题。收到消息后，将创建通知并将其发送到移动应用。当你转到 [Azure 经典管理门户]中 Web 作业的“日志”链接时，可以仔细查看 Web 作业日志来确认处理：
 
     ![][6]
 
@@ -265,11 +265,11 @@ ms.author: wesmc
 
 <!-- Links -->
 [通知中心示例]: https://github.com/Azure/azure-notificationhubs-samples
-[Azure 移动服务]: ../mobile-services/index.md/
+[Azure 移动服务]: ../mobile-services/index.md
 [Azure 服务总线]: ../service-bus-messaging/service-bus-fundamentals-hybrid-solutions.md
 [服务总线 Pub/Sub 编程]: ../service-bus-messaging/service-bus-dotnet-how-to-use-topics-subscriptions.md
 [Azure WebJob]: ../app-service-web/web-sites-create-web-jobs.md
 [通知中心 - Windows 通用教程]: ./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md
-[Azure 经典门户]: https://manage.windowsazure.cn/
+[Azure 经典管理门户]: https://manage.windowsazure.cn/
 
 <!---HONumber=Mooncake_0801_2016-->

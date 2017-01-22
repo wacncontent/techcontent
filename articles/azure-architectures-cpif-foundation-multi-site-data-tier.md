@@ -35,7 +35,7 @@ CPIF 介绍了组织、客户和合作伙伴应该如何设计和部署使用混
 本文档介绍了出于可用性和冗余性的目的，在多个地理区域对 Microsoft SQL Server 的内容提供访问的模式。关键的服务如下图所示，不考虑将访问数据本身的应用程序或 Web 层。下图是相关服务的简单说明，及其作为此模式的一部分它们将如何使用。
 
 以下关系图更详细地描述了每个主服务区域。
- 
+
 ![资源和资源组边栏选项卡上的“标记”部件](./media/azure-architectures-cpif-foundation-multi-site-data-tier/overview.png)
 
 ##  其他资源

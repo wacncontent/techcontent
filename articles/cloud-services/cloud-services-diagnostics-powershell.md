@@ -35,7 +35,7 @@ ms.author: adegeo
 
     $webrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "WebRole" -DiagnosticsConfigurationPath $webrole_diagconfigpath
     $workerrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "WorkerRole" -DiagnosticsConfigurationPath $workerrole_diagconfigpath
-     
+
     New-AzureDeployment -ServiceName $service_name -Slot Production -Package $service_package -Configuration $service_config -ExtensionConfiguration @($webrole_diagconfig,$workerrole_diagconfig) 
 
 如果诊断配置文件指定具有存储帐户名称的 StorageAccount 元素，则 New-AzureServiceDiagnosticsExtensionConfig cmdlet 将自动使用该存储帐户。要使其工作，存储帐户需要与要部署的云服务位于同一订阅中。
@@ -45,10 +45,10 @@ ms.author: adegeo
     $service_name = "MyService"
     $service_package = "C:\build\output\CloudService.cspkg"
     $service_config = "C:\build\output\ServiceConfiguration.Cloud.cscfg"
-    
+
     #Find the Extensions path based on service configuration file
     $extensionsSearchPath = Join-Path -Path (Split-Path -Parent $service_config) -ChildPath "Extensions"
-    
+
     $diagnosticsExtensions = Get-ChildItem -Path $extensionsSearchPath -Filter "PaaSDiagnostics.*.PubConfig.xml"
     $diagnosticsConfigurations = @()
     foreach ($extPath in $diagnosticsExtensions)
@@ -87,7 +87,7 @@ Visual Studio Online 使用类似的方法通过诊断扩展自动部署云服�
 
     $webrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "WebRole" -DiagnosticsConfigurationPath $webrole_diagconfigpath -StorageAccountName $diagnosticsstorage_name -StorageAccountKey $diagnosticsstorage_key
     $workerrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "WorkerRole" -DiagnosticsConfigurationPath $workerrole_diagconfigpath -StorageAccountName $diagnosticsstorage_name -StorageAccountKey $diagnosticsstorage_key
- 
+
 ## 在现有的云服务上启用诊断扩展
 
 可以使用 [Set-AzureServiceDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/azure/mt589140.aspx) cmdlet 在已运行的云服务上启用或更新诊断配置。
@@ -98,12 +98,12 @@ Visual Studio Online 使用类似的方法通过诊断扩展自动部署云服�
 
     $webrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "WebRole" -DiagnosticsConfigurationPath $webrole_diagconfigpath
     $workerrole_diagconfig = New-AzureServiceDiagnosticsExtensionConfig -Role "WorkerRole" -DiagnosticsConfigurationPath $workerrole_diagconfigpath
-    
+
     Set-AzureServiceDiagnosticsExtension -DiagnosticsConfiguration @($webrole_diagconfig,$workerrole_diagconfig) -ServiceName $service_name 
-      
+
 ## 获取当前诊断扩展配置
 使用 [Get AzureServiceDiagnosticsExtension](https://msdn.microsoft.com/zh-cn/library/azure/mt589204.aspx) cmdlet 可以获取云服务的当前诊断配置。
-    
+
     Get-AzureServiceDiagnosticsExtension -ServiceName "MyService"
 
 ## 删除诊断扩展

@@ -47,9 +47,9 @@ ms.author: jotaub;sethm
 
 现在，你已准备就绪，可以运行应用程序了。
 
-1.	从 Eclipse 中运行 **LogTopology** 类，然后等待它为所有分区启动接收方。
+1. 从 Eclipse 中运行 **LogTopology** 类，然后等待它为所有分区启动接收方。
 
-2.	运行 **Sender** 项目，在控制台窗口中按 **Enter**，然后会看到事件出现在接收方窗口中。
+2. 运行 **Sender** 项目，在控制台窗口中按 **Enter**，然后会看到事件出现在接收方窗口中。
 
     ![][22]
 
@@ -69,5 +69,5 @@ ms.author: jotaub;sethm
 [事件中心概述]: ./event-hubs-overview.md
 [使用事件中心的完整示例应用程序]: https://code.msdn.microsoft.com/windowsazure/Service-Bus-Event-Hub-286fd097
 [使用事件中心扩大事件处理]: https://code.msdn.microsoft.com/windowsazure/Service-Bus-Event-Hub-45f43fc3
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

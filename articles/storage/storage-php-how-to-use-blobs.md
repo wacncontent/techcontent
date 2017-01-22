@@ -285,7 +285,7 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 - 参阅 [PHP 块 Blob 示例](https://github.com/WindowsAzure/azure-sdk-for-php-samples/blob/master/storage/BlockBlobExample.php)。
 - 参阅 [PHP 页 Blob 示例](https://github.com/WindowsAzure/azure-sdk-for-php-samples/blob/master/storage/PageBlobExample.php)。
 - [使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)
- 
+
 有关详细信息，另请参阅 [PHP 开发人员中心](/develop/php/)。
 
 [download]: ../php-download-sdk.md

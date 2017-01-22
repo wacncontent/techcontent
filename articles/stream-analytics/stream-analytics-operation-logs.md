@@ -39,8 +39,8 @@ ms.author: jeffstok
 
 在 Azure 经典管理门户中手动导航到流分析和其他服务的操作日志：
 
-1.	在 **Azure 经典管理门户** 中单击“管理服务”[](https://manage.windowsazure.cn)。
-2.	在“类型”中选择“流分析”，在“服务名称”中选择作业的名称。  
+1. 在 **Azure 经典管理门户** 中单击“管理服务”[](https://manage.windowsazure.cn)。
+2. 在“类型”中选择“流分析”，在“服务名称”中选择作业的名称。  
 
   ![选择流分析](./media/stream-analytics-operation-logs/02-stream-analytics-operation-logs.png)
 

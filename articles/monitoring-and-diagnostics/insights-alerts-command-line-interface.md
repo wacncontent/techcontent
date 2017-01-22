@@ -69,10 +69,10 @@ ms.author: robb
 3. 若要创建规则，需要首先获得以下几条重要信息。
     - 要为其设置警报的资源的**资源 ID**
     - 可用于该资源的**指标定义**
-    
+
     获取资源 ID 的方法是使用 Azure 门户预览。假定该资源已创建，则在门户预览中将其选中。然后，在下一个边栏选项卡中，在“设置”部分下选择“属性”。“资源 ID”是下一个边栏选项卡中的一个字段。
     下面是 Web 应用的一个示例资源 ID：
-  
+
         /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename
 
     对于前面的资源示例，若要获取可用指标的列表和这些指标的单位，请使用以下 CLI 命令：
@@ -82,23 +82,23 @@ ms.author: robb
     _PT1M_ 是可用度量的粒度（1 分钟时间间隔）。使用不同的粒度可以提供不同的指标选项。
 
 4. 若要创建基于指标的警报规则，请使用以下形式的命令：
- 
+
     **azure insights alerts rule metric set** *[options] &lt;ruleName&gt; &lt;location&gt; &lt;resourceGroup&gt; &lt;windowSize&gt; &lt;operator&gt; &lt;threshold&gt; &lt;targetResourceId&gt; &lt;metricName&gt; &lt;timeAggregationOperator&gt;*
-    
+
     以下示例在一个网站资源上设置警报。当在 5 分钟内持续收到任何流量以及再次在 5 分钟内未收到任何流量时，警报将触发。
 
         azure insights alerts rule metric set myrule eastus myreasourcegroup PT5M GreaterThan 2 /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename BytesReceived Total
 
 5. 若要在警报触发时创建 Webhook 或发送电子邮件，请首先创建电子邮件和/或 Webhook。然后紧随其后创建规则。无法使用 CLI 将 Webhook 或电子邮件与已创建的规则相关联。
- 
+
         azure insights alerts actions email create --customEmails myemail@contoso.com
-    
+
         azure insights alerts actions webhook create https://www.contoso.com
-    
+
         azure insights alerts rule metric set myrulewithwebhookandemail chinaeast myreasourcegroup PT5M GreaterThan 2 /subscriptions/dededede-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/myresourcegroupname/providers/Microsoft.Web/sites/mywebsitename BytesReceived Total
 
 6. 若要创建在活动日志中出现特定条件时触发的警报，请使用以下形式：
- 
+
     **insights alerts rule log set** *[options] &lt;ruleName&gt; &lt;location&gt; &lt;resourceGroup&gt; &lt;operationName&gt;*
 
     例如

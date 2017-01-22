@@ -108,7 +108,7 @@ Service Fabric SDK 为群集管理提供 [FabricClient](https://msdn.microsoft.c
     string serverCertThumb = "A8136758F4AB8962AF2BF3F27921BE1DF67F4326";
     string CommonName = "www.clustername.chinaeast.chinacloudapp.cn";
     string connection = "clustername.chinaeast.chinacloudapp.cn:19000";
-    
+
     X509Credentials xc = GetCredentials(clientCertThumb, serverCertThumb, CommonName);
     FabricClient fc = new FabricClient(xc, connection);
     Task<bool> t = fc.PropertyManager.NameExistsAsync(new Uri("fabric:/any"));
@@ -125,9 +125,9 @@ Service Fabric SDK 为群集管理提供 [FabricClient](https://msdn.microsoft.c
     {
         Console.WriteLine("Connect failed: {0}", e.Message);
     }
-    
+
     ...
-    
+
     static X509Credentials GetCredentials(string clientCertThumb, string serverCertThumb, string name)
     {
         X509Credentials xc = new X509Credentials();

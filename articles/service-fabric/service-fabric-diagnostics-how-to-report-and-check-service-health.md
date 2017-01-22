@@ -33,8 +33,8 @@ ms.author: toddabel
 ## 先决条件
 必须已安装以下软件：
 
-   * Visual Studio 2015
-   * Service Fabric SDK
+    * Visual Studio 2015
+    * Service Fabric SDK
 
 ## 创建本地安全开发人员群集
 - 以管理员权限打开 PowerShell 并运行以下命令。

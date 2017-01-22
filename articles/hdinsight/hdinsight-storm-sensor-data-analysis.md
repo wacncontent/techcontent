@@ -46,12 +46,12 @@ ms.author: larryfr
 * **Storm on HDInsight**：用于实时处理来自事件中心的数据。
 * **HBase on HDInsight**：由 Storm 处理数据后为数据提供持久性 NoSQL 数据存储。
 * **Azure 虚拟网络服务**：在 Storm on HDInsight 和 HBase on HDInsight 群集之间启用安全通信。
-  
+
 * **仪表板网站**：实时绘制数据图表的示例仪表板。
-  
+
   * 该网站在 Node.js 中实现，因此它可以在用于测试的任何客户端操作系统上运行，或者可以部署到 Azure 网站。
   * [Socket.io](http://socket.io/) 用于 Storm 拓扑和网站之间的实时通信。
-    
+
     > [!NOTE]
     这是实现详细信息。你可以使用任何通信框架，例如原始 WebSockets 或 SignalR。
     > 
@@ -187,17 +187,17 @@ ms.author: larryfr
 
 ### 启动 Web 应用程序
 1. 打开新的命令提示符或终端，并将目录更改为 将目录更改为 **hdinsight-eventhub-example/dashboard**，并使用以下命令安装 Web 应用程序所需的依赖项：
-   
+
         npm install
 2. 使用以下命令启动 Web 应用程序：
-   
+
         node server.js
-   
+
     你应看到类似于下面的消息：
-   
+
         Server listening at port 3000
 3. 打开 Web 浏览器，并输入 http://localhost:3000/** 作为地址。你应看到类似于下面的页面：
-   
+
     ![Web 仪表板](./media/hdinsight-storm-sensor-data-analysis/emptydashboard.png)  
 
     将此命令提示符或终端保持打开状态。测试完成后，使用 Ctrl-C 停止 Web 服务器。
@@ -209,10 +209,10 @@ ms.author: larryfr
 > 
 
 1. 打开新的命令提示符、shell 或终端，将目录更改为 **hdinsight-eventhub-example/SendEvents/nodejs**，然后使用以下命令安装应用程序所需的依赖项：
-   
+
         npm install
 2. 在文本编辑器中打开 **app.js** 文件，并添加你之前获取的事件中心信息：
-   
+
         // ServiceBus Namespace
         var namespace = 'YourNamespace';
         // Event Hub Name
@@ -220,17 +220,17 @@ ms.author: larryfr
         // Shared access Policy name and key (from Event Hub configuration)
         var my_key_name = 'devices';
         var my_key = 'YourKey';
-   
-   > [!NOTE]
-   此示例假定已使用 **sensordata** 作为事件中心的名称并已使用**devices** 作为具有 **Send** 声明的策略的名称。
-   > 
-   > 
+
+    > [!NOTE]
+    此示例假定已使用 **sensordata** 作为事件中心的名称并已使用**devices** 作为具有 **Send** 声明的策略的名称。
+    > 
+    > 
 3. 使用以下命令在事件中心插入新条目：
-   
+
         node app.js
-   
+
     你应会看到包含发送到事件中心的数据的多个输出行。这些信息如下所示：
-   
+
         {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"0","Temperature":7}
         {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"1","Temperature":39}
         {"TimeStamp":"2015-02-10T14:43.05.00320Z","DeviceId":"2","Temperature":86}
@@ -244,22 +244,22 @@ ms.author: larryfr
 
 ### 启动拓扑
 1. 打开新的命令提示符、shell 或终端，将目录更改为 **hdinsight-eventhub-example/TemperatureMonitor**，然后使用以下命令启动拓扑：
-   
+
         mvn compile exec:java -Dexec.args="--local -R /no-hbase.yaml --filter dev.properties"
-   
+
     如果使用的是 PowerShell，请使用以下命令：
-   
+
         mvn compile exec:java "-Dexec.args=--local -R /no-hbase.yaml --filter dev.properties"
-   
+
     > [!NOTE]
     如果在 Linux/Unix/OS X 系统上，并且[已在开发环境中安装 Storm](http://storm.apache.org/releases/0.10.0/Setting-up-development-environment.html)，则可以使用以下命令：
     ><p> 
     ><p> `mvn compile package` <p> `storm jar target/WordCount-1.0-SNAPSHOT.jar org.apache.storm.flux.Flux --local -R /no-hbase.yaml`
     > 
     > 
-   
+
     这会在本地模式下启动 **no-hbase.yaml** 文件中定义的拓扑。**dev.properties** 文件中包含的值提供事件中心的连接信息。启动后，拓扑会从事件中心读取条目，然后将它们发送到在本地计算机上运行的仪表板。你应看到各行显示在 Web 仪表板中，如下所示：
-   
+
     ![包含数据的仪表板](./media/hdinsight-storm-sensor-data-analysis/datadashboard.png)  
 3. 当仪表板正在运行时，使用前面步骤中的 `node app.js` 命令将新数据发送到仪表板。由于温度值是随机生成的，因此图表应会更新以显示新值。
 
@@ -412,7 +412,7 @@ ms.author: larryfr
 现在，你已了解如何使用 Storm 从事件中心读取数据，以及使用 SignalR 和 D3.js 将 Storm 中的信息显示在 的外部仪表板上。如果你使用了可选步骤，则还已了解如何在虚拟网络中配置 HDInsight，以及如何使用 HBase bolt 在 Storm 拓扑与 HBase 之间进行通信。
 
 * 有关 HDinsight Storm 拓扑的更多示例，请参阅：
-  
+
   * [Storm on HDInsight 的示例拓扑](./hdinsight-storm-example-topology.md)
 * 有关 Apache Storm 的详细信息，请参阅 [Apache Storm](https://storm.incubator.apache.org/) 站点。
 * 有关 HBase on HDInsight 的详细信息，请参阅 [HDInsight 上的 HBase 概述](./hdinsight-hbase-overview.md)。

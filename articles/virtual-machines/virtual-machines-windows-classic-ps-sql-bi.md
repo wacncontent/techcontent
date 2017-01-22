@@ -102,7 +102,7 @@ Azure 虚拟机库包括若干含有 Microsoft SQL Server 的映像。虚拟机�
 - 磁盘管理的最佳做法是在 **C**: 和 **D**: 以外的驱动器上存储数据、日志和备份文件。例如，创建数据磁盘 **E**: 和 **F**:。
 
     - 默认驱动器 **C**: 的驱动器缓存策略未针对处理数据进行优化。
-    
+
     - **D**: 驱动器是主要用于页面文件的临时驱动器。**D**: 驱动器不会持久保留且不保存在 blob 存储中。诸如更改虚拟机大小之类的管理任务会重置 **D**: 驱动器。建议**不**要将 **D**: 驱动器用于数据库文件（包括 tempdb）。
 
     有关创建和附加磁盘的详细信息，请参阅[如何将数据磁盘附加到虚拟机](./virtual-machines-windows-classic-attach-disk.md)。
@@ -168,11 +168,11 @@ SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式�
 - 通过 Windows 远程桌面连接到虚拟机。在远程桌面的用户界面中：
 
     1. 键入**云服务名称**作为计算机名称。
-    
+
     1. 键入冒号 (:) 和为 TCP 远程桌面终结点配置的公共端口号。
-        
+
         Myservice.chinacloudapp.cn:63133
-        
+
         有关详细信息，请参阅[什么是云服务？](../cloud-services/cloud-services-choose-me.md)。
 
 **启动 Reporting Services 配置管理器。**
@@ -283,13 +283,13 @@ SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式�
 下表汇总一些选项，可用于将现有报表从本地计算机发布到 Azure 虚拟机上托管的报表服务器：
 
 - **报表生成器**：虚拟机包括 Microsoft SQL Server 报表生成器的单击一次版本。若要首次在虚拟机上启动报表生成器：
-                                            
+
     1. 使用管理权限启动你的浏览器。
-    
+
     1. 浏览到虚拟机上的网页门户，然后选择右上角的“下载”图标。
-    
+
     1. 选择“报表生成器”。
-    
+
     有关详细信息，请参阅[“启动报表生成器”。](https://msdn.microsoft.com/zh-cn/library/ms159221.aspx)
 
 - **SQL Server Data Tools**：VM：SQL Server Data Tools 安装在该虚拟机上并可用于在该虚拟机上创建**报表服务器项目**和报表。SQL Server Data Tools 可以将报表发布到虚拟机上的报表服务器。
@@ -301,11 +301,11 @@ SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式�
 - 创建一个包含报表的 .VHD 硬盘驱动器，然后上载并附加该驱动器。
 
     1. 在本地计算机上创建一个包含您的报表的 .VHD 硬盘驱动器。
-    
+
     1. 创建并安装管理证书。
-    
+
     1. 使用 Add-azurevhd cmdlet 将 VHD 文件上载到 Azure [创建 Windows Server VHD 并上载到 Azure](./virtual-machines-windows-classic-createupload-vhd.md)。
-    
+
     1. 将磁盘附加到虚拟机。
 
 ## 安装其他 SQL Server 服务和功能
@@ -380,13 +380,13 @@ Analysis Services 的**默认实例**侦听 TCP 端口 **2383**。在虚拟机�
 - 如果您使用的是单个 VM 并且下列两项为 true，不需要创建 VM 终结点并且不需要在 VM 上的防火墙中打开端口。
 
     - 你未远程连接到 VM 上的 SQL Server 功能。与 VM 建立远程桌面连接和从本地访问 VM 上的 SQL Server 功能，不被视为与 SQL Server 功能远程连接。
-    
+
     - 不通过 Azure 虚拟网络或其他 VPN 隧道解决方案将 VM 加入到本地域。
 
 - 如果虚拟机未加入到域，但您希望远程连接到 VM 上的 SQL Server 功能：
 
     - 在 VM 防火墙中打开端口。
-    
+
     - 为前述端口 (*) 打开虚拟机终结点。
 
 - 如果虚拟机使用 Azure 虚拟网络等 VPN 隧道加入域，则不需要终结点。但是要在 VM 防火墙中打开端口。
@@ -416,7 +416,7 @@ Analysis Services 的**默认实例**侦听 TCP 端口 **2383**。在虚拟机�
 
 - [Azure 虚拟机中的 SQL Server 概述](./virtual-machines-windows-sql-server-iaas-overview.md)
 
-- [虚拟机](./index.md/)
+- [虚拟机](./index.md)
 
 - [在 Azure 上设置 SQL Server 虚拟机](./virtual-machines-windows-classic-ps-sql-create.md)
 

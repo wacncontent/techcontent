@@ -17,8 +17,8 @@ wacn.date: 11/03/2016
 
 当将 Java 网站部署在 Azure Web 应用上后，如果运行过程中发现内存不足错误或者性能问题后，开发人员首先需要排查是否是 Java 代码的缺陷导致了内存泄漏，在确认代码没有问题后，并且确认网站的确需要更大的内存后，可以参照以下步骤修改 Java 虚拟机配置，来缓解网站内存压力问题。
 
-1.	登录网站 FTP，打开 web.config 文件，默认情况下 web.config 文件位于 `site\wwwroot` 下.
-2.	在 web.config 文件中，修改 JAVA_OPTS 参数的值，比如: 
+1. 登录网站 FTP，打开 web.config 文件，默认情况下 web.config 文件位于 `site\wwwroot` 下.
+2. 在 web.config 文件中，修改 JAVA_OPTS 参数的值，比如: 
 
         <environmentVariable name="JAVA_OPTS" value="-Djava.net.preferIPv4Stack=true -Xms256m -Xmx1024m -XX:PermSize=128m -XX:MaxPermSize=256m"/>
 
@@ -32,8 +32,8 @@ wacn.date: 11/03/2016
     另外当日志中发现如下错误时，才需要考虑增加 MaxPermSize 的值
                java.lang.OutOfMemoryError: PermGen space
 
-3.	当网站所需要的总内存超过 2G 的时候，需要登录 Azure Portal，在配置页面下，将网站运行模式改成 64 位, 如图:
+3. 当网站所需要的总内存超过 2G 的时候，需要登录 Azure Portal，在配置页面下，将网站运行模式改成 64 位, 如图:
 
      ![](./media/aog-web-app-java-memory-out/bit-change.png)
 
-4.	在 Azure Portal 上重启网站，使配置生效。
+4. 在 Azure Portal 上重启网站，使配置生效。

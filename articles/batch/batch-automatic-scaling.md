@@ -76,7 +76,7 @@ ms.author: marsma
         <li><p><b>taskcompletion</b>--等待当前运行的任务完成，然后从池中删除节点。</p></li>
         <li><p><b>retaineddata</b>--等待清理节点上的本地任务保留的所有数据，然后从池中删除节点。</p></li>
       </ul></td>
-   </tr>
+    </tr>
 </table>
 
 可以**获取**这些服务定义的变量的值，以根据 Batch 服务中的指标进行调整：
@@ -435,7 +435,7 @@ Batch 评估上述代码行后，会以值的向量形式返回样本范围。�
     // Define the autoscaling formula. In this snippet, the  formula sets the target number of nodes to 5 on
     // Mondays, and 1 on every other day of the week
     string myAutoScaleFormula = "$TargetDedicated = (time().weekday==1?5:1);";
-    
+
     // Update the existing pool's autoscaling formula by calling the BatchClient.PoolOperations.EnableAutoScale
     // method, passing in both the pool's ID and the new formula.
     myBatchClient.PoolOperations.EnableAutoScale("mypool", myAutoScaleFormula);
@@ -453,7 +453,7 @@ Batch 评估上述代码行后，会以值的向量形式返回样本范围。�
 
     // First obtain a reference to the existing pool
     CloudPool pool = myBatchClient.PoolOperations.GetPool("mypool");
-    
+
     // We must ensure that autoscaling is enabled on the pool prior to evaluating a formula
     if (pool.AutoScaleEnabled.HasValue && pool.AutoScaleEnabled.Value)
     {
@@ -465,17 +465,17 @@ Batch 评估上述代码行后，会以值的向量形式返回样本范围。�
             $IsWorkingWeekdayHour=$WorkHours && $IsWeekday;
             $TargetDedicated=$IsWorkingWeekdayHour?20:10;
         ";
-    
+
         // Perform the autoscale formula evaluation. Note that this does not actually apply the formula to
         // the pool.
         AutoScaleEvaluation eval = client.PoolOperations.EvaluateAutoScale(pool.Id, myFormula);
-    
+
         if (eval.AutoScaleRun.Error == null)
         {
             // Evaluation success - print the results of the AutoScaleRun. This will display the values of each
             // variable as evaluated by the autoscale formula.
             Console.WriteLine("AutoScaleRun.Results: " + eval.AutoScaleRun.Results);
-    
+
             // Apply the formula to the pool since it evaluated successfully
             client.PoolOperations.EnableAutoScale(pool.Id, myFormula);
         }
@@ -556,13 +556,13 @@ Batch 评估上述代码行后，会以值的向量形式返回样本范围。�
 
     string now = DateTime.UtcNow.ToString("r");
     string formula = string.Format(@"
-    
+
         $TargetDedicated = {1};
         lifespan         = time() - time(""{0}"");
         span             = TimeInterval_Minute * 60;
         startup          = TimeInterval_Minute * 10;
         ratio            = 50;
-    
+
         $TargetDedicated = (lifespan > startup ? (max($RunningTasks.GetSample(span, ratio), $ActiveTasks.GetSample(span, ratio)) == 0 ? 0 : $TargetDedicated) : {1});
         ", now, 4);
 

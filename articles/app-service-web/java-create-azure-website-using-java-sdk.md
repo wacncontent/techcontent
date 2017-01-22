@@ -146,7 +146,7 @@ Azure SDK for Java 使用管理证书在 Azure 订阅中进行身份验证。对
 5. 打开“全局存储库”，右键单击“中央”存储库，然后选择“重新生成索引”。
 
     ![][1]
-    
+
     此步骤可能需要几分钟时间，具体取决于你的连接速度。重新生成索引后，**中心** Maven 存储库中应会显示 Azure 包。
 
 6. 在“依赖项”中，单击“添加”。在“输入组 ID...”中输入 `azure-management`。选择基础管理和应用服务 Web 应用管理所用的包：
@@ -179,22 +179,22 @@ Azure SDK for Java 使用管理证书在 Azure 订阅中进行身份验证。对
     // General imports
     import java.net.URI;
     import java.util.ArrayList;
-    
+
     // Imports for Exceptions
     import java.io.IOException;
     import java.net.URISyntaxException;
     import javax.xml.parsers.ParserConfigurationException;
     import com.microsoft.windowsazure.exception.ServiceException;
     import org.xml.sax.SAXException;
-    
+
     // Imports for Azure App Service management configuration
     import com.microsoft.windowsazure.Configuration;
     import com.microsoft.windowsazure.management.configuration.ManagementConfiguration;
-    
+
     // Service management imports for App Service Web Apps creation
     import com.microsoft.windowsazure.management.websites.*;
     import com.microsoft.windowsazure.management.websites.models.*;
-    
+
     // Imports for authentication
     import com.microsoft.windowsazure.core.utils.KeyStoreType;
 
@@ -205,13 +205,13 @@ AzureWebDemo 应用程序的目的是创建应用服务 Web 应用，因此请�
 为 Web 应用和 Web 空间添加以下参数定义。你将需要提供你自己的 Azure 订阅 ID 和证书信息。
 
     public class WebAppCreator {
-    
+
         // Parameter definitions used for authentication.
         private static String uri = "https://management.core.chinacloudapi.cn/";
         private static String subscriptionId = "<subscription-id>";
         private static String keyStoreLocation = "<certificate-store-path>";
         private static String keyStorePassword = "<certificate-password>";
-    
+
         // Define web app parameter values.
         private static String webAppName = "WebDemoWebApp";
         private static String domainName = ".chinacloudsites.cn";
@@ -318,11 +318,11 @@ AzureWebDemo 应用程序的目的是创建应用服务 Web 应用，因此请�
 
     ----------
     Web app created - HTTP response 200
-    
+
     ----------
-    
+
     Name of web app created: WebDemoWebApp
-    
+
     ----------
 
 登录到 Azure 经典管理门户并单击“Web Apps”。在数分钟内，新 Web 应用应会出现在“Web Apps”列表中。
@@ -353,7 +353,7 @@ AzureWebDemo 应用程序的目的是创建应用服务 Web 应用，因此请�
           ...
           java.util.Date date = new java.util.Date();
         </head>
-    
+
         <body>
           Hello, the time is <%= date %> 
         </body>
@@ -565,7 +565,7 @@ JSPHello.war 自身首先会显示在目录区域中：
   [8]: ./media/java-create-azure-website-using-java-sdk/kudu-console-drag-drop.png
   [9]: ./media/java-create-azure-website-using-java-sdk/kudu-console-jsphello-war-1.png
   [10]: ./media/java-create-azure-website-using-java-sdk/kudu-console-jsphello-war-2.png
- 
+
 [Azure App Service]: ./app-service-changes-existing-services.md
 [Web 平台安装程序]: http://go.microsoft.com/fwlink/?LinkID=252838
 [Azure Toolkit for Eclipse]: ../azure-toolkit-for-eclipse-installation.md

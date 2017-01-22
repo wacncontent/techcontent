@@ -23,9 +23,9 @@ ms.author: adegeo
 
 在开始之前，请特别注意以下几点：
 
-1.	本教程使用 Powershell，因此请确保已安装 Azure Powershell 并已准备就绪。有关设置 Azure Powershell 的帮助，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
+1. 本教程使用 Powershell，因此请确保已安装 Azure Powershell 并已准备就绪。有关设置 Azure Powershell 的帮助，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
 
-2.	AD 域控制器和 Web/辅助角色实例需要在 VNET 中。
+2. AD 域控制器和 Web/辅助角色实例需要在 VNET 中。
 
 按照以下分步指南操作，如果遇到任何问题，请在下面留言。我们将回复你（没错，我们真的会阅读留言）。
 

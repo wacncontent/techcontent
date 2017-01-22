@@ -76,7 +76,7 @@ ms.author: subramar
      azure servicefabric cluster connect --connection-endpoint http://ip:19080 --client-key-path /tmp/key --client-cert-path /tmp/cert --ca-cert-path /tmp/ca1,/tmp/ca2 
 
 如果有多个 CA，请使用逗号作为分隔符。
- 
+
 如果证书中的“公用名”与连接终结点不匹配，可以使用 `--strict-ssl` 参数绕过验证，如以下命令中所示：
 
     azure servicefabric cluster connect --connection-endpoint http://ip:19080 --client-key-path /tmp/key --client-cert-path /tmp/cert --strict-ssl false 

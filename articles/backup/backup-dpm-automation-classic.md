@@ -278,11 +278,11 @@ DPM 服务器在注册到 Azure 备份保管库后，将使用默认的订阅设
 - 选择要从中还原的备份点。
 
         PS C:\> $RecoveryOption = New-DPMRecoveryOption -HyperVDatasource -TargetServer "HVDCenter02" -RecoveryLocation AlternateHyperVServer -RecoveryType Recover -TargetLocation "C:\\VMRecovery"
-    
+
         PS C:\> $PG = Get-DPMProtectionGroup -DPMServerName "TestingServer" 
         PS C:\> $DS = Get-DPMDatasource -ProtectionGroup $PG[0] 
         PS C:\> $RecoveryPoints = Get-DPMRecoverypoint -Datasource $DS[0] -Online
-    
+
         PS C:\> Restore-DPMRecoverableItem -RecoverableItem $RecoveryPoints[0] -RecoveryOption $RecoveryOption
 
 你可以针对任何数据源类型轻松扩展这些命令。

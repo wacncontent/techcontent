@@ -67,7 +67,7 @@ ms.author: juliako
 ####<a id="ContentKeyAuthorizationPolicies"></a>创建 ContentKeyAuthorizationPolicies
 
 请求：
-        
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeyAuthorizationPolicies HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 1.0;NetFx
@@ -79,11 +79,11 @@ ms.author: juliako
     x-ms-client-request-id: d732dbfa-54fc-474c-99d6-9b46a006f389
     Host: wamsshaclus001rest-hs.chinacloudapp.cn 
     Content-Length: 36
-    
+
     {"Name":"Open Authorization Policy"}
-    
+
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 211
@@ -98,11 +98,11 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Tue, 10 Feb 2015 08:25:56 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#ContentKeyAuthorizationPolicies/@Element","Id":"nb:ckpid:UUID:db4593da-f4d1-4cc5-a92a-d20eacbabee4","Name":"Open Authorization Policy"}
 
 ####<a id="ContentKeyAuthorizationPolicyOptions"></a>创建 ContentKeyAuthorizationPolicyOptions
-    
+
 请求：
 
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeyAuthorizationPolicyOptions HTTP/1.1
@@ -116,11 +116,11 @@ ms.author: juliako
     x-ms-client-request-id: d225e357-e60e-4f42-add8-9d93aba1409a
     Host: wamsshaclus001rest-hs.chinacloudapp.cn 
     Content-Length: 168
-    
+
     {"Name":"policy","KeyDeliveryType":2,"KeyDeliveryConfiguration":"","Restrictions":[{"Name":"HLS Open Authorization Policy","KeyRestrictionType":0,"Requirements":null}]}
 
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 349
@@ -135,13 +135,13 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Tue, 10 Feb 2015 08:56:40 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#ContentKeyAuthorizationPolicyOptions/@Element","Id":"nb:ckpoid:UUID:57829b17-1101-4797-919b-f816f4a007b7","Name":"policy","KeyDeliveryType":2,"KeyDeliveryConfiguration":"","Restrictions":[{"Name":"HLS Open Authorization Policy","KeyRestrictionType":0,"Requirements":null}]}
 
 ####<a id="LinkContentKeyAuthorizationPoliciesWithOptions"></a>将 ContentKeyAuthorizationPolicies 与 Options 相链接
 
 请求：
-    
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeyAuthorizationPolicies('nb%3Ackpid%3AUUID%3A0baa438b-8ac2-4c40-a53c-4d4722b78715')/$links/Options HTTP/1.1
     DataServiceVersion: 1.0;NetFx
     MaxDataServiceVersion: 3.0;NetFx
@@ -153,7 +153,7 @@ ms.author: juliako
     x-ms-client-request-id: 9847f705-f2ca-4e95-a478-8f823dbbaa29
     Host: wamsshaclus001rest-hs.chinacloudapp.cn 
     Content-Length: 154
-    
+
     {"uri":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeyAuthorizationPolicyOptions('nb%3Ackpoid%3AUUID%3A57829b17-1101-4797-919b-f816f4a007b7')"}
 
 响应：
@@ -175,7 +175,7 @@ ms.author: juliako
     x-ms-client-request-id: e613efff-cb6a-41b4-984a-f4f8fb6e76a4
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 78
-    
+
     {"AuthorizationPolicyId":"nb:ckpid:UUID:c06cebb8-c4f0-4d1a-ba00-3273fb2bc3ad"}
 
 响应：
@@ -189,7 +189,7 @@ ms.author: juliako
 若要配置令牌限制选项，你需要使用 XML 描述令牌的授权要求。令牌限制配置 XML 必须符合以下 XML 架构。
 
 ####<a id="schema"></a>令牌限制架构
-    
+
     <?xml version="1.0" encoding="utf-8"?>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/TokenRestrictionTemplate/v1" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/TokenRestrictionTemplate/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:complexType name="TokenClaim">
@@ -240,7 +240,7 @@ ms.author: juliako
 在配置**令牌**限制策略时，必须指定主**验证密钥**、**颁发者**和**受众**参数。**主验证密钥**包含令牌签名时使用的密钥，**颁发者**是颁发令牌的安全令牌服务。**受众**（有时称为**范围**）描述该令牌的意图，或者令牌授权访问的资源。媒体服务密钥传送服务将验证令牌中的这些值是否与模板中的值匹配。
 
 以下示例创建包含令牌限制的授权策略。在此示例中，客户端必须出示令牌，其中包含：签名密钥 (VerificationKey)、令牌颁发者和必需的声明。
-    
+
 ###创建 ContentKeyAuthorizationPolicies
 
 根据[此处](#ContentKeyAuthorizationPolicies)所示创建“令牌限制策略”。
@@ -248,7 +248,7 @@ ms.author: juliako
 ###创建 ContentKeyAuthorizationPolicyOptions
 
 请求：
-    
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeyAuthorizationPolicyOptions HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 3.0;NetFx
@@ -260,11 +260,11 @@ ms.author: juliako
     x-ms-client-request-id: 2643d836-bfe7-438e-9ba2-bc6ff28e4a53
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 1079
-    
+
     {"Name":"Token option for HLS","KeyDeliveryType":2,"KeyDeliveryConfiguration":null,"Restrictions":[{"Name":"Token Authorization Policy","KeyRestrictionType":1,"Requirements":"<TokenRestrictionTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/TokenRestrictionTemplate/v1"><AlternateVerificationKeys><TokenVerificationKey i:type="SymmetricVerificationKey"><KeyValue>BklyAFiPTQsuJNKriQJBZHYaKM2CkCTDQX2bw9sMYuvEC9sjW0W7GUIBygQL/+POEeUqCYPnmEU2g0o1GW2Oqg==</KeyValue></TokenVerificationKey></AlternateVerificationKeys><Audience>urn:test</Audience><Issuer>http://testacs.com/</Issuer><PrimaryVerificationKey i:type="SymmetricVerificationKey"><KeyValue>E5BUHiN4vBdzUzdP0IWaHFMMU3D1uRZgF16TOhSfwwHGSw+Kbf0XqsHzEIYk11M372viB9vbiacsdcQksA0ftw==</KeyValue></PrimaryVerificationKey><RequiredClaims><TokenClaim><ClaimType>urn:microsoft:azure:mediaservices:contentkeyidentifier</ClaimType><ClaimValue i:nil="true" /></TokenClaim></RequiredClaims><TokenType>SWT</TokenType></TokenRestrictionTemplate>"}]}
 
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 1260
@@ -279,9 +279,9 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Tue, 10 Feb 2015 09:10:37 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#ContentKeyAuthorizationPolicyOptions/@Element","Id":"nb:ckpoid:UUID:e1ef6145-46e8-4ee6-9756-b1cf96328c23","Name":"Token option for HLS","KeyDeliveryType":2,"KeyDeliveryConfiguration":null,"Restrictions":[{"Name":"Token Authorization Policy","KeyRestrictionType":1,"Requirements":"<TokenRestrictionTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/TokenRestrictionTemplate/v1"><AlternateVerificationKeys><TokenVerificationKey i:type="SymmetricVerificationKey"><KeyValue>BklyAFiPTQsuJNKriQJBZHYaKM2CkCTDQX2bw9sMYuvEC9sjW0W7GUIBygQL/+POEeUqCYPnmEU2g0o1GW2Oqg==</KeyValue></TokenVerificationKey></AlternateVerificationKeys><Audience>urn:test</Audience><Issuer>http://testacs.com/</Issuer><PrimaryVerificationKey i:type="SymmetricVerificationKey"><KeyValue>E5BUHiN4vBdzUzdP0IWaHFMMU3D1uRZgF16TOhSfwwHGSw+Kbf0XqsHzEIYk11M372viB9vbiacsdcQksA0ftw==</KeyValue></PrimaryVerificationKey><RequiredClaims><TokenClaim><ClaimType>urn:microsoft:azure:mediaservices:contentkeyidentifier</ClaimType><ClaimValue i:nil="true" /></TokenClaim></RequiredClaims><TokenType>SWT</TokenType></TokenRestrictionTemplate>"}]}
-    
+
 ####将 ContentKeyAuthorizationPolicies 与 Options 相链接
 
 根据[此处](#ContentKeyAuthorizationPolicies)所示将 ContentKeyAuthorizationPolicies 与 Options 相链接。
@@ -297,11 +297,11 @@ ms.author: juliako
 使用 PlayReady 保护你的内容时，需要在授权策略中指定的项目之一是用于定义 [PlayReady 许可证模板](./media-services-playready-license-template-overview.md)的 XML 字符串。
 
 ###开放限制
-    
+
 开放限制意味着系统会将密钥传送到发出密钥请求的任何用户。此限制可能适用于测试用途。
 
 以下示例创建开放授权策略，并将其添加到内容密钥。
-    
+
 ####<a id="ContentKeyAuthorizationPolicies2"></a>创建 ContentKeyAuthorizationPolicies
 
 请求：
@@ -317,11 +317,11 @@ ms.author: juliako
     x-ms-client-request-id: 9e7fa407-f84e-43aa-8f05-9790b46e279b
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 58
-    
+
     {"Name":"Deliver Common Content Key"}
-    
+
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 233
@@ -336,13 +336,13 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Tue, 10 Feb 2015 09:26:00 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#ContentKeyAuthorizationPolicies/@Element","Id":"nb:ckpid:UUID:cc3c64a8-e2fc-4e09-bf60-ac954251a387","Name":"Deliver Common Content Key"}
-    
+
 #### 创建 ContentKeyAuthorizationPolicyOptions
 
 请求：
-    
+
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeyAuthorizationPolicyOptions HTTP/1.1
     Content-Type: application/json
     DataServiceVersion: 3.0;NetFx
@@ -354,11 +354,11 @@ ms.author: juliako
     x-ms-client-request-id: f160ad25-b457-4bc6-8197-315604c5e585
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 593
-    
+
     {"Name":"","KeyDeliveryType":1,"KeyDeliveryConfiguration":"<PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1"><LicenseTemplates><PlayReadyLicenseTemplate><AllowTestDevices>false</AllowTestDevices><ContentKey i:type="ContentEncryptionKeyFromHeader" /><LicenseType>Nonpersistent</LicenseType><PlayRight /></PlayReadyLicenseTemplate></LicenseTemplates></PlayReadyLicenseResponseTemplate>","Restrictions":[{"Name":"Open","KeyRestrictionType":0,"Requirements":null}]}
-    
+
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 774
@@ -373,7 +373,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Tue, 10 Feb 2015 09:23:24 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#ContentKeyAuthorizationPolicyOptions/@Element","Id":"nb:ckpoid:UUID:1052308c-4df7-4fdb-8d21-4d2141fc2be0","Name":"","KeyDeliveryType":1,"KeyDeliveryConfiguration":"<PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1"><LicenseTemplates><PlayReadyLicenseTemplate><AllowTestDevices>false</AllowTestDevices><ContentKey i:type="ContentEncryptionKeyFromHeader" /><LicenseType>Nonpersistent</LicenseType><PlayRight /></PlayReadyLicenseTemplate></LicenseTemplates></PlayReadyLicenseResponseTemplate>","Restrictions":[{"Name":"Open","KeyRestrictionType":0,"Requirements":null}]}
 
 ####将 ContentKeyAuthorizationPolicies 与 Options 相链接
@@ -387,13 +387,13 @@ ms.author: juliako
 ###令牌限制
 
 若要配置令牌限制选项，你需要使用 XML 描述令牌的授权要求。令牌限制配置 XML 必须符合[此](#schema)部分中所示的 XML 架构。
-    
+
 ####创建 ContentKeyAuthorizationPolicies
-    
+
 根据[此处](#ContentKeyAuthorizationPolicies2)所示创建 ContentKeyAuthorizationPolicies。
 
 ####创建 ContentKeyAuthorizationPolicyOptions
-    
+
 请求：
 
     POST https://wamsshaclus001rest-hs.chinacloudapp.cn/api/ContentKeyAuthorizationPolicyOptions HTTP/1.1
@@ -407,11 +407,11 @@ ms.author: juliako
     x-ms-client-request-id: ab079b0e-2ba9-4cf1-b549-a97bfa6cd2d3
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
     Content-Length: 1525
-    
+
     {"Name":"Token option","KeyDeliveryType":1,"KeyDeliveryConfiguration":"<PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1"><LicenseTemplates><PlayReadyLicenseTemplate><AllowTestDevices>false</AllowTestDevices><ContentKey i:type="ContentEncryptionKeyFromHeader" /><LicenseType>Nonpersistent</LicenseType><PlayRight /></PlayReadyLicenseTemplate></LicenseTemplates></PlayReadyLicenseResponseTemplate>","Restrictions":[{"Name":"Token Authorization Policy","KeyRestrictionType":1,"Requirements":"<TokenRestrictionTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/TokenRestrictionTemplate/v1"><AlternateVerificationKeys><TokenVerificationKey i:type="SymmetricVerificationKey"><KeyValue>w52OyHVqXT8aaupGxuJ3NGt8M6opHDOtx132p4r6q4hLI6ffnLusgEGie1kedUewVoIe1tqDkVE6xsIV7O91KA==</KeyValue></TokenVerificationKey></AlternateVerificationKeys><Audience>urn:test</Audience><Issuer>http://testacs.com/</Issuer><PrimaryVerificationKey i:type="SymmetricVerificationKey"><KeyValue>dYwLKIEMBljLeY9VM7vWdlhps31Fbt0XXhqP5VyjQa33bJXleBtkzQ6dF5AtwI9gDcdM2dV2TvYNhCilBKjMCg==</KeyValue></PrimaryVerificationKey><RequiredClaims><TokenClaim><ClaimType>urn:microsoft:azure:mediaservices:contentkeyidentifier</ClaimType><ClaimValue i:nil="true" /></TokenClaim></RequiredClaims><TokenType>SWT</TokenType></TokenRestrictionTemplate>"}]}
 
 响应：
-    
+
     HTTP/1.1 201 Created
     Cache-Control: no-cache
     Content-Length: 1706
@@ -426,7 +426,7 @@ ms.author: juliako
     X-Powered-By: ASP.NET
     Strict-Transport-Security: max-age=31536000; includeSubDomains
     Date: Tue, 10 Feb 2015 09:58:47 GMT
-    
+
     {"odata.metadata":"https://wamsshaclus001rest-hs.chinacloudapp.cn/api/$metadata#ContentKeyAuthorizationPolicyOptions/@Element","Id":"nb:ckpoid:UUID:e42bbeae-de42-4077-90e9-a844f297ef70","Name":"Token option","KeyDeliveryType":1,"KeyDeliveryConfiguration":"<PlayReadyLicenseResponseTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/PlayReadyTemplate/v1"><LicenseTemplates><PlayReadyLicenseTemplate><AllowTestDevices>false</AllowTestDevices><ContentKey i:type="ContentEncryptionKeyFromHeader" /><LicenseType>Nonpersistent</LicenseType><PlayRight /></PlayReadyLicenseTemplate></LicenseTemplates></PlayReadyLicenseResponseTemplate>","Restrictions":[{"Name":"Token Authorization Policy","KeyRestrictionType":1,"Requirements":"<TokenRestrictionTemplate xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/Azure/MediaServices/KeyDelivery/TokenRestrictionTemplate/v1"><AlternateVerificationKeys><TokenVerificationKey i:type="SymmetricVerificationKey"><KeyValue>w52OyHVqXT8aaupGxuJ3NGt8M6opHDOtx132p4r6q4hLI6ffnLusgEGie1kedUewVoIe1tqDkVE6xsIV7O91KA==</KeyValue></TokenVerificationKey></AlternateVerificationKeys><Audience>urn:test</Audience><Issuer>http://testacs.com/</Issuer><PrimaryVerificationKey i:type="SymmetricVerificationKey"><KeyValue>dYwLKIEMBljLeY9VM7vWdlhps31Fbt0XXhqP5VyjQa33bJXleBtkzQ6dF5AtwI9gDcdM2dV2TvYNhCilBKjMCg==</KeyValue></PrimaryVerificationKey><RequiredClaims><TokenClaim><ClaimType>urn:microsoft:azure:mediaservices:contentkeyidentifier</ClaimType><ClaimValue i:nil="true" /></TokenClaim></RequiredClaims><TokenType>SWT</TokenType></TokenRestrictionTemplate>"}]}
 
 ####将 ContentKeyAuthorizationPolicies 与 Options 相链接

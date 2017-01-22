@@ -97,7 +97,7 @@ SAP“增强型监视”是在 Azure 上运行 SAP 的必要先决条件。请�
 
 除了此文中所述的内容以外，建议也删除以下项：
 
-   /lib/udev/rules.d/75-persistent-net-generator.rules
+    /lib/udev/rules.d/75-persistent-net-generator.rules
 
 还可以安装 Azure Linux 代理 (waagent) 来帮助避免在没有多个 NIC 时可能出现的问题。
 
@@ -143,11 +143,11 @@ SUSE 提供了一个名为“sapconf”的包，该包可管理一组特定于 S
 
 如果要使用 Gnome 桌面在单个 VM 中安装完整的 SAP 演示系统（包括 SAP GUI、浏览器、SAP 管理控制台），请根据以下提示在 Azure SLES 映像上安装该系统：
 
-   对于 SLES 11：
+    对于 SLES 11：
 
     zypper in -t pattern gnome
 
-   对于 SLES 12：
+    对于 SLES 12：
 
     zypper in -t pattern gnome-basic
 

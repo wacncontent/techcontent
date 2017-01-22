@@ -23,7 +23,7 @@ ms.author: cjgronlund
 
 ## 入门
 
-如果你不熟悉 HDInsight 上的 Hadoop，请转到 [HDInsight 文档页](./index.md/)以初步了解 Azure 经典管理门户。
+如果你不熟悉 HDInsight 上的 Hadoop，请转到 [HDInsight 文档页](./index.md)以初步了解 Azure 经典管理门户。
 
 ## Hadoop：批量查询
 

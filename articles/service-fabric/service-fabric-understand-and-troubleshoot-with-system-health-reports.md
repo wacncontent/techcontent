@@ -98,7 +98,7 @@ System.FM 表示故障转移管理器 (Failover Manager) 服务，是管理群�
 以下示例显示 **fabric:/WordCount** 应用程序上的状态事件：
 
     PS C:\> Get-ServiceFabricApplicationHealth fabric:/WordCount -ServicesFilter None -DeployedApplicationsFilter None
-    
+
     ApplicationName                 : fabric:/WordCount
     AggregatedHealthState           : Ok
     ServiceHealthStates             : None
@@ -128,13 +128,13 @@ System.FM 表示故障转移管理器 (Failover Manager) 服务，是管理群�
 以下示例显示服务 **fabric:/WordCount/WordCountService** 上的状态事件：
 
     PS C:\> Get-ServiceFabricServiceHealth fabric:/WordCount/WordCountService
-    
+
     ServiceName           : fabric:/WordCount/WordCountService
     AggregatedHealthState : Ok
     PartitionHealthStates :
                             PartitionId           : 875a1caa-d79f-43bd-ac9d-43ee89a9891c
                             AggregatedHealthState : Ok
-    
+
     HealthEvents          :
                             SourceId              : System.FM
                             Property              : State
@@ -468,7 +468,7 @@ Visual Studio 2015 诊断事件：RunAsync 在 **fabric:/HelloWorldStatefulAppli
     AggregatedHealthState : Warning
     UnhealthyEvaluations  : 
                             Unhealthy event: SourceId='System.NamingService', Property='Duration_AOCreateService.fabric:/MyApp/MyService', HealthState='Warning', ConsiderWarningAsError=false.
-                        
+
     HealthEvents          : 
                             SourceId              : System.RA
                             Property              : State
@@ -481,7 +481,7 @@ Visual Studio 2015 诊断事件：RunAsync 在 **fabric:/HelloWorldStatefulAppli
                             RemoveWhenExpired     : False
                             IsExpired             : False
                             Transitions           : Error->Ok = 4/29/2016 8:39:08 PM, LastWarning = 1/1/0001 12:00:00 AM
-                        
+
                             SourceId              : System.NamingService
                             Property              : Duration_AOCreateService.fabric:/MyApp/MyService
                             HealthState           : Warning
@@ -493,7 +493,7 @@ Visual Studio 2015 诊断事件：RunAsync 在 **fabric:/HelloWorldStatefulAppli
                             RemoveWhenExpired     : True
                             IsExpired             : False
                             Transitions           : Error->Warning = 4/29/2016 8:39:38 PM, LastOk = 1/1/0001 12:00:00 AM
-                        
+
                             SourceId              : System.NamingService
                             Property              : Duration_NOCreateService.fabric:/MyApp/MyService
                             HealthState           : Warning

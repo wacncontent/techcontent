@@ -60,7 +60,7 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
 缩略图持续时间|15 秒（2-3 个场景）| 30 秒（3-5 个场景）|60 秒（5-10 个场景）|90 秒（10-15 个场景）
 
 下面的 JSON 设置可用的参数。
-    
+
     {
         "version": "1.0",
         "options": {
@@ -76,7 +76,7 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
 
 1. 创建资产并将媒体文件上传到资产。
 1. 使用基于包含以下 json 预设值的配置文件的视频缩略图任务，创建一个作业。
-        
+
         {				
             "version": "1.0",
             "options": {
@@ -89,7 +89,7 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
 1. 下载输出文件。
 
 ###.NET 代码
-     
+
     using System;
     using System.Configuration;
     using System.IO;
@@ -97,7 +97,7 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
     using Microsoft.WindowsAzure.MediaServices.Client;
     using System.Threading;
     using System.Threading.Tasks;
-    
+
     namespace VideoSummarization
     {
         class Program
@@ -107,7 +107,7 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
                 ConfigurationManager.AppSettings["MediaServicesAccountName"];
             private static readonly string _mediaServicesAccountKey =
                 ConfigurationManager.AppSettings["MediaServicesAccountKey"];
-    
+
         private static readonly String _defaultScope = "urn:WindowsAzureMediaServices";
 
         // Azure China uses a different API server and a different ACS Base Address from the Global.
@@ -118,10 +118,10 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
             private static CloudMediaContext _context = null;
             private static MediaServicesCredentials _cachedCredentials = null;
         private static Uri _apiServer = null;
-    
+
             static void Main(string[] args)
             {
-    
+
                 // Create and cache the Media Services credentials in a static class variable.
                 _cachedCredentials = new MediaServicesCredentials(
                                 _mediaServicesAccountName,
@@ -134,56 +134,56 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
 
                     // Used the chached credentials to create CloudMediaContext.
                     _context = new CloudMediaContext(_apiServer, _cachedCredentials);
-    
+
                 // Run the thumbnail job.
                 var asset = RunVideoThumbnailJob(@"C:\supportFiles\VideoThumbnail\BigBuckBunny.mp4",
                                             @"C:\supportFiles\VideoThumbnail\config.json");
-    
+
                 // Download the job output asset.
                 DownloadAsset(asset, @"C:\supportFiles\VideoThumbnail\Output");
             }
-    
+
             static IAsset RunVideoThumbnailJob(string inputMediaFilePath, string configurationFile)
             {
                 // Create an asset and upload the input media file to storage.
                 IAsset asset = CreateAssetAndUploadSingleFile(inputMediaFilePath,
                     "My Video Thumbnail Input Asset",
                     AssetCreationOptions.None);
-    
+
                 // Declare a new job.
                 IJob job = _context.Jobs.Create("My Video Thumbnail Job");
-    
+
                 // Get a reference to Azure Media Video Thumbnails.
                 string MediaProcessorName = "Azure Media Video Thumbnails";
-    
+
                 var processor = GetLatestMediaProcessorByName(MediaProcessorName);
-    
+
                 // Read configuration from the specified file.
                 string configuration = File.ReadAllText(configurationFile);
-    
+
                 // Create a task with the encoding details, using a string preset.
                 ITask task = job.Tasks.AddNew("My Video Thumbnail Task",
                     processor,
                     configuration,
                     TaskOptions.None);
-    
+
                 // Specify the input asset.
                 task.InputAssets.Add(asset);
-    
+
                 // Add an output asset to contain the results of the job.
                 task.OutputAssets.AddNew("My Video Thumbnail Output Asset", AssetCreationOptions.None);
-    
+
                 // Use the following event handler to check job progress.  
                 job.StateChanged += new EventHandler<JobStateChangedEventArgs>(StateChanged);
-    
+
                 // Launch the job.
                 job.Submit();
-    
+
                 // Check job execution and wait for job to finish.
                 Task progressJobTask = job.GetExecutionProgressTask(CancellationToken.None);
-    
+
                 progressJobTask.Wait();
-    
+
                 // If job state is Error, the event handling
                 // method for job progress should log errors.  Here we check
                 // for error state and exit if needed.
@@ -195,20 +195,20 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
                                                     error.Message));
                     return null;
                 }
-    
+
                 return job.OutputMediaAssets[0];
             }
-    
+
             static IAsset CreateAssetAndUploadSingleFile(string filePath, string assetName, AssetCreationOptions options)
             {
                 IAsset asset = _context.Assets.Create(assetName, options);
-    
+
                 var assetFile = asset.AssetFiles.Create(Path.GetFileName(filePath));
                 assetFile.Upload(filePath);
-    
+
                 return asset;
             }
-    
+
             static void DownloadAsset(IAsset asset, string outputDirectory)
             {
                 foreach (IAssetFile file in asset.AssetFiles)
@@ -216,7 +216,7 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
                     file.Download(Path.Combine(outputDirectory, file.Name));
                 }
             }
-    
+
             static IMediaProcessor GetLatestMediaProcessorByName(string mediaProcessorName)
             {
                 var processor = _context.MediaProcessors
@@ -224,20 +224,20 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
                     .ToList()
                     .OrderBy(p => new Version(p.Version))
                     .LastOrDefault();
-    
+
                 if (processor == null)
                     throw new ArgumentException(string.Format("Unknown media processor",
                                                                mediaProcessorName));
-    
+
                 return processor;
             }
-    
+
             static private void StateChanged(object sender, JobStateChangedEventArgs e)
             {
                 Console.WriteLine("Job state changed event:");
                 Console.WriteLine("  Previous state: " + e.PreviousState);
                 Console.WriteLine("  Current state: " + e.CurrentState);
-    
+
                 switch (e.CurrentState)
                 {
                     case JobState.Finished:
@@ -262,7 +262,7 @@ maxMotionThumbnailDurationInSecs|指定生成的整个视频的时长的整数�
                         break;
                 }
             }
-    
+
         }
     }
 

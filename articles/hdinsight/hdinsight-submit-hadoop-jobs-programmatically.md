@@ -67,7 +67,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
         using Microsoft.Azure.Management.HDInsight.Job;
         using Microsoft.Azure.Management.HDInsight.Job.Models;
         using Hyak.Common;
-        
+
         namespace SubmitHDInsightJobDotNet
         {
             class Program
@@ -82,13 +82,13 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                 static void Main(string[] args)
                 {
                     System.Console.WriteLine("Running");
-        
+
                     var tokenCreds = GetTokenCloudCredentials();
                     var subCloudCredentials = GetSubscriptionCloudCredentials(tokenCreds, SubscriptionId);
 
                     var clusterCredentials = new BasicAuthenticationCloudCredentials { Username = ExistingClusterUsername, Password = ExistingClusterPassword };
                     _hdiJobManagementClient = new HDInsightJobManagementClient(ExistingClusterUri, clusterCredentials);
-        
+
                     SubmitHiveJob();
                     SubmitPigJob();
                     SubmitSqoopJob();
@@ -106,7 +106,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                             RESULT = order FREQUENCIES by COUNT desc;
                             DUMP RESULT;"
                     };
-        
+
                     System.Console.WriteLine("Submitting the Pig job to the cluster...");
                     var response = _hdiJobManagementClient.JobManagement.SubmitPigJob(parameters);
                     System.Console.WriteLine("Validating that the response is as expected...");
@@ -114,7 +114,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                     System.Console.WriteLine("Validating the response object...");
                     System.Console.WriteLine("JobId is " + response.JobSubmissionJsonResponse.Id);
                 }
-        
+
                 private static void SubmitHiveJob()
                 {
                     Dictionary<string, string> defines = new Dictionary<string, string> { { "hive.execution.engine", "ravi" }, { "hive.exec.reducers.max", "1" } };
@@ -125,7 +125,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                         Defines = defines,
                         Arguments = args
                     };
-        
+
                     Console.WriteLine("Submitting the Hive job to the cluster...");
                     var jobResponse = _hdiJobManagementClient.JobManagement.SubmitHiveJob(parameters);
                     var jobId = jobResponse.JobSubmissionJsonResponse.Id;
@@ -133,9 +133,9 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                     Console.WriteLine("Response status code is " + jobResponse.StatusCode);
                     Console.WriteLine("Validating the response object...");
                     Console.WriteLine("JobId is " + jobId);
-        
+
                     Console.WriteLine("Waiting for the job completion ...");
-        
+
                     // Wait for job completion
                     var jobDetail = _hdiJobManagementClient.JobManagement.GetJob(jobId).JobDetail;
                     while (!jobDetail.Status.JobComplete)
@@ -143,7 +143,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                         Thread.Sleep(1000);
                         jobDetail = _hdiJobManagementClient.JobManagement.GetJob(jobId).JobDetail;
                     }
-        
+
                     // Get job output
                     var storageAccess = new AzureStorageAccess(DefaultStorageAccountName, DefaultStorageAccountKey,
                         DefaultStorageContainerName);
@@ -151,29 +151,29 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                         ? _hdiJobManagementClient.JobManagement.GetJobOutput(jobId, storageAccess) // fetch stdout output in case of success
                         : _hdiJobManagementClient.JobManagement.GetJobErrorLogs(jobId, storageAccess); // fetch stderr output in case of failure
                 }
-        
+
                 private static void SubmitSqoopJob()
                 {
                     var sqlDatabaseServerName = "<SQLDatabaseServerName>";
                     var sqlDatabaseLogin = "<SQLDatabaseLogin>";
                     var sqlDatabaseLoginPassword = "<SQLDatabaseLoginPassword>";
                     var sqlDatabaseDatabaseName = "<DatabaseName>";
-        
+
                     var tableName = "<TableName>";
                     var exportDir = "/tutorials/usesqoop/data";
-        
+
                     // Connection string for using Azure SQL Database.
                     // Comment if using SQL Server
                     var connectionString = "jdbc:sqlserver://" + sqlDatabaseServerName + ".database.chinacloudapi.cn;user=" + sqlDatabaseLogin + "@" + sqlDatabaseServerName + ";password=" + sqlDatabaseLoginPassword + ";database=" + sqlDatabaseDatabaseName;
                     // Connection string for using SQL Server.
                     // Uncomment if using SQL Server
                     //var connectionString = "jdbc:sqlserver://" + sqlDatabaseServerName + ";user=" + sqlDatabaseLogin + ";password=" + sqlDatabaseLoginPassword + ";database=" + sqlDatabaseDatabaseName;
-        
+
                     var parameters = new SqoopJobSubmissionParameters
                     {
                         Command = "export --connect " + connectionString + " --table " + tableName + "_mobile --export-dir " + exportDir + "_mobile --fields-terminated-by \\t -m 1"
                     };
-        
+
                     System.Console.WriteLine("Submitting the Sqoop job to the cluster...");
                     var response = _hdiJobManagementClient.JobManagement.SubmitSqoopJob(parameters);
                     System.Console.WriteLine("Validating that the response is as expected...");

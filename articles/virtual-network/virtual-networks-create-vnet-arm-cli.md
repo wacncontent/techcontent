@@ -24,7 +24,7 @@ ms.author: jdial
 [!INCLUDE [virtual-networks-create-vnet-intro](../../includes/virtual-networks-create-vnet-intro-include.md)]
 
 Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建议通过 Resource Manager 部署模型创建资源。若要深入了解这两个模型之间的差异，请阅读[了解 Azure 部署模型](../azure-resource-manager/resource-manager-deployment-model.md)一文。
- 
+
 本文介绍如何使用 Azure 命令行接口 (CLI) 通过 Resource Manager 部署模型创建 VNet。还可以使用其他工具通过 Resource Manager 创建 VNet，或通过从以下列表中选择不同的选项使用经典部署模型创建 VNet：
 > [!div class="op_single_selector"]
 - [门户](./virtual-networks-create-vnet-arm-pportal.md)
@@ -47,7 +47,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         azure network vnet create --vnet TestVNet -e 192.168.0.0 -i 16 -n FrontEnd -p 192.168.1.0 -r 24 -l "China North"
 
     预期输出：
-   
+
             info:    Executing command network vnet create
             + Looking up network configuration
             + Looking up locations
@@ -56,13 +56,13 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
     使用的参数：
 
-   * **--vnet**。要创建的 VNet 的名称。对于我们的方案，为 *TestVNet*
-   * **-e（或 --address-space）**。VNet 地址空间。对于我们的方案，为 *192.168.0.0*
-   * **-i（或 -cidr）**。采用 CIDR 格式的网络掩码。对于我们的方案，为 *16* 。
-   * **-n（或 --subnet-name）**。第一个子网的名称。对于我们的方案，为 *FrontEnd* 。
-   * **-p（或 --subnet-start-ip）**。子网或子网地址空间的起始 IP 地址。对于我们的方案，为 *192.168.1.0* 。
-   * **-r（或 --subnet-cidr）**。子网的网络掩码（采用 CIDR 格式）。对于我们的方案，为 *24* 。
-   * **-l（或 --location）**。要在其中创建 VNet 的 Azure 区域 。在我们的方案中为中国北部。
+    * **--vnet**。要创建的 VNet 的名称。对于我们的方案，为 *TestVNet*
+    * **-e（或 --address-space）**。VNet 地址空间。对于我们的方案，为 *192.168.0.0*
+    * **-i（或 -cidr）**。采用 CIDR 格式的网络掩码。对于我们的方案，为 *16* 。
+    * **-n（或 --subnet-name）**。第一个子网的名称。对于我们的方案，为 *FrontEnd* 。
+    * **-p（或 --subnet-start-ip）**。子网或子网地址空间的起始 IP 地址。对于我们的方案，为 *192.168.1.0* 。
+    * **-r（或 --subnet-cidr）**。子网的网络掩码（采用 CIDR 格式）。对于我们的方案，为 *24* 。
+    * **-l（或 --location）**。要在其中创建 VNet 的 Azure 区域 。在我们的方案中为中国北部。
 3. 运行以下命令创建子网：
 
         azure network vnet subnet create -t TestVNet -n BackEnd -a 192.168.2.0/24
@@ -81,15 +81,15 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
 
     使用的参数：
 
-   * **-t（或 --vnet-name）**。将在其中创建子网的 VNet 的名称。对于我们的方案，为 *TestVNet* 。
-   * **-n（或 --name）**。新子网的名称。对于我们的方案，为 *BackEnd* 。
-   * **-a（或 --address-prefix）**。子网 CIDR 块。对于我们的方案，为 *192.168.2.0/24* 。
+    * **-t（或 --vnet-name）**。将在其中创建子网的 VNet 的名称。对于我们的方案，为 *TestVNet* 。
+    * **-n（或 --name）**。新子网的名称。对于我们的方案，为 *BackEnd* 。
+    * **-a（或 --address-prefix）**。子网 CIDR 块。对于我们的方案，为 *192.168.2.0/24* 。
 4. 运行以下命令查看新 VNet 的属性：
 
         azure network vnet show
 
     预期输出：
-   
+
             info:    Executing command network vnet show
             Virtual network name: TestVNet
             + Looking up the virtual network sites

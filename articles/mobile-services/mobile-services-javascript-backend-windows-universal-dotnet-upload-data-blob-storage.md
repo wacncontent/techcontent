@@ -52,11 +52,11 @@ ms.author: glenga
 + [移动服务服务器脚本参考]
 
     参考使用服务器脚本执行服务器端任务，并与其他 Azure 组件和外部资源集成的主题。
- 
+
 + [移动服务 .NET 操作方法概念性参考]
 
     了解有关如何将移动服务与 .NET 一起使用的详细信息
-  
+
 <!-- Anchors. -->
 [Install the Storage Client library]: #install-storage-client
 [Update the client app to capture images]: #add-select-images
@@ -80,5 +80,5 @@ ms.author: glenga
 [Azure Storage Client library for Store apps]: http://go.microsoft.com/fwlink/p/?LinkId=276866
 [移动服务 .NET 操作方法概念性参考]: ./mobile-services-dotnet-how-to-use-client-library.md
 [App settings]: http://msdn.microsoft.com/zh-cn/library/windowsazure/b6bb7d2d-35ae-47eb-a03f-6ee393e170f7
- 
+
 <!---HONumber=Mooncake_0118_2016-->

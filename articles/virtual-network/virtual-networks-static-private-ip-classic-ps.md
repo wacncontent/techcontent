@@ -98,7 +98,7 @@ ms.author: jdial
 
 ## 如何从 VM 中删除静态专用 IP 地址
 若要删除使用上述脚本添加到 VM 的静态专用 IP 地址，请运行以下 PowerShell 命令：
-    
+
     Get-AzureVM -ServiceName TestService -Name DNS01 |
       Remove-AzureStaticVNetIP |
       Update-AzureVM

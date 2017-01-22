@@ -48,7 +48,7 @@ ms.author: vturecek
 在此示例中，如果 `VoicemailBox` 对象出现以下情况，则序列化该对象：
  - 在执行组件实例和调用方之间传输该对象。
  - 该对象保存在状态管理器中，即持久保存在磁盘中，并且已复制到其他节点。
- 
+
 Reliable Actor 框架使用 DataContract 序列化。因此，自定义数据对象及其成员必须分别使用 **DataContract** 和 **DataMember** 属性进行批注
 
     [DataContract]

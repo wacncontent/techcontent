@@ -92,7 +92,7 @@ PostgreSQL 是一种类似于 Oracle 和 DB2 的高级开放源代码数据库�
 
         # su - postgres
 
-   >[!NOTE]出于安全原因，PostgreSQL 将使用非根用户来初始化、启动或关闭数据库。
+    >[!NOTE]出于安全原因，PostgreSQL 将使用非根用户来初始化、启动或关闭数据库。
 
 4. 通过输入以下命令编辑 *bash\_profile* 文件。这些行将添加到 *bash\_profile* 文件的末尾：
 

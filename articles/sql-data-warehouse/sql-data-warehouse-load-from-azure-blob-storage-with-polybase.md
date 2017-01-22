@@ -157,7 +157,7 @@ PolyBase 使用 T-SQL 外部对象来定义外部数据的位置和属性。外�
     ,   REJECT_VALUE = 0
     )
     ;
- 
+
     --FactOnlineSales
     CREATE EXTERNAL TABLE [asb].FactOnlineSales 
     (

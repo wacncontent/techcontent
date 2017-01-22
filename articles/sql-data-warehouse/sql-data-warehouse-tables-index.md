@@ -225,18 +225,18 @@ SQL 数据仓库提供多种索引选项，包括[聚集列存储索引][]、[�
 
     -- Rebuild the entire clustered index
     ALTER INDEX ALL ON [dbo].[DimProduct] REBUILD
-    
+
     -- Rebuild a single partition
     ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5
-    
+
     -- Rebuild a single partition with archival compression
     ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE)
-    
+
     -- Rebuild a single partition with columnstore compression
     ALTER INDEX ALL ON [dbo].[FactInternetSales] REBUILD Partition = 5 WITH (DATA_COMPRESSION = COLUMNSTORE)
 
 在 SQL 数据仓库中重建索引是一项脱机操作。有关重建索引的详细信息，请参阅 [Columnstore Indexes Defragmentation][]（列存储索引碎片整理）中的 ALTER INDEX REBUILD 部分和语法主题 [ALTER INDEX][]。
- 
+
 ### 步骤 3：验证聚集列存储段质量是否已改善
 重新运行识别出段质量不佳的表的查询，并验证段质量是否已改善。如果段质量并未改善，原因可能是表中的行太宽。请考虑在重建索引时使用较高的资源类或 DWU。如果需要更多内存，
 

@@ -15,7 +15,7 @@
     输出类似于以下示例：
 
         info:    Executing command vm disk list
-    
+
         * Fetching disk images
         * Getting virtual machines
         * Getting VM disks
@@ -36,7 +36,7 @@
     输出类似于以下示例：
 
         info:    Executing command vm disk list
-    
+
         * Fetching disk images
         data:    Name                                          OS
         data:    --------------------------------------------  -----
@@ -76,7 +76,7 @@
     输出类似于以下示例：
 
         info:    Executing command vm disk list
-    
+
         * Fetching disk images
         * Getting virtual machines
         * Getting VM disks

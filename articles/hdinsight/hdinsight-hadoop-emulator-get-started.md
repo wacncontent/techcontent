@@ -58,7 +58,7 @@ ms.author: nitinme
 2. 登录后，请输入以下命令：
 
         ambari-admin-password-reset
-    
+
     出现提示时，请提供 Ambari 管理员帐户的密码。访问 Ambari Web UI 时要用到此密码。
 
 ## 使用 hive 命令

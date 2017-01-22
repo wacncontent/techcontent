@@ -2,7 +2,7 @@
 1. 登录到 [Azure 经典管理门户](https://manage.windowsazure.cn/)，单击“移动服务”，然后单击你的移动服务。
 
 2. 单击“推送”选项卡、为“权限”选择“仅经过身份验证的用户”，单击“保存”，然后单击“编辑脚本”。
-    
+
     这样，你便可以自定义推送通知注册回调函数。如果你使用 Git 来编辑源代码，则在 `.\service\extensions\push.js` 中找到这一相同注册函数。
 
 3. 将现有**注册**函数替换为以下代码，然后单击“保存”：
@@ -10,7 +10,7 @@
         exports.register = function (registration, registrationContext, done) {   
             // Get the ID of the logged-in user.
             var userId = registrationContext.user.userId;    
-            
+
             // Perform a check here for any disallowed tags.
             if (!validateTags(registration))
             {
@@ -21,12 +21,12 @@
             else{
                 // Add a new tag that is the user ID.
                 registration.tags.push(userId);
-                
+
                 // Complete the callback as normal.
                 done();
             }
         };
-        
+
         function validateTags(registration){
             for(var i = 0; i < registration.tags.length; i++) { 
                 console.log(registration.tags[i]);           

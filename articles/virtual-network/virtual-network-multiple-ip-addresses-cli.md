@@ -102,7 +102,7 @@ ms.author: annahar
 3. 根据要求，完成以下任一部分中的步骤：
 
     **添加专用 IP 地址**
-    
+
     若要将专用 IP 地址添加到 NIC，必须使用以下命令创建 IP 配置。如果想要添加动态专用 IP 地址，请在输入命令前删除 ```-PrivateIpAddress 10.0.0.7```。指定的静态 IP 地址必须是子网的未使用地址。
 
         azure network nic ip-config create --resource-group myResourceGroup --nic-name myNic1 --private-ip-address 10.0.0.7 --name IPConfig-4
@@ -110,7 +110,7 @@ ms.author: annahar
     使用唯一配置名称和专用 IP 地址（用于具有静态 IP 地址的配置），根据需要创建多个配置。
 
     **添加公共 IP 地址**
-    
+
     将公共 IP 地址关联到新 IP 配置或现有 IP 配置即可添加它。根据需要，完成以下任一部分中的步骤。
 
     > [!NOTE]
@@ -118,7 +118,7 @@ ms.author: annahar
     >
 
     **将资源关联到新 IP 配置**
-    
+
     每次在新 IP 配置中添加公共 IP 地址时，还必须添加专用 IP 地址，因为所有 IP 配置都必须具有专用 IP 地址。可添加现有公共 IP 地址资源，也可创建新的公共 IP 地址资源。若要新建，请输入以下命令：
 
           azure network public-ip create --resource-group myResourceGroup --location chinaeast --name myPublicIP3 --domain-name-label mypublicdns3
@@ -133,13 +133,13 @@ ms.author: annahar
         azure network nic ip-config list --resource-group myResourceGroup --nic-name myNic1
 
     在返回的输出中查找类似如下所示的行：
-    
+
         Name               Provisioning state  Primary  Private IP allocation  Private IP version  Private IP address  Subnet    Public IP
         -----------------  ------------------  -------  ---------------------  ------------------  ------------------  --------  -----------
         default-ip-config  Succeeded           true     Dynamic                IPv4                10.0.0.4            mySubnet  myPublicIP
         IPConfig-2         Succeeded           false    Static                 IPv4                10.0.0.5            mySubnet  myPublicIP2
         IPConfig-3         Succeeded           false    Dynamic                IPv4                10.0.0.6            mySubnet
-     
+
     *IpConfig-3* 的**公共 IP** 列为空白，因此，当前没有公共 IP 地址资源与其关联。可将现有公共 IP 地址资源添加到 IpConfig-3，或输入以下命令进行创建：
 
         azure network public-ip create --resource-group  myResourceGroup --location chinaeast --name myPublicIP3 --domain-name-label mypublicdns3 --allocation-method Static
@@ -153,7 +153,7 @@ ms.author: annahar
         azure network nic ip-config list --resource-group myResourceGroup --nic-name myNic1
 
     您应该会看到与下面类似的输出：
-    
+
         Name               Provisioning state  Primary  Private IP allocation  Private IP version  Private IP address  Subnet    Public IP
         -----------------  ------------------  -------  ---------------------  ------------------  ------------------  --------  -----------
         default-ip-config  Succeeded           true     Dynamic                IPv4                10.0.0.4            mySubnet  myPublicIP

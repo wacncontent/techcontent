@@ -1,5 +1,5 @@
 1. 打开项目文件 mainpage.xaml.cs 并将以下代码段添加到 MainPage 类：
-    
+
         private MobileServiceUser user;
         private async Task Authenticate()
         {
@@ -45,7 +45,7 @@
         }
 
        此构造函数还注册 Loaded 事件的处理程序。
-        
+
 4. 按 F5 键运行应用，并使用您选择的标识提供程序登录应用。 
 
        当你成功登录时，应用应该运行而不出现错误，你应该能够查询移动服务，并对数据进行更新。

@@ -39,15 +39,15 @@ ms.author: cynthn
     vnet=/subscriptions/<sourceSubscriptionID>/resourceGroups/<sourceResourceGroup>/providers/Microsoft.Network/virtualNetworks/<vnetName>
     diag=/subscriptions/<sourceSubscriptionID>/resourceGroups/<sourceResourceGroup>/providers/Microsoft.Storage/storageAccounts/<diagnosticStorageAccountName>
     storage=/subscriptions/<sourceSubscriptionID>/resourceGroups/<sourceResourceGroup>/providers/Microsoft.Storage/storageAccounts/<storageAcountName>  	
-    
+
     azure resource move --ids $vm,$nic,$nsg,$pip,$vnet,$storage,$diag -d "<destinationResourceGroup>"
-    
+
 如果要将 VM 及其资源移到其他订阅，请添加 **--destination-subscriptionId &#60;destinationSubscriptionID&#62;** 参数来指定目标订阅。
 
 如果从 Windows 计算机上的命令提示符操作，需要在声明变量名称时在其前面添加 **$**。在 Linux 中不需要这样做。
 
 系统将要求确认是否想要移动指定的资源。请键入 **Y** 确认要移动资源。
-    
+
 [!INCLUDE [virtual-machines-common-move-vm](../../includes/virtual-machines-common-move-vm.md)]
 
 ## 后续步骤

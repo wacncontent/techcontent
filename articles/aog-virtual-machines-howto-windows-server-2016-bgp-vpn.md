@@ -14,7 +14,7 @@ wacn.date: 12/15/2016
 ---
 
 # 如何使用 Windows Server 2016 与 Azure 搭建支持 BGP 协议的 VPN 通道
- 
+
 ### 关于 Windows Server 2016 的 BGP 功能 ###
 
 从 Windows Server 2012 R2 开始，Windows Server 的 RRAS 已经能够支持 BGP 协议，但是 Windows Server 2012 R2 的 BGP 需要和  Multitenant Gateway 一起使用，要想跟 Azure 搭建支持 BGP 的 VPN 通道所需步骤相对繁琐。从 Windows Server 2016 开始，RRAS 不需要搭建 Multitenant Gateway 也能支持 BGP 协议，我们可以使用 Windows Server 2016 的 RRAS 功能很方便的跟 Azure 搭建支持 BGP 的 VPN。
@@ -47,7 +47,7 @@ VNET2 所对应的 VPN gateway AS 号为 `65011`，Peer 地址为 `10.5.1.254`�
 
         $vnet1gw = Get-AzureRmVirtualNetworkGateway -Name $GWName1 -ResourceGroupName $RG1
         $vnet1gw.BgpSettingsText
-    
+
     从 BgpSettingsText 字段的 BgpPeeringAddress 参数中可以获取 Peer 地址为 10.3.1.254。
 
         $vnet1gw.BgpSettingsText
@@ -86,29 +86,29 @@ VNET2 所对应的 VPN gateway AS 号为 `65011`，Peer 地址为 `10.5.1.254`�
           $assembly = $domain.DefineDynamicAssembly($name, 'Run') 
           $module = $assembly.DefineDynamicModule('PInvokeModule') 
           $type = $module.DefineType('PInvokeType', "Public,BeforeFieldInit") 
-    
+
           $inputParameters = @() 
-    
+
           for($counter = 1; $counter -le $parameterTypes.Length; $counter++) 
           { 
              $inputParameters += $parameters[$counter - 1] 
           } 
-    
+
           $method = $type.DefineMethod($methodName, 'Public,HideBySig,Static,PinvokeImpl',$returnType, $parameterTypes) 
-    
+
           ## Apply the P/Invoke constructor 
           $ctor = [Runtime.InteropServices.DllImportAttribute].GetConstructor([string]) 
           $attr = New-Object Reflection.Emit.CustomAttributeBuilder $ctor, $dllName 
           $method.SetCustomAttribute($attr) 
-    
+
           ## Create the temporary type, and invoke the method. 
           $realType = $type.CreateType() 
-    
+
           $ret = $realType.InvokeMember($methodName, 'Public,Static,InvokeMethod', $null, $null, $inputParameters) 
-    
+
           return $ret
         }
-    
+
         Function Set-PrivateProfileString( 
             $file, 
             $category, 
@@ -118,25 +118,25 @@ VNET2 所对应的 VPN gateway AS 号为 `65011`，Peer 地址为 `10.5.1.254`�
           ## Prepare the parameter types and parameter values for the Invoke-WindowsApi script 
           $parameterTypes = [string], [string], [string], [string] 
           $parameters = [string] $category, [string] $key, [string] $value, [string] $file 
-    
+
           ## Invoke the API 
           [void] (Invoke-WindowsApi "kernel32.dll" ([UInt32]) "WritePrivateProfileString" $parameterTypes $parameters)
         }
-    
+
         # Add and configure S2S VPN interface
         Add-VpnS2SInterface -Protocol IKEv2 -AuthenticationMethod PSKOnly -NumberOfTries 3 -ResponderAuthenticationMethod PSKOnly -Name 1.2.3.4 -Destination 1.2.3.4 -IPv4Subnet @() -SharedSecret AzureA1b2C3
-    
+
         Set-VpnServerIPsecConfiguration -EncryptionType MaximumEncryption
-    
+
         Set-VpnS2Sinterface -Name 1.2.3.4 -InitiateConfigPayload $false -Force
-    
+
         # Set S2S VPN connection to be persistent by editing the router.pbk file (required admin priveleges)
         Set-PrivateProfileString $env:windir\System32\ras\router.pbk "1.2.3.4" "IdleDisconnectSeconds" "0"
         Set-PrivateProfileString $env:windir\System32\ras\router.pbk "1.2.3.4" "RedialOnLinkFailure" "1"
-    
+
         # Restart the RRAS service
         Restart-Service RemoteAccess
-    
+
         # Dial-in to Azure gateway
         Connect-VpnS2SInterface -Name 1.2.3.4
 
@@ -158,13 +158,13 @@ VNET2 所对应的 VPN gateway AS 号为 `65011`，Peer 地址为 `10.5.1.254`�
     从下面的结果可以看到 BGP 是连接状态（connected）。
 
         PS C:\Users\Administrator> Get-BGPPeer
-        
+
         PeerName LocalIPAddress PeerIPAddress PeerASN OperationMode ConnectivityStatus
         -------- -------------- ------------- ------- ------------- ------------------
         AzureS2S 192.168.37.1   10.3.1.254    65010   Mixed         Connected         
 
 5. 查看本地获取的路由信息。
- 
+
     从下面的结果可以看到 VPN 设备一共收到了三条路由：  
     `10.3.0.0/16` 是 VNET1 的网络地址空间；  
     `10.5.0.0/16` 是 VNET2 的网络地址空间；  
@@ -184,26 +184,26 @@ VNET2 所对应的 VPN gateway AS 号为 `65011`，Peer 地址为 `10.5.1.254`�
     从本地的测试机发起的 PING 测试可以看到互通没有问题。
 
         C:\Windows\system32>ping 10.3.0.4
-        
+
         Pinging 10.3.0.4 with 32 bytes of data:
         Reply from 10.3.0.4: bytes=32 time=4ms TTL=126
         Reply from 10.3.0.4: bytes=32 time=4ms TTL=126
         Reply from 10.3.0.4: bytes=32 time=4ms TTL=126
         Reply from 10.3.0.4: bytes=32 time=6ms TTL=126
-        
+
         Ping statistics for 10.3.0.4:
             Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
         Approximate round trip times in milli-seconds:
         Minimum = 4ms, Maximum = 6ms, Average = 4ms
-        
+
         C:\Windows\system32>ping 10.5.0.4
-        
+
         Pinging 10.5.0.4 with 32 bytes of data:
         Reply from 10.5.0.4: bytes=32 time=6ms TTL=61
         Reply from 10.5.0.4: bytes=32 time=6ms TTL=61
         Reply from 10.5.0.4: bytes=32 time=10ms TTL=61
         Reply from 10.5.0.4: bytes=32 time=6ms TTL=61
-        
+
         Ping statistics for 10.5.0.4:
             Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
         Approximate round trip times in milli-seconds:

@@ -128,7 +128,7 @@ ms.author: ricksal
         static final int REQUEST_TAKE_PHOTO = 1;
         public Uri mPhotoFileUri = null;
         public File mPhotoFile = null;
-        
+
         public void takePicture(View view) {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             // Ensure that there's a camera activity to handle the intent
@@ -158,14 +158,14 @@ ms.author: ricksal
          */
         @com.google.gson.annotations.SerializedName("imageUri")
         private String mImageUri;
-    
+
         /**
          * Returns the item ImageUri
          */
         public String getImageUri() {
             return mImageUri;
         }
-    
+
         /**
          * Sets the item ImageUri
          *
@@ -175,20 +175,20 @@ ms.author: ricksal
         public final void setImageUri(String ImageUri) {
             mImageUri = ImageUri;
         }
-    
+
         /**
          * ContainerName - like a directory, holds blobs
          */
         @com.google.gson.annotations.SerializedName("containerName")
         private String mContainerName;
-    
+
         /**
          * Returns the item ContainerName
          */
         public String getContainerName() {
             return mContainerName;
         }
-    
+
         /**
          * Sets the item ContainerName
          *
@@ -198,20 +198,20 @@ ms.author: ricksal
         public final void setContainerName(String ContainerName) {
             mContainerName = ContainerName;
         }
-    
+
         /**
          *  ResourceName
          */
         @com.google.gson.annotations.SerializedName("resourceName")
         private String mResourceName;
-    
+
         /**
          * Returns the item ResourceName
          */
         public String getResourceName() {
             return mResourceName;
         }
-    
+
         /**
          * Sets the item ResourceName
          *
@@ -221,20 +221,20 @@ ms.author: ricksal
         public final void setResourceName(String ResourceName) {
             mResourceName = ResourceName;
         }
-    
+
         /**
          *  SasQueryString - permission to write to storage
          */
         @com.google.gson.annotations.SerializedName("sasQueryString")
         private String mSasQueryString;
-    
+
         /**
          * Returns the item SasQueryString
          */
         public String getSasQueryString() {
             return mSasQueryString;
         }
-    
+
         /**
          * Sets the item SasQueryString
          *
@@ -293,19 +293,19 @@ ms.author: ricksal
             if (mClient == null) {
                 return;
             }
-    
+
             // Create a new item
             final ToDoItem item = new ToDoItem();
-    
+
             item.setText(mTextNewToDo.getText().toString());
             item.setComplete(false);
             item.setContainerName("todoitemimages");
-    
+
             // Use a unigue GUID to avoid collisions.
             UUID uuid = UUID.randomUUID();
             String uuidInString = uuid.toString();
             item.setResourceName(uuidInString);
-    
+
             // Send the item to be inserted. When blob properties are set this
             // generates an SAS in the response.
             AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
@@ -313,23 +313,23 @@ ms.author: ricksal
                 protected Void doInBackground(Void... params) {
                     try {
                             final ToDoItem entity = addItemInTable(item);
-        
+
                             // If we have a returned SAS, then upload the blob.
                             if (entity.getSasQueryString() != null) {
-        
+
                            // Get the URI generated that contains the SAS
                             // and extract the storage credentials.
                             StorageCredentials cred = 
                                 new StorageCredentialsSharedAccessSignature(entity.getSasQueryString());
                             URI imageUri = new URI(entity.getImageUri());
-    
+
                             // Upload the new image as a BLOB from a stream.
                             CloudBlockBlob blobFromSASCredential =
                                     new CloudBlockBlob(imageUri, cred);
-    
+
                             blobFromSASCredential.uploadFromFile(mPhotoFileUri.getPath());
                           }
-    
+
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -344,12 +344,12 @@ ms.author: ricksal
                     return null;
                 }
             };
-    
+
             runAsyncTask(task);
-    
+
             mTextNewToDo.setText("");
         }
-    
+
 这段代码可向移动服务发送插入新 TodoItem 的请求。响应包含 SAS，然后可将其用于将图像从本地存储上载到 Azure 存储空间中的 Blob。
 
 ## 测试上载图像 
@@ -373,13 +373,13 @@ ms.author: ricksal
 现在，你已能够通过将移动服务与 Blob 服务集成安全地上载图片，请查看一些其他的后端服务和集成主题：
 
 + [使用 SendGrid 从移动服务发送电子邮件]
- 
+
     了解如何使用 SendGrid 电子邮件服务为你的移动服务添加电子邮件功能。本主题演示如何添加服务器端脚本，以使用 SendGrid 发送电子邮件。
 
 + [移动服务服务器脚本参考]
 
     参考使用服务器脚本执行服务器端任务，并与其他 Azure 组件和外部资源集成的主题。
-  
+
 <!-- Anchors. -->
 [Install the Storage Client library]: #install-storage-client
 [Update the client app to capture images]: #add-select-images
@@ -402,5 +402,5 @@ ms.author: ricksal
 [Azure Storage Client library for Store apps]: http://go.microsoft.com/fwlink/p/?LinkId=276866
 
 [App settings]: http://msdn.microsoft.com/zh-cn/library/windowsazure/b6bb7d2d-35ae-47eb-a03f-6ee393e170f7
- 
+
 <!---HONumber=Mooncake_0118_2016-->

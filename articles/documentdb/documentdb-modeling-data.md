@@ -53,7 +53,7 @@ ms.author: kipandya
 更新一个人的联系人详细信息和地址信息需要跨多个表执行写入操作。
 
 现在让我们来看看如何将相同的数据作为文档数据库中的独立实体进行建模。
-        
+
     {
         "id": "1",
         "firstName": "Thomas",
@@ -121,7 +121,7 @@ ms.author: kipandya
 随着文档大小的不断增长，通过网络传输数据和大规模读取和更新文档的能力将受到影响。
 
 在此情况下，考虑以下模型会更好。
-        
+
     Post document:
     {
         "id": "1",
@@ -197,7 +197,7 @@ ms.author: kipandya
             { "numberHeld":  50, "stockId": 2}
         ]
     }
-    
+
     Stock documents:
     {
         "id": "1",
@@ -219,7 +219,7 @@ ms.author: kipandya
         "mkt-cap": 1005000,
         "pe": 75.82
     }
-    
+
 但是当前这种方法的缺点是当显示一个人的投资组合时，如果应用程序需要显示所持有的每个股票的信息，则你需要多次访问数据库以加载每个股票文档的信息。这里我们决定提高一天当中频繁发生的写操作的效率，但是这反过来会影响读取操作，读取操作对此特定系统的性能的潜在影响较小。
 
 > [!NOTE] 规范化的数据模型**可能需要更多的往返访问服务器**。
@@ -267,7 +267,7 @@ ms.author: kipandya
         "id": "mspress",
         "name": "Microsoft Press"
     }
-    
+
     Book documents: 
     {"id": "1","name": "DocumentDB 101", "pub-id": "mspress"}
     {"id": "2","name": "DocumentDB for RDBMS Users", "pub-id": "mspress"}
@@ -289,14 +289,14 @@ ms.author: kipandya
     Author documents: 
     {"id": "a1", "name": "Thomas Andersen" }
     {"id": "a2", "name": "William Wakefield" }
-    
+
     Book documents:
     {"id": "b1", "name": "DocumentDB 101" }
     {"id": "b2", "name": "DocumentDB for RDBMS Users" }
     {"id": "b3", "name": "Taking over the world one JSON doc at a time" }
     {"id": "b4", "name": "Learn about Azure DocumentDB" }
     {"id": "b5", "name": "Deep Dive in to DocumentDB" }
-    
+
     Joining documents: 
     {"authorId": "a1", "bookId": "b1" }
     {"authorId": "a2", "bookId": "b1" }
@@ -310,7 +310,7 @@ ms.author: kipandya
     Author documents:
     {"id": "a1", "name": "Thomas Andersen", "books": ["b1, "b2", "b3"]}
     {"id": "a2", "name": "William Wakefield", "books": ["b1", "b4"]}
-    
+
     Book documents: 
     {"id": "b1", "name": "DocumentDB 101", "authors": ["a1", "a2"]}
     {"id": "b2", "name": "DocumentDB for RDBMS Users", "authors": ["a1"]}
@@ -351,7 +351,7 @@ ms.author: kipandya
             {"thumbnail": "http://....png"}
         ]
     }
-    
+
     Book documents:
     {
         "id": "b1",
@@ -385,12 +385,12 @@ ms.author: kipandya
 
 就像有多种方法可在屏幕上表示一个数据片段一样，数据的建模方法也不会只有一种。你需要了解你的应用程序以及它如何生成、使用和处理数据。然后，通过应用此处提供的一些准则，你可以开始创建可满足你的应用程序当前需求的模型。当你的应用程序需要进行更改时，你可以利用无架构数据库的灵活性欣然接受更改，并轻松改进你的数据模型。
 
-若要了解有关 Azure DocumentDB 的详细信息，请参阅该服务的[文档](./index.md/)页。
+若要了解有关 Azure DocumentDB 的详细信息，请参阅该服务的[文档](./index.md)页。
 
 若要了解有关在 Azure DocumentDB 中优化索引的信息，请参阅[索引策略](./documentdb-indexing-policies.md)中的文章。
 
 若要了解如何在多个分区之间对数据进行分片，请参阅[在 DocumentDB 中对数据进行分区](./documentdb-partition-data.md)。
 
 最后，有关多租户应用程序的数据建模和分片指导，请查阅[使用 Azure DocumentDB 扩展多租户应用程序](http://blogs.msdn.com/b/documentdb/archive/2014/12/03/scaling-a-multi-tenant-application-with-azure-documentdb.aspx)。
- 
+
 <!---HONumber=Mooncake_0912_2016-->

@@ -369,7 +369,7 @@ Azure 提供了优异的平台检测，以满足所有业务关键型应用程�
 * [Azure PowerShell][azure-ps] 中特定于 SAP 的 PowerShell cmdlet
 * [Azure CLI][azure-cli] 中特定于 SAP 的 Azure CLI
 * [Azure 门户预览][azure-portal]
- 
+
 以下指南也包含了有关 Azure 上的 SAP 的主题：
 
 * [Windows 虚拟机 (VM) 上的 SAP NetWeaver - 规划和实施指南][planning-guide]
@@ -498,7 +498,7 @@ Azure 可让用户从 Azure 应用商店部署 VM 实例，该库提供 Windows 
 ### <a name="54a1fc6d-24fd-4feb-9c57-ac588a55dff2"></a>方案 2：使用自定义映像为 SAP 部署 VM
 如 [Planning and Implementation Guide][planning-guide]（规划和实施指南）中的详细步骤所述，可通过一种方法来准备和创建自定义映像，然后使用它来创建多个新的 VM。
 流程图中的步骤顺序如下：
- 
+
 ![使用专用应用商店中的 VM 映像为 SAP 系统部署 VM 的流程图][deployment-guide-figure-300]  
 
 根据该流程图，需要执行以下步骤：
@@ -569,7 +569,7 @@ ___
 ___
 
 不同步骤的工作流如下：
- 
+
 ![使用 VM 磁盘为 SAP 系统部署 VM 的流程图][deployment-guide-figure-400]
 
 假设已在 Azure 中上载并定义磁盘（请参阅 [Planning and Implementation Guide][planning-guide]（规划和实施指南）），请遵循以下步骤
@@ -651,7 +651,7 @@ ___
 * 此时将弹出 Microsoft 下载管理器，其中包含一个以 .exe 结尾的行项。选择“运行”选项。
 * 此时将出现一个弹出窗口，询问你是否要运行 Microsoft Web 平台安装程序。按“是”
 * 此时将出现如下所示的屏幕：
- 
+
 ![Azure PowerShell cmdlet 安装屏幕][deployment-guide-figure-500] 
 <a name="figure-5"></a>
 
@@ -672,7 +672,7 @@ ___
 如果台式机/便携式计算机上安装的 Azure cmdlet 版本是最新版本，启动 Microsoft Web 平台安装程序后出现的第一个屏幕将与[此图][deployment-guide-figure-5]中所示的屏幕略有不同。
 
 请注意[下图][deployment-guide-figure-7]中的红圈。
- 
+
 ![表示已安装最新 Azure PS cmdlet 版本的 Azure PowerShell cmdlet 安装屏幕][deployment-guide-figure-700] 
 <a name="figure-7"></a>
 
@@ -729,12 +729,12 @@ ___
 #### Windows
 这些设置对于用于访问 Internet 的 LocalSystem 帐户也必须有效。如果代理设置不是通过组策略设置的，可以遵循以下步骤为 LocalSystem 帐户配置这些设置。
 
-1.	打开 gpedit.msc
-1.	导航到“计算机配置”–>“管理模板”->“Windows 组件”->“Internet Explorer”，然后启用“按计算机(而不是按用户)进行代理设置”
-1.	打开“控制台”，然后导航到“网络和 Internet”->“Internet 选项”
-1.	打开“连接”选项卡，然后单击“局域网设置”
-1.	禁用“自动检测设置”
-1.	启用“为 LAN 使用代理服务器”，然后输入代理主机和端口
+1. 打开 gpedit.msc
+1. 导航到“计算机配置”–>“管理模板”->“Windows 组件”->“Internet Explorer”，然后启用“按计算机(而不是按用户)进行代理设置”
+1. 打开“控制台”，然后导航到“网络和 Internet”->“Internet 选项”
+1. 打开“连接”选项卡，然后单击“局域网设置”
+1. 禁用“自动检测设置”
+1. 启用“为 LAN 使用代理服务器”，然后输入代理主机和端口
 
 #### Linux
 在 Azure 来宾代理的配置文件（位于 /etc/waagent.conf 中）中配置正确的代理。必须设置以下参数：
@@ -772,12 +772,12 @@ ___
     $env = Get-AzureRmEnvironment -Name <name of the environment>
     Login-AzureRmAccount -Environment $env
     Set-AzureRmContext -SubscriptionName <subscription name>
-    
+
     Set-AzureRmVMAEMExtension -ResourceGroupName <resource group name> -VMName <virtual machine name>
 
 在你提供帐户数据和 Azure 虚拟机名称后，该脚本将部署所需的扩展，并启用所需的功能。这可能需要几分钟。
 有关 Set-AzureRmVMAEMExtension 的详细信息，请阅读[此 MSDN 文章][msdn-set-azurermvmaemextension]。
-  
+
 ![成功执行特定于 SAP 的 Azure cmdlet Set-AzureRmVMAEMExtension 时的结果屏幕][deployment-guide-figure-900]
 
 成功运行 Set-AzureRmVMAEMExtension 后，将执行所有必要的步骤来为 SAP 配置主机监视功能。
@@ -833,7 +833,7 @@ ___
 C:\\Packages\\Plugins\\Microsoft.AzureCAT.AzureEnhancedMonitoring.AzureCATExtensionHandler\`<version`>\\drop
 
 监视扩展路径中提供的版本部分根据具体的情况而有所不同。如果在安装文件夹中看到了监视扩展版本的多个文件夹，请检查 Windows 服务“AzureEnhancedMonitoring”的配置，并切换到“可执行文件的路径”指示的文件夹。
- 
+
 ![运行适用于 SAP 的 Azure 增强型监视扩展的服务的属性][deployment-guide-figure-1000]
 
 * 在命令窗口中不使用任何参数执行 azperflib.exe。
@@ -844,7 +844,7 @@ C:\\Packages\\Plugins\\Microsoft.AzureCAT.AzureEnhancedMonitoring.AzureCATExtens
 
 ##### 检查 azperflib.exe 的输出
 azperflib.exe 的输出显示 SAP 的所有已填充 Azure 性能计数器。在收集的计数器的列表底部，可以看到一份摘要，以及指示 Azure 监视状态的运行状况指示器。
- 
+
 ![通过执行 azperflib.exe 完成的运行状况检查的输出指示不存在问题][deployment-guide-figure-1100] 
 <a name="figure-11"></a>
 
@@ -911,7 +911,7 @@ azperflib.exe 的输出显示 SAP 的所有已填充 Azure 性能计数器。在
 ![特定于 SAP 的 Azure cmdlet Test-VMConfigForSAP\_GUI 的输入屏幕][deployment-guide-figure-1200]
 
 在你输入有关帐户的信息和 Azure 虚拟机后，该脚本将测试所选虚拟机的配置。
- 
+
 ![成功测试适用于 SAP 的 Azure 监视基础结构时的输出][deployment-guide-figure-1300]  
 
 确保每项检查都标记为 OK。如果某些检查的结果不为 ok，请根据本文档的[配置适用于 SAP 的 Azure 增强型监视扩展][deployment-guide-4.5]一章中所述执行 update cmdlet。再次等待 15 分钟，然后重新执行[适用于 SAP 的 Azure 增强型监视的就绪状态检查][deployment-guide-5.1]和 [Azure 监视基础结构配置的运行状况检查][deployment-guide-5.2]章节中所述的检查。如果检查仍然指出部分或所有计数器存在问题，请转到[对适用于 SAP 的 Azure 监视基础结构进一步执行故障排除][deployment-guide-5.3]一章。
@@ -934,7 +934,7 @@ Azure 上的性能度量值的收集是由 Windows 服务“AzureEnhancedMonitor
 ###### 问题
 Windows 服务“AzureEnhancedMonitoring”不存在。 
 Azperflib.exe：azperlib.exe 输出中显示了[下图][deployment-guide-figure-14]中所示的错误。
- 
+
 ![azperflib.exe 的执行结果指出适用于 SAP 的 Azure 增强型监视扩展的服务未运行][deployment-guide-figure-1400]  
 
 ###### <a name="figure-14"></a>解决方案

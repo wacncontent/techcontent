@@ -6,11 +6,11 @@
         - (void) loginAndGetData
         {
             MSClient *client = self.todoService.client;
-            
+
             if (client.currentUser != nil) {
                 return;
             }
-            
+
             [client loginWithProvider:@"facebook" controller:self animated:YES completion:^(MSUser *user, NSError *error) {
                 [self refresh];
             }];

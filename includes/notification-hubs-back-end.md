@@ -13,7 +13,7 @@
 2. 在 Visual Studio 主菜单中，依次单击“工具”、“库程序包管理器”和“程序包管理器控制台”，然后在控制台窗口中键入以下命令并按 **Enter**：
 
         Install-Package Microsoft.Azure.NotificationHubs
-     
+
     这将使用 <a href="http://www.nuget.org/packages/Microsoft.Azure.NotificationHubs/">Microsoft.Azure.Notification Hubs NuGet 包</a>添加对 Azure 通知中心 SDK 的引用。
 
 3. 打开文件 Program.cs 并添加以下 `using` 语句：
@@ -28,11 +28,11 @@
             NotificationHubClient hub = 
                 NotificationHubClient.CreateClientFromConnectionString(
                     "<connection string with full access>", "<hub name>");
-        
+
             // Create an array of breaking news categories.
             var categories = new string[] { "World", "Politics", "Business", 
                 "Technology", "Science", "Sports"};
-        
+
             foreach (var category in categories)
             {
                 try
@@ -70,7 +70,7 @@
          }
 
     此代码将针对字符串数组中的所有 6 个标记将通知发送到 Windows 应用商店、Windows Phone 和 iOS 设备。使用标记是为了确保设备仅接收注册类别的通知。
-    
+
     > [!NOTE] 此后端代码支持 Windows 应用商店、Windows Phone、iOS 和 Android 客户端。发送方法将在尚未为特定客户端平台配置通知中心时返回错误响应。
 
 6. 在上面的代码中，将 `<hub name>` 和 `<connection string with full access>` 占位符替换为你的通知中心的名称和你之前获取的 *DefaultFullSharedAccessSignature* 的连接字符串。

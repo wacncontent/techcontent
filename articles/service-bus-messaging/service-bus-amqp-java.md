@@ -88,7 +88,7 @@ amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn
 | `[username]` | 从 [Azure 经典管理门户][]获取的服务总线 SAS 密钥名称。 | | | | |
 | `[password]` | 从 [Azure 经典管理门户][]获取的 URL 编码形式的服务总线 SAS 密钥。 | | | | |
 
-> [!NOTE]必须手动为密码进行 URL 编码。在 [http://www.w3schools.com/tags/ref\_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp) 上提供了一个有用的 URL 编码实用工具。
+> [!NOTE]必须手动为密码进行 URL 编码。在 [http://www.w3schools.com/tags/ref_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp) 上提供了一个有用的 URL 编码实用工具。
 
 例如，如果从门户获得的信息如下所示：
 
@@ -138,9 +138,9 @@ topic.[jndi_name] = [physical_name]
     env.put(Context.INITIAL_CONTEXT_FACTORY, 
             "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
     env.put(Context.PROVIDER_URL, "servicebus.properties"); 
-     
+
     InitialContext context = new InitialContext(env); 
-     
+
     ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCONNECTIONFACTORY");
     Topic topic = (Topic) context.lookup("TOPIC");
     Connection connection = cf.createConnection();
@@ -157,9 +157,9 @@ topic.[jndi_name] = [physical_name]
     env.put(Context.INITIAL_CONTEXT_FACTORY, 
             "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
     env.put(Context.PROVIDER_URL, "servicebus.properties"); 
-     
+
     InitialContext context = new InitialContext(env);
-    
+
     ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCONNECTIONFACTORY");
     Topic topic = (Topic) context.lookup("TOPIC");
     Connection connection = cf.createConnection();
@@ -194,10 +194,10 @@ JMS 定义了五种不同的消息类型：**BytesMessage**、**MapMessage**、*
 
     Stream stream = message.GetBody<Stream>();
     int streamLength = (int)stream.Length;
-    
+
     byte[] byteArray = new byte[streamLength];
     stream.Read(byteArray, 0, streamLength);
-    
+
     Console.WriteLine("Length = " + streamLength);
     for (int i = 0; i < stream.Length; i++)
     {
@@ -209,7 +209,7 @@ JMS 定义了五种不同的消息类型：**BytesMessage**、**MapMessage**、*
 以下代码演示如何通过服务总线 .NET API 使用 **MapMessage** 对象的正文。此代码循环访问映射的元素，并显示每个元素的名称和值。
 
     Dictionary<String, Object> dictionary = message.GetBody<Dictionary<String, Object>>();
-    
+
     foreach (String mapItemName in dictionary.Keys)
     {
       Object mapItemValue = null;
@@ -224,7 +224,7 @@ JMS 定义了五种不同的消息类型：**BytesMessage**、**MapMessage**、*
 以下代码演示如何通过服务总线 .NET API 使用 **StreamMessage** 对象的正文。此代码将列出流中的每一项及其类型。
 
     List<Object> list = message.GetBody<List<Object>>();
-    
+
     foreach (Object item in list)
     {
       Console.WriteLine(item + " (" + item.GetType() + ")");

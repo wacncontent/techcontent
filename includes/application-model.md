@@ -564,7 +564,7 @@ article.<a id="Ref" name="Ref"></a>
   [Data Storage Offerings in Azure]: /develop/net/how-to-guides/blob-storage-v17/
   [3]: ./media/application-model/application-model-6.jpg
   [4]: ./media/application-model/application-model-7.jpg
-  
+
   [Azure Pricing]: https://www.azure.cn/pricing/overview/
   [http://msdn.microsoft.com/zh-cn/library/azure/ee758710.aspx]: http://msdn.microsoft.com/zh-cn/library/azure/ee758710.aspx
   [http://msdn.microsoft.com/zh-cn/library/hh560567.aspx]: http://msdn.microsoft.com/zh-cn/library/hh560567.aspx

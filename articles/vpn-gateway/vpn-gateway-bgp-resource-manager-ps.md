@@ -57,7 +57,7 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 ### 开始之前
 
 - 确保你拥有 Azure 订阅。如果你还没有 Azure 订阅，你可以注册一个[试用版](https://www.azure.cn/pricing/1rmb-trial)。
-    
+
 - 你需要安装 Azure 资源管理器 PowerShell cmdlet。有关安装 PowerShell cmdlet 的详细信息，请参阅 [How to install and configure Azure PowerShell（如何安装和配置 Azure PowerShell）](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
 ### 步骤 1 - 创建并配置 VNet1 
@@ -113,7 +113,7 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 请求一个公共 IP 地址，以分配给要为 VNet 创建的网关。你还将定义所需的子网和 IP 配置。
 
     $gwpip1    = New-AzureRmPublicIpAddress -Name $GWIPName1 -ResourceGroupName $RG1 -Location $Location1 -AllocationMethod Dynamic
-    
+
     $vnet1     = Get-AzureRmVirtualNetwork -Name $VNetName1 -ResourceGroupName $RG1
     $subnet1   = Get-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -VirtualNetwork $vnet1
     $gwipconf1 = New-AzureRmVirtualNetworkGatewayIpConfig -Name $GWIPconfName1 -Subnet $subnet1 -PublicIpAddress $gwpip1
@@ -171,7 +171,7 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 - 你需要为本地网关声明的最小前缀是 VPN 设备上的 BGP 对等节点 IP 地址中的主机地址。在此示例中，它是“10.52.255.254/32”中的 /32 前缀。
 
 - 提醒一下，在本地网络与 Azure VNet 之间必须使用不同的 BGP ASN。如果它们是相同的，则需要更改 VNet ASN（如果本地 VPN 设备已使用该 ASN 与其他 BGP 邻居对等）。
-    
+
 继续操作之前，请确保仍与订阅 1 保持连接。
 
 #### 2\.为 Site5 创建本地网关
@@ -206,7 +206,7 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
     - eBGP Multihop        : Ensure the "multihop" option for eBGP is enabled on your device if needed
 
 连接应在几分钟后建立，BGP 对等会话将在建立 IPsec 连接后启动。
- 
+
 ## <a name ="v2vbgp"></a>第 3 部分 - 使用 BGP 建立 VNet 到 VNet 连接
 
 此部分将添加使用 BGP 的 VNet 到 VNet 连接，如下图中所示。
@@ -247,7 +247,7 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 #### 2\.在新资源组中创建 TestVNet2
 
     New-AzureRmResourceGroup -Name $RG2 -Location $Location2
-    
+
     $fesub2 = New-AzureRmVirtualNetworkSubnetConfig -Name $FESubName2 -AddressPrefix $FESubPrefix2
     $besub2 = New-AzureRmVirtualNetworkSubnetConfig -Name $BESubName2 -AddressPrefix $BESubPrefix2
     $gwsub2 = New-AzureRmVirtualNetworkSubnetConfig -Name $GWSubName2 -AddressPrefix $GWSubPrefix2
@@ -278,7 +278,7 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 
     $vnet1gw = Get-AzureRmVirtualNetworkGateway -Name $GWName1 -ResourceGroupName $RG1
     $vnet2gw = Get-AzureRmVirtualNetworkGateway -Name $GWName2 -ResourceGroupName $RG2
-    
+
 #### 2\.创建两个连接
 
 在此步骤中，你将创建从 TestVNet1 到 TestVNet2 的连接，以及从 TestVNet2 到 TestVNet1 的连接。

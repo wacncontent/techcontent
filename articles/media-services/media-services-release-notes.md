@@ -71,16 +71,16 @@ Azure 媒体服务引入了 Azure 媒体分析，可提供功能强大的视频�
 ### Apple FairPlay（预览版）
 
 Azure 媒体服务现允许通过 Apple FairPlay 动态加密 HTTP Live Streaming (HLS) 内容。也可使用 AMS 许可证传递服务将 FairPlay 许可证传递到客户端。如需更多详细信息，请参阅[使用 Azure 媒体服务流式传输受 Apple FairPlay 保护的 HLS 内容](./media-services-protect-hls-with-fairplay.md)。
-  
+
 ##<a id="feb_changes16"></a>2016 年 2 月版本
 
 适用于 .NET 的 Azure 媒体服务 SDK 最新版本 (3.5.3) 包含 Widevine 相关 Bug 修复。该问题是：无法对 Widevine 加密的多个资产重复使用 AssetDeliveryPolicy。为修复此 Bug，向 SDK 添加了以下属性：**WidevineBaseLicenseAcquisitionUrl**。
-    
+
     Dictionary<AssetDeliveryPolicyConfigurationKey, string> assetDeliveryPolicyConfiguration =
         new Dictionary<AssetDeliveryPolicyConfigurationKey, string>
     {
         {AssetDeliveryPolicyConfigurationKey.WidevineBaseLicenseAcquisitionUrl,"http://testurl"},
-        
+
     };
 
 ##<a id="jan_changes_16"></a>2016 年 1 月版本
@@ -109,7 +109,7 @@ Azure SDK 团队已发布新版 [Azure SDK for PHP](http://github.com/Azure/azur
 
 ##<a id="oct_changes_15"></a>2015 年 10 月版本
 
-Azure 媒体服务 (AMS) 现已在以下数据中心推出：巴西南部、印度西部、印度南部和印度中部。现可使用 Azure 经典管理门户[创建媒体服务帐户](./media-services-create-account.md#create-a-media-services-account-using-quick-create)，并执行[此处](./index.md/)所述的各项任务。不过，这些数据中心未启用实时编码。此外，这些数据中心并非提供所有类型的编码保留单元。
+Azure 媒体服务 (AMS) 现已在以下数据中心推出：巴西南部、印度西部、印度南部和印度中部。现可使用 Azure 经典管理门户[创建媒体服务帐户](./media-services-create-account.md#create-a-media-services-account-using-quick-create)，并执行[此处](./index.md)所述的各项任务。不过，这些数据中心未启用实时编码。此外，这些数据中心并非提供所有类型的编码保留单元。
 
 ##<a id="september_changes_15"></a>2015 年 9 月版本 
 
@@ -129,7 +129,7 @@ Azure 媒体服务 (AMS) 现已在以下数据中心推出：巴西南部、印�
     有关详细信息，请参阅[此博客](http://azure.microsoft.com/blog/azure-media-services-release-dynamic-manifest-composition-remove-hls-audio-only-track-and-hls-i-frame-track-support)。
 
 - AMS 现在支持 HLS v4 格式的 I-Frame。I-Frame 支持优化快进和倒带操作。默认情况下，所有 HLS v4 输出包括 I-Frame 播放列表 (EXT-X-I-FRAME-STREAM-INF)。
- 
+
     有关详细信息，请参阅[此博客](http://azure.microsoft.com/blog/azure-media-services-release-dynamic-manifest-composition-remove-hls-audio-only-track-and-hls-i-frame-track-support)。
 
 ##<a id="august_changes_15"></a>2015 年 8 月版本
@@ -187,14 +187,14 @@ Azure 媒体服务 .NET SDK 当前版本为 3.3.0.0。此版本中增加了以�
 - Azure 媒体索引器更新
     - 支持西班牙语
     - 新增配置 XML 格式
-    
+
     有关详细信息，请参阅[此博客](https://azure.microsoft.com/blog/2015/04/13/azure-media-indexer-spanish-v1-2/)。
 ###媒体服务 .NET SDK 更新
 
 Azure 媒体服务 .NET SDK 当前版本为 3.2.0.0。
 
 以下是一些面向客户的更新：
- 
+
 - **重大更改**：**TokenRestrictionTemplate.Issuer** 和 **TokenRestrictionTemplate.Audience** 更改为了字符串类型。
 - 与创建自定义重试策略相关的更新。
 - 与上传/下载文件相关的 Bug 修复。
@@ -205,7 +205,7 @@ Azure 媒体服务 .NET SDK 当前版本为 3.2.0.0。
 ### 媒体服务一般更新
 
 - 媒体服务现在提供 Azure CDN 集成。为了支持集成，将 **CdnEnabled** 属性添加到了 **StreamingEndpoint**。**CdnEnabled** 可用于从版本 2.9 开始的 REST API（有关详细信息，请参阅 [StreamingEndpoint](https://docs.microsoft.com/zh-cn/rest/api/media/operations/streamingendpoint)）。**CdnEnabled** 可用于从版本 3.1.0.2 开始的 NET SDK（有关详细信息，请参阅 [StreamingEndpoint]）https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.istreamingendpoint(v=azure.10).aspx))。
- 
+
 ##<a id="february_changes_15"></a>2015 年 2 月版本
 
 ### 媒体服务一般更新
@@ -236,7 +236,7 @@ Azure 媒体服务 .NET SDK 当前版本为 3.1.0.1。
 - 改进了查询授权策略选项的性能。
 - 在中国数据中心，现按客户提供[密钥传递 URL](https://docs.microsoft.com/zh-cn/rest/api/media/operations/contentkey#a-namegetdeliveryserviceurla-get-key-delivery-url)（与其他数据中心相同）。
 - 增加了 HLS 自动目标持续时间。进行实时流式传输时，HLS 始终是动态打包的。默认情况下，媒体服务根据从实时编码器收到的关键帧间隔 (KeyFrameInterval)（也称图片组 - GOP）自动计算 HLS 段打包率 (FragmentsPerSegment)。有关详细信息，请参阅[使用 Azure 媒体服务实时传送视频流]。
- 
+
 ###媒体服务 .NET SDK 更新
 
 - [Azure 媒体服务 .NET SDK](http://www.nuget.org/packages/windowsazure.mediaservices/) 当前版本为 3.1.0.0。
@@ -251,7 +251,7 @@ Azure 媒体服务 .NET SDK 当前版本为 3.1.0.1。
 - 注意，当前无法通过 SSL 连接引入 RTMP 实时流。
 - 也可通过 SSL 连接流式传输内容。为此，请确保流式处理 URL 以 HTTPS 开头。
 - 请注意，仅当要从中传递内容的流式处理终结点是在 2014 年 9 月 10 日以后创建的，才可通过 SSL 进行流式处理。如果流式处理 URL 基于 9 月 10 日之后创建的流式处理终结点，则 URL 会包含“streaming.mediaservices.chinacloudapi.cn”（新格式）。包含“origin.mediaservices.chinacloudapi.cn”（旧格式）的流式处理 URL 不支持 SSL。如果你的 URL 采用旧格式，而你希望能够通过 SSL 进行流式处理，请[创建新的流式处理终结点](./media-services-manage-origins.md)。使用基于新流式处理终结点创建的 URL，通过 SSL 流式处理内容。
-   
+
 ##<a id="october_changes_14"></a>2014 年 10 月版本
 
 ### <a id="new_encoder_release"></a>媒体服务编码器版本
@@ -271,7 +271,7 @@ Azure 媒体服务 .NET SDK 当前版本为 3.1.0.1。
 - 增加了 Nuget 还原生成步骤。
 - 修复了方案测试以使用存储库中的 x509 证书。
 - 在更新频道和流式处理端时验证设置。
- 
+
 ### 用于承载媒体服务示例的新增 GitHub 存储库
 
 示例位于 [Azure 媒体服务示例 GitHub 存储库](https://github.com/Azure/Azure-Media-Services-Samples)中。
@@ -281,7 +281,7 @@ Azure 媒体服务 .NET SDK 当前版本为 3.1.0.1。
 媒体服务 REST 元数据当前版本为 2.7。有关最新 REST 更新的详细信息，请参阅 [Azure 媒体服务 REST API 参考]。
 
 适用于 .NET 的媒体服务 SDK 当前版本为 3.0.0.7。
- 
+
 ### <a id="sept_14_breaking_changes"></a>重大更改
 
 * **Origin** 已重命名为 [StreamingEndpoint]。
@@ -302,13 +302,13 @@ Azure 媒体服务 .NET SDK 当前版本为 3.1.0.1。
 * 现可通过 [StreamingEndpoint] 实体添加自定义域（主机）名。
 
     要将自定义域名用作媒体服务流式处理终结点名称，需将自定义主机名添加到流式处理终结点。使用媒体服务 REST API 或 .NET SDK 添加自定义主机名。
-    
+
     请注意以下事项：
-    
+
     * 用户必须具有自定义域名的所有权。
-    
+
     * 必须通过 Azure 媒体服务验证域名所有权。若要验证域，请创建 CName，将 <MediaServicesAccountId>.<parent domain> 映射到 verifydns.<mediaservices-dns-zone>。
-    
+
     * 必须创建另一个 CName，将自定义主机名（例如 sports.contoso.com）映射到媒体服务流式处理终结点的主机名（例如 amstest.streaming.mediaservices.chinacloudapi.cn）。
 
     有关详细信息，请参阅 [StreamingEndpoint] 主题中的 **CustomHostNames** 属性。
@@ -358,7 +358,7 @@ Azure 媒体服务 .NET SDK 当前版本为 3.1.0.1。
 * 重试逻辑和暂时性异常处理方面的改进：
 
     * 改进了暂时性错误检测和重试逻辑，以处理由查询、保存更改、上传或下载文件引起的异常。
-    
+
     * 发生 Web 异常时（例如在请求 ACS 令牌期间），可以注意到严重错误现将更快失败。
 
 有关详细信息，请参阅[适用于 .NET 的媒体服务 SDK 中的重试逻辑]。
@@ -446,7 +446,7 @@ Azure 媒体服务 .NET SDK 扩展是一组扩展方法和帮助器函数，可�
 * 将多个存储帐户链接到一个媒体服务帐户的功能。 
 
     StorageAccount
-    
+
     Asset.StorageAccountName 和 Asset.StorageAccount
 
 * 更新 Job.Priority 的功能。
@@ -454,9 +454,9 @@ Azure 媒体服务 .NET SDK 扩展是一组扩展方法和帮助器函数，可�
 * 与实体和属性相关的通知：
 
     JobNotificationSubscription
-    
+
     NotificationEndPoint
-    
+
     作业
 
 * Asset.Uri
@@ -468,29 +468,29 @@ Azure 媒体服务 .NET SDK 扩展是一组扩展方法和帮助器函数，可�
 2013 年 6 月媒体服务 SDK 版本中包含以下更改。GitHub 上提供最新媒体服务 SDK。
 
 * 自 2.3.0.0 版起，媒体服务 SDK 支持将多个存储帐户链接到一个媒体服务帐户。以下 API 支持此功能：
-    
+
     IStorageAccount 类型。
-    
+
     Microsoft.WindowsAzure.MediaServices.Client.CloudMediaContext.StorageAccounts 属性。
-    
+
     StorageAccount 属性。
-    
+
     StorageAccountName 属性。
-    
+
     有关详细信息，请参阅[跨多个存储帐户管理媒体服务资产]。
 
 * 与 API 相关的通知。自 2.2.0.0 版起，可侦听 Azure 队列存储通知。有关详细信息，请参阅[处理媒体服务作业通知]。
-    
+
     Microsoft.WindowsAzure.MediaServices.Client.IJob.JobNotificationSubscriptions 属性。
-    
+
     Microsoft.WindowsAzure.MediaServices.Client.INotificationEndPoint 类型。
-    
+
     Microsoft.WindowsAzure.MediaServices.Client.IJobNotificationSubscription 类型。
-    
+
     Microsoft.WindowsAzure.MediaServices.Client.NotificationEndPointCollection 类型。
-    
+
     Microsoft.WindowsAzure.MediaServices.Client.NotificationEndPointType 类型。
-    
+
     Microsoft.WindowsAzure.MediaServices.Client.NotificationJobState 类型。
 
 * Azure 存储客户端 SDK 2.0 中的依赖项 (Microsoft.WindowsAzure.StorageClient.dll)。
@@ -534,9 +534,9 @@ Azure 媒体服务 .NET SDK 扩展是一组扩展方法和帮助器函数，可�
 本部分所述的变化是 2012 年 11 月（2.0.0.0 版）SDK 中包含的更新。这些更改可能要求对 2012 年 6 月预览版 SDK 的代码进行修改或重写。
 
 * 资产
-    
+
     IAsset.Create(assetName) 是唯一的资产创建函数。IAsset.Create 不再在方法调用中上传文件。使用 IAssetFile 上传。
-    
+
     IAsset.Publish 方法和 AssetState.Publish 枚举值已从媒体服务 SDK 中删除。必须重写依赖于此值的任何代码。
 
 * FileInfo
@@ -548,13 +548,13 @@ Azure 媒体服务 .NET SDK 扩展是一组扩展方法和帮助器函数，可�
     IAssetFile 取代了 FileInfo 并具有不同的行为。若要使用它，请先实例化 IAssetFiles 对象，然后使用媒体服务 SDK 或 Azure 存储 SDK 上传文件。可以使用以下 IAssetFile.Upload 重载：
 
     * IAssetFile.Upload(filePath)：阻止线程的同步方法，建议仅在上传单个文件时使用。
-    
+
     * IAssetFile.UploadAsync(filePath, blobTransferClient, locator, cancellationToken)：异步方法。这是首选上传机制。
 
     已知 Bug：使用 cancellationToken 确实将取消上传；但是，任务的取消状态可以是多个状态中的任何一个。必须正确捕获并处理异常。
 
 * 定位符
-    
+
     已删除原点特定的版本。SAS 特定的 context.Locators.CreateSasLocator(asset, accessPolicy) 将标记为已弃用或通过 GA 删除。请参阅“新增功能”下的“定位符”部分以了解更新行为。
 
 ##<a id="june_changes_12"></a>2012 年 6 月预览版
@@ -612,5 +612,5 @@ Azure 媒体服务 .NET SDK 扩展是一组扩展方法和帮助器函数，可�
 [GitHub]: https://github.com/Azure/azure-sdk-for-media-services
 [跨多个存储帐户管理媒体服务资产]: ./meda-services-managing-multiple-storage-accounts.md
 [处理媒体服务作业通知]: ./media-services-check-job-progress.md#check_progress_with_queues
- 
+
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

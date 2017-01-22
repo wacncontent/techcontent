@@ -70,11 +70,11 @@ PlayerRank 具有 Player 的外键。每个玩家各有零个或一个 PlayerRan
 在 Visual Studio 2013 中，ASP.NET Web 应用程序项目包含 Azure 移动服务的模板。请选择此模板，然后单击“确定”。
 
 ![][4]
- 
+
 项目模板包含示例控制器和数据对象。
 
 ![][5]
- 
+
 教程中并不需要这些项目，因此你可以将其从项目中删除。此外，请在 WebApiConfig.cs 和 LeaderboardContext.cs 中删除对 TodoItem 的引用。
 
 ## 添加数据模型
@@ -82,7 +82,7 @@ PlayerRank 具有 Player 的外键。每个玩家各有零个或一个 PlayerRan
 你将使用 [EF Code First](http://msdn.microsoft.com/zh-cn/data/ee712907#codefirst) 来定义数据库表。在 DataObjects 文件夹下，添加名为 `Player` 的类。
 
     using Microsoft.WindowsAzure.Mobile.Service;
-    
+
     namespace Leaderboard.DataObjects
     {
         public class Player : EntityData
@@ -95,14 +95,14 @@ PlayerRank 具有 Player 的外键。每个玩家各有零个或一个 PlayerRan
 
     using Microsoft.WindowsAzure.Mobile.Service;
     using System.ComponentModel.DataAnnotations.Schema;
-    
+
     namespace Leaderboard.DataObjects
     {
         public class PlayerRank : EntityData
         {
             public int Score { get; set; }
             public int Rank { get; set; }
-    
+
             [ForeignKey("Id")]
             public virtual Player Player { get; set; }
         }
@@ -123,20 +123,20 @@ PlayerRank 具有 Player 的外键。每个玩家各有零个或一个 PlayerRan
 在“添加基架”对话框中，展开左侧的“通用”，然后选择“Azure 移动服务”。接下来，选择“Azure 移动服务表控制器”。单击**“添加”**。
 
 ![][7] 
- 
+
 在“添加控制器”对话框中：
 
-1.	在“模型类”下，选择“Player”。 
-2.	在“数据上下文类”下，选择“MobileServiceContext”。
-3.	将控制器命名为“PlayerController”。
-4.	单击**“添加”**。
+1. 在“模型类”下，选择“Player”。 
+2. 在“数据上下文类”下，选择“MobileServiceContext”。
+3. 将控制器命名为“PlayerController”。
+4. 单击**“添加”**。
 
 此步骤将名为 PlayerController.cs 的文件添加到项目中。
 
 ![][8]
 
 该控制器派生自 **TableController<T>**。此类继承 **ApiController**，但它是专用于 Azure 移动服务的类。
- 
+
 - 路由：**TableController** 的默认路径为 `/tables/{table_name}/{id}`，其中，table\_name 与实体名称匹配。因此，Player 控制器的路由为 /tables/player/{id}。这种路由约定使得 **TableController** 与移动服务 [REST API](http://msdn.microsoft.com/zh-cn/library/azure/jj710104.aspx) 相一致。
 - 数据访问：对于数据库操作，**TableController** 类使用 **IDomainManager** 接口，该接口定义数据访问的抽象。基架使用 **EntityDomainManager**，这是包装 EF 上下文的 **IDomainManager** 的具体实现。 
 
@@ -165,7 +165,7 @@ PlayerRank 具有 Player 的外键。每个玩家各有零个或一个 PlayerRan
     Expires: 0
     Server: Microsoft-IIS/8.0
     Date: Mon, 21 Apr 2014 17:58:43 GMT
-    
+
     [{"id":"1","rank":1,"score":150},{"id":"2","rank":3,"score":100},{"id":"3","rank":1,"score":150}]
 
 请注意，`Player` 并未包含在对象图形中。若要包含玩家，可以通过定义数据传输对象 (DTO) 将对象图形平面化。
@@ -196,7 +196,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
             Rank = x.Rank
         });
     }
-    
+
     // GET tables/PlayerRank/48D68C86-6EA6-4C25-AA33-223FC9A27959
     public SingleResult<PlayerRankDto> GetPlayerRank(string id)
     {
@@ -207,7 +207,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
             Score = x.Score,
             Rank = x.Rank
         });
-    
+
         return SingleResult<PlayerRankDto>.Create(result);
     }
 
@@ -221,7 +221,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
     Expires: 0
     Server: Microsoft-IIS/8.0
     Date: Mon, 21 Apr 2014 19:57:08 GMT
-    
+
     [{"id":"1","playerName":"Alice","score":150,"rank":1},{"id":"2","playerName":"Bob","score":100,"rank":3},{"id":"3","playerName":"Charles","score":150,"rank":1}]
 
 请注意 JSON 负载现在包含玩家姓名。
@@ -307,9 +307,9 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 `PostPlayerScore` 方法采用 `PlayerScore` 实例作为输入。（客户端将在 HTTP POST 请求中发送 `PlayerScore`。） 该方法将执行以下操作：
 
-1.	如果数据库中尚无玩家的 `PlayerRank`，则新增一个。
-2.	更新玩家的分数。
-3.	运行 SQL 查询，以分批更新所有玩家排名。
+1. 如果数据库中尚无玩家的 `PlayerRank`，则新增一个。
+2. 更新玩家的分数。
+3. 运行 SQL 查询，以分批更新所有玩家排名。
 
 **[Route]** 属性为此方法定义一个自定义路由：
 
@@ -325,7 +325,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 将新的 Windows 应用商店应用程序项目添加到解决方案。我使用了空白应用程序 (Windows) 模板。
 
 ![][10]
- 
+
 使用 NuGet Package Manager 添加移动服务客户端库。在 Visual Studio 中，从“工具”菜单中选择“NuGet Package Manager”。然后选择“Package Manager Console”。在“Package Manager Console”窗口中键入以下命令。
 
     Install-Package WindowsAzure.MobileServices -Project LeaderboardApp
@@ -343,7 +343,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
             public string Id { get; set; }
             public string Name { get; set; }
         }
-    
+
         public class PlayerRank
         {
             public string Id { get; set; }
@@ -351,7 +351,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
             public int Score { get; set; }
             public int Rank { get; set; }
         }
-    
+
         public class PlayerScore
         {
             public string PlayerId { get; set; }
@@ -360,7 +360,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
     }
 
 这些类直接对应于移动服务中的数据实体。
- 
+
 ## 创建视图模型
 
 模型-视图-视图模型 (MVVM) 是模型-视图-控制器 (MVC) 的变体。MVVM 模式有助于将应用程序逻辑与表示形式区分开来。
@@ -378,13 +378,13 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
     using System.ComponentModel;
     using System.Net.Http;
     using System.Threading.Tasks;
-    
+
     namespace LeaderboardApp.ViewModel
     {
         class LeaderboardViewModel : INotifyPropertyChanged
         {
             MobileServiceClient _client;
-    
+
             public LeaderboardViewModel(MobileServiceClient client)
             {
                 _client = client;
@@ -539,7 +539,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
                 PlayerId = player.Id,
                 Score = score
             }; 
-            
+
             try
             {
                 await _client.InvokeApiAsync<PlayerScore, object>("score", playerScore);
@@ -590,7 +590,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
     // New code:
     using Microsoft.WindowsAzure.MobileServices;
-    
+
     namespace LeaderboardApp
     {
         sealed partial class App : Application
@@ -599,7 +599,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
             // TODO: Replace 'port' with the actual port number.
             const string serviceUrl = "http://localhost:port/";
             public static MobileServiceClient MobileService = new MobileServiceClient(serviceUrl);
-    
+
             // ...
         }
     }
@@ -658,13 +658,13 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 在此步骤中，你要将移动服务发布到 Azure，并修改应用程序以使用实时服务。
 
 在“解决方案资源管理器”中，右键单击 Leaderboard 项目并选择“发布”。
- 
+
 ![][12]
 
 在“发布”对话框中，单击“Azure 移动服务”。
 
 ![][13]
- 
+
 如果你尚未登录你的 Azure 帐户，请单击“登录”。
 
 ![][14]
@@ -672,7 +672,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 选择现有的移动服务，或单击“新建”以创建一个新的服务。然后单击“确定”以发布。
 
 ![][15]
- 
+
 发布过程会自动创建数据库。你不需要配置连接字符串。
 
 现在，你可以将排行榜应用程序连接到实时服务了。你需要以下两项：
@@ -683,7 +683,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 你可以从 Azure 经典管理门户获取这两项信息。在门户中单击“移动服务”，然后单击该移动服务。仪表板选项卡上列出了服务 URL。若要获取应用程序密钥，请单击“管理密钥”。
 
 ![][16]
- 
+
 在“管理访问密钥”对话框中，复制应用程序密钥值。
 
 ![][17]
@@ -747,7 +747,7 @@ DTO 是定义如何通过网络发送数据的对象。如果你希望有线格�
 
 <!-- URLs. -->
 
-[详细了解 Azure 移动服务]: ./index.md/
+[详细了解 Azure 移动服务]: ./index.md
 [详细了解 Web API]: http://asp.net/web-api
 [处理数据库写入冲突]: ./mobile-services-windows-store-dotnet-handle-database-conflicts.md
 [身份验证入门]: ./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users.md

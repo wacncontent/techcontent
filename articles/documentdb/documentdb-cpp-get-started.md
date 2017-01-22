@@ -61,16 +61,16 @@ ms.author: aasthan
 ## <a id="SetupC++"></a>步骤 2：设置 C++ 应用程序
 1. 打开 Visual Studio，在“文件”菜单中，单击“新建”，然后单击“项目”。
 2. 在“新建项目”窗口中，在“已安装”窗格中展开“Visual C++”，单击“Win32”，然后单击“Win32 控制台应用程序”。将项目命名为 hellodocumentdb，再单击“确定”。
-   
+
     ![“新建项目”向导的屏幕截图](./media/documentdb-cpp-get-started/hellodocumentdb.png)  
 
 3. Win32 应用程序向导启动后，单击“完成”。
 4. 创建项目后，右键单击“解决方案资源管理器”中的“hellodocumentdb”项目，并单击“管理 NuGet 包”以打开 NuGet 包管理器。
-   
+
     ![在项目菜单上显示“管理 NuGet 包”的屏幕截图](./media/documentdb-cpp-get-started/nuget.png)  
 
 5. 在“NuGet: hellodocumentdb”选项卡上，单击“浏览”，然后搜索 *documentdbcpp*。在结果中选择 DocumentDbCPP，如下面的屏幕截图所示。此程序包安装 C++ REST SDK 的引用，该 SDK 是DocumentDbCPP 的依赖项。
-   
+
     ![突出显示 DocumentDbCpp 包的屏幕截图](./media/documentdb-cpp-get-started/documentdbcpp.png)  
 
     将程序包添加到项目后，我们已准备好开始编写一些代码。
@@ -82,7 +82,7 @@ ms.author: aasthan
 
 ## <a id="Connect"></a>步骤 4：连接到 DocumentDB 帐户
 1. 将以下标头和命名空间添加到源代码的 `#include "stdafx.h"` 后面。
-   
+
         #include <cpprest/json.h>
         #include <documentdbcpp\DocumentClient.h>
         #include <documentdbcpp\exceptions.h>
@@ -91,12 +91,12 @@ ms.author: aasthan
         using namespace documentdb;
         using namespace std;
         using namespace web::json;
-    
+
 2. 接下来将以下代码添加到主函数，并替换帐户配置和主要密钥以匹配步骤 3 中的 DocumentDB 设置。
-   
+
         DocumentDBConfiguration conf (L"<account_configuration_uri>", L"<primary_key>");
         DocumentClient client (conf);
-   
+
     现已获得用于初始化 documentdb 客户端的代码，接下来让我们看看如何使用 DocumentDB 资源。
 
 ## <a id="CreateDBColl"></a>步骤 5：创建 C++ 数据库和集合
@@ -281,7 +281,7 @@ DocumentDB 支持删除 JSON 文档，可以复制下面的代码并将其粘贴
 ## 后续步骤
 - 了解如何[监视 DocumentDB 帐户](./documentdb-monitor-accounts.md)。
 - 在 [Query Playground](https://www.documentdb.com/sql/demo) 中对示例数据集运行查询。
-- 在 [DocumentDB 文档页](./index.md/)的“Develop”（开发）部分中了解有关编程模型的详细信息。
+- 在 [DocumentDB 文档页](./index.md)的“Develop”（开发）部分中了解有关编程模型的详细信息。
 
 [documentdb-create-account]: ./documentdb-create-account.md
 [documentdb-manage]: ./documentdb-manage.md

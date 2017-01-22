@@ -146,7 +146,7 @@ wacn.date: 12/15/2015
 ## 后续步骤
 
 若要了解有关使用 Windows PowerShell 管理基于角色的访问控制及相关主题的详细信息，请执行以下操作：
- 
+
 - [Azure 资源管理器 Cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/dn708504.aspx)：了解如何在 AzureResourceManager 模块中使用这些 cmdlet。
 
 - [Azure 博客](http://blogs.msdn.com/azure)：了解 Azure 中的新功能。

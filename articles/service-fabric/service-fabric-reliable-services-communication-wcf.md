@@ -83,7 +83,7 @@ Reliable services 框架使服务创作者能够选择他们要用于其服务�
     // create a  WcfCommunicationClientFactory object.
     var wcfClientFactory = new WcfCommunicationClientFactory<ICalculator>
         (clientBinding: binding, servicePartitionResolver: partitionResolver);
-    
+
     //
     // Create a client for communicating with the ICalculator service that has been created with the
     // Singleton partition scheme.
@@ -92,13 +92,13 @@ Reliable services 框架使服务创作者能够选择他们要用于其服务�
                     wcfClientFactory,
                     ServiceUri,
                     ServicePartitionKey.Singleton);
-    
+
     //
     // Call the service to perform the operation.
     //
     var result = calculatorServiceCommunicationClient.InvokeWithRetryAsync(
                     client => client.Channel.Add(2, 3)).Result;
-    
+
 >[!NOTE] 默认 ServicePartitionResolver 假设客户端正在与服务相同的群集中运行。如果不是这样，请创建 ServicePartitionResolver 对象，并传入群集连接终结点。
 
 ## 后续步骤

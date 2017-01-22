@@ -294,5 +294,5 @@ Azure 队列和服务总线队列都是 Azure 目前提供的消息队列服务�
 - [在 Azure 中使用队列服务](http://www.developerfusion.com/article/120197/using-the-queuing-service-in-windows-azure/)
 
 [Azure 经典管理门户]: http://manage.windowsazure.cn
- 
+
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

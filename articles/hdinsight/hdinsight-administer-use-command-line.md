@@ -46,7 +46,7 @@ ms.author: jgao
 要获取帮助，请使用 **-h** 开关。例如：
 
     azure hdinsight cluster create -h
-    
+
 ## 创建群集
 
 请参阅[使用 Azure CLI 在 HDInsight 中创建基于 Windows 的 Hadoop 群集](./hdinsight-hadoop-create-windows-clusters-cli.md)。

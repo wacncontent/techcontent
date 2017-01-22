@@ -72,24 +72,24 @@ ms.author: thmullan;torsteng
         : base(OpenDDRConnection(shardMap, shardingKey, connectionStr), true /* contextOwnsConnection */)
     {
     }
-    
+
     public static SqlConnection OpenDDRConnection(ShardMap shardMap, T shardingKey, string connectionStr)
     {
         // No initialization
         Database.SetInitializer<ElasticScaleContext<T>>(null);
-    
+
         // Ask shard map to broker a validated connection for the given key
         SqlConnection conn = null;
         try
         {
             conn = shardMap.OpenConnectionForKey(shardingKey, connectionStr, ConnectionOptions.Validate);
-    
+
             // Set TenantId in SESSION_CONTEXT to shardingKey to enable Row-Level Security filtering
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = @"exec sp_set_session_context @key=N'TenantId', @value=@shardingKey";
             cmd.Parameters.AddWithValue("@shardingKey", shardingKey);
             cmd.ExecuteNonQuery();
-    
+
             return conn;
         }
         catch (Exception)
@@ -98,7 +98,7 @@ ms.author: thmullan;torsteng
             {
                 conn.Dispose();
             }
-    
+
             throw;
         }
     } 
@@ -114,7 +114,7 @@ ms.author: thmullan;torsteng
             var query = from b in db.Blogs
                         orderby b.Name
                         select b;
-            
+
             Console.WriteLine("All blogs for TenantId {0}:", tenantId);     
             foreach (var item in query)     
             {       
@@ -129,7 +129,7 @@ ms.author: thmullan;torsteng
 
     // Program.cs
     // ...
-    
+
     // Wrapper function for ShardMap.OpenConnectionForKey() that automatically sets SESSION_CONTEXT with the correct
     // tenantId before returning a connection. As a best practice, you should only open connections using this 
     // method to ensure that SESSION_CONTEXT is always set before executing a query.
@@ -140,13 +140,13 @@ ms.author: thmullan;torsteng
         {
             // Ask shard map to broker a validated connection for the given key
             conn = shardMap.OpenConnectionForKey(tenantId, connectionStr, ConnectionOptions.Validate);
-    
+
             // Set TenantId in SESSION_CONTEXT to shardingKey to enable Row-Level Security filtering
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = @"exec sp_set_session_context @key=N'TenantId', @value=@shardingKey";
             cmd.Parameters.AddWithValue("@shardingKey", tenantId);
             cmd.ExecuteNonQuery();
-    
+
             return conn;
         }
         catch (Exception)
@@ -155,7 +155,7 @@ ms.author: thmullan;torsteng
             {
                 conn.Dispose();
             }
-    
+
             throw;
         }
     }
@@ -170,7 +170,7 @@ ms.author: thmullan;torsteng
         {
             SqlCommand cmd = conn.CreateCommand();
             cmd.CommandText = @"SELECT * FROM Blogs";
-    
+
             Console.WriteLine("--\nAll blogs for TenantId {0} (using ADO.NET SqlClient):", tenantId4);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
@@ -192,7 +192,7 @@ RLS 在 T-SQL 中实现：用户定义的函数用于定义访问逻辑，安全
 
     CREATE SCHEMA rls -- separate schema to organize RLS objects 
     GO
-    
+
     CREATE FUNCTION rls.fn_tenantAccessPredicate(@TenantId int)     
         RETURNS TABLE     
         WITH SCHEMABINDING
@@ -201,7 +201,7 @@ RLS 在 T-SQL 中实现：用户定义的函数用于定义访问逻辑，安全
             WHERE DATABASE_PRINCIPAL_ID() = DATABASE_PRINCIPAL_ID('dbo') -- the user in your application’s connection string (dbo is only for demo purposes!)         
             AND CAST(SESSION_CONTEXT(N'TenantId') AS int) = @TenantId
     GO
-    
+
     CREATE SECURITY POLICY rls.tenantAccessPolicy
         ADD FILTER PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Blogs,
         ADD BLOCK PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Blogs,
@@ -229,7 +229,7 @@ RLS 在 T-SQL 中实现：用户定义的函数用于定义访问逻辑，安全
         ADD CONSTRAINT df_TenantId_Blogs      
         DEFAULT CAST(SESSION_CONTEXT(N'TenantId') AS int) FOR TenantId 
     GO
-    
+
     ALTER TABLE Posts     
         ADD CONSTRAINT df_TenantId_Posts      
         DEFAULT CAST(SESSION_CONTEXT(N'TenantId') AS int) FOR TenantId 
@@ -268,7 +268,7 @@ RLS 在 T-SQL 中实现：用户定义的函数用于定义访问逻辑，安全
                 DATABASE_PRINCIPAL_ID() = DATABASE_PRINCIPAL_ID('superuser')
             )
     GO
-    
+
     -- Atomically swap in the new predicate function on each table
     ALTER SECURITY POLICY rls.tenantAccessPolicy
         ALTER FILTER PREDICATE rls.fn_tenantAccessPredicateWithSuperUser(TenantId) ON dbo.Blogs,

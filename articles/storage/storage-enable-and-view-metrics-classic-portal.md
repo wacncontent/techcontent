@@ -92,7 +92,7 @@ ms.author: fryu;robinsh
 
     // Set the service properties.
     blobClient.SetServiceProperties(properties);
-    
+
 ## 查看存储度量值
 
 在配置为监视存储帐户后，存储度量值将使用存储帐户在一组已知表中记录度量值。你可以在 Azure 经典管理门户中使用存储帐户的“监视”页以查看图表上可用的小时度量值。在 Azure 经典管理门户中，你可以在此页上执行以下操作：
@@ -148,7 +148,7 @@ ms.author: fryu;robinsh
     // Convert the dates to the format used in the PartitionKey
     var start = startDateTime.ToUniversalTime().ToString("yyyyMMdd'T'HHmm");
     var end = endDateTime.ToUniversalTime().ToString("yyyyMMdd'T'HHmm");
-    
+
     var services = Enum.GetValues(typeof(StorageService));
     foreach (StorageService service in services)
     {
@@ -163,7 +163,7 @@ ms.author: fryu;robinsh
     // The PartitionKey identifies the DataTime of the metrics.
     where entity.PartitionKey.CompareTo(start) >= 0 && entity.PartitionKey.CompareTo(end) <= 0 
     select entity;
-    
+
     // Filter on "user" transactions after fetching the metrics from Table Storage.
     // (StartsWith is not supported using LINQ with Azure table storage)
     var results = query.ToList().Where(m => m.RowKey.StartsWith("user"));
@@ -171,7 +171,7 @@ ms.author: fryu;robinsh
     Console.WriteLine(resultString);
     }
     }
-    
+
     private static string MetricsString(MetricsEntity entity, OperationContext opContext)
     {
     var entityProperties = entity.WriteEntity(opContext);
@@ -181,7 +181,7 @@ ms.author: fryu;robinsh
     string.Format("TransactionType: {0}, ", entity.TransactionType) +
     string.Join(",", entityProperties.Select(e => new KeyValuePair<string, string>(e.Key.ToString(), e.Value.PropertyAsObject.ToString())));
     return entityString;
-    
+
     }
 
 ## 在启用存储度量值时，你需要支付多少费用？
@@ -200,5 +200,5 @@ ms.author: fryu;robinsh
 
 ## 后续步骤：
 [启用存储分析日志记录和访问日志数据](https://msdn.microsoft.com/zh-cn/library/dn782840.aspx)
- 
+
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

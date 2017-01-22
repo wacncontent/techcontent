@@ -18,7 +18,7 @@ ms.author: glenga
 ---
 
 #  通过单个移动服务支持多个设备平台
- 
+
 在移动应用开发中使用 Azure 移动服务的主要优势之一在于，能够使用单个后端服务来支持多个客户端平台上的应用。移动服务为所有主要设备平台提供了本机客户端库，让你更轻松地使用单个后端服务，通过跨平台开发人员工具开发应用程序。本主题讨论在使用单个移动服务后端时让应用程序运行在多个客户端平台上的注意事项。
 
 ## <a id="push"></a>跨平台推送通知
@@ -34,7 +34,7 @@ ms.author: glenga
 可使用特定于平台的移动服务客户端库中的注册函数或使用移动服务 REST API 创建客户端注册。通知中心支持两种类型的设备注册：
 
 + **本机注册**<br/>本机注册专门针对特定于平台的推送通知服务。将通知发送到使用本机注册注册的设备时，你必须在移动服务中调用特定于平台的 API。若要将通知发送到多个平台上的设备，需要多个特定于平台的调用。   
-  
+
 + **模板注册**<br/>通知中心还支持特定于平台的模板注册。通过使用模板注册，你可以使用单个 API 调用将通知发送到任何已注册的平台上运行的应用程序。
 
 链接到特定于客户端的教程的以下各节中的表显示了如何实现从 .NET 和 JavaScript 后端移动服务推送通知。
@@ -58,7 +58,7 @@ ms.author: glenga
                          @"<toast><visual><binding template=""ToastText01"">" +
                          @"<text id=""1"">" + item.Text + @"</text>" +
                          @"</binding></visual></toast>";
-    
+
     // Send push notifications to all registered iOS and Windows Store devices. 
     await Services.Push.SendAsync(apnsMessage);
     await Services.Push.SendAsync(wnsMessage);
@@ -73,7 +73,7 @@ ms.author: glenga
 
     // Send a push notification to all template registrations.
     await Services.Push.SendAsync(templatePayload); 
- 
+
 ### JavaScript 后端
 
 在 JavaScript 后端移动服务中，通过调用从全局 [push 对象]获取的特定于平台的对象的 **send** 方法发送通知，如下表所示：
@@ -135,7 +135,7 @@ ms.author: glenga
 可使用跨平台工具，这些工具在仍共享单一代码库（通常是 JavaScript）的同时，在移动设备上提供了更丰富的本机体验。移动服务通过提供以下开发平台的快速入门教程，可让你轻松创建和管理跨平台应用程序开发平台的后端服务：
 
 + [**PhoneGap**](https://go.microsoft.com/fwLink/p/?LinkID=390707)**/**[**Cordova**](http://cordova.apache.org/)<br/>PhoneGap（Apache Cordova 项目的分发产品）是一个免费的开源框架，它允许你使用标准 Web API、HTML 和 JavaScript 开发可在 Android、iOS 和 Windows 设备上运行的单个应用程序。PhoneGap 提供了基于 Web 视图的 UI，但通过允许访问设备上的本机资源增强了用户体验，这些资源包括推送通知、加速计、相机、存储、地理位置和应用程序内浏览器。有关详细信息，请参阅 [PhoneGap 快速入门教程][PhoneGap]。
-    
+
     现在 Visual Studio 还允许你使用用于 Visual Studio 的多设备混合应用程序扩展（它是预发行软件）构建跨平台的 Cordova 应用程序。有关详细信息，请参阅[使用 HTML 和 JavaScript 的多设备混合应用程序入门](http://msdn.microsoft.com/zh-cn/library/dn771545.aspx)。
 
 + **Sencha Touch**<br/>Sencha Touch 提供了一组针对触摸屏优化的控件，这些控件使用单个 HTML 和 JavaScript 代码库在各种移动设备上提供类似本机的体验。Sencha Touch 可与 PhoneGap 或 Cordova 库一起使用，为用户提供对本机设备资源的访问权限。有关详细信息，请参阅 [Sencha Touch 快速入门教程][Sencha]。
@@ -146,7 +146,7 @@ ms.author: glenga
 [Azure 通知中心]: ../notification-hubs/notification-hubs-push-notification-overview.md
 [SSO Windows Store]: /documentation/articles/mobile-services-windows-store-dotnet-single-sign-on/
 [SSO Windows Phone]: /documentation/articles/mobile-services-windows-phone-single-sign-on/
-[Tutorials and resources]: ./index.md/
+[Tutorials and resources]: ./index.md
 
 [向用户发送跨平台通知]: /documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users-xplat-mobile-services/
 [Get started with push Windows dotnet]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started-push-vs2012/

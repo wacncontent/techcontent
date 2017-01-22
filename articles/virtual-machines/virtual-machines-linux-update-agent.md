@@ -75,7 +75,7 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
 
     #wget https://raw.githubusercontent.com/Azure/WALinuxAgent/WALinuxAgent-[version]/waagent  
 
-   以下行使用版本 2.0.14 作为示例：
+    以下行使用版本 2.0.14 作为示例：
 
     #wget https://raw.githubusercontent.com/Azure/WALinuxAgent/WALinuxAgent-2.0.14/waagent  
 
@@ -85,7 +85,7 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
     #unzip WALinuxAgent-[version].zip
     #cd WALinuxAgent-[version]
 
-   以下行使用版本 2.1.0 作为示例：
+    以下行使用版本 2.1.0 作为示例：
 
     #wget https://github.com/Azure/WALinuxAgent/archive/WALinuxAgent-2.1.0.zip
     #unzip WALinuxAgent-2.1.0.zip  
@@ -110,7 +110,7 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
     #sudo cp waagent /usr/share/oem/bin/
 
   如果这是新安装的 Azure Linux 代理，请运行：
- 
+
     #sudo /usr/sbin/waagent -install -verbose
 
 ### 对于版本 2.1.x，请使用：
