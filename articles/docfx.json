@@ -22,27 +22,17 @@
           "**/*.jpg",
           "**/*.jpeg",
           "**/*.svg",
-          "**/*.gif"
+          "**/*.gif",
+          "../includes/**/*.png",
+          "../includes/**/*.jpg",
+          "../includes/**/*.jpeg",
+          "../includes/**/*.svg",
+          "../includes/**/*.gif"
         ],
         "exclude": [
           "**/obj/**",
           "opsacndocsdemo/**"
         ]
-      },
-      {
-        "files": [
-          "**/*.svg",
-          "**/*.png",
-          "**/*.jpg",
-          "**/*.jpeg",
-          "**/*.gif"
-        ],
-        "exclude": [
-          "**/obj/**",
-          "opsacndocsdemo/**"
-        ],
-        "src": "../includes",
-        "dest": "../includes"
       }
     ],
     "overwrite": [],
