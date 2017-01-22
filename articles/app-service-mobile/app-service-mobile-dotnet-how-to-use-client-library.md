@@ -596,7 +596,7 @@ SDK 会在提取记录前执行隐式 `PushAsync()`。
     * 将 **INSERT-RESOURCE-ID-HERE** 替换移动应用后端的客户端 ID。可以在门户中“Azure Active Directory 设置”下面的“高级”选项卡获取客户端 ID。
     * 将 **INSERT-CLIENT-ID-HERE** 替换为从本机客户端应用程序复制的客户端 ID。
     
-   * 将 **INSERT-REDIRECT-URI-HERE** 替换为站点的 */.auth/login/done* 终结点（使用 HTTPS 方案）。此值应类似于 *https://contoso.chinacloudsites.cn/.auth/login/done* 。
+    * 将 **INSERT-REDIRECT-URI-HERE** 替换为站点的 */.auth/login/done* 终结点（使用 HTTPS 方案）。此值应类似于 *https://contoso.chinacloudsites.cn/.auth/login/done* 。
     
     每个平台所需的代码如下：
     
