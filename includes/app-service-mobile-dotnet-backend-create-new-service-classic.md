@@ -6,7 +6,7 @@
 
     可以选择其他应用服务计划或创建新的计划。有关应用服务计划以及如何在不同定价层和所需位置中创建新计划的详细信息，请参阅 [Azure App Service 计划深入概述](../articles/app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md)。
 
-4. 对于“应用服务计划”，选择默认计划（[标准层](https://www.azure.cn/pricing/details/app-service/)中）。还可以选择不同计划，或[创建一个新计划](../articles/app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md#create-an-app-service-plan)。应用服务计划的设置将确定与应用关联的[位置、功能、成本和计算资源](https://www.azure.cn/pricing/details/app-service/)。
+4. 对于“应用服务计划”，选择默认计划（[标准层](https://www.azure.cn/pricing/details/app-service/)中）。还可以选择不同计划，或[创建一个新计划](../articles/app-service/azure-web-sites-web-hosting-plans-in-depth-overview.md#create-an-app-service-plan)。应用服务计划的设置将确定与应用关联的[位置、功能、成本和计算资源](https://www.azure.cn/pricing/details/app-service)。
 
     做出有关计划的决定后，单击“创建”。这将创建移动应用后端。
 

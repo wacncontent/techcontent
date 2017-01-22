@@ -72,7 +72,7 @@ ms.author: asteen
 10. 如果密码设置操作失败，我们会将错误返回给用户，让他们再试一次。操作失败的可能原因是服务已关闭、用户选择的密码不符合组织策略、我们在本地 AD 中找不到该用户等。我们对于许多这类情况都有一个特定消息，并告知用户他们可以执行哪些操作来解决问题。
 
 ### <a name="scenarios-supported-for-password-writeback"></a>密码写回支持的方案
-下表介绍同步功能的各个版本支持哪些方案。通常情况下，如果要使用密码写回，我们强烈建议安装最新版本的 [Azure AD Connect](./active-directory-aadconnect.md#install-azure-ad-connect/)。
+下表介绍同步功能的各个版本支持哪些方案。通常情况下，如果要使用密码写回，我们强烈建议安装最新版本的 [Azure AD Connect](./active-directory-aadconnect.md#install-azure-ad-connect)。
 
   ![][002]  
 

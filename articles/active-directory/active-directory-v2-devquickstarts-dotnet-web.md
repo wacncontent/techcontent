@@ -166,7 +166,7 @@ HTML
     }
 
 ## 显示用户信息
-使用 OpenID Connect 对用户进行身份验证时，v2.0 终结点将向应用返回 id\_token，其中包含有关用户的[声明](./active-directory-v2-tokens.md#id_tokens/)或断言。你可以使用这些声明来个性化应用程序：
+使用 OpenID Connect 对用户进行身份验证时，v2.0 终结点将向应用返回 id\_token，其中包含有关用户的[声明](./active-directory-v2-tokens.md#id_tokens)或断言。你可以使用这些声明来个性化应用程序：
 
 - 打开 `Controllers\HomeController.cs` 文件。可以通过 `ClaimsPrincipal.Current` 安全主体对象访问控制器中的用户声明。
 

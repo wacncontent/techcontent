@@ -50,7 +50,7 @@ wacn.date: 01/03/2017
 你必须先完成以下先决条件才能启用和使用自助密码重置：
 
 - 创建 AAD 租户。有关详细信息，请参阅 [Azure AD 入门](./index.md)。
-- 获取 Azure 订阅。有关详细信息，请参阅[什么是 Azure AD 租户？](./active-directory-administer.md#what-is-an-azure-ad-tenant/)
+- 获取 Azure 订阅。有关详细信息，请参阅[什么是 Azure AD 租户？](./active-directory-administer.md#what-is-an-azure-ad-tenant)
 - 将你的 AAD 租户与 Azure 订阅相关联。有关详细信息，请参阅 [Azure 订阅与 Azure AD 的关联方式](https://msdn.microsoft.com/zh-cn/library/azure/dn629581.aspx)。
 - 升级到 Azure AD Premium、Basic 或使用 O365 付费许可证。有关详细信息，请参阅 [Azure Active Directory 版本](https://www.azure.cn/pricing/details/identity/)。
 
@@ -103,7 +103,7 @@ wacn.date: 01/03/2017
 - 通过将用户引导至位于 [http://aka.ms/ssprsetup](http://aka.ms/ssprsetup) 的注册门户，使用户能够注册其自己的数据
 - 要求用户在登录到位于 [http://myapps.microsoft.com](http://myapps.microsoft.com) 的访问面板时注册以进行密码重置，方法是将“登录到访问面板时要求用户注册”SSPR 配置选项设置为“是”。
 
-如果你想要详细了解密码重置使用哪些数据，以及此数据的任何格式要求，请参阅[密码重置使用哪些数据？](./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset/)
+如果你想要详细了解密码重置使用哪些数据，以及此数据的任何格式要求，请参阅[密码重置使用哪些数据？](./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset)
 
 #### 通过用户注册门户添加用户联系人数据
 1. 为使用密码重置注册门户，你必须为你所在组织的用户提供指向此页面的链接 ([http://aka.ms/ssprsetup](http://aka.ms/ssprsetup))，或者启用要求用户自动注册的选项。一旦他们单击此链接，将要求他们使用组织帐户登录。这样做之后，他们将看到以下页面：
@@ -203,7 +203,7 @@ wacn.date: 01/03/2017
   > 我们强烈建议使用 Azure AD Sync 或 DirSync 工具的任何用户升级到最新版本的 Azure AD Connect，以确保拥有最佳使用体验和发行的新功能。
 
 ### <a name="step-1-download-the-latest-version-of-azure-ad-connect"></a>步骤 1：下载最新版本的 Azure AD Connect
-Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure AD Sync 工具中提供了密码写回功能。Azure AD Connect 发行版或版本号为 **1.0.0485.0222** 或更高的 Azure AD Sync 工具中提供了支持自动帐户解锁的密码写回功能。如果你运行的是较旧版本，请在继续操作之前至少升级到此版本。[单击此处下载最新版本的 Azure AD Connect](./active-directory-aadconnect.md#install-azure-ad-connect/)。
+Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure AD Sync 工具中提供了密码写回功能。Azure AD Connect 发行版或版本号为 **1.0.0485.0222** 或更高的 Azure AD Sync 工具中提供了支持自动帐户解锁的密码写回功能。如果你运行的是较旧版本，请在继续操作之前至少升级到此版本。[单击此处下载最新版本的 Azure AD Connect](./active-directory-aadconnect.md#install-azure-ad-connect)。
 
 #### 查看 Azure AD Sync 的版本
 1. 导航到 **%ProgramFiles%\\Azure Active Directory Sync**。

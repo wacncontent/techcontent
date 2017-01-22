@@ -23,7 +23,7 @@ wacn.date: 01/19/2017
 
 ##概述
 
-利用 Azure 中的推送通知支持，你可以访问易于使用且向外扩展的多平台推送基础结构，这大大简化了为移动平台的使用者应用程序和企业应用程序实现推送通知的过程。本教程说明如何使用 Azure 通知中心将推送通知发送到特定设备上的特定应用程序用户。ASP.NET WebAPI 后端用于对客户端进行身份验证并生成通知，如指南主题[从应用后端注册](./notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend/)中所述。
+利用 Azure 中的推送通知支持，你可以访问易于使用且向外扩展的多平台推送基础结构，这大大简化了为移动平台的使用者应用程序和企业应用程序实现推送通知的过程。本教程说明如何使用 Azure 通知中心将推送通知发送到特定设备上的特定应用程序用户。ASP.NET WebAPI 后端用于对客户端进行身份验证并生成通知，如指南主题[从应用后端注册](./notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend)中所述。
 
 > [!NOTE]
 > 本教程假设您已根据[通知中心入门 (iOS)](./notification-hubs-ios-apple-push-notification-apns-get-started.md) 中所述创建并配置了通知中心。此外，只有在学习本教程后，才可以学习[安全推送 (iOS)](./notification-hubs-aspnet-backend-ios-push-apple-apns-secure-notification.md) 教程。
@@ -262,7 +262,7 @@ wacn.date: 01/19/2017
 
         @end
 
-    上面的代码使用 NSURLSession 对应用后端执行 REST 调用并使用 NSUserDefaults 在本地存储通知中心返回的 registrationId，实现了指南文章[从应用后端注册](./notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend/)中所述的逻辑。
+    上面的代码使用 NSURLSession 对应用后端执行 REST 调用并使用 NSUserDefaults 在本地存储通知中心返回的 registrationId，实现了指南文章[从应用后端注册](./notification-hubs-push-notification-registration-management.md#registration-management-from-a-backend)中所述的逻辑。
 
     请注意，此类需要设置其属性 **authorizationHeader**，才能正常工作。登录后，由 **ViewController** 类设置此属性。
 

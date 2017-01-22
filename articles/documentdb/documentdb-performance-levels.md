@@ -147,7 +147,7 @@ DocumentDB 集合允许根据应用程序的查询模式和性能需求来对数
 
     页面底部的“估计的每月帐单”将自动更新以提供月成本估计值。单击“保存”以保存更改。
 
-    如果不确定要增加多少吞吐量，请参阅[估计吞吐量需求](./documentdb-request-units.md#estimating-throughput-needs/)和[请求单位计算器](https://www.documentdb.com/capacityplanner)。
+    如果不确定要增加多少吞吐量，请参阅[估计吞吐量需求](./documentdb-request-units.md#estimating-throughput-needs)和[请求单位计算器](https://www.documentdb.com/capacityplanner)。
 
 ## 故障排除
 

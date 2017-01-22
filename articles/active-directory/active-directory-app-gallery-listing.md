@@ -33,7 +33,7 @@ wacn.date: 01/19/2017
 
 - 提供应用程序测试租户或帐户的凭据，使 Azure AD 团队可以测试集成。
 
-- 为 Azure AD 团队提供有关如何使用 [Azure AD 许可框架](./active-directory-integrating-applications.md#overview-of-the-consent-framework/)登录并将 Azure AD 实例连接到应用程序的说明。
+- 为 Azure AD 团队提供有关如何使用 [Azure AD 许可框架](./active-directory-integrating-applications.md#overview-of-the-consent-framework)登录并将 Azure AD 实例连接到应用程序的说明。
 
 - 为 Azure AD 团队提供在应用程序上测试单一登录所需的其他说明。
 

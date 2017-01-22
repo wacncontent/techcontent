@@ -84,7 +84,7 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 * 提交这些任务以在 Batch 上运行。
 
 >[!NOTE]
-> 有关作业管理器任务的详细信息，请参阅 [Batch feature overview for developers](./batch-api-basics.md#job-manager-task/)（面向开发人员的 Batch 功能概述）。
+> 有关作业管理器任务的详细信息，请参阅 [Batch feature overview for developers](./batch-api-basics.md#job-manager-task)（面向开发人员的 Batch 功能概述）。
 
 ### 使用模板创建作业管理器
 
@@ -219,7 +219,7 @@ Split() 实现具有以下项的访问权限：
 
 在作业管理器任务失败的情况下，某些任务可能仍在错误发生之前就已添加到服务中。这些任务将正常运行。请参阅上面的“作业拆分器失败”，获取有关此代码路径的介绍。
 
-异常返回的所有信息已写入 stdout.txt 和 stderr.txt 文件。有关详细信息，请参阅[错误处理](./batch-api-basics.md#error-handling/)。
+异常返回的所有信息已写入 stdout.txt 和 stderr.txt 文件。有关详细信息，请参阅[错误处理](./batch-api-basics.md#error-handling)。
 
 ### 客户端注意事项
 

@@ -110,7 +110,7 @@ DocumentDB 支持每个查询使用单个数值、字符串或布尔值属性进
 
 **如何使用 Order By 查询 DocumentDB 中现有的数据？**
 
-为了使用 Order By 对查询结果进行排序，必须修改集合的索引策略从而针对用于排序的属性使用范围索引类型。请参阅[修改索引策略](./documentdb-indexing-policies.md#modifying-the-indexing-policy-of-a-collection/)。
+为了使用 Order By 对查询结果进行排序，必须修改集合的索引策略从而针对用于排序的属性使用范围索引类型。请参阅[修改索引策略](./documentdb-indexing-policies.md#modifying-the-indexing-policy-of-a-collection)。
 
 **Order By 当前的限制是什么？**
 

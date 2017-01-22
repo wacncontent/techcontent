@@ -22,7 +22,7 @@ ms.author: rasquill
 
 # 使用 Azure 资源管理器模板和 Azure CLI 部署和管理虚拟机
 
-> [!div class="op_single_selector"]		
+> [!div class="op_single_selector"]
  - [PowerShell](./virtual-machines-windows-ps-manage.md)		
  - [CLI](./virtual-machines-windows-cli-deploy-templates.md)		
 

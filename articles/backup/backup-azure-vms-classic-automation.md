@@ -30,7 +30,7 @@ ms.author: markgal;trinadhk;jimpark
 本文专门介绍用于备份虚拟机的 PowerShell cmdlet。有关如何保护 Azure VM 的介绍，请参阅[在 Azure 中计划 VM 备份基础结构](./backup-azure-vms-introduction.md)。
 
 > [!NOTE]
-> 在开始之前，请阅读使用 Azure 备份所需的[系统必备组件](./backup-azure-vms-prepare.md)，以及当前 VM 备份解决方案的[限制](./backup-azure-vms-prepare.md#limitations/)。
+> 在开始之前，请阅读使用 Azure 备份所需的[系统必备组件](./backup-azure-vms-prepare.md)，以及当前 VM 备份解决方案的[限制](./backup-azure-vms-prepare.md#limitations)。
 
 为了提高 PowerShell 使用效率，请抽时间了解对象的层次结构以及从何处开始。
 

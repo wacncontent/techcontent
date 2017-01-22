@@ -50,7 +50,7 @@ Azure 已在平台中内置多种功能，用于支持高度可用的应用程�
 有关如何创建和部署云服务应用程序的详细信息，请参阅[如何创建和部署云服务](./cloud-services-how-to-create-deploy.md)。
 
 根据应用程序数据源，你可能需要检查应用程序数据源的恢复过程。
-  * 有关 Azure 存储空间数据源，请参阅[Azure 存储空间复制](../storage/storage-redundancy.md#read-access-geo-redundant-storage/)以了解基于所选复制模型而可用于应用程序的选项。
+  * 有关 Azure 存储空间数据源，请参阅[Azure 存储空间复制](../storage/storage-redundancy.md#read-access-geo-redundant-storage)以了解基于所选复制模型而可用于应用程序的选项。
   * 对于 SQL 数据库源，请阅读[概述：云业务连续性与使用 SQL 数据库进行数据库灾难恢复](../sql-database/sql-database-business-continuity.md)以了解基于所选复制模型而可用于应用程序的选项。
 
 ##选项 3：通过 Azure 流量管理器使用备份部署

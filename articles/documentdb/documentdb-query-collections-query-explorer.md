@@ -72,7 +72,7 @@ ms.author: kirillg
 
 ## 运行门户预览外部的 DocumentDB SQL 查询
 
-Azure 门户预览中的查询资源管理器只是一种对 DocumentDB 运行 SQL 查询的方式。还可以使用 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 或[客户端 SDK](./documentdb-sdk-dotnet.md) 运行 SQL 查询。有关使用这些其他方法的详细信息，请参阅[执行 SQL 查询](./documentdb-sql-query.md#executing-sql-queries/)
+Azure 门户预览中的查询资源管理器只是一种对 DocumentDB 运行 SQL 查询的方式。还可以使用 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 或[客户端 SDK](./documentdb-sdk-dotnet.md) 运行 SQL 查询。有关使用这些其他方法的详细信息，请参阅[执行 SQL 查询](./documentdb-sql-query.md#executing-sql-queries)
 
 ## 后续步骤
 

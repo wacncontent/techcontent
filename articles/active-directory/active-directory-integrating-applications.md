@@ -38,7 +38,7 @@ wacn.date: 01/06/2017
 2. 在左侧菜单中单击“Active Directory”图标，然后单击所需的目录。
 3. 在顶部菜单中单击“应用程序”。如果尚未将任何应用添加到你的目录，则此页只会显示“添加应用”链接。单击该链接，或者单击命令栏上的“添加”按钮。
 4. 在“要执行什么操作”页上，单击“添加我的组织正在开发的应用程序”链接。
-5. 在“向我们说明你的应用程序”页上，必须指定应用程序的名称并指明你要注册到 Azure AD 的应用程序类型。可以从 [Web 应用程序/客户端](./active-directory-dev-glossary.md#client-application/)和/或 [Web 资源/API](./active-directory-dev-glossary.md#resource-server/) 应用程序或[本机客户端](./active-directory-dev-glossary.md#native-client/)应用程序中选择。完成后，单击页面右下角的箭头图标。
+5. 在“向我们说明你的应用程序”页上，必须指定应用程序的名称并指明你要注册到 Azure AD 的应用程序类型。可以从 [Web 应用程序/客户端](./active-directory-dev-glossary.md#client-application)和/或 [Web 资源/API](./active-directory-dev-glossary.md#resource-server) 应用程序或[本机客户端](./active-directory-dev-glossary.md#native-client)应用程序中选择。完成后，单击页面右下角的箭头图标。
 6. 在“应用属性”页上，提供“登录 URL”和“应用 ID URI”（如果正在注册 Web 应用程序）或者只提供“重定向 URI”（针对本机客户端应用程序），然后单击页面右下角的复选框。
 7. 现已添加你的应用程序，此时你将转到应用程序的“快速启动”页。根据你的应用程序是 Web 应用程序还是本机应用程序，你将看到有关如何向应用程序添加更多功能的不同选项。添加应用程序后，你可以开始更新应用程序，使用户能够登录、访问其他应用程序中的 Web API，或者配置多租户应用程序（允许其他组织访问你的应用程序）。
 
@@ -76,12 +76,12 @@ wacn.date: 01/06/2017
 
     ![用户同意体验](./media/active-directory-integrating-applications/userconsent.png)  
 
-5. 用户授予许可后，授权代码将返回到你的应用程序，应用程序可凭此获取访问令牌和刷新令牌。有关此流程的详细信息，请参阅 [Azure AD 的身份验证方案](./active-directory-authentication-scenarios.md)主题中的[从 Web 应用程序到 Web API](./active-directory-authentication-scenarios.md#web-application-to-web-api/) 部分。
+5. 用户授予许可后，授权代码将返回到你的应用程序，应用程序可凭此获取访问令牌和刷新令牌。有关此流程的详细信息，请参阅 [Azure AD 的身份验证方案](./active-directory-authentication-scenarios.md)主题中的[从 Web 应用程序到 Web API](./active-directory-authentication-scenarios.md#web-application-to-web-api) 部分。
 
 ### 将客户端应用程序配置为访问 Web API
 为使 Web/机密客户端应用程序能够参与要求身份验证的授权流程（以及获取访问令牌），必须建立安全凭据。Azure 门户预览支持的默认身份验证方法是客户端 ID + 对称密钥。本部分介绍需要执行哪些配置步骤来提供客户端凭据的机密密钥。
 
-在此，在客户端访问资源应用程序公开的 Web API（例如 Azure AD 图形 API）之前，同意框架将确保客户端根据请求的权限获取所需的授权。默认情况下，所有应用程序可以从 Azure Active Directory（图形 API）和 Azure 服务管理 API 中选择权限。默认情况下已选择 Azure AD 的“启用登录并读取用户的配置文件”权限。如果客户端应用程序已在 Office 365 Azure AD 租户中注册，则也可以选择 SharePoint 与 Exchange Online 的 Web API 和权限。可以从所需 Web API 旁边的下拉菜单中的[两种类型的权限](./active-directory-dev-glossary.md#permissions/)中进行选择：
+在此，在客户端访问资源应用程序公开的 Web API（例如 Azure AD 图形 API）之前，同意框架将确保客户端根据请求的权限获取所需的授权。默认情况下，所有应用程序可以从 Azure Active Directory（图形 API）和 Azure 服务管理 API 中选择权限。默认情况下已选择 Azure AD 的“启用登录并读取用户的配置文件”权限。如果客户端应用程序已在 Office 365 Azure AD 租户中注册，则也可以选择 SharePoint 与 Exchange Online 的 Web API 和权限。可以从所需 Web API 旁边的下拉菜单中的[两种类型的权限](./active-directory-dev-glossary.md#permissions)中进行选择：
 
 - 应用程序权限：客户端应用程序需要亲自直接访问 Web API（无用户上下文）。此类型的权限需要管理员同意，并且不可用于本机客户端应用程序。
 - 委托的权限：客户端应用程序需要以登录用户的身份访问 Web API，但访问权限受所选权限的限制。除非权限已配置为需要管理员同意，否则用户可以授予此类型的权限。
@@ -108,7 +108,7 @@ wacn.date: 01/06/2017
 > 单击“保存”按钮还会基于你配置的“对其他应用程序的权限”自动设置对你目录中的应用程序的权限。可以在应用程序的“属性”选项卡中查看这些应用程序权限。
 
 ### 将资源应用程序配置为公开 Web API
-可以开发一个 Web API，并通过公开访问权限[范围](./active-directory-dev-glossary.md#scopes/)和[角色](./active-directory-dev-glossary.md#roles/)，使其可供其他客户端应用程序使用。可以像提供其他 Microsoft Web API（包括图形 API 和 Office 365 API）一样提供正确配置的 Web API。可通过[应用程序的清单](./active-directory-dev-glossary.md#application-manifest/)公开访问权限范围和角色。该清单是表示应用程序标识配置的 JSON 文件。
+可以开发一个 Web API，并通过公开访问权限[范围](./active-directory-dev-glossary.md#scopes/)和[角色](./active-directory-dev-glossary.md#roles)，使其可供其他客户端应用程序使用。可以像提供其他 Microsoft Web API（包括图形 API 和 Office 365 API）一样提供正确配置的 Web API。可通过[应用程序的清单](./active-directory-dev-glossary.md#application-manifest)公开访问权限范围和角色。该清单是表示应用程序标识配置的 JSON 文件。
 
 以下部分说明如何通过修改资源应用程序的清单公开访问范围。
 

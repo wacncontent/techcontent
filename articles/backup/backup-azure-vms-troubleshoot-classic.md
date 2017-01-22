@@ -36,7 +36,7 @@ wacn.date: 01/19/2017
 | 备份操作 | 错误详细信息 | 解决方法 |
 | -------- | -------- | -------|
 | 注册 | 附加到虚拟机的数据磁盘数超过了支持的限制 - 请分离此虚拟机上的某些数据磁盘，然后重试操作。Azure 备份最多支持将 16 个数据磁盘附加到 Azure 虚拟机进行备份 | 无 |
-| 注册 | Azure 备份遇到内部错误 - 等候几分钟，然后重试操作。如果问题持续出现，请联系 Microsoft 支持。 | 出现此错误的原因是，Premium LRS 上有以下其中一项不受支持的 VM 配置。<br> 高级存储 VM 可以使用恢复服务保管库进行备份。[了解详细信息](./backup-introduction-to-azure-backup.md#back-up-and-restore-premium-storage-vms/) |
+| 注册 | Azure 备份遇到内部错误 - 等候几分钟，然后重试操作。如果问题持续出现，请联系 Microsoft 支持。 | 出现此错误的原因是，Premium LRS 上有以下其中一项不受支持的 VM 配置。<br> 高级存储 VM 可以使用恢复服务保管库进行备份。[了解详细信息](./backup-introduction-to-azure-backup.md#back-up-and-restore-premium-storage-vms) |
 | 注册 | 安装代理操作超时，注册失败 | 检查是否支持虚拟机的操作系统版本。 |
 | 注册 | 命令执行失败 - 此项上正在进行另一项操作。等到前一项操作完成 | 无 |
 | 注册 | 不支持使用虚拟硬盘存储在高级存储上的虚拟机进行备份 | 无 |
@@ -68,7 +68,7 @@ wacn.date: 01/19/2017
 ## 还原
 | 操作 | 错误详细信息 | 解决方法 |
 | -------- | -------- | -------|
-| 还原 | 发生云内部错误，还原失败 | <ol><li>使用 DNS 设置配置了你正在尝试还原的云服务。你可以检查 <br>$deployment = Get-AzureDeployment -ServiceName "ServiceName" -Slot "Production" Get-AzureDns -DnsSettings $deployment.DnsSettings<br>如果配置了地址，则表示配置了 DNS 设置。<br> <li>尝试还原的云服务配置了 ReservedIP，且云服务中现有的 VM 处于停止状态。<br>可以使用以下 PowerShell cmdlet 检查云服务是否有保留的 IP：<br>$deployment = Get-AzureDeployment -ServiceName "servicename" -Slot "Production" $dep.ReservedIPName<br><li>正在尝试还原同一云服务中具有以下特殊网络配置的虚拟机。<br>- 采用负载均衡器配置的虚拟机（内部和外部）<br>- 具有多个保留 IP 的虚拟机<br>- 具有多个 NIC 的虚拟机<br>请在 UI 中选择新的云服务，或者参阅[还原注意事项](./backup-azure-restore-vms.md#restoring-vms-with-special-network-configurations/)，了解具有特殊网络配置的 VM</ol> |
+| 还原 | 发生云内部错误，还原失败 | <ol><li>使用 DNS 设置配置了你正在尝试还原的云服务。你可以检查 <br>$deployment = Get-AzureDeployment -ServiceName "ServiceName" -Slot "Production" Get-AzureDns -DnsSettings $deployment.DnsSettings<br>如果配置了地址，则表示配置了 DNS 设置。<br> <li>尝试还原的云服务配置了 ReservedIP，且云服务中现有的 VM 处于停止状态。<br>可以使用以下 PowerShell cmdlet 检查云服务是否有保留的 IP：<br>$deployment = Get-AzureDeployment -ServiceName "servicename" -Slot "Production" $dep.ReservedIPName<br><li>正在尝试还原同一云服务中具有以下特殊网络配置的虚拟机。<br>- 采用负载均衡器配置的虚拟机（内部和外部）<br>- 具有多个保留 IP 的虚拟机<br>- 具有多个 NIC 的虚拟机<br>请在 UI 中选择新的云服务，或者参阅[还原注意事项](./backup-azure-restore-vms.md#restoring-vms-with-special-network-configurations)，了解具有特殊网络配置的 VM</ol> |
 | 还原 | 所选 DNS 名称已被使用 - 请指定其他 DNS 名称，然后重试。 | 此处的 DNS 名称是指云服务名称（通常以 .chinacloudapp.cn 结尾）。此名称必须是唯一名称。如果遇到此错误，则需在还原过程中选择其他 VM 名称。<br><br>此错误仅向 Azure 门户预览用户显示。通过 PowerShell 进行的还原操作会成功，因为它只还原磁盘，而不创建 VM。如果在磁盘还原操作之后显式创建 VM，则会遇到该错误。 |
 | 还原 | 指定的虚拟网络配置不正确 - 请指定其他虚拟网络配置，然后重试。 | 无 |
 | 还原 | 指定的云服务使用的是保留 IP，这不符合要还原的虚拟机的配置 - 请指定其他不使用保留 IP 的云服务，或者选择其他用于还原的恢复点。 | 无 |

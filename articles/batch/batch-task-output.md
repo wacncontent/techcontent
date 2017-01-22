@@ -61,7 +61,7 @@ ms.author: marsma
 
 ## 要求：链接的存储帐户  <a name="requirement-linked-storage-account"></a>
 
-若要使用文件约定库将输出存储到持久性存储并在 Azure 门户预览中查看这些输出，必须[将 Azure 存储帐户链接](./batch-application-packages.md#link-a-storage-account/)到 Batch 帐户。如果尚未这样做，请使用 Azure 门户预览将存储帐户链接到 Batch 帐户：
+若要使用文件约定库将输出存储到持久性存储并在 Azure 门户预览中查看这些输出，必须[将 Azure 存储帐户链接](./batch-application-packages.md#link-a-storage-account)到 Batch 帐户。如果尚未这样做，请使用 Azure 门户预览将存储帐户链接到 Batch 帐户：
 
 “Batch 帐户”边栏选项卡 >“设置”>“存储帐户”>“存储帐户”（无）> 在你的订阅中选择一个存储帐户
 
@@ -72,7 +72,7 @@ ms.author: marsma
 使用文件约定库保存作业和任务输出时需要执行两个主要操作：创建存储容器，将输出保存到容器。
 
 >[!WARNING]
-> 由于所有作业和任务输出将存储在同一个容器中，因此，如果有大量的任务同时尝试保存文件，则可能会强制实施[存储节流限制](../storage/storage-performance-checklist.md#blobs/)。
+> 由于所有作业和任务输出将存储在同一个容器中，因此，如果有大量的任务同时尝试保存文件，则可能会强制实施[存储节流限制](../storage/storage-performance-checklist.md#blobs)。
 
 ### 创建存储容器
 

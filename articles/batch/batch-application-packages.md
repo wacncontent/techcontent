@@ -34,7 +34,7 @@ ms.author: marsma
 [Batch REST API][api_rest] 2015-12-01.2.2 版和对应的 [Batch .NET][api_net] 库 3.1.0 版引入了此功能。使用 Batch 时，我们建议始终使用最新的 API 版本。
 
 > [!IMPORTANT]
-> 目前，只有 *CloudServiceConfiguration* 池支持应用程序包。无法在使用 VirtualMachineConfiguration 映像创建的池中使用应用程序包。有关这两种不同配置的详细信息，请参阅 [Provision Linux compute nodes in Azure Batch pools](./batch-linux-nodes.md)（在 Azure Batch 池中预配 Linux 计算节点）的 [Virtual machine configuration](./batch-linux-nodes.md#virtual-machine-configuration/)（虚拟机配置）部分。
+> 目前，只有 *CloudServiceConfiguration* 池支持应用程序包。无法在使用 VirtualMachineConfiguration 映像创建的池中使用应用程序包。有关这两种不同配置的详细信息，请参阅 [Provision Linux compute nodes in Azure Batch pools](./batch-linux-nodes.md)（在 Azure Batch 池中预配 Linux 计算节点）的 [Virtual machine configuration](./batch-linux-nodes.md#virtual-machine-configuration)（虚拟机配置）部分。
 
 ## 关于应用程序和应用程序包
 在 Azure Batch 中，*应用程序*是指一组已创建版本的二进制文件，这些文件可自动下载到池中的计算节点。*应用程序包*指的是这些二进制文件中的一组*特定组合*，其代表应用程序的特定*版本*。
@@ -75,7 +75,7 @@ Batch 中的应用程序包含一个或多个应用程序包，指定应用程�
 若要使用应用程序包，必须先将 Azure 存储帐户链接到 Batch 帐户。如果还没有为 Batch 帐户配置存储帐户，Azure 门户预览在第一次单击 Batch 帐户边栏选项卡中的“应用程序”磁贴时显示警告。
 
 > [!IMPORTANT]
-> Batch 目前*仅*支持**常规用途**存储帐户类型，如[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)的[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account/)中步骤 5 所述。将某个 Azure 存储帐户链接到 Batch 帐户时，*只会*链接**常规用途**的存储帐户。
+> Batch 目前*仅*支持**常规用途**存储帐户类型，如[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)的[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account)中步骤 5 所述。将某个 Azure 存储帐户链接到 Batch 帐户时，*只会*链接**常规用途**的存储帐户。
 
 ![Azure 门户预览中显示的未配置存储帐户警告][9]  
 
@@ -251,7 +251,7 @@ csharp
     CloudTask blenderTask = new CloudTask(taskId, commandLine);
 
 > [!TIP]
-> 有关计算节点环境设置的详细信息，请参阅 [Batch feature overview](./batch-api-basics.md)（Batch 功能概述）中的 [Environment settings for tasks](./batch-api-basics.md#environment-settings-for-tasks/)（任务的环境设置）。
+> 有关计算节点环境设置的详细信息，请参阅 [Batch feature overview](./batch-api-basics.md)（Batch 功能概述）中的 [Environment settings for tasks](./batch-api-basics.md#environment-settings-for-tasks)（任务的环境设置）。
 
 ## 更新池的应用程序包
 如果已配置现有池的应用程序包，你可以指定池的新包。如果为池指定新的包引用，请遵循以下规则：

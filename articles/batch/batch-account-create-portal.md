@@ -57,7 +57,7 @@ ms.author: marsma
 
 ![Azure 门户预览中的 Batch 帐户边栏选项卡][account_blade]  
 
-* **Batch 帐户 URL**：使用 [Batch 开发 API](./batch-technical-overview.md#batch-development-apis/) 创建的应用程序需要使用一个帐户 URL 来管理资源以及在帐户中运行作业。Batch 帐户 URL 采用以下格式：
+* **Batch 帐户 URL**：使用 [Batch 开发 API](./batch-technical-overview.md#batch-development-apis) 创建的应用程序需要使用一个帐户 URL 来管理资源以及在帐户中运行作业。Batch 帐户 URL 采用以下格式：
 
     `https://<account_name>.<region>.batch.azure.com`  
 
@@ -75,7 +75,7 @@ Batch 帐户只在“免费层”中提供，这意味着无需为 Batch 帐户�
 
 如前所述，可以将**常规用途**存储帐户链接到 Batch 帐户（可选）。与 [Batch 文件约定 .NET](./batch-task-output.md)库一样，Batch 的[应用程序包](./batch-application-packages.md)功能在链接的常规用途存储帐户中使用 Blob 存储。这些可选功能可帮助部署 Batch 任务运行的应用程序，以及保存它们生成的数据。
 
-Batch 目前*仅*支持**常规用途**存储帐户类型，如[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)的[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account/)中步骤 5 所述。将某个 Azure 存储帐户链接到 Batch 帐户时，请确保*只*链接**常规用途**存储帐户。
+Batch 目前*仅*支持**常规用途**存储帐户类型，如[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)的[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account)中步骤 5 所述。将某个 Azure 存储帐户链接到 Batch 帐户时，请确保*只*链接**常规用途**存储帐户。
 
 ![创建“常规用途”存储帐户][storage_account]  
 

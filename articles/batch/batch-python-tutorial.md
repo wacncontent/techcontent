@@ -35,7 +35,7 @@ ms.author: marsma
 
 - **Azure 帐户**：如果没有 Azure 订阅，可以[创建一个 Azure 帐户][azure_free_account]。
 - **Batch 帐户**：获取 Azure 订阅后，请[创建 Azure Batch 帐户](./batch-account-create-portal.md)。
-- **存储帐户**：请参阅[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)中的[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account/)。
+- **存储帐户**：请参阅[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)中的[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account)。
 
 ### 代码示例
 
@@ -135,7 +135,7 @@ python
 
 ![在 Azure 存储空间中创建容器][1] <br/>
 
-Batch 包含的内置支持支持与 Azure 存储空间交互。存储帐户中的容器将为 Batch 帐户中运行的任务提供所需的文件。这些容器还提供存储任务生成的输出数据所需的位置。*python\_tutorial\_client.py* 脚本执行的第一个操作是在 [Azure Blob 存储](../storage/storage-introduction.md#blob-storage/)中创建三个容器：
+Batch 包含的内置支持支持与 Azure 存储空间交互。存储帐户中的容器将为 Batch 帐户中运行的任务提供所需的文件。这些容器还提供存储任务生成的输出数据所需的位置。*python\_tutorial\_client.py* 脚本执行的第一个操作是在 [Azure Blob 存储](../storage/storage-introduction.md#blob-storage)中创建三个容器：
 
 - **应用程序**：此容器存储任务运行的 Python 脚本 *python\_tutorial\_task.py*。
 - **输入**：任务将从*输入*容器下载所要处理的数据文件。
@@ -339,7 +339,7 @@ python
 
 - 池的 **ID**（*id* - 必需）<p/>与 Batch 中的大多数实体一样，新池在 Batch 帐户中必须具有唯一 ID。代码将使用池 ID 引用此池，这也是在 Azure [门户][azure_portal]中识别池的方式。
 
-- **计算节点数**（*target\_dedicated* - 必需）<p/>此属性指定应在池中部署多少个 VM。必须注意，所有 Batch 帐户都有默认**配额**，用于限制 Batch 帐户中的**核心**（因此也包括计算节点）数目。可以在 [Quotas and limits for the Azure Batch service](./batch-quota-limit.md)（Azure Batch 服务的配额和限制）中找到默认配额以及如何[提高配额](./batch-quota-limit.md#increase-a-quota/)（例如 Batch 帐户中的核心数目上限）的说明。如果你有类似于“为什么我的池不能包含 X 个以上的节点？”的疑惑，则原因可能在于此核心配额。
+- **计算节点数**（*target\_dedicated* - 必需）<p/>此属性指定应在池中部署多少个 VM。必须注意，所有 Batch 帐户都有默认**配额**，用于限制 Batch 帐户中的**核心**（因此也包括计算节点）数目。可以在 [Quotas and limits for the Azure Batch service](./batch-quota-limit.md)（Azure Batch 服务的配额和限制）中找到默认配额以及如何[提高配额](./batch-quota-limit.md#increase-a-quota)（例如 Batch 帐户中的核心数目上限）的说明。如果你有类似于“为什么我的池不能包含 X 个以上的节点？”的疑惑，则原因可能在于此核心配额。
 
 - 节点的**操作系统**（*virtual\_machine\_configuration* **或** *cloud\_service\_configuration* - 必需）<p/>在 *python\_tutorial\_client.py* 中，我们使用通过 `get_vm_config_for_distro` 帮助器函数获取的 [VirtualMachineConfiguration][py_vm_config] 来创建 Linux 节点池。此帮助器函数使用 [list\_node\_agent\_skus][py_list_skus] 来获取兼容的 [Azure 虚拟机应用商店][vm_marketplace]映像列表并从中选择映像。可以改为指定 [CloudServiceConfiguration][py_cs_config] 并从云服务创建 Windows 节点池。有关这两种配置的详细信息，请参阅 [Provision Linux compute nodes in Azure Batch pools](./batch-linux-nodes.md)（在 Azure Batch 池中预配 Linux 计算节点）。
 

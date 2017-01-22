@@ -22,7 +22,7 @@ ms.author: brandwe
 > [!NOTE]
     v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
-Azure Active Directory 的 v2.0 终结点可让你使用 [OAuth 2.0](./active-directory-v2-protocols.md#oauth2-authorization-code-flow/) 访问令牌保护 Web API，具有个人 Microsoft 帐户以及公司或学校帐户的用户也能够安全访问 Web API。
+Azure Active Directory 的 v2.0 终结点可让你使用 [OAuth 2.0](./active-directory-v2-protocols.md#oauth2-authorization-code-flow) 访问令牌保护 Web API，具有个人 Microsoft 帐户以及公司或学校帐户的用户也能够安全访问 Web API。
 
 **Passport** 是 Node.js 的身份验证中间件。Passport 极其灵活并且采用模块化结构，可以在不造成干扰的情况下放入任何基于 Express 的应用程序或 Resitify Web 应用程序。一套综合性策略支持使用用户名和密码、Facebook、Twitter 等进行身份验证。我们针对 Azure Active directory 开发了一个策略。我们将安装此模块，然后添加 Azure Active Directory `passport-azure-ad` 插件。
 

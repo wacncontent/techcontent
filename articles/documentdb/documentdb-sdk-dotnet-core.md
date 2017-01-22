@@ -52,7 +52,7 @@ ms.author: rnagpal
 借助 DocumentDB .NET Core 预览版 SDK，可生成能在 Windows、Mac 和 Linux 上运行的快速、跨平台 [ASP.NET Core](https://www.asp.net/core) 和 [.NET Core](https://www.microsoft.com/net/core#windows) 应用。
 
 DocumentDB .NET Core 预览版 SDK 与最新版 [DocumentDB.NET SDK](./documentdb-sdk-dotnet.md) 功能相同，并支持以下内容：
-- 所有[连接模式](./documentdb-performance-tips.md#networking/)：网关模式、Direct TCP 和 Direct HTTPs。
+- 所有[连接模式](./documentdb-performance-tips.md#networking)：网关模式、Direct TCP 和 Direct HTTPs。
 - 所有[一致性级别](./documentdb-consistency-levels.md)：强烈一致性、会话一致性、有限过期一致性和最终一致性。
 - [已分区集合](./documentdb-partition-data.md)。
 - [多区域数据库帐户和异地复制](./documentdb-distribute-data-globally.md)。

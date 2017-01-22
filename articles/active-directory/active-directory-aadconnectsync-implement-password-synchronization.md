@@ -142,7 +142,7 @@ Active Directory 域服务以实际用户密码的哈希值表示形式存储密
 4. 选择“搜索连接器空间”。
 5. 找到你要查找的用户。
 6. 选择“沿袭”选项卡，确保至少有一个同步规则的“密码同步”显示为 **True**。在默认配置中，同步规则的名称为 **In from AD - User AccountEnabled**。![有关用户的沿袭信息](./media/active-directory-aadconnectsync-implement-password-synchronization/cspasswordsync.png)
-7. 然后，从 Metaverse 到 Azure AD 连接器空间一直[跟踪用户](./active-directory-aadconnectsync-service-manager-ui-connectors.md#follow-an-object-and-its-data-through-the-system/)。连接器空间对象应存在一个“密码同步”设置为 **True** 的出站规则。在默认配置中，同步规则的名称为 **Out to AAD - User Join**。
+7. 然后，从 Metaverse 到 Azure AD 连接器空间一直[跟踪用户](./active-directory-aadconnectsync-service-manager-ui-connectors.md#follow-an-object-and-its-data-through-the-system)。连接器空间对象应存在一个“密码同步”设置为 **True** 的出站规则。在默认配置中，同步规则的名称为 **Out to AAD - User Join**。
 ![用户的连接器空间属性](./media/active-directory-aadconnectsync-implement-password-synchronization/cspasswordsync2.png)
 8. 若要查看对象在过去一周的密码同步详细信息，请单击“日志...”。
 ![对象日志详细信息](./media/active-directory-aadconnectsync-implement-password-synchronization/csobjectlog.png)

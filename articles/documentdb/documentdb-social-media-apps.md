@@ -100,7 +100,7 @@ Azure DocumentDB 可确保所有属性通过其[自动索引](./documentdb-index
         {"relevance":7, "post":"w34r-qeg6-ref6-8565"}
     ]
 
-我们可以有一个“最新”流（其中帖子按创建日期排序）和一个“最热门”流（其中包括在过去 24 小时内获得了更多赞的帖子），甚至还可以基于逻辑点赞粉丝和兴趣为每个用户实现客户流，且它仍然可以是一个帖子列表。虽然如何生成这些列表还是一个问题，但读取性能仍然不受阻碍。一旦我们获得其中一个列表之后，我们就可以使用 [IN 运算符](./documentdb-sql-query.md#where-clause/) 向 DocumentDB 发布单个查询以一次性获取帖子的所有页面。
+我们可以有一个“最新”流（其中帖子按创建日期排序）和一个“最热门”流（其中包括在过去 24 小时内获得了更多赞的帖子），甚至还可以基于逻辑点赞粉丝和兴趣为每个用户实现客户流，且它仍然可以是一个帖子列表。虽然如何生成这些列表还是一个问题，但读取性能仍然不受阻碍。一旦我们获得其中一个列表之后，我们就可以使用 [IN 运算符](./documentdb-sql-query.md#where-clause) 向 DocumentDB 发布单个查询以一次性获取帖子的所有页面。
 
 可以使用 [Azure App Service](https://www.azure.cn/home/features/app-service/) 的后台进程 - [Web 作业](../app-service-web/web-sites-create-web-jobs.md) - 来构建源流。创建一个帖子后，可以通过使用 [Azure 存储空间](https://www.azure.cn/home/features/storage/)[队列](../storage/storage-dotnet-how-to-use-queues.md)和 Web 作业（通过 [Azure Webjobs SDK](../app-service-web/websites-dotnet-webjobs-sdk.md) 触发）触发后台处理，从而根据我们自己的自定义逻辑实现流内的帖子传播。
 

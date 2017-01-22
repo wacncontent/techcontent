@@ -19,7 +19,7 @@ ms.author: syamk
 ---
 
 # DocumentDB 中的请求单位
-现已推出：DocumentDB [请求单位计算器](https://www.documentdb.com/capacityplanner)。详细了解如何[估计吞吐量需求](./documentdb-request-units.md#estimating-throughput-needs/)。
+现已推出：DocumentDB [请求单位计算器](https://www.documentdb.com/capacityplanner)。详细了解如何[估计吞吐量需求](./documentdb-request-units.md#estimating-throughput-needs)。
 
 ![吞吐量计算器][5]
 

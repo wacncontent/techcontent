@@ -110,7 +110,7 @@ ms.author: kirillg
 
 ## 在门户外使用脚本
 
-Azure 门户预览中的脚本资源管理器只是在 DocumentDB 中使用存储过程、触发器和用户定义的函数的一种方式。你还可以通过 REST API 和[客户端 SDK](./documentdb-sdk-dotnet.md) 使用这些脚本。REST API 文档包含有关[使用 REST 的存储过程](https://msdn.microsoft.com/zh-cn/library/azure/mt489092.aspx)、[使用 REST 的用户定义的函数](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx)和[使用 REST 的触发器](https://msdn.microsoft.com/zh-cn/library/azure/mt489116.aspx)的示例。还提供了介绍如何[使用 C# 处理脚本](./documentdb-dotnet-samples.md#server-side-programming-examples/)和[使用 Node.js 处理脚本](./documentdb-nodejs-samples.md#server-side-programming-examples/)的信息的示例。
+Azure 门户预览中的脚本资源管理器只是在 DocumentDB 中使用存储过程、触发器和用户定义的函数的一种方式。你还可以通过 REST API 和[客户端 SDK](./documentdb-sdk-dotnet.md) 使用这些脚本。REST API 文档包含有关[使用 REST 的存储过程](https://msdn.microsoft.com/zh-cn/library/azure/mt489092.aspx)、[使用 REST 的用户定义的函数](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx)和[使用 REST 的触发器](https://msdn.microsoft.com/zh-cn/library/azure/mt489116.aspx)的示例。还提供了介绍如何[使用 C# 处理脚本](./documentdb-dotnet-samples.md#server-side-programming-examples)和[使用 Node.js 处理脚本](./documentdb-nodejs-samples.md#server-side-programming-examples)的信息的示例。
 
 ## 后续步骤
 

@@ -199,7 +199,7 @@ ms.author: anhoh
     var databaseUrl = `dbs/${config.database.id}`;
     var collectionUrl = `${databaseUrl}/colls/${config.collection.id}`;
 
-可以通过使用 **DocumentClient** 类的 [createDatabase](https://azure.github.io/azure-documentdb-node/DocumentClient.html) 函数创建[数据库](./documentdb-resources.md#databases/)。数据库是跨集合分区的文档存储的逻辑容器。
+可以通过使用 **DocumentClient** 类的 [createDatabase](https://azure.github.io/azure-documentdb-node/DocumentClient.html) 函数创建[数据库](./documentdb-resources.md#databases)。数据库是跨集合分区的文档存储的逻辑容器。
 
 复制并粘贴 **getDatabase** 函数，以使用 ```config``` 对象中指定的 ```id``` 在 app.js 文件中创建新数据库。该函数将检查是否不存在具有相同 ```FamilyRegistry``` ID 的数据库。如果确实存在，我们将返回该数据库而不是创建新的。
 
@@ -259,7 +259,7 @@ ms.author: anhoh
 > 
 > 
 
-可以通过使用 **DocumentClient** 类的 [createCollection](https://azure.github.io/azure-documentdb-node/DocumentClient.html) 函数创建[集合](./documentdb-resources.md#collections/)。集合是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。
+可以通过使用 **DocumentClient** 类的 [createCollection](https://azure.github.io/azure-documentdb-node/DocumentClient.html) 函数创建[集合](./documentdb-resources.md#collections)。集合是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。
 
 将 **getCollection** 函数复制并粘贴到 app.js 文件中的 **getDatabase** 函数下面，使用 ```config``` 对象中指定的 ```id``` 创建新集合。同样，我们将首先检查以确保不存在具有相同 ```FamilyCollection``` ID 的集合。如果确实存在，我们将返回该集合而不是创建新的。
 
@@ -308,7 +308,7 @@ ms.author: anhoh
 祝贺你！ 你已成功创建 DocumentDB 集合。
 
 ## <a id="CreateDoc"></a>步骤 7：创建文档
-可以通过使用 **DocumentClient** 类的 [createDocument](https://azure.github.io/azure-documentdb-node/DocumentClient.html) 函数创建[文档](./documentdb-resources.md#documents/)。文档为用户定义的（任意）JSON 内容。现在，你可以将文档插入 DocumentDB。
+可以通过使用 **DocumentClient** 类的 [createDocument](https://azure.github.io/azure-documentdb-node/DocumentClient.html) 函数创建[文档](./documentdb-resources.md#documents)。文档为用户定义的（任意）JSON 内容。现在，你可以将文档插入 DocumentDB。
 
 将 **getFamilyDocument** 函数复制并粘贴到 **getCollection** 函数下面，以创建包含 ```config``` 对象中保存的 JSON 数据的文档。同样，我们将首先检查以确保不存在具有相同 ID 的文档。
 
@@ -399,7 +399,7 @@ DocumentDB 支持对存储在每个集合中的 JSON 文档进行各种[查询](
 
 ![Node.js 教程 - 说明查询的范围和含义的关系图 - 节点数据库](./media/documentdb-nodejs-get-started/node-js-tutorial-collection-documents.png)
 
-查询中的 [FROM](./documentdb-sql-query.md#from-clause/) 关键字是可选的，因为 DocumentDB 查询的范围已限制为单个集合。因此，“FROM Families f”可与“FROM root r”或者任何其他所选变量名进行交换。默认情况下，DocumentDB 将推断你选择的 Families、root 或变量名，并默认引用当前集合。
+查询中的 [FROM](./documentdb-sql-query.md#from-clause) 关键字是可选的，因为 DocumentDB 查询的范围已限制为单个集合。因此，“FROM Families f”可与“FROM root r”或者任何其他所选变量名进行交换。默认情况下，DocumentDB 将推断你选择的 Families、root 或变量名，并默认引用当前集合。
 
 将代码复制并粘贴到对 **getFamilyDocument** 的调用下面，以执行 **queryCollection** 函数。
 

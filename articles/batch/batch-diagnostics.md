@@ -28,7 +28,7 @@ ms.author: marsma
 
 * [Azure Batch 帐户](./batch-account-create-portal.md)
 
-* [Azure 存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account/)
+* [Azure 存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account)
 
   若要暂留 Batch 诊断日志，必须创建一个将用来存储日志的 Azure 存储帐户。可以在为 Batch 帐户[启用诊断日志记录](#enable-diagnostic-logging)时指定此存储帐户。启用日志收集时指定的存储帐户与[应用程序包](./batch-application-packages.md)和[任务输出暂留](./batch-task-output.md)文章中所提到的链接存储帐户不是同一个。
 

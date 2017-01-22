@@ -53,8 +53,8 @@ Azure 备份服务提供两种类型的保管库（备份保管库和恢复服�
 - 只可以备份选定操作系统版本的虚拟机：
   - **Linux**：Azure 备份支持 [Azure 认可的分发版列表](../virtual-machines/virtual-machines-linux-endorsed-distros.md)，但 Core OS Linux 除外。只要虚拟机上装有 VM 代理且支持 Python，其他自带的 Linux 分发版也可能会正常运行。
   - **Windows Server**：不支持低于 Windows Server 2008 R2 的版本。
-- 仅支持通过 PowerShell 还原属于多 DC 配置的域控制器 (DC) VM。阅读有关[还原多 DC 域控制器](./backup-azure-restore-vms.md#restoring-domain-controller-vms/)的详细信息。
-- 仅支持通过 PowerShell 还原采用以下特殊网络配置的虚拟机。还原操作完成后，在 UI 中使用还原工作流创建的 VM 将不采用这些网络配置。若要了解详细信息，请参阅[还原采用特殊网络配置的 VM](./backup-azure-restore-vms.md#restoring-vms-with-special-netwrok-configurations/)。
+- 仅支持通过 PowerShell 还原属于多 DC 配置的域控制器 (DC) VM。阅读有关[还原多 DC 域控制器](./backup-azure-restore-vms.md#restoring-domain-controller-vms)的详细信息。
+- 仅支持通过 PowerShell 还原采用以下特殊网络配置的虚拟机。还原操作完成后，在 UI 中使用还原工作流创建的 VM 将不采用这些网络配置。若要了解详细信息，请参阅[还原采用特殊网络配置的 VM](./backup-azure-restore-vms.md#restoring-vms-with-special-netwrok-configurations)。
   - 采用负载均衡器配置的虚拟机（内部和外部）
   - 使用多个保留 IP 地址的虚拟机
   - 使用多个网络适配器的虚拟机
@@ -63,7 +63,7 @@ Azure 备份服务提供两种类型的保管库（备份保管库和恢复服�
 
 恢复服务保管库是用于存储在不同时间创建的备份和恢复点的实体。恢复服务保管库还包含与受保护虚拟机关联的备份策略。
 
-Azure 门户预览版目前不支持 Azure 中国区的恢复服务。若要创建恢复服务保管库，请遵循[此处](./backup-azure-vms-automation.md#create-a-recovery-services-vault/)的 PowerShell 步骤
+Azure 门户预览版目前不支持 Azure 中国区的恢复服务。若要创建恢复服务保管库，请遵循[此处](./backup-azure-vms-automation.md#create-a-recovery-services-vault)的 PowerShell 步骤
 
 ## 在虚拟机中安装 VM 代理
 

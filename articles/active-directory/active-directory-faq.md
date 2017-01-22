@@ -110,7 +110,7 @@ Azure Active Directory 是综合性的标识即服务 (IDaaS) 解决方案，其
 - 直接登录联合应用
 - 联合、基于密码或现有的应用的深层链接
 
-有关详细信息，请参阅[为用户部署 Azure AD 集成的应用程序](./active-directory-appssoaccess-whatis.md#deploying-azure-ad-integrated-applications-to-users/)。
+有关详细信息，请参阅[为用户部署 Azure AD 集成的应用程序](./active-directory-appssoaccess-whatis.md#deploying-azure-ad-integrated-applications-to-users)。
 
 - - -
 **问：Azure Active Directory 可通过哪些不同的方式来启用对应用程序的身份验证和单一登录？**
@@ -121,6 +121,6 @@ Azure Active Directory 是综合性的标识即服务 (IDaaS) 解决方案，其
 
 - [Azure AD 的身份验证方案](./active-directory-authentication-scenarios.md)
 - [Active Directory 身份验证协议](./active-directory-developers-guide.md)
-- [Azure Active Directory 中单一登录的工作原理是什么？](./active-directory-appssoaccess-whatis.md#how-does-single-sign-on-with-azure-active-directory-work/)
+- [Azure Active Directory 中单一登录的工作原理是什么？](./active-directory-appssoaccess-whatis.md#how-does-single-sign-on-with-azure-active-directory-work)
 
 <!---HONumber=Mooncake_1128_2016-->

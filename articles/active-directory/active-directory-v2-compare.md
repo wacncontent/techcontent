@@ -98,7 +98,7 @@ v2.0 终结点只能在下列新位置中注册：[apps.dev.microsoft.com](https
 #### 脱机访问
 v2.0 终结点可能需要针对应用使用新的已知权限 — `offline_access` 范围。如果应用程序需要长期表示用户访问资源，则所有应用程序都需要请求此权限，即使用户可能不主动使用此应用程序亦然。在同意对话框中，`offline_access` 范围对用户显示为“脱机访问数据”，而用户必须同意。请求 `offline_access` 权限可让 Web 应用从 v2.0 终结点接收 OAuth 2.0 refresh\_tokens。Refresh\_tokens 属于长效令牌，可用于交换新的 OAuth 2.0 access\_tokens 以延长访问期间。
 
-如果应用未请求 `offline_access` 范围，则收不到 refresh\_tokens。这意味着，当在 [OAuth 2.0 授权代码流](./active-directory-v2-protocols.md#oauth2-authorization-code-flow/)中兑换 authorization\_code 时，只从 `/token` 终结点接收 access\_token。该 access\_token 短时间维持有效（通常是一小时），但最后终将过期。到时，应用必须将用户重定向回到 `/authorize` 终结点以检索新的 authorization\_code。在此重定向期间，根据应用程序的类型，用户或许无需再次输入其凭据或重新同意权限。
+如果应用未请求 `offline_access` 范围，则收不到 refresh\_tokens。这意味着，当在 [OAuth 2.0 授权代码流](./active-directory-v2-protocols.md#oauth2-authorization-code-flow)中兑换 authorization\_code 时，只从 `/token` 终结点接收 access\_token。该 access\_token 短时间维持有效（通常是一小时），但最后终将过期。到时，应用必须将用户重定向回到 `/authorize` 终结点以检索新的 authorization\_code。在此重定向期间，根据应用程序的类型，用户或许无需再次输入其凭据或重新同意权限。
 
 若要深入了解 OAuth 2.0、refresh\_token 和 access\_token，请查看 [v2.0 协议参考](./active-directory-v2-protocols.md)。
 

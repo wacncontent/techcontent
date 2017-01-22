@@ -20,7 +20,7 @@ ms.author: mimig
 ---
 
 # DocumentDB 性能提示
-Azure DocumentDB 是一个快速、弹性的分布式数据库，可以在提供延迟与吞吐量保证的情况下无缝缩放。使用 DocumentDB 时，无需对体系结构进行重大更改或编写复杂的代码就能缩放数据库。扩展和缩减操作就像执行单个 API 调用或 [SDK 方法调用](./documentdb-performance-levels.md#changing-performance-levels-using-the-net-sdk/)一样简单。但是，由于 DocumentDB 是通过网络调用访问的，因此你可以通过客户端优化来获得最高性能。
+Azure DocumentDB 是一个快速、弹性的分布式数据库，可以在提供延迟与吞吐量保证的情况下无缝缩放。使用 DocumentDB 时，无需对体系结构进行重大更改或编写复杂的代码就能缩放数据库。扩展和缩减操作就像执行单个 API 调用或 [SDK 方法调用](./documentdb-performance-levels.md#changing-performance-levels-using-the-net-sdk)一样简单。但是，由于 DocumentDB 是通过网络调用访问的，因此你可以通过客户端优化来获得最高性能。
 
 如果你有“如何改善数据库性能”的疑问，请考虑以下选项：
 
@@ -88,7 +88,7 @@ Azure DocumentDB 是一个快速、弹性的分布式数据库，可以在提供
     默认情况下，DocumentDB 请求是通过 HTTPS/REST 发出的，并受制于每个主机名或 IP 地址的默认连接限制。可能需要将 MaxConnections 设置为较大的值 (100-1000)，以便客户端库能够同时利用多个连接来访问 DocumentDB。在 .NET SDK 1.8.0 和更高版本中，[ServicePointManager.DefaultConnectionLimit](https://msdn.microsoft.com/zh-cn/library/system.net.servicepointmanager.defaultconnectionlimit.aspx) 的默认值为 50，若要更改此值，可将 [Documents.Client.ConnectionPolicy.MaxConnectionLimit](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.connectionpolicy.maxconnectionlimit.aspx) 设置为更大的值。
 4. **优化分区集合的并行查询**
 
-     DocumentDB .NET SDK 1.9.0 和更高版本支持并行查询，允许并行查询分区集合（有关详细信息，请参阅 [Working with the SDKs](./documentdb-partition-data.md#working-with-the-sdks/)（使用 SDK）和相关[代码示例](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/Queries/Program.cs)）。并行查询旨在改善其有序对等项的查询延迟和吞吐量。并行查询提供以下两个参数，用户可根据要求对其进行优化：(a) MaxDegreeOfParallelism：用于控制可并行查询的分区数上限；(b) MaxBufferedItemCount：用于控制预先提取的结果数。
+     DocumentDB .NET SDK 1.9.0 和更高版本支持并行查询，允许并行查询分区集合（有关详细信息，请参阅 [Working with the SDKs](./documentdb-partition-data.md#working-with-the-sdks)（使用 SDK）和相关[代码示例](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/Queries/Program.cs)）。并行查询旨在改善其有序对等项的查询延迟和吞吐量。并行查询提供以下两个参数，用户可根据要求对其进行优化：(a) MaxDegreeOfParallelism：用于控制可并行查询的分区数上限；(b) MaxBufferedItemCount：用于控制预先提取的结果数。
 
     (a) ***优化 MaxDegreeOfParallelism：***
     并行查询的工作原理是以并行方式查询多个分区。但是，在查询时，将按顺序从单个分区集合提取数据。因此，将 MaxDegreeOfParallelism 设置为分区数最有可能实现最高性能的查询，前提是其他所有系统条件保持不变。如果你不知道分区数目，可以将 MaxDegreeOfParallelism 设置为较大的数字，让系统选择最小值（分区数、用户提供的输入值）作为 MaxDegreeOfParallelism。
@@ -104,7 +104,7 @@ Azure DocumentDB 是一个快速、弹性的分布式数据库，可以在提供
     在某些情况下，降低垃圾收集的频率可能会有帮助。在 .NET 中，应将 [gcServer](https://msdn.microsoft.com/zh-cn/library/ms229357.aspx) 设置为 true。
 6. **按 RetryAfter 间隔实现退让**
 
-    在性能测试期间，应该增加负载，直到系统对小部分请求进行限制为止。如果受到限制，客户端应用程序应按照服务器指定的重试间隔在限制时退让。遵循退让可确保最大程度地减少等待重试的时间。DocumentDB [.NET](./documentdb-sdk-dotnet.md) 和 [Java](./documentdb-sdk-java.md) 1.8.0 和更高版本、[Node.js](./documentdb-sdk-node.md) 和 [Python](./documentdb-sdk-python.md) 1.9.0 和更高版本，以及所有支持的 [.NET Core](./documentdb-sdk-dotnet-core.md) SDK 版本均支持重试策略。有关详细信息，请参阅[超过保留的吞吐量限制](./documentdb-request-units.md#RequestRateTooLarge/)和 [RetryAfter](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.documents.documentclientexception.retryafter.aspx)。
+    在性能测试期间，应该增加负载，直到系统对小部分请求进行限制为止。如果受到限制，客户端应用程序应按照服务器指定的重试间隔在限制时退让。遵循退让可确保最大程度地减少等待重试的时间。DocumentDB [.NET](./documentdb-sdk-dotnet.md) 和 [Java](./documentdb-sdk-java.md) 1.8.0 和更高版本、[Node.js](./documentdb-sdk-node.md) 和 [Python](./documentdb-sdk-python.md) 1.9.0 和更高版本，以及所有支持的 [.NET Core](./documentdb-sdk-dotnet-core.md) SDK 版本均支持重试策略。有关详细信息，请参阅[超过保留的吞吐量限制](./documentdb-request-units.md#RequestRateTooLarge)和 [RetryAfter](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.documents.documentclientexception.retryafter.aspx)。
 7. **增大客户端工作负荷**
 
     如果以高吞吐量级别（> 50,000 RU/秒）进行测试，客户端应用程序可能成为瓶颈，因为计算机的 CPU 或网络利用率将达到上限。如果达到此限制，可以将客户端应用程序扩展到多个服务器，以进一步推送 DocumentDB 帐户。

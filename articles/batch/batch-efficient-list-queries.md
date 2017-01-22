@@ -227,7 +227,7 @@ csharp
 
 ## 后续步骤
 ### 并行节点任务
-[通过并发节点任务最大限度提高 Azure 批处理计算资源的使用率](./batch-parallel-node-tasks.md)是另一篇与批处理应用程序性能相关的文章。在数量较少但规模更大的计算节点上执行并行任务适合某些类型的工作负荷。若需详细了解此类方案，请查看文章中的[示例方案](./batch-parallel-node-tasks.md#example-scenario/)。
+[通过并发节点任务最大限度提高 Azure 批处理计算资源的使用率](./batch-parallel-node-tasks.md)是另一篇与批处理应用程序性能相关的文章。在数量较少但规模更大的计算节点上执行并行任务适合某些类型的工作负荷。若需详细了解此类方案，请查看文章中的[示例方案](./batch-parallel-node-tasks.md#example-scenario)。
 
 ### Batch 论坛
 MSDN 上的 [Azure Batch 论坛][forum]是探讨 Batch 服务以及咨询其相关问题的不错场所。欢迎前往浏览这些帮忙解决“棘手问题”的贴子，并发布你在构建 Batch 解决方案时遇到的问题。

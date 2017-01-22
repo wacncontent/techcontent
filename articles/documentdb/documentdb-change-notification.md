@@ -24,7 +24,7 @@ wacn.date: 01/19/2017
 
 我已使用 BizTalk Server 许多年，这是使用 [WCF LOB 适配器](https://msdn.microsoft.com/zh-cn/library/bb798128.aspx)时非常常见的案例。因此，我决定试试看能否在 DocumentDB 中对新增和/或已修改的文档重现此功能。
 
-本文概述了更改通知解决方案的组件，其中包括[触发器](./documentdb-programming.md#trigger/)和逻辑应用。重要代码片段以内联方式提供，[GitHub](https://github.com/HEDIDIN/DocDbNotifications) 上提供了整个解决方案。
+本文概述了更改通知解决方案的组件，其中包括[触发器](./documentdb-programming.md#trigger)和逻辑应用。重要代码片段以内联方式提供，[GitHub](https://github.com/HEDIDIN/DocDbNotifications) 上提供了整个解决方案。
 
 ## 使用案例
 

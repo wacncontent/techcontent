@@ -52,7 +52,7 @@ DirSyncFeature | 注释
 --- | ---
 DirectoryExtensions | [Azure AD Connect 同步：目录扩展](./active-directory-aadconnectsync-feature-directory-extensions.md)
 PasswordSync | [使用 Azure AD Connect 同步实现密码同步](./active-directory-aadconnectsync-implement-password-synchronization.md)
-UnifiedGroupWriteback | [预览：组写回](./active-directory-aadconnect-feature-preview.md#group-writeback/)
+UnifiedGroupWriteback | [预览：组写回](./active-directory-aadconnect-feature-preview.md#group-writeback)
 UserWriteback | 目前不支持。
 
 ## 重复属性复原

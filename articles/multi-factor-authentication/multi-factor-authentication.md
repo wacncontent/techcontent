@@ -66,7 +66,7 @@ Azure 多重身份验证有三个不同版本。
 | --- | --- |
 | 适用于 Office 365 的多重身份验证 |此版本专门与 Office 365 应用程序配合使用，可以从 Office 365 门户进行管理。因此，管理员现在可以使用双重验证来帮助保护其 Office 365 资源。此版本是 Office 365 订阅的一部分。 |
 | 面向 Azure 管理员的多重身份验证 |免费向所有 Azure 管理员提供适用于 Office 365 的同一组双重验证功能。Azure 订阅的每个管理员帐户可以启用此功能，以实现额外的保护。因此，如果管理员要访问 Azure 门户预览以创建 VM 或网站、管理存储或任何其他 Azure 服务，可将 MFA 添加到其管理员帐户。 |
-| Azure 多重身份验证 | Azure 多重身份验证（也称为“完整” 版本）提供了最丰富的功能集。它通过 [Azure 经典管理门户](https://manage.windowsazure.cn)、高级报告以及对一系列本地和云应用程序的支持，提供额外的配置选项。Azure 多重身份验证随附在 Azure Active Directory Premium 和企业移动性套件中，可在云中或本地进行部署。查看以下内容，了解[获取 Azure 多重身份验证的其他方法](./multi-factor-authentication.md#how-to-get-azure-multi-factor-authentication/)。 |
+| Azure 多重身份验证 | Azure 多重身份验证（也称为“完整” 版本）提供了最丰富的功能集。它通过 [Azure 经典管理门户](https://manage.windowsazure.cn)、高级报告以及对一系列本地和云应用程序的支持，提供额外的配置选项。Azure 多重身份验证随附在 Azure Active Directory Premium 和企业移动性套件中，可在云中或本地进行部署。查看以下内容，了解[获取 Azure 多重身份验证的其他方法](./multi-factor-authentication.md#how-to-get-azure-multi-factor-authentication)。 |
 
 ## 版本功能比较
 下表提供了 Azure 多重身份验证的各个版本中可用的功能列表。
@@ -103,7 +103,7 @@ Azure 多重身份验证有三个不同版本。
     - **按用户**。适用于要为固定数量、需要定期进行身份验证的员工启用双重验证的企业。
     - **按身份验证**。适用于要为大量的、需要不定期进行身份验证的外部用户启用双重验证的企业。
 
-Azure 多重身份验证为云和服务器提供了可选择的验证方法。这表示可以选择用户可使用的方法：电话呼叫、信息、应用通知或应用代码。有关详细信息，请参阅 [可选择的验证方法](./multi-factor-authentication-whats-next.md#selectable-verification-methods/)。
+Azure 多重身份验证为云和服务器提供了可选择的验证方法。这表示可以选择用户可使用的方法：电话呼叫、信息、应用通知或应用代码。有关详细信息，请参阅 [可选择的验证方法](./multi-factor-authentication-whats-next.md#selectable-verification-methods)。
 
 有关定价的详细信息，请参阅 [Azure MFA 定价](https://www.azure.cn/pricing/details/multi-factor-authentication/)。
 

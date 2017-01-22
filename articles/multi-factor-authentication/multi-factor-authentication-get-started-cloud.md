@@ -68,7 +68,7 @@ ms.author: kgremban
 - 已禁用
 
 > [!IMPORTANT]
->  请注意，如果直接从“禁用”状态进入“强制”状态，非新式验证客户端将停止工作，因为用户未经历 MFA 注册并获取[应用密码](./multi-factor-authentication-whats-next.md#app-passwords/)。如果使用非新式验证客户端并且需要应用密码，建议从“已禁用”状态更改为“已启用”状态。这样，用户便可以注册并获取其应用密码。
+>  请注意，如果直接从“禁用”状态进入“强制”状态，非新式验证客户端将停止工作，因为用户未经历 MFA 注册并获取[应用密码](./multi-factor-authentication-whats-next.md#app-passwords)。如果使用非新式验证客户端并且需要应用密码，建议从“已禁用”状态更改为“已启用”状态。这样，用户便可以注册并获取其应用密码。
 
         $st = New-Object -TypeName Microsoft.Online.Administration.StrongAuthenticationRequirement
         $st.RelyingParty = "*"

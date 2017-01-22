@@ -155,16 +155,16 @@ ms.author: marsma
 
 在 Batch 服务中创建计算节点的池。
 
-如 [Batch feature overview](./batch-api-basics.md#pool/)（Batch 功能概述）中所述，为池中的节点选择操作系统时，可以使用两个选项：“虚拟机配置”和“云服务配置”。使用 `--image-*` 选项可创建虚拟机配置池，使用 `--os-family` 可创建云服务配置池。不能同时指定 `--os-family` 和 `--image-*` 选项。
+如 [Batch feature overview](./batch-api-basics.md#pool)（Batch 功能概述）中所述，为池中的节点选择操作系统时，可以使用两个选项：“虚拟机配置”和“云服务配置”。使用 `--image-*` 选项可创建虚拟机配置池，使用 `--os-family` 可创建云服务配置池。不能同时指定 `--os-family` 和 `--image-*` 选项。
 
-可以指定池[应用程序包](./batch-application-packages.md)以及[启动任务](./batch-api-basics.md#start-task/)的命令行。若要指定启动任务的资源文件，必须改用 [JSON 文件](#json-files)。
+可以指定池[应用程序包](./batch-application-packages.md)以及[启动任务](./batch-api-basics.md#start-task)的命令行。若要指定启动任务的资源文件，必须改用 [JSON 文件](#json-files)。
 
 使用以下命令删除池：
 
     azure batch pool delete [pool-id]
 
 >[!TIP]
-> 在[虚拟机映像列表](./batch-linux-nodes.md#list-of-virtual-machine-images/)中检查适合 `--image-*` 选项的值。
+> 在[虚拟机映像列表](./batch-linux-nodes.md#list-of-virtual-machine-images)中检查适合 `--image-*` 选项的值。
 
 ## 创建作业
 

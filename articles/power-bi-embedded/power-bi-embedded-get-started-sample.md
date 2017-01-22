@@ -46,7 +46,7 @@ wacn.date: 01/13/2017
 
     ![](./media/powerbi-embedded-get-started-sample/console-option-5.png)  
 
-6. 输入**工作区集合**名称和**访问密钥**。可以通过 **Azure 门户预览**获取这些信息。若要了解有关如何获取**访问密钥**的信息，请参阅“Power BI Embedded 入门”中的[查看 Power BI API 访问密钥](./power-bi-embedded-get-started-sample.md#view-access-keys/)。
+6. 输入**工作区集合**名称和**访问密钥**。可以通过 **Azure 门户预览**获取这些信息。若要了解有关如何获取**访问密钥**的信息，请参阅“Power BI Embedded 入门”中的[查看 Power BI API 访问密钥](./power-bi-embedded-get-started-sample.md#view-access-keys)。
 
     ![](./media/powerbi-embedded-get-started-sample/azure-portal.png)  
 

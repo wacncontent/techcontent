@@ -42,7 +42,7 @@ ms.author: trinadhk; jimpark;
 
     ![选择日期](./media/backup-azure-restore-vms/select-date.png)
 
-    单击日历控件中的日期后，当日可用的恢复点将显示在下面的恢复点表中。“时间”列指示生成快照的时间。“类型”列显示恢复点的[一致性](./backup-azure-vms.md#consistency-of-recovery-points/)。表标题在括号中显示该日期可用的恢复点数目。
+    单击日历控件中的日期后，当日可用的恢复点将显示在下面的恢复点表中。“时间”列指示生成快照的时间。“类型”列显示恢复点的[一致性](./backup-azure-vms.md#consistency-of-recovery-points)。表标题在括号中显示该日期可用的恢复点数目。
 
     ![恢复点](./media/backup-azure-restore-vms/recovery-points.png)
 3. 从“恢复点”表中选择恢复点，然后单击“下一步”箭头转到下一个屏幕。
@@ -132,14 +132,14 @@ PowerShell 能够只从备份还原 VM 磁盘，而不建立虚拟机。当还�
 
 若要在还原磁盘后完全重新创建虚拟机，请执行以下步骤：
 
-1. 使用 [Azure 备份 PowerShell](./backup-azure-vms-classic-automation.md#restore-an-azure-vm/) 从备份保管库还原磁盘
+1. 使用 [Azure 备份 PowerShell](./backup-azure-vms-classic-automation.md#restore-an-azure-vm) 从备份保管库还原磁盘
 2. 使用 PowerShell cmdlet 创建负载均衡器/多个 NIC/多个保留 IP 所需的 VM 配置，并使用该配置创建具有所需配置的 VM。
 
     - 创建具有[多个 NIC](../virtual-network/virtual-networks-multiple-nics.md) 的 VM
     - 具有[多个保留 IP](../virtual-network/virtual-networks-reserved-public-ip.md) 的 VM
 
 ## 后续步骤
-- [排查错误](./backup-azure-vms-troubleshoot.md#restore/)
+- [排查错误](./backup-azure-vms-troubleshoot.md#restore)
 - [管理虚拟机](./backup-azure-manage-vms-classic.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

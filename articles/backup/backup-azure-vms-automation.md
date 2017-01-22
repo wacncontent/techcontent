@@ -102,7 +102,7 @@ ms.author: markgal; trinadhk
 
         PS C:\> New-AzureRmRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "China North"
 
-4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md#locally-redundant-storage/) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage/)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
+4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md#locally-redundant-storage) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
 
         PS C:\> $vault1 = Get-AzureRmRecoveryServicesVault -Name "testVault"
         PS C:\> Set-AzureRmRecoveryServicesBackupProperties  -Vault $vault1 -BackupStorageRedundancy GeoRedundant

@@ -34,11 +34,11 @@ Azure AD 高级版适用于使用世界范围的 Azure AD 实例的中国客户�
 使用以下链接可跳转至你最感兴趣的文档：
 
 - [概述：Azure AD 中的密码管理](./active-directory-passwords-how-it-works.md)
-- [Azure AD 中的自助密码重置：如何启用、配置和测试自助密码重置](./active-directory-passwords-getting-started.md#enable-users-to-reset-their-azure-ad-passwords/)
+- [Azure AD 中的自助密码重置：如何启用、配置和测试自助密码重置](./active-directory-passwords-getting-started.md#enable-users-to-reset-their-azure-ad-passwords)
 - [Azure AD 中的自助密码重置：如何根据你的需要自定义密码重置](./active-directory-passwords-customize.md)
 - [Azure AD 中的自助密码重置：部署和管理最佳实践](./active-directory-passwords-best-practices.md)
 - [Azure AD 中的密码管理报告：如何查看租户中的密码管理活动](./active-directory-passwords-get-insights.md)
-- [密码写回：如何配置 Azure AD 以管理本地密码](./active-directory-passwords-getting-started.md#enable-users-to-reset-or-change-their-ad-passwords/)
+- [密码写回：如何配置 Azure AD 以管理本地密码](./active-directory-passwords-getting-started.md#enable-users-to-reset-or-change-their-ad-passwords)
 - [Azure AD 密码管理故障排除](./active-directory-passwords-troubleshoot.md)
 - [Azure AD 密码管理常见问题](./active-directory-passwords-faq.md)
 

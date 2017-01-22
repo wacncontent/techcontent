@@ -26,7 +26,7 @@ ms.author: dastrock
 
 对于这些应用程序（AngularJS、Ember.js、React.js 等），Azure AD 支持 OAuth 2.0 隐式授权流。有关隐式流的说明，请参阅 [OAuth 2.0 规范](http://tools.ietf.org/html/rfc6749#section-4.2)。其主要优点是它可让应用程序从 Azure AD 获取令牌，无需要执行后端服务器凭据交换。这可让应用登录用户、维护会话，并获取客户端 JavaScript 代码中所有其他 Web API 的令牌。使用隐式流时有几个重要的安全注意事项 - 特别是关于[客户端](http://tools.ietf.org/html/rfc6749#section-10.3)和[用户模拟](http://tools.ietf.org/html/rfc6749#section-10.3)。
 
-如果你想要使用隐式流与 Azure AD 将身份验证添加到 JavaScript 应用，建议使用我们的开放源代码 JavaScript 库 [adal.js](https://github.com/AzureAD/azure-activedirectory-library-for-js)。[此处](./active-directory-appmodel-v2-overview.md#getting-started/)有几篇 AngularJS 教程可以帮助入门。
+如果你想要使用隐式流与 Azure AD 将身份验证添加到 JavaScript 应用，建议使用我们的开放源代码 JavaScript 库 [adal.js](https://github.com/AzureAD/azure-activedirectory-library-for-js)。[此处](./active-directory-appmodel-v2-overview.md#getting-started)有几篇 AngularJS 教程可以帮助入门。
 
 但是，如果你不想要使用单一页面应用程序中的库，而是自行发送协议消息，请遵循下面的常规步骤。
 
@@ -58,7 +58,7 @@ ms.author: dastrock
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
-| tenant | 必填 | 请求路径中的 `{tenant}` 值可用于控制哪些用户可以登录应用程序。允许的值为 `common`、`organizations`、`consumers` 和租户标识符。有关更多详细信息，请参阅[协议基础知识](./active-directory-v2-protocols.md#endpoints/)。 |
+| tenant | 必填 | 请求路径中的 `{tenant}` 值可用于控制哪些用户可以登录应用程序。允许的值为 `common`、`organizations`、`consumers` 和租户标识符。有关更多详细信息，请参阅[协议基础知识](./active-directory-v2-protocols.md#endpoints)。 |
 | client\_id | 必填 | 注册门户 ([apps.dev.microsoft.com](https://apps.dev.microsoft.com)) 分配给应用的应用程序 ID。 |
 | response\_type | 必填 | 必须包含 OpenID Connect 登录的 `id_token`。也可以包含 response\_type `token`。此处使用 `token`，让应用能够立即从授权终结点接收访问令牌，而无需向授权终结点发出第二次请求。如果使用 `token` response\_type，`scope` 参数必须包含范围，以指出要对哪个资源发出令牌。 |
 | redirect\_uri | 建议 | 应用程序的 redirect\_uri，应用程序可在此发送及接收身份验证响应。其必须完全符合在门户中注册的其中一个 redirect\_uris，否则必须是编码的 url。 |
@@ -110,7 +110,7 @@ ms.author: dastrock
 ## 验证 id\_token
 仅接收 id\_token 不足以验证用户，必须身份验证 id\_token 签名，并按照应用的要求验证令牌中的声明。v2.0 终结点使用 [JSON Web 令牌 (JWT)](http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html) 和公钥加密对令牌进行签名并验证其是否有效。
 
-可以选择验证客户端代码中的 `id_token`，但是常见的做法是将 `id_token` 发送到后端服务器，并在那里执行验证。验证 id\_token 的签名后，就有几项声明需要验证。有关详细信息，请参阅 [v2.0 令牌参考](./active-directory-v2-tokens.md)，包括[验证令牌](./active-directory-v2-tokens.md#validating-tokens/)和[有关签名密钥滚动更新的重要信息](./active-directory-v2-tokens.md#validating-tokens/)。我们建议利用库来分析和验证令牌 - 对于大多数语言和平台至少有一个可用。
+可以选择验证客户端代码中的 `id_token`，但是常见的做法是将 `id_token` 发送到后端服务器，并在那里执行验证。验证 id\_token 的签名后，就有几项声明需要验证。有关详细信息，请参阅 [v2.0 令牌参考](./active-directory-v2-tokens.md)，包括[验证令牌](./active-directory-v2-tokens.md#validating-tokens/)和[有关签名密钥滚动更新的重要信息](./active-directory-v2-tokens.md#validating-tokens)。我们建议利用库来分析和验证令牌 - 对于大多数语言和平台至少有一个可用。
 <!--TODO: Improve the information on this-->
 
 你可能还希望根据自己的方案验证其他声明。一些常见的验证包括：
@@ -148,7 +148,7 @@ ms.author: dastrock
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
-| tenant | 必填 | 请求路径中的 `{tenant}` 值可用于控制哪些用户可以登录应用程序。允许的值为 `common`、`organizations`、`consumers` 和租户标识符。有关更多详细信息，请参阅[协议基础知识](./active-directory-v2-protocols.md#endpoints/)。 |
+| tenant | 必填 | 请求路径中的 `{tenant}` 值可用于控制哪些用户可以登录应用程序。允许的值为 `common`、`organizations`、`consumers` 和租户标识符。有关更多详细信息，请参阅[协议基础知识](./active-directory-v2-protocols.md#endpoints)。 |
 | client\_id | 必填 | 注册门户 ([apps.dev.microsoft.com](https://apps.dev.microsoft.com)) 分配给应用的应用程序 ID。 |
 | response\_type | 必填 | 必须包含 OpenID Connect 登录的 `id_token`。还可以包含其他 response\_type，例如 `code`。 |
 | redirect\_uri | 建议 | 应用程序的 redirect\_uri，应用程序可在此发送及接收身份验证响应。其必须完全符合在门户中注册的其中一个 redirect\_uris，否则必须是编码的 url。 |

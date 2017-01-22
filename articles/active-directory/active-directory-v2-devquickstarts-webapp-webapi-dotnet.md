@@ -21,7 +21,7 @@ wacn.date: 12/12/2016
 # 从 .NET Web 应用调用 API
 通过 v2.0 终结点，可以快速地将身份验证添加 Web 应用和 Web API，同时支持个人 Microsoft 帐户以及工作或学校帐户。此外，我们将构建一个借助 Microsoft OWIN 中间件使用 OpenID Connect 将用户登录的 MVC Web 应用。该 Web 应用程序将获取受 OAuth 2.0 保护的 Web API 的 OAuth 2.0 访问令牌，用于创建、读取和删除给定用户的“待办事项列表”。
 
-本教程着重介绍如何通过 MSAL 获取和使用 Web 应用中的访问令牌，在[此处](./active-directory-v2-flows.md#web-apps/)可找到完整介绍。可能必须先了解如何[将基本登录添加到 Web 应用](./active-directory-v2-devquickstarts-dotnet-web.md)，或者如何[正确保护 Web API](./active-directory-v2-devquickstarts-dotnet-api.md)。
+本教程着重介绍如何通过 MSAL 获取和使用 Web 应用中的访问令牌，在[此处](./active-directory-v2-flows.md#web-apps)可找到完整介绍。可能必须先了解如何[将基本登录添加到 Web 应用](./active-directory-v2-devquickstarts-dotnet-web.md)，或者如何[正确保护 Web API](./active-directory-v2-devquickstarts-dotnet-api.md)。
 
 > [!NOTE]
 v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。

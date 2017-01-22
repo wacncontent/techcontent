@@ -74,7 +74,7 @@ wacn.date: 01/04/2017
 
         PS C:\> New-AzureRmRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "China North"
 
-4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md#locally-redundant-storage/) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage/)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
+4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md#locally-redundant-storage) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
 
     > [!TIP]
     > 许多 Azure 备份 cmdlet 要求使用恢复服务保管库对象作为输入。出于此原因，在变量中存储备份恢复服务保管库对象可提供方便。

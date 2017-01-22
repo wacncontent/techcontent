@@ -87,7 +87,7 @@ Azure Active Directory 为组织的云应用程序提供企业级标识管理。
 
 ## 后续步骤
 
-[开始编写代码](./active-directory-developers-guide.md#getting-started/)。
+[开始编写代码](./active-directory-developers-guide.md#getting-started)。
 
 [使用 Azure AD 登录用户](./active-directory-authentication-scenarios.md)
 

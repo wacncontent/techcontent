@@ -26,7 +26,7 @@ v2.0 终结点在每个[身份验证流](./active-directory-v2-flows.md)的处�
 
 ## 类型的令牌  <a name="types-of-tokens"></a>
 
-v2.0 终结点支持 [OAuth 2.0 授权协议](./active-directory-v2-protocols.md)，该协议使用 access\_token 与 refresh\_token。它还支持通过 [OpenID Connect](./active-directory-v2-protocols.md#openid-connect-sign-in-flow/) 进行身份验证和登录，其中引入了第三种类型的令牌 id\_token。每个令牌表示为“持有者令牌”。
+v2.0 终结点支持 [OAuth 2.0 授权协议](./active-directory-v2-protocols.md)，该协议使用 access\_token 与 refresh\_token。它还支持通过 [OpenID Connect](./active-directory-v2-protocols.md#openid-connect-sign-in-flow) 进行身份验证和登录，其中引入了第三种类型的令牌 id\_token。每个令牌表示为“持有者令牌”。
 
 持有者令牌是一种轻型安全令牌，它授予对受保护资源的“持有者”访问权限。从这个意义上来说，“持有者”是可以提供令牌的任何一方。虽然某一方必须首先通过 Azure AD 的身份验证才能收到持有者令牌，但如果不采取必要的步骤在传输过程和存储中对令牌进行保护，令牌可能会被意外的某一方拦截并使用。虽然某些安全令牌具有内置机制来防止未经授权方使用它们，但是持有者令牌没有这一机制，因此必须在安全的通道（例如传输层安全 (HTTPS)）中进行传输。如果持有者令牌以明文传输，则恶意方可以利用中间人攻击来获得令牌并使用它来对受保护资源进行未经授权的访问。当存储或缓存持有者令牌供以后使用时，也应遵循同样的安全原则。请始终确保你的应用以安全的方式传输和存储持有者令牌。有关持有者令牌的更多安全注意事项，请参阅 [RFC 6750 第 5 部分](http://tools.ietf.org/html/rfc6750)。
 
@@ -34,7 +34,7 @@ v2.0 终结点颁发的许多令牌都实现为 Json Web 令牌或 JWT。JWT 是
 
 ## Id\_tokens  <a name="id_tokens"></a>
 
-Id\_token 是应用使用 [OpenID Connect](./active-directory-v2-protocols.md#openid-connect-sign-in-flow/) 执行身份验证时收到的一种登录安全令牌形式。它以 [JWT](#types-of-tokens) 表示，包含可让用户登录应用的声明。可以适时使用 id\_token 中的声明 - 通常用于显示帐户信息或在应用程序中进行访问控制决策。v2.0 终结点只颁发一种类型的 id\_token，而无论用户登录的类型为何，都具有一组一致的声明。也就是说，id\_token 的格式和内容与个人 Microsoft 帐户用户及工作或学校帐户的格式与内容相同。
+Id\_token 是应用使用 [OpenID Connect](./active-directory-v2-protocols.md#openid-connect-sign-in-flow) 执行身份验证时收到的一种登录安全令牌形式。它以 [JWT](#types-of-tokens) 表示，包含可让用户登录应用的声明。可以适时使用 id\_token 中的声明 - 通常用于显示帐户信息或在应用程序中进行访问控制决策。v2.0 终结点只颁发一种类型的 id\_token，而无论用户登录的类型为何，都具有一组一致的声明。也就是说，id\_token 的格式和内容与个人 Microsoft 帐户用户及工作或学校帐户的格式与内容相同。
 
 Id\_token 已签名，但目前不会加密。应用收到 id\_token 时，必须[验证签名](#validating-tokens)以证明令牌的真实性，并验证令牌中的几个声明来证明其有效性。应用验证的声明根据方案要求而有所不同，但存在一些[常见声明验证](#validating-tokens)，应用必须在每种方案中执行。
 

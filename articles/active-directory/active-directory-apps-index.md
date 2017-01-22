@@ -41,7 +41,7 @@ wacn.date: 01/19/2017
 | 功能区 | |
 | :---: | --- |
 | 联合单一登录 | [排查基于 SAML 的单一登录问题](./active-directory-saml-debugging.md) |
-| 本地 AD 与 Azure AD 之间的单一登录 | [密码同步疑难解答](./active-directory-aadconnectsync-implement-password-synchronization.md)<br /><br />[密码写回疑难解答](./active-directory-passwords-troubleshoot.md#troubleshoot-password-writeback/) | 
+| 本地 AD 与 Azure AD 之间的单一登录 | [密码同步疑难解答](./active-directory-aadconnectsync-implement-password-synchronization.md)<br /><br />[密码写回疑难解答](./active-directory-passwords-troubleshoot.md#troubleshoot-password-writeback) | 
 
 ##单一登录 (SSO)
 
@@ -52,7 +52,7 @@ wacn.date: 01/19/2017
 | 文章指南 | |
 | :---: | --- |
 | 联合身份验证和其他登录类型简介 | [使用 Azure AD 进行单一登录](./active-directory-appssoaccess-whatis.md) |
-| 通过已简化的单一登录配置步骤与 Azure AD 预先集成的数千个 SaaS 应用程序 | [Azure AD 应用程序库入门](./active-directory-appssoaccess-whatis.md#get-started-with-the-azure-ad-application-gallery/)<br /><br />[支持联合身份验证的预先集成应用完整列表](http://aka.ms/aadfederatedapps)<br /><br />[如何将应用添加到 Azure AD 应用库](./active-directory-app-gallery-listing.md) |
+| 通过已简化的单一登录配置步骤与 Azure AD 预先集成的数千个 SaaS 应用程序 | [Azure AD 应用程序库入门](./active-directory-appssoaccess-whatis.md#get-started-with-the-azure-ad-application-gallery)<br /><br />[支持联合身份验证的预先集成应用完整列表](http://aka.ms/aadfederatedapps)<br /><br />[如何将应用添加到 Azure AD 应用库](./active-directory-app-gallery-listing.md) |
 | 如何手动设置和自定义单一登录配置 | [如何针对预先集成的应用自定义在 SAML 令牌中颁发的声明](./active-directory-saml-claims-customization.md) |
 | 使用 SAML 协议的联合应用的故障排除指南 | [排查基于 SAML 的单一登录问题](./active-directory-saml-debugging.md) |
 | 如何设置应用的证书过期日期，以及如何续订证书 | [在 Azure Active Directory 中管理用于联合单一登录的证书](./active-directory-sso-certs.md) |
@@ -93,7 +93,7 @@ wacn.date: 01/19/2017
 | Azure AD Connect 中提供的单一登录选项概述，以及管理混合环境的相关信息 | [Azure AD Connect 中的用户登录选项](./active-directory-aadconnect-user-signin.md) |
 | 同时使用本地 Active Directory 和 Azure Active Directory 管理环境的一般指导 | Azure AD 混合标识设计注意事项<br /><br />[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md) |
 | 有关使用密码同步启用 SSO 的指导 | [使用 Azure AD Connect 实现密码同步](./active-directory-aadconnectsync-implement-password-synchronization.md)<br /><br />[密码同步疑难解答](https://support.microsoft.com/zh-cn/kb/2855271) |
-| 有关使用密码写回启用 SSO 的指导 | [Azure AD 中的密码管理入门](./active-directory-passwords-getting-started.md)<br /><br />[密码写回疑难解答](./active-directory-passwords-troubleshoot.md#troubleshoot-password-writeback/) |
+| 有关使用密码写回启用 SSO 的指导 | [Azure AD 中的密码管理入门](./active-directory-passwords-getting-started.md)<br /><br />[密码写回疑难解答](./active-directory-passwords-troubleshoot.md#troubleshoot-password-writeback) |
 | 有关使用第三方标识提供者启用 SSO 的指导 | [可用于启用单一登录的兼容第三方标识提供者列表](https://aka.ms/ssoproviders) | 
 | Windows 10 用户如何通过 Azure AD Join 享受单一登录的优点 | 通过 Azure Active Directory Join 将云功能扩展到 Windows 10 设备 |
 
@@ -127,7 +127,7 @@ Azure AD Connect 适用于[所有版本的 Azure Active Directory](https://www.a
 
 | 文章指南 | |
 | :---: | --- |
-| 用于将单一登录应用部署到用户的各种选项比较 | [为用户部署 Azure AD 集成的应用程序](./active-directory-appssoaccess-whatis.md#deploying-azure-ad-integrated-applications-to-users/) |
+| 用于将单一登录应用部署到用户的各种选项比较 | [为用户部署 Azure AD 集成的应用程序](./active-directory-appssoaccess-whatis.md#deploying-azure-ad-integrated-applications-to-users) |
 | 访问面板及其移动对应产品 MyApps 的概述 | 访问面板和 MyApps 简介<br /> — [iOS](https://itunes.apple.com/us/app/my-apps-azure-active-directory/id824048653?mt=8)<br /> — [Android](https://play.google.com/store/apps/details?id=com.microsoft.myapps) |
 | 如何从 Office 365 网站访问 Azure AD 应用 | [使用 Office 365 应用启动程序](https://support.office.com/zh-cn/article/Meet-the-Office-365-app-launcher-79f12104-6fed-442f-96a0-eb089a3f476a) |
 | 如何从 Intune Managed Browser 移动应用访问 Azure AD 应用 | [Intune Managed Browser](https://technet.microsoft.com/zh-cn/library/dn878029.aspx)<br /> - [iOS](https://itunes.apple.com/us/app/microsoft-intune-managed-browser/id943264951?mt=8)<br /> - [Android](https://play.google.com/store/apps/details?id=com.microsoft.intune.mam.managedbrowser) |

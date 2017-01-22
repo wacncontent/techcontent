@@ -31,7 +31,7 @@ wacn.date: 12/09/2016
 | [就地升级](#in-place-upgrade) |如果你只有一台服务器，请在该服务器上就地升级安装。 |
 | [交叉迁移](#swing-migration) |如果有两台服务器，可将其中一台升级到最新版本或配置，然后在准备就绪时更改活动服务器。 |
 
-有关所需的权限，请参阅[升级所需的权限](./active-directory-aadconnect-accounts-permissions.md#upgrade/)。
+有关所需的权限，请参阅[升级所需的权限](./active-directory-aadconnect-accounts-permissions.md#upgrade)。
 
 ## <a name="in-place-upgrade"></a>就地升级
 就地升级适用于从 Azure AD Sync 或 Azure AD Connect 迁移。它不适用于 DirSync 或使用 FIM + Azure AD 连接器的解决方案。
@@ -50,7 +50,7 @@ wacn.date: 12/09/2016
 两台服务器可以使用不同的版本。例如，打算解除的活动服务器可以使用 Azure AD Sync，新的过渡服务器可以使用 Azure AD Connect。如果使用交叉迁移来开发新配置，则建议在两台服务器上使用相同的版本。
 ![暂存服务器](./media/active-directory-aadconnect-upgrade-previous-version/stagingserver1.png)
 
-备注：我们注意到，对于这种方案，有些客户喜欢使用三到四台服务器来进行交叉迁移。升级过渡服务器时，万一发生[灾难恢复](./active-directory-aadconnectsync-operations.md#disaster-recovery/)，就没有备份服务器可用。如果使用三到四台服务器，就可以准备一组装有新版本的主要/待机服务器，确保始终都有过渡服务器来接管任务。
+备注：我们注意到，对于这种方案，有些客户喜欢使用三到四台服务器来进行交叉迁移。升级过渡服务器时，万一发生[灾难恢复](./active-directory-aadconnectsync-operations.md#disaster-recovery)，就没有备份服务器可用。如果使用三到四台服务器，就可以准备一组装有新版本的主要/待机服务器，确保始终都有过渡服务器来接管任务。
 
 以下步骤也适用于从 Azure AD Sync 或者使用 FIM + Azure AD 连接器的解决方案迁移。这些步骤不适用于 DirSync，但是，可以在 [Upgrade Azure Active Directory sync (DirSync)](./active-directory-aadconnect-dirsync-upgrade-get-started.md)（升级 Azure Active Directory 同步 (DirSync)）一文中找到适用于 DirSync 的相同交叉迁移（也称为并行部署）方法的步骤。
 
@@ -59,8 +59,8 @@ wacn.date: 12/09/2016
 2. 如果创建了一些自定义配置，但过渡服务器没有这些配置，请遵循[将自定义配置从活动服务器移到过渡服务器](#move-custom-configuration-from-active-to-staging-server)部分中的步骤。
 3. 如果要从旧版 Azure AD Connect 升级，请将过渡服务器升级到最新版本。如果要从 Azure AD Sync 迁移，请在过渡服务器上安装 Azure AD Connect。
 4. 让同步引擎在过渡服务器上运行完全导入和完全同步。
-5. 使用[验证服务器的配置](./active-directory-aadconnectsync-operations.md#verify-the-configuration-of-a-server/)部分中**验证**下面列出的步骤，验证新配置是否不会造成任何意外的更改。如果发现意外的更改，请予以纠正、运行导入和同步，然后再次验证，直到数据看起来正常为止。可以在链接的主题中找到这些步骤。
-6. 将过渡服务器切换为活动服务器。这是[验证服务器的配置](./active-directory-aadconnectsync-operations.md#verify-the-configuration-of-a-server/)中的最后一个步骤，即**切换活动服务器**。
+5. 使用[验证服务器的配置](./active-directory-aadconnectsync-operations.md#verify-the-configuration-of-a-server)部分中**验证**下面列出的步骤，验证新配置是否不会造成任何意外的更改。如果发现意外的更改，请予以纠正、运行导入和同步，然后再次验证，直到数据看起来正常为止。可以在链接的主题中找到这些步骤。
+6. 将过渡服务器切换为活动服务器。这是[验证服务器的配置](./active-directory-aadconnectsync-operations.md#verify-the-configuration-of-a-server)中的最后一个步骤，即**切换活动服务器**。
 7. 如果你要升级 Azure AD Connect，现在请在过渡模式下将服务器升级到最新版本。按照与前面相同的步骤来升级数据和配置。如果已从 Azure AD Sync 升级，现在可以关闭并解除旧服务器。
 
 ### <a name="move-custom-configuration-from-active-to-staging-server"></a>将自定义配置从活动服务器移到过渡服务器

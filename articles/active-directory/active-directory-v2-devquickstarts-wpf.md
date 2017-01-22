@@ -24,9 +24,9 @@ v2.0 终结点可让你快速地将身份验证添加桌面应用，同时支持
 > [!NOTE]
 > v2.0 终结点并不支持所有 Azure Active Directory (AD) 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
-对于[在设备上运行的 .NET 本机应用](./active-directory-v2-flows.md#mobile-and-native-apps/)，Azure AD 提供 Microsoft Identity Authentication Library (MSAL)。在本质上，MSAL 的唯一用途就是方便应用获取用于调用 Web 服务的令牌。为了演示这种简便性，我们生成了一个 .NET WPF 待办事项列表应用，其中包括：
+对于[在设备上运行的 .NET 本机应用](./active-directory-v2-flows.md#mobile-and-native-apps)，Azure AD 提供 Microsoft Identity Authentication Library (MSAL)。在本质上，MSAL 的唯一用途就是方便应用获取用于调用 Web 服务的令牌。为了演示这种简便性，我们生成了一个 .NET WPF 待办事项列表应用，其中包括：
 
-- 使用 [OAuth 2.0 身份验证协议](./active-directory-v2-protocols.md#oauth2-authorization-code-flow/)让用户登录并获取访问令牌。
+- 使用 [OAuth 2.0 身份验证协议](./active-directory-v2-protocols.md#oauth2-authorization-code-flow)让用户登录并获取访问令牌。
 - 安全调用受 OAuth 2.0 保护的后端待办事项列表 Web 服务。
 - 注销用户。
 

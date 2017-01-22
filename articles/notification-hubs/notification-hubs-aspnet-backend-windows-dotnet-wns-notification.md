@@ -37,7 +37,7 @@ wacn.date: 11/22/2016
 
 在开始本教程之前，必须已完成以下移动服务教程：
 
-+ [通知中心入门]<br/>在此教程中，你创建通知中心，保留应用名称，然后注册以接收通知。本教程假设已完成这些步骤。请遵循[通知中心入门（Windows 应用商店）](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md)中的步骤；具体而言，请遵循[在 Windows 应用商店中注册你的应用](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md#register-your-app-for-the-windows-store/)和[配置通知中心](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md#configure-your-notification-hub/)部分中的步骤。请务必确保已在门户中你的通知中心的“配置”选项卡上输入了“程序包 SID”和“客户端机密”值。[配置通知中心](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md#configure-your-notification-hub/)部分中介绍了此配置过程。这个步骤非常重要：如果门户上的凭据与针对所选应用程序名称指定的凭据不匹配，推送通知将不会成功。
++ [通知中心入门]<br/>在此教程中，你创建通知中心，保留应用名称，然后注册以接收通知。本教程假设已完成这些步骤。请遵循[通知中心入门（Windows 应用商店）](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md)中的步骤；具体而言，请遵循[在 Windows 应用商店中注册你的应用](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md#register-your-app-for-the-windows-store/)和[配置通知中心](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md#configure-your-notification-hub)部分中的步骤。请务必确保已在门户中你的通知中心的“配置”选项卡上输入了“程序包 SID”和“客户端机密”值。[配置通知中心](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md#configure-your-notification-hub)部分中介绍了此配置过程。这个步骤非常重要：如果门户上的凭据与针对所选应用程序名称指定的凭据不匹配，推送通知将不会成功。
 
 > [!NOTE]
 > 如果使用应用服务中的移动应用作为后端，请参阅本教程的[移动应用版本](../app-service-mobile/app-service-mobile-windows-store-dotnet-get-started-push.md)。

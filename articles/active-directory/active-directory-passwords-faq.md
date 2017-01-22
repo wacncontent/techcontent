@@ -140,7 +140,7 @@ ms.author: asteen
 ## <a name="password-writeback"></a>密码写回
  - **问：密码写回如何在后台工作？**
 
- > **答：**请参阅[密码写回的工作原理](./active-directory-passwords-learn-more.md#how-password-writeback-works/)，了解有关启用密码写回时发生的情况以及数据如何通过系统流回本地环境的详细说明。请参阅“密码写回的工作原理”中的[密码写回安全模型](./active-directory-passwords-learn-more.md#password-writeback-security-model/)，了解我们如何确保密码写回是一项高度安全的服务。
+ > **答：**请参阅[密码写回的工作原理](./active-directory-passwords-learn-more.md#how-password-writeback-works/)，了解有关启用密码写回时发生的情况以及数据如何通过系统流回本地环境的详细说明。请参阅“密码写回的工作原理”中的[密码写回安全模型](./active-directory-passwords-learn-more.md#password-writeback-security-model)，了解我们如何确保密码写回是一项高度安全的服务。
 
  - **问：密码写回需要多长时间才工作？ 是否和使用密码哈希同步一样也存在同步延迟？**
 
@@ -156,7 +156,7 @@ ms.author: asteen
 
  - **问：密码写回是否安全？ 如何确保我不会受到黑客攻击？**
 
- > **答：**是的。密码写回具有极高的安全性。若要阅读有关密码写回服务实施的 4 个安全层的详细信息，请查看“密码写回的工作原理”中的[密码写回安全模型](./active-directory-passwords-learn-more.md#password-writeback-security-model/)。
+ > **答：**是的。密码写回具有极高的安全性。若要阅读有关密码写回服务实施的 4 个安全层的详细信息，请查看“密码写回的工作原理”中的[密码写回安全模型](./active-directory-passwords-learn-more.md#password-writeback-security-model)。
 
 ## 密码重置文档的链接
 以下是所有 Azure AD 密码重置文档页面的链接：

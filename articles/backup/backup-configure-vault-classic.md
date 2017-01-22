@@ -62,9 +62,9 @@ ms.author: jimpark; trinadhk; markgal
     >[!IMPORTANT]
     > 确定存储冗余选项的最佳时机是在创建保管库之后，并且是在将任何计算机注册到保管库之前。将某个项注册到保管库后，存储冗余选项将会锁定且不能修改。
 
-    若要使用 Azure 作为主要备份存储终结点（例如，从 Windows Server 备份到 Azure），请考虑选择（默认的）[异地冗余存储](../storage/storage-redundancy.md#geo-redundant-storage/)选项。
+    若要使用 Azure 作为主要备份存储终结点（例如，从 Windows Server 备份到 Azure），请考虑选择（默认的）[异地冗余存储](../storage/storage-redundancy.md#geo-redundant-storage)选项。
 
-    如果使用 Azure 作为第三级备份存储终结点（例如，你正在使用 System Center Data Protection Manager 在本地创建本地备份复制，使用 Azure 满足长期数据保留需求），应考虑选择[本地冗余存储](../storage/storage-redundancy.md#locally-redundant-storage/)。这可以降低在 Azure 中存储数据的成本，但提供的数据持久性更低，不过，对于第三级副本是可接受的。
+    如果使用 Azure 作为第三级备份存储终结点（例如，你正在使用 System Center Data Protection Manager 在本地创建本地备份复制，使用 Azure 满足长期数据保留需求），应考虑选择[本地冗余存储](../storage/storage-redundancy.md#locally-redundant-storage)。这可以降低在 Azure 中存储数据的成本，但提供的数据持久性更低，不过，对于第三级副本是可接受的。
 
     **选择存储冗余选项：**
 
@@ -83,7 +83,7 @@ ms.author: jimpark; trinadhk; markgal
 ## 步骤 2：下载保管库凭据文件
 本地计算机需要先在备份保存库中通过身份验证才能将数据备份到 Azure。身份验证是通过*保管库凭据*实现的。从经典管理门户通过安全通道下载保管库凭据文件。证书私钥不会在门户或服务中持久保存。
 
-详细了解[如何使用保管库凭据向备份服务进行身份验证](./backup-introduction-to-azure-backup.md#what-is-the-vault-credential-file/)。
+详细了解[如何使用保管库凭据向备份服务进行身份验证](./backup-introduction-to-azure-backup.md#what-is-the-vault-credential-file)。
 
 ### 将保管库凭据文件下载到本地计算机
 

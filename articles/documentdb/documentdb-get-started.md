@@ -167,7 +167,7 @@ ms.author: anhoh
             Console.ReadKey();
     }
 
-可以通过使用 **DocumentClient** 类的 [CreateDatabaseAsync](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.documents.client.documentclient.createdatabaseasync.aspx) 方法来创建 DocumentDB [数据库](./documentdb-resources.md#databases/)。数据库是跨集合分区的 JSON 文档存储的逻辑容器。
+可以通过使用 **DocumentClient** 类的 [CreateDatabaseAsync](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.documents.client.documentclient.createdatabaseasync.aspx) 方法来创建 DocumentDB [数据库](./documentdb-resources.md#databases)。数据库是跨集合分区的 JSON 文档存储的逻辑容器。
 
 将 **CreateDatabaseIfNotExists** 方法复制并粘贴到 **WriteToConsoleAndPromptToContinue** 方法后面。
 
@@ -214,7 +214,7 @@ ms.author: anhoh
 > 
 > 
 
-可以通过使用 **DocumentClient** 类的 [CreateDocumentCollectionAsync](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.documents.client.documentclient.createdocumentcollectionasync.aspx) 方法来创建[集合](./documentdb-resources.md#collections/)。集合是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。
+可以通过使用 **DocumentClient** 类的 [CreateDocumentCollectionAsync](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.documents.client.documentclient.createdocumentcollectionasync.aspx) 方法来创建[集合](./documentdb-resources.md#collections)。集合是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。
 
 将 **CreateDocumentCollectionIfNotExists** 方法复制并粘贴到 **CreateDatabaseIfNotExists** 方法后面。
 
@@ -266,7 +266,7 @@ ms.author: anhoh
 祝贺你！ 你已成功创建 DocumentDB 文档集合。
 
 ## <a id="CreateDoc"></a>步骤 6：创建 JSON 文档
-可以通过使用 **DocumentClient** 类的 [CreateDocumentAsync](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.documents.client.documentclient.createdocumentasync.aspx) 方法创建[文档](./documentdb-resources.md#documents/)。文档为用户定义的（任意）JSON 内容。现在，我们可以插入一个或多个文档。如果已有要在数据库中存储的数据，则可以使用 DocumentDB 的[数据迁移工具](./documentdb-import-data.md)，将数据导入数据库。
+可以通过使用 **DocumentClient** 类的 [CreateDocumentAsync](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.documents.client.documentclient.createdocumentasync.aspx) 方法创建[文档](./documentdb-resources.md#documents)。文档为用户定义的（任意）JSON 内容。现在，我们可以插入一个或多个文档。如果已有要在数据库中存储的数据，则可以使用 DocumentDB 的[数据迁移工具](./documentdb-import-data.md)，将数据导入数据库。
 
 在本例中，首先需要创建 **Family** 类来表示存储在 DocumentDB 中的对象。此外还将创建 **Family** 中使用的 **Parent**、**Child**、**Pet** 和 **Address** 子类。请注意，文档必须将 **ID** 属性序列化为 JSON 格式的 **ID**。通过在 **GetStartedDemo** 方法后添加以下内部子类来创建这些类。
 
@@ -482,7 +482,7 @@ DocumentDB 支持对存储在每个集合中的 JSON 文档进行各种[查询](
 
 ![说明 NoSQL 教程创建 C\# 控制台应用程序所用查询的范围和意义的图表。](./media/documentdb-get-started/nosql-tutorial-collection-documents.png)
 
-查询中的 [FROM](./documentdb-sql-query.md#from-clause/) 关键字是可选的，因为 DocumentDB 查询的范围已限制为单个集合。因此，“FROM Families f”可与“FROM root r”或者任何其他所选变量名进行交换。默认情况下，DocumentDB 将推断你选择的 Families、root 或变量名，并默认引用当前集合。
+查询中的 [FROM](./documentdb-sql-query.md#from-clause) 关键字是可选的，因为 DocumentDB 查询的范围已限制为单个集合。因此，“FROM Families f”可与“FROM root r”或者任何其他所选变量名进行交换。默认情况下，DocumentDB 将推断你选择的 Families、root 或变量名，并默认引用当前集合。
 
 ## <a id="ReplaceDocument"></a>步骤 8：替换 JSON 文档
 DocumentDB 支持替换 JSON 文档。

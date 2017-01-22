@@ -71,7 +71,7 @@ ms.author: jimpark;trinadhk;pullabhk; markgal
     ![备份保管库列表](./media/backup-azure-microsoft-azure-backup/backup_vaultslist.png)
 
   > [!IMPORTANT]
-  > 确保在创建保管库后立即选择适当的存储冗余选项。请在此[概述](../storage/storage-redundancy.md)中深入了解[异地冗余](../storage/storage-redundancy.md#geo-redundant-storage/)和[本地冗余](../storage/storage-redundancy.md#locally-redundant-storage/)选项。
+  > 确保在创建保管库后立即选择适当的存储冗余选项。请在此[概述](../storage/storage-redundancy.md)中深入了解[异地冗余](../storage/storage-redundancy.md#geo-redundant-storage/)和[本地冗余](../storage/storage-redundancy.md#locally-redundant-storage)选项。
 
 ## 3\.软件包
 

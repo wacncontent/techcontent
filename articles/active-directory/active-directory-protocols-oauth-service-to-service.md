@@ -34,7 +34,7 @@ OAuth 2.0 客户端凭据授权流允许 Web 服务（*机密客户端*）在调
 
 ## 在 Azure AD 中注册服务
 
-在 Azure Active Directory (Azure AD) 中注册调用服务和接收服务。有关详细说明，请参阅[添加、更新和删除应用](./active-directory-integrating-applications.md#BKMK_Native/)
+在 Azure Active Directory (Azure AD) 中注册调用服务和接收服务。有关详细说明，请参阅[添加、更新和删除应用](./active-directory-integrating-applications.md#BKMK_Native)
 
 ## <a name="request-an-access-token"></a> 请求访问令牌
 

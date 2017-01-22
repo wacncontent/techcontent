@@ -281,8 +281,8 @@ DocumentDB SDK 1.9.0 及更高版本支持并行查询执行选项，这些选�
 
 从单个分区集合迁移到已分区集合
 
-1. 将单个分区集合中的数据导出到 JSON。有关其他详细信息，请参阅[导出到 JSON 文件](./documentdb-import-data.md#export-to-json-file/)。
-2. 将数据导入到使用分区键定义创建的、吞吐量超过 10,000 个请求单位/秒的已分区集合，如下例所示。有关其他详细信息，请参阅[导入到 DocumentDB](./documentdb-import-data.md#DocumentDBSeqTarget/)。
+1. 将单个分区集合中的数据导出到 JSON。有关其他详细信息，请参阅[导出到 JSON 文件](./documentdb-import-data.md#export-to-json-file)。
+2. 将数据导入到使用分区键定义创建的、吞吐量超过 10,000 个请求单位/秒的已分区集合，如下例所示。有关其他详细信息，请参阅[导入到 DocumentDB](./documentdb-import-data.md#DocumentDBSeqTarget)。
 
 ![将数据迁移到 DocumentDB 中的已分区集合][3]  
 

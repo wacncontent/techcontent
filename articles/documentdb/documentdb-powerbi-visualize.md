@@ -86,15 +86,15 @@ wacn.date: 11/28/2016
 
     ![Power BI Desktop 获取数据 - Power BI 连接器](./media/documentdb-powerbi-visualize/power_bi_connector_pbigetdata.png)  
 
-6. 如下所示指定你想要从其中检索数据的 DocumentDB 帐户终结点 URL，然后单击“确定”。可以在 Azure 门户预览的“密钥”边栏选项卡上的“URI”框中检索 URL，或者使用演示帐户，在本例中，URL 为 `https://analytics.documents.azure.com`。**[](./documentdb-manage-account.md#keys/)**
+6. 如下所示指定你想要从其中检索数据的 DocumentDB 帐户终结点 URL，然后单击“确定”。可以在 Azure 门户预览的“密钥”边栏选项卡上的“URI”框中检索 URL，或者使用演示帐户，在本例中，URL 为 `https://analytics.documents.azure.com`。**[](./documentdb-manage-account.md#keys)**
 
     数据库名称、集合名称和 SQL 语句都可留空，因为这些字段是可选的。我们将使用导航器来选择数据库和集合并指定数据来源。
 
     ![DocumentDB Power BI 连接器的 Power BI 教程 - 桌面连接窗口](./media/documentdb-powerbi-visualize/power_bi_connector_pbiconnectwindow.png)  
 
-7. 如果你是首次连接到此终结点，则将提示你输入帐户密钥。可以在 Azure 门户预览的“只读密钥”边栏选项卡上的“主密钥”框中检索密钥，或者使用演示帐户，在本例中，密钥为 `RcEBrRI2xVnlWheejXncHId6QRcKdCGQSW6uSUEgroYBWVnujW3YWvgiG2ePZ0P0TppsrMgscoxsO7cf6mOpcA==`。**[](./documentdb-manage-account.md#keys/)**输入帐户密钥并单击“连接”。
+7. 如果你是首次连接到此终结点，则将提示你输入帐户密钥。可以在 Azure 门户预览的“只读密钥”边栏选项卡上的“主密钥”框中检索密钥，或者使用演示帐户，在本例中，密钥为 `RcEBrRI2xVnlWheejXncHId6QRcKdCGQSW6uSUEgroYBWVnujW3YWvgiG2ePZ0P0TppsrMgscoxsO7cf6mOpcA==`。**[](./documentdb-manage-account.md#keys)**输入帐户密钥并单击“连接”。
 
-    我们建议你在生成报表时使用只读密钥。这将防止主密钥不必要地暴露于潜在的安全风险中。只读密钥在 Azure 门户预览的“密钥”边栏选项卡中提供，或者，可以使用上面提供的演示帐户信息。[](./documentdb-manage-account.md#keys/)
+    我们建议你在生成报表时使用只读密钥。这将防止主密钥不必要地暴露于潜在的安全风险中。只读密钥在 Azure 门户预览的“密钥”边栏选项卡中提供，或者，可以使用上面提供的演示帐户信息。[](./documentdb-manage-account.md#keys)
 
     ![DocumentDB Power BI 连接器的 Power BI 教程 - 帐户密钥](./media/documentdb-powerbi-visualize/power_bi_connector_pbidocumentdbkey.png)  
 

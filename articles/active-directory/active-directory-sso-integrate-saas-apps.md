@@ -28,7 +28,7 @@ ms.author: curtand
 
 对于支持 SAML 2.0、WS-联合身份验证或 OpenID Connect 协议的应用程序，Azure Active Directory 将使用签名证书来建立信任关系。有关详细信息，请参阅[管理联合单一登录的证书](./active-directory-sso-certs.md)。
 
-对于仅支持基于 HTML 窗体的登录的应用程序，Azure Active Directory 将使用“密码保管库”来建立信任关系。这样，组织中的用户便可以使用 SaaS 应用程序中的用户帐户信息自动登录到 SaaS 应用程序。Azure AD 将收集并安全地存储用户帐户信息和相关密码。有关详细信息，请参阅[基于密码的单一登录](./active-directory-appssoaccess-whatis.md#password-based-single-sign-on/)。
+对于仅支持基于 HTML 窗体的登录的应用程序，Azure Active Directory 将使用“密码保管库”来建立信任关系。这样，组织中的用户便可以使用 SaaS 应用程序中的用户帐户信息自动登录到 SaaS 应用程序。Azure AD 将收集并安全地存储用户帐户信息和相关密码。有关详细信息，请参阅[基于密码的单一登录](./active-directory-appssoaccess-whatis.md#password-based-single-sign-on)。
 
 ## 授权
 
@@ -38,7 +38,7 @@ ms.author: curtand
 
 ## 访问
 
-Azure AD 提供多种可自定义的方式来向组织中的用户部署应用程序。你不会受限于任一特定的部署或访问解决方案。可以使用[最符合需要的解决方案](./active-directory-appssoaccess-whatis.md#deploying-azure-ad-integrated-applications-to-users/)。
+Azure AD 提供多种可自定义的方式来向组织中的用户部署应用程序。你不会受限于任一特定的部署或访问解决方案。可以使用[最符合需要的解决方案](./active-directory-appssoaccess-whatis.md#deploying-azure-ad-integrated-applications-to-users)。
 
 ## 有关使用中应用程序的其他注意事项
 

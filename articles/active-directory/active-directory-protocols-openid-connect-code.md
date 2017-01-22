@@ -190,6 +190,6 @@ wacn.date: 01/19/2017
 
 有关可能的错误代码的描述及其建议的客户端操作，请参阅[授权终结点错误的错误代码](#error-codes-for-authorization-endpoint-errors)。
 
-获取授权 `code` 和 `id_token` 之后，可以将用户登录，并代表他们获取访问令牌。若要将用户登录，必须确切地按上面所述验证 `id_token`。若要获取访问令牌，可以遵循 [OAuth 协议文档](./active-directory-protocols-oauth-code.md#Use-the-Authorization-Code-to-Request-an-Access-Token/)中所述的步骤。
+获取授权 `code` 和 `id_token` 之后，可以将用户登录，并代表他们获取访问令牌。若要将用户登录，必须确切地按上面所述验证 `id_token`。若要获取访问令牌，可以遵循 [OAuth 协议文档](./active-directory-protocols-oauth-code.md#Use-the-Authorization-Code-to-Request-an-Access-Token)中所述的步骤。
 
 <!---HONumber=Mooncake_1031_2016-->

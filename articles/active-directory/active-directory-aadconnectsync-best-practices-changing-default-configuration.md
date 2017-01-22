@@ -33,8 +33,8 @@ Azure AD Connect 同步在安装向导创建的服务帐户下运行。此服务
 ## 同步规则的更改
 安装向导提供的配置应该适用于最常见的方案。如果需要对配置进行更改，必须遵循这些规则，以便仍可保留支持的配置。
 
-- 如果默认的直接属性流不适用于组织，可以[更改属性流](./active-directory-aadconnectsync-change-the-configuration.md#other-common-attribute-flow-changes/)。
-- 如果希望[属性不流动](./active-directory-aadconnectsync-change-the-configuration.md#do-not-flow-an-attribute/)并要删除 Azure AD 中的任何现有属性值，需要为此方案创建规则。
+- 如果默认的直接属性流不适用于组织，可以[更改属性流](./active-directory-aadconnectsync-change-the-configuration.md#other-common-attribute-flow-changes)。
+- 如果希望[属性不流动](./active-directory-aadconnectsync-change-the-configuration.md#do-not-flow-an-attribute)并要删除 Azure AD 中的任何现有属性值，需要为此方案创建规则。
 - [禁用不需要的同步规则](#disable-an-unwanted-sync-rule)而不是删除它。升级期间将重新创建已删除的规则。
 - 若要[更改现成的规则](#change-an-out-of-box-rule)，应复制原始规则并禁用现成的规则。同步规则编辑器将显示提示并提供帮助。
 - 使用同步规则编辑器导出自定义同步规则。编辑器提供一个 PowerShell 脚本，可以在灾难恢复方案中使用它轻松重新创建同步规则。

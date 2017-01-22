@@ -36,7 +36,7 @@ DocumentDB 是面向 NoSQL 文档的数据库，以 JSON 格式存储数据。Do
 是，DocumentDB 允许应用程序存储任意的 JSON 文档，而不需要架构定义或提示。通过 DocumentDB SQL 查询界面便可立即查询数据。
 
 ### DocumentDB 是否支持 ACID 事务？
-是，DocumentDB 支持以 JavaScript 存储过程和触发器形式表示的跨文档事务。事务以每个集合内的单个分区为范围，且以 ACID 语义执行，也就是全有或全无，与其他并发执行的代码和用户请求隔离。如果在服务器端执行 JavaScript 应用程序代码的过程中引发了异常，则会回滚整个事务。有关事务的详细信息，请参阅[数据库程序事务](./documentdb-programming.md#database-program-transactions/)。
+是，DocumentDB 支持以 JavaScript 存储过程和触发器形式表示的跨文档事务。事务以每个集合内的单个分区为范围，且以 ACID 语义执行，也就是全有或全无，与其他并发执行的代码和用户请求隔离。如果在服务器端执行 JavaScript 应用程序代码的过程中引发了异常，则会回滚整个事务。有关事务的详细信息，请参阅[数据库程序事务](./documentdb-programming.md#database-program-transactions)。
 
 ### DocumentDB 的典型用例有哪些？
 对于侧重于以下要求的新 Web、移动、游戏和 IoT 应用程序而言，DocumentDB 是一个不错的选择：自动缩放、可预测的性能、毫秒响应时间的快速排序，以及查询无架构数据的能力。DocumentDB 有助于快速开发，且支持应用程序数据模型的连续迭代。用于管理用户生成的内容和数据的应用程序就是 [DocumentDB 的常见用例](./documentdb-use-cases.md)。
@@ -71,7 +71,7 @@ DocumentDB 是面向 NoSQL 文档的数据库，以 JSON 格式存储数据。Do
 可以在 [Azure 门户预览][azure-portal]中注册 Azure DocumentDB。首先必须注册 Azure 订阅。注册 Azure 订阅后，可以将 DocumentDB 帐户添加到 Azure 订阅。有关添加 DocumentDB 帐户的说明，请参阅[创建 DocumentDB 数据库帐户](./documentdb-create-account.md)。
 
 ### 什么是主密钥？
-主密钥是用于访问帐户的所有资源的安全令牌。拥有此密钥的人对数据库帐户中的所有资源具有读取和写入访问权。分发主密钥时要格外谨慎。[Azure 门户预览][azure-portal]的“密钥”边栏选项卡中提供主要主密钥和辅助主密钥。有关密钥的详细信息，请参阅[查看、复制和重新生成访问密钥](./documentdb-manage-account.md#keys/)。
+主密钥是用于访问帐户的所有资源的安全令牌。拥有此密钥的人对数据库帐户中的所有资源具有读取和写入访问权。分发主密钥时要格外谨慎。[Azure 门户预览][azure-portal]的“密钥”边栏选项卡中提供主要主密钥和辅助主密钥。有关密钥的详细信息，请参阅[查看、复制和重新生成访问密钥](./documentdb-manage-account.md#keys)。
 
 ### 我如何创建数据库？
 可以根据[创建 DocumentDB 数据库](./documentdb-create-database.md)中所述使用 [Azure 门户预览][azure-portal]、某个 [DocumentDB SDK](./documentdb-sdk-dotnet.md) 或 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 创建数据库。
@@ -108,7 +108,7 @@ DocumentDB 通过 JavaScript 存储过程和触发器支持语言集成式事务
 可通过三种方式将文件批量插入 DocumentDB：
 
 - 数据迁移工具，如[将数据导入 DocumentDB](./documentdb-import-data.md) 所述。
-- Azure 门户预览中的文档资源管理器，如[使用文档资源管理器批量添加文档](./documentdb-view-json-document-explorer.md#bulk-add-documents/)所述。
+- Azure 门户预览中的文档资源管理器，如[使用文档资源管理器批量添加文档](./documentdb-view-json-document-explorer.md#bulk-add-documents)所述。
 - 存储过程，如 [DocumentDB 服务器端编程](./documentdb-programming.md)所述。
 
 ### DocumentDB 是否支持资源链接缓存？

@@ -106,7 +106,7 @@ ms.author: asteen
 ### <a name="uploading-data-yourself"></a>自行上载数据
 如果要自行上载身份验证数据，用户无需注册密码重置便可重置其密码。只要用户在其帐户上定义的身份验证数据符合你定义的密码重置策略，这些用户便能重置其密码。
 
-要了解可以通过 DirSync 或 Windows PowerShell 设置哪些属性，请参阅[密码重置使用的数据](./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset/)。
+要了解可以通过 DirSync 或 Windows PowerShell 设置哪些属性，请参阅[密码重置使用的数据](./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset)。
 
 你可以执行以下步骤，通过 [Azure 经典管理门户](https://manage.windowsazure.cn)上载身份验证数据：
 
@@ -122,9 +122,9 @@ ms.author: asteen
 
     ![][006]  
 
-若要了解如何使用上述每个属性，请参阅[密码重置使用的数据](./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset/)。
+若要了解如何使用上述每个属性，请参阅[密码重置使用的数据](./active-directory-passwords-learn-more.md#what-data-is-used-by-password-reset)。
 
-请参阅[如何从 PowerShell 访问用户的密码重置数据](./active-directory-passwords-learn-more.md#how-to-access-password-reset-data-for-your-users/)，以了解如何使用 PowerShell 读取和设置此数据。
+请参阅[如何从 PowerShell 访问用户的密码重置数据](./active-directory-passwords-learn-more.md#how-to-access-password-reset-data-for-your-users)，以了解如何使用 PowerShell 读取和设置此数据。
 
 ## <a name="sample-training-materials"></a>示例培训材料
 我们正在准备示例培训材料，以帮助你的 IT 部门和用户快速了解如何部署及使用密码重置。敬请期待！

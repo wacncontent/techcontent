@@ -71,12 +71,12 @@ ms.author: mimig
 
 - Azure 门户预览。请参阅[使用 Azure 门户预览创建 DocumentDB 集合](./documentdb-create-collection.md)。
 - 包含示例数据的全面教程：[.NET](./documentdb-get-started.md)、[.NET MVC](./documentdb-dotnet-application.md)、[Java](./documentdb-java-application.md)、[Node.js](./documentdb-nodejs-application.md) 或 [Python](./documentdb-python-application.md)。
-- 可在 GitHub 中找到 [.NET](./documentdb-dotnet-samples.md#database-examples/)、[Node.js](./documentdb-nodejs-samples.md#database-examples/) 或 [Python](./documentdb-python-samples.md#database-examples/) 示例代码。
+- 可在 GitHub 中找到 [.NET](./documentdb-dotnet-samples.md#database-examples/)、[Node.js](./documentdb-nodejs-samples.md#database-examples) 或 [Python](./documentdb-python-samples.md#database-examples) 示例代码。
 - [.NET](./documentdb-sdk-dotnet.md)、[.NET Core](./documentdb-sdk-dotnet-core.md)、[Node.js](./documentdb-sdk-node.md)、[Java](./documentdb-sdk-java.md)、[Python](./documentdb-sdk-python.md) 和 [REST](https://msdn.microsoft.com/zh-cn/library/azure/mt489072.aspx) SDK。
 
 创建数据库和集合后，需要在集合中[添加文档](./documentdb-view-json-document-explorer.md)。
 
-集合中有文档后，可以使用 [DocumentDB SQL](./documentdb-sql-query.md) 对这些文档[执行查询](./documentdb-sql-query.md#executing-sql-queries/)。可以使用门户中的[查询浏览器](./documentdb-query-collections-query-explorer.md)、[REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 或其中一个 [SDK](./documentdb-sdk-dotnet.md) 执行查询。
+集合中有文档后，可以使用 [DocumentDB SQL](./documentdb-sql-query.md) 对这些文档[执行查询](./documentdb-sql-query.md#executing-sql-queries)。可以使用门户中的[查询浏览器](./documentdb-query-collections-query-explorer.md)、[REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn781481.aspx) 或其中一个 [SDK](./documentdb-sdk-dotnet.md) 执行查询。
 
 ### 了解详细信息
 若要详细了解 DocumentDB，请浏览以下资源：

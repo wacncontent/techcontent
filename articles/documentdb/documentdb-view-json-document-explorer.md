@@ -151,7 +151,7 @@ ms.author: kirillg
 
 ## 在门户外使用 JSON 文档
 
-Azure 门户预览中的文档资源管理器只是在 DocumentDB 中使用文档的一种方法。你也可以通过 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt489082.aspx) 或[客户端 SDK](./documentdb-sdk-dotnet.md) 来处理文档。有关代码示例，请参阅 [.NET SDK 文档示例](./documentdb-dotnet-samples.md#document-examples/)和 [Node.js SDK 文档示例](./documentdb-nodejs-samples.md#document-examples/)。
+Azure 门户预览中的文档资源管理器只是在 DocumentDB 中使用文档的一种方法。你也可以通过 [REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt489082.aspx) 或[客户端 SDK](./documentdb-sdk-dotnet.md) 来处理文档。有关代码示例，请参阅 [.NET SDK 文档示例](./documentdb-dotnet-samples.md#document-examples)和 [Node.js SDK 文档示例](./documentdb-nodejs-samples.md#document-examples)。
 
 如果需要从其他源（JSON 文件、MongoDB、SQL Server、CSV 文件、Azure 表存储、Amazon DynamoDB 或 HBase）导入或迁移文件，你可以使用 DocumentDB 的[数据迁移工具](./documentdb-import-data.md)将数据快速导入到 DocumentDB。
 
@@ -161,7 +161,7 @@ Azure 门户预览中的文档资源管理器只是在 DocumentDB 中使用文�
 
 **解决方案**：确保已选择正确的订阅、已插入文档的数据库和集合。另外，请检查以确保在吞吐量配额内运行。如果在最大吞吐量级别运行并受到限制，请减少应用程序使用量，以便在集合的最大吞吐量配额下运行。
 
-**说明**：门户是一个应用程序，就像任何其他应用程序一样，对 DocumentDB 数据库和集合进行调用。如果当前由于从单独的应用程序进行调用，请求受到限制，门户可能也同样受到限制，导致资源未显示在门户中。若要解决此问题，需解决高吞吐量使用率的原因，然后刷新门户边栏选项卡。有关如何测量和降低吞吐量使用率的信息，请参阅[性能提示](./documentdb-performance-tips.md)一文的[吞吐量](./documentdb-performance-tips.md#measure-rus/)部分。
+**说明**：门户是一个应用程序，就像任何其他应用程序一样，对 DocumentDB 数据库和集合进行调用。如果当前由于从单独的应用程序进行调用，请求受到限制，门户可能也同样受到限制，导致资源未显示在门户中。若要解决此问题，需解决高吞吐量使用率的原因，然后刷新门户边栏选项卡。有关如何测量和降低吞吐量使用率的信息，请参阅[性能提示](./documentdb-performance-tips.md)一文的[吞吐量](./documentdb-performance-tips.md#measure-rus)部分。
 
 ## 后续步骤
 
