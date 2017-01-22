@@ -12,9 +12,7 @@
           "README.md",
           "LICENSE",
           "LICENSE-CODE"
-        ],
-        "src": "articles",
-        "dest": "articles"
+        ]
       }
     ],
     "resource": [
@@ -29,9 +27,7 @@
         "exclude": [
           "**/obj/**",
           "opsacndocsdemo/**"
-        ],
-        "src": "articles",
-        "dest": "articles"
+        ]
       },
       {
         "files": [
@@ -45,8 +41,8 @@
           "**/obj/**",
           "opsacndocsdemo/**"
         ],
-        "src": "includes",
-        "dest": "includes"
+        "src": "../includes",
+        "dest": "../includes"
       }
     ],
     "overwrite": [],
