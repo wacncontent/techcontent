@@ -1,7 +1,7 @@
-> [AZURE.SELECTOR]
-- [C#](/documentation/articles/iot-hub-csharp-csharp-getstarted/)
-- [Java](/documentation/articles/iot-hub-java-java-getstarted/)
-- [Node.js](/documentation/articles/iot-hub-node-node-getstarted/)
+> [!div class="op_single_selector"]
+- [C#](../articles/iot-hub/iot-hub-csharp-csharp-getstarted.md)
+- [Java](../articles/iot-hub/iot-hub-java-java-getstarted.md)
+- [Node.js](../articles/iot-hub/iot-hub-node-node-getstarted.md)
 
 ## 介绍
 Azure IoT 中心是一项完全托管的服务，可在数百万个物联网 (IoT) 设备和一个解决方案后端之间实现安全可靠的双向通信。IoT 项目面临的最大挑战之一是如何可靠且安全地将设备连接到解决方案后端。为了解决此难题，IoT 中心：

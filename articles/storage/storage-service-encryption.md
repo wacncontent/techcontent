@@ -1,21 +1,22 @@
-<properties
-    pageTitle="静态数据的 Azure 存储服务加密 | Azure"
-    description="使用 Azure 存储空间服务加密功能可在存储数据时在服务端加密 Azure Blob 存储，并在检索数据时解密数据。"
-    services="storage"
-    documentationcenter=".net"
-    author="robinsh"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="edabe3ee-688b-41e0-b34f-613ac9c3fdfd"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="robinsh" />
+---
+title: 静态数据的 Azure 存储服务加密 | Azure
+description: 使用 Azure 存储空间服务加密功能可在存储数据时在服务端加密 Azure Blob 存储，并在检索数据时解密数据。
+services: storage
+documentationcenter: .net
+author: robinsh
+manager: timlt
+editor: tysonn
+
+ms.assetid: edabe3ee-688b-41e0-b34f-613ac9c3fdfd
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: robinsh
+---
 
 # 静态数据的 Azure 存储空间服务加密
 静态数据的 Azure 存储空间服务加密 (SSE) 可帮助你保护数据，使你的组织能够信守在安全性与合规性方面所做的承诺。使用此功能，Azure 存储空间可以先自动加密数据，再将数据保存到存储空间，并在检索之前解密数据。加密、解密和密钥管理对于用户而言是完全透明的。
@@ -24,8 +25,7 @@
 
 ## 概述
 
-
-Azure 存储空间提供配套的安全性功能，这些功能相辅相成，可让开发人员共同构建安全的应用程序。在应用程序和 Azure 之间传输数据时，可以使用[客户端加密](/documentation/articles/storage-client-side-encryption/)、HTTPS 或 SMB 3.0 来保护数据。存储服务加密提供静态加密，以完全透明的方式处理加密、解密和密钥管理。采用 256 位 [AES 加密](https://zh.wikipedia.org/wiki/%E9%AB%98%E7%BA%A7%E5%8A%A0%E5%AF%86%E6%A0%87%E5%87%86)所有数据，它是现在最强有力的分组密码之一。
+Azure 存储空间提供配套的安全性功能，这些功能相辅相成，可让开发人员共同构建安全的应用程序。在应用程序和 Azure 之间传输数据时，可以使用[客户端加密](./storage-client-side-encryption.md)、HTTPS 或 SMB 3.0 来保护数据。存储服务加密提供静态加密，以完全透明的方式处理加密、解密和密钥管理。采用 256 位 [AES 加密](https://zh.wikipedia.org/wiki/%E9%AB%98%E7%BA%A7%E5%8A%A0%E5%AF%86%E6%A0%87%E5%87%86)所有数据，它是现在最强有力的分组密码之一。
 
 SSE 的工作方式是在数据写入到 Azure 存储时对其加密，可用于块 blob、页 blob 和 追加 blob。它适用于：
 
@@ -38,7 +38,6 @@ SSE 的工作方式是在数据写入到 Azure 存储时对其加密，可用于
 若要启用或禁用存储帐户的存储服务加密，请登录 [Azure 门户预览](https://portal.azure.cn)，然后选择存储帐户。在“设置”边栏选项卡中，寻找如屏幕截图所示的“Blob 服务”部分，然后单击“加密”。
 
 ![显示加密选项的门户截图](./media/storage-service-encryption/image1.png)  
-
 
 单击“加密”设置后，可以启用或禁用存储服务加密。
 
@@ -67,13 +66,14 @@ SSE 具有以下限制：
 
 ##入门
 
-###步骤 1：[创建新存储帐户](/documentation/articles/storage-create-storage-account/)。
+###步骤 1：[创建新存储帐户](./storage-create-storage-account.md)。
 
 ###步骤 2：启用加密。
 
 可以使用 [Azure 门户预览](https://portal.azure.cn)启用加密。
 
-> [AZURE.NOTE] 如果想要以编程方式启用或禁用存储帐户上的存储服务加密，可以使用 [Azure 存储空间资源提供程序 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163683.aspx)、[.NET 存储空间资源提供程序](https://msdn.microsoft.com/zh-cn/library/azure/mt131037.aspx)、[Azure PowerShell](/documentation/articles/powershell-install-configure/) 或 [Azure CLI](/documentation/articles/storage-azure-cli/)。
+> [!NOTE]
+> 如果想要以编程方式启用或禁用存储帐户上的存储服务加密，可以使用 [Azure 存储空间资源提供程序 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163683.aspx)、[.NET 存储空间资源提供程序](https://msdn.microsoft.com/zh-cn/library/azure/mt131037.aspx)、[Azure PowerShell](../powershell-install-configure.md) 或 [Azure CLI](./storage-azure-cli.md)。
 
 ###步骤 3：将数据复制到存储帐户
 
@@ -83,17 +83,17 @@ SSE 具有以下限制：
 
 AzCopy 是一个 Windows 命令行实用工具，专用于将数据复制到 Azure Blob、文件和表存储以及从这些位置复制数据。可使用此工具将 blob 从一个存储帐户复制到另一个启用了 SSE 的存储帐户。
 
-有关详细信息，请参阅[使用 AzCopy 命令行实用工具传输数据](/documentation/articles/storage-use-azcopy/)。
+有关详细信息，请参阅[使用 AzCopy 命令行实用工具传输数据](./storage-use-azcopy.md)。
 
 #### 使用存储客户端库
 可以使用我们丰富的存储客户端库集，包括 .NET、C++、Java、Android、Node.js、PHP、Python 和 Ruby，在 Blob 存储或存储账户之间相互复制 blob 数据。
 
-有关详细信息，请访问[使用 .NET 的 Azure Blob 存储入门](/documentation/articles/storage-dotnet-how-to-use-blobs/)。
+有关详细信息，请访问[使用 .NET 的 Azure Blob 存储入门](./storage-dotnet-how-to-use-blobs.md)。
 
 #### 使用存储空间资源管理器
 可以使用存储资源管理器创建存储帐户、上传和下载数据、查看 Blob 内容，以及浏览目录。可以使用其中一个存储空间资源管理器将 Blob 上载到已启用加密的存储帐户。使用某些存储资源管理器，还可以将现有 Blob 存储中的数据复制到存储账户中的不同容器或已启用 SSE 的新存储帐户。
 
-有关详细信息，请访问 [Azure 存储空间资源管理器](/documentation/articles/storage-explorers/)。
+有关详细信息，请访问 [Azure 存储空间资源管理器](./storage-explorers.md)。
 
 ### 步骤 4：查询加密数据的状态
 已部署存储客户端库的更高版本，可让你查询对象的状态，从而判断其是否已加密。不久即会向此文档中添加示例。
@@ -120,7 +120,7 @@ AzCopy 是一个 Windows 命令行实用工具，专用于将数据复制到 Azu
 
 **问：如何在经典存储帐户中加密数据？**
 
-答：可以创建新的 Resource Manager 存储帐户，并使用 [AzCopy](/documentation/articles/storage-use-azcopy/) 将数据从现有经典存储帐户复制到新建的 Resource Manager 存储帐户。
+答：可以创建新的 Resource Manager 存储帐户，并使用 [AzCopy](./storage-use-azcopy.md) 将数据从现有经典存储帐户复制到新建的 Resource Manager 存储帐户。
 
 另一个选项是将经典存储帐户迁移到 Resource Manager 存储帐户。有关详细信息，请参阅 [Platform Supported Migration of IaaS Resources from Classic to Resource Manager](https://azure.microsoft.com/blog/iaas-migration-classic-resource-manager/)（平台支持的从经典部署模型到 Resource Manager 部署模型的 IaaS 资源迁移）。
 
@@ -166,7 +166,7 @@ AzCopy 是一个 Windows 命令行实用工具，专用于将数据复制到 Azu
 
 **问：此功能与 Azure 驱动器加密有何不同？**
 
-答：此功能用于加密 Azure Blob 存储中的数据。Azure 磁盘加密用于加密IaaS VM 中的 OS 和数据磁盘。有关详细信息，请访问我们的[存储安全指南](/documentation/articles/storage-security-guide/)。
+答：此功能用于加密 Azure Blob 存储中的数据。Azure 磁盘加密用于加密IaaS VM 中的 OS 和数据磁盘。有关详细信息，请访问我们的[存储安全指南](./storage-security-guide.md)。
 
 **问：如果我启用 SSE，然后在磁盘上启用 Azure 磁盘加密，会发生什么情况？**
 
@@ -180,11 +180,8 @@ AzCopy 是一个 Windows 命令行实用工具，专用于将数据复制到 Azu
 
 答：它是 Resource Manager 存储帐户吗？ 不支持经典存储帐户。
 
-
-
-
 ##后续步骤
 
-Azure 存储空间提供配套的安全性功能，这些功能相辅相成，可让开发人员共同构建安全的应用程序。有关详细信息，请访问[存储安全指南](/documentation/articles/storage-security-guide/)。
+Azure 存储空间提供配套的安全性功能，这些功能相辅相成，可让开发人员共同构建安全的应用程序。有关详细信息，请访问[存储安全指南](./storage-security-guide.md)。
 
 <!---HONumber=Mooncake_0103_2017-->

@@ -1,23 +1,21 @@
-<properties 
-	pageTitle="Azure 按需媒体编码器概述和比较 | Azure" 
-	description="本主题概述并比较 Azure 按需媒体编码器。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: Azure 按需媒体编码器概述和比较 | Azure
+description: 本主题概述并比较 Azure 按需媒体编码器。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/19/2016" 
-	wacn.date="12/27/2016" 
-	ms.author="juliako"/>  
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/19/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 #Azure 按需媒体编码器概述和比较
 
@@ -29,28 +27,28 @@ Azure 媒体服务提供了多个用于在云中对媒体进行编码的选项�
 
 媒体服务所提供的动态打包可让你以媒体服务支持的流格式（MPEG DASH、HLS、Smooth Streaming、HDS）传送自适应比特率 MP4 或平滑流编码内容，而无须重新打包成这些流格式。
 
-若要使用[动态打包](/documentation/articles/media-services-dynamic-packaging-overview/)，必须执行下列操作：
+若要使用[动态打包](./media-services-dynamic-packaging-overview.md)，必须执行下列操作：
 
 - 将夹层（源）文件编码成一组自适应比特率 MP4 文件或自适应比特率平滑流文件（本教程稍后将演示编码步骤）。
-- 针对你要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](/documentation/articles/media-services-manage-origins/#scale_streaming_endpoints)。
+- 针对你要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
 媒体服务支持将在本文中介绍的以下按需编码器：
 
-- [媒体编码器标准版](/documentation/articles/media-services-encode-asset/#media-encoder-standard)
+- [媒体编码器标准版](./media-services-encode-asset.md#media-encoder-standard)
 
 本文简要概述了按需媒体编码器，并提供了指向介绍更多详细信息的文章的链接。本主题还提供编码器的比较。
 
-请注意，默认情况下每个媒体服务帐户同时只能有一个活动的编码任务。你可以保留编码单元，使用它们可以同时运行多个编码任务，你购买的每个编码保留单元对应一个任务。有关信息，请参阅[缩放编码单位](/documentation/articles/media-services-portal-encoding-units/)。
+请注意，默认情况下每个媒体服务帐户同时只能有一个活动的编码任务。你可以保留编码单元，使用它们可以同时运行多个编码任务，你购买的每个编码保留单元对应一个任务。有关信息，请参阅[缩放编码单位](./media-services-portal-encoding-units.md)。
 
 ##<a name="media-encoder-standard"></a>媒体编码器标准版
 
 ###如何使用
 
-[如何使用媒体编码器标准版进行编码](/documentation/articles/media-services-dotnet-encode-with-media-encoder-standard/)
+[如何使用媒体编码器标准版进行编码](./media-services-dotnet-encode-with-media-encoder-standard.md)
 
 ###格式
 
-[格式和编解码器](/documentation/articles/media-services-media-encoder-standard-formats/)
+[格式和编解码器](./media-services-media-encoder-standard-formats.md)
 
 ###预设
 
@@ -64,20 +62,20 @@ Azure 媒体服务提供了多个用于在云中对媒体进行编码的选项�
 
 ###生成缩略图
 
-有关信息，请参阅[如何使用媒体编码器标准生成缩略图](/documentation/articles/media-services-custom-mes-presets-with-dotnet/#thumbnails)。
+有关信息，请参阅[如何使用媒体编码器标准生成缩略图](./media-services-custom-mes-presets-with-dotnet.md#thumbnails)。
 
 ###修剪视频（裁剪）
 
-有关信息，请参阅[如何使用媒体编码器标准修剪视频](/documentation/articles/media-services-custom-mes-presets-with-dotnet/#trim_video)。
+有关信息，请参阅[如何使用媒体编码器标准修剪视频](./media-services-custom-mes-presets-with-dotnet.md#trim_video)。
 
 ###创建覆盖层
 
-有关信息，请参阅[如何使用媒体编码器标准创建覆盖层](/documentation/articles/media-services-custom-mes-presets-with-dotnet/#overlay)。
+有关信息，请参阅[如何使用媒体编码器标准创建覆盖层](./media-services-custom-mes-presets-with-dotnet.md#overlay)。
 
 ###另请参阅
 
 [媒体服务博客](https://azure.microsoft.com/blog/2015/07/16/announcing-the-general-availability-of-media-encoder-standard/)
- 
+
 ##媒体编码器高级工作流
 
 ###概述
@@ -86,14 +84,11 @@ Azure 媒体服务提供了多个用于在云中对媒体进行编码的选项�
 
 ###如何使用
 
-
-
 [如何在 Azure 媒体服务中使用高级编码](https://azure.microsoft.com/blog/2015/03/06/how-to-use-premium-encoding-in-azure-media-services/)
 
 ###已知问题
 
 如果输入视频不包含隐藏式字幕，输出资产仍将包含一个空的 TTML 文件。
-
 
 ##<a id="compare_encoders"></a>比较编码器
 
@@ -104,9 +99,7 @@ Azure 媒体服务提供了多个用于在云中对媒体进行编码的选项�
 **媒体编码器标准版** |编码器|编码任务将根据“编码器”列下输出资产的大小（以 GB 为单位）按[此处][1]指定的费率进行收费。
 **媒体编码器高级工作流** |高级编码器|编码任务将根据“高级编码器”列下输出资产的大小（以 GB 为单位）按[此处][1]指定的费率进行收费。
 
-
 本部分将比较**媒体编码器标准版**和**媒体编码器高级工作流**的编码功能。
-
 
 ###输入容器/文件格式
 
@@ -164,7 +157,6 @@ WAV/PCM|是|是
 [Opus](https://zh.wikipedia.org/wiki/Opus_(audio_format) |是|否
 [Vorbis](https://zh.wikipedia.org/wiki/Vorbis)</a>|是|否
 
-
 ###输出容器/文件格式
 
 输出容器/文件格式|媒体编码器标准版|媒体编码器高级工作流
@@ -202,7 +194,6 @@ MPEG Layer 2|否|是
 MP3 (MPEG-1 Audio Layer 3)|否|是
 Windows Media 音频|否|是
 
-
 ##错误代码  
 
 下表列出了在执行编码任务期间发生错误的情况下可能返回的错误代码。若要获取 .NET 代码中的错误详细信息，请使用 [ErrorDetails](https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.mediaservices.client.errordetail.aspx) 类。若要获取 REST 代码中的错误详细信息，请使用 [ErrorDetail](https://docs.microsoft.com/zh-cn/rest/api/media/operations/errordetail) REST API。
@@ -220,21 +211,13 @@ ErrorUploadingOutputAsset|上载输出资产时的错误类别
 ErrorCancelingTask|涵盖尝试取消任务时失败的错误类别
 TransientError|涵盖暂时性问题（例如 Azure 存储空间发生暂时性网络问题）的错误类别
 
-
-
-
-
-
-
-
 ##相关文章
 
-- [通过自定义媒体编码器标准预设执行高级编码任务](/documentation/articles/media-services-custom-mes-presets-with-dotnet/)
-- [配额和限制](/documentation/articles/media-services-quotas-and-limitations/)
+- [通过自定义媒体编码器标准预设执行高级编码任务](./media-services-custom-mes-presets-with-dotnet.md)
+- [配额和限制](./media-services-quotas-and-limitations.md)
 
- 
 <!--Reference links in article-->
 
-[1]: /pricing/details/media-services/
+[1]: https://www.azure.cn/pricing/details/media-services/
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

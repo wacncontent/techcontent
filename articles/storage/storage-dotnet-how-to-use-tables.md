@@ -1,25 +1,25 @@
-<properties
-    pageTitle="通过 .NET 开始使用 Azure 表存储 | Azure"
-    description="使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。"
-    services="storage"
-    documentationcenter=".net"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="fe46d883-7bed-49dd-980e-5c71df36adb3"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="hero-article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />  
+---
+title: 通过 .NET 开始使用 Azure 表存储 | Azure
+description: 使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。
+services: storage
+documentationcenter: .net
+author: mmacy
+manager: timlt
+editor: tysonn
 
+ms.assetid: fe46d883-7bed-49dd-980e-5c71df36adb3
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: hero-article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 通过 .NET 开始使用 Azure 表存储
-[AZURE.INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
+[!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 
 ## 概述
 Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。表存储是采用无架构设计的键/属性存储。因为表存储无架构，因此可以很容易地随着你的应用程序需求的发展使数据适应存储。对于所有类型的应用程序，都可以快速并经济高效地访问数据。对于相似的数据量，表存储的成本通常显著低于传统的 SQL。
@@ -34,32 +34,32 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
 - [Microsoft Visual Studio](https://www.visualstudio.com/zh-cn/visual-studio-homepage-vs.aspx)
 - [适用于 .NET 的 Azure 存储空间客户端库](https://www.nuget.org/packages/WindowsAzure.Storage/)
 - [适用于 .NET 的 Azure Configuration Manager](https://www.nuget.org/packages/Microsoft.WindowsAzure.ConfigurationManager/)
-- 一个 [Azure 存储帐户](/documentation/articles/storage-create-storage-account/#create-a-storage-account)
+- 一个 [Azure 存储帐户](./storage-create-storage-account.md#create-a-storage-account)
 
-[AZURE.INCLUDE [storage-dotnet-client-library-version-include](../../includes/storage-dotnet-client-library-version-include.md)]
+[!INCLUDE [storage-dotnet-client-library-version-include](../../includes/storage-dotnet-client-library-version-include.md)]
 
-[AZURE.INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
+[!INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
-[AZURE.INCLUDE [storage-development-environment-include](../../includes/storage-development-environment-include.md)]
+[!INCLUDE [storage-development-environment-include](../../includes/storage-development-environment-include.md)]
 
 ### 添加命名空间声明
 将以下 **using** 语句添加到 `program.cs` 文件的顶部：
 
-	using Microsoft.Azure; // Namespace for CloudConfigurationManager 
-	using Microsoft.WindowsAzure.Storage; // Namespace for CloudStorageAccount
+    using Microsoft.Azure; // Namespace for CloudConfigurationManager 
+    using Microsoft.WindowsAzure.Storage; // Namespace for CloudStorageAccount
     using Microsoft.WindowsAzure.Storage.Table; // Namespace for Table storage types
 
 ### 解析连接字符串
 
-[AZURE.INCLUDE [storage-cloud-configuration-manager-include](../../includes/storage-cloud-configuration-manager-include.md)]
+[!INCLUDE [storage-cloud-configuration-manager-include](../../includes/storage-cloud-configuration-manager-include.md)]
 
 ### 创建表服务客户端
 **CloudTableClient** 类使你能够检索存储在表存储中的表和实体。下面是创建服务客户端的一种方法：
 
-	// Create the table client.
-	CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+    // Create the table client.
+    CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
 现在，你已准备好编写从表存储读取数据并将数据写入表存储的代码。
 
@@ -67,16 +67,16 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
 
 此示例演示如何创建表（如果表已经不存在）：
 
-	// Retrieve the storage account from the connection string.
-	CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
-	    CloudConfigurationManager.GetSetting("StorageConnectionString"));
-	
-	// Create the table client.
-	CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+    // Retrieve the storage account from the connection string.
+    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
+        CloudConfigurationManager.GetSetting("StorageConnectionString"));
 
-	// Retrieve a reference to the table.
+    // Create the table client.
+    CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+
+    // Retrieve a reference to the table.
     CloudTable table = tableClient.GetTableReference("people");
-		
+
     // Create the table if it doesn't exist.
     table.CreateIfNotExists();
 
@@ -108,8 +108,8 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
     // Create the table client.
     CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-	// Create the CloudTable object that represents the "people" table.
-	CloudTable table = tableClient.GetTableReference("people");
+    // Create the CloudTable object that represents the "people" table.
+    CloudTable table = tableClient.GetTableReference("people");
 
     // Create a new customer entity.
     CustomerEntity customer1 = new CustomerEntity("Harp", "Walter");
@@ -141,28 +141,28 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
     // Create the table client.
     CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
 
-	// Create the CloudTable object that represents the "people" table.
+    // Create the CloudTable object that represents the "people" table.
     CloudTable table = tableClient.GetTableReference("people");
 
     // Create the batch operation.
     TableBatchOperation batchOperation = new TableBatchOperation();
 
     // Create a customer entity and add it to the table.
-	CustomerEntity customer1 = new CustomerEntity("Smith", "Jeff");
-	customer1.Email = "Jeff@contoso.com";
-	customer1.PhoneNumber = "425-555-0104";
+    CustomerEntity customer1 = new CustomerEntity("Smith", "Jeff");
+    customer1.Email = "Jeff@contoso.com";
+    customer1.PhoneNumber = "425-555-0104";
 
-	// Create another customer entity and add it to the table.
-	CustomerEntity customer2 = new CustomerEntity("Smith", "Ben");
-	customer2.Email = "Ben@contoso.com";
-	customer2.PhoneNumber = "425-555-0102";
+    // Create another customer entity and add it to the table.
+    CustomerEntity customer2 = new CustomerEntity("Smith", "Ben");
+    customer2.Email = "Ben@contoso.com";
+    customer2.PhoneNumber = "425-555-0102";
 
-	// Add both customer entities to the batch insert operation.
-	batchOperation.Insert(customer1);
-	batchOperation.Insert(customer2);
+    // Add both customer entities to the batch insert operation.
+    batchOperation.Insert(customer1);
+    batchOperation.Insert(customer2);
 
-	// Execute the batch operation.
-	table.ExecuteBatch(batchOperation);
+    // Execute the batch operation.
+    table.ExecuteBatch(batchOperation);
 
 ## 检索分区中的所有实体
 若要查询表以获取分区中的所有实体，请使用 **TableQuery** 对象。以下代码示例指定了一个筛选器，以筛选分区键为“Smith”的实体。此示例会将查询结果中每个实体的字段输出到控制台。
@@ -201,7 +201,7 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
     // Create the CloudTable object that represents the "people" table.
     CloudTable table = tableClient.GetTableReference("people");
 
-	// Create the table query.
+    // Create the table query.
     TableQuery<CustomerEntity> rangeQuery = new TableQuery<CustomerEntity>().Where(
         TableQuery.CombineFilters(
             TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "Smith"),
@@ -236,10 +236,10 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
     TableResult retrievedResult = table.Execute(retrieveOperation);
 
     // Print the phone number of the result.
-	if (retrievedResult.Result != null)
-	   Console.WriteLine(((CustomerEntity)retrievedResult.Result).PhoneNumber);
-	else
-	   Console.WriteLine("The phone number could not be retrieved.");
+    if (retrievedResult.Result != null)
+       Console.WriteLine(((CustomerEntity)retrievedResult.Result).PhoneNumber);
+    else
+       Console.WriteLine("The phone number could not be retrieved.");
 
 ## 替换实体
 若要更新实体，请从表服务中检索它，修改实体对象，然后将更改保存回表服务。以下代码将更改现有客户的电话号码。此代码使用 **Replace**，而不是调用 **Insert**。这将导致在服务器上完全替换该实体，除非服务器上的该实体自检索到它以后发生更改，在此情况下，该操作将失败。操作失败将防止你的应用程序无意中覆盖应用程序的其他组件在检索与更新之间所做的更改。正确处理此失败问题的方法是再次检索实体，进行更改（如果仍有效），然后再次执行 **Replace** 操作。下一节将为你演示如何重写此行为。
@@ -264,21 +264,21 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
     CustomerEntity updateEntity = (CustomerEntity)retrievedResult.Result;
 
     if (updateEntity != null)
-	{
-	   // Change the phone number.
-	   updateEntity.PhoneNumber = "425-555-0105";
+    {
+       // Change the phone number.
+       updateEntity.PhoneNumber = "425-555-0105";
 
-	   // Create the Replace TableOperation.
-	   TableOperation updateOperation = TableOperation.Replace(updateEntity);
+       // Create the Replace TableOperation.
+       TableOperation updateOperation = TableOperation.Replace(updateEntity);
 
-	   // Execute the operation.
-	   table.Execute(updateOperation);
+       // Execute the operation.
+       table.Execute(updateOperation);
 
-	   Console.WriteLine("Entity updated.");
-	}
+       Console.WriteLine("Entity updated.");
+    }
 
-	else
-	   Console.WriteLine("Entity could not be retrieved.");
+    else
+       Console.WriteLine("Entity could not be retrieved.");
 
 ## 插入或替换实体
 如果该实体自从服务器中检索到它以后发生更改，则 **Replace** 操作将失败。此外，必须首先从服务器中检索该实体，**Replace** 操作才能成功。但是，有时你不知道服务器上是否存在该实体以及存储在其中的当前值是否无关。更新操作会将其全部覆盖。为此，你应使用 **InsertOrReplace** 操作。如果该实体不存在，此操作将插入它，如果存在，则替换它，而不管上次更新是何时进行的。在以下代码示例中，仍将检索 Ben Smith 的客户实体，但稍后会使用 **InsertOrReplace** 将其保存回服务器。将覆盖在检索与更新操作之间对实体进行的任何更新。
@@ -303,21 +303,21 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
     CustomerEntity updateEntity = (CustomerEntity)retrievedResult.Result;
 
     if (updateEntity != null)
-	{
-	   // Change the phone number.
-	   updateEntity.PhoneNumber = "425-555-1234";
+    {
+       // Change the phone number.
+       updateEntity.PhoneNumber = "425-555-1234";
 
-	   // Create the InsertOrReplace TableOperation.
-	   TableOperation insertOrReplaceOperation = TableOperation.InsertOrReplace(updateEntity);
+       // Create the InsertOrReplace TableOperation.
+       TableOperation insertOrReplaceOperation = TableOperation.InsertOrReplace(updateEntity);
 
-	   // Execute the operation.
-	   table.Execute(insertOrReplaceOperation);
+       // Execute the operation.
+       table.Execute(insertOrReplaceOperation);
 
-	   Console.WriteLine("Entity was updated.");
-	}
+       Console.WriteLine("Entity was updated.");
+    }
 
-	else
-	   Console.WriteLine("Entity could not be retrieved.");
+    else
+       Console.WriteLine("Entity could not be retrieved.");
 
 ## 查询一部分实体属性
 表查询可以只检索实体中的少数几个属性而不是所有实体属性。此方法称为“投影”，可减少带宽并提高查询性能，尤其适用于大型实体。以下代码中的查询只返回表中实体的电子邮件地址。这可通过使用 **DynamicTableEntity** 和 **EntityResolver** 的查询来实现。你可以在[“Upsert 和查询投影介绍”博客文章][Introducing Upsert and Query Projection blog post]中更加详细地了解投影。注意，本地存储模拟器不支持投影，因此，此代码仅在使用表服务中的帐户时才能运行。
@@ -366,18 +366,18 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
     CustomerEntity deleteEntity = (CustomerEntity)retrievedResult.Result;
 
     // Create the Delete TableOperation.
-	if (deleteEntity != null)
-	{
-	   TableOperation deleteOperation = TableOperation.Delete(deleteEntity);
+    if (deleteEntity != null)
+    {
+       TableOperation deleteOperation = TableOperation.Delete(deleteEntity);
 
-	   // Execute the operation.
-	   table.Execute(deleteOperation);
+       // Execute the operation.
+       table.Execute(deleteOperation);
 
-	   Console.WriteLine("Entity deleted.");
-	}
+       Console.WriteLine("Entity deleted.");
+    }
 
-	else
-	   Console.WriteLine("Could not retrieve the entity.");
+    else
+       Console.WriteLine("Could not retrieve the entity.");
 
 ## 删除表
 最后，以下代码示例将从存储帐户中删除表。在删除表之后的一段时间内无法重新创建它。
@@ -426,15 +426,14 @@ Azure 表存储是一种将结构化的 NoSQL 数据存储在云中的服务。�
 - 查看表服务参考文档，了解有关可用 API 的完整详情：
     - [.NET 存储客户端库参考](https://msdn.microsoft.com/zh-cn/library/mt347887.aspx)
     - [REST API 参考](http://msdn.microsoft.com/zh-cn/library/azure/dd179355)
-- 了解如何使用 [Azure WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk-get-started/) 简化你编写的用于 Azure 存储空间的代码
+- 了解如何使用 [Azure WebJobs SDK](../app-service-web/websites-dotnet-webjobs-sdk-get-started.md) 简化你编写的用于 Azure 存储空间的代码
 - 查看更多功能指南，以了解在 Azure 中存储数据的其他方式。
-    - [通过 .NET 开始使用 Azure Blob 存储](/documentation/articles/storage-dotnet-how-to-use-blobs/)来存储非结构化数据。
-    - [使用.NET (C#) 连接到 SQL 数据库](/documentation/articles/sql-database-develop-dotnet-simple/)，存储关系数据。
-
+    - [通过 .NET 开始使用 Azure Blob 存储](./storage-dotnet-how-to-use-blobs.md)来存储非结构化数据。
+    - [使用.NET (C#) 连接到 SQL 数据库](../sql-database/sql-database-develop-dotnet-simple.md)，存储关系数据。
 
   [下载并安装 Azure SDK for.NET]: /develop/net/
   [在 Visual Studio 中创建 Azure 项目]: http://msdn.microsoft.com/zh-cn/library/azure/ee405487.aspx
-  
+
   [Blob5]: ./media/storage-dotnet-how-to-use-table-storage/blob5.png
   [Blob6]: ./media/storage-dotnet-how-to-use-table-storage/blob6.png
   [Blob7]: ./media/storage-dotnet-how-to-use-table-storage/blob7.png

@@ -1,23 +1,22 @@
-<properties
-    pageTitle="Azure 媒体服务输出元数据架构 | Azure"
-    description="本主题概述 Azure 媒体服务输出元数据架构。"
-    author="Juliako"
-    manager="erikre"
-    editor=""
-    services="media-services"
-    documentationcenter="" />  
+---
+title: Azure 媒体服务输出元数据架构 | Azure
+description: 本主题概述 Azure 媒体服务输出元数据架构。
+author: Juliako
+manager: erikre
+editor: 
+services: media-services
+documentationcenter: 
 
-<tags
-    ms.assetid="1ed84c88-eea5-4a24-9c4f-f2428157d08a"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/26/2016"
-    wacn.date="12/12/2016"
-    ms.author="juliako" />  
-
+ms.assetid: 1ed84c88-eea5-4a24-9c4f-f2428157d08a
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/26/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 # 输出元数据
 ## 概述
@@ -25,10 +24,10 @@
 
 若要检查元数据文件，可以创建 **SAS** 定位器并将文件下载到本地计算机。
 
-本主题介绍输出元数据 (&lt;source\_file\_name&gt;\_manifest.xml) 以其为基础的 XML 架构的元素和类型。有关包含输入资产的元数据的文件的信息，请参阅[输入元数据](/documentation/articles/media-services-input-metadata-schema/)。
+本主题介绍输出元数据 (&lt;source\_file\_name&gt;\_manifest.xml) 以其为基础的 XML 架构的元素和类型。有关包含输入资产的元数据的文件的信息，请参阅[输入元数据](./media-services-input-metadata-schema.md)。
 
-> [AZURE.NOTE]可以在本主题末尾找到完整架构代码 XML 示例。
-
+> [!NOTE]
+>可以在本主题末尾找到完整架构代码 XML 示例。
 
 ## <a name="AssetFiles "></a> AssetFiles 根元素
 用于编码作业的 AssetFile 条目的集合。
@@ -36,10 +35,10 @@
 ### 子元素
 | 名称 | 说明 |
 | --- | --- |
-| <p>**AssetFile**</p><p> minOccurs="0"</p><p> maxOccurs="1"</p> |AssetFiles 集合中的 [AssetFile e元素](/documentation/articles/media-services-output-metadata-schema/)。 |
+| <p>**AssetFile**</p><p> minOccurs="0"</p><p> maxOccurs="1"</p> |AssetFiles 集合中的 [AssetFile e元素](./media-services-output-metadata-schema.md)。 |
 
 ## <a name="AssetFile "></a> AssetFile 元素
-可以找到 XML 示例 [XML 示例](/documentation/articles/media-services-output-metadata-schema/#xml)。
+可以找到 XML 示例 [XML 示例](./media-services-output-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -51,24 +50,24 @@
 ### 子元素
 | 名称 | 说明 |
 | --- | --- |
-| **源** |输入/源媒体文件的集合，处理该集合以生成此 AssetFile。有关详细信息，请参阅[源元素](/documentation/articles/media-services-output-metadata-schema/)。 |
-| <p>**VideoTracks**</p><p> minOccurs="0"</p><p> maxOccurs="1"</p> |每个物理 AssetFile 可以包含零个或以上交错到相应容器格式的视频轨道。这是所有这些视频轨道的集合。有关详细信息，请参阅 [VideoTracks 元素](/documentation/articles/media-services-output-metadata-schema/)。 |
-| <p>**AudioTracks**</p><p> minOccurs="0"</p><p> maxOccurs="1"</p> |每个物理 AssetFile 可以包含零个或以上交错到相应容器格式的音频轨道。这是所有这些音频轨道的集合。有关详细信息，请参阅 [AudioTracks 元素](/documentation/articles/media-services-output-metadata-schema/)。 |
+| **源** |输入/源媒体文件的集合，处理该集合以生成此 AssetFile。有关详细信息，请参阅[源元素](./media-services-output-metadata-schema.md)。 |
+| <p>**VideoTracks**</p><p> minOccurs="0"</p><p> maxOccurs="1"</p> |每个物理 AssetFile 可以包含零个或以上交错到相应容器格式的视频轨道。这是所有这些视频轨道的集合。有关详细信息，请参阅 [VideoTracks 元素](./media-services-output-metadata-schema.md)。 |
+| <p>**AudioTracks**</p><p> minOccurs="0"</p><p> maxOccurs="1"</p> |每个物理 AssetFile 可以包含零个或以上交错到相应容器格式的音频轨道。这是所有这些音频轨道的集合。有关详细信息，请参阅 [AudioTracks 元素](./media-services-output-metadata-schema.md)。 |
 
 ## <a name="Sources "></a> Sources 元素
 输入/源媒体文件的集合，处理该集合以生成此 AssetFile。
 
-可以找到 XML 示例 [XML 示例](/documentation/articles/media-services-output-metadata-schema/#xml)。
+可以找到 XML 示例 [XML 示例](./media-services-output-metadata-schema.md#xml)。
 
 ### 子元素
 | 名称 | 说明 |
 | --- | --- |
-| <p>**Source**</p><p> minOccurs="1"</p><p> maxOccurs="unbounded"</p> |生成此资产时所使用的输入/源文件。有关详细信息，请参阅[ 元素](/documentation/articles/media-services-output-metadata-schema/)。 |
+| <p>**Source**</p><p> minOccurs="1"</p><p> maxOccurs="unbounded"</p> |生成此资产时所使用的输入/源文件。有关详细信息，请参阅[ 元素](./media-services-output-metadata-schema.md)。 |
 
 ## <a name="Source "></a> Source 元素
 生成此资产时所使用的输入/源文件。
 
-可以找到 XML 示例 [XML 示例](/documentation/articles/media-services-output-metadata-schema/#xml)。
+可以找到 XML 示例 [XML 示例](./media-services-output-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -78,17 +77,17 @@
 ## <a name="VideoTracks "></a> VideoTracks 元素
 每个物理 AssetFile 可以包含零个或以上交错到相应容器格式的视频轨道。这是所有这些视频轨道的集合。
 
-可以找到 XML 示例 [XML 示例](/documentation/articles/media-services-output-metadata-schema/#xml)。
+可以找到 XML 示例 [XML 示例](./media-services-output-metadata-schema.md#xml)。
 
 ### 子元素
 | 名称 | 说明 |
 | --- | --- |
-| <p>**VideoTrack**</p><p> minOccurs="1"</p><p> maxOccurs="unbounded"</p> |父 AssetFile 中的特定视频轨道。有关详细信息，请参阅 [VideoTrack 元素](/documentation/articles/media-services-output-metadata-schema/#VideoTrack)。 |
+| <p>**VideoTrack**</p><p> minOccurs="1"</p><p> maxOccurs="unbounded"</p> |父 AssetFile 中的特定视频轨道。有关详细信息，请参阅 [VideoTrack 元素](./media-services-output-metadata-schema.md#VideoTrack)。 |
 
 ## <a name="VideoTrack"></a> VideoTrack 元素
 父 AssetFile 中的特定视频轨道。
 
-可以找到 XML 示例 [XML 示例](/documentation/articles/media-services-output-metadata-schema/#xml)。
+可以找到 XML 示例 [XML 示例](./media-services-output-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -110,17 +109,17 @@
 ## <a name="AudioTracks "></a> AudioTracks 元素
 每个物理 AssetFile 可以包含零个或以上交错到相应容器格式的音频轨道。这是所有这些音频轨道的集合。
 
-可以找到 XML 示例 [XML 示例](/documentation/articles/media-services-output-metadata-schema/#xml)。
+可以找到 XML 示例 [XML 示例](./media-services-output-metadata-schema.md#xml)。
 
 ### 子元素
 | 名称 | 说明 |
 | --- | --- |
-| <p>**AudioTrack**</p><p> minOccurs="1"</p><p> maxOccurs="unbounded"</p> |父 AssetFile 中的特定音频轨道。有关详细信息，请参阅 [AudioTrack 元素](/documentation/articles/media-services-output-metadata-schema/)。 |
+| <p>**AudioTrack**</p><p> minOccurs="1"</p><p> maxOccurs="unbounded"</p> |父 AssetFile 中的特定音频轨道。有关详细信息，请参阅 [AudioTrack 元素](./media-services-output-metadata-schema.md)。 |
 
 ## <a name="AudioTrack "></a> AudioTrack 元素
 父 AssetFile 中的特定音频轨道。
 
-可以找到 XML 示例 [XML 示例](/documentation/articles/media-services-output-metadata-schema/#xml)。
+可以找到 XML 示例 [XML 示例](./media-services-output-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -136,12 +135,12 @@
 ### 子元素
 | 名称 | 说明 |
 | --- | --- |
-| <p>**LoudnessMeteringResultParameters**</p><p> minOccurs="0"</p><p> maxOccurs="1"</p> |响度测量结果参数。有关详细信息，请参阅 [LoudnessMeteringResultParameters 元素](/documentation/articles/media-services-output-metadata-schema/)。 |
+| <p>**LoudnessMeteringResultParameters**</p><p> minOccurs="0"</p><p> maxOccurs="1"</p> |响度测量结果参数。有关详细信息，请参阅 [LoudnessMeteringResultParameters 元素](./media-services-output-metadata-schema.md)。 |
 
 ## <a name="LoudnessMeteringResultParameters "></a> LoudnessMeteringResultParameters 元素
 响度测量结果参数。
 
-可以找到 XML 示例 [XML 示例](/documentation/articles/media-services-output-metadata-schema/#xml)。
+可以找到 XML 示例 [XML 示例](./media-services-output-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -503,8 +502,6 @@
         </xs:complexType>  
       </xs:element>  
     </xs:schema>  
-
-
 
 ## <a name="xml"></a> XML 示例
  以下是输出元数据文件示例。

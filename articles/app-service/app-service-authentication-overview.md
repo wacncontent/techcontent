@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure 应用服务中的身份验证和授权 | Azure"
-	description="概念性参考和概述：Azure 应用服务的身份验证/授权功能"
-	services="app-service"
-	documentationCenter=""
-	authors="mattchenderson"
-	manager="erikre"
-	editor=""/>
+---
+title: Azure 应用服务中的身份验证和授权 | Azure
+description: 概念性参考和概述：Azure 应用服务的身份验证/授权功能
+services: app-service
+documentationCenter: 
+authors: mattchenderson
+manager: erikre
+editor: 
 
-<tags
-	ms.service="app-service"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="08/29/2016"
-	wacn.date="11/21/2016"
-	ms.author="mahender"/>
+ms.service: app-service
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 08/29/2016
+wacn.date: 11/21/2016
+ms.author: mahender
+---
 
 # Azure 应用服务中的身份验证和授权
 
@@ -48,7 +48,8 @@
 - 使用给定标识提供者发布的 SDK 来建立标识，然后即可获得应用服务的访问权限。
 - 使用单行代码即可让移动应用客户端 SDK 登录用户。
 
->[AZURE.TIP] 大多数应用程序应使用提供者 SDK，这样可以让用户在登录时获得更一致的体验，可以使用刷新支持，还可以获得提供者指定的其他权益。
+>[!TIP]
+> 大多数应用程序应使用提供者 SDK，这样可以让用户在登录时获得更一致的体验，可以使用刷新支持，还可以获得提供者指定的其他权益。
 
 使用提供者 SDK 时，用户一登录即可获得与操作系统结合更紧密的体验，而应用程序就运行在该操作系统中。这同时还提供提供者令牌以及客户端上的某些用户信息，因此可以更轻松地使用图形 API 和自定义用户体验。在博客和论坛上，偶尔也会看到此过程被称为“客户端流”或“客户端定向流”，因为客户端代码可以登录用户，还可以访问提供者令牌。
 
@@ -64,11 +65,12 @@
 
 虽然可以为用户提供应用程序访问权限，但是也可以委托其他应用程序来调用自己的 API。例如，可以让一个 Web 应用调用另一个 Web 应用中的 API。在这种情况下，可使用服务帐户凭据而非用户凭据来获取令牌。在 Azure Active Directory 用语中，服务帐户也称为“服务主体”，使用此类帐户的身份验证也称为“服务到服务方案”。
 
->[AZURE.IMPORTANT] 由于移动应用在客户设备上运行，因此移动应用程序_不_算可信应用程序，不应使用服务主体流，而应使用此前详细介绍过的用户流。
+>[!IMPORTANT]
+> 由于移动应用在客户设备上运行，因此移动应用程序_不_算可信应用程序，不应使用服务主体流，而应使用此前详细介绍过的用户流。
 
 对于服务到服务方案，应用服务可通过 Azure Active Directory 保护应用程序。调用应用程序只需提供 Azure Active Directory 服务主体授权令牌即可，而该令牌可通过在 Azure Active Directory 中提供客户端 ID 和客户端机密来获取。[Service principal authentication for API Apps][apia-service]（API 应用的服务主体身份验证）教程介绍了使用 ASP.NET API 应用的此类方案的示例。
 
-若要通过应用服务身份验证处理服务到服务方案，可使用客户端证书或基本身份验证。有关 Azure 中客户端证书的信息，请参阅 [How To Configure TLS Mutual Authentication for Web Apps](/documentation/articles/app-service-web-configure-tls-mutual-auth/)（如何为 Web 应用配置 TLS 相互身份验证）。有关 ASP.NET 中基本身份验证的信息，请参阅 [Authentication Filters in ASP.NET Web API 2](http://www.asp.net/web-api/overview/security/authentication-filters)（ASP.NET Web API 2 中的身份验证筛选器）。
+若要通过应用服务身份验证处理服务到服务方案，可使用客户端证书或基本身份验证。有关 Azure 中客户端证书的信息，请参阅 [How To Configure TLS Mutual Authentication for Web Apps](../app-service-web/app-service-web-configure-tls-mutual-auth.md)（如何为 Web 应用配置 TLS 相互身份验证）。有关 ASP.NET 中基本身份验证的信息，请参阅 [Authentication Filters in ASP.NET Web API 2](http://www.asp.net/web-api/overview/security/authentication-filters)（ASP.NET Web API 2 中的身份验证筛选器）。
 
 ## <a name="authorization"></a>应用服务中的授权机制
 
@@ -76,17 +78,17 @@
 
 - 只允许经过身份验证的请求访问应用程序。
 
-	如果浏览器收到匿名请求，应用服务会将其重定向到所选标识提供者的页面，方便用户登录。如果请求来自移动设备，则会返回“401 未授权”HTTP 响应。
+    如果浏览器收到匿名请求，应用服务会将其重定向到所选标识提供者的页面，方便用户登录。如果请求来自移动设备，则会返回“401 未授权”HTTP 响应。
 
-	此选项根本不需在应用中编写任何身份验证代码。如需进行更细致的授权，可通过代码获取用户信息。
+    此选项根本不需在应用中编写任何身份验证代码。如需进行更细致的授权，可通过代码获取用户信息。
 
 - 允许所有请求访问应用程序，但需验证经过身份验证的请求，在 HTTP 标头中传递身份验证信息。
 
-	此选项将授权决策交由应用程序代码进行，可以更灵活地处理匿名请求，但需用户编写代码。
+    此选项将授权决策交由应用程序代码进行，可以更灵活地处理匿名请求，但需用户编写代码。
 
 - 允许所有请求访问应用程序，不处理请求中的身份验证信息。
 
-	这种情况下，身份验证/授权功能处于关闭状态。身份验证和授权任务完全由应用程序代码来完成。
+    这种情况下，身份验证/授权功能处于关闭状态。身份验证和授权任务完全由应用程序代码来完成。
 
 前述行为由 Azure 门户预览中的“请求未经身份验证时需执行的操作”选项控制。如果选择“使用 *提供者名称* 登录”，则所有请求都需进行身份验证。“允许请求(无操作)”将授权决策交由代码进行，但仍提供身份验证信息。若要让代码来处理一切，可禁用身份验证/授权功能。
 
@@ -99,7 +101,7 @@
 
 使用任何语言或框架编写的代码均可从这些标头获取所需信息。对于 ASP.NET 4.6 应用，**ClaimsPrincipal** 会自动设置为相应的值。
 
-应用程序也可在其 `/.auth/me` 终结点上通过 HTTP GET 获取其他用户详细信息。如果请求中包含有效的令牌，则会返回 JSON 有效负载，并详细说明所使用的提供者、基础性提供者令牌，以及一些其他的用户信息。移动应用服务器 SDK 提供处理该数据的帮助器方法。有关详细信息，请参阅 [How to use the Azure Mobile Apps Node.js SDK](/documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/#howto-tables-getidentity)（如何使用 Azure 移动应用 Node.js SDK）和 [Work with the .NET backend server SDK for Azure Mobile Apps](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#user-info)（使用适用于 Azure 移动应用的 .NET 后端服务器 SDK）。
+应用程序也可在其 `/.auth/me` 终结点上通过 HTTP GET 获取其他用户详细信息。如果请求中包含有效的令牌，则会返回 JSON 有效负载，并详细说明所使用的提供者、基础性提供者令牌，以及一些其他的用户信息。移动应用服务器 SDK 提供处理该数据的帮助器方法。有关详细信息，请参阅 [How to use the Azure Mobile Apps Node.js SDK](../app-service-mobile/app-service-mobile-node-backend-how-to-use-server-sdk.md#howto-tables-getidentity)（如何使用 Azure 移动应用 Node.js SDK）和 [Work with the .NET backend server SDK for Azure Mobile Apps](../app-service-mobile/app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#user-info)（使用适用于 Azure 移动应用的 .NET 后端服务器 SDK）。
 
 ## 文档和其他资源
 
@@ -139,37 +141,29 @@
 - [User authentication for API Apps in Azure App Service][apia-user]（Azure 应用服务中 API 应用的用户身份验证）
 - [Service principal authentication for API Apps in Azure App Service][apia-service]（Azure 应用服务中 API 应用的服务主体身份验证）
 
+[apia-user]: ../app-service-api/app-service-api-dotnet-user-principal-auth.md
+[apia-service]: ../app-service-api/app-service-api-dotnet-service-principal-auth.md
 
+[web-getstarted]: ../app-service-web/app-service-web-get-started-2.md#authenticate-your-users
 
+[iOS]: ../app-service-mobile/app-service-mobile-ios-get-started-users.md
+[Android]: ../app-service-mobile/app-service-mobile-android-get-started-users.md
+[Xamarin.iOS]: ../app-service-mobile/app-service-mobile-xamarin-ios-get-started-users.md
+[Xamarin.Android]: ../app-service-mobile/app-service-mobile-xamarin-android-get-started-users.md
+[Xamarin.Forms]: ../app-service-mobile/app-service-mobile-xamarin-forms-get-started-users.md
+[Windows]: ../app-service-mobile/app-service-mobile-windows-store-dotnet-get-started-users.md
+[Cordova]: ../app-service-mobile/app-service-mobile-cordova-get-started-users.md
 
-
-
-
-
-
-[apia-user]: /documentation/articles/app-service-api-dotnet-user-principal-auth/
-[apia-service]: /documentation/articles/app-service-api-dotnet-service-principal-auth/
-
-[web-getstarted]: /documentation/articles/app-service-web-get-started-2/#authenticate-your-users
-
-[iOS]: /documentation/articles/app-service-mobile-ios-get-started-users/
-[Android]: /documentation/articles/app-service-mobile-android-get-started-users/
-[Xamarin.iOS]: /documentation/articles/app-service-mobile-xamarin-ios-get-started-users/
-[Xamarin.Android]: /documentation/articles/app-service-mobile-xamarin-android-get-started-users/
-[Xamarin.Forms]: /documentation/articles/app-service-mobile-xamarin-forms-get-started-users/
-[Windows]: /documentation/articles/app-service-mobile-windows-store-dotnet-get-started-users/
-[Cordova]: /documentation/articles/app-service-mobile-cordova-get-started-users/
-
-[AAD]: /documentation/articles/app-service-mobile-how-to-configure-active-directory-authentication/
+[AAD]: ../app-service-mobile/app-service-mobile-how-to-configure-active-directory-authentication.md
 [Facebook]: /documentation/articles/app-service-mobile-how-to-configure-facebook-authentication/
 [Google]: /documentation/articles/app-service-mobile-how-to-configure-google-authentication/
-[MSA]: /documentation/articles/app-service-mobile-how-to-configure-microsoft-authentication/
+[MSA]: ../app-service-mobile/app-service-mobile-how-to-configure-microsoft-authentication.md
 [Twitter]: /documentation/articles/app-service-mobile-how-to-configure-twitter-authentication/
 
-[custom-auth]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#custom-auth
+[custom-auth]: ../app-service-mobile/app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#custom-auth
 
-[ADAL-Android]: /documentation/articles/app-service-mobile-android-how-to-use-client-library/#adal
-[ADAL-iOS]: /documentation/articles/app-service-mobile-ios-how-to-use-client-library/#adal
-[ADAL-dotnet]: /documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/#adal
+[ADAL-Android]: ../app-service-mobile/app-service-mobile-android-how-to-use-client-library.md#adal
+[ADAL-iOS]: ../app-service-mobile/app-service-mobile-ios-how-to-use-client-library.md#adal
+[ADAL-dotnet]: ../app-service-mobile/app-service-mobile-dotnet-how-to-use-client-library.md#adal
 
 <!---HONumber=Mooncake_0919_2016-->

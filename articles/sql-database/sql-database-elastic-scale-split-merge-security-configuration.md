@@ -1,26 +1,25 @@
-<properties 
-    pageTitle="拆分/合并安全配置 | Azure" 
-    description="设置用于加密的 x409 证书" 
-    metaKeywords="弹性数据库证书安全性" 
-    services="sql-database" 
-    documentationCenter="" 
-    manager="jhubbard" 
-    authors="torsteng"/>
+---
+title: 拆分/合并安全配置 | Azure
+description: 设置用于加密的 x409 证书
+metaKeywords: 弹性数据库证书安全性
+services: sql-database
+documentationCenter: 
+manager: jhubbard
+authors: torsteng
 
-<tags 
-    ms.service="sql-database" 
-    ms.workload="sql-database" 
-    ms.tgt_pltfrm="na" 
-    ms.devlang="na" 
-    ms.topic="article" 
-    ms.date="05/27/2016" 
-    wacn.date="12/27/2016" 
-    ms.author="torsteng" />
-
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/27/2016
+wacn.date: 12/27/2016
+ms.author: torsteng
+---
 
 # 拆分/合并安全配置  
 
-若要使用拆分/合并服务，必须正确配置安全性。该服务是 Azure SQL 数据库弹性缩放功能的一部分。有关详细信息，请参阅[弹性缩放拆分和合并服务教程](/documentation/articles/sql-database-elastic-scale-configure-deploy-split-and-merge/)。
+若要使用拆分/合并服务，必须正确配置安全性。该服务是 Azure SQL 数据库弹性缩放功能的一部分。有关详细信息，请参阅[弹性缩放拆分和合并服务教程](./sql-database-elastic-scale-configure-deploy-split-and-merge.md)。
 
 ## 配置证书
 
@@ -34,7 +33,7 @@
 可从公共证书颁发机构 (CA) 或 [Windows 证书服务](http://msdn.microsoft.com/zh-cn/library/windows/desktop/aa376539.aspx)中获取证书。这些方法是获取证书的首选方法。
 
 如果这些选项不可用，你可以生成**自签名证书**。
- 
+
 ## 用于生成证书的工具
 
 * [makecert.exe](http://msdn.microsoft.com/zh-cn/library/bfsktky3.aspx)
@@ -271,7 +270,6 @@
 
 *    -e，带有证书到期日期
 
-
 ##<a name="Find-CA-Public Key"></a> 查找 CA 公钥
 
 所有客户端证书都必须由服务信任的证书颁发机构颁发。为了将证书上传到云服务，需要查找颁发了客户端证书（将用于身份验证）的证书颁发机构提供的公钥。
@@ -467,7 +465,7 @@
 6.     单击“浏览”。
 7.     选择所需的存储。
 8.     单击“完成”。
-       
+
     * 如果已选中“受信任的根证书颁发机构”存储，请单击“是”。
 9.     在所有对话框窗口上单击“确定”。
 
@@ -484,12 +482,12 @@
 7. 完成操作后，从列表中的新条目复制证书指纹。
 
 ## 其他安全注意事项
- 
+
 使用 HTTPS 终结点时，本文档中介绍的 SSL 设置将对服务及其客户端之间的通信进行加密。这一点很重要，因为该通信中包含了数据库访问凭据以及其他可能的敏感信息。但是，请注意，该服务会将内部状态（包括凭据）保存在其内部表中，该表位于你在 Azure 订阅中为元数据存储提供的 Azure SQL 数据库中。在服务配置文件（.CSCFG 文件）中，该数据库已定义为以下设置的一部分：
 
     <Setting name="ElasticScaleMetadata" value="Server=…" />
 
 对此数据库中存储的凭据进行加密。但是，最佳实践是，确保服务部署的 Web 角色和辅助角色保持最新且是安全的，因为它们都有权访问元数据数据库和用于加密和解密存储凭据的证书。
 
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

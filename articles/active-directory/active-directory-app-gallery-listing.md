@@ -1,22 +1,21 @@
-<properties
-   pageTitle="列出 Azure Active Directory 应用程序库中的应用程序"
-   description="如何列出 Azure Active Directory 库中支持单一登录的应用程序 | Azure"
-   services="active-directory"
-   documentationCenter="dev-center-name"
-   authors="msmbaldwin"
-   manager="mbaldwin"
-   editor=""/>
+---
+title: 列出 Azure Active Directory 应用程序库中的应用程序
+description: 如何列出 Azure Active Directory 库中支持单一登录的应用程序 | Azure
+services: active-directory
+documentationCenter: dev-center-name
+authors: msmbaldwin
+manager: mbaldwin
+editor: 
 
-<tags
-   ms.service="active-directory"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="identity"
-   ms.date="09/16/2016"
-   ms.author="mbaldwin"
-   wacn.date="01/19/2017"/>
-
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 09/16/2016
+ms.author: mbaldwin
+wacn.date: 01/19/2017
+---
 
 # 列出 Azure Active Directory 应用程序库中的应用程序
 
@@ -30,11 +29,11 @@
 
 ##OpenID Connect 集成
 
-若要将应用程序与 Azure AD 集成，请遵循[开发人员说明](/documentation/articles/active-directory-authentication-scenarios/)。然后回答以下问题并发送到 waadpartners@microsoft.com。
+若要将应用程序与 Azure AD 集成，请遵循[开发人员说明](./active-directory-authentication-scenarios.md)。然后回答以下问题并发送到 waadpartners@microsoft.com。
 
 - 提供应用程序测试租户或帐户的凭据，使 Azure AD 团队可以测试集成。
 
-- 为 Azure AD 团队提供有关如何使用 [Azure AD 许可框架](/documentation/articles/active-directory-integrating-applications/#overview-of-the-consent-framework/)登录并将 Azure AD 实例连接到应用程序的说明。
+- 为 Azure AD 团队提供有关如何使用 [Azure AD 许可框架](./active-directory-integrating-applications.md#overview-of-the-consent-framework)登录并将 Azure AD 实例连接到应用程序的说明。
 
 - 为 Azure AD 团队提供在应用程序上测试单一登录所需的其他说明。
 
@@ -63,6 +62,5 @@
 > 附加应用程序大图标（PNG 文件，215 x 215 像素，实色背景）：
 > 
 > 附加应用程序徽标（PNG 文件，150 x 122 像素，透明背景色）：
-
 
 <!---HONumber=Mooncake_0411_2016-->

@@ -1,30 +1,29 @@
-<properties
-   pageTitle="安装适用于 SQL 数据仓库的 Visual Studio 和 SSDT | Azure"
-   description="安装适用于 Azure SQL 数据仓库的 Visual Studio 和 SQL Server 开发工具 (SSDT)"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="sonyam"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 安装适用于 SQL 数据仓库的 Visual Studio 和 SSDT | Azure
+description: 安装适用于 Azure SQL 数据仓库的 Visual Studio 和 SQL Server 开发工具 (SSDT)
+services: sql-data-warehouse
+documentationCenter: NA
+authors: sonyam
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/17/2017"
-   ms.author="sonyama;barbkess"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: get-started-article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/17/2017
+ms.author: sonyama;barbkess
+---
 
 # 安装适用于 SQL 数据仓库的 Visual Studio 2015 和 SSDT
 若要开发 SQL 数据仓库的应用程序，建议使用 Visual Studio 2015，并结合最新版本的 SQL Server Data Tools (SSDT)。向后兼容也支持装有 SSDT 的 Visual Studio 2013 Update 5。
 
 使用装有 SSDT 的 Visual Studio 让你可以使用 SQL Server 对象资源管理器以可视化方式浏览 SQL 数据仓库中的表格、视图、存储过程和其他更多对象，并运行查询。
 
-> [AZURE.NOTE] SQL 数据仓库尚不支持 Visual Studio 数据库项目。将来的版本会添加此功能。
+> [!NOTE]
+> SQL 数据仓库尚不支持 Visual Studio 数据库项目。将来的版本会添加此功能。
 
 ## 步骤 1：安装 Visual Studio 2015
 遵循以下链接来下载并安装 Visual Studio 2015。如果你已安装 Visual Studio 2013 或 2015，请跳到步骤 2 以安装 SSDT。
@@ -45,11 +44,10 @@
 
 <!--Anchors-->
 
-
 <!--Image references-->
 
 <!--Articles-->
-[connect]: /documentation/articles/sql-data-warehouse-query-visual-studio/
+[connect]: ./sql-data-warehouse-query-visual-studio.md
 
 <!--Other-->
 

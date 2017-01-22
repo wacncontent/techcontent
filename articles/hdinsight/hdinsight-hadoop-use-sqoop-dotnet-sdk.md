@@ -1,26 +1,26 @@
-<properties
-	pageTitle="在 HDInsight 中使用 Hadoop Sqoop | Azure"
-	description="了解如何使用 HDInsight .NET SDK 在 Hadoop 群集和 Azure SQL 数据库之间运行 Sqoop 导入和导出。"
-	editor="cgronlun"
-	manager="paulettm"
-	services="hdinsight"
-	documentationCenter=""
-	tags="azure-portal"
-	authors="mumian"/>
+---
+title: 在 HDInsight 中使用 Hadoop Sqoop | Azure
+description: 了解如何使用 HDInsight .NET SDK 在 Hadoop 群集和 Azure SQL 数据库之间运行 Sqoop 导入和导出。
+editor: cgronlun
+manager: paulettm
+services: hdinsight
+documentationCenter: 
+tags: azure-portal
+authors: mumian
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-   ms.date="09/14/2016"
-   wacn.date="12/26/2016"
-	ms.author="jgao"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/14/2016
+wacn.date: 12/26/2016
+ms.author: jgao
+---
 
 #使用 HDInsight 中的 .NET SDK for Hadoop 运行 Sqoop 作业
 
-[AZURE.INCLUDE [sqoop-selector](../../includes/hdinsight-selector-use-sqoop.md)]
+[!INCLUDE [sqoop-selector](../../includes/hdinsight-selector-use-sqoop.md)]
 
 了解如何使用 HDInsight .NET SDK 在 HDInsight 中运行 Sqoop 作业，以在 HDInsight 群集和 Azure SQL 数据库或 SQL Server 数据库之间进行导入和导出。
 
@@ -28,7 +28,7 @@
 
 在开始本教程前，你必须具有以下项：
 
-- **HDInsight 中的 Hadoop 群集**。请参阅[创建群集和 SQL 数据库](/documentation/articles/hdinsight-use-sqoop/#create-cluster-and-sql-database)。
+- **HDInsight 中的 Hadoop 群集**。请参阅[创建群集和 SQL 数据库](./hdinsight-use-sqoop.md#create-cluster-and-sql-database)。
 
 ## 使用 .NET SDK 运行 Sqoop
 
@@ -40,7 +40,7 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 2. 在 Visual Studio 包管理器控制台中，运行以下 Nuget 命令以导入包。
 
         Install-Package Microsoft.Azure.Management.HDInsight.Job -Pre
-        
+
 3. 在 Program.cs 文件中使用以下代码：
 
         using System.Collections.Generic;
@@ -103,15 +103,15 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
                 }
             }
         }
-        
+
 4. 按 **F5** 运行程序。
 
 ##后续步骤
 
 现在你已了解如何使用 Sqoop。若要了解详细信息，请参阅以下文章：
 
-- [将 Oozie 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-oozie/)：在 Oozie 工作流中使用 Sqoop 操作。
-- [使用 HDInsight 分析外部测试版延迟数据](/documentation/articles/hdinsight-analyze-flight-delay-data/)：使用 Hive 分析外部测试版延迟数据，然后使用 Sqoop 将数据导出到 Azure SQL 数据库。
-- [将数据上传到 HDInsight](/documentation/articles/hdinsight-upload-data/)：了解将数据上传到 HDInsight/Azure Blob 存储的其他方法。
+- [将 Oozie 与 HDInsight 配合使用](./hdinsight-use-oozie.md)：在 Oozie 工作流中使用 Sqoop 操作。
+- [使用 HDInsight 分析外部测试版延迟数据](./hdinsight-analyze-flight-delay-data.md)：使用 Hive 分析外部测试版延迟数据，然后使用 Sqoop 将数据导出到 Azure SQL 数据库。
+- [将数据上传到 HDInsight](./hdinsight-upload-data.md)：了解将数据上传到 HDInsight/Azure Blob 存储的其他方法。
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -1,20 +1,21 @@
-<properties 
-   pageTitle="如何在虚拟网络中使用公共 IP 地址"
-   description="了解如何将虚拟网络配置为使用公共 IP 地址"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="carmonm"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="04/27/2016"
-   wacn.date="12/16/2016"
-   ms.author="jdial" />
+---
+title: 如何在虚拟网络中使用公共 IP 地址
+description: 了解如何将虚拟网络配置为使用公共 IP 地址
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: carmonm
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 04/27/2016
+wacn.date: 12/16/2016
+ms.author: jdial
+---
 
 # 虚拟网络 (VNet) 中的公共 IP 地址空间
 
@@ -46,6 +47,6 @@
 
 ## 后续步骤
 
-[如何管理 VNet 使用的 DNS 服务器](/documentation/articles/virtual-networks-manage-dns-in-vnet/)
+[如何管理 VNet 使用的 DNS 服务器](./virtual-networks-manage-dns-in-vnet.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

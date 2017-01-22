@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure 媒体服务概念 | Azure"
-    description="本部分概述 Azure 媒体服务的概念。"
-    services="media-services"
-    documentationcenter=""
-    author="Juliako"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="dcefc8bc-e2ea-4b38-a643-9010f4436fb5"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/07/2016"
-    wacn.date="01/13/2017"
-    ms.author="juliako" />  
+---
+title: Azure 媒体服务概念 | Azure
+description: 本部分概述 Azure 媒体服务的概念。
+services: media-services
+documentationcenter: 
+author: Juliako
+manager: erikre
+editor: 
 
+ms.assetid: dcefc8bc-e2ea-4b38-a643-9010f4436fb5
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/07/2016
+wacn.date: 01/13/2017
+ms.author: juliako
+---
 
 # Azure 媒体服务概念
 本部分概述最重要的媒体服务概念。
@@ -61,12 +61,12 @@
 
 [AccessPolicy](https://docs.microsoft.com/zh-cn/rest/api/media/operations/accesspolicy) 定义对资产的访问权限（如读取、写入和列出）和持续时间。通常将 AccessPolicy 对象传递给某个定位符，然后使用该定位符来访问资产中包含的文件。
 
-
 ###Blob 容器
 
 一个 Blob 容器包含一组 Blob 集。Blob 容器用作媒体服务中的访问控制分界点和资产上的共享访问签名 (SAS) 定位符。一个 Azure 存储帐户可以包含无数个 Blob 容器。一个容器可以存储无数个 Blob。
 
->[AZURE.NOTE]在不使用媒体服务 API 的情况下，不应该尝试更改媒体服务生成的 blob 容器内容。
+>[!NOTE]
+>在不使用媒体服务 API 的情况下，不应该尝试更改媒体服务生成的 blob 容器内容。
 
 ###<a id="locators"></a>定位符
 
@@ -78,7 +78,7 @@
 
 ###存储帐户
 
-对 Azure 存储空间进行的所有访问都要通过存储帐户完成。一个媒体服务帐户可与一个或多个存储帐户相关联。一个帐户可以包含无限个容器，只要每个帐户的容器总大小不超过 500TB 即可。媒体服务提供 SDK 级工具，可用于管理多个存储帐户，并在上传到这些帐户时基于指标或随机分发使资产分发达到负载均衡。有关详细信息，请参阅[使用 Azure 存储空间](/documentation/services/storage/)。
+对 Azure 存储空间进行的所有访问都要通过存储帐户完成。一个媒体服务帐户可与一个或多个存储帐户相关联。一个帐户可以包含无限个容器，只要每个帐户的容器总大小不超过 500TB 即可。媒体服务提供 SDK 级工具，可用于管理多个存储帐户，并在上传到这些帐户时基于指标或随机分发使资产分发达到负载均衡。有关详细信息，请参阅[使用 Azure 存储空间](../storage/index.md)。
 
 ##作业和任务
 
@@ -94,18 +94,16 @@ Azure 媒体服务提供了多个用于在云中对媒体进行编码的选项�
 
 媒体服务所提供的动态打包允许以媒体服务支持的流格式（MPEG DASH、HLS、平滑流式处理）传送自适应比特率 MP4 或平滑流式处理编码内容，而无须重新打包成这些流格式。
 
-若要使用[动态打包](/documentation/articles/media-services-dynamic-packaging-overview/)，必须执行下列操作：
+若要使用[动态打包](./media-services-dynamic-packaging-overview.md)，必须执行下列操作：
 
 - 将夹层（源）文件编码成一组自适应比特率 MP4 文件或自适应比特率平滑流文件（本教程稍后将演示编码步骤）。
-- 针对要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](/documentation/articles/media-services-manage-origins/#scale_streaming_endpoints/)。
+- 针对要传送内容的流式处理终结点，获取至少一个按需流式处理单位。有关详细信息，请参阅[如何缩放按需流式处理保留单元](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
 媒体服务支持将在本文中介绍的以下按需编码器：
 
-- [媒体编码器标准版](/documentation/articles/media-services-encode-asset/#media-encoder-standard)
+- [媒体编码器标准版](./media-services-encode-asset.md#media-encoder-standard)
 
-
-有关受支持的编码器的信息，请参阅[编码器](/documentation/articles/media-services-encode-asset/)。
-
+有关受支持的编码器的信息，请参阅[编码器](./media-services-encode-asset.md)。
 
 ##实时流式处理
 
@@ -123,7 +121,6 @@ Azure 媒体服务提供了多个用于在云中对媒体进行编码的选项�
 
 每个媒体服务帐户均可包含多个频道、多个节目以及多个 StreamingEndpoint。根据带宽和安全性需求，StreamingEndpoint 服务可专用于一个或多个频道。任何 StreamingEndpoint 都可以从任何频道拉取。
 
-
 ###节目
 
 [节目](https://docs.microsoft.com/zh-cn/rest/api/media/operations/program)用于控制实时流中片段的发布和存储。频道管理节目。频道和节目的关系非常类似于传统媒体，频道具有恒定的内容流，而节目的范围限定为该频道上的一些定时事件。
@@ -135,12 +132,11 @@ ArchiveWindowLength 还决定了客户端能够从当前实时位置按时间向
 
 一个频道最多支持三个同时运行的节目，因此可为同一传入流创建多个存档。这样，你便可以根据需要发布和存档事件的不同部分。例如，你的业务要求是存档 6 小时的节目，但只广播过去 10 分钟的内容。为了实现此目的，你需要创建两个同时运行的节目。一个节目设置为存档 6 小时的事件但不发布该节目。另一个节目设置为存档 10 分钟的事件，并且要发布该节目。
 
-
 有关详细信息，请参阅：
 
-- [使用能够使用 Azure 媒体服务执行实时编码的频道](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)
-- [使用从本地编码器接收多比特率实时流的频道](/documentation/articles/media-services-live-streaming-with-onprem-encoders/)
-- [配额和限制](/documentation/articles/media-services-quotas-and-limitations/)
+- [使用能够使用 Azure 媒体服务执行实时编码的频道](./media-services-manage-live-encoder-enabled-channels.md)
+- [使用从本地编码器接收多比特率实时流的频道](./media-services-live-streaming-with-onprem-encoders.md)
+- [配额和限制](./media-services-quotas-and-limitations.md)
 
 ##保护内容
 
@@ -156,7 +152,6 @@ ArchiveWindowLength 还决定了客户端能够从当前实时位置按时间向
 
 播放器请求流时，媒体服务将使用指定的密钥通过信封加密（使用 AES）或通用加密（使用 PlayReady 或 Widevine）来动态加密你的内容。为了解密流，播放器会从密钥传送服务请求密钥。为了确定用户是否有权获取密钥，该服务会评估为密钥指定的授权策略。
 
-
 ###令牌限制
 
 内容密钥授权策略可能受到一种或多种授权限制：开放、令牌限制或 IP 限制。令牌限制策略必须附带由安全令牌服务 (STS) 颁发的令牌。媒体服务支持采用简单 Web 令牌 (SWT) 格式和 JSON Web 令牌 (JWT) 格式的令牌。媒体服务不提供安全令牌服务。可以创建自定义 STS 或利用 Azure ACS 来颁发令牌。必须将 STS 配置为创建令牌，该令牌使用指定密钥以及令牌限制配置中指定的颁发声明进行签名。如果令牌有效，而且令牌中的声明与为密钥（或许可证）配置的声明相匹配，则媒体服务密钥传送服务会将请求的密钥（或许可证）返回到客户端。
@@ -165,24 +160,23 @@ ArchiveWindowLength 还决定了客户端能够从当前实时位置按时间向
 
 有关详细信息，请参阅以下文章：
 
-[保护内容概述](/documentation/articles/media-services-content-protection-overview/) 
-[使用 AES-128 提供保护](/documentation/articles/media-services-protect-with-aes128/) 
-[使用 DRM 提供保护](/documentation/articles/media-services-protect-with-drm/)
+[保护内容概述](./media-services-content-protection-overview.md) 
+[使用 AES-128 提供保护](./media-services-protect-with-aes128.md) 
+[使用 DRM 提供保护](./media-services-protect-with-drm.md)
 
 ##传送
 
 ###<a id="dynamic_packaging"></a>动态打包
 
-使用媒体服务时，建议始终将夹层文件编码为自适应比特率 MP4 集，然后使用[动态打包](/documentation/articles/media-services-dynamic-packaging-overview/)将该集转换为所需的格式。
-
+使用媒体服务时，建议始终将夹层文件编码为自适应比特率 MP4 集，然后使用[动态打包](./media-services-dynamic-packaging-overview.md)将该集转换为所需的格式。
 
 ###流式处理终结点
 
 StreamingEndpoint 表示一个流服务，该服务可以直接将内容传送给客户端播放器应用程序，也可以传送给内容交付网络 (CDN) 以进一步分发（Azure 媒体服务现在还提供了 Azure CDN 集成）。 StreamingEndpoint 服务的出站流可以是实时流，也可以是媒体服务帐户中的视频点播资产。此外，还可以通过调整扩展单元（也称为流单元）来控制 StreamingEndpoint 服务处理不断增长的带宽需求的能力。建议为生产环境中的应用程序分配一个或多个扩展单元。缩放单元提供能够以 200 Mbps 为增量购买的专用出口容量和附加功能（当前包括使用动态打包）。
 
-建议使用动态打包和/或动态加密。若要使用这些功能，必须获取计划从中流式传输内容的终结点的至少一个流式处理单位。有关详细信息，请参阅[缩放流式处理单位](/documentation/articles/media-services-manage-origins/#scale_streaming_endpoints)。
+建议使用动态打包和/或动态加密。若要使用这些功能，必须获取计划从中流式传输内容的终结点的至少一个流式处理单位。有关详细信息，请参阅[缩放流式处理单位](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
-默认情况下，每个媒体服务帐户最多可以包含 2 个流式处理终结点。若要请求更高的限制，请参阅[配额和限制](/documentation/articles/media-services-quotas-and-limitations/)。
+默认情况下，每个媒体服务帐户最多可以包含 2 个流式处理终结点。若要请求更高的限制，请参阅[配额和限制](./media-services-quotas-and-limitations.md)。
 
 仅当 StreamingEndpoint 处于运行状态时才进行计费。
 
@@ -200,7 +194,7 @@ StreamingEndpoint 表示一个流服务，该服务可以直接将内容传送�
 
 若要为用户提供渐进式下载 URL，必须先创建一个 OnDemandOrigin 定位符。创建定位符可以生成资产的基本路径。然后，需要追加 MP4 文件的名称。例如：
 
-	http://amstest1.streaming.mediaservices.chinacloudapi.cn/3c5fe676-199c-4620-9b03-ba014900f214/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4
+    http://amstest1.streaming.mediaservices.chinacloudapi.cn/3c5fe676-199c-4620-9b03-ba014900f214/BigBuckBunny_H264_650kbps_AAC_und_ch2_96kbps.mp4
 
 ###流式处理 URL
 
@@ -214,32 +208,27 @@ StreamingEndpoint 表示一个流服务，该服务可以直接将内容传送�
 
 - 平滑流
 
-	{流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest
+    {流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest
 
-		http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest
-
+        http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest
 
 - MPEG DASH
 
-	{流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest(format=mpd-time-csf)
+    {流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest(format=mpd-time-csf)
 
-		http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf)
-
-
+        http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=mpd-time-csf)
 
 - Apple HTTP 实时流 (HLS) V4
 
-	{流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest(format=m3u8-aapl)
+    {流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest(format=m3u8-aapl)
 
-		http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl)
-
-
+        http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl)
 
 - Apple HTTP 实时流 (HLS) V3
 
-	{流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest(format=m3u8-aapl-v3)
+    {流式处理终结点名称-媒体服务帐户名称}.streaming.mediaservices.chinacloudapi.cn/{定位符 ID}/{文件名}.ism/Manifest(format=m3u8-aapl-v3)
 
-		http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3)
+        http://testendpoint-testaccount.streaming.mediaservices.chinacloudapi.cn/fecebb23-46f6-490d-8b70-203e86b0df58/BigBuckBunny.ism/Manifest(format=m3u8-aapl-v3)
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: remove HDS related content-->

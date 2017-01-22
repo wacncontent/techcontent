@@ -6,14 +6,12 @@ Latest Freshness check:  2015-09-02 , GeneMi.
 ## Connection string
 -->
 
-
 ### 从 Azure 经典管理门户获取连接字符串
-
 
 使用 [Azure 经典管理门户](http://manage.windowsazure.cn)获取客户端程序与 Azure SQL 数据库进行交互所需的连接字符串：
 
 1. 单击**所有项目**>**SQL 数据库**。
-  
+
 2. 找到你的数据库，单击数据库所对应的行。
 
 3. 单击“查看 ADO .Net、ODBC、PHP 和 JDBC 的 SQL 数据库连接字符串”。
@@ -26,7 +24,6 @@ Could not find a good link for PHP
 For more information, see:<br/>[Connection Strings and Configuration Files](https://msdn.microsoft.com/zh-cn/library/ms378428.aspx).
 -->
 
-
 <!-- Image references. -->
 
 [1-select-sql]: ./media/sql-database-include-connection-string-20-portalshots/connection-string-select-sql.png
@@ -34,7 +31,6 @@ For more information, see:<br/>[Connection Strings and Configuration Files](http
 [2-select-database]: ./media/sql-database-include-connection-string-20-portalshots/connection-string-select-database.PNG
 
 [3-get-connection-details]: ./media/sql-database-include-connection-string-20-portalshots/connection-string-details.PNG
-
 
 <!--
 These three includes/ files are a sequenced set, but you can pick and choose:

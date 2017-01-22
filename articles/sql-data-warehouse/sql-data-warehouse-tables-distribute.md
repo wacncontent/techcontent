@@ -1,27 +1,26 @@
 <!-- Temp remove overview, partiion, statistics and temporary -->
-<properties
-   pageTitle="在 SQL 数据仓库中分布表 | Azure"
-   description="开始在 Azure SQL 数据仓库中分布表。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 在 SQL 数据仓库中分布表 | Azure
+description: 开始在 Azure SQL 数据仓库中分布表。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/10/2016"
-   ms.author="jrj;barbkess;sonyama"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/10/2016
+ms.author: jrj;barbkess;sonyama
+---
 
 # 在 SQL 数据仓库中分布表
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [概述][]
 - [数据类型][]
 - [分布][]
@@ -66,7 +65,6 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
 
 这两个示例都将创建轮循机制表：
 
-
     -- Round Robin created by default
     CREATE TABLE [dbo].[FactInternetSales]
     (   [ProductKey]            int          NOT NULL
@@ -97,15 +95,14 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
     )
     ;
 
-
-> [AZURE.NOTE] 尽管轮循机制是默认的表类型，但最好在 DDL 中明确规定此方法，使其他人能够清楚了解表布局的意图。
+> [!NOTE]
+> 尽管轮循机制是默认的表类型，但最好在 DDL 中明确规定此方法，使其他人能够清楚了解表布局的意图。
 
 ### 哈希分布表
 
 使用**哈希分布**算法来分布表可以减少查询时的数据移动，从而改善许多方案的性能。哈希分布表是在选择的单个列中使用哈希算法分散在分布式数据库之间的表。分布列确定如何将数据分散在分布式数据库之间。哈希函数使用分布列将行分配到分布区。哈希算法与最终的分布区具有确定性。也就是，相同数据类型的相同值始终使用相同的分布区。
 
 本示例将创建基于 ID 分布的表：
-
 
     CREATE TABLE [dbo].[FactInternetSales]
     (   [ProductKey]            int          NOT NULL
@@ -122,7 +119,6 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
     ,  DISTRIBUTION = HASH([ProductKey])
     )
     ;
-
 
 ## 选择分布列
 
@@ -172,7 +168,6 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
 3. 必须使用 equals 运算符联接列。
 4. 联接类型不能是 `CROSS JOIN`。
 
-
 ## 排查数据偏斜问题
 
 使用哈希分布方法分布表数据时，某些分布可能会偏斜，比其他表具有更多数据。过度的数据偏斜可能会影响查询性能，因为分布式查询的最终结果必须先等待运行时间最长的分布完成。根据数据偏斜的程度，你可能需要解决这种问题。
@@ -181,27 +176,23 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
 
 识别表偏斜的简单方法是使用 `DBCC PDW_SHOWSPACEUSED`。这是一种非常快捷简便的方法，可以查看存储在数据库中每组 60 个分布区内的表行数目。请记住，为了获得最平衡的性能，分布式表中的行应该平均分散在所有分布区中。
 
-
     -- Find data skew for a distributed table
     DBCC PDW_SHOWSPACEUSED('dbo.FactInternetSales');
 
-
 但是，如果你查询 Azure SQL 数据仓库动态管理视图 (DMV)，则可以执行更详细的分析。若要开始，请使用 [Table Overview][Overview]（表概述）一文中的 SQL 创建 <!--[-->dbo.vTableSizes<!--][]--> 视图。创建该视图后，运行此查询来识别哪些表有 10% 以上的数据偏斜。
-
 
     select *
     from dbo.vTableSizes 
     where two_part_name in 
         (
         select two_part_name
-    	from dbo.vTableSizes
+        from dbo.vTableSizes
         where row_count > 0
         group by two_part_name
         having min(row_count * 1.000)/max(row_count * 1.000) > .10
         )
     order by two_part_name, row_count
     ;
-
 
 ### 解决数据倾斜
 
@@ -214,7 +205,6 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
 ### 示例 1︰重新创建包含新分布列的表
 
 本示例使用 [CTAS][] 来重新创建具有不同哈希分布列的表。
-
 
     CREATE TABLE [dbo].[FactInternetSales_CustomerKey] 
     WITH (  CLUSTERED COLUMNSTORE INDEX
@@ -250,11 +240,9 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
     RENAME OBJECT [dbo].[FactInternetSales] TO [FactInternetSales_ProductKey];
     RENAME OBJECT [dbo].[FactInternetSales_CustomerKey] TO [FactInternetSales];
 
-
 ### 示例 2：使用轮循机制分布重新创建表
 
 本示例使用 [CTAS][] 来重新创建具有轮循机制分布而不是哈希分布的表。这种变化将生成平均的数据分布，但代价是数据移动加大。
-
 
     CREATE TABLE [dbo].[FactInternetSales_ROUND_ROBIN] 
     WITH (  CLUSTERED COLUMNSTORE INDEX
@@ -290,33 +278,31 @@ SQL 数据仓库在幕后将数据划分成 60 个数据库。每个数据库称
     RENAME OBJECT [dbo].[FactInternetSales] TO [FactInternetSales_HASH];
     RENAME OBJECT [dbo].[FactInternetSales_ROUND_ROBIN] TO [FactInternetSales];
 
-
 ## 后续步骤
 
 有关表设计的详细信息，请参阅 [Distribute][]（分布）、[Index][]（索引）、[Partition][]（分区）、[Data Types][]（数据类型）、[Statistics][]（统计信息）和 [Temporary Tables][Temporary]（临时表）文章。
 
 有关最佳实践的概述，请参阅 [SQL 数据仓库最佳实践][]。
 
-
 <!--Image references-->
 
 <!--Article references-->
-[Overview]: /documentation/articles/sql-data-warehouse-tables-overview/
-[概述]: /documentation/articles/sql-data-warehouse-tables-overview/
-[Data Types]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[Distribute]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[分布]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[Index]: /documentation/articles/sql-data-warehouse-tables-index/
-[索引]: /documentation/articles/sql-data-warehouse-tables-index/
-[Partition]: /documentation/articles/sql-data-warehouse-tables-partition/
-[Statistics]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[统计信息]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[Temporary]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[临时]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[SQL Data Warehouse Best Practices]: /documentation/articles/sql-data-warehouse-best-practices/
-[Query Monitoring]: /documentation/articles/sql-data-warehouse-manage-monitor/
-[dbo.vTableSizes]: /documentation/articles/sql-data-warehouse-tables-overview/#querying-table-sizes
+[Overview]: ./sql-data-warehouse-tables-overview.md
+[概述]: ./sql-data-warehouse-tables-overview.md
+[Data Types]: ./sql-data-warehouse-tables-data-types.md
+[数据类型]: ./sql-data-warehouse-tables-data-types.md
+[Distribute]: ./sql-data-warehouse-tables-distribute.md
+[分布]: ./sql-data-warehouse-tables-distribute.md
+[Index]: ./sql-data-warehouse-tables-index.md
+[索引]: ./sql-data-warehouse-tables-index.md
+[Partition]: ./sql-data-warehouse-tables-partition.md
+[Statistics]: ./sql-data-warehouse-tables-statistics.md
+[统计信息]: ./sql-data-warehouse-tables-statistics.md
+[Temporary]: ./sql-data-warehouse-tables-temporary.md
+[临时]: ./sql-data-warehouse-tables-temporary.md
+[SQL Data Warehouse Best Practices]: ./sql-data-warehouse-best-practices.md
+[Query Monitoring]: ./sql-data-warehouse-manage-monitor.md
+[dbo.vTableSizes]: ./sql-data-warehouse-tables-overview.md#querying-table-sizes
 
 <!--MSDN references-->
 [DBCC PDW_SHOWSPACEUSED()]: https://msdn.microsoft.com/zh-cn/library/mt204028.aspx

@@ -1,21 +1,22 @@
-<properties
-    pageTitle="什么是用户定义的路由和 IP 转发？"
-    description="了解如何在 Azure 中使用用户定义的路由 (UDR) 和 IP 转发将流量转发到虚拟设备。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor="tysonn" />
-<tags
-    ms.assetid="c39076c4-11b7-4b46-a904-817503c4b486"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="03/15/2016"
-    wacn.date="01/13/2017"
-    ms.author="jdial" />
+---
+title: 什么是用户定义的路由和 IP 转发？
+description: 了解如何在 Azure 中使用用户定义的路由 (UDR) 和 IP 转发将流量转发到虚拟设备。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: tysonn
+
+ms.assetid: c39076c4-11b7-4b46-a904-817503c4b486
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/15/2016
+wacn.date: 01/13/2017
+ms.author: jdial
+---
 
 # 什么是用户定义的路由和 IP 转发？
 在 Azure 中将虚拟机 (VM) 添加到虚拟网络 (VNet) 时，VM 能够自动通过网络进行相互通信。你不需要指定网关，即使这些 VM 位于不同子网中。如果有从 Azure 到你的数据中心的混合连接，这同样适用于从 VM 到公共 Internet 的通信，甚至还适用于到本地网络的通信。
@@ -39,8 +40,7 @@
 
 ![Azure 中的系统路由](./media/virtual-networks-udr-overview/Figure2.png)  
 
-
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 用户定义的路由只会应用于离开子网的流量。例如，无法创建路由以指定流量如何从 Internet 流入子网。此外，流量所转发到的目标设备不能与流量的来源设备位于同一子网中。必须为设备创建一个单独的子网。
 > 
 > 
@@ -83,17 +83,17 @@
 2. BGP 路由（当使用 ExpressRoute 时）
 3. 系统路由
 
-若要了解如何创建用户定义的路由，请参阅[如何在 Azure 中创建路由和启用 IP 转发](/documentation/articles/virtual-network-create-udr-arm-template/)。
+若要了解如何创建用户定义的路由，请参阅[如何在 Azure 中创建路由和启用 IP 转发](./virtual-network-create-udr-arm-template.md)。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 用户定义的路由仅适用于 Azure VM 和云服务。例如，如果你想要在本地网络和 Azure 之间添加防火墙虚拟设备，则需为 Azure 路由表创建用户定义的路由，以便将目标为本地地址空间的所有流量转发到虚拟设备。还可以将用户定义的路由 (UDR) 添加到网关子网，以便通过虚拟设备将所有流量从本地转发到 Azure。这是最近添加的功能。
 > 
 > 
 
 ### BGP 路由
-如果本地网络和 Azure 之间存在 ExpressRoute 连接，则可通过 BGP 将路由从本地网络传播到 Azure。在每个 Azure 子网中，这些 BGP 路由与系统路由和用户定义的路由的使用方式相同。有关详细信息，请参阅 [ExpressRoute 简介](/documentation/articles/expressroute-introduction/)。
+如果本地网络和 Azure 之间存在 ExpressRoute 连接，则可通过 BGP 将路由从本地网络传播到 Azure。在每个 Azure 子网中，这些 BGP 路由与系统路由和用户定义的路由的使用方式相同。有关详细信息，请参阅 [ExpressRoute 简介](../expressroute/expressroute-introduction.md)。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 你可以将 Azure 环境配置为使用强制方式通过隧道来连接你的本地网络，即为子网 0.0.0.0/0 创建一个用户定义的路由，而该子网则使用 VPN 网关作为下一跃点。但是，仅在使用 VPN 网关而非 ExpressRoute 的情况下，此方法才起作用。对于 ExpressRoute，强制隧道是通过 BGP 配置的。
 > 
 > 
@@ -104,8 +104,8 @@
 此虚拟设备 VM 必须能够接收不以其自身为目标的传入流量。若要允许 VM 接收发送到其他目标的流量，必须为该 VM 启用 IP 转发。这是 Azure 设置，不是来宾操作系统中的设置。
 
 ## 后续步骤
-* 了解如何[在 Resource Manager 部署模型中创建路由](/documentation/articles/virtual-network-create-udr-arm-template/)并将路由关联到子网。
-* 了解如何[在经典部署模型中创建路由](/documentation/articles/virtual-network-create-udr-classic-ps/)并将路由关联到子网。
+* 了解如何[在 Resource Manager 部署模型中创建路由](./virtual-network-create-udr-arm-template.md)并将路由关联到子网。
+* 了解如何[在经典部署模型中创建路由](./virtual-network-create-udr-classic-ps.md)并将路由关联到子网。
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: update meta properties & wording update & add VNet peering related contents-->

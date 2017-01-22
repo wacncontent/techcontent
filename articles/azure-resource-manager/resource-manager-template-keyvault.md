@@ -1,23 +1,22 @@
-<properties
-    pageTitle="密钥保管库的 Resource Manager 模板 | Azure"
-    description="介绍用于通过模板部署密钥保管库的 Resource Manager 架构。"
-    services="azure-resource-manager,key-vault"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="wpickett"
-    editor="" />  
+---
+title: 密钥保管库的 Resource Manager 模板 | Azure
+description: 介绍用于通过模板部署密钥保管库的 Resource Manager 架构。
+services: azure-resource-manager,key-vault
+documentationcenter: na
+author: tfitzmac
+manager: wpickett
+editor: 
 
-<tags
-    ms.assetid="96433b1a-68ee-4292-85b6-a581618b921b"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="06/23/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: 96433b1a-68ee-4292-85b6-a581618b921b
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 06/23/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 密钥保管库模板架构
 创建密钥保管库。
@@ -62,10 +61,10 @@
 | --- | --- |
 | type |枚举<br />必需<br />**Microsoft.KeyVault/vaults**<br /><br />要创建的资源类型。 |
 | apiVersion |枚举<br /><br />**2015-06-01** 或 **2014-12-19-preview**<br /><br />用于创建资源的 API 版本。 |
-| 名称 |字符串<br />必需<br />在 Azure 中唯一的名称。<br /><br />要创建的密钥保管库的名称。请考虑在命名约定中使用 [uniqueString](/documentation/articles/resource-group-template-functions/#uniquestring) 函数来创建唯一名称，如以下示例中所示。 |
-| location |字符串<br />必需<br />密钥保管库的有效区域。若要确定有效的区域，请参阅[支持的区域](/documentation/articles/resource-manager-supported-services/#supported-regions)。<br /><br />托管密钥保管库的区域。 |
+| 名称 |字符串<br />必需<br />在 Azure 中唯一的名称。<br /><br />要创建的密钥保管库的名称。请考虑在命名约定中使用 [uniqueString](./resource-group-template-functions.md#uniquestring) 函数来创建唯一名称，如以下示例中所示。 |
+| location |字符串<br />必需<br />密钥保管库的有效区域。若要确定有效的区域，请参阅[支持的区域](./resource-manager-supported-services.md#supported-regions)。<br /><br />托管密钥保管库的区域。 |
 | properties |对象<br />必需<br />[properties 对象](#properties)<br /><br />一个对象，用于指定要创建的密钥保管库的类型。 |
-| 资源 |数组<br />可选<br />允许的值：[密钥保管库机密资源](/documentation/articles/resource-manager-template-keyvault-secret/)<br /><br />密钥保管库的子资源。 |
+| 资源 |数组<br />可选<br />允许的值：[密钥保管库机密资源](./resource-manager-template-keyvault-secret.md)<br /><br />密钥保管库的子资源。 |
 
 <a id="properties" /></a>
 
@@ -73,14 +72,13 @@
 | Name | 值 |
 | --- | --- |
 | enabledForDeployment |布尔值<br />可选<br />**true** 或 **false**<br /><br />指定是否已为虚拟机或 Service Fabric 部署启用了保管库。 |
-| enabledForTemplateDeployment |布尔值<br />可选<br />**true** 或 **false**<br /><br />指定是否在 Resource Manager 模板部署中启用了保管库。有关详细信息，请参阅[在部署期间传递安全值](/documentation/articles/resource-manager-keyvault-parameter/) |
+| enabledForTemplateDeployment |布尔值<br />可选<br />**true** 或 **false**<br /><br />指定是否在 Resource Manager 模板部署中启用了保管库。有关详细信息，请参阅[在部署期间传递安全值](./resource-manager-keyvault-parameter.md) |
 | enabledForVolumeEncryption |布尔值<br />可选<br />**true** 或 **false**<br /><br />指定是否为卷加密启用了保管库。 |
 | tenantId |字符串<br />必需<br />**全局唯一标识符**<br /><br />订阅的租户标识符。可以使用 [Get-AzureRmSubscription](https://msdn.microsoft.com/zh-cn/library/azure/mt619284.aspx) PowerShell cmdlet 或 **azure account show** Azure CLI 命令来检索该值。 |
 | accessPolicies |数组<br />必需<br />[accessPolicies 对象](#accesspolicies)<br /><br />最多包含 16 个对象的数组，指定用户或服务主体的权限。 |
 | sku |对象<br />必需<br />[sku 对象](#sku)<br /><br />密钥保管库的 SKU。 |
 
 <a id="accesspolicies" /></a> 
-
 
 ### properties.accessPolicies 对象
 | 名称 | 值 |
@@ -91,7 +89,6 @@
 
 <a id="permissions" /></a>  
 
-
 ### properties.accessPolicies.permissions 对象
 | 名称 | 值 |
 | --- | --- |
@@ -99,7 +96,6 @@
 | secrets |数组<br />必需<br />**all**、**delete**、**get**、**list**、**set**<br /><br />向此 Active Directory 对象授予的，对此保管库中机密的权限。必须将此值指定为一个或多个允许值的数组。 |
 
 <a id="sku" /></a> 
-
 
 ### properties.sku 对象
 | Name | 值 |
@@ -240,7 +236,7 @@
 * [创建密钥保管库](https://github.com/Azure/azure-quickstart-templates/tree/master/101-key-vault-create/)
 
 ## 后续步骤
-* 有关密钥保管库的一般信息，请参阅 [Azure 密钥保管库入门](/documentation/articles/key-vault-get-started/)。
-* 有关在部署模板时引用密钥保管库机密的示例，请参阅[在部署期间传递安全值](/documentation/articles/resource-manager-keyvault-parameter/)。
+* 有关密钥保管库的一般信息，请参阅 [Azure 密钥保管库入门](../key-vault/key-vault-get-started.md)。
+* 有关在部署模板时引用密钥保管库机密的示例，请参阅[在部署期间传递安全值](./resource-manager-keyvault-parameter.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

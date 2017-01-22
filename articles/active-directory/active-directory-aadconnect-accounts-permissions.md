@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Azure AD Connect：帐户和权限 | Azure"
-    description="本主题介绍使用和创建的帐户以及所需的权限。"
-    services="active-directory"
-    documentationcenter=""
-    author="billmath"
-    manager="femila"
-    editor="" />  
+---
+title: Azure AD Connect：帐户和权限 | Azure
+description: 本主题介绍使用和创建的帐户以及所需的权限。
+services: active-directory
+documentationcenter: 
+author: billmath
+manager: femila
+editor: 
 
-<tags
-    ms.assetid="b93e595b-354a-479d-85ec-a95553dd9cc2"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/04/2016"
-    wacn.date="01/06/2017"
-    ms.author="billmath" />
+ms.assetid: b93e595b-354a-479d-85ec-a95553dd9cc2
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/04/2016
+wacn.date: 01/06/2017
+ms.author: billmath
+---
 
 # Azure AD Connect：帐户和权限
 Azure AD Connect 安装向导提供提供两种不同的路径：
@@ -25,15 +25,15 @@ Azure AD Connect 安装向导提供提供两种不同的路径：
 - 在“自定义设置”中，向导提供更多选项；但在某些情况下，需要确保自己拥有正确的权限。
 
 ## 相关文档
-如果尚未阅读有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的文档，下表提供了相关主题的链接。
+如果尚未阅读有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的文档，下表提供了相关主题的链接。
 
 |主题 |链接|  
 | --- | --- |
 |下载 Azure AD Connect | [下载 Azure AD Connect](http://go.microsoft.com/fwlink/?LinkId=615771)|
-|使用快速设置安装 | [Azure AD Connect 的快速安装](/documentation/articles/active-directory-aadconnect-get-started-express/)|
-|使用自定义设置安装 | [Azure AD Connect 的自定义安装](/documentation/articles/active-directory-aadconnect-get-started-custom/)|
-|从 DirSync 升级 | [从 Azure AD 同步工具 (DirSync) 升级](/documentation/articles/active-directory-aadconnect-dirsync-upgrade-get-started/)|
-|安装后 | [验证安装并分配许可证](/documentation/articles/active-directory-aadconnect-whats-next/)|
+|使用快速设置安装 | [Azure AD Connect 的快速安装](./active-directory-aadconnect-get-started-express.md)|
+|使用自定义设置安装 | [Azure AD Connect 的自定义安装](./active-directory-aadconnect-get-started-custom.md)|
+|从 DirSync 升级 | [从 Azure AD 同步工具 (DirSync) 升级](./active-directory-aadconnect-dirsync-upgrade-get-started.md)|
+|安装后 | [验证安装并分配许可证](./active-directory-aadconnect-whats-next.md)|
 
 ## 快速设置安装
 在快速设置中，安装向导要求提供 AD DS 企业管理员凭据，以便配置本地 Active Directory，使其具有 Azure AD Connect 所需的权限。如果从 DirSync 升级，AD DS 企业管理员凭据可用于重置 DirSync 所用帐户的密码。此外，还需要 Azure AD 全局管理员凭据。
@@ -84,8 +84,8 @@ Azure AD Connect 安装向导提供提供两种不同的路径：
 | 功能 | 权限 |
 | --- | --- |
 | 密码同步 |<li>复制目录更改</li><li>复制所有目录更改。 |
-| Exchange 混合部署 |[Exchange 混合写回](/documentation/articles/active-directory-aadconnectsync-attributes-synchronized/#exchange-hybrid-writeback/)中叙述了对用户、组和联系人的属性的写入权限。 |
-| 密码写回 |[密码管理入门](/documentation/articles/active-directory-passwords-getting-started/#step-4-set-up-the-appropriate-active-directory-permissions/)中叙述了对用户的属性的写入权限。 |
+| Exchange 混合部署 |[Exchange 混合写回](./active-directory-aadconnectsync-attributes-synchronized.md#exchange-hybrid-writeback)中叙述了对用户、组和联系人的属性的写入权限。 |
+| 密码写回 |[密码管理入门](./active-directory-passwords-getting-started.md#step-4-set-up-the-appropriate-active-directory-permissions)中叙述了对用户的属性的写入权限。 |
 | 组写回 |在分发组应该放置到的 OU 中读取、创建、更新和删除组对象。 |
 
 ## 升级 <a name="upgrade"></a>
@@ -128,6 +128,6 @@ Azure AD Connect 安装向导提供提供两种不同的路径：
 ![AD 帐户角色](./media/active-directory-aadconnect-accounts-permissions/aadsyncserviceaccountrole.png)
 
 ## 后续步骤
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_1226_2016-->

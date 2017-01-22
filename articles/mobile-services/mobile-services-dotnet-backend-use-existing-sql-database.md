@@ -1,22 +1,21 @@
-<properties 
-	pageTitle="使用现有的 SQL 数据库和移动服务 .NET 后端生成服务 | Azure" 
-	description="了解如何将现有的云或本地 SQL 数据库与基于 .NET 的移动服务结合使用" 
-	services="mobile-services" 
-	documentationCenter="" 
-	authors="ggailey777" 
-	manager="dwrede" 
-	editor="mollybos"/>
+---
+title: 使用现有的 SQL 数据库和移动服务 .NET 后端生成服务 | Azure
+description: 了解如何将现有的云或本地 SQL 数据库与基于 .NET 的移动服务结合使用
+services: mobile-services
+documentationCenter: 
+authors: ggailey777
+manager: dwrede
+editor: mollybos
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
-
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 # 使用现有的 SQL 数据库和移动服务 .NET 后端生成服务
 
@@ -25,7 +24,7 @@
 <a name="ExistingModel"></a>
 ## 探索现有的数据库模型
 
-在本教程中，我们将使用以你的移动服务创建的数据库，但不使用创建的默认模型。我们将手动创建任意模型，以代表你可能具有的现有应用程序。有关如何改为连接到本地数据库的完整详细信息，请查看[使用混合连接从 Azure 移动服务连接到本地 SQL Server](/documentation/articles/mobile-services-dotnet-backend-hybrid-connections-get-started/)。
+在本教程中，我们将使用以你的移动服务创建的数据库，但不使用创建的默认模型。我们将手动创建任意模型，以代表你可能具有的现有应用程序。有关如何改为连接到本地数据库的完整详细信息，请查看[使用混合连接从 Azure 移动服务连接到本地 SQL Server](./mobile-services-dotnet-backend-hybrid-connections-get-started.md)。
 
 1. 首先，请在 **Visual Studio 2013 Update 2** 中创建移动服务服务器项目，或使用可在 [Azure 经典管理门户](http://manage.windowsazure.cn)中从服务的“移动服务”选项卡下载的快速入门项目。对于本教程，我们假设你的服务器项目名称为 **ShoppingService**。
 
@@ -40,7 +39,7 @@
             {
                 [Key]
                 public int CustomerId { get; set; }
-                
+
                 public string Name { get; set; }
 
                 public virtual ICollection<Order> Orders { get; set; }
@@ -49,7 +48,7 @@
         }
 
 3. 在 **Models** 文件夹中创建 **Order.cs** 文件，并使用以下实现：
-    
+
         using System.ComponentModel.DataAnnotations;
 
         namespace ShoppingService.Models
@@ -66,7 +65,7 @@
                 public bool Completed { get; set; }
 
                 public int CustomerId { get; set; }
-              
+
                 public virtual Customer Customer { get; set; }
 
             }
@@ -145,7 +144,7 @@
     **Customer** 关系属性已替换为 **Customer** 名称，以及可用来为客户端上的关系手动建模的 **MobileCustomerId** 属性。现在你可以忽略 **CustomerId** 属性，以后才会使用此属性。
 
 3. 你可能会发现，在 **EntityData** 基类上添加系统属性后，DTO 的属性数目比模型类型还多。显然，需要一个位置来存储这些属性，因此我们将在原始数据库中额外添加一些列。虽然这样会更改数据库，但并不会中断现有的应用程序，因为这些更改只是附加的（将新的列添加到架构）。为此，请将以下语句添加到 **Customer.cs** 和 **Order.cs** 的顶部：
-    
+
         using System.ComponentModel.DataAnnotations.Schema;
         using Microsoft.WindowsAzure.Mobile.Service.Tables;
         using System;
@@ -174,7 +173,7 @@
         public byte[] Version { get; set; }
 
 5. 刚刚添加的系统属性具有某些会在数据库操作期间明确发生的内置行为（例如，自动更新创建/更新时间）。若要启用这些行为，我们需要更改 **ExistingContext.cs**。在该文件的顶部，添加以下代码：
-    
+
         using System.Data.Entity.ModelConfiguration.Conventions;
         using Microsoft.WindowsAzure.Mobile.Service.Tables;
         using System.Linq;
@@ -318,7 +317,7 @@ AutoMapper 此时会将对象互相映射。将匹配所有具有相应名称的
                 {
                     return (T)(object)GetKey(mobileCustomerId, this.context.Customers, this.Request);
                 }
-                
+
                 public override SingleResult<MobileCustomer> Lookup(string mobileCustomerId)
                 {
                     int customerId = GetKey<int>(mobileCustomerId);
@@ -605,7 +604,7 @@ AutoMapper 此时会将对象互相映射。将匹配所有具有相应名称的
             public DateTimeOffset? UpdatedAt { get; set; }
 
             public bool Deleted { get; set; }
-            
+
             [Version]
             public string Version { get; set; }
 

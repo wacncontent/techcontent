@@ -5,5 +5,4 @@ ExpressRoute 虚拟网络网关可使用以下 SKU：
 - 标准
 - HighPerformance
 
-
 <!---HONumber=Mooncake_1226_2016-->

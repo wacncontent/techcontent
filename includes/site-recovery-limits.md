@@ -1,19 +1,18 @@
-<properties
-   pageTitle="站点恢复限制表"
-   description="描述站点恢复的系统限制。"
-   services="site recovery"
-   documentationCenter="NA"
-   authors="csilauraa"
-   manager="jwhit"
-   editor="" />
-<tags
-   ms.service="site recovery"
-   ms.date="07/06/2015"
-   wacn.date="10/3/2015" />
+---
+title: 站点恢复限制表
+description: 描述站点恢复的系统限制。
+services: site recovery
+documentationCenter: NA
+authors: csilauraa
+manager: jwhit
+editor: 
 
+ms.service: site recovery
+ms.date: 07/06/2015
+wacn.date: 10/3/2015
+---
 
 以下限制适用于 Azure 站点恢复：
-
 
 |限制标识符|默认限制|
 |---|---|---|---|

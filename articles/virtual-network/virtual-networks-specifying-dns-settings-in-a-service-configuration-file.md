@@ -1,20 +1,21 @@
-<properties 
-   pageTitle="在服务配置文件中指定 DNS 设置"
-   description="说明"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="joaoma"
-   manager="carmonm"
-   editor="tysonn" />
-<tags 
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="02/24/2016"
-   wacn.date="04/26/2016"
-   ms.author="jdial" />
+---
+title: 在服务配置文件中指定 DNS 设置
+description: 说明
+services: virtual-network
+documentationCenter: na
+authors: joaoma
+manager: carmonm
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/24/2016
+wacn.date: 04/26/2016
+ms.author: jdial
+---
 
 # 在服务配置文件中指定 DNS 设置
 
@@ -30,7 +31,8 @@
         <DnsServer name="ID3" IPAddress="IPAddress3" />
       </DnsServers>
 
->[AZURE.WARNING]**DnsServer** 元素中的 **name** 属性仅用作引用名称。它不表示 DNS 服务器的主机名。每个 **DnsServer** 属性值必须在整个 Azure 订阅中是唯一的。
+>[!WARNING]
+>**DnsServer** 元素中的 **name** 属性仅用作引用名称。它不表示 DNS 服务器的主机名。每个 **DnsServer** 属性值必须在整个 Azure 订阅中是唯一的。
 
 ## 另请参阅
 
@@ -38,6 +40,6 @@
 
 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100)
 
-[使用网络配置文件配置虚拟网络](/documentation/articles/virtual-networks-create-vnet-classic-portal/)
+[使用网络配置文件配置虚拟网络](./virtual-networks-create-vnet-classic-portal.md)
 
 <!---HONumber=76-->

@@ -1,23 +1,21 @@
-<properties
-   pageTitle="SQL 数据仓库开发的设计决策和编码技术 | Azure"
-   description="SQL 数据仓库的开发概念、设计决策、建议和编程技术。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库开发的设计决策和编码技术 | Azure
+description: SQL 数据仓库的开发概念、设计决策、建议和编程技术。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="jrj;barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: jrj;barbkess;sonyama
+---
 
 # SQL 数据仓库的设计决策和编程技术
 请阅读以下开发文章，以更好地了解 SQL 数据仓库的关键设计决策、建议和编程技术。
@@ -53,24 +51,24 @@
 <!--Image references-->
 
 <!--Article references-->
-[并发]: /documentation/articles/sql-data-warehouse-develop-concurrency/
-[连接]: /documentation/articles/sql-data-warehouse-connect-overview/
-[CTAS]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[动态 SQL]: /documentation/articles/sql-data-warehouse-develop-dynamic-sql/
-[Group By 选项]: /documentation/articles/sql-data-warehouse-develop-group-by-options/
-[标签]: /documentation/articles/sql-data-warehouse-develop-label/
-[循环]: /documentation/articles/sql-data-warehouse-develop-loops/
-[统计信息]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[存储过程]: /documentation/articles/sql-data-warehouse-reference-tsql-statements/
-[表分布]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[表索引]: /documentation/articles/sql-data-warehouse-tables-overview/
-[表分区]: /documentation/articles/sql-data-warehouse-tables-partition/
-[临时表]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[事务]: /documentation/articles/sql-data-warehouse-develop-transactions/
-[用户定义的架构]: /documentation/articles/sql-data-warehouse-develop-user-defined-schemas/
-[变量赋值]: /documentation/articles/sql-data-warehouse-develop-variable-assignment/
-[视图]: /documentation/articles/sql-data-warehouse-develop-views/
-[Transact-SQL 参考]: /documentation/articles/sql-data-warehouse-overview-reference/
+[并发]: ./sql-data-warehouse-develop-concurrency.md
+[连接]: ./sql-data-warehouse-connect-overview.md
+[CTAS]: ./sql-data-warehouse-develop-ctas.md
+[动态 SQL]: ./sql-data-warehouse-develop-dynamic-sql.md
+[Group By 选项]: ./sql-data-warehouse-develop-group-by-options.md
+[标签]: ./sql-data-warehouse-develop-label.md
+[循环]: ./sql-data-warehouse-develop-loops.md
+[统计信息]: ./sql-data-warehouse-tables-statistics.md
+[存储过程]: ./sql-data-warehouse-reference-tsql-statements.md
+[表分布]: ./sql-data-warehouse-tables-statistics.md
+[表索引]: ./sql-data-warehouse-tables-overview.md
+[表分区]: ./sql-data-warehouse-tables-partition.md
+[临时表]: ./sql-data-warehouse-tables-temporary.md
+[事务]: ./sql-data-warehouse-develop-transactions.md
+[用户定义的架构]: ./sql-data-warehouse-develop-user-defined-schemas.md
+[变量赋值]: ./sql-data-warehouse-develop-variable-assignment.md
+[视图]: ./sql-data-warehouse-develop-views.md
+[Transact-SQL 参考]: ./sql-data-warehouse-overview-reference.md
 
 <!--MSDN references-->
 [renaming objects]: https://msdn.microsoft.com/zh-cn/library/mt631611.aspx

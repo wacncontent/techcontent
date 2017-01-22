@@ -1,23 +1,21 @@
-<properties
- pageTitle="开发人员指南 - IoT 中心终结点 | Azure"
- description="Azure IoT 中心开发人员指南 - 有关 IoT 中心终结点的参考信息"
- services="iot-hub"
- documentationCenter=".net"
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: 开发人员指南 - IoT 中心终结点 | Azure
+description: Azure IoT 中心开发人员指南 - 有关 IoT 中心终结点的参考信息
+services: iot-hub
+documentationCenter: .net
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="09/30/2016"
- wacn.date="12/12/2016" 
- ms.author="dobett"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 12/12/2016
+ms.author: dobett
+---
 
 # 参考 - IoT 中心终结点
 
@@ -41,7 +39,7 @@ Azure IoT 中心属于多租户服务，向各种执行组件公开功能。下�
     - *接收直接方法请求*。设备使用此终结点侦听[直接方法][lnk-methods]的请求。
 
     这些终结点使用 [MQTT v3.1.1][lnk-mqtt]、HTTP 1.1 和 [AMQP 1.0][lnk-amqp] 协议进行公开。请注意，也可以通过端口 443 上的 [WebSockets][lnk-websockets] 来实现 AMQP。
-    
+
     设备孪生的终结点和方法的终结点只能通过 [MQTT v3.1.1][lnk-mqtt] 使用。
 * **服务终结点**。每个 IoT 中心公开应用程序后端可用来与设备通信的一组终结点。这些终结点目前只能通过 [AMQP][lnk-amqp] 协议公开，方法调用终结点除外，后者通过 HTTP 1.1 公开。
     - *接收设备到云的消息*。此终结点与 [Azure 事件中心][lnk-event-hubs]兼容。后端服务可用它来读取由设备发送的所有[设备到云的消息][lnk-d2c]。
@@ -73,26 +71,25 @@ Azure IoT 中心属于多租户服务，向各种执行组件公开功能。下�
 [lnk-amqp]: https://www.amqp.org/
 [lnk-mqtt]: http://mqtt.org/
 [lnk-websockets]: https://tools.ietf.org/html/rfc6455
-[lnk-arm]: /documentation/articles/resource-group-overview/
-[lnk-event-hubs]: /documentation/services/event-hubs/
+[lnk-arm]: ../azure-resource-manager/resource-group-overview.md
+[lnk-event-hubs]: ../event-hubs/index.md
 
 [lnk-tls]: https://tools.ietf.org/html/rfc5246
 
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-accesscontrol]: ./iot-hub-devguide-security.md#access-control-and-permissions
+[lnk-importexport]: ./iot-hub-devguide-identity-registry.md#import-and-export-device-identities
+[lnk-d2c]: ./iot-hub-devguide-messaging.md#device-to-cloud-messages
+[lnk-device-identities]: ./iot-hub-devguide-identity-registry.md
+[lnk-upload]: ./iot-hub-devguide-file-upload.md
+[lnk-c2d]: ./iot-hub-devguide-messaging.md#cloud-to-device-messages
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-jobs]: ./iot-hub-devguide-jobs.md
 
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-accesscontrol]: /documentation/articles/iot-hub-devguide-security/#access-control-and-permissions
-[lnk-importexport]: /documentation/articles/iot-hub-devguide-identity-registry/#import-and-export-device-identities
-[lnk-d2c]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-messages
-[lnk-device-identities]: /documentation/articles/iot-hub-devguide-identity-registry/
-[lnk-upload]: /documentation/articles/iot-hub-devguide-file-upload/
-[lnk-c2d]: /documentation/articles/iot-hub-devguide-messaging/#cloud-to-device-messages
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-
-[lnk-devguide-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-devguide-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-devguide-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-devguide-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 
 <!---HONumber=Mooncake_1205_2016-->

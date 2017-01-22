@@ -1,22 +1,22 @@
-<properties
-    pageTitle="我的云服务项目发生了什么情况？| Azure"
-    description="介绍使用 Visual Studio 连接服务连接到 Azure 存储帐户后云服务项目中会发生什么情况"
-    services="storage"
-    documentationcenter=""
-    author="TomArcher"
-    manager="douge"
-    editor="" />
-<tags
-    ms.assetid="ca0ea68d-f417-4ce8-9413-40d76f69cdea"
-    ms.service="storage"
-    ms.workload="web"
-    ms.tgt_pltfrm="vs-what-happened"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/02/2016"
-    wacn.date="01/06/2017"
-    ms.author="tarcher" />  
+---
+title: 我的云服务项目发生了什么情况？| Azure
+description: 介绍使用 Visual Studio 连接服务连接到 Azure 存储帐户后云服务项目中会发生什么情况
+services: storage
+documentationcenter: 
+author: TomArcher
+manager: douge
+editor: 
 
+ms.assetid: ca0ea68d-f417-4ce8-9413-40d76f69cdea
+ms.service: storage
+ms.workload: web
+ms.tgt_pltfrm: vs-what-happened
+ms.devlang: na
+ms.topic: article
+ms.date: 12/02/2016
+wacn.date: 01/06/2017
+ms.author: tarcher
+---
 
 # 我的云服务项目（Visual Studio Azure 存储连接服务）发生了什么情况？
 ## 已添加引用

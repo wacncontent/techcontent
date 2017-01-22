@@ -1,18 +1,33 @@
-<properties linkid="" urlDisplayName="" pageTitle="Use SSL to securely access MySQL Database on Azure – Azure cloud" metaKeywords="Azure Cloud, technical documentation, documents and resources, MySQL, database, connection pool, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="Using Secure Sockets Layer (SSL) SSL encryption to access databases helps ensure that your access is secure. This article explains how to download and configure SSL certificates. MySQL Database on Azure currently supports the use of public keys to perform encryption and verification on the server side." metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: Use SSL to securely access MySQL Database on Azure – Azure cloud
+metaKeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, connection pool, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+description: Using Secure Sockets Layer (SSL) SSL encryption to access databases helps ensure that your access is secure. This article explains how to download and configure SSL certificates. MySQL Database on Azure currently supports the use of public keys to perform encryption and verification on the server side.
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql_en" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="en" />
+ms.service: mysql_en
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: en
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-ssl-connection/)
-- [English](/documentation/articles/mysql-database-enus-ssl-connection/)
+- [中文](./mysql-database-ssl-connection.md)
+- [English](./mysql-database-enus-ssl-connection.md)
 
 # Use SSL to securely access MySQL Database on Azure
-
 
 Using Secure Sockets Layer (SSL) encryption to access databases helps ensure that your access is secure. This article explains how to download and configure SSL certificates. MySQL Database on Azure currently supports the use of public keys to perform encryption and verification on the server side.
 
 When you create a MySQL Database on Azure instance, we strongly recommend that you put the database instance in the same region as other Azure services. This helps ensure their security even if you do not use SSL encryption.
-
 
 ## Step 1: Download the public key certificates for an SSL connection
 [Click to download ](https://www.wosign.com/root/WS_CA1_NEW.crt)the SSL certificate locally.
@@ -34,7 +49,8 @@ Once the connection is successful, you can use the status command to view the cl
 
 ![Verification][6]
 
->[AZURE.NOTE] **MySQL on Azure created an SSL secure connection between the proxy server and the client, so while SSL-related global variables or session variables on the server remain set to DISABLED, the entire communication process has actually already been encrypted with TLSv1.**
+>[!NOTE]
+> **MySQL on Azure created an SSL secure connection between the proxy server and the client, so while SSL-related global variables or session variables on the server remain set to DISABLED, the entire communication process has actually already been encrypted with TLSv1.**
 
 Using MySQL Workbench as an example, use the **Parameters** tab to set up the connection string for accessing the database, as shown in the following image.
 
@@ -51,7 +67,7 @@ Configure the SSL certificate by using the fields in the **SSL** tab.
 > ![errormessage][4]
 >
 
-> MySQL Workbench 6.3.5 uses SSL encryption by default, but involves certain compatibility issues. For specific solutions, see [Common client compatibility issues](/documentation/articles/mysql-database-compatibilityinquiry/).
+> MySQL Workbench 6.3.5 uses SSL encryption by default, but involves certain compatibility issues. For specific solutions, see [Common client compatibility issues](./mysql-database-compatibilityinquiry.md).
 
 > **Tip:** The current certificate supports MySQL.exe 5.5.44 and 5.6.25 and subsequent versions.
 > 
@@ -59,8 +75,6 @@ Configure the SSL certificate by using the fields in the **SSL** tab.
 For example, using Python, you can see from the following sample code how to configure by using functions.
 
 ![python SSL access][5]
-
-
 
 <!--Image references-->
 

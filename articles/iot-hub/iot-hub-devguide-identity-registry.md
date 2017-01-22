@@ -1,23 +1,21 @@
-<properties
- pageTitle="开发人员指南 - 设备标识注册表 | Azure"
- description="Azure IoT 中心开发人员指南 - 说明设备标识注册表以及如何使用它来管理设备"
- services="iot-hub"
- documentationCenter=".net"
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: 开发人员指南 - 设备标识注册表 | Azure
+description: Azure IoT 中心开发人员指南 - 说明设备标识注册表以及如何使用它来管理设备
+services: iot-hub
+documentationCenter: .net
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="09/30/2016"
- wacn.date="12/12/2016" 
- ms.author="dobett"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 12/12/2016
+ms.author: dobett
+---
 
 # 管理 IoT 中心中的设备标识
 
@@ -31,7 +29,8 @@
 
 当需要预配可连接到 IoT 中心的设备和需要控制每个设备对中心内面向设备的终结点的访问权限时，请使用设备标识注册表。
 
-> [AZURE.NOTE] 设备标识注册表不包含任何应用程序特定的元数据。
+> [!NOTE]
+> 设备标识注册表不包含任何应用程序特定的元数据。
 
 ## 设备标识注册表操作
 
@@ -47,7 +46,8 @@ IoT 中心设备标识注册表公开以下操作：
 
 上述所有操作均可以使用 [RFC7232][lnk-rfc7232] 中指定的乐观并发。
 
-> [AZURE.IMPORTANT] 如果要检索中心标识注册表中的所有标识，唯一方法是使用[导出][lnk-export]功能。
+> [!IMPORTANT]
+> 如果要检索中心标识注册表中的所有标识，唯一方法是使用[导出][lnk-export]功能。
 
 IoT 中心设备标识注册表：
 
@@ -57,7 +57,8 @@ IoT 中心设备标识注册表：
 
 IoT 解决方案通常具有不同的解决方案特定存储，其中包含应用程序特定的元数据。例如，智能建筑物解决方案中的解决方案特定存储将记录部署温度感应器的房间信息。
 
-> [AZURE.IMPORTANT] 只将设备标识注册表用于设备管理和预配操作。运行时的高吞吐量操作不应依赖于在设备标识注册表中执行操作。例如，在发送命令前先检查设备的连接状态就是不支持的模式。请务必检查设备标识注册表的[限制速率][lnk-quotas]以及[设备检测信号][lnk-guidance-heartbeat]模式。
+> [!IMPORTANT]
+> 只将设备标识注册表用于设备管理和预配操作。运行时的高吞吐量操作不应依赖于在设备标识注册表中执行操作。例如，在发送命令前先检查设备的连接状态就是不支持的模式。请务必检查设备标识注册表的[限制速率][lnk-quotas]以及[设备检测信号][lnk-guidance-heartbeat]模式。
 
 ## 禁用设备
 
@@ -91,7 +92,8 @@ IoT 中心标识注册表包含名为 **connectionState** 的字段。你只应�
 
 更复杂的实现可包含来自[操作监视][lnk-devguide-opmon]的信息，以便识别尝试连接或通信但失败的设备。实施检测信号模式时，请务必查看 [IoT 中心配额与限制][lnk-quotas]。
 
-> [AZURE.NOTE] 如果 IoT 解决方案只根据设备连接状态来决定是否发送云到设备的消息，并且没有把消息广播到大量设备，则可以考虑使用更简单的模式，即使用较短的到期时间。它达到的效果与使用检测信号模式维护设备连接状态达到的效果一样，而且更加有效。IoT 中心还可以通过请求消息确认来通知哪些设备可以接收消息、哪些设备脱机或不能接收消息。
+> [!NOTE]
+> 如果 IoT 解决方案只根据设备连接状态来决定是否发送云到设备的消息，并且没有把消息广播到大量设备，则可以考虑使用更简单的模式，即使用较短的到期时间。它达到的效果与使用检测信号模式维护设备连接状态达到的效果一样，而且更加有效。IoT 中心还可以通过请求消息确认来通知哪些设备可以接收消息、哪些设备脱机或不能接收消息。
 
 ## 参考主题：
 
@@ -115,7 +117,8 @@ IoT 中心标识注册表包含名为 **connectionState** 的字段。你只应�
 | connectionStateUpdatedTime |只读 |临时指示器，显示上次更新连接状态的日期和时间。 |
 | lastActivityTime |只读 |临时指示器，显示设备上次连接、接收或发送消息的日期和时间。 |
 
-> [AZURE.NOTE] 连接状态只能表示连接状态的 IoT 中心视图。根据网络状态和配置，可能会延迟此状态的更新。
+> [!NOTE]
+> 连接状态只能表示连接状态的 IoT 中心视图。根据网络状态和配置，可能会延迟此状态的更新。
 
 ## 其他参考资料
 
@@ -140,28 +143,26 @@ IoT 中心标识注册表包含名为 **connectionState** 的字段。你只应�
 
 - [Azure IoT 中心入门][lnk-getstarted-tutorial]
 
-
 <!-- Links and images -->
 
-
-[lnk-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 [lnk-resource-provider-apis]: https://msdn.microsoft.com/zh-cn/library/mt548492.aspx
-[lnk-guidance-provisioning]: /documentation/articles/iot-hub-devguide-identity-registry/#device-provisioning
-[lnk-guidance-heartbeat]: /documentation/articles/iot-hub-devguide-identity-registry/#device-heartbeat
+[lnk-guidance-provisioning]: ./iot-hub-devguide-identity-registry.md#device-provisioning
+[lnk-guidance-heartbeat]: ./iot-hub-devguide-identity-registry.md#device-heartbeat
 [lnk-rfc7232]: https://tools.ietf.org/html/rfc7232
-[lnk-bulk-identity]: /documentation/articles/iot-hub-bulk-identity-mgmt/
-[lnk-export]: /documentation/articles/iot-hub-devguide-identity-registry/#import-and-export-device-identities
-[lnk-devguide-opmon]: /documentation/articles/iot-hub-operations-monitoring/
+[lnk-bulk-identity]: ./iot-hub-bulk-identity-mgmt.md
+[lnk-export]: ./iot-hub-devguide-identity-registry.md#import-and-export-device-identities
+[lnk-devguide-opmon]: ./iot-hub-operations-monitoring.md
 
-[lnk-devguide-security]: /documentation/articles/iot-hub-devguide-security/
-[lnk-devguide-device-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-devguide-directmethods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-devguide-jobs]: /documentation/articles/iot-hub-devguide-jobs/
+[lnk-devguide-security]: ./iot-hub-devguide-security.md
+[lnk-devguide-device-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-devguide-directmethods]: ./iot-hub-devguide-direct-methods.md
+[lnk-devguide-jobs]: ./iot-hub-devguide-jobs.md
 
-[lnk-getstarted-tutorial]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
+[lnk-getstarted-tutorial]: ./iot-hub-csharp-csharp-getstarted.md
 
 <!---HONumber=Mooncake_1205_2016-->

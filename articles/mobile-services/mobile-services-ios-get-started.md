@@ -1,36 +1,36 @@
-<properties
-	pageTitle="适用于 iOS 应用的 Azure 移动服务入门 | JavaScript 后端"
-	description="遵照本教程开始使用 Azure 移动服务进行 iOS 开发。"
-	services="mobile-services"
-	documentationCenter="ios"
-	authors="krisragh"
-	manager="dwrede"
-	editor=""/>
+---
+title: 适用于 iOS 应用的 Azure 移动服务入门 | JavaScript 后端
+description: 遵照本教程开始使用 Azure 移动服务进行 iOS 开发。
+services: mobile-services
+documentationCenter: ios
+authors: krisragh
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-ios"
-	ms.devlang="objective-c"
-	ms.topic="hero-article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="krisragh"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-ios
+ms.devlang: objective-c
+ms.topic: hero-article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: krisragh
+---
 
 # <a name="getting-started"></a>移动服务入门
 
-[AZURE.INCLUDE [mobile-services-selector-get-started](../../includes/mobile-services-selector-get-started.md)]
-
+[!INCLUDE [mobile-services-selector-get-started](../../includes/mobile-services-selector-get-started.md)]
 
 本教程说明如何使用 Azure 移动服务向 iOS 应用程序添加基于云的后端服务。
 
 在本教程中，你将要创建一个新的移动服务，以及一个在新移动服务中存储应用程序数据的简单待办事项列表应用程序。要创建的移动服务将为服务器端业务逻辑使用 JavaScript。若要以 .NET 创建包含服务器端业务逻辑的移动服务，请参阅本主题的 [.NET 后端版本]。
 
-> [AZURE.NOTE]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并获取[免费的移动服务，即使在试用期结束之后仍可继续使用这些服务](/pricing/details/mobile-services/)。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial)。
+> [!NOTE]
+>若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并获取[免费的移动服务，即使在试用期结束之后仍可继续使用这些服务](https://www.azure.cn/pricing/details/mobile-services/)。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial)。
 
 ##  <a name="create-new-service"></a>创建新的移动服务
 
-[AZURE.INCLUDE [mobile-services-create-new-service](../../includes/mobile-services-create-new-service.md)]
+[!INCLUDE [mobile-services-create-new-service](../../includes/mobile-services-create-new-service.md)]
 
 ##  创建新的 iOS 应用程序
 
@@ -46,7 +46,7 @@
 
 ##  运行新的 iOS 应用程序
 
-[AZURE.INCLUDE [mobile-services-ios-run-app](../../includes/mobile-services-ios-run-app.md)]
+[!INCLUDE [mobile-services-ios-run-app](../../includes/mobile-services-ios-run-app.md)]
 
 <ol start="4"><li><p>返回 [Azure 经典管理门户]，单击“数据”选项卡，然后单击“TodoItem”表。这样，你便可以浏览应用程序在表中插入的数据。<p></li></ol></p>
 
@@ -62,8 +62,7 @@
 * [向现有应用程序添加推送通知]
 <br/>了解如何向应用程序发送一条很基本的推送通知。
 
-[AZURE.INCLUDE [app-service-disqus-feedback-slug](../../includes/app-service-disqus-feedback-slug.md)]
-
+[!INCLUDE [app-service-disqus-feedback-slug](../../includes/app-service-disqus-feedback-slug.md)]
 
 <!-- Anchors. -->
 
@@ -82,14 +81,13 @@
 [11]: ./media/mobile-services-ios-get-started/mobile-data-tab.png
 [12]: ./media/mobile-services-ios-get-started/mobile-data-browse.png
 
-
 <!-- URLs. -->
-[脱机数据同步入门]: /documentation/articles/mobile-services-ios-get-started-offline-data/
-[向现有应用程序添加身份验证]: /documentation/articles/mobile-services-dotnet-backend-ios-get-started-users/
-[向现有应用程序添加推送通知]: /documentation/articles/mobile-services-dotnet-backend-ios-get-started-push/
+[脱机数据同步入门]: ./mobile-services-ios-get-started-offline-data.md
+[向现有应用程序添加身份验证]: ./mobile-services-dotnet-backend-ios-get-started-users.md
+[向现有应用程序添加推送通知]: ./mobile-services-dotnet-backend-ios-get-started-push.md
 [Mobile Services iOS SDK]: https://go.microsoft.com/fwLink/p/?LinkID=266533
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
 [XCode]: https://go.microsoft.com/fwLink/p/?LinkID=266532
-[.NET 后端版本]: /documentation/articles/mobile-services-dotnet-backend-ios-get-started/
+[.NET 后端版本]: ./mobile-services-dotnet-backend-ios-get-started.md
 
 <!---HONumber=Mooncake_0118_2016-->

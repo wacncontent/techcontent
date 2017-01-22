@@ -1,34 +1,34 @@
-<properties
-    pageTitle="使用 PowerShell 设置和管理静态专用 IP 地址 | Azure"
-    description="如何如何使用 PowerShell 设置和管理静态专用 IP 地址 | Azure Resource Manager。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="timlt"
-    editor="tysonn"
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="d5f18929-15e3-40a2-9ee3-8188bc248ed8"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/23/2016"
-    wacn.date="01/13/2017"
-    ms.author="jdial" />  
+---
+title: 使用 PowerShell 设置和管理静态专用 IP 地址 | Azure
+description: 如何如何使用 PowerShell 设置和管理静态专用 IP 地址 | Azure Resource Manager。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager
 
+ms.assetid: d5f18929-15e3-40a2-9ee3-8188bc248ed8
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/23/2016
+wacn.date: 01/13/2017
+ms.author: jdial
+---
 
 # 使用 PowerShell 设置和管理静态专用 IP 地址
-[AZURE.INCLUDE [virtual-networks-static-private-ip-selectors-arm-include](../../includes/virtual-networks-static-private-ip-selectors-arm-include.md)]
+[!INCLUDE [virtual-networks-static-private-ip-selectors-arm-include](../../includes/virtual-networks-static-private-ip-selectors-arm-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-static-private-ip-intro-include](../../includes/virtual-networks-static-private-ip-intro-include.md)]
+[!INCLUDE [virtual-networks-static-private-ip-intro-include](../../includes/virtual-networks-static-private-ip-intro-include.md)]
 
-Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建议通过 Resource Manager 部署模型创建资源。若要深入了解这两个模型之间的差异，请阅读[了解 Azure 部署模型](/documentation/articles/resource-manager-deployment-model/)一文。本文介绍 Resource Manager 部署模型。你还可以[管理经典部署模型中的静态专用 IP 地址](/documentation/articles/virtual-networks-static-private-ip-classic-ps/)。
+Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建议通过 Resource Manager 部署模型创建资源。若要深入了解这两个模型之间的差异，请阅读[了解 Azure 部署模型](../azure-resource-manager/resource-manager-deployment-model.md)一文。本文介绍 Resource Manager 部署模型。你还可以[管理经典部署模型中的静态专用 IP 地址](./virtual-networks-static-private-ip-classic-ps.md)。
 
-[AZURE.INCLUDE [virtual-networks-static-ip-scenario-include](../../includes/virtual-networks-static-ip-scenario-include.md)]
+[!INCLUDE [virtual-networks-static-ip-scenario-include](../../includes/virtual-networks-static-ip-scenario-include.md)]
 
-以下示例 PowerShell 命令需要基于以上方案创建的简单环境。若要按本文档所示运行命令，首先需要构建[创建 VNet](/documentation/articles/virtual-networks-create-vnet-arm-ps/) 中所述的测试环境。
+以下示例 PowerShell 命令需要基于以上方案创建的简单环境。若要按本文档所示运行命令，首先需要构建[创建 VNet](./virtual-networks-create-vnet-arm-ps.md) 中所述的测试环境。
 
 ## 在创建 VM 时指定静态专用 IP 地址
 若要在名为 *TestVNet* 的 VNet 的 *FrontEnd* 子网中使用静态专用 IP *192.168.1.101* 创建名为 *DNS01* 的 VM，请按照以下步骤进行操作：
@@ -70,7 +70,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         New-AzureRmVM -ResourceGroupName $rgName -Location $locName -VM $vm 
 
     预期输出：
-	
+
         EndTime             : [Date and time]
         Error               : 
         Output              : 
@@ -181,8 +181,8 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
     Set-AzureRmNetworkInterface -NetworkInterface $nic
 
 ## 后续步骤
-* 了解[保留公共 IP](/documentation/articles/virtual-networks-reserved-public-ip/) 地址。
-* 了解[实例层级公共 IP (ILPIP)](/documentation/articles/virtual-networks-instance-level-public-ip/) 地址。
+* 了解[保留公共 IP](./virtual-networks-reserved-public-ip.md) 地址。
+* 了解[实例层级公共 IP (ILPIP)](./virtual-networks-instance-level-public-ip.md) 地址。
 * 查阅[保留 IP REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn722420.aspx)。
 
 <!---HONumber=Mooncake_0109_2017-->

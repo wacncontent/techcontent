@@ -1,26 +1,24 @@
-<properties
-   pageTitle="Azure SQL 数据库会自行学习和进行适应性调整"
-   description="了解 SQL 数据库如何进行学习和适应性调整"
-   keywords=""
-   services="sql-database"
-   documentationCenter=""
-   authors="CarlRabeler"
-   manager="jhubbard"
-   editor=""/>  
+---
+title: Azure SQL 数据库会自行学习和进行适应性调整
+description: 了解 SQL 数据库如何进行学习和适应性调整
+keywords: 
+services: sql-database
+documentationCenter: 
+authors: CarlRabeler
+manager: jhubbard
+editor: 
 
-
-<tags
-   ms.service="sql-database"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-management"
-   ms.date="10/13/2016"
-   wacn.date="10/31/2016"
-   ms.author="carlrab"/>
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-management
+ms.date: 10/13/2016
+wacn.date: 10/31/2016
+ms.author: carlrab
+---
 
 # Azure SQL 数据库会自行学习和进行适应性调整
-
 
 ## Azure SQL 数据库如何随应用程序进行学习、适应性调整和成长
 
@@ -33,7 +31,6 @@ Azure SQL 数据库每天管理数以十亿计的事务和数以百万计的数�
 
 ## 自动优化
 SQL 数据库能够让你的应用以最佳性能运行。方法便是通过持续地学习你的应用的模式、适应性地自行调节其性能并自动优化，而无需你做任何事 - 因为我们知道你也并不想做什么。
-
 
 [阅读文档](http://go.microsoft.com/fwlink/?LinkID=787566)
 
@@ -48,16 +45,16 @@ SQL 数据库提供应用所需的自动管理和数据保护，以便你能够�
 [阅读文档](http://go.microsoft.com/fwlink/?LinkID=787568)
 
 转到主页以查看 SQL 数据库可提供的其他功能。
-[请查看](/home/features/sql-database/)
+[请查看](https://www.azure.cn/home/features/sql-database/)
 
 ## 后续步骤
 
-获取 [Azure 订阅](/pricing/1rmb-trial)，并[创建首个 Azure SQL 数据库](/documentation/articles/sql-database-get-started/)。
+获取 [Azure 订阅](https://www.azure.cn/pricing/1rmb-trial)，并[创建首个 Azure SQL 数据库](./sql-database-get-started.md)。
 
 ## 其他资源
 
-浏览所有 [SQL 数据库的功能](/home/features/sql-database/)。
- 
-查看 [SQL 数据库技术概述](/documentation/articles/sql-database-technical-overview/)。
+浏览所有 [SQL 数据库的功能](https://www.azure.cn/home/features/sql-database/)。
+
+查看 [SQL 数据库技术概述](./sql-database-technical-overview.md)。
 
 <!---HONumber=Mooncake_1024_2016-->

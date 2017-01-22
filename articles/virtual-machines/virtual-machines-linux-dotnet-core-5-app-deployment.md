@@ -1,24 +1,22 @@
-<properties
-   pageTitle="使用虚拟机扩展自动化应用程序部署 | Azure"
-   description="Azure 虚拟机 DotNet Core 教程"
-   services="virtual-machines-linux"
-   documentationCenter="virtual-machines"
-   authors="neilpeterson"
-   manager="timlt"
-   editor="tysonn"
-   tags="azure-service-management"/>  
+---
+title: 使用虚拟机扩展自动化应用程序部署 | Azure
+description: Azure 虚拟机 DotNet Core 教程
+services: virtual-machines-linux
+documentationCenter: virtual-machines
+authors: neilpeterson
+manager: timlt
+editor: tysonn
+tags: azure-service-management
 
-
-<tags
-   ms.service="virtual-machines-linux"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-linux"
-   ms.workload="infrastructure"
-   ms.date="11/21/2016"
-   wacn.date="01/05/2017"
-   ms.author="nepeters"/>  
-
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
+ms.date: 11/21/2016
+wacn.date: 01/05/2017
+ms.author: nepeters
+---
 
 # 使用 Azure Resource Manager 模板部署应用程序
 
@@ -111,7 +109,7 @@
       }
     }
 
-有关使用自定义脚本扩展的详细信息，请参阅 [Custom script extensions with Resource Manager templates](/documentation/articles/virtual-machines-linux-extensions-customscript/)（使用 Resource Manager 模板自定义脚本扩展）。
+有关使用自定义脚本扩展的详细信息，请参阅 [Custom script extensions with Resource Manager templates](./virtual-machines-linux-extensions-customscript.md)（使用 Resource Manager 模板自定义脚本扩展）。
 
 ## 后续步骤
 

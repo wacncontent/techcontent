@@ -1,27 +1,27 @@
-<properties 
-	pageTitle="将弹性数据库客户端库与 Dapper 配合使用 | Azure" 
-	description="将弹性数据库客户端库与 Dapper 配合使用。" 
-	services="sql-database" 
-	documentationCenter="" 
-	manager="jhubbard" 
-	authors="torsteng"/>
+---
+title: 将弹性数据库客户端库与 Dapper 配合使用 | Azure
+description: 将弹性数据库客户端库与 Dapper 配合使用。
+services: sql-database
+documentationCenter: 
+manager: jhubbard
+authors: torsteng
 
-<tags 
-	ms.service="sql-database" 
-	ms.workload="sql-database" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="05/27/2016" 
-	wacn.date="12/26/2016" 
-	ms.author="torsteng"/>
+ms.service: sql-database
+ms.workload: sql-database
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 05/27/2016
+wacn.date: 12/26/2016
+ms.author: torsteng
+---
 
 # 将弹性数据库客户端库与 Dapper 配合使用 
 
-本文档面向依赖于使用 Dapper 生成应用程序，但同时想要运用[弹性数据库工具](/documentation/articles/sql-database-elastic-scale-introduction/)创建应用程序来实现分片，以扩展其数据层的开发人员。本文档演示了与弹性数据库工具进行集成所需的基于 Dapper 的应用程序中的更改。我们将重点介绍如何使用 Dapper 构建弹性数据库分片管理和数据相关的路由。
+本文档面向依赖于使用 Dapper 生成应用程序，但同时想要运用[弹性数据库工具](./sql-database-elastic-scale-introduction.md)创建应用程序来实现分片，以扩展其数据层的开发人员。本文档演示了与弹性数据库工具进行集成所需的基于 Dapper 的应用程序中的更改。我们将重点介绍如何使用 Dapper 构建弹性数据库分片管理和数据相关的路由。
 
 **示例代码**：[Azure SQL 数据库的弹性数据库工具 - Dapper 集成](https://code.msdn.microsoft.com/Elastic-Scale-with-Azure-e19fc77f)。
- 
+
 将 **Dapper** 和 **DapperExtensions** 与 Azure SQL 数据库的弹性数据库客户端库集成的过程很简单。应用程序可以通过将新 [SqlConnection](http://msdn.microsoft.com/zh-cn/library/system.data.sqlclient.sqlconnection.aspx) 对象的创建和打开方式更改为使用来自[客户端库](http://msdn.microsoft.com/zh-cn/library/azure/dn765902.aspx)的 [OpenConnectionForKey](http://msdn.microsoft.com/zh-cn/library/azure/dn807226.aspx) 调用，以使用数据相关的路由。这将应用程序中的更改限制为已创建和打开新连接的位置。
 
 ## Dapper 概述
@@ -30,7 +30,7 @@
 Dapper 中的映射器功能对数据库连接提供扩展方法，可以简化用于执行或查询数据库的 T-SQL 语句的提交。例如，使用 Dapper 可以轻松地在 .NET 对象与用于 **Execute** 调用的 SQL 语句参数之间进行映射，或者在 Dapper 中通过 **Query** 调用来使用对 .NET 对象执行 SQL 查询后返回的结果。
 
 使用 DapperExtensions 时，不再需要提供 SQL 语句。对数据库连接执行 **GetList** 或 **Insert** 等扩展方法会在幕后创建 SQL 语句。
- 
+
 Dapper 和 DapperExtensions 的另一个优点在于，应用程序可以控制数据库连接的创建。这有助于与弹性数据库客户端库进行交互，从而可以通过将 shardlet 映射到数据库来中转数据库连接。
 
 若要获取 Dapper 程序集，请参阅 [Dapper .NET](http://www.nuget.org/packages/Dapper)。有关 Dapper 扩展，请参阅 [DapperExtensions](http://www.nuget.org/packages/DapperExtensions)。
@@ -169,10 +169,9 @@ Microsoft 模式与实践团队发布了[暂时性故障处理应用程序块](h
 
 使用 Dapper 和 DapperExtensions 的应用程序很容易从 Azure SQL 数据库的弹性数据库工具受益。通过本文档中所述的步骤，这些应用程序可以使用该工具的功能，通过将新 [SqlConnection](http://msdn.microsoft.com/zh-cn/library/system.data.sqlclient.sqlconnection.aspx) 对象的创建和打开方式更改为使用弹性数据库客户端库的 [OpenConnectionForKey](http://msdn.microsoft.com/zh-cn/library/azure/dn807226.aspx) 调用，来实现数据相关的路由。这会将应用程序更改限制为已创建和打开新连接的位置。
 
-[AZURE.INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
+[!INCLUDE [elastic-scale-include](../../includes/elastic-scale-include.md)]
 
 <!--Image references-->
 [1]: ./media/sql-database-elastic-scale-working-with-dapper/dapperimage1.png
- 
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

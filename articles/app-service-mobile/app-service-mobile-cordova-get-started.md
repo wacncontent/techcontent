@@ -1,28 +1,27 @@
-<properties
-    pageTitle="在 Azure 应用服务移动应用中创建 Cordova 应用 | Azure"
-    description="遵循本教程开始使用 Azure 移动应用后端进行 Apache Cordova 开发"
-    services="app-service\mobile"
-    documentationCenter="javascript"
-    authors="adrianhall"
-    manager="erikre"
-    editor=""
-    tags=""
-    keywords="cordova,javascript,移动,客户端" />  
+---
+title: 在 Azure 应用服务移动应用中创建 Cordova 应用 | Azure
+description: 遵循本教程开始使用 Azure 移动应用后端进行 Apache Cordova 开发
+services: app-service\mobile
+documentationCenter: javascript
+authors: adrianhall
+manager: erikre
+editor: 
+tags: 
+keywords: cordova,javascript,移动,客户端
 
-
-<tags
-    ms.service="app-service-mobile"
-    ms.workload="na"
-    ms.tgt_pltfrm="mobile-html"
-    ms.devlang="javascript"
-    ms.topic="hero-article"
-    ms.date="10/01/2016"
-    wacn.date="12/26/2016"
-    ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: na
+ms.tgt_pltfrm: mobile-html
+ms.devlang: javascript
+ms.topic: hero-article
+ms.date: 10/01/2016
+wacn.date: 12/26/2016
+ms.author: adrianha
+---
 
 #创建 Apache Cordova 应用
 
-[AZURE.INCLUDE [app-service-mobile-selector-get-started](../../includes/app-service-mobile-selector-get-started.md)]
+[!INCLUDE [app-service-mobile-selector-get-started](../../includes/app-service-mobile-selector-get-started.md)]
 
 ## 概述
 
@@ -36,21 +35,20 @@
 
 * 装有 [Visual Studio Community 2015] 或更高版本的电脑。
 * [用于 Apache Cordova 的 Visual Studio 工具]
-* [有效的 Azure 帐户](/pricing/1rmb-trial/)。
+* [有效的 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 
 也可以绕过 Visual Studio，直接使用 Apache Cordova 命令行。在 Mac 计算机上学习本教程时，这种做法相当有效。本教程不介绍如何使用命令行编译 Apache Cordova 客户端应用程序。
 
 ## 创建新的 Azure 移动应用后端
-[AZURE.INCLUDE [app-service-mobile-dotnet-backend-create-new-service](../../includes/app-service-mobile-dotnet-backend-create-new-service.md)]
-
+[!INCLUDE [app-service-mobile-dotnet-backend-create-new-service](../../includes/app-service-mobile-dotnet-backend-create-new-service.md)]
 
 ## 配置服务器项目
 
-[AZURE.INCLUDE [app-service-mobile-configure-new-backend.md](../../includes/app-service-mobile-configure-new-backend.md)]
+[!INCLUDE [app-service-mobile-configure-new-backend.md](../../includes/app-service-mobile-configure-new-backend.md)]
 
 ## 下载并运行 Apache Cordova 应用
 
-[AZURE.INCLUDE [app-service-mobile-cordova-run-app](../../includes/app-service-mobile-cordova-run-app.md)]
+[!INCLUDE [app-service-mobile-cordova-run-app](../../includes/app-service-mobile-cordova-run-app.md)]
 
 ## 后续步骤
 
@@ -75,11 +73,11 @@
 [Azure portal]: https://portal.azure.cn/
 [Visual Studio Community 2015]: http://www.visualstudio.com/
 [用于 Apache Cordova 的 Visual Studio 工具]: https://www.visualstudio.com/vs/cordova/
-[身份验证添加]: /documentation/articles/app-service-mobile-cordova-get-started-users/
-[身份验证]: /documentation/articles/app-service-mobile-auth/
-[推送通知]: /documentation/articles/notification-hubs-push-notification-overview/
-[Apache Cordova SDK]: /documentation/articles/app-service-mobile-cordova-how-to-use-client-library/
-[ASP.NET Server SDK]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
-[Node.js Server SDK]: /documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/
+[身份验证添加]: ./app-service-mobile-cordova-get-started-users.md
+[身份验证]: ./app-service-mobile-auth.md
+[推送通知]: ../notification-hubs/notification-hubs-push-notification-overview.md
+[Apache Cordova SDK]: ./app-service-mobile-cordova-how-to-use-client-library.md
+[ASP.NET Server SDK]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[Node.js Server SDK]: ./app-service-mobile-node-backend-how-to-use-server-sdk.md
 
 <!---HONumber=Mooncake_1219_2016-->

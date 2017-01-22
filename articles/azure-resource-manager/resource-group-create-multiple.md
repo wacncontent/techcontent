@@ -1,23 +1,22 @@
-<properties
-    pageTitle="部署多个资源实例 | Azure"
-    description="在部署资源时使用 Azure 资源管理器模板中的复制操作和数组执行多次迭代。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="" />  
+---
+title: 部署多个资源实例 | Azure
+description: 在部署资源时使用 Azure 资源管理器模板中的复制操作和数组执行多次迭代。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: 
 
-<tags
-    ms.assetid="94d95810-a87b-460f-8e82-c69d462ac3ca"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/02/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: 94d95810-a87b-460f-8e82-c69d462ac3ca
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/02/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 在 Azure 资源管理器中创建多个资源实例
 本主题演示如何在您的 Azure 资源管理器模板中进行迭代操作，以创建多个资源实例。
@@ -534,8 +533,8 @@
     }
 
 ## 后续步骤
-* 若要了解有关模板区段的信息，请参阅[创作 Azure 资源管理器模板](/documentation/articles/resource-group-authoring-templates/)。
-* 如需可在模板中使用的所有函数，请参阅 [Azure Resource Manager 模板函数](/documentation/articles/resource-group-template-functions/)。
-* 若要了解如何部署模板，请参阅[使用 Azure 资源管理器模板部署应用程序](/documentation/articles/resource-group-template-deploy/)。
+* 若要了解有关模板区段的信息，请参阅[创作 Azure 资源管理器模板](./resource-group-authoring-templates.md)。
+* 如需可在模板中使用的所有函数，请参阅 [Azure Resource Manager 模板函数](./resource-group-template-functions.md)。
+* 若要了解如何部署模板，请参阅[使用 Azure 资源管理器模板部署应用程序](./resource-group-template-deploy.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

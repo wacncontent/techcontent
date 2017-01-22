@@ -19,17 +19,17 @@
 
 ![files-concepts][files-concepts]
 
--   **存储帐户：**对 Azure 存储服务的所有访问都要通过存储帐户来完成。有关存储帐户容量的详细信息，请参阅 [Azure 存储空间可伸缩性和性能目标](/documentation/articles/storage-scalability-targets/)。
+-   **存储帐户：**对 Azure 存储服务的所有访问都要通过存储帐户来完成。有关存储帐户容量的详细信息，请参阅 [Azure 存储空间可伸缩性和性能目标](../articles/storage/storage-scalability-targets.md)。
 
 -   **共享：**文件存储共享是 Azure 中的 SMB 文件共享。所有目录和文件都必须在父共享中创建。一个帐户可以包含无限数量的共享，一个共享可以存储无限数量的文件，直到达到文件共享的 5TB 总容量限制为止。
 
 -   **目录：**可选的目录层次结构。
 
--	**文件：**共享中的文件。文件大小最大可以为 1 TB。
+- **文件：**共享中的文件。文件大小最大可以为 1 TB。
 
 -   **URL 格式：**可使用以下 URL 格式对文件寻址：  
-	https://<storage account\>.file.core.chinacloudapi.cn/<share\>/<directory/directories>/<file\>
-    
+    https://<storage account\>.file.core.chinacloudapi.cn/<share\>/<directory/directories>/<file\>
+
     可使用以下示例 URL 寻址上图中的文件：`http://samples.file.core.chinacloudapi.cn/logs/CustomLogs/Log1.txt`
 
 有关如何命名共享、目录和文件的详细信息，请参阅[命名和引用共享、目录、文件和元数据](http://msdn.microsoft.com/zh-cn/library/azure/dn167011.aspx)。

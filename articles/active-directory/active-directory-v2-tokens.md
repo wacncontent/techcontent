@@ -1,34 +1,32 @@
-<properties
-	pageTitle="Azure AD v2.0 令牌参考 | Azure"
-	description="v2.0 终结点发出的令牌和声明类型"
-	services="active-directory"
-	documentationCenter=""
-	authors="dstrockis"
-	manager="mbaldwin"
-	editor=""/>  
+---
+title: Azure AD v2.0 令牌参考 | Azure
+description: v2.0 终结点发出的令牌和声明类型
+services: active-directory
+documentationCenter: 
+authors: dstrockis
+manager: mbaldwin
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/30/2016"
-	wacn.date="11/30/2016"
-	ms.author="dastrock"/>  
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/30/2016
+wacn.date: 11/30/2016
+ms.author: dastrock
+---
 
 # v2.0 令牌参考
 
-v2.0 终结点在每个[身份验证流](/documentation/articles/active-directory-v2-flows/)的处理中发出多种安全令牌。本文档说明每种令牌的格式、安全特征和内容。
+v2.0 终结点在每个[身份验证流](./active-directory-v2-flows.md)的处理中发出多种安全令牌。本文档说明每种令牌的格式、安全特征和内容。
 
-> [AZURE.NOTE]
-	v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](/documentation/articles/active-directory-v2-limitations/)。
+> [!NOTE]
+    v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
 ## 类型的令牌  <a name="types-of-tokens"></a>
 
-v2.0 终结点支持 [OAuth 2.0 授权协议](/documentation/articles/active-directory-v2-protocols/)，该协议使用 access\_token 与 refresh\_token。它还支持通过 [OpenID Connect](/documentation/articles/active-directory-v2-protocols/#openid-connect-sign-in-flow/) 进行身份验证和登录，其中引入了第三种类型的令牌 id\_token。每个令牌表示为“持有者令牌”。
+v2.0 终结点支持 [OAuth 2.0 授权协议](./active-directory-v2-protocols.md)，该协议使用 access\_token 与 refresh\_token。它还支持通过 [OpenID Connect](./active-directory-v2-protocols.md#openid-connect-sign-in-flow) 进行身份验证和登录，其中引入了第三种类型的令牌 id\_token。每个令牌表示为“持有者令牌”。
 
 持有者令牌是一种轻型安全令牌，它授予对受保护资源的“持有者”访问权限。从这个意义上来说，“持有者”是可以提供令牌的任何一方。虽然某一方必须首先通过 Azure AD 的身份验证才能收到持有者令牌，但如果不采取必要的步骤在传输过程和存储中对令牌进行保护，令牌可能会被意外的某一方拦截并使用。虽然某些安全令牌具有内置机制来防止未经授权方使用它们，但是持有者令牌没有这一机制，因此必须在安全的通道（例如传输层安全 (HTTPS)）中进行传输。如果持有者令牌以明文传输，则恶意方可以利用中间人攻击来获得令牌并使用它来对受保护资源进行未经授权的访问。当存储或缓存持有者令牌供以后使用时，也应遵循同样的安全原则。请始终确保你的应用以安全的方式传输和存储持有者令牌。有关持有者令牌的更多安全注意事项，请参阅 [RFC 6750 第 5 部分](http://tools.ietf.org/html/rfc6750)。
 
@@ -36,7 +34,7 @@ v2.0 终结点颁发的许多令牌都实现为 Json Web 令牌或 JWT。JWT 是
 
 ## Id\_tokens  <a name="id_tokens"></a>
 
-Id\_token 是应用使用 [OpenID Connect](/documentation/articles/active-directory-v2-protocols/#openid-connect-sign-in-flow/) 执行身份验证时收到的一种登录安全令牌形式。它以 [JWT](#types-of-tokens) 表示，包含可让用户登录应用的声明。可以适时使用 id\_token 中的声明 - 通常用于显示帐户信息或在应用程序中进行访问控制决策。v2.0 终结点只颁发一种类型的 id\_token，而无论用户登录的类型为何，都具有一组一致的声明。也就是说，id\_token 的格式和内容与个人 Microsoft 帐户用户及工作或学校帐户的格式与内容相同。
+Id\_token 是应用使用 [OpenID Connect](./active-directory-v2-protocols.md#openid-connect-sign-in-flow) 执行身份验证时收到的一种登录安全令牌形式。它以 [JWT](#types-of-tokens) 表示，包含可让用户登录应用的声明。可以适时使用 id\_token 中的声明 - 通常用于显示帐户信息或在应用程序中进行访问控制决策。v2.0 终结点只颁发一种类型的 id\_token，而无论用户登录的类型为何，都具有一组一致的声明。也就是说，id\_token 的格式和内容与个人 Microsoft 帐户用户及工作或学校帐户的格式与内容相同。
 
 Id\_token 已签名，但目前不会加密。应用收到 id\_token 时，必须[验证签名](#validating-tokens)以证明令牌的真实性，并验证令牌中的几个声明来证明其有效性。应用验证的声明根据方案要求而有所不同，但存在一些[常见声明验证](#validating-tokens)，应用必须在每种方案中执行。
 
@@ -44,10 +42,10 @@ Id\_token 已签名，但目前不会加密。应用收到 id\_token 时，必�
 
 #### 示例 id\_token
 
-	eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiI2NzMxZGU3Ni0xNGE2LTQ5YWUtOTdiYy02ZWJhNjkxNDM5MWUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYjk0MTk4MTgtMDlhZi00OWMyLWIwYzMtNjUzYWRjMWYzNzZlL3YyLjAiLCJpYXQiOjE0NTIyODUzMzEsIm5iZiI6MTQ1MjI4NTMzMSwiZXhwIjoxNDUyMjg5MjMxLCJuYW1lIjoiQmFiZSBSdXRoIiwibm9uY2UiOiIxMjM0NSIsIm9pZCI6ImExZGJkZGU4LWU0ZjktNDU3MS1hZDkzLTMwNTllMzc1MGQyMyIsInByZWZlcnJlZF91c2VybmFtZSI6InRoZWdyZWF0YmFtYmlub0BueXkub25taWNyb3NvZnQuY29tIiwic3ViIjoiTUY0Zi1nZ1dNRWppMTJLeW5KVU5RWnBoYVVUdkxjUXVnNWpkRjJubDAxUSIsInRpZCI6ImI5NDE5ODE4LTA5YWYtNDljMi1iMGMzLTY1M2FkYzFmMzc2ZSIsInZlciI6IjIuMCJ9.p_rYdrtJ1oCmgDBggNHB9O38KTnLCMGbMDODdirdmZbmJcTHiZDdtTc-hguu3krhbtOsoYM2HJeZM3Wsbp_YcfSKDY--X_NobMNsxbT7bqZHxDnA2jTMyrmt5v2EKUnEeVtSiJXyO3JWUq9R0dO-m4o9_8jGP6zHtR62zLaotTBYHmgeKpZgTFB9WtUq8DVdyMn_HSvQEfz-LWqckbcTwM_9RNKoGRVk38KChVJo4z5LkksYRarDo8QgQ7xEKmYmPvRr_I7gvM2bmlZQds2OeqWLB1NSNbFZqyFOCgYn3bAQ-nEQSKwBaA36jYGPOVG2r2Qv1uKcpSOxzxaQybzYpQ
+    eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1uQ19WWmNBVGZNNXBPWWlKSE1iYTlnb0VLWSJ9.eyJhdWQiOiI2NzMxZGU3Ni0xNGE2LTQ5YWUtOTdiYy02ZWJhNjkxNDM5MWUiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vYjk0MTk4MTgtMDlhZi00OWMyLWIwYzMtNjUzYWRjMWYzNzZlL3YyLjAiLCJpYXQiOjE0NTIyODUzMzEsIm5iZiI6MTQ1MjI4NTMzMSwiZXhwIjoxNDUyMjg5MjMxLCJuYW1lIjoiQmFiZSBSdXRoIiwibm9uY2UiOiIxMjM0NSIsIm9pZCI6ImExZGJkZGU4LWU0ZjktNDU3MS1hZDkzLTMwNTllMzc1MGQyMyIsInByZWZlcnJlZF91c2VybmFtZSI6InRoZWdyZWF0YmFtYmlub0BueXkub25taWNyb3NvZnQuY29tIiwic3ViIjoiTUY0Zi1nZ1dNRWppMTJLeW5KVU5RWnBoYVVUdkxjUXVnNWpkRjJubDAxUSIsInRpZCI6ImI5NDE5ODE4LTA5YWYtNDljMi1iMGMzLTY1M2FkYzFmMzc2ZSIsInZlciI6IjIuMCJ9.p_rYdrtJ1oCmgDBggNHB9O38KTnLCMGbMDODdirdmZbmJcTHiZDdtTc-hguu3krhbtOsoYM2HJeZM3Wsbp_YcfSKDY--X_NobMNsxbT7bqZHxDnA2jTMyrmt5v2EKUnEeVtSiJXyO3JWUq9R0dO-m4o9_8jGP6zHtR62zLaotTBYHmgeKpZgTFB9WtUq8DVdyMn_HSvQEfz-LWqckbcTwM_9RNKoGRVk38KChVJo4z5LkksYRarDo8QgQ7xEKmYmPvRr_I7gvM2bmlZQds2OeqWLB1NSNbFZqyFOCgYn3bAQ-nEQSKwBaA36jYGPOVG2r2Qv1uKcpSOxzxaQybzYpQ
 
-
-> [AZURE.TIP] 练习时，请尝试将示例 id\_token 中的声明粘贴到 calebb.net 中进行检查。
+> [!TIP]
+> 练习时，请尝试将示例 id\_token 中的声明粘贴到 calebb.net 中进行检查。
 
 #### Id\_tokens 中的声明
 | 名称 | 声明 | 示例值 | 说明 |
@@ -68,7 +66,6 @@ Id\_token 已签名，但目前不会加密。应用收到 id\_token 时，必�
 | 使用者 | `sub` | `MF4f-ggWMEji12KynJUNQZphaUTvLcQug5jdF2nl01Q` | 令牌针对其断言信息的主体，例如应用的用户。此值不可变且不能重新分配或重复使用，因此可以使用它来安全地执行授权检查，例如，当使用令牌访问资源时。因为使用者始终会在 Azure AD 颁发的令牌中存在，我们建议在通用授权系统中使用此值。 |
 | ObjectId | `oid` | `a1dbdde8-e4f9-4571-ad93-3059e3750d23` | Azure AD 系统中工作或学校帐户的对象 ID。不会针对个人 Microsoft 帐户发出此声明。需要 `profile` 范围才能接收此声明。 |
 
-
 ## 访问令牌
 
 v2.0 终结点颁发的访问令牌目前仅适用于 Microsoft 服务。在任何目前支持的方案中，应用应该无需要执行任何的访问令牌验证或检查。可以将访问令牌视为完全不透明 - 这些都是应用可以在 HTTP 请求中传递给 Microsoft 的字符串。
@@ -83,7 +80,7 @@ v2.0 终结点颁发的访问令牌目前仅适用于 Microsoft 服务。在任�
 
 刷新令牌属于多资源令牌。也就是说，在一个资源的令牌请求期间收到的刷新令牌可以兑换完全不同资源的访问令牌。
 
-为了在令牌响应中接收刷新，应用必须请求并获得 `offline_acesss` 范围。若要了解有关 `offline_access` 范围的详细信息，请参阅[此处有关同意和范围的文章](/documentation/articles/active-directory-v2-scopes/)。
+为了在令牌响应中接收刷新，应用必须请求并获得 `offline_acesss` 范围。若要了解有关 `offline_access` 范围的详细信息，请参阅[此处有关同意和范围的文章](./active-directory-v2-scopes.md)。
 
 刷新令牌永远对应用程序完全不透明。它们是由 Azure AD v2.0 终结点颁发，只能由 v2.0 终结点检查和解译。它们属于长效令牌，但你不应将应用编写成预期刷新令牌将持续任何一段时间。刷新令牌可能由于各种原因而随时失效。让应用知道刷新令牌是否有效的唯一方式就是对 v2.0 终结点发出令牌请求以尝试兑换。
 
@@ -101,12 +98,11 @@ JWT 包含三个段（以 `.` 字符分隔）。第一个段称为**标头**，�
 
 Id\_Token 使用行业标准非对称式加密算法（例如 RSA 256）进行签名。Id\_token 标头包含用于签名令牌的密钥和加密方法的相关信息：
 
-	{
-	  "typ": "JWT",
-	  "alg": "RS256",
-	  "kid": "MnC_VZcATfM5pOYiJHMba9goEKY"
-	}
-
+    {
+      "typ": "JWT",
+      "alg": "RS256",
+      "kid": "MnC_VZcATfM5pOYiJHMba9goEKY"
+    }
 
 `alg` 声明表示用于对令牌进行签名的算法，而 `kid` 声明表示用于对令牌进行签名的特定公钥。
 
@@ -114,11 +110,10 @@ Id\_Token 使用行业标准非对称式加密算法（例如 RSA 256）进行�
 
 可以使用位于以下位置的 OpenID Connect 元数据文档来获取验证签名所需的签名密钥数据：
 
+    https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
 
-	https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration
-
-
-> [AZURE.TIP] 在浏览器中尝试打开此 URL！
+> [!TIP]
+> 在浏览器中尝试打开此 URL！
 
 此元数据文档是一个 JSON 对象，包含一些有用的信息，例如执行 OpenID Connect 身份验证所需的各种终结点的位置。
 
@@ -138,7 +133,6 @@ Id\_Token 使用行业标准非对称式加密算法（例如 RSA 256）进行�
 有关应用应该执行的声明验证的完整列表，请参阅 [OpenID Connect 规范](http://openid.net/specs/openid-connect-core-1_0.html#IDTokenValidation)。
 
 这些声明的预期值详细信息包含在上面的 [id\_token 部分](#id_tokens)中。
-
 
 ## 令牌生存期
 

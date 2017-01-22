@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="Azure Multi-Factor Authentication 报告" 
-	description="本文介绍如何更改用户设置，例如，强制用户再次完成验证过程。" 
-	documentationCenter="" 
-	services="multi-factor-authentication" 
-	authors="billmath" 
-	manager="stevenpo" 
-	editor="curtand"/>
+---
+title: Azure Multi-Factor Authentication 报告
+description: 本文介绍如何更改用户设置，例如，强制用户再次完成验证过程。
+documentationCenter: 
+services: multi-factor-authentication
+authors: billmath
+manager: stevenpo
+editor: curtand
 
-<tags
-	ms.service="multi-factor-authentication"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/04/2016"
-	wacn.date="09/28/2016"
-	ms.author="kgremban"/>  
+ms.service: multi-factor-authentication
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/04/2016
+wacn.date: 09/28/2016
+ms.author: kgremban
+---
 
 # 管理云中 Azure 多重身份验证的用户设置
 
@@ -24,18 +24,13 @@
 - [要求选定的用户再次提供联系方法](#require-selected-users-to-provide-contact-methods-again)
 - [删除用户现有的应用密码](#delete-users-existing-app-passwords)
 
-
 如果计算机或设备丢失、被盗或你需要删除用户访问权限，则此项设置将很有用。
-
 
 ## <a name="require-selected-users-to-provide-contact-methods-again"></a>要求选定的用户再次提供联系方法
 
 此项设置将强制用户在登录时再次完成注册过程。请注意，如果用户拥有应用密码，则非浏览器应用将继续工作。你也可以通过选择“ 删除选定用户生成的所有现有应用密码”来删除用户的应用密码。
 
 ### 如何要求用户再次提供联系方法
-
-
-
 
 1. 登录到 Azure 经典管理门户。
 2. 在左侧单击“Active Directory”。

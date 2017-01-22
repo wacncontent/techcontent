@@ -1,31 +1,29 @@
-<properties 
-	pageTitle="DocumentDB 的 .NET NoSQL 示例 | Azure" 
-	description="在 github 上查找用于 DocumentDB 中的常见任务的 C# .NET NoSQL 示例，包括针对 NoSQL 数据库中的 JSON 文档执行的 CRUD 操作。" 
-	keywords="NoSQL 示例"
-	services="documentdb" 
-	authors="AndrewHoh" 
-	manager="jhubbard" 
-	editor="monicar" 
-	documentationCenter=".net"/>  
+---
+title: DocumentDB 的 .NET NoSQL 示例 | Azure
+description: 在 github 上查找用于 DocumentDB 中的常见任务的 C# .NET NoSQL 示例，包括针对 NoSQL 数据库中的 JSON 文档执行的 CRUD 操作。
+keywords: NoSQL 示例
+services: documentdb
+authors: AndrewHoh
+manager: jhubbard
+editor: monicar
+documentationCenter: .net
 
-
-<tags 
-	ms.service="documentdb" 
-	ms.workload="data-services" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="07/21/2016" 
-	wacn.date="11/30/2016" 
-	ms.author="rnagpal"/>
-
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 11/30/2016
+ms.author: rnagpal
+---
 
 # DocumentDB .NET 示例
 
-> [AZURE.SELECTOR]
-- [.NET 示例](/documentation/articles/documentdb-dotnet-samples/)
-- [Node.js 示例](/documentation/articles/documentdb-nodejs-samples/)
-- [Python 示例](/documentation/articles/documentdb-python-samples/)
+> [!div class="op_single_selector"]
+- [.NET 示例](./documentdb-dotnet-samples.md)
+- [Node.js 示例](./documentdb-nodejs-samples.md)
+- [Python 示例](./documentdb-python-samples.md)
 - [Azure 代码示例库](https://azure.microsoft.com/documentation/samples/?service=documentdb)
 
 [azure-documentdb-net](https://github.com/Azure/azure-documentdb-net/tree/master/samples/code-samples) GitHub 存储库中包含可对 DocumentDB 资源执行 CRUD 操作和其他常见操作的示例解决方案。本文将提供：
@@ -36,11 +34,11 @@
 **先决条件**
 
 1. 你必须要有 Azure 帐户才能使用这些 NoSQL 示例：
-    - 可以[建立一个 Azure 试用帐户](/pricing/1rmb-trial/)：获取可用来试用付费版 Azure 服务的信用额度，甚至在用完信用额度后，你仍可以保留帐户和使用免费的 Azure 服务（如网站）。你的信用卡将永远不会付费，除非你显式更改设置并要求付费。
- 
+    - 可以[建立一个 Azure 试用帐户](https://www.azure.cn/pricing/1rmb-trial/)：获取可用来试用付费版 Azure 服务的信用额度，甚至在用完信用额度后，你仍可以保留帐户和使用免费的 Azure 服务（如网站）。你的信用卡将永远不会付费，除非你显式更改设置并要求付费。
+
 2. 你也需要 [Microsoft.Azure.DocumentDB NuGet 程序包](http://www.nuget.org/packages/Microsoft.Azure.DocumentDB/)。
 
-> [AZURE.NOTE]
+> [!NOTE]
 每个示例都是独立的，自行对自身进行设置并在完成后自行进行清理。同样地，这些示例对 CreateDocumentCollectionAsync() 发出多个调用。每当执行此操作时，即会根据所创建的集合的性能层，对你的订阅收取使用 1 小时的费用。
 
 ## 数据库示例 <a name="database-examples"></a>
@@ -99,8 +97,8 @@ IndexManagement 项目示例的 [RunIndexDemo](https://github.com/Azure/azure-do
 [对字符串使用范围索引](https://github.com/Azure/azure-documentdb-dotnet/blob/2e9a48b6a446b47dd6182606c8608d439b88b683/samples/code-samples/IndexManagement/Program.cs#L342-L405)| [IndexingPolicy.IncludedPaths](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.indexingpolicy.includedpaths.aspx)<br>[RangeIndex](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.rangeindex.aspx)
 [执行索引转换](https://github.com/Azure/azure-documentdb-dotnet/blob/2e9a48b6a446b47dd6182606c8608d439b88b683/samples/code-samples/IndexManagement/Program.cs#L407-L464)| [ReplaceDocumentCollectionAsync](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.documentclient.replacedocumentcollectionasync.aspx)
 
-有关索引的详细信息，请参阅 [DocumentDB 索引策略](/documentation/articles/documentdb-indexing-policies/)。
- 
+有关索引的详细信息，请参阅 [DocumentDB 索引策略](./documentdb-indexing-policies.md)。
+
 ## 分区示例
 
 分区示例文件 [azure-documentdb-net/samples/code-samples/Partitioning/Program.cs](https://github.com/Azure/azure-documentdb-net/blob/master/samples/code-samples/Partitioning/Program.cs) 演示如何执行以下任务。在某些情况下，会使用附加的帮助程序文件来完成任务。
@@ -117,23 +115,23 @@ IndexManagement 项目示例的 [RunIndexDemo](https://github.com/Azure/azure-do
 使用 [RepartitionDataSample](https://github.com/Azure/azure-documentdb-dotnet/blob/d17c0ca5be739a359d105cf4112443f65ca2cb72/samples/code-samples/Partitioning/Program.cs#L313-L345) 和<br>[DocumentClientHashPartitioningManager.cs](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/Partitioning/Util/DocumentClientHashPartitioningManager.cs)<br>[添加、删除和重新平衡分区之间的数据](https://github.com/Azure/azure-documentdb-dotnet/blob/d17c0ca5be739a359d105cf4112443f65ca2cb72/samples/code-samples/Partitioning/Program.cs#L139-L141) | [HashPartitionResolver](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.partitioning.hashpartitionresolver.aspx)
 [在重新分区过程中为路由实现分区解析程序](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/Partitioning/Partitioners/TransitionHashPartitionResolver.cs) | [IPartitionResolver](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.ipartitionresolver.aspx) 
 
-有关分区和分片的详细信息，请参阅[对 DocumentDB 中的数据进行分区和扩展](/documentation/articles/documentdb-partition-data/)。
+有关分区和分片的详细信息，请参阅[对 DocumentDB 中的数据进行分区和扩展](./documentdb-partition-data.md)。
 
 ## 地理空间示例  
 
 地理空间示例文件 [azure-documentdb-net/samples/code-samples/Geospatial/Program.cs](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/Geospatial/Program.cs) 演示如何执行以下任务。
- 
+
 任务 | API 参考  
 ---- | ---  
 [对新集合启用地理空间索引](https://github.com/Azure/azure-documentdb-dotnet/blob/7b09c085817e850d683bc59bd864c2f6b552d275/samples/code-samples/Geospatial/Program.cs#L45-L63) | [IndexingPolicy](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.indexingpolicy.aspx)<br>[IndexKind.Spatial](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.indexkind.aspx)<br>[DataType.Point](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.datatype.aspx)  
 [使用 GeoJSON 点插入文档](https://github.com/Azure/azure-documentdb-dotnet/blob/7b09c085817e850d683bc59bd864c2f6b552d275/samples/code-samples/Geospatial/Program.cs#L116-L126) | [DocumentClient.CreateDocumentAsync](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.documentclient.createdocumentasync.aspx)<br>[DataType.Point](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.datatype.aspx)   
-[查找指定距离内的点](https://github.com/Azure/azure-documentdb-dotnet/blob/7b09c085817e850d683bc59bd864c2f6b552d275/samples/code-samples/Geospatial/Program.cs#L152-L194) | [ST\_DISTANCE](/documentation/articles/documentdb-sql-query/) 或<br>[GeometryOperationExtensions.Distance](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.spatial.geometryoperationextensions.distance.aspx#M:Microsoft.Azure.Documents.Spatial.GeometryOperationExtensions.Distance(Microsoft.Azure.Documents.Spatial.Geometry,Microsoft.Azure.Documents.Spatial.Geometry)  
-[查找多边形内的点](https://github.com/Azure/azure-documentdb-dotnet/blob/7b09c085817e850d683bc59bd864c2f6b552d275/samples/code-samples/Geospatial/Program.cs#L196-L221) | [ST\_WITHIN](/documentation/articles/documentdb-sql-query/#built-in-functions) 或<br>[GeometryOperationExtensions.Within](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.spatial.geometryoperationextensions.within.aspx#M:Microsoft.Azure.Documents.Spatial.GeometryOperationExtensions.Within(Microsoft.Azure.Documents.Spatial.Geometry,Microsoft.Azure.Documents.Spatial.Geometry) and<br>[Polygon](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.spatial.polygon.aspx)  
+[查找指定距离内的点](https://github.com/Azure/azure-documentdb-dotnet/blob/7b09c085817e850d683bc59bd864c2f6b552d275/samples/code-samples/Geospatial/Program.cs#L152-L194) | [ST\_DISTANCE](./documentdb-sql-query.md) 或<br>[GeometryOperationExtensions.Distance](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.spatial.geometryoperationextensions.distance.aspx#M:Microsoft.Azure.Documents.Spatial.GeometryOperationExtensions.Distance(Microsoft.Azure.Documents.Spatial.Geometry,Microsoft.Azure.Documents.Spatial.Geometry)  
+[查找多边形内的点](https://github.com/Azure/azure-documentdb-dotnet/blob/7b09c085817e850d683bc59bd864c2f6b552d275/samples/code-samples/Geospatial/Program.cs#L196-L221) | [ST\_WITHIN](./documentdb-sql-query.md#built-in-functions) 或<br>[GeometryOperationExtensions.Within](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.spatial.geometryoperationextensions.within.aspx#M:Microsoft.Azure.Documents.Spatial.GeometryOperationExtensions.Within(Microsoft.Azure.Documents.Spatial.Geometry,Microsoft.Azure.Documents.Spatial.Geometry) and<br>[Polygon](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.spatial.polygon.aspx)  
 [对现有集合启用地理空间索引](https://github.com/Azure/azure-documentdb-dotnet/blob/7b09c085817e850d683bc59bd864c2f6b552d275/samples/code-samples/Geospatial/Program.cs#L312-L336) | [DocumentClient.ReplaceDocumentCollectionAsync](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.documentclient.replacedocumentcollectionasync.aspx)<br>[DocumentCollection.IndexingPolicy](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.documentcollection.indexingpolicy.aspx#P:Microsoft.Azure.Documents.DocumentCollection.IndexingPolicy)  
-[验证点和多边形数据](https://github.com/Azure/azure-documentdb-dotnet/blob/7b09c085817e850d683bc59bd864c2f6b552d275/samples/code-samples/Geospatial/Program.cs#L223-L265) | [ST\_ISVALID](/documentation/articles/documentdb-sql-query/#built-in-functions)<br>[ST\_ISVALIDDETAILED](/documentation/articles/documentdb-sql-query/#built-in-functions)<br>[GeometryOperationExtensions.IsValid](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.spatial.geometryoperationextensions.isvalid.aspx)<br>[GeometryOperationExtensions.IsValidDetailed](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.spatial.geometryoperationextensions.isvaliddetailed.aspx)  
- 
-有关使用地理空间数据的详细信息，请参阅 [使用 Azure DocumentDB 中的地理空间数据](/documentation/articles/documentdb-geospatial/)。
- 
+[验证点和多边形数据](https://github.com/Azure/azure-documentdb-dotnet/blob/7b09c085817e850d683bc59bd864c2f6b552d275/samples/code-samples/Geospatial/Program.cs#L223-L265) | [ST\_ISVALID](./documentdb-sql-query.md#built-in-functions)<br>[ST\_ISVALIDDETAILED](./documentdb-sql-query.md#built-in-functions)<br>[GeometryOperationExtensions.IsValid](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.spatial.geometryoperationextensions.isvalid.aspx)<br>[GeometryOperationExtensions.IsValidDetailed](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.spatial.geometryoperationextensions.isvaliddetailed.aspx)  
+
+有关使用地理空间数据的详细信息，请参阅 [使用 Azure DocumentDB 中的地理空间数据](./documentdb-geospatial.md)。
+
 ## 查询示例
 
 查询文档文件 [azure-documentdb-net/samples/code-samples/Queries/Program.cs](https://github.com/Azure/azure-documentdb-net/blob/master/samples/code-samples/Queries/Program.cs) 演示如何通过 SQL 查询语法以及使用查询和 Lambda 的 LINQ 提供程序执行以下各项任务。
@@ -154,7 +152,7 @@ IndexManagement 项目示例的 [RunIndexDemo](https://github.com/Azure/azure-do
 [并行查询已分区集合](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/Queries/Program.cs#L664-L734) | [DocumentQueryable.CreateDocumentQuery](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.linq.documentqueryable.createdocumentquery.aspx)
 [使用 Order by 针对已分区集合进行查询](https://github.com/Azure/azure-documentdb-dotnet/blob/master/samples/code-samples/Queries/Program.cs#L737-L810) | [DocumentQueryable.CreateDocumentQuery](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.linq.documentqueryable.createdocumentquery.aspx)
 
-有关编写查询的详细信息，请参阅 [DocumentDB 内的 SQL 查询](/documentation/articles/documentdb-sql-query/)。
+有关编写查询的详细信息，请参阅 [DocumentDB 内的 SQL 查询](./documentdb-sql-query.md)。
 
 ## 服务器端编程示例  <a name="server-side-programming-examples"></a>
 
@@ -170,7 +168,7 @@ IndexManagement 项目示例的 [RunIndexDemo](https://github.com/Azure/azure-do
 [创建后触发器](https://github.com/Azure/azure-documentdb-net/blob/d17c0ca5be739a359d105cf4112443f65ca2cb72/samples/code-samples/ServerSideScripts/Program.cs#L329) | [DocumentClient.CreateTriggerAsync](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.documentclient.createtriggerasync.aspx)
 [创建用户定义函数 (UDF)](https://github.com/Azure/azure-documentdb-net/blob/d17c0ca5be739a359d105cf4112443f65ca2cb72/samples/code-samples/ServerSideScripts/Program.cs#L389) | [DocumentClient.CreateUserDefinedFunctionAsync](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.documents.client.documentclient.createuserdefinedfunctionasync.aspx) 
 
-有关服务器端编程的详细信息，请参阅 [DocumentDB 服务器端编程：存储过程、数据库触发器和 UDF](/documentation/articles/documentdb-programming/)。
+有关服务器端编程的详细信息，请参阅 [DocumentDB 服务器端编程：存储过程、数据库触发器和 UDF](./documentdb-programming.md)。
 
 ## 用户管理示例
 

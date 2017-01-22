@@ -1,29 +1,28 @@
-<properties
-    pageTitle="我的 MVC 项目（Visual Studio Azure Active Directory 连接服务）发生了什么情况？| Azure"
-    description="描述一下，当你使用 Visual Studio 连接服务连接到 Azure AD 时，你的 MVC 项目会发生什么情况"
-    services="active-directory"
-    documentationcenter="na"
-    author="TomArcher"
-    manager="douge"
-    editor="" />  
+---
+title: 我的 MVC 项目（Visual Studio Azure Active Directory 连接服务）发生了什么情况？| Azure
+description: 描述一下，当你使用 Visual Studio 连接服务连接到 Azure AD 时，你的 MVC 项目会发生什么情况
+services: active-directory
+documentationcenter: na
+author: TomArcher
+manager: douge
+editor: 
 
-<tags
-    ms.assetid="8b24adde-547e-4ffe-824a-2029ba210216"
-    ms.service="active-directory"
-    ms.workload="web"
-    ms.tgt_pltfrm="vs-what-happened"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/18/2016"
-    wacn.date="01/05/2017"
-    ms.author="tarcher" />  
-
+ms.assetid: 8b24adde-547e-4ffe-824a-2029ba210216
+ms.service: active-directory
+ms.workload: web
+ms.tgt_pltfrm: vs-what-happened
+ms.devlang: na
+ms.topic: article
+ms.date: 11/18/2016
+wacn.date: 01/05/2017
+ms.author: tarcher
+---
 
 # 我的 MVC 项目（Visual Studio Azure Active Directory 连接服务）发生了什么情况？
 
-> [AZURE.SELECTOR]
-> - [入门](/documentation/articles/vs-active-directory-dotnet-getting-started/)
-> - [发生了什么情况](/documentation/articles/vs-active-directory-dotnet-what-happened/)
+> [!div class="op_single_selector"]
+> - [入门](./vs-active-directory-dotnet-getting-started.md)
+> - [发生了什么情况](./vs-active-directory-dotnet-what-happened.md)
 
 ## 已添加引用
 ### NuGet 包引用
@@ -149,10 +148,9 @@ NuGet 包引用已删除，文件已删除和备份。根据你的项目的状�
         </providers>
     </entityFramework>
 
-
 ### 你的 Azure Active Directory 应用已更新
 你的 Azure Active Directory 应用已更新为包括 *读取目录数据* 权限，并已创建一个附加密钥，该密钥随后已用作 **Web.config** 文件中的 *ida:ClientSecret* 。
 
-[详细了解 Azure Active Directory](/home/features/identity/)
+[详细了解 Azure Active Directory](https://www.azure.cn/home/features/identity/)
 
 <!---HONumber=Mooncake_1226_2016-->

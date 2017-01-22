@@ -1,29 +1,30 @@
-<properties
-	pageTitle="在 Azure 中监视 Web Apps"
-	description="了解如何使用经典管理门户在 Azure 中监视 Web 应用。"
-	services="app-service"
-	documentationCenter=""
-	authors="cephalin"
-	manager="wpickett"
-	editor="mollybos"/>
+---
+title: 在 Azure 中监视 Web Apps
+description: 了解如何使用经典管理门户在 Azure 中监视 Web 应用。
+services: app-service
+documentationCenter: 
+authors: cephalin
+manager: wpickett
+editor: mollybos
 
-<tags
-	ms.service="app-service"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/07/2016"
-	wacn.date="01/05/2017"
-	ms.author="byvinyal"/>
+ms.service: app-service
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/07/2016
+wacn.date: 01/05/2017
+ms.author: byvinyal
+---
 
 # <a name="howtomonitor"></a>在 Azure 中监视 Web Apps
 
-[Azure Web Apps](/documentation/services/web-sites/) 通过“监视”管理页对标准 App Service 提供监视功能。“监视”管理页按如下所述提供 Web 应用的性能统计信息。
+[Azure Web Apps](./index.md) 通过“监视”管理页对标准 App Service 提供监视功能。“监视”管理页按如下所述提供 Web 应用的性能统计信息。
 
 ##度量值保留策略
 
->[AZURE.NOTE] 应用度量值的保留策略根据粒度级的不同而异。
+>[!NOTE]
+> 应用度量值的保留策略根据粒度级的不同而异。
 
 - **分钟** 粒度级的度量值将保留 **24 小时**
 - **小时** 粒度级的度量值将保留 **7 天**
@@ -43,8 +44,6 @@
 
 6. 若要从“监视”页中删除度量值，请选择要删除的度量值，然后单击页面底部的“删除度量值”图标。
 
-
-
 ## <a name="howtoreceivealerts"></a>如何：接收来自 Web 应用度量值的警报
 
 在“标准”Web 应用模式中，可以收到基于 Web 应用监视度量值的警报。该警报功能要求你首先配置用于监视的 Web 终结点，你可以在“配置”页的“监视”部分中进行此配置。你还可以选择当所选度量值达到指定的值时发送电子邮件。
@@ -53,18 +52,19 @@
 
 从[经典管理门户](https://manage.windowsazure.cn)中 Web 应用的“缩放”管理页可将 Web 应用配置为以“共享”或“标准” Web 应用模式运行。每个 Azure 订阅均有权访问为在“共享”模式中每个区域运行最多 100 个 Web 应用所提供的资源池。对于为此目的而向每个 Web 应用订阅提供的资源池可由同一地理区域中配置为在“共享”模式中运行的其他 Web 应用共享。由于共享这些资源是为了供其他 Web 应用使用，因此所有订阅对这些资源的使用是受限的。订阅使用这些资源存在限制，该限制以各 Web 应用“仪表板”管理页的使用率概述部分下列出的使用率配额形式表示。
 
->[AZURE.NOTE] 当 Web 应用配置为以“标准”模式运行时，会被分配专用资源，资源大小等同于 Azure 的[虚拟机](/documentation/articles/virtual-machines-windows-sizes/)和[云服务](/documentation/articles/cloud-services-sizes-specs/)大小表中的“小型”（默认值）、“中型”或“大型”虚拟机大小。对于可用于在“标准”模式下运行 Web 应用的订阅，没有针对资源的限制。但是，每个区域可创建的“标准”模式 Web 应用的数量是 500。
+>[!NOTE]
+> 当 Web 应用配置为以“标准”模式运行时，会被分配专用资源，资源大小等同于 Azure 的[虚拟机](../virtual-machines/virtual-machines-windows-sizes.md)和[云服务](../cloud-services/cloud-services-sizes-specs.md)大小表中的“小型”（默认值）、“中型”或“大型”虚拟机大小。对于可用于在“标准”模式下运行 Web 应用的订阅，没有针对资源的限制。但是，每个区域可创建的“标准”模式 Web 应用的数量是 500。
 
 ### 如何：查看配置为共享模式的 Web 应用的使用率配额 ###
 若要确定 Web 应用对资源使用率配额的影响程度，请执行下列步骤：
 
 1. 在[经典管理门户](https://manage.windowsazure.cn)中打开 Web 应用的“仪表板”管理页。
-2. “使用概览”部分显示了相应 [Azure Web 应用](/documentation/services/web-sites/)的使用率配额，它是以下内容的一个子集：
-	-	**输出的数据**、**CPU 时间** 和 **内存** - 当超过配额时，Azure 将会停止 Web 应用，以留出当前配额间隔的剩余部分。Azure 将在下一配额间隔开始时启动该 Web 应用。
-	-	**文件系统存储** - 当达到配额时，文件系统存储仍然可以访问以执行读取操作，但所有其他写入操作（包括正常 Web 应用活动所需的写入操作）将会被阻止。文件使用量降低或将该 Web 应用移入配额更高的 App Service 计划时，写入操作将恢复。
-	-	**链接的资源** - 在此处还显示所有链接的 Web 应用资源的配额，例如数据库或存储。
+2. “使用概览”部分显示了相应 [Azure Web 应用](./index.md)的使用率配额，它是以下内容的一个子集：
+    - **输出的数据**、**CPU 时间** 和 **内存** - 当超过配额时，Azure 将会停止 Web 应用，以留出当前配额间隔的剩余部分。Azure 将在下一配额间隔开始时启动该 Web 应用。
+    - **文件系统存储** - 当达到配额时，文件系统存储仍然可以访问以执行读取操作，但所有其他写入操作（包括正常 Web 应用活动所需的写入操作）将会被阻止。文件使用量降低或将该 Web 应用移入配额更高的 App Service 计划时，写入操作将恢复。
+    - **链接的资源** - 在此处还显示所有链接的 Web 应用资源的配额，例如数据库或存储。
 
-	一些配额可以按照 web 托管计划应用，另外一些则按照站点应用。
+    一些配额可以按照 web 托管计划应用，另外一些则按照站点应用。
 
 ## <a name="resourceusage"></a>如何：避免超过配额
 
@@ -85,21 +85,22 @@
 
 - **应用程序日志记录（文件系统）**- 启用对应用程序生成的信息的日志记录。“日志记录级别”字段确定是否记录“错误”、“警告”或“信息”级别信息。你也可以选择“详细”，这种模式将记录该应用程序产生的所有信息。
 
-	此设置产生的日志存储在 Web 应用的文件系统中，可使用下面“下载 Web 应用的日志文件”中介绍的步骤来下载。
+    此设置产生的日志存储在 Web 应用的文件系统中，可使用下面“下载 Web 应用的日志文件”中介绍的步骤来下载。
 
 - **应用程序日志记录（表存储）**- 启用对应用程序生成的信息的日志记录，类似于应用程序日志记录（文件系统）选项。但是，日志信息以表的形式存储在 Azure 存储帐户中。
 
-	若要指定 Azure 存储帐户和表，请依次选择“打开”、“日志记录级别”和“管理表存储”。指定要使用的存储帐户和表，或者创建一个新表。
+    若要指定 Azure 存储帐户和表，请依次选择“打开”、“日志记录级别”和“管理表存储”。指定要使用的存储帐户和表，或者创建一个新表。
 
-	可以使用 Azure 存储客户端来访问存储在表中的日志信息。
+    可以使用 Azure 存储客户端来访问存储在表中的日志信息。
 
 - **应用程序日志记录（Blob 存储）**- 启用对应用程序生成的信息的日志记录，类似于应用程序日志记录（表存储）选项。但是，日志信息以 blob 的形式存储在 Azure 存储帐户中。
 
-	若要指定 Azure 存储帐户和 Blob，请依次选择“打开”、“日志记录级别”和“管理 Blob 存储”。指定要使用的存储帐户、Blob 容器和 Blob 名称，或者创建一个新容器和 Blob。
+    若要指定 Azure 存储帐户和 Blob，请依次选择“打开”、“日志记录级别”和“管理 Blob 存储”。指定要使用的存储帐户、Blob 容器和 Blob 名称，或者创建一个新容器和 Blob。
 
-有关 Azure 存储帐户的详细信息，请参阅[如何管理存储帐户](/documentation/articles/storage-create-storage-account/)。
+有关 Azure 存储帐户的详细信息，请参阅[如何管理存储帐户](../storage/storage-create-storage-account.md)。
 
-> [AZURE.NOTE] 只有 .NET 应用程序支持到表或 Blob 存储中的应用程序日志记录。
+> [!NOTE]
+> 只有 .NET 应用程序支持到表或 Blob 存储中的应用程序日志记录。
 
 由于将应用程序日志记录到存储要求使用存储客户端来查看日志数据，所以在你计划使用了解如何从 Azure 表或 Blob 存储中直接读取和处理数据的服务或应用程序时，它是最有用的。将日志记录到文件系统会产生可使用 FTP 或其他工具下载到你本地计算机的文件，本节后面会有所说明。
 
@@ -107,8 +108,9 @@
 
 也可以从 Azure PowerShell 中使用 **Set-AzureWebsite** cmdlet 来启用诊断。如果尚未安装 Azure PowerShell，或者尚未将其配置为使用 Azure 订阅，请参阅[如何使用 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
-> [AZURE.NOTE] 应用程序日志记录依赖于你的应用程序生成的日志信息。用于生成日志信息的方法以及信息格式是特定于编写你的应用程序所使用的语言的。有关使用应用程序日志记录的语言特定的信息，请参见以下文章：
-><p> - **Node.js** - [如何在 Azure 网站中调试 Node.js 应用程序](/documentation/articles/web-sites-nodejs-debug/)
+> [!NOTE]
+> 应用程序日志记录依赖于你的应用程序生成的日志信息。用于生成日志信息的方法以及信息格式是特定于编写你的应用程序所使用的语言的。有关使用应用程序日志记录的语言特定的信息，请参见以下文章：
+><p> - **Node.js** - [如何在 Azure 网站中调试 Node.js 应用程序](./web-sites-nodejs-debug.md)
 ><p> 只有 .NET 应用程序支持到表或 Blob 存储中的应用程序日志记录。
 
 #### 网站诊断 ####
@@ -117,7 +119,7 @@
 
 - **Web 服务器日志记录** – 启用“Web 服务器日志记录”可使用 W3C 扩展日志文件格式保存 Web 应用日志。Web 服务器日志记录为对你的 Web 应用的所有传入请求生成一个记录，记录中包含客户端 IP 地址、请求的 URI、响应的 HTTP 状态代码以及客户端的用户代理字符串之类的信息。可将日志保存到 Azure 存储帐户或文件系统中。
 
- 若要将 Web 服务器日志保存到 Azure 存储帐户，请选择“存储”，然后选择“管理存储”，以指定用来保留日志的存储帐户和 Azure Blob 容器。有关 Azure 存储帐户的详细信息，请参阅[如何管理存储帐户](/documentation/articles/storage-create-storage-account/)。
+ 若要将 Web 服务器日志保存到 Azure 存储帐户，请选择“存储”，然后选择“管理存储”，以指定用来保留日志的存储帐户和 Azure Blob 容器。有关 Azure 存储帐户的详细信息，请参阅[如何管理存储帐户](../storage/storage-create-storage-account.md)。
 
     若要将 Web 服务器日志保存到文件系统，请选择“文件系统”。这将会启用“配额”框，在该框中，你可为日志文件设置最大磁盘空间量。最小大小为 25MB，最大为 100MB。默认大小是 35MB。
 
@@ -127,10 +129,10 @@
 
 - **失败请求跟踪** - 打开失败请求跟踪以捕获失败的客户端请求的信息，例如 400 系列 HTTP 状态代码。失败请求跟踪将会生成一个 XML 文档，其中包含对在 IIS 中通过其传递请求的模块的跟踪、模块返回的详细信息以及调用模块的时间。此信息可用于隔离其中发生了故障的组件。
 
-
 为 Web 应用启用诊断后，请单击“配置”管理页底部的“保存”图标，以应用你设置的选项。
 
-> [AZURE.IMPORTANT] “详细错误消息”和“失败请求跟踪”会对 Web 应用提出诸多要求。建议在重现所排查的问题后关闭这些功能。
+> [!IMPORTANT]
+> “详细错误消息”和“失败请求跟踪”会对 Web 应用提出诸多要求。建议在重现所排查的问题后关闭这些功能。
 
 ### 高级配置 ###
 
@@ -169,35 +171,37 @@
 
 1. 从“开始”屏幕或“开始”菜单，搜索 **Windows PowerShell**。右键单击“Windows PowerShell”项，并选择“以管理员身份运行”。
 
-	> [AZURE.NOTE] 如果未安装 **Azure PowerShell**，请参阅 [Azure PowerShell Cmdlet 入门](http://msdn.microsoft.com/zh-cn/library/azure/jj554332.aspx)以了解安装和配置信息。
+    > [!NOTE]
+    > 如果未安装 **Azure PowerShell**，请参阅 [Azure PowerShell Cmdlet 入门](http://msdn.microsoft.com/zh-cn/library/azure/jj554332.aspx)以了解安装和配置信息。
 
 2. 从 Azure PowerShell 提示符处，使用以下命令下载日志文件：
 
-		Save-AzureWebSiteLog -Name webappname
+        Save-AzureWebSiteLog -Name webappname
 
-	这将下载 **webappname** 指定的 Web 应用的日志文件，并将这些文件保存到当前目录的 **log.zip** 文件中。
+    这将下载 **webappname** 指定的 Web 应用的日志文件，并将这些文件保存到当前目录的 **log.zip** 文件中。
 
-	还可以通过使用以下命令查看日志事件的实时流：
+    还可以通过使用以下命令查看日志事件的实时流：
 
-		Get-AzureWebSiteLog -Name webappname -Tail
+        Get-AzureWebSiteLog -Name webappname -Tail
 
-	这会在 Azure PowerShell 提示符出现时将日志信息显示给提示符。
+    这会在 Azure PowerShell 提示符出现时将日志信息显示给提示符。
 
 **Azure CLI**
 
 打开新命令提示符、PowerShell、bash 或终端会话，并且使用以下命令下载日志文件：
 
-	azure site log download webappname
+    azure site log download webappname
 
 这将下载 **webappname** 指定的 Web 应用的日志文件，并将这些文件保存到当前目录的 **log.zip** 文件中。
 
 还可以通过使用以下命令查看日志事件的实时流：
 
-	azure site log tail webappname
+    azure site log tail webappname
 
 这会将日志信息显示给从其运行命令的命令提示符、PowerShell、bash 或终端会话。
 
-> [AZURE.NOTE] 如果未安装 **azure** 命令，请参阅[如何使用 Azure CLI](/documentation/articles/virtual-machines-command-line-tools/) 以了解安装和配置信息。
+> [!NOTE]
+> 如果未安装 **azure** 命令，请参阅[如何使用 Azure CLI](../virtual-machines-command-line-tools.md) 以了解安装和配置信息。
 
 ### 读取日志文件 ###
 
@@ -237,7 +241,6 @@
 
 - 用于读取文件的工具：日志分析程序。用于分析和查询 IIS 日志文件。可从 Microsoft 下载中心获得 Log Parser 2.2，网址为 <a href="http://go.microsoft.com/fwlink/?LinkId=246619">http://go.microsoft.com/fwlink/?LinkId=246619</a>。
 
-
 ## <a name="webendpointstatus"></a>如何：监视 Web 终结点状态
 
 此功能仅在 **标准** 模式下提供，允许你从最多 3 个地理位置监视最多 2 个终结点。
@@ -250,27 +253,26 @@
 
 **配置终结点监视：**
 
-1.	打开“Web Apps”。单击要配置的 Web 应用的名称。
-2.	单击“配置”选项卡。
+1. 打开“Web Apps”。单击要配置的 Web 应用的名称。
+2. 单击“配置”选项卡。
 3.     转到“监视”部分以便输入你的终结点设置。
-4.	输入终结点的名称。
-5.	输入你想要监视的 Web 应用一部分的 URL。例如，http://contoso.chinacloudsites.cn/archive。
-6.	从列表中选择一个或多个地理位置。
-7.	（可选）重复之前的步骤以创建第二个终结点。
-8.	单击“保存”。Web 终结点监视数据可能需要一段时间后才在“仪表板”和“监视器”选项卡上显示。
+4. 输入终结点的名称。
+5. 输入你想要监视的 Web 应用一部分的 URL。例如，http://contoso.chinacloudsites.cn/archive。
+6. 从列表中选择一个或多个地理位置。
+7. （可选）重复之前的步骤以创建第二个终结点。
+8. 单击“保存”。Web 终结点监视数据可能需要一段时间后才在“仪表板”和“监视器”选项卡上显示。
 
 若要创建电子邮件规则，请执行以下操作：
 
-9.	在最左侧的服务栏中单击“管理服务”。
-10.	单击底部的“添加规则”。
-11.	在“服务类型”中选择“Web 应用”，然后选择你之前配置了终结点监视的 Web 应用。单击 **“下一步”**。
-12.	在“度量值”中，现在，你可以为配置的终结点选择其他度量值。例如：**响应时间 (homepage/US: IL-Shanghai)**。选择响应时间度量值，然后在“阈值”中键入 3，以指定 3 秒的阀值。
-13.	选择“向服务管理员和共同管理员发送电子邮件”。单击“完成”。
+9. 在最左侧的服务栏中单击“管理服务”。
+10. 单击底部的“添加规则”。
+11. 在“服务类型”中选择“Web 应用”，然后选择你之前配置了终结点监视的 Web 应用。单击 **“下一步”**。
+12. 在“度量值”中，现在，你可以为配置的终结点选择其他度量值。例如：**响应时间 (homepage/US: IL-Shanghai)**。选择响应时间度量值，然后在“阈值”中键入 3，以指定 3 秒的阀值。
+13. 选择“向服务管理员和共同管理员发送电子邮件”。单击“完成”。
 
-	现在，Azure 将主动监视终结点并在答复时间超过 3 秒时发送电子邮件警报。
+    现在，Azure 将主动监视终结点并在答复时间超过 3 秒时发送电子邮件警报。
 
 [fzilla]: http://go.microsoft.com/fwlink/?LinkId=247914
 [vmsizes]: http://go.microsoft.com/fwlink/?LinkID=309169
- 
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

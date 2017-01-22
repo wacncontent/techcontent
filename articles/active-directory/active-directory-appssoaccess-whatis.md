@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure Active Directory 的应用程序访问与单一登录是什么？| Azure"
-	description="使用 Azure Active Directory 启用单一登录，以访问完成业务所需的全部 SaaS 和 Web 应用程序。"
-	services="active-directory"
-	documentationCenter=""
-	authors="asmalser-msft"
-	manager="femila"
-	editor=""/>  
+---
+title: Azure Active Directory 的应用程序访问与单一登录是什么？| Azure
+description: 使用 Azure Active Directory 启用单一登录，以访问完成业务所需的全部 SaaS 和 Web 应用程序。
+services: active-directory
+documentationCenter: 
+authors: asmalser-msft
+manager: femila
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/15/2016"
-	wacn.date="12/15/2016"
-	ms.author="asmalser-msft"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/15/2016
+wacn.date: 12/15/2016
+ms.author: asmalser-msft
+---
 
 #Azure Active Directory 的应用程序访问与单一登录是什么？
 
@@ -45,11 +45,11 @@ Azure AD 能轻松集成到许多现今热门的 SaaS 应用程序。它提供�
 
 Azure AD 支持通过三种不同的方式登录应用程序：
 
-*	**联合单一登录**可让应用程序重定向到 Azure AD 进行用户身份验证，而不是提示用户输入自己的密码。支持 SAML 2.0、WS 联合身份验证或 OpenID Connect 等协议的应用程序都支持此方式，而且这是最丰富的单一登录模式。
+* **联合单一登录**可让应用程序重定向到 Azure AD 进行用户身份验证，而不是提示用户输入自己的密码。支持 SAML 2.0、WS 联合身份验证或 OpenID Connect 等协议的应用程序都支持此方式，而且这是最丰富的单一登录模式。
 
-*	**基于密码的单一登录**允许使用 Web 浏览器扩展或移动应用安全存储应用程序的密码和重放。此方式使用应用程序提供的现有登录过程，但允许管理员管理密码，并且用户无需记住密码。
+* **基于密码的单一登录**允许使用 Web 浏览器扩展或移动应用安全存储应用程序的密码和重放。此方式使用应用程序提供的现有登录过程，但允许管理员管理密码，并且用户无需记住密码。
 
-*	**现有单一登录**可让 Azure AD 利用针对应用程序设置的任何现有单一登录，但可让这些应用程序链接到 Office 365 或 Azure AD 访问面板门户，当其中有应用程序启动时，Azure AD 中还会生成额外的报告。
+* **现有单一登录**可让 Azure AD 利用针对应用程序设置的任何现有单一登录，但可让这些应用程序链接到 Office 365 或 Azure AD 访问面板门户，当其中有应用程序启动时，Azure AD 中还会生成额外的报告。
 
 在用户通过应用程序的身份验证后，他们还需要在应用程序中预配的帐户记录，以告知应用程序他们对应用程序的哪些部分具有权限和访问级别。此帐户记录的预配可以自动完成，也可以在为用户提供单一登录访问之前由管理员手动完成。
 
@@ -63,8 +63,7 @@ Azure AD 支持通过三种不同的方式登录应用程序：
 
 Azure AD 允许对支持 SAML 2.0、WS 联合身份验证或 OpenID Connect 协议的应用程序使用联合单一登录。
 
-另请参阅：[管理用于联合单一登录的证书](/documentation/articles/active-directory-sso-certs/)
-
+另请参阅：[管理用于联合单一登录的证书](./active-directory-sso-certs.md)
 
 ###基于密码的单一登录  <a name="password-based-single-sign-on"></a>
 
@@ -72,9 +71,9 @@ Azure AD 允许对支持 SAML 2.0、WS 联合身份验证或 OpenID Connect 协�
 
 对于提供了基于 HTML 的登录页的任何基于云的应用程序，Azure AD 都可以支持基于密码的单一登录。使用自定义浏览器插件时，AAD 可以通过安全地检索应用程序凭据（例如目录中的用户名和密码）来自动化用户的登录过程，并代表用户将这些凭据输入到应用程序的登录页中。下面是两个用例：
 
-1.	**管理员管理凭据** – 管理员可以创建和管理应用程序凭据，并将这些凭据分配给需要访问应用程序的用户或组。在这种情况下，最终用户不需要知道凭据，但仍然能够通过单一登录方式来访问应用程序，只需通过其访问面板或提供的链接单击它即可。这既可以让管理员对凭据进行生命周期管理，又为最终用户提供了方便，这些最终用户不需要记住或管理特定于应用的密码。在自动登录过程中，最终用户提供的凭据会进行模糊化处理；不过在技术上，用户使用 Web 调试工具还是可以找到这些凭据，因此用户和管理员仍应遵循相同的安全策略，就像这些凭据是直接由用户提供一样。需要提供在多个用户之间共享的帐户访问权限时（例如在使用社交媒体或文档共享应用程序的情况下），由管理员提供凭据很有用。
+1. **管理员管理凭据** – 管理员可以创建和管理应用程序凭据，并将这些凭据分配给需要访问应用程序的用户或组。在这种情况下，最终用户不需要知道凭据，但仍然能够通过单一登录方式来访问应用程序，只需通过其访问面板或提供的链接单击它即可。这既可以让管理员对凭据进行生命周期管理，又为最终用户提供了方便，这些最终用户不需要记住或管理特定于应用的密码。在自动登录过程中，最终用户提供的凭据会进行模糊化处理；不过在技术上，用户使用 Web 调试工具还是可以找到这些凭据，因此用户和管理员仍应遵循相同的安全策略，就像这些凭据是直接由用户提供一样。需要提供在多个用户之间共享的帐户访问权限时（例如在使用社交媒体或文档共享应用程序的情况下），由管理员提供凭据很有用。
 
-2.	**用户管理凭据** – 管理员可以将应用程序分配给最终用户或组，并允许最终用户在第一次通过访问面板访问应用程序时直接输入自己的凭据。这将为最终用户创造方便，这样他们就不需要每次访问应用程序时不断输入特定于应用的密码。对凭据进行管理时也可以借鉴这个用例，管理员可以在未来某个日期为应用程序设置新的凭据，而不会改变最终用户的应用访问体验。
+2. **用户管理凭据** – 管理员可以将应用程序分配给最终用户或组，并允许最终用户在第一次通过访问面板访问应用程序时直接输入自己的凭据。这将为最终用户创造方便，这样他们就不需要每次访问应用程序时不断输入特定于应用的密码。对凭据进行管理时也可以借鉴这个用例，管理员可以在未来某个日期为应用程序设置新的凭据，而不会改变最终用户的应用访问体验。
 
 在这两种情况下，凭据都存储在目录中，处于加密状态，仅在自动登录期间通过 HTTPS 进行传递。通过基于密码的单一登录，Azure AD 为不能支持联合身份验证协议的应用程序提供了方便的标识访问管理解决方案。
 
@@ -98,7 +97,6 @@ Azure AD 允许对支持 SAML 2.0、WS 联合身份验证或 OpenID Connect 协�
 
 在 Azure AD 中删除用户或更改其信息时，这些更改也会反映在 SaaS 应用程序中。这意味着，配置自动身份生命周期管理可使管理员能够从 SaaS 应用程序控制并提供自动预配和取消预配。在 Azure AD 中，这种身份生命周期管理的自动化通过用户预配启用。
 
-
 ##<a name="get-started-with-the-azure-ad-application-gallery"></a>Azure 应用程序库入门
 
 已准备就绪？ 若要在 Azure AD 和组织所用的 SaaS 应用程序之间部署单一登录，请遵循这些指导原则。
@@ -109,23 +107,21 @@ Azure AD 允许对支持 SAML 2.0、WS 联合身份验证或 OpenID Connect 协�
 
 以下是有关了解应用支持哪些功能的一些提示：
 
-
 找到你的应用程序后，可以遵循应用程序库和 Azure 经典管理门户中显示的分步说明启用单一登录。
 
 ###应用程序不在库中怎么办？
 
 如果在 Azure AD 应用程序库中找不到你的应用程序，你可以选择：
 
-*	**添加你使用的但未列出的应用** - 使用 Azure 经典管理门户内应用库中的“自定义”类别来连接组织正在使用但未列出的应用程序。你可以添加支持 SAML 2.0 的任何应用程序作为联合应用，或者添加具有 HTML 登录页的任何应用程序作为密码 SSO 应用。
+* **添加你使用的但未列出的应用** - 使用 Azure 经典管理门户内应用库中的“自定义”类别来连接组织正在使用但未列出的应用程序。你可以添加支持 SAML 2.0 的任何应用程序作为联合应用，或者添加具有 HTML 登录页的任何应用程序作为密码 SSO 应用。
 
-
-*	**添加正在开发的自有应用** - 如果你自己开发了应用程序，请遵照 Azure AD 开发人员文档中的指导原则使用 Azure AD 图形 API 来实施联合单一登录或预配。有关详细信息，请参阅以下资源：
-  * [Azure AD 的身份验证方案](/documentation/articles/active-directory-authentication-scenarios/)
+* **添加正在开发的自有应用** - 如果你自己开发了应用程序，请遵照 Azure AD 开发人员文档中的指导原则使用 Azure AD 图形 API 来实施联合单一登录或预配。有关详细信息，请参阅以下资源：
+  * [Azure AD 的身份验证方案](./active-directory-authentication-scenarios.md)
   * [https://github.com/AzureADSamples/WebApp-MultiTenant-OpenIdConnect-DotNet](https://github.com/AzureADSamples/WebApp-MultiTenant-OpenIdConnect-DotNet)
   * [https://github.com/AzureADSamples/WebApp-WebAPI-MultiTenant-OpenIdConnect-DotNet](https://github.com/AzureADSamples/WebApp-WebAPI-MultiTenant-OpenIdConnect-DotNet)
   * [https://github.com/AzureADSamples/NativeClient-WebAPI-MultiTenant-WindowsStore](https://github.com/AzureADSamples/NativeClient-WebAPI-MultiTenant-WindowsStore)
 
-*	**请求应用集成** - 使用 [Azure AD 反馈论坛](https://feedback.azure.com/forums/169401-azure-active-directory/)请求所需应用程序的支持。
+* **请求应用集成** - 使用 [Azure AD 反馈论坛](https://feedback.azure.com/forums/169401-azure-active-directory/)请求所需应用程序的支持。
 
 ###使用 Azure 经典管理门户
 
@@ -162,12 +158,11 @@ Azure AD 提供多种可自定义的方式来向组织中的用户部署应用�
 
 ###Azure AD 访问面板
 
-https://myapps.microsoft.com 上的访问面板是一个基于 Web 的门户，它允许在 Azure Active Directory 中拥有组织帐户的最终用户查看和启动 Azure AD 管理员已向他们授予其访问权限的基于云的应用程序。如果你是使用 [Azure Active Directory Premium](/pricing/details/identity/) 的最终用户，则还可以通过访问面板利用自助服务组管理功能。
+https://myapps.microsoft.com 上的访问面板是一个基于 Web 的门户，它允许在 Azure Active Directory 中拥有组织帐户的最终用户查看和启动 Azure AD 管理员已向他们授予其访问权限的基于云的应用程序。如果你是使用 [Azure Active Directory Premium](https://www.azure.cn/pricing/details/identity/) 的最终用户，则还可以通过访问面板利用自助服务组管理功能。
 
 ![][3]
 
 访问面板是与 Azure 经典管理门户分开的，因此不要求用户拥有 Azure 订阅或 Office 365 订阅。
-
 
 ###Office 365 应用程序启动器
 
@@ -205,9 +200,8 @@ Azure AD 还为支持基于密码单一登录、现有单一登录以及任何�
 
 ##相关文章
 
-- [有关 Azure Active Directory 中应用程序管理的文章索引](/documentation/articles/active-directory-apps-index/)
-- [Introduction to Managing Access to Apps（管理对应用的访问简介）](/documentation/articles/active-directory-managing-access-to-apps/)
-
+- [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
+- [Introduction to Managing Access to Apps（管理对应用的访问简介）](./active-directory-managing-access-to-apps.md)
 
 <!--Image references-->
 [1]: ./media/active-directory-appssoaccess-whatis/onlineappgallery.png

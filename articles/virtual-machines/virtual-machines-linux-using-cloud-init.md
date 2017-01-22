@@ -1,30 +1,29 @@
-<properties
-    pageTitle="在创建期间使用 cloud-init 自定义 Linux VM | Azure"
-    description="在创建期间使用 cloud-init 自定义 Linux VM。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="vlivech"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 在创建期间使用 cloud-init 自定义 Linux VM | Azure
+description: 在创建期间使用 cloud-init 自定义 Linux VM。
+services: virtual-machines-linux
+documentationcenter: 
+author: vlivech
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="195c22cd-4629-4582-9ee3-9749493f1d72"
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/26/2016"
-    wacn.date="12/20/2016"
-    ms.author="v-livech" />  
-
+ms.assetid: 195c22cd-4629-4582-9ee3-9749493f1d72
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 10/26/2016
+wacn.date: 12/20/2016
+ms.author: v-livech
+---
 
 # 在创建期间使用 cloud-init 自定义 Linux VM
 本文说明如何制作 cloud-init 脚本来设置主机名、更新已安装的包及管理用户帐户。在 VM 创建期间可以从 Azure CLI 调用 cloud-init 脚本。本文需要以下条件：
 
-* 一个 Azure 帐户（[获取试用版](/pricing/1rmb-trial/)）
-* 已使用 `azure login -e AzureChinaCloud` 登录 [Azure CLI](/documentation/articles/xplat-cli-install/)。
+* 一个 Azure 帐户（[获取试用版](https://www.azure.cn/pricing/1rmb-trial/)）
+* 已使用 `azure login -e AzureChinaCloud` 登录 [Azure CLI](../xplat-cli-install.md)。
 * Azure CLI *必须处于* Azure Resource Manager 模式 `azure config mode arm`。
 
 ## 快速命令
@@ -69,17 +68,17 @@
 Azure 有三种不同的方法可在部署或启动 Linux VM 时对其进行更改。
 
 * 使用 cloud-init 注入脚本。
-* 使用 Azure [VMAccess 扩展](/documentation/articles/virtual-machines-linux-using-vmaccess-extension/)注入脚本。
+* 使用 Azure [VMAccess 扩展](./virtual-machines-linux-using-vmaccess-extension.md)注入脚本。
 * 使用 cloud-init 的 Azure 模板。
-* 使用 [CustomScriptExtention](/documentation/articles/virtual-machines-linux-extensions-customscript/) 的 Azure 模板。
+* 使用 [CustomScriptExtention](./virtual-machines-linux-extensions-customscript.md) 的 Azure 模板。
 
 若要在启动后随时注入脚本，请执行以下操作：
 
 * 直接通过 SSH 运行命令
-* 以命令方式或在 Azure 模板中使用 Azure [VMAccess 扩展](/documentation/articles/virtual-machines-linux-using-vmaccess-extension/)注入脚本
+* 以命令方式或在 Azure 模板中使用 Azure [VMAccess 扩展](./virtual-machines-linux-using-vmaccess-extension.md)注入脚本
 * Ansible、Salt、Chef 和 Puppet 等配置管理工具。
 
-> [AZURE.NOTE]
+> [!NOTE]
 > : VMAccess 扩展以使用 SSH 可以进行的相同方式以根用户身份执行脚本。但是，使用 VM 扩展可以启用 Azure 提供的几项功能，这些功能可以很有用，具体取决于用户的方案。
 > 
 > 
@@ -234,8 +233,8 @@ Linux 启动后，所有列出的用户都已创建并添加到 sudo 组。
 ## 后续步骤
 Cloud-init 正成为在 Linux VM 启动时对其进行修改的一种标准方法。Azure 还提供 VM 扩展，使用这些扩展可以在 LinuxVM 启动或运行时对其进行修改。例如，可以使用 Azure VMAccessExtension 在 VM 运行时重置 SSH 或用户信息。使用 cloud-init，需要重新启动才能重置密码。
 
-[关于虚拟机扩展和功能](/documentation/articles/virtual-machines-linux-extensions-features/)
+[关于虚拟机扩展和功能](./virtual-machines-linux-extensions-features.md)
 
-[管理用户、SSH，并使用 VMAccess 扩展检查或修复 Azure Linux VM 上的磁盘](/documentation/articles/virtual-machines-linux-using-vmaccess-extension/)
+[管理用户、SSH，并使用 VMAccess 扩展检查或修复 Azure Linux VM 上的磁盘](./virtual-machines-linux-using-vmaccess-extension.md)
 
 <!---HONumber=Mooncake_1212_2016-->

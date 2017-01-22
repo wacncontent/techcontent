@@ -1,29 +1,27 @@
-<properties
-	pageTitle="使用 Resource Manager 和 PowerShell 管理 VM | Azure"
-	description="使用 Azure Resource Manager 与 PowerShell 来管理虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 使用 Resource Manager 和 PowerShell 管理 VM | Azure
+description: 使用 Azure Resource Manager 与 PowerShell 来管理虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="na"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="01/05/2017"
-	ms.author="davidmu"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: na
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 01/05/2017
+ms.author: davidmu
+---
 
 # 使用 Resource Manager 与 PowerShell 来管理 Azure 虚拟机
 
 ## 安装 Azure PowerShell
- 
+
 有关安装最新版本的 Azure PowerShell、选择订阅和登录帐户的信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
 ## 设置变量
@@ -36,7 +34,7 @@
 ## 显示有关虚拟机的信息
 
 获取虚拟机信息。
-  
+
     Get-AzureRmVM -ResourceGroupName $rgName -Name $vmName
 
 它会返回与此示例类似的内容：
@@ -118,7 +116,7 @@
     Virtual machine stopping operation
     This cmdlet will stop the specified virtual machine. Do you want to continue?
     [Y] Yes  [N] No  [S] Suspend  [?] Help (default is "Y"):
-        
+
 输入 **Y** 以停止虚拟机。
 
 几分钟后，将返回类似于下面示例的内容：
@@ -159,7 +157,8 @@
 
     Remove-AzureRmVM -ResourceGroupName $rgName -Name $vmName
 
-> [AZURE.NOTE] 可以使用 **-Force** 参数跳过确认提示。
+> [!NOTE]
+> 可以使用 **-Force** 参数跳过确认提示。
 
 如果没有使用 -Force 参数，系统会提示进行确认：
 
@@ -176,19 +175,19 @@
 ## 更新虚拟机
 
 本示例演示如何更新虚拟机的大小。
-        
+
     $vmSize = "Standard_A1"
     $vm = Get-AzureRmVM -ResourceGroupName $rgName -Name $vmName
     $vm.HardwareProfile.vmSize = $vmSize
     Update-AzureRmVM -ResourceGroupName $rgName -VM $vm
-    
+
 它会返回与此示例类似的内容：
 
     RequestId  IsSuccessStatusCode  StatusCode  ReasonPhrase
     ---------  -------------------  ----------  ------------
                               True          OK  OK
-                              
-有关虚拟机的可用大小列表，请参阅 [Sizes for virtual machines in Azure](/documentation/articles/virtual-machines-windows-sizes/)（Azure 中的虚拟机大小）。
+
+有关虚拟机的可用大小列表，请参阅 [Sizes for virtual machines in Azure](./virtual-machines-windows-sizes.md)（Azure 中的虚拟机大小）。
 
 ## <a name="add-a-data-disk-to-a-virtual-machine"></a> 将数据磁盘添加到虚拟机
 
@@ -225,6 +224,6 @@
 
 ## 后续步骤
 
-如果部署出现问题，请参阅[使用 Azure 门户预览排除资源组部署故障](/documentation/articles/resource-manager-troubleshoot-deployments-portal/)
+如果部署出现问题，请参阅[使用 Azure 门户预览排除资源组部署故障](../azure-resource-manager/resource-manager-troubleshoot-deployments-portal.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

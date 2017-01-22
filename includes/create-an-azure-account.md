@@ -3,5 +3,5 @@
 ## 创建 Azure 帐户
 
 1.  打开 Web 浏览器并浏览到 [管理门户](http://azure.microsoft.com)
-2. 导航到[创建试用帐户](/pricing/1rmb-trial/)页并按相关步骤来创建试用帐户。您将需要用于验证身份的信用卡号和移动手机号，但不会向您收取相关费用。
+2. 导航到[创建试用帐户](https://www.azure.cn/pricing/1rmb-trial/)页并按相关步骤来创建试用帐户。您将需要用于验证身份的信用卡号和移动手机号，但不会向您收取相关费用。
 <!---HONumber=Mooncake_1207_2015-->

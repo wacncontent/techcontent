@@ -1,24 +1,22 @@
-<properties
-	pageTitle="使用 Resource Manager 模板创建 VM | Azure"
-	description="将 Resource Manager 模板与 PowerShell 配合使用，以轻松创建新的 Windows 虚拟机。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 使用 Resource Manager 模板创建 VM | Azure
+description: 将 Resource Manager 模板与 PowerShell 配合使用，以轻松创建新的 Windows 虚拟机。
+services: virtual-machines-windows
+documentationCenter: 
+authors: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="na"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/06/2016"
-	wacn.date="01/05/2017"
-	ms.author="davidmu"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: na
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 10/06/2016
+wacn.date: 01/05/2017
+ms.author: davidmu
+---
 
 # 使用资源管理器模板创建 Windows 虚拟机
 
@@ -26,11 +24,12 @@
 
 执行本文中的步骤大约需要 20 分钟时间。
 
-> [AZURE.IMPORTANT] 如果希望将 VM 包含在某个可用性集中，可以在创建 VM 时将其添加到该集。目前，不支持在创建 VM 后将其添加到可用性集。
+> [!IMPORTANT]
+> 如果希望将 VM 包含在某个可用性集中，可以在创建 VM 时将其添加到该集。目前，不支持在创建 VM 后将其添加到可用性集。
 
 ## 步骤 1：创建模板文件
 
-可以使用[创作 Azure Resource Manager 模板](/documentation/articles/resource-group-authoring-templates/)中的信息来创建自己的模板。也可以从 [Azure 快速入门模板](https://github.com/Azure/azure-quickstart-templates/)部署已创建的模板。
+可以使用[创作 Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)中的信息来创建自己的模板。也可以从 [Azure 快速入门模板](https://github.com/Azure/azure-quickstart-templates/)部署已创建的模板。
 
 1. 打开最喜欢的文本编辑器并添加所需的架构元素和所需的 contentVersion 元素：
 
@@ -38,7 +37,7 @@
           "$schema": "http://schema.management.azure.com/schemas/2014-04-01-preview/deploymentTemplate.json#",
           "contentVersion": "1.0.0.0",
         }
-2. [参数](/documentation/articles/resource-group-authoring-templates/#parameters)并非总是必需，但它们在部署参数时提供了一种输入值的方式。在 ContentVersion 元素后面添加 parameters 元素及其子元素：
+2. [参数](../azure-resource-manager/resource-group-authoring-templates.md#parameters)并非总是必需，但它们在部署参数时提供了一种输入值的方式。在 ContentVersion 元素后面添加 parameters 元素及其子元素：
 
         {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
@@ -49,7 +48,7 @@
           },
         }
 
-3. 可以在模板中使用[变量](/documentation/articles/resource-group-authoring-templates/#variables)来指定可能经常发生变化的值，或者需要从参数值的组合创建的值。在 parameters 节的后面添加 variables 元素：
+3. 可以在模板中使用[变量](../azure-resource-manager/resource-group-authoring-templates.md#variables)来指定可能经常发生变化的值，或者需要从参数值的组合创建的值。在 parameters 节的后面添加 variables 元素：
 
         {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
@@ -63,8 +62,8 @@
             "subnetRef": "[concat(variables('vnetID'),'/subnets/mysn1')]"  
           },
         }
-        
-4. 接下来将在模板中定义[资源](/documentation/articles/resource-group-authoring-templates/#resources)，例如虚拟机、虚拟网络和存储帐户。在 variables 节的后面添加 resources 节：
+
+4. 接下来将在模板中定义[资源](../azure-resource-manager/resource-group-authoring-templates.md#resources)，例如虚拟机、虚拟网络和存储帐户。在 variables 节的后面添加 resources 节：
 
         {
           "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
@@ -170,9 +169,10 @@
               }
             } ]
           }
-          
-    >[AZURE.NOTE] 本文创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅[使用 Windows PowerShell 和 Azure CLI 浏览和选择 Azure 虚拟机映像](/documentation/articles/virtual-machines-linux-cli-ps-findimage/)。
-            
+
+    >[!NOTE]
+    > 本文创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅[使用 Windows PowerShell 和 Azure CLI 浏览和选择 Azure 虚拟机映像](./virtual-machines-linux-cli-ps-findimage.md)。
+
 2. 将模板文件保存为 *VirtualMachineTemplate.json*。
 
 ## 步骤 2：创建参数文件
@@ -190,7 +190,8 @@
           }
         }
 
-    >[AZURE.NOTE] 查看有关[用户名和密码要求](/documentation/articles/virtual-machines-windows-faq/#what-are-the-username-requirements-when-creating-a-vm)的更多信息。
+    >[!NOTE]
+    > 查看有关[用户名和密码要求](./virtual-machines-windows-faq.md#what-are-the-username-requirements-when-creating-a-vm)的更多信息。
 
 2. 保存参数文件。
 
@@ -200,23 +201,23 @@
 
 ## 步骤 4：创建资源组
 
-必须在[资源组](/documentation/articles/resource-group-overview/)中部署所有资源。
+必须在[资源组](../azure-resource-manager/resource-group-overview.md)中部署所有资源。
 
 1. 获取可以创建资源的可用位置列表。
 
-	    Get-AzureRmLocation | sort DisplayName | Select DisplayName
+        Get-AzureRmLocation | sort DisplayName | Select DisplayName
 
 2. 使用列表中的位置（例如**中国北部**）替换 **$locName** 的值。创建变量。
 
         $locName = "location name"
-        
+
 3. 使用新资源组的名称替换 **$rgName** 的值。创建变量和资源组。
 
         $rgName = "resource group name"
         New-AzureRmResourceGroup -Name $rgName -Location $locName
-        
+
     用户应看到与此示例类似的内容：
-    
+
         ResourceGroupName : myrg1
         Location          : chinaeast
         ProvisioningState : Succeeded
@@ -248,11 +249,12 @@
 
         Outputs           :
 
->[AZURE.NOTE] 也可以从 Azure 存储帐户部署模板和参数。有关详细信息，请参阅[对 Azure 存储使用 Azure PowerShell](/documentation/articles/storage-powershell-guide-full/)。
+>[!NOTE]
+> 也可以从 Azure 存储帐户部署模板和参数。有关详细信息，请参阅[对 Azure 存储使用 Azure PowerShell](../storage/storage-powershell-guide-full.md)。
 
 ## 后续步骤
 
-- 如果部署出现问题，下一步是参阅[使用 Azure 门户预览排除资源组部署故障](/documentation/articles/resource-manager-troubleshoot-deployments-portal/)
-- 若要了解如何管理刚创建的虚拟机，请参阅[使用 Azure Resource Manager 和 PowerShell 管理虚拟机](/documentation/articles/virtual-machines-windows-ps-manage/)。
+- 如果部署出现问题，下一步是参阅[使用 Azure 门户预览排除资源组部署故障](../azure-resource-manager/resource-manager-troubleshoot-deployments-portal.md)
+- 若要了解如何管理刚创建的虚拟机，请参阅[使用 Azure Resource Manager 和 PowerShell 管理虚拟机](./virtual-machines-windows-ps-manage.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

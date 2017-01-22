@@ -1,35 +1,36 @@
-<properties
-	pageTitle="从移动服务升级到 Azure 应用服务"
-	description="了解如何轻松将移动服务应用程序升级到应用服务移动应用"
-	services="app-service\mobile"
-	documentationCenter=""
-	authors="adrianhall"
-	manager="dwrede"
-	editor=""/>
+---
+title: 从移动服务升级到 Azure 应用服务
+description: 了解如何轻松将移动服务应用程序升级到应用服务移动应用
+services: app-service\mobile
+documentationCenter: 
+authors: adrianhall
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="app-service-mobile"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="10/01/2016"
-	wacn.date="11/21/2016"
-	ms.author="adrianha"/>
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: adrianha
+---
 
 # 将现有 .NET Azure 移动服务升级到应用服务
 
 应用服务移动应用是使用 Azure 构建移动应用程序的新方式。有关的详细信息，请参阅 [What are Mobile Apps?]（什么是移动应用？）
 
-本主题介绍如何将现有 .NET 后端应用程序从 Azure 移动服务升级到新的应用服务移动应用。执行此升级时，现有移动服务应用程序可以继续正常运行。如果需要升级 Node.js 后端应用程序，请参阅 [Upgrading your Node.js Mobile Services](/documentation/articles/app-service-mobile-node-backend-upgrading-from-mobile-services/)（升级 Node.js 移动服务）。
+本主题介绍如何将现有 .NET 后端应用程序从 Azure 移动服务升级到新的应用服务移动应用。执行此升级时，现有移动服务应用程序可以继续正常运行。如果需要升级 Node.js 后端应用程序，请参阅 [Upgrading your Node.js Mobile Services](./app-service-mobile-node-backend-upgrading-from-mobile-services.md)（升级 Node.js 移动服务）。
 
 将某个移动后端升级到 Azure 应用服务后，该后端即可访问所有应用服务功能，同时会根据[应用服务定价]而不是移动服务定价进行计费。
 
 ##迁移与升级
 
-[AZURE.INCLUDE [app-service-mobile-migrate-vs-upgrade](../../includes/app-service-mobile-migrate-vs-upgrade.md)]
+[!INCLUDE [app-service-mobile-migrate-vs-upgrade](../../includes/app-service-mobile-migrate-vs-upgrade.md)]
 
->[AZURE.TIP] 建议在升级之前先[执行迁移](/documentation/articles/app-service-mobile-migrating-from-mobile-services/)。这样，就能在同一个应用服务计划中放置两个版本的应用程序，且无需支付额外的费用。
+>[!TIP]
+> 建议在升级之前先[执行迁移](./app-service-mobile-migrating-from-mobile-services.md)。这样，就能在同一个应用服务计划中放置两个版本的应用程序，且无需支付额外的费用。
 
 ###移动应用 .NET 服务器 SDK 改进
 
@@ -37,7 +38,7 @@
 
 - NuGet 依赖项有更大的灵活性。宿主环境不再提供其自身的 NuGet 包版本，因此可以使用替代的兼容版本。但是，如果移动服务器 SDK 或依赖项有新的关键 Bug 修复或安全更新，则必须手动更新服务。
 
-- 移动 SDK 有更大的灵活性。可以明确控制要设置哪些功能和路由，例如身份验证、表 API 和推送注册终结点。有关详细信息，请参阅 [How to use the .NET server SDK for Azure Mobile Apps](/documentation/articles/app-service-mobile-net-upgrading-from-mobile-services/#server-project-setup)（如何使用适用于 Azure 移动应用的 .NET 服务器 SDK）。
+- 移动 SDK 有更大的灵活性。可以明确控制要设置哪些功能和路由，例如身份验证、表 API 和推送注册终结点。有关详细信息，请参阅 [How to use the .NET server SDK for Azure Mobile Apps](./app-service-mobile-net-upgrading-from-mobile-services.md#server-project-setup)（如何使用适用于 Azure 移动应用的 .NET 服务器 SDK）。
 
 - 支持其他 ASP.NET 项目类型和路由。现在，可以在与移动后端项目相同的项目中托管 MVC 和 Web API 控制器。
 
@@ -47,7 +48,8 @@
 
 在许多情况下，只需切换到新的移动应用服务器 SDK 并将代码重新发布到新的移动应用实例，即可完成升级。但在某些情况下则需要一些额外的配置，例如高级身份验证方案和使用计划作业。后续部分将逐一介绍。
 
->[AZURE.TIP] 建议先阅读并充分了解本主题的余下内容，然后再开始升级。请记下以下概括的所有功能。
+>[!TIP]
+> 建议先阅读并充分了解本主题的余下内容，然后再开始升级。请记下以下概括的所有功能。
 
 移动服务客户端 SDK 与新的移动应用服务器 SDK **不**兼容。为了提供应用程序的服务连续性，不应该将更改发布到当前正在为发布的客户端提供服务的站点。而应该创建新的移动应用作为副本。可以在同一个应用服务计划中放置此应用程序，以免产生额外的财务成本。
 
@@ -63,7 +65,7 @@
 ##<a name="mobile-app-version"></a>创建第二个应用程序实例
 升级的第一个步骤是创建用于托管新版应用程序的移动应用资源。如果已迁移现有移动服务，则需要在同一个托管计划中创建此版本。打开 [Azure 门户预览]，导航到已迁移的应用程序。记下运行该应用程序的应用服务计划。
 
-接下来，根据 [.NET 后端创建说明](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#create-app)创建第二个应用程序实例。当系统提示选择应用服务计划或“托管计划”时，请选择已迁移的应用程序的计划。
+接下来，根据 [.NET 后端创建说明](./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#create-app)创建第二个应用程序实例。当系统提示选择应用服务计划或“托管计划”时，请选择已迁移的应用程序的计划。
 
 可能需要使用与移动服务中相同的数据库和通知中心。可以复制这些值，方法是打开 [Azure 门户预览]，导航到原始应用程序，然后单击“设置”>“应用程序设置”。在“连接字符串”下，复制 `MS_NotificationHubConnectionString` 和 `MS_TableConnectionString`。导航到新的升级站点并粘贴这些值，覆盖任何现有值。针对应用所需的任何其他应用程序设置重复此过程。如果未使用迁移的服务，可以从 [Azure 经典管理门户]上“移动服务”部分中的“配置”选项卡读取连接字符串和应用设置。
 
@@ -96,7 +98,8 @@
             .UseDefaultConfiguration()
         .ApplyTo(config);
 
->[AZURE.NOTE] 如果想要详细了解新的 .NET 服务器 SDK 以及如何在应用中添加/删除功能，请参阅 [How to use the .NET server SDK]（如何使用 .NET 服务器 SDK）主题。
+>[!NOTE]
+> 如果想要详细了解新的 .NET 服务器 SDK 以及如何在应用中添加/删除功能，请参阅 [How to use the .NET server SDK]（如何使用 .NET 服务器 SDK）主题。
 
 如果应用使用身份验证功能，则还需要注册 OWIN 中间件。在此情况下，应该将上述配置代码移入新的 OWIN 启动类。
 
@@ -200,7 +203,7 @@
 是否使用 CORS 的主要考虑范畴是必须允许 `eTag` 和 `Location` 标头，客户端 SDK 才能正常工作。
 
 ### 推送通知
-对于推送，可能会发现服务器 SDK 中遗漏的主项是 PushRegistrationHandler 类。注册在移动应用中的处理方式稍有不同，默认情况下启用不带标记的注册。可以使用自定义 API 实现标记管理。有关详细信息，请参阅[注册标记](/documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/#how-to-add-tags-to-a-device-installation-to-enable-push-to-tags)说明。
+对于推送，可能会发现服务器 SDK 中遗漏的主项是 PushRegistrationHandler 类。注册在移动应用中的处理方式稍有不同，默认情况下启用不带标记的注册。可以使用自定义 API 实现标记管理。有关详细信息，请参阅[注册标记](./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md#how-to-add-tags-to-a-device-installation-to-enable-push-to-tags)说明。
 
 ### 计划的作业
 移动应用中未内置计划的作业，因此在 .NET 后端中的任何现有作业都必须单独升级。一种做法是在移动应用代码站点上创建计划的 [Web 作业]。也可以设置用于保存作业代码的控制器，并设置按预期计划在终结点上运行的 [Azure 计划程序]。
@@ -219,7 +222,7 @@
 
 ##<a name="authentication"></a>身份验证注意事项
 
-移动服务的身份验证组件现已移入应用服务身份验证/授权功能。可以阅读 [Add authentication to your mobile app](/documentation/articles/app-service-mobile-ios-get-started-users/)（将身份验证添加到移动应用）主题，了解如何为站点启用此功能。
+移动服务的身份验证组件现已移入应用服务身份验证/授权功能。可以阅读 [Add authentication to your mobile app](./app-service-mobile-ios-get-started-users.md)（将身份验证添加到移动应用）主题，了解如何为站点启用此功能。
 
 对于某些提供程序（例如 AAD），应该可以利用复制应用程序的现有注册。只需导航到标识提供者的门户，并将新的重定向 URL 添加到注册即可。然后，使用客户端 ID 和机密配置应用服务身份验证/授权。
 
@@ -253,8 +256,8 @@
 
 可以通过以下链接，阅读有关安装新 SDK 以及使用新结构的信息：
 
-- [iOS 3.0.0 或更高版本](/documentation/articles/app-service-mobile-ios-how-to-use-client-library/)
-- [.NET (Windows/Xamarin) 2.0.0 或更高版本](/documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/)
+- [iOS 3.0.0 或更高版本](./app-service-mobile-ios-how-to-use-client-library.md)
+- [.NET (Windows/Xamarin) 2.0.0 或更高版本](./app-service-mobile-dotnet-how-to-use-client-library.md)
 
 如果应用程序使用推送通知，请记下每个平台的特定注册说明，因为相关的注册也发生了一些更改。
 
@@ -264,18 +267,18 @@
 
 [Azure 门户预览]: https://portal.azure.cn/
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
-[What are Mobile Apps?]: /documentation/articles/app-service-mobile-value-prop/
-[I already use web sites and mobile services - how does App Service help me?]: /documentation/articles/app-service-mobile-value-prop-migration-from-mobile-services/
+[What are Mobile Apps?]: ./app-service-mobile-value-prop.md
+[I already use web sites and mobile services - how does App Service help me?]: ./app-service-mobile-value-prop-migration-from-mobile-services.md
 [移动应用服务器 SDK]: http://www.nuget.org/packages/microsoft.azure.mobile.server
-[Create a Mobile App]: /documentation/articles/app-service-mobile-xamarin-ios-get-started/
-[Add push notifications to your mobile app]: /documentation/articles/app-service-mobile-xamarin-ios-get-started-push/
-[Add authentication to your mobile app]: /documentation/articles/app-service-mobile-xamarin-ios-get-started-users/
-[Azure 计划程序]: /documentation/services/scheduler/
-[Web 作业]: /documentation/articles/websites-webjobs-resources/
-[How to use the .NET server SDK]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
-[Migrate from Mobile Services to an App Service Mobile App]: /documentation/articles/app-service-mobile-migrating-from-mobile-services/
-[Migrate your existing Mobile Service to App Service]: /documentation/articles/app-service-mobile-migrating-from-mobile-services/
-[应用服务定价]: /pricing/details/app-service/
-[.NET server SDK overview]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
+[Create a Mobile App]: ./app-service-mobile-xamarin-ios-get-started.md
+[Add push notifications to your mobile app]: ./app-service-mobile-xamarin-ios-get-started-push.md
+[Add authentication to your mobile app]: ./app-service-mobile-xamarin-ios-get-started-users.md
+[Azure 计划程序]: ../scheduler/index.md
+[Web 作业]: ../app-service-web/websites-webjobs-resources.md
+[How to use the .NET server SDK]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[Migrate from Mobile Services to an App Service Mobile App]: ./app-service-mobile-migrating-from-mobile-services.md
+[Migrate your existing Mobile Service to App Service]: ./app-service-mobile-migrating-from-mobile-services.md
+[应用服务定价]: https://www.azure.cn/pricing/details/app-service/
+[.NET server SDK overview]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
 
 <!---HONumber=Mooncake_0919_2016-->

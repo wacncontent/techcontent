@@ -1,25 +1,25 @@
-<properties 
-	pageTitle="将图像从通用 Windows 应用上载到 Azure Blob 存储 | Azure" 
-	description="了解如何使用 JavaScript 后端移动服务将图像上载到 Azure Blob 存储和从通用 Windows 应用访问图像。" 
-	services="mobile-services,storage" 
-	documentationCenter="windows" 
-	authors="ggailey777" 
-	manager="dwrede" 
-	editor=""/>
+---
+title: 将图像从通用 Windows 应用上载到 Azure Blob 存储 | Azure
+description: 了解如何使用 JavaScript 后端移动服务将图像上载到 Azure Blob 存储和从通用 Windows 应用访问图像。
+services: mobile-services,storage
+documentationCenter: windows
+authors: ggailey777
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows-store"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="glenga"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows-store
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: glenga
+---
 
 # 使用移动服务将图像上载到 Azure Blob 存储
 
-[AZURE.INCLUDE [mobile-services-selector-upload-data-blob-storage](../../includes/mobile-services-selector-upload-data-blob-storage.md)]
+[!INCLUDE [mobile-services-selector-upload-data-blob-storage](../../includes/mobile-services-selector-upload-data-blob-storage.md)]
 
 ##概述 
 
@@ -34,31 +34,29 @@
 本教程需要的内容如下：
 
 + Microsoft Visual Studio 2013 Update 3 或更高版本
-+ [Azure 存储帐户](/documentation/articles/storage-create-storage-account/)
++ [Azure 存储帐户](../storage/storage-create-storage-account.md)
 + 连接到你的计算机的照相机或其他图像捕获设备。
 
 本教程基于移动服务快速入门。在开始本教程之前，必须先[完成移动服务入门]。
 
 ##在 Azure 经典管理门户中更新已注册的插入脚本
 
-[AZURE.INCLUDE [mobile-services-configure-blob-storage](../../includes/mobile-services-configure-blob-storage.md)]
+[!INCLUDE [mobile-services-configure-blob-storage](../../includes/mobile-services-configure-blob-storage.md)]
 
-[AZURE.INCLUDE [mobile-services-windows-universal-dotnet-upload-to-blob-storage](../../includes/mobile-services-windows-universal-dotnet-upload-to-blob-storage.md)]
+[!INCLUDE [mobile-services-windows-universal-dotnet-upload-to-blob-storage](../../includes/mobile-services-windows-universal-dotnet-upload-to-blob-storage.md)]
 
 ##后续步骤
 
 现在，你已能够通过将移动服务与 Blob 服务集成安全地上载图片，请查看一些其他的后端服务和集成主题：
 
-
 + [移动服务服务器脚本参考]
 
     参考使用服务器脚本执行服务器端任务，并与其他 Azure 组件和外部资源集成的主题。
- 
+
 + [移动服务 .NET 操作方法概念性参考]
 
     了解有关如何将移动服务与 .NET 一起使用的详细信息
-  
- 
+
 <!-- Anchors. -->
 [Install the Storage Client library]: #install-storage-client
 [Update the client app to capture images]: #add-select-images
@@ -70,19 +68,17 @@
 
 [2]: ./media/mobile-services-windows-store-dotnet-upload-data-blob-storage/mobile-add-storage-nuget-package-dotnet.png
 
-
 <!-- URLs. -->
-[Send email from Mobile Services with SendGrid]: /documentation/articles/store-sendgrid-mobile-services-send-email-scripts/
+[Send email from Mobile Services with SendGrid]: ./store-sendgrid-mobile-services-send-email-scripts.md
 
 [Send push notifications to Windows Store apps using Service Bus from a .NET back-end]: http://go.microsoft.com/fwlink/?LinkId=277073&clcid=0x409
-[移动服务服务器脚本参考]: /documentation/articles/mobile-services-how-to-use-server-scripts/
-[完成移动服务入门]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/
+[移动服务服务器脚本参考]: ./mobile-services-how-to-use-server-scripts.md
+[完成移动服务入门]: ./mobile-services-javascript-backend-windows-store-dotnet-get-started.md
 
 [Azure Management Portal]: https://manage.windowsazure.cn
-[How To Create a Storage Account]: /documentation/articles/storage-create-storage-account/
+[How To Create a Storage Account]: ../storage/storage-create-storage-account.md
 [Azure Storage Client library for Store apps]: http://go.microsoft.com/fwlink/p/?LinkId=276866
-[移动服务 .NET 操作方法概念性参考]: /documentation/articles/mobile-services-dotnet-how-to-use-client-library/
+[移动服务 .NET 操作方法概念性参考]: ./mobile-services-dotnet-how-to-use-client-library.md
 [App settings]: http://msdn.microsoft.com/zh-cn/library/windowsazure/b6bb7d2d-35ae-47eb-a03f-6ee393e170f7
- 
 
 <!---HONumber=Mooncake_0118_2016-->

@@ -1,27 +1,27 @@
-<properties
-	pageTitle="在 Azure 应用服务中生成和部署 Java API 应用"
-	description="了解如何创建 Java API 应用包并将其部署到 Azure 应用服务。"
-	services="app-service\api"
-	documentationCenter="java"
-	authors="bradygaster"
-	manager="mohisri"
-	editor="tdykstra"/>
+---
+title: 在 Azure 应用服务中生成和部署 Java API 应用
+description: 了解如何创建 Java API 应用包并将其部署到 Azure 应用服务。
+services: app-service\api
+documentationCenter: java
+authors: bradygaster
+manager: mohisri
+editor: tdykstra
 
-<tags
-	ms.service="app-service-api"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="java"
-	ms.topic="get-started-article"
-	ms.date="10/19/2016"
-	wacn.date="12/30/2016"
-	ms.author="rachelap"/>
+ms.service: app-service-api
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: java
+ms.topic: get-started-article
+ms.date: 10/19/2016
+wacn.date: 12/30/2016
+ms.author: rachelap
+---
 
 # 在 Azure 应用服务中生成和部署 Java API 应用
 
-[AZURE.INCLUDE [app-service-api-get-started-selector](../../includes/app-service-api-get-started-selector.md)]
+[!INCLUDE [app-service-api-get-started-selector](../../includes/app-service-api-get-started-selector.md)]
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本教程介绍如何创建 Java 应用程序，并使用 [Git] 将其部署到 Azure 应用服务 API 应用。本教程中的说明适用于任何能够运行 Java 的操作系统。本教程中的代码是使用 [Maven] 生成的。将使用 [Jax-RS] 创建 RESTful 服务，这些 Jax-RS 是根据 [Swagger] 元数据规范使用[Swagger 编辑器]生成的。
 
@@ -191,7 +191,7 @@
 
         @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JaxRSServerCodegen", date = "2015-11-24T21:54:11.648Z")
         public class ContactsApiServiceImpl extends ContactsApiService {
-  
+
             private ArrayList<Contact> loadContacts()
             {
                 ArrayList<Contact> list = new ArrayList<Contact>();
@@ -200,20 +200,20 @@
                 list.add(new Contact(3, "Lora Riggs", "lora@contoso.com"));
                 return list;
             }
-  
+
             @Override
             public Response contactsGet(SecurityContext securityContext)
             throws NotFoundException {
                 ArrayList<Contact> list = loadContacts();
                 return Response.ok().entity(list).build();
                 }
-  
+
             @Override
             public Response contactsGetById(Integer id, SecurityContext securityContext)
             throws NotFoundException {
                 ArrayList<Contact> list = loadContacts();
                 Contact ret = null;
-            
+
                 for(int i=0; i<list.size(); i++)
                 {
                     if(list.get(i).getId() == id)
@@ -304,10 +304,10 @@
 
 <!-- URL List -->
 
-[App Service API CORS]: /documentation/articles/app-service-api-cors-consume-javascript/
+[App Service API CORS]: ./app-service-api-cors-consume-javascript.md
 [Azure 门户预览]: https://portal.azure.cn/
-[Document DB Java SDK]: /documentation/articles/documentdb-java-application/
-[试用]: /pricing/1rmb-trial/
+[Document DB Java SDK]: ../documentdb/documentdb-java-application.md
+[试用]: https://www.azure.cn/pricing/1rmb-trial/
 [Git]: http://www.git-scm.com/
 [Java Developer Center]: /develop/java/
 [Java 开发人员工具包 8]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
@@ -316,7 +316,7 @@
 [Azure]: https://www.azure.cn/
 [在线 Swagger 编辑器]: http://editor.swagger.io/
 [Postman]: https://www.getpostman.com/
-[用于 Java 的存储 SDK]: /documentation/articles/storage-java-how-to-use-blob-storage/
+[用于 Java 的存储 SDK]: ../storage/storage-java-how-to-use-blob-storage.md
 [Swagger]: http://swagger.io/
 [Swagger 编辑器]: http://editor.swagger.io/
 [Visual Studio Code]: https://code.visualstudio.com

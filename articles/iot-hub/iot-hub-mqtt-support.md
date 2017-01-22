@@ -1,23 +1,21 @@
-<properties
- pageTitle="IoT 中心 MQTT 支持 | Azure"
- description="介绍 IoT 中心级别的 MQTT 支持"
- services="iot-hub"
- documentationCenter=".net"
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: IoT 中心 MQTT 支持 | Azure
+description: 介绍 IoT 中心级别的 MQTT 支持
+services: iot-hub
+documentationCenter: .net
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="10/24/2016"
- wacn.date="01/04/2017"
- ms.author="kdotchko"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/24/2016
+wacn.date: 01/04/2017
+ms.author: kdotchko
+---
 
 # IoT 中心 MQTT 支持
 
@@ -62,14 +60,14 @@ IoT 中心允许设备在端口 8883 上使用 [MQTT v3.1.1][lnk-mqtt-org] 协�
 - “密码”字段使用 SAS 令牌。对于 HTTP 和 AMQP 协议，SAS 令牌的格式是相同的：<br/>`SharedAccessSignature sig={signature-string}&se={expiry}&sr={URL-encoded-resourceURI}`。
 
     有关如何生成 SAS 令牌的详细信息，请参阅[使用 IoT 中心安全令牌][lnk-sas-tokens]的设备部分。
-    
+
     测试时也可以使用设备资源管理器工具来快速生成可以复制并粘贴到自己的代码中的 SAS 令牌。
-    
+
     1. 转到设备资源管理器中的“管理”选项卡。
     2. 单击“SAS 令牌”（右上角）。
     3. 在 **SASTokenForm** 上，从“DeviceID”下拉列表中选择你的设备。设置 **TTL**。
     4. 单击“生成”创建令牌。
-    
+
     所生成的 SAS 令牌具有以下结构：
     `HostName={your hub name}.azure-devices.cn;DeviceId=javadevice;SharedAccessSignature=SharedAccessSignature sr={your hub name}.azure-devices.cn%2fdevices%2fMyDevice01&sig=vSgHBMUG.....Ntg%3d&se=1456481802`。
 
@@ -82,9 +80,10 @@ IoT 中心允许设备在端口 8883 上使用 [MQTT v3.1.1][lnk-mqtt-org] 协�
 
 成功建立连接后，设备可以使用 `devices/{device_id}/messages/events/` 或 `devices/{device_id}/messages/events/{property_bag}` 作为**主题名称**将消息发送到 IoT 中心。`{property_bag}` 元素可让设备使用 URL 编码格式发送包含其他属性的消息。例如：
 
-		RFC 2396-encoded(<PropertyName1>)=RFC 2396-encoded(<PropertyValue1>)&RFC 2396-encoded(<PropertyName2>)=RFC 2396-encoded(<PropertyValue2>)…
+        RFC 2396-encoded(<PropertyName1>)=RFC 2396-encoded(<PropertyValue1>)&RFC 2396-encoded(<PropertyName2>)=RFC 2396-encoded(<PropertyValue2>)…
 
-> [AZURE.NOTE] 此 `{property_bag}` 元素使用的编码与 HTTP 协议中用于查询字符串的编码相同。
+> [!NOTE]
+> 此 `{property_bag}` 元素使用的编码与 HTTP 协议中用于查询字符串的编码相同。
 
 设备客户端应用程序还可以使用 `devices/{device_id}/messages/events/{property_bag}` 作为 **Will 主题名称**，来定义要以遥测消息形式转发的 *Will 消息*。
 
@@ -119,17 +118,17 @@ IoT 中心允许设备在端口 8883 上使用 [MQTT v3.1.1][lnk-mqtt-org] 协�
 [lnk-sample-csharp]: https://github.com/Azure/azure-iot-sdks/tree/master/csharp/device/samples
 [lnk-sample-python]: https://github.com/Azure/azure-iot-sdks/tree/master/python/device/samples
 [lnk-device-explorer]: https://github.com/Azure/azure-iot-sdks/blob/master/tools/DeviceExplorer/readme.md
-[lnk-sas-tokens]: /documentation/articles/iot-hub-devguide-security/#use-sas-tokens-in-a-device-app
-[lnk-mqtt-devguide]: /documentation/articles/iot-hub-devguide-messaging/#notes-on-mqtt-support
+[lnk-sas-tokens]: ./iot-hub-devguide-security.md#use-sas-tokens-in-a-device-app
+[lnk-mqtt-devguide]: ./iot-hub-devguide-messaging.md#notes-on-mqtt-support
 
-[lnk-devices]: /documentation/articles/iot-hub-tested-configurations/
-[lnk-protocols]: /documentation/articles/iot-hub-protocol-gateway/
-[lnk-compare]: /documentation/articles/iot-hub-compare-event-hubs/
-[lnk-scaling]: /documentation/articles/iot-hub-scaling/
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-devices]: ./iot-hub-tested-configurations.md
+[lnk-protocols]: ./iot-hub-protocol-gateway.md
+[lnk-compare]: ./iot-hub-compare-event-hubs.md
+[lnk-scaling]: ./iot-hub-scaling.md
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
 
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-messaging]: /documentation/articles/iot-hub-devguide-messaging/
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-messaging]: ./iot-hub-devguide-messaging.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

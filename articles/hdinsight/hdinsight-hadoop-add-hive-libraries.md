@@ -1,21 +1,21 @@
-<properties
-pageTitle="在 HDInsight 群集创建过程中添加 Hive 库 | Azure"
-description="了解如何在群集创建过程中将 Hive 库（jar 文件）添加到 HDInsight 群集。"
-services="hdinsight"
-documentationCenter=""
-authors="Blackmist"
-manager="paulettm"
-editor="cgronlun"/>
+---
+title: 在 HDInsight 群集创建过程中添加 Hive 库 | Azure
+description: 了解如何在群集创建过程中将 Hive 库（jar 文件）添加到 HDInsight 群集。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
 
-<tags
-ms.service="hdinsight"
-ms.devlang="na"
-ms.topic="article"
-ms.tgt_pltfrm="na"
-ms.workload="big-data"
-ms.date="09/20/2016"
-wacn.date="12/26/2016"
-ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 09/20/2016
+wacn.date: 12/26/2016
+ms.author: larryfr
+---
 
 #在 HDInsight 群集创建过程中添加 Hive 库
 
@@ -27,7 +27,8 @@ ms.author="larryfr"/>
 
 在群集创建过程中，该脚本将枚举文件、将这些文件复制到头节点和工作节点上的 `/usr/lib/customhivelibs/` 目录，然后将它们添加到 `core-site.xml` 文件中的 `hive.aux.jars.path` 属性。
 
-> [AZURE.NOTE] 使用本文中的脚本操作使库可用于以下方案：
+> [!NOTE]
+> 使用本文中的脚本操作使库可用于以下方案：
 > * __基于 Windows 的 HDInsight__ - 当使用 __Hive 命令行__和 __WebHCat__ (Templeton) 时。
 
 ##脚本
@@ -45,17 +46,18 @@ __要求__
 * 在创建期间，包含 jar 文件的库的存储帐户__必须__链接到 HDInsight 群集。可以通过两种方式之一完成此操作：
 
     * 在群集的默认存储帐户上的容器中。
-    
+
     * 在链接的存储容器上的容器中。例如，在经典管理门户中，可以使用“可选配置”、“链接存储帐户”添加额外存储。
 
 * 必须指定容器的 WASB 路径作为脚本操作的参数。例如，如果 jar 存储在名为 __mystorage__ 的存储帐户上名为 __libs__ 的容器中，则该参数应为 __wasbs://libs@mystorage.blob.core.chinacloudapi.cn/__。
 
-    > [AZURE.NOTE] 本文档假定你已创建存储帐户、blob 容器，并已将文件上传到该容器。
+    > [!NOTE]
+    > 本文档假定你已创建存储帐户、blob 容器，并已将文件上传到该容器。
     ><p> 如果尚未创建存储帐户，可以通过 [Azure 经典管理门户](https://manage.windowsazure.cn)创建该帐户。然后可以使用实用工具（如 [Azure 存储资源管理器](http://storageexplorer.com/)）在帐户中新建容器并将文件上传到该容器。
 
 ##使用脚本创建群集。
 
-1. 使用[预配 HDInsight 群集](/documentation/articles/hdinsight-provision-clusters-v1/#portal)中的步骤开始预配群集，但不要完成预配。
+1. 使用[预配 HDInsight 群集](./hdinsight-provision-clusters-v1.md#portal)中的步骤开始预配群集，但不要完成预配。
 
 2. 在“可选配置”边栏选项卡上，选择“脚本操作”，并提供如下所示信息：
 
@@ -72,12 +74,12 @@ __要求__
 
 5. 使用“可选配置”边栏选项卡底部的“选择”按钮以保存可选配置信息。
 
-6. 如[预配 HDInsight 群集](/documentation/articles/hdinsight-provision-clusters-v1/#portal)中所述，继续预配群集。
+6. 如[预配 HDInsight 群集](./hdinsight-provision-clusters-v1.md#portal)中所述，继续预配群集。
 
 群集创建完成后，你将能够使用通过此脚本从 Hive 添加的 jar，而无需使用 `ADD JAR` 语句。
 
 ##后续步骤
 
-在本文档中，你已了解如何在群集创建过程中将 jar 文件中包含的 Hive 库添加到 HDInsight 群集中。有关使用 Hive 的详细信息，请参阅[将 Hive 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-hive/)
+在本文档中，你已了解如何在群集创建过程中将 jar 文件中包含的 Hive 库添加到 HDInsight 群集中。有关使用 Hive 的详细信息，请参阅[将 Hive 与 HDInsight 配合使用](./hdinsight-use-hive.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

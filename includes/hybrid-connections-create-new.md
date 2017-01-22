@@ -5,19 +5,19 @@
 
 3. 指定“BizTalk 服务名称”并选择“版本”。
 
-	本教程使用 **mobile1**。你需要为新的 BizTalk 服务提供唯一名称。
+    本教程使用 **mobile1**。你需要为新的 BizTalk 服务提供唯一名称。
 
 4. 创建 BizTalk 服务后，请选择“混合连接”选项卡，然后单击“添加”。
 
-	![添加混合连接](./media/hybrid-connections-create-new/3.png)
+    ![添加混合连接](./media/hybrid-connections-create-new/3.png)
 
-	这将会创建一个新的混合连接。
+    这将会创建一个新的混合连接。
 
 5. 指定混合连接的“名称”和“主机名”，然后将“端口”设置为 `1433`。
-  
-	![配置混合连接](./media/hybrid-connections-create-new/4.png)
 
-	主机名就是本地服务器的名称。这会将混合连接配置为访问端口 1433 上运行的 SQL Server。如果你使用命名的 SQL Server 实例，请改用前面定义的静态端口。
+    ![配置混合连接](./media/hybrid-connections-create-new/4.png)
+
+    主机名就是本地服务器的名称。这会将混合连接配置为访问端口 1433 上运行的 SQL Server。如果你使用命名的 SQL Server 实例，请改用前面定义的静态端口。
 
 6. 创建新连接后，新连接的状态将显示为“本地安装未完成”。
 

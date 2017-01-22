@@ -1,36 +1,38 @@
-<properties
-  pageTitle="准备环境以使用 Azure 备份服务器来备份工作负荷 | Azure"
-  description="确保正确准备好你的环境，以使用 Azure 备份服务器来备份工作负荷"
-  services="backup"
-  documentationCenter=""
-  authors="trinadhk"
-  manager="shreeshd"
-  editor=""
-  keywords="azure 备份的服务器;备份保管库"/>
+---
+title: 准备环境以使用 Azure 备份服务器来备份工作负荷 | Azure
+description: 确保正确准备好你的环境，以使用 Azure 备份服务器来备份工作负荷
+services: backup
+documentationCenter: 
+authors: trinadhk
+manager: shreeshd
+editor: 
+keywords: azure 备份的服务器;备份保管库
 
-<tags
-  ms.service="backup"
-  ms.workload="storage-backup-recovery"
-  ms.tgt_pltfrm="na"
-  ms.devlang="na"
-  ms.topic="article"
-  ms.date="09/27/2016"
-  wacn.date="12/30/2016"
-  ms.author="jimpark;trinadhk;pullabhk;markgal"/>
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 12/30/2016
+ms.author: jimpark;trinadhk;pullabhk;markgal
+---
 
 # 准备使用 Azure 备份服务器来备份工作负荷
 
-> [AZURE.SELECTOR]
-- [Azure 备份服务器（经典）](/documentation/articles/backup-azure-microsoft-azure-backup-classic/)
-- [SCDPM（经典）](/documentation/articles/backup-azure-dpm-introduction-classic/)
+> [!div class="op_single_selector"]
+- [Azure 备份服务器（经典）](./backup-azure-microsoft-azure-backup-classic.md)
+- [SCDPM（经典）](./backup-azure-dpm-introduction-classic.md)
 
 本文介绍如何准备环境，以使用 Azure 备份服务器来备份工作负荷。
 
-> [AZURE.NOTE] Azure 有两种用于创建和使用资源的部署模型：[Resource Manager 和经典部署模型](/documentation/articles/resource-manager-deployment-model/)。本文提供有关还原使用 Resource Manager 模型部署的 VM 的信息和过程。
+> [!NOTE]
+> Azure 有两种用于创建和使用资源的部署模型：[Resource Manager 和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文提供有关还原使用 Resource Manager 模型部署的 VM 的信息和过程。
 
 使用 Azure 备份服务器，可以从单个控制台保护应用程序工作负荷，例如 Hyper-V VM、Microsoft SQL Server、SharePoint Server、Microsoft Exchange 和 Windows 客户端。
 
->[AZURE.WARNING] Azure 备份服务器继承了 Data Protection Manager (DPM) 的工作负荷备份功能。本文提供了其中一些功能的 DPM 文档链接。不过，Azure 备份服务器不能在磁带上提供保护，也没有与 System Center 集成。
+>[!WARNING]
+> Azure 备份服务器继承了 Data Protection Manager (DPM) 的工作负荷备份功能。本文提供了其中一些功能的 DPM 文档链接。不过，Azure 备份服务器不能在磁带上提供保护，也没有与 System Center 集成。
 
 ## 1\.Windows Server 计算机
 
@@ -41,7 +43,8 @@
 | Azure | Azure IaaS 虚拟机<br><br>A2 标准：双核，3.5GB RAM | 可以先从 Windows Server 2012 R2 Datacenter 的简单库映像着手。[使用 Azure 备份服务器 (DPM) 保护 IaaS 工作负荷](https://technet.microsoft.com/zh-cn/library/jj852163.aspx)有许多细节需要注意。部署计算机之前，请务必阅读相关文章。 |
 | 本地 | Hyper-V VM、<br>VMWare VM<br> 或物理主机<br><br>双核，4GB RAM | 可以使用 Windows Server 重复数据删除来删除 DPM 存储中的重复数据。了解有关在 Hyper-V VM 中部署时，[DPM 和重复数据删除](https://technet.microsoft.com/zh-cn/library/dn891438.aspx)如何配合工作的详细信息。 |
 
-> [AZURE.NOTE] 建议在包含 Windows Server 2012 R2 Datacenter 的计算机上安装 Azure 备份服务器。最新版本的 Windows 操作系统会自动安装许多必备组件。
+> [!NOTE]
+> 建议在包含 Windows Server 2012 R2 Datacenter 的计算机上安装 Azure 备份服务器。最新版本的 Windows 操作系统会自动安装许多必备组件。
 
 如果你打算在将来某个时间将此服务器加入域中，建议在安装 Azure 备份服务器之前完成域加入活动。部署之后，不支持将现有 Azure 备份服务器计算机移到新域中。
 
@@ -63,7 +66,7 @@
 
         New-AzureRmRecoveryServicesVault -Name "testvault" -ResourceGroupName " test-rg" -Location "West US"
 
-4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](/documentation/articles/storage-redundancy/#locally-redundant-storage) 或[异地冗余存储 (GRS)](/documentation/articles/storage-redundancy/#geo-redundant-storage)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
+4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md#locally-redundant-storage) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
 
         $vault1 = Get-AzureRmRecoveryServicesVault –Name "testVault"
         Set-AzureRmRecoveryServicesBackupProperties  -Vault $vault1 -BackupStorageRedundancy GeoRedundant
@@ -85,13 +88,12 @@
 
     由于所有文件的下载大小合计超过了 3G，在 10Mbps 下载链路上可能需要 60 分钟才能完成下载。
 
-
 ### 解压缩软件包
 
 下载所有文件之后，单击“MicrosoftAzureBackupInstaller.exe”。这将启动“Microsoft Azure 备份安装向导”，并将安装程序文件解压缩到指定的位置。继续运行向导，然后单击“解压缩”按钮开始解压缩过程。
 
-> [AZURE.WARNING] 至少需要有 4GB 的可用空间才能解压缩安装程序文件。
-
+> [!WARNING]
+> 至少需要有 4GB 的可用空间才能解压缩安装程序文件。
 
 ![Microsoft Azure 备份安装向导](./media/backup-azure-microsoft-azure-backup/extract/03.png)
 
@@ -113,7 +115,8 @@
 
     如果发生故障并且系统建议重新启动计算机，请按说明操作，然后单击“再次检查”。
 
-    > [AZURE.NOTE] Azure 备份服务器不能与远程 SQL Server 实例配合使用。Azure 备份服务器使用的实例需在本地。
+    > [!NOTE]
+    > Azure 备份服务器不能与远程 SQL Server 实例配合使用。Azure 备份服务器使用的实例需在本地。
 
 4. 提供 Microsoft Azure 备份服务器文件的安装位置，然后单击“下一步”。
 
@@ -127,7 +130,8 @@
 
 6. 选择是否要使用 Microsoft 更新来检查更新，然后单击“下一步”。
 
-    >[AZURE.NOTE] 我们建议让 Windows 更新重定向到 Microsoft 更新，此网站为 Windows 和 Microsoft Azure 备份服务器等其他产品提供了安全更新与重要更新。
+    >[!NOTE]
+    > 我们建议让 Windows 更新重定向到 Microsoft 更新，此网站为 Windows 和 Microsoft Azure 备份服务器等其他产品提供了安全更新与重要更新。
 
     ![Microsoft Azure 备份先决条件 2](./media/backup-azure-microsoft-azure-backup/update-opt-screen2.png)
 
@@ -145,14 +149,14 @@
 
     ![Azure 备份服务器](./media/backup-azure-microsoft-azure-backup/final-install/venus-installation-screen.png)
 
-
 安装步骤完成后，会一同创建产品的桌面图标。双击该图标即可启动该产品。
 
 ### 添加备份存储
 
 第一个备份副本保存在已附加到 Azure 备份服务器计算机的存储中。有关添加磁盘的详细信息，请参阅[配置存储池和磁盘存储](https://technet.microsoft.com/zh-cn/library/hh758075.aspx)。
 
-> [AZURE.NOTE] 即使你打算将数据发送到 Azure，也需要添加备份存储。在当前的 Azure 备份服务器体系结构中，Azure 备份保管库将保存数据的第二个副本，而本地存储将保存第一个（必需的）备份副本。
+> [!NOTE]
+> 即使你打算将数据发送到 Azure，也需要添加备份存储。在当前的 Azure 备份服务器体系结构中，Azure 备份保管库将保存数据的第二个副本，而本地存储将保存第一个（必需的）备份副本。
 
 ## 4\.网络连接
 
@@ -189,12 +193,10 @@ Azure 备份服务器需要连接到 Azure 备份服务才能成功运行。若�
 - “已取消预配”的订阅在取消预配的这段期间将失去功能。切换为“活动”后，将恢复产品的备份/还原功能。此外，只要以够长的保留期来保存本地磁盘上的备份数据，则还可以检索这些数据。但是，一旦订阅进入“已取消预配”状态，Azure 中的备份数据便会无可挽回地丢失。
 - “已过期”的订阅只会在恢复“活动”状态之前失去功能。在订阅处于“已过期”期间计划的任何备份都不会运行。
 
-
 ## 故障排除
 
 如果 Microsoft Azure 备份服务器在安装阶段（或者备份或还原时）失败并出现错误，请参阅此[错误代码文档](https://support.microsoft.com/kb/3041338)以获取详细信息。
-此外，还可以参考 [Azure 备份相关的常见问题](/documentation/articles/backup-azure-backup-faq/)
-
+此外，还可以参考 [Azure 备份相关的常见问题](./backup-azure-backup-faq.md)
 
 ## 后续步骤
 
@@ -202,8 +204,8 @@ Azure 备份服务器需要连接到 Azure 备份服务才能成功运行。若�
 
 请参阅这些文章，以深入了解如何使用 Microsoft Azure 备份服务器来保护工作负荷。
 
-- [SQL Server 备份](/documentation/articles/backup-azure-backup-sql/)
-- [SharePoint Server 备份](/documentation/articles/backup-azure-backup-sharepoint/)
-- [备用服务器备份](/documentation/articles/backup-azure-alternate-dpm-server/)
+- [SQL Server 备份](./backup-azure-backup-sql.md)
+- [SharePoint Server 备份](./backup-azure-backup-sharepoint.md)
+- [备用服务器备份](./backup-azure-alternate-dpm-server.md)
 
 <!---HONumber=Mooncake_0808_2016-->

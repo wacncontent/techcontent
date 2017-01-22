@@ -1,23 +1,21 @@
-<properties
- pageTitle="开发人员指南 - 配额和限制 | Azure"
- description="Azure IoT 中心开发人员指南 - 适用于 IoT 中心的配额和预期的限制行为的说明"
- services="iot-hub"
- documentationCenter=".net"
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: 开发人员指南 - 配额和限制 | Azure
+description: Azure IoT 中心开发人员指南 - 适用于 IoT 中心的配额和预期的限制行为的说明
+services: iot-hub
+documentationCenter: .net
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="multiple"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="09/30/2016"
- wacn.date="12/12/2016" 
- ms.author="dobett"/>  
-
+ms.service: iot-hub
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/30/2016
+wacn.date: 12/12/2016
+ms.author: dobett
+---
 
 # 参考 - 配额和限制
 
@@ -52,10 +50,11 @@ SKU 还确定了 IoT 中心对所有操作强制实施的限制。
 
 例如，如果你购买的是单一 S1 单位，则限制为每秒 100 个连接。这意味着，若要连接 100,000 台设备，至少需要花费 1000 秒（大约 16 分钟）。但是，同时连接的设备数可与你在设备标识注册表中注册的设备数相同。
 
+>[!NOTE]
+> 无论何时，都可以通过增加 IoT 中心预配的单位来提高配额或限制。
 
->[AZURE.NOTE] 无论何时，都可以通过增加 IoT 中心预配的单位来提高配额或限制。
-
->[AZURE.IMPORTANT] 标识注册表操作用于设备管理与预配方案中的运行时使用。通过[导入和导出作业][lnk-importexport]可以支持读取或更新大量的设备标识。
+>[!IMPORTANT]
+> 标识注册表操作用于设备管理与预配方案中的运行时使用。通过[导入和导出作业][lnk-importexport]可以支持读取或更新大量的设备标识。
 
 ## 其他限制
 
@@ -74,12 +73,12 @@ IoT 中心对其不同的功能实施其他限制。
 - [设备孪生、方法和作业的 IoT 中心查询语言][lnk-devguide-query]
 - [IoT 中心 MQTT 支持][lnk-devguide-mqtt]
 
-[lnk-pricing]: /pricing/details/iot-hub
+[lnk-pricing]: https://www.azure.cn/pricing/details/iot-hub
 [lnk-throttle-blog]: https://azure.microsoft.com/blog/iot-hub-throttling-and-you/
-[lnk-importexport]: /documentation/articles/iot-hub-devguide-identity-registry/#import-and-export-device-identities
+[lnk-importexport]: ./iot-hub-devguide-identity-registry.md#import-and-export-device-identities
 
-[lnk-devguide-endpoints]: /documentation/articles/iot-hub-devguide-endpoints/
-[lnk-devguide-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-devguide-endpoints]: ./iot-hub-devguide-endpoints.md
+[lnk-devguide-query]: ./iot-hub-devguide-query-language.md
+[lnk-devguide-mqtt]: ./iot-hub-mqtt-support.md
 
 <!---HONumber=Mooncake_1205_2016-->

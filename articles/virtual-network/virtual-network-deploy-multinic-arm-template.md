@@ -1,35 +1,34 @@
-<properties
-    pageTitle="使用模板创建具有多个 NIC 的 VM | Azure"
-    description="通过 Azure Resource Manager 使用模板创建具有多个 NIC 的 VM。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用模板创建具有多个 NIC 的 VM | Azure
+description: 通过 Azure Resource Manager 使用模板创建具有多个 NIC 的 VM。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="486f7dd5-cf2f-434c-85d1-b3e85c427def"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/02/2016"
-    wacn.date="01/05/2017"
-    ms.author="jdial" />  
-
+ms.assetid: 486f7dd5-cf2f-434c-85d1-b3e85c427def
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/02/2016
+wacn.date: 01/05/2017
+ms.author: jdial
+---
 
 # 使用模板创建具有多个 NIC 的 VM
-[AZURE.INCLUDE [virtual-network-deploy-multinic-arm-selectors-include.md](../../includes/virtual-network-deploy-multinic-arm-selectors-include.md)]
+[!INCLUDE [virtual-network-deploy-multinic-arm-selectors-include.md](../../includes/virtual-network-deploy-multinic-arm-selectors-include.md)]
 
-[AZURE.INCLUDE [virtual-network-deploy-multinic-intro-include.md](../../includes/virtual-network-deploy-multinic-intro-include.md)]
+[!INCLUDE [virtual-network-deploy-multinic-intro-include.md](../../includes/virtual-network-deploy-multinic-intro-include.md)]
 
-> [AZURE.NOTE]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是[经典部署模型](/documentation/articles/virtual-network-deploy-multinic-classic-ps/)。
+> [!NOTE]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是[经典部署模型](./virtual-network-deploy-multinic-classic-ps.md)。
 > 
 
-[AZURE.INCLUDE [virtual-network-deploy-multinic-scenario-include.md](../../includes/virtual-network-deploy-multinic-scenario-include.md)]
+[!INCLUDE [virtual-network-deploy-multinic-scenario-include.md](../../includes/virtual-network-deploy-multinic-scenario-include.md)]
 
 以下步骤将名为 *IaaSStory* 的资源组用于 Web 服务器，并将名为 *IaaSStory-BackEnd* 的资源组用于数据库服务器。
 
@@ -39,11 +38,12 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 1. 导航到[模板页](https://github.com/Azure/azure-quickstart-templates/tree/master/IaaS-Story/11-MultiNIC)。
 2. 下载模板，执行一些必要的修改。
 
-	>[AZURE.NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+    >[!NOTE]
+    > 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 3. 使用 PowerShell 或 CLI 部署模板。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 请确保存储帐户名称是唯一的。Azure 中不能存在重复的存储帐户名称。
 > 
 
@@ -89,7 +89,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
           "dbPort": 1433
         },
 
-6. 请注意，**vmSize** 包含值 *Standard\_DS3* 。只有某些 VM 大小允许使用多个 NIC。可阅读 [Windows VM 大小](/documentation/articles/virtual-machines-windows-sizes/)和 [Linux VM 大小](/documentation/articles/virtual-machines-linux-sizes/)这两篇文章，确认哪些 VM 大小支持多个 NIC。
+6. 请注意，**vmSize** 包含值 *Standard\_DS3* 。只有某些 VM 大小允许使用多个 NIC。可阅读 [Windows VM 大小](../virtual-machines/virtual-machines-windows-sizes.md)和 [Linux VM 大小](../virtual-machines/virtual-machines-linux-sizes.md)这两篇文章，确认哪些 VM 大小支持多个 NIC。
 
 7. 向下滚动到“资源”，注意第一个元素。它描述存储帐户。此存储帐户将用于维护每个数据库 VM 使用的数据磁盘。在此方案中，每个数据库 VM 将 OS 磁盘存储在常规存储器内，并将两个数据磁盘存储在 SSD（高级）存储器内。
 
@@ -227,38 +227,38 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 预期输出：
 
-	ResourceGroupName : IaaSStory-Backend
-	Location          : chinanorth
-	ProvisioningState : Succeeded
-	Tags              :
-	Permissions       :
-						Actions  NotActions
-						=======  ==========
-						*
-		Resources         :
-						Name                 Type                                 Location
-						===================  ===================================  ========
-						ASDB                 Microsoft.Compute/availabilitySets   chinanorth  
-						DB1                  Microsoft.Compute/virtualMachines    chinanorth  
-						DB2                  Microsoft.Compute/virtualMachines    chinanorth  
-						NICDB-DA-1           Microsoft.Network/networkInterfaces  chinanorth  
-						NICDB-DA-2           Microsoft.Network/networkInterfaces  chinanorth  
-						NICDB-RA-1           Microsoft.Network/networkInterfaces  chinanorth  
-						NICDB-RA-2           Microsoft.Network/networkInterfaces  chinanorth  
-						wtestvnetstorageprm  Microsoft.Storage/storageAccounts    chinanorth  
-	ResourceId        : /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/IaaSStory-Backend
+    ResourceGroupName : IaaSStory-Backend
+    Location          : chinanorth
+    ProvisioningState : Succeeded
+    Tags              :
+    Permissions       :
+                        Actions  NotActions
+                        =======  ==========
+                        *
+        Resources         :
+                        Name                 Type                                 Location
+                        ===================  ===================================  ========
+                        ASDB                 Microsoft.Compute/availabilitySets   chinanorth  
+                        DB1                  Microsoft.Compute/virtualMachines    chinanorth  
+                        DB2                  Microsoft.Compute/virtualMachines    chinanorth  
+                        NICDB-DA-1           Microsoft.Network/networkInterfaces  chinanorth  
+                        NICDB-DA-2           Microsoft.Network/networkInterfaces  chinanorth  
+                        NICDB-RA-1           Microsoft.Network/networkInterfaces  chinanorth  
+                        NICDB-RA-2           Microsoft.Network/networkInterfaces  chinanorth  
+                        wtestvnetstorageprm  Microsoft.Storage/storageAccounts    chinanorth  
+    ResourceId        : /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/IaaSStory-Backend
 
 ## 使用 Azure CLI 部署模板
 若要使用 Azure CLI 部署模板，请执行以下步骤。
 
-1. 如果从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
+1. 如果从未使用过 Azure CLI，请参阅[安装和配置 Azure CLI](../xplat-cli-install.md)，并按照说明进行操作，直到选择 Azure 帐户和订阅。
 2. 运行 **`azure config mode`** 命令，切换到 Resource Manager 模式，如下所示。
 
         azure config mode arm
 
     预期的输出如下所示：
 
-		info:    New mode is arm
+        info:    New mode is arm
 
 3. 打开[参数文件](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/11-MultiNIC/azuredeploy.parameters.json)，选择其内容，然后将其保存到计算机上的文件中。对于本示例，我们将参数文件保存到 *parameters.json*。
 4. 运行 **`azure group deployment create`** cmdlet，使用上面下载并修改的模板和参数文件部署新的 VNet。输出后显示的列表阐释了所用参数。
@@ -266,7 +266,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         azure group create -n IaaSStory-Backend -l chinanorth --template-uri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/11-MultiNIC/azuredeploy.json -e parameters.json
 
     预期输出：
-   
+
         info:    Executing command group create
         + Getting resource group IaaSStory-Backend
         + Creating resource group IaaSStory-Backend

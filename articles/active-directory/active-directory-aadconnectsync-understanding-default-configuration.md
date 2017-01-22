@@ -1,25 +1,26 @@
-<properties
-    pageTitle="Azure AD Connect 同步：了解默认配置 | Azure"
-    description="本文介绍 Azure AD Connect 同步中的默认配置。"
-    services="active-directory"
-    documentationCenter=""
-    authors="andkjell"
-    manager="femila"
-    editor=""/>
-<tags
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="09/01/2016"
-    ms.author="andkjell"
-    wacn.date="01/19/2017"/>
+---
+title: Azure AD Connect 同步：了解默认配置 | Azure
+description: 本文介绍 Azure AD Connect 同步中的默认配置。
+services: active-directory
+documentationCenter: 
+authors: andkjell
+manager: femila
+editor: 
+
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/01/2016
+ms.author: andkjell
+wacn.date: 01/19/2017
+---
 
 # Azure AD Connect 同步：了解默认配置
 本文介绍现成的配置规则。其中说明这些规则及其对配置将有何影响。此外还将逐步介绍如何完成 Azure AD Connect 同步的默认配置。其目的是让读者了解配置模型（名为声明性预配）在实际示例中的运行情形。本文假设你已使用安装向导安装并配置了 Azure AD Connect 同步。
 
-若要了解配置模型的详细信息，请阅读 [Understanding Declarative Provisioning](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning/)（了解声明性预配）。
+若要了解配置模型的详细信息，请阅读 [Understanding Declarative Provisioning](./active-directory-aadconnectsync-understanding-declarative-provisioning.md)（了解声明性预配）。
 
 ## 从本地到 Azure AD 的现成规则
 现成的配置中包含以下表达式。
@@ -135,7 +136,7 @@ SRE 是一个资源套件工具，将随 Azure AD Connect 同步一起安装。�
 
 例如，查看同步规则“In from AD - User AccountEnabled”。在 SRE 中标记此行，然后选择“编辑”。
 
-由于这是一条现成的规则，因此在打开该规则时将看到警告。你不应该[对现成规则进行任何更改](/documentation/articles/active-directory-aadconnectsync-best-practices-changing-default-configuration/)，因此系统会询问意图是什么。在本例中，我们只想要查看规则。请选择“否”。
+由于这是一条现成的规则，因此在打开该规则时将看到警告。你不应该[对现成规则进行任何更改](./active-directory-aadconnectsync-best-practices-changing-default-configuration.md)，因此系统会询问意图是什么。在本例中，我们只想要查看规则。请选择“否”。
 
 ![同步规则警告](./media/active-directory-aadconnectsync-understanding-default-configuration/warningeditrule.png)
 
@@ -189,18 +190,17 @@ SRE 是一个资源套件工具，将随 Azure AD Connect 同步一起安装。�
 
 表达式语言是 VBA (Visual Basic for Applications)，因此具有 Microsoft Office 或 VBScript 经验的用户认识该格式。属性将括在方括号内，如 [attributeName]。属性名称和函数名称是区分大小写的，但同步规则编辑器将对表达式求值并在表达式无效时提供警告。所有表达式都使用嵌套函数表示在一行上。为了显示配置语言的强大功能，下面给出了 pwdLastSet 流的示例，但插入了附加注释：
 
-	// If-then-else
-	IIF(
-	// (The evaluation for IIF) Is the attribute pwdLastSet present in AD?
-	IsPresent([pwdLastSet]),
-	// (The True part of IIF) If it is, then from right to left, convert the AD time format to a .Net datetime, change it to the time format used by Azure AD, and finally convert it to a string.
-	CStr(FormatDateTime(DateFromNum([pwdLastSet]),"yyyyMMddHHmmss.0Z")),
-	// (The False part of IIF) Nothing to contribute
-	NULL
-	)
+    // If-then-else
+    IIF(
+    // (The evaluation for IIF) Is the attribute pwdLastSet present in AD?
+    IsPresent([pwdLastSet]),
+    // (The True part of IIF) If it is, then from right to left, convert the AD time format to a .Net datetime, change it to the time format used by Azure AD, and finally convert it to a string.
+    CStr(FormatDateTime(DateFromNum([pwdLastSet]),"yyyyMMddHHmmss.0Z")),
+    // (The False part of IIF) Nothing to contribute
+    NULL
+    )
 
-
-有关属性流表达式语言的详细信息，请参阅 [Understanding Declarative Provisioning Expressions](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning-expressions/)（了解声明性预配表达式）。
+有关属性流表达式语言的详细信息，请参阅 [Understanding Declarative Provisioning Expressions](./active-directory-aadconnectsync-understanding-declarative-provisioning-expressions.md)（了解声明性预配表达式）。
 
 ### 优先级
 现已了解几个不同的同步规则，但这些规则在配置中配合运行。在某些情况下，属性值由相同目标属性的多个同步规则提供。在此情况下，可以使用属性优先级来确定哪个属性胜出。以属性 sourceAnchor 为例。此属性是能否登录 Azure AD 的重要属性。可以在两个不同的同步规则中看到此属性的属性流：“In from AD - User AccountEnabled”和“In from AD - User Common”。由于有同步规则优先级，如果有多个对象联接到 Metaverse 对象，sourceAnchor 属性将先由具有已启用帐户的林提供。如果没有已启用的帐户，同步引擎将使用全部提取同步规则“In from AD - User Common”。此配置可确保即使帐户已禁用，也仍有一个 sourceAnchor。
@@ -223,14 +223,14 @@ In from AD - User Lync | 仅当检测到 Lync 时才存在。传递所有基础�
 
 ## 后续步骤
 
-- 在 [Understanding Declarative Provisioning](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning/)（了解声明性预配）中了解有关配置模型的详细信息。
-- 在 [Understanding Declarative Provisioning Expressions](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning-expressions/)（了解声明性预配表达式）中了解有关表达式语言的详细信息。
-- 在 [Understanding Users and Contacts](/documentation/articles/active-directory-aadconnectsync-understanding-users-and-contacts/)（了解用户和联系人）中继续了解现成配置的工作原理
-- 在 [How to make a change to the default configuration](/documentation/articles/active-directory-aadconnectsync-change-the-configuration/)（如何对默认配置进行更改）中了解如何使用声明性预配进行实际更改。
+- 在 [Understanding Declarative Provisioning](./active-directory-aadconnectsync-understanding-declarative-provisioning.md)（了解声明性预配）中了解有关配置模型的详细信息。
+- 在 [Understanding Declarative Provisioning Expressions](./active-directory-aadconnectsync-understanding-declarative-provisioning-expressions.md)（了解声明性预配表达式）中了解有关表达式语言的详细信息。
+- 在 [Understanding Users and Contacts](./active-directory-aadconnectsync-understanding-users-and-contacts.md)（了解用户和联系人）中继续了解现成配置的工作原理
+- 在 [How to make a change to the default configuration](./active-directory-aadconnectsync-change-the-configuration.md)（如何对默认配置进行更改）中了解如何使用声明性预配进行实际更改。
 
 **概述主题**
 
-- [Azure AD Connect 同步：理解和自定义同步](/documentation/articles/active-directory-aadconnectsync-whatis/)
-- [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
+- [Azure AD Connect 同步：理解和自定义同步](./active-directory-aadconnectsync-whatis.md)
+- [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)
 
 <!---HONumber=Mooncake_0926_2016-->

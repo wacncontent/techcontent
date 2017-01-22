@@ -1,24 +1,24 @@
-<properties
-   pageTitle="使用动态 DNS 注册主机名"
-   description="本页详细介绍如何设置动态 DNS 以在自己的 DNS 服务器中注册主机名。"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="GarethBradshawMSFT"
-   manager="carmonm"
-   editor="tysonn" />
-<tags
-   ms.service="dns"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="08/31/2016"
-   wacn.date="12/26/2016"
-   ms.author="sewhee" />
+---
+title: 使用动态 DNS 注册主机名
+description: 本页详细介绍如何设置动态 DNS 以在自己的 DNS 服务器中注册主机名。
+services: virtual-network
+documentationCenter: na
+authors: GarethBradshawMSFT
+manager: carmonm
+editor: tysonn
 
+ms.service: dns
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 08/31/2016
+wacn.date: 12/26/2016
+ms.author: sewhee
+---
 
 # 使用动态 DNS 在自己的 DNS 服务器中注册主机名
-[Azure 为虚拟机 (VM) 和角色实例提供名称解析](/documentation/articles/virtual-networks-name-resolution-for-vms-and-role-instances/)。但是，如果名称解析需求超过 Azure 所提供的范围，可提供自己的 DNS 服务器。这样即可定制 DNS 解决方案以满足自己的特定需求。例如，可能需要通过 Active Directory 域控制器来访问本地资源。
+[Azure 为虚拟机 (VM) 和角色实例提供名称解析](./virtual-networks-name-resolution-for-vms-and-role-instances.md)。但是，如果名称解析需求超过 Azure 所提供的范围，可提供自己的 DNS 服务器。这样即可定制 DNS 解决方案以满足自己的特定需求。例如，可能需要通过 Active Directory 域控制器来访问本地资源。
 
 将自定义 DNS 服务器作为 Azure VM 托管时，可将针对同一 VNet 的主机名查询转发到 Azure 以解析主机名。如果不希望使用此路由，可使用动态 DNS 在 DNS 服务器中注册 VM 主机名。Azure 不具备直接在你的 DNS 服务器中创建记录的功能（如凭据），因此通常需要替代方案。以下是一些常见的替代方案。
 
@@ -32,30 +32,30 @@ Linux 客户端通常在启动时注册到 DNS 服务器，并假设 DHCP 服务
 
 可以使用 DHCP 客户端提供的挂钩在 DNS 服务器中创建和维护主机名条目。在 DHCP 周期中，客户端将执行 */etc/dhcp/dhclient-exit-hooks.d/* 中的脚本。通过使用 *nsupdate* 可将其用于注册新的 IP 地址。例如：
 
-    	#!/bin/sh
-    	requireddomain=mydomain.local
+        #!/bin/sh
+        requireddomain=mydomain.local
 
-    	# only execute on the primary nic
-    	if [ "$interface" != "eth0" ]
-    	then
-    		return
-    	fi
+        # only execute on the primary nic
+        if [ "$interface" != "eth0" ]
+        then
+            return
+        fi
 
-		# when we have a new IP, perform nsupdate
-		if [ "$reason" = BOUND ] || [ "$reason" = RENEW ] ||
-		   [ "$reason" = REBIND ] || [ "$reason" = REBOOT ]
-		then
-    		host=`hostname`
-	    	nsupdatecmds=/var/tmp/nsupdatecmds
-  			echo "update delete $host.$requireddomain a" > $nsupdatecmds
-  			echo "update add $host.$requireddomain 3600 a $new_ip_address" >> $nsupdatecmds
-  			echo "send" >> $nsupdatecmds
+        # when we have a new IP, perform nsupdate
+        if [ "$reason" = BOUND ] || [ "$reason" = RENEW ] ||
+           [ "$reason" = REBIND ] || [ "$reason" = REBOOT ]
+        then
+            host=`hostname`
+            nsupdatecmds=/var/tmp/nsupdatecmds
+              echo "update delete $host.$requireddomain a" > $nsupdatecmds
+              echo "update add $host.$requireddomain 3600 a $new_ip_address" >> $nsupdatecmds
+              echo "send" >> $nsupdatecmds
 
-  			nsupdate $nsupdatecmds
-		fi
+              nsupdate $nsupdatecmds
+        fi
 
-		#done
-		exit 0;
+        #done
+        exit 0;
 
 还可使用 *nsupdate* 命令来执行安全的动态 DNS 更新。例如，使用 Bind DNS 服务器时，将[生成](http://linux.yyz.us/nsupdate/)公钥-私钥对。已向 DNS 服务器[配置](http://linux.yyz.us/dns/ddns-server.html)密钥的公共部分，所以它可以验证请求中的签名。必须使用 *-k* 选项将密钥对提供给 *nsupdate*，以便对动态 DNS 更新请求进行签名。
 
@@ -63,6 +63,6 @@ Linux 客户端通常在启动时注册到 DNS 服务器，并假设 DHCP 服务
 
 如果需要，可以将 DNS 搜索后缀添加到 VM。DNS 后缀在 */etc/resolv.conf* 文件中指定。大多数 Linux 发行版自动管理此文件中的内容，因此通常不能对其进行编辑。但是，可通过使用 DHCP 客户端的 *supersede* 命令重写该后缀。若要执行此操作，请在 */etc/dhcp/dhclient.conf* 中添加以下内容：
 
-		supersede domain-name <required-dns-suffix>;
+        supersede domain-name <required-dns-suffix>;
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

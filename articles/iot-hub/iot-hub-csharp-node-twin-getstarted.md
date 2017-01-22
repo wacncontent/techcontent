@@ -1,34 +1,32 @@
-<properties
-	pageTitle="设备孪生入门 | Azure"
-	description="本教程介绍如何使用设备孪生"
-	services="iot-hub"
-	documentationCenter="node"
-	authors="fsautomata"
-	manager="timlt"
-	editor=""/>  
+---
+title: 设备孪生入门 | Azure
+description: 本教程介绍如何使用设备孪生
+services: iot-hub
+documentationCenter: node
+authors: fsautomata
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-hub"
-     ms.devlang="node"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="09/13/2016"
-     wacn.date="12/12/2016"
-     ms.author="elioda"/>  
-
+ms.service: iot-hub
+ms.devlang: node
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/13/2016
+wacn.date: 12/12/2016
+ms.author: elioda
+---
 
 # 教程：设备孪生入门（预览版）
 
-[AZURE.INCLUDE [iot-hub-selector-twin-get-started](../../includes/iot-hub-selector-twin-get-started.md)]
+[!INCLUDE [iot-hub-selector-twin-get-started](../../includes/iot-hub-selector-twin-get-started.md)]
 
 在本教程结束时，用户将有一个 .NET 控制台应用程序，以及一个 Node.js 控制台应用程序：
 
 * **AddTagsAndQuery.sln**，一个旨在从后端运行的 .NET 应用，用于添加标记并查询设备孪生。
 * **TwinSimulatedDevice.js**，一个 Node.js 应用，可模拟使用早前创建的设备标识连接到 IoT 中心的设备，并报告其连接状况。
 
-> [AZURE.NOTE]
+> [!NOTE]
 [Azure IoT SDK][lnk-hub-sdks] 一文介绍了各种可用来构建设备和后端应用程序的 SDK。
 > 
 > 
@@ -41,31 +39,31 @@
 
 + 有效的 Azure 帐户。（如果没有帐户，只需花费几分钟就能创建一个[帐户][lnk-free-trial]。）
 
-[AZURE.INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
+[!INCLUDE [iot-hub-get-started-create-hub](../../includes/iot-hub-get-started-create-hub.md)]
 
-[AZURE.INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
+[!INCLUDE [iot-hub-get-started-create-device-identity](../../includes/iot-hub-get-started-create-device-identity.md)]
 
 ## 创建服务应用
 在此部分，会创建一个 Node.js 控制台应用，将位置元数据添加到与 **myDeviceId** 关联的设备孪生。该应用随后会选择位于中国的设备来查询存储在中心的设备孪生，然后查询报告手机网络连接的设备孪生。
 
 1. 在 Visual Studio 中，使用“控制台应用程序”项目模板将 Visual C# Windows 经典桌面项目添加到当前解决方案。将项目命名为 **AddTagsAndQuery**。
-   
+
     ![新的 Visual C# Windows 经典桌面项目][img-createapp]  
 
 2. 在“解决方案资源管理器”中，右键单击“AddTagsAndQuery”项目，然后单击“管理 NuGet 包”。
 3. 在“Nuget 包管理器”窗口中，选择“浏览”，搜索 **microsoft.azure.devices**，选择“安装”以安装 **Microsoft.Azure.Devices** 包，然后接受使用条款。此过程将下载、安装 [Microsoft Azure IoT Service SDK][lnk-nuget-service-sdk]（Microsoft Azure IoT 服务 SDK）NuGet 包及其依赖项并添加对它的引用。
-   
+
     ![“NuGet 包管理器”窗口][img-servicenuget]  
 
 4. 在 **Program.cs** 文件顶部添加以下 `using` 语句：
-   
+
         using Microsoft.Azure.Devices;
 5. 将以下字段添加到 **Program** 类。将占位符值替换为在上一部分中为 IoT 中心创建的连接字符串。
-   
+
         static RegistryManager registryManager;
         static string connectionString = "{iot hub connection string}";
 6. 将以下方法添加到 **Program** 类：
-   
+
         public static async Task AddTagsAndQuery()
         {
             var twin = await registryManager.GetTwinAsync("myDeviceId");
@@ -79,31 +77,30 @@
                     }
                 }";
             await registryManager.UpdateTwinAsync(twin.DeviceId, patch, twin.ETag);
-   
+
             var query = registryManager.CreateQuery("SELECT * FROM devices WHERE tags.location.plant = 'Redmond43'", 100);
             var twinsInRedmond43 = await query.GetNextAsTwinAsync();
             Console.WriteLine("Devices in Redmond43: {0}", string.Join(", ", twinsInRedmond43.Select(t => t.DeviceId)));
-   
+
             query = registryManager.CreateQuery("SELECT * FROM devices WHERE tags.location.plant = 'Redmond43' AND properties.reported.connectivity.type = 'cellular'", 100);
             var twinsInRedmond43UsingCellular = await query.GetNextAsTwinAsync();
             Console.WriteLine("Devices in Redmond43 using cellular network: {0}", string.Join(", ", twinsInRedmond43UsingCellular.Select(t => t.DeviceId)));
         }
-   
+
     **RegistryManager** 类会公开从服务与设备孪生进行交互所需的所有方法。上面的代码首先初始化 **registryManager** 对象，然后检索 **myDeviceId** 的设备孪生，最后使用所需位置信息更新其标记。
-   
+
     更新后，该代码将执行两个查询：第一个只选择位于 **Redmond43** 工厂中的设备的设备孪生，第二个会优化查询，只选择也通过手机网络连接的设备。
-   
+
     请注意，前面的代码在创建 **query** 对象时会指定最大返回文档数。**query** 对象包含 **HasMoreResults** 布尔属性，可以用于多次调用 **GetNextAsTwinAsync** 方法以检索所有结果。名为 **GetNextAsJson** 的方法可用于不是设备孪生的结果（例如聚合查询的结果）。
 7. 最后，在 **Main** 方法中添加以下行：
-   
+
         registryManager = RegistryManager.CreateFromConnectionString(connectionString);
         AddTagsAndQuery().Wait();
         Console.WriteLine("Press Enter to exit.");
         Console.ReadLine();
 8. 运行此应用程序，对于寻找位于 **Redmond43** 的所有设备的查询，应在结果中看到一个设备，而对于将结果限制为使用手机网络连接的设备的查询，不会看到任何设备。
-   
-    ![窗口中的查询结果][img-addtagapp]  
 
+    ![窗口中的查询结果][img-addtagapp]  
 
 在下一部分，用户创建的设备应用会报告连接信息并更改上一部分中查询的结果。
 
@@ -111,31 +108,31 @@
 在此部分，会创建一个 Node.js 控制台应用作为 **myDeviceId** 连接到中心，然后更新其设备孪生的报告属性，说明它是使用手机网络进行连接的。
 
 1. 新建名为 **reportconnectivity** 的空文件夹。在命令提示符下的 **reportconnectivity** 文件夹中，使用以下命令创建新的 package.json 文件。接受所有默认值：
-   
+
     ```
     npm init
     ```
 2. 在 **reportconnectivity** 文件夹的命令提示符处，运行下述命令以安装 **azure-iot-device** 和 **azure-iot-device-mqtt** 包：
-   
+
     ```
     npm install azure-iot-device azure-iot-device-mqtt --save
     ```
 3. 在 **reportconnectivity** 文件夹中使用文本编辑器新建 **ReportConnectivity.js** 文件。
 4. 将以下代码添加到 **ReportConnectivity.js** 文件，并将 **{device connection string}** 占位符替换为在创建 **myDeviceId** 设备标识时复制的连接字符串：
-   
+
         'use strict';
         var Client = require('azure-iot-device').Client;
         var Protocol = require('azure-iot-device-mqtt').Mqtt;
-   
+
         var connectionString = '{device connection string}';
         var client = Client.fromConnectionString(connectionString, Protocol);
-   
+
         client.open(function(err) {
         if (err) {
             console.error('could not open IotHub client');
         }  else {
             console.log('client opened');
-   
+
             client.getTwin(function(err, twin) {
             if (err) {
                 console.error('could not get twin');
@@ -145,7 +142,7 @@
                         type: 'cellular'
                     }
                 };
-   
+
                 twin.properties.reported.update(patch, function(err) {
                     if (err) {
                         console.error('could not update twin');
@@ -158,17 +155,16 @@
             });
         }
         });
-   
+
     **Client** 对象会公开从设备与设备孪生进行交互所需的所有方法。前面的代码在初始化 **Client** 对象后会检索 **myDeviceId** 的设备孪生，并使用连接信息更新其报告属性。
 5. 运行设备应用
-   
+
         node ReportConnectivity.js
-   
+
     此时会显示消息`twin state reported`。
 6. 现在设备报告了其连接信息，该信息应出现在两个查询中。运行 .NET **AddTagsAndQuery** 应用即可再次运行查询。这次 **myDeviceId** 应出现在两个查询结果中。
-   
-    ![][img-addtagapp2]  
 
+    ![][img-addtagapp2]  
 
 ## 后续步骤
 在本教程中，在 Azure 门户中配置了新的 IoT 中心，然后在中心的标识注册表中创建了设备标识。已从后端应用程序以标记形式添加了设备元数据，并编写了模拟的设备应用，用于报告设备孪生中的设备连接信息。你还学习了如何使用 IoT 中心的类似 SQL 的查询语言来查询此信息。
@@ -188,19 +184,19 @@
 
 <!-- links -->
 
-[lnk-hub-sdks]: /documentation/articles/iot-hub-devguide-sdks/
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-hub-sdks]: ./iot-hub-devguide-sdks.md
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-nuget-service-sdk]: https://www.nuget.org/packages/Microsoft.Azure.Devices/
 
-[lnk-d2c]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-messages
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-identity]: /documentation/articles/iot-hub-devguide-identity-registry/
+[lnk-d2c]: ./iot-hub-devguide-messaging.md#device-to-cloud-messages
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-identity]: ./iot-hub-devguide-identity-registry.md
 
-[lnk-iothub-getstarted]: /documentation/articles/iot-hub-node-node-getstarted/
-[lnk-methods-tutorial]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-twin-how-to-configure]: /documentation/articles/iot-hub-csharp-node-twin-how-to-configure/
+[lnk-iothub-getstarted]: ./iot-hub-node-node-getstarted.md
+[lnk-methods-tutorial]: ./iot-hub-node-node-direct-methods.md
+[lnk-twin-how-to-configure]: ./iot-hub-csharp-node-twin-how-to-configure.md
 
 [lnk-dev-setup]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/get_started/node-devbox-setup.md
 

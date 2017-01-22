@@ -1,28 +1,26 @@
-<properties
-	pageTitle="HDInsight 的 Hadoop 群集版本有哪些新功能？| Azure"
-	description="HDInsight 支持多个可部署的 Hadoop 群集版本。请参见“支持的 Hadoop 和 HortonWorks 数据平台 (HDP) 版本”。"
-	services="hdinsight"
-	editor="cgronlun"
-	manager="paulettm"
-	authors="mumian"
-	documentationCenter=""/>
+---
+title: HDInsight 的 Hadoop 群集版本有哪些新功能？| Azure
+description: HDInsight 支持多个可部署的 Hadoop 群集版本。请参见“支持的 Hadoop 和 HortonWorks 数据平台 (HDP) 版本”。
+services: hdinsight
+editor: cgronlun
+manager: paulettm
+authors: mumian
+documentationCenter: 
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/25/2016"
-	wacn.date="12/12/2016"
-	ms.author="jgao"/>
-
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/25/2016
+wacn.date: 12/12/2016
+ms.author: jgao
+---
 
 # HDInsight 提供的 Hadoop 群集版本有哪些新功能？
 
 ## HDInsight 版本和 Hadoop 组件
 Azure HDInsight 支持多个可随时部署的 Hadoop 群集版本。每个版本选项设置 Hortonworks 数据平台 (HDP) 分发的特定版本和该分发内包含的一组组件。下表中逐项列出了与 HDInsight 群集版本关联的组件版本。请注意，Azure HDInsight 使用的默认群集版本当前是 3.1（到 11/7/2014 为止）并基于 HDP 2.1.7。
-
 
 <table border="1">
 <tr><th>组件</th><th>HDInsight 版本 3.3</th><th>HDInsight 版本 3.2</th><th>HDInsight 版本 3.1（默认）</th><th>HDInsight 版本 3.0</th><th>HDInsight 版本 2.1</th></tr>
@@ -40,15 +38,13 @@ Azure HDInsight 支持多个可随时部署的 Hadoop 群集版本。每个版�
 <tr><td>Apache Phoenix</td><td>4.4.0</td><td>4.2.0</td><td>4.0.0.2.1.7.0-2162</td><td></td><td></td></tr>
 </table>
 
-
 **获取当前组件版本信息**
 
 与 HDInsight 群集版本关联的组件版本可能在将来的 HDInsight 更新中更改。确定可用组件并验证正在使用哪些群集版本的一个方法是使用远程桌面登录到群集并直接检查“C:\\apps\\dist”目录的内容。
 
-
 **发行说明**
 
-请参阅 [HDInsight 发行说明](/documentation/articles/hdinsight-release-notes/)，了解 HDInsight 最新版本的更多发行说明。
+请参阅 [HDInsight 发行说明](./hdinsight-release-notes.md)，了解 HDInsight 最新版本的更多发行说明。
 
 ### 设置 HDInsight 群集时选择一个版本
 
@@ -58,7 +54,6 @@ Azure HDInsight 支持多个可随时部署的 Hadoop 群集版本。每个版�
 
 ## 功能特点
 HDInsight 平台的一些突出功能包括：
-
 
 - **Storm** - Storm on Azure HDInsight 现已正式发布，它你只需单击几下鼠标，就能在数分钟内快速轻松地完成实时部署。Apache Storm on Azure HDInsight 是 Apache Hadoop 生态系统中的开放源代码项目，它提供分析平台，能够可靠地处理数以百万计的事件。现在，Hadoop 用户可以分析发生的事件，以及从过去的事件中获得见解。Microsoft 还提供与 Visual Studio 的内置集成，方便开发人员与 Storm 交互。现在，你可以从 Visual Studio 内部开发、部署和调试 Storm 拓扑。
 
@@ -90,7 +85,6 @@ HDInsight 平台的一些突出功能包括：
 
 - **虚拟网络支持** - HDInsight 群集可用于 Azure 虚拟网络，以支持隔离云资源或将云资源与数据中心资源相链接的混合方案。
 
-
 ## 支持的版本
 下表列出当前可用的 HDInsight 版本以及它们使用的相应 Hortonworks 数据平台版本和发布日期。如果知道，还提供其支持到期日期和弃用日期。请注意以下事项：
 
@@ -120,14 +114,14 @@ SLA 用“支持窗口”来定义。“支持窗口”是指 HDInsight 群集�
 
 **弃用日期**是在该日期后，不能在 HDInsight 上创建此群集版本的日期。
 
-> [AZURE.NOTE]HDInsight 2.1 和 3.0 群集均运行在 Azure 来宾 OS [系列 4](/documentation/articles/cloud-services-guestos-update-matrix/) 上，该系列使用 64 位版本的 Windows Server 2012 R2 并支持 .NET Framework 4.0、4.5 和 4.5.1。
+> [!NOTE]
+>HDInsight 2.1 和 3.0 群集均运行在 Azure 来宾 OS [系列 4](../cloud-services/cloud-services-guestos-update-matrix.md) 上，该系列使用 64 位版本的 Windows Server 2012 R2 并支持 .NET Framework 4.0、4.5 和 4.5.1。
 
 ## 与 HDInsight 版本相关的 Hortonworks 发行说明##
 
 * HDInsight 群集版本 3.2 使用基于 [Hortonworks 数据平台 2.2][hdp-2-2] 的 Hadoop 分发版。
 
-	* 特定 Apache 组件的发行说明 - [Hive 0.14](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310843&version=12326450)、[Pig 0.14](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310730&version=12326954)、[HBase 0.98.4](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310753&version=12326810)、[Phoenix 4.2.0](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12315120&version=12327581)、[M/R 2.6](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310941&version=12327180)、[HDFS 2.6](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310942&version=12327181)、[YARN 2.6](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12313722&version=12327197)、[Common](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310240&version=12327179)、[Tez 0.5.2](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12314426&version=12328742)、[Storm 0.9.3](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12314820&version=12327112)、[Oozie 4.1.0](https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12324960&projectId=12311620)。
-
+    * 特定 Apache 组件的发行说明 - [Hive 0.14](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310843&version=12326450)、[Pig 0.14](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310730&version=12326954)、[HBase 0.98.4](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310753&version=12326810)、[Phoenix 4.2.0](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12315120&version=12327581)、[M/R 2.6](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310941&version=12327180)、[HDFS 2.6](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310942&version=12327181)、[YARN 2.6](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12313722&version=12327197)、[Common](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12310240&version=12327179)、[Tez 0.5.2](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12314426&version=12328742)、[Storm 0.9.3](https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12314820&version=12327112)、[Oozie 4.1.0](https://issues.apache.org/jira/secure/ReleaseNote.jspa?version=12324960&projectId=12311620)。
 
 * HDInsight 群集版本 3.1 使用基于 [Hortonworks 数据平台 2.1.7][hdp-2-1-7] 的 Hadoop 分发版。这是使用 11/7/2014 之后的 Azure HDInsight 门户时创建的**默认** Hadoop 群集。创建于 11/7/2014 之前的 HDInsight 3.1 群集基于[ Hortonworks 数据平台 2.1.1][hdp-2-1-1]。
 
@@ -137,12 +131,11 @@ SLA 用“支持窗口”来定义。“支持窗口”是指 HDInsight 群集�
 
 * HDInsight 群集版本 1.6 使用基于 [Hortonworks 数据平台 1.1][hdp-1-1-0] 的 Hadoop 分发版。
 
-
 [image-hdi-versioning-versionscreen]: ./media/hdinsight-component-versioning/hdi-versioning-version-screen.png
 
-[wa-forums]: /support/forums/
+[wa-forums]: https://www.azure.cn/support/forums/
 
-[connect-excel-with-hive-ODBC]: /documentation/articles/hdinsight-connect-excel-hive-ODBC-driver/
+[connect-excel-with-hive-ODBC]: ./hdinsight-connect-excel-hive-ODBC-driver.md
 
 [hdp-2-2]: http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.2.0/bk_HDP_RelNotes/content/ch_relnotes_v220.html
 

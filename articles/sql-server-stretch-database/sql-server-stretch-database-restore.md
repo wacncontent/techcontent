@@ -1,29 +1,30 @@
-<properties
-	pageTitle="还原已启用延伸的数据库 | Azure"
-	description="了解如何还原已启用延伸的数据库。"
-	services="sql-server-stretch-database"
-	documentationCenter=""
-	authors="douglaslMS"
-	manager=""
-	editor=""/>
+---
+title: 还原已启用延伸的数据库 | Azure
+description: 了解如何还原已启用延伸的数据库。
+services: sql-server-stretch-database
+documentationCenter: 
+authors: douglaslMS
+manager: 
+editor: 
 
-<tags
-	ms.service="sql-server-stretch-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/01/2016"
-	wacn.date="11/15/2016"
-	ms.author="douglasl"/>
+ms.service: sql-server-stretch-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/01/2016
+wacn.date: 11/15/2016
+ms.author: douglasl
+---
 
 # 还原已启用延伸的数据库
 
 必要时还原备份的数据库可从许多类型的故障、错误和灾难中恢复。
 
-有关备份的详细信息，请参阅[备份已启用延伸的数据库](/documentation/articles/sql-server-stretch-database-backup/)。
+有关备份的详细信息，请参阅[备份已启用延伸的数据库](./sql-server-stretch-database-backup.md)。
 
->   [AZURE.NOTE] 备份只是完整的高可用性和业务连续性解决方案的一个部分。有关高可用性的详细信息，请参阅[高可用性解决方案](https://msdn.microsoft.com/zh-cn/library/ms190202.aspx)。
+>   [!NOTE]
+> 备份只是完整的高可用性和业务连续性解决方案的一个部分。有关高可用性的详细信息，请参阅[高可用性解决方案](https://msdn.microsoft.com/zh-cn/library/ms190202.aspx)。
 
 ## 还原 SQL Server 数据
 若要从硬件故障或损坏中恢复，请从备份还原已启用延伸的 SQL Server 数据库。你可以继续使用当前使用的 SQL Server 还原方法。有关详细信息，请参阅[还原和恢复概述](https://msdn.microsoft.com/zh-cn/library/ms191253.aspx)。
@@ -63,20 +64,18 @@ Azure 上的 SQL Server Stretch Database 服务在删除数据库之前会创建
 
 2.  运行存储过程 [sys.sp\_rda\_reauthorize\_db](https://msdn.microsoft.com/zh-cn/library/mt131016.aspx)，以将已启用延伸的本地数据库重新连接到 Azure 数据库。
     -   提供现有的数据库范围凭据作为 sysname 或 varchar(128) 值。（不要使用 varchar(max)。） 你可以在视图 **sys.database\_scoped\_credentials** 中查找凭据名称。
-	-   指定是否要制作远程数据的副本并连接到该副本（推荐）。
+    -   指定是否要制作远程数据的副本并连接到该副本（推荐）。
 
-
-	    	USE <Stretch-enabled database name>;
-    		GO
-    		EXEC sp_rda_reauthorize_db
-    		    @credential = N'<existing_database_scoped_credential_name>',
-    			@with_copy = 1 ;  
-    		GO
-
+            USE <Stretch-enabled database name>;
+            GO
+            EXEC sp_rda_reauthorize_db
+                @credential = N'<existing_database_scoped_credential_name>',
+                @with_copy = 1 ;  
+            GO
 
 ## 另请参阅
 
-[延伸数据库的管理和故障排除](/documentation/articles/sql-server-stretch-database-manage/)
+[延伸数据库的管理和故障排除](./sql-server-stretch-database-manage.md)
 
 [sys.sp\_rda\_reauthorize\_db (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/mt131016.aspx)
 

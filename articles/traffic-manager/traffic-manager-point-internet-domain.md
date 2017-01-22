@@ -1,24 +1,21 @@
-<properties
-    pageTitle="将公司 Internet 域指向流量管理器域名 | Azure"
-    description="本文将帮助你将公司域名指向流量管理器域名。"
-    services="traffic-manager"
-    documentationCenter=""
-    authors="sdwheeler"
-    manager="carmonm"
-    editor=""
-/>  
+---
+title: 将公司 Internet 域指向流量管理器域名 | Azure
+description: 本文将帮助你将公司域名指向流量管理器域名。
+services: traffic-manager
+documentationCenter: 
+authors: sdwheeler
+manager: carmonm
+editor: 
 
-<tags
-    ms.service="traffic-manager"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/11/2016"
-    wacn.date="01/03/2017"
-    ms.author="sewhee"
-/>  
-
+ms.service: traffic-manager
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/11/2016
+wacn.date: 01/03/2017
+ms.author: sewhee
+---
 
 # 将公司 Internet 域指向 Azure 流量管理器域
 
@@ -30,14 +27,15 @@
 
 对 *www.contoso.com* 发出的所有流量请求将定向到 *contoso.trafficmanager.cn*。
 
->[AZURE.IMPORTANT] 无法将第二级域（例如 *contoso.com*）指向流量管理器域。DNS 协议标准不允许对二级域名使用 CNAME 记录。
+>[!IMPORTANT]
+> 无法将第二级域（例如 *contoso.com*）指向流量管理器域。DNS 协议标准不允许对二级域名使用 CNAME 记录。
 
 ## 后续步骤
 
-[流量管理器路由方法](/documentation/articles/traffic-manager-routing-methods/)
+[流量管理器路由方法](./traffic-manager-routing-methods.md)
 
-[流量管理器 - 禁用、启用或删除配置文件](/documentation/articles/disable-enable-or-delete-a-profile/)
+[流量管理器 - 禁用、启用或删除配置文件](./disable-enable-or-delete-a-profile.md)
 
-[流量管理器 - 禁用或启用终结点](/documentation/articles/disable-or-enable-an-endpoint/)
+[流量管理器 - 禁用或启用终结点](./disable-or-enable-an-endpoint.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

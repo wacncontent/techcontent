@@ -1,23 +1,21 @@
-<properties
- pageTitle="IoT 中心操作监视"
- description="概述 IoT 中心操作监视如何让你实时监视 IoT 中心上的操作状态。"
- services="iot-hub"
- documentationCenter=""
- authors="nberdy"
- manager="timlt"
- editor=""/>  
+---
+title: IoT 中心操作监视
+description: 概述 IoT 中心操作监视如何让你实时监视 IoT 中心上的操作状态。
+services: iot-hub
+documentationCenter: 
+authors: nberdy
+manager: timlt
+editor: 
 
-
-<tags
- ms.service="iot-hub"
- ms.devlang="na"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="08/11/2016"
- wacn.date="01/09/2017"
- ms.author="nberdy"/>
-
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/11/2016
+wacn.date: 01/09/2017
+ms.author: nberdy
+---
 
 # 操作监视简介
 IoT 中心操作监视可让你实时监视其 IoT 中心上的操作状态。IoT 中心跟踪多个操作类别的事件，你可以选择将一个或多个类别的事件发送到其 IoT 中心终结点进行处理。你可以监视数据中是否有错误，或根据数据模式设置更复杂的处理行为。
@@ -33,12 +31,11 @@ IoT 中心监视 5 种类别的事件：
 ## 如何启用操作监视
 1. 创建 IoT 中心。有关如何创建 IoT 中心的说明，请参阅[入门][lnk-get-started]指南。
 2. 打开 IoT 中心的边栏选项卡。在此处单击“操作监视”。
-   
+
     ![][1]
 3. 选择要监视的监视类别，然后单击“保存”。可以从“监视设置”中所列的与事件中心兼容的终结点读取事件。IoT 中心终结点称为 `messages/operationsmonitoringevents`。
-   
-    ![][2]  
 
+    ![][2]  
 
 ## 事件类别及其用法
 每种操作监视类别跟踪与 IoT 中心之间进行的不同类型的交互，每一种监视类别都有一个架构用于定义如何构建该类别的事件。
@@ -147,13 +144,12 @@ IoT 中心监视 5 种类别的事件：
 [1]: ./media/iot-hub-operations-monitoring/enable-OM-1.png
 [2]: ./media/iot-hub-operations-monitoring/enable-OM-2.png
 
-[lnk-get-started]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
-[lnk-diagnostic-metrics]: /documentation/articles/iot-hub-metrics/
-[lnk-scaling]: /documentation/articles/iot-hub-scaling/
-[lnk-dr]: /documentation/articles/iot-hub-ha-dr/
+[lnk-get-started]: ./iot-hub-csharp-csharp-getstarted.md
+[lnk-diagnostic-metrics]: ./iot-hub-metrics.md
+[lnk-scaling]: ./iot-hub-scaling.md
+[lnk-dr]: ./iot-hub-ha-dr.md
 
-
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

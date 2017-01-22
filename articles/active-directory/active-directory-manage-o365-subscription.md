@@ -1,27 +1,25 @@
-<properties
-    pageTitle="在 Azure 中管理 Office 365 订阅的目录 | Azure"
-    description="使用 Azure Active Directory 和 Azure 经典管理门户来管理 Office 365 订阅目录"
-    services="active-directory"
-    documentationcenter=""
-    author="curtand"
-    manager="femila"
-    editor="" />  
+---
+title: 在 Azure 中管理 Office 365 订阅的目录 | Azure
+description: 使用 Azure Active Directory 和 Azure 经典管理门户来管理 Office 365 订阅目录
+services: active-directory
+documentationcenter: 
+author: curtand
+manager: femila
+editor: 
 
-<tags
-    ms.assetid="746987b7-2dfd-4b35-819d-37c1b65c5c81"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="11/09/2016"
-    ms.author="curtand"
-    wacn.date="12/12/2016"/>  
-
-
+ms.assetid: 746987b7-2dfd-4b35-819d-37c1b65c5c81
+ms.service: active-directory
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 11/09/2016
+ms.author: curtand
+wacn.date: 12/12/2016
+---
 
 # 在 Azure 中管理 Office 365 订阅的目录
-本文介绍如何使用 Azure 经典管理门户管理为 Office 365 订阅创建的目录。必须是 Azure 订阅的服务管理员或共同管理员才能登录 Azure 经典管理门户。如果没有 Azure 订阅，现在可以使用此链接注册 [试用版](/pricing/1rmb-trial)，然后在 5 分钟内部署第一个云解决方案。请务必使用登录 Office 365 时所用的工作或学校帐户。
+本文介绍如何使用 Azure 经典管理门户管理为 Office 365 订阅创建的目录。必须是 Azure 订阅的服务管理员或共同管理员才能登录 Azure 经典管理门户。如果没有 Azure 订阅，现在可以使用此链接注册 [试用版](https://www.azure.cn/pricing/1rmb-trial)，然后在 5 分钟内部署第一个云解决方案。请务必使用登录 Office 365 时所用的工作或学校帐户。
 
 完成 Azure 订阅后，即可登录 Azure 经典管理门户并访问 Azure 服务。若要管理对 Office 365 用户进行身份验证所用的同一目录，请单击 Active Directory 扩展。
 
@@ -41,7 +39,7 @@
 ## 管理两个独立的目录
 若要在以 msmith@hotmail.com 身份登录到 Azure 时管理这两个目录，Michael Smith 必须完成以下步骤：
 
-> [AZURE.NOTE]
+> [!NOTE]
 仅当用户使用 Microsoft 帐户登录时才能完成这些步骤。如果用户是使用工作或学校帐户登录的，则“使用现有目录”选项不可用。工作或学校帐户只能通过其主目录（即存储工作或学校帐户的目录，该目录由工作单位或学校拥有）进行身份验证。
 
 1. 以 msmith@hotmail.com 的身份登录 [Azure 经典管理门户](https://manage.windowsazure.cn)。
@@ -62,6 +60,6 @@
 3. 将 Jane Doe 添加为订阅的共同管理员：单击“设置”>“管理员”> 选择订阅 >“添加”> 键入 **JohnDoe@Contoso.com**。
 
 ## 后续步骤
-有关订阅与目录之间关系的详细信息，请参阅[订阅如何与目录关联](/documentation/articles/active-directory-how-subscriptions-associated-directory/)。
+有关订阅与目录之间关系的详细信息，请参阅[订阅如何与目录关联](./active-directory-how-subscriptions-associated-directory.md)。
 
 <!---HONumber=Mooncake_1205_2016-->

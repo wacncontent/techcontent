@@ -1,26 +1,26 @@
-<properties
- pageTitle="使用 JDBC 在 Azure HDInsight 上查询 Hive"
- description="了解如何使用 JDBC 连接到 Azure HDInsight 上的 Hive，以及如何通过远程方式对存储在云中的数据运行查询。"
- services="hdinsight"
- documentationCenter=""
- authors="Blackmist"
- manager="paulettm"
- editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 使用 JDBC 在 Azure HDInsight 上查询 Hive
+description: 了解如何使用 JDBC 连接到 Azure HDInsight 上的 Hive，以及如何通过远程方式对存储在云中的数据运行查询。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
- ms.service="hdinsight"
- ms.devlang="java"
- ms.topic="article"
- ms.tgt_pltfrm="na"
- ms.workload="big-data"
- ms.date="11/08/2016"
- wacn.date="12/30/2016"
- ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: java
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 11/08/2016
+wacn.date: 12/30/2016
+ms.author: larryfr
+---
 
 #使用 Hive JDBC 驱动程序连接到 Azure HDInsight 上的 Hive
 
-[AZURE.INCLUDE [ODBC-JDBC-selector](../../includes/hdinsight-selector-odbc-jdbc.md)]
+[!INCLUDE [ODBC-JDBC-selector](../../includes/hdinsight-selector-odbc-jdbc.md)]
 
 在本文档中，学习如何使用 Java 应用程序中的 JDBC 将 Hive 查询远程提交到 HDInsight 群集。学习如何从 SQuirreL SQL 客户端进行连接，以及如何通过 Java 以编程方式进行连接。
 
@@ -76,7 +76,8 @@ SQuirreL SQL 是一个 JDBC 客户端，可用于通过 HDInsight 群集远程�
             * C:\\apps\\dist\\hadoop-2.6.0.2.2.9.1-7\\share\\hadoop\\common\\hadoop-common-2.6.0.2.2.9.1-7.jar
             * C:\\apps\\dist\\hadoop-2.6.0.2.2.9.1-7\\share\\hadoop\\common\\lib\\hadoop-auth-2.6.0.2.2.9.1-7.jar
 
-            > [AZURE.NOTE] 群集的路径和文件名中包含的版本号可能会有所不同。
+            > [!NOTE]
+            > 群集的路径和文件名中包含的版本号可能会有所不同。
 
         4. 文件复制完成后，断开远程桌面会话的连接。
 
@@ -134,7 +135,8 @@ SQuirreL SQL 是一个 JDBC 客户端，可用于通过 HDInsight 群集远程�
 
 使用 Java 客户端查询 Hive on HDInsight 的示例位于 [https://github.com/Azure-Samples/hdinsight-java-hive-jdbc](https://github.com/Azure-Samples/hdinsight-java-hive-jdbc)。按照存储库中的说明生成并运行该示例。
 
->[AZURE.NOTE] 此示例是针对全球 Azure 编写。对于 Azure 中国区，需要在连接字符串中将“azurehdinsight.net”替换为“azurehdinsight.cn”。
+>[!NOTE]
+> 此示例是针对全球 Azure 编写。对于 Azure 中国区，需要在连接字符串中将“azurehdinsight.net”替换为“azurehdinsight.cn”。
 
 ##故障排除
 
@@ -162,9 +164,9 @@ __解决方法__：要解决此错误，请使用以下步骤。
 
 现在，已了解如何将 JDBC 与 Hive 配合使用，请使用以下链接学习 Azure HDInsight 的其他用法。
 
-* [将数据上载到 HDInsight](/documentation/articles/hdinsight-upload-data/)
-* [将 Hive 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-hive/)
-* [将 Pig 与 HDInsight 配合使用](/documentation/articles/hdinsight-use-pig/)
-* [将 MapReduce 作业与 HDInsight 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将数据上载到 HDInsight](./hdinsight-upload-data.md)
+* [将 Hive 与 HDInsight 配合使用](./hdinsight-use-hive.md)
+* [将 Pig 与 HDInsight 配合使用](./hdinsight-use-pig.md)
+* [将 MapReduce 作业与 HDInsight 配合使用](./hdinsight-use-mapreduce.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

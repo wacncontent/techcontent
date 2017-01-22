@@ -1,23 +1,23 @@
-<properties
-   pageTitle="Azure 应用服务本地缓存概述 | Azure"
-   description="本文介绍如何针对 Azure 应用服务本地缓存功能执行启用、大小调整和状态查询操作。"
-   services="app-service"
-   documentationCenter="app-service"
-   authors="SyntaxC4"
-   manager="yochayk"
-   editor=""
-   tags="optional"
-   keywords=""/>
+---
+title: Azure 应用服务本地缓存概述 | Azure
+description: 本文介绍如何针对 Azure 应用服务本地缓存功能执行启用、大小调整和状态查询操作。
+services: app-service
+documentationCenter: app-service
+authors: SyntaxC4
+manager: yochayk
+editor: 
+tags: optional
+keywords: 
 
-<tags
-   ms.service="app-service"
-   ms.devlang="multiple"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="03/04/2016"
-   wacn.date="01/05/2017"
-   ms.author="cfowler"/>
+ms.service: app-service
+ms.devlang: multiple
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 03/04/2016
+wacn.date: 01/05/2017
+ms.author: cfowler
+---
 
 # Azure 应用服务本地缓存概述
 
@@ -86,13 +86,13 @@ Azure 应用服务本地缓存功能允许通过 Web 角色来查看内容。存
 
 ## 使用应用服务本地缓存的最佳实践
 
-建议将本地缓存与[过渡环境](/documentation/articles/web-sites-staged-publishing/)功能结合在一起使用。
+建议将本地缓存与[过渡环境](../app-service-web/web-sites-staged-publishing.md)功能结合在一起使用。
 
 * 将_粘性_ 应用设置 `WEBSITE_LOCAL_CACHE_OPTION` 与值 `Always` 添加到“生产”槽。如果使用的是 `WEBSITE_LOCAL_CACHE_SIZEINMB`，也可将其作为粘性设置添加到“生产”槽。
 * 创建“过渡”槽，将内容发布到“过渡”槽。如果获得了生产槽的本地缓存优势，则要想通过无缝的“构建-部署-测试”生命周期进行过渡，通常不需要将过渡槽设置为使用本地缓存。
-*	针对“过渡”槽来测试站点。
-*	准备就绪以后，即可在“过渡”槽和“生产”槽之间发出[交换操作](/documentation/articles/web-sites-staged-publishing/#Swap)命令。
-*	粘性设置包含名称，会粘到某个槽上。因此，将“过渡”槽交换成“生产”槽以后，该槽会继承本地缓存应用设置。新交换的“生产”槽将在几分钟后以本地缓存为基础运行，并会在交换后进行槽预热的过程中预热。因此，在槽交换完成后，“生产”槽会在本地缓存的基础上运行。
+* 针对“过渡”槽来测试站点。
+* 准备就绪以后，即可在“过渡”槽和“生产”槽之间发出[交换操作](../app-service-web/web-sites-staged-publishing.md#Swap)命令。
+* 粘性设置包含名称，会粘到某个槽上。因此，将“过渡”槽交换成“生产”槽以后，该槽会继承本地缓存应用设置。新交换的“生产”槽将在几分钟后以本地缓存为基础运行，并会在交换后进行槽预热的过程中预热。因此，在槽交换完成后，“生产”槽会在本地缓存的基础上运行。
 
 ## 常见问题 (FAQ)
 

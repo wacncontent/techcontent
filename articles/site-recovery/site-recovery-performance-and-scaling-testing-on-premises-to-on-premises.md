@@ -1,23 +1,22 @@
-<properties
-    pageTitle="使用 Site Recovery 进行本地到本地 Hyper-V 复制后的性能测试和缩放结果 | Azure"
-    description="本文介绍了使用 Azure Site Recovery 进行本地到本地复制时的性能测试。"
-    services="site-recovery"
-    documentationcenter=""
-    author="rayne-wiselman"
-    manager="jwhit"
-    editor="tysonn" />  
+---
+title: 使用 Site Recovery 进行本地到本地 Hyper-V 复制后的性能测试和缩放结果 | Azure
+description: 本文介绍了使用 Azure Site Recovery 进行本地到本地复制时的性能测试。
+services: site-recovery
+documentationcenter: 
+author: rayne-wiselman
+manager: jwhit
+editor: tysonn
 
-<tags
-    ms.assetid="96ff404f-0d88-43fa-a00b-2dffde93d192"
-    ms.service="site-recovery"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="storage-backup-recovery"
-    ms.date="11/01/2016"
-    wacn.date="01/04/2017"
-    ms.author="raynew" />  
-
+ms.assetid: 96ff404f-0d88-43fa-a00b-2dffde93d192
+ms.service: site-recovery
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: storage-backup-recovery
+ms.date: 11/01/2016
+wacn.date: 01/04/2017
+ms.author: raynew
+---
 
 # 使用 Site Recovery 进行本地到本地 Hyper-V 复制的性能测试和缩放结果
 
@@ -110,7 +109,6 @@ Hyper-V 副本使用恢复服务器上的少量内存来使存储操作数量最
 
 ![主要硬件规格](./media/site-recovery-performance-and-scaling-testing-on-premises-to-on-premises/IC744923.png)
 
-
 | 服务器 | RAM | 模型 | 处理器 | 处理器数目 | NIC | 软件 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 群集中的 Hyper-V 服务器：<br />ESTLAB-HOST07<br />ESTLAB-HOST08<br />ESTLAB-HOST09<br />ESTLAB-HOST10 |96 |Dell ™ PowerEdge ™ R720 |Intel(R) Xeon(R) CPU E5-2630 0 @ 2.30GHz |2 |I Gbps x 4 |Windows Server Datacenter 2012 R2 (x64) + Hyper-V 角色 |
@@ -170,6 +168,6 @@ Hyper-V 副本使用恢复服务器上的少量内存来使存储操作数量最
 |VM 写入吞吐量|\Hyper-V Virtual Storage Device(<VHD>)\Write Bytes/sec|
 
 ## 后续步骤
-- [设置两个本地 VMM 站点之间的保护](/documentation/articles/site-recovery-vmm-to-vmm/)
+- [设置两个本地 VMM 站点之间的保护](./site-recovery-vmm-to-vmm.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

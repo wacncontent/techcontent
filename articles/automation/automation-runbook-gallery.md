@@ -1,21 +1,21 @@
-<properties
-	pageTitle="Azure 自动化的 Runbook 和模块库 | Azure"
-	description="你可以安装并在 Azure 自动化环境中使用 Microsoft 和社区提供的 Runbook 与模块。本文介绍如何访问这些资源，以及在库中补充你的 Runbook。"
-	services="automation"
-	documentationCenter=""
-	authors="mgoedtel"
-	manager="jwhit"
-	editor="tysonn" />
-<tags
-	ms.service="automation"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="infrastructure-services"
-	ms.date="09/18/2016"
-	wacn.date="01/03/2017"
-	ms.author="magoedte;bwren" />
+---
+title: Azure 自动化的 Runbook 和模块库 | Azure
+description: 你可以安装并在 Azure 自动化环境中使用 Microsoft 和社区提供的 Runbook 与模块。本文介绍如何访问这些资源，以及在库中补充你的 Runbook。
+services: automation
+documentationCenter: 
+authors: mgoedtel
+manager: jwhit
+editor: tysonn
 
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 09/18/2016
+wacn.date: 01/03/2017
+ms.author: magoedte;bwren
+---
 
 # Azure 自动化的 Runbook 和模块库
 
@@ -29,7 +29,8 @@
 
 直接从 Runbook 库导入只能使用 Azure 经典管理门户来完成，而不能使用 Windows PowerShell 执行此功能。
 
->[AZURE.NOTE] 你应验证从 Runbook 库获取的任何 Runbook 的内容，在生产环境中安装和运行这些 Runbook 时，请谨慎操作。
+>[!NOTE]
+> 你应验证从 Runbook 库获取的任何 Runbook 的内容，在生产环境中安装和运行这些 Runbook 时，请谨慎操作。
 
 ### 使用 Azure 经典管理门户从 Runbook 库导入 Runbook
 
@@ -41,7 +42,6 @@
 3. 查看该 Runbook 的内容，并记下说明中所述的任何要求。完成后，单击右箭头按钮。
 4. 输入 Runbook 详细信息，然后单击复选标记按钮。Runbook 名称已填入。
 5. 该 Runbook 将出现在自动化帐户的“Runbook”选项卡中。
-
 
 ###<a name="AddRunbook"></a> 将 Runbook 添加到 Runbook 库
 
@@ -69,16 +69,15 @@ Azure 建议你将 Runbook 添加到你认为对其他客户有用的 Runbook �
     - 补救
     - VM 生命周期管理
 
-
 - 自动化每小时更新一次该库，因此，你无法立即看见上载内容。
 
 ## 请求 Runbook 或模块
 
-你可以将请求发送到[用户之声](/product-feedback)。如果你需要 Runbook 编写帮助，或对 PowerShell 存有疑问，请将问题发布到我们的[论坛](http://social.msdn.microsoft.com/Forums/windowsazure/zh-cn/home?forum=azureautomation&filter=alltypes&sort=lastpostdesc)。
+你可以将请求发送到[用户之声](https://www.azure.cn/product-feedback)。如果你需要 Runbook 编写帮助，或对 PowerShell 存有疑问，请将问题发布到我们的[论坛](http://social.msdn.microsoft.com/Forums/windowsazure/zh-cn/home?forum=azureautomation&filter=alltypes&sort=lastpostdesc)。
 
 ## 后续步骤
 
-- 若要开始使用 Runbook，请参阅[在 Azure 自动化中创建或导入 Runbook](/documentation/articles/automation-creating-importing-runbook/)
-- [了解 PowerShell 工作流](/documentation/articles/automation-powershell-workflow/)
+- 若要开始使用 Runbook，请参阅[在 Azure 自动化中创建或导入 Runbook](./automation-creating-importing-runbook.md)
+- [了解 PowerShell 工作流](./automation-powershell-workflow.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

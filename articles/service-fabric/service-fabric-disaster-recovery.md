@@ -1,21 +1,22 @@
-<properties
-    pageTitle="Azure Service Fabric 灾难恢复 | Azure"
-    description="Azure Service Fabric 提供应对各种灾难所需的功能。本文介绍可能发生的灾难类型，以及如何应对这些灾难。"
-    services="service-fabric"
-    documentationcenter=".net"
-    author="seanmck"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.assetid="ab49c4b9-74a8-4907-b75b-8d2ee84c6d90"
-    ms.service="service-fabric"
-    ms.devlang="dotNet"
-    ms.topic="article"
-    ms.tgt_pltfrm="NA"
-    ms.workload="NA"
-    ms.date="10/29/2016"
-    wacn.date="12/26/2016"
-    ms.author="seanmck" />
+---
+title: Azure Service Fabric 灾难恢复 | Azure
+description: Azure Service Fabric 提供应对各种灾难所需的功能。本文介绍可能发生的灾难类型，以及如何应对这些灾难。
+services: service-fabric
+documentationcenter: .net
+author: seanmck
+manager: timlt
+editor: 
+
+ms.assetid: ab49c4b9-74a8-4907-b75b-8d2ee84c6d90
+ms.service: service-fabric
+ms.devlang: dotNet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 10/29/2016
+wacn.date: 12/26/2016
+ms.author: seanmck
+---
 
 # Azure Service Fabric 中的灾难恢复
 提供高可用性云应用程序的关键是确保它可以从各种故障中生存下来，包括那些不受控制的故障。本文说明在潜在灾难环境中 Azure Service Fabric 群集的物理布局，并提供有关如何应对此类灾难以便限制或消除停机时间或数据丢失风险的指导。
@@ -28,11 +29,12 @@
 ### 容错域
 默认情况下，群集中的 VM 平均分散在名为容错域 (FD) 的逻辑组中，逻辑组根据主机硬件中的潜在故障将计算机分段。具体而言，如果你有两个 VM 位于两个不同的 FD 中，则可以确保它们不会共享相同的电源或网络交换机。因此，影响一个 VM 的局域网或电源故障不会影响到另一个 VM，使 Service Fabric 能够重新平衡群集中无响应计算机的工作负荷。
 
-可以使用 [Service Fabric Explorer](/documentation/articles/service-fabric-visualizing-your-cluster/) 中提供的群集映射将各容错域中群集的布局可视化：
+可以使用 [Service Fabric Explorer](./service-fabric-visualizing-your-cluster.md) 中提供的群集映射将各容错域中群集的布局可视化：
 
 ![Service Fabric Explorer 中分散在容错域之间的节点][sfx-cluster-map]
 
->[AZURE.NOTE] 群集映射中的另一个轴显示升级域，升级域以逻辑方式根据计划的维护活动将节点分组。Azure 中的 Service Fabric 群集始终分布在五个升级域之间。
+>[!NOTE]
+> 群集映射中的另一个轴显示升级域，升级域以逻辑方式根据计划的维护活动将节点分组。Azure 中的 Service Fabric 群集始终分布在五个升级域之间。
 
 ### 地理分布
 
@@ -52,7 +54,8 @@
 #### 仲裁丢失
 如果有状态服务分区的大多数副本关闭，则该分区将进入所谓的“仲裁丢失”状态。 此时，Service Fabric 会停止允许写入该分区，以确保其状态保持一致且可靠。实际上，我们会选择接受一段不可用的时间，以确保客户端不被告知其数据已保存（但事实并非如此）。请注意，如果选择允许从该有状态服务的辅助副本读取，可以在此状态下继续执行读取操作。分区保持仲裁丢失的状态，直到恢复足量的副本，或群集管理员强迫系统继续使用 [Repair-ServiceFabricPartition API][repair-partition-ps] 为止。
 
->[AZURE.WARNING] 在主要副本关闭时执行修复操作将导致数据丢失。
+>[!WARNING]
+> 在主要副本关闭时执行修复操作将导致数据丢失。
 
 系统服务也会遭受仲裁丢失，同时对相关服务造成特定影响。例如，命名服务的仲裁丢失将影响名称解析，而故障转移管理器服务的仲裁丢失将阻止创建新服务与故障转移。请注意，我们并*不*建议您像修复自己的服务一样尝试修复系统服务。而最好是单纯地等待，直到关闭的副本恢复为止。
 
@@ -68,37 +71,32 @@
 
 在整个物理数据中心遭到损坏（这种情况很少见）时，该数据中心托管的所有 Service Fabric 群集及其状态将会丢失。
 
-若要防范这种可能性，请务必定期[将状态备份到](/documentation/articles/service-fabric-reliable-services-backup-restore/)异地冗余存储，并确保已验证您能够还原备份。执行备份的频率取决于恢复点目标 (RPO)。即使尚未完全实现备份和还原，但还是应该实现 `OnDataLoss` 事件的处理程序，以便在发生该事件时进行记录，如下所示：
+若要防范这种可能性，请务必定期[将状态备份到](./service-fabric-reliable-services-backup-restore.md)异地冗余存储，并确保已验证您能够还原备份。执行备份的频率取决于恢复点目标 (RPO)。即使尚未完全实现备份和还原，但还是应该实现 `OnDataLoss` 事件的处理程序，以便在发生该事件时进行记录，如下所示：
 
-
-	protected virtual Task<bool> OnDataLoss(CancellationToken cancellationToken)
-	{
-	  ServiceEventSource.Current.ServiceMessage(this, "OnDataLoss event received.");
-	  return Task.FromResult(false);
-	}
-
-
+    protected virtual Task<bool> OnDataLoss(CancellationToken cancellationToken)
+    {
+      ServiceEventSource.Current.ServiceMessage(this, "OnDataLoss event received.");
+      return Task.FromResult(false);
+    }
 
 ### 软件故障和其他数据丢失根源
 在数据丢失的原因中，服务的代码缺陷、人为操作失误和安全违规比大范围的数据中心故障更为常见。但是，在所有情况下，恢复策略都一样：定期备份所有的有状态服务并运用还原该状态的能力。
 
 ## 后续步骤
-- 了解如何使用[可测试性框架](/documentation/articles/service-fabric-testability-overview/)模拟各种故障
+- 了解如何使用[可测试性框架](./service-fabric-testability-overview.md)模拟各种故障
 - 阅读有关灾难恢复和高可用性的其他资源。Microsoft 已发布大量有关这些主题的指导。尽管其中有些文档提到其他产品中使用的特定技术，但也包含了许多可在 Service Fabric 上下文中应用的一般性最佳实践：
- - [可用性核对清单](/documentation/articles/best-practices-availability-checklist/)
- - [执行灾难恢复演练](/documentation/articles/sql-database-disaster-recovery-drills/)
+ - [可用性核对清单](../best-practices-availability-checklist.md)
+ - [执行灾难恢复演练](../sql-database/sql-database-disaster-recovery-drills.md)
  - [Azure 应用程序的灾难恢复和高可用性][dr-ha-guide]
 
 <!-- External links -->
 
 [repair-partition-ps]: https://msdn.microsoft.com/zh-cn/library/mt163522.aspx
-[azure-status-dashboard]: /support/service-dashboard/
+[azure-status-dashboard]: https://www.azure.cn/support/service-dashboard/
 
 [dr-ha-guide]: https://msdn.microsoft.com/zh-cn/library/azure/dn251004.aspx
 
-
 <!-- Images -->
-
 
 [sfx-cluster-map]: ./media/service-fabric-disaster-recovery/sfx-clustermap.png
 

@@ -2,7 +2,7 @@
 
 2. 在“设置”边栏选项卡上，单击“连接”，然后单击边栏选项卡顶部的“添加”打开“添加连接”边栏选项卡。
 
-	![创建站点到站点连接](./media/vpn-gateway-add-site-to-site-connection-rm-portal-include/addconnection250.png)
+    ![创建站点到站点连接](./media/vpn-gateway-add-site-to-site-connection-rm-portal-include/addconnection250.png)
 
 3. 在“添加连接”边栏选项卡中，输入连接的“名称”。
 
@@ -20,7 +20,6 @@
 
 10. 连接完成后，你将看到它出现在网关的“连接”边栏选项卡中。
 
-	![创建站点到站点连接](./media/vpn-gateway-add-site-to-site-connection-rm-portal-include/connectionstatus450.png)
-
+    ![创建站点到站点连接](./media/vpn-gateway-add-site-to-site-connection-rm-portal-include/connectionstatus450.png)
 
 <!---HONumber=Mooncake_0425_2016---->

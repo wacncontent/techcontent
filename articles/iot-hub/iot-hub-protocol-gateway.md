@@ -1,23 +1,21 @@
-<properties
-   pageTitle="Azure IoT 协议网关 | Azure"
-   description="介绍如何使用 Azure IoT 协议网关来扩展 Azure IoT 中心的功能和协议支持。"
-   services="iot-hub"
-   documentationCenter=""
-   authors="kdotchkoff"
-   manager="timlt"
-   editor=""/>  
+---
+title: Azure IoT 协议网关 | Azure
+description: 介绍如何使用 Azure IoT 协议网关来扩展 Azure IoT 中心的功能和协议支持。
+services: iot-hub
+documentationCenter: 
+authors: kdotchkoff
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="iot-hub"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="08/23/2016"
-   wacn.date="01/04/2017"
-   ms.author="kdotchko"/>
-
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/23/2016
+wacn.date: 01/04/2017
+ms.author: kdotchko
+---
 
 # 支持 IoT 中心的其他协议
 
@@ -53,10 +51,10 @@ MQTT 适配器还会演示用来为其他协议构建协议适配器的编程模
 - [使用网关 SDK 模拟设备][lnk-gateway]
 - [使用 Azure 门户管理 IoT 中心][lnk-portal]
 
-[lnk-compare]: /documentation/articles/iot-hub-compare-event-hubs/
-[lnk-scaling]: /documentation/articles/iot-hub-scaling/
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-gateway]: /documentation/articles/iot-hub-linux-gateway-sdk-simulated-device/
-[lnk-portal]: /documentation/articles/iot-hub-manage-through-portal/
+[lnk-compare]: ./iot-hub-compare-event-hubs.md
+[lnk-scaling]: ./iot-hub-scaling.md
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-gateway]: ./iot-hub-linux-gateway-sdk-simulated-device.md
+[lnk-portal]: ./iot-hub-manage-through-portal.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

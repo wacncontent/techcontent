@@ -1,6 +1,6 @@
-> [AZURE.SELECTOR]
-- [Node.js](/documentation/articles/iot-hub-node-node-twin-getstarted/)
-- [C#](/documentation/articles/iot-hub-csharp-node-twin-getstarted/)
+> [!div class="op_single_selector"]
+- [Node.js](../articles/iot-hub/iot-hub-node-node-twin-getstarted.md)
+- [C#](../articles/iot-hub/iot-hub-csharp-node-twin-getstarted.md)
 
 ## 介绍
 
@@ -13,7 +13,8 @@
 * 同步设备应用和后端之间的长时间运行工作流的状态（例如固件和配置更新）。
 * 查询设备的元数据、配置或状态。
 
-> [AZURE.NOTE] 设备克隆旨在执行同步以及查询设备的配置和条件。可在[了解设备克隆][lnk-twins]中找到设备克隆适用情况的详细信息。
+> [!NOTE]
+> 设备克隆旨在执行同步以及查询设备的配置和条件。可在[了解设备克隆][lnk-twins]中找到设备克隆适用情况的详细信息。
 
 设备克隆存储在 IoT 中心内，其中包含：
 
@@ -23,16 +24,15 @@
 
 ![][img-twin]  
 
-
 此外，应用后端可以根据上述所有数据查询设备克隆。有关设备克隆的详细信息，请参阅[了解设备克隆][lnk-twins]，有关查询的详细信息，请参阅 [IoT 中心查询语言][lnk-query]。
 
-> [AZURE.NOTE] 当前，只能从使用 MQTT 协议连接到 IoT 中心的设备访问设备克隆。有关如何转换现有设备应用以使用 MQTT 的说明，请参阅 [MQTT 支持][lnk-devguide-mqtt]一文。
+> [!NOTE]
+> 当前，只能从使用 MQTT 协议连接到 IoT 中心的设备访问设备克隆。有关如何转换现有设备应用以使用 MQTT 的说明，请参阅 [MQTT 支持][lnk-devguide-mqtt]一文。
 
 本教程演示如何：
 
 - 创建将 *标记* 添加到设备克隆的后端应用，以及将其连接通道作为设备克隆上的 *报告属性* 进行报告的模拟设备。
 - 使用标记上的筛选器和之前创建的属性通过后端应用查询设备。
-
 
 <!-- images -->
 
@@ -40,10 +40,10 @@
 
 <!-- links -->
 
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-d2c]: /documentation/articles/iot-hub-devguide-messaging/#device-to-cloud-messages
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-devguide-mqtt]: /documentation/articles/iot-hub-mqtt-support/
+[lnk-query]: ../articles/iot-hub/iot-hub-devguide-query-language.md
+[lnk-twins]: ../articles/iot-hub/iot-hub-devguide-device-twins.md
+[lnk-d2c]: ../articles/iot-hub/iot-hub-devguide-messaging.md#device-to-cloud-messages
+[lnk-methods]: ../articles/iot-hub/iot-hub-devguide-direct-methods.md
+[lnk-devguide-mqtt]: ../articles/iot-hub/iot-hub-mqtt-support.md
 
 <!---HONumber=Mooncake_1212_2016-->

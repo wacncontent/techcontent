@@ -1,26 +1,26 @@
-<properties
-    pageTitle="通过 .NET 开始使用 Azure 队列存储 | Azure"
-    description="Azure 队列用于在应用程序组件之间进行可靠的异步消息传送。应用程序组件可以利用云消息传送进行独立缩放。"
-    services="storage"
-    documentationcenter=".net"
-    author="robinsh"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="c0f82537-a613-4f01-b2ed-fc82e5eea2a7"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="hero-article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="robinsh" />  
+---
+title: 通过 .NET 开始使用 Azure 队列存储 | Azure
+description: Azure 队列用于在应用程序组件之间进行可靠的异步消息传送。应用程序组件可以利用云消息传送进行独立缩放。
+services: storage
+documentationcenter: .net
+author: robinsh
+manager: timlt
+editor: tysonn
 
+ms.assetid: c0f82537-a613-4f01-b2ed-fc82e5eea2a7
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: hero-article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: robinsh
+---
 
 # 通过 .NET 开始使用 Azure 队列存储
 
-[AZURE.INCLUDE [storage-selector-queue-include](../../includes/storage-selector-queue-include.md)]
+[!INCLUDE [storage-selector-queue-include](../../includes/storage-selector-queue-include.md)]
 
 ##<a name="what-is"></a> 概述
 
@@ -36,27 +36,26 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
 - [Microsoft Visual Studio](https://www.visualstudio.com/zh-cn/visual-studio-homepage-vs.aspx)
 - [适用于 .NET 的 Azure 存储空间客户端库](https://www.nuget.org/packages/WindowsAzure.Storage/)
 - [适用于 .NET 的 Azure Configuration Manager](https://www.nuget.org/packages/Microsoft.WindowsAzure.ConfigurationManager/)
-- 一个 [Azure 存储帐户](/documentation/articles/storage-create-storage-account/#create-a-storage-account)
+- 一个 [Azure 存储帐户](./storage-create-storage-account.md#create-a-storage-account)
 
+[!INCLUDE [storage-dotnet-client-library-version-include](../../includes/storage-dotnet-client-library-version-include.md)]
 
-[AZURE.INCLUDE [storage-dotnet-client-library-version-include](../../includes/storage-dotnet-client-library-version-include.md)]
+[!INCLUDE [storage-queue-concepts-include](../../includes/storage-queue-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-queue-concepts-include](../../includes/storage-queue-concepts-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
-
-[AZURE.INCLUDE [storage-development-environment-include](../../includes/storage-development-environment-include.md)]
+[!INCLUDE [storage-development-environment-include](../../includes/storage-development-environment-include.md)]
 
 ### 添加命名空间声明
 将下列 `using` 语句添加到 `program.cs` 文件顶部：
 
-	using Microsoft.Azure; // Namespace for CloudConfigurationManager 
-	using Microsoft.WindowsAzure.Storage; // Namespace for CloudStorageAccount
+    using Microsoft.Azure; // Namespace for CloudConfigurationManager 
+    using Microsoft.WindowsAzure.Storage; // Namespace for CloudStorageAccount
     using Microsoft.WindowsAzure.Storage.Queue; // Namespace for Queue storage types
 
 ### 解析连接字符串
 
-[AZURE.INCLUDE [storage-cloud-configuration-manager-include](../../includes/storage-cloud-configuration-manager-include.md)]
+[!INCLUDE [storage-cloud-configuration-manager-include](../../includes/storage-cloud-configuration-manager-include.md)]
 
 ### 创建队列服务客户端
 
@@ -121,8 +120,8 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
     // Peek at the next message
     CloudQueueMessage peekedMessage = queue.PeekMessage();
 
-	// Display message.
-	Console.WriteLine(peekedMessage.AsString);
+    // Display message.
+    Console.WriteLine(peekedMessage.AsString);
 
 ##<a name="change-the-contents-of-a-queued-message"></a> 更改已排队消息的内容
 
@@ -138,7 +137,7 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
     // Retrieve a reference to a queue.
     CloudQueue queue = queueClient.GetQueueReference("myqueue");
 
-	// Get the message from the queue and update the message contents.
+    // Get the message from the queue and update the message contents.
     CloudQueueMessage message = queue.GetMessage();
     message.SetMessageContent("Updated contents.");
     queue.UpdateMessage(message,
@@ -228,14 +227,14 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
     // Retrieve a reference to a queue.
     CloudQueue queue = queueClient.GetQueueReference("myqueue");
 
-	// Fetch the queue attributes.
-	queue.FetchAttributes();
+    // Fetch the queue attributes.
+    queue.FetchAttributes();
 
     // Retrieve the cached approximate message count.
     int? cachedMessageCount = queue.ApproximateMessageCount;
 
-	// Display number of messages.
-	Console.WriteLine("Number of messages in queue: " + cachedMessageCount);
+    // Display number of messages.
+    Console.WriteLine("Number of messages in queue: " + cachedMessageCount);
 
 ## 删除队列
 
@@ -261,11 +260,11 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
 - 查看队列服务参考文档，了解有关可用 API 的完整详细信息：
     - [.NET 存储客户端库参考](http://go.microsoft.com/fwlink/?LinkID=390731&clcid=0x409)
     - [REST API 参考](http://msdn.microsoft.com/zh-cn/library/azure/dd179355)
-- 了解如何通过使用 [Azure WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk/) 简化为使用 Azure 存储空间而写的代码。
+- 了解如何通过使用 [Azure WebJobs SDK](../app-service-web/websites-dotnet-webjobs-sdk.md) 简化为使用 Azure 存储空间而写的代码。
 - 查看更多功能指南，以了解在 Azure 中存储数据的其他方式。
-    - [通过 .NET 开始使用 Azure 表存储](/documentation/articles/storage-dotnet-how-to-use-tables/)来存储结构化数据。
-    - [通过 .NET 开始使用 Azure Blob 存储](/documentation/articles/storage-dotnet-how-to-use-blobs/)来存储非结构化数据。
-    - [使用.NET (C#) 连接到 SQL 数据库](/documentation/articles/sql-database-develop-dotnet-simple/)，存储关系数据。
+    - [通过 .NET 开始使用 Azure 表存储](./storage-dotnet-how-to-use-tables.md)来存储结构化数据。
+    - [通过 .NET 开始使用 Azure Blob 存储](./storage-dotnet-how-to-use-blobs.md)来存储非结构化数据。
+    - [使用.NET (C#) 连接到 SQL 数据库](../sql-database/sql-database-develop-dotnet-simple.md)，存储关系数据。
 
   [Download and install the Azure SDK for .NET]: /develop/net/
   [.NET client library reference]: http://go.microsoft.com/fwlink/?LinkID=390731&clcid=0x409
@@ -274,6 +273,5 @@ Azure 队列存储用于在应用程序组件之间进行云消息传送。在�
   [OData]: http://nuget.org/packages/Microsoft.Data.OData/5.0.2
   [Edm]: http://nuget.org/packages/Microsoft.Data.Edm/5.0.2
   [Spatial]: http://nuget.org/packages/System.Spatial/5.0.2
- 
 
 <!---HONumber=Mooncake_0103_2017-->

@@ -1,26 +1,26 @@
-<properties
-	pageTitle="在 HDInsight 中调试 Hadoop：查看日志和解释错误消息 | Azure"
-	description="了解在使用 PowerShell 管理 HDInsight 时可能会收到的错误消息，以及恢复正常的步骤。"
-	services="hdinsight"
-	tags="azure-portal"
-	editor="cgronlun"
-	manager="paulettm"
-	authors="mumian"
-	documentationCenter=""/>
+---
+title: 在 HDInsight 中调试 Hadoop：查看日志和解释错误消息 | Azure
+description: 了解在使用 PowerShell 管理 HDInsight 时可能会收到的错误消息，以及恢复正常的步骤。
+services: hdinsight
+tags: azure-portal
+editor: cgronlun
+manager: paulettm
+authors: mumian
+documentationCenter: 
 
-<tags
-	ms.service="hdinsight"
-	ms.workload="big-data"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/02/2016"
-	wacn.date="12/16/2016"
-	ms.author="jgao"/>
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/02/2016
+wacn.date: 12/16/2016
+ms.author: jgao
+---
 
 # 分析 HDInsight 日志
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 Azure HDInsight 中的每个 Hadoop 群集都有用作默认文件系统的 Azure 存储帐户。该存储帐户称作默认存储帐户。群集使用默认存储帐户上的 Azure 表存储和 Blob 存储存储其日志。即使在删除群集后，日志仍会保留在存储帐户中。
 
@@ -68,21 +68,21 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 
 1. 打开 **Microsoft Excel**。
 2. 在“Power Query”菜单中，依次单击“来自 Azure”和“来自 Azure 表存储”。
- 
-	![HDInsight Hadoop Excel PowerQuery 打开 Azure 表存储](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-using-excel-power-query-open.png)
+
+    ![HDInsight Hadoop Excel PowerQuery 打开 Azure 表存储](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-using-excel-power-query-open.png)
 3. 输入存储帐户名称。对于 Azure 中国区，该名称必须是 FQDN。
 4. 输入存储帐户密钥。将显示一系列表：
 
-	![存储在 Azure 表存储中的 HDInsight Hadoop 日志](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-table-names.png)
+    ![存储在 Azure 表存储中的 HDInsight Hadoop 日志](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-table-names.png)
 5. 右键单击“导航器”窗格中的 hadoopservicelog 表，然后选择“编辑”。将显示 4 个列。（可选）删除“分区键”、“行键”和“时间戳”列，方法是：选择这些项，然后在功能区的选项中单击“删除列”。
 6. 单击“内容”列上的展开图标，选择要导入 Excel 电子表格中的列。选择 TraceLevel 和 ComponentName 进行本次演示：这样可以大致知道哪些组件有问题。
 
-	![HDInsight Hadoop 日志选择列](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-using-excel-power-query-filter.png)
+    ![HDInsight Hadoop 日志选择列](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-using-excel-power-query-filter.png)
 7. 单击“确定”导入数据。
 8. 选择“TraceLevel”、“角色”和“ComponentName”列，然后单击功能区中的“分组依据”控件。
 9. 单击“分组依据”对话框中的“确定”
 10. 单击“应用并关闭”。
- 
+
 现在，可以根据需要使用 Excel 筛选和排序。显然，可能要包括其他列（如“消息”列），以便在出现问题时对其进行深入分析，但选择上述列并对其分组后，已经可以基本了解 Hadoop 服务的情况。setuplog 和 hadoopinstalllog 表也是如此。
 
 #### 使用 Visual Studio
@@ -95,20 +95,19 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 4. 依次展开“存储帐户”、群集的默认存储帐户和“表”。
 5. 双击“hadoopservicelog”。
 6. 添加筛选器。例如：
-	
-		TraceLevel eq 'ERROR'
 
-	![HDInsight Hadoop 日志选择列](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-visual-studio-filter.png)
- 
+        TraceLevel eq 'ERROR'
+
+    ![HDInsight Hadoop 日志选择列](./media/hdinsight-debug-jobs/hdinsight-hadoop-analyze-logs-visual-studio-filter.png)
+
 ##写入 Azure Blob 存储的日志
 
 通过[写入 Azure 表的日志](#log-written-to-azure-tables)，可在一定程度上了解 HDInsight 群集中发生的事件。但是，这些表不提供任务级日志，这些日志在问题发生时可以用于进一步分析问题。为了更进一步详细了解发生的问题，可以对 HDInsight 群集进行配置，将通过 Templeton 提交的任何作业的任务日志写入 Blob 存储帐户。实际上，这是指通过 Azure PowerShell cmdlet 或 .NET 作业提交 API 提交的作业，而不是指通过 RDP 提交或通过命令行访问群集时提交的作业。
 
-要查看日志，请参阅[在基于 Windows 的 HDInsight 上访问 YARN 应用程序日志](/documentation/articles/hdinsight-hadoop-access-yarn-app-logs/)。
+要查看日志，请参阅[在基于 Windows 的 HDInsight 上访问 YARN 应用程序日志](./hdinsight-hadoop-access-yarn-app-logs.md)。
 
 有关应用程序日志的详细信息，请参阅[简化 YARN 中的用户日志管理和访问](http://hortonworks.com/blog/simplifying-user-logs-management-and-access-in-yarn/)。
- 
- 
+
 ## 查看群集运行状况和作业日志
 
 ###访问 Hadoop UI
@@ -120,7 +119,6 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 出现提示时，输入群集管理员凭据。在打开的查询控制台中，单击“Hadoop UI”。
 
 ![启动 Hadoop UI](./media/hdinsight-debug-jobs/hdi-debug-launch-dashboard-hadoop-ui.png)
-
 
 ###访问 Yarn UI
 
@@ -165,7 +163,6 @@ Power Query 可以从 [www.microsoft.com/download/details.aspx?id=39379](http://
 ### <a id="ClusterNameUnavailable"></a>ClusterNameUnavailable
 - **说明**：群集名称 *yourClusterName* 不可用。请选取另一个名称。  
 - **缓解**：用户应指定唯一且不存在的群集名称，然后重试。如果用户正在使用门户，则 UI 将通知他们该群集名称是否已在创建步骤期间使用。
-
 
 ### <a id="ClusterPasswordInvalid"></a>ClusterPasswordInvalid
 - **说明**：群集密码无效。密码长度至少必须为 10 个字符，并且至少必须包含一个数字、大写字母、小写字母和特殊字符且没有空格，不得包含用户名作为密码的一部分。  
