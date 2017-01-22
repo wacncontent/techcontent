@@ -1,19 +1,16 @@
-<properties
-	pageTitle="IoT 中心 - IP 筛选器"
-	description="本教程介绍如何针对 Azure IoT 中心将某些 IP 地址列入方块列表或允许列表。"
-	services="iot-hub"
-	documentationcenter=""
-	author="BeatriceOltean"
-	manager="timlt"
-	editor=""/>  
+---
+title: IoT 中心 - IP 筛选器
+description: 本教程介绍如何针对 Azure IoT 中心将某些 IP 地址列入方块列表或允许列表。
+services: iot-hub
+documentationcenter: 
+author: BeatriceOltean
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="iot-hub"
-	ms.date="11/14/2016"
-	wacn.date="12/19/2016"/>  
-
-
+ms.service: iot-hub
+ms.date: 11/14/2016
+wacn.date: 12/19/2016
+---
 
 # IP 筛选器
 
@@ -37,7 +34,6 @@
 
 ![][img-ip-filter-default]  
 
-
 ## 添加或编辑 IP 筛选器规则
 
 添加 IP 筛选器规则时，系统会提示用户提供以下值：
@@ -48,11 +44,9 @@
 
 ![][img-ip-filter-add-rule]  
 
-
 保存规则后，将会出现一个提醒，通知你更新正在进行。
 
 ![][img-ip-filter-save-new-rule]  
-
 
 在用户达到 10 个 IP 筛选器规则这一最大限制以后，系统会禁用“添加”选项。
 
@@ -63,7 +57,6 @@
 若要删除 IP 筛选器规则，请在网格中选择一条或多条规则，然后单击“删除”。
 
 ![][img-ip-filter-delete-rule]  
-
 
 ## IP 筛选器规则评估
 
@@ -76,7 +69,6 @@ IP 筛选器规则按顺序应用，与 IP 地址匹配的第一条规则决定�
 若要保存新的 IP 筛选器规则顺序，请单击“保存”。
 
 ![][img-ip-filter-rule-order]  
-
 
 ## 后续步骤
 
@@ -93,14 +85,12 @@ IP 筛选器规则按顺序应用，与 IP 地址匹配的第一条规则决定�
 [img-ip-filter-delete-rule]: ./media/iot-hub-ip-filtering/ip-filter-delete-rule.png
 [img-ip-filter-rule-order]: ./media/iot-hub-ip-filtering/ip-filter-rule-order.png
 
-
 <!-- Links -->
 
+[IoT Hub Developer Guide]: ./iot-hub-devguide.md
+[Azure ExpressRoute]: ../expressroute/expressroute-faqs.md#supported-services
 
-[IoT Hub Developer Guide]: /documentation/articles/iot-hub-devguide
-[Azure ExpressRoute]: /documentation/articles/expressroute-faqs/#supported-services
-
-[lnk-monitor]: /documentation/articles/iot-hub-operations-monitoring/
-[lnk-metrics]: /documentation/articles/iot-hub-metrics/
+[lnk-monitor]: ./iot-hub-operations-monitoring.md
+[lnk-metrics]: ./iot-hub-metrics.md
 
 <!---HONumber=Mooncake_1212_2016-->

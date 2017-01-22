@@ -1,26 +1,25 @@
-<properties
-    pageTitle="密钥保管库中机密的 Resource Manager 模板 | Azure"
-    description="介绍用于通过模板部署密钥保管库机密的Resource Manager 架构。"
-    services="azure-resource-manager,key-vault"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="" />  
+---
+title: 密钥保管库中机密的 Resource Manager 模板 | Azure
+description: 介绍用于通过模板部署密钥保管库机密的Resource Manager 架构。
+services: azure-resource-manager,key-vault
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: 
 
-<tags
-    ms.assetid="fd12bc81-b609-4ca8-b7e0-ee1049d70ab3"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="06/23/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />  
-
+ms.assetid: fd12bc81-b609-4ca8-b7e0-ee1049d70ab3
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 06/23/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 密钥保管库机密模板架构
-创建存储于密钥保管库中的机密。此资源类型通常部署为[密钥保管库](/documentation/articles/resource-manager-template-keyvault/)的子资源。
+创建存储于密钥保管库中的机密。此资源类型通常部署为[密钥保管库](./resource-manager-template-keyvault.md)的子资源。
 
 ## 架构格式
 若要创建密钥保管库机密，请将以下架构添加到你的模板。可将机密定义为密钥保管库的子资源或定义为顶级资源。在同一个模板中部署密钥保管库时，可将机密定义为子资源。如果密钥保管库不是部署在同一个模板中，或者需要通过对资源类型执行循环来创建多个密码，则需要将机密定义为顶级资源。
@@ -217,9 +216,8 @@
         "outputs": {}
     }
 
-
 ## 后续步骤
-* 有关密钥保管库的一般信息，请参阅 [Azure 密钥保管库入门](/documentation/articles/key-vault-get-started/)。
-* 有关在部署模板时引用密钥保管库机密的示例，请参阅[在部署期间传递安全值](/documentation/articles/resource-manager-keyvault-parameter/)。
+* 有关密钥保管库的一般信息，请参阅 [Azure 密钥保管库入门](../key-vault/key-vault-get-started.md)。
+* 有关在部署模板时引用密钥保管库机密的示例，请参阅[在部署期间传递安全值](./resource-manager-keyvault-parameter.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

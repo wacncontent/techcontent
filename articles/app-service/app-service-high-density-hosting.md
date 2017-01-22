@@ -1,23 +1,22 @@
-<properties
-    pageTitle="在 Azure 应用服务上进行高密度托管 | Azure"
-    description="在 Azure 应用服务上进行高密度托管"
-    author="btardif"
-    manager="wpickett"
-    editor=""
-    services="app-service\web"
-    documentationcenter="" />  
+---
+title: 在 Azure 应用服务上进行高密度托管 | Azure
+description: 在 Azure 应用服务上进行高密度托管
+author: btardif
+manager: wpickett
+editor: 
+services: app-service\web
+documentationcenter: 
 
-<tags
-    ms.assetid="a903cb78-4927-47b0-8427-56412c4e3e64"
-    ms.service="app-service-web"
-    ms.workload="web"
-    ms.tgt_pltfrm="na"
-    ms.devlang="multiple"
-    ms.topic="article"
-    ms.date="10/24/2016"
-    wacn.date="12/05/2016"
-    ms.author="byvinyal" />  
-
+ms.assetid: a903cb78-4927-47b0-8427-56412c4e3e64
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: article
+ms.date: 10/24/2016
+wacn.date: 12/05/2016
+ms.author: byvinyal
+---
 
 # 在 Azure 应用服务上进行高密度托管
 使用应用服务时，你的应用程序通过两个概念与分配给它的容量解耦：
@@ -84,6 +83,5 @@
              } ]
          }]
     }
-
 
 <!---HONumber=Mooncake_1128_2016-->

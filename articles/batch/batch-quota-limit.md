@@ -1,23 +1,21 @@
-<properties
-	pageTitle="Batch 服务的配额和限制 | Azure"
-	description="了解默认的 Azure Batch 配额、限制和约束，以及如何请求提高配额"
-	services="batch"
-	documentationCenter=""
-	authors="mmacy"
-	manager="timlt"
-	editor=""/>  
+---
+title: Batch 服务的配额和限制 | Azure
+description: 了解默认的 Azure Batch 配额、限制和约束，以及如何请求提高配额
+services: batch
+documentationCenter: 
+authors: mmacy
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="batch"
-	ms.workload="big-compute"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/10/2016"
-	wacn.date="11/30/2016"
-	ms.author="marsma"/>  
-
+ms.service: batch
+ms.workload: big-compute
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/10/2016
+wacn.date: 11/30/2016
+ms.author: marsma
+---
 
 # Azure Batch 服务的配额和限制
 
@@ -25,7 +23,8 @@
 
 如果你打算在 Batch 中运行生产工作负荷，可能需要将一个或多个配额提高到默认值以上。如果需要提高配额，可以免费提出在线[客户支持请求](#increase-a-quota)。
 
->[AZURE.NOTE] 配额是一种信用限制，不附带容量保证。如果你有大规模的容量需求，请联系 Azure 支持。
+>[!NOTE]
+> 配额是一种信用限制，不附带容量保证。如果你有大规模的容量需求，请联系 Azure 支持。
 
 ## 订阅配额
 **资源**|**默认限制**|**最大限制**
@@ -33,13 +32,13 @@
 每个区域每个订阅的 Batch 帐户数 | 1 | 50
 
 ## Batch 帐户配额  <a name="batch-account-quotas"></a>
-[AZURE.INCLUDE [azure-batch-limits](../../includes/azure-batch-limits.md)]
+[!INCLUDE [azure-batch-limits](../../includes/azure-batch-limits.md)]
 
 ## 其他限制
 **资源**|**最大限制**
 ---|---
-每个计算节点的[并发任务](/documentation/articles/batch-parallel-node-tasks/)数 | 4 x 节点核心数
-每个 Batch 帐户的[应用程序](/documentation/articles/batch-application-packages/)数 | 20
+每个计算节点的[并发任务](./batch-parallel-node-tasks.md)数 | 4 x 节点核心数
+每个 Batch 帐户的[应用程序](./batch-application-packages.md)数 | 20
 每个应用程序的应用程序包数 | 40
 应用程序包大小（每个） | 约 195GB<sup>1</sup>
 
@@ -55,7 +54,7 @@
 
 3. “属性”边栏选项卡显示了当前应用于 Batch 帐户的**配额**
 
-	![Batch 帐户配额][account_quotas]  
+    ![Batch 帐户配额][account_quotas]  
 
 ## 提高配额  <a name="increase-a-quota"></a>
 
@@ -67,41 +66,41 @@
 
 3. 在“基本”边栏选项卡上：
 
-	a.“问题类型”>“配额”
+    a.“问题类型”>“配额”
 
-	b.选择你的订阅。
+    b.选择你的订阅。
 
-	c.“配额类型”>“Batch”
+    c.“配额类型”>“Batch”
 
-	d.“支持计划”>“配额支持 - 已包括”
+    d.“支持计划”>“配额支持 - 已包括”
 
-	单击“下一步”。
+    单击“下一步”。
 
 4. 在“问题”边栏选项卡上：
 
-	a.根据[业务影响情况][support_sev]选择“严重性”。
+    a.根据[业务影响情况][support_sev]选择“严重性”。
 
-	b.在“详细信息”中，指定想要更改的每个配额、Batch 帐户名和新限制。
+    b.在“详细信息”中，指定想要更改的每个配额、Batch 帐户名和新限制。
 
-	单击“下一步”。
+    单击“下一步”。
 
 5. 在“联系信息”边栏选项卡上：
 
-	a.选择“首选联系方法”。
+    a.选择“首选联系方法”。
 
-	b.输入并确认所需的联系人详细信息。
+    b.输入并确认所需的联系人详细信息。
 
-	单击“创建”提交支持请求。
+    单击“创建”提交支持请求。
 
 提交支持请求后，Azure 支持人员将与你取得联系。请注意，完成该请求最多需要 2 个工作日。
 
 ## 相关主题
 
-* [使用 Azure 门户预览创建 Azure Batch 帐户](/documentation/articles/batch-account-create-portal/)
+* [使用 Azure 门户预览创建 Azure Batch 帐户](./batch-account-create-portal.md)
 
-* [Azure Batch 功能概述](/documentation/articles/batch-api-basics/)
+* [Azure Batch 功能概述](./batch-api-basics.md)
 
-* [Azure 订阅和服务限制、配额和约束](/documentation/articles/azure-subscription-service-limits/)
+* [Azure 订阅和服务限制、配额和约束](../azure-subscription-service-limits.md)
 
 [portal]: https://portal.azure.cn
 [portal_classic_increase]: https://azure.microsoft.com/blog/2014/06/04/azure-limits-quotas-increase-requests/

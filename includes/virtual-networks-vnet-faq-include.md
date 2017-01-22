@@ -8,23 +8,23 @@
 
 - 创建私有云专用的虚拟网络
 
-	有时你不需要适用于解决方案的跨界配置。创建 VNet 时，VNet 中的服务和 VM 可以在云中安全地互相直接通信。这可以在 VNet 内安全地保存流量，但仍允许你为需要 Internet 通信的 VM 和服务配置终结点连接，作为解决方案的一部分。
+    有时你不需要适用于解决方案的跨界配置。创建 VNet 时，VNet 中的服务和 VM 可以在云中安全地互相直接通信。这可以在 VNet 内安全地保存流量，但仍允许你为需要 Internet 通信的 VM 和服务配置终结点连接，作为解决方案的一部分。
 
 - 安全地扩展数据中心
 
-	借助 VNet，你可以构建传统的站点到站点 (S2S) VPN，以便安全地缩放数据中心容量。S2S VPN 使用 IPSEC 提供企业 VPN 网关和 Azure 之间的安全连接。
+    借助 VNet，你可以构建传统的站点到站点 (S2S) VPN，以便安全地缩放数据中心容量。S2S VPN 使用 IPSEC 提供企业 VPN 网关和 Azure 之间的安全连接。
 
 - 实现混合云方案
 
-	利用 VNet 可灵活地支持一系列混合云方案。你可以安全地将基于云的应用程序连接到任何类型的本地系统，例如大型机和 Unix 系统。
+    利用 VNet 可灵活地支持一系列混合云方案。你可以安全地将基于云的应用程序连接到任何类型的本地系统，例如大型机和 Unix 系统。
 
 ### 如何知道是否需要虚拟网络？
 
-请访问[虚拟网络概述](/documentation/articles/virtual-networks-overview/)，以便查看可帮助你决定最佳网络设计选项的决策表。
+请访问[虚拟网络概述](../articles/virtual-network/virtual-networks-overview.md)，以便查看可帮助你决定最佳网络设计选项的决策表。
 
 ### 如何开始？
 
-请访问[虚拟网络文档](/documentation/services/networking/)开始。此页包含指向常见配置步骤的链接以及帮助你了解设计虚拟网络时需要考虑的事项的信息。
+请访问[虚拟网络文档](../articles/virtual-network/index.md)开始。此页包含指向常见配置步骤的链接以及帮助你了解设计虚拟网络时需要考虑的事项的信息。
 
 ### 哪些服务可以与 VNet 共同使用？
 
@@ -42,7 +42,7 @@ VNet 可以与各种不同的 Azure 服务共同使用，例如云服务 (PaaS)�
 
 - Azure 门户预览（用于经典 VNet 和 Resource Manager VNet）。
 
-- 网络配置文件（netcfg - 仅用于经典 VNet）。请参阅[使用网络配置文件配置虚拟网络](/documentation/articles/virtual-networks-using-network-configuration-file/)。
+- 网络配置文件（netcfg - 仅用于经典 VNet）。请参阅[使用网络配置文件配置虚拟网络](../articles/virtual-network/virtual-networks-using-network-configuration-file.md)。
 
 - PowerShell（用于经典 VNet 和 Resource Manager VNet）。
 
@@ -54,7 +54,7 @@ VNet 可以与各种不同的 Azure 服务共同使用，例如云服务 (PaaS)�
 
 ### 我的 VNet 中是否可以有公共 IP 地址？
 
-是的。有关公共 IP 地址范围的详细信息，请参阅[虚拟网络 (VNet) 中的公共 IP 地址空间](/documentation/articles/virtual-networks-public-ip-within-vnet/)。请记住，无法从 Internet 直接访问公共 IP。
+是的。有关公共 IP 地址范围的详细信息，请参阅[虚拟网络 (VNet) 中的公共 IP 地址空间](../articles/virtual-network/virtual-networks-public-ip-within-vnet.md)。请记住，无法从 Internet 直接访问公共 IP。
 
 ### 虚拟网络中的子网数量是否有限制？
 
@@ -74,7 +74,7 @@ Azure 会保留每个子网中的某些 IP 地址。子网的第一个和最后�
 
 ### 是否可以在 VNet 和子网上指定自定义路由策略？
 
-是的。可以使用用户定义路由 (UDR)。有关 UDR 的详细信息，请访问[用户定义的路由和 IP 转发](/documentation/articles/virtual-networks-udr-overview/)。
+是的。可以使用用户定义路由 (UDR)。有关 UDR 的详细信息，请访问[用户定义的路由和 IP 转发](../articles/virtual-network/virtual-networks-udr-overview.md)。
 
 ### VNet 是否支持多播或广播？
 
@@ -128,7 +128,7 @@ Azure 会保留每个子网中的某些 IP 地址。子网的第一个和最后�
 
 ### VNet 的 DNS 选项有哪些？
 
-使用[](/documentation/articles/virtual-networks-name-resolution-for-vms-and-role-instances/)“VM 和角色实例的名称解析”页的决策表，引导你浏览提供的所有 DNS 选项。
+使用[](../articles/virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md)“VM 和角色实例的名称解析”页的决策表，引导你浏览提供的所有 DNS 选项。
 
 ### 是否可以为 VNet 指定 DNS 服务器？
 
@@ -142,12 +142,12 @@ Azure 会保留每个子网中的某些 IP 地址。子网的第一个和最后�
 
 是的。可以随时更改 VNet 的 DNS 服务器列表。如果更改 DNS 服务器列表，则需要重新启动 VNet 中的每个 VM，以使其拾取新的 DNS 服务器。
 
-
 ### 什么是 Azure 提供的 DNS？它是否适用于 VNet？
 
 Azure 提供的 DNS 是由 Microsoft 提供的多租户 DNS 服务。在此服务中，Azure 会注册所有 VM 和角色实例。此服务通过主机名为相同云服务内包含的 VM 和角色实例提供名称解析，并通过 FQDN 为相同 VNet 中的 VM 和角色实例提供名称解析。
 
-> [AZURE.NOTE] 此时使用 Azure 提供的 DNS 进行跨租户名称解析时，虚拟网络中的前 100 个云服务具有限制。如果使用自己的 DNS 服务器，此限制则不适用。
+> [!NOTE]
+> 此时使用 Azure 提供的 DNS 进行跨租户名称解析时，虚拟网络中的前 100 个云服务具有限制。如果使用自己的 DNS 服务器，此限制则不适用。
 
 ### 是否可以基于每个 VM/服务重写 DNS 设置？
 
@@ -175,11 +175,11 @@ Azure 提供的 DNS 是由 Microsoft 提供的多租户 DNS 服务。在此服�
 
 ### 我的 VM 将接收哪个 IP 地址？
 
-- **内部 IP 地址 -** 如果将 VM 部署到 VNet，该 VM 从您指定的内部 IP 地址池接收内部 IP 地址。VM 使用内部 IP 地址在 VNet 内进行通信。虽然 Azure 分配动态内部 IP 地址，但你可以为你的 VM 请求静态地址。若要了解有关静态内部 IP 地址的详细信息，请访问[如何设置静态内部 IP](/documentation/articles/virtual-networks-reserved-private-ip/)。
+- **内部 IP 地址 -** 如果将 VM 部署到 VNet，该 VM 从您指定的内部 IP 地址池接收内部 IP 地址。VM 使用内部 IP 地址在 VNet 内进行通信。虽然 Azure 分配动态内部 IP 地址，但你可以为你的 VM 请求静态地址。若要了解有关静态内部 IP 地址的详细信息，请访问[如何设置静态内部 IP](../articles/virtual-network/virtual-networks-reserved-private-ip.md)。
 
 - **VIP -** 你的 VM 还与 VIP 相关联，不过永远不会将 VIP 直接分配到 该 VM。VIP 是可以分配到云服务的公共 IP 地址。还可以为云服务保留 VIP。
 
-- **ILPIP -** 还可以配置实例层级公共 IP 地址 (ILPIP)。ILPIP 是直接与 VM 相关联，而非云服务。若要了解有关 ILPIP 的详细信息，请访问[实例层级公共 IP 概述](/documentation/articles/virtual-networks-instance-level-public-ip/)。
+- **ILPIP -** 还可以配置实例层级公共 IP 地址 (ILPIP)。ILPIP 是直接与 VM 相关联，而非云服务。若要了解有关 ILPIP 的详细信息，请访问[实例层级公共 IP 概述](../articles/virtual-network/virtual-networks-instance-level-public-ip.md)。
 
 ### 是否可以为以后创建的 VM 保留内部 IP 地址？
 
@@ -197,11 +197,12 @@ Azure 提供的 DNS 是由 Microsoft 提供的多租户 DNS 服务。在此服�
 
 无变化。IP 地址（公共 VIP 和内部 IP 地址）将留在云服务或 VM 中。
 
-> [AZURE.NOTE] 如果只想关闭 VM，请不要使用经典管理门户执行此操作。目前，关闭按钮会释放虚拟机。
+> [!NOTE]
+> 如果只想关闭 VM，请不要使用经典管理门户执行此操作。目前，关闭按钮会释放虚拟机。
 
 ### 在无需重新部署的情况下，是否可以将 VM 从一个子网移动到 VNet 中的另一个子网？
 
-是的。可以在[此处](/documentation/articles/virtual-networks-move-vm-role-to-subnet/)查看详细信息。
+是的。可以在[此处](../articles/virtual-network/virtual-networks-move-vm-role-to-subnet.md)查看详细信息。
 
 ### 是否可以为我的 VM 配置静态 MAC 地址？
 
@@ -225,8 +226,7 @@ Azure 提供的 DNS 是由 Microsoft 提供的多租户 DNS 服务。在此服�
 
 是的。可以在 VNet 内部署 Web 应用程序。此外，如果为 VNet 配置了点到站点，Web 应用则可以安全地连接和访问 Azure VNet 中的资源。有关详细信息，请参阅以下主题：
 
-
-- [Web Apps 虚拟网络集成](/documentation/articles/app-service-vnet-integration-powershell/)
+- [Web Apps 虚拟网络集成](../articles/app-service-web/app-service-vnet-integration-powershell.md)
 
 ### 是否可以在 VNet 中部署云服务与 Web 和辅助角色 (PaaS)？
 

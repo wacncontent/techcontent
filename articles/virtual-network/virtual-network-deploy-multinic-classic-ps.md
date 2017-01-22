@@ -1,43 +1,42 @@
-<properties
-    pageTitle="使用 PowerShell 创建具有多个 NIC 的 VM（经典）| Azure"
-    description="了解如何使用 PowerShell 通过经典部署模型创建具有多个 NIC 的 VM。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-service-management" />  
+---
+title: 使用 PowerShell 创建具有多个 NIC 的 VM（经典）| Azure
+description: 了解如何使用 PowerShell 通过经典部署模型创建具有多个 NIC 的 VM。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-service-management
 
-<tags
-    ms.assetid="6e50f39a-2497-4845-a5d4-7332dbc203c5"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/02/2016"
-    wacn.date="12/26/2016"
-    ms.author="jdial" />  
-
+ms.assetid: 6e50f39a-2497-4845-a5d4-7332dbc203c5
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/02/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 使用 PowerShell 创建具有多个 NIC 的 VM（经典）
 
-[AZURE.INCLUDE [virtual-network-deploy-multinic-classic-selectors-include.md](../../includes/virtual-network-deploy-multinic-classic-selectors-include.md)]
+[!INCLUDE [virtual-network-deploy-multinic-classic-selectors-include.md](../../includes/virtual-network-deploy-multinic-classic-selectors-include.md)]
 
 你可以在 Azure 中创建虚拟机 (VM)，然后将多个网络接口 (NIC) 附加到每个 VM。有多个 NIC 时，可跨各个 NIC 分隔不同的流量类型。例如，一个 NIC 可能会与 Internet 通信，而另一个 NIC 则只与未连接到 Internet 的内部资源通信。跨多个 NIC 分隔网络流量是许多网络虚拟设备（例如应用程序交付和 WAN 优化解决方案）所需的功能。
 
-> [AZURE.IMPORTANT]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何使用 [Resource Manager 部署模型](/documentation/articles/virtual-network-deploy-multinic-arm-ps/)执行这些步骤。
+> [!IMPORTANT]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何使用 [Resource Manager 部署模型](./virtual-network-deploy-multinic-arm-ps.md)执行这些步骤。
 
-[AZURE.INCLUDE [virtual-network-deploy-multinic-scenario-include.md](../../includes/virtual-network-deploy-multinic-scenario-include.md)]
+[!INCLUDE [virtual-network-deploy-multinic-scenario-include.md](../../includes/virtual-network-deploy-multinic-scenario-include.md)]
 
 以下步骤将名为 *IaaSStory* 的资源组用于 Web 服务器，并将名为 *IaaSStory-BackEnd* 的资源组用于数据库服务器。
 
 ## <a name="Prerequisites"></a> 先决条件
 
-需要先创建具有此方案需要的所有资源的 *IaaSStory* 资源组，然后才能创建数据库服务器。若要创建这些资源，请完成以下步骤。若要创建虚拟网络，请完成[创建虚拟网络](/documentation/articles/virtual-networks-create-vnet-classic-netcfg-ps/)一文中的步骤。
+需要先创建具有此方案需要的所有资源的 *IaaSStory* 资源组，然后才能创建数据库服务器。若要创建这些资源，请完成以下步骤。若要创建虚拟网络，请完成[创建虚拟网络](./virtual-networks-create-vnet-classic-netcfg-ps.md)一文中的步骤。
 
-[AZURE.INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
+[!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
 ## 创建后端 VM
 后端 VM 取决于以下资源的创建：

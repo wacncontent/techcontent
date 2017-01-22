@@ -6,12 +6,9 @@ Latest Freshness check:  2015-09-02 , GeneMi.
 ## Connection string
 -->
 
-
 ### 从 Azure 门户获取连接字符串
 
-
 使用 [Azure 经典管理门户](http://manage.windowsazure.cn)获取客户端程序与 Azure SQL 数据库进行交互所需的连接字符串：
-
 
 1. 单击“所有项目”>“SQL 数据库”。
 
@@ -31,11 +28,9 @@ Latest Freshness check:  2015-09-02 , GeneMi.
 
 [1-select-sql]: ./media/sql-database-include-connection-string-20-portalshots/connection-string-select-sql.png
 
-
 [2-select-database]: ./media/sql-database-include-connection-string-20-portalshots/connection-string-select-database.PNG
 
 [3-get-connection-string]: ./media/sql-database-include-connection-string-20-portalshots/connection-string-jdbc.PNG
-
 
 <!--
 These three includes/ files are a sequenced set, but you can pick and choose:

@@ -1,22 +1,22 @@
-<properties
-    pageTitle="队列存储和 Visual Studio 连接服务（Web 作业项目）入门 | Azure"
-    description="在使用 Visual Studio 连接服务连接到存储帐户后，如何开始使用 WebJob 项目中的 Azure 队列存储"
-    services="storage"
-    documentationcenter=""
-    author="TomArcher"
-    manager="douge"
-    editor="" />
-<tags
-    ms.assetid="5c3ef267-2a67-44e9-ab4a-1edd7015034f"
-    ms.service="storage"
-    ms.workload="web"
-    ms.tgt_pltfrm="vs-getting-started"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/02/2016"
-    wacn.date="01/06/2017"
-    ms.author="tarcher" />  
+---
+title: 队列存储和 Visual Studio 连接服务（Web 作业项目）入门 | Azure
+description: 在使用 Visual Studio 连接服务连接到存储帐户后，如何开始使用 WebJob 项目中的 Azure 队列存储
+services: storage
+documentationcenter: 
+author: TomArcher
+manager: douge
+editor: 
 
+ms.assetid: 5c3ef267-2a67-44e9-ab4a-1edd7015034f
+ms.service: storage
+ms.workload: web
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: na
+ms.topic: article
+ms.date: 12/02/2016
+wacn.date: 01/06/2017
+ms.author: tarcher
+---
 
 # 开始使用 Azure 队列存储和 Visual Studio 连接服务（WebJob 项目）
 
@@ -25,9 +25,7 @@
 
 本文提供了 C# 代码示例，用于演示如何在 Azure 队列存储服务中使用 Azure WebJobs SDK 版本 1.x。
 
-Azure 队列存储是一项可存储大量消息的服务，用户可以通过经验证的呼叫，使用 HTTP 或 HTTPS 从世界任何地方访问这些消息。一条队列消息的大小最多可为 64 KB，一个队列中可以包含数百万条消息，直至达到存储帐户的总容量限值。有关详细信息，请参阅[通过 .NET 开始使用 Azure 队列存储](/documentation/articles/storage-dotnet-how-to-use-queues/)。有关 ASP.NET 的详细信息，请参阅 [ASP.NET](http://www.asp.net)。
-
-
+Azure 队列存储是一项可存储大量消息的服务，用户可以通过经验证的呼叫，使用 HTTP 或 HTTPS 从世界任何地方访问这些消息。一条队列消息的大小最多可为 64 KB，一个队列中可以包含数百万条消息，直至达到存储帐户的总容量限值。有关详细信息，请参阅[通过 .NET 开始使用 Azure 队列存储](./storage-dotnet-how-to-use-queues.md)。有关 ASP.NET 的详细信息，请参阅 [ASP.NET](http://www.asp.net)。
 
 ## 如何在接收队列消息时触发函数
 
@@ -37,11 +35,10 @@ Azure 队列存储是一项可存储大量消息的服务，用户可以通过�
 
 在下面的示例中，队列中包含一个字符串消息，因此，**QueueTrigger** 已应用到包含队列消息内容的 **logMessage** 字符串参数。该函数[向仪表板写入一条日志消息](#how-to-write-logs)。
 
-
-		public static void ProcessQueueMessage([QueueTrigger("logqueue")] string logMessage, TextWriter logger)
-		{
-		    logger.WriteLine(logMessage);
-		}
+        public static void ProcessQueueMessage([QueueTrigger("logqueue")] string logMessage, TextWriter logger)
+        {
+            logger.WriteLine(logMessage);
+        }
 
 除了 **string** 以外，参数还可以是字节数组、**CloudQueueMessage** 对象或你定义的 POCO。
 
@@ -49,36 +46,36 @@ Azure 队列存储是一项可存储大量消息的服务，用户可以通过�
 
 在下面的示例中，队列消息包含 **BlobInformation** 对象的 JSON，该对象包含一个 **BlobName** 属性。SDK 会自动反序列化该对象。
 
-		public static void WriteLogPOCO([QueueTrigger("logqueue")] BlobInformation blobInfo, TextWriter logger)
-		{
-		    logger.WriteLine("Queue message refers to blob: " + blobInfo.BlobName);
-		}
+        public static void WriteLogPOCO([QueueTrigger("logqueue")] BlobInformation blobInfo, TextWriter logger)
+        {
+            logger.WriteLine("Queue message refers to blob: " + blobInfo.BlobName);
+        }
 
 SDK 使用 [Newtonsoft.Json NuGet 包](http://www.nuget.org/packages/Newtonsoft.Json)序列化和反序列化消息。如果在不使用 WebJobs SDK 的程序中创建队列消息，可以如以下示例所示编写代码，以创建 SDK 可以分析的 POCO 队列消息。
 
-		BlobInformation blobInfo = new BlobInformation() { BlobName = "log.txt" };
-		var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(blobInfo));
-		logQueue.AddMessage(queueMessage);
+        BlobInformation blobInfo = new BlobInformation() { BlobName = "log.txt" };
+        var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(blobInfo));
+        logQueue.AddMessage(queueMessage);
 
 ### 异步函数
 
 以下异步函数[将日志写入仪表板](#how-to-write-logs)。
 
-		public async static Task ProcessQueueMessageAsync([QueueTrigger("logqueue")] string logMessage, TextWriter logger)
-		{
-		    await logger.WriteLineAsync(logMessage);
-		}
+        public async static Task ProcessQueueMessageAsync([QueueTrigger("logqueue")] string logMessage, TextWriter logger)
+        {
+            await logger.WriteLineAsync(logMessage);
+        }
 
 异步函数可以采用[取消标记](http://www.asp.net/mvc/overview/performance/using-asynchronous-methods-in-aspnet-mvc-4#CancelToken)，如以下用于复制 blob 的示例中所示。（有关 **queueTrigger** 占位符的说明，请参阅 [Blob](#how-to-read-and-write-blobs-and-tables-while-processing-a-queue-message) 部分。）
 
-		public async static Task ProcessQueueMessageAsyncCancellationToken(
-		    [QueueTrigger("blobcopyqueue")] string blobName,
-		    [Blob("textblobs/{queueTrigger}",FileAccess.Read)] Stream blobInput,
-		    [Blob("textblobs/{queueTrigger}-new",FileAccess.Write)] Stream blobOutput,
-		    CancellationToken token)
-		{
-		    await blobInput.CopyToAsync(blobOutput, 4096, token);
-		}
+        public async static Task ProcessQueueMessageAsyncCancellationToken(
+            [QueueTrigger("blobcopyqueue")] string blobName,
+            [Blob("textblobs/{queueTrigger}",FileAccess.Read)] Stream blobInput,
+            [Blob("textblobs/{queueTrigger}-new",FileAccess.Write)] Stream blobOutput,
+            CancellationToken token)
+        {
+            await blobInput.CopyToAsync(blobOutput, 4096, token);
+        }
 
 ## QueueTrigger 属性适用的类型
 
@@ -119,42 +116,42 @@ SDK 实现了随机指数退让算法，以降低空闲队列轮询对存储事�
 
 下面的示例将所有这些元数据写入 INFO 应用程序日志。在该示例中，logMessage 和 queueTrigger 包含队列消息的内容。
 
-		public static void WriteLog([QueueTrigger("logqueue")] string logMessage,
-		    DateTimeOffset expirationTime,
-		    DateTimeOffset insertionTime,
-		    DateTimeOffset nextVisibleTime,
-		    string id,
-		    string popReceipt,
-		    int dequeueCount,
-		    string queueTrigger,
-		    CloudStorageAccount cloudStorageAccount,
-		    TextWriter logger)
-		{
-		    logger.WriteLine(
-		        "logMessage={0}\n" +
-			"expirationTime={1}\ninsertionTime={2}\n" +
-		        "nextVisibleTime={3}\n" +
-		        "id={4}\npopReceipt={5}\ndequeueCount={6}\n" +
-		        "queue endpoint={7} queueTrigger={8}",
-		        logMessage, expirationTime,
-		        insertionTime,
-		        nextVisibleTime, id,
-		        popReceipt, dequeueCount,
-		        cloudStorageAccount.QueueEndpoint,
-		        queueTrigger);
-		}
+        public static void WriteLog([QueueTrigger("logqueue")] string logMessage,
+            DateTimeOffset expirationTime,
+            DateTimeOffset insertionTime,
+            DateTimeOffset nextVisibleTime,
+            string id,
+            string popReceipt,
+            int dequeueCount,
+            string queueTrigger,
+            CloudStorageAccount cloudStorageAccount,
+            TextWriter logger)
+        {
+            logger.WriteLine(
+                "logMessage={0}\n" +
+            "expirationTime={1}\ninsertionTime={2}\n" +
+                "nextVisibleTime={3}\n" +
+                "id={4}\npopReceipt={5}\ndequeueCount={6}\n" +
+                "queue endpoint={7} queueTrigger={8}",
+                logMessage, expirationTime,
+                insertionTime,
+                nextVisibleTime, id,
+                popReceipt, dequeueCount,
+                cloudStorageAccount.QueueEndpoint,
+                queueTrigger);
+        }
 
 下面是示例代码编写的示例日志：
 
-		logMessage=Hello world!
-		expirationTime=10/14/2014 10:31:04 PM +00:00
-		insertionTime=10/7/2014 10:31:04 PM +00:00
-		nextVisibleTime=10/7/2014 10:41:23 PM +00:00
-		id=262e49cd-26d3-4303-ae88-33baf8796d91
-		popReceipt=AgAAAAMAAAAAAAAAfc9H0n/izwE=
-		dequeueCount=1
-		queue endpoint=https://contosoads.queue.core.chinacloudapi.cn/
-		queueTrigger=Hello world!
+        logMessage=Hello world!
+        expirationTime=10/14/2014 10:31:04 PM +00:00
+        insertionTime=10/7/2014 10:31:04 PM +00:00
+        nextVisibleTime=10/7/2014 10:41:23 PM +00:00
+        id=262e49cd-26d3-4303-ae88-33baf8796d91
+        popReceipt=AgAAAAMAAAAAAAAAfc9H0n/izwE=
+        dequeueCount=1
+        queue endpoint=https://contosoads.queue.core.chinacloudapi.cn/
+        queueTrigger=Hello world!
 
 ## 正常关闭
 
@@ -162,22 +159,22 @@ SDK 实现了随机指数退让算法，以降低空闲队列轮询对存储事�
 
 下述示例演示了如何在函数中检查即将发生的 Web 作业终止。
 
-	public static void GracefulShutdownDemo(
-	            [QueueTrigger("inputqueue")] string inputText,
-	            TextWriter logger,
-	            CancellationToken token)
-	{
-	    for (int i = 0; i < 100; i++)
-	    {
-	        if (token.IsCancellationRequested)
-	        {
-	            logger.WriteLine("Function was cancelled at iteration {0}", i);
-	            break;
-	        }
-	        Thread.Sleep(1000);
-	        logger.WriteLine("Normal processing for queue message={0}", inputText);
-	    }
-	}
+    public static void GracefulShutdownDemo(
+                [QueueTrigger("inputqueue")] string inputText,
+                TextWriter logger,
+                CancellationToken token)
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            if (token.IsCancellationRequested)
+            {
+                logger.WriteLine("Function was cancelled at iteration {0}", i);
+                break;
+            }
+            Thread.Sleep(1000);
+            logger.WriteLine("Normal processing for queue message={0}", inputText);
+        }
+    }
 
 **注意**：仪表板可能会错误显示已关闭函数的状态和输出。
 
@@ -191,24 +188,23 @@ SDK 实现了随机指数退让算法，以降低空闲队列轮询对存储事�
 
 下面的非异步代码示例在名为“outputqueue”的队列中创建新的队列消息，该消息的内容与名为“inputqueue”的队列中收到的队列消息相同。（对于异步函数，请按照本部分稍后将介绍的方法使用 **IAsyncCollector<T>**。）
 
-
-		public static void CreateQueueMessage(
-		    [QueueTrigger("inputqueue")] string queueMessage,
-		    [Queue("outputqueue")] out string outputQueueMessage )
-		{
-		    outputQueueMessage = queueMessage;
-		}
+        public static void CreateQueueMessage(
+            [QueueTrigger("inputqueue")] string queueMessage,
+            [Queue("outputqueue")] out string outputQueueMessage )
+        {
+            outputQueueMessage = queueMessage;
+        }
 
 ### POCO[（普通旧 CLR 对象](http://en.wikipedia.org/wiki/Plain_Old_CLR_Object)）队列消息
 
 若要创建包含 POCO（而不是字符串）的队列消息，请将 POCO 类型作为输出参数传递给 **Queue** 属性构造函数。
 
-		public static void CreateQueueMessage(
-		    [QueueTrigger("inputqueue")] BlobInformation blobInfoInput,
-		    [Queue("outputqueue")] out BlobInformation blobInfoOutput )
-		{
-		    blobInfoOutput = blobInfoInput;
-		}
+        public static void CreateQueueMessage(
+            [QueueTrigger("inputqueue")] BlobInformation blobInfoInput,
+            [Queue("outputqueue")] out BlobInformation blobInfoOutput )
+        {
+            blobInfoOutput = blobInfoInput;
+        }
 
 SDK 会自动将对象序列化为 JSON。即使对象为 null，也始终会创建队列消息。
 
@@ -216,15 +212,15 @@ SDK 会自动将对象序列化为 JSON。即使对象为 null，也始终会创
 
 若要创建多个消息，请设置输出队列 **ICollector<T>** 或 **IAsyncCollector<T>** 的参数类型，如以下示例所示。
 
-		public static void CreateQueueMessages(
-		    [QueueTrigger("inputqueue")] string queueMessage,
-		    [Queue("outputqueue")] ICollector<string> outputQueueMessage,
-		    TextWriter logger)
-		{
-		    logger.WriteLine("Creating 2 messages in outputqueue");
-		    outputQueueMessage.Add(queueMessage + "1");
-		    outputQueueMessage.Add(queueMessage + "2");
-		}
+        public static void CreateQueueMessages(
+            [QueueTrigger("inputqueue")] string queueMessage,
+            [Queue("outputqueue")] ICollector<string> outputQueueMessage,
+            TextWriter logger)
+        {
+            logger.WriteLine("Creating 2 messages in outputqueue");
+            outputQueueMessage.Add(queueMessage + "1");
+            outputQueueMessage.Add(queueMessage + "2");
+        }
 
 调用 **Add** 方法时，将立即创建每个队列消息。
 
@@ -246,21 +242,21 @@ SDK 会自动将对象序列化为 JSON。即使对象为 null，也始终会创
 
 下面的示例采用一个输入队列消息，并在输出队列中创建具有相同内容的新消息。输出队列名称由函数正文中的代码设置。
 
-		public static void CreateQueueMessage(
-		    [QueueTrigger("inputqueue")] string queueMessage,
-		    IBinder binder)
-		{
-		    string outputQueueName = "outputqueue" + DateTime.Now.Month.ToString();
-		    QueueAttribute queueAttribute = new QueueAttribute(outputQueueName);
-		    CloudQueue outputQueue = binder.Bind<CloudQueue>(queueAttribute);
-		    outputQueue.AddMessage(new CloudQueueMessage(queueMessage));
-		}
+        public static void CreateQueueMessage(
+            [QueueTrigger("inputqueue")] string queueMessage,
+            IBinder binder)
+        {
+            string outputQueueName = "outputqueue" + DateTime.Now.Month.ToString();
+            QueueAttribute queueAttribute = new QueueAttribute(outputQueueName);
+            CloudQueue outputQueue = binder.Bind<CloudQueue>(queueAttribute);
+            outputQueue.AddMessage(new CloudQueueMessage(queueMessage));
+        }
 
 **IBinder** 接口也可用于 **Table** 和 **Blob** 属性。
 
 ##<a id="how-to-read-and-write-blobs-and-tables-while-processing-a-queue-message"></a>如何在处理队列消息时读取和写入 Blob 和表
 
-可以使用 **Blob** 和 **Table** 属性读取与写入 blob 和表。本部分中的示例适用于 Blob。有关展示如何在创建或更新 blob 时触发进程的代码示例，请参阅[如何结合使用 Azure blob 存储和 WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk-storage-blobs-how-to/)；有关用于读取和写入表的代码示例，请参阅[如何结合使用 Azure 表存储和 WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk-storage-tables-how-to/)。
+可以使用 **Blob** 和 **Table** 属性读取与写入 blob 和表。本部分中的示例适用于 Blob。有关展示如何在创建或更新 blob 时触发进程的代码示例，请参阅[如何结合使用 Azure blob 存储和 WebJobs SDK](../app-service-web/websites-dotnet-webjobs-sdk-storage-blobs-how-to.md)；有关用于读取和写入表的代码示例，请参阅[如何结合使用 Azure 表存储和 WebJobs SDK](../app-service-web/websites-dotnet-webjobs-sdk-storage-tables-how-to.md)。
 
 ### 触发 Blob 操作的字符串队列消息
 
@@ -268,26 +264,26 @@ SDK 会自动将对象序列化为 JSON。即使对象为 null，也始终会创
 
 下面的示例使用 **Stream** 对象读取和写入 blob。队列消息是位于 textBlobs 容器中的 Blob 名称。将在同一个容器中创建 Blob 的副本，并在其名称后面附加“-new”。
 
-		public static void ProcessQueueMessage(
-		    [QueueTrigger("blobcopyqueue")] string blobName,
-		    [Blob("textblobs/{queueTrigger}",FileAccess.Read)] Stream blobInput,
-		    [Blob("textblobs/{queueTrigger}-new",FileAccess.Write)] Stream blobOutput)
-		{
-		    blobInput.CopyTo(blobOutput, 4096);
-		}
+        public static void ProcessQueueMessage(
+            [QueueTrigger("blobcopyqueue")] string blobName,
+            [Blob("textblobs/{queueTrigger}",FileAccess.Read)] Stream blobInput,
+            [Blob("textblobs/{queueTrigger}-new",FileAccess.Write)] Stream blobOutput)
+        {
+            blobInput.CopyTo(blobOutput, 4096);
+        }
 
-**Blob** 属性构造函数采用指定容器和 blob 名称的 **blobPath** 参数。有关此占位符的详细信息，请参阅[如何结合使用 Azure blob 存储和 WebJobs SDK](/documentation/articles/websites-dotnet-webjobs-sdk-storage-blobs-how-to/)。
+**Blob** 属性构造函数采用指定容器和 blob 名称的 **blobPath** 参数。有关此占位符的详细信息，请参阅[如何结合使用 Azure blob 存储和 WebJobs SDK](../app-service-web/websites-dotnet-webjobs-sdk-storage-blobs-how-to.md)。
 
 当属性修饰 **Stream** 对象时，另一个构造函数参数会将 **FileAccess** 模式指定为读取、写入或读取/写入。
 
 下面的示例使用 **CloudBlockBlob** 对象删除 blob。队列消息是 Blob 的名称。
 
-		public static void DeleteBlob(
-		    [QueueTrigger("deleteblobqueue")] string blobName,
-		    [Blob("textblobs/{queueTrigger}")] CloudBlockBlob blobToDelete)
-		{
-		    blobToDelete.Delete();
-		}
+        public static void DeleteBlob(
+            [QueueTrigger("deleteblobqueue")] string blobName,
+            [Blob("textblobs/{queueTrigger}")] CloudBlockBlob blobToDelete)
+        {
+            blobToDelete.Delete();
+        }
 
 ### POCO[（普通旧 CLR 对象](http://en.wikipedia.org/wiki/Plain_Old_CLR_Object)）队列消息
 
@@ -295,19 +291,19 @@ SDK 会自动将对象序列化为 JSON。即使对象为 null，也始终会创
 
 下面的示例将 Blob 复制到具有不同扩展名的新 Blob。队列消息是 **BlobInformation** 对象，其中包括 **BlobName** 和 **BlobNameWithoutExtension** 属性。属性名称用作 **Blob** 属性的 blob 路径中的占位符。
 
-		public static void CopyBlobPOCO(
-		    [QueueTrigger("copyblobqueue")] BlobInformation blobInfo,
-		    [Blob("textblobs/{BlobName}", FileAccess.Read)] Stream blobInput,
-		    [Blob("textblobs/{BlobNameWithoutExtension}.txt", FileAccess.Write)] Stream blobOutput)
-		{
-		    blobInput.CopyTo(blobOutput, 4096);
-		}
+        public static void CopyBlobPOCO(
+            [QueueTrigger("copyblobqueue")] BlobInformation blobInfo,
+            [Blob("textblobs/{BlobName}", FileAccess.Read)] Stream blobInput,
+            [Blob("textblobs/{BlobNameWithoutExtension}.txt", FileAccess.Write)] Stream blobOutput)
+        {
+            blobInput.CopyTo(blobOutput, 4096);
+        }
 
 SDK 使用 [Newtonsoft.Json NuGet 包](http://www.nuget.org/packages/Newtonsoft.Json)序列化和反序列化消息。如果你在不使用 WebJobs SDK 的程序中创建队列消息，则可以如以下示例所示编写代码，以创建 SDK 可以分析的 POCO 队列消息。
 
-		BlobInformation blobInfo = new BlobInformation() { BlobName = "boot.log", BlobNameWithoutExtension = "boot" };
-		var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(blobInfo));
-		logQueue.AddMessage(queueMessage);
+        BlobInformation blobInfo = new BlobInformation() { BlobName = "boot.log", BlobNameWithoutExtension = "boot" };
+        var queueMessage = new CloudQueueMessage(JsonConvert.SerializeObject(blobInfo));
+        logQueue.AddMessage(queueMessage);
 
 如果在将 Blob 绑定到某对象之前需要在函数中执行某些操作，则可以使用函数正文中的属性，如[使用函数正文中的 WebJobs SDK 属性](#use-webjobs-sdk-attributes-in-the-body-of-a-function)所示。
 
@@ -339,19 +335,19 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 在下面的示例中，如果队列消息包含不存在的 blob 名称，则 **CopyBlob** 函数会失败。在这种情况，消息将从 copyBlobqueue 队列移到 copyBlobqueue-poison 队列。然后 **ProcessPoisonMessage** 会记录有害消息。
 
-		public static void CopyBlob(
-		    [QueueTrigger("copyblobqueue")] string blobName,
-		    [Blob("textblobs/{queueTrigger}", FileAccess.Read)] Stream blobInput,
-		    [Blob("textblobs/{queueTrigger}-new", FileAccess.Write)] Stream blobOutput)
-		{
-		    blobInput.CopyTo(blobOutput, 4096);
-		}
+        public static void CopyBlob(
+            [QueueTrigger("copyblobqueue")] string blobName,
+            [Blob("textblobs/{queueTrigger}", FileAccess.Read)] Stream blobInput,
+            [Blob("textblobs/{queueTrigger}-new", FileAccess.Write)] Stream blobOutput)
+        {
+            blobInput.CopyTo(blobOutput, 4096);
+        }
 
-		public static void ProcessPoisonMessage(
-		    [QueueTrigger("copyblobqueue-poison")] string blobName, TextWriter logger)
-		{
-		    logger.WriteLine("Failed to copy blob, name=" + blobName);
-		}
+        public static void ProcessPoisonMessage(
+            [QueueTrigger("copyblobqueue-poison")] string blobName, TextWriter logger)
+        {
+            logger.WriteLine("Failed to copy blob, name=" + blobName);
+        }
 
 下图显示了处理有害消息时这些函数的控制台输出。
 
@@ -361,21 +357,21 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 你可以向你的函数添加名为 **dequeueCount** 的 **int** 参数，获取选择处理某消息的次数。然后，你可以检查函数代码中的取消排队计数，并在处理次数超过阈值时执行自己的有害消息处理，如以下示例中所示。
 
-		public static void CopyBlob(
-		    [QueueTrigger("copyblobqueue")] string blobName, int dequeueCount,
-		    [Blob("textblobs/{queueTrigger}", FileAccess.Read)] Stream blobInput,
-		    [Blob("textblobs/{queueTrigger}-new", FileAccess.Write)] Stream blobOutput,
-		    TextWriter logger)
-		{
-		    if (dequeueCount > 3)
-		    {
-		        logger.WriteLine("Failed to copy blob, name=" + blobName);
-		    }
-		    else
-		    {
-		    blobInput.CopyTo(blobOutput, 4096);
-		    }
-		}
+        public static void CopyBlob(
+            [QueueTrigger("copyblobqueue")] string blobName, int dequeueCount,
+            [Blob("textblobs/{queueTrigger}", FileAccess.Read)] Stream blobInput,
+            [Blob("textblobs/{queueTrigger}-new", FileAccess.Write)] Stream blobOutput,
+            TextWriter logger)
+        {
+            if (dequeueCount > 3)
+            {
+                logger.WriteLine("Failed to copy blob, name=" + blobName);
+            }
+            else
+            {
+            blobInput.CopyTo(blobOutput, 4096);
+            }
+        }
 
 ##<a id="how-to-set-configuration-options"></a>如何设置配置选项
 
@@ -389,24 +385,24 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 在代码中设置 SDK 连接字符串可以在配置文件或环境变量中使用自己的连接字符串名称，如以下示例中所示。
 
-		static void Main(string[] args)
-		{
-		    var _storageConn = ConfigurationManager
-		        .ConnectionStrings["MyStorageConnection"].ConnectionString;
+        static void Main(string[] args)
+        {
+            var _storageConn = ConfigurationManager
+                .ConnectionStrings["MyStorageConnection"].ConnectionString;
 
-		    var _dashboardConn = ConfigurationManager
-		        .ConnectionStrings["MyDashboardConnection"].ConnectionString;
+            var _dashboardConn = ConfigurationManager
+                .ConnectionStrings["MyDashboardConnection"].ConnectionString;
 
-		    var _serviceBusConn = ConfigurationManager
-		        .ConnectionStrings["MyServiceBusConnection"].ConnectionString;
+            var _serviceBusConn = ConfigurationManager
+                .ConnectionStrings["MyServiceBusConnection"].ConnectionString;
 
-		    JobHostConfiguration config = new JobHostConfiguration();
-		    config.StorageConnectionString = _storageConn;
-		    config.DashboardConnectionString = _dashboardConn;
-		    config.ServiceBusConnectionString = _serviceBusConn;
-		    JobHost host = new JobHost(config);
-		    host.RunAndBlock();
-		}
+            JobHostConfiguration config = new JobHostConfiguration();
+            config.StorageConnectionString = _storageConn;
+            config.DashboardConnectionString = _dashboardConn;
+            config.ServiceBusConnectionString = _serviceBusConn;
+            JobHost host = new JobHost(config);
+            host.RunAndBlock();
+        }
 
 ### 配置 QueueTrigger 设置
 
@@ -418,15 +414,15 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 下面的示例演示如何配置这些设置：
 
-		static void Main(string[] args)
-		{
-		    JobHostConfiguration config = new JobHostConfiguration();
-		    config.Queues.BatchSize = 8;
-		    config.Queues.MaxDequeueCount = 4;
-		    config.Queues.MaxPollingInterval = TimeSpan.FromSeconds(15);
-		    JobHost host = new JobHost(config);
-		    host.RunAndBlock();
-		}
+        static void Main(string[] args)
+        {
+            JobHostConfiguration config = new JobHostConfiguration();
+            config.Queues.BatchSize = 8;
+            config.Queues.MaxDequeueCount = 4;
+            config.Queues.MaxPollingInterval = TimeSpan.FromSeconds(15);
+            JobHost host = new JobHost(config);
+            host.RunAndBlock();
+        }
 
 ### 在代码中设置 WebJobs SDK 构造函数参数的值
 
@@ -436,30 +432,30 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 例如，假设你要在测试环境中使用名为 logqueuetest 的队列，并在生产环境中使用名为 logqueueprod 的队列。你希望在具有实际队列名称的 **appSettings** 集合中指定条目名称，而不是硬编码的队列名称。如果 **appSettings** 键为 logqueue，则函数如以下示例所示。
 
-		public static void WriteLog([QueueTrigger("%logqueue%")] string logMessage)
-		{
-		    Console.WriteLine(logMessage);
-		}
+        public static void WriteLog([QueueTrigger("%logqueue%")] string logMessage)
+        {
+            Console.WriteLine(logMessage);
+        }
 
 然后，**NameResolver** 类可以从 **appSettings** 获取队列名称，如以下示例所示：
 
-		public class QueueNameResolver : INameResolver
-		{
-		    public string Resolve(string name)
-		    {
-		        return ConfigurationManager.AppSettings[name].ToString();
-		    }
-		}
+        public class QueueNameResolver : INameResolver
+        {
+            public string Resolve(string name)
+            {
+                return ConfigurationManager.AppSettings[name].ToString();
+            }
+        }
 
 将 **NameResolver** 类传入 **JobHost** 对象，如以下示例中所示。
 
-		static void Main(string[] args)
-		{
-		    JobHostConfiguration config = new JobHostConfiguration();
-		    config.NameResolver = new QueueNameResolver();
-		    JobHost host = new JobHost(config);
-		    host.RunAndBlock();
-		}
+        static void Main(string[] args)
+        {
+            JobHostConfiguration config = new JobHostConfiguration();
+            config.NameResolver = new QueueNameResolver();
+            JobHost host = new JobHost(config);
+            host.RunAndBlock();
+        }
 
 **注意：**每次调用函数，都会解析队列名称、表名称和 blob 名称，但 blob 容器名称只会在应用程序启动时进行解析。作业运行时，无法更改 blob 容器名称。
 
@@ -467,24 +463,24 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 若要手动触发某个函数，请对 **JobHost** 对象使用 **Call** 或 **CallAsync** 方法，并对函数使用 **NoAutomaticTrigger** 属性，如以下示例所示。
 
-		public class Program
-		{
-		    static void Main(string[] args)
-		    {
-		        JobHost host = new JobHost();
-		        host.Call(typeof(Program).GetMethod("CreateQueueMessage"), new { value = "Hello world!" });
-		    }
+        public class Program
+        {
+            static void Main(string[] args)
+            {
+                JobHost host = new JobHost();
+                host.Call(typeof(Program).GetMethod("CreateQueueMessage"), new { value = "Hello world!" });
+            }
 
-		    [NoAutomaticTrigger]
-		    public static void CreateQueueMessage(
-		        TextWriter logger,
-		        string value,
-		        [Queue("outputqueue")] out string message)
-		    {
-		        message = value;
-		        logger.WriteLine("Creating queue message: ", message);
-		    }
-		}
+            [NoAutomaticTrigger]
+            public static void CreateQueueMessage(
+                TextWriter logger,
+                string value,
+                [Queue("outputqueue")] out string message)
+            {
+                message = value;
+                logger.WriteLine("Creating queue message: ", message);
+            }
+        }
 
 ##<a id="how-to-write-logs"></a>如何写入日志
 
@@ -494,12 +490,11 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 ![函数调用页中的日志](./media/vs-storage-webjobs-getting-started-queues/dashboardlogs.png)  
 
-
 在函数或 **Main()** 方法中调用的控制台方法的输出在 Web 作业的仪表板页面上显示，而不是在特定方法调用页面上显示。从方法签名的参数中获取的 TextWriter 对象的输出在方法调用的仪表板页中显示。
 
 无法将控制台输出链接到特定方法调用，因为控制台是单线程，而许多作业函数可能同时运行。正因如此，SDK 为每个函数调用提供了自身唯一的日志写入器对象。
 
-若要写入[应用程序跟踪日志](/documentation/articles/web-sites-dotnet-troubleshoot-visual-studio/#logsoverview)，请使用 **Console.Out**（创建标记为 INFO 的日志）和 **Console.Error**（创建标记为 ERROR 的日志）。或者，您可以使用 [Trace 或 TraceSource](http://blogs.msdn.com/b/mcsuksoldev/archive/2014/09/04/adding-trace-to-azure-web-sites-and-web-jobs.aspx)，它除了提供“信息”和“错误”外，还提供“详细”、“警告”和“严重级别”。应用程序跟踪日志在 Web 应用日志文件、Azure 表或 Azure blob 中显示，具体取决于配置 Azure Web 应用的方式。与所有控制台输出一样，最近的 100 条应用程序日志也会显示在 Web 作业的仪表板页中，而不是显示在函数调用的页中。
+若要写入[应用程序跟踪日志](../app-service-web/web-sites-dotnet-troubleshoot-visual-studio.md#logsoverview)，请使用 **Console.Out**（创建标记为 INFO 的日志）和 **Console.Error**（创建标记为 ERROR 的日志）。或者，您可以使用 [Trace 或 TraceSource](http://blogs.msdn.com/b/mcsuksoldev/archive/2014/09/04/adding-trace-to-azure-web-sites-and-web-jobs.aspx)，它除了提供“信息”和“错误”外，还提供“详细”、“警告”和“严重级别”。应用程序跟踪日志在 Web 应用日志文件、Azure 表或 Azure blob 中显示，具体取决于配置 Azure Web 应用的方式。与所有控制台输出一样，最近的 100 条应用程序日志也会显示在 Web 作业的仪表板页中，而不是显示在函数调用的页中。
 
 仅当程序在 Azure Web 作业中运行（而不是在本地运行或者在其他某个环境中运行）时，控制台输出才显示在仪表板中。
 
@@ -507,15 +502,15 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 下面的示例演示了写入日志的多种方法：
 
-		public static void WriteLog(
-		    [QueueTrigger("logqueue")] string logMessage,
-		    TextWriter logger)
-		{
-		    Console.WriteLine("Console.Write - " + logMessage);
-		    Console.Out.WriteLine("Console.Out - " + logMessage);
-		    Console.Error.WriteLine("Console.Error - " + logMessage);
-		    logger.WriteLine("TextWriter - " + logMessage);
-		}
+        public static void WriteLog(
+            [QueueTrigger("logqueue")] string logMessage,
+            TextWriter logger)
+        {
+            Console.WriteLine("Console.Write - " + logMessage);
+            Console.Out.WriteLine("Console.Out - " + logMessage);
+            Console.Error.WriteLine("Console.Error - " + logMessage);
+            logger.WriteLine("TextWriter - " + logMessage);
+        }
 
 在 WebJobs SDK 仪表板中，转到特定函数调用页面并选择“切换输出”时，会看到 **TextWriter** 对象的输出：
 
@@ -523,21 +518,20 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 ![函数调用页中的日志](./media/vs-storage-webjobs-getting-started-queues/dashboardlogs.png)
 
-
 在 WebJobs SDK 仪表板中，转到 Web 作业（而不是函数调用）页面并选择“切换输出”时，会看到最近的 100 行控制台输出。
 
 ![切换输出](./media/vs-storage-webjobs-getting-started-queues/dashboardapplogs.png)
 
 在连续的 WebJob 中，应用程序日志在 Web 应用文件系统的 /data/jobs/continuous/*{webjobname}*/job\_log.txt 中显示。
 
-		[09/26/2014 21:01:13 > 491e54: INFO] Console.Write - Hello world!
-		[09/26/2014 21:01:13 > 491e54: ERR ] Console.Error - Hello world!
-		[09/26/2014 21:01:13 > 491e54: INFO] Console.Out - Hello world!
+        [09/26/2014 21:01:13 > 491e54: INFO] Console.Write - Hello world!
+        [09/26/2014 21:01:13 > 491e54: ERR ] Console.Error - Hello world!
+        [09/26/2014 21:01:13 > 491e54: INFO] Console.Out - Hello world!
 
 在 Azure blob 中，应用程序日志如下所示：
-		2014-09-26T21:01:13,Information,contosoadsnew,491e54,635473620738373502,0,17404,17,Console.Write - Hello world!, 
-		2014-09-26T21:01:13,Error,contosoadsnew,491e54,635473620738373502,0,17404,19,Console.Error - Hello world!, 
-		2014-09-26T21:01:13,Information,contosoadsnew,491e54,635473620738529920,0,17404,17,Console.Out - Hello world!,
+        2014-09-26T21:01:13,Information,contosoadsnew,491e54,635473620738373502,0,17404,17,Console.Write - Hello world!, 
+        2014-09-26T21:01:13,Error,contosoadsnew,491e54,635473620738373502,0,17404,19,Console.Error - Hello world!, 
+        2014-09-26T21:01:13,Information,contosoadsnew,491e54,635473620738529920,0,17404,17,Console.Out - Hello world!,
 
 在 Azure 表中，**Console.Out** 和 **Console.Error** 日志如下所示：
 
@@ -547,7 +541,6 @@ SDK 在处理一个队列消息时最多会调用某个函数 5 次。如果第�
 
 ##后续步骤
 
-本文章提供了代码示例，演示如何处理用于操作 Azure 队列的常见方案。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 文档资源](/documentation/articles/websites-webjobs-resources/)。
- 
+本文章提供了代码示例，演示如何处理用于操作 Azure 队列的常见方案。有关如何使用 Azure WebJobs 和 WebJobs SDK 的详细信息，请参阅 [Azure WebJobs 文档资源](../app-service-web/websites-webjobs-resources.md)。
 
 <!---HONumber=Mooncake_0103_2017-->

@@ -1,26 +1,26 @@
-<properties
-	pageTitle="什么是 Azure 自动化 | Azure"
-	description="了解 Azure 自动化的重要性和常见问题的答案，为创建和使用 Runbook 做准备。"
-	services="automation"
-	documentationCenter=""
-	authors="mgoedtel"
-	manager="jwhit"
-	editor=""
-	keywords="什么是自动化, azure 自动化, azure 自动化示例"/>
-<tags
-	ms.service="automation"
-	ms.workload="tbd"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="get-started-article" 
-	ms.date="05/10/2016" 
-	wacn.date="01/03/2017"
-	ms.author="magoedte;bwren"/>
+---
+title: 什么是 Azure 自动化 | Azure
+description: 了解 Azure 自动化的重要性和常见问题的答案，为创建和使用 Runbook 做准备。
+services: automation
+documentationCenter: 
+authors: mgoedtel
+manager: jwhit
+editor: 
+keywords: 什么是自动化, azure 自动化, azure 自动化示例
+
+ms.service: automation
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 05/10/2016
+wacn.date: 01/03/2017
+ms.author: magoedte;bwren
+---
 
 # Azure 自动化概述
 
 借助 Azure 自动化，用户可以自动完成通常要在云环境和企业环境中执行的手动、长时间进行、易出错且重复性高的任务。它可以节省时间，可以提高常规管理任务的可靠性，甚至可以将这些任务安排成按特定的时间间隔自动执行。你可以使用 Runbook 实现这些过程的自动化，或者使用 Desired State Configuration 实现配置管理的自动化。本文概述了 Azure 自动化并回答了一些常见问题。您可以参考此库中的其他文章，以了解有关不同主题的更多详细信息。
-
 
 ## 使用 Runbook 实现过程的自动化
 
@@ -28,24 +28,21 @@ Runbook 是 Azure 自动化中执行某些自动化过程的一组任务。它�
 
 例如，如果 SQL 数据库即将达到最大大小，你可以通过现有的手动过程来截断该数据库，手动过程包括多个步骤，例如连接到服务器、连接到数据库、获取数据库的当前大小、查看是否超过了阈值，然后截断该数据库并通知用户。您无需手动执行每个步骤，而是可以创建一个将所有这些任务作为单个过程执行的 Runbook。你可以启动 Runbook，提供所需的信息，如 SQL 服务器名称、数据库名称、收件人电子邮件，然后无需干预，等待该过程自动完成即可。
 
-
 ## Runbook 可以自动化哪些任务？
 
 Azure 自动化中的 Runbook 基于 Windows PowerShell 工作流，因此它们能够执行 PowerShell 可以完成的任何工作。如果应用程序或服务具有一个 API，Runbook 可以使用它。如果你有一个用于该应用程序的 PowerShell 模块，可以将该模块加载到 Azure 自动化中，并在 Runbook 中包括这些 cmdlet。Azure 自动化 Runbook 在 Azure 云中运行，因此可以访问任何云资源或者那些可从云中访问的外部资源。
 
 ## 从社区获取 Runbook
 
-[Runbook 库](/documentation/articles/automation-runbook-gallery/#runbooks-in-runbook-gallery)包含来自 Microsoft 和社区的 Runbook，既可以在您的环境中使用未经修改的 Runbook，也可以根据自己的目的对其进行自定义。您还可以将它们作为学习如何创建自己的 Runbook 的参考。您甚至可以将您认为对其他用户有用的自己的 Runbook 分享到库中。
-
+[Runbook 库](./automation-runbook-gallery.md#runbooks-in-runbook-gallery)包含来自 Microsoft 和社区的 Runbook，既可以在您的环境中使用未经修改的 Runbook，也可以根据自己的目的对其进行自定义。您还可以将它们作为学习如何创建自己的 Runbook 的参考。您甚至可以将您认为对其他用户有用的自己的 Runbook 分享到库中。
 
 ## 使用 Azure 自动化创建 Runbook 
 
-您可以从头开始[创建您自己的 Runbook](/documentation/articles/automation-creating-importing-runbook/)，根据您自己的要求修改[Runbook 库](/documentation/articles/automation-runbook-gallery/)中的 Runbook。Azure.cn 中只有一个 Runbook 类型。你可以使用 PowerShell 工作流 Runbook，该 Runbook 可以脱机编辑，也可以使用 Azure 经典管理门户中的[文本编辑器](/documentation/articles/automation-edit-textual-runbook/)进行编辑。
+您可以从头开始[创建您自己的 Runbook](./automation-creating-importing-runbook.md)，根据您自己的要求修改[Runbook 库](./automation-runbook-gallery.md)中的 Runbook。Azure.cn 中只有一个 Runbook 类型。你可以使用 PowerShell 工作流 Runbook，该 Runbook 可以脱机编辑，也可以使用 Azure 经典管理门户中的[文本编辑器](./automation-edit-textual-runbook.md)进行编辑。
 
 ## 获取模块和配置 
 
 你可以获取包含 cmdlet 的 PowerShell 模块，这些 cmdlet 可以用于 [PowerShell 库](http://www.powershellgallery.com/)中的 Runbook。你可以下载并手动导入它们。你不能直接从 Azure 经典管理门户安装这些模块，但可以在下载之后进行安装，就像使用任何其他模块一样。
-
 
 ## Azure 自动化实际应用示例 
 
@@ -59,7 +56,6 @@ Azure 自动化中的 Runbook 基于 Windows PowerShell 工作流，因此它们
 * 针对你的实验室环境在 Azure 中构建 Active Directory 林。
 * 如果 SQL 数据库即将达到其最大大小，则截断数据库中的表。
 * 远程更新 Azure 网站的环境设置。
-
 
 ## Azure 自动化如何与其他自动化工具关联？
 
@@ -78,6 +74,6 @@ Azure 自动化中的 Runbook 基于 Windows PowerShell 工作流，因此它们
 
 ## 我是否可以提供反馈？ 
 
-**欢迎提供反馈！** 如果您正在寻找 Azure 自动化 Runbook 解决方案或集成模块，请在脚本中心发布脚本请求。如果您有关于 Azure 自动化的反馈或功能请求，请将其发布在[用户之声](/product-feedback)。谢谢！
+**欢迎提供反馈！** 如果您正在寻找 Azure 自动化 Runbook 解决方案或集成模块，请在脚本中心发布脚本请求。如果您有关于 Azure 自动化的反馈或功能请求，请将其发布在[用户之声](https://www.azure.cn/product-feedback)。谢谢！
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

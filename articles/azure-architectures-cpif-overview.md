@@ -1,17 +1,16 @@
-<properties 
-   pageTitle="云平台集成框架 | Azure" 
-   description="云平台集成框架提供工作负荷整合指南，将应用程序载入到 Microsoft 云解决方案中，其包含了用于 Azure 的体系结构模式" 
-   services="" 
-   documentationCenter="" 
-   authors="arynes" 
-   manager="fredhar" 
-   editor=""/>
+---
+title: 云平台集成框架 | Azure
+description: 云平台集成框架提供工作负荷整合指南，将应用程序载入到 Microsoft 云解决方案中，其包含了用于 Azure 的体系结构模式
+services: 
+documentationCenter: 
+authors: arynes
+manager: fredhar
+editor: 
 
-<tags
-   ms.service="cloud-services"
-   ms.date="03/25/2015"
-   wacn.date="10/03/2015"/>
-
+ms.service: cloud-services
+ms.date: 03/25/2015
+wacn.date: 10/03/2015
+---
 
 # 云平台集成框架（Azure 体系结构模式）
 

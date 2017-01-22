@@ -1,27 +1,25 @@
-<properties
-   pageTitle="SQL 数据仓库容量限制 | Azure"
-   description="SQL 数据仓库的连接、数据库、表和查询的最大值。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="sonyam"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库容量限制 | Azure
+description: SQL 数据仓库的连接、数据库、表和查询的最大值。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: sonyam
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="sonyama;barbkess;jrj"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: sonyama;barbkess;jrj
+---
 
 # SQL 数据仓库容量限制
 
 下表包含 Azure SQL 数据仓库的各个组件允许的最大值。
-
 
 ## 工作负荷管理
 
@@ -33,7 +31,6 @@
 | 数据库连接 | 预处理语句的最大内存 | 20 MB |
 | [工作负荷管理][] | 并发查询数上限 | 32<br/><br/>默认情况下，SQL 数据仓库可执行最多 32 个并发查询，剩余的查询将排队。<br/><br/>当为用户分配了更高的资源类时，或者为 SQL 数据仓库配置了较低的 DWU 时，并发级别可能会降低。某些查询（如 DMV 查询）始终可以运行。|
 | [Tempdb][] | Tempdb 的最大大小 | 每 DW100 399 GB。因此，在 DWU1000 的情况下，Tempdb 的大小为 3.99 TB |
-
 
 ## 数据库对象
 
@@ -57,7 +54,6 @@
 | 存储过程 | 最大嵌套级数。 | 8 |
 | 查看 | 每个视图的列数 | 1,024 |
 
-
 ## 加载
 
 | 类别 | 说明 | 最大值 |
@@ -79,7 +75,6 @@
 | SELECT | 每个 ORDER BY 列的字节数 | 8060 字节。<br/><br/>ORDER BY 子句中的列的字节数最大为 8060 字节。|
 | 每个语句的标识符和常量数 | 被引用的标识符和常量的数量。 | 65,535<br/><br/>SQL 数据仓库限制一条查询的单个表达式中可包含的标识符和常量数。此限制为 65,535。超过此数字将导致 SQL Server 错误 8632。有关详细信息，请参阅 [Internal error: An expression services limit has been reached][]（内部错误：已达到表达式服务限制）。|
 
-
 ## Metadata
 
 | 系统视图 | 最大行数 |
@@ -100,11 +95,11 @@
 <!--Image references-->
 
 <!--Article references-->
-[数据仓库单位 (DWU)]: /documentation/articles/sql-data-warehouse-overview-what-is/
-[SQL 数据仓库参考概述]: /documentation/articles/sql-data-warehouse-overview-reference/
-[工作负荷管理]: /documentation/articles/sql-data-warehouse-develop-concurrency/
-[Tempdb]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
+[数据仓库单位 (DWU)]: ./sql-data-warehouse-overview-what-is.md
+[SQL 数据仓库参考概述]: ./sql-data-warehouse-overview-reference.md
+[工作负荷管理]: ./sql-data-warehouse-develop-concurrency.md
+[Tempdb]: ./sql-data-warehouse-tables-temporary.md
+[数据类型]: ./sql-data-warehouse-tables-data-types.md
 [创建支持票证]: /documentation/articles/sql-data-warehouse-get-started-create-support-ticket/
 
 <!--MSDN references-->

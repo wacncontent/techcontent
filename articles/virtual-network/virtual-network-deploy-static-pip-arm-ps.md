@@ -1,41 +1,40 @@
-<properties
-    pageTitle="使用 PowerShell 创建具有静态公共 IP 的 VM | Azure"
-    description="了解如何使用 PowerShell 通过 Azure Resource Manager 创建具有静态公共 IP 地址的 VM。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 PowerShell 创建具有静态公共 IP 的 VM | Azure
+description: 了解如何使用 PowerShell 通过 Azure Resource Manager 创建具有静态公共 IP 地址的 VM。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="ad975ab9-d69f-45c1-9e45-0d3f0f51e87e"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="03/15/2016"
-    wacn.date="12/26/2016"
-    ms.author="jdial" />  
-
+ms.assetid: ad975ab9-d69f-45c1-9e45-0d3f0f51e87e
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/15/2016
+wacn.date: 12/26/2016
+ms.author: jdial
+---
 
 # 使用 PowerShell 创建具有静态公共 IP 的 VM
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/virtual-network-deploy-static-pip-arm-portal/)
-- [PowerShell](/documentation/articles/virtual-network-deploy-static-pip-arm-ps/)
-- [Azure CLI](/documentation/articles/virtual-network-deploy-static-pip-arm-cli/)
-- [模板](/documentation/articles/virtual-network-deploy-static-pip-arm-template/)
-- [PowerShell（经典）](/documentation/articles/virtual-networks-reserved-public-ip/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./virtual-network-deploy-static-pip-arm-portal.md)
+- [PowerShell](./virtual-network-deploy-static-pip-arm-ps.md)
+- [Azure CLI](./virtual-network-deploy-static-pip-arm-cli.md)
+- [模板](./virtual-network-deploy-static-pip-arm-template.md)
+- [PowerShell（经典）](./virtual-networks-reserved-public-ip.md)
 
-[AZURE.INCLUDE [virtual-network-deploy-static-pip-intro-include.md](../../includes/virtual-network-deploy-static-pip-intro-include.md)]
+[!INCLUDE [virtual-network-deploy-static-pip-intro-include.md](../../includes/virtual-network-deploy-static-pip-intro-include.md)]
 
-> [AZURE.NOTE]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型。
+> [!NOTE]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型。
 
-[AZURE.INCLUDE [virtual-network-deploy-static-pip-scenario-include.md](../../includes/virtual-network-deploy-static-pip-scenario-include.md)]
+[!INCLUDE [virtual-network-deploy-static-pip-scenario-include.md](../../includes/virtual-network-deploy-static-pip-scenario-include.md)]
 
-[AZURE.INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
+[!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
 ## 步骤 1 - 启动脚本
 可在[此处](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/IaaS-Story/03-Static-public-IP/virtual-network-deploy-static-pip-arm-ps.ps1)下载所用的完整 PowerShell 脚本。按照以下步骤更改脚本，以便用于具体环境。
@@ -145,13 +144,13 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 1. 在 PowerShell 控制台或 PowerShell ISE 中，运行上述脚本。
 2. 几分钟后，应显示以下输出：
-   
+
         ResourceGroupName : IaaSStory
         Location          : chinanorth
         ProvisioningState : Succeeded
         Tags              : 
         ResourceId        : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory
-   
+
         AddressSpace      : Microsoft.Azure.Commands.Network.Models.PSAddressSpace
         DhcpOptions       : Microsoft.Azure.Commands.Network.Models.PSDhcpOptions
         Subnets           : {FrontEnd}
@@ -176,7 +175,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Name              : WTestVNet
         Etag              : W/"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         Id                : /subscriptions/[Subscription ID]/resourceGroups/IaaSStory/providers/Microsoft.Network/virtualNetworks/WTestVNet
-   
+
         AddressSpace      : Microsoft.Azure.Commands.Network.Models.PSAddressSpace
         DhcpOptions       : Microsoft.Azure.Commands.Network.Models.PSDhcpOptions
         Subnets           : {FrontEnd}
@@ -207,7 +206,7 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
         Name              : WTestVNet
         Etag              : [Id]
         Id                : /subscriptions/[Subscription Id]/resourceGroups/IaaSStory/providers/Microsoft.Network/virtualNetworks/WTestVNet
-   
+
         TrackingOperationId : [Id]
         RequestId           : [Id]
         Status              : Succeeded

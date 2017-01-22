@@ -1,24 +1,22 @@
-<properties
-	pageTitle="管理虚拟机规模集中的 VM | Azure"
-	description="使用 Azure PowerShell 在虚拟机规模集中管理虚拟机。"
-	services="virtual-machine-scale-sets"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager"/>  
+---
+title: 管理虚拟机规模集中的 VM | Azure
+description: 使用 Azure PowerShell 在虚拟机规模集中管理虚拟机。
+services: virtual-machine-scale-sets
+documentationCenter: 
+authors: davidmu1
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machine-scale-sets"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="01/05/2017"
-	ms.author="davidmu"/>  
-
+ms.service: virtual-machine-scale-sets
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 01/05/2017
+ms.author: davidmu
+---
 
 # 在虚拟机规模集中管理虚拟机
 
@@ -91,11 +89,11 @@
         AutoUpgradeMinorVersion                 : True
         Settings                                : {"xmlCfg":"...","storageAccount":"astore"}
     ProvisioningState                           : Succeeded
-    
+
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要获取其相关信息的虚拟机的实例标识符，然后运行该命令：
 
     Get-AzureRmVmssVM -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
-        
+
 它会返回与此示例类似的内容：
 
     Id                            : /subscriptions/{sub-id}/resourceGroups/myrg1/providers/Microsoft.Compute/
@@ -144,7 +142,7 @@
       AutoUpgradeMinorVersion     : True
       Settings                    : {"xmlCfg":"...","storageAccount":"astore"}
       ProvisioningState           : Succeeded
-        
+
 ## 启动规模集中的虚拟机
 
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要启动的虚拟机的标识符，然后运行该命令：
@@ -168,16 +166,16 @@
     ]
 
 不使用 -InstanceId 参数即可启动规模集中的所有虚拟机。
-    
+
 ## 停止规模集中的虚拟机
 
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要停止的虚拟机的标识符，然后运行该命令：
 
-	Stop-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
+    Stop-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
 
 在资源浏览器中，我们可以看到该实例的状态是“已解除分配”：
 
-	"statuses": [
+    "statuses": [
       {
         "code": "ProvisioningState/succeeded",
         "level": "Info",
@@ -190,22 +188,22 @@
         "displayStatus": "VM deallocated"
       }
     ]
-    
+
 若要停止但不解除分配虚拟机，请使用 -StayProvisioned 参数。不使用 -InstanceId 参数即可停止规模集中的所有虚拟机。
-    
+
 ## 重启规模集中的虚拟机
 
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要重启的虚拟机的标识符，然后运行该命令：
 
-	Restart-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
-    
+    Restart-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
+
 不使用 -InstanceId 参数即可重启规模集中的所有虚拟机。
 
 ## 从规模集中删除虚拟机
 
 将带引号的值替换为资源组和规模集的名称。将 *#* 替换为要删除的虚拟机的标识符，然后运行该命令：
 
-	Remove-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
+    Remove-AzureRmVmss -ResourceGroupName "resource group name" -VMScaleSetName "scale set name" -InstanceId #
 
 不使用 -InstanceId 参数即可一次性删除整个虚拟机规模集。
 

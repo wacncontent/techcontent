@@ -1,40 +1,39 @@
-<properties
-    pageTitle="创建、启动或删除应用程序网关 | Azure"
-    description="此页提供有关创建、配置、启动和删除 Azure 应用程序网关的说明"
-    documentationcenter="na"
-    services="application-gateway"
-    author="georgewallace"
-    manager="carmonm"
-    editor="tysonn" />  
+---
+title: 创建、启动或删除应用程序网关 | Azure
+description: 此页提供有关创建、配置、启动和删除 Azure 应用程序网关的说明
+documentationcenter: na
+services: application-gateway
+author: georgewallace
+manager: carmonm
+editor: tysonn
 
-<tags
-    ms.assetid="577054ca-8368-4fbf-8d53-a813f29dc3bc"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="11/16/2016"
-    wacn.date="01/03/2017"
-    ms.author="gwallace" />  
-
+ms.assetid: 577054ca-8368-4fbf-8d53-a813f29dc3bc
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/16/2016
+wacn.date: 01/03/2017
+ms.author: gwallace
+---
 
 # 创建、启动或删除应用程序网关
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/application-gateway-create-gateway-portal/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-create-gateway-arm/)
-- [Azure 经典 PowerShell](/documentation/articles/application-gateway-create-gateway/)
-- [Azure Resource Manager 模板](/documentation/articles/application-gateway-create-gateway-arm-template/)
-- [Azure CLI](/documentation/articles/application-gateway-create-gateway-cli/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./application-gateway-create-gateway-portal.md)
+- [Azure Resource Manager PowerShell](./application-gateway-create-gateway-arm.md)
+- [Azure 经典 PowerShell](./application-gateway-create-gateway.md)
+- [Azure Resource Manager 模板](./application-gateway-create-gateway-arm-template.md)
+- [Azure CLI](./application-gateway-create-gateway-cli.md)
 
-Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之间提供故障转移和性能路由 HTTP 请求，而不管它们是在云中还是本地。应用程序网关提供许多应用程序传送控制器 (ADC) 功能，包括 HTTP 负载均衡、基于 cookie 的会话相关性、安全套接字层 (SSL) 卸载、自定义运行状况探测、多站点支持，以及许多其他功能。若要查找支持的功能的完整列表，请参阅[应用程序网关概述](/documentation/articles/application-gateway-introduction/)
+Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之间提供故障转移和性能路由 HTTP 请求，而不管它们是在云中还是本地。应用程序网关提供许多应用程序传送控制器 (ADC) 功能，包括 HTTP 负载均衡、基于 cookie 的会话相关性、安全套接字层 (SSL) 卸载、自定义运行状况探测、多站点支持，以及许多其他功能。若要查找支持的功能的完整列表，请参阅[应用程序网关概述](./application-gateway-introduction.md)
 
 本文将指导你完成创建、配置、启动和删除应用程序网关的步骤。
 
 ## 开始之前
 
 1. 使用 Web 平台安装程序安装最新版本的 Azure PowerShell cmdlet。可以从“下载”页的“Windows PowerShell”部分下载并安装最新版本。[](/downloads/)
-2. 如果你有现有的虚拟网络，请选择现有一个空子网，或者在现有虚拟网络中创建一个新子网，专门供应用程序网关使用。应用程序网关部署到的虚拟网络必须与要部署在应用程序网关后面的资源相同，除非使用 vnet 对等互连。若要了解更多信息，请访问 [Vnet 对等互连](/documentation/articles/virtual-network-peering-overview/)
+2. 如果你有现有的虚拟网络，请选择现有一个空子网，或者在现有虚拟网络中创建一个新子网，专门供应用程序网关使用。应用程序网关部署到的虚拟网络必须与要部署在应用程序网关后面的资源相同，除非使用 vnet 对等互连。若要了解更多信息，请访问 [Vnet 对等互连](../virtual-network/virtual-network-peering-overview.md)
 3. 请确认你已创建包含有效子网、可正常运行的虚拟网络。请确保没有虚拟机或云部署正在使用子网。应用程序网关必须单独位于虚拟网络子网中。
 4. 必须存在配置为使用应用程序网关的服务器，或者必须在虚拟网络中为其创建终结点，或者必须为其分配公共 IP/VIP。
 
@@ -57,13 +56,12 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 2. 创建配置 XML 文件或配置对象。
 3. 将配置提交到新建的应用程序网关资源。
 
-> [AZURE.NOTE]
-如果你需要为应用程序网关配置自定义探测，请参阅 [Create an application gateway with custom probes by using PowerShell](/documentation/articles/application-gateway-create-probe-classic-ps/)（使用 PowerShell 创建带自定义探测的应用程序网关）。有关详细信息，请查看 [custom probes and health monitoring](/documentation/articles/application-gateway-probe-overview/)（自定义探测和运行状况监视）。
+> [!NOTE]
+如果你需要为应用程序网关配置自定义探测，请参阅 [Create an application gateway with custom probes by using PowerShell](./application-gateway-create-probe-classic-ps.md)（使用 PowerShell 创建带自定义探测的应用程序网关）。有关详细信息，请查看 [custom probes and health monitoring](./application-gateway-probe-overview.md)（自定义探测和运行状况监视）。
 > 
 > 
 
 ![方案示例][scenario]  
-
 
 ### 创建应用程序网关资源
 
@@ -81,7 +79,6 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 <br/>  
 
-
     Name          : AppGwTest
     Description   :
     VnetName      : testvnet1
@@ -92,7 +89,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
     VirtualIPs    : {}
     DnsName       :
 
-> [AZURE.NOTE]
+> [!NOTE]
 *InstanceCount* 的默认值为 2，最大值为 10。*GatewaySize* 的默认值为 Medium。你可以选择 Small、Medium 或 Large。
 > 
 > 
@@ -156,7 +153,8 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 编辑配置项的括号之间的值。使用扩展名 .xml 保存文件。
 
->[AZURE.IMPORTANT] 协议项 Http 或 Https 区分大小写。
+>[!IMPORTANT]
+> 协议项 Http 或 Https 区分大小写。
 
 以下示例演示如何使用配置文件设置应用程序网关。此示例对公共端口 80 上的 HTTP 流量进行负载均衡，将网络流量发送到两个 IP 地址之间的后端端口 80。
 
@@ -213,7 +211,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 以下示例演示如何使用配置对象配置应用程序网关。必须单独配置所有的配置项，然后将其添加到应用程序网关配置对象。创建配置对象之后，使用 `Set-AzureApplicationGateway` 命令将配置提交到前面创建的应用程序网关资源。
 
-> [AZURE.NOTE]
+> [!NOTE]
 在为每个配置对象分配值之前，需要声明 PowerShell 用于存储的对象类型。在其中创建单个项的第一行定义了要使用哪个 **Microsoft.WindowsAzure.Commands.ServiceManagement.Network.ApplicationGateway.Model(对象名称)**。
 > 
 > 
@@ -319,13 +317,12 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 配置网关后，使用 `Start-AzureApplicationGateway` cmdlet 来启动网关。成功启动网关后，将开始计收应用程序网关的费用。
 
-> [AZURE.NOTE]
+> [!NOTE]
 `Start-AzureApplicationGateway` cmdlet 最多可能需要 15 到 20 分钟才能完成。
 > 
 > 
 
     Start-AzureApplicationGateway AppGwTest
-
 
 ## 验证网关状态
 
@@ -336,7 +333,6 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
     Get-AzureApplicationGateway AppGwTest
 
 <br/>  
-
 
     VERBOSE: 8:09:28 PM - Begin Operation: Get-AzureApplicationGateway
     VERBOSE: 8:09:30 PM - Completed Operation: Get-AzureApplicationGateway
@@ -349,7 +345,6 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
     State         : Running
     Vip           : 138.91.170.26
     DnsName       : appgw-1b8402e8-3e0d-428d-b661-289c16c82101.chinacloudapp.cn
-
 
 ## 删除应用程序网关
 
@@ -371,11 +366,9 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 应用程序网关进入停止状态后，请使用 `Remove-AzureApplicationGateway` cmdlet 删除该服务。
 
-
     Remove-AzureApplicationGateway AppGwTest
 
 <br/>  
-
 
     VERBOSE: 10:49:34 PM - Begin Operation: Remove-AzureApplicationGateway
     VERBOSE: 10:50:36 PM - Completed Operation: Remove-AzureApplicationGateway
@@ -385,11 +378,9 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 若要验证是否已删除服务，可以使用 `Get-AzureApplicationGateway` cmdlet。此步骤不是必需的。
 
-
     Get-AzureApplicationGateway AppGwTest
 
 <br/>  
-
 
     VERBOSE: 10:52:46 PM - Begin Operation: Get-AzureApplicationGateway
 
@@ -398,14 +389,14 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 ## 后续步骤
 
-如果你要配置 SSL 卸载，请参阅 [Configure an application gateway for SSL offload](/documentation/articles/application-gateway-ssl/)（配置应用程序网关以进行 SSL 卸载）。
+如果你要配置 SSL 卸载，请参阅 [Configure an application gateway for SSL offload](./application-gateway-ssl.md)（配置应用程序网关以进行 SSL 卸载）。
 
-如果你想要将应用程序网关配置为与内部负载均衡器配合使用，请参阅 [Create an application gateway with an internal load balancer (ILB)](/documentation/articles/application-gateway-ilb/)（创建具有内部负载均衡器 (ILB) 的应用程序网关）。
+如果你想要将应用程序网关配置为与内部负载均衡器配合使用，请参阅 [Create an application gateway with an internal load balancer (ILB)](./application-gateway-ilb.md)（创建具有内部负载均衡器 (ILB) 的应用程序网关）。
 
 如需负载均衡选项的其他常规信息，请参阅：
 
-* [Azure Load Balancer](/documentation/services/load-balancer/)
-* [Azure 流量管理器](/documentation/services/traffic-manager/)
+* [Azure Load Balancer](../load-balancer/index.md)
+* [Azure 流量管理器](../traffic-manager/index.md)
 
 [scenario]: ./media/application-gateway-create-gateway/scenario.png
 

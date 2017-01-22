@@ -1,30 +1,28 @@
-<properties 
-	pageTitle="暂存云服务部署 (Node.js) | Azure" 
-	description="了解如何使用虚拟 IP (VIP) 交换将 Azure 应用程序部署到过渡环境，然后再将其部署到生产环境。" 
-	services="cloud-services" 
-	documentationCenter="nodejs" 
-	authors="rmcmurray" 
-	manager="wpickett" 
-	editor=""/>  
+---
+title: 暂存云服务部署 (Node.js) | Azure
+description: 了解如何使用虚拟 IP (VIP) 交换将 Azure 应用程序部署到过渡环境，然后再将其部署到生产环境。
+services: cloud-services
+documentationCenter: nodejs
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-
-<tags 
-	ms.service="cloud-services" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="nodejs" 
-	ms.topic="article" 
-	ms.date="11/01/2016" 
-	wacn.date="12/26/2016" 
-	ms.author="robmcm"/>
-
-
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/26/2016
+ms.author: robmcm
+---
 
 # 在 Azure 中暂存应用程序
 
 可以先将要测试的已打包应用程序部署到 Azure 中的过渡环境，然后再将该应用程序移动到用户可通过 Internet 进行访问的生产环境。除只能使用 Azure 生成的经过模糊处理的 URL 访问暂存应用程序以外，过渡环境与生产环境完全相同。在验证应用程序能够正常运行后，可以通过执行虚拟 IP (VIP) 交换将其部署到生产环境。
 
-> [AZURE.NOTE] 本文中的步骤仅适用于作为 Azure 云服务托管的 Node 应用程序。
+> [!NOTE]
+> 本文中的步骤仅适用于作为 Azure 云服务托管的 Node 应用程序。
 
 ## 步骤 1：暂存应用程序
 
@@ -36,11 +34,11 @@
 
 2.  登录到 [Azure 经典管理门户]，然后选择“云服务”。创建云服务并将“过渡”列状态更新为“正在运行”后，单击服务名称。
 
-	![显示正运行服务的门户][cloud-service]
+    ![显示正运行服务的门户][cloud-service]
 
 3.  选择“仪表板”，然后选择“过渡”。
 
-	![云服务仪表板][cloud-service-dashboard]
+    ![云服务仪表板][cloud-service-dashboard]
 
 4. 注意右侧“站点 URL”条目中的值。DNS 名称是 Azure 生成的经过模糊处理的内部 ID。
 
@@ -52,7 +50,8 @@
 
 在过渡环境中验证应用程序的升级版本后，可以通过交换过渡和生产环境的虚拟 IP (VIP) 来快速使应用程序可用于生产环境。
 
-> [AZURE.NOTE] 此步骤假定已将应用程序部署到生产环境，并且已暂存其升级版本。
+> [!NOTE]
+> 此步骤假定已将应用程序部署到生产环境，并且已暂存其升级版本。
 
 1.  登录到 [Azure 经典管理门户]，单击“云服务”，然后选择服务名称。
 
@@ -73,6 +72,6 @@
 [cloud-service-dashboard]: ./media/cloud-services-nodejs-stage-application/cloud-service-dashboard-staging.png
 [cloud-service-staging-url]: ./media/cloud-services-nodejs-stage-application/cloud-service-staging-url.png
 [vip-swap-dialog]: ./media/cloud-services-nodejs-stage-application/vip-swap-dialog.png
-[如何在 Azure 中通过交换 VIP 将服务升级部署到生产环境]: /documentation/articles/cloud-services-how-to-manage/#how-to-swap-deployments-to-promote-a-staged-deployment-to-production
+[如何在 Azure 中通过交换 VIP 将服务升级部署到生产环境]: ./cloud-services-how-to-manage.md#how-to-swap-deployments-to-promote-a-staged-deployment-to-production
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

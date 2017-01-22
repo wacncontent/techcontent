@@ -1,22 +1,21 @@
-<properties
-   pageTitle="ExpressRoute 位置 | Azure"
-   description="本文详细说明了服务的上市区域，以及如何连接到 Azure 区域。"
-   services="expressroute"
-   documentationCenter="na"
-   authors="cherylmc"
-   manager="carmonm"
-   editor="" />  
+---
+title: ExpressRoute 位置 | Azure
+description: 本文详细说明了服务的上市区域，以及如何连接到 Azure 区域。
+services: expressroute
+documentationCenter: na
+authors: cherylmc
+manager: carmonm
+editor: 
 
-<tags
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="12/14/2016"
-   wacn.date="01/03/2017"
-   ms.author="cherylmc" />
-
+ms.service: expressroute
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/14/2016
+wacn.date: 01/03/2017
+ms.author: cherylmc
+---
 
 # ExpressRoute 合作伙伴和对等位置
 本文中的表格提供有关 ExpressRoute 连接提供商、ExpressRoute 地理覆盖范围、通过 ExpressRoute 支持的 Azure 服务以及 ExpressRoute 系统集成商 (SI) 的信息。
@@ -51,7 +50,7 @@
 
 ## 后续步骤
 
-- 有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 常见问题](/documentation/articles/expressroute-faqs/)。
-- 确保符合所有先决条件。请参阅 [ExpressRoute 先决条件](/documentation/articles/expressroute-prerequisites/)。
+- 有关 ExpressRoute 的详细信息，请参阅 [ExpressRoute 常见问题](./expressroute-faqs.md)。
+- 确保符合所有先决条件。请参阅 [ExpressRoute 先决条件](./expressroute-prerequisites.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

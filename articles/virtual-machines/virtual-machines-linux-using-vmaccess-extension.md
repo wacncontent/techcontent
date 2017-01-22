@@ -1,30 +1,31 @@
 <!-- need to be verified -->
 
-<properties
-    pageTitle="使用 VMAccess 扩展重置 Azure Linux VM 上的访问权限 | Azure"
-    description="使用 VMAccess 扩展重置 Azure Linux VM 上的访问权限。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="vlivech"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />
-<tags 
-    ms.assetid="261a9646-1f93-407e-951e-0be7226b3064"
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/25/2016"
-    wacn.date="12/20/2016"
-    ms.author="v-livech" />
+---
+title: 使用 VMAccess 扩展重置 Azure Linux VM 上的访问权限 | Azure
+description: 使用 VMAccess 扩展重置 Azure Linux VM 上的访问权限。
+services: virtual-machines-linux
+documentationcenter: 
+author: vlivech
+manager: timlt
+editor: 
+tags: azure-resource-manager
+
+ms.assetid: 261a9646-1f93-407e-951e-0be7226b3064
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 10/25/2016
+wacn.date: 12/20/2016
+ms.author: v-livech
+---
 
 # 管理用户、SSH，并使用 VMAccess 扩展检查或修复 Azure Linux VM 上的磁盘
 本文说明如何使用 Azure VMAcesss 扩展检查或修复磁盘、重置用户访问权限、管理用户帐户，或重置 Linux 上的 SSHD 配置。本文需要以下条件：
 
-* 一个 Azure 帐户（[获取试用版](/pricing/1rmb-trial/)）
-* 已使用 `azure login -e AzureChinaCloud` 登录 [Azure CLI](/documentation/articles/xplat-cli-install/)。
+* 一个 Azure 帐户（[获取试用版](https://www.azure.cn/pricing/1rmb-trial/)）
+* 已使用 `azure login -e AzureChinaCloud` 登录 [Azure CLI](../xplat-cli-install.md)。
 * Azure CLI *必须处于* Azure Resource Manager 模式 `azure config mode arm`。
 
 ## 快速命令
@@ -105,7 +106,6 @@ Linux VM 上的磁盘显示错误。不知道怎样重置 Linux VM 的根密码�
 
 `disk_check_repair.json`  
 
-
     {
       "check_disk": "true",
       "repair_disk": "true, user-disk-name"
@@ -127,7 +127,6 @@ Linux VM 上的磁盘显示错误。不知道怎样重置 Linux VM 的根密码�
 
 `reset_root_password.json`  
 
-
     {
       "username":"root",
       "password":"myNewPassword",   
@@ -146,7 +145,6 @@ Linux VM 上的磁盘显示错误。不知道怎样重置 Linux VM 的根密码�
 
 `reset_ssh_key.json`  
 
-
     {
       "username":"myAdminUser",
       "ssh_key":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCZ3S7gGp3rcbKmG2Y4vGZFMuMZCwoUzZNG1vHY7P2XV2x9FfAhy8iGD+lF8UdjFX3t5ebMm6BnnMh8fHwkTRdOt3LDQq8o8ElTBrZaKPxZN2thMZnODs5Hlemb2UX0oRIGRcvWqsd4oJmxsXa/Si98Wa6RHWbc9QZhw80KAcOVhmndZAZAGR+Wq6yslNo5TMOr1/ZyQAook5C4FtcSGn3Y+WczaoGWIxG4ZaWk128g79VIeJcIQqOjPodHvQAhll7qDlItVvBfMOben3GyhYTm7k4YwlEdkONm4yV/UIW0la1rmyztSBQIm9sZmSq44XXgjVmDHNF8UfCZ1ToE4r2SdwTmZv00T2i5faeYnHzxiLPA3Enub7iUo5IdwFArnqad7MO1SY1kLemhX9eFjLWN4mJe56Fu4NiWJkR9APSZQrYeKaqru4KUC68QpVasNJHbuxPSf/PcjF3cjO1+X+4x6L1H5HTPuqUkyZGgDO4ynUHbko4dhlanALcriF7tIfQR9i2r2xOyv5gxJEW/zztGqWma/d4rBoPjnf6tO7rLFHXMt/DVTkAfn5woYtLDwkn5FMyvThRmex3BDf0gujoI1y6cOWLe9Y5geNX0oj+MXg/W0cXAtzSFocstV1PoVqy883hNoeQZ3mIGB3Q0rIUm5d9MA2bMMt31m1g3Sin6EQ== myAdminUser@myVM",   
@@ -161,14 +159,12 @@ Linux VM 上的磁盘显示错误。不知道怎样重置 Linux VM 的根密码�
       Microsoft.OSTCExtensions * \
       --private-config-path reset_ssh_key.json
 
-
 ### 使用 VMAccess 管理 Linux 上的用户帐户
 VMAccess 是一种 Python 脚本，可用于管理 Linux VM 上的用户，而不需要登录和使用 sudo 或根帐户。
 
 若要创建用户，请使用此 VMAccess 脚本：
 
 `create_new_user.json`  
-
 
     {
     "username":"myNewUser",
@@ -188,7 +184,6 @@ VMAccess 是一种 Python 脚本，可用于管理 Linux VM 上的用户，而�
 若要删除用户，请使用此 VMAccess 脚本：
 
 `remove_user.json`  
-
 
     {
     "remove_user":"myDeletedUser",
@@ -210,7 +205,6 @@ VMAccess 是一种 Python 脚本，可用于管理 Linux VM 上的用户，而�
 
 `reset_sshd.json`  
 
-
     {
       "reset_ssh": true
     }
@@ -227,10 +221,10 @@ VMAccess 是一种 Python 脚本，可用于管理 Linux VM 上的用户，而�
 ## 后续步骤
 使用 Azure VMAccess 扩展更新 Linux 是一种对正在运行的 Linux VM 进行更改的方法。还可以使用 cloud-init 和 Azure 模板之类的工具在 Linux VM 启动时对其进行修改。
 
-[关于虚拟机扩展和功能](/documentation/articles/virtual-machines-linux-extensions-features/)
+[关于虚拟机扩展和功能](./virtual-machines-linux-extensions-features.md)
 
-[使用 Linux VM 扩展创作 Azure Resource Manager 模板](/documentation/articles/virtual-machines-linux-extensions-authoring-templates/)
+[使用 Linux VM 扩展创作 Azure Resource Manager 模板](./virtual-machines-linux-extensions-authoring-templates.md)
 
-[在创建期间使用 cloud-init 自定义 Linux VM](/documentation/articles/virtual-machines-linux-using-cloud-init/)
+[在创建期间使用 cloud-init 自定义 Linux VM](./virtual-machines-linux-using-cloud-init.md)
 
 <!---HONumber=Mooncake_1212_2016-->

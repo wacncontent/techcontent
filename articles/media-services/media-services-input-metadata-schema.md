@@ -1,47 +1,46 @@
-<properties
-    pageTitle="Azure 媒体服务输入元数据架构 |Azure"
-    description="本部分概述 Azure 媒体服务输入元数据架构。"
-    author="Juliako"
-    manager="erikre"
-    editor=""
-    services="media-services"
-    documentationcenter="" />  
+---
+title: Azure 媒体服务输入元数据架构 |Azure
+description: 本部分概述 Azure 媒体服务输入元数据架构。
+author: Juliako
+manager: erikre
+editor: 
+services: media-services
+documentationcenter: 
 
-<tags
-    ms.assetid="d72848e2-4b65-4c84-94bc-e2a90a6e7f47"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/26/2016"
-    wacn.date="12/12/2016"
-    ms.author="juliako" />  
-
+ms.assetid: d72848e2-4b65-4c84-94bc-e2a90a6e7f47
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/26/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 # 输入元数据
 编码作业与要对其执行编码任务的输入资产关联。完成任务后，会生成输出资产。输出资产包含视频、音频、缩略图、清单等。输出资产还包含提供输入资产相关元数据的文件。元数据 XML 文件的名称采用下列格式：&lt;asset\_id&gt;\_metadata.xml（例如，41114ad3-eb5e-4c57-8d92-5354e2b7d4a4\_metadata.xml），其中 &lt;asset\_id&gt; 是输入资产的 AssetId 值。
 
-若要检查元数据文件，可以创建 **SAS** 定位器并将文件下载到本地计算机。可找到有关如何创建 SAS 定位器的示例并下载文件[使用媒体服务 .NET SDK 扩展](/documentation/articles/media-services-dotnet-get-started/)。
+若要检查元数据文件，可以创建 **SAS** 定位器并将文件下载到本地计算机。可找到有关如何创建 SAS 定位器的示例并下载文件[使用媒体服务 .NET SDK 扩展](./media-services-dotnet-get-started.md)。
 
-本主题介绍输入元数据 (&lt;asset\_id&gt;\_metadata.xml) 以其为基础的 XML 架构的元素和类型。有关包含输出资产相关元数据的文件的信息，请参阅[输出元数据](/documentation/articles/media-services-output-metadata-schema/)。
+本主题介绍输入元数据 (&lt;asset\_id&gt;\_metadata.xml) 以其为基础的 XML 架构的元素和类型。有关包含输出资产相关元数据的文件的信息，请参阅[输出元数据](./media-services-output-metadata-schema.md)。
 
-> [AZURE.NOTE]可以在本主题末尾找到 [架构代码](/documentation/articles/media-services-input-metadata-schema/#code)和 [XML 示例](/documentation/articles/media-services-input-metadata-schema/#xml)。
-
+> [!NOTE]
+>可以在本主题末尾找到 [架构代码](./media-services-input-metadata-schema.md#code)和 [XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 ## <a name="AssetFiles"></a> AssetFiles 元素（根元素）
-包含编码作业的 [AssetFile 元素](/documentation/articles/media-services-input-metadata-schema/#AssetFile)的集合。
+包含编码作业的 [AssetFile 元素](./media-services-input-metadata-schema.md#AssetFile)的集合。
 
-请参阅本主题末尾的 XML 示例：[XML 示例](/documentation/articles/media-services-input-metadata-schema/#xml)。
+请参阅本主题末尾的 XML 示例：[XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 | 名称 | 说明 |
 | --- | --- |
-| **AssetFile**<br /><br /> minOccurs="1" maxOccurs="unbounded" |单个子元素。有关详细信息，请参阅 [AssetFile 元素](/documentation/articles/media-services-input-metadata-schema/#AssetFile)。 |
+| **AssetFile**<br /><br /> minOccurs="1" maxOccurs="unbounded" |单个子元素。有关详细信息，请参阅 [AssetFile 元素](./media-services-input-metadata-schema.md#AssetFile)。 |
 
 ## <a name="AssetFile"></a> AssetFile 元素
  包含描述资产文件的属性和元素。
 
- 请参阅本主题末尾的 XML 示例：[XML 示例](/documentation/articles/media-services-input-metadata-schema/#xml)。
+ 请参阅本主题末尾的 XML 示例：[XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -55,19 +54,19 @@
 | **StartTime** |**xs:duration** |内容开始时间。示例：StartTime="PT2.669S"。 |
 | **OverallBitRate** |**xs:int** |资产文件的平均比特率 (kbps)。 |
 
-> [AZURE.NOTE]序列中必须出现以下 4 个子元素。
-
+> [!NOTE]
+>序列中必须出现以下 4 个子元素。
 
 ### 子元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**Programs**</p><p>minOccurs="0"</p> | |当资产文件为 MPEG-TS 格式时，所有 [Programs 元素](/documentation/articles/media-services-input-metadata-schema/#Programs)的集合。 |
-| <p>**VideoTracks**</p><p>minOccurs="0"</p> | |每个物理资产文件可以包含零个或以上交错到相应容器格式的视频轨道。此元素包含资产文件中所有 [VideoTracks 元素](/documentation/articles/media-services-input-metadata-schema/#VideoTracks)的集合。 |
-| <p>**AudioTracks**</p><p>minOccurs="0"</p> | |每个物理资产文件可以包含零个或以上交错到相应容器格式的音频轨道。此元素包含资产文件中所有 [AudioTracks 元素](/documentation/articles/media-services-input-metadata-schema/#AudioTracks)的集合。 |
-| <p>**Metadata**</p><p>minOccurs="0"</p><p>maxOccurs="unbounded"</p> |[MetadataType](/documentation/articles/media-services-input-metadata-schema/#MetadataType) |表示为键/值字符串的资产文件元数据。例如：<br /><br /> **&lt;Metadata key="language" value="eng" /&gt;** |
+| <p>**Programs**</p><p>minOccurs="0"</p> | |当资产文件为 MPEG-TS 格式时，所有 [Programs 元素](./media-services-input-metadata-schema.md#Programs)的集合。 |
+| <p>**VideoTracks**</p><p>minOccurs="0"</p> | |每个物理资产文件可以包含零个或以上交错到相应容器格式的视频轨道。此元素包含资产文件中所有 [VideoTracks 元素](./media-services-input-metadata-schema.md#VideoTracks)的集合。 |
+| <p>**AudioTracks**</p><p>minOccurs="0"</p> | |每个物理资产文件可以包含零个或以上交错到相应容器格式的音频轨道。此元素包含资产文件中所有 [AudioTracks 元素](./media-services-input-metadata-schema.md#AudioTracks)的集合。 |
+| <p>**Metadata**</p><p>minOccurs="0"</p><p>maxOccurs="unbounded"</p> |[MetadataType](./media-services-input-metadata-schema.md#MetadataType) |表示为键/值字符串的资产文件元数据。例如：<br /><br /> **&lt;Metadata key="language" value="eng" /&gt;** |
 
 ## <a name="TrackType"></a> TrackType
-请参阅本主题末尾的 XML 示例：[XML 示例](/documentation/articles/media-services-input-metadata-schema/#xml)。
+请参阅本主题末尾的 XML 示例：[XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -80,21 +79,21 @@
 | **StartTime** |**xs:duration** |轨道开始时间。示例：StartTime="PT2.669S" |
 | **持续时间** |**xs:duration** |轨道持续时间。示例：Duration="PTSampleFormat M37.757S"。 |
 
-> [AZURE.NOTE]序列中必须出现以下 2 个子元素。
-
+> [!NOTE]
+>序列中必须出现以下 2 个子元素。
 
 ### 子元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**Disposition**</p><p>minOccurs="0"</p><p> maxOccurs="1"</p> |[StreamDispositionType](/documentation/articles/media-services-input-metadata-schema/#StreamDispositionType) |包含演示信息（例如，特定音频轨道是否针对视觉障碍观众）。 |
-| <p>**Metadata**</p><p> minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[MetadataType](/documentation/articles/media-services-input-metadata-schema/#MetadataType) |可以用来保存各种信息的通用键/值字符串。例如，key=”language” 和 value=”eng”。 |
+| <p>**Disposition**</p><p>minOccurs="0"</p><p> maxOccurs="1"</p> |[StreamDispositionType](./media-services-input-metadata-schema.md#StreamDispositionType) |包含演示信息（例如，特定音频轨道是否针对视觉障碍观众）。 |
+| <p>**Metadata**</p><p> minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[MetadataType](./media-services-input-metadata-schema.md#MetadataType) |可以用来保存各种信息的通用键/值字符串。例如，key=”language” 和 value=”eng”。 |
 
 ## <a name="AudioTrackType"></a> AudioTrackType（从 TrackType 继承）
- **AudioTrackType** 是从 [TrackType](/documentation/articles/media-services-input-metadata-schema/#TrackType) 继承的全局复杂类型。
+ **AudioTrackType** 是从 [TrackType](./media-services-input-metadata-schema.md#TrackType) 继承的全局复杂类型。
 
  此类型表示资产文件中的特定音频轨道。
 
- 请参阅本主题末尾的 XML 示例：[XML 示例](/documentation/articles/media-services-input-metadata-schema/#xml)。
+ 请参阅本主题末尾的 XML 示例：[XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -107,11 +106,11 @@
 | **BitsPerSample** |**xs:int** |wFormatTag 格式类型的每个样本位数。 |
 
 ## <a name="VideoTrackType"></a> VideoTrackType（从 TrackType 继承）
-**VideoTrackType** 是从 [TrackType](/documentation/articles/media-services-input-metadata-schema/#TrackType) 继承的全局复杂类型。
+**VideoTrackType** 是从 [TrackType](./media-services-input-metadata-schema.md#TrackType) 继承的全局复杂类型。
 
 此类型表示资产文件中的特定视频轨道。
 
-请参阅本主题末尾的 XML 示例：[XML 示例](/documentation/articles/media-services-input-metadata-schema/#xml)。
+请参阅本主题末尾的 XML 示例：[XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -135,7 +134,7 @@
 ## <a name="MetadataType"></a> MetadataType
 **MetadataType** 是一个全局复杂类型，它将资产文件的元数据描述为键/值字符串。例如，key=”language” 和 value=”eng”。
 
-请参阅本主题末尾的 XML 示例：[XML 示例](/documentation/articles/media-services-input-metadata-schema/#xml)。
+请参阅本主题末尾的 XML 示例：[XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -159,7 +158,7 @@
 ## <a name="StreamDispositionType"></a> StreamDispositionType
 **StreamDispositionType** 是描述流的全局复杂类型。
 
-请参阅本主题末尾的 XML 示例：[XML 示例](/documentation/articles/media-services-input-metadata-schema/#xml)。
+请参阅本主题末尾的 XML 示例：[XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 ### 属性
 | 名称 | 类型 | 说明 |
@@ -182,27 +181,27 @@
 ### 子元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**Program**</p><p>minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[ProgramType](/documentation/articles/media-services-input-metadata-schema/#ProgramType) |用于 MPEG-TS 格式的资产文件，包含资产文件中节目的相关信息。 |
+| <p>**Program**</p><p>minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[ProgramType](./media-services-input-metadata-schema.md#ProgramType) |用于 MPEG-TS 格式的资产文件，包含资产文件中节目的相关信息。 |
 
 ## <a name="VideoTracks"></a> VideoTracks 元素
  具有多个 **VideoTrack** 元素的包装器元素。
 
- 请参阅本主题末尾的 XML 示例：[XML 示例](/documentation/articles/media-services-input-metadata-schema/#xml)。
+ 请参阅本主题末尾的 XML 示例：[XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 ### 子元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**VideoTrack**</p><p> minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[VideoTrackType（从 TrackType 继承）](/documentation/articles/media-services-input-metadata-schema/#VideoTrackType) |包含资产文件中视频轨道的相关信息。 |
+| <p>**VideoTrack**</p><p> minOccurs="0"</p><p> maxOccurs="unbounded"</p> |[VideoTrackType（从 TrackType 继承）](./media-services-input-metadata-schema.md#VideoTrackType) |包含资产文件中视频轨道的相关信息。 |
 
 ## <a name="AudioTracks"></a> AudioTracks 元素
  具有多个 **AudioTrack** 元素的包装器元素。
 
- 请参阅本主题末尾的 XML 示例：[XML 示例](/documentation/articles/media-services-input-metadata-schema/#xml)。
+ 请参阅本主题末尾的 XML 示例：[XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 ### 元素
 | 名称 | 类型 | 说明 |
 | --- | --- | --- |
-| <p>**AudioTrack**</p><p> minOccurs="0"</p><p>maxOccurs="unbounded"</p> |[AudioTrackType（从 TrackType 继承）](/documentation/articles/media-services-input-metadata-schema/#AudioTrackType) |包含有关资产文件中音频轨道的信息。 |
+| <p>**AudioTrack**</p><p> minOccurs="0"</p><p>maxOccurs="unbounded"</p> |[AudioTrackType（从 TrackType 继承）](./media-services-input-metadata-schema.md#AudioTrackType) |包含有关资产文件中音频轨道的信息。 |
 
 ## <a name="code"></a> 架构代码
 
@@ -602,7 +601,6 @@
           </xs:complexType>  
         </xs:element>  
       </xs:schema>  
-
 
 ## <a name="xml"></a> XML 示例
 下面是输入元数据文件的示例。

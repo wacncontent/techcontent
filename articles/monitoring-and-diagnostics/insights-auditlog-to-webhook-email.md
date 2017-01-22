@@ -1,86 +1,85 @@
-<properties
-	pageTitle="针对 Azure 活动日志警报配置 webhook | Azure"
-	description="了解如何使用活动日志警报调用 webhook。"
-	authors="kamathashwin"
-	manager=""
-	editor=""
-	services="monitoring-and-diagnostics"
-	documentationCenter="monitoring-and-diagnostics"/>  
+---
+title: 针对 Azure 活动日志警报配置 webhook | Azure
+description: 了解如何使用活动日志警报调用 webhook。
+authors: kamathashwin
+manager: 
+editor: 
+services: monitoring-and-diagnostics
+documentationCenter: monitoring-and-diagnostics
 
-
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="12/08/2016"
-	wacn.date="01/03/2017"
-	ms.author="ashwink"/>  
-
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/03/2017
+ms.author: ashwink
+---
 
 # 针对 Azure 活动日志警报配置 webhook
 
-通过 webhook 可以将 Azure 警报通知路由到其他系统，以便进行后续处理或自定义操作。可以针对警报使用 webhook，以将警报路由到可以发送短信、记录 Bug、通过聊天/消息通知团队，或执行任意数量的其他操作的服务。本文介绍如何针对 Azure 活动日志警报设置 webhook，以及 HTTP POST 对 webhook 的有效负载情况。有关 Azure 度量值警报的设置和架构的信息，[请参阅本页](/documentation/articles/insights-webhooks-alerts/)。还可以将活动日志警报设置为激活时发送电子邮件。
+通过 webhook 可以将 Azure 警报通知路由到其他系统，以便进行后续处理或自定义操作。可以针对警报使用 webhook，以将警报路由到可以发送短信、记录 Bug、通过聊天/消息通知团队，或执行任意数量的其他操作的服务。本文介绍如何针对 Azure 活动日志警报设置 webhook，以及 HTTP POST 对 webhook 的有效负载情况。有关 Azure 度量值警报的设置和架构的信息，[请参阅本页](./insights-webhooks-alerts.md)。还可以将活动日志警报设置为激活时发送电子邮件。
 
->[AZURE.NOTE] 此功能目前处于预览状态，将在以后删除。
+>[!NOTE]
+> 此功能目前处于预览状态，将在以后删除。
 
-可以使用 [Azure PowerShell Cmdlet](/documentation/articles/insights-powershell-samples/#create-alert-rules)、[跨平台 CLI](/documentation/articles/insights-cli-samples/#work-with-alerts) 或 [Azure Monitor REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn933805.aspx) 设置活动日志警报。
+可以使用 [Azure PowerShell Cmdlet](./insights-powershell-samples.md#create-alert-rules)、[跨平台 CLI](./insights-cli-samples.md#work-with-alerts) 或 [Azure Monitor REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn933805.aspx) 设置活动日志警报。
 
 ## 对 webhook 进行身份验证
 Webhook 可以使用以下任一方法进行身份验证：
 
 1. **基于令牌的授权** - 保存的 webhook URI 具有令牌 ID，例如 `https://mysamplealert/webcallback?tokenid=sometokenid&someparameter=somevalue`
-2.	**基本授权** - 保存的 webhook URI 具有用户名和密码，例如 `https://userid:password@mysamplealert/webcallback?someparamater=somevalue&foo=bar`
+2. **基本授权** - 保存的 webhook URI 具有用户名和密码，例如 `https://userid:password@mysamplealert/webcallback?someparamater=somevalue&foo=bar`
 
 ## 负载架构
 POST 操作对于所有基于活动日志的警报包含以下 JSON 有效负载和架构。此架构类似于基于度量值的警报使用的架构。
 
-		{
-		        "status": "Activated",
-		        "context": {
-		                "resourceProviderName": "Microsoft.Web",
-		                "event": {
-		                        "$type": "Microsoft.WindowsAzure.Management.Monitoring.Automation.Notifications.GenericNotifications.Datacontracts.InstanceEventContext, Microsoft.WindowsAzure.Management.Mon.Automation",
-		                        "authorization": {
-		                                "action": "Microsoft.Web/sites/start/action",
-		                                "scope": "/subscriptions/s1/resourcegroups/rg1/providers/Microsoft.Web/sites/leoalerttest"
-		                        },
-		                        "eventDataId": "327caaca-08d7-41b1-86d8-27d0a7adb92d",
-		                        "category": "Administrative",
-		                        "caller": "myname@mycompany.com",
-		                        "httpRequest": {
-		                                "clientRequestId": "f58cead8-c9ed-43af-8710-55e64def208d",
-		                                "clientIpAddress": "104.43.166.155",
-		                                "method": "POST"
-		                        },
-		                        "status": "Succeeded",
-		                        "subStatus": "OK",
-		                        "level": "Informational",
-		                        "correlationId": "4a40beaa-6a63-4d92-85c4-923a25abb590",
-		                        "eventDescription": "",
-		                        "operationName": "Microsoft.Web/sites/start/action",
-		                        "operationId": "4a40beaa-6a63-4d92-85c4-923a25abb590",
-		                        "properties": {
-		                                "$type": "Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage",
-		                                "statusCode": "OK",
-		                                "serviceRequestId": "f7716681-496a-4f5c-8d14-d564bcf54714"
-		                        }
-		                },
-		                "timestamp": "Friday, March 11, 2016 9:13:23 PM",
-		                "id": "/subscriptions/s1/resourceGroups/rg1/providers/microsoft.insights/alertrules/alertonevent2",
-		                "name": "alertonevent2",
-		                "description": "test alert on event start",
-		                "conditionType": "Event",
-		                "subscriptionId": "s1",
-		                "resourceId": "/subscriptions/s1/resourcegroups/rg1/providers/Microsoft.Web/sites/leoalerttest",
-		                "resourceGroupName": "rg1"
-		        },
-		        "properties": {
-		                "key1": "value1",
-		                "key2": "value2"
-		        }
-		}
+        {
+                "status": "Activated",
+                "context": {
+                        "resourceProviderName": "Microsoft.Web",
+                        "event": {
+                                "$type": "Microsoft.WindowsAzure.Management.Monitoring.Automation.Notifications.GenericNotifications.Datacontracts.InstanceEventContext, Microsoft.WindowsAzure.Management.Mon.Automation",
+                                "authorization": {
+                                        "action": "Microsoft.Web/sites/start/action",
+                                        "scope": "/subscriptions/s1/resourcegroups/rg1/providers/Microsoft.Web/sites/leoalerttest"
+                                },
+                                "eventDataId": "327caaca-08d7-41b1-86d8-27d0a7adb92d",
+                                "category": "Administrative",
+                                "caller": "myname@mycompany.com",
+                                "httpRequest": {
+                                        "clientRequestId": "f58cead8-c9ed-43af-8710-55e64def208d",
+                                        "clientIpAddress": "104.43.166.155",
+                                        "method": "POST"
+                                },
+                                "status": "Succeeded",
+                                "subStatus": "OK",
+                                "level": "Informational",
+                                "correlationId": "4a40beaa-6a63-4d92-85c4-923a25abb590",
+                                "eventDescription": "",
+                                "operationName": "Microsoft.Web/sites/start/action",
+                                "operationId": "4a40beaa-6a63-4d92-85c4-923a25abb590",
+                                "properties": {
+                                        "$type": "Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage",
+                                        "statusCode": "OK",
+                                        "serviceRequestId": "f7716681-496a-4f5c-8d14-d564bcf54714"
+                                }
+                        },
+                        "timestamp": "Friday, March 11, 2016 9:13:23 PM",
+                        "id": "/subscriptions/s1/resourceGroups/rg1/providers/microsoft.insights/alertrules/alertonevent2",
+                        "name": "alertonevent2",
+                        "description": "test alert on event start",
+                        "conditionType": "Event",
+                        "subscriptionId": "s1",
+                        "resourceId": "/subscriptions/s1/resourcegroups/rg1/providers/Microsoft.Web/sites/leoalerttest",
+                        "resourceGroupName": "rg1"
+                },
+                "properties": {
+                        "key1": "value1",
+                        "key2": "value2"
+                }
+        }
 
 |元素名称|	说明|
 |---|---|
@@ -113,7 +112,7 @@ POST 操作对于所有基于活动日志的警报包含以下 JSON 有效负载
 |subStatus|	通常包含对应 REST 调用的 HTTP 状态代码。它还可能包含描述子状态的其他字符串。常见子状态值包括：OK（HTTP 状态代码：200）、Created（HTTP 状态代码：201）、Accepted（HTTP 状态代码：202）、No Content（HTTP 状态代码：204）、Bad Request（HTTP 状态代码：400）、Not Found（HTTP 状态代码：404）、Conflict（HTTP 状态代码：409）、Internal Server Error（HTTP 状态代码：500）、Service Unavailable（HTTP 状态代码：503）、Gateway Timeout（HTTP 状态代码：504）|
 
 ## 后续步骤
-- [了解有关活动日志的更多信息](/documentation/articles/monitoring-overview-activity-logs/)
+- [了解有关活动日志的更多信息](./monitoring-overview-activity-logs.md)
 - [对 Azure 警报执行 Azure 自动化脚本 (Runbook)](http://go.microsoft.com/fwlink/?LinkId=627081)
 - [使用逻辑应用通过 Twilio 从 Azure 警报发送短信](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-text-message-with-logic-app)。本示例适用于度量值警报，但经过修改后可用于活动日志警报。
 - [使用逻辑应用从 Azure 警报发送 Slack 消息](https://github.com/Azure/azure-quickstart-templates/tree/master/201-alert-to-slack-with-logic-app)。本示例适用于度量值警报，但经过修改后可用于活动日志警报。

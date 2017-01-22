@@ -1,21 +1,21 @@
-<properties
-   pageTitle="定义和管理状态 | Microsoft Azure"
-   description="如何定义和管理 Service Fabric 中的服务状态"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="appi101"
-   manager="timlt"
-   editor=""/>
+---
+title: 定义和管理状态 | Microsoft Azure
+description: 如何定义和管理 Service Fabric 中的服务状态
+services: service-fabric
+documentationCenter: .net
+authors: appi101
+manager: timlt
+editor: 
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="08/10/2016"
-   wacn.date="01/04/2017"
-   ms.author="aprameyr"/>
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 08/10/2016
+wacn.date: 01/04/2017
+ms.author: aprameyr
+---
 
 # 服务状态
 **服务状态**指的是服务正常运行所必需的数据。这包括服务为正常工作而读取和写入的数据结构和变量。
@@ -35,11 +35,10 @@
 
 有关 Service Fabric 概念的详细信息，请参阅以下内容：
 
-- [Service Fabric 服务的可用性](/documentation/articles/service-fabric-availability-services/)
+- [Service Fabric 服务的可用性](./service-fabric-availability-services.md)
 
-- [Service Fabric 服务的可伸缩性](/documentation/articles/service-fabric-concepts-scalability/)
+- [Service Fabric 服务的可伸缩性](./service-fabric-concepts-scalability.md)
 
-- [Service Fabric 服务分区](/documentation/articles/service-fabric-concepts-partitioning/)
- 
+- [Service Fabric 服务分区](./service-fabric-concepts-partitioning.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

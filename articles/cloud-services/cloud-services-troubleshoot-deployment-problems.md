@@ -1,21 +1,22 @@
-<properties
- pageTitle="排查云服务部署问题 | Azure"
- description="将云服务部署到 Azure 时，可能会遇到几个常见问题。本文提供了部分问题的解决方案。"
-   services="cloud-services"
-   documentationCenter=""
-   authors="simonxjx"
-   manager="felixwu"
-   editor=""
-   tags="top-support-issue"/>
-<tags
-   ms.service="cloud-services"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="tbd"
-   ms.date="11/30/2016"
-   wacn.date="01/03/2017"
-   ms.author="v-six" />
+---
+title: 排查云服务部署问题 | Azure
+description: 将云服务部署到 Azure 时，可能会遇到几个常见问题。本文提供了部分问题的解决方案。
+services: cloud-services
+documentationCenter: 
+authors: simonxjx
+manager: felixwu
+editor: 
+tags: top-support-issue
+
+ms.service: cloud-services
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: tbd
+ms.date: 11/30/2016
+wacn.date: 01/03/2017
+ms.author: v-six
+---
 
 # 排查云服务部署问题
 
@@ -26,9 +27,10 @@
 * 在 Azure 经典管理门户中，依次单击云服务的部署、“所有设置”、“属性”。
 * 在 Azure 经典管理门户中，依次单击云服务的部署、“仪表板”，然后定位到页面右下角（位于“速览”下）。请注意，此窗格中没有“属性”标签。
 
-> [AZURE.NOTE] 可通过单击“属性”窗格右上角的图标将该窗格的内容复制到剪贴板。
+> [!NOTE]
+> 可通过单击“属性”窗格右上角的图标将该窗格的内容复制到剪贴板。
 
-[AZURE.INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
+[!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
 ## 问题：无法访问网站，但部署已启动且所有角色实例均已就绪
 
@@ -65,16 +67,16 @@ Azure 检测到问题节点并因此将角色实例移到新节点时，系统�
 
 这种情况可能指示应用程序代码、程序包或配置文件存在问题。在这种情况下，应能看到状态每隔几分钟更改一次，而 Azure 门户则可能会显示“正在回收”、“忙”或“正在初始化”之类的内容。这表示应用程序存在问题，导致角色实例无法运行。
 
-有关如何解决此问题的详细信息，请参阅[导致角色回收的常见问题](/documentation/articles/cloud-services-troubleshoot-common-issues-which-cause-roles-recycle/)。
+有关如何解决此问题的详细信息，请参阅[导致角色回收的常见问题](./cloud-services-troubleshoot-common-issues-which-cause-roles-recycle.md)。
 
 ## 问题：应用程序停止工作
 
 1. 在 Azure 经典管理门户中，单击角色实例。
 2. 在 Azure 经典管理门户的“属性”窗格中，考虑是否存在以下情况，以便解决问题：
-   * 如果角色实例最近停止过（可查看“中止计数”的值），则可能是因为部署正在进行更新。等待，看角色实例是否会自行恢复运行。
-   * 如果角色实例处于“忙”状态，请检查应用程序代码，看是否已处理 [StatusCheck](https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.serviceruntime.roleenvironment.statuscheck) 事件。可能需要添加或修复处理此事件的某些代码。
+    * 如果角色实例最近停止过（可查看“中止计数”的值），则可能是因为部署正在进行更新。等待，看角色实例是否会自行恢复运行。
+    * 如果角色实例处于“忙”状态，请检查应用程序代码，看是否已处理 [StatusCheck](https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.serviceruntime.roleenvironment.statuscheck) 事件。可能需要添加或修复处理此事件的某些代码。
 
->[AZURE.WARNING] 如果回收云服务，请重置部署的属性，以便有效清除有关原始问题的信息。
-
+>[!WARNING]
+> 如果回收云服务，请重置部署的属性，以便有效清除有关原始问题的信息。
 
 <!---HONumber=Mooncake_1226_2016-->

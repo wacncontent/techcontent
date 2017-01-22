@@ -1,22 +1,21 @@
-<properties 
-	pageTitle="具有 MongoDB 协议支持的 DocumentDB 帐户开发指南（预览版）| Azure" 
-	description="了解具有 MongoDB 协议支持的 DocumentDB 帐户（目前以预览版提供）的预览版开发指南。" 
-	services="documentdb" 
-	authors="andrewhoh" 
-	manager="jhubbard" 
-	editor="" 
-	documentationCenter=""/>
+---
+title: 具有 MongoDB 协议支持的 DocumentDB 帐户开发指南（预览版）| Azure
+description: 了解具有 MongoDB 协议支持的 DocumentDB 帐户（目前以预览版提供）的预览版开发指南。
+services: documentdb
+authors: andrewhoh
+manager: jhubbard
+editor: 
+documentationCenter: 
 
-<tags 
-	ms.service="documentdb" 
-	ms.workload="data-services" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="09/15/2016" 
-	ms.author="anhoh"
-   	wacn.date="10/18/2016"/>  
-
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/15/2016
+ms.author: anhoh
+wacn.date: 10/18/2016
+---
 
 # 具有 MongoDB 协议支持的 DocumentDB 帐户开发指南
 
@@ -26,11 +25,12 @@ DocumentDB 支持使用核心 MongoDB API 函数来创建、读取、更新和�
 
 ## 集合
 
-> [AZURE.IMPORTANT] DocumentDB 在集合级别使用保留的吞吐量来提供有保证的可预测性能。因此，DocumentDB 中的集合是可计费实体。
+> [!IMPORTANT]
+> DocumentDB 在集合级别使用保留的吞吐量来提供有保证的可预测性能。因此，DocumentDB 中的集合是可计费实体。
 
-性能保留在集合级别应用，使应用程序可以调整系统中数据容器的最低级别性能。因此，集合的价格由集合的预配吞吐量（以每秒的请求单位数来度量）和总占用存储空间（以千兆字节为单位）决定。可以在集合的整个生命周期内调整设置的吞吐量，以适应不断变化的应用程序的处理需求和访问模式。有关详细信息，请参阅 [DocumentDB performance levels](/documentation/articles/documentdb-performance-levels/)（DocumentDB 性能级别）。
+性能保留在集合级别应用，使应用程序可以调整系统中数据容器的最低级别性能。因此，集合的价格由集合的预配吞吐量（以每秒的请求单位数来度量）和总占用存储空间（以千兆字节为单位）决定。可以在集合的整个生命周期内调整设置的吞吐量，以适应不断变化的应用程序的处理需求和访问模式。有关详细信息，请参阅 [DocumentDB performance levels](./documentdb-performance-levels.md)（DocumentDB 性能级别）。
 
-默认情况下，具有 MongoDB 协议支持的 DocumentDB 集合是以 1,000 RU/秒的预配吞吐量在标准定价层创建的。可以根据 [Changing performance levels using the Azure Portal](/documentation/articles/documentdb-performance-levels/#changing-performance-levels-using-the-azure-portal/)（使用 Azure 门户预览更改性能级别）中所述调整每个集合的预配吞吐量。
+默认情况下，具有 MongoDB 协议支持的 DocumentDB 集合是以 1,000 RU/秒的预配吞吐量在标准定价层创建的。可以根据 [Changing performance levels using the Azure Portal](./documentdb-performance-levels.md#changing-performance-levels-using-the-azure-portal/)（使用 Azure 门户预览更改性能级别）中所述调整每个集合的预配吞吐量。
 
 ## CRUD 操作
 
@@ -44,7 +44,6 @@ DocumentDB 支持 MongoDB 查询的完整语法，但有一些例外情况。除
 启用 MongoDB 协议的帐户的 Azure 门户预览体验迎合启用 MongoDB 协议的帐户的需要。我们正在寻求拓展该体验，但需要用户提供有关哪些门户功能最有用的[反馈](mailto:askdocdb@microsoft.com?subject=DocumentDB%20Protocol%20Support%20for%20MongoDB%20Preview%20Portal%20Experience)。
 
 ## 支持矩阵
-
 
 ### CRUD 和查询操作
 
@@ -75,7 +74,6 @@ Array|$all、$size、$elemMatch|
 注释|-all-| 
 投影| |-all-
 
-
 ### 数据库命令
 
 功能|支持|即将支持
@@ -89,9 +87,7 @@ GeoSpatial| |-all-
 
 ## 后续步骤
 
-- 了解如何对具有 MongoDB 协议支持的 DocumentDB 帐户[使用 MongoChef](/documentation/articles/documentdb-mongodb-mongochef/)。
-- 浏览具有 MongoDB 协议支持的 DocumentDB [示例](/documentation/articles/documentdb-mongodb-samples/)。
-
- 
+- 了解如何对具有 MongoDB 协议支持的 DocumentDB 帐户[使用 MongoChef](./documentdb-mongodb-mongochef.md)。
+- 浏览具有 MongoDB 协议支持的 DocumentDB [示例](./documentdb-mongodb-samples.md)。
 
 <!---HONumber=Mooncake_1010_2016-->

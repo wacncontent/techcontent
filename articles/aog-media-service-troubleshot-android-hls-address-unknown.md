@@ -1,17 +1,17 @@
-<properties
-	pageTitle="安卓 SDK 无法识别 Azure 媒体服务发布的 HLS 视频地址"
-	description="如何解决安卓 SDK 无法识别 Azure 媒体服务发布的 HLS 视频地址的问题。"
-	services="media-service"
-	documentationCenter=""
-	authors=""
-	manager=""
-	editor=""
-	tags=""/>
+---
+title: 安卓 SDK 无法识别 Azure 媒体服务发布的 HLS 视频地址
+description: 如何解决安卓 SDK 无法识别 Azure 媒体服务发布的 HLS 视频地址的问题。
+services: media-service
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: 
 
-<tags
-	ms.service="media-service-aog"
-	ms.date="10/27/2016"
-	wacn.date="11/03/2016"/>
+ms.service: media-service-aog
+ms.date: 10/27/2016
+wacn.date: 11/03/2016
+---
 
 #安卓 SDK 无法识别 Azure 媒体服务发布的 HLS 视频地址
 

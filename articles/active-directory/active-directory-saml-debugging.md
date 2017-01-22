@@ -1,18 +1,20 @@
-<properties 
-    pageTitle="如何在 Azure Active Directory 中调试对应用程序进行的基于 SAML 的单一登录 | Azure" 
-    description="了解如何在 Azure Active Directory 中调试对应用程序进行基于 SAML 的单一登录" 
-    services="active-directory" 
-    authors="asmalser-msft"  
-    documentationCenter="na" manager="stevenpo"/>
-<tags 
-    ms.service="active-directory" 
-    ms.devlang="na" 
-    ms.topic="article" 
-    ms.tgt_pltfrm="na" 
-    ms.workload="identity" 
-    ms.date="02/09/2016" 
-    wacn.date="06/27/2016" 
-    ms.author="asmalser" />
+---
+title: 如何在 Azure Active Directory 中调试对应用程序进行的基于 SAML 的单一登录 | Azure
+description: 了解如何在 Azure Active Directory 中调试对应用程序进行基于 SAML 的单一登录
+services: active-directory
+authors: asmalser-msft
+documentationCenter: na
+manager: stevenpo
+
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 02/09/2016
+wacn.date: 06/27/2016
+ms.author: asmalser
+---
 
 #如何在 Azure Active Directory 中调试对应用程序进行基于 SAML 的单一登录
 
@@ -21,15 +23,15 @@
 ![][1]
 
 包含 SAML 令牌的 Azure AD 响应通常是在从 [https://login.chinacloudapi.cn](https://login.chinacloudapi.cn) 发出 HTTP 302 重定向之后发生的响应，它将发送到应用程序的已配置**回复 URL**。
- 
+
 你可以通过选择此行，然后在右窗格中选择“检查器”>“WebForms”，来查看 SAML 令牌。右键单击“SAMLResponse”值并选择“发送到 TextWizard”。然后在“转换”菜单中选择“从 Base64”以解码令牌并查看其内容。
- 
+
 **注意**：当你查看此 HTTP 请求的内容时，Fiddler 可能会提示你配置 HTTPS 流量解密，此时你需要执行此操作。
 
 <!--## 相关文章
 
-- [有关 Azure Active Directory 中应用程序管理的文章索引](/documentation/articles/active-directory-apps-index/)
-- [如何为预先集成的应用程序自定义 SAML 令牌中颁发的声明](/documentation/articles/active-directory-saml-claims-customization/)
+- [有关 Azure Active Directory 中应用程序管理的文章索引](./active-directory-apps-index.md)
+- [如何为预先集成的应用程序自定义 SAML 令牌中颁发的声明](./active-directory-saml-claims-customization.md)
 -->
 <!--Image references-->
 [1]: ./media/active-directory-saml-debugging/fiddler.png

@@ -1,23 +1,22 @@
-<properties
-    pageTitle="使用 Azure 门户预览创建 SQL 数据库警报 | Azure"
-    description="使用 Azure 门户预览创建 SQL 数据库警报，该警报可在满足指定的条件时触发通知或自动化操作。"
-    author="CarlRabeler"
-    manager="jhubbard"
-    editor=""
-    services="sql-database"
-    documentationcenter="" />  
+---
+title: 使用 Azure 门户预览创建 SQL 数据库警报 | Azure
+description: 使用 Azure 门户预览创建 SQL 数据库警报，该警报可在满足指定的条件时触发通知或自动化操作。
+author: CarlRabeler
+manager: jhubbard
+editor: 
+services: sql-database
+documentationcenter: 
 
-<tags
-    ms.assetid="f7457655-ced6-4102-a9dd-7ddf2265c0e2"
-    ms.service="sql-database"
-    ms.workload="data-management"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="09/23/2016"
-    wacn.date="12/19/2016"
-    ms.author="carlrab" />  
-
+ms.assetid: f7457655-ced6-4102-a9dd-7ddf2265c0e2
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/23/2016
+wacn.date: 12/19/2016
+ms.author: carlrab
+---
 
 # 使用 Azure 门户预览为 Azure SQL 数据库创建警报
 
@@ -38,19 +37,19 @@
 
 可以使用以下工具配置和获取关于警报的信息：
 
-* [Azure 门户预览](/documentation/articles/insights-alerts-portal/)
-* [PowerShell](/documentation/articles/insights-alerts-powershell/)
-* [命令行界面 (CLI)](/documentation/articles/insights-alerts-command-line-interface/)
+* [Azure 门户预览](../monitoring-and-diagnostics/insights-alerts-portal.md)
+* [PowerShell](../monitoring-and-diagnostics/insights-alerts-powershell.md)
+* [命令行界面 (CLI)](../monitoring-and-diagnostics/insights-alerts-command-line-interface.md)
 * [Azure 监视器 REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn931945.aspx)
 
 ## 使用 Azure 门户预览创建指标的警报规则
 1. 在[门户](https://portal.azure.cn/)中，找到希望监视的资源并选择该资源。
 2. 在“监视”部分下选择“警报”或“警报规则”。对于不同的资源，文本和图标可能稍有不同。
-   
+
     ![监视](./media/insights-alerts-portal/AlertRulesButton.png)  
 
 3. 选择“添加警报”命令并填写各个字段。
-   
+
     ![添加警报](./media/insights-alerts-portal/AddAlertOnlyParamsPage.png)  
 
 4. 为警报规则**命名**，并选择一个**描述**，描述也将显示在通知电子邮件中。
@@ -69,7 +68,6 @@
 * 查看其中显示了指标阈值和前一天的实际值的图形。
 * 编辑或删除警报。
 * **禁用**或**启用**警报（如果希望暂时停止或恢复接收该警报的通知）。
-
 
 ## SQL 数据库警报值和阈值
 
@@ -114,10 +112,9 @@
 | 弹性池 | storage\_used | 已用的存储量 | 平均值 | 5 分钟 |
 ||||||
 
-
 ## 后续步骤
-* 详细了解[在警报中配置 Webhook](/documentation/articles/insights-webhooks-alerts/)。
-* 详细了解 [Azure 自动化 Runbook](/documentation/articles/automation-starting-a-runbook/)。
-* [大致了解指标收集](/documentation/articles/insights-how-to-customize-monitoring/)以确保你的服务可用且响应迅速。
+* 详细了解[在警报中配置 Webhook](../monitoring-and-diagnostics/insights-webhooks-alerts.md)。
+* 详细了解 [Azure 自动化 Runbook](../automation/automation-starting-a-runbook.md)。
+* [大致了解指标收集](../monitoring-and-diagnostics/insights-how-to-customize-monitoring.md)以确保你的服务可用且响应迅速。
 
 <!---HONumber=Mooncake_1212_2016-->

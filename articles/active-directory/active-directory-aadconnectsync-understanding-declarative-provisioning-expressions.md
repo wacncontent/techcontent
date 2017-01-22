@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure AD Connect 同步：了解声明性预配表达式 | Azure"
-	description="说明声明性设置表达式"
-	services="active-directory"
-	documentationCenter=""
-	authors="andkjell"
-	manager="stevenpo"
-	editor=""/>
+---
+title: Azure AD Connect 同步：了解声明性预配表达式 | Azure
+description: 说明声明性设置表达式
+services: active-directory
+documentationCenter: 
+authors: andkjell
+manager: stevenpo
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/31/2016"
-	ms.author="markusvi;andkjell"
-	wacn.date="01/19/2017"/>
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/31/2016
+ms.author: markusvi;andkjell
+wacn.date: 01/19/2017
+---
 
 # Azure AD Connect 同步：了解声明性预配表达式
 Azure AD Connect 同步基于 Forefront Identity Manager 2010 中最先引入的声明式预配。使用该功能可以实现完整的标识集成业务逻辑，而无需编写已编译的代码。
@@ -42,7 +41,7 @@ Azure AD Connect 同步基于 Forefront Identity Manager 2010 中最先引入的
 
 `Function1(Function2(Function3()))`
 
-有关函数的完整列表，请参阅 [function reference](/documentation/articles/active-directory-aadconnectsync-functions-reference/)（函数参考）。
+有关函数的完整列表，请参阅 [function reference](./active-directory-aadconnectsync-functions-reference.md)（函数参考）。
 
 ### Parameters
 通过连接器或由管理员使用 PowerShell 定义参数。参数通常包含因系统不同而各异的值，例如用户所在域的名称。这些参数可在属性流中使用。
@@ -85,17 +84,17 @@ Active Directory 连接器为入站同步规则提供以下参数：
 
 ## 后续步骤
 
-- 在 [Understanding Declarative Provisioning](/documentation/articles/active-directory-aadconnectsync-understanding-declarative-provisioning/)（了解声明性预配）中了解有关配置模型的详细信息。
-- 以 [Understanding the default configuration](/documentation/articles/active-directory-aadconnectsync-understanding-default-configuration/)（了解默认配置）中了解如何现成地使用声明式预配。
-- 在 [How to make a change to the default configuration](/documentation/articles/active-directory-aadconnectsync-change-the-configuration/)（如何对默认配置进行更改）中了解如何使用声明性预配进行实际更改。
+- 在 [Understanding Declarative Provisioning](./active-directory-aadconnectsync-understanding-declarative-provisioning.md)（了解声明性预配）中了解有关配置模型的详细信息。
+- 以 [Understanding the default configuration](./active-directory-aadconnectsync-understanding-default-configuration.md)（了解默认配置）中了解如何现成地使用声明式预配。
+- 在 [How to make a change to the default configuration](./active-directory-aadconnectsync-change-the-configuration.md)（如何对默认配置进行更改）中了解如何使用声明性预配进行实际更改。
 
 **概述主题**
 
-- [Azure AD Connect 同步：理解和自定义同步](/documentation/articles/active-directory-aadconnectsync-whatis/)
-- [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
+- [Azure AD Connect 同步：理解和自定义同步](./active-directory-aadconnectsync-whatis.md)
+- [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)
 
 **参考主题**
 
-- [Azure AD Connect 同步：函数参考](/documentation/articles/active-directory-aadconnectsync-functions-reference/)
+- [Azure AD Connect 同步：函数参考](./active-directory-aadconnectsync-functions-reference.md)
 
 <!---HONumber=Mooncake_0926_2016-->

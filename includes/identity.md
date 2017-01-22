@@ -8,7 +8,6 @@
 
 - 在云中或本地运行的应用程序可以使用 Azure Active Directory Access Control 让用户使用 Facebook、Google、Microsoft 和其他标识提供者的标识进行登录。
 
-
 本文将一一介绍这三种方式。
 
 ## 目录
@@ -19,13 +18,11 @@
 
 - [使用 Azure Active Directory Access Control](#ac)
 
-
 ## <a name="adinvm"></a>在 VM 中运行 Windows Server Active Directory
 
 在 Azure VM 中运行 Windows Server AD 与在本地运行它非常类似。[图 1](#fig1) 显示了这种情况的典型示例。
 
 ![Azure Active Directory in Virtual Machine](./media/identity/identity_01_ADinVM.png)
-
 
 <a name="Fig1"></a>图 1：Windows Server Active Directory 可在使用 Azure 虚拟网络连接到组织的本地数据中心的 Azure VM 中运行。
 
@@ -60,7 +57,6 @@
 - 只使用 SaaS 应用程序的个人和组织可将 Azure Active Directory 作为其唯一的目录服务。
 
 - 运行 Windows Server Active Directory 的组织可将其本地目录连接到 Azure Active Directory，然后使用此目录服务让用户通过单一登录访问 SaaS 应用程序。
-
 
 [图 2](#fig2) 演示了这两种方式中的第一种，即，只使用 Azure Active Directory。
 

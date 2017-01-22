@@ -1,27 +1,24 @@
-<properties
-	pageTitle="如何通过 Java 使用服务总线队列 | Azure"
-	description="了解如何在 Azure 中使用 Service Bus 队列。用 Java 编写的代码示例。"
-	services="service-bus"
-	documentationCenter="java"
-	authors="sethmanheim"
-	manager="timlt"
-	/>  
+---
+title: 如何通过 Java 使用服务总线队列 | Azure
+description: 了解如何在 Azure 中使用 Service Bus 队列。用 Java 编写的代码示例。
+services: service-bus
+documentationCenter: java
+authors: sethmanheim
+manager: timlt
 
-
-<tags
-	ms.service="service-bus"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="Java"
-	ms.topic="article"
-	ms.date="10/04/2016"
-	ms.author="sethm"
-	wacn.date="01/04/2017"/>  
-
+ms.service: service-bus
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: Java
+ms.topic: article
+ms.date: 10/04/2016
+ms.author: sethm
+wacn.date: 01/04/2017
+---
 
 # 如何使用 Service Bus 队列
 
-[AZURE.INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
+[!INCLUDE [service-bus-selector-queues](../../includes/service-bus-selector-queues.md)]
 
 本文介绍了如何使用服务总线队列。这些示例是采用 Java 编写的并且使用了 [Azure SDK for Java][]。涉及的任务包括**创建队列**、**发送和接收消息**以及**删除队列**。
 
@@ -51,15 +48,15 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 3.  在门户的下方窗格中，单击“创建”。
 
-	![](./media/service-bus-java-how-to-use-queues/sb-queues-03.png)
+    ![](./media/service-bus-java-how-to-use-queues/sb-queues-03.png)
 
 4.  在“添加新命名空间”对话框中，输入命名空间名称。系统会立即检查该名称是否可用。
 
-	![](./media/service-bus-java-how-to-use-queues/sb-queues-04.png)
+    ![](./media/service-bus-java-how-to-use-queues/sb-queues-04.png)
 
 5.  在确保命名空间名称可用后，选择应承载你的命名空间的国家或地区（确保使用在其中部署计算资源的同一国家/地区）。
 
-	重要说明：选取要部署应用程序的**相同区域**。这将为你提供最佳性能。
+    重要说明：选取要部署应用程序的**相同区域**。这将为你提供最佳性能。
 
 6. 	将对话框中的其他字段保留其默认值（“消息传递”和“标准层”），然后单击复选标记。系统现已创建命名空间并已将其启用。您可能需要等待几分钟，因为系统将为您的帐户配置资源。
 
@@ -71,16 +68,15 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 1.  在左侧导航窗格中，单击“Service Bus”节点以显示可用命名空间的列表：
 
-	![](./media/service-bus-java-how-to-use-queues/sb-queues-13.png)
+    ![](./media/service-bus-java-how-to-use-queues/sb-queues-13.png)
 
 2.  从显示的列表中单击你刚刚创建的命名空间。
 
 3.  单击“配置”以查看命名空间的共享访问策略。
 
-	![](./media/service-bus-java-how-to-use-queues/sb-queues-14.png)
+    ![](./media/service-bus-java-how-to-use-queues/sb-queues-14.png)
 
 4.  记下主密钥，或将其复制到剪贴板。
-
 
 ## 配置应用程序以使用 Service Bus
 
@@ -88,14 +84,13 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 ![](./media/service-bus-java-how-to-use-queues/eclipselibs.png)  
 
-
 将以下 `import` 语句添加到 Java 文件顶部：
 
-		// Include the following imports to use Service Bus APIs
-		import com.microsoft.windowsazure.services.servicebus.*;
-		import com.microsoft.windowsazure.services.servicebus.models.*;
-		import com.microsoft.windowsazure.core.*;
-		import javax.xml.datatype.*;
+        // Include the following imports to use Service Bus APIs
+        import com.microsoft.windowsazure.services.servicebus.*;
+        import com.microsoft.windowsazure.services.servicebus.models.*;
+        import com.microsoft.windowsazure.core.*;
+        import javax.xml.datatype.*;
 
 ## 创建队列
 
@@ -103,23 +98,23 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 **ServiceBusService** 类提供了创建、枚举和删除队列的方法。以下示例演示了如何通过名为“HowToSample”的命名空间，使用 **ServiceBusService** 对象创建名为“TestQueue”的队列：
 
-		Configuration config =
-			ServiceBusConfiguration.configureWithSASAuthentication(
-					"HowToSample",
-					"RootManageSharedAccessKey",
-					"SAS_key_value",
-					".servicebus.chinacloudapi.cn"
-					);
+        Configuration config =
+            ServiceBusConfiguration.configureWithSASAuthentication(
+                    "HowToSample",
+                    "RootManageSharedAccessKey",
+                    "SAS_key_value",
+                    ".servicebus.chinacloudapi.cn"
+                    );
 
     ServiceBusContract service = ServiceBusService.create(config);
     QueueInfo queueInfo = new QueueInfo("TestQueue");
     try
     {
-		CreateQueueResult result = service.createQueue(queueInfo);
+        CreateQueueResult result = service.createQueue(queueInfo);
     }
-	catch (ServiceException e)
-	{
-	    System.out.print("ServiceException encountered: ");
+    catch (ServiceException e)
+    {
+        System.out.print("ServiceException encountered: ");
         System.out.println(e.getMessage());
         System.exit(-1);
     }
@@ -175,56 +170,56 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 以下示例演示如何使用 **PeekLock** 模式（非默认模式）接收和处理消息。下面的示例将执行无限循环并在消息达到我们的“TestQueue”后进行处理：
 
-    	try
-	{
-		ReceiveMessageOptions opts = ReceiveMessageOptions.DEFAULT;
-		opts.setReceiveMode(ReceiveMode.PEEK_LOCK);
-	
-		while(true)  { 
-	         ReceiveQueueMessageResult resultQM = 
-	     			service.receiveQueueMessage("TestQueue", opts);
-		    BrokeredMessage message = resultQM.getValue();
-		    if (message != null && message.getMessageId() != null)
-		    {
-			    System.out.println("MessageID: " + message.getMessageId());    
-			    // Display the queue message.
-			    System.out.print("From queue: ");
-			    byte[] b = new byte[200];
-			    String s = null;
-			    int numRead = message.getBody().read(b);
-			    while (-1 != numRead)
-	            {
-	                s = new String(b);
-	                s = s.trim();
-	                System.out.print(s);
-	                numRead = message.getBody().read(b);
-			    }
-	            System.out.println();
-			    System.out.println("Custom Property: " + 
-			        message.getProperty("MyProperty"));
-			    // Remove message from queue.
-			    System.out.println("Deleting this message.");
-			    //service.deleteMessage(message);
-		    }  
-		    else  
-		    {        
-		        System.out.println("Finishing up - no more messages.");        
-		        break; 
-		        // Added to handle no more messages.
-		        // Could instead wait for more messages to be added.
-		    }
-	    }
-	}
-	catch (ServiceException e) {
-	    System.out.print("ServiceException encountered: ");
-	    System.out.println(e.getMessage());
-	    System.exit(-1);
-	}
-	catch (Exception e) {
-	    System.out.print("Generic exception encountered: ");
-	    System.out.println(e.getMessage());
-	    System.exit(-1);
-	} 	
+        try
+    {
+        ReceiveMessageOptions opts = ReceiveMessageOptions.DEFAULT;
+        opts.setReceiveMode(ReceiveMode.PEEK_LOCK);
+
+        while(true)  { 
+             ReceiveQueueMessageResult resultQM = 
+                     service.receiveQueueMessage("TestQueue", opts);
+            BrokeredMessage message = resultQM.getValue();
+            if (message != null && message.getMessageId() != null)
+            {
+                System.out.println("MessageID: " + message.getMessageId());    
+                // Display the queue message.
+                System.out.print("From queue: ");
+                byte[] b = new byte[200];
+                String s = null;
+                int numRead = message.getBody().read(b);
+                while (-1 != numRead)
+                {
+                    s = new String(b);
+                    s = s.trim();
+                    System.out.print(s);
+                    numRead = message.getBody().read(b);
+                }
+                System.out.println();
+                System.out.println("Custom Property: " + 
+                    message.getProperty("MyProperty"));
+                // Remove message from queue.
+                System.out.println("Deleting this message.");
+                //service.deleteMessage(message);
+            }  
+            else  
+            {        
+                System.out.println("Finishing up - no more messages.");        
+                break; 
+                // Added to handle no more messages.
+                // Could instead wait for more messages to be added.
+            }
+        }
+    }
+    catch (ServiceException e) {
+        System.out.print("ServiceException encountered: ");
+        System.out.println(e.getMessage());
+        System.exit(-1);
+    }
+    catch (Exception e) {
+        System.out.print("Generic exception encountered: ");
+        System.out.println(e.getMessage());
+        System.exit(-1);
+    } 	
 
 ## 如何处理应用程序崩溃和不可读消息
 
@@ -242,7 +237,7 @@ Service Bus 提供了相关功能来帮助你轻松地从应用程序错误或�
   [Azure SDK for Java]: /develop/java/
   [Azure Toolkit for Eclipse]: https://msdn.microsoft.com/zh-cn/library/azure/hh694271.aspx
 
-  [队列、主题和订阅]: /documentation/articles/service-bus-queues-topics-subscriptions/
+  [队列、主题和订阅]: ./service-bus-queues-topics-subscriptions.md
   [BrokeredMessage]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.aspx
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

@@ -1,22 +1,21 @@
-<properties
-   pageTitle="SQL 数据仓库 Transact-SQL 参考 | Azure"
-   description="SQL 数据仓库使用的 Transact-SQL 主题参考内容的链接。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="barbkess"
-   manager="barbkess"
-   editor=""/>
+---
+title: SQL 数据仓库 Transact-SQL 参考 | Azure
+description: SQL 数据仓库使用的 Transact-SQL 主题参考内容的链接。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: barbkess
+manager: barbkess
+editor: 
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="01/04/2017"
-   ms.author="barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 01/04/2017
+ms.author: barbkess;sonyama
+---
 
 #Transact-SQL 主题
 
@@ -115,18 +114,15 @@
 - [DROP USER](https://msdn.microsoft.com/zh-cn/library/ms189438.aspx)
 - [OPEN MASTER KEY](https://msdn.microsoft.com/zh-cn/library/ms174433.aspx)
 
-
 ## 后续步骤
 有关更多 TSQL 示例，请参阅 [SQL 数据仓库参考概述][]。
 
 <!--Image references-->
 
-
 <!--Article references-->
-[SQL 数据仓库参考概述]: /documentation/articles/sql-data-warehouse-overview-reference/
+[SQL 数据仓库参考概述]: ./sql-data-warehouse-overview-reference.md
 
 <!--MSDN references-->
-
 
 <!--Other Web references-->
 

@@ -1,28 +1,26 @@
-<properties
-   pageTitle="在 Linux 上使用 C 连接设备 | Azure"
-   description="介绍如何使用在 Linux 上运行的以 C 编写的应用程序将设备连接到 Azure IoT 套件预配置远程监视解决方案。"
-   services=""
-   suite="iot-suite"
-   documentationCenter="na"
-   authors="dominicbetts"
-   manager="timlt"
-   editor=""/>  
+---
+title: 在 Linux 上使用 C 连接设备 | Azure
+description: 介绍如何使用在 Linux 上运行的以 C 编写的应用程序将设备连接到 Azure IoT 套件预配置远程监视解决方案。
+services: 
+suite: iot-suite
+documentationCenter: na
+authors: dominicbetts
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="iot-suite"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="10/05/2016"
-   wacn.date="12/05/2016"
-   ms.author="dobett"/>
-
+ms.service: iot-suite
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 10/05/2016
+wacn.date: 12/05/2016
+ms.author: dobett
+---
 
 # 将设备连接到远程监视预配置解决方案 (Linux)
 
-[AZURE.INCLUDE [iot-suite-selector-connecting](../../includes/iot-suite-selector-connecting.md)]
+[!INCLUDE [iot-suite-selector-connecting](../../includes/iot-suite-selector-connecting.md)]
 
 ## 生成并运行示例 C 客户端 Linux
 
@@ -327,7 +325,7 @@ IoT 中心序列化程序客户端库使用一个模型来指定设备发送到 
       }
     }
     ```
-    
+
     下面提供了一个在启动时发送到 IoT 中心的示例 **DeviceInfo** 消息以供参考：
 
     ```
@@ -346,15 +344,15 @@ IoT 中心序列化程序客户端库使用一个模型来指定设备发送到 
       ]
     }
     ```
-    
+
     下面提供了一个发送到 IoT 中心的示例 **Telemetry** 消息以供参考：
 
     ```
     {"DeviceId":"mydevice01", "Temperature":50, "Humidity":50, "ExternalTemperature":55}
     ```
-    
+
     下面提供了一个从 IoT 中心接收的示例**命令**以供参考：
-    
+
     ```
     {
       "Name":"SetHumidity",
@@ -440,6 +438,6 @@ int main(void)
     ./sample_app
     ```
 
-[AZURE.INCLUDE [iot-suite-visualize-connecting](../../includes/iot-suite-visualize-connecting.md)]
+[!INCLUDE [iot-suite-visualize-connecting](../../includes/iot-suite-visualize-connecting.md)]
 
 <!---HONumber=Mooncake_1128_2016-->

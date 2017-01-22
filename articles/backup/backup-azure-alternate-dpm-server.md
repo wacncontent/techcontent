@@ -1,23 +1,21 @@
-<properties
-	pageTitle="从备份保管库中的另一台 DPM 服务器恢复数据 | Azure"
-	description="将所保护的数据从任意 DPM 服务器恢复到 Azure 备份保管库，前提是服务器已注册到该保管库。"
-	services="backup"
-	documentationCenter=""
-	authors="nkolli1"
-	manager="shreeshd"
-	editor=""/>  
+---
+title: 从备份保管库中的另一台 DPM 服务器恢复数据 | Azure
+description: 将所保护的数据从任意 DPM 服务器恢复到 Azure 备份保管库，前提是服务器已注册到该保管库。
+services: backup
+documentationCenter: 
+authors: nkolli1
+manager: shreeshd
+editor: 
 
-
-<tags
-	ms.service="backup"
-	ms.workload="storage-backup-recovery"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/08/2016"
-	wacn.date="09/05/2016"
-	ms.author="giridham;jimpark;trinadhk;markgal"/>  
-
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/08/2016
+wacn.date: 09/05/2016
+ms.author: giridham;jimpark;trinadhk;markgal
+---
 
 # 在备份保管库中恢复另一 DPM 服务器中的数据
 现在，你可以将所保护的数据从任意 DPM 服务器恢复到 Azure 备份保管库，前提是服务器已注册到该保管库。此方面的流程已完全集成到 DPM 管理控制台中，类似于其他恢复工作流。
@@ -35,7 +33,8 @@
 
     ![外部 DPM 凭据](./media/backup-azure-alternate-dpm-server/external-dpm-credentials.png)
 
-    >[AZURE.NOTE]仅与同一注册保管库关联的 DPM 服务器可以恢复彼此的数据。
+    >[!NOTE]
+    >仅与同一注册保管库关联的 DPM 服务器可以恢复彼此的数据。
 
     成功添加外部 DPM 服务器以后，你就可以从“恢复”选项卡浏览外部 DPM 服务器和本地 DPM 服务器的数据。
 
@@ -76,7 +75,8 @@
 
     ![外部 DPM 恢复选项摘要](./media/backup-azure-alternate-dpm-server/external-dpm-recovery-options-summary.png)
 
-    >[AZURE.NOTE]可以在 DPM 服务器的“监视”选项卡中监视恢复作业。
+    >[!NOTE]
+    >可以在 DPM 服务器的“监视”选项卡中监视恢复作业。
 
     ![监视恢复](./media/backup-azure-alternate-dpm-server/monitoring-recovery.png)
 
@@ -104,6 +104,6 @@
     ![清除外部 DPM](./media/backup-azure-alternate-dpm-server/external-dpm-azurebackupagentversion.png)
 
 ## 后续步骤：
-• [Azure 备份常见问题](/documentation/articles/backup-azure-backup-faq/)
+• [Azure 备份常见问题](./backup-azure-backup-faq.md)
 
 <!---HONumber=Mooncake_0829_2016-->

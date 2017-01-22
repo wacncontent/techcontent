@@ -1,26 +1,25 @@
-<properties
-    pageTitle="Azure 媒体服务分片 MP4 实时引入规范 | Azure"
-    description="本规范描述基于分片 MP4 的实时流引入协议和格式（适用于 Azure 媒体服务）。Azure 媒体服务提供实时传送视频流服务，支持客户使用 Azure 作为云平台来实时流式传输实时事件和广播内容。本文档还介绍了有关构建高度冗余和稳健的实时引入机制的最佳实践。"
-    services="media-services"
-    documentationcenter=""
-    author="cenkdin"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="43fac263-a5ea-44af-8dd5-cc88e423b4de"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="12/07/2016"
-    wacn.date="01/13/2017"
-    ms.author="cenkd;juliako" />  
+---
+title: Azure 媒体服务分片 MP4 实时引入规范 | Azure
+description: 本规范描述基于分片 MP4 的实时流引入协议和格式（适用于 Azure 媒体服务）。Azure 媒体服务提供实时传送视频流服务，支持客户使用 Azure 作为云平台来实时流式传输实时事件和广播内容。本文档还介绍了有关构建高度冗余和稳健的实时引入机制的最佳实践。
+services: media-services
+documentationcenter: 
+author: cenkdin
+manager: erikre
+editor: 
 
+ms.assetid: 43fac263-a5ea-44af-8dd5-cc88e423b4de
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 12/07/2016
+wacn.date: 01/13/2017
+ms.author: cenkd;juliako
+---
 
 # Azure 媒体服务分片 MP4 实时引入规范
 本规范描述基于分片 MP4 的实时流引入协议和格式（适用于 Azure 媒体服务）。Azure 媒体服务提供实时流服务，支持客户使用 Azure 作为云平台来实时流式传输实时事件和广播内容。本文档还介绍了有关构建高度冗余和稳健的实时引入机制的最佳实践。
-
 
 ##1\.一致表示法
 
@@ -36,7 +35,6 @@
 4. 客户端终结点使用 HTTP 自适应流协议（例如平滑流式处理、DASH 或 HLS）从流式处理终结点开始流式传输。
 
 ![image1][image1]
-
 
 ##3\.位流格式 - ISO 14496-12 分片 MP4
 
@@ -59,7 +57,7 @@
 
 Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 HTTP POST 请求，将以分片 MP4 格式打包的编码媒体数据传输到服务。每个 HTTP POST 发送完整的分片 MP4 位流（“流”），其开头为标头框（‘ftyp’、“实时服务器清单框”及 ‘moov’ 框），后接一系列片段（‘moof’ 与 ‘mdat’ 框）。有关 HTTP POST 请求的 URL 语法，请参阅 [1] 中的第 9.2 部分。以下是 POST URL 的示例：
 
-	http://customer.channel.mediaservices.chinacloudapi.cn/ingest.isml/streams(720p)
+    http://customer.channel.mediaservices.chinacloudapi.cn/ingest.isml/streams(720p)
 
 ###要求
 
@@ -75,7 +73,7 @@ Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 
 
 ##5\.时间刻度 
 
-[[MS SSTR]] (https://msdn.microsoft.com/zh-cn/library/ff469518.aspx) 介绍了 SmoothStreamingMedia（第 2.2.2.1 部分）、StreamElement（第 2.2.2.3 部分）、StreamFragmentElement（第 2.2.2.6 部分）和 LiveSMIL（第 2.2.7.3.1 节）的“时间刻度”使用方式。如果没有时间刻度值，则使用默认值 10,000,000 (10 MHz)。尽管平滑流格式规范不会阻止使用其他时间刻度值，但大多数编码器实现会使用此默认值 (10 MHz) 来生成平滑流引入数据。由于 [Azure 媒体动态打包](/documentation/articles/media-services-dynamic-packaging-overview/)功能方面的原因，建议为视频流使用 90 kHz 时间刻度，为音频流使用 44.1 或 48.1 kHz。如果不同的流采用不同的时间刻度值，则必须发送流级时间刻度。请参阅 [[MS-SSTR]] (https://msdn.microsoft.com/zh-cn/library/ff469518.aspx)。
+[[MS SSTR]] (https://msdn.microsoft.com/zh-cn/library/ff469518.aspx) 介绍了 SmoothStreamingMedia（第 2.2.2.1 部分）、StreamElement（第 2.2.2.3 部分）、StreamFragmentElement（第 2.2.2.6 部分）和 LiveSMIL（第 2.2.7.3.1 节）的“时间刻度”使用方式。如果没有时间刻度值，则使用默认值 10,000,000 (10 MHz)。尽管平滑流格式规范不会阻止使用其他时间刻度值，但大多数编码器实现会使用此默认值 (10 MHz) 来生成平滑流引入数据。由于 [Azure 媒体动态打包](./media-services-dynamic-packaging-overview.md)功能方面的原因，建议为视频流使用 90 kHz 时间刻度，为音频流使用 44.1 或 48.1 kHz。如果不同的流采用不同的时间刻度值，则必须发送流级时间刻度。请参阅 [[MS-SSTR]] (https://msdn.microsoft.com/zh-cn/library/ff469518.aspx)。
 
 ##6\.“流”的定义  
 
@@ -95,22 +93,17 @@ Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 
 
 ![image2][image2]  
 
-
 ###选项 2：将每个轨迹包含在单独的流中
 
 在此选项中，编码器在每个分片 MP4 位流中只放置一个轨迹，并通过多个独立的 HTTP 连接发布所有流。这可通过一个或多个编码器来实现。从实时引入的角度来看，此实时演播由四个流组成。
 
 ![image3][image3]  
 
-
 ###选项 3：将音频轨迹与比特率最低的视频轨迹捆绑成一个流
 
 在此选项中，客户选择将音频轨迹与比特率最低的视频轨迹捆绑成一个分片 MP4 位流，并让另外两个视频轨迹分别保留在自己的流中。
 
-
 ![image4][image4]  
-
-
 
 ###摘要
 
@@ -122,16 +115,15 @@ Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 
 
 本部分中，我们将讨论服务故障转移的方案。此案例中，服务的某个位置发生故障，且故障将自身记录为网络错误。以下是如何实施编码器以处理服务故障转移的一些建议：
 
-
 1. 建立超时值为 10 秒的 TCP 连接。如果尝试建立连接超过 10 秒，便会中止操作并重试。
 2. 发送 HTTP 请求消息区块的超时值较短。如果目标 MP4 片段持续时间为 N 秒，请使用介于 N 和 2N 秒之间的发送超时；例如，如果 MP4 片段持续时间是 6 秒，则使用 6 到 12 的超时。如果发生超时，请重置连接，打开新连接，然后以新连接恢复流引入。
 3. 为每个轨迹维护一个循环缓冲区，其中包含最后两个已成功完全发送到服务的片段。如果流的 HTTP POST 请求在流结束前终止或超时，则打开新的连接，然后开始另一个 HTTP POST 请求、重新发送流标头、为每个轨迹重新发送最后两个片段，但不在媒体时间轴上造成不连续情况。这会减少数据丢失的可能性。
 4. 建议编码器不要限制在发生 TCP 错误后，重新尝试创建连接或继续流式传输的次数。
 5. 发生 TCP 错误后：
-	1. 必须关闭当前连接，并且必须为新的 HTTP POST 请求创建新的连接。
-	2. 新的 HTTP POST URL 必须与初始 POST URL 相同。
-	3. 新的 HTTP POST 必须包括与初始 POST 相同的流标头（‘ftyp’、“实时服务器清单框”及 ‘moov’ 框）。
-	4. 必须重新发送为每个轨迹发送的最后两个片段，并恢复流式传输，但不在媒体时间轴上造成不连续情况。MP4 片段时间戳必须连续递增，甚至可跨越 HTTP POST 请求。
+    1. 必须关闭当前连接，并且必须为新的 HTTP POST 请求创建新的连接。
+    2. 新的 HTTP POST URL 必须与初始 POST URL 相同。
+    3. 新的 HTTP POST 必须包括与初始 POST 相同的流标头（‘ftyp’、“实时服务器清单框”及 ‘moov’ 框）。
+    4. 必须重新发送为每个轨迹发送的最后两个片段，并恢复流式传输，但不在媒体时间轴上造成不连续情况。MP4 片段时间戳必须连续递增，甚至可跨越 HTTP POST 请求。
 6. 如果未以匹配 MP4 片段持续时间的速率发送数据，则编码器应该终止 HTTP POST 请求。不发送数据的 HTTP POST 请求可以防止 Azure 媒体服务在服务更新时很快与编码器断开连接。出于此原因，稀疏（广告信号）轨迹的 HTTP POST 应该短暂留存，并在发送疏松片段之后立即终止。
 
 ##8\.编码器故障转移
@@ -139,8 +131,6 @@ Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 
 编码器故障转移是第二种故障转移方案，必须妥善配置此方案才能进行端到端实时流式传送。此方案中，错误状况会发生在编码器端。
 
 ![image5][image5]  
-
-
 
 发生编码器故障转移时，实时引入终结点上预期会：
 
@@ -157,7 +147,6 @@ Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 
 
 ![image6][image6]  
 
-
 如上图所示，有两组编码器同时将每个流的两个副本推送到实时服务。此设置之所以受支持，是因为 Azure 媒体服务能够根据流 ID 与片段时间戳筛选出重复片段。生成的实时流与存档将是所有流的单个副本，此副本很有可能是从两个源聚合而成。例如，在假设的极端条件下，只要有一个编码器（不一定是同一个）在任意给定时间点对每个流运行，则从服务生成的实时流就会是连续的，且不会丢失数据。
 
 此方案的要求与编码器故障转移的要求几乎相同，不同之处在于，第二组编码器将与主编码器同时运行。
@@ -167,7 +156,6 @@ Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 
 对于高度冗余的全局分发，有时需要跨区域备份以处理区域灾难。通过扩展“编码器冗余”拓扑，客户可以选择在不同的区域部署冗余服务，且该区域与第 2 组编码器连接。客户还可与 CDN 提供商合作，将 GTM（全局流量管理器）放在两个服务部署之前，以此无缝路由客户端流量。编码器的要求与“编码器冗余”方案相同，不同之处在于，第二组编码器必须指向不同的实时引入终结点。下图演示了这种设置：
 
 ![image7][image7]  
-
 
 ##11\.特殊类型的引入格式 
 
@@ -183,14 +171,13 @@ Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 
 2. 在如 [1] 的第 6 部分定义的“实时服务器清单框”中，使用“parentTrackName”参数指定父轨迹的名称。有关详细信息，请参阅 [1] 中的第 4.2.1.2.1.2 部分。
 3. 在“实时服务器清单框”中，manifestOutput 必须设置为“true”。
 4. 根据信号事件的稀疏性质，建议：
-	1. 实时事件开始时，编码器会将初始标头框发送给服务，使服务可以在客户端清单中注册稀疏轨迹。
-	2. 未发送数据时，编码器应该终止 HTTP POST 请求。不发送数据且长时间运行的 HTTP POST 可在服务更新或服务器重新启动时，防止 Azure 媒体服务快速与编码器断开连接，因为对套接字执行的接收操作中会暂时阻止媒体服务器。
-	3. 在此期间如果没有可用的信号数据，编码器应该关闭 HTTP POST 请求。POST 请求处于活动状态时，编码器应发送数据
-	4. 发送稀疏片段时，编码器可以设置显式 Content-Length 标头（如果可用）。
-	5. 通过新连接发送稀疏片段时，编码器应该从标头框开始发送，接着发送新片段。这是为了处理中途发生故障转移的情况，并会与先前从未看到稀疏轨迹的新服务器创建新的稀疏连接。
-	6. 时间戳值相等或更大的对应父轨迹片段可供客户端使用时，稀疏轨迹片段便可供客户端使用。例如，如果稀疏片段的时间戳 t=1000，则预期在客户端看到视频（假设父轨迹名称为 video）片段时间戳为 1000 或以上后，便可下载 t=1000 的稀疏片段。请注意，实际信号能够在演播时间轴上的不同位置上，极好地用于其指定用途。在上述示例中，t=1000 的稀疏片段具有 XML 负载，可将广告插入到数秒后的位置上。
-	7. 稀疏轨迹片段的负载可以采用各种不同的格式（例如 XML、文本或二进制等），具体取决于不同的方案。
-
+    1. 实时事件开始时，编码器会将初始标头框发送给服务，使服务可以在客户端清单中注册稀疏轨迹。
+    2. 未发送数据时，编码器应该终止 HTTP POST 请求。不发送数据且长时间运行的 HTTP POST 可在服务更新或服务器重新启动时，防止 Azure 媒体服务快速与编码器断开连接，因为对套接字执行的接收操作中会暂时阻止媒体服务器。
+    3. 在此期间如果没有可用的信号数据，编码器应该关闭 HTTP POST 请求。POST 请求处于活动状态时，编码器应发送数据
+    4. 发送稀疏片段时，编码器可以设置显式 Content-Length 标头（如果可用）。
+    5. 通过新连接发送稀疏片段时，编码器应该从标头框开始发送，接着发送新片段。这是为了处理中途发生故障转移的情况，并会与先前从未看到稀疏轨迹的新服务器创建新的稀疏连接。
+    6. 时间戳值相等或更大的对应父轨迹片段可供客户端使用时，稀疏轨迹片段便可供客户端使用。例如，如果稀疏片段的时间戳 t=1000，则预期在客户端看到视频（假设父轨迹名称为 video）片段时间戳为 1000 或以上后，便可下载 t=1000 的稀疏片段。请注意，实际信号能够在演播时间轴上的不同位置上，极好地用于其指定用途。在上述示例中，t=1000 的稀疏片段具有 XML 负载，可将广告插入到数秒后的位置上。
+    7. 稀疏轨迹片段的负载可以采用各种不同的格式（例如 XML、文本或二进制等），具体取决于不同的方案。
 
 ###冗余音频轨迹
 
@@ -207,10 +194,6 @@ Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 
 2. 使用独立的流发送两个最低视频比特率。其中每个流还应该包含每个唯一音频轨迹的副本。例如，当支持多种语言时，这些流应包含每种语言的音频轨迹。
 3. 使用独立的服务器（编码器）实例来编码和发送 (1) 与 (2) 中所提到的冗余流。
 
-
-
-
-
 [image1]: ./media/media-services-fmp4-live-ingest-overview/media-services-image1.png
 [image2]: ./media/media-services-fmp4-live-ingest-overview/media-services-image2.png
 [image3]: ./media/media-services-fmp4-live-ingest-overview/media-services-image3.png
@@ -218,8 +201,6 @@ Azure 媒体服务的 ISO 分片 MP4 实时引入使用长时间运行的标准 
 [image5]: ./media/media-services-fmp4-live-ingest-overview/media-services-image5.png
 [image6]: ./media/media-services-fmp4-live-ingest-overview/media-services-image6.png
 [image7]: ./media/media-services-fmp4-live-ingest-overview/media-services-image7.png
-
- 
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: remove HDS related content-->

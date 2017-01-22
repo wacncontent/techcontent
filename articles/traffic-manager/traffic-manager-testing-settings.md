@@ -1,24 +1,21 @@
-<properties
-    pageTitle="测试流量管理器设置 | Azure"
-    description="本文将帮助你测试流量管理器设置"
-    services="traffic-manager"
-    documentationCenter=""
-    authors="sdwheeler"
-    manager="carmonm"
-    editor=""
-/>  
+---
+title: 测试流量管理器设置 | Azure
+description: 本文将帮助你测试流量管理器设置
+services: traffic-manager
+documentationCenter: 
+authors: sdwheeler
+manager: carmonm
+editor: 
 
-<tags
-    ms.service="traffic-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/11/2016"
-    wacn.date="01/03/2017"
-    ms.author="sewhee"
-/>  
-
+ms.service: traffic-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/11/2016
+wacn.date: 01/03/2017
+ms.author: sewhee
+---
 
 # 测试流量管理器设置
 
@@ -71,8 +68,8 @@
 
 ## 后续步骤
 
-* [关于流量管理器流量路由方法](/documentation/articles/traffic-manager-routing-methods/)
-* [流量管理器性能注意事项](/documentation/articles/traffic-manager-performance-considerations/)
-* [流量管理器降级状态疑难解答](/documentation/articles/traffic-manager-troubleshooting-degraded/)
+* [关于流量管理器流量路由方法](./traffic-manager-routing-methods.md)
+* [流量管理器性能注意事项](./traffic-manager-performance-considerations.md)
+* [流量管理器降级状态疑难解答](./traffic-manager-troubleshooting-degraded.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

@@ -1,27 +1,27 @@
-<properties
-	pageTitle="通知中心的安全性"
-	description="本主题介绍 Azure 通知中心的安全性。"
-	services="notification-hubs"
-	documentationCenter=".net"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>
+---
+title: 通知中心的安全性
+description: 本主题介绍 Azure 通知中心的安全性。
+services: notification-hubs
+documentationCenter: .net
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="01/09/2017"
-	ms.author="wesmc"/>
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: multiple
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 01/09/2017
+ms.author: wesmc
+---
 
 #安全
 
 ##概述
 
-本主题将介绍 Azure 通知中心的安全模型。由于通知中心是服务总线实体，因此它们与服务总线实现同一安全模型。有关详细信息，请参阅[服务总线身份验证](/documentation/articles/service-bus-authentication-and-authorization/)主题。
+本主题将介绍 Azure 通知中心的安全模型。由于通知中心是服务总线实体，因此它们与服务总线实现同一安全模型。有关详细信息，请参阅[服务总线身份验证](../service-bus-messaging/service-bus-authentication-and-authorization.md)主题。
 
 ##共享访问签名 (SAS) 安全性 
 
@@ -44,7 +44,6 @@
 | 侦听 | 创建/更新、读取和删除单一注册。 | 创建/更新注册<br><br>读取注册<br><br>读取某个句柄的所有注册<br><br>删除注册 |
 | 发送 | 向通知中心发送消息 | 发送消息 |
 | 管理 | 通知中心的 CRUD（包括更新 PNS 凭据和安全密钥），以及基于标记读取注册。 | 创建/更新/读取/删除通知中心<br><br>按标记读取注册 |
-
 
 通知中心接受 Azure 访问控制令牌所授予的声明，并接受签名令牌（使用在通知中心直接配置的共享密钥生成）所授予的声明。
 

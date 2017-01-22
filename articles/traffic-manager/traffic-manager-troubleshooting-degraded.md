@@ -1,24 +1,21 @@
-<properties
-    pageTitle="Azure 流量管理器上的降级状态故障排除"
-    description="如何在流量管理器显示为降级状态时对流量管理器配置文件进行故障排除。"
-    services="traffic-manager"
-    documentationCenter=""
-    authors="sdwheeler"
-    manager="carmonm"
-    editor=""
-/>  
+---
+title: Azure 流量管理器上的降级状态故障排除
+description: 如何在流量管理器显示为降级状态时对流量管理器配置文件进行故障排除。
+services: traffic-manager
+documentationCenter: 
+authors: sdwheeler
+manager: carmonm
+editor: 
 
-<tags
-    ms.service="traffic-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/11/2016"
-    wacn.date="01/09/2017"
-    ms.author="sewhee"
-/>  
-
+ms.service: traffic-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/11/2016
+wacn.date: 01/09/2017
+ms.author: sewhee
+---
 
 # Azure 流量管理器上的降级状态故障排除
 
@@ -26,11 +23,9 @@
 
 ![降级状态](./media/traffic-manager-troubleshooting-degraded/traffic-manager-degraded.png)  
 
-
 转到该配置文件的“终结点”选项卡后，看到一个或多个终结点处于“脱机”状态：
 
 ![offline](./media/traffic-manager-troubleshooting-degraded/traffic-manager-offline.png)  
-
 
 ## 了解流量管理器探测
 
@@ -80,13 +75,13 @@
 
 ## 后续步骤
 
-[关于流量管理器流量路由方法](/documentation/articles/traffic-manager-routing-methods/)
+[关于流量管理器流量路由方法](./traffic-manager-routing-methods.md)
 
-[什么是流量管理器](/documentation/articles/traffic-manager-overview/)
+[什么是流量管理器](./traffic-manager-overview.md)
 
-[云服务](/documentation/services/cloud-services/)
+[云服务](../cloud-services/index.md)
 
-[Azure Web 应用](/documentation/services/app-service/web/)
+[Azure Web 应用](../app-service-web/index.md)
 
 [流量管理器上的操作（REST API 参考）](https://msdn.microsoft.com/zh-cn/library/hh758255.aspx)
 

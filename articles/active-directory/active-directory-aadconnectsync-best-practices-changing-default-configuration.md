@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure AD Connect 同步：有关更改默认配置的最佳实践 | Azure"
-	description="提供有关更改 Azure AD Connect 同步默认配置的最佳实践。"
-	services="active-directory"
-	documentationCenter=""
-	authors="andkjell"
-	manager="femila"
-	editor=""/>
+---
+title: Azure AD Connect 同步：有关更改默认配置的最佳实践 | Azure
+description: 提供有关更改 Azure AD Connect 同步默认配置的最佳实践。
+services: active-directory
+documentationCenter: 
+authors: andkjell
+manager: femila
+editor: 
 
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/22/2016"
-	ms.author="markvi;andkjell"
-	wacn.date="01/19/2017"/>
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/22/2016
+ms.author: markvi;andkjell
+wacn.date: 01/19/2017
+---
 
 # Azure AD Connect 同步：有关更改默认配置的最佳实践
 本主题旨在说明支持和不支持的 Azure AD Connect 同步更改。
@@ -29,18 +28,19 @@ Azure AD Connect 同步在安装向导创建的服务帐户下运行。此服务
 - **不支持**更改或重置服务帐户的密码。这样做会破坏加密密钥，服务将无法访问数据库且无法启动。
 
 ## 计划程序的更改
-从内部版本 1.1（2016 年 2 月）开始，你可以将[计划程序](/documentation/articles/active-directory-aadconnectsync-feature-scheduler/)配置为使用非默认的同步周期（默认周期为 30 分钟）。
+从内部版本 1.1（2016 年 2 月）开始，你可以将[计划程序](./active-directory-aadconnectsync-feature-scheduler.md)配置为使用非默认的同步周期（默认周期为 30 分钟）。
 
 ## 同步规则的更改
 安装向导提供的配置应该适用于最常见的方案。如果需要对配置进行更改，必须遵循这些规则，以便仍可保留支持的配置。
 
-- 如果默认的直接属性流不适用于组织，可以[更改属性流](/documentation/articles/active-directory-aadconnectsync-change-the-configuration/#other-common-attribute-flow-changes/)。
-- 如果希望[属性不流动](/documentation/articles/active-directory-aadconnectsync-change-the-configuration/#do-not-flow-an-attribute/)并要删除 Azure AD 中的任何现有属性值，需要为此方案创建规则。
+- 如果默认的直接属性流不适用于组织，可以[更改属性流](./active-directory-aadconnectsync-change-the-configuration.md#other-common-attribute-flow-changes/)。
+- 如果希望[属性不流动](./active-directory-aadconnectsync-change-the-configuration.md#do-not-flow-an-attribute/)并要删除 Azure AD 中的任何现有属性值，需要为此方案创建规则。
 - [禁用不需要的同步规则](#disable-an-unwanted-sync-rule)而不是删除它。升级期间将重新创建已删除的规则。
 - 若要[更改现成的规则](#change-an-out-of-box-rule)，应复制原始规则并禁用现成的规则。同步规则编辑器将显示提示并提供帮助。
 - 使用同步规则编辑器导出自定义同步规则。编辑器提供一个 PowerShell 脚本，可以在灾难恢复方案中使用它轻松重新创建同步规则。
 
->[AZURE.WARNING] 现成的同步规则具有指纹。如果更改这些规则，指纹将不再匹配。今后尝试应用 Azure AD Connect 的新版本时可能会遇到问题。只能根据本文所述的方式进行更改。
+>[!WARNING]
+> 现成的同步规则具有指纹。如果更改这些规则，指纹将不再匹配。今后尝试应用 Azure AD Connect 的新版本时可能会遇到问题。只能根据本文所述的方式进行更改。
 
 ### 禁用不需要的同步规则 <a name="disable-an-unwanted-sync-rule"></a>
 不要删除现成的同步规则。下一次升级期间会重新创建该规则。
@@ -64,7 +64,7 @@ Azure AD Connect 同步在安装向导创建的服务帐户下运行。此服务
 
 **概述主题**
 
-- [Azure AD Connect 同步：理解和自定义同步](/documentation/articles/active-directory-aadconnectsync-whatis/)
-- [将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)
+- [Azure AD Connect 同步：理解和自定义同步](./active-directory-aadconnectsync-whatis.md)
+- [将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)
 
 <!---HONumber=Mooncake_0926_2016-->

@@ -1,34 +1,29 @@
-<properties 
-	pageTitle="使用 .NET 连接到媒体服务帐户" 
-	description="本主题演示如何使用 .NET 连接到媒体服务。" 
-	services="media-services" 
-	documentationCenter="" 
-	authors="juliako" 
-	manager="erikre" 
-	editor=""/>  
+---
+title: 使用 .NET 连接到媒体服务帐户
+description: 本主题演示如何使用 .NET 连接到媒体服务。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-
-<tags 
-	ms.service="media-services" 
-	ms.workload="media" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="dotnet" 
-	ms.topic="article" 
-	ms.date="09/26/2016" 
-	wacn.date="12/26/2016"
-	ms.author="juliako"/>  
-
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 09/26/2016
+wacn.date: 12/26/2016
+ms.author: juliako
+---
 
 # 使用适用于 .NET 的媒体服务 SDK 连接到媒体服务帐户
 
-> [AZURE.SELECTOR]
-- [REST](/documentation/articles/media-services-rest-connect-programmatically/)
-- [.NET](/documentation/articles/media-services-dotnet-connect-programmatically/)
-
+> [!div class="op_single_selector"]
+- [REST](./media-services-rest-connect-programmatically.md)
+- [.NET](./media-services-dotnet-connect-programmatically.md)
 
 本主题介绍如何在使用适用于 .NET 的媒体服务 SDK 编程时获取与 Azure 媒体服务的编程连接。
-
 
 ## 连接到媒体服务
 
@@ -42,30 +37,27 @@
 
 若要查找这些值，请转到 Azure 经典管理门户，选择你的媒体服务帐户，然后单击门户窗口底部的“管理密钥”图标。单击每个文本框旁边的图标将值复制到系统剪贴板中。
 
-
 ## 创建 CloudMediaContext 实例
 
 若要开始针对媒体服务编程，你需要创建一个代表服务器上下文的 **CloudMediaContext** 实例。**CloudMediaContext** 包括对各种重要集合的引用，这些集合包括作业、资产、文件、访问策略和定位符。
 
->[AZURE.NOTE] **CloudMediaContext** 类不是线程安全的。每个线程或每组操作均应创建一个新 CloudMediaContext。
-
+>[!NOTE]
+> **CloudMediaContext** 类不是线程安全的。每个线程或每组操作均应创建一个新 CloudMediaContext。
 
 CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServicesCredentials** 为参数的构造函数。有关详细信息，请参阅下面的**重复使用访问控制服务令牌**。
 
 以下示例使用 public CloudMediaContext(MediaServicesCredentials credentials) 构造函数：
 
-	// _cachedCredentials and _context are class member variables. 
-	_cachedCredentials = new MediaServicesCredentials(
-	                _mediaServicesAccountName,
-	                _mediaServicesAccountKey);
-	
-	_context = new CloudMediaContext(_cachedCredentials);
+    // _cachedCredentials and _context are class member variables. 
+    _cachedCredentials = new MediaServicesCredentials(
+                    _mediaServicesAccountName,
+                    _mediaServicesAccountKey);
 
+    _context = new CloudMediaContext(_cachedCredentials);
 
 ## 重复使用访问控制服务令牌
 
 本部分说明如何通过使用以 MediaServicesCredentials 为参数的 CloudMediaContext 构造函数重复使用访问控制服务令牌。
-
 
 [Azure Active Directory 访问控制](https://msdn.microsoft.com/zh-cn/library/hh147631.aspx)（也称为访问控制服务或 ACS）是一个基于云的服务，可轻松对用户进行身份验证和授权以使用户获得访问其 Web 应用程序的权限。Azure 媒体服务通过需要 ACS 令牌的 OAuth 协议控制对其服务的访问。媒体服务从授权服务器接收 ACS 令牌。
 
@@ -75,100 +67,94 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
 
 - 你可以在内存中（例如，在静态类变量中）缓存 **MediaServicesCredentials** 对象。然后，将缓存的对象传递给 CloudMediaContext 构造函数。MediaServicesCredentials 对象包含一个 ACS 令牌，如果该令牌仍然有效，则可重复使用。如果该令牌无效，则会使用提供给 MediaServicesCredentials 构造函数的凭据通过媒体服务 SDK 刷新该令牌。
 
-	请注意，在调用 RefreshToken 后，**MediaServicesCredentials** 对象将获得有效的令牌。**CloudMediaContext** 将调用构造函数中的 **RefreshToken** 方法。如果你计划将令牌值保存到外部存储中，请确保在保存令牌数据之前检查 TokenExpiration 值是否有效。如果该值无效，请在进行缓存前调用 RefreshToken。
+    请注意，在调用 RefreshToken 后，**MediaServicesCredentials** 对象将获得有效的令牌。**CloudMediaContext** 将调用构造函数中的 **RefreshToken** 方法。如果你计划将令牌值保存到外部存储中，请确保在保存令牌数据之前检查 TokenExpiration 值是否有效。如果该值无效，请在进行缓存前调用 RefreshToken。
 
-		// Create and cache the Media Services credentials in a static class variable.
-		_cachedCredentials = new MediaServicesCredentials(_mediaServicesAccountName, _mediaServicesAccountKey);
+        // Create and cache the Media Services credentials in a static class variable.
+        _cachedCredentials = new MediaServicesCredentials(_mediaServicesAccountName, _mediaServicesAccountKey);
 
-		
-		// Use the cached credentials to create a new CloudMediaContext object.
-		if(_cachedCredentials == null)
-		{
-		    _cachedCredentials = new MediaServicesCredentials(_mediaServicesAccountName, _mediaServicesAccountKey);
-		}
-		
-		CloudMediaContext context = new CloudMediaContext(_cachedCredentials);
+        // Use the cached credentials to create a new CloudMediaContext object.
+        if(_cachedCredentials == null)
+        {
+            _cachedCredentials = new MediaServicesCredentials(_mediaServicesAccountName, _mediaServicesAccountKey);
+        }
+
+        CloudMediaContext context = new CloudMediaContext(_cachedCredentials);
 
 - 你也可以缓存 AccessToken 字符串和 TokenExpiration 值。这些值以后可以与缓存的令牌数据一起用于新建 MediaServicesCredentials 对象。这对于令牌可以在多个进程或多台计算机之间安全共享的方案尤其有用。
 
-	以下代码片段调用了未在此示例中定义的 SaveTokenDataToExternalStorage、GetTokenDataFromExternalStorage 和 UpdateTokenDataInExternalStorageIfNeeded 方法。你可以定义这些方法以在外部存储中存储、检索和更新令牌数据。
+    以下代码片段调用了未在此示例中定义的 SaveTokenDataToExternalStorage、GetTokenDataFromExternalStorage 和 UpdateTokenDataInExternalStorageIfNeeded 方法。你可以定义这些方法以在外部存储中存储、检索和更新令牌数据。
 
-		CloudMediaContext context1 = new CloudMediaContext(_mediaServicesAccountName, _mediaServicesAccountKey);
-		
-		// Get token values from the context.
-		var accessToken = context1.Credentials.AccessToken;
-		var tokenExpiration = context1.Credentials.TokenExpiration;
-		
-		// Save token values for later use. 
-		// The SaveTokenDataToExternalStorage method should check 
-		// whether the TokenExpiration value is valid before saving the token data. 
-		// If it is not valid, call MediaServicesCredentials’s RefreshToken before caching.
-		SaveTokenDataToExternalStorage(accessToken, tokenExpiration);
-		
-	使用保存的令牌值可创建 MediaServicesCredentials。
+        CloudMediaContext context1 = new CloudMediaContext(_mediaServicesAccountName, _mediaServicesAccountKey);
 
+        // Get token values from the context.
+        var accessToken = context1.Credentials.AccessToken;
+        var tokenExpiration = context1.Credentials.TokenExpiration;
 
-		var accessToken = "";
-		var tokenExpiration = DateTime.UtcNow;
-		
-		// Retrieve saved token values.
-		GetTokenDataFromExternalStorage(out accessToken, out tokenExpiration);
-		
-		// Create a new MediaServicesCredentials object using saved token values.
-		MediaServicesCredentials credentials = new MediaServicesCredentials(_mediaServicesAccountName, _mediaServicesAccountKey)
-		{
-		    AccessToken = accessToken,
-		    TokenExpiration = tokenExpiration
-		};
-		
-		CloudMediaContext context2 = new CloudMediaContext(credentials);
+        // Save token values for later use. 
+        // The SaveTokenDataToExternalStorage method should check 
+        // whether the TokenExpiration value is valid before saving the token data. 
+        // If it is not valid, call MediaServicesCredentials’s RefreshToken before caching.
+        SaveTokenDataToExternalStorage(accessToken, tokenExpiration);
 
-	在令牌已由媒体服务 SDK 更新的情况下，更新令牌副本。
-	
-		if(tokenExpiration != context2.Credentials.TokenExpiration)
-		{
-		    UpdateTokenDataInExternalStorageIfNeeded(accessToken, context2.Credentials.TokenExpiration);
-		}
-		
+    使用保存的令牌值可创建 MediaServicesCredentials。
+
+        var accessToken = "";
+        var tokenExpiration = DateTime.UtcNow;
+
+        // Retrieve saved token values.
+        GetTokenDataFromExternalStorage(out accessToken, out tokenExpiration);
+
+        // Create a new MediaServicesCredentials object using saved token values.
+        MediaServicesCredentials credentials = new MediaServicesCredentials(_mediaServicesAccountName, _mediaServicesAccountKey)
+        {
+            AccessToken = accessToken,
+            TokenExpiration = tokenExpiration
+        };
+
+        CloudMediaContext context2 = new CloudMediaContext(credentials);
+
+    在令牌已由媒体服务 SDK 更新的情况下，更新令牌副本。
+
+        if(tokenExpiration != context2.Credentials.TokenExpiration)
+        {
+            UpdateTokenDataInExternalStorageIfNeeded(accessToken, context2.Credentials.TokenExpiration);
+        }
 
 - 如果你具有多个媒体服务帐户（例如，用于负载共享目的或地域分布，则可以使用 System.Collections.Concurrent.ConcurrentDictionary 集合（ConcurrentDictionary 集合表示可由多个线程同时访问的密钥/值对的线程安全集合）缓存 MediaServicesCredentials 对象。然后可以使用 GetOrAdd 方法获得缓存凭据。
 
-		// Declare a static class variable of the ConcurrentDictionary type in which the Media Services credentials will be cached.  
-		private static readonly ConcurrentDictionary<string, MediaServicesCredentials> mediaServicesCredentialsCache = 
-		    new ConcurrentDictionary<string, MediaServicesCredentials>();
-		
+        // Declare a static class variable of the ConcurrentDictionary type in which the Media Services credentials will be cached.  
+        private static readonly ConcurrentDictionary<string, MediaServicesCredentials> mediaServicesCredentialsCache = 
+            new ConcurrentDictionary<string, MediaServicesCredentials>();
 
-		// Cache (or get already cached) Media Services credentials. Use these credentials to create a new CloudMediaContext object.
-		static public CloudMediaContext CreateMediaServicesContext(string accountName, string accountKey)
-		{
-		    CloudMediaContext cloudMediaContext;
-		    MediaServicesCredentials mediaServicesCredentials;
-		
-		    mediaServicesCredentials = mediaServicesCredentialsCache.GetOrAdd(
-		        accountName,
-		        valueFactory => new MediaServicesCredentials(accountName, accountKey));
-		
-		    cloudMediaContext = new CloudMediaContext(mediaServicesCredentials);
-		
-		    return cloudMediaContext;
-		}
-		
+        // Cache (or get already cached) Media Services credentials. Use these credentials to create a new CloudMediaContext object.
+        static public CloudMediaContext CreateMediaServicesContext(string accountName, string accountKey)
+        {
+            CloudMediaContext cloudMediaContext;
+            MediaServicesCredentials mediaServicesCredentials;
+
+            mediaServicesCredentials = mediaServicesCredentialsCache.GetOrAdd(
+                accountName,
+                valueFactory => new MediaServicesCredentials(accountName, accountKey));
+
+            cloudMediaContext = new CloudMediaContext(mediaServicesCredentials);
+
+            return cloudMediaContext;
+        }
+
 ## 连接到中国北部地区的媒体服务帐户
 
 如果你的帐户位于中国北部地区，请使用以下构造函数：
 
-	public CloudMediaContext(Uri apiServer, string accountName, string accountKey, string scope, string acsBaseAddress)
+    public CloudMediaContext(Uri apiServer, string accountName, string accountKey, string scope, string acsBaseAddress)
 
 例如：
 
-
-	_context = new CloudMediaContext(
-	    new Uri("https://wamsbjbclus001rest-hs.chinacloudapp.cn/API/"),
-	    _mediaServicesAccountName,
-	    _mediaServicesAccountKey,
-	    "urn:WindowsAzureMediaServices",
-	    "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn");
-
+    _context = new CloudMediaContext(
+        new Uri("https://wamsbjbclus001rest-hs.chinacloudapp.cn/API/"),
+        _mediaServicesAccountName,
+        _mediaServicesAccountKey,
+        "urn:WindowsAzureMediaServices",
+        "https://wamsprodglobal001acs.accesscontrol.chinacloudapi.cn");
 
 ## 将连接值存储到配置中
 
@@ -176,17 +162,16 @@ CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServic
 
 以下 App.config 文件包含了必需的连接值。<appSettings> 元素中的值是你从媒体服务帐户设置过程中获取的必需值。
 
-	<configuration>
-	  <appSettings>
-	    <add key="MediaServicesAccountName" value="Media-Services-Account-Name" />
-	    <add key="MediaServicesAccountKey" value="Media-Services-Account-Key" />
-	  </appSettings>
-	</configuration>
-
+    <configuration>
+      <appSettings>
+        <add key="MediaServicesAccountName" value="Media-Services-Account-Name" />
+        <add key="MediaServicesAccountKey" value="Media-Services-Account-Key" />
+      </appSettings>
+    </configuration>
 
 若要从配置中检索连接值，你可以使用 **ConfigurationManager** 类，然后将相关值分配给代码中的字段：
-	
-	private static readonly string _accountName = ConfigurationManager.AppSettings["MediaServicesAccountName"];
-	private static readonly string _accountKey = ConfigurationManager.AppSettings["MediaServicesAccountKey"];
+
+    private static readonly string _accountName = ConfigurationManager.AppSettings["MediaServicesAccountName"];
+    private static readonly string _accountKey = ConfigurationManager.AppSettings["MediaServicesAccountKey"];
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

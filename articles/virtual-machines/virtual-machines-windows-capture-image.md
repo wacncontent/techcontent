@@ -1,30 +1,31 @@
 <!-- need to be verified -->
 
-<properties
-    pageTitle="从通用化 Azure VM 捕获 VM 映像 | Azure"
-    description="了解如何从 Resource Manager 部署模型中创建的通用化 Azure VM 捕获 VM 映像"
-    services="virtual-machines-windows"
-    documentationcenter=""
-    author="cynthn"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />
-<tags 
-    ms.assetid="afdae4a1-6dfb-47b4-902a-f327f9bfe5b4"
-    ms.service="virtual-machines-windows"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/20/2016"
-    wacn.date="01/05/2017"
-    ms.author="cynthn" />
+---
+title: 从通用化 Azure VM 捕获 VM 映像 | Azure
+description: 了解如何从 Resource Manager 部署模型中创建的通用化 Azure VM 捕获 VM 映像
+services: virtual-machines-windows
+documentationcenter: 
+author: cynthn
+manager: timlt
+editor: 
+tags: azure-resource-manager
+
+ms.assetid: afdae4a1-6dfb-47b4-902a-f327f9bfe5b4
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 10/20/2016
+wacn.date: 01/05/2017
+ms.author: cynthn
+---
 
 # 如何从通用化 Azure VM 捕获 VM 映像
 本文说明如何使用 Azure PowerShell 创建通用化 Azure VM 的映像。然后可以使用该映像来创建另一个 VM。该映像包含 OS 磁盘和附加到虚拟机的数据磁盘。该映像不包含虚拟网络资源，因此，创建新 VM 时需要设置这些资源。
 
 ## 先决条件
-* 必须已[通用化 VM](/documentation/articles/virtual-machines-windows-generalize-vhd/)。通用化 VM 时将删除所有个人帐户信息及其他某些数据，并准备好要用作映像的计算机。
+* 必须已[通用化 VM](./virtual-machines-windows-generalize-vhd.md)。通用化 VM 时将删除所有个人帐户信息及其他某些数据，并准备好要用作映像的计算机。
 * 需要安装 Azure PowerShell 1.0.x 版或更新版本。如果尚未安装 PowerShell，请参阅 [How to install and configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（如何安装和配置 Azure PowerShell）了解安装步骤。
 
 ## 登录到 Azure PowerShell
@@ -64,10 +65,10 @@
             -Path <C:\local\Filepath\Filename.json>
 
     可以从 JSON 文件模板获取映像的 URL。转到“资源”>“storageProfile”>“osDisk”>“映像”>“URI”部分即可查找映像的完整路径。映像的 URL 如下所示：`https://<storageAccountName>.blob.core.chinacloudapi.cn/system/Microsoft.Compute/Images/<imagesContainer>/<templatePrefix-osDisk>.xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.vhd`。
-   
+
     也可以在门户中验证 URI。映像将复制到存储帐户中名为 **system** 的容器。
 
 ## 后续步骤
-* 现在，可以[从映像创建 VM](/documentation/articles/virtual-machines-windows-create-vm-generalized/)。
+* 现在，可以[从映像创建 VM](./virtual-machines-windows-create-vm-generalized.md)。
 
 <!---HONumber=Mooncake_1212_2016-->

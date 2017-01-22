@@ -1,61 +1,61 @@
-<properties 
-	pageTitle="如何使用 Azure Redis 缓存 | Azure" 
-	description="了解如何使用 Azure Redis 缓存提高 Azure 应用程序的性能" 
-	services="redis-cache,app-service" 
-	documentationCenter="" 
-	authors="steved0x" 
-	manager="douge" 
-	editor=""/>
+---
+title: 如何使用 Azure Redis 缓存 | Azure
+description: 了解如何使用 Azure Redis 缓存提高 Azure 应用程序的性能
+services: redis-cache,app-service
+documentationCenter: 
+authors: steved0x
+manager: douge
+editor: 
 
-<tags 
-	ms.service="cache" 
-	ms.workload="tbd" 
-	ms.tgt_pltfrm="cache-redis" 
-	ms.devlang="dotnet" 
-	ms.topic="hero-article" 
-	ms.date="08/25/2016" 
-	wacn.date="01/03/2017" 
-	ms.author="sdanie"/>
+ms.service: cache
+ms.workload: tbd
+ms.tgt_pltfrm: cache-redis
+ms.devlang: dotnet
+ms.topic: hero-article
+ms.date: 08/25/2016
+wacn.date: 01/03/2017
+ms.author: sdanie
+---
 
 # 如何使用 Azure Redis Cache
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/cache-dotnet-how-to-use-azure-redis-cache/)
-- [ASP.NET](/documentation/articles/cache-web-app-howto/)
-- [Node.js](/documentation/articles/cache-nodejs-get-started/)
-- [Java](/documentation/articles/cache-java-get-started/)
-- [Python](/documentation/articles/cache-python-get-started/)
+> [!div class="op_single_selector"]
+- [.NET](./cache-dotnet-how-to-use-azure-redis-cache.md)
+- [ASP.NET](./cache-web-app-howto.md)
+- [Node.js](./cache-nodejs-get-started.md)
+- [Java](./cache-java-get-started.md)
+- [Python](./cache-python-get-started.md)
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 本指南说明如何开始使用 **Azure Redis 缓存**。Azure Redis 缓存以常用的开放源 Redis 缓存为基础。它使您可以访问 Azure.cn 托管的安全专用的 Redis 缓存。你可以通过 Azure 中的任何应用程序访问使用 Azure Redis 缓存创建的缓存。
 
 Azure Redis 缓存提供以下层：
 
--	**基本** - 单个节点。多种大小，最大 53 GB。
--	**标准** - 双节点主/副本配置。多种大小，最大 53 GB。99.9% SLA。
--	**高级** - 双节点主/副本配置，最多有 10 个分片。从 6 GB 到 530 GB 的多种大小（有关详细信息，请与我们联系）。标准层的所有功能加上其他功能，包括支持 [Redis 群集](/documentation/articles/cache-how-to-premium-clustering/)、[Redis 持久性](/documentation/articles/cache-how-to-premium-persistence/)和 [Azure 虚拟网络](/documentation/articles/cache-how-to-premium-vnet/)。99.9% SLA。
+- **基本** - 单个节点。多种大小，最大 53 GB。
+- **标准** - 双节点主/副本配置。多种大小，最大 53 GB。99.9% SLA。
+- **高级** - 双节点主/副本配置，最多有 10 个分片。从 6 GB 到 530 GB 的多种大小（有关详细信息，请与我们联系）。标准层的所有功能加上其他功能，包括支持 [Redis 群集](./cache-how-to-premium-clustering.md)、[Redis 持久性](./cache-how-to-premium-persistence.md)和 [Azure 虚拟网络](./cache-how-to-premium-vnet.md)。99.9% SLA。
 
 每个级别在功能和定价方面存在差异。有关定价信息，请参阅[缓存定价详细信息][]。
 
-本指南说明如何使用以 C# 代码编写的 [StackExchange.Redis][] 客户端。涉及的任务包括**创建和配置缓存**、**配置缓存客户端**，以及**在缓存中添加和删除对象**。有关使用 Azure Redis 缓存的详细信息，请参阅[后续步骤][]部分。有关构建使用 Redis 缓存的 ASP.NET MVC Web 应用的分步教程，请参阅 [How to create a Web App with Redis Cache](/documentation/articles/cache-web-app-howto/)（如何创建使用 Redis 缓存的 Web 应用）。
+本指南说明如何使用以 C# 代码编写的 [StackExchange.Redis][] 客户端。涉及的任务包括**创建和配置缓存**、**配置缓存客户端**，以及**在缓存中添加和删除对象**。有关使用 Azure Redis 缓存的详细信息，请参阅[后续步骤][]部分。有关构建使用 Redis 缓存的 ASP.NET MVC Web 应用的分步教程，请参阅 [How to create a Web App with Redis Cache](./cache-web-app-howto.md)（如何创建使用 Redis 缓存的 Web 应用）。
 
 ## <a name="getting-started-cache-service"></a>Azure Redis 缓存入门
 
 Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置和配置缓存。接下来，配置缓存客户端，以便它们可以访问缓存。在配置了缓存客户端后，就可以开始使用它们。
 
--	[创建缓存][]
--	[配置缓存客户端][]
+- [创建缓存][]
+- [配置缓存客户端][]
 
 ## <a name="create-cache" id="create-a-cache"></a>创建缓存
 
-[AZURE.INCLUDE [azurerm-azurechinacloud-environment-parameter](../../includes/azurerm-azurechinacloud-environment-parameter.md)]
+[!INCLUDE [azurerm-azurechinacloud-environment-parameter](../../includes/azurerm-azurechinacloud-environment-parameter.md)]
 
-[AZURE.INCLUDE [redis-cache-create](../../includes/redis-cache-create.md)]
+[!INCLUDE [redis-cache-create](../../includes/redis-cache-create.md)]
 
 ## <a name="NuGet" id="configure-the-cache-clients"></a>配置缓存客户端
 
-[AZURE.INCLUDE [redis-cache-configure](../../includes/redis-cache-configure-stackexchange-redis-nuget.md)]
+[!INCLUDE [redis-cache-configure](../../includes/redis-cache-configure-stackexchange-redis-nuget.md)]
 
 在配置了你的客户端项目的缓存后，你可以使用以下各节中介绍的方法来使用你的缓存。
 
@@ -63,7 +63,7 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
 本节中的步骤介绍如何使用缓存执行常见任务。
 
--	[连接到缓存][]
+- [连接到缓存][]
 -   [添加和从缓存检索对象][]
 -   [处理缓存中的 .NET 对象](#work-with-net-objects-in-the-cache)
 
@@ -73,53 +73,56 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
     using StackExchange.Redis;
 
->[AZURE.NOTE] StackExchange.Redis 客户端需要.NET Framework 4 或更高版本。
+>[!NOTE]
+> StackExchange.Redis 客户端需要.NET Framework 4 或更高版本。
 
 到 Azure Redis 缓存的连接由 `ConnectionMultiplexer` 类管理。此类旨在共享并在客户端应用程序中重复使用，不需要在每次执行操作的基础上创建。
 
 要连接到 Azure Redis 缓存并返回连接的 `ConnectionMultiplexer` 的实例，请调用静态 `Connect` 方法并传递到缓存端点和密钥中，如下例所示。使用可以通过 `Get-AzureRmRedisCacheKey` PowerShell 命令获取的密钥作为 password 参数。
 
-	ConnectionMultiplexer connection = ConnectionMultiplexer.Connect("contoso5.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
+    ConnectionMultiplexer connection = ConnectionMultiplexer.Connect("contoso5.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
 
->[AZURE.IMPORTANT] 警告：切勿将凭据存储在源代码中。为了使本示例简单明了，我将以源代码来呈现凭据内容。有关如何存储凭据的详细信息，请参阅[应用程序字符串和连接字符串的工作原理][]。
+>[!IMPORTANT]
+> 警告：切勿将凭据存储在源代码中。为了使本示例简单明了，我将以源代码来呈现凭据内容。有关如何存储凭据的详细信息，请参阅[应用程序字符串和连接字符串的工作原理][]。
 
 如果你不想使用 SSL，请设置 `ssl=false` 或者省略 `ssl` 参数。
 
->[AZURE.NOTE] 默认情况下，将为新缓存禁用非 SSL 端口。
+>[!NOTE]
+> 默认情况下，将为新缓存禁用非 SSL 端口。
 
 共享应用程序中的 `ConnectionMultiplexer` 实例的一个方法是，拥有返回连接示例的静态属性（与下列示例类似）。这种线程安全方法，可仅初始化单一连接的 `ConnectionMultiplexer` 实例。在这些示例中，`abortConnect` 设置为 false，这表示即使未建立 Azure Redis 缓存连接，也可成功调用。`ConnectionMultiplexer` 的一个关键功能是，一旦还原网络问题和其他原因，它将自动还原缓存连接。
 
-	private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
-	{
-	    return ConnectionMultiplexer.Connect("contoso5.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
-	});
-	
-	public static ConnectionMultiplexer Connection
-	{
-	    get
-	    {
-	        return lazyConnection.Value;
-	    }
-	}
+    private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
+    {
+        return ConnectionMultiplexer.Connect("contoso5.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
+    });
+
+    public static ConnectionMultiplexer Connection
+    {
+        get
+        {
+            return lazyConnection.Value;
+        }
+    }
 
 有关高级连接配置选项的详细信息，请参阅 [StackExchange.Redis 配置模型][]。
 
-[AZURE.INCLUDE [redis-cache-create](../../includes/redis-cache-access-keys.md)]
+[!INCLUDE [redis-cache-create](../../includes/redis-cache-access-keys.md)]
 
 建立连接后，通过调用 `ConnectionMultiplexer.GetDatabase` 方法返回对 Redis 缓存数据库的引用。从 `GetDatabase` 方法返回的对象是一个轻型直通对象，不需要存储。
 
-	// Connection refers to a property that returns a ConnectionMultiplexer
-	// as shown in the previous example.
-	IDatabase cache = Connection.GetDatabase();
+    // Connection refers to a property that returns a ConnectionMultiplexer
+    // as shown in the previous example.
+    IDatabase cache = Connection.GetDatabase();
 
-	// Perform cache operations using the cache object...
-	// Simple put of integral data types into the cache
-	cache.StringSet("key1", "value");
-	cache.StringSet("key2", 25);
+    // Perform cache operations using the cache object...
+    // Simple put of integral data types into the cache
+    cache.StringSet("key1", "value");
+    cache.StringSet("key2", 25);
 
-	// Simple get of data types from the cache
-	string key1 = cache.StringGet("key1");
-	int key2 = (int)cache.StringGet("key2");
+    // Simple get of data types from the cache
+    string key1 = cache.StringGet("key1");
+    int key2 = (int)cache.StringGet("key2");
 
 现在您知道如何连接到 Azure Redis Cache 实例并将引用返回缓存数据库，让我们看看如何使用缓存。
 
@@ -127,10 +130,10 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
 可以使用 `StringSet` 和 `StringGet` 方法在缓存中存储和检索项。
 
-	// If key1 exists, it is overwritten.
-	cache.StringSet("key1", "value1");
+    // If key1 exists, it is overwritten.
+    cache.StringSet("key1", "value1");
 
-	string value = cache.StringGet("key1");
+    string value = cache.StringGet("key1");
 
 Redis 将大多数数据存储为 Redis 字符串，但这些字符串可能包含许多类型的数据，包括序列化的二进制数据，可在缓存中存储 .NET 对象时使用。
 
@@ -148,7 +151,7 @@ Redis 将大多数数据存储为 Redis 字符串，但这些字符串可能包�
 
 要在缓存中指定项的过期时间，请使用 `StringSet` 的 `TimeSpan` 参数。
 
-	cache.StringSet("key1", "value1", TimeSpan.FromMinutes(90));
+    cache.StringSet("key1", "value1", TimeSpan.FromMinutes(90));
 
 ## <a name="store-session" id="work-with-net-objects-in-the-cache"></a>处理缓存中的 .NET 对象
 
@@ -156,18 +159,17 @@ Azure Redis 缓存可以缓存 .NET 对象以及基元数据类型，但在缓�
 
 序列化对象的一种简单方式是使用 [Newtonsoft.Json.NET](https://www.nuget.org/packages/Newtonsoft.Json/8.0.1-beta1) 中的 `JsonConvert` 序列化方法，并与 JSON 相互序列化。以下示例演示了使用 `Employee` 对象实例执行 GET 和 SET。
 
+    class Employee
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
 
-	class Employee
-	{
-	    public int Id { get; set; }
-	    public string Name { get; set; }
-	
-	    public Employee(int EmployeeId, string Name)
-	    {
-	        this.Id = EmployeeId;
-	        this.Name = Name;
-	    }
-	}
+        public Employee(int EmployeeId, string Name)
+        {
+            this.Id = EmployeeId;
+            this.Name = Name;
+        }
+    }
 
     // Store to cache
     cache.StringSet("e25", JsonConvert.SerializeObject(new Employee(25, "Clayton Gragg")));
@@ -179,17 +181,15 @@ Azure Redis 缓存可以缓存 .NET 对象以及基元数据类型，但在缓�
 
 现在，你已学习了基础知识，接下来请打开以下链接了解有关 Azure Redis 缓存的详细信息。
 
--	了解 Azure Redis 缓存的 ASP.NET 提供程序。
-	-	[Azure Redis 会话状态提供程序](/documentation/articles/cache-aspnet-session-state-provider/)
-	-	[Azure Redis 缓存 ASP.NET 输出缓存提供程序](/documentation/articles/cache-aspnet-output-cache-provider/)
--	查看 [StackExchange.Redis 缓存客户端文档][]。
-	-	可以从许多 Redis 客户端和开发语言访问 azure Redis 缓存。有关详细信息，请参阅 [http://redis.io/clients][]。
--	Azure Redis 缓存还可与第三方服务和工具搭配使用，如 Redsmin 和 Redis Desktop Manager。
-	-	有关 Redsmin 的详细信息，请参阅[如何检索 Azure Redis 连接字符串并将其用于 Redsmin][]。
-	-	使用 [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager) 通过 GUI 访问和检查 Azure Redis 缓存中的数据。
--	请参阅 [redis][] 文档并阅读 [redis 数据类型][]和 [Redis 数据类型的十五分钟介绍][]。
-
-
+- 了解 Azure Redis 缓存的 ASP.NET 提供程序。
+    - [Azure Redis 会话状态提供程序](./cache-aspnet-session-state-provider.md)
+    - [Azure Redis 缓存 ASP.NET 输出缓存提供程序](./cache-aspnet-output-cache-provider.md)
+- 查看 [StackExchange.Redis 缓存客户端文档][]。
+    - 可以从许多 Redis 客户端和开发语言访问 azure Redis 缓存。有关详细信息，请参阅 [http://redis.io/clients][]。
+- Azure Redis 缓存还可与第三方服务和工具搭配使用，如 Redsmin 和 Redis Desktop Manager。
+    - 有关 Redsmin 的详细信息，请参阅[如何检索 Azure Redis 连接字符串并将其用于 Redsmin][]。
+    - 使用 [RedisDesktopManager](https://github.com/uglide/RedisDesktopManager) 通过 GUI 访问和检查 Azure Redis 缓存中的数据。
+- 请参阅 [redis][] 文档并阅读 [redis 数据类型][]和 [Redis 数据类型的十五分钟介绍][]。
 
 <!-- INTRA-TOPIC LINKS -->
 [后续步骤]: #next-steps
@@ -209,9 +209,7 @@ Azure Redis 缓存可以缓存 .NET 对象以及基元数据类型，但在缓�
 [Specify the expiration of an object in the cache]: #specify-expiration
 [Store ASP.NET session state in the cache]: #store-session
 
-  
 <!-- IMAGES -->
-
 
 [StackExchangeNuget]: ./media/cache-dotnet-how-to-use-azure-redis-cache/redis-cache-stackexchange-redis.png
 
@@ -227,18 +225,12 @@ Azure Redis 缓存可以缓存 .NET 对象以及基元数据类型，但在缓�
 
 [Caches]: ./media/cache-dotnet-how-to-use-azure-redis-cache/redis-cache-caches.png
 
-
-
-
-
-
-   
 <!-- LINKS -->
 
 [http://redis.io/clients]: http://redis.io/clients
-[Develop in other languages for Azure Redis Cache]: /documentation/services/redis-cache/
+[Develop in other languages for Azure Redis Cache]: ./index.md
 [如何检索 Azure Redis 连接字符串并将其用于 Redsmin]: https://redsmin.uservoice.com/knowledgebase/articles/485711-how-to-connect-redsmin-to-azure-redis-cache
-[Azure Redis Session State Provider]: /documentation/articles/cache-aspnet-session-state-provider/
+[Azure Redis Session State Provider]: ./cache-aspnet-session-state-provider.md
 [How to: Configure a Cache Client Programmatically]: http://msdn.microsoft.com/zh-cn/library/azure/gg618003.aspx
 [Session State Provider for Azure Cache]: http://go.microsoft.com/fwlink/?LinkId=320835
 [Azure AppFabric Cache: Caching Session State]: http://www.microsoft.com/showcase/details.aspx?uuid=87c833e9-97a9-42b2-8bb1-7601f9b5ca20
@@ -255,19 +247,18 @@ Azure Redis 缓存可以缓存 .NET 对象以及基元数据类型，但在缓�
 
 [StackExchange.Redis 配置模型]: http://github.com/StackExchange/StackExchange.Redis/blob/master/Docs/Configuration.md
 
-[Work with .NET objects in the cache]: /documentation/articles/cache-dotnet-how-to-use-azure-redis-cache/#working-with-caches
-
+[Work with .NET objects in the cache]: ./cache-dotnet-how-to-use-azure-redis-cache.md#working-with-caches
 
 [NuGet Package Manager Installation]: http://go.microsoft.com/fwlink/?LinkId=240311
-[缓存定价详细信息]: /pricing/details/redis-cache/
+[缓存定价详细信息]: https://www.azure.cn/pricing/details/redis-cache/
 [Azure Management Portal]: https://manage.windowsazure.cn/
 
-[Overview of Azure Redis Cache]: /documentation/services/redis-cache/
-[Azure Redis Cache]: /documentation/services/redis-cache/
+[Overview of Azure Redis Cache]: ./index.md
+[Azure Redis Cache]: ./index.md
 
 [Migrate to Azure Redis Cache]: http://go.microsoft.com/fwlink/?LinkId=317347
 [Azure Redis Cache Samples]: http://go.microsoft.com/fwlink/?LinkId=320840
-[Using Resource groups to manage your Azure resources]: /documentation/articles/resource-group-overview/
+[Using Resource groups to manage your Azure resources]: ../azure-resource-manager/resource-group-overview.md
 
 [StackExchange.Redis]: http://github.com/StackExchange/StackExchange.Redis
 [StackExchange.Redis 缓存客户端文档]: http://github.com/StackExchange/StackExchange.Redis#documentation

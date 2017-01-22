@@ -1,24 +1,22 @@
-<properties
-	pageTitle="使用 C# 部署 Azure 资源 | Azure"
-	description="了解如何使用 C# 和 Azure Resource Manager 创建 Azure 资源。"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="davidmu1"
-	manager="timlt"
-	editor="tysonn"
-	tags="azure-resource-manager"/>  
+---
+title: 使用 C# 部署 Azure 资源 | Azure
+description: 了解如何使用 C# 和 Azure Resource Manager 创建 Azure 资源。
+services: virtual-machines-windows
+documentationCenter: 
+authors: davidmu1
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="na"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="10/06/2016"
-	wacn.date="12/16/2016"
-	ms.author="davidmu"/>  
-
+ms.service: virtual-machines-windows
+ms.workload: na
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 10/06/2016
+wacn.date: 12/16/2016
+ms.author: davidmu
+---
 
 # 使用 C 部署 Azure 资源# 
 
@@ -28,7 +26,7 @@
 
 - 安装 [Visual Studio](http://msdn.microsoft.com/zh-cn/library/dd831853.aspx)
 - 验证是否安装了 [Windows Management Framework 3.0](http://www.microsoft.com/download/details.aspx?id=34595) 或 [Windows Management Framework 4.0](http://www.microsoft.com/download/details.aspx?id=40855)
-- 获取[身份验证令牌](/documentation/articles/resource-group-authenticate-service-principal/)
+- 获取[身份验证令牌](../azure-resource-manager/resource-group-authenticate-service-principal.md)
 
 完成这些步骤大约需要 30 分钟。
 
@@ -86,7 +84,7 @@
           return token;
         }
 
-	将 {client-id} 替换为 Azure Active Directory 应用程序的标识符，将 {client-secret} 替换为 AD 应用程序的访问密钥，并将 {tenant-id} 替换为你的订阅的租户标识符。可以通过运行 Get-AzureRmSubscription 找到租户 ID。可使用 Azure 门户预览找到访问密钥。
+    将 {client-id} 替换为 Azure Active Directory 应用程序的标识符，将 {client-secret} 替换为 AD 应用程序的访问密钥，并将 {tenant-id} 替换为你的订阅的租户标识符。可以通过运行 Get-AzureRmSubscription 找到租户 ID。可使用 Azure 门户预览找到访问密钥。
 
 3. 若要调用之前添加的方法，请将以下代码添加到 Program.cs 文件中的 Main 方法：
 
@@ -115,7 +113,7 @@
         var vmName = "virtual machine name";  
         var adminName = "administrator account name";
         var adminPassword = "administrator account password";
-        
+
     将所有变量值替换为要使用的名称和标识符。可以通过运行 Get-AzureRmSubscription 查找订阅标识符。
 
 2. 若要创建资源组并注册提供程序，请将以下方法添加到 Program 类：
@@ -128,7 +126,7 @@
         {
           var resourceManagementClient = new ResourceManagementClient(new Uri("https://management.chinacloudapi.cn/"), credential)
             { SubscriptionId = subscriptionId };
-            
+
           Console.WriteLine("Registering the providers...");
           var rpResult = resourceManagementClient.Providers.Register("Microsoft.Storage");
           Console.WriteLine(rpResult.RegistrationState);
@@ -136,7 +134,7 @@
           Console.WriteLine(rpResult.RegistrationState);
           rpResult = resourceManagementClient.Providers.Register("Microsoft.Compute");
           Console.WriteLine(rpResult.RegistrationState);
-          
+
           Console.WriteLine("Creating the resource group...");
           var resourceGroup = new ResourceGroup { Location = location };
           return await resourceManagementClient.ResourceGroups.CreateOrUpdateAsync(groupName, resourceGroup);
@@ -154,7 +152,7 @@
 
 ### 创建存储帐户
 
-需要一个[存储帐户](/documentation/articles/storage-create-storage-account/)来存储为虚拟机创建的虚拟硬盘文件。
+需要一个[存储帐户](../storage/storage-create-storage-account.md)来存储为虚拟机创建的虚拟硬盘文件。
 
 1. 若要创建存储帐户，请将以下方法添加到 Program 类：
 
@@ -247,17 +245,17 @@
           Console.WriteLine("Creating the virtual network...");
           var networkManagementClient = new NetworkManagementClient(credential)
             { SubscriptionId = subscriptionId };
-          
+
           var subnet = new Subnet
           {
             Name = subnetName,
             AddressPrefix = "10.0.0.0/24"
           };
-          
+
           var address = new AddressSpace {
             AddressPrefixes = new List<string> { "10.0.0.0/16" }
           };
-          
+
           return await networkManagementClient.VirtualNetworks.CreateOrUpdateAsync(
             groupName,
             vnetName,
@@ -269,7 +267,7 @@
             }
           );
         }
-        
+
 2. 若要调用之前添加的方法，请将以下代码添加到 Program 类的 Main 方法：
 
         var vnResult = CreateVirtualNetworkAsync(
@@ -281,7 +279,7 @@
           subnetName);
         Console.WriteLine(vnResult.Result.ProvisioningState);  
         Console.ReadLine();
-        
+
 ### 创建网络接口
 
 虚拟机需要网络接口才能在虚拟网络上进行通信。
@@ -458,7 +456,8 @@
           );
         }
 
-	>[AZURE.NOTE] 本教程创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅 [Navigate and select Azure virtual machine images with Windows PowerShell and the Azure CLI](/documentation/articles/virtual-machines-linux-cli-ps-findimage/)（使用 Windows PowerShell 和 Azure CLI 来导航和选择 Azure 虚拟机映像）。
+    >[!NOTE]
+    > 本教程创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅 [Navigate and select Azure virtual machine images with Windows PowerShell and the Azure CLI](./virtual-machines-linux-cli-ps-findimage.md)（使用 Windows PowerShell 和 Azure CLI 来导航和选择 Azure 虚拟机映像）。
 
 2. 若要调用之前添加的方法，请将此代码添加到 Main 方法：
 
@@ -480,7 +479,7 @@
 
 由于你需要为 Azure 中使用的资源付费，因此，删除不再需要的资源总是一种良好的做法。只需删除资源组即可删除虚拟机和所有支持资源。
 
-1.	若要删除资源组，请将此方法添加到 Program 类：
+1. 若要删除资源组，请将此方法添加到 Program 类：
 
         public static async void DeleteResourceGroupAsync(
           TokenCredentials credential,
@@ -493,7 +492,7 @@
           await resourceManagementClient.ResourceGroups.DeleteAsync(groupName);
         }
 
-2.	若要调用之前添加的方法，请将此代码添加到 Main 方法：
+2. 若要调用之前添加的方法，请将此代码添加到 Main 方法：
 
         DeleteResourceGroupAsync(
           credential,
@@ -507,16 +506,15 @@
 
 2. 在返回每个状态代码后，按 **Enter** 创建每个资源。创建虚拟机后，执行下一步骤，然后按 Enter 键删除所有资源。
 
-	完整运行该控制台应用程序大约需要 5 分钟。在按 Enter 开始删除资源之前，你可能需要在 Azure 门户预览中花费几分钟时间来验证资源的创建。
+    完整运行该控制台应用程序大约需要 5 分钟。在按 Enter 开始删除资源之前，你可能需要在 Azure 门户预览中花费几分钟时间来验证资源的创建。
 
 3. 若要查看资源的状态，请在 Azure 门户预览中浏览到“审核日志”：
 
-	![在 Azure 门户预览中浏览审核日志](./media/virtual-machines-windows-csharp/crpportal.png)  
+    ![在 Azure 门户预览中浏览审核日志](./media/virtual-machines-windows-csharp/crpportal.png)  
 
-    
 ## 后续步骤
 
-- 参考 [Deploy an Azure Virtual Machine using C# and a Resource Manager template](/documentation/articles/virtual-machines-windows-csharp-template/)（使用 C# 和 Resource Manager 模板部署 Azure 虚拟机）中的信息，利用模板创建虚拟机。
-- 若要了解如何管理刚创建的虚拟机，请参阅[使用 Azure Resource Manager 和 PowerShell 管理虚拟机](/documentation/articles/virtual-machines-windows-csharp-manage/)。
+- 参考 [Deploy an Azure Virtual Machine using C# and a Resource Manager template](./virtual-machines-windows-csharp-template.md)（使用 C# 和 Resource Manager 模板部署 Azure 虚拟机）中的信息，利用模板创建虚拟机。
+- 若要了解如何管理刚创建的虚拟机，请参阅[使用 Azure Resource Manager 和 PowerShell 管理虚拟机](./virtual-machines-windows-csharp-manage.md)。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

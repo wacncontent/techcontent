@@ -1,21 +1,22 @@
-<properties
-    pageTitle="使用共享访问签名 (SAS) | Azure"
-    description="了解使用共享访问签名 (SAS) 委派对 Azure 存储空间资源（包括 Blob、队列、表和文件）的访问权限。"
-    services="storage"
-    documentationcenter=""
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="46fd99d7-36b3-4283-81e3-f214b29f1152"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 使用共享访问签名 (SAS) | Azure
+description: 了解使用共享访问签名 (SAS) 委派对 Azure 存储空间资源（包括 Blob、队列、表和文件）的访问权限。
+services: storage
+documentationcenter: 
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: 46fd99d7-36b3-4283-81e3-f214b29f1152
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 使用共享访问签名 (SAS)
 ## 概述
@@ -24,7 +25,7 @@
 ## 什么是共享访问签名？
 共享访问签名对存储帐户中的资源提供委托访问。借助 SAS，可以授予客户端访问你的存储帐户中的资源的权限，而无需共享你的帐户密钥。这是在应用程序中使用共享访问签名的关键之处 &mdash; SAS 是用于共享存储资源的一种安全方式，它不会危及你的帐户密钥。
 
-[AZURE.INCLUDE [storage-account-key-note-include](../../includes/storage-account-key-note-include.md)]
+[!INCLUDE [storage-account-key-note-include](../../includes/storage-account-key-note-include.md)]
 
 SAS 可以精细控制向拥有 SAS 的客户端授予的访问类型，具体包括以下几个方面：
 
@@ -67,7 +68,6 @@ Azure 存储空间的版本 2015-04-05 引入了一种新的共享访问签名�
 
 ![sas-storage-uri][sas-storage-uri]  
 
-
 请注意，SAS 令牌是在客户端上生成的字符串（有关代码示例，请参阅下面的 [SAS 示例](#sas-examples)部分）。Azure 存储不以任何方式跟踪存储客户端库生成的 SAS 令牌。可以在客户端上创建不限数量的 SAS 令牌。
 
 客户端将 SAS URI 作为请求的一部分提供给 Azure 存储时，服务检查 SAS 参数和签名，以验证签名是否对请求的身份验证有效。如果服务确认签名有效，则请求通过身份验证。否则，请求被拒绝，错误代码为 403（禁止访问）。
@@ -81,7 +81,7 @@ Azure 存储空间的版本 2015-04-05 引入了一种新的共享访问签名�
 * **开始时间。** 这是 SAS 生效的时间。共享访问签名的开始时间是可选的；如果省略，SAS 将立即生效。必须以 UTC（协调世界时）格式表示，并使用特殊的 UTC 指示符（“Z”），例如 1994-11-05T13:15:30Z。
 * **到期时间。** 这是之后 SAS 将不再有效的时间。最佳实践建议你或者为 SAS 指定到期时间，或者将其与某一存储访问策略相关联。必须以 UTC（协调世界时）格式表示，并使用特殊的 UTC 指示符（“Z”），例如 1994-11-05T13:15:30Z（详见下）。
 * **权限。** 对 SAS 指定的权限指示客户端可使用 SAS 对存储资源执行哪些操作。帐户 SAS 和服务 SAS 提供的权限不同。
-* **IP。** 一个可选参数，它指定 Azure 外部要从中接受请求的一个 IP 地址或 IP 地址范围（有关 Express Route，请参阅[路由会话配置状态](/documentation/articles/expressroute-workflows/#routing-session-configuration-state)部分）。
+* **IP。** 一个可选参数，它指定 Azure 外部要从中接受请求的一个 IP 地址或 IP 地址范围（有关 Express Route，请参阅[路由会话配置状态](../expressroute/expressroute-workflows.md#routing-session-configuration-state)部分）。
 * **协议。** 一个可选参数，它指定请求允许的协议。可能的值包括“HTTPS 和 HTTP”(https,http)（它是默认值）或者“仅限 HTTPS”(https)。请注意，“仅限 HTTP”是不允许的值。
 * **签名。** 签名由指定为部分令牌的其他参数构造，然后进行加密。它用于对 SAS 进行身份验证。
 
@@ -102,7 +102,7 @@ Azure 存储空间的版本 2015-04-05 引入了一种新的共享访问签名�
 ## SAS URI 的示例
 下面是服务 SAS URI 的一个示例，它提供对某一 Blob 的读写权限。该表分解了 URI 的每个部分，以便理解它是如何影响 SAS 的：
 
-	https://myaccount.blob.core.chinacloudapi.cn/sascontainer/sasblob.txt?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D
+    https://myaccount.blob.core.chinacloudapi.cn/sascontainer/sasblob.txt?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D
 
 名称|SAS 部分|说明
 ---|---|---
@@ -118,7 +118,7 @@ IP 范围|sip=168.1.5.60-168.1.5.70|将从中接受请求的 IP 地址范围。
 
 下面是在令牌中使用相同的公用参数的帐户 SAS 的一个示例。由于这些参数已在前面说明，因此不在此处对其进行说明。下表中仅说明了特定于帐户 SAS 的参数。
 
-	https://myaccount.blob.core.chinacloudapi.cn/?restype=service&comp=properties&sv=2015-04-05&ss=bf&srt=s&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=F%6GRVAZ5Cdj2Pw4tgU7IlSTkWgn7bUkkAg8P6HESXwmf%4B
+    https://myaccount.blob.core.chinacloudapi.cn/?restype=service&comp=properties&sv=2015-04-05&ss=bf&srt=s&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=F%6GRVAZ5Cdj2Pw4tgU7IlSTkWgn7bUkkAg8P6HESXwmf%4B
 
 名称|SAS 部分|说明
 ---|---|---
@@ -135,7 +135,8 @@ IP 范围|sip=168.1.5.60-168.1.5.70|将从中接受请求的 IP 地址范围。
 * **临时 SAS：**在你创建一个临时 SAS 时，针对该 SAS 的开始时间、到期时间和权限全都在 SAS URI 上指定（在省略开始时间的情况下，也可以是暗示的）。这种类型的 SAS 可以创建为帐户 SAS 或服务 SAS。
 * **具有存储访问策略的 SAS：**存储访问策略是对资源容器（Blob 容器、表、队列或文件共享）定义的，可用于管理针对一个或多个共享访问签名的约束。在你将某一 SAS 与一个存储访问策略相关联时，该 SAS 将继承对该存储访问策略定义的约束：开始时间、到期时间和权限。
 
->[AZURE.NOTE] 目前，帐户 SAS 必须是一个临时 SAS。帐户 SAS 尚不支持存储访问策略。
+>[!NOTE]
+> 目前，帐户 SAS 必须是一个临时 SAS。帐户 SAS 尚不支持存储访问策略。
 
 这两种形式之间的差异对于一个关键情形而言十分重要：吊销。SAS 就是 URL，因此获取该 SAS 的任何人都可以使用它，而与谁请求它开始操作无关。如果 SAS 是公开发布的，则世界上的任何人都可以使用它。在发生以下四种情况之一前分发的 SAS 有效：
 
@@ -144,58 +145,56 @@ IP 范围|sip=168.1.5.60-168.1.5.70|将从中接受请求的 IP 地址范围。
 3. 删除了该 SAS 引用的存储访问策略，这是用于吊销 SAS 的另一种方法。请注意，如果你使用完全相同的名称重新创建该存储访问策略，则根据与该存储访问策略相关联的权限，所有现有 SAS 令牌都将再次有效（假定尚未经过该 SAS 的到期时间）。如果你想要吊销 SAS，请确保使用不同名称（如果你使用将来的到期时间重新创建该访问策略）。
 4. 将重新生成用于创建 SAS 的帐户密钥。请注意，这样做将导致使用该帐户密钥的所有应用程序组件身份验证失败，直到这些组件更新为使用其他有效帐户密钥或者重新生成的新帐户密钥。
 
->[AZURE.IMPORTANT] 共享访问签名 URI 与用于创建签名的帐户密钥和关联的存储访问策略（如果有）相关联。如果未指定存储访问策略，则吊销共享访问签名的唯一方法是更改帐户密钥。
+>[!IMPORTANT]
+> 共享访问签名 URI 与用于创建签名的帐户密钥和关联的存储访问策略（如果有）相关联。如果未指定存储访问策略，则吊销共享访问签名的唯一方法是更改帐户密钥。
 
 ## 在客户端应用程序中使用 SAS 进行身份验证
 拥有 SAS 的客户端可以使用 SAS 对存储帐户的请求进行身份验证，客户端没有此存储帐户的帐户密钥。SAS 可以包含在连接字符串中，或直接在合适的构造函数或方法中使用 SAS。
 
 ### 在连接字符串中使用 SAS
 
-[AZURE.INCLUDE [storage-use-sas-in-connection-string-include](../../includes/storage-use-sas-in-connection-string-include.md)]
+[!INCLUDE [storage-use-sas-in-connection-string-include](../../includes/storage-use-sas-in-connection-string-include.md)]
 
 ### 在构造函数或方法中使用 SAS
 一些 Azure 存储客户端库构造函数和方法重载提供 SAS 参数，以便可以使用 SAS 对服务的请求进行身份验证。
 
 例如，此处使用 SAS URI 创建对块 blob 的引用。SAS 提供请求所需的唯一凭据。之后将块 blob 引用用于写入操作：
 
+    string sasUri = "https://storagesample.blob.core.chinacloudapi.cn/sample-container/" +
+        "sampleBlob.txt?sv=2015-07-08&sr=b&sig=39Up9JzHkxhUIhFEjEH9594DJxe7w6cIRCg0V6lCGSo%3D" +
+        "&se=2016-10-18T21%3A51%3A37Z&sp=rcw";
 
-	string sasUri = "https://storagesample.blob.core.chinacloudapi.cn/sample-container/" +
-	    "sampleBlob.txt?sv=2015-07-08&sr=b&sig=39Up9JzHkxhUIhFEjEH9594DJxe7w6cIRCg0V6lCGSo%3D" +
-	    "&se=2016-10-18T21%3A51%3A37Z&sp=rcw";
+    CloudBlockBlob blob = new CloudBlockBlob(new Uri(sasUri));
 
-	CloudBlockBlob blob = new CloudBlockBlob(new Uri(sasUri));
+    // Create operation: Upload a blob with the specified name to the container.
+    // If the blob does not exist, it will be created. If it does exist, it will be overwritten.
+    try
+    {
+        MemoryStream msWrite = new MemoryStream(Encoding.UTF8.GetBytes(blobContent));
+        msWrite.Position = 0;
+        using (msWrite)
+        {
+            await blob.UploadFromStreamAsync(msWrite);
+        }
 
-	// Create operation: Upload a blob with the specified name to the container.
-	// If the blob does not exist, it will be created. If it does exist, it will be overwritten.
-	try
-	{
-	    MemoryStream msWrite = new MemoryStream(Encoding.UTF8.GetBytes(blobContent));
-	    msWrite.Position = 0;
-	    using (msWrite)
-	    {
-	        await blob.UploadFromStreamAsync(msWrite);
-	    }
-
-	    Console.WriteLine("Create operation succeeded for SAS {0}", sasUri);
-	    Console.WriteLine();
-	}
-	catch (StorageException e)
-	{
-	    if (e.RequestInformation.HttpStatusCode == 403)
-	    {
-	        Console.WriteLine("Create operation failed for SAS {0}", sasUri);
-	        Console.WriteLine("Additional error information: " + e.Message);
-	        Console.WriteLine();
-	    }
-	    else
-	    {
-	        Console.WriteLine(e.Message);
-	        Console.ReadLine();
-	        throw;
-	    }
-	}
-
-
+        Console.WriteLine("Create operation succeeded for SAS {0}", sasUri);
+        Console.WriteLine();
+    }
+    catch (StorageException e)
+    {
+        if (e.RequestInformation.HttpStatusCode == 403)
+        {
+            Console.WriteLine("Create operation failed for SAS {0}", sasUri);
+            Console.WriteLine("Additional error information: " + e.Message);
+            Console.WriteLine();
+        }
+        else
+        {
+            Console.WriteLine(e.Message);
+            Console.ReadLine();
+            throw;
+        }
+    }
 
 ## 使用 SAS 的最佳做法
 当你在应用程序中使用共享访问签名时，需要知道以下两个可能的风险：
@@ -230,8 +229,8 @@ IP 范围|sip=168.1.5.60-168.1.5.70|将从中接受请求的 IP 地址范围。
     static string GetAccountSASToken()
     {
         // To create the account SAS, you need to use your shared key credentials. Modify for your account.
-	    const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
-	    CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
+        const string ConnectionString = "DefaultEndpointsProtocol=https;AccountName=account-name;AccountKey=account-key;EndpointSuffix=core.chinacloudapi.cn";
+        CloudStorageAccount storageAccount = CloudStorageAccount.Parse(ConnectionString);
 
         // Create a new access policy for the account.
         SharedAccessAccountPolicy policy = new SharedAccessAccountPolicy()
@@ -352,7 +351,6 @@ IP 范围|sip=168.1.5.60-168.1.5.70|将从中接受请求的 IP 地址范围。
         return container.Uri + sasContainerToken;
     }
 
-
 ### 示例：在 Blob 上创建服务 SAS
 下面的代码在 Blob 上创建 SAS。如果提供现有存储访问策略的名称，则该策略与 SAS 关联。如果未提供存储访问策略，则代码会在 Blob 上创建一个临时 SAS。
 
@@ -397,21 +395,17 @@ IP 范围|sip=168.1.5.60-168.1.5.70|将从中接受请求的 IP 地址范围。
         return blob.Uri + sasBlobToken;
     }
 
-
-
 ## 结束语
 共享访问签名用于将存储帐户的受限权限提供给不应具有帐户密钥的客户端。因此，它们是安全模型的重要环节，适合使用 Azure 存储空间的任何应用程序。如果你按照本文中介绍的最佳实践执行，则可以使用 SAS 更灵活地访问你的存储帐户中的资源，且不会影响应用程序的安全性。
 
 ## 后续步骤
-- [在 Windows 上开始使用 Azure 文件存储](/documentation/articles/storage-dotnet-how-to-use-files/)
-- [管理对容器和 blob 的匿名读取访问](/documentation/articles/storage-manage-access-to-resources/)
+- [在 Windows 上开始使用 Azure 文件存储](./storage-dotnet-how-to-use-files.md)
+- [管理对容器和 blob 的匿名读取访问](./storage-manage-access-to-resources.md)
 - [使用共享的访问签名委托访问](http://msdn.microsoft.com/zh-cn/library/azure/ee395415.aspx)
 - [介绍表和队列 SAS](http://blogs.msdn.com/b/windowsazurestorage/archive/2012/06/12/introducing-table-sas-shared-access-signature-queue-sas-and-update-to-blob-sas.aspx)
 
 [sas-storage-fe-proxy-service]: ./media/storage-dotnet-shared-access-signature-part-1/sas-storage-fe-proxy-service.png
 [sas-storage-provider-service]: ./media/storage-dotnet-shared-access-signature-part-1/sas-storage-provider-service.png
 [sas-storage-uri]: ./media/storage-dotnet-shared-access-signature-part-1/sas-storage-uri.png
-
- 
 
 <!---HONumber=Mooncake_0103_2017-->

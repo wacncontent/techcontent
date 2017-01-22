@@ -1,16 +1,16 @@
-<properties
-	pageTitle="Azure PowerShell 1.0 预览版资源管理器更改 | Azure"
-	description="介绍针对 Azure PowerShell 1.0 预览版设计的资源管理器 cmdlet 所发生的更改。"
-	services="azure-resource-manager"
-	documentationCenter="na"
-	authors="ravbhatnagar"
-	manager="ryjones"
-	editor=""/>
+---
+title: Azure PowerShell 1.0 预览版资源管理器更改 | Azure
+description: 介绍针对 Azure PowerShell 1.0 预览版设计的资源管理器 cmdlet 所发生的更改。
+services: azure-resource-manager
+documentationCenter: na
+authors: ravbhatnagar
+manager: ryjones
+editor: 
 
-<tags
-	ms.service="azure-resource-manager"
-	ms.date="10/09/2015"
-	wacn.date="11/12/2015"/>
+ms.service: azure-resource-manager
+ms.date: 10/09/2015
+wacn.date: 11/12/2015
+---
 
 #对 Azure 资源管理器管理 PowerShell cmdlet 的更改
 
@@ -37,7 +37,7 @@
 在 1.0 预览版中，运行以下 cmdlet 就能获取相同的信息。若要获取资源组的日志，你可以运行：
 
      Get-AzureRmLog -ResourceGroup <resource-group-name>
-     
+
 若要获取特定资源的日志，你可以运行：
 
      Get-AzureRmLog -ResourceId /subscriptions/#######-####-####-####-############/resourcegroups/<resource-group-name>
@@ -54,7 +54,7 @@
 在 1.0 预览版中，运行以下 cmdlet 即可实现上述方案：
 
     Find-AzureRmResourceGroup -Tag <tag-object>
-    
+
 ##已删除 Test-AzureResource 和 Test-AzureResourceGroup
 
 这些 cmdlet 无法针对每种方案和资源类型可靠运行。我们正在努力针对此功能寻找更好的解决方案。在此同时，我们不希望你继续使用不可靠的 cmdlet。我们已在此版本中删除这些 cmdlet，将来的版本中会添加可靠的解决方案。

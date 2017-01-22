@@ -30,35 +30,38 @@
 
     - “专用映像”将列出用户创建的专用化和通用化虚拟机映像。
 
-    若要了解专用化和通用化虚拟机，请参阅 [VM Image](https://azure.microsoft.com/blog/2014/04/14/vm-image-blog-post/)（VM 映像）。有关如何将虚拟机转换成模板以便快速创建预配置的新虚拟机的信息，请参阅[如何捕获一台用作模板的 Windows 虚拟机](/documentation/articles/virtual-machines-windows-classic-capture-image/)。
+    若要了解专用化和通用化虚拟机，请参阅 [VM Image](https://azure.microsoft.com/blog/2014/04/14/vm-image-blog-post/)（VM 映像）。有关如何将虚拟机转换成模板以便快速创建预配置的新虚拟机的信息，请参阅[如何捕获一台用作模板的 Windows 虚拟机](../articles/virtual-machines/virtual-machines-windows-classic-capture-image.md)。
 
     你可以单击虚拟机映像名称，在页面右侧查看映像的相关信息。
 
-    >[AZURE.NOTE] 无法将虚拟机映像添加到“公共映像”或“MSDN 映像”列表，因为它们是只读的。创建的所有虚拟机都将添加到“专用映像”列表。
+    >[!NOTE]
+    > 无法将虚拟机映像添加到“公共映像”或“MSDN 映像”列表，因为它们是只读的。创建的所有虚拟机都将添加到“专用映像”列表。
 
 1. 在“虚拟机基本设置”页上，输入计算机名称，然后添加虚拟机的规格（包含大小）以及用户名和密码。完成后，单击“下一步”。
 
     将通过远程桌面使用新名称和密码来登录计算机，因此最好能记下新名称和密码，以免忘记。在 Visual Studio 中创建 Azure 虚拟机之后，可以在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中更改其大小和其他设置。
 
-    >[AZURE.NOTE] 如果选择更大的虚拟机规模，可能需要支付额外费用。有关详细信息，请参阅[虚拟机定价详细信息](/pricing/details/virtual-machines/)。
+    >[!NOTE]
+    > 如果选择更大的虚拟机规模，可能需要支付额外费用。有关详细信息，请参阅[虚拟机定价详细信息](https://www.azure.cn/pricing/details/virtual-machines/)。
 
-1. 在 Visual Studio 中创建的虚拟机需要云服务。在“云服务设置”页上，选择虚拟机的云服务，如果还没有云服务或想要使用新的云服务，请单击下拉列表中的“<新建...>”。还需要一个存储帐户，因此请在“存储帐户”下拉列表框中选择存储帐户（或创建新的存储帐户）。有关详细信息，请参阅 [Microsoft Azure 存储空间简介](/documentation/articles/storage-introduction/)。
+1. 在 Visual Studio 中创建的虚拟机需要云服务。在“云服务设置”页上，选择虚拟机的云服务，如果还没有云服务或想要使用新的云服务，请单击下拉列表中的“<新建...>”。还需要一个存储帐户，因此请在“存储帐户”下拉列表框中选择存储帐户（或创建新的存储帐户）。有关详细信息，请参阅 [Microsoft Azure 存储空间简介](../articles/storage/storage-introduction.md)。
 
 1. 如果你想要指定虚拟网络（可选操作），请在“虚拟网络”和“子网”下拉列表框中进行选择。
 
-    属于可用性集成员的虚拟机将部署到不同的容错域中。有关详细信息，请参阅 [Azure 虚拟网络](/home/features/networking/)。
+    属于可用性集成员的虚拟机将部署到不同的容错域中。有关详细信息，请参阅 [Azure 虚拟网络](https://www.azure.cn/home/features/networking/)。
 
 1. 如果想让虚拟机属于可用性集（也是可选操作），请选中“指定可用性集”复选框，然后在下拉列表框中选择可用性集。完成后，选择“下一步”按钮。
 
-    将虚拟机添加到可用性集可帮助确保在出现网络故障、本地磁盘硬件故障以及任何计划内停机时，应用程序仍然可用。需要使用 [Azure 经典管理门户](https://manage.windowsazure.cn/)来创建虚拟网络、子网和可用性集。有关详细信息，请参阅管理 [Windows](/documentation/articles/virtual-machines-windows-manage-availability/) 或 [Linux](/documentation/articles/virtual-machines-linux-manage-availability/) 虚拟机的可用性。
+    将虚拟机添加到可用性集可帮助确保在出现网络故障、本地磁盘硬件故障以及任何计划内停机时，应用程序仍然可用。需要使用 [Azure 经典管理门户](https://manage.windowsazure.cn/)来创建虚拟网络、子网和可用性集。有关详细信息，请参阅管理 [Windows](../articles/virtual-machines/virtual-machines-windows-manage-availability.md) 或 [Linux](../articles/virtual-machines/virtual-machines-linux-manage-availability.md) 虚拟机的可用性。
 
 1. 在“终结点”页上，指定要提供给虚拟机用户使用的公共终结点。例如，除了默认启用的远程桌面和 PowerShell 终结点以外，可以选择启用 HTTP（端口 80）。若要添加终结点，请在“端口名称”下拉列表框中选择一个终结点，然后选择“添加”按钮。若要删除终结点，请选择终结点列表中名称旁边的红色 **X**。
 
     ![虚拟机向导中的“终结点”页。](./media/virtual-machines-common-classic-create-manage-visual-studio/IC718351.png)  
 
-    可用的终结点取决于为虚拟机选择的云服务。有关详细信息，请参阅 [Windows](/documentation/articles/virtual-machines-windows-classic-setup-endpoints/) 或 [Linux](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/) VM 的 Azure 服务终结点。
+    可用的终结点取决于为虚拟机选择的云服务。有关详细信息，请参阅 [Windows](../articles/virtual-machines/virtual-machines-windows-classic-setup-endpoints.md) 或 [Linux](../articles/virtual-machines/virtual-machines-linux-classic-setup-endpoints.md) VM 的 Azure 服务终结点。
 
-    >[AZURE.NOTE] 启用公共终结点后，便可以通过 Internet 使用你虚拟机上的服务。请务必在虚拟机上安装并正确配置终结点和服务，例如，为终结点设置访问控制列表 (ACL)。有关详细信息，请参阅如何为 [Windows](/documentation/articles/virtual-machines-windows-classic-setup-endpoints/) 或 [Linux](/documentation/articles/virtual-machines-linux-classic-setup-endpoints/) 虚拟机设置终结点。
+    >[!NOTE]
+    > 启用公共终结点后，便可以通过 Internet 使用你虚拟机上的服务。请务必在虚拟机上安装并正确配置终结点和服务，例如，为终结点设置访问控制列表 (ACL)。有关详细信息，请参阅如何为 [Windows](../articles/virtual-machines/virtual-machines-windows-classic-setup-endpoints.md) 或 [Linux](../articles/virtual-machines/virtual-machines-linux-classic-setup-endpoints.md) 虚拟机设置终结点。
 
 1. 配置完虚拟机设置后，请选择“创建”按钮以创建虚拟机。
 
@@ -120,7 +123,7 @@
 
 1. 如果已在此虚拟机上运行 Sysprep，请选中“我已在虚拟机上运行 Sysprep”框。
 
-    Sysprep 是一种工具，它的一种功能是将系统特定的数据从虚拟机的 Windows 版本中删除，从而使其成为其他用户能够使用的模板。有关详细信息，请参阅[如何捕获一台用作模板的 Windows 虚拟机](/documentation/articles/virtual-machines-windows-classic-capture-image/)。在运行 Sysprep 之前备份 VM。
+    Sysprep 是一种工具，它的一种功能是将系统特定的数据从虚拟机的 Windows 版本中删除，从而使其成为其他用户能够使用的模板。有关详细信息，请参阅[如何捕获一台用作模板的 Windows 虚拟机](../articles/virtual-machines/virtual-machines-windows-classic-capture-image.md)。在运行 Sysprep 之前备份 VM。
 
 1. 配置好捕获设置之后，选择“捕获”按钮以创建检查点。
 
@@ -131,7 +134,6 @@
     检查点操作完成时，可在“Azure 活动日志”中看到该检查点。
 
     ![检查点操作已完成](./media/virtual-machines-common-classic-create-manage-visual-studio/IC744145.png)  
-
 
 ## 管理虚拟机检查点
 
@@ -155,6 +157,6 @@
 
 ## 后续步骤
 
-若要了解有关创建虚拟机的详细信息，请参阅[创建运行 Linux 的虚拟机](/documentation/articles/virtual-machines-linux-quick-create-cli/)和 [在 Azure 门户预览中创建运行 Windows 的虚拟机](/documentation/articles/virtual-machines-windows-hero-tutorial/)。
+若要了解有关创建虚拟机的详细信息，请参阅[创建运行 Linux 的虚拟机](../articles/virtual-machines/virtual-machines-linux-quick-create-cli.md)和 [在 Azure 门户预览中创建运行 Windows 的虚拟机](../articles/virtual-machines/virtual-machines-windows-hero-tutorial.md)。
 
 <!---HONumber=Mooncake_1114_2016-->

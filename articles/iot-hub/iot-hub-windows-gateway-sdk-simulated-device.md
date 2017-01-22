@@ -1,28 +1,25 @@
-<properties
-	pageTitle="使用网关 SDK 模拟设备 | Azure"
-	description="使用 Windows 的 Azure IoT 中心网关 SDK 演练，说明如何使用 Azure IoT 中心网关 SDK 从模拟设备发送遥测数据。"
-	services="iot-hub"
-	documentationCenter=""
-	authors="chipalost"
-	manager="timlt"
-	editor=""/>  
+---
+title: 使用网关 SDK 模拟设备 | Azure
+description: 使用 Windows 的 Azure IoT 中心网关 SDK 演练，说明如何使用 Azure IoT 中心网关 SDK 从模拟设备发送遥测数据。
+services: iot-hub
+documentationCenter: 
+authors: chipalost
+manager: timlt
+editor: 
 
-
-<tags
-     ms.service="iot-hub"
-     ms.devlang="cpp"
-     ms.topic="article"
-     ms.tgt_pltfrm="na"
-     ms.workload="na"
-     ms.date="08/29/2016"
-     wacn.date="12/12/2016"
-     ms.author="andbuc"/>  
-
-
+ms.service: iot-hub
+ms.devlang: cpp
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/29/2016
+wacn.date: 12/12/2016
+ms.author: andbuc
+---
 
 # Azure IoT 网关 SDK - 使用 Windows 通过模拟设备发送设备到云消息
 
-[AZURE.INCLUDE [iot-hub-gateway-sdk-simulated-selector](../../includes/iot-hub-gateway-sdk-simulated-selector.md)]
+[!INCLUDE [iot-hub-gateway-sdk-simulated-selector](../../includes/iot-hub-gateway-sdk-simulated-selector.md)]
 
 ## 生成并运行示例
 
@@ -140,7 +137,7 @@
 
 1. 在命令提示符下，浏览到本地 **azure-iot-gateway-sdk** 存储库副本中的根文件夹。
 2. 运行以下命令：
-   
+
     ```
     build\samples\simulated_device_cloud_upload\Debug\simulated_device_cloud_upload_sample.exe samples\simulated_device_cloud_upload\src\simulated_device_cloud_upload_win.json
     ```
@@ -159,14 +156,14 @@
 <!-- Links -->
 
 [lnk-setupdevbox]: https://github.com/Azure/azure-iot-gateway-sdk/blob/master/doc/devbox_setup.md
-[lnk-create-hub]: /documentation/articles/iot-hub-manage-through-portal/
-[lnk-free-trial]: /pricing/1rmb-trial/
+[lnk-create-hub]: ./iot-hub-manage-through-portal.md
+[lnk-free-trial]: https://www.azure.cn/pricing/1rmb-trial/
 [lnk-explorer-tools]: https://github.com/Azure/azure-iot-sdks/blob/master/doc/manage_iot_hub.md
 [lnk-gateway-sdk]: https://github.com/Azure/azure-iot-gateway-sdk/
 
-[lnk-physical-device]: /documentation/articles/iot-hub-gateway-sdk-physical-device/
+[lnk-physical-device]: ./iot-hub-gateway-sdk-physical-device.md
 
-[lnk-devguide]: /documentation/articles/iot-hub-devguide/
-[lnk-create-hub]: /documentation/articles/iot-hub-create-through-portal/
+[lnk-devguide]: ./iot-hub-devguide.md
+[lnk-create-hub]: ./iot-hub-create-through-portal.md
 
 <!---HONumber=Mooncake_1205_2016-->

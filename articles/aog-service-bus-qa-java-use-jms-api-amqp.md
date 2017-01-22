@@ -1,18 +1,18 @@
 
-<properties
-                pageTitle="使用 JAVA AMQP 协议如何订阅启用分区功能的 Azure 服务总线主题的消息"
-                description="借助 Java JMS API 使用 AMQP 协议订阅启用分区的 Azure 服务总线主题的消息"
-                services="service-bus"
-                documentationCenter=""
-                authors=""
-                manager=""
-                editor=""
-                tags="service bus topic,partition,subscription,AMQP"/>
+---
+title: 使用 JAVA AMQP 协议如何订阅启用分区功能的 Azure 服务总线主题的消息
+description: 借助 Java JMS API 使用 AMQP 协议订阅启用分区的 Azure 服务总线主题的消息
+services: service-bus
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: service bus topic,partition,subscription,AMQP
 
-<tags
-                ms.service="service-bus-aog"
-                ms.date="12/15/2016"
-                wacn.date="12/15/2016"/>
+ms.service: service-bus-aog
+ms.date: 12/15/2016
+wacn.date: 12/15/2016
+---
 
 # 使用 JAVA AMQP 协议如何订阅启用分区功能的 Azure 服务总线主题的消息  
 
@@ -30,28 +30,24 @@
 
 **代码如下：**  
 
+    Context context = new InitialContext();
+    ConnectionFactory factory = (ConnectionFactory) context.lookup("myFactoryLookup");
+    Connection connection = factory.createConnection(USER, PASSWORD);
+    connection.setExceptionListener(new ExceptionListener());
+    connection.start();
 
+    TopicSession session = (TopicSession) connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+    Topic topic = session.createTopic("test");
 
-	Context context = new InitialContext();
-	ConnectionFactory factory = (ConnectionFactory) context.lookup("myFactoryLookup");
-	Connection connection = factory.createConnection(USER, PASSWORD);
-	connection.setExceptionListener(new ExceptionListener());
-	connection.start();
+    // 对未启用 partition 的 topic 可以用 TopicSubscriber 订阅消息
+    // TopicSubscriber subscriber = session.createDurableSubscriber(topic, "subscription1");
+    // subscriber.setMessageListener(new MessageListener());
 
-	TopicSession session = (TopicSession) connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-	Topic topic = session.createTopic("test");
+    // 对启用 partition的topic 只能用 MessageConsumer 来订阅消息
+    MessageConsumer messageConsumer = session.createConsumer(session.createQueue("test/Subscriptions/sub1"));
+    messageConsumer.setMessageListener(new MessageListener());
 
-	// 对未启用 partition 的 topic 可以用 TopicSubscriber 订阅消息
-	// TopicSubscriber subscriber = session.createDurableSubscriber(topic, "subscription1");
-	// subscriber.setMessageListener(new MessageListener());
-
-	// 对启用 partition的topic 只能用 MessageConsumer 来订阅消息
-	MessageConsumer messageConsumer = session.createConsumer(session.createQueue("test/Subscriptions/sub1"));
-	messageConsumer.setMessageListener(new MessageListener());
-
-	MessageProducer messageProducer = session.createProducer(topic);
-	Message message = session.createTextMessage("Hello world1213!");
-	messageProducer.send(message);
-
-
+    MessageProducer messageProducer = session.createProducer(topic);
+    Message message = session.createTextMessage("Hello world1213!");
+    messageProducer.send(message);
 

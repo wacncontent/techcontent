@@ -1,13 +1,19 @@
-<properties services="virtual-machines" title="Setting up Azure CLI for service management" authors="squillace" solutions="" manager="timlt" editor="tysonn" />
+---
+services: virtual-machines
+title: Setting up Azure CLI for service management
+authors: squillace
+solutions: 
+manager: timlt
+editor: tysonn
 
-<tags
-   ms.service="virtual-machine"
-   ms.date="04/13/2015"
-   wacn.date="03/17/2016" />
+ms.service: virtual-machine
+ms.date: 04/13/2015
+wacn.date: 03/17/2016
+---
 
 ## 使用 Azure CLI
 
-完成以下步骤即可轻松使用包含相应订阅的最新版 Azure CLI。如果你需要安装 Azure CLI 并首先连接到你的帐户，请参阅[Azure 命令行接口 (Azure CLI)](/documentation/articles/xplat-cli-install/)。
+完成以下步骤即可轻松使用包含相应订阅的最新版 Azure CLI。如果你需要安装 Azure CLI 并首先连接到你的帐户，请参阅[Azure 命令行接口 (Azure CLI)](../articles/xplat-cli-install.md)。
 
 ### 步骤 1：更新 Azure CLI 版本
 

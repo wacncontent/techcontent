@@ -1,28 +1,28 @@
 <!-- need to be verified -->
 
-<properties
-    pageTitle="在 Linux 和 Mac 上创建 SSH 密钥 | Azure"
-    description="在 Linux 和 Mac 上为 Azure 上的资源管理器和经典部署模型生成和使用 SSH 密钥。"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="vlivech"
-    manager="timlt"
-    editor=""
-    tags="" />
-<tags 
-    ms.assetid="34ae9482-da3e-4b2d-9d0d-9d672aa42498"
-    ms.service="virtual-machines-linux"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.topic="get-started-article"
-    ms.date="11/14/2016"
-    wacn.date="12/20/2016"
-    ms.author="v-livech" />
+---
+title: 在 Linux 和 Mac 上创建 SSH 密钥 | Azure
+description: 在 Linux 和 Mac 上为 Azure 上的资源管理器和经典部署模型生成和使用 SSH 密钥。
+services: virtual-machines-linux
+documentationcenter: 
+author: vlivech
+manager: timlt
+editor: 
+tags: 
+
+ms.assetid: 34ae9482-da3e-4b2d-9d0d-9d672aa42498
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: get-started-article
+ms.date: 11/14/2016
+wacn.date: 12/20/2016
+ms.author: v-livech
+---
 
 # 在 Linux 和 Mac 上为 Azure 中的 Linux VM 创建 SSH 密钥
-使用 SSH 密钥对，可以在 Azure 上创建默认为使用 SSH 密钥进行身份验证的虚拟机，从而无需密码就可登录。密码可能被猜到，将 VM 向不间断的强力尝试开放，用于猜测密码。使用 Azure 模板或 `azure-cli` 创建的 VM 可以在部署过程中提供 SSH 公钥，并删除部署后配置。若要从 Windows 连接到 Linux VM，请参阅 [Create SSH keys on Windows](/documentation/articles/virtual-machines-linux-ssh-from-windows/)（在 Windows 上创建 SSH 密钥）。
-
+使用 SSH 密钥对，可以在 Azure 上创建默认为使用 SSH 密钥进行身份验证的虚拟机，从而无需密码就可登录。密码可能被猜到，将 VM 向不间断的强力尝试开放，用于猜测密码。使用 Azure 模板或 `azure-cli` 创建的 VM 可以在部署过程中提供 SSH 公钥，并删除部署后配置。若要从 Windows 连接到 Linux VM，请参阅 [Create SSH keys on Windows](./virtual-machines-linux-ssh-from-windows.md)（在 Windows 上创建 SSH 密钥）。
 
 ## 快速命令
 在以下命令中，将示例替换为自己所选的内容。
@@ -126,7 +126,6 @@ Azure 需要至少 2048 位采用 ssh-rsa 格式的公钥和私钥。为了创�
 
 `Enter file in which to save the key (/home/myusername/.ssh/id_rsa): id_rsa`  
 
-
 本文中的密钥对名称。系统默认提供名为 **id\_rsa** 的密钥对，有些工具可能要求私钥文件名为 **id\_rsa**，因此最好使用此密钥对。目录 `~/.ssh/` 是 SSH 密钥对和 SSH 配置文件的默认位置。
 
     ls -al ~/.ssh
@@ -138,7 +137,6 @@ Azure 需要至少 2048 位采用 ssh-rsa 格式的公钥和私钥。为了创�
 密钥密码：
 
 `Enter passphrase (empty for no passphrase):`  
-
 
 `ssh-keygen` 将密码称为“通行短语”。 *强烈*建议在密钥对中添加一个密码。如果不使用密码来保护密钥对，任何人只要拥有私钥文件，就可以用它登录到具有相应公钥的任何服务器。添加密码可提供更多保护以防有人能够获取私钥文件，可让用户有时间更改用于进行身份验证的密钥。
 
@@ -210,8 +208,8 @@ Azure 需要至少 2048 位采用 ssh-rsa 格式的公钥和私钥。为了创�
 ## 后续步骤
 下一步是使用新 SSH 公钥创建 Azure Linux VM。使用 SSH 公钥作为登录名创建的 Azure VM 可以比使用默认登录方法（即密码）创建的 VM 享受更好的保护。使用 SSH 密钥创建的 Azure VM 默认情况下配置为禁用密码，以避免强力猜测尝试。
 
-* [使用 Azure 模板创建安全 Linux VM](/documentation/articles/virtual-machines-linux-create-ssh-secured-vm-from-template/)
-* [使用 Azure 门户预览创建安全 Linux VM](/documentation/articles/virtual-machines-linux-quick-create-portal/)
-* [使用 Azure CLI 创建安全 Linux VM](/documentation/articles/virtual-machines-linux-quick-create-cli/)
+* [使用 Azure 模板创建安全 Linux VM](./virtual-machines-linux-create-ssh-secured-vm-from-template.md)
+* [使用 Azure 门户预览创建安全 Linux VM](./virtual-machines-linux-quick-create-portal.md)
+* [使用 Azure CLI 创建安全 Linux VM](./virtual-machines-linux-quick-create-cli.md)
 
 <!---HONumber=Mooncake_1212_2016-->

@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure SQL 数据库用户手册 - 第一部分 | Azure"
-	description="Azure SQL 数据库用户手册 - 第一部分 | Azure"
-	services=""
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure SQL 数据库用户手册 - 第一部分 | Azure
+description: Azure SQL 数据库用户手册 - 第一部分 | Azure
+services: 
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="sql-database"
-	ms.date=""
-	wacn.date="10/19/2016"/>
+ms.service: sql-database
+ms.date: 
+wacn.date: 10/19/2016
+---
 
 #Azure SQL 数据库用户手册
 
-- [Azure SQL 数据库用户手册 - 第二部分](/documentation/articles/azure-sql-database-user-manual-part-2/)
+- [Azure SQL 数据库用户手册 - 第二部分](./azure-sql-database-user-manual-part-2.md)
 
- 
 ##<a id="overview"></a>1. 总体介绍
 
 ###<a id="what-is-azure-sql-database"></a>1.1 什么是 Azure SQL 数据库  
@@ -39,101 +38,101 @@ Azure 提供数据库即服务 (Database-as-a-Service)，包括 Azure SQL 数据
 Azure SQL 数据库与传统 SQL Server 2008, 2012, 2014 虚拟机主要有以下几方面区别：  
 
 <table width="100%" border="1" cellspacing="0" cellpadding="0">
-	<tr>
-		<td>内容</td>
-		<td>SQL Server 虚拟机</td>
-		<td>Azure SQL 数据库</td>
-	</tr>
-	<tr>
-		<td><b>应用迁移</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>迁移现有应用</td>
-		<td>快速</td>
-		<td>中等</td>
-	</tr>
-	<tr>
-		<td>迁移新的应用</td>
-		<td>中等</td>
-		<td>快速</td>
-	</tr>
-	<tr>
-		<td><b>管理成本</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>管理操作系统</td>
-		<td>是</td>
-		<td>否</td>
-	</tr>
-	<tr>
-		<td>虚拟机高可用</td>
-		<td>需要手工设置</td>
-		<td>N/A</td>
-	</tr>
-	<tr>
-		<td>数据库高可用</td>
-		<td>需要手工设置(比如 SQL Server Always-On，SQL Server replication 等)</td>
-		<td>99.99% 服务级别协议</td>
-	</tr>
-	<tr>
-		<td>使用成本</td>
-		<td>中等</td>
-		<td>低</td>
-	</tr>
-	<tr>
-		<td><b>扩展(Scale)</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>向上扩展 (Scale-Up)</td>
-		<td>D14 (16Core / 112G)</td>
-		<td>P11</td>
-	</tr>
-	<tr>
-		<td>横向扩展 (Scale-Out)</td>
-		<td>需要手工设置 (比如 SQL Server Always-On，SQL Server replication 等)</td>
-		<td>需要用户自己设计 Scale-Out</td>
-	</tr>
-	<tr>
-		<td>数据库最大容量</td>
-		<td>32 TB (D14 16Core / 112G)</td>
-		<td>1 TB</td>
-	</tr>
-	<tr>
-		<td><b>管理平台</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>操作系统和虚拟机</td>
-		<td>用户完全控制</td>
-		<td>N/A</td>
-	</tr>
-	<tr>
-		<td>SQL Server 组件兼容性</td>
-		<td>对 SQL Server 产品全部支持，包括 SSIS, SSAS, SSRS</td>
-		<td>只提供数据库引擎</td>
-	</tr>
-	<tr>
-		<td><b>其他</b></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>服务级别</td>
-		<td>服务器，实例，数据库</td>
-		<td>数据库</td>
-	</tr>
-	<tr>
-		<td>兼容性</td>
-		<td>完全兼容</td>
-		<td>部分兼容</td>
-	</tr>
+    <tr>
+        <td>内容</td>
+        <td>SQL Server 虚拟机</td>
+        <td>Azure SQL 数据库</td>
+    </tr>
+    <tr>
+        <td><b>应用迁移</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>迁移现有应用</td>
+        <td>快速</td>
+        <td>中等</td>
+    </tr>
+    <tr>
+        <td>迁移新的应用</td>
+        <td>中等</td>
+        <td>快速</td>
+    </tr>
+    <tr>
+        <td><b>管理成本</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>管理操作系统</td>
+        <td>是</td>
+        <td>否</td>
+    </tr>
+    <tr>
+        <td>虚拟机高可用</td>
+        <td>需要手工设置</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td>数据库高可用</td>
+        <td>需要手工设置(比如 SQL Server Always-On，SQL Server replication 等)</td>
+        <td>99.99% 服务级别协议</td>
+    </tr>
+    <tr>
+        <td>使用成本</td>
+        <td>中等</td>
+        <td>低</td>
+    </tr>
+    <tr>
+        <td><b>扩展(Scale)</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>向上扩展 (Scale-Up)</td>
+        <td>D14 (16Core / 112G)</td>
+        <td>P11</td>
+    </tr>
+    <tr>
+        <td>横向扩展 (Scale-Out)</td>
+        <td>需要手工设置 (比如 SQL Server Always-On，SQL Server replication 等)</td>
+        <td>需要用户自己设计 Scale-Out</td>
+    </tr>
+    <tr>
+        <td>数据库最大容量</td>
+        <td>32 TB (D14 16Core / 112G)</td>
+        <td>1 TB</td>
+    </tr>
+    <tr>
+        <td><b>管理平台</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>操作系统和虚拟机</td>
+        <td>用户完全控制</td>
+        <td>N/A</td>
+    </tr>
+    <tr>
+        <td>SQL Server 组件兼容性</td>
+        <td>对 SQL Server 产品全部支持，包括 SSIS, SSAS, SSRS</td>
+        <td>只提供数据库引擎</td>
+    </tr>
+    <tr>
+        <td><b>其他</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>服务级别</td>
+        <td>服务器，实例，数据库</td>
+        <td>数据库</td>
+    </tr>
+    <tr>
+        <td>兼容性</td>
+        <td>完全兼容</td>
+        <td>部分兼容</td>
+    </tr>
 </table>
 
 ####<a id="migrate-application"></a>1.2.1 应用迁移
@@ -169,13 +168,13 @@ Azure SQL 数据库与传统 SQL Server 2008, 2012, 2014 虚拟机主要有以�
 
 在 Azure 环境下，采用 SQL Server 虚拟机，考虑的成本因素主要有：  
 
-1.	至少 2 台 SQL Server 虚拟机，并设置在同一个高可用性集下  
+1. 至少 2 台 SQL Server 虚拟机，并设置在同一个高可用性集下  
 
-2.	虚拟机开机时的计算成本  
+2. 虚拟机开机时的计算成本  
 
-3.	SQL Server License 费用  
+3. SQL Server License 费用  
 
-4.	虚拟机磁盘的存储费用  
+4. 虚拟机磁盘的存储费用  
 
 SQL Server 虚拟机所需成本需综合考虑上述四个因素。
 
@@ -221,11 +220,11 @@ SQL Server 虚拟机所需成本需综合考虑上述四个因素。
 
 在 Azure 环境下，采用 SQL Server 虚拟机，有三个非常重要的概念：  
 
-1.	服务器 (Server)，定义了 SQL Server 主机  
+1. 服务器 (Server)，定义了 SQL Server 主机  
 
-2.	实例 (Instance)，一个 SQL Server 主机下可以有多个实例 (instance)  
+2. 实例 (Instance)，一个 SQL Server 主机下可以有多个实例 (instance)  
 
-3.	数据库 (Database)，一个 SQL Server Instance 下可以有多个 SQL Server 数据库  
+3. 数据库 (Database)，一个 SQL Server Instance 下可以有多个 SQL Server 数据库  
 
 以上三点是使用 SQL Server 虚拟机时需要注意的内容。
 
@@ -248,7 +247,7 @@ Azure SQL 数据库是 SQL Server 2014 的子集，兼容大部分的 SQL Server
 ####<a id="save-management-cost"></a>1.3.1 降低管理成本
 
 由于不存在 SQL Server 虚拟机，因此用户无需对虚拟机的操作系统升级、补丁、数据库备份等进行管理，从而降低了管理成本。  
-                                                                       
+
 ####<a id="data-redundancy"></a>1.3.2 数据冗余 
 
 采用 Azure SQL 数据库，数据文件在底层做了三重冗余。事务在这三重冗余中保持同步。  
@@ -263,14 +262,14 @@ Azure SQL 数据库是 SQL Server 2014 的子集，兼容大部分的 SQL Server
 
 Azure SQL 数据库可自动备份，每周进行一次全备份，每天进行一次差异备份，每 5 分钟进行一次日志备份。  
 
-1.	对于基本服务层的 Azure SQL 数据库，备份自动保留 7 天。基本服务层的 Azure SQL 数据库可以回滚到当前时间之前 7 天内的任意时间点。  
+1. 对于基本服务层的 Azure SQL 数据库，备份自动保留 7 天。基本服务层的 Azure SQL 数据库可以回滚到当前时间之前 7 天内的任意时间点。  
 
-2.	对于标准服务层的 Azure SQL 数据库，备份自动保留 14 天。标准服务层的 Azure SQL 数据库可以回滚到当前时间之前 14 天内的任意时间点。  
+2. 对于标准服务层的 Azure SQL 数据库，备份自动保留 14 天。标准服务层的 Azure SQL 数据库可以回滚到当前时间之前 14 天内的任意时间点。  
 
-3.	对于高级服务层的 Azure SQL 数据库，备份自动保留 35 天。高级服务层的 Azure SQL 数据库可以回滚到当前时间之前 35 天内的任意时间点。  
+3. 对于高级服务层的 Azure SQL 数据库，备份自动保留 35 天。高级服务层的 Azure SQL 数据库可以回滚到当前时间之前 35 天内的任意时间点。  
 
 Azure SQL 数据库第一次创建完成后，系统会自动进行一次全备份。
-  
+
 ####<a id="read-only-geo-replication"></a>1.3.5 跨数据中心只读副本  
 
 国内的数据中心建设是成对的，比如 Azure 北京数据中心和 Azure 上海数据中心。这是充分考虑了异地容灾能力的结果。北京和上海数据中心之间有专线连接，该专线用于数据中心之间进行数据同步。  
@@ -300,62 +299,62 @@ Azure SQL 数据库有一个性能指标，叫做 DTU。有关 DTU 的详细信�
 Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和高级服务层。具体请参考以下表格：  
 
 ![服务层][1]
- 
-1.	基本服务层只有一种性能级别  
 
-2.	标准服务层分为四种性能级别：S0, S1, S2, S3  
+1. 基本服务层只有一种性能级别  
 
-3.	高级服务层分为六种性能级别：P1, P2, P4, P6, P11, P15
- 
+2. 标准服务层分为四种性能级别：S0, S1, S2, S3  
+
+3. 高级服务层分为六种性能级别：P1, P2, P4, P6, P11, P15
+
 ####<a id="basic-tier"></a>1.4.1 基本服务层
 
-1.	基本服务层，DTU 为 5  
+1. 基本服务层，DTU 为 5  
 
-2.	数据库最大容量为 2 GB，只包含数据库文件，不包含日志文件  
+2. 数据库最大容量为 2 GB，只包含数据库文件，不包含日志文件  
 
-3.	Max concurrent workers 为 30  
+3. Max concurrent workers 为 30  
 
-4.	Max concurrent logins 为 30  
+4. Max concurrent logins 为 30  
 
-5.	Max current sessions 为 300  
+5. Max current sessions 为 300  
 
-6.	备份自动保留 7 天。基本服务层的 Azure SQL 数据库可以回滚到当前时间之前7天内的任意时间点。  
+6. 备份自动保留 7 天。基本服务层的 Azure SQL 数据库可以回滚到当前时间之前7天内的任意时间点。  
 
-7.	Azure SQL 数据库提供自动备份，每周一次全备份，每天一次差异备份，每 5 分钟一次日志备份  
+7. Azure SQL 数据库提供自动备份，每周一次全备份，每天一次差异备份，每 5 分钟一次日志备份  
 
 ####<a id="standard-tier"></a>1.4.2 标准服务层  
 
-1.	标准服务层，分为四个不同的性能级别，S0, S1, S2, S3  
+1. 标准服务层，分为四个不同的性能级别，S0, S1, S2, S3  
 
-2.	数据库最大容量为 250 GB，只包含数据库文件，不包含日志文件  
+2. 数据库最大容量为 250 GB，只包含数据库文件，不包含日志文件  
 
-3.	Max concurrent workers 根据不同的性能级别，为 60, 90, 120, 200  
+3. Max concurrent workers 根据不同的性能级别，为 60, 90, 120, 200  
 
-4.	Max concurrent logins 根据不同的性能级别，为 60, 90, 120, 200  
+4. Max concurrent logins 根据不同的性能级别，为 60, 90, 120, 200  
 
-5.	Max current sessions 根据不同的性能级别，为 600, 900, 1200, 2400  
+5. Max current sessions 根据不同的性能级别，为 600, 900, 1200, 2400  
 
-6.	备份自动保留 14 天。标准服务层的 Azure SQL 数据库可以回滚到当前时间之前 14 天内的任意时间点。  
+6. 备份自动保留 14 天。标准服务层的 Azure SQL 数据库可以回滚到当前时间之前 14 天内的任意时间点。  
 
-7.	Azure SQL 数据库提供自动备份，每周一次全备份，每天一次差异备份，每 5 分钟一次日志备份  
+7. Azure SQL 数据库提供自动备份，每周一次全备份，每天一次差异备份，每 5 分钟一次日志备份  
 
 ####<a id="premium-tier"></a>1.4.3 高级服务层  
 
-1.	高级服务层，分为六个不同的性能级别，P1, P2, P4, P6, P11, P15
+1. 高级服务层，分为六个不同的性能级别，P1, P2, P4, P6, P11, P15
 
-2.	P1 – P6 数据库最大容量为 500 G，只包含数据库文件，不包含日志文件  
+2. P1 – P6 数据库最大容量为 500 G，只包含数据库文件，不包含日志文件  
 
-3.	P11, P15 数据库最大容量为 1 TB  
+3. P11, P15 数据库最大容量为 1 TB  
 
-4.	Max concurrent workers 根据不同的性能级别，提供不同的性能指标  
+4. Max concurrent workers 根据不同的性能级别，提供不同的性能指标  
 
-5.	Max concurrent logins 根据不同的性能级别，提供不同的性能指标  
+5. Max concurrent logins 根据不同的性能级别，提供不同的性能指标  
 
-6.	Max concurrent sessions 根据不同的性能级别，提供不同的性能指标  
+6. Max concurrent sessions 根据不同的性能级别，提供不同的性能指标  
 
-7.	备份自动保留 35 天。高级服务层的 Azure SQL 数据库可以回滚到当前时间之前 35 天内任意时间点。  
+7. 备份自动保留 35 天。高级服务层的 Azure SQL 数据库可以回滚到当前时间之前 35 天内任意时间点。  
 
-8.	Azure SQL 数据库提供自动备份，每周一次全备份，每天一次差异备份，每 5 分钟一次日志备份  
+8. Azure SQL 数据库提供自动备份，每周一次全备份，每天一次差异备份，每 5 分钟一次日志备份  
 
 ###<a id="azure-sql-database-concept"></a>1.5 Azure SQL 数据库相关知识介绍
 
@@ -364,7 +363,7 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 在 Azure SQL 数据库里，有一个非常重要的性能指标，叫做 DTU。  
 
 数据库事务单位 (DTU) 是 SQL 数据库中的度量单位，表示数据库基于实际度量（数据库事务）的相对性能。我们执行了针对联机事务处理 (OLTP) 请求通常需要执行的一组操作，然后度量了在全部加载的条件下每秒可以完成的事务量。 
-   
+
 简单理解 DTU，就是 DTU 数值越大，则该 SQL Azure Database 性能越好。所以高级服务层的 SQL Azure Database 性能最好，标准服务层次之，最后才是基本服务层。
 
 举个例子，我们在 1.4 节中可以观察到，基本服务层的 DTU 为 5，而 标准 S3 的 DTU 为 100。则 标准 S3 的数据库性能比基本服务层的性能高 20 倍。  
@@ -387,79 +386,79 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 
  1.2.5.1 小节中介绍了Azure SQL 数据库是 SQL Server 2014 的子集，兼容大部分的 SQL Server 引擎服务。使用 Azure SQL 数据库 V12 版本，兼容以下 SQL Server 特性：  
 
-1.	[支持 JSON](https://msdn.microsoft.com/zh-cn/library/dn921897.aspx)  
+1. [支持 JSON](https://msdn.microsoft.com/zh-cn/library/dn921897.aspx)  
 
-2.	[Windows 函数](https://msdn.microsoft.com/zh-cn/library/ms189798.aspx)以及[OVER](https://msdn.microsoft.com/zh-cn/library/ms189461.aspx)  
+2. [Windows 函数](https://msdn.microsoft.com/zh-cn/library/ms189798.aspx)以及[OVER](https://msdn.microsoft.com/zh-cn/library/ms189461.aspx)  
 
-3.	[XML indexes](https://msdn.microsoft.com/zh-cn/library/bb934097.aspx) 和 [selective XML indexes](https://msdn.microsoft.com/zh-cn/library/jj670104.aspx)  
+3. [XML indexes](https://msdn.microsoft.com/zh-cn/library/bb934097.aspx) 和 [selective XML indexes](https://msdn.microsoft.com/zh-cn/library/jj670104.aspx)  
 
-4.	[更改跟踪](https://msdn.microsoft.com/zh-cn/library/bb933875.aspx)  
+4. [更改跟踪](https://msdn.microsoft.com/zh-cn/library/bb933875.aspx)  
 
-5.	[INTO 子句](https://msdn.microsoft.com/zh-cn/library/ms188029.aspx)  
+5. [INTO 子句](https://msdn.microsoft.com/zh-cn/library/ms188029.aspx)  
 
-6.	[全文搜索](https://msdn.microsoft.com/zh-cn/library/ms142571.aspx)  
+6. [全文搜索](https://msdn.microsoft.com/zh-cn/library/ms142571.aspx)  
 
-7.	[ALTER DATABASE SCOPED CONFIGURATION (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/mt629158.aspx)  
-  
+7. [ALTER DATABASE SCOPED CONFIGURATION (Transact-SQL)](https://msdn.microsoft.com/zh-cn/library/mt629158.aspx)  
+
 #####<a id="improve-performance-level"></a>1.5.2.2 性能级别提高 
 
 在 V12 版本里，Azure SQL 数据库所有服务层 (基本, 标准, 高级) 的 DTU 性能都提高了 25%，且不会增加任何成本。除此以外，V12 还有其他新的特性，包括：  
 
-1.	支持[列存储索引](https://msdn.microsoft.com/zh-cn/library/gg492153.aspx)  
+1. 支持[列存储索引](https://msdn.microsoft.com/zh-cn/library/gg492153.aspx)  
 
-2.	支持对已经进行表分区的数据，进行 [truncate](https://msdn.microsoft.com/zh-cn/library/ms177570.aspx) 操作  
+2. 支持对已经进行表分区的数据，进行 [truncate](https://msdn.microsoft.com/zh-cn/library/ms177570.aspx) 操作  
 
-3.	支持动态管理视图 (Dynamic Management Views, [DMVs](https://msdn.microsoft.com/zh-cn/library/ms188754.aspx))，监控和调试数据库性能  
+3. 支持动态管理视图 (Dynamic Management Views, [DMVs](https://msdn.microsoft.com/zh-cn/library/ms188754.aspx))，监控和调试数据库性能  
 
 #####<a id="better-support-for-cloud-saas-providers"></a>1.5.2.3 更好的支持云 SaaS 供应商
 
 在 V12 版本里，新增了标准的 S3，并且提供了弹性数据库池，使用弹性数据库池可以：  
 
-1.	若干个 Azure SQL 数据库共享 DTU，以降低使用成本  
+1. 若干个 Azure SQL 数据库共享 DTU，以降低使用成本  
 
-2.	使用弹性数据库作业，管理数据库
+2. 使用弹性数据库作业，管理数据库
 
 #####<a id="improve-security"></a>1.5.2.4 安全性增加  
 
 在 V12 版本里，支持以下安全特性： 
 
-1.	[行级安全性(RLS)](https://msdn.microsoft.com/zh-cn/library/dn765131.aspx)  
+1. [行级安全性(RLS)](https://msdn.microsoft.com/zh-cn/library/dn765131.aspx)  
 
-2.	[动态数据屏蔽](/documentation/articles/sql-database-dynamic-data-masking-get-started/)  
+2. [动态数据屏蔽](./sql-database/sql-database-dynamic-data-masking-get-started.md)  
 
-3.	[包含的数据库用户](https://msdn.microsoft.com/zh-cn/library/ff929188.aspx)  
+3. [包含的数据库用户](https://msdn.microsoft.com/zh-cn/library/ff929188.aspx)  
 
-4.	使用GRANT, DENY, REVOKE 管理[应用程序角色](https://msdn.microsoft.com/zh-cn/library/ms190998.aspx)  
+4. 使用GRANT, DENY, REVOKE 管理[应用程序角色](https://msdn.microsoft.com/zh-cn/library/ms190998.aspx)  
 
-5.	[透明数据加密 (TDE)](https://msdn.microsoft.com/zh-cn/library/0bf7e8ff-1416-4923-9c4c-49341e208c62.aspx)  
+5. [透明数据加密 (TDE)](https://msdn.microsoft.com/zh-cn/library/0bf7e8ff-1416-4923-9c4c-49341e208c62.aspx)  
 
-6.	[使用 Azure Active Directory 身份验证连接到 SQL 数据库](/documentation/articles/sql-database-aad-authentication/)  
+6. [使用 Azure Active Directory 身份验证连接到 SQL 数据库](./sql-database/sql-database-aad-authentication.md)  
 
-7.	[始终加密](https://msdn.microsoft.com/zh-cn/library/mt163865.aspx) (预览)  
+7. [始终加密](https://msdn.microsoft.com/zh-cn/library/mt163865.aspx) (预览)  
 
 #####<a id="recommend-user-upgrade-to-v12"></a>1.5.2.5 建议用户升级 Azure SQL 数据库 V12  
 
-1.	Azure SQL 数据库 V12 支持的特性比 V11 更多  
+1. Azure SQL 数据库 V12 支持的特性比 V11 更多  
 
-2.	V12 会持续增加新的特性  
+2. V12 会持续增加新的特性  
 
-3.	很多其他新的特性会先增加到 Azure SQL 数据库 V12，然后再增加到 Microsoft SQL Server  
+3. 很多其他新的特性会先增加到 Azure SQL 数据库 V12，然后再增加到 Microsoft SQL Server  
 
 #####<a id="how-to-check-azure-sql-database-version"></a>1.5.2.6 如何查看当前的 Azure SQL 数据库版本  
 
-1.	登陆 Azure 管理界面  
+1. 登陆 Azure 管理界面  
 
-2.	查看 Azure SQL 数据库的图标  
+2. 查看 Azure SQL 数据库的图标  
 
-3.	如果显示的是 ![v12][2] 则当前的数据库版本是 V12  
+3. 如果显示的是 ![v12][2] 则当前的数据库版本是 V12  
 
-4.	如果显示的是 ![old][3] 则当前的数据库版本是老版本  
+4. 如果显示的是 ![old][3] 则当前的数据库版本是老版本  
 
-5.	另外一种方法是连接到 Azure SQL 数据库后，可以执行 `SELECT @@version`，查看当前的数据库版本  
+5. 另外一种方法是连接到 Azure SQL 数据库后，可以执行 `SELECT @@version`，查看当前的数据库版本  
 
-6.	如果显示的是 12.0.2000.10 ，则当前版本是 V12  
+6. 如果显示的是 12.0.2000.10 ，则当前版本是 V12  
 
-7.	如果显示的是 11.0.9228.18 ，则当前版本是 V11
+7. 如果显示的是 11.0.9228.18 ，则当前版本是 V11
 
 > [ 注意事项 ] V12 数据库只能托管在 V12 服务器 (注意 Azure SQL 数据库中的服务器是虚拟的 )。 V12 服务器只能托管 V12 数据库。 如果你的 Azure SQL 数据库不是 V12 版本，需要把当前数据库所在的服务器 (注意 Azure SQL 数据库中的服务器是虚拟的 ) 升级到 V12 版本。  
 
@@ -469,26 +468,26 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 
 我们在 1.4 小节中可以观察到 Azure SQL 数据库限制了数据库最大容量：  
 
-1.	基本服务层最大容量为 2 GB  
+1. 基本服务层最大容量为 2 GB  
 
-2.	标准服务层最大容量为 250 GB  
+2. 标准服务层最大容量为 250 GB  
 
-3.	高级服务层 P1 - P6 数据库最大容量为 500 GB  
+3. 高级服务层 P1 - P6 数据库最大容量为 500 GB  
 
-4.	高级服务层 P11, P15 数据库最大容量为 1 TB  
+4. 高级服务层 P11, P15 数据库最大容量为 1 TB  
 
 ####<a id="reduce-concurrent-requests"></a>1.6.2 并发请求减少  
 
 我们在 1.4 节中可以观察到 Azure SQL 数据库不仅仅限制了数据库的最大容量，而且限制了 Max concurrent workers，Max concurrent logins，Max concurrent sessions。如下表所示：  
 ![服务层级和性能][4]
- 
+
 上图可以以标准服务层的 S3 为例。  
 
-1.	Max concurrent Workers 为 200  
+1. Max concurrent Workers 为 200  
 
-2.	Max concurrent Logins 为 200  
+2. Max concurrent Logins 为 200  
 
-3.	Max concurrent sessions 为 2400
+3. Max concurrent sessions 为 2400
 
 使用 Visual Studio Test Agent 或者 Load Runner 等压力测试软件，对 Azure SQL 数据库进行压力测试时，如果并发数小于等于 200，Azure SQL 数据库正常提供服务。  
 
@@ -496,15 +495,15 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 
 结合到业务场景中，需要减少业务系统对 Azure SQL 数据库的并发。举个例子，某个企业在线培训系统的后台数据库采用 Azure SQL 数据库，在选择 Azure SQL 数据库服务层的时候，需考虑以下几点：  
 
-1.	Max Storage，只包含数据库文件，不包含日志文件  
+1. Max Storage，只包含数据库文件，不包含日志文件  
 
-2.	DTU  
+2. DTU  
 
-3.	Max concurrent Workers  
+3. Max concurrent Workers  
 
-4.	Max concurrent Logins  
+4. Max concurrent Logins  
 
-5.	Max concurrent sessions  
+5. Max concurrent sessions  
 
 业务高峰时，最大并发请求为 400。从上表中发现，至少需要选择高级服务层的 P2 (Max concurrent Worker 和 Max concurrent Logins 都是 400)，这样才能满足数据库的最大并发请求。
 
@@ -514,13 +513,13 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 
 很多大型的业务系统采用单一 Azure SQL 数据库，会遇到各种各样的问题。举个例子：  
 
-1.	A 用户的业务系统，数据库采用 Azure SQL 数据库，保存全国用户的信息数据 
+1. A 用户的业务系统，数据库采用 Azure SQL 数据库，保存全国用户的信息数据 
 
-2.	该业务系统每个月的数据库容量增长 40 GB
+2. 该业务系统每个月的数据库容量增长 40 GB
 
-3.	该业务系统最大的并发请求为 1000  
+3. 该业务系统最大的并发请求为 1000  
 
-4.	对 DTU 的需求也非常大
+4. 对 DTU 的需求也非常大
 
 针对上述现状，客户如果选择单一的 Azure SQL 数据库，只能选择高级服务层的 P6 (Max concurrent 为 1600)，价格较贵。  
 
@@ -529,11 +528,11 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 所以如果把所有的业务数据保存到一个数据库中，这个数据库就会产生性能瓶颈。如下图：  
 
 ![单个数据库性能瓶颈][5]
- 
+
 所以可以把数据表进行切片，下面介绍横向切片 (Horizontal partitioning)。  
 
 ![数据切片表][6]
- 
+
 上图把原本保存在同一个数据表中的数据，按照所在城市，拆分到不同数据库的数据表中。这样做的目的有以下几点:  
 
 (1)	减少数据库的最大容量  
@@ -547,7 +546,7 @@ Azure SQL 数据库服务层分为三种，基本服务层、 标准服务层和
 数据库表切片后，还要考虑对于不同的数据库，要设置不同的连接字符串。如下图： 
 
 ![设置不同的连接字符串][7]
- 
+
 ####<a id="single-database-server-max-dtu"></a>1.6.4 单个数据库服务器限制最大 DTU  
 
 上述内容介绍了 Azure SQL 数据库中的服务器是虚拟的，可在同一个 Azure SQL 数据库服务器下创建若干多个 Database，这若干个数据库之间是资源隔离的，不会产生资源竞争。但是 Azure 限制了单个 Azure SQL 数据库服务器的最大 DTU 为 45000。  
@@ -574,11 +573,11 @@ Azure SQL 数据库基本服务层的 DTU 是 5。
 
 ####<a id="azure-sql-database-backup"></a>1.6.6 数据库备份  
 
-1.	基本服务层的 Azure SQL 数据库，备份自动保留 7 天  
+1. 基本服务层的 Azure SQL 数据库，备份自动保留 7 天  
 
-2.	标准服务层下，备份自动保留 14 天  
+2. 标准服务层下，备份自动保留 14 天  
 
-3.	高级服务层下，备份自动保留 35 天
+3. 高级服务层下，备份自动保留 35 天
 
 某些情况下，需要把数据备份的保留时间延长，这时候就需要结合 Azure 自动化功能，把 Azure SQL 数据库备份文件保存到 Azure 存储里。  
 
@@ -589,14 +588,14 @@ Azure SQL 数据库基本服务层的 DTU 是 5。
 在开发应用程序时，经常使用北京时间 (即 UTC+8 时区)。  
 
 Azure SQL 数据库的时区默认为 UTC 时区，且无法进行修改和配置。这时候就需要修改 T-SQL 语句，将 UTC 时区修改为 UTC+8 时区。
-   
+
 ####<a id="not-support-for-sql-agent"></a>1.7.2 暂不支持 SQL Agent  
 
 在某些场景下，会使用 SQL Agent 执行 SQL Job。比如：  
 
-1.	在凌晨 12 点计算库存变化  
+1. 在凌晨 12 点计算库存变化  
 
-2.	对数据库进行全备份，将备份文件保存到虚拟机本地磁盘 E 盘  
+2. 对数据库进行全备份，将备份文件保存到虚拟机本地磁盘 E 盘  
 
 目前国内由世纪互联运营的 Microsoft Azure，暂时不支持使用 Azure SQL Agent。  
 
@@ -604,10 +603,9 @@ Azure SQL 数据库的时区默认为 UTC 时区，且无法进行修改和配�
 
 ###<a id="pricing"></a>1.8 价格
 
-有关 Azure SQL 数据库的价格，请参考[此处](/pricing/details/sql-database/)。  
+有关 Azure SQL 数据库的价格，请参考[此处](https://www.azure.cn/pricing/details/sql-database/)。  
 
 请注意: Azure SQL 数据库按照不同的服务层来收费，即按照基本、标准和高级服务层来收费，不收取存储及事务费用。  
-
 
 <!--image reference-->
 [1]: ./media/azure-sql-database-user-manual-part-1/azure-sql-database-user-manual-1.png

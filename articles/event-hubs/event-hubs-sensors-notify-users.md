@@ -1,21 +1,21 @@
-<properties 
-   pageTitle="通知用户已收到传感器或其他系统发出的数据 | Azure"
-   description="介绍如何使用事件中心来通知用户已收到传感器数据。"
-   services="event-hubs"
-   documentationCenter="na"
-   authors="spyrossak"
-   manager="timlt"
-   editor="" />  
+---
+title: 通知用户已收到传感器或其他系统发出的数据 | Azure
+description: 介绍如何使用事件中心来通知用户已收到传感器数据。
+services: event-hubs
+documentationCenter: na
+authors: spyrossak
+manager: timlt
+editor: 
 
-<tags 
-   ms.service="event-hubs"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="08/25/2016"
-   wacn.date="11/08/2016"
-   ms.author="spyros;sethm" />
+ms.service: event-hubs
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/25/2016
+wacn.date: 11/08/2016
+ms.author: spyros;sethm
+---
 
 # 通知用户已收到传感器或其他系统发出的数据
 
@@ -63,22 +63,22 @@
 
 - [AppToNotifyUsers][]
 
-[事件中心教程]: /documentation/articles/event-hubs-csharp-ephcs-getstarted/
-[Azure IoT 中心]: /home/features/iot-hub/
-[Azure 事件中心]: /home/features/event-hubs/
-[Azure 事件中心]: /home/features/event-hubs/
+[事件中心教程]: ./event-hubs-csharp-ephcs-getstarted.md
+[Azure IoT 中心]: https://www.azure.cn/home/features/iot-hub/
+[Azure 事件中心]: https://www.azure.cn/home/features/event-hubs/
+[Azure 事件中心]: https://www.azure.cn/home/features/event-hubs/
 [使用事件中心的完整示例应用程序]: https://code.msdn.microsoft.com/windowsazure/Service-Bus-Event-Hub-286fd097
 [AppToNotifyUsers]: https://github.com/Azure-Samples/event-hubs-dotnet-user-notifications
 [Dynamics AX]: https://www.microsoft.com/en-us/dynamics365/ax-overview
-[Azure 网站]: /home/features/web-site/
-[SQL Azure]: /home/features/sql-database/
-[HDInsight]: /home/features/hdinsight/
+[Azure 网站]: https://www.azure.cn/home/features/web-site/
+[SQL Azure]: https://www.azure.cn/home/features/sql-database/
+[HDInsight]: https://www.azure.cn/home/features/hdinsight/
 [Cortana Intelligence Suite]: http://www.microsoft.com/server-cloud/cortana-analytics-suite/Overview.aspx?WT.srch=1&WT.mc_ID=SEM_lLFwOJm3&bknode=BlueKai
 [IoT Suite]: https://azure.microsoft.com/solutions/iot-suite/
 [逻辑应用]: https://azure.microsoft.com/home/features/app-service/logic/
-[Azure 通知中心]: /home/features/notification-hubs/
-[Azure Stream Analytics]: /home/features/stream-analytics/
- 
+[Azure 通知中心]: https://www.azure.cn/home/features/notification-hubs/
+[Azure Stream Analytics]: https://www.azure.cn/home/features/stream-analytics/
+
 [1]: ./media/event-hubs-sensors-notify-users/event-hubs-sensor-alert.png
 [2]: ./media/event-hubs-sensors-notify-users/event-hubs-erp-alert.png
 

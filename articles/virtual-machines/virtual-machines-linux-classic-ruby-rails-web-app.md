@@ -1,31 +1,31 @@
-<properties
-    pageTitle="在 Linux VM 上托管 Ruby on Rails 网站 | Azure"
-    description="在 Azure 上使用 Linux 虚拟机设置和托管基于 Ruby on Rails 的网站。"
-    services="virtual-machines-linux"
-    documentationcenter="ruby"
-    author="rmcmurray"
-    manager="erikre"
-    editor=""
-    tags="azure-service-management" />
-<tags
-    ms.assetid="aad32685-3550-4bff-9c73-beb8d70b3291"
-    ms.service="virtual-machines-linux"
-    ms.workload="web"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="ruby"
-    ms.topic="article"
-    ms.date="11/01/2016"
-    wacn.date="01/13/2017"
-    ms.author="robmcm" />  
+---
+title: 在 Linux VM 上托管 Ruby on Rails 网站 | Azure
+description: 在 Azure 上使用 Linux 虚拟机设置和托管基于 Ruby on Rails 的网站。
+services: virtual-machines-linux
+documentationcenter: ruby
+author: rmcmurray
+manager: erikre
+editor: 
+tags: azure-service-management
 
+ms.assetid: aad32685-3550-4bff-9c73-beb8d70b3291
+ms.service: virtual-machines-linux
+ms.workload: web
+ms.tgt_pltfrm: vm-linux
+ms.devlang: ruby
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 01/13/2017
+ms.author: robmcm
+---
 
 # Azure VM 上的 Ruby on Rails Web 应用程序
 本教程介绍如何在 Azure 中使用 Linux 虚拟机托管 Ruby on Rails 网站。
 
 本教程使用 Ubuntu Server 14.04 LTS 进行验证。如果使用其他 Linux 发行版，可能需要修改安装 Rails 的步骤。
 
-> [AZURE.IMPORTANT]
-Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](/documentation/articles/resource-manager-deployment-model/)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。
+> [!IMPORTANT]
+Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。
 > 
 > 
 
@@ -51,20 +51,20 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 ## 在 Rails 上安装 Ruby
 1. 使用 SSH 连接到 VM。
 2. 从 SSH 会话中，使用以下命令在虚拟机上安装 Ruby：
-   
+
         sudo apt-get update -y
         sudo apt-get upgrade -y
         sudo apt-get install ruby ruby-dev build-essential libsqlite3-dev zlib1g-dev nodejs -y
-   
+
     安装可能需要几分钟时间。安装完成后，使用以下命令验证 Ruby 是否已安装：
-   
+
         ruby -v
-   
+
     这将返回已安装的 Ruby 的版本。
 3. 使用以下命令安装 Rails：
-   
+
         sudo gem install rails --no-rdoc --no-ri -V
-   
+
     使用 --no-rdoc 和 --no-ri 标志可跳过安装文档，从而加快速度。执行此命令可能需要花费较长时间，添加 -V 可显示有关安装进度的信息。
 
 ## 创建并运行应用
@@ -88,28 +88,28 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 
 ## 添加终结点
 1. 转到 [Azure 经典管理门户][management-portal]并选择 VM。
-   
+
     ![虚拟机列表][vmlist]  
 
 2. 选择页面顶部的“终结点”，然后单击页面底部的“+添加终结点”。
-   
+
     ![终结点页面][endpoints]
 3. 在“添加终结点”对话框中，选择“添加独立终结点”，然后单击“下一步”箭头。
-   
+
     ![新建终结点对话框][new-endpoint1]
 4. 在下一个对话框页面中，输入以下信息：
-   
+
     * **名称**：HTTP
     * **协议**：TCP
     * **公用端口**：80
     * **专用端口**：3000
-     
+
      这将创建一个公用端口 80，将流量路由到专用端口 3000，即 Rails 服务器侦听的端口。
-     
+
      ![新建终结点对话框][new-endpoint]
 5. 单击复选标记以保存终结点。
 6. 将出现一条消息，指出“正在进行更新”。此消息消失后，终结点将处于活动状态。现在，可以通过导航到虚拟机的 DNS 名称测试应用程序。网站应显示如下：
-   
+
     ![默认 rails 页面][default-rails-cloud]  
 
 ## <a id="next"></a> 后续步骤
@@ -124,18 +124,17 @@ Azure 具有两种不同的部署模型，用于创建和处理资源：[Resourc
 * [使用内容传送网络提供高带宽内容][cdn-howto]
 
 <!-- WA.com links -->
-[blobs]: /documentation/articles/storage-ruby-how-to-use-blob-storage/
+[blobs]: ../storage/storage-ruby-how-to-use-blob-storage.md
 [cdn-howto]: /develop/ruby/app-services/
 [management-portal]: https://manage.windowsazure.cn/
-[tables]: /documentation/articles/storage-ruby-how-to-use-table-storage/
-[vm-instructions]: /documentation/articles/virtual-machines-linux-classic-createportal/
+[tables]: ../storage/storage-ruby-how-to-use-table-storage.md
+[vm-instructions]: ./virtual-machines-linux-classic-createportal.md
 
 <!-- External Links -->
 [rails-guides]: http://guides.rubyonrails.org/
 [sqlite3]: http://www.sqlite.org/
 
 <!-- Images -->
-
 
 [default-rails-cloud]: ./media/virtual-machines-linux-classic-ruby-rails-web-app/basicrailscloud.png
 [vmlist]: ./media/virtual-machines-linux-classic-ruby-rails-web-app/vmlist.png

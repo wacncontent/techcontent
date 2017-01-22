@@ -1,27 +1,27 @@
-<properties
-    pageTitle="对多个 IP 配置进行负载均衡 | Azure"
-    description="在主要和辅助 IP 配置之间进行负载均衡。"
-    services="load-balancer"
-    documentationcenter="na"
-    author="anavinahar"
-    manager="narayan"
-    editor="na" />
-<tags
-    ms.assetid="244907cd-b275-4494-aaf7-dcfc4d93edfe"
-    ms.service="load-balancer"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="11/28/2016"
-    wacn.date="01/13/2017"
-    ms.author="annahar" />  
+---
+title: 对多个 IP 配置进行负载均衡 | Azure
+description: 在主要和辅助 IP 配置之间进行负载均衡。
+services: load-balancer
+documentationcenter: na
+author: anavinahar
+manager: narayan
+editor: na
 
+ms.assetid: 244907cd-b275-4494-aaf7-dcfc4d93edfe
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/28/2016
+wacn.date: 01/13/2017
+ms.author: annahar
+---
 
 # 在多个 IP 配置上进行负载均衡
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/load-balancer-multiple-ip/)
-- [CLI](/documentation/articles/load-balancer-multiple-ip-cli/)
+> [!div class="op_single_selector"]
+- [PowerShell](./load-balancer-multiple-ip.md)
+- [CLI](./load-balancer-multiple-ip-cli.md)
 
 本文介绍如何将 Azure Load Balancer 用于每个虚拟网络接口 \(NIC\) 的多个 IP 地址。目前，对一个 NIC 的多个 IP 地址的支持是预览版的功能。有关详细信息，请参阅本文的[限制](#limitations)部分。以下场景说明了如何通过负载均衡器使用此功能。
 
@@ -29,12 +29,11 @@
 
 ![负载均衡应用场景图像](./media/load-balancer-multiple-ip/lb-multi-ip.PNG)  
 
-
 ## <a name="limitations"></a> 限制
 
 现在，只有使用 Azure PowerShell 和 Azure CLI 才能对辅助 IP 配置进行负载均衡配置。该限制是暂时性的，以后随时可能更改。重新访问此页以检查更新。
 
-[AZURE.INCLUDE [virtual-network-preview](../../includes/virtual-network-preview.md)]
+[!INCLUDE [virtual-network-preview](../../includes/virtual-network-preview.md)]
 
 ## 在多个 IP 配置上进行负载均衡的步骤
 
@@ -46,20 +45,20 @@
         $location = "chinaeast".
         $myResourceGroup = "contosofabrikam"
 
-有关详细信息，请参阅[创建资源组](/documentation/articles/virtual-machines-windows-ps-create/)的第 2 步。
+有关详细信息，请参阅[创建资源组](../virtual-machines/virtual-machines-windows-ps-create.md)的第 2 步。
 
-3. [创建用于包含 VM 的可用性集](/documentation/articles/virtual-machines-windows-create-availability-set/)。对于此场景，请使用以下命令：
+3. [创建用于包含 VM 的可用性集](../virtual-machines/virtual-machines-windows-create-availability-set.md)。对于此场景，请使用以下命令：
 
         New-AzureRmAvailabilitySet -ResourceGroupName "contosofabrikam" -Name "myAvailset" -Location "China North"
 
-4. 按照[创建 Windows VM](/documentation/articles/virtual-machines-windows-ps-create/) 中步骤 3 至 5 的说明准备创建具有单个 NIC 的 VM。执行步骤 6.1，使用以下命令而不是步骤 6.2：
+4. 按照[创建 Windows VM](../virtual-machines/virtual-machines-windows-ps-create.md) 中步骤 3 至 5 的说明准备创建具有单个 NIC 的 VM。执行步骤 6.1，使用以下命令而不是步骤 6.2：
 
         $availset = Get-AzureRmAvailabilitySet -ResourceGroupName "contosofabrikam" -Name "myAvailset"
         New-AzureRmVMConfig -VMName "VM1" -VMSize "Standard_DS1_v2" -AvailabilitySetId $availset.Id
 
-然后完成[创建 Windows VM](/documentation/articles/virtual-machines-windows-ps-create/) 的步骤 6.3 至 6.8。
+然后完成[创建 Windows VM](../virtual-machines/virtual-machines-windows-ps-create.md) 的步骤 6.3 至 6.8。
 
-5. 向每个 VM 中添加另一个 IP 配置。按照[将多个 IP 地址分配给虚拟机](/documentation/articles/virtual-network-multiple-ip-addresses-powershell/#add)文章中的说明执行操作。请使用以下配置设置：
+5. 向每个 VM 中添加另一个 IP 配置。按照[将多个 IP 地址分配给虚拟机](../virtual-network/virtual-network-multiple-ip-addresses-powershell.md#add)文章中的说明执行操作。请使用以下配置设置：
 
         $NicName = "VM1-NIC"
         $RgName = "contosofabrikam"
@@ -103,7 +102,7 @@
         $mylb = Get-AzureRmLoadBalancer -Name "mylb" -ResourceGroupName $myResourceGroup | Add-AzureRmLoadBalancerBackendAddressPoolConfig -Name fabrikampool | Set-AzureRmLoadBalancer
 
         $mylb | Add-AzureRmLoadBalancerFrontendIpConfig -Name fabrikamfe -PublicIpAddress $publicIP2 | Set-AzureRmLoadBalancer
-    
+
         Add-AzureRmLoadBalancerRuleConfig -Name HTTP -LoadBalancer $mylb -FrontendIpConfiguration $frontendIP2 -BackendAddressPool $beaddresspool2 -Probe $healthProbe -Protocol Tcp -FrontendPort 80 -BackendPort 80 | Set-AzureRmLoadBalancer
 
 12. 下面的命令获取 NIC，然后将每个 NIC 的两个 IP 配置添加到负载均衡器的后端地址池：

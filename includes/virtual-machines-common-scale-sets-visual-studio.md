@@ -2,7 +2,6 @@
 
 本文介绍如何使用 Visual Studio 资源组部署来部署 Azure 虚拟机规模集。
 
-
 [Azure 虚拟机规模集](https://azure.microsoft.com/blog/azure-vm-scale-sets-public-preview/)是一种 Azure 计算资源，可通过轻松集成的自动缩放和负载均衡选项部署和管理一组类似的虚拟机。可以使用 [Azure 资源管理器 (ARM) 模板](https://github.com/Azure/azure-quickstart-templates)预配和部署 VM 规模集。可以使用 Azure CLI、PowerShell、REST 来部署 ARM 模板，也可直接从 Visual Studio 部署。Visual Studio 提供了一组示例模板，这些模板可以作为 Azure 资源组部署项目的一部分进行部署。
 
 Azure 资源组部署是一种通过单个部署操作将相关的一组 Azure 资源组合在一起并进行发布的方式。
@@ -20,20 +19,19 @@ Azure 资源组部署是一种通过单个部署操作将相关的一组 Azure �
 
 1. 通过选择 **文件，在 Visual Studio 2015 中创建一个新项目| New | Project**.
 
-	![File New][file_new]
+    ![File New][file_new]
 
 2. **Visual C# 下| Cloud**, choose **Azure Resource Manager** to create a project for deploying an ARM Template.
 
-	![Create Project][create_project]
+    ![Create Project][create_project]
 
 3.  在模板列表中，选择 Linux 或 Windows 虚拟机规模集模板。
 
-	![选择模板][select_Template]
+    ![选择模板][select_Template]
 
 4. 创建项目后，将看到 PowerShell 部署脚本、Azure Resource Manager 模板和虚拟机规模集的参数文件。
 
-	![解决方案资源管理器][solution_explorer]  
-
+    ![解决方案资源管理器][solution_explorer]  
 
 ## 自定义项目
 
@@ -43,37 +41,33 @@ Azure 资源组部署是一种通过单个部署操作将相关的一组 Azure �
 
 ![JSON 资源管理器][json_explorer]  
 
-
 ## 部署项目
 
 6. 将 ARM 模板部署到 Azure，以创建 VM 规模集资源。右键单击项目节点，选择 **部署| New Deployment**.
 
-	![Deploy Template][5deploy_Template]
+    ![Deploy Template][5deploy_Template]
 
 7. 在“部署到资源组”对话框中选择订阅。
 
-	![部署模板][6deploy_Template]
+    ![部署模板][6deploy_Template]
 
 8. 还可以从此处创建要将模板部署到的新 Azure 资源组。
 
-	![新建资源组][new_resource]
+    ![新建资源组][new_resource]
 
 9. 接下来，选择“编辑参数”按钮以输入参数，这些参数将传递到你的模板，创建部署时需要某些值，例如 OS 的用户名和密码。
 
-	![编辑参数][edit_parameters]  
-
+    ![编辑参数][edit_parameters]  
 
 10. 现在单击“部署”。“输出”窗口将显示部署进度。请注意，该操作正在执行 **Deploy-AzureResourceGroup.ps1** 脚本。
 
-	![输出窗口][output_window]  
-
+    ![输出窗口][output_window]  
 
 ## 浏览 VM 规模集
 
 部署完成后，你可以在 Visual Studio **云资源管理器**中（刷新列表）查看新的 VM 规模集。云资源管理器让你可以在开发应用程序时管理 Visual Studio 中的 Azure 资源。此外，还可在 Azure 门户预览和 Azure 资源浏览器中查看 VM 规模集。
 
 ![云资源管理器][cloud_explorer]  
-
 
  该门户提供了使用 Web 浏览器直观管理 Azure 基础结构的最佳方式，而 Azure 资源浏览器则通过在“实例视图”中提供窗口，并且还针对要查看的资源显示 PowerShell 命令，提供了方便地浏览和调试 Azure 资源的方式。当 VM 规模集处于预览状态时，资源浏览器将显示 VM 规模集的大多数详细信息。
 

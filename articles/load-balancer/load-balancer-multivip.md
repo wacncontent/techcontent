@@ -1,21 +1,21 @@
-<properties
-    pageTitle="云服务的多个 VIP"
-    description="概述 MultiVIP，以及如何在云服务上设置多个 VIP"
-    services="load-balancer"
-    documentationcenter="na"
-    author="kumudd"
-    manager="timlt" />
-<tags
-    ms.assetid="85f6d26a-3df5-4b8e-96a1-92b2793b5284"
-    ms.service="load-balancer"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/24/2016"
-    wacn.date="01/13/2017"
-    ms.author="kumud" />  
+---
+title: 云服务的多个 VIP
+description: 概述 MultiVIP，以及如何在云服务上设置多个 VIP
+services: load-balancer
+documentationcenter: na
+author: kumudd
+manager: timlt
 
+ms.assetid: 85f6d26a-3df5-4b8e-96a1-92b2793b5284
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/24/2016
+wacn.date: 01/13/2017
+ms.author: kumud
+---
 
 # 为云服务配置多个 VIP
 
@@ -25,16 +25,15 @@
 
 ![多 VIP SSL 方案](./media/load-balancer-multivip/Figure1.png)  
 
-
 在上面的示例中，所有 VIP 使用相同的公共端口 \(443\)，流量重定向到托管所有网站的云服务的内部 IP 地址中唯一专用端口上的一个或多个负载均衡的 VM。
 
-> [AZURE.NOTE]
+> [!NOTE]
 要求使用多个 VIP 的另一种情况是，在同一组虚拟机上托管多个 SQL AlwaysOn 可用性组侦听器。
 
-默认情况下，VIP 是动态的，这意味着，分配给云服务的实际 IP 地址会随着时间改变。为了防止发生这种情况，你可以为服务保留 VIP。若要了解有关保留 VIP 的详细信息，请参阅[保留的公共 IP](/documentation/articles/virtual-networks-reserved-public-ip/)。
+默认情况下，VIP 是动态的，这意味着，分配给云服务的实际 IP 地址会随着时间改变。为了防止发生这种情况，你可以为服务保留 VIP。若要了解有关保留 VIP 的详细信息，请参阅[保留的公共 IP](../virtual-network/virtual-networks-reserved-public-ip.md)。
 
-> [AZURE.NOTE]
-有关 VIP 和保留 IP 的定价信息，请参阅 [IP 地址定价](/pricing/details/reserved-ip-addresses/)。
+> [!NOTE]
+有关 VIP 和保留 IP 的定价信息，请参阅 [IP 地址定价](https://www.azure.cn/pricing/details/reserved-ip-addresses/)。
 
 可以使用 PowerShell 来验证云服务使用的 VIP、添加和删除 VIP、将 VIP 关联到终结点，以及在特定 VIP 上配置负载均衡。
 
@@ -63,9 +62,8 @@
 
     Remove-AzureVirtualIP -VirtualIPName Vip3 -ServiceName myService
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 你只能删除没有任何关联终结点的 VIP。
-
 
 ## 如何从云服务检索 VIP 信息
 若要检索与云服务关联的 VIP，请运行以下 PowerShell 脚本：
@@ -98,8 +96,8 @@
 * **Vip1** 是默认 VIP，你知道，原因是 IsDnsProgrammedName 的值设置为 true。
 * **Vip2** 和 **Vip3** 未被使用，因为它们没有任何 IP 地址。仅当已将某个终结点关联到 VIP 时，才会使用相应的 VIP。
 
-> [AZURE.NOTE]
-你的订阅将只收取额外的 VIP 费用（在 VIP 与终结点关联后收取）。有关定价的详细信息，请参阅 [IP 地址定价](/pricing/details/reserved-ip-addresses/)。
+> [!NOTE]
+你的订阅将只收取额外的 VIP 费用（在 VIP 与终结点关联后收取）。有关定价的详细信息，请参阅 [IP 地址定价](https://www.azure.cn/pricing/details/reserved-ip-addresses/)。
 
 ## 如何将 VIP 关联到终结点
 
@@ -154,13 +152,13 @@
 
 ## 后续步骤
 
-[用于 Azure Load Balancer 的 Log Analytics](/documentation/articles/load-balancer-monitor-log/)
+[用于 Azure Load Balancer 的 Log Analytics](./load-balancer-monitor-log.md)
 
-[面向 Internet 的负载均衡器概述](/documentation/articles/load-balancer-internet-overview/)
+[面向 Internet 的负载均衡器概述](./load-balancer-internet-overview.md)
 
-[面向 Internet 的负载均衡器入门](/documentation/articles/load-balancer-get-started-internet-arm-ps/)
+[面向 Internet 的负载均衡器入门](./load-balancer-get-started-internet-arm-ps.md)
 
-[虚拟网络概述](/documentation/articles/virtual-networks-overview/)
+[虚拟网络概述](../virtual-network/virtual-networks-overview.md)
 
 [保留 IP REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn722420.aspx)
 

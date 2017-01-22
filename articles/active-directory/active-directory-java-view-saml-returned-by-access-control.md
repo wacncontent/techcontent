@@ -1,36 +1,35 @@
-<properties
-    pageTitle="查看 Access Control 服务返回的 SAML (Java)"
-    description="了解如何通过 Azure 上托管的 Java 应用程序查看 Access Control 服务返回的 SAML。"
-    services="active-directory"
-    documentationcenter="java"
-    author="rmcmurray"
-    manager="erikre"
-    editor="" />  
+---
+title: 查看 Access Control 服务返回的 SAML (Java)
+description: 了解如何通过 Azure 上托管的 Java 应用程序查看 Access Control 服务返回的 SAML。
+services: active-directory
+documentationcenter: java
+author: rmcmurray
+manager: erikre
+editor: 
 
-    
-<tags
-    ms.assetid="6cd216f9-eb43-46b4-b30d-f194d0ae2d48"
-    ms.service="active-directory"
-    ms.workload="identity"
-    ms.tgt_pltfrm="na"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="11/01/2016"
-    wacn.date="01/19/2017"
-    ms.author="robmcm" />
+ms.assetid: 6cd216f9-eb43-46b4-b30d-f194d0ae2d48
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 01/19/2017
+ms.author: robmcm
+---
 
 # 如何查看 Azure Access Control 服务返回的 SAML
-本指南将演示如何查看 Azure Access Control 服务 (ACS) 返回到您的应用程序的基础安全声明标记语言 (SAML)。本指南基于[如何使用 Eclipse 通过 Azure 访问控制服务对 Web 用户进行身份验证](/documentation/articles/active-directory-java-authenticate-users-access-control-eclipse/)主题，并提供了用于显示 SAML 信息的代码。完整的应用程序与下图中所示类似。
+本指南将演示如何查看 Azure Access Control 服务 (ACS) 返回到您的应用程序的基础安全声明标记语言 (SAML)。本指南基于[如何使用 Eclipse 通过 Azure 访问控制服务对 Web 用户进行身份验证](./active-directory-java-authenticate-users-access-control-eclipse.md)主题，并提供了用于显示 SAML 信息的代码。完整的应用程序与下图中所示类似。
 
 ![示例 SAML 输出][saml_output]
 
 有关 ACS 的详细信息，请参阅[后续步骤](#next_steps)部分。
 
-> [AZURE.NOTE]
+> [!NOTE]
 Azure 访问服务控制筛选器是一个社区技术预览版。作为预发行软件，Microsoft 不会为它提供正式支持。
 
 ## <a name="pre"></a>先决条件
-若要完成本指南中的任务，请完成[如何使用 Eclipse 向 Azure 访问控制服务对 Web 用户进行身份验证](/documentation/articles/active-directory-java-authenticate-users-access-control-eclipse/)主题中的示例，并将其用作本指南的起点。
+若要完成本指南中的任务，请完成[如何使用 Eclipse 向 Azure 访问控制服务对 Web 用户进行身份验证](./active-directory-java-authenticate-users-access-control-eclipse.md)主题中的示例，并将其用作本指南的起点。
 
 ## <a name="add_library"></a>将 JspWriter 库添加到生成路径和部署程序集
 
@@ -179,7 +178,7 @@ Azure 访问服务控制筛选器是一个社区技术预览版。作为预发�
     </html>
 
 ## <a name="run_application"></a>运行应用程序
-1. 按照如何[使用 Eclipse 在 Azure 访问控制服务中对 Web 用户进行身份验证](/documentation/articles/active-directory-java-authenticate-users-access-control-eclipse/)主题所述的步骤，在计算模拟器中运行应用程序或部署到 Azure。
+1. 按照如何[使用 Eclipse 在 Azure 访问控制服务中对 Web 用户进行身份验证](./active-directory-java-authenticate-users-access-control-eclipse.md)主题所述的步骤，在计算模拟器中运行应用程序或部署到 Azure。
 2. 启动浏览器并打开 Web 应用程序。登录到您的应用程序后，您将看到 SAML 信息，包括标识提供程序提供的安全声明。
 
 ## <a name="next_steps"></a>后续步骤

@@ -1,27 +1,25 @@
-<properties 
-	pageTitle="针对审核的 SQL 数据库下层客户端支持和 IP 终结点更改 | Azure" 
-	description="了解针对审核的 SQL 数据库下层客户端支持和 IP 终结点更改。"
-	services="sql-database"
-	documentationCenter=""
-	authors="ronitr"
-	manager="jhubbard"
-	editor=""/>
+---
+title: 针对审核的 SQL 数据库下层客户端支持和 IP 终结点更改 | Azure
+description: 了解针对审核的 SQL 数据库下层客户端支持和 IP 终结点更改。
+services: sql-database
+documentationCenter: 
+authors: ronitr
+manager: jhubbard
+editor: 
 
-<tags
-	ms.service="sql-database"
-	ms.workload="data-management"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/10/2016"
-	wacn.date="12/26/2016"
-	ms.author="ronitr"/>
- 
+ms.service: sql-database
+ms.workload: data-management
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 07/10/2016
+wacn.date: 12/26/2016
+ms.author: ronitr
+---
+
 # SQL 数据库 - 针对审核的下层客户端支持和 IP 终结点更改
 
-
-对于支持 TDS 重定向的 SQL 客户端，可以自动使用[审核](/documentation/articles/sql-database-auditing-get-started/)。
-
+对于支持 TDS 重定向的 SQL 客户端，可以自动使用[审核](./sql-database-auditing-get-started.md)。
 
 ##<a id="subheading-1"></a>下层客户端支持
 

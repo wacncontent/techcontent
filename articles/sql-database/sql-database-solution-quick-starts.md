@@ -1,31 +1,29 @@
-<properties
-   pageTitle="Azure SQL 数据库解决方案快速入门 | Azure"
-   description="了解 Azure SQL 数据库解决方案"
-   services="sql-database"
-   documentationCenter=""
-   authors="CarlRabeler"
-   manager="jhubbard"
-   editor=""/>
+---
+title: Azure SQL 数据库解决方案快速入门 | Azure
+description: 了解 Azure SQL 数据库解决方案
+services: sql-database
+documentationCenter: 
+authors: CarlRabeler
+manager: jhubbard
+editor: 
 
-<tags
-   ms.service="sql-database"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="sqldb-quickstart"
-   ms.date="09/06/2016"
-   wacn.date="12/26/2016"
-   ms.author="carlrab"/>  
-
+ms.service: sql-database
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: sqldb-quickstart
+ms.date: 09/06/2016
+wacn.date: 12/26/2016
+ms.author: carlrab
+---
 
 # 浏览 Azure SQL 数据库解决方案快速入门
 
-本文包含了对 Azure SQL 数据库解决方案快速入门的概述。这些快速入门在 GitHub SQL Server 示例存储库中提供，根据实际方案演示 SQL 数据库在整个解决方案中的用法。有关演示特定 SQL 数据库功能用法的简单分步教程，请参阅[浏览 Azure SQL 数据库教程](/documentation/articles/sql-database-explore-tutorials/)。
+本文包含了对 Azure SQL 数据库解决方案快速入门的概述。这些快速入门在 GitHub SQL Server 示例存储库中提供，根据实际方案演示 SQL 数据库在整个解决方案中的用法。有关演示特定 SQL 数据库功能用法的简单分步教程，请参阅[浏览 Azure SQL 数据库教程](./sql-database-explore-tutorials.md)。
 
 ## 尝试 WingTipTickets 演示和动手实验
 
 [Azure SQL 数据库 WingTipTickets](https://github.com/microsoft/wingtiptickets) 演示和动手实验演示基于 Azure SQL 数据库和 Azure 搜索服务的、用于销售音乐会门票的示例应用程序。
-
 
 ## 跨多个池收集和监视资源使用情况数据
 
@@ -51,15 +49,15 @@ Code First 允许使用 C# 或 Visual Basic .NET 类定义模型。可以在类�
 
 ## 将弹性数据库工具集成到 Entity Framework 应用程序
 
-[将弹性数据库客户端库与实体框架配合使用](/documentation/articles/sql-database-elastic-scale-use-entity-framework-applications-visual-studio/)示例演示要将 Entity Framework 应用程序与[弹性数据库工具](/documentation/articles/sql-database-elastic-scale-get-started/)集成而需要对该应用程序所做的更改。重点是使用 Entity Framework Code First 方法撰写[分片映射管理](/documentation/articles/sql-database-elastic-scale-shard-map-management/)和[数据相关路由](/documentation/articles/sql-database-elastic-scale-data-dependent-routing/)。
+[将弹性数据库客户端库与实体框架配合使用](./sql-database-elastic-scale-use-entity-framework-applications-visual-studio.md)示例演示要将 Entity Framework 应用程序与[弹性数据库工具](./sql-database-elastic-scale-get-started.md)集成而需要对该应用程序所做的更改。重点是使用 Entity Framework Code First 方法撰写[分片映射管理](./sql-database-elastic-scale-shard-map-management.md)和[数据相关路由](./sql-database-elastic-scale-data-dependent-routing.md)。
 
 [EF 新数据库示例 Code First](http://msdn.microsoft.com/zh-cn/data/jj193542.aspx) 在此示例中充当运行示例。此文档附带的示例代码是 Visual Studio 代码示例中弹性数据库工具示例的一部分。
 
 ## 将弹性数据库工具与行级别安全性集成
 
-[使用弹性数据库工具和行级别安全性的多租户应用程序](/documentation/articles/sql-database-elastic-tools-multi-tenant-row-level-security/)演示要将[弹性数据库工具](/documentation/articles/sql-database-elastic-scale-get-started/)与[行级别安全性](https://msdn.microsoft.com/zh-cn/library/dn765131)集成而需要对 Entity Framework 应用程序做出的更改。此示例将演示如何同时运用这些技术来构建具有高度可伸缩性数据层、支持多租户分片的应用程序。
+[使用弹性数据库工具和行级别安全性的多租户应用程序](./sql-database-elastic-tools-multi-tenant-row-level-security.md)演示要将[弹性数据库工具](./sql-database-elastic-scale-get-started.md)与[行级别安全性](https://msdn.microsoft.com/zh-cn/library/dn765131)集成而需要对 Entity Framework 应用程序做出的更改。此示例将演示如何同时运用这些技术来构建具有高度可伸缩性数据层、支持多租户分片的应用程序。
 
-为此，可以使用 ADO.NET SqlClient 或 Entity Framework。此示例通过添加对多租户分片数据库的支持，扩展[将弹性数据库客户端库与 Entity Framework 配合使用](/documentation/articles/sql-database-elastic-scale-use-entity-framework-applications-visual-studio/)。
+为此，可以使用 ADO.NET SqlClient 或 Entity Framework。此示例通过添加对多租户分片数据库的支持，扩展[将弹性数据库客户端库与 Entity Framework 配合使用](./sql-database-elastic-scale-use-entity-framework-applications-visual-studio.md)。
 它将构建一个用于创建博客和文章的简单控制台应用程序，其中包含四个租户和两个多租户分片数据库。
 
 ## 通过 Tailspin Surveys 应用程序创建在线调查表
@@ -72,6 +70,6 @@ Code First 允许使用 C# 或 Visual Basic .NET 类定义模型。可以在类�
 
 ## 后续步骤
 
-[浏览 Azure SQL 数据库教程](/documentation/articles/sql-database-explore-tutorials/)
+[浏览 Azure SQL 数据库教程](./sql-database-explore-tutorials.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -1,24 +1,23 @@
-<properties
-	pageTitle="Cordova 移动服务项目（Visual Studio 连接服务）入门 | Microsoft Azure"
-	description="描述使用 Visual Studio 连接服务将 Cordova 项目连接到 Azure 移动服务后可以执行的前几个步骤。"
-	services="mobile-services"
-	documentationCenter=""
-	authors="mlhoop"
-	manager="douge"
-	editor=""/>
+---
+title: Cordova 移动服务项目（Visual Studio 连接服务）入门 | Microsoft Azure
+description: 描述使用 Visual Studio 连接服务将 Cordova 项目连接到 Azure 移动服务后可以执行的前几个步骤。
+services: mobile-services
+documentationCenter: 
+authors: mlhoop
+manager: douge
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="vs-getting-started"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/12/2016"
-	ms.author="mlearned"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: vs-getting-started
+ms.devlang: multiple
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/12/2016
+ms.author: mlearned
+---
 
 #  移动服务入门（Cordova 项目）
-
 
 ##前几个步骤
 为了跟踪这些代码，您需要首先执行的步骤取决于您连接的移动服务类型。
@@ -33,7 +32,7 @@
 
 var todoTable = mobileServiceClient.getTable('TodoItem');
 
-要使这些示例工作，表的权限必须设置为**具有应用程序密钥的任何人**。稍后，您可以设置身份验证。请参阅[身份验证入门](/documentation/articles/mobile-services-html-get-started-users/)。
+要使这些示例工作，表的权限必须设置为**具有应用程序密钥的任何人**。稍后，您可以设置身份验证。请参阅[身份验证入门](./mobile-services-html-get-started-users.md)。
 
 ##向表中添加项
 
@@ -43,7 +42,7 @@ var todoTable = mobileServiceClient.getTable('TodoItem');
         this.text = text;
         this.complete = false;
     }
-    
+
     var items = new Array();
     var insertTodoItem = function (todoItem) {
         todoTable.insert(todoItem).done(function (item) {

@@ -1,24 +1,22 @@
-<properties
-    pageTitle="什么是 Azure 的自助注册？| Azure"
-    description="概述 Azure 的自助注册、如何管理注册过程以及如何接管 DNS 域名。"
-    services="active-directory"
-    documentationcenter=""
-    author="curtand"
-    manager="femila"
-    editor="" />  
+---
+title: 什么是 Azure 的自助注册？| Azure
+description: 概述 Azure 的自助注册、如何管理注册过程以及如何接管 DNS 域名。
+services: active-directory
+documentationcenter: 
+author: curtand
+manager: femila
+editor: 
 
-<tags
-    ms.assetid="b9f01876-29d1-4ab8-8b74-04d43d532f4b"
-    ms.service="active-directory"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="identity"
-    ms.date="11/09/2016"
-    ms.author="curtand"
-    wacn.date="12/13/2016"/>  
-
-
+ms.assetid: b9f01876-29d1-4ab8-8b74-04d43d532f4b
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 11/09/2016
+ms.author: curtand
+wacn.date: 12/13/2016
+---
 
 # 什么是 Azure 的自助服务注册？
 本主题介绍自助注册过程以及如何接管 DNS 域名。
@@ -118,26 +116,26 @@
 
 1.Azure 经典管理门户
 
-   通过添加域来触发接管。如果域已经存在一个目录，则你可以选择执行外部接管。
+    通过添加域来触发接管。如果域已经存在一个目录，则你可以选择执行外部接管。
 
-   使用你的凭据登录到 Azure 经典管理门户。导航到现有目录，然后选择“添加域”。
+    使用你的凭据登录到 Azure 经典管理门户。导航到现有目录，然后选择“添加域”。
 
 2.Office 365
 
-   在 Office 365 中，可以使用“管理域”[](https://support.office.com/article/Navigate-to-the-Office-365-Manage-domains-page-026af1f2-0e6d-4f2d-9b33-fd147420fac2/)页上的选项来处理域和 DNS 记录。请参阅[在 Office 365 中验证域](https://support.office.com/article/Verify-your-domain-in-Office-365-6383f56d-3d09-4dcb-9b41-b5f5a5efd611/)。
+    在 Office 365 中，可以使用“管理域”[](https://support.office.com/article/Navigate-to-the-Office-365-Manage-domains-page-026af1f2-0e6d-4f2d-9b33-fd147420fac2/)页上的选项来处理域和 DNS 记录。请参阅[在 Office 365 中验证域](https://support.office.com/article/Verify-your-domain-in-Office-365-6383f56d-3d09-4dcb-9b41-b5f5a5efd611/)。
 
 3.Windows PowerShell
 
-   需要执行以下步骤以使用 Windows PowerShell 执行验证。
+    需要执行以下步骤以使用 Windows PowerShell 执行验证。
 
-   | 步骤 | 要使用的 Cmdlet | 
-   | ---- | ---- | 
-   | 创建凭据对象 |Get-Credential | 
-   | 连接到 Azure AD |Connect-MsolService | 
-   | 获取域列表 |Get-MsolDomain | 
-   | 创建质询 |Get-MsolDomainVerificationDns | 
-   | 创建 DNS 记录 |在 DNS 服务器上执行此操作 | 
-   | 验证质询 |Confirm-MsolEmailVerifiedDomain |
+    | 步骤 | 要使用的 Cmdlet | 
+    | ---- | ---- | 
+    | 创建凭据对象 |Get-Credential | 
+    | 连接到 Azure AD |Connect-MsolService | 
+    | 获取域列表 |Get-MsolDomain | 
+    | 创建质询 |Get-MsolDomainVerificationDns | 
+    | 创建 DNS 记录 |在 DNS 服务器上执行此操作 | 
+    | 验证质询 |Confirm-MsolEmailVerifiedDomain |
 
 例如：
 
@@ -148,29 +146,29 @@
         connect-msolservice -credential $msolcred
 2. 获取域的列表：
 
-    	Get-MsolDomain
+        Get-MsolDomain
 3. 然后 Get-MsolDomainVerificationDns cmdlet 来创建质询：
 
-    	Get-MsolDomainVerificationDns -DomainName *your\_domain\_name* -Mode DnsTxtRecord
+        Get-MsolDomainVerificationDns -DomainName *your\_domain\_name* -Mode DnsTxtRecord
 
     例如：
 
-    	Get-MsolDomainVerificationDns -DomainName contoso.com -Mode DnsTxtRecord
+        Get-MsolDomainVerificationDns -DomainName contoso.com -Mode DnsTxtRecord
 4. 复制从此命令返回的值（质询）。
 
     例如：
 
-    	MS=32DD01B82C05D27151EA9AE93C5890787F0E65D9
+        MS=32DD01B82C05D27151EA9AE93C5890787F0E65D9
 5. 在公共 DNS 命名空间中，创建包含你在上一步复制的值的 DNS txt 记录。
 
     此记录的名称即是父域的名称，因此，如果你要使用 Windows Server 中的 DNS 角色创建此资源记录，请将记录名称保留空白，而只在文本框中粘贴该值
 6. 运行 Confirm-MsolDomain cmdlet 以验证质询：
 
-    	Confirm-MsolEmailVerifiedDomain -DomainName *your\_domain\_name*
+        Confirm-MsolEmailVerifiedDomain -DomainName *your\_domain\_name*
 
     例如：
 
-    	Confirm-MsolEmailVerifiedDomain -DomainName contoso.com
+        Confirm-MsolEmailVerifiedDomain -DomainName contoso.com
 
 如果质询成功，你将返回到提示符，且不会显示错误。
 
@@ -198,7 +196,7 @@
 有关示例和如何使用这些参数的详细信息，请参阅 [Set-MsolCompanySettings](https://msdn.microsoft.com/zh-cn/library/azure/dn194127.aspx)。
 
 ## 另请参阅
-- [如何安装和配置 Azure PowerShell](/documentation/articles/powershell-install-configure/)
+- [如何安装和配置 Azure PowerShell](../powershell-install-configure.md)
 - [Azure PowerShell](https://msdn.microsoft.com/zh-cn/library/azure/jj156055.aspx)
 - [Azure Cmdlet 参考](https://msdn.microsoft.com/zh-cn/library/azure/jj554330.aspx)
 - [Set-MsolCompanySettings](https://msdn.microsoft.com/zh-cn/library/azure/dn194127.aspx)

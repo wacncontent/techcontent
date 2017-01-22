@@ -1,33 +1,30 @@
-<properties
-	pageTitle="Azure SQL 数据库基准检验概述"
-	description="本主题介绍在 Azure SQL 数据库的性能测量中使用的 Azure SQL 数据库基准检验。"
-	services="sql-database"
-	documentationCenter="na"
-	authors="carlrabeler"
-	manager="jhubbard"
-	editor="monicar" />  
+---
+title: Azure SQL 数据库基准检验概述
+description: 本主题介绍在 Azure SQL 数据库的性能测量中使用的 Azure SQL 数据库基准检验。
+services: sql-database
+documentationCenter: na
+authors: carlrabeler
+manager: jhubbard
+editor: monicar
 
-
-
-<tags
-	ms.service="sql-database"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.tgt_pltfrm="na"
-	ms.workload="data-management"
-	ms.date="06/21/2016"
-	wacn.date="12/19/2016"
-	ms.author="carlrab" />
-
+ms.service: sql-database
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-management
+ms.date: 06/21/2016
+wacn.date: 12/19/2016
+ms.author: carlrab
+---
 
 # Azure SQL 数据库基准检验概述
 
 ## 概述
-Azure SQL 数据库提供了三个具有多个性能级别的[服务层](/documentation/articles/sql-database-service-tiers/)。每个性能级别均提供不断增加的资源集或“能力”，旨在递增地提供更高的吞吐量。
+Azure SQL 数据库提供了三个具有多个性能级别的[服务层](./sql-database-service-tiers.md)。每个性能级别均提供不断增加的资源集或“能力”，旨在递增地提供更高的吞吐量。
 
 能够量化每个性能级别的递增能力如何转换为更高的数据库性能至关重要。为此，Microsoft 开发了 Azure SQL 数据库基准检验 (ASDB)。基准检验将执行在所有 OLTP 工作负荷中找到的基本操作组合。我们会度量为每个性能级别下运行的数据库实现的吞吐量。
 
-每个服务层和性能级别的资源和能力按[数据库事务单位 (DTU)](/documentation/articles/sql-database-what-is-a-dtu/) 来表示。DTU 基于每个性能级别提供的 CPU、内存以及读取和写入速率的混合度量提供了描述性能级别的相对能力的方式。将数据库的 DTU 等级加倍相当于将数据库能力加倍。基准检验通过执行实际的数据库操作，同时与提供给数据库的资源成比例地调整数据库大小、用户数和事务率，让我们可以评估每个性能级别提供的不断增长的能力对数据库性能的影响。
+每个服务层和性能级别的资源和能力按[数据库事务单位 (DTU)](./sql-database-what-is-a-dtu.md) 来表示。DTU 基于每个性能级别提供的 CPU、内存以及读取和写入速率的混合度量提供了描述性能级别的相对能力的方式。将数据库的 DTU 等级加倍相当于将数据库能力加倍。基准检验通过执行实际的数据库操作，同时与提供给数据库的资源成比例地调整数据库大小、用户数和事务率，让我们可以评估每个性能级别提供的不断增长的能力对数据库性能的影响。
 
 通过使用每小时事务数表示基本服务层的吞吐量、使用每分钟事务数表示标准服务层的吞吐量、使用每秒事务数表示高级服务层的吞吐量，可更轻松地快速将每个服务层的性能潜力与应用程序的要求联系起来。
 
@@ -83,9 +80,9 @@ ASDB 将度量联机事务处理 (OLTP) 工作负荷中最常发生的基本数�
 
 1. 建立数据库连接。
 2. 重复执行，直到收到退出通知：
-	- 随机选择事务（从加权分布中）。
-	- 执行所选的事务并测量响应时间。
-	- 等待步调延迟。
+    - 随机选择事务（从加权分布中）。
+    - 执行所选的事务并测量响应时间。
+    - 等待步调延迟。
 3. 关闭数据库连接。
 4. 退出。
 
@@ -127,10 +124,10 @@ ASDB 将度量联机事务处理 (OLTP) 工作负荷中最常发生的基本数�
 Azure SQL 数据库基准检验可以度量在整个可用的服务层和性能级别的范围内运行的 Azure SQL 数据库的相对性能。基准检验执行联机事务处理 (OLTP) 工作负荷中最常发生的基本数据库操作组合。基准检验通过度量实际性能可提供更有意义的有关更改性能级别对吞吐量的影响的评估，而不是只是列出每个级别提供的资源（例如，CPU 速度、内存大小和 IOPS）。将来，我们将继续改进基准检验以扩大其使用范围并扩展所提供的数据。
 
 ## 资源
-[SQL 数据库简介](/documentation/articles/sql-database-technical-overview/)
+[SQL 数据库简介](./sql-database-technical-overview.md)
 
-[服务层和性能级别](/documentation/articles/sql-database-service-tiers/)
+[服务层和性能级别](./sql-database-service-tiers.md)
 
-[单一数据库的性能指南](/documentation/articles/sql-database-performance-guidance/)
+[单一数据库的性能指南](./sql-database-performance-guidance.md)
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

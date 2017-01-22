@@ -27,7 +27,7 @@
 每个存储帐户的最大入口<sup>2</sup> | 如果已启用 GRS/ZRS<sup>3</sup>，则为 5 Gbps；对于 LRS，为 10 Gbps
 每个存储帐户的最大出口<sup>2</sup> | 如果已启用 RA-GRS/GRS/ZRS<sup>3</sup>，则为 10 Gbps；对于 LRS，为 15 Gbps
 
-<sup>1</sup>如果需要的存储帐户超过 20 个，请通过 [Azure 支持](/support/faq/)提出请求。Azure 存储空间团队将评审你的业务案例，最多可以批准 100 个存储帐户。
+<sup>1</sup>如果需要的存储帐户超过 20 个，请通过 [Azure 支持](https://www.azure.cn/support/faq/)提出请求。Azure 存储空间团队将评审你的业务案例，最多可以批准 100 个存储帐户。
 
 <sup>2</sup> *传入* 是指发送到存储帐户的所有数据（请求）。“出口”是指从存储帐户接收的所有数据（响应）。
 

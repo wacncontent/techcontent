@@ -1,23 +1,21 @@
-<properties
-   pageTitle="Azure 安全概述 | Microsoft Azure"
-   description="Azure.com 上的 Microsoft Azure 安全信息站点针对 Azure 安全问题提供了技术解答。"
-   services="security"
-   documentationCenter="na"
-   authors="Ling Chen"
-   manager="Langyun"
-   editor="Lingche"/>  
+---
+title: Azure 安全概述 | Microsoft Azure
+description: Azure.com 上的 Microsoft Azure 安全信息站点针对 Azure 安全问题提供了技术解答。
+services: security
+documentationCenter: na
+authors: Ling Chen
+manager: Langyun
+editor: Lingche
 
-
-<tags
-   ms.service="security"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="08/09/2016"
-   wacn.date="10/31/2016"
-   ms.author="terrylan"/>  
-
+ms.service: security
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/09/2016
+wacn.date: 10/31/2016
+ms.author: terrylan
+---
 
 # Azure 安全概述
 
@@ -38,8 +36,8 @@ Azure 安全信息站点目前包括以下类别（很快就会添加更多类�
 - 存储安全
 - 虚拟机安全
 
-
-> [AZURE.NOTE] Azure 安全信息站点中的所有文章都显示在网页左侧的导航栏中。如果想要查看所有文章，请单击或点按类别列表底部的“更多信息”。
+> [!NOTE]
+> Azure 安全信息站点中的所有文章都显示在网页左侧的导航栏中。如果想要查看所有文章，请单击或点按类别列表底部的“更多信息”。
 
 请不吝发表意见！ 如果想要添加其他类别，请告诉我们！ 如果想要在现有类别中添加文章，也请告诉我们！ 可以使用下面的“意见”部分，或向我们写信：[azsecinfositecn@microsoft.com](mailto:azsecinfositecn@microsoft.com)，我们会将你的建议添加到我们的计划中。
 

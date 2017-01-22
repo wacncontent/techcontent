@@ -1,36 +1,37 @@
-<properties
-   pageTitle="使用 Resource Manager 模板创建 VNet 对等互连 | Azure"
-   description="了解如何在 Resource Manager 中使用模板创建虚拟网络。"
-   services="virtual-network"
-   documentationCenter=""
-   authors="narayanannamalai"
-   manager="jefco"
-   editor=""
-   tags="azure-resource-manager"/>
+---
+title: 使用 Resource Manager 模板创建 VNet 对等互连 | Azure
+description: 了解如何在 Resource Manager 中使用模板创建虚拟网络。
+services: virtual-network
+documentationCenter: 
+authors: narayanannamalai
+manager: jefco
+editor: 
+tags: azure-resource-manager
 
-<tags
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="hero-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="09/14/2016"
-   wacn.date="01/05/2017"
-   ms.author="narayanannamalai;annahar"/>
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 09/14/2016
+wacn.date: 01/05/2017
+ms.author: narayanannamalai;annahar
+---
 
 # 使用 Resource Manager 模板创建 VNet 对等互连
 
-[AZURE.INCLUDE [virtual-networks-create-vnet-selectors-arm-include](../../includes/virtual-networks-create-vnetpeering-selectors-arm-include.md)]
+[!INCLUDE [virtual-networks-create-vnet-selectors-arm-include](../../includes/virtual-networks-create-vnetpeering-selectors-arm-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-create-vnet-intro](../../includes/virtual-networks-create-vnetpeering-intro-include.md)]
+[!INCLUDE [virtual-networks-create-vnet-intro](../../includes/virtual-networks-create-vnetpeering-intro-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-create-vnet-scenario-basic-include](../../includes/virtual-networks-create-vnetpeering-scenario-basic-include.md)]
+[!INCLUDE [virtual-networks-create-vnet-scenario-basic-include](../../includes/virtual-networks-create-vnetpeering-scenario-basic-include.md)]
 
 若要使用 Resource Manager 模板创建 VNet 对等互连，请执行以下步骤：
 
 1. 对于从未使用过 Azure PowerShell 的用户，请参阅 [How to Install and Configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（如何安装和配置 Azure PowerShell），完全按照说明进行操作，登录 Azure 并选择你的订阅。
 
-    > [AZURE.NOTE] 用于管理 VNet 对等互连的 PowerShell cmdlet 随附于 [Azure PowerShell 1.6](http://www.powershellgallery.com/packages/Azure/1.6.0)。
+    > [!NOTE]
+    > 用于管理 VNet 对等互连的 PowerShell cmdlet 随附于 [Azure PowerShell 1.6](http://www.powershellgallery.com/packages/Azure/1.6.0)。
 
 2. 以下文本显示基于上述方案的从 VNet1 到 VNet2 的 VNet 对等互连链接定义。复制以下内容并将其保存到名为 VNetPeeringVNet1.json 的文件中。
 
@@ -99,12 +100,12 @@
 
     VNet 对等互连中的每个链接都有上述属性集。例如，可针对 VNet1 到 VNet2 的 VNet 对等互连链接将“允许虚拟网络访问”设置为“Ture”，而针对另一方向的 VNet 对等互连链接设置为“False”。
 
-
-4. 若要部署模板文件，可以运行 New-AzureRmResourceGroupDeployment cmdlet 来创建或更新部署。有关使用 Resource Manager 模板的详细信息，请参阅此[文章](/documentation/articles/resource-group-template-deploy/)。
+4. 若要部署模板文件，可以运行 New-AzureRmResourceGroupDeployment cmdlet 来创建或更新部署。有关使用 Resource Manager 模板的详细信息，请参阅此[文章](../azure-resource-manager/resource-group-template-deploy.md)。
 
         New-AzureRmResourceGroupDeployment -ResourceGroupName <resource group name> -TemplateFile <template file path> -DeploymentDebugLogLevel all
 
-    > [AZURE.NOTE] 请替换为合适的资源组名称和模板文件。
+    > [!NOTE]
+    > 请替换为合适的资源组名称和模板文件。
 
     以下是一个基于上述方案的示例：
 
@@ -158,9 +159,9 @@
         RemoteGateways                   : null
         RemoteVirtualNetworkAddressSpace : null
 
-	对等互连在该方案中建立好后，应该能够启动两个 Vnet 中任何虚拟机之间的连接。默认情况下，“允许虚拟网络访问”为“True”，且 VNet 对等互连将设置正确的 ACL 以允许 Vnet 之间的通信。仍可应用网络安全组 (NSG) 规则来阻止特定子网或虚拟机之间的连接，从而实现两个虚拟网络之间访问权限的细粒度控制。有关创建 NSG 规则的详细信息，请参阅此[文章](/documentation/articles/virtual-networks-create-nsg-arm-ps/)。
+    对等互连在该方案中建立好后，应该能够启动两个 Vnet 中任何虚拟机之间的连接。默认情况下，“允许虚拟网络访问”为“True”，且 VNet 对等互连将设置正确的 ACL 以允许 Vnet 之间的通信。仍可应用网络安全组 (NSG) 规则来阻止特定子网或虚拟机之间的连接，从而实现两个虚拟网络之间访问权限的细粒度控制。有关创建 NSG 规则的详细信息，请参阅此[文章](./virtual-networks-create-nsg-arm-ps.md)。
 
-[AZURE.INCLUDE [virtual-networks-create-vnet-scenario-crosssub-include](../../includes/virtual-networks-create-vnetpeering-scenario-crosssub-include.md)]
+[!INCLUDE [virtual-networks-create-vnet-scenario-crosssub-include](../../includes/virtual-networks-create-vnetpeering-scenario-crosssub-include.md)]
 
 若要跨订阅创建 VNet 对等互连，请执行以下步骤：
 
@@ -168,7 +169,7 @@
 
         New-AzureRmRoleAssignment -SignInName <UserB ID> -RoleDefinitionName "Network Contributor" -Scope /subscriptions/<Subscription-A-ID>/resourceGroups/<ResourceGroupName>/providers/Microsoft.Network/VirtualNetwork/VNet5
 
-	这不是必须的，只要请求匹配，即使用户分别提出针对各个 Vnet 的对等互连请求，也可建立对等互连。添加另一个 VNet 的特权用户作为本地 VNet 用户可以更轻松地执行安装程序。
+    这不是必须的，只要请求匹配，即使用户分别提出针对各个 Vnet 的对等互连请求，也可建立对等互连。添加另一个 VNet 的特权用户作为本地 VNet 用户可以更轻松地执行安装程序。
 
 2. 使用订阅 B 的特权用户 B 帐户登录到 Azure，并运行以下 cmdlet：
 
@@ -210,7 +211,7 @@
 
         New-AzureRmResourceGroupDeployment -ResourceGroupName VNet101 -TemplateFile .\VNetPeeringVNet5.json -DeploymentDebugLogLevel all
 
-	以下是定义 JSON 文件的方法：
+    以下是定义 JSON 文件的方法：
 
         {
         "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
@@ -238,13 +239,13 @@
         ]
         }
 
- 	此方案中的对等互连建立好后，应该能够跨订阅启动两个 Vnet 中的任何虚拟机之间的连接。
+     此方案中的对等互连建立好后，应该能够跨订阅启动两个 Vnet 中的任何虚拟机之间的连接。
 
-[AZURE.INCLUDE [virtual-networks-create-vnet-scenario-transit-include](../../includes/virtual-networks-create-vnetpeering-scenario-transit-include.md)]
+[!INCLUDE [virtual-networks-create-vnet-scenario-transit-include](../../includes/virtual-networks-create-vnetpeering-scenario-transit-include.md)]
 
 1. 在此方案中，可以部署以下示例模板以建立 VNet 对等互连。需要将“允许转发的流量”属性设置为“Ture”，以允许对等 VNet 中的网络虚拟设备发送和接收流量。
 
-	以下模板用于创建从 HubVNet 到 VNet1 的 VNet 对等互连。请注意将 AllowForwardedTraffic 设置为 false。
+    以下模板用于创建从 HubVNet 到 VNet1 的 VNet 对等互连。请注意将 AllowForwardedTraffic 设置为 false。
 
         {
         "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
@@ -301,10 +302,9 @@
         ]
         }
 
+3. 对等互连建立后，可以参考此[文章](./virtual-network-create-udr-arm-ps.md)来定义用户定义的路由 (UDR)，通过虚拟设备重定向 VNet1 流量，使用其功能。在路由中指定下一个跃点地址时，可以在对等 VNet HubVNet 中将其设置为虚拟设备的 IP 地址。
 
-3. 对等互连建立后，可以参考此[文章](/documentation/articles/virtual-network-create-udr-arm-ps/)来定义用户定义的路由 (UDR)，通过虚拟设备重定向 VNet1 流量，使用其功能。在路由中指定下一个跃点地址时，可以在对等 VNet HubVNet 中将其设置为虚拟设备的 IP 地址。
-
-[AZURE.INCLUDE [virtual-networks-create-vnet-scenario-asmtoarm-include](../../includes/virtual-networks-create-vnetpeering-scenario-asmtoarm-include.md)]
+[!INCLUDE [virtual-networks-create-vnet-scenario-asmtoarm-include](../../includes/virtual-networks-create-vnetpeering-scenario-asmtoarm-include.md)]
 
 若要在不同部署模型中的虚拟网络之间创建对等互连，请执行以下步骤：
 1. 以下文本显示本方案中 VNET1 到 VNET2 的 VNet 对等互连链接定义。只需使用一个链接即可将经典虚拟网络对等互连到 Azure Resource Manager 虚拟网络。

@@ -1,25 +1,25 @@
-<properties
-   pageTitle="管理 SQL 数据仓库中表的统计信息 | Azure"
-   description="Azure SQL 数据仓库中表的统计信息入门。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>
+---
+title: 管理 SQL 数据仓库中表的统计信息 | Azure
+description: Azure SQL 数据仓库中表的统计信息入门。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: 
 
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="jrj;barbkess;sonyama"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: jrj;barbkess;sonyama
+---
 
 # 管理 SQL 数据仓库中表的统计信息
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [概述][]
 - [数据类型][]
 - [分布][]
@@ -60,8 +60,8 @@ SQL 数据仓库对你的数据了解得越多，其针对你的数据执行查�
 
 由于系统未提供 DMV 来确定自上次更新统计信息以来表中的数据是否发生更改，因此，如果知道统计信息的期限的话，也许你可以大致猜出更新状态。可以使用以下查询来确定上次更新每个表的统计信息的时间。
 
-> [AZURE.NOTE] 请记住，如果给定列的值分布有重大变化，则应该更新统计信息，不管上次更新时间为何。
-
+> [!NOTE]
+> 请记住，如果给定列的值分布有重大变化，则应该更新统计信息，不管上次更新时间为何。
 
     SELECT
         sm.[name] AS [schema_name],
@@ -88,7 +88,6 @@ SQL 数据仓库对你的数据了解得越多，其针对你的数据执行查�
     WHERE
         st.[user_created] = 1;
 
-
 例如，数据仓库中的日期列往往需要经常更新统计信息。每次有新行载入数据仓库时，就会添加新的加载日期或事务日期。这些操作会更改数据分布情况并使统计信息过时。相反地，客户表上性别列的统计信息可能永远不需要更新。假设客户间的分布固定不变，将新行添加到表变化并不会改变数据分布情况。不过，如果数据仓库只包含一种性别，而新的要求导致多种性别，则肯定需要更新性别列的统计信息。
 
 有关更多说明，请参阅 MSDN 上的[统计信息][]。
@@ -105,7 +104,8 @@ SQL 数据仓库对你的数据了解得越多，其针对你的数据执行查�
 - 考虑较不经常更新静态分布列。
 - 请记住，每个统计信息对象是连续更新的。仅实现 `UPDATE STATISTICS <TABLE_NAME>` 可能不太理想 - 尤其是对包含许多统计信息对象的宽型表而言。
 
-> [AZURE.NOTE] 有关 [递增键] 的详细信息，请参阅 SQL Server 2014 基数估计模型白皮书。
+> [!NOTE]
+> 有关 [递增键] 的详细信息，请参阅 SQL Server 2014 基数估计模型白皮书。
 
 有关更多说明，请参阅 MSDN 上的[基数估计][]。
 
@@ -119,15 +119,11 @@ SQL 数据仓库对你的数据了解得越多，其针对你的数据执行查�
 
 此语法使用所有默认选项。默认情况下，SQL 数据仓库在创建统计信息时对 20% 的表采样。
 
-
     CREATE STATISTICS [statistics_name] ON [schema_name].[table_name]([column_name]);
-
 
 例如：
 
-
     CREATE STATISTICS col1_stats ON dbo.table1 (col1);
-
 
 ### B.通过检查每个行创建单列统计信息
 
@@ -135,23 +131,17 @@ SQL 数据仓库对你的数据了解得越多，其针对你的数据执行查�
 
 若要采样整个表，请使用此语法：
 
-
     CREATE STATISTICS [statistics_name] ON [schema_name].[table_name]([column_name]) WITH FULLSCAN;
-
 
 例如：
 
-
     CREATE STATISTICS col1_stats ON dbo.table1 (col1) WITH FULLSCAN;
-
 
 ### C.通过指定样本大小创建单列统计信息
 
 或者，你可以以百分比指定样本大小：
 
-
     CREATE STATISTICS col1_stats ON dbo.table1 (col1) WITH SAMPLE = 50 PERCENT;
-
 
 ### D.只对某些行创建单列统计信息
 
@@ -161,19 +151,16 @@ SQL 数据仓库对你的数据了解得越多，其针对你的数据执行查�
 
 此示例将会基于一系列的值创建统计信息。可以轻松定义这些值以匹配分区中的值范围。
 
-
     CREATE STATISTICS stats_col1 ON table1(col1) WHERE col1 > '2000101' AND col1 < '20001231';
 
-
-> [AZURE.NOTE] 若要让查询优化器在选择分布式查询计划时考虑使用筛选的统计信息，查询必须符合统计信息对象的定义。使用上述示例，查询的 where 子句需要指定介于 2000101 和 20001231 之间的 col1 值。
+> [!NOTE]
+> 若要让查询优化器在选择分布式查询计划时考虑使用筛选的统计信息，查询必须符合统计信息对象的定义。使用上述示例，查询的 where 子句需要指定介于 2000101 和 20001231 之间的 col1 值。
 
 ### E.使用所有选项创建单列统计信息
 
 当然，你可以将选项组合在一起。以下示例使用自定义样本大小创建筛选的统计信息对象：
 
-
     CREATE STATISTICS stats_col1 ON table1 (col1) WHERE col1 > '2000101' AND col1 < '20001231' WITH SAMPLE = 50 PERCENT;
-
 
 有关完整参考，请参阅 MSDN 上的 [CREATE STATISTICS][]。
 
@@ -181,20 +168,18 @@ SQL 数据仓库对你的数据了解得越多，其针对你的数据执行查�
 
 若要创建多列统计信息，只需使用上述示例，但要指定更多的列。
 
-> [AZURE.NOTE] 用于估计查询结果中行数的直方图只适用于统计信息对象定义中所列的第一个列。
+> [!NOTE]
+> 用于估计查询结果中行数的直方图只适用于统计信息对象定义中所列的第一个列。
 
 在此示例中，直方图位于 *product\_category*。跨列统计信息是根据 *product\_category* 和 *product\_sub\_category* 计算的：
 
-
     CREATE STATISTICS stats_2cols ON table1 (product_category, product_sub_category) WHERE product_category > '2000101' AND product_category < '20001231' WITH SAMPLE = 50 PERCENT;
-
 
 由于 *product\_category* 和 *product\_sub\_category* 之间存在关联，因此在同时访问这些列时，多列统计信息相当有用。
 
 ### G.基于表中的所有列创建统计信息
 
 创建统计信息的方法之一是在创建表后发出 CREATE STATISTICS 命令。
-
 
     CREATE TABLE dbo.table1
     (
@@ -212,13 +197,11 @@ SQL 数据仓库对你的数据了解得越多，其针对你的数据执行查�
     CREATE STATISTICS stats_col2 on dbo.table2 (col2);
     CREATE STATISTICS stats_col3 on dbo.table3 (col3);
 
-
 ### H.使用存储过程基于数据库中的所有列创建统计信息
 
 SQL 数据仓库不提供相当于 SQL Server 中 [sp\_create\_stats][] 的系统存储过程。此存储过程将基于数据库中尚不包含统计信息的每个列创建单列统计信息对象。
 
 这可以帮助你开始进行数据库设计。你可以根据需要任意改写此存储过程。
-
 
     CREATE PROCEDURE    [dbo].[prc_sqldw_create_stats]
     (   @create_type    tinyint -- 1 default 2 Fullscan 3 Sample
@@ -299,12 +282,9 @@ SQL 数据仓库不提供相当于 SQL Server 中 [sp\_create\_stats][] 的系�
 
     DROP TABLE #stats_ddl;
 
-
 若要使用此过程对表中的所有列创建统计信息，只需调用该过程即可。
 
-
     prc_sqldw_create_stats;
-
 
 ## 示例：更新统计信息
 
@@ -313,39 +293,30 @@ SQL 数据仓库不提供相当于 SQL Server 中 [sp\_create\_stats][] 的系�
 1. 更新一个统计信息对象。指定要更新的统计信息对象名称。
 2. 更新表中的所有统计信息对象。指定表名称，而不是一个特定的统计信息对象。
 
-
 ### A.更新一个特定的统计信息对象 ###
 使用以下语法来更新特定的统计信息对象：
 
-
     UPDATE STATISTICS [schema_name].[table_name]([stat_name]);
-
 
 例如：
 
-
     UPDATE STATISTICS [dbo].[table1] ([stats_col1]);
 
-
 通过更新特定统计信息对象，可以减少管理统计信息所需的时间和资源。在选择要更新的最佳统计信息对象之前，需要经过一定的思考。
-
 
 ### B.更新表中的所有统计信息 ###
 此示例演示了更新表中所有统计信息对象的一个简单方法。
 
-
     UPDATE STATISTICS [schema_name].[table_name];
-
 
 例如：
 
-
     UPDATE STATISTICS dbo.table1;
-
 
 此语句很容易使用。只要记住，这会更新表中的所有统计信息，因此执行的工作可能会超过所需的数量。如果性能不是一个考虑因素，这绝对是保证拥有最新统计信息的最简单、最全面的操作方式。
 
-> [AZURE.NOTE] 更新表中的所有统计信息时，SQL 数据仓库将执行扫描，以针对每个统计信息进行表采样。如果表很大、包含许多列和许多统计信息，则根据需要更新各项统计信息可能比较有效率。
+> [!NOTE]
+> 更新表中的所有统计信息时，SQL 数据仓库将执行扫描，以针对每个统计信息进行表采样。如果表很大、包含许多列和许多统计信息，则根据需要更新各项统计信息可能比较有效率。
 
 <!-- 有关 `UPDATE STATISTICS` 过程的实现，请参阅[临时表][Temporary]一文。实现方法与上述 `CREATE STATISTICS` 过程略有不同，但最终结果相同。 -->
 
@@ -367,7 +338,6 @@ SQL 数据仓库不提供相当于 SQL Server 中 [sp\_create\_stats][] 的系�
 | [sys.tables][] | 针对每个表（包括外部表）提供一行。 |
 | [sys.table\_types][] | 针对每个数据类型提供一行。 |
 
-
 ### 统计信息的系统函数
 这些系统函数适合用于处理统计信息：
 
@@ -379,7 +349,6 @@ SQL 数据仓库不提供相当于 SQL Server 中 [sp\_create\_stats][] 的系�
 ### 将统计信息列和函数合并成一个视图
 
 此视图将统计信息相关的列以及 [STATS\_DATE()][] 函数的结果合并在一起。
-
 
     CREATE VIEW dbo.vstats_columns
     AS
@@ -415,7 +384,6 @@ SQL 数据仓库不提供相当于 SQL Server 中 [sp\_create\_stats][] 的系�
     AND     st.[user_created] = 1
     ;
 
-
 ## DBCC SHOW\_STATISTICS() 示例
 
 DBCC SHOW\_STATISTICS() 显示统计信息对象中保存的数据。这些数据包括三个组成部分。
@@ -430,29 +398,21 @@ DBCC SHOW\_STATISTICS() 显示统计信息对象中保存的数据。这些数�
 
 此简单示例显示了统计信息对象的所有三个组成部分。
 
-
     DBCC SHOW_STATISTICS([<schema_name>.<table_name>],<stats_name>)
-
 
 例如：
 
-
     DBCC SHOW_STATISTICS (dbo.table1, stats_col1);
-
 
 ### 显示 DBCC SHOW\_STATISTICS(); 的一个或多个组成部分
 
 如果你只想要查看特定部分，请使用 `WITH` 子句并指定要查看哪些部分：
 
-
     DBCC SHOW_STATISTICS([<schema_name>.<table_name>],<stats_name>) WITH stat_header, histogram, density_vector
-
 
 例如：
 
-
     DBCC SHOW_STATISTICS (dbo.table1, stats_col1) WITH histogram, density_vector
-
 
 ## DBCC SHOW\_STATISTICS() 差异
 相比于 SQL Server，在 SQL 数据仓库中，DBCC SHOW\_STATISTICS() 的实现更加严格。
@@ -472,19 +432,19 @@ DBCC SHOW\_STATISTICS() 显示统计信息对象中保存的数据。这些数�
 <!--Image references-->
 
 <!--Article references-->
-[Overview]: /documentation/articles/sql-data-warehouse-tables-overview/
-[概述]: /documentation/articles/sql-data-warehouse-tables-overview/
-[Data Types]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[Distribute]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[分布]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[Index]: /documentation/articles/sql-data-warehouse-tables-index/
-[索引]: /documentation/articles/sql-data-warehouse-tables-index/
-[Partition]: /documentation/articles/sql-data-warehouse-tables-partition/
-[Statistics]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[Temporary]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[临时]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[SQL 数据仓库最佳实践]: /documentation/articles/sql-data-warehouse-best-practices/
+[Overview]: ./sql-data-warehouse-tables-overview.md
+[概述]: ./sql-data-warehouse-tables-overview.md
+[Data Types]: ./sql-data-warehouse-tables-data-types.md
+[数据类型]: ./sql-data-warehouse-tables-data-types.md
+[Distribute]: ./sql-data-warehouse-tables-distribute.md
+[分布]: ./sql-data-warehouse-tables-distribute.md
+[Index]: ./sql-data-warehouse-tables-index.md
+[索引]: ./sql-data-warehouse-tables-index.md
+[Partition]: ./sql-data-warehouse-tables-partition.md
+[Statistics]: ./sql-data-warehouse-tables-statistics.md
+[Temporary]: ./sql-data-warehouse-tables-temporary.md
+[临时]: ./sql-data-warehouse-tables-temporary.md
+[SQL 数据仓库最佳实践]: ./sql-data-warehouse-best-practices.md
 
 <!--MSDN references-->  
 [基数估计]: https://msdn.microsoft.com/zh-cn/library/dn600374.aspx

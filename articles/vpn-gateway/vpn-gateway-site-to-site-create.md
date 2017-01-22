@@ -1,52 +1,50 @@
-<properties
-    pageTitle="使用 Azure 经典管理门户创建具有站点到站点 VPN 网关连接的虚拟网络 | Azure"
-    description="创建使用 S2S VPN 网关连接的 VNet，以便通过经典部署模型进行跨界配置和混合配置。"
-    services="vpn-gateway"
-    documentationcenter=""
-    author="cherylmc"
-    manager="carmonm"
-    editor=""
-    tags="azure-service-management" />  
+---
+title: 使用 Azure 经典管理门户创建具有站点到站点 VPN 网关连接的虚拟网络 | Azure
+description: 创建使用 S2S VPN 网关连接的 VNet，以便通过经典部署模型进行跨界配置和混合配置。
+services: vpn-gateway
+documentationcenter: 
+author: cherylmc
+manager: carmonm
+editor: 
+tags: azure-service-management
 
-<tags
-    ms.assetid="024ecb29-64de-4ff1-84f1-1a45a8595f0b"
-    ms.service="vpn-gateway"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/14/2016"
-    wacn.date="01/03/2017"
-    ms.author="cherylmc" />  
-
+ms.assetid: 024ecb29-64de-4ff1-84f1-1a45a8595f0b
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/14/2016
+wacn.date: 01/03/2017
+ms.author: cherylmc
+---
 
 # 使用 Azure 经典管理门户创建具有站点到站点连接的 VNet
-> [AZURE.SELECTOR]
-- [Resource Manager - Azure 门户预览](/documentation/articles/vpn-gateway-howto-site-to-site-resource-manager-portal/)
-- [Resource Manager - PowerShell](/documentation/articles/vpn-gateway-create-site-to-site-rm-powershell/)
-- [经典 - 经典管理门户](/documentation/articles/vpn-gateway-site-to-site-create/)
+> [!div class="op_single_selector"]
+- [Resource Manager - Azure 门户预览](./vpn-gateway-howto-site-to-site-resource-manager-portal.md)
+- [Resource Manager - PowerShell](./vpn-gateway-create-site-to-site-rm-powershell.md)
+- [经典 - 经典管理门户](./vpn-gateway-site-to-site-create.md)
 
 本文逐步讲解如何经典部署模型和经典管理门户创建一个虚拟网络和一个连接到本地网络的站点到站点 VPN 网关连接。站点到站点连接可以用于跨界和混合配置。
 
 ![站点到站点示意图](./media/vpn-gateway-site-to-site-create/site2site.png "站点到站点")  
 
-
 ### 用于站点到站点连接的部署模型和方法
-[AZURE.INCLUDE [部署模型](../../includes/vpn-gateway-deployment-models-include.md)]
+[!INCLUDE [部署模型](../../includes/vpn-gateway-deployment-models-include.md)]
 
 下表显示了站点到站点配置当前可用的部署模型和方法。当有配置步骤相关的文章发布时，我们会直接从此表格链接到该文章。
 
-[AZURE.INCLUDE [vpn-gateway-table-site-to-site-table](../../includes/vpn-gateway-table-site-to-site-include.md)]
+[!INCLUDE [vpn-gateway-table-site-to-site-table](../../includes/vpn-gateway-table-site-to-site-include.md)]
 
 #### 其他配置
-如果想要将多个 VNet 连接到一起，请参阅[为经典部署模型配置 VNet 到 VNet 连接](/documentation/articles/virtual-networks-configure-vnet-to-vnet-connection/)。如果要向已有连接的 VNet 添加站点到站点连接，请参阅 [Add a S2S connection to a VNet with an existing VPN gateway connection](/documentation/articles/vpn-gateway-multi-site/)（向已有 VPN 网关连接的 VNet 添加 S2S 连接）。
+如果想要将多个 VNet 连接到一起，请参阅[为经典部署模型配置 VNet 到 VNet 连接](./virtual-networks-configure-vnet-to-vnet-connection.md)。如果要向已有连接的 VNet 添加站点到站点连接，请参阅 [Add a S2S connection to a VNet with an existing VPN gateway connection](./vpn-gateway-multi-site.md)（向已有 VPN 网关连接的 VNet 添加 S2S 连接）。
 
 ## 开始之前
 在开始配置之前，请确认具有以下各项。
 
-* 一台兼容的 VPN 设备和能够对其进行配置的人员。请参阅[关于 VPN 设备](/documentation/articles/vpn-gateway-about-vpn-devices/)。如果不熟悉 VPN 设备的配置，或者不熟悉本地网络配置中的 IP 地址范围，请咨询能够提供此类详细信息的人员。
+* 一台兼容的 VPN 设备和能够对其进行配置的人员。请参阅[关于 VPN 设备](./vpn-gateway-about-vpn-devices.md)。如果不熟悉 VPN 设备的配置，或者不熟悉本地网络配置中的 IP 地址范围，请咨询能够提供此类详细信息的人员。
 * 一个用于 VPN 设备的面向外部的公共 IP 地址。此 IP 地址不得位于 NAT 之后。
-* Azure 订阅。如果你还没有 Azure 订阅，你可以注册一个[试用版](/pricing/1rmb-trial)。
+* Azure 订阅。如果你还没有 Azure 订阅，你可以注册一个[试用版](https://www.azure.cn/pricing/1rmb-trial)。
 
 ## <a name="CreateVNet"></a>创建虚拟网络
 1. 登录到 [Azure 经典管理门户](https://manage.windowsazure.cn/)。
@@ -89,12 +87,12 @@
 
 单击页面底部的复选标记，此时将开始创建虚拟网络。创建完成时，将在 Azure 经典管理门户的“网络”页上看到“状态”下列出的“已创建”。在创建 VNet 之后，你就可以配置虚拟网络网关。
 
-[AZURE.INCLUDE [vpn-gateway-no-nsg](../../includes/vpn-gateway-no-nsg-include.md)]
+[!INCLUDE [vpn-gateway-no-nsg](../../includes/vpn-gateway-no-nsg-include.md)]
 
 ## <a name="VNetGateway"></a>配置虚拟网络网关
-配置虚拟网络网关，创建安全的站点到站点连接。请参阅[在 Azure 经典管理门户中配置虚拟网络网关](/documentation/articles/vpn-gateway-configure-vpn-gateway-mp/)。
+配置虚拟网络网关，创建安全的站点到站点连接。请参阅[在 Azure 经典管理门户中配置虚拟网络网关](./vpn-gateway-configure-vpn-gateway-mp.md)。
 
 ## 后续步骤
-连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](/documentation/services/virtual-machines/)文档。
+连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md)文档。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

@@ -1,23 +1,21 @@
-<properties
-   pageTitle="在 Windows Server 和 Linux 上创建 Azure Service Fabric 群集 | Azure"
-   description="Service Fabric 群集会在 Windows Server 或 Linux 上运行，这意味着你将能够在可以运行 Windows Server 和 Linux 的任何位置部署和承载 Service Fabric 应用程序。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="Chackdan"
-   manager="timlt"
-   editor=""/>  
+---
+title: 在 Windows Server 和 Linux 上创建 Azure Service Fabric 群集 | Azure
+description: Service Fabric 群集会在 Windows Server 或 Linux 上运行，这意味着你将能够在可以运行 Windows Server 和 Linux 的任何位置部署和承载 Service Fabric 应用程序。
+services: service-fabric
+documentationCenter: .net
+authors: Chackdan
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotNet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/22/2016"
-   wacn.date="01/04/2017"
-   ms.author="chackdan"/>  
-
+ms.service: service-fabric
+ms.devlang: dotNet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/22/2016
+wacn.date: 01/04/2017
+ms.author: chackdan
+---
 
 # 在 Windows Server 或 Linux 上创建 Service Fabric 群集
 
@@ -25,7 +23,7 @@
 
 ##在 Azure 上创建 Service Fabric 群集
 
-应该通过资源模型模板或 Azure 门户预览在 Azure 上创建群集。有关详细信息，请参阅[使用 Resource Manager 模板创建 Service Fabric 群集](/documentation/articles/service-fabric-cluster-creation-via-arm/)或[在 Azure 门户预览中创建 Service Fabric 群集](/documentation/articles/service-fabric-cluster-creation-via-portal/)。
+应该通过资源模型模板或 Azure 门户预览在 Azure 上创建群集。有关详细信息，请参阅[使用 Resource Manager 模板创建 Service Fabric 群集](./service-fabric-cluster-creation-via-arm.md)或[在 Azure 门户预览中创建 Service Fabric 群集](./service-fabric-cluster-creation-via-portal.md)。
 
 ## Azure 上支持的群集操作系统
 
@@ -34,12 +32,11 @@
 * Windows Server 2012 R2
 * Windows Server 2016（在发布正式版之后）
 
-
 ##在本地或者与任何云提供商合作创建 Service Fabric 独立群集
 
 Service Fabric 提供一个安装包，用于在本地或者与任何云提供商合作创建独立的 Service Fabric 群集。
 
-有关在 Windows Server 上设置独立 Service Fabric 群集的详细信息，请参阅[创建适用于 Windows Server 的 Service Fabric 群集](/documentation/articles/service-fabric-cluster-creation-for-windows-server/)
+有关在 Windows Server 上设置独立 Service Fabric 群集的详细信息，请参阅[创建适用于 Windows Server 的 Service Fabric 群集](./service-fabric-cluster-creation-for-windows-server.md)
 
 ### 任何云部署与本地部署
 用于在本地创建 Service Fabric 群集的过程类似于在具有一组 VM 的任何所选云上创建群集的过程。预配 VM 的初始步骤由所使用的云提供程序或本地环境进行控制。具有一组在它们之间启用了网络连接的 VM 之后，随后用于设置 Service Fabric 包、编辑群集设置以及运行群集创建和管理脚本的步骤相同。这可以在选择面向新宿主环境时，确保操作和管理 Service Fabric 群集的知识和经验可以转移。
@@ -71,8 +68,8 @@ Service Fabric 提供一个安装包，用于在本地或者与任何云提供�
 * **自动缩放：**对于 Azure 上的群集，我们借助虚拟机规模集提供内置自动缩放功能。在本地和其他云环境中，必须构建自己的自动调整规模功能或使用 Service Fabric 为调整群集规模而公开的 API 来手动调整规模。
 
 ## 后续步骤
-在运行 Windows Server 的 VM 或计算机上创建群集：[创建适用于 Windows Server 的 Service Fabric 群集](/documentation/articles/service-fabric-cluster-creation-for-windows-server/)
+在运行 Windows Server 的 VM 或计算机上创建群集：[创建适用于 Windows Server 的 Service Fabric 群集](./service-fabric-cluster-creation-for-windows-server.md)
 
-在运行 Linux 的 VM 或计算机上创建群集：[Linux 上的 Service Fabric](/documentation/articles/service-fabric-linux-overview/)
+在运行 Linux 的 VM 或计算机上创建群集：[Linux 上的 Service Fabric](./service-fabric-linux-overview.md)
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

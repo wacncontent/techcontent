@@ -1,22 +1,21 @@
-<properties
-   pageTitle="优化 ExpressRoute 路由 | Azure"
-   description="本页详细介绍了在客户可以通过多个 ExpressRoute 线路在 Azure 与客户的公司网络之间进行连接时，如何优化路由。"
-   documentationCenter="na"
-   services="expressroute"
-   authors="charwen"
-   manager="carmonm"
-   editor=""/>  
+---
+title: 优化 ExpressRoute 路由 | Azure
+description: 本页详细介绍了在客户可以通过多个 ExpressRoute 线路在 Azure 与客户的公司网络之间进行连接时，如何优化路由。
+documentationCenter: na
+services: expressroute
+authors: charwen
+manager: carmonm
+editor: 
 
-<tags
-   ms.service="expressroute"
-   ms.devlang="na"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/10/2016"
-   wacn.date="10/31/2016"
-   ms.author="charwen"/>  
-
+ms.service: expressroute
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/10/2016
+wacn.date: 10/31/2016
+ms.author: charwen
+---
 
 # 优化 ExpressRoute 路由
 当你有多个 ExpressRoute 线路时，可以通过多个路径连接到 Azure。结果就是，你所采用的路由可能不是最理想的 - 也就是说，你的流量可能会经历较长的路径才能到达 Azure，而 Azure 的流量也可能会经历较长的路径才能到达你的网络。网络路径越长，延迟越严重。延迟对应用程序性能和用户体验有直接影响。本文将详述此问题，并说明如何使用标准路由技术来优化路由。
@@ -27,10 +26,8 @@
 ![](./media/expressroute-optimize-routing/expressroute-case1-problem.png)
 
 ### 解决方案：使用 BGP 社区
-若要优化两个办公室的用户的路由，你需要知道哪个前缀来自 Azure 中国北部，哪个前缀来自 Azure 中国东部。我们使用 [BGP 社区值](/documentation/articles/expressroute-routing/)对此信息进行编码。我们向每个 Azure 区域分配了唯一的 BGP 社区值，例如：为中国北部分配“12076:51004”，为中国东部分配“12076:51006”。现在，你知道了哪个前缀来自哪个 Azure 区域，因此可以配置哪个 ExpressRoute 线路应该为首选线路。由于我们使用 BGP 来交换路由信息，因此你可以使用 BGP 的“本地首选项（local preference）”来影响路由。在我们的示例中，你可以在中国东部将比中国北部更高的本地首选项值分配给 13.100.0.0/16。类似地，你可以在中国北部将比中国东部更高的本地首选项值分配给 23.100.0.0/16。此配置将确保当通往 Azure 的两个路径都可用时，你在北京的用户将使用中国北部的 ExpressRoute 线路连接到 Azure 中国北部，而你在上海的用户将使用中国东部的 ExpressRoute 连接到 Azure 中国东部。两边的路由都获得了优化。
+若要优化两个办公室的用户的路由，你需要知道哪个前缀来自 Azure 中国北部，哪个前缀来自 Azure 中国东部。我们使用 [BGP 社区值](./expressroute-routing.md)对此信息进行编码。我们向每个 Azure 区域分配了唯一的 BGP 社区值，例如：为中国北部分配“12076:51004”，为中国东部分配“12076:51006”。现在，你知道了哪个前缀来自哪个 Azure 区域，因此可以配置哪个 ExpressRoute 线路应该为首选线路。由于我们使用 BGP 来交换路由信息，因此你可以使用 BGP 的“本地首选项（local preference）”来影响路由。在我们的示例中，你可以在中国东部将比中国北部更高的本地首选项值分配给 13.100.0.0/16。类似地，你可以在中国北部将比中国东部更高的本地首选项值分配给 23.100.0.0/16。此配置将确保当通往 Azure 的两个路径都可用时，你在北京的用户将使用中国北部的 ExpressRoute 线路连接到 Azure 中国北部，而你在上海的用户将使用中国东部的 ExpressRoute 连接到 Azure 中国东部。两边的路由都获得了优化。
 
 ![](./media/expressroute-optimize-routing/expressroute-case1-solution.png)
-
-
 
 <!---HONumber=Mooncake_1024_2016-->

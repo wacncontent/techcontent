@@ -1,23 +1,22 @@
-<properties
-    pageTitle="用于 .NET 的媒体服务 SDK 中的重试逻辑 | Azure"
-    description="本主题概述了用于 .NET 的媒体服务 SDK 中的重试逻辑。"
-    author="Juliako"
-    manager="erikre"
-    editor=""
-    services="media-services"
-    documentationcenter="" />  
+---
+title: 用于 .NET 的媒体服务 SDK 中的重试逻辑 | Azure
+description: 本主题概述了用于 .NET 的媒体服务 SDK 中的重试逻辑。
+author: Juliako
+manager: erikre
+editor: 
+services: media-services
+documentationcenter: 
 
-<tags
-    ms.assetid="527b61a6-c862-4bd8-bcbc-b9aea1ffdee3"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/25/2016"
-    wacn.date="12/12/2016"
-    ms.author="juliako" />  
-
+ms.assetid: 527b61a6-c862-4bd8-bcbc-b9aea1ffdee3
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/25/2016
+wacn.date: 12/12/2016
+ms.author: juliako
+---
 
 # 用于 .NET 的媒体服务 SDK 中的重试逻辑
 使用 Azure 服务时，可能会发生暂时性故障。如果发生暂时性故障，在大多数情况下，重试几次后操作即可成功。用于 .NET 的媒体服务 SDK 可实现重试逻辑，用于处理与异常和错误相关的暂时性故障，引起这些异常和错误的原因包括 Web 请求、执行查询、保存更改和存储操作。默认情况下，再次引发应用程序异常之前，用于 .NET 的媒体服务 SDK 将重试 4 次。应用程序中的代码稍后必须正确处理此异常。
@@ -28,7 +27,7 @@
 * Web 请求策略可用于常规 Web 请求，例如，用于获取身份验证令牌和解析用户群集终结点。
 * 查询策略可用于从 REST 查询实体，例如，mediaContext.Assets.Where(…)。
 * SaveChanges 策略可用于在服务内执行任何更改数据的操作，例如，创建更新实体的实体、为操作调用服务函数。
-  
+
   本主题列出了用于 .NET 的媒体服务 SDK 的重试逻辑可处理的异常类型和错误代码。
 
 ## 异常类型
@@ -36,10 +35,10 @@
 
 | 异常 | Web 请求 | 存储 | 查询 | SaveChanges |
 | --- | --- | --- | --- | --- |
-| WebException<br/>有关详细信息，请参阅 [WebException 状态代码](/documentation/articles/media-services-retry-logic-in-dotnet-sdk/#WebExceptionStatus)部分。 |是 |是 |是 |是 |
-| DataServiceClientException<br/> 有关详细信息，请参阅 [HTTP 错误状态代码](/documentation/articles/media-services-retry-logic-in-dotnet-sdk/#HTTPStatusCode)。 |否 |是 |是 |是 |
-| DataServiceQueryException<br/> 有关详细信息，请参阅 [HTTP 错误状态代码](/documentation/articles/media-services-retry-logic-in-dotnet-sdk/#HTTPStatusCode)。 |否 |是 |是 |是 |
-| DataServiceRequestException<br/> 有关详细信息，请参阅 [HTTP 错误状态代码](/documentation/articles/media-services-retry-logic-in-dotnet-sdk/#HTTPStatusCode)。 |否 |是 |是 |是 |
+| WebException<br/>有关详细信息，请参阅 [WebException 状态代码](./media-services-retry-logic-in-dotnet-sdk.md#WebExceptionStatus)部分。 |是 |是 |是 |是 |
+| DataServiceClientException<br/> 有关详细信息，请参阅 [HTTP 错误状态代码](./media-services-retry-logic-in-dotnet-sdk.md#HTTPStatusCode)。 |否 |是 |是 |是 |
+| DataServiceQueryException<br/> 有关详细信息，请参阅 [HTTP 错误状态代码](./media-services-retry-logic-in-dotnet-sdk.md#HTTPStatusCode)。 |否 |是 |是 |是 |
+| DataServiceRequestException<br/> 有关详细信息，请参阅 [HTTP 错误状态代码](./media-services-retry-logic-in-dotnet-sdk.md#HTTPStatusCode)。 |否 |是 |是 |是 |
 | DataServiceTransportException |否 |否 |是 |是 |
 | TimeoutException |是 |是 |是 |否 |
 | SocketException |是 |是 |是 |是 |
@@ -62,7 +61,7 @@
 | ReceiveFailure |是 |是 |是 |否 |
 | RequestCanceled |是 |是 |是 |否 |
 | 超时 |是 |是 |是 |否 |
-| ProtocolError <br/>ProtocolError 的重试受控于 HTTP 状态代码处理。有关详细信息，请参阅 [HTTP 错误状态代码](/documentation/articles/media-services-retry-logic-in-dotnet-sdk/#HTTPStatusCode)。 |是 |是 |是 |是 |
+| ProtocolError <br/>ProtocolError 的重试受控于 HTTP 状态代码处理。有关详细信息，请参阅 [HTTP 错误状态代码](./media-services-retry-logic-in-dotnet-sdk.md#HTTPStatusCode)。 |是 |是 |是 |是 |
 
 ### <a name="HTTPStatusCode"></a>HTTP 错误状态代码
 如果 Query 和 SaveChanges 操作引发 DataServiceClientException、DataServiceQueryException 或 DataServiceQueryException，则 StatusCode 属性中返回 HTTP 错误状态代码。下表介绍了为哪些错误代码实现了重试逻辑。

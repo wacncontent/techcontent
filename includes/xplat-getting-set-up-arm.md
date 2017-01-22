@@ -1,9 +1,15 @@
-<properties services="virtual-machines" title="Using Azure CLI with Azure Resource Manager" authors="squillace" solutions="" manager="timlt" editor="tysonn" />
+---
+services: virtual-machines
+title: Using Azure CLI with Azure Resource Manager
+authors: squillace
+solutions: 
+manager: timlt
+editor: tysonn
 
-<tags
-   ms.service="virtual-machine"
-   ms.date="04/13/2015"
-   wacn.date="12/17/2015" />
+ms.service: virtual-machine
+ms.date: 04/13/2015
+wacn.date: 12/17/2015
+---
 
 ## 将 Azure CLI 与 Azure 资源管理器 (ARM) 配合使用
 
@@ -56,6 +62,7 @@
     $ azure config mode arm
     info:    New mode is arm
 
-> [AZURE.NOTE]你可以通过键入 `azure config mode asm` 切换回来，以便使用 Azure 服务管理命令。
+> [!NOTE]
+>你可以通过键入 `azure config mode asm` 切换回来，以便使用 Azure 服务管理命令。
 
 <!---HONumber=Mooncake_1207_2015-->

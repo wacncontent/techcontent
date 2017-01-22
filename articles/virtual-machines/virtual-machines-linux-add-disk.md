@@ -1,27 +1,27 @@
-<properties
-    pageTitle="将磁盘添加到 Linux VM | Azure"
-    description="了解如何将持久性磁盘添加到 Linux VM"
-    keywords="linux 虚拟机, 添加资源磁盘"
-    services="virtual-machines-linux"
-    documentationcenter=""
-    author="rickstercdn"
-    manager="timlt"
-    editor="tysonn"
-    tags="azure-resource-manager" />  
+---
+title: 将磁盘添加到 Linux VM | Azure
+description: 了解如何将持久性磁盘添加到 Linux VM
+keywords: linux 虚拟机, 添加资源磁盘
+services: virtual-machines-linux
+documentationcenter: 
+author: rickstercdn
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="3005a066-7a84-4dc5-bdaa-574c75e6e411"
-    ms.service="virtual-machines-linux"
-    ms.topic="article"
-    ms.workload="infrastructure-services"
-    ms.tgt_pltfrm="vm-linux"
-    ms.devlang="na"
-    ms.date="09/06/2016"
-    wacn.date="12/20/2016"
-    ms.author="rclaus" />
+ms.assetid: 3005a066-7a84-4dc5-bdaa-574c75e6e411
+ms.service: virtual-machines-linux
+ms.topic: article
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.date: 09/06/2016
+wacn.date: 12/20/2016
+ms.author: rclaus
+---
 
 # 将磁盘添加到 Linux VM
-本文介绍如何将持久性磁盘附加到 VM 以保存数据 - 即使 VM 由于维护或调整大小而重新预配。若要添加磁盘，需要在 Resource Manager 模式下配置 [Azure CLI](/documentation/articles/xplat-cli-install/) (`azure config mode arm`)。
+本文介绍如何将持久性磁盘附加到 VM 以保存数据 - 即使 VM 由于维护或调整大小而重新预配。若要添加磁盘，需要在 Resource Manager 模式下配置 [Azure CLI](../xplat-cli-install.md) (`azure config mode arm`)。
 
 ## 快速命令
 以下示例将一个 `50`GB 的磁盘附加到资源组 `myResourceGroup` 中名为 `myVM` 的 VM：
@@ -42,8 +42,8 @@
     info:    vm disk attach-new command OK
 
 ## <a name="connect-to-the-linux-vm-to-mount-the-new-disk"></a>连接到 Linux VM 以装入新磁盘
-> [AZURE.NOTE]
-本主题使用用户名和密码连接到 VM。若要使用公钥和私钥对与 VM 通信，请参阅 [How to Use SSH with Linux on Azure](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)（如何在 Azure 上的 Linux 中使用 SSH）。你可以通过使用 `azure vm reset-access` 命令完全重置 **SSH** 访问权限、添加或删除用户，或者添加公钥文件以确保安全访问，来修改使用 `azure vm quick-create` 命令创建的 VM 的 **SSH** 连接。
+> [!NOTE]
+本主题使用用户名和密码连接到 VM。若要使用公钥和私钥对与 VM 通信，请参阅 [How to Use SSH with Linux on Azure](./virtual-machines-linux-mac-create-ssh-keys.md)（如何在 Azure 上的 Linux 中使用 SSH）。你可以通过使用 `azure vm reset-access` 命令完全重置 **SSH** 访问权限、添加或删除用户，或者添加公钥文件以确保安全访问，来修改使用 `azure vm quick-create` 命令创建的 VM 的 **SSH** 连接。
 > 
 > 
 
@@ -195,7 +195,7 @@
     /dev/sdb1: UUID="22222222-2b2b-2c2c-2d2d-2e2e2e2e2e2e" TYPE="ext4"
     /dev/sdc1: UUID="33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e" TYPE="ext4"
 
-> [AZURE.NOTE]
+> [!NOTE]
 错误地编辑 **/etc/fstab** 文件可能会导致系统无法引导。如果没有把握，请参考分发的文档来获取有关如何正确编辑该文件的信息。另外，建议在编辑之前创建 /etc/fstab 文件的备份。
 > 
 > 
@@ -208,7 +208,7 @@
 
     UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,nofail   1   2
 
-> [AZURE.NOTE]
+> [!NOTE]
 之后，在不编辑 fstab 的情况下删除数据磁盘可能会导致 VM 无法启动。大多数分发版提供 `nofail` 和/或 `nobootwait` fstab 选项。这些选项使系统在磁盘无法装载的情况下也能启动。有关这些参数的详细信息，请查阅分发文档。
 > 
 > 即使文件系统已损坏或磁盘在引导时不存在，**nofail** 选项也能确保 VM 启动。如果不使用此选项，可能会遇到 [Cannot SSH to Linux VM due to FSTAB errors](https://blogs.msdn.microsoft.com/linuxonazure/2016/07/21/cannot-ssh-to-linux-vm-after-adding-data-disk-to-etcfstab-and-rebooting/)（由于 FSTAB 错误而无法通过 SSH 连接到 Linux VM）中所述的行为
@@ -223,7 +223,7 @@
         UUID=33333333-3b3b-3c3c-3d3d-3e3e3e3e3e3e   /datadrive   ext4   defaults,discard   1   2
 
 * 此处，还可以从命令行手动运行 `fstrim` 命令，或将其添加到 crontab 以定期运行：
-  
+
     **Ubuntu**
 
         sudo apt-get install util-linux
@@ -235,11 +235,11 @@
         sudo fstrim /datadrive
 
 ## 故障排除
-[AZURE.INCLUDE [virtual-machines-linux-lunzero](../../includes/virtual-machines-linux-lunzero.md)]
+[!INCLUDE [virtual-machines-linux-lunzero](../../includes/virtual-machines-linux-lunzero.md)]
 
 ## 后续步骤
 * 请记住，除非将该信息写入 [fstab](http://en.wikipedia.org/wiki/Fstab) 文件，否则即使重新启动 VM，新磁盘也无法供 VM 使用。
-* 为确保正确配置 Linux VM，请查看有关[优化 Linux 计算机性能](/documentation/articles/virtual-machines-linux-optimization/)的建议。
-* 可以添加更多的磁盘来扩展存储容量，[配置 RAID](/documentation/articles/virtual-machines-linux-configure-raid/) 来提高性能。
+* 为确保正确配置 Linux VM，请查看有关[优化 Linux 计算机性能](./virtual-machines-linux-optimization.md)的建议。
+* 可以添加更多的磁盘来扩展存储容量，[配置 RAID](./virtual-machines-linux-configure-raid.md) 来提高性能。
 
 <!---HONumber=Mooncake_1212_2016-->

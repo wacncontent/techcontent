@@ -1,32 +1,32 @@
-<properties 
-   pageTitle="了解最新的 Azure 来宾 OS 版本 | Azure" 
-   description="有关 Azure 云服务来宾 OS 的最新发行新闻以及 SDK 兼容性。" 
-   services="cloud-services" 
-   documentationCenter="na" 
-   authors="raiye" 
-   manager="timlt" 
-   editor=""/>  
+---
+title: 了解最新的 Azure 来宾 OS 版本 | Azure
+description: 有关 Azure 云服务来宾 OS 的最新发行新闻以及 SDK 兼容性。
+services: cloud-services
+documentationCenter: na
+authors: raiye
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="cloud-services"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="tbd" 
-   ms.date="12/14/2016"
-   wacn.date="01/03/2017"
-   ms.author="raiye"/>
+ms.service: cloud-services
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: tbd
+ms.date: 12/14/2016
+wacn.date: 01/03/2017
+ms.author: raiye
+---
 
 # Azure 来宾 OS 版本和 SDK 兼容性对照表
 提供适用于云服务的最新 Azure 来宾 OS 版本的最新信息。此信息将帮助你在来宾 OS 停用之前规划升级路径。如果根据 [Azure 来宾 OS 更新设置][Azure Guest OS Update Settings]中所述将角色配置为使用自动进行来宾 OS 更新，则不一定要阅读本页面。
 
-> [AZURE.IMPORTANT] 本页面适用于在来宾 OS 顶层运行的云服务 Web 角色和辅助角色，而不适用于 IaaS 虚拟机。
+> [!IMPORTANT]
+> 本页面适用于在来宾 OS 顶层运行的云服务 Web 角色和辅助角色，而不适用于 IaaS 虚拟机。
 
 <!-- -->
 
-
-> [AZURE.TIP] 订阅[来宾 OS 更新 RSS 源][rss]，以接收有关所有来宾 OS 更改的最新通知。
+> [!TIP]
+> 订阅[来宾 OS 更新 RSS 源][rss]，以接收有关所有来宾 OS 更改的最新通知。
 
 不太确定什么是来宾 OS 或者来宾 OS 的工作原理？ 请阅读[此部分](#how-it-works)。
 
@@ -92,7 +92,8 @@ OS 系列 5 的 RDP 密码至少必须有 10 个字符。
 
 支持 .NET 4.0、4.5、4.5.1、4.5.2
 
->[AZURE.NOTE] 标有 * 的日期可随时更改
+>[!NOTE]
+> 标有 * 的日期可随时更改
 
 | 配置字符串 | 发行日期 | 停用日期 | 失效日期 |
 | --- | --- | --- | --- |
@@ -123,7 +124,8 @@ OS 系列 5 的 RDP 密码至少必须有 10 个字符。
 
 支持 .NET 4.0、4.5、4.5.1、4.5.2
 
->[AZURE.NOTE] 标有 * 的日期可随时更改
+>[!NOTE]
+> 标有 * 的日期可随时更改
 
 | 配置字符串 | 发行日期 | 停用日期 | 失效日期 |
 | --- | --- | --- | --- |
@@ -149,14 +151,14 @@ OS 系列 5 的 RDP 密码至少必须有 10 个字符。
 | ~~WA-GUEST-OS-3.27\_201505-02~~ |2015 年 6 月 12 日 |2015 年 9 月 7 日 |TBD |
 | ~~WA-GUEST-OS-3.26\_201504-01~~ |2015 年 4 月 17 日 |2015 年 8 月 9 日 |TBD |
 
-
 ## 系列 2 发行版本
 
 **Windows Server 2008 R2 SP1**
 
 支持 .NET 3.5、4.0、4.5、4.5.1、4.5.2
 
->[AZURE.NOTE] 标有 * 的日期可随时更改
+>[!NOTE]
+> 标有 * 的日期可随时更改
 
 | 配置字符串 | 发行日期 | 停用日期 | 失效日期 |
 | --- | --- | --- | --- |
@@ -233,12 +235,11 @@ Azure 不断地发布更新。来宾 OS 只不过是此类更新的其中一种�
 
 如果你手动更新来宾 OS，请阅读[来宾 OS 停用策略][retirepolicy]。
 
-
 ## 来宾 OS 可支持性和停用策略
 [此处][retirepolicy]解释了来宾 OS 可支持性和停用策略。
 
-[Install .NET on a Cloud Service Role]: /documentation/articles/cloud-services-dotnet-install-dotnet/?WT.mc_id=azurebg_email_Trans_963_RevisedNET_Update
-[Azure Guest OS Update Settings]: /documentation/articles/cloud-services-how-to-configure/
+[Install .NET on a Cloud Service Role]: ./cloud-services-dotnet-install-dotnet.md?WT.mc_id=azurebg_email_Trans_963_RevisedNET_Update
+[Azure Guest OS Update Settings]: ./cloud-services-how-to-configure.md
 [rss]: http://sxp.microsoft.com/feeds/3.0/msdntn/WindowsAzureOSUpdates
 [ssl3 announcement]: http://azure.microsoft.com/blog/2014/12/09/azure-security-ssl-3-0-update/
 [Microsoft Security Advisory 3009008]: https://technet.microsoft.com/zh-cn/library/security/3009008.aspx
@@ -247,15 +248,14 @@ Azure 不断地发布更新。来宾 OS 只不过是此类更新的其中一种�
 [MS14-046]: https://technet.microsoft.com/zh-cn/library/security/ms14-046.aspx
 [retire policy sdk]: https://msdn.microsoft.com/zh-cn/library/dn479282.aspx
 [server and gos]: https://msdn.microsoft.com/zh-cn/library/dn775043.aspx
-[azuresupport]: /support/contact/
+[azuresupport]: https://www.azure.cn/support/contact/
 [net install pkg]: http://www.microsoft.com/zh-cn/download/details.aspx?id=42643
 [msrc]: http://www.microsoft.com/security/msrc/default.aspx
 [update guest os portal]: https://msdn.microsoft.com/zh-cn/library/gg433101.aspx
 [update guest os svc]: https://msdn.microsoft.com/zh-cn/library/gg456324.aspx
 [restarts]: http://blogs.msdn.com/b/kwill/archive/2012/09/19/role-instance-restarts-due-to-os-upgrades.aspx
-[patches]: /documentation/articles/cloud-services-guestos-msrc-releases/
-[retirepolicy]: /documentation/articles/cloud-services-guestos-retirement-policy/
-[fam1retire]: /documentation/articles/cloud-services-guestos-family1-retirement/
- 
+[patches]: ./cloud-services-guestos-msrc-releases.md
+[retirepolicy]: ./cloud-services-guestos-retirement-policy.md
+[fam1retire]: ./cloud-services-guestos-family1-retirement.md
 
 <!---HONumber=Mooncake_1226_2016-->

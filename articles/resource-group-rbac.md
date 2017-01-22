@@ -1,22 +1,20 @@
-<properties
-   pageTitle="管理对资源的访问权限"
-   description="使用基于角色的访问控制 (RBAC) 来管理用户对 Azure 中部署的资源的权限。"
-   services="azure-resource-manager"
-   documentationCenter="na"
-   authors="tfitzmac"
-   manager="wpickett"
-   editor=""/>
+---
+title: 管理对资源的访问权限
+description: 使用基于角色的访问控制 (RBAC) 来管理用户对 Azure 中部署的资源的权限。
+services: azure-resource-manager
+documentationCenter: na
+authors: tfitzmac
+manager: wpickett
+editor: 
 
-<tags
-   ms.service="azure-resource-manager"
-   ms.date="10/28/2015"
-   wacn.date="01/21/2016"/>
+ms.service: azure-resource-manager
+ms.date: 10/28/2015
+wacn.date: 01/21/2016
+---
 
 # 管理对资源的访问权限
 
 使用 Azure 资源管理器可以确保组织中的用户拥有用于管理或访问资源的适当权限。资源管理器利用基于角色的访问控制 (RBAC)，因此，你可以轻松地向各个资源或资源组应用安全策略。例如，可以授予用户访问订阅中特定虚拟机的权限，允许用户管理订阅中的所有 Web 应用，但但不允许管理其他资源。
-
-
 
 ## 概念
 
@@ -52,17 +50,15 @@
 4. 向单个用户授予对特定 Web 应用的“所有者”权限。
 5. 列出资源组的审核日志。
 
-
 ## 如何使用 PowerShell 管理访问权限
 
-[AZURE.INCLUDE [powershell-preview-inline-include](../includes/powershell-preview-inline-include.md)]
-
+[!INCLUDE [powershell-preview-inline-include](../includes/powershell-preview-inline-include.md)]
 
 ### 查看可用角色
 若要查看订阅的所有可用角色，请运行 **Get-AzureRmRoleDefinition** 命令。
 
     PS C:\> Get-AzureRmRoleDefinition
-    
+
     Name             : API Management Service Contributor
     Id               : /subscriptions/{subscription-id}/providers/Microsoft.Authorization/roleDefinitions/{guid}
     IsCustom         : False
@@ -87,7 +83,7 @@
 1. 在运行 **Get-AzureRmRoleDefinition** 命令时提供角色名称，以查看相应的“读者”角色定义。检查允许的操作是否为你想要分配的操作。
 
         PS C:\> Get-AzureRmRoleDefinition Reader
-   
+
         Name             : Reader
         Id               : /subscriptions/{subscription-id}/providers/Microsoft.Authorization/roleDefinitions/{guid}
         IsCustom         : False
@@ -104,7 +100,6 @@
 
         PS C:\> New-AzureRmRoleAssignment -ObjectId $group.Id -Scope /subscriptions/{subscriptionId}/ -RoleDefinitionName Reader
 
-
 ###向资源组的应用程序授予“参与者”权限。
 1. 在运行 **Get-AzureRmRoleDefinition** 命令时提供角色名称，以查看相应的“参与者”角色定义。检查允许的操作是否为你想要分配的操作。
 
@@ -118,7 +113,7 @@
 
         PS C:\> New-AzureRmRoleAssignment -ObjectId $service.Id -ResourceGroupName ExampleGroupName -RoleDefinitionName Contributor
 
-有关设置 Azure Active Directory 应用程序和服务主体的更全面说明，请参阅[使用 Azure 资源管理器对服务主体进行身份验证](/documentation/articles/resource-group-authenticate-service-principal/)。
+有关设置 Azure Active Directory 应用程序和服务主体的更全面说明，请参阅[使用 Azure 资源管理器对服务主体进行身份验证](./azure-resource-manager/resource-group-authenticate-service-principal.md)。
 
 ###向资源的用户授予“所有者”权限。
 1. 在运行 **Get-AzureRmRoleDefinition** 命令时提供角色名称，以查看相应的“所有者”角色定义。检查允许的操作是否为你想要分配的操作。
@@ -129,7 +124,6 @@
 
         PS C:\> New-AzureRmRoleAssignment -UserPrincipalName "someone@example.com" -ResourceGroupName {groupName} -ResourceType "Microsoft.Web/sites" -ResourceName "mysite" -RoleDefinitionName Owner
 
-
 ###列出资源组的审核日志。
 若要获取资源组的审核日志，请运行 **Get AzureRmLog** 命令（对于 Azure PowerShell 1.0 预览版之前的版本，运行 **Get-AzureResourceGroupLog**）。
 
@@ -137,7 +131,7 @@
 
 ## 如何使用适用于 Mac、Linux 和 Windows 的 Azure CLI
 
-如果你未安装适用于 Mac、Linux 和 Windows 的 Azure CLI，或者没有配置要与 Azure CLI 配合使用的组织帐户，请参阅[安装和配置 Azure CLI](/documentation/articles/xplat-cli-install/)。
+如果你未安装适用于 Mac、Linux 和 Windows 的 Azure CLI，或者没有配置要与 Azure CLI 配合使用的组织帐户，请参阅[安装和配置 Azure CLI](./xplat-cli-install.md)。
 
 1. 使用你的凭据登录到 Azure 帐户。该命令将返回登录的结果。
 
@@ -153,7 +147,7 @@
 3. 切换到 Azure 资源管理器模块。你将收到新模式确认。
 
         azure config mode arm
-        
+
         info:     New mode is arm
 
 ### 查看可用角色
@@ -165,7 +159,7 @@
 1. 获取“读取者”角色的角色定义。检查允许的操作是否为你想要分配的操作。
 
         azure role show Reader
-        
+
         info:    Executing command role show
         + Getting role definitions
         data:    Name    Actions  NotActions
@@ -176,7 +170,7 @@
 2. 通过根据名称搜索组，获取所需的安全组及其 objectId。以下示例显示了 ExampleAuditorGroup。
 
         azure ad group show --search ExampleAuditorGroup
-        
+
         info:    Executing command ad group show
         + Getting group list
         data:    Display Name:      ExampleAuditorGroup
@@ -189,12 +183,11 @@
 3. 为安全组创建角色分配。
 
         azure role assignment create --objectId {group-object-id} -o Reader -c /subscriptions/{subscriptionId}/
-        
+
         info:    Executing command role assignment create
         + Getting role definition id
         + Creating role assignment
         info:    role assignment create command OK
-
 
 ### 向资源组的应用程序授予“参与者”权限。
 1. 获取“参与者”角色的角色定义。检查允许的操作是否为你想要分配的操作。
@@ -209,7 +202,6 @@
 
         azure role assignment create --ObjectId {service-principal-object-id} -o Contributor -c /subscriptions/{subscriptionId}/
 
-
 ###向特定 Web 应用的用户授予“所有者”权限。
 1. 获取“所有者”角色的角色定义。检查允许的操作是否为你想要分配的操作。
 
@@ -219,16 +211,14 @@
 
         azure role assignment create --mail "someone@example.com" -o Owner -c /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Web/sites/{mySiteName}
 
-
 ###列出资源组的审核日志。
 若要获取资源组的审核日志，请运行 **azure group log show** 命令，并提供所需资源组的名称。
 
          azure group log show ExampleGroupName
 
-
 ## 如何使用 REST API
 若要通过 Azure 资源管理器 REST API 管理基于角色的访问控制，必须在发送请求时设置常见标头和参数（包括身份验证令牌）。有关信息，请参阅[常见参数和标头](https://msdn.microsoft.com/zh-cn/library/azure/dn906885.aspx)。
-   
+
 若要发现支持的 api 版本，请运行：
 
       GET https://management.chinacloudapi.cn/providers/Microsoft.Authorization?api-version=2015-01-01
@@ -251,17 +241,13 @@
        }
     }
 
-
 ###删除角色分配
 
       Delete  https://management.chinacloudapi.cn/subscriptions/{subscription-id}/providers/Microsoft.Authorization/roleAssignments/{role-assignment-id}?api-version=2014-10-01-preview
 
-
 ## 后续步骤
 
-- 若要了解有关使用服务主体管理订阅中的应用程序的访问权限的详细信息，请参阅[通过 Azure 资源管理器对服务主体进行身份验证](/documentation/articles/resource-group-authenticate-service-principal/)和[使用 Azure 经典管理门户创建新的 Azure 服务主体](/documentation/articles/resource-group-create-service-principal-portal/)。
-- 若要了解有关组织中的审核操作的详细信息，请参阅[使用资源管理器执行审核操作](/documentation/articles/resource-group-audit/)。
-
- 
+- 若要了解有关使用服务主体管理订阅中的应用程序的访问权限的详细信息，请参阅[通过 Azure 资源管理器对服务主体进行身份验证](./azure-resource-manager/resource-group-authenticate-service-principal.md)和[使用 Azure 经典管理门户创建新的 Azure 服务主体](./azure-resource-manager/resource-group-create-service-principal-portal.md)。
+- 若要了解有关组织中的审核操作的详细信息，请参阅[使用资源管理器执行审核操作](./azure-resource-manager/resource-group-audit.md)。
 
 <!---HONumber=Mooncake_1207_2015-->

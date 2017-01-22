@@ -1,18 +1,16 @@
-<properties 
-	pageTitle="Azure 云服务 - 服务定义和服务配置 - XML 证书" 
-	description="了解如何在服务定义和服务配置文件中配置证书。" 
-	services="cloud-services" 
-	documentationCenter=".net" 
-	authors="Thraka" 
-	manager="timlt" 
-	editor=""/>
+---
+title: Azure 云服务 - 服务定义和服务配置 - XML 证书
+description: 了解如何在服务定义和服务配置文件中配置证书。
+services: cloud-services
+documentationCenter: .net
+authors: Thraka
+manager: timlt
+editor: 
 
-<tags 
-	ms.service="cloud-services" 
-	ms.date="07/24/2015"
-	wacn.date="10/03/2015"/>
-
-
+ms.service: cloud-services
+ms.date: 07/24/2015
+wacn.date: 10/03/2015
+---
 
 # 配置证书的服务定义和配置
 

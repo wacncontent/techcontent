@@ -1,21 +1,21 @@
-<properties
-   pageTitle="泛型 LDAP 连接器 | Azure"
-   description="本文介绍如何配置 Microsoft 的泛型 LDAP 连接器。"
-   services="active-directory"
-   documentationCenter=""
-   authors="AndKjell"
-   manager="stevenpo"
-   editor=""/>
+---
+title: 泛型 LDAP 连接器 | Azure
+description: 本文介绍如何配置 Microsoft 的泛型 LDAP 连接器。
+services: active-directory
+documentationCenter: 
+authors: AndKjell
+manager: stevenpo
+editor: 
 
-<tags
-   ms.service="active-directory"
-   ms.workload="identity"
-   ms.tgt_pltfrm="na"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.date="08/30/2016"
-   wacn.date="10/11/2016"
-   ms.author="billmath"/>
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/30/2016
+wacn.date: 10/11/2016
+ms.author: billmath
+---
 
 # 泛型 LDAP 连接器技术参考
 本指南介绍泛型 LDAP 连接器。本文适用于以下产品：
@@ -258,6 +258,6 @@ Open LDAP 中的增量水印是 UTC 日期/时间。出于此原因，FIM 同步
 
 ## 故障排除
 
--	有关如何启用记录来排查连接器问题的信息，请参阅[如何启用连接器的 ETW 跟踪](http://go.microsoft.com/fwlink/?LinkId=335731)。
+- 有关如何启用记录来排查连接器问题的信息，请参阅[如何启用连接器的 ETW 跟踪](http://go.microsoft.com/fwlink/?LinkId=335731)。
 
 <!---HONumber=Mooncake_0926_2016-->

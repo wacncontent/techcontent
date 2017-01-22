@@ -28,7 +28,8 @@
 
     ![][14]
 
-    > [AZURE.NOTE] 命令历史记录一开始将命令状态显示为“挂起”。设备确认命令后，状态将更改为“成功”。
+    > [!NOTE]
+    > 命令历史记录一开始将命令状态显示为“挂起”。设备确认命令后，状态将更改为“成功”。
 
 5. 在仪表板上检查该设备现在是否发送 75 作为新的温度值。
 
@@ -40,7 +41,7 @@
 [14]: ./media/iot-suite-visualize-connecting/suite7-1.png
 [18]: ./media/iot-suite-visualize-connecting/suite10.png
 [img-telemetry]: ./media/iot-suite-visualize-connecting/telemetry.png
-[lnk-customize]: /documentation/articles/iot-suite-guidance-on-customizing-preconfigured-solutions/
-[lnk-dev-messaging]: /documentation/articles/iot-hub-devguide/#messaging
+[lnk-customize]: ../articles/iot-suite/iot-suite-guidance-on-customizing-preconfigured-solutions.md
+[lnk-dev-messaging]: ../articles/iot-hub/iot-hub-devguide.md#messaging
 
 <!---HONumber=Mooncake_0523_2016-->

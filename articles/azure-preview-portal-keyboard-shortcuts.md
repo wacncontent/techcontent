@@ -1,16 +1,16 @@
-<properties
-   pageTitle="Azure 经典管理门户快捷键 | Azure"
-   description="本文始终列出可在整个 Azure 经典管理门户中使用的最新快捷键。单个服务可能有其自身的专用快捷键。"
-   services="cloud-services"
-   documentationCenter=""
-   authors="curtand"
-   manager="stevenpo"
-   editor=""/>
+---
+title: Azure 经典管理门户快捷键 | Azure
+description: 本文始终列出可在整个 Azure 经典管理门户中使用的最新快捷键。单个服务可能有其自身的专用快捷键。
+services: cloud-services
+documentationCenter: 
+authors: curtand
+manager: stevenpo
+editor: 
 
-<tags
-   ms.service="multiple"
-   ms.date="12/01/2015"
-   wacn.date="03/18/2016"/>
+ms.service: multiple
+ms.date: 12/01/2015
+wacn.date: 03/18/2016
+---
 
 # Azure 经典管理门户快捷键
 
@@ -40,7 +40,6 @@
 | , | 将焦点移到命令栏 |
 | . | 将焦点移到导航栏 |
 | ? | 查看快捷键 |
-
 
 ## 后续步骤
 

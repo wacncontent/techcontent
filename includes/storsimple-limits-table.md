@@ -1,15 +1,16 @@
-<properties 
-   pageTitle="StorSimple 系统限制表"
-   description="介绍 StorSimple 组件和连接的系统限制与建议大小。"
-   services="storsimple"
-   documentationCenter="NA"
-   authors="alkohli"
-   manager="adinah"
-   editor="" />
-<tags 
-   ms.service="storsimple"
-   ms.date="08/18/2015"
-   wacn.date="10/3/2015" />
+---
+title: StorSimple 系统限制表
+description: 介绍 StorSimple 组件和连接的系统限制与建议大小。
+services: storsimple
+documentationCenter: NA
+authors: alkohli
+manager: adinah
+editor: 
+
+ms.service: storsimple
+ms.date: 08/18/2015
+wacn.date: 10/3/2015
+---
 
 | 限制标识符 | 限制 | 注释 |
 |----------------- | ------|--------- |
