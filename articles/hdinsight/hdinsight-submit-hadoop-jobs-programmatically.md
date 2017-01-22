@@ -22,7 +22,8 @@ ms.author: jgao
 
 学习如何使用 Azure PowerShell 提交 MapReduce 和 Hive 作业，以及如何使用 HDInsight .NET SDK 提交 MapReduce、Hadoop 流式处理和 Hive 作业。
 
-> [!NOTE] 这篇文章的步骤必须在 Windows 客户端使用。关于在 HDInsight 把 Linux, OS X 或者 Unix 客户端与 MapReduce, Hive 或者 Pig 一起使用，请查看以下文章，并选择 “Curl” 链接。
+> [!NOTE]
+> 这篇文章的步骤必须在 Windows 客户端使用。关于在 HDInsight 把 Linux, OS X 或者 Unix 客户端与 MapReduce, Hive 或者 Pig 一起使用，请查看以下文章，并选择 “Curl” 链接。
 ><p> - [在 HDInsight 使用 Hive](./hdinsight-use-hive.md)
 ><p> - [在 HDInsight 使用 Pig](./hdinsight-use-pig.md)
 ><p> - [在 HDInsight 使用 MapReduce](./hdinsight-use-mapreduce.md)

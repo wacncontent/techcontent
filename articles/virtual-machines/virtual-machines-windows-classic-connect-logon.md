@@ -40,7 +40,8 @@ ms.author: cynthn
 
     ![登录到虚拟机](./media/virtual-machines-windows-classic-connect-logon/connectwindows.png)
 
-> [!TIP] 如果“连接”按钮不可用，请参阅本文末尾的故障排除提示。
+> [!TIP]
+> 如果“连接”按钮不可用，请参阅本文末尾的故障排除提示。
 
 ## 登录到虚拟机
 

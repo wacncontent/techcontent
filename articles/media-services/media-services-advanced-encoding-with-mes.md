@@ -55,7 +55,8 @@ ms.author: juliako
 
 本部分说明如何自定义生成缩略图的预设。下面定义的预设包含有关如何将文件编码的信息，以及生成缩略图时所需的信息。可使用[此部分](./media-services-mes-presets-overview.md)所述的任何 MES 预设，并添加生成缩略图的代码。
 
->[!NOTE]如果要编码为单比特率视频，以下预设中的 **SceneChangeDetection** 设置只能设置为 true。如果要编码为多比特率视频并将 **SceneChangeDetection** 设置为 true，则编码器将返回错误。
+>[!NOTE]
+>如果要编码为单比特率视频，以下预设中的 **SceneChangeDetection** 设置只能设置为 true。如果要编码为多比特率视频并将 **SceneChangeDetection** 设置为 true，则编码器将返回错误。
 
 有关架构的信息，请参阅[此主题](./media-services-mes-schema.md)。
 
@@ -924,7 +925,8 @@ Media Encoder Standard 允许在现有视频上覆盖图像。目前支持以下
 
 默认情况下，如果要向编码器发送仅包含音频而不包含视频的输入，则输出资产将包含仅有音频数据的文件。某些播放器（包括 Azure 媒体播放器）（请参阅[此处](https://feedback.azure.com/forums/169396-azure-media-services/suggestions/8082468-audio-only-scenarios)）可能无法处理这样的流。对于这种方案，可使用此设置来强制编码器将单色视频轨迹添加到输出。
 
->[!NOTE]强制编码器插入输出视频轨迹会增加输出资产的大小，从而增加编码任务的相关成本。应运行测试来验证此成本增加对每月费用的影响不大。
+>[!NOTE]
+>强制编码器插入输出视频轨迹会增加输出资产的大小，从而增加编码任务的相关成本。应运行测试来验证此成本增加对每月费用的影响不大。
 
 ### 仅以最低比特率插入视频
 

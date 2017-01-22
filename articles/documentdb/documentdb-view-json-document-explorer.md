@@ -48,7 +48,8 @@ ms.author: kirillg
 
     ![文档资源管理器“保存”命令的屏幕截图](./media/documentdb-view-JSON-document-explorer/savedocument1.png)  
 
-    > [!NOTE] 如果你不提供“id”属性，文档资源管理器将自动添加 id 属性并生成一个 GUID 作为 id 值。
+    > [!NOTE]
+    > 如果你不提供“id”属性，文档资源管理器将自动添加 id 属性并生成一个 GUID 作为 id 值。
 
     如果已有来自 JSON 文件、MongoDB、SQL Server、CSV 文件、Azure 表存储、Amazon DynamoDB、HBase 或其他 DocumentDB 集合的数据，你可以使用 DocumentDB 的[数据迁移工具](./documentdb-import-data.md)快速导入数据。
 
@@ -86,7 +87,8 @@ ms.author: kirillg
 
 ![文档资源管理器文档属性视图的屏幕截图](./media/documentdb-view-JSON-document-explorer/documentproperties.png)  
 
-> [!NOTE] 时间戳 (\_ts) 属性在内部表示为新纪元时间，但文档资源管理器以方便阅读的 GMT 格式显示该值。
+> [!NOTE]
+> 时间戳 (\_ts) 属性在内部表示为新纪元时间，但文档资源管理器以方便阅读的 GMT 格式显示该值。
 
 ## 筛选文档
 文档资源管理器还支持多种导航选项和高级设置。
@@ -115,7 +117,8 @@ ms.author: kirillg
 
     ![文档资源管理器的屏幕截图，其中包含了筛选结果](./media/documentdb-view-JSON-document-explorer/documentexplorerfilterresults.png)
 
-    > [!IMPORTANT] 文档资源管理器的筛选器功能仅从***当前***加载的文档集中进行筛选，而并不对当前所选集合执行查询。
+    > [!IMPORTANT]
+    > 文档资源管理器的筛选器功能仅从***当前***加载的文档集中进行筛选，而并不对当前所选集合执行查询。
 
 4. 若要刷新由文档资源管理器加载的文档列表，请单击边栏选项卡顶部的“刷新”。
 
@@ -137,7 +140,8 @@ ms.author: kirillg
 
     ![文档资源管理器批量引入过程的屏幕截图](./media/documentdb-view-JSON-document-explorer/uploaddocument2.png)  
 
-    > [!NOTE] 文档资源管理器当前仅支持每个单独上传操作最多上传 100 个 JSON 文档。
+    > [!NOTE]
+    > 文档资源管理器当前仅支持每个单独上传操作最多上传 100 个 JSON 文档。
 
 3. 选好之后，单击“上载”按钮。这些文档将自动添加到“文档资源管理器”网格，上传结果显示为操作进度。导入失败将报告为单独的文件。
 

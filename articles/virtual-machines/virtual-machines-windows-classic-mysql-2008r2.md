@@ -42,7 +42,8 @@ ms.author: cynthn
 
 按照下列步骤操作可安装、配置和运行社区版 MySQL Server：
 
-> [!NOTE]这些步骤适用于 5.6.23.0 社区版 MySQL 和 Windows Server 2012 R2。不同版本的 MySQL 或 Windows Server 给你带来的体验可能有所不同。
+> [!NOTE]
+>这些步骤适用于 5.6.23.0 社区版 MySQL 和 Windows Server 2012 R2。不同版本的 MySQL 或 Windows Server 给你带来的体验可能有所不同。
 
 1. 使用远程桌面连接到该虚拟机后，从“开始”菜单单击“Internet Explorer”。
 2. 选择右上角的“工具”按钮（齿轮图标），然后单击“Internet 选项”。依次单击“安全”选项卡、“受信任的站点”图标、“站点”按钮。将 http://*.mysql.com 添加到受信任站点列表中。单击“关闭”，然后单击“确定”。
@@ -83,7 +84,8 @@ ms.author: cynthn
 
 如果你希望 MySQL Server 服务可供 Internet 上的 MySQL 客户端计算机使用，则必须为 MySQL Server 服务所侦听的 TCP 端口配置一个终结点，并创建更多 Windows 防火墙规则。该端口为 TCP 端口 3306，除非你在“类型和网络”页上指定了其他端口（前一过程的步骤 10）。
 
-> [!NOTE]你应该仔细考虑这样做的安全隐患，因为这会使 MySQL Server 服务可供 Internet 上的所有计算机使用。你可以通过访问控制列表 (ACL) 定义一组允许使用终结点的源 IP 地址。有关详细信息，请参阅[如何对虚拟机设置终结点](./virtual-machines-windows-classic-setup-endpoints.md)。
+> [!NOTE]
+>你应该仔细考虑这样做的安全隐患，因为这会使 MySQL Server 服务可供 Internet 上的所有计算机使用。你可以通过访问控制列表 (ACL) 定义一组允许使用终结点的源 IP 地址。有关详细信息，请参阅[如何对虚拟机设置终结点](./virtual-machines-windows-classic-setup-endpoints.md)。
 
 若要配置 MySQL Server 服务终结点，请执行以下操作：
 

@@ -83,7 +83,8 @@ Service Fabric 运行时会使用 ETW 来获取诊断信息（跟踪）。它也
 |`<azure-region>`  |应该创建弹性搜索群集的 Azure 区域的名称。|         
 |`<es-password>`   |弹性搜索用户的密码。|
 
->[!NOTE] 如果从 Test-AzureResourceGroup cmdlet 收到 NullReferenceException，表示你忘记登录到 Azure (`Add-AzureRmAccount`)。
+>[!NOTE]
+> 如果从 Test-AzureResourceGroup cmdlet 收到 NullReferenceException，表示你忘记登录到 Azure (`Add-AzureRmAccount`)。
 
 如果运行脚本时发生错误，而且你确定错误起因于错误的模板参数值，请更正参数文件，然后以不同资源组名再次运行脚本。你也可以将 `-RemoveExistingResourceGroup` 参数添加到脚本调用，以重复使用相同的资源组名，并让脚本清理旧的资源组。
 

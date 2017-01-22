@@ -35,7 +35,8 @@ ms.author: carlrab
 
 根据是要开始新的开发工作，还是升级现有的应用程序，可以创建临时表，或者通过添加临时属性来修改现有表。一般情况下，用户方案可能混用了这两个选项。使用 [SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx) (SSMS)、[SQL Server Data Tools](https://msdn.microsoft.com/zh-cn/library/mt204009.aspx) (SSDT) 或其他任何 Transact-SQL 开发工具执行以下操作。
 
-> [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+> [!IMPORTANT]
+> 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ###创建新表
 

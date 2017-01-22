@@ -150,7 +150,8 @@ Windows 版本的 **iothub\_client\_sample\_ampq** 应用程序包含以下 Visu
 
 ### 初始化库
 
-> [!NOTE] 在开始使用库之前，你可能需要执行一些特定于平台的初始化。例如，如果你打算在 Linux 上使用 AMQPS，则必须初始化 OpenSSL 库。[GitHub 存储库](https://github.com/Azure/azure-iot-sdks)中的示例将在客户端启动时调用实用工具函数 **platform\_init**，并在退出之前调用 **platform\_deinit** 函数。这些函数在“platform.h”标头文件中声明。你应该在[存储库](https://github.com/Azure/azure-iot-sdks)中为目标平台检查这些函数定义，以确定是否需要在客户端中包含任何平台初始化代码。
+> [!NOTE]
+> 在开始使用库之前，你可能需要执行一些特定于平台的初始化。例如，如果你打算在 Linux 上使用 AMQPS，则必须初始化 OpenSSL 库。[GitHub 存储库](https://github.com/Azure/azure-iot-sdks)中的示例将在客户端启动时调用实用工具函数 **platform\_init**，并在退出之前调用 **platform\_deinit** 函数。这些函数在“platform.h”标头文件中声明。你应该在[存储库](https://github.com/Azure/azure-iot-sdks)中为目标平台检查这些函数定义，以确定是否需要在客户端中包含任何平台初始化代码。
 
 只有在分配 IoT 中心客户端句柄之后，才可以开始使用库：
 

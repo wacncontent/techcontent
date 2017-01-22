@@ -33,7 +33,8 @@ Azure 经典管理门户使用远程桌面扩展方法，即使在部署应用�
 
     ![云服务远程](./media/cloud-services-role-enable-remote-desktop/CloudServices_Remote.png)  
 
-    > [!WARNING] 首次启用远程桌面并单击“确定”（复选标记）时，所有角色实例会重新启动。为避免重新启动，必须在角色上安装用于对密码进行加密的证书。若要避免重新启动，请[上载云服务的证书](./cloud-services-configure-ssl-certificate.md#step-3-upload-a-certificate)，然后返回到此对话框。
+    > [!WARNING]
+    > 首次启用远程桌面并单击“确定”（复选标记）时，所有角色实例会重新启动。为避免重新启动，必须在角色上安装用于对密码进行加密的证书。若要避免重新启动，请[上载云服务的证书](./cloud-services-configure-ssl-certificate.md#step-3-upload-a-certificate)，然后返回到此对话框。
 
 3. 在“角色”中，选择要更新的角色，或选择“全部”以选择所有角色。
 

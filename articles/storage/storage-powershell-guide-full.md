@@ -131,7 +131,8 @@ Azure PowerShell 是一个模块，提供用于通过 Windows PowerShell 管理 
 
 ![下载 Blob](./media/storage-powershell-guide-full/Blobdownload.png)
 
-> [!NOTE] “在 5 分钟内开始使用 Azure 存储和 PowerShell”部分提供了有关如何对 Azure 存储使用 Azure PowerShell 的简介。有关详细信息和说明，建议阅读以下部分。
+> [!NOTE]
+> “在 5 分钟内开始使用 Azure 存储和 PowerShell”部分提供了有关如何对 Azure 存储使用 Azure PowerShell 的简介。有关详细信息和说明，建议阅读以下部分。
 
 ##<a id="prerequisites-for-using-azure-powershell-with-azure-storage"></a> 对 Azure 存储使用 Azure PowerShell 的先决条件
 如上所述，需要一个 Azure 订阅和帐户来运行本指南中指定的 PowerShell cmdlet。
@@ -187,7 +188,8 @@ Azure PowerShell 是一个模块，提供用于通过 Windows PowerShell 管理 
         $StorageAccountName = "yourstorageaccount"
         New-AzureStorageAccount –StorageAccountName $StorageAccountName -Location $location
 
-> [!IMPORTANT] 存储帐户的名称在 Azure 中是唯一的，并且必须采用小写。有关命名约定和限制，请参阅[关于 Azure 存储帐户](./storage-create-storage-account.md)、[命名和引用容器、Blob 和元数据](http://msdn.microsoft.com/zh-cn/library/azure/dd135715.aspx)。
+> [!IMPORTANT]
+> 存储帐户的名称在 Azure 中是唯一的，并且必须采用小写。有关命名约定和限制，请参阅[关于 Azure 存储帐户](./storage-create-storage-account.md)、[命名和引用容器、Blob 和元数据](http://msdn.microsoft.com/zh-cn/library/azure/dd135715.aspx)。
 
 ### 如何设置默认的 Azure 存储帐户
 可以在订阅中设置多个存储帐户。可以选择其中的一个存储帐户，并将其设置为同一个 PowerShell 会话中所有存储命令的默认存储帐户。这样，便可以在不显式指定存储上下文的情况下运行 Azure PowerShell 存储命令。
@@ -263,7 +265,8 @@ Azure 存储中的每个 Blob 都必须在容器中。可以使用 New-AzureStor
     $StorageContainerName = "yourcontainername"
     New-AzureStorageContainer -Name $StorageContainerName -Permission Off
 
-> [!NOTE] 有三种级别的匿名读取访问权限：**Off**、**Blob** 和 **Container**。若要防止对 Blob 进行匿名访问，请将 Permission 参数设置为 **Off**。默认情况下，新容器是专用容器，只能由帐户所有者访问。若要允许对 Blob 资源进行匿名公共读取访问，但不允许访问容器元数据或容器中的 Blob 列表，请将 Permission 参数设置为 **Blob**。若要允许对 Blob 资源、容器元数据和容器中的 Blob 列表进行完全公开读取访问，请将 Permission 参数设置为 **Container**。有关详细信息，请参阅[管理对容器和 Blob 的匿名读取访问](./storage-manage-access-to-resources.md)。
+> [!NOTE]
+> 有三种级别的匿名读取访问权限：**Off**、**Blob** 和 **Container**。若要防止对 Blob 进行匿名访问，请将 Permission 参数设置为 **Off**。默认情况下，新容器是专用容器，只能由帐户所有者访问。若要允许对 Blob 资源进行匿名公共读取访问，但不允许访问容器元数据或容器中的 Blob 列表，请将 Permission 参数设置为 **Blob**。若要允许对 Blob 资源、容器元数据和容器中的 Blob 列表进行完全公开读取访问，请将 Permission 参数设置为 **Container**。有关详细信息，请参阅[管理对容器和 Blob 的匿名读取访问](./storage-manage-access-to-resources.md)。
 
 ### 如何将 Blob 上传到容器
 Azure Blob 存储支持块 Blob 和页 Blob。有关详细信息，请参阅[了解块 Blob、追加 Blob 和页 Blob](http://msdn.microsoft.com/zh-cn/library/azure/ee691964.aspx)。

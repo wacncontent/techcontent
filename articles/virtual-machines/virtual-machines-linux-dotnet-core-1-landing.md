@@ -26,7 +26,8 @@ ms.author: nepeters
 
 本系列教程中使用的示例是一个模拟音乐应用商店购物体验的 .Net Core 应用程序。此应用程序可以部署到 Linux 或 Windows 虚拟系统，针对这两者都已创建示例部署。该应用程序包含一个 Web 应用程序和一个 SQL 数据库。开始阅读本系列教程的文章之前，请先使用此页面上的“部署”按钮来部署应用程序。完整部署后，应用程序/Azure 体系结构将如下图所示。
 
->[!NOTE] 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 可以在[音乐应用商店 Linux 模板](https://github.com/neilpeterson/nepeters-azure-templates/tree/master/dotnet-core-music-linux-vm-sql-db)中找到音乐应用商店 Resource Manager 模板
 
@@ -52,7 +53,8 @@ ms.author: nepeters
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 
->[!NOTE] 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 Azure Resource Manager 模板需要以下参数值。
 

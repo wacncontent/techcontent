@@ -61,7 +61,8 @@ Reliable Collections 将在事务创建时根据副本的操作和角色，为�
 | 单个实体读取 |可重复的读取 |快照 |
 | 枚举\\计数 |快照 |快照 |
 
->[!NOTE] 单个实体操作的常见示例为 `IReliableDictionary.TryGetValueAsync`、`IReliableQueue.TryPeekAsync`。
+>[!NOTE]
+> 单个实体操作的常见示例为 `IReliableDictionary.TryGetValueAsync`、`IReliableQueue.TryPeekAsync`。
 
 Reliable Dictionary 和 Reliable Queue 都支持“读取你的写入”。换而言之，事务中的任何写入都将对属于同一事务的后续读取可见。
 
@@ -91,7 +92,8 @@ Reliable Dictionary 对所有单个实体操作使用行级别锁定。Reliable 
 
 现在让我们看一下有限磁盘方案。随着日志记录的累积，可靠状态管理器将耗尽磁盘空间。在这种情况出现之前，可靠状态管理器需截断其日志，以便为较新的记录腾出空间。它将请求可靠集合在磁盘中添加其内存中状态的检查点。Reliable Collections 负责保存到该点为止的状态。在 Reliable Collections 完成其检查点后，可靠状态管理器便可以截断日志以释放磁盘空间。这样一来，当副本需要重新启动时，Reliable Collections 将恢复其检查点状态，而可靠状态管理器将恢复并播放自该检查点以来发生的所有状态更改。
 
->[!NOTE] 检查点的另一增值优点在于它可提高常见情况下的恢复性能。这是因为检查点仅包含最新版本。
+>[!NOTE]
+> 检查点的另一增值优点在于它可提高常见情况下的恢复性能。这是因为检查点仅包含最新版本。
 
 ## 建议
 

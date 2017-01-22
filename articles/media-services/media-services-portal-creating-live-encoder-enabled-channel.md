@@ -27,12 +27,14 @@ ms.author: juliako
 
 本教程介绍了创建**频道**的步骤，该频道接收单比特率实时流，并将其编码为多比特率流。
 
->[!NOTE]有关为实时编码启用的通道的更多相关概念信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
+>[!NOTE]
+>有关为实时编码启用的通道的更多相关概念信息，请参阅[使用 Azure 媒体服务执行实时流式处理以创建多比特率流](./media-services-manage-live-encoder-enabled-channels.md)。
 
 ## 常见的实时流方案
 以下是创建常见的实时流应用程序时涉及的常规步骤。
 
->[!NOTE] 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的频道，请通过 Azure.cn 联系 amslived。
+>[!NOTE]
+> 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的频道，请通过 Azure.cn 联系 amslived。
 
 1. 将视频摄像机连接到计算机。启动并配置可以通过以下协议之一输出单比特率流的本地实时编码器：RTMP、平滑流式处理或 RTP (MPEG-TS)。有关详细信息，请参阅 [Azure 媒体服务 RTMP 支持和实时编码器](https://azure.microsoft.com/zh-cn/blog/azure-media-services-rtmp-support-and-live-encoders/)。
 
@@ -95,7 +97,8 @@ ms.author: juliako
 
     分配所有新的单元大约需要 20 分钟才能完成。
 
-    >[!NOTE] 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
+    >[!NOTE]
+    > 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
     >
     > 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅[媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
 
@@ -137,7 +140,8 @@ ms.author: juliako
 
 ![standard4][standard4]
 
->[!NOTE] 目前，通道启动可能最多需要 30 分钟。频道重置可能最多需要 5 分钟。
+>[!NOTE]
+> 目前，通道启动可能最多需要 30 分钟。频道重置可能最多需要 5 分钟。
 
 创建频道后，可以选择**“编码器”**选项卡，从中可以查看频道配置。此外，还可以管理广告和清单。
 

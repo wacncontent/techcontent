@@ -27,7 +27,8 @@ ms.author: glenga
 
 本教程基于移动服务快速入门。此外，还必须先完成[移动服务入门]或[将移动服务添加到现有应用程序](./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-data.md)教程。
 
->[!NOTE]本教程演示了如何对 Windows 应用商店和 Windows Phone 应用商店 8.1 应用中的用户使用服务器导向的身份验证。
+>[!NOTE]
+>本教程演示了如何对 Windows 应用商店和 Windows Phone 应用商店 8.1 应用中的用户使用服务器导向的身份验证。
 
 ##<a name="register"></a>注册应用程序以进行身份验证并配置移动服务
 
@@ -43,7 +44,8 @@ ms.author: glenga
 
 &nbsp;&nbsp;7.在共享的项目中，打开 App.xaml.cs 项目文件，找到 [MobileServiceClient](http://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mobileservices.mobileserviceclient.aspx) 的定义，并确保它已配置为连接到 Azure 中运行的移动服务。
 
->[!NOTE]当你使用 Visual Studio 工具将应用程序连接到移动服务时，该工具将生成两组 **MobileServiceClient** 定义，每个客户端平台一组。这是简化生成的代码的好时机，你可以通过将 `#if...#endif` 包装的 **MobileServiceClient** 定义统一为单个解包的定义供这两个版本的应用程序使用来简化生成的代码。从 [Azure 管理门户]下载快速入门应用时无需执行此操作。
+>[!NOTE]
+>当你使用 Visual Studio 工具将应用程序连接到移动服务时，该工具将生成两组 **MobileServiceClient** 定义，每个客户端平台一组。这是简化生成的代码的好时机，你可以通过将 `#if...#endif` 包装的 **MobileServiceClient** 定义统一为单个解包的定义供这两个版本的应用程序使用来简化生成的代码。从 [Azure 管理门户]下载快速入门应用时无需执行此操作。
 
 &nbsp;&nbsp;8.按 F5 键运行该 Windows 应用商店应用程序；验证启动该应用程序后，是否会引发状态代码为 401（“未授权”）的未处理异常。
 
@@ -55,13 +57,15 @@ ms.author: glenga
 
 [!INCLUDE [mobile-windows-universal-dotnet-authenticate-app](../../includes/mobile-windows-universal-dotnet-authenticate-app.md)]
 
->[!NOTE]如果已将 Windows 应用商店应用程序包信息注册到移动服务，则应该为 *useSingleSignOn* 参数提供 **true** 值以调用 <a href="http://go.microsoft.com/fwlink/p/?LinkId=311594" target="_blank">LoginAsync</a> 方法。如果不这样做，你的用户将继续显示登录提示每次调用 login 方法。
+>[!NOTE]
+>如果已将 Windows 应用商店应用程序包信息注册到移动服务，则应该为 *useSingleSignOn* 参数提供 **true** 值以调用 <a href="http://go.microsoft.com/fwlink/p/?LinkId=311594" target="_blank">LoginAsync</a> 方法。如果不这样做，你的用户将继续显示登录提示每次调用 login 方法。
 
 ##<a name="tokens"></a>在客户端上存储授权令牌
 
 先前示例显示标准登录，这要求在此应用每次启动时客户端同时联系标识提供商和移动服务。此方法不仅效率低下，而且如果很多客户尝试同时启动你的应用程序，你会遇到关于使用率的问题。更好的方法是缓存移动服务返回的授权令牌，然后在使用基于提供商的登录之前首先尝试使用此令牌。
 
->[!NOTE]无论你使用客户端管理的还是服务管理的身份验证，都可以缓存由移动服务颁发的令牌。本教程使用服务管理的身份验证。
+>[!NOTE]
+>无论你使用客户端管理的还是服务管理的身份验证，都可以缓存由移动服务颁发的令牌。本教程使用服务管理的身份验证。
 
 [!INCLUDE [mobile-windows-universal-dotnet-authenticate-app-with-token](../../includes/mobile-windows-universal-dotnet-authenticate-app-with-token.md)]
 

@@ -113,7 +113,8 @@ ms.author: cephalin
 
 请注意，`type` 元素指定应用服务计划（很久很久以前它被称为服务器场）的字符串，而其他元素和属性使用 JSON 文件中定义的参数填写，并且此资源不具有任何嵌套的资源。
 
->[!NOTE] 另请注意，`apiVersion` 的值会告知 Azure 哪个版本的 REST API 将与 JSON 资源定义一起使用，并且会影响资源在 `{}` 内应采用的格式化方式。
+>[!NOTE]
+> 另请注意，`apiVersion` 的值会告知 Azure 哪个版本的 REST API 将与 JSON 资源定义一起使用，并且会影响资源在 `{}` 内应采用的格式化方式。
 
 #### SQL Server ####
 
@@ -127,7 +128,8 @@ ms.author: cephalin
 - SQLServer 资源具有两个嵌套的资源，而每个具有不同的 `type` 值。
 - `"resources": […]` 内（其中定义了数据库和防火墙规则）的嵌套资源具有 `dependsOn` 元素，后者指定根级别 SQLServer 资源的资源 ID。这将告知 Azure Resource Manager：“创建此资源之前，另一个资源必须已经存在；如果在模板中定义另一个资源，则先创建一个。”
 
-    >[!NOTE] 有关如何使用 `resourceId()` 函数的详细信息，请参阅 [Azure 资源管理器模板函数](../azure-resource-manager/resource-group-template-functions.md)。
+    >[!NOTE]
+    > 有关如何使用 `resourceId()` 函数的详细信息，请参阅 [Azure 资源管理器模板函数](../azure-resource-manager/resource-group-template-functions.md)。
 
 - `dependsOn` 元素的影响在于让 Azure 资源管理器能够知道哪些资源可以并行创建，哪些资源必须按顺序创建。
 
@@ -160,7 +162,8 @@ Web 应用取决于两个不同的资源。这意味着只有在创建 App Servi
 
 在 `config/connectionstrings` 的 `properties` 元素中，每个连接字符串也定义为具有特定的 `"<name>" : {"value": "…", "type": "…"}` 格式的 name:value 对。对于 `type` 元素，可能的值为 `MySql`、`SQLServer`、`SQLAzure` 和 `Custom`。
 
->[!TIP] 若要获取连接字符串类型的最终列表，请在 Azure PowerShell 中运行以下命令：[Enum]::GetNames("Microsoft.WindowsAzure.Commands.Utilities.Websites.Services.WebEntities.DatabaseType")
+>[!TIP]
+> 若要获取连接字符串类型的最终列表，请在 Azure PowerShell 中运行以下命令：[Enum]::GetNames("Microsoft.WindowsAzure.Commands.Utilities.Websites.Services.WebEntities.DatabaseType")
 
 ##### 源代码管理 #####
 
@@ -172,7 +175,8 @@ Web 应用取决于两个不同的资源。这意味着只有在创建 App Servi
 
 请注意，在 `dependsOn` 元素中，除 Web 应用资源本身外，`sourcecontrols/web` 也取决于 `config/appsettings` 和 `config/connectionstrings`。这是因为一旦配置 `sourcecontrols/web` 后，Azure 部署进程将自动尝试部署、构建和启动应用程序代码。因此，插入此依赖项可帮助你确保在运行应用程序代码之前，应用程序有权访问所需的应用设置和连接字符串。
 
->[!NOTE] 另请注意，`IsManualIntegration` 设置为 `true`。此属性在本教程中是必需的，因为你实际上并不拥有 GitHub 存储库，因此不能实际授权 Azure 配置从 [ToDoApp](https://github.com/azure-appservice-samples/ToDoApp) 的连续发布（即将自动存储库更新推送到 Azure）。即使你拥有 GitHub 存储库，在 Azure 中国区也尚不支持设置 GitHub 凭据。
+>[!NOTE]
+> 另请注意，`IsManualIntegration` 设置为 `true`。此属性在本教程中是必需的，因为你实际上并不拥有 GitHub 存储库，因此不能实际授权 Azure 配置从 [ToDoApp](https://github.com/azure-appservice-samples/ToDoApp) 的连续发布（即将自动存储库更新推送到 Azure）。即使你拥有 GitHub 存储库，在 Azure 中国区也尚不支持设置 GitHub 凭据。
 
 ## 自己部署资源组模板 ##
 
@@ -234,7 +238,8 @@ Web 应用取决于两个不同的资源。这意味着只有在创建 App Servi
 
     ![](./media/app-service-deploy-complex-application-predictably/deploy-11-parametereditorfilled.png)  
 
-    >[!NOTE] 自动缩放是**标准**层或更高层中提供的一项功能，而计划级别警报是**基本**层或更高层中提供的功能，你需要将 **sku** 参数设置为**标准**或**高级**，使所有新 App Insights 资源亮起。
+    >[!NOTE]
+    > 自动缩放是**标准**层或更高层中提供的一项功能，而计划级别警报是**基本**层或更高层中提供的功能，你需要将 **sku** 参数设置为**标准**或**高级**，使所有新 App Insights 资源亮起。
 
 16. 单击“部署”。如果选择了“保存密码”，密码将**以纯文本格式**保存在参数文件中。否则，你将需要在部署过程中输入数据库密码。
 

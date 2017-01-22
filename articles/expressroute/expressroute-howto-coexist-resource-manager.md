@@ -30,7 +30,8 @@ ms.author: charleywen
 
 [!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
->[!IMPORTANT] 按以下说明进行操作之前，必须预先配置ExpressRoute 线路。在按以下步骤操作之前，请务必遵循相关指南来[创建 ExpressRoute 线路](./expressroute-howto-circuit-arm.md)和[配置路由](./expressroute-howto-routing-arm.md)。
+>[!IMPORTANT]
+> 按以下说明进行操作之前，必须预先配置ExpressRoute 线路。在按以下步骤操作之前，请务必遵循相关指南来[创建 ExpressRoute 线路](./expressroute-howto-circuit-arm.md)和[配置路由](./expressroute-howto-routing-arm.md)。
 
 ## 限制和局限性
 
@@ -59,7 +60,8 @@ ms.author: charleywen
 
 ![共存](./media/expressroute-howto-coexist-resource-manager/scenario2.jpg)
 
->[!NOTE] 不能将虚拟网络配置为转换路由器。
+>[!NOTE]
+> 不能将虚拟网络配置为转换路由器。
 
 ## 选择要使用的步骤
 
@@ -90,7 +92,8 @@ ms.author: charleywen
 
 3. 创建包括网关子网的虚拟网络。有关虚拟网络配置的详细信息，请参阅 [Azure 虚拟网络配置](../virtual-network/virtual-networks-create-vnet-arm-ps.md)。
 
-    >[!IMPORTANT] 网关子网必须是 /27 或更短的前缀（例如 /26 或 /25）。
+    >[!IMPORTANT]
+    > 网关子网必须是 /27 或更短的前缀（例如 /26 或 /25）。
 
     创建新的 VNet。
 
@@ -158,7 +161,8 @@ ms.author: charleywen
 
 如果网关子网为 /27 或更大，且虚拟网络是通过 ExpressRoute 连接的，则可跳过下面的步骤，转到前一部分的[“步骤 6 - 创建站点到站点 VPN 网关”](#vpngw)。
 
->[!NOTE] 如果你删除的是现有网关，则当你进行此配置时，本地系统将失去与虚拟网络建立的连接。
+>[!NOTE]
+> 如果你删除的是现有网关，则当你进行此配置时，本地系统将失去与虚拟网络建立的连接。
 
 1. 你需要安装 Azure PowerShell cmdlet 的最新版本。有关安装 PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。请注意，针对此配置使用的 cmdlet 可能与你熟悉的 cmdlet 稍有不同。请务必使用说明内容中指定的 cmdlet。
 
@@ -172,7 +176,8 @@ ms.author: charleywen
         Remove-AzureRmVirtualNetworkSubnetConfig -Name GatewaySubnet -VirtualNetwork $vnet
 
 4. 添加为 /27 或更大的网关子网。
-    >[!NOTE] 如果你因为虚拟网络中没有剩余足够的 IP 地址而无法增加网关子网大小，则需增加 IP 地址空间。
+    >[!NOTE]
+    > 如果你因为虚拟网络中没有剩余足够的 IP 地址而无法增加网关子网大小，则需增加 IP 地址空间。
 
         $vnet = Get-AzureRmVirtualNetwork -Name <yourvnetname> -ResourceGroupName <yourresourcegroup>
         Add-AzureRmVirtualNetworkSubnetConfig -Name "GatewaySubnet" -VirtualNetwork $vnet -AddressPrefix "10.200.255.0/24"

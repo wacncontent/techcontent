@@ -36,7 +36,8 @@ ms.author: amanbha
 - 如果在一段时间内未使用执行组件，则会从“活动执行组件”表中将其删除。
 - 将调用 `OnDeactivateAsync` 方法（该方法可以在执行组件实现中被覆盖）。这将清除此执行组件的所有计时器。不可从该方法中调用诸如状态更改的执行组件操作。
 
-> [!TIP] Fabric 执行组件运行时发出一些[与执行组件激活和停用相关的事件](./service-fabric-reliable-actors-diagnostics.md#actor-activation-and-deactivation-events)。它们可用于进行诊断和性能监视。
+> [!TIP]
+> Fabric 执行组件运行时发出一些[与执行组件激活和停用相关的事件](./service-fabric-reliable-actors-diagnostics.md#actor-activation-and-deactivation-events)。它们可用于进行诊断和性能监视。
 
 ### 执行组件垃圾回收
 停用某个执行组件后，将释放对此执行组件对象的引用，并且通常使用公共语言运行时 (CLR) 垃圾回收器对其进行回收。垃圾回收只清除执行组件对象；它**不会**删除存储在执行组件的状态管理器中的状态。当下次激活此执行组件时，将创建一个新的执行组件对象，并还原其状态。
@@ -46,7 +47,8 @@ ms.author: amanbha
 - 正在接收调用
 - 正在调用的 `IRemindable.ReceiveReminderAsync` 方法（仅当执行组件使用提醒时该方法才可用）。
 
-> [!NOTE] 如果该执行组件使用计时器并且调用了其计时器回调，则**不**将其视为“正在使用”。
+> [!NOTE]
+> 如果该执行组件使用计时器并且调用了其计时器回调，则**不**将其视为“正在使用”。
 
 在了解停用的详细信息之前，定义以下术语非常重要：
 

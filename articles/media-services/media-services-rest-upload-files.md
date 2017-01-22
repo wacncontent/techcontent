@@ -25,7 +25,8 @@ ms.author: juliako
 
 在媒体服务中，可以将数字文件上传到资产中。[资产](https://docs.microsoft.com/zh-cn/rest/api/media/operations/asset)实体可以包含视频、音频、图像、缩略图集合、图文轨迹和隐藏式字幕文件（以及有关这些文件的元数据。） 将文件上传到资产后，相关内容即安全地存储在云中供后续处理和流式处理。
 
->[!NOTE]选择资产文件名时需考虑下列事项：
+>[!NOTE]
+>选择资产文件名时需考虑下列事项：
 >
 >- 构建流内容的 URL 时，媒体服务会使用 IAssetFile.Name 属性的值（如 http://{AMSAccount}.origin.mediaservices.chinacloudapi.cn/{GUID}/{IAssetFile.Name}/streamingParameters.）。出于此原因，不允许使用百分号编码。**Name** 属性的值不能含有任何以下[百分号编码保留字符](http://zh.wikipedia.org/wiki/百分号编码#.E4.BF.9D.E7.95.99.E5.AD.97.E7.AC.A6.E7.9A.84.E7.99.BE.E5.88.86.E5.8F.B7.E7.BC.96.E7.A0.81)：!*'();:@&=+$,/?%#"。此外，文件扩展名中只能含有一个“.”。
 >
@@ -43,7 +44,8 @@ AMS 还可用于批量上传资产。有关详细信息，请参阅[此](./media
 
 ###创建资产
 
->[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
+>[!NOTE]
+> 使用媒体服务 REST API 时，需注意以下事项：
 >
 >访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 
@@ -63,7 +65,8 @@ AMS 还可用于批量上传资产。有关详细信息，请参阅[此](./media
 
 - **EnvelopeEncryptionProtected** = **4**：如果要上传使用 AES 文件加密的 HLS，请指定此值。请注意，Transform Manager 必须已对文件进行编码和加密。
 
->[!NOTE]如果资产要使用加密，则必须按以下主题中所述创建 **ContentKey** 并将其链接到你的资产：[如何创建 ContentKey](./media-services-rest-create-contentkey.md)。请注意，将文件上传到资产后，需要使用加密**资产**期间获取的值更新 **AssetFile** 实体上的加密属性。使用 **MERGE** HTTP 请求完成此操作。
+>[!NOTE]
+>如果资产要使用加密，则必须按以下主题中所述创建 **ContentKey** 并将其链接到你的资产：[如何创建 ContentKey](./media-services-rest-create-contentkey.md)。请注意，将文件上传到资产后，需要使用加密**资产**期间获取的值更新 **AssetFile** 实体上的加密属性。使用 **MERGE** HTTP 请求完成此操作。
 
 以下示例说明了如何创建资产。
 
@@ -291,7 +294,8 @@ SAS URL 采用以下格式：
 
 设置 AccessPolicy 和定位符后，即可使用 Azure 存储 REST API 将具体的文件上传到 Azure BLOB 存储容器。也可以按页或块 BLOB 来上传。
 
->[!NOTE] 必须将要上传的文件的文件名添加到在上一节收到的定位符 **Path** 值中。例如，https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . .
+>[!NOTE]
+> 必须将要上传的文件的文件名添加到在上一节收到的定位符 **Path** 值中。例如，https://storagetestaccount001.blob.core.chinacloudapi.cn/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . .
 
 有关使用 Azure 存储 blob 的详细信息，请参阅 [Blob 服务 REST API](http://msdn.microsoft.com/zh-cn/library/azure/dd135733.aspx)。
 

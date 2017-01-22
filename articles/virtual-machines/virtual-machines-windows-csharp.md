@@ -456,7 +456,8 @@ ms.author: davidmu
           );
         }
 
-    >[!NOTE] 本教程创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅 [Navigate and select Azure virtual machine images with Windows PowerShell and the Azure CLI](./virtual-machines-linux-cli-ps-findimage.md)（使用 Windows PowerShell 和 Azure CLI 来导航和选择 Azure 虚拟机映像）。
+    >[!NOTE]
+    > 本教程创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅 [Navigate and select Azure virtual machine images with Windows PowerShell and the Azure CLI](./virtual-machines-linux-cli-ps-findimage.md)（使用 Windows PowerShell 和 Azure CLI 来导航和选择 Azure 虚拟机映像）。
 
 2. 若要调用之前添加的方法，请将此代码添加到 Main 方法：
 

@@ -27,7 +27,8 @@ ms.author: v-six
 * 在 Azure 经典管理门户中，依次单击云服务的部署、“所有设置”、“属性”。
 * 在 Azure 经典管理门户中，依次单击云服务的部署、“仪表板”，然后定位到页面右下角（位于“速览”下）。请注意，此窗格中没有“属性”标签。
 
-> [!NOTE] 可通过单击“属性”窗格右上角的图标将该窗格的内容复制到剪贴板。
+> [!NOTE]
+> 可通过单击“属性”窗格右上角的图标将该窗格的内容复制到剪贴板。
 
 [!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
@@ -75,6 +76,7 @@ Azure 检测到问题节点并因此将角色实例移到新节点时，系统�
     * 如果角色实例最近停止过（可查看“中止计数”的值），则可能是因为部署正在进行更新。等待，看角色实例是否会自行恢复运行。
     * 如果角色实例处于“忙”状态，请检查应用程序代码，看是否已处理 [StatusCheck](https://msdn.microsoft.com/zh-cn/library/microsoft.windowsazure.serviceruntime.roleenvironment.statuscheck) 事件。可能需要添加或修复处理此事件的某些代码。
 
->[!WARNING] 如果回收云服务，请重置部署的属性，以便有效清除有关原始问题的信息。
+>[!WARNING]
+> 如果回收云服务，请重置部署的属性，以便有效清除有关原始问题的信息。
 
 <!---HONumber=Mooncake_1226_2016-->

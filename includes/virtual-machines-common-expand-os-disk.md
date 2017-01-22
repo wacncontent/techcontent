@@ -4,7 +4,8 @@
 1.  支持将组件安装在 OS 驱动器上的传统应用程序。
 2.  从本地迁移具有较大 OS 驱动器的物理电脑或虚拟机。
 
->[!IMPORTANT]Azure 具有用于创建和处理资源的两个不同的部署模型：Resource Manager 和经典。本文介绍如何使用 Resource Manager 模型。Azure 建议大多数新部署使用资源管理器模型。
+>[!IMPORTANT]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：Resource Manager 和经典。本文介绍如何使用 Resource Manager 模型。Azure 建议大多数新部署使用资源管理器模型。
 
 ## 调整 OS 驱动器的大小
 在本文中，我们将使用 [Azure Powershell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 的 Resource Manager 模块，完成调整 OS 驱动器大小的任务。在管理模式下打开 Powershell ISE 或 Powershell 窗口，并遵循以下步骤：
@@ -32,7 +33,8 @@
         $vm.StorageProfile.OSDisk.DiskSizeGB = 1023
         Update-AzureRmVM -ResourceGroupName $rgName -VM $vm
 
-    >[!WARNING]新大小应该大于现有磁盘大小。允许的最大值为 1023 GB。
+    >[!WARNING]
+    >新大小应该大于现有磁盘大小。允许的最大值为 1023 GB。
 
 6.  更新 VM 可能需要几秒钟时间。命令完成执行后，请重新启动 VM，如下所示：
 

@@ -26,7 +26,8 @@ ms.author: carlrab
 
 以下教程介绍如何使用 SQL Server Management Studio 管理和查询 Azure SQL 数据库。
 
-> [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+> [!IMPORTANT]
+> 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 | 教程 | 说明 |
 |---|---|---|

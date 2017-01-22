@@ -28,7 +28,8 @@ ms.author: juliako;milangada;gtrifonov
 
 ##概述
 
->[!IMPORTANT] 请确保查看[概述](./media-services-scale-media-processing-overview.md)主题，获取有关缩放媒体处理主题的详细信息。
+>[!IMPORTANT]
+> 请确保查看[概述](./media-services-scale-media-processing-overview.md)主题，获取有关缩放媒体处理主题的详细信息。
 
 若要使用 .NET SDK 更改保留单元类型和媒体保留单元数目，请执行以下操作：
 

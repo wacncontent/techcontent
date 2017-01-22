@@ -88,7 +88,8 @@ amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn
 | `[username]` | 从 [Azure 经典管理门户][]获取的服务总线 SAS 密钥名称。 | | | | |
 | `[password]` | 从 [Azure 经典管理门户][]获取的 URL 编码形式的服务总线 SAS 密钥。 | | | | |
 
-> [!NOTE]必须手动为密码进行 URL 编码。在 [http://www.w3schools.com/tags/ref_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp) 上提供了一个有用的 URL 编码实用工具。
+> [!NOTE]
+>必须手动为密码进行 URL 编码。在 [http://www.w3schools.com/tags/ref_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp) 上提供了一个有用的 URL 编码实用工具。
 
 例如，如果从门户获得的信息如下所示：
 

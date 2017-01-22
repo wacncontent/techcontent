@@ -25,7 +25,8 @@ wacn.date: 12/23/2016
 - Azure App Service 了解 **package.json** 和 **npm-shrinkwrap.json** 文件，可基于这些文件中的条目安装模块。
 - Azure 云服务希望所有模块都安装在开发环境中，并将 **node\_modules** 目录包含为部署包的一部分。可以为使用 **package.json** 或 **npm-shrinkwrap.json** 文件在云服务上安装模块提供相应支持，但这需要自定义云服务项目使用的默认脚本。有关如何实现此目的的示例，请参阅[运行 npm 安装以避免部署 Node 模块的 Azure 启动任务](https://github.com/woloski/nodeonazure-blog/blob/master/articles/startup-task-to-run-npm-in-azure.markdown)
 
-> [!NOTE] 本文不讨论 Azure 虚拟机，因为 VM 中的开发体验将取决于由虚拟机托管的操作系统。
+> [!NOTE]
+> 本文不讨论 Azure 虚拟机，因为 VM 中的开发体验将取决于由虚拟机托管的操作系统。
 
 ## Node.js 模块
 模块是可加载的 JavaScript 包，可为你的应用程序提供特定功能。通常使用 **npm** 命令行工具安装模块，但一些模块（如 http 模块）是作为核心 Node.js 包的一部分提供的。

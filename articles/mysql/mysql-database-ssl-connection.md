@@ -30,7 +30,8 @@ mysql.exe --ssl-ca=WS_CA1_NEW.crt -h mysqlservices.chinacloudapp.cn -u ssltest%t
 
 ![验证][6]
 
->[!NOTE]**需要注意的是MySQL on Azure在代理服务器proxy和用户端之间建立了SSL安全链接，所以服务器中SSL相关的全局变量或者会话变量仍然是DISABLED值，而实际上整个通信过程已被TLSv1加密。**
+>[!NOTE]
+>**需要注意的是MySQL on Azure在代理服务器proxy和用户端之间建立了SSL安全链接，所以服务器中SSL相关的全局变量或者会话变量仍然是DISABLED值，而实际上整个通信过程已被TLSv1加密。**
 
 以MySQL Workbench为例，通过Parameters标签设置访问数据库的Connection String，如下图所示。
 

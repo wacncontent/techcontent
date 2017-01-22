@@ -334,11 +334,13 @@ Azure 是 Microsoft 提供的一个云服务平台，它提供了各种新的可
 * SAP 系统：SAP ERP 开发系统、SAP BW 测试系统、SAP CRM 生产系统等的 DBMS 层与应用程序层的组合。在 Azure 部署中，不支持在本地和 Azure 之间分割这两个层。这意味着，某个 SAP 系统要么部署在本地，要么部署在 Azure 中。但是，可以将 SAP 布局中的不同系统部署到 Azure 或本地。例如，可以将 SAP CRM 开发系统和测试系统部署在 Azure 中，同时将 SAP CRM 生产系统部署在本地。
 * 仅限云的部署：不通过站点到站点或 ExpressRoute 连接将 Azure 订阅连接到本地网络基础结构的一种部署。在一般的 Azure 文档中，此类部署也称为“仅限云”部署。使用此方法部署的虚拟机可通过 Internet 和公共 IP 地址和/或分配给 Azure VM 的公共 DNS 名称来访问。在这些类型的部署中，Microsoft Windows 的本地 Active Directory (AD) 和 DNS 不会扩展到 Azure。因此，VM 不是本地 Active Directory 的一部分。这一点同样适用于使用 OpenLDAP + Kerberos 等协议的 Linux 实施方案。
 
-> [!NOTE] 本文档中的仅限云部署定义为在 Azure 中以独占方式运行的完整 SAP 布局，而不是将 Active Directory/OpenLDAP 或名称解析从本地扩展到公有云。SAP 生产系统或配置不支持仅限云的配置，在此配置中，托管于 Azure 的 SAP 系统与位于本地的资源之间需要使用 SAP STMS 或其他本地资源。
+> [!NOTE]
+> 本文档中的仅限云部署定义为在 Azure 中以独占方式运行的完整 SAP 布局，而不是将 Active Directory/OpenLDAP 或名称解析从本地扩展到公有云。SAP 生产系统或配置不支持仅限云的配置，在此配置中，托管于 Azure 的 SAP 系统与位于本地的资源之间需要使用 SAP STMS 或其他本地资源。
 
 * 跨界：描述这样一种方案：将 VM 部署到在本地数据中心与 Azure 之间建立了站点到站点、多站点或 ExpressRoute 连接的 Azure 订阅。在一般的 Azure 文档中，此类部署也称为跨界方案。连接的原因是为了将本地域、本地 Active Directory/OpenLDAP 和本地 DNS 扩展到 Azure。本地布局会扩展到订阅的 Azure 资产。经过这种扩展后，VM 可以成为本地域的一部分。本地域的域用户可以访问服务器，并可在这些 VM 上运行服务（例如 DBMS 服务）。但无法在本地的 VM 和 Azure 部署的 VM 之间进行通信和名称解析。这是大多数 SAP 资产预期要部署到的方案。有关详细信息，请参阅[此文][vpn-gateway-cross-premises-options]和[此文][vpn-gateway-site-to-site-create]。
 
-> [!NOTE] SAP 生产系统支持对 SAP 系统进行这种跨界部署：运行 SAP 系统的 Azure 虚拟机是本地域的成员。跨界配置可将部分或完整 SAP 环境部署到 Azure。即使在 Azure 中执行完整 SAP 环境，也需要有这些 VM 成为本地域和 ADS/OpenLDAP 的一部分。在本文档的以前版本中，我们曾谈到混合 IT 方案，其中“混合”一词基本上是指本地与 Azure 之间有跨界连接。此外，Azure 中的 VM 是本地 Active Directory/OpenLDAP 的一部分。
+> [!NOTE]
+> SAP 生产系统支持对 SAP 系统进行这种跨界部署：运行 SAP 系统的 Azure 虚拟机是本地域的成员。跨界配置可将部分或完整 SAP 环境部署到 Azure。即使在 Azure 中执行完整 SAP 环境，也需要有这些 VM 成为本地域和 ADS/OpenLDAP 的一部分。在本文档的以前版本中，我们曾谈到混合 IT 方案，其中“混合”一词基本上是指本地与 Azure 之间有跨界连接。此外，Azure 中的 VM 是本地 Active Directory/OpenLDAP 的一部分。
 
 有些 Microsoft 文档在描述跨界方案时稍有不同，特别是针对 DBMS HA 配置。在 SAP 相关的文档中，跨界方案单纯是指具有站点到站点或专用 (ExpressRoute) 连接，以及将 SAP 环境分布到本地与 Azure 的情况。
 
@@ -350,7 +352,8 @@ Azure 是 Microsoft 提供的一个云服务平台，它提供了各种新的可
 * [Windows 虚拟机 (VM) 上的 SAP NetWeaver - DBMS 部署指南][dbms-guide]
 * [Windows 虚拟机 (VM) 上的 SAP NetWeaver - 高可用性部署指南][ha-guide]
 
-> [!IMPORTANT] 在可能的情况下，请访问所述《SAP 安装指南》的链接（InstGuide-01 参考文档，请参阅 <http://service.sap.com/instguides>）。在满足先决条件和安装过程中，始终应该仔细阅读《SAP NetWeaver 安装指南》，因为本文档只包括了有关 Azure 虚拟机中安装的 SAP NetWeaver 系统的具体任务。
+> [!IMPORTANT]
+> 在可能的情况下，请访问所述《SAP 安装指南》的链接（InstGuide-01 参考文档，请参阅 <http://service.sap.com/instguides>）。在满足先决条件和安装过程中，始终应该仔细阅读《SAP NetWeaver 安装指南》，因为本文档只包括了有关 Azure 虚拟机中安装的 SAP NetWeaver 系统的具体任务。
 
 以下 SAP 说明与 Azure 上的 SAP 主题相关：
 
@@ -434,11 +437,13 @@ SAP 通常被视为企业中最关键的应用程序之一。通常，这些应�
 
 这是一种跨界方案，它存在多种可能的部署模式。简单而言，该方案就是在本地运行 SAP 布局的一部分，在 Azure 上运行 SAP 布局的另一部分。部分 SAP 组件在 Azure 上运行这一事实的所有方面对于最终用户都应该是透明的。因此，SAP 传输纠正系统 (STMS)、RFC 通信、打印、安全性（例如 SSO）等都将对 Azure 上运行的 SAP 系统无差错地工作。但是，跨界方案还描述了在 Azure 中运行完整 SAP 布局，并将客户的域和 DNS 扩展到 Azure 的方案。
 
-> [!NOTE] 这是支持运行 SAP 生产系统的部署方案。
+> [!NOTE]
+> 这是支持运行 SAP 生产系统的部署方案。
 
 有关如何将本地网络连接到 Azure 的详细信息，请参阅[此文][vpn-gateway-create-site-to-site-rm-powershell]。
 
-> [!IMPORTANT] 在讨论 Azure 与本地客户部署之间的跨界方案时，请注意整个 SAP 系统的粒度。_不支持_用于跨界方案的方案包括：
+> [!IMPORTANT]
+> 在讨论 Azure 与本地客户部署之间的跨界方案时，请注意整个 SAP 系统的粒度。_不支持_用于跨界方案的方案包括：
 ><p>
 ><p> * 以不同的部署方法运行不同的 SAP 应用程序层。例如，在本地运行 DBMS 层，同时将 SAP 应用程序层作为 Azure VM 部署在 VM 中；反之亦然。
 ><p> * 将 SAP 层的一些组件部署在 Azure 中，将另一些组件部署在本地。例如，在本地和 Azure VM 之间拆分 SAP 应用程序层的实例。
@@ -484,7 +489,8 @@ Azure 平台减少了采购前沿技术和基础结构的需要。它可以按�
 
 请注意，并非每个 Azure 区域都提供所有不同的 VM 系列（有关 Azure 区域，请参阅下一章）。另请注意，并非所有 VM 或 VM 系列都已通过 SAP 认证。
 
-> [!IMPORTANT] 使用 SAP NetWeaver 应用程序时，只支持 SAP 说明 [1928533] 中所列的一部分 VM 类型和配置。
+> [!IMPORTANT]
+> 使用 SAP NetWeaver 应用程序时，只支持 SAP 说明 [1928533] 中所列的一部分 VM 类型和配置。
 
 ### <a name="be80d1b9-a463-4845-bd35-f4cebdb5424a"></a>Azure 区域
 Microsoft 允许将虚拟机部署到所谓的“Azure 区域”。Azure 区域可以是位置很近的一个或多个数据中心。针对全球大多数地缘政治区域，Microsoft 至少有两个 Azure 区域。例如在欧洲，有一个“北欧”和一个“西欧”Azure 区域。一个地缘政治区域中的两个 Azure 区域之间相隔足够的距离，以确保自然或技术灾难不会同时影响同一地缘政治区域中的两个 Azure 区域。由于 Microsoft 在全球不同的地缘政治区域中稳定扩建新的 Azure 区域，因此这些区域的数目稳定增长，截至 2015 年 12 月已达 20 个 Azure 区域，并且已声明了更多的区域。客户可以将 SAP 系统部署到所有区域，包括中国的两个 Azure 区域。
@@ -643,7 +649,8 @@ Azure 中的每个虚拟机都需要连接到虚拟网络。
 
 有关详细信息，请参阅[此文][resource-groups-networking]和[此页](../virtual-network/index.md)。
 
-> [!NOTE] 默认情况下，部署 VM 后，无法更改虚拟网络配置。TCP/IP 设置必须留给 Azure DHCP 服务器。默认行为是动态 IP 配置。
+> [!NOTE]
+> 默认情况下，部署 VM 后，无法更改虚拟网络配置。TCP/IP 设置必须留给 Azure DHCP 服务器。默认行为是动态 IP 配置。
 
 虚拟网络卡的 MAC 地址在调整大小后可能更改，在此情况下，Windows 或 Linux 来宾 OS 将选择新的网卡，并自动使用 DHCP 来分配 IP 和 DNS 地址。
 
@@ -717,7 +724,8 @@ ExpressRoute 强制隧道由通过 ExpressRoute BGP 对等互连会话广告默�
 ### Azure 虚拟机服务中的配额
 我们需要明确这个事实：存储和网络基础结构是在运行 Azure 基础结构中的各种服务的 VM 之间共享的。就如同在客户自有的数据中心内一样，过度预配某些基础结构资源的情况确实时有发生。Azure 平台使用磁盘、CPU、网络和其他配额来限制资源消耗，并维持一致性、确定性的性能。不同的 VM 类型（A5、A6 等）针对磁盘、CPU、RAM 和网络资源的数量采用不同的配额。
 
-> [!NOTE] SAP 支持的 VM 类型的 CPU 和内存资源是在主机节点上预先分配的。这意味着，在部署 VM 后，该主机将会根据 VM 类型的定义提供资源。
+> [!NOTE]
+> SAP 支持的 VM 类型的 CPU 和内存资源是在主机节点上预先分配的。这意味着，在部署 VM 后，该主机将会根据 VM 类型的定义提供资源。
 
 在 Azure 解决方案中进行 SAP 规划和选型时，必须考虑适用于每个虚拟机大小的配额。[此处][virtual-machines-sizes]介绍了 VM 配额。
 
@@ -1693,7 +1701,8 @@ Azure 虚拟机上目前没有提供单一 VM SLA。若要大致了解单一 VM 
 
 如果你确定不使用 Windows Server 故障转移群集 (WSFC) 或 Linux 等效项等功能（Azure 尚未支持后者可配合 SAP 软件使用），可以利用 Azure VM 重新启动来保护 SAP 系统，以防止 Azure 物理服务器基础结构和整体基础 Azure 平台发生计划内和计划外的停机。
 
-> [!NOTE] 请注意，Azure VM 重新启动主要是保护 VM 而不是应用程序。VM 重新启动并未提供 SAP 应用程序的高可用性，而是提供特定基础结构级别的可用性，因而间接实现 SAP 系统的“更高可用性”。此外，在计划内或计划外的主机中断之后重新启动 VM 所需的时间也没有 SLA。因此，此“高可用性”方法不适用于 SAP 系统的关键组件，例如 (A)SCS 或 DBMS。
+> [!NOTE]
+> 请注意，Azure VM 重新启动主要是保护 VM 而不是应用程序。VM 重新启动并未提供 SAP 应用程序的高可用性，而是提供特定基础结构级别的可用性，因而间接实现 SAP 系统的“更高可用性”。此外，在计划内或计划外的主机中断之后重新启动 VM 所需的时间也没有 SLA。因此，此“高可用性”方法不适用于 SAP 系统的关键组件，例如 (A)SCS 或 DBMS。
 
 高可用性的另一个重要基础结构要素是存储。例如Azure 存储空间 SLA 可用性为 99,9%。如果用户将所有 VM 及其磁盘部署到单个 Azure 存储帐户，当 Azure 存储空间不可用时，将导致 Azure 存储帐户中的所有 VM 以及这些 VM 内运行的所有 SAP 组件不可用。
 

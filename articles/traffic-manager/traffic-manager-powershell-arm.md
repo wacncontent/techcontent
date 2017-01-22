@@ -58,7 +58,8 @@ Azure 流量管理器是使用名为流量管理器配置文件的一系列设�
     New-AzureRmResourceGroup -Name MyRG -Location "China North"
 ```
 
->[!NOTE] Azure Resource Manager 要求所有资源组都有一个位置。此位置将用作该资源组中创建的资源的默认位置。但是，由于流量管理器配置文件资源是全局性而不是区域性的，因此，所选的资源组位置不会影响 Azure 流量管理器。
+>[!NOTE]
+> Azure Resource Manager 要求所有资源组都有一个位置。此位置将用作该资源组中创建的资源的默认位置。但是，由于流量管理器配置文件资源是全局性而不是区域性的，因此，所选的资源组位置不会影响 Azure 流量管理器。
 
 ## 创建流量管理器配置文件
 

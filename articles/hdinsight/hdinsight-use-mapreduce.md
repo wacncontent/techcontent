@@ -63,13 +63,15 @@ Hadoop 流式处理通过 STDIN 和 STDOUT 与映射器和化简器通信 - 映�
 
 由于 Azure Blob 存储是 HDInsight 的默认存储，因此你也可以使用 **/example/data/gutenberg/davinci.txt** 访问该文件。
 
-> [!NOTE]在上述语法中，****wasbs:///** 用于访问 HDInsight 群集的默认存储容器中存储的文件。如果你在设置群集时指定了其他存储帐户，并想要访问这些帐户中存储的文件，你可以指定容器名称和存储帐户地址来访问数据。例如 ****wasbs://mycontainer@mystorage.blob.core.chinacloudapi.cn/example/data/gutenberg/davinci.txt**。
+> [!NOTE]
+>在上述语法中，****wasbs:///** 用于访问 HDInsight 群集的默认存储容器中存储的文件。如果你在设置群集时指定了其他存储帐户，并想要访问这些帐户中存储的文件，你可以指定容器名称和存储帐户地址来访问数据。例如 ****wasbs://mycontainer@mystorage.blob.core.chinacloudapi.cn/example/data/gutenberg/davinci.txt**。
 
 ## <a id="job"></a>关于示例 MapReduce
 
 本示例中使用的 MapReduce 作业位于 HDInsight 群集随附的 ****wasbs://example/jars/hadoop-mapreduce-examples.jar** 中。其中包含一个你要针对 **davinci.txt** 运行的单词计数示例。
 
-> [!NOTE]在 HDInsight 2.1 群集上，该文件位置为 ****wasbs:///example/jars/hadoop-examples.jar**。
+> [!NOTE]
+>在 HDInsight 2.1 群集上，该文件位置为 ****wasbs:///example/jars/hadoop-examples.jar**。
 
 下面提供了单词计数 MapReduce 作业的 Java 代码供你参考：
 

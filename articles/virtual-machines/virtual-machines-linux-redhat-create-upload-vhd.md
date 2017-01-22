@@ -880,7 +880,8 @@ Azure Linux 代理可使用在 Azure 上预配 VM 后附加到 VM 的本地资�
 
 此问题是间歇性的。但在 Hyper-V 和 Azure 中进行频繁的磁盘 I/O 操作过程中出现更加频繁。
 
-[!NOTE] 此已知问题已被 Red Hat 解决。若要安装关联的修补程序，请运行以下命令：
+>[!NOTE]
+> 此已知问题已被 Red Hat 解决。若要安装关联的修补程序，请运行以下命令：
 
     # sudo yum update
 

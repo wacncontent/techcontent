@@ -30,7 +30,8 @@ ms.author: sstein
 
 数据库通过从 Azure 存储 Blob 容器导入的 BACPAC 文件 (.bacpac) 创建。如果 Azure 存储中没有 BACPAC 文件，请参阅[使用 PowerShell 将 Azure SQL 数据库存档到 BACPAC 文件](./sql-database-export-powershell.md)。如果已有一个 BACPAC 文件但该文件不在 Azure 存储中，[使用 AzCopy 轻松将它上传到 Azure 存储帐户](../storage/storage-use-azcopy.md#blob-upload)。
 
-> [!NOTE] Azure SQL 数据库会自动为你可以还原的每个用户数据库创建和维护备份。有关详细信息，请参阅 [SQL 数据库自动备份](./sql-database-automated-backups.md)。
+> [!NOTE]
+> Azure SQL 数据库会自动为你可以还原的每个用户数据库创建和维护备份。有关详细信息，请参阅 [SQL 数据库自动备份](./sql-database-automated-backups.md)。
 
 若要导入 SQL 数据库，需要以下内容：
 

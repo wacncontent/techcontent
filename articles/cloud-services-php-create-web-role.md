@@ -46,7 +46,8 @@ Azure 提供了三种计算模型以运行应用程序：Azure App Service、Azu
 
     PS C:\myProject> Add-AzurePHPWorkerRole roleName
 
-> [!NOTE] `roleName` 参数是可选的。如果省略该参数，则将自动生成角色名称。创建的第一个 Web 角色将为 `WebRole1`，第二个 Web 角色为 `WebRole2`，依此类推。创建的第一个辅助角色将为 `WorkerRole1`，第二个辅助角色为 `WorkerRole2`，依此类推。
+> [!NOTE]
+> `roleName` 参数是可选的。如果省略该参数，则将自动生成角色名称。创建的第一个 Web 角色将为 `WebRole1`，第二个 Web 角色为 `WebRole2`，依此类推。创建的第一个辅助角色将为 `WorkerRole1`，第二个辅助角色为 `WorkerRole2`，依此类推。
 
 ## 指定内置 PHP 版本
 在将 PHP Web 角色或辅助角色添加到项目时，将修改项目的配置文件，以便在部署应用程序的每个 Web 实例或辅助进程实例时在其上安装 PHP。若要查看默认情况下安装的 PHP 的版本，请运行以下命令：
@@ -69,7 +70,8 @@ Azure 提供了三种计算模型以运行应用程序：Azure App Service、Azu
 
     PS C:\myProject> Set-AzureServiceProjectRole roleName php 5.4.0
 
-> [!NOTE] 可用的 PHP 版本将来可能会改变。
+> [!NOTE]
+> 可用的 PHP 版本将来可能会改变。
 
 ## 自定义内置 PHP 运行时
 当按上述步骤进行操作时，你可以完全控制所安装的 PHP 运行时的配置，包括修改 `php.ini` 设置和启用扩展。
@@ -83,7 +85,8 @@ Azure 提供了三种计算模型以运行应用程序：Azure App Service、Azu
         display_errors=On
         extension=php_mongo.dll
 
-> [!NOTE] 所提供的 `php.ini` 文件中未显式设置的所有设置都将自动设为其默认值。但请记住，你可以添加整个 `php.ini` 文件。
+> [!NOTE]
+> 所提供的 `php.ini` 文件中未显式设置的所有设置都将自动设为其默认值。但请记住，你可以添加整个 `php.ini` 文件。
 
 ## 使用你自己的 PHP 运行时
 在某些情况下，可能需要提供你自己的 PHP 运行时，而不是如上所述那样选择并配置内置 PHP 运行时。例如，可以在 Web 角色或辅助角色中使用你在开发环境中使用的 PHP 运行时，以便更轻松地确保应用程序不会更改生产环境中的行为。
@@ -117,7 +120,8 @@ Azure 提供了三种计算模型以运行应用程序：Azure App Service、Azu
 5. 将应用程序文件添加到 Web 角色的根目录。这将是 Web 服务器的根目录。
 6. 按照以下[发布应用程序](#publish-your-application)部分中所述发布你的应用程序。
 
-> [!NOTE] 在按照上述使用你自己的 PHP 运行时的步骤进行操作后，可以删除 `download.ps1` 脚本（位于 Web 角色的根目录的 `bin` 文件夹中）。
+> [!NOTE]
+> 在按照上述使用你自己的 PHP 运行时的步骤进行操作后，可以删除 `download.ps1` 脚本（位于 Web 角色的根目录的 `bin` 文件夹中）。
 
 ### 将辅助角色配置为使用你自己的 PHP 运行时
 若要将辅助角色配置为使用提供的 PHP 运行时，请执行下列步骤：

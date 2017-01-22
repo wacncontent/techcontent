@@ -44,7 +44,8 @@ ms.author: danlep
 
     sudo npm install -g azure-cli
 
-> [!NOTE]如果需要在 Linux 分发版或操作系统上安装或更新 Node.js 和 npm，我们建议安装最新的 Node.js LTS 版本 (4.x)。如果你使用旧版本，可能会遇到安装错误。
+> [!NOTE]
+>如果需要在 Linux 分发版或操作系统上安装或更新 Node.js 和 npm，我们建议安装最新的 Node.js LTS 版本 (4.x)。如果你使用旧版本，可能会遇到安装错误。
 
 如果喜欢，也可以将 npm 包的最新 Linux [tar 文件][linux-installer]下载到本地。然后，按照以下步骤安装下载的 npm 包（在 Linux 分发版上可能需要使用 **sudo**）：
 
@@ -58,7 +59,8 @@ ms.author: danlep
 
 * [Windows MSI][windows-installer]
 
->[!TIP]在 Windows 上，还可以下载 [Web 平台安装程序](https://go.microsoft.com/?linkid=9828653)来安装 CLI。借助此安装程序，可选择在安装 CLI 后再安装其他 Azure SDK 和命令行工具。
+>[!TIP]
+>在 Windows 上，还可以下载 [Web 平台安装程序](https://go.microsoft.com/?linkid=9828653)来安装 CLI。借助此安装程序，可选择在安装 CLI 后再安装其他 Azure SDK 和命令行工具。
 
 ## 选项 3：使用 Docker 容器
 
@@ -71,7 +73,8 @@ ms.author: danlep
 
     azure help
 
-> [!NOTE]在某些 Linux 分发版中，可能会收到类似于“`/usr/bin/env: ‘node’: No such file or directory`”的错误。此错误来自最近安装在 /usr/bin/nodejs 中的 Node.js 安装。若要解决此错误，请运行以下命令创建 /usr/bin/node 的符号链接：
+> [!NOTE]
+>在某些 Linux 分发版中，可能会收到类似于“`/usr/bin/env: ‘node’: No such file or directory`”的错误。此错误来自最近安装在 /usr/bin/nodejs 中的 Node.js 安装。若要解决此错误，请运行以下命令创建 /usr/bin/node 的符号链接：
 
     sudo ln -s /usr/bin/nodejs /usr/bin/node
 
@@ -81,7 +84,8 @@ ms.author: danlep
 
 你现在已准备就绪！ 若要访问所有 CLI 命令以使用自己的资源，请[从 Azure CLI 连接到 Azure 订阅](./xplat-cli-connect.md)。
 
->[!NOTE] 首次使用 Azure CLI 时，会看到一条消息，询问是否允许 Microsoft 收集使用情况信息。参与为自愿性质。如果选择参与，通过运行 `azure telemetry --disable` 即可随时停止参与。若要随时启用参与，请运行 `azure telemetry --enable`。
+>[!NOTE]
+> 首次使用 Azure CLI 时，会看到一条消息，询问是否允许 Microsoft 收集使用情况信息。参与为自愿性质。如果选择参与，通过运行 `azure telemetry --disable` 即可随时停止参与。若要随时启用参与，请运行 `azure telemetry --enable`。
 
 ## 更新 CLI
 

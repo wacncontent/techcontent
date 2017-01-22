@@ -99,7 +99,8 @@ ms.author: tdykstra
 
     创建一个项目，该项目配置为在针对位于相同解决方案中的 Web 项目进行部署时，自动以 Web 作业的方式部署。要在运行相关 Web 应用程序的同一 Web 应用中运行 Web 作业时，请使用此选项。
 
-> [!NOTE] Web 作业新建项目模板会自动安装 NuGet 包，并在 *Program.cs* 中包含适用于 [WebJobs SDK](./websites-dotnet-webjobs-sdk-get-started.md) 的代码。如果不想使用 WebJobs SDK，或者想要使用计划 Web 作业（而不是连续 Web 作业），请删除或更改 *Program.cs* 中的 `host.RunAndBlock` 语句。
+> [!NOTE]
+> Web 作业新建项目模板会自动安装 NuGet 包，并在 *Program.cs* 中包含适用于 [WebJobs SDK](./websites-dotnet-webjobs-sdk-get-started.md) 的代码。如果不想使用 WebJobs SDK，或者想要使用计划 Web 作业（而不是连续 Web 作业），请删除或更改 *Program.cs* 中的 `host.RunAndBlock` 语句。
 
 ### <a id="createnolink"></a>为独立的 Web 作业使用 Web 作业新建项目模板
 

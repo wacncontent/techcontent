@@ -19,7 +19,8 @@ ms.author: sashan
 
 # 使用 SQL 数据库活动异地复制管理云应用程序的滚动升级
 
-> [!NOTE] [活动异地复制](./sql-database-geo-replication-overview.md) 现在可用于所有层中的所有数据库。
+> [!NOTE]
+> [活动异地复制](./sql-database-geo-replication-overview.md) 现在可用于所有层中的所有数据库。
 
 了解如何使用 SQL 数据库中的[异地复制](./sql-database-geo-replication-overview.md)来启用云应用程序的滚动升级。由于升级是中断性操作，所以它应成为业务连续性规划和设计的一部分。本文介绍了编排升级过程的两种不同方法，并讨论了每种方法的优点和缺点。针对本文的目的，我们将使用一个简单的应用程序，该应用程序包含一个连接到作为其数据层的单一数据库的网站。我们的目标是在不对最终用户体验产生任何显著影响的情况下将版本 1 的应用程序升级到版本 2。
 
@@ -37,7 +38,8 @@ ms.author: sashan
 1.  为升级创建过渡槽。要执行此操作需要在同一 Azure 区域中创建一个辅助数据库 (1)，并部署相同的网站。监视此辅助数据库以查看种子设定过程是否已完成。
 3.  使用作为联机终结点的 <i>contoso-1.chinacloudsites.cn</i> 和作为离线终结点的 <i>contoso-2.chinacloudsites.cn</i> 在 WATM 中创建故障转移配置文件。
 
-> [!NOTE] 请注意，上述准备步骤不会影响生产槽中的应用程序，应用程序可以在完全访问模式下运行。
+> [!NOTE]
+> 请注意，上述准备步骤不会影响生产槽中的应用程序，应用程序可以在完全访问模式下运行。
 
 ![SQL 数据库异地复制配置。云灾难恢复。](./media/sql-database-manage-application-rolling-upgrade/Option1-1.png)
 
@@ -63,7 +65,8 @@ ms.author: sashan
 
 此时应用程序可完全正常运行，并且你可以重复上述升级步骤。
 
-> [!NOTE] 回滚操作不需要更改 WATM 配置文件，因为它已指向作为活动终结点的 <i>contoso-1.chinacloudsites.cn</i>。
+> [!NOTE]
+> 回滚操作不需要更改 WATM 配置文件，因为它已指向作为活动终结点的 <i>contoso-1.chinacloudsites.cn</i>。
 
 ![SQL 数据库异地复制配置。云灾难恢复。](./media/sql-database-manage-application-rolling-upgrade/Option1-4.png)
 
@@ -83,7 +86,8 @@ ms.author: sashan
 3.  在备份区域中创建网站的备用副本，并将其链接到地理冗余的辅助数据库 (4)。
 4.  将额外的终结点 <i>contoso-2.chinacloudsites.cn</i> 和 <i>contoso-3.chinacloudsites.cn</i> 作为离线终结点添加到 WATM 中的故障转移配置文件 (5)。
 
-> [!NOTE] 请注意，上述准备步骤不会影响生产槽中的应用程序，应用程序可以在完全访问模式下运行。
+> [!NOTE]
+> 请注意，上述准备步骤不会影响生产槽中的应用程序，应用程序可以在完全访问模式下运行。
 
 ![SQL 数据库异地复制配置。云灾难恢复。](./media/sql-database-manage-application-rolling-upgrade/Option2-1.png)
 
@@ -109,7 +113,8 @@ ms.author: sashan
 
 此时应用程序可完全正常运行，并且你可以重复上述升级步骤。
 
-> [!NOTE] 回滚操作不需要更改 WATM 配置文件，因为它已指向作为活动终结点的 <i>contoso-1.chinacloudsites.cn</i>。
+> [!NOTE]
+> 回滚操作不需要更改 WATM 配置文件，因为它已指向作为活动终结点的 <i>contoso-1.chinacloudsites.cn</i>。
 
 ![SQL 数据库异地复制配置。云灾难恢复。](./media/sql-database-manage-application-rolling-upgrade/Option2-4.png)
 

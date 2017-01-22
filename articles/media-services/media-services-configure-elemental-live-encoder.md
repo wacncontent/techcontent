@@ -61,11 +61,13 @@ ms.author: cenkdin;anilmur;juliako
 3. 单击“创建频道”。
 ![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental12.png)
 
->[!NOTE] 启动频道可能需要长达 20 分钟的时间。
+>[!NOTE]
+> 启动频道可能需要长达 20 分钟的时间。
 
 启动频道时，你可以[配置编码器](./media-services-configure-elemental-live-encoder.md#configure_elemental_rtp)。
 
->[!IMPORTANT] 请注意，只要频道进入就绪状态，就会开始计费。有关详细信息，请参阅[频道的状态](./media-services-manage-live-encoder-enabled-channels.md#states)。
+>[!IMPORTANT]
+> 请注意，只要频道进入就绪状态，就会开始计费。有关详细信息，请参阅[频道的状态](./media-services-manage-live-encoder-enabled-channels.md#states)。
 
 ###<a id="configure_elemental_rtp"></a>配置 Elemental Live 编码器 
 
@@ -95,7 +97,8 @@ ms.author: cenkdin;anilmur;juliako
 
     ![Elemental](./media/media-services-elemental-live-encoder/media-services-elemental13.png)
 
-    >[!NOTE] 建议将 Elemental 事件的时间代码设置为“系统时钟”，方便编码器在出现流故障时重新进行连接。
+    >[!NOTE]
+    > 建议将 Elemental 事件的时间代码设置为“系统时钟”，方便编码器在出现流故障时重新进行连接。
 
 4. 由于已创建输出，因此此时可单击“添加流”。现在可以配置输出设置。
 5. 向下滚动到刚创建的“流 1”，单击左侧的“视频”选项卡，展开“高级”设置部分。
@@ -128,7 +131,8 @@ ms.author: cenkdin;anilmur;juliako
 
 7. 单击“创建”（如果已创建新事件）或“更新”（如果正在编辑预先存在的事件），然后开始启动编码器。
 
->[!IMPORTANT] 在 Elemental Live Web 界面上单击“启动”之前，**必须**确保频道已就绪。另外，请确保不要让频道在没有事件的情况下处于就绪状态的时间超出 15 分钟。
+>[!IMPORTANT]
+> 在 Elemental Live Web 界面上单击“启动”之前，**必须**确保频道已就绪。另外，请确保不要让频道在没有事件的情况下处于就绪状态的时间超出 15 分钟。
 
 流运行 30 秒以后，导航回 AMSE 工具并测试播放情况。
 

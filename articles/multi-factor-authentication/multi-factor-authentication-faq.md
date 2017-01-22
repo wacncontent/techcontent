@@ -117,7 +117,8 @@ Azure 多重身份验证可作为独立的服务购买，按照每位用户和�
 
 获取有关创建应用密码的详细信息，以及其他[有关应用密码的帮助](./multi-factor-authentication-end-user-app-passwords.md)。
 
->[!NOTE] 适用于 Office 2013 客户端的新式验证
+>[!NOTE]
+> 适用于 Office 2013 客户端的新式验证
 >
 > Office 2013 客户端（包括 Outlook）支持新式验证协议。可以将 Office 2013 配置为支持多重身份验证。配置 Office 2013 之后，Office 2013 客户端就不需要应用密码。有关详细信息，请参阅 [Office 2013 modern authentication public preview announcement](https://blogs.office.com/2015/03/23/office-2013-modern-authentication-public-preview-announced/)（Office 2013 新式验证公共预览版发布声明）。
 

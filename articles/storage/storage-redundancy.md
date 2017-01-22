@@ -41,7 +41,8 @@ ms.author: marsma
 
 有关不同冗余选项的定价信息，请参阅 [Azure 存储空间定价](https://www.azure.cn/pricing/details/storage/)。
 
->[!NOTE] 高级存储仅支持本地冗余存储 (LRS)。有关高级存储的信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](./storage-premium-storage.md)。
+>[!NOTE]
+> 高级存储仅支持本地冗余存储 (LRS)。有关高级存储的信息，请参阅[高级存储：适用于 Azure 虚拟机工作负荷的高性能存储](./storage-premium-storage.md)。
 
 ##<a name="locally-redundant-storage"></a> 本地冗余存储
 本地冗余存储 (LRS) 会在存储扩展单元内复制三次数据，其中该单元托管在创建存储帐户的区域中的某数据中心内。写入请求仅在写入到全部 3 个副本中后才会成功返回。这三个副本各驻留在一个存储扩展单元的单独容错域和升级域中。

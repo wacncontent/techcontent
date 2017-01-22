@@ -21,7 +21,8 @@ ms.author: iainfou
 
 如果在对远程桌面 (RDP) 连接或应用程序对基于 Windows 的 Azure 虚拟机 (VM) 的访问进行故障排除时遇到困难，重新部署 VM 可能会有帮助。重新部署 VM 时，将 VM 移到 Azure 基础结构中的新节点，然后重新打开它，同时保留所有配置选项和关联的资源。本文介绍如何使用 Azure PowerShell 或 Azure 门户预览重新部署 VM。
 
-> [!NOTE] 重新部署 VM 后，临时磁盘将丢失，与虚拟网络接口相关联的动态 IP 地址会得到更新。
+> [!NOTE]
+> 重新部署 VM 后，临时磁盘将丢失，与虚拟网络接口相关联的动态 IP 地址会得到更新。
 
 ## 使用 Azure PowerShell
 

@@ -43,7 +43,8 @@ ms.author: adegeo
 
         ConvertTo-SecureString -String "Password123" -AsPlainText -Force | ConvertFrom-SecureString | Set-Content "password.txt"
 
->[!IMPORTANT] 设置密码时，请确保满足[复杂性要求](https://technet.microsoft.com/zh-cn/library/cc786468.aspx)。
+>[!IMPORTANT]
+> 设置密码时，请确保满足[复杂性要求](https://technet.microsoft.com/zh-cn/library/cc786468.aspx)。
 
 若要从安全密码文件创建凭据对象，必须读取文件内容并使用 [ConvertTo-SecureString](https://technet.microsoft.com/zh-cn/library/hh849818.aspx) 将其转换回安全字符串。
 
@@ -79,7 +80,8 @@ ms.author: adegeo
 
         Remove-AzureServiceRemoteDesktopExtension -ServiceName $servicename -UninstallConfiguration
 
->[!NOTE] 若要完全删除扩展配置，应结合 **UninstallConfiguration** 参数调用 *remove* cmdlet。
+>[!NOTE]
+> 若要完全删除扩展配置，应结合 **UninstallConfiguration** 参数调用 *remove* cmdlet。
 >
 >**UninstallConfiguration** 参数卸载已应用到服务的任何扩展配置。每个扩展配置与服务配置相关联。如果在不使用 **UninstallConfiguration** 的情况下调用 *remove* cmdlet，将取消<mark>部署</mark>与扩展配置之间的关联，因此会实际删除扩展。但是，扩展配置仍与服务保持关联。
 

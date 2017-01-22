@@ -26,7 +26,8 @@ ms.author: ryanwi
 2. 注册应用程序类型
 3. 创建应用程序实例
 
->[!NOTE] 如果使用 Visual Studio 来部署和调试本地开发群集上的应用程序，则将通过在应用程序项目的 Scripts 文件夹中找到的 PowerShell 脚本自动处理以下步骤。本文提供有关这些脚本正在执行什么操作的背景，以便你可以在 Visual Studio 外部执行相同的操作。
+>[!NOTE]
+> 如果使用 Visual Studio 来部署和调试本地开发群集上的应用程序，则将通过在应用程序项目的 Scripts 文件夹中找到的 PowerShell 脚本自动处理以下步骤。本文提供有关这些脚本正在执行什么操作的背景，以便你可以在 Visual Studio 外部执行相同的操作。
 
 ## 上载应用程序包
 上载应用程序包会将其放在一个可由内部 Service Fabric 组件访问的位置。你可以使用 PowerShell 执行上载。在运行本文中的任何 PowerShell 命令之前，请始终先使用 [Connect-ServiceFabricCluster](https://docs.microsoft.com/powershell/servicefabric/vlatest/connect-servicefabriccluster) 连接到 Service Fabric 群集。

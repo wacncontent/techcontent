@@ -134,7 +134,8 @@ SQL Server（任何版本） | Enterprise 或 Standard | 故障转移群集实�
 
 3. 在上述示例中，可用性组 DB1-AG 在故障转移之后，将变成订阅 DevTesting2 中运行的虚拟机 SQLAGVM2 上的主节点。
 
->[!NOTE] 只有上述步骤中添加为 SQL Server 上的主节点的可用性组可以添加到 Site Recovery 中。如果已在 SQL Server 上将可用性组设为主节点，或在添加可用性组后在 SQL Server 上添加了更多可用性组，请使用 SQL Server 上的“刷新”选项进行刷新。
+>[!NOTE]
+> 只有上述步骤中添加为 SQL Server 上的主节点的可用性组可以添加到 Site Recovery 中。如果已在 SQL Server 上将可用性组设为主节点，或在添加可用性组后在 SQL Server 上添加了更多可用性组，请使用 SQL Server 上的“刷新”选项进行刷新。
 
 #### 步骤 3：创建恢复计划
 
@@ -172,7 +173,8 @@ SQL Server（任何版本） | Enterprise 或 Standard | 故障转移群集实�
 
 如果你想要再次在本地 SQL Server 上使可用性组成为主节点，可以通过在恢复计划上触发计划的故障转移，并选择从 Microsoft Azure 到本地 VMM 服务器的方向来实现。
 
->[!NOTE] 在执行非计划的故障转移之后，必须在可用性组上触发反向复制才能继续复制。在完成此操作之前，复制将保持暂停状态。
+>[!NOTE]
+> 在执行非计划的故障转移之后，必须在可用性组上触发反向复制才能继续复制。在完成此操作之前，复制将保持暂停状态。
 
 ### 在没有 VMM 服务器或配置服务器的情况下对计算机进行保护
 
@@ -200,7 +202,8 @@ SQL Server（任何版本） | Enterprise 或 Standard | 故障转移群集实�
     1. 触发对恢复计划进行测试性故障转移之前，请从步骤 1 中进行的备份恢复虚拟机
     1. 对恢复计划进行测试性故障转移
 
-> [!NOTE]以下脚本假定 SQL 可用性组托管在经典 Azure 虚拟机中，在步骤 2 中还原的虚拟机的名称为 SQLAzureVM-Test。根据已恢复虚拟机的所用名称修改脚本。
+> [!NOTE]
+>以下脚本假定 SQL 可用性组托管在经典 Azure 虚拟机中，在步骤 2 中还原的虚拟机的名称为 SQLAzureVM-Test。根据已恢复虚拟机的所用名称修改脚本。
 
         workflow SQLAvailabilityGroupFailover
         {

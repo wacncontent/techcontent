@@ -21,7 +21,8 @@ ms.author: curtand
 
 本文介绍与 Azure AD 目录中存储的用户帐户关联的各种密码策略和复杂性要求。
 
-> [!IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
+> [!IMPORTANT]
+> **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
 
 ## 适用于所有用户帐户的 UserPrincipalName 策略
 

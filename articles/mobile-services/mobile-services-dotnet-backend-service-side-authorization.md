@@ -32,7 +32,8 @@ ms.author: krisragh
 
         public string UserId { get; set; }
 
-    >[!NOTE] 若要进行此数据模型更改并维护数据库中的现有数据，必须使用 [Code First 迁移](./mobile-services-dotnet-backend-how-to-use-code-first-migrations.md)。
+    >[!NOTE]
+    > 若要进行此数据模型更改并维护数据库中的现有数据，必须使用 [Code First 迁移](./mobile-services-dotnet-backend-how-to-use-code-first-migrations.md)。
 
 2. 在 Visual Studio 中，展开“控制器”文件夹，打开 **TodoItemController.cs**，然后添加以下 using 语句：
 

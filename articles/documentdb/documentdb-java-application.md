@@ -36,7 +36,8 @@ ms.author: denlee
 
 ![我的 ToDo 列表 Java 应用程序](./media/documentdb-java-application/image1.png)
 
-> [!TIP] 此应用程序开发教程假定你之前有使用 Java 的经验。如果你不熟悉 Java 或[必备工具](#Prerequisites)，我们建议从 GitHub 下载完整的 [todo](https://github.com/Azure-Samples/documentdb-java-todo-app) 项目，并按照[本文末尾的说明](#GetProject)构建应用程序。构建之后，你可以回顾本文以深入了解项目上下文中的代码。
+> [!TIP]
+> 此应用程序开发教程假定你之前有使用 Java 的经验。如果你不熟悉 Java 或[必备工具](#Prerequisites)，我们建议从 GitHub 下载完整的 [todo](https://github.com/Azure-Samples/documentdb-java-todo-app) 项目，并按照[本文末尾的说明](#GetProject)构建应用程序。构建之后，你可以回顾本文以深入了解项目上下文中的代码。
 
 ## <a id="Prerequisites"></a>此 Java Web 应用程序教程的先决条件
 在开始本应用程序开发教程前，你必须具有：

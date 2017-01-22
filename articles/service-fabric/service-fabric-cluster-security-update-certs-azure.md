@@ -23,7 +23,8 @@ ms.author: chackdan
 
 在创建群集期间配置证书安全性时，Service Fabric 允许指定两个群集证书（主要证书和辅助证书）。有关详细信息，请参阅 [creating an azure cluster via portal](./service-fabric-cluster-creation-via-portal.md)（通过门户创建 Azure 群集）或 [creating an azure cluster via Azure Resource Manager](./service-fabric-cluster-creation-via-arm.md)（通过 Azure Resource Manager 创建 Azure 群集）。如果通过 Resource Manager 进行部署并且只指定了一个群集证书，将使用该证书作为主要证书。在创建群集后，可以添加一个新证书作为辅助证书。
 
->[!NOTE] 对于安全群集，始终至少需要部署一个有效的（未吊销或过期）证书（主要或辅助），否则，群集无法正常运行。在所有有效证书过期前的 90 天，系统将针对节点生成警告跟踪和警告运行状况事件。Service Fabric 当前不会针对此主题发送电子邮件或其他任何通知。
+>[!NOTE]
+> 对于安全群集，始终至少需要部署一个有效的（未吊销或过期）证书（主要或辅助），否则，群集无法正常运行。在所有有效证书过期前的 90 天，系统将针对节点生成警告跟踪和警告运行状况事件。Service Fabric 当前不会针对此主题发送电子邮件或其他任何通知。
 
 ## 使用门户添加辅助证书
 若要添加另一个证书作为辅助证书，必须将该证书上载到 Azure 密钥保管库，然后将它部署到群集中的 VM。有关更多信息，请参阅 [Deploy certificates to VMs from a customer-managed key vault](http://blogs.technet.com/b/kv/archive/2015/07/14/vm_2d00_certificates.aspx)（将证书从客户管理的密钥保管库部署到 VM）。

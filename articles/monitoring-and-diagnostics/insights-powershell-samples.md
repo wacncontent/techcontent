@@ -74,7 +74,8 @@ wacn.date: 01/03/2017
 
 `Get-AzureRmLog` 支持许多其他参数。有关详细信息，请参阅 `Get-AzureRmLog` 参考文档。
 
->[!NOTE] `Get-AzureRmLog` 仅提供 15 天的历史记录。使用 **-MaxEvents** 参数可查询 15 天之外的最后 N 个事件。要访问超过 15 天的事件，请使用 REST API 或 SDK （使用 SDK 的 C# 示例）。如果不包括 **StartTime**，则默认值为 **EndTime** 减去一小时。如果不包括 **EndTime**，则默认值为当前时间。所有时间均是 UTC 时间。
+>[!NOTE]
+> `Get-AzureRmLog` 仅提供 15 天的历史记录。使用 **-MaxEvents** 参数可查询 15 天之外的最后 N 个事件。要访问超过 15 天的事件，请使用 REST API 或 SDK （使用 SDK 的 C# 示例）。如果不包括 **StartTime**，则默认值为 **EndTime** 减去一小时。如果不包括 **EndTime**，则默认值为当前时间。所有时间均是 UTC 时间。
 
 ## 检索警报历史记录
 若要查看所有警报事件，可以使用以下示例查询 Azure Resource Manager 日志。
@@ -147,7 +148,8 @@ wacn.date: 01/03/2017
 
 ### 活动日志事件警报
 
->[!NOTE] 此功能目前处于预览状态，将在以后删除（即将替换）。
+>[!NOTE]
+> 此功能目前处于预览状态，将在以后删除（即将替换）。
 
 在此方案中，在资源组 *abhingrgtest123* 中的我的订阅中成功启动网站时，会发送电子邮件。
 

@@ -30,7 +30,8 @@ ms.author: narayanannamalai;annahar
 
 1. 对于从未使用过 Azure PowerShell 的用户，请参阅 [How to Install and Configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（如何安装和配置 Azure PowerShell），完全按照说明进行操作，登录 Azure 并选择你的订阅。
 
-    > [!NOTE] 用于管理 VNet 对等互连的 PowerShell cmdlet 随附于 [Azure PowerShell 1.6](http://www.powershellgallery.com/packages/Azure/1.6.0)。
+    > [!NOTE]
+    > 用于管理 VNet 对等互连的 PowerShell cmdlet 随附于 [Azure PowerShell 1.6](http://www.powershellgallery.com/packages/Azure/1.6.0)。
 
 2. 以下文本显示基于上述方案的从 VNet1 到 VNet2 的 VNet 对等互连链接定义。复制以下内容并将其保存到名为 VNetPeeringVNet1.json 的文件中。
 
@@ -103,7 +104,8 @@ ms.author: narayanannamalai;annahar
 
         New-AzureRmResourceGroupDeployment -ResourceGroupName <resource group name> -TemplateFile <template file path> -DeploymentDebugLogLevel all
 
-    > [!NOTE] 请替换为合适的资源组名称和模板文件。
+    > [!NOTE]
+    > 请替换为合适的资源组名称和模板文件。
 
     以下是一个基于上述方案的示例：
 

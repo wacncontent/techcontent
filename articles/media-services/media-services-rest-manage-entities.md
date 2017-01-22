@@ -32,7 +32,8 @@ Azure 媒体服务是一项以 OData v3 为基础的基于 REST 的服务。因�
 - 更新实体
 - 删除实体
 
->[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
+>[!NOTE]
+> 使用媒体服务 REST API 时，需注意以下事项：
 >
 >访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 
@@ -112,7 +113,8 @@ Azure 媒体服务是一项以 OData v3 为基础的基于 REST 的服务。因�
     Authorization: Bearer http%3a%2f%2fschemas.xmlsoap.org%2fws%2f2005%2f05%2fidentity%2fclaims%2fnameidentifier=youraccountname&urn%3aSubscriptionId=2f84471d-b1ae-4e75-aa09-010f0fc0cf5b&http%3a%2f%2fschemas.microsoft.com%2faccesscontrolservice%2f2010%2f07%2fclaims%2fidentityprovider=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&Audience=urn%3aWindowsAzureMediaServices&ExpiresOn=1337078831&Issuer=https%3a%2f%2fwamsprodglobal001acs.accesscontrol.chinacloudapi.cn%2f&HMACSHA256=suFkxhvPWxQVMjOYelOJfYEWkyTWJCBc02pF0N7NghI%3d
     Host: wamsshaclus001rest-hs.chinacloudapp.cn
 
->[!NOTE]媒体服务不支持 $expand 操作以及“LINQ 注意事项（WCF 数据服务）”中所述的不受支持的 LINQ 方法。
+>[!NOTE]
+>媒体服务不支持 $expand 操作以及“LINQ 注意事项（WCF 数据服务）”中所述的不受支持的 LINQ 方法。
 
 ##<a name="enumerating-through-large-collections-of-entities"></a>枚举实体的大型集合
 

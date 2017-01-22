@@ -66,7 +66,8 @@ ms.author: juliako
 
 请注意，本主题中省略了生成 AES 密钥、加密密钥以及计算校验和的示例。仅提供了演示如何与媒体服务进行交互的示例。
 
->[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
+>[!NOTE]
+> 使用媒体服务 REST API 时，需注意以下事项：
 >
 >访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 

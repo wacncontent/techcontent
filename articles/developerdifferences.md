@@ -249,7 +249,8 @@ Azure Active Directory（AAD）可以为本地部署和云应用程序提供身�
 - 中国区 Azure 不包含访问控制（Access Control）命名空间。要集成应用程序以及与 Azure 身份验证服务同步的目录，需要使用 Azure 中的 Active Directory。在 Azure 经典管理门户中，单击" Active Directory”。
 - ACS 管理门户仅适用于服务总线命名空间。
 - 除了这些自定义带来的差异，中国区 Azure 中的 Azure AD 设计与境外 Azure 全部一致。
->[!NOTE]中国区 Azure 在预览期间，其创建的访问控制命名空间既不能操作，也不能访问。 但是，类似的功能可在 Azure 管理门户的 Active Directory 中使用。
+>[!NOTE]
+>中国区 Azure 在预览期间，其创建的访问控制命名空间既不能操作，也不能访问。 但是，类似的功能可在 Azure 管理门户的 Active Directory 中使用。
 
 ###<a name="srvbusconf"></a>服务总线配置
 
@@ -293,7 +294,8 @@ Azure Active Directory（AAD）可以为本地部署和云应用程序提供身�
         STSHOST=accesscontrol.chinacloudapi.cn 
         RELAYENV=Custom
 
->[!WARNING] 通过 csdef 文件中的 `<environment>` 标记为 Web 角色添加环境变量时，此选项不可用。 Web 角色在 w3wp.exe 的上下文中运行。 环境变量不会传播到 w3wp.exe 环境。 请参阅 Web 角色的选项 3。
+>[!WARNING]
+> 通过 csdef 文件中的 `<environment>` 标记为 Web 角色添加环境变量时，此选项不可用。 Web 角色在 w3wp.exe 的上下文中运行。 环境变量不会传播到 w3wp.exe 环境。 请参阅 Web 角色的选项 3。
 
 ####选项 2：使用 ServiceBus.config 文件重定向单个应用程序：
 

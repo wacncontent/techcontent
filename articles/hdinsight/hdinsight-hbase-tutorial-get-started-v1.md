@@ -22,7 +22,8 @@ ms.author: jgao
 
 了解如何使用 Hive 在 HDInsight 中预配 HBase 群集、创建 HBase 表和查询表。有关 HBase 的一般信息，请参阅 [HDInsight HBase 概述][hdinsight-hbase-overview]。
 
-> [!NOTE]HBase（版本 0.98.0）只能用于 HDInsight 上的 HDInsight 3.1 群集（基于 Apache Hadoop 和 YARN 2.4.0）。有关版本信息，请参阅 [HDInsight 提供的 Hadoop 群集版本有哪些新功能？][hdinsight-versions]
+> [!NOTE]
+>HBase（版本 0.98.0）只能用于 HDInsight 上的 HDInsight 3.1 群集（基于 Apache Hadoop 和 YARN 2.4.0）。有关版本信息，请参阅 [HDInsight 提供的 Hadoop 群集版本有哪些新功能？][hdinsight-versions]
 
 **先决条件**
 
@@ -42,7 +43,8 @@ ms.author: jgao
 1. 登录到 [Azure 经典管理门户][azure-management-portal]。
 2. 单击左下方的“新建”，然后依次单击“数据服务”、“HDInsight”、“HBase”。
 
-    >[!NOTE]你还可以使用“自定义创建”选项。
+    >[!NOTE]
+    >你还可以使用“自定义创建”选项。
 3. 输入“群集名称”、“群集大小”、HTTP 用户密码和“存储帐户”。
 
     ![在 HDInsight 中预配 HBase 群集][img-hdinsight-hbase-cluster-quick-create]
@@ -51,12 +53,14 @@ ms.author: jgao
 
     若要使用默认 HBase 设置过程，需要使用 Azure 存储帐户。请参阅[创建 Azure 存储帐户][azure-create-storageaccount]，以创建存储帐户。通过“自定义创建”选项，可使用群集预配过程创建存储帐户选项。
 
-    > [!WARNING] 为实现 HBase 服务的高可用性，必须设置包含至少**三个**节点的群集。这可以确保在一个节点发生故障时，可在其他节点上使用 HBase 数据区域。
+    > [!WARNING]
+    > 为实现 HBase 服务的高可用性，必须设置包含至少**三个**节点的群集。这可以确保在一个节点发生故障时，可在其他节点上使用 HBase 数据区域。
     ><p> 如果正在学习 HBase，请始终选择 1 作为群集大小，并在每次使用后删除该群集以节省费用。
 
 4. 单击右下方的“创建 HDInsight 群集”以创建 HBase 群集。
 
->[!NOTE] 删除 HBase 群集后，可使用同一默认 Blob 容器创建另一 HBase 群集。新群集将接受你在原始群集中创建的 HBase 表。
+>[!NOTE]
+> 删除 HBase 群集后，可使用同一默认 Blob 容器创建另一 HBase 群集。新群集将接受你在原始群集中创建的 HBase 表。
 
 ## 使用 HBase shell
 目前，可通过两种方式访问 HBase。本部分介绍如何使用 HBase shell。下一部分介绍如何使用 .NET SDK。
@@ -125,7 +129,8 @@ HBase 提供了多种方法用于将数据载入表中。有关详细信息，�
 
 如果需要，你可以创建一个文本文件并将该文件上载到你自己的存储帐户。有关说明，请参阅[在 HDInsight 中为 Hadoop 作业上载数据][hdinsight-upload-data]。
 
-> [!NOTE]此过程使用你在上一个过程中创建的“联系人”HBase 表。
+> [!NOTE]
+>此过程使用你在上一个过程中创建的“联系人”HBase 表。
 
 1. 在 RDP 会话中，单击桌面上的“Hadoop 命令行”快捷方式。
 2. 更改目录：

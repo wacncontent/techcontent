@@ -27,7 +27,8 @@ wacn.date: 01/09/2017
 
 在此情况下，请从本主题中的属性列表着手，并识别包含敏感数据或 PII 数据、因而不能同步的属性。然后在安装期间使用 [Azure AD 应用程序和属性筛选](./active-directory-aadconnect-get-started-custom.md#azure-ad-app-and-attribute-filtering/)取消选择这些属性。
 
->[!WARNING] 取消选择属性时，应该小心，只取消选择那些绝对不能同步的属性。取消选择其他属性可能会对功能造成负面影响。
+>[!WARNING]
+> 取消选择属性时，应该小心，只取消选择那些绝对不能同步的属性。取消选择其他属性可能会对功能造成负面影响。
 
 ## Office 365 ProPlus
 

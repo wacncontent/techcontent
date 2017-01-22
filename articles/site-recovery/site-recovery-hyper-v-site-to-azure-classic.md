@@ -184,7 +184,8 @@ Azure 提供用于创建和处理资源的两个不同的[部署模型](../azure
 
     ![创建存储帐户](./media/site-recovery-hyper-v-site-to-azure-classic/create-resources.png)  
 
->[!NOTE] <p>1.我们不支持跨资源组移动使用[新 Azure 门户](../storage/storage-create-storage-account.md)创建的存储帐户。<p>2.对于用于部署 Site Recovery 的存储帐户，不支持在同一订阅中跨资源组[迁移](../azure-resource-manager/resource-group-move-resources.md)，或者跨订阅迁移。
+>[!NOTE]
+> <p>1.我们不支持跨资源组移动使用[新 Azure 门户](../storage/storage-create-storage-account.md)创建的存储帐户。<p>2.对于用于部署 Site Recovery 的存储帐户，不支持在同一订阅中跨资源组[迁移](../azure-resource-manager/resource-group-move-resources.md)，或者跨订阅迁移。
 
 ## 步骤 5：创建并配置保护组
 
@@ -207,7 +208,8 @@ Azure 提供用于创建和处理资源的两个不同的[部署模型](../azure
 
 将虚拟机添加到保护组以启用虚拟机保护。
 
->[!NOTE] 不支持保护运行 Linux 的、使用静态 IP 地址的 VM。
+>[!NOTE]
+> 不支持保护运行 Linux 的、使用静态 IP 地址的 VM。
 
 1. 在保护组的“计算机”选项卡上，单击“将虚拟机添加到保护组以启用保护”。
 2. 在“启用虚拟机保护”页上，选择你要保护的虚拟机。
@@ -237,7 +239,8 @@ Azure 提供用于创建和处理资源的两个不同的[部署模型](../azure
         - **子网**：对于虚拟机上的每个网络适配器，请在 Azure 网络中选择故障转移后计算机应连接到的子网。
         - **目标 IP 地址**：如果源虚拟机的网络适配器配置为使用静态 IP 地址，则可以指定目标虚拟机的 IP 地址，确保计算机在故障转移后具有相同的 IP 地址。如果不指定 IP 地址，将在故障转移时分配任何可用的地址。如果指定了正在使用的地址，故障转移将会失败。
 
-        > [!NOTE] [Migration of networks](../azure-resource-manager/resource-group-move-resources.md)用于部署 Site Recovery 的网络不可在同一订阅的不同资源组之间或者跨订阅进行。
+        > [!NOTE]
+        > [Migration of networks](../azure-resource-manager/resource-group-move-resources.md)用于部署 Site Recovery 的网络不可在同一订阅的不同资源组之间或者跨订阅进行。
 
         ![配置虚拟机属性](./media/site-recovery-hyper-v-site-to-azure-classic/multiple-nic.png)  
 
@@ -260,7 +263,8 @@ Azure 提供用于创建和处理资源的两个不同的[部署模型](../azure
 
 按如下所述运行测试故障转移：
 
->[!NOTE] 在为 Azure 执行故障转移时，若要获得最佳性能，请确保已在受保护计算机中安装 Azure 代理。这有助于加快启动速度，并且也对出现问题时的诊断有所帮助。Linux 代理可在 [此处](https://github.com/Azure/WALinuxAgent)找到 - Windows 代理可在[此处](http://go.microsoft.com/fwlink/?LinkID=394789)找到。
+>[!NOTE]
+> 在为 Azure 执行故障转移时，若要获得最佳性能，请确保已在受保护计算机中安装 Azure 代理。这有助于加快启动速度，并且也对出现问题时的诊断有所帮助。Linux 代理可在 [此处](https://github.com/Azure/WALinuxAgent)找到 - Windows 代理可在[此处](http://go.microsoft.com/fwlink/?LinkID=394789)找到。
 
 1. 在“恢复计划”选项卡上，选择该计划并单击“测试故障转移”。
 2. 在“确认测试故障转移”页上，选择“无”或选择一个特定的 Azure 网络。请注意，如果你选择了“无”，则测试故障转移将检查虚拟机是否可以正确复制到 Azure，但不会检查你的复制网络配置。

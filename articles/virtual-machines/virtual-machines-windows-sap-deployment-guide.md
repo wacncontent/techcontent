@@ -838,7 +838,8 @@ C:\\Packages\\Plugins\\Microsoft.AzureCAT.AzureEnhancedMonitoring.AzureCATExtens
 
 * 在命令窗口中不使用任何参数执行 azperflib.exe。
 
-> [!NOTE] azperflib.exe 将以循环的方式运行，并每隔 60 秒更新收集的计数器一次。若要结束循环，请关闭命令窗口。
+> [!NOTE]
+> azperflib.exe 将以循环的方式运行，并每隔 60 秒更新收集的计数器一次。若要结束循环，请关闭命令窗口。
 
 如果 Azure 增强型监视扩展未安装或者服务“AzureEnhancedMonitoring”未运行，则表示未正确配置该扩展。在此情况下，请查看[对适用于 SAP 的 Azure 监视基础结构进一步执行故障排除][deployment-guide-5.3]一章中有关如何重新部署该扩展的详细说明。
 

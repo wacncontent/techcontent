@@ -197,7 +197,8 @@ wacn.date: 01/05/2017
 
 3. 完成该命令后，__wordcountjava\\target__ 目录将包含名为 __wordcountjava-1.0-SNAPSHOT.jar__ 的文件。
 
-    > [!NOTE]__wordcountjava-1.0-SNAPSHOT.jar__ 文件是一个 uberjar。
+    > [!NOTE]
+    >__wordcountjava-1.0-SNAPSHOT.jar__ 文件是一个 uberjar。
 
 ## <a name="test"></a>在模拟器中测试该程序
 
@@ -225,7 +226,8 @@ wacn.date: 01/05/2017
 
 本教程使用位于 %hadoop_home% 目录中的 .txt 文件作为数据文件。
 
-> [!NOTE]Hadoop HDFS 命令区分大小写。
+> [!NOTE]
+>Hadoop HDFS 命令区分大小写。
 
 **将数据文件复制到模拟器 HDFS**
 

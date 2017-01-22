@@ -61,7 +61,8 @@ ms.author: glenga
 
 3. 单击“创建 TodoItem 表”以创建用于存储应用程序数据的表。
 
-    > [!NOTE]不要从 Azure 经典管理门户下载 HTML 应用。相反，我们将在下面的部分中手动创建一个 Sencha Touch 应用程序。
+    > [!NOTE]
+    >不要从 Azure 经典管理门户下载 HTML 应用。相反，我们将在下面的部分中手动创建一个 Sencha Touch 应用程序。
 
 1. 记下 Azure 经典管理门户中的 **appKey** 和 **appUrl**。您将在本教程的其他部分中使用它们。
 
@@ -103,7 +104,8 @@ ms.author: glenga
 
 ### 作为 Sencha 包安装
 
-> [!NOTE]只有在使用 <code>sencha generate app</code> 命令生成了应用程序时，才能使用此方法。
+> [!NOTE]
+>只有在使用 <code>sencha generate app</code> 命令生成了应用程序时，才能使用此方法。
 
 所有由 Sencha Cmd 生成的应用程序在根目录下都具有一个“packages”文件夹。可以配置“packages”文件夹的位置，但不管其位置如何，您的应用程序（或多个应用程序，如果您已创建 Sencha 工作区）都可以将该文件夹用于存储所有程序包。
 

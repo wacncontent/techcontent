@@ -66,7 +66,8 @@ Azure 模块将读取环境变量 `AZURE_STORAGE_ACCOUNT`、`AZURE_STORAGE_ACCES
 
     var blobSvc = azure.createBlobService();
 
-> [!NOTE] 可以匿名访问 Blob，只需使用 **createBlobServiceAnonymous** 并提供主机地址即可。例如，使用 `var blobSvc = azure.createBlobServiceAnonymous('https://myblob.blob.core.chinacloudapi.cn/');`。
+> [!NOTE]
+> 可以匿名访问 Blob，只需使用 **createBlobServiceAnonymous** 并提供主机地址即可。例如，使用 `var blobSvc = azure.createBlobServiceAnonymous('https://myblob.blob.core.chinacloudapi.cn/');`。
 
 [!INCLUDE [storage-container-naming-rules-include](../../includes/storage-container-naming-rules-include.md)]
 
@@ -167,7 +168,8 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 * **appendBlockFromStream** - 将流的内容追加到现有追加 Blob
 * **appendBlockFromText** - 将字符串的内容追加到现有追加 Blob
 
-> [!NOTE] appendFromXXX API 将会执行某些客户端验证以快速失败，从而避免不必要的服务器调用。而 appendBlockFromXXX 则不会如此。
+> [!NOTE]
+> appendFromXXX API 将会执行某些客户端验证以快速失败，从而避免不必要的服务器调用。而 appendBlockFromXXX 则不会如此。
 
 以下代码示例将 **test.txt** 文件的内容上传到 **myappendblob** 中。
 
@@ -194,7 +196,8 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
       }
     });
 
-> [!NOTE] 页 Blob 包含 512 字节的“页面”。如果上传大小不是 512 倍数的数据，则会收到错误。
+> [!NOTE]
+> 页 Blob 包含 512 字节的“页面”。如果上传大小不是 512 倍数的数据，则会收到错误。
 
 ## 列出容器中的 Blob
 若要列出容器中的 Blob，请使用 **listBlobsSegmented** 方法。如果想要返回带特定前缀的 Blob，请使用 **listBlobsSegmentedWithPrefix**。
@@ -272,14 +275,16 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 对 **myblob** 的后续操作必须提供 `options.leaseId` 参数。租约 ID 作为 `result.id` 从 **acquireLease** 返回。
 
-> [!NOTE] 默认情况下，租约期限为无期。可以指定一个有限的租期（15 到 60 秒），只需提供 `options.leaseDuration` 参数即可。
+> [!NOTE]
+> 默认情况下，租约期限为无期。可以指定一个有限的租期（15 到 60 秒），只需提供 `options.leaseDuration` 参数即可。
 
 若要删除租约，请使用 **releaseLease**。若要中断租约，但又要防止其他人在原始租约到期之前获得新租约，则可使用 **breakLease**。
 
 ## 使用共享访问签名
 共享访问签名 (SAS) 是一种安全的方法，用于对 Blob 和容器进行细致访问而无需提供存储帐户名或密钥。通常使用共享访问签名来提供对数据的有限访问权限，例如允许移动应用程序访问 Blob。
 
-> [!NOTE] 虽然也可以允许匿名访问 Blob，但共享访问签名可以允许提供更受控制的访问，因为必须生成 SAS。
+> [!NOTE]
+> 虽然也可以允许匿名访问 Blob，但共享访问签名可以允许提供更受控制的访问，因为必须生成 SAS。
 
 受信任的应用程序（例如基于云的服务）可使用 **BlobService** 的 **generateSharedAccessSignature** 生成共享访问签名，然后将其提供给不受信任的或不完全受信任的应用程序，例如移动应用。共享访问签名可使用策略生成，该策略描述了共享访问签名的生效日期和失效日期，以及授予共享访问签名持有者的访问级别。
 

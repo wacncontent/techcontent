@@ -23,7 +23,8 @@ ms.author: wesmc
 [!INCLUDE [notification-hubs-selector-get-started](../../includes/notification-hubs-selector-get-started.md)]
 
 ##概述
-> [!IMPORTANT] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
+> [!IMPORTANT]
+> 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，只需花费几分钟就能创建一个试用帐户。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 本教程演示如何使用 Azure 通知中心将推送通知发送到 iOS 应用程序。
 你将创建一个空白 Xamarin.iOS 应用，它使用 [Apple Push Notification 服务 APNs 接收推送通知。完成后，你将能够使用通知中心将推送通知广播到运行你的应用的所有设备。NotificationHubs 应用程序示例中提供了完成的代码。
@@ -39,7 +40,8 @@ ms.author: wesmc
 + iOS 开发人员计划成员身份
 + [Xamarin Studio]
 
-    > [!NOTE] 由于 iOS 推送通知配置要求，你必须在物理 iOS 设备（iPhone 或 iPad）而不是在模拟器上部署和测试示例应用程序。
+    > [!NOTE]
+    > 由于 iOS 推送通知配置要求，你必须在物理 iOS 设备（iPhone 或 iPad）而不是在模拟器上部署和测试示例应用程序。
 
 只有在完成本教程后，才能完成有关 Xamarin iOS 应用的所有其他通知中心教程。
 
@@ -173,7 +175,8 @@ ms.author: wesmc
             }
         }
 
-    > [!NOTE] 你可以选择覆盖 **FailedToRegisterForRemoteNotifications()** 以处理无网络连接等情况。如果用户可能会在脱机模式下（例如飞行模式）下启动你的应用程序，并且你想要处理应用特定的推送消息方案，则此操作特别重要。
+    > [!NOTE]
+    > 你可以选择覆盖 **FailedToRegisterForRemoteNotifications()** 以处理无网络连接等情况。如果用户可能会在脱机模式下（例如飞行模式）下启动你的应用程序，并且你想要处理应用特定的推送消息方案，则此操作特别重要。
 
 10. 在你的设备上运行应用程序。
 

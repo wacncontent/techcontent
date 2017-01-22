@@ -16,7 +16,8 @@ wacn.date: 08/10/2016
 
 [MongoDB](https://www.mongodb.org/) 是目前在 NoSQL 市场上非常受欢迎的一个数据库，本文介绍如何使用 Azure PowerShell 和 Azure CLI 在 Azure 虚拟机上搭建单节点 MongoDB（测试使用）和包含主从复制以及分片集群的多节点 MongoDB（生产环境使用）。
 
->[!NOTE]目前脚本仅支持 CentOS (6.5, 6.6, 6.7, 7.0, 7.1, 7.2)。
+>[!NOTE]
+>目前脚本仅支持 CentOS (6.5, 6.6, 6.7, 7.0, 7.1, 7.2)。
 
 ##准备步骤 
 
@@ -42,7 +43,8 @@ wacn.date: 08/10/2016
 
 ##开始动手
 
->[!NOTE]参数使用注意事项
+>[!NOTE]
+>参数使用注意事项
 >VmName: 需保证唯一性，该参数将作为 DNS 前缀。  
 >DNSNamePrefix：必须小写，需保证唯一性，该参数将作为 DNS 前缀。  
 >ZabbixServerIPAddress：可选项，指定 Zabbix 服务器地址，安装 MongoDB 过程中会在虚拟机上自动安装 Zabbix agent。      

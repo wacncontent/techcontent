@@ -41,7 +41,8 @@ ms.author: seanmck
 
 ![服务中的分区和副本][cluster-application-instances]
 
->[!TIP] 可以使用 http://&lt;yourclusteraddress&gt;:19080/Explorer 上提供的 Service Fabric Explorer 工具查看群集中应用程序的布局。有关详细信息，请参阅[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
+>[!TIP]
+> 可以使用 http://&lt;yourclusteraddress&gt;:19080/Explorer 上提供的 Service Fabric Explorer 工具查看群集中应用程序的布局。有关详细信息，请参阅[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
 
 ## 描述服务
 服务清单以声明方式定义服务类型和版本。它指定服务元数据，例如服务类型、运行状况属性、负载均衡度量值、服务二进制文件和配置文件。换言之，它描述了组成一个服务包以支持一个或多个服务类型的代码、配置和数据包。下面是服务清单的简单示例：
@@ -89,7 +90,8 @@ ms.author: seanmck
 </Settings>
 ~~~
 
-> [!NOTE] 服务清单可以包含多个代码、配置和数据包。可对它们进行独立的版本控制。
+> [!NOTE]
+> 服务清单可以包含多个代码、配置和数据包。可对它们进行独立的版本控制。
 
 <!--
 For more information about other features supported by service manifests, refer to the following articles:
@@ -134,7 +136,8 @@ For more information about other features supported by service manifests, refer 
 
 **DefaultServices** 声明每当一个应用程序依据此应用程序类型进行实例化时自动创建的服务实例。默认服务只是提供便利，创建后，它们的行为在每个方面都与常规服务类似。它们与应用程序实例中的任何其他服务一起升级，并且也可以将它们删除。
 
-> [!NOTE] 应用程序清单可以包含多个服务清单导入和默认服务。可对每个服务清单导入进行独立的版本控制。
+> [!NOTE]
+> 应用程序清单可以包含多个服务清单导入和默认服务。可对每个服务清单导入进行独立的版本控制。
 
 若要了解如何维护不同的应用程序和用于单个环境的服务参数，请参阅[管理多个环境的应用程序参数](./service-fabric-manage-multiple-environment-app-configuration.md)。
 

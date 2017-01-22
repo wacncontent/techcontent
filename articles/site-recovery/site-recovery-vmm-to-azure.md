@@ -313,7 +313,8 @@ Site Recovery 是一项 Azure 服务，可通过协调从本地物理服务器�
 
     ![修改网络属性](./media/site-recovery-vmm-to-azure/multi-nic.png)
 
->[!NOTE] 不支持具有静态 IP 地址的 Linux 虚拟机。
+>[!NOTE]
+> 不支持具有静态 IP 地址的 Linux 虚拟机。
 
 ##<a name="step-7-test-your-deployment"></a> 测试部署
 

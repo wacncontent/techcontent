@@ -27,7 +27,8 @@ ms.author: dobett
 * **ReadDeviceToCloudMessages**，显示模拟设备发送的遥测数据。
 * **SimulatedDevice**，它使用前面创建的设备标识连接到 IoT 中心，并使用 AMQPS 协议每秒发送一次遥测消息。
 
-> [!NOTE] 有关各种 SDK 的信息（你可以使用这些 SDK 构建可在设备和解决方案后端上运行的应用程序），请参阅 [IoT Hub SDKs][lnk-hub-sdks]（IoT 中心 SDK）。
+> [!NOTE]
+> 有关各种 SDK 的信息（你可以使用这些 SDK 构建可在设备和解决方案后端上运行的应用程序），请参阅 [IoT Hub SDKs][lnk-hub-sdks]（IoT 中心 SDK）。
 
 若要完成本教程，你需要以下各项：
 
@@ -92,13 +93,15 @@ ms.author: dobett
 
     ![应用程序生成的设备密钥][12]
 
-> [!NOTE] IoT 中心标识注册表只存储设备标识，以启用对中心的安全访问。它存储设备 ID 和密钥作为安全凭据，以及启用或禁用标志让你禁用对单个设备的访问。如果应用程序需要存储其他特定于设备的元数据，则应使用特定于应用程序的存储。有关详细信息，请参阅 [IoT 中心开发人员指南][lnk-devguide-identity]。
+> [!NOTE]
+> IoT 中心标识注册表只存储设备标识，以启用对中心的安全访问。它存储设备 ID 和密钥作为安全凭据，以及启用或禁用标志让你禁用对单个设备的访问。如果应用程序需要存储其他特定于设备的元数据，则应使用特定于应用程序的存储。有关详细信息，请参阅 [IoT 中心开发人员指南][lnk-devguide-identity]。
 
 ## 接收设备到云的消息
 
 在本部分中，你将创建一个 Windows 控制台应用程序，用于读取来自 IoT 中心的设备到云消息。IoT 中心公开与 [Azure 事件中心][lnk-event-hubs-overview]兼容的终结点，以让你读取设备到云的消息。为了简单起见，本教程创建的基本读取器不适用于高吞吐量部署。若要了解如何大规模处理设备到云的消息，请参阅[处理设备到云的消息][lnk-process-d2c-tutorial]教程。有关如何处理来自事件中心的消息的更多信息，请参阅[事件中心入门][lnk-eventhubs-tutorial]教程。（本教程适用于 IoT 中心上与事件中心兼容的终结点）。
 
-> [!NOTE] 读取设备到云消息的事件中心兼容终结点始终使用 AMQPS 协议。
+> [!NOTE]
+> 读取设备到云消息的事件中心兼容终结点始终使用 AMQPS 协议。
 
 1. 在 Visual Studio 中，使用“控制台应用程序”项目模板将新的 Visual C# Windows 经典桌面项目添加到当前解决方案。确保 .NET Framework 版本为 4.5.1 或更高。将项目命名为 **ReadDeviceToCloudMessages**。
 
@@ -223,7 +226,8 @@ ms.author: dobett
 
 本教程指导你完成创建 IoT 中心设备客户端的步骤。你也可以使用 [Azure IoT 中心的连接服务][lnk-connected-service] Visual Studio 扩展将所需的代码添加到设备客户端应用程序。
 
-> [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+> [!NOTE]
+> 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 运行应用程序
 

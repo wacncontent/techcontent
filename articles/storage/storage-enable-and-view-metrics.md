@@ -110,7 +110,8 @@ ms.author: fryu;robinsh
 很多第三方存储浏览工具可识别这些表，并可用于直接查看这些表。
 有关可用工具的列表，请参阅 [Azure 存储资源管理器](./storage-explorers.md)。
 
-> [!NOTE] 从 [Azure 存储资源管理器](http://storageexplorer.com/) 0.8.0 版本开始，可查看和下载分析指标表。
+> [!NOTE]
+> 从 [Azure 存储资源管理器](http://storageexplorer.com/) 0.8.0 版本开始，可查看和下载分析指标表。
 
 若要以编程方式访问分析表，请注意如果存储帐户中列出这些表，将不显示它们。可按名称直接访问它们，也可使用 .NET 客户端库中的 [CloudAnalyticsClient API](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.storage.analytics.cloudanalyticsclient.aspx) 查询表名。
 

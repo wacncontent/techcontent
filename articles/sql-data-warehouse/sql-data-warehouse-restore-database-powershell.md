@@ -75,7 +75,8 @@ ms.author: lakshmir;barbkess;sonyama
         # Verify the status of restored database
         $RestoredDatabase.status
 
->[!NOTE] 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
+>[!NOTE]
+> 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
 
 ## 还原已删除的数据库
 
@@ -107,7 +108,8 @@ ms.author: lakshmir;barbkess;sonyama
         # 验证已还原的数据库的状态
         $RestoredDatabase.status
 
->[!NOTE] 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
+>[!NOTE]
+> 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
 
 ## 从 Azure 地理区域还原
 
@@ -133,7 +135,8 @@ ms.author: lakshmir;barbkess;sonyama
         # 验证异地还原的数据库是否处于联机状态
         $GeoRestoredDatabase.status
 
->[!NOTE] 若要在完成还原后配置数据库，请参阅 [Configure your database after recovery][]（在恢复后配置数据库）。
+>[!NOTE]
+> 若要在完成还原后配置数据库，请参阅 [Configure your database after recovery][]（在恢复后配置数据库）。
 
 如果源数据库启用了 TDE，则已恢复的数据库将启用 TDE。
 

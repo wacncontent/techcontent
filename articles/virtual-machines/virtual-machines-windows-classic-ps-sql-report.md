@@ -24,7 +24,8 @@ ms.author: asaxton
 
 本主题说明并指导你完成 SQL Server Reporting Services 本机模式报表服务器在 Azure 虚拟机中的部署和配置。本文档中的步骤使用一系列手动步骤来创建虚拟机以及用于在 VM 上配置 Reporting Services 的 Windows PowerShell 脚本。配置脚本包括为 HTTP 或 HTTPs 打开防火墙端口。
 
->[!NOTE]如果在报表服务器上不需要 **HTTPS**，请**跳过步骤 2**。
+>[!NOTE]
+>如果在报表服务器上不需要 **HTTPS**，请**跳过步骤 2**。
 ><p>在步骤 1 中创建 VM 后，转到使用脚本部分配置报表服务器和 HTTP。在你运行该脚本后，报表服务器便可以使用。
 
 ## 前提条件和假设
@@ -107,7 +108,8 @@ ms.author: asaxton
 
 ## 步骤 2：创建服务器证书
 
->[!NOTE]如果在报表服务器上不需要 HTTPS，则可以**跳过步骤 2** 并转到**使用脚本来配置报表服务器和 HTTP** 部分。使用 HTTP 脚本快速配置报表服务器，报表服务器便可以使用了。
+>[!NOTE]
+>如果在报表服务器上不需要 HTTPS，则可以**跳过步骤 2** 并转到**使用脚本来配置报表服务器和 HTTP** 部分。使用 HTTP 脚本快速配置报表服务器，报表服务器便可以使用了。
 
 为了在 VM 上使用 HTTPS，你需要受信任的 SSL 证书。具体取决于你的方案，你可以使用以下两种方法之一：
 
@@ -129,7 +131,8 @@ ms.author: asaxton
 
     [用于管理 Windows Server 2012 的安全工具](https://technet.microsoft.com/zh-cn/library/jj730960.aspx)
 
-    >[!NOTE]受信任的 SSL 证书的 **issued to** 字段应与你用于新 VM 的**云服务 DNS 名称**相同。
+    >[!NOTE]
+    >受信任的 SSL 证书的 **issued to** 字段应与你用于新 VM 的**云服务 DNS 名称**相同。
 
 1. **在 Web 服务器上安装服务器证书**。Web 服务器在这种情况下是托管报表服务器的 VM， Web 应用在配置 Reporting Services 时的后续步骤中创建。有关通过使用证书 MMC 管理单元在 Web 服务器上安装服务器证书的详细信息，请参阅[安装服务器证书](https://technet.microsoft.com/zh-cn/library/cc740068)。
 
@@ -599,13 +602,15 @@ ms.author: asaxton
 
 ## 步骤 4：打开 Windows 防火墙端口
 
->[!NOTE]如果使用了其中一个脚本来配置报表服务器，则可以跳过本节。该脚本包含一个用于打开防火墙端口的步骤。HTTP 默认端口是 80，HTTPS 默认端口是 443。
+>[!NOTE]
+>如果使用了其中一个脚本来配置报表服务器，则可以跳过本节。该脚本包含一个用于打开防火墙端口的步骤。HTTP 默认端口是 80，HTTPS 默认端口是 443。
 
 若要远程连接到虚拟机上的报表管理器或报表服务器，在 VM 上需要 TCP 终结点。在 VM 防火墙中需要打开同一个端口。设置 VM 时创建了该终结点。
 
 本部分提供有关如何打开防火墙端口的基本信息。有关详细信息，请参阅[为报表服务器访问配置防火墙](https://technet.microsoft.com/zh-cn/library/bb934283.aspx)
 
->[!NOTE]如果使用了脚本来配置报表服务器，则可以跳过本节。该脚本包含一个用于打开防火墙端口的步骤。
+>[!NOTE]
+>如果使用了脚本来配置报表服务器，则可以跳过本节。该脚本包含一个用于打开防火墙端口的步骤。
 
 如果你为非 443 的 HTTPS 配置一个私有端口，请相应地修改下面的脚本。若要打开 Windows 防火墙上的端口 **443**，请完成下列操作：
 
@@ -681,7 +686,8 @@ ms.author: asaxton
 
 ## 如果使用的不是 VM，将成本降到最低
 
->[!NOTE]为了在不使用 Azure 虚拟机时尽可能减少费用，可从 Azure 经典管理门户关闭 VM。如果使用 VM 内的 Windows 电源选项来关闭 VM，仍将为 VM 支付相同的金额。若要减少费用，你需要在 Azure 经典管理门户中关闭 VM。如果你不再需要该 VM，请记住删除 VM 和关联的 .vhd 文件以避免产生存储费用。有关详细信息，请参阅[虚拟机定价详细信息](https://www.azure.cn/pricing/details/virtual-machines/)中的常见问题部分。
+>[!NOTE]
+>为了在不使用 Azure 虚拟机时尽可能减少费用，可从 Azure 经典管理门户关闭 VM。如果使用 VM 内的 Windows 电源选项来关闭 VM，仍将为 VM 支付相同的金额。若要减少费用，你需要在 Azure 经典管理门户中关闭 VM。如果你不再需要该 VM，请记住删除 VM 和关联的 .vhd 文件以避免产生存储费用。有关详细信息，请参阅[虚拟机定价详细信息](https://www.azure.cn/pricing/details/virtual-machines/)中的常见问题部分。
 
 ## 更多信息
 

@@ -65,7 +65,8 @@ ms.author: juliako
 | <p>**H264Layer**</p><p> minOccurs="0" maxOccurs="unbounded"</p> |[H264Layer](./media-services-mes-schema.md#H264Layer) |H264 层的集合。 |
 
 ## <a name="H264Layer"></a> H264Layer
-> [!NOTE]视频限制基于 [H264 级别](https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC#Levels)表中描述的值。
+> [!NOTE]
+>视频限制基于 [H264 级别](https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC#Levels)表中描述的值。
 
 ### 元素
 | 名称 | 类型 | 说明 |

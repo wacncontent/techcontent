@@ -242,7 +242,8 @@ Rest API 符合 HTTP 1.1 协议规范。下面显示了该 API 的常规 URI 结
 ### 使用模板
 可以使用 PowerShell 或 AzureCLI，将服务从模板部署到 Azure。若要从 GitHub 中的模板部署服务，请下载[模板](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vnet-two-subnets)，执行一些必要的修改，然后使用 Azure CLI 进行部署。
 
->[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 ## 后续步骤
 [Azure 资源管理器模板语言](../azure-resource-manager/resource-group-authoring-templates.md)

@@ -39,7 +39,8 @@ ms.author: adrianha
 
 * Visual Studio with Xamarin。有关说明，请参阅[设置和安装 Visual Studio 和 Xamarin](https://msdn.microsoft.com/zh-cn/library/mt613162.aspx)。
 
->[!NOTE] 如果想要在注册 Azure 帐户之前开始使用 Azure App Service，请转到[试用应用服务](https://tryappservice.azure.com/?appServiceName=mobile)。可以立即在应用服务中创建短期的入门级移动应用。无需付费，也不需要做出任何承诺。
+>[!NOTE]
+> 如果想要在注册 Azure 帐户之前开始使用 Azure App Service，请转到[试用应用服务](https://tryappservice.azure.com/?appServiceName=mobile)。可以立即在应用服务中创建短期的入门级移动应用。无需付费，也不需要做出任何承诺。
 
 ## 创建 Azure 移动应用后端
 
@@ -67,7 +68,8 @@ ms.author: adrianha
 
     来自请求的数据被插入到 TodoItem 表。移动应用后端返回存储在表中的项，数据显示在列表中。
 
-    > [!NOTE] 可以查看访问移动应用后端以查询和插入数据的代码，这些代码在 ToDoActivity.cs C# 文件中。
+    > [!NOTE]
+    > 可以查看访问移动应用后端以查询和插入数据的代码，这些代码在 ToDoActivity.cs C# 文件中。
 
 ## 后续步骤
 

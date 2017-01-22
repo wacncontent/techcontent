@@ -41,7 +41,8 @@ Id\_token 已签名，但目前不会加密。应用收到 id\_token 时，必�
 
     eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0.eyJhdWQiOiIyZDRkMTFhMi1mODE0LTQ2YTctODkwYS0yNzRhNzJhNzMwOWUiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83ZmU4MTQ0Ny1kYTU3LTQzODUtYmVjYi02ZGU1N2YyMTQ3N2UvIiwiaWF0IjoxMzg4NDQwODYzLCJuYmYiOjEzODg0NDA4NjMsImV4cCI6MTM4ODQ0NDc2MywidmVyIjoiMS4wIiwidGlkIjoiN2ZlODE0NDctZGE1Ny00Mzg1LWJlY2ItNmRlNTdmMjE0NzdlIiwib2lkIjoiNjgzODlhZTItNjJmYS00YjE4LTkxZmUtNTNkZDEwOWQ3NGY1IiwidXBuIjoiZnJhbmttQGNvbnRvc28uY29tIiwidW5pcXVlX25hbWUiOiJmcmFua21AY29udG9zby5jb20iLCJzdWIiOiJKV3ZZZENXUGhobHBTMVpzZjd5WVV4U2hVd3RVbTV5elBtd18talgzZkhZIiwiZmFtaWx5X25hbWUiOiJNaWxsZXIiLCJnaXZlbl9uYW1lIjoiRnJhbmsifQ.
 
-> [!TIP] 练习时，请尝试将示例 id\_token 中的声明粘贴到 [calebb.net](http://jwt.calebb.net) 中进行检查。
+> [!TIP]
+> 练习时，请尝试将示例 id\_token 中的声明粘贴到 [calebb.net](http://jwt.calebb.net) 中进行检查。
 
 #### Id\_tokens 中的声明
 
@@ -111,7 +112,8 @@ Id\_Token 使用行业标准非对称式加密算法（例如 RSA 256）进行�
 
     https://login.microsoftonline.com/common/.well-known/openid-configuration
 
-> [!TIP] 在浏览器中尝试打开此 URL！
+> [!TIP]
+> 在浏览器中尝试打开此 URL！
 
 此元数据文档是一个 JSON 对象，包含一些有用的信息，例如执行 OpenID Connect 身份验证所需的各种终结点的位置。
 

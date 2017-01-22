@@ -26,7 +26,8 @@ ms.author: adrianha
 
 本主题说明如何在关键的 Azure 应用服务移动应用方案中使用 .NET 后端服务器 SDK。借助 Azure 移动应用 SDK 可从 ASP.NET 应用程序使用移动客户端。
 
->[!TIP] [适用于 Azure 移动应用的 .NET 服务器 SDK][2] 是 GitHub 上的开放源代码。存储库包含所有源代码，包括整个服务器 SDK 单元测试套件以及一些示例项目。
+>[!TIP]
+> [适用于 Azure 移动应用的 .NET 服务器 SDK][2] 是 GitHub 上的开放源代码。存储库包含所有源代码，包括整个服务器 SDK 单元测试套件以及一些示例项目。
 
 ## 参考文档
 
@@ -327,7 +328,8 @@ Azure 移动应用使用应用服务身份验证/授权来保护移动后端。�
 
     config.Routes.MapHttpRoute("custom", ".auth/login/custom", new { controller = "CustomAuth" });
 
->[!TIP] 使用 `loginAsync()` 方法可确保将身份验证令牌附加到后续对服务的每个调用。
+>[!TIP]
+> 使用 `loginAsync()` 方法可确保将身份验证令牌附加到后续对服务的每个调用。
 
 ###<a name="user-info"></a>如何检索经过身份验证的用户信息
 

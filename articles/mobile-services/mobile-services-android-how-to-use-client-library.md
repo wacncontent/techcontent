@@ -682,7 +682,8 @@ ms.author: ricksal
 
     此代码将使用 Google 登录对用户进行身份验证。此时将出现一个对话框，其中显示了已经过身份验证的用户的 ID。如果未正常完成身份验证，你将无法继续操作。
 
-    > [!NOTE]如果使用的标识提供程序不是 Google，请将传递给上述 **login** 方法的值更改为下列其中一项：_MicrosoftAccount_或 _WindowsAzureActiveDirectory_。
+    > [!NOTE]
+    >如果使用的标识提供程序不是 Google，请将传递给上述 **login** 方法的值更改为下列其中一项：_MicrosoftAccount_或 _WindowsAzureActiveDirectory_。
 
 3. 运行应用程序时，请使用选择的标识提供者登录。
 

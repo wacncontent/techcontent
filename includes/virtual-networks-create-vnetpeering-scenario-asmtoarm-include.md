@@ -2,7 +2,8 @@
 
 在此方案中，在名为 **VNET1** 和 **VNET2** 的两个 VNet 之间创建对等网络，这两个 VNet 分别属于 Azure Resource Manager 部署模型和经典部署模型。
 
-> [!NOTE] 这两个虚拟网络必须位于同一订阅中。
+> [!NOTE]
+> 这两个虚拟网络必须位于同一订阅中。
 
 ![asm 到 arm 部署方案](./media/virtual-networks-create-vnetpeering-scenario-asmtoarm-include/figure01.PNG)  
 

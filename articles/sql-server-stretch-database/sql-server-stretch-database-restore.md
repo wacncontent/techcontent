@@ -23,7 +23,8 @@ ms.author: douglasl
 
 有关备份的详细信息，请参阅[备份已启用延伸的数据库](./sql-server-stretch-database-backup.md)。
 
->   [!NOTE] 备份只是完整的高可用性和业务连续性解决方案的一个部分。有关高可用性的详细信息，请参阅[高可用性解决方案](https://msdn.microsoft.com/zh-cn/library/ms190202.aspx)。
+>   [!NOTE]
+> 备份只是完整的高可用性和业务连续性解决方案的一个部分。有关高可用性的详细信息，请参阅[高可用性解决方案](https://msdn.microsoft.com/zh-cn/library/ms190202.aspx)。
 
 ## 还原 SQL Server 数据
 若要从硬件故障或损坏中恢复，请从备份还原已启用延伸的 SQL Server 数据库。你可以继续使用当前使用的 SQL Server 还原方法。有关详细信息，请参阅[还原和恢复概述](https://msdn.microsoft.com/zh-cn/library/ms191253.aspx)。

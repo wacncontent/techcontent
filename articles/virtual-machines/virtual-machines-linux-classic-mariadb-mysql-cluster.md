@@ -34,7 +34,8 @@ ms.author: v-ahsab
 
 ![体系结构](./media/virtual-machines-linux-classic-mariadb-mysql-cluster/Setup.png)
 
-> [!NOTE]本主题将使用 [Azure CLI] 工具，所以请确保下载这些工具，并根据说明将其连接到你的 Azure 订阅。如果你需要对 Azure CLI 中可用命令的参考，可单击此链接以查看 [Azure CLI 命令参考]。你还将需要[创建用于身份验证的 SSH 密钥]，并记下 **.pem 文件的位置**。
+> [!NOTE]
+>本主题将使用 [Azure CLI] 工具，所以请确保下载这些工具，并根据说明将其连接到你的 Azure 订阅。如果你需要对 Azure CLI 中可用命令的参考，可单击此链接以查看 [Azure CLI 命令参考]。你还将需要[创建用于身份验证的 SSH 密钥]，并记下 **.pem 文件的位置**。
 
 ## 创建模板
 
@@ -207,7 +208,8 @@ ms.author: v-ahsab
 
     - 编辑 **[mariadb]** 部分，后接以下内容
 
-    > [!NOTE]建议 **innodb\_buffer\_pool\_size** 占用 VM 的 70% 内存。对于 RAM 为 3.5GB 的 Medium Azure VM，这里已设置为 2.45GB。
+    > [!NOTE]
+    >建议 **innodb\_buffer\_pool\_size** 占用 VM 的 70% 内存。对于 RAM 为 3.5GB 的 Medium Azure VM，这里已设置为 2.45GB。
 
             innodb_buffer_pool_size = 2508M # The buffer pool contains buffered data and the index. This is usually set to 70% of physical memory.
             innodb_log_file_size = 512M #  Redo logs ensure that write operations are fast, reliable, and recoverable after a crash
@@ -234,7 +236,8 @@ ms.author: v-ahsab
 
 1. 从之前创建的 **mariadb-galera-image** 映像创建第一个 CentOS 7 VM，设置虚拟网络名称为 **mariadbvnet**、子网为 **mariadb**、虚拟机大小为“中等”，传入云服务名称为 **mariadbha**（或者你希望通过 mariadbha.chinacloudapp.cn 访问的任何名称），将此虚拟机的名称设置为 **mariadb1**、用户名设置为 **azureuser**，启用 SSH 访问并传送 SSH 证书 .pem 文件，并将 **/path/to/key.pem** 替换为已生成的 .pem SSH 密钥的存储位置路径。
 
-    > [!NOTE]为清楚起见，以下命令拆开显示在多行内，但每个都应作为一整行进行输入。
+    > [!NOTE]
+    >为清楚起见，以下命令拆开显示在多行内，但每个都应作为一整行进行输入。
 
         azure vm create 
         --virtual-network-name mariadbvnet
@@ -299,7 +302,8 @@ ms.author: v-ahsab
 
 在使用 Azure CLI 的机器上运行以下命令。命令参数结构是：`azure vm endpoint create-multiple <MachineName> <PublicPort>:<VMPort>:<Protocol>:<EnableDirectServerReturn>:<Load Balanced Set Name>:<ProbeProtocol>:<ProbePort>`
 
->[!NOTE] 以下的命令只适用于 Azure CLI 0.8，更新的版本的 endpoints-config 已经变更为 `<public-port>:<local-port>:<protocol>:<idle-timeout>:<direct-server-return>:<probe-protocol>:<probe-port>:<probe-path>:<probe-interval>:<probe-timeout>:<load-balanced-set-name>:<internal-load-balancer-name>:<load-balancer-distribution>`
+>[!NOTE]
+> 以下的命令只适用于 Azure CLI 0.8，更新的版本的 endpoints-config 已经变更为 `<public-port>:<local-port>:<protocol>:<idle-timeout>:<direct-server-return>:<probe-protocol>:<probe-port>:<probe-path>:<probe-interval>:<probe-timeout>:<load-balanced-set-name>:<internal-load-balancer-name>:<load-balancer-distribution>`
 
     azure vm endpoint create-multiple mariadb1 3306:3306:tcp:false:MySQL:tcp:3306
     azure vm endpoint create-multiple mariadb2 3306:3306:tcp:false:MySQL:tcp:3306

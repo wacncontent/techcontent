@@ -22,7 +22,8 @@ wacn.date: 12/26/2016
 
 Azure Resource Manager 模板可帮助你定义要为解决方案部署的资源，以及指定可用于为不同环境输入值的参数和变量。模板中包含可用于为部署构造值的 JSON 和表达式。有关编写 Azure Resource Manager 模板的详细信息，以及模板格式的讨论，请参阅[创作 Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)。
 
->[!NOTE] 本文中的示例演示如何使用 Azure Resource Manager 来创建服务总线命名空间和消息实体（队列）。
+>[!NOTE]
+> 本文中的示例演示如何使用 Azure Resource Manager 来创建服务总线命名空间和消息实体（队列）。
 
 ## 服务总线和事件中心 Resource Manager 模板
 这些服务总线 Azure Resource Manager 模板可供下载和部署。单击以下链接可获得有关每个链接的详细信息，其中包含指向 GitHub 上的模板的链接：

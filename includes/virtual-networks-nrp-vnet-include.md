@@ -1,7 +1,8 @@
 ## 虚拟网络
 虚拟网络 (VNET) 和子网资源可帮助定义 Azure 中运行的工作负载的安全边界。VNet 的特征包括一个地址空间（定义为 CIDR 块）的集合。
 
->[!NOTE]网络管理员应熟悉 CIDR 表示法。如果你不熟悉 CIDR，请[了解详细信息](http://whatismyipaddress.com/cidr)。
+>[!NOTE]
+>网络管理员应熟悉 CIDR 表示法。如果你不熟悉 CIDR，请[了解详细信息](http://whatismyipaddress.com/cidr)。
 
 ![包含多个子网的 VNet](./media/resource-groups-networking/Figure4.png)
 

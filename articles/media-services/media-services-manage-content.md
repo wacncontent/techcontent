@@ -167,7 +167,8 @@ SAS URL 采用以下格式：
 
 附带到期日期的定位符。使用门户发布资产时，会创建到期日期在 100 年以后的定位符。
 
->[!NOTE] 如果在 2015 年 3 月之前使用了门户创建定位符，则会创建到期日期在两年以后的定位符。
+>[!NOTE]
+> 如果在 2015 年 3 月之前使用了门户创建定位符，则会创建到期日期在两年以后的定位符。
 
 若要更新定位符的到期日期，请使用 [REST](https://docs.microsoft.com/zh-cn/rest/api/media/operations/locator) 或 [.NET] (https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.ilocator.update(v=azure.10).aspx) API。请注意，更新 SAS 定位符的到期日期时，URL 会发生变化。
 

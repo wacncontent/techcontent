@@ -83,7 +83,8 @@ PolyBase 使用 T-SQL 外部对象来定义外部数据的位置和属性。外�
     ,   LOCATION = 'wasbs://contosoretaildw-tables@contosoretaildw.blob.core.chinacloudapi.cn/'
     ); 
 
-> [!IMPORTANT] 如果你选择公开 azure blob 存储容器，请记住，由于你是数据所有者，因此在数据离开数据中心时，需要支付数据传出费用。
+> [!IMPORTANT]
+> 如果你选择公开 azure blob 存储容器，请记住，由于你是数据所有者，因此在数据离开数据中心时，需要支付数据传出费用。
 
 ## 2\.配置数据格式
 

@@ -187,7 +187,8 @@ Azure 经典管理门户不支持使用自定义配置选项设置 HDInsight 群
 4. 请不要关闭 RDP 会话。本教程后面的步骤中仍会用到它。
 5. 重复相同的步骤，以从 Contoso-HBase-CE ping Contoso-HBase-CN 的 headnode0。
 
->[!IMPORTANT] 在继续后面的步骤之前，DNS 必须正常工作。
+>[!IMPORTANT]
+> 在继续后面的步骤之前，DNS 必须正常工作。
 
 ##在 HBase 表之间启用复制
 

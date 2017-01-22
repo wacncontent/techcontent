@@ -1189,7 +1189,8 @@ DocumentDB 根据存储过程和触发器，为对集合直接执行基于 JavaS
 
 现在，我们可以在投影中的查询中使用此 UDF。在从查询内调用时，必须用区分大小写的前缀“udf.”限定 UDF。
 
->[!NOTE] 在 2015 年 3 月 17 日之前，DocumentDB 支持无需“udf.”前缀的 UDF 调用，例如 SELECT REGEX\_MATCH()。已弃用此调用模式。
+>[!NOTE]
+> 在 2015 年 3 月 17 日之前，DocumentDB 支持无需“udf.”前缀的 UDF 调用，例如 SELECT REGEX\_MATCH()。已弃用此调用模式。
 
 **查询**
 

@@ -26,7 +26,8 @@ ms.author: jdial
 - **事件日志：**可以使用此日志查看基于 MAC 地址向虚拟机和实例角色应用的 NSG 规则。每隔 60 秒收集一次这些规则的状态。 
 - **计数器日志：**可以使用此日志查看应用每个 NSG 规则拒绝或允许流量的次数。
 
->[!WARNING] 日志仅适用于 Resource Manager 部署模型中部署的资源。不能将日志用于经典部署模型中的资源。若要更好地了解两种模型，请参考[了解 Resource Manager 部署和典型部署](../azure-resource-manager/resource-manager-deployment-model.md)一文。
+>[!WARNING]
+> 日志仅适用于 Resource Manager 部署模型中部署的资源。不能将日志用于经典部署模型中的资源。若要更好地了解两种模型，请参考[了解 Resource Manager 部署和典型部署](../azure-resource-manager/resource-manager-deployment-model.md)一文。
 
 ##启用日志记录
 始终为所有 Resource Manager 资源自动启用审核日志记录。需启用事件和计数器日志记录，才能开始收集通过这些日志提供的数据。若要启用日志记录，请按以下步骤操作。
@@ -108,7 +109,8 @@ Azure 默认生成此日志（以前称为“操作日志”）。日志在 Azur
 ## 查看和分析计数器和事件日志 
 需要连接到存储帐户并检索事件和计数器日志的 JSON 日志条目。下载 JSON 文件后，可将其转换为 CSV，并在 Excel、PowerBI 或任何其他数据可视化工具中进行查看。
 
->[!TIP] 如果你熟悉 Visual Studio 和更改 C# 中的常量和变量值的基本概念，可从 Github 获取并使用[日志转换器工具](https://github.com/Azure-Samples/networking-dotnet-log-converter)。
+>[!TIP]
+> 如果你熟悉 Visual Studio 和更改 C# 中的常量和变量值的基本概念，可从 Github 获取并使用[日志转换器工具](https://github.com/Azure-Samples/networking-dotnet-log-converter)。
 
 ## 后续步骤
 

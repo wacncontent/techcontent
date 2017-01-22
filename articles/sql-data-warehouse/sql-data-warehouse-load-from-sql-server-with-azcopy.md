@@ -26,7 +26,8 @@ wacn.date: 12/12/2016
 * 已安装 bcp 命令行实用工具
 * 已安装 SQLCMD 命令行实用工具
 
->[!NOTE] 可以从 [Microsoft 下载中心][]下载 bcp 和 sqlcmd 实用程序。
+>[!NOTE]
+> 可以从 [Microsoft 下载中心][]下载 bcp 和 sqlcmd 实用程序。
 
 ## 将数据导入 SQL 数据仓库
 在本教程中，你将在 Azure SQL 数据仓库中创建一个表，然后将数据导入该表。
@@ -48,7 +49,8 @@ wacn.date: 12/12/2016
         );
     "
 
->[!NOTE] 有关在 SQL 数据仓库中创建表和 WITH 子句中可用选项的详细信息，请参阅 [Table Overview][]（表概述）或 [CREATE TABLE syntax][]（CREATE TABLE 语法）。
+>[!NOTE]
+> 有关在 SQL 数据仓库中创建表和 WITH 子句中可用选项的详细信息，请参阅 [Table Overview][]（表概述）或 [CREATE TABLE syntax][]（CREATE TABLE 语法）。
 
 ### 步骤 2：创建源数据文件
 打开记事本，将以下几行数据复制到新文本文件，然后将此文件保存到本地临时目录，路径为 C:\Temp\DimDate2.txt。
@@ -66,7 +68,8 @@ wacn.date: 12/12/2016
     20150901,3,1
     20150101,1,3
 
-> [!NOTE] 请务必记得 bcp.exe 不支持 UTF-8 文件编码。使用 bcp.exe 时，请使用 ASCII 文件或 UTF-16 编码的文件。
+> [!NOTE]
+> 请务必记得 bcp.exe 不支持 UTF-8 文件编码。使用 bcp.exe 时，请使用 ASCII 文件或 UTF-16 编码的文件。
 
 ### 步骤 3：连接并导入数据
 在 bcp 中，可以使用以下命令来连接并导入数据（相应地替换其中的值）：
@@ -129,7 +132,8 @@ Azure SQL 数据仓库尚不支持自动创建或自动更新统计信息。为�
     20150901,3,1
     20150101,1,3
 
->[!NOTE] 由于分布式系统的性质，数据顺序在不同 SQL 数据仓库数据库之间可能不同。另一种做法是使用 bcp 的 **queryout** 函数来编写查询提取，而不是导出整个表。
+>[!NOTE]
+> 由于分布式系统的性质，数据顺序在不同 SQL 数据仓库数据库之间可能不同。另一种做法是使用 bcp 的 **queryout** 函数来编写查询提取，而不是导出整个表。
 
 ## 后续步骤
 有关加载数据的概述，请参阅[将数据载入 SQL 数据仓库][Load data into SQL Data Warehouse]。

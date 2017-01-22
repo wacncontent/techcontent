@@ -20,13 +20,15 @@ ms.author: danlep
 
 # 在 Azure VM 中使用应用商店映像创建 HPC Pack 群集的头节点
 
-> [!NOTE]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
+> [!NOTE]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
 
 头节点需要加入到 Azure 虚拟网络的 Active Directory 域中。可以使用此头节点在 Azure 中进行 HPC Pack 概念验证部署，并将计算资源添加到该群集以运行 HPC 工作负荷。
 
 ![HPC Pack 头节点][headnode]
 
->[!NOTE]目前，HPC Pack VM 映像为基于预安装了 HPC Pack 2012 R2 Update 2 的 Windows Server 2012 R2 Datacenter。还预安装了 Microsoft SQL Server 2014 Express。
+>[!NOTE]
+>目前，HPC Pack VM 映像为基于预安装了 HPC Pack 2012 R2 Update 2 的 Windows Server 2012 R2 Datacenter。还预安装了 Microsoft SQL Server 2014 Express。
 
 对于 Azure 中 HPC Pack 群集的生产部署，我们建议采用自动部署方法，如 [HPC Pack IaaS 部署脚本](./virtual-machines-windows-classic-hpcpack-cluster-powershell-script.md)。
 

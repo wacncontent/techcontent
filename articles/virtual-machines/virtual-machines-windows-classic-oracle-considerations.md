@@ -47,7 +47,8 @@ Azure 为每个虚拟机分配内部 IP 地址。除非虚拟机是虚拟网络�
 - **Oracle ASM 本身**与使用磁盘数组的方法相比，可能会导致更好的写操作性能，但会导致更差的读操作 IOPS。下图在逻辑上描绘了此安排。  
     ![](./media/virtual-machines-windows-classic-oracle-considerations/image2.png)
 
->[!IMPORTANT]逐条评估写性能和读性能之间的得失。使用这方法时的实际结果可能会有所不同。
+>[!IMPORTANT]
+>逐条评估写性能和读性能之间的得失。使用这方法时的实际结果可能会有所不同。
 
 ### 高可用性和灾难恢复注意事项
 

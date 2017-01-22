@@ -30,7 +30,8 @@ ms.author: jrj;barbkess;sonyama
 
 如果字符串较短，则可以像平时一样使用 [sp\_executesql][sp_executesql]。
 
-> [!NOTE] 作为动态 SQL 执行的语句仍将遵循所有 TSQL 验证规则。
+> [!NOTE]
+> 作为动态 SQL 执行的语句仍将遵循所有 TSQL 验证规则。
 
 ## 后续步骤
 有关更多开发技巧，请参阅[开发概述][development overview]。

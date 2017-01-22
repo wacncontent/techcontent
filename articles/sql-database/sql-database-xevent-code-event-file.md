@@ -240,7 +240,8 @@ PowerShell 脚本在结束时输出了几个命名值。必须编辑 Transact-SQ
 
 6. 保存然后运行该脚本。
 
-> [!WARNING] 前置 PowerShell 脚本生成的 SAS 密钥值可能以“?”（问号）开头。在以下 T-SQL 脚本中使用 SAS 密钥时，必须*删除前导“?”*。否则，可能由于安全原因而阻止操作。
+> [!WARNING]
+> 前置 PowerShell 脚本生成的 SAS 密钥值可能以“?”（问号）开头。在以下 T-SQL 脚本中使用 SAS 密钥时，必须*删除前导“?”*。否则，可能由于安全原因而阻止操作。
         ---- TODO: First, run the PowerShell portion of this two-part code sample.
         ---- TODO: Second, find every 'TODO' in this Transact-SQL file, and edit each.
 

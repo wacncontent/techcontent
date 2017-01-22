@@ -43,7 +43,8 @@ Xamarin 使开发人员能够通过共享的 C# 代码库来使用其本机用�
 
 现在，应该有了这样一个应用程序，单击其中某个按钮将使计数器递增。
 
-> [!NOTE] 用于 Xamarin 的 Azure 存储客户端库当前支持以下项目类型：本机共享、Xamarin.Forms 共享、Xamarin.Android 和 Xamarin.iOS。
+> [!NOTE]
+> 用于 Xamarin 的 Azure 存储客户端库当前支持以下项目类型：本机共享、Xamarin.Forms 共享、Xamarin.Android 和 Xamarin.iOS。
 
 ## 创建容器并上传 Blob
 

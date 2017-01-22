@@ -37,7 +37,8 @@ ms.author: adegeo
 
 如果角色未启动，或者在初始化、繁忙和停止状态之间循环，可能是因为每次角色重新启动生命周期事件时，代码都引发了未处理的异常。在这种情况下，请使用 [UnhandledException](https://msdn.microsoft.com/zh-cn/library/system.appdomain.unhandledexception.aspx) 事件来确定异常的原因并采用适当的方法进行处理。角色也可能会从 [Run](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.run.aspx) 方法返回，从而促使角色重新启动。有关部署状态的详细信息，请参阅[导致角色回收的常见问题](https://msdn.microsoft.com/zh-cn/library/azure/gg465402.aspx)。
 
-> [!NOTE]如果使用 [Azure Tools for Microsoft Visual Studio](https://msdn.microsoft.com/zh-cn/library/azure/ee405484.aspx) 开发应用程序，则角色项目模板将自动在 WebRole.cs 和 WorkerRole.cs 文件中扩展 **RoleEntryPoint** 类。
+> [!NOTE]
+>如果使用 [Azure Tools for Microsoft Visual Studio](https://msdn.microsoft.com/zh-cn/library/azure/ee405484.aspx) 开发应用程序，则角色项目模板将自动在 WebRole.cs 和 WorkerRole.cs 文件中扩展 **RoleEntryPoint** 类。
 
 ## OnStart 方法
 
@@ -63,7 +64,8 @@ Azure 使角色实例联机时，会调用 **OnStart** 方法。OnStart 代码�
 
 **OnStop** 方法在 Azure 使角色实例脱机之后并且在进程退出之前被调用。可以重写此方法来调用角色实例所需的代码，以便彻底关闭此角色实例。
 
-> [!IMPORTANT]如果出于某些原因而不是用户启动的关闭而调用 **OnStop** 方法，则此方法中运行的代码必须在有限的时间内完成。这段时间过后，进程将被终止，因此必须确保 **OnStop** 方法中的代码能够快速运行或者不必完全运行。引发 **Stopping** 事件后，会调用 **OnStop** 方法。
+> [!IMPORTANT]
+>如果出于某些原因而不是用户启动的关闭而调用 **OnStop** 方法，则此方法中运行的代码必须在有限的时间内完成。这段时间过后，进程将被终止，因此必须确保 **OnStop** 方法中的代码能够快速运行或者不必完全运行。引发 **Stopping** 事件后，会调用 **OnStop** 方法。
 
 ## Run 方法
 

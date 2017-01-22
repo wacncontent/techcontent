@@ -87,7 +87,8 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
 
 - SKU 系列确定计费类型。可以指定 *Metereddata* 以获取数据流量套餐，指定 *Unlimiteddata* 以获取无限制流量套餐。注意，可以将计费类型从 *Metereddata* 更改为 *Unlimiteddata*，但不能将类型从 *Unlimiteddata* 更改为 *Metereddata*。
 
->[!IMPORTANT] 从发布服务密钥的那一刻起，将对 ExpressRoute 线路进行计费。确保连接服务提供商准备好预配线路后就执行此操作。
+>[!IMPORTANT]
+> 从发布服务密钥的那一刻起，将对 ExpressRoute 线路进行计费。确保连接服务提供商准备好预配线路后就执行此操作。
 
 响应将包含服务密钥。你可以通过运行以下命令获取所有这些参数的详细说明。
 
@@ -209,7 +210,8 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
 
 有关分步说明，请参阅 [ExpressRoute circuit routing configuration](./expressroute-howto-routing-arm.md)（ExpressRoute 线路路由配置）一文，了解如何创建和修改线路对等互连。
 
->[!IMPORTANT] 这些说明只适用于由提供第 2 层连接服务的服务提供商创建的线路。如果你的服务提供商提供第 3 层托管服务（通常是 IP VPN，如 MPLS），则连接服务提供商将为你配置和管理路由。
+>[!IMPORTANT]
+> 这些说明只适用于由提供第 2 层连接服务的服务提供商创建的线路。如果你的服务提供商提供第 3 层托管服务（通常是 IP VPN，如 MPLS），则连接服务提供商将为你配置和管理路由。
 
 ### 8\.将虚拟网络链接到 ExpressRoute 线路
 
@@ -305,7 +307,8 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
 
 ### 禁用 ExpressRoute 高级版外接程序
 
->[!IMPORTANT] 如果你使用的资源超出了标准线路允许的范围，此操作可能会失败。
+>[!IMPORTANT]
+> 如果你使用的资源超出了标准线路允许的范围，此操作可能会失败。
 
 注意以下事项：
 
@@ -328,7 +331,8 @@ PowerShell cmdlet `Get-AzureRmExpressRouteServiceProvider` 将返回此信息，
 
 有关提供商支持的带宽选项，请查看 [ExpressRoute FAQ](./expressroute-faqs.md)（ExpressRoute 常见问题）。你可以选取大于现有线路大小的任何大小。
 
->[!IMPORTANT] 但是，你无法在不中断的情况下降低 ExpressRoute 线路的带宽。带宽降级需要取消对 ExpressRoute 线路的预配，然后重新预配新的 ExpressRoute 线路。
+>[!IMPORTANT]
+> 但是，你无法在不中断的情况下降低 ExpressRoute 线路的带宽。带宽降级需要取消对 ExpressRoute 线路的预配，然后重新预配新的 ExpressRoute 线路。
 
 确定所需的大小后，可以使用以下命令调整线路的大小。
 

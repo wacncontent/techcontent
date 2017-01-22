@@ -31,13 +31,15 @@ ms.tgt_pltfrm: NA
 
 可以将多个池添加到服务器，但不能将数据库从不同的服务器添加到同一个池中。若要创建池，需要在 V12 服务器中至少有一个数据库。如果你没有这样的数据库，请参阅[创建首个 Azure SQL 数据库](./sql-database-get-started.md)。可以创建只有一个数据库的池，但是池只有在具有多个数据库时才会经济高效。请参阅[弹性数据库池的价格和性能注意事项](./sql-database-elastic-pool-guidance.md)。
 
-> [!NOTE] 池只能随 SQL 数据库 V12 服务器一起使用。如果在 V11 服务器上有数据库，可以在 V12 服务器上[使用 PowerShell 脚本将它们标识为池的候选数据库](./sql-database-elastic-pool-database-assessment-powershell.md)，然后在一个步骤中[使用 PowerShell 升级到 V12 并创建一个池](./sql-database-upgrade-server-powershell.md)。
+> [!NOTE]
+> 池只能随 SQL 数据库 V12 服务器一起使用。如果在 V11 服务器上有数据库，可以在 V12 服务器上[使用 PowerShell 脚本将它们标识为池的候选数据库](./sql-database-elastic-pool-database-assessment-powershell.md)，然后在一个步骤中[使用 PowerShell 升级到 V12 并创建一个池](./sql-database-upgrade-server-powershell.md)。
 
 ## 步骤 1：创建新池
 
 本文介绍如何在门户的现有“服务器”边栏选项卡中创建新池，这是将现有数据库移到池中的最简单方法。
 
-> [!NOTE] 还可通过在**应用商店**中搜索 **SQL 弹性池**，或单击“SQL 弹性池”浏览边栏选项卡中的“+添加”来创建新池。可通过此池预配工作流指定新的或现有的服务器。
+> [!NOTE]
+> 还可通过在**应用商店**中搜索 **SQL 弹性池**，或单击“SQL 弹性池”浏览边栏选项卡中的“+添加”来创建新池。可通过此池预配工作流指定新的或现有的服务器。
 
 1. 在 [Azure 门户预览](http://portal.azure.cn/)左侧的列表下面，单击“更多服务”**>**“SQL 服务器”，然后单击包含要添加到池的数据库的服务器。
 2. 单击“新建池”。
@@ -62,7 +64,8 @@ ms.tgt_pltfrm: NA
 
 若要更改池的定价层，请单击“定价层”，单击所需定价层，然后单击“选择”。
 
-> [!IMPORTANT] 选择定价层并在最后一个步骤中单击“确定”来提交更改之后，便无法更改池的定价层。若要更改现有弹性池的定价层，请在所需的定价层中创建新的弹性池，然后将弹性数据库移转到这个新池。
+> [!IMPORTANT]
+> 选择定价层并在最后一个步骤中单击“确定”来提交更改之后，便无法更改池的定价层。若要更改现有弹性池的定价层，请在所需的定价层中创建新的弹性池，然后将弹性数据库移转到这个新池。
 
 ![选择定价层](./media/sql-database-elastic-pool-create-portal/pricing-tier.png)
 

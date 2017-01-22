@@ -24,7 +24,8 @@ wacn.date: 11/22/2016
 
 ##概述
 
-> [!NOTE] 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](https://www.azure.cn/pricing/1rmb-trial/)。
+> [!NOTE]
+> 若要完成本教程，你必须有一个有效的 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 1 元试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 本教程演示如何使用 Azure 通知中心将推送通知发送到 iOS 应用程序。你将创建一个空白 iOS 应用，它使用 Apple 推送通知服务 (APNS) 接收推送通知。
 
@@ -45,7 +46,8 @@ wacn.date: 11/22/2016
 + 支持 iOS 8（或更高版本）的设备
 + [Apple 开发人员计划](https://developer.apple.com/programs/)成员身份。
 
-    > [!NOTE] 由于推送通知的配置要求，你必须在物理 iOS 的设备（iPhone 或 iPad）而不是在 iOS 模拟器上部署和测试推送通知。
+    > [!NOTE]
+    > 由于推送通知的配置要求，你必须在物理 iOS 的设备（iPhone 或 iPad）而不是在 iOS 模拟器上部署和测试推送通知。
 
 完成本教程是学习有关 iOS 应用的所有其他通知中心教程的先决条件。
 
@@ -87,7 +89,8 @@ wacn.date: 11/22/2016
 
 4. 下载[移动服务 iOS SDK 版本 1.2.4]，然后将文件解压缩。在 Xcode 中，右键单击你的项目，然后单击“将文件添加到”选项，将 **WindowsAzureMessaging.framework** 文件夹添加到 Xcode 项目。选择“需要时复制项”，然后单击“添加”。
 
-    >[!NOTE] 通知中心 SDK 目前不支持 Xcode 7 上的 Bitcode。你必须在项目的“构建选项”中将“启用 Bitcode”设置为“否”。
+    >[!NOTE]
+    > 通知中心 SDK 目前不支持 Xcode 7 上的 Bitcode。你必须在项目的“构建选项”中将“启用 Bitcode”设置为“否”。
 
        ![解压缩 Azure SDK][10]  
 
@@ -162,7 +165,8 @@ wacn.date: 11/22/2016
 
 ## （可选）从应用发送推送通知
 
->[!IMPORTANT] 提供这个从客户端应用发送通知查询的示例仅供学习。由于这需要将 `DefaultFullSharedAccessSignature` 呈现在客户端应用中，这使您的通知中心面临这样的风险：即用户可能会获得相应访问权限将未经授权的通知发送到您的客户端。
+>[!IMPORTANT]
+> 提供这个从客户端应用发送通知查询的示例仅供学习。由于这需要将 `DefaultFullSharedAccessSignature` 呈现在客户端应用中，这使您的通知中心面临这样的风险：即用户可能会获得相应访问权限将未经授权的通知发送到您的客户端。
 
 如果你要从应用内发送推送通知，本节提供如何使用 REST 接口执行此操作的示例。
 
@@ -419,7 +423,8 @@ wacn.date: 11/22/2016
 
 11. 生成项目并确认没有错误。
 
-> [!NOTE] 如果在 Xcode7 中遇到有关 bitcode 支持的生成错误，应该在 Xcode 中将“生成设置”>“启用 Bitcode (ENABLE\_BITCODE)”更改为“否”。通知中心 SDK 目前不支持 Bitcode。
+> [!NOTE]
+> 如果在 Xcode7 中遇到有关 bitcode 支持的生成错误，应该在 Xcode 中将“生成设置”>“启用 Bitcode (ENABLE\_BITCODE)”更改为“否”。通知中心 SDK 目前不支持 Bitcode。
 
 可以在 Apple [本地和推送通知编程指南]中查看所有可能的通知负载。
 

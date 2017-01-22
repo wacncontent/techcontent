@@ -23,7 +23,8 @@ ms.author: douglasl
 
 若要了解有关 Stretch Database 的详细信息，请参阅 [Stretch Database](./sql-server-stretch-database-overview.md)。
 
- >   [!NOTE] 若要在以后禁用 Stretch Database，请记住，针对表或数据库禁用 Stretch Database 不会删除远程对象。若要删除远程表或远程数据库，必须使用 Azure 管理门户。远程对象在手动删除之前，会持续产生 Azure 费用。
+ >   [!NOTE]
+ > 若要在以后禁用 Stretch Database，请记住，针对表或数据库禁用 Stretch Database 不会删除远程对象。若要删除远程表或远程数据库，必须使用 Azure 管理门户。远程对象在手动删除之前，会持续产生 Azure 费用。
 
 ## 启动向导
 
@@ -75,7 +76,8 @@ ms.author: douglasl
 
 5. 单击“检查”以测试该函数。如果该函数返回表中的结果（也就是说，如果有要迁移的行满足条件），则测试会报告“成功”。
 
-    >   [!NOTE] 显示筛选器查询的文本框是只读的。你无法在文本框中编辑查询。
+    >   [!NOTE]
+    > 显示筛选器查询的文本框是只读的。你无法在文本框中编辑查询。
 
 6.  单击“完成”返回到“选择表”页面。
 

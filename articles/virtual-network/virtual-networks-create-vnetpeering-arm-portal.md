@@ -61,7 +61,8 @@ ms.author: narayanannamalai;annahar
 
     ![最终链接状态 2](./media/virtual-networks-create-vnetpeering-arm-portal/figure08.png)  
 
-    > [!NOTE] 仅当两个链接已连接在一起时，才会建立 VNET 对等互连。
+    > [!NOTE]
+    > 仅当两个链接已连接在一起时，才会建立 VNET 对等互连。
 
 每个链接有几个可配置属性：
 
@@ -92,7 +93,8 @@ VNet 对等互连中的每个链接都具有上述这组属性。从门户中，
 
     ![RBAC2](./media/virtual-networks-create-vnetpeering-arm-portal/figure11.png)  
 
-    > [!NOTE] 可以在浏览器中同时注销和登录两个用户会话，确保成功启用授权。
+    > [!NOTE]
+    > 可以在浏览器中同时注销和登录两个用户会话，确保成功启用授权。
 
 6. 作为用户 A 登录到门户，导航到 VNET3 边栏选项卡，单击“对等互连”，勾选“我知道我的资源 ID”复选框并使用以下格式键入 VNET5 的资源 ID。
 

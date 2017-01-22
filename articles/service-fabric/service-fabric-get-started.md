@@ -38,7 +38,8 @@ ms.author: ryanwi
 - Windows Server 2012 R2
 - Windows 10
 
->[!NOTE] 默认情况下，Windows 7 仅包含 Windows PowerShell 2.0。Service Fabric PowerShell cmdlet 需要 PowerShell 3.0 或更高版本。可以从 Microsoft 下载中心[下载 Windows PowerShell 5.0][powershell5-download]。
+>[!NOTE]
+> 默认情况下，Windows 7 仅包含 Windows PowerShell 2.0。Service Fabric PowerShell cmdlet 需要 PowerShell 3.0 或更高版本。可以从 Microsoft 下载中心[下载 Windows PowerShell 5.0][powershell5-download]。
 
 ## 安装运行时、SDK 和工具
 Web 平台安装程序为 Service Fabric 开发提供两种配置：

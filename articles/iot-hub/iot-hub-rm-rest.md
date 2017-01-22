@@ -25,7 +25,8 @@ ms.author: dobett
 
 你可以通过编程方式使用 [IoT 中心资源提供程序 REST API][lnk-rest-api] 创建和管理 Azure IoT 中心。本教程说明如何使用资源提供程序 REST API 从 C# 程序创建 IoT 中心。
 
-> [!NOTE] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用资源管理器部署模型。
+> [!NOTE]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用资源管理器部署模型。
 
 为了完成本教程，你需要有：
 
@@ -149,7 +150,8 @@ ms.author: dobett
 3. 单击“调试”，然后单击“开始调试”以运行应用程序。运行部署可能需要几分钟时间。
 4. 若要验证应用程序中是否添加了新 IoT 中心，可以访问 [Azure 门户预览][lnk-azure-portal]并查看资源列表，或使用 **Get-AzureRmResource** PowerShell cmdlet。
 
-> [!NOTE] 本示例应用程序将添加用于对你计费的 S1 标准 IoT 中心。可以通过[门户预览][lnk-azure-portal]删除该 IoT 中心，或者在完成后使用 **Remove-AzureRmResource** PowerShell cmdlet。
+> [!NOTE]
+> 本示例应用程序将添加用于对你计费的 S1 标准 IoT 中心。可以通过[门户预览][lnk-azure-portal]删除该 IoT 中心，或者在完成后使用 **Remove-AzureRmResource** PowerShell cmdlet。
 
 ## 后续步骤
 

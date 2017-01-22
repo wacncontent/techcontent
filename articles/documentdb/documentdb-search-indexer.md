@@ -91,7 +91,8 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
         "softDeleteMarkerValue" : "the value that identifies a document as deleted"
     }
 
-> [!NOTE] 如果你使用的是自定义投影，则将需要在 SELECT 子句中包含 softDeleteColumnName 属性。
+> [!NOTE]
+> 如果你使用的是自定义投影，则将需要在 SELECT 子句中包含 softDeleteColumnName 属性。
 
 ###<a id="CreateDataSourceExample"></a>请求正文示例
 
@@ -132,7 +133,8 @@ Azure 搜索支持创建和管理数据源（包括 DocumentDB）以及针对这
 
 确保目标索引的架构与源 JSON 文档的架构或自定义查询投影的输出的架构兼容。
 
->[!NOTE] 对于分区集合，默认文档键是 DocumentDB 的 `_rid` 属性，它在 Azure 搜索中重命名为 `rid`。此外，DocumentDB 的 `_rid` 值包含在 Azure 搜索键中无效的字符；因此，`_rid` 值采用 Base64 编码。
+>[!NOTE]
+> 对于分区集合，默认文档键是 DocumentDB 的 `_rid` 属性，它在 Azure 搜索中重命名为 `rid`。此外，DocumentDB 的 `_rid` 值包含在 Azure 搜索键中无效的字符；因此，`_rid` 值采用 Base64 编码。
 
 ###图 A：JSON 数据类型与 Azure 搜索数据类型之间的映射
 

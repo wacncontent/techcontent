@@ -30,7 +30,8 @@ articles/sql-database/sql-database-configure-firewall-settings
 
      ![新的服务器防火墙](./media/sql-database-create-new-server-firewall-portal/sql-database-create-new-server-firewall-portal-4.png)  
 
-     > [!NOTE] 还可从“数据库”边栏选项卡的工具栏中访问服务器级“防火墙设置”边栏选项卡。
+     > [!NOTE]
+     > 还可从“数据库”边栏选项卡的工具栏中访问服务器级“防火墙设置”边栏选项卡。
 
 6. 单击“添加客户端 IP”，让 Azure 为客户端 IP 地址创建规则。
 
@@ -44,6 +45,7 @@ articles/sql-database/sql-database-configure-firewall-settings
 
      ![新的服务器防火墙](./media/sql-database-create-new-server-firewall-portal/sql-database-create-new-server-firewall-portal-7.png)  
 
-    >[!IMPORTANT] 客户端 IP 地址可能会不定时地更改，因此可能需要创建新的防火墙规则才能访问服务器。可通过使用 [Bing](http://www.bing.com/search?q=my%20ip%20address) 来查看 IP 地址。然后添加一个 IP 地址或 IP 地址范围。有关详细信息，请参阅[管理防火墙设置](../articles/sql-database/sql-database-configure-firewall-settings.md#manage-existing-server-level-firewall-rules-through-the-azure-portal)。
+    >[!IMPORTANT]
+    > 客户端 IP 地址可能会不定时地更改，因此可能需要创建新的防火墙规则才能访问服务器。可通过使用 [Bing](http://www.bing.com/search?q=my%20ip%20address) 来查看 IP 地址。然后添加一个 IP 地址或 IP 地址范围。有关详细信息，请参阅[管理防火墙设置](../articles/sql-database/sql-database-configure-firewall-settings.md#manage-existing-server-level-firewall-rules-through-the-azure-portal)。
 
 <!---HONumber=Mooncake_1010_2016-->

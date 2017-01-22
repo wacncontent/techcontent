@@ -41,11 +41,13 @@ Azure 提供了内置诊断来调试托管在 [Azure 应用服务](./app-service
 
 启用该选项后，IISNode 将返回发送给 stderr 的最后 64K 的信息，而不是明确的错误提示，例如“发生了内部服务器错误”。
 
-> [!NOTE] 尽管 devErrorsEnabled 对于开发期间诊断问题很有用，但是在生产环境中启用它可能会导致向最终用户发送开发错误。
+> [!NOTE]
+> 尽管 devErrorsEnabled 对于开发期间诊断问题很有用，但是在生产环境中启用它可能会导致向最终用户发送开发错误。
 
 如果 **IISNode.yml** 文件在应用程序内已不存在，则在发布更新的应用程序后必须重新启动 Web 应用。如果只在以前已发布的现有 **IISNode.yml** 文件中更改设置，则无需重新启动。
 
-> [!NOTE] 如果使用 Azure 命令行工具或 Azure PowerShell Cmdlet 创建你的 Web 应用，则将自动创建一个默认的 **IISNode.yml** 文件。
+> [!NOTE]
+> 如果使用 Azure 命令行工具或 Azure PowerShell Cmdlet 创建你的 Web 应用，则将自动创建一个默认的 **IISNode.yml** 文件。
 
 若要重新启动 Web 应用，请在 [Azure 门户预览](https://portal.azure.cn)中选择该 Web 应用，然后单击“重新启动”按钮：
 
@@ -55,7 +57,8 @@ Azure 提供了内置诊断来调试托管在 [Azure 应用服务](./app-service
 
     azure site restart [sitename]
 
-> [!NOTE] 尽管 loggingEnabled 和 devErrorsEnabled 是用于捕获诊断信息的最常用的 IISNode.yml 配置选项，但可以使用 IISNode.yml 为托管环境配置多种选项。有关配置选项的完整列表，请参阅 [iisnode\_schema.xml](https://github.com/tjanczuk/iisnode/blob/master/src/config/iisnode_schema.xml) 文件。
+> [!NOTE]
+> 尽管 loggingEnabled 和 devErrorsEnabled 是用于捕获诊断信息的最常用的 IISNode.yml 配置选项，但可以使用 IISNode.yml 为托管环境配置多种选项。有关配置选项的完整列表，请参阅 [iisnode\_schema.xml](https://github.com/tjanczuk/iisnode/blob/master/src/config/iisnode_schema.xml) 文件。
 
 <a id="viewlogs"></a>
 ## 访问日志
@@ -70,7 +73,8 @@ Azure 提供了内置诊断来调试托管在 [Azure 应用服务](./app-service
 
 要通过 FTP 访问诊断信息，请访问 [Azure 门户预览](https://portal.azure.cn)，选择你的 Web 应用，然后选择“仪表板”。在“快速链接”部分中，“FTP 诊断日志”和“FTPS 诊断日志”链接提供了使用 FTP 协议访问日志的权限。
 
-> [!NOTE] 如果你以前没有为 FTP 或部署配置用户名和密码，则可以通过选择“设置部署凭据”从“快速启动”管理页来执行此配置。
+> [!NOTE]
+> 如果你以前没有为 FTP 或部署配置用户名和密码，则可以通过选择“设置部署凭据”从“快速启动”管理页来执行此配置。
 
 在仪表板中返回的 FTP URL 针对 **LogFiles** 目录，该目录中将包含以下子目录：
 

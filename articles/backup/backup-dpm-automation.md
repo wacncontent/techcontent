@@ -76,7 +76,8 @@ wacn.date: 01/04/2017
 
 4. 指定要使用的存储冗余类型；你可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md#locally-redundant-storage/) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage/)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
 
-    > [!TIP] 许多 Azure 备份 cmdlet 要求使用恢复服务保管库对象作为输入。出于此原因，在变量中存储备份恢复服务保管库对象可提供方便。
+    > [!TIP]
+    > 许多 Azure 备份 cmdlet 要求使用恢复服务保管库对象作为输入。出于此原因，在变量中存储备份恢复服务保管库对象可提供方便。
 
         PS C:\> $vault1 = Get-AzureRmRecoveryServicesVault -Name "testVault"
         PS C:\> Set-AzureRmRecoveryServicesBackupProperties  -vault $vault1 -BackupStorageRedundancy GeoRedundant
@@ -181,7 +182,8 @@ DPM 服务器在注册到恢复服务保管库后，会使用默认的订阅设�
 
     PS C:\> Set-DPMCloudSubscriptionSetting -DPMServerName "TestingServer" -SubscriptionSetting $setting -EncryptionPassphrase $Passphrase
 
-> [!IMPORTANT] 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
+> [!IMPORTANT]
+> 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
 
 此时，你应该已对 ```$setting``` 对象做出了全部所需的更改。请记得提交更改。
 

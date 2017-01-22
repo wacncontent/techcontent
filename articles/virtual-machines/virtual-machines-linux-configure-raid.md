@@ -27,7 +27,8 @@ ms.author: rclaus
 ## 附加数据磁盘
 配置 RAID 设备通常需要两个或多个空数据磁盘。本文不详细介绍如何将数据磁盘附加到 Linux 虚拟机。请参阅 Azure 文章[附加磁盘](./virtual-machines-linux-classic-attach-disk.md)，以详细了解如何在 Azure 上为 Linux 虚拟机附加空数据磁盘。
 
->[!NOTE] 超小型 VM 不支持将多个数据磁盘附加到虚拟机。请参阅 [Azure 的虚拟机和云服务大小](../cloud-services/cloud-services-sizes-specs.md)，以了解有关 VM 大小和支持的数据磁盘数量的详细信息。
+>[!NOTE]
+> 超小型 VM 不支持将多个数据磁盘附加到虚拟机。请参阅 [Azure 的虚拟机和云服务大小](../cloud-services/cloud-services-sizes-specs.md)，以了解有关 VM 大小和支持的数据磁盘数量的详细信息。
 
 ## 安装 mdadm 实用程序
 
@@ -118,7 +119,8 @@ ms.author: rclaus
         sudo -i chkconfig --add boot.md
         sudo echo 'DEVICE /dev/sd*[0-9]' >> /etc/mdadm.conf
 
-    >[!NOTE] 在 SUSE 系统中进行这些更改后，可能需要重新启动。在 SLES 12 中，*不*需要执行此步骤。
+    >[!NOTE]
+    > 在 SUSE 系统中进行这些更改后，可能需要重新启动。在 SLES 12 中，*不*需要执行此步骤。
 
 ## 将新文件系统添加到 /etc/fstab
 

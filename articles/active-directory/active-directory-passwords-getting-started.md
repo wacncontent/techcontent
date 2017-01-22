@@ -20,7 +20,8 @@ wacn.date: 01/03/2017
 
 # 密码管理入门
 
-> [!IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
+> [!IMPORTANT]
+> **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
 
 只要完成几个简单的步骤，就能让你的用户管理他们自己的云 Azure Active Directory 密码或本地 Active Directory 密码。在确保符合几个简单的先决条件之后，你将在不知不觉中为整个组织启用密码更改和重置。本文将引导你完成以下操作思路：
 
@@ -53,7 +54,8 @@ wacn.date: 01/03/2017
 - 将你的 AAD 租户与 Azure 订阅相关联。有关详细信息，请参阅 [Azure 订阅与 Azure AD 的关联方式](https://msdn.microsoft.com/zh-cn/library/azure/dn629581.aspx)。
 - 升级到 Azure AD Premium、Basic 或使用 O365 付费许可证。有关详细信息，请参阅 [Azure Active Directory 版本](https://www.azure.cn/pricing/details/identity/)。
 
-  >[!NOTE] 若要为云用户启用自助密码重置，必须升级到 Azure AD Premium、Azure AD Basic 或 O365 付费许可证。若要为本地用户启用自助密码重置，必须升级到 Azure AD Premium。有关详细信息，请参阅 [Azure Active Directory 版本](https://www.azure.cn/pricing/details/identity/)。这些信息包括以下任务的详细说明：如何注册 Azure AD Premium 或 Basic、如何激活你的许可计划并激活 Azure AD 访问权限，以及如何为管理员和用户帐户分配访问权限。
+  >[!NOTE]
+  > 若要为云用户启用自助密码重置，必须升级到 Azure AD Premium、Azure AD Basic 或 O365 付费许可证。若要为本地用户启用自助密码重置，必须升级到 Azure AD Premium。有关详细信息，请参阅 [Azure Active Directory 版本](https://www.azure.cn/pricing/details/identity/)。这些信息包括以下任务的详细说明：如何注册 Azure AD Premium 或 Basic、如何激活你的许可计划并激活 Azure AD 访问权限，以及如何为管理员和用户帐户分配访问权限。
 
 - 在 AAD 目录中创建至少一个管理员帐户和一个用户帐户。
 - 为所创建的管理员和用户帐户分配 AAD Premium、Basic 或 O365 付费许可证。
@@ -76,7 +78,8 @@ wacn.date: 01/03/2017
 
 5. 在“配置”选项卡上，向下滚动到“用户密码重置策略”部分。你将在此为给定目录配置用户密码重置策略的各个方面。
 
-    >[!NOTE] 此**策略仅适用于你组织中的最终用户，而不是管理员**。出于安全原因，Microsoft 控制了管理员的密码重置策略。如果你不查看本部分，请确保你已注册 Azure Active Directory Premium 和 Basic，并为要配置此功能的管理员帐户**分配了许可证**。
+    >[!NOTE]
+    > 此**策略仅适用于你组织中的最终用户，而不是管理员**。出于安全原因，Microsoft 控制了管理员的密码重置策略。如果你不查看本部分，请确保你已注册 Azure Active Directory Premium 和 Basic，并为要配置此功能的管理员帐户**分配了许可证**。
 
     ![][004]  
 
@@ -86,7 +89,8 @@ wacn.date: 01/03/2017
 
 7. 根据租户需求配置用户密码重置策略后，请单击屏幕底部的“保存”按钮。
 
-    >[!NOTE] 建议使用两个质询用户密码重置策略，以便你能够了解该功能如何在最复杂的情况下工作。
+    >[!NOTE]
+    > 建议使用两个质询用户密码重置策略，以便你能够了解该功能如何在最复杂的情况下工作。
 
     ![][006]
 
@@ -180,19 +184,23 @@ wacn.date: 01/03/2017
 - 已在你的租户中配置和启用了密码重置。有关详细信息，请参阅[让用户重置其 Azure AD 密码](#enable-users-to-reset-their-azure-ad-passwords)
 - 你拥有至少一个管理员帐户和一个测试用户帐户，还有一个可用于测试此功能的 Azure AD Premium 许可证。有关详细信息，请参阅 [Azure Active Directory 版本](./active-directory-editions.md)。
 
-  > [!NOTE] 确保用于启用密码回写的管理员帐户是云管理员帐户（在 Azure AD 中创建），而不是联合帐户（在本地 AD 中创建并同步到 Azure AD 中）。
+  > [!NOTE]
+  > 确保用于启用密码回写的管理员帐户是云管理员帐户（在 Azure AD 中创建），而不是联合帐户（在本地 AD 中创建并同步到 Azure AD 中）。
 
 - 拥有运行 Windows Server 2008、Windows Server 2008 R2、Windows Server 2012 或 Windows Server 2012 R2 并装有最新服务包的单林或多林 AD 本地部署。
 
-  > [!NOTE] 如果你运行的是旧版 Windows Server 2008 或 2008 R2，则你仍然可以使用此功能，但在云中实施本地 AD 密码策略之前，需要先[下载并安装 KB 2386717](https://support.microsoft.com/zh-cn/kb/2386717)。
+  > [!NOTE]
+  > 如果你运行的是旧版 Windows Server 2008 或 2008 R2，则你仍然可以使用此功能，但在云中实施本地 AD 密码策略之前，需要先[下载并安装 KB 2386717](https://support.microsoft.com/zh-cn/kb/2386717)。
 
 - 已安装了 Azure AD 同步工具，并已准备好 AD 环境，可随时同步到云。有关详细信息，请参阅[在云中使用本地标识基础结构](./active-directory-aadconnect.md)。
 
-  > [!NOTE] 测试密码写回之前，请确保完成完整导入，并在 Azure AD Connect 中从本地 AD 与 Azure AD 执行完全同步。
+  > [!NOTE]
+  > 测试密码写回之前，请确保完成完整导入，并在 Azure AD Connect 中从本地 AD 与 Azure AD 执行完全同步。
 
 - 如果使用 Azure AD Sync 或 Azure AD Connect，则需要打开 **TCP 443** 出站端口（在某些情况下需要打开 **TCP 9350-9354**）。有关详细信息，请参阅[步骤 3：配置防火墙](#step-3-configure-your-firewall)。不再支持对此方案使用 DirSync。如果你仍在使用 DirSync，请升级到最新版本的 Azure AD Connect，然后再部署密码写回。
 
-  > [!NOTE] 我们强烈建议使用 Azure AD Sync 或 DirSync 工具的任何用户升级到最新版本的 Azure AD Connect，以确保拥有最佳使用体验和发行的新功能。
+  > [!NOTE]
+  > 我们强烈建议使用 Azure AD Sync 或 DirSync 工具的任何用户升级到最新版本的 Azure AD Connect，以确保拥有最佳使用体验和发行的新功能。
 
 ### <a name="step-1-download-the-latest-version-of-azure-ad-connect"></a>步骤 1：下载最新版本的 Azure AD Connect
 Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure AD Sync 工具中提供了密码写回功能。Azure AD Connect 发行版或版本号为 **1.0.0485.0222** 或更高的 Azure AD Sync 工具中提供了支持自动帐户解锁的密码写回功能。如果你运行的是较旧版本，请在继续操作之前至少升级到此版本。[单击此处下载最新版本的 Azure AD Connect](./active-directory-aadconnect.md#install-azure-ad-connect/)。
@@ -208,7 +216,8 @@ Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure A
 
 如果此版本号大于或等于 **1.0.0419.0911**，或者想要安装 Azure AD Connect，则可以跳至[步骤 2：通过 UI 或 PowerShell 在 Azure AD Connect 中启用密码写回并验证](#step-2-enable-password-writeback-in-azure-ad-connect)。
 
- > [!NOTE] 如果是首次安装 Azure AD Connect 工具，建议遵循一些最佳实践，为目录同步准备好环境。在安装 Azure AD Connect 工具之前，必须在 [Office 365 管理门户](https://portal.partner.microsoftonline.cn)或 [Azure 经典管理门户](https://manage.windowsazure.cn)中激活目录同步。有关详细信息，请参阅[管理 Azure AD Connect](./active-directory-aadconnect-whats-next.md)。
+ > [!NOTE]
+ > 如果是首次安装 Azure AD Connect 工具，建议遵循一些最佳实践，为目录同步准备好环境。在安装 Azure AD Connect 工具之前，必须在 [Office 365 管理门户](https://portal.partner.microsoftonline.cn)或 [Azure 经典管理门户](https://manage.windowsazure.cn)中激活目录同步。有关详细信息，请参阅[管理 Azure AD Connect](./active-directory-aadconnect-whats-next.md)。
 
 ### <a name="step-2-enable-password-writeback-in-azure-ad-connect"></a>步骤 2：在 Azure AD Connect 中启用密码写回
 现在你已下载 Azure AD Connect 工具，为启用密码写回做好了准备。可通过两种方式之一启用密码写回。可以在 Azure AD Connect 设置向导的可选功能屏幕中启用密码写回，也可以通过 Windows PowerShell 启用。
@@ -222,7 +231,8 @@ Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure A
 
 4. 完成向导，最后一页将汇总更改并包括密码写回配置更改。
 
-> [!NOTE] 你随时可以禁用密码写回，方法是重新运行此向导并取消选择该功能，或者在 [Azure 经典管理门户](https://manage.windowsazure.cn)中目录的“配置”选项卡的“用户密码重置策略”部分中，将“密码写回到本地目录”设置设为“否”。有关自定义密码重置体验的详细信息，请查看[自定义：Azure AD 密码管理](./active-directory-passwords-customize.md)。
+> [!NOTE]
+> 你随时可以禁用密码写回，方法是重新运行此向导并取消选择该功能，或者在 [Azure 经典管理门户](https://manage.windowsazure.cn)中目录的“配置”选项卡的“用户密码重置策略”部分中，将“密码写回到本地目录”设置设为“否”。有关自定义密码重置体验的详细信息，请查看[自定义：Azure AD 密码管理](./active-directory-passwords-customize.md)。
 
 #### 使用 Windows PowerShell 启用密码写回
 1. 在你的**目录同步计算机**上，打开一个新的**权限提升的 Windows PowerShell 窗口**。
@@ -231,8 +241,10 @@ Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure A
 4. 运行以下 cmdlet 获得当前连接器的当前写回状态：`Get-ADSyncAADPasswordResetConfiguration -Connector $aadConnectorName.name`
 5. 运行以下 cmdlet 启用密码写回：`Set-ADSyncAADPasswordResetConfiguration -Connector $aadConnectorName.name -Enable $true`
 
-> [!NOTE] 如果系统提示你输入凭据，请确保你为 AzureADCredential 指定的管理员帐户是**云管理员帐户（在 Azure AD 中创建）**，而不是联合帐户（在本地 AD 中创建并同步到 Azure AD 中）。
-> [!NOTE] 可以通过 PowerShell 禁用密码写回，方法是重复上面的相同的步骤，不同的是在步骤中传递 `$false`，或者在 [Azure 经典管理门户](https://manage.windowsazure.cn)的目录的“配置”选项卡的“用户密码重置策略”部分中，将“密码写回到本地目录”设置设为“否”。
+> [!NOTE]
+> 如果系统提示你输入凭据，请确保你为 AzureADCredential 指定的管理员帐户是**云管理员帐户（在 Azure AD 中创建）**，而不是联合帐户（在本地 AD 中创建并同步到 Azure AD 中）。
+> [!NOTE]
+> 可以通过 PowerShell 禁用密码写回，方法是重复上面的相同的步骤，不同的是在步骤中传递 `$false`，或者在 [Azure 经典管理门户](https://manage.windowsazure.cn)的目录的“配置”选项卡的“用户密码重置策略”部分中，将“密码写回到本地目录”设置设为“否”。
 
 #### 验证配置是否成功
 配置成功之后，你将在 Windows PowerShell 窗口中看到消息“密码重置写回已启用”，或者在配置 UI 中看到成功消息。
@@ -260,7 +272,8 @@ Azure AD Connect 发行版或版本号为 **1.0.0419.0911** 或更高的 Azure A
 
   设置这些权限将允许每个林的 MA 服务帐户代表该林中的用户帐户管理密码。如果你忘记分配这些权限，即使写回看上去配置正确，用户在尝试从云中管理本地密码时也会遇到错误。下面是如何使用 **Active Directory 用户和计算机**管理单元实现此目的的详细步骤：
 
->[!NOTE] 将这些权限复制到目录中的所有对象可能需要一小时。
+>[!NOTE]
+> 将这些权限复制到目录中的所有对象可能需要一小时。
 
 #### <a name="step-4-set-up-the-appropriate-active-directory-permissions"></a>设置正确的权限以执行写回
 

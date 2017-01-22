@@ -21,7 +21,8 @@ ms.author: marsma
 
 可以使用 Azure Batch 在 Linux 和 Windows 虚拟机上运行并行计算工作负荷。本文详细说明如何使用 [Batch Python][py_batch_package] 和 [Batch .NET][api_net] 客户端库在 Batch 服务中创建 Linux 计算节点池。
 
-> [!NOTE] [Application packages]Linux 计算节点目前不支持 (/documentation/articles/batch-application-packages/)。
+> [!NOTE]
+> [Application packages]Linux 计算节点目前不支持 (/documentation/articles/batch-application-packages/)。
 
 ## 虚拟机配置  <a name="virtual-machine-configuration"></a>
 
@@ -42,7 +43,8 @@ Batch 服务使用[虚拟机规模集](../virtual-machine-scale-sets/virtual-mac
 | SKU | 14\.04.4-LTS |
 | 版本 | 最新 |
 
-> [!TIP] 可以在 [Navigate and select Linux virtual machine images in Azure with CLI or PowerShell](../virtual-machines/virtual-machines-linux-cli-ps-findimage.md)（使用 CLI 或 PowerShell 在 Azure 中导航和选择 Linux 虚拟机映像）中详细了解这些属性，以及如何列出应用商店映像。请注意，目前并非所有应用商店映像都与 Batch 兼容。有关详细信息，请参阅[节点代理 SKU](#node-agent-sku)。
+> [!TIP]
+> 可以在 [Navigate and select Linux virtual machine images in Azure with CLI or PowerShell](../virtual-machines/virtual-machines-linux-cli-ps-findimage.md)（使用 CLI 或 PowerShell 在 Azure 中导航和选择 Linux 虚拟机映像）中详细了解这些属性，以及如何列出应用商店映像。请注意，目前并非所有应用商店映像都与 Batch 兼容。有关详细信息，请参阅[节点代理 SKU](#node-agent-sku)。
 
 ### 节点代理 SKU  <a name="node-agent-sku"></a>
 
@@ -52,7 +54,8 @@ Batch 节点代理是一个程序，它在池中的每个节点上运行，并�
 * batch.node.centos 7
 * batch.node.windows amd64
 
-> [!IMPORTANT] 并非应用商店中的所有可用虚拟机映像都与当前可用的 Batch 节点代理兼容。必须使用 Batch SDK 来列出可用的节点代理 SKU 及其兼容的虚拟机映像。有关详细信息，请参阅本文稍后的[虚拟机映像列表](#list-of-virtual-machine-images)。
+> [!IMPORTANT]
+> 并非应用商店中的所有可用虚拟机映像都与当前可用的 Batch 节点代理兼容。必须使用 Batch SDK 来列出可用的节点代理 SKU 及其兼容的虚拟机映像。有关详细信息，请参阅本文稍后的[虚拟机映像列表](#list-of-virtual-machine-images)。
 
 ## 创建 Linux 池：Batch Python
 
@@ -201,7 +204,8 @@ csharp
 
 下表列出了本文上次更新时，与可用 Batch 节点代理兼容的应用商店虚拟机映像。请务必注意，此列表并非永久不变，因为可能随时会添加或删除映像和节点代理。建议 Batch 应用程序和服务始终使用 [list\_node\_agent\_skus][py_list_skus] (Python) 和 [ListNodeAgentSkus][net_list_skus] (Batch .NET)，从当前可用的 SKU 中做出决定和选择。
 
-> [!WARNING] 以下列表可随时更改。请始终使用 Batch API 中提供的**列出节点代理 SKU** 方法来列出，然后在运行 Batch 作业时从兼容的虚拟机和节点代理 SKU 中做出选择。
+> [!WARNING]
+> 以下列表可随时更改。请始终使用 Batch API 中提供的**列出节点代理 SKU** 方法来列出，然后在运行 Batch 作业时从兼容的虚拟机和节点代理 SKU 中做出选择。
 
 | **发布者** | **产品** | **映像 SKU** | **版本** | **节点代理 SKU ID** |
 | ------- | ------- | ------- | ------- | ------- |

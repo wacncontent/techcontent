@@ -29,7 +29,8 @@ ms.author: magoedte;bwren
 
 直接从 Runbook 库导入只能使用 Azure 经典管理门户来完成，而不能使用 Windows PowerShell 执行此功能。
 
->[!NOTE] 你应验证从 Runbook 库获取的任何 Runbook 的内容，在生产环境中安装和运行这些 Runbook 时，请谨慎操作。
+>[!NOTE]
+> 你应验证从 Runbook 库获取的任何 Runbook 的内容，在生产环境中安装和运行这些 Runbook 时，请谨慎操作。
 
 ### 使用 Azure 经典管理门户从 Runbook 库导入 Runbook
 

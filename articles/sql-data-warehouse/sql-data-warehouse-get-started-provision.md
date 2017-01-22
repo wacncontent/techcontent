@@ -33,7 +33,8 @@ ms.author: barbkess;lodipalm;sonyama
 - **Azure 帐户**：访问 [Azure 试用版][] 或者 [MSDN Azure 信用额度][]，以创建帐户。
 - **Azure SQL Server**：有关详细信息，请参阅[使用 Azure 门户预览创建 Azure SQL 数据库逻辑服务器][]。
 
-> [!NOTE] 创建 SQL 数据仓库可能会导致新的计费服务。有关详细信息，请参阅 [SQL 数据仓库定价][]。
+> [!NOTE]
+> 创建 SQL 数据仓库可能会导致新的计费服务。有关详细信息，请参阅 [SQL 数据仓库定价][]。
 
 ## 创建 SQL 数据仓库
 
@@ -59,7 +60,8 @@ ms.author: barbkess;lodipalm;sonyama
 
     - **选择源**：单击“选择源”>“示例”。Azure 使用 AdventureWorksDW 自动填充“选择示例”选项。
 
-> [!NOTE] SQL 数据仓库的默认排序规则是 SQL\_Latin1\_General\_CP1\_CI\_AS。如果需要其他排序规则，则可使用 [T-SQL][] 通过其他排序规则创建数据库。
+> [!NOTE]
+> SQL 数据仓库的默认排序规则是 SQL\_Latin1\_General\_CP1\_CI\_AS。如果需要其他排序规则，则可使用 [T-SQL][] 通过其他排序规则创建数据库。
 
 4. 单击“创建”以创建 SQL 数据仓库。
 

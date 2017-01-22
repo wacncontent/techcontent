@@ -35,7 +35,8 @@ ms.author: kyliel
 
 - **安装在 .vhd 文件中的 FreeBSD 操作系统** - 必须将受支持的 FreeBSD 操作系统安装到虚拟硬盘。可使用多个工具创建 .vhd 文件。例如，可使用虚拟化解决方案（如 Hyper-V）创建 .vhd 文件并安装操作系统。有关如何安装和使用 Hyper-V 的说明，请参阅[安装 Hyper-V 和创建虚拟机](http://technet.microsoft.com/zh-cn/library/hh846766.aspx)。
 
-> [!NOTE] Azure 不支持更新的 VHDX 格式。可使用 Hyper-V 管理器或 [convert-vhd](https://technet.microsoft.com/zh-cn/library/hh848454.aspx) cmdlet 将磁盘转换为 VHD 格式。此外，MSDN 上还有[有关如何将 FreeBSD 与 Hyper-V 配合使用的教程](http://blogs.msdn.com/b/kylie/archive/2014/12/25/running-freebsd-on-hyper-v.aspx)。
+> [!NOTE]
+> Azure 不支持更新的 VHDX 格式。可使用 Hyper-V 管理器或 [convert-vhd](https://technet.microsoft.com/zh-cn/library/hh848454.aspx) cmdlet 将磁盘转换为 VHD 格式。此外，MSDN 上还有[有关如何将 FreeBSD 与 Hyper-V 配合使用的教程](http://blogs.msdn.com/b/kylie/archive/2014/12/25/running-freebsd-on-hyper-v.aspx)。
 
 此任务包括以下五个步骤。
 
@@ -102,7 +103,8 @@ ms.author: kyliel
         # ln -sf /usr/local/sbin/waagent /usr/sbin/waagent  
         # ln -sf /usr/local/sbin/waagent2.0 /usr/sbin/waagent2.0
 
-    >[!IMPORTANT] 安装 Azure 代理之后，验证它是否正在运行是一个好主意：
+    >[!IMPORTANT]
+    > 安装 Azure 代理之后，验证它是否正在运行是一个好主意：
 
         # waagent -version
         WALinuxAgent-2.1.4 running on freebsd 10.3
@@ -158,7 +160,8 @@ ms.author: kyliel
 
     ![容器名称](./media/virtual-machines-linux-classic-freebsd-create-upload-vhd/storageaccount_containervalues.png)
 
-    > [!NOTE] 默认情况下，该容器是专用容器，只能由帐户所有者访问。若要允许对容器中的 Blob 进行公共读取访问，但不允许对容器属性和元数据进行公共读取访问，请使用“公共 Blob”选项。若要允许对容器和 Blob 进行完全公共读取访问，请使用“公共容器”选项。
+    > [!NOTE]
+    > 默认情况下，该容器是专用容器，只能由帐户所有者访问。若要允许对容器中的 Blob 进行公共读取访问，但不允许对容器属性和元数据进行公共读取访问，请使用“公共 Blob”选项。若要允许对容器和 Blob 进行完全公共读取访问，请使用“公共容器”选项。
 
 ## 步骤 3：准备连接到 Azure
 
@@ -216,7 +219,8 @@ ms.author: kyliel
 
         Add-AzureVMImage -ImageName <Your Image's Name> -MediaLocation <location of the VHD> -OS <Type of the OS on the VHD>
 
-    > [!NOTE]使用 Linux 作为 OS 类型。当前的 Azure PowerShell 版本只接受“Linux”或“Windows”作为参数。
+    > [!NOTE]
+    >使用 Linux 作为 OS 类型。当前的 Azure PowerShell 版本只接受“Linux”或“Windows”作为参数。
 
 2. 完成前面的步骤后，当你在 Azure 经典管理门户上选择“映像”选项卡时，将列出新映像。
 

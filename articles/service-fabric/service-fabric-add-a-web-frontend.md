@@ -25,7 +25,8 @@ ms.author: seanmck
 ## 将 ASP.NET Core 服务添加到应用程序
 ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web UI 和 Web API。让我们将 ASP.NET Web API 项目添加到现有的应用程序。
 
->[!NOTE] 若要完成本教程，需要[安装 .NET Core 1.0][dotnetcore-install]。
+>[!NOTE]
+> 若要完成本教程，需要[安装 .NET Core 1.0][dotnetcore-install]。
 
 1. 在解决方案资源管理器中，右键单击应用程序项目中的“服务”，然后选择“添加”>“新建 Service Fabric 服务”。
 
@@ -41,7 +42,8 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
     创建 Web API 项目后，应用程序中会有两个服务。随着你不断构建应用程序，将以完全相同的方式添加更多服务。每个服务都可以单独进行版本控制和升级。
 
->[!TIP] 若要了解有关构建 ASP.NET Core 服务的详细信息，请参阅 [ASP.NET Core 文档](https://docs.asp.net)。
+>[!TIP]
+> 若要了解有关构建 ASP.NET Core 服务的详细信息，请参阅 [ASP.NET Core 文档](https://docs.asp.net)。
 
 ## 运行应用程序
 
@@ -128,7 +130,8 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
 实现 `ICounter` 接口后，使有状态服务可从其他服务调用的最后一个步骤是打开通信通道。对于有状态服务，Service Fabric 提供了名为 `CreateServiceReplicaListeners` 的可重写方法。通过此方法，你可以根据想要为服务启用的通信类型指定一个或多个通信侦听器。
 
->[!NOTE] 用于打开无状态服务的通信通道的等效方法名为 `CreateServiceInstanceListeners`。
+>[!NOTE]
+> 用于打开无状态服务的通信通道的等效方法名为 `CreateServiceInstanceListeners`。
 
 在本例中，我们将替换现有的 `CreateServiceReplicaListeners` 方法，并提供 `ServiceRemotingListener` 的实例，该实例通过 `ServiceProxy` 来创建可从客户端调用的 RPC 终结点。
 
@@ -195,7 +198,8 @@ ASP.NET Core 是轻量跨平台的 Web 开发框架，可用于创建现代 Web 
 
     定期刷新浏览器，以查看计数器更新值。
 
->[!WARNING] 模板中提供的 ASP.NET Core Web 服务器称为 Kestrel，[目前尚不支持处理直接 Internet 流量](https://docs.asp.net/en/latest/fundamentals/servers.html#kestrel)。请注意，IIS 中的部署不支持 Service Fabric。
+>[!WARNING]
+> 模板中提供的 ASP.NET Core Web 服务器称为 Kestrel，[目前尚不支持处理直接 Internet 流量](https://docs.asp.net/en/latest/fundamentals/servers.html#kestrel)。请注意，IIS 中的部署不支持 Service Fabric。
 
 ## 执行组件的情况如何？
 

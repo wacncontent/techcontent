@@ -39,7 +39,8 @@ ms.author: glenga
     + **launch-mac.command**（Mac OS X 计算机）
     + **launch-linux.sh**（Linux 计算机）
 
-    >[!NOTE]在 Windows 计算机上，当 PowerShell 要求你确认是否要运行脚本时，请键入 `R`。你的 Web 浏览器可能会警告你不要运行该脚本，因为它是从 Internet 下载的。如果出现此警告，你必须请求浏览器继续加载该脚本。
+    >[!NOTE]
+    >在 Windows 计算机上，当 PowerShell 要求你确认是否要运行脚本时，请键入 `R`。你的 Web 浏览器可能会警告你不要运行该脚本，因为它是从 Internet 下载的。如果出现此警告，你必须请求浏览器继续加载该脚本。
 
     随后将在本地计算机上启动用于托管新应用程序的 Web 服务器。
 
@@ -53,7 +54,8 @@ ms.author: glenga
 
 ## <a name="add-authentication"></a>向应用程序添加身份验证
 
->[!NOTE]由于登录是在弹出窗口中执行的，因此你应该从按钮的 click 事件调用 **login** 方法。否则，许多浏览器都会隐藏登录窗口。
+>[!NOTE]
+>由于登录是在弹出窗口中执行的，因此你应该从按钮的 click 事件调用 **login** 方法。否则，许多浏览器都会隐藏登录窗口。
 
 1. 打开项目文件 index.html，找到 H1 元素，并在该元素的下面添加以下代码段：
 
@@ -103,7 +105,8 @@ ms.author: glenga
 
     这将会创建一组用于处理身份验证过程的函数。将使用 microsoftaccount 登录对用户进行身份验证。如果使用的标识提供者不是 microsoftaccount，请将传递给上述 **login** 方法的值更改为 *aad*。
 
-    >[!IMPORTANT]在 PhoneGap 应用程序中，还必须向项目中添加以下插件：
+    >[!IMPORTANT]
+    >在 PhoneGap 应用程序中，还必须向项目中添加以下插件：
     ><ul><li><code>phonegap 插件添加 https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git</code></li>
     > <li><code>phonegap 插件添加 https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git</code></li></ul>
 
@@ -111,7 +114,8 @@ ms.author: glenga
 
        当你成功登录时，应用应该运行而不出现错误，你应该能够查询移动服务，并对数据进行更新。
 
-    >[!NOTE]如果使用 Internet Explorer，可能会在登录后收到错误：<code>无法访问窗口打开程序。它可能位于不同的 Internet Explorer 区域</code>。发生此错误的原因是因为弹出窗口在与本地主机 (Intranet) 不同的安全区域 (Internet) 上运行。这只在使用本地主机开发期间影响应用程序。As a workaround, open the **Security** tab of **Internet Options**, click **Local Intranet**, click **Sites**, and disable **Automatically detect intranet network**.完成测试后，请记得将此设置更改回来。
+    >[!NOTE]
+    >如果使用 Internet Explorer，可能会在登录后收到错误：<code>无法访问窗口打开程序。它可能位于不同的 Internet Explorer 区域</code>。发生此错误的原因是因为弹出窗口在与本地主机 (Intranet) 不同的安全区域 (Internet) 上运行。这只在使用本地主机开发期间影响应用程序。As a workaround, open the **Security** tab of **Internet Options**, click **Local Intranet**, click **Sites**, and disable **Automatically detect intranet network**.完成测试后，请记得将此设置更改回来。
 
 ##  <a name="next-steps"></a>后续步骤
 

@@ -69,12 +69,14 @@ ms.author: cephalin
     - [Git](http://git-scm.com/documentation)
     - [PowerShell](https://technet.microsoft.com/zh-cn/library/bb978526.aspx)
 
-> [!NOTE] 完成本教程需要有一个 Azure 帐户：
+> [!NOTE]
+> 完成本教程需要有一个 Azure 帐户：
 > + 可以[注册一个 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/) — 获取可用来试用付费版 Azure 服务的信用额度，甚至在用完信用额度后，仍可以保留帐户和使用免费的 Azure 服务（如 Web 应用）。
 
 ## 设置生产环境 ##
 
->[!NOTE] 目前，在 Azure 中国，你不能在新门户输入 GitHub 的凭证。所以，只有公共的 GitHub 库才能使用连续发布，并且，你只能通过 Kudu 进行设置。
+>[!NOTE]
+> 目前，在 Azure 中国，你不能在新门户输入 GitHub 的凭证。所以，只有公共的 GitHub 库才能使用连续发布，并且，你只能通过 Kudu 进行设置。
 
 在典型的 DevOps 方案中，应用程序在 Azure 中实时运行，并且你可以通过连续发布对它进行更改。此方案将会提供你开发、测试和使用的模板来部署生产环境。本部分将介绍如何设置生产环境。
 
@@ -92,7 +94,8 @@ ms.author: cephalin
 
         .\deploy.ps1 -RepoUrl https://github.com/<your_fork>/todoapp.git
 
-    >[!NOTE] 在使用这些模板之前，需要进行以下编辑，以适应 Azure 中国区的云环境：
+    >[!NOTE]
+    > 在使用这些模板之前，需要进行以下编辑，以适应 Azure 中国区的云环境：
     > <p>1. 打开文件“ProdAndStage.json”，然后搜索“sourcecontrols”。
     > <p>2. 在“properties”内添加 `"IsManualIntegration": true` 
     > <p>3. 在“ProdAndStage.json”和“deploy.ps1”中，将“West US”或“East US”替换为“China East”或“China North”
@@ -106,7 +109,8 @@ ms.author: cephalin
 
     ![](./media/app-service-agile-software-development/production-2-app-in-browser.png)
 
-    >[!TIP] 查看 *&lt;repository\_root>* \\ARMTemplates\\Deploy.ps1，以了解它如何生成具有唯一 ID 的资源。可以使用相同的方法来创建相同部署的复本，而不必担心资源名称冲突。
+    >[!TIP]
+    > 查看 *&lt;repository\_root>* \\ARMTemplates\\Deploy.ps1，以了解它如何生成具有唯一 ID 的资源。可以使用相同的方法来创建相同部署的复本，而不必担心资源名称冲突。
 
 6. 返回 Git Shell 会话，运行：
 
@@ -134,7 +138,8 @@ ms.author: cephalin
         git push origin NewUpdate 
         .\deploy.ps1 -TemplateFile .\Dev.json -RepoUrl https://github.com/<your_fork>/ToDoApp.git -Branch NewUpdate
 
-    >[!NOTE] 应该对“Dev.json”进行相同的修改，就像你对“ProdAndStage.json”所做的修改一样
+    >[!NOTE]
+    > 应该对“Dev.json”进行相同的修改，就像你对“ProdAndStage.json”所做的修改一样
     > <p>
     > <P>[这里](https://github.com/bbetstcw/ToDoApp)可以找到一个已经改好的版本。
 
@@ -163,7 +168,8 @@ ms.author: cephalin
     - 开发环境在 Azure 中实时运行。
     - 删除开发环境就像删除资源组一样简单。[稍后](#delete)你将学习如何执行这项操作。
 
->[!NOTE] 有多位开发人员处理新的更新时，只要执行以下操作，每一位都可以轻松创建分支和专用开发环境：
+>[!NOTE]
+> 有多位开发人员处理新的更新时，只要执行以下操作，每一位都可以轻松创建分支和专用开发环境：
 ><p>1.	在 GitHub 中创建其在存储库中的专属分叉（请参阅[分叉存储库](https://help.github.com/articles/fork-a-repo/)）。
 ><p>2.	克隆其本地计算机上的分叉。
 ><p>3.	运行相同的命令，以创建其自身的开发分支和环境。
@@ -176,7 +182,8 @@ ms.author: cephalin
 
 ![](./media/app-service-agile-software-development/test-2-all-webapps.png)
 
->[!NOTE] 请注意，ProdandStage.json 将生产环境指定为使用**标准**定价层，这适合生产应用程序的缩放性。
+>[!NOTE]
+> 请注意，ProdandStage.json 将生产环境指定为使用**标准**定价层，这适合生产应用程序的缩放性。
 
 ## 构建和测试每项提交 ##
 
@@ -190,7 +197,8 @@ ms.author: cephalin
 
     ![](./media/app-service-agile-software-development/commit-1-changes.png)
 
-    >[!NOTE] 如果无法看到上述图像：
+    >[!NOTE]
+    > 如果无法看到上述图像：
     ><p>
     ><p>- 在第 18 行，将 `check-list` 更改为 `list-group`。
     ><p>- 在第 19 行，将 `class="check-list-item"` 更改为 `class="list-group-item"`。

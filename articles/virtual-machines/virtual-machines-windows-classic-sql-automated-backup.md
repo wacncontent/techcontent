@@ -26,7 +26,8 @@ ms.author: jroth
 
 自动备份将在运行 SQL Server 2014 Standard 或 Enterprise 的 Azure VM 上自动为所有现有数据库和新数据库配置[托管备份到 Azure](https://msdn.microsoft.com/zh-cn/library/dn449496.aspx)。这样，你便可以配置使用持久 Azure Blob 存储的定期数据库备份。自动备份依赖于 [SQL Server IaaS 代理扩展](./virtual-machines-windows-classic-sql-server-agent-extension.md)。
 
-> [!IMPORTANT]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。若要查看本文的 Resource Manager 版本，请参阅 [Azure 虚拟机中 SQL Server 的自动备份 (Resource Manager)](./virtual-machines-windows-sql-automated-backup.md)。
+> [!IMPORTANT]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。若要查看本文的 Resource Manager 版本，请参阅 [Azure 虚拟机中 SQL Server 的自动备份 (Resource Manager)](./virtual-machines-windows-sql-automated-backup.md)。
 
 ## 先决条件
 
@@ -42,7 +43,8 @@ ms.author: jroth
 - SQL Server 2014 Standard
 - SQL Server 2014 Enterprise
 
->[!NOTE] SQL Server 2016 尚不支持自动备份。
+>[!NOTE]
+> SQL Server 2016 尚不支持自动备份。
 
 **数据库配置**：
 
@@ -94,7 +96,8 @@ ms.author: jroth
 
 若要禁用自动备份，请对 **New-AzureVMSqlServerAutoBackupConfig** 运行不带 **-Enable** 参数的同一个脚本。与安装一样，可能需要花费几分钟时间来禁用自动备份。
 
->[!NOTE] 禁用和卸载 SQL Server IaaS 代理不会删除以前配置的托管备份设置。应该在禁用或卸载 SQL Server IaaS 代理之前禁用自动备份。
+>[!NOTE]
+> 禁用和卸载 SQL Server IaaS 代理不会删除以前配置的托管备份设置。应该在禁用或卸载 SQL Server IaaS 代理之前禁用自动备份。
 
 ## 后续步骤
 

@@ -51,7 +51,8 @@ wacn.date: 12/16/2016
 
 有关服务定义文件的详细信息，请参阅 [Azure 服务定义架构（.csdef 文件）](https://msdn.microsoft.com/zh-cn/library/azure/ee758711.aspx)。
 
-> [!NOTE] 如果使用 Azure Tools for Microsoft Visual Studio，则可在“属性”页中为角色定义本地存储资源。
+> [!NOTE]
+> 如果使用 Azure Tools for Microsoft Visual Studio，则可在“属性”页中为角色定义本地存储资源。
 
 ## 以编程方式访问本地存储资源
 

@@ -31,7 +31,8 @@ wacn.date: 01/03/2017
 
 本教程的代码[在 GitHub 上](https://github.com/Azure-Samples/active-directory-node-webapi)维护。
 
-> [!NOTE] 本文未涵盖如何使用 Azure AD B2C 来实施登录、注册和配置文件管理，而是着重介绍如何在用户已通过身份验证后调用 Web API。如果尚未开始，应该先从[如何与 Azure Active Directory 集成文档](./active-directory-how-to-integrate.md)入手，了解 Azure Active Directory 的基础知识。
+> [!NOTE]
+> 本文未涵盖如何使用 Azure AD B2C 来实施登录、注册和配置文件管理，而是着重介绍如何在用户已通过身份验证后调用 Web API。如果尚未开始，应该先从[如何与 Azure Active Directory 集成文档](./active-directory-how-to-integrate.md)入手，了解 Azure Active Directory 的基础知识。
 
 我们已在 GitHub 中的 MIT 许可证下发布了此运行示例的所有源代码，你可以任意克隆（甚至分发！）这些代码，并提供反馈和发出请求。
 
@@ -75,7 +76,8 @@ wacn.date: 01/03/2017
 
 从 [http://www.mongodb.org](http://www.mongodb.org) 安装 MongoDB。
 
-> [!NOTE] 本演练假定为 MongoDB 使用默认的安装与服务器终结点，在编写本文时，该终结点为：mongodb://localhost
+> [!NOTE]
+> 本演练假定为 MongoDB 使用默认的安装与服务器终结点，在编写本文时，该终结点为：mongodb://localhost
 
 ## 5\.将 Restify 模块安装到 Web API 中
 
@@ -163,7 +165,8 @@ Restify 提供强大的机制来使用 DTrace 跟踪 REST 调用。但是，许�
 
 接下来，我们将使用 passport-azuread 来添加 OAuth 策略，这是一套将 Azure Active Directory 连接到 Passport 的策略。在此 Rest API 示例中，我们将针对持有者令牌使用此策略。
 
-> [!NOTE] 尽管 OAuth2 提供了可以颁发任何已知令牌类型的框架，但只有一部分令牌类型已得到广泛使用。用于保护终结点的令牌是持有者令牌。持有者令牌是 OAuth2 中最广泛颁发的令牌，许多实现假定持有者令牌是唯一颁发的令牌类型。
+> [!NOTE]
+> 尽管 OAuth2 提供了可以颁发任何已知令牌类型的框架，但只有一部分令牌类型已得到广泛使用。用于保护终结点的令牌是持有者令牌。持有者令牌是 OAuth2 中最广泛颁发的令牌，许多实现假定持有者令牌是唯一颁发的令牌类型。
 
 在命令行中，将目录切换到 azuread 目录
 

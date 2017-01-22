@@ -119,7 +119,8 @@ Service Fabric 需要使用类似于下面的命令来启动 MongoDB，因此打
 
     mongod.exe --dbpath [path to data]
 
-> [!NOTE] 如果你将 MongoDB 数据目录放在节点的本地目录中，当节点发生故障时，将不会保留数据。你应该使用持久存储或实现 MongoDB 副本集以防止数据丢失。
+> [!NOTE]
+> 如果你将 MongoDB 数据目录放在节点的本地目录中，当节点发生故障时，将不会保留数据。你应该使用持久存储或实现 MongoDB 副本集以防止数据丢失。
 
 在 PowerShell 或命令行界面中，我们会使用下列参数来运行打包工具：
 

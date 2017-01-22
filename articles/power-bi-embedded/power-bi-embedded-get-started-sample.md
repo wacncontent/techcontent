@@ -27,7 +27,8 @@ wacn.date: 01/13/2017
  - [Power BI Embedded API 参考](https://msdn.microsoft.com/zh-cn/library/mt711493.aspx)
  - [Power BI Embedded .NET SDK](https://www.nuget.org/profiles/powerbi)（通过 NuGet 提供）
 
-> [!NOTE] 需要先在 Azure 订阅中创建至少一个**工作区集合**才能配置和运行 Power BI Embedded 入门示例。若要了解如何在 Azure 门户预览中创建**工作区集合**，请参阅 [Power BI Embedded 入门](./power-bi-embedded-get-started.md)。
+> [!NOTE]
+> 需要先在 Azure 订阅中创建至少一个**工作区集合**才能配置和运行 Power BI Embedded 入门示例。若要了解如何在 Azure 门户预览中创建**工作区集合**，请参阅 [Power BI Embedded 入门](./power-bi-embedded-get-started.md)。
 
 ## 配置示例应用
 
@@ -62,7 +63,8 @@ wacn.date: 01/13/2017
     Checking import state... Publishing
     Checking import state... Succeeded
 
-> [!NOTE] 如果 PBIX 文件包含任何直接查询连接，请选择选项 7 以更新连接字符串。
+> [!NOTE]
+> 如果 PBIX 文件包含任何直接查询连接，请选择选项 7 以更新连接字符串。
 
 此时，**工作区**中已导入了一个 Power BI PBIX 报表。接下来将演示如何运行 **Power BI Embedded** 入门示例 Web 应用。
 
@@ -96,7 +98,8 @@ Web 应用示例是一个示例仪表板，用于呈现**工作区**中导入的
 
 **Power BI Embedded** 示例代码分隔方式如下所示。每个部分在 PowerBI embedded.sln 解决方案中都包括了文件名称，以便轻松查找示例中的代码。
 
-> [!NOTE] 本节总结了演示如何编写代码的示例代码。若要查看完整的示例，请加载 Visual Studio 中的 PowerBI embedded.sln 解决方案。
+> [!NOTE]
+> 本节总结了演示如何编写代码的示例代码。若要查看完整的示例，请加载 Visual Studio 中的 PowerBI embedded.sln 解决方案。
 
 ### 模型
 此示例具有 **ReportsViewModel** 和 **ReportViewModel**。
@@ -227,7 +230,8 @@ Report.cshtml：为 **PowerBIReportFor** 设置 **Model.AccessToken** 和 Lambda
     ?reportId=d2a0ea38-...-9673-ee9655d54a4a&
     $filter={tableName/fieldName}%20eq%20'{fieldValue}'
 
-> [!NOTE] {tableName/fieldName} 不能包含空格或特殊字符。{fieldValue} 接受单个分类值。
+> [!NOTE]
+> {tableName/fieldName} 不能包含空格或特殊字符。{fieldValue} 接受单个分类值。
 
 ## 另请参阅
 

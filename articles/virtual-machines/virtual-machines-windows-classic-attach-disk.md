@@ -20,7 +20,8 @@ ms.author: cynthn
 
 # 将数据磁盘附加到使用经典部署模型创建的 Windows 虚拟机
 
-> [!IMPORTANT] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。如果想要使用新的门户，请参阅[如何在 Azure 门户预览中将数据磁盘附加到 Windows VM](./virtual-machines-windows-attach-disk-portal.md)。
+> [!IMPORTANT]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。如果想要使用新的门户，请参阅[如何在 Azure 门户预览中将数据磁盘附加到 Windows VM](./virtual-machines-windows-attach-disk-portal.md)。
 
 如果需要其他数据磁盘，可将空磁盘或现有的数据磁盘附加到 VM。在这两种情况下，磁盘是驻留在 Azure 存储帐户中的 .vhd 文件。如果是新磁盘，在附加磁盘之后，你也需要将它初始化，使其可供 Windows VM 使用。
 
@@ -46,7 +47,8 @@ ms.author: cynthn
 
     ![已成功初始化卷](./media/virtual-machines-windows-classic-attach-disk/newvolumecreated.png)
 
-> [!NOTE] VM 的大小决定可以在其上附加的磁盘数量。有关详细信息，请参阅[虚拟机大小](./virtual-machines-windows-sizes.md)。
+> [!NOTE]
+> VM 的大小决定可以在其上附加的磁盘数量。有关详细信息，请参阅[虚拟机大小](./virtual-machines-windows-sizes.md)。
 
 ## 其他资源
 

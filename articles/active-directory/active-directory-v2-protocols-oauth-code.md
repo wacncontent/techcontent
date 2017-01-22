@@ -46,7 +46,8 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
     &scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
     &state=12345
 
-> [!TIP] 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `code` 的 `https://localhost/myapp/`。
+> [!TIP]
+> 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `code` 的 `https://localhost/myapp/`。
     <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&response_mode=query&scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&state=12345" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
 
 | 参数 | | 说明 |
@@ -120,7 +121,8 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
     &grant_type=authorization_code
     &client_secret=JqQX2PNo9bpM0uEihUPzyrh    // NOTE: Only required for web apps
 
-> [!TIP] 尝试在 Postman 中执行此请求！ （别忘了替换 `code`）
+> [!TIP]
+> 尝试在 Postman 中执行此请求！ （别忘了替换 `code`）
     [![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
 
 | 参数 | | 说明 |
@@ -193,7 +195,8 @@ OAuth 2.0 授权代码授予可用于设备上所安装的应用中，以访问�
 ## 使用访问令牌
 你已经成功获取 `access_token`，现在可以通过在 `Authorization` 标头中包含令牌，在 Web API 的请求中使用令牌。
 
-> [!TIP] 在 Postman 中执行此请求！ （先替换 `Authorization` 标头）
+> [!TIP]
+> 在 Postman 中执行此请求！ （先替换 `Authorization` 标头）
     [![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
 
     GET /v1.0/me/messages
@@ -216,7 +219,8 @@ Access\_token 生存期很短，必须在其过期后刷新，才能继续访问
     &grant_type=refresh_token
     &client_secret=JqQX2PNo9bpM0uEihUPzyrh	  // NOTE: Only required for web apps
 
-> [!TIP] 尝试在 Postman 中执行此请求！ （别忘了替换 `refresh_token`）
+> [!TIP]
+> 尝试在 Postman 中执行此请求！ （别忘了替换 `refresh_token`）
     [![在 Postman 中运行](./media/active-directory-v2-protocols-oauth-code/runInPostman.png)](https://app.getpostman.com/run-collection/8f5715ec514865a07e6a)
 
 | 参数 | | 说明 |

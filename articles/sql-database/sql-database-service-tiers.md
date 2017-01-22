@@ -35,7 +35,8 @@ ms.author: carlrab
 | **标准** |大多数云应用程序的首选选项，支持多个并发查询。示例包括工作组或 Web 应用程序。 |
 | **高级** |专为高事务量设计，支持大量并发用户，并且需要最高级别的业务连续性功能。示例包括支持任务关键型应用程序的数据库。 |
 
->[!NOTE] Web Edition 和 Business Edition 已停用。如果你打算继续使用 Web 和 Business Edition，请参阅[版本停用常见问题](https://www.azure.cn/pricing/details/sql-database/)。
+>[!NOTE]
+> Web Edition 和 Business Edition 已停用。如果你打算继续使用 Web 和 Business Edition，请参阅[版本停用常见问题](https://www.azure.cn/pricing/details/sql-database/)。
 
 ##<a name="service-tiers-for-single-databases"></a><a name="standalone-database-service-tiers-and-performance-levels"></a><a name="single-database-service-tiers-and-performance-levels"></a> 单一数据库服务层和性能级别
 对于单一数据库，每个服务层内都具有多个性能级别。你可以灵活选择最能满足你的工作负荷需求的级别。如果你需要增加或减少工作负荷，可以快速更改数据库的性能级别。有关详细信息，请参阅[更改数据库服务层和性能级别](./sql-database-scale-up.md)。
@@ -44,7 +45,8 @@ ms.author: carlrab
 
 [!INCLUDE [SQL 数据库服务层表](../../includes/sql-database-service-tiers-table.md)]
 
->[!NOTE] 如需本服务层表中所有其他行的详细说明，请参阅[服务层功能和限制](./sql-database-performance-guidance.md#service-tier-capabilities-and-limits)。
+>[!NOTE]
+> 如需本服务层表中所有其他行的详细说明，请参阅[服务层功能和限制](./sql-database-performance-guidance.md#service-tier-capabilities-and-limits)。
 
 ##<a name="elastic-pool-service-tiers-and-performance-in-edtus"></a><a name="elastic-database-pool-service-tiers-and-performance-in-edtus"></a> 弹性数据库池服务层和性能 (eDTU)
 也可以管理[弹性数据库池](./sql-database-elastic-pool.md)内的多个数据库。弹性数据库池中的所有数据库共享一组公用资源。性能特征由*弹性数据库事务单位* (eDTU) 数度量。与单一数据库一样，弹性池有三个服务层：**基本**、**标准**和**高级**。对于池，这三个服务层仍定义整体性能限制和多个功能。

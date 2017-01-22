@@ -59,7 +59,8 @@ Python 教程[代码示例][github_article_samples]是 GitHub 上的 [azure-batc
 
 `pip install azure-batch==0.30.0rc4`<br/> `pip install azure-storage==0.30.0`
 
-> [!TIP] 如果使用无特权帐户，可能需要在命令前面加上 `sudo`。例如，`sudo pip install -r requirements.txt`。有关如何安装 Python 包的详细信息，请参阅 readthedocs.io 中的安装包。
+> [!TIP]
+> 如果使用无特权帐户，可能需要在命令前面加上 `sudo`。例如，`sudo pip install -r requirements.txt`。有关如何安装 Python 包的详细信息，请参阅 readthedocs.io 中的安装包。
 
 ## Batch Python 教程代码示例
 
@@ -161,7 +162,8 @@ python
 
 创建容器之后，应用程序现在即可上载任务使用的文件。
 
-> [!TIP] [How to use Azure Blob storage from Python](../storage/storage-python-how-to-use-blob-storage.md) 对如何使用 Azure 存储容器和 Blob 做了全面的概述。当你开始使用 Batch 时，它应该位于阅读列表顶部附近。
+> [!TIP]
+> [How to use Azure Blob storage from Python](../storage/storage-python-how-to-use-blob-storage.md) 对如何使用 Azure 存储容器和 Blob 做了全面的概述。当你开始使用 Batch 时，它应该位于阅读列表顶部附近。
 
 ## 步骤 2：上载任务脚本和数据文件  <a name="step-2-upload-task-script-and-data-files"></a>
 
@@ -248,7 +250,8 @@ python
 
 - **容器共享访问签名**：每个任务在计算节点上完成其工作后，会将其输出文件上载到 Azure 存储中的*输出*容器。为此，*python\_tutorial\_task.py* 将使用提供容器写入访问权限的容器共享访问签名。*python\_tutorial\_client.py* 中的 `get_container_sas_token` 函数获取容器的共享访问签名，然后该签名将以命令行参数的形式传递给任务。步骤 5 [将任务添加到作业](#step-5-add-tasks-to-job)介绍了容器 SAS 的用法。
 
-> [!TIP] 请查看有关共享访问签名的两篇系列教程的[第 1 部分：了解 SAS 模型](../storage/storage-dotnet-shared-access-signature-part-1.md)和[第 2 部分：创建 SAS 并将其用于 Blob 服务](../storage/storage-dotnet-shared-access-signature-part-2.md)，以详细了解如何提供对存储帐户中数据的安全访问。
+> [!TIP]
+> 请查看有关共享访问签名的两篇系列教程的[第 1 部分：了解 SAS 模型](../storage/storage-dotnet-shared-access-signature-part-1.md)和[第 2 部分：创建 SAS 并将其用于 Blob 服务](../storage/storage-dotnet-shared-access-signature-part-2.md)，以详细了解如何提供对存储帐户中数据的安全访问。
 
 ## 步骤 3：创建 Batch 池  <a name="step-3-create-batch-pool"></a>
 
@@ -348,7 +351,8 @@ python
 
 此外，在上述代码片段中，值得注意的问题是，StartTask 的 **command\_line** 属性中使用了两个环境变量：`AZ_BATCH_TASK_WORKING_DIR` 和 `AZ_BATCH_NODE_SHARED_DIR`。将自动为 Batch 池中的每个计算节点配置多个特定于 Batch 的环境变量。由任务执行的任何进程都可以访问这些环境变量。
 
-> [!TIP] 若要深入了解 Batch 池中计算节点上可用的环境变量，以及有关任务工作目录的信息，请参阅 [overview of Azure Batch features](./batch-api-basics.md)（Azure Batch 功能概述）中的 **Environment settings for tasks**（任务的环境设置）及 **Files and directories**（文件和目录）。
+> [!TIP]
+> 若要深入了解 Batch 池中计算节点上可用的环境变量，以及有关任务工作目录的信息，请参阅 [overview of Azure Batch features](./batch-api-basics.md)（Azure Batch 功能概述）中的 **Environment settings for tasks**（任务的环境设置）及 **Files and directories**（文件和目录）。
 
 ## 步骤 4：创建 Batch 作业  <a name="step-4-create-batch-job"></a>
 
@@ -436,7 +440,8 @@ python
 
         batch_service_client.task.add_collection(job_id, tasks)
 
-> [!IMPORTANT] 在访问环境变量（例如 `$AZ_BATCH_NODE_SHARED_DIR`）或执行节点的 `PATH` 中找不到的应用程序时，任务命令行必须显式调用 shell，例如，包含 `/bin/sh -c MyTaskApplication $MY_ENV_VAR`。如果任务在节点的 `PATH` 中执行应用程序，而且不引用任何环境变量，则就不必要满足此要求。
+> [!IMPORTANT]
+> 在访问环境变量（例如 `$AZ_BATCH_NODE_SHARED_DIR`）或执行节点的 `PATH` 中找不到的应用程序时，任务命令行必须显式调用 shell，例如，包含 `/bin/sh -c MyTaskApplication $MY_ENV_VAR`。如果任务在节点的 `PATH` 中执行应用程序，而且不引用任何环境变量，则就不必要满足此要求。
 
 在上述代码片段中的 `for` 循环内，可以看到已构造任务的命令行，其中有五个命令行参数已传递到 *python\_tutorial\_task.py*：
 
@@ -542,7 +547,8 @@ python
 
         print('  Download complete!')
 
-> [!NOTE] 在 *python\_tutorial\_client.py* 中调用 `download_blobs_from_container` 可指定应将文件下载到主目录。可以随意修改此输出位置。
+> [!NOTE]
+> 在 *python\_tutorial\_client.py* 中调用 `download_blobs_from_container` 可指定应将文件下载到主目录。可以随意修改此输出位置。
 
 ## 步骤 8：删除容器
 
@@ -569,7 +575,8 @@ python
     if query_yes_no('Delete pool?') == 'yes':
         batch_client.pool.delete(_POOL_ID)
 
-> [!IMPORTANT] 请记住，你需要支付计算资源的费用，而删除未使用的池可将费用降到最低。另请注意，删除池也会删除该池内的所有计算节点，并且删除池后，将无法恢复节点上的任何数据。
+> [!IMPORTANT]
+> 请记住，你需要支付计算资源的费用，而删除未使用的池可将费用降到最低。另请注意，删除池也会删除该池内的所有计算节点，并且删除池后，将无法恢复节点上的任何数据。
 
 ## 运行示例脚本
 

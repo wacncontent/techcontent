@@ -25,7 +25,8 @@ wacn.date: 01/09/2017
 
 如果你要开发 Windows Phone 8.1 应用，Azure AD 可让你简单直接地使用用户的 Active Directory 帐户对其进行身份验证。它还可以让应用程序安全地使用 Azure AD 保护的任何 Web API，例如 Office 365 API 或 Azure API。
 
-> [!NOTE] 此代码示例使用 ADAL v2.0。若要体验最新技术，你可以改为尝试[使用 ADAL v3.0 的 Windows 通用教程](./active-directory-devquickstarts-windowsstore.md)。如果你确实要构建适用于 Windows Phone 8.1 的应用，本文正是你的理想之选。ADAL v2.0 仍受到完全支持，并且是使用 Azure AD 来针对 Windows Phone 8.1 开发应用的建议方式。
+> [!NOTE]
+> 此代码示例使用 ADAL v2.0。若要体验最新技术，你可以改为尝试[使用 ADAL v3.0 的 Windows 通用教程](./active-directory-devquickstarts-windowsstore.md)。如果你确实要构建适用于 Windows Phone 8.1 的应用，本文正是你的理想之选。ADAL v2.0 仍受到完全支持，并且是使用 Azure AD 来针对 Windows Phone 8.1 开发应用的建议方式。
 
 对于需要访问受保护资源的 .NET 本机客户端，Azure AD 提供 Active Directory 身份验证库 (ADAL)。在本质上，ADAL 的唯一用途就是方便应用程序获取访问令牌。为了演示操作的简单性，下面我们要生成一个“目录搜索器”Windows Phone 8.1 应用程序，该应用程序可以：
 

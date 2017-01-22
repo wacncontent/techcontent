@@ -67,7 +67,8 @@ Azure 自动化中的安全资产包括凭据、证书、连接和加密的变�
 |Get-AutomationVariable|检索现有变量的值。|
 |Set-AutomationVariable|设置现有变量的值。|
 
->[!NOTE] 应避免在 Runbook 中的 **Get-AutomationVariable** 的 -Name 参数中使用变量，因为这可能会使设计时发现 Runbook 与自动化变量之间的依赖关系变得复杂化。
+>[!NOTE]
+> 应避免在 Runbook 中的 **Get-AutomationVariable** 的 -Name 参数中使用变量，因为这可能会使设计时发现 Runbook 与自动化变量之间的依赖关系变得复杂化。
 
 ## 创建新的自动化变量
 

@@ -58,7 +58,8 @@ ms.author: mcoskun
 
 **TransactionChanged** 事件处理程序使用 **NotifyTransactionChangedEventArgs** 来提供有关事件的详细信息。它包含用于指定更改类型的操作属性（例如，**NotifyTransactionChangedAction.Commit**）。也包含提供对已更改事务的引用的事务属性。
 
->[!NOTE] 现在，只有提交事务才会引发 **TransactionChanged** 事件。此操作等同于 **NotifyTransactionChangedAction.Commit**。但是在未来，可能会有其他类型的事务状态更改可以引发事件。建议你检查操作，仅在你预期的事件发生时处理事件。
+>[!NOTE]
+> 现在，只有提交事务才会引发 **TransactionChanged** 事件。此操作等同于 **NotifyTransactionChangedAction.Commit**。但是在未来，可能会有其他类型的事务状态更改可以引发事件。建议你检查操作，仅在你预期的事件发生时处理事件。
 
 以下是 **TransactionChanged** 事件处理程序示例。
 
@@ -119,7 +120,8 @@ ms.author: mcoskun
             }
     }
 
->[!NOTE] **ProcessStateManagerSingleEntityNotification** 是上述 **OnStateManagerChangedHandler** 示例所调用的示例方法。
+>[!NOTE]
+> **ProcessStateManagerSingleEntityNotification** 是上述 **OnStateManagerChangedHandler** 示例所调用的示例方法。
 
 上述代码会设置 **IReliableNotificationAsyncCallback** 接口以及 **DictionaryChanged**。**NotifyDictionaryRebuildEventArgs** 包含需要以异步方式枚举的 **IAsyncEnumerable** 接口，因此，会通过 **RebuildNotificationAsyncCallback**（而不是 **OnDictionaryChangedHandler**）来触发重新生成通知。
 
@@ -136,7 +138,8 @@ ms.author: mcoskun
             }
     }
 
->[!NOTE] 在上述代码中，在处理重新生成通知的过程中，会先清除所维护的聚合状态。由于正在利用新状态重新生成可靠集合，因此与以前的所有通知不相关。
+>[!NOTE]
+> 在上述代码中，在处理重新生成通知的过程中，会先清除所维护的聚合状态。由于正在利用新状态重新生成可靠集合，因此与以前的所有通知不相关。
 
 **DictionaryChanged** 事件处理程序使用 **NotifyDictionaryChangedEventArgs** 来提供有关事件的详细信息。**NotifyDictionaryChangedEventArgs** 有五个子类。使用 **NotifyDictionaryChangedEventArgs** 中的操作属性将 **NotifyDictionaryChangedEventArgs** 转换为正确的子类：
 

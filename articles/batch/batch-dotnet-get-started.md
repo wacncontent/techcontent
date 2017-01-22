@@ -36,7 +36,8 @@ ms.author: marsma
 - **Batch 帐户**：获取 Azure 订阅后，请[创建 Azure Batch 帐户](./batch-account-create-portal.md)。
 - **存储帐户**：请参阅[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)中的[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account/)。
 
-> [!IMPORTANT] Batch 目前*仅*支持**常规用途**存储帐户类型，如[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)的[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account/)中步骤 5 所述。
+> [!IMPORTANT]
+> Batch 目前*仅*支持**常规用途**存储帐户类型，如[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)的[创建存储帐户](../storage/storage-create-storage-account.md#create-a-storage-account/)中步骤 5 所述。
 
 ### Visual Studio
 必须安装 **Visual Studio 2015** 才能构建示例项目。可以在 [Visual Studio 2015 产品概述][visual_studio]中找到试用版的 Visual Studio。
@@ -103,7 +104,8 @@ csharp
     private const string StorageAccountName = "";
     private const string StorageAccountKey  = "";
 
-> [!IMPORTANT] 如上所述，目前必须为 Azure 存储空间中的**常规用途**存储帐户指定凭据。Batch 应用程序使用**常规用途**存储帐户中的 Blob 存储。请不要为通过选择 *Blob 存储* 帐户类型创建的存储帐户指定凭据。
+> [!IMPORTANT]
+> 如上所述，目前必须为 Azure 存储空间中的**常规用途**存储帐户指定凭据。Batch 应用程序使用**常规用途**存储帐户中的 Blob 存储。请不要为通过选择 *Blob 存储* 帐户类型创建的存储帐户指定凭据。
 
 可以在 [Azure 门户预览][azure_portal]中每个服务的帐户边栏选项卡中找到 Batch 和存储帐户凭据：
 
@@ -111,7 +113,8 @@ csharp
 
 使用凭据更新项目后，在“解决方案资源管理器”中右键单击该解决方案，然后单击“构建解决方案”。出现提示时，请确认还原任何 NuGet 包。
 
-> [!TIP] 如果未自动还原 NuGet 包，或者你看到了有关包还原失败的错误，请确保已安装 [NuGet 包管理器][nuget_packagemgr]，然后启用遗失包的下载。若要启用包下载，请参阅 [Enabling Package Restore During Build][nuget_restore]（在构建期间启用包还原）。
+> [!TIP]
+> 如果未自动还原 NuGet 包，或者你看到了有关包还原失败的错误，请确保已安装 [NuGet 包管理器][nuget_packagemgr]，然后启用遗失包的下载。若要启用包下载，请参阅 [Enabling Package Restore During Build][nuget_restore]（在构建期间启用包还原）。
 
 在以下部分中，我们将示例应用程序细分为用于处理 Batch 服务中工作负荷的多个步骤，并详细讨论这些步骤。建议你在学习本文的余下部分时参考 Visual Studio 中打开的解决方案，因为我们并不会讨论示例中的每一行代码。
 
@@ -180,7 +183,8 @@ csharp
 
 创建容器之后，应用程序现在即可上载任务使用的文件。
 
-> [!TIP] [How to use Blob Storage from .NET](../storage/storage-dotnet-how-to-use-blobs.md) 对如何使用 Azure 存储容器和 blob 进行了很好的概述。当你开始使用 Batch 时，它应该位于阅读列表顶部附近。
+> [!TIP]
+> [How to use Blob Storage from .NET](../storage/storage-dotnet-how-to-use-blobs.md) 对如何使用 Azure 存储容器和 blob 进行了很好的概述。当你开始使用 Batch 时，它应该位于阅读列表顶部附近。
 
 ## <a name="step-2-upload-task-application-and-data-files"></a>步骤 2：上载任务应用程序和数据文件
 
@@ -275,7 +279,8 @@ DotNetTutorial 示例应用程序不使用 JobPreparationTask 或 JobReleaseTask
 - **Blob 共享访问签名**：DotNetTutorial 中池的 StartTask 在从存储空间下载应用程序二进制文件和输入数据文件时使用 Blob 共享访问签名（请参阅下面的步骤 3）。DotNetTutorial 的 `Program.cs` 中的 `UploadFileToContainerAsync` 方法包含的代码可用于获取每个 blob 的共享访问签名。它是通过调用 [CloudBlob.GetSharedAccessSignature][net_sas_blob] 来完成此操作的。
 - **容器共享访问签名**：每个任务在计算节点上完成其工作后，会将其输出文件上载到 Azure 存储空间中的*输出*容器。为此，TaskApplication 使用容器共享访问签名，在上载文件时，该共享访问签名提供对路径中包含的容器的写访问。获取容器共享访问签名的操作方式类似于获取 blob 共享访问签名。在 DotNetTutorial 中，你会发现 `GetContainerSasUrl` 帮助器方法调用 [CloudBlobContainer.GetSharedAccessSignature][net_sas_container] 来执行该操作。你可以在下面的“步骤 6：监视任务”中详细了解 TaskApplication 如何使用容器共享访问签名。
 
-> [!TIP] 请查看有关共享访问签名的两篇系列教程的[第 1 部分：了解共享访问签名 (SAS) 模型](../storage/storage-dotnet-shared-access-signature-part-1.md)和[第 2 部分：创建共享访问签名 (SAS) 并将其用于 Blob 存储](../storage/storage-dotnet-shared-access-signature-part-2.md)，以详细了解如何提供对存储帐户中数据的安全访问。
+> [!TIP]
+> 请查看有关共享访问签名的两篇系列教程的[第 1 部分：了解共享访问签名 (SAS) 模型](../storage/storage-dotnet-shared-access-signature-part-1.md)和[第 2 部分：创建共享访问签名 (SAS) 并将其用于 Blob 存储](../storage/storage-dotnet-shared-access-signature-part-2.md)，以详细了解如何提供对存储帐户中数据的安全访问。
 
 ## <a name="step-3-create-batch-pool"></a>步骤 3：创建 Batch 池
 ![创建 Batch 池][3] <br/>
@@ -340,17 +345,20 @@ csharp
 
 使用 [CreatePool][net_pool_create] 创建池时，需指定多个参数，例如计算节点数目、[节点大小](../cloud-services/cloud-services-sizes-specs.md)以及节点的操作系统。在 *DotNetTutorial* 中，我们使用 [CloudServiceConfiguration][net_cloudserviceconfiguration] 从[云服务](../cloud-services/cloud-services-guestos-update-matrix.md)指定 Windows Server 2012 R2。但是，如果指定 [VirtualMachineConfiguration][net_virtualmachineconfiguration]，则可以从应用商店映像（包括 Windows 和 Linux 映像）创建节点池—有关详细信息，请参阅[在 Azure 批处理池中预配 Linux 计算节点](./batch-linux-nodes.md)。
 
-> [!IMPORTANT] 你需要支付 Batch 中计算资源的费用。若要将费用降到最低，可以在运行示例之前，将 `targetDedicated` 降为 1。
+> [!IMPORTANT]
+> 你需要支付 Batch 中计算资源的费用。若要将费用降到最低，可以在运行示例之前，将 `targetDedicated` 降为 1。
 
 也可以连同这些实体节点属性一起指定池的 [StartTask][net_pool_starttask]。StartTask 在每个节点加入池以及每次重新启动节点时在该节点上运行。StartTask 特别适合用于在任务执行之前在计算节点上安装应用程序。例如，如果任务使用 Python 脚本处理数据，则你可以使用 StartTask 在计算节点上安装 Python。
 
 在此示例应用程序中，StartTask 将它从存储空间下载的文件（使用 [StartTask][net_starttask].[ResourceFiles][net_starttask_resourcefiles] 属性指定），从 StartTask 工作目录复制到在节点上运行的*所有*任务可以访问的共享目录。本质上，这会在节点加入池时，将 `TaskApplication.exe` 及其依赖项复制到每个节点上的共享目录，因此该节点上运行的任何任务都可以访问它。
 
-> [!TIP] Azure Batch 的**应用程序包**功能提供另一种方法，用于将应用程序转移到池中的计算节点。有关详细信息，请参阅[使用 Azure Batch 应用程序包部署应用程序](./batch-application-packages.md)。
+> [!TIP]
+> Azure Batch 的**应用程序包**功能提供另一种方法，用于将应用程序转移到池中的计算节点。有关详细信息，请参阅[使用 Azure Batch 应用程序包部署应用程序](./batch-application-packages.md)。
 
 此外，在上述代码片段中，值得注意的问题是，StartTask 的 *CommandLine* 属性中使用了两个环境变量：`%AZ_BATCH_TASK_WORKING_DIR%` 和 `%AZ_BATCH_NODE_SHARED_DIR%`。将自动为 Batch 池中的每个计算节点配置多个特定于 Batch 的环境变量。由任务执行的任何进程都可以访问这些环境变量。
 
-> [!TIP] 若要深入了解 Batch 池中计算节点上可用的环境变量，以及有关任务工作目录的信息，请参阅[面向开发人员的 Batch 功能概述](./batch-api-basics.md)中的[任务的环境设置](./batch-api-basics.md#environment-settings-for-tasks/)及[文件和目录](./batch-api-basics.md#files-and-directories/)部分。
+> [!TIP]
+> 若要深入了解 Batch 池中计算节点上可用的环境变量，以及有关任务工作目录的信息，请参阅[面向开发人员的 Batch 功能概述](./batch-api-basics.md)中的[任务的环境设置](./batch-api-basics.md#environment-settings-for-tasks/)及[文件和目录](./batch-api-basics.md#files-and-directories/)部分。
 
 ## <a name="step-4-create-batch-job"></a>步骤 4：创建 Batch 作业
 
@@ -425,7 +433,8 @@ csharp
         return tasks;
     }
 
-> [!IMPORTANT] 在访问环境变量（例如 `%AZ_BATCH_NODE_SHARED_DIR%`）或执行节点的 `PATH` 中找不到的应用程序时，任务命令行必须带有 `cmd /c` 前缀。这样才可以显式执行命令解释器，并指示其在执行命令后终止操作。如果任务在节点的 `PATH` 中执行应用程序（例如 *robocopy.exe* 或 *powershell.exe*），而且未使用任何环境变量，则不必要满足此要求。
+> [!IMPORTANT]
+> 在访问环境变量（例如 `%AZ_BATCH_NODE_SHARED_DIR%`）或执行节点的 `PATH` 中找不到的应用程序时，任务命令行必须带有 `cmd /c` 前缀。这样才可以显式执行命令解释器，并指示其在执行命令后终止操作。如果任务在节点的 `PATH` 中执行应用程序（例如 *robocopy.exe* 或 *powershell.exe*），而且未使用任何环境变量，则不必要满足此要求。
 
 在上述代码片段中的 `foreach` 循环内，可以看到已构造任务的命令行，因此有三个命令行参数已传递到 *TaskApplication.exe*：
 
@@ -606,7 +615,8 @@ csharp
             Console.WriteLine("All files downloaded to {0}", directoryPath);
     }
 
-> [!NOTE] 对 *DotNetTutorial* 应用程序中 `DownloadBlobsFromContainerAsync` 的调用可以指定应将文件下载到 `%TEMP%` 文件夹。可以随意修改此输出位置。
+> [!NOTE]
+> 对 *DotNetTutorial* 应用程序中 `DownloadBlobsFromContainerAsync` 的调用可以指定应将文件下载到 `%TEMP%` 文件夹。可以随意修改此输出位置。
 
 ## 步骤 8：删除容器
 由于用户需要对位于 Azure 存储中的数据付费，因此我们建议删除批处理作业不再需要的 Blob。在 DotNetTutorial 的 `Program.cs` 中，调用帮助器方法 `DeleteContainerAsync` 三次即可实现此目的：
@@ -662,7 +672,8 @@ csharp
         await batchClient.PoolOperations.DeletePoolAsync(PoolId);
     }
 
-> [!IMPORTANT] 请记住，你需要支付计算资源的费用，而删除未使用的池可将费用降到最低。另请注意，删除池也会删除该池内的所有计算节点，并且删除池后，将无法恢复节点上的任何数据。
+> [!IMPORTANT]
+> 请记住，你需要支付计算资源的费用，而删除未使用的池可将费用降到最低。另请注意，删除池也会删除该池内的所有计算节点，并且删除池后，将无法恢复节点上的任何数据。
 
 ## 运行 *DotNetTutorial* 示例
 当你运行示例应用程序时，控制台输出如下所示。在执行期间启动池的计算节点时，你将会遇到暂停并看到`Awaiting task completion, timeout in 00:30:00...`。在执行期间和之后，可以使用 [Azure 门户预览][azure_portal]来监视池、计算节点、作业和任务。使用 [Azure 门户预览][azure_portal]或 [Azure 存储资源管理器][storage_explorers]可以查看应用程序创建的存储资源（容器和 Blob）。

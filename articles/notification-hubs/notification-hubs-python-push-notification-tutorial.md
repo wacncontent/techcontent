@@ -22,9 +22,11 @@ ms.author: wesmc
 
 如 MSDN 主题[通知中心 REST API](http://msdn.microsoft.com/zh-cn/library/dn223264.aspx) 中所述，你可以使用通知中心 REST 接口从 Java/PHP/Python/Ruby 后端访问所有通知中心功能。
 
-> [!NOTE] 这是在 Python 中实现通知发送的示例引用实现，不是官方支持的通知中心 Python SDK。
+> [!NOTE]
+> 这是在 Python 中实现通知发送的示例引用实现，不是官方支持的通知中心 Python SDK。
 
-> [!NOTE] 此示例使用 Python 3.4 编写。
+> [!NOTE]
+> 此示例使用 Python 3.4 编写。
 
 本主题中，我们将向你介绍如何：
 
@@ -34,7 +36,8 @@ ms.author: wesmc
 
 你可以按照你选定的移动平台的[入门教程](./notification-hubs-windows-store-dotnet-get-started-wns-push-notification.md)以 Python 实现后端部分。
 
-> [!NOTE] 该示例仅限于发送通知，并不执行任何注册管理操作。
+> [!NOTE]
+> 该示例仅限于发送通知，并不执行任何注册管理操作。
 
 ## 客户端接口
 主要的客户端接口可提供 [.NET 通知中心 SDK](http://msdn.microsoft.com/zh-cn/library/jj933431.aspx) 中提供的相同方法。这将允许你直接翻译当前该网站上提供的所有教程和示例，这些内容均来自 Internet 上的社区。

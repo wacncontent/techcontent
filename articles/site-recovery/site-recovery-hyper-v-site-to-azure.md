@@ -197,7 +197,8 @@ ms.author: raynew
 
 将虚拟机添加到保护组以启用虚拟机保护。
 
->[!NOTE] 不支持保护运行 Linux 的、使用静态 IP 地址的 VM。
+>[!NOTE]
+> 不支持保护运行 Linux 的、使用静态 IP 地址的 VM。
 
 1. 在保护组的“计算机”选项卡上，单击“将虚拟机添加到保护组以启用保护”。
 2. 在“启用虚拟机保护”页上，选择你要保护的虚拟机。
@@ -247,7 +248,8 @@ ms.author: raynew
 
 按如下所述运行测试故障转移：
 
->[!NOTE] 在为 Azure 执行故障转移时，若要获得最佳性能，请确保已在受保护计算机中安装 Azure 代理。这有助于加快启动速度，并且也对出现问题时的诊断有所帮助。Linux 代理可在 [此处](https://github.com/Azure/WALinuxAgent)找到 - Windows 代理可在[此处](http://go.microsoft.com/fwlink/?LinkID=394789)找到。
+>[!NOTE]
+> 在为 Azure 执行故障转移时，若要获得最佳性能，请确保已在受保护计算机中安装 Azure 代理。这有助于加快启动速度，并且也对出现问题时的诊断有所帮助。Linux 代理可在 [此处](https://github.com/Azure/WALinuxAgent)找到 - Windows 代理可在[此处](http://go.microsoft.com/fwlink/?LinkID=394789)找到。
 
 1. 在“恢复计划”选项卡上，选择该计划并单击“测试故障转移”。
 2. 在“确认测试故障转移”页上，选择“无”或选择一个特定的 Azure 网络。请注意，如果你选择了“无”，则测试故障转移将检查虚拟机是否可以正确复制到 Azure，但不会检查你的复制网络配置。

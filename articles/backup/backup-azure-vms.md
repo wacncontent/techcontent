@@ -24,13 +24,15 @@ ms.author: trinadhk; jimpark; markgal;
 
 有关其他信息，请参阅[在 Azure 中规划 VM 备份基础结构](./backup-azure-vms-introduction.md)和 [Azure 虚拟机](../virtual-machines/index.md)。
 
->[!NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。备份保管库只能保护经典部署 VM。无法使用备份保管库保护使用资源管理器部署的 VM。
+>[!NOTE]
+> Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。备份保管库只能保护经典部署 VM。无法使用备份保管库保护使用资源管理器部署的 VM。
 
 备份 Azure 虚拟机的过程包括三个主要步骤：
 
 ![备份 Azure IaaS VM 的三个步骤](./media/backup-azure-vms/3-steps-for-backup.png)  
 
->[!NOTE] 备份虚拟机是在本地完成的过程。你不能将一个区域的虚拟机备份到另一个区域的备份保管库。因此，必须在每个要备份 VM 的 Azure 区域中创建一个备份保管库。
+>[!NOTE]
+> 备份虚拟机是在本地完成的过程。你不能将一个区域的虚拟机备份到另一个区域的备份保管库。因此，必须在每个要备份 VM 的 Azure 区域中创建一个备份保管库。
 
 ## 步骤 1 - 发现 Azure 虚拟机
 为确保在注册之前能够识别任何添加到订阅中的新虚拟机 (VM)，请先运行发现过程。该过程将在 Azure 上查询订阅中的虚拟机列表和其他信息，例如云服务名称、区域等。
@@ -86,7 +88,8 @@ ms.author: trinadhk; jimpark; markgal;
 
 4. 在“注册项”快捷菜单中，选择你要注册的虚拟机。如果存在两个或两个以上的同名虚拟机，请使用云服务来区别它们。
 
-    >[!TIP] 可以一次注册多个虚拟机。
+    >[!TIP]
+    > 可以一次注册多个虚拟机。
 
     为每一个选定的虚拟机创建一个作业。
 
@@ -118,7 +121,8 @@ ms.author: trinadhk; jimpark; markgal;
 
     如果存在两个以上的同名虚拟机，请使用云服务来区别虚拟机。
 
-    >[!TIP] 你可以一次保护多个虚拟机。
+    >[!TIP]
+    > 你可以一次保护多个虚拟机。
 
     ![配置批量保护](./media/backup-azure-vms/protect-at-scale.png)  
 
@@ -128,7 +132,8 @@ ms.author: trinadhk; jimpark; markgal;
 
     ![使用新策略进行保护](./media/backup-azure-vms/policy-schedule.png)  
 
-    >[!NOTE] 备份策略包括计划备份的保留期方案。如果选择现有的备份策略，则不能修改下一步的保留期选项。
+    >[!NOTE]
+    > 备份策略包括计划备份的保留期方案。如果选择现有的备份策略，则不能修改下一步的保留期选项。
 
 5. 选择要与备份关联的“保留期范围”。
 
@@ -164,7 +169,8 @@ ms.author: trinadhk; jimpark; markgal;
 
     ![备份进行中](./media/backup-azure-vms/protect-inprogress.png)  
 
->[!NOTE] 在执行备份操作的过程中，Azure 备份服务将向虚拟机中的备份扩展发出一条命令，以刷新所有写入作业并取得一致的快照。
+>[!NOTE]
+> 在执行备份操作的过程中，Azure 备份服务将向虚拟机中的备份扩展发出一条命令，以刷新所有写入作业并取得一致的快照。
 
 完成初始备份后，“受保护的项”选项卡中的虚拟机状态将显示为“受保护”。
 

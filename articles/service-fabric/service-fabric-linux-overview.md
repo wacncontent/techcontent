@@ -27,7 +27,8 @@ Service Fabric 目前在 Linux 上以受限预览版提供，可让你在 Linux 
 
 可以使用任何语言或框架来构建[来宾可执行服务](./service-fabric-deploy-existing-app.md)。还可以使用 Java 或 C# 来构建基于 Reliable Services 和 Reliable Actor 框架的服务。
 
->[!NOTE] Linux 尚不支持 Reliable 集合。
+>[!NOTE]
+> Linux 尚不支持 Reliable 集合。
 
 Linux 上的 Service Fabric 在概念上等同于 Windows 上的 Service Fabric（OS 细节和编程语言支持除外）。因此，我们的大部分[现有文档](./index.md)都能帮助你熟悉该技术。
 

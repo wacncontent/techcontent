@@ -28,7 +28,8 @@ wacn.date: 01/09/2017
 ## 服务总线入门
 
 此指南假定你已有包含名为“queue1”的队列的服务总线命名空间。如果没有，则可以使用 [Azure 经典管理门户](http://manage.windowsazure.cn)创建命名空间和队列。有关如何创建服务总线命名空间和队列的详细信息，请参阅[如何使用服务总线队列](./service-bus-dotnet-get-started-with-queues.md)。
-> [!NOTE]分区队列和主题也支持 AMQP。有关详细信息，请参阅[分区消息实体](./service-bus-partitioning.md)和[针对服务总线分区队列和主题的 AMQP 1.0 支持](./service-bus-partitioned-queues-and-topics-amqp-overview.md)。
+> [!NOTE]
+>分区队列和主题也支持 AMQP。有关详细信息，请参阅[分区消息实体](./service-bus-partitioning.md)和[针对服务总线分区队列和主题的 AMQP 1.0 支持](./service-bus-partitioned-queues-and-topics-amqp-overview.md)。
 
 ## 下载 AMQP 1.0 JMS 客户端库
 
@@ -79,7 +80,8 @@ JMS 使用 Java 命名和目录接口 (JNDI) 创建逻辑名称和物理名称�
 - **[SASPolicyName]**：队列共享访问签名策略名称。
 - **[SASPolicyKey]**：队列共享访问签名策略密钥。
 
-> [!NOTE] 必须手动为密码进行 URL 编码。在 [http://www.w3schools.com/tags/ref_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp) 上提供了一个有用的 URL 编码实用工具。
+> [!NOTE]
+> 必须手动为密码进行 URL 编码。在 [http://www.w3schools.com/tags/ref_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp) 上提供了一个有用的 URL 编码实用工具。
 
 #### 配置目标
 
@@ -96,7 +98,8 @@ JMS 使用 Java 命名和目录接口 (JNDI) 创建逻辑名称和物理名称�
 - **[jndi\_name]**：目标的逻辑名称。这是将使用 JNDI IntialContext.lookup() 方法在 Java 应用程序中解析的名称。
 - **[physical\_name]**：应用程序向其发送或从该处接收消息的服务总线实体的名称。
 
-> [!NOTE]在从 Service Bus 主题订阅中接收时，在 JNDI 中指定的物理名称应该是该主题的名称。在 JMS 应用程序代码中创建可持久订阅时提供该订阅名称。[服务总线 AMQP 1.0 开发人员指南](./service-bus-amqp-dotnet.md)提供了有关从 JMS 使用服务总线主题订阅的更多详细信息。
+> [!NOTE]
+>在从 Service Bus 主题订阅中接收时，在 JNDI 中指定的物理名称应该是该主题的名称。在 JMS 应用程序代码中创建可持久订阅时提供该订阅名称。[服务总线 AMQP 1.0 开发人员指南](./service-bus-amqp-dotnet.md)提供了有关从 JMS 使用服务总线主题订阅的更多详细信息。
 
 ### 编写 JMS 应用程序
 

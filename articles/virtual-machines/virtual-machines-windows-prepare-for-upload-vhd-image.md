@@ -52,7 +52,8 @@ Azure 仅支持使用 VHD 文件格式的[第 1 代虚拟机](http://blogs.techn
 
 ## 准备要上载的 Windows 配置
 
-> [!NOTE] 以[管理权限](https://technet.microsoft.com/zh-cn/library/cc947813.aspx)运行以下所有命令。
+> [!NOTE]
+> 以[管理权限](https://technet.microsoft.com/zh-cn/library/cc947813.aspx)运行以下所有命令。
 
 1. 删除路由表中的所有静态持久性路由：
 

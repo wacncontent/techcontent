@@ -23,7 +23,8 @@ ms.author: adegeo
 
 参阅[本文](./cloud-services-startup-tasks.md)可了解启动任务的工作方式，特别是如何创建定义启动任务的条目。
 
->[!NOTE] 启动任务不适用于虚拟机，只适用于云服务 Web 角色和辅助角色。
+>[!NOTE]
+> 启动任务不适用于虚拟机，只适用于云服务 Web 角色和辅助角色。
 
 ## 在角色启动之前定义环境变量
 
@@ -424,7 +425,8 @@ ServiceDefinition.cmd：
     [Mon 10/17/2016 20:24:46.77] Done 
     [Mon 10/17/2016 20:24:46.77] == END logwrap.cmd ================================================ 
 
->[!TIP] **StartupLog.txt** 文件位于 *C:\\Resources\\temp\\{role identifier}\\RoleTemp* 文件夹中。
+>[!TIP]
+> **StartupLog.txt** 文件位于 *C:\\Resources\\temp\\{role identifier}\\RoleTemp* 文件夹中。
 
 ### 为启动任务适当地设置 executionContext
 
@@ -448,7 +450,8 @@ ServiceDefinition.cmd：
 
 在启动批处理文件的末尾缺少 `EXIT /B 0` 是角色未启动的常见原因。
 
->[!NOTE] 我发现当使用 `/B` 参数时，嵌套的批处理文件多次挂起。如果另一个批处理文件调用你的当前批处理文件（例如当使用[日志包装器](#always-log-startup-activities)时），你可能希望确保此挂起问题不再发生。在本例中，可以省略 `/B` 参数。
+>[!NOTE]
+> 我发现当使用 `/B` 参数时，嵌套的批处理文件多次挂起。如果另一个批处理文件调用你的当前批处理文件（例如当使用[日志包装器](#always-log-startup-activities)时），你可能希望确保此挂起问题不再发生。在本例中，可以省略 `/B` 参数。
 
 ### 启动任务应多次运行
 

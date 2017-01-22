@@ -234,7 +234,8 @@ Azure Redis 缓存基于流行的开源 Redis 缓存，可以通过各种 [Redis
 
 可以。若要使用 Azure Redis 缓存作为 PHP 会话缓存，请在 `session.save_path` 中指定 Azure Redis 缓存实例的连接字符串。
 
->[!IMPORTANT] 使用 Azure Redis 缓存作为 PHP 会话缓存时，必须对用于连接到缓存的安全密钥进行 URL 编码，如以下示例所示。
+>[!IMPORTANT]
+> 使用 Azure Redis 缓存作为 PHP 会话缓存时，必须对用于连接到缓存的安全密钥进行 URL 编码，如以下示例所示。
 >
 >`session.save_path = "tcp://mycache.redis.cache.chinacloudapi.cn:6379?auth=<url encoded primary or secondary key here>";`  
 
@@ -400,7 +401,8 @@ Redis 缓存“设置”边栏选项卡的“支持 + 故障排除”部分还�
 
 ### <a id="which-azure-cache-offering-is-right-for-me"></a> 哪种 Azure 缓存产品适合我？
 
->[!IMPORTANT]按照去年的[公告](https://azure.microsoft.com/blog/azure-managed-cache-and-in-role-cache-services-to-be-retired-on-11-30-2016/)，将于 2016 年 11 月 30 日停用 Azure 托管缓存服务和 Azure 角色中缓存服务。我们建议使用 [Azure Redis 缓存](https://www.azure.cn/home/features/redis-cache/)。
+>[!IMPORTANT]
+>按照去年的[公告](https://azure.microsoft.com/blog/azure-managed-cache-and-in-role-cache-services-to-be-retired-on-11-30-2016/)，将于 2016 年 11 月 30 日停用 Azure 托管缓存服务和 Azure 角色中缓存服务。我们建议使用 [Azure Redis 缓存](https://www.azure.cn/home/features/redis-cache/)。
 
 ### Azure Redis Cache
 Azure Redis 缓存已正式发布，最大大小为 53 GB，且其可用性 SLA 为 99.9%。全新[高级层](./cache-premium-tier-intro.md)提供的最大大小为 530 GB，且支持群集、VNET 和持久性，并附带 99.9% SLA。

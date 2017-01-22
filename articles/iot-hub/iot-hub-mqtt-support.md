@@ -82,7 +82,8 @@ IoT 中心允许设备在端口 8883 上使用 [MQTT v3.1.1][lnk-mqtt-org] 协�
 
         RFC 2396-encoded(<PropertyName1>)=RFC 2396-encoded(<PropertyValue1>)&RFC 2396-encoded(<PropertyName2>)=RFC 2396-encoded(<PropertyValue2>)…
 
-> [!NOTE] 此 `{property_bag}` 元素使用的编码与 HTTP 协议中用于查询字符串的编码相同。
+> [!NOTE]
+> 此 `{property_bag}` 元素使用的编码与 HTTP 协议中用于查询字符串的编码相同。
 
 设备客户端应用程序还可以使用 `devices/{device_id}/messages/events/{property_bag}` 作为 **Will 主题名称**，来定义要以遥测消息形式转发的 *Will 消息*。
 

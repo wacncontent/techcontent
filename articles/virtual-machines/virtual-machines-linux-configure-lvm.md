@@ -78,7 +78,8 @@ LVM 可用于将多个物理磁盘合并成单个存储卷。默认情况下，L
 
         sudo mkfs -t ext4 /dev/data-vg01/data-lv01
 
-  >[!NOTE] 在 SLES11 上，请使用 `-t ext3` 而不是 ext4。SLES11 仅支持对 ext4 文件系统进行只读访问。
+  >[!NOTE]
+  > 在 SLES11 上，请使用 `-t ext3` 而不是 ext4。SLES11 仅支持对 ext4 文件系统进行只读访问。
 
 ## 将新文件系统添加到 /etc/fstab
 

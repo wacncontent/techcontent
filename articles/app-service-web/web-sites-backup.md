@@ -32,7 +32,8 @@ ms.author: cephalin
 
 此信息会备份到你指定的 Azure 存储帐户和容器。
 
-> [!NOTE] 每个备份都是你的应用的完整脱机副本，而不是增量更新。
+> [!NOTE]
+> 每个备份都是你的应用的完整脱机副本，而不是增量更新。
 
 ## <a name="requirements"></a>要求和限制
 
@@ -46,7 +47,8 @@ ms.author: cephalin
 
     ![“备份”页面][ChooseBackupsPage]
 
-    >[!NOTE] 若显示以下消息，请单击该消息升级应用服务计划，然后才能继续备份。有关详细信息，请参阅[增加 Azure 中的应用](./web-sites-scale.md)。![选择存储帐户](./media/web-sites-backup/01UpgradePlan.png)
+    >[!NOTE]
+    > 若显示以下消息，请单击该消息升级应用服务计划，然后才能继续备份。有关详细信息，请参阅[增加 Azure 中的应用](./web-sites-scale.md)。![选择存储帐户](./media/web-sites-backup/01UpgradePlan.png)
 
 3. 在“备份”边栏选项卡中，单击“存储: 未配置”来配置存储帐户。
 
@@ -60,7 +62,8 @@ ms.author: cephalin
 
     ![选择存储帐户](./media/web-sites-backup/03ConfigureDatabase.png)
 
-    > [!NOTE] 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
+    > [!NOTE]
+    > 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
 
 6. 在“配置备份设置”边栏选项卡上，单击“保存”。
 
@@ -90,7 +93,8 @@ ms.author: cephalin
 
     ![选择存储帐户](./media/web-sites-backup/03ConfigureDatabase.png)
 
-    > [!NOTE] 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
+    > [!NOTE]
+    > 	若要使数据库显示在此列表中，其连接字符串必须位于应用中“应用程序设置”边栏选项卡的“连接字符串”部分中。
 
 6. 在“配置备份设置”边栏选项卡上，单击“保存”。
 
@@ -122,7 +126,8 @@ ms.author: cephalin
         D:\home\site\wwwroot\Images\2014
         D:\home\site\wwwroot\Images\brand.png
 
-    [!NOTE] 最后一行显示了你可以排除单个文件以及文件夹。
+    >[!NOTE]
+    > 最后一行显示了你可以排除单个文件以及文件夹。
 
 2. 创建名为 `_backup.filter` 的文件并将上述列表放在文件中，但删除 `D:\home`。每行列出一个目录或文件。文件的内容应为：
 
@@ -138,7 +143,8 @@ ms.author: cephalin
 
 现在，`_backup.filter` 中指定的所有文件和文件夹都会从备份中排除。在此示例中，将不再对日志文件，2013 年和 2014 年的映像文件以及 brand.png 进行备份。
 
->[!NOTE] 采用[还原定期备份](./web-sites-restore.md)的相同方式还原站点的部分备份。还原过程会执行正确的操作。<p>还原完整备份后，站点上的所有内容都被替换为备份中的所有内容。如果文件在站点上但不在备份中，则会将其删除。但是，还原部分备份时，位于其中一个黑名单目录或任何黑名单文件中的任何内容都保持不变。
+>[!NOTE]
+> 采用[还原定期备份](./web-sites-restore.md)的相同方式还原站点的部分备份。还原过程会执行正确的操作。<p>还原完整备份后，站点上的所有内容都被替换为备份中的所有内容。如果文件在站点上但不在备份中，则会将其删除。但是，还原部分备份时，位于其中一个黑名单目录或任何黑名单文件中的任何内容都保持不变。
 
 ## <a name="aboutbackups" id="moreaboutstorage"></a>如何存储备份
 
@@ -146,12 +152,14 @@ ms.author: cephalin
 
 应用的数据库备份存储在 .zip 文件的根目录中。对于 SQL 数据库，这是 BACPAC 文件（无文件扩展名），并且可以导入。若要基于 BACPAC 导出创建新的 SQL 数据库，请参阅[导入 BACPAC 文件以创建新的用户数据库](http://technet.microsoft.com/zh-cn/library/hh710052.aspx)。
 
-> [!WARNING] 改动“websitebackups”容器中的任何文件都会导致备份无效，进而无法还原。
+> [!WARNING]
+> 改动“websitebackups”容器中的任何文件都会导致备份无效，进而无法还原。
 
 ## <a name="nextsteps"></a>后续步骤
 有关从备份中还原应用的信息，请参阅 [Restore an app in Azure](./web-sites-restore.md)（在 Azure 中还原应用）。还可使用 REST API 备份和还原应用服务应用（请参阅 [使用 REST 备份和还原应用服务应用](./websites-csm-backup.md)）。
 
->[!NOTE] 若要开始使用 Azure，请参阅 [Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
+>[!NOTE]
+> 若要开始使用 Azure，请参阅 [Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 
 <!-- IMAGES -->
 [ChooseBackupsPage]: ./media/web-sites-backup/01ChooseBackupsPage.png

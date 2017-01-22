@@ -36,7 +36,8 @@ ms.author: danlep
 
     azure config mode arm
 
->[!NOTE] Azure 资源管理器模式与 Azure 服务管理模式互斥。即在一种模式下创建的资源不能从另一种模式进行管理。
+>[!NOTE]
+> Azure 资源管理器模式与 Azure 服务管理模式互斥。即在一种模式下创建的资源不能从另一种模式进行管理。
 
 ## azure account：管理你的帐户信息
 该工具使用你的 Azure 订阅信息连接到你的帐户。
@@ -1666,7 +1667,8 @@ ms.author: danlep
 
     vm quick-create [options] <resource-group> <name> <location> <os-type> <image-urn> <admin-username> <admin-password>
 
->[!TIP]从 CLI 版本 0.10 开始，你可以为某些常用的应用商店映像提供“UbuntuLTS”或“Win2012R2Datacenter”之类的简短别名作为 `image-urn`。针对选项运行 `azure help vm quick-create`。另外，从版本 0.10 开始，`azure vm quick-create` 默认使用高级存储，前提是所选区域提供该存储。
+>[!TIP]
+>从 CLI 版本 0.10 开始，你可以为某些常用的应用商店映像提供“UbuntuLTS”或“Win2012R2Datacenter”之类的简短别名作为 `image-urn`。针对选项运行 `azure help vm quick-create`。另外，从版本 0.10 开始，`azure vm quick-create` 默认使用高级存储，前提是所选区域提供该存储。
 
 **列出帐户中的虚拟机**
 

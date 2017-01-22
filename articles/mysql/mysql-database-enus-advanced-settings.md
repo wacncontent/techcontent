@@ -111,5 +111,6 @@ MySQL Database on Azure supports custom settings for some parameters. The follow
     <td>[60-240] </td>
   </tr>
 </table>
->[!NOTE]**In view of the limitations of Azure Traffic Manager, we have adjusted the default value for wait\_timeout to 120 seconds (s) and the selectable range to 60s to 240s, but this adjustment only works on instances created after October 2015. For earlier instances, please manually set the value of wait\_timeout to any number between 60s and 240s. We recommend 120s. **
+>[!NOTE]
+>**In view of the limitations of Azure Traffic Manager, we have adjusted the default value for wait\_timeout to 120 seconds (s) and the selectable range to 60s to 240s, but this adjustment only works on instances created after October 2015. For earlier instances, please manually set the value of wait\_timeout to any number between 60s and 240s. We recommend 120s. **
 <!--HONumber=81-->

@@ -21,7 +21,8 @@ ms.author: mahender
 
 ## 什么是应用服务身份验证/授权？
 
-> [!NOTE] 本主题将会移入 [App Service Authentication / Authorization](../app-service/app-service-authentication-overview.md)（应用服务身份验证/授权）合并主题，其中涉及 Web 应用、移动应用和 API 应用。
+> [!NOTE]
+> 本主题将会移入 [App Service Authentication / Authorization](../app-service/app-service-authentication-overview.md)（应用服务身份验证/授权）合并主题，其中涉及 Web 应用、移动应用和 API 应用。
 
 应用服务身份验证/授权是一项功能，使应用程序能够将用户登录，而无需在应用后端进行任何代码更改。该功能可以方便地保护应用程序和处理每个用户的数据。
 
@@ -50,7 +51,8 @@ ms.author: mahender
 - 使用一行代码，让移动应用客户端 SDK 登录用户。
 - 利用给定标识提供者发布的 SDK 建立标识，然后获取对应用服务的访问权限。
 
->[!TIP] 大多数应用程序都应该使用提供程序 SDK 来获得更自然的登录体验，使用刷新支持和其他提供程序特定的优势。
+>[!TIP]
+> 大多数应用程序都应该使用提供程序 SDK 来获得更自然的登录体验，使用刷新支持和其他提供程序特定的优势。
 
 ### 不使用提供程序 SDK 进行身份验证的工作原理
 

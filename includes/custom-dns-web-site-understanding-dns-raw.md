@@ -4,7 +4,8 @@ DNS 系统基于 *记录* 。记录将特定的 *名称*（例如 **contoso.com*
 
 在应用服务中创建 Web 应用时，将为 Web 应用自动分配 DNS 名称。此名称采用 **&lt;yourwebappname&gt;.chinacloudsites.cn** 的格式。创建 DNS 记录时，还有一个虚拟 IP 地址可供使用，因此你可以创建指向 **.chinacloudsites.cn** 的记录，也可以指向该 IP 地址。
 
-> [!NOTE] 如果你删除或重新创建 Web 应用，或者在将 App Service 计划模式设置为“基本”、“共享”或“标准”后再将其更改为“免费”，则 Web 应用的 IP 地址将会更改。
+> [!NOTE]
+> 如果你删除或重新创建 Web 应用，或者在将 App Service 计划模式设置为“基本”、“共享”或“标准”后再将其更改为“免费”，则 Web 应用的 IP 地址将会更改。
 
 此外还有多种类型的记录，每种类型都有其自己的功能和限制，但是对于 Web 应用，我们只关心两种，即 *A* 和 *CNAME* 记录。
 
@@ -18,13 +19,15 @@ A 记录相比于 CNAME 记录的主要优势是：
 
 * 你可以有一个使用通配符的条目（例如 ***.contoso.com**），它将处理多个子域（例如 **mail.contoso.com**、**blogs.contoso.com** 或 **www.contso.com**）的请求。
 
-> [!NOTE] 由于 A 记录映射到静态 IP 地址，因此它无法自动解析 Web 应用的 IP 地址的更改。用于 A 记录的 IP 地址是你为 Web 应用配置自定义域名设置时提供的；但是，如果你删除并重新创建 Web 应用或者将 App Service 计划模式改回“免费”，则该值可能会更改。
+> [!NOTE]
+> 由于 A 记录映射到静态 IP 地址，因此它无法自动解析 Web 应用的 IP 地址的更改。用于 A 记录的 IP 地址是你为 Web 应用配置自定义域名设置时提供的；但是，如果你删除并重新创建 Web 应用或者将 App Service 计划模式改回“免费”，则该值可能会更改。
 
 ###别名记录（CNAME 记录）
 
 CNAME 记录将*特定的* DNS 名称（例如 **mail.contoso.com** 或 **www.contoso.com**）映射到另一个（规范）域名。对于应用服务 Web 应用，规范域名是 Web 应用的 **&lt;yourwebappname>.chinacloudsites.cn** 域名。一旦创建，CNAME 即为 **&lt;你的 Web 应用名称>.chinacloudsites.cn** 域名创建一个别名。CNAME 条目将自动解析为 **&lt;你的 Web 应用名称>.chinacloudsites.cn** 域名的 IP 地址，因此，如果 Web 应用的 IP 地址发生更改，你不必采取任何操作。
 
-> [!NOTE] 某些域注册机构只允许你在使用 CNAME 记录（例如 **www.contoso.com**）和非根名称（例如 **contoso.com**）时映射子域。有关 CNAME 记录的详细信息，请参阅由你的注册机构提供的文档、<a href="http://en.wikipedia.org/wiki/CNAME_record">CNAME 记录上的 Wikipedia 条目</a>或 <a href="http://tools.ietf.org/html/rfc1035">IETF 域名 - 实现和规范</a>文档。
+> [!NOTE]
+> 某些域注册机构只允许你在使用 CNAME 记录（例如 **www.contoso.com**）和非根名称（例如 **contoso.com**）时映射子域。有关 CNAME 记录的详细信息，请参阅由你的注册机构提供的文档、<a href="http://en.wikipedia.org/wiki/CNAME_record">CNAME 记录上的 Wikipedia 条目</a>或 <a href="http://tools.ietf.org/html/rfc1035">IETF 域名 - 实现和规范</a>文档。
 
 ###Web 应用 DNS 细节
 
@@ -50,6 +53,7 @@ CNAME 记录将*特定的* DNS 名称（例如 **mail.contoso.com** 或 **www.co
 
     ![](./media/custom-dns-web-site/virtual-ip-address.png)
 
-    > [!NOTE] **免费** Web 应用不可使用自定义域名，并且必须将应用服务计划升级到**共享**、**基本**、**标准**或**高级**层。若要深入了解应用服务计划的定价层，包括如何更改 Web 应用的定价层，请参阅[如何缩放 Web 应用](../articles/app-service-web/web-sites-scale.md)。
+    > [!NOTE]
+    > **免费** Web 应用不可使用自定义域名，并且必须将应用服务计划升级到**共享**、**基本**、**标准**或**高级**层。若要深入了解应用服务计划的定价层，包括如何更改 Web 应用的定价层，请参阅[如何缩放 Web 应用](../articles/app-service-web/web-sites-scale.md)。
 
 <!---HONumber=Mooncake_0926_2016-->

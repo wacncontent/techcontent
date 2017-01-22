@@ -23,7 +23,8 @@ ms.author: juliako
 
 有关在实时流式处理视频中隐藏式字幕和广告支持的详细信息，请参阅[支持的隐藏式字幕和广告插入标准](./media-services-live-streaming-with-onprem-encoders.md#cc_and_ads)。
 
->[!NOTE] Azure Media Player 目前不支持广告。
+>[!NOTE]
+> Azure Media Player 目前不支持广告。
 
 ##<a id="insert_ads_into_media"></a>向媒体中插入广告
 

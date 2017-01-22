@@ -43,7 +43,8 @@ ms.author: cephalin
 - 有效的 [Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/)
 - 带有[用于 .NET 的 Azure SDK](http://go.microsoft.com/fwlink/p/?linkid=323510&clcid=0x409) 的 Visual Studio 2015如果使用 Visual Studio，步骤可能有所不同。
 
-> [!NOTE] 完成本教程需要有一个 Azure 帐户：
+> [!NOTE]
+> 完成本教程需要有一个 Azure 帐户：
 > + 可以[注册一个 Azure 帐户](https://www.azure.cn/pricing/1rmb-trial/) — 获取可用来试用付费版 Azure 服务的信用额度，用完信用额度后，仍可以保留帐户和使用免费的 Azure 服务（如 Web 应用）。
 
 ##<a name="deploy-a-web-app-to-azure-with-an-integrated-cdn-endpoint"></a> 将 Web 应用部署到具有集成 CDN 终结点的 Azure ##
@@ -81,7 +82,8 @@ ms.author: cephalin
 
     ![](./media/cdn-websites-with-cdn/7-create-cdn.png)  
 
-    > [!NOTE] 创建 CDN 终结点以后，管理门户就会显示其 URL 以及所集成的源域。不过，需要一定的时间才能将新 CDN 终结点的配置完全传播到所有 CDN 节点位置。
+    > [!NOTE]
+    > 创建 CDN 终结点以后，管理门户就会显示其 URL 以及所集成的源域。不过，需要一定的时间才能将新 CDN 终结点的配置完全传播到所有 CDN 节点位置。
 
 3. 返回经典管理门户，在“CDN”选项卡中，单击刚才创建的 CDN 终结点的名称。
 
@@ -93,7 +95,8 @@ ms.author: cephalin
 
 启用此功能后，通过不同的查询字符串进行访问的同一链接就可以缓存为不同的项。
 
->[!NOTE] 虽然启用查询字符串对于教程的此部分来说不是必需的，但为方便起见，最好是尽早启用此功能，因为在这里所做的任何更改都需要一定的时间才能传播到所有 CDN 节点，而你并不想让任何非查询字符串支持的内容充斥 CDN 缓存（稍后将讨论如何更新 CDN 内容）。
+>[!NOTE]
+> 虽然启用查询字符串对于教程的此部分来说不是必需的，但为方便起见，最好是尽早启用此功能，因为在这里所做的任何更改都需要一定的时间才能传播到所有 CDN 节点，而你并不想让任何非查询字符串支持的内容充斥 CDN 缓存（稍后将讨论如何更新 CDN 内容）。
 
 2. 现在，导航到 CDN 终结点地址。如果终结点已准备就绪，则会看到 Web 应用。如果收到 **HTTP 404** 错误，则说明 CDN 终结点尚未准备好。CDN 配置传播到所有边缘节点可能需要长达 1 小时。
 

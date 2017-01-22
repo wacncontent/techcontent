@@ -56,7 +56,8 @@ ms.author: marsma
     AccountKey=<account-key>;
     EndpointSuffix=core.chinacloudapi.cn
 
-> [!NOTE] Azure 存储空间连接字符串同时支持 HTTP 和 HTTPS，但强烈建议使用 HTTPS。
+> [!NOTE]
+> Azure 存储空间连接字符串同时支持 HTTP 和 HTTPS，但强烈建议使用 HTTPS。
 
 ## 使用共享访问签名创建连接字符串
 [!INCLUDE [storage-use-sas-in-connection-string-include](../../includes/storage-use-sas-in-connection-string-include.md)]

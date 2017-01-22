@@ -29,7 +29,8 @@ Azure Blob 存储是一种稳健、通用的存储解决方案，它与 HDInsigh
 
 通过将数据存储在 Blob 存储中，可以安全删除用于计算的 HDInsight 群集而不会丢失用户数据。
 
-> [!IMPORTANT] HDInsight 仅支持块 Blob。它不支持页 Blob 或追加 Blob。
+> [!IMPORTANT]
+> HDInsight 仅支持块 Blob。它不支持页 Blob 或追加 Blob。
 
 有关创建 HDInsight 群集的信息，请参阅 [HDInsight 入门][hdinsight-get-started]或[创建 HDInsight 群集][hdinsight-creation]。
 
@@ -46,7 +47,8 @@ HDInsight 提供对在本地附加到计算节点的分布式文件系统的访�
 
     wasb[s]://<containername>@<accountname>.blob.core.chinacloudapi.cn/<path>
 
-> [!NOTE] 在低于 3.0 的 HDInsight 版本中，使用的是 `asv://` 而不是 `wasb://`。不应在 HDInsight 群集 3.0 或更高版本中使用 `asv://`，否则会导致出错。
+> [!NOTE]
+> 在低于 3.0 的 HDInsight 版本中，使用的是 `asv://` 而不是 `wasb://`。不应在 HDInsight 群集 3.0 或更高版本中使用 `asv://`，否则会导致出错。
 
 Hadoop 支持默认文件系统的概念。默认文件系统意指默认方案和授权。它还可用于解析相对路径。在 HDInsight 创建过程中，请将 Azure 存储帐户和该帐户上的特定 Azure Blob 存储容器指定为默认文件系统。
 
@@ -80,7 +82,8 @@ Blob 存储可用于结构化和非结构化数据。Blob 存储容器将数据�
 
 某些 MapReduce 作业和包可能产生不适于存储在 Azure Blob 存储中的中间结果。在那种情况下，可选择将数据存储在本地 HDFS 中。实际上，HDInsight 将 DFS 用于 Hive 作业和其他过程中的某些中间结果。
 
-> [!NOTE] 大多数 HDFS 命令（例如 <b>ls</b>、<b>copyFromLocal</b> 和 <b>mkdir</b>）仍按预期工作。只有特定于本机 HDFS 实现（称作 DFS）的命令在 Azure Blob 存储上会显示不同的行为，例如 <b>fschk</b> 和 <b>dfsadmin</b>。
+> [!NOTE]
+> 大多数 HDFS 命令（例如 <b>ls</b>、<b>copyFromLocal</b> 和 <b>mkdir</b>）仍按预期工作。只有特定于本机 HDFS 实现（称作 DFS）的命令在 Azure Blob 存储上会显示不同的行为，例如 <b>fschk</b> 和 <b>dfsadmin</b>。
 
 ## <a id="preparingblobstorage"></a>创建 Blob 容器
 
@@ -152,13 +155,15 @@ URI 方案提供了使用 *wasb:* 前缀的未加密访问和使用 *wasbs* 的 
     wasbs:///example/jars/hadoop-mapreduce-examples.jar
     /example/jars/hadoop-mapreduce-examples.jar
 
-> [!NOTE] 在 HDInsight 版本 2.1 和 1.6 群集中，文件名是 <i>hadoop-examples.jar</i>。
+> [!NOTE]
+> 在 HDInsight 版本 2.1 和 1.6 群集中，文件名是 <i>hadoop-examples.jar</i>。
 
 &lt;path&gt; 是文件或目录 HDFS 路径名。由于 Azure Blob 存储容器只是键值存储，因此没有真正的分层文件系统。Blob 键中的斜线字符 (/) 解释为目录分隔符。例如，*hadoop-mapreduce-examples.jar* 的 Blob 名称是：
 
     example/jars/hadoop-mapreduce-examples.jar
 
-> [!NOTE] 在 HDInsight 外部使用 Blob 时，大多数实用程序无法识别 WASB 格式，应改用基本路径格式，如 `example/jars/hadoop-mapreduce-examples.jar`。
+> [!NOTE]
+> 在 HDInsight 外部使用 Blob 时，大多数实用程序无法识别 WASB 格式，应改用基本路径格式，如 `example/jars/hadoop-mapreduce-examples.jar`。
 
 ## <a id="azurecli"></a>使用 Azure CLI 访问 Blob
 
@@ -184,7 +189,8 @@ URI 方案提供了使用 *wasb:* 前缀的未加密访问和使用 *wasbs* 的 
 
 ## <a id="powershell"></a>使用 Azure PowerShell 访问 Blob
 
-> [!NOTE] 本部分中的命令提供了使用 PowerShell 访问 Blob 中存储的数据的基本示例。有关针对使用 HDInsight 自定义的功能更加全面的示例，请参阅 [HDInsight 工具](https://github.com/Blackmist/hdinsight-tools)。
+> [!NOTE]
+> 本部分中的命令提供了使用 PowerShell 访问 Blob 中存储的数据的基本示例。有关针对使用 HDInsight 自定义的功能更加全面的示例，请参阅 [HDInsight 工具](https://github.com/Blackmist/hdinsight-tools)。
 
 使用以下命令列出与 Blob 有关的 cmdlet：
 

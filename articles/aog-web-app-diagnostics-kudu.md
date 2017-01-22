@@ -88,7 +88,8 @@ Tools选项卡下面提供了一些其他在线工具：
 
     ![](./media/aog-web-app-diagnostics-kudu/log-stream.png)
 
-    >[!NOTE]如果通过 Kudu 站点启动 Log stream，由于浏览器会缓存响应数据，用户需要等到日志填满缓冲区后，才可以看到实时日志输出到页面。 Log stream 会持续 12 小时开启应用程序文件日志 (错误模式) ,用户可以在 Azure portal 上手动关闭。
+    >[!NOTE]
+    >如果通过 Kudu 站点启动 Log stream，由于浏览器会缓存响应数据，用户需要等到日志填满缓冲区后，才可以看到实时日志输出到页面。 Log stream 会持续 12 小时开启应用程序文件日志 (错误模式) ,用户可以在 Azure portal 上手动关闭。
 
 * WebJobs dashboard： 
 

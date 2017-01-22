@@ -20,7 +20,8 @@
     | **subnet2Name** | 第二个 VNet 的名称 |
     | **subnet2Prefix** | 第二个子网的 CIDR 块 |
 
-    >[!IMPORTANT] 在 github 中维护的 ARM 模板可能随着时间的推移发生变化。请确保在使用该模板之前对其进行检查。
+    >[!IMPORTANT]
+    > 在 github 中维护的 ARM 模板可能随着时间的推移发生变化。请确保在使用该模板之前对其进行检查。
 
 6. 查看 **resources** 下的内容，并注意以下项：
 

@@ -3,7 +3,8 @@
     Account name: devstoreaccount1
     Account key: Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==
 
-> [!NOTE]存储模拟器支持的身份验证密钥仅用于测试客户端身份验证代码的功能。它没有任何安全用途。不能在存储模拟器中使用生产存储帐户和密钥。另请注意：不应将开发帐户用于生产数据。
+> [!NOTE]
+>存储模拟器支持的身份验证密钥仅用于测试客户端身份验证代码的功能。它没有任何安全用途。不能在存储模拟器中使用生产存储帐户和密钥。另请注意：不应将开发帐户用于生产数据。
 >
 > 注意，存储模拟器仅支持通过 HTTP 连接。但是，对于访问 Azure 生产存储帐户中的资源，建议使用 HTTPS 协议。
 

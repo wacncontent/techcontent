@@ -23,7 +23,8 @@ ms.author: robmcm
 
 有关云服务以及如何将它们与 Azure 网站和虚拟机进行比较的更多信息，请参阅 [Azure 网站、云服务和虚拟机的比较]。
 
->[!TIP] 想要构建简单网站？ 如果方案仅涉及简单网站前端，请考虑[使用轻型 Web 应用]。可随 Web 应用的增长和需求的变化轻松升级到云服务。
+>[!TIP]
+> 想要构建简单网站？ 如果方案仅涉及简单网站前端，请考虑[使用轻型 Web 应用]。可随 Web 应用的增长和需求的变化轻松升级到云服务。
 
 按照本教程，生成托管在 Web 角色中的简单 Web 应用程序。使用计算模拟器在本地测试应用程序，然后使用 PowerShell 命令行工具部署该应用程序。
 
@@ -33,7 +34,8 @@ ms.author: robmcm
 
 ## 先决条件
 
-> [!NOTE] 本教程使用 Azure PowerShell，因此要求使用 Windows 系统。
+> [!NOTE]
+> 本教程使用 Azure PowerShell，因此要求使用 Windows 系统。
 
 - 安装和配置 [Azure PowerShell]。
 - 下载并安装用于 .NET 2.7 的 Azure SDK。在安装设置中，选择：
@@ -70,7 +72,8 @@ ms.author: robmcm
 
     **Add-azurenodewebrole** cmdlet 将创建一个基本 Node.js 应用程序。它还会修改 **.csfg** 和 **.csdef** 文件，以添加新角色的配置条目。
 
-    > [!NOTE] 如果不指定角色名称，将使用默认名称。可以提供一个名称作为第一个 cmdlet 参数：`Add-AzureNodeWebRole MyRole`
+    > [!NOTE]
+    > 如果不指定角色名称，将使用默认名称。可以提供一个名称作为第一个 cmdlet 参数：`Add-AzureNodeWebRole MyRole`
 
 Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（默认为 **WebRole1**）的目录中。代码如下：
 
@@ -104,7 +107,8 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
         Import-AzurePublishSettingsFile -Environment AzureChinaCloud [path to file]
 
-    > [!NOTE] 导入发布设置之后，请考虑删除下载的 .publishSettings 文件，因为其他人可能利用其中信息访问你的帐户。
+    > [!NOTE]
+    > 导入发布设置之后，请考虑删除下载的 .publishSettings 文件，因为其他人可能利用其中信息访问你的帐户。
 
 ### 发布应用程序
 
@@ -164,7 +168,8 @@ Node.js 应用在 **server.js** 文件中定义，该文件位于 Web 角色（�
 
     ![Remove-AzureService 命令的状态][The status of the Remove-AzureService command]
 
-    > [!NOTE] 删除服务不会删除最初发布服务时创建的存储帐户，用户仍需为使用的存储付费。如果没有任何其他对象使用存储，请删除它。
+    > [!NOTE]
+    > 删除服务不会删除最初发布服务时创建的存储帐户，用户仍需为使用的存储付费。如果没有任何其他对象使用存储，请删除它。
 
 ## 后续步骤
 

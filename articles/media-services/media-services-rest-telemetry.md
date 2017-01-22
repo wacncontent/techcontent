@@ -22,7 +22,8 @@ ms.author: juliako
 
 本主题介绍使用 REST API 配置 Azure 媒体服务 (AMS) 遥测可采取的常规步骤。
 
->[!NOTE]有关 AMS 遥测定义和使用方法的详细介绍，请参阅[概述](./media-services-telemetry-overview.md)主题。
+>[!NOTE]
+>有关 AMS 遥测定义和使用方法的详细介绍，请参阅[概述](./media-services-telemetry-overview.md)主题。
 
 本主题中所述步骤如下：
 
@@ -111,7 +112,8 @@ ms.author: juliako
 
     {"Name":"monitoring","EndPointAddress":"https://telemetryvalidationstore.table.core.chinacloudapi.cn/","EndPointType":2}
 
->[!NOTE]请务必将“https://telemetryvalidationstore.table.core.chinacloudapi.cn”值更改为存储帐户。
+>[!NOTE]
+>请务必将“https://telemetryvalidationstore.table.core.chinacloudapi.cn”值更改为存储帐户。
 
 ###响应
 

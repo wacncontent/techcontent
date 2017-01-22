@@ -27,7 +27,8 @@ Azure Active Directory (Azure AD) 是 Azure 提供的基于多租户云的目录
 
 请参阅 [Azure 订阅与 Azure Active Directory 的关联方式](./active-directory/active-directory-how-subscriptions-associated-directory.md)。
 
->[!NOTE]<p>1. Azure 中国的 Azure AD 目前只支持全局管理员和用户。<p>2. Azure 中国的 Azure AD 不支持 Microsoft 账户用户。  
+>[!NOTE]
+><p>1. Azure 中国的 Azure AD 目前只支持全局管理员和用户。<p>2. Azure 中国的 Azure AD 不支持 Microsoft 账户用户。  
 
 ## Azure AD 管理员与 Azure 订阅管理员的区别  
 

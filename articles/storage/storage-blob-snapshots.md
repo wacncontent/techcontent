@@ -24,7 +24,8 @@ ms.author: marsma
 
 Blob 的快照与其基本 Blob 相同，不过，Blob URI 的后面追加了一个 **DateTime** 值用于指示快照的生成时间。例如，如果页 Blob URI 为 `http://storagesample.core.blob.chinacloudapi.cn/mydrives/myvhd`，则快照 URI 将类似于 `http://storagesample.core.blob.chinacloudapi.cn/mydrives/myvhd?snapshot=2011-03-09T01:42:34.9360000Z`。
 
-> [!NOTE] 所有快照共享基本 Blob 的 URI。基本 Blob 与快照之间的唯一区别体现在追加的 **DateTime** 值。
+> [!NOTE]
+> 所有快照共享基本 Blob 的 URI。基本 Blob 与快照之间的唯一区别体现在追加的 **DateTime** 值。
 
 一个 Blob 可以有任意数目的快照。除非显式删除，否则快照会一直保留。快照的生存期不能长于其基本 Blob。你可以枚举与基本 Blob 关联的快照，以跟踪当前快照。
 
@@ -123,7 +124,8 @@ Blob 的快照与其基本 Blob 相同，不过，Blob URI 的后面追加了一
 * 通过调用 **UploadFile**、**UploadText**、**UploadStream** 或 **UploadByteArray** 方法替换块 Blob 可替换该 Blob 中的所有块。如果你有与该 Blob 关联的快照，则基本 Blob 和快照中的所有块现在将发生偏离，并且你需为这两个 Blob 中的所有块支付费用。即使基本 Blob 和快照中的数据保持相同也是如此。
 * Azure Blob 服务无法确定这两个块是否包含相同的数据。每个上传和提交的块均被视为唯一的快，即使它具有相同的数据和块 ID 也是如此。由于唯一的块会产生费用，因此考虑到更新具有快照的 Blob 将导致产生其他唯一块和额外费用这一点很重要。
 
-> [!NOTE] 最佳实践要求你仔细管理快照以避免额外费用。建议你通过以下方式管理快照：
+> [!NOTE]
+> 最佳实践要求你仔细管理快照以避免额外费用。建议你通过以下方式管理快照：
 
 > - 除非你的应用程序设计需要保留与 Blob 关联的快照，否则请在更新 Blob 时删除并重新创建这些快照，即使你使用相同的数据进行更新也是如此。通过删除并重新创建 Blob 的快照，可以确保 Blob 和快照不会发生偏离。
 

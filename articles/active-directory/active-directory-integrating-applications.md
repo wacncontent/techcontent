@@ -42,7 +42,8 @@ wacn.date: 01/06/2017
 6. 在“应用属性”页上，提供“登录 URL”和“应用 ID URI”（如果正在注册 Web 应用程序）或者只提供“重定向 URI”（针对本机客户端应用程序），然后单击页面右下角的复选框。
 7. 现已添加你的应用程序，此时你将转到应用程序的“快速启动”页。根据你的应用程序是 Web 应用程序还是本机应用程序，你将看到有关如何向应用程序添加更多功能的不同选项。添加应用程序后，你可以开始更新应用程序，使用户能够登录、访问其他应用程序中的 Web API，或者配置多租户应用程序（允许其他组织访问你的应用程序）。
 
->[!NOTE] 默认情况下，新建的应用程序注册已配置为允许你的目录中的用户登录到你的应用程序。
+>[!NOTE]
+> 默认情况下，新建的应用程序注册已配置为允许你的目录中的用户登录到你的应用程序。
 
 ## 更新应用程序 <a name="updating-an-application"></a>
 
@@ -103,7 +104,8 @@ wacn.date: 01/06/2017
     - 使用“应用程序权限”和“委托的权限”下拉列表选择客户端应用程序的所需权限。
 6. 完成后，单击命令栏上的“保存”按钮。如果为应用程序指定了密钥，则单击“保存”还会生成该密钥。
 
->[!NOTE] 单击“保存”按钮还会基于你配置的“对其他应用程序的权限”自动设置对你目录中的应用程序的权限。可以在应用程序的“属性”选项卡中查看这些应用程序权限。
+>[!NOTE]
+> 单击“保存”按钮还会基于你配置的“对其他应用程序的权限”自动设置对你目录中的应用程序的权限。可以在应用程序的“属性”选项卡中查看这些应用程序权限。
 
 ### 将资源应用程序配置为公开 Web API
 可以开发一个 Web API，并通过公开访问权限[范围](./active-directory-dev-glossary.md#scopes/)和[角色](./active-directory-dev-glossary.md#roles/)，使其可供其他客户端应用程序使用。可以像提供其他 Microsoft Web API（包括图形 API 和 Office 365 API）一样提供正确配置的 Web API。可通过[应用程序的清单](./active-directory-dev-glossary.md#application-manifest/)公开访问权限范围和角色。该清单是表示应用程序标识配置的 JSON 文件。
@@ -132,7 +134,8 @@ wacn.date: 01/06/2017
 
     ID 值必须是使用 [GUID 生成工具](https://msdn.microsoft.com/zh-cn/library/ms241442%28v=vs.80%29.aspx)或以编程方式新生成的 GUID。它表示 Web API 公开的权限的唯一标识符。将客户端适当地配置为请求访问 Web API 并调用 Web API 后，该客户端将显示一个 OAuth 2.0 JWT 令牌，该令牌的作用域 (scp) 声明已设置为上面指定的值（在本例中为 user\_impersonation）。
 
-    >[!NOTE] 以后你可以根据需要公开其他范围。请考虑你的 Web API 可能要公开与各种不同功能关联的多个范围。现在，你可以通过使用所收到的 OAuth 2.0 JWT 令牌中的范围 (scp) 声明来控制对 Web API 的访问。
+    >[!NOTE]
+    > 以后你可以根据需要公开其他范围。请考虑你的 Web API 可能要公开与各种不同功能关联的多个范围。现在，你可以通过使用所收到的 OAuth 2.0 JWT 令牌中的范围 (scp) 声明来控制对 Web API 的访问。
 
 6. 保存更新的 JSON 文件，然后将其上载，方法是单击命令栏中的“管理清单”按钮，选择“上载清单”，浏览到更新的清单文件，然后将其选中。上载后，你的 Web API 便已配置为可供目录中的其他应用程序使用。
 
@@ -158,7 +161,8 @@ wacn.date: 01/06/2017
 - Azure AD 图形 API，请参阅[权限范围 | Graph API 概念](https://msdn.microsoft.com/Library/Azure/Ad/Graph/howto/azure-ad-graph-api-permission-scopes)一文。
 - Office 365 API，请参阅 [Authentication and Authorization using Common Consent Framework](https://msdn.microsoft.com/office/office365/howto/application-manifest)（使用通用同意框架进行身份验证和授权）一文。有关如何生成可与 Office 365 API 集成的客户端应用的详细介绍，请参阅 [Set up your Office 365 development environment](https://msdn.microsoft.com/office/office365/HowTo/setup-development-environment)（设置 Office 365 开发环境）。
 
->[!NOTE] 由于当前存在的限制，如果本机客户端应用程序使用“访问组织的目录”权限，则它们只能调用 Azure AD 图形 API。此限制不适用于 Web 应用程序。
+>[!NOTE]
+> 由于当前存在的限制，如果本机客户端应用程序使用“访问组织的目录”权限，则它们只能调用 Azure AD 图形 API。此限制不适用于 Web 应用程序。
 
 ### 配置多租户应用程序
 将应用程序添加到 Azure AD 时，你可以希望你的应用程序只能由你组织中的用户访问。或者，你可能希望你的应用程序可由外部组织中的用户访问。这两种应用程序分别称为单租户应用程序和多租户应用程序。你可以修改单租户应用程序的配置，使其成为多租户应用程序，本部分将对此进行介绍。
@@ -171,7 +175,8 @@ wacn.date: 01/06/2017
 #### 使外部用户能够向你的应用程序授予对其资源的访问权限
 如果正在编写一个要供组织外部的客户或合作伙伴使用的应用程序，则需要在 Azure 经典管理门户中更新应用程序定义。
 
->[!NOTE] 在启用多租户时，必须确保应用程序的应用 ID URI 属于已验证的域。此外，返回 URL 必须以 https:// 开头。有关详细信息，请参阅[应用程序对象和服务主体对象](./active-directory-application-objects.md)。
+>[!NOTE]
+> 在启用多租户时，必须确保应用程序的应用 ID URI 属于已验证的域。此外，返回 URL 必须以 https:// 开头。有关详细信息，请参阅[应用程序对象和服务主体对象](./active-directory-application-objects.md)。
 
 若要使外部用户能够向你的应用授予访问权限，请执行以下操作：
 
@@ -241,7 +246,8 @@ Web 应用程序也可为用户提供注册体验。如果你确实提供注册�
 
 ![授予访问权限](./media/active-directory-integrating-applications/grantaccess.png)  
 
->[!NOTE] 只有外部组织的公司管理员才能授予对你应用程序的访问权限。如果用户不是公司管理员，系统会向他们提供相应的选项，用于向其公司管理员发送邮件以请求授予对此应用程序的访问权限。
+>[!NOTE]
+> 只有外部组织的公司管理员才能授予对你应用程序的访问权限。如果用户不是公司管理员，系统会向他们提供相应的选项，用于向其公司管理员发送邮件以请求授予对此应用程序的访问权限。
 
 客户通过单击“授予访问权限”授予对你应用程序的访问权限或者通过单击“取消”拒绝访问后，Azure AD 将向 ConsentReturnUrl 或你配置的回复 URL 发送响应。此响应包含以下参数：
 
@@ -252,7 +258,8 @@ Web 应用程序也可为用户提供注册体验。如果你确实提供注册�
 
 如果指定了其他参数作为 ConsentReturnUrl 编码 URL 的一部分，则会将这些参数返回到应用。下面显示了对某个访问授权请求返回的示例响应，该响应指明应用程序已被授权，并包含访问授权请求中提供的 ContextID：`https://adatum.com/ExpenseReport.aspx?ContextID=123456&Consent=Granted&TenantId=f03dcba3-d693-47ad-9983-011650e64134`。
 
->[!NOTE] 访问授权响应不包含用户的安全令牌；应用必须单独将用户登录。
+>[!NOTE]
+> 访问授权响应不包含用户的安全令牌；应用必须单独将用户登录。
 
 下面显示了对某个已被拒绝的访问授权请求返回的示例响应：`https://adatum.com/ExpenseReport.aspx?ContextID=123456&Consent=Denied`
 

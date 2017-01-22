@@ -36,7 +36,8 @@ ms.author: lodipalm;barbkess;sonyama
 - **资源组**：可使用同一资源组作为 Azure SQL Server，或参阅[如何创建资源组][]。
 - **执行 T-SQL 的环境**：可以使用 [Visual Studio][Installing Visual Studio and SSDT]、[sqlcmd][] 或 [SSMS][] 执行 T-SQL。
 
-> [!NOTE] 创建 SQL 数据仓库可能会导致新的计费服务。有关定价的详细信息，请参阅 [SQL 数据仓库定价][]。
+> [!NOTE]
+> 创建 SQL 数据仓库可能会导致新的计费服务。有关定价的详细信息，请参阅 [SQL 数据仓库定价][]。
 
 ## 使用 Visual Studio 创建数据库
 若不熟悉 Visual Studio，请参阅 [Query Azure SQL Data Warehouse (Visual Studio)][Query Azure SQL Data Warehouse (Visual Studio)]（查询 Azure SQL 数据仓库 (Visual Studio)）一文。若要开始操作，请在 Visual Studio 中打开 SQL Server 对象资源管理器，并连接到要托管 SQL 数据仓库数据库的服务器。连接后，可针对 **master** 数据库运行以下 SQL 命令来创建 SQL 数据仓库。此命令创建服务目标为 DW400 的数据库 MySqlDwDb，并允许此数据库增长到大小上限 10 TB。

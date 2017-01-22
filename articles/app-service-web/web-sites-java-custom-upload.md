@@ -71,7 +71,8 @@ ms.author: robmcm
 
 **stdoutLogFile**（默认值="d:\\home\\LogFiles\\httpPlatformStdout.log"） 记录 **processPath** 中指定进程的 **stdout** 和 **stderr** 的绝对文件路径。
 
-> [!NOTE] `%HTTP_PLATFORM_PORT%` 是一个特殊占位符，需要指定为 **arguments** 或 **httpPlatform** **environmentVariables** 列表的一部分。会将其替换为 **HttpPlatformHandler** 内部生成的端口，以便 **processPath** 指定的进程可以侦听此端口。
+> [!NOTE]
+> `%HTTP_PLATFORM_PORT%` 是一个特殊占位符，需要指定为 **arguments** 或 **httpPlatform** **environmentVariables** 列表的一部分。会将其替换为 **HttpPlatformHandler** 内部生成的端口，以便 **processPath** 指定的进程可以侦听此端口。
 
 ## 部署
 

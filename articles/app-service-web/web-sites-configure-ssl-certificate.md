@@ -24,7 +24,8 @@ ms.author: cephalin
 
 若要使用 HTTPS 保护拥有自定义域名的应用，可为该域名添加证书。默认情况下，Azure 使用单个 SSL 证书保护 ***.chinacloudsites.cn** 通配符域，因此客户端可以通过 **https://*&lt;appname>*.chinacloudsites.cn** 访问你的应用。但是，如果要使用 **contoso.com**、**www.contoso.com** 和 ***.contoso.com** 等自定义域，则默认证书不能提供保护。此外，与所有[通配符证书](https://casecurity.org/2014/02/26/pros-and-cons-of-single-domain-multi-domain-and-wildcard-certificates/)类似，默认证书的安全性没有使用证书的自定义域高。
 
->[!NOTE] 可随时在 [Azure 论坛](https://www.azure.cn/support/forums/)获取 Azure 专家的帮助。如需更加个性化的支持，请转到 [Azure 支持](https://www.azure.cn/support/contact/)，然后单击“获取支持”。
+>[!NOTE]
+> 可随时在 [Azure 论坛](https://www.azure.cn/support/forums/)获取 Azure 专家的帮助。如需更加个性化的支持，请转到 [Azure 支持](https://www.azure.cn/support/contact/)，然后单击“获取支持”。
 
 ## <a name="bkmk_domainname"></a>所需条件
 若要使用 HTTPS 保护自定义域名，需将自定义 SSL 证书绑定到 Azure 中的该自定义域。绑定自定义证书前，需要执行以下操作：
@@ -132,7 +133,8 @@ ms.author: cephalin
 
 4. 从 IIS 管理器导出 SSL 证书。有关导出证书的详细信息，请参阅[导出服务器证书 (IIS 7)][exportcertiis] (Export a Server Certificate (IIS 7))。
 
-    >[!IMPORTANT] 在“证书导出向导”中，确保选择“是, 导出私钥”
+    >[!IMPORTANT]
+    > 在“证书导出向导”中，确保选择“是, 导出私钥”
     ><p>
     >![导出私钥][certwiz1]
     ><p>
@@ -194,7 +196,8 @@ ms.author: cephalin
 
     系统提示后，定义密码以保护该 .pfx 文件。
 
-    > [!NOTE] 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
+    > [!NOTE]
+    > 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
 
 现可将导出的 PFX 文件上传到应用服务。请参阅[步骤 2. 上传和绑定自定义 SSL 证书](#bkmk_configuressl)。
 
@@ -278,13 +281,15 @@ ms.author: cephalin
 
     系统提示后，定义密码以保护该 .pfx 文件。
 
-    > [!NOTE] 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
+    > [!NOTE]
+    > 如果 CA 使用中间证书，必须用 `-certfile` 参数包含它们。这些证书通常从 CA 单独下载，会针对不同的 Web 服务器类型提供多种格式。选择具有 `.pem` 扩展名的版本。<p>`openssl -export` 命令应与下例中类似，其创建包含 **intermediate-cets.pem** 文件内的中间证书的 .pfx 文件：<p>`openssl pkcs12 -chain -export -out myserver.pfx -inkey myserver.key -in myserver.crt -certfile intermediate-cets.pem`
 
 现可将导出的 PFX 文件上传到应用服务。请参阅[步骤 2. 上传和绑定自定义 SSL 证书](#bkmk_configuressl)。
 
 ### <a name="bkmk_sscertreq"></a>使用 Certreq.exe 生成自签名证书 ###
 
->[!IMPORTANT] 自签名证书仅用于测试目的。在访问受自签名证书保护的网站时，大多数浏览器会返回错误。某些浏览器甚至可能会拒绝导航到站点。
+>[!IMPORTANT]
+> 自签名证书仅用于测试目的。在访问受自签名证书保护的网站时，大多数浏览器会返回错误。某些浏览器甚至可能会拒绝导航到站点。
 
 1. 创建文本文件（如 **mycert.txt**），向其复制以下文本并将其文件保存到工作目录中。将 `<your-domain>` 占位符替换为应用的自定义域名。
 
@@ -337,7 +342,8 @@ ms.author: cephalin
 
 ### <a name="bkmk_ssopenssl"></a>使用 OpenSSL 生成自签名证书 ###
 
->[!IMPORTANT] 自签名证书仅用于测试目的。在访问受自签名证书保护的网站时，大多数浏览器会返回错误。某些浏览器甚至可能会拒绝导航到站点。
+>[!IMPORTANT]
+> 自签名证书仅用于测试目的。在访问受自签名证书保护的网站时，大多数浏览器会返回错误。某些浏览器甚至可能会拒绝导航到站点。
 
 1. 创建一个名为 **serverauth.cnf** 的文本文件，然后向其复制以下内容，并将其保存到工作目录中：
 
@@ -442,7 +448,8 @@ ms.author: cephalin
 
 如果仍想允许到应用的 HTTP 访问，请跳过此步骤。应用服务*不*强制实施 HTTPS，因此访问者仍可使用 HTTP 访问应用。如果想要对应用强制实施 HTTPS，则可在应用的 `web.config` 文件中定义重写规则。无论应用的语言框架如何，每个应用服务应用都有此文件。
 
-> [!NOTE] 存在语言特定的请求重定向。ASP.NET MVC 可使用 [RequireHttps](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.requirehttpsattribute.aspx) 筛选器，而非 `web.config` 中的重写规则（请参阅[将安全的 ASP.NET MVC 5 应用部署到 Web 应用](./web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database.md)）。
+> [!NOTE]
+> 存在语言特定的请求重定向。ASP.NET MVC 可使用 [RequireHttps](http://msdn.microsoft.com/zh-cn/library/system.web.mvc.requirehttpsattribute.aspx) 筛选器，而非 `web.config` 中的重写规则（请参阅[将安全的 ASP.NET MVC 5 应用部署到 Web 应用](./web-sites-dotnet-deploy-aspnet-mvc-app-membership-oauth-sql-database.md)）。
 
 执行以下步骤:
 
@@ -479,7 +486,8 @@ ms.author: cephalin
 
     用户使用 HTTP 请求页面时，此规则都会将 HTTP 301（永久重定向）返回到 HTTPS 协议。它会从 http://contoso.com 重定向到 https://contoso.com。
 
-    >[!IMPORTANT] 如果 `web.config` 中已有其他 `<rule>` 标记，则将复制的 `<rule>` 标记置于另一 `<rule>` 标记前。
+    >[!IMPORTANT]
+    > 如果 `web.config` 中已有其他 `<rule>` 标记，则将复制的 `<rule>` 标记置于另一 `<rule>` 标记前。
 
 4. 将文件保存在 Kudu 调试控制台。此操作立即生效并将所有请求重定向到 HTTPS。
 

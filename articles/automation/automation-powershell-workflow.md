@@ -198,7 +198,8 @@ Windows PowerShell 工作流的一个优点是能够与典型脚本一样并行�
         Write-Output "All files copied."
     }
 
-> [!NOTE]  我们不建议并行运行子 Runbook，这是由于这已被证实将导致不可靠的结果。来自子 Runbook 的输出有时将不会显示，一个子 Runbook 中的设置可能会影响其他并行子 Runbook
+> [!NOTE]
+>  我们不建议并行运行子 Runbook，这是由于这已被证实将导致不可靠的结果。来自子 Runbook 的输出有时将不会显示，一个子 Runbook 中的设置可能会影响其他并行子 Runbook
 
 ## <a name="Checkpoints" id="checkpoints"></a> 检查点
 

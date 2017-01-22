@@ -26,7 +26,8 @@ ms.author: sewhee
 * **警报事件日志：**可以使用此日志来查看针对负载均衡器发出的警报。每隔五分钟收集一次负载均衡器的状态。仅在引发了负载均衡器警报事件的情况下，才会向此日志写入相关内容。
 * **运行状况探测日志：**可以使用此日志来查看探测运行状况时的检查状态、负载均衡器后端处于联机状态的实例的数目，以及从负载均衡器接收网络流量的虚拟机的百分比。探测状态事件变化时，将会向此日志写入相应内容。
 
->[!WARNING] Log Analytics 当前仅适用于面向 Internet 的负载均衡器。日志仅适用于 Resource Manager 部署模型中部署的资源。不能将日志用于经典部署模型中的资源。有关部署模型的详细信息，请参阅[了解 Resource Manager 部署和经典部署](../azure-resource-manager/resource-manager-deployment-model.md)。Log Analytics 当前仅适用于面向 Internet 的负载均衡器。该限制是暂时性的，以后随时可能更改。请务必重新访问此页，以了解将来发生的更改。
+>[!WARNING]
+> Log Analytics 当前仅适用于面向 Internet 的负载均衡器。日志仅适用于 Resource Manager 部署模型中部署的资源。不能将日志用于经典部署模型中的资源。有关部署模型的详细信息，请参阅[了解 Resource Manager 部署和经典部署](../azure-resource-manager/resource-manager-deployment-model.md)。Log Analytics 当前仅适用于面向 Internet 的负载均衡器。该限制是暂时性的，以后随时可能更改。请务必重新访问此页，以了解将来发生的更改。
 
 ## 启用日志记录
 
@@ -125,7 +126,8 @@ JSON 输出在属性字段显示了探测运行状况的基本信息。 *dipDown
 
 你需要连接到你的存储帐户并检索事件和运行状况探测日志的 JSON 日志项。下载 JSON 文件后，你可以将它们转换为 CSV 并在 Excel、PowerBI 或任何其他数据可视化工具中查看。
 
->[!TIP] 如果你熟悉 Visual Studio 和更改 C# 中的常量和变量值的基本概念，则可以使用 Github 提供的[日志转换器工具](https://github.com/Azure-Samples/networking-dotnet-log-converter)。
+>[!TIP]
+> 如果你熟悉 Visual Studio 和更改 C# 中的常量和变量值的基本概念，则可以使用 Github 提供的[日志转换器工具](https://github.com/Azure-Samples/networking-dotnet-log-converter)。
 
 ## 其他资源
 

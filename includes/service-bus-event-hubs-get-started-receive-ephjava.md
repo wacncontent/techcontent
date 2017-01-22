@@ -171,7 +171,8 @@ EventProcessorHost 是一个 Java 类，通过从事件中心管理持久检查�
         final String storageAccountName = "---StorageAccountName----"
         final String storageAccountKey = "---StorageAccountKey----";
 
-> [!NOTE] 本教程使用了一个 EventProcessorHost 实例。若要增加吞吐量，建议运行多个 EventProcessorHost 实例。在那些情况下，为了对接收到的事件进行负载均衡，各个不同实例会自动相互协调。如果希望多个接收方都各自处理全部事件，则必须使用 **ConsumerGroup** 概念。在从不同计算机中接收事件时，根据部署 EventProcessorHost 实例的计算机（或角色）来指定该实例的名称可能会很有用。
+> [!NOTE]
+> 本教程使用了一个 EventProcessorHost 实例。若要增加吞吐量，建议运行多个 EventProcessorHost 实例。在那些情况下，为了对接收到的事件进行负载均衡，各个不同实例会自动相互协调。如果希望多个接收方都各自处理全部事件，则必须使用 **ConsumerGroup** 概念。在从不同计算机中接收事件时，根据部署 EventProcessorHost 实例的计算机（或角色）来指定该实例的名称可能会很有用。
 
 <!-- Links -->
 [Event Hubs Overview]: ../articles/event-hubs/event-hubs-overview.md

@@ -91,7 +91,8 @@ ms.author: nicking
         }
     }
 
->[!NOTE] 可以在 HTTP 响应的 log 属性中找到错误消息。
+>[!NOTE]
+> 可以在 HTTP 响应的 log 属性中找到错误消息。
 
 ## <a name="schedule-automatic-backups"></a>计划自动备份
 除了按需备份应用外，还可以计划自动进行的备份。
@@ -211,7 +212,8 @@ Azure App Service 会尝试使用创建备份时提供的 SAS URL 从 Azure 存�
         }
     }
 
->[!NOTE] 出于安全原因，在为特定备份发送 GET 请求时，将不返回与该备份关联的 SAS URL。如果要查看与备份关联的 SAS URL，请向上述同一 URL 发送 POST 请求。在请求正文中包含空 JSON 对象。服务器响应包含该备份的所有信息，包括其 SAS URL。
+>[!NOTE]
+> 出于安全原因，在为特定备份发送 GET 请求时，将不返回与该备份关联的 SAS URL。如果要查看与备份关联的 SAS URL，请向上述同一 URL 发送 POST 请求。在请求正文中包含空 JSON 对象。服务器响应包含该备份的所有信息，包括其 SAS URL。
 
 <!-- IMAGES -->
 [SampleWebsiteInformation]: ./media/websites-csm-backup/01siteconfig.png

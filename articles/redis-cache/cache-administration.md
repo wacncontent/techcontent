@@ -21,7 +21,8 @@ ms.author: sdanie
 
 本主题介绍如何执行管理任务，如重新启动 Azure Redis 缓存实例和为 Azure Redis 缓存实例计划更新。
 
->[!IMPORTANT] 本文中所述的设置和功能仅适用于高级层缓存。
+>[!IMPORTANT]
+> 本文中所述的设置和功能仅适用于高级层缓存。
 
 ## 管理设置
 
@@ -51,7 +52,8 @@ ms.author: sdanie
 - **主和从属** - 同时重新启动这两个缓存节点时，缓存中的所有数据将丢失，并且无法连接到缓存，直到主节点重新联机。如果已配置[数据持久性](./cache-how-to-premium-persistence.md)，则在缓存重新联机时，将还原最新备份。请注意，在最新备份后进行的所有缓存写入将丢失。
 - **已启用群集的高级缓存的节点** - 重新启动已启用群集的高级缓存的节点时，其行为与重新启动非群集缓存节点时相同。
 
->[!IMPORTANT] 重新启动仅适用于高级层缓存。
+>[!IMPORTANT]
+> 重新启动仅适用于高级层缓存。
 
 ## <a name="reboot-faq"></a>重新启动常见问题
 
@@ -69,7 +71,8 @@ ms.author: sdanie
 
 能，如果重新启动缓存，将清除所有客户端连接。当所有客户端连接均已用完（例如，由于客户端应用程序中的逻辑错误或 bug）时，这很有用。每个定价层对于不同大小都有不同的[客户端连接数限制](./cache-configure.md#default-redis-server-configuration)，达到这些限制后，将不再接受客户端连接。通过重新启动缓存可以清除所有客户端连接。
 
->[!IMPORTANT] 如果由于客户端代码中的逻辑错误或 bug 客户端连接已用完，请注意在 Redis 节点重新联机后，StackExchange.Redis 自动将重新连接。如果未解决这一基本问题，客户端连接将继续用完。
+>[!IMPORTANT]
+> 如果由于客户端代码中的逻辑错误或 bug 客户端连接已用完，请注意在 Redis 节点重新联机后，StackExchange.Redis 自动将重新连接。如果未解决这一基本问题，客户端连接将继续用完。
 
 ### <a name="will-i-lose-data-from-my-cache-if-i-do-a-reboot"></a>如果执行重新启动，是否会丢失缓存中的数据？
 
@@ -93,7 +96,8 @@ ms.author: sdanie
 
 若要指定维护时段，请勾选合适的日期，然后指定每天的维护时段开始时间，最后再单击“确定”。请注意，维护时段使用 UTC 时间。
 
->[!NOTE] 更新的默认维护时段为 5 小时。此值不可以在 Azure 门户预览中配置，但可以在 PowerShell 中使用 [New-AzureRmRedisCacheScheduleEntry](https://msdn.microsoft.com/zh-cn/library/azure/mt763833.aspx) cmdlet 的 `MaintenanceWindow` 参数进行配置。有关详细信息，请参阅 [Can I managed scheduled updates using PowerShell, CLI, or other management tools?](#can-i-managed-scheduled-updates-using-powershell-cli-or-other-management-tools)（能否使用 PowerShell、CLI 或其他管理工具管理计划的更新？）
+>[!NOTE]
+> 更新的默认维护时段为 5 小时。此值不可以在 Azure 门户预览中配置，但可以在 PowerShell 中使用 [New-AzureRmRedisCacheScheduleEntry](https://msdn.microsoft.com/zh-cn/library/azure/mt763833.aspx) cmdlet 的 `MaintenanceWindow` 参数进行配置。有关详细信息，请参阅 [Can I managed scheduled updates using PowerShell, CLI, or other management tools?](#can-i-managed-scheduled-updates-using-powershell-cli-or-other-management-tools)（能否使用 PowerShell、CLI 或其他管理工具管理计划的更新？）
 
 ## <a name="schedule-updates-faq"></a>计划更新常见问题
 

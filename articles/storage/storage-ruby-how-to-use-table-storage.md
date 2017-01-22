@@ -129,7 +129,8 @@ Azure 模块将读取环境变量 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORA
     query = { :filter => "PartitionKey eq 'test-partition-key'" }
     result, token = azure_table_service.query_entities("testtable", query)
 
-> [!NOTE] 如果结果集太大，一个查询无法全部返回，将会返回一个继续标记，你可以使用该标记检索后续页面。
+> [!NOTE]
+> 如果结果集太大，一个查询无法全部返回，将会返回一个继续标记，你可以使用该标记检索后续页面。
 
 ## 查询条目属性的子集
 对表的查询可以只检索条目的几个属性。这种技术称为“投影”，可减少带宽并提高查询性能，尤其适用于大型条目。请使用 select 子句并传递你希望显示给客户端的属性的名称。

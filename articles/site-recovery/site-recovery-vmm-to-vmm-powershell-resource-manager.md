@@ -41,7 +41,8 @@ ms.author: sutalasi
 
 如果在设置本方案时遇到问题，请将你的问题发布到 [Azure 恢复服务论坛](https://social.msdn.microsoft.com/Forums/zh-cn/home?forum=hypervrecovmgr)。
 
-> [!NOTE] Azure 提供两个不同的[部署模型](../azure-resource-manager/resource-manager-deployment-model.md)来创建和处理资源：Azure Resource Manager 和经典。Azure 还有两个门户 — 支持经典部署模型的 Azure 经典门户，以及支持两种部署模型的 Azure 门户。本文介绍资源管理器部署模型。
+> [!NOTE]
+> Azure 提供两个不同的[部署模型](../azure-resource-manager/resource-manager-deployment-model.md)来创建和处理资源：Azure Resource Manager 和经典。Azure 还有两个门户 — 支持经典部署模型的 Azure 经典门户，以及支持两种部署模型的 Azure 门户。本文介绍资源管理器部署模型。
 
 ## 本地先决条件
 下面是在主要和辅助本地站点中部署此方案所要满足的条件：
@@ -160,7 +161,8 @@ ms.author: sutalasi
 
         $policyresult = New-AzureRmSiteRecoveryPolicy -Name $policyname -ReplicationProvider $RepProvider -ReplicationFrequencyInSeconds $Replicationfrequencyinseconds -RecoveryPoints $recoverypoints -ApplicationConsistentSnapshotFrequencyInHours $AppConsistentSnapshotFrequency -Authentication $AuthMode -ReplicationPort $AuthPort -ReplicationMethod $InitialRepMethod 
 
-    > [!NOTE] VMM 云包含的 Hyper-V 主机可能运行不同版本的 Windows Server（如 Hyper-V 先决条件中所示），但复制策略是特定于 OS 版本的。如果不同的主机运行在不同的操作系统版本上，则请为每类 OS 版本创建不同的复制策略。例如，如果你有 5 个主机运行在 Windows Servers 2012 上，3 个主机运行在 Windows Server 2012 R2 上，则请创建两种复制策略 – 一种策略用于一种类型的操作系统版本。
+    > [!NOTE]
+    > VMM 云包含的 Hyper-V 主机可能运行不同版本的 Windows Server（如 Hyper-V 先决条件中所示），但复制策略是特定于 OS 版本的。如果不同的主机运行在不同的操作系统版本上，则请为每类 OS 版本创建不同的复制策略。例如，如果你有 5 个主机运行在 Windows Servers 2012 上，3 个主机运行在 Windows Server 2012 R2 上，则请创建两种复制策略 – 一种策略用于一种类型的操作系统版本。
 
 2. 通过运行以下命令获取主保护容器（主 VMM 云）和恢复保护容器（恢复 VMM 云）：
 
@@ -208,7 +210,8 @@ ms.author: sutalasi
 
         $RecoveryNetworks = Get-AzureRmSiteRecoveryNetwork -Server $Servers[1]
 
-    > [!NOTE] 在服务器数组中，源 VMM 服务器可以是一个，也可以是第二个。查看 VMM 服务器的名称，获取相应的网络
+    > [!NOTE]
+    > 在服务器数组中，源 VMM 服务器可以是一个，也可以是第二个。查看 VMM 服务器的名称，获取相应的网络
 
 4. 最后一个 cmdlet 将在主网络与恢复网络之间创建映射。该 cmdlet 将主要网络指定为 $PrimaryNetworks 的第一个元素，将恢复网络指定为 $RecoveryNetworks 的第一个元素。
 
@@ -224,7 +227,8 @@ ms.author: sutalasi
 
         $TargetClassification = $storageclassifications[1]
 
-    > [!NOTE] 源和目标分类可以是数组中的任何元素。请参考以下命令的输出，了解 $storageclassifications 数组中源和目标分类的索引。
+    > [!NOTE]
+    > 源和目标分类可以是数组中的任何元素。请参考以下命令的输出，了解 $storageclassifications 数组中源和目标分类的索引。
 
     > Get-AzureRmSiteRecoveryStorageClassification | Select-Object -Property FriendlyName, Id | Format-Table
 
@@ -251,7 +255,8 @@ ms.author: sutalasi
 
 若要测试你的部署，可针对一台虚拟机运行测试故障转移，或者创建一个包括多个虚拟机的恢复计划并针对该计划运行测试故障转移。测试故障转移在隔离的网络中模拟你的故障转移和恢复机制。
 
-> [!NOTE] 你可以在 Azure 门户中为应用程序创建恢复计划。
+> [!NOTE]
+> 你可以在 Azure 门户中为应用程序创建恢复计划。
 
 若要检查作业是否完成，请遵循[监视活动](#monitor)中的步骤。
 

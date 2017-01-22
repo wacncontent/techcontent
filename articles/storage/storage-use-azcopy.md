@@ -22,7 +22,8 @@ ms.author: micurd
 ## 概述
 AzCopy 是一个 Windows 命令行实用程序，专用于使用具有优化性能的简单命令将数据复制到 Azure Blob、文件和表存储以及从这些位置复制数据。可在存储帐户中将数据从一个对象复制到另一个对象，或者在存储帐户之间复制。
 
-> [!NOTE] 本指南假定用户已熟悉了 [Azure 存储](https://www.azure.cn/home/features/storage/)。如果不熟悉，阅读 [Azure 存储简介](./storage-introduction.md)文档将有所帮助。最重要的是，需要[创建一个存储帐户](./storage-create-storage-account.md#create-a-storage-account)以开始使用 AzCopy。
+> [!NOTE]
+> 本指南假定用户已熟悉了 [Azure 存储](https://www.azure.cn/home/features/storage/)。如果不熟悉，阅读 [Azure 存储简介](./storage-introduction.md)文档将有所帮助。最重要的是，需要[创建一个存储帐户](./storage-create-storage-account.md#create-a-storage-account)以开始使用 AzCopy。
 
 ## 下载并安装 AzCopy
 ### Windows

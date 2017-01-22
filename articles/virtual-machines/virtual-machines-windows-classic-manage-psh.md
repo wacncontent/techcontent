@@ -26,7 +26,8 @@ ms.author: kasing
 
 每天执行的许多管理 VM 的任务都可通过使用 Azure PowerShell cmdlet 自动执行。本文提供较简单任务的示例命令，并提供演示更复杂任务的命令的文章链接。
 
->[!NOTE]如果尚未安装和配置 Azure PowerShell，你可以在[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 这篇文章中获取相关说明。
+>[!NOTE]
+>如果尚未安装和配置 Azure PowerShell，你可以在[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs) 这篇文章中获取相关说明。
 
 ## 如何使用示例命令
 你需要将命令中的一些文本替换为适合你的环境的文本。< and > 符号指示需要替换的文本。替换文本时，请删除符号，但将引号保留在原处。
@@ -46,7 +47,8 @@ ms.author: kasing
 
 运行以下命令：
 
->[!NOTE]可以从显示的 **Get-AzureVM** 命令中获取虚拟机和云服务名称。
+>[!NOTE]
+>可以从显示的 **Get-AzureVM** 命令中获取虚拟机和云服务名称。
 >
     $svcName = "<cloud service name>"
     $vmName = "<virtual machine name>"
@@ -60,7 +62,8 @@ ms.author: kasing
 
     Stop-AzureVM -ServiceName "<cloud service name>" -Name "<virtual machine name>"
 
->[!IMPORTANT]如果该 VM 是云服务中的最后一个 VM，则使用此参数可以保留该云服务的虚拟 IP (VIP)。<br><br> 如果你使用 StayProvisioned 参数，则仍要支付 VM 的费用。
+>[!IMPORTANT]
+>如果该 VM 是云服务中的最后一个 VM，则使用此参数可以保留该云服务的虚拟 IP (VIP)。<br><br> 如果你使用 StayProvisioned 参数，则仍要支付 VM 的费用。
 
 ## 启动 VM
 

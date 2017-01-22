@@ -26,7 +26,8 @@ ms.author: cabailey
 
 **估计完成时间：**20 分钟。
 
->[!NOTE]  本教程未说明如何编写其中一个步骤所包括的 Azure 应用程序，但说明了如何授权应用程序使用密钥保管库中的密钥或机密。
+>[!NOTE]
+>  本教程未说明如何编写其中一个步骤所包括的 Azure 应用程序，但说明了如何授权应用程序使用密钥保管库中的密钥或机密。
 >
 >本教程使用 Azure PowerShell。有关跨平台命令行接口的说明，请参阅[此相应教程](./key-vault-manage-with-cli.md)。
 
@@ -92,7 +93,8 @@ ms.author: cabailey
 
 你的 Azure 帐户现已获取在此密钥保管库上执行任何作业的授权。而且没有其他人有此授权。
 
->[!NOTE]  如果在尝试创建新的密钥保管库时看到错误“未注册使用命名空间‘Microsoft.KeyVault’的订阅”，请运行 `Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.KeyVault"`，然后重新运行 New-AzureRmKeyVault 命令。有关详细信息，请参阅 [Register-AzureRmResourceProvider](https://msdn.microsoft.com/zh-cn/library/azure/mt759831(v=azure.300).aspx)。
+>[!NOTE]
+>  如果在尝试创建新的密钥保管库时看到错误“未注册使用命名空间‘Microsoft.KeyVault’的订阅”，请运行 `Register-AzureRmResourceProvider -ProviderNamespace "Microsoft.KeyVault"`，然后重新运行 New-AzureRmKeyVault 命令。有关详细信息，请参阅 [Register-AzureRmResourceProvider](https://msdn.microsoft.com/zh-cn/library/azure/mt759831(v=azure.300).aspx)。
 >
 
 ## <a id="add"></a>将密钥或机密添加到保管库
@@ -138,7 +140,8 @@ ms.author: cabailey
 ## <a id="register"></a>将应用程序注册到 Azure Active Directory
 此步骤通常由开发人员在独立的计算机上完成。这并非 Azure 密钥保管库的特有状况，在此列出是为了让过程完整。
 
->[!IMPORTANT] 若要完成本教程，你的帐户、保管库以及将在本步骤中注册的应用程序全都必须位于相同的 Azure 目录中。
+>[!IMPORTANT]
+> 若要完成本教程，你的帐户、保管库以及将在本步骤中注册的应用程序全都必须位于相同的 Azure 目录中。
 
 使用密钥保管库的应用程序必须使用 Azure Active Directory 的令牌进行身份验证。为此，应用程序的所有者首先必须在其 Azure Active Directory 中注册该应用程序。注册结束后，应用程序所有者将获得以下值：
 

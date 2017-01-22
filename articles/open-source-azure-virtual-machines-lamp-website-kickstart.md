@@ -188,7 +188,8 @@ URL 地址为：
 
 即可。
 
-> [!NOTE] 注意：我们强烈建议您在测试完毕无误后把 mysql.php 删除掉，因为它里面包含了 MySQL root 的明文密码。  
+> [!NOTE]
+> 注意：我们强烈建议您在测试完毕无误后把 mysql.php 删除掉，因为它里面包含了 MySQL root 的明文密码。  
 
 如果是 Redhat, Ubuntu Linux, mysql.php 在 /var/www/html/ 路径下，如果是 SUSE LINUX, mysql.php 在 /srv/www/htdocs/ 路径下。
 

@@ -30,7 +30,8 @@ ms.author: narayanannamalai; annahar
 
 1. 对于从未使用过 Azure PowerShell 的用户，请参阅 [How to Install and Configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（如何安装和配置 Azure PowerShell），完全按照说明进行操作，登录 Azure 并选择你的订阅。
 
-    > [!NOTE] PowerShell cmdlet for managing VNet peering is shipped with [Azure PowerShell 1.6.](http://www.powershellgallery.com/packages/Azure/1.6.0)
+    > [!NOTE]
+    > PowerShell cmdlet for managing VNet peering is shipped with [Azure PowerShell 1.6.](http://www.powershellgallery.com/packages/Azure/1.6.0)
 
 2. 读取虚拟网络对象：
 

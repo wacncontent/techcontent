@@ -20,7 +20,8 @@ ms.author: ryanwi;mikhegn
 # 在本地群集上部署和升级应用程序入门
 Azure Service Fabric SDK 包含完整的本地开发环境，可让你快速地在本地群集上开始部署和管理应用程序。在本文中，您会从 Windows PowerShell 创建本地群集、将现有应用程序部署到该群集，然后将该应用程序升级为新版本。
 
-> [!NOTE] 本文假设您已[设置开发环境](./service-fabric-get-started.md)。
+> [!NOTE]
+> 本文假设您已[设置开发环境](./service-fabric-get-started.md)。
 
 ## 创建本地群集
 Service Fabric 群集代表一组可在其中部署应用程序的硬件资源。通常，群集由任意数量的计算机（从 5 台到数千台）组成。不过，Service Fabric SDK 包含可在一台计算机上运行的群集配置。
@@ -29,7 +30,8 @@ Service Fabric 群集代表一组可在其中部署应用程序的硬件资源�
 
 SDK 提供两种方式来设置本地群集：Windows PowerShell 脚本和本地群集管理器系统托盘应用。在本教程中，我们使用 PowerShell 脚本。
 
-> [!NOTE] 如果你已通过从 Visual Studio 部署应用程序创建了本地群集，则可以跳过本部分。
+> [!NOTE]
+> 如果你已通过从 Visual Studio 部署应用程序创建了本地群集，则可以跳过本部分。
 
 1. 以管理员身份启动新的 PowerShell 窗口。
 
@@ -112,7 +114,8 @@ Service Fabric SDK 包含一组丰富的框架以及用于创建应用程序的�
 
     ![在 Service Fabric 资源管理器中查看应用程序详细信息][sfx-service-overview]
 
-    > [!NOTE] 要了解有关 Service Fabric Explorer 的详细信息，请参阅[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
+    > [!NOTE]
+    > 要了解有关 Service Fabric Explorer 的详细信息，请参阅[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
 
 ## 升级应用程序
 Service Fabric 在应用程序推出于群集时监视其运行状况，从而提供无需停机的升级。让我们对 WordCount 应用程序执行简单的升级。
@@ -176,7 +179,8 @@ Service Fabric 在应用程序推出于群集时监视其运行状况，从而�
 
 单节点群集模式和 5 节点群集模式都不是仿真器或模拟器。它运行多台计算机群集上使用的相同平台代码。
 
-> [!NOTE] SDK 5.2 和更高版本中提供了此功能。
+> [!NOTE]
+> SDK 5.2 和更高版本中提供了此功能。
 
 若要将群集模式更改为单节点群集，请按如下所述使用 Service Fabric 本地群集管理器或使用 PowerShell：
 
@@ -194,7 +198,8 @@ Service Fabric 在应用程序推出于群集时监视其运行状况，从而�
 
 ![切换群集模式][switch-cluster-mode]  
 
-> [!WARNING] 更改群集模式时，将从系统中删除当前群集并创建新群集。更改群集模式时，在群集中存储的数据将被删除。
+> [!WARNING]
+> 更改群集模式时，将从系统中删除当前群集并创建新群集。更改群集模式时，在群集中存储的数据将被删除。
 
 ## 后续步骤
 - 现在，您已部署并升级某些预先生成的应用程序，接下来可以[尝试在 Visual Studio 中生成您自己的应用程序](./service-fabric-create-your-first-application-in-visual-studio.md)。

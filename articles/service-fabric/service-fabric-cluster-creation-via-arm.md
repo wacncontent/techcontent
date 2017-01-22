@@ -171,7 +171,8 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
 为了简化涉及到配置 AAD 与 Service Fabric 群集的一些步骤，我们创建了一组 Windows PowerShell 脚本。
 
->[!NOTE] 必须在创建群集*之前*执行这些步骤；因此，在脚本需要群集名称和终结点的情况下，这些应该是计划的值，而不是所创建的值。
+>[!NOTE]
+> 必须在创建群集*之前*执行这些步骤；因此，在脚本需要群集名称和终结点的情况下，这些应该是计划的值，而不是所创建的值。
 
 1. [将脚本下载][sf-aad-ps-script-download]到计算机。
 
@@ -421,7 +422,8 @@ Service Fabric 群集提供其管理功能的各种入口点，包括基于 Web 
 
     ![将用户分配到角色][assign-users-to-roles-dialog]  
 
->[!NOTE] 有关 Service Fabric 中角色的详细信息，请参阅 [Role-based access control for Service Fabric clients](./service-fabric-cluster-security-roles.md)（适用于 Service Fabric 客户端的基于角色的访问控制）。
+>[!NOTE]
+> 有关 Service Fabric 中角色的详细信息，请参阅 [Role-based access control for Service Fabric clients](./service-fabric-cluster-security-roles.md)（适用于 Service Fabric 客户端的基于角色的访问控制）。
 
 ## 后续步骤
 

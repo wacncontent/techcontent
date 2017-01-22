@@ -57,11 +57,13 @@ ms.author: juliako;cenkdin;anilmur
 3. 单击“创建频道”。
 ![FMLE](./media/media-services-fmle-live-encoder/media-services-fmle2.png)
 
->[!NOTE] 启动频道可能需要长达 20 分钟的时间。
+>[!NOTE]
+> 启动频道可能需要长达 20 分钟的时间。
 
 启动频道时，你可以[配置编码器](./media-services-configure-fmle-live-encoder.md#configure_fmle_rtmp)。
 
->[!IMPORTANT] 请注意，只要频道进入就绪状态，就会开始计费。有关详细信息，请参阅[频道的状态](./media-services-manage-live-encoder-enabled-channels.md#states)。
+>[!IMPORTANT]
+> 请注意，只要频道进入就绪状态，就会开始计费。有关详细信息，请参阅[频道的状态](./media-services-manage-live-encoder-enabled-channels.md#states)。
 
 ##<a id="configure_fmle_rtmp"></a>配置 FMLE 编码器
 
@@ -126,7 +128,8 @@ ms.author: juliako;cenkdin;anilmur
     若要实现额外的冗余，可对“辅助输入 URL”重复这些步骤。
 8. 选择“连接”。
 
->[!IMPORTANT] 单击“连接”之前，**必须**确保频道已就绪。另外，请确保不要让频道在没有输入/贡献源的情况下处于就绪状态的时间超出 15 分钟。
+>[!IMPORTANT]
+> 单击“连接”之前，**必须**确保频道已就绪。另外，请确保不要让频道在没有输入/贡献源的情况下处于就绪状态的时间超出 15 分钟。
 
 ##测试播放
 

@@ -94,7 +94,8 @@ ms.author: anandy;billmath
 
     ![配置探测](./media/active-directory-adfs-in-azure-with-azure-traffic-manager/mystsconfig.png)  
 
-    >[!NOTE] **确保完成配置时，终结点的状态为“联机”**。如果所有终结点都处于“降级”状态，Azure 流量管理器会尽量尝试路由流量，但前提是诊断不正确，并且所有终结点都可访问。
+    >[!NOTE]
+    > **确保完成配置时，终结点的状态为“联机”**。如果所有终结点都处于“降级”状态，Azure 流量管理器会尽量尝试路由流量，但前提是诊断不正确，并且所有终结点都可访问。
 
 5. **修改 Azure 流量管理器的 DNS 记录：**联合身份验证服务应该是 Azure 流量管理器 DNS 名称的 CNAME。在公共 DNS 记录中创建 CNAME，以使尝试访问联合身份验证服务的人员实际访问 Azure 流量管理器。
 

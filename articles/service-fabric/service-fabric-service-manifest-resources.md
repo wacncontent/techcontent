@@ -89,7 +89,8 @@ HTTP 终结点由 Service Fabric 自动建立 ACL。
 
 HTTPS 协议提供服务器身份验证，用于对客户端-服务器通信进行加密。若要在 Service Fabric 服务上启用 HTTPS，请在服务清单的“资源”->“终结点”->“终结点”部分中指定该协议，如前面针对终结点 *ServiceEndpoint3* 的操作所示。
 
->[!NOTE] 不能在应用程序升级期间更改服务的协议，因为这是一项破坏性更改。
+>[!NOTE]
+> 不能在应用程序升级期间更改服务的协议，因为这是一项破坏性更改。
 
 下面是你需要为 HTTPS 设置的一个示例 ApplicationManifest。必须提供证书的指纹。EndpointRef 是对 ServiceManifest 中 EndpointResource 的引用，你为其设置 HTTPS 协议。可以添加多个 EndpointCertificate。
 

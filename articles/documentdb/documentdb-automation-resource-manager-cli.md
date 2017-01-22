@@ -55,7 +55,8 @@ DocumentDB 数据库帐户是目前唯一可以使用资源管理器模板和 Az
     |info:    To sign in, use a web browser to open the page https://aka.ms/devicelogin. 
     Enter the code E1A2B3C4D to authenticate.
 
-> [!NOTE] 如果没有 Azure 帐户，则会看到一条错误消息，指出需要不同类型的帐户。若要从当前 Azure 帐户创建一个帐户，请参阅[在 Azure Active Directory 中创建工作或学校标识](../virtual-machines/virtual-machines-windows-create-aad-work-id.md)。
+> [!NOTE]
+> 如果没有 Azure 帐户，则会看到一条错误消息，指出需要不同类型的帐户。若要从当前 Azure 帐户创建一个帐户，请参阅[在 Azure Active Directory 中创建工作或学校标识](../virtual-machines/virtual-machines-windows-create-aad-work-id.md)。
 
 在浏览器中打开 [https://aka.ms/devicelogin](https://aka.ms/devicelogin)，然后输入命令输出中提供的代码。
 
@@ -143,7 +144,8 @@ DocumentDB 数据库帐户是目前唯一可以使用资源管理器模板和 Az
 
 在命令提示符处输入下列命令，于新的或现有的资源组中创建 DocumentDB 帐户：
 
-> [!TIP] 如果在 Azure PowerShell 或 Windows PowerShell 中运行此命令，将收到关于意外的令牌的错误。请改为在 Windows 命令提示符处运行此命令。
+> [!TIP]
+> 如果在 Azure PowerShell 或 Windows PowerShell 中运行此命令，将收到关于意外的令牌的错误。请改为在 Windows 命令提示符处运行此命令。
 
     azure resource create -g <resourcegroupname> -n <databaseaccountname> -r "Microsoft.DocumentDB/databaseAccounts" -o 2015-04-08 -l <resourcegrouplocation> -p "{"databaseAccountOfferType":"Standard","locations":["{"locationName":"<databaseaccountlocation>","failoverPriority":"<failoverPriority>"}"]}"
 
@@ -295,7 +297,8 @@ DocumentDB 能够跨不同的 Azure 区域[在全球分发数据][distribute-glo
 
 在命令提示符处输入下列命令，于新的或现有的资源组中创建 DocumentDB 帐户：
 
-> [!TIP] 如果在 Azure PowerShell 或 Windows PowerShell 中运行此命令，将收到关于意外的令牌的错误。请改为在 Windows 命令提示符处运行此命令。
+> [!TIP]
+> 如果在 Azure PowerShell 或 Windows PowerShell 中运行此命令，将收到关于意外的令牌的错误。请改为在 Windows 命令提示符处运行此命令。
 
     azure resource create -g <resourcegroupname> -n <databaseaccountname> -r "Microsoft.DocumentDB/databaseAccounts" -o 2015-04-08 -l <resourcegrouplocation> -p "{"databaseAccountOfferType":"Standard","locations":["{"locationName":"<databaseaccountlocation1>","failoverPriority":"<failoverPriority1>"},{"locationName":"<databaseaccountlocation2>","failoverPriority":"<failoverPriority2>"}"]}"
 
@@ -456,7 +459,8 @@ DocumentDB 能够跨不同的 Azure 区域[在全球分发数据][distribute-glo
 
 如果在创建资源组或数据库帐户时收到错误（例如 `Deployment provisioning state was not successful`），有几个故障排除选项可供使用。
 
-> [!NOTE] 在数据库帐户名称中提供不正确的字符，或提供无法使用 DocumentDB 的位置将导致部署错误。数据库帐户名称只能使用小写字母、数字及“-”字符，且长度必须为 3 到 50 个字符。
+> [!NOTE]
+> 在数据库帐户名称中提供不正确的字符，或提供无法使用 DocumentDB 的位置将导致部署错误。数据库帐户名称只能使用小写字母、数字及“-”字符，且长度必须为 3 到 50 个字符。
 
 - 如果输出包含以下 `Error information has been recorded to C:\Users\wendy\.azure\azure.err`，请查看 azure.err 文件中的错误信息。
 

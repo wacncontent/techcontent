@@ -71,7 +71,8 @@ Azure 流分析目前不允许在作业运行时替换输入/输出上的凭据�
 
 ### SQL 数据库
 
->[!NOTE] 注意：需要连接到 SQL 数据库服务。我们会根据 Azure 管理门户上的管理经验来说明具体如何做，但是，也可以选择使用某些客户端工具，例如 SQL Server Management Studio。
+>[!NOTE]
+> 注意：需要连接到 SQL 数据库服务。我们会根据 Azure 管理门户上的管理经验来说明具体如何做，但是，也可以选择使用某些客户端工具，例如 SQL Server Management Studio。
 
 1. 转到 Azure 管理门户的 SQL 数据库扩展：  
     ![graphic14][graphic14]

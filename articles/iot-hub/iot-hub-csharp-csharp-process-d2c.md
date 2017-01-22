@@ -38,7 +38,8 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 服务总线可以帮助确保可靠处理交互式消息，因为它提供了各消息的检查点，以及基于时间范围的重复数据删除。
 
-> [!NOTE] **EventProcessorHost** 实例只是其中一种处理交互式消息的方法。其他选项包括 [Azure Service Fabric][lnk-service-fabric] 和 [Azure 流分析][lnk-stream-analytics]。
+> [!NOTE]
+> **EventProcessorHost** 实例只是其中一种处理交互式消息的方法。其他选项包括 [Azure Service Fabric][lnk-service-fabric] 和 [Azure 流分析][lnk-stream-analytics]。
 
 在本教程最后，会运行 3 个 Windows 控制台应用：
 
@@ -46,7 +47,8 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 * **ProcessDeviceToCloudMessages** 使用 [EventProcessorHost] 类从与事件中心兼容的终结点检索消息。然后将数据点消息可靠地存储在 Azure blob 存储中，并将交互式消息转发到服务总线队列。
 * **ProcessD2CInteractiveMessages** 从服务总线队列中剔除交互式消息。
 
-> [!NOTE] IoT 中心对许多设备平台和语言（包括 C、Java 和 JavaScript）提供 SDK 支持。若要了解如何将本教程中的模拟设备替换为物理设备，以及如何将设备连接到 IoT 中心，请参阅 [Azure IoT 开发人员中心]。
+> [!NOTE]
+> IoT 中心对许多设备平台和语言（包括 C、Java 和 JavaScript）提供 SDK 支持。若要了解如何将本教程中的模拟设备替换为物理设备，以及如何将设备连接到 IoT 中心，请参阅 [Azure IoT 开发人员中心]。
 
 本教程直接适用于使用事件中心兼容消息的其他方式，如 [HDInsight (Hadoop)] 项目。有关详细信息，请参阅 [Azure IoT 中心开发人员指南 - 设备到云]。
 
@@ -83,7 +85,8 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
     此方法类似于 **SimulatedDevice** 项目中的 **SendDeviceToCloudMessagesAsync** 方法。唯一的区别在于现在设置 **MessageId** 系统属性和 **messageType** 用户属性。
     代码将向 **MessageId** 属性分配全局唯一标识符 (GUID)。服务总线可使用此标识符来删除收到的重复消息。本示例使用 **messageType** 属性来区分交互式消息和数据点消息。应用程序将在消息属性而不是在消息正文中传递此信息，因此事件处理器不需要反序列化消息来执行消息路由。
 
-    > [!NOTE] 有必要在设备代码中创建用于删除重复交互式消息的 **MessageId**。间歇性网络通信或其他故障可能会导致多次重复传输来自该设备的相同消息。你也可以使用语义消息 ID（例如相关消息数据字段的哈希）来取代 GUID。
+    > [!NOTE]
+    > 有必要在设备代码中创建用于删除重复交互式消息的 **MessageId**。间歇性网络通信或其他故障可能会导致多次重复传输来自该设备的相同消息。你也可以使用语义消息 ID（例如相关消息数据字段的哈希）来取代 GUID。
 
 2. 将以下方法添加到 **Main** 方法的 `Console.ReadLine()` 行的前面：
 
@@ -91,7 +94,8 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
         SendDeviceToCloudInteractiveMessagesAsync();
     `
 
-    > [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施指数退让等重试策略。
+    > [!NOTE]
+    > 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施指数退让等重试策略。
 
 ## 处理设备到云的消息
 
@@ -103,18 +107,21 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
 事件处理器使用事件中心消息偏移作为块 ID。借助此机制，事件处理器可在向存储空间提交新块之前执行重复数据删除检查，处理提交块和检查点之间可能发生的崩溃。
 
-> [!NOTE] 本教程使用单个存储帐户来写入从 IoT 中心检索的所有消息。若要确定解决方案中是否需使用多个 Azure 存储帐户，请参阅 [Azure 存储可缩放性指导原则]。
+> [!NOTE]
+> 本教程使用单个存储帐户来写入从 IoT 中心检索的所有消息。若要确定解决方案中是否需使用多个 Azure 存储帐户，请参阅 [Azure 存储可缩放性指导原则]。
 
 应用程序利用服务总线重复数据删除功能，在处理交互式消息时避免重复项。模拟的设备向每个交互式消息标记唯一的 **MessageId**。借助这些 ID，服务总线可确保在指定的重复数据删除时间范围内，仅向接收方发送一条带相同 **MessageId** 的消息。此重复数据删除功能和服务总线队列所提供的每一消息完成语义，使其能够很容易地实现可靠的交互消息处理。
 
 为确保未在重复数据删除时间范围外重新提交任何消息，代码会将 **EventProcessorHost** 检查点机制与服务总线队列重复数据删除时间范围进行同步。同步方式是在每次超出重复数据删除时间范围时（本教程中为 1 小时），至少强制执行一次检查点。
 
-> [!NOTE] 本教程使用单个分区服务总线队列来处理所有检索自 IoT 中心的交互式消息。若要深入了解如何使用服务总线队列来满足解决方案的扩展性要求，请参阅 [Azure 服务总线]文档。
+> [!NOTE]
+> 本教程使用单个分区服务总线队列来处理所有检索自 IoT 中心的交互式消息。若要深入了解如何使用服务总线队列来满足解决方案的扩展性要求，请参阅 [Azure 服务总线]文档。
 
 ### 预配 Azure 存储帐户和服务总线队列
 若要使用 [EventProcessorHost] 类，必须具有 Azure 存储帐户以使该类能记录检查点信息。可使用现有的存储帐户，或按照[关于 About Azure 存储]中的说明来创建新帐户。请记下存储帐户连接字符串。
 
-> [!NOTE] 复制和粘贴存储帐户连接字符串时，请务必不要包含空格。
+> [!NOTE]
+> 复制和粘贴存储帐户连接字符串时，请务必不要包含空格。
 
 你还需要服务总线队列来可靠处理交互式消息。可在 1 小时的重复数据删除时间范围内，以编程方式创建队列，如[如何使用服务总线队列][Service Bus queue]中所述。还可按以下步骤使用 [Azure 经典管理门户][lnk-classic-portal]：
 
@@ -295,7 +302,8 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
     **AppendAndCheckpoint** 方法先为要附加的块生成 blockId。Azure 存储要求所有块 ID 的长度均相同，以便此方法用前置零填补偏移 - `currentBlockInitOffset.ToString("0000000000000000000000000")`。如果具有此 ID 的块已在 Blob 中，此方法将使用缓冲区的当前内容将它覆盖。
 
-    > [!NOTE] 为了简化代码，本教程使用了每个分区的单个 Blob 文件来存储消息。实际上，会在某段时间后或在文件达到特定大小后创建其他文件，从而实现文件滚动。请记住，Azure 块 blob 最多可容纳 195 GB 的数据。
+    > [!NOTE]
+    > 为了简化代码，本教程使用了每个分区的单个 Blob 文件来存储消息。实际上，会在某段时间后或在文件达到特定大小后创建其他文件，从而实现文件滚动。请记住，Azure 块 blob 最多可容纳 195 GB 的数据。
 
 8. 在 **Program** 类的顶部添加以下 **using** 语句：
 
@@ -320,7 +328,8 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
           eventProcessorHost.UnregisterEventProcessorAsync().Wait();
         }
 
-    > [!NOTE] 为简单起见，本教程使用 [EventProcessorHost] 类的单个实例。有关详细信息，请参阅 [Event Hubs Programming Guide]（事件中心编程指南）。
+    > [!NOTE]
+    > 为简单起见，本教程使用 [EventProcessorHost] 类的单个实例。有关详细信息，请参阅 [Event Hubs Programming Guide]（事件中心编程指南）。
 
 ## 接收交互式消息
 在本部分，将编写一个 Windows 控制台应用，用于接收来自服务总线队列的交互式消息。若要深入了解如何使用服务总线构建解决方案，请参阅[使用服务总线构建多层应用程序][Build multi-tier applications with Service Bus]。
@@ -379,7 +388,8 @@ IoT 中心公开[事件中心][lnk-event-hubs]兼容的终结点来接收设备�
 
     ![3 个控制台应用程序][50]  
 
-> [!NOTE] 若要查看 blob 文件中的更新，需要将 **StoreEventProcessor** 类中的 **MAX\_BLOCK\_SIZE** 常量降为较小值，例如 **1024**。此更改很有用，原因是模拟设备发出的数据需要一些时间才能达到块大小限制。块大小更小时，可更快查看正创建和更新的 blob。但是，使用较大的块可以提高应用程序的可缩放性。
+> [!NOTE]
+> 若要查看 blob 文件中的更新，需要将 **StoreEventProcessor** 类中的 **MAX\_BLOCK\_SIZE** 常量降为较小值，例如 **1024**。此更改很有用，原因是模拟设备发出的数据需要一些时间才能达到块大小限制。块大小更小时，可更快查看正创建和更新的 blob。但是，使用较大的块可以提高应用程序的可缩放性。
 
 ## 后续步骤
 

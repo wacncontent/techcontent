@@ -134,7 +134,8 @@ IoT 云应用程序可以使用 Azure IoT 中心中的基元（即设备孪生�
     ```
 8. 保存并关闭 **dmpatterns\_getstarted\_device.js** 文件。
 
-    [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+    >[!NOTE]
+    > 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 使用直接方法在设备上触发远程重新启动
 在此部分中，会创建一个 Node.js 控制台应用，它使用直接方法在设备上启动远程重新启动，并使用设备孪生查询找到该设备上次重新启动时间。

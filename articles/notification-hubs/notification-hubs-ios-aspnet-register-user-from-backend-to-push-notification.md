@@ -109,7 +109,8 @@ ms.author: wesmc
 
     这为请求设置设备标记。
 
-    > [!NOTE] 此时，此方法中不应有任何其他代码。如果你已调用在完成[通知中心入门](./notification-hubs-ios-apple-push-notification-apns-get-started.md)教程的学习时添加的 **registerNativeWithDeviceToken** 方法，必须注释掉或删除该调用。
+    > [!NOTE]
+    > 此时，此方法中不应有任何其他代码。如果你已调用在完成[通知中心入门](./notification-hubs-ios-apple-push-notification-apns-get-started.md)教程的学习时添加的 **registerNativeWithDeviceToken** 方法，必须注释掉或删除该调用。
 
 10. 在 PushToUserAppDelegate.m 文件中，添加以下处理程序方法：
 

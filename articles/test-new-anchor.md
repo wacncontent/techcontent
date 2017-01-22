@@ -23,11 +23,14 @@ V.0625.1
 
 ##test direct reference of md file
 
-> [!TIP] Subscribe to the [Guest OS Update RSS Feed][rss] to receive the most timely notification on all Guest OS changes. Changes mentioned on that feed will be integrated into this page approximately every week.
+> [!TIP]
+> Subscribe to the [Guest OS Update RSS Feed][rss] to receive the most timely notification on all Guest OS changes. Changes mentioned on that feed will be integrated into this page approximately every week.
 
-> [!IMPORTANT] To ensure that your service works as expected, you must deploy it to Guest OS release that is compatible with the version of the Azure SDK used to develop your service. If you do not, the deployed service may exhibit errors in the cloud that were not apparent in the development environment.
+> [!IMPORTANT]
+> To ensure that your service works as expected, you must deploy it to Guest OS release that is compatible with the version of the Azure SDK used to develop your service. If you do not, the deployed service may exhibit errors in the cloud that were not apparent in the development environment.
 
-> [!WARNING] The retirement of Guest OS family 1 began June 1, 2013 and is scheduled to complete soon. Do not create new installations and upgrade older ones using this Guest OS family. For more information see [Azure Guest OS Family 1 Retirement Information][fam1retire]
+> [!WARNING]
+> The retirement of Guest OS family 1 began June 1, 2013 and is scheduled to complete soon. Do not create new installations and upgrade older ones using this Guest OS family. For more information see [Azure Guest OS Family 1 Retirement Information][fam1retire]
 
 ##测试Learning Map
 
@@ -47,7 +50,8 @@ V.0625.1
 >[!NOTE]
 > To complete this tutorial, you need an Azure account. If you don't have an account, you can create a free trial account in just a couple of minutes. For details, see <a href="https://www.azure.cn/pricing/1rmb-trial/" target="_blank">Azure Trial</a>.
 
->[!NOTE] From now on the new URI will be used in this tutorial.
+>[!NOTE]
+> From now on the new URI will be used in this tutorial.
 
 ## <a id="upload"></a>Create a new asset and upload a video file with REST API
 
@@ -298,7 +302,8 @@ If successful, the following response is returned:
 
 Once you have the AccessPolicy and Locator set, the actual file is uploaded to an Azure Blob Storage container using the Azure Storage REST APIs. You can either upload in page or block blobs. 
 
->[!NOTE] You must add the file name for the file you want to upload to the Locator **Path** value received in the previous section. For example, https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . . 
+>[!NOTE]
+> You must add the file name for the file you want to upload to the Locator **Path** value received in the previous section. For example, https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . . 
 
 For more information on working with Azure storage blobs, see [Blob Service REST API](https://msdn.microsoft.com/zh-CN/library/azure/dd135733.aspx).
 
@@ -382,7 +387,8 @@ With dynamic packaging you only need to store and pay for the files in single st
 
 Note that in addition to being able to use the dynamic packaging capabilities, On-Demand Streaming reserved units provide you with dedicated egress capacity that can be purchased in increments of 200 Mbps. By default, on-demand streaming is configured in a shared-instance model for which server resources (for example, compute, egress capacity, etc.) are shared with all other users. To improve an on-demand streaming throughput, it is recommended to purchase On-Demand Streaming reserved units.
 
->[!NOTE] For information about pricing details, see [Media Services Pricing Details](http://go.microsoft.com/fwlink/?LinkId=275107).
+>[!NOTE]
+> For information about pricing details, see [Media Services Pricing Details](http://go.microsoft.com/fwlink/?LinkId=275107).
 
 To change the number of on-demand streaming reserved units, do the following:
 
@@ -652,7 +658,8 @@ There are a few important things to note in any Job request:
 - Tasks must not form a cycle.
 - The value parameter that you pass to JobInputAsset or JobOutputAsset represents the index value for an Asset. The actual Assets are defined in the InputMediaAssets and OutputMediaAssets navigation properties on the Job entity definition. 
 
->[!NOTE] Because Media Services is built on OData v3, the individual assets in InputMediaAssets and OutputMediaAssets navigation property collections are referenced through a "__metadata : uri" name-value pair. 
+>[!NOTE]
+> Because Media Services is built on OData v3, the individual assets in InputMediaAssets and OutputMediaAssets navigation property collections are referenced through a "__metadata : uri" name-value pair. 
 
 - InputMediaAssets maps to one or more Assets you have created in Media Services. OutputMediaAssets are created by the system. They do not reference an existing asset.
 - OutputMediaAssets can be named using the assetName attribute. If this attribute is not present, then the name of the OutputMediaAsset will be whatever the inner text value of the <outputAsset> element is with a suffix of either the Job Name value, or the Job Id value (in the case where the Name property isn't defined). For example, if you set a value for assetName to "Sample", then the OutputMediaAsset Name property would be set to "Sample". However, if you did not set a value for assetName, but did set the job name to "NewJob", then the OutputMediaAsset Name would be "JobOutputAsset(value)_NewJob". 
@@ -721,7 +728,8 @@ The following example shows how to call CancelJob.
 
 If successful, a 204 response code is returned with no message body.
 
->[!NOTE] You must URL-encode the job id (normally nb:jid:UUID: somevalue) when passing it in as a parameter to CancelJob.
+>[!NOTE]
+> You must URL-encode the job id (normally nb:jid:UUID: somevalue) when passing it in as a parameter to CancelJob.
 
 ### Get the output asset 
 
@@ -979,7 +987,8 @@ If you download storage encrypted content, you must manually decrypt it before r
 
 Once you have the AccessPolicy and Locator set, you can download files using the Azure Storage REST APIs.  
 
->[!NOTE] You must add the file name for the file you want to download to the Locator **Path** value received in the previous section. For example, https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . . 
+>[!NOTE]
+> You must add the file name for the file you want to download to the Locator **Path** value received in the previous section. For example, https://storagetestaccount001.blob.core.windows.net/asset-e7b02da4-5a69-40e7-a8db-e8f4f697aac0/BigBuckBunny.mp4? . . . 
 
 For more information on working with Azure storage blobs, see [Blob Service REST API](https://msdn.microsoft.com/zh-CN/library/azure/dd135733.aspx).
 

@@ -27,7 +27,8 @@ ms.author: mingzhan
 
 [!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-both-include.md)]
 
-> [!NOTE] 如果要从 Windows 计算机执行此任务，可以使用 PuTTY 通过 SSH 登录到 Linux 计算机。有关详细信息，请参阅[如何登录到运行 Linux 的虚拟机](./virtual-machines-linux-mac-create-ssh-keys.md)。
+> [!NOTE]
+> 如果要从 Windows 计算机执行此任务，可以使用 PuTTY 通过 SSH 登录到 Linux 计算机。有关详细信息，请参阅[如何登录到运行 Linux 的虚拟机](./virtual-machines-linux-mac-create-ssh-keys.md)。
 
 Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中，因此，请先从该发行版存储库中查找并安装最新版本（如果可能）。
 

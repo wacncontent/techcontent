@@ -33,7 +33,8 @@ ms.author: tdykstra
 
 本部分说明如何使用 `BlobTrigger` 属性。
 
-> [!NOTE] WebJobs SDK 会扫描日志文件，以观察新的或更改的 Blob。此过程非常缓慢；创建 Blob 之后数分钟或更长时间内可能仍不会触发函数。如果你的应用程序需要立即处理 Blob，推荐的方法是在创建该 Blob 时创建队列消息，并在处理该 Blob 的函数上使用 [QueueTrigger](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#trigger) 属性（而非 `BlobTrigger` 属性）。
+> [!NOTE]
+> WebJobs SDK 会扫描日志文件，以观察新的或更改的 Blob。此过程非常缓慢；创建 Blob 之后数分钟或更长时间内可能仍不会触发函数。如果你的应用程序需要立即处理 Blob，推荐的方法是在创建该 Blob 时创建队列消息，并在处理该 Blob 的函数上使用 [QueueTrigger](./websites-dotnet-webjobs-sdk-storage-queues-how-to.md#trigger) 属性（而非 `BlobTrigger` 属性）。
 
 ### Blob 名称和扩展名的单个占位符  
 

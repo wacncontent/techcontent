@@ -92,7 +92,8 @@ SendGrid 是一项[基于云的电子邮件服务]，该服务提供了可靠的
 
     - **_from-address_**：用于发送电子邮件的地址。可考虑使用属于你组织的已注册域地址。
 
-     >[!NOTE]如果你没有注册的域，则可以使用移动服务的域，其格式为 *notifications@_your-mobile-service_.azure-mobile.net*。但是，将忽略发送至你的移动服务域的消息。
+     >[!NOTE]
+     >如果你没有注册的域，则可以使用移动服务的域，其格式为 *notifications@_your-mobile-service_.azure-mobile.net*。但是，将忽略发送至你的移动服务域的消息。
 
 6. 单击“保存”按钮。你现在已配置了一个脚本，每当将记录插入 **TodoItem** 表时都会发送电子邮件。
 

@@ -33,7 +33,8 @@ Azure Redis Cache 提供一个会话状态提供程序，可用于在缓存而�
 
 在搜索文本框中键入 **RedisSessionStateProvider**，从结果中选择它，然后单击“安装”。
 
->[!IMPORTANT] 如果你使用高级层的聚类分析功能，则必须使用 [RedisSessionStateProvider](https://www.nuget.org/packages/Microsoft.Web.RedisSessionStateProvider) 2.0.1 或更高版本，否则会引发异常。这是一项重大更改；有关详细信息，请参阅 [2\.0.0 版重大更改详细信息](https://github.com/Azure/aspnet-redis-providers/wiki/v2.0.0-Breaking-Change-Details)。
+>[!IMPORTANT]
+> 如果你使用高级层的聚类分析功能，则必须使用 [RedisSessionStateProvider](https://www.nuget.org/packages/Microsoft.Web.RedisSessionStateProvider) 2.0.1 或更高版本，否则会引发异常。这是一项重大更改；有关详细信息，请参阅 [2\.0.0 版重大更改详细信息](https://github.com/Azure/aspnet-redis-providers/wiki/v2.0.0-Breaking-Change-Details)。
 
 ![Azure Redis 缓存会话状态提供程序](./media/cache-aspnet-session-state-provider/redis-cache-session-state-provider.png)  
 
@@ -94,7 +95,8 @@ NuGet 程序包会下载并添加所需的程序集引用，并将以下部分�
 
 执行这些步骤后，你的应用程序已配置为使用 Redis 缓存会话状态提供程序。在应用程序中使用会话状态时，会话状态将存储在 Azure Redis 缓存实例中。
 
->[!NOTE] 请注意，与可以存储在默认的内存中 ASP.NET 会话状态提供程序中的数据不同，在缓存中存储的数据必须可序列化。使用适用于 Redis 的会话状态提供程序时，请确保在会话状态中存储的数据类型可序列化。
+>[!NOTE]
+> 请注意，与可以存储在默认的内存中 ASP.NET 会话状态提供程序中的数据不同，在缓存中存储的数据必须可序列化。使用适用于 Redis 的会话状态提供程序时，请确保在会话状态中存储的数据类型可序列化。
 
 ## <a name="aspnet-session-state-options"></a> ASP.NET 会话状态选项
 

@@ -27,7 +27,8 @@
 
     ![已成功附加了空数据磁盘](./media/howto-attach-disk-window-linux/AttachEmptySuccess.png)
 
-> [!NOTE]在添加新数据磁盘后，你需要登录到虚拟机并初始化磁盘，然后虚拟机才能使用磁盘来存储数据。
+> [!NOTE]
+>在添加新数据磁盘后，你需要登录到虚拟机并初始化磁盘，然后虚拟机才能使用磁盘来存储数据。
 
 ## <a id="attachexisting"></a>如何：附加现有磁盘
 

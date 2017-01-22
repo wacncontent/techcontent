@@ -55,11 +55,13 @@ ms.author: juliako;cenkdin;anilmur
 3. 单击“创建频道”。
 ![wirecast](./media/media-services-wirecast-live-encoder/media-services-wirecast2.png)
 
->[!NOTE] 启动频道可能需要长达 20 分钟的时间。
+>[!NOTE]
+> 启动频道可能需要长达 20 分钟的时间。
 
 启动频道时，你可以[配置编码器](./media-services-configure-wirecast-live-encoder.md#configure_wirecast_rtmp)。
 
->[!IMPORTANT] 请注意，只要频道进入就绪状态，就会开始计费。有关详细信息，请参阅[频道的状态](./media-services-manage-live-encoder-enabled-channels.md#states)。
+>[!IMPORTANT]
+> 请注意，只要频道进入就绪状态，就会开始计费。有关详细信息，请参阅[频道的状态](./media-services-manage-live-encoder-enabled-channels.md#states)。
 
 ##<a id="configure_wirecast_rtmp"></a>配置 Telestream Wirecast 编码器
 
@@ -135,7 +137,8 @@ ms.author: juliako;cenkdin;anilmur
 
     ![wirecast](./media/media-services-wirecast-live-encoder/media-services-wirecast7.png)
 
->[!IMPORTANT] 在单击“流”之前，**必须**确保频道已就绪。
+>[!IMPORTANT]
+> 在单击“流”之前，**必须**确保频道已就绪。
 >另外，请确保不要让频道在没有一个输入/贡献源的情况下处于就绪状态的时间超出 15 分钟。
 
 ##测试播放

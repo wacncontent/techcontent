@@ -101,7 +101,8 @@ ms.author: MikeRayMSFT
 
 前端端口是应用程序用来连接到 SQL Server 实例的端口。不同可用性组的 IP 地址可以使用相同的前端端口。
 
->[!NOTE] 对于 SQL Server 可用性组，每个 IP 地址需要一个特定的探测端口。例如，如果负载均衡器上有一个 IP 地址使用探测端口 59999，该负载均衡器上的其他任何 IP 地址就不能使用探测端口 59999。
+>[!NOTE]
+> 对于 SQL Server 可用性组，每个 IP 地址需要一个特定的探测端口。例如，如果负载均衡器上有一个 IP 地址使用探测端口 59999，该负载均衡器上的其他任何 IP 地址就不能使用探测端口 59999。
 
 - 有关负载均衡器限制的信息，请参阅[网络限制 - Azure Resource Manager](../azure-subscription-service-limits.md#networking-limits) 下面的**每个负载均衡器的专用前端 IP**。
 
@@ -170,7 +171,8 @@ ms.author: MikeRayMSFT
 
 - 在“名称”框中，为此新的侦听器创建一个名称，单击“下一步”两次，然后单击“完成”。不要在此时使侦听器或资源联机。
 
- >[!NOTE] 新侦听器的名称是应用程序用来连接 SQL Server 可用性组中数据库的网络名称。
+ >[!NOTE]
+ > 新侦听器的名称是应用程序用来连接 SQL Server 可用性组中数据库的网络名称。
 
 - 单击“资源”选项卡，然后展开刚创建的客户端访问点。右键单击 IP 资源，然后单击“属性”。记下 IP 地址的名称。稍后在 PowerShell 脚本的 `$IPResourceName` 变量中将要使用此名称。
 
@@ -193,7 +195,8 @@ ms.author: MikeRayMSFT
 
 - 更新变量并运行 PowerShell 脚本，以配置新侦听器的 IP 地址和端口。
 
- >[!NOTE] 如果 SQL Server 位于不同的区域，则需要运行 PowerShell 脚本两次。第一次使用第一个资源组中的群集网络名称、群集 IP 资源名称和负载均衡器 IP 地址。第二次使用第二个资源组中的群集网络名称、群集 IP 资源名称和负载均衡器 IP 地址。
+ >[!NOTE]
+ > 如果 SQL Server 位于不同的区域，则需要运行 PowerShell 脚本两次。第一次使用第一个资源组中的群集网络名称、群集 IP 资源名称和负载均衡器 IP 地址。第二次使用第二个资源组中的群集网络名称、群集 IP 资源名称和负载均衡器 IP 地址。
 
 现在，群集包含可用性组侦听器资源。
 
@@ -237,7 +240,8 @@ ms.author: MikeRayMSFT
 
 SQLCMD 连接将自动连接到托管主副本的 SQL Server 实例。
 
->[!NOTE] 确保指定的端口已在两个 SQL Server 的防火墙上打开。这两个服务器需要所用 TCP 端口的入站规则。有关详细信息，请参阅 [Add or Edit Firewall Rule](http://technet.microsoft.com/zh-cn/library/cc753558.aspx)（添加或编辑防火墙规则）。
+>[!NOTE]
+> 确保指定的端口已在两个 SQL Server 的防火墙上打开。这两个服务器需要所用 TCP 端口的入站规则。有关详细信息，请参阅 [Add or Edit Firewall Rule](http://technet.microsoft.com/zh-cn/library/cc753558.aspx)（添加或编辑防火墙规则）。
 
 ## 指导原则和限制
 

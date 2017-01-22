@@ -22,7 +22,8 @@ Proton-PHP 是绑定到 Proton-C 的 PHP 语言；也就是说，Proton-PHP 是�
 
 你可以从 [http://qpid.apache.org/download.html](http://qpid.apache.org/download.html) 下载 Proton-C 及其关联的绑定（包括 PHP）。此下载采用源代码格式。若要生成代码，请按照已下载的程序包中包含的说明操作。
 
-> [!IMPORTANT]在撰写本文时，Proton-C 中的 SSL 支持仅适用于 Linux 操作系统。由于 Azure 服务总线需要使用 SSL，目前，Proton-C（及语言绑定）只能用于从 Linux 访问服务总线。对 Windows 上的 SSL 启用 Proton-C 的开发工作正在进行中，因此请经常返回查看是否有更新。
+> [!IMPORTANT]
+>在撰写本文时，Proton-C 中的 SSL 支持仅适用于 Linux 操作系统。由于 Azure 服务总线需要使用 SSL，目前，Proton-C（及语言绑定）只能用于从 Linux 访问服务总线。对 Windows 上的 SSL 启用 Proton-C 的开发工作正在进行中，因此请经常返回查看是否有更新。
 
 ## 通过 PHP 使用服务总线队列、主题和订阅
 

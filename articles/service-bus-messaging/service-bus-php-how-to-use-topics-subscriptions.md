@@ -24,7 +24,8 @@ wacn.date: 01/09/2017
 
 创建访问 Azure Blob 服务的 PHP 应用程序的唯一要求是从代码中引用 [Azure SDK for PHP](../php-download-sdk.md) 中的类。你可以使用任何开发工具或记事本创建应用程序。
 
-> [!NOTE]你的 PHP 安装还必须已安装并启用 [OpenSSL 扩展](http://php.net/openssl)。
+> [!NOTE]
+>你的 PHP 安装还必须已安装并启用 [OpenSSL 扩展](http://php.net/openssl)。
 
 本文说明如何使用服务功能，这些功能可在 PHP 应用程序中本地调用，或通过在 Azure 的 Web 角色、辅助角色或网站中运行的代码调用。
 
@@ -41,7 +42,8 @@ wacn.date: 01/09/2017
 
 以下示例演示如何包含 autoloader 文件并引用 **ServiceBusService** 类。
 
-> [!NOTE]本示例（以及本文中的其他示例）假定你已通过 Composer 安装用于 Azure 的 PHP 客户端库。如果你已手动安装这些库或将其作为 PEAR 包安装，则必须引用 **WindowsAzure.php** autoloader 文件。
+> [!NOTE]
+>本示例（以及本文中的其他示例）假定你已通过 Composer 安装用于 Azure 的 PHP 客户端库。如果你已手动安装这些库或将其作为 PEAR 包安装，则必须引用 **WindowsAzure.php** autoloader 文件。
 
         require_once 'vendor\autoload.php';
         use WindowsAzure\Common\ServicesBuilder;
@@ -102,7 +104,8 @@ wacn.date: 01/09/2017
             echo $code.": ".$error_message."<br />";
         }
 
-> [!NOTE] 你可以对 `ServiceBusRestProxy` 对象使用 `listTopics` 方法，以检查具有指定名称的主题是否已位于服务命名空间中。
+> [!NOTE]
+> 你可以对 `ServiceBusRestProxy` 对象使用 `listTopics` 方法，以检查具有指定名称的主题是否已位于服务命名空间中。
 
 ## <a name="create-a-subscription"></a> 创建订阅
 
@@ -139,7 +142,8 @@ wacn.date: 01/09/2017
 
 还可以设置筛选器，以指定发送到主题的哪些消息应该在特定主题订阅中显示。订阅支持的最灵活的一种筛选器是 **SqlFilter**，它实现了一部分 SQL92 功能。SQL 筛选器将对发布到主题的消息的属性进行操作。有关 SqlFilters 的详细信息，请参阅 [SqlFilter.SqlExpression 属性][sqlfilter]。
 
-> [!NOTE]有关订阅的每个规则单独处理传入消息，并将其结果消息添加到订阅。此外，每个新订阅的筛选器具有一个默认 **Rule** 对象，该对象包含将主题中的所有消息添加到订阅的筛选器。若要仅接收与您的筛选器的消息，您必须删除默认规则。可以使用 `ServiceBusRestProxy->deleteRule` 方法删除默认规则。
+> [!NOTE]
+>有关订阅的每个规则单独处理传入消息，并将其结果消息添加到订阅。此外，每个新订阅的筛选器具有一个默认 **Rule** 对象，该对象包含将主题中的所有消息添加到订阅的筛选器。若要仅接收与您的筛选器的消息，您必须删除默认规则。可以使用 `ServiceBusRestProxy->deleteRule` 方法删除默认规则。
 
 以下示例将创建一个名为 **HighMessages** 的订阅，该订阅包含的 **SqlFilter** 仅选择自定义 **MessageNumber** 属性大于 3 的的消息（有关将自定义属性添加到消息的信息，请参阅[将消息发送到主题](#send-messages-to-a-topic)）：
 

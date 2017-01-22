@@ -110,7 +110,8 @@ Azure 虚拟机上的 SQL Server 经过优化，适合用于迁移现有的 SQL 
 - [SQL](https://www.azure.cn/pricing/details/virtual-machines/#sql) 和 [Windows](https://www.azure.cn/pricing/details/virtual-machines/#windows) 的[虚拟机定价](https://www.azure.cn/pricing/details/virtual-machines/)
 - [Azure 价格计算器](https://www.azure.cn/pricing/calculator/)
 
-> [!NOTE] SQL Server 上有一小部分的功能不适用于或不可用于 SQL 数据库。有关详细信息，请参阅 [SQL 数据库一般性限制和指导原则](./sql-database-general-limitations.md)以及 [SQL 数据库 Transact-SQL 信息](./sql-database-transact-sql-information.md)。如果要将现有的 SQL Server 解决方案迁移到云中，请参阅[将 SQL Server 数据库迁移到 Azure SQL 数据库](./sql-database-cloud-migrate.md)。当将现有的本地 SQL Server 应用程序迁移到 SQL 数据库时，建议你更新应用程序以利用云服务提供的功能。例如，可以考虑使用 [Azure Web App Service](https://www.azure.cn/home/features/web-site/) 或 [Azure 云服务](https://www.azure.cn/home/features/cloud-services/)来托管你的应用层，以提高成本效益。
+> [!NOTE]
+> SQL Server 上有一小部分的功能不适用于或不可用于 SQL 数据库。有关详细信息，请参阅 [SQL 数据库一般性限制和指导原则](./sql-database-general-limitations.md)以及 [SQL 数据库 Transact-SQL 信息](./sql-database-transact-sql-information.md)。如果要将现有的 SQL Server 解决方案迁移到云中，请参阅[将 SQL Server 数据库迁移到 Azure SQL 数据库](./sql-database-cloud-migrate.md)。当将现有的本地 SQL Server 应用程序迁移到 SQL 数据库时，建议你更新应用程序以利用云服务提供的功能。例如，可以考虑使用 [Azure Web App Service](https://www.azure.cn/home/features/web-site/) 或 [Azure 云服务](https://www.azure.cn/home/features/cloud-services/)来托管你的应用层，以提高成本效益。
 
 ### 管理
 

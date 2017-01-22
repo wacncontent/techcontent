@@ -52,7 +52,8 @@
 
         $vnet = Get-AzureVirtualNetwork -ResourceGroupName TestRG -Name TestVNet
 
-    >[!TIP]可以通过运行 **$vnet = New-AzureVirtualNetwork -ResourceGroupName TestRG -Name TestVNet -AddressPrefix 192.168.0.0/16 -Location centralus** 合并步骤 4 和步骤 5。
+    >[!TIP]
+    >可以通过运行 **$vnet = New-AzureVirtualNetwork -ResourceGroupName TestRG -Name TestVNet -AddressPrefix 192.168.0.0/16 -Location centralus** 合并步骤 4 和步骤 5。
 
 6. 将子网添加到新的 VNet 变量中，如下所示。
 

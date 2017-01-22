@@ -91,7 +91,8 @@ ms.author: chackdan
 
 - Bronze - 运行包含 3 个目标副本集的系统服务
 
->[!NOTE] 选择的可靠性层决定了主节点类型必须具有的节点数下限。可靠性层与群集大小上限没有关系。因此，你可以在 Bronze 可靠性层运行包含 20 个节点的群集。
+>[!NOTE]
+> 选择的可靠性层决定了主节点类型必须具有的节点数下限。可靠性层与群集大小上限没有关系。因此，你可以在 Bronze 可靠性层运行包含 20 个节点的群集。
 
  随时可以选择将群集的可靠性从一个层更新为另一个层。这样做会触发更改系统服务副本集计数所需的群集升级。等待升级完成，然后对群集做出其他任何更改，如添加节点，等等。可以在 Service Fabric Explorer 中运行 [Get-ServiceFabricClusterUpgrade](https://msdn.microsoft.com/zh-cn/library/mt126012.aspx) 来监视升级进度
 

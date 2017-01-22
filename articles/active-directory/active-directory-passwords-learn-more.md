@@ -20,7 +20,8 @@ ms.author: asteen
 
 # 了解有关密码管理的详细信息
 
-> [!IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
+> [!IMPORTANT]
+> **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
 
 如果你已部署密码管理，或只是想要在部署之前深入了解密码管理工作原理的技术细节，则本部分可让你大致了解该服务背后的技术概念。本部分将介绍以下内容：
 
@@ -106,7 +107,8 @@ ms.author: asteen
 ### <a name="what-data-is-used-by-password-reset"></a>密码重置使用哪些数据？
 下表概述密码重置期间此数据使用的位置和方式，旨在帮助你决定哪些身份验证选项适合你的组织。此表还显示当你代表用户从未验证此数据的输入路径提供数据时的格式要求。
 
-> [!NOTE] 注册门户中不会显示办公电话，因为用户当前无法在目录中编辑此属性。
+> [!NOTE]
+> 注册门户中不会显示办公电话，因为用户当前无法在目录中编辑此属性。
 
 <table>
           <tbody><tr>

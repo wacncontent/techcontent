@@ -48,7 +48,8 @@
 
     请注意，此类派生自 **GcmServiceBase**，“服务”属性必须应用于此类。
 
-    >[!NOTE]**GcmServiceBase** 类实现 **OnRegistered()**、**OnUnRegistered()**、**OnMessage()** 和 **OnError()** 方法。必须在 **PushHandlerService** 类中重写这些方法。
+    >[!NOTE]
+    >**GcmServiceBase** 类实现 **OnRegistered()**、**OnUnRegistered()**、**OnMessage()** 和 **OnError()** 方法。必须在 **PushHandlerService** 类中重写这些方法。
 
 5. 将以下代码添加到 **PushHandlerService** 类，以便重写 **OnRegistered **事件处理程序。
 

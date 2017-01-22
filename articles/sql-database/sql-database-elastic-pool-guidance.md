@@ -22,7 +22,8 @@ ms.tgt_pltfrm: NA
 
 - 有关池的概述，请参阅 [SQL 数据库弹性数据库池](./sql-database-elastic-pool.md)。
 
-> [!NOTE] 弹性数据库池仅适用于 SQL 数据库 V12 服务器。
+> [!NOTE]
+> 弹性数据库池仅适用于 SQL 数据库 V12 服务器。
 
 ## 弹性数据库池
 

@@ -27,7 +27,8 @@ ms.author: sstein
 
 建议你每当使用 Azure SQL 数据库时，都使用最新版本的 SSMS。
 
-> [!IMPORTANT] 由于 SSMS 不断改进以便配合 Azure 和 SQL 数据库的最新更新，因此请始终使用 SSMS 的最新版本。若要获取最新版本，请参阅 [下载 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+> [!IMPORTANT]
+> 由于 SSMS 不断改进以便配合 Azure 和 SQL 数据库的最新更新，因此请始终使用 SSMS 的最新版本。若要获取最新版本，请参阅 [下载 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ## 创建和管理 Azure SQL 数据库
 
@@ -59,7 +60,8 @@ ms.author: sstein
 
 -   在 SQL 数据库中，不支持将 **USE** 语句用于在数据库之间切换。您需要改为建立直接到目标数据库的连接。
 
->[!NOTE] 创建或修改数据库的许多 Transact-SQL 语句必须在其自己的批处理中运行，无法与其他 Transact-SQL 语句分组在一起。有关详细信息，请参阅上面特定于语句的信息。
+>[!NOTE]
+> 创建或修改数据库的许多 Transact-SQL 语句必须在其自己的批处理中运行，无法与其他 Transact-SQL 语句分组在一起。有关详细信息，请参阅上面特定于语句的信息。
 
 ## 创建并管理登录名
 

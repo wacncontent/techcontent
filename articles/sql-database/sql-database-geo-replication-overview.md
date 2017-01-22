@@ -21,7 +21,8 @@ ms.author: sstein
 
 使用活动异地复制可在相同或不同数据中心位置（区域）中最多配置四个可读的辅助数据库。在数据中心发生服务中断或无法连接到主数据库时，可以使用辅助数据库进行查询和故障转移。
 
->[!NOTE] 活动异地复制（可读辅助数据库）现在可供所有服务层中的所有数据库使用。
+>[!NOTE]
+> 活动异地复制（可读辅助数据库）现在可供所有服务层中的所有数据库使用。
 
  可以使用 [PowerShell](./sql-database-geo-replication-powershell.md)、[Transact-SQL](./sql-database-geo-replication-transact-sql.md) 或 [REST API - 创建或更新数据库](https://msdn.microsoft.com/zh-cn/library/azure/mt163685.aspx)配置活动异地复制。
 
@@ -62,7 +63,8 @@ ms.author: sstein
 
 - **可读的辅助数据库**：应用程序可以使用与访问主数据库时所用的相同或不同的安全主体来访问辅助数据库以执行只读操作。辅助数据库在快照隔离模式下运行，以确保对主数据库的更新的复制（日志重播）不会因辅助数据库上执行的查询操作而延迟。
 
->[!NOTE] 如果日志重播正在从主数据库接收的内容存在架构更新，则它将在辅助数据库上延迟，因为此过程需要辅助数据库上的架构锁。
+>[!NOTE]
+> 如果日志重播正在从主数据库接收的内容存在架构更新，则它将在辅助数据库上延迟，因为此过程需要辅助数据库上的架构锁。
 
 - **弹性池数据库的活动异地复制**：可以为任何弹性数据库池中的任何数据库配置活动异地复制。辅助数据库可以位于另一个弹性数据库池中。对于常规的数据库，辅助数据库可以是弹性数据库池，反过来也一样，只要服务层相同。
 
@@ -80,7 +82,8 @@ ms.author: sstein
 ## 防止丢失关键数据
 由于广域网的延迟时间较长，连续复制使用了异步复制机制。在发生故障时，异步复制会不可避免地丢失某些数据。但是，某些应用程序可能要求不能有数据丢失。为了保护这些关键更新，应用程序开发人员可以在提交事务后立即调用 [sp\_wait\_for\_database\_copy\_sync](https://msdn.microsoft.com/zh-cn/library/dn467644.aspx) 系统过程。调用 **sp\_wait\_for\_database\_copy\_sync** 会阻止调用线程，直到将上次提交的事务复制到辅助数据库。该过程将一直等待，直到辅助数据库确认所有排队的事务。**sp\_wait\_for\_database\_copy\_sync** 限于特定的连续复制链接。对主数据库具有连接权限的任何用户都可以调用此过程。
 
->[!NOTE] **sp\_wait\_for\_database\_copy\_sync** 过程调用导致的延迟可能会很明显。延迟取决于当前事务日志长度的大小，此调用在复制整个日志之前不会返回。除非绝对必要，否则请避免调用此过程。
+>[!NOTE]
+> **sp\_wait\_for\_database\_copy\_sync** 过程调用导致的延迟可能会很明显。延迟取决于当前事务日志长度的大小，此调用在复制整个日志之前不会返回。除非绝对必要，否则请避免调用此过程。
 
 ## 以编程方式管理活动异地复制
 
@@ -88,7 +91,8 @@ ms.author: sstein
 
 - **Azure Resource Manager API 和基于角色的安全性**：活动异地复制包括一组用于管理的 [Azure Resource Manager API](https://msdn.microsoft.com/zh-cn/library/azure/mt163571.aspx)，其中包括[基于 Azure Resource Manager 的 PowerShell cmdlet](./sql-database-geo-replication-powershell.md)。这些 API 需要使用资源组，并支持基于角色的安全性 (RBAC)。有关如何实现访问角色的详细信息，请参阅 [Azure 基于角色的访问控制](../active-directory/role-based-access-control-configure.md)。
 
->[!NOTE] 只有使用基于 [Azure Resource Manager](../azure-resource-manager/resource-group-overview.md) 的 [Azure SQL REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163571.aspx) 和 [Azure SQL 数据库 PowerShell cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/mt574084.aspx) 才支持活动异地复制的许多新功能。向后兼容性支持现有[（经典）REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn505719.aspx) 和 [Azure SQL 数据库（经典）cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/dn546723.aspx)，因此建议使用基于 Azure Resource Manager 的 API。
+>[!NOTE]
+> 只有使用基于 [Azure Resource Manager](../azure-resource-manager/resource-group-overview.md) 的 [Azure SQL REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163571.aspx) 和 [Azure SQL 数据库 PowerShell cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/mt574084.aspx) 才支持活动异地复制的许多新功能。向后兼容性支持现有[（经典）REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn505719.aspx) 和 [Azure SQL 数据库（经典）cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/dn546723.aspx)，因此建议使用基于 Azure Resource Manager 的 API。
 
 ### Transact-SQL
 

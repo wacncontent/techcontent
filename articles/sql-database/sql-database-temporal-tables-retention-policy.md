@@ -41,7 +41,8 @@ ms.author: bonova
     ALTER DATABASE <myDB>
     SET TEMPORAL_HISTORY_RETENTION  ON
 
-> [!IMPORTANT] 即使 **is\_temporal\_history\_retention\_enabled** 设置为 OFF，也可以为临时表配置保留策略，但在这种情况下，不会针对陈旧的行触发自动清理。
+> [!IMPORTANT]
+> 即使 **is\_temporal\_history\_retention\_enabled** 设置为 OFF，也可以为临时表配置保留策略，但在这种情况下，不会针对陈旧的行触发自动清理。
 
 在创建表的过程中，可以通过指定 HISTORY\_RETENTION\_PERIOD 参数的值来配置保留策略：
 
@@ -70,7 +71,8 @@ Azure SQL 数据库允许使用不同的时间单位指定保留策略：DAYS、
     ALTER TABLE dbo.WebsiteUserInfo
     SET (SYSTEM_VERSIONING = ON (HISTORY_RETENTION_PERIOD = 9 MONTHS));
 
-> [!IMPORTANT]  将 SYSTEM\_VERSIONING 设置为 OFF *不会保存*保留期值。在未显式指定 HISTORY\_RETENTION\_PERIOD 的情况下将 SYSTEM\_VERSIONING 设置为 ON 会导致保留期为 INFINITE。
+> [!IMPORTANT]
+>  将 SYSTEM\_VERSIONING 设置为 OFF *不会保存*保留期值。在未显式指定 HISTORY\_RETENTION\_PERIOD 的情况下将 SYSTEM\_VERSIONING 设置为 ON 会导致保留期为 INFINITE。
 
 若要查看保留策略的当前状态，请使用以下查询，该查询将数据库级别的临时保留启用标志与单个表的保留期相联接：
 

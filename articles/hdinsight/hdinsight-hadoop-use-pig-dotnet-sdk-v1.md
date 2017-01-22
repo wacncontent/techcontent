@@ -27,7 +27,8 @@ ms.author: larryfr
 
 HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsight 群集的操作。Pig 可让你通过为一系列数据转换建模，创建 MapReduce 操作。你将了解如何使用基本 C# 应用程序将 Pig 作业提交到 HDInsight 群集。
 
-> [!IMPORTANT] 目前，Azure 中国区的 HDInsight 只能通过 Azure 服务管理器 (ASM) 进行管理。适用于 HDInsight 的 Azure Resource Manager (ARM) 模型尚不可用。
+> [!IMPORTANT]
+> 目前，Azure 中国区的 HDInsight 只能通过 Azure 服务管理器 (ASM) 进行管理。适用于 HDInsight 的 Azure Resource Manager (ARM) 模型尚不可用。
 
 ## <a id="prereq"></a>先决条件
 
@@ -43,7 +44,8 @@ HDInsight .NET SDK 提供 .NET 客户端库，可简化从 .NET 中使用 HDInsi
 
 有关如何执行此操作的说明，请参阅[创建自签名证书](./hdinsight-administer-use-management-portal-v1.md#cert)。
 
-> [!NOTE] 创建证书时，请务必记下使用的友好名称供以后使用。
+> [!NOTE]
+> 创建证书时，请务必记下使用的友好名称供以后使用。
 
 ## <a id="subscriptionid"></a>查找你的订阅 ID
 

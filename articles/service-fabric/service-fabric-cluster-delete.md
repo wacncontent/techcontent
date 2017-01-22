@@ -21,7 +21,8 @@ ms.author: chackdan
 
 Service Fabric 群集由群集资源本身及众多其他 Azure 资源组成。因此，若要彻底删除 Service Fabric 群集，还需删除组成该群集的所有资源。可使用两种方法：删除该群集所在的资源组（此操作将删除该资源组中的群集资源及其他任何资源），或特定删除群集资源及其关联资源（而不删除资源组中的其他资源）。
 
->[!NOTE] 删除群集资源**不会**删除组成 Service Fabric 的其他所有资源。
+>[!NOTE]
+> 删除群集资源**不会**删除组成 Service Fabric 的其他所有资源。
 
 ## 删除 Service Fabric 群集所在的整个资源组 (RG)
 

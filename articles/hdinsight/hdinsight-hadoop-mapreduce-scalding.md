@@ -187,7 +187,8 @@ Scalding 是一种 Scala 库，它可以让你轻松地创建 Hadoop MapReduce �
 
 ## 在基于 Windows 的群集上运行作业
 
-> [!NOTE] 以下步骤使用 Windows PowerShell。有关运行 MapReduce 作业的其他方法，请参阅[在 HDInsight 上的 Hadoop 中使用 MapReduce](./hdinsight-use-mapreduce.md)。
+> [!NOTE]
+> 以下步骤使用 Windows PowerShell。有关运行 MapReduce 作业的其他方法，请参阅[在 HDInsight 上的 Hadoop 中使用 MapReduce](./hdinsight-use-mapreduce.md)。
 
 1. [安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 

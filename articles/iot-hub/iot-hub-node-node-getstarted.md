@@ -27,7 +27,8 @@ ms.author: dobett
 * **ReadDEviceToCloudMessages.js**，显示模拟设备发送的遥测数据。
 * **SimulatedDevice.js**，它使用前面创建的设备标识连接到 IoT 中心，并使用 AMQPS 协议每秒发送一次遥测消息。
 
-> [!NOTE] [IoT 中心 SDK][lnk-hub-sdks] 一文提供了各种 SDK 的相关信息，你可以使用这些 SDK 构建可在设备和解决方案后端上运行的应用程序。
+> [!NOTE]
+> [IoT 中心 SDK][lnk-hub-sdks] 一文提供了各种 SDK 的相关信息，你可以使用这些 SDK 构建可在设备和解决方案后端上运行的应用程序。
 
 若要完成本教程，您需要以下各项：
 
@@ -90,12 +91,14 @@ ms.author: dobett
 
 9. 记下**设备 ID** 和**设备密钥**。稍后在创建作为设备连接到 IoT 中心的应用程序时，需要这些值。
 
-> [!NOTE] IoT 中心标识注册表只存储设备标识，以启用对中心的安全访问。它存储设备 ID 和密钥作为安全凭据，以及启用或禁用标志（可用于禁用对单个设备的访问）。如果应用程序需要存储其他特定于设备的元数据，则应使用特定于应用程序的存储。有关详细信息，请参阅 [IoT Hub Developer Guide][lnk-devguide-identity]（IoT 中心开发人员指南）。
+> [!NOTE]
+> IoT 中心标识注册表只存储设备标识，以启用对中心的安全访问。它存储设备 ID 和密钥作为安全凭据，以及启用或禁用标志（可用于禁用对单个设备的访问）。如果应用程序需要存储其他特定于设备的元数据，则应使用特定于应用程序的存储。有关详细信息，请参阅 [IoT Hub Developer Guide][lnk-devguide-identity]（IoT 中心开发人员指南）。
 
 ## 接收设备到云的消息
 本部分将创建一个 Node.js 控制台应用，用于读取来自 IoT 中心的设备到云消息。IoT 中心公开与[事件中心][lnk-event-hubs-overview]兼容的终结点，以便你可读取设备到云的消息。为了简单起见，本教程创建的基本读取器不适用于高吞吐量部署。[Process device-to-cloud messages][lnk-process-d2c-tutorial]（处理设备到云的消息）教程介绍了如何大规模处理设备到云的消息。[事件中心入门][lnk-eventhubs-tutorial]教程更详细地介绍了如何处理来自事件中心的消息，此教程也适用于与 IoT 中心事件中心兼容的终结点。
 
-> [!NOTE] 读取设备到云消息的事件中心兼容终结点始终使用 AMQPS 协议。
+> [!NOTE]
+> 读取设备到云消息的事件中心兼容终结点始终使用 AMQPS 协议。
 
 1. 新建名为 **readdevicetocloudmessages** 的空文件夹。在 **readdevicetocloudmessages** 文件夹的命令提示符处，使用以下命令创建 package.json 文件。接受所有默认值：
 
@@ -205,7 +208,8 @@ ms.author: dobett
 
 9. 保存并关闭 **SimulatedDevice.js** 文件。
 
-> [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+> [!NOTE]
+> 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 运行应用
 现在，已准备就绪，可以运行应用。

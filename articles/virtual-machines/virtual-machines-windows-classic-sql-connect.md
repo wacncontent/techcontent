@@ -37,7 +37,8 @@ ms.author: jroth
 - [通过 Internet 连接到 SQL Server](#connect-to-sql-server-over-the-internet)
 - [连接到同一虚拟网络中的 SQL Server](#connect-to-sql-server-in-the-same-virtual-network)
 
->[!NOTE] 使用下列任一方法进行连接之前，必须遵循[本文中的步骤配置连接](#steps-for-configuring-sql-server-connectivity-in-an-azure-vm)。
+>[!NOTE]
+> 使用下列任一方法进行连接之前，必须遵循[本文中的步骤配置连接](#steps-for-configuring-sql-server-connectivity-in-an-azure-vm)。
 
 ### <a name="connect-to-sql-server-in-the-same-cloud-service"></a> 连接到同一云服务中的 SQL Server
 
@@ -59,7 +60,8 @@ ms.author: jroth
 
 尽管客户端可通过 Internet 进行连接，但这并不意味着任何人都可以连接到 SQL Server。外部客户端必须有正确的用户名和密码。为了提高安全性，请不要对公共虚拟机终结点使用常用的 1433 端口。如果可能，请考虑在终结点上添加 ACL 以将流量限制到你允许的客户端。有关在终结点上使用 ACL 的说明，请参阅[管理终结点上的 ACL](./virtual-machines-windows-classic-setup-endpoints.md#manage-the-acl-on-an-endpoint)。
 
->[!NOTE] 务必注意，使用此方法与 SQL Server 通信时，Azure 数据中心的所有传出数据都将基于[出站数据传输定价](https://www.azure.cn/pricing/details/data-transfer/)产生费用。
+>[!NOTE]
+> 务必注意，使用此方法与 SQL Server 通信时，Azure 数据中心的所有传出数据都将基于[出站数据传输定价](https://www.azure.cn/pricing/details/data-transfer/)产生费用。
 
 ### <a name="connect-to-sql-server-in-the-same-virtual-network"></a> 连接到同一虚拟网络中的 SQL Server
 

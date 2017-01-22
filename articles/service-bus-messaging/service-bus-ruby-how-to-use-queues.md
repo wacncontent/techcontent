@@ -58,7 +58,8 @@ Service Bus 队列是一种可用于各种应用场景的通用技术：
 
 ![复制密钥](./media/service-bus-ruby-how-to-use-queues/defaultkey.png)  
 
-> [!NOTE] 如果登录到 [Azure 经典管理门户](http://manage.windowsazure.cn/)并导航到服务总线命名空间的连接信息，也可以找到此密钥。
+> [!NOTE]
+> 如果登录到 [Azure 经典管理门户](http://manage.windowsazure.cn/)并导航到服务总线命名空间的连接信息，也可以找到此密钥。
 
 ## 创建 Ruby 应用程序
 

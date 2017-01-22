@@ -73,6 +73,7 @@ ms.author: juliako
 
     **故障排除步骤**：在 AMSE 工具中导航到“流式处理终结点”选项卡，确认包含一个流式处理单位的流式处理终结点正在运行。
 
->[!NOTE] 如果遵循故障排除步骤后仍然无法成功流式处理，请[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单。
+>[!NOTE]
+> 如果遵循故障排除步骤后仍然无法成功流式处理，请[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单。
 
 <!---HONumber=Mooncake_Quality_Review_1202_2016-->

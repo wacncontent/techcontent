@@ -50,11 +50,13 @@ DocumentDB 自动将集合分区到一个或多个物理服务器。创建集合
 
 每个集合可以预留每秒 100 的倍数请求单位的数据块的吞吐量，每秒从几百到几百万个请求单位。可以在集合的整个生命周期内调整设置的吞吐量，以适应不断变化的应用程序的处理需求和访问模式。有关详细信息，请参阅 [DocumentDB performance levels](./documentdb-performance-levels.md)（DocumentDB 性能级别）。
 
->[!IMPORTANT] 集合是计费实体。集合的成本由集合的设置的吞吐量（以每秒的请求单位数来衡量）和总占用存储空间（以千兆字节为单位）决定。
+>[!IMPORTANT]
+> 集合是计费实体。集合的成本由集合的设置的吞吐量（以每秒的请求单位数来衡量）和总占用存储空间（以千兆字节为单位）决定。
 
 一个特定操作如插入、删除、查询或存储过程执行会消耗多少个请求单位？ 请求单位是请求处理成本的规范化的度量。读取 1 KB 文档需要 1 个 RU，但是插入、替换或删除同一文档的请求却要占用服务的更多处理，因此需要更多请求单位。来自服务的每个响应包括一个自定义标头 (`x-ms-request-charge`)，其中报告了请求所要使用的请求单位数。此标头也可通过 [SDK](./documentdb-sdk-dotnet.md) 防问。在 .NET SDK 中，[RequestCharge](https://msdn.microsoft.com/zh-cn/library/azure/dn933057.aspx#P:Microsoft.Azure.Documents.Client.ResourceResponse`1.RequestCharge) 是 [ResourceResponse](https://msdn.microsoft.com/zh-cn/library/azure/dn799209.aspx) 对象的属性。如果要在进行单个调用前估计吞吐量需求，可以使用 [Capacity Planner](./documentdb-request-units.md#estimating-throughput-needs/) 来帮助进行此估计。
 
->[!NOTE] 用于 1 KB 文档的 1 个请求单位基准与使用[会话一致性](./documentdb-consistency-levels.md)的简单的文档 GET 命令相对应。
+>[!NOTE]
+> 用于 1 KB 文档的 1 个请求单位基准与使用[会话一致性](./documentdb-consistency-levels.md)的简单的文档 GET 命令相对应。
 
 影响针对某个 DocumentDB 数据库帐户的操作所使用的请求单位数的因素有多个。这些因素包括：
 

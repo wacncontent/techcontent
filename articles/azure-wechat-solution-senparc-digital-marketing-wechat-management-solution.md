@@ -36,7 +36,8 @@ wacn.date: 01/17/2017
     - 计算机视觉
     - 情绪感知
 
->[!NOTE]以上配置仅供参考。
+>[!NOTE]
+>以上配置仅供参考。
 
 ### 环境配置
 1. Web 应用
@@ -45,7 +46,8 @@ wacn.date: 01/17/2017
 
         ![4](./media/azure-wechat-solution-senparc-digital-marketing-wechat-management-solution/4.png)
 
-        >[!NOTE]域名需要做 CName 映射,到域名购买平台做 CName 映射。
+        >[!NOTE]
+        >域名需要做 CName 映射,到域名购买平台做 CName 映射。
 
     2. Ftp 配置
 
@@ -110,13 +112,15 @@ wacn.date: 01/17/2017
     公众号 AppId: Key：AppId
     公众号 AppSecret: Key：AppSecret
 
-    >[!NOTE]微信公众号类型不能为订阅号。
+    >[!NOTE]
+    >微信公众号类型不能为订阅号。
 
 5. 域名
 
     网站域名 Key：DomainName
 
->[!NOTE]网页授权以后的网站域名
+>[!NOTE]
+>网页授权以后的网站域名
 
 ## 项目初始化
 

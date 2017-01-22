@@ -116,7 +116,8 @@ ms.author: dobett
           }
         }
 
-> [!NOTE]  也可以使用 **RegistryManager** 类的 **GetDevicesAsync** 方法检索设备列表。但是，此方法有一个硬性限制，那就是返回的设备对象数最多只能有 1000 个。**GetDevicesAsync** 方法的预期用例适用于开发方案，其目的是要帮助调试，因此不建议用于生产工作负荷。
+> [!NOTE]
+>  也可以使用 **RegistryManager** 类的 **GetDevicesAsync** 方法检索设备列表。但是，此方法有一个硬性限制，那就是返回的设备对象数最多只能有 1000 个。**GetDevicesAsync** 方法的预期用例适用于开发方案，其目的是要帮助调试，因此不建议用于生产工作负荷。
 
 ## 导入设备
 
@@ -124,7 +125,8 @@ ms.author: dobett
 
 请谨慎使用 **ImportDevicesAsync** 方法，因为除了在设备标识注册表中预配新设备以外，此方法也会更新和删除现有设备。
 
-> [!WARNING]  导入操作不可撤消。请始终先使用 **ExportDevicesAsync** 方法将现有数据备份到另一个 Blob 容器，再对设备标识注册表进行批量更改。
+> [!WARNING]
+>  导入操作不可撤消。请始终先使用 **ExportDevicesAsync** 方法将现有数据备份到另一个 Blob 容器，再对设备标识注册表进行批量更改。
 
 **ImportDevicesAsync** 方法有两个参数：
 
@@ -136,7 +138,8 @@ ms.author: dobett
 
         SharedAccessBlobPermissions.Write | SharedAccessBlobPermissions.Read | SharedAccessBlobPermissions.Delete
 
-> [!NOTE]  这两个参数可以指向同一 Blob 容器。参数不同只会让你更容易掌控数据，因为输出容器需要其他权限。
+> [!NOTE]
+>  这两个参数可以指向同一 Blob 容器。参数不同只会让你更容易掌控数据，因为输出容器需要其他权限。
 
 以下 C# 代码段演示如何启动导入作业：
 
@@ -166,7 +169,8 @@ ms.author: dobett
 | **delete** | 如果已存在具有指定 **ID** 的设备，则将它删除，而不管 **ETag** 值为何。<br/>如果设备不存在，则在日志文件中写入错误。 |
 | **deleteIfMatchETag** | 如果已存在具有指定 **ID** 的设备，则仅当 **ETag** 匹配时才将它删除。如果设备不存在，则在日志文件中写入错误。<br/>如果 ETag 不匹配，则在日志文件中写入错误。 |
 
-> [!NOTE] 如果序列化数据未显式定义设备的 **importMode** 标志，则在导入操作期间将默认使用 **createOrUpdate**。
+> [!NOTE]
+> 如果序列化数据未显式定义设备的 **importMode** 标志，则在导入操作期间将默认使用 **createOrUpdate**。
 
 ## 导入设备示例 – 批量预配设备 
 

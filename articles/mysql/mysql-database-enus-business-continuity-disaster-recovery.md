@@ -104,7 +104,8 @@ When incidents happen, user can either rely on self-service by specifying the po
 
 ### Offsite recovery performance indicators: ###
 ERT<3 hours，RPO< 1 hour. <br>
->[!NOTE] ERT, RTO, and RPO are project indicators that are intended only for reference purposes. These indicators only appear in regional disasters and are not part of the MySQL database service’s service level agreement (SLA).
+>[!NOTE]
+> ERT, RTO, and RPO are project indicators that are intended only for reference purposes. These indicators only appear in regional disasters and are not part of the MySQL database service’s service level agreement (SLA).
 
 ### User self-service process: ###
 If a disaster occurs and you can use the Azure portal, you can use the offsite restore process in [backup and restore](./mysql-database-point-in-time-restore.md) to perform the operation. However, if regional disasters occur frequently, it will not be possible to obtain correct information on the instance in the Azure portal. In such a situation, we recommend that you perform an offsite restore operation on the instance by using PowerShell:

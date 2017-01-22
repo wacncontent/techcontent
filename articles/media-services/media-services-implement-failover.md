@@ -47,7 +47,8 @@ ms.author: juliako
 - 不支持使用存储加密资产 (AssetCreationOptions.StorageEncrypted) 进行复制（因为两个媒体服务帐户中的加密密钥将会有所不同）。
 - 如果你想要利用动态打包，则必须先获取至少一个按需流式处理保留单元。有关详细信息，请参阅[动态打包资产](./media-services-dynamic-packaging-overview.md)。
 
->[!NOTE]请考虑将媒体服务[复制器工具](http://replicator.codeplex.com/)用作备用选项，以手动实现故障转移流式处理方案。此工具可用于在两个媒体服务帐户之间复制资产。
+>[!NOTE]
+>请考虑将媒体服务[复制器工具](http://replicator.codeplex.com/)用作备用选项，以手动实现故障转移流式处理方案。此工具可用于在两个媒体服务帐户之间复制资产。
 
 ##先决条件
 

@@ -66,7 +66,8 @@ ms.tgt_pltfrm: NA
 - 如果复制失败，新数据库的 sys.databases 视图的 state\_desc 列将设置为 SUSPECT。在这种情况下，对新数据库执行 DROP 语句并稍后重试。
 - 如果复制成功，新数据库的 sys.databases 视图的 state\_desc 列将设置为 ONLINE。在这种情况下，复制已完成并且新数据库是一个常规数据库，可独立于源数据库进行更改。
 
-> [!NOTE] - 如果决定在复制过程中取消复制，请对新数据库执行 [DROP DATABASE](https://msdn.microsoft.com/zh-cn/library/ms178613.aspx) 语句。此外，对源数据库执行 DROP DATABASE 语句也将取消复制过程。
+> [!NOTE]
+> - 如果决定在复制过程中取消复制，请对新数据库执行 [DROP DATABASE](https://msdn.microsoft.com/zh-cn/library/ms178613.aspx) 语句。此外，对源数据库执行 DROP DATABASE 语句也将取消复制过程。
 
 ##<a name="resolve-logins-after-the-copy-operation-completes"></a> 在复制操作完成后解析登录名
 

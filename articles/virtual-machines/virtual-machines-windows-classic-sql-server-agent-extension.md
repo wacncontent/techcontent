@@ -26,7 +26,8 @@ ms.author: jroth
 
 SQL Server IaaS 代理扩展 (SQLIaaSAgent) 在 Azure 虚拟机上运行，可以自动执行管理任务。本主题概述了该扩展支持的服务以及有关安装、状态及删除的说明。
 
-> [!IMPORTANT]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。若要查看本文的 Resource Manager 版本，请参阅[适用于 SQL Server VM 的 SQL Server 代理扩展 (Resource Manager)](./virtual-machines-windows-sql-server-agent-extension.md)。
+> [!IMPORTANT]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。若要查看本文的 Resource Manager 版本，请参阅[适用于 SQL Server VM 的 SQL Server 代理扩展 (Resource Manager)](./virtual-machines-windows-sql-server-agent-extension.md)。
 
 ## <a name="supported-services"></a>支持的服务
 
@@ -77,7 +78,8 @@ SQL Server IaaS 代理扩展支持以下管理任务：
 
 如果要更新到最新版本的 SQL IaaS 代理扩展，则必须在更新该扩展后重启虚拟机。
 
->[!NOTE] 经典虚拟机不能通过门户安装和配置 SQL IaaS 代理扩展。
+>[!NOTE]
+> 经典虚拟机不能通过门户安装和配置 SQL IaaS 代理扩展。
 
 ## 状态
 

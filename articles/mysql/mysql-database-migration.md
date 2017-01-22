@@ -74,7 +74,8 @@ MySQL Database on Azure兼容MySQL 5.5 和 MySQL 5.6，所以绝大部分应用�
 
 1.同步数据库到MySQL Database on Azure，您可以把运行在MySQL Database on Azure上的数据库服务器配置为从服务器。具体配置和同步数据库的步骤请参考如何配置数据同步复制到MySQL Database on Azure。 
 
->[!NOTE] ** 注意：您会需要打开当前的数据库服务器的外部访问，我们强烈建议您配置SSL并只允许外部通过SSL访问。**
+>[!NOTE]
+> ** 注意：您会需要打开当前的数据库服务器的外部访问，我们强烈建议您配置SSL并只允许外部通过SSL访问。**
 
 2.在Azure上部署新的应用并指向新建的Azure上的数据库。 
 
@@ -87,7 +88,8 @@ MySQL Database on Azure兼容MySQL 5.5 和 MySQL 5.6，所以绝大部分应用�
 
 5.停止数据库同步复制。您只需在下面的页面上点击“禁用”然后保存就可以。
 ![迁移][2]
->[!NOTE] **注意：这个操作会重启数据库服务器 **
+>[!NOTE]
+> **注意：这个操作会重启数据库服务器 **
 
 6.启用新的应用。
 

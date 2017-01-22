@@ -133,6 +133,7 @@ VM 备份依赖于向底层存储发出快照命令。如果无法访问存储�
     - 如果你指定了某种网络限制（例如网络安全组），请部署 HTTP 代理服务器来路由流量。可在[此处](./backup-azure-vms-prepare.md#2-network-connectivity/)找到部署 HTTP 代理服务器的步骤。
     - 向 NSG 添加规则（如果已创建规则），以允许从 HTTP 代理访问 INTERNET。
 
->[!NOTE] 必须在来宾内启用 DHCP，才能正常进行 IaaS VM 备份。如果需要静态专用 IP 地址，你应该通过平台配置该 IP。VM 内的 DHCP 选项应保持启用。查看有关[设置静态内部专用 IP](../virtual-network/virtual-networks-reserved-private-ip.md) 的详细信息。
+>[!NOTE]
+> 必须在来宾内启用 DHCP，才能正常进行 IaaS VM 备份。如果需要静态专用 IP 地址，你应该通过平台配置该 IP。VM 内的 DHCP 选项应保持启用。查看有关[设置静态内部专用 IP](../virtual-network/virtual-networks-reserved-private-ip.md) 的详细信息。
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

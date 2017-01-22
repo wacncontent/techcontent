@@ -34,7 +34,8 @@ wacn.date: 01/06/2017
 
 ## 备份和还原 VM 时的限制
 
->[!NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。以下列表提供了在经典模型中部署时的限制。
+>[!NOTE]
+> Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。以下列表提供了在经典模型中部署时的限制。
 
 - 不支持备份超过 16 个数据磁盘的虚拟机。
 - 不支持备份使用保留 IP 地址且未定义终结点的虚拟机。
@@ -104,7 +105,8 @@ wacn.date: 01/06/2017
 ### 使用 HTTP 代理进行 VM 备份 <a name="using-an-http-proxy-for-vm-backups"></a>
 备份 VM 时，VM 上的备份扩展会使用 HTTPS API 将快照管理命令发送到 Azure 存储空间。将通过 HTTP 代理路由备份扩展流量，因为它是为了访问公共 Internet 而配置的唯一组件。
 
->[!NOTE] 至于应该使用何种代理软件，我们不提供任何建议。请确保你选取的代理可以进行下述配置步骤。
+>[!NOTE]
+> 至于应该使用何种代理软件，我们不提供任何建议。请确保你选取的代理可以进行下述配置步骤。
 
 以下示例图像显示了使用 HTTP 代理所要执行的三个配置步骤：
 
@@ -140,7 +142,8 @@ wacn.date: 01/06/2017
        Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyEnable -Value $obj.ProxyEnable
        Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name Proxyserver -Value $obj.Proxyserver
 
->[!NOTE] 如果在代理服务器日志中发现“(407)需要代理身份验证”，请检查身份验证设置是否正确。
+>[!NOTE]
+> 如果在代理服务器日志中发现“(407)需要代理身份验证”，请检查身份验证设置是否正确。
 
 ######对于 Linux 计算机
 

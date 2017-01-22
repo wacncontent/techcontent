@@ -10,7 +10,8 @@
 
     ![](./media/mobile-services-android-run-sample-code/android-studio-choose-device.png)
 
-    > [!NOTE]可以使用 Android 手机或 Android 模拟器运行此项目。使用 Android 手机运行会要求你下载手机特定的 USB 驱动程序。
+    > [!NOTE]
+    >可以使用 Android 手机或 Android 模拟器运行此项目。使用 Android 手机运行会要求你下载手机特定的 USB 驱动程序。
     >
     > 若要在 Android 模拟器中运行该项目，必须至少定义一个 Android 虚拟设备 (AVD)。使用 AVD 管理器创建和管理这些设备。
 

@@ -60,12 +60,14 @@ ApplicationPackageRoot 包含定义应用程序的 ApplicationManifest.xml 文�
 * *Config*。此目录包含一个 Settings.xml 文件（必要时还将包含其他文件），服务可以在运行时访问该文件以检索特定的配置设置。
 * *Data*。这是用于存储服务可能需要的其他本地数据的其他目录。数据应仅用于存储临时数据。如果需要对服务进行重定位（例如在故障转移期间），则 Service Fabric 不会复制对数据目录所做的更改。
 
->[!NOTE] 如果不需要 `config` 和 `data` 目录，则不必创建它们。
+>[!NOTE]
+> 如果不需要 `config` 和 `data` 目录，则不必创建它们。
 
 ## 打包现有的可执行文件
 打包来宾可执行文件时，可以选择使用 Visual Studio 项目模板，或者[手动创建应用程序包](#manually)。使用 Visual Studio 时，新的项目模板将为用户创建应用程序包结构和清单文件。
 
->[!NOTE] 将现有 Windows 可执行文件打包到服务中的最简单方法是使用 Visual Studio。
+>[!NOTE]
+> 将现有 Windows 可执行文件打包到服务中的最简单方法是使用 Visual Studio。
 
 ##<a name="using-visual-studio-to-package-an-existing-application"></a> 使用 Visual Studio 打包现有的可执行文件
 
@@ -103,7 +105,8 @@ Visual Studio 提供 Service Fabric 服务模板来帮助你将来宾可执行�
 
 Service Fabric 对应用程序根目录下的内容执行了 xcopy，因此除创建 code 和 settings 这两个顶级目录以外没有其他任何预定义结构可以使用。（如有需要可以选取其他名称。有关详细信息，请参阅下一节内容。）
 
->[!NOTE] 确保包含应用程序需要的所有文件和依赖项。Service Fabric 将复制群集中所有节点上的应用程序包的内容，将在群集中部署应用程序的服务。包中应该包含应用程序需要运行的所有代码。不要假定已安装依赖项。
+>[!NOTE]
+> 确保包含应用程序需要的所有文件和依赖项。Service Fabric 将复制群集中所有节点上的应用程序包的内容，将在群集中部署应用程序的服务。包中应该包含应用程序需要运行的所有代码。不要假定已安装依赖项。
 
 ### 编辑服务清单文件
 下一步是编辑服务清单文件以包含如下信息：

@@ -38,7 +38,8 @@ ms.author: larryfr
 
 ## <a id="curl"></a>使用 Curl 运行 MapReduce 作业
 
-> [!NOTE]使用 Curl 或者与 WebHCat 进行任何其他形式的 REST 通信时，必须提供 HDInsight 群集管理员用户名和密码，对请求进行身份验证。此外，用来向服务器发送请求的 URI 必须包括群集名称。
+> [!NOTE]
+>使用 Curl 或者与 WebHCat 进行任何其他形式的 REST 通信时，必须提供 HDInsight 群集管理员用户名和密码，对请求进行身份验证。此外，用来向服务器发送请求的 URI 必须包括群集名称。
 ><p>
 ><p> 对本部分中的所有命令，请将 **USERNAME** 替换为在群集上进行身份验证的用户名，并将 **PASSWORD** 替换为用户帐户的密码。将 **CLUSTERNAME** 替换为群集名称。
 ><p>
@@ -82,7 +83,8 @@ ms.author: larryfr
 
     如果作业已完成，则状态是“SUCCEEDED”。
 
-    > [!NOTE]此 Curl 请求返回具有作业相关信息的 JSON 文档；使用 jq 可以仅检索状态值。
+    > [!NOTE]
+    >此 Curl 请求返回具有作业相关信息的 JSON 文档；使用 jq 可以仅检索状态值。
 
 4. 在作业的状态更改为 **SUCCEEDED** 后，可以从 Azure Blob 存储中检索作业的结果。随查询一起传递的 `statusdir` 参数包含输出文件的位置；在这种情况下为 **wasbs:///example/curl**。此地址将作业的输出存储在 HDInsight 群集所用的默认存储容器的 **example/curl** 目录中。
 
@@ -94,7 +96,8 @@ ms.author: larryfr
 
     azure storage blob download <container-name> <blob-name> <destination-file>
 
-> [!NOTE]必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。有关详细信息，请参阅[如何将数据上载到 HDInsight](./hdinsight-upload-data.md)。
+> [!NOTE]
+>必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。有关详细信息，请参阅[如何将数据上载到 HDInsight](./hdinsight-upload-data.md)。
 
 ## <a id="summary"></a>摘要
 

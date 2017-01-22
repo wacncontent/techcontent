@@ -34,7 +34,8 @@ ms.author: carlrab
 
   ![VSSSDT 迁移示意图](./media/sql-database-cloud-migrate/03VSSSDTDiagram.png)
 
-  > [!NOTE] 如果需要进行仅有架构的迁移，则可以将架构直接从 Visual Studio 发布到 Azure SQL 数据库。当数据库架构所需的更改量超过了迁移向导单独可处理的数量时使用此方法。
+  > [!NOTE]
+  > 如果需要进行仅有架构的迁移，则可以将架构直接从 Visual Studio 发布到 Azure SQL 数据库。当数据库架构所需的更改量超过了迁移向导单独可处理的数量时使用此方法。
 
 ##<a name="detecting-compatibility-issues-using-sql-server-data-tools-for-visual-studio"></a> 使用 SQL Server Data Tools for Visual Studio 检测兼容性问题
 

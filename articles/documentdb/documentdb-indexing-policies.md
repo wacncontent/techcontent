@@ -48,7 +48,8 @@ ms.author: arramac
 
     await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), collection);   
 
->[!NOTE] REST API 2015-06-03 版本更改了索引策略的 JSON 架构，以支持针对字符串的范围索引。.NET SDK 1.2.0 和 Java、Python 和 Node.js SDK 1.1.0 支持新策略架构。旧 SDK 使用 REST API 2015-04-08 版本，支持旧的索引策略架构。
+>[!NOTE]
+> REST API 2015-06-03 版本更改了索引策略的 JSON 架构，以支持针对字符串的范围索引。.NET SDK 1.2.0 和 Java、Python 和 Node.js SDK 1.1.0 支持新策略架构。旧 SDK 使用 REST API 2015-04-08 版本，支持旧的索引策略架构。
 >
 >默认情况下，DocumentDB 总是使用哈希索引对文档中的所有字符串属性执行索引，并使用范围索引对数值属性执行索引。
 
@@ -61,7 +62,8 @@ DocumentDB 支持三种索引模式，可通过索引策略对 DocumentDB 集合
 
 **无**︰索引模式标记为“无”的集合没有与之关联的索引。如果 DocumentDB 用作键值存储，并且只通过其 ID 属性访问文档，则通常使用该模式。
 
->[!NOTE] 将索引策略配置为“无”时，删除任何现有索引会产生不良影响。如果你的访问模式只需要 ID 和/或“自助链接”，请使用此选项。
+>[!NOTE]
+> 将索引策略配置为“无”时，删除任何现有索引会产生不良影响。如果你的访问模式只需要 ID 和/或“自助链接”，请使用此选项。
 
 下面的示例演示了如何使用 .NET SDK 借助针对所有文档插入的一致自动索引创建 DocumentDB 集合。
 
@@ -195,7 +197,8 @@ DocumentDB 支持点、多边形和 LineString 的自动索引。
 
     await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), rangeDefault);   
 
-> [!NOTE] 当查询使用 Order By，但针对最大精度的查询路径没有范围索引时，DocumentDB 将返回错误。
+> [!NOTE]
+> 当查询使用 Order By，但针对最大精度的查询路径没有范围索引时，DocumentDB 将返回错误。
 
 同样，可以从索引中完全排除路径。下面的示例演示了如何使用“*”通配符从索引中排除文档的整个部分（也称为子树）。
 
@@ -288,7 +291,8 @@ DocumentDB 允许你动态更改集合的索引策略。更改 DocumentDB 集合
 - 手动选择要编制索引的属性，并随着时间的推移进行更改
 - 调整索引精度，以提高查询性能或减少占用的存储
 
->[!NOTE] 若要使用 ReplaceDocumentCollectionAsync 修改索引策略，要求安装不低于 1.3.0 版本的 .NET SDK。
+>[!NOTE]
+> 若要使用 ReplaceDocumentCollectionAsync 修改索引策略，要求安装不低于 1.3.0 版本的 .NET SDK。
 >
 > 要成功完成索引转换，必须确保集合有足够的可用存储空间。如果集合达到其存储配额，将暂停索引转换。获得可用的存储空间后（例如删除某些文档），索引转换将立即自动恢复。
 

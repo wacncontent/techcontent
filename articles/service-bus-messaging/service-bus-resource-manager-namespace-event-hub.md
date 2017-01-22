@@ -18,7 +18,8 @@ wacn.date: 08/15/2016
 
 有关创建模板的详细信息，请参阅[创作 Azure Resource Manager 模板][]。
 
->[!NOTE] 以下 Azure Resource Manager 模板可供下载和部署。
+>[!NOTE]
+> 以下 Azure Resource Manager 模板可供下载和部署。
 >
 >-    [创建包含队列和授权规则的服务总线命名空间](./service-bus-resource-manager-namespace-auth-rule.md)
 >-    [创建包含队列的服务总线命名空间](./service-bus-resource-manager-namespace-queue.md)

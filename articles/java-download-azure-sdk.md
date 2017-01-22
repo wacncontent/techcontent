@@ -41,7 +41,8 @@ wacn.date: 12/30/2016
 ### 步骤 2 - 使用必要的依赖项配置 Maven 设置
 将项目配置为使用 Maven 生成之后，可以使用类似于以下示例的语法，将必要的依赖项添加到 pom.xml 文件中。请注意，你无需添加以下示例中所列的每个依赖项，而只需添加项目所需的特定依赖项。
 
-> [!NOTE] 在以下示例中的每个 `<version>` 元素中，将此示例中的“n.n.n”占位符替换为有效版本号，可从 [Maven 上的 Azure 库存储库]获取此版本号。
+> [!NOTE]
+> 在以下示例中的每个 `<version>` 元素中，将此示例中的“n.n.n”占位符替换为有效版本号，可从 [Maven 上的 Azure 库存储库]获取此版本号。
 
     <dependency>
         <groupId>com.microsoft.azure</groupId>

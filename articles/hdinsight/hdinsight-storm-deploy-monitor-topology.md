@@ -42,7 +42,8 @@ HDInsight 工具中的 Storm 仪表板和 Storm 功能依赖于 Storm REST API�
   * Visual Studio 2013 [Update 4](http://www.microsoft.com/download/details.aspx?id=44921) 或 [Visual Studio 2013 Community](http://download.microsoft.com/download/7/1/B/71BA74D8-B9A0-4E6C-9159-A8335D54437E/vs_community.exe)
   * [Visual Studio 2015](https://www.visualstudio.com/downloads/)
 
-  > [!NOTE] 适用于 Visual Studio 的 HDInsight 工具目前只支持 Storm on HDInsight 群集版本 3.2。
+  > [!NOTE]
+  > 适用于 Visual Studio 的 HDInsight 工具目前只支持 Storm on HDInsight 群集版本 3.2。
 
 ## Storm 仪表板
 

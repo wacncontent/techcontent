@@ -24,7 +24,8 @@ ms.author: iainfou
 
 如果无法连接到 Windows 虚拟机 (VM)，可以重置本地管理员密码或重置远程桌面服务配置。你可以使用 Azure 门户预览或 Azure PowerShell 中的 VM 访问扩展重置密码。如果使用 PowerShell，请确保在工作计算机上安装最新的 PowerShell 模块，并登录到 Azure 订阅。有关详细步骤，请阅读 [How to install and configure Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)（如何安装和配置 Azure PowerShell）。
 
-> [!TIP] 可以使用 `Import-Module Azure, AzureRM; Get-Module Azure, AzureRM | Format-Table Name, Version` 检查安装的 PowerShell 版本
+> [!TIP]
+> 可以使用 `Import-Module Azure, AzureRM; Get-Module Azure, AzureRM | Format-Table Name, Version` 检查安装的 PowerShell 版本
 
 ## Resource Manager 部署模型中的 Windows VM
 
@@ -70,7 +71,8 @@ ms.author: iainfou
     Set-AzureRmVMAccessExtension -ResourceGroupName "myRG" -VMName "myVM" `
         -Name "myVMAccess" -Location ChinaNorth -typeHandlerVersion "2.0
 
-> [!TIP] 这两个命令都会将新命名的 VM 访问代理添加到虚拟机。在任何时候，一个 VM 只能拥有一个 VM 访问代理。若要成功设置 VM 访问代理属性，使用 `Remove-AzureRmVMAccessExtension` 或 `Remove-AzureRmVMExtension` 删除之前设置的访问代理。从 Azure PowerShell 1.2.2 版开始，如果将 `Set-AzureRmVMExtension` 与 `-ForceRerun` 选项结合使用，则无需执行此步骤。使用 `-ForceRerun` 时，请确保使用与前述命令设置的 VM 访问代理相同的名称。
+> [!TIP]
+> 这两个命令都会将新命名的 VM 访问代理添加到虚拟机。在任何时候，一个 VM 只能拥有一个 VM 访问代理。若要成功设置 VM 访问代理属性，使用 `Remove-AzureRmVMAccessExtension` 或 `Remove-AzureRmVMExtension` 删除之前设置的访问代理。从 Azure PowerShell 1.2.2 版开始，如果将 `Set-AzureRmVMExtension` 与 `-ForceRerun` 选项结合使用，则无需执行此步骤。使用 `-ForceRerun` 时，请确保使用与前述命令设置的 VM 访问代理相同的名称。
 
 如果仍无法远程连接到虚拟机，请参阅 [Troubleshoot Remote Desktop connections to a Windows-based Azure virtual machine](./virtual-machines-windows-troubleshoot-rdp-connection.md)（对与基于 Windows 的 Azure 虚拟机的远程桌面连接进行故障排除），了解更多尝试步骤。
 

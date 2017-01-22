@@ -70,7 +70,8 @@ IoT 中心将设备孪生公开为名为**设备**的文档集合。因此，以
 
         SELECT * FROM devices
 
-> [!NOTE] [Azure IoT SDKs][lnk-hub-sdks] 支持将大量结果分页：
+> [!NOTE]
+> [Azure IoT SDKs][lnk-hub-sdks] 支持将大量结果分页：
 
 IoT 中心允许使用任意条件检索设备孪生筛选结果。例如，
 

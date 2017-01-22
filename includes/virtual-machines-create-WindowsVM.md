@@ -20,12 +20,14 @@
 
     - 对于“区域/地缘组/虚拟网络”，请使用适合你所在位置的区域。您也可以选择指定一个虚拟网络。
 
-    >[!NOTE] 如果你希望虚拟机使用虚拟网络，则**必须**在创建虚拟机时指定虚拟网络。创建虚拟机后，不能将它加入虚拟网络。有关详细信息，请参阅 [Azure 虚拟网络概述](../articles/virtual-network/virtual-networks-overview.md)。
+    >[!NOTE]
+    > 如果你希望虚拟机使用虚拟网络，则**必须**在创建虚拟机时指定虚拟网络。创建虚拟机后，不能将它加入虚拟网络。有关详细信息，请参阅 [Azure 虚拟网络概述](../articles/virtual-network/virtual-networks-overview.md)。
     > <p>有关配置终结点的详细信息，请参阅[如何设置虚拟机的终结点](../articles/virtual-machines/virtual-machines-windows-classic-setup-endpoints.md)。
 
 7. 第四个配置屏幕可让你安装 VM 代理，以及配置某些可用的扩展。
 
-    >[!NOTE] VM 代理为你提供安装扩展的环境，可帮助你与虚拟机交互或管理虚拟机。有关详细信息，请参阅[关于 VM 代理和扩展](../articles/virtual-machines/virtual-machines-windows-classic-agents-and-extensions.md)。
+    >[!NOTE]
+    > VM 代理为你提供安装扩展的环境，可帮助你与虚拟机交互或管理虚拟机。有关详细信息，请参阅[关于 VM 代理和扩展](../articles/virtual-machines/virtual-machines-windows-classic-agents-and-extensions.md)。
 
 8. 创建虚拟机之后，经典管理门户将在“虚拟机”下列出新虚拟机。此外，还会创建相应的云服务和存储帐户，并将其列在这些部分中。虚拟机和云服务都会自动启动，其状态将显示为“正在运行”。
 

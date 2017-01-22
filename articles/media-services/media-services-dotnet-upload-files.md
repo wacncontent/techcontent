@@ -27,7 +27,8 @@ ms.author: juliako
 
 资产中的文件称为**资产文件**。**AssetFile** 实例和实际媒体文件是两个不同的对象。AssetFile 实例包含有关媒体文件的元数据，而媒体文件包含实际媒体内容。
 
->[!NOTE]选择资产文件名时需考虑下列事项：
+>[!NOTE]
+>选择资产文件名时需考虑下列事项：
 >
 >- 构建流内容的 URL 时，媒体服务会使用 IAssetFile.Name 属性的值（如 http://{AMSAccount}.origin.mediaservices.chinacloudapi.cn/{GUID}/{IAssetFile.Name}/streamingParameters.）。出于此原因，不允许使用百分号编码。**Name** 属性的值不能含有任何以下[百分号编码保留字符](http://en.wikipedia.org/wiki/Percent-encoding#Percent-encoding_reserved_characters)：!*'();:@&=+$,/?%#"。此外，文件扩展名中只能含有一个“.”。
 >
@@ -111,7 +112,8 @@ ms.author: juliako
 
 - 	使用 **UploadAsync** 方法将文件上传到媒体服务中。
 
->[!NOTE] 使用 UploadAsync 方法可确保调用不会阻塞并且文件并行上传。
+>[!NOTE]
+> 使用 UploadAsync 方法可确保调用不会阻塞并且文件并行上传。
 
         static public IAsset CreateAssetAndUploadMultipleFiles(AssetCreationOptions assetCreationOptions, string folderPath)
         {

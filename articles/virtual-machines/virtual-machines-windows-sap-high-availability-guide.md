@@ -468,7 +468,8 @@ ms.author: goraco
 - [SAP NetWeaver on Windows virtual machines (VMs) - DBMS Deployment Guide][dbms-guide]（Windows 虚拟机 (VM) 上的 SAP NetWeaver - DBMS 部署指南）
 - [Windows 虚拟机 (VM) 上的 SAP NetWeaver - 高可用性指南][sap-ha-guide]（本指南）
 
-> [!NOTE] 在可能的情况下，请访问所述《SAP 安装指南》的链接（请参阅 [SAP Installation Guides][sap-installation-guides]（SAP 安装指南））。在满足先决条件和安装过程中，始终应该仔细阅读《SAP NetWeaver Installation Guides》（SAP NetWeaver 安装指南），因为本文档只包括了有关 Azure 虚拟机中安装的基于 SAP NetWeaver 的系统的具体任务。
+> [!NOTE]
+> 在可能的情况下，请访问所述《SAP 安装指南》的链接（请参阅 [SAP Installation Guides][sap-installation-guides]（SAP 安装指南））。在满足先决条件和安装过程中，始终应该仔细阅读《SAP NetWeaver Installation Guides》（SAP NetWeaver 安装指南），因为本文档只包括了有关 Azure 虚拟机中安装的基于 SAP NetWeaver 的系统的具体任务。
 
 以下 SAP 说明与 Azure 上的 SAP 主题相关：
 
@@ -484,7 +485,8 @@ ms.author: goraco
 
 ##  <a name="42156640c6-01cf-45a9-b225-4baa678b24f1"></a>Azure Resource Manager 与经典部署模型之间的 SAP HA 差异 
 
-> [!NOTE] 经典部署模型也称为 Azure 服务管理 (ASM) 模型。
+> [!NOTE]
+> 经典部署模型也称为 Azure 服务管理 (ASM) 模型。
 
 ### <a name="f76af273-1993-4d83-b12d-65deeae23686"></a>资源组
 资源组是一个新概念，包含具有相同生命周期的所有资源（例如，它们是同时创建和删除的）。有关资源组的详细信息，请阅读此文。
@@ -497,7 +499,8 @@ ms.author: goraco
 
 如果仍要使用旧的 Azure 经典模型，需要遵循 [SAP NetWeaver on Azure - Clustering SAP ASCS/SCS Instances using Windows Server Failover Cluster on Azure with SIOS DataKeeper](http://go.microsoft.com/fwlink/?LinkId=613056)（Azure 上的 SAP NetWeaver - 配合 SIOS DataKeeper 使用 Azure 上的 Windows Server 故障转移群集来组建 SAP ASCS/SCS 实例的群集）一文中所述的过程。
 
-> [!NOTE] 强烈建议使用新的 Azure Resource Manager 部署模型来进行 SAP 安装，因为与经典部署模型相比，它提供许多优势。
+> [!NOTE]
+> 强烈建议使用新的 Azure Resource Manager 部署模型来进行 SAP 安装，因为与经典部署模型相比，它提供许多优势。
 有关详细信息，请参阅[此文][virtual-machines-azure-resource-manager-architecture-benefits-arm]。   
 
 ## <a name="8ecf3ba0-67c0-4495-9c14-feec1a2255b7"></a>Windows Server 故障转移群集 (WSFC) 
@@ -532,7 +535,8 @@ _**图 1：**针对 Azure 上的 SAP ASCS/SCS 建议使用的 Windows Server 故
 
 上图显示了包含两个节点的共享存储群集。在本地环境中的共享存储群集中，有一个该群集内所有节点都看到的共享存储。锁定机制可防止数据损坏。此外，所有节点也可以检测到另一个节点是否发生故障。如果一个节点发生故障，剩余的节点将获取存储资源的所有权并确保服务的可用性。
 
-> [!NOTE] 就某些 DBMS（例如 SQL Server）而言，实现高可用性不一定需要用到共享磁盘。SQL Server AlwaysOn 将 DBMS 数据和日志从一个群集节点的本地磁盘复制到另一个群集节点的本地磁盘。因此，Windows 群集配置并不需要用到共享磁盘。
+> [!NOTE]
+> 就某些 DBMS（例如 SQL Server）而言，实现高可用性不一定需要用到共享磁盘。SQL Server AlwaysOn 将 DBMS 数据和日志从一个群集节点的本地磁盘复制到另一个群集节点的本地磁盘。因此，Windows 群集配置并不需要用到共享磁盘。
 
 ### <a name="ff7a9a06-2bc5-4b20-860a-46cdb44669cd"></a>网络/名称解析
 
@@ -570,7 +574,8 @@ _**图 2：**Azure 中没有共享磁盘的 Windows Server 故障转移群集配
 
 _**图 3：**Azure 中使用 SIOS DataKeeper 的 Windows Server 故障转移群集配置架构_
 
-> [!NOTE] 就某些 DBMS（例如 SQL Server）而言，实现高可用性不一定需要用到共享磁盘。SQL Server AlwaysOn 将 DBMS 数据和日志从一个群集节点的本地磁盘复制到另一个群集节点的本地磁盘。因此，Windows 群集配置并不需要用到共享磁盘。
+> [!NOTE]
+> 就某些 DBMS（例如 SQL Server）而言，实现高可用性不一定需要用到共享磁盘。SQL Server AlwaysOn 将 DBMS 数据和日志从一个群集节点的本地磁盘复制到另一个群集节点的本地磁盘。因此，Windows 群集配置并不需要用到共享磁盘。
 
 ### <a name="44641e18-a94e-431f-95ff-303ab65e0bcb"></a>Azure 上的名称解析
 
@@ -683,13 +688,15 @@ _**图 9：**指定 SAP HA Azure Resource Manager 参数_
 - **网络安全组**：`<SAPSystemSID>-nsg-ascs-0`  
 具有对 `<SAPSystemSID>-ascs-0` VM 开放的外部 RDP 端口
 
-> [!NOTE]  所有网卡和 Azure ILB 的 IP 地址一开始都创建为**动态**地址。必须如本文稍后所述，将它们更改为**静态** IP 地址。
+> [!NOTE]
+>  所有网卡和 Azure ILB 的 IP 地址一开始都创建为**动态**地址。必须如本文稍后所述，将它们更改为**静态** IP 地址。
 
 ### <a name="c87a8d3f-b1dc-4d2f-b23c-da4b72977489"></a>部署具有企业网络连接（跨界）的 VM 供生产使用
 
 针对生产 SAP 系统，将使用 Azure 站点到站点 (VPN) 或 Azure ExpressRoute 部署具有[企业网络连接（跨界）][planning-guide-2.2]的 Azure VM。
 
-> [!NOTE]  在此情况下，必须事先创建并准备好 Azure VNET 和子网。
+> [!NOTE]
+>  在此情况下，必须事先创建并准备好 Azure VNET 和子网。
 
 在“NEWOREXISTINGSUBNET”字段中，选择“existing”。
 
@@ -719,13 +726,15 @@ _**图 9：**指定 SAP HA Azure Resource Manager 参数_
 
 SAP Azure Resource Manager 模板将自动创建 Azure VNET 和子网。
 
-> [!NOTE] 此外，需要在相同的 VNET 中至少为 AD/DNS 部署一个专用 VM。这些 VM 不是模板创建的。
+> [!NOTE]
+> 此外，需要在相同的 VNET 中至少为 AD/DNS 部署一个专用 VM。这些 VM 不是模板创建的。
 
 ### <a name="47d5300a-a830-41d4-83dd-1a0d1ffdbe6a"></a>Azure 虚拟网络
 
 在本例中，Azure VNET 的地址空间是 10.0.0.0/16。有一个名为 _**Subnet**_、地址范围为 10.0.0.0/24 的子网。所有 VM 和 ILB 都部署在此 VNET 中。
 
-> [!NOTE] 请不要对来宾内部的网络设置（例如 IP 地址、DNS 服务器、子网等）进行任何更改。所有网络设置都通过 Azure 完成，通过 DHCP 服务传播。
+> [!NOTE]
+> 请不要对来宾内部的网络设置（例如 IP 地址、DNS 服务器、子网等）进行任何更改。所有网络设置都通过 Azure 完成，通过 DHCP 服务传播。
 
 ### <a name="b22d7b3b-4343-40ff-a319-097e13f62f9e"></a>DNS IP 地址
 
@@ -741,7 +750,8 @@ SAP Azure Resource Manager 模板将自动创建 Azure VNET 和子网。
 
 _**图 10：**配置 Azure VNET 的 DNS 服务器_
 
-> [!NOTE] 如果更改了 DNS 服务器的 IP 地址，则需要重新启动 Azure VM，才能应用更改并传播新的 DNS 服务器。
+> [!NOTE]
+> 如果更改了 DNS 服务器的 IP 地址，则需要重新启动 Azure VM，才能应用更改并传播新的 DNS 服务器。
 在本例中，已在以下 Windows VM 上安装并配置 DNS 服务
 
 | VM 角色 | VM 主机名 | 网卡名称 | 静态 IP 地址  
@@ -773,7 +783,8 @@ _**图 10：**配置 Azure VNET 的 DNS 服务器_
 
 将字段“分配”从“动态”更改为“静态”，然后输入所需的 **IP 地址**。
 
-> [!NOTE] 如果更改了网卡的 IP 地址，则需要重新启动 Azure VM 才能应用更改。
+> [!NOTE]
+> 如果更改了网卡的 IP 地址，则需要重新启动 Azure VM 才能应用更改。
 
 ![图 11：为每个 VM 的网卡配置静态 IP 地址][sap-ha-guide-figure-3002]  
 
@@ -1011,7 +1022,8 @@ _**图 27：**同样请忽略有关磁盘仲裁的警告_
 
 在本文用于演示的配置中，将在 Azure 中运行的名为 _**domcontr-0**_ 的 AD/DNS 服务器上配置文件共享见证。由于已配置了与 Azure 的 VPN 连接（通过站点到站点或 ExpressRoute），而 AD/DNS 驻留在本地环境中，因此它不适合用于运行文件共享见证。
 
-> [!NOTE] 如果 AD/DNS 只在本地环境中运行，请不要在本地环境中运行的 AD/DNS Windows OS 上配置文件共享见证，因为在 Azure 上运行的群集节点与本地环境中的 AD/DNS 之间，网络延迟可能太大而造成连接问题。请务必在运行位置靠近群集节点的 Azure Windows VM 上配置文件共享见证。
+> [!NOTE]
+> 如果 AD/DNS 只在本地环境中运行，请不要在本地环境中运行的 AD/DNS Windows OS 上配置文件共享见证，因为在 Azure 上运行的群集节点与本地环境中的 AD/DNS 之间，网络延迟可能太大而造成连接问题。请务必在运行位置靠近群集节点的 Azure Windows VM 上配置文件共享见证。
 
 仲裁驱动器至少需要 1024 MB 的可用空间。建议保留 2048 MB 空间
 
@@ -1101,7 +1113,8 @@ _**图 38：**通过“添加角色和功能向导”安装 .Net Framework 3.5 �
 
 在安装 SIOS 软件之前，必须先创建域用户 _**DataKeeperSvc**_。
 
-> [!NOTE] 请将此 _**DataKeeperSvc**_ 用户同时添加到两个群集节点上的“本地管理员”组中。
+> [!NOTE]
+> 请将此 _**DataKeeperSvc**_ 用户同时添加到两个群集节点上的“本地管理员”组中。
 
 在两个群集节点上安装 SIOS 软件
 
@@ -1220,7 +1233,8 @@ SAP NetWeaver ABAP 系统、Java 系统和 ABAP+Java 系统的安装过程几乎
 
 这也意味着，在 Azure 上，一个 Windows Server 故障转移群集中只能运行一个 SAP 故障转移群集角色，例如，对于 ABAP 系统而言，只能运行一个 ASCS 实例；对于 Java 系统而言，只能运行一个 SCS 实例；对于 ABAP+Java 而言，只能运行一个 ASCS 和一个 SCS 实例。
 
-> [!NOTE] 《SAP 安装指南》（请参阅 [SAP Installation Guides][sap-installation-guides]（SAP 安装指南））中所述的多 SID 群集目前在 Azure 中无法运行。
+> [!NOTE]
+> 《SAP 安装指南》（请参阅 [SAP Installation Guides][sap-installation-guides]（SAP 安装指南））中所述的多 SID 群集目前在 Azure 中无法运行。
 
 ![图 54：定义 SAP ASCS/SCS 群集虚拟名称和 TCP/IP 地址的 DNS 项][sap-ha-guide-figure-3046]  
 

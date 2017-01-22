@@ -32,7 +32,8 @@ ms.author: marsma
 - **检查帐户配额**并采取试错猜测，确定哪些 Batch 帐户存在哪些限制。在启动作业、创建池或添加计算节点之前检查帐户配额可以主动调整创建计算资源的位置或时机。可以先确定哪些帐户需要增加配额，然后再为这些帐户分配其他资源。
 - 通过在同一应用程序中使用批处理管理 .NET、[Azure Active Directory][aad_about] 和 [Azure资源管理器][resman_overview]，用户可以**结合其他 Azure 服务的功能**获得全功能管理体验。使用这些功能及其 API 可以提供顺畅的身份验证体验、创建和删除资源组以及上述功能，以获取端到端管理解决方案。
 
-> [!NOTE] 尽管本文着重介绍以编程方式管理 Batch 帐户、密钥和配额，但也可使用 [Azure 门户预览][azure_portal]执行其中的许多活动。有关详细信息，请参阅[使用 Azure 门户预览创建 Azure 批处理帐户](./batch-account-create-portal.md)和 [Azure 批处理服务的配额和限制](./batch-quota-limit.md)。
+> [!NOTE]
+> 尽管本文着重介绍以编程方式管理 Batch 帐户、密钥和配额，但也可使用 [Azure 门户预览][azure_portal]执行其中的许多活动。有关详细信息，请参阅[使用 Azure 门户预览创建 Azure 批处理帐户](./batch-account-create-portal.md)和 [Azure 批处理服务的配额和限制](./batch-quota-limit.md)。
 
 ## 创建和删除 Batch 帐户
 如上所述，批处理管理 API 的主要功能之一就是在 Azure 区域中创建和删除批处理帐户。为此，请使用 [BatchManagementClient.Account.CreateAsync][net_create] 和 [DeleteAsync][net_delete]，或其同步等效命令。
@@ -54,7 +55,8 @@ csharp
     // Delete the account
     await batchManagementClient.Account.DeleteAsync("MyResourceGroup", account.Name);
 
-> [!NOTE] 使用 Batch Management .NET 库及其 BatchManagementClient 类的应用程序需有服务管理员或共同管理员访问权限才能使用拥有要管理的 Batch 帐户的订阅。有关详细信息，请参阅 [Azure Active Directory](#azure-active-directory) 部分和 [AccountManagement][acct_mgmt_sample] 代码示例。
+> [!NOTE]
+> 使用 Batch Management .NET 库及其 BatchManagementClient 类的应用程序需有服务管理员或共同管理员访问权限才能使用拥有要管理的 Batch 帐户的订阅。有关详细信息，请参阅 [Azure Active Directory](#azure-active-directory) 部分和 [AccountManagement][acct_mgmt_sample] 代码示例。
 
 ## 检索和重新生成帐户密钥
 使用 [ListKeysAsync][net_list_keys] 从订阅中的任何 Batch 帐户获取主要和辅助帐户密钥。可以使用 [RegenerateKeyAsync][net_regenerate_keys] 重新生成这些密钥。
@@ -78,7 +80,8 @@ csharp
                 KeyName = AccountKeyType.Primary
                 });
 
-> [!TIP] 可以为管理应用程序创建简化的连接工作流。首先，获取想要使用 [ListKeysAsync][net_list_keys] 管理的 Batch 帐户的帐户密钥。然后在初始化 Batch .NET 库的 [BatchSharedKeyCredentials][net_sharedkeycred] 类（初始化 [BatchClient][net_batch_client] 时使用）时使用此密钥。
+> [!TIP]
+> 可以为管理应用程序创建简化的连接工作流。首先，获取想要使用 [ListKeysAsync][net_list_keys] 管理的 Batch 帐户的帐户密钥。然后在初始化 Batch .NET 库的 [BatchSharedKeyCredentials][net_sharedkeycred] 类（初始化 [BatchClient][net_batch_client] 时使用）时使用此密钥。
 
 ## 检查 Azure 订阅和 Batch 帐户配额
 Azure 订阅和类似于 Batch 的各个 Azure 服务均有默认配额，用于限制其中特定实体的数目。有关 Azure 订阅的默认配额，请参阅 [Azure 订阅和服务限制、配额与约束](../azure-subscription-service-limits.md)。有关 Batch 服务的默认配额，请参阅 [Azure Batch 服务的配额和限制](./batch-quota-limit.md)。使用批处理管理 .NET 库可以在应用程序中检查这些配额。这样，你就可以在添加帐户或计算资源（如池和计算节点）之前做出分配决策。
@@ -127,7 +130,8 @@ csharp
     Console.WriteLine("Pool quota: {0}", account.Properties.PoolQuota);
     Console.WriteLine("Active job and job schedule quota: {0}", account.Properties.ActiveJobAndJobScheduleQuota);
 
-> [!IMPORTANT] 尽管 Azure 订阅和服务有默认配额，但许多限制都可以通过在 [Azure 门户预览][azure_portal]中提出请求来提高。例如，可以参阅 [Azure Batch 服务的配额和限制](./batch-quota-limit.md)以获取有关提高 Batch 帐户配额的说明。
+> [!IMPORTANT]
+> 尽管 Azure 订阅和服务有默认配额，但许多限制都可以通过在 [Azure 门户预览][azure_portal]中提出请求来提高。例如，可以参阅 [Azure Batch 服务的配额和限制](./batch-quota-limit.md)以获取有关提高 Batch 帐户配额的说明。
 
 ## Batch Management .NET、Azure AD 和资源管理器
 使用批处理管理 .NET 库时，通常还使用 [Azure Active Directory][aad_about] (Azure AD) 和 [Azure资源管理器][resman_overview]。下面讨论的示例项目将在演示批处理管理 .NET API 的过程中同时使用 Azure Active Directory 和资源管理器。
@@ -149,7 +153,8 @@ Azure 本身使用 Azure AD 来对其客户、服务管理员和组织用户进�
 
 ![Azure 门户预览中的应用程序权限][2]  
 
-> [!TIP] 如果“Azure 服务管理 API”未出现在“对其他应用程序的权限”下，请单击“添加应用程序”，选择“Azure 服务管理 API”，然后单击复选标记按钮。然后，根据上面的指定委托权限。
+> [!TIP]
+> 如果“Azure 服务管理 API”未出现在“对其他应用程序的权限”下，请单击“添加应用程序”，选择“Azure 服务管理 API”，然后单击复选标记按钮。然后，根据上面的指定委托权限。
 
 根据上述说明添加应用程序以后，请使用应用程序的重定向 URI 和客户端 ID 更新 [AccountManagment][acct_mgmt_sample] 示例项目中的 `Program.cs`。可在应用程序的“配置”选项卡中查找这些值：
 

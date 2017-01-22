@@ -27,7 +27,8 @@ ms.author: sdanie
 - [服务器端故障排除](#server-side-troubleshooting) - 此部分指导你如何确定和解决 Azure Redis 缓存服务器端引发的问题。
 - [StackExchange.Redis 超时异常](#stackexchangeredis-timeout-exceptions) - 此部分说明如何在使用 StackExchange.Redis 客户端时排查问题。
 
->[!NOTE] 本指南中的多个故障排除步骤包括了运行 Redis 命令和监视各种性能指标的说明。如需更多信息和说明，请参阅[其他信息](#additional-information)部分的文章。
+>[!NOTE]
+> 本指南中的多个故障排除步骤包括了运行 Redis 命令和监视各种性能指标的说明。如需更多信息和说明，请参阅[其他信息](#additional-information)部分的文章。
 
 ## <a name="client-side-troubleshooting"></a> 客户端故障排除
 
@@ -87,7 +88,8 @@ ms.author: sdanie
 
 通过 Azure 门户预览或关联的性能计数器监视系统范围的 CPU 使用率。请注意，不要监视 *进程* CPU，因为即使单个进程的 CPU 使用率低，系统的总体 CPU 使用率也可能高。注意与超时相对应的 CPU 使用率峰值。由于 CPU 使用率高，你可能还会在 `TimeoutException` 错误消息中看到 `in: XXX` 值高，如[流量激增](#burst-of-traffic)部分所述。
 
->[!NOTE] StackExchange.Redis 1.1.603 及更高版本在 `TimeoutException` 错误消息中包括了 `local-cpu` 指标。确保使用最新版本的 [StackExchange.Redis NuGet 包](https://www.nuget.org/packages/StackExchange.Redis/)。我们会不断对代码中的 Bug 进行修正，以便更好地应对超时情况。因此，请务必使用最新的版本。
+>[!NOTE]
+> StackExchange.Redis 1.1.603 及更高版本在 `TimeoutException` 错误消息中包括了 `local-cpu` 指标。确保使用最新版本的 [StackExchange.Redis NuGet 包](https://www.nuget.org/packages/StackExchange.Redis/)。我们会不断对代码中的 Bug 进行修正，以便更好地应对超时情况。因此，请务必使用最新的版本。
 
 #### 解决方法
 

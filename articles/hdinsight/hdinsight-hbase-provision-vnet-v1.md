@@ -80,7 +80,8 @@ DNS 服务器是可选的，但在某些情况下又是必需的。[在两个 Az
 
 **创建群集要使用的 Azure 存储帐户和 Blob 存储容器**
 
-> [!NOTE]HDInsight 群集使用 Azure Blob 存储来存储数据。有关详细信息，请参阅[在 HDInsight 中将 Azure Blob 存储与 Hadoop 配合使用](./hdinsight-hadoop-use-blob-storage.md)。你需要存储帐户和 Blob 存储容器。存储帐户位置必须与虚拟网络位置和群集位置匹配。
+> [!NOTE]
+>HDInsight 群集使用 Azure Blob 存储来存储数据。有关详细信息，请参阅[在 HDInsight 中将 Azure Blob 存储与 Hadoop 配合使用](./hdinsight-hadoop-use-blob-storage.md)。你需要存储帐户和 Blob 存储容器。存储帐户位置必须与虚拟网络位置和群集位置匹配。
 
 像其他 HDInsight 群集，HBase 群集要求将 Azure 存储帐户和 Blob 存储容器作为默认文件系统。存储帐户位置必须与虚拟网络位置和群集位置匹配。有关详细信息，请参阅[在 HDInsight 中将 Azure Blob 存储与 Hadoop 配合使用][hdinsight-storage]。在设置 HBase 群集时，你可以选择创建新群集或使用现有群集。此过程演示如何使用 Azure 经典管理门户创建存储帐户和 Blob 存储容器。
 
@@ -105,7 +106,8 @@ DNS 服务器是可选的，但在某些情况下又是必需的。[在两个 Az
 
 **通过使用 Azure 经典管理门户设置 HBase 群集**
 
-> [!NOTE]有关通过使用 Azure PowerShell 预配新 HBase 群集的信息，请参阅[使用 Azure PowerShell 预配 HBase 群集](#powershell)。
+> [!NOTE]
+>有关通过使用 Azure PowerShell 预配新 HBase 群集的信息，请参阅[使用 Azure PowerShell 预配 HBase 群集](#powershell)。
 
 1. 登录到 [Azure 经典管理门户][azure-portal]。
 
@@ -115,7 +117,8 @@ DNS 服务器是可选的，但在某些情况下又是必需的。[在两个 Az
 
     ![提供 HBase 群集的详细信息][img-provision-cluster-page1]
 
-    > [!NOTE]对于 HBase 群集，Windows Server 是唯一可用的 OS 选项。
+    > [!NOTE]
+    >对于 HBase 群集，Windows Server 是唯一可用的 OS 选项。
 
 4. 在“配置群集”页上，输入或选择以下内容：
 
@@ -129,7 +132,8 @@ DNS 服务器是可选的，但在某些情况下又是必需的。[在两个 Az
     <tr><td>数据节点大小</td><td><p>为数据节点选择 VM 大小。</p></td></tr>
     <tr><td>Zookeeper 大小</td><td><p>为 Zookeeper 节点选择 VM 大小。</p></td></tr>
     </table>
-    >[!NOTE]根据所选的 VM，你的成本可能会有所不同。HDInsight 对群集节点使用所有标准层 VM。有关 VM 大小如何影响价格的信息，请参阅 <a href="https://www.azure.cn/pricing/details/hdinsight/" target="_blank">HDInsight 价格</a>。
+    >[!NOTE]
+    >根据所选的 VM，你的成本可能会有所不同。HDInsight 对群集节点使用所有标准层 VM。有关 VM 大小如何影响价格的信息，请参阅 <a href="https://www.azure.cn/pricing/details/hdinsight/" target="_blank">HDInsight 价格</a>。
 
     单击右侧按钮。
 
@@ -180,7 +184,8 @@ DNS 服务器是可选的，但在某些情况下又是必需的。[在两个 Az
 
     ![配置脚本操作以自定义 HDInsight HBase 群集][img-provision-cluster-page5]
 
-    > [!NOTE]此页可用于在安装过程中自定义群集。有关详细信息，请参阅[使用脚本操作自定义 HDInsight 群集](./hdinsight-hadoop-customize-cluster-v1.md)。
+    > [!NOTE]
+    >此页可用于在安装过程中自定义群集。有关详细信息，请参阅[使用脚本操作自定义 HDInsight 群集](./hdinsight-hadoop-customize-cluster-v1.md)。
 
 要开始处理新 HBase 群集，可以按照[开始在 HDInsight 中将 HBase 与 Hadoop 配合使用](./hdinsight-hbase-tutorial-get-started-v1.md)中的步骤操作。
 
@@ -300,7 +305,8 @@ DNS 服务器是可选的，但在某些情况下又是必需的。[在两个 Az
 
         这将返回 DNS 后缀。例如 **yourclustername.b4.internal.chinacloudapp.cn**。
 
-    > [!NOTE]你还可以使用远程桌面来连接到 HBase 群集（你将连接到头节点），并从命令提示符运行 **ipconfig** 来获取 DNS 后缀。有关启用远程桌面协议 (RDP) 并使用 RDP 连接到群集的说明，请参阅[使用 Azure 经典管理门户在 HDInsight 中管理 Hadoop 群集][hdinsight-admin-portal]。
+    > [!NOTE]
+    >你还可以使用远程桌面来连接到 HBase 群集（你将连接到头节点），并从命令提示符运行 **ipconfig** 来获取 DNS 后缀。有关启用远程桌面协议 (RDP) 并使用 RDP 连接到群集的说明，请参阅[使用 Azure 经典管理门户在 HDInsight 中管理 Hadoop 群集][hdinsight-admin-portal]。
     > <p>![hdinsight.hbase.dns.surffix][img-dns-surffix]
 
 <!--
@@ -327,7 +333,8 @@ DNS 服务器是可选的，但在某些情况下又是必需的。[在两个 Az
         <value>zookeeper0.<dns suffix>,zookeeper1.<dns suffix>,zookeeper2.<dns suffix></value>
     </property>
 
-> [!NOTE]有关 Azure 虚拟网络中的名称解析的详细信息，包括如何使用自己的 DNS 服务器，请参阅[名称解析 (DNS)](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md)。
+> [!NOTE]
+>有关 Azure 虚拟网络中的名称解析的详细信息，包括如何使用自己的 DNS 服务器，请参阅[名称解析 (DNS)](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md)。
 
 ## <a name="powershell"></a>通过使用 Azure PowerShell 设置 HBase 群集
 

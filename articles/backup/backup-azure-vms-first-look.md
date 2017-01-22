@@ -34,7 +34,8 @@ ms.author: markgal; jimpark
 
 ![VM 备份过程的高级视图](./media/backup-azure-vms-first-look/backupazurevm-classic.png)  
 
->[!NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。本教程适用于可在 Azure 经典管理门户中创建的 VM。Azure 备份服务支持基于资源管理器的 VM。
+>[!NOTE]
+> Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。本教程适用于可在 Azure 经典管理门户中创建的 VM。Azure 备份服务支持基于资源管理器的 VM。
 
 ## 步骤 1 - 为 VM 创建备份保管库
 
@@ -118,7 +119,8 @@ ms.author: markgal; jimpark
 
 8. 在“注册项”快捷菜单中，选择你要注册的虚拟机。
 
-    >[!TIP] 可以一次注册多个虚拟机。
+    >[!TIP]
+    > 可以一次注册多个虚拟机。
 
     为每一个选定的虚拟机创建一个作业。
 
@@ -164,7 +166,8 @@ Azure VM 代理必须安装在 Azure 虚拟机上，备份扩展才能运行。�
 
     ![使用新策略进行保护](./media/backup-azure-vms/policy-schedule.png)  
 
-    >[!NOTE] 备份策略包括计划备份的保留期方案。如果选择现有的备份策略，则不能修改下一步的保留期选项。
+    >[!NOTE]
+    > 备份策略包括计划备份的保留期方案。如果选择现有的备份策略，则不能修改下一步的保留期选项。
 
 6. 在“保留期”中，定义特定备份点的每日、每周、每月和每年范围。
 
@@ -199,7 +202,8 @@ Azure VM 代理必须安装在 Azure 虚拟机上，备份扩展才能运行。�
 
     ![已使用恢复点备份虚拟机](./media/backup-azure-vms/protect-backedupvm.png)  
 
-    >[!NOTE] 备份虚拟机是在本地完成的过程。你不能将一个区域的虚拟机备份到另一个区域的备份保管库。因此，对于每个需要备份 VM 的 Azure 区域，需要在该区域中至少创建一个备份保管库。
+    >[!NOTE]
+    > 备份虚拟机是在本地完成的过程。你不能将一个区域的虚拟机备份到另一个区域的备份保管库。因此，对于每个需要备份 VM 的 Azure 区域，需要在该区域中至少创建一个备份保管库。
 
 ## 后续步骤
 成功备份 VM 后，你可能需要执行几个相关的步骤。最合理的步骤是熟悉将数据还原到 VM 的操作。但是，有几个管理任务可帮助了解如何确保数据安全和最大限度地降低成本。

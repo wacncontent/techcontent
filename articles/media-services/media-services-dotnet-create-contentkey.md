@@ -31,7 +31,8 @@ ms.author: juliako
 
 加密的资产必须与 **ContentKey** 关联。本文介绍如何创建内容密钥。
 
->[!NOTE] 使用媒体服务 .NET SDK 创建新的 **StorageEncrypted** 资产时，会自动创建 **ContentKey** 并将其链接到资产。
+>[!NOTE]
+> 使用媒体服务 .NET SDK 创建新的 **StorageEncrypted** 资产时，会自动创建 **ContentKey** 并将其链接到资产。
 
 ##ContentKeyType
 

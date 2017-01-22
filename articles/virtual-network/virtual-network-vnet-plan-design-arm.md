@@ -53,7 +53,8 @@ ms.author: jdial
 
 VNet 和子网资源可帮助定义 Azure 中运行的工作负荷的安全边界。VNet 的特征包括一个地址空间（定义为 CIDR 块）的集合。
 
->[!NOTE] 网络管理员应熟悉 CIDR 表示法。如果你不熟悉 CIDR，请[了解它的详细信息](http://whatismyipaddress.com/cidr)。
+>[!NOTE]
+> 网络管理员应熟悉 CIDR 表示法。如果你不熟悉 CIDR，请[了解它的详细信息](http://whatismyipaddress.com/cidr)。
 
 VNet 包含以下属性。
 
@@ -93,7 +94,8 @@ VNet 包含以下属性。
 
 就虚拟网络而言，具有**网络参与者**角色的用户可以完全控制 Azure Resource Manager 虚拟网络资源。同样，具有**经典网络参与者**角色的用户可以完全控制经典虚拟网络资源。
 
->[!NOTE] 你还可以[创建自己的角色](../active-directory/role-based-access-control-configure.md)来分离管理需求。
+>[!NOTE]
+> 你还可以[创建自己的角色](../active-directory/role-based-access-control-configure.md)来分离管理需求。
 
 ## 设计
 

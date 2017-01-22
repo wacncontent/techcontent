@@ -23,7 +23,8 @@ ms.author: byvinyal
 
 ##度量值保留策略
 
->[!NOTE] 应用度量值的保留策略根据粒度级的不同而异。
+>[!NOTE]
+> 应用度量值的保留策略根据粒度级的不同而异。
 
 - **分钟** 粒度级的度量值将保留 **24 小时**
 - **小时** 粒度级的度量值将保留 **7 天**
@@ -51,7 +52,8 @@ ms.author: byvinyal
 
 从[经典管理门户](https://manage.windowsazure.cn)中 Web 应用的“缩放”管理页可将 Web 应用配置为以“共享”或“标准” Web 应用模式运行。每个 Azure 订阅均有权访问为在“共享”模式中每个区域运行最多 100 个 Web 应用所提供的资源池。对于为此目的而向每个 Web 应用订阅提供的资源池可由同一地理区域中配置为在“共享”模式中运行的其他 Web 应用共享。由于共享这些资源是为了供其他 Web 应用使用，因此所有订阅对这些资源的使用是受限的。订阅使用这些资源存在限制，该限制以各 Web 应用“仪表板”管理页的使用率概述部分下列出的使用率配额形式表示。
 
->[!NOTE] 当 Web 应用配置为以“标准”模式运行时，会被分配专用资源，资源大小等同于 Azure 的[虚拟机](../virtual-machines/virtual-machines-windows-sizes.md)和[云服务](../cloud-services/cloud-services-sizes-specs.md)大小表中的“小型”（默认值）、“中型”或“大型”虚拟机大小。对于可用于在“标准”模式下运行 Web 应用的订阅，没有针对资源的限制。但是，每个区域可创建的“标准”模式 Web 应用的数量是 500。
+>[!NOTE]
+> 当 Web 应用配置为以“标准”模式运行时，会被分配专用资源，资源大小等同于 Azure 的[虚拟机](../virtual-machines/virtual-machines-windows-sizes.md)和[云服务](../cloud-services/cloud-services-sizes-specs.md)大小表中的“小型”（默认值）、“中型”或“大型”虚拟机大小。对于可用于在“标准”模式下运行 Web 应用的订阅，没有针对资源的限制。但是，每个区域可创建的“标准”模式 Web 应用的数量是 500。
 
 ### 如何：查看配置为共享模式的 Web 应用的使用率配额 ###
 若要确定 Web 应用对资源使用率配额的影响程度，请执行下列步骤：
@@ -97,7 +99,8 @@ ms.author: byvinyal
 
 有关 Azure 存储帐户的详细信息，请参阅[如何管理存储帐户](../storage/storage-create-storage-account.md)。
 
-> [!NOTE] 只有 .NET 应用程序支持到表或 Blob 存储中的应用程序日志记录。
+> [!NOTE]
+> 只有 .NET 应用程序支持到表或 Blob 存储中的应用程序日志记录。
 
 由于将应用程序日志记录到存储要求使用存储客户端来查看日志数据，所以在你计划使用了解如何从 Azure 表或 Blob 存储中直接读取和处理数据的服务或应用程序时，它是最有用的。将日志记录到文件系统会产生可使用 FTP 或其他工具下载到你本地计算机的文件，本节后面会有所说明。
 
@@ -105,7 +108,8 @@ ms.author: byvinyal
 
 也可以从 Azure PowerShell 中使用 **Set-AzureWebsite** cmdlet 来启用诊断。如果尚未安装 Azure PowerShell，或者尚未将其配置为使用 Azure 订阅，请参阅[如何使用 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
-> [!NOTE] 应用程序日志记录依赖于你的应用程序生成的日志信息。用于生成日志信息的方法以及信息格式是特定于编写你的应用程序所使用的语言的。有关使用应用程序日志记录的语言特定的信息，请参见以下文章：
+> [!NOTE]
+> 应用程序日志记录依赖于你的应用程序生成的日志信息。用于生成日志信息的方法以及信息格式是特定于编写你的应用程序所使用的语言的。有关使用应用程序日志记录的语言特定的信息，请参见以下文章：
 ><p> - **Node.js** - [如何在 Azure 网站中调试 Node.js 应用程序](./web-sites-nodejs-debug.md)
 ><p> 只有 .NET 应用程序支持到表或 Blob 存储中的应用程序日志记录。
 
@@ -127,7 +131,8 @@ ms.author: byvinyal
 
 为 Web 应用启用诊断后，请单击“配置”管理页底部的“保存”图标，以应用你设置的选项。
 
-> [!IMPORTANT] “详细错误消息”和“失败请求跟踪”会对 Web 应用提出诸多要求。建议在重现所排查的问题后关闭这些功能。
+> [!IMPORTANT]
+> “详细错误消息”和“失败请求跟踪”会对 Web 应用提出诸多要求。建议在重现所排查的问题后关闭这些功能。
 
 ### 高级配置 ###
 
@@ -166,7 +171,8 @@ ms.author: byvinyal
 
 1. 从“开始”屏幕或“开始”菜单，搜索 **Windows PowerShell**。右键单击“Windows PowerShell”项，并选择“以管理员身份运行”。
 
-    > [!NOTE] 如果未安装 **Azure PowerShell**，请参阅 [Azure PowerShell Cmdlet 入门](http://msdn.microsoft.com/zh-cn/library/azure/jj554332.aspx)以了解安装和配置信息。
+    > [!NOTE]
+    > 如果未安装 **Azure PowerShell**，请参阅 [Azure PowerShell Cmdlet 入门](http://msdn.microsoft.com/zh-cn/library/azure/jj554332.aspx)以了解安装和配置信息。
 
 2. 从 Azure PowerShell 提示符处，使用以下命令下载日志文件：
 
@@ -194,7 +200,8 @@ ms.author: byvinyal
 
 这会将日志信息显示给从其运行命令的命令提示符、PowerShell、bash 或终端会话。
 
-> [!NOTE] 如果未安装 **azure** 命令，请参阅[如何使用 Azure CLI](../virtual-machines-command-line-tools.md) 以了解安装和配置信息。
+> [!NOTE]
+> 如果未安装 **azure** 命令，请参阅[如何使用 Azure CLI](../virtual-machines-command-line-tools.md) 以了解安装和配置信息。
 
 ### 读取日志文件 ###
 

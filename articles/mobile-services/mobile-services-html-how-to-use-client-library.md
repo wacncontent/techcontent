@@ -46,7 +46,8 @@ ms.author: glenga
 
 必须将占位符 `AppUrl` 替换为移动服务的应用程序 URL，将 `AppKey` 替换为你从 [Azure 经典管理门户](http://manage.windowsazure.cn/)获取的应用程序密钥。
 
->[!IMPORTANT]应用程序密钥用于针对移动服务筛选出随机请求，将随应用程序一起分发。由于此密钥未加密，因此不能被认为是安全的。为确保安全访问你的移动服务数据，你必须改为在允许用户访问前对用户进行身份验证。有关详细信息，请参阅[如何：对用户进行身份验证](#authentication)。
+>[!IMPORTANT]
+>应用程序密钥用于针对移动服务筛选出随机请求，将随应用程序一起分发。由于此密钥未加密，因此不能被认为是安全的。为确保安全访问你的移动服务数据，你必须改为在允许用户访问前对用户进行身份验证。有关详细信息，请参阅[如何：对用户进行身份验证](#authentication)。
 
 ## <a name="querying"></a>如何从移动服务查询数据
 
@@ -163,7 +164,8 @@ ms.author: glenga
 
 以下代码演示了如何通过在查询中包含 `orderBy` 或 `orderByDescending` 函数来为数据排序。该代码将返回 `todoItemTable` 中的项，这些项已按 `text` 字段的升序排序。默认情况下，服务器只返回前 50 个元素。
 
-> [!NOTE]默认情况下，将使用服务器驱动的页大小来防止返回所有元素。这可以防止对大型数据集发出的默认请求对服务造成负面影响。 
+> [!NOTE]
+>默认情况下，将使用服务器驱动的页大小来防止返回所有元素。这可以防止对大型数据集发出的默认请求对服务造成负面影响。 
 你可以根据下一节中所述，通过调用 `take` 来增加返回的项数。`todoItemTable` 是对前面创建的移动服务表的引用。
 
     var ascendingSortedTable = todoItemTable.orderBy("text").read().done(function (results) {
@@ -255,7 +257,8 @@ ms.author: glenga
         }, handleError);
     }
 
->[!NOTE]在 `read` 函数中提供原始 OData 查询选项字符串时，不能在同一查询中使用查询生成器方法。在这种情况下，必须将整个查询编写为 OData 查询字符串。有关 OData 系统查询选项的详细信息，请参阅 [OData 系统查询选项参考]。
+>[!NOTE]
+>在 `read` 函数中提供原始 OData 查询选项字符串时，不能在同一查询中使用查询生成器方法。在这种情况下，必须将整个查询编写为 OData 查询字符串。有关 OData 系统查询选项的详细信息，请参阅 [OData 系统查询选项参考]。
 
 ## <a name="inserting"></a>如何在移动服务中插入数据
 
@@ -386,7 +389,8 @@ ms.author: glenga
 
 移动服务支持使用 Microsoft 帐户和 Azure Active Direcotry 对应用程序用户进行身份验证和授权。你可以在表中设置权限，以便将特定操作的访问权限限制给已经过身份验证的用户。你还可以在服务器脚本中使用已经过身份验证的用户的标识来实施授权规则。有关详细信息，请参阅 [身份验证入门] 教程。
 
->[!NOTE]在 PhoneGap 或 Cordova 应用程序中使用身份验证时，还必须向项目中添加以下插件：
+>[!NOTE]
+>在 PhoneGap 或 Cordova 应用程序中使用身份验证时，还必须向项目中添加以下插件：
 >
 >+ https://git-wip-us.apache.org/repos/asf/cordova-plugin-device.git
 >+ https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git
@@ -509,7 +513,8 @@ In some cases, the call to the login method can be avoided after the first time 
 
 如果你的应用程序是 PhoneGap 或 Apache Cordova HTML/JavaScript 应用程序，则你可以使用本机移动平台在设备上接收推送通知。[Azure 移动服务的 Apache Cordova 插件](https://github.com/Azure/azure-mobile-services-cordova)可让你向 Azure 通知中心注册推送通知。使用的具体通知服务取决于执行代码的本机设备平台。有关如何执行此操作的示例，请参阅[使用 Microsoft Azure 将通知推送到 Cordova 应用程序](https://github.com/Azure/mobile-services-samples/tree/master/CordovaNotificationsArticle)。
 
->[!NOTE]此插件目前仅支持 iOS 和 Android 设备。有关也包含 Windows 设备的解决方案，请参阅文章[使用通知中心集成将通知推送到 PhoneGap 应用程序](http://blogs.msdn.com/b/azuremobile/archive/2014/06/17/push-notifications-to-phonegap-apps-using-notification-hubs-integration.aspx)。
+>[!NOTE]
+>此插件目前仅支持 iOS 和 Android 设备。有关也包含 Windows 设备的解决方案，请参阅文章[使用通知中心集成将通知推送到 PhoneGap 应用程序](http://blogs.msdn.com/b/azuremobile/archive/2014/06/17/push-notifications-to-phonegap-apps-using-notification-hubs-integration.aspx)。
 
 ## <a name="errors"></a>如何：处理错误
 

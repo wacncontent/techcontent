@@ -59,7 +59,8 @@ ms.author: ganesr
 
 大型云中的每个较小云用于表示属于组织中不同部门的订阅。组织内的每个部门可以使用自己的订阅部署其服务，但可以共享单个 ExpressRoute 线路以连接回本地网络。单个部门（在此示例中为 IT 部门）可以拥有 ExpressRoute 线路。组织内的其他订阅可以使用 ExpressRoute 线路。
 
->[!NOTE] 将对 ExpressRoute 线路所有者收取专用线路的连接和带宽费用。所有虚拟网络共享相同的带宽。
+>[!NOTE]
+> 将对 ExpressRoute 线路所有者收取专用线路的连接和带宽费用。所有虚拟网络共享相同的带宽。
 
 ![跨订阅连接](./media/expressroute-howto-linkvnet-classic/cross-subscription.png)
 

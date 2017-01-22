@@ -29,7 +29,8 @@ wacn.date: 01/09/2017
 
 本文介绍如何配置不同的筛选方法。
 
-> [!IMPORTANT]Microsoft 不支持在正式记录的这些操作之外修改或操作 Azure AD Connect 同步。其中的任何操作都可能会导致 Azure AD Connect 同步出现不一致或不受支持状态，并由此导致 Microsoft 无法提供这种部署的技术支持。
+> [!IMPORTANT]
+>Microsoft 不支持在正式记录的这些操作之外修改或操作 Azure AD Connect 同步。其中的任何操作都可能会导致 Azure AD Connect 同步出现不一致或不受支持状态，并由此导致 Microsoft 无法提供这种部署的技术支持。
 
 ## 基础知识和重要说明
 在 Azure AD Connect 同步中，你可以随时启用筛选。如果你从目录同步的默认配置开始并在此后配置了筛选，则筛选出的对象不再同步到 Azure AD。由于这种变化，Azure AD 中前面已同步，但之后进行筛选的任何对象会在 Azure AD 中进行删除。

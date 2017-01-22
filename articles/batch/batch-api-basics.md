@@ -23,7 +23,8 @@ ms.author: marsma
 
 不管是在开发可发出直接 [REST API][batch_rest_api] 调用的分布式计算应用程序或服务，还是使用某个[批处理 SDK](./batch-technical-overview.md#batch-development-apis/)，都可以使用本文中介绍的多种资源和功能。
 
-> [!TIP] 有关 Batch 服务的更全面介绍，请参阅 [Basics of Azure Batch](./batch-technical-overview.md)（Azure Batch 基础知识）。
+> [!TIP]
+> 有关 Batch 服务的更全面介绍，请参阅 [Basics of Azure Batch](./batch-technical-overview.md)（Azure Batch 基础知识）。
 
 ## Batch 服务工作流
 几乎所有使用 Batch 服务处理并行工作负荷的应用程序和服务都使用以下典型高级工作流：
@@ -37,7 +38,8 @@ ms.author: marsma
 
 以下部分介绍可实现分布式计算方案的上述和其他批处理资源。
 
-> [!NOTE] 需要有[批处理帐户](./batch-account-create-portal.md)才能使用批处理服务。此外，几乎所有解决方案都使用 [Azure 存储][azure_storage]帐户存储和检索文件。Batch 目前仅支持**常规用途**存储帐户类型，如 [About Azure storage accounts](../storage/storage-create-storage-account.md)（关于 Azure 存储帐户）的 [Create a storage account](../storage/storage-create-storage-account.md#create-a-storage-account/)（创建存储帐户）中步骤 5 所述。
+> [!NOTE]
+> 需要有[批处理帐户](./batch-account-create-portal.md)才能使用批处理服务。此外，几乎所有解决方案都使用 [Azure 存储][azure_storage]帐户存储和检索文件。Batch 目前仅支持**常规用途**存储帐户类型，如 [About Azure storage accounts](../storage/storage-create-storage-account.md)（关于 Azure 存储帐户）的 [Create a storage account](../storage/storage-create-storage-account.md#create-a-storage-account/)（创建存储帐户）中步骤 5 所述。
 
 ## Batch 服务资源
 使用 Batch 服务的所有解决方案需要以下某些资源：帐户、计算节点、池、作业、任务。其他资源（如作业计划和应用程序包）都很有用，但为可选功能。
@@ -131,7 +133,8 @@ Azure Batch 池构建在核心 Azure 计算平台的顶层。这些池提供大�
 
     可以指定应在其中创建池计算节点的 Azure [虚拟网络 (VNet)](../virtual-network/virtual-networks-overview.md) 的 ID。有关详细信息，请参阅[池网络配置](#pool-network-configuration)部分。
 
-> [!IMPORTANT] 所有 Batch 帐户都有默认**配额**，用于限制 Batch 帐户中的**核心**（因此也包括计算节点）数目。可以在 [Quotas and limits for the Azure Batch service](./batch-quota-limit.md)（Azure Batch 服务的配额和限制）中找到默认配额以及如何[提高配额](./batch-quota-limit.md#increase-a-quota/)（例如 Batch 帐户中的核心数目上限）的说明。如果你有类似于“为什么我的池不能包含 X 个以上的节点？”的疑惑，则原因可能在于此核心配额。
+> [!IMPORTANT]
+> 所有 Batch 帐户都有默认**配额**，用于限制 Batch 帐户中的**核心**（因此也包括计算节点）数目。可以在 [Quotas and limits for the Azure Batch service](./batch-quota-limit.md)（Azure Batch 服务的配额和限制）中找到默认配额以及如何[提高配额](./batch-quota-limit.md#increase-a-quota/)（例如 Batch 帐户中的核心数目上限）的说明。如果你有类似于“为什么我的池不能包含 X 个以上的节点？”的疑惑，则原因可能在于此核心配额。
 
 ## 作业  <a name="job"></a>
 
@@ -197,7 +200,8 @@ Azure Batch 池构建在核心 Azure 计算平台的顶层。这些池提供大�
 
 但是，它还可能包含计算节点上运行的所有任务使用的引用数据。例如，启动任务的命令行可执行 `robocopy` 操作，将应用程序文件（已指定为资源文件并下载到节点）从启动任务的[工作目录](#files-and-directories)复制到[共享文件夹](#files-and-directories)，然后然后运行 MSI 或 `setup.exe`。
 
-> [!IMPORTANT] Batch 目前*仅*支持**常规用途**存储帐户类型，如 [About Azure storage accounts](../storage/storage-create-storage-account.md)（关于 Azure 存储帐户）的 [Create a storage account](../storage/storage-create-storage-account.md#create-a-storage-account/)（创建存储帐户）中步骤 5 所述。Batch 任务（包括标准任务、启动任务、作业准备任务和作业释放任务）*只能*指定位于**常规用途**存储帐户中的资源文件。
+> [!IMPORTANT]
+> Batch 目前*仅*支持**常规用途**存储帐户类型，如 [About Azure storage accounts](../storage/storage-create-storage-account.md)（关于 Azure 存储帐户）的 [Create a storage account](../storage/storage-create-storage-account.md#create-a-storage-account/)（创建存储帐户）中步骤 5 所述。Batch 任务（包括标准任务、启动任务、作业准备任务和作业释放任务）*只能*指定位于**常规用途**存储帐户中的资源文件。
 
 通常，Batch 服务需要等待启动任务完成，然后认为节点已准备好分配任务，但你可以配置这种行为。
 
@@ -274,7 +278,8 @@ Batch 服务在节点上公开文件系统的一部分作为*根目录*。任务
 
     `stdout.txt` 和 `stderr.txt`：在任务执行期间，会将这些文件写入任务文件夹。
 
->[!IMPORTANT] 从池中删除节点时，也会删除节点上存储的*所有*文件。
+>[!IMPORTANT]
+> 从池中删除节点时，也会删除节点上存储的*所有*文件。
 
 ## 应用程序包  <a name="application-packages"></a>
 
@@ -286,7 +291,8 @@ Batch 可以处理使用 Azure 存储将应用程序包存储及部署到计算�
 
 若要了解应用程序包功能的详细信息，请参阅 [Application deployment with Azure Batch application packages](./batch-application-packages.md)（使用 Azure Batch 应用程序包部署应用程序）。
 
->[!NOTE] 如果将池应用程序包添加到*现有*池，则必须重新启动其计算节点，应用程序包才会应用到节点。
+>[!NOTE]
+> 如果将池应用程序包添加到*现有*池，则必须重新启动其计算节点，应用程序包才会应用到节点。
 
 ## 池和计算节点生存期
 在设计 Azure Batch 解决方案时，必须做出有关如何及何时创建池，以及这些池中的计算节点可用性要保持多久的设计决策。
@@ -336,7 +342,8 @@ Batch 可以处理使用 Azure 存储将应用程序包存储及部署到计算�
 
 有关自动缩放应用程序的详细信息，请参阅[自动缩放 Azure Batch 池中的计算节点](./batch-automatic-scaling.md)。
 
-> [!TIP] 若要获得最大的计算资源使用率，请将节点的目标数目设置成在作业结束时降为零，但允许正在运行的任务完成。
+> [!TIP]
+> 若要获得最大的计算资源使用率，请将节点的目标数目设置成在作业结束时降为零，但允许正在运行的任务完成。
 
 ## 证书的安全性
 在加密或解密任务的敏感信息（例如 [Azure 存储帐户][azure_storage]的密钥）时，通常需要使用证书。为此，可以在节点上安装证书。加密的机密通过命令行参数或内嵌在某个任务资源中来传递给任务，已安装的证书可用于解密机密。
@@ -385,7 +392,8 @@ Batch 可以处理使用 Azure 存储将应用程序包存储及部署到计算�
 
 可通过远程登录到计算节点来进一步执行调试和故障排除。可以使用 Azure 门户预览下载 Windows 节点的远程桌面协议 (RDP) 文件，并获取 Linux 节点的安全外壳 (SSH) 连接信息。也可以使用 Batch API（例如，使用 [Batch .NET][net_rdpfile] 或 [Batch Python](./batch-linux-nodes.md#connect-to-linux-nodes/)）执行此操作。
 
->[!IMPORTANT] 若要通过 RDP 或 SSH 连接到某个节点，必须先在该节点上创建一个用户。为此，可以使用 Azure 门户预览通过 Batch REST API [将用户帐户添加到节点][rest_create_user]、在 Batch .NET 中调用 [ComputeNode.CreateComputeNodeUser][net_create_user] 方法，或在 Batch Python 模块中调用 [add\_user][py_add_user] 方法。
+>[!IMPORTANT]
+> 若要通过 RDP 或 SSH 连接到某个节点，必须先在该节点上创建一个用户。为此，可以使用 Azure 门户预览通过 Batch REST API [将用户帐户添加到节点][rest_create_user]、在 Batch .NET 中调用 [ComputeNode.CreateComputeNodeUser][net_create_user] 方法，或在 Batch Python 模块中调用 [add\_user][py_add_user] 方法。
 
 ### 对“不良的”计算节点进行故障排除
 在部分任务失败的情况下，Batch 客户端应用程序或服务可以检查失败任务的元数据来找出行为异常的节点。池中的每个节点都有一个唯一 ID，运行任务的节点包含在任务元数据中。识别出“有问题的节点”后，可对其执行多种操作：
@@ -403,7 +411,8 @@ Batch 可以处理使用 Azure 存储将应用程序包存储及部署到计算�
 
     这实际上是使节点“脱机”，以便不再收到任何分配的任务，但允许节点继续运行并保留在池中。这可让你执行进一步的调查以了解失败原因，却又会不丢失失败任务的数据，并且不让节点造成额外的任务失败。例如，可以禁用节点上的任务计划，然后从[远程登录](#connecting-to-compute-nodes)以检查节点的事件日志，或执行其他故障排除操作。完成调查后，可以启用任务计划（[REST][rest_online] | [.NET][net_online]）使节点重新联机，或者执行上述其他操作。
 
-> [!IMPORTANT] 可以使用本部分中所述的每项操作（重新启动、重置映像、删除和禁用任务计划），来指定当执行操作时要如何处理节点上当前正在运行的任务。例如，禁用具有 Batch .NET 客户端库的节点上的任务计划时，可以指定 [DisableComputeNodeSchedulingOption][net_offline_option] 枚举值，以指定是要**终止**运行中的任务、将任务**重新排队**以在其他节点上计划，还是允许执行中的任务先完成再执行操作 (**TaskCompletion**)。
+> [!IMPORTANT]
+> 可以使用本部分中所述的每项操作（重新启动、重置映像、删除和禁用任务计划），来指定当执行操作时要如何处理节点上当前正在运行的任务。例如，禁用具有 Batch .NET 客户端库的节点上的任务计划时，可以指定 [DisableComputeNodeSchedulingOption][net_offline_option] 枚举值，以指定是要**终止**运行中的任务、将任务**重新排队**以在其他节点上计划，还是允许执行中的任务先完成再执行操作 (**TaskCompletion**)。
 
 ## 后续步骤
 - 在 [Get started with the Azure Batch Library for .NET](./batch-dotnet-get-started.md)（适用于 .NET 的 Azure Batch 库入门）中逐步演练一个示例 Batch 应用程序。另请参阅该教程的 [Python 版本](./batch-python-tutorial.md)，其中介绍了如何在 Linux 计算节点上运行工作负荷。

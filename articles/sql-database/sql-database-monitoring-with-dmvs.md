@@ -71,7 +71,8 @@ SQL 数据库部分支持三种类别的动态管理视图：
         ON c.session_id = s.session_id
     WHERE c.session_id = @@SPID;
 
-> [!NOTE] 在执行 **sys.dm\_exec\_requests** 和 **sys.dm\_exec\_sessions **视图时，如果具有对数据库的 **VIEW DATABASE STATE** 权限，将会看到数据库上所有正在执行的会话；否则，只会看到当前会话。
+> [!NOTE]
+> 在执行 **sys.dm\_exec\_requests** 和 **sys.dm\_exec\_sessions **视图时，如果具有对数据库的 **VIEW DATABASE STATE** 权限，将会看到数据库上所有正在执行的会话；否则，只会看到当前会话。
 
 ## 监视查询性能
 

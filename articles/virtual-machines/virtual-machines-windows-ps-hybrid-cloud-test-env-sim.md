@@ -43,7 +43,8 @@ ms.author: josephd
 3. 创建 VNet 到 VNet 的 VPN 连接。
 4. 配置 DC2。
 
->[!NOTE] Azure 中的虚拟机和虚拟网关在运行时会持续产生货币成本。此成本是针对 MSDN 或付费订阅进行计费的。在实施时，Azure VPN 网关将由两台 Azure 虚拟机组成。为了将费用降到最低，请创建测试环境，并尽可能快地执行所需的测试和演示。
+>[!NOTE]
+> Azure 中的虚拟机和虚拟网关在运行时会持续产生货币成本。此成本是针对 MSDN 或付费订阅进行计费的。在实施时，Azure VPN 网关将由两台 Azure 虚拟机组成。为了将费用降到最低，请创建测试环境，并尽可能快地执行所需的测试和演示。
 
 ## 阶段 1：配置 TestLab 虚拟网络
 
@@ -51,7 +52,8 @@ ms.author: josephd
 
 接下来，请启动 Azure PowerShell 提示符。
 
-> [!NOTE] 以下命令集使用 Azure PowerShell 1.0 及更高版本。
+> [!NOTE]
+> 以下命令集使用 Azure PowerShell 1.0 及更高版本。
 
 登录到你的帐户。
 

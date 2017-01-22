@@ -41,7 +41,8 @@ ms.author: juliako
 
 若要开始针对媒体服务编程，你需要创建一个代表服务器上下文的 **CloudMediaContext** 实例。**CloudMediaContext** 包括对各种重要集合的引用，这些集合包括作业、资产、文件、访问策略和定位符。
 
->[!NOTE] **CloudMediaContext** 类不是线程安全的。每个线程或每组操作均应创建一个新 CloudMediaContext。
+>[!NOTE]
+> **CloudMediaContext** 类不是线程安全的。每个线程或每组操作均应创建一个新 CloudMediaContext。
 
 CloudMediaContext 具有五个构造函数重载。建议使用以 **MediaServicesCredentials** 为参数的构造函数。有关详细信息，请参阅下面的**重复使用访问控制服务令牌**。
 

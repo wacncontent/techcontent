@@ -20,7 +20,8 @@ ms.author: cynthn
 
 #捕获使用经典部署模型创建的 Azure Windows 虚拟机的映像。
 
-> [!IMPORTANT] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。有关 Resource Manager 模型的信息，请参阅[为 Azure 中运行的 Windows VM 创建副本](./virtual-machines-windows-vhd-copy.md)。
+> [!IMPORTANT]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。有关 Resource Manager 模型的信息，请参阅[为 Azure 中运行的 Windows VM 创建副本](./virtual-machines-windows-vhd-copy.md)。
 
 本文将演示如何捕获运行 Windows 的 Azure 虚拟机，可以将它用作映像来创建其他虚拟机。此映像包含操作系统磁盘和任何附加到虚拟机的数据磁盘。由于它不包括网络配置，因此在使用此映像创建其他虚拟机时，需要进行相关配置。
 
@@ -34,7 +35,8 @@ Azure 将映像存储在**“我的映像”**下。上传的任何映像都会�
 - [如何将数据磁盘附加到虚拟机](./virtual-machines-windows-classic-attach-disk.md)
 - 确保 Sysprep 支持服务器角色。有关详细信息，请参阅 [Sysprep Support for Server Roles](https://msdn.microsoft.com/windows/hardware/commercialize/manufacture/desktop/sysprep-support-for-server-roles)（Sysprep 对服务器角色的支持）。
 
-> [!WARNING] 此过程会在捕获原始虚拟机后将其删除。
+> [!WARNING]
+> 此过程会在捕获原始虚拟机后将其删除。
 
 在捕获 Azure 虚拟机映像之前，建议备份目标虚拟机。可以使用 Azure 备份来备份 Azure 虚拟机。有关详细信息，请参阅[备份 Azure 虚拟机](../backup/backup-azure-vms.md)。认证合作伙伴提供了其他解决方案。若要了解目前提供的内容，请搜索 Azure 库或应用商店。
 

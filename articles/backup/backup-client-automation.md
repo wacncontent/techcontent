@@ -57,7 +57,8 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 
 4. 指定要使用的存储冗余类型；可以使用[本地冗余存储 (LRS)](../storage/storage-redundancy.md#locally-redundant-storage/) 或[异地冗余存储 (GRS)](../storage/storage-redundancy.md#geo-redundant-storage/)。以下示例显示，testVault 的 -BackupStorageRedundancy 选项设置为 GeoRedundant。
 
-    > [!TIP] 许多 Azure 备份 cmdlet 要求使用恢复服务保管库对象作为输入。出于此原因，在变量中存储备份恢复服务保管库对象可提供方便。
+    > [!TIP]
+    > 许多 Azure 备份 cmdlet 要求使用恢复服务保管库对象作为输入。出于此原因，在变量中存储备份恢复服务保管库对象可提供方便。
 
         PS C:\> $vault1 = Get-AzureRmRecoveryServicesVault -Name "testVault"
         PS C:\> Set-AzureRmRecoveryServicesBackupProperties  -vault $vault1 -BackupStorageRedundancy GeoRedundant
@@ -128,7 +129,8 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     Region              :China North
     Machine registration succeeded.
 
-> [!IMPORTANT] 请勿使用相对路径来指定保管库凭据文件。必须提供绝对路径作为 cmdlet 的输入。
+> [!IMPORTANT]
+> 请勿使用相对路径来指定保管库凭据文件。必须提供绝对路径作为 cmdlet 的输入。
 
 ## 网络设置
 如果 Windows 计算机通过代理服务器连接到 Internet，则也可以向代理提供代理设置。此示例未使用代理服务器，因此我们要显式清除任何代理相关的信息。
@@ -149,7 +151,8 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     PS C:\> ConvertTo-SecureString -String "Complex!123_STRING" -AsPlainText -Force | Set-OBMachineSetting
     Server properties updated successfully
 
-> [!IMPORTANT] 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
+> [!IMPORTANT]
+> 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
 
 ## 备份文件和文件夹
 从 Windows Server 和客户端到 Azure 备份的所有备份由策略控制。策略由三个部分组成：

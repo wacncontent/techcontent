@@ -84,7 +84,8 @@ ms.author: cenkd;juliako
 
 有关如何传送内容和构建流式处理 URL 的详细信息，请参阅[传送内容概述](./media-services-deliver-content-overview.md)。
 
->[!NOTE]请注意，动态清单不会更改资产和该资产的默认清单。客户端可以选择请求包含或不包含筛选器的流。
+>[!NOTE]
+>请注意，动态清单不会更改资产和该资产的默认清单。客户端可以选择请求包含或不包含筛选器的流。
 
 ###<a id="filters"></a>筛选器 
 

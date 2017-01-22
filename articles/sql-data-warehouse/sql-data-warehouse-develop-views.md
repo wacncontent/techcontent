@@ -20,7 +20,8 @@ ms.author: jrj;barbkess;sonyama
 # SQL 数据仓库中的视图
 SQL 数据仓库中的视图特别有用。可以通过多种不同的方式使用这些视图以提升解决方案的质量。本文重点介绍几个示例，说明如何使用视图来丰富你的解决方案，以及需要注意的限制。
 
-> [!NOTE] 本文不讨论 `CREATE VIEW` 的语法。有关这方面的参考信息，请参阅 MSDN 上的 [CREATE VIEW][] 文章。
+> [!NOTE]
+> 本文不讨论 `CREATE VIEW` 的语法。有关这方面的参考信息，请参阅 MSDN 上的 [CREATE VIEW][] 文章。
 
 ## 体系结构摘要
 一种很常见的应用模式是在加载数据时，使用 CREATE TABLE AS SELECT (CTAS) 并后接对象重命名模式来重建表。

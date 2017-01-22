@@ -75,7 +75,8 @@ ms.author: glenga
 
 ## 如何列出订阅中的现有移动服务
 
-> [!NOTE]CLI 中与“list”和“script”相关的命令只适用于 JavaScript 后端。
+> [!NOTE]
+>CLI 中与“list”和“script”相关的命令只适用于 JavaScript 后端。
 
 以下命令将返回 Azure 订阅中所有移动服务的列表：
 
@@ -91,7 +92,8 @@ ms.author: glenga
 
 如果包含 `-a` 和 `-q` 参数的话，此命令还会删除该移动服务使用的 SQL 数据库和服务器且不显示任何提示。
 
-> [!NOTE]如果不随 <code>-a</code> 或 <code>-d</code> 一起指定 <code>-q</code> 参数，则执行将会暂停，并且系统会提示你针对 SQL 数据库选择删除选项。仅当没有其他任何服务使用该数据库或服务器时，才能使用 <code>-a</code> 参数；否则，请使用 <code>-d</code> 参数，以便只删除属于要删除的移动服务的数据。
+> [!NOTE]
+>如果不随 <code>-a</code> 或 <code>-d</code> 一起指定 <code>-q</code> 参数，则执行将会暂停，并且系统会提示你针对 SQL 数据库选择删除选项。仅当没有其他任何服务使用该数据库或服务器时，才能使用 <code>-a</code> 参数；否则，请使用 <code>-d</code> 参数，以便只删除属于要删除的移动服务的数据。
 
 ## 如何在移动服务中创建表
 

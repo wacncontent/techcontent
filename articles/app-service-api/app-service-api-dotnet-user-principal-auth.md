@@ -80,7 +80,8 @@ ms.author: rachelap
 
 如果想要遵循本教程，但又不想完成第一篇和第二篇教程，请执行以下步骤，其中说明了如何开始使用自动化过程部署示例应用程序。
 
->[!NOTE] 执行以下步骤可以建立学习起点，就好像已完成前两篇教程一样，但只有一点例外：Visual Studio 不知道每个项目已部署到哪些 Web 应用或 API 应用。这意味着，无法在本教程中获得有关如何部署到正确目标的确切说明。如果不太了解自行部署的步骤，最好遵循系列教程中的[第一篇教程](./app-service-api-dotnet-get-started.md)，而不要从此自动化部署过程开始。
+>[!NOTE]
+> 执行以下步骤可以建立学习起点，就好像已完成前两篇教程一样，但只有一点例外：Visual Studio 不知道每个项目已部署到哪些 Web 应用或 API 应用。这意味着，无法在本教程中获得有关如何部署到正确目标的确切说明。如果不太了解自行部署的步骤，最好遵循系列教程中的[第一篇教程](./app-service-api-dotnet-get-started.md)，而不要从此自动化部署过程开始。
 
 1. 确保满足[第一篇教程](./app-service-api-dotnet-get-started.md)中所列的所有先决条件。除了所列的先决条件以外，这些身份验证教程还假设读者在 Visual Studio 和 Azure 门户预览中用过应用服务 Web 应用和 API 应用。
 
@@ -154,7 +155,8 @@ ms.author: rachelap
 
 配置 Azure AD 身份验证时，应用服务已创建 Azure AD 应用程序。默认情况下，新 Azure AD 应用程序配置为将持有者令牌提供给 API 应用的 URL。在本部分，将 Azure AD 应用程序配置为向 AngularJS 前端提供持有者令牌，而不是直接提供给中间层 API 应用。AngularJS 前端在调用 API 应用时，会将令牌发送到 API 应用。
 
->[!NOTE] 为了尽可能简化过程，本教程为前端和中间层 API 应用使用单个 Azure AD 应用程序。另一种做法是使用两个 Azure AD 应用程序。在此情况下，必须授予前端 Azure AD 应用程序调用中间层 Azure AD 应用程序的权限。使用这种多重应用程序方法可以更精细地控制每层的权限。
+>[!NOTE]
+> 为了尽可能简化过程，本教程为前端和中间层 API 应用使用单个 Azure AD 应用程序。另一种做法是使用两个 Azure AD 应用程序。在此情况下，必须授予前端 Azure AD 应用程序调用中间层 Azure AD 应用程序的权限。使用这种多重应用程序方法可以更精细地控制每层的权限。
 
 11. 在 [Azure 经典管理门户](https://manage.windowsazure.cn/)中，转到“Azure Active Directory”。
 

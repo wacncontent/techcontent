@@ -20,7 +20,8 @@ ms.author: iainfou
 # 如何重置 Azure VM 的本地 Windows 密码
 如果已安装 Azure 来宾代理，可以使用 [Azure 门户预览或 Azure PowerShell](./virtual-machines-windows-reset-rdp.md) 重置 Azure 中 VM 的本地 Windows 密码。此方法是重置 Azure VM 密码的主要方法。如果遇到了 Azure 来宾代理无响应的问题，或者上载自定义映像后无法安装，可以手动重置 Windows 密码。本文详细说明如何通过将源 OS 虚拟磁盘附加到另一个 VM 来重置本地帐户密码。
 
-> [!WARNING] 只有在万不得已的情况下才使用此过程。始终应该先尝试使用 [Azure 门户预览或 Azure PowerShell](./virtual-machines-windows-reset-rdp.md) 重置密码。
+> [!WARNING]
+> 只有在万不得已的情况下才使用此过程。始终应该先尝试使用 [Azure 门户预览或 Azure PowerShell](./virtual-machines-windows-reset-rdp.md) 重置密码。
 
 ## 过程概述
 无法访问 Azure 来宾代理时，针对 Azure 中的 Windows VM 执行本地密码重置的核心步骤如下：
@@ -69,7 +70,8 @@ ms.author: iainfou
 
 4. 在源 VM 的驱动器上的 `\Windows\System32\GroupPolicy` 中创建 `gpt.ini`（如果存在 gpt.ini，请将它重命名为 gpt.ini.bak）：
 
-    > [!WARNING] 切勿在 C:\\Windows（故障排除 VM 的 OS 驱动器）中意外创建以下文件。应该在源 VM 的、作为数据磁盘附加的 OS 驱动器中创建以下文件。
+    > [!WARNING]
+    > 切勿在 C:\\Windows（故障排除 VM 的 OS 驱动器）中意外创建以下文件。应该在源 VM 的、作为数据磁盘附加的 OS 驱动器中创建以下文件。
 
     - 将以下代码行添加到创建的 `gpt.ini` 文件中：
 

@@ -60,7 +60,8 @@ ms.author: lakshmir;barbkess;sonyama
 8. 单击**“确定”**
 9. 数据库还原过程随即将会开始，你可以使用“通知”监视还原进度
 
->[!NOTE] 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
+>[!NOTE]
+> 完成还原后，即可按 [Configure your database after recovery][]（在恢复后配置数据库）中的说明配置恢复的数据库。
 
 ## 还原已删除的数据库
 
@@ -91,7 +92,8 @@ ms.author: lakshmir;barbkess;sonyama
 8. 单击**“确定”**
 9. 数据库还原过程随即将会开始，你可以使用“通知”监视还原进度
 
->[!NOTE] 若要在完成还原后配置数据库，请参阅 [Configure your database after recovery][]（在恢复后配置数据库）。
+>[!NOTE]
+> 若要在完成还原后配置数据库，请参阅 [Configure your database after recovery][]（在恢复后配置数据库）。
 
 ## 后续步骤
 若要了解 Azure SQL 数据库版本的业务连续性功能，请阅读 [Azure SQL 数据库业务连续性概述][]。

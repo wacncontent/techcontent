@@ -42,7 +42,8 @@ Contoso Corp 开发了一个新的合作伙伴门户。此门户的 URL 为 http
 
 ![流量管理器 DNS 配置][1]  
 
-> [!NOTE] 通过 Azure 流量管理器来使用虚构域时，必须使用 CNAME 将虚构域名指向流量管理器域名。DNS 标准不允许在域的“顶点”（或根）位置创建 CNAME。因此，无法为“contoso.com”（有时称为“裸”域）创建 CNAME。只能为“contoso.com”下的域（例如“www.contoso.com”）创建 CNAME。为了克服此限制，我们建议通过简单的 HTTP 重定向将针对“contoso.com”的请求定向到某个备用名称（例如“www.contoso.com”）。
+> [!NOTE]
+> 通过 Azure 流量管理器来使用虚构域时，必须使用 CNAME 将虚构域名指向流量管理器域名。DNS 标准不允许在域的“顶点”（或根）位置创建 CNAME。因此，无法为“contoso.com”（有时称为“裸”域）创建 CNAME。只能为“contoso.com”下的域（例如“www.contoso.com”）创建 CNAME。为了克服此限制，我们建议通过简单的 HTTP 重定向将针对“contoso.com”的请求定向到某个备用名称（例如“www.contoso.com”）。
 
 ## <a name="how-clients-connect-using-traffic-manager"></a>客户端如何使用流量管理器进行连接
 

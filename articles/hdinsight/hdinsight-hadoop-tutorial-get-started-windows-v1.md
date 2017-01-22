@@ -34,7 +34,8 @@ ms.author: nitinme
 
 Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HDInsight 开发者预览版*），与 Azure HDInsight 的通用版本结合使用。Emulator 针对开发人员方案，仅支持单节点部署。有关如何使用 HDInsight Emulator 的信息，请参阅 [HDInsight Emulator 入门][hdinsight-emulator]。
 
-> [!NOTE]有关如何设置 HBase 群集的说明，请参阅[在 HDInsight 中设置 HBase 群集][hdinsight-hbase-custom-provision]。请参阅 <a href="http://hbase.apache.org/book.html#architecture">Hadoop 与 HBase 之间的差别</a>，以了解为何要选择其中的某一种数据库。
+> [!NOTE]
+>有关如何设置 HBase 群集的说明，请参阅[在 HDInsight 中设置 HBase 群集][hdinsight-hbase-custom-provision]。请参阅 <a href="http://hbase.apache.org/book.html#architecture">Hadoop 与 HBase 之间的差别</a>，以了解为何要选择其中的某一种数据库。
 
 ## 先决条件
 
@@ -49,7 +50,8 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 
 在设置 HDInsight 中的 Hadoop 群集时，将要指定 Azure 存储帐户。将该帐户的一个特定 Blob 存储容器指定为默认文件系统，如同在 Hadoop 分布式文件系统 (HDFS) 中一样。默认情况下，HDInsight 群集与指定存储帐户预配在同一数据中心内。有关详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用][hdinsight-storage]
 
->[!NOTE]请不要在多个 Hadoop 群集之间共享默认的 Blob 存储容器。
+>[!NOTE]
+>请不要在多个 Hadoop 群集之间共享默认的 Blob 存储容器。
 
 除此存储帐户外，还可在自定义配置群集时以添加其他存储帐户。附加的此存储帐户可以来自同一 Azure 订阅，也可以来自不同的 Azure 订阅。有关说明，请参阅[使用自定义选项设置 HDInsight 群集][hdinsight-provision]。
 
@@ -101,7 +103,8 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 
 -- COMMENTED OUT TEXT ENDS -->
 
->[!NOTE]这些步骤将预配 HDInsight 群集版本 3.1。若要使用其他版本创建群集，请使用经典管理门户中的“自定义”创建方法，或使用 Azure PowerShell。有关各版本之间的差异的信息，请参阅 [HDInsight 提供的群集版本有哪些新功能？][hdinsight-versions]。有关使用“自定义创建”选项的信息，请参阅[使用自定义选项设置 HDInsight 群集][hdinsight-provision]。
+>[!NOTE]
+>这些步骤将预配 HDInsight 群集版本 3.1。若要使用其他版本创建群集，请使用经典管理门户中的“自定义”创建方法，或使用 Azure PowerShell。有关各版本之间的差异的信息，请参阅 [HDInsight 提供的群集版本有哪些新功能？][hdinsight-versions]。有关使用“自定义创建”选项的信息，请参阅[使用自定义选项设置 HDInsight 群集][hdinsight-provision]。
 
 ## <a name="sample"></a>从经典管理门户运行示例数据
 
@@ -117,7 +120,8 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 ## <a name="hivequery"></a>从经典管理门户运行 Hive 查询
 既已配置 HDInsight 群集，下一步是运行 Hive 作业以查询示例 Hive 表。我们将使用 HDInsight 群集随附的 *hivesampletable*。该表包含有关移动设备制造商、平台和型号的数据。对此表运行 Hive 查询可按特定制造商检索移动设备的数据。
 
-> [!NOTE] 用于 Visual Studio 的 HDInsight 工具随附了用于 .NET 的 Azure SDK 2.5 或更高版本。使用 Visual Studio 中的工具可以连接到 HDInsight 群集、创建 Hive 表和运行 Hive 查询。有关详细信息，请参阅 [用于 Visual Studio 的 HDInsight Hadoop 工具入门][1]。
+> [!NOTE]
+> 用于 Visual Studio 的 HDInsight 工具随附了用于 .NET 的 Azure SDK 2.5 或更高版本。使用 Visual Studio 中的工具可以连接到 HDInsight 群集、创建 Hive 表和运行 Hive 查询。有关详细信息，请参阅 [用于 Visual Studio 的 HDInsight Hadoop 工具入门][1]。
 
 **从群集仪表板运行 Hive 作业**
 
@@ -130,7 +134,8 @@ Microsoft 还提供了 HDInsight Emulator for Azure（以前称作 *Microsoft HD
 
     页面顶部有多个选项卡。默认选项卡为“Hive 编辑器”，而其他选项卡为“作业历史记录”和“文件浏览器”。使用仪表板可以提交 Hive 查询、检查 Hadoop 作业日志，以及浏览 WASB 文件。
 
-    > [!NOTE]请注意，网页的 URL 为 *&lt;ClusterName&gt;.azurehdinsight.cn*。因此，如果不从经典管理门户打开仪表板，也可以在 Web 浏览器中使用 URL 打开仪表板。
+    > [!NOTE]
+    >请注意，网页的 URL 为 *&lt;ClusterName&gt;.azurehdinsight.cn*。因此，如果不从经典管理门户打开仪表板，也可以在 Web 浏览器中使用 URL 打开仪表板。
 
 6. 在“Hive 编辑器”选项卡上，为“查询名称”输入 **HTC20**。查询名称为作业标题。在查询窗格中，按下图所示输入 Hive 查询：
 

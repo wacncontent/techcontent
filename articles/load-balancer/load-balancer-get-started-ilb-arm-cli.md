@@ -27,7 +27,8 @@ ms.author: sewhee
 
 [!INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
 
->[!NOTE] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Microsoft 建议对大多数新部署使用该模型，而不要使用[经典部署模型](./load-balancer-get-started-ilb-classic-cli.md)。
+>[!NOTE]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Microsoft 建议对大多数新部署使用该模型，而不要使用[经典部署模型](./load-balancer-get-started-ilb-classic-cli.md)。
 
 [!INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
 
@@ -82,7 +83,8 @@ Azure Resource Manager 中的所有资源将与资源组关联。创建资源组
 
         azure network lb create -n nrprg -l chinaeast
 
-    >[!NOTE] 内部负载均衡器的所有资源（如虚拟网络和虚拟网络子网）必须都在同一资源组中并在同一区域中。
+    >[!NOTE]
+    > 内部负载均衡器的所有资源（如虚拟网络和虚拟网络子网）必须都在同一资源组中并在同一区域中。
 
 2. 为内部负载均衡器创建前端 IP 地址。
 
@@ -115,7 +117,8 @@ Azure Resource Manager 中的所有资源将与资源组关联。创建资源组
 
         azure network lb probe create --resource-group nrprg --lb-name ilbset --name ilbprobe --protocol tcp --interval 300 --count 4
 
-    >[!NOTE] Azure Platform 对各种管理方案使用一个公开可路由的静态 IPv4 地址。该 IP 地址为 168.63.129.16。此 IP 地址不应被任何防火墙阻止，因为这可能会导致意外行为。对于 Azure 内部负载均衡，此 IP 地址用于监视负载均衡器中的探测器，以确定负载均衡集中虚拟机的运行状况状态。如果网络安全组用于将流量限制到内部负载均衡集中的 Azure 虚拟机或应用于虚拟网络子网，请确保添加网络安全规则以允许来自 168.63.129.16 的流量。
+    >[!NOTE]
+    > Azure Platform 对各种管理方案使用一个公开可路由的静态 IPv4 地址。该 IP 地址为 168.63.129.16。此 IP 地址不应被任何防火墙阻止，因为这可能会导致意外行为。对于 Azure 内部负载均衡，此 IP 地址用于监视负载均衡器中的探测器，以确定负载均衡集中虚拟机的运行状况状态。如果网络安全组用于将流量限制到内部负载均衡集中的 Azure 虚拟机或应用于虚拟网络子网，请确保添加网络安全规则以允许来自 168.63.129.16 的流量。
 
 ## 创建 NIC
 
@@ -159,7 +162,8 @@ Azure Resource Manager 中的所有资源将与资源组关联。创建资源组
 
         azure vm create --resource--resource-grouproup nrprg --name DB1 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic1-be --availset-name nrp-avset --storage-account-name web1nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
 
-    >[!IMPORTANT] VMs in a load balancer need to be in the same availability set. Use `azure availset create` to create an availability set.
+    >[!IMPORTANT]
+    > VMs in a load balancer need to be in the same availability set. Use `azure availset create` to create an availability set.
 
 4. 创建名为 *DB2* 的虚拟机 (VM)，然后将其与名为 *lb-nic2-be* 的 NIC 相关联。名为 *web1nrp* 的存储帐户在运行以下命令之前已创建。
 

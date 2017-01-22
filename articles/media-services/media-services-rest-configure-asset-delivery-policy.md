@@ -25,7 +25,8 @@ ms.author: juliako
 
 本主题介绍为何以及如何创建和配置资产传送策略。
 
->[!NOTE]<p>若要使用动态打包和动态加密，必须确保至少有一个缩放单位（也称为流式处理单位）。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。<p>此外，你的资产必须包含一组自适应比特率 MP4 或自适应比特率平滑流文件。
+>[!NOTE]
+><p>若要使用动态打包和动态加密，必须确保至少有一个缩放单位（也称为流式处理单位）。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。<p>此外，你的资产必须包含一组自适应比特率 MP4 或自适应比特率平滑流文件。
 
 可以将不同的策略应用到同一个资产。例如，可以将 PlayReady 加密应用到平滑流式处理，将 AES 信封加密应用到 MPEG DASH 和 HLS。将阻止流式处理传送策略中未定义的任何协议（例如，添加仅将 HLS 指定为协议的单个策略）。不定义任何传送策略是例外情况。此时，将顺利允许所有协议。
 
@@ -60,7 +61,8 @@ HDS
 - 可将多个资产传送策略关联到单个资产，但只能指定一种方法来处理给定的 AssetDeliveryProtocol。也就是说，如果尝试链接两个指定 AssetDeliveryProtocol.SmoothStreaming 协议的传送策略，则会导致出错，因为当客户端发出平滑流式处理请求时，系统不知道要应用哪个策略。
 - 如果资产包含现有流式处理定位符，则不能将新策略链接到该资产、取消现有策略与资产的链接，或者更新与该资产关联的传送策略。必须先删除流式处理定位符，调整策略，再重新创建流式处理定位符。重新创建流式处理定位符时，可以使用同一个 locatorId，但应确保该操作不会导致客户端出现问题，因为内容可能已被来源或下游 CDN 缓存。
 
->[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
+>[!NOTE]
+> 使用媒体服务 REST API 时，需注意以下事项：
 >
 >访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 
@@ -266,7 +268,8 @@ HDS
 
     {"Name":"AssetDeliveryPolicy","AssetDeliveryProtocol":2,"AssetDeliveryPolicyType":4,"AssetDeliveryConfiguration":"[{"Key":7,"Value":"https:\\/\\/example.net\/WidevineLicenseAcquisition\/"}]"}
 
->[!NOTE]使用 Widevine 加密时，只能使用 DASH 传送。请确保在资产传送协议中指定 DASH (2)。
+>[!NOTE]
+>使用 Widevine 加密时，只能使用 DASH 传送。请确保在资产传送协议中指定 DASH (2)。
 
 ###将资产与资产传送策略相链接
 

@@ -23,7 +23,8 @@ ms.author: jgao
 
 了解如何规划 HDInsight 群集的预配。
 
-> [!IMPORTANT] 目前，Azure 中国区的 HDInsight 只能通过 Azure 服务管理器 (ASM) 进行管理。适用于 HDInsight 的 Azure Resource Manager (ARM) 模型尚不可用。
+> [!IMPORTANT]
+> 目前，Azure 中国区的 HDInsight 只能通过 Azure 服务管理器 (ASM) 进行管理。适用于 HDInsight 的 Azure Resource Manager (ARM) 模型尚不可用。
 
 **先决条件：**
 
@@ -63,7 +64,8 @@ ms.author: jgao
 
     ![HDInsight 群集](./media/hdinsight-provision-clusters-v1/hdinsight.clusters.png)
 
-    > [!NOTE] *Azure HDInsight 群集*也称为 *HDInsight 中的 Hadoop 群集*或者 *HDInsight 群集*。有时，该术语可与 *Hadoop 群集*换用。它们都代表托管在 Azure 环境中的 Hadoop 群集。
+    > [!NOTE]
+    > *Azure HDInsight 群集*也称为 *HDInsight 中的 Hadoop 群集*或者 *HDInsight 群集*。有时，该术语可与 *Hadoop 群集*换用。它们都代表托管在 Azure 环境中的 Hadoop 群集。
 
     在给定的群集类型中，各节点有不同的角色，使客户能够针对特定角色，根据适合其工作负荷的详细信息来调整节点的大小。例如，如果执行的分析作业类型会消耗大量内存，Hadoop 群集可以使用大量内存来预配辅助节点。
 
@@ -90,7 +92,8 @@ ms.author: jgao
 
     客户需根据群集的生存期，支付这些节点的使用费。创建群集之后便开始计费，删除群集时便停止计费（无法取消分配或保留群集）。群集大小会影响群集价格。为了方便学习，建议使用 1 个数据节点。有关 HDInsight 定价的详细信息，请参阅 [HDInsight 定价](https://www.azure.cn/pricing/details/hdinsight/)。
 
-    >[!NOTE] 群集大小限制因 Azure 订阅而异。若要提高限制的大小，请联系计费支持人员。
+    >[!NOTE]
+    > 群集大小限制因 Azure 订阅而异。若要提高限制的大小，请联系计费支持人员。
 
 - **区域/虚拟网络（也称为位置）**
 
@@ -121,11 +124,13 @@ ms.author: jgao
 
     ![HDInsight 存储](./media/hdinsight-provision-clusters-v1/HDInsight.storage.png)
 
-    >[!NOTE] Blob 存储容器提供一组 Blob 集，如图所示：
+    >[!NOTE]
+    > Blob 存储容器提供一组 Blob 集，如图所示：
 
     ![Azure Blob 存储](./media/hdinsight-provision-clusters-v1/Azure.blob.storage.jpg)
 
-    >[!WARNING] 不要对多个群集共享一个 Blob 存储容器。此操作不受支持。
+    >[!WARNING]
+    > 不要对多个群集共享一个 Blob 存储容器。此操作不受支持。
 
     有关使用辅助 Blob 存储的详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用](./hdinsight-hadoop-use-blob-storage.md)。
 
@@ -135,7 +140,8 @@ ms.author: jgao
 
 ## 高级配置选项
 
->[!NOTE] 本部分目前仅适用于基于 Windows 的 HDInsight 群集。
+>[!NOTE]
+> 本部分目前仅适用于基于 Windows 的 HDInsight 群集。
 
 ### 使用 HDInsight 群集自定义功能来自定义群集
 
@@ -275,7 +281,8 @@ ms.author: jgao
 ### 使用 Azure PowerShell
 Azure PowerShell 是一个功能强大的脚本编写环境，可用于在 Azure 中控制和自动执行工作负荷的部署和管理。本部分提供有关如何通过使用 Azure PowerShell 设置 HDInsight 群集的说明。有关配置工作站以运行 HDInsight Windows Powershell cmdlet 的信息，请参阅[安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。有关将 Azure PowerShell 与 HDInsight 配合使用的详细信息，请参阅[使用 PowerShell 管理 HDInsight](./hdinsight-administer-use-powershell.md)。有关 HDInsight Windows PowerShell cmdlet 的列表，请参阅 [HDInsight cmdlet 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn858087.aspx)。
 
-> [!NOTE] 虽然本部分中的脚本可用于在 Azure 虚拟网络上配置 HDInsight 群集，但它们不能用于创建 Azure 虚拟网络。有关创建 Azure 虚拟网络的信息，请参阅[虚拟网络配置任务](../virtual-network/virtual-networks-create-vnet-arm-ps.md)。
+> [!NOTE]
+> 虽然本部分中的脚本可用于在 Azure 虚拟网络上配置 HDInsight 群集，但它们不能用于创建 Azure 虚拟网络。有关创建 Azure 虚拟网络的信息，请参阅[虚拟网络配置任务](../virtual-network/virtual-networks-create-vnet-arm-ps.md)。
 
 通过使用 Azure PowerShell 设置 HDInsight 群集需要执行以下过程：
 
@@ -326,7 +333,8 @@ HDInsight 使用 Azure Blob 存储容器作为默认文件系统。你需要先�
 
 **设置 HDInsight 群集**
 
-> [!NOTE] Azure PowerShell cmdlet 是唯一推荐用于更改 HDInsight 群集中的配置变量的方法。如果对群集进行修补，可能会覆盖通过远程桌面连接到群集时对 Hadoop 配置文件所做的更改。如果对群集进行修补，将保留通过 Azure PowerShell 设置的配置值。
+> [!NOTE]
+> Azure PowerShell cmdlet 是唯一推荐用于更改 HDInsight 群集中的配置变量的方法。如果对群集进行修补，可能会覆盖通过远程桌面连接到群集时对 Hadoop 配置文件所做的更改。如果对群集进行修补，将保留通过 Azure PowerShell 设置的配置值。
 
 - 在 Azure PowerShell 控制台窗口中运行以下命令：
 
@@ -353,7 +361,8 @@ HDInsight 使用 Azure Blob 存储容器作为默认文件系统。你需要先�
         # Create a new HDInsight cluster
         New-AzureHDInsightCluster -Name $clusterName -Credential $credential -Location $location -DefaultStorageAccountName "$storageAccountName.blob.core.chinacloudapi.cn" -DefaultStorageAccountKey $storageAccountKey -DefaultStorageContainerName $containerName  -ClusterSizeInNodes $clusterNodes -ClusterType Hadoop
 
-    >[!NOTE] $hadoopUserName 和 $hadoopUserPassword 命令用于群集创建的 Hadoop 用户帐户。此帐户将用于连接到群集并运行作业。如果你在 Azure 经典管理门户中使用“快速创建”选项来设置群集，则默认 Hadoop 用户名为“admin”。不要将此帐户与远程桌面协议 (RDP) 用户帐户相混淆。RDP 用户帐户不能与 Hadoop 用户帐户相同。有关详细信息，请参阅 [使用 Azure 经典管理门户管理 HDInsight 中的 Hadoop 群集][hdinsight-admin-portal]。
+    >[!NOTE]
+    > $hadoopUserName 和 $hadoopUserPassword 命令用于群集创建的 Hadoop 用户帐户。此帐户将用于连接到群集并运行作业。如果你在 Azure 经典管理门户中使用“快速创建”选项来设置群集，则默认 Hadoop 用户名为“admin”。不要将此帐户与远程桌面协议 (RDP) 用户帐户相混淆。RDP 用户帐户不能与 Hadoop 用户帐户相同。有关详细信息，请参阅 [使用 Azure 经典管理门户管理 HDInsight 中的 Hadoop 群集][hdinsight-admin-portal]。
 
     设置群集可能需要几分钟时间。
 
@@ -363,7 +372,8 @@ HDInsight 使用 Azure Blob 存储容器作为默认文件系统。你需要先�
 
 设置群集时，你可以使用其他配置选项，例如，连接到多个 Azure Blob 存储，使用虚拟网络，或者对 Hive 和 Oozie 元存储使用 Azure SQL 数据库。这样，你便可以将数据和元数据的生存期与群集的生存期分开。
 
-> [!NOTE] Windows PowerShell cmdlet 是唯一推荐用于更改 HDInsight 群集中的配置变量的方法。如果对群集进行修补，可能会覆盖通过远程桌面连接到群集时对 Hadoop 配置文件所做的更改。如果对群集进行修补，将保留通过 Azure PowerShell 设置的配置值。
+> [!NOTE]
+> Windows PowerShell cmdlet 是唯一推荐用于更改 HDInsight 群集中的配置变量的方法。如果对群集进行修补，可能会覆盖通过远程桌面连接到群集时对 Hadoop 配置文件所做的更改。如果对群集进行修补，将保留通过 Azure PowerShell 设置的配置值。
 
 - 从 Windows PowerShell 窗口运行以下命令：
 
@@ -406,7 +416,8 @@ HDInsight 使用 Azure Blob 存储容器作为默认文件系统。你需要先�
             Add-AzureHDInsightMetastore -SqlAzureServerName "$oozieSQLDatabaseServerName.database.chinacloudapi.cn" -DatabaseName $oozieSQLDatabaseName -Credential $oozieCreds -MetastoreType OozieMetastore |
                 New-AzureHDInsightCluster -Name $clusterName -Location $location -VirtualNetworkId $vnetID -SubnetName $subNetName
 
-    >[!NOTE] 用于元存储的 Azure SQL 数据库必须允许连接到其他 Azure 服务，包括 Azure HDInsight。在 Azure SQL 数据库仪表板的右侧单击服务器名称。这是运行 SQL 数据库实例的服务器。进入服务器视图后，请单击“配置”，单击“Azure 服务”对应的“是”，然后单击“保存”。
+    >[!NOTE]
+    > 用于元存储的 Azure SQL 数据库必须允许连接到其他 Azure 服务，包括 Azure HDInsight。在 Azure SQL 数据库仪表板的右侧单击服务器名称。这是运行 SQL 数据库实例的服务器。进入服务器视图后，请单击“配置”，单击“Azure 服务”对应的“是”，然后单击“保存”。
 
 **列出 HDInsight 群集**
 
@@ -416,7 +427,8 @@ HDInsight 使用 Azure Blob 存储容器作为默认文件系统。你需要先�
 
 ### 使用 Azure CLI
 
-> [!NOTE] 自 2014 年 8 月 29 日起，Azure CLI 无法用于将群集与 Azure 虚拟网络相关联。
+> [!NOTE]
+> 自 2014 年 8 月 29 日起，Azure CLI 无法用于将群集与 Azure 虚拟网络相关联。
 
 用于预配 HDInsight 群集的另一选项是 Azure CLI。Azure CLI 是以 Node.js 实现的。可以在支持 Node.js 的任意平台（包括 Windows、Mac 和 Linux）上使用它。
 
@@ -456,7 +468,8 @@ HDInsight 使用 Azure Blob 存储容器作为默认文件系统。你需要先�
 
 在使用 Azure CLI 之前，你必须配置工作站和 Azure 之间的连接。Azure CLI 使用你的 Azure 订阅信息连接到你的帐户。可从 Azure 的发布设置文件中获取此信息。稍后可以导入发布设置文件作为永久性本地配置设置，Azure CLI 会将此设置用于后续操作。你只需导入你的发布设置一次。
 
-> [!NOTE] 发布设置文件包含敏感信息。Azure 建议你删除该文件或采取其他措施来加密包含该文件的用户文件夹。在 Windows 上，修改文件夹属性或使用 BitLocker 驱动程序加密。
+> [!NOTE]
+> 发布设置文件包含敏感信息。Azure 建议你删除该文件或采取其他措施来加密包含该文件的用户文件夹。在 Windows 上，修改文件夹属性或使用 BitLocker 驱动程序加密。
 
 1. 打开终端窗口。
 2. 运行以下命令以登录到你的 Azure 订阅：
@@ -490,7 +503,8 @@ Azure CLI 可通过 NPM 或 Windows 安装程序来安装。Azure 建议你只�
 
         npm install -g https://github.com/azure/azure-xplat-cli/archive/hdinsight-February-18-2015.tar.gz
 
-    > [!NOTE] 如果收到“未找到 NPM 命令”的错误消息，请验证以下路径位于 PATH 环境变量中：<i>C:\\Program Files (x86)\\nodejs;C:\\Users[用户名]\\AppData\\Roaming\\npm</i> 或 <i>C:\\Program Files\\nodejs;C:\\Users[用户名]\\AppData\\Roaming\\npm</i>
+    > [!NOTE]
+    > 如果收到“未找到 NPM 命令”的错误消息，请验证以下路径位于 PATH 环境变量中：<i>C:\\Program Files (x86)\\nodejs;C:\\Users[用户名]\\AppData\\Roaming\\npm</i> 或 <i>C:\\Program Files\\nodejs;C:\\Users[用户名]\\AppData\\Roaming\\npm</i>
 
 5. 运行以下命令以验证安装：
 
@@ -512,7 +526,8 @@ Azure CLI 可通过 NPM 或 Windows 安装程序来安装。Azure 建议你只�
 
 在使用 Azure CLI 之前，你必须配置工作站和 Azure 之间的连接。Azure CLI 使用你的 Azure 订阅信息连接到你的帐户。可从 Azure 的发布设置文件中获取此信息。稍后可以导入发布设置文件作为永久性本地配置设置，Azure CLI 会将此设置用于后续操作。你只需导入你的发布设置一次。
 
-> [!NOTE] 发布设置文件包含敏感信息。Azure 建议你删除该文件或采取其他措施来加密包含该文件的用户文件夹。在 Windows 上，修改文件夹属性或使用 BitLocker。
+> [!NOTE]
+> 发布设置文件包含敏感信息。Azure 建议你删除该文件或采取其他措施来加密包含该文件的用户文件夹。在 Windows 上，修改文件夹属性或使用 BitLocker。
 
 1. 打开**命令提示符**。
 2. 运行以下命令来下载发布设置文件：
@@ -601,7 +616,8 @@ HDInsight 群集还需要在存储帐户中提供一个容器。如果你提供�
         #Run this command to create a cluster by using the config file
         azure hdinsight cluster create --config <file>
 
-    >[!NOTE] 用于元存储的 Azure SQL 数据库必须允许连接到其他 Azure 服务，包括 Azure HDInsight。在 Azure SQL 数据库仪表板的右侧单击服务器名称。这是运行 SQL 数据库实例的服务器。进入服务器视图后，请单击“配置”，单击“Azure 服务”对应的“是”，然后单击“保存”。
+    >[!NOTE]
+    > 用于元存储的 Azure SQL 数据库必须允许连接到其他 Azure 服务，包括 Azure HDInsight。在 Azure SQL 数据库仪表板的右侧单击服务器名称。这是运行 SQL 数据库实例的服务器。进入服务器视图后，请单击“配置”，单击“Azure 服务”对应的“是”，然后单击“保存”。
 
     ![HDI.CLIClusterCreationConfig][image-cli-clustercreation-config]
 

@@ -36,7 +36,8 @@ ms.author: juliako
 
 本主题演示如何使用 Azure 媒体服务通过 Apple FairPlay 动态加密 HLS 内容。它还演示了如何使用媒体服务许可证传送服务将 FairPlay 许可证传送到客户端。
 
->[!NOTE] 如果还想要使用 PlayReady 加密 HLS 内容，则需要创建一个通用的内容密钥并将其与你的资产相关联。你还需要配置此内容密钥的授权策略，如[使用 PlayReady 动态通用加密](./media-services-protect-with-drm.md)主题中所述。
+>[!NOTE]
+> 如果还想要使用 PlayReady 加密 HLS 内容，则需要创建一个通用的内容密钥并将其与你的资产相关联。你还需要配置此内容密钥的授权策略，如[使用 PlayReady 动态通用加密](./media-services-protect-with-drm.md)主题中所述。
 
 ## 要求和注意事项
 
@@ -97,7 +98,8 @@ ms.author: juliako
     - 传送方法（在本例中为 FairPlay）、
     - FairPlay 策略选项配置。有关如何配置 FairPlay 的详细信息，请参阅以下示例中的 ConfigureFairPlayPolicyOptions() 方法。
 
-        >[!NOTE] 通常，可能只需配置一次 FairPlay 策略选项，因为仅有一套证书和 ASK。
+        >[!NOTE]
+        > 通常，可能只需配置一次 FairPlay 策略选项，因为仅有一套证书和 ASK。
     - 限制（打开或令牌）
     - 以及特定于密钥传送类型的信息，其定义了将密钥传送到客户端的方式。
 
@@ -107,7 +109,8 @@ ms.author: juliako
     - 动态加密类型（常用的 CBC 加密）、
     - 许可证获取 URL。
 
-    >[!NOTE]如果要传送使用 FairPlay + 另一个 DRM 加密的流，则必须配置单独的传送策略
+    >[!NOTE]
+    >如果要传送使用 FairPlay + 另一个 DRM 加密的流，则必须配置单独的传送策略
     >
     >- 一个 IAssetDeliveryPolicy 用来将 DASH 配置为 CENC（PlayReady 和 WideVine）并将平滑配置为 PlayReady。
     >- 另一个 IAssetDeliveryPolicy 用来配置 HLS 的 FairPlay
@@ -120,7 +123,8 @@ ms.author: juliako
 
     spc=<Base64 encoded SPC>
 
->[!NOTE] Azure Media Player 不支持现成的 FairPlay 播放。客户需要通过 Apple 开发人员帐户获得示例播放器，以便在 MAC OSX 上播放 FairPlay。
+>[!NOTE]
+> Azure Media Player 不支持现成的 FairPlay 播放。客户需要通过 Apple 开发人员帐户获得示例播放器，以便在 MAC OSX 上播放 FairPlay。
 
 ##流 URL
 

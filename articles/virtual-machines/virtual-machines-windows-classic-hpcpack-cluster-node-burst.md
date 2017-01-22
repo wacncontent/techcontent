@@ -32,7 +32,8 @@ ms.author: danlep
 
 * **Azure VM 中部署的 HPC Pack 头节点** - 可使用独立头节点或较大群集中的头节点。若要创建独立头节点，请参阅[在 Azure VM 中部署 HPC Pack 头节点](./virtual-machines-windows-hpcpack-cluster-headnode.md)。有关 HPC Pack 群集的自动部署选项，请参阅[在 Azure 中使用 Microsoft HPC Pack 创建和管理 Windows HPC 群集时可用的选项](./virtual-machines-windows-hpcpack-cluster-options.md)。
 
-    >[!TIP] 如果使用 [HPC Pack IaaS 部署脚本](./virtual-machines-windows-classic-hpcpack-cluster-powershell-script.md)在 Azure 中创建群集，则可以在自动化部署中包含 Azure 突发节点。请参阅该文中的示例。
+    >[!TIP]
+    > 如果使用 [HPC Pack IaaS 部署脚本](./virtual-machines-windows-classic-hpcpack-cluster-powershell-script.md)在 Azure 中创建群集，则可以在自动化部署中包含 Azure 突发节点。请参阅该文中的示例。
 
 * **Azure 订阅** - 若要添加 Azure 节点，可选择部署头节点 VM 时所用的相同订阅，也可选用一个或多个不同订阅。
 
@@ -45,7 +46,8 @@ ms.author: danlep
 * 新的 Azure 云服务
 * 新的 Azure 存储帐户
 
->[!NOTE] 请勿重复使用订阅中的现有云服务。
+>[!NOTE]
+> 请勿重复使用订阅中的现有云服务。
 
 **注意事项**
 

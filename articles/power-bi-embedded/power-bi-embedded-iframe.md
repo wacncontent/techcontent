@@ -46,7 +46,8 @@ Power BI Embedded 的每个工作区是每位客户（租户）的工作区，�
 
 ![](./media/power-bi-embedded-iframe/copy-access-key.png)  
 
-> [!NOTE] 也可以预配工作区集合，然后通过 REST API 获取访问密钥。有关详细信息，请参阅 [Power BI Resource Provider APIs](https://msdn.microsoft.com/zh-cn/library/azure/mt712306.aspx)（Power BI 资源提供程序 API）。
+> [!NOTE]
+> 也可以预配工作区集合，然后通过 REST API 获取访问密钥。有关详细信息，请参阅 [Power BI Resource Provider APIs](https://msdn.microsoft.com/zh-cn/library/azure/mt712306.aspx)（Power BI 资源提供程序 API）。
 
 ## 使用 Power BI Desktop 创建 .pbix 文件
 接下来，必须创建数据连接以及要嵌入的报表。此任务不需要编程或编写代码，只需使用 Power BI Desktop。本文不会深入探讨如何使用 Power BI Desktop。如需帮助，请参阅 [Getting started with Power BI Desktop](https://powerbi.microsoft.com/documentation/powerbi-desktop-getting-started/)（Power BI Desktop 入门）。本示例只使用[零售分析示例](https://powerbi.microsoft.com/documentation/powerbi-sample-datasets/)。
@@ -215,7 +216,8 @@ URI 片段 **32960a09-6366-4208-a8bb-9e0678cdbb9d** 是 workspaceId，查询参�
 
 或者，可以使用 Power BI Embedded 中的行级别安全性，在一个报表中隔离每个用户的数据。这样，就可以使用相同的 .pbix（UI 等）和不同的数据源来预配每份客户报表。
 
-> [!NOTE] 如果使用**导入模式**而不是 **DirectQuery 模式**，则无法通过 API 刷新模型。此外，Power BI Embedded 尚不支持通过 Power BI 网关访问本地数据源。建议随时关注 [Power BI 博客](https://powerbi.microsoft.com/blog/)，了解最新消息和将来版本中推出的新功能。
+> [!NOTE]
+> 如果使用**导入模式**而不是 **DirectQuery 模式**，则无法通过 API 刷新模型。此外，Power BI Embedded 尚不支持通过 Power BI 网关访问本地数据源。建议随时关注 [Power BI 博客](https://powerbi.microsoft.com/blog/)，了解最新消息和将来版本中推出的新功能。
 
 ## 在网页中进行身份验证和托管（嵌入）报表
 
@@ -229,7 +231,8 @@ URI 片段 **32960a09-6366-4208-a8bb-9e0678cdbb9d** 是 workspaceId，查询参�
 
 首先，必须准备好输入值，稍后要为此值签名。此值是以下 json 的 base64 url 编码 (rfc4648) 字符串，以点 (.) 字符分隔。稍后将会说明如何获取报表 ID。
 
-> [!NOTE] 如果想要使用 Power BI Embedded 的行级别安全性 (RLS)，则还必须在声明中指定 **username** 和 **roles**。
+> [!NOTE]
+> 如果想要使用 Power BI Embedded 的行级别安全性 (RLS)，则还必须在声明中指定 **username** 和 **roles**。
 
     {
       "typ":"JWT",
@@ -328,7 +331,8 @@ URI 片段 **32960a09-6366-4208-a8bb-9e0678cdbb9d** 是 workspaceId，查询参�
 
 可以使用前面的应用令牌在 Web 应用中嵌入报表。在下一个示例代码中，可以发现前半部与前面的示例相同。在后半部中，本示例在 iframe 中显示 **embedUrl**（请参阅前面的结果），将应用令牌发布到 iframe 中。
 
-> [!NOTE] 需要将报表 ID 值更改为自己的值。此外，由于内容管理系统中的 bug，代码示例中的 iframe 标记以文本形式显示。如果复制并粘贴本示例代码，请删除标记中的大写文本。
+> [!NOTE]
+> 需要将报表 ID 值更改为自己的值。此外，由于内容管理系统中的 bug，代码示例中的 iframe 标记以文本形式显示。如果复制并粘贴本示例代码，请删除标记中的大写文本。
 
         <?php
         // 1. power bi access key

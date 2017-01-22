@@ -43,7 +43,8 @@ Azure 事件中心可处理网站、应用和设备的大量数据。借助事�
 
 可以从 GitHub 下载本教程中创建的项目的完整版本：[eventhub-storm-hybrid](https://github.com/Azure-Samples/hdinsight-dotnet-java-storm-eventhub)。但是，仍然需要按照本教程中的步骤提供配置设置。
 
-> [!NOTE] 使用已完成的项目时，必须使用 **NuGet 包管理器**还原此解决方案所需的程序包。
+> [!NOTE]
+> 使用已完成的项目时，必须使用 **NuGet 包管理器**还原此解决方案所需的程序包。
 
 ## 事件中心 Spout 和 Bolt
 
@@ -55,7 +56,8 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 [HDInsight Storm 示例](https://github.com/hdinsight/hdinsight-storm-examples)项目中 **lib** 文件夹下包含了最新版本的 **eventhubs-storm-Spout-0.9-jar-with-dependencies.jar** 文件。要下载该文件，请使用以下方法之一。
 
-> [!NOTE] 已提交 Spout 和 Bolt 以包含在 Apache Storm 项目中。有关详细信息，请参阅 GitHub 中的 [STORM-583: Initial check-in for storm-event hubs](https://github.com/apache/storm/pull/336/files)（STORM-583：Storm 事件中心的初始签入）。
+> [!NOTE]
+> 已提交 Spout 和 Bolt 以包含在 Apache Storm 项目中。有关详细信息，请参阅 GitHub 中的 [STORM-583: Initial check-in for storm-event hubs](https://github.com/apache/storm/pull/336/files)（STORM-583：Storm 事件中心的初始签入）。
 
 * **下载 ZIP 文件**：在 [HDInsight Storm 示例](https://github.com/hdinsight/hdinsight-storm-examples)站点中，选择右窗格中的“下载 ZIP”下载包含项目的 .zip 文件。
 
@@ -77,7 +79,8 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
     ![向导页 1](./media/hdinsight-storm-develop-csharp-event-hub-topology/wiz1.png)
 
-    > [!NOTE] 应选择与 Storm on HDInsight 服务器相同的**位置**，以减少延迟和成本。
+    > [!NOTE]
+    > 应选择与 Storm on HDInsight 服务器相同的**位置**，以减少延迟和成本。
 
 2. 在“配置事件中心”屏幕上，输入“分区计数”和“消息保留期”值。对于本示例，请使用分区计数 8 和消息保留期 1。记下分区计数，因为稍后需要用到。
 
@@ -106,7 +109,8 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 2. 输入存储帐户的**名称**，选择**位置**，然后单击**复选标记**以创建存储帐户。
 
-    > [!NOTE] 应选择与事件中心和 Storm on HDInsight 服务器相同的**位置**，以减少延迟和成本。
+    > [!NOTE]
+    > 应选择与事件中心和 Storm on HDInsight 服务器相同的**位置**，以减少延迟和成本。
 
 3. 创建新存储帐户后，选择该帐户，然后使用页面底部的“管理访问密钥”链接检索“存储帐户名称”和“主访问密钥”。保存此信息，因为稍后将要用到。
 
@@ -233,7 +237,8 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
 此时，已完成对 **Program.cs** 的操作。已经定义拓扑，但现在必须修改 **Spout.cs**，使它能够以事件中心 Bolt 可以使用的格式生成数据。
 
-> [!NOTE] 此拓扑将默认创建一个工作进程，以充分满足示例需求。如果要针对生产群集改写此拓拟，应添加以下代码以更改工作进程数：
+> [!NOTE]
+> 此拓扑将默认创建一个工作进程，以充分满足示例需求。如果要针对生产群集改写此拓拟，应添加以下代码以更改工作进程数：
 
     StormConfig config = new StormConfig();
     config.setNumWorkers(1);
@@ -250,7 +255,8 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
     这样可以更轻松地使用 JSON 数据。
 
-    > [!NOTE] 应该已经安装 JSON.NET 包，因为它是用于 C# Storm 拓扑的 SCP.NET 框架所必需的。
+    > [!NOTE]
+    > 应该已经安装 JSON.NET 包，因为它是用于 C# Storm 拓扑的 SCP.NET 框架所必需的。
 
 3. 找到以下代码：
 
@@ -386,11 +392,13 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
     此代码指示拓扑使用 Bolt（在 Bolt.cs 中定义）。此处使用先前定义的自定义序列化程序，以便此 Bolt 可使用上游 Java 组件生成的数据。在此示例中为 EventHubSpout。
 
-    > [!IMPORTANT] SetBolt 的最后一个参数（值为 `true`）启用此 Bolt 的 ACK 功能。该参数是必需的，因为 EventHubSpout 组件期望它发出数据的 ACK。如果下游组件未返回 ACK，则 Spout 在处理大约 1000 条消息后将停止接收。
+    > [!IMPORTANT]
+    > SetBolt 的最后一个参数（值为 `true`）启用此 Bolt 的 ACK 功能。该参数是必需的，因为 EventHubSpout 组件期望它发出数据的 ACK。如果下游组件未返回 ACK，则 Spout 在处理大约 1000 条消息后将停止接收。
 
 此时，已完成对 **Program.cs** 的操作。已经定义拓扑，但现在必须创建一个帮助器类以将数据写入表存储，然后必须修改 **Bolt.cs** 以便可了解 Spout 生成的数据。
 
-> [!NOTE] 此拓扑将默认创建一个工作进程，以充分满足示例需求。如果要针对生产群集改写此拓拟，应添加以下代码以更改工作线程数：
+> [!NOTE]
+> 此拓扑将默认创建一个工作进程，以充分满足示例需求。如果要针对生产群集改写此拓拟，应添加以下代码以更改工作线程数：
 
     StormConfig config = new StormConfig();
     config.setNumWorkers(1);
@@ -492,7 +500,8 @@ Spout 和 Bolt 以名为 **eventhubs-storm-spout-#.#-jar-with-dependencies.jar**
 
     将实体插入到表中后，为元组调用 `Ack()`，以通知 Spout 已成功处理数据。
 
-    > [!IMPORTANT] EventHubSpout 组件需要来自下游组件（如此 Bolt）的每个元组的 ACK。如果未收到 ACK，EventHubSpout 将假定元组处理失败。
+    > [!IMPORTANT]
+    > EventHubSpout 组件需要来自下游组件（如此 Bolt）的每个元组的 ACK。如果未收到 ACK，EventHubSpout 将假定元组处理失败。
 
 此时，已完成创建一个拓扑，该拓扑可从事件中心读取数据，并将其存储到表存储（位于先前创建的表中）。
 

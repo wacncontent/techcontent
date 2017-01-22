@@ -21,7 +21,8 @@ ms.author: dineshm
 # 使用 C++ 列出 Azure 存储资源
 使用 Azure 存储进行开发时，很多情况下列表操作很重要。本文介绍如何使用用于 C++ 的 Azure 存储客户端库中提供的列表 API 最有效率地枚举 Azure 存储中的对象。
 
->[!NOTE] 本指南主要面向适用于 C++ 版本 2.x 的 Azure 存储客户端库，该库可通过 [NuGet](http://www.nuget.org/packages/wastorage) 或 [GitHub](https://github.com/Azure/azure-storage-cpp) 获取。
+>[!NOTE]
+> 本指南主要面向适用于 C++ 版本 2.x 的 Azure 存储客户端库，该库可通过 [NuGet](http://www.nuget.org/packages/wastorage) 或 [GitHub](https://github.com/Azure/azure-storage-cpp) 获取。
 
 存储客户端库提供了多种方法，用于列出或查询 Azure 存储中的对象。本文将探讨以下方案：
 

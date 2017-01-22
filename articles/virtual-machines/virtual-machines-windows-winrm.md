@@ -22,7 +22,8 @@ ms.author: singhkay
 
 ## Azure 服务管理中的 WinRM 与 Azure Resource Manager
 
-> [!NOTE] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用资源管理器部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型
+> [!NOTE]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用资源管理器部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型
 
 * 有关 Azure Resource Manager 的概述，请参阅此[文章](../azure-resource-manager/resource-group-overview.md)
 * 有关 Azure 服务管理和 Azure Resource Manager 之间的差异，请参阅此[文章](../azure-resource-manager/resource-manager-deployment-model.md)
@@ -82,7 +83,8 @@ ms.author: singhkay
 
 预配 VM 时，Microsoft.Compute 资源提供程序需要指向密钥保管库中密钥的 URL。这将使 Microsoft.Compute 资源提供程序能够下载密钥，并在 VM 上创建等效证书。
 
->[!NOTE] 密钥 URL 需要同时包含版本。示例 URL 类似如下
+>[!NOTE]
+> 密钥 URL 需要同时包含版本。示例 URL 类似如下
 https://contosovault.vault.chinacloudapi.cn:443/secrets/contososecret/01h9db0df2cd4300a20ence585a6s7ve
 
 #### 模板
@@ -139,7 +141,8 @@ https://contosovault.vault.chinacloudapi.cn:443/secrets/contososecret/01h9db0df2
 
 可在 [Github](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-winrm-keyvault-windows) 中找到此模板的源代码.
 
->[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 #### PowerShell
 
@@ -156,7 +159,8 @@ https://contosovault.vault.chinacloudapi.cn:443/secrets/contososecret/01h9db0df2
 
     Enable-PSRemoting -Force
 
->[!NOTE] 如果以上命令无效，可能需要确保 WinRM 服务正在运行。可使用 `Get-Service WinRM` 完成此操作
+>[!NOTE]
+> 如果以上命令无效，可能需要确保 WinRM 服务正在运行。可使用 `Get-Service WinRM` 完成此操作
 
 设置完成后，即可使用以下命令连接到 VM
 

@@ -34,7 +34,8 @@ ms.tgt_pltfrm: NA
 
 SQL 数据库的许多新功能仅在使用 [Azure Resource Manager 部署模型](../azure-resource-manager/resource-group-overview.md)时才可用，因此示例使用面向 Resource Manager 的 [Azure SQL 数据库 PowerShell cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/mt574084.aspx)。向后兼容支持现有的经典部署模型 [Azure SQL 数据库（经典）cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/dn546723.aspx)，但建议使用 Resource Manager cmdlet。
 
->[!NOTE] 根据数据库的大小，复制操作可能需要一些时间才能完成。
+>[!NOTE]
+> 根据数据库的大小，复制操作可能需要一些时间才能完成。
 
 ## 将 SQL 数据库复制到同一台服务器
 

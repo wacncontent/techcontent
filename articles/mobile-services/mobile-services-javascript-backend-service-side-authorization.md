@@ -40,7 +40,8 @@ ms.author: krisragh
 
     在插入之前，此脚本会在项中添加已经过身份验证的用户的用户 ID。
 
-    >[!NOTE] 请确保已启用“[动态架构](https://msdn.microsoft.com/zh-cn/library/azure/jj193175.aspx)”。否则，不会自动添加 userId 列。默认情况下，已经为新的移动服务启用了此设置。
+    >[!NOTE]
+    > 请确保已启用“[动态架构](https://msdn.microsoft.com/zh-cn/library/azure/jj193175.aspx)”。否则，不会自动添加 userId 列。默认情况下，已经为新的移动服务启用了此设置。
 
 3. 同样，请将现有的 **Read** 操作替换为以下函数。此脚本将会筛选返回的 TodoItem 对象，使用户只会收到他们自己的插入项。
 

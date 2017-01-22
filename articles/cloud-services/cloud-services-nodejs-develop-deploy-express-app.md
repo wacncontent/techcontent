@@ -42,7 +42,8 @@ Node.js 包含核心运行时中最小的一个功能集。开发人员在开发
         PS C:\Node\expressapp> Add-AzureNodeWebRole
         PS C:\Node\expressapp> Set-AzureServiceProjectRole WebRole1 Node 0.10.21
 
-    > [!NOTE] 默认情况下，**Add-azurenodewebrole** 使用旧版 Node.js。上述 **Set-azureserviceprojectrole** 语句将指示 Azure 使用 v0.10.21 版本的节点。请注意，这些参数区分大小写。通过检查 **WebRole1\\package.json** 中的 **engines** 属性可以验证是否已选择正确的 Node.js 版本。
+    > [!NOTE]
+    > 默认情况下，**Add-azurenodewebrole** 使用旧版 Node.js。上述 **Set-azureserviceprojectrole** 语句将指示 Azure 使用 v0.10.21 版本的节点。请注意，这些参数区分大小写。通过检查 **WebRole1\\package.json** 中的 **engines** 属性可以验证是否已选择正确的 Node.js 版本。
 
 ##安装 Express
 

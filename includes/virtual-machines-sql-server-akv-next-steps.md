@@ -9,7 +9,8 @@
 
 以下 Transact-SQL 脚本提供针对每种形式的示例。
 
->[!NOTE] 每个示例基于两个先决条件：密钥保管库中名为 **CONTOSO\_KEY** 的非对称密钥，以及 AKV 集成功能创建的名为 **Azure\_EKM\_TDE\_cred** 的凭据。
+>[!NOTE]
+> 每个示例基于两个先决条件：密钥保管库中名为 **CONTOSO\_KEY** 的非对称密钥，以及 AKV 集成功能创建的名为 **Azure\_EKM\_TDE\_cred** 的凭据。
 
 ### 透明数据加密 (TDE)
 1. 创建数据库引擎将用于 TDE 的 SQL Server 登录名，然后向其添加凭据。

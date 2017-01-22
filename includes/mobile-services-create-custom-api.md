@@ -6,7 +6,8 @@
 
 3. 在“API 名称”中键入 _completeall_，然后单击勾选按钮创建新 API。
 
-    > [!TIP] 使用默认权限和应用密钥的任何人都可以调用自定义 API。但是，应用程序密钥不被视为安全的凭据，因为无法安全地分发或存储它。请考虑仅限经过身份验证的用户访问。
+    > [!TIP]
+    > 使用默认权限和应用密钥的任何人都可以调用自定义 API。但是，应用程序密钥不被视为安全的凭据，因为无法安全地分发或存储它。请考虑仅限经过身份验证的用户访问。
 
 4. 在 API 表中单击 **completeall**。
 
@@ -24,7 +25,8 @@
             })
         };
 
-> [!NOTE] 提供给自定义 API 函数的 [request](http://msdn.microsoft.com/zh-cn/library/windowsazure/jj554218.aspx) 和 [response](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn303373.aspx) 对象由 [Express.js 库](http://go.microsoft.com/fwlink/p/?LinkId=309046)实现。
+> [!NOTE]
+> 提供给自定义 API 函数的 [request](http://msdn.microsoft.com/zh-cn/library/windowsazure/jj554218.aspx) 和 [response](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn303373.aspx) 对象由 [Express.js 库](http://go.microsoft.com/fwlink/p/?LinkId=309046)实现。
 
 <!-- Anchors. -->
 

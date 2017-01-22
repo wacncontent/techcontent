@@ -94,7 +94,8 @@ ms.author: rclaus
     root@mylinuxvm:~# sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"/g' /etc/default/grub
     root@mylinuxvm:~# update-grub
 
->[!NOTE] 对 /dev/sda 单独进行此设置毫无用处。需要在循序 I/O 是主导的 I/O 模式的所有数据磁盘上设置此项。
+>[!NOTE]
+> 对 /dev/sda 单独进行此设置毫无用处。需要在循序 I/O 是主导的 I/O 模式的所有数据磁盘上设置此项。
 
 你应该会看到以下输出，指示已成功重新生成 grub.cfg 并且默认计划程序已更新为 NOOP。
 

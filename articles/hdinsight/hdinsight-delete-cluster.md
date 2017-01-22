@@ -21,7 +21,8 @@ ms.author: larryfr
 
 HDInsight 群集按小时收费，因此在不再需要使用群集时，就应将其删除。在本文档中，你将了解如何使用 Azure 经典管理门户、Azure PowerShell 和 Azure CLI 删除群集。
 
-> [!IMPORTANT] 删除 HDInsight 群集不会删除与群集关联的 Azure 存储帐户。这样你就可以保留和重复使用由群集存储的所有数据。
+> [!IMPORTANT]
+> 删除 HDInsight 群集不会删除与群集关联的 Azure 存储帐户。这样你就可以保留和重复使用由群集存储的所有数据。
 
 ##Azure 经典管理门户
 

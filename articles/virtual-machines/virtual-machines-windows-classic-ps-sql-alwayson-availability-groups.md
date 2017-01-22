@@ -28,7 +28,8 @@ ms.author: mikeray
 
 > [!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-classic-include.md)]
 
->[!NOTE]有关同一方案的基于 GUI 的教程，请参阅[在 Azure 中配置 AlwaysOn 可用性组 (GUI)](./virtual-machines-windows-classic-portal-sql-alwayson-availability-groups.md)。
+>[!NOTE]
+>有关同一方案的基于 GUI 的教程，请参阅[在 Azure 中配置 AlwaysOn 可用性组 (GUI)](./virtual-machines-windows-classic-portal-sql-alwayson-availability-groups.md)。
 
 Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server 系统的成本。本教程介绍如何在 Azure 环境中使用端到端 SQL Server AlwaysOn 实施可用性组。完成本教程后，Azure 中的 SQL Server AlwaysOn 解决方案将包括以下要素：
 
@@ -62,7 +63,8 @@ Azure 虚拟机 (VM) 可帮助数据库管理员降低高可用性 SQL Server �
 
     **Get-AzurePublishgSettingsFile** 命令自动生成管理证书，Azure 将其下载到你的计算机。浏览器将自动打开，提示输入 Azure 订阅的 Microsoft 帐户凭据。所下载的 **.publishsettings** 文件包含管理 Azure 订阅所需的一切信息。将该文件保存到本地目录后，使用 **Import-AzurePublishSettingsFile -Environment AzureChinaCloud** 命令将其导入。
 
-    >[!NOTE]publishsettings 文件中含有你的凭据（未编码），这些凭据用于管理你的 Azure 订阅和服务。确保此文件安全的最佳做法是，将其暂时存储在您的源目录的外部（例如存储在 Libraries\\Documents 文件夹中），然后在完成导入后将其删除。恶意用户获得 publishsettings 文件的访问权限后，可编辑、创建和删除你的 Azure 服务。
+    >[!NOTE]
+    >publishsettings 文件中含有你的凭据（未编码），这些凭据用于管理你的 Azure 订阅和服务。确保此文件安全的最佳做法是，将其暂时存储在您的源目录的外部（例如存储在 Libraries\\Documents 文件夹中），然后在完成导入后将其删除。恶意用户获得 publishsettings 文件的访问权限后，可编辑、创建和删除你的 Azure 服务。
 
 1. 定义将用于创建云 IT 基础结构的一系列变量。
 

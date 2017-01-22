@@ -43,7 +43,8 @@ Ubuntu 现已发布正式 Azure VHD，可从 [http://cloud-images.ubuntu.com/](h
 
 ## 手动步骤
 
-> [!NOTE] 为 Azure 创建自己的自定义 Ubuntu 映像之前，请考虑改用 [http://cloud-images.ubuntu.com/](http://cloud-images.ubuntu.com/) 中的映像。
+> [!NOTE]
+> 为 Azure 创建自己的自定义 Ubuntu 映像之前，请考虑改用 [http://cloud-images.ubuntu.com/](http://cloud-images.ubuntu.com/) 中的映像。
 
 1. 在 Hyper-V 管理器的中间窗格中，选择虚拟机。
 

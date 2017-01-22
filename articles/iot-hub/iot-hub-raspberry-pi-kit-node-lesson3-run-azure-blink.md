@@ -67,7 +67,8 @@ wacn.date: 12/26/2016
 
     gulp
 
-> [!NOTE] 默认 gulp 任务按顺序运行 `install-tools`、`deploy` 和 `run` 任务。[部署 blink 应用](./iot-hub-raspberry-pi-kit-node-lesson1-deploy-blink-app.md)时，是分别运行这些任务的。
+> [!NOTE]
+> 默认 gulp 任务按顺序运行 `install-tools`、`deploy` 和 `run` 任务。[部署 blink 应用](./iot-hub-raspberry-pi-kit-node-lesson1-deploy-blink-app.md)时，是分别运行这些任务的。
 > 
 > 
 

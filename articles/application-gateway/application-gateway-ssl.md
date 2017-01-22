@@ -104,7 +104,8 @@ ms.author: gwallace
     ThumbprintAlgo : sha1RSA
     State..........: Provisioned
 
->[!NOTE] 证书密码的长度必须是 4 到 12 个字符，可包含字母或数字。不接受特殊字符。
+>[!NOTE]
+> 证书密码的长度必须是 4 到 12 个字符，可包含字母或数字。不接受特殊字符。
 
 ## <a name="configure-the-gateway"></a> 配置网关
 

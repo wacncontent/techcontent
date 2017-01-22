@@ -24,7 +24,8 @@ ms.author: jroth
 
 本文提供了有关如何通过使用 PowerShell cmdlet 在 Azure 中创建 SQL Server 虚拟机的步骤。
 
-> [!IMPORTANT]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。有关此主题中的 Resource Manager 版本，请参阅[使用 Azure PowerShell Resource Manager 预配 SQL Server 虚拟机](./virtual-machines-windows-ps-sql-create.md)。
+> [!IMPORTANT]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用资源管理器模型。有关此主题中的 Resource Manager 版本，请参阅[使用 Azure PowerShell Resource Manager 预配 SQL Server 虚拟机](./virtual-machines-windows-ps-sql-create.md)。
 
 ### 安装和配置 PowerShell：
 
@@ -64,7 +65,8 @@ ms.author: jroth
 
         (Get-AzureStorageAccount | where { $_.GeoPrimaryLocation -eq $dcLocation }).StorageAccountName
 
-    >[!NOTE] 如果需要新的存储帐户，请先使用 New-AzureStorageAccoun 命令创建全部小写的存储帐户名称，如下例中所示：**New-AzureStorageAccount -StorageAccountName "<storage account name>" -Location $dcLocation**
+    >[!NOTE]
+    > 如果需要新的存储帐户，请先使用 New-AzureStorageAccoun 命令创建全部小写的存储帐户名称，如下例中所示：**New-AzureStorageAccount -StorageAccountName "<storage account name>" -Location $dcLocation**
 
 1. 将目标存储帐户名称分配给 **$staccount**。然后使用 **Set-azuresubscription** 设置订阅和当前存储帐户。
 
@@ -109,7 +111,8 @@ ms.author: jroth
 
         New-AzureVM -ServiceName $svcname -VMs $vm1
 
->[!NOTE] 有关更多说明和配置选项，请参阅[使用 Azure PowerShell 创建和预配置基于 Windows 的虚拟机](./virtual-machines-windows-classic-create-powershell.md)中的**构建你的命令集**部分。
+>[!NOTE]
+> 有关更多说明和配置选项，请参阅[使用 Azure PowerShell 创建和预配置基于 Windows 的虚拟机](./virtual-machines-windows-classic-create-powershell.md)中的**构建你的命令集**部分。
 
 ## PowerShell 脚本示例
 

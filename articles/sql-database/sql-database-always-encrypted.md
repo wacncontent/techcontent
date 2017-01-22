@@ -131,7 +131,8 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 
 设置 Always Encrypted 之后，便可以生成一个应用程序，用其在已加密列上执行某些 INSERT 操作和 SELECT 操作。若要成功运行此示例应用程序，必需在运行过 Always Encrypted 向导的计算机上运行它。若要在其他计算机上运行，必须将 Always Encrypted 证书部署到运行客户端应用的计算机上。
 
-> [!IMPORTANT] 通过 Always Encrypted 列将纯文本数据传递到服务器时，应用程序必须使用 [SqlParameter](https://msdn.microsoft.com/zh-cn/library/system.data.sqlclient.sqlparameter.aspx) 对象。在不使用 SqlParameter 对象的情况下传递文本值会导致异常。
+> [!IMPORTANT]
+> 通过 Always Encrypted 列将纯文本数据传递到服务器时，应用程序必须使用 [SqlParameter](https://msdn.microsoft.com/zh-cn/library/system.data.sqlclient.sqlparameter.aspx) 对象。在不使用 SqlParameter 对象的情况下传递文本值会导致异常。
 
 1. 打开 Visual Studio 并创建新的 C# 控制台应用程序。确保将项目设置为 **.NET Framework 4.6** 或更高版本。
 2. 将项目命名为 **AlwaysEncryptedConsoleApp**，然后单击“确定”。
@@ -146,7 +147,8 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 
 可以在连接字符串中直接进行该设置，也可以使用 [SqlConnectionStringBuilder](https://msdn.microsoft.com/zh-cn/library/system.data.sqlclient.sqlconnectionstringbuilder.aspx) 进行设置。下一节中的示例应用程序演示如何使用 **SqlConnectionStringBuilder**。
 
-> [!NOTE] 在特定于 Always Encrypted 的客户端应用程序中，这是需要完成的唯一更改。如果某个现有应用程序将其连接字符串存储在外部（即存储在配置文件中），则可在不更改任何代码的情况下启用 Always Encrypted。
+> [!NOTE]
+> 在特定于 Always Encrypted 的客户端应用程序中，这是需要完成的唯一更改。如果某个现有应用程序将其连接字符串存储在外部（即存储在配置文件中），则可在不更改任何代码的情况下启用 Always Encrypted。
 
 ### 在连接字符串中启用 Always Encrypted
 
@@ -474,7 +476,8 @@ SSMS 提供了一个向导，可以通过设置列主密钥 (CMK)、列加密密
 
     ![新建控制台应用程序](./media/sql-database-always-encrypted/ssms-plaintext.png)
 
-> [!NOTE] 如果从其他计算机使用 SSMS（或任何客户端）进行连接，则无法访问加密密钥，因此无法解密数据。
+> [!NOTE]
+> 如果从其他计算机使用 SSMS（或任何客户端）进行连接，则无法访问加密密钥，因此无法解密数据。
 
 ## 后续步骤
 创建使用 Always Encrypted 的数据库以后，可能需要执行以下操作：

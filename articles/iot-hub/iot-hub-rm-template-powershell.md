@@ -25,14 +25,16 @@ ms.author: dobett
 
 你可以使用 Azure Resource Manager (ARM) 以编程方式创建和管理 Azure IoT 中心。本教程说明如何结合使用 Resource Manager 模板和 PowerShell 来创建 IoT 中心。
 
-> [!NOTE] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用资源管理器部署模型。
+> [!NOTE]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用资源管理器部署模型。
 
 为了完成本教程，你需要有：
 
 - 有效的 Azure 帐户。<br/>如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用][lnk-free-trial]。
 - [Azure PowerShell 1.0][lnk-powershell-install] 或更高版本。
 
-> [!TIP] [将 Azure PowerShell 与 Azure Resource Manager 配合使用][lnk-powershell-arm]一文提供了有关如何使用 PowerShell 脚本和 ARM 模板创建 Azure 资源的详细信息。
+> [!TIP]
+> [将 Azure PowerShell 与 Azure Resource Manager 配合使用][lnk-powershell-arm]一文提供了有关如何使用 PowerShell 脚本和 ARM 模板创建 Azure 资源的详细信息。
 
 ## 连接到你的 Azure 订阅
 
@@ -112,7 +114,8 @@ ms.author: dobett
 4. 输出将显示你创建的 IoT 中心的密钥。
 5. 若要验证应用程序中是否添加了新 IoT 中心，可以访问[门户预览][lnk-azure-portal]并查看资源列表，或使用 **Get-AzureRmResource** PowerShell cmdlet。
 
-> [!NOTE] 此示例应用程序添加用于计费的 S1 标准 IoT 中心。可以通过[门户预览][lnk-azure-portal]删除该 IoT 中心，或者在完成后使用 **Remove-AzureRmResource** PowerShell cmdlet。
+> [!NOTE]
+> 此示例应用程序添加用于计费的 S1 标准 IoT 中心。可以通过[门户预览][lnk-azure-portal]删除该 IoT 中心，或者在完成后使用 **Remove-AzureRmResource** PowerShell cmdlet。
 
 ## 后续步骤
 

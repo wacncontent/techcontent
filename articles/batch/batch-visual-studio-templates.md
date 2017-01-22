@@ -21,7 +21,8 @@ ms.author: marsma
 
 Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代码来帮助以最少的精力在 Batch 上实现并运行计算密集型工作负荷。本文档介绍这些模板，并提供其用法指导。
 
->[!IMPORTANT] 本文只介绍适用于这两个模板的信息，假设读者熟悉与其相关的 Batch 服务和重要概念：池、计算节点、作业和任务、作业管理器任务、环境变量和其他相关信息。可以在 [Basics of Azure Batch](./batch-technical-overview.md)（Azure Batch 基础知识）、[Batch feature overview for developers](./batch-api-basics.md)（面向开发人员的 Batch 功能概述）和 [Get started with the Azure Batch library for .NET](./batch-dotnet-get-started.md)（用于 .NET 的 Azure Batch 库入门）中找到更多信息。
+>[!IMPORTANT]
+> 本文只介绍适用于这两个模板的信息，假设读者熟悉与其相关的 Batch 服务和重要概念：池、计算节点、作业和任务、作业管理器任务、环境变量和其他相关信息。可以在 [Basics of Azure Batch](./batch-technical-overview.md)（Azure Batch 基础知识）、[Batch feature overview for developers](./batch-api-basics.md)（面向开发人员的 Batch 功能概述）和 [Get started with the Azure Batch library for .NET](./batch-dotnet-get-started.md)（用于 .NET 的 Azure Batch 库入门）中找到更多信息。
 
 ## 综合概述
 
@@ -33,7 +34,8 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 
 例如，在电影渲染方案中，作业拆分器将单个电影作业转变成数百个或数千个单独处理各个帧的不同任务。相应地，任务处理器调用为了渲染每个帧所需的渲染应用程序和所有依赖进程，执行任何额外操作（例如，将渲染的帧复制到存储位置）。
 
->[!NOTE] 作业管理器和任务处理器模板彼此独立，因此可以根据计算作业要求和个人喜好，选择同时使用两者或只使用其中之一。
+>[!NOTE]
+> 作业管理器和任务处理器模板彼此独立，因此可以根据计算作业要求和个人喜好，选择同时使用两者或只使用其中之一。
 
 如下图所示，使用这些模板的计算作业经历三个阶段：
 
@@ -81,7 +83,8 @@ Batch 的**作业管理器**和**任务处理器** Visual Studio 模板提供代
 * 将一个作业拆分为多个任务。
 * 提交这些任务以在 Batch 上运行。
 
->[!NOTE] 有关作业管理器任务的详细信息，请参阅 [Batch feature overview for developers](./batch-api-basics.md#job-manager-task/)（面向开发人员的 Batch 功能概述）。
+>[!NOTE]
+> 有关作业管理器任务的详细信息，请参阅 [Batch feature overview for developers](./batch-api-basics.md#job-manager-task/)（面向开发人员的 Batch 功能概述）。
 
 ### 使用模板创建作业管理器
 
@@ -171,7 +174,8 @@ csharp
         }
     }
 
->[!NOTE] 在 `Split()` 方法中，批注部分是作业管理器模板代码中唯一可修改的部分，方法是添加用于将作业拆分成不同任务的逻辑。如果想要修改模板的其他部分，请确定熟悉 Batch 的工作原理，并先在几个 [Batch 代码示例][github_samples]中试试看。
+>[!NOTE]
+> 在 `Split()` 方法中，批注部分是作业管理器模板代码中唯一可修改的部分，方法是添加用于将作业拆分成不同任务的逻辑。如果想要修改模板的其他部分，请确定熟悉 Batch 的工作原理，并先在几个 [Batch 代码示例][github_samples]中试试看。
 
 Split() 实现具有以下项的访问权限：
 
@@ -379,7 +383,8 @@ csharp
         }
     }
 
->[!NOTE] Run() 方法中的批注部分是任务处理器模板代码中唯一可修改的部分，方法是为工作负荷中的任务添加运行逻辑。如果想要修改模板的其他部分，请先熟悉 Batch 的工作原理，方法是查看 Batch 文档并在几个 Batch 代码示例上进行尝试。
+>[!NOTE]
+> Run() 方法中的批注部分是任务处理器模板代码中唯一可修改的部分，方法是为工作负荷中的任务添加运行逻辑。如果想要修改模板的其他部分，请先熟悉 Batch 的工作原理，方法是查看 Batch 文档并在几个 Batch 代码示例上进行尝试。
 
 Run() 方法负责启动命令行、启动一个或多个进程、等待所有进程完成、保存结果，最后返回退出代码。Run() 方法可供实现任务的处理逻辑。任务处理器框架调用 Run() 方法；用户不需要自行调用。
 
@@ -405,7 +410,8 @@ Run() 实现具有以下项的访问权限：
 | 1 | 任务处理器任务失败，程序的“预期”部分有异常。异常已转换成 `TaskProcessorException` 与诊断信息，如有可能，还提供可解决失败的建议。 |
 | 2 | 任务处理器任务失败，发生“意外的”异常。异常已记录到标准输出，但任务处理器无法添加任何额外的诊断或补救信息。 |
 
->[!NOTE] 如果调用的程序使用退出代码 1 和 2 来指出特定失败模式，则使用退出代码 1 和 2 来代表任务处理器错误将造成模棱两可的状况。可以编辑 Program.cs 文件中的异常案例，将这些任务处理器错误代码更改为可区分的退出代码。
+>[!NOTE]
+> 如果调用的程序使用退出代码 1 和 2 来指出特定失败模式，则使用退出代码 1 和 2 来代表任务处理器错误将造成模棱两可的状况。可以编辑 Program.cs 文件中的异常案例，将这些任务处理器错误代码更改为可区分的退出代码。
 
 异常返回的所有信息已写入 stdout.txt 和 stderr.txt 文件。有关详细信息，请参阅 Batch 文档中的“Error Handling”（错误处理）。
 
@@ -448,7 +454,8 @@ Batch 服务提供一个简单的机制在 [Microsoft.Azure.Batch.JobManagerTask
 
 在许多情况下，最好将每个操作的参数传递到作业管理器任务，以便控制作业拆分进程或配置作业的任务。为此，可将名为 parameters.json 的 JSON 文件上载为作业管理器任务的资源文件。然后，参数就可以在作业管理器模板的 `JobSplitter._parameters` 字段中可用。
 
->[!NOTE] 内置的参数处理程序只支持字符串到字符串的字典。如果想要以参数值的形式传递复杂 JSON 值，需要以字符串形式传递并在作业拆分器中进行分析，或者修改框架的 `Configuration.GetJobParameters` 方法。
+>[!NOTE]
+> 内置的参数处理程序只支持字符串到字符串的字典。如果想要以参数值的形式传递复杂 JSON 值，需要以字符串形式传递并在作业拆分器中进行分析，或者修改框架的 `Configuration.GetJobParameters` 方法。
 
 ### 将参数传递给任务处理器模板
 
@@ -460,7 +467,8 @@ parameters.json 的资源文件，如果找到，则将它加载为参数字典�
 
 * 生成和上载任务特定的 parameters.json 文档作为作业拆分器执行的一部分，并在任务的资源文件集合中引用该 Blob。如果不同的任务有不同的参数，就必须这样做。以参数形式将帧索引传递到任务的 3D 渲染方案便是可能的示例。
 
->[!NOTE] 内置的参数处理程序只支持字符串到字符串的字典。如果想要以参数值的形式传递复杂 JSON 值，需要以字符串形式传递并在任务处理器中进行分析，或者修改框架的 `Configuration.GetTaskParameters` 方法。
+>[!NOTE]
+> 内置的参数处理程序只支持字符串到字符串的字典。如果想要以参数值的形式传递复杂 JSON 值，需要以字符串形式传递并在任务处理器中进行分析，或者修改框架的 `Configuration.GetTaskParameters` 方法。
 
 ## 后续步骤
 

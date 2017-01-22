@@ -21,15 +21,18 @@ ms.author: oanapl
 
 Azure Service Fabric 组件报告包含群集中的所有实体。[运行状况存储](./service-fabric-health-introduction.md#health-store)根据系统报告来创建和删除实体。它还将这些实体组织为层次结构以捕获实体交互。
 
-> [!NOTE] 若要了解与运行状况相关的概念，请阅读 [Service Fabric 运行状况模型](./service-fabric-health-introduction.md)。
+> [!NOTE]
+> 若要了解与运行状况相关的概念，请阅读 [Service Fabric 运行状况模型](./service-fabric-health-introduction.md)。
 
 系统运行状况报告提供有关群集和应用程序功能的可见性，并且通过运行状况标记问题。对于应用程序和服务，系统运行状况报告从 Service Fabric 的角度验证实体得到实现并且正常运行。报告不对服务的业务逻辑进行任何运行状况监视，也不检测暂停的进程。用户服务可以使用其逻辑的特有信息来丰富运行状况数据。
 
-> [!NOTE] 监视器运行状况报告仅在系统组件创建一个实体之后才可见。在删除实体之后，运行状况存储自动删除与该实体关联的所有运行状况报告。创建实体的新实例时的处理方式也一样（例如，创建新的服务副本实例）。所有与旧实例关联的报告都将从存储中删除并清除。
+> [!NOTE]
+> 监视器运行状况报告仅在系统组件创建一个实体之后才可见。在删除实体之后，运行状况存储自动删除与该实体关联的所有运行状况报告。创建实体的新实例时的处理方式也一样（例如，创建新的服务副本实例）。所有与旧实例关联的报告都将从存储中删除并清除。
 
 按来源标识系统组件报告，并以“System”前缀开头。监视器不能与来源使用相同的前缀，因为如果参数无效，报告将被拒绝。让我们来看一些系统报告并了解是什么触发了这些报告以及如何纠正报告指出的问题。
 
-> [!NOTE] Service Fabric 不断添加感兴趣的状况报告，这些报告可以提高对群集和应用程序中正在发生的事情的可见性。
+> [!NOTE]
+> Service Fabric 不断添加感兴趣的状况报告，这些报告可以提高对群集和应用程序中正在发生的事情的可见性。
 
 ## 群集系统运行状况报告
 群集运行状况实体在运行状况存储中自动创建。如果一切运行正常，则不提供系统报告。
@@ -453,7 +456,8 @@ Visual Studio 2015 诊断事件：RunAsync 在 **fabric:/HelloWorldStatefulAppli
 
 当命名操作所花时间过长而导致无法接受时，**System.NamingService** 会报告其主副本的运行状况。[CreateServiceAsync](https://msdn.microsoft.com/zh-cn/library/azure/mt124028.aspx) 或 [DeleteServiceAsync](https://msdn.microsoft.com/zh-cn/library/azure/mt124029.aspx) 都是命名操作的示例。在 FabricClient 下可找到更多方法，例如，可在[服务管理方法](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.fabricclient.servicemanagementclient.aspx)或[属性管理方法](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.fabricclient.propertymanagementclient.aspx)下找到更多方法。
 
-> [!NOTE] 命名服务将服务名称解析到群集中的某个位置，并允许用户管理服务名称和属性。它是一个 Service Fabric 分区型持久服务。其中一个分区代表“颁发机构所有者”，内含与所有 Service Fabric 名称和服务相关的元数据。Service Fabric 名称映射到不同的分区，这些分区称为“名称所有者”分区，因此该服务是可扩展的。阅读有关[命名服务](./service-fabric-architecture.md)的更多内容。
+> [!NOTE]
+> 命名服务将服务名称解析到群集中的某个位置，并允许用户管理服务名称和属性。它是一个 Service Fabric 分区型持久服务。其中一个分区代表“颁发机构所有者”，内含与所有 Service Fabric 名称和服务相关的元数据。Service Fabric 名称映射到不同的分区，这些分区称为“名称所有者”分区，因此该服务是可扩展的。阅读有关[命名服务](./service-fabric-architecture.md)的更多内容。
 
 当某个命名操作所需时间超出预期时，将会在*为操作提供服务的命名服务分区的主副本*上使用警告报告对该操作进行标记。如果操作成功完成，将清除该警告。如果操作在完成时出现错误，则运行状况报告中会包括有关该错误的详细信息。
 

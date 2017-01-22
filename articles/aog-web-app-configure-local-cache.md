@@ -47,7 +47,8 @@ Azure web 应用内容（包括代码文件，资源文件等）默认并不是�
 
      ![](./media/aog-web-app-configure-local-cache/portal.png)
 
-    >[!NOTE]默认 local cache 大小为 300MB，最大支持 1G(1024MB)
+    >[!NOTE]
+    >默认 local cache 大小为 300MB，最大支持 1G(1024MB)
 
 2. 重启 web 应用后配置生效
 

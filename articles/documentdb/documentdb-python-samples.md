@@ -38,7 +38,8 @@ ms.author: moderakh
 
 2. 你还需要 [Python SDK](./documentdb-sdk-python.md)。 
 
-    > [!NOTE] 每个示例都是独立的，自行对自身进行设置并在完成后自行进行清理。因此，示例问题将多次调用 [document\_client.CreateCollection](http://azure.github.io/azure-documentdb-python/api/pydocumentdb.document_client.html)。每次执行完此操作，均会按照正在创建的集合的性能等级，向你的订阅收取使用 1 小时的费用。
+    > [!NOTE]
+    > 每个示例都是独立的，自行对自身进行设置并在完成后自行进行清理。因此，示例问题将多次调用 [document\_client.CreateCollection](http://azure.github.io/azure-documentdb-python/api/pydocumentdb.document_client.html)。每次执行完此操作，均会按照正在创建的集合的性能等级，向你的订阅收取使用 1 小时的费用。
 
 ## 数据库示例  <a name="database-examples"></a>
 

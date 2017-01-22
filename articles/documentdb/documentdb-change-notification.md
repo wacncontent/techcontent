@@ -65,11 +65,13 @@ IT 部门表示他们可以轻松提供此通知。他们还表示可以将文�
 
         SELECT * FROM Patients p WHERE (p._ts >= @unixTimeStamp)
 
-    > [!NOTE] The _ts represents the TimeStamp metadata for all DocumentDB resources.
+    > [!NOTE]
+    > The _ts represents the TimeStamp metadata for all DocumentDB resources.
 
 4. 如果找到文档，则会将响应正文发送到 Azure Blob 存储。
 
-    > [!NOTE] Blob 存储需要 Azure 存储帐户。你必须预配 Azure Blob 存储帐户，并添加名为 patients 的新 Blob。有关详细信息，请参阅[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)和 [Azure Blob 存储入门](../storage/storage-dotnet-how-to-use-blobs.md)。
+    > [!NOTE]
+    > Blob 存储需要 Azure 存储帐户。你必须预配 Azure Blob 存储帐户，并添加名为 patients 的新 Blob。有关详细信息，请参阅[关于 Azure 存储帐户](../storage/storage-create-storage-account.md)和 [Azure Blob 存储入门](../storage/storage-dotnet-how-to-use-blobs.md)。
 
 5. 最后会发送电子邮件，通知收件人已找到的文档数目。如果找不到任何文档，电子邮件正文将为“0 Documents Found”。
 
@@ -102,7 +104,8 @@ IT 部门表示他们可以轻松提供此通知。他们还表示可以将文�
 
 ![添加条件](./media/documentdb-change-notification/condition1.png)  
 
-> [!NOTE] 你也可以在“代码视图”中输入任何信息。
+> [!NOTE]
+> 你也可以在“代码视图”中输入任何信息。
 
 让我们在代码视图中看一下完整的逻辑应用。
 
@@ -251,7 +254,8 @@ C#
 
 `triggerBody()` 代表逻辑应用 REST API 的 REST POST 主体中包含的参数。`()['Subject']` 代表字段。所有这些参数构成了 JSON 格式的主体。
 
-> [!NOTE] 使用 Webhook，你可以完整访问触发器的请求标头和主体。在此应用程序中，你会需要主体。
+> [!NOTE]
+> 使用 Webhook，你可以完整访问触发器的请求标头和主体。在此应用程序中，你会需要主体。
 
 如先前所述，你可以使用设计器来分配参数，或在代码视图中分配参数。如果在代码视图中分配参数，你会接着定义需有值的属性，如下列代码示例所示。
 
@@ -525,7 +529,8 @@ JSON
 
 下一个操作是将文档保存到 [Azure Blog 存储](https://www.azure.cn/home/features/storage/)。
 
-> [!NOTE] Blob 存储需要 Azure 存储帐户。你必须预配 Azure Blob 存储帐户，并添加名为 patients 的新 Blob。有关详细信息，请参阅 [Get started with Azure Blob storage](../storage/storage-dotnet-how-to-use-blobs.md)（Azure Blob 存储入门）。
+> [!NOTE]
+> Blob 存储需要 Azure 存储帐户。你必须预配 Azure Blob 存储帐户，并添加名为 patients 的新 Blob。有关详细信息，请参阅 [Get started with Azure Blob storage](../storage/storage-dotnet-how-to-use-blobs.md)（Azure Blob 存储入门）。
 
 ### 创建文件
 
@@ -910,7 +915,8 @@ JSON
 ### DocDBNotificationApi 操作
 让我们看看 Swagger 文档
 
-> [!NOTE] 为了从外部调用操作，你需要在 API 应用的设置中添加 CORS 允许的原始值“*”（不含引号），如下图所示。
+> [!NOTE]
+> 为了从外部调用操作，你需要在 API 应用的设置中添加 CORS 允许的原始值“*”（不含引号），如下图所示。
 
 ![Cors 配置](./media/documentdb-change-notification/cors.png)  
 

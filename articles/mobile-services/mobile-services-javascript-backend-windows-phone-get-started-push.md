@@ -27,7 +27,8 @@ ms.author: glenga
 
 本教程是在 TodoList 示例应用程序的基础上制作的。在开始本教程之前，必须先完成主题[将移动服务添加到现有应用程序]以将项目连接到移动服务。如果尚未连接移动服务，“添加推送通知”向导可为你创建此连接。
 
->[!NOTE]若要向 Windows Phone 8.1 应用商店应用程序发送推送通知，请遵照本教程的 [Windows 应用商店应用程序](./mobile-services-javascript-backend-windows-universal-dotnet-get-started-push.md)版本。
+>[!NOTE]
+>若要向 Windows Phone 8.1 应用商店应用程序发送推送通知，请遵照本教程的 [Windows 应用商店应用程序](./mobile-services-javascript-backend-windows-universal-dotnet-get-started-push.md)版本。
 
 ## <a id="update-app"></a>更新应用程序以注册通知
 
@@ -64,7 +65,8 @@ ms.author: glenga
 
     此代码检索 ChannelURI 以查找来自 Microsoft 推送通知服务 (MPNS) （由 Windows Phone 8.x "Silverlight" 使用）的应用程序， 然后注册该 ChannelURI 以支持推送通知。
 
-    >[!NOTE]在本教程中，移动服务将向设备发送一条 toast 通知。而当你发送磁贴通知时，必须在通道上调用 **BindToShellTile** 方法。
+    >[!NOTE]
+    >在本教程中，移动服务将向设备发送一条 toast 通知。而当你发送磁贴通知时，必须在通道上调用 **BindToShellTile** 方法。
 
 3. 在 App.xaml.cs 中 **Application\_Launching** 事件处理程序的顶部，添加对新的 **AcquirePushChannel** 方法的以下调用：
 
@@ -118,13 +120,15 @@ ms.author: glenga
 
     这样，移动服务便可以连接到处于未经身份验证模式的 MPNS 以发送推送通知。
 
-    >[!NOTE]本教程使用未经身份验证模式下的 MPNS。在此模式下，MPNS 将限制可发送到某个设备通道的通知数。若要解除此限制，必须生成一个证书，然后通过单击“上载”并选择该证书来上载该证书。有关生成证书的详细信息，请参阅[设置已经过身份验证的 Web 服务以便为 Windows Phone 发送推送通知]。
+    >[!NOTE]
+    >本教程使用未经身份验证模式下的 MPNS。在此模式下，MPNS 将限制可发送到某个设备通道的通知数。若要解除此限制，必须生成一个证书，然后通过单击“上载”并选择该证书来上载该证书。有关生成证书的详细信息，请参阅[设置已经过身份验证的 Web 服务以便为 Windows Phone 发送推送通知]。
 
 ## <a id="test"></a>在应用程序中测试推送通知
 
 1. 在 Visual Studio 中，按 F5 键运行应用程序。
 
-    >[!NOTE]在 Windows Phone 模拟器测试时，你可能会遇到 401 错误“未授权的 RegistrationAuthorizationException”。由于 Windows Phone 模拟器时钟与主机电脑时钟的同步问题，在调用 `RegisterNativeAsync()` 期间可能会出现此错误。这可能会导致安全令牌被拒绝。若要解决此问题，只需在模拟器中手动设置时钟，然后再开始测试。
+    >[!NOTE]
+    >在 Windows Phone 模拟器测试时，你可能会遇到 401 错误“未授权的 RegistrationAuthorizationException”。由于 Windows Phone 模拟器时钟与主机电脑时钟的同步问题，在调用 `RegisterNativeAsync()` 期间可能会出现此错误。这可能会导致安全令牌被拒绝。若要解决此问题，只需在模拟器中手动设置时钟，然后再开始测试。
 
 5. 在应用程序中，在文本框中输入文本“hello push”，单击“保存”，然后立即单击开始按钮或后退按钮以退出应用程序。
 
@@ -134,7 +138,8 @@ ms.author: glenga
 
     ![收到的 Toast 通知](./media/mobile-services-javascript-backend-windows-phone-get-started-push/mobile-quickstart-push5-wp8.png)
 
-    >[!NOTE]如果你仍未退出应用程序，则不会收到该通知。若要在应用程序处于活动状态时接收 toast 通知，你必须处理 [ShellToastNotificationReceived](http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/microsoft.phone.notification.httpnotificationchannel.shelltoastnotificationreceived.aspx) 事件。
+    >[!NOTE]
+    >如果你仍未退出应用程序，则不会收到该通知。若要在应用程序处于活动状态时接收 toast 通知，你必须处理 [ShellToastNotificationReceived](http://msdn.microsoft.com/zh-cn/library/windowsphone/develop/microsoft.phone.notification.httpnotificationchannel.shelltoastnotificationreceived.aspx) 事件。
 
 ##  <a name="next-steps"></a>后续步骤
 

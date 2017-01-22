@@ -142,7 +142,8 @@ WAImportExport 工具是可与 [Azure 导入/导出服务](./storage-import-expo
 
 如果数据无法放入 InitialDriveset 中指定的驱动器，可以使用该工具将其他驱动器添加到同一个复制会话。
 
->[!NOTE] 会话 ID 应与上一个会话 ID 匹配。日记文件应与上一个会话中指定的文件匹配。
+>[!NOTE]
+> 会话 ID 应与上一个会话 ID 匹配。日记文件应与上一个会话中指定的文件匹配。
 
     WAImportExport.exe PrepImport /j:<SameJournalFile> /id:<SameSessionId> /AdditionalDriveSet:<newdriveset.csv>
 
@@ -172,7 +173,8 @@ WAImportExport 工具是可与 [Azure 导入/导出服务](./storage-import-expo
 
     WAImportExport.exe PrepImport /j:JournalTest.jrn /id:session#2 /ResumeSession
 
-> [!IMPORTANT] 恢复复制会话时，请不要通过添加或删除文件来修改源数据文件和目录。
+> [!IMPORTANT]
+> 恢复复制会话时，请不要通过添加或删除文件来修改源数据文件和目录。
 
 ## WAImportExport 参数
 
@@ -321,7 +323,8 @@ SessionId 可以包含字母、0~9、下划线 (\_)、短划线 (-) 或井号 (#
 有可能你的计算机不带 tpm 芯片。如果使用 tpm.msc 未返回任何输出，请查看下一条常见问题。
 
 #### 如何在 BitLocker 中禁用受信任的平台模块 (TPM)？
-> [!NOTE] 仅当服务器中没有 TPM 时，才需要禁用 TPM 策略。如果用户的服务器中有受信任的 TPM，则不需要禁用 TPM。
+> [!NOTE]
+> 仅当服务器中没有 TPM 时，才需要禁用 TPM 策略。如果用户的服务器中有受信任的 TPM，则不需要禁用 TPM。
 
 若要在 BitLocker 中禁用 TPM，请执行以下步骤：
 

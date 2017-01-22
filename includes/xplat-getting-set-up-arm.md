@@ -62,6 +62,7 @@ wacn.date: 12/17/2015
     $ azure config mode arm
     info:    New mode is arm
 
-> [!NOTE]你可以通过键入 `azure config mode asm` 切换回来，以便使用 Azure 服务管理命令。
+> [!NOTE]
+>你可以通过键入 `azure config mode asm` 切换回来，以便使用 Azure 服务管理命令。
 
 <!---HONumber=Mooncake_1207_2015-->

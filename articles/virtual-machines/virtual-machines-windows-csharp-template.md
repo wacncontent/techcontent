@@ -208,7 +208,8 @@ ms.author: davidmu
           }
         }
 
-    >[!NOTE] 本文创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅[使用 Windows PowerShell 和 Azure CLI 浏览和选择 Azure 虚拟机映像](./virtual-machines-linux-cli-ps-findimage.md)。
+    >[!NOTE]
+    > 本文创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅[使用 Windows PowerShell 和 Azure CLI 浏览和选择 Azure 虚拟机映像](./virtual-machines-linux-cli-ps-findimage.md)。
 
 4. 保存创建的参数文件。
 

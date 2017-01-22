@@ -22,7 +22,8 @@ ms.author: cynthn
 
 本文逐步说明如何在资源组或订阅之间移动 Windows VM。如果最初在个人订阅中创建了 VM，现在想要将其移到公司的订阅以继续工作，则在订阅之间移动 VM 会很方便。
 
-> [!NOTE] 在移动过程中将创建新的资源 ID。移动 VM 后，需要更新工具和脚本以使用新的资源 ID。
+> [!NOTE]
+> 在移动过程中将创建新的资源 ID。移动 VM 后，需要更新工具和脚本以使用新的资源 ID。
 
 [!INCLUDE [virtual-machines-common-move-vm](../../includes/virtual-machines-common-move-vm.md)]
 

@@ -59,7 +59,8 @@ Azure Redis 缓存提供的 Redis 群集与[在 Redis 中实施](http://redis.io
 
 若要更改正在运行并且已启用群集的高级缓存的群集大小，请在“设置”边栏选项卡中单击“(预览) Redis 群集大小”。
 
->[!NOTE] 请注意，虽然 Azure Redis 缓存高级层已发行公开上市版，但 Redis 群集大小功能目前以预览版提供。
+>[!NOTE]
+> 请注意，虽然 Azure Redis 缓存高级层已发行公开上市版，但 Redis 群集大小功能目前以预览版提供。
 
 ![Redis 群集大小][redis-cache-redis-cluster-size]  
 
@@ -112,7 +113,8 @@ Azure Redis 缓存提供的 Redis 群集与[在 Redis 中实施](http://redis.io
 
 目前，并非所有客户端都支持 Redis 群集功能。StackExchange.Redis 是不支持该功能的客户端。有关其他客户端的详细信息，请参阅 [Redis 群集教程](http://redis.io/topics/cluster-tutorial)的[操作群集](http://redis.io/topics/cluster-tutorial#playing-with-the-cluster)部分。
 
->[!NOTE] 如果你使用 StackExchange.Redis 作为客户端，请确保使用最新版本的 [StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis/)，即 1.0.481 或更高，以便群集功能能够正常使用。如果你对 move 异常有任何疑问，请参阅 [move 异常](#move-exceptions)了解详细信息。
+>[!NOTE]
+> 如果你使用 StackExchange.Redis 作为客户端，请确保使用最新版本的 [StackExchange.Redis](https://www.nuget.org/packages/StackExchange.Redis/)，即 1.0.481 或更高，以便群集功能能够正常使用。如果你对 move 异常有任何疑问，请参阅 [move 异常](#move-exceptions)了解详细信息。
 
 ### <a name="how-do-i-connect-to-my-cache-when-clustering-is-enabled"></a>启用群集功能后，如何连接到我的缓存？
 

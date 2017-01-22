@@ -23,7 +23,8 @@ ms.tgt_pltfrm: NA
 
 此脚本适合用于评估 v11 服务器上要迁移到 v12 服务器（支持池）的数据库。在 v12 服务器上， SQL 数据库具有内置的智能，能分析历史使用情况遥测数据并在更具成本效益的时候推荐使用池。有关信息，请参阅[监视、管理和调整弹性数据库池](./sql-database-elastic-pool-manage-portal.md)。
 
-> [!IMPORTANT] 运行该脚本时，请保持 PowerShell 窗口处于打开状态。在运行脚本未达到所需的时间前，请不要关闭 PowerShell 窗口。
+> [!IMPORTANT]
+> 运行该脚本时，请保持 PowerShell 窗口处于打开状态。在运行脚本未达到所需的时间前，请不要关闭 PowerShell 窗口。
 
 ## 先决条件 
 

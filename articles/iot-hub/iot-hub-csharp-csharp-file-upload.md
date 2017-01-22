@@ -30,7 +30,8 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
 * **SimulatedDevice**，这是 [Send Cloud-to-Device messages with IoT Hub]（使用 IoT 中心发送云到设备的消息）教程中创建的应用的修改版本，它可以使用 IoT 中心提供的 SAS URI 将文件上载到存储。
 * **ReadFileUploadNotification**，它可以接收来自 IoT 中心的文件上载通知。
 
-> [!NOTE] IoT 中心通过 Azure IoT 设备 SDK 来支持许多设备平台和语言（包括 C、Java 和 Javascript）。有关如何将设备连接到本教程中所示的代码（通常是连接到 Azure IoT 中心）的逐步说明，请参阅 [Azure IoT Developer Center]（Azure IoT 开发人员中心）。
+> [!NOTE]
+> IoT 中心通过 Azure IoT 设备 SDK 来支持许多设备平台和语言（包括 C、Java 和 Javascript）。有关如何将设备连接到本教程中所示的代码（通常是连接到 Azure IoT 中心）的逐步说明，请参阅 [Azure IoT Developer Center]（Azure IoT 开发人员中心）。
 
 完成本教程需要具备以下项：
 
@@ -81,7 +82,8 @@ Azure IoT 中心是一项完全托管的服务，可在数百万个 IoT 设备�
 
         SendToBlobAsync();
 
-> [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+> [!NOTE]
+> 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 接收文件上载通知
 

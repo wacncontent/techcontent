@@ -99,7 +99,8 @@ POST 操作对于所有基于度量值的警报包含以下 JSON 有效负载和
 |portalLink |Y | |指向门户资源摘要页的直接链接。|
 |properties |N |可选 |一组包含事件详细信息的 `<Key, Value>` 对（即 `Dictionary<String, String>`）。properties 字段是可选的。在自定义 UI 或基于逻辑应用的工作流中，用户可以输入键/值，该键/值可通过有效负载传递。将自定义属性传递回 webhook 的替代方法是通过 webhook URI 本身（作为查询参数）|
 
->[!NOTE] 只能使用 [Azure Monitor REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn933805.aspx) 设置属性字段。
+>[!NOTE]
+> 只能使用 [Azure Monitor REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn933805.aspx) 设置属性字段。
 
 ## 后续步骤
 

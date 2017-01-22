@@ -23,7 +23,8 @@ ms.author: robmcm;asirveda;martinsawicki
 ## Azure Toolkit for Eclipse 版本
 本文包含有关 Azure Toolkit for Eclipse 的不同版本和最新更新的信息。
 
-> [!NOTE] 另外还有 Azure Toolkit for IntelliJ IDE。有关详细信息，请参阅 [Azure Toolkit for IntelliJ]。
+> [!NOTE]
+> 另外还有 Azure Toolkit for IntelliJ IDE。有关详细信息，请参阅 [Azure Toolkit for IntelliJ]。
 
 ### 2016 年 8 月 26 日
 用于 Eclipse 的 Azure 工具包 - 2016 年 8 月版包含以下增强功能：
@@ -106,7 +107,8 @@ Azure Toolkit for Eclipse – 2015 年 3 月版包含以下增强功能：
 
 * **支持 Mac、Ubuntu 和其他 Linux 风格**。此版本的 Azure Toolkit for Eclipse 添加了对 Mac OS 和多种 Unix 平台的支持，因此，开发人员可以在运行非 Windows 操作系统的 Eclipse 中，安装该工具包来创建、配置 Java 项目并将其发布到 Azure 云服务 (PaaS)。
 
->[!NOTE] 此功能目前以预览版提供，不建议在生产环境中使用。对于此版本，我们不提供客户支持服务级别协议 (SLA)，但鼓励并感谢大家的反馈。
+>[!NOTE]
+> 此功能目前以预览版提供，不建议在生产环境中使用。对于此版本，我们不提供客户支持服务级别协议 (SLA)，但鼓励并感谢大家的反馈。
 
 * **新的 Application Insights 插件**。现在，开发人员可以在 Azure 上使用 Application Insights 配置自动服务器遥测。
 * **基于 Ant 的命令行部署自动化**。此功能使开发人员能够使用 Eclipse 外部的 Ant，自动发布其较新版本的部署。首次从 Eclipse 部署某个项目后，将为该项目自动配置一个预先生成的脚本，后续的部署只需使用该脚本通过命令行完全自动化部署。

@@ -60,7 +60,8 @@ ms.author: juliako
 
 定位符具有过期日期。Azure 门户将定位符的过期日期设置为 100 年以后。
 
->[!NOTE] 如果在 2015 年 3 月之前使用 Azure 门户创建定位符，这些定位符设置为两年后过期。
+>[!NOTE]
+> 如果在 2015 年 3 月之前使用 Azure 门户创建定位符，这些定位符设置为两年后过期。
 
 若要更新定位符的过期日期，请使用 [REST](https://docs.microsoft.com/zh-cn/rest/api/media/operations/locator#a-nameupdatealocatora-update-a-locator) 或 [.NET] (https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.ilocator.update(v=azure.10).aspx) API。请注意，当你更新 SAS 定位符的过期日期时，URL 会发生变化。
 
@@ -73,7 +74,8 @@ ms.author: juliako
 
 若要为用户提供流式处理 URL，必须先创建一个 OnDemandOrigin 定位符。通过创建定位符，可获得包含要流式传输的内容的资产的基本路径。但是，为了能够流式传输此内容，需要进一步修改此路径。若要构造流式处理清单文件的完整 URL，必须将定位符的 path 值与清单 \(filename.ism\) 文件名连接起来。然后，向定位符路径追加 **/Manifest** 和相应的格式（如果需要）。
 
->[!NOTE]你也可以通过 SSL 连接流式传输内容。为此，请确保流 URL 以 HTTPS 开头。
+>[!NOTE]
+>你也可以通过 SSL 连接流式传输内容。为此，请确保流 URL 以 HTTPS 开头。
 
 仅当要从中传送内容的流式处理终结点是在 2014 年 9 月 10 日之后创建的情况下，才可以通过 SSL 流式传输内容。如果流式处理 URL 基于 2014 年 9 月 10 日之后创建的流式处理终结点，则 URL 会包含“streaming.mediaservices.chinacloudapi.cn”。 包含“origin.mediaservices.chinacloudapi.cn”（旧格式）的流 URL 不支持 SSL。如果你的 URL 采用旧格式，并且你希望能够通过 SSL 流式传输内容，请创建新的流式处理终结点。使用基于新流式处理终结点的 URL 通过 SSL 流式传输内容。
 

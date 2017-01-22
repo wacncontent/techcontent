@@ -76,7 +76,8 @@ SQuirreL SQL 是一个 JDBC 客户端，可用于通过 HDInsight 群集远程�
             * C:\\apps\\dist\\hadoop-2.6.0.2.2.9.1-7\\share\\hadoop\\common\\hadoop-common-2.6.0.2.2.9.1-7.jar
             * C:\\apps\\dist\\hadoop-2.6.0.2.2.9.1-7\\share\\hadoop\\common\\lib\\hadoop-auth-2.6.0.2.2.9.1-7.jar
 
-            > [!NOTE] 群集的路径和文件名中包含的版本号可能会有所不同。
+            > [!NOTE]
+            > 群集的路径和文件名中包含的版本号可能会有所不同。
 
         4. 文件复制完成后，断开远程桌面会话的连接。
 
@@ -134,7 +135,8 @@ SQuirreL SQL 是一个 JDBC 客户端，可用于通过 HDInsight 群集远程�
 
 使用 Java 客户端查询 Hive on HDInsight 的示例位于 [https://github.com/Azure-Samples/hdinsight-java-hive-jdbc](https://github.com/Azure-Samples/hdinsight-java-hive-jdbc)。按照存储库中的说明生成并运行该示例。
 
->[!NOTE] 此示例是针对全球 Azure 编写。对于 Azure 中国区，需要在连接字符串中将“azurehdinsight.net”替换为“azurehdinsight.cn”。
+>[!NOTE]
+> 此示例是针对全球 Azure 编写。对于 Azure 中国区，需要在连接字符串中将“azurehdinsight.net”替换为“azurehdinsight.cn”。
 
 ##故障排除
 

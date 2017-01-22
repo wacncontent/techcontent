@@ -26,7 +26,8 @@ ms.author: markgal; trinadhk
 
 本文说明如何使用 Azure PowerShell cmdlet 从恢复服务保管库备份和恢复 Azure 虚拟机 (VM)。恢复服务保管库是一种 Azure资源管理器资源，用于保护 Azure 备份和 Azure Site Recovery 服务中的数据与资产。可以使用恢复服务保管库来保护 Azure Service Manager 部署型 VM 以及 Azure资源管理器部署型 VM。
 
->[!NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文针对使用资源管理器模型创建的 VM。
+>[!NOTE]
+> Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文针对使用资源管理器模型创建的 VM。
 
 本文将逐步指导用户使用 PowerShell 来保护 VM，以及从恢复点还原数据。
 
@@ -106,7 +107,8 @@ ms.author: markgal; trinadhk
         PS C:\> $vault1 = Get-AzureRmRecoveryServicesVault -Name "testVault"
         PS C:\> Set-AzureRmRecoveryServicesBackupProperties  -Vault $vault1 -BackupStorageRedundancy GeoRedundant
 
-    > [!TIP] 许多 Azure 备份 cmdlet 要求使用恢复服务保管库对象作为输入。因此，在变量中存储备份恢复服务保管库对象可提供方便。
+    > [!TIP]
+    > 许多 Azure 备份 cmdlet 要求使用恢复服务保管库对象作为输入。因此，在变量中存储备份恢复服务保管库对象可提供方便。
 
 ## 在订阅中查看保管库
 使用 **[Get-AzureRmRecoveryServicesVault](https://msdn.microsoft.com/zh-cn/library/mt643907.aspx)** 查看当前订阅中所有保管库的列表。可以使用此命令来查看是否创建了新的保管库，或者查看订阅中的可用保管库。
@@ -139,7 +141,8 @@ ms.author: markgal; trinadhk
     ----                 ------------       -------------------- ----------                ----------
     DefaultPolicy        AzureVM            AzureVM              4/14/2016 5:00:00 PM
 
-> [!NOTE] PowerShell 中 BackupTime 字段的时区是 UTC。
+> [!NOTE]
+> PowerShell 中 BackupTime 字段的时区是 UTC。
 
 一个备份保护策略至少与一个保留策略相关联。保留策略定义在 Azure 备份中保留恢复点的时限。使用 **Get-AzureRmRecoveryServicesBackupRetentionPolicyObject** 可以查看默认保留策略。同理，可以使用 **Get-AzureRmRecoveryServicesBackupSchedulePolicyObject** 获取默认计划策略。计划和保留策略对象将用作 **New-AzureRmRecoveryServicesBackupProtectionPolicy** cmdlet 的输入。
 
@@ -191,7 +194,8 @@ ms.author: markgal; trinadhk
     ------------     ---------            ------               ---------                 -------                   ----------
     V2VM              Backup               InProgress            4/23/2016 5:00:30 PM                       cf4b3ef5-2fac-4c8e-a215-d2eba4124f27
 
-> [!NOTE]：PowerShell 中的 StartTime 和 EndTime 字段时区为 UTC。
+> [!NOTE]
+>：PowerShell 中的 StartTime 和 EndTime 字段时区为 UTC。
 
 ## 监视备份作业
 

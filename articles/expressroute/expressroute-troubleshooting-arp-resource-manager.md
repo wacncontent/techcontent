@@ -25,7 +25,8 @@ ms.author: ganesr
 
 本文将指导你完成相关步骤，以便了解 ExpressRoute 线路的 ARP 表。
 
->[!IMPORTANT] 本文档旨在帮助你诊断和修复简单问题。它不是为了替代 Azure 支持部门。如果你无法通过下述指南解决问题，则必须[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单。
+>[!IMPORTANT]
+> 本文档旨在帮助你诊断和修复简单问题。它不是为了替代 Azure 支持部门。如果你无法通过下述指南解决问题，则必须[在线申请支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)创建工单。
 
 ## 地址解析协议 (ARP) 和 ARP 表
 地址解析协议 (ARP) 是在 [RFC 826](https://tools.ietf.org/html/rfc826) 中定义的第二层协议。ARP 用于映射以太网地址（MAC 地址）和 IP 地址。
@@ -122,7 +123,8 @@ ARP 表示例：
         --- ----------------- ---------  ----------    
           0 Microsoft         65.0.0.2 aaaa.bbbb.cccc
 
->[!NOTE] 通过你的连接提供商提出支持请求，以便进行此类问题的调试。
+>[!NOTE]
+> 通过你的连接提供商提出支持请求，以便进行此类问题的调试。
 
 ### 当 Azure 端出现问题时的 ARP 表
 

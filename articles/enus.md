@@ -54,13 +54,15 @@ MySQL Database on Azure supports slave server mode and standard MySQL data repli
 
     ii. If you are using SSL links, select the enable option in the locations by using the SSL links. Next, open the master server certification authority (CA) certificate and copy the entire contents into the input box of the master server CA certificate. c) Click Save after all the details are correctly configured.
 
->[!NOTE]**We strongly recommend using SSL to help ensure that your data is secure. **
+>[!NOTE]
+>**We strongly recommend using SSL to help ensure that your data is secure. **
 
 ![Configuration process](./media/mysql-database-data-replication/replicationsetting.png)
 
 12. Once the configuration is successful, the Replication Status at the bottom should say “replicating.” ![Configuration process](./media/mysql-database-data-replication/replicationstatus.png)
 
->[!NOTE]**Once the replication role of the MySQL server is set to slave server, the server will be in read-only mode. - Once the replication role of the MySQL server is set to slave server, none of the master server parameters on the replication page will be editable, except for the role. If there is an input error, you must set the replication role to Disabled and then reconfigure the slave server parameters. - We recommend setting the binlog\_format for the master server to Mixed or Row, to avoid causing data replication errors due to the use of unsafe statements such as sysdate ().**
+>[!NOTE]
+>**Once the replication role of the MySQL server is set to slave server, the server will be in read-only mode. - Once the replication role of the MySQL server is set to slave server, none of the master server parameters on the replication page will be editable, except for the role. If there is an input error, you must set the replication role to Disabled and then reconfigure the slave server parameters. - We recommend setting the binlog\_format for the master server to Mixed or Row, to avoid causing data replication errors due to the use of unsafe statements such as sysdate ().**
 
 ##Data replication restrictions
 1. Changes on the master server to accounts and permissions are not replicated. If you created an account on the master server and this account needs to access the slave server, then you will need to create the same account yourself on MySQL Database on Azure.

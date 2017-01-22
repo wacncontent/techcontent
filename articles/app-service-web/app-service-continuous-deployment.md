@@ -35,7 +35,8 @@ ms.author: dariagrigoriu
 
 4. 输入 GitHub 存储库的 URL 并输入要跟踪的分支。将“存储库类型”保留为“Git”，并单击“完成”
 
-    > [!NOTE] Azure 中国目前只支持公共存储库，因为我们无法输入 Web 应用的 Git 凭据。
+    > [!NOTE]
+    > Azure 中国目前只支持公共存储库，因为我们无法输入 Web 应用的 Git 凭据。
 
     Azure 将创建与所选存储库的关联，从指定的分支提取文件，并保留 Azure Web 应用存储库的副本。
 

@@ -58,11 +58,13 @@ Azure PowerShell 使用语义版本控制，这意味着如果版本 A > 版本 
 
 从 WebPI 安装 Azure PowerShell 1.0 和更高版本的方法与安装 0.9.x 版本是一样的。下载 [Azure PowerShell](http://aka.ms/webpi-azps) 并开始安装。如果安装了 Azure PowerShell 0.9.x，将在升级期间卸载版本 0.9.x。如果从 PowerShell 库安装了 Azure PowerShell 模块，安装程序将在安装之前自动删除这些模块，以确保 Azure PowerShell 环境一致。
 
-> [!NOTE] 如果之前从 PowerShell 库安装了 Azure 模块，安装程序将自动删除这些模块。这是为了防止混淆已安装的模块版本及其所在的位置。PowerShell 库模块通常安装在 **%ProgramFiles%\\WindowsPowerShell\\Modules** 中。相反，WebPI 安装程序会在 **%ProgramFiles(x86)%\\Microsoft SDKs\\Azure\\PowerShell** 中安装 Azure 模块。如果在安装过程中发生错误，可以手动删除 **%ProgramFiles%\\WindowsPowerShell\\Modules** 文件夹中的 Azure* 文件夹，然后重试安装。
+> [!NOTE]
+> 如果之前从 PowerShell 库安装了 Azure 模块，安装程序将自动删除这些模块。这是为了防止混淆已安装的模块版本及其所在的位置。PowerShell 库模块通常安装在 **%ProgramFiles%\\WindowsPowerShell\\Modules** 中。相反，WebPI 安装程序会在 **%ProgramFiles(x86)%\\Microsoft SDKs\\Azure\\PowerShell** 中安装 Azure 模块。如果在安装过程中发生错误，可以手动删除 **%ProgramFiles%\\WindowsPowerShell\\Modules** 文件夹中的 Azure* 文件夹，然后重试安装。
 
 安装完成后，```$env:PSModulePath``` 设置中应会有包含 Azure PowerShell cmdlet 的目录。
 
-> [!NOTE] 从 WebPI 安装时，会发生一个有关 PowerShell **$env:PSModulePath** 的已知问题。如果计算机因系统更新或其他安装而需要重启，有可能会导致更新 **$env:PSModulePath** 不包含 Azure PowerShell 的安装路径。如果发生这种情况，当你在安装或升级之后尝试使用 Azure PowerShell cmdlet 时，可能会看到“cmdlet 无法识别”消息。如果发生这种情况，重启计算机应该可以解决该问题。
+> [!NOTE]
+> 从 WebPI 安装时，会发生一个有关 PowerShell **$env:PSModulePath** 的已知问题。如果计算机因系统更新或其他安装而需要重启，有可能会导致更新 **$env:PSModulePath** 不包含 Azure PowerShell 的安装路径。如果发生这种情况，当你在安装或升级之后尝试使用 Azure PowerShell cmdlet 时，可能会看到“cmdlet 无法识别”消息。如果发生这种情况，重启计算机应该可以解决该问题。
 
 如果尝试加载或执行 cmdlet，会收到如下消息：
 
@@ -153,7 +155,8 @@ cmdlet 需要使用你的订阅来管理你的服务。如果你没有 Azure 订
 
     $cred = Get-Credential
     Login-AzureRmAccount -EnvironmentName AzureChinaCloud -Credential $cred
-> [!NOTE] 如果你的组织帐户有多个关联的租户，请指定 TenantId 参数：
+> [!NOTE]
+> 如果你的组织帐户有多个关联的租户，请指定 TenantId 参数：
 
     $loadersubscription = Get-AzureRmSubscription -SubscriptionName $YourSubscriptionName -TenantId $YourAssociatedSubscriptionTenantId
 

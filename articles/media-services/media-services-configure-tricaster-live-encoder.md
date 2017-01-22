@@ -29,7 +29,8 @@ ms.author: juliako;cenkd;anilmur
 
 本教程演示了如何通过 Azure 媒体服务浏览器 (AMSE) 工具管理 Azure 媒体服务 (AMS)。此工具仅在 Windows 电脑上运行。如果使用的是 Mac 或 Linux，则可使用 Azure 经典管理门户创建[频道](./media-services-portal-creating-live-encoder-enabled-channel.md#create-a-channel)和[节目](./media-services-portal-creating-live-encoder-enabled-channel.md#create-and-manage-a-program)。
 
->[!NOTE]使用 Tricaster 将贡献源发送到已启用实时编码的 AMS 频道时，如果使用了 Tricaster 的某些功能（例如，在源之间快速剪切，或者切入/切出静态图像），实时事件可能会出现视频/音频抖动。AMS 团队正在努力解决这些问题，在此之前，不建议使用这些功能。
+>[!NOTE]
+>使用 Tricaster 将贡献源发送到已启用实时编码的 AMS 频道时，如果使用了 Tricaster 的某些功能（例如，在源之间快速剪切，或者切入/切出静态图像），实时事件可能会出现视频/音频抖动。AMS 团队正在努力解决这些问题，在此之前，不建议使用这些功能。
 
 ##先决条件
 
@@ -57,11 +58,13 @@ ms.author: juliako;cenkd;anilmur
 3. 单击“创建频道”。
 ![tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster2.png)
 
->[!NOTE] 启动频道可能需要长达 20 分钟的时间。
+>[!NOTE]
+> 启动频道可能需要长达 20 分钟的时间。
 
 启动频道时，你可以[配置编码器](./media-services-configure-tricaster-live-encoder.md#configure_tricaster_rtmp)。
 
->[!IMPORTANT] 请注意，只要频道进入就绪状态，就会开始计费。有关详细信息，请参阅[频道的状态](./media-services-manage-live-encoder-enabled-channels.md#states)。
+>[!IMPORTANT]
+> 请注意，只要频道进入就绪状态，就会开始计费。有关详细信息，请参阅[频道的状态](./media-services-manage-live-encoder-enabled-channels.md#states)。
 
 ##<a id="configure_tricaster_rtmp"></a>配置 NewTek TriCaster 编码器
 
@@ -120,7 +123,8 @@ ms.author: juliako;cenkd;anilmur
 
     ![tricaster](./media/media-services-tricaster-live-encoder/media-services-tricaster11.png)
 
->[!IMPORTANT] 在单击“流”之前，**必须**确保频道已就绪。
+>[!IMPORTANT]
+> 在单击“流”之前，**必须**确保频道已就绪。
 >另外，请确保不要让频道在没有输入/贡献源的情况下处于就绪状态的时间超出 15 分钟。
 
 ##测试播放

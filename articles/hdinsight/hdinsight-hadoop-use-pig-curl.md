@@ -38,7 +38,8 @@ ms.author: larryfr
 
 ##<a id="curl"></a>使用 Curl 运行 Pig 作业
 
-> [!NOTE] 使用 Curl 或者与 WebHCat 进行任何其他形式的 REST 通信时，必须提供 HDInsight 群集的管理员用户名和密码对请求进行身份验证。此外，还必须使用群集名称作为用来向服务器发送请求的统一资源标识符 (URI) 的一部分。
+> [!NOTE]
+> 使用 Curl 或者与 WebHCat 进行任何其他形式的 REST 通信时，必须提供 HDInsight 群集的管理员用户名和密码对请求进行身份验证。此外，还必须使用群集名称作为用来向服务器发送请求的统一资源标识符 (URI) 的一部分。
 ><p> 对于本部分中的命令，请将 **USERNAME** 替换为对群集进行身份验证的用户，并将 **PASSWORD** 替换为用户帐户的密码。将 **CLUSTERNAME** 替换为群集名称。
 ><p> REST API 通过[基本访问身份验证](http://en.wikipedia.org/wiki/Basic_access_authentication)进行保护。你始终应该使用安全 HTTP (HTTPS) 发出请求，以帮助确保安全地将凭据发送到服务器。
 
@@ -69,7 +70,8 @@ ms.author: larryfr
         * **execute**：要执行的 Pig Latin 语句
         * **statusdir**：此作业的状态要写入到的目录
 
-    > [!NOTE] 请注意，在与 Curl 配合使用时，将使用 `+` 字符替换 Pig Latin 语句中的空格。
+    > [!NOTE]
+    > 请注意，在与 Curl 配合使用时，将使用 `+` 字符替换 Pig Latin 语句中的空格。
 
     此命令应返回可用来检查作业状态的作业 ID，例如：
 
@@ -81,7 +83,8 @@ ms.author: larryfr
 
     如果作业已完成，状态将是 **SUCCEEDED**。
 
-    > [!NOTE] 此 Curl 请求返回具有作业相关信息的 JavaScript 对象表示法 (JSON) 文档；使用 jq 可以仅检索状态值。
+    > [!NOTE]
+    > 此 Curl 请求返回具有作业相关信息的 JavaScript 对象表示法 (JSON) 文档；使用 jq 可以仅检索状态值。
 
 ##<a id="results"></a>查看结果
 
@@ -95,7 +98,8 @@ ms.author: larryfr
 
     azure storage blob download <container-name> <blob-name> <destination-file>
 
-> [!NOTE] 你必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。
+> [!NOTE]
+> 你必须使用 `-a` 和 `-k` 参数指定包含 Blob 的存储帐户名称，或者设置 **AZURE\_STORAGE\_ACCOUNT** 和 **AZURE\_STORAGE\_ACCESS\_KEY** 环境变量。
 
 ##<a id="summary"></a>摘要
 

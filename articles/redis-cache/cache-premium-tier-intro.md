@@ -74,7 +74,8 @@ Azure Redis 缓存是一种分布式托管缓存，可通过提供对数据的�
 
 有关详细信息，请参阅[计划更新](./cache-administration.md#schedule-updates)和[计划更新常见问题](./cache-administration.md#schedule-updates-faq)。
 
->[!NOTE] 仅在计划的维护时段进行 Redis 服务器更新。维护时段不适用于 Azure 更新或 VM 操作系统更新。
+>[!NOTE]
+> 仅在计划的维护时段进行 Redis 服务器更新。维护时段不适用于 Azure 更新或 VM 操作系统更新。
 
 ## 伸缩到高级层
 

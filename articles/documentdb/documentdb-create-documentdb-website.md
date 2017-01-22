@@ -29,7 +29,8 @@ wacn.date: 01/10/2017
 - 如何使用 Azure 资源管理器模板来部署和集成 DocumentDB 帐户、App Service Web Apps 中的 Web 应用以及 Webdeploy 应用程序？
 
 ## 先决条件
-> [!TIP] 虽然本教程不会假设先前有使用 Azure 资源管理器模板或 JSON 的经验，但是，如果你想修改引用的模板或部署选项，则需要有其中每个领域的知识。
+> [!TIP]
+> 虽然本教程不会假设先前有使用 Azure 资源管理器模板或 JSON 的经验，但是，如果你想修改引用的模板或部署选项，则需要有其中每个领域的知识。
 
 在按照本教程中的说明操作之前，请确保已有下列各项：
 
@@ -46,7 +47,8 @@ wacn.date: 01/10/2017
 
 现在让我们来部署第一个模板。
 
-> [!TIP] 该模板不会验证下面输入的 Web 应用名称和 DocumentDB 帐户名称是否 a) 有效以及 b) 可用。强烈建议在提交部署之前，先确认你打算提供的名称的可用性。
+> [!TIP]
+> 该模板不会验证下面输入的 Web 应用名称和 DocumentDB 帐户名称是否 a) 有效以及 b) 可用。强烈建议在提交部署之前，先确认你打算提供的名称的可用性。
 
 1. 登录到 [Azure 门户预览](https://portal.azure.cn)，单击“新建”并搜索“模板部署”。
     ![模板部署 UI 的屏幕截图](./media/documentdb-create-documentdb-website/TemplateDeployment1.png)
@@ -94,7 +96,8 @@ wacn.date: 01/10/2017
 
 现在让我们来部署第二个模板。此模板可用于演示如何将帐户终结点和主密钥等 DocumentDB 连接信息插入 Web 应用，作为应用程序设置或自定义连接字符串。例如，你或许有想要使用 DocumentDB 帐户部署的 Web 应用程序，以及在部署期间自动填充的连接信息。
 
-> [!TIP] 该模板不会验证下面输入的 Web 应用名称和 DocumentDB 帐户名称是否 a) 有效以及 b) 可用。强烈建议在提交部署之前，先确认你打算提供的名称的可用性。
+> [!TIP]
+> 该模板不会验证下面输入的 Web 应用名称和 DocumentDB 帐户名称是否 a) 有效以及 b) 可用。强烈建议在提交部署之前，先确认你打算提供的名称的可用性。
 
 1. 在 [Azure 门户预览](https://portal.azure.cn)中，单击“新建”并搜索“模板部署”。
     ![模板部署 UI 的屏幕截图](./media/documentdb-create-documentdb-website/TemplateDeployment1.png)

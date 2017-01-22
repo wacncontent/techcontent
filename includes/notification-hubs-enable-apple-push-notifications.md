@@ -62,7 +62,8 @@ Apple 推送通知服务 (APNS) 使用证书对推送通知进行身份验证。
 
        将显示“Add iOS Certificate”（添加 iOS 证书）助手。
 
-    > [!NOTE] 本教程使用开发证书。注册生产证书时使用相同的过程。你只需确保在发送通知时使用相同的证书类型。
+    > [!NOTE]
+    > 本教程使用开发证书。注册生产证书时使用相同的过程。你只需确保在发送通知时使用相同的证书类型。
 
 5. 单击“Choose File”（选择文件），浏览到你在第一个任务中创建的 CSR 文件保存到的位置，然后单击“Generate”（生成）。
 
@@ -76,7 +77,8 @@ Apple 推送通知服务 (APNS) 使用证书对推送通知进行身份验证。
 
       ![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-cert-downloaded.png)  
 
-    > [!NOTE] 默认情况下，下载的文件（开发证书）名为 **aps\_development.cer**。
+    > [!NOTE]
+    > 默认情况下，下载的文件（开发证书）名为 **aps\_development.cer**。
 
 7. 双击下载的推送证书 **aps\_development.cer**。
 
@@ -84,7 +86,8 @@ Apple 推送通知服务 (APNS) 使用证书对推送通知进行身份验证。
 
        ![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-cert-in-keychain.png)  
 
-    > [!NOTE] 证书中的名称可能不同，但将以 **Apple Development iOS Push Services:** 作为前缀。
+    > [!NOTE]
+    > 证书中的名称可能不同，但将以 **Apple Development iOS Push Services:** 作为前缀。
 
 8. 在 Keychain Access 中，右键单击你在“Certificates”（证书）类别中创建的新推送证书。单击“导出”，为文件命名，选择“.p12”格式，然后单击“保存”。
 
@@ -92,7 +95,8 @@ Apple 推送通知服务 (APNS) 使用证书对推送通知进行身份验证。
 
     记下导出的 .p12 证书的文件名和位置。它将用于启用 APNS 身份验证。
 
-    >[!NOTE] 本教程将创建 QuickStart.p12 文件。你的文件名和位置可能不同。
+    >[!NOTE]
+    > 本教程将创建 QuickStart.p12 文件。你的文件名和位置可能不同。
 
 ##为应用程序创建配置文件
 

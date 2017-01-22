@@ -74,7 +74,8 @@ ms.author: ningk
 
 [在 Linux 上配置软件 RAID](./virtual-machines-linux-configure-raid.md)
 
->[!NOTE]如果使用的是 XFS 文件系统，创建 RAID 后请按照下面的步骤操作。
+>[!NOTE]
+>如果使用的是 XFS 文件系统，创建 RAID 后请按照下面的步骤操作。
 
 若要在 Debian、Ubuntu 或 Linux Mint 上安装 XFS，请使用以下命令：
 
@@ -134,7 +135,8 @@ Linux 实现了四种类型的 I/O 计划算法：
     root@mysqlnode1:~# sed -i 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash elevator=noop"/g' /etc/default/grub
     root@mysqlnode1:~# update-grub
 
->[!NOTE]对 /dev/sda 单独进行此设置毫无用处。需对数据库所在的所有数据磁盘进行设置。
+>[!NOTE]
+>对 /dev/sda 单独进行此设置毫无用处。需对数据库所在的所有数据磁盘进行设置。
 
 你应该会看到以下输出，指示已成功重新生成 grub.cfg 并且默认计划程序已更新为 NOOP。
 

@@ -32,7 +32,8 @@ ms.author: juliako
 1. 获取访问令牌
 2. 连接到媒体服务 URI
 
-    >[!NOTE]上海 DC URI：https://wamsshaclus001rest-hs.chinacloudapp.cn/API/ ； 北京 DC URI： https://wamsbjbclus001rest-hs.chinacloudapp.cn/API/
+    >[!NOTE]
+    >上海 DC URI：https://wamsshaclus001rest-hs.chinacloudapp.cn/API/ ； 北京 DC URI： https://wamsbjbclus001rest-hs.chinacloudapp.cn/API/
 
 3. 将后续 API 调用发布到相应的 URL。
 

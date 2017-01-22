@@ -33,7 +33,8 @@ ms.tgt_pltfrm: NA
  - 在导出期间终止所有读取和写入活动。
  - 对所有大型表格上的非 null 值使用[聚集索引](https://msdn.microsoft.com/zh-cn/library/ms190457.aspx)。如果不使用聚集索引，当时间超过 6-12 个小时时，导出可能会失败。这是因为导出服务需要完成表格扫描，才能尝试导出整个表格。确认表格是否针对导出进行优化的一个好方法是，运行 **DBCC SHOW\_STATISTICS**，确保 *RANGE\_HI\_KEY* 不是 null 并且值分布良好。有关详细信息，请参阅 [DBCC SHOW\_STATISTICS](https://msdn.microsoft.com/zh-cn/library/ms174384.aspx)。
 
-> [!NOTE] BACPAC 不能用于备份和还原操作。Azure SQL 数据库会自动为每个用户数据库创建备份。有关详细信息，请参阅 [SQL 数据库自动备份](./sql-database-automated-backups.md)。
+> [!NOTE]
+> BACPAC 不能用于备份和还原操作。Azure SQL 数据库会自动为每个用户数据库创建备份。有关详细信息，请参阅 [SQL 数据库自动备份](./sql-database-automated-backups.md)。
 
 若要完成本文，需要以下各项：
 
@@ -47,7 +48,8 @@ ms.tgt_pltfrm: NA
 
 [New-AzureRmSqlDatabaseExport](https://msdn.microsoft.com/zh-cn/library/mt707796.aspx) cmdlet 向服务提交导出数据库请求。根据数据库的大小，导出操作可能需要一些时间才能完成。
 
-> [!IMPORTANT] 若要确保获得事务处理一致性 BACPAC 文件，应首先[创建数据库的副本](./sql-database-copy-powershell.md)，然后导出该数据库副本。
+> [!IMPORTANT]
+> 若要确保获得事务处理一致性 BACPAC 文件，应首先[创建数据库的副本](./sql-database-copy-powershell.md)，然后导出该数据库副本。
 
      $exportRequest = New-AzureRmSqlDatabaseExport –ResourceGroupName $ResourceGroupName –ServerName $ServerName `
        –DatabaseName $DatabaseName –StorageKeytype $StorageKeytype –StorageKey $StorageKey -StorageUri $BacpacUri `

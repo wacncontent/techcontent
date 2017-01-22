@@ -19,7 +19,8 @@ ms.author: lmazuel
 
 # 如何从 Python 使用服务管理
 
-> [!NOTE] 服务管理 API 将被新的资源管理 API 替换，后者目前已发布预览版。请参阅 [Azure 资源管理文档](http://azure-sdk-for-python.readthedocs.org/)，详细了解如何使用 Python 推出的全新资源管理 API。
+> [!NOTE]
+> 服务管理 API 将被新的资源管理 API 替换，后者目前已发布预览版。请参阅 [Azure 资源管理文档](http://azure-sdk-for-python.readthedocs.org/)，详细了解如何使用 Python 推出的全新资源管理 API。
 
 本指南说明如何以编程方式从 Python 执行常见服务管理任务。[用于 Python 的 Azure SDK](https://github.com/Azure/azure-sdk-for-python) 中的 **ServiceManagementService** 类支持以编程方式访问 [Azure 经典管理门户][management-portal]中提供的众多与服务管理相关的功能（例如**创建、更新和删除云服务、部署、数据管理服务和虚拟机**）。此功能可用于构建需要以编程方式访问服务管理的应用程序。
 
@@ -38,7 +39,8 @@ Azure SDK for Python 可包装 [Azure 服务管理 API][svc-mgmt-rest-api]，后
 ## <a name="Connect"> </a>如何：连接到服务管理
 若要连接到服务管理终结点，你需要 Azure 订阅 ID 和有效管理证书。可以通过 [Azure 经典管理门户][management-portal]获取订阅 ID。
 
-> [!NOTE] 从 Azure SDK for Python v0.8.0 开始，在 Windows 上运行时，可以使用通过 OpenSSL 创建的证书。需要 Python 2.7.4 或更高版本。我们建议用户使用 OpenSSL 而不是 .pfx，因为将来可能会取消对 .pfx 证书的支持。
+> [!NOTE]
+> 从 Azure SDK for Python v0.8.0 开始，在 Windows 上运行时，可以使用通过 OpenSSL 创建的证书。需要 Python 2.7.4 或更高版本。我们建议用户使用 OpenSSL 而不是 .pfx，因为将来可能会取消对 .pfx 证书的支持。
 
 ### Windows/Mac/Linux 上的管理证书 (OpenSSL)
 可使用 [OpenSSL](http://www.openssl.org/) 创建管理证书。你实际上需要创建两个证书，一个用于服务器（`.cer` 文件），一个用于客户端（`.pem` 文件）。若要创建 `.pem` 文件，请执行以下代码：

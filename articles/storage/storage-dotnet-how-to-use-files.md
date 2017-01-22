@@ -106,7 +106,8 @@ ms.author: minet
 
     ![演示如何装载文件共享的屏幕快照](./media/storage-dotnet-how-to-use-files/files-manage-3.png)
 
-    >[!TIP] 若要查找用于装载的存储帐户访问密钥，请先单击存储帐户的“设置”，然后单击“访问密钥”。
+    >[!TIP]
+    > 若要查找用于装载的存储帐户访问密钥，请先单击存储帐户的“设置”，然后单击“访问密钥”。
 
     ![演示如何查找存储帐户访问密钥的屏幕快照](./media/storage-dotnet-how-to-use-files/files-manage-4.png)
 
@@ -120,7 +121,8 @@ ms.author: minet
 
 若要准备使用 PowerShell，请下载并安装 Azure PowerShell cmdlet。有关安装点和安装说明，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。
 
-> [!NOTE] 建议你下载并安装最新的 Azure PowerShell 模块或升级到最新模块。
+> [!NOTE]
+> 建议你下载并安装最新的 Azure PowerShell 模块或升级到最新模块。
 
 通过单击“开始”并键入 **Azure PowerShell** 打开 Azure PowerShell 窗口。Azure PowerShell 窗口将为你加载 Azure PowerShell 模块。
 
@@ -142,7 +144,8 @@ ms.author: minet
 
 现在，你在文件存储中已有一个文件共享。接下来，我们将添加目录和文件。
 
-> [!IMPORTANT] 文件共享的名称必须是全部小写。有关命名文件共享和文件的完整详细信息，请参阅[命名和引用共享、目录、文件和元数据](https://msdn.microsoft.com/zh-cn/library/azure/dn167011.aspx)。
+> [!IMPORTANT]
+> 文件共享的名称必须是全部小写。有关命名文件共享和文件的完整详细信息，请参阅[命名和引用共享、目录、文件和元数据](https://msdn.microsoft.com/zh-cn/library/azure/dn167011.aspx)。
 
 ### 在文件共享中创建目录
 
@@ -237,7 +240,8 @@ Get-AzureStorageFile 将返回任何传入的目录对象的文件和目录列�
 * 安装支持 SMB 3.0 的 Windows 版本。Windows 将利用 SMB 3.0 加密来在本地客户端和云中的 Azure 文件共享之间安全地传输数据。
 * 根据 SMB 协议的需要，在本地网络中打开端口 445（TCP 出站）的 Internet 访问。
 
-> [!NOTE] 某些 Internet 服务提供商可能会阻止端口 445，因此你可能需要与你的服务提供商核实。
+> [!NOTE]
+> 某些 Internet 服务提供商可能会阻止端口 445，因此你可能需要与你的服务提供商核实。
 
 ## 使用文件存储进行开发
 
@@ -271,7 +275,8 @@ Get-AzureStorageFile 将返回任何传入的目录对象的文件和目录列�
         </appSettings>
     </configuration>
 
-> [!NOTE] 最新版本的 Azure 存储模拟器不支持文件存储。连接字符串必须针对云中要使用文件存储的 Azure 存储帐户。
+> [!NOTE]
+> 最新版本的 Azure 存储模拟器不支持文件存储。连接字符串必须针对云中要使用文件存储的 Azure 存储帐户。
 
 ### 添加命名空间声明
 
@@ -411,7 +416,8 @@ Get-AzureStorageFile 将返回任何传入的目录对象的文件和目录列�
 
 还可以使用 AzCopy 将一个文件复制到另一个文件或将一个 Blob 复制到一个文件，反之亦然。请参阅[使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)。
 
-> [!NOTE] 如果将一个 Blob 复制到一个文件，或将一个文件复制到一个 Blob，必须使用共享访问签名 (SAS) 对源对象进行身份验证，即使你在同一存储帐户内进行复制。
+> [!NOTE]
+> 如果将一个 Blob 复制到一个文件，或将一个文件复制到一个 Blob，必须使用共享访问签名 (SAS) 对源对象进行身份验证，即使你在同一存储帐户内进行复制。
 
 **将一个文件复制到另一个文件**
 

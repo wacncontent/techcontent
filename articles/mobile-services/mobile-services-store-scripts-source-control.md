@@ -37,7 +37,8 @@ ms.author: glenga
 
     安装 Git 所需的步骤因操作系统的不同而异。有关操作系统特定的分发和安装指南，请参阅[安装 Git]。
 
-    > [!NOTE]在某些操作系统上，命令行和 GUI 版本的 Git 都可用。本文中提供的说明使用命令行版本。
+    > [!NOTE]
+    >在某些操作系统上，命令行和 GUI 版本的 Git 都可用。本文中提供的说明使用命令行版本。
 
 2. 打开一个命令行，例如 **GitBash** (Windows) 或 **Bash** (Unix Shell)。在 OS X 系统上，可以通过 **Terminal** 应用程序访问命令行。
 
@@ -105,7 +106,8 @@ ms.author: glenga
 
         "node-uuid": "~1.4.3"
 
-    >[!NOTE]对 package.json 文件执行这项更新会导致推送提交内容后重新启动移动服务。
+    >[!NOTE]
+    >对 package.json 文件执行这项更新会导致推送提交内容后重新启动移动服务。
 
 2. 现在，请浏览到 .\\service\\table 子文件夹，打开 todoitem.insert.js 文件并按如下所示修改该文件：
 

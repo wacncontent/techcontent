@@ -51,7 +51,8 @@ ms.author: sethm
 
        ![][22]
 
-> [!NOTE]  在本教程中，只出于开发目的以本地模式使用 Storm。请参阅 [HDInsight Storm 概述][]和官方 [Apache Storm][] 文档，以了解 Storm 部署和模式的详细信息。
+> [!NOTE]
+>  在本教程中，只出于开发目的以本地模式使用 Storm。请参阅 [HDInsight Storm 概述][]和官方 [Apache Storm][] 文档，以了解 Storm 部署和模式的详细信息。
 
 ## 后续步骤
 

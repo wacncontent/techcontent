@@ -29,11 +29,13 @@ SQL Server Management Studio 中的“将数据库部署到 Azure 数据库”�
 
 ##<a name="use-the-deploy-database-to-microsoft-azure-database-wizard"></a> 使用“将数据库部署到 Azure 数据库”向导
 
-> [!NOTE] 以下步骤假定用户有预配的 SQL 数据库服务器。
+> [!NOTE]
+> 以下步骤假定用户有预配的 SQL 数据库服务器。
 
 1. 确认你安装了最新版本的 SQL Server Management Studio。Management Studio 的新版本将每月更新一次，以与 Azure 门户的更新保持同步。
 
-    > [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+    > [!IMPORTANT]
+    > 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 2. 打开 Management Studio 并连接到要在对象资源管理器中迁移的 SQL Server 数据库。
 3. 右键单击对象资源管理器中的数据库、指向“任务”，然后单击“将数据库部署到 Azure SQL 数据库...”

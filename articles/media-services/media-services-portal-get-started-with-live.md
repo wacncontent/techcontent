@@ -62,7 +62,8 @@ ms.author: juliako;cenkd
 
 分配所有新的单元大约需要 20 分钟才能完成。
 
->[!NOTE] 当前，将流式处理单元的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
+>[!NOTE]
+> 当前，将流式处理单元的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
 >
 > 为 24 小时时间段指定的最大单位数将用于计算成本。有关定价的详细信息，请参阅 [媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
 
@@ -88,11 +89,13 @@ ms.author: juliako;cenkd
 
 ## 配置实时编码器并引入实时流
 
->[!NOTE] 此步骤需要上一步中提到的频道引入 URL。
+>[!NOTE]
+> 此步骤需要上一步中提到的频道引入 URL。
 
 有关如何配置 Wirecast 并开始引入流的详细信息，请参阅 [Wirecast 配置](https://azure.microsoft.com/blog/2014/09/18/azure-media-services-rtmp-support-and-live-encoders/)。
 
->[!NOTE] 如果出于任何原因停止了编码器，然后需要重新启动它，则应先重置频道，方法是在 Azure 经典管理门户中单击“重置”命令。
+>[!NOTE]
+> 如果出于任何原因停止了编码器，然后需要重新启动它，则应先重置频道，方法是在 Azure 经典管理门户中单击“重置”命令。
 
 ## 创建和管理节目
 

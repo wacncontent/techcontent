@@ -27,7 +27,8 @@ ms.author: larryfr
 
 在群集创建过程中，该脚本将枚举文件、将这些文件复制到头节点和工作节点上的 `/usr/lib/customhivelibs/` 目录，然后将它们添加到 `core-site.xml` 文件中的 `hive.aux.jars.path` 属性。
 
-> [!NOTE] 使用本文中的脚本操作使库可用于以下方案：
+> [!NOTE]
+> 使用本文中的脚本操作使库可用于以下方案：
 > * __基于 Windows 的 HDInsight__ - 当使用 __Hive 命令行__和 __WebHCat__ (Templeton) 时。
 
 ##脚本
@@ -50,7 +51,8 @@ __要求__
 
 * 必须指定容器的 WASB 路径作为脚本操作的参数。例如，如果 jar 存储在名为 __mystorage__ 的存储帐户上名为 __libs__ 的容器中，则该参数应为 __wasbs://libs@mystorage.blob.core.chinacloudapi.cn/__。
 
-    > [!NOTE] 本文档假定你已创建存储帐户、blob 容器，并已将文件上传到该容器。
+    > [!NOTE]
+    > 本文档假定你已创建存储帐户、blob 容器，并已将文件上传到该容器。
     ><p> 如果尚未创建存储帐户，可以通过 [Azure 经典管理门户](https://manage.windowsazure.cn)创建该帐户。然后可以使用实用工具（如 [Azure 存储资源管理器](http://storageexplorer.com/)）在帐户中新建容器并将文件上传到该容器。
 
 ##使用脚本创建群集。

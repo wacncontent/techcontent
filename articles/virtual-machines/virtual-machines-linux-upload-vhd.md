@@ -68,7 +68,8 @@ ms.author: iainfou
     - 安装并配置 [QEMU](https://en.wikibooks.org/wiki/QEMU/Installing_QEMU) 或 [KVM](http://www.linux-kvm.org/page/RunningKVM)，并小心使用 VHD 作为映像格式。如有需要，可以使用 `qemu-img convert` [转换映像](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats)。
     - 也可以在 [Windows 10](https://msdn.microsoft.com/virtualization/hyperv_on_windows/quick_start/walkthrough_install) 或 [Windows Server 2012/2012 R2](https://technet.microsoft.com/zh-cn/library/hh846766.aspx) 上使用 Hyper-V。
 
-> [!NOTE] Azure 不支持更新的 VHDX 格式。创建 VM 时，请将 VHD 指定为映像格式。如有需要，可以使用 [`qemu-img convert`](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats) 或 [`Convert-VHD`](https://technet.microsoft.com/zh-cn/library/hh848454.aspx) PowerShell cmdlet 将 VHDX 磁盘转换为 VHD。此外，Azure 不支持上载动态 VHD，因此，上载之前，需要将此类磁盘转换为静态 VHD。可以使用 [Azure VHD Utilities for GO](https://github.com/Microsoft/azure-vhd-utils-for-go) 等工具在上载到 Azure 的过程中转换动态磁盘。
+> [!NOTE]
+> Azure 不支持更新的 VHDX 格式。创建 VM 时，请将 VHD 指定为映像格式。如有需要，可以使用 [`qemu-img convert`](https://en.wikibooks.org/wiki/QEMU/Images#Converting_image_formats) 或 [`Convert-VHD`](https://technet.microsoft.com/zh-cn/library/hh848454.aspx) PowerShell cmdlet 将 VHDX 磁盘转换为 VHD。此外，Azure 不支持上载动态 VHD，因此，上载之前，需要将此类磁盘转换为静态 VHD。可以使用 [Azure VHD Utilities for GO](https://github.com/Microsoft/azure-vhd-utils-for-go) 等工具在上载到 Azure 的过程中转换动态磁盘。
 
 - 从自定义映像创建的 VM 必须位于映像本身所在的存储帐户中
     - 创建存储帐户和容器，以存放自定义映像以及所创建的 VM
@@ -94,7 +95,8 @@ Azure 支持各种 Linux 分发版（请参阅 [认可的分发版](./virtual-ma
 
 另请参阅 **[Linux 安装说明](./virtual-machines-linux-create-upload-generic.md#general-linux-installation-notes)**，获取更多有关为 Azure 准备 Linux 映像的一般提示。
 
-> [!NOTE] 只有使用某个认可的分发版且在配置详细信息中“支持的版本”下指定了 [Azure 认可的 Linux 分发版](./virtual-machines-linux-endorsed-distros.md)时，[Azure 平台 SLA](https://www.azure.cn/support/sla/virtual-machines/) 才适用于运行 Linux 的 VM。
+> [!NOTE]
+> 只有使用某个认可的分发版且在配置详细信息中“支持的版本”下指定了 [Azure 认可的 Linux 分发版](./virtual-machines-linux-endorsed-distros.md)时，[Azure 平台 SLA](https://www.azure.cn/support/sla/virtual-machines/) 才适用于运行 Linux 的 VM。
 
 ## 创建资源组
 资源组以逻辑方式将所有 Azure 资源（例如虚拟网络和存储）聚集在一起，以支持虚拟机。可以在这里了解有关 [Azure 资源组](../azure-resource-manager/resource-group-overview.md)的详细信息。在上载自定义磁盘映像并创建 VM 之前，首先需要创建一个资源组。

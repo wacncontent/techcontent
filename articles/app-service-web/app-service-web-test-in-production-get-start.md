@@ -40,7 +40,8 @@ ms.author: cephalin
 
 在每个 TiP 方案的基本级别中，将预定义百分比的实际流量路由到非生产部署槽。为此，请执行以下步骤：
 
->[!NOTE] 此处的步骤假设已有[非生产部署槽](./web-sites-staged-publishing.md)，并且所需的 Web 应用内容[已部署](./web-sites-deploy.md)给它。
+>[!NOTE]
+> 此处的步骤假设已有[非生产部署槽](./web-sites-staged-publishing.md)，并且所需的 Web 应用内容[已部署](./web-sites-deploy.md)给它。
 
 1. 登录到 [Azure 门户预览](https://portal.azure.cn/)。
 2. 在 Web 应用的边栏选项卡中，单击“设置”>“流量路由”。![](./media/app-service-web-test-in-production/01-traffic-routing.png)

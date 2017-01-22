@@ -28,7 +28,8 @@ ms.author: juliako
 
 可通过创建 OnDemand 流式处理定位符并生成流式处理 URL 来流式传输自适应比特率 MP4 集。[对资产进行编码](./media-services-encode-asset.md)主题说明了如何编码成自适应比特率 MP4 集。
 
->[!NOTE]如果内容已加密，则在创建定位符之前配置资产传送策略（如[本](./media-services-dotnet-configure-asset-delivery-policy.md)主题中所述）。
+>[!NOTE]
+>如果内容已加密，则在创建定位符之前配置资产传送策略（如[本](./media-services-dotnet-configure-asset-delivery-policy.md)主题中所述）。
 
 也可以使用 OnDemand 流式处理定位符生成指向可渐进式下载的 MP4 文件的 URL。
 
@@ -95,7 +96,8 @@ ms.author: juliako
     URL to manifest for client streaming using MPEG DASH protocol:
     http://amstest1.streaming.mediaservices.chinacloudapi.cn/3c5fe676-199c-4620-9b03-ba014900f214/BigBuckBunny.ism/manifest(format=mpd-time-csf)
 
->[!NOTE]也可通过 SSL 连接流式传输内容。为此，请确保流式处理 URL 以 HTTPS 开头。
+>[!NOTE]
+>也可通过 SSL 连接流式传输内容。为此，请确保流式处理 URL 以 HTTPS 开头。
 
 生成渐进式下载 URL
 

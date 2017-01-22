@@ -53,7 +53,8 @@ wacn.date: 11/30/2016
     ![](./media/aog-sql-database-troubleshot-dead-lock/v11-2.jpg)
 
 4. 我们对 Master 数据库新建一个查询。  
-    >[!NOTE]由于 sys.event_log 有大概十分钟左右的延迟，所以请在十分钟后在执行查询。
+    >[!NOTE]
+    >由于 sys.event_log 有大概十分钟左右的延迟，所以请在十分钟后在执行查询。
 
     ![](./media/aog-sql-database-troubleshot-dead-lock/v11-3.jpg)
 
@@ -77,7 +78,8 @@ wacn.date: 11/30/2016
 
 对于 V12 版本的数据库，我们可以通过运行如下语句来查询死锁信息，死锁的模拟可以参照上文中 V11 部分所述来完成。
 
->[!NOTE]V12 的死锁信息也会有一些延迟，所以刚发生的死锁可能需要等待 10 分钟左右才能看到。
+>[!NOTE]
+>V12 的死锁信息也会有一些延迟，所以刚发生的死锁可能需要等待 10 分钟左右才能看到。
 
     WITH CTE AS (
            SELECT CAST(event_data AS XML)  AS [target_data_XML] 

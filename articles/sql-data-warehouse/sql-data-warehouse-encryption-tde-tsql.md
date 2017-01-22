@@ -44,7 +44,8 @@ ms.author: rortloff;barbkess
 
         ALTER DATABASE [AdventureWorks] SET ENCRYPTION OFF;
 
-> [!NOTE] 在更改 TDE 设置之前，必须恢复暂停的 SQL 数据仓库。
+> [!NOTE]
+> 在更改 TDE 设置之前，必须恢复暂停的 SQL 数据仓库。
 
 ## 验证加密
 若要验证 SQL 数据仓库的加密状态，请遵循以下步骤：

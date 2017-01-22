@@ -58,7 +58,8 @@
 
 在没有域环境的情况下，SQL Server 数据库引擎无法使用 Windows 身份验证。若要从其他计算机连接到数据库引擎，请将 SQL Server 的身份验证模式配置为混合。混合模式身份验证同时允许 SQL Server 身份验证和 Windows 身份验证。
 
->[!NOTE] 如果你已使用配置的域环境配置了 Azure 虚拟网络，可能没有必要配置混合模式身份验证。
+>[!NOTE]
+> 如果你已使用配置的域环境配置了 Azure 虚拟网络，可能没有必要配置混合模式身份验证。
 
 1. 在连接到虚拟机时，在“开始”页面中，键入“SQL Server Management Studio”，然后单击勾选图标。
 
@@ -108,7 +109,8 @@
 
 11. 如果这是你创建的第一个登录名，可能会需要将此登录名指派为 SQL Server 管理员。这样的话，请在“服务器角色”页面上选中“sysadmin”。
 
-    >[!NOTE] sysadmin 固定服务器角色的成员对数据库引擎具有完全控制权限。应谨慎限制此角色中的成员资格。
+    >[!NOTE]
+    > sysadmin 固定服务器角色的成员对数据库引擎具有完全控制权限。应谨慎限制此角色中的成员资格。
 
     ![sysadmin](./media/virtual-machines-sql-server-connection-steps/25sysadmin.png)
 

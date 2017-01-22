@@ -40,7 +40,8 @@ ms.author: barbkess;sonyama
 
 ### 安装最新版本的 Azure PowerShell
 
-> [!NOTE]  若要对 SQL 数据仓库使用 Azure PowerShell，需要安装 Azure PowerShell 1.0.3 或更高版本。若要验证当前版本，请运行命令 **Get-Module -ListAvailable -Name Azure**。可以从 [Microsoft Web 平台安装程序][]安装最新的版本。有关详细信息，请参阅[如何安装和配置 Azure PowerShell][]。
+> [!NOTE]
+>  若要对 SQL 数据仓库使用 Azure PowerShell，需要安装 Azure PowerShell 1.0.3 或更高版本。若要验证当前版本，请运行命令 **Get-Module -ListAvailable -Name Azure**。可以从 [Microsoft Web 平台安装程序][]安装最新的版本。有关详细信息，请参阅[如何安装和配置 Azure PowerShell][]。
 
 ### Azure PowerShell cmdlet 入门
 
@@ -72,7 +73,8 @@ ms.author: barbkess;sonyama
 
 若要暂停数据库，请使用 [Suspend-AzureRmSqlDatabase][] cmdlet。以下示例将暂停 Server01 服务器上托管的 Database02 数据库。该服务器位于名为 ResourceGroup1 的 Azure 资源组中。
 
-> [!NOTE] 注意，如果服务器是 foo.database.chinacloudapi.cn，请使用“foo”作为 Powershell cmdlet 中的 -ServerName。
+> [!NOTE]
+> 注意，如果服务器是 foo.database.chinacloudapi.cn，请使用“foo”作为 Powershell cmdlet 中的 -ServerName。
 
     Suspend-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" `
     –ServerName "Server01" –DatabaseName "Database02"

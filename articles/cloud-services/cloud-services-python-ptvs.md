@@ -36,7 +36,8 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 
 有关详细信息，请参阅[什么是云服务？]。
 
-> [!NOTE] *想要构建一个简单的网站？* 
+> [!NOTE]
+> *想要构建一个简单的网站？* 
 如果方案只涉及一个简单的网站前端，请考虑使用 Azure 应用服务中的轻型 Web 应用功能。随着网站的不断扩大和需求的不断变化，用户可将其轻松升级到云服务。请参阅 <a href="/develop/python/">Python 开发人员中心</a>上关于开发 Azure App Service 中的 Web Apps 功能的文章。
 <br />
 
@@ -62,7 +63,8 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 
 ## 在云服务上安装 Python
 
->[!WARNING] 本文上次更新时与 Visual Studio 一起安装的安装脚本无法使用。本部分介绍一种解决方法。
+>[!WARNING]
+> 本文上次更新时与 Visual Studio 一起安装的安装脚本无法使用。本部分介绍一种解决方法。
 
 安装脚本的主要问题在于无法安装 Python。首先，请在 [ServiceDefinition.csdef](./cloud-services-model-and-package.md#csdef) 文件中定义两个[启动任务](./cloud-services-startup-tasks.md)。任务一：(**PrepPython.ps1**) 下载并安装 Python 运行时间。第二个任务 (**PipInstaller.ps1**) 运行 pip，安装可能存在的任何依赖项。
 
@@ -227,7 +229,8 @@ Azure 为运行应用程序提供了三种计算模型：[Azure 应用服务中�
 
 #### 修改 LaunchWorker.ps1
 
->[!NOTE] 对于**辅助角色**项目，需要 **LauncherWorker.ps1** 文件才能执行启动文件。在 **web 角色**项目中，启动文件在项目属性中定义。
+>[!NOTE]
+> 对于**辅助角色**项目，需要 **LauncherWorker.ps1** 文件才能执行启动文件。在 **web 角色**项目中，启动文件在项目属性中定义。
 
 **bin\\LaunchWorker.ps1** 最初是为了执行多种准备工作而创建的，但实际上并不起作用。将该文件中的内容替换为以下脚本。
 

@@ -25,7 +25,8 @@ ms.author: daleche
 
     Error code 40613: "Database <x> on server <y> is not currently available. Please retry the connection later. If the problem persists, contact customer support, and provide them the session tracing ID of <z>"
 
-> [!NOTE] 此错误消息通常是暂时的（生存期较短）。
+> [!NOTE]
+> 此错误消息通常是暂时的（生存期较短）。
 
 移动（或重新配置）Azure 数据库时发生此错误，应用程序失去与 SQL 数据库的连接。计划内事件（例如软件升级）或计划外事件（例如进程崩溃或负载均衡）都可能导致发生 SQL 数据库重新配置事件。大多数重新配置事件的生存期通常较短，应在最多 60 秒内完成。但是，这些事件偶尔可能需要更长时间才能完成，例如当大型事务导致长时间运行的恢复时。
 

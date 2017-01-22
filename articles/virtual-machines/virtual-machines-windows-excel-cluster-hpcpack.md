@@ -161,7 +161,8 @@ HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出�
 
     * 若要使用 MAK，请先运行 clusrun `ospp.vbs` 以输入密钥，然后通过 Internet 或电话激活所有 Excel 计算节点。 
 
->[!NOTE]Office Professional Plus 2013 的零售产品密钥不适用于此 VM 映像。如果拥有不属此 Office Professional Plus 2013 批量版的 Office 或 Excel 版本的有效密钥和安装媒体，则也可以使用这些版本。请首先卸载此批量版，然后安装所拥有的版本。可捕获重新安装的 Excel 计算节点作为自定义 VM 映像，以便在大规模部署中使用。
+>[!NOTE]
+>Office Professional Plus 2013 的零售产品密钥不适用于此 VM 映像。如果拥有不属此 Office Professional Plus 2013 批量版的 Office 或 Excel 版本的有效密钥和安装媒体，则也可以使用这些版本。请首先卸载此批量版，然后安装所拥有的版本。可捕获重新安装的 Excel 计算节点作为自定义 VM 映像，以便在大规模部署中使用。
 
 ### 卸载 Excel 工作簿
 
@@ -217,7 +218,8 @@ HPC Pack 部署脚本可运行一段时间。此脚本的一项功能是导出�
 
 若要运行 Excel UDF，请按照前面的步骤 1 - 3 设置客户端计算机。对于 Excel UDF，不需在计算节点上安装 Excel 应用程序。因此，在创建群集计算节点时，可以选择常规计算节点映像而非使用 Excel 的计算节点映像。
 
->[!NOTE] Excel 2010 和 Excel 2013 群集连接器对话框有 34 字符限制。使用此对话框指定运行 UDF 的群集。如果完整的群集名称较长（例如 hpcexcelhn01.chinaeast.chinacloudapp.cn），则会在对话框中容纳不下。解决方法是设置一个计算机范围的变量（例如 *CCP\_IAASHN*），其值为群集的长名称。然后，在对话框中输入 *%CCP\_IAASHN%* 作为群集头节点名称。
+>[!NOTE]
+> Excel 2010 和 Excel 2013 群集连接器对话框有 34 字符限制。使用此对话框指定运行 UDF 的群集。如果完整的群集名称较长（例如 hpcexcelhn01.chinaeast.chinacloudapp.cn），则会在对话框中容纳不下。解决方法是设置一个计算机范围的变量（例如 *CCP\_IAASHN*），其值为群集的长名称。然后，在对话框中输入 *%CCP\_IAASHN%* 作为群集头节点名称。
 
 成功部署群集后，继续使用以下步骤来运行示例内置 Excel UDF。对于自定义 Excel UDF，请参阅这些[资源](http://social.technet.microsoft.com/wiki/contents/articles/1198.windows-hpc-and-microsoft-excel-resources-for-building-cluster-ready-workbooks.aspx)来构建 XLL 并将它们部署在 IaaS 群集上。
 

@@ -105,7 +105,8 @@ SQL 数据库 V12 具有[旧版所欠缺的许多优点](./sql-database-v12-what
 
 ## 升级到 SQL 数据库 V12 后监视数据库
 
->[!IMPORTANT] 升级到最新版本的 SQL Server Management Studio (SSMS) 以利用新的 v12 功能。[下载 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+>[!IMPORTANT]
+> 升级到最新版本的 SQL Server Management Studio (SSMS) 以利用新的 v12 功能。[下载 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 升级后，主动监视数据库，确保应用程序以所需性能运行，然后根据需要优化设置。
 

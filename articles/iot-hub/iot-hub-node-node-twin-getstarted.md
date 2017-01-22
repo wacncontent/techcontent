@@ -26,7 +26,8 @@ ms.author: elioda
 * **AddTagsAndQuery.js**，一个旨在从后端运行的 Node.js 应用，它添加标记并查询设备孪生。
 * **TwinSimulatedDevice.js**，一个 Node.js 应用，它模拟使用早前创建的设备标识连接到 IoT 中心的设备，并报告其连接条件。
 
-> [!NOTE] [IoT Hub SDKs][lnk-hub-sdks]（IoT 中心 SDK）一文介绍了各种可以用来构建设备和后端应用程序的 SDK。
+> [!NOTE]
+> [IoT Hub SDKs][lnk-hub-sdks]（IoT 中心 SDK）一文介绍了各种可以用来构建设备和后端应用程序的 SDK。
 
 若要完成本教程，你需要以下各项：
 
@@ -125,7 +126,8 @@ ms.author: elioda
 ## 创建设备应用
 在此部分，会创建一个 Node.js 控制台应用作为 **myDeviceId** 连接到中心，然后更新其设备孪生的报告属性，说明它是使用手机网络进行连接的。
 
-> [!NOTE] 目前，只能从使用 MQTT 协议连接到 IoT 中心的设备访问设备孪生。有关如何转换现有设备应用以使用 MQTT 的说明，请参阅 [MQTT 支持][lnk-devguide-mqtt]一文。
+> [!NOTE]
+> 目前，只能从使用 MQTT 协议连接到 IoT 中心的设备访问设备孪生。有关如何转换现有设备应用以使用 MQTT 的说明，请参阅 [MQTT 支持][lnk-devguide-mqtt]一文。
 
 1. 新建名为 **reportconnectivity** 的空文件夹。在命令提示符下的 **reportconnectivity** 文件夹中，使用以下命令创建新的 package.json 文件。接受所有默认值：
 

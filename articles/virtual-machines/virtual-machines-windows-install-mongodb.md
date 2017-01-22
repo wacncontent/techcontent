@@ -31,7 +31,8 @@ ms.author: iainfou
 
 ## 安装 MongoDB
 
-> [!IMPORTANT] 默认情况下，不启用 MongoDB 安全功能，例如身份验证和 IP 地址绑定。在将 MongoDB 部署到生产环境之前，应启用安全功能。有关详细信息，请参阅 [MongoDB Security and Authentication](http://www.mongodb.org/display/DOCS/Security+and+Authentication)（MongoDB 安全性和身份验证）。
+> [!IMPORTANT]
+> 默认情况下，不启用 MongoDB 安全功能，例如身份验证和 IP 地址绑定。在将 MongoDB 部署到生产环境之前，应启用安全功能。有关详细信息，请参阅 [MongoDB Security and Authentication](http://www.mongodb.org/display/DOCS/Security+and+Authentication)（MongoDB 安全性和身份验证）。
 
 1. 使用远程桌面连接到 VM 后，请在 VM 上从“开始”菜单打开 Internet Explorer。
 
@@ -71,7 +72,8 @@ ms.author: iainfou
 
         ;C:\Program Files\MongoDB\Server\3.2\bin
 
-    > [!NOTE] 请务必添加前置分号 (`;`)，指明要将一个位置添加到 `PATH` 变量。
+    > [!NOTE]
+    > 请务必添加前置分号 (`;`)，指明要将一个位置添加到 `PATH` 变量。
 
 2. 在数据磁盘上创建 MongoDB 数据和日志目录。在“开始”菜单中，选择“命令提示符”。以下示例在 F: 驱动器中创建目录：
 
@@ -84,7 +86,8 @@ ms.author: iainfou
 
     MongoDB 可能需要几分钟来分配日志文件和开始侦听连接。当 `mongod.exe` 服务器启动和分配日志文件时，所有日志消息将定向到 *F:\\MongoLogs\\mongolog.log* 文件。
 
-    > [!NOTE] 运行 MongoDB 实例时，命令提示符的焦点将保留在此任务上。将命令提示符窗口保持打开状态，以便继续运行 MongoDB。或者，如下一步骤的详述，将 MongoDB 作为服务安装。
+    > [!NOTE]
+    > 运行 MongoDB 实例时，命令提示符的焦点将保留在此任务上。将命令提示符窗口保持打开状态，以便继续运行 MongoDB。或者，如下一步骤的详述，将 MongoDB 作为服务安装。
 
 4. 为获得更健全的 MongoDB 体验，请将 `mongod.exe` 作为服务安装。创建服务意味着不需要每次使用 MongoDB 时都要运行命令提示符。按如下所示创建服务，并相应地调整数据和日志目录的路径：
 
@@ -135,7 +138,8 @@ ms.author: iainfou
 
 如有需要，创建一个网络安全组规则，以允许从现有 Azure 虚拟网络子网外部访问 MongoDB。可以使用 [Azure 门户预览](./virtual-machines-windows-nsg-quickstart-portal.md)或 [Azure PowerShell](./virtual-machines-windows-nsg-quickstart-powershell.md) 创建网络安全组规则。与创建 Windows 防火墙规则时一样，允许通过 TCP 端口 27017 连接到 MongoDB VM 的虚拟网络接口。
 
-> [!NOTE] TCP 端口 27017 是 MongoDB 使用的默认端口。可以在启动 `mongod.exe` 时使用 `--port` 参数手动更改此端口，或者通过某个服务更改此端口。如果更改了端口，请确保在前面的步骤中更新 Windows 防火墙和网络安全组规则。
+> [!NOTE]
+> TCP 端口 27017 是 MongoDB 使用的默认端口。可以在启动 `mongod.exe` 时使用 `--port` 参数手动更改此端口，或者通过某个服务更改此端口。如果更改了端口，请确保在前面的步骤中更新 Windows 防火墙和网络安全组规则。
 
 ## 后续步骤
 本教程已介绍如何在 Windows VM 上安装和配置 MongoDB。现在，可以遵循 [MongoDB 文档](https://docs.mongodb.com/manual/)中的高级主题访问 Windows VM 上的 MongoDB。

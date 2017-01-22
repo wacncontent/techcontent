@@ -50,7 +50,8 @@ ms.author: barbkess;sonyama
 
     C:\>sqlcmd -S MySqlDw.database.chinacloudapi.cn -d Adventure_Works -G -I
 
-> [!NOTE] 需[启用 Azure Active Directory 身份验证](./sql-data-warehouse-authentication.md)才能使用 Active Directory 进行身份验证。
+> [!NOTE]
+> 需[启用 Azure Active Directory 身份验证](./sql-data-warehouse-authentication.md)才能使用 Active Directory 进行身份验证。
 
 ## 2\.查询
 连接后，可以对实例发出任何支持的 Transact-SQL 语句。在此示例中，查询以交互模式进行提交。

@@ -38,7 +38,8 @@ ms.author: marsma
 
 使用 Azure Batch 时，可以通过节点设置来设置多达四倍 (4x) 的节点核心数，从而最大限度地提高任务数。例如，如果将池的节点大小配置为“大型”（四核），则可将 `maxTasksPerNode` 设置为 16。有关每个节点大小的核心数的详细信息，请参阅[云服务的大小](../cloud-services/cloud-services-sizes-specs.md)。有关服务限制的详细信息，请参阅 [Azure 批处理服务的配额和限制](./batch-quota-limit.md)。
 
-> [!TIP] 为池构造[自动缩放公式][enable_autoscaling]时，请务必考虑 `maxTasksPerNode` 值。例如，如果增加每个节点的任务数，则可能会极大地影响对 `$RunningTasks` 求值的公式。有关详细信息，请参阅[自动缩放 Azure Batch 池中的计算节点](./batch-automatic-scaling.md)。
+> [!TIP]
+> 为池构造[自动缩放公式][enable_autoscaling]时，请务必考虑 `maxTasksPerNode` 值。例如，如果增加每个节点的任务数，则可能会极大地影响对 `$RunningTasks` 求值的公式。有关详细信息，请参阅[自动缩放 Azure Batch 池中的计算节点](./batch-automatic-scaling.md)。
 
 ## 任务分发
 当池中的计算节点可以并行执行任务时，必须根据需要指定任务在池中各节点之间的分发情况。
@@ -81,7 +82,8 @@ json
       "enableInterNodeCommunication":true,
     }
 
-> [!NOTE] 只能在创建池时设置 `maxTasksPerNode` 元素和 [MaxTasksPerComputeNode][maxtasks_net] 属性。创建完池以后，不能对上述元素和属性进行修改。
+> [!NOTE]
+> 只能在创建池时设置 `maxTasksPerNode` 元素和 [MaxTasksPerComputeNode][maxtasks_net] 属性。创建完池以后，不能对上述元素和属性进行修改。
 
 ## 代码示例
 GitHub 上的 [ParallelNodeTasks][parallel_tasks_sample] 项目说明了如何使用 [CloudPool.MaxTasksPerComputeNode][maxtasks_net] 属性。
@@ -104,7 +106,8 @@ GitHub 上的 [ParallelNodeTasks][parallel_tasks_sample] 项目说明了如何�
 
 第二次运行示例应用程序时，显示作业持续时间显著缩短。这是因为该池已被配置为每个节点四个任务，因此可以并行执行任务，使得作业可以在大约四分之一的时间内完成。
 
-> [!NOTE] 上述摘要中的作业持续时间不包括创建池的时间。上述每个作业都提交到此前已创建的池，这些池的计算节点在提交时处于*空闲* 状态。
+> [!NOTE]
+> 上述摘要中的作业持续时间不包括创建池的时间。上述每个作业都提交到此前已创建的池，这些池的计算节点在提交时处于*空闲* 状态。
 
 ## 后续步骤
 ### Batch 资源管理器热度地图

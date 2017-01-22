@@ -22,7 +22,8 @@ ms.author: saurabh
 
 # 使用 Azure 资源管理器模板创建具有监视和诊断功能的 Windows 虚拟机
 
-> [!NOTE]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
+> [!NOTE]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
 
 Azure 诊断扩展可在基于 Windows 的 Azure 虚拟机上提供监视和诊断功能。通过将该扩展纳入为 Azure 资源管理器模板的一部分，可以在虚拟机上启用这些功能。有关将任何扩展纳入为虚拟机模板一部分的详细信息，请参阅[使用 VM 扩展创作 Azure 资源管理器模板](./virtual-machines-windows-extensions-authoring-templates.md)。本文介绍如何将 Azure 诊断扩展添加到 Windows 虚拟机模板中。
 
@@ -100,7 +101,8 @@ Azure 诊断扩展可在基于 Windows 的 Azure 虚拟机上提供监视和诊�
 
 最佳做法是在不同于虚拟机资源组的其他资源组中指定诊断存储帐户。资源组可以视为具有自己的生存期的部署单位，可以部署虚拟机以及在新配置更新时重新部署，但是你可能想要跨这些虚拟机部署继续在相同的存储帐户中存储诊断数据。在不同的资源中拥有存储帐户可让存储帐户接受来自各种虚拟机部署的数据，方便解决各种版本之间的问题。
 
->[!NOTE] 如果从 Visual Studio 创建 Windows 虚拟机模板，默认存储帐户可能会设置为使用将虚拟机 VHD 上载到的存储帐户。这是为了简化 VM 的初始设置。你应该重构模板以使用可以当作参数传入的不同存储帐户。
+>[!NOTE]
+> 如果从 Visual Studio 创建 Windows 虚拟机模板，默认存储帐户可能会设置为使用将虚拟机 VHD 上载到的存储帐户。这是为了简化 VM 的初始设置。你应该重构模板以使用可以当作参数传入的不同存储帐户。
 
 ## <a name="diagnostics-configuration-variables"></a> 诊断配置变量
 
@@ -121,7 +123,8 @@ Azure 诊断扩展可在基于 Windows 的 Azure 虚拟机上提供监视和诊�
 
 上述配置中的指标定义 xml 节点是一个重要的配置元素，因为它定义如何聚合和存储之前在 *PerformanceCounter* 节点中的 xml 定义的性能计数器。
 
-> [!IMPORTANT] 这些度量值是促使 Azure 门户预览中生成监视图表和警报的因素。如果你需要在 Azure 门户预览中查看 VM 监视数据，则必须在诊断配置中包括 **Metrics** 节点以及 *resourceID* 和 **MetricAggregation**。
+> [!IMPORTANT]
+> 这些度量值是促使 Azure 门户预览中生成监视图表和警报的因素。如果你需要在 Azure 门户预览中查看 VM 监视数据，则必须在诊断配置中包括 **Metrics** 节点以及 *resourceID* 和 **MetricAggregation**。
 
 以下是指标定义 xml 的示例：
 

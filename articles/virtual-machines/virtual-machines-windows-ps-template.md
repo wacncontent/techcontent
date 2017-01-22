@@ -24,7 +24,8 @@ ms.author: davidmu
 
 执行本文中的步骤大约需要 20 分钟时间。
 
-> [!IMPORTANT] 如果希望将 VM 包含在某个可用性集中，可以在创建 VM 时将其添加到该集。目前，不支持在创建 VM 后将其添加到可用性集。
+> [!IMPORTANT]
+> 如果希望将 VM 包含在某个可用性集中，可以在创建 VM 时将其添加到该集。目前，不支持在创建 VM 后将其添加到可用性集。
 
 ## 步骤 1：创建模板文件
 
@@ -169,7 +170,8 @@ ms.author: davidmu
             } ]
           }
 
-    >[!NOTE] 本文创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅[使用 Windows PowerShell 和 Azure CLI 浏览和选择 Azure 虚拟机映像](./virtual-machines-linux-cli-ps-findimage.md)。
+    >[!NOTE]
+    > 本文创建运行 Windows Server 操作系统版本的虚拟机。若要详细了解如何选择其他映像，请参阅[使用 Windows PowerShell 和 Azure CLI 浏览和选择 Azure 虚拟机映像](./virtual-machines-linux-cli-ps-findimage.md)。
 
 2. 将模板文件保存为 *VirtualMachineTemplate.json*。
 
@@ -188,7 +190,8 @@ ms.author: davidmu
           }
         }
 
-    >[!NOTE] 查看有关[用户名和密码要求](./virtual-machines-windows-faq.md#what-are-the-username-requirements-when-creating-a-vm)的更多信息。
+    >[!NOTE]
+    > 查看有关[用户名和密码要求](./virtual-machines-windows-faq.md#what-are-the-username-requirements-when-creating-a-vm)的更多信息。
 
 2. 保存参数文件。
 
@@ -246,7 +249,8 @@ ms.author: davidmu
 
         Outputs           :
 
->[!NOTE] 也可以从 Azure 存储帐户部署模板和参数。有关详细信息，请参阅[对 Azure 存储使用 Azure PowerShell](../storage/storage-powershell-guide-full.md)。
+>[!NOTE]
+> 也可以从 Azure 存储帐户部署模板和参数。有关详细信息，请参阅[对 Azure 存储使用 Azure PowerShell](../storage/storage-powershell-guide-full.md)。
 
 ## 后续步骤
 

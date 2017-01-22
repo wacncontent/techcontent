@@ -78,7 +78,8 @@ ms.author: adegeo
 ## 使用 .NET SDK 访问终结点
 Azure 托管库提供了角色实例在运行时用来通信的方法。可以从角色实例中运行的代码检索有关其他角色实例及其终结点是否存在的信息，以及有关当前角色实例的信息。
 
-> [!NOTE]你只能检索有关正在你的云服务中运行且定义了至少一个内部终结点的角色实例的信息。无法获取有关其他服务中运行的角色实例的数据。
+> [!NOTE]
+>你只能检索有关正在你的云服务中运行且定义了至少一个内部终结点的角色实例的信息。无法获取有关其他服务中运行的角色实例的数据。
 
 可以使用 [Instances](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.role.instances.aspx) 属性检索角色的实例。首先，使用 [CurrentRoleInstance](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleenvironment.currentroleinstance.aspx) 返回对当前角色实例的引用，然后使用 [Role](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleinstance.role.aspx) 属性返回对角色本身的引用。
 
@@ -88,7 +89,8 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 
 **Instances** 属性将返回一个 **RoleInstance** 对象集合。此集合始终包含当前实例。如果角色未定义内部终结点，则集合将包含当前实例，但不包含任何其他实例。如果未为角色定义内部终结点，则集合中的角色实例的数目将始终为 1。如果角色定义了一个内部终结点，则其实例在运行时是可发现的，并且集合中的实例数将与在服务配置文件中为角色指定的实例数对应。
 
-> [!NOTE]Azure 托管库不提供用来确定其他角色实例的运行状况的方法，但如果你的服务需要此功能，则可以自行实现此类运行状况评估。你可以使用 [Azure Diagnostics](https://msdn.microsoft.com/zh-cn/library/azure/gg433048.aspx) 来获取有关正在运行的角色实例的信息。
+> [!NOTE]
+>Azure 托管库不提供用来确定其他角色实例的运行状况的方法，但如果你的服务需要此功能，则可以自行实现此类运行状况评估。你可以使用 [Azure Diagnostics](https://msdn.microsoft.com/zh-cn/library/azure/gg433048.aspx) 来获取有关正在运行的角色实例的信息。
 
 若要确定角色实例上的内部终结点的端口号，可以使用 [InstanceEndpoints](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleinstance.instanceendpoints.aspx) 属性来返回 Dictionary 对象，该对象中将包含终结点名称及其对应的 IP 地址和端口。[IPEndpoint](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleinstanceendpoint.ipendpoint.aspx) 属性返回指定终结点的 IP 地址和端口。**PublicIPEndpoint** 属性返回负载均衡终结点的端口。将不使用 **PublicIPEndpoint** 属性的 IP 地址部分。
 
@@ -105,7 +107,8 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
 
 下面的辅助角色示例将获取通过服务定义公开的终结点，然后开始侦听连接。
 
-> [!WARNING]此代码仅适用于已部署的服务。在 Azure 计算模拟器中运行时，将忽略创建直接端口终结点的服务配置元素（**InstanceInputEndpoint** 元素）。
+> [!WARNING]
+>此代码仅适用于已部署的服务。在 Azure 计算模拟器中运行时，将忽略创建直接端口终结点的服务配置元素（**InstanceInputEndpoint** 元素）。
 
         using System;
         using System.Diagnostics;
@@ -223,7 +226,8 @@ Azure 托管库提供了角色实例在运行时用来通信的方法。可以�
           </WorkerRole>
         </ServiceDefinition>
 
-> [!NOTE]固定端口和自动分配的端口的内部终结点会限制角色之间的通信。
+> [!NOTE]
+>固定端口和自动分配的端口的内部终结点会限制角色之间的通信。
 
 默认情况下，在定义内部终结点后，通信可以从任意角色流动到角色的内部终结点，而不会受到任何限制。若要限制通信，必须将 **NetworkTrafficRules** 元素添加到服务定义文件中的 **ServiceDefinition** 元素。
 

@@ -38,7 +38,8 @@ ms.author: riande
 * 如何使用 Azure SQL 数据库在云中存储关系数据。
 * 如何部署 Web 项目，以便将数据库用于 Azure 应用服务中的 [Web 应用](./app-service-changes-existing-services.md)。
 
->[!NOTE] 本教程的篇幅较长。如果要快速了解 Azure 应用服务和 Visual Studio Web 项目，请参阅[在 Azure 应用服务中创建 ASP.NET Web 应用](./web-sites-dotnet-get-started.md)。有关疑难解答信息，请参阅[疑难解答](#troubleshooting)部分。
+>[!NOTE]
+> 本教程的篇幅较长。如果要快速了解 Azure 应用服务和 Visual Studio Web 项目，请参阅[在 Azure 应用服务中创建 ASP.NET Web 应用](./web-sites-dotnet-get-started.md)。有关疑难解答信息，请参阅[疑难解答](#troubleshooting)部分。
 
 ## 先决条件
 
@@ -349,7 +350,8 @@ ASP.NET MVC 基架功能可以自动生成用于执行创建、读取、更新�
 
 ## 添加 OAuth2 提供程序
 
->[!NOTE] 为了详细说明如何使用 Google 和 Facebook 开发人员门户网站，本教程提供了指向 ASP.NET 网站上的教程的链接。但是，Google 和 Facebook 更改其网站的频率比这些教程的更新频率更频繁，因此这些教程现在已过时。如果在使用这些指导时遇到困难，请参阅本教程末尾提供的 Disqus 注释以查看已更改项的列表。
+>[!NOTE]
+> 为了详细说明如何使用 Google 和 Facebook 开发人员门户网站，本教程提供了指向 ASP.NET 网站上的教程的链接。但是，Google 和 Facebook 更改其网站的频率比这些教程的更新频率更频繁，因此这些教程现在已过时。如果在使用这些指导时遇到困难，请参阅本教程末尾提供的 Disqus 注释以查看已更改项的列表。
 
 [OAuth](http://oauth.net/ "http://oauth.net/") 是一种开放协议，允许以一种简单而标准的方法从 Web、移动和桌面应用程序进行安全授权。ASP.NET MVC Internet 模板使用 OAuth 公开将 Facebook、Twitter、Google 和 Microsoft 作为身份验证提供程序。虽然本教程仅使用 Google 作为身份验证提供程序，但你可轻松修改代码以使用其中任一提供程序。实施其他提供程序的步骤与你将在本教程中看到的步骤非常类似。要将 Facebook 用作身份验证提供程序，请参阅[使用 Facebook、Twitter、LinkedIn 和 Google OAuth2 登录名创建 MVC 5 应用](http://www.asp.net/mvc/tutorials/mvc-5/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on)。
 

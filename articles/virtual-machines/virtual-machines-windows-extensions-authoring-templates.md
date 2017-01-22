@@ -22,7 +22,8 @@ ms.author: kundanap
 
 # 使用 VM 扩展创作 Windows 资源管理器模板。
 
-> [!NOTE]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
+> [!NOTE]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
 
 [!INCLUDE [virtual-machines-common-extensions-authoring-templates](../../includes/virtual-machines-common-extensions-authoring-templates.md)]
 
@@ -38,7 +39,8 @@ ms.author: kundanap
 
 这三个属性分别映射到上述模板代码段中的“发布者”、“类型”和“typeHandlerVersion”。
 
->[!NOTE] 始终建议使用最新的扩展版本以获取最新功能。
+>[!NOTE]
+> 始终建议使用最新的扩展版本以获取最新功能。
 
 ## 确定扩展配置参数的架构
 

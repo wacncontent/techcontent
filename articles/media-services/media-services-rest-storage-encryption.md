@@ -30,9 +30,11 @@ ms.author: juliako
 - 将内容密钥链接到资产。
 - 对 AssetFile 实体设置加密相关的参数。
 
->[!NOTE]如果要传送存储加密资产，则必须配置资产的传送策略。在流式传输资产之前，流式处理服务器会删除存储加密，然后再使用指定的传送策略流式传输你的内容。有关详细信息，请参阅[配置资产传送策略](./media-services-rest-configure-asset-delivery-policy.md)。
+>[!NOTE]
+>如果要传送存储加密资产，则必须配置资产的传送策略。在流式传输资产之前，流式处理服务器会删除存储加密，然后再使用指定的传送策略流式传输你的内容。有关详细信息，请参阅[配置资产传送策略](./media-services-rest-configure-asset-delivery-policy.md)。
 
->[!NOTE] 使用媒体服务 REST API 时，需注意以下事项：
+>[!NOTE]
+> 使用媒体服务 REST API 时，需注意以下事项：
 >
 >访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 

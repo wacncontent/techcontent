@@ -71,7 +71,8 @@
 
     此代码将针对字符串数组中的所有 6 个标记将通知发送到 Windows 应用商店、Windows Phone 和 iOS 设备。使用标记是为了确保设备仅接收注册类别的通知。
 
-    > [!NOTE] 此后端代码支持 Windows 应用商店、Windows Phone、iOS 和 Android 客户端。发送方法将在尚未为特定客户端平台配置通知中心时返回错误响应。
+    > [!NOTE]
+    > 此后端代码支持 Windows 应用商店、Windows Phone、iOS 和 Android 客户端。发送方法将在尚未为特定客户端平台配置通知中心时返回错误响应。
 
 6. 在上面的代码中，将 `<hub name>` 和 `<connection string with full access>` 占位符替换为你的通知中心的名称和你之前获取的 *DefaultFullSharedAccessSignature* 的连接字符串。
 

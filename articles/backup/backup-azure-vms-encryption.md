@@ -21,7 +21,8 @@ ms.author: markgal; jimpark; trinadhk
 
 如果企业想要在 Azure 中加密其 VM 数据，解决方案是在 Windows 计算机上使用 Bitlocker，在 Linux 计算机上使用 dmcrypt。
 
-> [!NOTE]  Azure 备份支持对使用 Azure 磁盘加密 (ADE) 加密的 VM 进行备份和还原。<br>
+> [!NOTE]
+>  Azure 备份支持对使用 Azure 磁盘加密 (ADE) 加密的 VM 进行备份和还原。<br>
 1. 如果 VM 是使用 BEK 和 KEK 加密的，则可使用 PowerShell 来进行此操作。<br>
 2. 如果 VM 只使用 BEK 加密，则不支持备份和还原。<br> 
 请参阅 Azure 备份 [PowerShell 文档](./backup-azure-vms-automation.md)，了解如何备份和还原使用 ADE 加密的 VM。
@@ -51,7 +52,8 @@ ms.author: markgal; jimpark; trinadhk
 | 数据还原 | Azure 备份 | 使用 Azure 备份从恢复点还原磁盘或整个 VM。在执行还原操作过程中，Azure 备份不会解密数据。|
 | 解密 | Bitlocker 或 dmcrypt | 为了从还原的数据磁盘或还原的 VM 读取数据，软件需有密钥管理软件提供的密钥。如果没有正确的密钥，就无法解密数据。 |
 
-> [!IMPORTANT]  密钥管理（包括密钥滚动更新）不是 Azure 备份的一部分。这一方面需要分开管理，但对整体备份/还原操作很重要。
+> [!IMPORTANT]
+>  密钥管理（包括密钥滚动更新）不是 Azure 备份的一部分。这一方面需要分开管理，但对整体备份/还原操作很重要。
 
 ### 支持的方案
 

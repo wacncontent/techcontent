@@ -72,7 +72,8 @@ Azure 提供了一部分适用于 Windows Server、IIS 和 ASP.NET 堆栈的性�
 
 Azure 支持针对 Web 角色和辅助角色创建和修改自定义性能计数器。这些计数器可用于跟踪和监视应用程序特定行为。可以使用提升的权限通过启动任务、Web 角色或辅助角色创建和删除自定义性能计数器类别和说明符。
 
->[!NOTE] 用于更改自定义性能计数器的代码必须具有提升的权限才能运行。如果代码位于 Web 角色或辅助角色中，则该角色必须在 ServiceDefinition.csdef 文件中包括标记 <Runtime executionContext="elevated" /> 才能使角色正常初始化。
+>[!NOTE]
+> 用于更改自定义性能计数器的代码必须具有提升的权限才能运行。如果代码位于 Web 角色或辅助角色中，则该角色必须在 ServiceDefinition.csdef 文件中包括标记 <Runtime executionContext="elevated" /> 才能使角色正常初始化。
 
 可以使用诊断代理将自定义性能计数器数据发送到 Azure 存储。
 
@@ -84,7 +85,8 @@ Azure 缓存性能计数器数据和其他诊断信息。当正在运行的角�
 
 每个配置的性能计数器实例均按指定的采样率进行记录，并通过计划的传输请求或按需传输请求将采样的数据传输到存储帐户。可以将自动传输计划为每分钟一次。通过诊断代理传输的性能计数器数据存储在存储帐户的 WADPerformanceCountersTable 表中。该表可以通过标准 Azure 存储 API 方法进行访问和查询。请参阅 [Azure 性能计数器示例](http://code.msdn.microsoft.com/Windows-Azure-PerformanceCo-7d80ebf9)，以获取通过 WADPerformanceCountersTable 表查询和显示性能计数器数据的示例。
 
->[!NOTE] 根据诊断代理传输频率和队列延迟，存储帐户中的最新性能计数器数据可能会过时数分钟。
+>[!NOTE]
+> 根据诊断代理传输频率和队列延迟，存储帐户中的最新性能计数器数据可能会过时数分钟。
 
 ## 使用诊断配置文件启用性能计数器
 
@@ -143,7 +145,8 @@ counterSpecifier 属性指定要收集的性能计数器。sampleRate 属性指�
 
 对于 Azure SDK 2.5，可在 diagnostics.wadcfgx 文件中指定存储帐户。
 
->[!NOTE] 这些说明仅适用于 Azure SDK 2.4 及更低版本。对于 Azure SDK 2.5，可在 diagnostics.wadcfgx 文件中指定存储帐户。
+>[!NOTE]
+> 这些说明仅适用于 Azure SDK 2.4 及更低版本。对于 Azure SDK 2.5，可在 diagnostics.wadcfgx 文件中指定存储帐户。
 
 设置连接字符串：
 

@@ -42,7 +42,8 @@ ms.author: larryfr
 
 1. 从 HDInsight 桌面启动“Hadoop 命令行”。这将在 **c:\\apps\\dist\\hadoop-&lt;version number>** 目录中打开新命令提示符。
 
-    > [!NOTE]Hadoop 更新时，版本号也会发生变化。**HADOOP\_HOME** 环境变量可用来查找路径。例如，`cd %HADOOP_HOME%` 会将目录更改为 Hadoop 目录，不需要知道版本号。
+    > [!NOTE]
+    >Hadoop 更新时，版本号也会发生变化。**HADOOP\_HOME** 环境变量可用来查找路径。例如，`cd %HADOOP_HOME%` 会将目录更改为 Hadoop 目录，不需要知道版本号。
 
 2. 要使用 **Hadoop** 命令运行示例 MapReduce 作业，请使用以下命令：
 
@@ -50,7 +51,8 @@ ms.author: larryfr
 
     这将启动 **wordcount** 类（包含在当前目录下的 **hadoop-mapreduce-examples.jar** 文件中）。它使用 **wasbs://example/data/gutenberg/davinci.txt** 文档作为输入，输出将存储到 **wasbs:///example/data/WordCountOutput**。
 
-    > [!NOTE]有关此 MapReduce 作业和示例数据的详细信息，请参阅<a href="./hdinsight-use-mapreduce.md">在 HDInsight Hadoop 中使用 MapReduce</a>。
+    > [!NOTE]
+    >有关此 MapReduce 作业和示例数据的详细信息，请参阅<a href="./hdinsight-use-mapreduce.md">在 HDInsight Hadoop 中使用 MapReduce</a>。
 
 2. 作业在处理时提供详细信息，并在完成时返回如下信息：
 
@@ -65,7 +67,8 @@ ms.author: larryfr
 
     这会显示两个文件：**\_SUCCESS** 和 **part-r-00000**。**part-r-00000** 文件包含此作业的输出。
 
-    > [!NOTE]某些 MapReduce 作业可能会将结果拆分成多个 **part-r-#####** 文件。如果是这样，请使用 ##### 后缀指示文件的顺序。
+    > [!NOTE]
+    >某些 MapReduce 作业可能会将结果拆分成多个 **part-r-#####** 文件。如果是这样，请使用 ##### 后缀指示文件的顺序。
 
 4. 要查看输出，请使用以下命令：
 

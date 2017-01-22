@@ -110,7 +110,8 @@ Azure PowerShell 提供 *cmdlet*，可让你在 HDInsight 上远程运行 MapRed
 
     此输出指示作业已成功完成。
 
-    > [!NOTE] 如果 **ExitCode** 的值不是 0，请参阅[故障排除](#troubleshooting)。
+    > [!NOTE]
+    > 如果 **ExitCode** 的值不是 0，请参阅[故障排除](#troubleshooting)。
 
 ##查看输出
 
@@ -151,7 +152,8 @@ MapReduce 作业已将操作结果存储到 Azure Blob 存储（位于指定为�
         #Use the -blob switch to filter only blobs contained in example/data/WordCountOutput
         Get-AzureStorageBlob -Container $storageContainer -Blob example/data/WordCountOutput/* -Context $context | Get-AzureStorageBlobContent -Context $context
 
-> [!NOTE] 此示例会将下载的文件存储到你从中运行脚本的目录中的 **example/data/WordCountOutput** 文件夹。
+> [!NOTE]
+> 此示例会将下载的文件存储到你从中运行脚本的目录中的 **example/data/WordCountOutput** 文件夹。
 
 在文本编辑器中打开 **output.txt** 文件，以查看作业生成的单词和计数。
 

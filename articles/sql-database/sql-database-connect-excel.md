@@ -47,7 +47,8 @@ ms.author: joseidz
 
     ![键入服务器名称和登录凭据](./media/sql-database-connect-excel/connect-to-server.png)
 
-    > [!TIP] 根据你的网络环境，你可能无法连接；如果 SQL 数据库服务器不允许来自客户端 IP 地址的流量，你可能会断开连接。转到 [Azure 经典管理门户](https://manage.windowsazure.cn)，依次单击“SQL 服务器”、你的服务器、“设置”下面的“防火墙”，然后添加客户端 IP 地址。有关详细信息，请参阅[如何配置防火墙设置](./sql-database-configure-firewall-settings-powershell.md)。
+    > [!TIP]
+    > 根据你的网络环境，你可能无法连接；如果 SQL 数据库服务器不允许来自客户端 IP 地址的流量，你可能会断开连接。转到 [Azure 经典管理门户](https://manage.windowsazure.cn)，依次单击“SQL 服务器”、你的服务器、“设置”下面的“防火墙”，然后添加客户端 IP 地址。有关详细信息，请参阅[如何配置防火墙设置](./sql-database-configure-firewall-settings-powershell.md)。
 
 5. 在“选择数据库和表”对话框中，从列表中选择要使用的数据库、单击要使用的表或视图（我们选择了 **vGetAllCategories**），然后单击“下一步”。
 
@@ -74,7 +75,8 @@ ms.author: joseidz
 
     ![配置数据库报表。](./media/sql-database-connect-excel/power-pivot-results.png)
 
-> [!TIP] 如果要将其他 Excel 工作簿和工作表连接到数据库，请依次单击“数据”、“连接”、“添加”，从列表中选择你创建的连接，然后单击“打开”。
+> [!TIP]
+> 如果要将其他 Excel 工作簿和工作表连接到数据库，请依次单击“数据”、“连接”、“添加”，从列表中选择你创建的连接，然后单击“打开”。
 > ![从另一个工作簿打开连接](./media/sql-database-connect-excel/open-from-another-workbook.png)
 
 ## 后续步骤

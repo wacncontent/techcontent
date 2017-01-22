@@ -141,7 +141,8 @@ ms.author: jroth
 
 我们将首先创建虚拟网络的子网配置。在本教程中，我们将使用 [New-AzureRmVirtualNetworkSubnetConfig](https://msdn.microsoft.com/zh-cn/library/mt619412.aspx) cmdlet 创建默认子网。我们将使用前面初始化的变量所定义的子网名称和地址前缀来创建虚拟网络子网配置。
 
->[!NOTE] 你可以使用此 cmdlet 来定义虚拟网络子网配置的其他属性，但这已超出本教程的范围。
+>[!NOTE]
+> 你可以使用此 cmdlet 来定义虚拟网络子网配置的其他属性，但这已超出本教程的范围。
 
 执行以下 cmdlet，以创建虚拟子网配置。
 
@@ -159,7 +160,8 @@ ms.author: jroth
 
 我们现已定义虚拟网络，接下来需要配置 IP 地址才能连接到虚拟机。在本教程中，我们将使用动态 IP 地址来创建公共 IP 地址，以支持 Internet 连接。我们将使用 [New-AzureRmPublicIpAddress](https://msdn.microsoft.com/zh-cn/library/mt603620.aspx) cmdlet，以前面初始化的变量所定义的名称、位置、分配方法和 DNS 域名标签，在前面创建的资源组中创建公共 IP 地址。
 
->[!NOTE] 你可以使用此 cmdlet 来定义公共 IP 地址的其他属性，但这已超出本初步教程的范围。你也可以创建专用地址或具有静态地址的地址，但这也超出了本教程的范围。
+>[!NOTE]
+> 你可以使用此 cmdlet 来定义公共 IP 地址的其他属性，但这已超出本初步教程的范围。你也可以创建专用地址或具有静态地址的地址，但这也超出了本教程的范围。
 
 执行以下 cmdlet，以创建公共 IP 地址。
 

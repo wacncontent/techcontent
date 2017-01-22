@@ -26,7 +26,8 @@ ms.author: juliako
 
 本主题介绍输出元数据 (&lt;source\_file\_name&gt;\_manifest.xml) 以其为基础的 XML 架构的元素和类型。有关包含输入资产的元数据的文件的信息，请参阅[输入元数据](./media-services-input-metadata-schema.md)。
 
-> [!NOTE]可以在本主题末尾找到完整架构代码 XML 示例。
+> [!NOTE]
+>可以在本主题末尾找到完整架构代码 XML 示例。
 
 ## <a name="AssetFiles "></a> AssetFiles 根元素
 用于编码作业的 AssetFile 条目的集合。

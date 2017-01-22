@@ -85,7 +85,8 @@ ms.author: robmcm
 
     ![配置配置文件][configure profile]
 
-    >[!NOTE] 要使用 Azure 中国，你需要点击 **Advanced...**，并把 "https://management.core.windows.net" 替换成 "https://management.core.chinacloudapi.cn"。
+    >[!NOTE]
+    > 要使用 Azure 中国，你需要点击 **Advanced...**，并把 "https://management.core.windows.net" 替换成 "https://management.core.chinacloudapi.cn"。
 
 5. 从你的订阅配置文件复制订阅 ID 和管理证书，然后将其粘贴到相应的字段中。
 

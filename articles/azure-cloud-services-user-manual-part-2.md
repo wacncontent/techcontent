@@ -70,7 +70,8 @@ wacn.date: 12/15/2016
 2. 只有 Worker Role，没有 Web Role；  
 3. 既有 Web Role，又有 Worker Role。
 
-> [!NOTE] 上图中的 Worker Role 分为三类 (Worker Role, Cache Worker Role 和 Worker Role with Service Bus Queue)。本文只介绍 Worker Role。
+> [!NOTE]
+> 上图中的 Worker Role 分为三类 (Worker Role, Cache Worker Role 和 Worker Role with Service Bus Queue)。本文只介绍 Worker Role。
 
 为什么 Azure 有 Web Role / Worker Role？它的好处在哪里？接下来举例说明。
 
@@ -267,7 +268,8 @@ csdef 文件 — 全称是云服务 Definition，定义了云服务的参数，�
 4. Enable Diagnostics — 表示在 Azure 云服务 Web Role 启用诊断功能，可以点击 Configure 按钮，设置需要诊断的具体参数；  
 5. Specify the storage account credentials for the Diagnostics result — 表示需要把诊断的结果数据，保存到 Azure 表存储中。这里需要配置 Azure 存储的连接字符串。  
 
-    > [!NOTE] Azure 云服务背后运行的是非持久化虚拟机，任何保存在非持久化虚拟机本地磁盘的文件都会有丢失风险，所以需要把诊断数据保存到 Azure 表存储中。  
+    > [!NOTE]
+    > Azure 云服务背后运行的是非持久化虚拟机，任何保存在非持久化虚拟机本地磁盘的文件都会有丢失风险，所以需要把诊断数据保存到 Azure 表存储中。  
 
 6. 以上图为例，把 Web Role 横向扩展为 10 台，每台计算节点的 CPU 内存为 2 Core/3.5 GB (A 系列)。如果是 D 系列虚拟机，显示如下： 
 

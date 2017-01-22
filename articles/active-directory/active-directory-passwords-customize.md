@@ -19,7 +19,8 @@ ms.author: asteen
 
 # 自定义密码管理以符合组织的需求
 
-> [!IMPORTANT] **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
+> [!IMPORTANT]
+> **你是否因登录时遇到问题而浏览至此？** 如果是这样，[可按以下方式更改和重置你的密码](./active-directory-passwords-update-your-own-password.md)。
 
 为了尽可能地向用户提供最佳体验，我们建议你了解并试用你可以使用的所有密码管理配置选项。事实上，你可以转到 [Azure 经典管理门户](https://manage.windowsazure.cn)的“Active Directory 扩展”中的配置选项卡，立即开始探索。本主题将引导你从 [Azure 经典管理门户](https://manage.windowsazure.cn)中目录的“配置”选项卡，完成管理员可以进行的不同密码管理自定义，包括：
 
@@ -132,7 +133,8 @@ ms.author: asteen
 ## 密码管理行为 <a name="password-management-behavior"></a>
 下表说明了每个控件对注册密码重置并重置密码的用户体验有何影响。可以在 [Azure 经典管理门户](https://manage.windowsazure.cn)中目录的“配置”选项卡的“用户密码重置策略”部分下配置这些选项。
 
-> [!NOTE] 你所使用的管理员帐户必须分配了 AAD Premium 许可证才能看到这些策略控件。<br><br>这些策略控件仅适用于重置密码的最终用户，而不是管理员。**Microsoft 为管理员指定了默认的备用电子邮件和/或移动电话策略，这些策略无法更改。**
+> [!NOTE]
+> 你所使用的管理员帐户必须分配了 AAD Premium 许可证才能看到这些策略控件。<br><br>这些策略控件仅适用于重置密码的最终用户，而不是管理员。**Microsoft 为管理员指定了默认的备用电子邮件和/或移动电话策略，这些策略无法更改。**
 
 <table>
             <tbody><tr>

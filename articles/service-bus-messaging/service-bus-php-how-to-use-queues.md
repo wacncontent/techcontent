@@ -24,7 +24,8 @@ wacn.date: 01/04/2017
 
 创建访问 Azure Blob 服务的 PHP 应用程序的唯一要求是从代码中引用 [Azure SDK for PHP](../php-download-sdk.md) 中的类。你可以使用任何开发工具或记事本创建应用程序。
 
-> [!NOTE]你的 PHP 安装还必须已安装并启用 [OpenSSL 扩展](http://php.net/openssl)。
+> [!NOTE]
+>你的 PHP 安装还必须已安装并启用 [OpenSSL 扩展](http://php.net/openssl)。
 
 在本指南中，你将使用服务功能，这些功能可在 PHP 应用程序中本地调用，或通过在 Azure 的 Web 角色、辅助角色或网站中运行的代码调用。
 
@@ -41,7 +42,8 @@ wacn.date: 01/04/2017
 
 下面的示例演示了如何包括 autoloader 文件并引用 **ServicesBuilder** 类。
 
-> [!NOTE]本示例（以及本文中的其他示例）假定你已通过 Composer 安装用于 Azure 的 PHP 客户端库。如果你已手动安装这些库或将其作为 PEAR 包安装，则必须引用 **WindowsAzure.php** autoloader 文件。
+> [!NOTE]
+>本示例（以及本文中的其他示例）假定你已通过 Composer 安装用于 Azure 的 PHP 客户端库。如果你已手动安装这些库或将其作为 PEAR 包安装，则必须引用 **WindowsAzure.php** autoloader 文件。
 
         require_once 'vendor\autoload.php';
         use WindowsAzure\Common\ServicesBuilder;
@@ -103,7 +105,8 @@ wacn.date: 01/04/2017
             echo $code.": ".$error_message."<br />";
         }
 
-> [!NOTE] 你可以对 `ServiceBusRestProxy` 对象使用 `listQueues` 方法，以检查具有指定名称的队列是否已位于命名空间中。
+> [!NOTE]
+> 你可以对 `ServiceBusRestProxy` 对象使用 `listQueues` 方法，以检查具有指定名称的队列是否已位于命名空间中。
 
 ## 如何：向队列发送消息
 

@@ -106,7 +106,8 @@ ms.author: vturecek
 
     ActorRuntime.RegisterActorAsync<MyOtherActor>();
 
-> [!TIP] Service Fabric 执行组件运行时发出一些[与执行组件方法相关的事件和性能计数器](./service-fabric-reliable-actors-diagnostics.md#actor-method-events-and-performance-counters)。它们可用于进行诊断和性能监视。
+> [!TIP]
+> Service Fabric 执行组件运行时发出一些[与执行组件方法相关的事件和性能计数器](./service-fabric-reliable-actors-diagnostics.md#actor-method-events-and-performance-counters)。它们可用于进行诊断和性能监视。
 
 ## 调试
 

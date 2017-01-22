@@ -9,7 +9,8 @@
 - [选项 1：同时创建虚拟机和可用性集][]。然后，在创建新的虚拟机时将虚拟机添加到该集。
 - [选项 2：将现有虚拟机添加到可用性集][]。
 
->[!NOTE] 在经典模型中，要放入同一可用性集的虚拟机必须属于同一云服务。
+>[!NOTE]
+> 在经典模型中，要放入同一可用性集的虚拟机必须属于同一云服务。
 
 ## <a id="createset"> </a>选项 1：同时创建虚拟机和可用性集##
 
@@ -69,7 +70,8 @@
 
     Get-AzureVM -ServiceName "<VmCloudServiceName>" -Name "<VmName>" | Set-AzureAvailabilitySet -AvailabilitySetName "<AvSetName>" | Update-AzureVM
 
->[!NOTE] 虚拟机可能必须重新启动，以完成将其添加到可用性集的操作。
+>[!NOTE]
+> 虚拟机可能必须重新启动，以完成将其添加到可用性集的操作。
 
 <!-- LINKS -->
 [选项 1：同时创建虚拟机和可用性集]: #createset

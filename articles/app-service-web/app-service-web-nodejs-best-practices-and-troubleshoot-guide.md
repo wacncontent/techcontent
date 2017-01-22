@@ -23,7 +23,8 @@ ms.author: ranjithr;wadeh
 
 在本文中，你将了解 Azure Webapps 上运行的[节点应用程序](./app-service-web-nodejs-get-started.md)的最佳做法和故障排除步骤（通过 [iisnode](https://github.com/azure/iisnode)）。
 
->[!WARNING] 在生产站点上使用故障排除步骤时，请格外小心。建议在非生产安装（例如过渡槽）上排查应用问题，当问题修复后，请交换过渡槽与生产槽。
+>[!WARNING]
+> 在生产站点上使用故障排除步骤时，请格外小心。建议在非生产安装（例如过渡槽）上排查应用问题，当问题修复后，请交换过渡槽与生产槽。
 
 ## IISNODE 配置
 
@@ -95,7 +96,8 @@ ms.author: ranjithr;wadeh
 
     默认值为 0，这表示已禁用此功能。如果设置为大于 0 的值，iisnode 会每隔“idlePageOutTimePeriod”毫秒将其所有子进程移出分页。若要了解移出分页的意思，请参考此[文档](https://msdn.microsoft.com/zh-cn/library/windows/desktop/ms682606.aspx)。对于耗用大量内存并且偶尔想要将内存页出至磁盘以释放一些 RAM 的应用程序，此设置很有用。
 
->[!WARNING] 在生产应用程序上启用以下配置设置时，请格外小心。建议不要在实际生产应用程序上启用它们。
+>[!WARNING]
+> 在生产应用程序上启用以下配置设置时，请格外小心。建议不要在实际生产应用程序上启用它们。
 
 * debugHeaderEnabled
 

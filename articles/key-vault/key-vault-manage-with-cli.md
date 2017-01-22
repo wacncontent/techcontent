@@ -25,7 +25,8 @@ ms.author: bruceper
 
 **估计完成时间：**20 分钟。
 
->[!NOTE]  本教程未说明如何编写其中一个步骤所包括的 Azure 应用程序，但说明了如何授权应用程序使用密钥保管库中的密钥或机密。
+>[!NOTE]
+>  本教程未说明如何编写其中一个步骤所包括的 Azure 应用程序，但说明了如何授权应用程序使用密钥保管库中的密钥或机密。
 >
 >目前，无法在 Azure 门户中配置 Azure 密钥保管库。请改用这些跨平台命令行接口说明。或者，有关 Azure PowerShell 说明，请参阅[此对应教程](./key-vault-get-started.md)。
 
@@ -68,7 +69,8 @@ ms.author: bruceper
 
     azure login -u username -e azurechinacloud
 
->[!NOTE]  login 方法仅适用于组织帐户。组织帐户是指受组织管理、并在组织的 Azure Active Directory 租户中定义的用户。
+>[!NOTE]
+>  login 方法仅适用于组织帐户。组织帐户是指受组织管理、并在组织的 Azure Active Directory 租户中定义的用户。
 
 如果您当前没有组织帐户，且已使用 Microsoft 帐户登录到 Azure 订阅，则您可以按照以下步骤轻松地创建一个组织帐户。
 
@@ -153,7 +155,8 @@ ms.author: bruceper
 
 此步骤通常由开发人员在独立的计算机上完成。这并非 Azure 密钥保管库的特有状况，在此列出是为了让过程完整。
 
->[!IMPORTANT] 若要完成本教程，你的帐户、保管库以及将在本步骤中注册的应用程序全都必须位于相同的 Azure 目录中。
+>[!IMPORTANT]
+> 若要完成本教程，你的帐户、保管库以及将在本步骤中注册的应用程序全都必须位于相同的 Azure 目录中。
 
 使用密钥保管库的应用程序必须使用 Azure Active Directory 的令牌进行身份验证。为此，应用程序的所有者首先必须在其 Azure Active Directory 中注册该应用程序。注册结束后，应用程序所有者将获得以下值：
 
@@ -181,7 +184,8 @@ ms.author: bruceper
 
     azure keyvault set-policy --vault-name 'ContosoKeyVault' --spn 8f8c4bbd-485b-45fd-98f7-ec6300b7b4ed --perms-to-keys '["decrypt","sign"]'
 
->[!NOTE] 如果你是在 Windows 命令提示符下运行，则应将单引号替换为双引号，并对内部双引号进行转义操作。例如："[\"decrypt\",\"sign\"]"。
+>[!NOTE]
+> 如果你是在 Windows 命令提示符下运行，则应将单引号替换为双引号，并对内部双引号进行转义操作。例如："[\"decrypt\",\"sign\"]"。
 
 如果要授权同一应用程序读取保管库中的机密，请运行以下命令：
 

@@ -48,7 +48,8 @@ ms.author: rachelap
 
 [Swagger](http://swagger.io/) 是描述 RESTful API 的元数据的文件格式。Azure 应用服务提供 [Swagger 元数据的内置支持](./app-service-api-metadata.md)。本教程部分为 API 开发工作流建模，将在其中先创建 Swagger 元数据，然后以此创建（自动生成）API 服务器代码基架。
 
->[!NOTE] 如果不想要了解如何从 Swagger 元数据文件创建 Node.js 代码基架，可以跳过本部分。如果只想将示例代码部署到新 API 应用，请直接转到[在 Azure 中创建 API 应用](#createapiapp)部分。
+>[!NOTE]
+> 如果不想要了解如何从 Swagger 元数据文件创建 Node.js 代码基架，可以跳过本部分。如果只想将示例代码部署到新 API 应用，请直接转到[在 Azure 中创建 API 应用](#createapiapp)部分。
 
 ### 安装并执行 Swaggerize
 

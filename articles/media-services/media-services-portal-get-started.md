@@ -18,7 +18,8 @@ wacn.date: 12/27/2016
 
 本教程介绍了使用 Azure 经典管理门户实施基本视频点播 (VoD) 内容传送应用程序的步骤。
 
-> [!NOTE] 若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [Azure 免费试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
+> [!NOTE]
+> 若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [Azure 免费试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
 
 本教程包括以下任务：
 
@@ -82,7 +83,8 @@ wacn.date: 12/27/2016
 
     分配所有新的单元大约需要 20 分钟才能完成。
 
-    >[!NOTE] 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
+    >[!NOTE]
+    > 当前，将流式处理单位的任何正值设置回“无”可将流式处理功能禁用最多 1 小时。
     >
     > 为 24 小时期间指定的最大单位数将用于计算成本。有关定价详细信息，请参阅 [媒体服务定价详细信息](https://www.azure.cn/pricing/details/media-services/)。
 
@@ -172,7 +174,8 @@ SAS URL 采用以下格式。
 
 定位符附带到期日期。使用门户发布资产时，会创建到期日期在 100 年后的定位符。
 
->[!NOTE] 如果使用门户在 2015 年 3 月之前创建了定位符，则会创建到期日期在两年后的定位符。
+>[!NOTE]
+> 如果使用门户在 2015 年 3 月之前创建了定位符，则会创建到期日期在两年后的定位符。
 
 若要更新定位符的到期日期，请使用 [REST](https://docs.microsoft.com/zh-cn/rest/api/media/operations/locator) 或 [.NET](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.ilocator.update(v=azure.10).aspx) API。请注意，更新 SAS 定位符的到期日期时，URL 会发生变化。
 

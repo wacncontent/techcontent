@@ -69,7 +69,8 @@ ms.author: dkshir
 
 该部分描述保护独立 Windows 群集所需的证书。如果要指定群集证书，请将 **ClusterCredentialType** 的值设置为 _**X509**_。如果要指定用于外部连接的服务器证书，请将 **ServerCredentialType** 设置为 _**X509**_。虽然不是强制性要求，但是我们建议指定这两个证书，以便更好地保护群集。如果将这些值设置为 *X509*，则还必须指定相应的证书，否则 Service Fabric 将引发异常。在某些情况下，你可能只想要指定_ClientCertificateThumbprints_ 或 _ReverseProxyCertificate_。此时，不需要将 _ClusterCredentialType_ 或 _ServerCredentialType_ 设为 _X509_。
 
->[!NOTE] [指纹](https://en.wikipedia.org/wiki/Public_key_fingerprint)是证书的主要标识。请阅读[如何检索证书的指纹](https://msdn.microsoft.com/zh-cn/library/ms734695.aspx)，以找出所创建的证书的指纹。
+>[!NOTE]
+> [指纹](https://en.wikipedia.org/wiki/Public_key_fingerprint)是证书的主要标识。请阅读[如何检索证书的指纹](https://msdn.microsoft.com/zh-cn/library/ms734695.aspx)，以找出所创建的证书的指纹。
 
 下表列出了在设置群集时所需的证书：
 

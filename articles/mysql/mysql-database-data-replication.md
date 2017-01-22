@@ -73,14 +73,16 @@ source <备份文件名>;
     ii.	如果使用SSL连接,请在使用SSL连接处选择启用。然后打开主服务器CA证书,将它的所有内容拷贝到主服务器CA证书输入框中。
     3)	配置好所有信心后点击保存。
 
->[!NOTE] **注意:为保证数据的安全性，我们强烈建议使用SSL。**
+>[!NOTE]
+> **注意:为保证数据的安全性，我们强烈建议使用SSL。**
 
 ![配置过程](./media/mysql-database-data-replication/replicationsetting.png)
 
 12. 配置成功后,底部的复制状态应该为复制中。
 ![配置过程](./media/mysql-database-data-replication/replicationstatus.png)
 
->[!NOTE] ** 注意:
+>[!NOTE]
+> ** 注意:
 - 当MySQL服务器的复制角色配置为从服务器以后,该服务器处于只读模式。
 - 当MySQL服务器的复制角色配置为从服务器以后, 除角色外，复制页面所有主服务器参数不可更改。如果有输入错误,只有先将复制角色配置为禁止，然后重新配置从服务器参数。
 - 我们推荐将主服务器的binlog_format参数设置为 Mixed或者Row, 从而避免因为使用unsafe statement,例如 sysdate()而引发的数据复制错误.**

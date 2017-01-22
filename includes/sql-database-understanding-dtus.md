@@ -4,7 +4,8 @@
 
 ![SQL 数据库简介：按层和级别统计的单个数据库 DTU。](./media/sql-database-understanding-dtus/single_db_dtus.png)
 
->[!NOTE] 如果你要迁移现有的 SQL Server 数据库，则可使用第三方工具 [Azure SQL 数据库 DTU 计算器](http://dtucalculator.azurewebsites.net)对你的数据库在 Azure SQL 数据库中可能需要的性能级别和服务层进行估算。
+>[!NOTE]
+> 如果你要迁移现有的 SQL Server 数据库，则可使用第三方工具 [Azure SQL 数据库 DTU 计算器](http://dtucalculator.azurewebsites.net)对你的数据库在 Azure SQL 数据库中可能需要的性能级别和服务层进行估算。
 
 ### DTU 与 eDTU
 

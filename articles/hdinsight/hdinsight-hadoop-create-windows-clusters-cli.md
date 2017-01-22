@@ -42,7 +42,8 @@ ms.author: jgao
         azure config mode asm
         azure login -e AzureChinaCloud
 
-    > [!NOTE] 如果想用 Azure CLI 管理 Azure 中国的 HDInsight 群集，请安装 Azure CLI 0.9.x，而不是最新的 0.10.x.
+    > [!NOTE]
+    > 如果想用 Azure CLI 管理 Azure 中国的 HDInsight 群集，请安装 Azure CLI 0.9.x，而不是最新的 0.10.x.
 
 要获取帮助，请使用 **-h** 开关。例如：
 
@@ -62,7 +63,8 @@ ms.author: jgao
 
         azure storage account create "<Azure Storage Account Name>" -l "<Azure Location>" --type LRS
 
-    > [!NOTE] 存储帐户必须与 HDInsight 共置于同一数据中心。存储帐户类型不能为 ZRS，因为 ZRS 不支持表。
+    > [!NOTE]
+    > 存储帐户必须与 HDInsight 共置于同一数据中心。存储帐户类型不能为 ZRS，因为 ZRS 不支持表。
 
     有关使用 Azure 经典管理门户创建 Azure 存储帐户的信息，请参阅 [创建、管理或删除存储帐户][azure-create-storageaccount]。
 

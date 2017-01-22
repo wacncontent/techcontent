@@ -49,7 +49,8 @@ SQL 数据仓库允许多达 1,024 个并发连接。所有 1,024 个连接都�
 
 满足其中一个阈值时，就会按“先进先出”原则排队执行新查询。如果查询已经完成且查询和槽的数目降至限制以下，则会释放排队的查询。
 
-> [!NOTE]  以独占方式在动态管理视图 (DMV) 或目录视图上执行的 *Select* 查询不受任何并发限制的约束。用户可以对系统进行监视，而不用考虑在系统中执行的查询的数目。
+> [!NOTE]
+>  以独占方式在动态管理视图 (DMV) 或目录视图上执行的 *Select* 查询不受任何并发限制的约束。用户可以对系统进行监视，而不用考虑在系统中执行的查询的数目。
 
 ##<a name="resource-classes"></a> 资源类
 资源类有助于控制针对查询的内存分配和 CPU 周期。可以*数据库角色*的形式向用户分配四个资源类。这四个资源类是：**smallrc**、**mediumrc**、**largerc** 和 **xlargerc**。smallrc 类的用户获得的内存量较小，但是可以利用更高的并发性。与之相反，分配给 xlargerc 类的用户获得的内存量大，因此可以并发运行的查询数较少。
@@ -260,7 +261,8 @@ Removed as these two are not confirmed / supported under SQLDW
     CREATE LOGIN newperson WITH PASSWORD = 'mypassword';
     CREATE USER newperson for LOGIN newperson;
 
-    > [!NOTE] 最好是在针对 Azure SQL 数据仓库用户的 master 数据库中创建一个用户。在 master 中创建用户以后，用户即可使用 SSMS 之类的工具登录，不需指定数据库名称。此外，用户还可以使用对象资源管理器查看 SQL Server 上的所有数据库。有关创建和管理用户的详细信息，请参阅[保护 SQL 数据仓库中的数据库][]。
+    > [!NOTE]
+    > 最好是在针对 Azure SQL 数据仓库用户的 master 数据库中创建一个用户。在 master 中创建用户以后，用户即可使用 SSMS 之类的工具登录，不需指定数据库名称。此外，用户还可以使用对象资源管理器查看 SQL Server 上的所有数据库。有关创建和管理用户的详细信息，请参阅[保护 SQL 数据仓库中的数据库][]。
 
 2. **创建 SQL 数据仓库用户：**与 **SQL 数据仓库**数据库建立连接，然后执行以下命令。
 
@@ -278,7 +280,8 @@ Removed as these two are not confirmed / supported under SQLDW
 
         EXEC sp_droprolemember 'largerc', 'newperson'
 
-    > [!NOTE] 无法从 smallrc 中删除用户。
+    > [!NOTE]
+    > 无法从 smallrc 中删除用户。
 
 ## 对排队的查询进行的检测，以及其他 DMV
 

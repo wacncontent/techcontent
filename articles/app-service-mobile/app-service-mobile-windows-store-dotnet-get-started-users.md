@@ -114,7 +114,8 @@ ms.author: adrianha
 
 前一示例显示了标准登录，这要求在该应用每次启动时客户端同时联系标识提供者和应用服务。此方法不仅效率低下，而且如果很多客户尝试同时启动你的应用，你会遇到关于使用率的问题。更好的方法是缓存应用服务返回的授权令牌，然后在使用基于提供者的登录之前首先尝试使用此令牌。
 
->[!NOTE]无论使用的是客户端管理的还是服务管理的身份验证，都可以缓存应用服务颁发的令牌。本教程使用服务管理的身份验证。
+>[!NOTE]
+>无论使用的是客户端管理的还是服务管理的身份验证，都可以缓存应用服务颁发的令牌。本教程使用服务管理的身份验证。
 
 [!INCLUDE [mobile-windows-universal-dotnet-authenticate-app-with-token](../../includes/mobile-windows-universal-dotnet-authenticate-app-with-token.md)]
 

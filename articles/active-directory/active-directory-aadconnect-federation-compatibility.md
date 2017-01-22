@@ -27,7 +27,8 @@ Azure Active Directory 为 Office 365 和其他 Microsoft Online 服务提供单
 
 有关如何获取此处列出的第三方标识提供者的信息，请通过 idp@oxfordcomputergroup.com 与 Oxford Computer Group 联系。
 
->[!IMPORTANT] Oxford Computer Group 仅测试了这些单一登录方案的联合功能。Oxford Computer Group 未对这些单一登录方案的同步、双重身份验证等组件执行测试。
+>[!IMPORTANT]
+> Oxford Computer Group 仅测试了这些单一登录方案的联合功能。Oxford Computer Group 未对这些单一登录方案的同步、双重身份验证等组件执行测试。
 
 >按备用 ID 和 UPN 使用登录也未在此计划中测试。
 
@@ -52,7 +53,8 @@ Azure Active Directory 为 Office 365 和其他 Microsoft Online 服务提供单
 - Dell One Identity Cloud Access Manager v7.1
 - AuthAnvil Single Sign On 4.5
 
->[!IMPORTANT] 由于这些是第三方产品，Microsoft 不会对与这些标识提供者相关的问题和疑问提供支持，例如部署、配置、故障排除、最佳实践等方面的问题和疑问。如果需要获得支持或者存在有关这些标识提供者的疑问，请直接联系提供支持的第三方。
+>[!IMPORTANT]
+> 由于这些是第三方产品，Microsoft 不会对与这些标识提供者相关的问题和疑问提供支持，例如部署、配置、故障排除、最佳实践等方面的问题和疑问。如果需要获得支持或者存在有关这些标识提供者的疑问，请直接联系提供支持的第三方。
 
 >仅使用 WS 联合和 WS 信任协议测试这些第三方标识提供者与 Microsoft 云服务的互操作性。测试不包括使用 SAML 协议。
 

@@ -115,14 +115,16 @@ DocumentDB 用户资源与 DocumentDB 数据库关联。每个数据库可能包
 
     docUser = await client.CreateUserAsync(UriFactory.CreateDatabaseUri("db"), docUser);
 
-> [!NOTE] 每个 DocumentDB 用户都具有 PermissionsLink 属性，该属性可用于检索与该用户关联的权限的列表。
+> [!NOTE]
+> 每个 DocumentDB 用户都具有 PermissionsLink 属性，该属性可用于检索与该用户关联的权限的列表。
 
 DocumentDB 权限资源与 DocumentDB 用户关联。每个用户可能包含零个或多个 DocumentDB 权限。权限资源提供对用户在尝试访问某个特定应用程序资源时需要的安全令牌的访问权限。权限资源可能提供两种可用的访问级别：
 
 - 所有：用户对资源具有完全权限
 - 只读：用户只能读取资源的内容，但无法对资源执行写入、更新或删除操作。
 
-> [!NOTE] 为了运行 DocumentDB 存储过程，用户必须具有对存储过程将在其中运行的集合的所有权限。
+> [!NOTE]
+> 为了运行 DocumentDB 存储过程，用户必须具有对存储过程将在其中运行的集合的所有权限。
 
 下面的代码片段演示如何创建权限资源、读取权限资源的资源令牌以及将权限与上面创建的用户关联。
 
@@ -154,7 +156,8 @@ DocumentDB 权限资源与 DocumentDB 用户关联。每个用户可能包含零
 
     DocumentClient userClient = new DocumentClient(new Uri(endpointUrl), permList);
 
-> [!TIP] 资源令牌的有效时间跨度默认为 1 小时。但是，令牌生存期可以显式指定为最多 5 个小时。
+> [!TIP]
+> 资源令牌的有效时间跨度默认为 1 小时。但是，令牌生存期可以显式指定为最多 5 个小时。
 
 ## 后续步骤
 - 若要了解有关 DocumentDB 的详细信息，请单击[此处](./index.md)。

@@ -27,7 +27,8 @@ ms.author: wesmc
 
 本教程将演示基于角色的访问控制，检查每个用户在 Azure Active Directory (AAD) 中定义的“销售”组的成员资格。访问检查将在 .NET 移动服务后端中使用 Azure Active Directory 的 [Graph REST API] 来完成。只有属于“销售”组的用户才能查询数据。
 
->[!NOTE]本教程旨在扩充身份验证知识以加入授权实践。你应该先使用 Azure Active Directory 身份验证提供程序完成[向应用程序添加身份验证]教程。本教程将继续更新[向应用程序添加身份验证]教程中使用的 TodoItem 应用程序。
+>[!NOTE]
+>本教程旨在扩充身份验证知识以加入授权实践。你应该先使用 Azure Active Directory 身份验证提供程序完成[向应用程序添加身份验证]教程。本教程将继续更新[向应用程序添加身份验证]教程中使用的 TodoItem 应用程序。
 
 ##先决条件
 
@@ -163,7 +164,8 @@ ms.author: wesmc
 
 9. 在 AuthorizeAadRole.cs 中，更新 `AuthorizeAadRole` 类中的 `GetAADToken` 方法。此方法使用存储在移动服务中的应用程序设置来获取从 ADAL 访问 AAD 的令牌。
 
-    >[!NOTE]默认情况下，ADAL for .NET 包含内存中令牌缓存，以帮助减轻 Active Directory 的额外网络流量。但是，你可以编写自己的缓存实现，或完全禁用缓存。有关详细信息，请参阅 [ADAL for .NET]。
+    >[!NOTE]
+    >默认情况下，ADAL for .NET 包含内存中令牌缓存，以帮助减轻 Active Directory 的额外网络流量。但是，你可以编写自己的缓存实现，或完全禁用缓存。有关详细信息，请参阅 [ADAL for .NET]。
 
         // Use ADAL and the authentication app settings from the Mobile Service to get an AAD access token
         private async Task<string> GetAADToken()
@@ -228,7 +230,8 @@ ms.author: wesmc
 
 11. 在 AuthorizeAadRole.cs 中，使用以下代码更新 `AuthorizeAadRole` 类中的 `OnAuthorization` 方法。此代码要求调用移动服务的用户已在 AAD 上完成身份验证。然后，此代码将获取用户的 AAD 对象 ID，检查与该角色对应的 Active Directory 组的成员资格。
 
-    >[!NOTE]你可以按名称查找 Active Directory 组。但是，在许多情况下，将组 ID 存储为移动服务应用程序设置是较好的做法。这是因为组名称很可能会更改，而 ID 会保持相同。
+    >[!NOTE]
+    >你可以按名称查找 Active Directory 组。但是，在许多情况下，将组 ID 存储为移动服务应用程序设置是较好的做法。这是因为组名称很可能会更改，而 ID 会保持相同。
 
         public override void OnAuthorization(HttpActionContext actionContext)
         {

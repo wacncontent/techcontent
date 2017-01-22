@@ -28,7 +28,8 @@ Azure 安全日志记录、分析和监视生命周期包括：
 ## 日志生成
 Windows 事件日志中引发了虚拟机中有关**系统**、**安全**和**应用程序**通道的安全事件。若要确保在不出现数据丢失的情况下记录事件，请务必正确配置事件日志的大小。根据审核策略设置生成的事件数量和事件收集策略定义的事件数量来设置事件日志的大小。有关详细信息，请参阅[安全审核监视和管理规划](http://technet.microsoft.com/zh-cn/library/ee513968.aspx#BKMK_4)。
 
->[!NOTE]在使用 Windows 事件转发 (WEF) 或 Azure 诊断（如[日志收集](#log-collection)部分所述）从云服务或虚拟机中拉取日志时，请考虑系统中断的潜在影响。例如，如果您的 WEF 环境在一段时间内出现故障，您要么确保日志大小足以应对更长的持续时间，要么就需要做好日志数据可能丢失的准备。
+>[!NOTE]
+>在使用 Windows 事件转发 (WEF) 或 Azure 诊断（如[日志收集](#log-collection)部分所述）从云服务或虚拟机中拉取日志时，请考虑系统中断的潜在影响。例如，如果您的 WEF 环境在一段时间内出现故障，您要么确保日志大小足以应对更长的持续时间，要么就需要做好日志数据可能丢失的准备。
 
 对于在 Azure 中部署的云服务应用程序和从 <!--[-->Azure 虚拟机应用商店<!--](/marketplace/virtual-machines/#microsoft)-->创建的虚拟机，默认情况下启用一组操作系统安全事件。客户可以通过自定义操作系统审核策略来添加、删除或修改要审核的事件。有关详细信息，请参阅[安全策略设置参考](http://technet.microsoft.com/zh-cn/library/jj852210.aspx)。
 
@@ -214,7 +215,8 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 - 时间戳是在服务器上维护的日期/时间值，用来跟踪实体上次修改的时间。
 
->[!NOTE]Azure 存储空间表中的最大行大小被限制为 1 MB。如果帐户在 2012 年 6 月之后创建，则存储帐户可以包含多达 200 TB 的 blob、队列和表中的数据。因此，如果 blob 和队列没有任何存储空间，则表大小可以增长至 200 TB。在 2012 年 6 月之前创建的帐户具有 100 TB 的限制。
+>[!NOTE]
+>Azure 存储空间表中的最大行大小被限制为 1 MB。如果帐户在 2012 年 6 月之后创建，则存储帐户可以包含多达 200 TB 的 blob、队列和表中的数据。因此，如果 blob 和队列没有任何存储空间，则表大小可以增长至 200 TB。在 2012 年 6 月之前创建的帐户具有 100 TB 的限制。
 
 您还可以选择在存储资源管理器中编辑表数据。双击表视图中的特定行以打开“编辑实体”窗口，如下所示：
 
@@ -226,7 +228,8 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 ##### 步骤 1：更新配置文件以包括感兴趣的事件
 需要更新上一示例中创建的 Azure 诊断文件以包括 Windows 应用程序事件日志错误类型。
 
->[!NOTE]需要将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。在新文件中定义的设置将覆盖现有的配置。
+>[!NOTE]
+>需要将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。在新文件中定义的设置将覆盖现有的配置。
 
 若要检索现有配置设置，可以使用 **Get-AzureVMDiagnosticsExtension** cmdlet。下面是一个用于检索现有配置的示例 Azure PowerShell 脚本：
 
@@ -392,7 +395,8 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 若要检测防火墙更改，我们将更新现有配置以包括防火墙更改事件。
 
 #### 步骤 1：获取现有配置
->[!NOTE]新的配置设置将覆盖现有配置。因此，请务必将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。
+>[!NOTE]
+>新的配置设置将覆盖现有配置。因此，请务必将任何现有的 Azure 诊断配置设置与新的配置文件进行合并。
 
 若要检索现有配置设置，可以使用 **Get-AzureServiceDiagnosticsExtension** cmdlet：
 
@@ -527,7 +531,8 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 - 将现有的 Azure 诊断配置设置与您所做的更改进行合并。新的配置文件将覆盖现有的配置设置。
 - 明智地选择“计划传输时间段”间隔。较短的传输时间将会提高数据相关性，但可能会增加存储成本和处理开销。
 
->[!NOTE]将会显著影响收集的数据量的另一个变量是日志记录级别。下面举例说明如何通过日志记录级别筛选日志：
+>[!NOTE]
+>将会显著影响收集的数据量的另一个变量是日志记录级别。下面举例说明如何通过日志记录级别筛选日志：
 
     System!*[System[(Level =2)]]
 
@@ -535,7 +540,8 @@ $VM3 = Update-AzureVM -ServiceName $service_name -Name $vm_name -VM $VM2.VM
 
 - 如果不再需要诊断数据，请定期将其从 Azure 存储空间中清除。
 
->[!NOTE]若要了解有关诊断数据的详细信息，请参阅[在 Azure 存储空间中存储和查看诊断数据](https://msdn.microsoft.com/zh-cn/library/azure/hh411534.aspx)。容器和存储诊断数据的表就像其他容器和表一样，您可以采用对其他数据采用的相同方法来删除其中的 blob 和实体。您可以采用编程方式通过其中一个存储客户端库或采用直观的方式通过[存储资源管理器客户端](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/03/11/windows-azure-storage-explorers-2014.aspx)来删除诊断数据。
+>[!NOTE]
+>若要了解有关诊断数据的详细信息，请参阅[在 Azure 存储空间中存储和查看诊断数据](https://msdn.microsoft.com/zh-cn/library/azure/hh411534.aspx)。容器和存储诊断数据的表就像其他容器和表一样，您可以采用对其他数据采用的相同方法来删除其中的 blob 和实体。您可以采用编程方式通过其中一个存储客户端库或采用直观的方式通过[存储资源管理器客户端](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/03/11/windows-azure-storage-explorers-2014.aspx)来删除诊断数据。
 
 - 它是将服务数据和安全日志数据存储在单独的存储帐户的最佳做法。这种隔离可确保安全日志数据的保存不会影响生产服务数据的存储性能。
 - 基于组织的合规性策略、数据分析和监视要求选择日志保留期。

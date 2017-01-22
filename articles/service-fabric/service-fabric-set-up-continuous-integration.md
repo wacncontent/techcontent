@@ -35,7 +35,8 @@ ms.author: mthalman
 
 4. 确保已创建 Service Fabric 应用程序 (.sfproj) 项目。必须具有使用 Service Fabric SDK 2.1 或更高版本创建或升级的项目（.sfproj 文件应包含 1.1 或更高的 ProjectVersion 属性值）。
 
->[!NOTE] 不再需要自定义生成代理。Team Services 托管代理现在预装了 Service Fabric 群集管理软件，因此可以直接从这些代理部署应用程序。
+>[!NOTE]
+> 不再需要自定义生成代理。Team Services 托管代理现在预装了 Service Fabric 群集管理软件，因此可以直接从这些代理部署应用程序。
 
 ## 配置和共享源文件
 

@@ -21,7 +21,8 @@ ms.author: adegeo
 
 角色启动之前，可以使用启动任务执行操作。可能需要执行的操作包括安装组件、注册 COM 组件、设置注册表项或启动长时间运行的进程。
 
->[!NOTE] 启动任务不适用于虚拟机，只适用于云服务 Web 角色和辅助角色。
+>[!NOTE]
+> 启动任务不适用于虚拟机，只适用于云服务 Web 角色和辅助角色。
 
 ## 启动任务的工作方式
 
@@ -45,7 +46,8 @@ ms.author: adegeo
     - **simple** 任务以同步方式执行（一次一个任务）。
     - **background** 和 **foreground** 任务与启动任务并行，以异步方式启动。
 
-    > [!WARNING] 在启动过程中的启动任务阶段，IIS 可能未完全配置，因此角色特定的数据可能不可用。需要角色特定的数据的启动任务应使用 [Microsoft.WindowsAzure.ServiceRuntime.RoleEntryPoint.OnStart](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.onstart.aspx)。
+    > [!WARNING]
+    > 在启动过程中的启动任务阶段，IIS 可能未完全配置，因此角色特定的数据可能不可用。需要角色特定的数据的启动任务应使用 [Microsoft.WindowsAzure.ServiceRuntime.RoleEntryPoint.OnStart](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleentrypoint.onstart.aspx)。
 
 3. 将启动角色主机进程并在 IIS 中创建站点。
 
@@ -76,7 +78,8 @@ ms.author: adegeo
         ECHO The current version is %MyVersionNumber% >> "%TEMP%\StartupLog.txt" 2>&1
         EXIT /B 0
 
-> [!NOTE] 在 Visual Studio 中，启动批处理文件的“复制到输出目录”属性应设为“始终复制”，以确保将启动批处理文件正确地部署到 Azure 上的项目（对于 Web 角色，为 **approot\\bin**；对于辅助角色，为 **approot**）。
+> [!NOTE]
+> 在 Visual Studio 中，启动批处理文件的“复制到输出目录”属性应设为“始终复制”，以确保将启动批处理文件正确地部署到 Azure 上的项目（对于 Web 角色，为 **approot\\bin**；对于辅助角色，为 **approot**）。
 
 ## 任务属性的说明
 
@@ -97,14 +100,16 @@ ms.author: adegeo
 - **elevated**  
 启动任务以管理员特权运行。这将允许启动任务安装程序、更改 IIS 配置、执行注册表更改和其他管理员级别任务，而不会提高角色本身的权限级别。
 
-> [!NOTE] 启动任务的权限级别不需要与角色本身相同。
+> [!NOTE]
+> 启动任务的权限级别不需要与角色本身相同。
 
 **taskType** - 指定启动任务的执行方式。
 
 - **simple**  
 任务按照 [ServiceDefinition.csdef] 文件中指定的顺序一次一个地以同步方式执行。当一个 **simple** 启动任务以为零的 **errorlevel** 结束时，将执行下一个 **simple** 启动任务。如果没有更多 **simple** 启动任务要执行，则将启动角色本身。   
 
-    > [!NOTE] 如果 **simple** 任务以非零 **errorlevel** 结束，则将阻止该实例。后续 **simple** 启动任务和角色本身将不会启动。
+    > [!NOTE]
+    > 如果 **simple** 任务以非零 **errorlevel** 结束，则将阻止该实例。后续 **simple** 启动任务和角色本身将不会启动。
 
     若要确保批处理文件以为零的 **errorlevel** 结束，请在批处理文件进程结束时执行命令 `EXIT /B 0`。
 

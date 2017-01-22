@@ -29,7 +29,8 @@ ms.author: adrianha
 
 [!INCLUDE [app-service-mobile-migrate-vs-upgrade](../../includes/app-service-mobile-migrate-vs-upgrade.md)]
 
->[!TIP] 建议在升级之前先[执行迁移](./app-service-mobile-migrating-from-mobile-services.md)。这样，就能在同一个应用服务计划中放置两个版本的应用程序，且无需支付额外的费用。
+>[!TIP]
+> 建议在升级之前先[执行迁移](./app-service-mobile-migrating-from-mobile-services.md)。这样，就能在同一个应用服务计划中放置两个版本的应用程序，且无需支付额外的费用。
 
 ###移动应用 .NET 服务器 SDK 改进
 
@@ -47,7 +48,8 @@ ms.author: adrianha
 
 在许多情况下，只需切换到新的移动应用服务器 SDK 并将代码重新发布到新的移动应用实例，即可完成升级。但在某些情况下则需要一些额外的配置，例如高级身份验证方案和使用计划作业。后续部分将逐一介绍。
 
->[!TIP] 建议先阅读并充分了解本主题的余下内容，然后再开始升级。请记下以下概括的所有功能。
+>[!TIP]
+> 建议先阅读并充分了解本主题的余下内容，然后再开始升级。请记下以下概括的所有功能。
 
 移动服务客户端 SDK 与新的移动应用服务器 SDK **不**兼容。为了提供应用程序的服务连续性，不应该将更改发布到当前正在为发布的客户端提供服务的站点。而应该创建新的移动应用作为副本。可以在同一个应用服务计划中放置此应用程序，以免产生额外的财务成本。
 
@@ -96,7 +98,8 @@ ms.author: adrianha
             .UseDefaultConfiguration()
         .ApplyTo(config);
 
->[!NOTE] 如果想要详细了解新的 .NET 服务器 SDK 以及如何在应用中添加/删除功能，请参阅 [How to use the .NET server SDK]（如何使用 .NET 服务器 SDK）主题。
+>[!NOTE]
+> 如果想要详细了解新的 .NET 服务器 SDK 以及如何在应用中添加/删除功能，请参阅 [How to use the .NET server SDK]（如何使用 .NET 服务器 SDK）主题。
 
 如果应用使用身份验证功能，则还需要注册 OWIN 中间件。在此情况下，应该将上述配置代码移入新的 OWIN 启动类。
 

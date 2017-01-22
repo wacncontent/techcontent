@@ -26,7 +26,8 @@ ms.author: elioda
 * **SimulateDeviceConfiguration.js**，一个模拟设备应用，用于等待所需配置更新并报告模拟配置更新过程的状态。
 * **SetDesiredConfigurationAndQuery**，一个旨在从后端运行的 .NET 控制台应用，用于在设备上设置所需配置并查询配置更新过程。
 
-> [!NOTE] [IoT Hub SDKs][lnk-hub-sdks]（IoT 中心 SDK）一文介绍了各种可以用来构建设备和后端应用程序的 SDK。
+> [!NOTE]
+> [IoT Hub SDKs][lnk-hub-sdks]（IoT 中心 SDK）一文介绍了各种可以用来构建设备和后端应用程序的 SDK。
 
 完成本教程需具备以下条件：
 

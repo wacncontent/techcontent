@@ -31,7 +31,8 @@ ms.author: chackdan
 
 为此，可将“fabricClusterAutoupgradeEnabled”群集配置设置为 true 或 false。
 
->[!NOTE] 请确保群集始终运行受支持的 Service Fabric 版本。当我们宣布发行新版 Service Fabric 时，以前的版本标记为自发布日期开始算起的 60 天后结束支持。新版发布将在 [Service Fabric 团队博客](https://blogs.msdn.microsoft.com/azureservicefabric/)中通告。然后，便可以选择使用新版本。
+>[!NOTE]
+> 请确保群集始终运行受支持的 Service Fabric 版本。当我们宣布发行新版 Service Fabric 时，以前的版本标记为自发布日期开始算起的 60 天后结束支持。新版发布将在 [Service Fabric 团队博客](https://blogs.msdn.microsoft.com/azureservicefabric/)中通告。然后，便可以选择使用新版本。
 
 仅当使用的是生产形式的节点配置（每个 Service Fabric 节点在独立的物理机或虚拟机上分配）时，才可以将群集升级到最新版本。如果使用的是开发群集（单个物理机或虚拟机上有多个 Service Fabric 节点），则必须先解除该群集，然后使用新版本重新创建该群集。
 
@@ -93,7 +94,8 @@ ms.author: chackdan
 
 如果群集节点**未**与 [http://download.microsoft.com](http://download.microsoft.com) 建立 Internet 连接，可以使用以下步骤将群集升级到支持的版本
 
->[!NOTE]如果运行的群集未连接到 Internet，必须关注 Service Fabric 团队博客获取有关新版的通知。在此情况下，系统**不会**发出任何群集运行状况警告。
+>[!NOTE]
+>如果运行的群集未连接到 Internet，必须关注 Service Fabric 团队博客获取有关新版的通知。在此情况下，系统**不会**发出任何群集运行状况警告。
 
 1. 请修改群集配置，将以下属性设置为 false。
 

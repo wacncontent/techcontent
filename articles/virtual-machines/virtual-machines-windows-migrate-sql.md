@@ -47,7 +47,8 @@ ms.author: carlasab
 
 如果不能使用上述方法，请手动迁移你的数据库。使用此方法时，你通常先进行数据库备份，接下来将数据库备份复制到 Azure，然后执行数据库还原。你还可以将数据库文件本身复制到 Azure，然后附加这些文件。你可以通过多种方法完成将数据库迁移到 Azure VM 的这一手动流程。
 
-> [!NOTE] 从较旧版本的 SQL Server 升级到 SQL Server 2014 或 SQL Server 2016 时，应考虑是否需要做一些更改。建议在迁移项目时处理好不受新版 SQL Server 支持的功能上的所有依赖项。有关受支持的版本和方案的详细信息，请参阅[升级到 SQL Server](https://msdn.microsoft.com/zh-cn/library/bb677622.aspx)。
+> [!NOTE]
+> 从较旧版本的 SQL Server 升级到 SQL Server 2014 或 SQL Server 2016 时，应考虑是否需要做一些更改。建议在迁移项目时处理好不受新版 SQL Server 支持的功能上的所有依赖项。有关受支持的版本和方案的详细信息，请参阅[升级到 SQL Server](https://msdn.microsoft.com/zh-cn/library/bb677622.aspx)。
 
 下表列出了各种主要迁移方法，并讨论了最适合使用该方法的场合。
 
@@ -166,7 +167,8 @@ ms.author: carlasab
 2. 使用 [Add-AzureVHD cmdlet](https://msdn.microsoft.com/zh-cn/library/azure/dn495173.aspx) 将 VHD 文件上载到 Azure 存储空间。
 3. 使用上载的 VHD 部署新的虚拟机。
 
-> [!NOTE] 若要迁移整个应用程序，请考虑使用 [Azure Site Recovery](../site-recovery/site-recovery-overview.md)。
+> [!NOTE]
+> 若要迁移整个应用程序，请考虑使用 [Azure Site Recovery](../site-recovery/site-recovery-overview.md)。
 
 ## 后续步骤
 

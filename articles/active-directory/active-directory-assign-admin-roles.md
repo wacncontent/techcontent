@@ -27,7 +27,8 @@ wacn.date: 01/03/2017
 
 - **全局管理员/公司管理员**：有权访问所有管理功能。注册 Azure 帐户的人员将成为全局管理员。只有全局管理员才能分配其他管理员角色。你的公司中可以有多个全局管理员。
 
-    > [!NOTE] 在 Microsoft 图形 API、Azure AD 图形 API 和 Azure AD PowerShell 中，此角色标识为“公司管理员”。它是 [Azure 门户预览](https://portal.azure.cn)中的“全局管理员”。
+    > [!NOTE]
+    > 在 Microsoft 图形 API、Azure AD 图形 API 和 Azure AD PowerShell 中，此角色标识为“公司管理员”。它是 [Azure 门户预览](https://portal.azure.cn)中的“全局管理员”。
 
 - **法规管理员**：
 
@@ -51,13 +52,15 @@ wacn.date: 01/03/2017
 
 - **密码管理员/支持管理员**：重置密码、管理服务请求并监视服务运行状况。密码管理员只能为用户和其他密码管理员重置密码。
 
-    > [!NOTE] 在 Microsoft 图形 API、Azure AD 图形 API 和 Azure AD PowerShell 中，此角色标识为“支持管理员”。
+    > [!NOTE]
+    > 在 Microsoft 图形 API、Azure AD 图形 API 和 Azure AD PowerShell 中，此角色标识为“支持管理员”。
 
 - **SharePoint 服务管理员**：具有此角色的用户在 Microsoft SharePoint Online（如果存在此服务）中拥有全局权限。有关详细信息，请参阅 [About Office 365 admin roles](https://support.office.com/article/About-Office-365-admin-roles-da585eea-f576-4f55-a1e0-87090b6aaa9d?ui=en-US&rs=en-US&ad=US)（关于 Office 365 管理员角色）。
 
 - **服务管理员**：管理服务请求并监视服务运行状况。
 
-    > [!NOTE] 若要为用户分配服务管理员角色，全局管理员必须先在服务（例如 Exchange Online）中将管理权限分配给用户，然后在 Azure 经典管理门户中将服务管理员角色分配给用户。
+    > [!NOTE]
+    > 若要为用户分配服务管理员角色，全局管理员必须先在服务（例如 Exchange Online）中将管理权限分配给用户，然后在 Azure 经典管理门户中将服务管理员角色分配给用户。
 
 - **用户帐户管理员**：重置密码、监视服务运行状况，并管理用户帐户、用户组和服务请求。用户管理管理员权限存在一些限制。例如，他们不能删除全局管理员或创建其他管理员。另外，他们也不能为计费管理员、全局管理员和服务管理员重置密码。
 

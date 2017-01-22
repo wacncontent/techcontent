@@ -67,7 +67,8 @@ Azure CLI 是一个跨平台工具，可用于管理 Azure 服务。使用以下
         azure config mode asm
         azure login -e AzureChinaCloud
 
-    > [!NOTE] 如果想用 Azure CLI 管理 Azure 中国的 HDInsight 群集，请安装 Azure CLI 0.9.x，而不是最新的 0.10.x.
+    > [!NOTE]
+    > 如果想用 Azure CLI 管理 Azure 中国的 HDInsight 群集，请安装 Azure CLI 0.9.x，而不是最新的 0.10.x.
 
 3. 输入以下命令，列出订阅的存储帐户：
 

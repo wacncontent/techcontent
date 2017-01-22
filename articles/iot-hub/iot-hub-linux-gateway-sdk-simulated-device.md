@@ -35,7 +35,8 @@ ms.author: andbuc
 2. 浏览到本地 **azure-iot-gateway-sdk** 存储库副本中的根文件夹。
 3. 运行 **tools/build.sh** 脚本。此脚本使用 **cmake** 实用工具在本地 **azure-iot-gateway-sdk** 存储库副本的根文件夹中创建一个名为 **build** 的文件夹，并生成一个生成文件。然后，该脚本将生成解决方案并运行测试。
 
-> [!NOTE]  每次运行 **build.sh** 脚本时，都会删除本地 **azure-iot-gateway-sdk** 存储库副本的根文件夹中的 **build** 文件夹并重新生成。
+> [!NOTE]
+>  每次运行 **build.sh** 脚本时，都会删除本地 **azure-iot-gateway-sdk** 存储库副本的根文件夹中的 **build** 文件夹并重新生成。
 
 运行示例：
 

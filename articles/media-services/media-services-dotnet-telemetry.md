@@ -22,7 +22,8 @@ ms.author: juliako
 
 本主题介绍使用 .NET SDK 配置 Azure 媒体服务 (AMS) 遥测可采取的常规步骤。
 
->[!NOTE]有关 AMS 遥测定义和使用方法的详细介绍，请参阅[概述](./media-services-telemetry-overview.md)主题。
+>[!NOTE]
+>有关 AMS 遥测定义和使用方法的详细介绍，请参阅[概述](./media-services-telemetry-overview.md)主题。
 
 可通过以下方式之一使用遥测数据：
 

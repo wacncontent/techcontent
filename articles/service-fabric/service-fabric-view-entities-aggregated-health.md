@@ -55,16 +55,19 @@ Service Fabric 资源管理器提供群集的更直观展示。在下图中，�
 
 [1]: ./media/service-fabric-view-entities-aggregated-health/servicefabric-explorer-cluster-health.png
 
-> [!NOTE] 了解有关 [Service Fabric 资源管理器](./service-fabric-visualizing-your-cluster.md)的更多信息。
+> [!NOTE]
+> 了解有关 [Service Fabric 资源管理器](./service-fabric-visualizing-your-cluster.md)的更多信息。
 
 ##<a name="health-queries"></a> 运行状况查询
 Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduction.md#health-entities-and-hierarchy)提供运行状况查询。可以通过 API（可在 FabricClient.HealthManager 中找到的方法）、PowerShell cmdlet 和 REST 访问它们。这些查询返回有关实体的完整运行状况信息：聚合运行状况、实体运行状况事件、子运行状况（在适用时）以及实体不正常时的不正常评估。
 
-> [!NOTE] 填满运行状况存储时，将返回运行状况实体。实体必须是作用中（未删除），并且具有系统报告。层次结构链上其父实体还必须有系统报告。如果不满足上述条件之一，则运行状况查询返回一个异常，并显示未返回实体的原因。
+> [!NOTE]
+> 填满运行状况存储时，将返回运行状况实体。实体必须是作用中（未删除），并且具有系统报告。层次结构链上其父实体还必须有系统报告。如果不满足上述条件之一，则运行状况查询返回一个异常，并显示未返回实体的原因。
 
 运行状况查询必须传递取决于实体类型的实体标识符。这些查询接受可选的运行状况策略参数。如果未指定运行状况策略，则使用来自群集清单或应用程序清单的[运行状况策略](./service-fabric-health-introduction.md#health-policies)进行评估。这些查询还接受筛选器，以仅返回与指定筛选器有关的部分子项或事件。
 
-> [!NOTE] 在服务器端应用输出筛选器，因此减小了消息回复大小。我们建议使用输出筛选器来限制返回的数据，而不是在客户端应用筛选器。
+> [!NOTE]
+> 在服务器端应用输出筛选器，因此减小了消息回复大小。我们建议使用输出筛选器来限制返回的数据，而不是在客户端应用筛选器。
 
 实体的运行状况包含：
 
@@ -936,7 +939,8 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
 ## 常规查询
 常规查询返回指定类型的 Service Fabric 实体的列表。这些查询通过 API（通过 **FabricClient.QueryManager** 上的方法）、PowerShell cmdlet 和 REST 来公开。这些查询聚合了来自多个组件的子查询。其中一个组件是[运行状况存储](./service-fabric-health-introduction.md#health-store)，该组件为每个查询结果填充聚合的运行状况。
 
-> [!NOTE] 一般查询返回实体的聚合运行状况状态，不包含丰富的运行状况数据。如果一个实体不正常，你可以通过运行状况查询来跟进，获得所有运行状况信息，包括事件、子项运行状况状态和不正常评估。
+> [!NOTE]
+> 一般查询返回实体的聚合运行状况状态，不包含丰富的运行状况数据。如果一个实体不正常，你可以通过运行状况查询来跟进，获得所有运行状况信息，包括事件、子项运行状况状态和不正常评估。
 
 如果一般查询返回实体的未知运行状况，则可能表示运行状况存储中不存在有关该实体的完整数据。此外，也有可能对运行状况存储的子查询未成功（例如，发生通信错误，或运行状况存储已被限制）。通过对实体进行运行状况查询进行跟进。如果子查询发生暂时性错误，例如网络问题，此跟进查询可能成功。它还可以从运行状况存储提供关于为何实体未公开的详细信息。
 
@@ -964,7 +968,8 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
   - API：[FabricClient.QueryClient.GetDeployedServicePackageListAsync](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.fabricclient.queryclient.getdeployedservicepackagelistasync.aspx)
   - PowerShell：Get-ServiceFabricDeployedApplication
 
-> [!NOTE] 有些查询会返回已分页的结果。这些查询的返回结果是派生自 [PagedList<T>](https://msdn.microsoft.com/zh-cn/library/azure/mt280056.aspx) 的列表。如果一条消息无法容纳这些结果，则仅返回一页，以及一个用于跟踪枚举停止位置的 ContinuationToken。应该继续调用相同的查询，并从先前的查询传入继续标记以获取后续结果。
+> [!NOTE]
+> 有些查询会返回已分页的结果。这些查询的返回结果是派生自 [PagedList<T>](https://msdn.microsoft.com/zh-cn/library/azure/mt280056.aspx) 的列表。如果一条消息无法容纳这些结果，则仅返回一页，以及一个用于跟踪枚举停止位置的 ContinuationToken。应该继续调用相同的查询，并从先前的查询传入继续标记以获取后续结果。
 
 ### 示例
 
@@ -1068,7 +1073,8 @@ Service Fabric 为每个支持的[实体类型](./service-fabric-health-introduc
 ## 使用系统运行状况评估进行故障排除
 如果群集或应用程序出现问题，请立即查看群集或应用程序的运行状况以找出错误。不正常评估将提供是什么触发了当前不正常状态的详细信息。如果需要，你可以向下钻取到状况不正常的子实体，以识别根本原因。
 
-> [!NOTE] 不正常评估将显示实体评估为当前健康状况的第一个原因。可能有其他多个事件触发此状态，但是评估中不会反映这些事件。若要获取更多信息，请向下钻取到运行状况实体，找出群集中的所有不正常报告。
+> [!NOTE]
+> 不正常评估将显示实体评估为当前健康状况的第一个原因。可能有其他多个事件触发此状态，但是评估中不会反映这些事件。若要获取更多信息，请向下钻取到运行状况实体，找出群集中的所有不正常报告。
 
 ## 后续步骤
 [使用系统运行状况报告进行故障排除](./service-fabric-understand-and-troubleshoot-with-system-health-reports.md)

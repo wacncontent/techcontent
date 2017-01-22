@@ -21,7 +21,8 @@ ms.author: adegeo
 
 管理证书允许你使用 Azure 提供的服务管理 API 进行身份验证。许多程序和工具（如 Visual Studio 或 Azure SDK）将使用这些证书来自动配置和部署各种 Azure 服务。**这仅适用于 Azure 经典管理门户**。
 
->[!WARNING] 请小心！ 这些类型的证书允许任何使用它们进行身份验证的人管理与它们相关联的订阅。
+>[!WARNING]
+> 请小心！ 这些类型的证书允许任何使用它们进行身份验证的人管理与它们相关联的订阅。
 
 有关 Azure 证书（包括创建自签名证书）的详细信息，如果您需要便可[使用](./cloud-services/cloud-services-certs-create.md#what-are-management-certificates)。
 

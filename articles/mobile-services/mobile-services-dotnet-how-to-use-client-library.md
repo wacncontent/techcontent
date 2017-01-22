@@ -59,7 +59,8 @@ ms.author: glenga
 
 在上面的代码中，请将 `AppUrl` 和 `AppKey` 依次替换为移动服务 URL 和应用程序密钥。在 Azure 经典管理门户中选择你的移动服务，然后单击“仪表板”即可获取这两个值。
 
->[!IMPORTANT]应用程序密钥用于针对移动服务筛选出随机请求，将随应用程序一起分发。由于此密钥未加密，因此不能被认为是安全的。为确保安全访问你的移动服务数据，你必须改为在允许用户访问前对用户进行身份验证。有关详细信息，请参阅[如何：对用户进行身份验证](#authentication)。
+>[!IMPORTANT]
+>应用程序密钥用于针对移动服务筛选出随机请求，将随应用程序一起分发。由于此密钥未加密，因此不能被认为是安全的。为确保安全访问你的移动服务数据，你必须改为在允许用户访问前对用户进行身份验证。有关详细信息，请参阅[如何：对用户进行身份验证](#authentication)。
 
 ##<a name="instantiating"></a>如何创建表引用
 
@@ -80,7 +81,8 @@ ms.author: glenga
 - [选择特定的列]
 - [按 ID 查找数据]
 
->[!NOTE]将强制使用服务器驱动的页大小来防止返回所有行。这可以防止对大型数据集发出的默认请求对服务造成负面影响。若要返回 50 个以上的行，请根据[在页中返回数据]所述使用 `Take` 方法。
+>[!NOTE]
+>将强制使用服务器驱动的页大小来防止返回所有行。这可以防止对大型数据集发出的默认请求对服务造成负面影响。若要返回 50 个以上的行，请根据[在页中返回数据]所述使用 `Take` 方法。
 
 ### <a name="filtering"></a>如何筛选返回的数据
 
@@ -204,7 +206,8 @@ ms.author: glenga
 
 ##<a name="inserting"></a>如何在移动服务中插入数据
 
-> [!NOTE]如果你想要对某个类型执行插入、查找、删除或更新操作，则需要创建一个名为 **Id** 的成员。正因如此，示例类 **TodoItem** 包含了一个名为 **Id** 的成员。更新和删除操作中始终必须存在一个有效的 ID 值。
+> [!NOTE]
+>如果你想要对某个类型执行插入、查找、删除或更新操作，则需要创建一个名为 **Id** 的成员。正因如此，示例类 **TodoItem** 包含了一个名为 **Id** 的成员。更新和删除操作中始终必须存在一个有效的 ID 值。
 
 以下代码演示了如何在表中插入新行。参数包含要作为 .NET 对象插入的数据。
 
@@ -303,7 +306,8 @@ ms.author: glenga
 
 Xamarin 应用需要一些额外的代码才能将 iOS 或 Android 应用上运行的 Xamarin 应用分别注册到 Apple Push Notification 服务 (APNS) 和 Google Cloud Messaging (GCM) 服务。有关详细信息，请参阅**向应用添加推送通知** ([Xamarin.iOS](./partner-xamarin-mobile-services-ios-get-started-push.md#add-push)。
 
->[!NOTE]当你需要发送通知给特定的已注册用户时，必须在注册之前要求身份验证，然后验证是否已授权该用户注册特定标记。例如，必须检查以确保用户注册的标记不是其他人的用户 ID。有关详细信息，请参阅[向经过身份验证的用户发送推送通知](./mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users.md)。
+>[!NOTE]
+>当你需要发送通知给特定的已注册用户时，必须在注册之前要求身份验证，然后验证是否已授权该用户注册特定标记。例如，必须检查以确保用户注册的标记不是其他人的用户 ID。有关详细信息，请参阅[向经过身份验证的用户发送推送通知](./mobile-services-dotnet-backend-windows-store-dotnet-push-notifications-app-users.md)。
 
 ##<a name="pull-notifications"></a>如何：在 Windows 应用中使用定期通知
 

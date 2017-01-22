@@ -59,7 +59,8 @@ ms.author: vturecek
         }
     }
 
-> [!NOTE] 服务接口中的参数和返回类型可以是任何简单、复杂或自定义的类型，但它们必须是 .NET [DataContractSerializer](https://msdn.microsoft.com/zh-cn/library/ms731923.aspx) 可序列化的类型。
+> [!NOTE]
+> 服务接口中的参数和返回类型可以是任何简单、复杂或自定义的类型，但它们必须是 .NET [DataContractSerializer](https://msdn.microsoft.com/zh-cn/library/ms731923.aspx) 可序列化的类型。
 
 ## 调用远程服务的方法
 若要使用远程处理堆栈在服务上调用方法，可以通过 `Microsoft.ServiceFabric.Services.Remoting.Client.ServiceProxy` 类对该服务使用本地代理。`ServiceProxy` 方法通过使用该服务实现的同一接口来创建本地代理。使用此代理，你只需在此接口上远程调用方法。

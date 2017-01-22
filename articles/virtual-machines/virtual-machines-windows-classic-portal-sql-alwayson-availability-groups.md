@@ -56,7 +56,8 @@ ms.author: mikeray
 
 - 你已经深入了解 AlwaysOn 可用性组。有关详细信息，请参阅 [AlwaysOn 可用性组 (SQL Server)](https://msdn.microsoft.com/zh-cn/library/hh510230.aspx)。
 
->[!NOTE]如果你想将 AlwaysOn 可用性组与 SharePoint 结合使用，另请参阅[为 SharePoint 2013 配置 SQL Server 2012 AlwaysOn 可用性组](https://technet.microsoft.com/zh-cn/library/jj715261.aspx)。
+>[!NOTE]
+>如果你想将 AlwaysOn 可用性组与 SharePoint 结合使用，另请参阅[为 SharePoint 2013 配置 SQL Server 2012 AlwaysOn 可用性组](https://technet.microsoft.com/zh-cn/library/jj715261.aspx)。
 
 ## 创建虚拟网络和域控制器服务器
 
@@ -115,7 +116,8 @@ ms.author: mikeray
 
 1. 选择“Active Directory 域服务”和“DNS 服务器”角色。出现提示时，添加这些角色所需的任何其他功能。
 
-    >[!NOTE]你将收到无静态 IP 地址的验证警告。如果你要测试配置，请单击“继续”。对于生产方案，请[使用 PowerShell 设置域控制器计算机的静态 IP 地址](../virtual-network/virtual-networks-reserved-private-ip.md)。
+    >[!NOTE]
+    >你将收到无静态 IP 地址的验证警告。如果你要测试配置，请单击“继续”。对于生产方案，请[使用 PowerShell 设置域控制器计算机的静态 IP 地址](../virtual-network/virtual-networks-reserved-private-ip.md)。
 
     ![添加角色对话框](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC784624.png)
 
@@ -322,7 +324,8 @@ ms.author: mikeray
 |用于管理群集的访问点|在“群集名称”中键入 **Cluster1**|
 |确认|除非你使用的是存储空间，否则请使用默认值。请参阅此表后面的备注。|
 
-    >[!WARNING]如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“确认”页上的“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
+    >[!WARNING]
+    >如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“确认”页上的“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
 
 1. 在左窗格中，展开“故障转移群集管理器”，然后单击“Cluster1.corp.contoso.com”。
 
@@ -346,7 +349,8 @@ ms.author: mikeray
 
 1. 在“确认”页中，单击“下一步”以添加节点。
 
-    >[!WARNING]如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
+    >[!WARNING]
+    >如果你使用[存储空间](https://technet.microsoft.com/zh-cn/library/hh831739)来将多个磁盘组合到存储池中，则必须取消选中“将所有符合条件的存储添加到群集中”复选框。如果不取消选中该选项，则在群集过程中将分离虚拟磁盘。因此，这些虚拟磁盘也不会出现在磁盘管理器或资源管理器之中，除非从群集中删除存储空间，并使用 PowerShell 将其重新附加。
 
 1. 向群集添加节点后，单击“完成”。“故障转移群集管理器”现在应显示你的群集具有三个节点，并将这些节点在“节点”容器中列出。
 
@@ -536,7 +540,8 @@ ms.author: mikeray
 
     ![故障转移群集管理器中的可用性组](./media/virtual-machines-windows-classic-portal-sql-alwayson-availability-groups/IC665534.gif)
 
->[!WARNING]请勿尝试从故障转移群集管理器对可用性组进行故障转移。所有故障转移操作都应在 SSMS 中的 **AlwaysOn 仪表板**内进行。有关详细信息，请参阅[将 WSFC 故障转移群集管理器用于可用性组的限制](https://msdn.microsoft.com/zh-cn/library/ff929171.aspx)。
+>[!WARNING]
+>请勿尝试从故障转移群集管理器对可用性组进行故障转移。所有故障转移操作都应在 SSMS 中的 **AlwaysOn 仪表板**内进行。有关详细信息，请参阅[将 WSFC 故障转移群集管理器用于可用性组的限制](https://msdn.microsoft.com/zh-cn/library/ff929171.aspx)。
 
 ## 后续步骤
 现在，你已通过在 Azure 中创建可用性组，成功实施了 SQL Server AlwaysOn。若要为此可用性组配置侦听器，请参阅[在 Azure 中配置 AlwaysOn 可用性组的 ILB 侦听器](./virtual-machines-windows-classic-ps-sql-int-listener.md)。

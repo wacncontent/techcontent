@@ -37,7 +37,8 @@ ms.author: juliako;anilmur
 
 以下步骤介绍创建常见的实时流式处理应用程序时涉及的任务。
 
->[!NOTE] 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的通道，请通过 Azure.cn 联系 amslived。
+>[!NOTE]
+> 目前，实时事件的最大建议持续时间为 8 小时。如果你需要运行一个需要更长时间的通道，请通过 Azure.cn 联系 amslived。
 
 1. 将视频摄像机连接到计算机。启动并配置可以通过以下协议之一输出单比特率流的本地实时编码器：RTMP、平滑流式处理或 RTP (MPEG-TS)。有关详细信息，请参阅 [Azure 媒体服务 RTMP 支持和实时编码器](https://azure.microsoft.com/zh-cn/blog/azure-media-services-rtmp-support-and-live-encoders/)。
 
@@ -108,7 +109,8 @@ ms.author: juliako;anilmur
 ##连接到媒体服务
 最佳做法是，应使用 app.config 文件来存储媒体服务名称和帐户密钥。
 
->[!NOTE]若要查找名称和密钥值，请转到 Azure 经典管理门户，选择媒体服务帐户，然后单击门户窗口底部的“管理密钥”图标。单击每个文本框旁边的图标将值复制到系统剪贴板中。
+>[!NOTE]
+>若要查找名称和密钥值，请转到 Azure 经典管理门户，选择媒体服务帐户，然后单击门户窗口底部的“管理密钥”图标。单击每个文本框旁边的图标将值复制到系统剪贴板中。
 
 在 app.config 文件中添加 appSettings 部分，并设置媒体服务帐户名称和帐户密钥的值。
 

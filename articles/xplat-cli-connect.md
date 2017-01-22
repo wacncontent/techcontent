@@ -54,7 +54,8 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
     +
     info:    login command OK
 
->[!NOTE]  使用交互式登录时，会使用 Azure Active Directory 进行身份验证和授权。如果使用 Microsoft 帐户标识，登录过程会访问 Azure Active Directory 的默认域。（如果注册的是免费 Azure 帐户，Azure Active Directory 已为该帐户自动创建了默认域。）
+>[!NOTE]
+>  使用交互式登录时，会使用 Azure Active Directory 进行身份验证和授权。如果使用 Microsoft 帐户标识，登录过程会访问 Azure Active Directory 的默认域。（如果注册的是免费 Azure 帐户，Azure Active Directory 已为该帐户自动创建了默认域。）
 
 ## 方案 2：使用用户名和密码登录 Azure <a name="use-the-log-in-method"></a>
 
@@ -95,7 +96,8 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 
 这将会打开默认浏览器，并提示你登录到 [Azure 经典管理门户](https://manage.windowsazure.cn)。登录后，将下载 `.publishsettings` 文件。记下此文件的保存位置。
 
->[!NOTE] 如果你的帐户与多个 Azure Active Directory 租户关联，系统将提示你选择要为哪个 Active Directory 下载发布设置文件。
+>[!NOTE]
+> 如果你的帐户与多个 Azure Active Directory 租户关联，系统将提示你选择要为哪个 Active Directory 下载发布设置文件。
 
 使用下载页面进行选择或通过访问 Azure 经典门户进行选择之后，所选的 Active Directory 将成为经典管理门户和下载页面使用的默认值。设立默认值后，会在下载页面的顶部看到文本“__若要返回选择页面，请单击此处__”。使用提供的链接返回选择页面。
 
@@ -103,7 +105,8 @@ info:    To sign in, use a web browser to open the page http://aka.ms/devicelogi
 
         azure account import <path to your .publishsettings file>
 
->[!IMPORTANT]导入发布设置后，应删除 `.publishsettings` 文件。因为 Azure CLI 不再需要该文件，并且该文件会产生安全风险，因为它可以用来访问你的订阅。
+>[!IMPORTANT]
+>导入发布设置后，应删除 `.publishsettings` 文件。因为 Azure CLI 不再需要该文件，并且该文件会产生安全风险，因为它可以用来访问你的订阅。
 
 ## CLI 命令模式 <a name="CLI-command-modes"></a>
 
@@ -115,7 +118,8 @@ Azure CLI 提供两种命令模式让你使用不同的命令集来处理 Azure 
 
 首次安装时，CLI 的当前版本处于 Resource Manager 模式下。
 
->[!NOTE]Resource Manager 模式与服务管理模式互斥。即，在一种模式下创建的资源不能通过另一种模式进行管理。
+>[!NOTE]
+>Resource Manager 模式与服务管理模式互斥。即，在一种模式下创建的资源不能通过另一种模式进行管理。
 
 ## 多个订阅
 
@@ -133,7 +137,8 @@ Azure CLI 提供两种命令模式让你使用不同的命令集来处理 Azure 
 
 这会将默认订阅更改为 Azure-sub-2。
 
-> [!NOTE] 更改默认订阅将会立即生效，并且是全局更改；新的 Azure CLI 命令（无论是从同一命令行实例还是其他实例运行的）将使用新的默认订阅。
+> [!NOTE]
+> 更改默认订阅将会立即生效，并且是全局更改；新的 Azure CLI 命令（无论是从同一命令行实例还是其他实例运行的）将使用新的默认订阅。
 
 如果要将非默认订阅用于 Azure CLI，但不想更改当前默认订阅，则可以将 `--subscription` 选项用于命令并提供要用于此操作的订阅名称。
 

@@ -30,7 +30,8 @@ ms.author: genemi
 
 *XEvents* 不是正式名称，有时在博客或其他非正式场合表示“扩展的事件”。
 
-> [!NOTE] 从 2015 年 10 月开始，扩展事件会话功能已在 Azure SQL 数据库的预览级激活。正式发布 (GA) 日期尚未确定。
+> [!NOTE]
+> 从 2015 年 10 月开始，扩展事件会话功能已在 Azure SQL 数据库的预览级激活。正式发布 (GA) 日期尚未确定。
 
 下面提供了 Azure SQL 数据库和 Microsoft SQL Server 的扩展事件的其他相关信息：
 

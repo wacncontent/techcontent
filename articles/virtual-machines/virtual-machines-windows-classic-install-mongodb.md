@@ -20,7 +20,8 @@ ms.author: iainfou
 
 #在 Windows VM 上安装 MongoDB
 
-> [!IMPORTANT] Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。请参阅[本文](./virtual-machines-windows-classic-install-mongodb.md)，了解如何使用 Resource Manager 部署模型安装和配置 MongoDB。
+> [!IMPORTANT]
+> Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。请参阅[本文](./virtual-machines-windows-classic-install-mongodb.md)，了解如何使用 Resource Manager 部署模型安装和配置 MongoDB。
 
 [MongoDB][MongoDB] 是一个流行的开源、高性能 NoSQL 数据库。本文将引导你使用 [Azure 经典管理门户][AzurePortal]创建 Windows Server 虚拟机 (VM)。然后创建数据磁盘并将其附加到 VM，再安装和配置 MongoDB。如果想使用 Azure 中现有的 VM，可直接跳到[安装并配置 MongoDB](#install-and-run-mongodb-on-the-virtual-machine)。
 
@@ -30,7 +31,8 @@ ms.author: iainfou
 
 [!INCLUDE [virtual-machines-create-WindowsVM](../../includes/virtual-machines-create-windowsvm.md)]
 
-> [!NOTE] 在创建虚拟机时可以为 MongoDB 添加一个终结点并将其配置为如下设置：将其命名为 **Mongo**，使用 **TCP** 作为协议，并将公共端口和专用端口都设为 **27017**。
+> [!NOTE]
+> 在创建虚拟机时可以为 MongoDB 添加一个终结点并将其配置为如下设置：将其命名为 **Mongo**，使用 **TCP** 作为协议，并将公共端口和专用端口都设为 **27017**。
 
 ## 附加数据磁盘
 若要为虚拟机提供存储，请附加数据磁盘，然后对其进行初始化，以供 Windows 使用。如果已有数据磁盘，可附加该现有磁盘；此外还可附加空磁盘。

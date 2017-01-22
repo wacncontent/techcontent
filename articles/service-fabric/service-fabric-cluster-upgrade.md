@@ -31,7 +31,8 @@ ms.author: chackdan
 
 为此，请门户上设置“upgradeMode”群集配置，或者在创建时或稍后在实时群集上使用 Resource Manager 进行设置。
 
->[!NOTE] 请确保群集始终运行受支持的结构版本。当我们宣布发行新版 Service Fabric 时，以前的版本标记为自发布日期开始算起的 60 天后结束支持。新版发布将在 [Service Fabric 团队博客](https://blogs.msdn.microsoft.com/azureservicefabric/)中通告。然后，便可以选择使用新版本。
+>[!NOTE]
+> 请确保群集始终运行受支持的结构版本。当我们宣布发行新版 Service Fabric 时，以前的版本标记为自发布日期开始算起的 60 天后结束支持。新版发布将在 [Service Fabric 团队博客](https://blogs.msdn.microsoft.com/azureservicefabric/)中通告。然后，便可以选择使用新版本。
 
 群集运行的版本过期前 14 天，系统会生成运行状况事件，使群集进入警告运行状况状态。在升级到支持的结构版本之前，群集将保持警告状态。
 
@@ -187,7 +188,8 @@ Microsoft 将维护 Azure 群集中运行的结构代码和配置。我们将根
 
 对于每个节点类型，可以添加要在应用程序中使用的自定义放置属性。NodeType 是无需显式添加即可使用的默认属性。
 
->[!NOTE] 有关使用放置约束、节点属性以及如何定义它们的详细信息，请参阅 Service Fabric 群集资源管理器文档[描述群集](./service-fabric-cluster-resource-manager-cluster-description.md)中的“放置约束和节点属性”部分。
+>[!NOTE]
+> 有关使用放置约束、节点属性以及如何定义它们的详细信息，请参阅 Service Fabric 群集资源管理器文档[描述群集](./service-fabric-cluster-resource-manager-cluster-description.md)中的“放置约束和节点属性”部分。
 
 ### 容量度量值
 

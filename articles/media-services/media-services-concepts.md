@@ -65,7 +65,8 @@ ms.author: juliako
 
 一个 Blob 容器包含一组 Blob 集。Blob 容器用作媒体服务中的访问控制分界点和资产上的共享访问签名 (SAS) 定位符。一个 Azure 存储帐户可以包含无数个 Blob 容器。一个容器可以存储无数个 Blob。
 
->[!NOTE]在不使用媒体服务 API 的情况下，不应该尝试更改媒体服务生成的 blob 容器内容。
+>[!NOTE]
+>在不使用媒体服务 API 的情况下，不应该尝试更改媒体服务生成的 blob 容器内容。
 
 ###<a id="locators"></a>定位符
 

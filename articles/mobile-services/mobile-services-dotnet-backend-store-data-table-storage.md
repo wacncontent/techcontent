@@ -71,7 +71,8 @@ ms.author: glenga
             public bool Complete { get; set; }
         }
 
-    >[!NOTE]**StorageData** 类型的 Id 属性需要一个复合键，该键是格式为 *partitionId*,*rowValue* 的字符串。
+    >[!NOTE]
+    >**StorageData** 类型的 Id 属性需要一个复合键，该键是格式为 *partitionId*,*rowValue* 的字符串。
 
 2. 在 **TodoItemController** 中添加以下 using 语句。
 

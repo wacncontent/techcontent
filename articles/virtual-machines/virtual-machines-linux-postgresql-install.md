@@ -28,7 +28,8 @@ PostgreSQL 是一种类似于 Oracle 和 DB2 的高级开放源代码数据库�
 
 ## 安装 PostgreSQL
 
-> [!NOTE]你必须已经有一个运行 Linux 的 Azure 虚拟机，才能完成本教程。在继续操作前，若要创建并设置 Linux VM，请参阅 [Azure Linux VM 教程](./virtual-machines-linux-quick-create-cli.md)。
+> [!NOTE]
+>你必须已经有一个运行 Linux 的 Azure 虚拟机，才能完成本教程。在继续操作前，若要创建并设置 Linux VM，请参阅 [Azure Linux VM 教程](./virtual-machines-linux-quick-create-cli.md)。
 
 在此示例中，使用端口 1999 作为 PostgreSQL 端口。
 
@@ -92,7 +93,8 @@ PostgreSQL 是一种类似于 Oracle 和 DB2 的高级开放源代码数据库�
 
         # su - postgres
 
-    >[!NOTE]出于安全原因，PostgreSQL 将使用非根用户来初始化、启动或关闭数据库。
+    >[!NOTE]
+    >出于安全原因，PostgreSQL 将使用非根用户来初始化、启动或关闭数据库。
 
 4. 通过输入以下命令编辑 *bash\_profile* 文件。这些行将添加到 *bash\_profile* 文件的末尾：
 

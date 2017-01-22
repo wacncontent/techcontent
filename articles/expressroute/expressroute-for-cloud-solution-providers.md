@@ -23,7 +23,8 @@ Microsoft 为传统经销商和分销商 (CSP) 提供超大规模的服务，允
 
 ExpresRoute 由一对可以实现高可用性的线路组成，这对线路连接到单个客户订阅，不能由多个客户共享。每个线路都会在不同的路由器中终止，目的是维持高可用性。
 
->[!NOTE] ExpressRoute 存在带宽和连接限制，也就是说，进行大型/复杂的实施时，需要为单个客户提供多个 ExpressRoute 线路。
+>[!NOTE]
+> ExpressRoute 存在带宽和连接限制，也就是说，进行大型/复杂的实施时，需要为单个客户提供多个 ExpressRoute 线路。
 
  Azure 提供越来越多的服务，你可以将这些服务提供给你的客户。若要充分利用这些服务，需使用 ExpressRoute 连接对  Azure 环境进行高速、低延迟访问。
 
@@ -51,7 +52,8 @@ Azure 为 CSP 提供管理 Azure 客户订阅所需的 API，允许通过编程�
 
 在 Connect-To 模型中，服务提供商使用基于客户网络的 ExpressRoute 在其客户的数据中心和 CSP 预配的 Azure 订阅之间创建直接连接。
 
->[!NOTE] 就 ExpressRoute 来说，客户需创建和维护 ExpressRoute 线路。
+>[!NOTE]
+> 就 ExpressRoute 来说，客户需创建和维护 ExpressRoute 线路。
 
 此连接方案要求客户在访问由 CSP 管理的 Azure 订阅时，使用全部或部分由客户创建、拥有和管理的直接网络连接，通过客户网络直接进行连接。对于这些客户来说，所作的假定是提供商目前并没有建立客户标识存储，而且提供商会帮助客户将当前的标识存储复制到 Azure Active Directory 中，以便通过 AOBO 管理其订阅。此方案的关键驱动因素包括：既定的合作伙伴或服务提供商已建立与客户的合作关系、客户目前正使用提供商的服务，或者合作伙伴希望提供完全基于 Azure 托管型解决方案的服务，而不需要使用现有的提供商数据中心或基础结构。
 
@@ -65,7 +67,8 @@ Azure 为 CSP 提供管理 Azure 客户订阅所需的 API，允许通过编程�
 ## 网络速度
 ExpressRoute 支持的网络速度其范围为 50 Mb/秒到 10Gb/秒。因此，客户可以根据其具体环境购买所需的网络带宽。
 
->[!NOTE] 网络带宽可以在不中断通信的情况下，根据需要进行提升，但若要降低网络速度，则需先拆卸线路，然后按较低的网络速度重新创建。
+>[!NOTE]
+> 网络带宽可以在不中断通信的情况下，根据需要进行提升，但若要降低网络速度，则需先拆卸线路，然后按较低的网络速度重新创建。
 
 ExpressRoute 支持将多个 vNet 连接到单个 ExpressRoute 线路，以便更好地利用速度更高的连接。单个 ExpressRoute 线路可以在同一客户拥有的多个 Azure 订阅之间共享。
 
@@ -85,7 +88,8 @@ ExpressRoute 提供三种路由域：公共对等互连、专用对等互连。�
 
 你可以自定义路由筛选器，根据需要来允许相关路由。如需详细信息，或者需要了解如何进行此类更改，请参阅详细介绍路由筛选器的以下文章：[使用 PowerShell 创建和修改 ExpressRoute 线路的路由](./expressroute-howto-routing-classic.md)。
 
->[!NOTE] 对于公共对等互连，必须通过客户或 CSP 拥有的公共 IP 地址进行连接，并且必须遵循所有定义的规则。有关详细信息，请参阅 [ExpressRoute 先决条件](./expressroute-prerequisites.md)页。
+>[!NOTE]
+> 对于公共对等互连，必须通过客户或 CSP 拥有的公共 IP 地址进行连接，并且必须遵循所有定义的规则。有关详细信息，请参阅 [ExpressRoute 先决条件](./expressroute-prerequisites.md)页。
 
 ## 路由
 ExpressRoute 通过 Azure 虚拟网络网关连接到 Azure 网络。网络网关为 Azure 虚拟网络提供路由功能。

@@ -39,7 +39,8 @@ ms.author: ganesr
 
 这些说明只适用于由提供第 2 层连接服务的服务提供商创建的线路。如果你的服务提供商提供第 3 层托管服务（通常是 IPVPN，如 MPLS），则连接服务提供商将为你设置和管理路由。
 
->[!IMPORTANT] 我们目前无法通过服务管理门户播发服务提供商配置的对等互连。我们正在努力不久就实现这一功能。请在配置 BGP 对等互连之前与服务提供商核对。
+>[!IMPORTANT]
+> 我们目前无法通过服务管理门户播发服务提供商配置的对等互连。我们正在努力不久就实现这一功能。请在配置 BGP 对等互连之前与服务提供商核对。
 你可以为 ExpressRoute 线路配置一到两个对等互连（Azure 专用和Azure 公共）。可以按照所选的任意顺序配置对等互连。但是，你必须确保一次只完成一个对等互连的配置。
 
 ## Azure 专用对等互连
@@ -130,7 +131,8 @@ ms.author: ganesr
 
         Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $ckt
 
-    >[!IMPORTANT]请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
+    >[!IMPORTANT]
+    >请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
 
 ### 查看 Azure 专用对等互连详细信息
 
@@ -152,7 +154,8 @@ ms.author: ganesr
 
 可以运行以下 cmdlet 来删除对等互连配置。
 
->[!WARNING]运行此 cmdlet 之前，必须确保已从 ExpressRoute 线路取消链接所有虚拟网络。
+>[!WARNING]
+>运行此 cmdlet 之前，必须确保已从 ExpressRoute 线路取消链接所有虚拟网络。
 
     Remove-AzureRmExpressRouteCircuitPeeringConfig -Name "AzurePrivatePeering" -Circuit $ckt
     Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $ckt
@@ -245,7 +248,8 @@ ms.author: ganesr
 
         Set-AzureRmExpressRouteCircuit -ExpressRouteCircuit $ckt
 
-    >[!IMPORTANT]请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
+    >[!IMPORTANT]
+    >请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
 
 ### 查看 Azure 公共对等互连详细信息
 

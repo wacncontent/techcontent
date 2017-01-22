@@ -29,7 +29,8 @@ ms.author: douglasl
 
 **权限**。对数据库或表启用延伸数据库需要有 db\_owner 权限。对某个表启用延伸数据库还要求对该表拥有 ALTER 权限。
 
- >   [!NOTE] 若要在以后禁用 Stretch Database，请记住，针对表或数据库禁用 Stretch Database 不会删除远程对象。若要删除远程表或远程数据库，必须使用 Azure 管理门户。远程对象在手动删除之前，会持续产生 Azure 费用。
+ >   [!NOTE]
+ > 若要在以后禁用 Stretch Database，请记住，针对表或数据库禁用 Stretch Database 不会删除远程对象。若要删除远程表或远程数据库，必须使用 Azure 管理门户。远程对象在手动删除之前，会持续产生 Azure 费用。
 
 ## <a name="EnableWizardTable"></a>使用向导来对表启用 Stretch Database
 **启动向导**
@@ -70,7 +71,8 @@ ms.author: douglasl
 
 -   （可选）如果表同时包含热数据和冷数据，请使用 `FILTER_PREDICATE = <function>` 子句指定一个函数来选择要迁移的行。该谓词必须调用内联表值函数。有关详细信息，请参阅[使用筛选器函数选择要迁移的行](./sql-server-stretch-database-predicate-function.md)。如果未指定筛选器函数，则会迁移整个表。
 
-    >   [!NOTE] 如果提供的筛选器函数性能不佳，则数据迁移的性能也会不佳。Stretch Database 使用 CROSS APPLY 运算符对表应用筛选器函数。
+    >   [!NOTE]
+    > 如果提供的筛选器函数性能不佳，则数据迁移的性能也会不佳。Stretch Database 使用 CROSS APPLY 运算符对表应用筛选器函数。
 
 -   指定 `MIGRATION_STATE = OUTBOUND` 立即开始数据迁移，或指定 `MIGRATION_STATE = PAUSED` 推迟数据迁移的开始时间。
 

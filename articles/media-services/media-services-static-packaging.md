@@ -19,7 +19,8 @@ ms.author: juliako
 
 # 使用 Azure 媒体包装器完成静态打包任务
 
->[!NOTE]Azure 媒体包装器和 Azure 媒体加密器的使用期限已延长到 2017 年 3 月 1 日。在此日期之前，这些处理器的功能将添加到 Media Encoder Standar (MES) 中。客户将收到有关如何迁移工作流以将作业发送到 MES 的指示。格式转换和加密功能也可通过动态打包和动态加密提供。
+>[!NOTE]
+>Azure 媒体包装器和 Azure 媒体加密器的使用期限已延长到 2017 年 3 月 1 日。在此日期之前，这些处理器的功能将添加到 Media Encoder Standar (MES) 中。客户将收到有关如何迁移工作流以将作业发送到 MES 的指示。格式转换和加密功能也可通过动态打包和动态加密提供。
 
 ## 概述
 
@@ -27,7 +28,8 @@ ms.author: juliako
 
 媒体服务支持动态和静态打包。使用静态打包时，需要以客户要求的各种格式创建内容副本。使用动态打包，你只需要创建一个包含一组自适应比特率 MP4 或平滑流式处理文件的资产。然后，按需流式处理服务器会确保你的用户以选定的协议按清单或分段请求中的指定格式接收流。因此，你只需以单一存储格式存储文件并为其付费，然后媒体服务服务就会基于客户端的请求生成并提供相应响应。
 
->[!NOTE]建议使用[动态打包](./media-services-dynamic-packaging-overview.md)。
+>[!NOTE]
+>建议使用[动态打包](./media-services-dynamic-packaging-overview.md)。
 
 但是，有的方案需要静态打包：
 
@@ -43,7 +45,8 @@ ms.author: juliako
 
 如果你要使用一组未使用媒体服务的编码器编码的自适应比特率（多比特率）MP4 文件，则应在进一步处理前验证这些文件。媒体服务包装器可以验证包含一组 MP4 文件的资产，并可检查该资产是否可以打包成平滑流式处理或 HLS。如果验证任务失败，则处理该任务的作业将完成并显示错误。用于定义验证任务的预设的 XML 可以在 [Azure 媒体包装器的任务预设](http://msdn.microsoft.com/zh-cn/library/azure/hh973635.aspx)主题中找到。
 
->[!NOTE]请使用 Media Encoder Standard 生成内容，或使用媒体服务包装器验证内容，以避免运行时问题。如果按需流式处理服务器在运行时无法解析你的源文件，则你会收到 HTTP 1.1 错误“415 不支持的媒体类型”。服务器多次未能解析你的源文件会影响按需流式处理服务器的性能，并且可能会减少服务于其他请求的可用带宽。Azure 媒体服务在其按需流式处理服务上提供一个服务级别协议 (SLA)；但是，如果以上述方式滥用服务器，则无法遵循此 SLA。
+>[!NOTE]
+>请使用 Media Encoder Standard 生成内容，或使用媒体服务包装器验证内容，以避免运行时问题。如果按需流式处理服务器在运行时无法解析你的源文件，则你会收到 HTTP 1.1 错误“415 不支持的媒体类型”。服务器多次未能解析你的源文件会影响按需流式处理服务器的性能，并且可能会减少服务于其他请求的可用带宽。Azure 媒体服务在其按需流式处理服务上提供一个服务级别协议 (SLA)；但是，如果以上述方式滥用服务器，则无法遵循此 SLA。
 
 本部分演示如何处理验证任务。本部分还演示如何查看完成时出现 JobStatus.Error 的作业的状态和错误消息。
 
@@ -254,7 +257,8 @@ ms.author: juliako
 
 媒体服务现在提供有用于传送 Microsoft PlayReady 许可证的服务。本文中的示例显示如何配置媒体服务 PlayReady 许可证传送服务（请参见以下代码中定义的 ConfigureLicenseDeliveryService 方法）。有关媒体服务 PlayReady 许可证传送服务的详细信息，请参阅[使用 PlayReady 动态加密和许可证传送服务](./media-services-protect-with-drm.md)。
 
->[!NOTE]若要传送使用 PlayReady 加密的 MPEG DASH，请确保通过将 useSencBox 和 adjustSubSamples 属性（在 [Azure 媒体加密器的任务预设](http://msdn.microsoft.com/zh-cn/library/azure/hh973610.aspx)主题中说明）设置为 true 使用 CENC 选项。
+>[!NOTE]
+>若要传送使用 PlayReady 加密的 MPEG DASH，请确保通过将 useSencBox 和 adjustSubSamples 属性（在 [Azure 媒体加密器的任务预设](http://msdn.microsoft.com/zh-cn/library/azure/hh973610.aspx)主题中说明）设置为 true 使用 CENC 选项。
 
 确保更新以下代码，以便指向输入 MP4 文件所在的文件夹。
 
@@ -693,7 +697,8 @@ ms.author: juliako
 
 如果你要使用 AES-128 加密 HLS，可以选择使用动态加密（推荐选项）或静态加密（如本部分所述）。如果你决定使用动态加密，请参阅[使用 AES-128 动态加密和密钥传送服务](./media-services-protect-with-aes128.md)。
 
->[!NOTE]若要将内容转换为 HLS，必须先将内容转换/编码为平滑流式处理。此外，对于使用 AES 加密的 HLS，请确保在 MediaPackager\_SmoothToHLS.xml 文件中设置以下属性：将加密属性设置为 true，将密钥值和 keyuri 值设置为指向身份验证\\授权服务器。媒体服务将创建密钥文件，并将其放置在资产容器中。你应该将 /asset-containerguid/*.key 文件复制到服务器（或创建你自己的密钥文件），然后从资产容器中删除 *.key 文件。
+>[!NOTE]
+>若要将内容转换为 HLS，必须先将内容转换/编码为平滑流式处理。此外，对于使用 AES 加密的 HLS，请确保在 MediaPackager\_SmoothToHLS.xml 文件中设置以下属性：将加密属性设置为 true，将密钥值和 keyuri 值设置为指向身份验证\\授权服务器。媒体服务将创建密钥文件，并将其放置在资产容器中。你应该将 /asset-containerguid/*.key 文件复制到服务器（或创建你自己的密钥文件），然后从资产容器中删除 *.key 文件。
 
 本部分的示例将夹层文件（在本例中为 MP4）编码为多比特率 MP4 文件，然后将 MP4 打包为平滑流式处理。然后，它将平滑流式处理打包成使用高级加密标准 (AES) 128 位流加密法加密的 HTTP Live Streaming (HLS)。确保更新以下代码，以便指向输入 MP4 文件所在的文件夹。还指向 MediaPackager\_MP4ToSmooth.xml 和 MediaPackager\_SmoothToHLS.xml 配置文件所在的文件夹。可以在 [Azure 媒体包装器的任务预设](http://msdn.microsoft.com/zh-cn/library/azure/hh973635.aspx)主题中找到这些文件的定义。
 
@@ -968,7 +973,8 @@ ms.author: juliako
 
 如果你想要通过 PlayReady 保护你的内容，则可选择使用[动态加密](./media-services-protect-with-drm.md)（推荐选项）或静态加密（如本部分所述）。
 
->[!NOTE] 若要使用 PlayReady 保护你的内容，必须先将内容转换/编码为平滑流格式。
+>[!NOTE]
+> 若要使用 PlayReady 保护你的内容，必须先将内容转换/编码为平滑流格式。
 
 本部分的示例将夹层文件（在本例中为 MP4）编码为多比特率 MP4 文件。然后，它将 MP4 打包为平滑流式处理，并使用 PlayReady 对平滑流式处理进行加密。若要生成使用 PlayReady 加密的 HTTP Live Streaming (HLS)，需要将 PlayReady 平滑流式处理资产打包成 HLS。本主题演示如何执行所有这些步骤。
 

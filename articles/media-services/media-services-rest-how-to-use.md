@@ -59,7 +59,8 @@ x-ms-version|小数|2.11
 DataServiceVersion|小数|3.0
 MaxDataServiceVersion|小数|3.0
 
->[!NOTE] 由于媒体服务使用 OData 通过 REST API 公布其基础资产元数据存储库，因此任何请求中均应包括 DataServiceVersion 和 MaxDataServiceVersion 标头，但如果未包括这些标头，当前媒体服务会假定使用的 DataServiceVersion 值为 3.0。
+>[!NOTE]
+> 由于媒体服务使用 OData 通过 REST API 公布其基础资产元数据存储库，因此任何请求中均应包括 DataServiceVersion 和 MaxDataServiceVersion 标头，但如果未包括这些标头，当前媒体服务会假定使用的 DataServiceVersion 值为 3.0。
 
 以下是一组可选标头：
 

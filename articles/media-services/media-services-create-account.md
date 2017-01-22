@@ -19,7 +19,8 @@ wacn.date: 12/27/2016
 - [PowerShell](./media-services-manage-with-powershell.md)
 - [REST](https://docs.microsoft.com/zh-cn/rest/api/media/management/create-media-services-account)
 
-> [!NOTE] 若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [ 1 元试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
+> [!NOTE]
+> 若要完成本教程，你需要一个 Azure 帐户。有关详细信息，请参阅 [ 1 元试用](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
 
 Azure 经典管理门户提供了快速创建 Azure 媒体服务帐户的方法。可以使用自己的帐户访问媒体服务，这些服务使你能够在 Azure 中存储、加密、编码、管理和流式传输媒体内容。创建媒体服务帐户时，还将在此帐户所在的地理区域内创建一个关联的媒体服务帐户（或使用现有存储帐户）。
 

@@ -32,7 +32,8 @@ ms.author: carlrab
 
 1. 确认你安装了最新版本的 SQL Server Management Studio。Management Studio 的新版本将每月更新一次，以与 Azure 门户的更新保持同步。
 
-      > [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+      > [!IMPORTANT]
+      > 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 2. 打开 Management Studio 并连接到你在对象资源管理器中的源数据库。
 3. 右键单击对象资源管理器中的源数据库、指向“任务”，然后单击“导出数据层应用程序...”

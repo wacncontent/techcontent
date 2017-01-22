@@ -85,7 +85,8 @@ ms.author: anhoh
     using Microsoft.Azure.Documents.Client;
     using Newtonsoft.Json;
 
-> [!IMPORTANT] 为了完成该 NoSQL 教程，请确保添加以上依赖关系。
+> [!IMPORTANT]
+> 为了完成该 NoSQL 教程，请确保添加以上依赖关系。
 
 现在，在公共类 *Program* 下添加这两个常量和*客户端* 变量。
 
@@ -204,7 +205,8 @@ ms.author: anhoh
 
 ## <a id="CreateColl"></a>步骤 5：创建集合  
 
-> [!WARNING] **CreateDocumentCollectionAsync** 将创建一个具有保留吞吐量的新集合，它牵涉定价。有关详细信息，请访问[定价页](https://www.azure.cn/pricing/details/documentdb/)。
+> [!WARNING]
+> **CreateDocumentCollectionAsync** 将创建一个具有保留吞吐量的新集合，它牵涉定价。有关详细信息，请访问[定价页](https://www.azure.cn/pricing/details/documentdb/)。
 
 可以通过使用 **DocumentClient** 类的 [CreateDocumentCollectionAsync](https://msdn.microsoft.com/zh-cn/library/microsoft.azure.documents.client.documentclient.createdocumentcollectionasync.aspx) 方法来创建[集合](./documentdb-resources.md#collections/)。集合是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。
 

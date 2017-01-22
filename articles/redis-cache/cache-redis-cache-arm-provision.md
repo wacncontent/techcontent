@@ -27,7 +27,8 @@ ms.author: sdanie
 
 有关完整的模板，请参阅 [Redis 缓存模板](https://github.com/Azure/azure-quickstart-templates/blob/master/101-redis-cache/azuredeploy.json)。
 
->[!NOTE] 适用于新[高级层](./cache-premium-tier-intro.md)的 ARM 模板现已推出。
+>[!NOTE]
+> 适用于新[高级层](./cache-premium-tier-intro.md)的 ARM 模板现已推出。
 ><p>-    [创建具有群集功能的高级 Redis 缓存](https://github.com/Azure/azure-quickstart-templates/tree/master/201-redis-premium-cluster-diagnostics/)
 ><p>-    [创建具有数据持久性的高级 Redis 缓存](https://github.com/Azure/azure-quickstart-templates/tree/master/201-redis-premium-persistence/)
 ><p>-    [创建具有 VNet 和可选群集功能的高级 Redis 缓存](https://github.com/Azure/azure-quickstart-templates/tree/master/201-redis-premium-vnet-cluster-diagnostics/)

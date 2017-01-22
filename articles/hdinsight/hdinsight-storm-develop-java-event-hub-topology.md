@@ -29,7 +29,8 @@ Azure 事件中心可用于处理网站、应用程序和设备中的大量数�
 
     - [基于 Windows 的 Storm on HDInsight 群集](./hdinsight-apache-storm-tutorial-get-started.md)：若要从 Windows 客户端使用 PowerShell 来操作群集，请选择此选项
 
-    > [!NOTE] 本文档中的步骤假设使用 Storm on HDInsight 群集 3.3 或更高版本。这些群集提供 Storm 0.10.0 和 Hadoop 2.7，可减少正常演示本示例而需要执行的步骤。<p>有关可在 HDInsight 3.2 上与 Storm 0.9.3 配合运行的示例版本，请参阅示例存储库的 [Storm v0.9.3](https://github.com/Azure-Samples/hdinsight-java-storm-eventhub/tree/Storm_v0.9.3) 分支。
+    > [!NOTE]
+    > 本文档中的步骤假设使用 Storm on HDInsight 群集 3.3 或更高版本。这些群集提供 Storm 0.10.0 和 Hadoop 2.7，可减少正常演示本示例而需要执行的步骤。<p>有关可在 HDInsight 3.2 上与 Storm 0.9.3 配合运行的示例版本，请参阅示例存储库的 [Storm v0.9.3](https://github.com/Azure-Samples/hdinsight-java-storm-eventhub/tree/Storm_v0.9.3) 分支。
 
 * [Azure 事件中心](../event-hubs/event-hubs-csharp-ephcs-getstarted.md)
 
@@ -39,7 +40,8 @@ Azure 事件中心可用于处理网站、应用程序和设备中的大量数�
 
 * 文本编辑器或 Java 集成开发环境 (IDE)
 
-    > [!NOTE] 你的编辑器或 IDE 可能具有处理 Maven 的特定功能，但本文档中未提供说明。有关环境编辑功能的详细信息，请参阅所使用产品的文档。
+    > [!NOTE]
+    > 你的编辑器或 IDE 可能具有处理 Maven 的特定功能，但本文档中未提供说明。有关环境编辑功能的详细信息，请参阅所使用产品的文档。
 
 * SCP 客户端。对于 Windows 客户端，建议使用可从 [PuTTY 下载页](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)获取的 PSCP。
 
@@ -71,7 +73,8 @@ __com.microsoft.example.EventHubReader__ 从事件中心读取数据（EventHubW
 
 这将添加 storm-eventhubs 包的依赖项，它包含用于从事件中心读取的 Spout 和写入事件中心的 Bolt。
 
-> [!NOTE] 此包仅适用于 Storm 0.10.0 和更高版本。使用 Storm 0.9.3 时，必须手动安装 Microsoft 提供的 Spout 包。有关与 Storm 0.9.3 配合运行的示例，请参阅示例存储库的 [Storm v0.9.3](https://github.com/Azure-Samples/hdinsight-java-storm-eventhub/tree/Storm_v0.9.3) 分支。
+> [!NOTE]
+> 此包仅适用于 Storm 0.10.0 和更高版本。使用 Storm 0.9.3 时，必须手动安装 Microsoft 提供的 Spout 包。有关与 Storm 0.9.3 配合运行的示例，请参阅示例存储库的 [Storm v0.9.3](https://github.com/Azure-Samples/hdinsight-java-storm-eventhub/tree/Storm_v0.9.3) 分支。
 
 ####HdfsBolt 和 WASB 组件
 
@@ -121,7 +124,8 @@ HdfsBolt 一般用于将数据存储到 Hadoop 分布式文件系统 (HDFS)。�
         </exclusions>
     </dependency>
 
-> [!NOTE] 如果使用早期版本的 HDInsight（例如 3.2 版），必须手动注册这些组件。有关示例以及早期版本的 HDInsight 群集所需的自定义位，请参阅示例存储库的 [Storm v0.9.3](https://github.com/Azure-Samples/hdinsight-java-storm-eventhub/tree/Storm_v0.9.3) 分支。
+> [!NOTE]
+> 如果使用早期版本的 HDInsight（例如 3.2 版），必须手动注册这些组件。有关示例以及早期版本的 HDInsight 群集所需的自定义位，请参阅示例存储库的 [Storm v0.9.3](https://github.com/Azure-Samples/hdinsight-java-storm-eventhub/tree/Storm_v0.9.3) 分支。
 
 ####maven-compiler-plugin
 
@@ -253,7 +257,8 @@ HdfsBolt 一般用于将数据存储到 Hadoop 分布式文件系统 (HDFS)。�
 
     ![向导页 1](./media/hdinsight-storm-develop-csharp-event-hub-topology/wiz1.png)
 
-    > [!NOTE] 应选择与 Storm on HDInsight 服务器相同的**位置**，以降低延迟和成本。
+    > [!NOTE]
+    > 应选择与 Storm on HDInsight 服务器相同的**位置**，以降低延迟和成本。
 
 2. 在“配置事件中心”屏幕中，输入“分区计数”和“消息保留期”值。对于本示例，请使用分区计数 10，消息保留期 1。记下分区计数，因为稍后需要用到。
 
@@ -340,7 +345,8 @@ EventHubSpout 定期检查点其状态为 Zookeeper 节点，将保存当前的�
 
 可将持久性检查点导入和导出到 WASB（HDInsight 群集使用的 Azure 存储空间。） 用于执行此操作的脚本位于 Storm on HDInsight 上的 **c:\\apps\\dist\\storm-0.9.3.2.2.1.0-2340\\zkdatatool-1.0\\bin** 中。
 
->[!NOTE] 路径中的版本号可能不同，因为群集上安装的 Storm 版本将来可能会更改。
+>[!NOTE]
+> 路径中的版本号可能不同，因为群集上安装的 Storm 版本将来可能会更改。
 
 此目录中的脚本是：
 
@@ -352,7 +358,8 @@ EventHubSpout 定期检查点其状态为 Zookeeper 节点，将保存当前的�
 
 需要删除群集，又希望在将新群集重新联机时从中心的当前偏移量恢复处理时，可以使用导出和导入来保存检查点数据。
 
-> [!NOTE] 由于数据将保存到默认的存储容器，新群集**必须**使用前一群集所用的同一个存储帐户和容器。
+> [!NOTE]
+> 由于数据将保存到默认的存储容器，新群集**必须**使用前一群集所用的同一个存储帐户和容器。
 
 ## 删除群集
 

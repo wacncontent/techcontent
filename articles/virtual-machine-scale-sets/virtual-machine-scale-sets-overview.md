@@ -36,7 +36,8 @@ ms.author: guybo
 
 可在[此处](https://github.com/Azure/azure-quickstart-templates)的 Azure 快速入门模板 GitHub 存储库中找到一组 VM 规模集的示例模板。（查找标题中含有 *vmss* 的模板）
 
->[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 若要部署 VM 规模集，请下载模板，执行必要的修改，然后使用 Azure PowerShell 或 Azure CLI 部署它。如果你不确定某个资源是否支持大写或大小写混合，则更为安全的做法是始终使用小写参数值。此外，此处还对 VM 规模集模板进行了方便的视频解剖：
 

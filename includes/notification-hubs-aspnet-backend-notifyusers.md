@@ -8,11 +8,13 @@
 
 以下步骤说明了如何创建新的 ASP.NET WebAPI 后端：
 
-> [!NOTE]**重要提示**：在开始本教程之前，请确保已安装最新版本的 NuGet 程序包管理器。若要进行检查，请启动 Visual Studio。从“工具”菜单，单击“扩展和更新”。搜索“适用于 Visual Studio 2013 的 NuGet 程序包管理器”，并且确保具有版本 2.8.50313.46 或更高版本。否则，请卸载并重新安装 NuGet 程序包管理器。
+> [!NOTE]
+>**重要提示**：在开始本教程之前，请确保已安装最新版本的 NuGet 程序包管理器。若要进行检查，请启动 Visual Studio。从“工具”菜单，单击“扩展和更新”。搜索“适用于 Visual Studio 2013 的 NuGet 程序包管理器”，并且确保具有版本 2.8.50313.46 或更高版本。否则，请卸载并重新安装 NuGet 程序包管理器。
 > 
 > ![][B4]
 
-> [!NOTE]请确保已安装 Visual Studio [Azure SDK](/downloads/) 以便进行 Web 应用部署。
+> [!NOTE]
+>请确保已安装 Visual Studio [Azure SDK](/downloads/) 以便进行 Web 应用部署。
 
 1. 启动 Visual Studio 或 Visual Studio Express。单击“服务器资源管理器”并登录到你的 Azure 帐户。Visual Studio 需要你登录才能在你的帐户中创建 Web 应用资源。
 2. 在 Visual Studio 中，依次单击“文件”、“新建”和“项目”，依次展开“模板”和“Visual C#”，然后依次单击“Web”和“ASP.NET Web 应用程序”，键入名称 **AppBackend**，然后单击“确定”。 
@@ -99,7 +101,8 @@
             }
         }
 
-    > [!NOTE]**安全说明**：`AuthenticationTestHandler` 类不提供真正的身份验证。它仅用于模拟基本身份验证并且是不安全的。您必须在生产应用程序和服务中实现安全的身份验证机制。
+    > [!NOTE]
+    >**安全说明**：`AuthenticationTestHandler` 类不提供真正的身份验证。它仅用于模拟基本身份验证并且是不安全的。您必须在生产应用程序和服务中实现安全的身份验证机制。
 
 4. 在 **App\_Start/WebApiConfig.cs** 类中 `Register` 方法的末尾添加以下代码，以注册消息处理程序：
 

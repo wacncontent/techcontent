@@ -52,7 +52,8 @@ Apache Oozie 是一个管理 Hadoop 作业的工作流/协调系统。它与 Had
 
 2.  Sqoop 操作将 HiveQL 输出结果导出到 Azure SQL 数据库中的表。有关 Sqoop 的详细信息，请参阅[将 Hadoop Sqoop 与 HDInsight 配合使用][hdinsight-use-sqoop]。
 
-> [!NOTE]有关在 HDInsight 群集上支持的 Oozie 版本，请参阅 [HDInsight 提供的 Hadoop 群集版本有哪些新增功能？][hdinsight-versions]。
+> [!NOTE]
+>有关在 HDInsight 群集上支持的 Oozie 版本，请参阅 [HDInsight 提供的 Hadoop 群集版本有哪些新增功能？][hdinsight-versions]。
 
 ### <a name="prerequisites"></a>先决条件
 
@@ -169,9 +170,11 @@ HDInsight 使用 Azure 存储空间中的 Blob 来存储数据。有关详细信
 
     wasb[s]://<ContainerName>@<StorageAccountName>.blob.core.chinacloudapi.cn/<path>/<filename>
 
-> [!NOTE]HDInsight 版本 3.0 群集仅支持 **wasbs://* 语法。较早的 **asv://* 语法在 HDInsight 2.1 和 1.6 群集中受支持，但在 HDInsight 3.0 群集中不受支持。
+> [!NOTE]
+>HDInsight 版本 3.0 群集仅支持 **wasbs://* 语法。较早的 **asv://* 语法在 HDInsight 2.1 和 1.6 群集中受支持，但在 HDInsight 3.0 群集中不受支持。
 
-> [!NOTE]wasbs:// 路径是虚拟路径。有关详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用][hdinsight-storage]。
+> [!NOTE]
+>wasbs:// 路径是虚拟路径。有关详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用][hdinsight-storage]。
 
 存储在默认文件系统容器中的文件可以使用以下任一 URI 从 HDInsight 进行访问（以下代码使用 workflow.xml 为例）：
 
@@ -204,7 +207,8 @@ HDInsight 使用 Azure 存储空间中的 Blob 来存储数据。有关详细信
 
     系统将提示你输入 Azure 帐户凭据。这种添加订阅连接的方法会超时，12 个小时之后，你将需要再次运行该 cmdlet。
 
-    > [!NOTE]如果你有多个 Azure 订阅，而默认订阅不是你想使用的，则请使用 <strong>Select-AzureSubscription</strong> cmdlet 来选择正确的订阅。
+    > [!NOTE]
+    >如果你有多个 Azure 订阅，而默认订阅不是你想使用的，则请使用 <strong>Select-AzureSubscription</strong> cmdlet 来选择正确的订阅。
 
 3. 将以下脚本复制到脚本窗格，然后设置前六个变量：
 

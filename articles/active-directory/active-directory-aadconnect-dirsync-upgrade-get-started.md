@@ -36,7 +36,8 @@ Azure AD Connect 是 DirSync 的后继产品。本主题介绍从 DirSync 升级
 [就地升级](#in-place-upgrade) | 如果升级预期少于 3 小时，则为首选选项。
 [并行部署](#parallel-deployment) | 如果升级预期超过 3 小时，则为首选选项。
 
->[!NOTE] 当你规划从 DirSync 升级到 Azure AD Connect 时，在升级之前请勿自行卸载 DirSync。Azure AD Connect 将读取和迁移 DirSync 的配置，并在检查服务器之后卸载 DirSync。
+>[!NOTE]
+> 当你规划从 DirSync 升级到 Azure AD Connect 时，在升级之前请勿自行卸载 DirSync。Azure AD Connect 将读取和迁移 DirSync 的配置，并在检查服务器之后卸载 DirSync。
 
 **就地升级** 向导会显示完成升级预计所需的时间。根据假设，预计需要 3 小时才能完成包含 50,000 个对象（用户、联系人和组）的数据库的升级。如果数据库中的对象数少于 50,000 个，Azure AD Connect 会建议进行就地升级。如果确定继续，升级期间会自动应用当前设置，服务器也会自动恢复活动的同步。
 
@@ -142,7 +143,8 @@ DirSync 支持以下配置更改，并且将会升级：
 9. 单击“安装”。
 10. 安装完成后，请注销并再次登录到 Windows，然后即可使用同步服务管理器或同步规则编辑器，或者尝试进行其他任何配置更改。
 
->[!NOTE] 将会开始同步 Windows Server Active Directory 和 Azure Active Directory，但不会将更改导出到 Azure AD。每次只能有一个同步工具在主动导出更改。这种状态称为[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode/)。
+>[!NOTE]
+> 将会开始同步 Windows Server Active Directory 和 Azure Active Directory，但不会将更改导出到 Azure AD。每次只能有一个同步工具在主动导出更改。这种状态称为[过渡模式](./active-directory-aadconnectsync-operations.md#staging-mode/)。
 
 ### 验证 Azure AD Connect 是否已准备好开始同步
 

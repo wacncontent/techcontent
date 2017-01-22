@@ -47,7 +47,8 @@ ms.author: marsma
 
     New-AzureRmBatchAccount -AccountName <account_name> -Location "China North" -ResourceGroupName <res_group_name>
 
-> [!NOTE] Batch 帐户名在资源组所在的 Azure 区域中必须唯一，长度为 3 到 24 个字符，并且只能包含小写字母和数字。
+> [!NOTE]
+> Batch 帐户名在资源组所在的 Azure 区域中必须唯一，长度为 3 到 24 个字符，并且只能包含小写字母和数字。
 
 ### 获取帐户访问密钥
 **Get-AzureRmBatchAccountKeys** 显示与 Azure Batch 帐户关联的访问密钥。例如，运行以下命令可获取你创建的帐户的主要密钥和辅助密钥。
@@ -63,7 +64,8 @@ ms.author: marsma
 
     New-AzureRmBatchAccountKey -AccountName <account_name> -KeyType Primary
 
-> [!NOTE] 若要生成新的辅助密钥，请为 **KeyType** 参数指定“Secondary”。必须单独重新生成主要密钥和辅助密钥。
+> [!NOTE]
+> 若要生成新的辅助密钥，请为 **KeyType** 参数指定“Secondary”。必须单独重新生成主要密钥和辅助密钥。
 
 ### 删除批处理帐户
 **Remove-AzureRmBatchAccount** 删除 Batch 帐户。例如：
@@ -79,7 +81,8 @@ ms.author: marsma
 
 将 BatchAccountContext 对象传入使用 **BatchContext** 参数的 cmdlet。
 
-> [!NOTE] 默认情况下，帐户的主要密钥用于身份验证，但用户可以通过更改 BatchAccountContext 对象的 **KeyInUse** 属性，显式选择要使用的密钥：`$context.KeyInUse = "Secondary"`。
+> [!NOTE]
+> 默认情况下，帐户的主要密钥用于身份验证，但用户可以通过更改 BatchAccountContext 对象的 **KeyInUse** 属性，显式选择要使用的密钥：`$context.KeyInUse = "Secondary"`。
 
 ## 创建和修改 Batch 资源
 使用 **New-AzureBatchPool**、**New-AzureBatchJob** 和 **New-AzureBatchTask** 等 cmdlet 在批处理帐户下创建资源。可以使用相应的 **Get-** 和 **Set-** cmdlet 更新现有资源的属性，以及使用 **Remove-** cmdlet 删除批处理帐户下的资源。

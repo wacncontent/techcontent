@@ -32,7 +32,8 @@ wacn.lang: cn
 
 为了更好地说明，本文提供[以JAVA为例的一段示例代码](http://wacnstorage.blob.core.chinacloudapi.cn/marketing-resource/documents/MySQLConnectionPool.java )，供参考，您也可以参考[Apache common DBCP](http://commons.apache.org/proper/commons-dbcp/)来了解更多。
 
->[!NOTE]**服务器端会设置超时机制，如果一个连接在一段时间内处于闲置状态，服务器就会关闭这个链接，以释放不必要的资源占用。因此为了保障在您使用时，您的长链接的有效性，请设置验证机制，具体配置可参考[如何在客户端配置验证机制确认长连接有效性](./mysql-database-validationquery.md)**
+>[!NOTE]
+>**服务器端会设置超时机制，如果一个连接在一段时间内处于闲置状态，服务器就会关闭这个链接，以释放不必要的资源占用。因此为了保障在您使用时，您的长链接的有效性，请设置验证机制，具体配置可参考[如何在客户端配置验证机制确认长连接有效性](./mysql-database-validationquery.md)**
 
 ## 通过长连接访问数据库 （推荐）##
 PHP中建议您使用长连接，长连接的概念与连接池的概念类似。需要注意的是PHP目前有三种驱动，除Mysqli外，其他两种驱动均支持Persistent Connection. 

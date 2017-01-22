@@ -27,13 +27,15 @@ Azure 移动应用客户端和服务器 SDK 支持对结构化数据（包含对
 
 在本教程中，将创建一个存储帐户，并将连接字符串添加到移动应用后端。然后将从新的移动应用类型 `StorageController<T>` 将新继承项添加到服务器项目。
 
->[!TIP] 本教程提供了可用的[配套示例](https://azure.microsoft.com/documentation/samples/app-service-mobile-dotnet-todo-list-files/)，用户可将其部署到自己的 Azure 帐户。
+>[!TIP]
+> 本教程提供了可用的[配套示例](https://azure.microsoft.com/documentation/samples/app-service-mobile-dotnet-todo-list-files/)，用户可将其部署到自己的 Azure 帐户。
 
 ## 先决条件
 
 * 完成[创建 Xamarin.Forms 应用]教程，其中列出了其他先决条件。本文使用该教程中完成的应用。
 
->[!NOTE] 如果要在注册 Azure 帐户之前就开始使用 Azure 应用服务，请转到 [Try App Service](https://tryappservice.azure.com/?appServiceName=mobile)（试用应用服务）。在那里，可以立即在应用服务中创建短期的入门级移动应用 - 无需信用卡，也无需做出承诺。
+>[!NOTE]
+> 如果要在注册 Azure 帐户之前就开始使用 Azure 应用服务，请转到 [Try App Service](https://tryappservice.azure.com/?appServiceName=mobile)（试用应用服务）。在那里，可以立即在应用服务中创建短期的入门级移动应用 - 无需信用卡，也无需做出承诺。
 
 ## 创建存储帐户
 
@@ -143,7 +145,8 @@ Azure 移动应用客户端和服务器 SDK 支持对结构化数据（包含对
 - [更新主视图](#update-main-view)
 - [更新 Android 项目](#update-android)、[iOS 项目](#update-ios)、[Windows 项目](#update-windows)
 
->[!NOTE] 本教程中仅包含有关 Android、iOS 和 Windows 应用商店平台的说明，而不包含有关 Windows Phone 的说明。
+>[!NOTE]
+> 本教程中仅包含有关 Android、iOS 和 Windows 应用商店平台的说明，而不包含有关 Windows Phone 的说明。
 
 ###<a name="add-nuget"></a>添加 NuGet 包
 

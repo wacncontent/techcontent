@@ -69,7 +69,8 @@ Visual Studio 解决方案包含三个项目：
 
     ![Azure App Tools 版本](./media/app-service-api-dotnet-get-started/apiversion.png)  
 
-    >[!NOTE] 根据计算机上已有 SDK 依赖项数量的不同，安装 SDK 可能耗时较长，从几分钟到半小时或更长时间不等。	
+    >[!NOTE]
+    > 根据计算机上已有 SDK 依赖项数量的不同，安装 SDK 可能耗时较长，从几分钟到半小时或更长时间不等。	
 
 ## 下载示例应用程序
 
@@ -211,7 +212,8 @@ ASP.NET Web API 项目可以使用 [Swashbuckle](https://www.nuget.org/packages/
 
 Swashbuckle 可用于任何 ASP.NET Web API 项目。如果要将 Swagger 元数据生成添加到现有项目，只需安装 Swashbuckle 包。
 
->[!NOTE] Swagger 元数据包含每个 API 操作的唯一 ID。默认情况下，Swashbuckle 可能为 Web API 控制器方法生成重复的 Swagger 操作 ID。如果控制器有重载的 HTTP 方法（例如 `Get()` 和 `Get(id)`），就会发生这种情况。有关如何处理重载的信息，请参阅 [Customize Swashbuckle-generated API definitions](./app-service-api-dotnet-swashbuckle-customize.md)（自定义 Swashbuckle 生成的 API 定义）。如果在 Visual Studio 中使用 Azure API 应用模板创建 Web API 项目，*SwaggerConfig.cs* 文件中会自动添加用于生成唯一操作 ID 的代码。
+>[!NOTE]
+> Swagger 元数据包含每个 API 操作的唯一 ID。默认情况下，Swashbuckle 可能为 Web API 控制器方法生成重复的 Swagger 操作 ID。如果控制器有重载的 HTTP 方法（例如 `Get()` 和 `Get(id)`），就会发生这种情况。有关如何处理重载的信息，请参阅 [Customize Swashbuckle-generated API definitions](./app-service-api-dotnet-swashbuckle-customize.md)（自定义 Swashbuckle 生成的 API 定义）。如果在 Visual Studio 中使用 Azure API 应用模板创建 Web API 项目，*SwaggerConfig.cs* 文件中会自动添加用于生成唯一操作 ID 的代码。
 
 ## <a id="createapiapp"></a>在 Azure 中创建 API 应用并向其部署代码
 
@@ -365,7 +367,8 @@ ToDoListAPI 项目已有生成的客户端代码，但在以下步骤中，要�
 
     ![API 定义 URL](./media/app-service-api-dotnet-get-started/codegenurlplugged.png)
 
-    >[!TIP] 获取用于生成代码的元数据的另一种方法是直接输入 URL，而无需通过浏览对话框。或者，如果要在部署到 Azure 之前生成客户端代码，可以在本地运行 Web API 项目，转到可提供 Swagger JSON 文件的 URL，保存文件，然后使用“选择现有的 Swagger 元数据文件”选项。
+    >[!TIP]
+    > 获取用于生成代码的元数据的另一种方法是直接输入 URL，而无需通过浏览对话框。或者，如果要在部署到 Azure 之前生成客户端代码，可以在本地运行 Web API 项目，转到可提供 Swagger JSON 文件的 URL，保存文件，然后使用“选择现有的 Swagger 元数据文件”选项。
 
 5. 在“添加 REST API 客户端”对话框中，单击“确定”。
 

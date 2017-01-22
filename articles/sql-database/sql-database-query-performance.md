@@ -48,7 +48,8 @@ Query Performance Insight 非常易于使用：
 
     ![性能仪表板](./media/sql-database-query-performance/performance.png)
 
-> [!NOTE] SQL 数据库的查询存储需要捕获几个小时的数据，才能提供查询性能见解。如果在某段时间内数据库没有任何活动，或查询存储不处于活动状态，则显示该时间段的图表为空。如果查询存储未运行，可随时启用它。
+> [!NOTE]
+> SQL 数据库的查询存储需要捕获几个小时的数据，才能提供查询性能见解。如果在某段时间内数据库没有任何活动，或查询存储不处于活动状态，则显示该时间段的图表为空。如果查询存储未运行，可随时启用它。
 
 ##<a name="review-top-cpu-consuming-queries"></a> 查看 DTU 消耗量靠前的查询
 

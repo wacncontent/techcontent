@@ -25,7 +25,8 @@ DocumentDB 支持使用核心 MongoDB API 函数来创建、读取、更新和�
 
 ## 集合
 
-> [!IMPORTANT] DocumentDB 在集合级别使用保留的吞吐量来提供有保证的可预测性能。因此，DocumentDB 中的集合是可计费实体。
+> [!IMPORTANT]
+> DocumentDB 在集合级别使用保留的吞吐量来提供有保证的可预测性能。因此，DocumentDB 中的集合是可计费实体。
 
 性能保留在集合级别应用，使应用程序可以调整系统中数据容器的最低级别性能。因此，集合的价格由集合的预配吞吐量（以每秒的请求单位数来度量）和总占用存储空间（以千兆字节为单位）决定。可以在集合的整个生命周期内调整设置的吞吐量，以适应不断变化的应用程序的处理需求和访问模式。有关详细信息，请参阅 [DocumentDB performance levels](./documentdb-performance-levels.md)（DocumentDB 性能级别）。
 

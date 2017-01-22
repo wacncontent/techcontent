@@ -30,7 +30,8 @@ ms.author: charwen
 
 [!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
->[!IMPORTANT] 按以下说明进行操作之前，必须预先配置ExpressRoute 线路。在按以下步骤操作之前，请务必遵循相关指南来[创建 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)和[配置路由](./expressroute-howto-routing-classic.md)。
+>[!IMPORTANT]
+> 按以下说明进行操作之前，必须预先配置ExpressRoute 线路。在按以下步骤操作之前，请务必遵循相关指南来[创建 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)和[配置路由](./expressroute-howto-routing-classic.md)。
 
 ## 限制和局限性
 
@@ -56,7 +57,8 @@ ms.author: charwen
 
 ![共存](./media/expressroute-howto-coexist-classic/scenario2.jpg)
 
->[!NOTE]不能将虚拟网络配置为转换路由器。
+>[!NOTE]
+>不能将虚拟网络配置为转换路由器。
 
 ## 选择要使用的步骤
 
@@ -151,13 +153,15 @@ ms.author: charwen
 
 7. 创建一个本地站点 VPN 网关实体。此命令不会配置本地 VPN 网关，而是允许你提供本地网关设置（如公共 IP 和本地地址空间），以便 Azure VPN 网关可以连接到它。
 
-    >[!IMPORTANT] netcfg 中未定义站点到站点 VPN 的本地站点。而是，必须使用此 cmdlet 指定本地站点参数。不能使用门户或 netcfg 文件定义它。
+    >[!IMPORTANT]
+    > netcfg 中未定义站点到站点 VPN 的本地站点。而是，必须使用此 cmdlet 指定本地站点参数。不能使用门户或 netcfg 文件定义它。
 
     使用下面的示例，并将值替换为你自己的值。
 
         New-AzureLocalNetworkGateway -GatewayName MyLocalNetwork -IpAddress <MyLocalGatewayIp> -AddressSpace <MyLocalNetworkAddress>
 
-    > [!NOTE]如果你的本地网络具有多个路由，你可以通过数组的形式将其全部传入。$MyLocalNetworkAddress = @("10.1.2.0/24","10.1.3.0/24","10.2.1.0/24")
+    > [!NOTE]
+    >如果你的本地网络具有多个路由，你可以通过数组的形式将其全部传入。$MyLocalNetworkAddress = @("10.1.2.0/24","10.1.3.0/24","10.2.1.0/24")
 
     若要检索虚拟网络网关设置（包括网关 ID 和公共 IP），请使用 `Get-AzureVirtualNetworkGateway` cmdlet。请参阅以下示例。
 
@@ -185,7 +189,8 @@ ms.author: charwen
 
 如果网关子网为 /27 或更大，且虚拟网络是通过 ExpressRoute 连接的，则可跳过下面的步骤，转到前一部分的[“步骤 6 - 创建站点到站点 VPN 网关”](#vpngw)。
 
->[!NOTE] 如果你删除的是现有网关，则当你进行此配置时，本地系统将失去与虚拟网络建立的连接。
+>[!NOTE]
+> 如果你删除的是现有网关，则当你进行此配置时，本地系统将失去与虚拟网络建立的连接。
 
 1. 你需要安装最新版本的 Azure Resource Manager PowerShell cmdlet。有关安装 PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](../powershell-install-configure.md)。请注意，针对此配置使用的 cmdlet 可能与你熟悉的 cmdlet 稍有不同。请务必使用说明内容中指定的 cmdlet。 
 
@@ -198,7 +203,8 @@ ms.author: charwen
     `Get-AzureVNetConfig -ExportToFile "C:\NetworkConfig.xml"`
 
 4. 编辑网络配置文件架构，使网关子网为 /27 或更短的前缀（例如 /26 或 /25）。请参阅以下示例。
->[!NOTE] 如果你因为虚拟网络中没有剩余足够的 IP 地址而无法增加网关子网大小，则需增加 IP 地址空间。有关配置架构的详细信息，请参阅 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100.aspx)。
+>[!NOTE]
+> 如果你因为虚拟网络中没有剩余足够的 IP 地址而无法增加网关子网大小，则需增加 IP 地址空间。有关配置架构的详细信息，请参阅 [Azure 虚拟网络配置架构](https://msdn.microsoft.com/zh-cn/library/azure/jj157100.aspx)。
 
           <Subnet name="GatewaySubnet">
             <AddressPrefix>10.17.159.224/27</AddressPrefix>

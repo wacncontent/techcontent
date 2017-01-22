@@ -60,11 +60,13 @@ Azure Blob 存储是一项可存储大量非结构化数据的服务，用户可
         // Get a reference to a container named “mycontainer.”
         CloudBlobContainer container = blobClient.GetContainerReference("mycontainer");
 
-> [!NOTE] 在接下来的部分中，将在代码的前面使用先前过程中显示的全部代码。
+> [!NOTE]
+> 在接下来的部分中，将在代码的前面使用先前过程中显示的全部代码。
 
 ## 使用代码创建容器
 
-> [!NOTE]在 ASP.NET 中执行 Azure 存储调用的一些 API 是异步的。有关详细信息，请参阅[使用 Async 和 Await 进行异步编程](http://msdn.microsoft.com/zh-cn/library/hh191443.aspx)。以下示例中的代码假定正在使用异步编程方法。
+> [!NOTE]
+>在 ASP.NET 中执行 Azure 存储调用的一些 API 是异步的。有关详细信息，请参阅[使用 Async 和 Await 进行异步编程](http://msdn.microsoft.com/zh-cn/library/hh191443.aspx)。以下示例中的代码假定正在使用异步编程方法。
 
 若要在存储帐户中创建容器，所需做的只是添加对 **CreateIfNotExistsAsync** 的调用，如以下代码所示：
 

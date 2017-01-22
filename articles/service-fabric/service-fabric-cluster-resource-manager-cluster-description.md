@@ -142,7 +142,8 @@ ClusterManifest.xml
         </WindowsServer>
       </Infrastructure>
 
-> [!NOTE] 在 Azure 部署中，由 Azure 分配容错域和升级域。因此，Azure 基础结构选项中节点和角色的定义不包含容错域或升级域信息。
+> [!NOTE]
+> 在 Azure 部署中，由 Azure 分配容错域和升级域。因此，Azure 基础结构选项中节点和角色的定义不包含容错域或升级域信息。
 
 ##<a name="placement-constraints-and-node-properties"></a> 放置约束和节点属性
 有时（事实上是大多数情况下），需要确保只在群集中的特定节点或一组特定节点上运行某些工作负荷。例如，某些工作负荷可能需要 GPU 或 SSD，而有些则不用。一个有说服力的示例就是几乎在每个 n 层体系结构中，特定计算机充当应用程序的前端/接口服务端（因此通常在 Internet 上公开），而不同的集（通常包含不同的硬件资源）处理计算或存储层的工作（因此通常不会在 Internet 上公开）。Service Fabric 甚至预期到，在微服务领域中有特定的工作负荷需要在特定硬件配置上运行，例如：

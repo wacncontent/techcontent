@@ -222,7 +222,8 @@ ms.author: rachelap
 
 Web API CORS 支持比应用服务 CORS 支持更有弹性。例如，在代码中可为不同操作方法指定不同的接受来源，但对于应用服务 CORS，只能为所有 API 应用的方法指定一组接受的来源。
 
-> [!NOTE] 请不要尝试在一个 API 应用中同时使用 Web API CORS 和应用服务 CORS。否则，会优先使用应用服务 CORS，而 Web API CORS 不起作用。例如，如果在应用服务中启用一个来源域，同时在 Web API 代码中启用所有来源域，则 Azure API 应用仅接受来自 Azure 中指定的域的调用。
+> [!NOTE]
+> 请不要尝试在一个 API 应用中同时使用 Web API CORS 和应用服务 CORS。否则，会优先使用应用服务 CORS，而 Web API CORS 不起作用。例如，如果在应用服务中启用一个来源域，同时在 Web API 代码中启用所有来源域，则 Azure API 应用仅接受来自 Azure 中指定的域的调用。
 
 ### 如何在 Web API 代码中启用 CORS
 

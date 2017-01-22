@@ -87,7 +87,8 @@ ms.author: jdial
 
     ![在 Azure 门户预览中创建 VM](./media/virtual-networks-static-ip-arm-pportal/figure09.png)
 
->[!NOTE] 单击“保存”后，如果你注意到分配仍设置为“动态”，则表示你键入的 IP 地址已被使用。请尝试其他 IP 地址。
+>[!NOTE]
+> 单击“保存”后，如果你注意到分配仍设置为“动态”，则表示你键入的 IP 地址已被使用。请尝试其他 IP 地址。
 
 ## 如何从 VM 中删除静态专用 IP 地址
 若要从上面创建的 VM 中删除静态专用 IP 地址，请按照以下步骤操作。

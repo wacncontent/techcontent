@@ -27,7 +27,8 @@ ms.author: juliako;mingfeiy
 
 本主题介绍创建和配置资产传送策略的原因和方式。
 
->[!NOTE]若要使用动态打包和动态加密，必须确保至少有一个缩放单位（也称为流式处理单位）。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
+>[!NOTE]
+>若要使用动态打包和动态加密，必须确保至少有一个缩放单位（也称为流式处理单位）。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
 >
 >此外，你的资产必须包含一组自适应比特率 MP4 或自适应比特率平滑流式处理文件。
 
@@ -141,7 +142,8 @@ Azure 媒体服务还允许你添加 Widevine 加密。以下示例演示将 Pla
 
     }
 
->[!NOTE]使用 Widevine 加密时，只能使用 DASH 传送。请确保在资产传送协议中指定 DASH。
+>[!NOTE]
+>使用 Widevine 加密时，只能使用 DASH 传送。请确保在资产传送协议中指定 DASH。
 
 ##DynamicEnvelopeEncryption 资产传送策略 
 

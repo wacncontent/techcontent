@@ -21,7 +21,8 @@ ms.author: rachelap
 
 ## 概述 
 
-> [!NOTE] 本主题将会移入 [App Service Authentication / Authorization](../app-service/app-service-authentication-overview.md)（应用服务身份验证/授权）合并主题，其中涉及 Web 应用、移动应用和 API 应用。
+> [!NOTE]
+> 本主题将会移入 [App Service Authentication / Authorization](../app-service/app-service-authentication-overview.md)（应用服务身份验证/授权）合并主题，其中涉及 Web 应用、移动应用和 API 应用。
 
 Azure 应用服务提供内置的身份验证与授权服务，可实现 [OAuth 2.0](#oauth) 和 [OpenID Connect](#oauth)。本文介绍 Azure 应用服务中 API 应用可用的服务和选项。
 

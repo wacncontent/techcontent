@@ -77,7 +77,8 @@ expand 字符串用于减少获取特定信息所需的 API 调用数。使用 e
 - 当所有属性都是必需属性且没有指定 select 字符串时，*必须* 使用 expand 字符串来获取统计信息。如果使用了 select 字符串来获取属性的子集，则可在 select 字符串中指定 `stats`，不需指定 expand 字符串。
 - 此示例性 expand 字符串指定列表中的每个项都应返回统计信息：`stats`。
 
-> [!NOTE] 构造这三种查询字符串类型（filter、select 和 expand）中的任意一种类型时，必须确保属性名称和大小写与其 REST API 元素的对应项相匹配。例如，在使用 .NET [CloudTask](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.cloudtask) 类时，必须指定 **state** 而非 **State**，即使 .NET 属性为 [CloudTask.State](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.cloudtask.state)。请参阅下表中 .NET 和 REST API 之间的属性映射。
+> [!NOTE]
+> 构造这三种查询字符串类型（filter、select 和 expand）中的任意一种类型时，必须确保属性名称和大小写与其 REST API 元素的对应项相匹配。例如，在使用 .NET [CloudTask](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.cloudtask) 类时，必须指定 **state** 而非 **State**，即使 .NET 属性为 [CloudTask.State](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.cloudtask.state)。请参阅下表中 .NET 和 REST API 之间的属性映射。
 
 ### filter、select 和 expand 字符串的规则
 - filter、select 和 expand 字符串中属性名称的显示方式应与其在[批处理 REST][api_rest] API 中的显示方式相同，即使用户使用[批处理 .NET][api_net] 或其他某个批处理 SDK。
@@ -125,7 +126,8 @@ csharp
     List<CloudPool> testPools =
         await myBatchClient.PoolOperations.ListPools(detailLevel).ToListAsync();
 
-> [!TIP] 使用 Select 和 Expand 子句配置的 [ODATADetailLevel][odata] 实例也可以传递给相应的 Get 方法（例如 [PoolOperations.GetPool](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.pooloperations.getpool.aspx)），以便限制返回的数据量。
+> [!TIP]
+> 使用 Select 和 Expand 子句配置的 [ODATADetailLevel][odata] 实例也可以传递给相应的 Get 方法（例如 [PoolOperations.GetPool](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.batch.pooloperations.getpool.aspx)），以便限制返回的数据量。
 
 ## Batch REST 到 .NET API 映射
 filter、select 和 expand 字符串中的属性名称*必须*反映其 REST API 对应项，不管是名称本身还是大小写。下表提供了 .NET 和 REST API 的对应项之间的映射。

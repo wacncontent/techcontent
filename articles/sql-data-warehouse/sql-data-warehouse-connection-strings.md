@@ -37,7 +37,8 @@ ms.author: sonyama;barbkess
 
     jdbc:sqlserver://yourserver.database.chinacloudapi.cn:1433;database=yourdatabase;user={your_user_name};password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.chinacloudapi.cn;loginTimeout=30;
 
-> [!NOTE] 请考虑将连接超时值设置为 300 秒，以便连接可以经受住短时间内不可用。
+> [!NOTE]
+> 请考虑将连接超时值设置为 300 秒，以便连接可以经受住短时间内不可用。
 
 ## 后续步骤
 若要开始使用 Visual Studio 和其他应用程序查询数据仓库，请参阅[使用 Visual Studio 进行查询][Query with Visual Studio]。

@@ -20,7 +20,8 @@ ms.author: danlep
 
 # Azure 服务管理 (asm) 模式下的 Azure CLI 命令
 
-[!IMPORTANT]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](./azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用 [Resource Manager model](./virtual-machines/azure-cli-arm-commands.md)。
+>[!IMPORTANT]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](./azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用 [Resource Manager model](./virtual-machines/azure-cli-arm-commands.md)。
 
 本文提供经常用于在经典部署模型中创建和管理 Azure 资源的 Azure CLI 命令的语法和选项。通过在 Azure 服务管理 (asm) 模式下运行 CLI 可以访问这些命令。本参考内容并不完整，你的 CLI 版本可能会显示略微不同的命令或参数。
 
@@ -38,7 +39,8 @@ ms.author: danlep
 
     azure config mode asm
 
->[!NOTE] CLI 的 Azure Resource Manager 模式与 Azure 服务管理模式互斥。即，在一种模式下创建的资源不能通过另一种模式进行管理。
+>[!NOTE]
+> CLI 的 Azure Resource Manager 模式与 Azure 服务管理模式互斥。即，在一种模式下创建的资源不能通过另一种模式进行管理。
 
 ## 管理帐户信息和发布设置
 CLI 可以连接到帐户的一种方式是使用 Azure 订阅信息。（有关其他选项，请参阅[从 Azure CLI 连接到 Azure 订阅](./xplat-cli-connect.md)。） 可以从 Azure 经典门户中的发布设置文件中获取此信息，如下所述。可以导入发布设置文件作为永久性本地配置设置，CLI 会将此设置用于后续操作。只需导入一次发布设置即可。
@@ -67,7 +69,8 @@ CLI 可以连接到帐户的一种方式是使用 Azure 订阅信息。（有关
     warn:   Remember to delete it now that it has been imported.
     info:   Account publish settings imported successfully
 
-> [!NOTE] publishsettings 文件可以包含有关多个订阅的详细信息（即，订阅名称和 ID）。在导入 publishsettings 文件时，第一个订阅将用作默认订阅。若要使用其他订阅，请运行以下命令：<code>~$ azure config set subscription &lt;other-subscription-id&gt;</code>
+> [!NOTE]
+> publishsettings 文件可以包含有关多个订阅的详细信息（即，订阅名称和 ID）。在导入 publishsettings 文件时，第一个订阅将用作默认订阅。若要使用其他订阅，请运行以下命令：<code>~$ azure config set subscription &lt;other-subscription-id&gt;</code>
 
 **account clear [options]**
 
@@ -501,7 +504,7 @@ Windows 虚拟机稍后可以通过添加端口 3389 作为终结点来启用 RD
 
 当使用 azure vm disk detach 命令分离数据磁盘时，请使用 &lt;lun&gt; 参数指明要分离的磁盘。
 
-> [!NOTE] 请注意，应始终按相反的顺序分离数据磁盘，即，从已分配的编号最高的 LUN 开始。Linux SCSI 层不支持在仍附加有编号较高的 LUN 时分离编号较低的 LUN。例如，不应在仍附加有 LUN 1 的情况下分离 LUN 0。
+> [AZURE>NOTE] 请注意，应始终按相反的顺序分离数据磁盘，即，从已分配的编号最高的 LUN 开始。Linux SCSI 层不支持在仍附加有编号较高的 LUN 时分离编号较低的 LUN。例如，不应在仍附加有 LUN 1 的情况下分离 LUN 0。
 
 **vm disk show [options] &lt;name>**
 
@@ -743,7 +746,8 @@ Azure 网站是可通过 URI 访问的 Web 配置。尽管网站托管在虚拟�
     info:   Repository initialized
     info:   site create command OK
 
-> [!NOTE] 站点名称必须是唯一的。无法创建与现有站点具有相同 DNS 名称的站点。
+> [!NOTE]
+> 站点名称必须是唯一的。无法创建与现有站点具有相同 DNS 名称的站点。
 
 **site browse [options] [name]**
 
@@ -1265,7 +1269,8 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 + **-k`<skip>`** 或 **--skip`<skip>`**：跳过 `<skip>` 指定的行数。
 + **-p`<top>`** 或 **--top `<top>`**：返回由 `<top>` 指定的特定行数。
 
-> [!NOTE] **--query** 参数优先于 **--type**、**--skip** 和 **--top**。
+> [!NOTE]
+> **--query** 参数优先于 **--type**、**--skip** 和 **--top**。
 
 **mobile recover [options] [unhealthyservicename] [healthyservicename]**
 
@@ -1286,7 +1291,8 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 
 密钥类型为 `master` 和 `application`。
 
-> [!NOTE] 当重新生成密钥时，使用旧密钥的客户端可能无法访问你的移动服务。当重新生成应用程序密钥时，应使用新密钥值更新应用程序。
+> [!NOTE]
+> 当重新生成密钥时，使用旧密钥的客户端可能无法访问你的移动服务。当重新生成应用程序密钥时，应使用新密钥值更新应用程序。
 
 **mobile key set [options] [servicename] [type] [value]**
 
@@ -1541,7 +1547,8 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
     + **none**（按需作业）
 + **-t`<time>`** **--startTime `<time>`** 脚本的首次运行开始时间，采用 ISO 格式；默认值为 `now`。
 
-> [!NOTE] 创建的新作业处于禁用状态，因为还必须上传脚本。请使用 **mobile script upload** 命令上载脚本并使用 **mobile job update** 命令启用作业。
+> [!NOTE]
+> 创建的新作业处于禁用状态，因为还必须上传脚本。请使用 **mobile script upload** 命令上载脚本并使用 **mobile job update** 命令启用作业。
 
 **mobile job update [options] [servicename] [jobname]**
 
@@ -1571,7 +1578,8 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
     info:    Executing command mobile job delete
     info:    mobile job delete command OK
 
-> [!NOTE] 删除作业也将删除已上传的脚本。
+> [!NOTE]
+> 删除作业也将删除已上传的脚本。
 
 ###<a name="Mobile_Scale"></a>用于缩放移动服务的命令
 
@@ -1602,7 +1610,8 @@ Azure 移动服务汇聚了一系列支持你的应用程序的后端功能的 A
 + **-c`<mode>`** 或 **--computeMode `<mode>`**：计算模式必须为 `Free` 或 `Reserved`。
 + **-i`<count>`** 或 **--numberOfInstances`<count>`**：在保留模式下运行时使用的实例数。
 
-> [!NOTE] 将计算模式设置为`Reserved`时，同一区域中的所有移动服务都将在高级模式下运行。
+> [!NOTE]
+> 将计算模式设置为`Reserved`时，同一区域中的所有移动服务都将在高级模式下运行。
 
 ###用于为移动服务启用预览版功能的命令
 

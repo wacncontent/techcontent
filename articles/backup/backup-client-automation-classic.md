@@ -39,7 +39,8 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 
 ## 创建备份保管库
 
-> [!WARNING] 对于第一次使用 Azure 备份的客户，你需要注册用于订阅的 Azure 备份提供程序。可通过运行以下命令来执行此操作：Register-AzureProvider -ProviderNamespace "Microsoft.Backup"
+> [!WARNING]
+> 对于第一次使用 Azure 备份的客户，你需要注册用于订阅的 Azure 备份提供程序。可通过运行以下命令来执行此操作：Register-AzureProvider -ProviderNamespace "Microsoft.Backup"
 
 可以使用 **New-AzureRMBackupVault** cmdlet 创建新的备份保管库。备份保管库是一种 ARM 资源，因此需要将它放置在资源组中。在权限提升的 Azure PowerShell 控制台中运行以下命令：
 
@@ -107,7 +108,8 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
 
     Machine registration succeeded.
 
-> [!IMPORTANT] 请勿使用相对路径来指定保管库凭据文件。必须提供绝对路径作为 cmdlet 的输入。
+> [!IMPORTANT]
+> 请勿使用相对路径来指定保管库凭据文件。必须提供绝对路径作为 cmdlet 的输入。
 
 ## 网络设置
 如果 Windows 计算机通过代理服务器连接到 Internet，则也可以向代理提供代理设置。此示例未使用代理服务器，因此我们要显式清除任何代理相关的信息。
@@ -128,7 +130,8 @@ Azure PowerShell 1.0 已在 2015 年 10 月发布。此版本在 0.9.8 版本的
     PS C:\> ConvertTo-SecureString -String "Complex!123_STRING" -AsPlainText -Force | Set-OBMachineSetting
     Server properties updated successfully
 
-> [!IMPORTANT] 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
+> [!IMPORTANT]
+> 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
 
 ## 备份文件和文件夹
 从 Windows Server 和客户端到 Azure 备份的所有备份由策略控制。原则包含三个部分：策略由三个部分组成：

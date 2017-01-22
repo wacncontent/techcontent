@@ -97,7 +97,8 @@ X.509 数字证书通常用于验证客户端与服务器，以及对消息进�
 ### 客户端 X.509 证书
 客户端证书通常不由第三方证书颁发机构颁发。当前用户位置的“个人”存储通常包含由根证书颁发机构放置的客户端证书，其预期目的是“客户端身份验证”。客户端可以在需要相互身份验证时使用此类证书。
 
->[!NOTE] Service Fabric 群集上的所有管理操作都需要服务器证书。客户端证书不能用于管理。
+>[!NOTE]
+> Service Fabric 群集上的所有管理操作都需要服务器证书。客户端证书不能用于管理。
 
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 

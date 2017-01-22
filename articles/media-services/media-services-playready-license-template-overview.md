@@ -30,7 +30,8 @@ Azure 媒体服务现在提供可用于传送 Microsoft PlayReady 许可证的�
 - 音频\\视频内容输入控件的输出保护级别。
 - 有关详细信息，请参阅 [PlayReady 符合性规则](https://www.microsoft.com/playready/licensing/compliance/)文档中的输出控件部分 (3.5)。
 
->[!NOTE]目前，只能配置 PlayReady 许可证（此权限是必需的）的 PlayRight。PlayRight 为客户端提供播放内容的权限。PlayRight 还允许配置特定于播放的限制。有关详细信息，请参阅 [PlayReadyPlayRight](./media-services-playready-license-template-overview.md#PlayReadyPlayRight)。
+>[!NOTE]
+>目前，只能配置 PlayReady 许可证（此权限是必需的）的 PlayRight。PlayRight 为客户端提供播放内容的权限。PlayRight 还允许配置特定于播放的限制。有关详细信息，请参阅 [PlayReadyPlayRight](./media-services-playready-license-template-overview.md#PlayReadyPlayRight)。
 
 若要使用媒体服务配置 PlayReady 许可证，必须配置媒体服务 PlayReady 许可证模板。该模板在 XML 中定义。
 
@@ -73,7 +74,8 @@ XML 符合 PlayReady 许可证模板 XML 架构部分中定义的 PlayReady 许�
 
 [PlayReadyPlayRight](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.mediaservices.client.contentkeyauthorization.playreadyplayright.aspx) - 此类表示 PlayReady 许可证的 PlayRight。它会授予用户播放许可证中和 PlayRight 本身（用于播放特定策略）配置的零个或多个限制的制约内容的权限。PlayRight 上的很多策略都与输出限制有关，输出限制用于控制可以播放的内容的输出类型和使用给定输出时必须使用的任何限制。例如，如果启用了 DigitalVideoOnlyContentRestriction，DRM 运行时将只允许通过数字输出显示视频（不允许模拟视频输出传递内容）。
 
->[!IMPORTANT]这些限制类型可以非常强大，但也会影响使用者体验。如果输出保护配置了太多限制，内容可能会无法在某些客户端上播放。有关详细信息，请参阅 [PlayReady 符合性规则](https://www.microsoft.com/playready/licensing/compliance/)文档。
+>[!IMPORTANT]
+>这些限制类型可以非常强大，但也会影响使用者体验。如果输出保护配置了太多限制，内容可能会无法在某些客户端上播放。有关详细信息，请参阅 [PlayReady 符合性规则](https://www.microsoft.com/playready/licensing/compliance/)文档。
 
 有关 Silverlight 支持的保护级别的示例，请参阅：[Silverlight 支持的输出保护](https://msdn.microsoft.com/zh-cn/library/cc838192(v=VS.95).aspx#Silverlight_Support_for_Output_Protection)。
 

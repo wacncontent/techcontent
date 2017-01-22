@@ -66,7 +66,8 @@ ms.author: glenga
 
        这使您可以浏览此应用插入表中的数据。
 
->[!NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 default.js 文件中。
+>[!NOTE]
+>你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 default.js 文件中。
 
 ## 后续步骤
 完成快速入门后，请了解如何使用[适用于 HTML/JavaScript 的移动服务客户端](./mobile-services-html-how-to-use-client-library.md)。

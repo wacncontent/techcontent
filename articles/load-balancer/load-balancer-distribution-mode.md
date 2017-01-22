@@ -54,7 +54,8 @@ ms.author: sewhee
 
     Get-AzureVM -ServiceName mySvc -Name MyVM1 | Add-AzureEndpoint -Name HttpIn -Protocol TCP -PublicPort 80 -LocalPort 8080 –LoadBalancerDistribution sourceIP | Update-AzureVM
 
->[!NOTE] LoadBalancerDistribution 可以设置为 sourceIP（用于 2 元组（源 IP、目标 IP）负载均衡）、sourceIPProtocol（用于 3 元组（源 IP、目标 IP、协议）负载均衡）或 none（如果想要使用 5 元组负载均衡的默认行为）。
+>[!NOTE]
+> LoadBalancerDistribution 可以设置为 sourceIP（用于 2 元组（源 IP、目标 IP）负载均衡）、sourceIPProtocol（用于 3 元组（源 IP、目标 IP、协议）负载均衡）或 none（如果想要使用 5 元组负载均衡的默认行为）。
 
 使用以下命令检索终结点负载均衡器分发模式配置：
 

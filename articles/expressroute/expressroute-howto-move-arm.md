@@ -76,7 +76,8 @@ ms.author: ganesr
 
     Move-AzureRmExpressRouteCircuit -Name "MyCircuit" -ResourceGroupName "DemoRG" -Location "chinaeast" -ServiceKey "<Service-key>"
 
->[!NOTE] 转移完成之后，列在前一个 cmdlet 中的新名称用于处理资源。线路实质上已重命名。
+>[!NOTE]
+> 转移完成之后，列在前一个 cmdlet 中的新名称用于处理资源。线路实质上已重命名。
 
 ## 为两种部署模型启用 ExpressRoute 线路
 

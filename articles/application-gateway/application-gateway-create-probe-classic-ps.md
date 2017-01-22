@@ -28,7 +28,8 @@ ms.author: gwallace
 
 [!INCLUDE [azure-probe-intro-include](../../includes/application-gateway-create-probe-intro-include.md)]
 
-> [!IMPORTANT] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](./application-gateway-create-probe-ps.md)。
+> [!IMPORTANT]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用 Resource Manager 模型。了解如何[使用 Resource Manager 模型执行这些步骤](./application-gateway-create-probe-ps.md)。
 
 [!INCLUDE [azure-ps-prerequisites-include.md](../../includes/azure-ps-prerequisites-include.md)]
 
@@ -137,7 +138,8 @@ ms.author: gwallace
 
 以下示例演示如何使用配置文件设置应用程序网关以负载均衡公共端口 80 上的 HTTP 流量，然后使用自定义探测将网络流量发送到两个 IP 地址之间的后端端口 80。
 
->[!IMPORTANT] 协议项 Http 或 Https 区分大小写。
+>[!IMPORTANT]
+> 协议项 Http 或 Https 区分大小写。
 
 已添加用于配置自定义探测的新配置项 <Probe>。
 

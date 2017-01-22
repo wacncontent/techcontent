@@ -70,11 +70,13 @@ Database import and export is relatively simple, but involves a relatively long 
 
 1\. Synchronize the database to MySQL Database on Azure. You can configure the database server running on MySQL Database on Azure as a subordinate server. For the specific steps involved in configuring and synchronizing databases, see Configure SQL Data Sync to replicate to MySQL Database on Azure.
 
->[!NOTE] **Note: You will need to open up external access to the current database server. We strongly recommend that you configure SSL and only permit external access using SSL.**
+>[!NOTE]
+> **Note: You will need to open up external access to the current database server. We strongly recommend that you configure SSL and only permit external access using SSL.**
 
 2\. Deploy the new application on Azure and direct it to the newly created database on Azure.
 
-[!WARNING] As the database on Azure is running in read-only mode at this time, the functionality of the application may be limited.
+>[!WARNING]
+> As the database on Azure is running in read-only mode at this time, the functionality of the application may be limited.
 
 3\. Confirm that the database on Azure has reached a synchronized state. You can confirm the synchronization status based on the replication status and latency on the replication page.
 ![Migrate][1]
@@ -84,7 +86,8 @@ Database import and export is relatively simple, but involves a relatively long 
 5\. Stop the database synchronization replication. Click **Disable**, and then save on the page below.
 ![Migrate][2]
 
->[!NOTE] **Note: This operation restarts the database server.**
+>[!NOTE]
+> **Note: This operation restarts the database server.**
 
 6\. Enable the new application.
 

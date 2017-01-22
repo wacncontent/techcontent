@@ -72,7 +72,8 @@ SSE 具有以下限制：
 
 可以使用 [Azure 门户预览](https://portal.azure.cn)启用加密。
 
-> [!NOTE] 如果想要以编程方式启用或禁用存储帐户上的存储服务加密，可以使用 [Azure 存储空间资源提供程序 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163683.aspx)、[.NET 存储空间资源提供程序](https://msdn.microsoft.com/zh-cn/library/azure/mt131037.aspx)、[Azure PowerShell](../powershell-install-configure.md) 或 [Azure CLI](./storage-azure-cli.md)。
+> [!NOTE]
+> 如果想要以编程方式启用或禁用存储帐户上的存储服务加密，可以使用 [Azure 存储空间资源提供程序 REST API](https://msdn.microsoft.com/zh-cn/library/azure/mt163683.aspx)、[.NET 存储空间资源提供程序](https://msdn.microsoft.com/zh-cn/library/azure/mt131037.aspx)、[Azure PowerShell](../powershell-install-configure.md) 或 [Azure CLI](./storage-azure-cli.md)。
 
 ###步骤 3：将数据复制到存储帐户
 

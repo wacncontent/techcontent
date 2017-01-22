@@ -41,7 +41,8 @@ wacn.date: 12/19/2016
 
 记下 Pi 的 `IP address` 和 `hostname`。本文后面的步骤需要此信息。
 
-> [!NOTE] 确保 Pi 与计算机连接到同一网络。例如，如果计算机连接到无线网络，而 Pi 连接到有线网络，则可能看不到 devdisco 输出中的 IP 地址。
+> [!NOTE]
+> 确保 Pi 与计算机连接到同一网络。例如，如果计算机连接到无线网络，而 Pi 连接到有线网络，则可能看不到 devdisco 输出中的 IP 地址。
 > 
 > 
 
@@ -106,7 +107,8 @@ wacn.date: 12/19/2016
 ### 确保应用正常运行
 此时会看到 Pi 上的 LED 每隔两秒闪烁一次。如果看不到 LED 闪烁，请参阅[故障排除指南](./iot-hub-raspberry-pi-kit-node-troubleshooting.md)，了解常见问题的解决方案。![LED 闪烁](./media/iot-hub-raspberry-pi-lessons/lesson1/led_blinking.jpg)
 
-> [!NOTE] 使用 `Ctrl + C` 终止应用程序。
+> [!NOTE]
+> 使用 `Ctrl + C` 终止应用程序。
 > 
 > 
 

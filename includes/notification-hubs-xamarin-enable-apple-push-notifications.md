@@ -52,7 +52,8 @@
 
        此时将显示“Add iOS Certificate”（添加 iOS 证书）助手。
 
-    > [!NOTE]本教程使用开发证书。注册生产证书时使用相同的过程。你只需确保在发送通知时使用相同的证书类型。
+    > [!NOTE]
+    >本教程使用开发证书。注册生产证书时使用相同的过程。你只需确保在发送通知时使用相同的证书类型。
 
 7. 单击“Choose File”（选择文件），浏览到推送证书 CSR 保存到的位置。然后单击“Generate”（生成）。
 
@@ -66,13 +67,15 @@
 
       ![](./media/notification-hubs-enable-apple-push-notifications/notification-hubs-cert-downloaded.png)
 
-    > [!NOTE]默认情况下，下载的文件（开发证书）名为 **aps\_development.cer**。
+    > [!NOTE]
+    >默认情况下，下载的文件（开发证书）名为 **aps\_development.cer**。
 
 9. 双击下载的推送证书 **aps\_development.cer**。将在 Keychain 中安装新证书，如下所示：
 
        ![](./media/notification-hubs-xamarin-enable-apple-push-notifications/notification-hubs-cert-in-keychain.png)
 
-    > [!NOTE]证书中的名称可能不同，但将以 **Apple Development iOS Push Services:** 作为前缀。
+    > [!NOTE]
+    >证书中的名称可能不同，但将以 **Apple Development iOS Push Services:** 作为前缀。
 
 10. 在 Keychain Access 中，右键单击你在“Certificates”（证书）类别中创建的新推送证书。单击“Export”（导出），为文件命名，选择“.p12”格式，然后单击“Save”（保存）。
 

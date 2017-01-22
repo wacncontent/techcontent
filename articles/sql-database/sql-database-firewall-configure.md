@@ -56,13 +56,15 @@ Azure SQL 数据库为 Azure 和其他基于 Internet 的应用程序提供关�
 
 - 如果该请求的 IP 地址不位于任何服务器级或数据库级防火墙规则中指定的范围内，则连接请求失败。
 
-> [!NOTE] 若要从你的本地计算机访问 Azure SQL 数据库，请确保你的网络和本地计算机上的防火墙允许在 TCP 端口 1433 上的传出通信。
+> [!NOTE]
+> 若要从你的本地计算机访问 Azure SQL 数据库，请确保你的网络和本地计算机上的防火墙允许在 TCP 端口 1433 上的传出通信。
 
 ## 从 Azure 连接
 
 在应用程序尝试从 Azure 连接到你的数据库服务器时，防火墙将验证是否允许 Azure 连接。如果防火墙设置的开始地址和结束地址都等于 0.0.0.0，则表示允许这些连接。如果不允许该连接尝试，则该请求将不会访问 Azure SQL 数据库服务器。
 
-> [!IMPORTANT] 该选项将防火墙配置为允许来自 Azure 的所有连接，包括来自其他客户的订阅的连接。选择该选项时，请确保你的登录名和用户权限将访问权限限制为仅已授权用户使用。
+> [!IMPORTANT]
+> 该选项将防火墙配置为允许来自 Azure 的所有连接，包括来自其他客户的订阅的连接。选择该选项时，请确保你的登录名和用户权限将访问权限限制为仅已授权用户使用。
 
 你可以通过两种方式从 Azure 启用连接：
 
@@ -109,7 +111,8 @@ Azure SQL 数据库为 Azure 和其他基于 Internet 的应用程序提供关�
 | [Set-AzureSqlDatabaseServerFirewallRule](https://msdn.microsoft.com/zh-cn/library/azure/dn546739.aspx) | 服务器 | 更新现有服务器级防火墙规则的属性 |
 | [Remove-AzureSqlDatabaseServerFirewallRule](https://msdn.microsoft.com/zh-cn/library/azure/dn546727.aspx) | 服务器 | 删除服务器级防火墙规则 |
 
-> [!NOTE] 在防火墙设置的更改生效之前，可能最多有五分钟的延迟。
+> [!NOTE]
+> 在防火墙设置的更改生效之前，可能最多有五分钟的延迟。
 
 ## 数据库防火墙故障排除
 

@@ -77,7 +77,8 @@ Azure 上的 VHD 映像必须已将虚拟大小调整为 1 MB。通常情况下�
 
 若要修正此问题，可使用 Hyper-V 管理器控制台或 [Resize-VHD](http://technet.microsoft.com/zh-cn/library/hh848535.aspx) Powershell cmdlet 调整 VM 大小。如果你未在 Windows 环境中运行，则建议使用 qemu-img 转换（如果需要）并调整 VHD 大小。
 
-> [!NOTE] qemu-img 版本 2.2.1 或更高版本中存在已知 bug，会导致 VHD 格式不正确。QEMU 2.6 中已修复此问题。建议使用 qemu-img 2.2.0 或更低版本，或者更新到 2.6 或更高版本。参考：https://bugs.launchpad.net/qemu/+bug/1490611。
+> [!NOTE]
+> qemu-img 版本 2.2.1 或更高版本中存在已知 bug，会导致 VHD 格式不正确。QEMU 2.6 中已修复此问题。建议使用 qemu-img 2.2.0 或更低版本，或者更新到 2.6 或更高版本。参考：https://bugs.launchpad.net/qemu/+bug/1490611。
 
  1. 直接使用工具（如 `qemu-img` 或 `vbox-manage`）调整 VHD 大小可能会生成无法启动的 VHD。因此，建议先将 VHD 转换为 RAW 磁盘映像。如果已将 VM 映像创建为 RAW 磁盘映像（对于 KVM 等某些虚拟机监控程序，这是默认设置），则可以跳过此步骤：
 
@@ -183,7 +184,8 @@ Hyper-V 和 Azure 的 Linux 集成服务 (LIS) 驱动程序会直接影响上游
         # export HISTSIZE=0
         # logout
 
-    >[!NOTE] 运行“waagent -force -deprovision”之后，在 Virtualbox 上可能看到以下错误：`[Errno 5] Input/output error`。此错误消息并不关键，可以忽略。
+    >[!NOTE]
+    > 运行“waagent -force -deprovision”之后，在 Virtualbox 上可能看到以下错误：`[Errno 5] Input/output error`。此错误消息并不关键，可以忽略。
 
 - 然后，需要关闭虚拟机并将 VHD 上载到 Azure。
 

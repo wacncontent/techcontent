@@ -56,7 +56,8 @@ ms.tgt_pltfrm: NA
 
     单击“选择”将提交更改定价层的缩放请求。根据数据库的大小，缩放操作可能需要一些时间才能完成（请参阅本文顶部的信息）。
 
-    > [!NOTE] 更改数据库定价层不会更改数据库最大大小。若要更改数据库最大大小，请使用 [Transact-SQL (T-SQL)](https://msdn.microsoft.com/zh-cn/library/mt574871.aspx) 或 [PowerShell](https://msdn.microsoft.com/zh-cn/library/mt619433.aspx)。
+    > [!NOTE]
+    > 更改数据库定价层不会更改数据库最大大小。若要更改数据库最大大小，请使用 [Transact-SQL (T-SQL)](https://msdn.microsoft.com/zh-cn/library/mt574871.aspx) 或 [PowerShell](https://msdn.microsoft.com/zh-cn/library/mt619433.aspx)。
 
     ![选择定价层][2]
 

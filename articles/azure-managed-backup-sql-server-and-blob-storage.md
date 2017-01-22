@@ -145,7 +145,8 @@ SQL 版本支持说明：本文档基于 SQL Server 2014 编写，适用于 SQL 
 
     ![22](./media/azure-managed-backup-sql-server-and-blob-storage/22.png)
 
-    >[!NOTE]初次配置时选择**配置**选项。
+    >[!NOTE]
+    >初次配置时选择**配置**选项。
 
 3. 勾选**启用托管备份**。
 

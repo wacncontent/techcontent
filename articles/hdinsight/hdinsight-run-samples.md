@@ -29,7 +29,8 @@ ms.author: jgao
 - [**Pi 估计器**](#hdinsight-sample-pi-estimator)：使用统计学方法（拟蒙特卡罗法）来估算 pi 值。
 - [**10-GB Graysort**](#hdinsight-sample-10gb-graysort)：使用 HDInsight 对 10 GB 文件运行常规用途的 GraySort。有三个作业要运行：Teragen 生成数据，Terasort 对数据排序，而 Teravalidate 确认数据已正确排序。
 
->[!NOTE]可以在附录中找到源代码。
+>[!NOTE]
+>可以在附录中找到源代码。
 
 Web 上有许多介绍 Hadoop 相关技术（例如基于 Java 的 MapReduce 编程和流式处理）的其他文档，以及有关 Windows PowerShell 脚本中使用的 cmdlet 的文档。有关这些资源的详细信息，请参阅：
 

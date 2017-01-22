@@ -40,7 +40,8 @@ ms.author: danlep
 
 有关详细过程，请参阅[安装 Microsoft HPC Pack Web 组件](http://technet.microsoft.com/zh-cn/library/hh314627.aspx)。
 
->[!TIP] HPC Pack 的某些 Azure 快速启动模板将自动安装并配置 Web 组件。如果使用 [HPC Pack IaaS 部署脚本](./virtual-machines-windows-classic-hpcpack-cluster-powershell-script.md)创建群集，可在部署期间选择安装并配置 Web 组件。
+>[!TIP]
+> HPC Pack 的某些 Azure 快速启动模板将自动安装并配置 Web 组件。如果使用 [HPC Pack IaaS 部署脚本](./virtual-machines-windows-classic-hpcpack-cluster-powershell-script.md)创建群集，可在部署期间选择安装并配置 Web 组件。
 
 **安装 Web 组件**
 
@@ -64,7 +65,8 @@ ms.author: danlep
 
 4. 在系统提示选择证书时，请选择与头节点的公共 DNS 名称对应的证书。例如，若使用经典部署模型部署头节点 VM，则证书名称将类似于：CN=&lt;HeadNodeDnsName&gt;.chinacloudapp.cn。若使用 Resource Manager 部署模型，则证书名称将类似于：CN=&lt;HeadNodeDnsName&gt;.&lt;region&gt;.chinacloudapp.cn。
 
-    >[!NOTE] 稍后将作业从本地计算机提交到头节点时选择此证书。不要选择或配置与 Active Directory 域中头节点的计算机名称对应的证书（例如 CN=MyHPCHeadNode.HpcAzure.local）。
+    >[!NOTE]
+    > 稍后将作业从本地计算机提交到头节点时选择此证书。不要选择或配置与 Active Directory 域中头节点的计算机名称对应的证书（例如 CN=MyHPCHeadNode.HpcAzure.local）。
 
 5. 若要配置用于作业提交的 Web 门户，请键入以下命令：
 
@@ -105,7 +107,8 @@ ms.author: danlep
 
 4. 在证书导入向导中单击“下一步”，然后按照步骤将从头节点中导出的证书导入“受信任的根证书颁发机构”存储。
 
->[!TIP] 由于客户端计算机未识别头节点上的证书颁发机构，因此可能会出现安全警告。出于测试目的，可忽略此警告并完成证书导入。
+>[!TIP]
+> 由于客户端计算机未识别头节点上的证书颁发机构，因此可能会出现安全警告。出于测试目的，可忽略此警告并完成证书导入。
 
 ## <a name="step-3-run-test-jobs-on-the-cluster"></a> 步骤 3：在群集上运行测试作业
 
@@ -123,7 +126,8 @@ ms.author: danlep
 
         job list /scheduler:https://<HeadNodeDnsName>.<region>.chinacloudapp.cn /all
 
-    >[!TIP] 在计划程序 URL 中使用头节点的完整 DNS 名称，而不是 IP 地址。如果指定 IP 地址，将会出现类似于下面的错误：“服务器证书必须具有有效的信任链，或放置在受信任的根存储区中。”
+    >[!TIP]
+    > 在计划程序 URL 中使用头节点的完整 DNS 名称，而不是 IP 地址。如果指定 IP 地址，将会出现类似于下面的错误：“服务器证书必须具有有效的信任链，或放置在受信任的根存储区中。”
 
 3. 出现提示时，请键入 HPC 群集管理员或你配置的另一群集用户的用户名（格式为 &lt;DomainName&gt;\\&lt;UserName&gt;）和密码。你可以选择在本地存储凭据以执行更多作业操作。
 

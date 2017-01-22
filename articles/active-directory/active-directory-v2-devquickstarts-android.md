@@ -25,11 +25,13 @@ Microsoft 标识平台使用开放式标准，例如 OAuth2 和 OpenID Connect�
 
 如果你是 OAuth2 或 OpenID Connect 新手，此示例配置可能不太适合你。建议阅读 [2\.0 协议 — OAuth 2.0 授权代码流](./active-directory-v2-protocols-oauth-code.md)了解背景信息。
 
-> [!NOTE] 我们平台中的有些功能（例如条件访问和 Intune 策略管理）采用 OAuth2 或 OpenID Connect 标准中的表达式，所以会要求使用开放源代码 Azure 标识库。
+> [!NOTE]
+> 我们平台中的有些功能（例如条件访问和 Intune 策略管理）采用 OAuth2 或 OpenID Connect 标准中的表达式，所以会要求使用开放源代码 Azure 标识库。
 
 v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。
 
-> [!NOTE] 若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
+> [!NOTE]
+> 若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
 ## 从 GitHub 下载代码。
 本教程的代码[在 GitHub 上](https://github.com/azure-samples/active-directory-android-native-oidcandroidlib-v2)维护。若要遵照该代码，你可以[下载 .zip 格式应用骨架](git@github.com:Azure-Samples/active-directory-android-native-oidcandroidlib-v2.git/archive/skeleton.zip)，或克隆该骨架：

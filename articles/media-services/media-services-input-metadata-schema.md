@@ -25,7 +25,8 @@ ms.author: juliako
 
 本主题介绍输入元数据 (&lt;asset\_id&gt;\_metadata.xml) 以其为基础的 XML 架构的元素和类型。有关包含输出资产相关元数据的文件的信息，请参阅[输出元数据](./media-services-output-metadata-schema.md)。
 
-> [!NOTE]可以在本主题末尾找到 [架构代码](./media-services-input-metadata-schema.md#code)和 [XML 示例](./media-services-input-metadata-schema.md#xml)。
+> [!NOTE]
+>可以在本主题末尾找到 [架构代码](./media-services-input-metadata-schema.md#code)和 [XML 示例](./media-services-input-metadata-schema.md#xml)。
 
 ## <a name="AssetFiles"></a> AssetFiles 元素（根元素）
 包含编码作业的 [AssetFile 元素](./media-services-input-metadata-schema.md#AssetFile)的集合。
@@ -53,7 +54,8 @@ ms.author: juliako
 | **StartTime** |**xs:duration** |内容开始时间。示例：StartTime="PT2.669S"。 |
 | **OverallBitRate** |**xs:int** |资产文件的平均比特率 (kbps)。 |
 
-> [!NOTE]序列中必须出现以下 4 个子元素。
+> [!NOTE]
+>序列中必须出现以下 4 个子元素。
 
 ### 子元素
 | 名称 | 类型 | 说明 |
@@ -77,7 +79,8 @@ ms.author: juliako
 | **StartTime** |**xs:duration** |轨道开始时间。示例：StartTime="PT2.669S" |
 | **持续时间** |**xs:duration** |轨道持续时间。示例：Duration="PTSampleFormat M37.757S"。 |
 
-> [!NOTE]序列中必须出现以下 2 个子元素。
+> [!NOTE]
+>序列中必须出现以下 2 个子元素。
 
 ### 子元素
 | 名称 | 类型 | 说明 |

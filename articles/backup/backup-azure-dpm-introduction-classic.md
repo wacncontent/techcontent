@@ -48,7 +48,8 @@ System Center DPM 备份文件和应用程序数据。备份到 DPM 的数据可
 
 拍摄快照后，数据将由 Azure 备份服务传输到备份保管库中。该服务负责确定并传输自上次备份以来进行了更改的块，使备份存储和网络更高效。数据传输完成后，将会删除快照并创建恢复点。在 Azure 经典管理门户中，可以查看此恢复点。
 
->[!NOTE] Linux 虚拟机只能使用文件一致性备份。
+>[!NOTE]
+> Linux 虚拟机只能使用文件一致性备份。
 
 ## 先决条件 <a name="prerequisites"></a>
 按如下所述让 Azure 备份做好备份 DPM 数据的准备：
@@ -91,6 +92,7 @@ System Center DPM 备份文件和应用程序数据。备份到 DPM 的数据可
 - 压缩流
 - 稀疏流
 
->[!NOTE] 从 System Center 2012 DPM SP1 开始，可以使用 Azure 备份将 DPM 保护的工作负荷备份到 Azure。
+>[!NOTE]
+> 从 System Center 2012 DPM SP1 开始，可以使用 Azure 备份将 DPM 保护的工作负荷备份到 Azure。
 
 <!---HONumber=Mooncake_1017_2016-->

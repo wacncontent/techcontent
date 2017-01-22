@@ -25,7 +25,8 @@ wacn.date: 12/26/2016
 
 有关完整的模板，请参阅 GitHub 上的[服务总线授权规则模板][]。
 
->[!NOTE] 以下 Azure Resource Manager 模板可供下载和部署。
+>[!NOTE]
+> 以下 Azure Resource Manager 模板可供下载和部署。
 >
 > -  [创建服务总线命名空间](./service-bus-resource-manager-namespace.md)
 > -  [创建包含队列的服务总线命名空间](./service-bus-resource-manager-namespace-queue.md)

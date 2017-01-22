@@ -82,7 +82,8 @@ wacn.date: 12/12/2016
 
         $publicIP = New-AzureRmPublicIpAddress -Name PublicIp -ResourceGroupName NRP-RG -Location 'China East' –AllocationMethod Static -DomainNameLabel loadbalancernrp 
 
-    >[!IMPORTANT] 负载均衡器将公共 IP 的域标签用作 FQDN 的前缀。这不同于经典部署模型，后者将云服务用作负载均衡器 FQDN。
+    >[!IMPORTANT]
+    > 负载均衡器将公共 IP 的域标签用作 FQDN 的前缀。这不同于经典部署模型，后者将云服务用作负载均衡器 FQDN。
 
 ## 创建前端 IP 池和后端地址池
 
@@ -252,7 +253,8 @@ wacn.date: 12/12/2016
 
     Remove-AzureRmLoadBalancer -Name NRPLB -ResourceGroupName NRP-RG
 
->[!NOTE] 可选开关 **-Force** 可用于避免删除提示。
+>[!NOTE]
+> 可选开关 **-Force** 可用于避免删除提示。
 
 ## 后续步骤
 

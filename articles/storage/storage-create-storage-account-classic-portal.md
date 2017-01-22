@@ -42,7 +42,8 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
 有关存储帐户容量和性能目标的详细信息，请参阅 [Azure 存储可伸缩性和性能目标](./storage-scalability-targets.md)。
 
-> [!NOTE] 当你创建 Azure 虚拟机时，如果在部署位置中还没有存储帐户，则会在该位置自动创建一个存储帐户。因此，没有必要按照下面的步骤来创建虚拟机磁盘的存储帐户。存储帐户名称将基于虚拟机名称。请参阅 [Azure 虚拟机文档](../virtual-machines/index.md)以了解更多详细信息。
+> [!NOTE]
+> 当你创建 Azure 虚拟机时，如果在部署位置中还没有存储帐户，则会在该位置自动创建一个存储帐户。因此，没有必要按照下面的步骤来创建虚拟机磁盘的存储帐户。存储帐户名称将基于虚拟机名称。请参阅 [Azure 虚拟机文档](../virtual-machines/index.md)以了解更多详细信息。
 
 ##<a id="create-a-storage-account"></a> 创建存储帐户
 
@@ -54,7 +55,8 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
 3. 在 **URL** 中，输入存储帐户的名称。
 
-    > [!NOTE] 存储帐户名称必须为 3 到 24 个字符，并且只能包含数字和小写字母。
+    > [!NOTE]
+    > 存储帐户名称必须为 3 到 24 个字符，并且只能包含数字和小写字母。
     >  
     > 你的存储帐户名称在 Azure 中必须是唯一的。Azure 经典管理门户将指出你选择的存储帐户名称是否已经存在。
 
@@ -64,7 +66,8 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
     请注意，在创建存储帐户时，必须选择一个地缘组。不能将现有帐户移到一个地缘组中。有关地缘组的更多信息，请参阅下面的[服务与地缘组的归置](#service-co-location-with-an-affinity-group)。
 
-    >[!IMPORTANT] 若要确定哪些位置可用于你的订阅，可以调用[列出所有资源提供程序](https://msdn.microsoft.com/zh-cn/library/azure/dn790524.aspx)操作。若要从 PowerShell 列出提供程序，请调用 [Get-AzureLocation](https://msdn.microsoft.com/zh-cn/library/azure/dn757693.aspx)。通过 .NET，使用 ProviderOperationsExtensions 类的 [List](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.management.resources.provideroperationsextensions.list.aspx) 方法。
+    >[!IMPORTANT]
+    > 若要确定哪些位置可用于你的订阅，可以调用[列出所有资源提供程序](https://msdn.microsoft.com/zh-cn/library/azure/dn790524.aspx)操作。若要从 PowerShell 列出提供程序，请调用 [Get-AzureLocation](https://msdn.microsoft.com/zh-cn/library/azure/dn757693.aspx)。通过 .NET，使用 ProviderOperationsExtensions 类的 [List](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.azure.management.resources.provideroperationsextensions.list.aspx) 方法。
     >
 <!--	>Additionally, see [Azure Regions](https://azure.microsoft.com/regions/#services) for more information about what services are available in which region.-->
 
@@ -102,12 +105,14 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
 *地缘组*是你的 Azure 服务和 VM 及 Azure 存储帐户的地理分组。通过定位同一数据中心或靠近目标用户受众的计算机工作负载，地缘组可提高服务性能。此外，当某个存储帐户中的数据被另一个服务访问，而该服务是同一个地缘组的一部分时，不会对出口流量收费。
 
-> [!NOTE]  若要创建地缘组，请打开 [Azure 经典管理门户](https://manage.windowsazure.cn)的“设置”区域，单击“地缘组”，然后单击“添加地缘组”或“添加”按钮。也可使用 Azure 服务管理 API 创建和管理地缘组。请参阅<a href="http://msdn.microsoft.com/zh-cn/library/azure/ee460798.aspx">对地缘组的操作</a>以了解更多信息。
+> [!NOTE]
+>  若要创建地缘组，请打开 [Azure 经典管理门户](https://manage.windowsazure.cn)的“设置”区域，单击“地缘组”，然后单击“添加地缘组”或“添加”按钮。也可使用 Azure 服务管理 API 创建和管理地缘组。请参阅<a href="http://msdn.microsoft.com/zh-cn/library/azure/ee460798.aspx">对地缘组的操作</a>以了解更多信息。
 
 ## 查看、复制和重新生成存储访问密钥
 创建存储帐户时，Azure 将生成两个 512 位存储访问密钥，用于在用户访问该存储帐户时对其进行身份验证。Azure 提供两个存储访问密钥，因此可在不中断存储服务的情况下重新生成用于访问该服务的密钥。
 
-> [!NOTE] 建议避免与他人共享存储访问密钥。若要允许不提供你的访问密钥即可访问存储空间资源，可使用*共享访问签名*。通过共享访问签名，可在所定义的访问间隔用所指定访问权限，访问帐户中的资源。有关详细信息，请参阅[使用共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)。
+> [!NOTE]
+> 建议避免与他人共享存储访问密钥。若要允许不提供你的访问密钥即可访问存储空间资源，可使用*共享访问签名*。通过共享访问签名，可在所定义的访问间隔用所指定访问权限，访问帐户中的资源。有关详细信息，请参阅[使用共享访问签名 (SAS)](./storage-dotnet-shared-access-signature-part-1.md)。
 
 在 [Azure 经典管理门户](https://manage.windowsazure.cn)中，可使用仪表板或“存储”页上的“管理密钥”查看、复制和重新生成用于访问 Blob、表和队列服务的存储访问密钥。
 
@@ -128,7 +133,8 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 ### 重新生成存储访问密钥
 建议定期更改存储帐户的访问密钥，以确保存储连接安全。分配了两个访问密钥，因此重新生成其中一个访问密钥时，始终能够使用另一个访问密钥连接到存储帐户。
 
-> [!WARNING] 重新生成访问密钥会影响 Azure 中的服务以及依赖于存储帐户的应用程序。必须更新使用访问密钥访问存储帐户的所有客户端，以使用新密钥。
+> [!WARNING]
+> 重新生成访问密钥会影响 Azure 中的服务以及依赖于存储帐户的应用程序。必须更新使用访问密钥访问存储帐户的所有客户端，以使用新密钥。
 
 **媒体服务** - 如果你的媒体服务依赖于存储帐户，则必须在重新生成密钥后将访问密钥与媒体服务重新同步。
 
@@ -150,7 +156,8 @@ Azure 存储帐户将授权访问 Azure 存储中的 Azure Blob、队列、表�
 
 若要删除不再使用的存储帐户，请使用仪表板或“配置”页上的“删除”。“删除”操作将删除整个存储帐户，包括帐户中的所有 Blob、表和队列。
 
-> [!WARNING] 无法恢复已删除的存储帐户，也无法检索删除之前该存储帐户包含的任何内容。删除帐户前请务必备份要保存的任何内容。对于帐户中的任务资源也是如此 - Blob、表、队列或文件的删除是永久删除。
+> [!WARNING]
+> 无法恢复已删除的存储帐户，也无法检索删除之前该存储帐户包含的任何内容。删除帐户前请务必备份要保存的任何内容。对于帐户中的任务资源也是如此 - Blob、表、队列或文件的删除是永久删除。
 >
 > 如果存储帐户包含用于 Azure 虚拟机的 VHD 文件，则必须删除使用这些 VHD 文件的任何映像和磁盘，然后才能删除存储帐户。首先，如果虚拟机正在运行，则停止运行，然后将其删除。若要删除磁盘，请导航到“磁盘”选项卡，然后在那里删除存所有磁盘。若要删除映像，请导航到“映像”选项卡，然后删除存储在帐户中的任何映像。
 

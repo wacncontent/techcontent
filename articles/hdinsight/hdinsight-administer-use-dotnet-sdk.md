@@ -104,7 +104,8 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
     _hdinsightClient.EnableHttp(cluster.Name, cluster.Location, "admin","<password>");
 
->[!NOTE] 通过授予/撤消访问权限，你将重置群集用户名和密码。
+>[!NOTE]
+> 通过授予/撤消访问权限，你将重置群集用户名和密码。
 
 也可以通过经典管理门户完成此操作。请参阅[使用 Azure 经典管理门户管理 HDInsight][hdinsight-admin-portal]。
 

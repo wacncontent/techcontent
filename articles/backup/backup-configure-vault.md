@@ -62,7 +62,8 @@ ms.author: jimpark; trinadhk; markgal
 
 ## 步骤 2 - 下载文件
 
->[!NOTE] 通过 Azure 门户预览启用备份功能即将推出。目前，可以使用本地 Azure 恢复服务代理备份文件和文件夹。
+>[!NOTE]
+> 通过 Azure 门户预览启用备份功能即将推出。目前，可以使用本地 Azure 恢复服务代理备份文件和文件夹。
 
 #### 下载恢复服务代理
 
@@ -86,7 +87,8 @@ ms.author: jimpark; trinadhk; markgal
     - 提供已下载的保管库凭据
     - 将加密通行短语保存在安全的位置。
 
-    >[!NOTE] 如果你丢失或忘记了通行短语，Microsoft 无法帮助你恢复备份数据。请将文件保存在安全的位置。还原备份时需要用到此文件。
+    >[!NOTE]
+    > 如果你丢失或忘记了通行短语，Microsoft 无法帮助你恢复备份数据。请将文件保存在安全的位置。还原备份时需要用到此文件。
 
 现已安装代理，且已向保管库注册计算机。接下来可以配置和计划备份。
 
@@ -115,7 +117,8 @@ ms.author: jimpark; trinadhk; markgal
 
     ![Windows Server 备份项](./media/backup-configure-vault/specify-backup-schedule-close.png)  
 
-    >[!NOTE] 有关如何指定备份计划的详细信息，请参阅[使用 Azure 备份来取代磁带基础结构](./backup-azure-backup-cloud-as-tape.md)一文。
+    >[!NOTE]
+    > 有关如何指定备份计划的详细信息，请参阅[使用 Azure 备份来取代磁带基础结构](./backup-azure-backup-cloud-as-tape.md)一文。
 
 8. 在“选择保留策略”页上，为备份复制选择“保留策略”。
 
@@ -129,7 +132,8 @@ ms.author: jimpark; trinadhk; markgal
 ### <a name="enable-network-throttling"></a>启用网络限制
 备份代理提供网络限制。限制功能将控制数据传输期间的网络带宽使用方式。如果需要在上班时间内备份数据，但不希望备份程序干扰其他 Internet 流量，此控制机制很有帮助。限制适用于备份和还原活动。
 
->[!NOTE] 网络限制在 Windows Server 2008 R2 SP1、Windows Server 2008 SP2 或 Windows 7（带 Service Pack）上不可用。Azure 备份网络限制功能需要在本地操作系统上使用服务质量 (QoS)。虽然 Azure 备份可以保护这些操作系统，但这些平台上的可用 QoS 版本不兼容 Azure 备份网络限制。网络限制可用于所有其他[支持的操作系统](./backup-azure-backup-faq.md)。
+>[!NOTE]
+> 网络限制在 Windows Server 2008 R2 SP1、Windows Server 2008 SP2 或 Windows 7（带 Service Pack）上不可用。Azure 备份网络限制功能需要在本地操作系统上使用服务质量 (QoS)。虽然 Azure 备份可以保护这些操作系统，但这些平台上的可用 QoS 版本不兼容 Azure 备份网络限制。网络限制可用于所有其他[支持的操作系统](./backup-azure-backup-faq.md)。
 
 **启用网络限制**
 

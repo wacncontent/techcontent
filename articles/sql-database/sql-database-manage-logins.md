@@ -51,7 +51,8 @@ ms.author: rickbyh
 ### 通过使用 SQL Server Management Studio 连接到数据库
 有关如何使用 SQL Server Management Studio 进行连接的详细说明，请参阅[使用 SQL Server Management Studio 连接到 SQL 数据库并执行示例 T-SQL 查询](./sql-database-connect-query-ssms.md)。
 
-> [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+> [!IMPORTANT]
+> 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ## 其他特殊帐户
 SQL 数据库在虚拟 master 数据库中提供了两个受限管理角色，可以向这两个角色添加用户帐户。
@@ -64,7 +65,8 @@ SQL 数据库在虚拟 master 数据库中提供了两个受限管理角色，�
 
          CREATE LOGIN Mary WITH PASSWORD = '<strong_password>';
 
-     > [!NOTE] 创建登录名或包含数据库用户时必须使用强密码。有关详细信息，请参阅[强密码](https://msdn.microsoft.com/zh-cn/library/ms161962.aspx)。
+     > [!NOTE]
+     > 创建登录名或包含数据库用户时必须使用强密码。有关详细信息，请参阅[强密码](https://msdn.microsoft.com/zh-cn/library/ms161962.aspx)。
 
     为了提高性能，会暂时在数据库级别缓存登录名（服务器级主体）。若要刷新身份验证缓存，请参阅 [DBCC FLUSHAUTHCACHE](https://msdn.microsoft.com/zh-cn/library/mt627793.aspx)。
 
@@ -79,7 +81,8 @@ SQL 数据库在虚拟 master 数据库中提供了两个受限管理角色，�
          ALTER ROLE dbmanager ADD MEMBER Mary; 
          ALTER ROLE dbmanager ADD MEMBER [mike@contoso.com];
 
-     > [!NOTE] dbmanager 是虚拟 master 数据库中的数据库角色，因此只能向该 dbmanager 角色添加用户。不能向数据库级角色添加服务器级登录名。
+     > [!NOTE]
+     > dbmanager 是虚拟 master 数据库中的数据库角色，因此只能向该 dbmanager 角色添加用户。不能向数据库级角色添加服务器级登录名。
 
 5. 必要时，可将服务器级防火墙配置为允许新用户进行连接。
 
@@ -104,7 +107,8 @@ SQL 数据库在虚拟 master 数据库中提供了两个受限管理角色，�
 
 若要向其他用户授予对数据库的完全控制权限，可通过 `ALTER ROLE` 语句让这些用户成为 **db\_owner** 固定数据库角色的成员。
 
-> [!NOTE] 根据登录名创建数据库用户的主要原因是，有时 SQL Server 身份验证用户需要访问多个数据库。基于登录名的用户与登录名绑定，并且只为该登录名保留一个密码。各个数据库中的包含数据库用户都是单个的实体，且均保留各自的密码。如果包含数据库用户的密码不相同，则可能会给这些用户造成混淆。
+> [!NOTE]
+> 根据登录名创建数据库用户的主要原因是，有时 SQL Server 身份验证用户需要访问多个数据库。基于登录名的用户与登录名绑定，并且只为该登录名保留一个密码。各个数据库中的包含数据库用户都是单个的实体，且均保留各自的密码。如果包含数据库用户的密码不相同，则可能会给这些用户造成混淆。
 
 ### 配置数据库级防火墙
 

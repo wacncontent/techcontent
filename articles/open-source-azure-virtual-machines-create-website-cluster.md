@@ -47,7 +47,8 @@ MySQL 是一主一从，提供数据写服务； Redis 也是一主一从，提�
 
     ![3](./media/open-source-azure-virtual-machines-create-website-cluster/3.png)
 
-    >[!WARNING] 注意： 如果你希望虚拟机使用虚拟网络，则必须在创建虚拟机时指定虚拟网络。创建虚拟机后，不能将它加入虚拟网络。 
+    >[!WARNING]
+    > 注意： 如果你希望虚拟机使用虚拟网络，则必须在创建虚拟机时指定虚拟网络。创建虚拟机后，不能将它加入虚拟网络。 
 
     我的虚拟机及网络基本信息如下：
     <table border="1">
@@ -118,7 +119,8 @@ MySQL 是一主一从，提供数据写服务； Redis 也是一主一从，提�
 
     ![4](./media/open-source-azure-virtual-machines-create-website-cluster/4.png)
 
-    >[!WARNING] 不想让这些服务器处于同一虚拟网络的话可以忽略创建虚拟网络这步，那么我们建议让这些服务器位于同一个数据中心，比如区域都位于中国东部或中国北部，以降低网络延迟。在创建虚拟机时选择区域，让它们的区域保持一致，都是中国东部或者中国北部。用各自虚拟机的公网 IP 替代上面表格中的IP地址。
+    >[!WARNING]
+    > 不想让这些服务器处于同一虚拟网络的话可以忽略创建虚拟网络这步，那么我们建议让这些服务器位于同一个数据中心，比如区域都位于中国东部或中国北部，以降低网络延迟。在创建虚拟机时选择区域，让它们的区域保持一致，都是中国东部或者中国北部。用各自虚拟机的公网 IP 替代上面表格中的IP地址。
 
 2. 创建虚拟机
 
@@ -179,7 +181,8 @@ MySQL 是一主一从，提供数据写服务； Redis 也是一主一从，提�
                 server  centosweb2 10.0.0.5:80  weight 5 check inter 2000 rise 2 fall 3
                 server  centosweb3 10.0.0.6:80  weight 5 check inter 2000 rise 2 fall 3
 
-    >[!WARNING]注意上面红色标注的部分为3台WEB的IP地址，请根据您的实际情况填写: 如果3台WEB与此LB在同一个虚拟网络的不同子网下，这里可以填写私有IP地址，否则请填写3台WEB的实际公网IP地址。
+    >[!WARNING]
+    >注意上面红色标注的部分为3台WEB的IP地址，请根据您的实际情况填写: 如果3台WEB与此LB在同一个虚拟网络的不同子网下，这里可以填写私有IP地址，否则请填写3台WEB的实际公网IP地址。
 
 4. Redis 的安装和主从设置
 
@@ -273,7 +276,8 @@ MySQL 是一主一从，提供数据写服务； Redis 也是一主一从，提�
 
         sudo bash install_redis.sh masterIP
 
-    >[!IMPORTANT] 注意：其中的 masterIP 指的是您的 redis master 的 IP 地址，请根据您的具体情况设置:如果 redis 这两台机器在同一个子网下，这里可以填 redis master 的私有 IP 地址，否则请填写 redis master 的公网 IP 地址。
+    >[!IMPORTANT]
+    > 注意：其中的 masterIP 指的是您的 redis master 的 IP 地址，请根据您的具体情况设置:如果 redis 这两台机器在同一个子网下，这里可以填 redis master 的私有 IP 地址，否则请填写 redis master 的公网 IP 地址。
 
     比如我运行
 
@@ -363,7 +367,8 @@ MySQL 是一主一从，提供数据写服务； Redis 也是一主一从，提�
 
         sudo bash install_mysql.sh mysqlPassword
 
-    >[!IMPORTANT] 注意：其中的 mysqlPassword 指的是您的 mysql root 密码，请根据您的具体情况设置。
+    >[!IMPORTANT]
+    > 注意：其中的 mysqlPassword 指的是您的 mysql root 密码，请根据您的具体情况设置。
 
     比如您运行
 
@@ -438,7 +443,8 @@ MySQL 是一主一从，提供数据写服务； Redis 也是一主一从，提�
 
         sudo bash install_mysql.sh mysqlPassword masterIP　
 
-    >[!IMPORTANT] 注意：其中的 mysqlPassword 指的是您的 mysql root 密码， masterIP 指的是mysql，master 的 IP 地址，请根据您的具体情况设置。
+    >[!IMPORTANT]
+    > 注意：其中的 mysqlPassword 指的是您的 mysql root 密码， masterIP 指的是mysql，master 的 IP 地址，请根据您的具体情况设置。
 
     比如我运行
 
@@ -540,7 +546,8 @@ MySQL 是一主一从，提供数据写服务； Redis 也是一主一从，提�
 
         sudo bash install_apache.sh mysqlPassword mysqlMasterIP insertValue
 
-    >[!IMPORTANT] 注意：其中的 mysqlPassword 指的是您的 mysql master 的 root 密码，请根据您的具体情况设置； mysqlMasterIP 指的是您的 mysql master 的 IP 地址，如果 mysql master 和这台 web 处于同一个虚拟网络的不同子网下，此时可以填写 mysql master 的私有 IP 地址，否则请填写 mysql master 公网 IP 地址； insertValue 指的是您要往 mysql 测试表中写入的值，这个值在访问http://centoshaproxy.chinacloudapp.cn/mysql.php 会显示出来。
+    >[!IMPORTANT]
+    > 注意：其中的 mysqlPassword 指的是您的 mysql master 的 root 密码，请根据您的具体情况设置； mysqlMasterIP 指的是您的 mysql master 的 IP 地址，如果 mysql master 和这台 web 处于同一个虚拟网络的不同子网下，此时可以填写 mysql master 的私有 IP 地址，否则请填写 mysql master 公网 IP 地址； insertValue 指的是您要往 mysql 测试表中写入的值，这个值在访问http://centoshaproxy.chinacloudapp.cn/mysql.php 会显示出来。
 
     比如我运行
 
@@ -586,7 +593,8 @@ MySQL 是一主一从，提供数据写服务； Redis 也是一主一从，提�
 
     即可。
 
-    >[!IMPORTANT] 注意：我们强烈建议您在测试完毕无误后去到三台 web, 把/var/www/html/mysql.php删除掉，因为它里面包含了 mysql master root 的明文密码。
+    >[!IMPORTANT]
+    > 注意：我们强烈建议您在测试完毕无误后去到三台 web, 把/var/www/html/mysql.php删除掉，因为它里面包含了 mysql master root 的明文密码。
 
 9. 域名设置
 

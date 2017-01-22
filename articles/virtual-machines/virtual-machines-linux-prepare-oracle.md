@@ -54,7 +54,8 @@ ms.author: bbenz
 
         # sudo rpm -e --nodeps NetworkManager
 
-    >[!NOTE]如果未安装此包，则该命令将失败，并显示一条错误消息。这是正常情况。
+    >[!NOTE]
+    >如果未安装此包，则该命令将失败，并显示一条错误消息。这是正常情况。
 
 4. 在包含以下文本的 /etc/sysconfig/ 目录中创建一个名为 **network** 的文件：
 

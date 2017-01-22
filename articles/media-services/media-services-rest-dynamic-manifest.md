@@ -38,7 +38,8 @@ ms.author: juliako;cenkdin
 - [PresentationTimeRange](https://docs.microsoft.com/zh-cn/rest/api/media/operations/presentationtimerange)
 - [FilterTrackSelect 和 FilterTrackPropertyCondition](https://docs.microsoft.com/zh-cn/rest/api/media/operations/filtertrackselect)
 
->[!NOTE]<p>使用媒体服务 REST API 时，需注意以下事项：<p>访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。<p>请根据[使用 REST API 连接到媒体服务](./media-services-rest-connect-programmatically.md)中所述对媒体服务 URI 执行后续调用。
+>[!NOTE]
+><p>使用媒体服务 REST API 时，需注意以下事项：<p>访问媒体服务中的实体时，必须在 HTTP 请求中设置特定标头字段和值。有关详细信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。<p>请根据[使用 REST API 连接到媒体服务](./media-services-rest-connect-programmatically.md)中所述对媒体服务 URI 执行后续调用。
 
 ##创建筛选器
 

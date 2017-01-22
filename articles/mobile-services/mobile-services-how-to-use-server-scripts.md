@@ -80,7 +80,8 @@ ms.author: ricksal
 + [Delete][delete function]：`function del (id, user, request) { ... }`
 + [Read][read function]：`function read (query, user, request) { ... }`
 
->[!NOTE]注册到删除操作的函数必须命名为 _del_，因为 delete 是 JavaScript 中的保留关键字。
+>[!NOTE]
+>注册到删除操作的函数必须命名为 _del_，因为 delete 是 JavaScript 中的保留关键字。
 
 每个服务器脚本都有一个主函数，并包含可选的 Helper 函数。即使服务器脚本是为特定表创建的，它也可以引用同一数据库中的其他表。你还可以将公用函数定义为可在脚本之间共享的模块。有关详细信息，请参阅[源代码管理和共享代码][Source control, shared code, and helper functions]。
 
@@ -102,7 +103,8 @@ ms.author: ricksal
 
 + **respond 函数**：已返回自定义响应。
 
-> [!IMPORTANT]如果在脚本的某个代码路径中 **execute** 和 **respond** 均未调用，则该操作可能不返回响应。
+> [!IMPORTANT]
+>如果在脚本的某个代码路径中 **execute** 和 **respond** 均未调用，则该操作可能不返回响应。
 
 以下脚本将调用 **execute** 函数来完成客户端请求的数据操作：
 
@@ -132,7 +134,8 @@ ms.author: ricksal
         request.execute(); 
     }
 
->[!NOTE]在删除脚本中，更改所提供的 userId 变量不会影响所删除的记录。
+>[!NOTE]
+>在删除脚本中，更改所提供的 userId 变量不会影响所删除的记录。
 
 有关更多示例，请参阅[读取和写入数据]、[修改请求]和[验证数据]。
 
@@ -171,7 +174,8 @@ ms.author: ricksal
 
 如果为 **execute** 函数提供了 **success** 处理程序，则还必须在 **success** 处理程序中调用 **respond** 函数，使运行时知道脚本已完成，并且可写入响应。如果在调用 **respond** 时未传递任何参数，则移动服务将生成默认响应。
 
->[!NOTE]只有在先调用 **execute** 函数之后，才能调用不带参数的 **respond** 来调用默认响应。
+>[!NOTE]
+>只有在先调用 **execute** 函数之后，才能调用不带参数的 **respond** 来调用默认响应。
 
 ### <a name="override-error"></a>如何：重写默认错误处理
 
@@ -448,7 +452,8 @@ HTTP GET 请求可按如下所示调用上述自定义 API 示例中的两个路
 
 + 使用 Azure 命令行工具中的命令提示符。有关详细信息，请参阅[使用命令行工具]。
 
->[!NOTE]启用源代码管理后，你可以直接在 git 存储库的 .\\service\\scheduler 子文件夹中编辑计划的作业脚本文件。有关详细信息，请参阅 [如何：使用源代码管理来共享代码]。
+>[!NOTE]
+>启用源代码管理后，你可以直接在 git 存储库的 .\\service\\scheduler 子文件夹中编辑计划的作业脚本文件。有关详细信息，请参阅 [如何：使用源代码管理来共享代码]。
 
 ## <a name="shared-code"></a>源代码管理、共享代码和 Helper 函数
 
@@ -495,11 +500,13 @@ HTTP GET 请求可按如下所示调用上述自定义 API 示例中的两个路
 
 + 对于专用或自定义模块，你可以使用 npm 手动将模块安装到源代码管理的 `.\service\node_modules` 目录中。有关如何手动上载模块的示例，请参阅[在服务器脚本中利用共享代码和 Node.js 模块]。
 
-    >[!NOTE]如果 `node_modules` 已在目录层次结构中存在，NPM 将在该目录中创建 `\node-uuid` 子目录，而不是在存储库中创建一个新的 `node_modules`。在此情况下，你只需删除现有的 `node_modules` 目录即可。
+    >[!NOTE]
+    >如果 `node_modules` 已在目录层次结构中存在，NPM 将在该目录中创建 `\node-uuid` 子目录，而不是在存储库中创建一个新的 `node_modules`。在此情况下，你只需删除现有的 `node_modules` 目录即可。
 
 将 package.json 文件或自定义模块提交到移动服务的存储库后，请使用 **require** 来按名称引用这些模块。
 
->[!NOTE]在 package.json 中指定的模块或者上载到移动服务的模块只会在服务器脚本代码中使用。移动服务运行时不使用这些模块。
+>[!NOTE]
+>在 package.json 中指定的模块或者上载到移动服务的模块只会在服务器脚本代码中使用。移动服务运行时不使用这些模块。
 
 ### <a name="helper-functions"></a>如何：使用 Helper 函数
 
@@ -643,7 +650,8 @@ Helper 函数也可以只定义一次，然后在服务器脚本之间共享。�
 
         var todoItemsTable = request.service.tables.getTable('TodoItem');
 
-> [!NOTE]共享函数不能直接访问 **tables** 对象。在共享函数中，必须将表对象传递给该函数。
+> [!NOTE]
+>共享函数不能直接访问 **tables** 对象。在共享函数中，必须将表对象传递给该函数。
 
 获得 [table 对象]后，可以调用一个或多个表操作函数：insert、update、delete 或 read。以下示例将从 permissions 表中读取用户权限：
 
@@ -900,7 +908,8 @@ Stream|不支持
 
 若要写入日志，请使用全局 [console 对象]。使用 **log** 或 **info** 函数记录信息级警告。**warning** 和 **error** 函数将记录其对应级别，这些级别已在日志中予以标注。
 
-> [!NOTE]若要查看移动服务的日志，请登录到 [Azure 经典管理门户](https://manage.windowsazure.cn/)，选择你的移动服务，然后选择“日志”选项卡。
+> [!NOTE]
+>若要查看移动服务的日志，请登录到 [Azure 经典管理门户](https://manage.windowsazure.cn/)，选择你的移动服务，然后选择“日志”选项卡。
 
 你还可以使用 [console 对象]的日志记录功能通过参数来设置消息格式。以下示例向消息字符串提供了一个参数形式的 JSON 对象：
 

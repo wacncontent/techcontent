@@ -22,7 +22,8 @@ ms.author: sumukhs
 
 Azure Service Fabric 运行时在 settings.xml 文件中查找预定义的节名称，并在创建基础运行时组件时使用这些配置值。
 
->[!NOTE] 请**勿**删除或修改 Visual Studio 解决方案中生成的 settings.xml 文件中的以下配置的节名称。
+>[!NOTE]
+> 请**勿**删除或修改 Visual Studio 解决方案中生成的 settings.xml 文件中的以下配置的节名称。
 
 也有一些全局设置会影响 ReliableDictionaryActorStateProvider 的配置。
 

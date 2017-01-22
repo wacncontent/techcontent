@@ -34,10 +34,12 @@ ms.author: billmath
 - 目前仅支持单林 Exchange 组织部署。如果本地环境中有多个 Exchange 组织，则你需有一个本地 GALSync 解决方案才能让这些组显示在其他林中。
 - 组写回功能当前无法处理安全组或分发组。
 
->[!NOTE] 组写回需要 Azure AD Premium 订阅。
+>[!NOTE]
+> 组写回需要 Azure AD Premium 订阅。
 
 ## <a name="user-writeback"></a>用户写回
-> [!IMPORTANT] Azure AD Connect 的 2015 年 8 月更新版中删除了用户写回预览版功能。如果你已启用此功能，现在应将它禁用。
+> [!IMPORTANT]
+> Azure AD Connect 的 2015 年 8 月更新版中删除了用户写回预览版功能。如果你已启用此功能，现在应将它禁用。
 
 ## 后续步骤
 配置 [Azure AD Connect 的自定义安装](./active-directory-aadconnect-get-started-custom.md)。

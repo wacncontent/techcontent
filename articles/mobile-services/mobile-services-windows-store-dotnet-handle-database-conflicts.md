@@ -112,7 +112,8 @@ ms.author: wesmc
             public string Version { set; get; }
         }
 
-    > [!NOTE]使用非类型表时，请通过将 Version 标志添加到表的 SystemProperties 来启用乐观并发。
+    > [!NOTE]
+    >使用非类型表时，请通过将 Version 标志添加到表的 SystemProperties 来启用乐观并发。
     >
     >`````
     >//Enable optimistic concurrency by retrieving __version

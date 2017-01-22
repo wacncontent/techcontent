@@ -90,12 +90,14 @@ MongoDB 为 Red Hat/CentOS、SUSE、Ubuntu 和 Debian 等 Linux 分发版[提供
 
 以下示例在 `ChinaNorth` 区域中创建名为 `myResourceGroup` 的资源组。按如下所示输入自己的值：
 
->[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
     azure group create --name myResourceGroup --location ChinaNorth \
         --template-file /path/to/azuredeploy.json
 
-> [!NOTE] 创建部署后的几秒内，Azure CLI 会返回到提示符，但安装和配置需要几分钟才能完成。使用 `azure group deployment show myResourceGroup` 检查部署状态，并相应地输入资源组的名称。等到 `ProvisioningState` 显示“成功”，然后尝试通过 SSH 连接到 VM。
+> [!NOTE]
+> 创建部署后的几秒内，Azure CLI 会返回到提示符，但安装和配置需要几分钟才能完成。使用 `azure group deployment show myResourceGroup` 检查部署状态，并相应地输入资源组的名称。等到 `ProvisioningState` 显示“成功”，然后尝试通过 SSH 连接到 VM。
 
 完成部署后，通过 SSH 连接到 VM。按以下示例中所示，使用 `azure vm show` 命令获取 VM 的 IP 地址：
 
@@ -123,16 +125,19 @@ MongoDB 为 Red Hat/CentOS、SUSE、Ubuntu 和 Debian 等 Linux 分发版[提供
 
 - [CentOS 上的 MongoDB 分片群集](https://github.com/Azure/azure-quickstart-templates/tree/master/mongodb-sharding-centos) - https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/mongodb-sharding-centos/azuredeploy.json
 
-> [!WARNING] 部署这种复杂 MongoDB 分片群集需要 20 个以上的核心（每个区域中一个订阅的默认核心计数通常为 20 个）。请提出 Azure 支持请求，以增加核心计数。
+> [!WARNING]
+> 部署这种复杂 MongoDB 分片群集需要 20 个以上的核心（每个区域中一个订阅的默认核心计数通常为 20 个）。请提出 Azure 支持请求，以增加核心计数。
 
 以下示例在 `ChinaNorth` 区域中创建名为 `myResourceGroup` 的资源组。按如下所示输入自己的值：
 
->[!NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
     azure group create --name myResourceGroup --location ChinaNorth \
         --template-file /path/to/azuredeploy.json
 
-> [!NOTE] 创建部署后的几秒内，Azure CLI 会返回到提示符，但安装和配置可能需要一小时以上才能完成。使用 `azure group deployment show myResourceGroup` 检查部署状态，并相应地调整资源组的名称。等到 `ProvisioningState` 显示“成功”，然后连接到 VM。
+> [!NOTE]
+> 创建部署后的几秒内，Azure CLI 会返回到提示符，但安装和配置可能需要一小时以上才能完成。使用 `azure group deployment show myResourceGroup` 检查部署状态，并相应地调整资源组的名称。等到 `ProvisioningState` 显示“成功”，然后连接到 VM。
 
 ## 后续步骤
 在上述示例中，你已在本地从 VM 连接到 MongoDB 实例。如果想要从另一个 VM 或网络连接到 MongoDB 实例，请确保[创建相应的网络安全组规则](./virtual-machines-linux-nsg-quickstart.md)。

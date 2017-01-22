@@ -73,7 +73,8 @@ HDInsight 群集附带了某些示例数据。以后会用到以下两个示例�
 4. 如果选择为数据库创建新的 SQL 数据库服务器，请单击“下一步”。如果选择现有服务，请确保它满足[以下条件](#sql_server_condition)，然后单击“完成”。
 5. 输入登录用户名和密码，然后为 SQL Server 选择区域（如果选择创建新服务器）。
 
-> [!NOTE] SQl Server 的资源组名称是“Default-Sql-chinaeast”或“Default-Sql-chinanorth”，具体取决于 SQL Server 的区域。
+> [!NOTE]
+> SQl Server 的资源组名称是“Default-Sql-chinaeast”或“Default-Sql-chinanorth”，具体取决于 SQL Server 的区域。
 
 在 [Azure 经典管理门户](https://manage.windowsazure.cn)上创建群集。
 
@@ -86,25 +87,29 @@ HDInsight 群集附带了某些示例数据。以后会用到以下两个示例�
 
 - **Azure SQL 数据库**：必须为 Azure SQL 数据库服务器配置防火墙规则，允许从工作站进行访问。有关创建 Azure SQL 数据库和配置防火墙的说明，请参阅 [Azure SQL 数据库入门][sqldatabase-get-started]。 
 
-    > [!NOTE] 默认情况下，可以从 Azure HDInsight 这样的 Azure 服务连接 Azure SQL 数据库。如果禁用了此防火墙设置，则必须从 Azure 经典管理门户启用。有关创建 Azure SQL 数据库和配置防火墙规则的说明，请参阅[创建和配置 SQL 数据库][sqldatabase-create-configue]。
+    > [!NOTE]
+    > 默认情况下，可以从 Azure HDInsight 这样的 Azure 服务连接 Azure SQL 数据库。如果禁用了此防火墙设置，则必须从 Azure 经典管理门户启用。有关创建 Azure SQL 数据库和配置防火墙规则的说明，请参阅[创建和配置 SQL 数据库][sqldatabase-create-configue]。
 
     <a name="sql_server_condition"></a>
 
 - **SQL Server**：如果 HDInsight 群集与 SQL Server 位于 Azure 中的同一虚拟网络，则可以使用本文中的步骤将数据导入或导出 SQL Server 数据库。
 
-    > [!NOTE] HDInsight 仅支持基于位置的虚拟网络，并且当前不适用于基于地缘组的虚拟网络。
+    > [!NOTE]
+    > HDInsight 仅支持基于位置的虚拟网络，并且当前不适用于基于地缘组的虚拟网络。
 
     * 若要创建和配置虚拟网络，请参阅[虚拟网络配置任务](https://www.azure.cn/home/features/virtual-machines/)。
 
         * 在数据中心使用 SQL Server 时，必须将虚拟网络配置为*站点到站点*或*点到站点*。
 
-            > [!NOTE] 对于**点到站点**虚拟网络，SQL Server 必须运行 VPN 客户端配置应用程序，该应用程序可从 Azure 虚拟网络配置的“仪表板”中获得。
+            > [!NOTE]
+            > 对于**点到站点**虚拟网络，SQL Server 必须运行 VPN 客户端配置应用程序，该应用程序可从 Azure 虚拟网络配置的“仪表板”中获得。
 
         * 在 Azure 虚拟机上使用 SQL Server 时，如果托管 SQL Server 的虚拟机是 HDInsight 所在虚拟网络的成员，则可以使用任何虚拟网络配置。
 
     * 若要在虚拟网络上创建 HDInsight 群集，请参阅[使用自定义选项在 HDInsight 中创建 Hadoop 群集](./hdinsight-provision-clusters-v1.md)
 
-    > [!NOTE] SQL Server 还必须允许身份验证。必须使用 SQL Server 登录名来完成本文中的步骤。
+    > [!NOTE]
+    > SQL Server 还必须允许身份验证。必须使用 SQL Server 登录名来完成本文中的步骤。
 
 ## 运行 Sqoop 作业
 
@@ -178,7 +183,8 @@ PowerShell 示例将执行以下步骤：
 
     源文件为 tutorials/usesqoop/data/sample.log。数据导出到的表的名称为 log4jlogs。
 
-    > [!NOTE] 除了连接字符串信息，此部分中的步骤还应适用于 Azure SQL 数据库或 SQL Server。这些步骤已经过以下配置测试：
+    > [!NOTE]
+    > 除了连接字符串信息，此部分中的步骤还应适用于 Azure SQL 数据库或 SQL Server。这些步骤已经过以下配置测试：
     ><p> * **Azure 虚拟网络点到站点配置**：虚拟网络已将 HDInsight 群集连接到专用数据中心的 SQL Server。
     ><p> * **Azure HDInsight 3.1**：有关在虚拟网络上创建群集的信息，请参阅[使用自定义选项在 HDInsight 中创建 Hadoop 群集](./hdinsight-provision-clusters-v1.md)。
     ><p> * **SQL Server 2014**：已配置为允许身份验证和运行 VPN 客户端配置包，可以安全地连接到虚拟网络。

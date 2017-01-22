@@ -35,7 +35,8 @@ ms.author: billmath
 
 ### 从 Office 365 门户或电子邮件续订通知
 
->[!NOTE] 如果你收到电子邮件或门户通知，要求你续订 Office 证书，请参阅[管理对令牌签名证书的更改](#managecerts)，检查是否需要采取任何操作。Microsoft 已知可能有问题会导致发送证书续订通知，即使并不需要用户采取任何操作。
+>[!NOTE]
+> 如果你收到电子邮件或门户通知，要求你续订 Office 证书，请参阅[管理对令牌签名证书的更改](#managecerts)，检查是否需要采取任何操作。Microsoft 已知可能有问题会导致发送证书续订通知，即使并不需要用户采取任何操作。
 
 Azure AD 将尝试监视联合元数据，并按照此元数据的指示更新令牌签名证书。在令牌签名证书过期前 30 天，Azure AD 会通过轮询联合元数据，检查是否已有新的证书。
 
@@ -44,7 +45,8 @@ Azure AD 将尝试监视联合元数据，并按照此元数据的指示更新�
 
 ![Office 365 门户通知](./media/active-directory-aadconnect-o365-certs/notification.png)  
 
->[!IMPORTANT] 如果使用 AD FS，为确保业务连续性，请确认服务器具有以下更新，以免因已知问题而导致身份验证失败。这可以减少在此续订期间和未来续订期间出现已知的 AD FS 代理服务器问题：
+>[!IMPORTANT]
+> 如果使用 AD FS，为确保业务连续性，请确认服务器具有以下更新，以免因已知问题而导致身份验证失败。这可以减少在此续订期间和未来续订期间出现已知的 AD FS 代理服务器问题：
 >
 >Server 2012 R2 — [Windows Server 2014 年 5 月汇总](http://support.microsoft.com/zh-cn/kb/2955164)
 >
@@ -60,13 +62,15 @@ Azure AD 将尝试监视联合元数据，并按照此元数据的指示更新�
 
 ![AutoCertificateRollover](./media/active-directory-aadconnect-o365-certs/autocertrollover.png)
 
-[!NOTE] 如果你使用的是 AD FS 2.0，请先运行 Add-Pssnapin Microsoft.Adfs.Powershell。
+>[!NOTE]
+> 如果你使用的是 AD FS 2.0，请先运行 Add-Pssnapin Microsoft.Adfs.Powershell。
 
 ### 步骤 2：确认 AD FS 和 Azure AD 已同步
 
 在 AD FS 服务器上打开 Azure AD PowerShell 提示符，并连接到 Azure AD。
 
->[!NOTE] 可在[此处](https://technet.microsoft.com/zh-cn/library/jj151815.aspx)下载 Azure AD PowerShell。
+>[!NOTE]
+> 可在[此处](https://technet.microsoft.com/zh-cn/library/jj151815.aspx)下载 Azure AD PowerShell。
 
     Connect-MsolService
 
@@ -132,7 +136,8 @@ https://(your_FS_name)/federationmetadata/2007-06/federationmetadata.xml
 
     PS C:\>Get-ADFSCertificate -CertificateType token-signing
 
-    >[!NOTE] 如果你使用的是 AD FS 2.0，应该先运行 Add-Pssnapin Microsoft.Adfs.Powershell。
+    >[!NOTE]
+    > 如果你使用的是 AD FS 2.0，应该先运行 Add-Pssnapin Microsoft.Adfs.Powershell。
 
 3. 查看命令输出中是否存在任何已列出的证书。如果 AD FS 已生成新证书，你应该会在输出中看到两个证书：一个证书的 **IsPrimary** 值为 **True**，**NotAfter** 日期为 5 天内；另一个证书的 **IsPrimary** 为 **False**，**NotAfter** 大约为未来的 1 年。
 
@@ -154,7 +159,8 @@ https://(your_FS_name)/federationmetadata/2007-06/federationmetadata.xml
 4. 如果你在并非用作 AD FS 主联合服务器的计算机上运行这些命令，请运行 Set-MSOLAdfscontext -Computer <AD FS primary server>，其中 <AD FS primary server> 是主 AD FS 服务器的内部 FQDN 名称。此 cmdlet 生成将你连接到 AD FS 的上下文。
 5. 运行 Update-MSOLFederatedDomain -DomainName <domain>。此 cmdlet 会将 AD FS 中的设置更新到云服务中，并配置两者之间的信任关系。
 
->[!NOTE] 如果你需要支持多个顶级域（例如 contoso.com 和 fabrikam.com），则必须将 SupportMultipleDomain 开关用于任何 cmdlet。
+>[!NOTE]
+> 如果你需要支持多个顶级域（例如 contoso.com 和 fabrikam.com），则必须将 SupportMultipleDomain 开关用于任何 cmdlet。
 
 ## <a name="connectrenew"></a>使用 Azure AD Connect 修复 Azure AD 信任 
 

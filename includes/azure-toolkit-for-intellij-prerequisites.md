@@ -14,7 +14,8 @@
 
 可以在 JetBrains Plugin Repository 的 [Azure Toolkit for Eclipse](https://plugins.jetbrains.com/plugin/8053) 页面中找到详细信息。
 
-> [!IMPORTANT] 如果要在 Windows 上使用 Azure Toolkit for IntelliJ，则运行该工具包需要安装 Azure SDK 2.9.1 或更高版本。安装 Azure SDK 有两个选项：
+> [!IMPORTANT]
+> 如果要在 Windows 上使用 Azure Toolkit for IntelliJ，则运行该工具包需要安装 Azure SDK 2.9.1 或更高版本。安装 Azure SDK 有两个选项：
 > 
 > * 可以通过使用 Web 平台安装程序 (WebPI) 下载并安装 Azure SDK。
 > * 如果创建第一个 Azure 部署项目时尚未安装 Azure SDK，则会提示你自动下载和安装所需版本的 Azure SDK。

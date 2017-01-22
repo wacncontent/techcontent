@@ -53,7 +53,8 @@ ms.author: syamk
 - [azure.cn](/downloads/) 上提供 Azure Python SDK for Visual Studio 2.4 版本或更高版本。我们使用的是 Azure SDK for Python 2.7。
 - 来自 [python.org][2] 的 Python 2.7。我们使用的是 Python 2.7.11。
 
-> [!IMPORTANT] 如果首次安装 Python 2.7，请确保在自定义 Python 2.7.11 屏幕中，选择“向路径添加 python.exe”。
+> [!IMPORTANT]
+> 如果首次安装 Python 2.7，请确保在自定义 Python 2.7.11 屏幕中，选择“向路径添加 python.exe”。
 > 
 > ![自定义 Python 2.7.11 屏幕的屏幕截图，你需要在该屏幕中选择“向路径添加 python.exe”](./media/documentdb-python-application/image2.png)
 
@@ -113,7 +114,8 @@ ms.author: syamk
 
         Successfully installed Babel-2.3.2 Tempita-0.5.2 WTForms-2.1 Whoosh-2.7.4 blinker-1.4 decorator-4.0.9 flask-0.9 flask-babel-0.8 flask-mail-0.7.6 flask-sqlalchemy-0.16 flask-whooshalchemy-0.55a0 flask-wtf-0.8.4 flup-1.0.2 pydocumentdb-1.6.1 pytz-2013b0 speaklater-1.3 sqlalchemy-0.7.9 sqlalchemy-migrate-0.7.2
 
-    > [!NOTE] 在相当少见的情况下，你可能会在输出窗口中看到失败。如果出现此情况，请检查错误是否与清理相关。有时候清理会失败，但安装仍是成功的（在输出窗口中向上滚动以确认这一点）。可以通过[验证虚拟环境](#verify-the-virtual-environment)来检查安装。如果安装失败，但验证成功，则可以继续操作。
+    > [!NOTE]
+    > 在相当少见的情况下，你可能会在输出窗口中看到失败。如果出现此情况，请检查错误是否与清理相关。有时候清理会失败，但安装仍是成功的（在输出窗口中向上滚动以确认这一点）。可以通过[验证虚拟环境](#verify-the-virtual-environment)来检查安装。如果安装失败，但验证成功，则可以继续操作。
 
 ### 验证虚拟环境  <a name="verify-the-virtual-environment"></a>
 
@@ -190,7 +192,8 @@ ms.author: syamk
                 year=datetime.now().year,
                 message='You just created a new database, collection, and document.  Your old votes have been deleted')
 
-    > [!TIP] **CreateCollection** 方法采用可选的 **RequestOptions** 作为第三个参数。这可以用于指定集合的产品/服务类型。如果没有提供任何 offerType 值，则将使用默认的产品/服务类型创建集合。有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 中的性能级别](./documentdb-performance-levels.md)。
+    > [!TIP]
+    > **CreateCollection** 方法采用可选的 **RequestOptions** 作为第三个参数。这可以用于指定集合的产品/服务类型。如果没有提供任何 offerType 值，则将使用默认的产品/服务类型创建集合。有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 中的性能级别](./documentdb-performance-levels.md)。
 
 ### 读取数据库、集合、文档，并提交窗体
 - 还是在 **views.py** 中，将以下代码添加到文件末尾。这将设置窗体、读取数据库、集合和文档。不要删除 **views.py** 中任何现有的代码。仅将其追加到末尾。

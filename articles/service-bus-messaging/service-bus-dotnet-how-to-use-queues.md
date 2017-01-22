@@ -127,7 +127,8 @@ wacn.date: 01/04/2017
             namespaceManager.CreateQueue(qd);
         }
 
-> [!NOTE]你可以对 [NamespaceManager][] 对象使用 [QueueExists](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.queueexists.aspx) 方法，以检查具有指定名称的队列是否已存在于某个服务命名空间中。
+> [!NOTE]
+>你可以对 [NamespaceManager][] 对象使用 [QueueExists](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.queueexists.aspx) 方法，以检查具有指定名称的队列是否已存在于某个服务命名空间中。
 
 ## 向队列发送消息
 

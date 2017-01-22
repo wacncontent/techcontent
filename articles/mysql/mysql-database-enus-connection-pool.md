@@ -37,7 +37,8 @@ Database connection pooling handles the creation, management, and allocation of 
 
 For your reference, see this [piece of sample code that uses Java as an example](http://wacnstorage.blob.core.chinacloudapi.cn/marketing-resource/documents/MySQLConnectionPool.java). And for more information, see the [Apache common DBCP](http://commons.apache.org/proper/commons-dbcp/).
 
->[!NOTE]**The server configures a timeout mechanism, closing a connection that has been in an idle state for some time, in order to free up resources. Be sure to set up the authentication system to ensure the effectiveness of persistent connections when you are using them. For more information, see: [How to configure authentication systems on the client side to ensure the effectiveness of persistent connections.](./mysql-database-validationquery.md)**
+>[!NOTE]
+>**The server configures a timeout mechanism, closing a connection that has been in an idle state for some time, in order to free up resources. Be sure to set up the authentication system to ensure the effectiveness of persistent connections when you are using them. For more information, see: [How to configure authentication systems on the client side to ensure the effectiveness of persistent connections.](./mysql-database-validationquery.md)**
 
 ## Access databases that use persistent connections (recommended)##
 Use persistent connections in PHP. The concept of persistent connections is similar to that of connection pooling. It is important to note that PHP currently has three types of drivers. While the MySQLi driver type does not support persistent connection, the other two types of drivers do.

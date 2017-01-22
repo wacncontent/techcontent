@@ -37,7 +37,8 @@
 
     这可以防止在对用户进行身份验证之前加载数据。
 
-    >[!NOTE]若要成功地从 Windows Phone Store 8.1 应用进行身份验证，你必须在调用 **OnNavigated** 方法以及引发页面的 **Loaded** 事件之后调用 LoginAsync。在本教程中，这是通过将“登录”按钮添加到此应用而完成的。
+    >[!NOTE]
+    >若要成功地从 Windows Phone Store 8.1 应用进行身份验证，你必须在调用 **OnNavigated** 方法以及引发页面的 **Loaded** 事件之后调用 LoginAsync。在本教程中，这是通过将“登录”按钮添加到此应用而完成的。
 
 4. 将以下代码段添加到 MainPage 类：
 

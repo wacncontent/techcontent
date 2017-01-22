@@ -42,7 +42,8 @@ ms.author: anithaa
 
 本文说明如何使用 Azure Resource Manager 部署模型中的有效路由功能确定连接失败的原因。尽管本示例只使用系统路由，但可以使用相同的步骤判断任何路由类型的入站和出站连接失败情况。
 
->[!NOTE] 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
+>[!NOTE]
+> 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
 
 ### 查看虚拟机的有效路由
 
@@ -67,7 +68,8 @@ ms.author: anithaa
 
     如果 VM 只有一个 NIC，则默认已选择该 NIC。如果有多个 NIC，请选择要查看其有效路由的 NIC。
 
-    >[!NOTE] 如果与 NIC 关联的 VM 不处于运行中状态，将不显示有效路由。门户中只显示前 200 个有效路由。如需完整列表，请单击“下载”。可以在下载的 .csv 文件中进一步筛选结果。
+    >[!NOTE]
+    > 如果与 NIC 关联的 VM 不处于运行中状态，将不显示有效路由。门户中只显示前 200 个有效路由。如需完整列表，请单击“下载”。可以在下载的 .csv 文件中进一步筛选结果。
 
     请注意输出中的以下信息：
     - **Source**：表示路由的类型。系统路由显示为 *Default*，UDR 显示为 *User*，网关路由（静态或 BGP）显示为 *VPNGateway*。
@@ -124,7 +126,8 @@ ms.author: anithaa
 
     ![](./media/virtual-network-routes-troubleshoot-portal/image10.png)  
 
-    >[!NOTE] 如果 NIC 没有与运行中的 VM 关联，则不会显示任何有效路由。
+    >[!NOTE]
+    > 如果 NIC 没有与运行中的 VM 关联，则不会显示任何有效路由。
 
 ## <a name="Considerations"></a>注意事项
 

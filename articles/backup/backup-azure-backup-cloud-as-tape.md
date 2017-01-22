@@ -60,7 +60,8 @@ Azure 备份和 System Center Data Protection Manager 客户可以：
 
 恢复点总数为 56。
 
-> [!NOTE] Azure 备份对恢复点的数量没有限制。
+> [!NOTE]
+> Azure 备份对恢复点的数量没有限制。
 
 ## 高级配置
 通过单击上述屏幕中的“修改”，客户可以进一步灵活指定保留计划。

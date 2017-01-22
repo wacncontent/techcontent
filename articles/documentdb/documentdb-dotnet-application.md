@@ -309,7 +309,8 @@ ms.author: syamk
             }
         }
 
-    > [!TIP] 创建新的 DocumentCollection 时，你可以提供 OfferType 的可选 RequestOptions 参数，此参数可让你指定新集合的性能级别。如果未传递此参数，系统将使用默认的产品/服务类型。有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 性能级别](./documentdb-performance-levels.md)
+    > [!TIP]
+    > 创建新的 DocumentCollection 时，你可以提供 OfferType 的可选 RequestOptions 参数，此参数可让你指定新集合的性能级别。如果未传递此参数，系统将使用默认的产品/服务类型。有关 DocumentDB 产品/服务类型的详细信息，请参阅 [DocumentDB 性能级别](./documentdb-performance-levels.md)
 
 3. 我们打算从配置中读取部分值，因此请打开应用程序的 **Web.config** 文件，并在 `<AppSettings>` 节下面添加下列几行。
 

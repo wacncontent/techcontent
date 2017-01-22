@@ -30,7 +30,8 @@ Azure 高级存储为运行 I/O 密集型工作负荷的虚拟机提供高性能
 
 可将其他平台中的 VM 迁移到 Azure 高级存储，或将现有 Azure VM 从标准存储迁移到高级存储。本指南介绍了这两种方案的相关步骤。根据具体方案，执行相关部分中指定的步骤。
 
-> [!NOTE]有关高级存储的功能概述和定价信息，可参阅高级存储：[适用于 Azure 虚拟机工作负荷的高性能存储](./storage-premium-storage.md)。建议将任何需要高 IOPS 的虚拟机磁盘迁移到 Azure 高级存储，以便应用程序实现最佳性能。如果磁盘不需要高 IOPS，可以通过在标准存储（将虚拟机磁盘数据存储在硬盘驱动器 (HDD) 上而不是 SSD 上）中对其进行维护来限制成本。
+> [!NOTE]
+>有关高级存储的功能概述和定价信息，可参阅高级存储：[适用于 Azure 虚拟机工作负荷的高性能存储](./storage-premium-storage.md)。建议将任何需要高 IOPS 的虚拟机磁盘迁移到 Azure 高级存储，以便应用程序实现最佳性能。如果磁盘不需要高 IOPS，可以通过在标准存储（将虚拟机磁盘数据存储在硬盘驱动器 (HDD) 上而不是 SSD 上）中对其进行维护来限制成本。
 
 完成整个迁移过程可能需要在执行本指南中提供的步骤前后执行其他操作。示例包括配置虚拟网络/终结点，或在应用程序内部更改代码，后者可能需要停止应用程序一段时间。这些操作特定于每个应用程序，应根据本指南中的步骤完成操作，尽可能无缝地完全转换到高级存储。
 
@@ -93,7 +94,8 @@ Azure VM 可附加多个高级存储磁盘，使应用程序可具有每个 VM �
 * 用于通用化 VHD 的工具（如果计划从中创建多个 VM 实例）。例如，sysprep for Windows 或 virt-sysprep for Ubuntu。
 * 用于将 VHD 文件上传到存储帐户的工具。请参阅[使用 AzCopy 命令行实用程序传输数据](./storage-use-azcopy.md)或者使用 [Azure 存储资源管理器](http://blogs.msdn.com/b/windowsazurestorage/archive/2014/03/11/windows-azure-storage-explorers-2014.aspx)。本指南介绍使用 AzCopy 工具复制 VHD 的步骤。
 
-> [!NOTE] 如果选择基于 AzCopy 的同步复制选项，为了获得最佳性能，请通过目标存储帐户所在区域中的 Azure VM 运行上述某个工具，进而复制 VHD。如果从其他区域中的 Azure VM 复制 VHD，性能可能会下降。
+> [!NOTE]
+> 如果选择基于 AzCopy 的同步复制选项，为了获得最佳性能，请通过目标存储帐户所在区域中的 Azure VM 运行上述某个工具，进而复制 VHD。如果从其他区域中的 Azure VM 复制 VHD，性能可能会下降。
 >
 > 若要在带宽有限的情况下复制大量数据，可以考虑将硬盘驱动器传送到 Azure 数据中心，以便使用 Azure 导入/导出服务来传输数据。使用 Azure 导入/导出服务可以仅将数据复制到标准存储帐户。当数据传入标准存储帐户后，可以使用[复制 Blob API](https://msdn.microsoft.com/zh-cn/library/azure/dd894037.aspx) 或 AzCopy 将数据传输到高级存储帐户。
 >
@@ -116,7 +118,8 @@ VM 必须完全关闭才能干净迁移。在迁移完成之前将会存在停�
 ##### 使用通用的操作系统 VHD 创建多个 VM 实例
 如果要上传将用于创建多个泛型 Azure 虚拟机实例的 VHD，必须先使用 sysprep 实用工具通用化 VHD。这适用于本地或云中的 VHD。Sysprep 将从 VHD 中删除计算机特定的所有信息。
 
->[!IMPORTANT] 通用化 VM 之前，请先创建其快照或进行备份。运行 sysprep 将停止并释放 VM 实例。按照以下步骤对 Windows OS VHD 运行 sysprep 命令。请注意，运行 Sysprep 命令时将要求关闭虚拟机。有关 Sysprep 的详细信息，请参阅 [Sysprep 概述](http://technet.microsoft.com/zh-cn/library/hh825209.aspx)或 [Sysprep 技术参考](http://technet.microsoft.com/zh-cn/library/cc766049.aspx)。
+>[!IMPORTANT]
+> 通用化 VM 之前，请先创建其快照或进行备份。运行 sysprep 将停止并释放 VM 实例。按照以下步骤对 Windows OS VHD 运行 sysprep 命令。请注意，运行 Sysprep 命令时将要求关闭虚拟机。有关 Sysprep 的详细信息，请参阅 [Sysprep 概述](http://technet.microsoft.com/zh-cn/library/hh825209.aspx)或 [Sysprep 技术参考](http://technet.microsoft.com/zh-cn/library/cc766049.aspx)。
 
 1. 以管理员身份打开“命令提示符”窗口。
 2. 输入以下命令打开 Sysprep：
@@ -260,7 +263,8 @@ VM 必须完全关闭才能干净迁移。在迁移完成之前将会存在停�
 * [Azure 存储资源管理器上传 Blob](https://azurestorageexplorer.codeplex.com/)
 - [存储导入/导出服务 REST API 参考](https://msdn.microsoft.com/zh-CN/library/dn529096.aspx)
 
->[!NOTE]如果预估上传时间大于 7 天，建议使用导入/导出服务。可根据数据大小和传输单位，利用 [DataTransferSpeedCalculator](https://github.com/Azure-Samples/storage-dotnet-import-export-job-management/blob/master/DataTransferSpeedCalculator.html) 预估时间。导入/导出可用于复制到标准存储帐户。需要使用 AzCopy 等工具从标准存储复制到高级存储帐户。
+>[!NOTE]
+>如果预估上传时间大于 7 天，建议使用导入/导出服务。可根据数据大小和传输单位，利用 [DataTransferSpeedCalculator](https://github.com/Azure-Samples/storage-dotnet-import-export-job-management/blob/master/DataTransferSpeedCalculator.html) 预估时间。导入/导出可用于复制到标准存储帐户。需要使用 AzCopy 等工具从标准存储复制到高级存储帐户。
 
 ## <a name="create-azure-virtual-machine-using-premium-storage"></a>使用高级存储创建 Azure VM
 将 VHD 上传或复制到所需的存储帐户后，请按照本部分中的说明将 VHD 注册为 OS 映像或 OS 磁盘（具体取决于方案），然后从中创建 VM 实例。在创建后，可以将数据磁盘 VHD 附加到 VM。本部分末尾提供了一个示例迁移脚本。此简单脚本不符合任意方案。可能需要更新该脚本以与特定方案相匹配。若要查看此脚本是否适用于用户方案，请参阅下面的[示例迁移脚本](#a-sample-migration-script)。
@@ -275,7 +279,8 @@ VM 必须完全关闭才能干净迁移。在迁移完成之前将会存在停�
 
 让应用程序做好停机准备。为了执行干净的迁移，必须停止当前系统中的所有处理。只有这样才能使其处于一致状态，可以将该状态迁移到新的平台。停机持续时间将取决于要迁移的磁盘中的数据量。
 
-> [!NOTE]如果要通过专用 VHD 磁盘创建 Azure Resource Manager VM，请参阅 [此模板](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-from-specialized-vhd)，了解如何使用现有磁盘部署 Resource Manager VM。
+> [!NOTE]
+>如果要通过专用 VHD 磁盘创建 Azure Resource Manager VM，请参阅 [此模板](https://github.com/Azure/azure-quickstart-templates/tree/master/201-vm-from-specialized-vhd)，了解如何使用现有磁盘部署 Resource Manager VM。
 
 ### 注册 VHD
 若要从 OS VHD 创建 VM 或将数据磁盘附加到新的 VM，必须先注册它们。请按以下步骤操作，具体取决于 VHD 方案。
@@ -306,7 +311,8 @@ VM 必须完全关闭才能干净迁移。在迁移完成之前将会存在停�
 ### 创建支持高级存储的 VM
 注册 OS 映像或 OS 磁盘后，请创建新的 DS 系列 VM。将使用注册的操作系统映像或操作系统磁盘名称。从高级存储层选择 VM 类型。在以下示例中，我们将使用 *Standard\_DS2* VM 大小。
 
->[!NOTE] 更新磁盘大小，以确保它满足容量、性能要求和可用的 Azure 磁盘大小。
+>[!NOTE]
+> 更新磁盘大小，以确保它满足容量、性能要求和可用的 Azure 磁盘大小。
 
 逐步执行以下 PowerShell cmdlet 创建新的 VM。首先，设置公共参数：
 
@@ -357,7 +363,8 @@ VM 必须完全关闭才能干净迁移。在迁移完成之前将会存在停�
 
     Update-AzureVM  -VM $vm
 
-> [!NOTE]本指南可能未涵盖支持应用程序所要执行的其他步骤。
+> [!NOTE]
+>本指南可能未涵盖支持应用程序所要执行的其他步骤。
 
 ### 检查和计划备份
 启动并运行新的 VM 后，使用与原始 VM 相同的登录 ID 和密码访问它，并验证所有功能是否按预期正常工作。所有设置（包括带区卷）都会出现在新的 VM 中。
@@ -374,7 +381,8 @@ VM 必须完全关闭才能干净迁移。在迁移完成之前将会存在停�
 
 下面提供的是自动化脚本。将文本替换为用户信息，并更新脚本以匹配特定方案。
 
-> [!NOTE]使用现有脚本不会保留源 VM 的网络配置。将需要在迁移后的 VM 上重新配置网络设置。
+> [!NOTE]
+>使用现有脚本不会保留源 VM 的网络配置。将需要在迁移后的 VM 上重新配置网络设置。
 
         <#
         .Synopsis

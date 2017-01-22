@@ -37,7 +37,8 @@ ms.author: ganesr
 - 在开始配置之前，请务必查看[先决条件](./expressroute-prerequisites.md)页、[路由要求](./expressroute-routing.md)页和[工作流](./expressroute-workflows.md)页。
 - 你必须有一个活动的 ExpressRoute 线路。在继续下一步之前，请按说明[创建 ExpressRoute 线路](./expressroute-howto-circuit-classic.md)，并通过连接提供商启用该线路。ExpressRoute 线路必须处于已预配和已启用状态，你才能运行下述 cmdlet。
 
->[!IMPORTANT] 这些说明只适用于由提供第 2 层连接服务的服务提供商创建的线路。如果你的服务提供商提供第 3 层托管服务（通常是 IPVPN，如 MPLS），则连接服务提供商将为你设置和管理路由。
+>[!IMPORTANT]
+> 这些说明只适用于由提供第 2 层连接服务的服务提供商创建的线路。如果你的服务提供商提供第 3 层托管服务（通常是 IPVPN，如 MPLS），则连接服务提供商将为你设置和管理路由。
 
 你可以为 ExpressRoute 线路配置一到两个对等互连（Azure 专用和Azure 公共）。可以按照所选的任意顺序配置对等互连。但是，你必须确保一次只完成一个对等互连的配置。
 
@@ -96,7 +97,8 @@ ms.author: ganesr
 
         New-AzureBGPPeering -AccessType Private -ServiceKey "*********************************" -PrimaryPeerSubnet "10.0.0.0/30" -SecondaryPeerSubnet "10.0.0.4/30" -PeerAsn 1234 -VlanId 100 -SharedKey "A1B2C3D4"
 
-    >[!IMPORTANT]请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
+    >[!IMPORTANT]
+    >请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
 
 ### 查看 Azure 专用对等互连详细信息
 
@@ -127,7 +129,8 @@ ms.author: ganesr
 
 可以运行以下 cmdlet 来删除对等互连配置。
 
->[!WARNING]运行此 cmdlet 之前，必须确保已从 ExpressRoute 线路取消链接所有虚拟网络。
+>[!WARNING]
+>运行此 cmdlet 之前，必须确保已从 ExpressRoute 线路取消链接所有虚拟网络。
 
     Remove-AzureBGPPeering -AccessType Private -ServiceKey "*********************************"
 
@@ -186,7 +189,8 @@ ms.author: ganesr
 
         New-AzureBGPPeering -AccessType Public -ServiceKey "*********************************" -PrimaryPeerSubnet "131.107.0.0/30" -SecondaryPeerSubnet "131.107.0.4/30" -PeerAsn 1234 -VlanId 200 -SharedKey "A1B2C3D4"
 
-    >[!IMPORTANT]请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
+    >[!IMPORTANT]
+    >请确保将 AS 编号指定为对等互连 ASN 而不是客户 ASN。
 
 ### 查看 Azure 公共对等互连详细信息
 

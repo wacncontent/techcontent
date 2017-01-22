@@ -97,7 +97,8 @@ ASR 让故障转移变为可能，第一步是将指定的虚拟机从主要数�
         $ip = Get-SCIPAddress -GrantToObjectID $na[0].id
         $ip.address  
 
->[!NOTE] 在虚拟机使用 DHCP 的方案中，IP 地址的管理完全在 ASR 控制范围之外。管理员必须确保提供恢复站点上 IP 地址的 DHCP 服务器可以从与主站点相同的范围中提供地址。
+>[!NOTE]
+> 在虚拟机使用 DHCP 的方案中，IP 地址的管理完全在 ASR 控制范围之外。管理员必须确保提供恢复站点上 IP 地址的 DHCP 服务器可以从与主站点相同的范围中提供地址。
 
 ####<a name="failover-to-azure"></a> 故障转移到 Azure
 

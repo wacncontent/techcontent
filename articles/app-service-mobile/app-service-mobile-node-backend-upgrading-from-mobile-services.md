@@ -29,7 +29,8 @@ ms.author: adrianha
 
 [!INCLUDE [app-service-mobile-migrate-vs-upgrade](../../includes/app-service-mobile-migrate-vs-upgrade.md)]
 
->[!TIP] 建议在升级之前先[执行迁移](./app-service-mobile-migrating-from-mobile-services.md)。这样，就能在同一个应用服务计划中放置两个版本的应用程序，且无需支付额外的费用。
+>[!TIP]
+> 建议在升级之前先[执行迁移](./app-service-mobile-migrating-from-mobile-services.md)。这样，就能在同一个应用服务计划中放置两个版本的应用程序，且无需支付额外的费用。
 
 ### 移动应用 Node.js 服务器 SDK 改进
 

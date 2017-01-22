@@ -157,7 +157,8 @@ ms.author: davidmu
 
     Remove-AzureRmVM -ResourceGroupName $rgName -Name $vmName
 
-> [!NOTE] 可以使用 **-Force** 参数跳过确认提示。
+> [!NOTE]
+> 可以使用 **-Force** 参数跳过确认提示。
 
 如果没有使用 -Force 参数，系统会提示进行确认：
 

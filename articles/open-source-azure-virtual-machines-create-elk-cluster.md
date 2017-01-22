@@ -16,7 +16,8 @@ wacn.date: 08/09/2016
 #在 Azure 虚拟机上快速搭建 ELK 集群
 
 ELK 是 [Elasticsearch](https://www.elastic.co/products/elasticsearch)、[Logstash](https://www.elastic.co/products/logstash)、[Kibana](https://www.elastic.co/products/kibana) 三个开源软件的组合，是目前在实时数据检索和分析领域非常受欢迎的开源解决方案。本文介绍了如何通过 Azure 资源管理器在 Azure 虚拟机上快速搭建 ELK 集群。 
->[!NOTE]说明目前脚本仅支持 CentOS 7.2。
+>[!NOTE]
+>说明目前脚本仅支持 CentOS 7.2。
 
 ##准备步骤 
 
@@ -43,7 +44,8 @@ ELK 是 [Elasticsearch](https://www.elastic.co/products/elasticsearch)、[Logsta
 ##开始动手
 
 PowerShell脚本运行注意事项
->[!WARNING]<p>PowerShell 脚本运行注意事项  </p><p>需要以管理员权限运行 PowerShell，使用之前需运行如下命令： </p><p>
+>[!WARNING]
+><p>PowerShell 脚本运行注意事项  </p><p>需要以管理员权限运行 PowerShell，使用之前需运行如下命令： </p><p>
 `Set-ExecutionPolicy -ExecutionPolicy Unrestricted `</p> 
 
 ###在Azure虚拟机上搭建ELK集群
@@ -105,7 +107,8 @@ PowerShell脚本运行注意事项
 
         PS D:\elk-centos> New-AzureRmResourceGroupDeployment -Name deployelk -ResourceGroupName <YOUR-RESOURCE-GROUP-NAME> -TemplateParameterFile .\azuredeploy.parameters.json -TemplateUri $TemplateUri -DeploymentDebugLogLevel All -Verbose 
 
-    >[!NOTE]你可以通过指定可选参数 "-DeploymentDebugLogLevel All -Verbose" 来输出更多的部署日志，这可能有助于你诊断在部署过程中发生的错误。如果 PowerShell 返回这个参数不存在，请更新 Azure Powershell 到最新版本。   
+    >[!NOTE]
+    >你可以通过指定可选参数 "-DeploymentDebugLogLevel All -Verbose" 来输出更多的部署日志，这可能有助于你诊断在部署过程中发生的错误。如果 PowerShell 返回这个参数不存在，请更新 Azure Powershell 到最新版本。   
 
     *或者*
 

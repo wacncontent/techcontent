@@ -27,7 +27,8 @@ ms.author: juliako
 * 指定了不受支持的 API 版本。有关最新版本的信息，请参阅[媒体服务 REST API 开发的设置](./media-services-rest-how-to-use.md)。
 * 未指定媒体服务的 API 版本。有关如何指定 API 版本的信息，请参阅[使用媒体服务 REST API 连接到媒体服务](./media-services-rest-connect-programmatically.md)。
 
-  > [!NOTE]如果使用 .NET 或 Java SDK 连接到媒体服务，则无论何时尝试并执行针对媒体服务的操作，都会指定 API 版本。
+  > [!NOTE]
+  >如果使用 .NET 或 Java SDK 连接到媒体服务，则无论何时尝试并执行针对媒体服务的操作，都会指定 API 版本。
 
 * 指定了未定义的属性。错误消息中提供属性名称。仅可指定身份是给定实体的成员的那些属性。有关实体及其属性的列表，请参阅 [Azure 媒体服务 REST API 参考](https://docs.microsoft.com/zh-cn/rest/api/media/mediaservice)。
 * 指定了无效的属性值。错误消息中提供属性名称。请参阅上一个链接，了解有效的属性类型及其值。
@@ -93,7 +94,8 @@ ms.author: juliako
 ## 503 服务不可用
 服务器当前无法接收请求。导致此错误的可能原因是向服务发出了过多的请求。对于发出过多服务请求的应用程序，媒体服务限制机制将限制其资源使用量。
 
-> [!NOTE]查看错误消息和错误代码字符串，获取收到 503 错误的原因的更多详细信息。此错误并不始终意味着限制。
+> [!NOTE]
+>查看错误消息和错误代码字符串，获取收到 503 错误的原因的更多详细信息。此错误并不始终意味着限制。
 
 可能的状态说明包括：
 
@@ -103,7 +105,8 @@ ms.author: juliako
 
 若要处理此错误，我们建议使用指数回退重试逻辑。这意味着在连续错误响应的重试之间使用渐进式长等待。有关详细信息，请参阅[临时故障处理应用程序块](https://msdn.microsoft.com/zh-cn/library/hh680905.aspx)。
 
-> [!NOTE]如果使用[用于 .NET 的 Azure 媒体服务 SDK](https://github.com/Azure/azure-sdk-for-media-services/tree/master)，503 错误的重试逻辑由 SDK 实现。
+> [!NOTE]
+>如果使用[用于 .NET 的 Azure 媒体服务 SDK](https://github.com/Azure/azure-sdk-for-media-services/tree/master)，503 错误的重试逻辑由 SDK 实现。
 
 ## 另请参阅
 [媒体服务管理错误代码](http://msdn.microsoft.com/zh-cn/library/windowsazure/dn167016.aspx)

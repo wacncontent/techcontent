@@ -25,7 +25,8 @@ ms.author: marsma
 
 ![门户中“保存的输出文件”和“保存的日志”选择器][1]  
 
->[!NOTE] 本文中所述的 [Azure Batch 文件约定][nuget_package] .NET 类库目前以预览版提供。在正式版推出之前，本文所述的某些功能可能会更改。
+>[!NOTE]
+> 本文中所述的 [Azure Batch 文件约定][nuget_package] .NET 类库目前以预览版提供。在正式版推出之前，本文所述的某些功能可能会更改。
 
 ## 任务输出注意事项
 
@@ -55,7 +56,8 @@ ms.author: marsma
 
 可以从 [NuGet][nuget_package] 获取该库，其中包含新类并使用新方法扩展了 [CloudJob][net_cloudjob] 和 [CloudTask][net_cloudtask] 类。你可以使用 [NuGet 库包管理器][nuget_manager]将它添加到 Visual Studio 项目。
 
->[!TIP] 可以在 GitHub 上的用于 .NET 的 Azure SDK 存储库中找到 Azure Batch 文件约定库的[源代码][github_file_conventions]。
+>[!TIP]
+> 可以在 GitHub 上的用于 .NET 的 Azure SDK 存储库中找到 Azure Batch 文件约定库的[源代码][github_file_conventions]。
 
 ## 要求：链接的存储帐户  <a name="requirement-linked-storage-account"></a>
 
@@ -69,7 +71,8 @@ ms.author: marsma
 
 使用文件约定库保存作业和任务输出时需要执行两个主要操作：创建存储容器，将输出保存到容器。
 
->[!WARNING] 由于所有作业和任务输出将存储在同一个容器中，因此，如果有大量的任务同时尝试保存文件，则可能会强制实施[存储节流限制](../storage/storage-performance-checklist.md#blobs/)。
+>[!WARNING]
+> 由于所有作业和任务输出将存储在同一个容器中，因此，如果有大量的任务同时尝试保存文件，则可能会强制实施[存储节流限制](../storage/storage-performance-checklist.md#blobs/)。
 
 ### 创建存储容器
 
@@ -114,7 +117,8 @@ csharp
 
 以后在 Batch 中查询给定任务的已保存输出时，可以使用这些输出类型来指定要列出哪种类型的输出。换而言之，当你列出某个任务的输出时，可以根据某种输出类型来筛选列表。例如，“列出任务 *109* 的 *预览* 输出。” 本文稍后的[检索输出](#retrieve-output)部分中详细介绍了如何列出和检索输出。
 
->[!TIP] 输出类型还会指定特定的文件将显示在 Azure 门户预览中的哪个位置： *TaskOutput* 分类的文件将显示在“任务输出文件”中，*TaskLog* 文件将显示在“任务日志”中。
+>[!TIP]
+> 输出类型还会指定特定的文件将显示在 Azure 门户预览中的哪个位置： *TaskOutput* 分类的文件将显示在“任务输出文件”中，*TaskLog* 文件将显示在“任务日志”中。
 
 ### 存储作业输出
 
@@ -163,7 +167,8 @@ csharp
 
 `Task.Delay` 必须位于此 `using` 块的末尾，确保节点代理有时间将标准输出的内容刷新到节点上的 stdout.txt 文件（节点代理是在池中的每个节点上运行，在节点与 Batch 服务之间提供命令和控制接口的程序）。若没有此延迟，可能会遗漏最后几秒的输出。并非所有文件都需要此延迟。
 
->[!NOTE] 启用 SaveTrackedAsync 文件跟踪时，只会在 Azure 存储空间中保存被跟踪文件的 *追加* 内容。此方法只应该用于跟踪非轮转的日志文件或追加到的其他文件，也就是说，数据在更新时只会添加到文件末尾。
+>[!NOTE]
+> 启用 SaveTrackedAsync 文件跟踪时，只会在 Azure 存储空间中保存被跟踪文件的 *追加* 内容。此方法只应该用于跟踪非轮转的日志文件或追加到的其他文件，也就是说，数据在更新时只会添加到文件末尾。
 
 ## 检索输出  <a name="retrieve-output"></a>
 

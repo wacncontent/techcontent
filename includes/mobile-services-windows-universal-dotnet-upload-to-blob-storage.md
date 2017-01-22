@@ -282,7 +282,8 @@
 
     ![](./media/mobile-services-windows-universal-dotnet-upload-to-blob-storage/mobile-quickstart-blob-ie.png)
 
-       >[!NOTE]新项的 *imageUri* 属性绑定到**图像**控件时，将从 Blob 存储自动下载图像。
+       >[!NOTE]
+       >新项的 *imageUri* 属性绑定到**图像**控件时，将从 Blob 存储自动下载图像。
 
 5. 停止此应用程序并重新启动该应用程序的 Windows Phone 项目版本。
 

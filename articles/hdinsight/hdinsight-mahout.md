@@ -32,7 +32,8 @@ Mahout 是适用于 Apache Hadoop 的[计算机学习][ml]库。Mahout 包含用
 
 * 如何在 HDInsight 3.0 和 HDInsight 2.0 群集上安装 Mahout
 
-    > [!NOTE] Mahout 是随 HDInsight 3.1 版本的群集一起提供的。如果使用早期版本的 HDInsight，请在继续操作之前参阅[安装 Mahout](#install)。
+    > [!NOTE]
+    > Mahout 是随 HDInsight 3.1 版本的群集一起提供的。如果使用早期版本的 HDInsight，请在继续操作之前参阅[安装 Mahout](#install)。
 
 ##先决条件
 
@@ -43,7 +44,8 @@ Mahout 是适用于 Apache Hadoop 的[计算机学习][ml]库。Mahout 包含用
 
 ## <a name="recommendations"></a>使用 Windows PowerShell 生成推荐
 
-> [!NOTE] 尽管在本部分中使用的作业使用 Windows PowerShell 执行，但是，随 Mahout 一起提供的很多类当前不使用 Windows PowerShell，必须使用 Hadoop 命令行来运行这些类。有关不使用 Windows PowerShell 的类的列表，请参阅[故障排除](#troubleshooting)部分。<p>有关使用 Hadoop 命令行运行 Mahout 作业的示例，请参阅[使用 Hadoop 命令行对数据进行分类](#classify)。
+> [!NOTE]
+> 尽管在本部分中使用的作业使用 Windows PowerShell 执行，但是，随 Mahout 一起提供的很多类当前不使用 Windows PowerShell，必须使用 Hadoop 命令行来运行这些类。有关不使用 Windows PowerShell 的类的列表，请参阅[故障排除](#troubleshooting)部分。<p>有关使用 Hadoop 命令行运行 Mahout 作业的示例，请参阅[使用 Hadoop 命令行对数据进行分类](#classify)。
 
 Mahout 提供的功能之一是推荐引擎。此引擎接受 `userID`、`itemId` 和 `prefValue` 格式（此项的用户偏好）的数据。然后，Mahout 将执行共同匹配项分析，以确定：_偏好某个项的用户也偏好其他类似项_。随后，Mahout 确定拥有类似项偏好的用户，这些偏好可用于推荐。
 
@@ -143,7 +145,8 @@ user-ratings.txt 中包含的数据具有 `userID`、`movieID`、`userRating` �
             -JobId $job.JobId `
             -StandardError
 
-> [!NOTE] Mahout 作业不会删除处理作业时创建的临时数据。在示例作业中指定 `--tempDir` 参数，以将临时文件隔离到特定目录中。
+> [!NOTE]
+> Mahout 作业不会删除处理作业时创建的临时数据。在示例作业中指定 `--tempDir` 参数，以将临时文件隔离到特定目录中。
 
 Mahout 作业不会将输出返回到 STDOUT。而是会将其作为 __part-r-00000__ 存储在指定的输出目录中。该脚本将此文件下载到你工作站上的当前目录中的 __output.txt__ 中。
 
@@ -392,7 +395,8 @@ Mahout 提供的分类方法之一是生成[随机林][forest]。这是一个多
 
   此作业还将生成位于 __wasbs:///example/data/predictions/KDDTest+.arff.out__ 的文件。但是，用户无法阅读此文。
 
-> [!NOTE] Mahout 作业不会覆盖文件。如果要再次运行这些作业，则必须删除由以前的作业创建的文件。
+> [!NOTE]
+> Mahout 作业不会覆盖文件。如果要再次运行这些作业，则必须删除由以前的作业创建的文件。
 
 ## <a name="troubleshooting"></a>故障排除
 
@@ -410,7 +414,8 @@ Mahout 安装在 HDInsight 3.1 群集上，可使用以下步骤将其手动安�
 
         After the build completes, you can find the JAR file at __mahout\mrlegacy\target\mahout-mrlegacy-1.0-SNAPSHOT-job.jar__.
 
-        > [!NOTE] When Mahout 1.0 is released, you should be able to use the prebuilt packages with HDInsight 3.0.
+        > [!NOTE]
+        > When Mahout 1.0 is released, you should be able to use the prebuilt packages with HDInsight 3.0.
 
 2. 将该 jar 文件上传到群集默认存储内的 __example/jars__ 中。在以下脚本中将 CLUSTERNAME 替换为你的 HDInsight 群集的名称，并将 FILENAME 替换为 __mahout-coure-0.9-job.jar__ 文件的路径。
 

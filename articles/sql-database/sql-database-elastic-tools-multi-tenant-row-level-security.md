@@ -209,7 +209,8 @@ RLS 在 T-SQL 中实现：用户定义的函数用于定义访问逻辑，安全
         ADD BLOCK PREDICATE rls.fn_tenantAccessPredicate(TenantId) ON dbo.Posts
     GO 
 
-> [!TIP] 对于需要在数百个表中添加谓词的更复杂项目，你可以使用一个帮助程序存储过程，通过在架构中的所有表内添加谓词自动生成安全策略。请参阅[向所有表应用行级安全性 – 帮助程序脚本（博客）](http://blogs.msdn.com/b/sqlsecurity/archive/2015/03/31/apply-row-level-security-to-all-tables-helper-script)。
+> [!TIP]
+> 对于需要在数百个表中添加谓词的更复杂项目，你可以使用一个帮助程序存储过程，通过在架构中的所有表内添加谓词自动生成安全策略。请参阅[向所有表应用行级安全性 – 帮助程序脚本（博客）](http://blogs.msdn.com/b/sqlsecurity/archive/2015/03/31/apply-row-level-security-to-all-tables-helper-script)。
 
 现在如果你再次运行示例应用程序，租户将只能看到属于他们的行。此外，应用程序只能插入当前已连接到分片数据库的租户的行，而不能插入属于其他租户的行，并且不能将可见行更新为使用其他 TenantId。如果应用程序尝试执行上述任一操作，将会引发 DbUpdateException。
 
@@ -247,7 +248,8 @@ RLS 在 T-SQL 中实现：用户定义的函数用于定义访问逻辑，安全
         } 
     }); 
 
-> [!NOTE] 如果你对实体框架项目使用默认约束，则不建议在 EF 数据模型中包括 TenantId 列。这是因为实体框架查询会自动提供默认值，而这些值会重写 T-SQL 中创建的、使用 SESSION\_CONTEXT 的默认约束。举例来说，若要在示例项目中使用默认约束，你应该从 DataClasses.cs 中删除 TenantId（并在程序包管理器控制台中运行 Add-Migration），然后使用 T-SQL 来确保该字段仅存在于数据库表中。这样，在插入数据时，EF 不会自动提供错误的默认值。
+> [!NOTE]
+> 如果你对实体框架项目使用默认约束，则不建议在 EF 数据模型中包括 TenantId 列。这是因为实体框架查询会自动提供默认值，而这些值会重写 T-SQL 中创建的、使用 SESSION\_CONTEXT 的默认约束。举例来说，若要在示例项目中使用默认约束，你应该从 DataClasses.cs 中删除 TenantId（并在程序包管理器控制台中运行 Add-Migration），然后使用 T-SQL 来确保该字段仅存在于数据库表中。这样，在插入数据时，EF 不会自动提供错误的默认值。
 
 ### （可选）启用“超级用户”来访问所有行
 有些应用程序可能需要创建一个能够访问所有行的“超级用户”，例如，为了跨所有分片上的所有租户来生成报告，或在涉及到数据库之间移动租户行的分片上执行拆分/合并操作。为此，你应该在每个分片数据库中新建 SQL 用户（在本例中为“超级用户”）。然后使用新的谓词函数更改安全策略，以允许此用户访问所有行：

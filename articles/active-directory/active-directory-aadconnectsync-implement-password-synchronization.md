@@ -42,7 +42,8 @@ wacn.date: 12/15/2016
 
 有关详细信息，请参阅 [Integrating your on-premises identities with Azure Active Directory](./active-directory-aadconnect.md)（将本地标识与 Azure Active Directory 集成）
 
-> [!NOTE] 有关为 FIPS 和密码同步配置的 Active Directory 域服务的更多详细信息，请参阅 [Password Sync and FIPS](#password-synchronization-and-fips)（密码同步和 FIPS）。
+> [!NOTE]
+> 有关为 FIPS 和密码同步配置的 Active Directory 域服务的更多详细信息，请参阅 [Password Sync and FIPS](#password-synchronization-and-fips)（密码同步和 FIPS）。
 
 ## 密码同步的工作原理
 Active Directory 域服务以实际用户密码的哈希值表示形式存储密码。哈希值是单向数学函数（“ *哈希算法* ”）的计算结果。没有任何方法可将单向函数的结果还原为纯文本版本的密码。无法使用密码哈希来登录本地网络。
@@ -59,7 +60,8 @@ Active Directory 域服务以实际用户密码的哈希值表示形式存储密
 同步密码对当前登录的用户没有任何影响。
 当前的云服务会话不会立即受到已同步密码更改的影响，而是在你登录云服务时才受到影响。但是，当云服务要求你再次身份验证时，就需要提供新的密码。
 
-> [!NOTE] 只有 Active Directory 的对象类型用户才支持密码同步。不支持 iNetOrgPerson 对象类型。
+> [!NOTE]
+> 只有 Active Directory 的对象类型用户才支持密码同步。不支持 iNetOrgPerson 对象类型。
 
 ### 密码同步在 Azure AD 域服务中的工作原理
 也可以使用密码同步功能将本地密码同步到 Azure AD 域服务。此方案可让 Azure AD 域服务以本地 AD 中所有可用的方法验证云中的用户。此方案的体验类似于在本地环境中使用 Active Directory 迁移工具 (ADMT)。
@@ -78,7 +80,8 @@ Active Directory 域服务以实际用户密码的哈希值表示形式存储密
 **密码复杂性策略**
 启用密码同步时，本地 Active Directory 中的密码复杂性策略会覆盖云中可能为同步的用户定义的复杂性策略。可以使用本地 Active Directory 的所有有效密码来访问 Azure AD 服务。
 
-> [!NOTE] 直接在云中创建的用户的密码仍受到云中定义的密码策略的约束。
+> [!NOTE]
+> 直接在云中创建的用户的密码仍受到云中定义的密码策略的约束。
 
 **密码过期策略**
 如果用户属于密码同步的范围，云帐户密码则设置为“永不过期”。

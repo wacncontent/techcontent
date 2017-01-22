@@ -121,7 +121,8 @@ SQL 数据库使用 SQL Server 技术创建[完整](https://msdn.microsoft.com/z
     Explicit list of what to do with a geo-redundant backup. "Use a ..." helps people to scan the topic and find the uses quickly.
 ---------------->
 
->[!NOTE] 在 Azure 存储中，术语“复制”是指将文件从一个位置复制到另一个位置。SQL 的“数据库复制”是指让多个辅助数据库与主数据库同步。
+>[!NOTE]
+> 在 Azure 存储中，术语“复制”是指将文件从一个位置复制到另一个位置。SQL 的“数据库复制”是指让多个辅助数据库与主数据库同步。
 
 <!----------------
     The next ## H2's discuss key characteristics of how the feature works. The title is in conversational language and asks the question that will be answered.
@@ -154,7 +155,8 @@ SQL 数据库提供的备份存储容量高达最大预配数据库存储空间�
 
 如果删除了某个数据库，SQL 数据库将以保存联机数据库的相同方式保存其备份。例如删除了保留期为 7 天的某个基本数据库。已保存 4 天的备份将继续保存 3 天。
 
-> [!IMPORTANT] 如果删除了托管 SQL 数据库的 Azure SQL 服务器，则属于该服务器的所有数据库也将被删除且不可恢复。无法还原已删除的服务器。
+> [!IMPORTANT]
+> 如果删除了托管 SQL 数据库的 Azure SQL 服务器，则属于该服务器的所有数据库也将被删除且不可恢复。无法还原已删除的服务器。
 
 <!-------------------
 OPTIONAL section

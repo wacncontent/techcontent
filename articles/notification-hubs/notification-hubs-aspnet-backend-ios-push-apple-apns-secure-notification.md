@@ -42,7 +42,8 @@ ms.author: wesmc
 
 本安全推送教程演示如何安全地发送推送通知。本教程以[通知用户](./notification-hubs-aspnet-backend-ios-apple-apns-notification.md)教程为基础，因此您应该先完成该教程中的步骤。
 
-> [!NOTE] 本教程假设您已根据[通知中心入门 (iOS)](./notification-hubs-ios-apple-push-notification-apns-get-started.md) 中所述创建并配置了通知中心。
+> [!NOTE]
+> 本教程假设您已根据[通知中心入门 (iOS)](./notification-hubs-ios-apple-push-notification-apns-get-started.md) 中所述创建并配置了通知中心。
 
 [!INCLUDE [notification-hubs-aspnet-backend-securepush](../../includes/notification-hubs-aspnet-backend-securepush.md)]
 

@@ -31,7 +31,8 @@ ms.tgt_pltfrm: NA
 
 BACPAC 是包含数据库架构和数据的 .bacpac 文件。数据库通过从 Azure 存储 blob 容器导入的 BACPAC 创建。如果 Azure 存储中没有 .bacpac 文件，你可以按照[创建和导出 Azure SQL 数据库的 BACPAC](./sql-database-export.md) 中的步骤创建一个。
 
-> [!NOTE] Azure SQL 数据库会自动为你可以还原的每个用户数据库创建和维护备份。有关详细信息，请参阅[业务连续性概述](./sql-database-business-continuity.md)。
+> [!NOTE]
+> Azure SQL 数据库会自动为你可以还原的每个用户数据库创建和维护备份。有关详细信息，请参阅[业务连续性概述](./sql-database-business-continuity.md)。
 
 若要从 .bacpac 导入 SQL 数据库，需要以下内容：
 
@@ -39,7 +40,8 @@ BACPAC 是包含数据库架构和数据的 .bacpac 文件。数据库通过从 
 - Azure SQL 数据库 V12 服务器。如果没有 V12 服务器，可以按照本文中的以下步骤创建一个：[创建你的第一个 Azure SQL 数据库](./sql-database-get-started.md)。
 - 要导入 [Azure 存储帐户（标准）](../storage/storage-create-storage-account.md)blob 容器中的数据库的 .bacpac 文件。
 
-> [!IMPORTANT] 从 Azure Blob 存储导入 BACPAC 时，请使用标准存储。不支持从高级存储导入 BACPAC。
+> [!IMPORTANT]
+> 从 Azure Blob 存储导入 BACPAC 时，请使用标准存储。不支持从高级存储导入 BACPAC。
 
 ## 选择用于托管数据库的服务器
 

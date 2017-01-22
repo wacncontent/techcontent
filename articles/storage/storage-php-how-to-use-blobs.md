@@ -48,7 +48,8 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 
 下面的示例演示了如何包括 autoloader 文件并引用 **ServicesBuilder** 类。
 
-> [!NOTE] 本示例（以及本文中的其他示例）假定已通过 Composer 安装了用于 Azure 的 PHP 客户端库。如果已手动安装这些库，则需要引用 `WindowsAzure.php` autoloader 文件。
+> [!NOTE]
+> 本示例（以及本文中的其他示例）假定已通过 Composer 安装了用于 Azure 的 PHP 客户端库。如果已手动安装这些库，则需要引用 `WindowsAzure.php` autoloader 文件。
 
     require_once 'vendor/autoload.php';
     use WindowsAzure\Common\ServicesBuilder;

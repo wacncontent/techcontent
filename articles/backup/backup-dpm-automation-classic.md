@@ -60,7 +60,8 @@ ms.author: jimpark; trinadhk; anuragm; markgal
 
 ### 创建备份保管库
 
-> [!WARNING] 对于第一次使用 Azure 备份的客户，你需要注册用于订阅的 Azure 备份提供程序。可通过运行以下命令来执行此操作：Register-AzureProvider -ProviderNamespace "Microsoft.Backup"
+> [!WARNING]
+> 对于第一次使用 Azure 备份的客户，你需要注册用于订阅的 Azure 备份提供程序。可通过运行以下命令来执行此操作：Register-AzureProvider -ProviderNamespace "Microsoft.Backup"
 
 可以使用 **New-AzureRMBackupVault** cmdlet 创建新的备份保管库。备份保管库是一种 ARM 资源，因此需要将它放置在资源组中。在权限提升的 Azure PowerShell 控制台中运行以下命令：
 
@@ -122,7 +123,8 @@ ms.author: jimpark; trinadhk; anuragm; markgal
 
 这将使用指定的保管库凭据向 Azure 保管库注册名为“TestingServer”的 DPM 服务器。
 
-> [!IMPORTANT] 请勿使用相对路径来指定保管库凭据文件。必须提供绝对路径作为 cmdlet 的输入。
+> [!IMPORTANT]
+> 请勿使用相对路径来指定保管库凭据文件。必须提供绝对路径作为 cmdlet 的输入。
 
 ### 初始配置设置
 DPM 服务器在注册到 Azure 备份保管库后，将使用默认的订阅设置启动。这些订阅设置包括网络、加密和临时区域。若要开始更改订阅设置，需要先使用 [Get-DPMCloudSubscriptionSetting](https://technet.microsoft.com/zh-cn/library/jj612793) cmdlet 获取现有（默认）设置中的句柄：
@@ -158,7 +160,8 @@ DPM 服务器在注册到 Azure 备份保管库后，将使用默认的订阅设
 
     PS C:\> Set-DPMCloudSubscriptionSetting -DPMServerName "TestingServer" -SubscriptionSetting $setting -EncryptionPassphrase $Passphrase
 
-> [!IMPORTANT] 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
+> [!IMPORTANT]
+> 请妥善保管设置好的通行短语，并保证其安全。如果没有此通行短语，你将无法从 Azure 还原数据。
 
 此时，你应该已对 ```$setting``` 对象做出了全部所需的更改。请记得提交更改。
 

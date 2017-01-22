@@ -46,11 +46,13 @@ Service Fabric 报告器可监视感兴趣的已标识条件。它们会根据�
 
 - 从 Service Fabric 群集外探测资源的*外部*监视器（例如，类似于 Gomez 的监视服务）。
 
-> [!NOTE] 根据现有设定，群集会被系统组件发送的运行状况报告填充。从[使用系统运行状况报告进行故障排除](./service-fabric-understand-and-troubleshoot-with-system-health-reports.md)了解更多信息。必须在系统已创建的[运行状况实体](./service-fabric-health-introduction.md#health-entities-and-hierarchy)上发送用户报告。
+> [!NOTE]
+> 根据现有设定，群集会被系统组件发送的运行状况报告填充。从[使用系统运行状况报告进行故障排除](./service-fabric-understand-and-troubleshoot-with-system-health-reports.md)了解更多信息。必须在系统已创建的[运行状况实体](./service-fabric-health-introduction.md#health-entities-and-hierarchy)上发送用户报告。
 
 只要运行状况报告的设计清晰明了，发送运行状况报告就十分容易。如果群集不[安全](./service-fabric-cluster-security.md)或者如果结构客户端具有管理员权限，可以使用 [FabricClient](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.fabricclient.aspx) 来报告运行状况。这可以使用 [FabricClient.HealthManager.ReportHealth](https://msdn.microsoft.com/zh-cn/library/system.fabric.fabricclient.healthclient.reporthealth.aspx) 通过 API 来完成，或者通过 PowerShell 或 REST 来完成。有用于批处理报告的配置旋钮，可提升性能。
 
-> [!NOTE] 报告运行状况会同步处理，并且只代表客户端上的验证工作。运行状况客户端或者 `Partition` 或 `CodePackageActivationContext` 对象接受报告的这项事实并不表示该报告应用在存储中。它以异步方式发送并可能与其他报告一起进行批处理。在服务器上处理仍可能失败：序号可能已过时、必须应用报告的实体已被删除，等等。
+> [!NOTE]
+> 报告运行状况会同步处理，并且只代表客户端上的验证工作。运行状况客户端或者 `Partition` 或 `CodePackageActivationContext` 对象接受报告的这项事实并不表示该报告应用在存储中。它以异步方式发送并可能与其他报告一起进行批处理。在服务器上处理仍可能失败：序号可能已过时、必须应用报告的实体已被删除，等等。
 
 ##<a name="health-client"></a> 运行状况客户端
 运行状况报告会使用存在于结构客户端内的运行状况客户端来发送至运行状况存储。可以使用下列设置来配置运行状况客户端：
@@ -61,7 +63,8 @@ Service Fabric 报告器可监视感兴趣的已标识条件。它们会根据�
 
 - **HealthOperationTimeout**：报告消息发送到运行状况存储的超时期限。如果消息超时，运行状况客户端就会不断重试，直到运行状况存储确认报告已处理为止。默认值：2 分钟。
 
-> [!NOTE] 批量处理报告时，结构客户端必须至少保持 HealthReportSendInterval 的活动状态，以确保报告发送完毕。如果消息丢失或运行状况存储因为暂时性错误而无法应用它们，结构客户端必须保持更长时间的活动状态，让其有再试一次的机会。
+> [!NOTE]
+> 批量处理报告时，结构客户端必须至少保持 HealthReportSendInterval 的活动状态，以确保报告发送完毕。如果消息丢失或运行状况存储因为暂时性错误而无法应用它们，结构客户端必须保持更长时间的活动状态，让其有再试一次的机会。
 
 客户端上的缓冲会将报告的唯一性纳入考虑范围。例如，如果特定的错误报告器针对相同实体的相同属性每秒产生 100 个报告，则会以最后一个版本取代所有报告。客户端队列中最多存在一个这样的报告。如果配置了批处理，则发送到运行状况存储的报告数目仅为每个发送间隔发送一份报告。这是最后添加的报告，可反映实体的最新状态。在创建 `FabricClient` 时，藉由针对运行状况相关实体传递 [FabricClientSettings](https://msdn.microsoft.com/zh-cn/library/azure/system.fabric.fabricclientsettings.aspx) 的所需值，即能指定所有配置参数。
 
@@ -101,7 +104,8 @@ Service Fabric 报告器可监视感兴趣的已标识条件。它们会根据�
                                NodeName                             : Node.1
                                }
 
-> [!NOTE] 若要确保未授权的服务无法针对群集中的实体报告运行状况，可将服务器配置为只接受来自受保护客户端的请求。用于报告的 `FabricClient` 必须启用安全性才能与群集通信（例如使用 Kerberos 或证书身份验证）。详细了解[群集安全性](./service-fabric-cluster-security.md)。
+> [!NOTE]
+> 若要确保未授权的服务无法针对群集中的实体报告运行状况，可将服务器配置为只接受来自受保护客户端的请求。用于报告的 `FabricClient` 必须启用安全性才能与群集通信（例如使用 Kerberos 或证书身份验证）。详细了解[群集安全性](./service-fabric-cluster-security.md)。
 
 ## 在低特权的服务内进行报告
 在对群集不具有管理员访问权限的 Service Fabric 服务内，你可以通过 `Partition` 或 `CodePackageActivationContext`，报告来自当前上下文的实体的运行状况。
@@ -118,7 +122,8 @@ Service Fabric 报告器可监视感兴趣的已标识条件。它们会根据�
 
 - 使用 [CodePackageActivationContext.ReportDeployedServicePackageHealth](https://msdn.microsoft.com/zh-cn/library/system.fabric.codepackageactivationcontext.reportdeployedservicepackagehealth.aspx) 来报告部署于当前节点上的当前应用程序的服务包运行状况。
 
-> [!NOTE] 就内部而言，`Partition` 和 `CodePackageActivationContext` 会保留使用默认设置配置的运行状况客户端。针对[运行状况客户端](./service-fabric-report-health.md#health-client)所说明的相同注意事项将适用 — 报告在计时器上进行批处理和发送操作，因此这些对象应保持活动状态，以便有机会发送报告。
+> [!NOTE]
+> 就内部而言，`Partition` 和 `CodePackageActivationContext` 会保留使用默认设置配置的运行状况客户端。针对[运行状况客户端](./service-fabric-report-health.md#health-client)所说明的相同注意事项将适用 — 报告在计时器上进行批处理和发送操作，因此这些对象应保持活动状态，以便有机会发送报告。
 
 ## 设计运行状况报告
 生成高质量报告的第一步是识别可能影响服务运行状况的条件。在条件启动甚至发生之前，任何有助于在服务或群集中标记问题的条件，都有可能替你省下数十亿元。优点包括故障时间变少，晚上花在调查和修复问题上的时间变少，客户满意度自然也高。
@@ -133,7 +138,8 @@ Service Fabric 报告器可监视感兴趣的已标识条件。它们会根据�
 
 确定监视器详细信息后，应该确定可唯一标识它的源 ID。如果多个相同类型的监视器存留于群集中，它们必须报告不同的实体，如果它们报告相同的实体，请确保源 ID 或属性皆不相同，如此报告才可并存。运行状况报告的属性应捕获受监视的条件。（在上述示例中，该属性可以是 **ShareSize**。） 如果多个报告应用于同一条件，该属性应包含一些动态信息，才可让报告共存。例如，如果有多个需要监视的共享，该属性的名称可以是 **ShareSize-sharename**。
 
-> [!NOTE] 运行状况存储*不*应该用来保存状态信息。只有与运行状况相关的信息才应作为运行状况进行报告，即影响实体运行状况评估的信息。运行状况存储并非设计作为一般用途的存储。它使用运行状况评估逻辑将所有数据聚合到运行状况中。发送与运行状况无关的信息（例如，报告运行状况为“正常”的状态）不会影响聚合的运行状况，但可能对运行状况存储的性能造成负面影响。
+> [!NOTE]
+> 运行状况存储*不*应该用来保存状态信息。只有与运行状况相关的信息才应作为运行状况进行报告，即影响实体运行状况评估的信息。运行状况存储并非设计作为一般用途的存储。它使用运行状况评估逻辑将所有数据聚合到运行状况中。发送与运行状况无关的信息（例如，报告运行状况为“正常”的状态）不会影响聚合的运行状况，但可能对运行状况存储的性能造成负面影响。
 
 下一个决策点为何种实体需报告。大多数情况下，显然是依据条件而定。应该选择具有最佳粒度的实体。如果条件影响到某个分区中的所有副本，则报告该分区，而非服务。以下是需要仔细考虑的极端案例。如果条件影响到实体（例如副本），但需要将条件标记为超过副本生存期，则应报告分区。否则，当删除副本时，与其相关的所有报告都会从存储中清除。这表示监视器编写器也必须将实体和报告的生存期纳入考虑范围。必须清楚说明报告需从存储中清除的时间点（例如，针对实体报告的错误不再适用时）。
 

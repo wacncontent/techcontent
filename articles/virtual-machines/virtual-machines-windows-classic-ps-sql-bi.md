@@ -111,7 +111,8 @@ Azure 虚拟机库包括若干含有 Microsoft SQL Server 的映像。虚拟机�
 
     ![SQL Server 服务](./media/virtual-machines-windows-classic-ps-sql-bi/IC650107.gif)
 
-    >[!NOTE]支持的 BI 方案中需要 SQL Server 数据库引擎。在单服务器 VM 拓扑中，数据库引擎需要在同一个 VM 上运行。
+    >[!NOTE]
+    >支持的 BI 方案中需要 SQL Server 数据库引擎。在单服务器 VM 拓扑中，数据库引擎需要在同一个 VM 上运行。
 
     有关详细信息，请参阅以下部分：[卸载 Reporting Services](https://msdn.microsoft.com/zh-cn/library/hh479745.aspx) 和[卸载 Analysis Services 实例](https://msdn.microsoft.com/zh-cn/library/ms143687.aspx)。
 
@@ -155,7 +156,8 @@ Analysis Services、Reporting Services、SQL Server 数据库引擎和数据源�
 
 SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式，但未配置报表服务器。本部分中的步骤配置 Reporting Services 报表服务器。有关配置 Reporting Services 本机模式的更多详细信息，请参阅[安装 Reporting Services 本机模式报表服务器 (SSRS)](https://msdn.microsoft.com/zh-cn/library/ms143711.aspx)。
 
->[!NOTE]有关使用 Windows PowerShell 脚本配置报表服务器的类似内容，请参阅[使用 PowerShell 创建运行本机模式报表服务器的 Azure VM](./virtual-machines-windows-classic-ps-sql-report.md)。
+>[!NOTE]
+>有关使用 Windows PowerShell 脚本配置报表服务器的类似内容，请参阅[使用 PowerShell 创建运行本机模式报表服务器的 Azure VM](./virtual-machines-windows-classic-ps-sql-report.md)。
 
 ### <a name="connect-to-the-virtual-machine-and-start-the-reporting-services-configuration-manager"></a> 连接到虚拟机并启动 Reporting Services 配置管理器
 
@@ -320,7 +322,8 @@ SQL Server 的虚拟机库映像包括安装的 Reporting Services 本机模式�
 
 或运行 C:\SQLServer\_13.0\_full\setup.exe，C:\\SQLServer\_12.0\_full\\setup.exe 或 C:\\SQLServer\_11.0\_full\\setup.exe
 
->[!NOTE]首次运行 SQL Server 安装程序时可能会下载更多安装文件并需要重新启动虚拟机和重新启动 SQL Server 安装程序。
+>[!NOTE]
+>首次运行 SQL Server 安装程序时可能会下载更多安装文件并需要重新启动虚拟机和重新启动 SQL Server 安装程序。
 ><p>如果需要反复自定义从 Azure 虚拟机中选择的映像，请考虑创建您自己的 SQL Server 映像。Analysis Services SysPrep 功能在 SQL Server 2012 SP1 CU2 中已启用。有关详细信息，请参阅[使用 SysPrep 安装 SQL Server 的注意事项](https://msdn.microsoft.com/zh-cn/library/ee210754.aspx)。
 
 ### 若要安装 Analysis Services 表格模式
@@ -432,7 +435,8 @@ Analysis Services 的**默认实例**侦听 TCP 端口 **2383**。在虚拟机�
 
 - [在混合环境中使用 Power BI](https://msdn.microsoft.com/zh-cn/library/dn798994.aspx)
 
->[!NOTE] [Submit feedback and contact information through Microsoft SQL Server Connect](https://connect.microsoft.com/SQLServer/Feedback)
+>[!NOTE]
+> [Submit feedback and contact information through Microsoft SQL Server Connect](https://connect.microsoft.com/SQLServer/Feedback)
 
 ### 社区内容
 

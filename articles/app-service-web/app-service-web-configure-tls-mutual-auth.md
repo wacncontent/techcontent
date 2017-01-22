@@ -33,7 +33,8 @@ ms.author: naziml
 
 可以使用 [ARMClient 工具](https://github.com/projectkudu/ARMClient)轻松创建 REST API 调用。使用该工具登录之后，需要发出以下命令：
 
->[!NOTE] 使用 `ARMClient.exe login [environment name]` 登录时，`[environment name]` 应为 `MOONCAKE`。换而言之，用于登录 Azure 中国区的命令为 `ARMClient.exe login MOONCAKE`。
+>[!NOTE]
+> 使用 `ARMClient.exe login [environment name]` 登录时，`[environment name]` 应为 `MOONCAKE`。换而言之，用于登录 Azure 中国区的命令为 `ARMClient.exe login MOONCAKE`。
 
     ARMClient PUT subscriptions/{Subscription Id}/resourcegroups/{Resource Group Name}/providers/Microsoft.Web/sites/{Website Name}?api-version=2015-04-01 @enableclientcert.json -verbose
 

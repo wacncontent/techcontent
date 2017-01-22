@@ -21,7 +21,8 @@ ms.author: sonyama;barbkess;mausher
 
 可以使用 Azure PowerShell cmdlet 或 REST API 来管理许多 SQL 数据仓库管理任务。下面是如何使用 PowerShell 命令自动执行 SQL 数据仓库中的常见任务的一些示例。如需一些好的 REST 示例，请参阅[使用 REST 管理可伸缩性][]一文。
 
-> [!NOTE]  若要对 SQL 数据仓库使用 Azure PowerShell，需要安装 Azure PowerShell 1.0.3 或更高版本。可以通过运行 **Get-Module -ListAvailable -Name Azure** 来检查版本。可以通过 [Microsoft Web 平台安装程序][]安装最新版本。有关安装最新版本的详细信息，请参阅[如何安装和配置 Azure PowerShell][]。
+> [!NOTE]
+>  若要对 SQL 数据仓库使用 Azure PowerShell，需要安装 Azure PowerShell 1.0.3 或更高版本。可以通过运行 **Get-Module -ListAvailable -Name Azure** 来检查版本。可以通过 [Microsoft Web 平台安装程序][]安装最新版本。有关安装最新版本的详细信息，请参阅[如何安装和配置 Azure PowerShell][]。
 
 ## Azure PowerShell cmdlet 入门
 
@@ -55,7 +56,8 @@ ms.author: sonyama;barbkess;mausher
     $database = Get-AzureRmSqlDatabase –ResourceGroupName "ResourceGroup1" –ServerName "Server01" –DatabaseName "Database02"
     $resultDatabase = $database | Resume-AzureRmSqlDatabase
 
-> [!NOTE] 注意，如果服务器是 foo.database.windows.net，请使用“foo”作为 Powershell cmdlet 中的 -ServerName。
+> [!NOTE]
+> 注意，如果服务器是 foo.database.windows.net，请使用“foo”作为 Powershell cmdlet 中的 -ServerName。
 
 ## 经常使用的 PowerShell cmdlet
 

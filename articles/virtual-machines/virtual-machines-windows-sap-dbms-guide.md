@@ -321,7 +321,8 @@ ms.author: sedusch
 * 仅限云的部署：不通过站点到站点或 ExpressRoute 连接将 Azure 订阅连接到本地网络基础结构的一种部署。在一般的 Azure 文档中，此类部署也称为“仅限云”部署。使用此方法部署的虚拟机可通过 Internet 和分配给 Azure VM 的公共 Internet 终结点来访问。在此类部署中，本地 Active Directory (AD) 和 DNS 不会扩展到 Azure。因此，VM 不是本地 Active Directory 的一部分。注意：本文档中的仅限云部署定义为在 Azure 中以独占方式运行，而不会将 Active Directory 或名称解析从本地扩展到公有云的完整 SAP 布局。SAP 生产系统或配置不支持仅限云的配置，前者需要在托管于 Azure 的 SAP 系统与位于本地的资源之间使用 SAP STMS 或其他本地资源。
 * 跨界：描述这样一种方案：将 VM 部署到在本地数据中心与 Azure 之间建立了站点到站点、多站点或 ExpressRoute 连接的 Azure 订阅。在一般的 Azure 文档中，此类部署也称为跨界方案。建立连接是为了将本地域、本地 Active Directory 和本地 DNS 扩展到 Azure。本地布局会扩展到订阅的 Azure 资产。经过这种扩展后，VM 可以成为本地域的一部分。本地域的域用户可以访问服务器，并可在这些 VM 上运行服务（例如 DBMS 服务）。可以在部署于本地的 VM 与部署于 Azure 的 VM 之间进行通信和名称解析。我们预计这是在 Azure 上部署 SAP 资产最常见的方案。有关详细信息，请参阅[此文][vpn-gateway-cross-premises-options]和[此文][vpn-gateway-site-to-site-create]。
 
-> [!NOTE] SAP 生产系统支持对 SAP 系统进行这种跨界部署：运行 SAP 系统的 Azure 虚拟机是本地域的成员。跨界配置可将部分或完整 SAP 布局部署到 Azure。即使在 Azure 中运行完整 SAP 布局，也需要这些 VM 成为本地域和 ADS 的一部分。在本文档的以前版本中，我们曾谈到混合 IT 方案，其中“混合”一词基本上是指本地与 Azure 之间有跨界连接。在此方案中，“混合”还表示 Azure 中的 VM 是本地 Active Directory 的一部分。
+> [!NOTE]
+> SAP 生产系统支持对 SAP 系统进行这种跨界部署：运行 SAP 系统的 Azure 虚拟机是本地域的成员。跨界配置可将部分或完整 SAP 布局部署到 Azure。即使在 Azure 中运行完整 SAP 布局，也需要这些 VM 成为本地域和 ADS 的一部分。在本文档的以前版本中，我们曾谈到混合 IT 方案，其中“混合”一词基本上是指本地与 Azure 之间有跨界连接。在此方案中，“混合”还表示 Azure 中的 VM 是本地 Active Directory 的一部分。
 
 有些 Microsoft 文档在描述跨界方案时稍有不同，特别是针对 DBMS HA 配置。在 SAP 相关的文档中，跨界方案单纯是指具有站点到站点或专用 (ExpressRoute) 连接，以及将 SAP 布局分布到本地与 Azure 的情况。
 
@@ -353,7 +354,8 @@ ms.author: sedusch
 
 你应当使用过 Azure 体系结构，并知道如何部署和操作 Azure 虚拟机。有关详细信息，请参阅：<https://www.azure.cn/documentation/>
 
-> [!NOTE] 我们**不**讨论 Azure 平台的 Azure 平台即服务 (PaaS) 产品。本文讨论如何在 Azure 虚拟机 (IaaS) 中运行数据库管理系统 (DBMS)，就像在本地环境中运行 DBMS 一样。这两种产品的数据库性能与功能差异极大，不应混用。另请参阅：<https://www.azure.cn/home/features/sql-database/>
+> [!NOTE]
+> 我们**不**讨论 Azure 平台的 Azure 平台即服务 (PaaS) 产品。本文讨论如何在 Azure 虚拟机 (IaaS) 中运行数据库管理系统 (DBMS)，就像在本地环境中运行 DBMS 一样。这两种产品的数据库性能与功能差异极大，不应混用。另请参阅：<https://www.azure.cn/home/features/sql-database/>
 
 由于我们讨论的是 IaaS，因此，一般而言，Windows、Linux 和 DBMS 的安装和配置基本上与你在本地安装的任何虚拟机或裸机计算机相同。不过，使用 IaaS 时的一些体系结构和系统管理实施决策会有所不同。本文档旨在说明使用 IaaS 时必须准备好应对的特定体系结构和系统管理差异。
 
@@ -476,7 +478,8 @@ Azure 存储空间本地复制（本地冗余）可提供多层保护，避免�
 
 可在[此处][storage-redundancy]找到更多信息。
 
-> [!NOTE] 对于 DBMS 部署，不建议使用异地冗余存储
+> [!NOTE]
+> 对于 DBMS 部署，不建议使用异地冗余存储
 ><p>
 > Azure 存储空间异地复制是异步的。对装载到单个 VM 的各个 VHD 的复制不会完全一致地进行同步。因此，不适合复制分布在不同 VHD 上的 DBMS 文件，或者使用软件 RAID 基于多个 VHD 来部署的 DBMS 文件。DBMS 软件要求持久性磁盘存储在不同的 LUN 和基础磁盘/VHD/主轴上精确同步。DBMS 软件会使用各种机制对 IO 写入活动排序，即使有几毫秒的变化，DBMS 都将报告复制的目标磁盘存储已损坏。因此，如果你真的想让数据库配置中的某个数据库延伸到多个异地复制的 VHD，则需要使用数据库方法和功能来执行这类复制。你不应该依赖 Azure 存储空间异地复制来执行此作业。
 ><p>
@@ -553,7 +556,8 @@ Azure 可用性集是 VM 或服务的逻辑分组，可确保 VM 和其他服务
 * 有一种例外情况就是，将静态 IP 地址分配给网络接口，如[此处][virtual-networks-reserved-private-ip]所述。
 * 在这种情况下，只要网络接口未被删除，IP 地址就保持固定。
 
-> [!IMPORTANT] 为了让整个部署简单且易于管理，明确建议通过在所涉及的不同 VM 之间提供正常运行的名称解析，在 Azure 的 DBMS HA 或 DR 配置中设置 VM 合作。
+> [!IMPORTANT]
+> 为了让整个部署简单且易于管理，明确建议通过在所涉及的不同 VM 之间提供正常运行的名称解析，在 Azure 的 DBMS HA 或 DR 配置中设置 VM 合作。
 
 ## 部署主机监视
 若要有效使用 Azure 虚拟机中的 SAP 应用程序，SAP 需要能够从运行 Azure 虚拟机的物理主机获取主机监视数据。需要有特定的 SAP HostAgent 补丁级别，才能在 SAPOSCOL 和 SAP HostAgent 中启用此功能。SAP 说明 [1409604] 中介绍了确切的补丁级别。
@@ -565,7 +569,8 @@ Azure 可用性集是 VM 或服务的逻辑分组，可确保 VM 和其他服务
 ### SQL Server IaaS
 自从有了 Azure，你就可以轻松地将构建于 Windows Server 平台的现有 SQL Server 应用程序迁移到 Azure 虚拟机。借助虚拟机中的 SQL Server，你可以轻松地将这些应用程序迁移到 Azure，从而减少部署、管理和维护企业级应用程序的总拥有成本。借助 Azure 虚拟机中的 SQL Server，管理员和开发人员仍然可以使用在本地可用的相同开发和管理工具。
 
-> [!IMPORTANT] 请注意，我们不讨论 Azure SQL 数据库，它是 Azure 平台的“平台即服务”产品。本文讨论的是如何运行 SQL Server 产品（已知适用于 Azure 虚拟机中的本地部署），以及如何运用 Azure 的“服务架构”功能。这两种产品的数据库性能与功能差异很大，不应混用。另请参阅：<https://www.azure.cn/home/features/sql-database/>
+> [!IMPORTANT]
+> 请注意，我们不讨论 Azure SQL 数据库，它是 Azure 平台的“平台即服务”产品。本文讨论的是如何运行 SQL Server 产品（已知适用于 Azure 虚拟机中的本地部署），以及如何运用 Azure 的“服务架构”功能。这两种产品的数据库性能与功能差异很大，不应混用。另请参阅：<https://www.azure.cn/home/features/sql-database/>
 
 在继续操作之前，强烈建议查看[此文档][virtual-machines-sql-server-infrastructure-services]。
 
@@ -1144,7 +1149,8 @@ SAP 目前支持 SAP MaxDB 版本 7.9，该版本可以与 Azure 中基于 SAP N
 #### <a name="b48cfe3b-48e9-4f5b-a783-1d29155bd573"></a>存储配置
 适用于 SAP MaxDB 的 Azure 存储空间最佳做法遵循 [RDBMS 部署的结构][dbms-guide-2]一章中所述的常规建议。
 
-> [!IMPORTANT] 与其他数据库一样，SAP MaxDB 也有数据和日志文件。不过，在 SAP MaxDB 术语中，正确的词汇是“卷”（不是“文件”）。例如，有 SAP MaxDB 数据卷和日志卷。请勿与 OS 磁盘卷混淆。
+> [!IMPORTANT]
+> 与其他数据库一样，SAP MaxDB 也有数据和日志文件。不过，在 SAP MaxDB 术语中，正确的词汇是“卷”（不是“文件”）。例如，有 SAP MaxDB 数据卷和日志卷。请勿与 OS 磁盘卷混淆。
 
 简而言之，必须：
 

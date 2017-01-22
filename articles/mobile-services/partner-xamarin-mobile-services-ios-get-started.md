@@ -26,7 +26,8 @@ ms.author: craig.dunn@xamarin.com
 
 完成本教程需要 XCode 和 Xamarin Studio（对于 OS X）或 Visual Studio（对于 Windows）以及联网的 Mac。[设置和安装 Visual Studio 和 Xamarin](https://msdn.microsoft.com/zh-cn/library/mt613162.aspx) 中提供了完整的安装说明。
 
-> [!IMPORTANT]若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个免费的移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial)。
+> [!IMPORTANT]
+>若要完成本教程，你需要一个 Azure 帐户。如果你没有帐户，可以注册 Azure 试用版并取得多达 10 个免费的移动服务，即使在试用期结束之后仍可继续使用这些服务。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial)。
 
 ##  <a name="create-new-service"></a>创建新的移动服务
 
@@ -74,7 +75,8 @@ ms.author: craig.dunn@xamarin.com
 
     这样可向在 Azure 中托管的新移动服务发送 POST 请求。来自请求的数据被插入到 TodoItem 表。移动服务返回存储在表中的项，数据显示在列表中。
 
-    > [!NOTE]你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 TodoService.cs C# 文件中。
+    > [!NOTE]
+    >你可以查看访问你的移动服务以查询和插入数据的代码，这些代码在 TodoService.cs C# 文件中。
 
 4. 返回 [Azure 经典管理门户]，单击“数据”选项卡，然后单击“TodoItems”表。
 

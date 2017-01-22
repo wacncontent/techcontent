@@ -25,7 +25,8 @@ wacn.date: 01/03/2017
 2. 在域名注册机构中为域名添加 DNS 条目
 3. 在 Azure AD 中验证自定义域名
 
-> [!NOTE] 如果打算配置自定义域名以搭配 Active Directory 联合身份验证服务 (AD FS) 或公司网络上的其他安全令牌服务 (STS) 使用，请按照[添加和配置域以便与 Azure Active Directory 联盟](./active-directory-add-domain-federated.md)中的说明操作。如果打算将公司目录中的用户同步到 Azure AD，但[密码哈希同步](./active-directory-aadconnectsync-implement-password-synchronization.md)不符合要求，这样做将非常有用。
+> [!NOTE]
+> 如果打算配置自定义域名以搭配 Active Directory 联合身份验证服务 (AD FS) 或公司网络上的其他安全令牌服务 (STS) 使用，请按照[添加和配置域以便与 Azure Active Directory 联盟](./active-directory-add-domain-federated.md)中的说明操作。如果打算将公司目录中的用户同步到 Azure AD，但[密码哈希同步](./active-directory-aadconnectsync-implement-password-synchronization.md)不符合要求，这样做将非常有用。
 
 ## 将自定义域名添加到目录 <a name="add-a-custom-domain-name-to-your-directory"></a>
 

@@ -52,7 +52,8 @@ Azure 表存储服务使用户可以存储大量结构化数据。该服务是�
          CloudStorageAccount storageAccount = CloudStorageAccount.Parse(
            CloudConfigurationManager.GetSetting("<storage account name>
          _AzureStorageConnectionString"));
-> [!NOTE]  在下列示例中，在代码的前面使用上述全部代码。
+> [!NOTE]
+>  在下列示例中，在代码的前面使用上述全部代码。
 
 3. 获取 **CloudTableClient** 对象，以引用存储帐户中的表对象。
 

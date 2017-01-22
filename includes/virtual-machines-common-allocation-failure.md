@@ -50,7 +50,8 @@ Azure 数据中心的服务器分区成群集。通常会尝试向多个群集�
 下图 5 显示（固定的）分配案例的分类。
 ![固定分配分类](./media/virtual-machines-common-allocation-failure/Allocation3.png)
 
-> [!NOTE] 每个分配案例中列出的错误均已缩略。有关详细的错误字符串，请参阅 [错误字符串查找](#Error string lookup)。
+> [!NOTE]
+> 每个分配案例中列出的错误均已缩略。有关详细的错误字符串，请参阅 [错误字符串查找](#Error string lookup)。
 
 ## 分配案例：重设 VM 大小或向现有云服务添加 VM 或角色实例
 **错误**

@@ -70,7 +70,8 @@ wacn.date: 12/19/2016
 
 ![开启](./media/iot-hub-raspberry-pi-lessons/lesson1/micro_usb_power_on.jpg)  
 
-> [!NOTE] 必须使用工具包中至少为 2 安 的电源，确保 Raspberry 有正常运行所需的足够电力。
+> [!NOTE]
+> 必须使用工具包中至少为 2 安 的电源，确保 Raspberry 有正常运行所需的足够电力。
 > 
 > 
 

@@ -32,7 +32,8 @@ ms.author: carlrab
 
  ![SAMW 迁移示意图](./media/sql-database-cloud-migrate/02SAMWDiagram.png)  
 
-  > [!NOTE] 向导的内置转换并非能够修复它可检测到的所有不兼容的架构。无法解决的非兼容脚本将报告为错误，并会在生成的脚本中注入注释。如果检测到多个错误，请使用 Visual Studio 或 SQL Server Management Studio 来单步执行并修复无法使用 SQL Server 迁移向导修复的每个错误。
+  > [!NOTE]
+  > 向导的内置转换并非能够修复它可检测到的所有不兼容的架构。无法解决的非兼容脚本将报告为错误，并会在生成的脚本中注入注释。如果检测到多个错误，请使用 Visual Studio 或 SQL Server Management Studio 来单步执行并修复无法使用 SQL Server 迁移向导修复的每个错误。
 
 ## 后续步骤
 

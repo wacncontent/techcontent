@@ -140,7 +140,8 @@ ms.author: adegeo
 
 <p/>
 
- >[!NOTE] 证书的指纹可通过使用文本编辑器添加到配置文件中，或者值可以添加到 Visual Studio 中的角色的“属性”页的“证书”选项卡。
+ >[!NOTE]
+ > 证书的指纹可通过使用文本编辑器添加到配置文件中，或者值可以添加到 Visual Studio 中的角色的“属性”页的“证书”选项卡。
 
 ## 定义角色实例的端口
 Azure 仅允许 Web 角色有一个入口点。即所有通信都通过一个 IP 地址完成。可以通过配置主机头使请求指向正确的位置来配置网站共享一个端口。此外，可将应用程序配置为侦听 IP 地址上的已知端口。
@@ -197,7 +198,8 @@ Azure 仅允许 Web 角色有一个入口点。即所有通信都通过一个 IP
 - **[Changed](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.windowsazure.serviceruntime.roleenvironment.changed.aspx) 事件**
 发生在配置更改已应用于某个角色的指定实例之后。
 
-> [!NOTE] 由于证书更改始终使角色实例处于脱机状态，因此不会引发 RoleEnvironment.Changing 或 RoleEnvironment.Changed 事件。
+> [!NOTE]
+> 由于证书更改始终使角色实例处于脱机状态，因此不会引发 RoleEnvironment.Changing 或 RoleEnvironment.Changed 事件。
 
 ## <a name="cspkg"></a> ServicePackage.cspkg
 要将应用程序部署为 Azure 中的云服务，必须首先以适当的格式打包该应用程序。可以使用 **CSPack** 命令行工具（与 [Azure SDK](/downloads/) 一起安装）来创建包文件作为 Visual Studio 的替代。

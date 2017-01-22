@@ -31,7 +31,8 @@ ms.author: arramac
 
 若要开始处理代码，请从 [DocumentDB 性能测试示例](https://github.com/Azure/azure-documentdb-dotnet/tree/master/samples/documentdb-benchmark)下载项目。
 
-> [!NOTE] 此应用程序的目标是演示使用少数客户端计算机从 DocumentDB 中提取更好性能的最佳做法。生成此应用程序的目的不是为了演示服务的峰值容量如何可以无限扩展。
+> [!NOTE]
+> 此应用程序的目标是演示使用少数客户端计算机从 DocumentDB 中提取更好性能的最佳做法。生成此应用程序的目的不是为了演示服务的峰值容量如何可以无限扩展。
 
 如果正在寻找用于提高 DocumentDB 性能的客户端配置选项，请参阅 [DocumentDB 性能提示](./documentdb-performance-tips.md)。
 
@@ -42,7 +43,8 @@ ms.author: arramac
 
 **步骤 2：**在 App.config 中修改 EndpointUrl、AuthorizationKey、CollectionThroughput 和 DocumentTemplate（可选）的设置。
 
-> [!NOTE] 为集合预配高吞吐量之前，请参阅[定价页](https://www.azure.cn/pricing/details/documentdb/)以估算每个集合的成本。DocumentDB 根据存储和吞吐量单独按小时计费，因此你可以通过在测试后删除或降低 DocumentDB 集合的吞吐量来节省成本。
+> [!NOTE]
+> 为集合预配高吞吐量之前，请参阅[定价页](https://www.azure.cn/pricing/details/documentdb/)以估算每个集合的成本。DocumentDB 根据存储和吞吐量单独按小时计费，因此你可以通过在测试后删除或降低 DocumentDB 集合的吞吐量来节省成本。
 
 **步骤 3：**从命令行编译并运行控制台应用。你应会看到如下输出：
 

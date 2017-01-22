@@ -35,7 +35,8 @@ ms.author: juliako
 
 本主题适合开发受保护媒体传送应用程序的开发人员。本主题介绍如何使用授权策略来配置密钥传送服务，确保只有经过授权的客户端才能接收加密密钥。此外还将介绍如何使用动态加密。
 
->[!NOTE]若要开始使用动态加密，必须首先获取至少一个缩放单位（也称为流式处理单位）。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
+>[!NOTE]
+>若要开始使用动态加密，必须首先获取至少一个缩放单位（也称为流式处理单位）。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
 ## AES-128 动态加密和密钥传送服务工作流
 下面是使用 AES 加密资产时需要执行的常规步骤，这些步骤使用媒体服务密钥传送服务，也使用动态加密。
@@ -103,7 +104,8 @@ ms.author: juliako
 
 需要为用户提供平滑流、DASH 或 HLS 的流式处理 URL。
 
->[!NOTE]如果添加或更新资产的传送策略，则必须删除现有定位符（如果有）并创建新定位符。
+>[!NOTE]
+>如果添加或更新资产的传送策略，则必须删除现有定位符（如果有）并创建新定位符。
 
 有关如何发布资产和生成流 URL 的说明，请参阅[生成流 URL](./media-services-deliver-streaming-content.md)。
 

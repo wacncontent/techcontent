@@ -28,7 +28,8 @@ Azure AD Connect 使用现代身份验证（使用 ADAL 库）来进行身份验
 
 首先，我们需要确保正确配置 [**machine.config**](./active-directory-aadconnect-prerequisites.md#connectivity/)。![machineconfig](./media/active-directory-aadconnect-troubleshoot-connectivity/machineconfig.png)
 
-> [!NOTE] 某些非 Microsoft 博客提到，应该对 miiserver.exe.config 进行更改。但是，每次升级都会覆盖此文件，因此，尽管系统在初始安装期间可正常工作，但首次升级时将停止工作。出于此原因，建议改为更新 machine.config。
+> [!NOTE]
+> 某些非 Microsoft 博客提到，应该对 miiserver.exe.config 进行更改。但是，每次升级都会覆盖此文件，因此，尽管系统在初始安装期间可正常工作，但首次升级时将停止工作。出于此原因，建议改为更新 machine.config。
 
 还必须在代理服务器上打开所需的 URL。[Office 365 URLs and IP address ranges ](https://support.office.com/article/Office-365-URLs-and-IP-address-ranges-8548a211-3fe7-47cb-abb1-355ea5aa88a2)（Office 365 URL 和 IP 地址范围）中提供了正式列表。
 

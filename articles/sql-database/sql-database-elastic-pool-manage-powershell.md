@@ -103,7 +103,8 @@ ms.author: srinia
 
 可以向资源添加警报规则，以便在资源达到设置的使用阈值时，向 [URL 终结点](https://msdn.microsoft.com/zh-cn/library/mt718036.aspx)发送电子邮件通知或警报字符串。使用 Add-AzureRmMetricAlertRule cmdlet。
 
-> [!IMPORTANT]对弹性池资源利用率的监视存在至少 20 分钟的延迟。当前不支持为弹性池设置短于 30 分钟的警报。为弹性池设置的任何时长（PowerShell API 中名为“-WindowSize”的参数）短于 30 分钟的警报可能无法被触发。请确保为弹性池定义的任何警报的时长不短于 30 分钟 (WindowSize)。
+> [!IMPORTANT]
+>对弹性池资源利用率的监视存在至少 20 分钟的延迟。当前不支持为弹性池设置短于 30 分钟的警报。为弹性池设置的任何时长（PowerShell API 中名为“-WindowSize”的参数）短于 30 分钟的警报可能无法被触发。请确保为弹性池定义的任何警报的时长不短于 30 分钟 (WindowSize)。
 
 该示例添加了一个警报，以便在池的 eDTU 消耗超出特定阈值时获取通知。
 
@@ -130,7 +131,8 @@ ms.author: srinia
 
 可以将警报规则添加到弹性池中的所有数据库，以便在资源达到警报设置的使用阈值时，向 [URL 终结点](https://msdn.microsoft.com/zh-cn/library/mt718036.aspx)发送电子邮件通知或警报字符串。
 
-> [!IMPORTANT] 对弹性池资源利用率的监视存在至少 20 分钟的延迟。当前不支持为弹性池设置短于 30 分钟的警报。为弹性池设置的任何时长（PowerShell API 中名为“-WindowSize”的参数）短于 30 分钟的警报可能无法被触发。请确保为弹性池定义的任何警报的时长不短于 30 分钟 (WindowSize)。
+> [!IMPORTANT]
+> 对弹性池资源利用率的监视存在至少 20 分钟的延迟。当前不支持为弹性池设置短于 30 分钟的警报。为弹性池设置的任何时长（PowerShell API 中名为“-WindowSize”的参数）短于 30 分钟的警报可能无法被触发。请确保为弹性池定义的任何警报的时长不短于 30 分钟 (WindowSize)。
 
 该示例向池中的所有数据库添加了一个警报，以便在数据库的 DTU 消耗超出特定阈值时获取通知。
 

@@ -52,7 +52,8 @@ Power BI 允许以可视方式将数据显示为报表。使用适用于 Storm o
 
 * **IISLogsTable.sql**：Transact-SQL 语句，用于生成存储数据的数据库。
 
-> [!WARNING] 在 HDInsight 群集上启动该拓扑前，必须先在 SQL 数据库中创建表。
+> [!WARNING]
+> 在 HDInsight 群集上启动该拓扑前，必须先在 SQL 数据库中创建表。
 
 ## 下载示例
 
@@ -86,7 +87,8 @@ Power BI 允许以可视方式将数据显示为报表。使用适用于 Storm o
 
 1. 在“解决方案资源管理器”中，右键单击“StormToSQL”项目，然后选择“提交到 Storm on HDInsight”。从“Storm 群集”下拉对话框中选择 HDInsight 群集。
 
-    > [!NOTE] “Storm 群集”下拉对话框中填充服务器名称可能需要几秒钟时间。
+    > [!NOTE]
+    > “Storm 群集”下拉对话框中填充服务器名称可能需要几秒钟时间。
     ><p>
     ><p> 如果出现提示，请输入 Azure 订阅的登录凭据。如果有多个订阅，请登录包含 Storm on HDInsight 群集的订阅。
 
@@ -121,7 +123,8 @@ Power BI 允许以可视方式将数据显示为报表。使用适用于 Storm o
 
 4. 输入信息以连接到 Azure SQL 数据库。可以通过访问 [Azure 经典管理门户](https://manage.windowsazure.cn)并选择 SQL 数据库查找此信息。
 
-    > [!NOTE] 还可以通过在连接对话框中使用“启用高级选项”，以设置刷新间隔和自定义筛选器。
+    > [!NOTE]
+    > 还可以通过在连接对话框中使用“启用高级选项”，以设置刷新间隔和自定义筛选器。
 
 5. 连接后，将显示一个名称与连接的数据库相同的新数据集。选择该数据集以开始设计报表。
 

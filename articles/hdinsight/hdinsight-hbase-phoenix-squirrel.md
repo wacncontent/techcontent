@@ -21,7 +21,8 @@ ms.author: jgao
 
 了解如何在 HDInsight 中使用 [Apache Phoenix](http://phoenix.apache.org/)，以及如何在工作站上安装和配置 SQuirrel 以连接到 HDInsight 中的 HBase 群集。有关 Phoenix 的详细信息，请参阅[在 15 分钟或以下了解 Phoenix](http://phoenix.apache.org/Phoenix-in-15-minutes-or-less.html)。有关 Phoenix 语法，请参阅 [Phoenix 语法](http://phoenix.apache.org/language/index.html)。
 
->[!NOTE] 有关 HDInsight 中的 Phoenix 版本信息，请参阅 [HDInsight 提供的 Hadoop 群集版本有有何变化？][hdinsight-versions]。
+>[!NOTE]
+> 有关 HDInsight 中的 Phoenix 版本信息，请参阅 [HDInsight 提供的 Hadoop 群集版本有有何变化？][hdinsight-versions]。
 
 ## 使用 SQLLine
 [SQLLine](http://sqlline.sourceforge.net/) 是用于执行 SQL 的命令行实用工具。
@@ -73,7 +74,8 @@ ms.author: jgao
 
 - 已将一个 HBase 群集部署到包含 DNS 虚拟机的 Azure 虚拟网络。有关说明，请参阅[在 Azure 虚拟网络上预配 HBase 群集][hdinsight-hbase-provision-vnet-v1]。 
 
-    >[!IMPORTANT]必须在虚拟网络中安装一个 DNS 服务器。有关说明，请参阅[在两个 Azure 虚拟网络之间配置 DNS](./hdinsight-hbase-geo-replication-configure-DNS.md)
+    >[!IMPORTANT]
+    >必须在虚拟网络中安装一个 DNS 服务器。有关说明，请参阅[在两个 Azure 虚拟网络之间配置 DNS](./hdinsight-hbase-geo-replication-configure-DNS.md)
 
 - 获取 HBase 群集的特定于连接的 DNS 后缀。若要获取该后缀，请与群集建立连接桌面连接 (RDP)，然后运行 IPConfig。DNS 后缀类似于：
 
@@ -89,7 +91,8 @@ ms.author: jgao
 2. 打开/运行该 jar 文件。它需要 [Java 运行时环境](http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html)。
 3. 单击“下一步”两次。
 4. 指定你具有写入权限的路径，然后单击“下一步”。
-    >[!NOTE]默认的安装文件夹为 C:\\Program Files\\squirrel-sql-3.6 文件夹。若要写入此路径，必须为安装程序授予管理员权限。可以管理员身份打开命令提示符，导航到 Java 的 bin 文件夹，然后运行
+    >[!NOTE]
+    >默认的安装文件夹为 C:\\Program Files\\squirrel-sql-3.6 文件夹。若要写入此路径，必须为安装程序授予管理员权限。可以管理员身份打开命令提示符，导航到 Java 的 bin 文件夹，然后运行
     ><p>`java.exe -jar [the path of the SQuirrel jar file]`
 5. 单击“确定”确认创建目标目录。
 6. 默认设置是安装基本和标准程序包。单击“下一步”。
@@ -113,7 +116,8 @@ Phoenix 驱动程序 jar 文件位于 HBase 群集上。根据具体的版本，
     - **示例 URL**：jdbc:phoenix:zookeeper2.contoso-hbase-eu.f5.internal.chinacloudapp.cn
     - **类名**：org.apache.phoenix.jdbc.PhoenixDriver
 
-    >[!WARNING] 在“示例 URL”中使用全小写。当其中一个主机关闭时，可以使用整个 zookeeper 仲裁。主机名为 zookeeper0、zookeeper1 和 zookeeper2。
+    >[!WARNING]
+    > 在“示例 URL”中使用全小写。当其中一个主机关闭时，可以使用整个 zookeeper 仲裁。主机名为 zookeeper0、zookeeper1 和 zookeeper2。
 
     ![HDInsight HBase Phoenix SQuirrel 驱动程序][img-squirrel-driver]
 4. 单击**“确定”**。

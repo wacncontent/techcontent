@@ -20,7 +20,8 @@ wacn.date: 01/04/2017
 
 [!INCLUDE [howto-service-bus-queues](../../includes/howto-service-bus-queues.md)]
 
-> [!NOTE] 若要安装 Python 或 [Python Azure 包][]，请参阅 [Python 安装指南](../python-how-to-install.md)。
+> [!NOTE]
+> 若要安装 Python 或 [Python Azure 包][]，请参阅 [Python 安装指南](../python-how-to-install.md)。
 
 ## 创建队列
 

@@ -26,7 +26,8 @@ Azure CLI 提供了一组开源且跨平台的命令，这些命令可以用于 
 
 本指南假定你了解 Azure 存储服务的基本概念。本指南提供了大量的脚本，用于演示 Azure CLI 与 Azure 存储服务的用法。在运行每个脚本之前，请确保根据配置更新脚本变量。
 
-> [!NOTE] 本指南提供经典存储帐户的 Azure CLI 命令和脚本示例。若要了解如何使用适用于 Resource Manager 存储帐户的 Azure CLI 命令，请参阅[将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure 资源管理配合使用](../virtual-machines/azure-cli-arm-commands.md#azure-storage-commands-to-manage-your-storage-objects)。
+> [!NOTE]
+> 本指南提供经典存储帐户的 Azure CLI 命令和脚本示例。若要了解如何使用适用于 Resource Manager 存储帐户的 Azure CLI 命令，请参阅[将适用于 Mac、Linux 和 Windows 的 Azure CLI 与 Azure 资源管理配合使用](../virtual-machines/azure-cli-arm-commands.md#azure-storage-commands-to-manage-your-storage-objects)。
 
 ## 在 5 分钟内开始使用 Azure 存储服务和 Azure CLI
 本指南使用 Ubuntu 作为示例，但其他 OS 平台的操作应与此类似。
@@ -114,7 +115,8 @@ Azure 存储服务中的每个 Blob 都必须在容器中。你可以使用 `azu
 
         azure storage container create mycontainer
 
-> [!NOTE] 有三种级别的匿名读取访问权限：**Off**、**Blob** 和 **Container**。若要防止对 Blob 进行匿名访问，请将 Permission 参数设置为 **Off**。默认情况下，新容器是专用容器，只能由帐户所有者访问。若要允许对 Blob 资源进行匿名公共读取访问，但不允许访问容器元数据或容器中的 Blob 列表，请将 Permission 参数设置为 **Blob**。若要允许对 Blob 资源、容器元数据和容器中的 Blob 列表进行完全公开读取访问，请将 Permission 参数设置为 **Container**。有关详细信息，请参阅[管理对容器和 Blob 的匿名读取访问](./storage-manage-access-to-resources.md)。
+> [!NOTE]
+> 有三种级别的匿名读取访问权限：**Off**、**Blob** 和 **Container**。若要防止对 Blob 进行匿名访问，请将 Permission 参数设置为 **Off**。默认情况下，新容器是专用容器，只能由帐户所有者访问。若要允许对 Blob 资源进行匿名公共读取访问，但不允许访问容器元数据或容器中的 Blob 列表，请将 Permission 参数设置为 **Blob**。若要允许对 Blob 资源、容器元数据和容器中的 Blob 列表进行完全公开读取访问，请将 Permission 参数设置为 **Container**。有关详细信息，请参阅[管理对容器和 Blob 的匿名读取访问](./storage-manage-access-to-resources.md)。
 
 ### 将 Blob 上载到容器中
 Azure Blob 存储支持块 Blob 和页 Blob。有关详细信息，请参阅[了解块 Blob、追加 Blob 和页 Blob](http://msdn.microsoft.com/zh-cn/library/azure/ee691964.aspx)。

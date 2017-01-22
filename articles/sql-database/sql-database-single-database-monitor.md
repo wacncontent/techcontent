@@ -44,7 +44,8 @@ ms.author: carlrab
 
 在门户中公开的指标也可以通过以下系统视图查看：在服务器的逻辑 **master** 数据库中使用 [sys.resource\_stats](https://msdn.microsoft.com/zh-cn/library/dn269979.aspx)，在用户数据库中使用 [sys.dm\_db\_resource\_stats](https://msdn.microsoft.com/zh-cn/library/dn800981.aspx)。如果需要在更长时间段内监视更粗略的数据，请使用 **sys.resource\_stats**。如果需要在较短时间范围内监视更精细的数据，请使用 **sys.dm\_db\_resource\_stats**。有关详细信息，请参阅 [Azure SQL 数据库性能指南](./sql-database-performance-guidance.md#monitoring-resource-use-with-sysresourcestats)。
 
->[!NOTE] 在已停用的 Web 和 Business Edition 数据库中使用 **sys.dm\_db\_resource\_stats** 将返回空结果集。
+>[!NOTE]
+> 在已停用的 Web 和 Business Edition 数据库中使用 **sys.dm\_db\_resource\_stats** 将返回空结果集。
 
 对于弹性数据库池，可以使用本节中所述的技术来监视池中的单个数据库。但也可总体监视该池。有关信息，请参阅[监视和管理弹性数据库池](./sql-database-elastic-pool-manage-portal.md)。
 

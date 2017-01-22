@@ -75,13 +75,15 @@ wacn.lang: cn
 
     ![11](./media/azure-cognitive-services-face-api-wechat-app/11.png)
 
-    >[!NOTE]在本文档所展示的全部内容中，后续需要将修改后的应用代码作为 web service 发布到某个 web 站点，并在 JS 接口安全域名处输入发布代码的 web 站点域名。在实际操作时，您可以先通过 Azure Web App 创建一个空白的 web 站点，并在此处填入该 web 站点的域名，在后续步骤中将完成修改的代码上传到该站点。
+    >[!NOTE]
+    >在本文档所展示的全部内容中，后续需要将修改后的应用代码作为 web service 发布到某个 web 站点，并在 JS 接口安全域名处输入发布代码的 web 站点域名。在实际操作时，您可以先通过 Azure Web App 创建一个空白的 web 站点，并在此处填入该 web 站点的域名，在后续步骤中将完成修改的代码上传到该站点。
 
 ##Step3： 确认现有非关系型数据库可用性：MongoDB
 
 1. 登陆到现有的已连接到 Internet 的 Mongo DB 服务器，本演示中使用的 MongoDB 部署在 Azure VM 中。红框中填写的是虚拟机的公共 IP 地址，端口号默认 22。
 
-    >[!NOTE]如果您没有已存在的适用的 Mongo DB 服务器，您可以直接在 Azure 订阅中创建一台 Linux VM 并进行 MongoDB 部署。
+    >[!NOTE]
+    >如果您没有已存在的适用的 Mongo DB 服务器，您可以直接在 Azure 订阅中创建一台 Linux VM 并进行 MongoDB 部署。
 
     ![12](./media/azure-cognitive-services-face-api-wechat-app/12.png)
 
@@ -132,7 +134,8 @@ wacn.lang: cn
 
 5. 将本地发布好的应用程序上传到公网 Web 服务器中，本演示中的 Web 服务器使用 Azure Web App 服务。
 
-    >[!NOTE]应用程序上传的目标服务器，要求必须与本演示中 [Step2->3](#step2-3) 中设置的 “JS 接口安全域名” 地址一致。
+    >[!NOTE]
+    >应用程序上传的目标服务器，要求必须与本演示中 [Step2->3](#step2-3) 中设置的 “JS 接口安全域名” 地址一致。
      
 ##Step7： 结果验证
 
@@ -148,7 +151,8 @@ wacn.lang: cn
 
     ![24](./media/azure-cognitive-services-face-api-wechat-app/24.png)	
 
-    >[!NOTE]本演示中使用的数据库是 test 数据库，test 数据库是 MongoDB 的默认数据库，也是配置在 web.config 中的数据库。
+    >[!NOTE]
+    >本演示中使用的数据库是 test 数据库，test 数据库是 MongoDB 的默认数据库，也是配置在 web.config 中的数据库。
 
 ##扩展服务
 

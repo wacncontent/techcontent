@@ -109,7 +109,8 @@ ms.author: masashin
 
 过期的缓存数据将从缓存中删除，应用程序必须从原始数据存储中检索数据（它可以将新提取的信息放回缓存）。在配置缓存时，你可以设置默认的过期策略。在许多缓存服务中，当以编程方式将单个对象存储在缓存中时，还可以规定这些对象的过期时间。某些缓存可让你将过期时间指定为绝对值，或者，如果并未在指定的时间内访问，则从缓存中删除项的滑动值。此设置将重写任何缓存范围的过期策略，但只适用于指定的对象。
 
-> [!NOTE] 请慎重考虑缓存的过期时段及其包含的对象。如果设置的时段太短，则对象很快就会过期，因此就减少了使用缓存带来的优势。如果设置的时段太长，则会面临数据过时的风险。
+> [!NOTE]
+> 请慎重考虑缓存的过期时段及其包含的对象。如果设置的时段太短，则对象很快就会过期，因此就减少了使用缓存带来的优势。如果设置的时段太长，则会面临数据过时的风险。
 
 此外，如果允许数据长时间驻留，则缓存有可能会填满。在此情况下，将新项添加到缓存的任何请求可能会导致某些项被强行删除，这个过程称为逐出。缓存服务通常根据最近最少使用 (LRU) 的原则逐出数据，但你通常可以重写此策略，并防止项被逐出。但是，如果采用这种方法，则会面临缓存超过可用内存。应用程序尝试将项添加到缓存时将会失败并发生异常。
 
@@ -199,7 +200,8 @@ Azure Redis 缓存是高性能缓存解决方案，提供可用性、可缩放�
 
  Azure Redis 缓存与客户端应用程序使用的多种 API 兼容。如果现有应用程序已使用运行本地的 Azure Redis 缓存，Azure Redis 缓存可在云中提供缓存的快速迁移路径。
 
-> [!NOTE] Azure 还提供托管缓存服务。此服务基于 Azure Service Fabric 缓存引擎。使用它可以创建可由松散耦合应用程序共享的分布式缓存。缓存托管在 Azure 数据中心内运行的高性能服务器上。但是，不再建议使用此选项，提供此选项只是为了支持构建为使用此选项的现有应用程序。针对所有新的开发，请改用 Azure Redis 缓存。
+> [!NOTE]
+> Azure 还提供托管缓存服务。此服务基于 Azure Service Fabric 缓存引擎。使用它可以创建可由松散耦合应用程序共享的分布式缓存。缓存托管在 Azure 数据中心内运行的高性能服务器上。但是，不再建议使用此选项，提供此选项只是为了支持构建为使用此选项的现有应用程序。针对所有新的开发，请改用 Azure Redis 缓存。
 >
 > 此外，Azure 支持角色中缓存。此功能可让你创建云服务专用的缓存。缓存由 Web 角色或辅助角色的实例托管，只能由以同一云服务部署单位的一部分来操作的角色进行访问。（部署单位是作为云服务部署到特定区域的角色实例集合。） 缓存已组建群集，托管缓存的同一部署单位中的所有角色实例将成为同一缓存群集的一部分。但是，不再建议使用此选项，提供此选项只是为了支持构建为使用此选项的现有应用程序。针对所有新的开发，请改用 Azure Redis 缓存。
 >
@@ -215,7 +217,8 @@ Redis 支持读取和写入操作。在 Redis 中，写入操作将定期存储�
 
  所有写入都是异步的，不会阻止客户端读取和写入数据。当 Redis 开始运行时，将从快照或日志文件中读取数据，并使用它来构建内存中缓存。有关详细信息，请参阅 Redis 网站上的 [Redis persistence](http://redis.io/topics/persistence)（Redis 持久性）。
 
-> [!NOTE] Redis 不保证所有写入在发生灾难性故障时都会得到保存，但在最糟的情况下，你只会丢失几秒钟的数据。请记住，缓存并不适合用作权威数据源，应用程序负责使用缓存来确保成功将关键数据保存到适当的数据存储。有关详细信息，请参阅[缓存端模式](http://msdn.microsoft.com/zh-cn/library/dn589799.aspx)。
+> [!NOTE]
+> Redis 不保证所有写入在发生灾难性故障时都会得到保存，但在最糟的情况下，你只会丢失几秒钟的数据。请记住，缓存并不适合用作权威数据源，应用程序负责使用缓存来确保成功将关键数据保存到适当的数据存储。有关详细信息，请参阅[缓存端模式](http://msdn.microsoft.com/zh-cn/library/dn589799.aspx)。
 
 #### Redis 数据类型
 
@@ -261,7 +264,8 @@ Redis 不直接支持任何形式的数据加密，因此所有编码必须由�
 
 有关详细信息，请访问 Redis 网站上的 [Redis security](http://redis.io/topics/security)（Redis 安全性）页。
 
-> [!NOTE] Azure Redis 缓存通过连接的客户端提供自身的安全层。底层 Redis 服务器不向公共网络公开。
+> [!NOTE]
+> Azure Redis 缓存通过连接的客户端提供自身的安全层。底层 Redis 服务器不向公共网络公开。
 
 ### 使用 Azure Redis 缓存
 
@@ -289,7 +293,8 @@ Azure 经典管理门户包含便利的图形画面，可让你监视缓存的�
 
 有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 会话状态提供程序](./redis-cache/cache-aspnet-session-state-provider.md)页。
 
-> [!NOTE] 对在 Azure 环境外部运行的 ASP.NET 应用程序，请不要使用 Azure Redis 缓存的会话状态提供程序。从 Azure 外部访问缓存的延迟会抵消缓存数据带来的性能优势。
+> [!NOTE]
+> 对在 Azure 环境外部运行的 ASP.NET 应用程序，请不要使用 Azure Redis 缓存的会话状态提供程序。从 Azure 外部访问缓存的延迟会抵消缓存数据带来的性能优势。
 
 同样地，Azure Redis 缓存的输出缓存提供程序可让你保存 ASP.NET Web 应用程序生成的 HTTP 响应。配合 Azure Redis 缓存使用输出缓存提供程序可以针对呈现复杂 HTML 输出的应用程序改善响应时间；生成类似响应的应用程序实例可以使用缓存中的共享输出段，而不用重新生成此 HTML 输出。有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 输出缓存提供程序](./redis-cache/cache-aspnet-output-cache-provider.md)页。
 
@@ -324,7 +329,8 @@ Azure 门户预览包含便利的图形画面，可让你监视缓存的性能�
 
 有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 会话状态提供程序](./redis-cache/cache-aspnet-session-state-provider.md)页。
 
-> [!NOTE] 不要针对在 Azure 环境外部运行的 ASP.NET 应用程序使用 Azure Redis 缓存的会话状态提供程序。从 Azure 外部访问缓存的延迟会抵消缓存数据带来的性能优势。
+> [!NOTE]
+> 不要针对在 Azure 环境外部运行的 ASP.NET 应用程序使用 Azure Redis 缓存的会话状态提供程序。从 Azure 外部访问缓存的延迟会抵消缓存数据带来的性能优势。
 
 同样地，Azure Redis 缓存的输出缓存提供程序可让你保存 ASP.NET Web 应用程序生成的 HTTP 响应。配合 Azure Redis 缓存使用输出缓存提供程序可以针对呈现复杂 HTML 输出的应用程序改善响应时间。生成类似响应的应用程序实例可以使用缓存中的共享输出段，而不用重新生成此 HTML 输出。有关详细信息，请访问 Microsoft 网站上的 [Azure Redis 缓存的 ASP.NET 输出缓存提供程序](./redis-cache/cache-aspnet-output-cache-provider.md)页。
 
@@ -788,7 +794,8 @@ Redis 集是共享单个键的多个项集合。可以使用 SADD 命令来创�
         Console.WriteLine(post);
     }
 
-> [!NOTE] StackExchange 库还提供了 `IDatabase.SortedSetRangeByRankAsync` 方法，用于以评分顺序返回数据，但不返回评分。
+> [!NOTE]
+> StackExchange 库还提供了 `IDatabase.SortedSetRangeByRankAsync` 方法，用于以评分顺序返回数据，但不返回评分。
 
 你也可以使用评分递减顺序来检索项，并通过将额外参数提供给 `IDatabase.SortedSetRangeByRankWithScoresAsync` 方法来限制返回项的数目。以下示例演示了排名前 10 位博客文章的标题和评分：
 

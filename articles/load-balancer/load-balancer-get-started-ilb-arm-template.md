@@ -27,7 +27,8 @@ wacn.date: 01/05/2017
 
 [!INCLUDE [load-balancer-get-started-ilb-intro-include.md](../../includes/load-balancer-get-started-ilb-intro-include.md)]
 
->[!NOTE] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Microsoft 建议对大多数新部署使用该模型，而不要使用[经典部署模型](./load-balancer-get-started-ilb-classic-ps.md)。
+>[!NOTE]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Microsoft 建议对大多数新部署使用该模型，而不要使用[经典部署模型](./load-balancer-get-started-ilb-classic-ps.md)。
 
 [!INCLUDE [load-balancer-get-started-ilb-scenario-include.md](../../includes/load-balancer-get-started-ilb-scenario-include.md)]
 

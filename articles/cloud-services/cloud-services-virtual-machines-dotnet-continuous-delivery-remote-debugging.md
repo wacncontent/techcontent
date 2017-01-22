@@ -43,7 +43,8 @@ ms.author: tarcher
 4. 根据[如何安装和配置 Azure PowerShell](../powershell-install-configure.md) 中所述安装 Azure Powershell（0.7.4 或更高版本）。
 5. 运行以下脚本以启用 RemoteDebug 扩展。将路径和个人数据替换为自己的数据，例如，订阅名称、服务名称和指纹。
 
-    >[!NOTE] 此脚本是针对 Visual Studio 2015 配置的。如果使用的是 Visual Studio 2013，请修改下面的 `$referenceName` 和 `$extensionName` 赋值以使用 `RemoteDebugVS2013`（而不是使用 `RemoteDebugVS2015`）。
+    >[!NOTE]
+    > 此脚本是针对 Visual Studio 2015 配置的。如果使用的是 Visual Studio 2013，请修改下面的 `$referenceName` 和 `$extensionName` 赋值以使用 `RemoteDebugVS2013`（而不是使用 `RemoteDebugVS2015`）。
 
     <pre>
     Add-AzureRmAccount -EnvironmentName AzureChinaCloud

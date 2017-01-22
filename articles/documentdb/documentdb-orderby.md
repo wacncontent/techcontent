@@ -64,7 +64,8 @@ DocumentDB 支持每个查询使用单个数值、字符串或布尔值属性进
 
 回想一下，DocumentDB 支持两种索引（哈希和范围），可以为特定的路径/属性、数据类型（字符串/数字）设置该索引并且是以不同的精度值（最大精度值或固定精度值）。由于 DocumentDB 使用哈希索引做为默认索引，因此必须使用带有数字、字符串（或两者）范围的自定义索引策略创建新集合，以便能够使用 Order By。
 
->[!NOTE] 在 2015 年 7 月 7 日推出了字符串范围索引，以及 REST API 版本 2015-06-03。若要为 Order By 创建针对字符串的策略，必须使用 .NET SDK 的 SDK 版本 1.2.0，或者 Python、Node.js 或 Java SDK 的版本 1.1.0。
+>[!NOTE]
+> 在 2015 年 7 月 7 日推出了字符串范围索引，以及 REST API 版本 2015-06-03。若要为 Order By 创建针对字符串的策略，必须使用 .NET SDK 的 SDK 版本 1.2.0，或者 Python、Node.js 或 Java SDK 的版本 1.1.0。
 >
 >在 REST API 版本 2015-06-03 之前，默认的集合索引策略为字符串哈希和数字哈希。这都已更改为字符串哈希和数字范围。
 
@@ -79,7 +80,8 @@ DocumentDB 支持每个查询使用单个数值、字符串或布尔值属性进
 
     await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), books);  
 
->[!NOTE] 请注意，Order By 只能返回使用 RangeIndex 作为索引的数据类型（字符串和数字）的结果。例如，如果你的默认索引策略仅有数字的 RangeIndex，那么针对含字符串值的路径使用 Order By 将不返回任何文档。
+>[!NOTE]
+> 请注意，Order By 只能返回使用 RangeIndex 作为索引的数据类型（字符串和数字）的结果。例如，如果你的默认索引策略仅有数字的 RangeIndex，那么针对含字符串值的路径使用 Order By 将不返回任何文档。
 
 ### 针对单个属性的 Order By 的索引
 下面显示如何只是针对标题属性（为字符串）使用索引为 Order By 创建集合。这里有两个路径，一个用于具有范围索引的标题属性 ("/Title/?")，另一个用于具有默认索引方案（即字符串哈希和数字范围）的其他每个属性。

@@ -39,7 +39,8 @@ Azure Service Fabric 服务可以是有状态服务，也可以是无状态服�
 ### 副本角色
 副本的角色可用于管理受该副本所管理状态的生命周期。具有主副本角色的副本将为读取请求提供服务。通过更新状态并将此更改复制到副本集中的活动辅助副本，主副本也可以处理写入请求。活动辅助副本的角色是接收主副本已复制的状态更改并更新其状态视图。
 
->[!NOTE] 对开发人员而言，更高级别的编程模型（如 [Reliable Actors 框架](./service-fabric-reliable-actors-introduction.md)）可使副本角色的概念不再抽象化。
+>[!NOTE]
+> 对开发人员而言，更高级别的编程模型（如 [Reliable Actors 框架](./service-fabric-reliable-actors-introduction.md)）可使副本角色的概念不再抽象化。
 
 ## 后续步骤
 

@@ -134,13 +134,15 @@ wacn.date: 01/04/2017
             namespaceManager.CreateTopic(td);
         }
 
-> [!NOTE]可以对 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 对象使用 [TopicExists](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.topicexists.aspx) 方法来检查具有指定名称的主题在某个命名空间中是否已存在。
+> [!NOTE]
+>可以对 [NamespaceManager](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 对象使用 [TopicExists](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.topicexists.aspx) 方法来检查具有指定名称的主题在某个命名空间中是否已存在。
 
 ## 创建订阅
 
 还可以使用 [`NamespaceManager`](https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.namespacemanager.aspx) 类创建主题订阅。订阅已命名，并且具有一个限制传递到订阅的虚拟队列的消息集的可选筛选器。
 
-> [!IMPORTANT] 要使消息可由订阅接收，必须在将任何消息发送到主题之前，创建该订阅。如果对于某个主题没有订阅，则该主题将丢弃这些消息。
+> [!IMPORTANT]
+> 要使消息可由订阅接收，必须在将任何消息发送到主题之前，创建该订阅。如果对于某个主题没有订阅，则该主题将丢弃这些消息。
 
 ### 创建具有默认 (MatchAll) 筛选器的订阅
 

@@ -28,7 +28,8 @@ ms.author: trinadhk; jimpark; markgal;
 
 Azure 备份服务提供两种类型的保管库（备份保管库和恢复服务保管库）来保护 VM。备份保管库保护使用经典部署模型部署的 VM。恢复服务保管库保护**经典部署和资源管理器部署的 VM**。必须使用恢复服务保管库来保护资源管理器部署的 VM。
 
->[!NOTE] Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。有关使用经典部署模型 VM 的详细信息，请参阅[准备好环境以备份 Azure 虚拟机](./backup-azure-vms-prepare.md)。
+>[!NOTE]
+> Azure 有两种用于创建和使用资源的部署模型：[资源管理器部署模型和经典部署模型](../azure-resource-manager/resource-manager-deployment-model.md)。有关使用经典部署模型 VM 的详细信息，请参阅[准备好环境以备份 Azure 虚拟机](./backup-azure-vms-prepare.md)。
 
 请确保符合以下先决条件，这样才能保护或备份资源管理器部署的虚拟机 (VM)：
 
@@ -107,7 +108,8 @@ Azure VM 代理必须安装在 Azure 虚拟机上，备份扩展才能运行。�
 ### 使用 HTTP 代理进行 VM 备份
 备份 VM 时，VM 上的备份扩展会使用 HTTPS API 将快照管理命令发送到 Azure 存储空间。将通过 HTTP 代理路由备份扩展流量，因为它是为了访问公共 Internet 而配置的唯一组件。
 
->[!NOTE] 至于应该使用何种代理软件，我们不提供任何建议。请确保你选取的代理可以进行下述配置步骤。
+>[!NOTE]
+> 至于应该使用何种代理软件，我们不提供任何建议。请确保你选取的代理可以进行下述配置步骤。
 
 以下示例图像显示了使用 HTTP 代理所要执行的三个配置步骤：
 
@@ -145,7 +147,8 @@ Azure VM 代理必须安装在 Azure 虚拟机上，备份扩展才能运行。�
     Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name ProxyEnable -Value $obj.ProxyEnable
     Set-ItemProperty -Path Registry::"HKEY_USERS\S-1-5-18\Software\Microsoft\Windows\CurrentVersion\Internet Settings" -Name Proxyserver -Value $obj.Proxyserver
 
->[!NOTE] 如果在代理服务器日志中发现“(407)需要代理身份验证”，请检查身份验证设置是否正确。
+>[!NOTE]
+> 如果在代理服务器日志中发现“(407)需要代理身份验证”，请检查身份验证设置是否正确。
 
 ######对于 Linux 计算机
 

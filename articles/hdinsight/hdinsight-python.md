@@ -48,7 +48,8 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
     FROM hivesampletable
     ORDER BY clientid LIMIT 50;
 
-> [!NOTE] 在基于 Windows 的 HDInsight 群集上，**USING** 子句必须指定 python.exe 的完整路径。该路径始终为 `D:\Python27\python.exe`。
+> [!NOTE]
+> 在基于 Windows 的 HDInsight 群集上，**USING** 子句必须指定 python.exe 的完整路径。该路径始终为 `D:\Python27\python.exe`。
 
 本示例执行以下操作：
 
@@ -103,7 +104,8 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 * __使用 Jython__：`register '/path/to/pig_python.py' using jython as myfuncs;`
 * __使用 C Python__：`register '/path/to/pig_python.py' using streaming_python as myfuncs;`
 
-> [!IMPORTANT] 使用 Jython 时，pig\_jython 文件的路径可以是本地路径或 WASB:// 路径。但是，使用 C Python 时，必须引用用于提交 Pig 作业的节点的本地文件系统上的文件。
+> [!IMPORTANT]
+> 使用 Jython 时，pig\_jython 文件的路径可以是本地路径或 WASB:// 路径。但是，使用 C Python 时，必须引用用于提交 Pig 作业的节点的本地文件系统上的文件。
 
 通过注册后，此示例的 Pig Latin 对于两个脚本是相同的：
 
@@ -134,7 +136,8 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
     date, time, classname, level, detail = input.split(' ', 4)
     return date, time, classname, level, detail
 
-> [!NOTE] 安装时不必要考虑“pig\_util”，脚本会自动使用该选项。
+> [!NOTE]
+> 安装时不必要考虑“pig\_util”，脚本会自动使用该选项。
 
 还记得吗？我们前面只是将 **LINE** 输入定义为 chararray，因为输入没有一致的架构。 Python 脚本的任务是将数据转换成用于输出的一致架构。其工作方式如下所述：
 
@@ -246,7 +249,8 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
 
     此脚本将检索 HDInsight 群集的信息，然后提取默认存储帐户的名称和密钥，并将文件上传到容器的根目录。
 
-    > [!NOTE] [在 HDInsight 中上传 Hadoop 作业的数据](./hdinsight-upload-data.md)文档中介绍了上传脚本的其他方法。
+    > [!NOTE]
+    > [在 HDInsight 中上传 Hadoop 作业的数据](./hdinsight-upload-data.md)文档中介绍了上传脚本的其他方法。
 
 上传文件后，使用以下 PowerShell 脚本启动作业。完成作业时，会将输出写入到 PowerShell 控制台。
 
@@ -282,7 +286,8 @@ HDInsight 还包含 Jython，后者是用 Java 编写的 Python 实现。Pig 无
     100042	Apple iPhone 4.2.x	375ad9a0ddc4351536804f1d5d0ea9b9
 
 ####Pig (Jython)
-> [!NOTE] 使用 PowerShell 远程提交作业时，无法使用 C Python 作为解释器。
+> [!NOTE]
+> 使用 PowerShell 远程提交作业时，无法使用 C Python 作为解释器。
 
     # Replace 'YourHDIClusterName' with the name of your cluster
     $clusterName = YourHDIClusterName

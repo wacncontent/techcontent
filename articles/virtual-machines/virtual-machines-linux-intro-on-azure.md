@@ -85,7 +85,8 @@ Azure Linux 代理包含自动检测此名称更改的功能，并会相应地�
 
 在 Linux 上，资源磁盘通常由 Azure Linux 代理管理并且自动装载到 **/mnt/resource**（或 Ubuntu 映像上的 **/mnt**）。
 
->[!NOTE]请注意，资源磁盘是**临时**磁盘，并可能在重新启动 VM 时被删除或重新格式化。
+>[!NOTE]
+>请注意，资源磁盘是**临时**磁盘，并可能在重新启动 VM 时被删除或重新格式化。
 
 在 Linux 上，数据磁盘可能由内核命名为 `/dev/sdc`，并且用户需要对该资源进行分区、格式化和装载。在[如何将数据磁盘附加到虚拟机](./virtual-machines-linux-classic-attach-disk.md)的教程中对此进行了分步说明。
 

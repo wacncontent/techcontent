@@ -57,7 +57,8 @@ ms.author: jdial
 
 1. 为每个 **RoleInstance** 元素查找 **HostName** 元素。
 
->[!WARNING] 还可通过以下方式从 REST 调用响应，查看云服务的内部域后缀：查看 **InternalDnsSuffix** 元素；通过在远程桌面会话 (Windows) 中的命令提示符下运行 ipconfig /all；通过从 SSH 终端 (Linux) 运行 cat /etc/resolv.conf。
+>[!WARNING]
+> 还可通过以下方式从 REST 调用响应，查看云服务的内部域后缀：查看 **InternalDnsSuffix** 元素；通过在远程桌面会话 (Windows) 中的命令提示符下运行 ipconfig /all；通过从 SSH 终端 (Linux) 运行 cat /etc/resolv.conf。
 
 ## 修改主机名
 

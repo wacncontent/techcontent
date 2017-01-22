@@ -23,7 +23,8 @@ ms.author: cephalin
 
 本教程介绍如何使用 [Visual Studio Code](http://code.visualstudio.com//Docs/whyvscode) (VS Code) 创建 ASP.NET Web 5 应用，并将其部署到 [Azure App Service](../app-service/app-service-value-prop-what-is.md)。
 
-> [!NOTE] 尽管本文介绍的是 Web 应用，但同样适用于 API 应用和移动应用。
+> [!NOTE]
+> 尽管本文介绍的是 Web 应用，但同样适用于 API 应用和移动应用。
 
 ASP.NET 5 是经过大幅重新设计的 ASP.NET。ASP.NET 5 是新的开源跨平台框架，用于通过 .NET 构建基于云的现代 Web 应用。有关详细信息，请参阅 [ASP.NET 5 简介](http://docs.asp.net/en/latest/conceptual-overview/aspnet.html)。有关 Azure App Service Web 应用的信息，请参阅 [Web 应用概述](./app-service-web-overview.md)。
 
@@ -70,7 +71,8 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
 
         dnvm use 1.0.0-update1 -p
 
-> [!NOTE] 有关 OS X、 Linux 和 Windows 的更详细安装说明，请参阅[安装 ASP.NET 5 和 DNX](https://code.visualstudio.com/Docs/ASPnet5#_installing-aspnet-5-and-dnx)。
+> [!NOTE]
+> 有关 OS X、 Linux 和 Windows 的更详细安装说明，请参阅[安装 ASP.NET 5 和 DNX](https://code.visualstudio.com/Docs/ASPnet5#_installing-aspnet-5-and-dnx)。
 
 ## 创建 Web 应用 
 
@@ -82,7 +84,8 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
 
         npm install -g yo grunt-cli generator-aspnet bower
 
-    > [!NOTE] 你可能会收到提示 npm 版本已过期的警告。此警告不会影响本教程。
+    > [!NOTE]
+    > 你可能会收到提示 npm 版本已过期的警告。此警告不会影响本教程。
 
 3. 在命令提示符下输入以下命令，以创建项目文件夹，并创建应用的基架。
 
@@ -114,7 +117,8 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
 
         dnx: Run Command
 
-    > [!NOTE] 如果 Omnisharp 服务器当前未运行，则会启动。重新输入上述命令。
+    > [!NOTE]
+    > 如果 Omnisharp 服务器当前未运行，则会启动。重新输入上述命令。
 
     接下来，选择以下命令以运行你的 Web 应用：
 
@@ -122,7 +126,8 @@ ASP.NET 5/DNX（.NET 执行环境）是精简的 .NET 堆栈，用于构建在 O
 
     命令窗口会显示该应用程序已启动。如果命令窗口未显示此消息，请检查 VS Code 左下角以找出项目中的错误。
 
-    > [!NOTE] 从**命令控制板**发出命令需要在命令行的开头输入 **>** 字符。你可以在 *project.json* 文件中查看与 **web** 命令相关的详细信息。
+    > [!NOTE]
+    > 从**命令控制板**发出命令需要在命令行的开头输入 **>** 字符。你可以在 *project.json* 文件中查看与 **web** 命令相关的详细信息。
     > 如果该命令未出现或不可用，则可能需要安装 C# 扩展。运行 `>Extensions: Install Extension` 和 `ext install c#` 以安装 C# 扩展。
 
 2. 打开浏览器并导航到以下 URL。
@@ -221,7 +226,8 @@ Git 是分布式版本控制系统，可用于部署 Azure App Service Web 应�
         To https://user@testsite.scm.chinacloudsites.cn/testsite.git
         [new branch]      master -> master
 
-> [!NOTE] 如果更改了应用，可依次选择“全部提交”选项和“推送”选项，直接在 VS Code 中使用内置 Git 功能重新发布应用。可以在“全部提交”和“刷新”按钮旁边的下拉菜单中找到可用的“推送”选项。
+> [!NOTE]
+> 如果更改了应用，可依次选择“全部提交”选项和“推送”选项，直接在 VS Code 中使用内置 Git 功能重新发布应用。可以在“全部提交”和“刷新”按钮旁边的下拉菜单中找到可用的“推送”选项。
 
 如果需要与其他人对项目进行协作，应该考虑在推送到 Azure 之前先推送到 GitHub。
 

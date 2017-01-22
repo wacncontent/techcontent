@@ -28,7 +28,8 @@ Azure 文件存储使用标准 SMB 协议在云中提供文件共享。使用 Az
 
 文件存储现已正式推出并同时支持 SMB 2.1 和 SMB 3.0。有关文件存储的更多详细信息，请参阅[文件服务 REST API](https://msdn.microsoft.com/zh-cn/library/azure/dn167006.aspx)。
 
->[!NOTE] 由于 Linux SMB 客户端尚不支持加密，从 Linux 装载文件共享仍需要客户端与文件共享在同一 Azure 区域中。但是，Linux 的加密支持已经在负责 SMB 功能的 Linux 开发人员的路线图上。将来支持加密的 Linux 分发也将能够从任何位置装载 Azure 文件共享。
+>[!NOTE]
+> 由于 Linux SMB 客户端尚不支持加密，从 Linux 装载文件共享仍需要客户端与文件共享在同一 Azure 区域中。但是，Linux 的加密支持已经在负责 SMB 功能的 Linux 开发人员的路线图上。将来支持加密的 Linux 分发也将能够从任何位置装载 Azure 文件共享。
 
 ## 选择要使用的 Linux 分发
 在 Azure 中创建 Linux 虚拟机时，可以从 Azure 映像库指定支持 SMB 2.1 或更高版本的 Linux 映像。下面是建议的 Linux 映像的列表：

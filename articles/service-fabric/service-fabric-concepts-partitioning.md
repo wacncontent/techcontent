@@ -114,7 +114,8 @@ Service Fabric 提供了三个分区方案可供选择：
 
 编写任何代码之前，需要考虑分区和分区键。需要 26 个分区（字母表中的每个字母各一个分区），但是低键和高键是怎样的呢？ 因为我们确实是对每个字母使用一个分区，所以可以使用 0 作为低键，使用 25 作为高键，因为每个字母都是自己的键。
 
->[!NOTE] 这是简化方案，因为在现实情况下分布是不均匀的。以字母“S”或“M”开头的姓氏比以“X”或“Y”开头的姓氏更常见。
+>[!NOTE]
+> 这是简化方案，因为在现实情况下分布是不均匀的。以字母“S”或“M”开头的姓氏比以“X”或“Y”开头的姓氏更常见。
 
 1. 打开“Visual Studio”>“文件”>“新建”>“项目”。
 2. 在“新建项目”对话框中，选择 Service Fabric 应用程序。
@@ -143,7 +144,8 @@ Service Fabric 提供了三个分区方案可供选择：
 
 7. 接下来，需要重写 Processing 类的 `CreateServiceReplicaListeners()` 方法。
 
-    >[!NOTE] 对于此示例，我们假定你使用一个简单 HttpCommunicationListener。有关 Reliable Service 通信的详细信息，请参阅 [Reliable Service 通信方式](./service-fabric-reliable-services-communication.md)。
+    >[!NOTE]
+    > 对于此示例，我们假定你使用一个简单 HttpCommunicationListener。有关 Reliable Service 通信的详细信息，请参阅 [Reliable Service 通信方式](./service-fabric-reliable-services-communication.md)。
 
 8. 副本所侦听的 URL 的建议格式为以下格式：`{scheme}://{nodeIp}:{port}/{partitionid}/{replicaid}/{guid}`。因此，你要将通信侦听器配置为侦听正确的终结点以及使用此模式。
 

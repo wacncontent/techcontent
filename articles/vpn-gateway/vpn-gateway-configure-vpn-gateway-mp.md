@@ -143,7 +143,8 @@ ms.author: cherylmc
 
 在更改网关 VPN 类型之前，请确保验证 VPN 设备可支持所要使用的路由类型。若要下载新的路由配置示例并检查 VPN 设备要求，请参阅[关于用于虚拟网络连接的 VPN 设备](./vpn-gateway-about-vpn-devices.md)。
 
->[!IMPORTANT] 删除虚拟网络 VPN 网关时，将释放分配给该网关的 VIP。重新创建网关时，系统会为它分配新的 VIP。
+>[!IMPORTANT]
+> 删除虚拟网络 VPN 网关时，将释放分配给该网关的 VIP。重新创建网关时，系统会为它分配新的 VIP。
 
 1. **删除现有 VPN 网关。**
 

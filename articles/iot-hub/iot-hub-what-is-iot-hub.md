@@ -30,7 +30,8 @@ ms.author: dobett
 
 ![在物联网解决方案中充当云网关的 Azure IoT 中心][img-architecture]  
 
-> [!NOTE] 有关 IoT 体系结构的深入讨论，请参阅 [Azure IoT Reference Architecture][lnk-refarch]（Azure IoT 参考体系结构）。
+> [!NOTE]
+> 有关 IoT 体系结构的深入讨论，请参阅 [Azure IoT Reference Architecture][lnk-refarch]（Azure IoT 参考体系结构）。
 
 ## IoT 设备连接性挑战
 

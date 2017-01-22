@@ -53,7 +53,8 @@ ms.author: robinsh
         "AccountKey=your_storage_account_key;" +
         "EndpointSuffix=core.Chinacloudapi.cn";
 
-> [!NOTE] 将 your\_storage\_account\_name 和 your\_storage\_account\_key 替换为你的存储帐户的实际值。
+> [!NOTE]
+> 将 your\_storage\_account\_name 和 your\_storage\_account\_key 替换为你的存储帐户的实际值。
 
 ## 连接到 Azure 存储帐户
 

@@ -58,7 +58,8 @@ Trace、Debug 和 TraceSource 都需要设置“侦听器”来收集和记录�
         </trace>
     </system.diagnostics>
     ```
-    >[!IMPORTANT] 确保与 Microsoft.WindowsAzure.Diagnostics 程序集建立项目引用。更新上述 xml 中的版本号，以便与引用的 Microsoft.WindowsAzure.Diagnostics 程序集的版本匹配。
+    >[!IMPORTANT]
+    > 确保与 Microsoft.WindowsAzure.Diagnostics 程序集建立项目引用。更新上述 xml 中的版本号，以便与引用的 Microsoft.WindowsAzure.Diagnostics 程序集的版本匹配。
 
 3. 保存 config 文件。
 

@@ -108,7 +108,8 @@ Azure SQL 数据库经典门户：
 
 另一种方法是使用装有 [CU6](http://support.microsoft.com/zh-cn/kb/3031047) 的 SQL Server Management Studio (SSMS) 2014 来连接到 Azure SQL 数据库。以下博客文章提供了更多详细信息：<br/>[Azure SQL 数据库的客户端工具更新](https://azure.microsoft.com/blog/2014/12/22/client-tooling-updates-for-azure-sql-database)。
 
-> [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+> [!IMPORTANT]
+> 建议始终使用最新版本的 Management Studio 以保持与 Azure 和 SQL 数据库的更新同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ### 升级到 V12 *期间*的限制
 在升级到 V12 期间，V11 数据库仍然支持数据访问。但你要考虑到几个限制。
@@ -138,7 +139,8 @@ Azure SQL 数据库经典门户：
 - [Visual Studio 2013 中的 SQL Server 数据库工具 2015 年 2 月更新版](https://msdn.microsoft.com/data/hh297027)
 - [Azure SQL 数据库 V12 数据层应用程序框架 (DacFx) 2015 年 2 月版](http://www.microsoft.com/zh-cn/download/details.aspx?id=45886)
 
-> [!NOTE] 前面的工具链接已在 2015 年 3 月 2 日或之后更新。我们建议你使用这些工具的较新更新版。
+> [!NOTE]
+> 前面的工具链接已在 2015 年 3 月 2 日或之后更新。我们建议你使用这些工具的较新更新版。
 
 ### 将已删除的 V11 数据库还原到 V12
 以下方案说明了可以将已删除的 V11 Azure SQL 数据库还原到 V12 Azure SQL 数据库服务器。

@@ -26,7 +26,8 @@ Azure Blob 存储是一种将非结构化数据作为对象/Blob 存储在云中
 
 本文介绍如何使用 Azure Blob 存储执行常见任务。这些示例用 Java 编写并使用 [Azure Storage SDK for Java][Azure Storage SDK for Java]。涉及的任务包括**上传**、**列出**、**下传**和**删除** Blob。有关 Blob 的详细信息，请参阅[后续步骤](#NextSteps)部分。
 
-> [!NOTE] SDK 提供给在 Android 设备上使用 Azure 存储空间的开发人员。有关详细信息，请参阅 [Azure Storage SDK for Android][Azure Storage SDK for Android]。
+> [!NOTE]
+> SDK 提供给在 Android 设备上使用 Azure 存储空间的开发人员。有关详细信息，请参阅 [Azure Storage SDK for Android][Azure Storage SDK for Android]。
 
 [!INCLUDE [storage-blob-concepts-include](../../includes/storage-blob-concepts-include.md)]
 
@@ -67,7 +68,8 @@ Azure 存储客户端使用存储连接字符串来存储用于访问数据管�
 ## 创建容器
 利用 **CloudBlobClient** 对象，可以获得容器和 Blob 的引用对象。以下代码将创建 **CloudBlobClient** 对象。
 
-> [!NOTE] 还有其他方式来创建 **CloudStorageAccount** 对象；有关详细信息，请参阅 [Azure 存储空间客户端 SDK 参考]中的 **CloudStorageAccount**。
+> [!NOTE]
+> 还有其他方式来创建 **CloudStorageAccount** 对象；有关详细信息，请参阅 [Azure 存储空间客户端 SDK 参考]中的 **CloudStorageAccount**。
 
 [!INCLUDE [storage-container-naming-rules-include](../../includes/storage-container-naming-rules-include.md)]
 

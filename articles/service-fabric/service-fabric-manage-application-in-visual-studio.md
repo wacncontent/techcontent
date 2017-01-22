@@ -56,7 +56,8 @@ ms.author: seanmck;mikhegn
 
 ![附加了日期的新应用程序版本的示例][preservedata]  
 
->[!NOTE] 1.1 版之前的适用于 Visual Studio 的 Service Fabric 工具版本不具有此属性。对于 1.1 版之前的版本，请使用“启动时保留数据”属性实现相同的效果。“保留应用程序”选项是在用于 Visual Studio 的 Service Fabric 工具 1.2 版本中引入的。
+>[!NOTE]
+> 1.1 版之前的适用于 Visual Studio 的 Service Fabric 工具版本不具有此属性。对于 1.1 版之前的版本，请使用“启动时保留数据”属性实现相同的效果。“保留应用程序”选项是在用于 Visual Studio 的 Service Fabric 工具 1.2 版本中引入的。
 
 ## 向 Service Fabric 应用程序添加服务
 
@@ -82,7 +83,8 @@ ms.author: seanmck;mikhegn
 
 ![删除应用程序](./media/service-fabric-manage-application-in-visual-studio/removeapplication.png)  
 
->[!TIP] 有关更丰富的群集管理功能，请参阅[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
+>[!TIP]
+> 有关更丰富的群集管理功能，请参阅[使用 Service Fabric Explorer 可视化群集](./service-fabric-visualizing-your-cluster.md)。
 
 <!--Every topic should have next steps and links to the next logical set of content to keep the customer engaged-->
 

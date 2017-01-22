@@ -2,7 +2,8 @@
 
 ![创建缓存](./media/redis-cache-premium-create/redis-cache-new-cache-menu.png)
 
->[!NOTE] 除了在 Azure 门户预览中创建缓存以外，也可以使用 ARM 模板、PowerShell 或 Azure CLI 来创建。有关详细信息，请参阅[创建缓存](../articles/redis-cache/cache-dotnet-how-to-use-azure-redis-cache.md#create-a-cache)。
+>[!NOTE]
+> 除了在 Azure 门户预览中创建缓存以外，也可以使用 ARM 模板、PowerShell 或 Azure CLI 来创建。有关详细信息，请参阅[创建缓存](../articles/redis-cache/cache-dotnet-how-to-use-azure-redis-cache.md#create-a-cache)。
 
 若要配置高级功能，请先在“选择你的定价层”边栏选项卡中选择一个高级定价层。
 

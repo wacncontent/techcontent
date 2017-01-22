@@ -42,7 +42,8 @@ ms.author: kgremban
       - 应用权限（仅限全局管理员）。例如：另一个 Azure AD 应用程序中的角色成员身份，或相对于 Azure 资源、资源组或订阅的角色成员身份
       - 委派的权限（任何用户）。例如：Azure AD、登录和读取配置文件
 
-> [!NOTE]默认情况下，任何成员都可以注册应用程序。若要了解如何限定只有特定成员拥有注册应用程序的权限，请参阅 [How applications are added to Azure AD（如何将应用程序添加到 Azure AD）](./active-directory-how-applications-are-added.md#who-has-permission-to-add-applications-to-my-azure-ad-instance)文档。
+> [!NOTE]
+>默认情况下，任何成员都可以注册应用程序。若要了解如何限定只有特定成员拥有注册应用程序的权限，请参阅 [How applications are added to Azure AD（如何将应用程序添加到 Azure AD）](./active-directory-how-applications-are-added.md#who-has-permission-to-add-applications-to-my-azure-ad-instance)文档。
 
 下面是全局管理员需要执行哪些操作，才能帮助开发人员将其应用程序投放到生产环境：
 

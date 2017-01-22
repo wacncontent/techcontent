@@ -73,7 +73,8 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
     using StackExchange.Redis;
 
->[!NOTE] StackExchange.Redis 客户端需要.NET Framework 4 或更高版本。
+>[!NOTE]
+> StackExchange.Redis 客户端需要.NET Framework 4 或更高版本。
 
 到 Azure Redis 缓存的连接由 `ConnectionMultiplexer` 类管理。此类旨在共享并在客户端应用程序中重复使用，不需要在每次执行操作的基础上创建。
 
@@ -81,11 +82,13 @@ Azure Redis Cache 非常容易上手。若要开始使用，需要首先设置�
 
     ConnectionMultiplexer connection = ConnectionMultiplexer.Connect("contoso5.redis.cache.chinacloudapi.cn,abortConnect=false,ssl=true,password=...");
 
->[!IMPORTANT] 警告：切勿将凭据存储在源代码中。为了使本示例简单明了，我将以源代码来呈现凭据内容。有关如何存储凭据的详细信息，请参阅[应用程序字符串和连接字符串的工作原理][]。
+>[!IMPORTANT]
+> 警告：切勿将凭据存储在源代码中。为了使本示例简单明了，我将以源代码来呈现凭据内容。有关如何存储凭据的详细信息，请参阅[应用程序字符串和连接字符串的工作原理][]。
 
 如果你不想使用 SSL，请设置 `ssl=false` 或者省略 `ssl` 参数。
 
->[!NOTE] 默认情况下，将为新缓存禁用非 SSL 端口。
+>[!NOTE]
+> 默认情况下，将为新缓存禁用非 SSL 端口。
 
 共享应用程序中的 `ConnectionMultiplexer` 实例的一个方法是，拥有返回连接示例的静态属性（与下列示例类似）。这种线程安全方法，可仅初始化单一连接的 `ConnectionMultiplexer` 实例。在这些示例中，`abortConnect` 设置为 false，这表示即使未建立 Azure Redis 缓存连接，也可成功调用。`ConnectionMultiplexer` 的一个关键功能是，一旦还原网络问题和其他原因，它将自动还原缓存连接。
 

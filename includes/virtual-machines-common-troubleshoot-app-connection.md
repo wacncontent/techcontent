@@ -5,7 +5,8 @@
  - [对与基于 Windows 的 Azure 虚拟机的远程桌面连接进行故障排除](../articles/virtual-machines/virtual-machines-windows-troubleshoot-rdp-connection.md)
  - [对于基于 Linux 的 Azure 虚拟机的 Secure Shell (SSH) 连接进行故障排除](../articles/virtual-machines/virtual-machines-linux-troubleshoot-ssh-connection.md)
 
-> [!NOTE] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../articles/azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍了如何使用这两种模型，但 Azure 建议大多数最新部署使用 Resource Manager 模型。
+> [!NOTE]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../articles/azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍了如何使用这两种模型，但 Azure 建议大多数最新部署使用 Resource Manager 模型。
 
 如果你对本文中的任何点需要更多帮助，可以联系 [MSDN Azure 和 CSDN Azure](https://www.azure.cn/support/forums/)上的 Azure 专家。或者，你也可以提出 Azure 支持事件。请转到 [Azure 支持站点](https://www.azure.cn/support/contact/)并选择“获取支持”。
 

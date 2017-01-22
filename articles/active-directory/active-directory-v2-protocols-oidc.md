@@ -80,7 +80,8 @@ OpenID Connect 描述了元数据文档，该文档包含了应用执行登录�
         &state=12345
         &nonce=678910
 
-> [!TIP] 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `id_token` 的 `https://localhost/myapp/`。请注意，此请求会使用 `response_mode=query`（仅用于教程）。建议使用 `response_mode=form_post`。
+> [!TIP]
+> 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `id_token` 的 `https://localhost/myapp/`。请注意，此请求会使用 `response_mode=query`（仅用于教程）。建议使用 `response_mode=form_post`。
     <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&scope=openid&response_mode=query&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
 
 | 参数 | | 说明 |
@@ -200,7 +201,8 @@ You can simply redirect the user to the `end_session_endpoint` listed in the Ope
     &state=12345						 				 // Any value, provided by your app
     &nonce=678910										 // Any value, provided by your app
 
-> [!TIP] 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `id_token` 和 `code` 的 `https://localhost/myapp/`。请注意，此请求会使用 `response_mode=query`（仅用于教程）。建议使用 `response_mode=form_post`。
+> [!TIP]
+> 单击下面的链接以执行此请求！ 登录之后，你的浏览器应重定向至地址栏中具有 `id_token` 和 `code` 的 `https://localhost/myapp/`。请注意，此请求会使用 `response_mode=query`（仅用于教程）。建议使用 `response_mode=form_post`。
     <a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&response_type=id_token%20code&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F&response_mode=query&scope=openid%20offline_access%20https%3A%2F%2Fgraph.microsoft.com%2Fmail.read&state=12345&nonce=678910" target="_blank">https://login.microsoftonline.com/common/oauth2/v2.0/authorize...</a>
 
 通过在请求中包含权限范围并使用 `response_type=id_token code`，v2.0 终结点可确保用户已经同意 `scope` 查询参数中指示的权限，并且将授权代码返回到应用以交换访问令牌。

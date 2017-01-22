@@ -27,7 +27,8 @@ ms.author: carlrab
 
 在迁移到 Azure SQL 数据库之前，高级用户可使用 SQL Server Management Studio 解决 SQL Server 数据库的兼容性问题。
 
-> [!IMPORTANT] 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
+> [!IMPORTANT]
+> 建议始终使用最新版本的 Management Studio 以与 Azure 和 SQL 数据库的更新保持同步。[更新 SQL Server Management Studio](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx)。
 
 ## 使用 SQL Server Management Studio
 使用 SQL Server Management Studio 通过各种 Transact-SQL 命令（如 **ALTER DATABASE**）来修复兼容性问题。该方法主要面向能够在实时数据库上轻松使用 Transact-SQL 的高级用户。如果不是，建议使用 SSDT。

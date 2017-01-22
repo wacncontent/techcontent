@@ -31,7 +31,8 @@ Microsoft Azure IoT 设备 SDK 包含的代码可帮助构建连接到 Azure IoT
 - 适用于 Node.js 的 Azure IoT 设备 SDK
 - 适用于 Python 2.7 的 Microsoft Azure IoT 设备 SDK
 
-> [!NOTE] 有关使用语言和平台特定的程序包管理器在开发计算机上安装二进制文件和依赖项的信息，请参阅 GitHub 存储库中的自述文件。
+> [!NOTE]
+> 有关使用语言和平台特定的程序包管理器在开发计算机上安装二进制文件和依赖项的信息，请参阅 GitHub 存储库中的自述文件。
 
 ## 操作系统平台和硬件兼容性
 
@@ -49,7 +50,8 @@ Microsoft Azure IoT 服务 SDK 包含的代码可帮助构建直接与 IoT 中�
 - 适用于 Node.js 的 Azure IoT 服务 SDK
 - 适用于 Java 的 Azure IoT 服务 SDK
 
-> [!NOTE] 有关使用语言和平台特定的程序包管理器在开发计算机上安装二进制文件和依赖项的信息，请参阅 GitHub 存储库中的自述文件。
+> [!NOTE]
+> 有关使用语言和平台特定的程序包管理器在开发计算机上安装二进制文件和依赖项的信息，请参阅 GitHub 存储库中的自述文件。
 
 ## Azure IoT 网关 SDK
 

@@ -22,7 +22,8 @@ ms.author: marsma
 ## 概述
 Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进行开发的本地环境。使用存储模拟器，可以在本地针对存储服务测试应用程序，而无需创建 Azure 订阅且不会产生任何费用。如果对应用程序在模拟器中的工作情况感到满意，则可以切换到在云中使用 Azure 存储帐户。
 
-> [!NOTE] 存储模拟器作为 [Azure SDK](/downloads/) 的一部分提供。此外，还可以使用[独立安装程序](https://go.microsoft.com/fwlink/?linkid=717179&clcid=0x409)来安装存储模拟器。若要配置存储模拟器，必须在计算机上具有管理权限。
+> [!NOTE]
+> 存储模拟器作为 [Azure SDK](/downloads/) 的一部分提供。此外，还可以使用[独立安装程序](https://go.microsoft.com/fwlink/?linkid=717179&clcid=0x409)来安装存储模拟器。若要配置存储模拟器，必须在计算机上具有管理权限。
 > 
 > 存储模拟器目前仅在 Windows 上运行。
 >  
@@ -128,13 +129,15 @@ Azure 存储模拟器提供了一个模拟 Azure Blob、队列和表服务以进
 
     http://127.0.0.1:10000/myaccount-secondary/mycontainer/myblob.txt 
 
-> [!NOTE] 若要使用存储模拟器以编程方式访问辅助副本，请使用 Storage Client Library for .NET 3.2 版或更高版本。有关详细信息，请参阅[用于 .NET 的存储客户端库](https://msdn.microsoft.com/zh-cn/library/azure/dn261237.aspx)。
+> [!NOTE]
+> 若要使用存储模拟器以编程方式访问辅助副本，请使用 Storage Client Library for .NET 3.2 版或更高版本。有关详细信息，请参阅[用于 .NET 的存储客户端库](https://msdn.microsoft.com/zh-cn/library/azure/dn261237.aspx)。
 
 ##<a id="storage-emulator-command-line-tool-reference"></a> 存储模拟器命令行工具参考
 
 从 3.0 版开始，在启动存储模拟器时，会出现命令提示符弹出窗口。可使用命令提示符窗口启动和停止模拟器以及查询状态和执行其他操作。
 
-> [!NOTE] 如果已安装 Azure 计算模拟器，则在启动存储模拟器时，将显示一个系统任务栏图标。右键单击该图标可显示一个菜单，其中提供了启动和停止存储模拟器的图形化方式。
+> [!NOTE]
+> 如果已安装 Azure 计算模拟器，则在启动存储模拟器时，将显示一个系统任务栏图标。右键单击该图标可显示一个菜单，其中提供了启动和停止存储模拟器的图形化方式。
 
 ### 命令行语法
     AzureStorageEmulator [start] [stop] [status] [clear] [init] [help]

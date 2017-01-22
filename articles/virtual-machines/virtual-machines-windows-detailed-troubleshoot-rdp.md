@@ -23,7 +23,8 @@ ms.author: iainfou
 
 本文提供详细的故障排除步骤，用于为基于 Windows 的 Azure 虚拟机诊断和修复复杂的远程桌面错误。
 
-> [!IMPORTANT] 若要排除更常见的远程桌面错误，请务必先阅读[远程桌面的基本故障排除文章](./virtual-machines-windows-troubleshoot-rdp-connection.md)，然后再继续。
+> [!IMPORTANT]
+> 若要排除更常见的远程桌面错误，请务必先阅读[远程桌面的基本故障排除文章](./virtual-machines-windows-troubleshoot-rdp-connection.md)，然后再继续。
 
 可能会出现远程桌面错误消息，其不同于[基本远程桌面故障排除指南](./virtual-machines-windows-troubleshoot-rdp-connection.md)中介绍的所有特定错误消息。请按照这些步骤确定远程桌面 (RDP) 客户端为何无法连接到 Azure VM 上的 RDP 服务。
 
@@ -98,7 +99,8 @@ ms.author: iainfou
 
 ![](./media/virtual-machines-windows-detailed-troubleshoot-rdp/tshootrdp_3.png)  
 
-> [!NOTE] 对于在资源管理器中创建的虚拟机，请跳转到[来源 4：网络安全组](#source-4-network-security-groups)。
+> [!NOTE]
+> 对于在资源管理器中创建的虚拟机，请跳转到[来源 4：网络安全组](#source-4-network-security-groups)。
 
 如果同一云服务或虚拟网络中没有其他虚拟机，可自行创建。执行[创建在 Azure 中运行 Windows 的虚拟机](./virtual-machines-windows-hero-tutorial.md)中的步骤。测试完成后，删除测试虚拟机。
 

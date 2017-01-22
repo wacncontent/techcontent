@@ -36,7 +36,8 @@ ms.author: sonyama;barbkess
 
 在 SQL 数据仓库上执行的所有查询都记录到 [sys.dm\_pdw\_exec\_requests][sys.dm_pdw_exec_requests]。此 DMV 包含最后 10,000 个执行的查询。request\_id 对每个查询进行唯一标识，并且为此 DMV 的主键。request\_id 在每次进行新的查询时按顺序分配，并会加上前缀 QID，代表查询 ID。针对给定 session\_id 查询此 DMV 将显示给定登录的所有查询。
 
->[!NOTE] 存储过程使用多个请求 ID。按先后顺序分配请求 ID。
+>[!NOTE]
+> 存储过程使用多个请求 ID。按先后顺序分配请求 ID。
 
 以下是调查特定查询的查询执行计划和时间所要遵循的步骤。
 

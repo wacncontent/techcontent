@@ -33,7 +33,8 @@ ms.author: giridham;jimpark;trinadhk;markgal
 
     ![外部 DPM 凭据](./media/backup-azure-alternate-dpm-server/external-dpm-credentials.png)
 
-    >[!NOTE]仅与同一注册保管库关联的 DPM 服务器可以恢复彼此的数据。
+    >[!NOTE]
+    >仅与同一注册保管库关联的 DPM 服务器可以恢复彼此的数据。
 
     成功添加外部 DPM 服务器以后，你就可以从“恢复”选项卡浏览外部 DPM 服务器和本地 DPM 服务器的数据。
 
@@ -74,7 +75,8 @@ ms.author: giridham;jimpark;trinadhk;markgal
 
     ![外部 DPM 恢复选项摘要](./media/backup-azure-alternate-dpm-server/external-dpm-recovery-options-summary.png)
 
-    >[!NOTE]可以在 DPM 服务器的“监视”选项卡中监视恢复作业。
+    >[!NOTE]
+    >可以在 DPM 服务器的“监视”选项卡中监视恢复作业。
 
     ![监视恢复](./media/backup-azure-alternate-dpm-server/monitoring-recovery.png)
 

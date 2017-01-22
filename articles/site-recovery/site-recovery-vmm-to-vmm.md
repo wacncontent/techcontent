@@ -252,7 +252,8 @@ ms.author: raynew
 
     ![虚拟机保护作业](./media/site-recovery-vmm-to-vmm/vm-jobs.png)
 
->[!NOTE] 你还可以在 VMM 控制台中为虚拟机启用保护。在虚拟机属性的“Azure Site Recovery”选项卡中，在工具栏上单击“启用保护”。
+>[!NOTE]
+> 你还可以在 VMM 控制台中为虚拟机启用保护。在虚拟机属性的“Azure Site Recovery”选项卡中，在工具栏上单击“启用保护”。
 
 ### 将现有虚拟机加入进来
 

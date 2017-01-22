@@ -40,11 +40,13 @@ ms.author: larryfr
 
 - 用于 Visual Studio 的 HDInsight 工具 - 参阅[开始使用用于 Visual Studio 的 HDInsight 工具](./hdinsight-hadoop-visual-studio-tools-get-started.md) 安装并配置用于 Visual Studio 的 HDInsight 工具。
 
-    > [!NOTE] Visual Studio Express 不支持用于 Visual Studio 的 HDInsight 工具
+    > [!NOTE]
+    > Visual Studio Express 不支持用于 Visual Studio 的 HDInsight 工具
 
 - Apache Storm on HDInsight 群集：参阅 [Apache Storm on HDInsight 入门](./hdinsight-apache-storm-tutorial-get-started.md)了解创建群集的步骤。
 
-    > [!NOTE] 用于 Visual Studio 的 HDInsight 工具目前只支持 Storm on HDInsight 版本 3.2 群集。
+    > [!NOTE]
+    > 用于 Visual Studio 的 HDInsight 工具目前只支持 Storm on HDInsight 版本 3.2 群集。
 
 ##模板
 
@@ -63,7 +65,8 @@ ms.author: larryfr
 | Storm 混合示例 | 如何使用 Java 组件 |
 | Storm 示例 | 一个基本的单词计数拓扑 |
 
-> [!NOTE]HBase 读取器和写入器示例使用 HBase REST API 与 HDInsight 群集上的 HBase 通信，而不是 HBase Java API。
+> [!NOTE]
+>HBase 读取器和写入器示例使用 HBase REST API 与 HDInsight 群集上的 HBase 通信，而不是 HBase Java API。
 
 在本文档的步骤中，你将使用基本 Storm 应用程序项目类型来创建新拓扑。
 
@@ -169,7 +172,8 @@ ms.author: larryfr
 
     - **Counter.cs**：实现 Bolt，以统计每个单词的数目，并发出一串新单词和每个单词的计数。
 
-    > [!NOTE]这些 Bolt 只会读取和写入流，但是你也可以使用 Bolt 来与数据库或服务等源进行通信。
+    > [!NOTE]
+    >这些 Bolt 只会读取和写入流，但是你也可以使用 Bolt 来与数据库或服务等源进行通信。
 
 3. 打开 **Splitter.cs**。请注意，默认情况下它只包含一个方法 **Execute**。在 Bolt 收到要处理的 Tuple 时将调用此方法。此时，你可以读取和处理传入 Tuple，以及发出传出 Tuple。
 
@@ -347,19 +351,22 @@ Spout 和 Bolt 以图形方式排列，用于定义数据在组件之间的流�
 
 1. 在“解决方案资源管理器”中，右键单击项目，然后选择“提交到 Storm on HDInsight”。
 
-    > [!NOTE]如果出现提示，请输入你 Azure 订阅的登录凭据。如果你有多个订阅，请登录包含 Storm on HDInsight 群集的订阅。
+    > [!NOTE]
+    >如果出现提示，请输入你 Azure 订阅的登录凭据。如果你有多个订阅，请登录包含 Storm on HDInsight 群集的订阅。
 
 2. 从“Storm 群集”下拉列表中选择你的 Storm on HDInsight 群集，然后选择“提交”。你可以使用“输出”窗口监视提交是否成功。
 
 3. 成功提交拓扑之后，应该会出现群集的“Storm 拓扑”。从列表中选择“WordCount”拓扑，以查看有关正在运行的拓扑的信息。
 
-    > [!NOTE]你也可以展开“Azure”>“HDInsight”，右键单击 Storm on HDInsight 群集，然后选择“查看 Storm 拓扑”，来从“服务器资源管理器”查看“Storm 拓扑”。
+    > [!NOTE]
+    >你也可以展开“Azure”>“HDInsight”，右键单击 Storm on HDInsight 群集，然后选择“查看 Storm 拓扑”，来从“服务器资源管理器”查看“Storm 拓扑”。
 
     使用 Spout 或 Bolt 的链接查看有关这些组件的信息。将会针对每个选择的项打开一个新窗口。
 
 4. 从“拓扑摘要”视图中，单击“终止”以停止拓扑。
 
-    > [!NOTE]Storm 拓扑会一直运行，直到它被停用，或者群集被删除。
+    > [!NOTE]
+    >Storm 拓扑会一直运行，直到它被停用，或者群集被删除。
 
 ##事务拓扑
 
@@ -395,11 +402,13 @@ Spout 和 Bolt 以图形方式排列，用于定义数据在组件之间的流�
 
     - 事务版本在 **HybridTopologyTx\_csharpSpout\_javaBolt** 中定义
 
-        > [!NOTE]此版本还演示了如何使用文本文件中的 clojure 代码作为 Java 组件。
+        > [!NOTE]
+        >此版本还演示了如何使用文本文件中的 clojure 代码作为 Java 组件。
 
 若要切换在提交项目时使用的拓扑，只需将 `[Active(true)]` 语句式移到你要在提交给群集之前使用的拓扑。
 
-> [!NOTE]在 **JavaDependency** 文件夹中，所需的所有 Java 文件都会提供为此项目的一部分。
+> [!NOTE]
+>在 **JavaDependency** 文件夹中，所需的所有 Java 文件都会提供为此项目的一部分。
 
 创建和提交混合拓扑时，需注意以下事项：
 
@@ -417,7 +426,8 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 - **TopologyBuilder.SetEventHubSpout** 方法：将事件中心 Spout 组件添加到拓扑
 
-> [!NOTE]相比于其他 Java 组件，尽管这些方法可让你更轻松地使用事件中心 Spout，但你仍然必须使用 CustomizedInteropJSONSerializer 来序列化 Spout 生成的数据。
+> [!NOTE]
+>相比于其他 Java 组件，尽管这些方法可让你更轻松地使用事件中心 Spout，但你仍然必须使用 CustomizedInteropJSONSerializer 来序列化 Spout 生成的数据。
 
 ##如何更新 SCP.NET
 
@@ -427,7 +437,8 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 2. 从包管理器中选择“更新”。如果有可用的更新，将会列出更新。单击“更新”按钮可让包安装更新。
 
-> [!IMPORTANT]如果你的项目是通过一个未使用 NuGet 进行包更新的旧版 SCP.NET 创建的，则你必须执行以下步骤更新到新版本：
+> [!IMPORTANT]
+>如果你的项目是通过一个未使用 NuGet 进行包更新的旧版 SCP.NET 创建的，则你必须执行以下步骤更新到新版本：
 ><p> 1. 在“解决方案资源管理器”中，右键单击项目，然后选择“管理 NuGet 包”。
 ><p> 2. 使用“搜索”字段搜索 **Microsoft.SCP.Net.SDK**，然后将其添加到项目中。
 
@@ -437,13 +448,15 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 虽然很容易就可以将拓扑部署到群集，但是，在某些情况下，你可能需要在本地测试拓扑。使用以下步骤，在开发环境上本地执行和测试本教程中的示例拓扑。
 
-> [!WARNING]本地测试只适用于仅限 C# 的基本拓扑。不应将本地测试用于混合拓扑或用于使用多个流的拓扑，否则你会收到错误。
+> [!WARNING]
+>本地测试只适用于仅限 C# 的基本拓扑。不应将本地测试用于混合拓扑或用于使用多个流的拓扑，否则你会收到错误。
 
 1. 在“解决方案资源管理器”中，右键单击项目，然后选择“属性”。在项目属性中，将“输出类型”更改为“控制台应用程序”。
 
     ![输出类型](./media/hdinsight-storm-develop-csharp-visual-studio-topology/outputtype.png)
 
-    > [!NOTE]将拓扑部署到群集之前，请记得将“输出类型”更改回“类库”。
+    > [!NOTE]
+    >将拓扑部署到群集之前，请记得将“输出类型”更改回“类库”。
 
 2. 在“解决方案资源管理器”中，右键单击项目，然后依次选择“添加”>“新建项”。选择“类”，并输入 **LocalTest.cs** 作为类名称。最后，单击“添加”。
 
@@ -553,11 +566,13 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 7. 使用“Windows 资源管理器”找到包含项目的目录，例如，**C:\\Users<你的用户名>\\Documents\\Visual Studio 2013\\Projects\\WordCount\\WordCount**。在此目录中打开 Bin，然后单击“调试”。你应会看到运行测试时生成的文本文件：sentences.txt、counter.txt 和 splitter.txt。打开每个文本文件并检查数据。
 
-    > [!NOTE]字符串数据会保存为这些文件中的十进制值数组。例如，**splitter.txt** 文件中的 [[97,103,111]] 是单词“and”。
+    > [!NOTE]
+    >字符串数据会保存为这些文件中的十进制值数组。例如，**splitter.txt** 文件中的 [[97,103,111]] 是单词“and”。
 
 虽然在本地测试基本字数应用程序相当简单，但是真正的价值在于与外部数据来源进行通信或执行复杂数据分析的复杂拓扑。处理此类项目时，你可能需要在组件中设置断点并逐步运行代码，以找出问题。
 
-> [!NOTE]在部署到 Storm on HDInsight 群集之前，请记得将“项目类型”设置回“类库”。
+> [!NOTE]
+>在部署到 Storm on HDInsight 群集之前，请记得将“项目类型”设置回“类库”。
 
 ###记录信息
 
@@ -567,7 +582,8 @@ SCP.Net 版本 0.9.4.203 引入了专用于事件中心 Spout（从事件中心�
 
 你可以从“服务器资源管理器”中的“Hadoop 服务日志”查看记录的信息。展开 Storm on HDInsight 群集的条目，然后展开“Hadoop 服务日志”。最后，选择要查看的日志文件。
 
-> [!NOTE]日志存储在群集使用的 Azure 存储帐户中。如果此订阅与用来登录 Visual Studio 的订阅不同，则必须登录包含存储帐户的订阅才能查看此信息。
+> [!NOTE]
+>日志存储在群集使用的 Azure 存储帐户中。如果此订阅与用来登录 Visual Studio 的订阅不同，则必须登录包含存储帐户的订阅才能查看此信息。
 
 ###查看错误信息
 

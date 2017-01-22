@@ -124,7 +124,8 @@ ms.author: lakasa;robinsh
     // This is where the GetToken method from above is used.
     KeyVaultKeyResolver cloudResolver = new KeyVaultKeyResolver(GetToken);
 
-> [!NOTE] 密钥保管库对象模型
+> [!NOTE]
+> 密钥保管库对象模型
 >
 >务必了解，实际上有两个密钥保管库对象模型：一个基于 REST API（KeyVault 命名空间），另一个是客户端加密的扩展。
 
@@ -155,7 +156,8 @@ ms.author: lakasa;robinsh
 
 ![显示包含加密元数据的 Blob 元数据的屏幕截图](./media/storage-encrypt-decrypt-blobs-key-vault/blobmetadata.png)
 
-> [!NOTE] 如果查看 BlobEncryptionPolicy 构造函数，将看到它可以接受密钥和/或解析程序。请注意，现在无法将解析程序用于加密，因为它当前不支持默认密钥。
+> [!NOTE]
+> 如果查看 BlobEncryptionPolicy 构造函数，将看到它可以接受密钥和/或解析程序。请注意，现在无法将解析程序用于加密，因为它当前不支持默认密钥。
 
 ## 解密 Blob 并下载
 当使用解析程序类有意义时，实际上就是解密。用于加密的密钥的 ID 与其元数据中的 Blob 相关联，因此没有理由检索该密钥，请记住密钥与 Blob 之间的关联关系。只需确保该密钥保留在密钥保管库中。
@@ -172,7 +174,8 @@ RSA 密钥的私钥则保留在密钥保管库中，因此，为了进行解密�
     using (var np = File.Open(@"C:\data\MyFileDecrypted.txt", FileMode.Create))
         blob.DownloadToStream(np, null, options, null);
 
-> [!NOTE] 可以通过几个其他类型的解析程序来简化密钥管理，其中包括：AggregateKeyResolver 和 CachingKeyResolver。
+> [!NOTE]
+> 可以通过几个其他类型的解析程序来简化密钥管理，其中包括：AggregateKeyResolver 和 CachingKeyResolver。
 
 ## 使用密钥保管库密码
 将密码用于客户端加密的方式是通过 SymmetricKey 类，因为密码实际上是一种对称密钥。但是，如上所述，密钥保管库中的密码不会完全映射到 SymmetricKey。这里要注意几个问题：

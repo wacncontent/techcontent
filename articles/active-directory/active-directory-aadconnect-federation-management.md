@@ -57,7 +57,8 @@ Azure AD Connect 可以检查 AD FS 和 Azure Active Directory 信任的当前�
 
 4. 单击“安装”修复信任。
 
-> [!NOTE] Azure AD Connect 只能对自签名的证书进行修复或采取措施。Azure AD connect 无法修复第三方证书。
+> [!NOTE]
+> Azure AD Connect 只能对自签名的证书进行修复或采取措施。Azure AD connect 无法修复第三方证书。
 
 ### 添加 AD FS 服务器 <a name="addadfsserver"></a>
 > [!NOTE] 
@@ -176,7 +177,8 @@ AD FS 支持丰富的声明语言，让你用来创建自定义声明规则。�
 
 在此规则中，你只需检查临时标志 **idflag**。根据该标志的值决定是否发出声明。
 
-> [!NOTE] 这些规则的顺序非常重要。
+> [!NOTE]
+> 这些规则的顺序非常重要。
 
 #### 具有子域 UPN 的 SSO
 可以使用 Azure AD Connect 添加要联合的多个域（如 [Add a new federated domain](./active-directory-aadconnect-federation-management.md#addfeddomain/)（添加新的联合域）中所述）。必须修改 UPN 声明，以便颁发者 ID 对应于根域而非子域，因为联合根域也涵盖子级。

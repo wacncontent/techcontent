@@ -25,7 +25,8 @@ ms.author: douglasl
 
 对数据库或表启用延伸数据库需要有 db\_owner 权限。对数据库启用延伸数据库还需要有 CONTROL DATABASE 权限。
 
- >   [!NOTE] 若要在以后禁用 Stretch Database，请记住，针对表或数据库禁用 Stretch Database 不会删除远程对象。若要删除远程表或远程数据库，必须使用 Azure 管理门户。远程对象在手动删除之前，会持续产生 Azure 费用。
+ >   [!NOTE]
+ > 若要在以后禁用 Stretch Database，请记住，针对表或数据库禁用 Stretch Database 不会删除远程对象。若要删除远程表或远程数据库，必须使用 Azure 管理门户。远程对象在手动删除之前，会持续产生 Azure 费用。
 
 ## 准备工作
 

@@ -8,7 +8,8 @@
 
 - 使用某些系统上提供的特殊工具来检测和自动处理自定义数据。
 
-> [!NOTE] 本文介绍了如何才能使用通过 Azure 服务管理 API 创建的 VM 注入自定义数据。若要了解如何使用 Azure 资源管理 API，请参阅[示例模板](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-customdata)。
+> [!NOTE]
+> 本文介绍了如何才能使用通过 Azure 服务管理 API 创建的 VM 注入自定义数据。若要了解如何使用 Azure 资源管理 API，请参阅[示例模板](https://github.com/Azure/azure-quickstart-templates/tree/master/101-vm-customdata)。
 
 ## 将自定义数据注入到 Azure 虚拟机中
 
@@ -22,7 +23,8 @@
 
 + 如果你的 Azure VM 是基于 Windows 的 VM，则自定义数据文件将保存到 `%SYSTEMDRIVE%\AzureData\CustomData.bin`。虽然它已进行 Base64 编码，以便从本地计算机传输到新 VM，但它将自动解码并可以立即打开或使用。
 
-    > [!NOTE] 如果该文件存在，它将被覆盖。目录的安全性已设为 **System:Full Control** 和 **Administrators:Full Control**。
+    > [!NOTE]
+    > 如果该文件存在，它将被覆盖。目录的安全性已设为 **System:Full Control** 和 **Administrators:Full Control**。
 
 + 如果你的 Azure VM 是基于 Linux 的 VM，则自定义数据文件将位于下列其中一个位置，具体取决于你的分发版。数据可能采用 base64 编码，因此可能需要先解码数据：
 

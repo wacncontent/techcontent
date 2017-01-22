@@ -179,7 +179,8 @@ SQL 数据仓库支持分区拆分、合并和切换。这些函数中，每个�
 
     CREATE STATISTICS Stat_dbo_FactInternetSales_OrderDateKey ON dbo.FactInternetSales(OrderDateKey);
 
-> [!NOTE] 通过创建统计信息对象，我们可以确保表元数据更加准确。如果我们省略了创建统计信息这一步，SQL 数据仓库将使用默认值。有关统计信息的详细信息，请参阅[统计信息][]。
+> [!NOTE]
+> 通过创建统计信息对象，我们可以确保表元数据更加准确。如果我们省略了创建统计信息这一步，SQL 数据仓库将使用默认值。有关统计信息的详细信息，请参阅[统计信息][]。
 
 然后，我们可以使用 `sys.partitions` 目录视图查询行计数：
 

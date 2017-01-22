@@ -287,7 +287,8 @@ BGP 是通常在 Internet 上使用的，用于在两个或更多网络之间交
 
     New-AzureRmVirtualNetworkGatewayConnection -Name $Connection21 -ResourceGroupName $RG2 -VirtualNetworkGateway1 $vnet2gw -VirtualNetworkGateway2 $vnet1gw -Location $Location2 -ConnectionType Vnet2Vnet -SharedKey 'AzureA1b2C3' -EnableBgp $True
 
->[!IMPORTANT] 请确保为这两个连接启用 BGP。
+>[!IMPORTANT]
+> 请确保为这两个连接启用 BGP。
 
 完成这些步骤后，连接将在几分钟后建立，BGP 对等会话将在完成 VNet 到 VNet 连接后启动。
 

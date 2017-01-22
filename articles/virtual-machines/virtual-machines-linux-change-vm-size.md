@@ -26,7 +26,8 @@ ms.author: mikewasson
 
 本文介绍了如何使用 [Azure CLI][azure-cli] 来调整 Linux VM 的大小。
 
-> [!NOTE] Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型。
+> [!NOTE]
+> Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍如何使用 Resource Manager 部署模型。Azure 建议对大多数新的部署使用该模型，而不是经典部署模型。
 
 ## 调整 Linux VM 的大小 
 
@@ -54,7 +55,8 @@ ms.author: mikewasson
             https://<storage-account-name>.blob.core.chinacloudapi.cn/ 
         azure vm start -g <resource-group> <vm-name>
 
-    > [!WARNING] 解除分配 VM 也会释放分配给该 VM 的所有动态 IP 地址。OS 和数据磁盘不受影响。
+    > [!WARNING]
+    > 解除分配 VM 也会释放分配给该 VM 的所有动态 IP 地址。OS 和数据磁盘不受影响。
 
 <!-- links -->
 

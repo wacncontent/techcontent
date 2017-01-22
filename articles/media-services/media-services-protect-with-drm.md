@@ -37,7 +37,8 @@ Azure 媒体服务允许传送受 [Microsoft PlayReady DRM](https://www.microsof
 
 开发应用程序以传送受多个 DRM（例如 PlayReady 和 Widevine）保护的媒体的开发人员可以参考本主题。本主题介绍如何使用授权策略来配置 PlayReady 许可证传送服务，确保只有经过授权的客户端才能接收 PlayReady 或 Widevine 许可证。此外，还介绍如何通过 DASH 使用 PlayReady 或 Widevine DRM 进行动态加密。
 
->[!NOTE]若要开始使用动态加密，必须首先获取至少一个缩放单位（也称为流式处理单位）。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
+>[!NOTE]
+>若要开始使用动态加密，必须首先获取至少一个缩放单位（也称为流式处理单位）。有关详细信息，请参阅[如何缩放媒体服务](./media-services-manage-origins.md#scale_streaming_endpoints)。
 
 ##下载示例
 
@@ -110,7 +111,8 @@ Azure 媒体服务允许传送受 [Microsoft PlayReady DRM](https://www.microsof
 
 需要为用户提供平滑流、DASH 或 HLS 的流式处理 URL。
 
->[!NOTE]如果添加或更新资产的传送策略，则必须删除现有定位符（如果有）并创建新定位符。
+>[!NOTE]
+>如果添加或更新资产的传送策略，则必须删除现有定位符（如果有）并创建新定位符。
 
 有关如何发布资产和生成流 URL 的说明，请参阅[生成流 URL](./media-services-deliver-streaming-content.md)。
 

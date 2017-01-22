@@ -53,7 +53,8 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 
 我们在这里进行的更改是要删除“x5t”属性。你可以继续使用相同的机制来验证令牌，但应该只依赖“kid”属性来检索正确的公钥，如 OpenID Connect 协议中所指定。
 
-> [!IMPORTANT] **你的工作：确保应用不依赖于 x5t 值是否存在。**
+> [!IMPORTANT]
+> **你的工作：确保应用不依赖于 x5t 值是否存在。**
 
 ### 删除 profile\_info
 以前，v2.0 终结点一直在称为 `profile_info` 的令牌响应中返回 base64 编码的 JSON 对象。当通过向下列对象发送请求，从 v2.0 终结点请求访问令牌时：
@@ -88,7 +89,8 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 
 在接下来两周，应该将应用编码为从 `id_token` 或 `profile_info`（以存在的那个为准）检索用户信息。这样一来，进行更改时，应用可以无缝地处理从 `profile_info` 到 `id_token` 的转换，而不会中断。
 
-> [!IMPORTANT] **你的工作：确保应用不依赖于 `profile_info` 值是否存在。**
+> [!IMPORTANT]
+> **你的工作：确保应用不依赖于 `profile_info` 值是否存在。**
 
 ### 删除 id\_token\_expires\_in
 与 `profile_info` 相似，我们同时也从响应中删除 `id_token_expires_in` 参数。以前，v2.0 终结点会返回 `id_token_expires_in` 的值以及每个 id\_token 响应，例如在授权响应中：
@@ -108,7 +110,8 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 
 `id_token_expires_in` 值会指出 id\_token 保持有效的秒数。现在，我们完全删除 `id_token_expires_in` 值。可以改为使用 OpenID Connect 标准 `nbf` 和 `exp` 声明来检查 id\_token 的有效性。有关这些声明的详细信息，请参阅 [v2.0 令牌参考](./active-directory-v2-tokens.md)。
 
-> [!IMPORTANT] **你的工作：确保应用不依赖于 `id_token_expires_in` 值是否存在。**
+> [!IMPORTANT]
+> **你的工作：确保应用不依赖于 `id_token_expires_in` 值是否存在。**
 
 ### 更改 scope=openid 返回的声明
 这项更改最为重要 — 事实上，它将影响使用 v2.0 终结点的几乎每个应用。许多应用程序使用 `openid` 范围将请求发送到 v2.0 终结点，例如：
@@ -152,7 +155,8 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 
 应用可以立即开始发送 `email` 和 `profile` 范围，v2.0 终结点会接受这两个范围，并根据需要开始向用户请求权限。不过，对 `openid` 范围解释的更改几周后才会生效。
 
-> [!IMPORTANT] **你的工作：如果应用需要用户的相关信息，则添加 `profile` 和 `email` 范围。** 请注意，默认情况下，ADAL 将在请求中同时包含这些权限。
+> [!IMPORTANT]
+> **你的工作：如果应用需要用户的相关信息，则添加 `profile` 和 `email` 范围。** 请注意，默认情况下，ADAL 将在请求中同时包含这些权限。
 
 ### 删除颁发者尾部斜杠。
 以前，v2.0 终结点的令牌中显示的颁发者值采用以下格式：
@@ -162,7 +166,8 @@ v2.0 终结点大量使用 JWT 令牌，其中包含标头参数部分以及令�
 其中 guid 是颁发令牌的 Azure AD 租户的 tenantId。进行这些更改之后，这两个令牌和 OpenID Connect 发现文档中的颁发者值将变为。
     https://login.microsoftonline.com/{some-guid}/v2.0 
 
-> [!IMPORTANT] **你的工作：确保应用在颁发者验证期间接受包含或不含尾部斜杠的颁发者值。**
+> [!IMPORTANT]
+> **你的工作：确保应用在颁发者验证期间接受包含或不含尾部斜杠的颁发者值。**
 
 ## 为何更改？
 引进这些更改的主要目的是要符合 OpenID Connect 标准规范。我们希望通过符合 OpenID Connect，将与 Microsoft 标识服务集成以及与业内其他标识服务集成的差异降到最低。我们想让开发人员使用他们最爱的开源身份验证库，而不必更改库来适应 Microsoft 的差异。

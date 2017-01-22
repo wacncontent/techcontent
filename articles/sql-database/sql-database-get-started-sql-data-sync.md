@@ -22,7 +22,8 @@ ms.author: jhubbard
 
 本教程假定你之前未使用过 SQL Server 和 Azure SQL 数据库。在本教程中，你将创建一个完全配置且按既定计划同步的混合（SQL Server 和 SQL 数据库实例）同步组。
 
-> [!NOTE] 有关 Azure SQL 数据同步的完整技术文档集以前位于 MSDN 中，现在以 .pdf 文件提供。可从[此处](http://download.microsoft.com/download/4/E/3/4E394315-A4CB-4C59-9696-B25215A19CEF/SQL_Data_Sync_Preview.pdf)下载。
+> [!NOTE]
+> 有关 Azure SQL 数据同步的完整技术文档集以前位于 MSDN 中，现在以 .pdf 文件提供。可从[此处](http://download.microsoft.com/download/4/E/3/4E394315-A4CB-4C59-9696-B25215A19CEF/SQL_Data_Sync_Preview.pdf)下载。
 
 ## 步骤 1：连接到 Azure SQL 数据库
 

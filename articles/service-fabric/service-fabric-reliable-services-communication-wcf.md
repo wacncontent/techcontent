@@ -99,7 +99,8 @@ Reliable services 框架使服务创作者能够选择他们要用于其服务�
     var result = calculatorServiceCommunicationClient.InvokeWithRetryAsync(
                     client => client.Channel.Add(2, 3)).Result;
 
->[!NOTE] 默认 ServicePartitionResolver 假设客户端正在与服务相同的群集中运行。如果不是这样，请创建 ServicePartitionResolver 对象，并传入群集连接终结点。
+>[!NOTE]
+> 默认 ServicePartitionResolver 假设客户端正在与服务相同的群集中运行。如果不是这样，请创建 ServicePartitionResolver 对象，并传入群集连接终结点。
 
 ## 后续步骤
 * [使用 Reliable Services 远程控制执行远程过程调用](./service-fabric-reliable-services-communication-remoting.md)

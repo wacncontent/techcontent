@@ -42,7 +42,8 @@ ms.author: anithaa
 
 本文说明如何使用 Azure Resource Manager 部署模型中的有效路由功能确定连接失败的原因。尽管本示例只使用系统路由，但可以使用相同的步骤判断任何路由类型的入站和出站连接失败情况。
 
->[!NOTE] 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
+>[!NOTE]
+> 如果 VM 附加了多个 NIC，请检查每个 NIC 的有效路由，以便诊断与 VM 之间的网络连接问题。
 
 ### 查看虚拟机的有效路由
 
@@ -58,7 +59,8 @@ ms.author: anithaa
 
         Get-AzureRmEffectiveRouteTable -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
 
-    >[!TIP] 如果不知道网络接口的名称，请输入以下命令检索资源组中所有网络接口的名称。*
+    >[!TIP]
+    > 如果不知道网络接口的名称，请输入以下命令检索资源组中所有网络接口的名称。*
 
         Get-AzureRmNetworkInterface -ResourceGroupName RG1 | Format-Table Name
 

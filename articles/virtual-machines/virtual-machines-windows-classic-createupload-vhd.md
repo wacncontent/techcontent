@@ -22,7 +22,8 @@ ms.author: cynthn
 
 本文说明如何上载自己的通用化 VM 映像作为虚拟硬盘 (VHD)，以便使用它来创建虚拟机。有关 Azure 中的磁盘和 VHD 的更多详细信息，请参阅 [About Disks and VHDs for Virtual Machines](./virtual-machines-linux-about-disks-vhds.md)（关于虚拟机的磁盘和 VHD）。
 
-> [!IMPORTANT] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用 Resource Manager 模型。也可以使用 Resource Manager 模型来[捕获](./virtual-machines-windows-capture-image.md)和[上载](./virtual-machines-windows-upload-image.md)虚拟机。
+> [!IMPORTANT]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型。Azure 建议大多数新部署使用 Resource Manager 模型。也可以使用 Resource Manager 模型来[捕获](./virtual-machines-windows-capture-image.md)和[上载](./virtual-machines-windows-upload-image.md)虚拟机。
 
 ## 先决条件
 
@@ -34,7 +35,8 @@ ms.author: cynthn
 
 - **.VHD 文件** - 存储在 .vhd 文件中并附加到虚拟机的受支持 Windows 操作系统。还应该检查 sysprep 是否支持 VHD 上运行的服务器角色。有关详细信息，请参阅 [Sysprep Support for Server Roles](https://msdn.microsoft.com/windows/hardware/commercialize/manufacture/desktop/sysprep-support-for-server-roles)（Sysprep 对服务器角色的支持）。
 
-> [!IMPORTANT] Azure 不支持 VHDX 格式。可使用 Hyper-V 管理器或 [Convert-VHD cmdlet](http://technet.microsoft.com/zh-cn/library/hh848454.aspx) 将磁盘转换为 VHD 格式。有关详细信息，请参阅此 [blogpost](http://blogs.msdn.com/b/virtual_pc_guy/archive/2012/10/03/using-powershell-to-convert-a-vhd-to-a-vhdx.aspx)。
+> [!IMPORTANT]
+> Azure 不支持 VHDX 格式。可使用 Hyper-V 管理器或 [Convert-VHD cmdlet](http://technet.microsoft.com/zh-cn/library/hh848454.aspx) 将磁盘转换为 VHD 格式。有关详细信息，请参阅此 [blogpost](http://blogs.msdn.com/b/virtual_pc_guy/archive/2012/10/03/using-powershell-to-convert-a-vhd-to-a-vhdx.aspx)。
 
 ## 步骤 1：准备 VHD 
 

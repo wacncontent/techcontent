@@ -38,7 +38,8 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
 * **SimulatedDevice**，这是在 [Get started with IoT Hub]（IoT 中心入门）中创建的应用的修改版本，可连接到 IoT 中心并接收云到设备的消息。
 * **SendCloudToDevice**，它将云到设备的消息通过 IoT 中心发送到模拟设备，然后接收 IoT 中心的传送确认。
 
-> [!NOTE] IoT 中心通过 Azure IoT 设备 SDK 对许多设备平台和语言（包括 C、Java 和 Javascript）提供 SDK 支持。有关如何将设备连接到本教程中的代码（通常是连接到 Azure IoT 中心）的逐步说明，请参阅 [Azure IoT Developer Center]（Azure IoT 开发人员中心）。
+> [!NOTE]
+> IoT 中心通过 Azure IoT 设备 SDK 对许多设备平台和语言（包括 C、Java 和 Javascript）提供 SDK 支持。有关如何将设备连接到本教程中的代码（通常是连接到 Azure IoT 中心）的逐步说明，请参阅 [Azure IoT Developer Center]（Azure IoT 开发人员中心）。
 
 若要完成本教程，你需要以下各项：
 
@@ -72,13 +73,15 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
 
     对 `CompleteAsync()` 的调用将通知 IoT 中心，指出已成功处理消息。可以安全地从设备队列中删除该消息。如果因故导致设备应用无法完成消息处理作业，IoT 中心将再传递一次。因此设备应用中的消息处理逻辑必须是*幂等的*，以便多次接收相同的消息会生成相同的结果。应用程序也可以暂时放弃消息，让 IoT 中心将消息保留在队列中以供将来使用。或者，应用程序可以拒绝消息，以永久性从队列中删除该消息。有关云到设备消息生命周期的详细信息，请参阅 [IoT Hub Developer Guide][IoT Hub Developer Guide - C2D]（IoT 中心开发人员指南）。
 
-    > [!NOTE] 使用 HTTP/1 而不使用 AMQP 作为传输时，`ReceiveAsync` 方法将立即返回。使用 HTTP/1 的云到设备消息，其支持模式是间歇连接到设备，且不常检查消息（时间间隔小于 25 分钟）。发出更多 HTTP/1 接收会导致 IoT 中心限制请求。有关 AMQP 和 HTTP/1 支持之间的差异，以及 IoT 中心限制的详细信息，请参阅 [IoT Hub Developer Guide][IoT Hub Developer Guide - C2D]（IoT 中心开发人员指南）。
+    > [!NOTE]
+    > 使用 HTTP/1 而不使用 AMQP 作为传输时，`ReceiveAsync` 方法将立即返回。使用 HTTP/1 的云到设备消息，其支持模式是间歇连接到设备，且不常检查消息（时间间隔小于 25 分钟）。发出更多 HTTP/1 接收会导致 IoT 中心限制请求。有关 AMQP 和 HTTP/1 支持之间的差异，以及 IoT 中心限制的详细信息，请参阅 [IoT Hub Developer Guide][IoT Hub Developer Guide - C2D]（IoT 中心开发人员指南）。
 
 2. 将以下方法添加到 **Main** 方法的 `Console.ReadLine()` 行的前面：
 
         ReceiveC2dAsync();
 
-> [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+> [!NOTE]
+> 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 发送云到设备的消息
 
@@ -170,7 +173,8 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
 
     ![应用接收消息][22]
 
-> [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+> [!NOTE]
+> 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 后续步骤
 

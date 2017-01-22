@@ -22,7 +22,8 @@ ms.author: cynthn
 
 以下步骤演示如何使用 Azure 命令行接口 (CLI) 命令将基础结构即服务 (IaaS) 资源从经典部署模型迁移到 Azure Resource Manager 部署模型。本文中的操作需要 [Azure CLI](../xplat-cli-install.md)。
 
->[!NOTE] 此处描述的所有操作都是幂等的。如果你遇到功能不受支持或配置错误以外的问题，建议你重试准备、中止或提交操作。然后平台将重试操作。
+>[!NOTE]
+> 此处描述的所有操作都是幂等的。如果你遇到功能不受支持或配置错误以外的问题，建议你重试准备、中止或提交操作。然后平台将重试操作。
 
 ## 步骤 1：准备迁移
 
@@ -43,7 +44,8 @@ ms.author: cynthn
 
     azure account set "<azure-subscription-name>"
 
->[!NOTE] 注册是一次性步骤，但必须在尝试迁移之前完成。如果不注册，你会看到以下错误消息
+>[!NOTE]
+> 注册是一次性步骤，但必须在尝试迁移之前完成。如果不注册，你会看到以下错误消息
 ><p>BadRequest : Subscription is not registered for migration.
 
 使用以下命令向迁移资源提供程序注册。请注意，在某些情况下，此命令会超时。但是，注册会成功。

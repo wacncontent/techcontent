@@ -24,7 +24,8 @@ ms.author: cjiang
 
 [!INCLUDE [virtual-machines-troubleshoot-deployment-new-vm-opening](../../includes/virtual-machines-troubleshoot-deployment-new-vm-opening-include.md)]
 
-> [!IMPORTANT] Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。
+> [!IMPORTANT]
+> Azure 具有两种不同的部署模型，用于创建和处理资源：[Resource Manager 模型和经典模型](../azure-resource-manager/resource-manager-deployment-model.md)。本文介绍使用经典部署模型的情况。Azure 建议大多数新部署使用 Resource Manager 模型。
 
 查看资源管理器版本，请点击[这里](./virtual-machines-linux-troubleshoot-deployment-new-vm.md).
 
@@ -74,7 +75,8 @@ ms.author: cjiang
 - 创建新的云服务，并将其与区域或基于区域的虚拟网络关联。
 - 在新的云服务中创建新 VM。如果在尝试创建新的云服务时收到错误，请稍后再试一次，或更改云服务的区域。
 
-> [!IMPORTANT] 如果尝试在现有的云服务中创建新的 VM，但无法创建，而又必须为新的 VM 创建新的云服务，则可以选择合并同一云服务中的所有 VM。为此，请删除现有云服务中的 VM，然后从它们位于新云服务中的磁盘重新捕获。然而，请务必记住，新的云服务将有新的名称和 VIP，因此需要为所有目前将此信息用于现有云服务的依赖项更新该信息。
+> [!IMPORTANT]
+> 如果尝试在现有的云服务中创建新的 VM，但无法创建，而又必须为新的 VM 创建新的云服务，则可以选择合并同一云服务中的所有 VM。为此，请删除现有云服务中的 VM，然后从它们位于新云服务中的磁盘重新捕获。然而，请务必记住，新的云服务将有新的名称和 VIP，因此需要为所有目前将此信息用于现有云服务的依赖项更新该信息。
 
 **原因 2：**云服务已经与链接到某个地缘组的虚拟网络关联，因而按照设计被固定到了特定群集。因此，该地缘组中的所有新计算资源请求都将尝试在托管现有资源的同一群集中发出。但是，同一群集可能不支持请求的 VM 大小，或者可用空间不足，从而导致分配错误。无论是通过新的云服务还是现有的云服务创建新资源，都是如此。
 

@@ -31,7 +31,8 @@ ms.author: subramar
 ## 步骤 1：构建和部署视觉对象示例
 单击右键应用程序项目 **VisualObjectsApplication**，然后选择“发布”命令生成并发布应用程序。有关详细信息，请参阅 [Service Fabric 应用程序升级教程](./service-fabric-application-upgrade-tutorial.md)。或者，也可以使用 PowerShell 来部署应用程序。
 
-> [!NOTE] 要在 PowerShell 中使用任何 Service Fabric 命令，必须先使用 `Connect-ServiceFabricCluster` cmdlet 连接到群集。同样，假设已在本地计算机上设置了群集。请参阅[设置 Service Fabric 部署环境](./service-fabric-get-started.md)上的文章。
+> [!NOTE]
+> 要在 PowerShell 中使用任何 Service Fabric 命令，必须先使用 `Connect-ServiceFabricCluster` cmdlet 连接到群集。同样，假设已在本地计算机上设置了群集。请参阅[设置 Service Fabric 部署环境](./service-fabric-get-started.md)上的文章。
 
 在 Visual Studio 中构建项目后，可以使用 PowerShell 命令 **Copy-ServiceFabricApplicationPackage** 将应用程序包复制到 ImageStore。下一个步骤是使用 **Register-ServiceFabricApplicationPackage** cmdlet 将应用程序注册到 Service Fabric 运行时。最后一个步骤是使用 **New-ServiceFabricApplication** cmdlet 启动应用程序的实例。这三个步骤类似于使用 Visual Studio 中的“部署”菜单项。
 

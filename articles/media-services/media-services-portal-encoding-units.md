@@ -47,7 +47,8 @@ ms.author: juliako;milanga
 
 ##注意事项
 
->[!IMPORTANT] 请注意以下事项：
+>[!IMPORTANT]
+> 请注意以下事项：
 
 - 保留单元可用于并行化所有媒体处理，其中包括使用 Azure Media Indexer 的索引编制作业。但是，与编码不同，使用更快的保留单元并不会加快索引编制作业的处理速度。
 

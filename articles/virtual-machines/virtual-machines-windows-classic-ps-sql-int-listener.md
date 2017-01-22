@@ -85,7 +85,8 @@ ms.author: MikeRayMSFT
 
 1. 设置变量后，将脚本从文本编辑器复制到 Azure PowerShell 会话中运行。如果提示符仍然显示 >>，请再次按 Enter，以确保脚本开始运行。注意：
 
->[!NOTE] Azure 经典管理门户目前不支持内部负载均衡器，因此在 Azure 经典管理门户中看不到 ILB 或终结点。但是，如果负载均衡器在某个内部 IP 地址上运行，则 **Get-AzureEndpoint** 将返回该地址。否则，将返回 null。
+>[!NOTE]
+> Azure 经典管理门户目前不支持内部负载均衡器，因此在 Azure 经典管理门户中看不到 ILB 或终结点。但是，如果负载均衡器在某个内部 IP 地址上运行，则 **Get-AzureEndpoint** 将返回该地址。否则，将返回 null。
 
 ## 如果需要，请验证是否已安装 KB2854082
 

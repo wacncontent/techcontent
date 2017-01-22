@@ -24,7 +24,8 @@ ms.author: byvinyal
 
 请访问 [Azure 定价概述](https://www.azure.cn/pricing/)以了解有关 Azure 定价的详细信息。你可以在该网站上使用[定价计算器](https://www.azure.cn/pricing/calculator/)或访问服务的定价详细信息页（例如，[Windows VM](https://www.azure.cn/pricing/details/virtual-machines/#Windows/)）来估算成本。
 
-> [!NOTE]如果想要提高**默认限制**之上的限制，可以[打开免费的联机客户支持请求](https://www.azure.cn/support/support-ticket-form/)。无法将这些限制提高到超过下表中的**最大限制**值。如果没有任何**最大限制**列，则指定的资源不具有可调整的限制。
+> [!NOTE]
+>如果想要提高**默认限制**之上的限制，可以[打开免费的联机客户支持请求](https://www.azure.cn/support/support-ticket-form/)。无法将这些限制提高到超过下表中的**最大限制**值。如果没有任何**最大限制**列，则指定的资源不具有可调整的限制。
 
 ## <a name="limits-and-the-azure-resource-manager"></a> 限制和 Azure 资源管理器
 

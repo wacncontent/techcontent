@@ -30,7 +30,8 @@ ms.author: crwilcox
 
 如果 Notebook 服务不适用于你的方案，请继续阅读本文，它将会说明如何在 Azure 上使用 Linux 虚拟机 (VM) 部署 Jupyter Notebook。
 
-> [!NOTE]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
+> [!NOTE]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
 
 [!INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
 

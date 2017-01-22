@@ -93,7 +93,8 @@ Azure 备份可保护高级存储 VM。Azure 高级存储是基于固态硬盘 (
 ### 备份高级存储 VM <a name="back-up-and-restore-premium-storage-vms"></a>
 在备份高级存储 VM 时，备份服务在高级存储帐户中创建临时暂存位置。名为“AzureBackup-”的暂存位置相当于连接到 VM 的高级磁盘的数据大小总计。
 
->[!NOTE] 请不要修改或编辑暂存位置。
+>[!NOTE]
+> 请不要修改或编辑暂存位置。
 
 备份作业完成后，将删除暂存位置。用于暂存位置的存储的价格与所有[高级存储定价](../storage/storage-premium-storage.md#pricing-and-billing/)一致。
 

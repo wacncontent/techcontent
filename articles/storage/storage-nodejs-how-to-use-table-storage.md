@@ -112,7 +112,8 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
       dueDate: {'_':new Date(2015, 6, 20), '$':'Edm.DateTime'}
     };
 
-> [!NOTE] 每个记录还有一个“时间戳”字段，在插入或更新实体时，Azure 会设置该字段。
+> [!NOTE]
+> 每个记录还有一个“时间戳”字段，在插入或更新实体时，Azure 会设置该字段。
 
 还可以使用 **entityGenerator** 来创建实体。下面的示例使用 **entityGenerator** 来创建相同的任务实体。
 
@@ -138,7 +139,8 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
     { '.metadata': { etag: 'W/"datetime\'2015-02-25T01%3A22%3A22.5Z\'"' } }
 
-> [!NOTE] 默认情况下，**insertEntity** 不会在 `response` 信息中返回插入的实体。如果计划对此实体执行其他操作，或者希望对信息进行缓存，则可在 `result` 中返回该实体。可以通过启用 **echoContent** 来执行此操作，如下所示：
+> [!NOTE]
+> 默认情况下，**insertEntity** 不会在 `response` 信息中返回插入的实体。如果计划对此实体执行其他操作，或者希望对信息进行缓存，则可在 `result` 中返回该实体。可以通过启用 **echoContent** 来执行此操作，如下所示：
 >
 > `tableSvc.insertEntity('mytable', task, {echoContent: true}, function (error, result, response) {...}`
 
@@ -159,7 +161,8 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
       }
     });
 
-> [!NOTE] 默认情况下，更新某个实体时，不会查看要更新的数据是否曾被其他进程更新过。若要支持并发更新，请执行以下步骤：
+> [!NOTE]
+> 默认情况下，更新某个实体时，不会查看要更新的数据是否曾被其他进程更新过。若要支持并发更新，请执行以下步骤：
 >
 > 1. 获取要更新的对象的 ETag。对于任何实体相关操作，该 ETag 将在 `response` 中返回，并且可通过 `response['.metadata'].etag` 检索。
 > 2. 对某个实体执行更新操作时，请将以前检索的 ETag 信息添加到新的实体。例如：
@@ -271,7 +274,8 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
       }
     });
 
-> [!NOTE] 考虑在删除项时使用 ETag，以确保项尚未被其他进程修改。请参阅[更新实体](#update-an-entity)了解如何使用 ETag。
+> [!NOTE]
+> 考虑在删除项时使用 ETag，以确保项尚未被其他进程修改。请参阅[更新实体](#update-an-entity)了解如何使用 ETag。
 
 ## 删除表
 以下代码从存储帐户中删除一个表。

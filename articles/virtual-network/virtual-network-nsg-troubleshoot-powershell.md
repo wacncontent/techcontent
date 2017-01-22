@@ -47,7 +47,8 @@ ms.author: anithaa
 
         Get-AzureRmEffectiveNetworkSecurityGroup -NetworkInterfaceName VM1-NIC1 -ResourceGroupName RG1
 
-    >[!TIP] 如果不知道 NIC 的名称，请输入以下命令检索资源组中所有 NIC 的名称：
+    >[!TIP]
+    > 如果不知道 NIC 的名称，请输入以下命令检索资源组中所有 NIC 的名称：
 
     >`Get-AzureRmNetworkInterface -ResourceGroupName RG1 | Format-Table Name`  
 
@@ -157,7 +158,8 @@ ms.author: anithaa
     - 前面带有 *defaultSecurityRules* 的规则名称：创建 NSG 时，将在其中创建几个默认的安全规则。无法删除默认规则，但可以使用更高优先级的规则将其覆盖。请阅读 [NSG overview](./virtual-networks-nsg.md#default-rules)（NSG 概述）一文，了解有关 NSG 默认安全规则的详细信息。
     - **ExpandedAddressPrefix** 扩展 NSG 默认标记的地址前缀。标记代表多个地址前缀。对 VM 与特定地址前缀的连接进行故障排除时，扩展标记很有用。例如，如果有 VNET 对等互连，VIRTUAL\_NETWORK 标记将在上述输出中扩展，显示对等互连的 VNet 前缀。
 
-        >[!NOTE] 仅当 NSG 与子网和/或 NIC 关联时，该命令才显示有效规则。一个 VM 可能有多个应用了不同 NSG 的 NIC。故障排除时，请针对每个 NIC 运行该命令。
+        >[!NOTE]
+        > 仅当 NSG 与子网和/或 NIC 关联时，该命令才显示有效规则。一个 VM 可能有多个应用了不同 NSG 的 NIC。故障排除时，请针对每个 NIC 运行该命令。
 
 3. 为了方便筛选大量 NSG 规则，请输入以下命令进一步进行故障排除：
 
@@ -170,7 +172,8 @@ ms.author: anithaa
 
 4. 在网格视图中可以看到，RDP 具有允许和拒绝两种规则。步骤 2 的输出显示 *DenyRDP* 规则位于对子网应用的 NSG 中。入站规则先处理对子网应用的 NSG。如果找到匹配项，则不处理对网络接口应用的 NSG。在此情况下，子网中的 *DenyRDP* 规则会阻止通过 RDP 连接到 VM (**VM1**)。
 
-    >[!NOTE] 一个 VM 上可以附加多个 NIC。每个 NIC 可以连接到不同的子网。由于上一步骤中的命令是针对 NIC 运行的，因此请务必指定连接失败的 NIC。如果不确定要指定哪个 NIC，可以针对附加到 VM 的每个 NIC 运行这些命令。
+    >[!NOTE]
+    > 一个 VM 上可以附加多个 NIC。每个 NIC 可以连接到不同的子网。由于上一步骤中的命令是针对 NIC 运行的，因此请务必指定连接失败的 NIC。如果不确定要指定哪个 NIC，可以针对附加到 VM 的每个 NIC 运行这些命令。
 
 5. 若要使用 RDP 连接到 VM1，请在 **Subnet1-NSG** NSG 中将 *Deny RDP (3389)* 规则更改为 *Allow RDP(3389)*。打开与 VM 的 RDP 连接或使用 PsPing 工具，确认 TCP 端口 3389 是否已打开。有关 PsPing 的详细信息，请阅读 [PsPing 下载页](https://technet.microsoft.com/sysinternals/psping.aspx)
 

@@ -19,7 +19,8 @@ ms.author: lemai
 
 # 如何在服务中调用数据丢失
 
->[!WARNING] 本文档介绍如何导致服务数据丢失，应谨慎使用。
+>[!WARNING]
+> 本文档介绍如何导致服务数据丢失，应谨慎使用。
 
 ## 介绍
 你可以通过调用 StartPartitionDataLossAsync() 在 Service Fabric 服务的分区调用数据丢失。此 API 使用错误注入和分析服务来执行导致数据丢失条件的工作。

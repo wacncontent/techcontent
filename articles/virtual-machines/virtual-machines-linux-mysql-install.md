@@ -26,7 +26,8 @@ ms.author: mingzhan
 
 ##在虚拟机上安装 MySQL
 
-> [!NOTE]你必须已经有一个运行 Linux 的 Azure 虚拟机，才能完成本教程。在继续操作前，请参阅 [Azure Linux VM 教程](./virtual-machines-linux-quick-create-cli.md)创建并设置一个 Linux VM，其中 `mysqlnode` 为 VM 名称，`azureuser` 为用户。
+> [!NOTE]
+>你必须已经有一个运行 Linux 的 Azure 虚拟机，才能完成本教程。在继续操作前，请参阅 [Azure Linux VM 教程](./virtual-machines-linux-quick-create-cli.md)创建并设置一个 Linux VM，其中 `mysqlnode` 为 VM 名称，`azureuser` 为用户。
 
 在此情况下，请使用 3306 端口作为 MySQL 端口。
 

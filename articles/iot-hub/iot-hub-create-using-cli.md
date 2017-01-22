@@ -33,7 +33,8 @@ ms.author: boltean
     azure --version
 ```
 
-> [!NOTE] Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。Azure CLI 必须处于 Azure Resource Manager 模式：
+> [!NOTE]
+> Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。Azure CLI 必须处于 Azure Resource Manager 模式：
 ```
     azure config mode arm
 ```
@@ -58,7 +59,8 @@ ms.author: boltean
 
         azure group create -n exampleResourceGroup -l chinaeast
 
-> [!TIP] [Use the Azure CLI to manage Azure resources and resource groups][lnk-CLI-arm]（使用 Azure CLI 管理 Azure 资源和资源组）一文详细介绍了如何使用 Azure CLI 管理 Azure 资源。
+> [!TIP]
+> [Use the Azure CLI to manage Azure resources and resource groups][lnk-CLI-arm]（使用 Azure CLI 管理 Azure 资源和资源组）一文详细介绍了如何使用 Azure CLI 管理 Azure 资源。
 
 ## 创建 IoT 中心
 
@@ -82,7 +84,8 @@ ms.author: boltean
 
         azure iothub create -g exampleResourceGroup -n exampleIoTHubName -l chinaeast -k s1 -u 1
 
-> [!NOTE] 此 Azure CLI 命令为用户创建付费的 S1 标准 IoT 中心。可以使用以下命令删除 IoT 中心 **exampleIoTHubName**
+> [!NOTE]
+> 此 Azure CLI 命令为用户创建付费的 S1 标准 IoT 中心。可以使用以下命令删除 IoT 中心 **exampleIoTHubName**
 ```
     azure iothub delete -g exampleResourceGroup -n exampleIoTHubName
 ```

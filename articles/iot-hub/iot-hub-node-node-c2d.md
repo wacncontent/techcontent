@@ -38,7 +38,8 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
 * **SimulatedDevice**，这是在 [IoT 中心入门]中创建的应用的修改版本，可连接到 IoT 中心并接收云到设备的消息。
 * **SendCloudToDeviceMessage**，它将云到设备的消息通过 IoT 中心发送到模拟设备，然后接收 IoT 中心的传送确认。
 
-> [!NOTE] IoT 中心通过 Azure IoT 设备 SDK 对许多设备平台和语言（包括 C、Java 和 Javascript）提供 SDK 支持。有关如何将设备连接到本教程中的代码（通常是连接到 Azure IoT 中心）的逐步说明，请参阅 [Azure IoT Developer Center]（Azure IoT 开发人员中心）。
+> [!NOTE]
+> IoT 中心通过 Azure IoT 设备 SDK 对许多设备平台和语言（包括 C、Java 和 Javascript）提供 SDK 支持。有关如何将设备连接到本教程中的代码（通常是连接到 Azure IoT 中心）的逐步说明，请参阅 [Azure IoT Developer Center]（Azure IoT 开发人员中心）。
 
 若要完成本教程，您需要以下各项：
 
@@ -74,7 +75,8 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
     };
     ```
 
-    > [!NOTE]如果使用 HTTP（而不使用 MQTT 或 AMQP）作为传输，**DeviceClient** 实例不会经常检查 IoT 中心发来的消息（时间间隔小于 25 分钟）。有关 MQTT、AMQP 和 HTTP 支持之间的差异，以及 IoT 中心限制的详细信息，请参阅 [IoT 中心开发人员指南][IoT Hub Developer Guide - C2D]。
+    > [!NOTE]
+    >如果使用 HTTP（而不使用 MQTT 或 AMQP）作为传输，**DeviceClient** 实例不会经常检查 IoT 中心发来的消息（时间间隔小于 25 分钟）。有关 MQTT、AMQP 和 HTTP 支持之间的差异，以及 IoT 中心限制的详细信息，请参阅 [IoT 中心开发人员指南][IoT Hub Developer Guide - C2D]。
 
 ## 发送云到设备的消息
 在本部分中，你将创建一个 Node.js 控制台应用，用于将云到设备的消息发送到模拟设备应用。需要 [IoT 中心入门]教程中所添加的设备 ID。还需要 IoT 中心的连接字符串（位于 [Azure 门户预览]）。
@@ -164,7 +166,8 @@ Azure IoT 中心是一项完全托管的服务，有助于在数百万个 IoT �
 
     ![运行应用以发送 c2d 命令][img-send-command]  
 
-    > [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+    > [!NOTE]
+    > 为简单起见，本教程不实现任何重试策略。在生产代码中，应按 MSDN 文章 [Transient Fault Handling]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 后续步骤
 在本教程中，你已学习如何发送和接收云到设备的消息。

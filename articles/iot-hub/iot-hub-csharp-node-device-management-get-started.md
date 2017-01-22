@@ -192,7 +192,8 @@ IoT 后端应用可以使用 Azure IoT 中心的基元（即设备孪生和直�
     ```
 8. 保存并关闭 **dmpatterns\_getstarted\_device.js** 文件。
 
-    [!NOTE] 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
+    >[!NOTE]
+    > 为简单起见，本教程不实现任何重试策略。在生产代码中，你应该按 MSDN 文章 [Transient Fault Handling][lnk-transient-faults]（暂时性故障处理）中所述实施重试策略（例如指数性的回退）。
 
 ## 运行应用
 现在，已准备就绪，可以运行应用。

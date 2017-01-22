@@ -27,7 +27,8 @@ ms.author: juliako;anilmur
 
 如果你的输出资产已经过存储加密，则必须配置资产传送策略。有关详细信息，请参阅[配置资产传送策略](./media-services-dotnet-configure-asset-delivery-policy.md)。
 
->[!NOTE]MES 将生成一个输出文件，其名称包含输入文件名的前 32 个字符。该名称基于预设文件中指定的内容。例如，"FileName": "{Basename}\_{Index}{Extension}"。{Basename} 将替换为输入文件名的前 32 个字符。
+>[!NOTE]
+>MES 将生成一个输出文件，其名称包含输入文件名的前 32 个字符。该名称基于预设文件中指定的内容。例如，"FileName": "{Basename}\_{Index}{Extension}"。{Basename} 将替换为输入文件名的前 32 个字符。
 
 ###MES 格式
 

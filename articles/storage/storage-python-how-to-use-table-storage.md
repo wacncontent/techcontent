@@ -110,7 +110,8 @@ ms.author: marsma
 
 以下代码中的查询只返回表中实体的说明。
 
-[!NOTE] 下面的代码段仅对云存储服务有效。不受存储模拟器支持。
+>[!NOTE]
+> 下面的代码段仅对云存储服务有效。不受存储模拟器支持。
 
     tasks = table_service.query_entities('tasktable', filter="PartitionKey eq 'tasksSeattle'", select='description')
     for task in tasks:

@@ -10,9 +10,11 @@
     * [Mac OS X](http://www.apple.com/osx) 版本 “Yosemite”和“El Captain”
     * [Ubuntu Linux](http://www.ubuntu.com) 版本 12、14 和 15
 
->[!NOTE] 可以在 Eclipse Marketplace 页面上的[适用于 Eclipse 的 Azure 工具包](http://marketplace.eclipse.org/content/azure-toolkit-eclipse)中找到详细信息。
+>[!NOTE]
+> 可以在 Eclipse Marketplace 页面上的[适用于 Eclipse 的 Azure 工具包](http://marketplace.eclipse.org/content/azure-toolkit-eclipse)中找到详细信息。
 
-> [!IMPORTANT] 如果要在 Windows 上使用适用于 Eclipse 的 Azure 工具包，则运行该工具包需要安装 Azure SDK 2.7 或更高版本。安装 Azure SDK 有两个选项：
+> [!IMPORTANT]
+> 如果要在 Windows 上使用适用于 Eclipse 的 Azure 工具包，则运行该工具包需要安装 Azure SDK 2.7 或更高版本。安装 Azure SDK 有两个选项：
 > 
 > * 可以通过使用 [Web 平台安装程序 (WebPI)][] 下载并安装 Azure SDK。
 > * 如果创建第一个 Azure 部署项目时尚未安装 Azure SDK，则会提示你自动下载和安装所需版本的 Azure SDK。

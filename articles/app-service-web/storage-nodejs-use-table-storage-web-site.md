@@ -86,7 +86,8 @@ ms.author: robmcm
         ├── mkdirp@0.3.5
         └── commander@1.3.2 (keypress@0.1.0)
 
-    > [!NOTE] “-g”参数表示全局安装模块。这样，我们可使用 **express** 生成 Web 应用基架，而无需键入其他路径信息。
+    > [!NOTE]
+    > “-g”参数表示全局安装模块。这样，我们可使用 **express** 生成 Web 应用基架，而无需键入其他路径信息。
 
 4. 若要创建应用程序的基架，请输入 **express** 命令：
 
@@ -329,7 +330,8 @@ ms.author: robmcm
         var accountName = nconf.get("STORAGE_NAME");
         var accountKey = nconf.get("STORAGE_KEY");
 
-    > [!NOTE] nconf 将从环境变量或我们稍后将创建的 **config.json** 文件中加载配置值。
+    > [!NOTE]
+    > nconf 将从环境变量或我们稍后将创建的 **config.json** 文件中加载配置值。
 
 3. 在 app.js 文件中，向下滚动到以下行：
 
@@ -470,7 +472,8 @@ ms.author: robmcm
 
 本节中的步骤使用 Azure 命令行工具在 App Service 中创建新的 Web 应用，然后使用 Git 部署应用程序。若要执行这些步骤，你必须具有 Azure 订阅。
 
-> [!NOTE] 也可以使用 [Azure 门户预览](https://portal.azure.cn/)执行这些步骤。请参阅 [Build and deploy a Node.js web app in Azure App Service]（在 Azure 应用服务中构建和部署 Node.js Web 应用）。
+> [!NOTE]
+> 也可以使用 [Azure 门户预览](https://portal.azure.cn/)执行这些步骤。请参阅 [Build and deploy a Node.js web app in Azure App Service]（在 Azure 应用服务中构建和部署 Node.js Web 应用）。
 ><p>
 > 如果这是创建的第一个 Web 应用，则必须使用 Azure 门户预览部署此应用程序。
 
@@ -527,7 +530,8 @@ ms.author: robmcm
         info:   Executing `git remote add azure https://username@tabletasklist.chinacloudsites.cn/TableTasklist.git`
         info:   site create command OK
 
-    > [!NOTE] 如果这是订阅的第一个应用服务 Web 应用，系统会指示使用 Azure 门户预览创建该 Web 应用。有关详细信息，请参阅 [Build and deploy a Node.js web app in Azure App Service]（在 Azure 应用服务中构建和部署 Node.js Web 应用）。
+    > [!NOTE]
+    > 如果这是订阅的第一个应用服务 Web 应用，系统会指示使用 Azure 门户预览创建该 Web 应用。有关详细信息，请参阅 [Build and deploy a Node.js web app in Azure App Service]（在 Azure 应用服务中构建和部署 Node.js Web 应用）。
 
 ### 设置环境变量。
 

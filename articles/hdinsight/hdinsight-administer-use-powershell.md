@@ -144,7 +144,8 @@ Azure PowerShell 无法在 HDInsight 创建过程中创建 Blob 容器。可使�
 ##缩放群集
 使用群集缩放功能，可更改 Azure HDInsight 中运行的群集使用的辅助节点数，而无需重新创建群集。
 
->[!NOTE] 只支持使用 HDInsight 3.1.3 或更高版本的群集。如果你不确定群集的版本，可以查看“属性”页。
+>[!NOTE]
+> 只支持使用 HDInsight 3.1.3 或更高版本的群集。如果你不确定群集的版本，可以查看“属性”页。
 
 更改 HDInsight 支持的每种类型的群集所用数据节点数的影响：
 
@@ -218,7 +219,8 @@ HDInsight 群集提供以下 HTTP Web 服务（所有这些服务都有 REST 样
 
     Grant-AzureHDInsightHttpServicesAccess -Name $clusterName -HttpCredential $credential
 
->[!NOTE] 授予/撤消访问权限时，将重设群集用户的用户名和密码。
+>[!NOTE]
+> 授予/撤消访问权限时，将重设群集用户的用户名和密码。
 
 也可以使用经典管理门户完成此操作。请参阅[使用 Azure 经典管理门户管理 HDInsight][hdinsight-admin-portal]。
 

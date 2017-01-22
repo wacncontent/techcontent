@@ -48,7 +48,8 @@ Service Fabric 应用程序可以包含一个或多个服务，每个服务都�
 
     ![Visual Studio 中的新建服务对话框][2]
 
-    >[!NOTE] 有关选项的详细信息，请参阅 [Service Fabric 编程模型概述](./service-fabric-choose-framework.md)。
+    >[!NOTE]
+    > 有关选项的详细信息，请参阅 [Service Fabric 编程模型概述](./service-fabric-choose-framework.md)。
 
     Visual Studio 会创建应用程序项目和有状态服务项目，并在解决方案资源管理器中显示它们。
 
@@ -69,7 +70,8 @@ Service Fabric 应用程序可以包含一个或多个服务，每个服务都�
 
 1. 按 F5 以部署应用程序以便进行调试。
 
-    >[!NOTE] 首次部署需要一段时间，因为 Visual Studio 要创建本地群集以用于开发。本地群集只在单台计算机上运行用户在多计算机群集中生成的相同平台代码。群集创建状态显示在 Visual Studio 输出窗口中。
+    >[!NOTE]
+    > 首次部署需要一段时间，因为 Visual Studio 要创建本地群集以用于开发。本地群集只在单台计算机上运行用户在多计算机群集中生成的相同平台代码。群集创建状态显示在 Visual Studio 输出窗口中。
 
     群集准备就绪时，将从 SDK 随附的本地群集系统托盘管理器应用程序收到通知。
 
@@ -87,7 +89,8 @@ Service Fabric 应用程序可以包含一个或多个服务，每个服务都�
 
     本地群集包含在单台计算机上托管的五个节点。它会模拟一个五节点群集，其中节点处于不同计算机上。让我们在本地群集上取下一个节点，以模拟丢失一台计算机的情况，同时练习 Visual Studio 调试器。
 
-    >[!NOTE] 项目模板发出的应用程序诊断事件会使用包含的 `ServiceEventSource` 类。有关详细信息，请参阅[如何在本地监视和诊断服务](./service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)。
+    >[!NOTE]
+    > 项目模板发出的应用程序诊断事件会使用包含的 `ServiceEventSource` 类。有关详细信息，请参阅[如何在本地监视和诊断服务](./service-fabric-diagnostics-how-to-monitor-and-diagnose-services-locally.md)。
 
 4. 在服务项目中查找派生自 StatefulService 的类（例如 MyStatefulService），然后在 `RunAsync` 方法的第一行上设置断点。
 

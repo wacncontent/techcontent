@@ -86,7 +86,8 @@ ms.author: larryfr
 
         STORE RESULT into 'wasbs:///example/data/pigout'
 
-    > [!NOTE] 数据将存储到文件中名为 **part-nnnnn** 的指定目录。如果该目录已存在，你将收到错误消息。
+    > [!NOTE]
+    > 数据将存储到文件中名为 **part-nnnnn** 的指定目录。如果该目录已存在，你将收到错误消息。
 
 7. 若要退出 grunt 提示符，请输入以下语句。
 

@@ -146,7 +146,8 @@ wacn.date: 08/10/2016
 
 ![26](./media/azure-media-services-live-streaming/26.png)
 
->[!NOTE]后续的公开课都可以在已创建的频道直播，只需要再按照 Step 2 的 3、4 操作即可。
+>[!NOTE]
+>后续的公开课都可以在已创建的频道直播，只需要再按照 Step 2 的 3、4 操作即可。
 
 ##Step4: 使用 CDN 为视频直播加速
 

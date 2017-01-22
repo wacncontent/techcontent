@@ -31,7 +31,8 @@ ms.author: douglasl
 
 如果你只是想要暂停数据迁移，请参阅[暂停和恢复 Stretch Database](./sql-server-stretch-database-pause.md)。
 
->   [!NOTE] 针对表或数据库禁用 Stretch Database 不会删除远程对象。若要删除远程表或远程数据库，必须使用 Azure 管理门户。远程对象在删除之前，会持续产生 Azure 费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
+>   [!NOTE]
+> 针对表或数据库禁用 Stretch Database 不会删除远程对象。若要删除远程表或远程数据库，必须使用 Azure 管理门户。远程对象在删除之前，会持续产生 Azure 费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
 
 ## 为表禁用延伸数据库
 
@@ -45,7 +46,8 @@ ms.author: douglasl
 
     -   **禁用| Leave data in Azure**. 为表禁用延伸数据库。  放弃表的远程数据，使其保留在 Azure 中。
 
-    >   [!NOTE] 针对表禁用 Stretch Database 不会删除远程数据或远程表。若要删除远程表，必须使用 Azure 管理门户。远程表在删除之前，会持续产生 Azure 存储费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
+    >   [!NOTE]
+    > 针对表禁用 Stretch Database 不会删除远程数据或远程表。若要删除远程表，必须使用 Azure 管理门户。远程表在删除之前，会持续产生 Azure 存储费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
 
 ### 使用 Transact-SQL 为表禁用延伸数据库
 
@@ -64,7 +66,8 @@ ms.author: douglasl
         ALTER TABLE <table_name>
            SET ( REMOTE_DATA_ARCHIVE = OFF_WITHOUT_DATA_RECOVERY ( MIGRATION_STATE = PAUSED ) ) ;
 
->   [!NOTE] 针对表禁用 Stretch Database 不会删除远程数据或远程表。若要删除远程表，必须使用 Azure 管理门户。远程表在删除之前，会持续产生 Azure 费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
+>   [!NOTE]
+> 针对表禁用 Stretch Database 不会删除远程数据或远程表。若要删除远程表，必须使用 Azure 管理门户。远程表在删除之前，会持续产生 Azure 费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
 
 ## 为数据库禁用延伸数据库
 在为某个数据库禁用延伸数据库之前，必须对该数据库中已启用延伸的每个表禁用延伸数据库。
@@ -75,7 +78,8 @@ ms.author: douglasl
 
 2.  单击右键，然后依次选择“任务”、“Stretch”、“禁用”。
 
->   [!NOTE] 针对数据库禁用 Stretch Database 不会删除远程数据库。若要删除远程数据库，必须使用 Azure 管理门户。远程数据库在删除之前，会持续产生 Azure 费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
+>   [!NOTE]
+> 针对数据库禁用 Stretch Database 不会删除远程数据库。若要删除远程数据库，必须使用 Azure 管理门户。远程数据库在删除之前，会持续产生 Azure 费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
 
 ### 使用 Transact-SQL 为数据库禁用延伸数据库
 运行以下命令。
@@ -83,7 +87,8 @@ ms.author: douglasl
     ALTER DATABASE <database name>
         SET REMOTE_DATA_ARCHIVE = OFF ;
 
->   [!NOTE] 针对数据库禁用 Stretch Database 不会删除远程数据库。若要删除远程数据库，必须使用 Azure 管理门户。远程数据库在删除之前，会持续产生 Azure 费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
+>   [!NOTE]
+> 针对数据库禁用 Stretch Database 不会删除远程数据库。若要删除远程数据库，必须使用 Azure 管理门户。远程数据库在删除之前，会持续产生 Azure 费用。有关详细信息，请参阅 [SQL Server Stretch Database 定价](https://www.azure.cn/pricing/details/sql-server-stretch-database/)。
 
 ## 另请参阅
 

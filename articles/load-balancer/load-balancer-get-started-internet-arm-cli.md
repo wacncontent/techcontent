@@ -73,7 +73,8 @@ ms.author: sewhee
 
     azure network public-ip create -g NRPRG -n NRPPublicIP -l chinaeast -d loadbalancernrp -a static -i 4
 
-    >[!IMPORTANT] 负载均衡器将使用公共 IP 的域标签作为其 FQDN。这与经典部署不同，后者使用云服务座位负载均衡器 FQDN。该实例中，FQDN 是 *loadbalancernrp.eastus.cloudapp.azure.com* 。
+    >[!IMPORTANT]
+    > 负载均衡器将使用公共 IP 的域标签作为其 FQDN。这与经典部署不同，后者使用云服务座位负载均衡器 FQDN。该实例中，FQDN 是 *loadbalancernrp.eastus.cloudapp.azure.com* 。
 
 ## 创建负载均衡器
 
@@ -223,7 +224,8 @@ ms.author: sewhee
 
         azure vm create --resource-group nrprg --name web1 --location chinaeast --vnet-name nrpvnet --vnet-subnet-name nrpvnetsubnet --nic-name lb-nic1-be --availset-name nrp-avset --storage-account-name web1nrp --os-type Windows --image-urn MicrosoftWindowsServer:WindowsServer:2012-R2-Datacenter:4.0.20150825
 
-    >[!IMPORTANT] 负载均衡器中的 VM 需要在同一可用性集中。使用 `azure availset create` 创建可用性集。
+    >[!IMPORTANT]
+    > 负载均衡器中的 VM 需要在同一可用性集中。使用 `azure availset create` 创建可用性集。
 
     输出应如下所示：
 
@@ -244,7 +246,8 @@ ms.author: sewhee
         + Creating VM "web1"
         info:    vm create command OK
 
-    >[!NOTE] 应显示信息性消息**这是未配置公共 IP 的 NIC**，因为为连接到 Internet 的负载均衡器创建的 NIC 使用的是负载均衡器公共 IP 地址。
+    >[!NOTE]
+    > 应显示信息性消息**这是未配置公共 IP 的 NIC**，因为为连接到 Internet 的负载均衡器创建的 NIC 使用的是负载均衡器公共 IP 地址。
 
     由于 *lb-nic1-be* NIC 与 *rdp1* NAT 规则相关联，因此你可以使用 RDP 通过负载均衡器上的端口 3441 连接到 *web1* 。
 

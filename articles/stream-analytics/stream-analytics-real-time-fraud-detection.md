@@ -55,7 +55,8 @@ ms.author: jeffstok
 
 1. 下载 [TelcoGenerator.zip 文件](http://download.microsoft.com/download/8/B/D/8BD50991-8D54-4F59-AB83-3354B69C8A7E/TelcoGenerator.zip)，将其解压缩到某个目录。
 
-    > [!NOTE] Windows 可能会阻止下载的 zip 文件。右键单击该文件，选择“属性”。如果看到“此文件来自其他计算机，可能被阻止以帮助保护该计算机。”消息，则选中“取消阻止”框，然后在该 zip 文件上单击“应用”。
+    > [!NOTE]
+    > Windows 可能会阻止下载的 zip 文件。右键单击该文件，选择“属性”。如果看到“此文件来自其他计算机，可能被阻止以帮助保护该计算机。”消息，则选中“取消阻止”框，然后在该 zip 文件上单击“应用”。
 
 2. 将 telcodatagen.exe.config 中的 Microsoft.ServiceBus.ConnectionString 和 EventHubName 值替换为事件中心的连接字符串和名称。
 
@@ -136,7 +137,8 @@ ms.author: jeffstok
 
      SELECT * FROM CallStream
 
-    > [!IMPORTANT] 请确保输入源的名称与此前指定的输入的名称相匹配。
+    > [!IMPORTANT]
+    > 请确保输入源的名称与此前指定的输入的名称相匹配。
 
 3. 单击查询编辑器下的**“测试”**。
 4. 提供测试文件。可以使用在前面步骤中创建的文件，也可以使用 [telco.json](https://github.com/Azure/azure-stream-analytics/blob/master/Samples/SampleDataFiles/Telco.json)。

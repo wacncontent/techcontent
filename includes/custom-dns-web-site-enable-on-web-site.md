@@ -1,6 +1,7 @@
 在传播域名记录后，必须将其与 Web 应用关联。通过以下步骤使用 Web 浏览器启用域名。
 
-> [!NOTE] 在之前的步骤中创建的 TXT 记录通过 DNS 系统向外传播可能需要一段时间。在 TXT 记录传播之前，无法将域名添加到 Web 应用。如果使用的是 A 记录，则上一步创建的 TXT 记录传播后才可将 A 记录域名添加到 Web 应用。
+> [!NOTE]
+> 在之前的步骤中创建的 TXT 记录通过 DNS 系统向外传播可能需要一段时间。在 TXT 记录传播之前，无法将域名添加到 Web 应用。如果使用的是 A 记录，则上一步创建的 TXT 记录传播后才可将 A 记录域名添加到 Web 应用。
 >
 > 可使用 <a href="http://www.digwebinterface.com/">http://www.digwebinterface.com/</a> 等服务验证该 TXT 记录是否可用。
 

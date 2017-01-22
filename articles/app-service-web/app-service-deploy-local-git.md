@@ -85,7 +85,8 @@ ms.author: dariagrigoriu
 3. 使用 `git remote` 添加步骤 1 的 **Git URL** 中所列的远程引用。使用的命令应类似于：
 
         git remote add azure https://<username>@localgitdeployment.scm.chinacloudsites.cn:443/localgitdeployment.git         
-    > [!NOTE] **remote** 命令可将命名引用添加到远程存储库。在本示例中，它为 Web 应用的存储库创建名为“azure”的引用。
+    > [!NOTE]
+    > **remote** 命令可将命名引用添加到远程存储库。在本示例中，它为 Web 应用的存储库创建名为“azure”的引用。
 
 4. 使用刚刚创建的新 **azure** 远程命令将内容推送到应用服务。
 
