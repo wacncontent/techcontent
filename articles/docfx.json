@@ -20,11 +20,21 @@
         "files": [
           "**/*.png",
           "**/*.jpg",
+          "**/*.jpeg",
           "**/*.svg",
-          "**/*.gif",
+          "**/*.gif"
+        ],
+        "exclude": [
+          "**/obj/**",
+          "opsacndocsdemo/**"
+        ]
+      },
+      {
+        "files": [
+          "../includes/**/*.svg",
           "../includes/**/*.png",
           "../includes/**/*.jpg",
-          "../includes/**/*.svg",
+          "../includes/**/*.jpeg",
           "../includes/**/*.gif"
         ],
         "exclude": [
