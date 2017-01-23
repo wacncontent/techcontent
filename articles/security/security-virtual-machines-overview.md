@@ -1,23 +1,21 @@
-<properties
-   pageTitle="Azure 虚拟机安全概述 | Microsoft Azure"
-   description=" 使用 Azure 虚拟机可以灵活实现虚拟化，无需购买和维护运行虚拟机的物理硬件。本文概述了可用于 Azure 虚拟机的核心 Azure 安全功能。"
-   services="security"
-   documentationCenter="na"
-   authors="lingche"
-   manager="shlan"
-   editor="lingche"/>  
+---
+title: Azure 虚拟机安全概述 | Microsoft Azure
+description:  使用 Azure 虚拟机可以灵活实现虚拟化，无需购买和维护运行虚拟机的物理硬件。本文概述了可用于 Azure 虚拟机的核心 Azure 安全功能。
+services: security
+documentationCenter: na
+authors: lingche
+manager: shlan
+editor: lingche
 
-
-<tags
-   ms.service="security"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="na"
-   ms.date="09/16/2016"
-   wacn.date="10/31/2016"
-   ms.author="terrylan"/>  
-
+ms.service: security
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/16/2016
+wacn.date: 10/31/2016
+ms.author: terrylan
+---
 
 # Azure 虚拟机安全概述
 
@@ -67,19 +65,19 @@ Microsoft 反恶意软件是一个针对应用程序和租户环境所提供的�
 
 了解详细信息：有关使用反恶意软件保护虚拟机的详细信息，请参阅：
 
-- [适用于 Azure 云服务和虚拟机的 Microsoft 反恶意软件](/documentation/articles/azure-security-antimalware/)
+- [适用于 Azure 云服务和虚拟机的 Microsoft 反恶意软件](./azure-security-antimalware.md)
 - [在 Azure 虚拟机上部署反恶意软件解决方案](https://azure.microsoft.com/blog/deploying-antimalware-solutions-on-azure-virtual-machines/)
-- [如何在 Windows VM 上安装和配置 Asiainfo Deep Security 即服务](/documentation/articles/virtual-machines-windows-classic-install-trend/)
+- [如何在 Windows VM 上安装和配置 Asiainfo Deep Security 即服务](../virtual-machines/virtual-machines-windows-classic-install-trend.md)
 - [Azure 映像应用商店中的安全解决方案](https://market.azure.cn/List/Index?sort=Featured&filters=tag:security)
 
 ## 硬件安全模块
 
-加密和身份验证无法提高安全性，除非密钥本身也受到保护。通过将关键密码和密钥存储在 Azure 密钥保管库中，可以简化此类密码和密钥的管理和保护。密钥保管库使你可以将密钥存储在 FIPS 140-2 级别 2 标准认证的硬件安全模块 (HSM) 中。用于备份或[透明数据加密](https://msdn.microsoft.com/zh-cn/library/bb934049.aspx)的 SQL Server 加密密钥可以存储在密钥保管库中，此外还可存储应用程序中的任意密钥或机密。对这些受保护项的权限和访问权限通过 [Azure Active Directory](/documentation/services/identity/) 进行管理。
+加密和身份验证无法提高安全性，除非密钥本身也受到保护。通过将关键密码和密钥存储在 Azure 密钥保管库中，可以简化此类密码和密钥的管理和保护。密钥保管库使你可以将密钥存储在 FIPS 140-2 级别 2 标准认证的硬件安全模块 (HSM) 中。用于备份或[透明数据加密](https://msdn.microsoft.com/zh-cn/library/bb934049.aspx)的 SQL Server 加密密钥可以存储在密钥保管库中，此外还可存储应用程序中的任意密钥或机密。对这些受保护项的权限和访问权限通过 [Azure Active Directory](../active-directory/index.md) 进行管理。
 
 了解详细信息：
 
-- [什么是 Azure 密钥保管库？](/documentation/articles/key-vault-whatis/)
-- [Azure 密钥保管库入门](/documentation/articles/key-vault-get-started/)
+- [什么是 Azure 密钥保管库？](../key-vault/key-vault-whatis.md)
+- [Azure 密钥保管库入门](../key-vault/key-vault-get-started.md)
 - [Azure 密钥保管库博客](https://blogs.technet.microsoft.com/kv/)
 
 ## 虚拟机备份
@@ -88,8 +86,8 @@ Azure 备份是一个可缩放的解决方案，无需资本投资便可保护�
 
 了解详细信息：
 
-- [什么是 Azure 备份？](/documentation/articles/backup-introduction-to-azure-backup/)
-- [Azure 备份服务 - 常见问题](/documentation/articles/backup-azure-backup-faq/)
+- [什么是 Azure 备份？](../backup/backup-introduction-to-azure-backup.md)
+- [Azure 备份服务 - 常见问题](../backup/backup-azure-backup-faq.md)
 
 ## Azure Site Recovery
 
@@ -105,9 +103,9 @@ Site Recovery：
 
 了解详细信息：
 
-- [什么是 Azure Site Recovery？](/documentation/articles/site-recovery-overview/)
-- [Azure Site Recovery 的工作原理](/documentation/articles/site-recovery-components/)
-- [Azure Site Recovery 保护哪些工作负荷？](/documentation/articles/site-recovery-workload/)
+- [什么是 Azure Site Recovery？](../site-recovery/site-recovery-overview.md)
+- [Azure Site Recovery 的工作原理](../site-recovery/site-recovery-components.md)
+- [Azure Site Recovery 保护哪些工作负荷？](../site-recovery/site-recovery-workload.md)
 
 ## 虚拟网络
 
@@ -115,9 +113,8 @@ Site Recovery：
 
 了解详细信息：
 
-- [Azure 网络安全概述](/documentation/articles/security-network-overview/)
-- [虚拟网络概述](/documentation/articles/virtual-networks-overview/)
-
+- [Azure 网络安全概述](./security-network-overview.md)
+- [虚拟网络概述](../virtual-network/virtual-networks-overview.md)
 
 ## 合规性
 

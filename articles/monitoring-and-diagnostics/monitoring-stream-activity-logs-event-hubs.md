@@ -1,25 +1,24 @@
-<properties
-	pageTitle="将 Azure 活动日志流式传输到事件中心 | Azure"
-	description="了解如何将 Azure 活动日志流式传输到事件中心。"
-	authors="johnkemnetz"
-	manager="rboucher"
-	editor=""
-	services="monitoring-and-diagnostics"
-	documentationCenter="monitoring-and-diagnostics"/>
+---
+title: 将 Azure 活动日志流式传输到事件中心 | Azure
+description: 了解如何将 Azure 活动日志流式传输到事件中心。
+authors: johnkemnetz
+manager: rboucher
+editor: 
+services: monitoring-and-diagnostics
+documentationCenter: monitoring-and-diagnostics
 
-<tags
-	ms.service="monitoring-and-diagnostics"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="11/28/2016"
-	wacn.date="01/03/2017"
-	ms.author="johnkem"/>  
-
+ms.service: monitoring-and-diagnostics
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/28/2016
+wacn.date: 01/03/2017
+ms.author: johnkem
+---
 
 # 将 Azure 活动日志流式传输到事件中心
-可以将 [**Azure 活动日志**](/documentation/articles/monitoring-overview-activity-logs/)以近实时方式流式传输到任何应用程序，方法是使用门户预览中的内置“导出”选项，或者通过 Azure PowerShell Cmdlet 或 Azure CLI 在日志配置文件中启用服务总线规则 ID。
+可以将 [**Azure 活动日志**](./monitoring-overview-activity-logs.md)以近实时方式流式传输到任何应用程序，方法是使用门户预览中的内置“导出”选项，或者通过 Azure PowerShell Cmdlet 或 Azure CLI 在日志配置文件中启用服务总线规则 ID。
 
 ## 可以对活动日志和事件中心执行的操作
 可以通过下述几种方式将流式传输功能用于活动日志：
@@ -46,7 +45,6 @@
 
 4. 单击“保存”保存这些设置。这些设置会即时应用到订阅。
 
-
 ### 通过 PowerShell Cmdlet
 如果日志配置文件已存在，则需先删除该配置文件。
 
@@ -54,7 +52,7 @@
 2. 如果存在，使用 `Remove-AzureRmLogProfile` 将其删除。
 3. 使用 `Set-AzureRmLogProfile` 创建配置文件：
 
-		Add-AzureRmLogProfile -Name my_log_profile -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinaeast/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey -Locations chinaeast,chinanorth -RetentionInDays 90 -Categories Write,Delete,Action
+        Add-AzureRmLogProfile -Name my_log_profile -StorageAccountId /subscriptions/s1/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/my_storage -serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinaeast/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey -Locations chinaeast,chinanorth -RetentionInDays 90 -Categories Write,Delete,Action
 
 服务总线规则 ID 是特定格式的字符串，例如：{服务总线资源 ID}/authorizationrules/{密钥名称}
 
@@ -65,16 +63,16 @@
 2. 如果存在，使用 `azure insights logprofile delete` 将其删除。
 3. 使用 `azure insights logprofile add` 创建配置文件：
 
-		azure insights logprofile add --name my_log_profile --storageId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Storage/storageAccounts/my_storage --serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinaeast/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey --locations chinaeast,chinanorth --retentionInDays 90 –categories Write,Delete,Action
+        azure insights logprofile add --name my_log_profile --storageId /subscriptions/s1/resourceGroups/insights-integration/providers/Microsoft.Storage/storageAccounts/my_storage --serviceBusRuleId /subscriptions/s1/resourceGroups/Default-ServiceBus-chinaeast/providers/Microsoft.ServiceBus/namespaces/mytestSB/authorizationrules/RootManageSharedAccessKey --locations chinaeast,chinanorth --retentionInDays 90 –categories Write,Delete,Action
 
 服务总线规则 ID 是以下格式的字符串：`{service bus resource ID}/authorizationrules/{key name}`。
- 
+
 ## 如何使用事件中心的日志数据？
-[此处提供活动日志的架构](/documentation/articles/monitoring-overview-activity-logs/)。每个事件都采用 JSON blob（称为“记录”）数组的形式。
+[此处提供活动日志的架构](./monitoring-overview-activity-logs.md)。每个事件都采用 JSON blob（称为“记录”）数组的形式。
 
 ## 后续步骤
-- [将活动日志存档到存储帐户](/documentation/articles/monitoring-archive-activity-log/)
-- [阅读 Azure 活动日志概述](/documentation/articles/monitoring-overview-activity-logs/)
-- [根据活动日志事件设置警报](/documentation/articles/insights-auditlog-to-webhook-email/)
+- [将活动日志存档到存储帐户](./monitoring-archive-activity-log.md)
+- [阅读 Azure 活动日志概述](./monitoring-overview-activity-logs.md)
+- [根据活动日志事件设置警报](./insights-auditlog-to-webhook-email.md)
 
 <!---HONumber=Mooncake_1010_2016-->

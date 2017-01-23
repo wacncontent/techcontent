@@ -1,7 +1,7 @@
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/storage-dotnet-how-to-use-files/)
-- [C++](/documentation/articles/storage-c-plus-plus-how-to-use-files/)
-- [Java](/documentation/articles/storage-java-how-to-use-file-storage/)
-- [Python](/documentation/articles/storage-python-how-to-use-file-storage/)
+> [!div class="op_single_selector"]
+- [.NET](../articles/storage/storage-dotnet-how-to-use-files.md)
+- [C++](../articles/storage/storage-c-plus-plus-how-to-use-files.md)
+- [Java](../articles/storage/storage-java-how-to-use-file-storage.md)
+- [Python](../articles/storage/storage-python-how-to-use-file-storage.md)
 
 <!---HONumber=Mooncake_1031_2016-->

@@ -1,28 +1,28 @@
-<properties
-    pageTitle="Azure 自动化中的证书资产 | Azure"
-    description="可以安全地将证书存储在 Azure 自动化中，以便可以通过 Runbook 访问这些证书，对 Azure 和第三方资源进行身份验证。本文介绍了有关证书的详细信息，以及如何在文本和图形创作中使用证书。"
-    services="automation"
-    documentationcenter=""
-    author="mgoedtel"
-    manager="stevenka"
-    editor="tysonn" />  
+---
+title: Azure 自动化中的证书资产 | Azure
+description: 可以安全地将证书存储在 Azure 自动化中，以便可以通过 Runbook 访问这些证书，对 Azure 和第三方资源进行身份验证。本文介绍了有关证书的详细信息，以及如何在文本和图形创作中使用证书。
+services: automation
+documentationcenter: 
+author: mgoedtel
+manager: stevenka
+editor: tysonn
 
-<tags
-    ms.assetid="ac9c22ae-501f-42b9-9543-ac841cf2cc36"
-    ms.service="automation"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="12/19/2016"
-    wacn.date="01/09/2017"
-    ms.author="magoedte;bwren" />  
+ms.assetid: ac9c22ae-501f-42b9-9543-ac841cf2cc36
+ms.service: automation
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 12/19/2016
+wacn.date: 01/09/2017
+ms.author: magoedte;bwren
+---
 
 # Azure 自动化中的证书资产
 
 可以安全地将证书存储在 Azure 自动化中，以便使用 **Get-AzureAutomationCertificate** 活动通过 Runbook 访问这些证书。这样，你便可以创建使用证书进行身份验证的 Runbook，或者将证书添加到 Azure 或第三方资源。
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 Azure 自动化中的安全资产包括凭据、证书、连接和加密的变量。这些资产已使用针对每个自动化帐户生成的唯一密钥加密并存储在 Azure 自动化中。此密钥由主证书加密，并存储在 Azure 自动化中。在存储安全资产之前，会先使用主证书来解密自动化帐户的密钥，然后使用该密钥来加密资产。
 > 
 

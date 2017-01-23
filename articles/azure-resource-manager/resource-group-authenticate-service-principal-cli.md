@@ -1,29 +1,30 @@
-<properties
-    pageTitle="使用 Azure CLI 创建服务主体 | Azure"
-    description="描述如何使用 Azure CLI 创建 Active Directory 应用程序和服务主体，并通过基于角色的访问控制授予其对资源的访问权限。它演示如何使用密码或证书对应用程序进行身份验证。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="c224a189-dd28-4801-b3e3-26991b0eb24d"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="multiple"
-    ms.workload="na"
-    ms.date="12/14/2016"
-    wacn.date="01/06/2017"
-    ms.author="tomfitz" />
+---
+title: 使用 Azure CLI 创建服务主体 | Azure
+description: 描述如何使用 Azure CLI 创建 Active Directory 应用程序和服务主体，并通过基于角色的访问控制授予其对资源的访问权限。它演示如何使用密码或证书对应用程序进行身份验证。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
+
+ms.assetid: c224a189-dd28-4801-b3e3-26991b0eb24d
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: multiple
+ms.workload: na
+ms.date: 12/14/2016
+wacn.date: 01/06/2017
+ms.author: tomfitz
+---
 
 # 使用 Azure CLI 创建服务主体来访问资源
-> [AZURE.SELECTOR]
-- [PowerShell](/documentation/articles/resource-group-authenticate-service-principal/)
-- [Azure CLI](/documentation/articles/resource-group-authenticate-service-principal-cli/)
-- [门户](/documentation/articles/resource-group-create-service-principal-portal/)
+> [!div class="op_single_selector"]
+- [PowerShell](./resource-group-authenticate-service-principal.md)
+- [Azure CLI](./resource-group-authenticate-service-principal-cli.md)
+- [门户](./resource-group-create-service-principal-portal.md)
 
-如果应用程序或脚本需要访问资源，用户在多数情况下不想要使用自己的凭据来运行此过程。用户可能有几种不同的权限可用于应用程序，如果用户职责改变，则不想要应用程序继续使用此凭据。与上述方法不同，也可以为应用程序创建一个标识，其中包括身份验证凭据和角色分配情况。每次应用运行时，将使用这些凭据对其自身进行身份验证。本主题介绍如何通过[适用于 Mac、Linux 和 Windows 的 Azure CLI](/documentation/articles/xplat-cli-install/) 为应用程序进行设置，使之能够使用自己的凭据和标识运行。
+如果应用程序或脚本需要访问资源，用户在多数情况下不想要使用自己的凭据来运行此过程。用户可能有几种不同的权限可用于应用程序，如果用户职责改变，则不想要应用程序继续使用此凭据。与上述方法不同，也可以为应用程序创建一个标识，其中包括身份验证凭据和角色分配情况。每次应用运行时，将使用这些凭据对其自身进行身份验证。本主题介绍如何通过[适用于 Mac、Linux 和 Windows 的 Azure CLI](../xplat-cli-install.md) 为应用程序进行设置，使之能够使用自己的凭据和标识运行。
 
 使用 Azure CLI 时，可以通过 2 个选项进行 AD 应用程序身份验证：
 
@@ -35,12 +36,12 @@
 ## Active Directory 概念
 在本文中，用户将创建两个对象 - Active Directory (AD) 应用程序和服务主体。AD 应用程序是应用程序的全局表示形式。它包含凭据（应用程序 ID 和密码或证书）。服务主体是应用程序在 Active Directory 中的本地表示形式。它包含角色分配。本主题重点介绍单租户应用程序，即应用程序只会在一个组织中运行。通常会将单租户应用程序作为在组织中运行的业务线应用程序使用。在单租户应用程序中，有一个 AD 应用和一个服务主体。
 
-你可能会疑惑 - 为什么需要这两个对象？ 在考虑多租户应用程序时，此方法会更合理。通常对软件即服务 (SaaS) 应用程序使用多租户应用程序，其中应用程序在许多不同订阅中运行。对于多租户应用程序，有一个 AD 应用和多个服务主体（授予应用访问权限的每个 Active Directory 中有一个）。若要设置多租户应用程序，请参阅[使用 Azure Resource Manager API 进行授权的开发人员指南](/documentation/articles/resource-manager-api-authentication/)。
+你可能会疑惑 - 为什么需要这两个对象？ 在考虑多租户应用程序时，此方法会更合理。通常对软件即服务 (SaaS) 应用程序使用多租户应用程序，其中应用程序在许多不同订阅中运行。对于多租户应用程序，有一个 AD 应用和多个服务主体（授予应用访问权限的每个 Active Directory 中有一个）。若要设置多租户应用程序，请参阅[使用 Azure Resource Manager API 进行授权的开发人员指南](./resource-manager-api-authentication.md)。
 
 ## <a name="required-permissions"></a> 所需的权限
 若要完成本主题，必须在 Azure Active Directory 和 Azure 订阅中均具有足够的权限。具体而言，必须能够在 Active Directory 中创建应用并向角色分配服务主体。
 
-检查帐户是否有足够权限的最简方法是使用门户。请参阅[检查要求的权限](/documentation/articles/resource-group-create-service-principal-portal/#required-permissions)。
+检查帐户是否有足够权限的最简方法是使用门户。请参阅[检查要求的权限](./resource-group-create-service-principal-portal.md#required-permissions)。
 
 现在转到[密码](#create-service-principal-with-password)或[证书](#create-service-principal-with-certificate)身份验证部分。
 
@@ -54,7 +55,7 @@
         azure login -e AzureChinaCloud
 
 2. 创建 AD 应用程序时有两个选项。既可以一步创建 AD 应用程序和服务主体，也可以单独创建。如果不需要为应用指定主页和标识符 URI，则可一步创建。如果需要为 Web 应用设置这些值，请单独创建。此步骤介绍两个选项。
-   
+
     * 若要一步创建 AD 应用程序和服务主体，请提供应用名称和密码，如以下命令中所示：
 
             azure ad sp create -n exampleapp -p {your-password}
@@ -68,11 +69,11 @@
          azure ad sp create -a {AppId}
 
     如果帐户在 Active Directory 上不具有[所需的权限](#required-permissions)，将看到指示“Authentication\_Unauthorized”或“上下文中找不到订阅”的错误消息。
-     
+
     对于这两个选项，都会返回新的服务主体。授权时需要使用**对象 ID**。登录时需要提供随**服务主体名称**列出的 GUID。此 GUID 与 AppId 的值一样。在示例应用程序中，此值称为 **客户端 ID**。
 
          info:    Executing command ad sp create
-     
+
          Creating application exampleapp
            / Creating service principal for application 7132aca4-1bdb-4238-ad81-996ff91d8db+
            data:    Object Id:               ff863613-e5e2-4a6b-af07-fff6f2de3f4e
@@ -82,7 +83,7 @@
            data:                             https://www.contoso.org/example
            info:    ad sp create command OK
 
-3. 向服务主体授予对订阅的权限。在此示例中，向“读取者”角色（授予读取订阅中所有资源的权限）添加服务主体。对于其他角色，请参阅 [RBAC：内置角色](/documentation/articles/role-based-access-built-in-roles/)。对于 **ServicePrincipalName** 参数，请提供创建应用程序时使用的 **ObjectId**。运行此命令之前，必须留出一些时间将新的服务主体传遍 Active Directory。手动运行这些命令时，任务之间通常已经过足够的时间。在脚本中，应在命令间添加休眠步骤（如 `sleep 15`）。如果看到错误称主体不存在于目录中，请重新运行该命令。
+3. 向服务主体授予对订阅的权限。在此示例中，向“读取者”角色（授予读取订阅中所有资源的权限）添加服务主体。对于其他角色，请参阅 [RBAC：内置角色](../active-directory/role-based-access-built-in-roles.md)。对于 **ServicePrincipalName** 参数，请提供创建应用程序时使用的 **ObjectId**。运行此命令之前，必须留出一些时间将新的服务主体传遍 Active Directory。手动运行这些命令时，任务之间通常已经过足够的时间。在脚本中，应在命令间添加休眠步骤（如 `sleep 15`）。如果看到错误称主体不存在于目录中，请重新运行该命令。
 
         azure role assignment create --objectId ff863613-e5e2-4a6b-af07-fff6f2de3f4e -o Reader -c /subscriptions/{subscriptionId}/
 
@@ -164,7 +165,7 @@
         azure login -e AzureChinaCloud
 
 5. 创建 AD 应用程序时有两个选项。既可以一步创建 AD 应用程序和服务主体，也可以单独创建。如果不需要为应用指定主页和标识符 URI，则可一步创建。如果需要为 Web 应用设置这些值，请单独创建。此步骤介绍两个选项。
-   
+
     * 若要一步创建 AD 应用程序和服务主体，请提供应用名称和证书数据，如以下命令中所示：
 
             azure ad sp create -n exampleapp --cert-value {certificate data}
@@ -178,11 +179,11 @@
          azure ad sp create -a {AppId}
 
     如果帐户在 Active Directory 上不具有[所需的权限](#required-permissions)，将看到指示“Authentication\_Unauthorized”或“上下文中找不到订阅”的错误消息。
-     
+
     对于这两个选项，都会返回新的服务主体。授权时需要使用对象 ID。登录时需要提供随**服务主体名称**列出的 GUID。此 GUID 与 AppId 的值一样。在示例应用程序中，此值称为 **客户端 ID**。
 
          info:    Executing command ad sp create
-     
+
          Creating service principal for application 4fd39843-c338-417d-b549-a545f584a74+
            data:    Object Id:        7dbc8265-51ed-4038-8e13-31948c7f4ce7
            data:    Display Name:     exampleapp
@@ -191,7 +192,7 @@
            data:                      https://www.contoso.org/example
            info:    ad sp create command OK
 
-6. 向服务主体授予对订阅的权限。在此示例中，向“读取者”角色（授予读取订阅中所有资源的权限）添加服务主体。对于其他角色，请参阅 [RBAC：内置角色](/documentation/articles/role-based-access-built-in-roles/)。对于 **ServicePrincipalName** 参数，请提供创建应用程序时使用的 **ObjectId**。运行此命令之前，必须留出一些时间将新的服务主体传遍 Active Directory。手动运行这些命令时，任务之间通常已经过足够的时间。在脚本中，应在命令间添加休眠步骤（如 `sleep 15`）。如果看到错误称主体不存在于目录中，请重新运行该命令。
+6. 向服务主体授予对订阅的权限。在此示例中，向“读取者”角色（授予读取订阅中所有资源的权限）添加服务主体。对于其他角色，请参阅 [RBAC：内置角色](../active-directory/role-based-access-built-in-roles.md)。对于 **ServicePrincipalName** 参数，请提供创建应用程序时使用的 **ObjectId**。运行此命令之前，必须留出一些时间将新的服务主体传遍 Active Directory。手动运行这些命令时，任务之间通常已经过足够的时间。在脚本中，应在命令间添加休眠步骤（如 `sleep 15`）。如果看到错误称主体不存在于目录中，请重新运行该命令。
 
         azure role assignment create --objectId 7dbc8265-51ed-4038-8e13-31948c7f4ce7 -o Reader -c /subscriptions/{subscriptionId}/
 
@@ -292,7 +293,7 @@
 * [使用 Ruby 管理 Azure 资源和资源组](https://github.com/Azure-Samples/resource-manager-ruby-resources-and-groups/)
 
 ## 后续步骤
-* 有关将应用程序集成到 Azure 以管理资源的详细步骤，请参阅 [Developer's guide to authorization with the Azure Resource Manager API](/documentation/articles/resource-manager-api-authentication/)（使用 Azure Resource Manager API 进行授权的开发人员指南）。
+* 有关将应用程序集成到 Azure 以管理资源的详细步骤，请参阅 [Developer's guide to authorization with the Azure Resource Manager API](./resource-manager-api-authentication.md)（使用 Azure Resource Manager API 进行授权的开发人员指南）。
 * 若要获取有关使用证书和 Azure CLI 的详细信息，请参阅 [Certificate-based authentication with Azure Service Principals from Linux command line](http://blogs.msdn.com/b/arsen/archive/2015/09/18/certificate-based-auth-with-azure-service-principals-from-linux-command-line.aspx)（从 Linux 命令行对 Azure 服务主体进行基于证书的身份验证）。
 
 <!---HONumber=Mooncake_0103_2017-->

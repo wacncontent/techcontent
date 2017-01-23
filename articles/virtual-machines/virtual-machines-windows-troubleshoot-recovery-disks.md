@@ -1,25 +1,24 @@
-<properties
-    pageTitle="将 Windows 故障排除 VM 与 Azure PowerShell 联合使用 | Azure"
-    description="了解如何通过 Azure PowerShell 将 OS 磁盘连接到恢复 VM，以便排查 Azure 中的 Windows VM 问题。"
-    services="virtual-machines-windows"
-    documentationCenter=""
-    authors="iainfoulds"
-    manager="timlt"
-    editor="" />
-<tags
-    ms.service="virtual-machines-windows"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-windows"
-    ms.workload="infrastructure"
-    ms.date="12/13/2016"
-    wacn.date="01/13/2017"
-    ms.author="iainfou" />  
+---
+title: 将 Windows 故障排除 VM 与 Azure PowerShell 联合使用 | Azure
+description: 了解如何通过 Azure PowerShell 将 OS 磁盘连接到恢复 VM，以便排查 Azure 中的 Windows VM 问题。
+services: virtual-machines-windows
+documentationCenter: 
+authors: iainfoulds
+manager: timlt
+editor: 
 
+ms.service: virtual-machines-windows
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-windows
+ms.workload: infrastructure
+ms.date: 12/13/2016
+wacn.date: 01/13/2017
+ms.author: iainfou
+---
 
 # 通过使用 Azure PowerShell 将 OS 磁盘附加到恢复 VM 来对 Windows VM 进行故障排除
 如果 Windows 虚拟机 (VM) 在 Azure 中遇到启动或磁盘错误，可能需要对虚拟硬盘本身执行故障排除步骤。一个常见示例是应用程序更新失败，使 VM 无法成功启动。本文详细介绍如何使用 Azure PowerShell 将虚拟硬盘连接到另一个 Windows VM 来修复所有错误，然后重新创建原始 VM。
-
 
 ## 恢复过程概述
 故障排除过程如下：
@@ -36,7 +35,6 @@
 
 在以下示例中，请将参数名称替换为你自己的值。示例参数名称包括 `myResourceGroup`、`mystorageaccount` 和 `myVM`。
 
-
 ## 确定启动问题
 用户可以通过查看 Azure 中 VM 的屏幕快照来排查启动问题。此屏幕快照有助于确定为何 VM 无法启动。以下示例从名为 `myResourceGroup` 的资源组中名为 `myVM` 的 Windows VM 获取屏幕快照：
 
@@ -44,7 +42,6 @@
         -Name myVM -Windows -LocalPath C:\Users\ops\
 
 检查屏幕快照，确定 VM 无法启动的原因。请注意所提供的任何特定错误消息或错误代码。
-
 
 ## 查看现有虚拟硬盘的详细信息
 在将虚拟硬盘附加到另一个 VM 之前，需要标识虚拟硬盘 (VHD) 的名称。
@@ -87,7 +84,6 @@
 
 等到 VM 已完成删除，然后再将虚拟硬盘附加到另一个 VM。虚拟硬盘上将其与 VM 关联的租约需要释放，然后才能将虚拟硬盘附加到另一个 VM。
 
-
 ## 将现有虚拟硬盘附加到另一个 VM
 在后续几个步骤中，将使用另一个 VM 进行故障排除。将现有虚拟硬盘附加到此故障排除 VM，以浏览和编辑磁盘的内容。例如，此过程允许用户更正任何配置错误或者查看其他应用程序或系统日志文件。选择或创建另一个 VM 以用于故障排除。
 
@@ -98,9 +94,8 @@
         -VhdUri "https://mystorageaccount.blob.core.chinacloudapi.cn/vhds/myVM.vhd"
     Update-AzureRmVM -ResourceGroup "myResourceGroup" -VM $myVM
 
-> [AZURE.NOTE]
+> [!NOTE]
 添加磁盘时需指定磁盘的大小。我们在附加现有磁盘时，会将 `-DiskSizeInGB` 指定为 `$null`。此值可确保正确附加数据磁盘，无需确定数据磁盘的实际大小。
-
 
 ## 装载附加的数据磁盘
 
@@ -124,7 +119,6 @@
 
 ## 修复原始虚拟硬盘上的问题
 装载现有虚拟硬盘后，可以根据需要执行任何维护和故障排除步骤。解决问题后，请继续执行以下步骤。
-
 
 ## 卸载并分离原始虚拟硬盘
 解决错误后，可从故障排除 VM 中卸载并分离现有虚拟硬盘。在将虚拟硬盘附加到故障排除 VM 的租约释放前，不能将该虚拟硬盘用于任何其他 VM。
@@ -153,14 +147,12 @@
 
 - https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-specialized-vhd-existing-vnet/azuredeploy.json  
 
-
 该模板使用先前命令中的 VHD URL 将 VM 部署到现有虚拟网络中。以下示例将模板部署到名为 `myResourceGroup` 的资源组：
 
     New-AzureRmResourceGroupDeployment -Name myDeployment -ResourceGroupName myResourceGroup `
       -TemplateUri https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-specialized-vhd-existing-vnet/azuredeploy.json
 
 响应模板的提示，例如 VM 名称、OS 类型和 VM 大小。`osDiskVhdUri` 与前面将现有虚拟硬盘附加到故障排除 VM 时使用的相同。
-
 
 ## 重新启用启动诊断
 
@@ -171,8 +163,8 @@
     Update-AzureRmVM -ResourceGroup "myResourceGroup" -VM $myVM
 
 ## 后续步骤
-如果在连接到 VM 时遇到问题，请参阅[排查 Azure VM 的 RDP 连接问题](/documentation/articles/virtual-machines-windows-troubleshoot-rdp-connection/)。如果在访问 VM 上运行的应用时遇到问题，请参阅[排查 Windows VM 上的应用程序连接问题](/documentation/articles/virtual-machines-windows-troubleshoot-app-connection/)。
+如果在连接到 VM 时遇到问题，请参阅[排查 Azure VM 的 RDP 连接问题](./virtual-machines-windows-troubleshoot-rdp-connection.md)。如果在访问 VM 上运行的应用时遇到问题，请参阅[排查 Windows VM 上的应用程序连接问题](./virtual-machines-windows-troubleshoot-app-connection.md)。
 
-有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](/documentation/articles/resource-group-overview/)。
+有关资源组的详细信息，请参阅 [Azure Resource Manager 概述](../azure-resource-manager/resource-group-overview.md)。
 
 <!---HONumber=Mooncake_0109_2017-->

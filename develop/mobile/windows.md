@@ -1,8 +1,17 @@
-<properties pageTitle="移动服务-Windows - Azure 微软云" metakeywords="" description="移动服务-Windows - Azure 微软云" services="" documentationCenter="Windows" authors="" manager="Tiffena" editor="EricChen"/>
-  
-<tags ms.service="mobile-services" ms.date="" wacn.date="11/17/2016"/>
+---
+title: 移动服务-Windows - Azure 微软云
+metakeywords: 
+description: 移动服务-Windows - Azure 微软云
+services: 
+documentationCenter: Windows
+authors: 
+manager: Tiffena
+editor: EricChen
 
-
+ms.service: mobile-services
+ms.date: 
+wacn.date: 11/17/2016
+---
 
 #Windows 开发人员中心
 
@@ -10,8 +19,8 @@
 ###通过 AAD 进行身份验证
 ###通过 WNS 发送推送通知
 
-[入门教程](/documentation/articles/mobile-services-javascript-backend-windows-store-javascript-get-started/)
-  
+[入门教程](../../articles/mobile-services/mobile-services-javascript-backend-windows-store-javascript-get-started.md)
+
   向用户发送推送通知
 
 - [iOS 开发人员中心](/develop/mobile/ios)
@@ -20,7 +29,7 @@
 
 ##新功能
 
-- [通知中心入门](/documentation/articles/notification-hubs-windows-mobile-push-notifications-mpns/)
+- [通知中心入门](../../articles/notification-hubs/notification-hubs-windows-mobile-push-notifications-mpns.md)
 - [使用 Active Directory 身份验证库登录](https://github.com/AzureADSamples/NativeClient-WindowsPhone8.1)
 - [通过媒体服务使用视频和音频流](http://playerframework.codeplex.com/releases/view/97333)
 
@@ -28,7 +37,7 @@
 
 ###用户
 
-- [登录 Microsoft 帐户](/documentation/articles/mobile-services-windows-phone-get-started-users/)
+- [登录 Microsoft 帐户](../../articles/mobile-services/mobile-services-windows-phone-get-started-users.md)
 - [使用 Active Directory 身份验证库登录](https://github.com/AzureADSamples/NativeClient-WindowsPhone8.1)
 <!--- [代表用户访问 SharePoint](/documentation/articles/mobile-services-dotnet-backend-calling-sharepoint-on-behalf-of-user/)-->
 
@@ -36,28 +45,25 @@
 
 ###数据
 
-- [在 SQL 数据库 中使用移动服务存储结构化数据](/documentation/articles/mobile-services-windows-phone-get-started-data/)
+- [在 SQL 数据库 中使用移动服务存储结构化数据](../../articles/mobile-services/mobile-services-windows-phone-get-started-data.md)
 
-查看服务：[移动服务](/documentation/services/mobile-services/) | [存储](/documentation/services/storage/)
+查看服务：[移动服务](../../articles/mobile-services/index.md) | [存储](../../articles/storage/index.md)
 
 ###同步
 
-
-
-查看服务：[移动服务](/documentation/services/mobile-services/)
+查看服务：[移动服务](../../articles/mobile-services/index.md)
 
 ###推送
 
-- [通知中心入门](/documentation/articles/notification-hubs-windows-mobile-push-notifications-mpns/)
-- [通过通知中心发送有针对性的通知](/documentation/articles/notification-hubs-windows-phone-push-xplat-segmented-mpns-notification/)
+- [通知中心入门](../../articles/notification-hubs/notification-hubs-windows-mobile-push-notifications-mpns.md)
+- [通过通知中心发送有针对性的通知](../../articles/notification-hubs/notification-hubs-windows-phone-push-xplat-segmented-mpns-notification.md)
 
-
-查看服务： [通知中心](/documentation/services/notification-hubs/)
+查看服务： [通知中心](../../articles/notification-hubs/index.md)
 
 ###媒体
 
 - [通过媒体服务使用视频和音频流](http://playerframework.codeplex.com/releases/view/97333)
-- [构建平滑流式应用程序](/documentation/articles/media-services-build-smooth-streaming-apps/)
+- [构建平滑流式应用程序](../../articles/media-services/media-services-build-smooth-streaming-apps.md)
 
 查看服务：[媒体服务](/develop/media-services)
 

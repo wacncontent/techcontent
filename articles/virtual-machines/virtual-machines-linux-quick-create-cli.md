@@ -1,42 +1,41 @@
-<properties
-    pageTitle="使用 Azure CLI 2.0（预览版）创建 Linux VM | Azure"
-    description="使用 Azure CLI 2.0（预览版）创建 Linux VM。"
-    services="virtual-machines-linux"
-    documentationcenter="author: squillace"
-    manager="timlt" />  
+---
+title: 使用 Azure CLI 2.0（预览版）创建 Linux VM | Azure
+description: 使用 Azure CLI 2.0（预览版）创建 Linux VM。
+services: virtual-machines-linux
+documentationcenter: author: squillace
+manager: timlt
 
-<tags
-    ms.assetid="82005a05-053d-4f52-b0c2-9ae2e51f7a7e"
-    ms.service="virtual-machines-linux"
-    ms.devlang="NA"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="vm-linux"
-    ms.workload="infrastructure"
-    ms.date="09/26/2016"
-    wacn.date="12/20/2016"
-    ms.author="rasquill" />  
-
+ms.assetid: 82005a05-053d-4f52-b0c2-9ae2e51f7a7e
+ms.service: virtual-machines-linux
+ms.devlang: NA
+ms.topic: hero-article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
+ms.date: 09/26/2016
+wacn.date: 12/20/2016
+ms.author: rasquill
+---
 
 # 使用 Azure CLI 2.0（预览版）创建 Linux VM
 
-[AZURE.INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
+[!INCLUDE [azure-cli-2-azurechinacloud-environment-parameter](../../includes/azure-cli-2-azurechinacloud-environment-parameter.md)]
 
 本文说明如何在 Azure CLI 2.0（预览版）中使用 [az vm create](https://docs.microsoft.com/cli/azure/vm#create) 命令在 Azure 上快速部署 Linux 虚拟机 (VM)。
 
-> [AZURE.NOTE] 
+> [!NOTE] 
 Azure CLI 2.0 预览版是下一代的多平台 CLI。欢迎通过 [GitHub 项目页](https://github.com/Azure/azure-cli)试用该软件并提供反馈。
 ><p>
-><p>剩余的文档使用现有的 Azure CLI。若要使用现有 Azure CLI 而不是 CLI 2.0 预览版创建 VM，请参阅 [Create a VM with the Azure CLI](/documentation/articles/virtual-machines-linux-quick-create-cli-nodejs/)（使用 Azure CLI 创建 VM）。
+><p>剩余的文档使用现有的 Azure CLI。若要使用现有 Azure CLI 而不是 CLI 2.0 预览版创建 VM，请参阅 [Create a VM with the Azure CLI](./virtual-machines-linux-quick-create-cli-nodejs.md)（使用 Azure CLI 创建 VM）。
 
 若要创建 VM，需要：
 
-* 一个 Azure 帐户（[获取试用版](/pricing/1rmb-trial/)）
+* 一个 Azure 帐户（[获取试用版](https://www.azure.cn/pricing/1rmb-trial/)）
 * 已安装 [Azure CLI v.2.0（预览版）](https://github.com/Azure/azure-cli#installation)
 * 登录到 Azure 帐户（键入 [az login](https://docs.microsoft.com/cli/azure/#login)）
 
-（也可以使用 [Azure 门户预览](/documentation/articles/virtual-machines-linux-quick-create-portal/)快速部署 Linux VM。）
+（也可以使用 [Azure 门户预览](./virtual-machines-linux-quick-create-portal.md)快速部署 Linux VM。）
 
-以下示例演示如何部署 Debian VM 和附加安全外壳 (SSH) 密钥（你的参数可能与此不同；如果需要不同的映像，[可以搜索映像](/documentation/articles/virtual-machines-linux-cli-ps-findimage/)）。
+以下示例演示如何部署 Debian VM 和附加安全外壳 (SSH) 密钥（你的参数可能与此不同；如果需要不同的映像，[可以搜索映像](./virtual-machines-linux-cli-ps-findimage.md)）。
 
 ## 创建资源组
 
@@ -103,9 +102,9 @@ Azure CLI 2.0 预览版是下一代的多平台 CLI。欢迎通过 [GitHub 项�
 ## 后续步骤
 使用 `az vm create` 命令可以快速部署 VM，以便可以登录到 bash shell 开始工作。但是，使用 `az vm create` 不会为用户提供广泛的控制，也不会让用户创建更复杂的环境。若要部署针对基础结构自定义的 Linux VM，可以遵循下列任一文章操作：
 
-* [Use an Azure Resource Manager template to create a specific deployment（使用 Azure Resource Manager 模板创建特定部署）](/documentation/articles/virtual-machines-linux-cli-deploy-templates/)
-* [Create your own custom environment for a Linux VM using Azure CLI commands directly（直接使用 Azure CLI 命令为 Linux VM 创建用户自己的自定义环境）](/documentation/articles/virtual-machines-linux-create-cli-complete/)
-* [Create an SSH Secured Linux VM on Azure using templates（使用模板在 Azure 上创建受 SSH 保护的 Linux VM）](/documentation/articles/virtual-machines-linux-create-ssh-secured-vm-from-template/)
+* [Use an Azure Resource Manager template to create a specific deployment（使用 Azure Resource Manager 模板创建特定部署）](./virtual-machines-linux-cli-deploy-templates.md)
+* [Create your own custom environment for a Linux VM using Azure CLI commands directly（直接使用 Azure CLI 命令为 Linux VM 创建用户自己的自定义环境）](./virtual-machines-linux-create-cli-complete.md)
+* [Create an SSH Secured Linux VM on Azure using templates（使用模板在 Azure 上创建受 SSH 保护的 Linux VM）](./virtual-machines-linux-create-ssh-secured-vm-from-template.md)
 
 如果使用 Java，请尝试 [create()](https://docs.microsoft.com/java/api/com.microsoft.azure.management.compute._virtual_machine) 方法。
 

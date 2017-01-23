@@ -1,21 +1,21 @@
-<properties
-    pageTitle="配置负载均衡器的 TCP 空闲超时 | Azure"
-    description="配置负载均衡器的 TCP 空闲超时"
-    services="load-balancer"
-    documentationcenter="na"
-    author="kumudd"
-    manager="timlt" />
-<tags
-    ms.assetid="4625c6a8-5725-47ce-81db-4fa3bd055891"
-    ms.service="load-balancer"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/24/2016"
-    wacn.date="01/13/2017"
-    ms.author="kumud" />  
+---
+title: 配置负载均衡器的 TCP 空闲超时 | Azure
+description: 配置负载均衡器的 TCP 空闲超时
+services: load-balancer
+documentationcenter: na
+author: kumudd
+manager: timlt
 
+ms.assetid: 4625c6a8-5725-47ce-81db-4fa3bd055891
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/24/2016
+wacn.date: 01/13/2017
+ms.author: kumud
+---
 
 # 为 Azure Load Balancer 配置 TCP 空闲超时设置
 
@@ -30,7 +30,6 @@
 TCP 保持连接状态非常适用于不受电池寿命限制的情况。不建议将其用于移动应用程序。在移动应用程序中使用 TCP 保持连接状态可能会加快设备电池的耗尽速度。
 
 ![TCP 超时](./media/load-balancer-tcp-idle-timeout/image1.png)  
-
 
 以下章节介绍了如何更改虚拟机和云服务中的空闲超时设置
 
@@ -138,11 +137,11 @@ TCP 保持连接状态非常适用于不受电池寿命限制的情况。不建�
 
 ## 后续步骤
 
-[Internal load balancer overview（内部负载均衡器概述）](/documentation/articles/load-balancer-internal-overview/)
+[Internal load balancer overview（内部负载均衡器概述）](./load-balancer-internal-overview.md)
 
-[开始配置面向 Internet 的负载均衡器](/documentation/articles/load-balancer-get-started-internet-arm-ps/)
+[开始配置面向 Internet 的负载均衡器](./load-balancer-get-started-internet-arm-ps.md)
 
-[配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: update meta properties & wording update & update code-->

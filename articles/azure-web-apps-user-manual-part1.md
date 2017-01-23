@@ -1,22 +1,21 @@
-<properties
-	pageTitle="Azure Web 应用用户手册 - 第一部分 | Azure"
-	description="详细介绍如何创建和管理 Azure Web 应用。"
-	services="app-service-web"
-	documentationCenter=""
-	authors="Lei Zhang"
-	manager=""
-	editor=""/>
+---
+title: Azure Web 应用用户手册 - 第一部分 | Azure
+description: 详细介绍如何创建和管理 Azure Web 应用。
+services: app-service-web
+documentationCenter: 
+authors: Lei Zhang
+manager: 
+editor: 
 
-<tags
-	ms.service="app-service-web"
-	ms.date=""
-	wacn.date="07/07/2016"/>
+ms.service: app-service-web
+ms.date: 
+wacn.date: 07/07/2016
+---
 
 # Azure Web 应用用户手册 - 第一部分
 
-- [Azure Web 应用用户手册 - 第二部分](/documentation/articles/azure-web-apps-user-manual-part2/)
-- [Azure Web 应用用户手册 - 第三部分](/documentation/articles/azure-web-apps-user-manual-part3/)
-
+- [Azure Web 应用用户手册 - 第二部分](./azure-web-apps-user-manual-part2.md)
+- [Azure Web 应用用户手册 - 第三部分](./azure-web-apps-user-manual-part3.md)
 
 ##<a name="section_3"></a> 1. Azure Web 应用相关服务
 ###<a name="section_3_1"></a> 1.1 Azure Web 应用的带宽问题
@@ -40,40 +39,40 @@ Azure Web 应用支持的开发语言包括：.NET, Java, PHP, Python, Node.js�
 Azure Web 应用是一个多租户的环境。Azure Web 应用架构借鉴了 Microsoft Web Farm Framework 的设计。它由 5 个最基本的核心组件构成。
 
 ![structure](./media/azure-web-apps-user-manual-part1/structure.png)
- 
-1.	**网站工作服务器 (Web Worker)**
 
-	客户的网站运行在网站工作服务器。每个部署单元通常有上千台网站工作服务器。可以简单的认为一台网站工作服务器就是一台 IIS 服务器。每台服务器上可能同时运行很多客户的网站。客户也可以要求自己的网站同时运行几个实例，Azure Web 应用提供负载均衡服务。工作服务器上安装有运行客户网站必需的语言环境和各种框架。包括：
+1. **网站工作服务器 (Web Worker)**
 
-	* (1)	IIS
-	* (2)	.Net Framework
-	* (3)	PHP
-	* (4)	Node.js
-	* (5)	Python
-	* (6)	WebDeploy/GIT
-	* (7)	数据访问组件，比如 Microsoft Data Access Component 和 MySQL 的数据驱动程序
+    客户的网站运行在网站工作服务器。每个部署单元通常有上千台网站工作服务器。可以简单的认为一台网站工作服务器就是一台 IIS 服务器。每台服务器上可能同时运行很多客户的网站。客户也可以要求自己的网站同时运行几个实例，Azure Web 应用提供负载均衡服务。工作服务器上安装有运行客户网站必需的语言环境和各种框架。包括：
 
-2.	**前端服务器 (Frontend)**
+    * (1)	IIS
+    * (2)	.Net Framework
+    * (3)	PHP
+    * (4)	Node.js
+    * (5)	Python
+    * (6)	WebDeploy/GIT
+    * (7)	数据访问组件，比如 Microsoft Data Access Component 和 MySQL 的数据驱动程序
 
-	前端服务器是 Azure Web 应用系统的入口服务器。每个部署单元通常有多台前端服务器。Azure 负载均衡设备负责把客户的请求分发到前端服务器。前端服务器上安装有扩展的 IIS Application Request Routing(ARR)。 IIS ARR 是一个工作在 HTTP 层的负载均衡组件，它是前端服务器的最重要的组件。可阅读[这篇文章](http://www.iis.net/downloads/microsoft/application-request-routing)帮助您更好的理解前端服务器的工作原理。
+2. **前端服务器 (Frontend)**
 
-	前端服务器主要提供三个功能：
+    前端服务器是 Azure Web 应用系统的入口服务器。每个部署单元通常有多台前端服务器。Azure 负载均衡设备负责把客户的请求分发到前端服务器。前端服务器上安装有扩展的 IIS Application Request Routing(ARR)。 IIS ARR 是一个工作在 HTTP 层的负载均衡组件，它是前端服务器的最重要的组件。可阅读[这篇文章](http://www.iis.net/downloads/microsoft/application-request-routing)帮助您更好的理解前端服务器的工作原理。
 
-	* (1)	请求转发功能。将客户的请求转发到对应的工作服务器，并将工作服务器的响应转发给客户端。
-	* (2)	负载均衡功能。如果客户网站有多个实例在运行，前端服务器根据配置的负载均衡算法将客户请求分发到各个网站实例。
-	* (3)	分配工作服务器。当第一个请求到达时，前端服务器根据工作服务器的负载情况选择当前负载最低的工作服务器分配给客户。
+    前端服务器主要提供三个功能：
 
-3.	**部署服务器 (Publishing Server)**
+    * (1)	请求转发功能。将客户的请求转发到对应的工作服务器，并将工作服务器的响应转发给客户端。
+    * (2)	负载均衡功能。如果客户网站有多个实例在运行，前端服务器根据配置的负载均衡算法将客户请求分发到各个网站实例。
+    * (3)	分配工作服务器。当第一个请求到达时，前端服务器根据工作服务器的负载情况选择当前负载最低的工作服务器分配给客户。
 
-	Azure Web 应用提供多种部署方式，比如 GIT，WebDeploy，FTP 等。只有 FTP 部署通过部署服务器完成。同时，FTP 提供了诊断日志下载功能。GIT 和 WebDeploy 直接通过客户网站本身完成部署任务。
+3. **部署服务器 (Publishing Server)**
 
-4.	**文件服务器 (File Server)**
+    Azure Web 应用提供多种部署方式，比如 GIT，WebDeploy，FTP 等。只有 FTP 部署通过部署服务器完成。同时，FTP 提供了诊断日志下载功能。GIT 和 WebDeploy 直接通过客户网站本身完成部署任务。
 
-	文件服务器通过 Azure 云存储提供文件服务，包括客户网站文件，配置文件，诊断日志和临时文件等。客户的网站文件保存在文件服务器，工作服务器通过 UNC 共享路径的方式访问网站文件。
+4. **文件服务器 (File Server)**
 
-5.	**运行时数据库 (Runtime Database)**
+    文件服务器通过 Azure 云存储提供文件服务，包括客户网站文件，配置文件，诊断日志和临时文件等。客户的网站文件保存在文件服务器，工作服务器通过 UNC 共享路径的方式访问网站文件。
 
-	运行时数据库存储有客户网站数据，配置等信息，同时保存客户资源使用情况。
+5. **运行时数据库 (Runtime Database)**
+
+    运行时数据库存储有客户网站数据，配置等信息，同时保存客户资源使用情况。
 
 ###<a name="section_3_5"></a> 1.5 Azure Web 应用会话保持
 在 [1.4 节](#section_3_4) 中，已经介绍了，Azure 负载均衡设备负责把客户的请求分发到前端服务器。前端服务器上安装有扩展的 IIS Application Request Routing(ARR)。IIS ARR 默认提供 Sticky-Session 功能，保证会话的保持，实现方式是利用 Affinity Cookie。
@@ -101,14 +100,14 @@ Azure Web 应用是一个多租户的环境。Azure Web 应用架构借鉴了 Mi
 * (2)	中型，配置为：双核心，3.5GB 内存
 * (3)	大型，配置为：四核心，7GB 内存
 
->[AZURE.NOTE]
+>[!NOTE]
 >如果您开发的 Web Application，单个实例需要运行的最小计算单元大于 4Core/7GB (对应 Web 应用单台最高配置大型，4Core/7GB)，则这个 Web Application 不适合部署在 Azure Web 应用 PaaS 平台。
 
 ###<a name="section_3_9"></a> 1.9 Azure Web 应用服务类型
 Azure Web 应用提供四种不同的服务类型，如下图：
 
 ![app_service_plan](./media/azure-web-apps-user-manual-part1/app_service_plan.png)
- 
+
 这四种不同的服务类型区别如下：
 
 <table border="1">
@@ -148,49 +147,49 @@ Azure Web 应用提供四种不同的服务类型，如下图：
 </tbody>
 </table>
 
-更详细的服务类型比较，请参考 Azure 中国 [官网](/pricing/details/web-site/) 
+更详细的服务类型比较，请参考 Azure 中国 [官网](https://www.azure.cn/pricing/details/web-site/) 
 
 这四种服务类型的区别如下：
 
-1.	免费 (Free)
+1. 免费 (Free)
 
-	* (1)	如果在免费 (Free) 模式下，客户的计算资源是和其他用户共享的，不是独享的。也就是说，免费 Web 应用的资源是和别的用户共享 CPU
-	* (2)	一个 Azure 账户最多只能创建 10 个类型为免费的 Azure Web 应用
-	* (3)	在免费模式下，一个 Azure Web 应用每天仅有 60 分钟的 CPU 计算时间
-	* (4)	在免费模式下，一个 Azure Web 应用最多能使用的存储大小为 1GB
-	* (5)	在免费模式下，Azure Web 应用不支持横向扩展功能
-	* (6)	在免费模式下，Azure Web 应用是没有服务级别协议保障的
+    * (1)	如果在免费 (Free) 模式下，客户的计算资源是和其他用户共享的，不是独享的。也就是说，免费 Web 应用的资源是和别的用户共享 CPU
+    * (2)	一个 Azure 账户最多只能创建 10 个类型为免费的 Azure Web 应用
+    * (3)	在免费模式下，一个 Azure Web 应用每天仅有 60 分钟的 CPU 计算时间
+    * (4)	在免费模式下，一个 Azure Web 应用最多能使用的存储大小为 1GB
+    * (5)	在免费模式下，Azure Web 应用不支持横向扩展功能
+    * (6)	在免费模式下，Azure Web 应用是没有服务级别协议保障的
 
-2.	共享 (Shared)
+2. 共享 (Shared)
 
-	* (1)	如果在共享 (Shared) 模式下，客户的计算资源是和其他用户共享的，不是独享的。也就是说，共享 Web 应用的资源是和别的用户共享 CPU。
-	* (2)	一个 Azure 账户最多只能创建 100 个类型为共享的 Azure Web 应用
-	* (3)	在共享模式下，一个 Azure Web 应用最多能使用的存储大小为 1GB
-	* (4)	在共享模式下，一个 Azure Web 应用每天仅有 240 分钟的 CPU 计算时间
-	* (5)	在共享模式下，Azure Web 应用支持横向扩展功能，且横向支持最多 6 个共享实例
-	* (6)	在共享模式下，Azure Web 应用是没有服务级别协议保障的
+    * (1)	如果在共享 (Shared) 模式下，客户的计算资源是和其他用户共享的，不是独享的。也就是说，共享 Web 应用的资源是和别的用户共享 CPU。
+    * (2)	一个 Azure 账户最多只能创建 100 个类型为共享的 Azure Web 应用
+    * (3)	在共享模式下，一个 Azure Web 应用最多能使用的存储大小为 1GB
+    * (4)	在共享模式下，一个 Azure Web 应用每天仅有 240 分钟的 CPU 计算时间
+    * (5)	在共享模式下，Azure Web 应用支持横向扩展功能，且横向支持最多 6 个共享实例
+    * (6)	在共享模式下，Azure Web 应用是没有服务级别协议保障的
 
-3.	基本 (Basic)
+3. 基本 (Basic)
 
-	* (1)	如果在基本 (Basic) 模式下，客户的计算资源是独享的
-	* (2)	基本模式下，独享的计算资源有三种类型：小型，中型，大型
-	* (3)	一个 Azure 账户可以创建无限多个类型为基本的 Azure Web 应用
-	* (4)	在基本模式下，一个 Azure Web 应用最多能使用的存储大小为 10GB
-	* (5)	在基本模式下，Azure Web 应用支持横向扩展功能，且横向支持最多 3 个独享的实例
-	* (6)	在基本模式下，Azure Web 应用支持 99.9% 的服务级别协议
+    * (1)	如果在基本 (Basic) 模式下，客户的计算资源是独享的
+    * (2)	基本模式下，独享的计算资源有三种类型：小型，中型，大型
+    * (3)	一个 Azure 账户可以创建无限多个类型为基本的 Azure Web 应用
+    * (4)	在基本模式下，一个 Azure Web 应用最多能使用的存储大小为 10GB
+    * (5)	在基本模式下，Azure Web 应用支持横向扩展功能，且横向支持最多 3 个独享的实例
+    * (6)	在基本模式下，Azure Web 应用支持 99.9% 的服务级别协议
 
-4.	标准 (Standard)
+4. 标准 (Standard)
 
-	* (1)	如果在标准 (Standard) 模式下，客户的计算资源是独享的
-	* (2)	标准模式下，独享的计算资源有三种类型：小型，中型，大型
-	* (3)	一个 Azure 账户可以创建无限多个类型为标准的 Azure Web 应用
-	* (4)	在标准模式下，一个 Azure Web 应用最多能使用的存储大小为 50GB
-	* (5)	在标准模式下，Azure Web 应用支持横向扩展功能，且横向支持最多 10 个独享的实例
-	* (6)	在标准模式下，Azure Web 应用支持99.9%的服务级别协议
+    * (1)	如果在标准 (Standard) 模式下，客户的计算资源是独享的
+    * (2)	标准模式下，独享的计算资源有三种类型：小型，中型，大型
+    * (3)	一个 Azure 账户可以创建无限多个类型为标准的 Azure Web 应用
+    * (4)	在标准模式下，一个 Azure Web 应用最多能使用的存储大小为 50GB
+    * (5)	在标准模式下，Azure Web 应用支持横向扩展功能，且横向支持最多 10 个独享的实例
+    * (6)	在标准模式下，Azure Web 应用支持99.9%的服务级别协议
 
 ![app_service_plan2](./media/azure-web-apps-user-manual-part1/app_service_plan2.png)
- 
->[AZURE.NOTE]
+
+>[!NOTE]
 >对于 Azure Web 应用来说，需要把 App Service 配置为基本或标准，才能得到 99.9% 的服务级别协议。但是只需要 1 个实例数就有服务级别协议保障，并不需要 2 个或者 2 个以上的实例做高可用性。
 
 ###<a name="section_3_10"></a> 1.10 Azure Web 应用使用静态资源
@@ -198,13 +197,13 @@ Azure Web 应用提供四种不同的服务类型，如下图：
 
 这里建议把 Web 项目文件的静态资源，比如图片、照片、视频等都保存在 Azure 存储里，这样的好处有以下几点：
 
-1.	加快网站部署速度
+1. 加快网站部署速度
 
-	去除掉静态资源 (图片、照片、视频) 的 Web 项目文件只包含了源代码信息，文件容量小，上传速度就加快了
+    去除掉静态资源 (图片、照片、视频) 的 Web 项目文件只包含了源代码信息，文件容量小，上传速度就加快了
 
-2.	静态资源可以直接访问 Azure 存储
+2. 静态资源可以直接访问 Azure 存储
 
-	通过将静态内容请求发送到 Azure 存储，将动态内容的请求发送到 Azure 云主机，就可以大大减少云主机独享带宽的压力。
+    通过将静态内容请求发送到 Azure 存储，将动态内容的请求发送到 Azure 云主机，就可以大大减少云主机独享带宽的压力。
 
 ###<a name="section_3_11"></a> 1.11 Azure Web 应用公网 IP
 Azure PaaS 云服务和虚拟机都有独享的公网 IPV4 地址。
@@ -222,28 +221,28 @@ Azure Web 应用是一个多租户的环境，每个部署单元有一个可以�
 架构图同 [1.4 节](#section_3_4)，如下：
 
 ![structure](./media/azure-web-apps-user-manual-part1/structure.png)
- 
+
 在不使用 IP SSL 的情况下，所有 Azure 用户的 Azure Web 应用的入口公网 IP 地址 (Inbound VIP) 是共享的。
 
 如果客户部署在 Azure Web 应用需要调用外部的网络服务，比如 SQL Azure, MySQL，Bing MAPI API，等。Azure Web 应用使用该 VIP 连接外部服务。部署在同一个部署单元的所有网站在调用外部网络服务时都使用该 VIP。随着网站数目的增加，单一的 VIP 已经不能满足客户的需要。为此，增加了四个出口 VIP（入口 VIP 同时会作为出口 VIP）。具体信息如下：
 
-1.	部署单元：BJB-001 (Azure 北京数据中心)
+1. 部署单元：BJB-001 (Azure 北京数据中心)
 
-		Inbound VIP :42.159.5.43
-		Outbound VIPs:
-		42.159.4.73
-		42.159.4.84
-		42.159.4.211
-		42.159.4.160
+        Inbound VIP :42.159.5.43
+        Outbound VIPs:
+        42.159.4.73
+        42.159.4.84
+        42.159.4.211
+        42.159.4.160
 
-2.	部署单元：SHA-001 (Azure 上海数据中心)
+2. 部署单元：SHA-001 (Azure 上海数据中心)
 
-		Inbound VIP: 42.159.132.179
-		Outbound VIPs:
-		42.159.135.109
-		42.159.135.174
-		42.159.135.208
-		42.159.133.172
+        Inbound VIP: 42.159.132.179
+        Outbound VIPs:
+        42.159.135.109
+        42.159.135.174
+        42.159.135.208
+        42.159.133.172
 
 如果您的应用程序有 IP 白名单的要求，那么就只需要把上面的部署单元的所有 VIP 加入到允许的 IP 地址列表中。
 
@@ -252,11 +251,11 @@ Azure Web 应用是一个多租户的环境，每个部署单元有一个可以�
 比如有 2 个真实的应用程序，DNS 信息如下：
 
 ![dns](./media/azure-web-apps-user-manual-part1/dns.png)
- 
+
 可以直接使用 ping 命令，如下：
 
 ![ping](./media/azure-web-apps-user-manual-part1/ping.png)
- 
+
 可以看到这 2 个 Azure Web 应用的 Inbound VIP 都是 42.159.132.179。
 
 根据上面的部署单元信息，可以查看到这 2 个 Azure Web 应用是部署在上海数据中心的 SHA-001。
@@ -269,34 +268,34 @@ Azure Web 应用是一个多租户的环境，每个部署单元有一个可以�
 Azure Web 应用提供四种不同的服务类型：
 
 ![app_service_plan](./media/azure-web-apps-user-manual-part1/app_service_plan.png)
- 
-1.	免费 (Free)
 
-	* (1)	在免费模式下，客户的 Web 应用是不收取费用的。但是每一个 Azure Web 应用每天仅有 60 分钟的 CPU 计算时间。
-	* (2)	在免费模式下，Azure Web 应用没有服务级别协议保障
+1. 免费 (Free)
 
-2.	共享 (Shared)
+    * (1)	在免费模式下，客户的 Web 应用是不收取费用的。但是每一个 Azure Web 应用每天仅有 60 分钟的 CPU 计算时间。
+    * (2)	在免费模式下，Azure Web 应用没有服务级别协议保障
 
-	* (1)	共享模式下，Azure Web 应用支持横向扩展功能，且横向支持最多 6 个共享实例。
-	* (2)	在共享模式下，一个 Azure Web 应用每天仅有 240 分钟的 CPU 计算时间
-	* (3)	在共享模式下，每一个 Web 应用实例的标准价格是每小时 ￥0.11。
-	* (4)	在共享模式下，Azure Web 应用没有服务级别协议保障
+2. 共享 (Shared)
 
-3.	基本 (Basic) 和标准 (Standard) 收费如下：
+    * (1)	共享模式下，Azure Web 应用支持横向扩展功能，且横向支持最多 6 个共享实例。
+    * (2)	在共享模式下，一个 Azure Web 应用每天仅有 240 分钟的 CPU 计算时间
+    * (3)	在共享模式下，每一个 Web 应用实例的标准价格是每小时 ￥0.11。
+    * (4)	在共享模式下，Azure Web 应用没有服务级别协议保障
+
+3. 基本 (Basic) 和标准 (Standard) 收费如下：
 
 ![price](./media/azure-web-apps-user-manual-part1/price.png)
 
-以上价格参考 Azure 中国 [官方价格信息](http://www.azure.cn/pricing/details/web-site/)
+以上价格参考 Azure 中国 [官方价格信息](https://www.azure.cn/pricing/details/web-site/)
 
 * (1)	在基本模式下，单个小型，中型，大型的 Web 应用实例价格分别为 0.45 元/小时，0.89 元/小时，1.79 元/小时。
 * (2)	在基本模式下，如果用多个实例进行横向扩展，则每小时单价会按照实例个数增加。
 
-	比如 2 个 Web 应用小型实例做负载均衡，每小时费用 = 0.45 元 × 2 个实例 = 0.90 元/小时
+    比如 2 个 Web 应用小型实例做负载均衡，每小时费用 = 0.45 元 × 2 个实例 = 0.90 元/小时
 
 * (3)	在标准模式下，单个小型，中型，大型的 Web 应用实例价格分别为 0.60 元/小时，1.19 元/小时，2.38 元/小时。
 * (4)	在标准模式下，如果用多个实例进行横向扩展，则每小时单价会按照实例个数增加。
 
-	比如 2 个 Web 应用大型实例做负载均衡，每小时费用 = 2.38 元 × 2 个实例 = 4.76 元/小时
+    比如 2 个 Web 应用大型实例做负载均衡，每小时费用 = 2.38 元 × 2 个实例 = 4.76 元/小时
 
 * (5)	只有在基本和标准模式下，Azure Web 应用才享受 99.9% 的服务级别协议
 
@@ -309,20 +308,20 @@ Azure Web 应用提供四种不同的服务类型：
 为了避免继续产生费用，请将不再使用的网站实例删除，或将其更改为 ”免费” 级别。如下图：
 
 ![scale](./media/azure-web-apps-user-manual-part1/scale.png)
- 
+
 ###<a name="section_3_14"></a> 1.14 Azure Web 应用限制
-1.	单个 Web 应用实例大小
+1. 单个 Web 应用实例大小
 
-	单个 Azure Web 应用实例最大为大型，配置是 4Core/7GB。如果您开发的 Web 应用，单个实例需要运行的最小计算单元大于 4Core/7GB，则这个 Web 应用不适合部署在 Azure Web 应用 PaaS 平台。
+    单个 Azure Web 应用实例最大为大型，配置是 4Core/7GB。如果您开发的 Web 应用，单个实例需要运行的最小计算单元大于 4Core/7GB，则这个 Web 应用不适合部署在 Azure Web 应用 PaaS 平台。
 
-2.	横向扩展能力
+2. 横向扩展能力
 
-	在标准模式下，Azure Web 应用支持横向扩展功能，且横向支持最多 10 个独享的实例
+    在标准模式下，Azure Web 应用支持横向扩展功能，且横向支持最多 10 个独享的实例
 
-3.	不支持安装软件
+3. 不支持安装软件
 
-	因为无法通过 Windows Remote Desktop 或者 Linux SSH 管理 Azure Web 应用的操作系统，所以 Azure Web 应用不支持自定义安装软件
+    因为无法通过 Windows Remote Desktop 或者 Linux SSH 管理 Azure Web 应用的操作系统，所以 Azure Web 应用不支持自定义安装软件
 
-4.	不支持 Azure Virtual Network 虚拟网络
+4. 不支持 Azure Virtual Network 虚拟网络
 
-	在由世纪互联运营的 Microsoft Azure，Azure Web 应用目前不支持加入到 Virtual Network 虚拟网络中，所以访问加入到 Virtual Network 的 Azure VM 虚拟机，必须通过 Azure VM 的公网 IP 或者 DNS 访问。为了保证安全性，建议结合 Access Control List(ACL) 设置一起使用。
+    在由世纪互联运营的 Microsoft Azure，Azure Web 应用目前不支持加入到 Virtual Network 虚拟网络中，所以访问加入到 Virtual Network 的 Azure VM 虚拟机，必须通过 Azure VM 的公网 IP 或者 DNS 访问。为了保证安全性，建议结合 Access Control List(ACL) 设置一起使用。

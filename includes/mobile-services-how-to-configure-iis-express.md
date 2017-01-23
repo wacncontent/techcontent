@@ -3,11 +3,9 @@
 
     ![](./media/mobile-services-how-to-configure-iis-express/iis-express-tray-stop-site.png)
 
-
 2. 在命令提示符窗口中，运行 **ipconfig** 命令，以查找您的工作站的有效本地 IP 地址。
 
     ![](./media/mobile-services-how-to-configure-iis-express/ipconfig.png)
-
 
 3. 在 Visual Studio 中，打开 IIS Express 的 applicationhost.config 文件。此文件位于您的用户配置文件目录的以下子目录中。
 
@@ -29,12 +27,13 @@
 
 5. 打开 Windows 防火墙控制台，并创建新的端口规则以允许连接到端口。有关创建新的 Windows 防火墙端口规则的详细信息，请参阅[如何添加新的 Windows 防火墙端口规则]。
 
-    >[AZURE.NOTE]如果您的测试计算机已加入域，则可按照域策略来控制防火墙例外。在这种情况下，您需要联系域管理员，为计算机上的端口获取豁免。
+    >[!NOTE]
+    >如果您的测试计算机已加入域，则可按照域策略来控制防火墙例外。在这种情况下，您需要联系域管理员，为计算机上的端口获取豁免。
 
     现在，您应该已经配置为使用托管移动服务的 IIS Express 来进行测试。
 
-    >[AZURE.NOTE]在本地完成服务测试之后，应该删除您创建的 Windows 防火墙规则。
-
+    >[!NOTE]
+    >在本地完成服务测试之后，应该删除您创建的 Windows 防火墙规则。
 
 <!-- URLs. -->
 [如何添加新的 Windows 防火墙端口规则]:  http://go.microsoft.com/fwlink/?LinkId=392240

@@ -1,22 +1,21 @@
-<properties
-	pageTitle="模板"
-	description="本主题介绍 Azure 通知中心的模板。"
-	services="notification-hubs"
-	documentationCenter=".net"
-	authors="wesmc7777"
-	manager="erikre"
-	editor=""/>  
+---
+title: 模板
+description: 本主题介绍 Azure 通知中心的模板。
+services: notification-hubs
+documentationCenter: .net
+authors: wesmc7777
+manager: erikre
+editor: 
 
-<tags
-	ms.service="notification-hubs"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-multiple"
-	ms.devlang="multiple"
-	ms.topic="article"
-	ms.date="06/29/2016"
-	wacn.date="08/23/2016"
-	ms.author="wesmc"/>  
-
+ms.service: notification-hubs
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-multiple
+ms.devlang: multiple
+ms.topic: article
+ms.date: 06/29/2016
+wacn.date: 08/23/2016
+ms.author: wesmc
+---
 
 # 模板
 
@@ -38,17 +37,17 @@
 
 发送推送通知的标准方法是向平台通知服务（WNS、APNS）发送要传出的每个通知的特定负载。例如，若要向 APNS 发送警报，负载将是以下格式的 Json 对象：
 
-	{"aps": {"alert" : "Hello!" }}
+    {"aps": {"alert" : "Hello!" }}
 
 若要在 Windows 应用商店应用程序中发送类似的 toast 消息，XML 负载将如下所示：
 
-	<toast>
-	  <visual>
-	    <binding template=\"ToastText01\">
-	      <text id=\"1\">Hello!</text>
-	    </binding>
-	  </visual>
-	</toast>
+    <toast>
+      <visual>
+        <binding template=\"ToastText01\">
+          <text id=\"1\">Hello!</text>
+        </binding>
+      </visual>
+    </toast>
 
 你可以为 MPNS (Windows Phone) 和 GCM (Android) 平台创建类似的负载。
 
@@ -60,20 +59,19 @@
 
 ![](./media/notification-hubs-templates/notification-hubs-hello.png)
 
-
 iOS 客户端应用注册的模板如下所示：
 
-	{"aps": {"alert": "$(message)"}}
+    {"aps": {"alert": "$(message)"}}
 
 Windows 应用商店客户端应用的相应模板为：
 
-	<toast>
-		<visual>
-			<binding template=\"ToastText01\">
-				<text id=\"1\">$(message)</text>
-			</binding>
-		</visual>
-	</toast>
+    <toast>
+        <visual>
+            <binding template=\"ToastText01\">
+                <text id=\"1\">$(message)</text>
+            </binding>
+        </visual>
+    </toast>
 
 请注意，实际消息将替换表达式 $(message)。每当通知中心向此特定注册发送消息时，此表达式将指示通知中心构建遵循此模板并用常用值替换的消息。
 
@@ -87,18 +85,17 @@ Windows 应用商店客户端应用的相应模板为：
 
 使用摄氏温度的一天天气预报模板如下所示：
 
-	<tile>
-	  <visual>
-	    <binding template="TileWideSmallImageAndText04">
-	      <image id="1" src="$(day1_image)" alt="alt text"/>
-	      <text id="1">Seattle, WA</text>
-	      <text id="2">$(day1_tempC)</text>
-	    </binding>  
-	  </visual>
-	</tile>
+    <tile>
+      <visual>
+        <binding template="TileWideSmallImageAndText04">
+          <image id="1" src="$(day1_image)" alt="alt text"/>
+          <text id="1">Seattle, WA</text>
+          <text id="2">$(day1_tempC)</text>
+        </binding>  
+      </visual>
+    </tile>
 
 发送到通知中心的消息包含以下属性：
-
 
 <table border="1">
 <tr><td>day1_image</td><td>day2_image</td><td>day3_image</td><td>day4_image</td><td>day5_image</td></tr>
@@ -106,20 +103,17 @@ Windows 应用商店客户端应用的相应模板为：
 <tr><td>day1_tempF</td><td>day2_tempF</td><td>day3_tempF</td><td>day4_tempF</td><td>day5_tempF</td></tr>
 </table><br/>
 
-
 通过使用此模式，后端只需发送一条消息，而不必为应用用户存储特定的个性化选项。下图演示了此方案：
 
 ![](./media/notification-hubs-templates/notification-hubs-registration-specific.png)
 
 ##如何注册模板
 
-若要使用安装模型（首选）或注册模型来注册模板，请参阅[注册管理](/documentation/articles/notification-hubs-push-notification-registration-management/)。
+若要使用安装模型（首选）或注册模型来注册模板，请参阅[注册管理](./notification-hubs-push-notification-registration-management.md)。
 
 ##模板表达式语言
 
 模板限定为 XML 或 JSON 文档格式。此外，只能在特定位置放置表达式；例如，对于 XML 放置节点属性或值，对于 JSON 放置字符串属性值。
-
-
 
 下表显示了模板中允许使用的语言：
 
@@ -137,26 +131,24 @@ Windows 应用商店客户端应用的相应模板为：
 
 使用连接时，必须使用 {} 括住整个表达式。例如，{$(prop) + ‘ - ’ + $(prop2)}。|
 
-
 例如，下面所示不是有效的 XML 模板：
 
-	<tile>
-	  <visual>
-	    <binding $(property)>
-	      <text id="1">Seattle, WA</text>
-	    </binding>  
-	  </visual>
-	</tile>
-
+    <tile>
+      <visual>
+        <binding $(property)>
+          <text id="1">Seattle, WA</text>
+        </binding>  
+      </visual>
+    </tile>
 
 如前所述，使用串联时，表达式必须用大括号括住。例如：
 
-	<tile>
-	  <visual>
-	    <binding template="ToastText01">
-	      <text id="1">{'Hi, ' + $(name)}</text>
-	    </binding>  
-	  </visual>
-	</tile>
+    <tile>
+      <visual>
+        <binding template="ToastText01">
+          <text id="1">{'Hi, ' + $(name)}</text>
+        </binding>  
+      </visual>
+    </tile>
 
 <!---HONumber=Mooncake_0815_2016-->

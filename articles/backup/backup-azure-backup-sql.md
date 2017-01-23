@@ -1,29 +1,27 @@
-<properties
-	pageTitle="使用 DPM 为 SQL 工作负荷配置 Azure 备份 | Azure"
-	description="使用 Azure 备份服务备份 SQL Server 数据库简介"
-	services="backup"
-	documentationCenter=""
-	authors="adigan"
-	manager="Nkolli1"
-	editor=""/>  
+---
+title: 使用 DPM 为 SQL 工作负荷配置 Azure 备份 | Azure
+description: 使用 Azure 备份服务备份 SQL Server 数据库简介
+services: backup
+documentationCenter: 
+authors: adigan
+manager: Nkolli1
+editor: 
 
-
-<tags
-	ms.service="backup"
-	ms.workload="storage-backup-recovery"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/27/2016"
-	wacn.date="11/15/2016"
-	ms.author="adigan;giridham; jimpark;markgal;trinadhk"/>
-
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/27/2016
+wacn.date: 11/15/2016
+ms.author: adigan;giridham; jimpark;markgal;trinadhk
+---
 
 # 使用 DPM 为 SQL 工作负荷配置 Azure 备份
 
 本文将引导你使用 Azure 备份来完成 SQL Server 数据库的备份配置步骤。
 
-若要将 SQL Server 数据库备份到 Azure，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](/pricing/1rmb-trial/)。
+若要将 SQL Server 数据库备份到 Azure，你需要一个 Azure 帐户。如果你没有帐户，可以创建一个试用帐户，只需几分钟即可完成。有关详细信息，请参阅 [Azure 试用](https://www.azure.cn/pricing/1rmb-trial/)。
 
 向 Azure 备份以及从 Azure 恢复 SQL Server 数据库的管理工作涉及三个步骤：
 
@@ -32,7 +30,7 @@
 3. 从 Azure 恢复数据库。
 
 ## 开始之前
-在开始之前，请确保符合使用 Azure 备份保护工作负荷的所有[先决条件](/documentation/articles/backup-azure-dpm-introduction-classic/#prerequisites/)。先决条件包括如下任务：创建备份保管库、下载保管库凭据、安装 Azure 备份代理，以及向保管库注册服务器。
+在开始之前，请确保符合使用 Azure 备份保护工作负荷的所有[先决条件](./backup-azure-dpm-introduction-classic.md#prerequisites)。先决条件包括如下任务：创建备份保管库、下载保管库凭据、安装 Azure 备份代理，以及向保管库注册服务器。
 
 ## 创建备份策略以保护要备份到 Azure 的 SQL Server 数据库
 
@@ -58,15 +56,14 @@
 
     ![数据保护方法 - 短期磁盘和在线 Azure](./media/backup-azure-backup-sql/pg-name.png)  
 
-
 7. 在“指定短期目标”屏幕中，提供创建磁盘备份点所需的输入。
 
     在这里我们可以看到，“保留期”设置为“5 天”，“同步频率”设置为“每 15 分钟一次”，这也是进行备份的频率。“快速完整备份”设置为“晚上 8:00”。
 
     ![短期目标](./media/backup-azure-backup-sql/pg-shortterm.png)  
 
-
-    >[AZURE.NOTE] 在每天晚上 8:00（根据屏幕输入），将会创建一个备份点，以便传输自前一天晚上 8:00 的备份点以来进行了修改的数据。此过程称为**快速完整备份**。虽然事务日志每 15 分钟同步一次，但如果需要在晚上 9:00 恢复数据库，则会重播自上一个快速完整备份点（在本示例中为晚上 8 点）以来的日志，从而创建备份点。
+    >[!NOTE]
+    > 在每天晚上 8:00（根据屏幕输入），将会创建一个备份点，以便传输自前一天晚上 8:00 的备份点以来进行了修改的数据。此过程称为**快速完整备份**。虽然事务日志每 15 分钟同步一次，但如果需要在晚上 9:00 恢复数据库，则会重播自上一个快速完整备份点（在本示例中为晚上 8 点）以来的日志，从而创建备份点。
 
 8. 单击“下一步”
 
@@ -102,11 +99,12 @@
 
     在本示例中，备份会在一天的中午 12:00 和晚上 8:00 各进行一次（参见屏幕底部）
 
-    >[AZURE.NOTE] 最好是在磁盘上设置几个短期恢复点，以便进行快速恢复。这称为“操作恢复”。Azure 具有较高的 SLA，其可用性也可以得到保证，因此可作为理想的非现场位置。
+    >[!NOTE]
+    > 最好是在磁盘上设置几个短期恢复点，以便进行快速恢复。这称为“操作恢复”。Azure 具有较高的 SLA，其可用性也可以得到保证，因此可作为理想的非现场位置。
 
     **最佳做法**：确保在使用 DPM 完成本地磁盘备份后安排好 Azure 备份。这样就可以将最新磁盘备份复制到 Azure。
 
-13. 选择保留策略计划。有关保留策略工作原理的详细信息，请参阅[使用 Azure 备份来取代磁带基础结构文章](/documentation/articles/backup-azure-backup-cloud-as-tape/)。
+13. 选择保留策略计划。有关保留策略工作原理的详细信息，请参阅[使用 Azure 备份来取代磁带基础结构文章](./backup-azure-backup-cloud-as-tape.md)。
 
     ![保留策略](./media/backup-azure-backup-sql/pg-retentionschedule.png)
 
@@ -120,7 +118,6 @@
 14. 单击“下一步”，选择相应的选项将初始备份副本传输到 Azure。你可以选择“自动通过网络”或“脱机备份”。
 
     - “自动通过网络”会根据为备份选择的计划将备份数据传输到 Azure。
-    
 
     选择将初始备份副本发送到 Azure 的相关传输机制，然后单击“下一步”。
 
@@ -176,6 +173,6 @@
 
 ### 后续步骤：
 
-• [Azure 备份常见问题](/documentation/articles/backup-azure-backup-faq/)
+• [Azure 备份常见问题](./backup-azure-backup-faq.md)
 
 <!---HONumber=Mooncake_1107_2016-->

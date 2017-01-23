@@ -1,10 +1,27 @@
-<properties linkid="" urlDisplayName="" pageTitle="Monitoring MySQL Database on Azure databases – Azure cloud" metakeywords="Azure Cloud, technical documentation, documents and resources, MySQL, database, monitoring, performance metrics, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS" description="MySQL Database on Azure provides users with the ability to monitor key performance metrics, which you can check on the dashboard in the Azure management portal." metaCanonical="" services="MySQL" documentationCenter="Services" title="" authors="" solutions="" manager="" editor="" />
+---
+linkid: 
+urlDisplayName: 
+title: Monitoring MySQL Database on Azure databases – Azure cloud
+metakeywords: Azure Cloud, technical documentation, documents and resources, MySQL, database, monitoring, performance metrics, Azure MySQL, MySQL PaaS, Azure MySQL PaaS, Azure MySQL Service, Azure RDS
+description: MySQL Database on Azure provides users with the ability to monitor key performance metrics, which you can check on the dashboard in the Azure management portal.
+metaCanonical: 
+services: MySQL
+documentationCenter: Services
+title: 
+authors: 
+solutions: 
+manager: 
+editor: 
 
-<tags ms.service="mysql_en" ms.date="07/05/2016" wacn.date="07/05/2016" wacn.lang="en" />
+ms.service: mysql_en
+ms.date: 07/05/2016
+wacn.date: 07/05/2016
+wacn.lang: en
+---
 
 > [AZURE.LANGUAGE]
-- [中文](/documentation/articles/mysql-database-operation-monitoring-metrics/)
-- [English](/documentation/articles/mysql-database-enus-operation-monitoring-metrics/)
+- [中文](./mysql-database-operation-monitoring-metrics.md)
+- [English](./mysql-database-enus-operation-monitoring-metrics.md)
 
 #Monitoring MySQL database on Azure Databases
 
@@ -47,7 +64,7 @@ that use the Azure portal -> MySQL Database on Azure. Select the required perfor
     <td width="96" valign="top"><p align="center">Insert Per Second</p></td>
     <td width="306" valign="top"><p>The average number of insert queries per second </p></td>
   </tr>
-   <tr>
+    <tr>
     <td width="96" valign="top"><p align="center">Peak Insert Per Second</p></td>
     <td width="306" valign="top"><p>The peak number of insert queries per second </p></td>
   </tr>

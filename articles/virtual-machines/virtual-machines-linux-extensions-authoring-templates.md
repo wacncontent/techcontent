@@ -1,28 +1,28 @@
 <!-- ARM: tested -->
 
-<properties
-   pageTitle="使用 Linux VM 扩展创作模板 | Azure"
-   description="详细了解如何为 Linux VM 使用扩展创建 Azure 资源管理器模板"
-   services="virtual-machines-linux"
-   documentationCenter=""
-   authors="kundanap"
-   manager="timlt"
-   editor=""
-   tags="azure-resource-manager"/>
+---
+title: 使用 Linux VM 扩展创作模板 | Azure
+description: 详细了解如何为 Linux VM 使用扩展创建 Azure 资源管理器模板
+services: virtual-machines-linux
+documentationCenter: 
+authors: kundanap
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-<tags
-   ms.service="virtual-machines-linux"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-linux"
-   ms.workload="infrastructure-services"
-   ms.date="03/29/2016"
-   wacn.date="06/29/2016"
-   ms.author="kundanap"/>
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure-services
+ms.date: 03/29/2016
+wacn.date: 06/29/2016
+ms.author: kundanap
+---
 
 # 使用 VM 扩展创作 Linux 资源管理器模板。
 
-[AZURE.INCLUDE [virtual-machines-common-extensions-authoring-templates](../../includes/virtual-machines-common-extensions-authoring-templates.md)]
+[!INCLUDE [virtual-machines-common-extensions-authoring-templates](../../includes/virtual-machines-common-extensions-authoring-templates.md)]
 
 从 Azure CLI，运行以下命令：
 
@@ -36,13 +36,14 @@
 
 这三个属性分别映射到上述模板代码段中的“发布者”、“类型”和“typeHandlerVersion”。
 
->[AZURE.NOTE] 始终建议使用最新的扩展版本以获取最新功能。
+>[!NOTE]
+> 始终建议使用最新的扩展版本以获取最新功能。
 
 ## 确定扩展配置参数的架构
 
 创作扩展模板的下一个步骤是确定提供配置参数的格式。每个扩展均支持其自己的参数集。
 
-若要查看 Linux 扩展的示例配置，请单击文档 [Linux 扩展示例](/documentation/articles/virtual-machines-linux-extensions-configuration-samples/)。
+若要查看 Linux 扩展的示例配置，请单击文档 [Linux 扩展示例](./virtual-machines-linux-extensions-configuration-samples.md)。
 
 请参阅以下 VM 模板链接，以获取完整的 VM 扩展模板。
 

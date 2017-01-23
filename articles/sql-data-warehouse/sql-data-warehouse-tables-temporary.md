@@ -1,27 +1,25 @@
-<properties
-   pageTitle="SQL 数据仓库中的临时表 | Microsoft Azure"
-   description="开始使用 Azure SQL 数据仓库中的临时表。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="jrowlandjones"
-   manager="barbkess"
-   editor=""/>  
+---
+title: SQL 数据仓库中的临时表 | Microsoft Azure
+description: 开始使用 Azure SQL 数据仓库中的临时表。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: jrowlandjones
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="jrj;barbkess;sonyama"/>  
-
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: jrj;barbkess;sonyama
+---
 
 # SQL 数据仓库中的临时表
 
-> [AZURE.SELECTOR]
+> [!div class="op_single_selector"]
 - [概述][]
 - [数据类型][]
 - [分布][]
@@ -37,7 +35,6 @@
 ## 创建临时表
 
 只需在表名的前面添加 `#` 作为前缀，即可创建临时表。例如：
-
 
     CREATE TABLE #stats_ddl
     (
@@ -55,9 +52,7 @@
     ,	HEAP
     )
 
-
 此外可以使用 `CTAS` 通过完全相同的方法来创建临时表：
-
 
     CREATE TABLE #stats_ddl
     WITH
@@ -108,31 +103,25 @@
     FROM    t1
     ;
 
-
->[AZURE.NOTE] `CTAS` 是一个非常强大的命令，具有附加优势，可以非常有效地利用事务日志空间。
-
+>[!NOTE]
+> `CTAS` 是一个非常强大的命令，具有附加优势，可以非常有效地利用事务日志空间。
 
 ## 删除临时表
 
 创建新会话时，应不存在任何临时表。但是，如果调用同一存储过程，它将使用相同名称创建临时表，若要确保 `CREATE TABLE` 语句成功执行，可以使用带 `DROP` 的简单预存在检查，如下面的示例中所示：
-
 
     IF OBJECT_ID('tempdb..#stats_ddl') IS NOT NULL
     BEGIN
         DROP TABLE #stats_ddl
     END
 
-
 为了实现编码一致性，好的做法是对表和临时表都使用此模式。当在代码中完成临时表时，使用 `DROP TABLE` 来删除临时表也很不错。在存储过程开发中，将 drop 命令捆绑在过程结尾来确保清除这些对象非常普遍。
 
-
     DROP TABLE #stats_ddl
-
 
 ##<a name="modularizing-code"></a> 模块化代码
 
 由于可以在用户会话中的任何位置查看临时表，可以利用这一点帮助将应用程序代码模块化。例如，下面的存储过程会将上面建议的做法组合在一起生成 DDL，该 DDL 会按统计名称更新数据库中的所有统计信息。
-
 
     CREATE PROCEDURE    [dbo].[prc_sqldw_update_stats]
     (   @update_type    tinyint -- 1 default 2 fullscan 3 sample 4 resample
@@ -204,9 +193,7 @@
     ;
     GO
 
-
 在此阶段发生的唯一操作是创建存储过程，该存储过程只使用 DDL 语句生成了临时表 #stats\_ddl。如果此存储过程在会话中运行了不止一次，它会删除已存在的 #stats\_ddl，以确保它不会失败。但是，由于存储过程的末尾没有 `DROP TABLE`，当存储过程完成后，它将保留创建的表，以便可以在存储过程以外读取它。在 SQL 数据仓库中，与其他 SQL Server 数据库不同，有可能在创建临时表的过程外部使用该临时表。可以在会话中的**任何位置**使用 SQL 数据仓库临时表。这可以提高代码的模块化程度与易管理性，如以下示例所示：
-
 
     EXEC [dbo].[prc_sqldw_update_stats] @update_type = 1, @sample_pct = NULL;
 
@@ -225,7 +212,6 @@
 
     DROP TABLE #stats_ddl;
 
-
 ## 临时表的限制
 
 SQL 数据仓库在实现临时表时确实会施加一些限制。目前，仅支持会话范围的临时表。不支持全局临时表。此外，不能在临时表上创建视图。
@@ -237,19 +223,19 @@ SQL 数据仓库在实现临时表时确实会施加一些限制。目前，仅�
 <!--Image references-->
 
 <!--Article references-->
-[Overview]: /documentation/articles/sql-data-warehouse-tables-overview/
-[概述]: /documentation/articles/sql-data-warehouse-tables-overview/
-[Data Types]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[Distribute]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[分布]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[Index]: /documentation/articles/sql-data-warehouse-tables-index/
-[索引]: /documentation/articles/sql-data-warehouse-tables-index/
-[Partition]: /documentation/articles/sql-data-warehouse-tables-partition/
-[Statistics]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[统计信息]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[临时]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[SQL 数据仓库最佳实践]: /documentation/articles/sql-data-warehouse-best-practices/
+[Overview]: ./sql-data-warehouse-tables-overview.md
+[概述]: ./sql-data-warehouse-tables-overview.md
+[Data Types]: ./sql-data-warehouse-tables-data-types.md
+[数据类型]: ./sql-data-warehouse-tables-data-types.md
+[Distribute]: ./sql-data-warehouse-tables-distribute.md
+[分布]: ./sql-data-warehouse-tables-distribute.md
+[Index]: ./sql-data-warehouse-tables-index.md
+[索引]: ./sql-data-warehouse-tables-index.md
+[Partition]: ./sql-data-warehouse-tables-partition.md
+[Statistics]: ./sql-data-warehouse-tables-statistics.md
+[统计信息]: ./sql-data-warehouse-tables-statistics.md
+[临时]: ./sql-data-warehouse-tables-temporary.md
+[SQL 数据仓库最佳实践]: ./sql-data-warehouse-best-practices.md
 
 <!--MSDN references-->
 

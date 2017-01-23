@@ -1,26 +1,24 @@
 
 <!--Ibiza portal-->
 
-<properties
-   pageTitle="Service Fabric 节点类型和 VM 规模集 | Azure"
-   description="介绍 Service Fabric 节点类型如何与 VM 规模集相关联，以及如何远程连接到 VM 规模集实例或群集节点。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="ChackDan"
-   manager="timlt"
-   editor=""/>
+---
+title: Service Fabric 节点类型和 VM 规模集 | Azure
+description: 介绍 Service Fabric 节点类型如何与 VM 规模集相关联，以及如何远程连接到 VM 规模集实例或群集节点。
+services: service-fabric
+documentationCenter: .net
+authors: ChackDan
+manager: timlt
+editor: 
 
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotnet"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/09/2016"
-   wacn.date="01/17/2017"
-   ms.author="chackdan"/>  
-
-
+ms.service: service-fabric
+ms.devlang: dotnet
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/09/2016
+wacn.date: 01/17/2017
+ms.author: chackdan
+---
 
 # Service Fabric 节点类型与虚拟机规模集之间的关系
 
@@ -36,16 +34,13 @@
 
 当你扩展 VM 规模集时，将创建新的实例。新 VM 规模集的名称通常是 VM 规模集名称 + 下一个实例编号。在本示例中，即 BackEnd\_5。
 
-
 ## 将 VM 规模集负载均衡器映射到每个节点类型/VM 规模集
 
 如果已从门户或使用提供的示例 Resource Manager 模板部署群集，则在获取资源组下所有资源的列表时，将看到每个 VM 规模集或节点类型的负载均衡器。
 
 该名称类似于 **LB-&lt;NodeType name&gt;**。例如，以下屏幕截图中显示了 LB-sfcluster4doc-0：
 
-
 ![资源][Resources]  
-
 
 ##<a name="remote-connect-to-a-vm-scale-set-instance-or-a-cluster-node"></a> 远程连接到 VM 规模集实例或群集节点
 在群集中定义的每个节点类型将设置为不同的 VM 规模集。这意味着，节点类型可以独立扩展或缩减，且可由不同的 VM SKU 组成。不同于单实例 VM，VM 规模集的实例没有自身的虚拟 IP 地址。因此你可能很难找到可用来远程连接到特定实例的 IP 地址和连接端口。
@@ -60,12 +55,9 @@
 
 ![LBBlade][LBBlade]  
 
-
-
 在“设置”中，单击“入站 NAT 规则”。随后可以获得可用来远程连接到第一个 VM 规模集实例的 IP 地址和端口。以下屏幕截图中显示的是 **104.42.106.156** 和 **3389**。
 
 ![NATRules][NATRules]  
-
 
 ### 步骤 2：找出可用来远程连接到特定 VM 规模集实例/节点的端口
 
@@ -82,13 +74,11 @@
 |FrontEnd\_4|3393|
 |FrontEnd\_5|3394|
 
-
 ### 步骤 3：远程连接到特定 VM 规模集实例
 
 在以下屏幕截图中，我使用了“远程桌面连接”来连接到 FrontEnd\_1：
 
 ![RDP][RDP]  
-
 
 ## 如何更改 RDP 端口范围值
 
@@ -100,39 +90,29 @@
 
 ![InboundNatPools][InboundNatPools]  
 
-
-
 ### 群集部署之后
-这稍微要复杂一点，并且可能会导致 VM 设置被回收。你现在必须使用 Azure PowerShell 设置新值。请确保计算机上已安装 Azure PowerShell 1.0 或更高版本。如果尚未安装，强烈建议根据 [How to install and configure Azure PowerShell](/documentation/articles/powershell-install-configure/)（如何安装和配置 Azure PowerShell）一文中所述的步骤安装。
+这稍微要复杂一点，并且可能会导致 VM 设置被回收。你现在必须使用 Azure PowerShell 设置新值。请确保计算机上已安装 Azure PowerShell 1.0 或更高版本。如果尚未安装，强烈建议根据 [How to install and configure Azure PowerShell](../powershell-install-configure.md)（如何安装和配置 Azure PowerShell）一文中所述的步骤安装。
 
 登录到你的 Azure 帐户。如果此 PowerShell 命令由于某些原因而失败，你应该检查 Azure PowerShell 是否已正确安装。
 
-
-	Login-AzureRmAccount -EnvironmentName AzureChinaCloud
-
+    Login-AzureRmAccount -EnvironmentName AzureChinaCloud
 
 运行以下命令获取有关负载均衡器的详细信息，在值中，可以看到 **inboundNatPools** 的描述：
 
-
-	Get-AzureRmResource -ResourceGroupName <RGname> -ResourceType Microsoft.Network/loadBalancers -ResourceName <load balancer name>
-
+    Get-AzureRmResource -ResourceGroupName <RGname> -ResourceType Microsoft.Network/loadBalancers -ResourceName <load balancer name>
 
 现在，将 *frontendPortRangeStart* 和 *frontendPortRangeEnd* 设置为所需的值。
 
-
-	$PropertiesObject = @{
-		#Property = value;
-	}
-	Set-AzureRmResource -PropertyObject $PropertiesObject -ResourceGroupName <RG name> -ResourceType Microsoft.Network/loadBalancers -ResourceName <load Balancer name> -ApiVersion <use the API version that get returned> -Force
-
-
+    $PropertiesObject = @{
+        #Property = value;
+    }
+    Set-AzureRmResource -PropertyObject $PropertiesObject -ResourceGroupName <RG name> -ResourceType Microsoft.Network/loadBalancers -ResourceName <load Balancer name> -ApiVersion <use the API version that get returned> -Force
 
 ## 后续步骤
 
-- [“随地部署”功能的概述及其与 Azure 托管群集的比较](/documentation/articles/service-fabric-deploy-anywhere/)
-- [群集安全性](/documentation/articles/service-fabric-cluster-security/)
-- [Service Fabric SDK 及其入门](/documentation/articles/service-fabric-get-started/)
-
+- [“随地部署”功能的概述及其与 Azure 托管群集的比较](./service-fabric-deploy-anywhere.md)
+- [群集安全性](./service-fabric-cluster-security.md)
+- [Service Fabric SDK 及其入门](./service-fabric-get-started.md)
 
 <!--Image references-->
 

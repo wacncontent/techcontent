@@ -31,9 +31,9 @@
 标记直接存在于资源和资源组中。若要查看现有标记，只需使用 **azure group show** 获取资源组及其资源。
 
     azure group show -n tag-demo-group --json
-    
+
 该操作返回有关资源组的元数据，包括任何应用到其中的标记。
-    
+
     {
       "id": "/subscriptions/4705409c-9372-42f0-914c-64a504530837/resourceGroups/tag-demo-group",
       "name": "tag-demo-group",
@@ -51,15 +51,15 @@
 使用 **azure resource show** 可以查看特定资源的标记。
 
     azure resource show -g tag-demo-group -n storagetagdemo -r Microsoft.Storage/storageAccounts -o 2016-01-01 --json
-    
+
 若要检索具有标记值的所有资源，请使用：
 
     azure resource list -t Dept=Finance --json
-    
+
 若要检索具有标记值的所有资源组，请使用：
 
     azure group list -t Dept=Finance
-        
+
 可以通过以下命令查看订阅中的现有标记：
 
     azure tag list

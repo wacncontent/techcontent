@@ -1,27 +1,25 @@
-<properties
-    pageTitle="为 Azure 移动应用启用脱机同步 (Cordova) | Azure"
-    description="了解如何在 Cordova 应用程序中使用应用服务移动应用来缓存和同步脱机数据"
-    documentationCenter="cordova"
-    authors="adrianhall"
-    manager="erikre"
-    editor=""
-    services="app-service\mobile"/>  
+---
+title: 为 Azure 移动应用启用脱机同步 (Cordova) | Azure
+description: 了解如何在 Cordova 应用程序中使用应用服务移动应用来缓存和同步脱机数据
+documentationCenter: cordova
+authors: adrianhall
+manager: erikre
+editor: 
+services: app-service\mobile
 
-
-<tags
-    ms.service="app-service-mobile"
-    ms.workload="mobile"
-    ms.tgt_pltfrm="mobile-cordova-ios"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="10/01/2016"
-    wacn.date="11/21/2016"
-    ms.author="adrianha"/>  
-
+ms.service: app-service-mobile
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-cordova-ios
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 10/01/2016
+wacn.date: 11/21/2016
+ms.author: adrianha
+---
 
 # 为 Cordova 移动应用启用脱机同步
 
-[AZURE.INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
+[!INCLUDE [app-service-mobile-selector-offline](../../includes/app-service-mobile-selector-offline.md)]
 
 本教程介绍适用于 Cordova 的 Azure 移动应用的脱机同步功能。脱机同步允许最终用户与移动应用交互（查看、添加或修改数据），即使在没有网络连接时也是如此。更改存储在本地数据库中；设备重新联机后，这些更改会与远程服务同步。
 
@@ -47,7 +45,7 @@
 
         client = new WindowsAzure.MobileServiceClient('http://yourmobileapp.azurewebsites.cn');
 
-	替换为此代码：
+    替换为此代码：
 
         client = new WindowsAzure.MobileServiceClient('http://yourmobileapp.azurewebsites.cn');
 
@@ -180,8 +178,7 @@
 
 5. （可选）使用 Visual Studio 查看 Azure SQL 数据库表，以了解后端数据库中的数据是否未更改。
 
-	在 Visual Studio 中，打开“服务器资源管理器”。导航到“Azure”->“SQL 数据库”中的数据库。右键单击数据库并选择“在 SQL Server 对象资源管理器中打开”。现在便可以浏览 SQL 数据库表及其内容。
-
+    在 Visual Studio 中，打开“服务器资源管理器”。导航到“Azure”->“SQL 数据库”中的数据库。右键单击数据库并选择“在 SQL Server 对象资源管理器中打开”。现在便可以浏览 SQL 数据库表及其内容。
 
 ## （可选）测试与移动后端的重新连接
 
@@ -201,7 +198,6 @@
 
 * [Azure 移动应用中的脱机数据同步]
 
-
 * [用于 Apache Cordova 的 Visual Studio 工具]
 
 ## 后续步骤
@@ -211,22 +207,21 @@
 
 <!-- ##Summary -->
 
-
 <!-- Images -->
 
 <!-- URLs. -->
 
-[Apache Cordova 快速入门]: /documentation/articles/app-service-mobile-cordova-get-started/
+[Apache Cordova 快速入门]: ./app-service-mobile-cordova-get-started.md
 [自述文件]: https://github.com/Azure/azure-mobile-apps-js-client#offline-data-sync-preview
 [脱机同步示例]: https://github.com/shrishrirang/azure-mobile-apps-quickstarts/tree/samples/client/cordova/ZUMOAPPNAME
-[Azure 移动应用中的脱机数据同步]: /documentation/articles/app-service-mobile-offline-data-sync/
-[Adding Authentication]: /documentation/articles/app-service-mobile-cordova-get-started-users/
-[authentication]: /documentation/articles/app-service-mobile-cordova-get-started-users/
-[Work with the .NET backend server SDK for Azure Mobile Apps]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
+[Azure 移动应用中的脱机数据同步]: ./app-service-mobile-offline-data-sync.md
+[Adding Authentication]: ./app-service-mobile-cordova-get-started-users.md
+[authentication]: ./app-service-mobile-cordova-get-started-users.md
+[Work with the .NET backend server SDK for Azure Mobile Apps]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
 [Visual Studio Community 2015]: http://www.visualstudio.com/
 [用于 Apache Cordova 的 Visual Studio 工具]: https://www.visualstudio.com/zh-cn/features/cordova-vs.aspx
-[Apache Cordova SDK]: /documentation/articles/app-service-mobile-cordova-how-to-use-client-library/
-[ASP.NET Server SDK]: /documentation/articles/app-service-mobile-dotnet-backend-how-to-use-server-sdk/
-[Node.js Server SDK]: /documentation/articles/app-service-mobile-node-backend-how-to-use-server-sdk/
+[Apache Cordova SDK]: ./app-service-mobile-cordova-how-to-use-client-library.md
+[ASP.NET Server SDK]: ./app-service-mobile-dotnet-backend-how-to-use-server-sdk.md
+[Node.js Server SDK]: ./app-service-mobile-node-backend-how-to-use-server-sdk.md
 
 <!---HONumber=Mooncake_1010_2016-->

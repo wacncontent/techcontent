@@ -1,24 +1,21 @@
-<properties
-	pageTitle="服务总线中继概述 | Azure"
-	description="服务总线中继的概述。"
-	services="service-bus"
-	documentationCenter=".net"
-	authors="sethmanheim"
-	manager="timlt"
-	editor=""/>  
+---
+title: 服务总线中继概述 | Azure
+description: 服务总线中继的概述。
+services: service-bus
+documentationCenter: .net
+authors: sethmanheim
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="service-bus"
-	ms.workload="na"
-	ms.tgt_pltfrm="na"
-	ms.devlang="multiple"
-	ms.topic="get-started-article"
-	ms.date="09/01/2016"
-	ms.author="sethm"
-	wacn.date="01/04/2017"/>  
-
-
+ms.service: service-bus
+ms.workload: na
+ms.tgt_pltfrm: na
+ms.devlang: multiple
+ms.topic: get-started-article
+ms.date: 09/01/2016
+ms.author: sethm
+wacn.date: 01/04/2017
+---
 
 # 服务总线中继概述
 
@@ -36,10 +33,8 @@
 
 有关服务总线中继的详细信息，请参阅以下主题。
 
-- [Azure 服务总线体系结构概述](/documentation/articles/service-bus-fundamentals-hybrid-solutions/)
+- [Azure 服务总线体系结构概述](./service-bus-fundamentals-hybrid-solutions.md)
 
-- [如何使用 Service Bus 中继服务](/documentation/articles/service-bus-dotnet-how-to-use-relay/)
-
- 
+- [如何使用 Service Bus 中继服务](./service-bus-dotnet-how-to-use-relay.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

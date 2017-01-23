@@ -1,22 +1,22 @@
-<properties
-    pageTitle="使用 Azure 媒体服务实时传送视频流概述 | Azure"
-    description="本主题概述了如何使用 Azure 媒体服务实时传送视频流。"
-    services="media-services"
-    documentationcenter=""
-    author="Juliako"
-    manager="erikre"
-    editor="" />
-<tags
-    ms.assetid="fb63502e-914d-4c1f-853c-4a7831bb08e8"
-    ms.service="media-services"
-    ms.workload="media"
-    ms.tgt_pltfrm="na"
-    ms.devlang="ne"
-    ms.topic="article"
-    ms.date="12/07/2016"
-    wacn.date="01/13/2017"
-    ms.author="juliako" />  
+---
+title: 使用 Azure 媒体服务实时传送视频流概述 | Azure
+description: 本主题概述了如何使用 Azure 媒体服务实时传送视频流。
+services: media-services
+documentationcenter: 
+author: Juliako
+manager: erikre
+editor: 
 
+ms.assetid: fb63502e-914d-4c1f-853c-4a7831bb08e8
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: ne
+ms.topic: article
+ms.date: 12/07/2016
+wacn.date: 01/13/2017
+ms.author: juliako
+---
 
 #使用 Azure 媒体服务实时传送视频流概述
 
@@ -36,10 +36,9 @@
   * 记录和存储引入的内容，以便稍后进行流式处理（视频点播）
   * 直接通过常用流式传输协议（例如 MPEG DASH、平滑流式处理、HLS）将内容传递给客户，或传递至内容交付网络 \(CDN\) 以供进一步分发。
 
-
 **Azure 媒体服务** (AMS) 提供了引入、编码、预览、存储和传送实时流式处理内容的功能。
 
-将内容传送给客户时，目标是将优质视频传递到处于不同网络条件下的各种设备。为此，可使用实时编码器将流编码为多比特率（自适应比特率）视频流。为满足不同设备的流式处理要求，使用媒体服务[动态打包](/documentation/articles/media-services-dynamic-packaging-overview/)将流动态地重新打包为不同的协议。媒体服务支持传送以下自适应比特率流式处理技术：HTTP Live Streaming \(HLS\)、平滑流式处理、MPEG DASH。
+将内容传送给客户时，目标是将优质视频传递到处于不同网络条件下的各种设备。为此，可使用实时编码器将流编码为多比特率（自适应比特率）视频流。为满足不同设备的流式处理要求，使用媒体服务[动态打包](./media-services-dynamic-packaging-overview.md)将流动态地重新打包为不同的协议。媒体服务支持传送以下自适应比特率流式处理技术：HTTP Live Streaming \(HLS\)、平滑流式处理、MPEG DASH。
 
 在 Azure 媒体服务中，**频道**、**节目**和**流式处理终结点**处理所有实时流式处理功能，包括引入、格式化、DVR、安全性、缩放性和冗余。
 
@@ -47,9 +46,9 @@
 
 - 本地实时编码器将多比特率 **RTMP** 或**平滑流式处理**（分片 MP4）发送到经配置可以进行**直通**传递的通道。**直通**传递是指引入的流将会直接通过**通道**，而不会经过任何进一步的处理。可以使用以下输出多比特率平滑流的实时编码器：Elemental、Envivio、Cisco。以下实时编码器输出 RTMP：Adobe Flash Media Live Encoder (FMLE)、Telestream Wirecast 和 Tricaster 转码器。实时编码器也可将单比特率流发送到并未启用实时编码的通道，但不建议这样做。收到请求时，媒体服务会将该流传送给客户。
 
-	>[AZURE.NOTE] 需要长时间处理多个事件，并且已经在本地编码器上进行了投入时，可以使用直通这种最经济的方法来实时传送视频流。请参阅[定价](/pricing/details/media-services/)详细信息。
-	
-	
+    >[!NOTE]
+    > 需要长时间处理多个事件，并且已经在本地编码器上进行了投入时，可以使用直通这种最经济的方法来实时传送视频流。请参阅[定价](https://www.azure.cn/pricing/details/media-services/)详细信息。
+
 - 本地实时编码器（采用以下格式之一：RTMP 或平滑流式处理（分片 MP4））将单比特率流发送至能够使用媒体服务执行实时编码的通道。还支持 RTP (MPEG-TS)，但前提是拥有到 Azure 数据中心的专用连接。以下提供 RTMP 输出的实时编码器可以使用此类型的通道：Telestream Wirecast、FMLE。然后，通道将对传入的单比特率流执行实时编码，使之转换为多比特率（自适应）视频流。收到请求时，媒体服务会将该流传送给客户。
 
 从媒体服务2.10 发行版开始，创建通道时，可以指定希望通道接收输入流的方式，以及是否希望通道对流执行实时编码。可以使用两个选项：
@@ -66,7 +65,7 @@
 单比特率输入在云中被编码为多比特率|否|是
 最大分辨率，层数|1080p，8 层，60+fps|720p，6 层，30 fps
 输入协议|RTMP、平滑流|RTMP、平滑流和 RTP
-价格|请参阅[定价页](/pricing/details/media-services/)并单击“实时视频”选项卡|请参阅[定价页](/pricing/details/media-services/) 
+价格|请参阅[定价页](https://www.azure.cn/pricing/details/media-services/)并单击“实时视频”选项卡|请参阅[定价页](https://www.azure.cn/pricing/details/media-services/) 
 最长运行时间|全天候运行|8 小时
 支持插入静态图像|否|是
 支持发出广告指示|否|是
@@ -81,15 +80,14 @@
 
 ![实时工作流](./media/media-services-live-streaming-workflow/media-services-live-streaming-current.png)  
 
-
-有关详细信息，请参阅[使用从本地编码器接收多比特率实时流的频道](/documentation/articles/media-services-live-streaming-with-onprem-encoders/)。
+有关详细信息，请参阅[使用从本地编码器接收多比特率实时流的频道](./media-services-live-streaming-with-onprem-encoders.md)。
 
 ## 使用能够通过 Azure 媒体服务执行实时编码的通道
 下图显示的是实时流式处理工作流中涉及的 AMS 平台的主要组成部分，该工作流中的频道能够通过媒体服务执行实时编码。
 
 ![实时工作流](./media/media-services-live-streaming-workflow/media-services-live-streaming-new.png)
 
-有关详细信息，请参阅[使用能够通过 Azure 媒体服务执行实时编码的通道](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)。
+有关详细信息，请参阅[使用能够通过 Azure 媒体服务执行实时编码的通道](./media-services-manage-live-encoder-enabled-channels.md)。
 
 ##频道及其相关组件的说明
 
@@ -100,7 +98,6 @@
 可以在创建频道时获取引入 URL 和预览 URL。若要获取这些 URL，频道不一定要处于已启动状态。准备好开始将数据从实时转码器推送到频道时，频道必须已启动。实时转码器开始引入数据后，你可以预览流。
 
 每个媒体服务帐户均可包含多个频道、多个节目以及多个 StreamingEndpoint。根据带宽和安全性需求，StreamingEndpoint 服务可专用于一个或多个频道。任何 StreamingEndpoint 都可以从任何频道拉取。
-
 
 ###节目 
 
@@ -120,7 +117,8 @@ ArchiveWindowLength 还决定了客户端能够从当前实时位置按时间向
 
 若要阻止通道进一步计费，必须通过 API 或 Azure 经典管理门户停止通道。使用完通道后，需要亲自停止通道。不停止通道会导致持续计费。
 
->[AZURE.NOTE]使用“标准”通道时，AMS 会自动关闭输入源丢失 12 小时后仍处于“正在运行”状态但没有程序运行的任何通道。但是，在通道处于“正在运行”状态的时间段内，仍会向你收费。
+>[!NOTE]
+>使用“标准”通道时，AMS 会自动关闭输入源丢失 12 小时后仍处于“正在运行”状态但没有程序运行的任何通道。但是，在通道处于“正在运行”状态的时间段内，仍会向你收费。
 
 ### <a id="states"></a>通道状态及其如何映射到计费模式
 通道的当前状态。可能的值包括：
@@ -132,7 +130,7 @@ ArchiveWindowLength 还决定了客户端能够从当前实时位置按时间向
 - **正在删除**。正在删除通道。此暂时性状态下不会发生计费。此状态下不允许进行更新或流式传输。
 
 下表显示通道状态如何映射到计费模式。
- 
+
 通道状态|门户 UI 指示器|是否计费？
 ---|---|---
 正在启动|正在启动|否（暂时状态）
@@ -140,20 +138,16 @@ ArchiveWindowLength 还决定了客户端能够从当前实时位置按时间向
 正在停止|正在停止|否（暂时状态）
 已停止|已停止|否
 
-
-
-
-
 ## 相关主题
-[Azure 媒体服务分片 MP4 实时引入规范](/documentation/articles/media-services-fmp4-live-ingest-overview/)
+[Azure 媒体服务分片 MP4 实时引入规范](./media-services-fmp4-live-ingest-overview.md)
 
-[通过 Azure 媒体服务使用能够执行实时编码的通道](/documentation/articles/media-services-manage-live-encoder-enabled-channels/)
+[通过 Azure 媒体服务使用能够执行实时编码的通道](./media-services-manage-live-encoder-enabled-channels.md)
 
-[使用从本地编码器接收多比特率实时流的频道](/documentation/articles/media-services-live-streaming-with-onprem-encoders/)
+[使用从本地编码器接收多比特率实时流的频道](./media-services-live-streaming-with-onprem-encoders.md)
 
-[配额和限制](/documentation/articles/media-services-quotas-and-limitations/)
+[配额和限制](./media-services-quotas-and-limitations.md)
 
-[媒体服务概念](/documentation/articles/media-services-concepts/)
+[媒体服务概念](./media-services-concepts.md)
 
 <!---HONumber=Mooncake_0109_2017-->
 <!--Update_Description: remove HDS related content-->

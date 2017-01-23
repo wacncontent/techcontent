@@ -1,21 +1,22 @@
-<properties
-    pageTitle="将链接模版与 Resource Manager 配合使用 | Azure"
-    description="介绍如何使用 Azure 资源管理器模板中的链接模板创建一个模块化的模板的解决方案。演示如何传递参数值、指定参数文件和动态创建的 URL。"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="27d8c4b2-1e24-45fe-88fd-8cf98a6bb2d2"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="11/28/2016"
-    wacn.date="01/06/2017"
-    ms.author="tomfitz" />
+---
+title: 将链接模版与 Resource Manager 配合使用 | Azure
+description: 介绍如何使用 Azure 资源管理器模板中的链接模板创建一个模块化的模板的解决方案。演示如何传递参数值、指定参数文件和动态创建的 URL。
+services: azure-resource-manager
+documentationcenter: na
+author: tfitzmac
+manager: timlt
+editor: tysonn
+
+ms.assetid: 27d8c4b2-1e24-45fe-88fd-8cf98a6bb2d2
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 11/28/2016
+wacn.date: 01/06/2017
+ms.author: tomfitz
+---
 
 # 将已链接的模版与 Azure 资源管理器配合使用
 可在一个 Azure Resource Manager 模板中链接到另一个模板，将部署分解成一组有针对性并且有特定用途的模板。如同将一个应用程序分解为多个代码类那样，分解可在测试、重用和可读性方面带来好处。
@@ -54,7 +55,7 @@ Resource Manager 服务必须能够访问链接的模板。无法为链接的模
         "contentVersion": "1.0.0.0",
     }
 
-尽管链接模板必须可从外部使用，但它无需向公众正式发布。可以将模板添加到只有存储帐户所有者可以访问的专用存储帐户。然后，在部署期间创建共享访问签名 (SAS) 令牌来启用访问。将该 SAS 令牌添加到链接模板的 URI。有关在存储帐户中设置模板和生成 SAS 令牌的步骤，请参阅[使用 Resource Manager 模板和 Azure PowerShell 部署资源](/documentation/articles/resource-group-template-deploy/)或[使用 Resource Manager 模板和 Azure CLI 部署资源](/documentation/articles/resource-group-template-deploy-cli/)。
+尽管链接模板必须可从外部使用，但它无需向公众正式发布。可以将模板添加到只有存储帐户所有者可以访问的专用存储帐户。然后，在部署期间创建共享访问签名 (SAS) 令牌来启用访问。将该 SAS 令牌添加到链接模板的 URI。有关在存储帐户中设置模板和生成 SAS 令牌的步骤，请参阅[使用 Resource Manager 模板和 Azure PowerShell 部署资源](./resource-group-template-deploy.md)或[使用 Resource Manager 模板和 Azure CLI 部署资源](./resource-group-template-deploy-cli.md)。
 
 下面的示例演示了链接到其他模板的父模板。使用作为参数传入的 SAS 令牌访问链接模板。
 
@@ -81,7 +82,6 @@ Resource Manager 服务必须能够访问链接的模板。无法为链接的模
 Resource Manager 会将每个链接模板作为单独的部署来处理。在资源组的部署历史记录中，可看到父模板和嵌套模板的分别部署。
 
 ![部署历史记录](./media/resource-group-linked-templates/linked-deployment-history.png)  
-
 
 ## 链接到参数文件
 以下示例使用 **parametersLink** 属性链接到参数文件。
@@ -118,7 +118,7 @@ Resource Manager 会将每个链接模板作为单独的部署来处理。在资
         "vmTemplateUrl": "[concat(variables('templateBaseUrl'), 'database-2disk-resources.json')]"
     }
 
-你还可以使用 [deployment()](/documentation/articles/resource-group-template-functions/#deployment) 获取当前模板的基 URL，并使用该 URL 来获取同一位置其他模板的 URL。如果模板位置发生变化（原因可能是改版）或者想要避免对模板文件中的 URL 进行硬编码，则此方法非常有用。
+你还可以使用 [deployment()](./resource-group-template-functions.md#deployment) 获取当前模板的基 URL，并使用该 URL 来获取同一位置其他模板的 URL。如果模板位置发生变化（原因可能是改版）或者想要避免对模板文件中的 URL 进行硬编码，则此方法非常有用。
 
     "variables": {
         "sharedTemplateUrl": "[uri(deployment().properties.templateLink.uri, 'shared-resources.json')]"
@@ -288,7 +288,7 @@ URI 将解析成名为 **existingStorageAccount.json** 或 **newStorageAccount.j
 系统将提示用户提供 SAS 令牌作为参数。需要在令牌的前面加上 **?**。
 
 ## 后续步骤
-* 若要了解如何为资源定义部署顺序，请参阅 [Defining dependencies in Azure Resource Manager templates](/documentation/articles/resource-group-define-dependencies/)（在 Azure Resource Manager 模板中定义依赖关系）
-* 若要了解如何定义一个资源而创建多个实例，请参阅 [Create multiple instances of resources in Azure Resource Manager](/documentation/articles/resource-group-create-multiple/)（在 Azure Resource Manager 中创建多个资源实例）
+* 若要了解如何为资源定义部署顺序，请参阅 [Defining dependencies in Azure Resource Manager templates](./resource-group-define-dependencies.md)（在 Azure Resource Manager 模板中定义依赖关系）
+* 若要了解如何定义一个资源而创建多个实例，请参阅 [Create multiple instances of resources in Azure Resource Manager](./resource-group-create-multiple.md)（在 Azure Resource Manager 中创建多个资源实例）
 
 <!---HONumber=Mooncake_0103_2017-->

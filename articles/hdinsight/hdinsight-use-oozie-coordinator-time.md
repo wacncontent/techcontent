@@ -1,27 +1,27 @@
-<properties
-    pageTitle="在 HDInsight 中使用基于时间的 Hadoop Oozie 协调器 | Azure"
-    description="在 HDInsight 中使用基于时间的 Hadoop Oozie 协调器（大数据服务）。了解如何定义 Oozie 工作流和协调器，以及如何提交作业。"
-    services="hdinsight"
-    documentationcenter=""
-    tags="azure-portal"
-    author="mumian"
-    manager="jhubbard"
-    editor="cgronlun" />
-<tags
-    ms.assetid="00c3a395-d51a-44ff-af2d-1f116c4b1c83"
-    ms.service="hdinsight"
-    ms.workload="big-data"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/15/2016"
-    wacn.date="01/06/2017"
-    ms.author="jgao" />  
+---
+title: 在 HDInsight 中使用基于时间的 Hadoop Oozie 协调器 | Azure
+description: 在 HDInsight 中使用基于时间的 Hadoop Oozie 协调器（大数据服务）。了解如何定义 Oozie 工作流和协调器，以及如何提交作业。
+services: hdinsight
+documentationcenter: 
+tags: azure-portal
+author: mumian
+manager: jhubbard
+editor: cgronlun
 
+ms.assetid: 00c3a395-d51a-44ff-af2d-1f116c4b1c83
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/15/2016
+wacn.date: 01/06/2017
+ms.author: jgao
+---
 
 # 将基于时间的 Oozie 协调器与 HDInsight 中的 Hadoop 配合使用以定义工作流和协调作业
 
-[AZURE.INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
+[!INCLUDE [azure-sdk-developer-differences](../../includes/azure-sdk-developer-differences.md)]
 
 在本文中，将学习如何定义工作流和协调器，以及如何基于时间触发协调器作业。阅读本文前，浏览[将 Oozie 与 HDInsight 配合使用][hdinsight-use-oozie]很有帮助。
 
@@ -31,7 +31,6 @@ Apache Oozie 是一个管理 Hadoop 作业的工作流/协调系统。该系统�
 下图显示将要实现的工作流：
 
 ![工作流关系图][img-workflow-diagram]  
-
 
 工作流包含两个操作：
 
@@ -54,7 +53,7 @@ Apache Oozie 是一个管理 Hadoop 作业的工作流/协调系统。该系统�
     有关 Hive 的详细信息，请参阅[将 Hive 与 HDInsight 配合使用][hdinsight-use-hive]。
 2. Sqoop 操作将 HiveQL 操作输出结果导出到 Azure SQL 数据库中的表。有关 Sqoop 的详细信息，请参阅[将 Sqoop 与 HDInsight 配合使用][hdinsight-use-sqoop]。
 
-> [AZURE.NOTE]
+> [!NOTE]
 有关 HDInsight 群集上支持的 Oozie 版本，请参阅 [HDInsight 提供的群集版本有哪些新功能？][hdinsight-versions]。
 >
 >
@@ -84,10 +83,10 @@ Apache Oozie 是一个管理 Hadoop 作业的工作流/协调系统。该系统�
     <tr><td>SQL 数据库名</td><td>$sqlDatabaseName</td><td></td><td>Sqoop 将数据导出到的 Azure SQL 数据库。</td></tr>
     </table>
 
-  > [AZURE.NOTE]
+  > [!NOTE]
   默认情况下，可从 Azure 服务（如 Azure HDInsight）连接 Azure SQL 数据库。如果禁用此防火墙设置，则必须从 Azure 门户预览启用。有关创建 SQL 数据库和配置防火墙规则的说明，请参阅[创建和配置 SQL 数据库][sqldatabase-get-started]。
 
-> [AZURE.NOTE]
+> [!NOTE]
 填写表中的值。这将有助于学习本教程。
 
 ## <a id="defineworkflow"></a> 定义 Oozie 工作流和相关 HiveQL 脚本
@@ -100,7 +99,7 @@ Oozie 工作流定义以 hPDL（XML 过程定义语言）编写。默认的工�
 3. **log4j 日志文件位置**。字段分隔符为“,”。默认换行符为“\\n”。如果要多次运行 Oozie 工作流，可使用 Hive 外部表避免从原始位置删除数据文件。
 4. **INSERT OVERWRITE 语句**从 log4j Hive 表统计每个日志级类型的次数，并将输出结果保存到 Azure Blob 存储位置。
 
-> [AZURE.NOTE]
+> [!NOTE]
 有一个已知的 Hive 路径问题。将会在提交 Oozie 作业时遇到此问题。可在 TechNet Wiki 上找到解决此问题的说明：[HDInsight Hive 错误:无法重命名][technetwiki-hive-error]。
 
 **定义由工作流调用的 HiveQL 脚本文件**
@@ -254,7 +253,7 @@ HDInsight 使用 Azure Blob 存储进行数据存储。wasbs:// 是 Microsoft �
 
     wasb[s]://<ContainerName>@<StorageAccountName>.blob.core.chinacloudapi.cn/<path>/<filename>
 
-> [AZURE.NOTE]
+> [!NOTE]
 HDInsight 群集版本 3.0 仅支持 *wasb://* 语法。较早的 *asv://* 语法在 HDInsight 2.1 和 1.6 群集中受支持，但在 HDInsight 3.0 群集中不受支持。
 ><p>
 > wasb:// 路径是虚拟路径。有关详细信息，请参阅[将 Azure Blob 存储与 HDInsight 配合使用][hdinsight-storage]。
@@ -290,7 +289,7 @@ HDInsight 群集版本 3.0 仅支持 *wasb://* 语法。较早的 *asv://* 语�
 
     系统将提示输入 Azure 帐户凭据。添加订阅连接的此方法会超时，12 小时后必须重新运行 cmdlet。
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     如果拥有多个 Azure 订阅，而默认订阅不是要使用的订阅，则可以使用 <strong>Select-AzureSubscription</strong> 选择订阅。
 
 3. 将以下脚本复制到脚本窗格，然后设置前六个变量：
@@ -373,7 +372,6 @@ HDInsight 群集版本 3.0 仅支持 *wasb://* 语法。较早的 *asv://* 语�
 5. 单击“运行脚本”或按 **F5** 运行脚本。输出结果类似如下：
 
     ![教程准备的输出结果][img-preparation-output]  
-
 
 ## <a id="run"></a> 运行 Oozie 项目
 目前，Azure PowerShell 不提供用于定义 Oozie 作业的任何 cmdlet。可以使用 **Invoke-RestMethod** cmdlet 调用 Oozie Web 服务。Oozie Web 服务 API 是 HTTP REST JSON API。有关 Oozie Web 服务 API 的详细信息，请参阅 [Apache Oozie 4.0 文档][apache-oozie-400]（对于 HDInsight 群集 3.0 版）或 [Apache Oozie 3.3.2 文档][apache-oozie-332]（对于 HDInsight 群集 2.1 版）。
@@ -519,7 +517,7 @@ HDInsight 群集版本 3.0 仅支持 *wasb://* 语法。较早的 *asv://* 语�
         </configuration>
         "@
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     与工作流提交有效负载文件相比，主要区别是变量 **oozie.coord.application.path**。提交工作流作业时，使用 **oozie.wf.application.path**。
 
 4. 将以下内容追加到脚本。此部分检查 Oozie Web 服务状态：
@@ -558,7 +556,7 @@ HDInsight 群集版本 3.0 仅支持 *wasb://* 语法。较早的 *asv://* 语�
             return $oozieJobId
         }
 
-    > [AZURE.NOTE]
+    > [!NOTE]
     提交工作流作业时，必须在创建作业后进行另一次 Web 服务调用以启动作业。在这种情况下，协调器作业会按时间触发。作业将自动启动。
 
 6. 将以下内容追加到脚本。此部分检查 Oozie 作业状态：
@@ -693,25 +691,25 @@ HDInsight 群集版本 3.0 仅支持 *wasb://* 语法。较早的 *asv://* 语�
 
 [hdinsight-cmdlets-download]: http://go.microsoft.com/fwlink/?LinkID=325563
 
-[hdinsight-versions]: /documentation/articles/hdinsight-component-versioning-v1/
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
-[hdinsight-admin-portal]: /documentation/articles/hdinsight-administer-use-management-portal-v1/
+[hdinsight-versions]: ./hdinsight-component-versioning-v1.md
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
+[hdinsight-admin-portal]: ./hdinsight-administer-use-management-portal-v1.md
 
-[hdinsight-use-sqoop]: /documentation/articles/hdinsight-use-sqoop/
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
-[hdinsight-admin-powershell]: /documentation/articles/hdinsight-administer-use-powershell/
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
-[hdinsight-use-hive]: /documentation/articles/hdinsight-use-hive/
-[hdinsight-use-pig]: /documentation/articles/hdinsight-use-pig/
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-[hdinsight-develop-java-mapreduce]: /documentation/articles/hdinsight-develop-deploy-java-mapreduce/
-[hdinsight-use-oozie]: /documentation/articles/hdinsight-use-oozie/
+[hdinsight-use-sqoop]: ./hdinsight-use-sqoop.md
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-admin-powershell]: ./hdinsight-administer-use-powershell.md
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
+[hdinsight-use-hive]: ./hdinsight-use-hive.md
+[hdinsight-use-pig]: ./hdinsight-use-pig.md
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
+[hdinsight-develop-java-mapreduce]: ./hdinsight-develop-deploy-java-mapreduce.md
+[hdinsight-use-oozie]: ./hdinsight-use-oozie.md
 
-[sqldatabase-get-started]: /documentation/articles/sql-database-get-started/
+[sqldatabase-get-started]: ../sql-database/sql-database-get-started.md
 
 [azure-management-portal]: https://portal.azure.cn/
-[azure-create-storageaccount]: /documentation/articles/storage-create-storage-account/
+[azure-create-storageaccount]: ../storage/storage-create-storage-account.md
 
 [apache-hadoop]: http://hadoop.apache.org/
 [apache-oozie-400]: http://oozie.apache.org/docs/4.0.0/

@@ -1,21 +1,21 @@
-<properties
-    pageTitle="Azure 角色属性"
-    description="了解如何使用 Azure Toolkit for Eclipse 来配置 Azure 角色设置。"
-    services=""
-    documentationCenter="java"
-    authors="rmcmurray"
-    manager="wpickett"
-    editor=""/>
+---
+title: Azure 角色属性
+description: 了解如何使用 Azure Toolkit for Eclipse 来配置 Azure 角色设置。
+services: 
+documentationCenter: java
+authors: rmcmurray
+manager: wpickett
+editor: 
 
-<tags
-    ms.service="multiple"
-    ms.workload="na"
-    ms.tgt_pltfrm="multiple"
-    ms.devlang="Java"
-    ms.topic="article"
-    ms.date="11/01/2016" 
-    wacn.date="12/05/2016" 
-    ms.author="robmcm"/>
+ms.service: multiple
+ms.workload: na
+ms.tgt_pltfrm: multiple
+ms.devlang: Java
+ms.topic: article
+ms.date: 11/01/2016
+wacn.date: 12/05/2016
+ms.author: robmcm
+---
 
 <!-- Legacy MSDN URL = https://msdn.microsoft.com/library/azure/hh690945.aspx -->
 
@@ -42,7 +42,7 @@
 * [本地存储属性](#local_storage_properties)
 * [服务器配置属性](#server_configuration_properties)
 * [SSL 卸载属性](#ssl_offloading_properties)
-	
+
 <a name="virtual_machine_properties"></a>
 ### 虚拟机属性 ###
 
@@ -50,7 +50,8 @@
 
 ![][ic719499]
 
->[AZURE.NOTE] 仅限 Windows：将实例数设置为大于 1 的值，此外，还要配置应用程序服务器，不管此设置如何，工具包都只允许在模拟器中运行 1 个角色实例。这是为了避免不同服务器实例在同一台计算机上运行时，在这些实例之间出现端口绑定冲突（例如，所有实例都尝试绑定到端口 8080）。所需的实例计数设置已保留，但仅当部署到云中时生效。
+>[!NOTE]
+> 仅限 Windows：将实例数设置为大于 1 的值，此外，还要配置应用程序服务器，不管此设置如何，工具包都只允许在模拟器中运行 1 个角色实例。这是为了避免不同服务器实例在同一台计算机上运行时，在这些实例之间出现端口绑定冲突（例如，所有实例都尝试绑定到端口 8080）。所需的实例计数设置已保留，但仅当部署到云中时生效。
 
 <a name="caching_properties"></a>
 ### 缓存属性 ###
@@ -65,7 +66,8 @@
 * 以内存的百分比形式表示的缓存大小。
 * 当应用程序作为云服务运行时，用于保存缓存状态的存储帐户名称；如果你不想保存缓存状态，则为“无”。（在计算模拟器中运行应用程序时，不使用存储帐户名称。） 如果将存储帐户名称设置为“(自动)”（这是默认值），则缓存配置将自动使用你在“发布到 Azure”对话框中选择的同一存储帐户。
 
->[AZURE.NOTE] 仅当你使用 Eclipse 工具包的发布向导发布部署时，“(自动)”设置才能产生所需的效果。如果改为使用外部机制（如 [Azure 经典管理门户][]）手动发布 .cspkg 文件，部署将不能正常工作。
+>[!NOTE]
+> 仅当你使用 Eclipse 工具包的发布向导发布部署时，“(自动)”设置才能产生所需的效果。如果改为使用外部机制（如 [Azure 经典管理门户][]）手动发布 .cspkg 文件，部署将不能正常工作。
 
 以下对话框显示缓存的属性。
 
@@ -113,7 +115,8 @@
 * 在生成 Azure 部署项目时将组件导入项目所要执行的步骤。
 * 在 Azure 云中部署该组件时要执行的步骤。
 
->[AZURE.NOTE] 在指定组件文件或命令行时，请记住，你的部署将发布到 Windows 虚拟机，因此你的自定义步骤必须对于基于 Windows 的操作系统是有效的。
+>[!NOTE]
+> 在指定组件文件或命令行时，请记住，你的部署将发布到 Windows 虚拟机，因此你的自定义步骤必须对于基于 Windows 的操作系统是有效的。
 
 组件具有以下属性：
 
@@ -125,20 +128,21 @@
     * **WAR：**组件是 Java Web 应用程序存档文件 (WAR) 并从 **From** 属性指定的本地路径上的动态 Web 项目导入。（这是工具包根据该位置中的项目性质自动检测到的）。
     * **zip：**组件是一个 zip 文件，通过压缩 **From** 属性指定的目录或文件导入。
 * **From：**表示要导入到部署的项目的文件夹或文件在本地计算机上的源路径。可以在此属性中使用 Windows 环境变量。生成项目时，所有可导入组件都将导入到角色的 **approot** 目录。
-	
-	请注意，你可以在部署到云（而非计算模拟器）时通过下载部署组件。请参阅下面有关添加组件的相关信息。
-	
+
+    请注意，你可以在部署到云（而非计算模拟器）时通过下载部署组件。请参阅下面有关添加组件的相关信息。
+
 * **As：**将组件导入到角色的 **approot** 目录并最终部署到 Azure 云中时所用的文件名。将此属性留空可使该名称保持与本地计算机上的名称相同。（对于可执行组件，即 **Deploy** 方法设为 **exec** 的组件，这可以是任意 Windows 命令行语句。）
 
-	>[AZURE.IMPORTANT] 如果在此值中使用空格字符，则处理空格字符的方式将因部署方法而异。如果部署方法是 **exec**，则空格将解释为命令行参数分隔符，而不是文件名的一部分。对于所有其他部署方法，空格将解释为文件名的一部分。
-	
+    >[!IMPORTANT]
+    > 如果在此值中使用空格字符，则处理空格字符的方式将因部署方法而异。如果部署方法是 **exec**，则空格将解释为命令行参数分隔符，而不是文件名的一部分。对于所有其他部署方法，空格将解释为文件名的一部分。
+
 * **Deploy：**指示在启动部署时应用于组件的操作的方法。这可以是以下值之一：
     * **copy：**组件将复制到 **To** 属性指定的目标路径。
     * **exec：**组件是一个可执行的 Windows 命令行语句，启动部署时，在 **To** 属性指定的路径上下文中执行。
     * **none：**启动部署时，不对组件应用任何操作。
     * **zip：**组件将解压缩到 **To** 属性指定的目标路径。仅当 **Import** 属性是 **zip** 时，此方法才可用。
 * **To：**将组件部署到的虚拟机上的目标路径。可以在此属性中使用 Windows 环境变量，并且文件路径是相对于 **approot** 的路径。
-	
+
 若要添加新组件，请单击“组件”属性页上的“添加”按钮，此时将打开“Azure 角色组件”对话框。请为上述属性提供值。
 
 下面显示一个用于添加新的 WAR 组件的示例。
@@ -157,7 +161,8 @@
 
 将按所列顺序处理组件。使用“上移”和“下移”按钮可排列顺序。
 
->[AZURE.NOTE] 服务器配置功能也依赖于组件。如果不删除相应的服务器配置，则无法删除或编辑这些组件。当你尝试对此类组件进行更改时，将向你提示该信息。
+>[!NOTE]
+> 服务器配置功能也依赖于组件。如果不删除相应的服务器配置，则无法删除或编辑这些组件。当你尝试对此类组件进行更改时，将向你提示该信息。
 
 <a name="debugging_properties"></a>
 ### 调试属性 ###
@@ -208,7 +213,8 @@
 
 在角色启动时，环境变量可用于启动脚本。
 
->[AZURE.NOTE] 指定环境变量时，请记住，你的部署将发布到 Windows 虚拟机，因此你的环境变量必须对于基于 Windows 的操作系统有效。
+>[!NOTE]
+> 指定环境变量时，请记住，你的部署将发布到 Windows 虚拟机，因此你的环境变量必须对于基于 Windows 的操作系统有效。
 
 为了举例说明在角色启动时可用的环境变量，请通过单击“添加”按钮创建一个新的环境变量。下面显示了所创建的名为 **MyRoleVersion** 的环境变量并为其分配值 **1.0**。
 
@@ -304,7 +310,6 @@
 
 ![][ic796926]  
 
-
 确认已选中“部署此类型的服务器”复选框，然后选择要使用的应用程序服务器类型。
 
 要指定用于云部署的服务器，可以利用以下选项：
@@ -324,7 +329,7 @@
 1. 请确保你已按前面的步骤选择了本地服务器。这将告知插件如何通过自定义下载部署服务器，因为该服务器必须与所选的服务器类型属于同一系列。
 2. 选中名为“通过自定义下载部署”的复选框。如果要从 Azure 存储帐户下载，请从“存储帐户”下拉列表中选择存储帐户（可以单击“帐户”链接以修改列表中的内容），系统会部分填充“URL”字段，然后请自行填写服务器下载 ZIP 的 URL 的剩余部分（当使用 Azure 存储时，URL 中的 Blob 名称必须小写）。如果不希望使用 Azure 存储，请在“存储帐户”下拉列表中选择“(无)”，然后在“URL”字段中输入服务器下载 ZIP 的 URL。该 ZIP 将包含表示应用程序服务器安装目录的子文件夹。例如，如果对 Apache Tomcat 7.0.35 使用 zip，则 zip 内将包含表示安装目录的子文件夹，如 **apache-tomcat-7.0.35**。
 3. 指定主目录环境变量的值。它将默认为用于本地应用程序服务器的值，但如果你的云应用程序服务器不同于本地应用程序服务器，则可以指定一个不同的值。但是，你需要确保云应用程序服务器与前面选择的服务器类型属于同一个系列。
-   如果将来你要更新云应用程序服务器 zip，可以手动更改主目录设置，或者，让它再次与本地设置匹配（如果也更改了本地应用程序服务器）。
+    如果将来你要更新云应用程序服务器 zip，可以手动更改主目录设置，或者，让它再次与本地设置匹配（如果也更改了本地应用程序服务器）。
 4. 单击“确定”以保存你的更改。
 
 可以自定义哪些项显示在“服务器配置”属性页的“服务器”选项卡中的基本逻辑。这是一项高级功能，如果你的需求超出默认值，或者如果你要添加其他服务器，则可能需要此功能。若要自定义逻辑，请在“服务器”对话框中，单击“自定义”链接。此时将关闭“服务器配置”属性页并在 Eclipse 中打开 **componentsets.xml** 文件，然后你可以根据需要修改该文件以扩展服务器配置模板。**componentsets.xml** 的文档在 **componentsets.xml** 文件本身中提供。
@@ -348,7 +353,6 @@
 
 ![][ic719512]  
 
-
 单击“添加”添加另一个应用程序，或者单击“删除”删除某个应用程序。出于效率考虑，如果在部署到云时你要对应用程序的源使用下载，请使用“组件属性”指定 URL、存储帐户等。[](#components_properties)
 
 从 2014 年 4 月发行版开始，应用程序将自动上载到为部署选择的同一存储帐户（在 **eclipsedeploy** 容器下）。你的部署的启动逻辑包含首先从该存储帐户下载这些应用程序的步骤。这意味着你无需重新生成和重新部署整个程序包即可升级部署中的应用程序，方法是手动将更新版本的应用程序直接上载到该存储帐户（例如，使用 Azure 门户），替换工具包最初上载到那里的 WAR 文件。然后，只需再次使用 Azure 管理门户，或通过命令行实用工具启动所有这些角色实例的回收。（目前不支持直接从 Eclipse 工具包中触发角色回收。）
@@ -360,18 +364,15 @@
 
 `[windowsazurepackage] Verifying blob availability (https://example.blob.core.windows.net/temp/tomcat6.zip)...`  
 
-
 如果选择“通过下载部署...”选项，则可能会显示以下警告，但生成将继续：
 
 `[windowsazurepackage] warning: Failed to confirm blob availability! Make sure the URL and/or the access key is correct (https://example.blob.core.windows.net/temp/tomcat6.zip).`  
-
 
 此警告是尚未验证下载的可用性的唯一指示。因此，如果由于某种原因，云中的部署失败，请检查是否收到此警告。
 
 如果要禁用下载验证（例如，如果你认为它不必要地降低生成速度），请在 package.xml 的 `<windowsazurepackage>` 元素中将 `verifydownloads` 属性设为 `false`：
 
 `<windowsazurepackage verifydownloads="false" ...>`  
-
 
 如果选择了“自动上载...”选项，则每当需要上载时，就会在控制台窗口中看到每隔 5 秒钟报告上载进度的生成消息。
 
@@ -381,7 +382,6 @@
 在 Eclipse 的项目资源管理器窗格中打开角色的上下文菜单，单击“Azure”，然后单击“SSL 卸载”。
 
 ![][ic719481]  
-
 
 在此对话框中，你可以启用 SSL 卸载，以便可以在 Azure 上的 Java 部署中轻松地启用安全超文本传输协议 (HTTPS) 支持，而无需在 Java 应用程序服务器中配置 SSL。有关详细信息，请参阅 [SSL 卸载][SSL Offloading]和[如何使用 SSL 卸载][How to Use SSL Offloading]。
 
@@ -402,18 +402,18 @@
 
 [Azure Java 开发人员中心]: /develop/java/
 [Azure 经典管理门户]: http://manage.windowsazure.cn
-[适用于 Eclipse 的 Azure 工具包]: /documentation/articles/azure-toolkit-for-eclipse/
-[Azure 项目属性]: /documentation/articles/azure-toolkit-for-eclipse-azure-project-properties/
-[Azure 存储帐户列表]: /documentation/articles/azure-toolkit-for-eclipse-azure-storage-account-list/
+[适用于 Eclipse 的 Azure 工具包]: ./azure-toolkit-for-eclipse.md
+[Azure 项目属性]: ./azure-toolkit-for-eclipse-azure-project-properties.md
+[Azure 存储帐户列表]: ./azure-toolkit-for-eclipse-azure-storage-account-list.md
 [com.microsoft.windowsazure.serviceruntime 包摘要]: http://azure.github.io/azure-sdk-for-java/com/microsoft/windowsazure/serviceruntime/package-summary.html
-[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: /documentation/articles/azure-toolkit-for-eclipse-creating-a-hello-world-application/
-[调试多实例部署中的特定角色实例]: /documentation/articles/azure-toolkit-for-eclipse-debugging-azure-applications/#debugging_specific_role_instance
-[在 Eclipse 中调试 Azure 应用程序]: /documentation/articles/azure-toolkit-for-eclipse-debugging-azure-applications/
-[实施大型部署]: /documentation/articles/azure-toolkit-for-eclipse-deploying-large-deployments/
+[在 Eclipse 中为 Azure 创建 Hello World 应用程序]: ./azure-toolkit-for-eclipse-creating-a-hello-world-application.md
+[调试多实例部署中的特定角色实例]: ./azure-toolkit-for-eclipse-debugging-azure-applications.md#debugging_specific_role_instance
+[在 Eclipse 中调试 Azure 应用程序]: ./azure-toolkit-for-eclipse-debugging-azure-applications.md
+[实施大型部署]: ./azure-toolkit-for-eclipse-deploying-large-deployments.md
 [如何使用并置缓存]: /develop/java/
 [如何使用 SSL 卸载]: /develop/java/
-[安装 Azure Toolkit for Eclipse]: /documentation/articles/azure-toolkit-for-eclipse-installation/
-[会话相关性]: /documentation/articles/azure-toolkit-for-eclipse-enable-session-affinity/
+[安装 Azure Toolkit for Eclipse]: ./azure-toolkit-for-eclipse-installation.md
+[会话相关性]: ./azure-toolkit-for-eclipse-enable-session-affinity.md
 [SSL 卸载]: /develop/java/
 
 <!-- IMG List -->
@@ -440,6 +440,5 @@
 [ic796926]: ./media/azure-toolkit-for-eclipse-azure-role-properties/ic796926.png
 [ic719512]: ./media/azure-toolkit-for-eclipse-azure-role-properties/ic719512.png
 [ic719481]: ./media/azure-toolkit-for-eclipse-azure-role-properties/ic719481.png
-
 
 <!---HONumber=Mooncake_1128_2016-->

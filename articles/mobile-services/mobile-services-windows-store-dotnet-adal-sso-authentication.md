@@ -1,36 +1,34 @@
-<properties
-	pageTitle="使用 Active Directory 身份验证库单一登录对应用进行身份验证（Windows 应用商店）| Azure"
-	description="了解如何在 Windows 应用商店应用程序中使用 ADAL 对用户进行单一登录身份验证。"
-	documentationCenter="windows"
-	authors="wesmc7777"
-	manager="dwrede"
-	editor=""
-	services="mobile-services"/>
+---
+title: 使用 Active Directory 身份验证库单一登录对应用进行身份验证（Windows 应用商店）| Azure
+description: 了解如何在 Windows 应用商店应用程序中使用 ADAL 对用户进行单一登录身份验证。
+documentationCenter: windows
+authors: wesmc7777
+manager: dwrede
+editor: 
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows-store"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="wesmc"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows-store
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: wesmc
+---
 
 # 使用 Active Directory 身份验证库单一登录对应用程序进行身份验证
 
-
-[AZURE.INCLUDE [mobile-services-selector-adal-sso](../../includes/mobile-services-selector-adal-sso.md)]
+[!INCLUDE [mobile-services-selector-adal-sso](../../includes/mobile-services-selector-adal-sso.md)]
 
 ##概述
 
-在本教程中，你将使用 Active Directory 身份验证库将身份验证添加到快速入门项目，以支持使用 Azure Active Directory 进行[客户端定向的登录操作](http://msdn.microsoft.com/zh-cn/library/azure/jj710106.aspx)。若要支持使用 Azure Active Directory 进行[服务定向的登录操作](http://msdn.microsoft.com/zh-cn/library/azure/dn283952.aspx)，请从[向移动服务应用添加身份验证](/documentation/articles/mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users/)教程入手。
+在本教程中，你将使用 Active Directory 身份验证库将身份验证添加到快速入门项目，以支持使用 Azure Active Directory 进行[客户端定向的登录操作](http://msdn.microsoft.com/zh-cn/library/azure/jj710106.aspx)。若要支持使用 Azure Active Directory 进行[服务定向的登录操作](http://msdn.microsoft.com/zh-cn/library/azure/dn283952.aspx)，请从[向移动服务应用添加身份验证](./mobile-services-dotnet-backend-windows-universal-dotnet-get-started-users.md)教程入手。
 
 若要能够对用户进行身份验证，必须向 Azure Active Directory (AAD) 注册你的应用程序。此过程分为两个步骤。首先，你必须注册你的移动服务，并公开其上的权限。其次，你必须注册你的 Windows 应用商店应用程序，并授予它对这些权限的访问权限
 
-
->[AZURE.NOTE]本教程旨在帮助你更好地了解如何通过移动服务，使用[客户端定向的登录操作](http://msdn.microsoft.com/zh-cn/library/azure/jj710106.aspx)对 Windows 应用商店应用进行单一登录 Azure Active Directory 身份验证。如果这是你第一次体验移动服务，请先完成[移动服务入门]教程。
-
+>[!NOTE]
+>本教程旨在帮助你更好地了解如何通过移动服务，使用[客户端定向的登录操作](http://msdn.microsoft.com/zh-cn/library/azure/jj710106.aspx)对 Windows 应用商店应用进行单一登录 Azure Active Directory 身份验证。如果这是你第一次体验移动服务，请先完成[移动服务入门]教程。
 
 ##先决条件
 
@@ -41,12 +39,11 @@
 * Microsoft Azure 移动服务 SDK NuGet 包
 * Active Directory 身份验证库 NuGet 包 
 
-[AZURE.INCLUDE [mobile-services-dotnet-adal-register-service](../../includes/mobile-services-dotnet-adal-register-service.md)]
+[!INCLUDE [mobile-services-dotnet-adal-register-service](../../includes/mobile-services-dotnet-adal-register-service.md)]
 
 ##向 Azure Active Directory 注册你的应用程序
 
 若要向 Azure Active Directory 注册应用程序，必须将该应用程序关联到 Windows 应用商店，并为该应用程序提供程序包安全标识符 (SID)。在 Azure Active Directory 中使用本机应用程序设置注册该程序包 SID。
-
 
 ### 将该应用程序与新的应用商店应用程序名称相关联
 
@@ -64,7 +61,6 @@
 
 5. 单击“关联”将该应用与应用商店名称相关联。
 
-
 ### 检索应用程序的程序包 SID
 
 现在，你需要检索使用本机应用程序设置配置的程序包 SID。
@@ -76,7 +72,6 @@
 2. 然后单击应用管理“>应用标识”，然后复制页面中的包 SID。
 
     ![][4]
-
 
 ###创建本机应用程序注册
 
@@ -108,24 +103,21 @@
 
 现在，将在 AAD 中配置你的移动服务，以接收你的应用程序发出的单一登录请求。
 
-
-
 ##将移动服务配置为要求身份验证
 
-[AZURE.INCLUDE [mobile-services-restrict-permissions-dotnet-backend](../../includes/mobile-services-restrict-permissions-dotnet-backend.md)]
+[!INCLUDE [mobile-services-restrict-permissions-dotnet-backend](../../includes/mobile-services-restrict-permissions-dotnet-backend.md)]
 
 ##向客户端应用程序添加身份验证代码
 
 1. 在 Visual Studio 中打开 Windows 应用商店客户端应用程序项目。
 
-[AZURE.INCLUDE [mobile-services-dotnet-adal-install-nuget](../../includes/mobile-services-dotnet-adal-install-nuget.md)]
+[!INCLUDE [mobile-services-dotnet-adal-install-nuget](../../includes/mobile-services-dotnet-adal-install-nuget.md)]
 
 4. 在 Visual Studio 的“解决方案资源管理器”窗口中，打开 MainPage.cs 文件，并添加以下 using 语句。
 
         using Windows.UI.Popups;
         using Microsoft.IdentityModel.Clients.ActiveDirectory;
         using Newtonsoft.Json.Linq;
-
 
 5. 将以下代码添加到声明了 `AuthenticateAsync` 方法的 MainPage 类。
 
@@ -175,7 +167,6 @@
             await RefreshTodoItems();
         }
 
-
 ##测试使用身份验证的客户端
 
 1. 在 Visual Studio 中，运行客户端应用程序。
@@ -183,9 +174,6 @@
 3. 该应用程序将进行身份验证并返回 Todo 项目。
 
     ![][15]
-
-
-
 
 <!-- Images -->
 [0]: ./media/mobile-services-windows-store-dotnet-adal-sso-authenticate/mobile-services-aad-app-manage-manifest.png
@@ -205,10 +193,10 @@
 [15]: ./media/mobile-services-windows-store-dotnet-adal-sso-authentication/mobile-services-app-run.png
 
 <!-- URLs. -->
-[如何向 Azure Active Directory 注册]: /documentation/articles/mobile-services-how-to-register-active-directory-authentication/
+[如何向 Azure Active Directory 注册]: ./mobile-services-how-to-register-active-directory-authentication.md
 [Azure 经典管理门户]: https://manage.windowsazure.cn/
 
-[移动服务入门]: /documentation/articles/mobile-services-dotnet-backend-windows-store-dotnet-get-started/
+[移动服务入门]: ./mobile-services-dotnet-backend-windows-store-dotnet-get-started.md
 [Windows 开发人员中心仪表板]: http://go.microsoft.com/fwlink/p/?LinkID=266734
 
 <!---HONumber=Mooncake_0118_2016-->

@@ -1,23 +1,22 @@
-<properties
-	pageTitle="创建 Jupyter/IPython Notebook | Azure"
-	description="了解如何在使用 Azure 中的资源管理器部署模型创建的 Linux 虚拟机上部署 Jupyter/IPython Notebook。"
-	services="virtual-machines-linux"
-	documentationCenter="python"
-	authors="crwilcox"
-	manager="wpickett"
-	editor=""
-	tags="azure-service-management,azure-resource-manager"/>
+---
+title: 创建 Jupyter/IPython Notebook | Azure
+description: 了解如何在使用 Azure 中的资源管理器部署模型创建的 Linux 虚拟机上部署 Jupyter/IPython Notebook。
+services: virtual-machines-linux
+documentationCenter: python
+authors: crwilcox
+manager: wpickett
+editor: 
+tags: azure-service-management,azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="python"
-	ms.topic="article"
-	ms.date="11/10/2015"
-	wacn.date="05/24/2016"
-	ms.author="crwilcox"/>
-
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: python
+ms.topic: article
+ms.date: 11/10/2015
+wacn.date: 05/24/2016
+ms.author: crwilcox
+---
 
 # Azure 上的 Jupyter Notebook
 
@@ -26,15 +25,15 @@
 ![屏幕快照](./media/virtual-machines-linux-jupyter-notebook/ipy-notebook-spectral.png)
 使用 SciPy 和 Matplotlib 包来分析录音结构。
 
-
 ## Jupyter 的两种方法：Azure Notebook 或自定义部署
 可以使用 Azure 提供的服务[快速开始使用 Jupyter](http://blogs.technet.com/b/machinelearning/archive/2015/07/24/introducing-jupyter-notebooks-in-azure-ml-studio.aspx)。通过使用 Azure Notebook 服务，你可以轻松访问 Jupyter 的可缩放计算资源（包含 Python 的所有功能及其许多库）的可 Web 访问接口。由于安装由该服务处理，用户无需管理和用户配置即可访问这些资源。
 
 如果 Notebook 服务不适用于你的方案，请继续阅读本文，它将会说明如何在 Azure 上使用 Linux 虚拟机 (VM) 部署 Jupyter Notebook。
 
-> [AZURE.NOTE]Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](/documentation/articles/resource-manager-deployment-model/)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
+> [!NOTE]
+>Azure 具有用于创建和处理资源的两个不同的部署模型：[资源管理器和经典](../azure-resource-manager/resource-manager-deployment-model.md)。这篇文章介绍如何使用资源管理器部署模型，Azure 建议大多数新部署使用资源管理器模型替代经典部署模型。
 
-[AZURE.INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
+[!INCLUDE [create-account-and-vms-note](../../includes/create-account-and-vms-note.md)]
 
 ## 在 Azure 上创建并配置 VM
 
@@ -67,44 +66,41 @@
   <th>Python 2.7</th>
   <tr>
     <td>
-		<a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh'>64 位</href>
-	</td>
+        <a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh'>64 位</href>
+    </td>
     <td>
-		<a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.3.0-Linux-x86_64.sh'>64 位</href>
-	</td>
+        <a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.3.0-Linux-x86_64.sh'>64 位</href>
+    </td>
   </tr>
   <tr>
     <td>
-		<a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86.sh'>32 位</href>
-	</td>
+        <a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86.sh'>32 位</href>
+    </td>
     <td>
-		<a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.3.0-Linux-x86.sh'>32 位</href>
-	</td>  
+        <a href='https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.3.0-Linux-x86.sh'>32 位</href>
+    </td>  
   </tr>
 </table>
-
 
 #### 在 Ubuntu 上安装 Anaconda3 2.3.0（64 位）
 作为一个示例，这演示如何在 Ubuntu 上安装 Anaconda
 
-	# install anaconda
-	cd ~
-	mkdir -p anaconda
-	cd anaconda/
-	curl -O https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh
-	sudo bash Anaconda3-2.3.0-Linux-x86_64.sh -b -f -p /anaconda3
+    # install anaconda
+    cd ~
+    mkdir -p anaconda
+    cd anaconda/
+    curl -O https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda3-2.3.0-Linux-x86_64.sh
+    sudo bash Anaconda3-2.3.0-Linux-x86_64.sh -b -f -p /anaconda3
 
-	# clean up home directory
-	cd ..
-	rm -rf anaconda/
+    # clean up home directory
+    cd ..
+    rm -rf anaconda/
 
-	# Update Jupyter to the latest install and generate its config file
-	sudo /anaconda3/bin/conda install jupyter -y
-	/anaconda3/bin/jupyter-notebook --generate-config
-
+    # Update Jupyter to the latest install and generate its config file
+    sudo /anaconda3/bin/conda install jupyter -y
+    /anaconda3/bin/jupyter-notebook --generate-config
 
 ![屏幕快照](./media/virtual-machines-linux-jupyter-notebook/anaconda-install.png)
-
 
 ### 配置 Jupyter 和使用 SSL
 在安装后，我们需要花一些时间来为 Jupyter 设置配置文件。如果你在配置 Jupyter 时遇到问题，查看[针对运行 Notebook 服务器的 Jupyter 文档](http://jupyter-notebook.readthedocs.org/en/latest/public_server.html)可能会有帮助。
@@ -189,7 +185,6 @@ Jupyter 不仅仅是字处理器，因为它允许混合计算和丰富媒体（
 
 * 用作协作计算的平台：多个用户可以登录到同一 notebook 服务器来共享实时计算会话。
 
-
 如果你转到 IPython 源代码[存储库][]，你将找到具有 notebook 示例的整个目录，你可以下载这些示例，然后在自己的 Azure Jupyter VM 上进行试用。只需从网站中下载 `.ipynb` 文件并将它们上载到你的 notebook Azure VM 的仪表板上（或将它们直接下载到 VM 中）。
 
 ## 结束语
@@ -202,7 +197,7 @@ Jupyter Notebook 为交互访问 Azure 上的 Python 生态系统的功能提供
 
 有关详细信息，请参阅 [Python 开发人员中心](/develop/python/)。
 
-[portal-vm-linux]: /documentation/articles/virtual-machines-linux-quick-create-portal/
+[portal-vm-linux]: ./virtual-machines-linux-quick-create-portal.md
 [存储库]: https://github.com/ipython/ipython
 [Python Tools for Visual Studio]: http://aka.ms/ptvs
 

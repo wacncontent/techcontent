@@ -1,33 +1,30 @@
-<properties
-   pageTitle="在 Linux 上设置开发环境 | Azure"
-   description="在 Linux 上安装运行时和 SDK 并创建本地开发群集。完成此设置后，你就可以开始生成应用程序。"
-   services="service-fabric"
-   documentationCenter=".net"
-   authors="seanmck"
-   manager="timlt"
-   editor=""/>  
+---
+title: 在 Linux 上设置开发环境 | Azure
+description: 在 Linux 上安装运行时和 SDK 并创建本地开发群集。完成此设置后，你就可以开始生成应用程序。
+services: service-fabric
+documentationCenter: .net
+authors: seanmck
+manager: timlt
+editor: 
 
-
-<tags
-   ms.service="service-fabric"
-   ms.devlang="dotNet"
-   ms.topic="get-started-article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="NA"
-   ms.date="09/26/2016"
-   wacn.date="11/28/2016"
-   ms.author="seanmck"/>  
-
+ms.service: service-fabric
+ms.devlang: dotNet
+ms.topic: get-started-article
+ms.tgt_pltfrm: NA
+ms.workload: NA
+ms.date: 09/26/2016
+wacn.date: 11/28/2016
+ms.author: seanmck
+---
 
 # 在 Linux 上准备开发环境
 
+> [!div class="op_single_selector"]
+-[ Windows](./service-fabric-get-started.md)
+- [Linux](./service-fabric-get-started-linux.md)
+- [OSX](./service-fabric-get-started-mac.md)
 
-> [AZURE.SELECTOR]
--[ Windows](/documentation/articles/service-fabric-get-started/)
-- [Linux](/documentation/articles/service-fabric-get-started-linux/)
-- [OSX](/documentation/articles/service-fabric-get-started-mac/)
-
- 若要在 Linux 开发计算机上部署和运行 [Azure Service Fabric 应用程序](/documentation/articles/service-fabric-application-model/)，请安装运行时和通用 SDK。还可以安装适用于 Java 和 .NET Core 的可选 SDK。
+ 若要在 Linux 开发计算机上部署和运行 [Azure Service Fabric 应用程序](./service-fabric-application-model.md)，请安装运行时和通用 SDK。还可以安装适用于 Java 和 .NET Core 的可选 SDK。
 
 ## 先决条件
 ### 支持的操作系统版本
@@ -119,7 +116,6 @@
 
     ![Linux 上的 Service Fabric Explorer][sfx-linux]  
 
-
 现在，可以根据来宾容器或来宾可执行文件，部署预先构建的 Service Fabric 应用程序包或新包。若要使用 Java 或 .NET Core SDK 构建新服务，请遵循以下可选设置步骤。
 
 ## 安装 Java SDK 和 Eclipse Neon 插件（可选）
@@ -150,7 +146,6 @@ Java SDK 提供所需的库和模板用于通过 Java 构建 Service Fabric 服�
 
     ![Eclipse 插件][sf-eclipse-plugin]  
 
-
 5. 选择 Service Fabric 插件，然后单击“下一步”。
 
 6. 继续安装，并接受最终用户许可协议。
@@ -173,20 +168,17 @@ Java SDK 提供所需的库和模板用于通过 Java 构建 Service Fabric 服�
 
 ## 后续步骤
 
-- [在 Linux 上创建第一个 Java 应用程序](/documentation/articles/service-fabric-create-your-first-linux-application-with-java/)
+- [在 Linux 上创建第一个 Java 应用程序](./service-fabric-create-your-first-linux-application-with-java.md)
 
-- [在 OSX 上准备开发环境](/documentation/articles/service-fabric-get-started-mac/)
-
+- [在 OSX 上准备开发环境](./service-fabric-get-started-mac.md)
 
 <!-- Links -->
-
 
 [azure-xplat-cli-github]: https://github.com/Azure/azure-xplat-cli
 [install-node]: https://nodejs.org/en/download/package-manager/#installing-node-js-via-package-manager
 [buildship-update]: https://projects.eclipse.org/projects/tools.buildship
 
 <!--Images -->
-
 
 [sf-eclipse-plugin]: ./media/service-fabric-get-started-linux/service-fabric-eclipse-plugin.png
 [sfx-linux]: ./media/service-fabric-get-started-linux/sfx-linux.png

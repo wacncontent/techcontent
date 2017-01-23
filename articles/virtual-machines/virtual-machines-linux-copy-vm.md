@@ -1,34 +1,33 @@
-<properties
-	pageTitle="创建 Azure Linux VM 的副本 | Azure"
-	description="了解如何在 Resource Manager 部署模型中创建 Azure Linux 虚拟机的副本"
-	services="virtual-machines-linux"
-	documentationCenter=""
-	authors="cynthn"
-	manager="timlt"
-	tags="azure-resource-manager"/>  
+---
+title: 创建 Azure Linux VM 的副本 | Azure
+description: 了解如何在 Resource Manager 部署模型中创建 Azure Linux 虚拟机的副本
+services: virtual-machines-linux
+documentationCenter: 
+authors: cynthn
+manager: timlt
+tags: azure-resource-manager
 
-
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="07/28/2016"
-	wacn.date="01/05/2017"
-	ms.author="cynthn"/>
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 07/28/2016
+wacn.date: 01/05/2017
+ms.author: cynthn
+---
 
 # 创建在 Azure 上运行的 Linux 虚拟机副本
 
 本文说明如何使用 Resource Manager 部署模型创建运行 Linux 的 Azure 虚拟机 (VM) 副本。首先，通过操作系统和数据磁盘复制到新容器，然后设置网络资源并创建新虚拟机。
 
-还可以[上载自定义磁盘映像并从中创建 VM](/documentation/articles/virtual-machines-linux-upload-vhd/)。
+还可以[上载自定义磁盘映像并从中创建 VM](./virtual-machines-linux-upload-vhd.md)。
 
 ## 开始之前
 
 在开始执行相关步骤前，请先确保符合以下先决条件：
 
-- 已在计算机上下载并安装 [Azure CLI](/documentation/articles/xplat-cli-install/)。
+- 已在计算机上下载并安装 [Azure CLI](../xplat-cli-install.md)。
 
 - 还需要准备好有关现有 Azure Linux VM 的一些信息：
 
@@ -103,6 +102,6 @@
 
 ## 后续步骤
 
-若要了解如何使用 Azure CLI 来管理新虚拟机，请参阅 [Azure CLI commands for the Azure Resource Manager](/documentation/articles/azure-cli-arm-commands/)（Azure Resource Manager 的 Azure CLI 命令）。
+若要了解如何使用 Azure CLI 来管理新虚拟机，请参阅 [Azure CLI commands for the Azure Resource Manager](./azure-cli-arm-commands.md)（Azure Resource Manager 的 Azure CLI 命令）。
 
 <!---HONumber=Mooncake_0829_2016-->

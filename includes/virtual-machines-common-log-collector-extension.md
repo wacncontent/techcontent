@@ -1,6 +1,7 @@
 
 若要诊断 Azure 云服务的问题，需要在问题发生时收集虚拟机上该服务的日志文件。可以使用 AzureLogCollector 按需扩展从一个或多个云服务 VM 执行一次性日志收集（通过 Web 角色和辅助角色），并将收集到的文件传输到 Azure 存储帐户 - 所有这些操作都无需远程登录到任何 VM。
-> [AZURE.NOTE]大多数日志信息的说明可以在 http://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.asp 中找到。
+> [!NOTE]
+>大多数日志信息的说明可以在 http://blogs.msdn.com/b/kwill/archive/2013/08/09/windows-azure-paas-compute-diagnostics-data.asp 中找到。
 
 有两种收集模式，其使用取决于要收集的文件的类型。
 - 仅 Azure 来宾代理日志 (GA)。此收集模式包括与 Azure 来宾代理以及其他 Azure 组件相关的所有日志。
@@ -70,7 +71,8 @@
 
     }
 
-> [AZURE.NOTE]此扩展不需要 **privateConfiguration**。你可以只为 **–PrivateConfiguration** 参数提供一个空的结构。
+> [!NOTE]
+>此扩展不需要 **privateConfiguration**。你可以只为 **–PrivateConfiguration** 参数提供一个空的结构。
 
 你可以遵循以下两个步骤之一，将 AzureLogCollector 添加到所选角色的云服务或虚拟机的一个或多个实例，以便在每个 VM 上触发收集操作，从而运行收集的文件并将其发送给指定的 Azure 帐户。
 
@@ -108,7 +110,8 @@
         $AdditionalDataList+= $a1
               #more locations can be added....
 
-    > [AZURE.NOTE] 你可以使用令牌 `%roleroot%` 来指定角色根驱动器，因为该角色不使用固定驱动器。
+    > [!NOTE]
+    > 你可以使用令牌 `%roleroot%` 来指定角色根驱动器，因为该角色不使用固定驱动器。
 
 4. 提供要向其上载所收集文件的 Azure 存储帐户名称和密钥。
 
@@ -172,7 +175,6 @@
       Bool 递归
       }
 
-
 ## 作为 VM 扩展添加
 
 按照说明将 Azure PowerShell 连接到订阅。
@@ -207,7 +209,6 @@
         $StorageAccountKey  = 'YouStorageAccountKey'
 
 3. 按如下所示调用 SetAzureVMLogCollector.ps1（本文末尾提供），以便为云服务启用 AzureLogCollector 扩展。执行完以后，你可以在 https://YouareStorageAccountName.blob.core.chinacloudapi.cn/vmlogs 下找到上载的文件
-
 
 下面是传递给脚本的参数的定义。（也在下面复制。）
 
@@ -363,9 +364,7 @@ SetAzureServiceLogCollector.ps1
     $SasUri = $SasUri + "&restype=container&comp=list"
     Write-Output "The container for uploaded file can be accessed using this link:`r`n$sasuri"
 
-
 SetAzureVMLogCollector.ps1
-
 
     [CmdletBinding(SupportsShouldProcess = $true)]
 

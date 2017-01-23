@@ -1,18 +1,16 @@
-<properties
-	pageTitle="从 Azure IoT 中心云到设备通信指南"
-	description="Azure IoT 中心开发人员指南 - 指导用户何时使用直接方法、设备孪生的所需属性或从云到设备的消息。"
-	services="iot-hub"
-	documentationcenter=""
-	author="fsautomata"
-	manager="timlt"
-	editor=""/>  
+---
+title: 从 Azure IoT 中心云到设备通信指南
+description: Azure IoT 中心开发人员指南 - 指导用户何时使用直接方法、设备孪生的所需属性或从云到设备的消息。
+services: iot-hub
+documentationcenter: 
+author: fsautomata
+manager: timlt
+editor: 
 
-
-<tags
-	ms.service="iot-hub"
-	ms.date="11/09/2016"
-	wacn.date="12/19/2016"/>  
-
+ms.service: iot-hub
+ms.date: 11/09/2016
+wacn.date: 12/19/2016
+---
 
 # 从云到设备通信指南
 IoT 中心提供三个选项，允许设备应用向后端公开功能：
@@ -39,14 +37,14 @@ IoT 中心提供三个选项，允许设备应用向后端公开功能：
 * [使用所需属性配置设备][lnk-twin-properties]：针对设备孪生的所需属性；
 * [发送从云到设备的消息][lnk-c2d-tutorial]：针对从云到设备的消息。
 
-[lnk-twins]: /documentation/articles/iot-hub-devguide-device-twins/
-[lnk-quotas]: /documentation/articles/iot-hub-devguide-quotas-throttling/
-[lnk-query]: /documentation/articles/iot-hub-devguide-query-language/
-[lnk-jobs]: /documentation/articles/iot-hub-devguide-jobs/
-[lnk-c2d]: /documentation/articles/iot-hub-devguide-messaging/#cloud-to-device-messages
-[lnk-methods]: /documentation/articles/iot-hub-devguide-direct-methods/
-[lnk-methods-tutorial]: /documentation/articles/iot-hub-node-node-direct-methods/
-[lnk-twin-properties]: /documentation/articles/iot-hub-node-node-twin-how-to-configure/
-[lnk-c2d-tutorial]: /documentation/articles/iot-hub-node-node-c2d/
+[lnk-twins]: ./iot-hub-devguide-device-twins.md
+[lnk-quotas]: ./iot-hub-devguide-quotas-throttling.md
+[lnk-query]: ./iot-hub-devguide-query-language.md
+[lnk-jobs]: ./iot-hub-devguide-jobs.md
+[lnk-c2d]: ./iot-hub-devguide-messaging.md#cloud-to-device-messages
+[lnk-methods]: ./iot-hub-devguide-direct-methods.md
+[lnk-methods-tutorial]: ./iot-hub-node-node-direct-methods.md
+[lnk-twin-properties]: ./iot-hub-node-node-twin-how-to-configure.md
+[lnk-c2d-tutorial]: ./iot-hub-node-node-c2d.md
 
 <!---HONumber=Mooncake_1212_2016-->

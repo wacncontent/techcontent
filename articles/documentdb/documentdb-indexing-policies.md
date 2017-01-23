@@ -1,27 +1,26 @@
-<properties
-    pageTitle="DocumentDB 索引策略 | Azure"
-    description="了解 DocumentDB 中的索引工作原理以及如何配置与更改索引策略。在 DocumentDB 中配置索引策略，实现自动索引并提高性能。"
-    keywords="索引的工作原理, 自动索引, 索引数据库, documentdb, azure, Azure"
-    services="documentdb"
-    documentationcenter=""
-    author="arramac"
-    manager="jhubbard"
-    editor="monicar" />  
+---
+title: DocumentDB 索引策略 | Azure
+description: 了解 DocumentDB 中的索引工作原理以及如何配置与更改索引策略。在 DocumentDB 中配置索引策略，实现自动索引并提高性能。
+keywords: 索引的工作原理, 自动索引, 索引数据库, documentdb, azure, Azure
+services: documentdb
+documentationcenter: 
+author: arramac
+manager: jhubbard
+editor: monicar
 
-<tags
-    ms.assetid="d5e8f338-605d-4dff-8a61-7505d5fc46d7"
-    ms.service="documentdb"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="data-services"
-    ms.date="11/11/2016"
-    wacn.date="12/27/2016"
-    ms.author="arramac" />  
-
+ms.assetid: d5e8f338-605d-4dff-8a61-7505d5fc46d7
+ms.service: documentdb
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-services
+ms.date: 11/11/2016
+wacn.date: 12/27/2016
+ms.author: arramac
+---
 
 # DocumentDB 索引策略
-尽管许多客户都愿意让 Azure DocumentDB 自动处理[索引的方方面面](/documentation/articles/documentdb-indexing/)，但 DocumentDB 还支持在创建过程中为集合指定自定义**索引策略**。与其他数据库平台中提供的辅助索引相比，DocumentDB 中的索引策略更加灵活且功能强大，因为它允许你设计和自定义索引形状，而无需牺牲架构的灵活性。若要了解 DocumentDB 中的索引工作原理，就必须通过管理索引策略来了解它，你可以在索引存储开销、写入和查询吞吐量以及查询一致性之间进行详细权衡。
+尽管许多客户都愿意让 Azure DocumentDB 自动处理[索引的方方面面](./documentdb-indexing.md)，但 DocumentDB 还支持在创建过程中为集合指定自定义**索引策略**。与其他数据库平台中提供的辅助索引相比，DocumentDB 中的索引策略更加灵活且功能强大，因为它允许你设计和自定义索引形状，而无需牺牲架构的灵活性。若要了解 DocumentDB 中的索引工作原理，就必须通过管理索引策略来了解它，你可以在索引存储开销、写入和查询吞吐量以及查询一致性之间进行详细权衡。
 
 在本文中，我们将仔细研究 DocumentDB 索引策略、自定义索引策略的方法和相关的权衡方案。
 
@@ -49,8 +48,8 @@
 
     await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), collection);   
 
-
->[AZURE.NOTE] REST API 2015-06-03 版本更改了索引策略的 JSON 架构，以支持针对字符串的范围索引。.NET SDK 1.2.0 和 Java、Python 和 Node.js SDK 1.1.0 支持新策略架构。旧 SDK 使用 REST API 2015-04-08 版本，支持旧的索引策略架构。
+>[!NOTE]
+> REST API 2015-06-03 版本更改了索引策略的 JSON 架构，以支持针对字符串的范围索引。.NET SDK 1.2.0 和 Java、Python 和 Node.js SDK 1.1.0 支持新策略架构。旧 SDK 使用 REST API 2015-04-08 版本，支持旧的索引策略架构。
 >
 >默认情况下，DocumentDB 总是使用哈希索引对文档中的所有字符串属性执行索引，并使用范围索引对数值属性执行索引。
 
@@ -63,7 +62,8 @@ DocumentDB 支持三种索引模式，可通过索引策略对 DocumentDB 集合
 
 **无**︰索引模式标记为“无”的集合没有与之关联的索引。如果 DocumentDB 用作键值存储，并且只通过其 ID 属性访问文档，则通常使用该模式。
 
->[AZURE.NOTE] 将索引策略配置为“无”时，删除任何现有索引会产生不良影响。如果你的访问模式只需要 ID 和/或“自助链接”，请使用此选项。
+>[!NOTE]
+> 将索引策略配置为“无”时，删除任何现有索引会产生不良影响。如果你的访问模式只需要 ID 和/或“自助链接”，请使用此选项。
 
 下面的示例演示了如何使用 .NET SDK 借助针对所有文档插入的一致自动索引创建 DocumentDB 集合。
 
@@ -99,9 +99,8 @@ DocumentDB 返回在“无”索引模式下对集合进行查询的错误。查
 
      collection = await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("mydb"), collection);
 
-
 ### 索引路径
-DocumentDB 将 JSON 文档和索引建立为树形，从而可以针对树中的路径调整策略。可以在此 [DocumentDB 索引简介](/documentation/articles/documentdb-indexing/)中找到更多详细信息。在这些文档中，你可以选择必须包括在索引中或从索引中排除的路径。如果事先已知查询模式，这可以提高写入性能并减少方案所需的索引存储。
+DocumentDB 将 JSON 文档和索引建立为树形，从而可以针对树中的路径调整策略。可以在此 [DocumentDB 索引简介](./documentdb-indexing.md)中找到更多详细信息。在这些文档中，你可以选择必须包括在索引中或从索引中排除的路径。如果事先已知查询模式，这可以提高写入性能并减少方案所需的索引存储。
 
 索引路径以根 (/) 开头，通常以通配符“?”结尾，表示前缀有多个可能值。例如，对于 SELECT * FROM Families F WHERE F.familyName = "Andersen"，必须在集合的索引策略中包含 /familyName/? 的索引路径。
 
@@ -118,7 +117,7 @@ DocumentDB 将 JSON 文档和索引建立为树形，从而可以针对树中的
 | /props//subprop/? | 对对象数组（如 [{subprop: "a"}, {subprop: "b"}]）进行迭代和 JOIN 查询所需的索引路径：<br><br>SELECT tag FROM tag IN collection.props WHERE tag.subprop = "value"<br><br>SELECT tag FROM collection c JOIN tag IN c.props WHERE tag.subprop = "value" |
 | /prop/subprop/? | 所需的用于查询的索引路径（分别为哈希或范围类型）：<br><br>SELECT FROM collection c WHERE c.prop.subprop = "value"<br><br>SELECT FROM collection c WHERE c.prop.subprop > 5 |
 
-> [AZURE.NOTE]
+> [!NOTE]
 在设置自定义索引路径时，需要为由特殊路径“/*”表示的整个文档树指定默认索引规则。
 > 
 > 
@@ -146,7 +145,6 @@ DocumentDB 将 JSON 文档和索引建立为树形，从而可以针对树中的
 
     collection = await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), pathRange);
 
-
 ### 索引数据类型、种类和精度
 现在，我们已经介绍了如何指定路径，让我们来讨论配置路径的索引策略时可以使用的选项。可以为每个路径指定一个或多个索引定义︰
 
@@ -164,7 +162,7 @@ DocumentDB 还支持每个路径的空间索引种类，可为点、多边形或
 
 - **空间**支持高效的空间（在其中和距离）查询。DataType 可以是 Point、Polygon 或 LineString。
 
-> [AZURE.NOTE]
+> [!NOTE]
 DocumentDB 支持点、多边形和 LineString 的自动索引。
 > 
 > 
@@ -199,8 +197,8 @@ DocumentDB 支持点、多边形和 LineString 的自动索引。
 
     await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), rangeDefault);   
 
-
-> [AZURE.NOTE] 当查询使用 Order By，但针对最大精度的查询路径没有范围索引时，DocumentDB 将返回错误。
+> [!NOTE]
+> 当查询使用 Order By，但针对最大精度的查询路径没有范围索引时，DocumentDB 将返回错误。
 
 同样，可以从索引中完全排除路径。下面的示例演示了如何使用“*”通配符从索引中排除文档的整个部分（也称为子树）。
 
@@ -209,8 +207,6 @@ DocumentDB 支持点、多边形和 LineString 的自动索引。
     collection.IndexingPolicy.ExcludedPaths.Add(new ExcludedPath { Path = "/nonIndexedContent/*");
 
     collection = await client.CreateDocumentCollectionAsync(UriFactory.CreateDatabaseUri("db"), excluded);
-
-
 
 ## 选择包括在索引中和从索引中排除
 可以选择是否让集合自动为所有文档执行索引。默认情况下，为所有文档自动执行索引，但你可以选择关闭该功能。关闭索引功能后，只能通过本身的链接或通过使用 ID 进行查询的方法访问文档。
@@ -233,7 +229,6 @@ DocumentDB 允许你动态更改集合的索引策略。更改 DocumentDB 集合
 **联机索引转换**
 
 ![索引的工作原理 — DocumentDB 联机索引转换](./media/documentdb-indexing-policies/index-transformations.png)  
-
 
 在联机状态下执行索引转换，这意味着按照旧策略索引的文档可以按照新策略有效转换，**而不会影响集合的写入可用性或预配的吞吐量**。在索引转换过程中，使用 REST API、SDK 或在存储的过程和触发器中执行读取和写入操作的一致性不会受到影响。这就意味着，在更改索引策略时，你的应用程序的性能不会下降，也没有停机时间。
 
@@ -260,7 +255,6 @@ DocumentDB 允许你动态更改集合的索引策略。更改 DocumentDB 集合
     collection.IndexingPolicy.IndexingMode = IndexingMode.Lazy;
 
     await client.ReplaceDocumentCollectionAsync(collection);
-
 
 可以通过调用 ReadDocumentCollectionAsync 来查看索引转换的进度，例如下图所示。
 
@@ -297,7 +291,8 @@ DocumentDB 允许你动态更改集合的索引策略。更改 DocumentDB 集合
 - 手动选择要编制索引的属性，并随着时间的推移进行更改
 - 调整索引精度，以提高查询性能或减少占用的存储
 
->[AZURE.NOTE] 若要使用 ReplaceDocumentCollectionAsync 修改索引策略，要求安装不低于 1.3.0 版本的 .NET SDK。
+>[!NOTE]
+> 若要使用 ReplaceDocumentCollectionAsync 修改索引策略，要求安装不低于 1.3.0 版本的 .NET SDK。
 >
 > 要成功完成索引转换，必须确保集合有足够的可用存储空间。如果集合达到其存储配额，将暂停索引转换。获得可用的存储空间后（例如删除某些文档），索引转换将立即自动恢复。
 
@@ -310,7 +305,6 @@ DocumentDB API 提供有关性能指标的信息，如所用的索引存储以�
      // different policies.
      ResourceResponse<DocumentCollection> collectionInfo = await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri("db", "coll"));  
      Console.WriteLine("Document size quota: {0}, usage: {1}", collectionInfo.DocumentQuota, collectionInfo.DocumentUsage);
-
 
 若要度量每个写入操作（创建、更新或删除）执行索引的开销，请检查 x-ms-request-charge header 标头（或 .NET SDK 中 [ResourceResponse<T>](http://msdn.microsoft.com/zh-cn/library/dn799209.aspx) 的等效 [RequestCharge](http://msdn.microsoft.com/zh-cn/library/dn799099.aspx) 属性）来度量这些操作占用的请求单位数。
 
@@ -398,6 +392,6 @@ JSON 规范中实现了以下更改︰
 
 1. [DocumentDB .NET 索引管理代码示例](https://github.com/Azure/azure-documentdb-net/blob/master/samples/code-samples/IndexManagement/Program.cs)
 2. [DocumentDB REST API 集合操作](https://msdn.microsoft.com/zh-cn/library/azure/dn782195.aspx)
-3. [使用 DocumentDB SQL 进行查询](/documentation/articles/documentdb-sql-query/)
+3. [使用 DocumentDB SQL 进行查询](./documentdb-sql-query.md)
 
 <!---HONumber=Mooncake_1219_2016-->

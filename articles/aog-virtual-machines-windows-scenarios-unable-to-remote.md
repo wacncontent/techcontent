@@ -1,12 +1,16 @@
-<properties 
-	pageTitle="Azure Windows虚拟机常见导致无法远程的操作" 
-	description="对Azure虚拟机的一些操作可能会导致无法远程连接，本文罗列了常见的几种场景。" 
-	services="virtual machine" 
-	documentationCenter="" 
-	authors=""
-	manager="" 
-	editor=""/>
-<tags ms.service="virtual-machines-aog" ms.date="" wacn.date="07/26/2016"/>
+---
+title: Azure Windows虚拟机常见导致无法远程的操作
+description: 对Azure虚拟机的一些操作可能会导致无法远程连接，本文罗列了常见的几种场景。
+services: virtual machine
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+
+ms.service: virtual-machines-aog
+ms.date: 
+wacn.date: 07/26/2016
+---
 
 # Azure Windows 虚拟机常见导致无法远程的操作
 
@@ -20,17 +24,16 @@
 - [场景6 - 用户账户过期](#scenario06)
 - [场景7 - 使用三方软件误修改RDP侦听端口](#scenario07)
 
-
 ##<a id="scenario01"></a>场景1
 在虚拟机的网卡配置中配置IP地址或MAC地址，导致重新启动后，虚拟机可能无法远程连接。
- 
+
 ![](./media/aog-virtual-machines-windows-scenarios-unable-to-remote/scenario-01-01.png) 
  
 ![](./media/aog-virtual-machines-windows-scenarios-unable-to-remote/scenario-01-02.png) 
 
 ##<a id="scenario02"></a>场景2
 虚拟机启用了Remote Desktop Licensing（远程桌面授权）功能，试用期120天到期后，虚拟机无法正常RDP。
- 
+
 ![](./media/aog-virtual-machines-windows-scenarios-unable-to-remote/scenario-02-01.png) 
 
 这个功能安装后，可以允许多于2个用户同时访问Windows Server，但是这个是付费功能，默认有120天的试用期，试用期到期后，会遇到无法正常RDP到虚拟机的问题。关于更多详细内容请参考[这篇文章](https://technet.microsoft.com/zh-cn/library/cc725933%28v=ws.11%29.aspx?f=255&MSPPError=-2147217396)。
@@ -75,14 +78,14 @@
 解决此类问题的方法：
 首先通过Powershell（5986端口）连接到服务器中：
 
-	Enter-Pssession -ComputerName [VM's VIP] -port [The Port of PowerShell] -Authentication Negotiate -Credential [Username] -UseSSL -SessionOption (New-PSSessionOption -SkipCACheck -SkipCNCheck)
+    Enter-Pssession -ComputerName [VM's VIP] -port [The Port of PowerShell] -Authentication Negotiate -Credential [Username] -UseSSL -SessionOption (New-PSSessionOption -SkipCACheck -SkipCNCheck)
 
 连接成功后，使用`tasklist /svc`查看TermService的PID：
- 
+
 ![](./media/aog-virtual-machines-windows-scenarios-unable-to-remote/scenario-07-01.png)  
 
 使用`netstat -ano`查看TermService侦听的端口：
 
 ![](./media/aog-virtual-machines-windows-scenarios-unable-to-remote/scenario-07-02.png)  
- 
+
 如果发现是非3389端口，则在终结点（Endpoint）处将RDP的本地端口（Local Port）修改为对应端口号即可。

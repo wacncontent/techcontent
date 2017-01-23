@@ -1,22 +1,21 @@
-<properties
- pageTitle="Azure IoT 中心概述 | Azure"
- description="Azure IoT 中心服务概述：什么是 IoT 中心、设备连接、物联网通信模式和服务辅助通信模式"
- services="iot-hub"
- documentationCenter=""
- authors="dominicbetts"
- manager="timlt"
- editor=""/>  
+---
+title: Azure IoT 中心概述 | Azure
+description: Azure IoT 中心服务概述：什么是 IoT 中心、设备连接、物联网通信模式和服务辅助通信模式
+services: iot-hub
+documentationCenter: 
+authors: dominicbetts
+manager: timlt
+editor: 
 
-<tags
- ms.service="iot-hub"
- ms.devlang="na"
- ms.topic="get-started-article"
- ms.tgt_pltfrm="na"
- ms.workload="na"
- ms.date="08/25/2016"
- wacn.date="01/04/2017"
- ms.author="dobett"/>  
-
+ms.service: iot-hub
+ms.devlang: na
+ms.topic: get-started-article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 08/25/2016
+wacn.date: 01/04/2017
+ms.author: dobett
+---
 
 # Azure IoT 中心是什么？
 
@@ -31,8 +30,8 @@
 
 ![在物联网解决方案中充当云网关的 Azure IoT 中心][img-architecture]  
 
-
-> [AZURE.NOTE] 有关 IoT 体系结构的深入讨论，请参阅 [Azure IoT Reference Architecture][lnk-refarch]（Azure IoT 参考体系结构）。
+> [!NOTE]
+> 有关 IoT 体系结构的深入讨论，请参阅 [Azure IoT Reference Architecture][lnk-refarch]（Azure IoT 参考体系结构）。
 
 ## IoT 设备连接性挑战
 
@@ -96,28 +95,26 @@ Azure IoT 中心会实现[服务辅助通信][lnk-service-assisted-pattern]模�
 
 ## 后续步骤
 
-
 你可以使用 IoT 设备 SDK 在各种设备硬件平台和操作系统上实现客户端应用程序。IoT 设备 SDK 包含库，可协助将遥测数据发送到 IoT 中心，并接收云到设备的命令。使用 SDK 时，提供各种网络协议可与 IoT 中心进行通信。若要了解详细信息，请参阅[设备 SDK 的相关信息][lnk-device-sdks]。
 
 若要开始编写一些代码并运行一些示例，请参阅 [IoT 中心入门][lnk-get-started]教程。
 
 [img-architecture]: ./media/iot-hub-what-is-iot-hub/hubarchitecture.png
 
-
-[lnk-get-started]: /documentation/articles/iot-hub-csharp-csharp-getstarted/
+[lnk-get-started]: ./iot-hub-csharp-csharp-getstarted.md
 [protocol-gateway]: https://github.com/Azure/azure-iot-protocol-gateway/blob/master/README.md
 [lnk-service-assisted-pattern]: http://blogs.msdn.com/b/clemensv/archive/2014/02/10/service-assisted-communication-for-connected-devices.aspx "服务辅助通信，博客作者 Clemens Vasters"
-[lnk-compare]: /documentation/articles/iot-hub-compare-event-hubs/
-[lnk-gateway]: /documentation/articles/iot-hub-protocol-gateway/
-[lnk-field-gateway]: /documentation/articles/iot-hub-devguide-endpoints/#field-gateways
-[lnk-devguide-identityregistry]: /documentation/articles/iot-hub-devguide-identity-registry/
-[lnk-devguide-security]: /documentation/articles/iot-hub-devguide/#security
+[lnk-compare]: ./iot-hub-compare-event-hubs.md
+[lnk-gateway]: ./iot-hub-protocol-gateway.md
+[lnk-field-gateway]: ./iot-hub-devguide-endpoints.md#field-gateways
+[lnk-devguide-identityregistry]: ./iot-hub-devguide-identity-registry.md
+[lnk-devguide-security]: ./iot-hub-devguide.md#security
 [lnk-wns]: https://msdn.microsoft.com/zh-cn/library/windows/apps/mt187203.aspx
 [lnk-google-messaging]: https://developers.google.com/cloud-messaging/
 
 [lnk-device-sdks]: https://github.com/Azure/azure-iot-sdks
 [lnk-refarch]: http://download.microsoft.com/download/A/4/D/A4DAD253-BC21-41D3-B9D9-87D2AE6F0719/Microsoft_Azure_IoT_Reference_Architecture.pdf
 [lnk-gateway-sdk]: https://github.com/Azure/azure-iot-gateway-sdk
-[lnk-device-management]: /documentation/articles/iot-hub-device-management-overview/
+[lnk-device-management]: ./iot-hub-device-management-overview.md
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

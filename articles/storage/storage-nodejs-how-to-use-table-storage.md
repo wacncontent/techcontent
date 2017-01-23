@@ -1,38 +1,38 @@
-<properties
-    pageTitle="如何通过 Node.js 使用 Azure 表存储 | Azure"
-    description="使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。"
-    services="storage"
-    documentationcenter="nodejs"
-    author="mmacy"
-    manager="timlt"
-    editor="tysonn" />
-<tags
-    ms.assetid="fc2e33d2-c5da-4861-8503-53fdc25750de"
-    ms.service="storage"
-    ms.workload="storage"
-    ms.tgt_pltfrm="na"
-    ms.devlang="nodejs"
-    ms.topic="article"
-    ms.date="12/08/2016"
-    wacn.date="01/06/2017"
-    ms.author="marsma" />
+---
+title: 如何通过 Node.js 使用 Azure 表存储 | Azure
+description: 使用 Azure 表存储（一种 NoSQL 数据存储）将结构化数据存储在云中。
+services: storage
+documentationcenter: nodejs
+author: mmacy
+manager: timlt
+editor: tysonn
+
+ms.assetid: fc2e33d2-c5da-4861-8503-53fdc25750de
+ms.service: storage
+ms.workload: storage
+ms.tgt_pltfrm: na
+ms.devlang: nodejs
+ms.topic: article
+ms.date: 12/08/2016
+wacn.date: 01/06/2017
+ms.author: marsma
+---
 
 # 如何通过 Node.js 使用 Azure 表存储
-[AZURE.INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
-
+[!INCLUDE [storage-selector-table-include](../../includes/storage-selector-table-include.md)]
 
 ## 概述
 本主题将演示如何使用 Node.js 应用程序中的 Azure 表服务执行常见方案。
 
 本主题中的代码示例假定用户已拥有 Node.js 应用程序。有关如何在 Azure 中创建 Node.js 应用程序的信息，请参阅以下任何主题：
 
-- [在 Azure App Service 中创建 Node.js Web 应用](/documentation/articles/web-sites-nodejs-develop-deploy-mac/)
-- [使用 WebMatrix 构建 Node.js Web 应用并将其部署到 Azure](/documentation/articles/web-sites-nodejs-use-webmatrix/)
-- [生成 Node.js 应用程序并将其部署到 Azure 云服务](/documentation/articles/cloud-services-nodejs-develop-deploy-app/)（使用 Windows PowerShell）
+- [在 Azure App Service 中创建 Node.js Web 应用](../app-service-web/web-sites-nodejs-develop-deploy-mac.md)
+- [使用 WebMatrix 构建 Node.js Web 应用并将其部署到 Azure](../app-service-web/web-sites-nodejs-use-webmatrix.md)
+- [生成 Node.js 应用程序并将其部署到 Azure 云服务](../cloud-services/cloud-services-nodejs-develop-deploy-app.md)（使用 Windows PowerShell）
 
-[AZURE.INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
+[!INCLUDE [storage-table-concepts-include](../../includes/storage-table-concepts-include.md)]
 
-[AZURE.INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
+[!INCLUDE [storage-create-account-include](../../includes/storage-create-account-include.md)]
 
 ## 创建用于访问 Azure 存储的应用程序
 若要使用 Azure 存储，需要 Azure Storage SDK for Node.js，其中包括一组便于与存储 REST 服务进行通信的库。
@@ -41,23 +41,23 @@
 1. 使用 **PowerShell** (Windows)、**Terminal** (Mac) 或 **Bash** (Unix) 等命令行接口导航到在其中创建了应用程序的文件夹。
 2. 在命令窗口中键入 **npm install azure-storage**。该命令的输出类似于以下示例。
 
-		azure-storage@0.5.0 node_modules\azure-storage
-		+-- extend@1.2.1
-		+-- xmlbuilder@0.4.3
-		+-- mime@1.2.11
-		+-- node-uuid@1.4.3
-		+-- validator@3.22.2
-		+-- underscore@1.4.4
-		+-- readable-stream@1.0.33 (string_decoder@0.10.31, isarray@0.0.1, inherits@2.0.1, core-util-is@1.0.1)
-		+-- xml2js@0.2.7 (sax@0.5.2)
-		+-- request@2.57.0 (caseless@0.10.0, aws-sign2@0.5.0, forever-agent@0.6.1, stringstream@0.0.4, oauth-sign@0.8.0, tunnel-agent@0.4.1, isstream@0.1.2, json-stringify-safe@5.0.1, bl@0.9.4, combined-stream@1.0.5, qs@3.1.0, mime-types@2.0.14, form-data@0.2.0, http-signature@0.11.0, tough-cookie@2.0.0, hawk@2.3.1, har-validator@1.8.0)
+        azure-storage@0.5.0 node_modules\azure-storage
+        +-- extend@1.2.1
+        +-- xmlbuilder@0.4.3
+        +-- mime@1.2.11
+        +-- node-uuid@1.4.3
+        +-- validator@3.22.2
+        +-- underscore@1.4.4
+        +-- readable-stream@1.0.33 (string_decoder@0.10.31, isarray@0.0.1, inherits@2.0.1, core-util-is@1.0.1)
+        +-- xml2js@0.2.7 (sax@0.5.2)
+        +-- request@2.57.0 (caseless@0.10.0, aws-sign2@0.5.0, forever-agent@0.6.1, stringstream@0.0.4, oauth-sign@0.8.0, tunnel-agent@0.4.1, isstream@0.1.2, json-stringify-safe@5.0.1, bl@0.9.4, combined-stream@1.0.5, qs@3.1.0, mime-types@2.0.14, form-data@0.2.0, http-signature@0.11.0, tough-cookie@2.0.0, hawk@2.3.1, har-validator@1.8.0)
 
 3.  可以手动运行 **ls** 命令来验证是否创建了 **node_modules** 文件夹。在该文件夹中将找到 **azure-storage** 包，其中包含访问存储所需的库。
 
 ### 导入包
 将以下代码添加到应用程序中的 **server.js** 文件的顶部：
 
-	var azure = require('azure-storage');
+    var azure = require('azure-storage');
 
 ## 设置 Azure 存储连接
 Azure 模块将读取环境变量 AZURE\_STORAGE\_ACCOUNT 和 AZURE\_STORAGE\_ACCESS\_KEY 或 AZURE\_STORAGE\_CONNECTION\_STRING 以获取连接到 Azure 存储帐户所需的信息。如果未设置这些环境变量，则必须在调用 **TableService** 时指定帐户信息。
@@ -67,33 +67,33 @@ Azure 模块将读取环境变量 AZURE\_STORAGE\_ACCOUNT 和 AZURE\_STORAGE\_AC
 ## 创建表
 下面的代码创建 **TableService** 对象并使用它来创建一个新表。将以下代码添加到 **server.js** 的顶部附近。
 
-	var tableSvc = azure.createTableService();
+    var tableSvc = azure.createTableService();
 
 调用 **createTableIfNotExists** 将创建具有指定名称的一个新表（如果该表尚不存在）。下面的示例将创建一个名为“mytable”的新表（如果该表尚不存在）：
 
-	tableSvc.createTableIfNotExists('mytable', function(error, result, response){
-	  if(!error){
-	    // Table exists or created
-	  }
-	});
+    tableSvc.createTableIfNotExists('mytable', function(error, result, response){
+      if(!error){
+        // Table exists or created
+      }
+    });
 
 如果创建了新表，`result.created` 将为 `true`，如果表已存在，则为 `false`。`response` 将包含有关该请求的信息。
 
 ### 筛选器
 可选的筛选操作可应用于使用 **TableService** 执行的操作。筛选操作可包括日志记录、自动重试等。筛选器是实现具有签名的方法的对象：
 
-	function handle (requestOptions, next)
+    function handle (requestOptions, next)
 
 在对请求选项执行预处理后，该方法需要调用“next”并且传递具有以下签名的回调：
 
-	function (returnObject, finalCallback, next)
+    function (returnObject, finalCallback, next)
 
 在此回调中并且在处理 returnObject（来自对服务器请求的响应）后，回调需要调用 next（如果它已存在）以继续处理其他筛选器或只调用 finalCallback 以便结束服务调用。
 
 Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别是 **ExponentialRetryPolicyFilter** 和 **LinearRetryPolicyFilter**。以下代码将创建使用 **ExponentialRetryPolicyFilter** 的 **TableService** 对象:
 
-	var retryOperations = new azure.ExponentialRetryPolicyFilter();
-	var tableSvc = azure.createTableService().withFilter(retryOperations);
+    var retryOperations = new azure.ExponentialRetryPolicyFilter();
+    var tableSvc = azure.createTableService().withFilter(retryOperations);
 
 ## 将实体添加到表
 若要添加实体，首先创建定义实体属性的对象。所有实体都必须都包含 **PartitionKey** 和 **RowKey**，它们是实体的唯一标识符。
@@ -105,40 +105,42 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 下面是如何定义实体的示例。请注意，**dueDate** 被定义为一种类型的 **Edm.DateTime**。可以选择指定类型。如果未指定类型，系统会进行推断。
 
-	var task = {
-	  PartitionKey: {'_':'hometasks'},
-	  RowKey: {'_': '1'},
-	  description: {'_':'take out the trash'},
-	  dueDate: {'_':new Date(2015, 6, 20), '$':'Edm.DateTime'}
-	};
+    var task = {
+      PartitionKey: {'_':'hometasks'},
+      RowKey: {'_': '1'},
+      description: {'_':'take out the trash'},
+      dueDate: {'_':new Date(2015, 6, 20), '$':'Edm.DateTime'}
+    };
 
-> [AZURE.NOTE] 每个记录还有一个“时间戳”字段，在插入或更新实体时，Azure 会设置该字段。
+> [!NOTE]
+> 每个记录还有一个“时间戳”字段，在插入或更新实体时，Azure 会设置该字段。
 
 还可以使用 **entityGenerator** 来创建实体。下面的示例使用 **entityGenerator** 来创建相同的任务实体。
 
-	var entGen = azure.TableUtilities.entityGenerator;
-	var task = {
-	  PartitionKey: entGen.String('hometasks'),
-	  RowKey: entGen.String('1'),
-	  description: entGen.String('take out the trash'),
-	  dueDate: entGen.DateTime(new Date(Date.UTC(2015, 6, 20))),
-	};
+    var entGen = azure.TableUtilities.entityGenerator;
+    var task = {
+      PartitionKey: entGen.String('hometasks'),
+      RowKey: entGen.String('1'),
+      description: entGen.String('take out the trash'),
+      dueDate: entGen.DateTime(new Date(Date.UTC(2015, 6, 20))),
+    };
 
 要将实体添加到表中，应将实体对象传递给 **insertEntity** 方法。
 
-	tableSvc.insertEntity('mytable',task, function (error, result, response) {
-	  if(!error){
-	    // Entity inserted
-	  }
-	});
+    tableSvc.insertEntity('mytable',task, function (error, result, response) {
+      if(!error){
+        // Entity inserted
+      }
+    });
 
 如果操作成功，`result` 将包含插入的记录的 [ETag](http://zh.wikipedia.org/wiki/HTTP_ETag)，而 `response` 将包含有关操作的信息。
 
 示例响应:
 
-	{ '.metadata': { etag: 'W/"datetime\'2015-02-25T01%3A22%3A22.5Z\'"' } }
+    { '.metadata': { etag: 'W/"datetime\'2015-02-25T01%3A22%3A22.5Z\'"' } }
 
-> [AZURE.NOTE] 默认情况下，**insertEntity** 不会在 `response` 信息中返回插入的实体。如果计划对此实体执行其他操作，或者希望对信息进行缓存，则可在 `result` 中返回该实体。可以通过启用 **echoContent** 来执行此操作，如下所示：
+> [!NOTE]
+> 默认情况下，**insertEntity** 不会在 `response` 信息中返回插入的实体。如果计划对此实体执行其他操作，或者希望对信息进行缓存，则可在 `result` 中返回该实体。可以通过启用 **echoContent** 来执行此操作，如下所示：
 >
 > `tableSvc.insertEntity('mytable', task, {echoContent: true}, function (error, result, response) {...}`
 
@@ -153,13 +155,14 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 以下示例演示了使用 **replaceEntity** 更新实体：
 
-	tableSvc.replaceEntity('mytable', updatedTask, function(error, result, response){
-	  if(!error) {
-	    // Entity updated
-	  }
-	});
+    tableSvc.replaceEntity('mytable', updatedTask, function(error, result, response){
+      if(!error) {
+        // Entity updated
+      }
+    });
 
-> [AZURE.NOTE] 默认情况下，更新某个实体时，不会查看要更新的数据是否曾被其他进程更新过。若要支持并发更新，请执行以下步骤：
+> [!NOTE]
+> 默认情况下，更新某个实体时，不会查看要更新的数据是否曾被其他进程更新过。若要支持并发更新，请执行以下步骤：
 >
 > 1. 获取要更新的对象的 ETag。对于任何实体相关操作，该 ETag 将在 `response` 中返回，并且可通过 `response['.metadata'].etag` 检索。
 > 2. 对某个实体执行更新操作时，请将以前检索的 ETag 信息添加到新的实体。例如：
@@ -177,29 +180,29 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
  下面的示例演示了在一个批次中提交两个实体：
 
-	var task1 = {
-	  PartitionKey: {'_':'hometasks'},
-	  RowKey: {'_': '1'},
-	  description: {'_':'Take out the trash'},
-	  dueDate: {'_':new Date(2015, 6, 20)}
-	};
-	var task2 = {
-	  PartitionKey: {'_':'hometasks'},
-	  RowKey: {'_': '2'},
-	  description: {'_':'Wash the dishes'},
-	  dueDate: {'_':new Date(2015, 6, 20)}
-	};
+    var task1 = {
+      PartitionKey: {'_':'hometasks'},
+      RowKey: {'_': '1'},
+      description: {'_':'Take out the trash'},
+      dueDate: {'_':new Date(2015, 6, 20)}
+    };
+    var task2 = {
+      PartitionKey: {'_':'hometasks'},
+      RowKey: {'_': '2'},
+      description: {'_':'Wash the dishes'},
+      dueDate: {'_':new Date(2015, 6, 20)}
+    };
 
-	var batch = new azure.TableBatch();
+    var batch = new azure.TableBatch();
 
-	batch.insertEntity(task1, {echoContent: true});
-	batch.insertEntity(task2, {echoContent: true});
+    batch.insertEntity(task1, {echoContent: true});
+    batch.insertEntity(task2, {echoContent: true});
 
-	tableSvc.executeBatch('mytable', batch, function (error, result, response) {
-	  if(!error) {
-	    // Batch completed
-	  }
-	});
+    tableSvc.executeBatch('mytable', batch, function (error, result, response) {
+      if(!error) {
+        // Batch completed
+      }
+    });
 
 对于成功的批处理操作，`result` 将包含批处理中每个操作的信息。
 
@@ -215,11 +218,11 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 ## 通过键检索实体
 如果想要返回基于 **PartitionKey** 和 **RowKey** 的特定实体，请使用 **retrieveEntity** 方法。
 
-	tableSvc.retrieveEntity('mytable', 'hometasks', '1', function(error, result, response){
-	  if(!error){
-	    // result contains the entity
-	  }
-	});
+    tableSvc.retrieveEntity('mytable', 'hometasks', '1', function(error, result, response){
+      if(!error){
+        // result contains the entity
+      }
+    });
 
 此操作完成后，`result` 将包含该实体。
 
@@ -235,52 +238,53 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 以下示例生成的查询将返回 PartitionKey 为“hometasks”的前五项。
 
-	var query = new azure.TableQuery()
-	  .top(5)
-	  .where('PartitionKey eq ?', 'hometasks');
+    var query = new azure.TableQuery()
+      .top(5)
+      .where('PartitionKey eq ?', 'hometasks');
 
 由于未使用 **select**，因此将返回所有字段。若要对表执行查询，请使用 **queryEntities**。下面的示例使用此查询来返回“mytable”中的实体。
 
-	tableSvc.queryEntities('mytable',query, null, function(error, result, response) {
-	  if(!error) {
-	    // query was successful
-	  }
-	});
+    tableSvc.queryEntities('mytable',query, null, function(error, result, response) {
+      if(!error) {
+        // query was successful
+      }
+    });
 
 如果成功，`result.entries` 将包含与查询匹配的一组实体。如果查询无法返回所有实体，`result.continuationToken` 就不会是 *null* ，因此可用作 **queryEntities** 的第三个参数来检索更多结果。对于初始查询，第三个参数请使用 *null* 。
 
 ### 查询一部分实体属性
 对表的查询可以只检索实体中的少数几个字段。这可以减少带宽并提高查询性能，尤其适用于大型实体。使用 **select** 子句并传递要返回的字段的名称。例如，下面的查询将只返回 **description** 和 **dueDate** 字段。
 
-	var query = new azure.TableQuery()
-	  .select(['description', 'dueDate'])
-	  .top(5)
-	  .where('PartitionKey eq ?', 'hometasks');
+    var query = new azure.TableQuery()
+      .select(['description', 'dueDate'])
+      .top(5)
+      .where('PartitionKey eq ?', 'hometasks');
 
 ## 删除实体
 可以使用实体的分区键和行键删除实体。在本例中，**task1** 对象包含要删除的实体的 **RowKey** 和 **PartitionKey** 值。然后，该对象被传递给 **deleteEntity** 方法。
 
-	var task = {
-	  PartitionKey: {'_':'hometasks'},
-	  RowKey: {'_': '1'}
-	};
+    var task = {
+      PartitionKey: {'_':'hometasks'},
+      RowKey: {'_': '1'}
+    };
 
-	tableSvc.deleteEntity('mytable', task, function(error, response){
-	  if(!error) {
-	    // Entity deleted
-	  }
-	});
+    tableSvc.deleteEntity('mytable', task, function(error, response){
+      if(!error) {
+        // Entity deleted
+      }
+    });
 
-> [AZURE.NOTE] 考虑在删除项时使用 ETag，以确保项尚未被其他进程修改。请参阅[更新实体](#update-an-entity)了解如何使用 ETag。
+> [!NOTE]
+> 考虑在删除项时使用 ETag，以确保项尚未被其他进程修改。请参阅[更新实体](#update-an-entity)了解如何使用 ETag。
 
 ## 删除表
 以下代码从存储帐户中删除一个表。
 
-	tableSvc.deleteTable('mytable', function(error, response){
-		if(!error){
-			// Table deleted
-		}
-	});
+    tableSvc.deleteTable('mytable', function(error, response){
+        if(!error){
+            // Table deleted
+        }
+    });
 
 如果不确定表是否存在，则使用 **deleteTableIfExists**。
 
@@ -291,22 +295,20 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 在查询时，在查询对象实例和回调函数之间可能会提供继续标记参数：
 
+    var nextContinuationToken = null;
+    dc.table.queryEntities(tableName,
+        query,
+        nextContinuationToken,
+        function (error, results) {
+            if (error) throw error;
 
-	var nextContinuationToken = null;
-	dc.table.queryEntities(tableName,
-	    query,
-	    nextContinuationToken,
-	    function (error, results) {
-	        if (error) throw error;
+            // iterate through results.entries with results
 
-	        // iterate through results.entries with results
+            if (results.continuationToken) {
+                nextContinuationToken = results.continuationToken;
+            }
 
-	        if (results.continuationToken) {
-	            nextContinuationToken = results.continuationToken;
-	        }
-
-	    });
-
+        });
 
 如果检查 `continuationToken` 对象，就会发现 `nextPartitionKey`、`nextRowKey` 和 `targetLocation` 等属性可用于循环访问所有结果。
 
@@ -319,35 +321,35 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 下面的示例生成了一个新的共享访问策略，该策略将允许 SAS 持有者查询 ('r') 表，在创建后 100 分钟过期。
 
-	var startDate = new Date();
-	var expiryDate = new Date(startDate);
-	expiryDate.setMinutes(startDate.getMinutes() + 100);
-	startDate.setMinutes(startDate.getMinutes() - 100);
+    var startDate = new Date();
+    var expiryDate = new Date(startDate);
+    expiryDate.setMinutes(startDate.getMinutes() + 100);
+    startDate.setMinutes(startDate.getMinutes() - 100);
 
-	var sharedAccessPolicy = {
-	  AccessPolicy: {
-	    Permissions: azure.TableUtilities.SharedAccessPermissions.QUERY,
-	    Start: startDate,
-	    Expiry: expiryDate
-	  },
-	};
+    var sharedAccessPolicy = {
+      AccessPolicy: {
+        Permissions: azure.TableUtilities.SharedAccessPermissions.QUERY,
+        Start: startDate,
+        Expiry: expiryDate
+      },
+    };
 
-	var tableSAS = tableSvc.generateSharedAccessSignature('mytable', sharedAccessPolicy);
-	var host = tableSvc.host;
+    var tableSAS = tableSvc.generateSharedAccessSignature('mytable', sharedAccessPolicy);
+    var host = tableSvc.host;
 
 请注意，还必须提供主机信息，因为 SAS 持有者尝试访问表时，必须提供该信息。
 
 然后，客户端应用程序将 SAS 用于 **TableServiceWithSAS**，以便针对表执行操作。下面的示例连接到该表，并执行一个查询。
 
-	var sharedTableService = azure.createTableServiceWithSas(host, tableSAS);
-	var query = azure.TableQuery()
-	  .where('PartitionKey eq ?', 'hometasks');
+    var sharedTableService = azure.createTableServiceWithSas(host, tableSAS);
+    var query = azure.TableQuery()
+      .where('PartitionKey eq ?', 'hometasks');
 
-	sharedTableService.queryEntities(query, null, function(error, result, response) {
-	  if(!error) {
-	    // result contains the entities
-	  }
-	});
+    sharedTableService.queryEntities(query, null, function(error, result, response) {
+      if(!error) {
+        // result contains the entities
+      }
+    });
 
 由于 SAS 在生成时只具有查询访问权限，因此如果尝试插入、更新或删除实体，则会返回错误。
 
@@ -356,36 +358,36 @@ Azure SDK for Node.js 中附带了两个实现重试逻辑的筛选器，分别�
 
 ACL 是使用一组访问策略实施的，每个策略都有一个关联的 ID。以下示例定义了两个策略，一个用于“user1”，一个用于“user2”：
 
-	var sharedAccessPolicy = {
-	  user1: {
-	    Permissions: azure.TableUtilities.SharedAccessPermissions.QUERY,
-	    Start: startDate,
-	    Expiry: expiryDate
-	  },
-	  user2: {
-	    Permissions: azure.TableUtilities.SharedAccessPermissions.ADD,
-	    Start: startDate,
-	    Expiry: expiryDate
-	  }
-	};
+    var sharedAccessPolicy = {
+      user1: {
+        Permissions: azure.TableUtilities.SharedAccessPermissions.QUERY,
+        Start: startDate,
+        Expiry: expiryDate
+      },
+      user2: {
+        Permissions: azure.TableUtilities.SharedAccessPermissions.ADD,
+        Start: startDate,
+        Expiry: expiryDate
+      }
+    };
 
 下面的示例获取 **hometasks** 表的当前 ACL，然后使用 **setTableAcl** 添加新策略。此方法具有以下用途：
 
-	var extend = require('extend');
-	tableSvc.getTableAcl('hometasks', function(error, result, response) {
+    var extend = require('extend');
+    tableSvc.getTableAcl('hometasks', function(error, result, response) {
     if(!error){
-	    var newSignedIdentifiers = extend(true, result.signedIdentifiers, sharedAccessPolicy);
-	    tableSvc.setTableAcl('hometasks', newSignedIdentifiers, function(error, result, response){
-	      if(!error){
-	        // ACL set
-	      }
-	    });
-	  }
-	});
+        var newSignedIdentifiers = extend(true, result.signedIdentifiers, sharedAccessPolicy);
+        tableSvc.setTableAcl('hometasks', newSignedIdentifiers, function(error, result, response){
+          if(!error){
+            // ACL set
+          }
+        });
+      }
+    });
 
 设置 ACL 后，可以根据某个策略的 ID 创建 SAS。以下示例为“user2”创建新的 SAS：
 
-	tableSAS = tableSvc.generateSharedAccessSignature('hometasks', { Id: 'user2' });
+    tableSAS = tableSvc.generateSharedAccessSignature('hometasks', { Id: 'user2' });
 
 ## 后续步骤
 有关详细信息，请参阅以下资源。
@@ -399,11 +401,11 @@ ACL 是使用一组访问策略实施的，每个策略都有一个关联的 ID�
   [using the REST API]: http://msdn.microsoft.com/zh-cn/library/azure/hh264518.aspx
   [Azure Portal]: portal.azure.cn
 
-  [Node.js Cloud Service]: /documentation/articles/cloud-services-nodejs-develop-deploy-app/
+  [Node.js Cloud Service]: ../cloud-services/cloud-services-nodejs-develop-deploy-app.md
   [Azure Storage Team Blog]: http://blogs.msdn.com/b/windowsazurestorage/
-  [ Website with WebMatrix]: /documentation/articles/web-sites-nodejs-use-webmatrix/
-  [Node.js Cloud Service with Storage]: /documentation/articles/storage-nodejs-use-table-storage-cloud-service-app/
-  [使用 Azure 表服务的 Node.js Web 应用]: /documentation/articles/storage-nodejs-use-table-storage-web-site/
-  [Create and deploy a Node.js application to an Azure website]: /documentation/articles/web-sites-nodejs-develop-deploy-mac/
+  [ Website with WebMatrix]: ../app-service-web/web-sites-nodejs-use-webmatrix.md
+  [Node.js Cloud Service with Storage]: ./storage-nodejs-use-table-storage-cloud-service-app.md
+  [使用 Azure 表服务的 Node.js Web 应用]: ../app-service-web/storage-nodejs-use-table-storage-web-site.md
+  [Create and deploy a Node.js application to an Azure website]: ../app-service-web/web-sites-nodejs-develop-deploy-mac.md
 
 <!---HONumber=Mooncake_0103_2017-->

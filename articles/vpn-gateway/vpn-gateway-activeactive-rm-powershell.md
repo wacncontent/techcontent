@@ -1,34 +1,33 @@
-<properties
-    pageTitle="如何使用 Azure Resource Manager 和 PowerShell 来配置与 Azure VPN 网关的主动-主动 S2S VPN 连接 | Azure"
-    description="本文逐步讲解如何使用 Azure Resource Manager 和 PowerShell 配置包含 Azure VPN 网关的主动-主动连接。"
-    services="vpn-gateway"
-    documentationcenter="na"
-    author="yushwang"
-    manager="rossort"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 如何使用 Azure Resource Manager 和 PowerShell 来配置与 Azure VPN 网关的主动-主动 S2S VPN 连接 | Azure
+description: 本文逐步讲解如何使用 Azure Resource Manager 和 PowerShell 配置包含 Azure VPN 网关的主动-主动连接。
+services: vpn-gateway
+documentationcenter: na
+author: yushwang
+manager: rossort
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="238cd9b3-f1ce-4341-b18e-7390935604fa"
-    ms.service="vpn-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="09/26/2016"
-    wacn.date="01/05/2017"
-    ms.author="yushwang" />  
-
+ms.assetid: 238cd9b3-f1ce-4341-b18e-7390935604fa
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 09/26/2016
+wacn.date: 01/05/2017
+ms.author: yushwang
+---
 
 # 使用 Azure Resource Manager 和 PowerShell 来配置与 Azure VPN 网关的主动-主动 S2S VPN 连接
 本文逐步讲解如何使用 Resource Manager 部署模型和 PowerShell 创建主动-主动跨界连接与 VNet 到 VNet 连接。
 
 **关于 Azure 部署模型**
 
-[AZURE.INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
+[!INCLUDE [vpn-gateway-clasic-rm](../../includes/vpn-gateway-classic-rm-include.md)]
 
 ## 关于高可用性跨界连接
-若要实现跨界连接和 VNet 到 VNet 连接的高可用性，应该部署多个 VPN 网关，在网络与 Azure 之间建立多个并行连接。有关连接选项和拓扑的概述，请参阅[高可用性跨界连接与 VNet 到 VNet 连接](/documentation/articles/vpn-gateway-highlyavailable/)。
+若要实现跨界连接和 VNet 到 VNet 连接的高可用性，应该部署多个 VPN 网关，在网络与 Azure 之间建立多个并行连接。有关连接选项和拓扑的概述，请参阅[高可用性跨界连接与 VNet 到 VNet 连接](./vpn-gateway-highlyavailable.md)。
 
 本文提供有关设置两个虚拟网络之间的主动-主动跨界 VPN 连接以及主动-主动连接的说明：
 
@@ -39,7 +38,7 @@
 
 可以将这些选项结合起来，构建符合要求的更复杂、高度可用的网络拓扑。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 请注意，主动-主动模式只能在 HighPerformance SKU 中正常工作
 > 
 > 
@@ -54,7 +53,7 @@
 其他属性与非主动-主动网关相同。
 
 ### 开始之前
-* 确保你拥有 Azure 订阅。如果还没有 Azure 订阅，可以注册一个[帐户](/pricing/1rmb-trial/)。
+* 确保你拥有 Azure 订阅。如果还没有 Azure 订阅，可以注册一个[帐户](https://www.azure.cn/pricing/1rmb-trial/)。
 * 你需要安装 Azure Resource Manager PowerShell cmdlet。有关安装 PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
 ### 步骤 1 - 创建并配置 VNet1
@@ -85,7 +84,7 @@
     $Connection152 = "VNet1toSite5_2"
 
 #### 2\.连接到订阅并创建新资源组
-确保切换到 PowerShell 模式，以便使用资源管理器 cmdlet。有关详细信息，请参阅[将 Windows PowerShell 与资源管理器配合使用](/documentation/articles/powershell-azure-resource-manager/)。
+确保切换到 PowerShell 模式，以便使用资源管理器 cmdlet。有关详细信息，请参阅[将 Windows PowerShell 与资源管理器配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)。
 
 打开 PowerShell 控制台并连接到你的帐户。使用下面的示例来帮助你连接：
 
@@ -144,7 +143,6 @@
 网关实例的公共 IP 地址顺序与对应的 BGP 对等连接地址相同。在本示例中，公共 IP 为 40.112.190.5 的网关 VM 将使用 10.12.255.4 作为其 BGP 对等连接地址，公共 IP 为 138.91.156.129 的网关将使用 10.12.255.5。设置连接到主动-主动网关的本地 VPN 设备时需要此信息。下图显示了网关和所有地址：
 
 ![主动-主动网关](./media/vpn-gateway-activeactive-rm-powershell/active-active-gw.png)  
-
 
 创建网关后，可以使用此网关创建主动-主动跨界连接或 VNet 到 VNet 连接。以下各节将介绍完成该练习所需的步骤。
 
@@ -205,7 +203,6 @@
 
 ![active-active-crossprem](./media/vpn-gateway-activeactive-rm-powershell/active-active.png)  
 
-
 ### 步骤 3 - 将两个本地 VPN 设备连接到主动-主动 VPN 网关
 如果同一个本地网络上有两个 VPN 设备，可以通过将 Azure VPN 网关连接到第二个 VPN 设备来实现双重冗余。
 
@@ -243,7 +240,6 @@
 
 ![dual-redundancy-crossprem](./media/vpn-gateway-activeactive-rm-powershell/dual-redundancy.png)  
 
-
 ## <a name ="aav2v"></a>第 3 部分 - 建立主动-主动 VNet 到 VNet 连接
 本部分使用 BGP 创建主动-主动 VNet 到 VNet 连接。
 
@@ -252,7 +248,7 @@
 ### 步骤 1 - 创建 TestVNet2 和 VPN 网关
 必须确保新虚拟网络的 IP 地址空间 TestVNet2 不与任何 VNet 范围重叠。
 
-在本示例中，虚拟网络属于同一订阅。可以在不同订阅之间设置 VNet 到 VNet 连接，有关更多详细信息，请参阅[配置 VNet 到 VNet 连接](/documentation/articles/vpn-gateway-vnet-vnet-rm-ps/)。请确保在创建连接时添加“-EnableBgp $True”，以启用 BGP。
+在本示例中，虚拟网络属于同一订阅。可以在不同订阅之间设置 VNet 到 VNet 连接，有关更多详细信息，请参阅[配置 VNet 到 VNet 连接](./vpn-gateway-vnet-vnet-rm-ps.md)。请确保在创建连接时添加“-EnableBgp $True”，以启用 BGP。
 
 #### 1\.声明变量
 请务必将值替换为要用于配置的值。
@@ -318,7 +314,7 @@
 
     New-AzureRmVirtualNetworkGatewayConnection -Name $Connection21 -ResourceGroupName $RG2 -VirtualNetworkGateway1 $vnet2gw -VirtualNetworkGateway2 $vnet1gw -Location $Location2 -ConnectionType Vnet2Vnet -SharedKey 'AzureA1b2C3' -EnableBgp $True
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 请确保为这两个连接启用 BGP。
 > 
 > 
@@ -327,11 +323,10 @@
 
 ![active-active-v2v](./media/vpn-gateway-activeactive-rm-powershell/vnet-to-vnet.png)  
 
-
 ## <a name ="aaupdate"></a>第 4 部分 - 更新主动-主动和主动-待机连接之间的现有网关
 最后一部分说明如何将现有 Azure VPN 网关从主动-待机模式配置为主动-主动模式，或反之。
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 请注意，主动-主动模式只能在 HighPerformance SKU 中正常工作
 > 
 > 
@@ -381,6 +376,6 @@
 这种更新最多可能需要 30 到 45 分钟。
 
 ## 后续步骤
-连接完成后，即可将虚拟机添加到虚拟网络。请参阅[创建虚拟机](/documentation/articles/virtual-machines-windows-hero-tutorial/)以获取相关步骤。
+连接完成后，即可将虚拟机添加到虚拟网络。请参阅[创建虚拟机](../virtual-machines/virtual-machines-windows-hero-tutorial.md)以获取相关步骤。
 
 <!---HONumber=Mooncake_1219_2016-->

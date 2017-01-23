@@ -1,27 +1,26 @@
-<properties
-   pageTitle="SQL 数据库和 SQL 数据仓库针对 Azure AD MFA 的 SSMS 支持 | Azure"
-   description="将 Multi-Factored Authentication 与 SSMS 搭配用于 SQL 数据库和 SQL 数据仓库。"
-   services="sql-database"
-   documentationCenter=""
-   authors="BYHAM"
-   manager="jhubbard"
-   editor=""
-   tags=""/>  
+---
+title: SQL 数据库和 SQL 数据仓库针对 Azure AD MFA 的 SSMS 支持 | Azure
+description: 将 Multi-Factored Authentication 与 SSMS 搭配用于 SQL 数据库和 SQL 数据仓库。
+services: sql-database
+documentationCenter: 
+authors: BYHAM
+manager: jhubbard
+editor: 
+tags: 
 
-
-<tags
-   ms.service="sql-database"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="data-management"
-   ms.date="10/04/2016"
-   wacn.date="10/31/2016"
-   ms.author="rick.byham@microsoft.com"/>
+ms.service: sql-database
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: data-management
+ms.date: 10/04/2016
+wacn.date: 10/31/2016
+ms.author: rick.byham@microsoft.com
+---
 
 # SQL 数据库和 SQL 数据仓库针对 Azure AD MFA 的 SSMS 支持
 
-现在，Azure SQL 数据库和 Azure SQL 数据仓库支持使用 *Active Directory 通用身份验证*，从 SQL Server Management Studio (SSMS) 进行连接。Active Directory 通用身份验证是支持 *Azure 多重身份验证* (MFA) 的交互式工作流。Azure MFA 可帮助保护对数据和应用程序的访问，同时满足用户对简单登录的需求。它利用一系列简单的验证选项提供强身份验证，这些选项包括电话、短信、含有 PIN 码的智能卡或移动应用通知，用户可以根据自己的偏好选择所用的方法。有关多重身份验证的说明，请参阅[多重身份验证](/documentation/articles/multi-factor-authentication/)。
+现在，Azure SQL 数据库和 Azure SQL 数据仓库支持使用 *Active Directory 通用身份验证*，从 SQL Server Management Studio (SSMS) 进行连接。Active Directory 通用身份验证是支持 *Azure 多重身份验证* (MFA) 的交互式工作流。Azure MFA 可帮助保护对数据和应用程序的访问，同时满足用户对简单登录的需求。它利用一系列简单的验证选项提供强身份验证，这些选项包括电话、短信、含有 PIN 码的智能卡或移动应用通知，用户可以根据自己的偏好选择所用的方法。有关多重身份验证的说明，请参阅[多重身份验证](../multi-factor-authentication/multi-factor-authentication.md)。
 
 SSMS 现在支持：
 
@@ -44,11 +43,11 @@ SSMS 现在支持：
 
 实现多重身份验证需要四个基本步骤。
 
-1. **配置 Azure Active Directory** — 有关详细信息，请参阅[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)、[将自己的域名添加到 Azure AD](https://azure.microsoft.com/blog/2012/11/28/windows-azure-now-supports-federation-with-windows-server-active-directory/)、[Microsoft Azure now supports federation with Windows Server Active Directory](https://azure.microsoft.com/blog/2012/11/28/windows-azure-now-supports-federation-with-windows-server-active-directory/)（Microsoft Azure 现在支持与 Windows Server Active Directory 联合）、[管理 Azure AD 目录](https://msdn.microsoft.com/zh-cn/library/azure/hh967611.aspx)和[使用 Windows PowerShell 管理 Azure AD](https://msdn.microsoft.com/zh-cn/library/azure/jj151815.aspx)。
+1. **配置 Azure Active Directory** — 有关详细信息，请参阅[将本地标识与 Azure Active Directory 集成](../active-directory/active-directory-aadconnect.md)、[将自己的域名添加到 Azure AD](https://azure.microsoft.com/blog/2012/11/28/windows-azure-now-supports-federation-with-windows-server-active-directory/)、[Microsoft Azure now supports federation with Windows Server Active Directory](https://azure.microsoft.com/blog/2012/11/28/windows-azure-now-supports-federation-with-windows-server-active-directory/)（Microsoft Azure 现在支持与 Windows Server Active Directory 联合）、[管理 Azure AD 目录](https://msdn.microsoft.com/zh-cn/library/azure/hh967611.aspx)和[使用 Windows PowerShell 管理 Azure AD](https://msdn.microsoft.com/zh-cn/library/azure/jj151815.aspx)。
 
-2. **配置 MFA** — 有关分步说明，请参阅[配置 Azure 多重身份验证](/documentation/articles/multi-factor-authentication-whats-next/)。
+2. **配置 MFA** — 有关分步说明，请参阅[配置 Azure 多重身份验证](../multi-factor-authentication/multi-factor-authentication-whats-next.md)。
 
-3. **配置 SQL 数据库或 SQL 数据仓库以进行 Azure AD 身份验证** — 有关分步说明，请参阅[使用 Azure Active Directory 身份验证连接到 SQL 数据库或 SQL 数据仓库](/documentation/articles/sql-database-aad-authentication/)。
+3. **配置 SQL 数据库或 SQL 数据仓库以进行 Azure AD 身份验证** — 有关分步说明，请参阅[使用 Azure Active Directory 身份验证连接到 SQL 数据库或 SQL 数据仓库](./sql-database-aad-authentication.md)。
 
 4. **下载 SSMS** — 在客户端计算机上，从[下载 SQL Server Management Studio (SSMS)](https://msdn.microsoft.com/zh-cn/library/mt238290.aspx) 下载最新的 SSMS（至少是 2016 年 8 月版）。
 
@@ -63,14 +62,15 @@ SSMS 现在支持：
 3. 显示“登录到帐户”对话框时，提供 Azure Active Directory 标识的帐户和密码。
 ![2mfa-sign-in][2]
 
-    > [AZURE.NOTE] 如果使用不需要 MFA 的帐户进行通用身份验证，可以在此时连接。对于需要 MFA 的用户，请继续执行以下步骤。
- 
+    > [!NOTE]
+    > 如果使用不需要 MFA 的帐户进行通用身份验证，可以在此时连接。对于需要 MFA 的用户，请继续执行以下步骤。
+
 4. 可能会显示两个 MFA 设置对话框。这个一次性操作根据 MFA 管理员设置而定，因此可能是可选的。对于已启用 MFA 的域，有时会预定义此步骤（例如，域会要求用户使用智能卡和 PIN 码）。
 ![3mfa-setup][3]
 
 5. 通过第二个可能出现的一次性对话框，可以选择身份验证方法的详细信息。可能的选项由管理员配置。
 ![4mfa-verify-1][4]
- 
+
 6. Azure Active Directory 向你发送确认信息。收到验证码后，将其输入“输入验证码”框，然后单击“登录”。
 ![5mfa-verify-2][5]
 
@@ -78,8 +78,7 @@ SSMS 现在支持：
 
 ##后续步骤  
 
-向其他人授权访问你的数据库：[SQL 数据库身份验证和授权：授予访问权限](/documentation/articles/sql-database-manage-logins/) 确保其他人可以通过防火墙建立连接：[使用 Azure 门户配置 Azure SQL 数据库服务器级防火墙规则](/documentation/articles/sql-database-configure-firewall-settings/)
-
+向其他人授权访问你的数据库：[SQL 数据库身份验证和授权：授予访问权限](./sql-database-manage-logins.md) 确保其他人可以通过防火墙建立连接：[使用 Azure 门户配置 Azure SQL 数据库服务器级防火墙规则](./sql-database-configure-firewall-settings.md)
 
 [1]: ./media/sql-database-ssms-mfa-auth/1mfa-universal-connect.png
 [2]: ./media/sql-database-ssms-mfa-auth/2mfa-sign-in.png

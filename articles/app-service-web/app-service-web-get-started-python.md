@@ -1,29 +1,25 @@
-<properties 
-	pageTitle="在 5 分钟内将第一个 Python Web 应用部署到 Azure | Azure" 
-	description="了解如何部署示例应用，轻松地在应用服务中运行 Web 应用。快速进行实际的开发，立即查看结果。" 
-	services="app-service\web"
-	documentationCenter=""
-	authors="cephalin"
-	manager="wpickett"
-	editor=""
-/>  
+---
+title: 在 5 分钟内将第一个 Python Web 应用部署到 Azure | Azure
+description: 了解如何部署示例应用，轻松地在应用服务中运行 Web 应用。快速进行实际的开发，立即查看结果。
+services: app-service\web
+documentationCenter: 
+authors: cephalin
+manager: wpickett
+editor: 
 
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: hero-article
+ms.date: 10/13/2016
+wacn.date: 10/31/2016
+ms.author: cephalin
+---
 
-<tags
-	ms.service="app-service-web"
-	ms.workload="web"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="hero-article"
-	ms.date="10/13/2016"
-	wacn.date="10/31/2016" 
-	ms.author="cephalin"
-/>  
-
-	
 # 在 5 分钟内将第一个 Python Web 应用部署到 Azure
 
-本教程旨在帮助用户将第一个 Python Web 应用部署到 [Azure 应用服务](/documentation/articles/app-service-value-prop-what-is/)。应用服务可用于创建 Web 应用、[移动应用后端](/documentation/services/app-service/mobile/)和 [API 应用](/documentation/articles/app-service-api-apps-why-best-platform/)。
+本教程旨在帮助用户将第一个 Python Web 应用部署到 [Azure 应用服务](../app-service/app-service-value-prop-what-is.md)。应用服务可用于创建 Web 应用、[移动应用后端](../app-service-mobile/index.md)和 [API 应用](../app-service-api/app-service-api-apps-why-best-platform.md)。
 
 用户将能够：
 
@@ -35,8 +31,8 @@
 ## <a name="Prerequisites"></a> 先决条件
 
 - [Git](http://www.git-scm.com/downloads)。
-- [Azure CLI](/documentation/articles/xplat-cli-install/)。
-- 一个 Azure 帐户。如果你没有帐户，可以[注册试用版](/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
+- [Azure CLI](../xplat-cli-install.md)。
+- 一个 Azure 帐户。如果你没有帐户，可以[注册试用版](https://www.azure.cn/pricing/1rmb-trial/?WT.mc_id=A261C142F)。
 
 ## 部署 Python Web 应用
 
@@ -53,7 +49,6 @@
     按照帮助消息的提示继续此登录过程。
 
     ![登录到 Azure 以创建第一个 Web 应用](./media/app-service-web-get-started/3-azure-login.png)  
-
 
 4. 将 Azure CLI 更改为 ASM 模式，然后设置应用服务的部署用户。稍后使用凭据部署代码。
 
@@ -74,7 +69,6 @@
 
     ![在 Azure 中创建第一个 Web 应用的 Azure 资源](./media/app-service-web-get-started-languages/python-site-create.png)  
 
-
     现在已在 Azure 中创建应用。而且当前的目录也已进行 Git 初始化并作为 Git 远程连接到新的应用服务应用。可以浏览到应用的 URL (http://&lt;app_name>.chinacloudsites.cn) 查看优雅的默认 HTML 页面，不过现在要做的是真正获取自己的代码。
 
 4. 像使用 Git 推送任何代码一样，将示例代码部署到 Azure 应用。出现提示时，使用之前配置的密码。
@@ -82,7 +76,6 @@
         git push azure master
 
     ![在 Azure 中将代码推送到第一个 Web 应用](./media/app-service-web-get-started-languages/python-git-push.png)  
-
 
     `git push` 不仅将代码放在 Azure 中，也在部署引擎中触发部署任务。如果项目（存储库）根目录中存在 requirements.txt (Python) 文件，部署脚本会还原所需的包。
 
@@ -104,7 +97,7 @@
 
 ## 后续步骤
 
-[在 Visual Studio 中创建、配置 Django Web 应用，并将其部署到 Azure](/documentation/articles/web-sites-python-ptvs-django-mysql/)。通过学习本教程，可以了解在 Azure 中运行 Python Web 应用所需的基本技能，包括：
+[在 Visual Studio 中创建、配置 Django Web 应用，并将其部署到 Azure](./web-sites-python-ptvs-django-mysql.md)。通过学习本教程，可以了解在 Azure 中运行 Python Web 应用所需的基本技能，包括：
 
 - 根据模板创建和部署 Python 应用。
 - 设置 Python 版本。
@@ -113,7 +106,7 @@
 
 或者，对第一个 Web 应用执行更多操作。例如：
 
-- 尝试[将代码部署到 Azure 的其他方法](/documentation/articles/web-sites-deploy/)。
-- 使 Azure 应用上升到更高的层次。对用户进行身份验证。按需缩放。设置一些性能警报。所有这些操作只需按几下鼠标即可完成。请参阅[在第一个 Web 应用中添加功能](/documentation/articles/app-service-web-get-started-2/)。
+- 尝试[将代码部署到 Azure 的其他方法](./web-sites-deploy.md)。
+- 使 Azure 应用上升到更高的层次。对用户进行身份验证。按需缩放。设置一些性能警报。所有这些操作只需按几下鼠标即可完成。请参阅[在第一个 Web 应用中添加功能](./app-service-web-get-started-2.md)。
 
 <!---HONumber=Mooncake_1024_2016-->

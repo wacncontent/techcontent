@@ -1,20 +1,21 @@
-<properties 
- pageTitle="Azure 门户预览中的 Azure 计划程序入门 | Azure"
- description="Azure 门户中的 Azure 计划程序入门"
- services="scheduler" 
- documentationCenter=".NET" 
- authors="krisragh" 
- manager="dwrede" 
- editor=""/>
-<tags
- ms.service="scheduler"
- ms.workload="infrastructure-services"
- ms.tgt_pltfrm="na"
- ms.devlang="dotnet"
- ms.topic="hero-article"
- ms.date="08/10/2016"
- wacn.date="01/03/2017"
- ms.author="deli"/>
+---
+title: Azure 门户预览中的 Azure 计划程序入门 | Azure
+description: Azure 门户中的 Azure 计划程序入门
+services: scheduler
+documentationCenter: .NET
+authors: krisragh
+manager: dwrede
+editor: 
+
+ms.service: scheduler
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: hero-article
+ms.date: 08/10/2016
+wacn.date: 01/03/2017
+ms.author: deli
+---
 
 # Azure 门户预览中的 Azure 计划程序入门
 
@@ -46,7 +47,6 @@
 
       ![][action-settings]  
 
-
 5.  最后，让我们来定义一个计划。该作业可定义为一次性作业，但是我们选择了重复执行的计划：
 
     1. **重复周期**：`Recurring`
@@ -58,7 +58,6 @@
     4. **结束日期**：从今天起两天后的日期
 
       ![][recurrence-schedule]  
-
 
 6.  单击“创建”
 
@@ -82,8 +81,7 @@
 
 这些只读属性描述计划程序作业的管理元数据。
 
-   ![][job-properties]
-
+    ![][job-properties]
 
 ### 操作设置
 
@@ -97,18 +95,17 @@
 
 对于服务总线操作类型，可以更改命名空间、主题/队列路径、身份验证设置、传输类型、消息属性和消息正文。
 
-   ![][job-action-settings]
+    ![][job-action-settings]
 
 ### 计划
 
 如果想要更改快速创建向导中创建的计划，此处能够重新配置该计划。
 
-这是[作业中生成复杂计划和高级重复执行](/documentation/articles/scheduler-advanced-complexity/)的机会
+这是[作业中生成复杂计划和高级重复执行](./scheduler-advanced-complexity.md)的机会
 
 可以更改开始日期与时间、重复计划以及结束日期与时间（如果该作业是重复进行的。）
 
-   ![][job-schedule]
-
+    ![][job-schedule]
 
 ### 历史记录
 
@@ -126,38 +123,35 @@
 
 6.  执行结束时间
 
-   ![][job-history]  
-
+    ![][job-history]  
 
 可单击运行以查看**历史记录详情**，包括每次执行的整个响应情况。此对话框还允许你将响应复制到剪贴板。
 
-   ![][job-history-details]
+    ![][job-history-details]
 
 ### 用户
 
-Azure 基于角色的访问控制 (RBAC) 可用于对 Azure 计划程序进行细致的访问管理。若要了解如何使用“用户”选项卡，请参阅 [Azure 基于角色的访问控制](/documentation/articles/role-based-access-control-configure/)
-
+Azure 基于角色的访问控制 (RBAC) 可用于对 Azure 计划程序进行细致的访问管理。若要了解如何使用“用户”选项卡，请参阅 [Azure 基于角色的访问控制](../active-directory/role-based-access-control-configure.md)
 
 ## 另请参阅
 
- [计划程序是什么？](/documentation/articles/scheduler-intro/)
+ [计划程序是什么？](./scheduler-intro.md)
 
- [计划程序的概念、术语和实体层次结构](/documentation/articles/scheduler-concepts-terms/)
+ [计划程序的概念、术语和实体层次结构](./scheduler-concepts-terms.md)
 
- [Azure 计划程序中的计划和计费](/documentation/articles/scheduler-plans-billing/)
+ [Azure 计划程序中的计划和计费](./scheduler-plans-billing.md)
 
- [如何使用 Azure 计划程序生成复杂的计划和高级重复执行](/documentation/articles/scheduler-advanced-complexity/)
+ [如何使用 Azure 计划程序生成复杂的计划和高级重复执行](./scheduler-advanced-complexity.md)
 
  [计划程序 REST API 参考](https://msdn.microsoft.com/zh-CN/library/dn528946)
 
- [计划程序 PowerShell Cmdlet 参考](/documentation/articles/scheduler-powershell-reference/)
+ [计划程序 PowerShell Cmdlet 参考](./scheduler-powershell-reference.md)
 
- [计划程序的高可用性和可靠性](/documentation/articles/scheduler-high-availability-reliability/)
+ [计划程序的高可用性和可靠性](./scheduler-high-availability-reliability.md)
 
- [计划程序的限制、默认值和错误代码](/documentation/articles/scheduler-limits-defaults-errors/)
+ [计划程序的限制、默认值和错误代码](./scheduler-limits-defaults-errors.md)
 
- [计划程序出站身份验证](/documentation/articles/scheduler-outbound-authentication/)
-
+ [计划程序出站身份验证](./scheduler-outbound-authentication.md)
 
 [marketplace-create]: ./media/scheduler-get-started-portal/scheduler-v2-portal-marketplace-create.png
 [action-settings]: ./media/scheduler-get-started-portal/scheduler-v2-portal-action-settings.png
@@ -168,7 +162,6 @@ Azure 基于角色的访问控制 (RBAC) 可用于对 Azure 计划程序进行�
 [job-schedule]: ./media/scheduler-get-started-portal/scheduler-v2-portal-job-schedule.png
 [job-history]: ./media/scheduler-get-started-portal/scheduler-v2-portal-job-history.png
 [job-history-details]: ./media/scheduler-get-started-portal/scheduler-v2-portal-job-history-details.png
-
 
 [1]: ./media/scheduler-get-started-portal/scheduler-get-started-portal001.png
 [2]: ./media/scheduler-get-started-portal/scheduler-get-started-portal002.png

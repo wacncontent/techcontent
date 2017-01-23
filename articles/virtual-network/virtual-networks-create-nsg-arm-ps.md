@@ -1,32 +1,32 @@
-<properties
-    pageTitle="使用 PowerShell 创建 NSG | Azure"
-    description="了解如何使用 PowerShell 创建 NSG | Resource Manager。"
-    services="virtual-network"
-    documentationcenter="na"
-    author="jimdial"
-    manager="timlt"
-    editor="tysonn"
-    tags="azure-resource-manager" />
-<tags
-    ms.assetid="9cef62b8-d889-4d16-b4d0-58639539a418"
-    ms.service="virtual-network"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="02/23/2016"
-    wacn.date="01/13/2017"
-    ms.author="jdial" />  
+---
+title: 使用 PowerShell 创建 NSG | Azure
+description: 了解如何使用 PowerShell 创建 NSG | Resource Manager。
+services: virtual-network
+documentationcenter: na
+author: jimdial
+manager: timlt
+editor: tysonn
+tags: azure-resource-manager
 
+ms.assetid: 9cef62b8-d889-4d16-b4d0-58639539a418
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 02/23/2016
+wacn.date: 01/13/2017
+ms.author: jdial
+---
 
 # 使用 PowerShell 创建 NSG
-[AZURE.INCLUDE [virtual-networks-create-nsg-selectors-arm-include](../../includes/virtual-networks-create-nsg-selectors-arm-include.md)]
+[!INCLUDE [virtual-networks-create-nsg-selectors-arm-include](../../includes/virtual-networks-create-nsg-selectors-arm-include.md)]
 
-[AZURE.INCLUDE [virtual-networks-create-nsg-intro-include](../../includes/virtual-networks-create-nsg-intro-include.md)]
+[!INCLUDE [virtual-networks-create-nsg-intro-include](../../includes/virtual-networks-create-nsg-intro-include.md)]
 
-Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建议通过 Resource Manager 部署模型创建资源。若要深入了解这两个模型之间的差异，请阅读[了解 Azure 部署模型](/documentation/articles/resource-manager-deployment-model/)一文。本文介绍 Resource Manager 部署模型。你还可以[在经典部署模型中创建 NSG](/documentation/articles/virtual-networks-create-nsg-classic-ps/)。
+Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建议通过 Resource Manager 部署模型创建资源。若要深入了解这两个模型之间的差异，请阅读[了解 Azure 部署模型](../azure-resource-manager/resource-manager-deployment-model.md)一文。本文介绍 Resource Manager 部署模型。你还可以[在经典部署模型中创建 NSG](./virtual-networks-create-nsg-classic-ps.md)。
 
-[AZURE.INCLUDE [virtual-networks-create-nsg-scenario-include](../../includes/virtual-networks-create-nsg-scenario-include.md)]
+[!INCLUDE [virtual-networks-create-nsg-scenario-include](../../includes/virtual-networks-create-nsg-scenario-include.md)]
 
 下面的示例 PowerShell 命令需要一个已经基于上述方案创建的简单环境。如果你想要运行本文档中所显示的命令，首先通过部署[此模板](http://github.com/telmosampaio/azure-templates/tree/master/201-IaaS-WebFrontEnd-SQLBackEnd)构建测试环境，单击“部署至 Azure”，如有必要替换默认参数值，然后按照门户中的说明进行操作。
 
@@ -58,7 +58,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         $nsg
 
     输出仅显示安全规则：
-   
+
         SecurityRules        : [
                                  {
                                    "Name": "rdp-rule",
@@ -98,7 +98,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         -AddressPrefix 192.168.1.0/24 -NetworkSecurityGroup $nsg
 
     输出只显示 *FrontEnd* 子网设置，注意 **NetworkSecurityGroup** 属性值：
-   
+
                     Subnets           : [
                                           {
                                             "Name": "FrontEnd",
@@ -119,8 +119,8 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
                                             "RouteTable": null,
                                             "ProvisioningState": "Succeeded"
                                           }
-   
-    > [AZURE.WARNING]
+
+    > [!WARNING]
     上述命令的输出显示虚拟网络配置对象的内容，该对象仅存在于运行 PowerShell 的计算机上。若要将这些设置保存到 Azure，需要运行 `Set-AzureRmVirtualNetwork` cmdlet。
     > 
     > 
@@ -129,7 +129,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         Set-AzureRmVirtualNetwork -VirtualNetwork $vnet
 
     输出仅显示 NSG 部分：
-   
+
         "NetworkSecurityGroup": {
           "Id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/TestRG/providers/Microsoft.Network/networkSecurityGroups/NSG-FrontEnd"
         }
@@ -165,7 +165,7 @@ Azure 有两个部署模型：Azure Resource Manager 和经典模型。Azure 建
         -AddressPrefix 192.168.2.0/24 -NetworkSecurityGroup $nsg
 
     输出只显示 *BackEnd* 子网设置，注意 **NetworkSecurityGroup** 属性值：
-   
+
         Subnets           : [
                       {
                         "Name": "BackEnd",

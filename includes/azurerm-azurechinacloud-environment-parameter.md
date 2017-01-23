@@ -1,4 +1,4 @@
-> [AZURE.NOTE]
+> [!NOTE]
 若要使用中国云环境，以下 AzureRm PowerShell 命令需要添加**“-Environment”**参数。<br />
 >	`Add-AzureRmAccount`<br />
 >	`Login-AzureRmAccount`<br />

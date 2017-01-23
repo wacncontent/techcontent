@@ -1,24 +1,24 @@
 <!-- ARM: tested -->
 
-<properties
-	pageTitle="将策略应用到 Azure Resource Manager 虚拟机 | Azure"
-	description="如何将策略应用到 Azure Resource Manager Windows 虚拟机"
-	services="virtual-machines-windows"
-	documentationCenter=""
-	authors="singhkay"
-	manager="drewm"
-	editor=""
-	tags="azure-resource-manager"/>
+---
+title: 将策略应用到 Azure Resource Manager 虚拟机 | Azure
+description: 如何将策略应用到 Azure Resource Manager Windows 虚拟机
+services: virtual-machines-windows
+documentationCenter: 
+authors: singhkay
+manager: drewm
+editor: 
+tags: azure-resource-manager
 
-<tags
-	ms.service="virtual-machines-windows"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-windows"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="04/13/2016"
-	wacn.date="01/05/2017"
-	ms.author="singhkay"/>
+ms.service: virtual-machines-windows
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-windows
+ms.devlang: na
+ms.topic: article
+ms.date: 04/13/2016
+wacn.date: 01/05/2017
+ms.author: singhkay
+---
 
 # 将策略应用到 Azure Resource Manager 虚拟机
 
@@ -35,7 +35,7 @@
 
 若要开始使用 Azure Resource Manager 策略，我们建议你先阅读以下文章，然后继续执行本文中的步骤。以下文章介绍了策略的基本定义和结构以及如何评估策略，并提供了策略定义的各种示例。
 
-* [使用策略来管理资源和控制访问](/documentation/articles/resource-manager-policy)
+* [使用策略来管理资源和控制访问](../azure-resource-manager/resource-manager-policy.md)
 
 ## 为虚拟机定义策略
 
@@ -83,7 +83,7 @@
 
 下表描述了可在策略定义中用作字段的虚拟机属性。有关策略字段的详细信息，请参阅以下文章：
 
-* [字段和源](/documentation/articles/resource-manager-policy/#conditions)
+* [字段和源](../azure-resource-manager/resource-manager-policy.md#conditions)
 
 | 字段名称 | 说明 |
 |----------------|----------------------------------------------------|
@@ -96,12 +96,12 @@
 
 可以直接使用 REST API 或 PowerShell cmdlet 轻松创建策略。有关创建策略的信息，请参阅以下文章：
 
-* [创建策略](/documentation/articles/resource-manager-policy/#create-and-assign-a-policy)
+* [创建策略](../azure-resource-manager/resource-manager-policy.md#create-and-assign-a-policy)
 
 ## 应用策略
 
 创建策略后，需要根据定义的范围来应用它。范围可以是订阅、资源组甚至资源。有关应用策略的信息，请参阅以下文章：
 
-* [创建策略](/documentation/articles/resource-manager-policy/#create-and-assign-a-policy)
+* [创建策略](../azure-resource-manager/resource-manager-policy.md#create-and-assign-a-policy)
 
 <!---HONumber=Mooncake_0425_2016-->

@@ -1,26 +1,25 @@
-<properties
-    pageTitle="了解如何保护对 DocumentDB 中的数据的访问 | Azure"
-    description="了解有关 DocumentDB 中的访问控制概念，包括主密钥、只读密钥、用户和权限。"
-    services="documentdb"
-    author="kiratp"
-    manager="jhubbard"
-    editor="monicar"
-    documentationcenter="" />  
+---
+title: 了解如何保护对 DocumentDB 中的数据的访问 | Azure
+description: 了解有关 DocumentDB 中的访问控制概念，包括主密钥、只读密钥、用户和权限。
+services: documentdb
+author: kiratp
+manager: jhubbard
+editor: monicar
+documentationcenter: 
 
-<tags
-    ms.assetid="8641225d-e839-4ba6-a6fd-d6314ae3a51c"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="11/12/2016"
-    wacn.date="12/27/2016"
-    ms.author="kipandya" />  
-
+ms.assetid: 8641225d-e839-4ba6-a6fd-d6314ae3a51c
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/12/2016
+wacn.date: 12/27/2016
+ms.author: kipandya
+---
 
 # 保护对 DocumentDB 数据的访问
-本文概述了如何保护对存储在 [Azure DocumentDB](/home/features/documentdb/) 中的数据的访问。
+本文概述了如何保护对存储在 [Azure DocumentDB](https://www.azure.cn/home/features/documentdb/) 中的数据的访问。
 
 阅读本概述后，你将能够回答以下问题：
 
@@ -58,16 +57,13 @@ DocumentDB 提供一流的概念，以便控制对 DocumentDB 资源的访问。
 
 ![DocumentDB 主密钥插图](./media/documentdb-secure-access-to-data/masterkeys.png)  
 
-
 - 只读密钥：创建 DocumentDB 帐户时，将创建两个只读密钥（主要和辅助）。这些密钥可实现对 DocumentDB 帐户中所有资源的只读访问权限。
 
 ![DocumentDB 只读密钥插图](./media/documentdb-secure-access-to-data/readonlykeys.png)  
 
-
 - 资源令牌：资源令牌与 DocumentDB 权限资源关联，可捕获数据库用户与该用户对某个特定 DocumentDB 应用程序资源（如集合、文档）的权限之间的关系。
 
 ![DocumentDB 资源令牌插图](./media/documentdb-secure-access-to-data/resourcekeys.png)  
-
 
 ## 使用 DocumentDB 主密钥和只读密钥
 前面曾提到，DocumentDB 主密钥提供对 DocumentDB 帐户中所有资源的完全管理访问权限，而只读密钥实现对该帐户中所有资源的只读访问权限。下面的代码片段说明了如何使用 DocumentDB 帐户终结点和主密钥来实例化 DocumentClient 并创建新的数据库。
@@ -87,7 +83,6 @@ DocumentDB 提供一流的概念，以便控制对 DocumentDB 资源的访问。
         {
             Id = databaseName
         });
-
 
 ## DocumentDB 资源令牌概述
 如果想要为不能通过主密钥得到信任的客户端提供对 DocumentDB 帐户中资源的访问权限，你可以使用资源令牌（通过创建 DocumentDB 用户和权限）。你的 DocumentDB 主密钥包括主要密钥和辅助密钥，这两种密钥都授予对你的帐户以及其中所有资源的管理访问权限。公开这两种主密钥的任何一种都会向可能的恶意或负面使用开放你的帐户。
@@ -109,7 +104,6 @@ DocumentDB 资源令牌提供一种安全的备选方案，允许客户端根据
 
 ![DocumentDB 资源令牌工作流](./media/documentdb-secure-access-to-data/resourcekeyworkflow.png)  
 
-
 ## 处理 DocumentDB 用户和权限
 DocumentDB 用户资源与 DocumentDB 数据库关联。每个数据库可能包含零个或多个 DocumentDB 用户。下面的代码片段演示如何创建 DocumentDB 用户资源。
 
@@ -121,16 +115,16 @@ DocumentDB 用户资源与 DocumentDB 数据库关联。每个数据库可能包
 
     docUser = await client.CreateUserAsync(UriFactory.CreateDatabaseUri("db"), docUser);
 
-> [AZURE.NOTE] 每个 DocumentDB 用户都具有 PermissionsLink 属性，该属性可用于检索与该用户关联的权限的列表。
+> [!NOTE]
+> 每个 DocumentDB 用户都具有 PermissionsLink 属性，该属性可用于检索与该用户关联的权限的列表。
 
 DocumentDB 权限资源与 DocumentDB 用户关联。每个用户可能包含零个或多个 DocumentDB 权限。权限资源提供对用户在尝试访问某个特定应用程序资源时需要的安全令牌的访问权限。权限资源可能提供两种可用的访问级别：
 
 - 所有：用户对资源具有完全权限
 - 只读：用户只能读取资源的内容，但无法对资源执行写入、更新或删除操作。
 
-
-> [AZURE.NOTE] 为了运行 DocumentDB 存储过程，用户必须具有对存储过程将在其中运行的集合的所有权限。
-
+> [!NOTE]
+> 为了运行 DocumentDB 存储过程，用户必须具有对存储过程将在其中运行的集合的所有权限。
 
 下面的代码片段演示如何创建权限资源、读取权限资源的资源令牌以及将权限与上面创建的用户关联。
 
@@ -141,7 +135,7 @@ DocumentDB 权限资源与 DocumentDB 用户关联。每个用户可能包含零
         ResourceLink = documentCollection.SelfLink,
         Id = "readperm"
     };
-    
+
     docPermission = await client.CreatePermissionAsync(UriFactory.CreateUserUri("db", "user"), docPermission);
     Console.WriteLine(docPermission.Id + " has token of: " + docPermission.Token);
 
@@ -162,11 +156,12 @@ DocumentDB 权限资源与 DocumentDB 用户关联。每个用户可能包含零
 
     DocumentClient userClient = new DocumentClient(new Uri(endpointUrl), permList);
 
-> [AZURE.TIP] 资源令牌的有效时间跨度默认为 1 小时。但是，令牌生存期可以显式指定为最多 5 个小时。
+> [!TIP]
+> 资源令牌的有效时间跨度默认为 1 小时。但是，令牌生存期可以显式指定为最多 5 个小时。
 
 ## 后续步骤
-- 若要了解有关 DocumentDB 的详细信息，请单击[此处](/documentation/services/documentdb/)。
-- 若要了解有关管理主密钥和只读密钥的信息，请单击[此处](/documentation/articles/documentdb-manage-account/)。
+- 若要了解有关 DocumentDB 的详细信息，请单击[此处](./index.md)。
+- 若要了解有关管理主密钥和只读密钥的信息，请单击[此处](./documentdb-manage-account.md)。
 - 若要了解如何构造 DocumentDB 授权令牌，请单击[此处](https://msdn.microsoft.com/zh-cn/library/azure/dn783368.aspx)
 
 <!---HONumber=Mooncake_1219_2016-->

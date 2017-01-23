@@ -1,21 +1,21 @@
-<properties
-   pageTitle="Azure AD Connect 同步：计划程序 | Azure"
-   description="本主题介绍 Azure AD Connect 同步中的内置计划程序。"
-   services="active-directory"
-   documentationCenter=""
-   authors="AndKjell"
-   manager="StevenPo"
-   editor=""/>
+---
+title: Azure AD Connect 同步：计划程序 | Azure
+description: 本主题介绍 Azure AD Connect 同步中的内置计划程序。
+services: active-directory
+documentationCenter: 
+authors: AndKjell
+manager: StevenPo
+editor: 
 
-<tags
-   ms.service="active-directory"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="identity"
-   ms.date="08/04/2016"
-   wacn.date="08/29/2016"
-   ms.author="billmath"/>
+ms.service: active-directory
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: identity
+ms.date: 08/04/2016
+wacn.date: 08/29/2016
+ms.author: billmath
+---
 
 # Azure AD Connect 同步：计划程序
 本主题介绍 Azure AD Connect 同步（也称为同步引擎）中的内置计划程序。
@@ -49,7 +49,7 @@ Azure AD Connect 同步会使用计划程序同步本地目录中发生的更改
 - **PurgeRunHistoryInterval**。操作日志应保留的时间。可以在同步服务管理器中查看这些日志。默认设置是保留这些日志 7 天。
 - **SyncCycleEnabled**。指示计划程序是否正在运行导入、同步和导出过程作为其操作的一部分。
 - **MaintenanceEnabled**。显示是否启用了维护过程。它将更新证书/密钥，并清除操作日志。
-- **IsStagingModeEnabled**。显示是否启用了[暂存模式](/documentation/articles/active-directory-aadconnectsync-operations/)。
+- **IsStagingModeEnabled**。显示是否启用了[暂存模式](./active-directory-aadconnectsync-operations.md)。
 
 你可以使用 `Set-ADSyncScheduler` 更改上述一些设置。可以修改以下参数：
 
@@ -84,7 +84,7 @@ Azure AD Connect 同步会使用计划程序同步本地目录中发生的更改
 
 - 从源目录中添加了更多要导入的对象或属性
 - 更改了同步规则
-- 更改了[筛选设置](/documentation/articles/active-directory-aadconnectsync-configure-filtering/)，因此应包含不同的对象数
+- 更改了[筛选设置](./active-directory-aadconnectsync-configure-filtering.md)，因此应包含不同的对象数
 
 如果进行了上述某项更改，则需要运行完全同步周期，以便同步引擎有机会重新合并连接器空间。完全同步周期包括以下步骤：
 
@@ -109,18 +109,16 @@ Azure AD Connect 同步会使用计划程序同步本地目录中发生的更改
 计划程序仍处于活动状态，并将在下次有机会时重新启动。
 
 ## <a name="custom-scheduler"></a>自定义计划程序
-本节中所述的 cmdlet 仅在内部版本 [1\.1.130.0](/documentation/articles/active-directory-aadconnect-version-history/) 及更高版本中提供。
+本节中所述的 cmdlet 仅在内部版本 [1\.1.130.0](./active-directory-aadconnect-version-history.md) 及更高版本中提供。
 
 如果内置的计划程序不符合你的要求，则可以使用 PowerShell 计划连接器。
 
 ### Invoke-ADSyncRunProfile
 可以用这种方式为连接器启动配置文件：
 
+    Invoke-ADSyncRunProfile -ConnectorName "name of connector" -RunProfileName "name of profile"
 
-	Invoke-ADSyncRunProfile -ConnectorName "name of connector" -RunProfileName "name of profile"
-
-
-用于[连接器名称](/documentation/articles/active-directory-aadconnectsync-service-manager-ui-connectors/)和[运行配置文件名称](/documentation/articles/active-directory-aadconnectsync-service-manager-ui-connectors/)的名称可以在[同步服务管理器 UI](/documentation/articles/active-directory-aadconnectsync-service-manager-ui/) 中找到。
+用于[连接器名称](./active-directory-aadconnectsync-service-manager-ui-connectors.md)和[运行配置文件名称](./active-directory-aadconnectsync-service-manager-ui-connectors.md)的名称可以在[同步服务管理器 UI](./active-directory-aadconnectsync-service-manager-ui.md) 中找到。
 
 ![调用运行配置文件](./media/active-directory-aadconnectsync-feature-scheduler/invokerunprofile.png)
 
@@ -140,9 +138,7 @@ Azure AD Connect 同步会使用计划程序同步本地目录中发生的更改
 ### Get-ADSyncConnectorRunStatus
 还可以监视同步引擎以了解它是忙还是空闲。如果同步引擎处于空闲状态且未运行连接器，则此 cmdlet 将返回一个空结果。如果连接器正在运行，它将返回连接器的名称。
 
-
-	Get-ADSyncConnectorRunStatus
-
+    Get-ADSyncConnectorRunStatus
 
 ![连接器运行状态](./media/active-directory-aadconnectsync-feature-scheduler/getconnectorrunstatus.png)  
 在上图中，第一行来自同步引擎处于空闲的状态。第二行来自 Azure AD 连接器正在运行时。
@@ -151,8 +147,8 @@ Azure AD Connect 同步会使用计划程序同步本地目录中发生的更改
 如果启动安装向导，则计划程序将暂时暂停。这是因为它认为你将进行配置更改，如果同步引擎正处于活动运行状态，将不能应用这些更改。出于此原因，不要让安装向导处于打开状态，因为将使同步引擎停止执行任何同步操作。
 
 ## 后续步骤
-了解有关 [Azure AD Connect 同步](/documentation/articles/active-directory-aadconnectsync-whatis/)配置的详细信息。
+了解有关 [Azure AD Connect 同步](./active-directory-aadconnectsync-whatis.md)配置的详细信息。
 
-了解有关[将本地标识与 Azure Active Directory 集成](/documentation/articles/active-directory-aadconnect/)的详细信息。
+了解有关[将本地标识与 Azure Active Directory 集成](./active-directory-aadconnect.md)的详细信息。
 
 <!---HONumber=Mooncake_0822_2016-->

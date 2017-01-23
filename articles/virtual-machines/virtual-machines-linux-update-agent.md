@@ -1,23 +1,22 @@
-<properties
-	pageTitle="从 GitHub 更新 Azure Linux 代理 | Azure"
-	description="了解如何从 Github 将 Azure 中 Linux VM 的 Azure Linux 代理更新到最新版本"
-	services="virtual-machines-linux"
-	documentationCenter=""
-	authors="SuperScottz"
-	manager="timlt"
-	editor=""
-	tags="azure-resource-manager,azure-service-management"/>
+---
+title: 从 GitHub 更新 Azure Linux 代理 | Azure
+description: 了解如何从 Github 将 Azure 中 Linux VM 的 Azure Linux 代理更新到最新版本
+services: virtual-machines-linux
+documentationCenter: 
+authors: SuperScottz
+manager: timlt
+editor: 
+tags: azure-resource-manager,azure-service-management
 
-<tags
-	ms.service="virtual-machines-linux"
-	ms.workload="infrastructure-services"
-	ms.tgt_pltfrm="vm-linux"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="12/14/2015"
-	wacn.date="12/26/2016"
-	ms.author="mingzhan"/>
-
+ms.service: virtual-machines-linux
+ms.workload: infrastructure-services
+ms.tgt_pltfrm: vm-linux
+ms.devlang: na
+ms.topic: article
+ms.date: 12/14/2015
+wacn.date: 12/26/2016
+ms.author: mingzhan
+---
 
 # 如何从 GitHub 将 VM 上的 Azure Linux 代理更新到最新版本
 
@@ -26,10 +25,10 @@
 1. 在 Azure 中具有运行的 Linux VM。
 2. 使用 SSH 连接到该 Linux VM。
 
-[AZURE.INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-both-include.md)]
+[!INCLUDE [learn-about-deployment-models](../../includes/learn-about-deployment-models-both-include.md)]
 
-
-> [AZURE.NOTE] 如果要从 Windows 计算机执行此任务，可以使用 PuTTY 通过 SSH 登录到 Linux 计算机。有关详细信息，请参阅[如何登录到运行 Linux 的虚拟机](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)。
+> [!NOTE]
+> 如果要从 Windows 计算机执行此任务，可以使用 PuTTY 通过 SSH 登录到 Linux 计算机。有关详细信息，请参阅[如何登录到运行 Linux 的虚拟机](./virtual-machines-linux-mac-create-ssh-keys.md)。
 
 Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中，因此，请先从该发行版存储库中查找并安装最新版本（如果可能）。
 
@@ -63,13 +62,11 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
 
 通常完成上述这些步骤就行了，但如果因某种原因，你需要直接从 https://github.com 安装它，请使用以下步骤。
 
-
 ## 安装 wget
 
 使用 SSH 登录到 VM。
 
 通过在命令行上键入 `#sudo yum install wget` 来安装 wget（有一些发行版在默认情况下未安装它，如 Redhat、CentOS 和 Oracle Linux 6.4 和 6.5 版）。
-
 
 ## 下载最新版本
 
@@ -79,7 +76,7 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
 
     #wget https://raw.githubusercontent.com/Azure/WALinuxAgent/WALinuxAgent-[version]/waagent  
 
-   以下行使用版本 2.0.14 作为示例：
+    以下行使用版本 2.0.14 作为示例：
 
     #wget https://raw.githubusercontent.com/Azure/WALinuxAgent/WALinuxAgent-2.0.14/waagent  
 
@@ -89,7 +86,7 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
     #unzip WALinuxAgent-[version].zip
     #cd WALinuxAgent-[version]
 
-   以下行使用版本 2.1.0 作为示例：
+    以下行使用版本 2.1.0 作为示例：
 
     #wget https://github.com/Azure/WALinuxAgent/archive/WALinuxAgent-2.1.0.zip
     #unzip WALinuxAgent-2.1.0.zip  
@@ -114,7 +111,7 @@ Azure 支持的 Linux 发行版已将 Azure Linux 代理包放入其存储库中
     #sudo cp waagent /usr/share/oem/bin/
 
   如果这是新安装的 Azure Linux 代理，请运行：
- 
+
     #sudo /usr/sbin/waagent -install -verbose
 
 ### 对于版本 2.1.x，请使用：

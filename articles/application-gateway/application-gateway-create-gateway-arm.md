@@ -1,37 +1,36 @@
-<properties
-   pageTitle="使用 Azure Resource Manager 创建、启动或删除应用程序网关 | Azure"
-   description="本页提供有关使用 Azure Resource Manager 创建、配置、启动和删除 Azure 应用程序网关的说明"
-   documentationCenter="na"
-   services="application-gateway"
-   authors="georgewallace"
-   manager="carmonm"
-   editor="tysonn"/>  
+---
+title: 使用 Azure Resource Manager 创建、启动或删除应用程序网关 | Azure
+description: 本页提供有关使用 Azure Resource Manager 创建、配置、启动和删除 Azure 应用程序网关的说明
+documentationCenter: na
+services: application-gateway
+authors: georgewallace
+manager: carmonm
+editor: tysonn
 
-<tags
-   ms.service="application-gateway"
-   ms.devlang="na"
-   ms.topic="hero-article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="11/16/2016"
-   wacn.date="01/03/2017"
-   ms.author="gwallace"/>
-
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/16/2016
+wacn.date: 01/03/2017
+ms.author: gwallace
+---
 
 # 使用 Azure Resource Manager 创建、启动或删除应用程序网关
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/application-gateway-create-gateway-portal/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-create-gateway-arm/)
-- [Azure 经典 PowerShell](/documentation/articles/application-gateway-create-gateway/)
-- [Azure Resource Manager 模板](/documentation/articles/application-gateway-create-gateway-arm-template/)
-- [Azure CLI](/documentation/articles/application-gateway-create-gateway-cli/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./application-gateway-create-gateway-portal.md)
+- [Azure Resource Manager PowerShell](./application-gateway-create-gateway-arm.md)
+- [Azure 经典 PowerShell](./application-gateway-create-gateway.md)
+- [Azure Resource Manager 模板](./application-gateway-create-gateway-arm-template.md)
+- [Azure CLI](./application-gateway-create-gateway-cli.md)
 
-Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之间提供故障转移和性能路由 HTTP 请求，而不管它们是在云中还是本地。应用程序网关提供许多应用程序传送控制器 (ADC) 功能，包括 HTTP 负载均衡、基于 cookie 的会话相关性、安全套接字层 (SSL) 卸载、自定义运行状况探测、多站点支持，以及许多其他功能。若要查找支持的功能的完整列表，请参阅[应用程序网关概述](/documentation/articles/application-gateway-introduction/)
+Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之间提供故障转移和性能路由 HTTP 请求，而不管它们是在云中还是本地。应用程序网关提供许多应用程序传送控制器 (ADC) 功能，包括 HTTP 负载均衡、基于 cookie 的会话相关性、安全套接字层 (SSL) 卸载、自定义运行状况探测、多站点支持，以及许多其他功能。若要查找支持的功能的完整列表，请参阅[应用程序网关概述](./application-gateway-introduction.md)
 
 本文将指导你完成创建、配置、启动和删除应用程序网关的步骤。
 
-> [AZURE.IMPORTANT]
-在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源之前，请确保你了解[部署模型和工具](/documentation/articles/azure-classic-rm/)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文档介绍如何使用 Azure Resource Manager 创建应用程序网关。若要使用经典版本，请转到[使用 PowerShell 创建应用程序网关经典部署](/documentation/articles/application-gateway-create-gateway/)。
+> [!IMPORTANT]
+在使用 Azure 资源之前，请务必了解 Azure 当前使用两种部署模型：Resource Manager 部署模型和经典部署模型。在使用任何 Azure 资源之前，请确保你了解[部署模型和工具](../azure-classic-rm.md)。可以通过单击本文顶部的选项卡来查看不同工具的文档。本文档介绍如何使用 Azure Resource Manager 创建应用程序网关。若要使用经典版本，请转到[使用 PowerShell 创建应用程序网关经典部署](./application-gateway-create-gateway.md)。
 > 
 > 
 
@@ -59,7 +58,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 ## 创建资源管理器的资源组
 
-确保使用最新版本的 Azure PowerShell。[将 Windows PowerShell 与 Resource Manager 配合使用](/documentation/articles/powershell-azure-resource-manager/)中提供了详细信息。
+确保使用最新版本的 Azure PowerShell。[将 Windows PowerShell 与 Resource Manager 配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)中提供了详细信息。
 
 ### 步骤 1
 
@@ -91,8 +90,8 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
 在上面的示例中，我们在位置“中国北部”创建了名为“appgw-RG”的资源组。
 
-> [AZURE.NOTE]
-如果你需要为应用程序网关配置自定义探测，请参阅 [Create an application gateway with custom probes by using PowerShell](/documentation/articles/application-gateway-create-probe-ps/)（使用 PowerShell 创建带自定义探测的应用程序网关）。有关详细信息，请查看 [custom probes and health monitoring](/documentation/articles/application-gateway-probe-overview/)（自定义探测和运行状况监视）。
+> [!NOTE]
+如果你需要为应用程序网关配置自定义探测，请参阅 [Create an application gateway with custom probes by using PowerShell](./application-gateway-create-probe-ps.md)（使用 PowerShell 创建带自定义探测的应用程序网关）。有关详细信息，请查看 [custom probes and health monitoring](./application-gateway-probe-overview.md)（自定义探测和运行状况监视）。
 > 
 > 
 
@@ -176,7 +175,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
     $sku = New-AzureRmApplicationGatewaySku -Name Standard_Small -Tier Standard -Capacity 2
 
-> [AZURE.NOTE]
+> [!NOTE]
 **InstanceCount** 的默认值为 2，最大值为 10。**GatewaySize** 的默认值为 Medium。可以在 **Standard\_Small**、**Standard\_Medium** 和 **Standard\_Large** 之间进行选择。
 > 
 > 
@@ -212,7 +211,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
     Remove-AzureRmApplicationGateway -Name $appgwtest -ResourceGroupName appgw-rg -Force
 
-> [AZURE.NOTE]
+> [!NOTE]
 可以使用 **-force** 开关来禁止显示该删除的确认消息。
 > 
 > 
@@ -228,7 +227,6 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
     Get-AzureRmPublicIpAddress -ResourceGroupName appgw-RG -Name publicIP01
 
 <br/>  
-
 
     Name                     : publicIP01
     ResourceGroupName        : appgw-RG
@@ -252,13 +250,13 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
 ## 后续步骤
 
-如果你要配置 SSL 卸载，请参阅 [Configure an application gateway for SSL offload](/documentation/articles/application-gateway-ssl/)（配置应用程序网关以进行 SSL 卸载）。
+如果你要配置 SSL 卸载，请参阅 [Configure an application gateway for SSL offload](./application-gateway-ssl.md)（配置应用程序网关以进行 SSL 卸载）。
 
-如果你想要将应用程序网关配置为与内部负载均衡器配合使用，请参阅 [Create an application gateway with an internal load balancer (ILB)](/documentation/articles/application-gateway-ilb/)（创建具有内部负载均衡器 (ILB) 的应用程序网关）。
+如果你想要将应用程序网关配置为与内部负载均衡器配合使用，请参阅 [Create an application gateway with an internal load balancer (ILB)](./application-gateway-ilb.md)（创建具有内部负载均衡器 (ILB) 的应用程序网关）。
 
 如需负载均衡选项的其他常规信息，请参阅：
 
-* [Azure Load Balancer](/documentation/services/load-balancer/)
-* [Azure 流量管理器](/documentation/services/traffic-manager/)
+* [Azure Load Balancer](../load-balancer/index.md)
+* [Azure 流量管理器](../traffic-manager/index.md)
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

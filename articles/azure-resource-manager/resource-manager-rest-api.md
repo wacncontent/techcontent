@@ -1,37 +1,36 @@
-<properties
-    pageTitle="Resource Manager REST API | Azure"
-    description="概述 Resource Manager REST API 身份验证和用例"
-    services="azure-resource-manager"
-    documentationcenter="na"
-    author="navalev"
-    manager="timlt"
-    editor="" />  
+---
+title: Resource Manager REST API | Azure
+description: 概述 Resource Manager REST API 身份验证和用例
+services: azure-resource-manager
+documentationcenter: na
+author: navalev
+manager: timlt
+editor: 
 
-<tags
-    ms.assetid="e8d7a1d2-1e82-4212-8288-8697341408c5"
-    ms.service="azure-resource-manager"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="06/23/2016"
-    wacn.date="01/06/2016"
-    ms.author="navale;tomfitz;" />  
-
+ms.assetid: e8d7a1d2-1e82-4212-8288-8697341408c5
+ms.service: azure-resource-manager
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 06/23/2016
+wacn.date: 01/06/2016
+ms.author: navale;tomfitz;
+---
 
 # Resource Manager REST API
->[AZURE.SELECTOR]
-[Azure PowerShell](/documentation/articles/powershell-azure-resource-manager/)
-[Azure CLI](/documentation/articles/xplat-cli-azure-resource-manager/)
-[Portal](/documentation/articles/resource-group-portal/)
-[REST API](/documentation/articles/resource-manager-rest-api/)
+>[!div class="op_single_selector"]
+[Azure PowerShell](./powershell-azure-resource-manager.md)
+[Azure CLI](./xplat-cli-azure-resource-manager.md)
+[Portal](./resource-group-portal.md)
+[REST API](./resource-manager-rest-api.md)
 
 在每次调用 Azure Resource Manager、每次部署模板以及每次配置存储帐户时，都会对 Azure Resource Manager 的 RESTful API 进行一次或多次调用。本主题专门介绍这些 API 以及如何在完全不使用任何 SDK 的情况下调用它们。如果你想要完全控制对 Azure 的所有请求，或者你偏好语言的 SDK 无法使用或不支持你想要执行的操作，这些 API 可能非常有用。
 
 本文不逐一介绍 Azure 中公开的每个 API，而以某些 API 为例，说明如何继续连接到这些 API。如果有一定的基础知识，则可继续阅读 [Azure Resource Manager REST API Reference](https://docs.microsoft.com/rest/api/resources/)（Azure Resource Manager REST API 参考），查找有关如何使用其余 API 的详细信息。
 
 ## 身份验证
-对 ARM 的身份验证由 Azure Active Directory (AD) 处理。若要连接到任何 API，首先需要使用 Azure AD 进行身份验证，以接收可传递给每个请求的身份验证令牌。由于我们讨论的是如何直接对 REST API 进行单纯调用，因此还假设当弹出屏幕提示输入用户名和密码时，甚至是在双重身份验证方案中使用的其他验证机制中，你不想要使用一般的用户名和密码进行身份验证。因此，我们将创建所谓的 Azure AD 应用程序和一个用于登录的服务主体。但请记住，Azure AD 支持多个身份验证过程，而这些过程全都可用于检索后续 API 请求所需的身份验证令牌。有关分步说明，请参阅[创建 Azure AD 应用程序和服务主体](/documentation/articles/resource-group-create-service-principal-portal/)。
+对 ARM 的身份验证由 Azure Active Directory (AD) 处理。若要连接到任何 API，首先需要使用 Azure AD 进行身份验证，以接收可传递给每个请求的身份验证令牌。由于我们讨论的是如何直接对 REST API 进行单纯调用，因此还假设当弹出屏幕提示输入用户名和密码时，甚至是在双重身份验证方案中使用的其他验证机制中，你不想要使用一般的用户名和密码进行身份验证。因此，我们将创建所谓的 Azure AD 应用程序和一个用于登录的服务主体。但请记住，Azure AD 支持多个身份验证过程，而这些过程全都可用于检索后续 API 请求所需的身份验证令牌。有关分步说明，请参阅[创建 Azure AD 应用程序和服务主体](./resource-group-create-service-principal-portal.md)。
 
 ### 生成访问令牌
 通过向外调用位于 login.chinacloudapi.cn 的 Azure AD 来对 Azure AD 进行身份验证。若要进行身份验证，你需要提供以下信息：

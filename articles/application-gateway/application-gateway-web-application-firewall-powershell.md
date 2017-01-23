@@ -1,28 +1,27 @@
-<properties
-    pageTitle="在新的或现有的应用程序网关上配置 Web 应用程序防火墙 | Azure"
-    description="本文提供有关如何在现有的或新的应用程序网关上开始使用 Web 应用程序防火墙的指南。"
-    documentationcenter="na"
-    services="application-gateway"
-    author="georgewallace"
-    manager="carmonm"
-    editor="tysonn" />  
+---
+title: 在新的或现有的应用程序网关上配置 Web 应用程序防火墙 | Azure
+description: 本文提供有关如何在现有的或新的应用程序网关上开始使用 Web 应用程序防火墙的指南。
+documentationcenter: na
+services: application-gateway
+author: georgewallace
+manager: carmonm
+editor: tysonn
 
-<tags
-    ms.assetid="670b9732-874b-43e6-843b-d2585c160982"
-    ms.service="application-gateway"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="11/16/2016"
-    wacn.date="12/05/2016"
-    ms.author="gwallace" />  
-
+ms.assetid: 670b9732-874b-43e6-843b-d2585c160982
+ms.service: application-gateway
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 11/16/2016
+wacn.date: 12/05/2016
+ms.author: gwallace
+---
 
 # 在新的或现有的应用程序网关上配置 Web 应用程序防火墙
-> [AZURE.SELECTOR]
-- [Azure 门户预览](/documentation/articles/application-gateway-web-application-firewall-portal/)
-- [Azure Resource Manager PowerShell](/documentation/articles/application-gateway-web-application-firewall-powershell/)
+> [!div class="op_single_selector"]
+- [Azure 门户预览](./application-gateway-web-application-firewall-portal.md)
+- [Azure Resource Manager PowerShell](./application-gateway-web-application-firewall-powershell.md)
 
 Azure 应用程序网关中的 Web 应用程序防火墙 (WAF) 可保护 Web 应用程序，使其免受常见 Web 攻击的威胁，例如 SQL 注入、跨站点脚本攻击和会话劫持。
 
@@ -32,10 +31,9 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 ![方案图像][scenario]  
 
-
 ## WAF 配置差异
 
-如果已经阅读[使用 PowerShell 创建应用程序网关](/documentation/articles/application-gateway-create-gateway-arm/)，就会了解创建应用程序网关时需要配置的 SKU 设置。在应用程序网关上配置 SKU 时，WAF 会提供其他可定义的设置。不需要对应用程序网关本身进行任何其他更改。
+如果已经阅读[使用 PowerShell 创建应用程序网关](./application-gateway-create-gateway-arm.md)，就会了解创建应用程序网关时需要配置的 SKU 设置。在应用程序网关上配置 SKU 时，WAF 会提供其他可定义的设置。不需要对应用程序网关本身进行任何其他更改。
 
 **SKU** - 没有 WAF 的普通应用程序网关支持 **Standard\_Small**、**Standard\_Medium** 和 **Standard\_Large** 大小。随着 WAF 的推出，提供其他两个 SKU，分别是 **WAF\_Medium** 和 **WAF\_Large**。小型应用程序网关不支持 WAF。
 
@@ -45,7 +43,7 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
 ## <a name="add-web-application-firewall-to-an-existing-application-gateway"></a> 将 Web 应用程序防火墙添加到现有的应用程序网关
 
-确保使用最新版本的 Azure PowerShell。[将 Windows PowerShell 与 Resource Manager 配合使用](/documentation/articles/powershell-azure-resource-manager/)中提供了详细信息。
+确保使用最新版本的 Azure PowerShell。[将 Windows PowerShell 与 Resource Manager 配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)中提供了详细信息。
 
 ### 步骤 1
 
@@ -85,13 +83,13 @@ Azure 应用程序网关是第 7 层负载均衡器。它在不同服务器之�
 
     Set-AzureRmApplicationGateway -ApplicationGateway $gw
 
-此命令使用 Web 应用程序防火墙更新应用程序网关。建议查看[应用程序网关诊断](/documentation/articles/application-gateway-diagnostics/)，了解如何查看应用程序网关的日志。由于 WAF 的安全特性，需要定期查看日志，以了解 Web 应用程序的安全状态。
+此命令使用 Web 应用程序防火墙更新应用程序网关。建议查看[应用程序网关诊断](./application-gateway-diagnostics.md)，了解如何查看应用程序网关的日志。由于 WAF 的安全特性，需要定期查看日志，以了解 Web 应用程序的安全状态。
 
 ## <a name="create-an-application-gateway-with-web-application-firewall"></a> 创建具有 Web 应用程序防火墙的应用程序网关
 
 以下步骤引导用户从头到尾完成创建具有 Web 应用程序防火墙的应用程序网关的整个过程。
 
-确保使用最新版本的 Azure PowerShell。[将 Windows PowerShell 与 Resource Manager 配合使用](/documentation/articles/powershell-azure-resource-manager/)中提供了详细信息。
+确保使用最新版本的 Azure PowerShell。[将 Windows PowerShell 与 Resource Manager 配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)中提供了详细信息。
 
 ### 步骤 1
 
@@ -123,8 +121,8 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
 在上述示例中，我们创建了名为“appgw-RG”的资源组，位置为“中国北部”。
 
-> [AZURE.NOTE]
-如果你需要为应用程序网关配置自定义探测，请参阅 [Create an application gateway with custom probes by using PowerShell（使用 PowerShell 创建带自定义探测的应用程序网关）](/documentation/articles/application-gateway-create-probe-ps/)。有关详细信息，请查看 [custom probes and health monitoring（自定义探测和运行状况监视）](/documentation/articles/application-gateway-probe-overview/)。
+> [!NOTE]
+如果你需要为应用程序网关配置自定义探测，请参阅 [Create an application gateway with custom probes by using PowerShell（使用 PowerShell 创建带自定义探测的应用程序网关）](./application-gateway-create-probe-ps.md)。有关详细信息，请查看 [custom probes and health monitoring（自定义探测和运行状况监视）](./application-gateway-probe-overview.md)。
 > 
 > 
 
@@ -134,7 +132,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
     $gwSubnet = New-AzureRmVirtualNetworkSubnetConfig -Name 'appgwsubnet' -AddressPrefix 10.0.0.0/24
 
-> [AZURE.NOTE]
+> [!NOTE]
 应用程序的子网应至少具有 28 个掩码位。此值会让应用程序网关实例的子网中留出 10 个可用地址。若使用较小的子网，可能无法在未来添加更多的应用程序网关实例。
 > 
 > 
@@ -165,7 +163,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
     $publicip = New-AzureRmPublicIpAddress -ResourceGroupName appgw-rg -name 'appgwpip' -Location "China North" -AllocationMethod Dynamic
 
-> [AZURE.IMPORTANT]
+> [!IMPORTANT]
 应用程序网关不支持使用通过定义的域标签创建的公共 IP 地址。仅支持具有动态创建的域标签的公共 IP 地址。如果需要应用程序网关具有友好的 DNS 名称，建议使用 CNAME 记录作为别名。
 > 
 > 
@@ -232,7 +230,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
     $sku = New-AzureRmApplicationGatewaySku -Name WAF_Medium -Tier WAF -Capacity 2
 
-> [AZURE.NOTE]
+> [!NOTE]
 可以选择 **WAF\_Medium** 或 **WAF\_Large**，使用 WAF 时的层始终是 **WAF**。容量是介于 1 和 10 之间的任意数字。
 > 
 > 
@@ -257,7 +255,6 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
 <br/>  
 
-
     Name                     : publicIP01
     ResourceGroupName        : appgw-RG
     Location                 : chinanorth
@@ -280,7 +277,7 @@ Azure 资源管理器要求所有资源组指定一个位置。此位置将用�
 
 ## 后续步骤
 
-若要了解如何配置诊断日志记录，以及如何记录通过 Web 应用程序防火墙检测到或阻止的事件，请参阅[应用程序网关诊断](/documentation/articles/application-gateway-diagnostics/)
+若要了解如何配置诊断日志记录，以及如何记录通过 Web 应用程序防火墙检测到或阻止的事件，请参阅[应用程序网关诊断](./application-gateway-diagnostics.md)
 
 [scenario]: ./media/application-gateway-web-application-firewall-powershell/scenario.png
 

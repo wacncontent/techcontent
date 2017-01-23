@@ -1,6 +1,6 @@
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/app-service-api-dotnet-get-started/)
-- [Node.js](/documentation/articles/app-service-api-nodejs-api-app/)
-- [Java](/documentation/articles/app-service-api-java-api-app/)
+> [!div class="op_single_selector"]
+- [.NET](../articles/app-service-api/app-service-api-dotnet-get-started.md)
+- [Node.js](../articles/app-service-api/app-service-api-nodejs-api-app.md)
+- [Java](../articles/app-service-api/app-service-api-java-api-app.md)
 
 <!---HONumber=Mooncake_0919_2016-->

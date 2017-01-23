@@ -1,16 +1,30 @@
-<properties linkid="downloads" urlDisplayName="下载和安装 Azure SDK工具" pageTitle="Azure 服务管理" metaKeywords="下载和安装 Azure SDK工具" description="下载和安装 Azure SDK、Azure PowerShell 和用于管理和部署的命令行工具" metaCanonical="" services="downloads" documentationCenter="downloads" title="下载和安装 Azure SDK工具" authors="ACom" solutions="" manager="" editor="Eric Chen" />
-<tags ms.service="downloads"
-    ms.date=""
-    wacn.date="11/25/2016"
-    />
+---
+linkid: downloads
+urlDisplayName: 下载和安装 Azure SDK工具
+title: Azure 服务管理
+metaKeywords: 下载和安装 Azure SDK工具
+description: 下载和安装 Azure SDK、Azure PowerShell 和用于管理和部署的命令行工具
+metaCanonical: 
+services: downloads
+documentationCenter: downloads
+title: 下载和安装 Azure SDK工具
+authors: ACom
+solutions: 
+manager: 
+editor: Eric Chen
 
+ms.service: downloads
+ms.date: 
+wacn.date: 11/25/2016
+---
 
 <div>
   <h1>下载</h1>
   <h3>获取你所需的 SDK 和命令行工具</h3>
 </div>
 
->[AZURE.NOTE] 本文涉及的 SDK 和工具应用于由微软运营的 Microsoft Azure 服务；在中国， Microsoft Azure 服务由世纪互联公司运营，如需使用，请参考 [Azure 应用程序开发说明](/documentation/articles/developerdifferences/)。
+>[!NOTE]
+> 本文涉及的 SDK 和工具应用于由微软运营的 Microsoft Azure 服务；在中国， Microsoft Azure 服务由世纪互联公司运营，如需使用，请参考 [Azure 应用程序开发说明](./articles/developerdifferences.md)。
 
 <div>
   <h2>SDK</h2>
@@ -31,9 +45,9 @@
   <div>
     <h4>Java</h4>
     <ul>
-      <li><a href="/documentation/articles/java-download-azure-sdk/">Windows 安装</a></li>
-      <li><a href="/documentation/articles/java-download-azure-sdk/">Mac 安装</a></li>
-      <li><a href="/documentation/articles/java-download-azure-sdk/">Linux 安装</a></li>
+      <li><a href="./articles/java-download-azure-sdk.md">Windows 安装</a></li>
+      <li><a href="./articles/java-download-azure-sdk.md">Mac 安装</a></li>
+      <li><a href="./articles/java-download-azure-sdk.md">Linux 安装</a></li>
       <li><a href="/develop/java/">文档</a></li>
     </ul>
   </div>
@@ -83,7 +97,7 @@
       <!--li><a href="http://nuget.org/packages/WindowsAzure.MobileServices/">Windows 应用商店 C# 安装</a></li-->
       <!--li><a href="http://nuget.org/packages/WindowsAzure.MobileServices.WinJS/">Windows 应用商店 JS 安装</a></li-->
       <li><a href="http://nuget.org/packages/WindowsAzure.MobileServices/">Windows Phone 8 安装</a></li>
-      <li><a href="/documentation/services/mobile-services/">文档</a></li>
+      <li><a href="./articles/mobile-services/index.md">文档</a></li>
     </ul>
   </div>
   <div>
@@ -107,8 +121,8 @@
     <h4>Windows PowerShell</h4>
     <ul>
       <li><a href="http://aka.ms/webpi-azps">安装</a></li>
-	  <li><a href="http://go.microsoft.com/?linkid=9811175&clcid=0x804">安装旧版</a></li>
-      <li><a href="/documentation/articles/powershell-install-configure/">文档</a></li>
+      <li><a href="http://go.microsoft.com/?linkid=9811175&clcid=0x804">安装旧版</a></li>
+      <li><a href="./articles/powershell-install-configure.md">文档</a></li>
       <li><a href="https://technet.microsoft.com/zh-cn/scriptcenter/bb410849.aspx">浏览脚本中心</a></li>
     </ul>
   </div>
@@ -118,7 +132,7 @@
       <li><a href="http://go.microsoft.com/?linkid=9828653&clcid=0x804">Windows 安装</a></li>
       <li><a href="http://go.microsoft.com/fwlink/?linkid=253471&clcid=0x804">Mac 安装</a></li>
       <li><a href="http://go.microsoft.com/fwlink/?linkid=253472&clcid=0x804">Linux 安装</a></li>
-      <li><a href="/documentation/articles/xplat-cli-install/">文档</a></li>
+      <li><a href="./articles/xplat-cli-install.md">文档</a></li>
     </ul>
   </div>
   <div>
@@ -132,7 +146,7 @@
     <h4>Azure 存储模拟器</h4>
     <ul>
       <li><a href="http://go.microsoft.com/fwlink/?linkid=717179&clcid=0x804">安装</a></li>
-      <li><a href="/documentation/articles/storage-use-emulator/">文档</a></li>
+      <li><a href="./articles/storage/storage-use-emulator.md">文档</a></li>
     </ul>
   </div>
 </div>

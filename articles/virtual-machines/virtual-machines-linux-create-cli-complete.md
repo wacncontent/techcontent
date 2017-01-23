@@ -1,29 +1,30 @@
 <!-- need to be verified -->
 
-<properties
-    pageTitle="使用 Azure CLI 创建完整的 Linux 环境 | Azure"
-    description="使用 Azure CLI 从头开始创建存储、Linux VM、虚拟网络和子网、负载均衡器、NIC、公共 IP 和网络安全组。"
-    services="virtual-machines-linux"
-    documentationcenter="virtual-machines"
-    author="iainfoulds"
-    manager="timlt"
-    editor=""
-    tags="azure-resource-manager" />
-<tags 
-    ms.assetid="4ba4060b-ce95-4747-a735-1d7c68597a1a"
-    ms.service="virtual-machines-linux"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="vm-linux"
-    ms.workload="infrastructure"
-    ms.date="10/24/2016"
-    wacn.date="12/20/2016"
-    ms.author="iainfou" />
+---
+title: 使用 Azure CLI 创建完整的 Linux 环境 | Azure
+description: 使用 Azure CLI 从头开始创建存储、Linux VM、虚拟网络和子网、负载均衡器、NIC、公共 IP 和网络安全组。
+services: virtual-machines-linux
+documentationcenter: virtual-machines
+author: iainfoulds
+manager: timlt
+editor: 
+tags: azure-resource-manager
+
+ms.assetid: 4ba4060b-ce95-4747-a735-1d7c68597a1a
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure
+ms.date: 10/24/2016
+wacn.date: 12/20/2016
+ms.author: iainfou
+---
 
 # 使用 Azure CLI 创建完整的 Linux 环境
 在本文中，我们将构建一个简单网络，其中包含一个负载均衡器，以及一对可用于开发和简单计算的 VM。将以逐条命令的方式完成整个过程，直到创建两个可以从 Internet 上的任何位置连接的有效且安全的 Linux VM。然后，便可以继续构建更复杂的网络和环境。
 
-在此过程中，将了解 Resource Manager 部署模型提供的依赖性层次结构及其提供的功能。明白系统是如何构建的以后，即可使用 [Azure Resource Manager 模板](/documentation/articles/resource-group-authoring-templates/)更快速地重新构建系统。此外，了解环境的各个部分如何彼此配合运行后，可以更轻松创建模板以实现自动化。
+在此过程中，将了解 Resource Manager 部署模型提供的依赖性层次结构及其提供的功能。明白系统是如何构建的以后，即可使用 [Azure Resource Manager 模板](../azure-resource-manager/resource-group-authoring-templates.md)更快速地重新构建系统。此外，了解环境的各个部分如何彼此配合运行后，可以更轻松创建模板以实现自动化。
 
 该环境包含：
 
@@ -33,12 +34,12 @@
 
 ![基本环境概述](./media/virtual-machines-linux-create-cli-complete/environment_overview.png)
 
-若要创建此自定义环境，需要在 Resource Manager 模式 (`azure config mode arm`) 下安装最新的 [Azure CLI](/documentation/articles/xplat-cli-install/)。此外，还需要安装 JSON 解析工具。本示例使用 [jq](https://stedolan.github.io/jq/)。
+若要创建此自定义环境，需要在 Resource Manager 模式 (`azure config mode arm`) 下安装最新的 [Azure CLI](../xplat-cli-install.md)。此外，还需要安装 JSON 解析工具。本示例使用 [jq](https://stedolan.github.io/jq/)。
 
 ## 快速命令
 如果需要快速完成任务，请参阅以下部分，其中详细说明了用于将 VM 上载到 Azure 的基本命令。本文档的余下部分（[从此处开始](#detailed-walkthrough)）提供了每个步骤的更详细信息和应用背景。
 
-确保已登录 [Azure CLI](/documentation/articles/xplat-cli-install/) 并使用 Resource Manager 模式：
+确保已登录 [Azure CLI](../xplat-cli-install.md) 并使用 Resource Manager 模式：
 
     azure config mode arm
 
@@ -206,7 +207,7 @@
 ## <a name="detailed-walkthrough"></a> 详细演练
 下面的详细步骤说明构建环境时每条命令的作用。了解这些概念有助于构建自己的自定义开发或生产环境。
 
-确保已登录 [Azure CLI](/documentation/articles/xplat-cli-install/) 并使用 Resource Manager 模式：
+确保已登录 [Azure CLI](../xplat-cli-install.md) 并使用 Resource Manager 模式：
 
     azure config mode arm
 
@@ -659,7 +660,7 @@ Azure 资源组是逻辑部署实体，包含用于启用资源部署逻辑管�
     info:    network lb rule create command OK
 
 ## <a name="create-a-load-balancer-health-probe"></a> 创建负载均衡器运行状况探测
-运行状况探测定期检查受负载均衡器后面的 VM，以确保它们可以根据定义操作和响应请求。否则，将从操作中删除这些 VM，确保不会将用户定向到它们。可以针对运行状况探测定义自定义检查，以及间隔和超时值。有关运行状况探测的详细信息，请参阅 [Load Balancer probes](/documentation/articles/load-balancer-custom-probe-overview/)（负载均衡器探测）。以下示例创建名为 `myHealthProbe` 的 TCP 运行状况探测：
+运行状况探测定期检查受负载均衡器后面的 VM，以确保它们可以根据定义操作和响应请求。否则，将从操作中删除这些 VM，确保不会将用户定向到它们。可以针对运行状况探测定义自定义检查，以及间隔和超时值。有关运行状况探测的详细信息，请参阅 [Load Balancer probes](../load-balancer/load-balancer-custom-probe-overview.md)（负载均衡器探测）。以下示例创建名为 `myHealthProbe` 的 TCP 运行状况探测：
 
     azure network lb probe create --resource-group myResourceGroup \
       --lb-name myLoadBalancer --name myHealthProbe --protocol "tcp" \
@@ -917,7 +918,7 @@ Azure 资源组是逻辑部署实体，包含用于启用资源部署逻辑管�
       --priority 1001 --destination-port-range 80 --access allow \
       --name myNetworkSecurityGroupRuleHTTP
 
-> [AZURE.NOTE]
+> [!NOTE]
 入站规则是入站网络连接的筛选器。在本示例中，我们将 NSG 绑定到 VM 虚拟 NIC，这意味着任何对端口 22 的请求都将在 VM 上传递到 NIC。此入站规则与网络连接相关，而不与终结点相关（终结点与经典部署相关）。若要打开端口，必须将 `--source-port-range` 保持设置为“*”（默认值）才能接受来自**任何**请求端口的入站请求。端口通常是动态的。
 > 
 > 
@@ -929,7 +930,6 @@ Azure 资源组是逻辑部署实体，包含用于启用资源部署逻辑管�
       --network-security-group-name myNetworkSecurityGroup
 
 <br/>  
-
 
     azure network nic set --resource-group myResourceGroup --name myNic2 \
       --network-security-group-name myNetworkSecurityGroup
@@ -944,17 +944,17 @@ Azure 资源组是逻辑部署实体，包含用于启用资源部署逻辑管�
 
 升级域表示虚拟机组以及可同时重新启动的基础物理硬件。在计划内维护期间，升级域的重新启动顺序可能不会按序进行，但一次只重新启动一个升级域。同样，将多个 VM 放入一个可用性站点时，Azure 会自动将它们分散到升级域。
 
-有关详细信息，请阅读[管理 VM 可用性](/documentation/articles/virtual-machines-linux-manage-availability/)。
+有关详细信息，请阅读[管理 VM 可用性](./virtual-machines-linux-manage-availability.md)。
 
 ## <a name="create-the-linux-vms"></a> 创建 Linux VM
-已经创建存储和网络资源，支持可访问 Internet 的 VM。现在，创建 VM 并使用不含密码的 SSH 密钥保护其安全。在此情况下，我们需要基于最新的 LTS 创建 Ubuntu VM。我们将根据 [finding Azure VM images](/documentation/articles/virtual-machines-linux-cli-ps-findimage/)（查找 Azure VM 映像）中所述，使用 `azure vm image list` 来查找该映像信息。
+已经创建存储和网络资源，支持可访问 Internet 的 VM。现在，创建 VM 并使用不含密码的 SSH 密钥保护其安全。在此情况下，我们需要基于最新的 LTS 创建 Ubuntu VM。我们将根据 [finding Azure VM images](./virtual-machines-linux-cli-ps-findimage.md)（查找 Azure VM 映像）中所述，使用 `azure vm image list` 来查找该映像信息。
 
 我们使用命令 `azure vm image list westeurope canonical | grep LTS` 选择了映像。在此示例中，使用 `canonical:UbuntuServer:16.04.0-LTS:16.04.201608150`。对于最后一个字段，我们将传递 `latest`，以便将来可随时获取最新的内部版本。（使用的字符串是 `canonical:UbuntuServer:16.04.0-LTS:16.04.201608150`）。
 
 已使用 **ssh-keygen -t rsa -b 2048** 在 Linux 或 Mac 上创建 ssh rsa 公钥和私钥对的任何人都熟悉下一个步骤。如果 `~/.ssh` 目录中没有任何证书密钥对，可以创建证书密钥对：
 
 * 使用 `azure vm create --generate-ssh-keys` 选项自动创建。
-* [根据说明手动自行创建](/documentation/articles/virtual-machines-linux-mac-create-ssh-keys/)。
+* [根据说明手动自行创建](./virtual-machines-linux-mac-create-ssh-keys.md)。
 
 或者，可以在创建 VM 之后，使用 `--admin-password` 方法对 SSH 连接进行身份验证。此方法通常不太安全。
 
@@ -1090,18 +1090,18 @@ Azure 资源组是逻辑部署实体，包含用于启用资源部署逻辑管�
     info:    vm show command OK
 
 ## 将环境导出为模板
-现已构建此环境，如果要使用相同的参数创建与其相符的额外开发环境或生产环境，该怎么办？ Resource Manager 使用定义了所有环境参数的 JSON 模板。通过引用此 JSON 模板构建出整个环境。可以[手动构建 JSON 模板](/documentation/articles/resource-group-authoring-templates/)，也可以通过导出现有环境来为自己创建 JSON 模板：
+现已构建此环境，如果要使用相同的参数创建与其相符的额外开发环境或生产环境，该怎么办？ Resource Manager 使用定义了所有环境参数的 JSON 模板。通过引用此 JSON 模板构建出整个环境。可以[手动构建 JSON 模板](../azure-resource-manager/resource-group-authoring-templates.md)，也可以通过导出现有环境来为自己创建 JSON 模板：
 
     azure group export --name myResourceGroup
 
-此命令在当前工作目录中创建 `myResourceGroup.json` 文件。从此模板创建环境时，系统会提示输入所有资源名称，包括负载均衡器、网络接口或 VM 的名称。可以通过向前面所示的 `azure group export` 命令中添加 `-p` 或 `--includeParameterDefaultValue` 参数，在模板文件中填充这些名称。请编辑 JSON 模板以指定资源名称，或[创建 parameters.json 文件](/documentation/articles/resource-group-authoring-templates/#parameters)来指定资源名称。
+此命令在当前工作目录中创建 `myResourceGroup.json` 文件。从此模板创建环境时，系统会提示输入所有资源名称，包括负载均衡器、网络接口或 VM 的名称。可以通过向前面所示的 `azure group export` 命令中添加 `-p` 或 `--includeParameterDefaultValue` 参数，在模板文件中填充这些名称。请编辑 JSON 模板以指定资源名称，或[创建 parameters.json 文件](../azure-resource-manager/resource-group-authoring-templates.md#parameters)来指定资源名称。
 
 使用模板创建环境：
 
     azure group deployment create --resource-group myNewResourceGroup \
       --template-file myResourceGroup.json
 
-可能需要阅读[有关通过模板进行部署的详细信息](/documentation/articles/resource-group-template-deploy-cli/)。了解如何对环境进行增量更新、如何使用参数文件，以及如何从单个存储位置访问模板。
+可能需要阅读[有关通过模板进行部署的详细信息](../azure-resource-manager/resource-group-template-deploy-cli.md)。了解如何对环境进行增量更新、如何使用参数文件，以及如何从单个存储位置访问模板。
 
 ## 后续步骤
 现在，已准备好开始使用多个网络组件和 VM。可以使用本文介绍的核心组件，通过此示例环境构建应用程序。

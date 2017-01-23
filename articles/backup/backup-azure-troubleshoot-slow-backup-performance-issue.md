@@ -1,38 +1,36 @@
-<properties
-   pageTitle="排查在 Azure 备份中备份文件和文件夹时速度缓慢的问题 | Azure"
-   description="提供了故障排除指导，帮助你诊断 Azure 备份性能问题的原因"
-   services="backup"
-   documentationCenter=""
-   authors="genlin"
-   manager="jimpark"
-   editor=""/>  
+---
+title: 排查在 Azure 备份中备份文件和文件夹时速度缓慢的问题 | Azure
+description: 提供了故障排除指导，帮助你诊断 Azure 备份性能问题的原因
+services: backup
+documentationCenter: 
+authors: genlin
+manager: jimpark
+editor: 
 
-
-<tags
-    ms.service="backup"
-    ms.workload="storage-backup-recovery"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/13/2016"
-    wacn.date="11/15/2016"
-    ms.author="genli"/>  
-
+ms.service: backup
+ms.workload: storage-backup-recovery
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/13/2016
+wacn.date: 11/15/2016
+ms.author: genli
+---
 
 # 排查在 Azure 备份中备份文件和文件夹时速度缓慢的问题
 
 本文提供故障排除指导，帮助你诊断使用 Azure 备份来备份文件和文件夹时备份性能缓慢的原因。当你使用 Azure 备份代理备份文件时，备份过程花费的时间可能比预期要长。这种延迟可能由以下一个或多个原因所造成：
 
--	[正在备份的计算机存在性能瓶颈。](#cause1)
--	[其他进程或防病毒软件正在干扰 Azure 备份进程。](#cause2)
--	[备份代理在 Azure 虚拟机 (VM) 上运行。](#cause3)
--	[正在备份大量的（数百万个）文件。](#cause4)
+- [正在备份的计算机存在性能瓶颈。](#cause1)
+- [其他进程或防病毒软件正在干扰 Azure 备份进程。](#cause2)
+- [备份代理在 Azure 虚拟机 (VM) 上运行。](#cause3)
+- [正在备份大量的（数百万个）文件。](#cause4)
 
 在开始排查问题之前，建议你下载并安装[最新的 Azure 备份代理](http://download.microsoft.com/download/4/3/7/4376BBCE-9123-46FD-AAE1-599EAB6D2BD2/MARSAgentInstaller.exe)。我们经常更新备份代理，以修复各种问题、添加功能和改善性能。
 
-此外，我们强烈建议你查看 [Azure Backup service FAQ](/documentation/articles/backup-azure-backup-faq/)（Azure 备份服务常见问题），确保所遇到的问题并非任何常见配置问题。
+此外，我们强烈建议你查看 [Azure Backup service FAQ](./backup-azure-backup-faq.md)（Azure 备份服务常见问题），确保所遇到的问题并非任何常见配置问题。
 
-[AZURE.INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
+[!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
 
 <a id="cause1"></a>
 ## 原因：计算机存在性能瓶颈
@@ -53,8 +51,8 @@ Windows 提供了名为[性能监视器](https://technet.microsoft.com/zh-cn/mag
 | 内存--可用 MB| • 50% 或更多的内存可用 = 正常</br>• 25% 的内存可用 = 监视</br>• 10% 的内存可用 = 警告</br>• 不到 100 MB 或 5% 的内存可用 = 关键或超出规范|
 |处理器--\\处理器时间百分比(所有实例)|• 消耗不到 60% = 正常</br>• 消耗 61% - 90% = 监视或注意</br>• 消耗 91% - 100% = 关键|
 
-
-> [AZURE.NOTE] 如果你判定罪魁祸首是基础结构，建议你定期进行磁盘碎片整理以提高性能。
+> [!NOTE]
+> 如果你判定罪魁祸首是基础结构，建议你定期进行磁盘碎片整理以提高性能。
 
 <a id="cause2"></a>
 ## 原因：其他进程或防病毒软件正在干扰 Azure 备份
@@ -85,6 +83,6 @@ Windows 提供了名为[性能监视器](https://technet.microsoft.com/zh-cn/mag
 
 - **UI 显示数据传输进度**。数据仍在传输。网络带宽或数据大小可能导致延迟。
 
-- **UI 未显示数据传输进度**。打开位于 C:\\Azure Recovery Services Agent\\Temp 中的日志，然后检查日志中的 FileProvider::EndData 条目。此条目表示数据传输已完成，正在进行目录操作。请不要取消备份作业，而是再等待片刻，让目录操作完成。如果问题持续出现，请联系 [Azure 支持](/support/support-ticket-form/?l=zh-cn)。
+- **UI 未显示数据传输进度**。打开位于 C:\\Azure Recovery Services Agent\\Temp 中的日志，然后检查日志中的 FileProvider::EndData 条目。此条目表示数据传输已完成，正在进行目录操作。请不要取消备份作业，而是再等待片刻，让目录操作完成。如果问题持续出现，请联系 [Azure 支持](https://www.azure.cn/support/support-ticket-form/?l=zh-cn)。
 
 <!---HONumber=Mooncake_1107_2016-->

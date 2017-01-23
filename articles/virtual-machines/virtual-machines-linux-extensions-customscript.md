@@ -1,28 +1,27 @@
-<properties
-   pageTitle="Linux VM 上的自定义脚本 | Azure"
-   description="使用自定义脚本扩展自动化 Linux VM 配置任务"
-   services="virtual-machines-linux"
-   documentationCenter=""
-   authors="neilpeterson"
-   manager="timlt"
-   editor=""
-   tags="azure-resource-manager"/>  
+---
+title: Linux VM 上的自定义脚本 | Azure
+description: 使用自定义脚本扩展自动化 Linux VM 配置任务
+services: virtual-machines-linux
+documentationCenter: 
+authors: neilpeterson
+manager: timlt
+editor: 
+tags: azure-resource-manager
 
-
-<tags
-   ms.service="virtual-machines-linux"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="vm-linux"
-   ms.workload="infrastructure-services"
-   ms.date="09/22/2016"
-   wacn.date="01/05/2017"
-   ms.author="nepeters"/>  
-
+ms.service: virtual-machines-linux
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: vm-linux
+ms.workload: infrastructure-services
+ms.date: 09/22/2016
+wacn.date: 01/05/2017
+ms.author: nepeters
+---
 
 # 在 Linux 虚拟机上使用 Azure 自定义脚本扩展
 
->[AZURE.NOTE] 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
+>[!NOTE]
+> 必须修改从 GitHub 存储库“azure-quickstart-templates”下载的模板，以适应 Azure 中国云环境。例如，替换某些终结点（将“blob.core.windows.net”替换为“blob.core.chinacloudapi.cn”，将“cloudapp.azure.com”替换为“chinacloudapp.cn”）；更改某些不受支持的 VM 映像；更改某些不受支持的 VM 大小。
 
 自定义脚本扩展在 Azure 虚拟机上下载并执行脚本。此扩展适用于部署后配置、软件安装或其他任何配置/管理任务。可以从 Azure 存储或其他可访问的 Internet 位置下载脚本，或者将脚本提供给扩展运行时。自定义脚本扩展与 Azure Resource Manager 模板集成，也可以使用 Azure CLI、PowerShell、Azure 门户预览或 Azure 虚拟机 REST API 来运行它。
 
@@ -63,14 +62,14 @@
 
 使用 Azure CLI 来运行自定义脚本扩展时，请创建一个或多个至少包含文件 URI 和脚本执行命令的配置文件。
 
-	azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-	  --auto-upgrade-minor-version --public-config-path /script-config.json
+    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+      --auto-upgrade-minor-version --public-config-path /script-config.json
 
 （可选）可以使用 `--public-config` 和 `--private-config` 选项来运行命令，这样，便可以在执行期间指定配置，而无需使用单独的配置文件。
 
-	azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-	  --auto-upgrade-minor-version \
-	  --public-config '{"fileUris": ["https://gist.github.com/ahmetalpbalkan/b5d4a856fe15464015ae87d5587a4439/raw/466f5c30507c990a4d5a2f5c79f901fa89a80841/hello.sh"],"commandToExecute": "./hello.sh"}'
+    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+      --auto-upgrade-minor-version \
+      --public-config '{"fileUris": ["https://gist.github.com/ahmetalpbalkan/b5d4a856fe15464015ae87d5587a4439/raw/466f5c30507c990a4d5a2f5c79f901fa89a80841/hello.sh"],"commandToExecute": "./hello.sh"}'
 
 ### Azure CLI 示例
 
@@ -83,8 +82,8 @@
 
 Azure CLI 命令：
 
-	azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-	  --auto-upgrade-minor-version --public-config-path /public.json
+    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+      --auto-upgrade-minor-version --public-config-path /public.json
 
 **示例 2** - 不包含脚本文件的公共配置。
 
@@ -94,8 +93,8 @@ Azure CLI 命令：
 
 Azure CLI 命令：
 
-	azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-	  --auto-upgrade-minor-version --public-config-path /public.json
+    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+      --auto-upgrade-minor-version --public-config-path /public.json
 
 **示例 3** - 使用公共配置文件指定脚本文件 URI，使用受保护的配置文件指定要执行的命令。
 
@@ -113,8 +112,8 @@ Azure CLI 命令：
 
 Azure CLI 命令：
 
-	azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
-	  --auto-upgrade-minor-version --public-config-path ./public.json --private-config-path ./protected.json
+    azure vm extension set myResourceGroup myVM CustomScript Microsoft.Azure.Extensions 2.0 \
+      --auto-upgrade-minor-version --public-config-path ./public.json --private-config-path ./protected.json
 
 ## Resource Manager 模板
 
@@ -206,6 +205,6 @@ Azure 脚本扩展生成一个日志，位置如下。
 
 ## 后续步骤
 
-有关其他 VM 脚本扩展的信息，请参阅 [Azure Script Extension overview for Linux](/documentation/articles/virtual-machines-linux-extensions-features/)（适用于 Linux 的 Azure 脚本扩展概述）。
+有关其他 VM 脚本扩展的信息，请参阅 [Azure Script Extension overview for Linux](./virtual-machines-linux-extensions-features.md)（适用于 Linux 的 Azure 脚本扩展概述）。
 
 <!---HONumber=Mooncake_1114_2016-->

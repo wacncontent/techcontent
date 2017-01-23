@@ -1,21 +1,21 @@
-<properties 
-   pageTitle="Azure SDK for .NET 2.8 发行说明" 
-   description="Azure SDK for .NET 2.8 发行说明" 
-   services="app-service\web" 
-   documentationCenter=".net" 
-   authors="Juliako" 
-   manager="dwrede" 
-   editor=""/>
+---
+title: Azure SDK for .NET 2.8 发行说明
+description: Azure SDK for .NET 2.8 发行说明
+services: app-service\web
+documentationCenter: .net
+authors: Juliako
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="app-service"
-	ms.date="01/31/2016"
-	wacn.date="03/17/2016"/>
+ms.service: app-service
+ms.date: 01/31/2016
+wacn.date: 03/17/2016
+---
 
 # Azure SDK for .NET 2.8、2.8.1 和 2.8.2
 
 ##概述
- 
+
 本文包含 Azure SDK for .NET 2.8、2.8.1 和 2.8.2 版本的发行说明（包括已知问题和重大更改）。
 
 有关此版本中的新功能和更新的完整列表，请参阅 [Azure SDK 2.8 for Visual Studio 2013 和 Azure SDK 2.8 for Visual Studio 2015](https://azure.microsoft.com/zh-cn/blog/announcing-the-azure-sdk-2-8-for-net/) 通知。
@@ -27,12 +27,12 @@
 [Azure SDK for .NET 2.8 for Visual Studio 2015](http://go.microsoft.com/fwlink/?LinkId=699285)
 
 [Azure SDK for .NET 2.8 for Visual Studio 2013](http://go.microsoft.com/fwlink/?LinkId=699287)
- 
+
 ### .NET 4.5.2 支持 
 
 ####已知问题
 
-Azure.NET SDK 2.8 可让你创建 .NET 4.5.2 云服务包。不过，.NET 4.5.2 Framework 要在 2016 年 1 月来宾 OS 版本发布后，才会安装在默认的来宾 OS 映像上。在此之前，可以通过独立的来宾 OS 版本 November 2015-02 获取 .NET 4.5.2 Framework。请参阅 [Azure 来宾 OS 版本和 SDK 兼容性对照表](/documentation/articles/cloud-services-guestos-update-matrix/)页跟踪该映像的发布时间。November 2015-02 映像发布后，你可以选择通过更新云服务配置文件 (.cscfg) 来使用该映像。在服务配置文件中，将 ServiceConfiguration 元素的 osVersion 属性设置为字符串“WA-GUEST-OS-4.26\_201511-02”。如果你选择使用此映像，将不再获得来宾 OS 的自动更新。若要获取自动更新，osVersion 必须设置为“\*”，并且只能在 2016 年 1 月通过自动更新获取 .NET 4.5.2。
+Azure.NET SDK 2.8 可让你创建 .NET 4.5.2 云服务包。不过，.NET 4.5.2 Framework 要在 2016 年 1 月来宾 OS 版本发布后，才会安装在默认的来宾 OS 映像上。在此之前，可以通过独立的来宾 OS 版本 November 2015-02 获取 .NET 4.5.2 Framework。请参阅 [Azure 来宾 OS 版本和 SDK 兼容性对照表](./cloud-services/cloud-services-guestos-update-matrix.md)页跟踪该映像的发布时间。November 2015-02 映像发布后，你可以选择通过更新云服务配置文件 (.cscfg) 来使用该映像。在服务配置文件中，将 ServiceConfiguration 元素的 osVersion 属性设置为字符串“WA-GUEST-OS-4.26\_201511-02”。如果你选择使用此映像，将不再获得来宾 OS 的自动更新。若要获取自动更新，osVersion 必须设置为“\*”，并且只能在 2016 年 1 月通过自动更新获取 .NET 4.5.2。
 
 ###Azure 数据工厂
 
@@ -41,7 +41,6 @@ Azure.NET SDK 2.8 可让你创建 .NET 4.5.2 云服务包。不过，.NET 4.5.2 
 如果计算机上安装的 Azure PowerShell 版本高于 0.9.8，则在创建与示例数据相关的 **数据工厂模板** 项目期间，Azure PowerShell 脚本可能会失败。
 
 若要成功创建这种类型的项目，必须安装 [Azure PowerShell 0.9.8 版](https://github.com/Azure/azure-powershell/releases/download/v0.9.8-September2015/azure-powershell.0.9.8.msi)。
-
 
 ### Azure 资源管理器工具 
 
@@ -74,7 +73,7 @@ Azure 资源组项目提供的 PowerShell 脚本在此版本中已更新，可�
 ## Azure SDK for .NET 2.8.1
 
 ### Visual Studio 2013 和 Visual Studio 2015 的已知问题
- 
+
 1. 以槽为目标的触发 Web 作业发布将显示错误，并且不会设置计划，但会将 Web 作业推送到 Azure。需要计划作业的客户可以使用 Azure 经典管理门户来设置 Web 作业的计划。 
 2. Python 客户可能会遇到调试器问题。服务团队正在针对此问题推出修复程序，但如果客户受到影响，请通过论坛、通知博客或发行说明意见部分告知 Microsoft。 
 3. 某些区域（如印度南部）的客户会遇到 Azure Web 应用预配错误。这与经典管理门户中的情况一致，遇到此问题的客户可以使用 Azure 经典管理门户来请求这些地理区域的发布访问权限。使用 Azure 经典管理门户请求这些区域的访问权限后，预配应能正常进行。

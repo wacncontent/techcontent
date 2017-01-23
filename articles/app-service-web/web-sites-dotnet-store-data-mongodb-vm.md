@@ -1,27 +1,26 @@
-<properties
-    pageTitle="在 Azure 中创建连接到虚拟机上运行的 MongoDB 的 Web 应用"
-    description="本教程介绍如何使用 Git 将 ASP.NET 应用部署到连接至Azure 虚拟机上 MongoDB 的 Azure App Service。"
-    tags="azure-portal"
-    services="app-service\web, virtual-machines"
-    documentationcenter=".net"
-    author="cephalin"
-    manager="wpickett"
-    editor="" />  
+---
+title: 在 Azure 中创建连接到虚拟机上运行的 MongoDB 的 Web 应用
+description: 本教程介绍如何使用 Git 将 ASP.NET 应用部署到连接至Azure 虚拟机上 MongoDB 的 Azure App Service。
+tags: azure-portal
+services: app-service\web, virtual-machines
+documentationcenter: .net
+author: cephalin
+manager: wpickett
+editor: 
 
-<tags
-    ms.assetid="adf7a472-ae00-45a8-aec4-06247e21318b"
-    ms.service="app-service-web"
-    ms.workload="web"
-    ms.tgt_pltfrm="na"
-    ms.devlang="dotnet"
-    ms.topic="article"
-    ms.date="02/29/2016"
-    wacn.date="12/26/2016"
-    ms.author="cephalin" />
+ms.assetid: adf7a472-ae00-45a8-aec4-06247e21318b
+ms.service: app-service-web
+ms.workload: web
+ms.tgt_pltfrm: na
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 02/29/2016
+wacn.date: 12/26/2016
+ms.author: cephalin
+---
 
 # 在 Azure 中创建连接到虚拟机上运行的 MongoDB 的 Web 应用
 使用 Git，可以将 ASP.NET 应用程序部署到 Azure App Service Web 应用。在本教程中，你将构建一个简单的前端 ASP.NET MVC 任务列表应用程序，该程序将连接至在 Azure 内的虚拟机中运行的 MongoDB 数据库。[MongoDB][MongoDB] 是一个受欢迎的开源、高性能 NoSQL 数据库。在开发计算机上运行并测试 ASP.NET 应用程序后，可使用 Git 将其上传到应用服务 Web 应用。
-
 
 ## 背景知识
 以下知识对学习本教程有帮助（但并非必需）：
@@ -36,7 +35,7 @@
 * [用于 .NET 的 Azure SDK](http://go.microsoft.com/fwlink/p/?linkid=323510&clcid=0x409)
 * 一个有效的 Azure 订阅
 
-[AZURE.INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
+[!INCLUDE [create-account-and-websites-note](../../includes/create-account-and-websites-note.md)]
 
 <a id="virtualmachine"></a>
 
@@ -51,25 +50,25 @@
 在本部分中，将使用 Visual Studio 创建一个名为“My Task List”的 ASP.NET 应用程序，并执行到 Azure App Service Web 应用的初始部署。该应用程序在本地运行，但它会连接到 Azure 上的虚拟机，并使用此处创建的 MongoDB 实例。
 
 1. 在 Visual Studio 中，单击“新建项目”。
-   
+
     ![新项目开始页面][StartPageNewProject]
 2. 在“新建项目”窗口中的左侧窗格中，选择“Visual C#”，然后选择“Web”。在中间窗格中，选择“ASP.NET Web 应用程序”。在底部，将项目命名为“MyTaskListApp”，然后单击“确定”。
-   
+
     ![新建项目对话框][NewProjectMyTaskListApp]
 3. 在“新建 ASP.NET 项目”对话框中，选择“MVC”，然后单击“确定”。
-   
+
     ![选择 MVC 模板][VS2013SelectMVCTemplate]  
 
 4. 如果尚未登录 Azure，系统会提示用户登录。按提示登录到 Azure。
 5. 登录后即可开始配置应用服务 Web 应用。指定“Web 应用名称”、“应用服务计划”、“资源组”和“区域”，然后单击“创建”。
-   
+
     ![](./media/web-sites-dotnet-store-data-mongodb-vm/VSConfigureWebAppSettings.png)  
 
 6. 项目创建完以后，等待 Web 应用在 Azure 应用服务中创建，如“Azure 应用服务活动”窗口所示。然后，单击“现在将 MyTaskListApp 发布到此 Web 应用”。
 7. 单击“发布”。
-   
+
     ![](./media/web-sites-dotnet-store-data-mongodb-vm/VSPublishWeb.png)
-   
+
     将默认的 ASP.NET 应用程序发布到 Azure App Service Web 应用后，将在浏览器中启动该应用程序。
 
 ## 安装 MongoDB C# 驱动程序
@@ -78,10 +77,10 @@ MongoDB 通过驱动程序为 C# 应用程序提供客户端支持，需要在�
 安装 MongoDB C# 驱动程序的步骤：
 
 1. 在“解决方案资源管理器”中右键单击“MyTaskListApp”项目，然后选择“管理 NuGet 包”。
-   
+
     ![管理 NuGet 包][VS2013ManageNuGetPackages]
 2. 在“管理 NuGet 包”窗口的左侧窗格中，单击“联机”。在右侧的“联机搜索”框中，键入“mongodb.driver”。单击“安装”安装此驱动程序。
-   
+
     ![搜索 MongoDB C# 驱动程序][SearchforMongoDBCSharpDriver]
 3. 单击“我接受”接受 10gen, Inc. 的许可条款。
 4. 安装驱动程序后，单击“关闭”。
@@ -135,7 +134,6 @@ MongoDB C# 驱动程序现已安装。对 **MongoDB.Bson**、**MongoDB.Driver** 
     using MongoDB.Driver;
     using MongoDB.Bson;
     using System.Configuration;
-
 
     namespace MyTaskListApp
     {
@@ -354,7 +352,6 @@ MongoDB C# 驱动程序现已安装。对 **MongoDB.Bson**、**MongoDB.Driver** 
     </table>
     <div>  @Html.Partial("Create", new MyTaskListApp.Models.MyTask())</div>
 
-
 若要增加创建新任务的功能，右键单击“Views\\Home\\”文件夹并选择*添加*一个**视图**。将该视图命名为 *Create*。将此代码替换为以下代码：
 
     @model MyTaskListApp.Models.MyTask
@@ -429,7 +426,7 @@ MongoDB C# 驱动程序现已安装。对 **MongoDB.Bson**、**MongoDB.Driver** 
 
 1. 在“解决方案资源管理器”中，再次右键单击“MyTaskListApp”，并单击“发布”。
 2. 单击“发布”。
-   
+
     现在应该看到 Web 应用在 Azure App Service 中运行并在 Azure 虚拟机中访问 MongoDB 数据库。
 
 ## 摘要
@@ -441,7 +438,7 @@ MongoDB C# 驱动程序现已安装。对 **MongoDB.Bson**、**MongoDB.Driver** 
 
 有关针对 MongoDB 开发 C# 应用程序的详细信息，请参阅 [CSharp 语言中心][MongoC#LangCenter]。
 
-[AZURE.INCLUDE [app-service-web-whats-changed](../../includes/app-service-web-whats-changed.md)]
+[!INCLUDE [app-service-web-whats-changed](../../includes/app-service-web-whats-changed.md)]
 
 <!-- HYPERLINKS -->
 
@@ -452,12 +449,11 @@ MongoDB C# 驱动程序现已安装。对 **MongoDB.Bson**、**MongoDB.Driver** 
 [ASP.NET]: http://www.asp.net/
 [MongoConnectionStrings]: http://www.mongodb.org/display/DOCS/Connections
 [MongoDB]: http://www.mongodb.org
-[InstallMongoOnWindowsVM]: /documentation/articles/virtual-machines-windows-classic-install-mongodb/
+[InstallMongoOnWindowsVM]: ../virtual-machines/virtual-machines-windows-classic-install-mongodb.md
 [VSEWeb]: http://www.visualstudio.com/zh-cn/downloads/download-visual-studio-vs#d-2013-express
 [VSUlt]: http://www.visualstudio.com/zh-cn/downloads/download-visual-studio-vs
 
 <!-- IMAGES -->
-
 
 [StartPageNewProject]: ./media/web-sites-dotnet-store-data-mongodb-vm/NewProject.png
 [NewProjectMyTaskListApp]: ./media/web-sites-dotnet-store-data-mongodb-vm/NewProjectMyTaskListApp.png

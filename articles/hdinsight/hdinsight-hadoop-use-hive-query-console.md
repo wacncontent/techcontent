@@ -1,31 +1,31 @@
-<properties
-   pageTitle="在 HDInsight 中的查询控制台上使用 Hadoop Hive | Azure"
-   description="了解如何在浏览器中使用基于 Web 的查询控制台在 HDInsight Hadoop 群集上运行 Hive 查询。"
-   services="hdinsight"
-   documentationCenter=""
-   authors="Blackmist"
-   manager="paulettm"
-   editor="cgronlun"
-	tags="azure-portal"/>
+---
+title: 在 HDInsight 中的查询控制台上使用 Hadoop Hive | Azure
+description: 了解如何在浏览器中使用基于 Web 的查询控制台在 HDInsight Hadoop 群集上运行 Hive 查询。
+services: hdinsight
+documentationCenter: 
+authors: Blackmist
+manager: paulettm
+editor: cgronlun
+tags: azure-portal
 
-<tags
-   ms.service="hdinsight"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="big-data"
-   ms.date="09/20/2016"
-   wacn.date="01/05/2017"
-   ms.author="larryfr"/>
+ms.service: hdinsight
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: big-data
+ms.date: 09/20/2016
+wacn.date: 01/05/2017
+ms.author: larryfr
+---
 
 # 使用查询控制台运行 Hive 查询
 
-[AZURE.INCLUDE [hive-selector](../../includes/hdinsight-selector-use-hive.md)]
+[!INCLUDE [hive-selector](../../includes/hdinsight-selector-use-hive.md)]
 
 本文介绍如何在浏览器中使用 HDInsight 查询控制台在 HDInsight Hadoop 群集上运行 Hive 查询。
 
-> [AZURE.NOTE] 查询控制台只能在基于 Windows 的 HDInsight 群集上使用。
-
+> [!NOTE]
+> 查询控制台只能在基于 Windows 的 HDInsight 群集上使用。
 
 ## <a id="prereq"></a>先决条件
 
@@ -41,9 +41,9 @@
 
 2. 在页面顶部的链接中，选择“Hive 编辑器”。此时将显示一个窗体，可以在其中输入要在 HDInsight 群集上运行的 HiveQL 语句。
 
-	![hive 编辑器](./media/hdinsight-hadoop-use-hive-query-console/queryconsole.png)
+    ![hive 编辑器](./media/hdinsight-hadoop-use-hive-query-console/queryconsole.png)
 
-	将文本 `Select * from hivesampletable` 替换为以下 HiveQL 语句：
+    将文本 `Select * from hivesampletable` 替换为以下 HiveQL 语句：
 
         set hive.execution.engine=tez;
         DROP TABLE log4jLogs;
@@ -57,7 +57,8 @@
     * **DROP TABLE**：删除表和数据文件（如果该表已存在）。
     * **CREATE EXTERNAL TABLE**：在 Hive 中创建新“外部”表。外部表仅在 Hive 中存储表定义；数据会保留在原始位置。
 
-    > [AZURE.NOTE] 如果希望以外部源更新基础数据（例如自动化数据上载过程），或以其他 MapReduce 操作更新基础数据，但希望 Hive 查询始终使用最新数据，则必须使用外部表。
+    > [!NOTE]
+    > 如果希望以外部源更新基础数据（例如自动化数据上载过程），或以其他 MapReduce 操作更新基础数据，但希望 Hive 查询始终使用最新数据，则必须使用外部表。
     > <p>删除外部表**不会**删除数据，只会删除表定义。
 
     * **ROW FORMAT**：告知 Hive 如何设置数据的格式。在此情况下，每个日志中的字段以空格分隔。
@@ -69,7 +70,6 @@
 
 3. 当“状态”字段更改为“已完成”时，请选择与作业对应的“查看详细信息”。在详细信息页上，“作业输出”包含 `[ERROR]	3`。你可以使用此字段下面的“下载”按钮下载包含作业的输出的文件。
 
-
 ## <a id="summary"></a>摘要
 
 查询控制台提供了一种简单的方法，可在 HDInsight 群集上运行 Hive 查询，监视作业状态，以及检索输出。
@@ -80,48 +80,44 @@
 
 有关 HDInsight 中的 Hive 的一般信息：
 
-* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-hive/)
+* [将 Hive 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-hive.md)
 
 有关 HDInsight 上 Hadoop 的其他使用方法的信息：
 
-* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-pig/)
+* [将 Pig 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-pig.md)
 
-* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](/documentation/articles/hdinsight-use-mapreduce/)
+* [将 MapReduce 与 HDInsight 上的 Hadoop 配合使用](./hdinsight-use-mapreduce.md)
 
 如果将 Tez 与 Hive 配合使用，请参阅以下文档，了解调试信息：
 
-* [在基于 Windows 的 HDInsight 上使用 Tez UI](/documentation/articles/hdinsight-debug-tez-ui/)
+* [在基于 Windows 的 HDInsight 上使用 Tez UI](./hdinsight-debug-tez-ui.md)
 
-[1]: /documentation/articles/hdinsight-hadoop-visual-studio-tools-get-started/
+[1]: ./hdinsight-hadoop-visual-studio-tools-get-started.md
 
 [hdinsight-sdk-documentation]: http://msdn.microsoft.com/zh-cn/library/dn479185.aspx
 
-[azure-purchase-options]: /pricing/overview/
-[azure-member-offers]: /pricing/member-offers/
-[azure-trial]: /pricing/1rmb-trial/
+[azure-purchase-options]: https://www.azure.cn/pricing/overview/
+[azure-member-offers]: https://www.azure.cn/pricing/member-offers/
+[azure-trial]: https://www.azure.cn/pricing/1rmb-trial/
 
 [apache-tez]: http://tez.apache.org
 [apache-hive]: http://hive.apache.org/
 [apache-log4j]: http://zh.wikipedia.org/wiki/Log4j
 [hive-on-tez-wiki]: https://cwiki.apache.org/confluence/display/Hive/Hive+on+Tez
-[import-to-excel]: /documentation/articles/hdinsight-connect-excel-power-query/
+[import-to-excel]: ./hdinsight-connect-excel-power-query.md
 
+[hdinsight-use-oozie]: ./hdinsight-use-oozie.md
+[hdinsight-analyze-flight-data]: ./hdinsight-analyze-flight-delay-data.md
 
-[hdinsight-use-oozie]: /documentation/articles/hdinsight-use-oozie/
-[hdinsight-analyze-flight-data]: /documentation/articles/hdinsight-analyze-flight-delay-data/
+[hdinsight-storage]: ./hdinsight-hadoop-use-blob-storage.md
 
-
-
-[hdinsight-storage]: /documentation/articles/hdinsight-hadoop-use-blob-storage/
-
-[hdinsight-provision]: /documentation/articles/hdinsight-provision-clusters-v1/
-[hdinsight-submit-jobs]: /documentation/articles/hdinsight-submit-hadoop-jobs-programmatically/
-[hdinsight-upload-data]: /documentation/articles/hdinsight-upload-data/
-[hdinsight-get-started]: /documentation/articles/hdinsight-hadoop-tutorial-get-started-windows-v1/
+[hdinsight-provision]: ./hdinsight-provision-clusters-v1.md
+[hdinsight-submit-jobs]: ./hdinsight-submit-hadoop-jobs-programmatically.md
+[hdinsight-upload-data]: ./hdinsight-upload-data.md
+[hdinsight-get-started]: ./hdinsight-hadoop-tutorial-get-started-windows-v1.md
 
 [Powershell-install-configure]: https://docs.microsoft.com/powershell/azureps-cmdlets-docs
 [powershell-here-strings]: http://technet.microsoft.com/zh-cn/library/ee692792.aspx
-
 
 [img-hdi-hive-powershell-output]: ./media/hdinsight-use-hive/HDI.Hive.PowerShell.Output.png
 

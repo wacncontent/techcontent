@@ -1,30 +1,29 @@
-<properties
-    pageTitle="适用于 DocumentDB 的 NoSQL C++ 教程 | Azure"
-    description="使用面向 C++ 的 DocumentDB SDK 创建 C++ 数据库和控制台应用程序的 NoSQL C++ 教程。DocumentDB 是全球范围的 NoSQL 数据库服务。"
-    services="documentdb"
-    documentationcenter="cpp"
-    author="asthana86"
-    manager="jhubbard"
-    editor="" />  
+---
+title: 适用于 DocumentDB 的 NoSQL C++ 教程 | Azure
+description: 使用面向 C++ 的 DocumentDB SDK 创建 C++ 数据库和控制台应用程序的 NoSQL C++ 教程。DocumentDB 是全球范围的 NoSQL 数据库服务。
+services: documentdb
+documentationcenter: cpp
+author: asthana86
+manager: jhubbard
+editor: 
 
-<tags
-    ms.assetid="b8756b60-8d41-4231-ba4f-6cfcfe3b4bab"
-    ms.service="documentdb"
-    ms.workload="data-services"
-    ms.tgt_pltfrm="na"
-    ms.devlang="cpp"
-    ms.topic="hero-article"
-    ms.date="11/02/2016"
-    wacn.date="01/06/2017"
-    ms.author="aasthan" />  
-
+ms.assetid: b8756b60-8d41-4231-ba4f-6cfcfe3b4bab
+ms.service: documentdb
+ms.workload: data-services
+ms.tgt_pltfrm: na
+ms.devlang: cpp
+ms.topic: hero-article
+ms.date: 11/02/2016
+wacn.date: 01/06/2017
+ms.author: aasthan
+---
 
 # NoSQL C++ 教程：DocumentDB C++ 控制台应用程序
->[AZURE.SELECTOR]
-[.NET](/documentation/articles/documentdb-get-started/)
-[.NET Core](/documentation/articles/documentdb-dotnetcore-get-started/)
-[Node.js](/documentation/articles/documentdb-nodejs-get-started/)
-[C++](/documentation/articles/documentdb-cpp-get-started/)
+>[!div class="op_single_selector"]
+[.NET](./documentdb-get-started.md)
+[.NET Core](./documentdb-dotnetcore-get-started.md)
+[Node.js](./documentdb-nodejs-get-started.md)
+[C++](./documentdb-cpp-get-started.md)
 
 欢迎使用面向 C++ 的 Azure DocumentDB SDK 的 C++ 教程！ 学习本教程后，你将拥有一个创建并查询 DocumentDB 资源（包括 C++ 数据库）的控制台应用程序。
 
@@ -51,30 +50,29 @@
 ## C++ 教程的先决条件
 请确保你具有以下内容：
 
-- 有效的 Azure 帐户。如果你没有，可以注册 [Azure 试用版](/pricing/1rmb-trial/)。
+- 有效的 Azure 帐户。如果你没有，可以注册 [Azure 试用版](https://www.azure.cn/pricing/1rmb-trial/)。
 - [Visual Studio](https://www.visualstudio.com/downloads/)，安装了 C++ 语言组件。
 
 ## 第 1 步：创建 DocumentDB 帐户
 让我们创建一个 DocumentDB 帐户。如果已经有想要使用的帐户，可以跳到[安装 C++ 应用程序](#SetupC++)。
 
-[AZURE.INCLUDE [documentdb-create-dbaccount](../../includes/documentdb-create-dbaccount.md)]
+[!INCLUDE [documentdb-create-dbaccount](../../includes/documentdb-create-dbaccount.md)]
 
 ## <a id="SetupC++"></a>步骤 2：设置 C++ 应用程序
 1. 打开 Visual Studio，在“文件”菜单中，单击“新建”，然后单击“项目”。
 2. 在“新建项目”窗口中，在“已安装”窗格中展开“Visual C++”，单击“Win32”，然后单击“Win32 控制台应用程序”。将项目命名为 hellodocumentdb，再单击“确定”。
-   
+
     ![“新建项目”向导的屏幕截图](./media/documentdb-cpp-get-started/hellodocumentdb.png)  
 
 3. Win32 应用程序向导启动后，单击“完成”。
 4. 创建项目后，右键单击“解决方案资源管理器”中的“hellodocumentdb”项目，并单击“管理 NuGet 包”以打开 NuGet 包管理器。
-   
+
     ![在项目菜单上显示“管理 NuGet 包”的屏幕截图](./media/documentdb-cpp-get-started/nuget.png)  
 
 5. 在“NuGet: hellodocumentdb”选项卡上，单击“浏览”，然后搜索 *documentdbcpp*。在结果中选择 DocumentDbCPP，如下面的屏幕截图所示。此程序包安装 C++ REST SDK 的引用，该 SDK 是DocumentDbCPP 的依赖项。
-   
+
     ![突出显示 DocumentDbCpp 包的屏幕截图](./media/documentdb-cpp-get-started/documentdbcpp.png)  
 
-   
     将程序包添加到项目后，我们已准备好开始编写一些代码。
 
 ## <a id="Config"></a>步骤 3：从 Azure 门户预览中复制 DocumentDB 数据库的连接详细信息
@@ -82,10 +80,9 @@
 
 ![Azure 门户预览中的 DocumentDB URI 和密钥](./media/documentdb-cpp-get-started/nosql-tutorial-keys.png)  
 
-
 ## <a id="Connect"></a>步骤 4：连接到 DocumentDB 帐户
 1. 将以下标头和命名空间添加到源代码的 `#include "stdafx.h"` 后面。
-   
+
         #include <cpprest/json.h>
         #include <documentdbcpp\DocumentClient.h>
         #include <documentdbcpp\exceptions.h>
@@ -94,16 +91,16 @@
         using namespace documentdb;
         using namespace std;
         using namespace web::json;
-	
+
 2. 接下来将以下代码添加到主函数，并替换帐户配置和主要密钥以匹配步骤 3 中的 DocumentDB 设置。
-   
+
         DocumentDBConfiguration conf (L"<account_configuration_uri>", L"<primary_key>");
         DocumentClient client (conf);
-   
+
     现已获得用于初始化 documentdb 客户端的代码，接下来让我们看看如何使用 DocumentDB 资源。
 
 ## <a id="CreateDBColl"></a>步骤 5：创建 C++ 数据库和集合
-执行此步骤之前，针对 DocumentDB 的新用户，让我们回顾一下数据库、集合和文档的交互方式。[数据库](/documentation/articles/documentdb-resources/#databases/)是跨集合分区的文档存储的逻辑容器。[集合](/documentation/articles/documentdb-resources/#collections/)是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。可以在 [DocumentDB 分层资源模型和概念](/documentation/articles/documentdb-resources/)中了解有关 DocumentDB 分层资源模型和概念的更多信息。
+执行此步骤之前，针对 DocumentDB 的新用户，让我们回顾一下数据库、集合和文档的交互方式。[数据库](./documentdb-resources.md#databases)是跨集合分区的文档存储的逻辑容器。[集合](./documentdb-resources.md#collections)是 JSON 文档和相关联的 JavaScript 应用程序逻辑的容器。可以在 [DocumentDB 分层资源模型和概念](./documentdb-resources.md)中了解有关 DocumentDB 分层资源模型和概念的更多信息。
 
 若要创建数据库和相应的集合，请将下面的代码添加到主函数末尾。这样可以使用上一步中声明的客户端配置创建名为“FamilyRegistry”的数据库和名为“FamilyCollection”的集合。
 
@@ -114,9 +111,8 @@
       wcout << ex.message();
     }
 
-
 ## <a id="CreateDoc"></a>步骤 6：创建文档
-[文档](/documentation/articles/documentdb-resources/#documents/)为用户定义的（任意）JSON 内容。现在，你可以将文档插入 DocumentDB。将下面的代码复制到主函数的末尾可创建一个文档。
+[文档](./documentdb-resources.md#documents)为用户定义的（任意）JSON 内容。现在，你可以将文档插入 DocumentDB。将下面的代码复制到主函数的末尾可创建一个文档。
 
     try {
       value document_family;
@@ -137,9 +133,8 @@
 
 ![C++ 教程 - 说明帐户、数据库、集合和文档间层次关系的关系图](./media/documentdb-cpp-get-started/documentdbdocs.png)  
 
-
 ## <a id="QueryDB"></a>步骤 7：查询 DocumentDB 资源
-DocumentDB 支持对存储在每个集合中的 JSON 文档进行各种[查询](/documentation/articles/documentdb-sql-query/)。下面的示例代码演示了使用 DocumentDB SQL 语法创建的查询，可以对上一步中创建的文档运行此查询。
+DocumentDB 支持对存储在每个集合中的 JSON 文档进行各种[查询](./documentdb-sql-query.md)。下面的示例代码演示了使用 DocumentDB SQL 语法创建的查询，可以对上一步中创建的文档运行此查询。
 
 此函数包含三个参数：数据库和集合的唯一标识符或资源 id 以及文档客户端。在主函数前面添加此代码。
 
@@ -275,7 +270,6 @@ DocumentDB 支持删除 JSON 文档，可以复制下面的代码并将其粘贴
 
 ![DocumentDB C++ 应用程序输出](./media/documentdb-cpp-get-started/docdbconsole.png)  
 
-
 祝贺你！ 你已完成 C++ 教程，并成功创建了第一个 DocumentDB 控制台应用程序！
 
 ## <a id="GetSolution"></a>获取完整的 C++ 教程解决方案
@@ -285,11 +279,11 @@ DocumentDB 支持删除 JSON 文档，可以复制下面的代码并将其粘贴
 - GitHub 上提供的 [GetStarted](https://github.com/stalker314314/DocumentDBCpp) 解决方案。
 
 ## 后续步骤
-- 了解如何[监视 DocumentDB 帐户](/documentation/articles/documentdb-monitor-accounts/)。
+- 了解如何[监视 DocumentDB 帐户](./documentdb-monitor-accounts.md)。
 - 在 [Query Playground](https://www.documentdb.com/sql/demo) 中对示例数据集运行查询。
-- 在 [DocumentDB 文档页](/documentation/services/documentdb/)的“Develop”（开发）部分中了解有关编程模型的详细信息。
+- 在 [DocumentDB 文档页](./index.md)的“Develop”（开发）部分中了解有关编程模型的详细信息。
 
-[documentdb-create-account]: /documentation/articles/documentdb-create-account/
-[documentdb-manage]: /documentation/articles/documentdb-manage/
+[documentdb-create-account]: ./documentdb-create-account.md
+[documentdb-manage]: ./documentdb-manage.md
 
 <!---HONumber=Mooncake_1212_2016-->

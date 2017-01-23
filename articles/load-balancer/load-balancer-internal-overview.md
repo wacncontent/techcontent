@@ -1,24 +1,22 @@
 
-<properties
-   pageTitle="内部负载均衡器概述 | Azure"
-   description="内部负载均衡器及其功能的概述。Azure 的负载均衡器的工作原理，以及配置内部终结点的可能方案"
-   services="load-balancer"
-   documentationCenter="na"
-   authors="sdwheeler"
-   manager="carmonm"
-   editor="tysonn" />  
+---
+title: 内部负载均衡器概述 | Azure
+description: 内部负载均衡器及其功能的概述。Azure 的负载均衡器的工作原理，以及配置内部终结点的可能方案
+services: load-balancer
+documentationCenter: na
+authors: sdwheeler
+manager: carmonm
+editor: tysonn
 
-<tags
-   ms.service="load-balancer"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="10/24/2016"
-   wacn.date="12/05/2016"
-   ms.author="sewhee" />  
-
-
+ms.service: load-balancer
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/24/2016
+wacn.date: 12/05/2016
+ms.author: sewhee
+---
 
 # Internal load balancer overview（内部负载均衡器概述）
 
@@ -46,7 +44,6 @@ Web 层包含 Internet 客户端的面向 Internet 的终结点，是负载均�
 
 ![对单个云服务进行内部负载均衡](./media/load-balancer-internal-overview/IC736321.png)  
 
-
 图 1 - 面向 Internet 的多层应用程序
 
 多层应用程序的另一可能用例是：ILB 部署到使用 ILB 服务的云服务以外的其他云服务。
@@ -54,7 +51,6 @@ Web 层包含 Internet 客户端的面向 Internet 的终结点，是负载均�
 使用同一虚拟网络的云服务将可访问该 ILB 终结点。下图显示前端 Web 服务器所在的云服务不同于数据库后端所在的云服务，其利用的是同一虚拟网络中的 ILB 终结点。
 
 ![在多个云服务之间进行内部负载均衡](./media/load-balancer-internal-overview/IC744147.png)  
-
 
 图 2- 不同的云服务中的前端服务器
 
@@ -66,26 +62,24 @@ Web 层包含 Internet 客户端的面向 Internet 的终结点，是负载均�
 
 ![使用点到站点 VPN 的内部负载均衡](./media/load-balancer-internal-overview/IC744148.png)  
 
-
 图 3 - LB 终结点后面托管的 LOB 应用程序
 
 LOB 的另一方案是通过站点到站点 VPN 连接到在其中配置了 ILB 终结点的虚拟网络。这样可以将本地网络流量路由到 ILB 终结点。
 
 ![使用站点到站点 VPN 的内部负载均衡](./media/load-balancer-internal-overview/IC744150.png)  
 
-
 图 4 - 将本地网络流量路由到 ILB 终结点
 
 ## 后续步骤
 
-[Azure Load Balancer 的 Azure Resource Manager 支持](/documentation/articles/load-balancer-arm/)
+[Azure Load Balancer 的 Azure Resource Manager 支持](./load-balancer-arm.md)
 
-[开始配置面向 Internet 的负载均衡器](/documentation/articles/load-balancer-get-started-internet-arm-ps/)
+[开始配置面向 Internet 的负载均衡器](./load-balancer-get-started-internet-arm-ps.md)
 
-[Get started configuring an Internal load balancer（开始配置内部负载均衡器）](/documentation/articles/load-balancer-get-started-ilb-arm-ps/)
+[Get started configuring an Internal load balancer（开始配置内部负载均衡器）](./load-balancer-get-started-ilb-arm-ps.md)
 
-[配置负载均衡器分发模式](/documentation/articles/load-balancer-distribution-mode/)
+[配置负载均衡器分发模式](./load-balancer-distribution-mode.md)
 
-[为负载均衡器配置空闲 TCP 超时设置](/documentation/articles/load-balancer-tcp-idle-timeout/)
+[为负载均衡器配置空闲 TCP 超时设置](./load-balancer-tcp-idle-timeout.md)
 
 <!---HONumber=Mooncake_1128_2016-->

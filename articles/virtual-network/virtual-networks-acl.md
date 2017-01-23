@@ -1,28 +1,30 @@
-<properties 
-   pageTitle="什么是网络访问控制列表 (ACL)？"
-   description="了解 ACL"
-   services="virtual-network"
-   documentationCenter="na"
-   authors="telmosampaio"
-   manager="carolz"
-   editor="tysonn" />
-<tags
-   ms.service="virtual-network"
-   ms.devlang="na"
-   ms.topic="article"
-   ms.tgt_pltfrm="na"
-   ms.workload="infrastructure-services"
-   ms.date="03/15/2016"
-   wacn.date="12/12/2016"
-   ms.author="jdial" />
+---
+title: 什么是网络访问控制列表 (ACL)？
+description: 了解 ACL
+services: virtual-network
+documentationCenter: na
+authors: telmosampaio
+manager: carolz
+editor: tysonn
+
+ms.service: virtual-network
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 03/15/2016
+wacn.date: 12/12/2016
+ms.author: jdial
+---
 
 # 什么是终结点访问控制列表 (ACL)？
 
 终结点访问控制列表 (ACL) 是可用于 Azure 部署的安全增强。利用 ACL，你可以选择允许还是拒绝虚拟机终结点的流量。此数据包筛选功能额外提供了一层安全性。只能为终结点指定网络 ACL，无法为虚拟网络或虚拟网络中包含的特定子网指定 ACL。
 
-> [AZURE.IMPORTANT] 建议尽可能使用网络安全组 (NSG)，而不要使用 ACL。若要了解有关 NSG 的详细信息，请参阅[什么是网络安全组](/documentation/articles/virtual-networks-nsg/)。
+> [!IMPORTANT]
+> 建议尽可能使用网络安全组 (NSG)，而不要使用 ACL。若要了解有关 NSG 的详细信息，请参阅[什么是网络安全组](./virtual-networks-nsg.md)。
 
-可以使用 PowerShell 或在经典管理门户中配置 ACL。若要使用 PowerShell 配置网络 ACL，请参阅[使用 PowerShell 管理终结点的访问控制列表 (ACL)](/documentation/articles/virtual-networks-acl-powershell/)。若要使用经典管理门户配置网络 ACL，请参阅[如何设置虚拟机的终结点](/documentation/articles/virtual-machines-windows-classic-setup-endpoints/)。
+可以使用 PowerShell 或在经典管理门户中配置 ACL。若要使用 PowerShell 配置网络 ACL，请参阅[使用 PowerShell 管理终结点的访问控制列表 (ACL)](./virtual-networks-acl-powershell.md)。若要使用经典管理门户配置网络 ACL，请参阅[如何设置虚拟机的终结点](../virtual-machines/virtual-machines-windows-classic-setup-endpoints.md)。
 
 使用网络 ACL 可以实现以下目的：
 
@@ -98,6 +100,6 @@ ACL 是包含规则列表的对象。当你创建 ACL 并将其应用于虚拟�
 
 ## 后续步骤
 
-[如何使用 PowerShell 管理终结点的访问控制列表 (ACL)](/documentation/articles/virtual-networks-acl-powershell/)
+[如何使用 PowerShell 管理终结点的访问控制列表 (ACL)](./virtual-networks-acl-powershell.md)
 
 <!---HONumber=Mooncake_Quality_Review_1118_2016-->

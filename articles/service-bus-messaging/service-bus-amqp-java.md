@@ -1,26 +1,25 @@
-<properties 
-   pageTitle="服务总线和 Java 与 AMQP 1.0 | Azure"
-    description="使用 AMQP 通过 Java 使用服务总线"
-   services="service-bus"
-   documentationCenter="na"
-   authors="sethmanheim"
-   manager="timlt"
-    editor="" />  
- 
-<tags 
-    ms.service="service-bus"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.tgt_pltfrm="na"
-    ms.workload="na"
-    ms.date="09/29/2016"
-    ms.author="sethm"
-    wacn.date="01/04/2017"/>  
+---
+title: 服务总线和 Java 与 AMQP 1.0 | Azure
+description: 使用 AMQP 通过 Java 使用服务总线
+services: service-bus
+documentationCenter: na
+authors: sethmanheim
+manager: timlt
+editor: 
 
+ms.service: service-bus
+ms.devlang: na
+ms.topic: article
+ms.tgt_pltfrm: na
+ms.workload: na
+ms.date: 09/29/2016
+ms.author: sethm
+wacn.date: 01/04/2017
+---
 
 # 使用 AMQP 1.0 通过 Java 使用 Service Bus
 
-[AZURE.INCLUDE [service-bus-selector-amqp](../../includes/service-bus-selector-amqp.md)]
+[!INCLUDE [service-bus-selector-amqp](../../includes/service-bus-selector-amqp.md)]
 
 Java 消息服务 (JMS) 是一种标准 API，用于处理 Java 平台上面向消息的中间件。Azure 服务总线已使用 Apache Qpid 项目开发的基于 AMQP 1.0 的 JMS 客户端库进行测试。此库支持完整的 JMS 1.1 API，并可用于任何 AMQP 1.0 兼容的消息服务。[Windows Server 服务总线](https://msdn.microsoft.com/zh-cn/library/dn282144.aspx)（本地服务总线）中也支持此方案。有关详细信息，请参阅[适用于 Windows Server 的服务总线中的 AMQP][]。
 
@@ -89,7 +88,8 @@ amqps://[username]:[password]@[namespace].servicebus.chinacloudapi.cn
 | `[username]` | 从 [Azure 经典管理门户][]获取的服务总线 SAS 密钥名称。 | | | | |
 | `[password]` | 从 [Azure 经典管理门户][]获取的 URL 编码形式的服务总线 SAS 密钥。 | | | | |
 
-> [AZURE.NOTE]必须手动为密码进行 URL 编码。在 [http://www.w3schools.com/tags/ref\_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp) 上提供了一个有用的 URL 编码实用工具。
+> [!NOTE]
+>必须手动为密码进行 URL 编码。在 [http://www.w3schools.com/tags/ref_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp) 上提供了一个有用的 URL 编码实用工具。
 
 例如，如果从门户获得的信息如下所示：
 
@@ -129,22 +129,19 @@ topic.[jndi_name] = [physical_name]
 
 若要定义映射到名为“topic1”的服务总线主题的名为“TOPIC”的逻辑 JMS 目标，属性文件中的条目应如下所示：
 
-
     topic.TOPIC = topic1
-
 
 ### 使用 JMS 发送消息
 
 以下代码演示如何向服务总线主题发送消息。假设在上一部分中所述的 **servicebus.properties** 配置文件中定义了 `SBCONNECTIONFACTORY` 和 `TOPIC`。
 
-
     Hashtable<String, String> env = new Hashtable<String, String>(); 
     env.put(Context.INITIAL_CONTEXT_FACTORY, 
             "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
     env.put(Context.PROVIDER_URL, "servicebus.properties"); 
-     
+
     InitialContext context = new InitialContext(env); 
-     
+
     ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCONNECTIONFACTORY");
     Topic topic = (Topic) context.lookup("TOPIC");
     Connection connection = cf.createConnection();
@@ -153,19 +150,17 @@ topic.[jndi_name] = [physical_name]
     TextMessage message = session.createTextMessage("This is a text string"); 
     producer.send(message);
 
-
 ### 使用 JMS 接收消息
 
 以下代码演示`how`从服务总线主题订阅接收消息。假设在上一部分中所述的 **servicebus.properties** 配置文件中定义了 `SBCONNECTIONFACTORY` 和 TOPIC。它还假定订阅名称是 `subscription1`。
-
 
     Hashtable<String, String> env = new Hashtable<String, String>(); 
     env.put(Context.INITIAL_CONTEXT_FACTORY, 
             "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory"); 
     env.put(Context.PROVIDER_URL, "servicebus.properties"); 
-     
+
     InitialContext context = new InitialContext(env);
-    
+
     ConnectionFactory cf = (ConnectionFactory) context.lookup("SBCONNECTIONFACTORY");
     Topic topic = (Topic) context.lookup("TOPIC");
     Connection connection = cf.createConnection();
@@ -174,7 +169,6 @@ topic.[jndi_name] = [physical_name]
     connection.start();
     Message message = messageConsumer.receive();
 
-
 ### 用于构建可靠的应用程序的准则
 
 JMS 规范定义了应如何编写 API 方法和应用程序代码的异常约定来处理此类异常。下面是有关异常处理需要注意的其他一些要点：
@@ -182,8 +176,8 @@ JMS 规范定义了应如何编写 API 方法和应用程序代码的异常约�
 -   使用 **connection.setExceptionListener** 向 JMS 连接注册 **ExceptionListener**。这允许以异步方式向客户端通知问题。此通知对于仅使用消息的连接特别重要，因为客户端没有其他方法可以获知其连接已失败。如果底层 AMQP 连接、会话或链接有问题，将调用 **ExceptionListener**。在此情况下，应用程序应从零开始重新创建 **JMS Connection**、**Session**、**MessageProducer** 和 **MessageConsumer** 对象。
 
 -   若要验证是否已从 **MessageProducer** 将一条消息成功发送到服务总线实体，请确保已为应用程序配置 **qpid.sync\_publish** 系统属性集。可以通过在启动应用程序时在命令行上设置 **-Dqpid.sync\_publish=true** Java VM 选项启动程序来完成此操作。设置此选项可将库配置为不从发送调用返回，直到收到该消息已被服务总线接受的确认为止。如果在发送操作期间出现问题，则将引发 **JMSException**。有两个可能的原因：
-	1. 如果问题是由于服务总线拒绝所发送的特定消息所致，则将引发 **MessageRejectedException** 异常。此错误是暂时的，或者由于消息出现某些问题所致。建议的操作过程是进行多次尝试，以便使用一些后退逻辑重试该操作。如果问题仍然存在，则应使用本地记录的错误放弃该消息。在这种情况下，无需重新创建 **JMS Connection**、**Session** 或 **MessageProducer** 对象。
-	2. 如果问题是由于服务总线关闭 AMQP 链接所致，则将引发 **InvalidDestinationException** 异常。这可能是由于暂时性问题或由于消息实体被删除所致。在这两种情况中的任一情况下，均应重新创建 **JMS Connection**、**Session** 和 **MessageProducer** 对象。如果错误条件是暂时的，则此操作最终将会成功。如果实体已被删除，则失败将是永久的。
+    1. 如果问题是由于服务总线拒绝所发送的特定消息所致，则将引发 **MessageRejectedException** 异常。此错误是暂时的，或者由于消息出现某些问题所致。建议的操作过程是进行多次尝试，以便使用一些后退逻辑重试该操作。如果问题仍然存在，则应使用本地记录的错误放弃该消息。在这种情况下，无需重新创建 **JMS Connection**、**Session** 或 **MessageProducer** 对象。
+    2. 如果问题是由于服务总线关闭 AMQP 链接所致，则将引发 **InvalidDestinationException** 异常。这可能是由于暂时性问题或由于消息实体被删除所致。在这两种情况中的任一情况下，均应重新创建 **JMS Connection**、**Session** 和 **MessageProducer** 对象。如果错误条件是暂时的，则此操作最终将会成功。如果实体已被删除，则失败将是永久的。
 
 ## 在 .NET 和 JMS 之间进行消息传递
 
@@ -199,27 +193,24 @@ JMS 定义了五种不同的消息类型：**BytesMessage**、**MapMessage**、*
 
 以下代码演示如何通过服务总线 .NET API 使用 **BytesMessage** 对象的正文。
 
-
     Stream stream = message.GetBody<Stream>();
     int streamLength = (int)stream.Length;
-    
+
     byte[] byteArray = new byte[streamLength];
     stream.Read(byteArray, 0, streamLength);
-    
+
     Console.WriteLine("Length = " + streamLength);
     for (int i = 0; i < stream.Length; i++)
     {
       Console.Write("[" + (sbyte) byteArray[i] + "]");
     }
 
-
 ##### MapMessage
 
 以下代码演示如何通过服务总线 .NET API 使用 **MapMessage** 对象的正文。此代码循环访问映射的元素，并显示每个元素的名称和值。
 
-
     Dictionary<String, Object> dictionary = message.GetBody<Dictionary<String, Object>>();
-    
+
     foreach (String mapItemName in dictionary.Keys)
     {
       Object mapItemValue = null;
@@ -229,27 +220,22 @@ JMS 定义了五种不同的消息类型：**BytesMessage**、**MapMessage**、*
       }
     }
 
-
 ##### StreamMessage
 
 以下代码演示如何通过服务总线 .NET API 使用 **StreamMessage** 对象的正文。此代码将列出流中的每一项及其类型。
 
-
     List<Object> list = message.GetBody<List<Object>>();
-    
+
     foreach (Object item in list)
     {
       Console.WriteLine(item + " (" + item.GetType() + ")");
     }
 
-
 ##### TextMessage
 
 以下代码演示如何通过服务总线 .NET API 使用 **TextMessage** 对象的正文。此代码将显示消息的正文中包含的文本字符串。
 
-
     Console.WriteLine("Text: " + message.GetBody<String>());
-
 
 #### 服务总线 .NET API 到 JMS
 
@@ -259,15 +245,12 @@ JMS 定义了五种不同的消息类型：**BytesMessage**、**MapMessage**、*
 
 以下代码演示如何在 .NET 中创建由 JMS 客户端接收作为 **BytesMessage** 的 [BrokeredMessage][] 对象。
 
-
     byte[] bytes = { 33, 12, 45, 33, 12, 45, 33, 12, 45, 33, 12, 45 };
     message = new BrokeredMessage(bytes);
-
 
 ##### StreamMessage
 
 以下代码演示如何在 .NET 中创建由 JMS 客户端接收作为 **StreamMessage** 的 [BrokeredMessage][] 对象。
-
 
     List<Object> list = new List<Object>();
     list.Add("String 1");
@@ -276,21 +259,17 @@ JMS 定义了五种不同的消息类型：**BytesMessage**、**MapMessage**、*
     list.Add((double)3.14159);
     message = new BrokeredMessage(list);
 
-
 ##### TextMessage
 
 以下代码演示如何通过服务总线 .NET API 使用 **TextMessage** 的正文。此代码将显示消息的正文中包含的文本字符串。
 
-
     message = new BrokeredMessage("this is a text string");
-
 
 ### 应用程序属性
 
 ####JMS 到服务总线 .NET API
 
 JMS 消息支持以下类型的应用程序属性：**boolean**、**byte**、**short**、**int**、**long**、**float**、**double** 和 **String**。以下 Java 代码显示如何使用上述每种属性类型在消息上设置属性。
-
 
     message.setBooleanProperty("TestBoolean", true); 
     message.setByteProperty("TestByte", (byte) 33); 
@@ -299,9 +278,7 @@ JMS 消息支持以下类型的应用程序属性：**boolean**、**byte**、**s
     message.setIntProperty("TestInt", 100); 
     message.setStringProperty("TestString", "Service Bus");
 
-
 在服务总线 .NET API 中，在 [BrokeredMessage][] 的 **Properties** 集合中携带消息应用程序属性。以下代码演示如何读取从 JMS 客户端收到的消息的应用程序属性。
-
 
     if (message.Properties.Keys.Count > 0)
     {
@@ -312,7 +289,6 @@ JMS 消息支持以下类型的应用程序属性：**boolean**、**byte**、**s
       }
       Console.WriteLine();
     }
-
 
 下表显示如何将 JMS 属性类型映射到 .NET 属性类型。
 
@@ -326,7 +302,6 @@ JMS 消息支持以下类型的应用程序属性：**boolean**、**byte**、**s
 | String | 字符串 |
 
 [BrokeredMessage][] 类型支持以下类型的应用程序属性：**byte**、**sbyte**、**char**、**short**、**ushort**、**int**、**uint**、**long**、**ulong**、**float**、**double**、**decimal**、**bool**、**Guid**、**string**、**Uri**、**DateTime**、**DateTimeOffset** 和 **TimeSpan**。以下 .NET 代码显示如何使用上述每种属性类型在 [BrokeredMessage][] 对象上设置属性。
-
 
     message.Properties["TestByte"] = (byte)128;
     message.Properties["TestSbyte"] = (sbyte)-22;
@@ -348,9 +323,7 @@ JMS 消息支持以下类型的应用程序属性：**boolean**、**byte**、**s
     message.Properties["TestDateTimeOffSet"] = DateTimeOffset.Now;
     message.Properties["TestTimeSpan"] = TimeSpan.FromMinutes(60);
 
-
 以下 Java 代码演示如何读取从服务总线 .NET 客户端收到的消息的应用程序属性。
-
 
     Enumeration propertyNames = message.getPropertyNames(); 
     while (propertyNames.hasMoreElements()) 
@@ -445,7 +418,7 @@ JMS 消息支持以下类型的应用程序属性：**boolean**、**byte**、**s
 [适用于 Windows Server 的服务总线中的 AMQP]: https://msdn.microsoft.com/zh-cn/library/dn574799.aspx
 [BrokeredMessage]: https://msdn.microsoft.com/zh-cn/library/azure/microsoft.servicebus.messaging.brokeredmessage.aspx
 
-[服务总线 AMQP 概述]: /documentation/articles/service-bus-amqp-overview/
+[服务总线 AMQP 概述]: ./service-bus-amqp-overview.md
 [Azure 经典管理门户]: http://manage.windowsazure.cn
 
 <!---HONumber=Mooncake_Quality_Review_1230_2016-->

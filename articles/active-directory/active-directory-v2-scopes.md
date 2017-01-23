@@ -1,34 +1,32 @@
-<properties
-	pageTitle="Azure AD v2.0 的范围、权限和同意 | Azure"
-	description="介绍 Azure AD v2.0 终结点中的授权，包括范围、权限和同意。"
-	services="active-directory"
-	documentationCenter=""
-	authors="dstrockis"
-	manager="mbaldwin"
-	editor=""/>  
+---
+title: Azure AD v2.0 的范围、权限和同意 | Azure
+description: 介绍 Azure AD v2.0 终结点中的授权，包括范围、权限和同意。
+services: active-directory
+documentationCenter: 
+authors: dstrockis
+manager: mbaldwin
+editor: 
 
-
-<tags
-	ms.service="active-directory"
-	ms.workload="identity"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="09/30/2016"
-	wacn.date="11/08/2016"
-	ms.author="dastrock"/>  
-
+ms.service: active-directory
+ms.workload: identity
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 09/30/2016
+wacn.date: 11/08/2016
+ms.author: dastrock
+---
 
 # v2.0 终结点中的范围、权限和同意
 
 与 Azure AD 集成的应用程序遵循可让用户控制应用程序如何访问其数据的特定授权模型。此授权模型的 v2.0 实现已更新，其中更改了应用程序必须与 Azure AD 交互的方式。本主题涵盖此授权模型的基本概念，包括范围、权限和同意。
 
-> [AZURE.NOTE]
-	v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](/documentation/articles/active-directory-v2-limitations/)。
+> [!NOTE]
+    v2.0 终结点并不支持所有 Azure Active Directory 方案和功能。若要确定是否应使用 v2.0 终结点，请阅读 [v2.0 限制](./active-directory-v2-limitations.md)。
 
 ## 范围和权限
 
-Azure AD 实施 [OAuth 2.0](/documentation/articles/active-directory-v2-protocols/) 授权协议，此方法允许第三方应用代表用户访问 Web 托管的资源。任何与 Azure AD 集成的 Web 托管资源都有资源标识符或**应用程序 ID URI**。例如，Microsoft 的某些 Web 托管资源包括：
+Azure AD 实施 [OAuth 2.0](./active-directory-v2-protocols.md) 授权协议，此方法允许第三方应用代表用户访问 Web 托管的资源。任何与 Azure AD 集成的 Web 托管资源都有资源标识符或**应用程序 ID URI**。例如，Microsoft 的某些 Web 托管资源包括：
 
 - Office 365 统一邮件 API：`https://outlook.office.com`
 - Azure AD 图形 API：`https://graph.chinacloudapi.cn`
@@ -57,7 +55,7 @@ OpenID Connect 的 v2.0 实现有一些明确定义但未应用到任何特定�
 
 #### OpenId
 
-如果应用使用 [OpenID Connect](/documentation/articles/active-directory-v2-protocols/) 执行登录，则必须请求 `openid` 范围。`openid` 范围在工作帐户同意屏幕上显示为“登录”权限，而在个人 Microsoft 帐户同意屏幕上显示为“查看你的配置文件并使用你的 Microsoft 帐户连接到应用程序和服务”权限。此权限使应用能够以 `sub` 声明的形式接收用户的唯一标识符。它还会向应用提供对用户信息终结点的访问权限。`openid` 范围还可用于在 v2.0 令牌终结点获取 id\_token，该令牌可用于保护应用不同组件之间的 HTTP 调用。
+如果应用使用 [OpenID Connect](./active-directory-v2-protocols.md) 执行登录，则必须请求 `openid` 范围。`openid` 范围在工作帐户同意屏幕上显示为“登录”权限，而在个人 Microsoft 帐户同意屏幕上显示为“查看你的配置文件并使用你的 Microsoft 帐户连接到应用程序和服务”权限。此权限使应用能够以 `sub` 声明的形式接收用户的唯一标识符。它还会向应用提供对用户信息终结点的访问权限。`openid` 范围还可用于在 v2.0 令牌终结点获取 id\_token，该令牌可用于保护应用不同组件之间的 HTTP 调用。
 
 #### 电子邮件
 
@@ -65,32 +63,29 @@ OpenID Connect 的 v2.0 实现有一些明确定义但未应用到任何特定�
 
 #### 配置文件
 
-`profile` 范围可以连同 `openid` 范围和任何其他范围一起包含。它提供大量用户信息的应用程序访问权限。这包括但不限于用户的名字、姓氏、首选用户名、对象 ID 等等。有关给定用户的 id\_token 中可用的配置文件声明的完整列表，请参阅 [v2.0 令牌参考](/documentation/articles/active-directory-v2-tokens/)。
+`profile` 范围可以连同 `openid` 范围和任何其他范围一起包含。它提供大量用户信息的应用程序访问权限。这包括但不限于用户的名字、姓氏、首选用户名、对象 ID 等等。有关给定用户的 id\_token 中可用的配置文件声明的完整列表，请参阅 [v2.0 令牌参考](./active-directory-v2-tokens.md)。
 
 #### Offline\_access
 
 [`offline_access` 范围](http://openid.net/specs/openid-connect-core-1_0.html#OfflineAccess)允许应用在较长时间内代表用户访问资源。在公司帐户同意屏幕上，此范围显示为“随时访问你的数据”权限。在个人 Microsoft 帐户同意屏幕上，则显示为“随时访问你的信息”权限。用户批准 `offline_access` 范围后，应用将能够接收来自 v2.0 令牌终结点的刷新令牌。刷新令牌属于长效令牌，可让应用程序在旧的访问令牌过期时获取新的访问令牌。
 
-如果应用未请求 `offline_access` 范围，则收不到 refresh\_tokens。这意味着，当在 [OAuth 2.0 授权代码流](/documentation/articles/active-directory-v2-protocols/)中兑换 authorization\_code 时，只从 `/token` 终结点接收 access\_token。该 access\_token 短时间维持有效（通常是一小时），但最后终将过期。到时，应用必须将用户重定向回到 `/authorize` 终结点以检索新的 authorization\_code。在此重定向期间，根据应用程序的类型，用户或许无需再次输入其凭据或重新同意权限。
+如果应用未请求 `offline_access` 范围，则收不到 refresh\_tokens。这意味着，当在 [OAuth 2.0 授权代码流](./active-directory-v2-protocols.md)中兑换 authorization\_code 时，只从 `/token` 终结点接收 access\_token。该 access\_token 短时间维持有效（通常是一小时），但最后终将过期。到时，应用必须将用户重定向回到 `/authorize` 终结点以检索新的 authorization\_code。在此重定向期间，根据应用程序的类型，用户或许无需再次输入其凭据或重新同意权限。
 
-有关如何获取及使用刷新令牌的详细信息，请参阅 [v2.0 协议参考](/documentation/articles/active-directory-v2-protocols/)。
-
+有关如何获取及使用刷新令牌的详细信息，请参阅 [v2.0 协议参考](./active-directory-v2-protocols.md)。
 
 ## 请求单个用户的同意
 
-在 [OpenID Connect 或 OAuth 2.0](/documentation/articles/active-directory-v2-protocols/) 授权请求中，应用可以使用 `scope` 查询参数来请求它所需的权限。例如，当用户登录应用程序时，应用程序发送如下所示的请求（包含换行符以便于阅读）：
+在 [OpenID Connect 或 OAuth 2.0](./active-directory-v2-protocols.md) 授权请求中，应用可以使用 `scope` 查询参数来请求它所需的权限。例如，当用户登录应用程序时，应用程序发送如下所示的请求（包含换行符以便于阅读）：
 
-
-	GET https://login.microsoftonline.com/common/oauth2/v2.0/authorize?
-	client_id=6731de76-14a6-49ae-97bc-6eba6914391e
-	&response_type=code
-	&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
-	&response_mode=query
-	&scope=
-	https%3A%2F%2Fgraph.microsoft.com%2Fcalendar.read%20
-	https%3A%2F%2Fgraph.microsoft.com%2Fmail.send
-	&state=12345
-
+    GET https://login.microsoftonline.com/common/oauth2/v2.0/authorize?
+    client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+    &response_type=code
+    &redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+    &response_mode=query
+    &scope=
+    https%3A%2F%2Fgraph.microsoft.com%2Fcalendar.read%20
+    https%3A%2F%2Fgraph.microsoft.com%2Fmail.send
+    &state=12345
 
 `scope` 参数是应用程序所请求的范围列表（以空格分隔）。将范围值附加到资源的标识符（应用程序 ID URI）可指示每个范围。上述请求表示应用程序需要相应的权限来读取用户的邮箱，以及以用户身分发送邮件。
 
@@ -126,7 +121,7 @@ Microsoft 生态系统中的某些高特权权限可以标记为**受管理员�
 
 #### 在应用注册门户中请求权限
 
-- 在 [apps.dev.microsoft.com](https://apps.dev.microsoft.com/?referrer=/documentation/articles&deeplink=/appList) 中导航到你的应用程序，或[创建一个应用](/documentation/articles/active-directory-v2-app-registration/)（如果没有）。
+- 在 [apps.dev.microsoft.com](https://apps.dev.microsoft.com/?referrer=/documentation/articles&deeplink=/appList) 中导航到你的应用程序，或[创建一个应用](./active-directory-v2-app-registration.md)（如果没有）。
 - 找到“Microsoft Graph 权限”部分并添加应用所需的权限。
 - 请务必**保存**应用注册
 
@@ -134,28 +129,22 @@ Microsoft 生态系统中的某些高特权权限可以标记为**受管理员�
 
 在构建使用管理员同意终结点的应用程序时，应用通常需要一个页面/视图，使管理员能够批准应用的权限。此页面可以是应用注册流的一部分、应用设置的一部分，或专用“连接”流的一部分。在许多情况下，合理的结果是应用只在用户使用工作或学校 Microsoft 帐户登录之后才显示此“连接”视图。
 
-将用户登录到应用后，可以识别管理员所属的组织，然后要求他们批准必要的权限。尽管在严格意义上不需要这样做，但有助于为组织用户带来更直观的体验。若要让用户登录，请遵循 [v2.0 协议教程](/documentation/articles/active-directory-v2-protocols/)。
+将用户登录到应用后，可以识别管理员所属的组织，然后要求他们批准必要的权限。尽管在严格意义上不需要这样做，但有助于为组织用户带来更直观的体验。若要让用户登录，请遵循 [v2.0 协议教程](./active-directory-v2-protocols.md)。
 
 #### 向目录管理员请求权限
 
 准备向公司管理员请求权限时，可以将用户重定向到 v2.0 **管理员许可终结点**。
 
+    // Line breaks for legibility only
 
-	// Line breaks for legibility only
+    GET https://login.microsoftonline.com/{tenant}/adminconsent?
+    client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+    &state=12345
+    &redirect_uri=http://localhost/myapp/permissions
 
-	GET https://login.microsoftonline.com/{tenant}/adminconsent?
-	client_id=6731de76-14a6-49ae-97bc-6eba6914391e
-	&state=12345
-	&redirect_uri=http://localhost/myapp/permissions
+    // Pro Tip: Try pasting the below request in a browser!
 
-
-
-	// Pro Tip: Try pasting the below request in a browser!
-
-
-
-	https://login.microsoftonline.com/common/adminconsent?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&state=12345&redirect_uri=http://localhost/myapp/permissions
-
+    https://login.microsoftonline.com/common/adminconsent?client_id=6731de76-14a6-49ae-97bc-6eba6914391e&state=12345&redirect_uri=http://localhost/myapp/permissions
 
 | 参数 | | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -169,9 +158,7 @@ Microsoft 生态系统中的某些高特权权限可以标记为**受管理员�
 ##### 成功的响应
 如果管理员批准了应用程序的权限，成功响应如下：
 
-
-	GET http://localhost/myapp/permissions?tenant=a8990e1f-ff32-408a-9f8e-78d3b9139b95&state=state=12345&admin_consent=True
-
+    GET http://localhost/myapp/permissions?tenant=a8990e1f-ff32-408a-9f8e-78d3b9139b95&state=state=12345&admin_consent=True
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -179,14 +166,10 @@ Microsoft 生态系统中的某些高特权权限可以标记为**受管理员�
 | state | 同样随令牌响应返回的请求中所包含的值。其可以是你想要的任何内容的字符串。该状态用于对发出身份验证请求出现之前，有关用户在应用中的状态的信息（例如前面所在的页面或视图）编码。 |
 | admin\_consent | 将设置为 `True`。 |
 
-
-
 ##### 错误响应
 如果管理员未批准了应用程序的权限，失败响应如下：
 
-
-	GET http://localhost/myapp/permissions?error=permission_denied&error_description=The+admin+canceled+the+request
-
+    GET http://localhost/myapp/permissions?error=permission_denied&error_description=The+admin+canceled+the+request
 
 | 参数 | 说明 |
 | ----------------------- | ------------------------------- | --------------- |
@@ -199,23 +182,21 @@ Microsoft 生态系统中的某些高特权权限可以标记为**受管理员�
 
 在用户同意应用程序的权限之后，应用程序即可获取访问令牌，而这些令牌表示应用程序访问资源的权限。给定的访问令牌只能用于单个资源，但其内部编码是应用程序已获得该资源的特有权限。若要获取访问令牌，应用程序可以对 v2.0 令牌终结点发出请求：
 
+    POST common/oauth2/v2.0/token HTTP/1.1
+    Host: https://login.microsoftonline.com
+    Content-Type: application/json
 
-	POST common/oauth2/v2.0/token HTTP/1.1
-	Host: https://login.microsoftonline.com
-	Content-Type: application/json
-
-	{
-		"grant_type": "authorization_code",
-		"client_id": "6731de76-14a6-49ae-97bc-6eba6914391e",
-		"scope": "https://outlook.office.com/mail.read https://outlook.office.com/mail.send",
-		"code": "AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq..."
-		"redirect_uri": "https://localhost/myapp",
-		"client_secret": "zc53fwe80980293klaj9823"  // NOTE: Only required for web apps
-	}
-
+    {
+        "grant_type": "authorization_code",
+        "client_id": "6731de76-14a6-49ae-97bc-6eba6914391e",
+        "scope": "https://outlook.office.com/mail.read https://outlook.office.com/mail.send",
+        "code": "AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq..."
+        "redirect_uri": "https://localhost/myapp",
+        "client_secret": "zc53fwe80980293klaj9823"  // NOTE: Only required for web apps
+    }
 
 然后，生成的访问令牌可用于资源的 HTTP 请求 - 它可靠地指示应用程序具有适当权限可执行给定任务的资源。
 
-有关 OAuth 2.0 协议以及如何获取访问令牌的详细信息，请参阅 [v2.0 终结点协议参考](/documentation/articles/active-directory-v2-protocols/)。
+有关 OAuth 2.0 协议以及如何获取访问令牌的详细信息，请参阅 [v2.0 终结点协议参考](./active-directory-v2-protocols.md)。
 
 <!---HONumber=Mooncake_1031_2016-->

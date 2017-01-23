@@ -1,22 +1,22 @@
-<properties
-    pageTitle="Resource Manager 模板最佳实践 | Azure"
-    description="有关简化 Azure Resource Manager 模板的指导。"
-    services="azure-resource-manager"
-    documentationcenter=""
-    author="tfitzmac"
-    manager="timlt"
-    editor="tysonn" />  
+---
+title: Resource Manager 模板最佳实践 | Azure
+description: 有关简化 Azure Resource Manager 模板的指导。
+services: azure-resource-manager
+documentationcenter: 
+author: tfitzmac
+manager: timlt
+editor: tysonn
 
-<tags
-    ms.assetid="31b10deb-0183-47ce-a5ba-6d0ff2ae8ab3"
-    ms.service="azure-resource-manager"
-    ms.workload="multiple"
-    ms.tgt_pltfrm="na"
-    ms.devlang="na"
-    ms.topic="article"
-    ms.date="10/25/2016"
-    wacn.date="12/26/2016"
-    ms.author="tomfitz" />
+ms.assetid: 31b10deb-0183-47ce-a5ba-6d0ff2ae8ab3
+ms.service: azure-resource-manager
+ms.workload: multiple
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 10/25/2016
+wacn.date: 12/26/2016
+ms.author: tomfitz
+---
 
 # 创建 Azure Resource Manager 模板的最佳实践
 以下指导帮助用户创建可靠且易于使用的 Resource Manager 模板。这些指导仅供参考，并不一定要你遵循。你可能需要根据方案对此做出变通。
@@ -28,7 +28,7 @@
 2. 不需要唯一的资源名称，不过，提供的名称应可帮助识别上下文。
 3. 通用的资源名称。
 
-有关建立命名约定的帮助，请参阅 [Infrastructure naming guidelines](/documentation/articles/virtual-machines-windows-infrastructure-naming-guidelines/)（基础结构命名指南）。
+有关建立命名约定的帮助，请参阅 [Infrastructure naming guidelines](../virtual-machines/virtual-machines-windows-infrastructure-naming-guidelines.md)（基础结构命名指南）。
 
 ### 唯一的资源名称
 对于具有数据访问终结点的任何资源类型，必须提供唯一的资源名称。需要唯一名称的一些常见类型包括：
@@ -45,7 +45,7 @@
 
 此外，存储帐户名必须使用小写字母，包含 24 个或更少的字符，并且不包含任何连字符。
 
-如果为这些资源名称提供参数，则必须在部署过程中构思唯一的名称。与此相反，可以创建一个变量，使用 [uniqueString()](/documentation/articles/resource-group-template-functions#uniquestring) 函数生成名称。通常，还需要在 **uniqueString** 中添加一个前缀或后缀，这样，只需查看名称就能轻松确定资源类型。例如，可以使用以下变量生成存储帐户的唯一名称：
+如果为这些资源名称提供参数，则必须在部署过程中构思唯一的名称。与此相反，可以创建一个变量，使用 [uniqueString()](./resource-group-template-functions.md#uniquestring) 函数生成名称。通常，还需要在 **uniqueString** 中添加一个前缀或后缀，这样，只需查看名称就能轻松确定资源类型。例如，可以使用以下变量生成存储帐户的唯一名称：
 
     "variables": {
         "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]"
@@ -91,7 +91,7 @@
 
 ## Parameters
 1. 尽量不要使用参数，而是尽可能地使用变量或文本。只为以下各项提供参数：
-   
+
     * 想要根据环境更改的设置（如 SKU、大小或容量）。
     * 想要方便识别而指定的资源名称。
     * 通常用于完成其他任务的值（如用户名）。
@@ -99,7 +99,7 @@
     * 创建资源类型的多个实例时要使用的值的数目或数组。
 2. 参数名称应遵循 **camelCasing**。
 3. 在每个参数的元数据中提供说明。
-   
+
         "parameters": {
             "storageAccountType": {
                 "type": "string",
@@ -109,7 +109,7 @@
             }
         }
 4. 定义参数（密码和 SSH 密钥除外）的默认值。
-   
+
         "parameters": {
             "storageAccountType": {
                 "type": "string",
@@ -120,7 +120,7 @@
             }
         }
 5. 为所有密码和机密使用 **securestring**。
-   
+
         "parameters": {
             "secretValue": {
                 "type": "securestring",
@@ -130,7 +130,7 @@
             }
         }
 6. 尽量避免使用参数来指定**位置**。改用资源组的位置属性。如果为所有资源使用 **resourceGroup().location** 表达式，模板中的资源将部署在与资源组相同的位置。
-   
+
         "resources": [
           {
               "name": "[variables('storageAccountName')]",
@@ -140,16 +140,16 @@
               ...
           }
         ]
-   
+
      如果只有有限数量的位置支持某种资源类型，请考虑在模板中直接指定有效的位置。如果必须使用位置参数，请尽量与可能需要位于同一位置的资源共享该参数值。这种方法可以最大程度地减少用户为每个资源类型提供位置的需要。
 7. 避免对资源类型的 API 版本使用参数或变量。资源的属性和值可能会因版本号的不同而异。如果将 API 版本设置为参数或变量，代码编辑器中的 Intellisense 将无法确定正确的架构，并且会在模板中将 API 版本硬编码。
 
 ## 变量
 1. 针对需要在模板中多次使用的值使用变量。如果一次只使用一个值，则硬编码值可使模板更易于阅读。
-2. 不能在 variables 节中使用 [reference](/documentation/articles/resource-group-template-functions#reference) 函数。reference 函数从资源的运行时状态中派生其值，但变量是在初始模板分析期间解析的。应直接在模板的 **resources** 或 **outputs** 节中构造需要 **reference** 函数的值。
+2. 不能在 variables 节中使用 [reference](./resource-group-template-functions.md#reference) 函数。reference 函数从资源的运行时状态中派生其值，但变量是在初始模板分析期间解析的。应直接在模板的 **resources** 或 **outputs** 节中构造需要 **reference** 函数的值。
 3. 根据[资源名称](#resource-names)中所述，针对需要保持唯一的资源名称包含变量。
 4. 可以将变量组合成复杂对象。可以使用 **variable.subentry** 格式，从复杂对象引用值。组合变量有助于跟踪相关变量，并提高模板的易读性。
-   
+
         "variables": {
             "storage": {
                 "name": "[concat(uniqueString(resourceGroup().id),'storage')]",
@@ -168,17 +168,17 @@
               ...
           }
         ]
-   
-    > [AZURE.NOTE]
+
+    > [!NOTE]
     复杂对象不能包含从复杂对象引用值的表达式。若要进行这种引用，可以定义一个单独的变量。
     > 
     > 
-   
-    有关使用复杂对象作为变量的更高级示例，请参阅[Sharing state in Azure Resource Manager templates](/documentation/articles/best-practices-resource-manager-state/)（在 Azure Resource Manager 模板中共享状态）。
+
+    有关使用复杂对象作为变量的更高级示例，请参阅[Sharing state in Azure Resource Manager templates](./best-practices-resource-manager-state.md)（在 Azure Resource Manager 模板中共享状态）。
 
 ## 资源
 1. 为模板中的每个资源指定**注释**，以帮助其他参与者理解该资源的用途。
-   
+
         "resources": [
           {
               "name": "[variables('storageAccountName')]",
@@ -189,34 +189,34 @@
               ...
           }
         ]
-2. 使用标记将元数据添加到可让你添加有关资源的其他信息的资源。例如，可以将元数据添加到某个资源以显示计费详细信息。有关详细信息，请参阅[使用标记来组织 Azure 资源](/documentation/articles/resource-group-using-tags/)。
+2. 使用标记将元数据添加到可让你添加有关资源的其他信息的资源。例如，可以将元数据添加到某个资源以显示计费详细信息。有关详细信息，请参阅[使用标记来组织 Azure 资源](./resource-group-using-tags.md)。
 3. 如果在模板中使用**公共终结点**（例如 Blob 存储公共终结点），请**不要**将命名空间硬编码。使用 **reference** 函数可动态检索命名空间。使用此方法可以将模板部署到不同的公共命名空间环境，而无需在模板中手动更改终结点。在模板中将 apiVersion 设置为用于 storageAccount 的同一版本。
-   
+
         "osDisk": {
             "name": "osdisk",
             "vhd": {
                 "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName')), '2016-01-01').primaryEndpoints.blob, variables('vmStorageAccountContainerName'), '/',variables('OSDiskName'),'.vhd')]"
             }
         }
-   
+
      如果在同一模板中部署了存储帐户，则引用资源时不需要指定提供程序命名空间。简化的语法为：
-   
+
         "osDisk": {
             "name": "osdisk",
             "vhd": {
                 "uri": "[concat(reference(variables('storageAccountName'), '2016-01-01').primaryEndpoints.blob, variables('vmStorageAccountContainerName'), '/',variables('OSDiskName'),'.vhd')]"
             }
         }
-   
+
      如果在使用公共命名空间配置的模板中包含了其他值，请更改这些值以反映相同的 reference 函数。例如，虚拟机 diagnosticsProfile 的 storageUri 属性。
-   
+
         "diagnosticsProfile": {
             "bootDiagnostics": {
                 "enabled": "true",
                 "storageUri": "[reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName')), '2016-01-01').primaryEndpoints.blob]"
             }
         }
-   
+
      你还可以在不同资源组中**引用**现有的存储帐户。
 
         "osDisk": {
@@ -227,15 +227,15 @@
         }
 
 1. 仅当应用程序有需要时，才将 publicIPAddresses 分配到虚拟机。若要建立连接以进行调试或管理，请使用 inboundNatRules、virtualNetworkGateways 或 jumpbox。
-   
+
      有关连接到虚拟机的详细信息，请参阅：
-   
-    * [为 Azure Resource Manager 中的虚拟机设置 WinRM 访问权限](/documentation/articles/virtual-machines-windows-winrm/)
-    * [使用 Azure 门户预览实现对 VM 的外部访问](/documentation/articles/virtual-machines-windows-nsg-quickstart-portal/)
-    * [使用 PowerShell 对 VM 实现外部访问](/documentation/articles/virtual-machines-windows-nsg-quickstart-powershell/)
-    * [打开端口和终结点](/documentation/articles/virtual-machines-linux-nsg-quickstart/)
+
+    * [为 Azure Resource Manager 中的虚拟机设置 WinRM 访问权限](../virtual-machines/virtual-machines-windows-winrm.md)
+    * [使用 Azure 门户预览实现对 VM 的外部访问](../virtual-machines/virtual-machines-windows-nsg-quickstart-portal.md)
+    * [使用 PowerShell 对 VM 实现外部访问](../virtual-machines/virtual-machines-windows-nsg-quickstart-powershell.md)
+    * [打开端口和终结点](../virtual-machines/virtual-machines-linux-nsg-quickstart.md)
 2. publicIPAddresses 的 **domainNameLabel** 属性必须唯一。domainNameLabel 必须包含 3 到 63 个字符，并遵循正则表达式 `^[a-z][a-z0-9-]{1,61}[a-z0-9]$` 指定的规则。由于 uniqueString 函数生成 13 个字符的字符串，因此 dnsPrefixString 参数不得超过 50 个字符。
-   
+
         "parameters": {
             "dnsPrefixString": {
                 "type": "string",
@@ -249,7 +249,7 @@
             "dnsPrefix": "[concat(parameters('dnsPrefixString'),uniquestring(resourceGroup().id))]"
         }
 3. 将密码添加到 **customScriptExtension** 时，请在 protectedSettings 中使用 **commandToExecute** 属性。
-   
+
         "properties": {
             "publisher": "Microsoft.Azure.Extensions",
             "type": "CustomScript",
@@ -264,8 +264,8 @@
                 "commandToExecute": "[concat('sh install_lamp.sh ', parameters('mySqlPassword'))]"
             }
         }
-   
-    > [AZURE.NOTE]
+
+    > [!NOTE]
     为了确保作为参数传递给 virtualMachines/扩展的机密经过加密，请使用相关扩展的 protectedSettings 属性。
     > 
     > 
@@ -300,7 +300,7 @@
 
 ![嵌套模板](./media/resource-manager-template-best-practices/nestedTemplateDesign.png)
 
-有关详细信息，请参阅[将链接的模板与 Azure 资源管理器配合使用](/documentation/articles/resource-group-linked-templates/)。
+有关详细信息，请参阅[将链接的模板与 Azure 资源管理器配合使用](./resource-group-linked-templates.md)。
 
 ## 有条件地链接到嵌套模板
 可以使用属于模板 URI 一部分的参数，有条件地链接到嵌套模板。
@@ -339,8 +339,8 @@
 2. 另外，一个不错的想法是设置 JSON 的格式以以提高可读性。可以为本地编辑器使用 JSON 格式化程序包。在 Visual Studio 中，使用 **Ctrl+K、Ctrl+D** 设置文档的格式。在 VS Code 中，使用 **Alt+Shift+F**。如果你的本地编辑器无法设置文档格式，你可以使用[联机格式化程序](https://www.bing.com/search?q=json+formatter)。
 
 ## 后续步骤
-* 有关设置存储帐户的指导，请参阅 [Azure Storage Performance and Scalability Checklist](/documentation/articles/storage-performance-checklist/)（Azure 存储空间的性能和可缩放性清单）。
-* 有关虚拟网络的帮助，请参阅 [Networking infrastructure guidelines](/documentation/articles/virtual-machines-windows-infrastructure-networking-guidelines/)（网络基础结构指南）。
-* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](/documentation/articles/resource-manager-subscription-governance/)。
+* 有关设置存储帐户的指导，请参阅 [Azure Storage Performance and Scalability Checklist](../storage/storage-performance-checklist.md)（Azure 存储空间的性能和可缩放性清单）。
+* 有关虚拟网络的帮助，请参阅 [Networking infrastructure guidelines](../virtual-machines/virtual-machines-windows-infrastructure-networking-guidelines.md)（网络基础结构指南）。
+* 如需了解企业如何使用 Resource Manager 对订阅进行有效管理，请参阅 [Azure 企业机架 - 规范性订阅管理](./resource-manager-subscription-governance.md)。
 
 <!---HONumber=Mooncake_1219_2016-->

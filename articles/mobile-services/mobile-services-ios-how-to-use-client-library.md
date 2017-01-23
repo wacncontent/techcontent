@@ -1,31 +1,32 @@
-<properties
-	pageTitle="如何使用适用于 Azure 移动服务的 iOS 客户端库"
-	description="如何使用适用于移动服务的 iOS 客户端库"
-	services="mobile-services"
-	documentationCenter="ios"
-	authors="krisragh"
-	manager="dwrede"
-	editor=""/>
+---
+title: 如何使用适用于 Azure 移动服务的 iOS 客户端库
+description: 如何使用适用于移动服务的 iOS 客户端库
+services: mobile-services
+documentationCenter: ios
+authors: krisragh
+manager: dwrede
+editor: 
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-ios"
-	ms.devlang="objective-c"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="krisragh"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-ios
+ms.devlang: objective-c
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: krisragh
+---
 
 #  如何使用适用于 Azure 移动服务的 iOS 客户端库
 
-[AZURE.INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
+[!INCLUDE [mobile-services-selector-client-library](../../includes/mobile-services-selector-client-library.md)]
 
 本指南介绍如何使用 Azure 移动服务 [iOS SDK] 执行常见任务。如果你不熟悉移动服务，请先完成[移动服务快速入门]，以配置你的帐户、创建表，并创建移动服务。
 
-> [AZURE.NOTE]本指南使用最新的 [iOS 移动服务 SDK](https://go.microsoft.com/fwLink/?LinkID=266533&clcid=0x409)。如果你的项目使用旧版 SDK，请先升级 Xcode 中的框架。
+> [!NOTE]
+>本指南使用最新的 [iOS 移动服务 SDK](https://go.microsoft.com/fwLink/?LinkID=266533&clcid=0x409)。如果你的项目使用旧版 SDK，请先升级 Xcode 中的框架。
 
-[AZURE.INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
+[!INCLUDE [mobile-services-concepts](../../includes/mobile-services-concepts.md)]
 
 ## <a name="Setup"></a>安装与先决条件
 
@@ -44,7 +45,7 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 若要访问或更新 Azure 移动服务的数据，请创建对表的引用。将 `TodoItem` 替换为你的表名称。
 
 ```
-	MSTable *table = [client tableWithName:@"TodoItem"];
+    MSTable *table = [client tableWithName:@"TodoItem"];
 ```
 
 ## <a name="querying"></a>如何：查询数据
@@ -53,14 +54,14 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 
 ```
 [table readWithCompletion:^(MSQueryResult *result, NSError *error) {
-		if(error) { // error is nil if no error occured
-			NSLog(@"ERROR %@", error);
-		} else {
-				for(NSDictionary *item in result.items) { // items is NSArray of records that match query
-				NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
-			}
-		}
-	}];
+        if(error) { // error is nil if no error occured
+            NSLog(@"ERROR %@", error);
+        } else {
+                for(NSDictionary *item in result.items) { // items is NSArray of records that match query
+                NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
+            }
+        }
+    }];
 ```
 
 ## <a name="filtering"></a>如何：筛选器返回的数据
@@ -71,17 +72,17 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 
 ```
 // Create a predicate that finds items where complete is false
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"complete == NO"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"complete == NO"];
 // Query the TodoItem table and update the items property with the results from the service
 [table readWithPredicate:predicate completion:^(MSQueryResult *result, NSError *error) {
-		if(error) {
-			NSLog(@"ERROR %@", error);
-		} else {
-				for(NSDictionary *item in result.items) {
-				NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
-			}
-		}
-	}];
+        if(error) {
+            NSLog(@"ERROR %@", error);
+        } else {
+                for(NSDictionary *item in result.items) {
+                NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
+            }
+        }
+    }];
 ```
 
 ## <a name="query-object"></a>如何：使用 MSQuery
@@ -101,7 +102,6 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 * 指定请求中的自定义查询字符串参数 
 * 应用其他函数
 
-
 ##  <a name="sorting"></a>如何：使用 MSQuery 对数据排序
 
 让我们先看一个示例，来了解如何对结果排序。若要先按 **text** 字段升序排序，然后按 `completion` 字段降序排序，请按如下所示调用 `MSQuery`：
@@ -110,14 +110,14 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 [query orderByAscending:@"text"];
 [query orderByDescending:@"complete"];
 [query readWithCompletion:^(MSQueryResult *result, NSError *error) {
-		if(error) {
-				NSLog(@"ERROR %@", error);
-		} else {
-				for(NSDictionary *item in result.items) {
-						NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
-				}
-		}
-	}];
+        if(error) {
+                NSLog(@"ERROR %@", error);
+        } else {
+                for(NSDictionary *item in result.items) {
+                        NSLog(@"Todo Item: %@", [item objectForKey:@"text"]);
+                }
+        }
+    }];
 ```
 
 ##  <a name="paging"></a>如何：使用 MSQuery 在页中返回数据
@@ -125,9 +125,9 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 移动服务可以限制单个响应中返回的记录量。若要控制显示给用户的记录数，你必须实施一个分页系统。你可以使用 **MSQuery** 对象的以下三个属性来执行分页：
 
 ```
-+	`BOOL includeTotalCount`
-+	`NSInteger fetchLimit`
-+	`NSInteger fetchOffset`
++ `BOOL includeTotalCount`
++ `NSInteger fetchLimit`
++ `NSInteger fetchOffset`
 ```
 
 在以下示例中，一个简单函数会向服务器请求 5 条记录，然后将这些记录附加到先前加载记录的本地集合：
@@ -143,39 +143,38 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 {
     MSQuery *query = [self.table query];
 
-		query.includeTotalCount = YES;
+        query.includeTotalCount = YES;
     query.fetchLimit = 5;
-		query.fetchOffset = self.loadedItems.count;
-
+        query.fetchOffset = self.loadedItems.count;
 
     [query readWithCompletion:^(MSQueryResult *result, NSError *error) {
-			if(!error) {
-				// Add the items to our local copy
+            if(!error) {
+                // Add the items to our local copy
             [self.loadedItems addObjectsFromArray:result.items];
 
             // Set a flag to keep track if there are any additional records we need to load
             self.moreResults = (self.loadedItems.count <= result.totalCount);
-			}
-		}];
-	}
+            }
+        }];
+    }
 
 ```
- 
+
 ##  <a name="selecting"></a><a name="parameters"></a>如何：使用 MSQuery 限制字段和展开查询字符串参数
 
 若要限制在查询中返回的字段，请在 **selectFields** 属性中指定字段的名称。这样，便只会返回文本和已完成的字段：
 
 ```
-	query.selectFields = @[@"text", @"completed"];
+    query.selectFields = @[@"text", @"completed"];
 ```
 
 若要在服务器请求中包含其他查询字符串参数（例如，某个自定义服务器端脚本要使用这些参数），请按如下所示填充 `query.parameters`：
 
 ```
-	query.parameters = @{
-		@"myKey1" : @"value1",
-		@"myKey2" : @"value2",
-	};
+    query.parameters = @{
+        @"myKey1" : @"value1",
+        @"myKey2" : @"value2",
+    };
 ```
 
 ## <a name="inserting"></a>如何：插入数据
@@ -185,17 +184,17 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 如果未提供 `id`，后端会自动生成新的唯一 ID。提供你自己的 `id`，以使用电子邮件地址、用户名或你自己的自定义值作为 ID。提供自己的 ID 可以让联接和业务导向型数据库逻辑变得更容易。
 
 ```
-	NSDictionary *newItem = @{@"id": @"custom-id", @"text": @"my new item", @"complete" : @NO};
-	[self.table insert:newItem completion:^(NSDictionary *result, NSError *error) {
-		// The result contains the new item that was inserted,
-		// depending on your server scripts it may have additional or modified 
-		// data compared to what was passed to the server.
-		if(error) {
-				NSLog(@"ERROR %@", error);
-		} else {
-						NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
-	}
-	}];
+    NSDictionary *newItem = @{@"id": @"custom-id", @"text": @"my new item", @"complete" : @NO};
+    [self.table insert:newItem completion:^(NSDictionary *result, NSError *error) {
+        // The result contains the new item that was inserted,
+        // depending on your server scripts it may have additional or modified 
+        // data compared to what was passed to the server.
+        if(error) {
+                NSLog(@"ERROR %@", error);
+        } else {
+                        NSLog(@"Todo Item: %@", [result objectForKey:@"text"]);
+    }
+    }];
 ```
 
 ## <a name="modifying"></a>如何：修改数据
@@ -203,19 +202,19 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 若要更新现有的行，请修改项并调用 `update`：
 
 ```
-	NSMutableDictionary *newItem = [oldItem mutableCopy]; // oldItem is NSDictionary
-	[newItem setValue:@"Updated text" forKey:@"text"];
-	[self.table update:newItem completion:^(NSDictionary *item, NSError *error) {
-		// Handle error or perform additional logic as needed
-	}];
+    NSMutableDictionary *newItem = [oldItem mutableCopy]; // oldItem is NSDictionary
+    [newItem setValue:@"Updated text" forKey:@"text"];
+    [self.table update:newItem completion:^(NSDictionary *item, NSError *error) {
+        // Handle error or perform additional logic as needed
+    }];
 ```
 
 或者，提供行 ID 和更新的字段：
 
 ```
-	[self.table update:@{@"id":@"37BBF396-11F0-4B39-85C8-B319C729AF6D", @"Complete":@YES} completion:^(NSDictionary *item, NSError *error) {
-		// Handle error or perform additional logic as needed
-	}];
+    [self.table update:@{@"id":@"37BBF396-11F0-4B39-85C8-B319C729AF6D", @"Complete":@YES} completion:^(NSDictionary *item, NSError *error) {
+        // Handle error or perform additional logic as needed
+    }];
 ```
 
 进行更新时，至少必须设置 `id` 属性。
@@ -225,27 +224,26 @@ MSClient *client = [MSClient clientWithApplicationURLString:@"AppUrl" applicatio
 若要删除某个项，请对该项调用 `delete`：
 
 ```
-	[self.table delete:item completion:^(id itemId, NSError *error) {
-		// Handle error or perform additional logic as needed
-	}];
+    [self.table delete:item completion:^(id itemId, NSError *error) {
+        // Handle error or perform additional logic as needed
+    }];
 ```
 
 或者，提供行 ID 来进行删除：
 
 ```
-	[self.table deleteWithId:@"37BBF396-11F0-4B39-85C8-B319C729AF6D" completion:^(id itemId, NSError *error) {
-		// Handle error or perform additional logic as needed
-	}];
+    [self.table deleteWithId:@"37BBF396-11F0-4B39-85C8-B319C729AF6D" completion:^(id itemId, NSError *error) {
+        // Handle error or perform additional logic as needed
+    }];
 ```
 
 进行删除时，至少必须设置 `id` 属性。
 
 ##<a name="#custom-api"></a>如何：调用自定义 API
 
-自定义 API 可让你定义自定义终结点，这些终结点将会公开不映射到插入、更新、删除或读取操作的服务器功能。使用自定义 API 能够以更大的力度控制消息传送，包括读取和设置 HTTP 消息标头，以及定义除 JSON 以外的消息正文格式。有关如何在移动服务中创建自定义 API 的示例，请参阅[如何：定义自定义 API 终结点](/documentation/articles/mobile-services-dotnet-backend-define-custom-api/)。
+自定义 API 可让你定义自定义终结点，这些终结点将会公开不映射到插入、更新、删除或读取操作的服务器功能。使用自定义 API 能够以更大的力度控制消息传送，包括读取和设置 HTTP 消息标头，以及定义除 JSON 以外的消息正文格式。有关如何在移动服务中创建自定义 API 的示例，请参阅[如何：定义自定义 API 终结点](./mobile-services-dotnet-backend-define-custom-api.md)。
 
-[AZURE.INCLUDE [mobile-services-ios-call-custom-api](../../includes/mobile-services-ios-call-custom-api.md)]
-
+[!INCLUDE [mobile-services-ios-call-custom-api](../../includes/mobile-services-ios-call-custom-api.md)]
 
 ## <a name="authentication"></a>如何：对用户进行身份验证
 
@@ -256,32 +254,32 @@ Azure 移动服务支持两种身份验证工作流：
 - **服务器托管登录**：Azure 移动服务将代表应用程序管理登录过程。它会显示提供者特定的登录页，并使用选择的提供者进行身份验证。
 
 - **客户端托管登录**：_应用程序_必须从标识提供者请求令牌，然后将此令牌提供给 Azure 移动服务以进行身份验证。
-		
+
 当身份验证成功时，你将获得具有用户 ID 值和身份验证令牌的用户对象。若要使用此用户 ID 来授权用户，请参阅[服务器端授权]。若要将表访问权限限制给已经过身份验证的用户，请参阅[权限]。
 
 ###  服务器托管登录
 
 以下是可以将服务器托管登录添加到[移动服务快速入门]项目的方式；你可以为其他项目使用类似的代码。
 
-[AZURE.INCLUDE [mobile-services-ios-authenticate-app](../../includes/mobile-services-ios-authenticate-app.md)]
+[!INCLUDE [mobile-services-ios-authenticate-app](../../includes/mobile-services-ios-authenticate-app.md)]
 
 ###  客户端托管登录（单一登录）
 
 你可以在移动服务客户端外部执行登录过程来启用单一登录，或者使应用程序能够直接联系标识提供者。在这种情况下，你可以通过提供单独从受支持标识提供者获取的令牌来登录到移动服务。
 
 以下示例使用 [Live Connect SDK] 为 iOS 应用程序启用单一登录。该示例假设你前面在控制器中创建了名为 `liveClient` 的 **LiveConnectClient** 实例，并且用户已登录。
-	
+
 ```
-	[client loginWithProvider:@"microsoftaccount" 
-		token:@{@"authenticationToken" : self.liveClient.session.authenticationToken}
-		completion:^(MSUser *user, NSError *error) {
-				// Handle success and errors
-	}];
+    [client loginWithProvider:@"microsoftaccount" 
+        token:@{@"authenticationToken" : self.liveClient.session.authenticationToken}
+        completion:^(MSUser *user, NSError *error) {
+                // Handle success and errors
+    }];
 ```
 
 ## <a name="caching-tokens"></a>如何：缓存身份验证令牌
 
-了解如何在[移动服务快速入门]项目中缓存令牌；你可以对任何项目应用类似的步骤。[AZURE.INCLUDE [mobile-services-ios-authenticate-app-with-token](../../includes/mobile-services-ios-authenticate-app-with-token.md)]
+了解如何在[移动服务快速入门]项目中缓存令牌；你可以对任何项目应用类似的步骤。[!INCLUDE [mobile-services-ios-authenticate-app-with-token](../../includes/mobile-services-ios-authenticate-app-with-token.md)]
 
 ## <a name="errors"></a>如何：处理错误
 
@@ -318,8 +316,8 @@ Azure 移动服务支持两种身份验证工作流：
 <!-- Images. -->
 
 <!-- URLs. -->
-[移动服务快速入门]: /documentation/articles/mobile-services-ios-get-started/
-[Get started with Mobile Services]: /documentation/articles/mobile-services-ios-get-started/
+[移动服务快速入门]: ./mobile-services-ios-get-started.md
+[Get started with Mobile Services]: ./mobile-services-ios-get-started.md
 [Mobile Services SDK]: https://go.microsoft.com/fwLink/p/?LinkID=266533
 
 [iOS SDK]: https://developer.apple.com/xcode
@@ -327,13 +325,12 @@ Azure 移动服务支持两种身份验证工作流：
 [Handling Expired Tokens]: http://go.microsoft.com/fwlink/p/?LinkId=301955
 [Live Connect SDK]: http://go.microsoft.com/fwlink/p/?LinkId=301960
 [权限]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj193161.aspx
-[服务器端授权]: /documentation/articles/mobile-services-javascript-backend-service-side-authorization/
+[服务器端授权]: ./mobile-services-javascript-backend-service-side-authorization.md
 [动态架构]: http://go.microsoft.com/fwlink/p/?LinkId=296271
 [创建表]: http://msdn.microsoft.com/zh-cn/library/windowsazure/jj193162.aspx
 [NSDictionary object]: http://go.microsoft.com/fwlink/p/?LinkId=301965
 [ASCII control codes C0 and C1]: http://en.wikipedia.org/wiki/Data_link_escape_character#C1_set
-[CLI to manage Mobile Services tables]: /documentation/articles/virtual-machines-command-line-tools/#Mobile_Tables
-[冲突处理程序]: /documentation/articles/mobile-services-ios-handling-conflicts-offline-data/#add-conflict-handling
- 
+[CLI to manage Mobile Services tables]: ../virtual-machines-command-line-tools.md#Mobile_Tables
+[冲突处理程序]: ./mobile-services-ios-handling-conflicts-offline-data.md#add-conflict-handling
 
 <!---HONumber=Mooncake_0215_2016-->

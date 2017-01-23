@@ -1,17 +1,17 @@
-<properties
-                pageTitle="在 Azure 经典管理门户中创建 CDN 终结点失败"
-                description="在 Azure 经典管理门户中创建 CDN 终结点时，出现无提示或 CDN 终结点创建失败"
-                services="cdn"
-                documentationCenter=""
-                authors=""
-                manager=""
-                editor=""
-                tags="cdn,IPC number, contoso"/>
+---
+title: 在 Azure 经典管理门户中创建 CDN 终结点失败
+description: 在 Azure 经典管理门户中创建 CDN 终结点时，出现无提示或 CDN 终结点创建失败
+services: cdn
+documentationCenter: 
+authors: 
+manager: 
+editor: 
+tags: cdn,IPC number, contoso
 
-<tags
-                ms.service="cdn-aog"
-                ms.date="12/29/2016"
-                wacn.date="12/29/2016"/>
+ms.service: cdn-aog
+ms.date: 12/29/2016
+wacn.date: 12/29/2016
+---
 
 # 在 Azure 经典管理门户中创建 CDN 终结点失败
 

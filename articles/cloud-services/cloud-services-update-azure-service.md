@@ -1,20 +1,21 @@
-<properties
-pageTitle="如何更新云服务 | Azure"
-description="了解如何在 Azure 中更新云服务。了解如何云服务上进行更新以确保可用性。"
-services="cloud-services"
-documentationCenter=""
-authors="Thraka"
-manager="timlt"
-editor=""/>
-<tags
-ms.service="cloud-services"
-ms.workload="tbd"
-ms.tgt_pltfrm="na"
-ms.devlang="na"
-ms.topic="article"
-ms.date="11/14/2016"
-wacn.date="12/26/2016"
-ms.author="adegeo"/>
+---
+title: 如何更新云服务 | Azure
+description: 了解如何在 Azure 中更新云服务。了解如何云服务上进行更新以确保可用性。
+services: cloud-services
+documentationCenter: 
+authors: Thraka
+manager: timlt
+editor: 
+
+ms.service: cloud-services
+ms.workload: tbd
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 11/14/2016
+wacn.date: 12/26/2016
+ms.author: adegeo
+---
 
 # 如何更新云服务
 
@@ -29,7 +30,8 @@ Azure 将角色实例划分为称为升级域 (UD) 的逻辑组。升级域 (UD)
 
 在为服务中的一个或多个角色执行就地更新时，Azure 根据所属的升级域更新角色实例集。Azure 更新给定升级域中的所有实例（停止、更新并将它们重新联机），然后移到下一个升级域。通过仅停止在当前升级域中运行的实例，Azure 确保在执行更新时将对正在运行服务造成的影响降到最低。有关详细信息，请参阅本文后面的[如何进行更新](#howanupgradeproceeds)。
 
-> [AZURE.NOTE] 虽然**更新**和**升级**术语在 Azure 上下文中的含义略有不同，但在本文档中的功能过程和描述中可以互换使用。
+> [!NOTE]
+> 虽然**更新**和**升级**术语在 Azure 上下文中的含义略有不同，但在本文档中的功能过程和描述中可以互换使用。
 
 服务至少必须定义角色的两个实例，以便就地更新该角色而无需停机。如果服务仅包含一个角色的一个实例，则只有在完成就地更新后才能使用服务。
 
@@ -62,8 +64,8 @@ Azure 将角色实例划分为称为升级域 (UD) 的逻辑组。升级域 (UD)
 
 <sup>2</sup>需要 Azure SDK 1.5 或更高版本。
 
-> [AZURE.WARNING] 更改虚拟机大小将会损坏本地数据。
-
+> [!WARNING]
+> 更改虚拟机大小将会损坏本地数据。
 
 在更新期间，不支持以下操作：
 
@@ -83,7 +85,6 @@ Azure 将角色实例划分为称为升级域 (UD) 的逻辑组。升级域 (UD)
 下图说明了在仅升级一个角色时如何进行更新：
 
 ![升级角色](./media/cloud-services-update-azure-service/IC345880.png "升级角色")
-
 
 在自动更新期间，Azure 结构控制器会定期评估云服务的运行状况，以判断何时可以安全进行下一次 UD。此运行状况评估基于每个角色执行，并且只考虑最新版本中的实例（即 UD 中已步进的实例）。它验证每个角色的最小数量的角色实例是否已达到令人满意的终止状态。
 
@@ -110,7 +111,8 @@ Azure 将角色实例划分为称为升级域 (UD) 的逻辑组。升级域 (UD)
 ## 更新回滚
 在 Azure 结构控制器接受初始更新请求后，Azure 允许对服务启动额外操作，从而在更新期间提供管理服务方面的灵活性。只有在更新（配置更改）或升级在部署上处于**进行中**状态时，才能执行回滚。只要至少有一个服务实例尚未更新到新版本，就认为更新或升级处于进行中状态。要测试是否允许回滚，请检查“获取部署”和“获取云服务属性”操作返回的 RollbackAllowed 标志值是否设置为 true。[](https://msdn.microsoft.com/zh-cn/library/azure/ee460804.aspx)[](https://msdn.microsoft.com/zh-cn/library/azure/ee460806.aspx)
 
-> [AZURE.NOTE] 这仅对在**就地**更新或升级上调用 Rollback 有意义，因为 VIP 交换升级涉及将服务的一个完整运行实例替换为另一个实例。
+> [!NOTE]
+> 这仅对在**就地**更新或升级上调用 Rollback 有意义，因为 VIP 交换升级涉及将服务的一个完整运行实例替换为另一个实例。
 
 回滚进行中的更新将对部署产生以下影响：
 
@@ -150,7 +152,7 @@ Azure 将角色实例划分为称为升级域 (UD) 的逻辑组。升级域 (UD)
 若要调用返回 Locked 标志的这些方法版本，必须将请求标头设置为“x-ms-version: 2011-10-01”或更高版本。有关版本控制标头的详细信息，请参阅[服务管理版本控制](https://msdn.microsoft.com/zh-cn/library/azure/gg592580.aspx)。
 
 ## <a name="distributiondfroles"></a> 在升级域之间分配角色
-Azure 在一定数量的升级域之间均匀分配角色实例，可以将升级域数配置为服务定义 (.csdef) 文件的一部分。升级域的最大数量为 20 个，默认值为 5 个。有关如何修改服务定义文件的详细信息，请参阅 [Azure 服务定义架构（.csdef 文件）](/documentation/articles/cloud-services-model-and-package/#csdef)。
+Azure 在一定数量的升级域之间均匀分配角色实例，可以将升级域数配置为服务定义 (.csdef) 文件的一部分。升级域的最大数量为 20 个，默认值为 5 个。有关如何修改服务定义文件的详细信息，请参阅 [Azure 服务定义架构（.csdef 文件）](./cloud-services-model-and-package.md#csdef)。
 
 例如，如果角色具有 10 个实例，则每个升级域默认包含两个实例。如果角色具有 14 个实例，则四个升级域分别包含 3 个实例，第五个域包含 2 个实例。
 
@@ -160,12 +162,12 @@ Azure 在一定数量的升级域之间均匀分配角色实例，可以将升�
 
 ![升级域的分配](./media/cloud-services-update-azure-service/IC345533.png "升级域的分配")
 
-
-> [AZURE.NOTE] 请注意，Azure 控制如何在升级域之间分配实例。无法指定将哪些实例分配给哪个域。
+> [!NOTE]
+> 请注意，Azure 控制如何在升级域之间分配实例。无法指定将哪些实例分配给哪个域。
 
 ## 后续步骤
-- [如何管理云服务](/documentation/articles/cloud-services-how-to-manage/)
-- [如何监视云服务](/documentation/articles/cloud-services-how-to-monitor/)
-- [如何配置云服务](/documentation/articles/cloud-services-how-to-configure/)
+- [如何管理云服务](./cloud-services-how-to-manage.md)
+- [如何监视云服务](./cloud-services-how-to-monitor.md)
+- [如何配置云服务](./cloud-services-how-to-configure.md)
 
 <!---HONumber=Mooncake_Quality_Review_1215_2016-->

@@ -1,22 +1,21 @@
-<properties
-	pageTitle="调整媒体处理的规模概述 | Azure"
-	description="本主题概述了如何使用 Azure 媒体服务调整媒体处理的规模。"
-	services="media-services"
-	documentationCenter=""
-	authors="juliako"
-	manager="erikre"
-	editor=""/>
+---
+title: 调整媒体处理的规模概述 | Azure
+description: 本主题概述了如何使用 Azure 媒体服务调整媒体处理的规模。
+services: media-services
+documentationCenter: 
+authors: juliako
+manager: erikre
+editor: 
 
-<tags
-	ms.service="media-services"
-	ms.workload="media"
-	ms.tgt_pltfrm="na"
-	ms.devlang="na"
-	ms.topic="article"
-	ms.date="08/29/2016"
-	wacn.date="12/27/2016"
-	ms.author="juliako"/>
-
+ms.service: media-services
+ms.workload: media
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 08/29/2016
+wacn.date: 12/27/2016
+ms.author: juliako
+---
 
 # 调整媒体处理的规模概述
 
@@ -39,7 +38,8 @@
 
 ##注意事项
 
->[AZURE.IMPORTANT] 查看本节中所述的注意事项。
+>[!IMPORTANT]
+> 查看本节中所述的注意事项。
 
 - 保留单元可用于并行化所有媒体处理，其中使用 Azure Media Indexer 为作业编制索引。但是，与编码不同，索引作业使用更快的保留单元并不能更快地完成处理。
 
@@ -51,17 +51,16 @@
 
 - 为 24 小时期间指定的最大单位数将用于计算成本。
 
-
 ##配额和限制
 
-有关配额和限制以及如何开具支持票证的信息，请参阅[配额和限制](/documentation/articles/media-services-quotas-and-limitations/)。
+有关配额和限制以及如何开具支持票证的信息，请参阅[配额和限制](./media-services-quotas-and-limitations.md)。
 
 ##后续步骤
 
 通过以下技术之一完成调整媒体处理的规模任务：
 
-> [AZURE.SELECTOR]
-- [.NET](/documentation/articles/media-services-dotnet-encoding-units/)
+> [!div class="op_single_selector"]
+- [.NET](./media-services-dotnet-encoding-units.md)
 - [REST](https://docs.microsoft.com/zh-cn/rest/api/media/operations/encodingreservedunittype)
 - [Java](https://github.com/southworkscom/azure-sdk-for-media-services-java-samples)
 - [PHP](https://github.com/Azure/azure-sdk-for-php/tree/master/examples/MediaServices)

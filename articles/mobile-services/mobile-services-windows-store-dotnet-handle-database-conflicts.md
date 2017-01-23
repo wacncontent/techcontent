@@ -1,21 +1,21 @@
-<properties 
-	pageTitle="利用乐观并发处理数据库写入冲突（Windows 应用商店）| Azure" 
-	description="了解如何处理服务器上和 Windows 应用商店应用程序中的数据库写入冲突。" 
-	documentationCenter="windows" 
-	authors="wesmc7777" 
-	manager="dwrede" 
-	editor="" 
-	services="mobile-services"/>
+---
+title: 利用乐观并发处理数据库写入冲突（Windows 应用商店）| Azure
+description: 了解如何处理服务器上和 Windows 应用商店应用程序中的数据库写入冲突。
+documentationCenter: windows
+authors: wesmc7777
+manager: dwrede
+editor: 
+services: mobile-services
 
-<tags
-	ms.service="mobile-services"
-	ms.workload="mobile"
-	ms.tgt_pltfrm="mobile-windows"
-	ms.devlang="dotnet"
-	ms.topic="article"
-	ms.date="07/21/2016"
-	wacn.date="09/26/2016"
-	ms.author="wesmc"/>
+ms.service: mobile-services
+ms.workload: mobile
+ms.tgt_pltfrm: mobile-windows
+ms.devlang: dotnet
+ms.topic: article
+ms.date: 07/21/2016
+wacn.date: 09/26/2016
+ms.author: wesmc
+---
 
 # 处理数据库写入冲突
 
@@ -25,7 +25,6 @@
 
 在本教程中，你将向快速入门应用添加功能以处理更新 TodoItem 数据库时可能发生的争用。
 
-
 ##先决条件
 
 本教程需要的内容如下
@@ -34,39 +33,33 @@
 + 本教程基于移动服务快速入门。在开始本教程之前，必须先[完成移动服务入门]。 
 + [Azure 帐户]
 + Azure 移动服务 NuGet 包 1.1.0 或更高版本。若要获取最新版本，请执行以下步骤：
-	1. 在 Visual Studio 中，打开项目并右键单击解决方案资源管理器中的项目，然后单击“管理 Nuget 包”。 
+    1. 在 Visual Studio 中，打开项目并右键单击解决方案资源管理器中的项目，然后单击“管理 Nuget 包”。 
 
-		![][19]
+        ![][19]
 
-	2. 展开“联机”并单击“Microsoft 和 .NET”。在“搜索”文本框中输入“Azure 移动服务”。针对 **Azure 移动服务** NuGet 包单击“安装”。
+    2. 展开“联机”并单击“Microsoft 和 .NET”。在“搜索”文本框中输入“Azure 移动服务”。针对 **Azure 移动服务** NuGet 包单击“安装”。
 
-		![][20]
-
-
- 
+        ![][20]
 
 ##更新应用程序以允许更新
 
 在本节中，你将更新 TodoList 用户界面，以便更新列表框控件中每个项目的文本。列表框将包含针对数据库表中每个项目的复选框和文本框控件。你将能够更新 TodoItem 的文本字段。应用程序将处理该文本框的 `LostFocus` 事件以更新数据库中的项目。
 
-
 1. 在 Visual Studio 中，打开在[移动服务入门]教程中下载的 TodoList 项目。
 2. 在 Visual Studio 解决方案资源管理器中，打开 MainPage.xaml 并将 `ListView` 定义替换为下面所示的 `ListView` 并保存更改。
 
-		<ListView Name="ListItems" Margin="62,10,0,0" Grid.Row="1">
-			<ListView.ItemTemplate>
-				<DataTemplate>
-					<StackPanel Orientation="Horizontal">
-						<CheckBox Name="CheckBoxComplete" IsChecked="{Binding Complete, Mode=TwoWay}" Checked="CheckBoxComplete_Checked" Margin="10,5" VerticalAlignment="Center"/>
-						<TextBox x:Name="ToDoText" Height="25" Width="300" Margin="10" Text="{Binding Text, Mode=TwoWay}" AcceptsReturn="False" LostFocus="ToDoText_LostFocus"/>
-					</StackPanel>
-				</DataTemplate>
-			</ListView.ItemTemplate>
-		</ListView>
-
+        <ListView Name="ListItems" Margin="62,10,0,0" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Name="CheckBoxComplete" IsChecked="{Binding Complete, Mode=TwoWay}" Checked="CheckBoxComplete_Checked" Margin="10,5" VerticalAlignment="Center"/>
+                        <TextBox x:Name="ToDoText" Height="25" Width="300" Margin="10" Text="{Binding Text, Mode=TwoWay}" AcceptsReturn="False" LostFocus="ToDoText_LostFocus"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
 3. 在 Visual Studio 解决方案资源管理器中，打开共享项目中的 MainPage.cs。将事件处理程序添加到 TextBox `LostFocus` 事件的 MainPage，如下所示。
-
 
         private async void ToDoText_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -108,24 +101,24 @@
 
 1. 打开共享项目中的 TodoItem.cs，使用以下代码更新 `TodoItem` 类定义以包括 `__version` 系统属性，从而启用对写入冲突检测的支持。
 
-		public class TodoItem
-		{
-			public string Id { get; set; }			
-			[JsonProperty(PropertyName = "text")]
-			public string Text { get; set; }			
-			[JsonProperty(PropertyName = "complete")]
-			public bool Complete { get; set; }			
-			[JsonProperty(PropertyName = "__version")]
-			public string Version { set; get; }
-		}
+        public class TodoItem
+        {
+            public string Id { get; set; }			
+            [JsonProperty(PropertyName = "text")]
+            public string Text { get; set; }			
+            [JsonProperty(PropertyName = "complete")]
+            public bool Complete { get; set; }			
+            [JsonProperty(PropertyName = "__version")]
+            public string Version { set; get; }
+        }
 
-	> [AZURE.NOTE]使用非类型表时，请通过将 Version 标志添加到表的 SystemProperties 来启用乐观并发。
-	>
-	>`````
-	>//Enable optimistic concurrency by retrieving __version
-	>todoTable.SystemProperties |= MobileServiceSystemProperties.Version;
-	>`````
-
+    > [!NOTE]
+    >使用非类型表时，请通过将 Version 标志添加到表的 SystemProperties 来启用乐观并发。
+    >
+    >`````
+    >//Enable optimistic concurrency by retrieving __version
+    >todoTable.SystemProperties |= MobileServiceSystemProperties.Version;
+    >`````
 
 2. 将 `Version` 属性添加到 `TodoItem` 类后，如果记录自上次查询以来已更改，则在更新期间将通过 `MobileServicePreconditionFailedException` 异常通知应用程序。此异常包括服务器中该项目的最新版本。在共享项目的 MainPage.cs 中，添加以下代码以在 `UpdateToDoItem()` 方法中处理异常。
 
@@ -160,9 +153,7 @@
             }
         }
 
-
 3. 在 MainPage.cs 中，添加在 `UpdateToDoItem()` 中引用的 `ResolveConflict()` 方法的定义。请注意，为了解决冲突，在提交用户的决定之前，请将本地项目的版本设置为服务器中的已更新版本。否则，你将不断遇到冲突。
-
 
         private async Task ResolveConflict(TodoItem localItem, TodoItem serverItem)
         {
@@ -186,72 +177,66 @@
             };			
             ServerBtn.Invoked = async (IUICommand command) =>
             {
-				RefreshTodoItems();
+                RefreshTodoItems();
             };			
             await msgDialog.ShowAsync();
         }
-
-
 
 ##测试应用程序中的数据库写入冲突
 
 在本节中，你将生成 Windows 应用商店应用程序包，以便在第二台计算机或虚拟机上安装应用程序。然后，你将在这两台计算机上运行应用程序，并生成写入冲突以测试代码。应用的两个实例将尝试更新同一项目的 `text` 属性，因此需要用户解决该冲突。
 
-
 1. 创建 Windows 应用商店应用程序包，以便在第二台计算机或虚拟机上进行安装。为此，请在 Visual Studio 中单击“项目”->“应用商店”->“创建应用程序包”。
 
-	![][0]
+    ![][0]
 
 2. 在“创建包”屏幕上，单击“否”，因为此包将不会上载到 Windows 应用商店。然后，单击“下一步”。
 
-	![][1]
+    ![][1]
 
 3. 在“选择和配置包”屏幕上，接受默认设置，然后单击“创建”。
 
-	![][10]
+    ![][10]
 
 4. 在“已创建包”屏幕上，单击“输出位置”链接以打开包位置。
 
-   	![][11]
+       ![][11]
 
 5. 将包文件夹“todolist\_1.0.0.0\_AnyCPU\_Debug\_Test”复制到第二台计算机。在该计算机上，打开包文件夹并右键单击 **Add-AppDevPackage.ps1** PowerShell 脚本，然后单击“使用 PowerShell 运行”，如下所示。按照提示操作以安装应用程序。
 
-	![][12]
-  
+    ![][12]
+
 6. 通过单击“调试”->“启动调试”在 Visual Studio 中运行应用的第 1 个实例。在第二台计算机的“开始”屏幕上，单击向下箭头以查看“按名称排列的应用程序”。然后单击 **todolist** 应用以运行应用的第 2 个实例。
 
-	应用实例 1	
-	![][2]
+    应用实例 1	
+    ![][2]
 
-	应用实例 2	
-	![][2]
-
+    应用实例 2	
+    ![][2]
 
 7. 在应用实例 1 中，将最后一个项目的文本更新为“Test Write 1”，然后单击另一个文本框，以使 `LostFocus` 事件处理程序更新数据库。下面的屏幕快照显示了一个示例。
-	
-	应用实例 1	
-	![][3]
 
-	应用实例 2	
-	![][2]
+    应用实例 1	
+    ![][3]
+
+    应用实例 2	
+    ![][2]
 
 8. 此时，应用程序的第 2 个实例中的相应项目具有该项目的旧版本。在该应用实例中，针对 `text` 属性输入“Test Write 2”。然后单击另一个文本框，以使 `LostFocus` 事件处理程序尝试使用旧的 `_version` 属性更新数据库。
 
-	应用实例 1	
-	![][4]
+    应用实例 1	
+    ![][4]
 
-	应用实例 2	
-	![][5]
+    应用实例 2	
+    ![][5]
 
 9. 因为用于更新尝试的 `__version` 值与服务器 `__version` 值不匹配，所以，移动服务 SDK 将引发 `MobileServicePreconditionFailedException`，并且允许应用解决该冲突。若要解决此冲突，可单击“提交本地文本”以提交实例 2 中的值。此外，也可单击“保留服务器文本”以放弃实例 2 中的值，从而保留已提交的应用的实例 1 中的值。
 
-	应用实例 1	
-	![][4]
+    应用实例 1	
+    ![][4]
 
-	应用实例 2	
-	![][6]
-
-
+    应用实例 2	
+    ![][6]
 
 ##使用服务器脚本自动解决冲突
 
@@ -264,74 +249,72 @@
 
 1. 登录到 [Azure 经典管理门户]，单击“移动服务”，然后单击你的应用。
 
-   	![][7]
+       ![][7]
 
 2. 单击“数据”选项卡，然后单击 **TodoItem** 表。
 
-   	![][8]
+       ![][8]
 
 3. 单击“脚本”，然后选择“更新”操作。
 
-   	![][9]
+       ![][9]
 
 4. 将现有脚本替换为以下函数，然后单击“保存”。
 
-		function update(item, user, request) { 
-			request.execute({ 
-				conflict: function (serverRecord) {
-					// Only committing changes if the item is not completed.
-					if (serverRecord.complete === false) {
-						//write the updated item to the table
-						request.execute();
-					}
-					else
-					{
-						request.respond(statusCodes.FORBIDDEN, 'The item is already completed.');
-					}
-				}
-			}); 
-		}   
+        function update(item, user, request) { 
+            request.execute({ 
+                conflict: function (serverRecord) {
+                    // Only committing changes if the item is not completed.
+                    if (serverRecord.complete === false) {
+                        //write the updated item to the table
+                        request.execute();
+                    }
+                    else
+                    {
+                        request.respond(statusCodes.FORBIDDEN, 'The item is already completed.');
+                    }
+                }
+            }); 
+        }   
 5. 在两台计算机上运行 **todolist** 应用。更改实例 2 中最后一项的 TodoItem `text`。然后单击另一个文本框，以使 `LostFocus` 事件处理程序更新数据库。
 
-	应用实例 1	
-	![][4]
+    应用实例 1	
+    ![][4]
 
-	应用实例 2	
-	![][5]
+    应用实例 2	
+    ![][5]
 
 6. 在应用程序的实例 1 中，针对最后一个 text 属性输入不同的值。然后单击另一个文本框，以使 `LostFocus` 事件处理程序尝试使用错误的 `__version` 属性更新数据库。
 
-	应用实例 1	
-	![][13]
+    应用实例 1	
+    ![][13]
 
-	应用实例 2	
-	![][14]
+    应用实例 2	
+    ![][14]
 
 7. 请注意，由于该项目未标记为“完成”而允许更新，服务器脚本解决了冲突，因此在应用程序中未遇到异常。若要查看更新是否确实成功，请单击实例 2 中的“刷新”以重新查询数据库。
 
-	应用实例 1	
-	![][15]
+    应用实例 1	
+    ![][15]
 
-	应用实例 2	
-	![][15]
+    应用实例 2	
+    ![][15]
 
 8. 在实例 1 中，单击复选框以完成最后一个 Todo 项目。
 
-	应用实例 1	
-	![][16]
+    应用实例 1	
+    ![][16]
 
-	应用实例 2	
-	![][15]
+    应用实例 2	
+    ![][15]
 
 9. 在实例 2 中，尝试更新最后一个 TodoItem 的文本，触发 `LostFocus` 事件。在对冲突进行响应时，由于该项目已完成，此脚本通过拒绝更新解决了冲突。
 
-	应用实例 1	
-	![][17]
+    应用实例 1	
+    ![][17]
 
-	应用实例 2	
-	![][18]
- 
-
+    应用实例 2	
+    ![][18]
 
 <!-- Images. -->
 [0]: ./media/mobile-services-windows-store-dotnet-handle-database-conflicts/Mobile-oc-store-create-app-package1.png
@@ -358,12 +341,12 @@
 
 <!-- URLs. -->
 [乐观并发控制]: http://go.microsoft.com/fwlink/?LinkId=330935
-[Get started with Mobile Services]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/#create-new-service
-[Azure 帐户]: /pricing/1rmb-trial/
+[Get started with Mobile Services]: ./mobile-services-javascript-backend-windows-store-dotnet-get-started.md#create-new-service
+[Azure 帐户]: https://www.azure.cn/pricing/1rmb-trial/
 [Validate and modify data with scripts]: /documentation/articles/mobile-services-windows-store-dotnet-validate-modify-data-server-scripts/
 [Refine queries with paging]: /documentation/articles/mobile-services-windows-store-dotnet-add-paging-data/
-[完成移动服务入门]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/
-[移动服务入门]: /documentation/articles/mobile-services-javascript-backend-windows-store-dotnet-get-started/
+[完成移动服务入门]: ./mobile-services-javascript-backend-windows-store-dotnet-get-started.md
+[移动服务入门]: ./mobile-services-javascript-backend-windows-store-dotnet-get-started.md
 [Get started with data]: /documentation/articles/mobile-services-windows-store-dotnet-get-started-data/
 [向应用程序添加身份验证]: /documentation/articles/mobile-services-windows-store-dotnet-get-started-users/
 

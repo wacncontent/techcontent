@@ -1,56 +1,54 @@
-<properties
-    pageTitle="使用 Azure Resource Manager 和 PowerShell 创建具有站点到站点 VPN 连接的虚拟网络 | Azure"
-    description="本文逐步讲解如何使用 Resource Manager 部署模型创建 VNet，并使用 S2S VPN 网关连接将其连接到本地网络。"
-    services="vpn-gateway"
-    documentationcenter="na"
-    author="cherylmc"
-    manager="carmonm"
-    editor=""
-    tags="azure-resource-manager" />  
+---
+title: 使用 Azure Resource Manager 和 PowerShell 创建具有站点到站点 VPN 连接的虚拟网络 | Azure
+description: 本文逐步讲解如何使用 Resource Manager 部署模型创建 VNet，并使用 S2S VPN 网关连接将其连接到本地网络。
+services: vpn-gateway
+documentationcenter: na
+author: cherylmc
+manager: carmonm
+editor: 
+tags: azure-resource-manager
 
-<tags
-    ms.assetid="fcc2fda5-4493-4c15-9436-84d35adbda8e"
-    ms.service="vpn-gateway"
-    ms.devlang="na"
-    ms.topic="hero-article"
-    ms.tgt_pltfrm="na"
-    ms.workload="infrastructure-services"
-    ms.date="10/14/2016"
-    wacn.date="01/09/2017"
-    ms.author="cherylmc" />  
-
+ms.assetid: fcc2fda5-4493-4c15-9436-84d35adbda8e
+ms.service: vpn-gateway
+ms.devlang: na
+ms.topic: hero-article
+ms.tgt_pltfrm: na
+ms.workload: infrastructure-services
+ms.date: 10/14/2016
+wacn.date: 01/09/2017
+ms.author: cherylmc
+---
 
 # 使用 PowerShell 创建具有站点到站点连接的 VNet
-> [AZURE.SELECTOR]
-- [Resource Manager - Azure 门户预览](/documentation/articles/vpn-gateway-howto-site-to-site-resource-manager-portal/)
-- [Resource Manager - PowerShell](/documentation/articles/vpn-gateway-create-site-to-site-rm-powershell/)
-- [经典 - 经典管理门户](/documentation/articles/vpn-gateway-site-to-site-create/)
+> [!div class="op_single_selector"]
+- [Resource Manager - Azure 门户预览](./vpn-gateway-howto-site-to-site-resource-manager-portal.md)
+- [Resource Manager - PowerShell](./vpn-gateway-create-site-to-site-rm-powershell.md)
+- [经典 - 经典管理门户](./vpn-gateway-site-to-site-create.md)
 
 本文逐步讲解如何使用 Azure Resource Manager 部署模型创建一个虚拟网络和一个连接到本地网络的站点到站点 VPN 网关连接。站点到站点连接可以用于跨界和混合配置。
 
 ![站点到站点示意图](./media/vpn-gateway-create-site-to-site-rm-powershell/s2srmps.png "站点到站点")  
 
-
 ### 用于站点到站点连接的部署模型和方法
-[AZURE.INCLUDE [部署模型](../../includes/vpn-gateway-deployment-models-include.md)]
+[!INCLUDE [部署模型](../../includes/vpn-gateway-deployment-models-include.md)]
 
 下表显示了站点到站点配置当前可用的部署模型和方法。当有配置步骤相关的文章发布时，我们会直接从此表格链接到该文章。
 
-[AZURE.INCLUDE [站点到站点连接表](../../includes/vpn-gateway-table-site-to-site-include.md)]
+[!INCLUDE [站点到站点连接表](../../includes/vpn-gateway-table-site-to-site-include.md)]
 
 #### 其他配置
-如果你想要将多个 VNet 连接到一起，但又不想创建连接到本地位置的连接，则请参阅[配置 VNet 到 VNet 连接](/documentation/articles/vpn-gateway-vnet-vnet-rm-ps/)。如果要向已有连接的 VNet 添加站点到站点连接，请参阅 [Add a S2S connection to a VNet with an existing VPN gateway connection](/documentation/articles/vpn-gateway-howto-multi-site-to-site-resource-manager-portal/)（向已有 VPN 网关连接的 VNet 添加 S2S 连接）。
+如果你想要将多个 VNet 连接到一起，但又不想创建连接到本地位置的连接，则请参阅[配置 VNet 到 VNet 连接](./vpn-gateway-vnet-vnet-rm-ps.md)。如果要向已有连接的 VNet 添加站点到站点连接，请参阅 [Add a S2S connection to a VNet with an existing VPN gateway connection](./vpn-gateway-howto-multi-site-to-site-resource-manager-portal.md)（向已有 VPN 网关连接的 VNet 添加 S2S 连接）。
 
 ## 开始之前
 在开始配置之前，请确认具有以下各项。
 
-* 一台兼容的 VPN 设备和能够对其进行配置的人员。请参阅[关于 VPN 设备](/documentation/articles/vpn-gateway-about-vpn-devices/)。如果不熟悉 VPN 设备的配置，或者不熟悉本地网络配置中的 IP 地址范围，请咨询能够提供此类详细信息的人员。
+* 一台兼容的 VPN 设备和能够对其进行配置的人员。请参阅[关于 VPN 设备](./vpn-gateway-about-vpn-devices.md)。如果不熟悉 VPN 设备的配置，或者不熟悉本地网络配置中的 IP 地址范围，请咨询能够提供此类详细信息的人员。
 * 一个用于 VPN 设备的面向外部的公共 IP 地址。此 IP 地址不得位于 NAT 之后。
-* Azure 订阅。如果你还没有 Azure 订阅，你可以注册一个[试用版](/pricing/1rmb-trial)。
+* Azure 订阅。如果你还没有 Azure 订阅，你可以注册一个[试用版](https://www.azure.cn/pricing/1rmb-trial)。
 * 最新版本的 Azure Resource Manager PowerShell cmdlet。有关安装 PowerShell cmdlet 的详细信息，请参阅[如何安装和配置 Azure PowerShell](https://docs.microsoft.com/powershell/azureps-cmdlets-docs)。
 
 ## <a name="Login"></a>1.连接到订阅
-确保切换到 PowerShell 模式，以便使用资源管理器 cmdlet。有关详细信息，请参阅[将 Windows PowerShell 与资源管理器配合使用](/documentation/articles/powershell-azure-resource-manager/)。
+确保切换到 PowerShell 模式，以便使用资源管理器 cmdlet。有关详细信息，请参阅[将 Windows PowerShell 与资源管理器配合使用](../azure-resource-manager/powershell-azure-resource-manager.md)。
 
 打开 PowerShell 控制台并连接到你的帐户。使用下面的示例来帮助你连接：
 
@@ -69,7 +67,7 @@
 
 如果已拥有一个包含 /29 或更大网关子网的虚拟网络，则可以往前跳转到[添加本地网关](#localnet)。
 
-[AZURE.INCLUDE [vpn-gateway-no-nsg](../../includes/vpn-gateway-no-nsg-include.md)]
+[!INCLUDE [vpn-gateway-no-nsg](../../includes/vpn-gateway-no-nsg-include.md)]
 
 ### 若要创建虚拟网络和网关子网
 使用以下示例创建一个虚拟网络和网关子网。替换为你自己的值。
@@ -154,7 +152,7 @@ Resource Manager 部署模型的 Azure VPN 网关目前使用动态分配方法�
 使用以下值：
 
 * 站点到站点配置的 *-GatewayType* 为 *Vpn*。网关类型永远是你要实现的配置的特定类型。例如，其他网关配置可能需要 -GatewayType ExpressRoute。
-* *-VpnType* 可以是 *RouteBased*（在某些文档中称为动态网关）或 *PolicyBased*（在某些文档中称为静态网关）。有关 VPN 网关类型的详细信息，请参阅[关于 VPN 网关](/documentation/articles/vpn-gateway-about-vpngateways/)。
+* *-VpnType* 可以是 *RouteBased*（在某些文档中称为动态网关）或 *PolicyBased*（在某些文档中称为静态网关）。有关 VPN 网关类型的详细信息，请参阅[关于 VPN 网关](./vpn-gateway-about-vpngateways.md)。
 * *-GatewaySku* 可以是 *Basic*、*Standard* 或 *HighPerformance*。
 
         New-AzureRmVirtualNetworkGateway -Name vnetgw1 -ResourceGroupName testrg `
@@ -162,7 +160,7 @@ Resource Manager 部署模型的 Azure VPN 网关目前使用动态分配方法�
         -VpnType RouteBased -GatewaySku Standard
 
 ## <a name="ConfigureVPNDevice"></a>7.配置 VPN 设备
-此时，需要使用虚拟网络网关的公共 IP 地址来配置本地 VPN 设备。请联系你的设备制造商以获得具体的配置信息。有关详细信息，请参阅 [VPN 设备](/documentation/articles/vpn-gateway-about-vpn-devices/)。
+此时，需要使用虚拟网络网关的公共 IP 地址来配置本地 VPN 设备。请联系你的设备制造商以获得具体的配置信息。有关详细信息，请参阅 [VPN 设备](./vpn-gateway-about-vpn-devices.md)。
 
 若要查找虚拟网络网关的公共 IP 地址，请使用下面的示例：
 
@@ -187,18 +185,18 @@ Resource Manager 部署模型的 Azure VPN 网关目前使用动态分配方法�
 ## <a name="toverify"></a>验证 VPN 连接
 VPN 连接有几种不同的验证方式。
 
-[AZURE.INCLUDE [vpn-gateway-verify-connection-rm](../../includes/vpn-gateway-verify-connection-rm-include.md)]
+[!INCLUDE [vpn-gateway-verify-connection-rm](../../includes/vpn-gateway-verify-connection-rm-include.md)]
 
 ## <a name="modify"></a>修改本地网关的 IP 地址前缀
 如果需要更改局域网网关的前缀，请使用下面的说明。提供了两套说明。要选择哪套说明取决于您是否已创建了网关连接。
 
-[AZURE.INCLUDE [vpn-gateway-modify-ip-prefix-rm](../../includes/vpn-gateway-modify-ip-prefix-rm-include.md)]
+[!INCLUDE [vpn-gateway-modify-ip-prefix-rm](../../includes/vpn-gateway-modify-ip-prefix-rm-include.md)]
 
 ## <a name="modifygwipaddress"></a>修改本地网关的 IP 地址
-[AZURE.INCLUDE [vpn-gateway-modify-lng-gateway-ip-rm](../../includes/vpn-gateway-modify-lng-gateway-ip-rm-include.md)]
+[!INCLUDE [vpn-gateway-modify-lng-gateway-ip-rm](../../includes/vpn-gateway-modify-lng-gateway-ip-rm-include.md)]
 
 ## 后续步骤
-*  连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](/documentation/services/virtual-machines/)。
-* 有关 BGP 的信息，请参阅 [BGP 概述](/documentation/articles/vpn-gateway-bgp-overview/)和[如何配置 BGP](/documentation/articles/vpn-gateway-bgp-resource-manager-ps/)。
+*  连接完成后，即可将虚拟机添加到虚拟网络。有关详细信息，请参阅[虚拟机](../virtual-machines/index.md)。
+* 有关 BGP 的信息，请参阅 [BGP 概述](./vpn-gateway-bgp-overview.md)和[如何配置 BGP](./vpn-gateway-bgp-resource-manager-ps.md)。
 
 <!---HONumber=Mooncake_Quality_Review_0104_2017-->

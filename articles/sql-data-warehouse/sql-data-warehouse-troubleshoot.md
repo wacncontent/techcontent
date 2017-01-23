@@ -1,22 +1,21 @@
-<properties
-   pageTitle="排查 Azure SQL 数据仓库问题 | Azure"
-   description="排查 Azure SQL 数据仓库问题。"
-   services="sql-data-warehouse"
-   documentationCenter="NA"
-   authors="sonyam"
-   manager="barbkess"
-   editor=""/>  
+---
+title: 排查 Azure SQL 数据仓库问题 | Azure
+description: 排查 Azure SQL 数据仓库问题。
+services: sql-data-warehouse
+documentationCenter: NA
+authors: sonyam
+manager: barbkess
+editor: 
 
-
-<tags
-   ms.service="sql-data-warehouse"
-   ms.devlang="NA"
-   ms.topic="article"
-   ms.tgt_pltfrm="NA"
-   ms.workload="data-services"
-   ms.date="10/31/2016"
-   wacn.date="12/19/2016"
-   ms.author="sonyama;barbkess"/>
+ms.service: sql-data-warehouse
+ms.devlang: NA
+ms.topic: article
+ms.tgt_pltfrm: NA
+ms.workload: data-services
+ms.date: 10/31/2016
+wacn.date: 12/19/2016
+ms.author: sonyama;barbkess
+---
 
 # 排查 Azure SQL 数据仓库问题
 
@@ -31,7 +30,6 @@
 | CTAIP 错误 | 当登录名已在 SQL Server master 数据库中创建，但未在 SQL 数据仓库数据库中时，可能会出现此错误。如果你遇到此错误，请参阅[安全性概述][]一文。本文介绍如何在 master 中创建登录名和用户，然后如何在 SQL 数据仓库数据库中创建用户。|
 | 被防火墙阻止 |为了确保只有已知的 IP 地址可以访问数据库，Azure SQL 数据库受到服务器和数据库级别的防火墙保护。默认情况下，防火墙是安全的，这意味着，你需要显式启用单个 IP 地址或地址范围才能进行连接。若要配置防火墙的访问权限，请遵循[预配说明][]中的[为客户端 IP 配置服务器防火墙访问权限][]中所述的步骤。|
 | 无法使用工具或驱动程序进行连接 | SQL 数据仓库建议使用 [SSMS][]、[用于 Visual Studio 2015 的 SSDT][] 或 [sqlcmd][] 来查询数据。如需详细了解驱动程序以及如何连接到 SQL 数据仓库，请参阅 [Azure SQL 数据仓库驱动程序][] 和 [连接到 Azure SQL 数据仓库][] 这两篇文章。|
-
 
 ## 工具
 
@@ -89,41 +87,41 @@
 <!--Image references-->
 
 <!--Article references-->
-[Security overview]: /documentation/articles/sql-data-warehouse-overview-manage-security/
-[安全性概述]: /documentation/articles/sql-data-warehouse-overview-manage-security/
+[Security overview]: ./sql-data-warehouse-overview-manage-security.md
+[安全性概述]: ./sql-data-warehouse-overview-manage-security.md
 [Create support ticket]: /documentation/articles/sql-data-warehouse-get-started-create-support-ticket/
-[缩放 SQL 数据仓库]: /documentation/articles/sql-data-warehouse-manage-compute-overview/
-[DWU]: /documentation/articles/sql-data-warehouse-overview-what-is/
+[缩放 SQL 数据仓库]: ./sql-data-warehouse-manage-compute-overview.md
+[DWU]: ./sql-data-warehouse-overview-what-is.md
 [请求增加配额]: /documentation/articles/sql-data-warehouse-get-started-create-support-ticket#request-quota-change
-[Learning how to monitor your queries]: /documentation/articles/sql-data-warehouse-manage-monitor/
-[预配说明]: /documentation/articles/sql-data-warehouse-get-started-provision/
-[为客户端 IP 配置服务器防火墙访问权限]: /documentation/articles/sql-data-warehouse-get-started-provision/
-[SQL 数据仓库最佳实践]: /documentation/articles/sql-data-warehouse-best-practices/
-[表大小]: /documentation/articles/sql-data-warehouse-tables-overview/
-[不支持的表功能]: /documentation/articles/sql-data-warehouse-tables-overview/
-[不支持的数据类型]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[Overview]: /documentation/articles/sql-data-warehouse-tables-overview/
-[Data types]: /documentation/articles/sql-data-warehouse-tables-data-types/
-[Distribute]: /documentation/articles/sql-data-warehouse-tables-distribute/
-[Index]: /documentation/articles/sql-data-warehouse-tables-index/
-[Partition]: /documentation/articles/sql-data-warehouse-tables-partition/
-[Statistics]: /documentation/articles/sql-data-warehouse-tables-statistics/
-[Temporary]: /documentation/articles/sql-data-warehouse-tables-temporary/
-[列存储索引质量不佳]: /documentation/articles/sql-data-warehouse-tables-index/
-[重建索引以提高段质量]: /documentation/articles/sql-data-warehouse-tables-index/
-[工作负荷管理]: /documentation/articles/sql-data-warehouse-develop-concurrency/
-[使用 CTAS 解决不支持的 UPDATE 和 DELETE 语法]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[UPDATE 解决方法]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[DELETE 解决方法]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[MERGE 解决方法]: /documentation/articles/sql-data-warehouse-develop-ctas/
-[存储过程限制]: /documentation/articles/sql-data-warehouse-develop-stored-procedures/
-[向 Azure SQL 数据仓库进行身份验证]: /documentation/articles/sql-data-warehouse-authentication/
-[Working around the PolyBase UTF-8 requirement]: /documentation/articles/sql-data-warehouse-load-polybase-guide/
+[Learning how to monitor your queries]: ./sql-data-warehouse-manage-monitor.md
+[预配说明]: ./sql-data-warehouse-get-started-provision.md
+[为客户端 IP 配置服务器防火墙访问权限]: ./sql-data-warehouse-get-started-provision.md
+[SQL 数据仓库最佳实践]: ./sql-data-warehouse-best-practices.md
+[表大小]: ./sql-data-warehouse-tables-overview.md
+[不支持的表功能]: ./sql-data-warehouse-tables-overview.md
+[不支持的数据类型]: ./sql-data-warehouse-tables-data-types.md
+[Overview]: ./sql-data-warehouse-tables-overview.md
+[Data types]: ./sql-data-warehouse-tables-data-types.md
+[Distribute]: ./sql-data-warehouse-tables-distribute.md
+[Index]: ./sql-data-warehouse-tables-index.md
+[Partition]: ./sql-data-warehouse-tables-partition.md
+[Statistics]: ./sql-data-warehouse-tables-statistics.md
+[Temporary]: ./sql-data-warehouse-tables-temporary.md
+[列存储索引质量不佳]: ./sql-data-warehouse-tables-index.md
+[重建索引以提高段质量]: ./sql-data-warehouse-tables-index.md
+[工作负荷管理]: ./sql-data-warehouse-develop-concurrency.md
+[使用 CTAS 解决不支持的 UPDATE 和 DELETE 语法]: ./sql-data-warehouse-develop-ctas.md
+[UPDATE 解决方法]: ./sql-data-warehouse-develop-ctas.md
+[DELETE 解决方法]: ./sql-data-warehouse-develop-ctas.md
+[MERGE 解决方法]: ./sql-data-warehouse-develop-ctas.md
+[存储过程限制]: ./sql-data-warehouse-develop-stored-procedures.md
+[向 Azure SQL 数据仓库进行身份验证]: ./sql-data-warehouse-authentication.md
+[Working around the PolyBase UTF-8 requirement]: ./sql-data-warehouse-load-polybase-guide.md
 
 <!--MSDN references-->
 [sys.database\_principals]: https://msdn.microsoft.com/zh-cn/library/ms187328.aspx
 [CREATE FUNCTION]: https://msdn.microsoft.com/zh-cn/library/mt203952.aspx
-[sqlcmd]: /documentation/articles/sql-data-warehouse-get-started-connect-sqlcmd/
+[sqlcmd]: ./sql-data-warehouse-get-started-connect-sqlcmd.md
 
 <!--Other Web references-->
 

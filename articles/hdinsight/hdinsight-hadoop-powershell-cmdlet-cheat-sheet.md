@@ -1,22 +1,21 @@
-<properties 
-	pageTitle="HDInsight Hadoop PowerShell Cmdlet 备忘单 | Azure" 
-	description="一个可下载的 HDInsight Hadoop Powershell cmdlet 备忘单，可帮助你在 Azure HDInsight 中执行标准的 Hadoop 任务。"
-	services="hdinsight" 
-	documentationCenter="" 
-	authors="nitinme" 
-	manager="paulettm" 
-	editor="cgronlun"/>
+---
+title: HDInsight Hadoop PowerShell Cmdlet 备忘单 | Azure
+description: 一个可下载的 HDInsight Hadoop Powershell cmdlet 备忘单，可帮助你在 Azure HDInsight 中执行标准的 Hadoop 任务。
+services: hdinsight
+documentationCenter: 
+authors: nitinme
+manager: paulettm
+editor: cgronlun
 
-<tags 
-	ms.service="hdinsight" 
-	ms.workload="big-data" 
-	ms.tgt_pltfrm="na" 
-	ms.devlang="na" 
-	ms.topic="article" 
-	ms.date="02/25/2016" 
-	wacn.date="12/26/2016" 
-	ms.author="nitinme"/>
-
+ms.service: hdinsight
+ms.workload: big-data
+ms.tgt_pltfrm: na
+ms.devlang: na
+ms.topic: article
+ms.date: 02/25/2016
+wacn.date: 12/26/2016
+ms.author: nitinme
+---
 
 # 用于执行 Hadoop 常见任务的 Azure HDInsight PowerShell cmdlet 备忘单
 
@@ -29,6 +28,5 @@ Azure HDInsight 提供了 PowerShell cmdlet 用于在群集上执行 Hadoop 任�
 **查看 Azure HDInsight PowerShell 参考文档：[Azure HDInsight PowerShell 参考](https://msdn.microsoft.com/zh-cn/library/azure/dn858087.aspx)**
 
 ![用于执行 Hadoop 常见任务的 HDInsight PowerShell Cmdlet 备忘单](./media/hdinsight-hadoop-powershell-cmdlet-cheat-sheet/HDI.PowerShell.Cmdlet.CheatSheet.png)  
-
 
 <!---HONumber=Nov15_HO2-->
